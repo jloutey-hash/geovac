@@ -39,7 +39,7 @@ pip install geovac
 Or install from source:
 
 ```bash
-git clone https://github.com/yourusername/geovac.git
+git clone https://github.com/jloutey-hash/geovac.git
 cd geovac
 pip install -e .
 ```
@@ -260,7 +260,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## 🔗 Links
 
 - **Documentation:** [https://geovac.readthedocs.io](https://geovac.readthedocs.io)
-- **GitHub:** [https://github.com/yourusername/geovac](https://github.com/yourusername/geovac)
+- **GitHub:** [https://github.com/jloutey-hash/geovac](https://github.com/jloutey-hash/geovac)
 - **Paper:** [arXiv:XXXX.XXXXX](https://arxiv.org/abs/XXXX.XXXXX)
 - **Benchmarks:** See `benchmark_standalone.py` and `benchmark_pyscf.py` in the repo
 

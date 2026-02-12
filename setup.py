@@ -18,7 +18,7 @@ setup(
     description='O(N) complexity quantum solver using geometric lattice discretization',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/yourusername/geovac',  # Update with your actual repo
+    url='https://github.com/jloutey-hash/geovac',
     license='MIT',
     
     packages=find_packages(exclude=['tests', 'old_research_archive', 'geometric-solver']),
@@ -68,8 +68,8 @@ setup(
     ],
     
     project_urls={
-        'Documentation': 'https://github.com/yourusername/geovac/wiki',
-        'Source': 'https://github.com/yourusername/geovac',
-        'Bug Reports': 'https://github.com/yourusername/geovac/issues',
+        'Documentation': 'https://github.com/jloutey-hash/geovac/wiki',
+        'Source': 'https://github.com/jloutey-hash/geovac',
+        'Bug Reports': 'https://github.com/jloutey-hash/geovac/issues',
     },
 )
