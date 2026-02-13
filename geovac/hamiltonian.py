@@ -1084,7 +1084,7 @@ class MoleculeHamiltonian:
         Bridge connections: [(atom_i, atom_j, n_bridges), ...]
         Example: [(0, 1, 16)] connects atoms 0 and 1 with 16 bridges
     kinetic_scale : float
-        Calibration constant for Hamiltonian (should give E(H) ≈ -0.5 Ha)
+        Universal calibration constant (default: -1/16, validated for H/He+/H2+)
     
     Attributes:
     -----------
@@ -1100,7 +1100,7 @@ class MoleculeHamiltonian:
     
     def __init__(self, lattices: List[GeometricLattice], 
                  connectivity: List[Tuple[int, int, int]],
-                 kinetic_scale: float = -0.075551):
+                 kinetic_scale: float = -1/16):
         """
         Initialize molecular Hamiltonian from atomic lattices.
         
@@ -1113,7 +1113,7 @@ class MoleculeHamiltonian:
             Each tuple defines a chemical bond
         kinetic_scale : float, optional
             Kinetic energy calibration constant
-            Default: -0.075551 (calibrated to E(H) = -0.5 Ha)
+            Default: -1/16 (universal constant, validated for H/He+/H2+)
         
         Example:
         --------
@@ -1123,7 +1123,7 @@ class MoleculeHamiltonian:
         >>> mol = MoleculeHamiltonian(
         ...     lattices=[atom_A, atom_B],
         ...     connectivity=[(0, 1, 16)],
-        ...     kinetic_scale=-0.075551
+        ...     kinetic_scale=-1/16  # Universal constant
         ... )
         >>> E_gs, psi_gs = mol.compute_ground_state()
         """
