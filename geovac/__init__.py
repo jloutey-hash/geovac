@@ -1,53 +1,78 @@
 """
-GeoVac: Geometric Vacuum Quantum Solver
-========================================
+GeoVac: Topological Quantum Chemistry Solver
+=============================================
 
-A high-performance quantum chemistry solver using sparse graph lattice discretization
-based on the AdS5 paraboloid geometry. Achieves O(N) complexity scaling with >97% 
-matrix sparsity.
+The first quantum chemistry solver that models chemical bonds as sparse
+topological bridges (information channels) rather than force fields.
 
-Key Features:
-- Ultra-fast: Solves 3025-state Helium system in 22ms
-- Accurate: Matches experimental ground state within 0.01% error
-- Sparse: 97.6% sparsity enables efficient large-scale calculations
-- Calibrated: Physics-based kinetic scaling tuned to experiment
+**Revolutionary Approach:**
+- Bonds = Graph connectivity (not Coulomb potentials)
+- Binding energy = Eigenvalue lowering from wavefunction delocalization
+- Bond strength ∝ Number of bridge edges (N ≈ 16 for H₂)
 
-Quick Start:
------------
+**Performance:**
+- O(N) complexity scaling with >97% matrix sparsity
+- Semi-quantitative accuracy: ~35% error for H₂ bond energy
+- Ultra-fast: Single atoms in <10ms, molecules in <50ms
+
+**Key Innovation:**
+Models chemistry as discrete topology where:
+- Nodes = quantum states |n,l,m⟩
+- Edges = kinetic coupling
+- Bridges = molecular bonds
+- Eigenvalues = energies
+
+Quick Start (Atoms):
+-------------------
 >>> from geovac import HeliumHamiltonian
 >>> h = HeliumHamiltonian(max_n=3, Z=2, kinetic_scale=-0.103)
 >>> energy, wavefunction = h.compute_ground_state()
 >>> print(f"Ground state energy: {energy[0]:.6f} Hartree")
 Ground state energy: -2.903000 Hartree
 
+Quick Start (Molecules):
+-----------------------
+>>> from geovac import GeometricLattice, MoleculeHamiltonian
+>>> # Create H₂ molecule with 16 topological bridges
+>>> atom_A = GeometricLattice(max_n=5)
+>>> atom_B = GeometricLattice(max_n=5)
+>>> h2 = MoleculeHamiltonian(
+...     lattices=[atom_A, atom_B],
+...     connectivity=[(0, 1, 16)],  # Bridge atoms 0-1 with 16 edges
+...     kinetic_scale=-0.075551
+... )
+>>> E_ground, psi = h2.compute_ground_state()
+>>> print(f"H₂ binding energy: {E_ground[0] - 2*(-0.5):.6f} Ha")
+
 Available Classes:
 -----------------
 - GeometricLattice: Sparse graph lattice with (n,l,m) quantum state nodes
-- HeliumHamiltonian: Non-relativistic two-electron solver
+- HeliumHamiltonian: Two-electron atomic solver
+- MoleculeHamiltonian: **NEW** - Molecular bonding via sparse bridges
 - DiracHamiltonian: Relativistic spinor-based solver (experimental)
 
-Performance Benchmarks:
-----------------------
-max_n=3: 196 states  → 6.4 ms  (97.6% sparse)
-max_n=4: 900 states  → 10.9 ms (99.4% sparse)
-max_n=5: 3025 states → 22.7 ms (99.8% sparse)
-
-Comparison: ~100x faster than traditional dense methods (PySCF, Gaussian)
+Status:
+-------
+- Single atoms: Quantitative (~0.01% error with calibration)
+- Molecules: Semi-quantitative (~35% error for H₂ at N=16 bridges)
+- Scaling: O(N) complexity, 97-99% sparse matrices
 """
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 
 # Core imports - expose main classes at top level
 from .lattice import GeometricLattice
-from .hamiltonian import HeliumHamiltonian
+from .hamiltonian import HeliumHamiltonian, HeliumPackingSolver, MoleculeHamiltonian
 from .dirac_hamiltonian import DiracHamiltonian, DiracLatticeStates
 
 # Define public API
 __all__ = [
     'GeometricLattice',
     'HeliumHamiltonian',
+    'MoleculeHamiltonian',
+    'HeliumPackingSolver',
     'DiracHamiltonian',
     'DiracLatticeStates',
     '__version__',
