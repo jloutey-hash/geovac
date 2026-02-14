@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python demo_h2.py:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}
