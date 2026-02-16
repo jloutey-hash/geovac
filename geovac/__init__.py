@@ -35,7 +35,7 @@ Quick Start:
 >>> E, psi = solver.compute_ground_state()
 """
 
-__version__ = '0.6.0'
+__version__ = '0.7.0'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 
@@ -44,6 +44,7 @@ from .lattice import GeometricLattice
 from .hamiltonian import HeliumHamiltonian, HeliumPackingSolver, MoleculeHamiltonian
 from .dirac_hamiltonian import DiracHamiltonian, DiracLatticeStates
 from .atomic_solver import AtomicSolver, solve_hydrogen, solve_atom
+from .dynamics import TimePropagator
 
 # Holographic/AdS-CFT modules live in ADSCFT/ package:
 #   from ADSCFT import MuonicHydrogenSolver, compute_holographic_entropy, etc.
@@ -59,6 +60,7 @@ __all__ = [
     'AtomicSolver',
     'solve_hydrogen',
     'solve_atom',
+    'TimePropagator',
     '__version__',
 ]
 

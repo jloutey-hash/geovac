@@ -5,6 +5,36 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-02-15
+
+### The Time Machine
+
+#### Quantum Dynamics Engine
+- **NEW:** `TimePropagator` class in `geovac/dynamics.py`
+- Crank-Nicolson unitary time propagator: unconditionally stable, norm-preserving
+- `step()` / `evolve()` for time-independent Hamiltonians (precomputed LU)
+- `step_with_H()` / `evolve_driven()` for time-dependent Hamiltonians
+- `build_dipole_z()`: electric dipole operator from selection rules (Delta_l=+/-1, Delta_m=0)
+
+#### Rabi Oscillation Validation
+- Hydrogen atom driven by resonant oscillating field: V(t) = E0 * cos(omega*t) * z
+- P_1s oscillates from 1.0 toward 0.0 and back (coherent population transfer)
+- Norm conservation: ||psi(t)|| = 1.0 to machine precision at every step
+- Off-resonance check: detuned driving shows reduced oscillation amplitude
+- `tests/rabi_oscillation.py`: complete Rabi dynamics test suite
+
+#### Significance
+- GeoVac is no longer just a static eigenvalue solver
+- Coherent quantum dynamics confirmed: superposition, interference, unitary evolution
+- The lattice supports time-dependent perturbation theory, laser physics, and control
+
+#### Added
+- `geovac/dynamics.py`: `TimePropagator` class
+- `tests/rabi_oscillation.py`: Rabi oscillation test (3 tests)
+- `TimePropagator` exported from `geovac.__init__`
+
+---
+
 ## [0.6.0] - 2026-02-15
 
 ### The General Relativity Update
