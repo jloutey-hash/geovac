@@ -35,7 +35,7 @@ Quick Start:
 >>> E, psi = solver.compute_ground_state()
 """
 
-__version__ = '0.4.2'
+__version__ = '0.5.0'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 

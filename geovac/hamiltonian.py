@@ -1112,7 +1112,9 @@ class MoleculeHamiltonian:
                  bond_length: float = None,
                  max_n: int = 5,
                  relativistic: bool = False,
-                 lattice_torsion: float = 0.0):
+                 lattice_torsion: float = 0.0,
+                 bridge_amplitude: float = 1.0,
+                 bridge_decay_rate: float = 1.0):
         """
         Initialize molecular Hamiltonian from WEIGHTED LATTICES.
 
@@ -1160,6 +1162,13 @@ class MoleculeHamiltonian:
             not a potential correction.
             Physical interpretation: the nucleus is a topological defect with
             torsion spin J that deforms the local metric near the core.
+        bridge_amplitude : float, optional
+            Pre-exponential factor A for bridge weight W = A * exp(-lambda * R).
+            Default: 1.0
+        bridge_decay_rate : float, optional
+            Exponential decay rate lambda (1/Bohr) for distance-dependent bridges.
+            W_bridge = bridge_amplitude * exp(-bridge_decay_rate * R_AB).
+            Default: 1.0. Set to 0.0 for flat (distance-independent) bridges.
 
         Example:
         --------
@@ -1244,6 +1253,10 @@ class MoleculeHamiltonian:
         # Store lattice torsion (metric deformation at core)
         self.lattice_torsion = lattice_torsion
 
+        # Store bridge decay parameters (distance-dependent tunneling)
+        self.bridge_amplitude = bridge_amplitude
+        self.bridge_decay_rate = bridge_decay_rate
+
         # === Build unified Hamiltonian from weighted graph ===
         # The lattices provide: adjacency, node_weights (potential)
         # We just combine them and build H = kinetic_scale * (D - A + W)
@@ -1276,32 +1289,46 @@ class MoleculeHamiltonian:
             for row, col, weight in zip(adj.row, adj.col, adj.data):
                 self.adjacency[offset + row, offset + col] = weight
         
-        # Add bridge connections
+        # Add bridge connections with distance-dependent weights
+        # W_bridge = A * exp(-lambda * R_AB)  (tunneling decay law)
         self.bridge_info = []
         for atom_i, atom_j, n_bridges in self.connectivity:
             lattice_i = self.lattices[atom_i]
             lattice_j = self.lattices[atom_j]
             offset_i = offsets[atom_i]
             offset_j = offsets[atom_j]
-            
+
+            # Distance-dependent bridge weight
+            R_AB = np.linalg.norm(
+                lattice_i.nucleus_position - lattice_j.nucleus_position
+            )
+            if R_AB > 1e-10 and self.bridge_decay_rate > 0.0:
+                bridge_weight = self.bridge_amplitude * np.exp(
+                    -self.bridge_decay_rate * R_AB
+                )
+            else:
+                bridge_weight = self.bridge_amplitude
+
             # Get prioritized boundary states
             boundary_i = lattice_i._get_boundary_states_prioritized()
             boundary_j = lattice_j._get_boundary_states_prioritized()
-            
-            # Add bridges
+
+            # Add bridges with computed weight
             n_actual = min(len(boundary_i), len(boundary_j), n_bridges)
             for k in range(n_actual):
                 idx_i = offset_i + boundary_i[k]
                 idx_j = offset_j + boundary_j[k]
-                
+
                 # Symmetric connection
-                self.adjacency[idx_i, idx_j] = 1.0
-                self.adjacency[idx_j, idx_i] = 1.0
-            
+                self.adjacency[idx_i, idx_j] = bridge_weight
+                self.adjacency[idx_j, idx_i] = bridge_weight
+
             self.bridge_info.append({
                 'atoms': (atom_i, atom_j),
                 'n_bridges_requested': n_bridges,
-                'n_bridges_actual': n_actual
+                'n_bridges_actual': n_actual,
+                'distance': R_AB,
+                'bridge_weight': bridge_weight,
             })
         
         # Apply lattice torsion (metric deformation at nuclear defect)

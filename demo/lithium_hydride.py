@@ -1,26 +1,29 @@
 """
-Lithium Hydride (LiH) - Heteronuclear Molecular Bond
-=====================================================
+Lithium Hydride (LiH) - Dynamic Bridge Geometry Optimization
+=============================================================
 
-First test of the Geometric Torsion engine on a heteronuclear molecule.
+v0.5.0: Distance-dependent bridges enable molecular geometry optimization.
 
 System:
-    Li (Z=3) at origin  +  H (Z=1) at 3.015 Bohr
+    Li (Z=3) at origin  +  H (Z=1) at variable distance R
     4 electrons total (3 from Li, 1 from H)
-    Bond length: 3.015 Bohr = 1.596 Angstrom
+    Experimental bond length: 3.015 Bohr = 1.596 Angstrom
 
 Physics:
+    Bridge weight decays exponentially with distance:
+        W_bridge = A * exp(-lambda * R)
+
+    Total energy = E_electronic + V_NN (nuclear repulsion)
+
+    Competition:
+        - Nuclear repulsion (Z_Li * Z_H / R) pushes atoms apart
+        - Graph tunneling (exp(-lambda * R)) pulls atoms together
+        - Equilibrium: minimum in E(R) = The Bond
+
     Li nucleus is a topological defect: gamma = 0.25 * (3 - 2) = 0.25
     H nucleus is flat: Z=1 < Z_ref=2, no torsion.
 
-    For heteronuclear molecules we use apply_molecular_torsion() which
-    applies ONLY Law 3 (per-atom torsion) without global kinetic or
-    potential rescaling. Each atom keeps its natural -Z/n^2 potential.
-
     4-electron energy: E = 2*E_0 + 2*E_1 (fill lowest 2 orbitals)
-
-Target:
-    Total energy: -8.07 Ha (Hartree-Fock reference)
 
 Date: February 15, 2026
 """
@@ -36,12 +39,14 @@ from geovac import MoleculeHamiltonian, CALIBRATED_KINETIC_SCALE
 
 def run_lih(bond_length: float = 3.015,
             max_n: int = 5,
+            bridge_decay_rate: float = 1.0,
+            bridge_amplitude: float = 1.0,
             verbose: bool = True) -> dict:
     """
-    Simulate Lithium Hydride at a given bond length.
+    Simulate Lithium Hydride at a given bond length with dynamic bridges.
 
     Uses mean-field single-particle orbitals with 4-electron filling:
-    E_total = 2*E_0 + 2*E_1 (2 electrons per orbital, 2 orbitals).
+    E_total = 2*E_0 + 2*E_1 + V_NN (nuclear repulsion)
 
     Parameters:
     -----------
@@ -49,39 +54,29 @@ def run_lih(bond_length: float = 3.015,
         Li-H distance in Bohr (default: 3.015, equilibrium)
     max_n : int
         Basis set size (default: 5)
+    bridge_decay_rate : float
+        Exponential decay rate lambda (1/Bohr) for bridge weights (default: 1.0)
+    bridge_amplitude : float
+        Pre-exponential factor A for bridge weights (default: 1.0)
     verbose : bool
         Print details
 
     Returns:
     --------
-    dict with energy, orbital energies, timing
+    dict with energy, orbital energies, bridge weight, timing
     """
     Z_Li = 3
     Z_H = 1
-    E_target = -8.07  # Hartree-Fock reference
-
-    if verbose:
-        print(f"\n{'='*70}")
-        print(f"LITHIUM HYDRIDE (LiH) - HETERONUCLEAR BOND")
-        print(f"{'='*70}")
-        print(f"\n  Configuration:")
-        print(f"    Li (Z=3) at (0, 0, 0)")
-        print(f"    H  (Z=1) at ({bond_length}, 0, 0)")
-        print(f"    Bond length: {bond_length:.3f} Bohr ({bond_length * 0.529177:.3f} Angstrom)")
-        print(f"    Electrons:   4 (3 from Li + 1 from H)")
-        print(f"\n  Method:")
-        print(f"    Torsion:  Li gamma=0.25 (defect), H gamma=0.00 (flat)")
-        print(f"    Solver:   Mean-field + 4-electron filling (2*E0 + 2*E1)")
-        print(f"    max_n:    {max_n}")
-        print(f"    Target:   {E_target:.2f} Ha")
 
     t0 = time.time()
 
-    # Build with default kinetic scale and actual nuclear charges
+    # Build molecule with distance-dependent bridges
     mol = MoleculeHamiltonian(
         nuclei=[(0.0, 0.0, 0.0), (bond_length, 0.0, 0.0)],
         nuclear_charges=[Z_Li, Z_H],
-        max_n=max_n
+        max_n=max_n,
+        bridge_amplitude=bridge_amplitude,
+        bridge_decay_rate=bridge_decay_rate,
     )
 
     # Apply per-atom torsion only (no global kinetic/potential rescaling)
@@ -94,31 +89,48 @@ def run_lih(bond_length: float = 3.015,
     t_solve = time.time()
 
     # 4-electron filling: 2 per orbital, fill lowest 2
-    E_total = 2 * energies[0] + 2 * energies[1]
-    error_pct = 100 * (E_total - E_target) / abs(E_target)
+    E_electronic = 2 * energies[0] + 2 * energies[1]
+
+    # Nuclear repulsion: V_NN = Z_Li * Z_H / R
+    V_NN = mol.compute_nuclear_repulsion()
+
+    # Total energy = electronic + nuclear repulsion
+    E_total = E_electronic + V_NN
+
+    # Bridge weight for this distance
+    bridge_weight = mol.bridge_info[0]['bridge_weight'] if mol.bridge_info else 1.0
 
     if verbose:
         print(f"\n{'='*70}")
-        print(f"  RESULTS")
+        print(f"LITHIUM HYDRIDE (LiH) - DYNAMIC BRIDGE BOND")
         print(f"{'='*70}")
-        print(f"\n  Single-particle orbitals:")
+        print(f"\n  Configuration:")
+        print(f"    Li (Z=3) at (0, 0, 0)")
+        print(f"    H  (Z=1) at ({bond_length}, 0, 0)")
+        print(f"    Bond length: {bond_length:.3f} Bohr ({bond_length * 0.529177:.3f} Angstrom)")
+        print(f"    Electrons:   4 (3 from Li + 1 from H)")
+        print(f"\n  Bridge Physics:")
+        print(f"    Decay rate:  lambda = {bridge_decay_rate:.2f} / Bohr")
+        print(f"    Amplitude:   A = {bridge_amplitude:.2f}")
+        print(f"    Weight:      W = {bridge_weight:.6f}  (A * exp(-lambda * R))")
+        print(f"\n  Energy Decomposition:")
+        print(f"    E_electronic: {E_electronic:.6f} Ha")
+        print(f"    V_NN:         {V_NN:+.6f} Ha  (Z_Li * Z_H / R)")
+        print(f"    E_total:      {E_total:.6f} Ha")
+        print(f"\n  Orbitals:")
         labels = ['1s(Li)', '2s(Li)', '2p(Li)', '2p(Li)', '1s(H)', '3s(Li)']
         for i in range(min(6, len(energies))):
             occ = '**' if i < 2 else '  '
             lbl = labels[i] if i < len(labels) else '...'
             print(f"    {occ} E_{i} = {energies[i]:.6f} Ha  ({lbl})")
-        print(f"\n  4-electron energy: 2*E_0 + 2*E_1 = {E_total:.6f} Ha")
-        print(f"  Target:            {E_target:.2f} Ha")
-        print(f"  Error:             {error_pct:+.2f}%")
-        print(f"\n  Orbital gap (HOMO-LUMO): {energies[2] - energies[1]:.4f} Ha "
-              f"= {(energies[2] - energies[1]) * 27.2114:.2f} eV")
-        print(f"  States: {mol.n_total_states} single-particle")
+        print(f"\n  States: {mol.n_total_states} single-particle")
         print(f"  Build: {(t_build - t0)*1000:.0f} ms, Solve: {(t_solve - t_build)*1000:.0f} ms")
 
     return {
         'energy': E_total,
-        'target': E_target,
-        'error_pct': error_pct,
+        'E_electronic': E_electronic,
+        'V_NN': V_NN,
+        'bridge_weight': bridge_weight,
         'bond_length': bond_length,
         'orbital_energies': energies,
         'n_states': mol.n_total_states,
@@ -127,111 +139,100 @@ def run_lih(bond_length: float = 3.015,
 
 
 def scan_bond_length(max_n: int = 5,
+                     bridge_decay_rate: float = 1.0,
+                     bridge_amplitude: float = 1.0,
                      verbose: bool = True) -> dict:
     """
-    Scan LiH bond length to find the potential energy curve.
+    Scan LiH bond length to find equilibrium geometry.
+
+    The energy curve E(R) = E_electronic(R) + Z_Li*Z_H/R should show:
+    - Too close: nuclear repulsion dominates -> energy rises
+    - Too far: bridges break (W->0) -> energy rises
+    - Just right: a minimum appears (The Bond)
     """
-    distances = np.arange(1.5, 8.0, 0.5)
+    distances = np.arange(2.0, 6.5, 0.25)
 
     if verbose:
         print(f"\n{'='*70}")
-        print(f"LiH BOND LENGTH SCAN")
+        print(f"LiH BOND LENGTH SCAN (Dynamic Bridges)")
         print(f"{'='*70}")
-        print(f"  max_n: {max_n}")
-        print(f"  Distances: {distances[0]:.1f} to {distances[-1]:.1f} Bohr")
-        print(f"\n  {'R (Bohr)':>10}  {'E_total (Ha)':>12}  {'Note':>15}")
-        print(f"  {'-'*10}  {'-'*12}  {'-'*15}")
+        print(f"  max_n:  {max_n}")
+        print(f"  lambda: {bridge_decay_rate:.2f} / Bohr")
+        print(f"  A:      {bridge_amplitude:.2f}")
+        print(f"  Range:  {distances[0]:.1f} to {distances[-1]:.1f} Bohr")
+        print(f"\n  {'R':>6}  {'W_bridge':>10}  {'E_elec':>10}  {'V_NN':>8}"
+              f"  {'E_total':>10}  {'Note':>12}")
+        print(f"  {'-'*6}  {'-'*10}  {'-'*10}  {'-'*8}  {'-'*10}  {'-'*12}")
 
     results = {}
     E_min = 0.0
     R_min = 0.0
 
     for R in distances:
-        r = run_lih(bond_length=R, max_n=max_n, verbose=False)
+        r = run_lih(
+            bond_length=R, max_n=max_n,
+            bridge_decay_rate=bridge_decay_rate,
+            bridge_amplitude=bridge_amplitude,
+            verbose=False,
+        )
         results[R] = r
 
         note = ""
         if r['energy'] < E_min:
             E_min = r['energy']
             R_min = R
-            note = "<-- minimum"
+            note = "<-- min"
 
         if verbose:
-            print(f"  {R:10.3f}  {r['energy']:12.6f}  {note:>15}")
+            print(f"  {R:6.2f}  {r['bridge_weight']:10.6f}  {r['E_electronic']:10.4f}"
+                  f"  {r['V_NN']:8.4f}  {r['energy']:10.4f}  {note:>12}")
 
     if verbose:
-        print(f"\n  Equilibrium:    R = {R_min:.1f} Bohr, E = {E_min:.6f} Ha")
-        print(f"  Experimental:   R = 3.015 Bohr")
-        # Compute binding energy relative to separated atoms
+        print(f"\n  {'='*70}")
+        print(f"  Equilibrium:    R = {R_min:.2f} Bohr ({R_min * 0.529177:.3f} Angstrom)")
+        print(f"  Experimental:   R = 3.015 Bohr (1.596 Angstrom)")
+        print(f"  E_min:          {E_min:.6f} Ha")
+
+        # Binding energy relative to separated atoms
         E_inf = results[max(distances)]['energy']
         binding = E_min - E_inf
-        print(f"  Binding energy: {binding:.4f} Ha = {binding * 27.2114:.2f} eV")
+        if binding < 0:
+            print(f"  Binding energy: {binding:.4f} Ha = {binding * 27.2114:.2f} eV")
+            print(f"  --> BOUND STATE FOUND!")
+        else:
+            print(f"  Binding energy: {binding:.4f} Ha (no minimum found)")
 
     return results
 
 
-def compare_torsion(bond_length: float = 3.015,
-                    max_n: int = 5,
-                    verbose: bool = True) -> None:
-    """
-    Compare LiH with and without torsion on Li.
-    """
-    if verbose:
-        print(f"\n{'='*70}")
-        print(f"TORSION COMPARISON: LiH at R = {bond_length} Bohr")
-        print(f"{'='*70}")
-
-    # Without torsion
-    mol_flat = MoleculeHamiltonian(
-        nuclei=[(0.0, 0.0, 0.0), (bond_length, 0.0, 0.0)],
-        nuclear_charges=[3, 1],
-        max_n=max_n
-    )
-    e_flat, _ = mol_flat.compute_ground_state(n_states=4, method='mean_field')
-    E_flat = 2 * e_flat[0] + 2 * e_flat[1]
-
-    # With torsion on Li
-    mol_torsion = MoleculeHamiltonian(
-        nuclei=[(0.0, 0.0, 0.0), (bond_length, 0.0, 0.0)],
-        nuclear_charges=[3, 1],
-        max_n=max_n
-    )
-    mol_torsion.apply_molecular_torsion()
-    e_torsion, _ = mol_torsion.compute_ground_state(n_states=4, method='mean_field')
-    E_torsion = 2 * e_torsion[0] + 2 * e_torsion[1]
-
-    E_target = -8.07
-
-    if verbose:
-        print(f"\n  {'':>20}  {'Flat (gamma=0)':>16}  {'Torsion (Li 0.25)':>18}")
-        print(f"  {'-'*20}  {'-'*16}  {'-'*18}")
-        print(f"  {'E_0 (1s core)':>20}  {e_flat[0]:>16.6f}  {e_torsion[0]:>18.6f}")
-        print(f"  {'E_1 (2s bond)':>20}  {e_flat[1]:>16.6f}  {e_torsion[1]:>18.6f}")
-        print(f"  {'E_2 (LUMO)':>20}  {e_flat[2]:>16.6f}  {e_torsion[2]:>18.6f}")
-        print(f"  {'4e total':>20}  {E_flat:>16.6f}  {E_torsion:>18.6f}")
-        print(f"  {'Target':>20}  {E_target:>16.2f}  {E_target:>18.2f}")
-        err_flat = 100 * (E_flat - E_target) / abs(E_target)
-        err_torsion = 100 * (E_torsion - E_target) / abs(E_target)
-        print(f"  {'Error':>20}  {err_flat:>+15.2f}%  {err_torsion:>+17.2f}%")
-        print(f"\n  Torsion correction: {E_torsion - E_flat:+.4f} Ha "
-              f"= {(E_torsion - E_flat) * 27.2114:+.2f} eV")
-
-
 if __name__ == '__main__':
     print("=" * 70)
-    print("GeoVac: Lithium Hydride (LiH) Demo")
-    print("First heteronuclear test of the Geometric Torsion engine")
+    print("GeoVac v0.5.0: LiH Dynamic Bridge Geometry Optimization")
+    print("Finding the bond from Nuclear Repulsion (1/R) vs")
+    print("Graph Tunneling (exp(-lambda*R))")
     print("=" * 70)
 
-    # Torsion comparison at equilibrium
-    compare_torsion(bond_length=3.015, max_n=5)
+    # Calibrated bridge parameters for LiH
+    # A=8.5, lambda=0.2 places the PES minimum near R~2.75 Bohr
+    # with binding energy ~0.10 Ha (~2.7 eV)
+    A_cal = 8.5
+    lam_cal = 0.2
 
-    # Main calculation
-    result = run_lih(bond_length=3.015, max_n=5, verbose=True)
+    # Single-point at experimental geometry
+    result = run_lih(
+        bond_length=3.015, max_n=5,
+        bridge_amplitude=A_cal, bridge_decay_rate=lam_cal,
+        verbose=True,
+    )
 
-    # Bond length scan
-    scan_bond_length(max_n=5, verbose=True)
+    # Bond length scan: find the equilibrium
+    scan_bond_length(
+        max_n=5,
+        bridge_amplitude=A_cal, bridge_decay_rate=lam_cal,
+        verbose=True,
+    )
 
     print(f"\n{'='*70}")
-    print(f"'A twisted lithium bonds to a flat hydrogen.'")
+    print(f"'The bond emerges from the competition between")
+    print(f" repulsion and tunneling on the graph.'")
     print(f"{'='*70}")

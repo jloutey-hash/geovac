@@ -157,6 +157,7 @@ def test_h2_bond(verbose=True, relativistic=False):
         lattices=[atom_A, atom_B],
         connectivity=[(0, 1, 4 * max_n)],  # Standard bridge scaling
         kinetic_scale=UNIVERSAL_KINETIC_SCALE,
+        bridge_decay_rate=0.0,  # Flat bridges for topology validation
     )
 
     energies, wf = mol.compute_ground_state(n_states=1, method='full_ci')

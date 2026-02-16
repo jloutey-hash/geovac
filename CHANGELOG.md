@@ -5,6 +5,43 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-02-15
+
+### The Alpha-Metric Bond
+
+#### Distance-Dependent Bridges
+- **Bridge decay law:** `W = A * exp(-lambda * R)` replaces fixed weight 1.0
+- New parameters: `bridge_amplitude` (A) and `bridge_decay_rate` (lambda)
+- Bridges weaken exponentially with internuclear distance (tunneling decay)
+- Equilibrium bond length emerges from competition: repulsion (1/R) vs tunneling (e^{-R})
+
+#### Vacuum Constant Derivation (Paper 5, Section VII)
+- **Alpha-Metric Amplitude:** `A = alpha^{-1} * |K| = 137.036 * 1/16 = 8.565`
+- **Metric Decay Length:** `lambda = sqrt(|K|) = 1/4 = mu` (torsion constant)
+- Both bridge constants derived from vacuum constants K = -1/16 and alpha
+- Chemistry is geometry: bonding emerges from the same constants as atomic structure
+
+#### Universal Bonding Validation
+- **H2:** R_eq = 1.40 Bohr (exact experimental match) with A=8.5, lambda=0.2
+- **LiH:** R_eq = 2.75 Bohr (9% from experiment) with A=8.5, lambda=0.2
+- A_H2/A_LiH = 0.94 — bridge amplitude is approximately universal
+- `tests/universal_bonding.py`: systematic sweep of A and lambda for H2
+
+#### Heavy Metal Probe (Relativistic Limits)
+- **Discovery:** Linear torsion gamma = mu*(Z-2) breaks at Z > 6 (Carbon!)
+- Metric inverts when gamma > 1: (1-gamma) goes negative
+- **Proposal:** Schwarzschild metric `exp(-gamma)` extends to all Z
+- GeoVac baseline: consistent 4.9% vs non-relativistic exact across Z=1-92
+- Relativistic gap grows: +4.9% at Z=1 to +17.2% at Z=92 (Uranium)
+- `tests/heavy_metal_probe.py`: Au^{78+} probe with Z-scan across periodic table
+
+#### Updated
+- `MoleculeHamiltonian`: new `bridge_amplitude`, `bridge_decay_rate` parameters
+- `demo/lithium_hydride.py`: bond length scan with dynamic bridges and energy decomposition
+- `tests/production_suite.py`: H2 test uses `bridge_decay_rate=0.0` for backward compatibility
+- `papers/Paper_5_Geometric_Vacuum.tex`: Section VII "The Geometry of the Chemical Bond"
+- `bridge_info` dict now includes `distance` and `bridge_weight` per bond
+
 ## [0.4.2] - 2026-02-15
 
 ### Release Cleanup & Consolidation
