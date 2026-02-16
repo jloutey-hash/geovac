@@ -16,53 +16,79 @@ from typing import List, Tuple, Dict
 
 class GeometricLattice:
     """
-    Clean implementation of the hydrogen quantum state lattice.
-    
+    TOPOLOGICAL QUANTUM LATTICE - "The Lattice is Truth"
+
     Nodes represent quantum states |n, l, m⟩ where:
     - n: principal quantum number (n ≥ 1)
     - l: angular momentum quantum number (0 ≤ l < n)
     - m: magnetic quantum number (-l ≤ m ≤ l)
-    
+
     Edges represent allowed transitions:
     - Angular transitions: m ↔ m±1 (within same n, l)
     - Radial transitions: n ↔ n±1 (within same l, m)
-    
+
+    Node Weights (DIAGONAL) represent POTENTIAL ENERGY:
+    - For state (n,l,m) near nucleus with charge Z: weight = -Z/n²
+    - This IS the potential energy, encoded as graph topology!
+
+    CRITICAL PRINCIPLE:
+    ALL PHYSICS COMES FROM THE GRAPH. The Hamiltonian solver is "dumb" -
+    it just diagonalizes H = scale*(D - A + W) where W are node weights.
+
     Attributes:
     -----------
     max_n : int
         Maximum principal quantum number
+    nucleus_position : np.ndarray
+        3D position of the nucleus this lattice represents
+    nuclear_charge : int
+        Nuclear charge Z (proton number)
     states : List[Tuple[int, int, int]]
         List of all (n, l, m) quantum states
     adjacency : scipy.sparse.csr_matrix
         Sparse adjacency matrix encoding connectivity
+    node_weights : np.ndarray
+        Diagonal weights (potential energy) for each node
     """
-    
-    def __init__(self, max_n: int, topological_weights: bool = False):
+
+    def __init__(self,
+                 max_n: int,
+                 nucleus_position: Tuple[float, float, float] = (0.0, 0.0, 0.0),
+                 nuclear_charge: int = 1,
+                 topological_weights: bool = False):
         """
-        Initialize the geometric lattice.
-        
+        Initialize the geometric lattice centered on a nucleus.
+
         Parameters:
         -----------
         max_n : int
             Maximum principal quantum number (n ≥ 1)
+        nucleus_position : Tuple[float, float, float], optional
+            3D coordinates of the nucleus (default: origin)
+        nuclear_charge : int, optional
+            Nuclear charge Z (default: 1 for hydrogen)
         topological_weights : bool, optional
-            If True, use n-dependent edge weights to encode potential
-            in graph topology (pure geometric mode). If False, use
-            binary weights (hybrid mode with separate potential term).
-            Default: False
+            If True, use n-dependent edge weights (default: False)
         """
         if max_n < 1:
             raise ValueError("max_n must be at least 1")
-        
+        if nuclear_charge < 1:
+            raise ValueError("nuclear_charge must be at least 1")
+
         self.max_n = max_n
+        self.nucleus_position = np.array(nucleus_position, dtype=float)
+        self.nuclear_charge = nuclear_charge
         self.topological_weights = topological_weights
+
         self.states: List[Tuple[int, int, int]] = []
         self._state_index: Dict[Tuple[int, int, int], int] = {}
         self.adjacency: csr_matrix = None
-        
+        self.node_weights: np.ndarray = None
+
         # Build lattice structure
         self._generate_states()
         self._build_adjacency_matrix()
+        self._compute_node_weights()
     
     def _generate_states(self) -> None:
         """
@@ -185,7 +211,48 @@ class GeometricLattice:
         else:
             # Binary (uniform) weights
             return 1.0
-    
+
+    def _compute_node_weights(self) -> None:
+        """
+        Compute diagonal node weights = POTENTIAL ENERGY as graph topology.
+
+        CRITICAL PRINCIPLE: "The Lattice is Truth"
+        =========================================
+        In spectral graph theory, the potential is NOT an external operator.
+        It is the DIAGONAL WEIGHT (self-loop) of the graph.
+
+        For a hydrogen-like atom with nuclear charge Z:
+            Node weight for state (n, l, m) = -Z/n²
+
+        This IS the potential energy V = -Z/r, encoded topologically through
+        the quantum number n. The spatial scaling r = n²/Z is IMPLICIT in
+        the Bohr model - we don't need explicit coordinates!
+
+        The Hamiltonian solver will use:
+            H = kinetic_scale * (D - A + W)
+
+        where W = diag(node_weights) encodes the potential.
+
+        Physical Interpretation:
+        -----------------------
+        - Low n states (close to nucleus): Large negative weight (strong binding)
+        - High n states (far from nucleus): Small negative weight (weak binding)
+        - Nuclear charge Z: Scales the binding strength
+
+        Examples:
+        - Hydrogen (Z=1, n=1): weight = -1/1 = -1.0 Ha
+        - Helium (Z=2, n=1):   weight = -2/1 = -2.0 Ha (twice as strong!)
+        - H⁻ (Z=1, n=2):       weight = -1/4 = -0.25 Ha (weakly bound)
+
+        This is PURE TOPOLOGY - no coordinates, no distance calculations!
+        """
+        self.node_weights = np.zeros(self.num_states)
+
+        for i, (n, l, m) in enumerate(self.states):
+            # Topological potential energy: -Z/n²
+            # This encodes the Coulomb attraction through quantum numbers alone
+            self.node_weights[i] = -self.nuclear_charge / (n**2)
+
     @property
     def num_states(self) -> int:
         """Return the total number of quantum states in the lattice."""

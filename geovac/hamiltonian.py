@@ -4,18 +4,18 @@ Helium Atom Hamiltonian on Geometric Lattice
 Implements a 2-electron Hamiltonian using tensor product space over
 the discrete quantum state lattice (n, l, m).
 
-H_total = H₁ ⊗ I + I ⊗ H₁ + V_ee
+H_total = H_1 x I + I x H_1 + V_ee
 
-where H₁ is the single-particle Hamiltonian and V_ee is electron-electron repulsion.
+where H_1 is the single-particle Hamiltonian and V_ee is electron-electron repulsion.
 
 Modes:
 ------
 1. Pure Geometric Mode (geometric_mode=True):
-   H₁ = D - A (no added potential)
+   H_1 = D - A (no added potential)
    Potential emerges from topological edge weights
    
 2. Hybrid Mode (geometric_mode=False):
-   H₁ = T + V where T = -½(D-A), V = -Z/r
+   H_1 = T + V where T = -½(D-A), V = -Z/r
    Explicit Coulomb potential added to graph Laplacian
 
 Author: Computational Quantum Physics
@@ -24,10 +24,11 @@ Date: February 2026
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.sparse import csr_matrix, lil_matrix, diags, identity, kron
+from scipy.sparse import csr_matrix, lil_matrix, diags, identity, kron, bmat
 from scipy.sparse.linalg import eigsh
 from typing import Tuple, Dict, List
 from .lattice import GeometricLattice
+from .dirac_hamiltonian import DiracHamiltonian, C_LIGHT, ELECTRON_MASS
 
 
 # Physical Constants (Atomic Units)
@@ -39,7 +40,7 @@ class HeliumHamiltonian:
     """
     Two-electron Hamiltonian for Helium atom on geometric lattice.
     
-    Uses tensor product space: |ψ⟩ = |n₁,l₁,m₁⟩ ⊗ |n₂,l₂,m₂⟩
+    Uses tensor product space: |psi> = |n_1,l_1,m_1> x |n_2,l_2,m_2>
     
     Parameters:
     -----------
@@ -73,7 +74,7 @@ class HeliumHamiltonian:
             Used to calibrate graph Laplacian to physical units
         geometric_mode : bool, optional
             If True, use pure geometric mode where potential emerges
-            from topological edge weights (D - A with 1/(n₁*n₂) weights).
+            from topological edge weights (D - A with 1/(n_1*n_2) weights).
             If False, use hybrid mode with separate Coulomb potential.
             Default: False (hybrid mode for backward compatibility)
         """
@@ -93,8 +94,8 @@ class HeliumHamiltonian:
         self.lattice = GeometricLattice(max_n, topological_weights=geometric_mode)
         self.n_states = self.lattice.num_states
         
-        print(f"  → {self.n_states} single-particle states")
-        print(f"  → {self.n_states**2} two-particle states")
+        print(f"  -> {self.n_states} single-particle states")
+        print(f"  -> {self.n_states**2} two-particle states")
         
         # Build Hamiltonians
         self.h1 = None
@@ -109,9 +110,9 @@ class HeliumHamiltonian:
         
         PURE GEOMETRIC MODE (geometric_mode=True):
         ------------------------------------------
-        H₁ = (D - A) * kinetic_scale
+        H_1 = (D - A) * kinetic_scale
         
-        The potential emerges from topological edge weights w(n₁,n₂) = 1/(n₁*n₂).
+        The potential emerges from topological edge weights w(n_1,n_2) = 1/(n_1*n_2).
         States near the nucleus (low n) have stronger coupling, creating an
         effective "topological puncture" that mimics the Coulomb potential.
         
@@ -120,7 +121,7 @@ class HeliumHamiltonian:
         
         HYBRID MODE (geometric_mode=False):
         -----------------------------------
-        H₁ = T + V where:
+        H_1 = T + V where:
         - T = -½ * kinetic_scale * (D - A)  [graph Laplacian]
         - V = -Z/n²  [explicit Coulomb potential]
         
@@ -141,16 +142,16 @@ class HeliumHamiltonian:
             # ======================================
             # PURE GEOMETRIC MODE
             # ======================================
-            # H₁ = (D - A) with topological weights
+            # H_1 = (D - A) with topological weights
             # NO added potential term
             # Energy well emerges from graph topology
             # ======================================
             self.h1 = self.kinetic_scale * laplacian
             
-            print(f"  ✓ Pure geometric Hamiltonian: H₁ = {self.kinetic_scale:.6f} * (D - A)")
-            print(f"  ✓ Edge weights: 1/(n₁*n₂) encode Coulomb potential")
-            print(f"  ✓ Topological puncture at n=1")
-            print(f"  ✓ Matrix: {self.h1.shape}, {self.h1.nnz} nonzero")
+            print(f"  [OK] Pure geometric Hamiltonian: H_1 = {self.kinetic_scale:.6f} * (D - A)")
+            print(f"  [OK] Edge weights: 1/(n_1*n_2) encode Coulomb potential")
+            print(f"  [OK] Topological puncture at n=1")
+            print(f"  [OK] Matrix: {self.h1.shape}, {self.h1.nnz} nonzero")
             
         else:
             # ======================================
@@ -167,12 +168,12 @@ class HeliumHamiltonian:
             
             V = diags(potential, 0, shape=(self.n_states, self.n_states), format='csr')
             
-            # Total: H₁ = T + V
+            # Total: H_1 = T + V
             self.h1 = T + V
             
-            print(f"  ✓ Kinetic energy (graph Laplacian): {self.n_states}×{self.n_states}")
-            print(f"  ✓ Potential energy (Coulomb): diagonal")
-            print(f"  ✓ H₁ matrix: {self.h1.shape}, {self.h1.nnz} nonzero")
+            print(f"  [OK] Kinetic energy (graph Laplacian): {self.n_states}×{self.n_states}")
+            print(f"  [OK] Potential energy (Coulomb): diagonal")
+            print(f"  [OK] H_1 matrix: {self.h1.shape}, {self.h1.nnz} nonzero")
     
     def _compute_spatial_coordinates(self) -> np.ndarray:
         """
@@ -218,10 +219,10 @@ class HeliumHamiltonian:
     
     def _build_electron_repulsion(self) -> csr_matrix:
         """
-        Construct electron-electron repulsion term: V_ee = 1/|r₁ - r₂|
+        Construct electron-electron repulsion term: V_ee = 1/|r_1 - r_2|
         
         In tensor product space, this is a diagonal operator acting on
-        combined states |n₁,l₁,m₁⟩ ⊗ |n₂,l₂,m₂⟩.
+        combined states |n_1,l_1,m_1> x |n_2,l_2,m_2>.
         
         The interaction energy is estimated as:
         V_ee(i,j) = 1/|r_i - r_j|
@@ -260,14 +261,14 @@ class HeliumHamiltonian:
                     n1 = self.lattice.states[i][0]
                     v_ee_diagonal[idx_combined] = 1.0 / (n1**2)
                 else:
-                    # Coulomb repulsion: 1/r₁₂
+                    # Coulomb repulsion: 1/r_1_2
                     v_ee_diagonal[idx_combined] = 1.0 / distance
         
         v_ee = diags(v_ee_diagonal, 0, shape=(n_two_particle, n_two_particle), 
                      format='csr')
         
-        print(f"  ✓ Electron-electron repulsion: {n_two_particle}×{n_two_particle} diagonal")
-        print(f"  ✓ Mean repulsion energy: {np.mean(v_ee_diagonal):.4f} Hartree")
+        print(f"  [OK] Electron-electron repulsion: {n_two_particle}×{n_two_particle} diagonal")
+        print(f"  [OK] Mean repulsion energy: {np.mean(v_ee_diagonal):.4f} Hartree")
         
         return v_ee
     
@@ -275,11 +276,11 @@ class HeliumHamiltonian:
         """
         Construct two-particle Hamiltonian using tensor products.
         
-        H₂ = H₁ ⊗ I + I ⊗ H₁ + V_ee
+        H_2 = H_1 x I + I x H_1 + V_ee
         
         where:
-        - H₁ ⊗ I: First electron kinetic + potential
-        - I ⊗ H₁: Second electron kinetic + potential
+        - H_1 x I: First electron kinetic + potential
+        - I x H_1: Second electron kinetic + potential
         - V_ee: Electron-electron repulsion
         
         Uses scipy.sparse.kron for efficient sparse tensor products.
@@ -289,27 +290,27 @@ class HeliumHamiltonian:
         # Identity matrix for tensor products
         I = identity(self.n_states, format='csr')
         
-        # First electron Hamiltonian: H₁ ⊗ I
-        print("  → Computing H₁ ⊗ I...")
+        # First electron Hamiltonian: H_1 x I
+        print("  -> Computing H_1 x I...")
         h1_x_I = kron(self.h1, I, format='csr')
         
-        # Second electron Hamiltonian: I ⊗ H₁
-        print("  → Computing I ⊗ H₁...")
+        # Second electron Hamiltonian: I x H_1
+        print("  -> Computing I x H_1...")
         I_x_h1 = kron(I, self.h1, format='csr')
         
         # Electron-electron repulsion
-        print("  → Computing V_ee...")
+        print("  -> Computing V_ee...")
         v_ee = self._build_electron_repulsion()
         
         # Total Hamiltonian
-        print("  → Assembling total Hamiltonian...")
+        print("  -> Assembling total Hamiltonian...")
         self.h2 = h1_x_I + I_x_h1 + v_ee
         
         # Statistics
         n_total = self.n_states**2
         sparsity = 1.0 - (self.h2.nnz / (n_total**2))
         
-        print(f"\n  ✓ Two-particle Hamiltonian complete:")
+        print(f"\n  [OK] Two-particle Hamiltonian complete:")
         print(f"      Shape:      {self.h2.shape}")
         print(f"      Nonzero:    {self.h2.nnz}")
         print(f"      Sparsity:   {sparsity:.6f}")
@@ -341,7 +342,7 @@ class HeliumHamiltonian:
         # which='SA' finds smallest algebraic (most negative)
         energies, wavefunctions = eigsh(self.h2, k=n_states, which='SA')
         
-        print(f"  ✓ Eigenvalue computation complete")
+        print(f"  [OK] Eigenvalue computation complete")
         
         return energies, wavefunctions
     
@@ -442,13 +443,13 @@ class HeliumHamiltonian:
             # Verdict
             if self.geometric_mode:
                 if abs(b_fit + 2.0) < 0.1 and r_squared > 0.99:
-                    print(f"\n✓ TOPOLOGICAL SUCCESS: -1/n² scaling emerges from graph!")
+                    print(f"\n[OK] TOPOLOGICAL SUCCESS: -1/n² scaling emerges from graph!")
                 elif abs(b_fit + 2.0) < 0.3:
-                    print(f"\n⚠ PARTIAL SUCCESS: Scaling is close but needs refinement")
-                    print(f"  → Adjust edge weights near n=1 (topological puncture)")
+                    print(f"\n[!] PARTIAL SUCCESS: Scaling is close but needs refinement")
+                    print(f"  -> Adjust edge weights near n=1 (topological puncture)")
                 else:
-                    print(f"\n✗ SCALING FAILURE: Graph topology does not produce -1/n²")
-                    print(f"  → Theory prediction failed. Refine edge weight formula.")
+                    print(f"\n[X] SCALING FAILURE: Graph topology does not produce -1/n²")
+                    print(f"  -> Theory prediction failed. Refine edge weight formula.")
             
             return {
                 'eigenvalues': energies,
@@ -459,7 +460,7 @@ class HeliumHamiltonian:
                 'mean_error': np.mean(rel_errors)
             }
         else:
-            print("\n⚠ Could not assign quantum numbers to eigenvalues")
+            print("\n[!] Could not assign quantum numbers to eigenvalues")
             return {
                 'eigenvalues': energies,
                 'n_quantum': [],
@@ -487,14 +488,14 @@ class HeliumPackingSolver:
     
     CRITICAL PARADIGM SHIFT:
     -------------------------
-    Instead of tensor product H₁ ⊗ I + I ⊗ H₁ (O(N²) dimensional space),
+    Instead of tensor product H_1 x I + I x H_1 (O(N²) dimensional space),
     this solver places electrons at specific NODES on the N-dimensional
     lattice and computes total energy:
     
     E_total = E_site(e1) + E_site(e2) + U_graph(e1, e2)
     
     where:
-    - E_site(e_i): Single-particle energy at that node (from H₁ eigenvalues)
+    - E_site(e_i): Single-particle energy at that node (from H_1 eigenvalues)
     - U_graph(e1, e2): Graph-based repulsion = α / d_graph(n1, n2)
     - d_graph: Shortest path (geodesic) on the lattice graph
     
@@ -502,7 +503,7 @@ class HeliumPackingSolver:
     
     Pauli Exclusion:
     ----------------
-    If e1 and e2 occupy the same node → d_graph = 0 → U = ∞
+    If e1 and e2 occupy the same node -> d_graph = 0 -> U = inf
     This AUTOMATICALLY enforces Pauli exclusion from graph geometry!
     
     Attributes:
@@ -512,7 +513,7 @@ class HeliumPackingSolver:
     h1 : scipy.sparse.csr_matrix
         Single-particle Hamiltonian
     site_energies : np.ndarray
-        Energy of each lattice site (H₁ diagonal for eigenstates)
+        Energy of each lattice site (H_1 diagonal for eigenstates)
     alpha_interaction : float
         Coupling constant for graph repulsion
     """
@@ -536,7 +537,7 @@ class HeliumPackingSolver:
             Use pure geometric mode (recommended for packing)
         alpha_interaction : float
             Coupling constant for graph repulsion: U = α / d_graph
-            Larger α → stronger repulsion → more separation
+            Larger α -> stronger repulsion -> more separation
         """
         self.max_n = max_n
         self.Z = Z
@@ -565,10 +566,10 @@ class HeliumPackingSolver:
         # Precompute graph distances (for efficiency)
         print(f"\n  Computing graph distances...")
         self.graph_distances = self.lattice.compute_all_pair_distances(method='geodesic')
-        print(f"  ✓ Distance matrix: {self.graph_distances.shape}")
+        print(f"  [OK] Distance matrix: {self.graph_distances.shape}")
     
     def _build_single_particle_hamiltonian(self):
-        """Build H₁ using same logic as HeliumHamiltonian."""
+        """Build H_1 using same logic as HeliumHamiltonian."""
         adjacency = self.lattice.adjacency
         
         # Graph Laplacian
@@ -577,10 +578,10 @@ class HeliumPackingSolver:
         laplacian = D - adjacency
         
         if self.geometric_mode:
-            # Pure geometric: H₁ = kinetic_scale * (D - A)
+            # Pure geometric: H_1 = kinetic_scale * (D - A)
             self.h1 = self.kinetic_scale * laplacian
         else:
-            # Hybrid: H₁ = T + V
+            # Hybrid: H_1 = T + V
             T = -0.5 * self.kinetic_scale * laplacian
             
             potential = np.zeros(self.n_states)
@@ -616,13 +617,13 @@ class HeliumPackingSolver:
         self.eigenvalues = energies
         self.eigenvectors = eigenvectors
         
-        # For simplicity, use diagonal of H₁ as site energies
-        # (This is exact for diagonal H₁, approximate otherwise)
+        # For simplicity, use diagonal of H_1 as site energies
+        # (This is exact for diagonal H_1, approximate otherwise)
         self.site_energies = np.array(self.h1.diagonal()).flatten()
         
-        print(f"  ✓ Site energies computed")
-        print(f"  ✓ Ground state: {energies[0]:.6f} Hartree")
-        print(f"  ✓ Excited states: {n_compute} computed")
+        print(f"  [OK] Site energies computed")
+        print(f"  [OK] Ground state: {energies[0]:.6f} Hartree")
+        print(f"  [OK] Excited states: {n_compute} computed")
     
     def compute_interaction_energy(self, idx1: int, idx2: int) -> float:
         """
@@ -630,7 +631,7 @@ class HeliumPackingSolver:
         
         U_12 = α / d_graph(n1, n2)
         
-        PAULI EXCLUSION: If idx1 == idx2 → d_graph = 0 → U = ∞
+        PAULI EXCLUSION: If idx1 == idx2 -> d_graph = 0 -> U = inf
         
         Parameters:
         -----------
@@ -643,7 +644,7 @@ class HeliumPackingSolver:
             Interaction energy (Hartree)
         """
         if idx1 == idx2:
-            # Same site → infinite repulsion (Pauli exclusion)
+            # Same site -> infinite repulsion (Pauli exclusion)
             return np.inf
         
         # Get graph distance
@@ -672,7 +673,7 @@ class HeliumPackingSolver:
         E_total : float
             Total energy (Hartree)
         """
-        # Site energies (diagonal of H₁)
+        # Site energies (diagonal of H_1)
         E1 = self.site_energies[idx1]
         E2 = self.site_energies[idx2]
         
@@ -756,7 +757,7 @@ class HeliumPackingSolver:
         U = self.compute_interaction_energy(idx1, idx2)
         d_graph = self.graph_distances[idx1, idx2]
         
-        print(f"\n  ✓ Search complete: {n_configs} configurations tested")
+        print(f"\n  [OK] Search complete: {n_configs} configurations tested")
         print(f"\n{'='*70}")
         print(f"GROUND STATE FOUND")
         print(f"{'='*70}")
@@ -792,7 +793,7 @@ class HeliumPackingSolver:
         idx1 = np.argmin(self.site_energies)
         state1 = self.lattice.states[idx1]
         
-        print(f"\n  Electron 1 → {state1} (lowest site energy)")
+        print(f"\n  Electron 1 -> {state1} (lowest site energy)")
         
         # Find best placement for electron 2
         min_energy = np.inf
@@ -816,8 +817,8 @@ class HeliumPackingSolver:
         U = self.compute_interaction_energy(idx1, idx2)
         d_graph = self.graph_distances[idx1, idx2]
         
-        print(f"  Electron 2 → {state2} (minimizes total energy)")
-        print(f"\n  ✓ Greedy placement complete")
+        print(f"  Electron 2 -> {state2} (minimizes total energy)")
+        print(f"\n  [OK] Greedy placement complete")
         print(f"\n  Total energy:     {min_energy:.6f} Hartree")
         print(f"  Graph distance:   {d_graph:.4f}")
         
@@ -835,7 +836,7 @@ class HeliumPackingSolver:
         Verify that same-site occupation has infinite energy cost.
         
         Test: Place both electrons at the same node.
-        Expected: E = ∞ (enforces Pauli exclusion)
+        Expected: E = inf (enforces Pauli exclusion)
         """
         print(f"\n{'='*70}")
         print(f"PAULI EXCLUSION TEST")
@@ -857,14 +858,14 @@ class HeliumPackingSolver:
         print(f"  E_total:      {E_total}")
         
         if np.isinf(U_same_site):
-            print(f"\n  ✓ PAULI EXCLUSION VERIFIED")
-            print(f"  → Same-site occupation: U = ∞")
-            print(f"  → Graph geometry AUTOMATICALLY enforces Pauli principle!")
+            print(f"\n  [OK] PAULI EXCLUSION VERIFIED")
+            print(f"  -> Same-site occupation: U = inf")
+            print(f"  -> Graph geometry AUTOMATICALLY enforces Pauli principle!")
             verdict = True
         else:
-            print(f"\n  ✗ PAULI EXCLUSION FAILED")
-            print(f"  → Same-site occupation has finite energy")
-            print(f"  → Need to add explicit antisymmetry constraint")
+            print(f"\n  [X] PAULI EXCLUSION FAILED")
+            print(f"  -> Same-site occupation has finite energy")
+            print(f"  -> Need to add explicit antisymmetry constraint")
             verdict = False
         
         return {
@@ -943,30 +944,30 @@ if __name__ == "__main__":
         print("HELIUM PACKING SOLVER - SUMMARY")
         print("=" * 70)
         
-        print(f"\n✓ Pauli Exclusion:")
+        print(f"\n[OK] Pauli Exclusion:")
         if pauli_result['pauli_enforced']:
-            print(f"  → Graph geometry AUTOMATICALLY enforces exclusion")
-            print(f"  → Same-site occupation: U = ∞")
+            print(f"  -> Graph geometry AUTOMATICALLY enforces exclusion")
+            print(f"  -> Same-site occupation: U = inf")
         else:
-            print(f"  → WARNING: Pauli exclusion not enforced")
+            print(f"  -> WARNING: Pauli exclusion not enforced")
         
-        print(f"\n✓ Ground State Energy:")
-        print(f"  → Small lattice (n=3): {result_small['energy']:.6f} Ha")
-        print(f"  → Large lattice (n=4): {result_large['energy']:.6f} Ha")
-        print(f"  → Experimental:        -2.903 Ha")
+        print(f"\n[OK] Ground State Energy:")
+        print(f"  -> Small lattice (n=3): {result_small['energy']:.6f} Ha")
+        print(f"  -> Large lattice (n=4): {result_large['energy']:.6f} Ha")
+        print(f"  -> Experimental:        -2.903 Ha")
         
-        print(f"\n✓ Electron Configuration:")
-        print(f"  → Electron 1: {result_large['states'][0]}")
-        print(f"  → Electron 2: {result_large['states'][1]}")
-        print(f"  → Graph distance: {result_large['distance']:.4f}")
+        print(f"\n[OK] Electron Configuration:")
+        print(f"  -> Electron 1: {result_large['states'][0]}")
+        print(f"  -> Electron 2: {result_large['states'][1]}")
+        print(f"  -> Graph distance: {result_large['distance']:.4f}")
         
-        print(f"\n✓ Scaling:")
-        print(f"  → Memory: O(N) instead of O(N²)")
-        print(f"  → Storage: {solver_large.n_states}×{solver_large.n_states} vs. {solver_large.n_states**2}×{solver_large.n_states**2}")
-        print(f"  → Reduction: {100 * (1 - solver_large.n_states**2 / (solver_large.n_states**4)):.1f}% smaller")
+        print(f"\n[OK] Scaling:")
+        print(f"  -> Memory: O(N) instead of O(N²)")
+        print(f"  -> Storage: {solver_large.n_states}×{solver_large.n_states} vs. {solver_large.n_states**2}×{solver_large.n_states**2}")
+        print(f"  -> Reduction: {100 * (1 - solver_large.n_states**2 / (solver_large.n_states**4)):.1f}% smaller")
         
         print(f"\n{'='*70}")
-        print("✓ Packing solver test complete")
+        print("[OK] Packing solver test complete")
         print("=" * 70)
         
         sys.exit(0)
@@ -1037,12 +1038,12 @@ if __name__ == "__main__":
         print("=" * 70)
         
         if abs(analysis_geo['scaling_exponent'] + 2.0) < 0.1:
-            print("\n✓ PURE GEOMETRIC MODE SUCCESS!")
+            print("\n[OK] PURE GEOMETRIC MODE SUCCESS!")
             print("  The topological puncture creates -1/n² scaling.")
             print("  Energy well emerges from graph structure alone.")
             print("  No added potential term needed.")
         else:
-            print("\n⚠ PURE GEOMETRIC MODE NEEDS REFINEMENT")
+            print("\n[!] PURE GEOMETRIC MODE NEEDS REFINEMENT")
             print("  Scaling exponent deviates from -2.0")
             print("\n  NEXT STEPS:")
             print("  1. Adjust kinetic_scale parameter")
@@ -1051,7 +1052,7 @@ if __name__ == "__main__":
             print("  4. Test alternative topological puncture schemes")
     
     print("\n" + "=" * 70)
-    print("✓ Analysis complete")
+    print("[OK] Analysis complete")
     print("=" * 70)
 
 class MoleculeHamiltonian:
@@ -1077,14 +1078,14 @@ class MoleculeHamiltonian:
     purely in graph topology!
 
     **Solver Methods:**
-    - 'mean_field' (default): Fast O(N) solver, ~17% error for H₂
-    - 'full_ci': Exact 2-electron solver via tensor product, ~0% error for H₂
+    - 'mean_field' (default): Fast O(N) solver, ~17% error for H_2
+    - 'full_ci': Exact 2-electron solver via tensor product, ~0% error for H_2
     - 'geometric_dft': Lightweight density correction, middle-ground approach
 
     Parameters:
     -----------
     lattices : List[GeometricLattice]
-        Atomic lattices to combine (e.g., [H_A, H_B] for H₂)
+        Atomic lattices to combine (e.g., [H_A, H_B] for H_2)
     connectivity : List[Tuple[int, int, int]]
         Bridge connections: [(atom_i, atom_j, n_bridges), ...]
         Example: [(0, 1, 16)] connects atoms 0 and 1 with 16 bridges
@@ -1103,41 +1104,150 @@ class MoleculeHamiltonian:
         Molecular Hamiltonian: H = kinetic_scale × (D - A)
     """
 
-    def __init__(self, lattices: List[GeometricLattice],
-                 connectivity: List[Tuple[int, int, int]],
-                 kinetic_scale: float = -1/16):
+    def __init__(self, lattices: List[GeometricLattice] = None,
+                 connectivity: List[Tuple[int, int, int]] = None,
+                 kinetic_scale: float = None,
+                 nuclei: List[Tuple[float, float, float]] = None,
+                 nuclear_charges: List[int] = None,
+                 bond_length: float = None,
+                 max_n: int = 5,
+                 relativistic: bool = False,
+                 lattice_torsion: float = 0.0):
         """
-        Initialize molecular Hamiltonian from atomic lattices.
+        Initialize molecular Hamiltonian from WEIGHTED LATTICES.
+
+        UNIFIED ARCHITECTURE - "The Lattice is Truth":
+        ==============================================
+        ALL PHYSICS COMES FROM THE GRAPH STRUCTURE.
+
+        The Hamiltonian is simply H = kinetic_scale * (D - A + W) where:
+        - D = degree matrix
+        - A = adjacency matrix
+        - W = diagonal node weights (POTENTIAL ENERGY from lattices!)
+
+        This class is a "dumb solver" - it just diagonalizes the weighted
+        graph provided by the lattices. The lattices encode ALL quantum
+        information: states, connectivity, AND potential energy.
+
+        Convenience Parameters:
+        ----------------------
+        You can provide lattices directly OR specify nuclear configuration
+        and this class will build weighted lattices for you.
 
         Parameters:
         -----------
-        lattices : List[GeometricLattice]
-            List of atomic lattices (one per atom)
-        connectivity : List[Tuple[int, int, int]]
+        lattices : List[GeometricLattice], optional
+            Pre-built weighted lattices (each has node_weights = potential energy)
+        connectivity : List[Tuple[int, int, int]], optional
             Bridge specifications: [(atom_i, atom_j, n_bridges), ...]
-            Each tuple defines a chemical bond
         kinetic_scale : float, optional
             Kinetic energy calibration constant
-            Default: -1/16 (universal constant, validated for H/He+/H2+)
+            Default: -1/16 (molecules), -0.103 (atoms)
+        nuclei : List[Tuple[float, float, float]], optional
+            Convenience: nuclear positions → auto-builds lattices
+        nuclear_charges : List[int], optional
+            Convenience: nuclear charges for auto-built lattices
+        bond_length : float, optional
+            Shortcut for 2-atom: nuclei=[(0,0,0), (d,0,0)]
+        max_n : int, optional
+            Maximum quantum number for auto-built lattices (default: 5)
+        lattice_torsion : float, optional
+            Torsion parameter for the nuclear defect (default: 0.0).
+            Scales adjacency edges connected to n=1 core nodes by (1 - torsion).
+            gamma=0.0: no torsion (standard graph).
+            gamma>0.0: reduces hopping to core, making singularity harder to
+            access topologically. This is a METRIC deformation of the graph,
+            not a potential correction.
+            Physical interpretation: the nucleus is a topological defect with
+            torsion spin J that deforms the local metric near the core.
 
         Example:
         --------
-        >>> # H₂ molecule with 16 bridge edges
-        >>> atom_A = GeometricLattice(max_n=5)
-        >>> atom_B = GeometricLattice(max_n=5)
-        >>> mol = MoleculeHamiltonian(
-        ...     lattices=[atom_A, atom_B],
-        ...     connectivity=[(0, 1, 16)],
-        ...     kinetic_scale=-1/16  # Universal constant
-        ... )
-        >>> E_gs, psi_gs = mol.compute_ground_state(method='mean_field')
+        >>> # Method 1: Pre-built lattices (full control)
+        >>> atom_A = GeometricLattice(max_n=5, nucleus_position=(0,0,0), nuclear_charge=1)
+        >>> atom_B = GeometricLattice(max_n=5, nucleus_position=(1.4,0,0), nuclear_charge=1)
+        >>> mol = MoleculeHamiltonian(lattices=[atom_A, atom_B], connectivity=[(0,1,16)])
+        >>>
+        >>> # Method 2: Convenience (auto-builds lattices)
+        >>> mol_he = MoleculeHamiltonian(nuclei=[(0,0,0)], nuclear_charges=[2], max_n=5)
+        >>>
+        >>> # Both methods produce the SAME unified Hamiltonian: H = scale*(D-A+W)
         """
-        self.lattices = lattices
-        self.connectivity = connectivity
-        self.kinetic_scale = kinetic_scale
-        self.n_atoms = len(lattices)
+        # === Build or receive lattices ===
+        if lattices is not None:
+            # Method 1: User provided pre-built lattices
+            self.lattices = lattices
+            self.connectivity = connectivity if connectivity is not None else []
+            self.n_atoms = len(lattices)
 
-        # Build combined system
+            # Extract nuclear info from lattices (if available)
+            self.nuclei = [lat.nucleus_position for lat in lattices]
+            self.nuclear_charges = [lat.nuclear_charge for lat in lattices]
+
+            # Default kinetic scale for molecules
+            if kinetic_scale is None:
+                kinetic_scale = -1/16
+        else:
+            # Method 2: Build weighted lattices from nuclear configuration
+            if bond_length is not None and nuclei is None:
+                # Shortcut for diatomic molecules
+                if nuclear_charges is None:
+                    nuclear_charges = [1, 1]  # Default to H2
+                if len(nuclear_charges) != 2:
+                    raise ValueError("bond_length shortcut only works for 2-atom systems")
+                nuclei = [(0.0, 0.0, 0.0), (bond_length, 0.0, 0.0)]
+
+            if nuclei is None:
+                raise ValueError("Must provide either 'lattices' or 'nuclei' parameter")
+
+            # Store nuclear configuration
+            self.nuclei = [np.array(pos, dtype=float) for pos in nuclei]
+            self.n_atoms = len(self.nuclei)
+
+            if nuclear_charges is None:
+                self.nuclear_charges = [1] * self.n_atoms  # Default to hydrogen
+            else:
+                if len(nuclear_charges) != self.n_atoms:
+                    raise ValueError(f"nuclear_charges length ({len(nuclear_charges)}) must match nuclei length ({self.n_atoms})")
+                self.nuclear_charges = nuclear_charges
+
+            # Build WEIGHTED lattices (each knows its nucleus and computes node_weights)
+            self.lattices = [
+                GeometricLattice(
+                    max_n=max_n,
+                    nucleus_position=tuple(self.nuclei[i]),
+                    nuclear_charge=self.nuclear_charges[i]
+                )
+                for i in range(self.n_atoms)
+            ]
+
+            # Build connectivity (bridge all atom pairs for molecules)
+            if self.n_atoms == 1:
+                self.connectivity = []  # Single atom: no bridges
+            else:
+                n_bridges = 16  # Default bridge count
+                self.connectivity = []
+                for i in range(self.n_atoms):
+                    for j in range(i + 1, self.n_atoms):
+                        self.connectivity.append((i, j, n_bridges))
+
+            # Default kinetic scale for atoms
+            if kinetic_scale is None:
+                kinetic_scale = -0.10298808  # Universal base for atoms
+
+        # Store kinetic_scale
+        self.kinetic_scale = kinetic_scale
+
+        # Store relativistic flag
+        self.relativistic = relativistic
+
+        # Store lattice torsion (metric deformation at core)
+        self.lattice_torsion = lattice_torsion
+
+        # === Build unified Hamiltonian from weighted graph ===
+        # The lattices provide: adjacency, node_weights (potential)
+        # We just combine them and build H = kinetic_scale * (D - A + W)
+        # If relativistic=True, also add mass-velocity correction term
         self._build_molecular_adjacency()
         self._build_molecular_hamiltonian()
     
@@ -1194,28 +1304,161 @@ class MoleculeHamiltonian:
                 'n_bridges_actual': n_actual
             })
         
+        # Apply lattice torsion (metric deformation at nuclear defect)
+        if self.lattice_torsion != 0.0:
+            self._apply_lattice_torsion()
+
         # Convert to CSR for efficient computations
         self.adjacency = self.adjacency.tocsr()
-    
+
+    def _apply_lattice_torsion(self, torsion_map: dict = None) -> None:
+        """
+        Apply per-atom metric deformation (torsion) at nuclear defects.
+
+        Each nucleus is a topological defect with torsion proportional
+        to its excess charge. Edges touching the n=1 core of atom i
+        are scaled by (1 - gamma_i):
+
+            A_ij -> A_ij * (1 - gamma_i)   if i is a core node of atom k
+
+        For edges connecting two different atoms' cores (bridge between
+        two defects), the larger torsion dominates.
+
+        This is a METRIC deformation. The potential W = -Z/n^2 stays PURE.
+
+        Parameters:
+        -----------
+        torsion_map : dict, optional
+            {atom_index: gamma} for each atom that has torsion.
+            If None, uses self.lattice_torsion as uniform gamma for all atoms.
+        """
+        # Build the per-atom torsion map
+        if torsion_map is None:
+            # Uniform torsion (backward-compatible)
+            gamma_uniform = self.lattice_torsion
+            if abs(gamma_uniform) < 1e-12:
+                return
+            torsion_map = {i: gamma_uniform for i in range(self.n_atoms)}
+
+        # Filter out zero-torsion atoms
+        torsion_map = {k: v for k, v in torsion_map.items() if abs(v) > 1e-12}
+        if not torsion_map:
+            return
+
+        # Compute state offsets
+        state_counts = [lattice.num_states for lattice in self.lattices]
+        offsets = [0] + list(np.cumsum(state_counts))
+
+        # Map each n=1 core node to its atom's torsion gamma
+        # core_gamma[global_idx] = gamma for that atom
+        core_gamma = {}
+        for atom_idx, lattice in enumerate(self.lattices):
+            if atom_idx not in torsion_map:
+                continue
+            gamma = torsion_map[atom_idx]
+            offset = offsets[atom_idx]
+            for local_idx, (n, l, m) in enumerate(lattice.states):
+                if n == 1:
+                    core_gamma[offset + local_idx] = gamma
+
+        if not core_gamma:
+            return
+
+        # Work in COO format for efficient element-wise scaling
+        adj_coo = self.adjacency.tocoo()
+        new_data = adj_coo.data.copy()
+
+        for k in range(len(new_data)):
+            row_gamma = core_gamma.get(adj_coo.row[k], 0.0)
+            col_gamma = core_gamma.get(adj_coo.col[k], 0.0)
+            # Use the larger torsion if both endpoints are core nodes
+            gamma = max(row_gamma, col_gamma)
+            if gamma > 0:
+                new_data[k] *= (1.0 - gamma)
+
+        # Rebuild adjacency with torsion-modified edges
+        from scipy.sparse import coo_matrix
+        self.adjacency = lil_matrix(
+            coo_matrix((new_data, (adj_coo.row, adj_coo.col)),
+                       shape=(self.n_total_states, self.n_total_states))
+        )
+
     def _build_molecular_hamiltonian(self) -> None:
         """
-        Build molecular Hamiltonian from adjacency matrix.
-        
-        Uses the spectral delocalization principle:
-        H = kinetic_scale × (D - A)
-        
-        where D is the degree matrix and A is adjacency.
-        Ground state eigenvalue represents molecular energy.
+        Build molecular Hamiltonian from WEIGHTED GRAPH.
+
+        UNIFIED ARCHITECTURE - "The Lattice is Truth":
+        ==============================================
+        The Hamiltonian is ALWAYS:
+
+            H = kinetic_scale*(D - A) + W
+
+        where:
+        - D = degree matrix (diagonal, counts edges per node)
+        - A = adjacency matrix (off-diagonal, graph connectivity)
+        - W = diagonal node weights (POTENTIAL ENERGY from lattices!)
+        - kinetic_scale = calibration constant (system-specific)
+
+        CRITICAL: kinetic_scale ONLY multiplies the Laplacian (kinetic term).
+                  The potential W is NOT scaled (it's already in Hartree units).
+
+        The lattices provide node_weights[] which encode the potential energy
+        V = -Z/n² for each quantum state. This is PURE TOPOLOGY - the potential
+        is a property of the graph, not an external calculation!
+
+        No coordinate calculations. No explicit Coulomb laws. Just graph structure.
+
+        The physics is in the lattices. The Hamiltonian solver is "dumb".
         """
         # Compute degree matrix
         degree = np.array(self.adjacency.sum(axis=1)).flatten()
         D = diags(degree, 0, shape=(self.n_total_states, self.n_total_states), format='csr')
-        
+
         # Laplacian: L = D - A
         laplacian = D - self.adjacency
-        
-        # Hamiltonian with kinetic scaling
-        self.hamiltonian = self.kinetic_scale * laplacian
+
+        # Extract node weights (POTENTIAL ENERGY) from lattices
+        # Each lattice computed node_weights = -Z/n² for its states
+        W_diagonal = np.zeros(self.n_total_states)
+
+        state_counts = [lattice.num_states for lattice in self.lattices]
+        offsets = [0] + list(np.cumsum(state_counts))
+
+        for atom_idx, lattice in enumerate(self.lattices):
+            start = offsets[atom_idx]
+            end = offsets[atom_idx + 1]
+
+            # Copy node weights from lattice (these ARE the potential energy!)
+            W_diagonal[start:end] = lattice.node_weights
+
+        # Diagonal weight matrix (potential energy as graph topology)
+        W = diags(W_diagonal, 0, shape=(self.n_total_states, self.n_total_states), format='csr')
+
+        # UNIFIED HAMILTONIAN: H = kinetic_scale*(D - A) + W
+        # CRITICAL: kinetic_scale ONLY affects the Laplacian (kinetic energy)!
+        #           The potential W is NOT scaled (already in Hartree units from -Z/n²)
+        # This is the SAME formula for H2, He, H-, H3+, everything!
+        # The difference is in the lattices' node_weights, not the formula!
+        self.hamiltonian = self.kinetic_scale * laplacian + W
+
+        # === RELATIVISTIC CORRECTION (Mass-Velocity Term) ===
+        # When relativistic=True, add graph-based relativistic correction:
+        #   H_total = H_sch - λ_rel × (k×L)²
+        # where L = D - A (graph Laplacian), k = kinetic_scale, λ_rel ≈ 4α² ≈ 1.33×10⁻⁵
+        # This implements the mass-velocity correction: T_rel = T - (1/2c²)T²
+        # CRITICAL: Must scale with kinetic_scale² to match the units of H_sch
+        if self.relativistic:
+            # Fine structure constant: α ≈ 1/137.036
+            alpha = 1.0 / 137.035999084
+            lambda_rel = 4 * alpha**2  # ≈ 1.33×10⁻⁵
+
+            # Compute L² = (D - A)² via sparse matrix multiplication
+            # This is computationally expensive but necessary for high-Z accuracy
+            laplacian_squared = laplacian @ laplacian
+
+            # Add relativistic correction (negative, lowers energy)
+            # Scale by kinetic_scale² to match Hamiltonian units
+            self.hamiltonian = self.hamiltonian - lambda_rel * (self.kinetic_scale**2) * laplacian_squared
     
     def compute_ground_state(self, n_states: int = 1, method: str = 'mean_field') -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -1229,10 +1472,10 @@ class MoleculeHamiltonian:
             Solver method (default: 'mean_field')
             - 'mean_field': Fast O(N) sparse graph Laplacian solver
               Uses single-particle Hamiltonian H = kinetic_scale × (D - A)
-              Returns uncorrelated energy (~17% error for H₂)
+              Returns uncorrelated energy (~17% error for H_2)
             - 'full_ci': Exact 2-electron solver via tensor product
-              Constructs H_total = H₁⊗I + I⊗H₁ + V_ee
-              Solves exact 2-body Schrödinger equation (~0% error for H₂)
+              Constructs H_total = H_1xI + IxH_1 + V_ee
+              Solves exact 2-body Schrödinger equation (~0% error for H_2)
               WARNING: O(N²) memory, only for small systems
             - 'geometric_dft': Lightweight density-based correction
               Runs mean_field, adds repulsion penalty to high-density nodes
@@ -1249,20 +1492,22 @@ class MoleculeHamiltonian:
         --------
         >>> # Fast mean-field solver
         >>> energies, psi = mol.compute_ground_state(n_states=2, method='mean_field')
-        >>> E_bonding = energies[0]  # ~17% error for H₂
+        >>> E_bonding = energies[0]  # ~17% error for H_2
         >>>
         >>> # Exact correlation solver
         >>> energies_exact, psi_exact = mol.compute_ground_state(n_states=1, method='full_ci')
-        >>> E_exact = energies_exact[0]  # ~0% error for H₂
+        >>> E_exact = energies_exact[0]  # ~0% error for H_2
         """
         if method == 'mean_field':
             return self._solve_mean_field(n_states)
         elif method == 'full_ci':
             return self._solve_full_ci(n_states)
+        elif method == 'dirac':
+            return self._solve_dirac(n_states)
         elif method == 'geometric_dft':
             return self._solve_geometric_dft(n_states)
         else:
-            raise ValueError(f"Unknown method: {method}. Choose 'mean_field', 'full_ci', or 'geometric_dft'")
+            raise ValueError(f"Unknown method: {method}. Choose 'mean_field', 'full_ci', 'dirac', or 'geometric_dft'")
 
     def _solve_mean_field(self, n_states: int) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -1284,12 +1529,12 @@ class MoleculeHamiltonian:
         Full Configuration Interaction solver for 2-electron systems.
 
         Constructs exact 2-body Hamiltonian:
-        H_total = H₁ ⊗ I + I ⊗ H₁ + V_en_cross + V_ee
+        H_total = H_1 x I + I x H_1 + V_en_cross + V_ee
 
         where:
-        - H₁: Single-particle Hamiltonian (kinetic + self-nuclear attraction)
-        - V_en_cross: Cross-nuclear attraction (e1→n2, e2→n1)
-        - V_ee: Electron-electron repulsion 1/r₁₂
+        - H_1: Single-particle Hamiltonian (kinetic + self-nuclear attraction)
+        - V_en_cross: Cross-nuclear attraction (e1->n2, e2->n1)
+        - V_ee: Electron-electron repulsion 1/r_1_2
 
         CRITICAL: The cross-nuclear terms ensure each electron feels
         attraction from BOTH nuclei, not just its "home" nucleus.
@@ -1311,32 +1556,32 @@ class MoleculeHamiltonian:
         # Identity matrix for tensor products
         I = identity(self.n_total_states, format='csr')
 
-        # First electron: H₁ ⊗ I (kinetic + attraction to home nucleus)
-        print(f"\n  → Building H₁ ⊗ I (electron 1)...")
+        # First electron: H_1 x I (kinetic + attraction to home nucleus)
+        print(f"\n  -> Building H_1 x I (electron 1)...")
         H1_x_I = kron(H1, I, format='csr')
 
-        # Second electron: I ⊗ H₁ (kinetic + attraction to home nucleus)
-        print(f"  → Building I ⊗ H₁ (electron 2)...")
+        # Second electron: I x H_1 (kinetic + attraction to home nucleus)
+        print(f"  -> Building I x H_1 (electron 2)...")
         I_x_H1 = kron(I, H1, format='csr')
 
         # CRITICAL FIX: Cross-nuclear attraction terms
-        print(f"  → Building V_en_cross (cross-nuclear attraction)...")
+        print(f"  -> Building V_en_cross (cross-nuclear attraction)...")
         V_n1, V_n2 = self._build_cross_nuclear_attraction()
 
-        # Electron 1 attracted to nucleus 2: V_n2 ⊗ I
-        print(f"  → Building V_n2 ⊗ I (electron 1 → nucleus 2)...")
+        # Electron 1 attracted to nucleus 2: V_n2 x I
+        print(f"  -> Building V_n2 x I (electron 1 -> nucleus 2)...")
         V_n2_x_I = kron(V_n2, I, format='csr')
 
-        # Electron 2 attracted to nucleus 1: I ⊗ V_n1
-        print(f"  → Building I ⊗ V_n1 (electron 2 → nucleus 1)...")
+        # Electron 2 attracted to nucleus 1: I x V_n1
+        print(f"  -> Building I x V_n1 (electron 2 -> nucleus 1)...")
         I_x_V_n1 = kron(I, V_n1, format='csr')
 
         # Electron-electron repulsion
-        print(f"  → Building V_ee (electron-electron repulsion)...")
+        print(f"  -> Building V_ee (electron-electron repulsion)...")
         V_ee = self._build_electron_repulsion_molecular()
 
         # Total Hamiltonian with ALL terms
-        print(f"  → Assembling H_total = H₁⊗I + I⊗H₁ + V_n2⊗I + I⊗V_n1 + V_ee...")
+        print(f"  -> Assembling H_total = H_1xI + IxH_1 + V_n2xI + IxV_n1 + V_ee...")
         H_total = H1_x_I + I_x_H1 + V_n2_x_I + I_x_V_n1 + V_ee
 
         # Statistics
@@ -1344,19 +1589,19 @@ class MoleculeHamiltonian:
         sparsity = 1.0 - (H_total.nnz / (n_two_particle**2))
         memory_mb = H_total.data.nbytes / 1e6
 
-        print(f"\n  ✓ Full CI Hamiltonian:")
+        print(f"\n  [OK] Full CI Hamiltonian:")
         print(f"      Shape:      {H_total.shape}")
         print(f"      Nonzero:    {H_total.nnz:,}")
         print(f"      Sparsity:   {sparsity:.6f}")
         print(f"      Memory:     {memory_mb:.2f} MB")
 
         # Solve eigenvalue problem
-        print(f"\n  → Solving eigenvalue problem (this may take time)...")
+        print(f"\n  -> Solving eigenvalue problem (this may take time)...")
         k = min(n_states, n_two_particle - 2)
 
         try:
             eigvals, eigvecs = eigsh(H_total, k=k, which='SA')
-            print(f"  ✓ Full CI ground state energy: {eigvals[0]:.6f} Ha")
+            print(f"  [OK] Full CI ground state energy: {eigvals[0]:.6f} Ha")
             return eigvals, eigvecs
         except Exception as e:
             raise RuntimeError(f"Full CI eigenvalue computation failed: {str(e)}")
@@ -1365,9 +1610,16 @@ class MoleculeHamiltonian:
         """
         Build cross-nuclear attraction potential matrices.
 
-        For H₂ molecule with 2 atoms:
+        For multi-center systems:
+        - Each electron feels attraction from ALL nuclei
+        - V_ni: Attraction of electron to nucleus i (for states NOT on atom i)
+
+        For 2-atom H_2:
         - V_n1: Attraction of electron to nucleus 1 (for states on atom 2)
         - V_n2: Attraction of electron to nucleus 2 (for states on atom 1)
+
+        For single atom (He, H⁻):
+        - Both matrices are zero (no cross-attraction)
 
         Each matrix is diagonal in single-particle space.
 
@@ -1375,17 +1627,8 @@ class MoleculeHamiltonian:
         --------
         V_n1, V_n2 : tuple of csr_matrix
             Diagonal potential matrices for cross-nuclear attraction
+            For single-atom systems, both are zero matrices
         """
-        # Get nuclear positions (bond length along x-axis)
-        bond_length = 1.4  # Bohr radii
-        nucleus_positions = []
-
-        for atom_idx in range(self.n_atoms):
-            if atom_idx == 0:
-                nucleus_positions.append(np.array([0.0, 0.0, 0.0]))
-            else:
-                nucleus_positions.append(np.array([bond_length * atom_idx, 0.0, 0.0]))
-
         # Get state coordinates
         coords = self._compute_molecular_coordinates()
 
@@ -1397,17 +1640,22 @@ class MoleculeHamiltonian:
         v_n1_diagonal = np.zeros(self.n_total_states)
         v_n2_diagonal = np.zeros(self.n_total_states)
 
-        # For 2-atom system (H₂)
-        if self.n_atoms == 2:
-            nucleus_1_pos = nucleus_positions[0]
-            nucleus_2_pos = nucleus_positions[1]
+        if self.n_atoms == 1:
+            # Single atom: no cross-nuclear attraction
+            pass  # Leave as zeros
+
+        elif self.n_atoms == 2:
+            # Two-atom system: cross-attraction between atoms
+            nucleus_1_pos = self.nuclei[0]
+            nucleus_2_pos = self.nuclei[1]
+            Z1 = self.nuclear_charges[0]
+            Z2 = self.nuclear_charges[1]
 
             for i in range(self.n_total_states):
                 state_pos = coords[i]
 
-                # Distance to nucleus 1
+                # Distance to each nucleus
                 r_to_n1 = np.linalg.norm(state_pos - nucleus_1_pos)
-                # Distance to nucleus 2
                 r_to_n2 = np.linalg.norm(state_pos - nucleus_2_pos)
 
                 # Determine which atom this state belongs to
@@ -1417,24 +1665,53 @@ class MoleculeHamiltonian:
                 # Electron on atom 1 feels cross-attraction to nucleus 2
                 if atom_idx == 0:
                     if r_to_n2 > 1e-10:
-                        v_n2_diagonal[i] = -1.0 / r_to_n2  # Nuclear charge Z=1 for H
+                        v_n2_diagonal[i] = -Z2 / r_to_n2
                     else:
-                        v_n2_diagonal[i] = -1.0  # Regularization
+                        v_n2_diagonal[i] = -Z2
                 # Electron on atom 2 feels cross-attraction to nucleus 1
                 elif atom_idx == 1:
                     if r_to_n1 > 1e-10:
-                        v_n1_diagonal[i] = -1.0 / r_to_n1  # Nuclear charge Z=1 for H
+                        v_n1_diagonal[i] = -Z1 / r_to_n1
                     else:
-                        v_n1_diagonal[i] = -1.0  # Regularization
+                        v_n1_diagonal[i] = -Z1
+
+        else:
+            # Multi-atom system (N > 2): generalize cross-attraction
+            # For now, use simplified approach (full generalization needed)
+            for i in range(self.n_total_states):
+                state_pos = coords[i]
+                state_info = self._get_state_info(i)
+                atom_idx = state_info['atom']
+
+                # Sum attraction from all OTHER nuclei
+                for nuc_idx in range(self.n_atoms):
+                    if nuc_idx == atom_idx:
+                        continue  # Skip self-attraction (handled in H1)
+
+                    nucleus_pos = self.nuclei[nuc_idx]
+                    Z_nuc = self.nuclear_charges[nuc_idx]
+                    r_to_nuc = np.linalg.norm(state_pos - nucleus_pos)
+
+                    if r_to_nuc > 1e-10:
+                        # Add to appropriate matrix (for 2-atom compatibility)
+                        if nuc_idx == 0:
+                            v_n1_diagonal[i] += -Z_nuc / r_to_nuc
+                        elif nuc_idx == 1:
+                            v_n2_diagonal[i] += -Z_nuc / r_to_nuc
 
         V_n1 = diags(v_n1_diagonal, 0, shape=(self.n_total_states, self.n_total_states), format='csr')
         V_n2 = diags(v_n2_diagonal, 0, shape=(self.n_total_states, self.n_total_states), format='csr')
 
-        mean_v_n1 = np.mean(np.abs(v_n1_diagonal[v_n1_diagonal != 0]))
-        mean_v_n2 = np.mean(np.abs(v_n2_diagonal[v_n2_diagonal != 0]))
+        # Statistics
+        nonzero_v_n1 = v_n1_diagonal[v_n1_diagonal != 0]
+        nonzero_v_n2 = v_n2_diagonal[v_n2_diagonal != 0]
 
-        print(f"      V_n1 (e2→n1): {mean_v_n1:.4f} Ha (mean)")
-        print(f"      V_n2 (e1→n2): {mean_v_n2:.4f} Ha (mean)")
+        if len(nonzero_v_n1) > 0:
+            mean_v_n1 = np.mean(np.abs(nonzero_v_n1))
+            print(f"      V_n1 (cross-attraction): {mean_v_n1:.4f} Ha (mean)")
+        if len(nonzero_v_n2) > 0:
+            mean_v_n2 = np.mean(np.abs(nonzero_v_n2))
+            print(f"      V_n2 (cross-attraction): {mean_v_n2:.4f} Ha (mean)")
 
         return V_n1, V_n2
 
@@ -1472,7 +1749,16 @@ class MoleculeHamiltonian:
                     # Find which atom/state this is
                     state_info = self._get_state_info(i)
                     n_quantum = state_info['n']
-                    v_ee_diagonal[idx_combined] = 1.0 / (n_quantum**2)
+                    atom_idx = state_info['atom']
+
+                    # Scale by nuclear charge: r_eff = n^2 / Z
+                    if self.nuclear_charges is not None:
+                        Z = self.nuclear_charges[atom_idx]
+                    else:
+                        Z = 1
+
+                    r_eff = (n_quantum**2) / Z
+                    v_ee_diagonal[idx_combined] = 1.0 / r_eff
                 else:
                     v_ee_diagonal[idx_combined] = 1.0 / distance
 
@@ -1487,8 +1773,8 @@ class MoleculeHamiltonian:
         """
         Compute spatial coordinates for all states in molecular system.
 
-        For molecular systems, we need to position atoms in space.
-        For H₂: place atom A at origin, atom B at bond length.
+        Uses stored nuclear positions (self.nuclei) to place quantum states
+        relative to their parent nucleus.
 
         Returns coordinates array: shape (n_total_states, 3)
         """
@@ -1498,26 +1784,45 @@ class MoleculeHamiltonian:
         state_counts = [lattice.num_states for lattice in self.lattices]
         offsets = [0] + list(np.cumsum(state_counts))
 
-        # Bond length estimate (in Bohr radii, for H₂: ~1.4 Bohr)
-        # For simplicity, place atoms along x-axis
-        bond_length = 1.4  # Bohr radii
+        # Get nuclear positions
+        if self.nuclei is not None:
+            # Multi-center mode: use provided nuclear positions
+            nucleus_positions = self.nuclei
+        else:
+            # Legacy mode: infer positions from atom indices
+            # Default: place along x-axis with 1.4 Bohr spacing
+            bond_length = 1.4
+            nucleus_positions = []
+            for atom_idx in range(self.n_atoms):
+                if atom_idx == 0:
+                    nucleus_positions.append(np.array([0.0, 0.0, 0.0]))
+                else:
+                    nucleus_positions.append(np.array([bond_length * atom_idx, 0.0, 0.0]))
 
         for atom_idx, lattice in enumerate(self.lattices):
             start = offsets[atom_idx]
             end = offsets[atom_idx + 1]
 
-            # Atomic position (along x-axis)
-            if atom_idx == 0:
-                atom_position = np.array([0.0, 0.0, 0.0])
+            # Get nuclear position for this atom
+            atom_position = nucleus_positions[atom_idx]
+
+            # CRITICAL: Get nuclear charge for Bohr radius scaling
+            # r_effective = r_hydrogen / Z
+            # As Z increases, electron cloud contracts by 1/Z
+            if self.nuclear_charges is not None:
+                Z = self.nuclear_charges[atom_idx]
             else:
-                atom_position = np.array([bond_length * atom_idx, 0.0, 0.0])
+                Z = 1  # Default to hydrogen
 
             # Compute coordinates relative to atomic position
             for local_idx, (n, l, m) in enumerate(lattice.states):
                 global_idx = start + local_idx
 
                 # Radial distance from nucleus
-                r = n**2  # Bohr radius scaling
+                # UNIVERSAL SCALING: r = (n^2) / Z
+                # This makes the lattice automatically contract for high-Z atoms
+                r_base = n**2  # Hydrogen-like Bohr radius
+                r = r_base / Z  # Scale by nuclear charge
 
                 # Angular coordinates
                 if l > 0:
@@ -1555,49 +1860,276 @@ class MoleculeHamiltonian:
 
         raise ValueError(f"State index {global_idx} out of range")
 
-    def _solve_geometric_dft(self, n_states: int) -> Tuple[np.ndarray, np.ndarray]:
+    def _solve_dirac(self, n_states: int) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Geometric DFT solver: Mean-field + density-based correction.
+        Relativistic Dirac equation solver for molecules.
 
-        Algorithm:
-        1. Run mean-field solver to get ground state
-        2. Calculate electron density on each node: ρ(i) = |ψ(i)|²
-        3. Add repulsion penalty to high-density nodes
-        4. Iteratively refine until convergence
+        Constructs molecular Dirac Hamiltonian with spinor structure:
+        H_Dirac = | H₊    c·A  |
+                  | c·A†  H₋   |
 
-        This provides a middle-ground between mean-field speed and full CI accuracy.
+        where H₊ = V + mc² (particle sector), H₋ = V - mc² (antiparticle sector),
+        and c·A couples the two sectors through the kinetic/adjacency matrix.
+
+        For multi-electron systems (like H_2), uses tensor product:
+        H_total = H_Dirac x I + I x H_Dirac + V_ee
+
+        **Physics:**
+        - Includes relativistic corrections: spin-orbit coupling, mass-velocity effects
+        - Speed of light c scaled to lattice spacing for numerical stability
+        - Rest mass mc² separated from binding energy in analysis
+
+        **Performance:**
+        - Spinor dimension: 2N (each state -> particle + antiparticle)
+        - For 2-electron: (2N)² tensor product space
+        - Maintains high sparsity despite increased dimensionality
+
+        Returns:
+        --------
+        energies : np.ndarray
+            Eigenvalues (includes rest mass mc²)
+        wavefunctions : np.ndarray
+            Spinor wavefunctions (2N or (2N)² dimensional)
         """
         print(f"\n{'='*70}")
-        print(f"GEOMETRIC DFT SOLVER - Density-Based Correction")
+        print(f"DIRAC SOLVER - Relativistic Molecular Hamiltonian")
         print(f"{'='*70}")
-        print(f"  Method: Mean-field + density penalty")
+        print(f"  Method: Relativistic Dirac equation with molecular bridges")
+        print(f"  Electrons: 2 (H_2 molecule)")
+        print(f"  Solver: Full spinor tensor product")
 
-        # Step 1: Run mean-field solver
-        print(f"\n  → Running mean-field solver...")
+        # For now, only support 2-electron systems
+        if len(self.lattices) != 2:
+            raise NotImplementedError("Dirac solver currently supports H_2 (2 atoms) only")
+
+        # Build single-atom Dirac Hamiltonians with effective c scaled for lattice
+        max_n = self.lattices[0].max_n
+        print(f"\n[1/6] Building atomic Dirac Hamiltonians...")
+        print(f"  Lattice size: max_n = {max_n}")
+        print(f"  Using effective c = c/(max_n)² for lattice discretization")
+
+        # Create Dirac Hamiltonians for both atoms (same for H_2)
+        # Note: DiracHamiltonian already handles effective c scaling
+        dirac_A = DiracHamiltonian(max_n, Z=1, use_effective_c=True)
+        dirac_B = DiracHamiltonian(max_n, Z=1, use_effective_c=True)
+
+        n_spinor = 2 * dirac_A.n_states  # Spinor dimension (2N)
+        mc2 = dirac_A.mc2  # Rest energy
+
+        print(f"  Single-particle states:  {dirac_A.n_states}")
+        print(f"  Spinor dimension:        {n_spinor}")
+        print(f"  Rest energy mc²:         {mc2:.6f} Ha")
+
+        # Add molecular bridges in spinor space
+        print(f"\n[2/6] Adding molecular bridges to spinor Hamiltonians...")
+        H_A_spinor = dirac_A.h_dirac.copy()
+        H_B_spinor = dirac_B.h_dirac.copy()
+
+        # Get bridge information
+        n_bridges = self.bridge_info[0]['n_bridges_actual']
+        print(f"  Bridges: {n_bridges} connections between atoms")
+        print(f"  Bridge scaling: kinetic_scale = {self.kinetic_scale:.6f}")
+
+        # Build molecular Hamiltonian by combining atomic Dirac Hamiltonians
+        # For now, use direct combination without explicit bridge coupling
+        # This is a simplified approach - full implementation would add
+        # bridges in spinor space between the atoms
+        print(f"\n[3/6] Building molecular Dirac Hamiltonian...")
+        print(f"  WARNING: Using simplified atomic combination")
+        print(f"  Full bridge coupling in spinor space not yet implemented")
+
+        # Use mean of the two atomic Hamiltonians as approximation
+        H_mol_spinor = (H_A_spinor + H_B_spinor) / 2.0
+
+        # Build 2-electron tensor product
+        print(f"\n[4/6] Building 2-electron tensor product Hamiltonian...")
+        I_spinor = identity(n_spinor, format='csr')
+
+        print(f"  -> H_Dirac x I (electron 1)...")
+        H1_x_I = kron(H_mol_spinor, I_spinor, format='csr')
+
+        print(f"  -> I x H_Dirac (electron 2)...")
+        I_x_H1 = kron(I_spinor, H_mol_spinor, format='csr')
+
+        print(f"  -> Summing kinetic terms...")
+        H_kinetic = H1_x_I + I_x_H1
+
+        # Add electron-electron repulsion (same as non-relativistic)
+        print(f"\n[5/6] Adding electron-electron repulsion...")
+
+        # Use existing molecular coordinates (extend to spinor space)
+        coords_base = self._compute_molecular_coordinates()
+        n_states_per_atom = dirac_A.n_states
+
+        # Extend coordinates to spinor space (duplicate for particle/antiparticle)
+        coords_spinor = np.vstack([coords_base, coords_base])  # 2N spinor states
+
+        n_tensor = n_spinor ** 2
+        v_ee_diagonal = np.zeros(n_tensor)
+
+        for i in range(n_spinor):
+            for j in range(n_spinor):
+                idx_combined = i * n_spinor + j
+
+                r1 = coords_spinor[i]
+                r2 = coords_spinor[j]
+                distance = np.linalg.norm(r1 - r2)
+
+                if distance < 1e-10:
+                    # Self-interaction: use effective radius
+                    state_idx = i % n_states_per_atom
+                    if state_idx < len(self.lattices[0].states):
+                        n_quantum = self.lattices[0].states[state_idx][0]
+                        v_ee_diagonal[idx_combined] = 1.0 / (n_quantum**2)
+                    else:
+                        # Second atom states
+                        local_idx = state_idx - n_states_per_atom
+                        if local_idx < len(self.lattices[1].states):
+                            n_quantum = self.lattices[1].states[local_idx][0]
+                            v_ee_diagonal[idx_combined] = 1.0 / (n_quantum**2)
+                else:
+                    v_ee_diagonal[idx_combined] = 1.0 / distance
+
+        V_ee = diags(v_ee_diagonal, 0, shape=(n_tensor, n_tensor), format='csr')
+
+        print(f"  [OK] Repulsion matrix constructed")
+        print(f"    Mean V_ee: {np.mean(v_ee_diagonal):.4f} Ha")
+
+        # Assemble total Hamiltonian
+        print(f"\n[6/6] Assembling total Hamiltonian...")
+        H_total = H_kinetic + V_ee
+
+        # Statistics
+        sparsity = 1.0 - (H_total.nnz / n_tensor**2)
+
+        print(f"\n  [OK] Relativistic 2-electron Hamiltonian complete:")
+        print(f"      Spinor dimension (single):  {n_spinor}")
+        print(f"      Tensor product dimension:   {n_tensor} (= {n_spinor}²)")
+        print(f"      Matrix shape:               {H_total.shape}")
+        print(f"      Nonzero elements:           {H_total.nnz}")
+        print(f"      Sparsity:                   {sparsity:.6f}")
+        print(f"      Memory (MB):                {H_total.data.nbytes / 1e6:.2f}")
+
+        # Solve eigenvalue problem
+        print(f"\n  -> Solving eigenvalue problem (this may take time)...")
+        energies, wavefunctions = eigsh(H_total, k=n_states, which='SA')
+
+        print(f"  [OK] Dirac ground state energy: {energies[0]:.6f} Ha (includes rest mass)")
+
+        # Note about rest mass
+        rest_mass_contrib = 4 * mc2  # 2 electrons × 2 sectors
+        binding_energy = energies[0] - rest_mass_contrib
+
+        print(f"\n  Physical interpretation:")
+        print(f"    Total energy:       {energies[0]:.6f} Ha")
+        print(f"    Rest mass (4×mc²):  {rest_mass_contrib:.6f} Ha")
+        print(f"    Binding energy:     {binding_energy:.6f} Ha")
+        print(f"    (Subtract rest mass for comparison to non-relativistic)")
+
+        return energies, wavefunctions
+
+    def _solve_geometric_dft(self, n_states: int) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Geometric-DFT: Lightweight topological correlation correction.
+
+        Strategy:
+        1. Solve mean-field (fast O(N))
+        2. Analyze wavefunction delocalization between atoms
+        3. Apply topology-based correlation correction
+        4. Target: Recover ~80% of correlation energy in <1s
+
+        For H_2:
+        - Mean-field: -0.980 Ha (missing 0.162 Ha correlation)
+        - Geometric-DFT: ~-1.11 Ha (recover ~0.13 Ha, 80% of correlation)
+        - Full CI: -1.142 Ha (exact correlation)
+
+        Physical Basis:
+        - Correlation energy emerges from electron delocalization
+        - Bonding strength ∝ wavefunction delocalization across atoms
+        - Empirical functional fitted to Full CI benchmarks
+        """
+        print(f"\n{'='*70}")
+        print(f"GEOMETRIC-DFT SOLVER - Topological Correlation Correction")
+        print(f"{'='*70}")
+        print(f"  Method: Mean-field + delocalization-based correlation")
+        print(f"  Target: Recover ~80% of correlation energy")
+
+        # Step 1: Solve mean-field
+        print(f"\n  -> Running mean-field solver...")
         energies_mf, wavefunctions_mf = self._solve_mean_field(n_states)
+        lambda_bonding = energies_mf[0]  # Single-particle bonding eigenvalue
         psi_gs = wavefunctions_mf[:, 0]
 
-        # Step 2: Calculate electron density
-        print(f"  → Computing electron density...")
-        density = np.abs(psi_gs)**2
+        # For 2-electron molecules: Total energy = 2 × λ_bonding
+        E_mf_total = 2 * lambda_bonding
 
-        # Step 3: Add density-dependent correction
-        # Penalty: E_correction = α * Σ_i ρ(i)²
-        # This simulates electron-electron repulsion
-        alpha_repulsion = 0.5  # Tunable parameter
+        # Step 2: Analyze wavefunction delocalization
+        print(f"  -> Analyzing wavefunction delocalization...")
 
-        density_energy = alpha_repulsion * np.sum(density**2)
+        if len(self.lattices) == 1:
+            # Single atom: no bonding correlation (would need different functional)
+            print(f"  [!] Single atom system - no molecular correlation correction")
+            print(f"  Note: For atoms like He, use Full CI for correlation")
+            return energies_mf, wavefunctions_mf
 
-        print(f"\n  ✓ Geometric DFT results:")
-        print(f"      Mean-field energy:   {energies_mf[0]:.6f} Ha")
-        print(f"      Density correction:  +{density_energy:.6f} Ha")
-        print(f"      Corrected energy:    {energies_mf[0] + density_energy:.6f} Ha")
+        # Compute electron population on each atom
+        atom_populations = []
+        offset = 0
+        for lattice in self.lattices:
+            n_states_atom = lattice.num_states
+            atom_pop = np.sum(np.abs(psi_gs[offset:offset+n_states_atom])**2)
+            atom_populations.append(atom_pop)
+            offset += n_states_atom
 
-        # Return corrected energy
-        energies_corrected = energies_mf.copy()
-        energies_corrected[0] += density_energy
+        # Delocalization metric (topological bonding strength):
+        # Perfect bonding (H_2) -> equal populations (0.5, 0.5) -> D = 1.0
+        # No bonding -> localized (1.0, 0.0) -> D = 0.0
+        n_atoms = len(self.lattices)
+        ideal_pop = 1.0 / n_atoms
+        variance = np.var(atom_populations)
+        max_variance = ideal_pop * (1 - ideal_pop)  # Max variance for 2 atoms
+        delocalization = 1.0 - (variance / max_variance)  # Range: [0, 1]
 
-        return energies_corrected, wavefunctions_mf
+        print(f"  -> Atom populations: {[f'{p:.3f}' for p in atom_populations]}")
+        print(f"  -> Delocalization metric: D = {delocalization:.3f}")
+        print(f"      (D=1.0: perfect bonding, D=0.0: no bonding)")
+
+        # Step 3: Correlation energy functional
+        # Empirical model fitted to H_2 Full CI benchmarks:
+        # E_corr = -A × D^α × (n_electrons / 2)^β
+        #
+        # Parameters fitted to H_2 at R=1.40 Bohr:
+        # - Full CI correlation: -0.162 Ha
+        # - Target recovery: 80% -> -0.130 Ha
+        # - Delocalization: ~1.0 (perfect bonding)
+
+        A = 0.130  # Ha (correlation per electron pair, fitted)
+        alpha = 2.0  # Quadratic in delocalization (bonding strength)
+        beta = 1.0  # Linear in electron pairs
+
+        n_electrons = 2  # For now, assume 2-electron system
+        n_electron_pairs = n_electrons / 2.0
+
+        E_corr = -A * (delocalization ** alpha) * (n_electron_pairs ** beta)
+
+        print(f"\n  -> Correlation functional:")
+        print(f"      Formula: E_corr = -A × D^α × (N_e/2)^β")
+        print(f"      E_corr = -{A} × {delocalization:.3f}^{alpha} × {n_electron_pairs}^{beta}")
+        print(f"      E_corr = {E_corr:.6f} Ha")
+
+        # Step 4: Apply correction to TOTAL energy
+        E_dft_total = E_mf_total + E_corr
+
+        print(f"\n  [OK] Geometric-DFT Energy Breakdown:")
+        print(f"      Mean-field (2 electrons):   {E_mf_total:.6f} Ha (= 2×{lambda_bonding:.6f})")
+        print(f"      Correlation correction:     {E_corr:.6f} Ha")
+        print(f"      Total DFT energy:           {E_dft_total:.6f} Ha")
+
+        # Return corrected total energy (keep mean-field wavefunctions)
+        # Note: Unlike mean-field which returns eigenvalues, DFT returns total energy
+        energies_dft = np.array([E_dft_total])  # Total 2-electron energy
+
+        return energies_dft, wavefunctions_mf
     
     def compute_binding_energy(self, atomic_energies: List[float]) -> float:
         """
@@ -1619,7 +2151,7 @@ class MoleculeHamiltonian:
         
         Example:
         --------
-        >>> # H₂ molecule
+        >>> # H_2 molecule
         >>> E_H2, _ = mol.compute_ground_state()
         >>> E_H_atomic = -0.5  # Isolated hydrogen
         >>> Delta_E = mol.compute_binding_energy([E_H_atomic, E_H_atomic])
@@ -1634,7 +2166,7 @@ class MoleculeHamiltonian:
         """
         Analyze how ground state wavefunction delocalizes across atoms.
         
-        For each atom, compute probability: P_i = Σ |ψ(state)|² for states on atom i
+        For each atom, compute probability: P_i = Σ |psi(state)|² for states on atom i
         
         Returns:
         --------
@@ -1644,7 +2176,7 @@ class MoleculeHamiltonian:
         Example:
         --------
         >>> probs = mol.analyze_wavefunction_delocalization()
-        >>> print(f"H₂: A={probs[0]:.3f}, B={probs[1]:.3f}")
+        >>> print(f"H_2: A={probs[0]:.3f}, B={probs[1]:.3f}")
         >>> # Expected for symmetric bond: A=0.500, B=0.500
         """
         _, psi = self.compute_ground_state(n_states=1)
@@ -1663,7 +2195,297 @@ class MoleculeHamiltonian:
             probabilities[i] = prob
         
         return probabilities
-    
+
+    def compute_nuclear_repulsion(self) -> float:
+        """
+        Compute nuclear-nuclear repulsion energy.
+
+        V_NN = Σ_(i<j) Z_i * Z_j / |R_i - R_j|
+
+        This is a classical Coulomb repulsion between nuclei.
+        CRITICAL for molecules - omitting this gives massively negative energies!
+
+        Returns:
+        --------
+        V_NN : float
+            Nuclear repulsion energy (Hartree)
+        """
+        if self.nuclei is None or len(self.nuclei) < 2:
+            return 0.0  # Single atom has no nuclear repulsion
+
+        V_NN = 0.0
+        for i in range(len(self.nuclei)):
+            for j in range(i + 1, len(self.nuclei)):
+                R_i = self.nuclei[i]
+                R_j = self.nuclei[j]
+                distance = np.linalg.norm(R_i - R_j)
+
+                if distance < 1e-10:
+                    raise ValueError(f"Nuclei {i} and {j} are at the same position!")
+
+                Z_i = self.nuclear_charges[i]
+                Z_j = self.nuclear_charges[j]
+
+                V_NN += (Z_i * Z_j) / distance
+
+        return V_NN
+
+    def optimize_effective_charge(self, method: str = 'full_ci',
+                                   n_points: int = 15,
+                                   z_range: tuple = (0.5, 1.2)) -> Dict:
+        """
+        Optimize effective nuclear charge Z_eff variationally.
+
+        Sweeps Z_eff from z_range[0]*Z to z_range[1]*Z and finds the
+        scaling that minimizes the ground state energy. This accounts
+        for electron shielding effects.
+
+        **Physical Motivation:**
+        - H⁻: Outer electron is shielded → Z_eff < 1 → lattice expands
+        - He: Each electron partially shields the other → Z_eff ≈ 1.7 (not 2.0)
+        - H₃⁺: Complex multi-center shielding
+
+        Parameters:
+        -----------
+        method : str, optional
+            Solver method ('mean_field' or 'full_ci')
+            Default: 'full_ci' for exact correlation
+        n_points : int, optional
+            Number of Z_eff values to sample (default: 15)
+        z_range : tuple, optional
+            (min_factor, max_factor) for Z_eff sweep
+            Default: (0.5, 1.2) means 0.5*Z to 1.2*Z
+
+        Returns:
+        --------
+        result : dict
+            - 'z_eff_optimal': Optimal effective charges (list, one per atom)
+            - 'energy_optimal': Ground state energy at optimal Z_eff
+            - 'z_eff_scan': All Z_eff values tested
+            - 'energies_scan': Corresponding energies
+        """
+        if self.nuclear_charges is None:
+            raise ValueError("optimize_effective_charge requires multi-center mode")
+
+        print(f"\n{'='*70}")
+        print(f"VARIATIONAL Z_EFF OPTIMIZATION")
+        print(f"{'='*70}")
+        print(f"  Method: {method}")
+        print(f"  Atoms: {self.n_atoms}")
+        print(f"  Raw Z: {self.nuclear_charges}")
+        print(f"  Scan range: {z_range[0]:.2f}Z to {z_range[1]:.2f}Z")
+        print(f"  Sample points: {n_points}")
+
+        # Store original nuclear charges
+        original_charges = self.nuclear_charges.copy()
+
+        # For simplicity, assume all atoms scale together by same factor
+        # (Could be generalized to optimize each atom independently)
+        z_factors = np.linspace(z_range[0], z_range[1], n_points)
+
+        energies = []
+        z_eff_values = []
+
+        print(f"\n  Scanning Z_eff...")
+        for i, factor in enumerate(z_factors):
+            # Scale all nuclear charges by factor
+            scaled_charges = [int(round(Z * factor)) if Z * factor >= 1 else factor * Z
+                             for Z in original_charges]
+
+            # For continuous optimization, use fractional charges
+            scaled_charges_float = [Z * factor for Z in original_charges]
+
+            # Rebuild Hamiltonian with scaled charges
+            self.nuclear_charges = scaled_charges_float
+            self._build_molecular_hamiltonian()
+
+            # Compute ground state energy
+            try:
+                E, _ = self.compute_ground_state(n_states=1, method=method)
+                energy = E[0]
+
+                # Add nuclear repulsion (doesn't change with Z_eff scaling)
+                V_NN = self.compute_nuclear_repulsion()
+                energy_total = energy + V_NN
+
+                energies.append(energy_total)
+                z_eff_values.append(scaled_charges_float.copy())
+
+                if (i + 1) % 3 == 0 or i == 0 or i == len(z_factors) - 1:
+                    print(f"    Z_eff = {scaled_charges_float[0]:.3f}: E = {energy_total:.6f} Ha")
+
+            except Exception as e:
+                print(f"    Z_eff = {scaled_charges_float[0]:.3f}: FAILED ({str(e)[:50]})")
+                energies.append(np.inf)
+                z_eff_values.append(scaled_charges_float.copy())
+
+        # Find optimal Z_eff
+        idx_optimal = np.argmin(energies)
+        z_eff_optimal = z_eff_values[idx_optimal]
+        energy_optimal = energies[idx_optimal]
+
+        print(f"\n{'='*70}")
+        print(f"OPTIMIZATION RESULT:")
+        print(f"{'='*70}")
+        print(f"  Optimal Z_eff: {z_eff_optimal}")
+        print(f"  Optimal energy: {energy_optimal:.6f} Ha")
+        print(f"  Shielding factor: {z_eff_optimal[0] / original_charges[0]:.3f}")
+        print(f"{'='*70}")
+
+        # Restore original charges (user can choose to keep or not)
+        self.nuclear_charges = original_charges
+        self._build_molecular_hamiltonian()
+
+        return {
+            'z_eff_optimal': z_eff_optimal,
+            'energy_optimal': energy_optimal,
+            'z_factors_scan': z_factors,
+            'z_eff_scan': z_eff_values,
+            'energies_scan': energies
+        }
+
+    def set_effective_charges(self, z_eff: List[float]) -> None:
+        """
+        Set effective nuclear charges and rebuild Hamiltonian.
+
+        Use this after optimize_effective_charge() to apply the optimal Z_eff.
+
+        Parameters:
+        -----------
+        z_eff : List[float]
+            Effective nuclear charges for each atom
+        """
+        if len(z_eff) != len(self.nuclear_charges):
+            raise ValueError(f"z_eff length ({len(z_eff)}) must match n_atoms ({len(self.nuclear_charges)})")
+
+        self.nuclear_charges = list(z_eff)
+        self._build_molecular_hamiltonian()
+
+        print(f"  Updated Z_eff: {self.nuclear_charges}")
+
+    def apply_isoelectronic_scaling(self, Z_ref: int = 2, Z_target: int = None) -> None:
+        """
+        Apply the Three Universal Laws of Geometric Scaling.
+
+        Works for both homonuclear (Li+, Be2+) and heteronuclear (LiH)
+        systems. Each atom gets its own torsion based on its nuclear charge.
+
+        **Law 1 - Conformal Scaling (Kinetic):**
+            T -> T * (Z_max / Z_ref)^2
+            Already applied via kinetic_scale in the constructor.
+
+        **Law 2 - Coulomb Scaling (Potential):**
+            V_i -> V_i * (Z_i / Z_ref)   per atom
+            Node weights scale linearly with that atom's charge.
+
+        **Law 3 - Geometric Torsion (Metric Deformation):**
+            gamma_i = mu * (Z_i - Z_ref)   per atom, only if Z_i > Z_ref
+            mu = 1/4 = sqrt(|kinetic_scale|) = sqrt(1/16)
+            Each nucleus is an independent topological defect.
+
+        After this call, the Hamiltonian is fully rebuilt. No need to
+        call _build_molecular_hamiltonian() manually.
+
+        Parameters:
+        -----------
+        Z_ref : int
+            Reference nuclear charge (default: 2 for Helium)
+        Z_target : int, optional
+            For homonuclear systems: target nuclear charge.
+            For heteronuclear systems: leave as None to use per-atom charges.
+
+        Usage:
+        ------
+        Homonuclear (Li+):
+        >>> mol = MoleculeHamiltonian(nuclear_charges=[3],
+        ...     kinetic_scale=CALIBRATED * (3/2)**2)
+        >>> mol.apply_isoelectronic_scaling(Z_ref=2, Z_target=3)
+
+        Heteronuclear (LiH):
+        >>> mol = MoleculeHamiltonian(nuclear_charges=[3, 1],
+        ...     kinetic_scale=CALIBRATED * (3/2)**2)
+        >>> mol.apply_isoelectronic_scaling(Z_ref=2)
+        >>> # Li gets torsion gamma=0.25, H gets gamma=0.
+        """
+        TORSION_MU = 0.25  # = sqrt(|kinetic_scale|) = sqrt(1/16)
+
+        # Determine per-atom charges
+        if Z_target is not None:
+            # Homonuclear: all atoms use Z_target
+            charges = [Z_target] * self.n_atoms
+        else:
+            # Heteronuclear: use each atom's actual charge
+            charges = list(self.nuclear_charges)
+
+        # --- Law 2: Coulomb Scaling (per-atom potential) ---
+        # Only enhance atoms with Z > Z_ref (topological defects).
+        # Light atoms (Z <= Z_ref) keep their natural -Z/n^2 potential.
+        for i, lattice in enumerate(self.lattices):
+            Z_i = charges[i]
+            if Z_i > Z_ref:
+                potential_scale = Z_i / Z_ref
+                lattice.node_weights *= potential_scale
+
+        # --- Law 3: Geometric Torsion (per-atom metric deformation) ---
+        torsion_map = {}
+        for i, Z_i in enumerate(charges):
+            if Z_i > Z_ref:
+                torsion_map[i] = TORSION_MU * (Z_i - Z_ref)
+
+        # Rebuild adjacency with per-atom torsion.
+        # Clear any constructor torsion so _build_molecular_adjacency
+        # starts from a clean flat graph.
+        self.lattice_torsion = 0.0
+        self._build_molecular_adjacency()
+        if torsion_map:
+            self._apply_lattice_torsion(torsion_map)
+            self.adjacency = self.adjacency.tocsr()
+        self._build_molecular_hamiltonian()
+
+    def apply_molecular_torsion(self, Z_ref: int = 2) -> None:
+        """
+        Apply per-atom geometric torsion for general molecules.
+
+        For heteronuclear molecules (e.g. LiH), use this instead of
+        apply_isoelectronic_scaling. This applies ONLY Law 3 (torsion)
+        without modifying kinetic scale or node-weight potentials.
+
+        Each nucleus with Z > Z_ref is a topological defect:
+            gamma_i = (1/4) * (Z_i - Z_ref)
+
+        Light atoms (Z <= Z_ref) are left flat (no torsion).
+
+        Parameters:
+        -----------
+        Z_ref : int
+            Reference charge below which no torsion is applied (default: 2)
+
+        Usage:
+        ------
+        >>> mol = MoleculeHamiltonian(
+        ...     nuclei=[(0,0,0), (3.015,0,0)],
+        ...     nuclear_charges=[3, 1],  # Li + H
+        ...     max_n=5
+        ... )
+        >>> mol.apply_molecular_torsion()  # Li gets gamma=0.25, H stays flat
+        """
+        TORSION_MU = 0.25
+
+        torsion_map = {}
+        for i, Z_i in enumerate(self.nuclear_charges):
+            if Z_i > Z_ref:
+                torsion_map[i] = TORSION_MU * (Z_i - Z_ref)
+
+        if not torsion_map:
+            return
+
+        # Rebuild adjacency from clean graph, apply per-atom torsion
+        self.lattice_torsion = 0.0
+        self._build_molecular_adjacency()
+        self._apply_lattice_torsion(torsion_map)
+        self.adjacency = self.adjacency.tocsr()
+        self._build_molecular_hamiltonian()
+
     def __repr__(self) -> str:
         bond_str = ", ".join([f"{i}-{j}({n})" for i, j, n in self.connectivity])
         return (f"MoleculeHamiltonian(atoms={self.n_atoms}, "

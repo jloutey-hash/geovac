@@ -1,0 +1,22 @@
+{
+  "electron": {
+    "contact_factor": 0.799993757705334,
+    "contact_factor_error": 5.86365241049024e-06,
+    "radius_fm": 8.525779694978825,
+    "radius_codata_fm": 0.8751
+  },
+  "muon": {
+    "contact_factor": 0.799993757705334,
+    "contact_factor_error": 0.182723687519816,
+    "radius_fm": 43.581007244170166,
+    "radius_codata_fm": 0.84087
+  },
+  "analysis": {
+    "contact_ratio": 1.0,
+    "contact_reduction_percent": 0.0,
+    "radius_discrepancy_fm": -35.05522754919134,
+    "experimental_discrepancy_fm": 0.03422999999999998,
+    "agreement_percent": -102410.8312859812,
+    "status": "partial"
+  }
+}

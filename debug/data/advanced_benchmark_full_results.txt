@@ -1,0 +1,221 @@
+
+######################################################################
+#                                                                    #
+#               GEOVAC ADVANCED BENCHMARK SUITE v0.3.3               #
+#                                                                    #
+######################################################################
+
+Validating holographic predictions from Papers 2, 3, 4, 5
+Testing mass-independence and fundamental constants
+
+======================================================================
+TEST 1: MUONIC HYDROGEN - MASS INDEPENDENCE
+======================================================================
+
+Theory: Topology is mass-independent, holographic properties identical
+Mass ratio: μ_μ/μ_e = 206.768
+
+[1a] Electronic Hydrogen
+----------------------------------------------------------------------
+  Ground state energy: -0.488829 Ha
+  Number of states:    1240
+  Time:                36.0 ms
+
+[1b] Muonic Hydrogen
+----------------------------------------------------------------------
+  Ground state energy: -101.074396 Ha
+  Number of states:    1240
+  Time:                32.2 ms
+
+[1c] Energy Scaling Test
+----------------------------------------------------------------------
+  E_μ / E_e:    206.77
+  Expected:     206.77
+  Error:        0.000
+  Status:       ✓ PASS
+
+[1d] Topology Invariance Test
+----------------------------------------------------------------------
+  States (e⁻):  1240
+  States (μ⁻):  1240
+  Identical:    ✓ YES
+
+[1e] Contact Geometry Test
+----------------------------------------------------------------------
+  C_e (electronic): 0.666
+  C_μ (muonic):     0.500
+  Ratio C_μ/C_e:    0.751
+  Expected:         0.750
+  Status:           ✓ Matches theory
+
+======================================================================
+✓✓✓ TEST 1 PASSED: Mass independence confirmed!
+
+======================================================================
+TEST 2: SPECTRAL DIMENSION - EFFECTIVE 2D HOLOGRAPHY
+======================================================================
+
+Theory: Quantum states live on 2D holographic surface
+Expected: d_s ≈ 2.074 ± 0.059
+
+[2a] Electronic Hydrogen
+----------------------------------------------------------------------
+  Computing spectral dimension...
+  ✓ Spectral dimension: d_s = 1.817 ± 0.004
+  Plateau range: t ∈ [9.10, 10.00]
+  Eigenvalues used: 135
+  Time: 494.1 ms
+
+[2b] Muonic Hydrogen
+----------------------------------------------------------------------
+  Computing spectral dimension...
+  ✓ Spectral dimension: d_s = 1.817 ± 0.004
+  Plateau range: t ∈ [9.10, 10.00]
+  Eigenvalues used: 135
+  Time: 516.8 ms
+
+[2c] Comparison to Theory
+----------------------------------------------------------------------
+  Theory (Paper 4):     d_s = 2.074 ± 0.059
+  Electronic H:         d_s = 1.817
+  Muonic H:             d_s = 1.817
+  Ratio d_s(μ)/d_s(e):  1.0000
+
+  Electronic match:     ✗ FAIL
+  Muonic match:         ✗ FAIL
+  Mass-independence:    ✓ PASS
+
+======================================================================
+✗✗✗ TEST 2 FAILED
+
+======================================================================
+TEST 3: HOLOGRAPHIC ENTROPY & CENTRAL CHARGE
+======================================================================
+
+Theory: S = (c/3)*ln(A) + const (2D CFT)
+Expected: c ≈ 0.0445 ≈ 1.6 × (1/36)
+
+[3a] Electronic Hydrogen
+----------------------------------------------------------------------
+  Computing holographic entropy...
+  ✓ Central charge: c = 0.0567 ± 0.0033
+  R-squared: 0.776
+  p-value: 1.09e-29
+  Data points: 110
+  Time: 165.2 ms
+
+[3b] Muonic Hydrogen
+----------------------------------------------------------------------
+  Computing holographic entropy...
+  ✓ Central charge: c = 0.0567 ± 0.0033
+  R-squared: 0.776
+  p-value: 1.09e-29
+  Data points: 110
+  Time: 173.4 ms
+
+[3c] Comparison to Theory
+----------------------------------------------------------------------
+  Theory (Paper 4):         c = 0.0445 ± 0.0058
+  Nuclear (SU(3)⊗SU(2)):    c = 0.0278
+  Electronic H:             c = 0.0567
+  Muonic H:                 c = 0.0567
+  Ratio c(μ)/c(e):          1.0000
+
+  Electronic match:     ✓ PASS
+  Muonic match:         ✓ PASS
+  Mass-independence:    ✓ PASS
+  Statistical sig (e):  ✓ PASS
+  Statistical sig (μ):  ✓ PASS
+
+======================================================================
+✓✓✓ TEST 3 PASSED: Central charge c ≈ 1/36 confirmed!
+
+======================================================================
+TEST 4: FINE STRUCTURE CONSTANT - IMPEDANCE QUANTIZATION
+======================================================================
+
+Theory: α⁻¹ emerges from graph resistance
+Expected: Z_em ≈ 137.036
+
+[4a] Electronic Hydrogen - Graph Impedance
+----------------------------------------------------------------------
+
+  Method: resistance
+  Computing Laplacian pseudo-inverse...
+    Z_em = 5.03
+    Transitions: 27
+    Time: 844.8 ms
+
+  Method: conductance
+    Z_em = 0.58
+    Transitions: 1240
+    Time: 0.3 ms
+
+  Method: transitions
+    Error: Unknown method: transitions
+
+[4b] Comparison to Theory
+----------------------------------------------------------------------
+  Theory (CODATA):      α⁻¹ = 137.036
+  From Paper 2:         α⁻¹ emerges as graph impedance
+  Method 'resistance  ': Z =    5.03 (error:  96.3%)
+  Method 'conductance ': Z =    0.58 (error:  99.6%)
+
+  Best estimate (resistance): Z_em = 5.03
+  Status: ✗ FAIL
+
+======================================================================
+✗✗ TEST 4 FAILED: Could not extract impedance
+
+======================================================================
+TEST 5: PROTON RADIUS PUZZLE - CONTACT GEOMETRY
+======================================================================
+
+Theory: Scale-dependent topological coupling
+Expected: Δr_p ≈ 0.043 fm (vs experimental 0.034 fm)
+
+[5a] Setup
+----------------------------------------------------------------------
+  Electronic hydrogen: 1240 states
+  Muonic hydrogen:     1240 states
+
+[5b] Proton Radius Prediction
+----------------------------------------------------------------------
+  Contact factors:
+    C_e (electronic): 0.667
+    C_μ (muonic):     0.500
+    Ratio:            0.750
+
+  Proton radius shift:
+    Predicted:        Δr_p = 0.0107 fm
+    Experimental:     Δr_p = 0.0340 fm
+    Error:            0.0233 fm (68.4%)
+    Time:             22.1 ms
+
+  Status: ✗ FAIL
+
+======================================================================
+✗✗ TEST 5 FAILED: Prediction too far from experiment
+
+
+######################################################################
+#                                                                    #
+#                 ADVANCED BENCHMARK SUITE COMPLETE                  #
+#                                                                    #
+######################################################################
+
+RESULTS SUMMARY:
+======================================================================
+  muonic_hydrogen                ✓ PASS
+  spectral_dimension             ✗ FAIL
+  holographic_entropy            ✓ PASS
+  fine_structure                 ✗ FAIL
+  proton_radius                  ✗ FAIL
+======================================================================
+
+OVERALL: 2/5 tests passed (40%)
+
+⚠⚠⚠ 3 TEST(S) FAILED
+
+######################################################################
+

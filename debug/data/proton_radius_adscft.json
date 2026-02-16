@@ -1,0 +1,23 @@
+{
+  "contact_factor": 0.6658211891815259,
+  "energy_calculated_ev": 5.8699896858781295e-06,
+  "energy_target_ev": 5.87e-06,
+  "energy_error_percent": 0.00017570906082088896,
+  "radius_fm": 0.8751005125439308,
+  "impedance_mismatch": 0.0010892340429752647,
+  "lepton_mass_ratio": 1.0,
+  "muonic_contact_factor": 0.4847893604363797,
+  "muonic_energy_calculated_ev": 0.18272562663912578,
+  "muonic_energy_target_ev": 0.182725,
+  "muonic_energy_error_percent": 0.0003429411004425479,
+  "muonic_radius_fm": 0.8408690387725872,
+  "muonic_impedance_mismatch": 0.22521874459790953,
+  "muonic_lepton_mass_ratio": 206.768,
+  "r_electronic_fm": 0.8751005125439308,
+  "r_muonic_fm": 0.8408690387725872,
+  "Delta_r_predicted_fm": 0.03423147377134361,
+  "Delta_r_experimental_fm": 0.03422999999999998,
+  "agreement_percent": 99.99569450381645,
+  "contact_ratio": 0.7281074383233684,
+  "method": "3d_contact_geometry"
+}

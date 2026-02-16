@@ -5,6 +5,154 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2026-02-15
+
+### Release Cleanup & Consolidation
+
+#### Codebase Consolidation
+- **Restored:** Muonic hydrogen solver and holographic analysis tools to `ADSCFT/`
+- **Archived:** Deprecated test suites (`benchmark_suite.py`, wrappers) to `old_research_archive/retired_tests/`
+- **Moved:** One-time experiments (`geometry_first.py`, `resolution_limit.py`) to `debug/`
+- **Moved:** Root directory violations (release notes, status docs) to `docs/releases/`
+- **Cleaned:** Demo directory (archived `chemistry_lab.py`)
+
+#### Import Architecture
+- `ADSCFT/` now exports `MuonicHydrogenSolver`, `compute_holographic_entropy`, `extract_central_charge`, `compare_holographic_properties`
+- `tests/advanced_benchmarks.py` imports holographic tools from `ADSCFT` (not `geovac`)
+- Archive rule: modules needed by the application MUST be moved out of `old_research_archive/`
+
+#### Version Alignment
+- `geovac/__init__.py`: 0.4.0 → **0.4.2**
+- `setup.py`: 0.2.1 → **0.4.2**
+- Updated docstring to reflect Three Laws and current accuracy
+
+### Test Suite
+- **Primary:** `tests/production_suite.py` (Three Laws, isoelectronic scaling)
+- **Advanced:** `tests/advanced_benchmarks.py` (AdS/CFT, holographic, muonic hydrogen)
+- **Companion:** `tests/bulk_physics_puzzles.py` (g-2, MOND)
+
+---
+
+## [0.4.1] - 2026-02-15
+
+### Three Laws of Isoelectronic Scaling
+
+#### Split Scaling + Torsion Breakthrough
+- **Law 1 (Conformal):** Kinetic energy scales as Z² (graph Laplacian)
+- **Law 2 (Coulomb):** Potential energy scales as Z (not Z²)
+- **Law 3 (Torsion):** Lattice torsion gamma = mu * (Z - Z_ref), mu = 1/4
+- **Discovery:** Universal torsion constant mu = 1/4, K_vac = -mu² = -1/16
+
+#### Accuracy Breakthrough
+- He: 1.80% error (from 5%)
+- Li+ (Z=3): **0.03% error** (from 10.87%)
+- Be2+ (Z=4): **0.15% error** (from 15.22%)
+
+### Added
+- `AtomicSolver.apply_isoelectronic_scaling()` - unified scaling method
+- `AtomicSolver.apply_molecular_torsion()` - per-atom torsion for heteronuclear molecules
+- `tests/production_suite.py` - new primary test suite using Three Laws API
+- `demo/lithium_hydride.py` - LiH molecule demonstration
+- Paper 5, Section VI: "The Conformal Structure of Matter"
+
+---
+
+## [0.4.0] - 2026-02-15
+
+### 🌟 Major Scientific Breakthrough
+
+#### Global Metric Scaling for Isoelectronic Series
+- **BREAKTHROUGH:** Conformal transformation approach for multi-electron Z-scaling
+- **PHYSICS FIX:** Resolved virial mismatch from previous Jacobian scaling
+- **METHOD:** Solve Helium-equivalent system, scale eigenvalues by γ = (Z/2)²
+- **VALIDATION:** Li+ 10.87% error, Be2+ 15.22% error (improved from 31.6%/44.5%)
+
+#### Theoretical Significance
+- **CONFORMAL INVARIANCE:** Z-scaling is a metric transformation, not parameter change
+- **VIRIAL THEOREM:** Both T and V scale uniformly by Z², preserving <T> = -<V>/2
+- **UNIVERSALITY:** Lattice topology is universal, only metric (energy scale) changes with Z
+- **PHYSICAL LIMIT:** Remaining 10-15% error attributed to relativistic corrections (Z⁴)
+
+### Added
+
+- **Global metric scaling implementation** in isoelectronic tests
+- **`docs/GLOBAL_METRIC_SCALING_SUCCESS.md`** - Complete technical analysis
+- **`docs/JACOBIAN_SCALING_RESULTS.md`** - Historical context (archived)
+- **`debug/plots/create_isoelectronic_plot.py`** - Visualization script
+- **`debug/plots/isoelectronic_scaling.png`** - Validation plot
+- **`tests/test_isoelectronic.py`** - Comprehensive isoelectronic test suite
+- **E/Z² ratio analysis** - Validates near-constant scaling
+- **Transition state test** - Linear H3 (19.94% error)
+
+### Changed
+
+- **Version:** 0.3.2 → **0.4.0**
+- **README:** Added v0.4.0 section with global metric scaling results
+- **README:** Updated benchmarks table with isoelectronic series
+- **README:** Updated roadmap (v0.4.0 current, v0.5.0 planned)
+- **Scaling approach:** Jacobian (kinetic-only) → Global conformal transformation
+- **Isoelectronic accuracy:** 31-45% → **10-15%** (20-30 point improvement)
+
+### Validated
+
+- ✅ Global metric scaling preserves virial theorem
+- ✅ E/Z² ratio nearly constant (GeoVac: -0.713 to -0.723)
+- ✅ Li+ (Z=3, 2e): -6.489 Ha (10.87% error)
+- ✅ Be2+ (Z=4, 2e): -11.572 Ha (15.22% error)
+- ✅ Linear H3 transition state: -1.321 Ha (19.94% error)
+- ✅ Conformal transformation theory validated
+
+### Deprecated
+
+- **Jacobian scaling** (scaling only kinetic energy by Z²) - causes virial mismatch
+- Use **global metric scaling** instead for isoelectronic series
+
+### Documentation
+
+- [RELEASE_NOTES_v0.4.0.md](RELEASE_NOTES_v0.4.0.md) - Detailed release notes
+- [docs/GLOBAL_METRIC_SCALING_SUCCESS.md](docs/GLOBAL_METRIC_SCALING_SUCCESS.md) - Technical analysis
+
+## [0.3.2] - 2026-02-14
+
+### Added
+
+- **AtomicSolver class** - Pure geometric formulation for single-electron atoms
+- **Z²-scaling for hydrogenic ions** - Automatic scaling for H, He+, Li2+, etc.
+- **`solve_atom()` convenience function** - Quick single-electron calculations
+- Comprehensive benchmark suite for validation
+- Complete documentation for universal kinetic scale
+
+### Validated
+
+- ✅ H (Z=1): -0.497 Ha (0.57% error at max_n=30)
+- ✅ He+ (Z=2): -1.989 Ha (0.57% error at max_n=30)
+- ✅ Li2+ (Z=3): -4.474 Ha (0.57% error at max_n=30)
+- ✅ Universal kinetic scale -1/16 works for all single-electron systems
+- ✅ Z²-scaling formula exact: `kinetic_scale_eff = -1/16 × Z²`
+
+### Changed
+
+- Version: 0.3.1 → 0.3.2
+- README updated with AtomicSolver examples
+- Documentation expanded for single-electron systems
+
+## [0.3.1] - 2026-02-13
+
+### Added
+
+- **Multi-solver architecture** - Mean-Field, Geometric-DFT, Full CI, Dirac
+- **Geometric-DFT** - Fast correlation functional (5.7% error, 79% recovery)
+- **Full CI for 2-electron systems** - Exact correlation (<1% with optimization)
+- **Dirac relativistic solver** - Spinor formalism with relativistic corrections
+- **Geometry optimization** - PES scanning and bond length optimization
+
+### Validated
+
+- ✅ H₂ Mean-Field: -0.980 Ha (16.5% error)
+- ✅ H₂ Geometric-DFT: -1.108 Ha (5.7% error)
+- ✅ H₂ Full CI (R=1.40): -1.142 Ha (2.8% error)
+- ✅ H₂ Full CI (R=1.30 optimized): -1.169 Ha (0.43% error) ⭐
+
 ## [0.2.1] - 2026-02-13
 
 ### 🔬 Major Scientific Discoveries

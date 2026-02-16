@@ -12,7 +12,7 @@ long_description = (this_directory / "README.md").read_text(encoding='utf-8')
 
 setup(
     name='geovac',
-    version='0.2.1',
+    version='0.4.2',
     author='J. Loutey',
     author_email='jloutey@example.com',  # Update with your actual email
     description='Topological Hartree-Fock quantum solver with universal constant -1/16',

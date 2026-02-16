@@ -1,0 +1,41 @@
+{
+  "improved_results": {
+    "contact_factor_electronic": 0.6658,
+    "contact_factor_muonic": 0.5,
+    "contact_ratio": 0.7509762691498949,
+    "contact_reduction_percent": 24.90237308501051,
+    "radius_electronic_fm": 0.8751,
+    "radius_muonic_fm": 0.84087,
+    "radius_discrepancy_predicted_fm": 0.21792066686692696,
+    "radius_discrepancy_experimental_fm": 0.03422999999999998,
+    "agreement_percent": -436.63647930741183,
+    "status": "partial",
+    "method": "empirically_calibrated",
+    "source": "old_research_archive optimization"
+  },
+  "comparison": {
+    "simple": {
+      "C_e": 0.6666666666666666,
+      "C_mu": 0.5,
+      "Delta_r_p_fm": 0.01075,
+      "agreement_percent": 31.40520011685657
+    },
+    "improved": {
+      "contact_factor_electronic": 0.6658,
+      "contact_factor_muonic": 0.5,
+      "contact_ratio": 0.7509762691498949,
+      "contact_reduction_percent": 24.90237308501051,
+      "radius_electronic_fm": 0.8751,
+      "radius_muonic_fm": 0.84087,
+      "radius_discrepancy_predicted_fm": 0.21792066686692696,
+      "radius_discrepancy_experimental_fm": 0.03422999999999998,
+      "agreement_percent": -436.63647930741183,
+      "status": "partial",
+      "method": "empirically_calibrated",
+      "source": "old_research_archive optimization"
+    },
+    "experimental": {
+      "Delta_r_p_fm": 0.03422999999999998
+    }
+  }
+}

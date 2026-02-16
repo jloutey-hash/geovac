@@ -2,68 +2,40 @@
 GeoVac: Topological Quantum Chemistry Solver
 =============================================
 
-The first quantum chemistry solver that models chemical bonds as sparse
-topological bridges (information channels) rather than force fields.
+Solves the wave function using Spectral Graph Theory (Sparse Graph Laplacians)
+rather than continuous integration. Universal kinetic scale K_vac = -1/16.
 
-**Revolutionary Approach:**
-- Bonds = Graph connectivity (not Coulomb potentials)
-- Binding energy = Eigenvalue lowering from wavefunction delocalization
-- Bond strength ∝ Number of bridge edges (N ≈ 4×max_n for H₂)
+**Three Laws of Isoelectronic Scaling (v0.4.1):**
+- Law 1 (Conformal): Kinetic energy scales as Z²
+- Law 2 (Coulomb): Potential energy scales as Z
+- Law 3 (Torsion): Lattice torsion gamma = mu * (Z - Z_ref), mu = 1/4
 
 **Performance:**
 - O(N) complexity scaling with >97% matrix sparsity
-- Mean-field accuracy: 0% error for H₂⁺, ~17% correlation error for H₂
+- Isoelectronic accuracy: Li+ 0.03%, Be2+ 0.15%
+- H2+ topological control: <0.1% error
 - Ultra-fast: Single atoms in <10ms, molecules in <50ms
 
-**Physics Classification:**
-GeoVac functions as a discrete Topological Hartree-Fock solver:
-- Single-electron systems: Exact (validated with H₂⁺)
-- Multi-electron systems: Mean-field quality (missing correlation energy)
-
-**Key Innovation:**
-Models chemistry as discrete topology where:
-- Nodes = quantum states |n,l,m⟩
-- Edges = kinetic coupling
-- Bridges = molecular bonds
-- Eigenvalues = energies
-
-Quick Start (Atoms):
--------------------
->>> from geovac import HeliumHamiltonian
->>> h = HeliumHamiltonian(max_n=3, Z=2, kinetic_scale=-0.103)
->>> energy, wavefunction = h.compute_ground_state()
->>> print(f"Ground state energy: {energy[0]:.6f} Hartree")
-Ground state energy: -2.903000 Hartree
-
-Quick Start (Molecules):
------------------------
->>> from geovac import GeometricLattice, MoleculeHamiltonian
->>> # Create H₂ molecule with 16 topological bridges
->>> atom_A = GeometricLattice(max_n=5)
->>> atom_B = GeometricLattice(max_n=5)
->>> h2 = MoleculeHamiltonian(
-...     lattices=[atom_A, atom_B],
-...     connectivity=[(0, 1, 16)],  # Bridge atoms 0-1 with 16 edges
-...     kinetic_scale=-0.075551
-... )
->>> E_ground, psi = h2.compute_ground_state()
->>> print(f"H₂ binding energy: {E_ground[0] - 2*(-0.5):.6f} Ha")
-
-Available Classes:
------------------
+**Key Classes:**
+- AtomicSolver: Unified atomic solver with isoelectronic scaling
 - GeometricLattice: Sparse graph lattice with (n,l,m) quantum state nodes
-- HeliumHamiltonian: Two-electron atomic solver
-- MoleculeHamiltonian: **NEW** - Molecular bonding via sparse bridges
+- MoleculeHamiltonian: Molecular bonding via sparse bridges
 - DiracHamiltonian: Relativistic spinor-based solver (experimental)
 
-Status:
--------
-- Single atoms: Quantitative (~0.01% error with calibration)
-- Molecules: Semi-quantitative (~35% error for H₂ at N=16 bridges)
-- Scaling: O(N) complexity, 97-99% sparse matrices
+Quick Start:
+-----------
+>>> from geovac import AtomicSolver, UNIVERSAL_KINETIC_SCALE
+>>> solver = AtomicSolver(max_n=10, Z=1)
+>>> E, psi = solver.compute_ground_state()
+>>> print(f"Hydrogen: {E[0]:.6f} Ha")
+
+>>> # Isoelectronic scaling (Li+, Be2+, etc.)
+>>> solver = AtomicSolver(max_n=10, Z=3)
+>>> solver.apply_isoelectronic_scaling()
+>>> E, psi = solver.compute_ground_state()
 """
 
-__version__ = '0.2.1'
+__version__ = '0.4.2'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 
@@ -71,6 +43,10 @@ __license__ = 'MIT'
 from .lattice import GeometricLattice
 from .hamiltonian import HeliumHamiltonian, HeliumPackingSolver, MoleculeHamiltonian
 from .dirac_hamiltonian import DiracHamiltonian, DiracLatticeStates
+from .atomic_solver import AtomicSolver, solve_hydrogen, solve_atom
+
+# Holographic/AdS-CFT modules live in ADSCFT/ package:
+#   from ADSCFT import MuonicHydrogenSolver, compute_holographic_entropy, etc.
 
 # Define public API
 __all__ = [
@@ -80,6 +56,9 @@ __all__ = [
     'HeliumPackingSolver',
     'DiracHamiltonian',
     'DiracLatticeStates',
+    'AtomicSolver',
+    'solve_hydrogen',
+    'solve_atom',
     '__version__',
 ]
 
