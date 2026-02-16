@@ -1344,12 +1344,17 @@ class MoleculeHamiltonian:
 
         Each nucleus is a topological defect with torsion proportional
         to its excess charge. Edges touching the n=1 core of atom i
-        are scaled by (1 - gamma_i):
+        are scaled by the Schwarzschild metric:
 
-            A_ij -> A_ij * (1 - gamma_i)   if i is a core node of atom k
+            A_ij -> A_ij * exp(-gamma_i)   if i is a core node of atom k
 
         For edges connecting two different atoms' cores (bridge between
         two defects), the larger torsion dominates.
+
+        The exponential metric replaces the linear (1 - gamma) law:
+          - Matches linear torsion for small gamma: exp(-g) ~ 1 - g
+          - Stays positive for ALL gamma (no metric inversion)
+          - Extends torsion to the full periodic table (Z > 6)
 
         This is a METRIC deformation. The potential W = -Z/n^2 stays PURE.
 
@@ -1401,7 +1406,7 @@ class MoleculeHamiltonian:
             # Use the larger torsion if both endpoints are core nodes
             gamma = max(row_gamma, col_gamma)
             if gamma > 0:
-                new_data[k] *= (1.0 - gamma)
+                new_data[k] *= np.exp(-gamma)
 
         # Rebuild adjacency with torsion-modified edges
         from scipy.sparse import coo_matrix
