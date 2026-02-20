@@ -1,443 +1,234 @@
-# GeoVac: Topological Quantum Chemistry Engine
+# GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-0.4.2-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-0.7.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 0.4.2** - Three Laws of Isoelectronic Scaling & Codebase Consolidation
+**Version 0.7.0** - The Time Machine (Quantum Dynamics Engine)
 
-GeoVac is a **Topological Quantum Chemistry Solver** that reformulates the Schrödinger equation as a graph topology problem. Instead of solving partial differential equations over continuous space, GeoVac maps quantum states to nodes on a graph and solves the **Graph Laplacian** as a sparse matrix eigenvalue problem.
+GeoVac maps the Schrodinger equation onto graph topologies to replace expensive continuous integration with highly efficient **O(N) sparse matrix eigenvalue problems**. Quantum states become nodes on a graph, the kinetic energy operator becomes a **Graph Laplacian**, and molecular bonds emerge as topological bridges between atomic subgraphs.
 
--   **The Goal:** To replace expensive force-field integrations with $O(N)$ sparse graph algorithms.
--   **The Breakthrough:** The kinetic energy scale of the vacuum converges to the universal rational constant **-1/16**.
--   **The Precision:**
-    -   **Single-Electron Systems (H, He+, H2+):** < 0.1% Error (Exact Mean-Field).
-    -   **Two-Electron Molecules (H2 with Full CI):** **< 0.5% Error** (With geometry optimization).
-    -   **Many-Electron Atoms (He):** ~17% Error (Mean-Field only).
+**Why this matters:**
+- Traditional quantum chemistry computes $\int \psi^* H \psi \, d^3r$ over continuous space (expensive)
+- GeoVac computes $\mathbf{v}^T \mathbf{L} \mathbf{v}$ over a sparse graph (cheap, O(N))
+- Same physics, fundamentally different computational approach
 
----
+**Precision (our most defensible results):**
 
-## 🎯 What's New in v0.4.2
-
-### Three Laws of Isoelectronic Scaling ⭐⭐⭐
-
-**Breakthrough Achievement:** Discovered three fundamental laws governing how quantum systems scale with nuclear charge Z, achieving **sub-percent accuracy** across the isoelectronic series.
-
-**The Three Laws:**
-1. **Law 1 (Conformal):** Kinetic energy scales as Z² (graph Laplacian)
-2. **Law 2 (Coulomb):** Potential energy scales as Z (not Z²!)
-3. **Law 3 (Torsion):** Lattice torsion γ = μ(Z - Z_ref), with universal torsion constant **μ = 1/4**
-
-**Key Discovery:** The vacuum constant K_vac = -1/16 = -μ² emerges from the torsion constant μ = 1/4.
-
-**Results:**
-
-| System | Z | Electrons | Reference (Ha) | GeoVac (Ha) | Error | Status |
-|--------|---|-----------|----------------|-------------|-------|--------|
-| **He** | 2 | 2 | -2.903 | -2.851 | **1.80%** | ✓ Baseline |
-| **Li+** | 3 | 2 | -7.280 | -7.278 | **0.03%** | ✓✓✓ Three Laws |
-| **Be2+** | 4 | 2 | -13.650 | -13.630 | **0.15%** | ✓✓✓ Three Laws |
-
-**Implementation:**
-```python
-from geovac import AtomicSolver
-
-# Create solver and apply isoelectronic scaling
-solver = AtomicSolver(max_n=10, Z=3)  # Li+
-solver.apply_isoelectronic_scaling()
-E, psi = solver.compute_ground_state()
-print(f"Li+ energy: {E[0]:.6f} Ha")  # -7.278 Ha (0.03% error)
-```
-
-### Codebase Consolidation (v0.4.2)
-- Restored holographic/muonic hydrogen modules to `ADSCFT/`
-- Archived deprecated test suites, consolidated to `production_suite.py` + `advanced_benchmarks.py`
-- Cleaned root directory per CLAUDE.md rules
-- Version alignment: all files at 0.4.2
+| System | Method | Error | Status |
+|--------|--------|-------|--------|
+| **H, He+, H2+ (1e)** | Graph Laplacian | < 0.1% | Exact mean-field |
+| **H2 (2e, Full CI)** | Tensor product | < 0.5% | With geometry opt |
+| **Li+ (2e, Z=3)** | Three Laws + Torsion | 0.25% | Sub-percent |
+| **Be2+ (2e, Z=4)** | Three Laws + Torsion | 0.57% | Sub-percent |
+| **Au78+ (Z=79)** | Schwarzschild torsion | Stable | Full periodic table |
 
 ---
 
-## 🎯 What's New in v0.3.2
+## What's New
 
-### Universal Kinetic Scale Validated Across All Systems ⭐⭐⭐
+### v0.7.0 - The Time Machine
+- **Quantum dynamics engine:** `TimePropagator` class with Crank-Nicolson unitary integration
+- **Rabi oscillations confirmed:** Population oscillates 1.0 -> 0.0 -> 1.0, norm preserved to 1e-13
+- The lattice supports superposition, interference, and coherent time evolution
 
-**Major Achievement:** The -1/16 kinetic scale is now **validated across ALL quantum systems**:
-- ✅ **Single-electron atoms (H, He+, Li2+):** 0.57% error with automatic Z²-scaling
-- ✅ **Multi-electron atoms (He Full CI):** 1.24% error
-- ✅ **Molecules (H₂ Full CI):** 2.8% error
-- ✅ **Z-scaling formula:** `kinetic_scale_effective = -1/16 * Z²` (exact!)
+### v0.6.0 - The General Relativity Update
+- **Schwarzschild torsion:** `exp(-gamma)` replaces `(1-gamma)` in the metric
+- Solver now stable for **all Z** (full periodic table, Z=1 to Z=92+)
+- Gold (Z=79) and Mercury (Z=80) validated
 
-**New Features:**
-1. **AtomicSolver Class** - Pure geometric formulation for single-electron atoms
-   - Automatic Z²-scaling for hydrogenic ions
-   - Validates universal constant across all Z values
-   - Convergence to exact values as max_n → ∞
+### v0.5.0 - The Alpha-Metric Bond
+- **Distance-dependent bridges:** `W = A * exp(-lambda * R)` for molecular geometry
+- H2 equilibrium bond length: **1.40 Bohr (exact experimental match)**
+- Bridge constants derived from vacuum: A = alpha^{-1} * |K| = 8.565
 
-2. **Comprehensive Benchmark Suite** - Production validation framework
-   - Tests H, He+, Li2+ single-electron systems
-   - Validates He, H₂ multi-electron correlation
-   - All methods: mean-field, geometric-dft, full_ci
-
-3. **Complete Documentation** - Theory and implementation guides
-   - [UNIVERSAL_SCALE_VALIDATION.md](UNIVERSAL_SCALE_VALIDATION.md) - Full validation report
-   - [SOLUTION_UNIVERSAL_KINETIC_SCALE.md](SOLUTION_UNIVERSAL_KINETIC_SCALE.md) - Technical details
-   - Clear guidelines on when to use each solver
-
-### Multi-Solver Framework (v0.3.1)
-GeoVac offers **four fully-implemented solver methods** with different accuracy/speed tradeoffs:
-
-1. **`method='mean_field'`** (Default) - Fast $O(N)$ single-particle solver
-   - Exact for single-electron systems (H, He+, H2+)
-   - ~17% correlation error for multi-electron systems
-   - Non-relativistic Schrödinger equation
-
-2. **`method='full_ci'`** - Exact 2-electron solver via tensor products
-   - Builds complete $N^2$-dimensional configuration interaction space
-   - Includes cross-nuclear attraction and electron-electron repulsion
-   - Maintains 99.9987% sparsity even in huge tensor product space
-   - Non-relativistic Schrödinger equation
-
-3. **`method='dirac'`** - Relativistic Dirac equation solver
-   - Spinor formalism: $(2N)^2$-dimensional for 2-electron systems
-   - Includes relativistic corrections: spin-orbit, mass-velocity, Darwin term
-   - Effective $c$ scaling for lattice discretization
-   - Important for heavy atoms, magnetic properties, spectroscopy
-
-4. **`method='geometric_dft'`** ⭐ NEW - Topological correlation correction
-   - Mean-field speed with ~80% correlation recovery
-   - Correlation functional based on wavefunction delocalization
-   - **5.7% error for H₂** (vs 16.7% mean-field, 2.8% Full CI)
-   - Same O(N) speed as mean-field (~6ms)
-   - Ideal for medium-sized molecules requiring accuracy without Full CI cost
-
-### Breakthrough Results
-- **H₂ Full CI with Geometry Optimization:** **0.426% error** (experimental: -1.174 Ha, computed: -1.169 Ha)
-- **Optimal Topological Bond Length:** 1.30 Bohr (vs 1.40 Bohr experimental)
-- **Basis Set Extrapolation:** Power law fit predicts E_∞ = -1.161 Ha (1.09% error at R=1.40)
+### v0.4.x - Three Laws of Isoelectronic Scaling
+- Law 1 (Conformal): Kinetic ~ Z^2
+- Law 2 (Coulomb): Potential ~ Z
+- Law 3 (Torsion): gamma = mu*(Z - Z_ref), mu = 1/4
+- Li+ 0.25%, Be2+ 0.57% error
 
 ---
 
-## ⚡ The Universal Kinetic Constant (-1/16)
+## The Universal Kinetic Constant (-1/16)
 
-Originally, GeoVac used a calibrated parameter to map graph eigenvalues to physical energy. Extensive finite-size scaling analysis ($n \to \infty$) has revealed that this is a fundamental topological invariant.
+The kinetic energy scale of the vacuum lattice converges to the rational constant:
 
-$$\text{Scale} = \lim_{n \to \infty} S(n) = -\frac{1}{16} \approx -0.0625$$
+$$\text{Scale} = -\frac{1}{16} = -0.0625$$
 
-**Universality Validated (v0.3.2):**
-
-This constant holds for **ALL quantum systems** when using the pure geometric formulation:
-- ✅ **Single-electron atoms:** H, He+, Li2+ (Z=1,2,3) - 0.57% error at max_n=30
-- ✅ **Multi-electron atoms:** He (2 electrons, Full CI) - 1.24% error
-- ✅ **Molecules:** H₂, H₂⁺ (Full CI) - 2.8% error
-
-**Z-Scaling Formula (NEW):**
-
-For hydrogenic atoms with nuclear charge Z, energies scale as E ∝ Z²:
-$$\text{kinetic\_scale}_{\text{eff}} = -\frac{1}{16} \times Z^2$$
-
-This Z²-scaling is **automatically applied** in the AtomicSolver class.
-
-**Physical Meaning:**
-- The graph Laplacian structure is universal (independent of Z)
-- Nuclear charge Z only affects the overall energy scale
-- The dimensionless ground state eigenvalue is exactly **8** for Z=1
+This is not a fitted parameter. It is a topological invariant validated across all tested systems (H, He+, Li2+, He, H2, H2+). The Z-scaling formula `kinetic_scale_eff = -1/16 * Z^2` is exact.
 
 ---
 
-## 🧠 Theory: The Topological Hamiltonian
-
-Standard quantum chemistry solves $H\psi = E\psi$ using continuous operators:
-$$H = -\frac{1}{2}\nabla^2 - \frac{Z}{r} + \frac{1}{r_{12}}$$
-
-GeoVac discretizes this using **Spectral Graph Theory**:
-
-1.  **State Mapping:** Each quantum state $|n,l,m\rangle$ is a **Node** in the graph.
-2.  **Kinetic Energy:** The Laplacian operator $-\nabla^2$ is replaced by the **Graph Laplacian** $\mathcal{L} = D - A$.
-3.  **Potential Energy:** The Coulomb potential emerges from **Weighted Connectivity** toward the origin, derived rigorously from the graph topology.
-4.  **Bonding (Mean-Field):** Molecular bonds form via **Dynamic Topological Bridges**, where the number of inter-atomic connections scales as $N_b \approx 4 \times n_{max}$.
-5.  **Correlation (Full CI):** Two-electron systems build tensor product space $H_{total} = H_1 \otimes I + I \otimes H_1 + V_{cross} + V_{ee}$, including cross-nuclear attraction and electron-electron repulsion.
-
----
-
-## ⚠️ Benchmarks & Validation
-
-### Single-Electron Systems (Validated with AtomicSolver) ⭐ NEW
-
-| System | Z | Method | Reference | GeoVac (max_n=30) | Error | Status |
-| :--- | :---: | :--- | :--- | :--- | :--- | :--- |
-| **H (Atom)** | 1 | Pure Geometric | -0.500 Ha | -0.497 Ha | **0.57%** | ✓✓ Converging to Exact |
-| **He+ (Ion)** | 2 | Pure Geometric | -2.000 Ha | -1.989 Ha | **0.57%** | ✓✓ Exact Z²-Scaling |
-| **Li2+ (Ion)** | 3 | Pure Geometric | -4.500 Ha | -4.474 Ha | **0.57%** | ✓✓ Universal Scale |
-
-**Key Finding:** All single-electron systems show **identical 0.57% error**, confirming:
-- Universal kinetic scale -1/16 works for ALL Z values
-- Z²-scaling formula is exact: `kinetic_scale_effective = -1/16 * Z²`
-- Error is purely from finite basis (max_n=30), converges to exact as max_n → ∞
-
-### Multi-Electron Isoelectronic Series (Three Laws) ⭐ NEW
-
-| System | Z | Method | Reference | GeoVac | Error | Status |
-| :--- | :---: | :--- | :--- | :--- | :--- | :--- |
-| **He (2e)** | 2 | Split Scaling | -2.903 Ha | -2.851 Ha | **1.80%** | ✓✓ Baseline |
-| **Li+ (2e)** | 3 | Three Laws + Torsion | -7.280 Ha | -7.278 Ha | **0.03%** | ✓✓✓ Sub-percent |
-| **Be2+ (2e)** | 4 | Three Laws + Torsion | -13.650 Ha | -13.630 Ha | **0.15%** | ✓✓✓ Sub-percent |
-
-**Key Achievement:** Three Laws of Isoelectronic Scaling with torsion constant μ=1/4 achieve sub-percent accuracy!
-
-### Multi-Electron Systems (Full CI Correlation)
-
-| System | Method | Reference | GeoVac | Error | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **He (Atom)** | Full CI | -2.904 Ha | -2.940 Ha | **1.24%** | ✓✓✓ Validates Correlation |
-| **H2 (R=1.40)** | Mean-Field | -1.174 Ha | -0.980 Ha | **16.5%** | ✗ Missing Correlation |
-| **H2 (R=1.40)** | Geometric-DFT | -1.174 Ha | -1.108 Ha | **5.7%** | ✓✓ 79% Recovery |
-| **H2 (R=1.40, n=10)** | Full CI | -1.174 Ha | -1.142 Ha | **2.8%** | ✓✓✓ Excellent |
-| **H2 (R=1.30, n=10)** | Full CI (Optimized) | -1.174 Ha | -1.169 Ha | **0.43%** | ✓✓✓ **OUTSTANDING** |
-
-**Key Insights:**
-- **AtomicSolver:** New solver for single-electron atoms with automatic Z²-scaling
-- **Universal Scale:** -1/16 validated across H, He+, Li2+, He, H₂ (all systems tested!)
-- **Mean-Field:** Perfect for single-electron, ~17% error for multi-electron (expected)
-- **Geometric-DFT:** 79% correlation recovery at O(N) speed (5.7% error)
-- **Full CI:** Exact correlation recovery, <3% error for molecules, <2% for atoms
-
----
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 ```bash
 git clone https://github.com/jloutey-hash/geovac.git
 cd geovac
-pip install -r requirements.txt
+pip install -e .
 ```
 
-### Example 1: Single-Electron Atoms (AtomicSolver) ⭐ NEW
+### Single-Electron Atoms
 ```python
-from geovac import AtomicSolver, solve_atom, UNIVERSAL_KINETIC_SCALE
+from geovac import AtomicSolver, solve_atom
 
-# Quick calculation: Hydrogen atom
-E_H, psi_H = solve_atom(Z=1, max_n=30)
-print(f"H ground state: {E_H:.6f} Ha")  # -0.497 Ha (0.57% error)
+# Hydrogen
+E, psi = solve_atom(Z=1, max_n=30)
+print(f"H ground state: {E:.6f} Ha")  # -0.497 Ha (0.57% error)
 
-# Helium ion (He+, Z=2) - automatic Z²-scaling
-E_Hep, psi_Hep = solve_atom(Z=2, max_n=30)
-print(f"He+ ground state: {E_Hep:.6f} Ha")  # -1.989 Ha (0.57% error)
-
-# Lithium ion (Li2+, Z=3)
-E_Li2p, psi_Li2p = solve_atom(Z=3, max_n=30)
-print(f"Li2+ ground state: {E_Li2p:.6f} Ha")  # -4.474 Ha (0.57% error)
-
-# Or use the AtomicSolver class directly for more control
-solver = AtomicSolver(max_n=30, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
-E, psi = solver.compute_ground_state(n_states=5)  # Get first 5 excited states
+# Any hydrogenic ion (automatic Z^2 scaling)
+E, psi = solve_atom(Z=3, max_n=30)  # Li2+
+print(f"Li2+ ground state: {E:.6f} Ha")  # -4.474 Ha
 ```
 
-### Example 2: H₂ Molecule - Mean-Field (Fast)
+### H2 Molecule (Full CI)
 ```python
 from geovac import GeometricLattice, MoleculeHamiltonian, UNIVERSAL_KINETIC_SCALE
 
-# Build H₂ with sparse topological bridges
 atom_A = GeometricLattice(max_n=10)
 atom_B = GeometricLattice(max_n=10)
-
 h2 = MoleculeHamiltonian(
     lattices=[atom_A, atom_B],
-    connectivity=[(0, 1, 40)],  # 40 bridges between atoms 0-1
-    kinetic_scale=UNIVERSAL_KINETIC_SCALE
+    connectivity=[(0, 1, 40)],
+    kinetic_scale=UNIVERSAL_KINETIC_SCALE,
+    bridge_decay_rate=0.0,  # Flat bridges for topology validation
 )
-
-# Fast mean-field solver (O(N), ~17% error)
-E_mf, psi_mf = h2.compute_ground_state(method='mean_field')
-print(f"Mean-Field Energy: {E_mf[0]:.6f} Ha")  # ~-0.980 Ha (16.5% error)
+E, psi = h2.compute_ground_state(method='full_ci')
+print(f"H2 Full CI: {E[0]:.6f} Ha")  # -1.142 Ha (2.8% error)
 ```
 
-### Example 3: H₂ Molecule - Geometric-DFT (Fast Correlation) ⭐ NEW
+### Time Evolution (Rabi Oscillations)
 ```python
-# Same molecule setup as above...
+from geovac import AtomicSolver, TimePropagator
 
-# Geometric-DFT: Fast with ~80% correlation recovery
-E_dft, psi_dft = h2.compute_ground_state(method='geometric_dft')
-print(f"Geometric-DFT Energy: {E_dft[0]:.6f} Ha")  # ~-1.108 Ha (5.7% error)
+solver = AtomicSolver(max_n=5, Z=1)
+E, psi = solver.compute_ground_state(n_states=5)
 
-# Correlation recovered vs mean-field
-E_mf_total = 2 * E_mf[0]  # Mean-field returns single-particle eigenvalues
-E_corr_dft = E_dft[0] - E_mf_total
-print(f"Correlation (DFT): {E_corr_dft:.6f} Ha")  # ~-0.130 Ha (79% of exact)
-```
-
-### Example 4: H₂ Molecule - Full CI (Exact Correlation)
-```python
-# Same molecule setup as above...
-
-# Exact 2-electron solver (O(N²), <1% error with optimization)
-E_ci, psi_ci = h2.compute_ground_state(method='full_ci')
-print(f"Full CI Energy: {E_ci[0]:.6f} Ha")  # ~-1.142 Ha (2.7% error at R=1.40)
-
-# Correlation energy recovered
-E_mf_total = 2 * E_mf[0]
-E_corr = E_ci[0] - E_mf_total
-print(f"Correlation Energy: {E_corr:.6f} Ha")  # ~-0.162 Ha (100% exact)
-```
-
-### Example 5: Relativistic Dirac Equation
-```python
-# Relativistic quantum chemistry with Dirac equation
-# Important for heavy atoms, magnetic properties, spectroscopy
-
-# Build molecule (use smaller basis due to spinor dimension)
-atom_A = GeometricLattice(max_n=5)
-atom_B = GeometricLattice(max_n=5)
-h2 = MoleculeHamiltonian(
-    lattices=[atom_A, atom_B],
-    connectivity=[(0, 1, 20)],
-    kinetic_scale=UNIVERSAL_KINETIC_SCALE
-)
-
-# Relativistic Dirac solver (O((2N)²), includes spin-orbit coupling)
-E_dirac, psi_dirac = h2.compute_ground_state(method='dirac')
-print(f"Dirac Energy (raw): {E_dirac[0]:.6f} Ha")  # Includes rest mass mc²
-
-# Relativistic corrections
-# For light atoms (H, C, N, O): ~0.01% effect
-# For heavy atoms (Au, U): several % effect
-# Spin-orbit coupling: Important for spectroscopy and magnetism
-```
-
-### Example 6: Convergence Study
-```python
-# Test basis set convergence (see convergence_study_h2.py)
-max_n_values = [5, 6, 7, 8, 9, 10]
-energies = []
-
-for max_n in max_n_values:
-    atom_A = GeometricLattice(max_n=max_n)
-    atom_B = GeometricLattice(max_n=max_n)
-    h2 = MoleculeHamiltonian(
-        lattices=[atom_A, atom_B],
-        connectivity=[(0, 1, 4*max_n)],
-        kinetic_scale=UNIVERSAL_KINETIC_SCALE
-    )
-    E, _ = h2.compute_ground_state(method='full_ci')
-    energies.append(E[0])
-
-# Fit to E(n) = E_∞ + A/n^α to extrapolate infinite basis limit
-# Result: E_∞ ≈ -1.161 Ha (1.1% error)
-```
-
-### Example 7: Geometry Optimization
-```python
-# Scan potential energy surface (see optimize_geometry_h2.py)
-bond_lengths = np.linspace(1.30, 1.50, 21)
-energies = []
-
-for R in bond_lengths:
-    # Override bond_length in molecular coordinates
-    # (see optimize_geometry_h2.py for implementation)
-    E, _ = h2.compute_ground_state(method='full_ci')
-    energies.append(E)
-
-# Find minimum energy geometry
-R_optimal = bond_lengths[np.argmin(energies)]
-E_min = np.min(energies)
-print(f"Optimal Bond Length: {R_optimal:.2f} Bohr")  # 1.30 Bohr
-print(f"Minimum Energy: {E_min:.6f} Ha")  # -1.169 Ha (0.43% error!)
+# Build dipole operator and propagate
+V_z = TimePropagator.build_dipole_z(solver.lattice)
+prop = TimePropagator(solver.H, dt=0.01)
+psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 ```
 
 ---
 
-## 📊 Performance
+## Solver Methods
 
-### Scaling Analysis
-| System | States | Tensor Dim | Sparsity | Time (Full CI) | Method |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| H₂ (n=5) | 77 | 5,929 | 99.95% | 0.03 s | Full CI |
-| H₂ (n=8) | 296 | 87,616 | 99.98% | 0.6 s | Full CI |
-| H₂ (n=10) | 770 | 592,900 | 99.9987% | 4.5 s | Full CI |
-
-**Key Features:**
-- Mean-Field: $O(N)$ complexity, ultra-fast (<0.1s for molecules)
-- Full CI: $O(N^2)$ states but maintains >99.99% sparsity
-- Sparse eigensolvers (ARPACK) exploit structure for fast exact solutions
+| Method | Complexity | Accuracy | Use Case |
+|--------|-----------|----------|----------|
+| `mean_field` | O(N) | Exact for 1e, ~17% for 2e | Fast screening |
+| `geometric_dft` | O(N) | ~6% for 2e (80% correlation) | Fast + accurate |
+| `full_ci` | O(N^2) | < 3% for 2e (exact correlation) | Quantitative benchmarks |
+| `dirac` | O((2N)^2) | Relativistic corrections | Heavy atoms, spectroscopy |
 
 ---
 
-## 📖 Documentation & Validation
+## Benchmarks
 
-### Included Demos
-- **`demo_h2.py`** - Complete H₂ walkthrough (all 4 methods: mean-field, Geometric-DFT, Full CI, Dirac)
-- **`demo_h2_dirac.py`** - Relativistic Dirac equation for molecular bonding
-- **`convergence_study_h2.py`** - Basis set convergence analysis with extrapolation
-- **`optimize_geometry_h2.py`** - PES scanning and geometry optimization
+### Production Suite (6/6 passing)
 
-### Validation Scripts
-All demos include direct comparison to experimental NIST values with error analysis.
+| Test | Energy (Ha) | Target (Ha) | Error | Status |
+|------|------------|-------------|-------|--------|
+| H2 Full CI | -1.142 | -1.174 | 2.80% | PASS |
+| He | -2.851 | -2.904 | 1.82% | PASS |
+| H- | -0.528 | -0.528 | 0.03% | PASS |
+| Li+ | -7.298 | -7.280 | 0.25% | PASS |
+| Be2+ | -13.733 | -13.656 | 0.57% | PASS |
+| H3 linear | -1.321 | -1.650 | 19.94% | PASS |
 
-### Research Papers
-See `papers/` directory for:
-- Universal constant derivation and validation
-- Topological bond formation theory
-- Full CI tensor product formalism
-- Cross-nuclear attraction formulation
+### Heavy Metals Suite (4/4 passing)
+| Test | Z | gamma | Status |
+|------|---|-------|--------|
+| Au78+ | 79 | 19.25 | PASS (solver stable) |
+| Hg79+ | 80 | 19.50 | PASS (solver stable) |
+| Li+ backward compat | 3 | 0.25 | PASS (0.25%) |
+| Be2+ backward compat | 4 | 0.50 | PASS (0.57%) |
 
----
-
-## 🔬 Physical Classification
-
-**GeoVac is a Discrete Topological Hartree-Fock Solver** with correlation options:
-
-| Feature | Mean-Field | Geometric-DFT ⭐ | Full CI |
-| :--- | :--- | :--- | :--- |
-| **Single-Electron** | Exact (0% error) | Exact (0% error) | Exact (0% error) |
-| **Exchange** | Implicit (topology) | Implicit (topology) | Explicit (Pauli exclusion) |
-| **Correlation** | Absent (~17% error) | **~80% recovered** (~6% error) | **Exact** (<1% with optimization) |
-| **Complexity** | $O(N)$ | $O(N)$ (same as MF!) | $O(N^2)$ states |
-| **Speed** | <100ms | <100ms | ~20s |
-| **Use Case** | Fast screening | **Fast + accurate** | Quantitative benchmarks |
+### Rabi Dynamics Suite (3/3 passing)
+| Test | Result | Status |
+|------|--------|--------|
+| Norm conservation | deviation = 1.1e-13 | PASS |
+| Rabi oscillation | amplitude = 0.9996 | PASS |
+| Off-resonance | reduced amplitude | PASS |
 
 ---
 
-## 🛣️ Roadmap
+## Performance
 
-### v0.4.2 (Current)
-- ✅ **Three Laws of Isoelectronic Scaling** - Split scaling (Z², Z) + torsion (μ=1/4)
-- ✅ **Sub-percent accuracy** - Li+ 0.03%, Be2+ 0.15%
-- ✅ Multi-solver architecture (Mean-Field, Geometric-DFT, Full CI, Dirac)
-- ✅ AdS/CFT holographic analysis (muonic hydrogen, central charge, spectral dimension)
-- ✅ Universal kinetic scale K_vac = -1/16 = -μ² validated
-- ✅ Consolidated test suites and codebase cleanup
-- 🔲 3-electron Full CI (Li, Li+)
-- 🔲 Automatic geometry optimization
-
-### v0.5.0 (Planned)
-- 🔲 Molecular dynamics via graph rewiring
-- 🔲 Excited state spectroscopy
-- 🔲 Periodic systems (solids)
-- 🔲 Relativistic corrections for high-Z systems
+| System | States | Sparsity | Time | Method |
+|--------|--------|----------|------|--------|
+| H2 (n=5) | 77 | 99.95% | 0.03s | Full CI |
+| H2 (n=10) | 770 | 99.999% | 4.5s | Full CI |
+| Au78+ (n=10) | 385 | >99% | 0.01s | Mean-field |
+| Rabi (2000 steps) | 55 | --- | 2.0s | Crank-Nicolson |
 
 ---
 
-## 📚 Citation
+## Experimental Theoretical Conjectures
 
-If you use GeoVac in your research, please cite:
+The following research directions extend beyond the core computational quantum chemistry engine into fundamental physics. These are exploratory and speculative.
+
+### AdS/CFT Holographic Analysis
+- Boundary theory: quantum states as graph nodes, adjacency matrix as CFT data
+- Bulk theory: 3D geometric embedding with symplectic areas and gauge fields
+- Spectral dimension d_s ~ 1.8-2.0 (mass-independent)
+- Central charge c ~ 0.057 (mass-independent)
+- See `ADSCFT/` package and `papers/conjectures/Paper_3_Holography`
+
+### Fine Structure Constant
+- Geometric impedance of U(1) fiber: alpha^{-1} = 137.042 (0.0045% error)
+- Helical pitch delta = 3.081 introduced as geometric ansatz (not first-principles)
+- See `papers/conjectures/Paper_2_Alpha`
+
+### Muonic Hydrogen & Mass-Independence
+- Energy ratio muonic/electronic = 206.77 (matches mass ratio)
+- All holographic properties (d_s, c, topology) are mass-invariant
+- See `papers/conjectures/Paper_4_Universality`
+
+### Emergent Spacetime
+- Weak-field metric (scalar gravity) from graph Laplacian Poisson equation
+- Schwarzschild torsion for heavy elements (exponential metric suppression)
+- Full tensor GR from graph Laplacian remains an open problem
+- See `papers/conjectures/Paper_5_Geometric_Vacuum`
+
+---
+
+## Project Structure
+
+```
+geovac/           Core package (lattice, hamiltonian, solver, dynamics)
+papers/
+  core/           Defensible foundations (Paper 0-1)
+  conjectures/    Theoretical explorations (Paper 2-5, FAQ)
+tests/            Production + heavy metals + Rabi test suites
+demo/             Customer-facing demonstrations
+ADSCFT/           AdS/CFT research (holographic tools)
+debug/            Development scratchpad
+benchmarks/       Performance tracking
+```
+
+---
+
+## Citation
 
 ```
 @software{geovac2026,
   author = {J. Loutey},
-  title = {GeoVac: Topological Quantum Chemistry Solver},
+  title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {0.4.2},
+  version = {0.7.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```
 
 ---
 
-## 📄 License
+## License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Spectral Graph Theory** foundations (Chung, 1997)
 - **NIST Atomic Spectra Database** for validation data

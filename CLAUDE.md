@@ -2,8 +2,9 @@
 
 ## 🌍 Project Context
 **Name:** GeoVac (The Geometric Vacuum)
-**Mission:** Topological Quantum Chemistry Engine. We solve the wave function using Spectral Graph Theory (Sparse Graph Laplacians) rather than continuous integration.
-**Theory Foundation:** Papers 0-5 in `papers/` directory (LaTeX source of truth)
+**Mission:** Spectral Graph Theory approach to Computational Quantum Chemistry. We map the Schrodinger equation onto graph topologies and replace expensive continuous integration with highly efficient O(N) sparse matrix eigenvalue problems.
+**Core Theory:** Papers 0-1 in `papers/core/` (graph Laplacian mechanics, universal constant)
+**Conjectures:** Papers 2-5 in `papers/conjectures/` (emergent spacetime, alpha derivation, holography — exploratory)
 
 ---
 
@@ -12,8 +13,10 @@
 **ROOT DIRECTORY MUST REMAIN CLEAN.** Only essential files allowed.
 
 ### **Core Directories**
-- `geovac/` → Core package source code (`__init__.py`, `hamiltonian.py`, `lattice.py`, etc.)
-- `papers/` → **Theory Source of Truth.** LaTeX papers (Paper_0 through Paper_5). Read here first when unsure about physics.
+- `geovac/` → Core package source code (`__init__.py`, `hamiltonian.py`, `lattice.py`, `dynamics.py`, etc.)
+- `papers/` → Theory papers, split into two tiers:
+  - `papers/core/` → **Defensible foundations.** Strictly testable O(N) sparse graph Laplacian implementations (Paper 0: geometric packing & universal constant, Paper 1: spectral graph theory & eigenvalue methods)
+  - `papers/conjectures/` → **Theoretical physics explorations.** Speculative extensions beyond computational QC (Paper 2: alpha derivation, Paper 3: holography, Paper 4: universality, Paper 5: geometric vacuum synthesis, FAQ)
 - `tests/` → Unit tests and validation suites (pytest format)
 
 ### **Development Directories**
@@ -85,7 +88,7 @@
 ### **Data & Figures**
 - `*.png`, `*.pdf`, `*.svg` → Plots (`debug/plots/` or `papers/figures/`)
 - `*.txt`, `*.csv`, `*.json` → Data (`debug/data/`)
-- `*.tex`, `*.bib`, `*.aux`, `*.log` → Papers (`papers/`)
+- `*.tex`, `*.bib`, `*.aux`, `*.log` → Papers (`papers/core/` or `papers/conjectures/`)
 
 ---
 
@@ -206,13 +209,15 @@ mv test_something.py debug/
 - **Spectral Dimension:** d_s ≈ 1.8-2.0, mass-independent → validates holography
 - **Central Charge:** c ≈ 0.057, mass-independent → validates CFT connection
 
-### **Theory Papers** (Source of Truth)
-- **Paper 0:** Geometric packing framework and universal constant discovery
-- **Paper 1:** Spectral graph theory foundations and eigenvalue methods
-- **Paper 2:** Fine structure constant (α⁻¹) derivation (exploratory)
-- **Paper 3:** Holographic entropy, spectral dimension, central charge
-- **Paper 4:** Mass-independence, universality, muonic hydrogen
-- **Paper 5:** Comprehensive geometric vacuum framework (synthesis)
+### **Theory Papers**
+- **Core (`papers/core/`):**
+  - **Paper 0:** Geometric packing framework and universal constant K = -1/16
+  - **Paper 1:** Spectral graph theory foundations and eigenvalue methods
+- **Conjectures (`papers/conjectures/`):**
+  - **Paper 2:** Fine structure constant (α⁻¹) derivation (geometric ansatz)
+  - **Paper 3:** Holographic entropy, spectral dimension, central charge
+  - **Paper 4:** Mass-independence, universality, muonic hydrogen
+  - **Paper 5:** Comprehensive geometric vacuum framework (synthesis)
 
 ### **Old Research Insights** (Reference Only)
 - **Fine Structure:** Old method used symplectic plaquettes (0.15% error) vs. our graph impedance (exploratory)
@@ -379,18 +384,18 @@ python debug/test_install.py
 | Speed regression | < 10% | Performance control |
 
 ### **"Which paper has the physics I need?"**
-| Topic | Paper | Section |
-|:---|:---:|:---|
-| Universal constant -1/16 | Paper 0 | Sec 2 |
-| Graph Laplacian method | Paper 1 | Sec 3 |
-| Fine structure α⁻¹ | Paper 2 | Sec 4-6 |
-| Spectral dimension d_s | Paper 3 | Sec 4 |
-| Holographic entropy S | Paper 3 | Sec 5 |
-| Central charge c | Paper 3 | Sec 6 |
-| Mass-independence | Paper 4 | Sec 3-4 |
-| Muonic hydrogen | Paper 4 | Sec 5 |
-| Contact geometry | Paper 4 | Sec 5 |
-| Comprehensive framework | Paper 5 | All |
+| Topic | Paper | Location | Tier |
+|:---|:---:|:---|:---:|
+| Universal constant -1/16 | Paper 0 | Sec 2 | Core |
+| Graph Laplacian method | Paper 1 | Sec 3 | Core |
+| Fine structure α⁻¹ | Paper 2 | Sec 4-6 | Conjecture |
+| Spectral dimension d_s | Paper 3 | Sec 4 | Conjecture |
+| Holographic entropy S | Paper 3 | Sec 5 | Conjecture |
+| Central charge c | Paper 3 | Sec 6 | Conjecture |
+| Mass-independence | Paper 4 | Sec 3-4 | Conjecture |
+| Muonic hydrogen | Paper 4 | Sec 5 | Conjecture |
+| Contact geometry | Paper 4 | Sec 5 | Conjecture |
+| Comprehensive framework | Paper 5 | All | Conjecture |
 
 ---
 
