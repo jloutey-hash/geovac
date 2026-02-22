@@ -2,8 +2,8 @@
 
 ## 🌍 Project Context
 **Name:** GeoVac (The Geometric Vacuum)
-**Mission:** Spectral Graph Theory approach to Computational Quantum Chemistry. We map the Schrodinger equation onto graph topologies and replace expensive continuous integration with highly efficient O(N) sparse matrix eigenvalue problems.
-**Core Theory:** Papers 0-1 in `papers/core/` (graph Laplacian mechanics, universal constant)
+**Mission:** Spectral Graph Theory approach to Computational Quantum Chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (homologous to the unit S³). The continuous Schrodinger equation and its 1/r potential are mathematical artifacts of projecting this topology into flat R³ coordinates via stereographic projection. We replace expensive continuous integration with highly efficient O(N) sparse matrix eigenvalue problems.
+**Core Theory:** Papers 0-1, 7 in `papers/core/` (graph Laplacian mechanics, universal constant, dimensionless vacuum)
 **Conjectures:** Papers 2-5 in `papers/conjectures/` (emergent spacetime, alpha derivation, holography — exploratory)
 
 ---
@@ -15,7 +15,7 @@
 ### **Core Directories**
 - `geovac/` → Core package source code (`__init__.py`, `hamiltonian.py`, `lattice.py`, `dynamics.py`, etc.)
 - `papers/` → Theory papers, split into two tiers:
-  - `papers/core/` → **Defensible foundations.** Strictly testable O(N) sparse graph Laplacian implementations (Paper 0: geometric packing & universal constant, Paper 1: spectral graph theory & eigenvalue methods)
+  - `papers/core/` → **Defensible foundations.** Strictly testable O(N) sparse graph Laplacian implementations (Paper 0: geometric packing & universal constant, Paper 1: spectral graph theory & eigenvalue methods, Paper 7: dimensionless vacuum & Schrodinger recovery)
   - `papers/conjectures/` → **Theoretical physics explorations.** Speculative extensions beyond computational QC (Paper 2: alpha derivation, Paper 3: holography, Paper 4: universality, Paper 5: geometric vacuum synthesis, FAQ)
 - `tests/` → Unit tests and validation suites (pytest format)
 
@@ -151,6 +151,30 @@ for state in states:
 
 ---
 
+## 🔬 The Dimensionless Vacuum Principle (CRITICAL)
+
+This principle governs all development on the GeoVac codebase. It was formally proven via 18/18 symbolic proofs (`tests/test_fock_projection.py`, `tests/test_fock_laplacian.py`) and documented in Paper 7.
+
+### **The Principle**
+The discrete graph Laplacian has **no intrinsic physical scale**. It is a pure, dimensionless combinatorial topology homologous to the unit three-sphere S³. The continuous Schrodinger equation — including the 1/r Coulomb potential and dimensionful energy levels E_n = -1/(2n²) — is **not fundamental**. It is a mathematical artifact that emerges strictly from projecting this dimensionless topology into flat R³ coordinates via Fock's 1935 stereographic projection.
+
+### **Prime Directive**
+**Never attempt to modify the discrete graph Laplacian to artificially recover continuous differential terms (like 1/r or ∇²).** The graph is an exact, dimensionless S³ topology. The Schrodinger equation is merely its flat-space projection. If the graph eigenvalues do not match expected physics, the issue is in the projection or the energy-shell constraint — not in the graph itself.
+
+### **Key Mathematical Facts**
+1. **Conformal factor** Ω = 2p₀/(p² + p₀²) always produces the **unit** S³, regardless of p₀. The intrinsic geometry has no scale.
+2. **Eigenvalues** of the Laplace-Beltrami operator on unit S³ are pure integers: λ_n = -(n² - 1). No physical dimensions.
+3. **Energy** enters only through the energy-shell constraint p₀² = -2E, which acts as a "stereographic focal length." Energy is the coordinate penalty for flattening curved topology.
+4. **The 1/r Coulomb potential** is not an input force law — it is the coordinate distortion created by the stereographic projection (chordal distance identity).
+
+### **Topological Integrity Test**
+The symbolic validation suite (`tests/test_fock_projection.py` + `tests/test_fock_laplacian.py`) is the **foundational topological integrity check** for the entire framework. These 18 tests must:
+- **Never be broken or bypassed** by any code change
+- **Always pass** before any release
+- Be run alongside physics benchmarks: `pytest tests/test_fock_projection.py tests/test_fock_laplacian.py -v`
+
+---
+
 ## 🧪 Workflow Protocols
 
 ### **1. The "Theory Check" Rule**
@@ -172,12 +196,14 @@ AI: "Found! Section 3.2 has the derivation. Implementing now."
 
 After **any** modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 
-1. Run validation: `pytest tests/advanced_benchmarks.py`
-2. Verify **H2+** < 0.1% error (The Topological Control)
-3. Verify **H2 Full CI** < 1.0% error (The Accuracy Control)
-4. Report any speed regression > 10%
+1. Run topological integrity: `pytest tests/test_fock_projection.py tests/test_fock_laplacian.py -v`
+2. Run validation: `pytest tests/advanced_benchmarks.py`
+3. Verify **18/18 symbolic proofs pass** (The Topological Foundation)
+4. Verify **H2+** < 0.1% error (The Topological Control)
+5. Verify **H2 Full CI** < 1.0% error (The Accuracy Control)
+6. Report any speed regression > 10%
 
-**Rationale:** H2+ (single-electron) validates topology. H2 Full CI validates physics.
+**Rationale:** Symbolic proofs validate the mathematical foundation. H2+ validates topology. H2 Full CI validates physics.
 
 ### **3. The "Clean Room" Rule**
 
@@ -203,6 +229,7 @@ mv test_something.py debug/
 - **Mass-Independence:** All holographic properties (d_s, c, topology) are mass-invariant
 
 ### **Validation Benchmarks** (Critical Tests)
+- **Topological Integrity:** 18/18 symbolic proofs must pass → validates S³ conformal geometry (FOUNDATIONAL)
 - **H2+ (Single-electron):** Must be < 0.1% error → validates topology
 - **H2 Full CI:** Must be < 1.0% error → validates physics
 - **Muonic H:** Energy ratio = 206.77, topology identical → validates mass-independence
@@ -213,6 +240,7 @@ mv test_something.py debug/
 - **Core (`papers/core/`):**
   - **Paper 0:** Geometric packing framework and universal constant K = -1/16
   - **Paper 1:** Spectral graph theory foundations and eigenvalue methods
+  - **Paper 7:** The Dimensionless Vacuum — formal proof that the graph Laplacian is a scale-invariant unit S³ topology and the Schrodinger equation is its flat-space projection (18/18 symbolic proofs)
 - **Conjectures (`papers/conjectures/`):**
   - **Paper 2:** Fine structure constant (α⁻¹) derivation (geometric ansatz)
   - **Paper 3:** Holographic entropy, spectral dimension, central charge
@@ -272,6 +300,9 @@ mv test_something.py debug/
 ```bash
 # Run all tests
 pytest tests/
+
+# Run topological integrity proofs (MUST pass before any release)
+pytest tests/test_fock_projection.py tests/test_fock_laplacian.py -v
 
 # Run advanced benchmarks (muonic H, holography, etc.)
 pytest tests/advanced_benchmarks.py -v
@@ -376,6 +407,7 @@ python debug/test_install.py
 ### **"What's the error tolerance?"**
 | Test | Max Error | Purpose |
 |:---|:---:|:---|
+| Symbolic proofs (18 tests) | 0 failures | **Topological foundation** |
 | H (hydrogen) | < 0.1% | Basic validation |
 | He+ (helium ion) | < 0.1% | Z-scaling check |
 | H2+ (ionized H2) | < 0.1% | **Topological control** |
@@ -396,16 +428,20 @@ python debug/test_install.py
 | Muonic hydrogen | Paper 4 | Sec 5 | Conjecture |
 | Contact geometry | Paper 4 | Sec 5 | Conjecture |
 | Comprehensive framework | Paper 5 | All | Conjecture |
+| **Dimensionless vacuum** | **Paper 7** | **All** | **Core** |
+| Schrodinger recovery proof | Paper 7 | Sec 4 | Core |
+| S³ conformal geometry | Paper 7 | Sec 3 | Core |
 
 ---
 
 ## 📖 Version History
 
+- **v2.0** (Feb 22, 2026): Added Dimensionless Vacuum Principle, Paper 7, topological integrity tests
 - **v1.0** (Feb 14, 2026): Complete rewrite with directory structure, file naming, workflows
 - **v0.1** (Feb 11, 2026): Initial version (basic guidelines only)
 
 ---
 
-**Last Updated:** February 14, 2026
+**Last Updated:** February 22, 2026
 **Status:** Active (official project guidelines)
 **Compliance:** All current files organized per these standards

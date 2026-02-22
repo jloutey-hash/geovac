@@ -1163,11 +1163,18 @@ class MoleculeHamiltonian:
             Physical interpretation: the nucleus is a topological defect with
             torsion spin J that deforms the local metric near the core.
         bridge_amplitude : float, optional
-            Pre-exponential factor A for bridge weight W = A * exp(-lambda * R).
-            Default: 1.0
+            Pre-exponential factor A for bridge weight. Default: 1.0
         bridge_decay_rate : float, optional
-            Exponential decay rate lambda (1/Bohr) for distance-dependent bridges.
-            W_bridge = bridge_amplitude * exp(-bridge_decay_rate * R_AB).
+            Reserved for backward compatibility. Bridge weights now use
+            the exact 1s-1s Slater-type orbital overlap integral:
+
+                W_bridge = A * S(R)
+                S(R) = (1 + R + R²/3) * exp(-R)
+
+            where R is the internuclear distance in Bohr. The polynomial
+            prefactor is the analytic overlap of two hydrogenic 1s STOs.
+            No fitted decay parameter is needed — the physics is exact.
+
             Default: 1.0. Set to 0.0 for flat (distance-independent) bridges.
 
         Example:
@@ -1289,8 +1296,12 @@ class MoleculeHamiltonian:
             for row, col, weight in zip(adj.row, adj.col, adj.data):
                 self.adjacency[offset + row, offset + col] = weight
         
-        # Add bridge connections with distance-dependent weights
-        # W_bridge = A * exp(-lambda * R_AB)  (tunneling decay law)
+        # Add bridge connections with exact STO 1s-1s overlap weights
+        # S(R) = (1 + R + R^2/3) * exp(-R)
+        # This is the analytic overlap integral of two hydrogenic 1s
+        # Slater-type orbitals separated by internuclear distance R (Bohr).
+        # No fitted decay parameter — the polynomial-exponential form
+        # is the exact spatial overlap of the electron wavefunctions.
         self.bridge_info = []
         for atom_i, atom_j, n_bridges in self.connectivity:
             lattice_i = self.lattices[atom_i]
@@ -1298,14 +1309,14 @@ class MoleculeHamiltonian:
             offset_i = offsets[atom_i]
             offset_j = offsets[atom_j]
 
-            # Distance-dependent bridge weight
+            # Internuclear distance
             R_AB = np.linalg.norm(
                 lattice_i.nucleus_position - lattice_j.nucleus_position
             )
             if R_AB > 1e-10 and self.bridge_decay_rate > 0.0:
-                bridge_weight = self.bridge_amplitude * np.exp(
-                    -self.bridge_decay_rate * R_AB
-                )
+                # Exact 1s STO overlap: S(R) = (1 + R + R²/3) * exp(-R)
+                S_R = (1.0 + R_AB + R_AB**2 / 3.0) * np.exp(-R_AB)
+                bridge_weight = self.bridge_amplitude * S_R
             else:
                 bridge_weight = self.bridge_amplitude
 
@@ -1633,10 +1644,20 @@ class MoleculeHamiltonian:
 
         try:
             eigvals, eigvecs = eigsh(H_total, k=k, which='SA')
-            print(f"  [OK] Full CI ground state energy: {eigvals[0]:.6f} Ha")
-            return eigvals, eigvecs
         except Exception as e:
             raise RuntimeError(f"Full CI eigenvalue computation failed: {str(e)}")
+
+        # Add nuclear-nuclear repulsion V_NN (Born-Oppenheimer)
+        # V_NN = +Z_A*Z_B / R_AB is strictly positive and unscaled.
+        # It is a classical Coulomb repulsion between bare nuclei
+        # and shifts ALL electronic eigenvalues uniformly upward.
+        V_NN = self.compute_nuclear_repulsion()
+        if V_NN > 0.0:
+            eigvals = eigvals + V_NN
+            print(f"  [OK] Nuclear repulsion V_NN: +{V_NN:.6f} Ha")
+
+        print(f"  [OK] Full CI ground state energy (E_elec + V_NN): {eigvals[0]:.6f} Ha")
+        return eigvals, eigvecs
 
     def _build_cross_nuclear_attraction(self) -> Tuple[csr_matrix, csr_matrix]:
         """
