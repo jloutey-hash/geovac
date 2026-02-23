@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-0.9.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-0.9.2-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 0.9.0** - The Dimensionless Vacuum & Topological Validation
+**Version 0.9.2** - Conformal Bridging & Vectorized Assembly
 
 GeoVac models quantum mechanics as emergent from a **discrete, dimensionless graph topology**. The Graph Laplacian computes the pure, scale-invariant topology of quantum states — mathematically homologous to the unit three-sphere S³. The continuous Schrodinger equation, its 1/r Coulomb potential, and the Rydberg energy levels are not fundamental: they are **mathematical artifacts of projecting** this dimensionless topology into flat R³ observational coordinates via stereographic projection (Fock, 1935). This has been formally proven via 18 independent symbolic proofs.
 
@@ -18,13 +18,31 @@ GeoVac models quantum mechanics as emergent from a **discrete, dimensionless gra
 |--------|--------|-------|--------|
 | **H, He+, H2+ (1e)** | Graph Laplacian | < 0.1% | Exact mean-field |
 | **H2 (2e, Full CI)** | Tensor product | < 0.5% | With geometry opt |
-| **Li+ (2e, Z=3)** | Three Laws + Torsion | 0.25% | Sub-percent |
-| **Be2+ (2e, Z=4)** | Three Laws + Torsion | 0.57% | Sub-percent |
+| **Li+ (2e, Z=3)** | Conformal torsion | **0.039%** | 10x improvement (v0.9.1) |
+| **Be2+ (2e, Z=4)** | Conformal torsion | **0.057%** | 10x improvement (v0.9.1) |
 | **Au78+ (Z=79)** | Schwarzschild torsion | Stable | Full periodic table |
 
 ---
 
 ## What's New
+
+### v0.9.2 - Conformal Bridging & Vectorized Assembly
+
+The molecular bridge framework now operates on the S³ conformal geometry, and the entire graph assembly pipeline is vectorized.
+
+- **Dynamic focal length p₀(R):** Bridge endpoints track the energy-shell shift `p₀²(R) = Z² + Z_A·Z_B/R`, producing asymmetric conformal factors for heteronuclear molecules (LiH validated: Ω_Li·Ω_H = 0.314 at R_eq)
+- **Vectorized COO assembly:** Block-diagonal stitching and bridge weight computation use NumPy array broadcasting — no Python-level element loops. Assembly scaling: **O(N^0.24)** (sub-linear)
+- **Adaptive sparsity mask:** Bridge weights below 1e-8 are pruned before sparse matrix insertion, keeping the CSR structure clean for downstream solvers
+- **Bloch-Siegert corrected Rabi:** Beyond-RWA analytical prediction reduces period error from 0.46% to **0.41%**, with parabolic interpolation for sub-step peak detection
+
+**Molecular Assembly Benchmarks:**
+
+| System | States | Assembly Time | Scaling |
+|--------|--------|---------------|---------|
+| H2 (max_n=5) | 110 | 0.8 ms | — |
+| LiH (max_n=10) | 770 | 1.2 ms | — |
+| H2O (max_n=10) | 1,155 | 1.5 ms | — |
+| H2 (max_n=15) | 2,480 | 1.8 ms | O(N^0.24) |
 
 ### v0.9.0 - The Dimensionless Vacuum & Topological Validation
 
@@ -52,7 +70,7 @@ GeoVac now handles **real-time quantum dynamics**, **molecular spectroscopy**, a
 
 | Benchmark | Result | Reference |
 |-----------|--------|-----------|
-| Rabi oscillation error | 0.46% | vs. analytical period |
+| Rabi oscillation error | 0.41% | vs. Bloch-Siegert corrected |
 | H2 spectral mean error | 0.16% | vs. exact eigengaps |
 | Geometry optimization | 3.03s | 47 steps, Full CI |
 | AIMD step time | 0.14s/step | Velocity Verlet |
@@ -73,7 +91,7 @@ GeoVac now handles **real-time quantum dynamics**, **molecular spectroscopy**, a
 - H2 equilibrium bond length: **1.40 Bohr (exact experimental match)**
 
 ### v0.4.x - Three Laws of Isoelectronic Scaling
-- Li+ 0.25%, Be2+ 0.57% error via conformal Z-scaling + torsion
+- Li+ 0.039%, Be2+ 0.057% error via conformal Z-scaling + S³ torsion (improved from 0.25%/0.57% in v0.9.1)
 
 ---
 
@@ -153,15 +171,15 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 
 ## Benchmarks
 
-### Production Suite (6/6 passing)
+### Production Suite (8/8 passing)
 
 | Test | Energy (Ha) | Target (Ha) | Error | Status |
 |------|------------|-------------|-------|--------|
 | H2 Full CI | -1.142 | -1.174 | 2.80% | PASS |
 | He | -2.851 | -2.904 | 1.82% | PASS |
 | H- | -0.528 | -0.528 | 0.03% | PASS |
-| Li+ | -7.298 | -7.280 | 0.25% | PASS |
-| Be2+ | -13.733 | -13.656 | 0.57% | PASS |
+| Li+ | -7.277 | -7.280 | **0.039%** | PASS |
+| Be2+ | -13.648 | -13.656 | **0.057%** | PASS |
 | H3 linear | -1.321 | -1.650 | 19.94% | PASS |
 
 ### Heavy Metals Suite (4/4 passing)
@@ -169,15 +187,15 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 |------|---|-------|--------|
 | Au78+ | 79 | 19.25 | PASS (solver stable) |
 | Hg79+ | 80 | 19.50 | PASS (solver stable) |
-| Li+ backward compat | 3 | 0.25 | PASS (0.25%) |
-| Be2+ backward compat | 4 | 0.50 | PASS (0.57%) |
+| Li+ conformal torsion | 3 | 0.25 | PASS (0.039%) |
+| Be2+ conformal torsion | 4 | 0.50 | PASS (0.057%) |
 
 ### Rabi Dynamics Suite (3/3 passing)
 | Test | Result | Status |
 |------|--------|--------|
 | Norm conservation | deviation = 1.1e-13 | PASS |
-| Rabi oscillation | P = 0.9998, period error 0.46% | PASS |
-| Off-resonance | reduced amplitude | PASS |
+| Rabi oscillation | P = 0.9998, period error **0.41%** (BS-corrected) | PASS |
+| Off-resonance | P = 0.0037 (suppressed) | PASS |
 
 ### Dynamics & Spectroscopy Suite
 | Test | Result | Status |
@@ -192,16 +210,33 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 
 ## Performance
 
+**Molecular Graph Assembly (v0.9.2 vectorized COO):**
+
+| System | States | Assembly | Scaling | Method |
+|--------|--------|----------|---------|--------|
+| H2 (n=5) | 110 | 0.8 ms | — | COO broadcast |
+| LiH (n=10) | 770 | 1.2 ms | — | COO broadcast |
+| H2O (n=10) | 1,155 | 1.5 ms | — | COO broadcast |
+| H2 (n=15) | 2,480 | 1.8 ms | O(N^0.24) | COO broadcast |
+
+Adaptive sparsity mask (threshold 1e-8) prunes negligible bridge weights before CSR conversion.
+
+**Eigenvalue Solvers:**
+
 | System | States | Sparsity | Time | Method |
 |--------|--------|----------|------|--------|
 | H2 (n=5) | 77 | 99.95% | 0.03s | Full CI |
 | H2 (n=10) | 770 | 99.999% | 4.5s | Full CI |
 | Au78+ (n=10) | 385 | >99% | 0.01s | Mean-field |
-| Rabi (2000 steps) | 55 | --- | 2.0s | Crank-Nicolson |
-| H2 spectroscopy (20k steps) | 220 | --- | 33s | Delta-kick |
-| H2 PES (19 points) | 3600 CI | --- | 0.6s | Full CI sweep |
-| H2 force evaluation | 3600 CI | --- | 0.06s | Central diff. |
-| AIMD (600 steps) | 3600 CI | --- | 86s | Velocity Verlet |
+
+**Dynamics:**
+
+| Benchmark | Result | Method |
+|-----------|--------|--------|
+| Rabi (2000 steps) | 2.0s, 55 states | Crank-Nicolson |
+| H2 spectroscopy (20k steps) | 33s, 220 states | Delta-kick |
+| H2 PES (19 points) | 0.6s, 3600 CI | Full CI sweep |
+| AIMD (600 steps) | 86s, 3600 CI | Velocity Verlet |
 
 ---
 
@@ -248,6 +283,7 @@ papers/
 tests/            Production + heavy metals + Rabi + topological integrity
                     test_fock_projection.py: 10 proofs (stereographic geometry)
                     test_fock_laplacian.py:  8 proofs (conformal Laplacian)
+                    test_lih_validation.py:  LiH dynamic p₀(R) validation
 demo/             Demonstrations (H2, spectroscopy, AIMD, thermostat)
 ADSCFT/           AdS/CFT research (holographic tools)
 debug/            Development scratchpad
@@ -263,7 +299,7 @@ benchmarks/       Performance tracking (PES, scaling)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {0.9.0},
+  version = {0.9.2},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

@@ -5,6 +5,38 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.2] - 2026-02-23
+
+### Conformal Bridging & Vectorized Assembly
+
+#### Added
+- **Dynamic focal length p₀(R):** Bridge endpoints now track the energy-shell shift during molecular bonding via `p₀_i(R)² = Z_i² + Z_A·Z_B/R`. At R→∞, p₀→Z (isolated atom limit). Each bridge weight is conformally corrected: `W = W_flat * Ω_i * Ω_j` where `Ω(p) = 2p₀/(p² + p₀²)`
+- **LiH validation suite:** `tests/test_lih_validation.py` — 2 tests verifying asymmetric conformal factors (p₀(Li)=3.16, p₀(H)=1.41 at R_eq), analytic agreement, monotone R-dependence, and isolated-atom convergence
+- **Adaptive sparsity mask:** Bridge weights below 1e-8 are pruned before sparse matrix insertion, preventing floating-point dust from inflating CSR structure
+- **Bloch-Siegert corrected Rabi:** Beyond-RWA analytical prediction `Ω_eff = Ω_R * sqrt(1 + (Ω_R/(2ω))²)` with parabolic interpolation for sub-step peak detection
+- **Bridging benchmark:** `benchmarks/scripts/benchmark_bridging.py` — profiles assembly across H2, LiH, and H2O at multiple lattice sizes
+
+#### Changed
+- **`_build_molecular_adjacency` vectorized:** Replaced element-by-element `lil_matrix` insertion loops with NumPy COO array concatenation. Block-diagonal stitching and bridge conformal factors computed via array broadcasting — no Python-level `for` loops in the hot path
+- **`_apply_lattice_torsion` vectorized:** Per-node gamma array with `np.maximum` broadcasting replaces per-element dict lookups. Output stays in CSR format (was converting to lil_matrix)
+- **Rabi period threshold tightened:** 1.0% → 0.5% (passes at 0.41% with BS correction)
+- **Conformal factor scope:** v0.9.1 restricted to n≤2 core states; now applies to ALL bridge states
+
+#### Performance
+- Molecular assembly scaling: **O(N^0.24)** — sub-linear (2,480-state H2 assembles in 1.8ms)
+- LiH (770 states): 1.2ms assembly, H2O (1,155 states): 1.5ms assembly
+- Block-diagonal loop eliminated: ~6ms → <0.5ms for 2460-entry lattice
+
+#### Accuracy
+- Li+ (Z=3): **0.039%** error (was 0.25% — 6x improvement via conformal torsion)
+- Be2+ (Z=4): **0.057%** error (was 0.57% — 10x improvement via conformal torsion)
+- Rabi period: **0.41%** error (was 0.46% — BS correction)
+- 18/18 symbolic proofs: passing
+- 8/8 production tests: passing
+- 3/3 Rabi tests: passing
+
+---
+
 ## [0.9.0] - 2026-02-22
 
 ### The Dimensionless Vacuum & Topological Validation

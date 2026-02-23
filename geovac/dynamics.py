@@ -186,6 +186,66 @@ class TimePropagator:
         return psi
 
     @staticmethod
+    def smooth_boundary(H: csr_matrix, lattice: GeometricLattice,
+                        alpha: float = 2.0) -> csr_matrix:
+        """
+        Apply topological boundary smoothing to suppress spectral aliasing.
+
+        The finite lattice has a hard cutoff at n = max_n. States near this
+        boundary have artificial eigenvalues because they lack proper
+        connections to higher-n states. This contamination introduces
+        spurious frequencies into time evolution (Rabi oscillations,
+        spectroscopy).
+
+        Smoothing applies a Gaussian damping factor to Hamiltonian matrix
+        elements involving boundary states:
+
+            H_ij -> H_ij * f(n_i) * f(n_j)
+
+        where f(n) = exp(-alpha * max(0, n - n_thresh)^2) and
+        n_thresh = max_n - 2.
+
+        Only off-diagonal elements are damped (diagonal potential is physical).
+        This preserves the energy levels of low-n states while suppressing
+        the coupling to boundary artifacts.
+
+        Parameters
+        ----------
+        H : csr_matrix
+            Hamiltonian matrix (sparse)
+        lattice : GeometricLattice
+            Lattice with states list for n-quantum-number lookup
+        alpha : float
+            Damping strength (default: 2.0). Larger = stronger smoothing.
+
+        Returns
+        -------
+        H_smooth : csr_matrix
+            Smoothed Hamiltonian (sparse)
+        """
+        max_n = lattice.max_n
+        # For small lattices (max_n <= 5), only damp the outermost shell.
+        # For larger lattices, damp the last 2 shells.
+        n_thresh = max(1, max_n - 1 if max_n <= 5 else max_n - 2)
+
+        # Build per-state damping factors (vectorized)
+        n_vals = np.array([s[0] for s in lattice.states], dtype=np.float64)
+        excess = np.maximum(0.0, n_vals - n_thresh)
+        damping = np.exp(-alpha * excess * excess)
+
+        # Apply damping to off-diagonal elements only (vectorized)
+        H_coo = H.tocoo()
+        new_data = H_coo.data.copy().astype(float)
+
+        off_diag = H_coo.row != H_coo.col
+        new_data[off_diag] *= damping[H_coo.row[off_diag]] * damping[H_coo.col[off_diag]]
+
+        from scipy.sparse import coo_matrix
+        H_smooth = coo_matrix((new_data, (H_coo.row, H_coo.col)),
+                              shape=H.shape).tocsr()
+        return H_smooth
+
+    @staticmethod
     def build_dipole_z(lattice: GeometricLattice) -> csr_matrix:
         """
         Build the z-component of the electric dipole operator.
