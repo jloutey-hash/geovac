@@ -2,7 +2,7 @@
 
 ## 🌍 Project Context
 **Name:** GeoVac (The Geometric Vacuum)
-**Mission:** Spectral Graph Theory approach to Computational Quantum Chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (homologous to the unit S³). The continuous Schrodinger equation and its 1/r potential are mathematical artifacts of projecting this topology into flat R³ coordinates via stereographic projection. We replace expensive continuous integration with highly efficient O(N) sparse matrix eigenvalue problems.
+**Mission:** Spectral Graph Theory approach to Computational Quantum Chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (homologous to the unit S³) that is *mathematically equivalent* to the Schrödinger equation via Fock's 1935 conformal projection, as proven in Paper 7. This equivalence is exploited computationally to replace expensive continuous integration with highly efficient O(N) sparse matrix eigenvalue problems.
 **Core Theory:** Papers 0-1, 7 in `papers/core/` (graph Laplacian mechanics, universal constant, dimensionless vacuum)
 **Conjectures:** Papers 2-5 in `papers/conjectures/` (emergent spacetime, alpha derivation, holography — exploratory)
 
@@ -156,7 +156,10 @@ for state in states:
 This principle governs all development on the GeoVac codebase. It was formally proven via 18/18 symbolic proofs (`tests/test_fock_projection.py`, `tests/test_fock_laplacian.py`) and documented in Paper 7.
 
 ### **The Principle**
-The discrete graph Laplacian has **no intrinsic physical scale**. It is a pure, dimensionless combinatorial topology homologous to the unit three-sphere S³. The continuous Schrodinger equation — including the 1/r Coulomb potential and dimensionful energy levels E_n = -1/(2n²) — is **not fundamental**. It is a mathematical artifact that emerges strictly from projecting this dimensionless topology into flat R³ coordinates via Fock's 1935 stereographic projection.
+The discrete graph Laplacian has **no intrinsic physical scale**. It is a pure, dimensionless combinatorial topology homologous to the unit three-sphere S³. The continuous Schrodinger equation — including the 1/r Coulomb potential and dimensionful energy levels E_n = -1/(2n²) — emerges from projecting this dimensionless topology into flat R³ coordinates via Fock's 1935 stereographic projection.
+
+### **Mathematical Equivalence vs. Physical Priority**
+The 18 symbolic proofs establish a *mathematical equivalence* between the discrete graph, the unit S³, and the Schrödinger equation — not a proof that the graph is physically more fundamental. Per Paper 7 Section VI.B, these are equivalent representations under conformal projection. Claims about ontological priority are interpretive, not proven. Code and documentation should reflect this distinction.
 
 ### **Prime Directive**
 **Never attempt to modify the discrete graph Laplacian to artificially recover continuous differential terms (like 1/r or ∇²).** The graph is an exact, dimensionless S³ topology. The Schrodinger equation is merely its flat-space projection. If the graph eigenvalues do not match expected physics, the issue is in the projection or the energy-shell constraint — not in the graph itself.
@@ -184,6 +187,8 @@ Before implementing new physics (e.g., relativistic corrections, new potentials)
 1. **Check `papers/`** to see if the derivation exists
 2. **If code contradicts paper** → Flag it and ask user
 3. **If we change physics in code** → Prompt user to update papers/README
+
+**Authoritative source:** The core papers (`papers/core/`) — Paper 0, Paper 1, Paper 6, and Paper 7 — are the authoritative theoretical source. If the README or any documentation conflicts with these papers, the papers take precedence. Flag the conflict to the user rather than silently resolving it in favor of the README.
 
 **Example:**
 ```
@@ -358,6 +363,8 @@ python debug/test_install.py
 3. ✅ Check `CHANGELOG.md` for recent changes
 4. ✅ **Ask user** if unsure about physics interpretation
 
+**Authoritative source:** The core papers (`papers/core/`) — Paper 0, Paper 1, Paper 6, and Paper 7 — take precedence over README and all other documentation. If a conflict is found, flag it to the user rather than silently resolving it in favor of the README.
+
 ### **When Writing New Code**
 1. Read relevant sections from `papers/Paper_*.tex`
 2. Follow existing patterns in `geovac/` modules
@@ -420,6 +427,10 @@ python debug/test_install.py
 |:---|:---:|:---|:---:|
 | Universal constant -1/16 | Paper 0 | Sec 2 | Core |
 | Graph Laplacian method | Paper 1 | Sec 3 | Core |
+| O(V) quantum dynamics | Paper 6 | All | Core |
+| Rabi oscillations | Paper 6 | — | Core |
+| Delta-kick spectroscopy | Paper 6 | — | Core |
+| AIMD / Langevin thermostat | Paper 6 | — | Core |
 | Fine structure α⁻¹ | Paper 2 | Sec 4-6 | Conjecture |
 | Spectral dimension d_s | Paper 3 | Sec 4 | Conjecture |
 | Holographic entropy S | Paper 3 | Sec 5 | Conjecture |
@@ -436,12 +447,13 @@ python debug/test_install.py
 
 ## 📖 Version History
 
+- **v2.1** (Feb 27, 2026): Clarified mathematical equivalence vs. physical priority framing; added Paper 6 to core reference table; established core papers as authoritative source over README
 - **v2.0** (Feb 22, 2026): Added Dimensionless Vacuum Principle, Paper 7, topological integrity tests
 - **v1.0** (Feb 14, 2026): Complete rewrite with directory structure, file naming, workflows
 - **v0.1** (Feb 11, 2026): Initial version (basic guidelines only)
 
 ---
 
-**Last Updated:** February 22, 2026
+**Last Updated:** February 27, 2026
 **Status:** Active (official project guidelines)
 **Compliance:** All current files organized per these standards

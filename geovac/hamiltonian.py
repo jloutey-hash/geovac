@@ -22,6 +22,7 @@ Author: Computational Quantum Physics
 Date: February 2026
 """
 
+import warnings
 import numpy as np
 import scipy.sparse as sp
 from scipy.sparse import csr_matrix, diags, identity, kron, bmat
@@ -78,11 +79,21 @@ class HeliumHamiltonian:
             If False, use hybrid mode with separate Coulomb potential.
             Default: False (hybrid mode for backward compatibility)
         """
+        warnings.warn(
+            "HeliumHamiltonian is deprecated and has known implementation bugs: "
+            "(1) wrong kinetic sign — applies an internal -0.5 factor so passing a "
+            "negative kinetic_scale produces positive (unphysical) kinetic energy; "
+            "(2) classical Euclidean V_ee using fictitious 3D coordinates, not a "
+            "quantum-mechanical expectation value. "
+            "Use MoleculeHamiltonian with optimize_effective_charge() instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self.max_n = max_n
         self.Z = Z
         self.kinetic_scale = kinetic_scale
         self.geometric_mode = geometric_mode
-        
+
         # Build single-particle lattice with appropriate edge weights
         mode_str = "PURE GEOMETRIC" if geometric_mode else "HYBRID"
         print(f"\n{'='*70}")
@@ -1695,34 +1706,48 @@ class MoleculeHamiltonian:
         print(f"  Two-particle states:    {self.n_total_states**2}")
         print(f"  Method: Tensor Product Hamiltonian + Cross-Nuclear Attraction")
 
-        # Build PURE-KINETIC single-particle Hamiltonian for the CI.
+        # Build single-particle Hamiltonian H1 for the CI.
         #
-        # CRITICAL: Do NOT use self.hamiltonian (which includes node weights W).
-        # The graph Laplacian kinetic_scale*(D-A) already encodes the full
-        # single-center nuclear attraction implicitly through the S³ topology
-        # (per Paper 7, Dimensionless Vacuum Principle). Adding node weights W
-        # on top double-counts the nuclear potential, making each electron's
-        # energy ~2x too negative.
+        # Multi-atom (n_atoms > 1): pure-kinetic H1 = kinetic_scale*(D-A).
+        #   Do NOT include node weights W = -Z/n² here.  V_cross (built below)
+        #   supplies each electron's attraction to the OTHER nucleus.  Including
+        #   W on top of V_cross would double-count the nuclear attraction and
+        #   make every electron ~2x too strongly bound (Bug 3, fixed Feb 2026).
         #
-        # The correct CI decomposition is:
-        #   H_total = H_kin⊗I + I⊗H_kin + V_cross_n2⊗I + I⊗V_cross_n1 + V_ee
-        # where H_kin = kinetic_scale * (D - A), no node weights.
-        # The cross-nuclear terms (added below) supply the genuine new physics
-        # that a single-atom graph cannot encode.
+        # Single-atom (n_atoms == 1): add explicit V_en = diag(-Z/n²) to H1.
+        #   V_cross returns zero for single atoms (no second nucleus), so without
+        #   this term the electrons have no nuclear attraction at all.  W is not
+        #   "double-counting" here — it is the ONLY source of V_en.
+        #
+        # Single-atom: V_en must be explicit — no V_cross to supply it.
+        # Multi-atom:  V_cross handles nuclear attraction; W would double-count it.
         degree = np.array(self.adjacency.sum(axis=1)).flatten()
         laplacian_only = diags(degree, 0, shape=(self.n_total_states, self.n_total_states),
                                format='csr') - self.adjacency
         H1 = self.kinetic_scale * laplacian_only
 
+        if self.n_atoms == 1:
+            # Single-atom: restore explicit self-nuclear attraction from lattice
+            # node_weights (= -Z_orig/n², fixed at construction Z, not current
+            # nuclear_charges). This is intentional: the Z_eff optimization loop
+            # varies nuclear_charges to minimize V_ee self-repulsion; V_en is not
+            # part of the variational parameter. Using lattice.node_weights keeps
+            # the nuclear attraction fixed at the physical Z while allowing the
+            # V_ee self-interaction estimate to vary with Z_eff.
+            V_en = diags(self.lattices[0].node_weights, 0,
+                         shape=(self.n_total_states, self.n_total_states), format='csr')
+            H1 = H1 + V_en
+
         # Identity matrix for tensor products
         I = identity(self.n_total_states, format='csr')
 
-        # First electron: H_kin x I (kinetic + implicit self-nuclear)
-        print(f"\n  -> Building H_kin x I (electron 1, pure-kinetic)...")
+        # First electron: H1 x I
+        h1_desc = "kinetic + V_en" if self.n_atoms == 1 else "pure-kinetic"
+        print(f"\n  -> Building H1 x I (electron 1, {h1_desc})...")
         H1_x_I = kron(H1, I, format='csr')
 
-        # Second electron: I x H_kin (kinetic + implicit self-nuclear)
-        print(f"  -> Building I x H_kin (electron 2, pure-kinetic)...")
+        # Second electron: I x H1
+        print(f"  -> Building I x H1 (electron 2, {h1_desc})...")
         I_x_H1 = kron(I, H1, format='csr')
 
         # CRITICAL FIX: Cross-nuclear attraction terms

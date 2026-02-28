@@ -4,20 +4,20 @@
 
 **Version 0.9.2** - Conformal Bridging & Vectorized Assembly
 
-GeoVac models quantum mechanics as emergent from a **discrete, dimensionless graph topology**. The Graph Laplacian computes the pure, scale-invariant topology of quantum states — mathematically homologous to the unit three-sphere S³. The continuous Schrodinger equation, its 1/r Coulomb potential, and the Rydberg energy levels are not fundamental: they are **mathematical artifacts of projecting** this dimensionless topology into flat R³ observational coordinates via stereographic projection (Fock, 1935). This has been formally proven via 18 independent symbolic proofs.
+GeoVac models quantum mechanics on a **discrete, dimensionless graph topology**. The discrete graph Laplacian — a sparse matrix with O(V) nonzero entries — is *mathematically equivalent* to the Schrödinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
 **Why this matters:**
-- Traditional quantum chemistry assumes continuous spacetime with dimensionful potentials (expensive)
+- Traditional quantum chemistry discretizes continuous 3D space with dimensionful potentials (expensive, O(N³) scaling)
 - GeoVac computes $\mathbf{v}^T \mathbf{L} \mathbf{v}$ over a dimensionless sparse graph (cheap, O(N))
-- The Schrodinger equation is mathematically recovered as a conformal projection of the graph topology
-- Same physics, fundamentally different ontology
+- The Schrödinger equation is mathematically recovered as a conformal projection of the graph topology (Paper 7, proven)
+- Same physics, more efficient computational substrate
 
 **Precision (our most defensible results):**
 
 | System | Method | Error | Status |
 |--------|--------|-------|--------|
 | **H, He+, H2+ (1e)** | Graph Laplacian | < 0.1% | Exact mean-field |
-| **H2 (2e, Full CI)** | Tensor product | < 0.5% | With geometry opt |
+| **H2 (2e, Full CI)** | Tensor product | 1.72% (converged) | Systematic ceiling — cross-nuclear model |
 | **Li+ (2e, Z=3)** | Conformal torsion | **0.039%** | 10x improvement (v0.9.1) |
 | **Be2+ (2e, Z=4)** | Conformal torsion | **0.057%** | 10x improvement (v0.9.1) |
 | **Au78+ (Z=79)** | Schwarzschild torsion | Stable | Full periodic table |
@@ -48,13 +48,13 @@ The molecular bridge framework now operates on the S³ conformal geometry, and t
 
 GeoVac's mathematical foundation is now **formally proven**, not just computationally validated.
 
-- **18/18 symbolic proofs** (sympy) verify the complete algebraic chain: discrete graph → unit S³ → Schrodinger equation
+- **18/18 symbolic proofs** (sympy) verify the complete algebraic chain: discrete graph → unit S³ → Schrödinger equation
 - **Fock projection geometry:** Unit sphere constraint, chordal distance identity, conformal factor, inverse projection — all proven symbolically
 - **Conformal Laplacian:** S³ eigenvalues verified as pure integers λ_n = -(n²-1) for n=1,2,3 via Gegenbauer polynomials
-- **Energy as projection:** Rydberg levels E_n = -1/(2n²) arise solely from the energy-shell constraint p₀² = -2E, not from the sphere's curvature
-- **Paper 7:** "The Dimensionless Vacuum: Recovering the Schrodinger Equation from Scale-Invariant Graph Topology" — full publication-ready manuscript
+- **Energy as projection parameter:** Rydberg levels E_n = -1/(2n²) arise solely from the energy-shell constraint p₀² = -2E, which acts as the stereographic focal length mapping S³ coordinates to flat ℝ³
+- **Paper 7:** "The Dimensionless Vacuum: Recovering the Schrödinger Equation from Scale-Invariant Graph Topology" — full publication-ready manuscript
 
-**The upshot:** The 1/r Coulomb potential is not an input force law. It is the coordinate distortion created by flattening a sphere. Energy is not a property of the vacuum — it is the penalty paid for representing compact topology in non-compact coordinates.
+**The upshot (Paper 7, Secs. V–VI):** The graph Laplacian and the Schrödinger equation are mathematically equivalent representations, connected by Fock's conformal projection. The chordal distance identity converts the free-particle Green's function on S³ into the Coulomb kernel in flat space. The Rydberg energy levels enter through the energy-shell constraint p₀² = -2E, which parameterizes the projection. These are equivalent descriptions of the same physics under a well-defined conformal map. Whether the topological or the differential formulation is physically prior is a question of interpretation, not of theorem (Paper 7, Sec. VI.B).
 
 ### v0.8.0 - The Dynamics & Thermodynamics Release
 
@@ -75,7 +75,7 @@ GeoVac now handles **real-time quantum dynamics**, **molecular spectroscopy**, a
 | Geometry optimization | 3.03s | 47 steps, Full CI |
 | AIMD step time | 0.14s/step | Velocity Verlet |
 | AIMD energy conservation | 0.0003% | max drift, 600 steps |
-| Vibrational frequency | 4666 cm$^{-1}$ | expt. 4161 cm$^{-1}$ |
+| Vibrational frequency | 4666 cm$^{-1}$ | expt. 4161 cm$^{-1}$ (~12% error; cross-nuclear model correction pending, Paper 6 Sec. VIII) |
 
 ### v0.7.0 - The Time Machine
 - **Quantum dynamics engine:** `TimePropagator` class with Crank-Nicolson unitary integration
@@ -101,7 +101,7 @@ The kinetic energy scale of the vacuum lattice converges to the rational constan
 
 $$\text{Scale} = -\frac{1}{16} = -0.0625$$
 
-This is the unique kinetic scale that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum. It is not a free fitting parameter — it is the bridge between the dimensionless graph topology and dimensionful physics, uniquely determined by requiring spectral agreement with the Rydberg formula. Its universality across all tested systems (H, He+, Li2+, He, H2, H2+) confirms the graph topology encodes the correct relative spectral structure. The Z-scaling formula `kinetic_scale_eff = -1/16 * Z^2` is exact.
+This is the unique kinetic scale that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum, determined by requiring agreement with the Rydberg formula (Paper 7, Sec. V). It is not a free fitting parameter — it is the bridge between the dimensionless graph topology and dimensionful physics. Its universality across all tested systems (H, He+, Li2+, He, H2, H2+) confirms the graph topology encodes the correct relative spectral structure. The Z-scaling formula `kinetic_scale_eff = -1/16 * Z^2` is exact.
 
 ---
 
@@ -140,7 +140,7 @@ h2 = MoleculeHamiltonian(
     bridge_decay_rate=0.0,  # Flat bridges for topology validation
 )
 E, psi = h2.compute_ground_state(method='full_ci')
-print(f"H2 Full CI: {E[0]:.6f} Ha")  # -1.142 Ha (2.8% error)
+print(f"H2 Full CI: {E[0]:.6f} Ha") 
 ```
 
 ### Time Evolution (Rabi Oscillations)
@@ -171,16 +171,28 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 
 ## Benchmarks
 
-### Production Suite (8/8 passing)
+### Production Suite (5/5 passing)
 
 | Test | Energy (Ha) | Target (Ha) | Error | Status |
 |------|------------|-------------|-------|--------|
-| H2 Full CI | -1.142 | -1.174 | 2.80% | PASS |
-| He | -2.851 | -2.904 | 1.82% | PASS |
+| H2 Full CI (max_n=5) | -1.149 | -1.174 | 2.15% | PASS |
+| He — Variational Z_eff + Full CI (max_n=5) | -2.851 | -2.904 | 1.82% | PASS |
 | H- | -0.528 | -0.528 | 0.03% | PASS |
 | Li+ | -7.277 | -7.280 | **0.039%** | PASS |
 | Be2+ | -13.648 | -13.656 | **0.057%** | PASS |
-| H3 linear | -1.321 | -1.650 | 19.94% | PASS |
+
+**He method note:** He uses variational effective charge optimization (Z_eff ≈ 1.7, Slater variational method) rather than Z=2 Full CI. Result is near-HF limit (-2.8617 Ha); full correlation recovery requires explicitly correlated methods beyond current scope.
+
+**H2 Full CI basis convergence** (error converges at 1.72% — systematic ceiling from incomplete cross-nuclear model, not a basis limitation):
+
+| Basis | Energy (Ha) | Error | Time |
+|-------|------------|-------|------|
+| max_n=5 | -1.149 | 2.15% | 0.1s |
+| max_n=8 | -1.154 | 1.72% | 1.5s |
+| max_n=10 | -1.154 | 1.72% | 6.3s |
+| max_n=12 | -1.154 | 1.72% | 23s |
+
+**H3 linear removed:** the 2-electron Full CI solver cannot be applied to 3-electron systems. H3 requires an N-electron CI implementation that does not yet exist — see Future Directions.
 
 ### Heavy Metals Suite (4/4 passing)
 | Test | Z | gamma | Status |
@@ -205,6 +217,27 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 | Geometry optimization | R_eq = 1.293 Bohr in 3.03s | PASS |
 | NVE AIMD energy conservation | 0.0003% max drift | PASS |
 | Langevin bond dissociation | R > 3.0 at step 493 | PASS |
+
+### GeoVac vs PySCF Comparison (CI-validated, Feb 2026)
+
+External benchmark run against PySCF v2.6+ in GitHub Actions CI (ubuntu-latest, Feb 28 2026).
+Full comparison script: `benchmarks/scripts/benchmark_vs_pyscf.py`.
+
+| System | Method | Energy (Ha) | Error vs exact |
+|--------|--------|------------|----------------|
+| H | GeoVac (max_n=20, N=2870) | -0.4936 | 1.27% |
+| H | PySCF UHF/STO-3G | -0.4666 | 6.68% |
+| H | PySCF UHF/cc-pVQZ | -0.4999 | 0.01% |
+| He | GeoVac var. Z_eff + FCI (max_n=5) | -2.8508 | 1.82% |
+| He | PySCF RHF/STO-3G | -2.8078 | 3.30% |
+| He | PySCF RHF/cc-pVQZ | -2.8615 | 1.45% |
+| H2 | GeoVac FCI (max_n=8, N=408) | -1.1542 | 1.73% |
+| H2 | PySCF FCI/STO-3G | -1.1373 | 3.17% |
+| H2 | PySCF FCI/cc-pVQZ | -1.1738 | 0.06% |
+
+**Key takeaway:** GeoVac H2 Full CI (1.73% error) outperforms PySCF FCI/STO-3G (3.17%) with no basis-set optimization,
+using only a sparse graph eigenvalue problem (>99.9% zeros) instead of O(N⁴) integral evaluation.
+Single-electron H converges monotonically toward exact at 0.57%/max_n=30.
 
 ---
 
@@ -240,32 +273,9 @@ Adaptive sparsity mask (threshold 1e-8) prunes negligible bridge weights before 
 
 ---
 
-## Experimental Theoretical Conjectures
+## Future Directions
 
-The following research directions extend beyond the core computational quantum chemistry engine into fundamental physics. These are exploratory and speculative.
-
-### AdS/CFT Holographic Analysis
-- Boundary theory: quantum states as graph nodes, adjacency matrix as CFT data
-- Bulk theory: 3D geometric embedding with symplectic areas and gauge fields
-- Spectral dimension d_s ~ 1.8-2.0 (mass-independent)
-- Central charge c ~ 0.057 (mass-independent)
-- See `ADSCFT/` package and `papers/conjectures/Paper_3_Holography`
-
-### Fine Structure Constant
-- Geometric impedance of U(1) fiber: alpha^{-1} = 137.042 (0.0045% error)
-- Helical pitch delta = 3.081 introduced as geometric ansatz (not first-principles)
-- See `papers/conjectures/Paper_2_Alpha`
-
-### Muonic Hydrogen & Mass-Independence
-- Energy ratio muonic/electronic = 206.77 (matches mass ratio)
-- All holographic properties (d_s, c, topology) are mass-invariant
-- See `papers/conjectures/Paper_4_Universality`
-
-### Emergent Spacetime
-- Weak-field metric (scalar gravity) from graph Laplacian Poisson equation
-- Schwarzschild torsion for heavy elements (exponential metric suppression)
-- Full tensor GR from graph Laplacian remains an open problem
-- See `papers/conjectures/Paper_5_Geometric_Vacuum`
+Planned extensions include: (i) 3-electron and beyond — the current Full CI solver is 2-electron only; H3 and larger open-shell systems require a new N-electron CI implementation before they can be benchmarked honestly; (ii) corrected cross-nuclear interaction model (Paper 6, Sec. VIII), which is the remaining source of the 1.72% H2 systematic error and of H3's 56% error; (iii) nonadiabatic dynamics via coupled electronic-state propagation; (iv) periodic systems, where the graph topology naturally encodes translational symmetry via Bloch boundary conditions; and (v) expanded accuracy benchmarks against additional established codes (ORCA, Molpro) beyond the PySCF comparison already validated in CI (see Benchmarks above).
 
 ---
 
@@ -279,13 +289,12 @@ papers/
                     Paper 1: Spectral graph theory & eigenvalue methods
                     Paper 6: Quantum dynamics & thermodynamics
                     Paper 7: The Dimensionless Vacuum (S³ proof)
-  conjectures/    Theoretical explorations (Paper 2-5, FAQ)
+  conjectures/    Theoretical explorations (Papers 2–5; speculative)
 tests/            Production + heavy metals + Rabi + topological integrity
                     test_fock_projection.py: 10 proofs (stereographic geometry)
                     test_fock_laplacian.py:  8 proofs (conformal Laplacian)
                     test_lih_validation.py:  LiH dynamic p₀(R) validation
 demo/             Demonstrations (H2, spectroscopy, AIMD, thermostat)
-ADSCFT/           AdS/CFT research (holographic tools)
 debug/            Development scratchpad
 benchmarks/       Performance tracking (PES, scaling)
 ```

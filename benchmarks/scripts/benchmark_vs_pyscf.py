@@ -78,23 +78,30 @@ def run_geovac_hydrogen(max_n: int = 20) -> dict:
     }
 
 
-def run_geovac_helium(max_n: int = 10) -> dict:
-    """Run helium with GeoVac (mean-field, using HeliumHamiltonian)."""
-    from geovac import HeliumHamiltonian
+def run_geovac_helium(max_n: int = 5) -> dict:
+    """Run helium with GeoVac using MoleculeHamiltonian + variational Z_eff optimization.
+
+    Matches the production_suite.py path exactly (max_n=5, Z_eff ≈ 1.7).
+    HeliumHamiltonian is NOT used here — it has a wrong kinetic sign and classical V_ee.
+    """
+    from geovac import MoleculeHamiltonian
 
     t0 = time.perf_counter()
-    he = HeliumHamiltonian(max_n=max_n, Z=2, kinetic_scale=-1/16 * 4)
-    energy, _ = he.compute_ground_state()
+    mol = MoleculeHamiltonian(
+        nuclei=[(0.0, 0.0, 0.0)],
+        nuclear_charges=[2],
+        max_n=5,
+    )
+    result = mol.optimize_effective_charge(method='full_ci', n_points=12, z_range=(0.7, 1.0))
+    mol.set_effective_charges(result['z_eff_optimal'])
+    energies, _ = mol.compute_ground_state(n_states=1, method='full_ci')
     t1 = time.perf_counter()
 
-    # Energy may be scalar or array depending on implementation
-    e_val = float(energy) if np.ndim(energy) == 0 else float(energy[0]) if hasattr(energy, '__len__') else float(energy)
-
     return {
-        'energy': e_val,
+        'energy': float(energies[0]),
         'time_ms': (t1 - t0) * 1000,
-        'n_basis': he.n_states if hasattr(he, 'n_states') else 'N/A',
-        'method': f'GeoVac He (max_n={max_n})',
+        'n_basis': mol.n_total_states,
+        'method': 'GeoVac He (var. Z_eff + FCI, max_n=5)',
     }
 
 
@@ -441,13 +448,11 @@ def generate_comparison_report() -> str:
     he_results = []
 
     try:
-        for max_n in [5, 8, 10]:
-            r = run_geovac_helium(max_n=max_n)
-            error_vs_exact = abs((r['energy'] - REFERENCE['He']['energy_exact']) /
-                                 REFERENCE['He']['energy_exact']) * 100
-            r['error_pct'] = error_vs_exact
-            r['system'] = 'He'
-            he_results.append(r)
+        r = run_geovac_helium()
+        r['error_pct'] = abs((r['energy'] - REFERENCE['He']['energy_exact']) /
+                             REFERENCE['He']['energy_exact']) * 100
+        r['system'] = 'He'
+        he_results.append(r)
     except Exception as e:
         lines.append(f"  GeoVac Helium error: {e}")
 

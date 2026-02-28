@@ -8,7 +8,6 @@ This suite contains the "Golden Set" of tests that prove:
 1. Universal constants (alpha, proton radius)
 2. Molecular bonding (H2)
 3. Atomic systems (He, H-, Li+, Be2+)
-4. Reaction barriers (H3 linear)
 
 All tests use the UNIFIED architecture with topological potential.
 
@@ -58,8 +57,6 @@ GOLDEN_TARGETS = {
     'Li+': -7.27991,           # Ha (NIST, isoelectronic with He)
     'Be2+': -13.65556,         # Ha (NIST, isoelectronic with He)
 
-    # Transition States
-    'H3_linear': -1.65,        # Ha (Approximate saddle point)
 }
 
 
@@ -463,69 +460,10 @@ def test_beryllium_dication(verbose=True, relativistic=False):
     }
 
 
-# ==============================================================================
-# Test 8: Linear H3 (Transition State)
-# ==============================================================================
-
-def test_h3_linear(verbose=True, relativistic=False):
-    """
-    Test linear H3 transition state.
-
-    Target: -1.65 Ha (approximate saddle point)
-    Pass threshold: < 20% error
-    """
-    if verbose:
-        print(f"\n{'='*70}")
-        print("TEST 8: LINEAR H3 (TRANSITION STATE)")
-        print(f"{'='*70}")
-        print("\nConfiguration:")
-        print("  System:     H---H---H (symmetric stretch)")
-        print("  Separation: 3.6 Bohr total")
-        print("  Method:     Full CI")
-        print(f"  Relativistic: {relativistic}")
-        print(f"  Target:     {GOLDEN_TARGETS['H3_linear']} Ha")
-
-    nuclei = [
-        (-1.8, 0.0, 0.0),
-        (0.0, 0.0, 0.0),
-        (1.8, 0.0, 0.0)
-    ]
-
-    t0 = time.time()
-    mol = MoleculeHamiltonian(
-        nuclei=nuclei,
-        nuclear_charges=[1, 1, 1],
-        max_n=5,
-        relativistic=relativistic
-    )
-
-    energies, wf = mol.compute_ground_state(n_states=1, method='full_ci')
-    V_NN = mol.compute_nuclear_repulsion()
-    t1 = time.time()
-
-    E_computed = energies[0] + V_NN
-    E_target = GOLDEN_TARGETS['H3_linear']
-    error_pct = 100 * abs(E_computed - E_target) / abs(E_target)
-
-    passed = error_pct < 20.0
-
-    if verbose:
-        print(f"\nResults:")
-        print(f"  Electronic:   {energies[0]:.6f} Ha")
-        print(f"  Nuclear rep:  {V_NN:.6f} Ha")
-        print(f"  Total:        {E_computed:.6f} Ha")
-        print(f"  Target:       {E_target:.6f} Ha")
-        print(f"  Error:        {error_pct:.2f}%")
-        print(f"  Time:         {(t1-t0)*1000:.1f} ms")
-        print(f"\n  {'OK PASS' if passed else 'FAIL FAIL'}: Error {'<' if passed else '>='} 20.0%")
-
-    return {
-        'test': 'H3_linear',
-        'energy': E_computed,
-        'target': E_target,
-        'error_pct': error_pct,
-        'passed': passed
-    }
+# H3 requires 3-electron CI — not yet implemented. See Future Directions.
+# The 2-electron _solve_full_ci cannot be applied to H3 (3 electrons), and
+# the production_suite previously also double-counted V_NN for this case.
+# Remove this test until an N-electron CI solver is available.
 
 
 # ==============================================================================
@@ -562,7 +500,6 @@ def run_production_tests(relativistic=False):
     results.append(test_hydride(verbose=True, relativistic=relativistic))
     results.append(test_lithium_ion(verbose=True, relativistic=relativistic))
     results.append(test_beryllium_dication(verbose=True, relativistic=relativistic))
-    results.append(test_h3_linear(verbose=True, relativistic=relativistic))
 
     # Summary
     print(f"\n\n{'#'*70}")
@@ -599,7 +536,6 @@ def run_production_tests(relativistic=False):
         print("\nThe GeoVac framework is validated across:")
         print("  - Molecular bonds (H2)")
         print("  - Atomic systems (He, H-, Li+, Be2+)")
-        print("  - Transition states (H3)")
         print("\n'The Lattice is Truth' OK")
     else:
         print(f"\n⚠ {total - passed} test(s) need attention")
