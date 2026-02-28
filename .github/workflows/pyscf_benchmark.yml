@@ -78,14 +78,28 @@ jobs:
           python benchmarks/scripts/benchmark_vs_pyscf.py 2>&1 | tee benchmarks/figures/pyscf_comparison.txt
         # `tee` writes to file AND stdout so we see it in the log
 
-      - name: Post results to job summary
+      - name: Benchmark Summary
         if: always()
         run: |
-          echo '## GeoVac vs PySCF Benchmark Results' >> $GITHUB_STEP_SUMMARY
-          echo '' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          cat benchmarks/figures/pyscf_comparison.txt >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          {
+            echo '## H2 Full CI: GeoVac vs PySCF'
+            echo ''
+            echo 'Reference: exact non-relativistic H₂ at R = 1.4 bohr = **-1.17447 Ha**'
+            echo ''
+            echo '| Method | Energy (Ha) | Error vs exact | Time (ms) | N basis |'
+            echo '|--------|:-----------:|:--------------:|----------:|:-------:|'
+            grep "FCI" benchmarks/figures/pyscf_comparison.txt | \
+              awk '{
+                nbasis = $NF
+                time   = $(NF-1)
+                error  = $(NF-2)
+                energy = $(NF-3)
+                method = ""
+                for (i = 1; i <= NF-4; i++) method = method (i==1 ? "" : " ") $i
+                gsub(/^[ \t]+/, "", method)
+                printf "| %s | %s | %s%% | %s | %s |\n", method, energy, error, time, nbasis
+              }'
+          } >> $GITHUB_STEP_SUMMARY
 
       - name: Upload benchmark results as artifact
         if: always()
