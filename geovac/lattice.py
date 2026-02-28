@@ -534,33 +534,31 @@ class GeometricLattice:
     
     def _get_boundary_states_prioritized(self) -> List[int]:
         """
-        Get boundary state indices (n=n_max) sorted by bonding priority.
-        
-        Priority ranking for molecular bonding:
-        1. (n_max, 0, 0) - s orbital, maximum overlap
-        2. (n_max, 1, 0) - p_z orbital, σ-bond axis
-        3. (n_max, 2, 0) - d_z² orbital
-        4. Higher l with m=0
-        5. Non-zero m states (lower priority)
-        
+        Return ALL state indices sorted by ground-state wavefunction amplitude.
+
+        Priority is determined by the node potential depth -Z/n², which is
+        the dominant factor in the atomic ground-state amplitude: states with
+        lower n have the most negative node weight and contribute most to the
+        bonding orbital. Within each shell (same n), s-type states (l=0, m=0)
+        are preferred, then σ-compatible p (l=1, m=0), then higher l/|m|.
+
+        This replaces the old n=max_n-only selection, which produced zero
+        bonding/antibonding splitting because the n=1 core states (highest
+        ground-state amplitude) were never connected.
+
         Returns:
         --------
         prioritized_indices : List[int]
-            State indices sorted by bonding priority (highest first)
+            All state indices sorted by bonding relevance (highest first).
         """
-        # Find all n_max states
-        boundary_states = [(idx, state) for idx, state in enumerate(self.states) 
-                          if state[0] == self.max_n]
-        
-        # Sort by priority: (l, |m|) - lower is better
+        # Sort key: (n, l, |m|) — lowest values = highest ground-state weight
         def priority_key(item):
             idx, (n, l, m) = item
-            return (l, abs(m))
-        
-        boundary_states.sort(key=priority_key)
-        
-        # Return indices only
-        return [idx for idx, state in boundary_states]
+            return (n, l, abs(m))
+
+        all_states = list(enumerate(self.states))
+        all_states.sort(key=priority_key)
+        return [idx for idx, state in all_states]
     
     def __repr__(self) -> str:
         return (f"GeometricLattice(max_n={self.max_n}, "

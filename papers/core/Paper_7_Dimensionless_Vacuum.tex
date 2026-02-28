@@ -12,7 +12,7 @@
 \date{\today}
 
 \begin{abstract}
-We demonstrate that the continuous Schr\"odinger equation for the hydrogen atom is mathematically recovered from a discrete, scale-invariant graph topology through a chain of exact algebraic transformations. The discrete paraboloid lattice of the GeoVac framework---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit three-sphere $S^3$. Using Vladimir Fock's 1935 stereographic projection, we show that this dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping. The results establish that quantum wave mechanics is a dimensionful shadow of a dimensionless geometric reality: energy is the coordinate penalty paid for flattening intrinsically curved topological information.
+We demonstrate that the continuous Schr\"odinger equation for the hydrogen atom is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via Fock's stereographic projection, and that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit. This establishes a precise mathematical correspondence between the discrete graph formulation and wave mechanics. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
 \end{abstract}
 
 \maketitle
@@ -34,7 +34,7 @@ Yet a remarkable observation, first made by Fock in 1935 \cite{fock1935}, sugges
 
 This observation was developed further by Bargmann \cite{bargmann1936}, who connected the hidden $SO(4)$ symmetry of hydrogen to the isometry group of $S^3$, and by Barut and Kleinert \cite{barut1967}, who extended the symmetry to the full conformal group $SO(4,2)$. The mathematical structure has been thoroughly studied in the context of dynamical symmetry groups \cite{bander1966,biedenharn1981}. However, these results are typically presented as mathematical curiosities---elegant reformulations of a solved problem---rather than as evidence for a deeper physical ontology.
 
-In this paper, we take the opposite stance. We argue that the $S^3$ representation is not merely a convenient mathematical trick, but reveals the fundamental structure of the quantum vacuum. Our starting point is the GeoVac framework \cite{loutey_paper0,loutey_paper1}, which models the hydrogen atom as a discrete graph: nodes represent quantum states $|n, l, m\rangle$, edges represent physical transitions, and the Hamiltonian is a sparse matrix encoding connectivity. This discrete lattice is \textit{intrinsically dimensionless}---it is a pure combinatorial topology with no inherent length, time, or energy scales.
+In this paper, we take the opposite stance. We argue that the $S^3$ representation is not merely a convenient mathematical trick, but reveals deep structural content that can be exploited computationally. Our starting point is the GeoVac framework \cite{loutey_paper0,loutey_paper1}, which models the hydrogen atom as a discrete graph: nodes represent quantum states $|n, l, m\rangle$, edges represent physical transitions, and the Hamiltonian is a sparse matrix encoding connectivity. This discrete lattice is \textit{intrinsically dimensionless}---it is a pure combinatorial topology with no inherent length, time, or energy scales.
 
 The central result of this paper is a rigorous demonstration that:
 \begin{enumerate}
@@ -46,6 +46,42 @@ The central result of this paper is a rigorous demonstration that:
 These claims are supported by a suite of 18 independent symbolic proofs, implemented in \texttt{sympy} and verified computationally, that confirm every algebraic step of the conformal transformation chain.
 
 The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} demonstrates the operator equivalence between the curved Laplacian and the flat Schr\"odinger equation. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
+
+
+%% ========================================================================
+\section{What is New vs.\ What is Known}
+\label{sec:attribution}
+%% ========================================================================
+
+The $S^3$ structure of the hydrogen atom has a distinguished history, and we emphasize what is established mathematics versus what is new in this work.
+
+\subsection{Known Results (Prior Work)}
+
+The following results are well-established in the mathematical physics literature:
+
+\begin{itemize}
+\item \textit{Fock (1935)} \cite{fock1935}: The hydrogen atom in momentum space maps to $S^3$ via stereographic projection. The Coulomb problem becomes a free particle on the sphere, with the $1/r$ potential emerging from the chordal distance identity.
+
+\item \textit{Bargmann (1936)} \cite{bargmann1936}: The hidden $SO(4)$ symmetry of hydrogen corresponds to the isometry group of $S^3$. The integer spectrum $\lambda_n = -(n^2 - 1)$ follows from the representation theory of $SO(4)$.
+
+\item \textit{Barut and Kleinert (1967)} \cite{barut1967}: The full conformal group $SO(4,2)$ acts as the dynamical symmetry group of hydrogen, connecting $S^3$ to the non-compact spectrum-generating algebra.
+\end{itemize}
+
+The stereographic projection formulas (Eqs.~\ref{eq:stereo_spatial}--\ref{eq:stereo_fourth}), the unit sphere constraint (Eq.~\ref{eq:unit_sphere}), the chordal distance identity (Eq.~\ref{eq:chordal}), the conformal Laplacian relation (Eq.~\ref{eq:conformal_laplacian}), and the integer eigenvalue spectrum (Eq.~\ref{eq:s3_spectrum}) are all known results. Our symbolic proofs in the Appendix verify these identities; they do not claim to derive them for the first time.
+
+\subsection{New Contributions of This Work}
+
+The following are the specific new contributions:
+
+\begin{enumerate}
+\item \textbf{Discrete graph convergence.} We demonstrate that the GeoVac discrete paraboloid lattice---with nodes $(n, l, m)$ and edges generated by $L_\pm, T_\pm$ operators---converges in the continuum limit to the Laplace-Beltrami operator on unit $S^3$. This connects a concrete computational framework (sparse graph eigenvalue problems) to the known continuous structure.
+
+\item \textbf{Explicit symbolic verification.} The 18 symbolic proofs (Appendix~\ref{app:tests}) provide a complete, machine-verified algebraic audit of the conformal transformation chain. While the underlying identities are known, this systematic verification in \texttt{sympy} is new and provides a reproducible computational check.
+
+\item \textbf{Scale-invariance framing.} We articulate the ``dimensionless vacuum'' perspective: the observation that the conformal factor $\Omega$ always produces the \textit{unit} $S^3$ regardless of $p_0$, and that all physical dimensions enter exclusively through the energy-shell constraint. While implicit in Fock's original treatment, this framing---and its implications for the GeoVac computational approach---has not been stated explicitly in the literature.
+
+\item \textbf{Computational methodology.} The practical consequence: replacing continuous integration with sparse graph Laplacian eigenvalue problems that achieve $O(V)$ scaling, justified by the mathematical equivalence established here.
+\end{enumerate}
 
 
 %% ========================================================================
@@ -72,7 +108,7 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the universal topological constant derived from information-theoretic packing constraints \cite{loutey_paper0}.
+where $\kappa = -1/16$ is the universal kinetic scale---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum, consistent with the information-theoretic packing constraints of \cite{loutey_paper0}.
 
 \subsection{Intrinsic Dimensionlessness}
 
@@ -311,7 +347,7 @@ Each stage has been verified by independent symbolic computation. The 18 passing
 
 \subsection{The Dimensionless Vacuum Hypothesis}
 
-The mathematical evidence supports a precise physical claim: \textit{the fundamental quantum vacuum is a dimensionless, scale-invariant topology}. The continuous Schr\"odinger equation and its dimensionful energy levels are not fundamental---they are emergent properties of a specific projection of this topology into observational coordinates.
+The mathematical evidence supports a precise structural observation: \textit{the Schr\"odinger equation for hydrogen is mathematically equivalent, under Fock's conformal projection, to the Laplace-Beltrami operator on a dimensionless, scale-invariant topology (unit $S^3$)}. The continuous equation and its dimensionful energy levels can be viewed as emergent properties of projecting this topology into observational coordinates. This is a mathematical equivalence under conformal projection, not a proof of physical priority---whether the graph or the differential equation is ``more fundamental'' is a question of physical interpretation, not of theorem.
 
 Three features of the projection merit emphasis:
 
@@ -339,7 +375,7 @@ The results of this paper provide a formal justification for the GeoVac framewor
 
 \textit{Discretization artifacts:} The $s/p$ splitting at finite $n_{\max}$ is spectral aliasing on a compact manifold---it arises from boundary effects in the finite graph and decays as $n_{\max} \to \infty$.
 
-\textit{Universal kinetic scale:} The constant $\kappa = -1/16$ is the unique prefactor that maps the dimensionless graph Laplacian eigenvalues to the physical hydrogen spectrum, consistent with the energy-shell projection mechanism.
+\textit{Universal kinetic scale:} The constant $\kappa = -1/16$ is the unique kinetic scale consistent with the Rydberg formula and the graph topology. It is not independently derived from topology alone---it is the bridge between the dimensionless graph and dimensionful physics, determined by requiring the graph eigenvalues to reproduce the hydrogen spectrum via the energy-shell projection mechanism. Its universality across all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph topology correctly encodes the \textit{relative} spectral structure.
 
 \subsection{Limitations}
 
@@ -347,11 +383,11 @@ Several caveats apply. First, this paper addresses only the single-electron hydr
 
 \subsection{Concluding Remarks}
 
-Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. We have demonstrated that this sphere is intrinsically dimensionless---a pure topology with no physical scale---and that every dimensionful quantity in the Schr\"odinger equation is introduced by the act of projecting this topology into flat observational coordinates.
+Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. We have demonstrated that this sphere is intrinsically dimensionless---a pure topology with no physical scale---and that every dimensionful quantity in the Schr\"odinger equation is introduced by the act of projecting this topology into flat observational coordinates. Furthermore, we have shown that the GeoVac discrete graph Laplacian converges to this same $S^3$ structure in the continuum limit, establishing a rigorous mathematical foundation for the sparse graph computational approach.
 
-The wave equation is a continuous, dimensionful shadow of a discrete, dimensionless geometric reality. The Coulomb potential is not a force law imposed on space; it is the coordinate distortion created by flattening a sphere. Energy is not a property of the vacuum; it is the penalty paid for representing compact topology in non-compact coordinates.
+Within this mathematical equivalence, the wave equation can be viewed as a continuous, dimensionful projection of a discrete, dimensionless topology. The Coulomb potential emerges as the coordinate distortion created by the stereographic flattening, and the energy levels emerge from the energy-shell constraint that parameterizes the projection.
 
-Whether this perspective points toward a deeper theory of quantum mechanics, or merely provides an elegant reformulation, is a question we leave to future investigation.
+We emphasize that these are statements of mathematical equivalence, not claims about which formulation is physically prior. Whether the topological perspective points toward a deeper theory of quantum mechanics, or provides a computationally useful reformulation, is a question we leave to future investigation. What is established here is the precise mathematical chain connecting the discrete graph to the continuous equation, verified step by step through symbolic computation.
 
 
 %% ========================================================================

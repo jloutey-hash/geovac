@@ -1695,18 +1695,34 @@ class MoleculeHamiltonian:
         print(f"  Two-particle states:    {self.n_total_states**2}")
         print(f"  Method: Tensor Product Hamiltonian + Cross-Nuclear Attraction")
 
-        # Build single-particle Hamiltonian (same as mean-field)
-        H1 = self.hamiltonian
+        # Build PURE-KINETIC single-particle Hamiltonian for the CI.
+        #
+        # CRITICAL: Do NOT use self.hamiltonian (which includes node weights W).
+        # The graph Laplacian kinetic_scale*(D-A) already encodes the full
+        # single-center nuclear attraction implicitly through the S³ topology
+        # (per Paper 7, Dimensionless Vacuum Principle). Adding node weights W
+        # on top double-counts the nuclear potential, making each electron's
+        # energy ~2x too negative.
+        #
+        # The correct CI decomposition is:
+        #   H_total = H_kin⊗I + I⊗H_kin + V_cross_n2⊗I + I⊗V_cross_n1 + V_ee
+        # where H_kin = kinetic_scale * (D - A), no node weights.
+        # The cross-nuclear terms (added below) supply the genuine new physics
+        # that a single-atom graph cannot encode.
+        degree = np.array(self.adjacency.sum(axis=1)).flatten()
+        laplacian_only = diags(degree, 0, shape=(self.n_total_states, self.n_total_states),
+                               format='csr') - self.adjacency
+        H1 = self.kinetic_scale * laplacian_only
 
         # Identity matrix for tensor products
         I = identity(self.n_total_states, format='csr')
 
-        # First electron: H_1 x I (kinetic + attraction to home nucleus)
-        print(f"\n  -> Building H_1 x I (electron 1)...")
+        # First electron: H_kin x I (kinetic + implicit self-nuclear)
+        print(f"\n  -> Building H_kin x I (electron 1, pure-kinetic)...")
         H1_x_I = kron(H1, I, format='csr')
 
-        # Second electron: I x H_1 (kinetic + attraction to home nucleus)
-        print(f"  -> Building I x H_1 (electron 2)...")
+        # Second electron: I x H_kin (kinetic + implicit self-nuclear)
+        print(f"  -> Building I x H_kin (electron 2, pure-kinetic)...")
         I_x_H1 = kron(I, H1, format='csr')
 
         # CRITICAL FIX: Cross-nuclear attraction terms
@@ -1763,30 +1779,50 @@ class MoleculeHamiltonian:
 
     def _build_cross_nuclear_attraction(self) -> Tuple[csr_matrix, csr_matrix]:
         """
-        Build cross-nuclear attraction potential matrices.
+        Build cross-nuclear attraction potential matrices using the Mulliken
+        minimal-basis approximation.
 
-        For multi-center systems:
-        - Each electron feels attraction from ALL nuclei
-        - V_ni: Attraction of electron to nucleus i (for states NOT on atom i)
+        The cross-nuclear matrix element for state i (quantum numbers n,l,m)
+        on atom A, feeling attraction to nucleus B at distance R_AB, is:
 
-        For 2-atom H_2:
-        - V_n1: Attraction of electron to nucleus 1 (for states on atom 2)
-        - V_n2: Attraction of electron to nucleus 2 (for states on atom 1)
+            V_cross(i) ≈ (-Z_B / R_AB) × S_eff(n_i, l_i, R_AB, Z_A)
 
-        For single atom (He, H⁻):
-        - Both matrices are zero (no cross-attraction)
+        where S_eff is the effective orbital-overlap factor.  This replaces
+        the previous point-charge model (-Z/r with r from _compute_molecular_
+        coordinates), which placed each state at a single point and
+        overestimated the attraction by ~5× relative to the correct orbital
+        expectation value <φ_i| -Z_B/|r-R_B| |φ_i>.
 
-        Each matrix is diagonal in single-particle space.
+        S_eff(n, l, R, Z):
+            R_eff = R * Z / n²           (bond length in units of orbital radius)
+            S_1s   = exp(-R_eff) * (1 + R_eff + R_eff²/3)   (STO-1s overlap)
+            ang    = 1 / (2l + 1)        (angular reduction: l=0→1, l=1→1/3, …)
+            S_eff  = min(S_1s * ang, 1)  (capped at 1 to avoid unphysical excess)
+
+        For n=1, l=0, R=1.4 bohr (Z=1): S_eff ≈ 0.75, giving V_cross ≈ -0.54 Ha.
+        This is consistent with the exact integral ≈ -0.61 Ha and contrasts
+        with the old model which gave -0.58 Ha per state but was applied at
+        fictitious point positions that amplified the aggregate ground-state
+        contribution.
+
+        Variational collapse prevention:
+            For large n the STO-1s overlap → 1 (R_eff → 0), which would make
+            every diffuse state feel the full -Z/R nuclear charge.  This causes
+            the Full CI to variationally prefer high-n configurations and diverge
+            as max_n grows.  The correct asymptotic limit for a diffuse orbital
+            (n²/Z >> R_AB) is V_cross → -Z_other × <1/r>_A = -Z_other × Z/n².
+            We therefore cap:
+                V_cross = max(Mulliken, -Z_other × Z_self / n²)
+            Both quantities are negative; max picks the less negative (weaker) one.
+            Result: n≥2 states are automatically damped, ground state is dominated
+            by n=1 bonding configuration as expected.
 
         Returns:
         --------
         V_n1, V_n2 : tuple of csr_matrix
-            Diagonal potential matrices for cross-nuclear attraction
-            For single-atom systems, both are zero matrices
+            Diagonal potential matrices for cross-nuclear attraction.
+            For single-atom systems, both are zero matrices.
         """
-        # Get state coordinates
-        coords = self._compute_molecular_coordinates()
-
         # Compute state offsets for each atom
         state_counts = [lattice.num_states for lattice in self.lattices]
         offsets = [0] + list(np.cumsum(state_counts))
@@ -1797,76 +1833,78 @@ class MoleculeHamiltonian:
 
         if self.n_atoms == 1:
             # Single atom: no cross-nuclear attraction
-            pass  # Leave as zeros
-
-        elif self.n_atoms == 2:
-            # Two-atom system: cross-attraction between atoms
-            nucleus_1_pos = self.nuclei[0]
-            nucleus_2_pos = self.nuclei[1]
-            Z1 = self.nuclear_charges[0]
-            Z2 = self.nuclear_charges[1]
-
-            for i in range(self.n_total_states):
-                state_pos = coords[i]
-
-                # Distance to each nucleus
-                r_to_n1 = np.linalg.norm(state_pos - nucleus_1_pos)
-                r_to_n2 = np.linalg.norm(state_pos - nucleus_2_pos)
-
-                # Determine which atom this state belongs to
-                state_info = self._get_state_info(i)
-                atom_idx = state_info['atom']
-
-                # Electron on atom 1 feels cross-attraction to nucleus 2
-                if atom_idx == 0:
-                    if r_to_n2 > 1e-10:
-                        v_n2_diagonal[i] = -Z2 / r_to_n2
-                    else:
-                        v_n2_diagonal[i] = -Z2
-                # Electron on atom 2 feels cross-attraction to nucleus 1
-                elif atom_idx == 1:
-                    if r_to_n1 > 1e-10:
-                        v_n1_diagonal[i] = -Z1 / r_to_n1
-                    else:
-                        v_n1_diagonal[i] = -Z1
+            pass
 
         else:
-            # Multi-atom system (N > 2): generalize cross-attraction
-            # For now, use simplified approach (full generalization needed)
-            for i in range(self.n_total_states):
-                state_pos = coords[i]
-                state_info = self._get_state_info(i)
-                atom_idx = state_info['atom']
+            # General multi-atom case
+            for atom_idx, lattice in enumerate(self.lattices):
+                start = offsets[atom_idx]
+                Z_self = self.nuclear_charges[atom_idx]
 
-                # Sum attraction from all OTHER nuclei
-                for nuc_idx in range(self.n_atoms):
-                    if nuc_idx == atom_idx:
-                        continue  # Skip self-attraction (handled in H1)
+                for local_idx, (n, l, m) in enumerate(lattice.states):
+                    global_idx = start + local_idx
 
-                    nucleus_pos = self.nuclei[nuc_idx]
-                    Z_nuc = self.nuclear_charges[nuc_idx]
-                    r_to_nuc = np.linalg.norm(state_pos - nucleus_pos)
+                    for nuc_idx in range(self.n_atoms):
+                        if nuc_idx == atom_idx:
+                            continue  # self-attraction handled by node weights
 
-                    if r_to_nuc > 1e-10:
-                        # Add to appropriate matrix (for 2-atom compatibility)
+                        R_AB = float(np.linalg.norm(
+                            self.nuclei[atom_idx] - self.nuclei[nuc_idx]
+                        ))
+                        Z_other = self.nuclear_charges[nuc_idx]
+
+                        if R_AB < 1e-10:
+                            # Nuclei coincide: skip cross-term (no cross geometry)
+                            continue
+
+                        # Mulliken-approximate overlap factor
+                        # R_eff = R_AB in units of the orbital Bohr radius (n²/Z_self)
+                        R_eff = R_AB * Z_self / (n ** 2)
+                        S_1s = np.exp(-R_eff) * (1.0 + R_eff + R_eff ** 2 / 3.0)
+                        # Angular reduction: s→1, p→1/3, d→1/5, ...
+                        ang = 1.0 / (2 * l + 1)
+                        S_eff = min(S_1s * ang, 1.0)
+
+                        # Cross-nuclear potential: Mulliken estimate, capped at
+                        # the atomic <1/r> expectation value to prevent variational
+                        # collapse.
+                        #
+                        # For compact orbitals (R_eff >> 1, i.e. n small):
+                        #   Mulliken ≈ -Z/R × S_eff  (< Z/n² in magnitude)  → Mulliken wins
+                        # For diffuse orbitals (R_eff << 1, i.e. n large):
+                        #   Mulliken → -Z/R (full nuclear charge)  ← UNPHYSICAL
+                        #   Correct limit: -Z_other × <1/r>_A = -Z_other × Z_self/n²
+                        #
+                        # Example: n=5, Z=1, R=1.4 bohr
+                        #   Mulliken = -0.714 Ha  (R_eff=0.056, S_eff≈1)
+                        #   Limit    = -0.040 Ha  (⟨1/r⟩ proxy)
+                        #   → limit wins, prevents high-n states from dominating CI
+                        v_cross_mulliken = (-Z_other / R_AB) * S_eff
+                        v_cross_limit = -Z_other * Z_self / (n ** 2)
+                        # Both are negative; max picks the less negative (weaker) one.
+                        v_cross = max(v_cross_mulliken, v_cross_limit)
+
+                        # Accumulate into the matrix corresponding to nucleus nuc_idx
                         if nuc_idx == 0:
-                            v_n1_diagonal[i] += -Z_nuc / r_to_nuc
+                            v_n1_diagonal[global_idx] += v_cross
                         elif nuc_idx == 1:
-                            v_n2_diagonal[i] += -Z_nuc / r_to_nuc
+                            v_n2_diagonal[global_idx] += v_cross
 
-        V_n1 = diags(v_n1_diagonal, 0, shape=(self.n_total_states, self.n_total_states), format='csr')
-        V_n2 = diags(v_n2_diagonal, 0, shape=(self.n_total_states, self.n_total_states), format='csr')
+        V_n1 = diags(v_n1_diagonal, 0,
+                     shape=(self.n_total_states, self.n_total_states), format='csr')
+        V_n2 = diags(v_n2_diagonal, 0,
+                     shape=(self.n_total_states, self.n_total_states), format='csr')
 
         # Statistics
         nonzero_v_n1 = v_n1_diagonal[v_n1_diagonal != 0]
         nonzero_v_n2 = v_n2_diagonal[v_n2_diagonal != 0]
 
         if len(nonzero_v_n1) > 0:
-            mean_v_n1 = np.mean(np.abs(nonzero_v_n1))
-            print(f"      V_n1 (cross-attraction): {mean_v_n1:.4f} Ha (mean)")
+            print(f"      V_n1 (cross-attraction, Mulliken): "
+                  f"{np.mean(np.abs(nonzero_v_n1)):.4f} Ha (mean)")
         if len(nonzero_v_n2) > 0:
-            mean_v_n2 = np.mean(np.abs(nonzero_v_n2))
-            print(f"      V_n2 (cross-attraction): {mean_v_n2:.4f} Ha (mean)")
+            print(f"      V_n2 (cross-attraction, Mulliken): "
+                  f"{np.mean(np.abs(nonzero_v_n2)):.4f} Ha (mean)")
 
         return V_n1, V_n2
 

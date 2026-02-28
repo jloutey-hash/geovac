@@ -1,0 +1,127 @@
+name: PySCF Benchmark Comparison
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'geovac/**'
+      - 'benchmarks/scripts/benchmark_vs_pyscf.py'
+      - '.github/workflows/pyscf_benchmark.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'geovac/**'
+      - 'benchmarks/scripts/benchmark_vs_pyscf.py'
+  workflow_dispatch:   # allow manual trigger from the Actions tab
+
+jobs:
+  # ────────────────────────────────────────────────────────────────────────────
+  # Job 1: Topology + unit tests (fast, always runs, no PySCF needed)
+  # ────────────────────────────────────────────────────────────────────────────
+  unit-tests:
+    name: Unit Tests (topology + H2 decomposition)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install numpy scipy sympy pytest
+
+      - name: Install GeoVac (editable)
+        run: pip install -e .
+
+      - name: Run topological integrity proofs (18/18 must pass)
+        run: pytest tests/test_fock_projection.py tests/test_fock_laplacian.py -v
+
+      - name: Run H2 energy decomposition tests (fast subset)
+        run: pytest tests/test_h2_energy_decomposition.py -v -m "not slow"
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # Job 2: PySCF benchmark (Linux only, ~5 min)
+  # ────────────────────────────────────────────────────────────────────────────
+  pyscf-benchmark:
+    name: GeoVac vs PySCF Benchmark
+    runs-on: ubuntu-latest
+    # Run after unit tests pass so we don't waste time if basics are broken
+    needs: unit-tests
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies + PySCF
+        run: |
+          pip install --upgrade pip
+          pip install numpy scipy sympy pytest
+          # PySCF is Linux-only; install from PyPI
+          pip install pyscf
+
+      - name: Install GeoVac (editable)
+        run: pip install -e .
+
+      - name: Run benchmark
+        run: |
+          python benchmarks/scripts/benchmark_vs_pyscf.py 2>&1 | tee benchmarks/figures/pyscf_comparison.txt
+        # `tee` writes to file AND stdout so we see it in the log
+
+      - name: Post results to job summary
+        if: always()
+        run: |
+          echo '## GeoVac vs PySCF Benchmark Results' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat benchmarks/figures/pyscf_comparison.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload benchmark results as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pyscf-benchmark-${{ github.sha }}
+          path: benchmarks/figures/pyscf_comparison.txt
+          retention-days: 90
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # Job 3: H2 convergence test (slow, max_n=8, ~3 min)
+  # Only runs on push to main (not on every PR to save CI minutes)
+  # ────────────────────────────────────────────────────────────────────────────
+  h2-convergence:
+    name: H2 Full CI Convergence (max_n=8, slow)
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install numpy scipy sympy pytest
+
+      - name: Install GeoVac (editable)
+        run: pip install -e .
+
+      - name: Run H2 convergence test (max_n=8)
+        run: pytest tests/test_h2_energy_decomposition.py -v -m slow -s
+        # -s passes stdout through so we see the Full CI progress output

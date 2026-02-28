@@ -101,7 +101,7 @@ The kinetic energy scale of the vacuum lattice converges to the rational constan
 
 $$\text{Scale} = -\frac{1}{16} = -0.0625$$
 
-This is not a fitted parameter. It is a topological invariant validated across all tested systems (H, He+, Li2+, He, H2, H2+). The Z-scaling formula `kinetic_scale_eff = -1/16 * Z^2` is exact.
+This is the unique kinetic scale that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum. It is not a free fitting parameter — it is the bridge between the dimensionless graph topology and dimensionful physics, uniquely determined by requiring spectral agreement with the Rydberg formula. Its universality across all tested systems (H, He+, Li2+, He, H2, H2+) confirms the graph topology encodes the correct relative spectral structure. The Z-scaling formula `kinetic_scale_eff = -1/16 * Z^2` is exact.
 
 ---
 

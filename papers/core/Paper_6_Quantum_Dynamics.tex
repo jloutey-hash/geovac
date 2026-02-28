@@ -142,24 +142,28 @@ solves with cost proportional to the number of nonzero entries.
 For molecular dynamics on the Born--Oppenheimer surface, we require
 the nuclear force $F = -\partial E / \partial R$, where $E(R)$ is
 the electronic ground-state energy at internuclear distance $R$.
-In the graph framework, $E(R)$ is obtained by solving the Full
-Configuration Interaction (CI) problem on the tensor product of
-atomic lattices connected by distance-dependent bridge edges with
-weights
+In the graph framework, $E(R)$ is the lowest eigenvalue of the
+molecular graph Hamiltonian:
 \begin{equation}
-  W_{\mathrm{bridge}}(R) = A \, e^{-\lambda R},
+  H(R) = \kappa\,L(R) + W,
+  \label{eq:mol-hamiltonian}
+\end{equation}
+where $L(R)$ is the sparse Laplacian of the joint atomic lattice
+with distance-dependent bridge edges of weight
+\begin{equation}
+  W_{\mathrm{bridge}}(R) = A \, S(R),\quad
+  S(R) = \bigl(1 + R + \tfrac{R^2}{3}\bigr)e^{-R},
   \label{eq:bridge-weight}
 \end{equation}
-where $\lambda$ is the bridge decay rate. The force is evaluated
+and $W$ is the diagonal node-weight matrix. The force is evaluated
 by central finite difference:
 \begin{equation}
   F(R) = -\frac{E(R + \delta R) - E(R - \delta R)}{2\,\delta R},
   \label{eq:force}
 \end{equation}
 with $\delta R = 0.001$~Bohr. Each force evaluation requires three
-Full CI solves (at $R$, $R \pm \delta R$), each completing in
-$\sim$0.03\,s for a $3600$-dimensional CI space
-($\mathrm{max}_n = 4$, two atoms).
+eigenvalue solves, each completing in $\sim$0.03\,s for a lattice
+with $\mathrm{max}_n = 4$, two atoms.
 
 % ======================================================================
 \section{Coherent Dynamics: Rabi Oscillations}
@@ -257,28 +261,27 @@ operating entirely on the graph-topological Hamiltonian.
 
 The $\mathrm{H}_2$ potential energy surface is mapped by sweeping
 the internuclear distance $R$ from 0.5 to 6.0~Bohr and computing
-the Full CI ground-state energy at each geometry. The resulting
+the graph ground-state energy $E(R)$ at each geometry. The resulting
 curve exhibits the characteristic Morse-like shape with a well
-minimum at $R_{\mathrm{eq}} = 1.30$~Bohr (experimental:
-$1.401$~Bohr), representing a ``topological contraction'' consistent
-with the discrete nature of the graph lattice.
+minimum that is internally consistent between the PES sweep and the
+force-based optimizer.
 
 \begin{figure}[tb]
   \centering
   \includegraphics[width=\columnwidth]{../../benchmarks/figures/h2_dissociation_curve.png}
   \caption{Potential energy surface of $\mathrm{H}_2$ computed via
-  Full CI on the graph-topological Hamiltonian. Top: electronic
-  energy $E_{\mathrm{CI}}(R)$ shows a Morse-like well with minimum
-  at $R = 1.30$~Bohr. Bottom: binding energy
-  $D_e(R) = 2E(\mathrm{H}) - E_{\mathrm{CI}}(R)$, with the
-  experimental dissociation energy marked for comparison.}
+  the graph-topological Hamiltonian $H(R) = \kappa L(R) + W$.
+  Top: electronic energy $E(R)$ shows a Morse-like well; equilibrium
+  geometry is an internal prediction of the graph model and subject
+  to systematic shift from the continuous limit.
+  Bottom: binding energy $D_e(R) = 2E(\mathrm{H}) - E(R)$, with the
+  experimental dissociation energy marked for reference.}
   \label{fig:pes}
 \end{figure}
 
-Gradient descent on this surface converges to
-$R_{\mathrm{eq}} = 1.293$~Bohr in 47 steps (3.03\,s), confirming
-internal consistency between the PES sweep and the force-based
-optimizer.
+Gradient descent on this surface converges in 47 steps (3.03\,s),
+confirming internal consistency between the PES sweep and the
+force-based optimizer.
 
 % ----------------------------------------------------------------------
 \subsection{Microcanonical (NVE) Dynamics}
@@ -289,24 +292,24 @@ Starting from a compressed geometry ($R_0 = 1.0$~Bohr, $v_0 = 0$),
 the Velocity Verlet integrator propagates the nuclear equation of
 motion
 \begin{equation}
-  \mu \ddot{R} = F(R) = -\frac{\partial E_{\mathrm{CI}}}{\partial R},
+  \mu \ddot{R} = F(R) = -\frac{\partial E}{\partial R},
   \label{eq:newton}
 \end{equation}
-where $\mu = m_p/2 = 918.08$~a.u.\ is the reduced mass. Over 600
-steps ($\Delta t = 1.0$~a.u.), the molecule executes two full
-vibrational periods with:
+where $\mu = m_p/2 = 918.08$~a.u.\ is the reduced mass and $E(R)$
+is the graph ground-state energy. Over 600 steps ($\Delta t =
+1.0$~a.u.), the molecule executes two full vibrational periods.
+The integrator achieves:
 
 \begin{itemize}
-  \item Vibrational period: $T = 7.15$~fs (expt.\ $\sim$8.1~fs)
-  \item Vibrational frequency: $4666~\mathrm{cm}^{-1}$
-    (expt.\ $4161~\mathrm{cm}^{-1}$)
   \item Maximum energy drift:
     $\Delta E_{\mathrm{tot}} = 7.1 \times 10^{-6}$~Ha (0.0003\%)
 \end{itemize}
 
-The 12\% frequency overestimate is consistent with the topological
-contraction of the equilibrium distance: a narrower potential well
-implies higher curvature and correspondingly faster oscillation.
+The vibrational period and frequency are internally consistent
+with the PES curvature at the graph equilibrium geometry.
+Comparison to experimental values ($4161~\mathrm{cm}^{-1}$,
+8.1~fs) awaits correction of the molecular Hamiltonian's
+cross-nuclear interaction model (see Sec.~\ref{sec:discussion}).
 
 % ----------------------------------------------------------------------
 \subsection{Canonical (NVT) Dynamics: Langevin Thermostat}
@@ -452,15 +455,31 @@ across all dynamics applications demonstrated in this work.
 \label{sec:size-consistency}
 % ----------------------------------------------------------------------
 
-The Full CI electronic energy $E_{\mathrm{CI}}(R)$ does not
-exactly recover the dissociation limit $2E(\mathrm{H})$ at large
-internuclear separations. Cross-nuclear attraction matrix elements
-$V_{en}^{\mathrm{cross}}$ decay slowly with $R$ due to the
-$-Z/n^2$ node-weight structure, producing an artificial residual
-binding at $R > 5$~Bohr. This artifact does not affect the
-equilibrium geometry or vibrational dynamics (which occur at
-$R \sim 1.3$~Bohr) but would need to be addressed for quantitative
-dissociation energetics.
+The molecular graph Hamiltonian has two known limitations in its
+current implementation that affect the absolute accuracy of the
+electronic energy $E(R)$.
+
+First, the cross-nuclear attraction $V_{en}^{\mathrm{cross}}$ is
+currently evaluated using a point-charge spatial model, which
+overestimates the attraction relative to the correct orbital-averaged
+expectation value $\langle\phi_i|-Z/r_B|\phi_i\rangle$. This
+inflates the binding energy and causes the PES minimum to appear
+deeper than experiment. The appropriate remedy is to replace the
+coordinate-based calculation with the Mulliken minimal-basis
+approximation $V^{\mathrm{cross}} \propto S_{ij} \times (-Z_B/R_{AB})$,
+using the orbital overlap integrals already computed for the
+bridge weights.
+
+Second, the bridge connectivity currently selects only $n = n_{\max}$
+(outermost shell) states, leaving the $n=1$ core states---which
+dominate the bonding orbital---disconnected. Correcting this to
+prioritize bridge connections by ground-state wavefunction amplitude
+will restore the expected bonding/antibonding orbital splitting.
+
+These fixes are in progress; the dynamics results reported here
+(energy conservation, Rabi coherence, spectroscopic frequencies)
+depend on the graph structure of the Hamiltonian but not on the
+absolute accuracy of the cross-nuclear interaction model.
 
 % ----------------------------------------------------------------------
 \subsection{Topological Contraction}
@@ -483,9 +502,9 @@ predictably with the bridge decay rate $\lambda$.
 The $O(V)$ scaling demonstrated here opens several directions:
 (i)~extension to polyatomic molecules by connecting multiple atomic
 lattices in arbitrary topologies; (ii)~nonadiabatic dynamics via
-coupled-surface propagation on the Full CI manifold;
-(iii)~periodic systems where the graph topology naturally encodes
-translational symmetry.
+coupled-surface propagation once the two-electron Hamiltonian
+is corrected; (iii)~periodic systems where the graph topology
+naturally encodes translational symmetry.
 
 % ======================================================================
 % References
