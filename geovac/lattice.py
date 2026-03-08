@@ -9,7 +9,6 @@ Date: February 2026
 """
 
 import numpy as np
-import scipy.sparse as sp
 from scipy.sparse import csr_matrix, lil_matrix
 from typing import List, Tuple, Dict
 
@@ -72,8 +71,8 @@ class GeometricLattice:
         """
         if max_n < 1:
             raise ValueError("max_n must be at least 1")
-        if nuclear_charge < 1:
-            raise ValueError("nuclear_charge must be at least 1")
+        if nuclear_charge < 0:
+            raise ValueError("nuclear_charge must be non-negative")
 
         self.max_n = max_n
         self.nucleus_position = np.array(nucleus_position, dtype=float)

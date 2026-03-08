@@ -1,50 +1,44 @@
 """
-GeoVac: Topological Quantum Chemistry Solver
-=============================================
+GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
+=================================================================
 
-Solves the wave function using Spectral Graph Theory (Sparse Graph Laplacians)
-rather than continuous integration. Universal kinetic scale K_vac = -1/16.
-
-**Three Laws of Isoelectronic Scaling (v0.4.1):**
-- Law 1 (Conformal): Kinetic energy scales as Z²
-- Law 2 (Coulomb): Potential energy scales as Z
-- Law 3 (Torsion): Lattice torsion gamma = mu * (Z - Z_ref), mu = 1/4
-
-**Performance:**
-- O(N) complexity scaling with >97% matrix sparsity
-- Isoelectronic accuracy: Li+ 0.03%, Be2+ 0.15%
-- H2+ topological control: <0.1% error
-- Ultra-fast: Single atoms in <10ms, molecules in <50ms
+Solves electronic structure using sparse graph Laplacians over hydrogenic
+quantum numbers. Universal kinetic scale K_vac = -1/16.
 
 **Key Classes:**
-- AtomicSolver: Unified atomic solver with isoelectronic scaling
-- GeometricLattice: Sparse graph lattice with (n,l,m) quantum state nodes
-- MoleculeHamiltonian: Molecular bonding via sparse bridges
-- DiracHamiltonian: Relativistic spinor-based solver (experimental)
+- AtomicSolver: Single-electron atoms with Z^2 scaling
+- LatticeIndex: N-electron FCI via relational lattice index (He, Li validated)
+- MoleculeHamiltonian: Molecular bonding via sparse bridges (H2 Full CI)
+- GeometricLattice: Core sparse graph lattice with (n,l,m) quantum state nodes
+- TimePropagator: Crank-Nicolson unitary time evolution
+
+**FCI Accuracy (slater_full):**
+- He (2e): 0.35% at max_n=5 (hybrid h1, monotonic convergence)
+- Li (3e): 1.10% at max_n=4 (exact h1, monotonic convergence)
+- H (1e): 0.57% at max_n=30
 
 Quick Start:
 -----------
->>> from geovac import AtomicSolver, UNIVERSAL_KINETIC_SCALE
->>> solver = AtomicSolver(max_n=10, Z=1)
->>> E, psi = solver.compute_ground_state()
->>> print(f"Hydrogen: {E[0]:.6f} Ha")
-
->>> # Isoelectronic scaling (Li+, Be2+, etc.)
->>> solver = AtomicSolver(max_n=10, Z=3)
->>> solver.apply_isoelectronic_scaling()
->>> E, psi = solver.compute_ground_state()
+>>> from geovac import LatticeIndex
+>>> idx = LatticeIndex(n_electrons=2, max_n=3, nuclear_charge=2,
+...                    vee_method='slater_full', h1_method='hybrid')
+>>> H = idx.assemble_hamiltonian()
 """
 
-__version__ = '0.7.0'
+__version__ = '0.9.9'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 
 # Core imports - expose main classes at top level
 from .lattice import GeometricLattice
-from .hamiltonian import HeliumHamiltonian, HeliumPackingSolver, MoleculeHamiltonian
+from .hamiltonian import MoleculeHamiltonian
 from .dirac_hamiltonian import DiracHamiltonian, DiracLatticeStates
 from .atomic_solver import AtomicSolver, solve_hydrogen, solve_atom
 from .dynamics import TimePropagator
+from .lattice_index import LatticeIndex, MolecularLatticeIndex, compute_vee_s3_overlap, compute_bsse_correction
+from .direct_ci import DirectCISolver
+from .aimd import VelocityVerlet, LangevinThermostat, run_lih_aimd, run_li_nve
+from .benchmark import run_unitarity_test, run_scaling_benchmark, run_li_energy_audit
 
 # Holographic/AdS-CFT modules live in ADSCFT/ package:
 #   from ADSCFT import MuonicHydrogenSolver, compute_holographic_entropy, etc.
@@ -52,15 +46,23 @@ from .dynamics import TimePropagator
 # Define public API
 __all__ = [
     'GeometricLattice',
-    'HeliumHamiltonian',
     'MoleculeHamiltonian',
-    'HeliumPackingSolver',
     'DiracHamiltonian',
     'DiracLatticeStates',
     'AtomicSolver',
     'solve_hydrogen',
     'solve_atom',
     'TimePropagator',
+    'LatticeIndex',
+    'MolecularLatticeIndex',
+    'compute_bsse_correction',
+    'VelocityVerlet',
+    'LangevinThermostat',
+    'run_lih_aimd',
+    'run_li_nve',
+    'run_unitarity_test',
+    'run_scaling_benchmark',
+    'run_li_energy_audit',
     '__version__',
 ]
 
@@ -74,31 +76,3 @@ HYDROGEN_GROUND_STATE = -0.5  # Hartree (exact)
 H2_PLUS_USES_UNIVERSAL_SCALE = True  # 0% error confirms topology is correct
 H2_CORRELATION_ERROR = 0.17  # 17% missing from mean-field (expected)
 
-# Convenience function for quick calculations
-def solve_helium(max_n=3, kinetic_scale=CALIBRATED_KINETIC_SCALE):
-    """
-    Convenience function to solve Helium ground state with calibrated parameters.
-    
-    Parameters
-    ----------
-    max_n : int, optional
-        Maximum principal quantum number for lattice (default: 3)
-    kinetic_scale : float, optional
-        Calibration factor for graph Laplacian kinetic energy
-        (default: -0.103, matches experimental ground state)
-    
-    Returns
-    -------
-    energy : float
-        Ground state energy in Hartree atomic units
-    wavefunction : ndarray
-        Ground state wavefunction (normalized)
-    
-    Examples
-    --------
-    >>> energy, psi = solve_helium(max_n=3)
-    >>> print(f"E₀ = {energy:.6f} Ha")
-    E₀ = -2.903000 Ha
-    """
-    h = HeliumHamiltonian(max_n=max_n, Z=2, kinetic_scale=kinetic_scale)
-    return h.compute_ground_state()

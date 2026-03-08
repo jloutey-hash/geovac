@@ -1,0 +1,91 @@
+==========================================================================
+PRECISION AUDIT: Origin of the Universal Constant K = -1/16
+==========================================================================
+
+PART 1: Scale Factor Convergence
+--------------------------------------------------------------------------
+ max_n   N_states   lambda_max    kappa_req    ratio   error%
+--------------------------------------------------------------------------
+     5         55     6.618034  -0.07555114   1.2088    20.88
+    10        385     7.611436  -0.06569063   1.0511     5.11
+    15       1240     7.821269  -0.06392825   1.0229     2.29
+    20       2870     7.898179  -0.06330573   1.0129     1.29
+    25       5525     7.934293  -0.06301759   1.0083     0.83
+    30       9455     7.954094  -0.06286071   1.0058     0.58
+
+PART 2: Eigenvalue Ratios (Pure Topology)
+--------------------------------------------------------------------------
+These ratios are determined by graph structure alone,
+independent of any physical scale factor.
+
+  max_n = 10 (N = 385 states):
+    Top 5 eigenvalues of L: 7.6114, 7.6039, 7.5370, 7.4658, 7.3561
+    lambda_2 / lambda_1 = 0.999007
+
+  max_n = 20 (N = 2870 states):
+    Top 5 eigenvalues of L: 7.8982, 7.8978, 7.8917, 7.8917, 7.8798
+    lambda_2 / lambda_1 = 0.999952
+
+  max_n = 30 (N = 9455 states):
+    Top 5 eigenvalues of L: 7.9541, 7.9538, 7.9530, 7.9524, 7.9504
+    lambda_2 / lambda_1 = 0.999969
+
+PART 3: Z-Scaling Verification
+--------------------------------------------------------------------------
+Same kappa = -1/16 works for all Z (scaled by Z^2).
+
+  Z=1: E_computed=   -0.493636 Ha, E_exact=   -0.50 Ha, error=1.2728%
+  Z=2: E_computed=   -1.974545 Ha, E_exact=   -2.00 Ha, error=1.2728%
+  Z=3: E_computed=   -4.442726 Ha, E_exact=   -4.50 Ha, error=1.2728%
+  Z=4: E_computed=   -7.898179 Ha, E_exact=   -8.00 Ha, error=1.2728%
+
+==========================================================================
+HONEST ASSESSMENT
+==========================================================================
+
+Q: Does -1/16 emerge from the topology alone?
+
+A: No. Here is the precise chain of reasoning:
+
+  1. The graph Laplacian L = D - A is a dimensionless matrix
+     whose eigenvalues are determined purely by graph connectivity.
+     This is genuinely topological.
+
+  2. The RATIOS between eigenvalues are topological invariants.
+     As max_n -> infinity, these ratios converge to 1:4:9:16:...
+     (the Rydberg ratios). This convergence IS a topological
+     property of the graph's continuum limit (unit S3).
+
+  3. The ABSOLUTE SCALE kappa = -1/16 is the unique constant
+     that maps these dimensionless eigenvalues onto the
+     dimensionful Rydberg energy levels E_n = -1/(2n^2) Ha.
+     This mapping requires EXTERNAL INPUT: the physical energy
+     scale (the Hartree).
+
+  4. Paper 0's derivation of -1/16 from information packing
+     (2n^2 states, shell structure) provides a CONSISTENCY
+     argument: given the graph's degeneracy structure, -1/16
+     is the unique value consistent with recovering hydrogen
+     spectroscopy. But this is a matching condition, not an
+     independent derivation from topology alone.
+
+RECOMMENDED FRAMING:
+  '-1/16 is the unique kinetic scale consistent with the
+  Rydberg formula and the graph topology. It is not
+  independently derived from topology alone -- it is the
+  bridge between the dimensionless graph and dimensionful
+  physics. Its universality across all Z (via Z^2 scaling)
+  confirms that the graph topology correctly encodes the
+  RELATIVE structure of quantum mechanics; the absolute
+  scale requires one physical input.'
+
+==========================================================================
+CONVERGENCE DATA (for plotting)
+==========================================================================
+max_n, n_states, lambda_max, kappa_required, error_pct
+5, 55, 6.618034, -0.07555114, 20.8818
+10, 385, 7.611436, -0.06569063, 5.1050
+15, 1240, 7.821269, -0.06392825, 2.2852
+20, 2870, 7.898179, -0.06330573, 1.2892
+25, 5525, 7.934293, -0.06301759, 0.8281
+30, 9455, 7.954094, -0.06286071, 0.5771

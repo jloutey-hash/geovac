@@ -45,7 +45,7 @@ The central result of this paper is a rigorous demonstration that:
 
 These claims are supported by a suite of 18 independent symbolic proofs, implemented in \texttt{sympy} and verified computationally, that confirm every algebraic step of the conformal transformation chain.
 
-The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} demonstrates the operator equivalence between the curved Laplacian and the flat Schr\"odinger equation. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
+The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} demonstrates the operator equivalence between the curved Laplacian and the flat Schr\"odinger equation. Section~\ref{sec:vee_s3} derives the two-electron repulsion integral as a density-overlap integral on $S^3$. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
 
 
 %% ========================================================================
@@ -329,6 +329,11 @@ where the coefficients $a_k(p)$ are \textit{rational functions} of $p$ and $p_0$
 
 
 %% ========================================================================
+\input{paper7_section_vee}
+%% ========================================================================
+
+
+%% ========================================================================
 \section{Discussion and Conclusions}
 \label{sec:discussion}
 %% ========================================================================
@@ -379,7 +384,7 @@ The results of this paper provide a formal justification for the GeoVac framewor
 
 \subsection{Limitations}
 
-Several caveats apply. First, this paper addresses only the single-electron hydrogen atom. Multi-electron systems require additional structure beyond the unit $S^3$, such as tensor products of spheres or more complex topological spaces. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence---only demonstrated it empirically through $n_{\max} = 30$.
+Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence---only demonstrated it empirically through $n_{\max} = 30$.
 
 \subsection{Concluding Remarks}
 

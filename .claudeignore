@@ -1,0 +1,9 @@
+# Ignore the massive archive of scrap code
+old_esearch_archive/
+
+# Ignore other common high-token noise
+*.pdf
+*.log
+.git/
+node_modules/
+__pycache__/

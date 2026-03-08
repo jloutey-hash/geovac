@@ -217,6 +217,8 @@ def test_1_norm_conservation() -> dict:
     print(f"\n  Status: {'OK PASS' if passed else 'FAIL'}"
           f" (norm deviation < 1e-10)")
 
+    assert passed, f"Norm deviation {norm_max_dev:.2e} >= 1e-10"
+
     return {
         'test': 'norm_conservation',
         'norm_final': norm_final,
@@ -389,6 +391,10 @@ def test_2_rabi_oscillation(sys_info: dict) -> dict:
           f"Norm deviation = {norm_max_dev:.2e} < 1e-6")
     print(f"\n  Status: {'OK PASS' if passed else 'FAIL'}")
 
+    assert pass_population, f"Rabi peak P_target={p_tgt_peak:.4f} < 0.95"
+    assert pass_period, f"Rabi period error {period_error:.4f}% >= 0.5%"
+    assert pass_norm, f"Rabi norm deviation {norm_max_dev:.2e} >= 1e-6"
+
     return {
         'test': 'rabi_oscillation',
         'p_tgt_peak': p_tgt_peak,
@@ -476,6 +482,8 @@ def test_3_off_resonance(sys_info: dict) -> dict:
     print(f"\n  [{'PASS' if pass_suppressed else 'FAIL'}] "
           f"P_target = {p_tgt_max:.4f} < 0.50 (suppressed vs resonant)")
     print(f"\n  Status: {'OK PASS' if passed else 'FAIL'}")
+
+    assert passed, f"Off-resonance P_target={p_tgt_max:.4f} >= 0.50 (not suppressed)"
 
     return {
         'test': 'off_resonance',

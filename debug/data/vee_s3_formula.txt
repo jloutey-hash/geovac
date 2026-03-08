@@ -1,0 +1,41 @@
+Two-Electron V_ee on S^3: The Density-Overlap Formula
+============================================================
+Date: March 2026
+
+MASTER FORMULA (s-orbital pairs):
+
+  F0(a,b) = (4Z/pi) int_0^inf Phi_a(t) * Phi_b(t) dt
+
+where t = q/(2Z) is the dimensionless momentum transfer,
+and Phi_a(t) = rho_tilde_aa(2Zt) is the Fock-projected density.
+
+DERIVATION STEPS:
+  1. F0(a,b) = (2/pi) int_0^inf rho_aa(q) rho_bb(q) dq
+     (momentum-space convolution of orbital densities)
+  2. Substitute q = 2Z*t (Fock scale p0 = 2Z), dq = 2Z dt:
+     F0(a,b) = (4Z/pi) int_0^inf Phi_a(t) Phi_b(t) dt
+  3. The integral is over ONE variable (t), not two.
+     ==> V_ee is a NODE property (density overlap)
+     ==> NOT an edge property (pairwise distance)
+
+DENSITY FUNCTIONS (p0 = 2Z):
+  Phi_1s(t) = 1/(1+t^2)^2
+  Phi_2s(t) = (1-12t^2+32t^4)/(4t^2+1)^4
+  Phi_2p(t) = 16t^2/(1+4t^2)^4
+
+VERIFIED VALUES:
+  F0(1s,1s) = (4Z/pi) * 5pi/32 = 5Z/8        [exact]
+  F0(1s,2s) = (4Z/pi) * 17pi/324 = 17Z/81    [exact]
+  F0(2s,2s) = (4Z/pi) * 77pi/2048 = 77Z/512  [exact]
+  F0(1s,2p) = (4Z/pi) * 59pi/972 = 59Z/243   [exact]
+
+STRUCTURAL RESULT:
+  The kappa/d^2 ansatz (current LatticeIndex) assigns one S^3
+  POINT per orbital and computes edge weights. This is correct
+  for same-shell pairs (1s-1s) where the density is effectively
+  constant, but overestimates cross-shell pairs (1s-2s) by ~30x.
+
+  The correct approach requires each orbital to carry a density
+  FUNCTION on S^3, with V_ee computed as the overlap integral.
+  This is equivalent to the Slater integral, expressed in S^3
+  coordinates via the Fock projection.

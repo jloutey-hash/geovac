@@ -124,12 +124,16 @@ def test_muonic_hydrogen(verbose=True):
 
     # Summary
     print("\n" + "="*70)
-    if energy_test_pass and topology_identical:
+    passed = energy_test_pass and topology_identical
+    if passed:
         print("✓✓✓ TEST 1 PASSED: Mass independence confirmed!")
-        return True
     else:
         print("✗✗✗ TEST 1 FAILED")
-        return False
+
+    assert energy_test_pass, f"Muonic H energy ratio {energy_ratio:.2f} too far from {expected_ratio:.2f}"
+    assert topology_identical, f"Topology mismatch: e={solver_e.n_states}, mu={solver_mu.n_states}"
+
+    return True
 
 
 # Test 2 (Spectral Dimension) RETIRED
@@ -217,12 +221,17 @@ def test_holographic_entropy(verbose=True):
 
     # Summary
     print("\n" + "="*70)
-    if pass_e and pass_ratio and pass_sig_e:
+    passed = pass_e and pass_ratio and pass_sig_e
+    if passed:
         print("✓✓✓ TEST 3 PASSED: Central charge c ≈ 1/36 confirmed!")
-        return True
     else:
         print("✗✗✗ TEST 3 FAILED")
-        return False
+
+    assert pass_e, f"Electronic central charge c={c_e:.4f} too far from {c_theory:.4f}"
+    assert pass_ratio, f"Mass-independence ratio c_mu/c_e={c_ratio:.4f} too far from 1.0"
+    assert pass_sig_e, f"Electronic fit not significant: p={p_e:.2e}"
+
+    return True
 
 
 # Test 4 (Fine Structure - Graph Only) RETIRED
@@ -289,6 +298,8 @@ def test_fine_structure_adscft(verbose=True):
     else:
         print("✗✗ TEST 6 FAILED: Error too large")
         print(f"    Expected < 1% error, got {results['error_percent']:.2f}%")
+
+    assert pass_test, f"Fine structure error {results['error_percent']:.2f}% >= 1.0%"
 
     return pass_test
 
@@ -416,10 +427,12 @@ def test_hyperfine_impedance(verbose=True):
     if pass_test:
         print("✓ TEST 8 PASSED: Geometric impedance computed correctly")
         print("  Phase space framework validated")
-        return True
     else:
         print("⚠ TEST 8 FAILED: Impedance scaling issues")
-        return False
+
+    assert pass_test, f"Hyperfine impedance scaling error {scaling_error*100:.1f}% >= 1.0%"
+
+    return True
 
 
 # Import CODATA values for new tests

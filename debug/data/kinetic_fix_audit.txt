@@ -1,0 +1,83 @@
+Kinetic Term Fix + Slater F0 Cache Audit
+==========================================
+Date: February 2026
+
+DIAGNOSIS
+---------
+The graph Laplacian one-electron Hamiltonian has two problems for FCI:
+
+1. DIAGONAL WRONG: h_diag = KINETIC_SCALE * degree + node_weight
+   - 1s (Li): h=-3.0625, exact=-4.5000 (32% error)
+   - 2s (Li): h=-0.8750, exact=-1.1250 (22% error)
+   - All states within a shell have DIFFERENT diagonals (degree varies)
+
+2. OFF-DIAGONAL UNIFORM: all hopping integrals = -1/16 = -0.0625
+   - T+/- transitions: 14 edges (radial)
+   - L+/- transitions: 20 edges (angular)
+   - All same weight regardless of quantum numbers
+   - Exact hydrogen eigenbasis: ALL off-diagonal = 0 (eigenstates!)
+
+
+THREE h1 MODES IMPLEMENTED
+----------------------------
+'graph'  : H1 = KINETIC_SCALE * (D-A) + diag(-Z/n^2)  [original]
+'exact'  : H1 = diag(-Z^2/(2n^2))  [hydrogen eigenbasis, no off-diag]
+'hybrid' : diagonal = -Z^2/(2n^2), off-diagonal from graph Laplacian
+
+
+ENERGY AUDIT (max_n=4)
+-----------------------
+                               Method   He err%   Li err%
+  -------------------------------------------------------
+                   chordal + graph h1     0.97%    91.62%
+                 slater F0 + graph h1     0.55%    41.39%
+                 slater F0 + exact h1     5.29%     5.58%
+                slater F0 + hybrid h1     4.89%     3.99%
+
+
+ANALYSIS
+--------
+1. slater + graph (baseline): He=0.55% (excellent), Li=41.39%
+   The graph Laplacian off-diagonal elements provide CI mixing.
+   Diagonal is wrong but partially compensated by degree term.
+   Li diagonal error (1s: 32%) dominates the 41% energy error.
+
+2. slater + exact: He=5.29%, Li=5.58%
+   Exact diagonal fixes the 1s error -> Li drops to 5.58%.
+   But ZERO off-diagonal -> no CI mixing -> He degrades.
+   E(He) = 2*h(1s) + F0(1s,1s) = -4.0 + 1.25 = -2.75 Ha (Hartree energy only).
+   Missing: -0.154 Ha correlation energy requires off-diagonal 2e integrals.
+
+3. slater + hybrid (BEST OVERALL): He=4.89%, Li=3.99%
+   Exact diagonal + graph off-diagonal.
+   Li: diagonal correction recovers most of the error.
+   He: graph off-diagonal provides some CI mixing but the
+   exact diagonal changes the energy gaps, reducing mixing efficacy.
+   He degradation from 0.55% to 4.89% is due to missing exchange
+   integrals (G^k Slater integrals) which would provide proper CI coupling.
+
+
+SLATER F0 CACHE
+----------------
+Cache location: geovac/cache/slater_f0_Z{Z}_nmax{N}.npz
+First run: ~150s (numerical integration)
+Subsequent runs: <0.1s (load from cache)
+Speedup: ~8000x
+
+
+ROOT CAUSE OF REMAINING ERROR
+-------------------------------
+Both He (4.89%) and Li (3.99%) errors come from the same source:
+the V_ee operator only contributes to the DIAGONAL of the FCI Hamiltonian
+(F0 = direct Coulomb integrals). A proper FCI requires OFF-DIAGONAL
+two-electron matrix elements:
+
+- Single excitation (p->q): Sum_r [<pr|g|qr> - delta(sigma) <pr|g|rq>]
+  These are the exchange integrals G^k(nl, n'l').
+
+- Double excitation (pq->rs): <pq|g|rs> - delta(sigma) <pq|g|sr>
+  These are general two-electron integrals.
+
+These are NOT currently implemented. The graph Laplacian off-diagonal
+provides a crude substitute for CI mixing, which accidentally helps He
+but is too uniform (all 1/16) to properly handle multi-shell mixing in Li.

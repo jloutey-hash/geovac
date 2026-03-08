@@ -1,0 +1,42 @@
+Two-Electron V_ee on S^3: Verification Results
+============================================================
+Date: March 2026
+
+SYMBOLIC VERIFICATION
+------------------------------------------------------------
+  [PASS] F0(1s,1s) (position) = 5/8*Z
+  [PASS] F0(1s,2s) (position) = 17/81*Z
+  [PASS] F0(2s,2s) (position) = 77/512*Z
+  [PASS] F0(1s,2p) (position) = 59/243*Z
+  [PASS] F0(1s,1s) (momentum) = 5/8*Z
+  [PASS] F0(1s,2s) (momentum) = 17/81*Z
+  [PASS] F0(2s,2s) (momentum) = 77/512*Z
+  [PASS] F0(1s,1s) via S^3 projection = 5Z/8
+  [PASS] F0(1s,2s) via S^3 projection = 17Z/81
+  [PASS] F0(2s,2s) via S^3 projection = 77Z/512
+
+NUMERICAL: Slater F0 vs Naive Chordal kappa/d^2
+------------------------------------------------------------
+Pair         Z       Slater      Chordal    Ratio
+1s-1s        1     0.625000     0.625000     1.00
+1s-1s        2     1.250000     1.250000     1.00
+1s-2s        1     0.209877     6.250000    29.78
+1s-2s        2     0.419753    12.500000    29.78
+2s-2s        1     0.150391     0.625000     4.16
+2s-2s        2     0.300781     1.250000     4.16
+
+KEY FINDING:
+V_ee is a NODE PROPERTY (density overlap on S^3),
+not an edge property (pairwise chordal distance).
+
+Formula:
+  F0(a,b) = (4Z/pi) int_0^inf Phi_a(t) * Phi_b(t) dt
+
+where t = tan(u) and u is the Fock stereographic angle,
+q = 2Z*t is the momentum transfer, and
+Phi_a(t) = rho_tilde_aa(2Zt) is the Fock-projected density.
+
+Specific densities (p0 = 2Z):
+  Phi_1s(t) = 1/(1+t^2)^2
+  Phi_2s(t) = (1-12t^2+32t^4)/(4t^2+1)^4
+  Phi_2p(t) = 16t^2/(1+4t^2)^4

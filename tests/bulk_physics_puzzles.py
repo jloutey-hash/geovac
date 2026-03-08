@@ -204,6 +204,8 @@ def test_geometric_g2(verbose=True):
         print("✗✗ TEST 9 FAILED: Geometric g-2 does not match QED")
         print(f"    Error: {error_pct_schwinger:.2f}% vs target <10%")
 
+    assert pass_test, f"Geometric g-2 error {error_pct_schwinger:.2f}% >= 10%"
+
     return pass_test
 
 
@@ -408,6 +410,8 @@ def test_mond_dark_matter_limit(verbose=True):
     print(f"  Exponent:                β = {beta:.4f}")
     print(f"  Physical regime:         {regime}")
     print(f"  Status:                  {'✓ PASS' if pass_test else '✗ FAIL'}")
+
+    assert pass_test, f"MOND fit failed: R²={R2:.3f}, β={beta:.4f}"
 
     # Additional analysis: Check for MOND transition
     print("\n[10f] MOND Transition Analysis (Bonus)")

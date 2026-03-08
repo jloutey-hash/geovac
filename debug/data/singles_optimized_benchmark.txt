@@ -1,0 +1,38 @@
+Singles Bottleneck Elimination Benchmark (v0.9.7)
+==================================================
+Date: March 7, 2026
+
+Optimisation: Dense NumPy arrays replace scipy sparse matrix element access
+and dict-based ERI lookups. Inlined Slater-Condon single excitation
+computation eliminates function call overhead.
+
+Profile (Li nmax=3, before → after):
+  _slater_condon_single:  118,300 calls, 3.127s → eliminated (inlined)
+  _H1_spatial.__getitem__: 2.808s → 0s (dense array)
+  _get_eri dict lookups:   0.167s → 0s (dense 4D array)
+  Total assembly:          3.513s → 0.377s (9.3× speedup)
+
+Benchmark results (all fci_method='direct', vee_method='slater_full'):
+
+System      nmax  N_SD       E (Ha)       Time     v0.9.6   Speedup
+------      ----  ----       ------       ----     ------   -------
+He          2       45    -2.831629     0.01s       0.01s    ~1×
+He          3      378    -2.840439     0.02s       0.08s    ~4×
+He          4    1,770    -2.843429     0.22s       0.61s    2.8×
+He          5    5,995    -2.844828     1.59s       4.13s    2.6×
+Li          3    3,276    -7.392086     0.26s       3.52s   13.5×
+Li          4   34,220    -7.395921     7.57s      56.59s    7.5×
+Li          5  215,820    -7.397751   116.35s   infeasible   NEW
+Be          3   20,475   -14.531256     2.89s      19.60s    6.8×
+Be          4  487,635   -14.535460   357.46s   infeasible   NEW
+
+New results enabled by optimisation:
+  Li nmax=5: E = -7.3978 Ha (1.07% error vs exact -7.4781 Ha)
+  Be nmax=4: E = -14.5355 Ha (0.90% error vs exact -14.6674 Ha)
+
+Bottleneck analysis (Li nmax=4, v0.9.7):
+  Diagonal:  ~0.0s
+  Singles:   ~3.5s  (was 50s)
+  Doubles:   ~3.5s  (unchanged)
+  eigsh:     ~0.5s
+  Total:     ~7.6s

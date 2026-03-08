@@ -1,0 +1,79 @@
+kappa_ee = 5Z/2 Calibration Audit
+===================================
+Date: February 2026
+
+STEP 1 — Algebraic derivation
+------------------------------
+Exact 1s-1s Hartree integral: F^0(1s,1s) = 5Z/8 Ha
+Chordal model, same-orbital:  V_ee = kappa_ee / d^2 = kappa_ee / 4  (d^2=4 antipodal)
+Setting equal:  kappa_ee / 4 = 5Z/8  =>  kappa_ee = 5Z/2
+
+  Z=2: kappa=5.0000, V_ee(1s,1s)=1.2500 Ha, F^0=1.2500 Ha  [EXACT MATCH]
+  Z=3: kappa=7.5000, V_ee(1s,1s)=1.8750 Ha, F^0=1.8750 Ha  [EXACT MATCH]
+
+
+STEP 4 — S^3 coordinate degeneracy
+------------------------------------
+Five canonical states (p0=1 normalised):
+  (n,l,m)       xi_1      xi_2      xi_3      xi_4     |xi|
+  (1,0,+0):  0.00000   0.00000   1.00000   0.00000   1.000000
+  (2,0,+0):  0.00000   0.00000   0.80000  -0.60000   1.000000
+  (2,1,+0):  0.80000   0.00000   0.00000  -0.60000   1.000000
+  (2,1,+1):  0.56569   0.00000   0.56569  -0.60000   1.000000
+  (2,1,-1):  0.56569   0.00000  -0.56569  -0.60000   1.000000
+
+All 5 states distinct on S^3.
+
+Degenerate pairs in full max_n=4 basis (d^2 = 0 up to numerical precision):
+  (3,1,0) == (3,2,0)  [d^2=0: same n=3, m=0, different l>0]
+  (4,1,0) == (4,2,0)  [d^2=0: same n=4, m=0, different l>0]
+  (4,1,0) == (4,3,0)  [d^2=0: same n=4, m=0, different l>0]
+  (4,2,0) == (4,3,0)  [d^2=0: same n=4, m=0, different l>0]
+
+Root cause: theta-encoding uses m/sqrt(l(l+1)), which gives cos(theta)=0 for
+all m=0, l>0 states (same n). These share the same S^3 point. The d_sq clip
+at 1e-14 prevents division by zero but V_ee -> kappa/1e-14 ~ 1e15 Ha.
+Impact: ground state dominated by n=1,2 states (no degeneracy), but excited-
+state matrix elements for these pairs are unphysical.
+
+
+STEP 3 — Energy audit (max_n=4, vee=chordal, kappa_ee=5Z/2)
+--------------------------------------------------------------
+Species  Z  n_el  kappa_ee   n_sd    E_GeoVac      E_exact       |dE|   err%
+Helium   2     2    5.000   1,770   -2.875616   -2.9037 Ha   0.0281 Ha   0.97%
+Lithium  3     3    7.500  34,220   -0.412759   -7.4781 Ha   7.0653 Ha  94.48%
+
+
+ANALYSIS
+--------
+He (0.97% error):
+  Ground state = 1s^2 = same-orbital pair only.
+  V_ee(1s,1s) = 5/4 = 1.25 Ha = F^0(He 1s,1s) [calibrated exactly].
+  FCI corrections from excited configs are small. Result: excellent.
+
+Li (94.48% error):
+  Ground state = 1s^2 2s^1.
+  Inter-shell pairs: d^2(1s,2s) = 2(1 - xi(1s).xi(2s)) = 2(1-0.8) = 0.40
+  V_ee(1s,2s) = 7.5 / 0.40 = 18.75 Ha  (appears TWICE: 1s_up-2s and 1s_dn-2s)
+  Same-orbital: V_ee(1s,1s) = 1.875 Ha
+  Total V_ee for ground SD ~ 1.875 + 2*18.75 = 39.375 Ha  (catastrophic)
+  Nuclear binding for Li ~ -Z^2 * sum(1/n^2) ~ -9*(1+0.25) = -11.25 Ha
+  Net: electron repulsion overwhelms binding -> collapsed energy.
+
+Root cause: the theta-encoding captures angular quantum number (l,m) but
+NOT radial shell separation. States (1,0,0) and (2,0,0) differ in xi_3 and
+xi_4 but d^2 = 0.4 is too small — physically, 1s and 2s are far apart.
+kappa_ee = 5Z/2 is the correct same-orbital calibration (exact for He).
+For inter-shell pairs, a radially-aware embedding is required.
+
+Comparison: with kappa_ee=1 Ha (old):
+  V_ee(1s,1s) = 0.25 Ha (6x too small for He)
+  V_ee(1s,2s) = 2.50 Ha (large but survivable for Li -> 17.85% error)
+
+CONCLUSION
+----------
+kappa_ee = 5Z/2 is the mathematically correct calibration for same-orbital
+pairs. It produces excellent He results (0.97%) but reveals a fundamental
+limitation of the theta-encoding for inter-shell pairs. A two-parameter model
+(separate kappa for same vs. different orbital) or a radially-aware S^3
+embedding is needed to handle multi-shell systems like Li.

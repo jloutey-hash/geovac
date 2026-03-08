@@ -1,0 +1,61 @@
+=== DIRECT CI SCALING ===
+System   nmax   N_SD       t_total(s)   E(Ha)          method  
+-----------------------------------------------------------------
+[LatticeIndex] c^k table: 14 non-zero entries
+[LatticeIndex] ERI table: 65 non-zero entries
+[LatticeIndex] max_n=2: 5 spatial states, 10 spin-orbitals, 45 Slater determinants (enumerated in 0.000s)
+[DirectCI] Precomputed: 0.000s (N_SD=45, spatial_target_pairs=52)
+[DirectCI] Hamiltonian assembled: shape=(45, 45), nnz=97, time=0.007s (diag=0.0s, singles=0.0s, doubles=0.0s)
+He       2      45         0.01         -2.831629      direct  
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 378 Slater determinants (enumerated in 0.000s)
+[DirectCI] Precomputed: 0.002s (N_SD=378, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(378, 378), nnz=2,562, time=0.187s (diag=0.0s, singles=0.2s, doubles=0.0s)
+He       3      378        0.20         -2.840439      direct  
+[LatticeIndex] c^k table: 372 non-zero entries
+[LatticeIndex] ERI table: 17024 non-zero entries
+[LatticeIndex] max_n=4: 30 spatial states, 60 spin-orbitals, 1,770 Slater determinants (enumerated in 0.000s)
+[DirectCI] Precomputed: 0.022s (N_SD=1,770, spatial_target_pairs=14718)
+[DirectCI] Hamiltonian assembled: shape=(1770, 1770), nnz=30,782, time=1.822s (diag=0.0s, singles=1.7s, doubles=0.1s)
+He       4      1770       1.93         -2.843429      direct  
+[LatticeIndex] c^k table: 1175 non-zero entries
+[LatticeIndex] ERI table: 122605 non-zero entries
+[LatticeIndex] max_n=5: 55 spatial states, 110 spin-orbitals, 5,995 Slater determinants (enumerated in 0.001s)
+[DirectCI] Precomputed: 0.189s (N_SD=5,995, spatial_target_pairs=108628)
+[DirectCI] Hamiltonian assembled: shape=(5995, 5995), nnz=227,307, time=11.610s (diag=0.0s, singles=10.8s, doubles=0.8s)
+He       5      5995       12.30        -2.844828      direct  
+[LatticeIndex] c^k table: 14 non-zero entries
+[LatticeIndex] ERI table: 65 non-zero entries
+[LatticeIndex] max_n=2: 5 spatial states, 10 spin-orbitals, 120 Slater determinants (enumerated in 0.000s)
+[DirectCI] Precomputed: 0.000s (N_SD=120, spatial_target_pairs=52)
+[DirectCI] Hamiltonian assembled: shape=(120, 120), nnz=352, time=0.022s (diag=0.0s, singles=0.0s, doubles=0.0s)
+Li       2      120        0.03         -7.101226      direct  
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 3,276 Slater determinants (enumerated in 0.000s)
+[DirectCI] Precomputed: 0.002s (N_SD=3,276, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(3276, 3276), nnz=46,200, time=2.253s (diag=0.0s, singles=2.1s, doubles=0.2s)
+Li       3      3276       2.28         -7.392086      direct  
+[LatticeIndex] c^k table: 372 non-zero entries
+[LatticeIndex] ERI table: 17024 non-zero entries
+[LatticeIndex] max_n=4: 30 spatial states, 60 spin-orbitals, 34,220 Slater determinants (enumerated in 0.004s)
+[DirectCI] Precomputed: 0.033s (N_SD=34,220, spatial_target_pairs=14718)
+[DirectCI] Hamiltonian assembled: shape=(34220, 34220), nnz=1,455,648, time=56.017s (diag=0.1s, singles=50.1s, doubles=5.6s)
+Li       4      34220      56.59        -7.395921      direct  
+[LatticeIndex] Computing 42 R^k integrals (grid method)...
+[LatticeIndex] R^k integrals computed in 0.5s
+[LatticeIndex] c^k table: 14 non-zero entries
+[LatticeIndex] ERI table: 65 non-zero entries
+[LatticeIndex] max_n=2: 5 spatial states, 10 spin-orbitals, 210 Slater determinants (enumerated in 0.000s)
+[DirectCI] Precomputed: 0.000s (N_SD=210, spatial_target_pairs=52)
+[DirectCI] Hamiltonian assembled: shape=(210, 210), nnz=734, time=0.045s (diag=0.0s, singles=0.0s, doubles=0.0s)
+Be       2      210        14.18        -13.734043     direct  
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 20,475 Slater determinants (enumerated in 0.004s)
+[DirectCI] Precomputed: 0.008s (N_SD=20,475, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(20475, 20475), nnz=474,291, time=19.099s (diag=0.1s, singles=16.8s, doubles=2.1s)
+Be       3      20475      19.23        -14.531256     direct  
+
+Exact non-rel Be: -14.6674 Ha, HF limit: -14.5730 Ha

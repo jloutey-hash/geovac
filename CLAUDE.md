@@ -94,16 +94,29 @@
 
 ## ⚡ Coding Standards
 
-### **1. Sparse Matrix First**
-Always use `scipy.sparse` (csr_matrix, coo_matrix). **Never densify** matrices unless N < 100.
+### **1. Sparse vs Dense: Context-Dependent**
+
+- **Hamiltonian and CI matrices (N > 100):** Always use `scipy.sparse` (csr_matrix,
+  coo_matrix). Never densify.
+- **Hot-loop lookup tables (ERI, h1 in direct CI):** Use dense NumPy arrays
+  when the array fits comfortably in memory (n_spinorb ≤ ~300 at nmax=5 → 300²
+  floats = 720 KB). `scipy.sparse._validate_indices` overhead (~24µs/call) is
+  prohibitive at 100K+ lookups per assembly.
+
+Rule of thumb: sparse for the physics matrix (N_SD × N_SD), dense for the
+orbital-index lookup tables (n_spinorb × n_spinorb or n_spatial⁴).
 
 ```python
-# ✅ GOOD
+# ✅ GOOD — large CI matrix
 from scipy.sparse import csr_matrix
-H = csr_matrix((n_states, n_states))
+H = csr_matrix((n_sd, n_sd))
 
-# ❌ BAD
-H = H.toarray()  # Only if n_states < 100
+# ✅ GOOD — small lookup table in tight loop
+H1_dense = H1_sparse.toarray()  # n_spatial × n_spatial, used 100k+ times
+eri_4d = np.zeros((n_spatial, n_spatial, n_spatial, n_spatial))  # < 100 MB
+
+# ❌ BAD — densifying a large CI matrix
+H = H.toarray()  # N_SD × N_SD can be 500k × 500k
 ```
 
 ### **2. Type Hints Required**
@@ -421,6 +434,9 @@ python debug/test_install.py
 | H2 Full CI | < 1.0% | **Accuracy control** |
 | Muonic H energy ratio | < 0.01% | Mass-independence |
 | Speed regression | < 10% | Performance control |
+| V_ee S³ overlap (1s-1s, 1s-2s, 2s-2s) | < 0.01% | Topological integrity |
+| Direct CI vs matrix CI (any system) | < 1e-8 Ha | Algorithmic consistency |
+| LiH binding energy (CP-corrected) | report only | BSSE >> D_e at nmax=3 |
 
 ### **"Which paper has the physics I need?"**
 | Topic | Paper | Location | Tier |
@@ -442,11 +458,18 @@ python debug/test_install.py
 | **Dimensionless vacuum** | **Paper 7** | **All** | **Core** |
 | Schrodinger recovery proof | Paper 7 | Sec 4 | Core |
 | S³ conformal geometry | Paper 7 | Sec 3 | Core |
+| V_ee on S³ (node overlap) | Paper 7 | Sec VI | Core |
+| Slater F⁰ master formula | Paper 7 | Sec VI.B | Core |
+| Node vs edge V_ee warning | Paper 7 | Sec VI.C | Core |
+| Excitation-driven Direct CI | K&H 1984 | `direct_ci.py` | Core |
 
 ---
 
 ## 📖 Version History
 
+- **v2.4** (Mar 7, 2026): Corrected sparse/dense rule to context-dependent; direct CI validated as O(N_SD × N_connected)
+- **v2.3** (Mar 6, 2026): Added excitation-driven Direct CI (Knowles-Handy 1984) references and algorithmic consistency tolerance
+- **v2.2** (Mar 6, 2026): Added V_ee S³ density-overlap (Paper 7 Sec VI) to theory reference table
 - **v2.1** (Feb 27, 2026): Clarified mathematical equivalence vs. physical priority framing; added Paper 6 to core reference table; established core papers as authoritative source over README
 - **v2.0** (Feb 22, 2026): Added Dimensionless Vacuum Principle, Paper 7, topological integrity tests
 - **v1.0** (Feb 14, 2026): Complete rewrite with directory structure, file naming, workflows

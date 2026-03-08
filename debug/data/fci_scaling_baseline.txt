@@ -1,0 +1,17 @@
+=== CURRENT FCI SCALING (matrix method, v0.9.5) ===
+Date: 2026-03-06
+
+System   nmax   N_SD       t_total(s)   E(Ha)
+-------------------------------------------------------
+He       2      45         0.01         -2.831629
+He       3      378        0.17         -2.840439
+He       4      1770       2.68         -2.843429
+He       5      5995       25.26        -2.844828
+Li       2      120        0.03         -7.101226
+Li       3      3276       4.16         -7.392086
+Li       4      34220      276.97       -7.395921
+
+Bottleneck: _assemble_hamiltonian_full O(N_SD^2) pairwise loop
+He nmax=5: 5995^2/2 ~ 18M pairs checked, 25s
+Li nmax=4: 34220^2/2 ~ 586M pairs checked, 276s
+Li nmax=5: would be ~215k^2/2 ~ 23B pairs -- completely infeasible

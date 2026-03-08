@@ -1,0 +1,16 @@
+# LiH PES: GeoVac MolecularLatticeIndex FCI
+# Z_A=3 (Li), Z_B=1 (H), nmax=3, n_bridges=20
+# vee_method=slater_full, same-atom V_ee approximation
+# Equilibrium: R_eq=2.00 Bohr, E=-8.097248 Ha
+# Expt: R_eq=3.015 Bohr, E=-8.0705 Ha
+# E(Li,nmax=3)=-7.392086, E(H,nmax=3)=-0.500000
+#
+# R(Bohr)  E_total(Ha)  V_NN(Ha)  E_elec(Ha)
+2.00  -8.097248  1.500000  -9.597248
+2.50  -7.915140  1.200000  -9.115140
+3.00  -7.943672  1.000000  -8.943672
+3.50  -8.047849  0.857143  -8.904992
+4.00  -7.952196  0.750000  -8.702196
+5.00  -7.808570  0.600000  -8.408570
+6.00  -7.746727  0.500000  -8.246727
+8.00  -7.746695  0.375000  -8.121695

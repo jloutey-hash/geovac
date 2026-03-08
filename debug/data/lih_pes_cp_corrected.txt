@@ -1,0 +1,374 @@
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 3,276 Slater determinants (enumerated in 0.002s)
+[LatticeIndex] Full Hamiltonian assembled: shape=(3276, 3276), nnz=46,200, time=3.330s (diag=0.0s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] Full Hamiltonian assembled: shape=(28, 28), nnz=28, time=0.003s (diag=0.0s)
+E(Li, own) = -7.392086 Ha
+E(H,  own) = -0.500000 Ha
+E_sep(own) = -7.892086 Ha
+
+     R       E_mol     E_ghost    D_e_CP   D_e_raw      BSSE
+------------------------------------------------------------
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=2.50 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.088s)
+[MolecularLatticeIndex] V_NN = 1.200000 Ha
+[DirectCI] Precomputed: 0.183s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=74.163s (diag=1.2s, singles=54.8s, doubles=16.8s)
+[MolecularLatticeIndex] E_elec = -9.330056 Ha, V_NN = 1.200000 Ha, E_total = -8.130056 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=2.50 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.004s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.006s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=2.635s (diag=0.1s, singles=2.2s, doubles=0.3s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=2.50 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.011s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 2.500    -8.13006    -8.00697    0.1231    0.2380   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=3.00 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.090s)
+[MolecularLatticeIndex] V_NN = 1.000000 Ha
+[DirectCI] Precomputed: 0.186s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=70.729s (diag=1.2s, singles=52.9s, doubles=15.4s)
+[MolecularLatticeIndex] E_elec = -9.091023 Ha, V_NN = 1.000000 Ha, E_total = -8.091023 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=3.00 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.004s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.006s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=2.621s (diag=0.1s, singles=2.2s, doubles=0.3s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=3.00 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.011s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 3.000    -8.09102    -8.00697    0.0841    0.1989   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=3.02 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.082s)
+[MolecularLatticeIndex] V_NN = 0.995025 Ha
+[DirectCI] Precomputed: 0.186s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=70.759s (diag=1.1s, singles=53.0s, doubles=15.3s)
+[MolecularLatticeIndex] E_elec = -9.085064 Ha, V_NN = 0.995025 Ha, E_total = -8.090039 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=3.02 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.005s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.009s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=3.433s (diag=0.1s, singles=2.9s, doubles=0.4s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=3.02 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.011s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 3.015    -8.09004    -8.00697    0.0831    0.1980   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=3.50 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.117s)
+[MolecularLatticeIndex] V_NN = 0.857143 Ha
+[DirectCI] Precomputed: 0.255s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=93.212s (diag=1.8s, singles=70.3s, doubles=19.5s)
+[MolecularLatticeIndex] E_elec = -8.919847 Ha, V_NN = 0.857143 Ha, E_total = -8.062704 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=3.50 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.005s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.008s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=3.562s (diag=0.1s, singles=3.0s, doubles=0.4s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=3.50 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.017s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 3.500    -8.06270    -8.00697    0.0557    0.1706   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=4.00 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.096s)
+[MolecularLatticeIndex] V_NN = 0.750000 Ha
+[DirectCI] Precomputed: 0.215s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=77.595s (diag=1.6s, singles=59.5s, doubles=15.2s)
+[MolecularLatticeIndex] E_elec = -8.791289 Ha, V_NN = 0.750000 Ha, E_total = -8.041289 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=4.00 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.003s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.005s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=3.054s (diag=0.1s, singles=2.6s, doubles=0.4s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=4.00 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.011s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 4.000    -8.04129    -8.00697    0.0343    0.1492   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=5.00 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.068s)
+[MolecularLatticeIndex] V_NN = 0.600000 Ha
+[DirectCI] Precomputed: 0.153s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=82.562s (diag=1.4s, singles=62.3s, doubles=17.4s)
+[MolecularLatticeIndex] E_elec = -8.609844 Ha, V_NN = 0.600000 Ha, E_total = -8.009844 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=5.00 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.006s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.009s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=3.207s (diag=0.1s, singles=2.7s, doubles=0.4s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=5.00 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.018s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 5.000    -8.00984    -8.00697    0.0029    0.1178   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=6.00 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.072s)
+[MolecularLatticeIndex] V_NN = 0.500000 Ha
+[DirectCI] Precomputed: 0.171s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=81.746s (diag=1.3s, singles=61.3s, doubles=17.7s)
+[MolecularLatticeIndex] E_elec = -8.500194 Ha, V_NN = 0.500000 Ha, E_total = -8.000194 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=6.00 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.003s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.005s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=3.130s (diag=0.1s, singles=2.7s, doubles=0.3s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=6.00 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.017s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 6.000    -8.00019    -8.00697   -0.0068    0.1081   -0.1149
+[MolecularLatticeIndex] LiH: Z_A=3, Z_B=1, nmax_A=3, nmax_B=3, R=8.00 bohr, Ne=4
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 14 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=80
+[MolecularLatticeIndex] V_ee: 3002 ERI entries (18 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 367,290 SDs (enumerated in 0.066s)
+[MolecularLatticeIndex] V_NN = 0.375000 Ha
+[DirectCI] Precomputed: 0.155s (N_SD=367,290, spatial_target_pairs=2504)
+[DirectCI] Hamiltonian assembled: shape=(367290, 367290), nnz=8,437,290, time=81.398s (diag=1.3s, singles=62.0s, doubles=16.8s)
+[MolecularLatticeIndex] E_elec = -8.375684 Ha, V_NN = 0.375000 Ha, E_total = -8.000684 Ha
+[MolecularLatticeIndex] ghost: Z_A=3, Z_B=0, nmax_A=3, nmax_B=3, R=8.00 bohr, Ne=3
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 27,720 SDs (enumerated in 0.003s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[DirectCI] Precomputed: 0.005s (N_SD=27,720, spatial_target_pairs=1243)
+[DirectCI] Hamiltonian assembled: shape=(27720, 27720), nnz=256,284, time=2.740s (diag=0.1s, singles=2.4s, doubles=0.3s)
+[MolecularLatticeIndex] E_elec = -7.496598 Ha, V_NN = 0.000000 Ha, E_total = -7.496598 Ha
+[MolecularLatticeIndex] ghost: Z_A=0, Z_B=1, nmax_A=3, nmax_B=3, R=8.00 bohr, Ne=1
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[LatticeIndex] c^k table: 90 non-zero entries
+[LatticeIndex] ERI table: 1492 non-zero entries
+[LatticeIndex] max_n=3: 14 spatial states, 28 spin-orbitals, 28 Slater determinants (enumerated in 0.000s)
+[MolecularLatticeIndex] Bridges: 0 (requested 20)
+[MolecularLatticeIndex] H1: 28 spatial states, off-diag nnz=52
+[MolecularLatticeIndex] V_ee: 1492 ERI entries (0 cross-atom)
+[MolecularLatticeIndex] 28 spatial, 56 spin-orbitals, 56 SDs (enumerated in 0.000s)
+[MolecularLatticeIndex] V_NN = 0.000000 Ha
+[MolecularLatticeIndex] H assembled: shape=(56, 56), nnz=132, time=0.010s
+[MolecularLatticeIndex] E_elec = -0.510367 Ha, V_NN = 0.000000 Ha, E_total = -0.510367 Ha
+ 8.000    -8.00068    -8.00697   -0.0063    0.1086   -0.1149

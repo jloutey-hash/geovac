@@ -1,0 +1,68 @@
+Slater F0 V_ee Audit
+=====================
+Date: February 2026
+
+STEP 1 -- F0 Integral Validation (Z=1)
+----------------------------------------
+All 5 test pairs match analytical values to machine precision:
+  F0(1s,1s) = 5/8     = 0.625000  [PASS]
+  F0(1s,2s) = 17/81   = 0.209877  [PASS]
+  F0(1s,2p) = 59/243  = 0.242798  [PASS]
+  F0(2s,2s) = 77/512  = 0.150391  [PASS]
+  F0(2s,2p) = 83/512  = 0.162109  [PASS]
+
+
+STEP 2 -- Energy Audit (max_n=4, vee=slater)
+----------------------------------------------
+Species  Z  n_el  n_sd    E_GeoVac      E_exact       |dE|   err%
+Helium   2     2  1,770  -2.887804   -2.9037 Ha   0.0159 Ha  0.55%
+Lithium  3     3  34,220 -4.382954   -7.4781 Ha   3.0951 Ha  41.39%
+
+
+V_ee Matrix Elements (Li, Z=3)
+-------------------------------
+  V_ee(1s,1s) = 1.875000 Ha  [exact: 5Z/8 = 1.875]
+  V_ee(1s,2s) = 0.629630 Ha  [exact: 17Z/81 = 0.6296]
+  V_ee(1s,2p) = 0.728395 Ha  [exact: 59Z/243 = 0.7284]
+  V_ee(2s,2s) = 0.451172 Ha  [exact: 77Z/512 = 0.4512]
+  V_ee(2s,2p) = 0.486328 Ha  [exact: 83Z/512 = 0.4863]
+
+
+COMPARISON TABLE -- All V_ee methods, max_n=4
+----------------------------------------------
+              Method   Species      E_GeoVac     E_exact     err %
+  chordal kappa=5Z/2        He     -2.875616     -2.9037     0.97%
+  chordal kappa=5Z/2        Li     -0.412759     -7.4781    94.48%
+            mulliken        Li     -3.495767     -7.4781    53.25%
+           slater F0        He     -2.887804     -2.9037     0.55%
+           slater F0        Li     -4.382954     -7.4781    41.39%
+
+
+ANALYSIS
+--------
+Slater F0 integrals are the CORRECT electron-electron repulsion:
+- He improved: 0.97% -> 0.55% (best result for He)
+- Li improved: 94.48% -> 41.39% (massive V_ee correction)
+
+The V_ee matrix elements are now exact (match analytical Slater integrals).
+The remaining 41% Li error is NOT from V_ee. It must come from the one-electron
+kinetic term (graph Laplacian with uniform edge weights).
+
+The graph Laplacian eigenvalues are -n^2+1 (exact S3 Laplace-Beltrami), giving
+one-electron energies E_n = -1/(2n^2) via the energy-shell constraint. This is
+correct for isolated atoms. However, in the FCI framework, the off-diagonal
+kinetic matrix elements (hopping integrals) use uniform edge weights W=1, which
+under-represents transitions between shells of very different n. This is the
+"topological bond contraction" documented in the module docstring.
+
+CONSTRUCTION TIME
+-----------------
+Slater F0 construction is slow (~140s for max_n=4) due to nested numerical
+integration. Caching by (n,l) pairs helps (only ~10 unique pairs for max_n=4),
+but the inner integral must be evaluated at many r1 points.
+
+Potential optimizations:
+  1. Pre-compute Y0(r1) on a grid and interpolate
+  2. Use Gauss-Laguerre quadrature (native to exponential integrands)
+  3. Cache F0 values to disk for reuse
+  4. Use known analytical formulas for small n (lookup table)

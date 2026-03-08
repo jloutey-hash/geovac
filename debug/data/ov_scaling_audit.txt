@@ -1,0 +1,33 @@
+==========================================================================
+O(V) SCALING VALIDATION - RIGOROUS BENCHMARK
+==========================================================================
+
+PART 1: Wall-Clock Timing
+--------------------------------------------------------------------------
+ max_n        V        NNZ   Sparsity  Build(ms)  Solve(ms)  Total(ms)      E_0(Ha)
+--------------------------------------------------------------------------
+     7      140        406     0.9793       2.86       2.23       5.09    -0.452254
+    11      506       1650     0.9936       9.14       4.85      13.99    -0.480083
+    14     1015       3458     0.9966      14.99       8.95      23.94    -0.487398
+    21     3311      11900     0.9989      52.64      34.19      86.82    -0.494239
+    25     5525      20200     0.9993      92.15      80.23     172.38    -0.495893
+
+PART 2: Scaling Exponent Fits
+--------------------------------------------------------------------------
+Fitting: time ~ V^a (log-log linear regression)
+
+     Total: exponent = 0.953 +/- 0.059 (95% CI: [0.837, 1.070]) R^2 = 0.9885
+     Build: exponent = 0.941 +/- 0.034 (95% CI: [0.873, 1.008]) R^2 = 0.9960
+     Solve: exponent = 0.971 +/- 0.102 (95% CI: [0.771, 1.170]) R^2 = 0.9681
+       NNZ: exponent = 1.062 +/- 0.007 (95% CI: [1.048, 1.076]) R^2 = 0.9999
+
+PART 3: Assessment
+--------------------------------------------------------------------------
+  Total scaling exponent: 0.953
+  Verdict: CONFIRMED: Near-linear O(V) scaling
+
+  Note: The sparse eigenvalue solve (ARPACK/eigsh) has
+  complexity O(nnz * k * n_iter) where nnz scales linearly
+  with V for sparse graphs. The O(V) claim refers to the
+  scaling with number of basis functions (graph vertices),
+  not worst-case matrix algebra.

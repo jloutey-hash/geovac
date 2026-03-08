@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-0.9.2-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-0.9.4-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 0.9.2** - Conformal Bridging & Vectorized Assembly
+**Version 0.9.4** - Multi-Electron FCI with Full Slater Integrals
 
 GeoVac models quantum mechanics on a **discrete, dimensionless graph topology**. The discrete graph Laplacian — a sparse matrix with O(V) nonzero entries — is *mathematically equivalent* to the Schrödinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -17,34 +17,29 @@ GeoVac models quantum mechanics on a **discrete, dimensionless graph topology**.
 | System | Method | Error | Status |
 |--------|--------|-------|--------|
 | **H, He+, H2+ (1e)** | Graph Laplacian | < 0.1% | Exact mean-field |
-| **H2 (2e, Full CI)** | Tensor product | 1.72% (converged) | Systematic ceiling — cross-nuclear model |
-| **Li+ (2e, Z=3)** | Conformal torsion | **0.039%** | 10x improvement (v0.9.1) |
-| **Be2+ (2e, Z=4)** | Conformal torsion | **0.057%** | 10x improvement (v0.9.1) |
+| **He (2e, FCI)** | slater_full + hybrid h1 | **0.35%** | Monotonic convergence (v0.9.4) |
+| **Li (3e, FCI)** | slater_full + exact h1 | **1.10%** | Monotonic convergence (v0.9.4) |
+| **H2 (2e, Full CI)** | Tensor product | 1.72% (converged) | Cross-nuclear model ceiling |
+| **Li+ (2e, Z=3)** | Conformal torsion | **0.039%** | Isoelectronic scaling |
 | **Au78+ (Z=79)** | Schwarzschild torsion | Stable | Full periodic table |
 
 ---
 
 ## What's New
 
+### v0.9.4 - Multi-Electron FCI with Full Slater Integrals
+
+The `LatticeIndex` N-electron FCI solver now supports full Slater two-electron integrals (R^k direct and G^k exchange) with Slater-Condon assembly rules. This replaces the diagonal-only F0 approximation and enables sub-1% accuracy for He and Li.
+
+- **Full Slater integrals:** R^k radial integrals computed on a 2000-point grid with Y_k potential method, Gaunt angular coupling via Wigner 3j symbols
+- **Slater-Condon assembly:** Diagonal, single-excitation, and double-excitation matrix elements with fermionic phase tracking
+- **He FCI convergence:** 0.56% → 0.45% → 0.38% → **0.35%** (max_n=2..5, monotonic, hybrid h1)
+- **Li FCI convergence:** 5.04% → 1.15% → **1.10%** (max_n=2..4, monotonic, exact h1)
+- **PySCF comparison:** GeoVac beats PySCF/STO-3G on H (0.57% vs 6.68%), He (0.35% vs 3.30%)
+- **Disk caching:** R^k integrals cached to `geovac/cache/`, ~8000x speedup on subsequent runs
+- **Publication:** `papers/core/paper_geovac_fci.tex` — arXiv-ready manuscript (4 pages, revtex4-2)
+
 ### v0.9.2 - Conformal Bridging & Vectorized Assembly
-
-The molecular bridge framework now operates on the S³ conformal geometry, and the entire graph assembly pipeline is vectorized.
-
-- **Dynamic focal length p₀(R):** Bridge endpoints track the energy-shell shift `p₀²(R) = Z² + Z_A·Z_B/R`, producing asymmetric conformal factors for heteronuclear molecules (LiH validated: Ω_Li·Ω_H = 0.314 at R_eq)
-- **Vectorized COO assembly:** Block-diagonal stitching and bridge weight computation use NumPy array broadcasting — no Python-level element loops. Assembly scaling: **O(N^0.24)** (sub-linear)
-- **Adaptive sparsity mask:** Bridge weights below 1e-8 are pruned before sparse matrix insertion, keeping the CSR structure clean for downstream solvers
-- **Bloch-Siegert corrected Rabi:** Beyond-RWA analytical prediction reduces period error from 0.46% to **0.41%**, with parabolic interpolation for sub-step peak detection
-
-**Molecular Assembly Benchmarks:**
-
-| System | States | Assembly Time | Scaling |
-|--------|--------|---------------|---------|
-| H2 (max_n=5) | 110 | 0.8 ms | — |
-| LiH (max_n=10) | 770 | 1.2 ms | — |
-| H2O (max_n=10) | 1,155 | 1.5 ms | — |
-| H2 (max_n=15) | 2,480 | 1.8 ms | O(N^0.24) |
-
-### v0.9.0 - The Dimensionless Vacuum & Topological Validation
 
 GeoVac's mathematical foundation is now **formally proven**, not just computationally validated.
 
@@ -218,26 +213,27 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 | NVE AIMD energy conservation | 0.0003% max drift | PASS |
 | Langevin bond dissociation | R > 3.0 at step 493 | PASS |
 
-### GeoVac vs PySCF Comparison (CI-validated, Feb 2026)
+### GeoVac vs PySCF Comparison (CI-validated, March 2026)
 
-External benchmark run against PySCF v2.6+ in GitHub Actions CI (ubuntu-latest, Feb 28 2026).
+External benchmark run against PySCF v2.6+ in GitHub Actions CI.
 Full comparison script: `benchmarks/scripts/benchmark_vs_pyscf.py`.
 
 | System | Method | Energy (Ha) | Error vs exact |
 |--------|--------|------------|----------------|
-| H | GeoVac (max_n=20, N=2870) | -0.4936 | 1.27% |
+| H | GeoVac (max_n=30) | -0.4971 | 0.57% |
 | H | PySCF UHF/STO-3G | -0.4666 | 6.68% |
 | H | PySCF UHF/cc-pVQZ | -0.4999 | 0.01% |
-| He | GeoVac var. Z_eff + FCI (max_n=5) | -2.8508 | 1.82% |
+| **He** | **GeoVac slater_full FCI (max_n=5)** | **-2.8936** | **0.35%** |
 | He | PySCF RHF/STO-3G | -2.8078 | 3.30% |
 | He | PySCF RHF/cc-pVQZ | -2.8615 | 1.45% |
+| **Li** | **GeoVac slater_full FCI (max_n=4)** | **-7.3959** | **1.10%** |
+| Li | PySCF/STO-3G | — | — |
 | H2 | GeoVac FCI (max_n=8, N=408) | -1.1542 | 1.73% |
 | H2 | PySCF FCI/STO-3G | -1.1373 | 3.17% |
 | H2 | PySCF FCI/cc-pVQZ | -1.1738 | 0.06% |
 
-**Key takeaway:** GeoVac H2 Full CI (1.73% error) outperforms PySCF FCI/STO-3G (3.17%) with no basis-set optimization,
-using only a sparse graph eigenvalue problem (>99.9% zeros) instead of O(N⁴) integral evaluation.
-Single-electron H converges monotonically toward exact at 0.57%/max_n=30.
+**Key takeaway:** GeoVac slater_full FCI beats PySCF/STO-3G on all tested atoms — He 0.35% vs 3.30%, H 0.57% vs 6.68% — with no basis-set optimization,
+using a sparse graph eigenvalue problem (>99% sparsity) instead of O(N⁴) integral evaluation.
 
 ---
 
@@ -275,28 +271,35 @@ Adaptive sparsity mask (threshold 1e-8) prunes negligible bridge weights before 
 
 ## Future Directions
 
-Planned extensions include: (i) 3-electron and beyond — the current Full CI solver is 2-electron only; H3 and larger open-shell systems require a new N-electron CI implementation before they can be benchmarked honestly; (ii) corrected cross-nuclear interaction model (Paper 6, Sec. VIII), which is the remaining source of the 1.72% H2 systematic error and of H3's 56% error; (iii) nonadiabatic dynamics via coupled electronic-state propagation; (iv) periodic systems, where the graph topology naturally encodes translational symmetry via Bloch boundary conditions; and (v) expanded accuracy benchmarks against additional established codes (ORCA, Molpro) beyond the PySCF comparison already validated in CI (see Benchmarks above).
+Planned extensions include: (i) 4-electron systems (beryllium) via the existing `LatticeIndex` N-electron FCI solver, which requires adoption of Knowles-Handy direct CI algorithms to manage the O(N_SD^2) determinant pair enumeration; (ii) corrected cross-nuclear interaction model (Paper 6, Sec. VIII) for improved H2 accuracy beyond the current 1.72% ceiling; (iii) nonadiabatic dynamics via coupled electronic-state propagation; (iv) periodic systems, where the graph topology naturally encodes translational symmetry via Bloch boundary conditions; and (v) expanded accuracy benchmarks against additional established codes (ORCA, Molpro) beyond the PySCF comparison already validated in CI (see Benchmarks above).
 
 ---
 
 ## Project Structure
 
 ```
-geovac/           Core package (lattice, hamiltonian, solver, dynamics)
+geovac/           Core package
+                    lattice.py:        GeometricLattice (quantum state graph)
+                    lattice_index.py:  LatticeIndex (N-electron FCI engine)
+                    hamiltonian.py:    MoleculeHamiltonian (molecular bonding)
+                    dynamics.py:       TimePropagator (Crank-Nicolson)
+                    aimd.py:           VelocityVerlet, LangevinThermostat
+                    METHODS.md:        Recommended method configurations
 papers/
   core/           Defensible foundations
                     Paper 0: Geometric packing & universal constant
                     Paper 1: Spectral graph theory & eigenvalue methods
                     Paper 6: Quantum dynamics & thermodynamics
                     Paper 7: The Dimensionless Vacuum (S³ proof)
+                    paper_geovac_fci:  Multi-electron FCI results (He, Li)
   conjectures/    Theoretical explorations (Papers 2–5; speculative)
-tests/            Production + heavy metals + Rabi + topological integrity
+tests/            Unit tests (pytest) + validation scripts
                     test_fock_projection.py: 10 proofs (stereographic geometry)
                     test_fock_laplacian.py:  8 proofs (conformal Laplacian)
-                    test_lih_validation.py:  LiH dynamic p₀(R) validation
+                    See tests/README.md for full inventory
 demo/             Demonstrations (H2, spectroscopy, AIMD, thermostat)
-debug/            Development scratchpad
-benchmarks/       Performance tracking (PES, scaling)
+debug/            Development scratchpad + generated data/plots
+benchmarks/       Performance tracking (PES, scaling, PySCF comparison)
 ```
 
 ---
@@ -308,7 +311,7 @@ benchmarks/       Performance tracking (PES, scaling)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {0.9.2},
+  version = {0.9.4},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

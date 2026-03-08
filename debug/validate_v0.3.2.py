@@ -21,7 +21,6 @@ if sys.platform == 'win32':
 from geovac import (
     AtomicSolver,
     solve_atom,
-    HeliumHamiltonian,
     GeometricLattice,
     MoleculeHamiltonian,
     UNIVERSAL_KINETIC_SCALE
@@ -90,10 +89,14 @@ def validate_helium_full_ci():
     print(f"Basis size: max_n=10 (385 states → 148,225 2-particle states)\n")
 
     import time
-    h = HeliumHamiltonian(max_n=10, Z=2, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+    mol = MoleculeHamiltonian(
+        nuclei=[(0.0, 0.0, 0.0)],
+        nuclear_charges=[2],
+        max_n=10,
+    )
 
     t_start = time.time()
-    E, psi = h.compute_ground_state(n_states=1)
+    E, psi = mol.compute_ground_state(n_states=1, method='full_ci')
     t_elapsed = (time.time() - t_start) * 1000
 
     error_pct = ((E[0] - ref_energy) / ref_energy) * 100
