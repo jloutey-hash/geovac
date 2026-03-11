@@ -1,0 +1,24 @@
+D-matrix LiH diagnostic results (v0.9.16)
+nmax = 3
+
+E_Li = -7.392086 Ha
+E_H  = -0.500000 Ha
+E_Li + E_H = -7.892086 Ha
+
+Mulliken vs D-matrix at R=3.015:
+  Mulliken: E_mol=-8.116739, D_e_raw=0.224653, BSSE=-0.114879, D_e_CP=0.109774
+  D-matrix: E_mol=-6.770435, D_e_raw=-1.121651, BSSE=-0.114879, D_e_CP=-1.236530
+
+D-matrix PES:
+         R          E_mol        D_e_raw         D_e_CP
+     2.500      -6.565069      -1.327018      -1.441897
+     3.000      -6.765451      -1.126636      -1.241515
+     3.015      -6.770435      -1.121651      -1.236530
+     3.500      -6.908575      -0.983511      -1.098390
+     4.000      -7.015915      -0.876172      -0.991050
+     5.000      -7.166187      -0.725900      -0.840779
+     6.000      -7.266367      -0.625720      -0.740599
+
+Diagnostic 1 (dissociation): FAIL
+Diagnostic 2 (bound minimum): FAIL
+Diagnostic 3 (BSSE reduction): FAIL

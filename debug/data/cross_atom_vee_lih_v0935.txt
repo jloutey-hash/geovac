@@ -1,0 +1,94 @@
+================================================================================
+v0.9.35 Cross-Atom V_ee All-L Extension -- LiH Diagnostics
+Date: 2026-03-11
+nmax=3, Z_A=3, Z_B=1, N_e=4, fci_method=direct
+================================================================================
+
+--- J_cross Table at R=3.015 (36 unique pairs) ---
+  J(1,0; 1,0) = 0.327873 Ha
+  J(1,0; 2,0) = 0.185578 Ha
+  J(1,0; 2,1) = 0.222060 Ha
+  J(1,0; 3,0) = 0.092579 Ha
+  J(1,0; 3,1) = 0.102434 Ha
+  J(1,0; 3,2) = 0.110723 Ha
+  J(2,0; 1,0) = 0.312119 Ha
+  J(2,0; 2,0) = 0.180687 Ha
+  J(2,0; 2,1) = 0.210198 Ha
+  J(2,0; 3,0) = 0.091118 Ha
+  J(2,0; 3,1) = 0.099738 Ha
+  J(2,0; 3,2) = 0.109977 Ha
+  J(2,1; 1,0) = 0.317899 Ha
+  J(2,1; 2,0) = 0.182259 Ha
+  J(2,1; 2,1) = 0.213691 Ha
+  J(2,1; 3,0) = 0.091565 Ha
+  J(2,1; 3,1) = 0.100518 Ha
+  J(2,1; 3,2) = 0.110216 Ha
+  J(3,0; 1,0) = 0.222891 Ha
+  J(3,0; 2,0) = 0.157987 Ha
+  J(3,0; 2,1) = 0.174523 Ha
+  J(3,0; 3,0) = 0.085702 Ha
+  J(3,0; 3,1) = 0.092515 Ha
+  J(3,0; 3,2) = 0.105934 Ha
+  J(3,1; 1,0) = 0.235103 Ha
+  J(3,1; 2,0) = 0.161454 Ha
+  J(3,1; 2,1) = 0.179569 Ha
+  J(3,1; 3,0) = 0.086476 Ha
+  J(3,1; 3,1) = 0.093494 Ha
+  J(3,1; 3,2) = 0.106639 Ha
+  J(3,2; 1,0) = 0.263965 Ha
+  J(3,2; 2,0) = 0.168855 Ha
+  J(3,2; 2,1) = 0.190284 Ha
+  J(3,2; 3,0) = 0.088168 Ha
+  J(3,2; 3,1) = 0.095592 Ha
+  J(3,2; 3,2) = 0.108020 Ha
+
+--- Energy Comparison at R=3.015 (nmax=3, fci_method=direct) ---
+
+  cross_atom_vee    ERI entries    spatial_target_pairs    E_total (Ha)
+  all_l             3394 (410 x)   2878                    -8.116290
+  s_only            3020 (36 x)    2504                    -8.116739
+  dE(all-s)         +374           +374                    +0.000449
+
+  dE(all_l - s_only) = +0.449 mHa  (negligible)
+
+--- CP-Corrected Binding Energy at R=3.015 ---
+
+  E(Li, nmax=3)   = -7.392086 Ha
+  E(H, nmax=3)    = -0.500000 Ha
+  E(Li+H)         = -7.892086 Ha
+  E(LiH, all_l)   = -8.116290 Ha
+  BSSE             = -0.114879 Ha (Li: -0.104511, H: -0.010367)
+  E_A_ghost        = -7.496598 Ha
+  E_B_ghost        = -0.510367 Ha
+
+  D_e_raw          = 0.224204 Ha (expt: 0.092 Ha)
+  D_e_CP           = 0.109325 Ha (expt: 0.092 Ha, 18.8% error)
+
+  Baseline (s_only, v0.9.11):
+  D_e_CP           = 0.093 Ha (1.0% error)
+
+  Note: D_e_CP increased from 0.093 to 0.109 because the all_l cross-atom
+  V_ee raises E(mol) by 0.449 mHa while ghost atoms (no cross-atom V_ee)
+  are unaffected. However, this worsened D_e_CP from 1% to 19% error.
+
+--- nmax=2 Results (from previous session) ---
+
+  R       dE(all-s) mHa
+  2.0     +0.342
+  3.015   +0.403
+  6.0     +0.465
+
+  dE increases with R (wrong direction for outward R_eq shift).
+
+--- Timing ---
+  nmax=3, all_l:  82.5s assembly + 3.0s eigensolve = 85.5s per point
+  nmax=3, s_only: 67.9s assembly + 3.8s eigensolve = 71.7s per point
+
+--- Conclusion ---
+  1. l>0 cross-atom V_ee adds ~0.4 mHa repulsion (negligible).
+  2. The correction increases with R, NOT concentrated at short R.
+  3. R_eq does NOT move toward 3.015 bohr.
+  4. LiH ground state is s-dominated (1s^2 2s^2); p/d populations are tiny.
+  5. Root cause of R_eq error remains: cross-nuclear attraction (Fourier diagonal).
+  6. Recommended default: cross_atom_vee='s_only' (backward compatible,
+     avoids 20% timing overhead from 374 extra ERI entries).

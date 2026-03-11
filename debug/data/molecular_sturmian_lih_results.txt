@@ -1,0 +1,185 @@
+======================================================================
+LiH MO-Projected Sturmian Betas — v0.9.30
+March 10, 2026
+======================================================================
+
+Parameters:
+  Z_A = 3 (Li), Z_B = 1 (H), R = 3.015 bohr, p0 = sqrt(10) = 3.1623
+  c = p0*R/2 = 4.7671 (fixed energy parameter)
+  Sturmian diagonal: eps = p0^2/2 - beta * Z_alpha * p0
+
+Method:
+  1. Compute molecular Sturmian betas via prolate spheroidal separation
+     (same as v0.9.29 — solver unchanged).
+  2. NEW: Project MO betas onto atom-centered basis via dominant-overlap.
+     For each atom-centered orbital chi^alpha_{nlm}, compute |<chi|S_k>|^2
+     with each MO S_k of same |m|, and assign beta = beta_{k*} where
+     k* = argmax |overlap|^2.
+  3. Build H1 diagonal with projected betas, off-diagonal with SW D-matrix.
+  4. Run FCI with direct CI.
+
+----------------------------------------------------------------------
+MO BETAS (from v0.9.29, unchanged)
+----------------------------------------------------------------------
+
+  n   (m, n_sph, n_rad)   beta      MO label
+  --- -------------------  --------  ----------
+   1  (0, 0, 0)           1.032704  1sigma
+   2  (0, 0, 1)           2.023396  3sigma
+   2  (0, 1, 0)           1.949648  2sigma
+   2  (1, 0, 0)           1.976026  1pi
+   3  (0, 0, 2)           2.980253  5sigma
+   3  (0, 1, 1)           2.890019  4sigma
+   3  (0, 2, 0)           2.324572  (low n=3)
+   3  (1, 0, 1)           2.912355  2pi_2
+   3  (1, 1, 0)           2.804239  2pi_1
+   3  (2, 0, 0)           2.860162  1delta
+
+----------------------------------------------------------------------
+PROJECTED BETAS — DOMINANT OVERLAP ASSIGNMENT
+----------------------------------------------------------------------
+
+A-center (Li, Z=3):
+  (n,l,m)    beta_proj   eps (Ha)   bound?   expected beta
+  ---------  ---------  ---------  ------   -------------
+  (1,0,0)     1.0327     -4.7971     YES     1.033 (1sigma) ✓
+  (2,0,0)     2.9803    -23.2732     YES     2.023 (3sigma) ✗
+  (2,1,-1)    2.9124    -22.6290     YES     1.976 (1pi)    ✗
+  (2,1,0)     2.9803    -23.2732     YES     2.023 (3sigma) ✗
+  (2,1,+1)    2.9124    -22.6290     YES     1.976 (1pi)    ✗
+  (3,0,0)     2.0234    -14.1956     YES     --
+  (3,1,-1)    1.9760    -13.7462     YES     --
+  (3,1,0)     2.0234    -14.1956     YES     --
+  (3,1,+1)    1.9760    -13.7462     YES     --
+  (3,2,-2)    2.8602    -22.1339     YES     --
+  (3,2,-1)    2.8042    -21.6033     YES     --
+  (3,2,0)     2.8900    -22.4171     YES     --
+  (3,2,+1)    2.8042    -21.6033     YES     --
+  (3,2,+2)    2.8602    -22.1339     YES     --
+
+B-center (H, Z=1):
+  (n,l,m)    beta_proj   eps (Ha)   bound?   expected beta
+  ---------  ---------  ---------  ------   -------------
+  (1,0,0)     2.3246     -2.3509     YES     1.950 (2sigma) ✗
+  (2,0,0)     2.9803     -4.4244     YES     --
+  (2,1,-1)    2.8042     -3.8678     YES     --
+  (2,1,0)     2.8900     -4.1390     YES     --
+  (2,1,+1)    2.8042     -3.8678     YES     --
+  (3,0,0)     2.3246     -2.3509     YES     --
+  (3,1,-1)    2.8042     -3.8678     YES     --
+  (3,1,0)     2.8900     -4.1390     YES     --
+  (3,1,+1)    2.8042     -3.8678     YES     --
+  (3,2,-2)    2.8602     -4.0446     YES     --
+  (3,2,-1)    2.9124     -4.2097     YES     --
+  (3,2,0)     2.9803     -4.4244     YES     --
+  (3,2,+1)    2.9124     -4.2097     YES     --
+  (3,2,+2)    2.8602     -4.0446     YES     --
+
+----------------------------------------------------------------------
+CHECKS 1-4
+----------------------------------------------------------------------
+
+CHECK 1: H 1s diagonal negative
+  beta^H_1s = 2.324572 (from n=3 MO, NOT 2sigma!)
+  eps^H_1s = -2.350943 Ha
+  RESULT: PASS (negative, but wrong MO assigned)
+
+CHECK 2: Li 1s diagonal
+  beta^Li_1s = 1.032704 (from 1sigma)
+  eps^Li_1s = -4.797093 Ha
+  RESULT: PASS (correct MO assigned)
+
+CHECK 3: All B-center diagonals
+  14/14 B-center negative, 14/14 A-center negative
+  RESULT: PASS
+
+CHECK 4: Backward compatibility at R=100
+  MO betas at R=100 DO NOT approach 1/n (all betas ~1.5-4.0)
+  Projected betas at R=100: all ~3-4, vs expected ~1/n
+  Max deviation: 1119%
+  RESULT: FAIL — fundamental to shared-p0 approach at large R
+
+----------------------------------------------------------------------
+FCI RESULT (single-point, fixed p0=sqrt(10), R=3.015)
+----------------------------------------------------------------------
+
+  E_mol = -42.505 Ha
+  E_atoms = -7.892 Ha (Li + H reference)
+  D_e_raw = +34.61 Ha (catastrophically overbound)
+  Exact E_LiH = -8.07 Ha
+
+  RESULT: UNPHYSICAL — energy 5.3x too negative
+
+----------------------------------------------------------------------
+ROOT CAUSE ANALYSIS
+----------------------------------------------------------------------
+
+Two compounding errors:
+
+1. BETA SCALE MISMATCH (fundamental):
+   The MO beta parametrizes a = beta*(Z_A+Z_B)*R in the prolate spheroidal
+   equation. The atom-centered formula uses eps = p0^2/2 - beta*Z_alpha*p0.
+   These are different parametrizations. MO betas ~1-3 encode molecular
+   nuclear attraction for the full two-center system. Multiplying by
+   Z_alpha*p0 in the atom-centered formula double-counts the nuclear
+   attraction:
+     Li 2s: beta*Z*p0 = 2.98*3*3.16 = 28.3 vs exact Z^2/(2n^2) = 1.125
+     Overestimate: 25x
+
+2. WRONG MO ASSIGNMENT (overlap computation):
+   The dominant-overlap assigns atomic orbitals to the wrong MOs:
+   - H 1s → n=3 MO (beta=2.325) instead of 2sigma (beta=1.950)
+   - Li 2s → n=3 MO (beta=2.980) instead of 3sigma (beta=2.023)
+   Higher-n MOs have larger spatial extent, dominating overlap integrals
+   through the volume element rather than wavefunction character.
+
+----------------------------------------------------------------------
+SEVEN-CONFIGURATION COMPARISON at R=3.015
+----------------------------------------------------------------------
+
+  Version       D_e_CP     R_eq    Notes
+  ----------  ----------  ------  ---------------------------
+  v0.9.11      +0.093     ~2.5    Baseline (1.0% err)
+  v0.9.18      +0.143     <2.0    Hybrid SW
+  v0.9.21      UNBOUND     ---    Single-p0
+  v0.9.28      UNBOUND     ---    Atomic beta_k
+  v0.9.29      UNBOUND     ---    MO betas unmapped
+  v0.9.30      -34.6       ---    MO projected (UNPHYSICAL)
+  Experiment   +0.092     3.015
+
+----------------------------------------------------------------------
+THREE STANDARD DIAGNOSTICS
+----------------------------------------------------------------------
+
+  1. Dissociation: NOT RUN (single-point only)
+  2. Bound: FAIL (E_mol catastrophically too negative)
+  3. R_eq: NOT RUN
+
+----------------------------------------------------------------------
+CONCLUSION
+----------------------------------------------------------------------
+
+The dominant-overlap MO-to-atom projection FAILS for LiH FCI because:
+
+(a) The MO beta and atom-centered Sturmian beta are different quantities
+    with different parametrizations. Direct substitution into
+    eps = p0^2/2 - beta*Z*p0 overestimates nuclear attraction by 25-170x.
+
+(b) The overlap computation doesn't reliably match atomic orbitals to
+    their chemically correct MO counterparts — volume-element bias
+    favors higher-n MOs with larger spatial extent.
+
+The prolate spheroidal solver itself works (verified H2+ to 0.6% error).
+The MO betas are physically meaningful as molecular parameters. The
+failure is in the conversion from molecular to atom-centered parameters.
+
+Paths forward:
+  (a) Direct MO energy approach: compute <chi_alpha|H_mol|chi_alpha>
+      numerically, bypassing the beta parameter entirely.
+  (b) Rescaled beta: beta_atom = beta_MO * (Z_total*R) / (Z_alpha*p0*n)
+      to match parametrization scales.
+  (c) Abandon shared-p0 Sturmian for heteronuclear systems entirely;
+      return to the v0.9.11 Fourier/Mulliken approach (which works).
+  (d) Two-p0 approach: separate p0 for each atom center.
+
+======================================================================

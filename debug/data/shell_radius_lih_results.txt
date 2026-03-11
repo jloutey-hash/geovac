@@ -1,0 +1,79 @@
+Shell-Dependent Cross-Nuclear Attenuation -- LiH PES (v0.9.23)
+======================================================================
+nmax = 3
+Architecture: hybrid (Fourier diag + SW off-diag)
+
+Atomic energies:
+  E_Li = -7.392086 Ha
+  E_H  = -0.500000 Ha
+  E_atoms = -7.892086 Ha
+
+BSSE (old, no shell radius) = -0.114879 Ha
+BSSE (new, shell radius)    = -0.114879 Ha
+
+PES comparison (old = v0.9.18 baseline, new = v0.9.23):
+       R        E_old    D_raw_old    D_CP_old        E_new    D_raw_new    D_CP_new
+   1.500    -8.475399    0.583313    0.468434    -7.463158   -0.428928   -0.543807
+   2.000    -8.297887    0.405801    0.290922    -7.610507   -0.281579   -0.396458
+   2.500    -8.208081    0.315995    0.201116    -7.715604   -0.176482   -0.291361
+   3.000    -8.151253    0.259167    0.144288    -7.786676   -0.105410   -0.220289
+   3.015    -8.149940    0.257853    0.142974    -7.788436   -0.103650   -0.218529
+   3.500    -8.115873    0.223787    0.108908    -7.836497   -0.055589   -0.170468
+   4.000    -8.091971    0.199885    0.085006    -7.872114   -0.019972   -0.134851
+   5.000    -8.063402    0.171316    0.056437    -7.917325    0.025239   -0.089640
+   6.000    -8.043751    0.151665    0.036786    -7.943255    0.051169   -0.063710
+
+Summary:
+  Old (v0.9.18): R_eq ~ 1.500, D_e_CP = 0.468434 Ha (monotonic, no minimum in range)
+  New (v0.9.23): UNBOUND (D_e_CP < 0 at all R in scan range)
+  Experiment:    R_eq = 3.015,   D_e = 0.092000 Ha
+
+Diagnostics:
+  1. Dissociation (old): FAIL (D_e_CP(R=6) = 0.036786)
+     Dissociation (new): FAIL (D_e_CP(R=6) = -0.063710, molecule above atoms)
+  2. Bound minimum (old): PASS (D_e_CP > 0 at all R, best at R=1.5)
+     Bound minimum (new): FAIL (D_e_CP < 0 at all R, molecule unbound)
+  3. R_eq in [2.5, 3.5] (old): FAIL (R_eq ~ 1.5, PES monotonically decreasing)
+     R_eq in [2.5, 3.5] (new): FAIL (no R_eq, molecule unbound)
+  4. BSSE changed: NO (delta = 0.000000)
+
+Per-shell cross-nuclear corrections at R=3.015:
+  Li 1s: R_eff=3.348, V_old=-0.331675, V_new=-0.298656 (+10.0%)
+  Li 2s: R_eff=4.348, V_old=-0.326950, V_new=-0.229809 (+29.7%)
+  Li 3s: R_eff=6.015, V_old=-0.229001, V_new=-0.163012 (+28.8%)
+  H  1s: R_eff=4.015, V_old=-0.985415, V_new=-0.745978 (+24.3%)
+  H  2s: R_eff=7.015, V_old=-0.557776, V_new=-0.403946 (+27.6%)
+  H  3s: R_eff=12.015, V_old=-0.278099, V_new=-0.211680 (+23.9%)
+
+ROOT CAUSE ANALYSIS:
+The shell radius correction R_eff = R + n^2/Z_self is too aggressive when
+applied to the EXACT electrostatic potential (Fourier cross-nuclear).
+
+The _fourier_cross_attraction() function already computes the exact
+quantum-mechanical potential:
+    V = -Z_other * [(1/R) int_0^R |R_nl(r)|^2 r^2 dr + int_R^inf |R_nl(r)|^2 r dr]
+
+This integral ALREADY accounts for the orbital radial extent: it integrates
+the electron density from 0 to R (inside) and R to infinity (outside),
+weighted by the actual wavefunction.  The potential naturally weakens for
+diffuse orbitals because less density lies inside the sphere of radius R.
+
+Adding R_eff = R + n^2/Z_self on top of the exact integral DOUBLE-COUNTS
+the orbital diffuseness.  For H 1s at R=3.015:
+  - Exact V_cross = -0.891 Ha (already accounts for R_nl(r) spreading)
+  - R_eff V_cross = -0.678 Ha (artificially shifts evaluation to R=4.015)
+  - True delta: -24% overcorrection
+
+The result: all cross-nuclear terms are weakened by 10-33%, destroying
+the binding entirely.  D_e_CP goes from +0.143 Ha (overbinding) to
+-0.219 Ha (unbound).
+
+The overbinding in v0.9.18 does NOT come from the Fourier diagonal
+(which is exact).  It comes from the SW off-diagonal, which uses a
+form factor f(n,gamma) = sin(gamma) that may overestimate the coupling
+at short R.  The shell-radius correction targets the wrong term.
+
+PATH FORWARD:
+1. Scale the SW form factor f(n,gamma) instead of the Fourier diagonal
+2. Add n-dependent attenuation to the D-matrix off-diagonal coupling
+3. Replace the Fourier diagonal with exact D-matrix diagonal elements

@@ -1,0 +1,77 @@
+LiH FCI Convergence Study — v0.9.10 (cross-atom J fix)
+Date: 2026-03-08
+R = 3.015 Bohr, Z_A=3 (Li), Z_B=1 (H), Ne=4
+D_e(expt) = 0.0924 Ha
+
+===== nmax = 2 per atom =====
+NSD            = 4,845
+E_mol          = -8.089185 Ha
+E(Li)          = -7.101226 Ha
+E(H)           = -0.500000 Ha
+E(Li)+E(H)     = -7.601226 Ha
+D_e (raw)      = 0.4880 Ha
+BSSE           = -0.2184 Ha
+D_e (CP)       = 0.2696 Ha
+D_e (expt)     = 0.0924 Ha
+Error vs expt  = 191.8%
+
+Timing:
+  Build (init)   = 0.0s
+  Solve (eigen)  = 5.4s
+  Total (mol)    = 6s
+  Note: nmax=2 is too small for meaningful CP correction
+        (BSSE exceeds D_e by 2.4x)
+
+===== nmax = 3 per atom =====
+NSD            = 367,290
+E_mol          = -8.100310 Ha
+E(Li)          = -7.392086 Ha
+E(H)           = -0.500000 Ha
+E(Li)+E(H)     = -7.892086 Ha
+D_e (raw)      = 0.2082 Ha
+BSSE           = -0.1149 Ha
+D_e (CP)       = 0.0933 Ha
+D_e (expt)     = 0.0924 Ha
+Error vs expt  = 1.0%
+
+Timing:
+  Build (init)   = 0.1s
+  Solve (eigen)  = 72.3s (DirectCI: 69s assembly, ~3s eigsh)
+  Total (mol)    = 82s (including separated atom calcs)
+  BSSE (2 ghost) = ~8s
+  Bottleneck: DirectCI singles loop (52s of 69s assembly)
+
+IMPORTANT: nmax=3 baseline improved from 0.083 Ha (10% error) in v0.9.9
+to 0.093 Ha (1.0% error) in v0.9.10. The _phi_s_orbital_general
+normalization fix corrected n=3 cross-atom J values, which were previously
+~100x too large and producing unphysical repulsion.
+
+===== nmax = 4 per atom =====
+NSD (expected) = 8,214,570
+Status: INFEASIBLE on current hardware
+
+The run was killed after 30 minutes (timeout). At the time of termination:
+  Memory usage = 5.4 GB
+  CPU time     = 18+ minutes
+  Output       = 0 bytes (all stdout buffered, never flushed)
+
+The SD enumeration (itertools.combinations(120, 4) → 8.2M tuples + dict
+index) consumed ~5.4 GB. DirectCI assembly did not complete within the
+remaining time.
+
+Scaling wall: the LiH FCI basis grows as C(4*nmax^2, 4) ~ nmax^8.
+  nmax=2: 4,845 SDs → 6s
+  nmax=3: 367,290 SDs → 82s  (76× more SDs, 14× longer)
+  nmax=4: 8,214,570 SDs → >1800s, >5.4 GB (22× more SDs)
+
+To reach nmax=4, the code needs:
+  1. Sparse SD representation (don't store all 8.2M tuples in a list+dict)
+  2. On-the-fly SD enumeration in the DirectCI excitation loop
+  3. Or a symmetry-restricted CI (e.g., Ms=0 sector only)
+
+===== CONVERGENCE SUMMARY =====
+ nmax          NSD     D_e_CP    err%     time(s)
+    2        4,845     0.2696  191.8%           6
+    3      367,290     0.0933    1.0%          82
+    4    8,214,570     (infeasible: >1800s, >5.4 GB)
+ expt                  0.0924

@@ -1,0 +1,38 @@
+Hybrid Cross-Atom Architecture LiH Diagnostic (v0.9.18)
+============================================================
+
+nmax = 3
+Architecture: Mulliken diagonal + SW/D-matrix off-diagonal
+
+Atomic energies:
+  E_Li = -7.392086 Ha
+  E_H  = -0.500000 Ha
+  E_atoms = -7.892086 Ha
+
+BSSE = -0.114879 Ha
+
+Summary at R=3.015:
+  Baseline: E=-8.116739, D_e_CP=0.109774 Ha
+  Hybrid:   E=-8.149940, D_e_CP=0.142974 Ha
+  Expt:     D_e = 0.092 Ha
+
+H1 matrix elements at R=3.015:
+  Diagonal Li 1s:  base=-4.831675, hybrid=-4.831675
+  Diagonal H 1s:   base=-1.485415, hybrid=-1.485415
+  Off-diag 1sA-1sB: base=0.006780, hybrid=-0.131226
+
+PES scan (hybrid):
+       R        E_mol      D_e_raw       D_e_CP
+   2.000    -8.297887     0.405801     0.290922
+   2.500    -8.208081     0.315995     0.201116
+   3.000    -8.151253     0.259167     0.144288
+   3.015    -8.149940     0.257853     0.142974
+   3.500    -8.115873     0.223787     0.108908
+   4.000    -8.091971     0.199885     0.085006
+   5.000    -8.063402     0.171316     0.056437
+   6.000    -8.043751     0.151665     0.036786
+
+Diagnostics:
+  1. Dissociation: FAIL (D_e_CP(R=6) = 0.036786)
+  2. Bound minimum: PASS (max D_e_CP = 0.290922 at R=2.000)
+  3. BSSE = -0.114879 Ha (same as baseline)

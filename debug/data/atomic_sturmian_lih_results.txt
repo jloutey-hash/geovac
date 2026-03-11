@@ -1,0 +1,82 @@
+======================================================================
+LiH Atomic Sturmian Diagnostics (v0.9.22)
+======================================================================
+
+Atomic p0 values:
+  Li (Z=3, nmax=3): p0_A = 3.845019
+  H  (Z=1, nmax=3): p0_B = 1.000000
+  Geometric mean:   p0_AB = 1.960872
+
+Numerical checks:
+  Li 1s diagonal: -4.142971 Ha (hydrogenic: -4.500 Ha)
+  H  1s diagonal: -0.500000 Ha (hydrogenic: -0.500 Ha)
+  Li cross-nuc (1s, Z_B=1): -0.260077 Ha
+  H  cross-nuc (1s, Z_A=3): uncapped=-3.000000, capped=-0.995025 Ha
+
+Bond angles at R=3.015:
+  gamma_A = 0.1721 rad (9.9 deg)
+  gamma_B = 0.6405 rad (36.7 deg)
+  gamma_B > gamma_A: True
+
+PES scan (nmax=3, E_atoms=-7.892086 Ha):
+  R (bohr)   E_mol (Ha)    D_e_raw   Status
+----------------------------------------------
+     2.000   -11.783659     3.8916    bound
+     2.500   -11.305873     3.4138    bound
+     3.000   -10.583056     2.6910    bound
+     3.015   -10.563032     2.6709    bound
+     3.500   -10.020630     2.1285    bound
+     4.000    -9.688875     1.7968    bound
+     5.000    -9.294319     1.4022    bound
+     6.000    -9.073887     1.1818    bound
+
+BSSE correction (R=3.015):
+  E_A_own   = -7.392086 Ha
+  E_B_own   = -0.500000 Ha
+  E_A_ghost = -7.496598 Ha
+  E_B_ghost = -0.510367 Ha
+  BSSE_A    = -0.104511 Ha
+  BSSE_B    = -0.010367 Ha
+  BSSE      = -0.114879 Ha (baseline: -0.115 Ha)
+
+CP-corrected PES:
+  R (bohr)        E_mol    D_e_raw     D_e_CP   Status
+--------------------------------------------------------
+     2.000   -11.783659     3.8916     3.7767    bound
+     2.500   -11.305873     3.4138     3.2989    bound
+     3.000   -10.583056     2.6910     2.5761    bound
+     3.015   -10.563032     2.6709     2.5561    bound
+     3.500   -10.020630     2.1285     2.0137    bound
+     4.000    -9.688875     1.7968     1.6819    bound
+     5.000    -9.294319     1.4022     1.2874    bound
+     6.000    -9.073887     1.1818     1.0669    bound
+
+======================================================================
+SUMMARY
+======================================================================
+  Minimum E_mol: -11.783659 Ha at R=2.000 bohr
+  D_e_raw at minimum: 3.8916 Ha
+  D_e_CP at minimum:  3.7767 Ha
+  Expt: D_e = 0.092 Ha at R_eq = 3.015 bohr
+
+Diagnostic 1 - Dissociation limit (R=6.0):
+  D_e_CP(R=6.0) = 1.0669 Ha
+  |D_e_CP| <= 0.001: FAIL
+
+Diagnostic 2 - Bound minimum:
+  D_e_CP at R_min = 3.7767 Ha
+  D_e_CP > 0: PASS
+
+Diagnostic 3 - BSSE:
+  BSSE = -0.114879 Ha
+  Baseline = -0.115 Ha
+  BSSE changed from baseline: NO
+
+Comparison with baselines:
+  Hybrid (v0.9.18) D_e_CP: 0.143 Ha
+  Atomic Sturmian D_e_CP:   3.7767 Ha
+  Experiment D_e:           0.092 Ha
+
+Success criterion: D_e_CP in [0.05, 0.20] Ha
+  D_e_CP = 3.7767 Ha
+  PARTIAL SUCCESS (see diagnosis)

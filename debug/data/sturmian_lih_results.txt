@@ -1,0 +1,49 @@
+Sturmian Basis LiH Diagnostic (v0.9.20)
+nmax=3, R_eq=3.015 bohr
+
+Atomic reference: E(Li)=-7.392086, E(H)=-0.500000, E_sep=-7.892086 Ha
+
+Self-consistency: converged=False, p0=4.569787, E_mol=4.660024 Ha, n_iter=4
+
+PES (fixed p0):
+       R        E (Ha)
+     ---           ---
+   2.000      4.602035
+   2.500      4.622611
+   3.000      4.658924
+   3.015      4.660024
+   3.500      4.693488
+   4.000      4.722553
+   5.000      4.765983
+   6.000      4.796030
+
+======================================================================
+DIAGNOSTICS
+======================================================================
+
+1. Dissociation limit (R=6.0):
+   E(R=6.0) = 4.796030 Ha
+   D_e_raw(R=6.0 - R_min) = 0.193996 Ha
+
+2. Bound minimum:
+   R_min = 2.000 bohr (expt: 3.015)
+   E_min = 4.602035 Ha (exact: -8.0705)
+   D_e_raw = 0.193996 Ha
+   D_e_CP  = -12.609000 Ha (expt: 0.0924)
+
+3. BSSE:
+   BSSE = -0.114879 Ha (Mulliken baseline: -0.115)
+
+4. Comparison with baselines:
+   D_e_CP(Sturmian): -12.6090 Ha
+   D_e_CP(hybrid):   0.1430 Ha
+   D_e_CP(expt):     0.0924 Ha
+
+5. Self-consistent p0:
+   p0_init = 2.236068
+   p0_final = 4.569787
+   n_iterations = 4
+   converged = False
+
+   DIAGNOSIS: E_mol became positive (unbound state).
+   The Sturmian basis at p0=4.5698 is too compact/diffuse.

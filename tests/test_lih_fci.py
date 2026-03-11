@@ -21,6 +21,7 @@ import pytest
 
 from geovac.lattice_index import (
     MolecularLatticeIndex, LatticeIndex, compute_bsse_correction,
+    compute_cross_atom_J, compute_cross_atom_K, compute_overlap_element,
 )
 
 
@@ -29,13 +30,17 @@ pytestmark = pytest.mark.filterwarnings("ignore::UserWarning")
 
 
 def _build_lih(R: float, nmax: int = 2, n_bridges: int = 10,
-               fci_method: str = 'matrix') -> MolecularLatticeIndex:
+               fci_method: str = 'matrix',
+               cross_atom_vee: object = True,
+               zeta_A: float = 1.0,
+               zeta_B: float = 1.0) -> MolecularLatticeIndex:
     """Helper to build LiH at given R with small basis for test speed."""
     return MolecularLatticeIndex(
         Z_A=3, Z_B=1, nmax_A=nmax, nmax_B=nmax,
         R=R, n_electrons=4,
         n_bridges=n_bridges, vee_method='slater_full',
-        fci_method=fci_method,
+        fci_method=fci_method, cross_atom_vee=cross_atom_vee,
+        zeta_A=zeta_A, zeta_B=zeta_B,
     )
 
 
@@ -247,3 +252,544 @@ class TestLiHCounterpoise:
 
         assert D_e_cp > 0, \
             f"CP-corrected D_e should be positive, got {D_e_cp:.4f} Ha"
+
+
+class TestCrossAtomJ:
+    """Tests for cross-atom direct Coulomb integrals J_AB(R)."""
+
+    # Reference values computed via compute_cross_atom_J at R=3.015, ZA=3, ZB=1
+    # These are the 9 s-s pairs (×2 for ERI symmetry = 18 entries)
+    REFERENCE_J = {
+        (1, 1): 0.327873,
+        (1, 2): 0.185578,
+        (1, 3): 0.092579,
+        (2, 1): 0.312119,
+        (2, 2): 0.180687,
+        (2, 3): 0.091118,
+        (3, 1): 0.222891,
+        (3, 2): 0.157987,
+        (3, 3): 0.085702,
+    }
+
+    def test_j_asymptotic_zero(self):
+        """J_AB(R -> inf) -> 0: orbitals don't interact at large separation."""
+        j_far = compute_cross_atom_J(1, 0, 1, 0, R=200.0, ZA=3.0, ZB=1.0)
+        assert abs(j_far) < 0.01, \
+            f"J(1s,1s,R=200) = {j_far:.6f}, expected ~0"
+
+    def test_j_point_charge_limit(self):
+        """J_AB(R) -> 1/R for compact orbitals at large R."""
+        R = 100.0
+        j = compute_cross_atom_J(1, 0, 1, 0, R=R, ZA=3.0, ZB=1.0)
+        # 1s orbitals are compact; at R=100 should be very close to 1/R
+        np.testing.assert_allclose(j, 1.0 / R, rtol=0.01,
+                                   err_msg="J(1s,1s) should approach 1/R")
+
+    def test_j_reference_values(self):
+        """J_AB at R=3.015 matches reference values within 1%."""
+        R = 3.015
+        for (na, nb), j_ref in self.REFERENCE_J.items():
+            j = compute_cross_atom_J(na, 0, nb, 0, R=R, ZA=3.0, ZB=1.0)
+            np.testing.assert_allclose(
+                j, j_ref, rtol=0.01,
+                err_msg=f"J(Li {na}s, H {nb}s) = {j:.6f}, ref = {j_ref:.6f}"
+            )
+
+    def test_j_monotone_in_R(self):
+        """J_AB decreases with increasing R (less overlap at larger separation)."""
+        R_vals = [2.0, 3.0, 5.0, 10.0]
+        j_vals = [compute_cross_atom_J(1, 0, 1, 0, R=R, ZA=3.0, ZB=1.0)
+                  for R in R_vals]
+        for i in range(len(j_vals) - 1):
+            assert j_vals[i] > j_vals[i + 1], \
+                f"J not monotone: J(R={R_vals[i]})={j_vals[i]:.6f} <= " \
+                f"J(R={R_vals[i+1]})={j_vals[i+1]:.6f}"
+
+    def test_j_accepts_nonzero_l(self):
+        """compute_cross_atom_J handles l>0 via monopole (spherical average)."""
+        j = compute_cross_atom_J(2, 1, 1, 0, R=3.0, ZA=3.0, ZB=1.0)
+        # 2p-1s cross-atom J should be positive and less than 1/R
+        assert 0 < j < 1.0 / 3.0 + 0.1, \
+            f"J(2p,1s,R=3) = {j:.6f}, expected in (0, 0.43)"
+
+    def test_18_cross_atom_entries_in_eri(self):
+        """MolecularLatticeIndex generates 36 cross-atom ERIs in s_only mode.
+
+        nmax=3: 3 s-orbitals per atom (1s, 2s, 3s).
+        J entries: 3*3 = 9 pairs * 2 symmetry = 18 Coulomb entries.
+        K entries: 3*3 = 9 pairs * 2 = 18 exchange entries.
+        Total: 36 cross-atom ERI entries.
+        """
+        mol = MolecularLatticeIndex(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            n_bridges=10, vee_method='slater_full',
+            fci_method='matrix', cross_atom_vee='s_only',
+        )
+        nA = mol._n_spatial_A
+        n_cross_J = 0
+        n_cross_K = 0
+        for (a, b, c, d), val in mol._eri.items():
+            a_is_A = a < nA
+            b_is_A = b < nA
+            if a_is_A != b_is_A:
+                if a == c and b == d:
+                    n_cross_J += 1
+                elif a == d and b == c:
+                    n_cross_K += 1
+        assert n_cross_J == 18, \
+            f"Expected 18 cross-atom J entries, got {n_cross_J}"
+        assert n_cross_K == 18, \
+            f"Expected 18 cross-atom K entries (s-s only), got {n_cross_K}"
+
+
+class TestOverlapMatrix:
+    """Tests for cross-atom overlap integrals and Lowdin orthogonalization."""
+
+    def test_same_center_overlap_is_one(self):
+        """Overlap of 1s orbital with itself on the same center = 1."""
+        s = compute_overlap_element(1, 0, 1, 0, ZA=1.0, ZB=1.0, R=0.0)
+        np.testing.assert_allclose(s, 1.0, atol=1e-6,
+                                   err_msg="Self-overlap should be 1")
+
+    def test_overlap_h_h_1s(self):
+        """H-H 1s overlap at R=1.4 matches STO analytical value."""
+        R = 1.4
+        s = compute_overlap_element(1, 0, 1, 0, ZA=1.0, ZB=1.0, R=R)
+        # Analytical: S = e^{-R}(1 + R + R²/3)
+        s_exact = np.exp(-R) * (1.0 + R + R**2 / 3.0)
+        np.testing.assert_allclose(s, s_exact, rtol=0.02,
+                                   err_msg=f"H-H 1s overlap: got {s:.4f}, "
+                                           f"expected {s_exact:.4f}")
+
+    def test_overlap_li_h_positive(self):
+        """Li-H 1s overlap at R=3.015 is positive and < 1."""
+        s = compute_overlap_element(1, 0, 1, 0, ZA=3.0, ZB=1.0, R=3.015)
+        assert 0 < s < 1, f"Cross-atom overlap should be in (0,1), got {s:.4f}"
+
+    def test_overlap_decreases_with_R(self):
+        """Overlap decreases with internuclear distance."""
+        s_near = compute_overlap_element(1, 0, 1, 0, ZA=3.0, ZB=1.0, R=2.0)
+        s_far = compute_overlap_element(1, 0, 1, 0, ZA=3.0, ZB=1.0, R=5.0)
+        assert s_near > s_far, \
+            f"Overlap should decrease: S(R=2)={s_near:.4f} <= S(R=5)={s_far:.4f}"
+
+    def test_overlap_rejects_nonzero_l(self):
+        """compute_overlap_element raises NotImplementedError for l>0."""
+        with pytest.raises(NotImplementedError):
+            compute_overlap_element(2, 1, 1, 0, ZA=1.0, ZB=1.0, R=3.0)
+
+    def test_overlap_matrix_identity_blocks(self):
+        """Overlap matrix has identity diagonal blocks (same-atom is orthonormal)."""
+        mol = _build_lih(R=3.015, nmax=2)
+        S = mol._compute_overlap_matrix()
+        nA = mol._n_spatial_A
+        np.testing.assert_allclose(S[:nA, :nA], np.eye(nA), atol=1e-12,
+                                   err_msg="Same-atom block A should be identity")
+        nB = mol._n_spatial_B
+        np.testing.assert_allclose(S[nA:, nA:], np.eye(nB), atol=1e-12,
+                                   err_msg="Same-atom block B should be identity")
+
+    def test_overlap_matrix_symmetric(self):
+        """Overlap matrix is symmetric."""
+        mol = _build_lih(R=3.015, nmax=2)
+        S = mol._compute_overlap_matrix()
+        np.testing.assert_allclose(S, S.T, atol=1e-12,
+                                   err_msg="Overlap matrix should be symmetric")
+
+
+class TestLowdinOrthogonalization:
+    """Tests for Lowdin symmetric orthogonalization of molecular basis."""
+
+    def test_lowdin_runs_without_error(self):
+        """MolecularLatticeIndex with orthogonalize=True completes."""
+        mol = MolecularLatticeIndex(
+            Z_A=3, Z_B=1, nmax_A=2, nmax_B=2,
+            R=3.015, n_electrons=4,
+            n_bridges=10, vee_method='slater_full',
+            fci_method='matrix', orthogonalize=True,
+        )
+        eigvals, _ = mol.compute_ground_state(n_states=1)
+        assert eigvals[0] < -7.0, f"E={eigvals[0]:.4f}, expected below -7.0"
+
+    def test_lowdin_preserves_basis_size(self):
+        """Lowdin transform preserves spatial basis size (no functions dropped)."""
+        mol = MolecularLatticeIndex(
+            Z_A=3, Z_B=1, nmax_A=2, nmax_B=2,
+            R=3.015, n_electrons=4,
+            n_bridges=10, vee_method='slater_full',
+            fci_method='matrix', orthogonalize=True,
+        )
+        assert mol._n_spatial == 10  # 5+5 unchanged
+        assert mol.n_sp == 20
+
+    def test_lowdin_reduces_bsse(self):
+        """BSSE with orthogonalization should be smaller than without.
+
+        Lowdin removes basis linear dependencies that allow electrons to
+        borrow orbitals from the other center (the root cause of BSSE).
+        """
+        # BSSE without orthogonalization
+        result_no = compute_bsse_correction(
+            Z_A=3, Z_B=1, nmax_A=2, nmax_B=2, R=3.015,
+            n_electrons_A=3, n_electrons_B=1,
+            vee_method='slater_full', fci_method='matrix',
+            orthogonalize=False,
+        )
+        # BSSE with orthogonalization
+        result_orth = compute_bsse_correction(
+            Z_A=3, Z_B=1, nmax_A=2, nmax_B=2, R=3.015,
+            n_electrons_A=3, n_electrons_B=1,
+            vee_method='slater_full', fci_method='matrix',
+            orthogonalize=True,
+        )
+
+        print(f"\nBSSE without orth: {result_no['BSSE']:.6f} Ha")
+        print(f"BSSE with orth:    {result_orth['BSSE']:.6f} Ha")
+
+        # Orthogonalized BSSE should be smaller in magnitude
+        assert abs(result_orth['BSSE']) <= abs(result_no['BSSE']) + 1e-6, \
+            f"|BSSE_orth| ({abs(result_orth['BSSE']):.6f}) should be <= " \
+            f"|BSSE_no| ({abs(result_no['BSSE']):.6f})"
+
+    def test_ghost_energy_unchanged_with_lowdin(self):
+        """Ghost atom with no cross-atom overlap gives same energy."""
+        # At very large R, cross-atom overlap → 0, so Lowdin = identity
+        mol_no = MolecularLatticeIndex(
+            Z_A=1, Z_B=0, nmax_A=2, nmax_B=2,
+            R=50.0, n_electrons=1,
+            vee_method='slater_full', fci_method='matrix',
+            orthogonalize=False,
+        )
+        E_no = mol_no.compute_ground_state(n_states=1)[0][0]
+
+        mol_orth = MolecularLatticeIndex(
+            Z_A=1, Z_B=0, nmax_A=2, nmax_B=2,
+            R=50.0, n_electrons=1,
+            vee_method='slater_full', fci_method='matrix',
+            orthogonalize=True,
+        )
+        E_orth = mol_orth.compute_ground_state(n_states=1)[0][0]
+
+        np.testing.assert_allclose(E_orth, E_no, atol=1e-8,
+                                   err_msg="Ghost at large R should be unchanged")
+
+
+class TestCrossAtomExchange:
+    """Tests for cross-atom exchange integrals via Mulliken approximation."""
+
+    def test_k_zero_at_large_R(self):
+        """K_AB -> 0 as R -> inf (overlap vanishes)."""
+        mol = _build_lih(R=100.0, nmax=2)
+        nA = mol._n_spatial_A
+        for (a, b, c, d), val in mol._eri.items():
+            a_on_A = a < nA
+            b_on_A = b < nA
+            # Exchange pattern: (a,b,b,a) with a,b on different atoms
+            if a_on_A != b_on_A and a == d and b == c:
+                assert abs(val) < 1e-6, \
+                    f"Exchange ERI {(a,b,c,d)} = {val:.8f} should be ~0 at R=100"
+
+    def test_k_positive(self):
+        """K_AB > 0 at equilibrium (exchange integrals are positive)."""
+        mol = _build_lih(R=3.015, nmax=2)
+        nA = mol._n_spatial_A
+        found_exchange = False
+        for (a, b, c, d), val in mol._eri.items():
+            a_on_A = a < nA
+            b_on_A = b < nA
+            if a_on_A != b_on_A and a == d and b == c:
+                assert val > 0, \
+                    f"Exchange ERI {(a,b,c,d)} = {val:.6f} should be > 0"
+                found_exchange = True
+        assert found_exchange, "No cross-atom exchange ERIs found"
+
+    def test_k_symmetric(self):
+        """K(aA, bB) stored as both (a,b,b,a) and (b,a,a,b)."""
+        mol = _build_lih(R=3.015, nmax=2)
+        nA = mol._n_spatial_A
+        for (a, b, c, d), val in mol._eri.items():
+            a_on_A = a < nA
+            b_on_A = b < nA
+            if a_on_A != b_on_A and a == d and b == c:
+                partner = mol._eri.get((b, a, a, b), None)
+                assert partner is not None, \
+                    f"Missing symmetric partner for exchange ERI {(a,b,c,d)}"
+                np.testing.assert_allclose(val, partner, atol=1e-12)
+
+    def test_k_smaller_than_j(self):
+        """K_AB < J_AB for same (a, b) pair (exchange < Coulomb)."""
+        mol = _build_lih(R=3.015, nmax=2)
+        nA = mol._n_spatial_A
+        for (a, b, c, d), val in mol._eri.items():
+            a_on_A = a < nA
+            b_on_A = b < nA
+            if a_on_A != b_on_A and a == d and b == c:
+                j_val = mol._eri.get((a, b, a, b), 0.0)
+                assert val < j_val, \
+                    f"K({a},{b}) = {val:.6f} >= J({a},{b}) = {j_val:.6f}"
+
+    def test_cross_atom_eri_counts(self):
+        """Cross-atom ERI counts with all-l default (v0.9.35).
+
+        nmax=2: 5 spatial states per atom (1s, 2s, 2p_{-1,0,1}).
+        J: 5*5 = 25 pairs * 2 symmetry = 50 Coulomb entries (all l).
+        K: 2*2 = 4 s-s pairs * 2 = 8 exchange entries (s-only).
+        """
+        mol = _build_lih(R=3.015, nmax=2)
+        nA = mol._n_spatial_A
+        n_coulomb = 0
+        n_exchange = 0
+        for (a, b, c, d) in mol._eri:
+            a_on_A = a < nA
+            b_on_A = b < nA
+            if a_on_A != b_on_A:
+                if a == c and b == d:
+                    n_coulomb += 1
+                elif a == d and b == c:
+                    n_exchange += 1
+        assert n_coulomb == 50, \
+            f"Expected 50 cross-atom J entries (all l), got {n_coulomb}"
+        assert n_exchange == 8, \
+            f"Expected 8 cross-atom K entries (s-s only), got {n_exchange}"
+
+    def test_mulliken_formula_manual(self):
+        """Verify Mulliken formula: K = S^2 * (F0_aa + F0_bb) / 2."""
+        R = 3.015
+        ZA, ZB = 3.0, 1.0
+        S = compute_overlap_element(1, 0, 1, 0, ZA, ZB, R)
+
+        mol = _build_lih(R=R, nmax=2)
+        # F0(Li 1s, Li 1s) = same-atom ERI (0, 0, 0, 0) on atom A
+        f0_a = mol._li_A._eri.get((0, 0, 0, 0), 0.0)
+        # F0(H 1s, H 1s) = same-atom ERI (0, 0, 0, 0) on atom B
+        f0_b = mol._li_B._eri.get((0, 0, 0, 0), 0.0)
+
+        k_expected = S * S * (f0_a + f0_b) / 2.0
+
+        nA = mol._n_spatial_A
+        # Exchange ERI for Li 1s (idx=0) - H 1s (idx=nA): stored as (0, nA, nA, 0)
+        k_actual = mol._eri.get((0, nA, nA, 0), 0.0)
+
+        assert k_expected > 0, f"Expected K should be positive, got {k_expected}"
+        np.testing.assert_allclose(
+            k_actual, k_expected, rtol=1e-6,
+            err_msg=f"K(1s,1s) = {k_actual:.8f}, expected {k_expected:.8f}"
+        )
+
+    def test_energy_lowered_by_exchange(self):
+        """Exchange lowers energy: E(with K) < E(without K).
+
+        Exchange enters Slater-Condon as -delta(sigma)*<pq|qp>.
+        Since K > 0, this is a negative contribution to same-spin pairs,
+        lowering the total energy.
+        """
+        mol = _build_lih(R=3.015, nmax=2)
+        E_with_K, _ = mol.compute_ground_state(n_states=1)
+
+        # Zero out cross-atom exchange ERIs and re-solve
+        nA = mol._n_spatial_A
+        exchange_keys = []
+        for (a, b, c, d) in list(mol._eri.keys()):
+            a_on_A = a < nA
+            b_on_A = b < nA
+            if a_on_A != b_on_A and a == d and b == c:
+                exchange_keys.append((a, b, c, d))
+
+        assert len(exchange_keys) > 0, "No exchange ERIs to remove"
+
+        for key in exchange_keys:
+            del mol._eri[key]
+
+        # Re-assemble and solve without exchange
+        H_no_K = mol.assemble_hamiltonian()
+        from scipy.sparse.linalg import eigsh
+        eigvals_no_K, _ = eigsh(H_no_K, k=1, which='SA',
+                                v0=np.random.RandomState(42).randn(H_no_K.shape[0]))
+        E_no_K = eigvals_no_K[0] + mol.V_NN
+
+        assert E_with_K[0] < E_no_K, \
+            f"E(with K) = {E_with_K[0]:.6f} should be < E(without K) = {E_no_K:.6f}"
+
+    def test_energy_bound(self):
+        """LiH is still bound after adding exchange."""
+        mol = _build_lih(R=3.015, nmax=2)
+        E_mol, _ = mol.compute_ground_state(n_states=1)
+
+        # Separated atoms
+        li = LatticeIndex(n_electrons=3, max_n=2, nuclear_charge=3,
+                          vee_method='slater_full', h1_method='exact')
+        E_li = li.compute_ground_state(n_states=1)[0][0]
+        h = LatticeIndex(n_electrons=1, max_n=2, nuclear_charge=1,
+                         vee_method='slater_full', h1_method='exact')
+        E_h = h.compute_ground_state(n_states=1)[0][0]
+        E_sep = E_li + E_h
+
+        assert E_mol[0] < E_sep, \
+            f"E_mol = {E_mol[0]:.6f} should be < E_sep = {E_sep:.6f}"
+
+
+# ===========================================================================
+# Energy decomposition tests (v0.9.24)
+# ===========================================================================
+
+class TestEnergyDecomposition:
+    """Tests for Hamiltonian term decomposition instrumentation."""
+
+    @pytest.fixture(scope="class")
+    def mol_and_civec(self):
+        """Build MolecularLatticeIndex at R=3.015 and solve FCI (nmax=2)."""
+        mol = _build_lih(R=3.015, nmax=2)
+        eigvals, eigvecs = mol.compute_ground_state(n_states=1)
+        return mol, eigvecs[:, 0], eigvals[0]
+
+    def test_decomposition_sum(self, mol_and_civec):
+        """Verify decomposed components sum to E_total within 1e-5 Ha."""
+        mol, civec, E_fci = mol_and_civec
+        decomp = mol.decompose_energy(civec, E_fci)
+
+        component_sum = (decomp['T'] + decomp['V_nA'] + decomp['V_nB']
+                         + decomp['V_cross_A'] + decomp['V_cross_B']
+                         + decomp['V_bridge'] + decomp['V_ee']
+                         + decomp['V_NN'])
+
+        assert abs(component_sum - decomp['E_total']) < 1e-5, \
+            (f"Component sum {component_sum:.8f} != "
+             f"E_total {decomp['E_total']:.8f}")
+
+        # Also verify E_total matches FCI eigenvalue
+        assert abs(decomp['E_total'] - E_fci) < 1e-5, \
+            (f"E_total {decomp['E_total']:.8f} != "
+             f"FCI eigenvalue {E_fci:.8f}")
+
+    def test_virial_ratio(self, mol_and_civec):
+        """Verify virial ratio is finite and document its value.
+
+        NOTE: In this Hamiltonian, V_nA = -Z^2/(2n^2) contains both kinetic
+        and nuclear attraction (exact atomic eigenvalues). The graph Laplacian
+        hopping 'T' is NOT the physical kinetic energy, so the standard virial
+        theorem (-2T/V = 1) does not apply to this decomposition. The test
+        verifies the decomposition is self-consistent (finite, non-NaN).
+        """
+        mol, civec, E_fci = mol_and_civec
+        decomp = mol.decompose_energy(civec, E_fci)
+
+        V_total = (decomp['V_nA'] + decomp['V_nB']
+                   + decomp['V_cross_A'] + decomp['V_cross_B']
+                   + decomp['V_ee'] + decomp['V_NN'])
+
+        assert abs(V_total) > 1e-10, f"V_total is near zero: {V_total}"
+        virial = -2.0 * decomp['T'] / V_total
+
+        assert np.isfinite(virial), f"Virial ratio is not finite: {virial}"
+        # Document the actual value (expected ~0 because T is graph hopping,
+        # not physical kinetic energy)
+        print(f"\n  Virial ratio -2<T_graph>/<V> = {virial:.4f} "
+              f"(T_graph={decomp['T']:.6f}, V_total={V_total:.6f})")
+
+
+# ===========================================================================
+# Cross-atom V_ee l>0 extension tests (v0.9.35)
+# ===========================================================================
+
+class TestCrossAtomVeeAllL:
+    """Tests for cross-atom V_ee with all (n,l) orbital pairs (v0.9.35)."""
+
+    def test_j_cross_p_orbital_physical_range(self):
+        """J(2p_Li, 1s_H) at R=3.015 is positive and < 1/R."""
+        j = compute_cross_atom_J(2, 1, 1, 0, R=3.015, ZA=3.0, ZB=1.0)
+        assert 0 < j < 1.0 / 3.015 + 0.05, \
+            f"J(2p,1s,R=3.015) = {j:.6f}, expected in (0, {1/3.015 + 0.05:.3f})"
+        print(f"\n  J(Li 2p, H 1s, R=3.015) = {j:.6f} Ha")
+
+    def test_j_cross_monotone_with_l(self):
+        """J monotonically decreases with R for l>0 pairs too."""
+        R_vals = [2.0, 3.015, 6.0]
+        j_vals = [compute_cross_atom_J(2, 1, 1, 0, R=R, ZA=3.0, ZB=1.0)
+                  for R in R_vals]
+        for i in range(len(j_vals) - 1):
+            assert j_vals[i] > j_vals[i + 1], \
+                f"J(2p,1s) not monotone: J(R={R_vals[i]})={j_vals[i]:.6f} " \
+                f"<= J(R={R_vals[i+1]})={j_vals[i+1]:.6f}"
+        print(f"\n  J(2p,1s): R=2.0→{j_vals[0]:.4f}, "
+              f"R=3.015→{j_vals[1]:.4f}, R=6.0→{j_vals[2]:.4f}")
+
+    def test_cross_vee_raises_energy_at_short_R(self):
+        """Cross-atom V_ee (all l) raises energy vs disabled at R=2.0.
+
+        Adding cross-atom electron-electron repulsion makes the molecule
+        less bound at short R (more positive energy).
+        """
+        mol_on = _build_lih(R=2.0, nmax=2, cross_atom_vee=True)
+        E_on, _ = mol_on.compute_ground_state(n_states=1)
+
+        mol_off = _build_lih(R=2.0, nmax=2, cross_atom_vee=False)
+        E_off, _ = mol_off.compute_ground_state(n_states=1)
+
+        assert E_on[0] > E_off[0], \
+            f"E(cross_vee=True) = {E_on[0]:.6f} should be > " \
+            f"E(cross_vee=False) = {E_off[0]:.6f} at R=2.0"
+        print(f"\n  R=2.0: E(all_l)={E_on[0]:.4f}, E(off)={E_off[0]:.4f}, "
+              f"delta={E_on[0] - E_off[0]:.4f} Ha")
+
+
+class TestOrbitalExponentRelaxation:
+    """Tests for orbital exponent relaxation (v0.9.36)."""
+
+    def test_exponent_regression_zeta_one(self):
+        """zeta_B=1.0 gives identical energy to baseline (no regression).
+
+        The parametrization must not change the default code path.
+        """
+        mol_baseline = _build_lih(R=3.015, nmax=2)
+        E_baseline, _ = mol_baseline.compute_ground_state(n_states=1)
+
+        mol_zeta = _build_lih(R=3.015, nmax=2, zeta_B=1.0)
+        E_zeta, _ = mol_zeta.compute_ground_state(n_states=1)
+
+        diff = abs(E_zeta[0] - E_baseline[0])
+        assert diff < 1e-4, \
+            f"zeta_B=1.0 energy {E_zeta[0]:.6f} differs from baseline " \
+            f"{E_baseline[0]:.6f} by {diff:.2e} Ha (threshold 1e-4)"
+        print(f"\n  E(baseline)={E_baseline[0]:.6f}, E(zeta=1)={E_zeta[0]:.6f}, "
+              f"diff={diff:.2e} Ha")
+
+    def test_contraction_lowers_energy(self):
+        """At R=3.015, E(zeta_B=1.3) < E(zeta_B=1.0) — variational improvement.
+
+        Contracting the H orbital under Li's Coulomb field should lower the
+        total energy at equilibrium-like distances.
+        """
+        mol_fixed = _build_lih(R=3.015, nmax=2, zeta_B=1.0)
+        E_fixed, _ = mol_fixed.compute_ground_state(n_states=1)
+
+        mol_contracted = _build_lih(R=3.015, nmax=2, zeta_B=1.3)
+        E_contracted, _ = mol_contracted.compute_ground_state(n_states=1)
+
+        assert E_contracted[0] < E_fixed[0], \
+            f"E(zeta_B=1.3)={E_contracted[0]:.6f} should be < " \
+            f"E(zeta_B=1.0)={E_fixed[0]:.6f} at R=3.015"
+        print(f"\n  E(zeta=1.0)={E_fixed[0]:.6f}, E(zeta=1.3)={E_contracted[0]:.6f}, "
+              f"delta={E_contracted[0] - E_fixed[0]:.4f} Ha")
+
+    def test_free_atom_limit(self):
+        """At large R, optimal zeta_B approaches 1.0 (free H).
+
+        At R=20 the H atom is essentially free, so the optimal exponent
+        should be near 1.0.
+        """
+        from scipy.optimize import minimize_scalar
+
+        def energy_at_zeta(zeta_B: float) -> float:
+            mol = _build_lih(R=20.0, nmax=2, zeta_B=zeta_B)
+            E, _ = mol.compute_ground_state(n_states=1)
+            return E[0]
+
+        result = minimize_scalar(energy_at_zeta, bounds=(0.8, 2.0),
+                                 method='bounded')
+        zeta_opt = result.x
+
+        assert 0.95 <= zeta_opt <= 1.05, \
+            f"Optimal zeta_B at R=20 is {zeta_opt:.4f}, expected ~1.0 " \
+            f"(free atom limit)"
+        print(f"\n  R=20: zeta_B*={zeta_opt:.4f} (expected ~1.0)")

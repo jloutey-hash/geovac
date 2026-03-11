@@ -1,0 +1,48 @@
+BOND SPHERE MINIMAL HAMILTONIAN -- ANALYSIS RESULTS
+============================================================
+Date: 2026-03-11
+Model: 2-state (1-sigma Li 1s, 2-sigma Li 2s/H 1s bonding)
+Parameters: beta1=1.033, beta2=1.95, Z_A=3, Z_B=1
+
+1. ANALYTIC gamma_eq: DOES NOT EXIST
+   Sturmian H proportional to S -> eigenvalues independent of gamma.
+   dE_total/dgamma = Z_A*Z_B*p0/(2cos^2(gamma/2)) > 0 always.
+
+2. NUMERICAL SWEEP (fixed beta):
+          R         p0        E_total      gamma
+   ------------------------------------------------
+       1.00    12.5244     -78.430240     0.1594
+       1.50    10.2261     -52.286827     0.1302
+       2.00     8.8561     -39.215120     0.1128
+       2.50     7.9211     -31.372096     0.1009
+       3.00     7.2310     -26.143413     0.0921
+       3.50     6.6946     -22.408640     0.0853
+       4.00     6.2622     -19.607560     0.0798
+       4.50     5.9041     -17.428942     0.0752
+       5.00     5.6011     -15.686048     0.0714
+       5.50     5.3404     -14.260044     0.0681
+       6.00     5.1131     -13.071707     0.0652
+       6.50     4.9125     -12.066191     0.0626
+       7.00     4.7338     -11.204320     0.0603
+       7.50     4.5733     -10.457365     0.0583
+       8.00     4.4280      -9.803780     0.0564
+       8.50     4.2958      -9.227087     0.0548
+       9.00     4.1748      -8.714471     0.0532
+       9.50     4.0635      -8.255815     0.0518
+      10.00     3.9606      -7.843024     0.0505
+
+3. SELF-CONSISTENT SOLUTION (fixed beta): NONE
+   E_total(R) = Z_A Z_B / (R*(1+2*alpha_eff)) -- pure 1/R, no minimum.
+   alpha_eff = -0.519125, 1+2*alpha_eff = -0.038251
+
+4. COMPARISON:
+   R_eq (Bond Sphere, fixed beta) = inf (unbound)
+   R_eq (experiment)               = 3.015 bohr
+   R_eq (LCAO v0.9.11)             = ~2.5 bohr
+
+5. ROOT CAUSE:
+   The Sturmian construction makes H[i,j] proportional to S[i,j].
+   Eigenvalues E_k = (p0^2/2)(1/beta_k - 1) are geometry-independent.
+   Binding requires beta_k(R) -- the prolate spheroidal PES.
+   The minimal 2-state model with fixed beta is structurally incapable
+   of predicting R_eq.

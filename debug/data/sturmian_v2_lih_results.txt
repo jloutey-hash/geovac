@@ -1,0 +1,85 @@
+Sturmian v2 LiH Diagnostic (v0.9.21)
+nmax=3, R_eq=3.015 bohr
+Fix: D-matrix cross-nuclear replaces frozen Fourier
+
+Atomic reference: E(Li)=-7.392086, E(H)=-0.500000, E_sep=-7.892086 Ha
+
+======================================================================
+SELF-CONSISTENCY LOOP
+======================================================================
+
+--- damping=1.0 ---
+  converged:    False
+  p0_final:     4.269364
+  E_mol:        2.348874 Ha
+  n_iterations: 2
+  wall time:    151.5s
+
+--- damping=0.5 ---
+  converged:    True
+  p0_final:     3.168416
+  E_mol:        -5.019429 Ha
+  n_iterations: 12
+  wall time:    996.2s
+  SUCCESS: converged at damping=0.5
+
+Best result: damping=0.5, p0=3.168416, E_mol=-5.019429, converged=True
+
+======================================================================
+PES SCAN (fixed p0=3.168416)
+======================================================================
+
+       R        E (Ha)
+     ---           ---
+   2.000     -4.472033
+   2.500     -4.796471
+   3.000     -5.014028
+   3.015     -5.019432
+   3.500     -5.169124
+   4.000     -5.285519
+   5.000     -5.449209
+   6.000     -5.559388
+
+======================================================================
+BSSE (standard ghost basis)
+======================================================================
+  E(Li, own):   -7.392086 Ha
+  E(H, own):    -0.500000 Ha
+  E(Li, ghost): -7.496598 Ha
+  E(H, ghost):  -0.510367 Ha
+  BSSE_Li:      -0.104511 Ha
+  BSSE_H:       -0.010367 Ha
+  BSSE_total:   -0.114879 Ha
+  v0.9.20 BSSE: -0.115000 Ha
+  Changed:      False
+
+======================================================================
+DIAGNOSTICS
+======================================================================
+
+1. Dissociation limit (R=6.0):
+   E(R=6.0) = -5.559388 Ha
+   D_e_raw(R=6.0 - R_min) = 0.000000 Ha
+   PASS: False
+
+2. Bound minimum:
+   R_min = 6.000 bohr (expt: 3.015)
+   E_min = -5.559388 Ha (exact: -8.0705)
+   D_e_raw = 0.000000 Ha
+   D_e_CP  = -2.447577 Ha (expt: 0.0924)
+
+3. BSSE:
+   BSSE = -0.114879 Ha (v0.9.20: -0.115)
+   Changed from v0.9.20: False
+
+4. Comparison with baselines:
+   D_e_CP(Sturmian v2): -2.4476 Ha
+   D_e_CP(hybrid):      0.1430 Ha
+   D_e_CP(expt):        0.0924 Ha
+
+5. Self-consistent p0:
+   p0_init = 2.236068
+   p0_final = 3.168416
+   damping = 0.5
+   n_iterations = 12
+   converged = True

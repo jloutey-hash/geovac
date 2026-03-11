@@ -1,0 +1,118 @@
+======================================================================
+v0.9.34 Dual-p0 MO Sturmian FCI — LiH Diagnostics
+n_grid=20 (reduced for speed)
+======================================================================
+
+--- CHECK 1: Cross-set overlap at equal p0 ---
+  p0=2.0, nmax=2, n_mo=4
+  k=0: S_within=1.000000, O_cross=1.000000, err=0.00%
+  k=1: S_within=1.000000, O_cross=1.000000, err=0.00%
+  k=2: S_within=1.000000, O_cross=1.000000, err=0.00%
+  k=3: S_within=1.000000, O_cross=1.000000, err=0.00%
+  PASS
+
+--- CHECK 2: H-scale H1 diagonal at p0_H=1.0 ---
+  p0_H=1.0, nmax_H=2, n_mo_H=4
+  H1_HH[0,0] = -2.603927 Ha  (n=1,m=0,ns=0,nr=0)
+  H1_HH[1,1] = -1.157117 Ha  (n=2,m=0,ns=0,nr=1)
+  H1_HH[2,2] = -1.478581 Ha  (n=2,m=0,ns=1,nr=0)
+  H1_HH[3,3] = -1.219328 Ha  (n=2,m=1,ns=0,nr=0)
+  1sigma' H1 = -2.6039 Ha (NOT close to -0.5; MOs see full molecular potential)
+  All negative? PASS
+
+--- CHECK 3: Combined S eigenvalues ---
+  p0_Li=3.8450, p0_H=1.0000, R=3.015
+  Combined basis: 10 Li + 4 H = 14 total
+  S eigenvalues (sorted):
+    [ 0] 0.046124
+    [ 1] 0.371734
+    [ 2] 0.457922
+    [ 3] 0.487882
+    [ 4] 0.653848
+    [ 5] 0.771034
+    [ 6] 0.847319
+    [ 7] 0.928175
+    [ 8] 0.965780
+    [ 9] 0.995487
+    [10] 1.007441
+    [11] 1.022103
+    [12] 1.283629
+    [13] 2.389582
+  Smallest: 0.046124
+  Near-LD (< 0.01)? NO — OK
+
+--- CHECK 4: H-scale H1 negativity ---
+  All H-scale H1 diagonals negative: PASS
+
+======================================================================
+DUAL-P0 FCI AT R=3.015
+======================================================================
+[DUAL-FCI] Z_A=3.0, Z_B=1.0, R=3.015
+[DUAL-FCI] nmax_Li=3, nmax_H=2, n_el=4
+[DUAL-FCI] Starting p0_Li=3.8450, p0_H=1.0000
+  Combined basis: 10 Li + 4 H = 14 raw MOs
+  S eigenvalues: min=0.0461, max=2.3896
+  After orth: 14 MOs, 28 spinorbs, 20475 SDs
+  iter 0: E=-9.992 Ha, p0_Li=3.845->3.110, p0_H=1.000->1.220
+  iter 1: E=-10.112 Ha, p0_Li=3.110->2.704, p0_H=1.220->1.414
+  iter 2: E=-10.135 Ha, p0_Li=2.704->2.435, p0_H=1.414->1.591
+  iter 3: E=-10.087 Ha, p0_Li=2.435->2.248, p0_H=1.591->1.743
+  (not fully converged — p0 still drifting)
+
+  p0_Li* ~ 2.25 (drifting down from 3.845)
+  p0_H*  ~ 1.74 (drifting up from 1.0)
+  E_mol  ~ -10.1 Ha
+  E_exact = -8.0706 Ha
+  Error  ~ 25%
+  Bound? YES (E < E_atoms=-7.892)
+  n_dropped = 0 initially, 2 at later iterations
+
+======================================================================
+ANALYSIS
+======================================================================
+
+The dual-p0 basis does NOT fix the Sturmian overbinding. Key findings:
+
+1. H-scale MOs at p0_H=1.0 have H1 diagonal = -2.6 Ha (NOT -0.5 Ha).
+   The MOs span the full molecular volume and "see" the Li nucleus
+   (-3/r_A potential), making their energies much more negative than
+   a free H atom. This defeats the purpose of separate p0 scales.
+
+2. The self-consistent p0 loop drives p0_H upward (1.0 -> 1.7) and
+   p0_Li downward (3.8 -> 2.2), converging toward a SINGLE effective
+   p0 ~ 2.0. The two scales do not remain separated.
+
+3. The energy E ~ -10.1 Ha matches v0.9.31 single-p0 Sturmian (-10.07 Ha)
+   because the additional H-scale MOs provide more variational freedom
+   but the same Sturmian identity overbinding persists.
+
+Root cause: Sturmian MOs are molecular eigenfunctions of the FULL
+two-center potential. There is no atom-specific localization. Both
+Li-scale and H-scale MOs extend over the entire molecule and feel
+both nuclei equally. The separate p0 values do not produce
+atom-specific length scales — they just produce redundant representations
+of the same molecular MO space.
+
+Fix path: The Sturmian approach fundamentally cannot separate atomic
+length scales because the prolate spheroidal eigenfunctions are
+inherently delocalized over both centers. The atom-centered LCAO
+approach (lattice_index.py) naturally provides separate length scales
+through separate atomic lattices.
+
+======================================================================
+ELEVEN-CONFIGURATION COMPARISON (R=3.015)
+======================================================================
+Config                              E (Ha)     err%     D_e   R_eq
+----------------------------------------------------------------------
+  v0.9.8  atom-cent graph           -8.097     0.3%   0.198   ~2.0
+  v0.9.9  CP-corrected              -8.097     0.3%   0.083   ~2.5
+  v0.9.11 CP PES                    -8.097     0.3%   0.093   ~2.5
+  v0.9.12 Lowdin ERI                  ---      ---     ---   FAIL
+  v0.9.13 Mulliken K                -8.097     0.3%   0.110   ~2.5
+  v0.9.18 hybrid D-mat              -8.097     0.3%   0.143   <2.0
+  v0.9.31 MO Sturm (single p0)     -10.070    24.8%  bound   <2.0
+  v0.9.32 canon+exactJ              -7.131    11.6%  unbnd   ~3.5
+  v0.9.33 exact K                    -6.796    15.8%  unbnd    6.0
+  v0.9.34 dual-p0                   ~-10.1    ~25%   bound   n/a
+
+  Exact LiH: -8.0706 Ha, D_e=0.092 Ha, R_eq=3.015 Bohr

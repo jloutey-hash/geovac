@@ -5,6 +5,1183 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.37] - 2026-03-11
+
+### Codebase Lock — LiH Benchmark Complete
+
+Documentation and cleanup release. No production code changes.
+
+#### Paper 8 Narrative Complete
+- Added Sturmian Structural Theorem (Sec. XII): H proportional to S,
+  eigenvalues geometry-independent. Binding requires beta_k(R) from PDE.
+- Added SO(4) Selection Rules (Sec. XIII): D2_10_10 = 1 and D2_00_10 = 0
+  for all gamma. The 2p0 orbital is a transparent mode of the bond channel.
+- Added Harmonic Phase Locking negative result (Sec. XIV): no D-matrix
+  critical points map to R_eq ~ 3.015 bohr. R_eq is emergent variational
+  balance, not geometric fixed point.
+- Revised abstract and conclusion to reflect three classes of results:
+  positive structural theorems, negative Sturmian theorem, negative
+  phase locking observation.
+
+#### Codebase Cleanup
+- Created `debug/archive/` and moved 31 one-off diagnostic scripts from
+  the v0.9.20-v0.9.36 experimental arc.
+- Created `docs/sturmian_attempts.md` — complete narrative of the Sturmian
+  arc (v0.9.20-v0.9.34) with structural theorem summary.
+
+#### New Paper Scaffold
+- Created `papers/core/paper_geovac_lcao_fci.tex` — scaffold for the
+  LCAO FCI results paper with section structure, key claims, and
+  bibliography. Working title: "Topological Full Configuration Interaction
+  for Heteronuclear Diatomics: LiH as a Benchmark."
+
+#### Scientific Results (Final, nmax=3)
+- D_e_CP = 0.093 Ha (1.0% error vs expt 0.092 Ha)
+- R_eq ~ 2.5 bohr, identified as nmax discretization artifact
+- Sturmian structural theorem proven (29 diagnostic versions)
+- All specific R_eq hypotheses tested and eliminated
+
+#### Unchanged
+- All production code in geovac/ untouched.
+- All tests pass.
+
+## [0.9.36] - 2026-03-11
+
+### Orbital Exponent Relaxation for LiH
+
+#### Added
+- `zeta_A`, `zeta_B` parameters on `MolecularLatticeIndex`: per-atom orbital
+  exponent scaling. Each orbital on atom X uses effective charge Z_eff = zeta_X
+  * Z_X for its radial shape. All integrals (H1 diagonal, same-atom Slater F0,
+  cross-nuclear attraction, cross-atom J/K, overlap) are recomputed with scaled
+  exponents. Default zeta=1.0 preserves existing behavior (verified to 0.0 Ha).
+- `_compute_single_f0()` module-level function with memoization for efficient
+  recomputation of Slater F0 integrals at non-integer effective charges.
+- `compute_bsse_correction()` accepts `zeta_A`, `zeta_B` and passes them to
+  ghost atom fragment calculations for consistent basis space in CP correction.
+- 3 new tests in `TestOrbitalExponentRelaxation` (test_lih_fci.py):
+  - `test_exponent_regression_zeta_one`: zeta_B=1.0 matches baseline to <1e-4 Ha
+  - `test_contraction_lowers_energy`: E(zeta_B=1.3) < E(zeta_B=1.0) at R=3.015
+  - `test_free_atom_limit`: zeta_B*(R=20) in [0.95, 1.05] (free H limit)
+- `debug/diagnose_orbital_relaxation_lih.py` — Parts 1-3 diagnostic with coarse
+  grid optimization of zeta_B*(R) and CP-corrected PES comparison.
+
+#### Key Results
+- **zeta_B*(R)** monotonically decreases with R as expected:
+  1.50 (R=2.0) → 1.30 (R=3.015) → 1.10 (R=6.0). Approaches free-atom
+  limit zeta=1.0 at dissociation.
+- **dE_relax** is nearly R-independent in the bonding region:
+  -0.272 (R=2.5), -0.279 (R=3.015), -0.254 (R=3.5) Ha.
+  Difference dE(2.5) - dE(3.015) = +0.007 Ha (near zero).
+- **R_eq unchanged** at ~2.5 bohr — orbital relaxation shifts the PES
+  nearly uniformly downward, not differentially.
+- **D_e_CP(relaxed) = 0.433 Ha** at R=3.015 (4.7x overestimated vs expt 0.092).
+  The large energy lowering is a variational artifact in the truncated LCAO
+  basis, not a physical improvement: the contracted H orbital acquires
+  Li-centered character through basis overlap.
+- **BSSE drops** from -0.115 to -0.071 Ha at zeta_B=1.3 (38% reduction) — the
+  compact orbital borrows less from the other center.
+
+#### Conclusion
+Orbital exponent relaxation is NOT the mechanism for the R_eq error.
+The PES minimum does not shift because dE_relax is roughly constant in
+[2.5, 3.5]. The R_eq problem lies in the cross-nuclear attraction
+(Mulliken/Fourier diagonal), not in orbital exponent flexibility.
+
+#### Unchanged
+- All 47/47 LiH tests + 3 new = 50/50 pass. 18/18 topological integrity proofs pass.
+- Sturmian code paths (mo_fci.py, molecular_sturmian.py) untouched.
+- No changes to default behavior (zeta=1.0 by default).
+
+## [0.9.35] - 2026-03-11
+
+### Cross-Atom V_ee Extension to All Angular Momentum
+
+#### Added
+- `compute_cross_atom_J()` now accepts arbitrary (n, l) pairs, not just s-orbitals.
+  The `_form_factor_nl()` integrand already handled any l via numerical integration
+  of the spherically-averaged charge density; only the `NotImplementedError` guard
+  for l>0 was removed. Monopole (L=0) approximation captures 80-90% of the
+  integral at typical bond lengths.
+- `cross_atom_vee` parameter on `MolecularLatticeIndex`: `True` (all l pairs,
+  new default), `'s_only'` (s-s only, backward compatible), `False` (disabled).
+- `_build_cross_atom_vee()` rewritten to loop over all (n_A, l_A, n_B, l_B)
+  pairs when `cross_atom_vee=True`. Mulliken exchange K remains s-orbital only.
+- 3 new tests in `TestCrossAtomVeeAllL` (test_lih_fci.py):
+  - `test_j_cross_p_orbital_physical_range`: J(Li 2p, H 1s) in valid range
+  - `test_j_cross_monotone_with_l`: J(2p,1s) decreases with R
+  - `test_cross_vee_raises_energy_at_short_R`: E(all_l) > E(s_only) at R=2.0
+- `debug/diagnose_cross_atom_vee_lih.py` — v0.9.35 diagnostic with J table,
+  dE(R) comparison, CP-corrected PES, term decomposition.
+
+#### Key Results
+- **J values at R=3.015** (nmax=3): J(2p,1s) = 0.318 Ha, J(2p,2p) = 0.214 Ha,
+  J(3d,1s) = 0.142 Ha — physically reasonable, smaller than s-s integrals.
+- **dE(all_l - s_only) = +0.449 mHa** at nmax=3, R=3.015 — negligible.
+  The l>0 correction increases with R (wrong direction for outward R_eq shift).
+- **Root cause**: LiH ground state is s-dominated (1s^2 2s^2); p/d orbital
+  populations are tiny in the CI expansion. l>0 cross-atom V_ee adds negligible
+  screening.
+- **R_eq unchanged** (~2.5 bohr). D_e_CP(all_l) = 0.109 Ha vs D_e_CP(s_only) =
+  0.093 Ha — the 0.449 mHa repulsive shift slightly worsens D_e because ghost
+  atoms are unaffected. The screening deficit (-0.247 Ha) is NOT caused by
+  missing l>0 V_ee. Recommended default: `cross_atom_vee='s_only'`.
+
+#### Conclusion
+Cross-atom V_ee for l>0 orbitals is now complete (infrastructure ready for
+future use) but does not move R_eq toward 3.015. The R_eq problem lies in the
+cross-nuclear attraction (Mulliken/Fourier diagonal), not in V_ee screening.
+
+#### Unchanged
+- All 44/44 LiH tests pass, 18/18 topological integrity proofs pass.
+- BSSE/counterpoise machinery untouched.
+- Sturmian code paths (mo_fci.py, molecular_sturmian.py) untouched.
+
+## [0.9.34] - 2026-03-10
+
+### Dual-p0 MO Sturmian Basis
+
+#### Added
+- `compute_cross_set_integrals()` in `geovac/molecular_sturmian.py` —
+  overlap and H1 matrix elements between two MO Sturmian sets computed
+  at different momentum parameters p0_A and p0_B. Symmetrized Sturmian
+  identity: H1_ij = -(p0_A^2+p0_B^2)/4 O_ij + [(1-beta_i)+(1-beta_j)]/2 V_ij.
+- `compute_combined_jk_integrals()` in `geovac/molecular_sturmian.py` —
+  J and K integrals for combined dual-p0 basis via Poisson multipole
+  expansion on common prolate spheroidal grid.
+- `orth_method='none_raw'` in `compute_h1_matrix()` — returns raw
+  (non-orthogonalized) matrices for use by dual-p0 mode.
+- `dual_p0` mode in `MOSturmianFCI` — combines Li-scale (nmax=3, p0_Li)
+  and H-scale (nmax=2, p0_H) MO sets into 14 spatial MOs, 28 spinorbs,
+  20,475 SDs. Canonical orthogonalization of combined 14x14 overlap.
+  Two-parameter self-consistency loop with projected 1-RDM subblocks.
+- `solve_dual()` method with `p0_Li_init`, `p0_H_init`, damping.
+- 3 new tests in `tests/test_mo_fci.py` (13 total):
+  - Test 11: Cross-set consistency (equal-p0 overlap matches to 0.00%)
+  - Test 12: H-scale H1 negative (all 4 diagonals < 0 at p0_H=1.0)
+  - Test 13: Combined basis count (14 spatial MOs = 10 Li + 4 H)
+- `debug/diagnose_mo_fci_v0934.py` — checks 1-4, S eigenvalues, FCI.
+
+#### Key Results
+- **Check 1 PASS**: Cross-set overlap at equal p0 matches within-set to 0.00%.
+- **Check 2 PASS**: All H-scale H1 diagonals negative at p0_H=1.0.
+  H1[0,0] = -2.604 Ha (1sigma' sees full molecular potential, NOT -0.5).
+- **Check 3 PASS**: Smallest combined S eigenvalue = 0.046 (no near-LD).
+- **LiH FCI (R=3.015)**: E ~ -10.1 Ha (exact -8.071, ~25% error). BOUND.
+  Over-binding persists, same as v0.9.31 single-p0 (-10.07 Ha).
+- **p0 convergence**: p0_Li drifts from 3.845 to ~2.25, p0_H drifts
+  from 1.0 to ~1.74. The two scales do NOT remain separated.
+
+#### Root Cause Analysis
+Dual-p0 does not fix Sturmian overbinding. Prolate spheroidal Sturmian
+MOs are eigenfunctions of the FULL two-center potential — they extend
+over both nuclei regardless of p0. At p0_H=1.0, the H-scale 1sigma'
+has H1 = -2.6 Ha because it "sees" the Li nucleus (-3/r_A). The
+self-consistent loop drives both p0 values toward a common ~2.0,
+eliminating the scale separation. The additional H-scale MOs just
+provide more variational freedom for the same overbinding artifact.
+
+The atom-centered LCAO approach (lattice_index.py) naturally provides
+separate length scales through separate atomic lattices. The Sturmian
+MO approach cannot achieve this because delocalization is inherent
+to the prolate spheroidal basis.
+
+#### Unchanged
+- All 18/18 topological integrity proofs pass.
+- Single-p0 solver (solve()) unchanged.
+- Atom-centered infrastructure (lattice_index.py, direct_ci.py) untouched.
+
+## [0.9.33] - 2026-03-10
+
+### Exact Exchange K Integrals via Poisson Solve
+
+#### Added
+- `compute_exact_k_integrals()` in `geovac/molecular_sturmian.py` —
+  exchange integrals K_kl via Poisson solve on prolate spheroidal grid,
+  using the same multipole expansion machinery as J integrals (v0.9.32).
+  Exchange density rho_kl = S_k*S_l replaces diagonal density rho_k = |S_k|^2.
+  m-selection rule enforced: K_kl = 0 when m_k != m_l.
+- `decompose_energy()` in `MOSturmianFCI` — diagonal-weighted CI energy
+  decomposition into H1, J, K, V_NN contributions.
+- 3 new tests in `tests/test_mo_fci.py` (10 total):
+  - Test 8: K diagonal equals J diagonal (K_kk = J_kk to 0.0000%)
+  - Test 9: K matrix symmetric (max asymmetry < 1e-6)
+  - Test 10: K selection rule (sigma-pi K = 0.00e+00)
+- `debug/diagnose_mo_fci_v0933.py` — full diagnostics with K table,
+  gap projection, PES, and ten-configuration comparison.
+
+#### Key Results
+- **K_kk = J_kk exactly** — validates Poisson off-diagonal path.
+- **K[0,1] = 0.174 Ha** (1sigma-2sigma exchange). K/J = 0.15.
+- **Ohno-Klopman OVERESTIMATED exchange**: K_ohno[0,1] = 0.269 vs
+  K_exact[0,1] = 0.174. Ohno-Klopman treated compact point charges
+  as closer together than the actual exchange density distribution.
+- **LiH FCI (R=3.015)**: E = -6.796 Ha (exact -8.071, 15.8% error).
+  WORSE than v0.9.32 (-7.131, 11.6% error). UNBOUND.
+- **p0* = 3.687** (v0.9.32: 3.777). p0 feedback does NOT self-correct
+  the compactness artifact.
+- **PES minimum at R=6.0** (unphysical). Dissociation E(R=6)=-7.516
+  fails (|delta|=0.376 Ha vs E_atoms=-7.892).
+
+#### Root Cause Analysis
+Exact K removed accidental Ohno-Klopman compensation. The shared-p0
+Sturmian basis makes ALL orbitals too compact (p0~3.7 vs optimal Li
+p0~3.16, H p0~1.0). This causes:
+- J too large (compact orbitals have excess overlap) -> too much repulsion
+- Ohno-Klopman overestimated K -> partial cancellation (lucky error)
+- Removing the compensation (exact K < K_ohno) raises energy further
+The fundamental issue is shared-p0 compactness, not the exchange method.
+Fix path: atom-specific p0 scaling or dual-exponent basis.
+
+#### Unchanged
+- J integral computation unchanged from v0.9.32.
+- All 18/18 topological integrity proofs pass.
+- Atom-centered infrastructure (lattice_index.py, direct_ci.py) untouched.
+
+## [0.9.32] - 2026-03-10
+
+### Canonical Orthogonalization + Exact J Integrals
+
+#### Added
+- Canonical orthogonalization in `compute_h1_matrix()` — replaces Lowdin
+  S^{-1/2} with eigenvalue-filtered canonical orth (threshold=1e-4).
+  Prevents core contamination from near-linear-dependence. Returns raw
+  overlap matrix S and H1_raw for diagnostics.
+- `compute_exact_j_integrals()` in `geovac/molecular_sturmian.py` —
+  direct Coulomb integrals J_kl via Poisson solve on prolate spheroidal
+  grid using multipole expansion (Legendre polynomial expansion,
+  cumulative radial integration). Replaces population-weighted Slater F0.
+- `diagnose_orthogonalization()` in `MOSturmianFCI` — prints overlap
+  matrix, S eigenvalues, H1 before/after both Lowdin and canonical orth.
+- Exchange integrals: Ohno-Klopman monopole retained for off-diagonal K.
+- 3 new tests in `tests/test_mo_fci.py` (7 total):
+  - Test 5: Canonical trace matches Lowdin trace (same eigenvalues)
+  - Test 6: J_00 > J_11 (core > bonding self-repulsion)
+  - Test 7: J_00 within 30% of atomic Li 1s self-repulsion (1.875 Ha)
+- `debug/data/mo_fci_lih_results.txt` — full overlap matrix, eigenvalues,
+  H1 before/after, J matrix, PES, nine-configuration comparison.
+
+#### Key Results
+- **J_00 = 2.31 Ha** (atomic Li 1s: 1.875 Ha, 23% error — PASS).
+- **LiH FCI (R=3.015)**: E = -7.131 Ha (exact -8.071, 11.6% error).
+  Error halved vs v0.9.31 (25% -> 12%).
+- **UNBOUND**: E > E_atoms at all R (opposite from v0.9.31 overbinding).
+- **PES shape correct**: local minimum near R=3.5 (expt 3.015).
+- **Dissociation correct**: E(R=6) = -7.885, |delta| = 0.007 Ha.
+- **Canonical orth**: n_dropped=0 (smallest S eigenvalue = 0.31).
+- **H1[1,1] positive in raw basis**: NOT a Lowdin artifact — the Sturmian
+  identity gives positive H_ii for MOs with beta > 1.
+
+#### Root Cause (underbinding)
+Exact J integrals provide ~23% more electron repulsion than population-
+weighted Slater F0. Combined with Ohno-Klopman exchange (underestimates
+exchange stabilization), total energy is ~0.76 Ha above E_atoms.
+Fix path: exact exchange integrals or atom-specific p0 scaling.
+
+#### Unchanged
+- Prolate spheroidal solver unchanged from v0.9.29.
+- All 18/18 topological integrity proofs pass.
+- Atom-centered infrastructure (lattice_index.py, direct_ci.py) untouched.
+
+## [0.9.31] - 2026-03-10
+
+### Molecular Orbital FCI in Sturmian Basis
+
+#### Added
+- `geovac/mo_fci.py` — new FCI solver (`MOSturmianFCI`) using molecular
+  Sturmian orbitals as primary basis. Self-consistent p0 loop with
+  Lowdin-orthogonalized integrals. First Sturmian FCI to achieve correct
+  energy scale for LiH.
+- `compute_h1_matrix()` in `geovac/molecular_sturmian.py` — one-electron
+  Hamiltonian via Sturmian identity (avoids numerical Laplacian). Returns
+  Lowdin-orthogonalized H1 and transformation matrix S^{-1/2}.
+- `_eval_mo_wavefunction()` — evaluates MO Sturmian wavefunctions on 2D
+  prolate spheroidal grid using FD radial eigenvectors and angular
+  eigenvectors from Legendre expansion.
+- `compute_eri_matrix()` — approximate two-electron integrals using
+  population-weighted Slater F0 (same-center) and Ohno-Klopman
+  (cross-center). Includes 4-index Lowdin transform.
+- `_slater_f0_fast()` — analytical Slater F0 lookup table (6 exact values
+  for n=1,2,3 s-orbital pairs, avoids slow numerical integration).
+- `_compute_population_weights()` — MO center-character weights via
+  eta-bisection of density integral on prolate spheroidal grid.
+- 4 new tests in `tests/test_mo_fci.py`:
+  - Test 1: H1 symmetric after Lowdin (max|H1-H1.T| < 1e-6)
+  - Test 2: LiH nmax=3 counts (10 MOs, 20 spinorbs, 4845 SDs)
+  - Test 3: H2 homonuclear sigma symmetry
+  - Test 4: Dissociation limit (R=20, E within 30% of E_atoms)
+- `debug/diagnose_mo_fci_lih.py` — diagnostic script with checks 1-4
+  and PES scan.
+- `debug/data/mo_fci_lih_results.txt` — full results and analysis.
+
+#### Key Results
+- **Check 1 PASS**: H1[0,0] = -4.525 Ha (Li 1s energy, 0.6% error vs -4.5).
+- **Check 3 PASS**: H1 symmetry to machine precision (8.9e-16).
+- **Check 4 PASS**: V_NN = 0.995025 Ha (exact).
+- **LiH FCI (R=3.015)**: E = -10.07 Ha (n_grid=40), 25% error vs -8.07 exact.
+  Energy scale correct — first Sturmian FCI in the right range.
+- **Bound**: YES at all R tested (D_e_raw = 1.4-1.9 Ha, overbinding).
+- **PES**: Monotonically decreasing, R_eq < 2.0 bohr.
+- **Lowdin fix**: Without orthogonalization, E = -13.15 Ha (63% error).
+  Sturmian overlap off-diagonals up to 0.41 — Slater-Condon rules
+  require orthonormal orbitals.
+
+#### Root Cause (overbinding)
+Population-weighted V_ee approximation underestimates electron repulsion
+in the molecular basis. Non-canonical orbital ordering amplifies CI mixing.
+Shared-p0 self-consistency drives basis toward compact orbitals.
+
+#### Unchanged
+- Prolate spheroidal solver unchanged from v0.9.29.
+- All 18/18 topological integrity proofs pass.
+- All 10 molecular Sturmian tests pass.
+- atom-centered infrastructure (lattice_index.py, direct_ci.py) untouched.
+
+## [0.9.30] - 2026-03-10
+
+### MO-to-Atom-Center Beta Projection
+
+#### Added
+- `project_mo_betas_to_atom_centers()` in `geovac/molecular_sturmian.py` —
+  dominant-overlap projection of molecular orbital betas onto atom-centered
+  hydrogenic orbitals. Evaluates MO wavefunctions and hydrogenic functions
+  on a 2D Gauss-Legendre grid in prolate spheroidal coordinates, computes
+  overlap integrals, and assigns each atomic orbital the beta of its most
+  overlapping MO.
+- Helper functions: `_angular_eigenvector()`, `_eval_angular_wavefunction()`,
+  `_hydrogen_radial()` for overlap computation.
+- `_build_molecular_sturmian_h1()` in `MolecularLatticeIndex` — new H1
+  builder using MO-projected Sturmian diagonal + SW D-matrix off-diagonal.
+  Accessed via `use_sturmian='molecular'`.
+- Updated `solve_sturmian_p0()` to dispatch correctly for `'molecular'` path.
+- 3 new tests in `tests/test_molecular_sturmian.py` (10 total):
+  - Test 5: H 1s projected beta > binding threshold (1.581) — PASS
+  - Test 6: H 1s Sturmian diagonal negative — PASS
+  - Test 7: All 14 B-center diagonals negative — PASS (14/14)
+- `debug/diagnose_mo_projection_lih.py` — FCI diagnostic script.
+- `debug/data/molecular_sturmian_lih_results.txt` — full results and analysis.
+
+#### Key Results
+- **Checks 1-3: PASS** — all 28 diagonals (14 A + 14 B) are negative.
+- **Check 4 (R=100 backward compat): FAIL** — MO betas don't recover
+  1/n at large R (fundamental to shared-p0 approach).
+- **FCI: UNPHYSICAL** — E_mol = -42.5 Ha (exact -8.07 Ha, 5.3x error).
+
+#### Root Cause
+Two compounding errors make the MO-projected Sturmian FCI unphysical:
+1. **Beta scale mismatch**: MO beta parametrizes a = beta*(Z_A+Z_B)*R
+   (prolate spheroidal), but atom-centered formula uses eps = p0^2/2 -
+   beta*Z_alpha*p0 (atomic Sturmian). Direct substitution overestimates
+   nuclear attraction by 25-170x for n >= 2 orbitals.
+2. **Wrong MO assignment**: Dominant-overlap favors higher-n MOs with
+   larger spatial extent, not the chemically correct MO. H 1s → n=3 MO
+   (beta=2.325) instead of 2sigma (beta=1.950).
+
+#### Unchanged
+- Prolate spheroidal solver unchanged from v0.9.29 (still verified).
+- All 7 existing tests + 18/18 topological integrity proofs pass.
+- Default behavior (use_sturmian=False) identical to v0.9.29.
+
+## [0.9.29] - 2026-03-10
+
+### Prolate Spheroidal Molecular Sturmian Betas
+
+#### Added
+- `geovac/molecular_sturmian.py` — **complete rewrite** replacing v0.9.28's
+  node-weight `compute_beta_k()` with prolate spheroidal coordinate separation.
+  Three functions:
+  - `_angular_sep_const(m, n_sph, c, b)` — angular separation constant via
+    matrix Legendre expansion (matches `scipy.special.obl_cv` to ~1e-14)
+  - `_radial_top_evals(m, c, a)` — radial eigenvalues via self-adjoint FD
+    with Neumann BC at xi=1 for m=0 (key fix for ground state)
+  - `compute_molecular_sturmian_betas(Z_A, Z_B, R, p0, nmax)` — public API,
+    finds molecular beta for each (m, n_sph, n_rad) orbital via brentq
+    root-finding on the matching condition A_ang + L_top = 0
+
+- 7 new tests in `tests/test_molecular_sturmian.py` (replacing 3 old tests):
+  - Test 1: Angular eigenvalue vs scipy obl_cv (homonuclear, 18 cases)
+  - Test 2: H2+ ground state energy within 1% of exact (-1.1026 Ha)
+  - Test 3-6: LiH nmax=3 — 10 orbitals found, all finite, 1sigma ~1, ordering
+  - Test 7: H2 homonuclear n=2 degeneracy (spread < 30%)
+
+- `debug/data/molecular_sturmian_lih_results.txt` — full results and analysis
+- `debug/diagnose_h2p_energy.py` — H2+ verification script
+- `debug/diagnose_lih_betas.py`, `debug/diagnose_lih_all_betas.py` — LiH beta scripts
+
+#### Key Results
+- **H2+ verification**: E = -1.096 Ha (exact -1.103, 0.6% error) — validates approach
+- **LiH betas (nmax=3)**: All 10 molecular orbitals found.
+  1sigma: beta=1.033, 2sigma: beta=1.950, 1pi: beta=1.976
+- **Check 2 (H 1s bound): FAIL** — beta(1sigma)=1.033, needed 1.581.
+  1sigma is the Li 1s core MO (beta~1/n=1), not the H bonding orbital.
+  The 2sigma MO (beta=1.950) would bind H, but the mapping is ad hoc.
+
+#### Root Cause
+Prolate spheroidal separation gives MOLECULAR orbital betas, not atom-centered
+betas. The fundamental mismatch: optimal p0 for Li (~3.9) vs H (~1.0). At
+compromise p0=sqrt(10), the Li 1s core dominates 1sigma, leaving H unbound.
+No single-p0 Sturmian basis can simultaneously optimize both centers.
+
+#### Removed
+- Old `compute_beta_k(n, l, Z_self, Z_other, R, p0)` from v0.9.28
+- `use_sturmian='molecular'` branch in `lattice_index.py` (dead code after
+  Part 1 test audit)
+
+## [0.9.28] - 2026-03-10
+
+### Molecular Sturmian β_k from Bond Sphere Node Weights
+
+#### Added
+- `geovac/molecular_sturmian.py` — clean reimplementation (~50 lines) replacing
+  the failed prolate spheroidal PDE solver from v0.9.27-dev. Single function
+  `compute_beta_k(n, l, Z_self, Z_other, R, p0)` computes molecular Sturmian
+  β_k as the ratio of molecular to atomic potential expectation values:
+  `β_k = (self_nuclear + cross_nuclear) / self_nuclear`
+  where `self_nuclear = Z_self·p₀/n` (exact) and `cross_nuclear` reuses the
+  existing `_fourier_cross_attraction()` Fourier integral.
+- `use_sturmian='molecular'` branch in `_build_sturmian_h1()`: molecular
+  diagonal `ε_k = p₀²/2 - β_k·Z·p₀/n` with intra-atom graph hopping and
+  SW cross-atom D-matrix coupling. Cross-nuclear is folded into β_k
+  diagonal (no separate D-matrix cross-nuclear blocks).
+- 3 new tests in `tests/test_molecular_sturmian.py`:
+  - Test 1: β_k ≥ 1 for all (n,l) at LiH geometry
+  - Test 2: β_k → 1 within 5% at R=100 bohr (backward compat)
+  - Test 3: H 1s molecular diagonal more negative than atomic
+- `debug/diagnose_molecular_sturmian_lih.py`: β_k table, checks 1-4, FCI
+  self-consistency, PES scan with CP correction.
+- `debug/data/molecular_sturmian_lih_results.txt`: full results.
+
+#### Key Results
+- **β_k(Li 1s) = 1.035**: modest cross-nuclear enhancement (Li core tightly bound).
+- **β_k(H 1s) = 1.312**: significant 31% boost from Li's Z=3 cross-nuclear.
+- **H 1s diagonal: +0.852 Ha** (STILL POSITIVE, improved from +1.838 Ha atomic).
+  The cross-nuclear alone reduces the deficit by 46% but cannot overcome the
+  kinetic penalty p₀²/2 = 5.0 Ha at shared p₀ ≈ 3.16.
+- R=100 backward compat: worst β deviation = 2.9% (B-center n=3 at R=100).
+- FCI self-consistency (default V_ee): p₀* = 3.164, E_mol = -5.005 Ha.
+  **LiH remains UNBOUND** (E_atoms = -7.892 Ha, deficit = 2.89 Ha).
+- `vee_method='slater'` blocked by pre-existing `_eri` AttributeError in
+  `_build_cross_atom_vee()` (ghost-atom LatticeIndex lacks `_eri`).
+
+#### Root Cause Confirmed
+For H 1s to be bound: need β > p₀/(2·Z_B) = 1.582. Actual β = 1.312.
+The cross-nuclear ⟨Z_A/r_A⟩ = 0.985 Ha is only 31% of Z_B·p₀ = 3.164 Ha.
+The single-p₀ Sturmian basis with molecular β_k corrections is insufficient
+for heteronuclear binding — consistent with v0.9.21 and v0.9.27 conclusions.
+
+#### Unchanged
+- All existing tests pass + 3 new molecular Sturmian tests.
+- No changes to existing V_ee, cross-nuclear, bridge, or FCI code.
+- Default behavior (`use_sturmian=False`) identical to v0.9.27.
+
+## [0.9.27] - 2026-03-10
+
+### SO(4) CG Cross-Center V_ee Test
+
+#### Added
+- `use_so4_vee` parameter on `MolecularLatticeIndex` (default `False`):
+  when True with `use_sturmian=True`, replaces Fourier cross-center V_ee with
+  SO(4) Clebsch-Gordan two-electron integrals using D-matrix rotation:
+  `J(A_{n_a l_a m_a}, B_{n_b l_b m_b}) = Σ_{l'm'} D^(n_b)_{(l'm'),(l_b m_b)}(γ) × F0_Sturmian(n_a,l_a; n_b,l')`
+  where `F0_Sturmian(p0) = p0 × F0_hydrogenic(Z=1)`.
+- `_build_so4_cross_vee(p0)`: builds cross-center ERI entries from SO(4)
+  D-matrix rotation of Sturmian Slater F0 integrals. Clears and rebuilds at
+  each self-consistency iteration.
+- `solve_sturmian_p0()` modified to rebuild SO(4) cross-center V_ee at each
+  iteration when `use_so4_vee=True`.
+- 3 new tests in `tests/test_sturmian_basis.py` (22 total Sturmian tests):
+  - Test 20: D-matrix rotation for n=1 (J(1s_A,1s_B) = F0_Sturmian = p0×5/8)
+  - Test 21: F0_Sturmian scaling with p0 (verified at p0=2.0 and 3.168)
+  - Test 22: Cross-center J ratio equals p0/Z_A (Sturmian artifact)
+- `debug/diagnose_so4_vee_sturmian_lih.py`: cross-center ERI table, 3-point
+  PES, gap analysis, and conclusion statement.
+- `debug/data/so4_vee_lih_results.txt`: full results.
+
+#### Negative Result — SO(4) CG V_ee Cannot Rescue Single-p0 Sturmian
+- Self-consistency converges to p0*≈3.168, E_mol≈-5.02 Ha (same as v0.9.21
+  without cross-center V_ee). LiH is **unbound** (E_atoms = -7.892 Ha).
+- J_cross(1s_A,1s_B) = 1.980 Ha (= p0×5/8), J_same(1s_A,1s_A) = 1.875 Ha.
+  Cross-center J _exceeds_ same-center J because p0=3.168 > Z_A=3 — an
+  artifact of the shared-p0 Sturmian assigning unphysical effective charge.
+- H 1s one-electron deficit at p0*=3.168: ε(1s) = p0²/2 - p0 = +1.85 Ha
+  (vs exact -0.5 Ha), a gap of ~2.35 Ha — 25× larger than the physical LiH
+  D_e = 0.092 Ha.
+- The SO(4) cross-center V_ee (~2 Ha for dominant 1s-1s pair) cannot overcome
+  the one-electron deficit because it adds _repulsion_, raising E_mol further.
+- CONCLUSION: The single-S³ shared-p0 framework is fundamentally incompatible
+  with heteronuclear molecules. Molecular Sturmians (atom-dependent p0 or
+  adaptive energy-shell) are required for correct LiH binding.
+
+#### Unchanged
+- 184/184 tests pass (22 Sturmian, 51 LiH, all others).
+- Same-atom V_ee, cross-nuclear attraction, and bridge coupling unchanged.
+- Default behavior (`use_so4_vee=False`) identical to v0.9.26.
+
+## [0.9.26] - 2026-03-09
+
+### Angular-Weighted Cross-Atom V_ee
+
+#### Added
+- `angular_weighted` parameter on `MolecularLatticeIndex` (default `True`):
+  when True, multiplies each Ohno-Klopman ERI by the angular solid-angle
+  factor `f(l_A, l_B) = 1 / ((2*l_A + 1) * (2*l_B + 1))`. This suppresses
+  p-orbital pairs by 1/3, d-orbital pairs by 1/5, and p-p pairs by 1/9,
+  reflecting the fraction of solid angle subtended. Setting
+  `angular_weighted=False` reproduces v0.9.25 behavior exactly.
+- `angular_weighted` parameter passed through to `compute_bsse_correction()`.
+- 2 new tests in `tests/test_lih_fci.py`:
+  - `test_angular_factor_ordering`: p-p weighted J < s-s unweighted J (ratio 1/9)
+  - `test_angular_weight_recovery`: `angular_weighted=False` matches v0.9.25
+- `debug/diagnose_angular_vee_lih.py`: 5-config PES diagnostic.
+- `debug/data/angular_vee_lih_results.txt`: results with term decomposition.
+
+#### Negative Result — Angular Weighting Has Negligible Effect
+- baseline+angular at R=3.015: E = -7.677419 Ha (vs -7.677334 unweighted,
+  delta = -0.000085 Ha). LiH still **unbound** at all R.
+- hybrid+angular at R=3.015: E = -7.752617 Ha (vs -7.752513 unweighted,
+  delta = -0.000104 Ha). Still unbound.
+- Screening deficit = -0.107 Ha (unchanged from v0.9.25 unweighted).
+- Root cause: at nmax=3, the FCI ground state concentrates electron density
+  in s-orbitals. The p/d orbital occupancies are small, so suppressing their
+  cross-atom integrals by factors of 1/3 to 1/25 barely affects total energy.
+  The angular factor is physically correct but numerically irrelevant at this
+  basis size.
+- Path forward: the cross-atom V_ee problem is not about angular weighting —
+  it requires fundamentally different cross-atom integrals (exact SO(4)
+  Clebsch-Gordan two-electron integrals on the bond sphere, or higher-nmax
+  basis where p/d occupation is more significant).
+
+#### Unchanged
+- 49/49 tests pass (47 existing + 2 new).
+- Same-atom V_ee, cross-nuclear attraction, and bridge coupling unchanged.
+- Default behavior (`cross_atom_vee=False`) identical to v0.9.24.
+
+## [0.9.25] - 2026-03-09
+
+### Cross-Atom V_ee: Ohno-Klopman Monopole Approximation
+
+#### Added
+- `cross_atom_vee` parameter on `MolecularLatticeIndex` (default `False`):
+  when True, adds Ohno-Klopman direct Coulomb integrals for non-s-orbital
+  cross-atom pairs (l>0 on either center). Pure s-orbital pairs retain the
+  more accurate Fourier J + Mulliken K from `_build_cross_atom_vee()`.
+- `_build_cross_atom_vee_ohno_klopman()`: implements the Ohno-Klopman formula
+  `J = 1 / sqrt(R^2 + (n_i^2/Z_A + n_j^2/Z_B)^2)` for all cross-atom
+  orbital pairs where at least one has l>0. The formula uses hydrogenic mean
+  orbital radii n^2/Z and interpolates between 1/R at large R and a finite
+  orbital-size cap at R->0.
+- `cross_atom_vee` parameter passed through to `compute_bsse_correction()`.
+- 3 new tests in `tests/test_lih_fci.py`:
+  - `test_eri_magnitude_ordering`: 1s-1s > 3s-3s (compact orbitals repel more)
+  - `test_dissociation_limit_classical`: J -> 1/R within 1% at R=100 bohr
+  - `test_screening_direction`: cross_atom_vee=True raises E_mol at short R
+- `debug/diagnose_cross_atom_vee_lih.py`: diagnostic PES scan.
+- `debug/data/cross_atom_vee_lih_results.txt`: four-configuration comparison.
+
+#### Negative Result — Over-Repulsive for Non-s-Orbital Pairs
+- With `cross_atom_vee=True`, LiH becomes **unbound** at all R values.
+- E_mol(R=3.015) rises from -8.117 Ha (baseline) to -7.677 Ha (+0.440 Ha).
+- The screening deficit was reduced from -0.247 Ha to -0.107 Ha (57%
+  improvement), but the total repulsion is too strong.
+- Root cause: Ohno-Klopman uses n^2/Z for ALL angular momenta, giving the
+  same cross-atom integral for 2p and 2s orbitals. In reality, p/d orbitals
+  have angular nodes that reduce cross-atom Coulomb integrals significantly.
+  With nmax=3, the 11 non-s orbitals per atom contribute 154 cross-atom
+  pairs, each over-repulsive by the missing angular factor.
+- Path forward: angular-dependent Ohno-Klopman (multiply by angular factor
+  proportional to 1/(2l+1) for the p/d orbitals), or exact SO(4)
+  Clebsch-Gordan cross-atom ERIs on the bond sphere.
+
+#### Unchanged
+- 47/47 tests pass (44 existing + 3 new).
+- Same-atom V_ee, cross-nuclear attraction, and bridge coupling unchanged.
+- Default behavior (`cross_atom_vee=False`) identical to v0.9.24.
+
+## [0.9.24] - 2026-03-09
+
+### Hamiltonian Term Decomposition — Root Cause of R_eq Shift
+
+#### Added
+- `decompose_energy(civec, E_total)` method on `MolecularLatticeIndex`:
+  decomposes FCI ground-state energy into T (graph hopping), V_nA, V_nB
+  (atomic eigenvalues), V_cross_A, V_cross_B (Fourier cross-nuclear),
+  V_bridge (inter-atomic bridges), V_ee (residual), V_NN (nuclear repulsion).
+- `_build_1rdm_diagonal(civec)`: fast diagonal 1-RDM from FCI vector.
+- `_compute_h1_expectation(civec)`: sparse single-excitation walk for <H1>.
+- `_compute_bridge_expectation(civec)`: bridge-only expectation value.
+- 2 new tests in `tests/test_lih_fci.py`:
+  - `test_decomposition_sum`: components sum to E_total within 1e-5 Ha.
+  - `test_virial_ratio`: virial ratio is finite and documented.
+- `debug/diagnose_term_decomposition_lih.py`: PES scan at 8 R values.
+- `debug/data/term_decomposition_lih.txt`: full decomposition output.
+
+#### Root Cause Finding
+- **V_cross_B** (H electrons feeling Li nucleus) is the dominant driver of
+  R_eq being too short (2.5 vs experimental 3.015 bohr).
+- Between R=3.015 and R=2.5, V_cross_B decreases by **-0.364 Ha** while
+  V_NN increases by only +0.205 Ha, producing a net energy decrease of
+  -0.061 Ha that pulls the minimum inward.
+- Total cross-nuclear change: Delta(V_cross_A + V_cross_B) = **-0.500 Ha**,
+  compensated by only Delta(V_ee) = +0.253 Ha → screening deficit -0.247 Ha.
+- The Fourier cross-nuclear attraction (`_fourier_cross_attraction`) uses
+  the exact electrostatic potential of the orbital density at distance R,
+  but the FCI wavefunction cannot fully screen this attraction because
+  cross-atom V_ee only includes s-orbital pairs and no exchange.
+- V_bridge is negligible (< 0.001 Ha at all R, ~1000x smaller than V_cross).
+
+#### Unchanged
+- 176/176 tests pass (174 existing + 2 new).
+- No physics code modified — instrumentation only.
+
+## [0.9.23] - 2026-03-09
+
+### Shell-Dependent Cross-Nuclear Attenuation — Negative Result
+
+#### Added
+- `use_shell_radius` parameter on `MolecularLatticeIndex` (default `True`)
+  and `compute_bsse_correction`: replaces bare internuclear distance R with
+  R_eff(n, Z_self) = R + n^2/Z_self in the Fourier cross-nuclear diagonal.
+- `_shell_effective_R(n, Z_self, R)` static helper method.
+- 3 new tests in `tests/test_lih_fci.py`:
+  - Shell-radius correction direction (n=3 correction > n=1)
+  - Dissociation limit preservation (R=100 correction < 1%)
+  - R_eq shifts outward with use_shell_radius=True
+- `debug/diagnose_shell_radius_lih.py`: PES scan comparing old vs new.
+- `debug/data/shell_radius_lih_results.txt`: full PES table with diagnosis.
+- Paper 8 Section XII subsection: "Shell-Dependent Cross-Nuclear Attenuation."
+
+#### Result (NEGATIVE)
+- **Molecule unbound**: D_e_CP < 0 at all R (was +0.143 Ha in v0.9.18).
+- The Fourier cross-nuclear (`_fourier_cross_attraction`) already computes
+  the exact electrostatic potential via radial integration, which inherently
+  accounts for orbital diffuseness.  Adding R_eff double-counts the radial
+  extent, weakening all cross-nuclear terms by 10-30%.
+- BSSE unchanged at -0.115 Ha (ghost atoms have Z=0, unaffected).
+- **Diagnosis**: the v0.9.18 overbinding comes from the SW off-diagonal
+  coupling (form factor f(n,gamma)=sin(gamma)), not the Fourier diagonal.
+
+#### Unchanged
+- 174/174 tests pass (171 existing + 3 new).
+- SW off-diagonal, FCI solver, V_ee, Sturmian paths all untouched.
+
+---
+
+## [0.9.22] - 2026-03-09
+
+### Atom-Dependent Sturmian p₀ — Heteronuclear Binding Restored
+
+#### Added
+- `compute_atomic_p0(Z, nmax)` function in `lattice_index.py`: computes the
+  self-consistent Sturmian p₀ for an isolated atom via single-atom FCI.
+  Results cached by (Z, nmax).  H: p₀=1.000, Li(nmax=3): p₀=3.845.
+- `use_sturmian='atomic'` mode in `MolecularLatticeIndex`: each atom uses
+  its own p₀ from isolated-atom FCI instead of a shared molecular p₀.
+  - Sturmian diagonal: ε_n(p₀_α) = p₀_α²/2 - Z_α·p₀_α/n per atom
+  - Cross-nuclear A-A block: -(Z_B/p₀_A)·D^(n)(γ_A) with γ_A(p₀_A, R)
+  - Cross-nuclear B-B block: -(Z_A/p₀_B)·D^(n)(γ_B) with γ_B(p₀_B, R)
+  - Off-diagonal A-B hopping: geometric mean p₀_AB = sqrt(p₀_A·p₀_B)
+  - H cross-nuclear cap: -(Z_A/p₀_B) capped at -Z_A/R when |uncapped| > |cap|
+- `_build_atomic_sturmian_h1()` method: assembles per-atom diagonals and
+  cross-nuclear via `_build_atomic_sturmian_cross_nuclear()`.
+- 7 new tests in `tests/test_sturmian_basis.py` (19 total):
+  - Test 13: `compute_atomic_p0` for H (p₀=1.0), Li, ghost (p₀=0)
+  - Test 14: H 1s diagonal = -0.500 Ha with `use_sturmian='atomic'`
+  - Test 15: Cross-nuclear magnitudes (Li: -Z_B/p₀_A, H: capped at -Z_A/R)
+  - Test 16: γ_A ≠ γ_B and γ_B > γ_A (H sees larger angular separation)
+- `debug/diagnose_atomic_sturmian_lih.py`: PES scan + BSSE + CP correction.
+- `debug/data/atomic_sturmian_lih_results.txt`: full diagnostic output.
+- Paper 9 Section XI: "Atom-Dependent Momentum Scales as an Intermediate
+  Approximation" — documents what is given up (single-S³) and preserved
+  (D-matrix angular structure, backward compatibility).
+
+#### Key Result: LiH Binding Restored (Massive Overbinding)
+- E_mol(R=3.015) = -10.563 Ha, E_atoms = -7.892 Ha → molecule strongly bound
+- H 1s diagonal: -0.500 Ha (negative, bound) — vs +1.85 Ha in v0.9.21
+- γ_A = 9.9° (Li sees small bond angle), γ_B = 36.7° (H sees large angle)
+- D_e_CP = 2.556 Ha at R=3.015 (expt: 0.092 Ha) — 28× overbinding
+- PES monotonically decreasing: no minimum, D_e_CP(R=6.0) = 1.07 Ha
+- BSSE unchanged at -0.115 Ha (ghost atoms bypass Sturmian path)
+
+#### PES scan (nmax=3, CP-corrected)
+| R (bohr) | E_mol (Ha) | D_e_raw | D_e_CP | Status |
+|:---------:|:----------:|:-------:|:------:|:------:|
+| 2.0 | -11.784 | 3.892 | 3.777 | bound |
+| 3.015 | -10.563 | 2.671 | 2.556 | bound |
+| 4.0 | -9.689 | 1.797 | 1.682 | bound |
+| 6.0 | -9.074 | 1.182 | 1.067 | bound |
+
+#### Root Cause of Overbinding
+The cap -Z_A/R is applied uniformly to ALL 14 B-block diagonal elements.
+Physically, only the H 1s should feel full Li attraction; higher orbitals
+should feel less.  The n-dependent D-matrix elements (cos γ for n=2, etc.)
+would provide this discrimination, but at p₀_B=1 the uncapped value
+-Z_A/p₀_B = -3.0 Ha exceeds the cap for all n, so all orbitals get
+the same maximum attraction.  The cap also scales as 1/R, producing
+a PES that decreases monotonically instead of having a minimum.
+
+#### Unchanged
+- `use_sturmian=True` (single-p₀) path unchanged
+- `use_sturmian=False` (standard) path unchanged
+- FCI solver and two-electron integrals unchanged
+- No molecular self-consistency loop (atomic p₀ values are fixed)
+
+
+## [0.9.21] - 2026-03-09
+
+### Fully p₀-Consistent Sturmian H1 — Self-Consistency Converges
+
+#### Added
+- `_build_sturmian_cross_nuclear(p0, R)` method in `MolecularLatticeIndex`:
+  computes the exact D-matrix cross-nuclear attraction (Paper 9, Eq. 23)
+  in the A-A and B-B diagonal blocks.  Formula:
+  ⟨S^A_{n'l'm'} | -Z_B/r_B | S^A_{nlm}⟩ = -(Z_B/p₀)·D^(n)_{(l'm'),(lm)}(γ).
+  Block-diagonal in n, symmetrized (D+D^T)/2 for Hermiticity.
+- `damping` parameter in `solve_sturmian_p0()`: mixing factor α ∈ (0,1].
+  p₀^(k+1) = (1-α)·p₀^(k) + α·√(-2·E_mol^(k)).  Default α=1.0 (bare).
+- 4 new tests in `tests/test_sturmian_basis.py` (12 total):
+  - Test 9: n=1 cross-nuclear diagonal = -Z_B/p₀ (D^(1)=1 always)
+  - Test 10: n=2 cross-nuclear diagonal = -(Z_B/p₀)·cos(γ)
+  - Test 11: 1/p₀ scaling (doubling p₀ halves n=1 element)
+  - Test 12: n=1 element R-independent at fixed p₀
+- `debug/diagnose_sturmian_v2_lih.py`: diagnostic with damping sweep,
+  PES scan, and BSSE analysis.
+- `debug/data/sturmian_v2_lih_results.txt`: full results.
+- Paper 8 Section XIII updated with v0.9.21 subsections E-G.
+
+#### Changed
+- `_build_sturmian_h1()` now uses `_build_sturmian_cross_nuclear()` instead
+  of the frozen Fourier `_fourier_cross_attraction()`.  The entire A-A and
+  B-B cross-nuclear is now p₀-dependent, resolving the Fourier-Sturmian
+  inconsistency that caused v0.9.20 divergence.
+
+#### Key Result: Self-Consistency Converges
+The self-consistency loop for LiH (nmax=3, R=3.015) **converges** with
+damping α=0.5 in 12 iterations:
+- p₀* = 3.168416
+- E_mol = -5.019 Ha
+- Bare iteration (α=1.0) diverges: p₀ overshoots 2.24 → 4.27, E_mol positive.
+
+#### Key Finding: Molecule Unbound
+Despite convergence, **the molecule is unbound**: E_mol = -5.019 Ha lies
+2.87 Ha above E_atoms = -7.892 Ha.  The PES is monotonically decreasing
+(no minimum).
+
+**Root cause**: the single p₀ = 3.168 (optimal for Li, Z=3) makes the
+hydrogen 1s diagonal positive: ε₁(3.168) = p₀²/2 - Z_H·p₀ = +1.85 Ha
+(vs hydrogenic -0.500 Ha).  The 2.35 Ha penalty per H orbital cannot be
+compensated by cross-nuclear attraction or electron repulsion.
+
+This is a fundamental property of the Sturmian basis for heteronuclear
+molecules, not a code defect.
+
+#### BSSE
+BSSE unchanged at -0.115 Ha (ghost atoms bypass Sturmian basis).  The
+Paper 9 BSSE conjecture cannot be tested until the molecule is bound.
+
+#### Not Changed
+- Non-Sturmian paths (hybrid, standard, D-matrix) unchanged
+- FCI solver and two-electron integrals unchanged
+- All 18/18 symbolic proofs pass
+- All 164 tests pass (160 existing + 4 new)
+
+## [0.9.20] - 2026-03-09
+
+### Sturmian Basis Implementation — Self-Consistency Divergence Diagnosed
+
+#### Added
+- `use_sturmian=True` flag in `MolecularLatticeIndex`: activates the Sturmian
+  basis (Paper 9).  Three changes applied:
+  1. **Sturmian diagonal** replaces atomic eigenvalue −Z²/(2n²) with
+     ε_n(p₀) = p₀²/2 − Z·p₀/n.  Backward compatibility assertion verifies
+     ε_n(Z/n) = −Z²/(2n²) to machine precision.
+  2. **Self-consistency loop** `solve_sturmian_p0()`: iterates
+     p₀ = √(−2·E_mol) until convergence or max_iter.  Returns
+     (p₀, E_mol, n_iter, converged).
+  3. **Form factor = 1**: `sw_form_factor(n, γ, sturmian=True)` returns 1.0
+     (exact in Sturmian basis, Paper 9 Sec. V).
+- `sturmian_p0` parameter: optional explicit p₀ for fixed-p₀ calculations.
+- `tests/test_sturmian_basis.py`: 8 tests (backward compatibility, diagonal
+  degeneracy, form factor sturmian/non-sturmian, p₀ initialization,
+  convergence-or-failure).  All 8/8 pass.
+- `debug/diagnose_sturmian_lih.py`: Full diagnostic script with self-consistency
+  loop, PES scan, and BSSE analysis.
+- `debug/data/sturmian_lih_results.txt`: Diagnostic results.
+- Paper 8 Section XIV: "Sturmian Implementation and Fourth LiH Test" — reports
+  oscillating divergence and root cause analysis.
+
+#### Key Result: Oscillating Divergence
+The self-consistency loop for LiH (nmax=3, R=3.015) **diverges** after 4
+iterations with oscillating p₀ (2.24 → 3.94 → 1.06 → 4.57 → positive E_mol).
+
+**Root cause**: the Fourier cross-nuclear attraction uses fixed hydrogenic
+wavefunctions (p₀=Z/n per shell) that do not scale with the Sturmian p₀.
+At small p₀, hydrogenic cross-nuclear overestimates attraction → E_mol too
+negative → p₀ jumps up.  At large p₀, Sturmian kinetic p₀²/2 dominates →
+E_mol positive.  The iteration alternates between these regimes.
+
+**Fix (deferred)**: compute cross-nuclear attraction via D-matrix in the
+A-A block (exact in Sturmian basis, naturally p₀-dependent), replacing the
+fixed hydrogenic Fourier integral.
+
+#### Paper 9 Errata
+Paper 9 Eq. (22) states ε_n = −p₀²/2 − Zp₀/n².  This contains a
+sign/exponent typo.  The correct formula is ε_n = +p₀²/2 − Zp₀/n, derived
+from the Sturmian eigenvalue equation and virial theorem.
+
+#### Not Changed
+- Existing use_dmatrix='hybrid' path unchanged (default for non-Sturmian)
+- FCI solver and two-electron integrals unchanged
+- All 18/18 symbolic proofs pass
+- All existing LiH/He/Li/Be tests pass
+
+## [0.9.19] - 2026-03-09
+
+### Paper 9 — Sturmian Basis and Self-Consistent Bond Sphere (Theory)
+
+#### Added
+- `papers/core/Paper_9_Sturmian_Bond_Sphere.tex`: Paper 9 in the Geometric
+  Vacuum series.  Establishes that the bond sphere hypothesis (Paper 8) requires
+  the Sturmian basis — all basis functions must share a single p₀ to live on one
+  S³.  Derives the exact SW cross-center integral with no form factor:
+  ⟨S^A|−Z_B/r_B|S^A⟩ = −(Z_B/p₀)·D(γ).  Defines the self-consistency loop
+  p₀ = √(−2E_mol).  Proves backward compatibility with Papers 0–7 (p₀→Z/n
+  recovers hydrogenic eigenstates).
+- `tests/geovac_paper9_tests.py`: 10 symbolic (sympy) verification tests.
+  All 10/10 pass: Sturmian eigenvalue condition, single-S³ property, hydrogenic
+  limit, orthogonality weight, form factor identity, mismatch analysis,
+  fixed-point existence, γ encodes geometry+energy, backward compatibility,
+  SW exactness spot-check.
+
+#### Not Changed
+- No existing physics code modified.  Implementation deferred to v0.9.20.
+
+## [0.9.18] - 2026-03-09
+
+### Hybrid Cross-Atom Architecture
+
+#### Added
+- `use_dmatrix='hybrid'` option in `MolecularLatticeIndex`: combines Fourier
+  cross-nuclear attraction (diagonal, unchanged) with SW/D-matrix off-diagonal
+  coupling (replaces bridge mechanism).
+- `debug/diagnose_hybrid_lih.py`: Diagnostic script for hybrid architecture.
+- Paper 8 Section XIII: "Hybrid Architecture and Third LiH Test" with full
+  PES table and diagnostic results.
+
+#### Changed
+- `_build_molecular_h1()` now has three branches: standard (bridges),
+  D-matrix (SW-only), and hybrid (Fourier diagonal + SW off-diagonal).
+- `use_dmatrix` parameter type broadened from `bool` to accept `'hybrid'`.
+
+#### LiH Hybrid Results (Positive — Molecule Bound)
+- **Diagnostic 2 PASSES:** LiH is bound at all scanned R values (D_e_CP > 0).
+- Hybrid lowers energy by 0.033 Ha vs baseline at R=3.015 (additive SW coupling).
+- D_e_CP(R=3.015) = 0.143 Ha (expt: 0.092 Ha, 55% overestimate).
+- Baseline D_e_CP = 0.110 Ha (19% overestimate).
+- SW off-diagonal: -0.131 Ha (1s_A, 1s_B), 19× larger than bridge hopping
+  (+0.007 Ha), opposite sign (attractive vs repulsive).
+- Diagonal match: YES — hybrid h1_diag identical to baseline to machine precision.
+- R_eq still < 2.0 bohr (same issue as baseline, inherited from Fourier diagonal).
+- Diagnostic 1 fails: D_e_CP(R=6) = 0.037 Ha (incomplete dissociation).
+- BSSE unchanged at -0.115 Ha (ghost atoms bypass D-matrix path).
+
+## [0.9.17] - 2026-03-09
+
+### Shibuya-Wulfman Nuclear Attraction Integrals
+
+#### Added
+- `geovac/shibuya_wulfman.py`: Standalone SW module with 4 functions:
+  - `sw_form_factor(n, gamma)` — form factor f(n,gamma) = sin(gamma)
+  - `sw_nuclear_attraction(np_, lp, mp, n, l, m, Z_B, p0, gamma)` — single element
+  - `sw_coupling_matrix(n_max, Z_B, p0, gamma)` — full coupling matrix (symmetrized D)
+  - `sw_coupling_matrix_AB(n_max, Z_A, Z_B, p0, gamma)` — two-center combined matrix
+- `tests/test_shibuya_wulfman.py`: 8 tests (R-dependence, dissociation limit, sign,
+  magnitude, D-matrix factorization, cross-n zero, single/two-center symmetry)
+- `debug/diagnose_sw_lih.py`: Diagnostic script for SW vs Mulliken LiH comparison
+- Paper 8 Section XII: "Shibuya-Wulfman Nuclear Attraction" with LiH PES table,
+  root cause analysis, and updated path forward
+
+#### Changed
+- `_cross_atom_h1_dmatrix()` now uses SW integrals instead of geometric-mean scale.
+  Old code preserved in comments. Uses Z_eff = (Z_A+Z_B)/2, sin(gamma) form factor,
+  and symmetrized D-matrix (D+D^T)/2 for Hermiticity.
+
+#### LiH SW Results (Negative — Root Cause Identified)
+- SW coupling: kappa_SW(1s) = 0.131 Ha (Z_eff/p0 * sin(gamma))
+- E_mol(SW) = -6.947 Ha at R=3.015 (unbound: 0.945 Ha above atoms)
+- Root cause: D-matrix path eliminates diagonal cross-nuclear attraction (~2 Ha
+  for 4 electrons) and replaces it with off-diagonal SW coupling (0.131 Ha max).
+  The off-diagonal hopping and diagonal nuclear attraction are structurally
+  different integrals — the D-matrix correctly describes the former but not
+  the latter.
+- Path forward: hybrid approach — retain Mulliken diagonal + use SW off-diagonal
+
+#### Test Results
+- 152/152 tests pass (8 new SW + 144 existing)
+- All three LiH diagnostics FAIL (same structural issue as v0.9.16)
+
+## [0.9.16] - 2026-03-09
+
+### D-Matrix Integration + Paper 8 Extension
+
+#### Added
+- `MolecularLatticeIndex`: `use_dmatrix=False` flag — when True, replaces
+  Mulliken/Fourier cross-atom H1 with SO(4) D-matrix elements from `wigner_so4.py`
+- `_cross_atom_h1_dmatrix(R, p0)` method: builds cross-atom one-electron matrix
+  using D-matrix blocks for each n-shell, with geometric-mean coupling scale
+  κ_cross(n) = |κ| × sqrt(Z_A Z_B) / n²
+- `debug/diagnose_dmatrix_lih.py`: Diagnostic script comparing Mulliken vs D-matrix
+  paths for LiH at nmax=3 (367,290 SDs)
+- Paper 8 extended with 3 new sections:
+  - Section IX: Opposite-Sign Rotation physics (A = J⁺ − J⁻ generator,
+    opposite-sign SU(2) rotations, s-p hybridization, antipodal limit)
+  - Section X: D-Matrix Implementation and LiH Results (coupling scale ansatz,
+    PES table, 3 diagnostic pass/fail tests, root cause analysis)
+  - Section XI: Updated Conclusion (negative result documented, Shibuya-Wulfman
+    matrix elements identified as the correct next step)
+
+#### LiH D-Matrix Results (Negative — Scientifically Informative)
+- Baseline (Mulliken): E_mol = -8.117 Ha, D_e_CP = 0.110 Ha (bound, 19% error)
+- D-matrix: E_mol = -6.770 Ha, D_e_raw = -1.122 Ha (unbound)
+- Root cause: geometric-mean coupling (0.108 Ha) is 5× weaker than Mulliken
+  cross-nuclear attraction (~0.5 Ha). D-matrix provides correct angular mixing
+  but no electrostatic content. Fix: Shibuya-Wulfman matrix elements.
+- All 3 diagnostics FAIL: dissociation limit, bound minimum, BSSE reduction
+- BSSE unchanged (ghost atoms bypass D-matrix by design)
+
+#### Unchanged
+- Default `use_dmatrix=False` preserves all existing behavior
+- No changes to FCI solver, two-electron integrals, or single-atom code
+- All 83 existing LiH + Wigner tests pass
+
+## [0.9.15] - 2026-03-09
+
+### SO(4) Wigner D-Matrix Implementation
+
+#### Added
+- `geovac/wigner_so4.py`: Standalone SO(4) D-matrix module exposing 5 functions:
+  - `cg_so4(n, l, m)` — CG coefficients mapping |n,l,m⟩ → SU(2)⊗SU(2) basis
+  - `wigner_d_su2(j, mp, m, angle)` — SU(2) small d-matrix elements (Varshalovich convention)
+  - `wigner_D_so4(n, lp, mp, l, m, gamma)` — full SO(4) D-matrix element via
+    d⁺(γ) ⊗ d⁻(-γ) (opposite-sign rotation from A = J⁺ - J⁻ generator)
+  - `bond_angle(R, p0)` — stereographic angle γ from internuclear distance R
+  - `d_matrix_block(n, gamma)` — full n² × n² D-matrix for the n-shell
+- `tests/test_wigner_so4.py`: 44 tests in 9 test classes (0.69s):
+  - TestUnitarity (8): D†D = I for n=1..4, det = ±1
+  - TestIdentity (7): D(0) = I, perturbative near-zero
+  - TestSU2Limits (4): n=1 scalar, n=2 block, d^{1/2} and d^1 elements
+  - TestComposition (4): D(α)D(β) = D(α+β), D(γ)D(-γ) = I
+  - TestHermitianConjugate (4): D(γ)^T = D(-γ)
+  - TestShibuyaWulfman (2): s-p mixing element, diagonal decay
+  - TestLargeRLimit (3): γ→0 at large R, D→I
+  - TestAntipodalLimit (5): D(π)² = I, correct m→-m structure
+  - TestCGCoefficients (4): normalization, completeness
+
+#### Key Physics Insight
+The bond rotation is generated by the Runge-Lenz vector A = J⁺ - J⁻.
+Since [J⁺, J⁻] = 0, exp(iγ A_y) = exp(iγ J⁺_y) exp(-iγ J⁻_y), so j⁺
+and j⁻ rotate in OPPOSITE directions. At γ=π (united atom), D(π) maps
+|l,m⟩ → (-1)^{n-1+l+|m|} |l,-m⟩ (A-rotation parity, not spatial parity).
+
+#### Implementation Notes
+- Pure numpy/scipy, no sympy dependency (CG via internal Racah formula)
+- LRU-cached CG and d-matrix elements for performance
+- Does NOT modify any existing source files or MolecularLatticeIndex
+
+## [0.9.14] - 2026-03-09
+
+### Paper 8: Bond Sphere Geometry (Theory)
+
+#### Added
+- `papers/core/Paper_8_Bond_Sphere.tex`: Paper 8 — the bond sphere construction.
+  A diatomic molecule is described by a single S³ with two weighted poles, not
+  two atomic S³ manifolds joined by approximate cross terms. Internuclear distance
+  R encodes as polar angle γ via cos γ = (p₀² − p_R²)/(p₀² + p_R²). Cross-atom
+  matrix elements are SO(4) Wigner D-matrix elements at the rotation g(γ) mapping
+  one pole to the other. BSSE eliminated by construction. Polyatomic molecules
+  conjectured as graphs of bond spheres sharing atomic poles.
+- `tests/geovac_paper8_tests.py`: 18 symbolic tests verifying:
+  - SO(4) Lie algebra: [L,L], [L,A], [A,A] commutators, J⁺/J⁻ commuting, Casimir
+  - Angle-distance formula: Pythagorean identity, limits, conformal relation
+  - Pole limits: D(γ=0) = I, D(γ=π) unitary, continuity at γ=π/2
+  - Two-pole Laplacian: reduces to single-pole at γ=0, eigenvalue splitting
+  - Heteronuclear symmetry: [H,Lz]=0 for all Z, [H,L±]≠0 for Z_A≠Z_B
+
+#### Known Prior Work (Attributed in Paper)
+- Shibuya-Wulfman (1965): two-center Coulomb → single S³ with two poles
+- Aquilanti-Cavalli (1980s-90s): hyperspherical harmonics for molecules
+- Avery (2000s): Sturmian basis and SO(4) matrix elements
+
+#### New Contributions
+- Bond sphere as first-class GeoVac lattice object
+- γ(R) mapping in GeoVac momentum-space coordinates
+- BSSE elimination argument (basis on joint S³)
+- Polyatomic graph-of-spheres conjecture
+- 18 symbolic verifications
+
+#### Previous v0.9.14 Attempt (Reverted)
+All-orbital cross-atom V_ee extension was attempted and reverted (D_e_CP shift
+< 0.5 mHa; large-R CP artifact). The bond sphere construction replaces this
+approach entirely.
+
+---
+
+## [0.9.13] - 2026-03-09
+
+### Cross-Atom Exchange Integrals (Mulliken Approximation)
+
+#### Added
+- `compute_cross_atom_K(na, la, nb, lb, R, ZA, ZB, eri_A, eri_B, states_A, states_B)`:
+  Cross-atom exchange integral via Mulliken approximation:
+  K(aA, bB; R) = S(aA, bB)² × [F⁰(a,a; ZA) + F⁰(b,b; ZB)] / 2.
+  Uses existing overlap integrals (v0.9.12) and same-atom self-Coulomb F⁰.
+- Exchange ERIs stored as `_eri[(a, b, b, a)]` and symmetric partner `(b, a, a, b)`
+  in `_build_cross_atom_vee`. The Slater-Condon diagonal exchange term
+  `-δ(σ)·<pq|qp>` now picks up cross-atom exchange (was zero before).
+- 8 new tests in `TestCrossAtomExchange`: asymptotic (K→0 at R→∞), positivity,
+  symmetry, K<J, count matching, Mulliken formula verification, energy direction,
+  and binding energy validation.
+
+#### Physics
+- Exchange enters as `-δ(σ)·K` in Slater-Condon rules. Since K > 0, adding
+  exchange LOWERS the total energy for same-spin pairs (reduces over-repulsion).
+- The Mulliken approximation is standard in quantum chemistry (Mulliken, 1949).
+  It is exact in the S→0 limit (dissociation) and approximate at intermediate R.
+  The two-center exchange integral does NOT factorize into single-center form
+  factors (unlike J), so Mulliken is the appropriate approximation tier.
+- For LiH at R=3.015, nmax=3: K(Li 1s, H 1s) ≈ S²×(F⁰_Li + F⁰_H)/2 ≈ 8 mHa.
+
+---
+
+## [0.9.12] - 2026-03-08
+
+### Löwdin Orthogonalization for Molecular Basis
+
+#### Added
+- `_wavefunction_form_factor(n, l, Z, q)`: Fourier-Bessel transform of the
+  radial wavefunction R_{nl}(r), distinct from the density form factor |R|².
+  Closed-form expressions for n=1,2 (analytical Laplace transforms); numerical
+  integration for n≥3. Used for overlap integrals between atom-centered bases.
+- `compute_overlap_element(na, la, nb, lb, ZA, ZB, R)`: Cross-atom overlap
+  integral S_AB = (2/π) ∫₀^∞ g_A(q) g_B(q) sin(qR)/(qR) q² dq via the
+  wavefunction form factor. Verified: S(H-H, 1s, R=1.4) = 0.7529 matches
+  exact STO value e^{-R}(1+R+R²/3) to 4 digits.
+- `MolecularLatticeIndex._compute_overlap_matrix()`: Full spatial overlap
+  matrix with identity same-atom blocks and Fourier-computed cross-atom blocks
+  (s-orbital pairs only, consistent with cross-atom V_ee scope).
+- `MolecularLatticeIndex._lowdin_orthogonalize(S)`: Löwdin symmetric
+  orthogonalization S^{-1/2} applied to H1 (matrix transform) and V_ee
+  (4-index ERI transform via einsum). Eigenvalue threshold 1e-6 for
+  near-linear dependency removal.
+- `orthogonalize: bool = False` parameter on `MolecularLatticeIndex.__init__`
+  and `compute_bsse_correction`. When True, computes overlap matrix and
+  applies Löwdin transform after integral construction, before SD enumeration.
+- 11 new tests in `tests/test_lih_fci.py`:
+  - `TestOverlapMatrix` (7 tests): self-overlap=1, STO validation, symmetry,
+    identity blocks, monotone decrease, l>0 rejection
+  - `TestLowdinOrthogonalization` (4 tests): runs without error, preserves
+    basis size, BSSE reduction, ghost energy invariance
+
+#### Known Limitation — Löwdin incompatible with approximate cross-atom ERIs
+PES scan (R=2.5–3.5 bohr) revealed that `orthogonalize=True` catastrophically
+breaks molecular energies: E_mol drops by 2–3 Ha below the non-orthogonalized
+value (e.g., -11.15 vs -8.14 Ha at R=2.5). Root cause: the 4-index ERI
+transform assumes complete physical integrals, but our cross-atom ERIs include
+only direct Coulomb J (no exchange K). The S^{-1/2} transform mixes these
+incomplete integrals, creating 8018 transformed ERIs (vs 3002 originals) with
+unphysical contributions. BSSE is unchanged (-0.1149 Ha) because ghost atoms
+have identity overlap and bypass the transform entirely.
+
+**Recommendation:** Use counterpoise correction (v0.9.9) for BSSE, not Löwdin.
+The `orthogonalize` parameter defaults to `False`. The overlap matrix and
+wavefunction form factor infrastructure remain useful independently.
+
+#### Technical Notes
+- Closed-form wavefunction form factors for n=1,2,3 (analytical Laplace
+  transforms). Numerical integration only for n≥4.
+- n=3 form factor: g(q) = 4a^{5/2}(3a⁴-10a²q²+3q⁴)/(a²+q²)⁴, a=Z/3.
+  Verified against numerical integration to machine precision.
+- The wavefunction form factor g(q) is NOT normalized to 1 at q=0 (unlike
+  the density form factor ρ̃(0)=1). For 1s Z=1: g(0)=4, for 2s Z=1: g(0)≈-22.6.
+- Overlap integral Li(1s)-H(1s) at R=3.015: S ≈ 0.080 (small, but non-zero
+  basis overlap drives BSSE).
+- Condition numbers of overlap matrix are modest (8–14 for R=2.5–3.5),
+  confirming no near-linear-dependency issues in the molecular basis.
+
+---
+
+## [0.9.11] - 2026-03-08
+
+### LiH Convergence Validation — 1% Binding Energy Accuracy
+
+#### Result
+The v0.9.10 normalization fix for `_phi_s_orbital_general` (n >= 3) dramatically
+improved the LiH binding energy at nmax=3:
+
+- **Before (v0.9.9):** D_e^CP = 0.083 Ha (10% error vs expt 0.0924 Ha)
+- **After (v0.9.10):** D_e^CP = **0.093 Ha (1.0% error)**
+
+The improvement comes from correct n=3 cross-atom J values. Previously,
+Φ_3s(0) = 113 instead of 1.0, producing unphysical cross-atom repulsion.
+
+| nmax | N_SD | D_e^CP (Ha) | Error (%) | Time (s) |
+|------|------|-------------|-----------|----------|
+| 2 | 4,845 | 0.270 | 192% | 6 |
+| 3 | 367,290 | **0.093** | **1.0%** | 82 |
+| 4 | 8,214,570 | — | — | >1800 (infeasible) |
+
+#### nmax=4 Scaling Wall
+At nmax=4 per atom (120 spin-orbitals, 8.2M SDs), the calculation exceeded
+30 minutes and 5.4 GB memory without completing. The SD enumeration
+(list + dict of 8.2M tuples) consumes the bulk of memory. Reaching nmax=4
+requires sparse SD representation or symmetry-restricted CI (Ms=0 sector).
+
+#### Added
+- `debug/validate_lih_nmax4.py`: Convergence validation script (nmax=2,3,4)
+- `debug/data/lih_nmax4_convergence.txt`: Full timing and energy data
+- `debug/data/lih_convergence_summary.md`: Convergence table for paper
+
+#### Paper Update
+- `papers/core/paper_geovac_fci.tex`: Updated D_e from 0.083 Ha (10%) to
+  0.093 Ha (1%) in abstract, results, Table III (R=3.015 row), and conclusion
+
+---
+
+## [0.9.10] - 2026-03-08
+
+### Cross-Atom ERIs and Form Factor Bug Fix
+
+#### Bug Fix: `_phi_s_orbital_general` normalization (n >= 3)
+The general s-orbital form factor function had two bugs for n >= 3:
+(1) wrong radial wavefunction normalization (`2*(1/n)^1.5` instead of the
+correct hydrogenic normalization), and (2) a spurious 4π prefactor.
+The result was Φ_3s(0) = 113 instead of 1.0, making all cross-atom J
+values involving n=3 orbitals wildly wrong (e.g., J(3s,3s) = 1096 Ha
+instead of 0.086 Ha). Fixed by delegating to `_form_factor_nl` which
+already had the correct normalization. The n=1,2 closed-form expressions
+were unaffected.
+
+#### Added
+- `compute_cross_atom_J(na, la, nb, lb, R, ZA, ZB)`: standalone function
+  for cross-atom direct Coulomb integrals via Fourier convolution
+  (Paper 7, Eq. 9: J_AB = (2/π) ∫ ρ̃_A(q) ρ̃_B(q) sin(qR)/(qR) dq).
+  Results cached to `geovac/cache/cross_atom_J_*.npy`.
+- `tests/test_lih_fci.py`: 6 new tests in `TestCrossAtomJ` class:
+  asymptotic limit, point-charge limit, 9 reference J values at R=3.015,
+  monotonicity, l>0 rejection, 18-entry ERI count verification.
+
+#### Refactored
+- `_build_cross_atom_vee()` now delegates to `compute_cross_atom_J`
+  instead of inline integration, enabling independent testing and caching.
+
+#### Cross-atom J reference values (R=3.015, Li-H, nmax=3)
+| Pair | J (Ha) | Pair | J (Ha) | Pair | J (Ha) |
+|------|--------|------|--------|------|--------|
+| 1s-1s | 0.328 | 2s-1s | 0.312 | 3s-1s | 0.223 |
+| 1s-2s | 0.186 | 2s-2s | 0.181 | 3s-2s | 0.158 |
+| 1s-3s | 0.093 | 2s-3s | 0.091 | 3s-3s | 0.086 |
+
+---
+
 ## [0.9.9] - 2026-03-08
 
 ### LiH BSSE Diagnosis and Counterpoise Correction

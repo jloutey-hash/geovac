@@ -1,0 +1,19 @@
+Li 3-Electron Ground State Energy — V_ee Method Comparison
+=================================================================
+Reference: E_exact = -7.4781 Ha (Pekeris 1959)
+Methods: ['chordal', 'mulliken']
+
+
+--- CHORDAL ---
+ max_n       n_sd        E_GeoVac      E_exact       |dE|    err%
+-----------------------------------------------------------------
+     4     34,220       -6.143094      -7.4781     1.3350  17.85%
+
+--- MULLIKEN ---
+ max_n       n_sd        E_GeoVac      E_exact       |dE|    err%
+-----------------------------------------------------------------
+     4     34,220       -3.495767      -7.4781     3.9823  53.25%
+
+NOTE: Errors do NOT converge to zero with max_n for either method.
+Chordal: graph-native (Paper 7, Eq. 14), kappa_ee=1 Ha, d=2 antipodal.
+Mulliken: ~12% overestimation; ~10x error for same-orbital pairs.

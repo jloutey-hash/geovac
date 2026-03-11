@@ -101,26 +101,16 @@ def _phi_s_orbital_general(n: int, t: float) -> float:
     """
     General s-orbital projected density via numerical FT of |R_{n0}(r)|^2.
 
-    rho_ns(q) = integral_0^inf |R_{n0}(r)|^2 * sin(qr)/(qr) * r^2 * 4pi dr
-    Then Phi_n(t) = rho_ns(2t) with Z=1.
+    Phi_n(t) = rho_tilde(q=2t) with Z=1, where
+    rho_tilde(q) = integral_0^inf |R_{n0}(r)|^2 * sin(qr)/(qr) * r^2 dr
+
+    Delegates to _form_factor_nl which has the correct hydrogenic
+    normalization for all (n, l).
 
     For n=1,2 the closed-form expressions in _phi_s_orbital are preferred.
     """
-    from scipy.special import assoc_laguerre
-    q = 2.0 * t  # momentum in Z=1 units, p0=2
-    # R_{n0}(r) = 2*(1/n)^{3/2} * L_{n-1}^1(2r/n) * exp(-r/n) for Z=1
-    # |R_{n0}|^2 r^2 is the radial probability density
-    def integrand(r: float) -> float:
-        x = 2.0 * r / n
-        lag = assoc_laguerre(x, n - 1, 1)
-        R = 2.0 * (1.0 / n) ** 1.5 * lag * np.exp(-r / n)
-        rho_r = R * R * r * r
-        if q < 1e-14:
-            return rho_r  # sin(qr)/(qr) -> 1
-        qr = q * r
-        return rho_r * np.sin(qr) / qr
-    val, _ = quad(integrand, 0, np.inf, limit=300)
-    return val * 4.0 * np.pi
+    # q = 2*t in Z=1 units
+    return _form_factor_nl(n, 0, 1.0, 2.0 * t)
 
 
 def _form_factor_nl(n: int, l: int, Z: float, q: float) -> float:
@@ -240,6 +230,504 @@ def compute_vee_s3_overlap(
 
     integral, _ = quad(integrand, 0, np.inf, limit=200)
     return (4.0 * Z / np.pi) * integral
+
+
+def _wavefunction_form_factor(n: int, l: int, Z: float, q: float) -> float:
+    """
+    Spherically averaged wavefunction form factor for hydrogenic (n,l) orbital.
+
+    g(q) = integral_0^inf R_{nl,Z}(r) * sin(qr)/(qr) * r^2 dr
+
+    This is the Fourier-Bessel transform of the RADIAL WAVEFUNCTION R_{nl}(r),
+    NOT the density |R_{nl}|^2. Used for computing overlap integrals between
+    orbitals on different centers.
+
+    Unlike the density form factor (rho_tilde(0) = 1 always), g(0) = integral R r^2 dr
+    and is NOT normalized to 1 (e.g., g_{1s}(0) = 4Z^{5/2}/(Z^2)^2 = 4/Z^{3/2}).
+
+    Parameters
+    ----------
+    n : int
+        Principal quantum number
+    l : int
+        Angular momentum quantum number (must be 0 for now)
+    Z : float
+        Nuclear charge
+    q : float
+        Momentum transfer in atomic units (1/bohr)
+
+    Returns
+    -------
+    float
+        Wavefunction form factor value
+    """
+    # Closed-form expressions using Laplace transforms of r^n e^{-ar} sin(qr)
+    # General formula: g(q) = int_0^inf R_{nl}(r) j_0(qr) r^2 dr
+    #   = (1/q) int_0^inf R_{nl}(r) r sin(qr) dr  for l=0
+
+    if l == 0 and n == 1:
+        # R_{10}(r) = 2Z^{3/2} e^{-Zr}
+        # g(q) = 2Z^{3/2} * 2Z/(Z^2+q^2)^2 = 4Z^{5/2}/(Z^2+q^2)^2
+        # using int_0^inf r e^{-ar} sin(qr) dr = 2aq/(a^2+q^2)^2
+        # and g = (2Z^{3/2}/q) * 2Zq/(Z^2+q^2)^2
+        return 4.0 * Z ** 2.5 / (Z * Z + q * q) ** 2
+
+    if l == 0 and n == 2:
+        # R_{20}(r) = Z^{3/2}/(2*sqrt(2)) * (2-Zr) * e^{-Zr/2}
+        # g(q) = Z^{3/2}/(2*sqrt(2)) * [2*I1 - Z*I2]
+        # where a = Z/2,
+        #   I1 = int r^2 e^{-ar} sin(qr)/(qr) dr = 2a/(a^2+q^2)^2
+        #   I2 = int r^3 e^{-ar} sin(qr)/(qr) dr = 2(3a^2-q^2)/(a^2+q^2)^3
+        from math import sqrt
+        a = Z / 2.0
+        a2q2 = a * a + q * q
+        I1 = 2.0 * a / a2q2 ** 2
+        I2 = 2.0 * (3.0 * a * a - q * q) / a2q2 ** 3
+        return Z ** 1.5 / (2.0 * sqrt(2.0)) * (2.0 * I1 - Z * I2)
+
+    if l == 0 and n == 3:
+        # g(q) = 4*a^{5/2} * (3a^4 - 10a^2*q^2 + 3q^4) / (a^2+q^2)^4
+        # where a = Z/3. Derived from Laplace transforms:
+        # R_{30}(r) = N*(L_2^1(2Zr/3))*e^{-Zr/3}, expanded into r^k e^{-ar} terms,
+        # then int r^k e^{-ar} sin(qr)/(qr) dr evaluated analytically.
+        # Verified against numerical integration to machine precision.
+        a = Z / 3.0
+        a2 = a * a
+        q2 = q * q
+        D = a2 + q2
+        num = 3.0 * a2 * a2 - 10.0 * a2 * q2 + 3.0 * q2 * q2
+        return 4.0 * a ** 2.5 * num / D ** 4
+
+    # General case: numerical integration
+    from scipy.special import assoc_laguerre
+    from math import factorial, sqrt
+
+    nr = n - l - 1
+    N_coeff = (2.0 * Z / n) ** 1.5 * sqrt(factorial(nr) / (2.0 * n * factorial(n + l)))
+
+    def integrand(r: float) -> float:
+        if r < 1e-30:
+            return 0.0
+        x = 2.0 * Z * r / n
+        lag = assoc_laguerre(x, nr, 2 * l + 1)
+        R_nl = N_coeff * x ** l * lag * np.exp(-x / 2.0)
+        if q < 1e-14:
+            return R_nl * r * r
+        qr = q * r
+        return R_nl * np.sin(qr) / qr * r * r
+
+    val, _ = quad(integrand, 0, np.inf, limit=300)
+    return val
+
+
+def compute_overlap_element(
+    na: int, la: int, nb: int, lb: int,
+    ZA: float, ZB: float, R: float,
+) -> float:
+    """
+    Overlap integral between hydrogenic orbitals on different centers.
+
+    S_AB = (2/pi) integral_0^inf g_A(q) g_B(q) sin(qR)/(qR) q^2 dq
+
+    where g(q) = integral_0^inf R_{nl,Z}(r) sin(qr)/(qr) r^2 dr
+    is the wavefunction form factor (NOT the density form factor).
+
+    For R=0, same-center same-orbital: S = 1 (orthonormal atomic basis).
+    For R>0, cross-center: S measures basis overlap between atom-centered
+    hydrogenic orbitals, driving BSSE.
+
+    Currently restricted to l=0 (s-orbital) pairs. The l>0 generalization
+    requires angular-dependent form factors.
+
+    Parameters
+    ----------
+    na, la : int
+        Quantum numbers for orbital on center A
+    nb, lb : int
+        Quantum numbers for orbital on center B
+    ZA, ZB : float
+        Nuclear charges
+    R : float
+        Internuclear distance in bohr
+
+    Returns
+    -------
+    float
+        Overlap integral (dimensionless)
+
+    Raises
+    ------
+    NotImplementedError
+        If la > 0 or lb > 0
+    """
+    if la > 0 or lb > 0:
+        raise NotImplementedError(
+            f"Overlap form factor not implemented for l>0 orbitals "
+            f"(got la={la}, lb={lb}). Requires angular-dependent form factors."
+        )
+
+    def integrand(q: float) -> float:
+        gA = _wavefunction_form_factor(na, la, ZA, q)
+        gB = _wavefunction_form_factor(nb, lb, ZB, q)
+        qR = q * R
+        if qR < 1e-10:
+            sinc = 1.0
+        else:
+            sinc = np.sin(qR) / qR
+        return gA * gB * q * q * sinc
+
+    result, _ = quad(integrand, 0, np.inf, limit=300)
+    return (2.0 / np.pi) * result
+
+
+def compute_exact_cross_nuclear(
+    n_B: int,
+    l_B: int,
+    m_B: int,
+    Z_B: float,
+    Z_A: float,
+    R: float,
+    n_radial: int = 100,
+    n_angular: int = 50,
+) -> float:
+    """
+    Exact two-center nuclear attraction integral via 2D quadrature.
+
+    Computes V = -Z_A * integral |chi^B_{nlm}(r)|^2 / |r - R*zhat| d^3r
+    where chi^B is a hydrogen-like orbital centered at B with nuclear charge Z_B,
+    and nucleus A with charge Z_A sits at distance R along the z-axis.
+
+    Uses Gauss-Laguerre (radial) x Gauss-Legendre (angular) quadrature.
+    For l=0 (s-orbitals), this is mathematically equivalent to the shell-theorem
+    formula in _fourier_cross_attraction.  For l>0, the angular dependence of
+    |Y_l^m|^2 produces corrections beyond the spherical average.
+
+    Parameters
+    ----------
+    n_B, l_B, m_B : int
+        Quantum numbers of the orbital on atom B.
+    Z_B : float
+        Nuclear charge of atom B (determines orbital shape).
+    Z_A : float
+        Nuclear charge of atom A (the attracting nucleus).
+    R : float
+        Internuclear distance in Bohr.
+    n_radial : int
+        Number of Gauss-Laguerre radial quadrature points (default 100).
+    n_angular : int
+        Number of Gauss-Legendre angular quadrature points (default 50).
+
+    Returns
+    -------
+    float
+        Cross-nuclear attraction energy in Hartree (negative).
+    """
+    if R < 1e-10 or Z_A == 0:
+        return 0.0
+
+    from scipy.special import lpmv
+
+    # --- Radial quadrature: Gauss-Laguerre with hydrogenic scaling ---
+    # The dominant decay of |R_nl(r)|^2 ~ exp(-2*Z_B*r/n_B).
+    # Substitution x = 2*Z_B*r/n_B maps this to exp(-x).
+    x_nodes, x_weights = np.polynomial.laguerre.laggauss(n_radial)
+    scale = float(n_B) / (2.0 * float(Z_B))  # r = scale * x
+    r_nodes = scale * x_nodes  # physical radial coordinates
+
+    # --- Angular quadrature: Gauss-Legendre over cos(theta) ---
+    cos_nodes, cos_weights = np.polynomial.legendre.leggauss(n_angular)
+
+    # --- Radial wavefunction |R_{nl}(r)|^2 at quadrature nodes ---
+    from scipy.special import assoc_laguerre
+
+    Z = float(Z_B)
+    n = n_B
+    l = l_B
+    m_abs = abs(m_B)
+    nr = n - l - 1  # radial quantum number
+
+    # Normalization: N^2 = (2Z/n)^3 * (n-l-1)! / (2n * (n+l)!)
+    N_sq = (2.0 * Z / n) ** 3 * factorial(nr) / (2.0 * n * factorial(n + l))
+
+    # Compute |R_nl(r)|^2 at each radial node
+    rho_r = 2.0 * Z * r_nodes / n  # dimensionless radial variable
+    lag_vals = np.array([assoc_laguerre(xi, nr, 2 * l + 1) for xi in rho_r])
+    R_sq = N_sq * rho_r ** (2 * l) * lag_vals ** 2 * np.exp(-rho_r)
+    # Note: exp(-rho) = exp(-x) is absorbed by Laguerre weights,
+    # so the effective integrand multiplies by exp(+x).
+    R_sq_eff = N_sq * rho_r ** (2 * l) * lag_vals ** 2  # without exp(-x)
+
+    # --- Angular density factor ---
+    # |Y_l^m(theta,phi)|^2 integrated over phi gives:
+    #   angular_density(cos_theta) = (2l+1)/2 * (l-|m|)!/(l+|m|)! * [P_l^|m|(cos_theta)]^2
+    # Normalized so that integral_{-1}^{1} angular_density(u) du = 1.
+    if l == 0:
+        ang_factor = 0.5 * np.ones(n_angular)
+    else:
+        c_lm = (2 * l + 1) / 2.0 * factorial(l - m_abs) / factorial(l + m_abs)
+        plm_vals = np.array([lpmv(m_abs, l, u) for u in cos_nodes])
+        ang_factor = c_lm * plm_vals ** 2
+
+    # --- 2D quadrature: sum over (r, cos_theta) ---
+    # V = -Z_A * integral |psi|^2 / |r - R*zhat| d^3r
+    #   = -Z_A * integral_0^inf integral_{-1}^{1}
+    #       |R_nl(r)|^2 * angular_density(u) / sqrt(r^2 + R^2 - 2*r*R*u) * r^2 dr du
+    #
+    # With substitution r = scale * x, dr = scale * dx, and Laguerre weight e^{-x}:
+    #   integral ... dr = scale * sum_i w_i * f(scale*x_i) * e^{x_i} * e^{-x_i}
+    #   The e^{-x} in |R_nl|^2 is cancelled by the e^{+x} from the weight change.
+
+    total = 0.0
+    R2 = R * R
+    for i in range(n_radial):
+        r_i = r_nodes[i]
+        r2_i = r_i * r_i
+        R_sq_i = R_sq_eff[i]  # |R_nl|^2 without exp(-x), Laguerre weight handles it
+        r2_factor = r2_i * R_sq_i * scale  # r^2 * |R_nl|^2_eff * dr/dx
+
+        # Angular sum
+        ang_sum = 0.0
+        for j in range(n_angular):
+            u = cos_nodes[j]
+            dist2 = r2_i + R2 - 2.0 * r_i * R * u
+            if dist2 < 1e-30:
+                dist2 = 1e-30
+            dist = np.sqrt(dist2)
+            ang_sum += cos_weights[j] * ang_factor[j] / dist
+
+        total += x_weights[i] * r2_factor * ang_sum
+
+    return -float(Z_A) * total
+
+
+_f0_memo: Dict[Tuple[int, int, int, int, float], float] = {}
+
+
+def _compute_single_f0(
+    n1: int, l1: int, n2: int, l2: int, Z: float
+) -> float:
+    """
+    Compute a single Slater F0 integral for hydrogenic orbitals at charge Z.
+
+    F0(n1 l1, n2 l2; Z) = integral |R_{n1l1,Z}(r1)|^2 |R_{n2l2,Z}(r2)|^2
+                            * (1/r_>) * r1^2 r2^2 dr1 dr2
+
+    Used for recomputing same-atom V_ee with scaled orbital exponents.
+    Results are memoized by (n1, l1, n2, l2, round(Z, 8)).
+    """
+    key = (n1, l1, n2, l2, round(Z, 8))
+    if key in _f0_memo:
+        return _f0_memo[key]
+    val = _compute_single_f0_impl(n1, l1, n2, l2, Z)
+    _f0_memo[key] = val
+    # Also cache reverse
+    _f0_memo[(n2, l2, n1, l1, round(Z, 8))] = val
+    return val
+
+
+def _compute_single_f0_impl(
+    n1: int, l1: int, n2: int, l2: int, Z: float
+) -> float:
+    """Unmemorized implementation of _compute_single_f0."""
+    from scipy.special import genlaguerre
+
+    r_max = 80.0 / Z
+
+    def _radial_wf_unnorm(r: np.ndarray, n: int, l: int) -> np.ndarray:
+        rho = 2.0 * Z * r / n
+        L_poly = genlaguerre(n - l - 1, 2 * l + 1)(rho)
+        return rho ** l * np.exp(-rho / 2.0) * L_poly
+
+    # Normalization constants
+    norm1_sq, _ = quad(
+        lambda r: _radial_wf_unnorm(np.array(r), n1, l1) ** 2 * r ** 2,
+        0, r_max, limit=200
+    )
+    norm1 = 1.0 / np.sqrt(norm1_sq)
+    norm2_sq, _ = quad(
+        lambda r: _radial_wf_unnorm(np.array(r), n2, l2) ** 2 * r ** 2,
+        0, r_max, limit=200
+    )
+    norm2 = 1.0 / np.sqrt(norm2_sq)
+
+    def R_wf(r: float, n: int, l: int, norm: float) -> float:
+        return float(norm * _radial_wf_unnorm(np.array(r), n, l))
+
+    def _inner(r1: float) -> float:
+        if r1 < 1e-30:
+            return 0.0
+        p1, _ = quad(lambda r2: R_wf(r2, n2, l2, norm2) ** 2 * r2 ** 2,
+                     0, r1, limit=100)
+        p2, _ = quad(lambda r2: R_wf(r2, n2, l2, norm2) ** 2 * r2,
+                     r1, r_max, limit=100)
+        return p1 / r1 + p2
+
+    val, _ = quad(
+        lambda r1: R_wf(r1, n1, l1, norm1) ** 2 * _inner(r1) * r1 ** 2,
+        0, r_max, limit=200
+    )
+    return val
+
+
+def compute_cross_atom_J(
+    na: int,
+    la: int,
+    nb: int,
+    lb: int,
+    R: float,
+    ZA: float,
+    ZB: float,
+) -> float:
+    """
+    Cross-atom direct Coulomb integral via Fourier convolution.
+
+    J_AB(R) = (2/pi) integral_0^inf rho_A(q) rho_B(q) sin(qR)/(qR) dq
+
+    where rho_A(q) = _form_factor_nl(na, la, ZA, q) is the spherically
+    averaged charge form factor of a hydrogenic orbital on center A.
+
+    This gives the classical Coulomb repulsion between two charge
+    distributions centered on nuclei separated by distance R.
+    For R -> inf, J -> 1/R (point charge limit).
+
+    For l>0 orbitals, the density |Y_l^m|^2 is anisotropic, but the
+    form factor uses the spherical average (monopole L=0 term of the
+    multipole expansion). This captures 80-90% of the integral at
+    typical bond lengths (R ~ 3 bohr) and is exact for s-orbitals.
+
+    Parameters
+    ----------
+    na, la : int
+        Quantum numbers for orbital on center A
+    nb, lb : int
+        Quantum numbers for orbital on center B
+    R : float
+        Internuclear distance in bohr
+    ZA, ZB : float
+        Nuclear charges of centers A and B
+
+    Returns
+    -------
+    float
+        Direct Coulomb integral J_AB in Hartree
+    """
+
+    # Check disk cache
+    cache_dir = os.path.join(os.path.dirname(__file__), 'cache')
+    cache_file = os.path.join(
+        cache_dir,
+        f"cross_atom_J_{na}{la}_{nb}{lb}_R{R:.4f}_Z{ZA:.0f}_{ZB:.0f}.npy",
+    )
+    if os.path.exists(cache_file):
+        return float(np.load(cache_file))
+
+    def integrand(q: float) -> float:
+        rho_a = _form_factor_nl(na, la, ZA, q)
+        rho_b = _form_factor_nl(nb, lb, ZB, q)
+        qR = q * R
+        if qR < 1e-10:
+            sinc = 1.0
+        else:
+            sinc = np.sin(qR) / qR
+        return rho_a * rho_b * sinc
+
+    result, _ = quad(integrand, 0, np.inf, limit=300)
+    j_ab = (2.0 / np.pi) * result
+
+    # Save to disk cache
+    os.makedirs(cache_dir, exist_ok=True)
+    np.save(cache_file, j_ab)
+
+    return j_ab
+
+
+def compute_cross_atom_K(
+    na: int,
+    la: int,
+    nb: int,
+    lb: int,
+    R: float,
+    ZA: float,
+    ZB: float,
+    eri_A: Dict[Tuple[int, int, int, int], float],
+    eri_B: Dict[Tuple[int, int, int, int], float],
+    states_A: List[Tuple[int, int, int]],
+    states_B: List[Tuple[int, int, int]],
+) -> float:
+    """
+    Cross-atom exchange integral via Mulliken approximation.
+
+    K(aA, bB; R) = S(aA, bB; R)^2 * [F0(a,a; ZA) + F0(b,b; ZB)] / 2
+
+    where S is the overlap integral between orbitals on different centers,
+    and F0(a,a) is the same-atom self-Coulomb integral (Slater F^0).
+
+    The Mulliken approximation is used because the exact cross-atom exchange
+    integral is a two-center integral that does not factorize into
+    single-center form factors (unlike the direct Coulomb J_AB).
+
+    Properties:
+    - K -> 0 as R -> inf (S -> 0, correct dissociation)
+    - K > 0 (exchange integrals are positive)
+    - K < J for the same orbital pair (exchange < Coulomb)
+    - Standard in quantum chemistry (Mulliken, 1949)
+
+    Restricted to l=0 (s-orbital) pairs, consistent with the cross-atom
+    J restriction.
+
+    Parameters
+    ----------
+    na, la : int
+        Quantum numbers for orbital on center A
+    nb, lb : int
+        Quantum numbers for orbital on center B
+    R : float
+        Internuclear distance in bohr
+    ZA, ZB : float
+        Nuclear charges of centers A and B
+    eri_A, eri_B : dict
+        Same-atom ERI tables from LatticeIndex._eri for atoms A and B
+    states_A, states_B : list of (n, l, m) tuples
+        State lists for atoms A and B
+
+    Returns
+    -------
+    float
+        Exchange integral K_AB in Hartree
+
+    Raises
+    ------
+    NotImplementedError
+        If la > 0 or lb > 0
+    """
+    if la > 0 or lb > 0:
+        raise NotImplementedError(
+            f"Cross-atom K restricted to s-orbitals (got la={la}, lb={lb})."
+        )
+
+    # Overlap integral S(aA, bB)
+    S_ab = compute_overlap_element(na, la, nb, lb, ZA, ZB, R)
+
+    # Find spatial indices for the (n, l=0, m=0) states
+    idx_a = None
+    for i, (n, l, m) in enumerate(states_A):
+        if n == na and l == la and m == 0:
+            idx_a = i
+            break
+    idx_b = None
+    for i, (n, l, m) in enumerate(states_B):
+        if n == nb and l == lb and m == 0:
+            idx_b = i
+            break
+
+    if idx_a is None or idx_b is None:
+        return 0.0
+
+    # Same-atom self-Coulomb F0(a,a) and F0(b,b)
+    f0_aa = eri_A.get((idx_a, idx_a, idx_a, idx_a), 0.0)
+    f0_bb = eri_B.get((idx_b, idx_b, idx_b, idx_b), 0.0)
+
+    return S_ab * S_ab * (f0_aa + f0_bb) / 2.0
 
 
 class LatticeIndex:
@@ -1575,6 +2063,21 @@ class MolecularLatticeIndex:
         FCI assembly method ('auto', 'direct', or 'matrix')
     kinetic_scale : float
         Universal kinetic scale factor (default -1/16)
+    cross_atom_vee : bool or str
+        Cross-atom V_ee mode: True = all (n,l) pairs (default),
+        's_only' = s-orbital pairs only (v0.9.11), False = disabled.
+    cross_nuclear_method : str
+        Cross-nuclear attraction method: 'exact' = full 2D quadrature
+        for all (n,l,m) orbitals (default), 'fourier' = shell-theorem
+        formula for s-orbitals only (v0.9.35 baseline).
+    zeta_A : float
+        Orbital exponent scale for atom A (default 1.0). Each orbital on
+        atom A uses effective charge Z_eff = zeta_A * Z_A for its radial
+        shape. All integrals (H1 diagonal, Slater F0, cross-nuclear,
+        cross-atom J/K) are recomputed with scaled exponents.
+    zeta_B : float
+        Orbital exponent scale for atom B (default 1.0). Same as zeta_A
+        but for atom B orbitals.
     """
 
     # Reuse LatticeIndex static methods for fermionic phase computation
@@ -1594,6 +2097,14 @@ class MolecularLatticeIndex:
         fci_method: str = 'auto',
         kinetic_scale: float = KINETIC_SCALE,
         sparsity_threshold: float = 1e-8,
+        orthogonalize: bool = False,
+        use_dmatrix: object = False,
+        use_sturmian: object = False,
+        sturmian_p0: Optional[float] = None,
+        cross_atom_vee: object = True,
+        cross_nuclear_method: str = 'exact',
+        zeta_A: float = 1.0,
+        zeta_B: float = 1.0,
     ) -> None:
         self.Z_A = Z_A
         self.Z_B = Z_B
@@ -1606,6 +2117,50 @@ class MolecularLatticeIndex:
         self.fci_method = fci_method
         self.kinetic_scale = kinetic_scale
         self.threshold = sparsity_threshold
+        self.orthogonalize = orthogonalize
+        self.use_dmatrix = use_dmatrix
+        self.use_sturmian = use_sturmian
+        self.cross_atom_vee = cross_atom_vee
+        self.cross_nuclear_method = cross_nuclear_method
+        self.zeta_A = zeta_A
+        self.zeta_B = zeta_B
+        # Effective orbital charges: zeta_scale * Z determines orbital shape
+        self._Z_orb_A = zeta_A * float(Z_A) if Z_A > 0 else 0.0
+        self._Z_orb_B = zeta_B * float(Z_B) if Z_B > 0 else 0.0
+
+        # Sturmian p0: shared momentum scale (Paper 9)
+        if use_sturmian == 'atomic':
+            # Atom-dependent p0 (v0.9.22): each atom uses its own
+            # self-consistent p0 from isolated-atom FCI.
+            self._sturmian_p0_A = compute_atomic_p0(Z_A, nmax_A)
+            self._sturmian_p0_B = compute_atomic_p0(Z_B, nmax_B)
+            self._sturmian_p0_AB = np.sqrt(
+                self._sturmian_p0_A * self._sturmian_p0_B
+            )
+            # Store a nominal p0 for compatibility
+            self._sturmian_p0 = self._sturmian_p0_AB
+            self.use_dmatrix = 'hybrid'
+        elif use_sturmian == 'molecular':
+            # MO-projected Sturmian (v0.9.30): prolate spheroidal MO betas
+            # projected onto atom-centered basis via dominant-overlap.
+            if sturmian_p0 is not None:
+                self._sturmian_p0 = sturmian_p0
+            else:
+                self._sturmian_p0 = np.sqrt(
+                    (float(Z_A)**2 + float(Z_B)**2) / 2.0
+                )
+            self.use_dmatrix = 'hybrid'
+
+        elif use_sturmian:
+            if sturmian_p0 is not None:
+                self._sturmian_p0 = sturmian_p0
+            else:
+                # Default: geometric mean of atomic scales (Paper 9, Sec. VI.B)
+                self._sturmian_p0 = np.sqrt(
+                    (float(Z_A)**2 + float(Z_B)**2) / 2.0
+                )
+            # Force hybrid-like D-matrix path for Sturmian
+            self.use_dmatrix = 'hybrid'
 
         # Ghost atom support: Z=0 means basis functions are present
         # but carry no nuclear attraction (Boys-Bernardi counterpoise).
@@ -1619,9 +2174,12 @@ class MolecularLatticeIndex:
         Z_A_eff = Z_A if Z_A > 0 else 1
         Z_B_eff = Z_B if Z_B > 0 else 1
         label = "ghost" if (self._ghost_A or self._ghost_B) else "LiH"
+        zeta_str = ""
+        if abs(zeta_A - 1.0) > 1e-12 or abs(zeta_B - 1.0) > 1e-12:
+            zeta_str = f", zeta_A={zeta_A:.4f}, zeta_B={zeta_B:.4f}"
         print(f"[MolecularLatticeIndex] {label}: Z_A={Z_A}, Z_B={Z_B}, "
               f"nmax_A={nmax_A}, nmax_B={nmax_B}, R={R:.2f} bohr, "
-              f"Ne={n_electrons}")
+              f"Ne={n_electrons}{zeta_str}")
 
         import warnings
         with warnings.catch_warnings():
@@ -1647,6 +2205,12 @@ class MolecularLatticeIndex:
         self._build_combined_adjacency()
         self._build_molecular_h1()
         self._build_molecular_vee()
+
+        # --- Optional Lowdin orthogonalization ---
+        if self.orthogonalize:
+            S = self._compute_overlap_matrix()
+            self._lowdin_orthogonalize(S)
+
         self._enumerate_sd_basis()
 
         # Nuclear repulsion (exact; zero for ghost atoms)
@@ -1750,56 +2314,758 @@ class MolecularLatticeIndex:
 
         Diagonal: exact atomic eigenvalues -Z²/(2n²) + cross-nuclear attraction
         (electrostatic potential, s-orbitals only for variational balance).
-        Off-diagonal: kinetic hopping from combined adjacency (with bridges).
+        Off-diagonal: kinetic hopping from combined adjacency (with bridges),
+        or D-matrix cross-atom coupling when use_dmatrix=True.
         """
         n = self._n_spatial
         nA = self._n_spatial_A
 
-        # Diagonal: exact atomic eigenvalues (zero for ghost atoms)
+        # --- Atom-dependent Sturmian path (v0.9.22): per-atom p0 ---
+        if self.use_sturmian == 'atomic' and not self._ghost_A and not self._ghost_B:
+            self._build_atomic_sturmian_h1()
+            return
+
+        # --- MO-projected Sturmian path (v0.9.30): prolate spheroidal betas ---
+        if self.use_sturmian == 'molecular' and not self._ghost_A and not self._ghost_B:
+            self._build_molecular_sturmian_h1(self._sturmian_p0)
+            return
+
+        # --- Sturmian path (Paper 9): Sturmian diagonal + exact D-matrix ---
+        if self.use_sturmian and not self._ghost_A and not self._ghost_B:
+            self._build_sturmian_h1(self._sturmian_p0)
+            return
+
+        # Diagonal: atomic eigenvalues with orbital exponent scaling.
+        # For orbital exponent zeta_scale * Z / n (Z_eff = zeta * Z):
+        #   E_n = Z_eff^2/(2n^2) - Z*Z_eff/n^2 = Z_eff*(Z_eff - 2Z)/(2n^2)
+        # At zeta=1: E_n = Z*(Z-2Z)/(2n^2) = -Z^2/(2n^2) (standard).
         h1_diag = np.zeros(n)
         if not self._ghost_A:
+            Z_eff_A = self._Z_orb_A
+            Z_A_f = float(self.Z_A)
             for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
-                h1_diag[i] = -float(self.Z_A)**2 / (2.0 * ni**2)
+                h1_diag[i] = Z_eff_A * (Z_eff_A - 2.0 * Z_A_f) / (2.0 * ni**2)
         if not self._ghost_B:
+            Z_eff_B = self._Z_orb_B
+            Z_B_f = float(self.Z_B)
             for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
-                h1_diag[nA + j] = -float(self.Z_B)**2 / (2.0 * nj**2)
+                h1_diag[nA + j] = Z_eff_B * (Z_eff_B - 2.0 * Z_B_f) / (2.0 * nj**2)
 
-        # Cross-nuclear attraction via electrostatic potential.
-        # Only s-orbitals (l=0) get cross-nuclear attraction to match the
-        # scope of cross-atom V_ee (also s-orbital only).  Including
-        # cross-nuclear attraction for p-orbitals WITHOUT compensating
-        # cross-atom V_ee would violate the variational bound.
-        # Skip entirely if either atom is a ghost (Z=0 → no attraction).
-        if not self._ghost_A and not self._ghost_B:
+        if self.use_dmatrix == 'hybrid' and not self._ghost_A and not self._ghost_B:
+            # --- Hybrid path (v0.9.18): cross-nuclear diagonal + SW off-diagonal ---
+            self._apply_cross_nuclear_diagonal(h1_diag)
+            self._h1_diag = h1_diag
+
+            # Off-diagonal: intra-atom graph Laplacian only (no inter-atomic bridges)
+            from scipy.sparse import block_diag as sp_block_diag
+            A_intra = sp_block_diag(
+                [self._li_A.lattice.adjacency, self._li_B.lattice.adjacency],
+                format='csr'
+            )
+            H1_offdiag_intra = self.kinetic_scale * (-A_intra)
+
+            # Cross-atom off-diagonal: SW D-matrix elements
+            H1_dmatrix = self._cross_atom_h1_dmatrix(self.R)
+
+            self._H1_spatial = (
+                diags(h1_diag) + H1_offdiag_intra + H1_dmatrix
+            ).tocsr()
+
+            # Build offdiag dict for matrix assembly path
+            H1_offdiag_full = (H1_offdiag_intra + H1_dmatrix).tocoo()
+            self._h1_offdiag: Dict[int, List[Tuple[int, float]]] = {
+                i: [] for i in range(n)
+            }
+            for r, c, v in zip(H1_offdiag_full.row, H1_offdiag_full.col,
+                               H1_offdiag_full.data):
+                if r != c and abs(v) >= self.threshold:
+                    self._h1_offdiag[r].append((c, float(v)))
+
+            nnz_cross = H1_dmatrix.nnz
+            print(f"[MolecularLatticeIndex] H1 (hybrid): {n} spatial states, "
+                  f"intra nnz={H1_offdiag_intra.nnz}, "
+                  f"cross nnz={nnz_cross}")
+
+        elif self.use_dmatrix and self.use_dmatrix != 'hybrid' and not self._ghost_A and not self._ghost_B:
+            # --- D-matrix path (Paper 8): cross-atom H1 via SO(4) rotation ---
+            # No Fourier cross-nuclear attraction on diagonal.
+            # All cross-atom coupling enters through D-matrix off-diagonal.
+            self._h1_diag = h1_diag
+
+            # Intra-atom off-diagonal: kinetic hopping within each atom only
+            # (block-diagonal part of adjacency, no inter-atomic bridges)
+            from scipy.sparse import block_diag as sp_block_diag
+            A_intra = sp_block_diag(
+                [self._li_A.lattice.adjacency, self._li_B.lattice.adjacency],
+                format='csr'
+            )
+            H1_offdiag_intra = self.kinetic_scale * (-A_intra)
+
+            # Cross-atom off-diagonal: D-matrix elements
+            H1_dmatrix = self._cross_atom_h1_dmatrix(self.R)
+
+            self._H1_spatial = (
+                diags(h1_diag) + H1_offdiag_intra + H1_dmatrix
+            ).tocsr()
+
+            # Build offdiag dict for matrix assembly path
+            H1_offdiag_full = (H1_offdiag_intra + H1_dmatrix).tocoo()
+            self._h1_offdiag: Dict[int, List[Tuple[int, float]]] = {
+                i: [] for i in range(n)
+            }
+            for r, c, v in zip(H1_offdiag_full.row, H1_offdiag_full.col,
+                               H1_offdiag_full.data):
+                if r != c and abs(v) >= self.threshold:
+                    self._h1_offdiag[r].append((c, float(v)))
+
+            nnz_cross = H1_dmatrix.nnz
+            print(f"[MolecularLatticeIndex] H1 (D-matrix): {n} spatial states, "
+                  f"intra nnz={H1_offdiag_intra.nnz}, "
+                  f"cross nnz={nnz_cross}")
+        else:
+            # --- Standard path: cross-nuclear + bridge hopping ---
+            self._apply_cross_nuclear_diagonal(h1_diag)
+            self._h1_diag = h1_diag
+
+            # Off-diagonal: kinetic hopping from combined graph Laplacian
+            H1_offdiag = self.kinetic_scale * (-self._adjacency_combined)
+            self._H1_spatial = (diags(h1_diag) + H1_offdiag).tocsr()
+
+            # Build offdiag dict for matrix assembly path
+            H1_coo = H1_offdiag.tocoo()
+            self._h1_offdiag: Dict[int, List[Tuple[int, float]]] = {
+                i: [] for i in range(n)
+            }
+            for r, c, v in zip(H1_coo.row, H1_coo.col, H1_coo.data):
+                if r != c and abs(v) >= self.threshold:
+                    self._h1_offdiag[r].append((c, float(v)))
+
+            # Report H1 statistics
+            n_cross_A = sum(1 for i in range(nA) if h1_diag[i] !=
+                            -float(self.Z_A)**2 / (2.0 * self._li_A.lattice.states[i][0]**2))
+            print(f"[MolecularLatticeIndex] H1: {n} spatial states, "
+                  f"off-diag nnz={H1_offdiag.nnz}")
+
+    def _apply_cross_nuclear_diagonal(self, h1_diag: np.ndarray) -> None:
+        """
+        Apply cross-nuclear attraction to the h1 diagonal in-place.
+
+        When cross_nuclear_method='exact', uses full 2D quadrature via
+        compute_exact_cross_nuclear() for ALL (n,l,m) orbitals.
+        When cross_nuclear_method='fourier', uses the shell-theorem formula
+        for s-orbitals only (v0.9.35 baseline).
+
+        Orbital shapes use Z_orb (= zeta * Z_nuclear) to account for
+        exponent relaxation, while the attracting charge remains Z_other.
+
+        Skips ghost atoms (Z=0).
+        """
+        if self._ghost_A or self._ghost_B:
+            return
+
+        nA = self._n_spatial_A
+        # Orbital shape charges (zeta-scaled); attracting charges are bare Z
+        Z_orb_A = self._Z_orb_A
+        Z_orb_B = self._Z_orb_B
+
+        if self.cross_nuclear_method == 'exact':
+            # Exact 2D quadrature for all orbitals
+            for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
+                h1_diag[i] += compute_exact_cross_nuclear(
+                    ni, li, mi, Z_orb_A, float(self.Z_B), self.R)
+            for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
+                h1_diag[nA + j] += compute_exact_cross_nuclear(
+                    nj, lj, mj, Z_orb_B, float(self.Z_A), self.R)
+        else:
+            # Fourier/shell-theorem: s-orbitals only (l=0)
             for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
                 if li == 0:
                     h1_diag[i] += self._fourier_cross_attraction(
-                        ni, li, self.Z_A, self.Z_B, self.R)
+                        ni, li, Z_orb_A, float(self.Z_B), self.R)
             for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
                 if lj == 0:
                     h1_diag[nA + j] += self._fourier_cross_attraction(
-                        nj, lj, self.Z_B, self.Z_A, self.R)
+                        nj, lj, Z_orb_B, float(self.Z_A), self.R)
 
-        self._h1_diag = h1_diag
+    def _build_atomic_sturmian_cross_nuclear(
+        self, R: float
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Per-atom cross-nuclear attraction with atom-dependent p0 (v0.9.22).
 
-        # Off-diagonal: kinetic hopping from combined graph Laplacian
-        H1_offdiag = self.kinetic_scale * (-self._adjacency_combined)
-        self._H1_spatial = (diags(h1_diag) + H1_offdiag).tocsr()
+        Each atom's orbitals feel the other nucleus through D-matrix elements
+        evaluated at that atom's own p0 and corresponding bond angle gamma:
 
-        # Build offdiag dict for matrix assembly path
-        H1_coo = H1_offdiag.tocoo()
+            A-A block: -(Z_B / p0_A) * D^(n)(gamma_A)
+            B-B block: -(Z_A / p0_B) * D^(n)(gamma_B)
+
+        where gamma_alpha = arccos((p0_alpha^2 - p_R^2)/(p0_alpha^2 + p_R^2))
+        uses the atom-specific p0.  This breaks the single-S3 geometry but
+        restores binding for heteronuclear molecules.
+
+        The H cross-nuclear (1s feeling Li nucleus) can be very strong:
+        -(Z_A/p0_B) = -3 Ha when Z_A=3, p0_B=1.  If this exceeds -Z_A/R
+        (the point-charge limit), it is capped at -Z_A/R.
+
+        Parameters
+        ----------
+        R : float
+            Internuclear distance in Bohr.
+
+        Returns
+        -------
+        V_cross_A : np.ndarray
+            Shape (n_spatial_A, n_spatial_A). Nucleus B acting on A orbitals.
+        V_cross_B : np.ndarray
+            Shape (n_spatial_B, n_spatial_B). Nucleus A acting on B orbitals.
+        """
+        from .wigner_so4 import bond_angle, d_matrix_block
+
+        nA = self._n_spatial_A
+        nB = self._n_spatial_B
+        Z_A = float(self.Z_A)
+        Z_B = float(self.Z_B)
+        p0_A = self._sturmian_p0_A
+        p0_B = self._sturmian_p0_B
+
+        gamma_A = bond_angle(R, p0_A)
+        gamma_B = bond_angle(R, p0_B)
+        self._gamma_A = gamma_A
+        self._gamma_B = gamma_B
+
+        print(f"[Atomic Sturmian] p0_A={p0_A:.4f}, p0_B={p0_B:.4f}, "
+              f"gamma_A={gamma_A:.4f} rad ({np.degrees(gamma_A):.1f} deg), "
+              f"gamma_B={gamma_B:.4f} rad ({np.degrees(gamma_B):.1f} deg)")
+
+        # Cap: H cross-nuclear -(Z_A/p0_B) must not exceed -Z_A/R
+        cap_B = Z_A / R  # maximum magnitude for B-block diagonal
+
+        # V_cross_A: nucleus B on A orbitals = -(Z_B/p0_A) * D_sym(gamma_A)
+        V_cross_A = np.zeros((nA, nA))
+        offset = 0
+        for n_shell in range(1, self.nmax_A + 1):
+            n_sq = n_shell * n_shell
+            D_raw = d_matrix_block(n_shell, gamma_A)
+            D_sym = (D_raw + D_raw.T) / 2.0
+            scale = -(Z_B / p0_A)
+            V_cross_A[offset:offset + n_sq, offset:offset + n_sq] = (
+                scale * D_sym
+            )
+            offset += n_sq
+
+        # V_cross_B: nucleus A on B orbitals = -(Z_A/p0_B) * D_sym(gamma_B)
+        # with capping: diagonal elements capped at -Z_A/R
+        V_cross_B = np.zeros((nB, nB))
+        V_cross_B_uncapped = np.zeros((nB, nB))
+        offset = 0
+        n_capped = 0
+        for n_shell in range(1, self.nmax_B + 1):
+            n_sq = n_shell * n_shell
+            D_raw = d_matrix_block(n_shell, gamma_B)
+            D_sym = (D_raw + D_raw.T) / 2.0
+            scale = -(Z_A / p0_B)
+            block_uncapped = scale * D_sym
+            V_cross_B_uncapped[offset:offset + n_sq, offset:offset + n_sq] = (
+                block_uncapped
+            )
+            # Cap diagonal elements
+            block_capped = block_uncapped.copy()
+            for k in range(n_sq):
+                if block_capped[k, k] < -cap_B:
+                    block_capped[k, k] = -cap_B
+                    n_capped += 1
+            V_cross_B[offset:offset + n_sq, offset:offset + n_sq] = (
+                block_capped
+            )
+            offset += n_sq
+
+        self._V_cross_B_uncapped = V_cross_B_uncapped
+        if n_capped > 0:
+            print(f"[Atomic Sturmian] WARNING: {n_capped} B-block diagonal "
+                  f"elements capped at -Z_A/R = -{cap_B:.4f} Ha "
+                  f"(uncapped: -{Z_A/p0_B:.4f} Ha)")
+
+        return V_cross_A, V_cross_B
+
+    def _build_atomic_sturmian_h1(self) -> None:
+        """
+        Build one-electron Hamiltonian with atom-dependent Sturmian p0 (v0.9.22).
+
+        Each atom uses its own self-consistent momentum scale p0_alpha
+        from the isolated-atom FCI.  The Sturmian diagonal for atom alpha's
+        orbital (n,l,m) is:
+
+            epsilon_n(p0_alpha) = p0_alpha^2/2 - Z_alpha * p0_alpha / n
+
+        Cross-nuclear uses per-atom D-matrix with atom-specific gamma.
+        Off-diagonal A-B hopping uses geometric-mean p0_AB = sqrt(p0_A * p0_B).
+
+        This breaks the single-S3 geometry but restores binding for
+        heteronuclear molecules with large Z_A/Z_B ratios.
+        """
+        n = self._n_spatial
+        nA = self._n_spatial_A
+        p0_A = self._sturmian_p0_A
+        p0_B = self._sturmian_p0_B
+        p0_AB = self._sturmian_p0_AB
+
+        print(f"\n[Atomic Sturmian H1] p0_A={p0_A:.4f} (Z_A={self.Z_A}), "
+              f"p0_B={p0_B:.4f} (Z_B={self.Z_B}), "
+              f"p0_AB={p0_AB:.4f}")
+
+        # --- Backward compatibility assertion ---
+        for Z_val, p0_val in [(self.Z_A, p0_A), (self.Z_B, p0_B)]:
+            if Z_val == 0:
+                continue
+            Z = float(Z_val)
+            # At p0 = Z/n, the Sturmian diagonal equals -Z^2/(2n^2)
+            for n_shell in range(1, max(self.nmax_A, self.nmax_B) + 1):
+                p0_test = Z / n_shell
+                eps_s = p0_test**2 / 2.0 - Z * p0_test / n_shell
+                eps_a = -Z**2 / (2.0 * n_shell**2)
+                assert abs(eps_s - eps_a) < 1e-10, (
+                    f"Backward compat FAILED: Z={Z_val}, n={n_shell}"
+                )
+
+        # --- Per-atom Sturmian diagonal ---
+        h1_diag = np.zeros(n)
+        for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
+            h1_diag[i] = p0_A**2 / 2.0 - float(self.Z_A) * p0_A / ni
+        for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
+            h1_diag[nA + j] = p0_B**2 / 2.0 - float(self.Z_B) * p0_B / nj
+
+        # --- Per-atom cross-nuclear via D-matrix ---
+        V_cross_A, V_cross_B = self._build_atomic_sturmian_cross_nuclear(
+            self.R
+        )
+
+        # Store diagonal for diagnostics
+        self._h1_diag = h1_diag.copy()
+
+        # --- Off-diagonal: intra-atom graph Laplacian (no bridges) ---
+        from scipy.sparse import block_diag as sp_block_diag
+        A_intra = sp_block_diag(
+            [self._li_A.lattice.adjacency, self._li_B.lattice.adjacency],
+            format='csr'
+        )
+        H1_offdiag_intra = self.kinetic_scale * (-A_intra)
+
+        # --- Cross-atom off-diagonal: SW D-matrix with p0_AB ---
+        H1_dmatrix = self._cross_atom_h1_dmatrix(self.R, p0=p0_AB)
+
+        # --- Assemble ---
+        from scipy.sparse import block_diag as sp_block_diag2
+        V_cross_sparse = sp_block_diag2(
+            [csr_matrix(V_cross_A), csr_matrix(V_cross_B)],
+            format='csr'
+        )
+
+        self._H1_spatial = (
+            diags(h1_diag) + V_cross_sparse + H1_offdiag_intra + H1_dmatrix
+        ).tocsr()
+
+        # Update h1_diag to include cross-nuclear diagonal for FCI
+        for i in range(nA):
+            self._h1_diag[i] += V_cross_A[i, i]
+        for j in range(self._n_spatial_B):
+            self._h1_diag[nA + j] += V_cross_B[j, j]
+
+        # Build offdiag dict for matrix/direct assembly
+        H1_offdiag_full = (
+            V_cross_sparse + H1_offdiag_intra + H1_dmatrix
+        ).tocoo()
         self._h1_offdiag: Dict[int, List[Tuple[int, float]]] = {
             i: [] for i in range(n)
         }
-        for r, c, v in zip(H1_coo.row, H1_coo.col, H1_coo.data):
+        for r, c, v in zip(H1_offdiag_full.row, H1_offdiag_full.col,
+                           H1_offdiag_full.data):
             if r != c and abs(v) >= self.threshold:
                 self._h1_offdiag[r].append((c, float(v)))
 
-        # Report H1 statistics
-        n_cross_A = sum(1 for i in range(nA) if h1_diag[i] !=
-                        -float(self.Z_A)**2 / (2.0 * self._li_A.lattice.states[i][0]**2))
-        print(f"[MolecularLatticeIndex] H1: {n} spatial states, "
-              f"off-diag nnz={H1_offdiag.nnz}")
+        # Diagnostics
+        print(f"[Atomic Sturmian H1] Li 1s diag: {h1_diag[0]:.6f} Ha "
+              f"(cross-nuc: {V_cross_A[0,0]:.6f} Ha)")
+        print(f"[Atomic Sturmian H1] H 1s diag: {h1_diag[nA]:.6f} Ha "
+              f"(cross-nuc: {V_cross_B[0,0]:.6f} Ha)")
+        print(f"[Atomic Sturmian H1] {n} spatial, "
+              f"cross_AA={V_cross_sparse.nnz}, "
+              f"cross_AB={H1_dmatrix.nnz}, intra={H1_offdiag_intra.nnz}")
+
+    def _build_sturmian_cross_nuclear(
+        self, p0: float, R: float
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Sturmian cross-nuclear attraction via D-matrix (Paper 9, Eq. 23).
+
+        In the Sturmian basis, the cross-nuclear matrix element for
+        orbitals on center A in the field of nucleus B is:
+
+            ⟨S^A_{n'l'm'} | -Z_B/r_B | S^A_{nlm}⟩
+                = -(Z_B/p0) · D^(n)_{(l'm'),(lm)}(γ)
+
+        Block-diagonal in n (same-shell only).  The D-matrix blocks are
+        symmetrized (D+D^T)/2 for Hermiticity.
+
+        This replaces the frozen Fourier cross-nuclear of v0.9.20.  The
+        result is fully p0-dependent through both the 1/p0 prefactor and
+        γ(p0, R), resolving the Fourier–Sturmian inconsistency.
+
+        Parameters
+        ----------
+        p0 : float
+            Shared Sturmian momentum scale.
+        R : float
+            Internuclear distance in Bohr.
+
+        Returns
+        -------
+        V_cross_A : np.ndarray
+            Shape (n_spatial_A, n_spatial_A).  Nucleus B acting on A orbitals.
+        V_cross_B : np.ndarray
+            Shape (n_spatial_B, n_spatial_B).  Nucleus A acting on B orbitals.
+        """
+        from .wigner_so4 import bond_angle, d_matrix_block
+
+        nA = self._n_spatial_A
+        nB = self._n_spatial_B
+        Z_A = float(self.Z_A)
+        Z_B = float(self.Z_B)
+
+        gamma = bond_angle(R, p0)
+
+        # Pre-compute symmetrized D-matrix blocks per shell
+        n_max = max(self.nmax_A, self.nmax_B)
+        D_blocks: Dict[int, np.ndarray] = {}
+        for n_shell in range(1, n_max + 1):
+            D_raw = d_matrix_block(n_shell, gamma)
+            D_blocks[n_shell] = (D_raw + D_raw.T) / 2.0
+
+        # V_cross_A: nucleus B on A orbitals = -(Z_B/p0) * D_sym
+        V_cross_A = np.zeros((nA, nA))
+        offset = 0
+        for n_shell in range(1, self.nmax_A + 1):
+            n_sq = n_shell * n_shell
+            scale = -(Z_B / p0)
+            V_cross_A[offset:offset + n_sq, offset:offset + n_sq] = (
+                scale * D_blocks[n_shell]
+            )
+            offset += n_sq
+
+        # V_cross_B: nucleus A on B orbitals = -(Z_A/p0) * D_sym
+        V_cross_B = np.zeros((nB, nB))
+        offset = 0
+        for n_shell in range(1, self.nmax_B + 1):
+            n_sq = n_shell * n_shell
+            scale = -(Z_A / p0)
+            V_cross_B[offset:offset + n_sq, offset:offset + n_sq] = (
+                scale * D_blocks[n_shell]
+            )
+            offset += n_sq
+
+        return V_cross_A, V_cross_B
+
+    def _build_molecular_sturmian_h1(self, p0: float) -> None:
+        """Build H1 with MO-projected Sturmian diagonal (v0.9.30).
+
+        Uses prolate spheroidal molecular orbital betas projected onto
+        atom-centered hydrogenic orbitals via dominant-overlap assignment.
+
+        Diagonal: eps^alpha_{nlm} = p0^2/2 - beta^alpha_{nlm} * Z_alpha * p0
+        Off-diagonal: intra-atom graph Laplacian + SW D-matrix cross-atom.
+
+        Parameters
+        ----------
+        p0 : float
+            Shared Sturmian momentum scale.
+        """
+        from .molecular_sturmian import (
+            compute_molecular_sturmian_betas,
+            project_mo_betas_to_atom_centers,
+        )
+
+        n = self._n_spatial
+        nA = self._n_spatial_A
+        self._sturmian_p0 = p0
+
+        Z_A = float(self.Z_A)
+        Z_B = float(self.Z_B)
+        nmax = max(self.nmax_A, self.nmax_B)
+
+        # --- Compute MO betas and project ---
+        mo_results = compute_molecular_sturmian_betas(
+            Z_A=Z_A, Z_B=Z_B, R=self.R, p0=p0, nmax=nmax
+        )
+        beta_A, beta_B = project_mo_betas_to_atom_centers(
+            mo_results, Z_A=Z_A, Z_B=Z_B, R=self.R, p0=p0, nmax=nmax
+        )
+
+        # --- MO-projected Sturmian diagonal ---
+        h1_diag = np.zeros(n)
+        for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
+            key = (ni, li, mi)
+            beta = beta_A.get(key, 1.0 / ni)
+            h1_diag[i] = p0**2 / 2.0 - beta * Z_A * p0
+
+        for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
+            key = (nj, lj, mj)
+            beta = beta_B.get(key, 1.0 / nj)
+            h1_diag[nA + j] = p0**2 / 2.0 - beta * Z_B * p0
+
+        self._h1_diag = h1_diag.copy()
+
+        # --- Off-diagonal: intra-atom graph Laplacian ---
+        from scipy.sparse import block_diag as sp_block_diag
+        A_intra = sp_block_diag(
+            [self._li_A.lattice.adjacency, self._li_B.lattice.adjacency],
+            format='csr'
+        )
+        H1_offdiag_intra = self.kinetic_scale * (-A_intra)
+
+        # --- Cross-atom off-diagonal: SW D-matrix ---
+        H1_dmatrix = self._cross_atom_h1_dmatrix(self.R, p0=p0)
+
+        # --- Assemble ---
+        self._H1_spatial = (
+            diags(h1_diag) + H1_offdiag_intra + H1_dmatrix
+        ).tocsr()
+
+        # Build offdiag dict for matrix/direct assembly
+        H1_offdiag_full = (H1_offdiag_intra + H1_dmatrix).tocoo()
+        self._h1_offdiag: Dict[int, List[Tuple[int, float]]] = {
+            i: [] for i in range(n)
+        }
+        for r, c, v in zip(H1_offdiag_full.row, H1_offdiag_full.col,
+                           H1_offdiag_full.data):
+            if r != c and abs(v) >= self.threshold:
+                self._h1_offdiag[r].append((c, float(v)))
+
+        nnz_cross_AB = H1_dmatrix.nnz
+        print(f"[MolecularLatticeIndex] H1 (MO-projected Sturmian): "
+              f"{n} spatial, p0={p0:.4f}, "
+              f"cross_AB={nnz_cross_AB}, intra={H1_offdiag_intra.nnz}")
+
+    def _build_sturmian_h1(self, p0: float) -> None:
+        """
+        Build one-electron Hamiltonian with Sturmian diagonal (Paper 9).
+
+        The Sturmian diagonal replaces the atomic eigenvalue -Z²/(2n²) with:
+
+            ε_n(p0) = p0²/2 - Z·p0/n
+
+        where p0 is the shared molecular momentum scale.  This is the
+        expectation value ⟨S_nlm| -½∇² - Z/r |S_nlm⟩ evaluated via the
+        Sturmian eigenvalue equation and virial theorem (Paper 9, Sec. VII).
+
+        Note: Paper 9 Eq. (22) states ε_n = -p0²/2 - Zp0/n², which has a
+        sign/exponent typo.  The correct formula ε_n = +p0²/2 - Zp0/n is
+        derived from the Sturmian equation (Sec. IV) and passes the backward
+        compatibility check ε_n(Z/n) = -Z²/(2n²) exactly.
+
+        Cross-nuclear attraction uses the p0-dependent D-matrix formula
+        (Paper 9, Eq. 23) in the A-A and B-B diagonal blocks.  The A-B
+        off-diagonal block uses SW D-matrix hopping with sturmian=True.
+
+        Parameters
+        ----------
+        p0 : float
+            Shared Sturmian momentum scale.
+        """
+        n = self._n_spatial
+        nA = self._n_spatial_A
+        self._sturmian_p0 = p0
+
+        # --- Backward compatibility assertion (Paper 9, Sec. VII) ---
+        # At p0 = Z/n, the Sturmian diagonal must equal the atomic
+        # eigenvalue -Z²/(2n²).
+        for Z_val in [self.Z_A, self.Z_B]:
+            if Z_val == 0:
+                continue
+            Z = float(Z_val)
+            for n_shell in range(1, max(self.nmax_A, self.nmax_B) + 1):
+                p0_atomic = Z / n_shell
+                eps_sturmian = p0_atomic**2 / 2.0 - Z * p0_atomic / n_shell
+                eps_atomic = -Z**2 / (2.0 * n_shell**2)
+                assert abs(eps_sturmian - eps_atomic) < 1e-10, (
+                    f"Backward compatibility FAILED: Z={Z_val}, n={n_shell}, "
+                    f"ε_Sturmian(Z/n)={eps_sturmian:.12f} vs "
+                    f"ε_atomic={eps_atomic:.12f}"
+                )
+
+        # --- Sturmian diagonal: ε_n(p0) = p0²/2 - Z·p0/n ---
+        h1_diag = np.zeros(n)
+        for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
+            h1_diag[i] = p0**2 / 2.0 - float(self.Z_A) * p0 / ni
+        for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
+            h1_diag[nA + j] = p0**2 / 2.0 - float(self.Z_B) * p0 / nj
+
+        # --- Cross-nuclear via D-matrix (Paper 9 Eq. 23, v0.9.21) ---
+        # Replaces frozen Fourier cross-nuclear of v0.9.20.
+        V_cross_A, V_cross_B = self._build_sturmian_cross_nuclear(p0, self.R)
+
+        # Store diagonal for diagnostics before adding cross-nuclear
+        self._h1_diag = h1_diag.copy()
+
+        # --- Off-diagonal: intra-atom graph Laplacian (no bridges) ---
+        from scipy.sparse import block_diag as sp_block_diag
+        A_intra = sp_block_diag(
+            [self._li_A.lattice.adjacency, self._li_B.lattice.adjacency],
+            format='csr'
+        )
+        H1_offdiag_intra = self.kinetic_scale * (-A_intra)
+
+        # --- Cross-atom off-diagonal: SW D-matrix (sturmian=True) ---
+        H1_dmatrix = self._cross_atom_h1_dmatrix(self.R, p0=p0)
+
+        # --- Assemble: diagonal + cross-nuclear (A-A, B-B) + intra + AB ---
+        # Build cross-nuclear as sparse block-diagonal matrix
+        from scipy.sparse import block_diag as sp_block_diag2
+        V_cross_sparse = sp_block_diag2(
+            [csr_matrix(V_cross_A), csr_matrix(V_cross_B)],
+            format='csr'
+        )
+
+        self._H1_spatial = (
+            diags(h1_diag) + V_cross_sparse + H1_offdiag_intra + H1_dmatrix
+        ).tocsr()
+
+        # Update h1_diag to include cross-nuclear diagonal for FCI
+        for i in range(nA):
+            self._h1_diag[i] += V_cross_A[i, i]
+        for j in range(self._n_spatial_B):
+            self._h1_diag[nA + j] += V_cross_B[j, j]
+
+        # Build offdiag dict for matrix/direct assembly
+        H1_offdiag_full = (
+            V_cross_sparse + H1_offdiag_intra + H1_dmatrix
+        ).tocoo()
+        self._h1_offdiag: Dict[int, List[Tuple[int, float]]] = {
+            i: [] for i in range(n)
+        }
+        for r, c, v in zip(H1_offdiag_full.row, H1_offdiag_full.col,
+                           H1_offdiag_full.data):
+            if r != c and abs(v) >= self.threshold:
+                self._h1_offdiag[r].append((c, float(v)))
+
+        nnz_cross_AB = H1_dmatrix.nnz
+        nnz_cross_AA = V_cross_sparse.nnz
+        print(f"[MolecularLatticeIndex] H1 (Sturmian v2): {n} spatial, "
+              f"p0={p0:.4f}, cross_AA={nnz_cross_AA}, "
+              f"cross_AB={nnz_cross_AB}, intra={H1_offdiag_intra.nnz}")
+
+    def solve_sturmian_p0(
+        self,
+        R: float,
+        p0_init: Optional[float] = None,
+        tol: float = 1e-6,
+        max_iter: int = 50,
+        damping: float = 1.0,
+    ) -> Tuple[float, float, int, bool]:
+        """
+        Self-consistent determination of p0 via p0 = sqrt(-2 * E_mol(p0)).
+
+        Iteration (Paper 9, Sec. VI.B):
+          1. Build H(p0), run FCI, get E_mol
+          2. p0_target = sqrt(-2 * E_mol)
+          3. p0_new = (1-damping)*p0 + damping*p0_target
+          4. Repeat until |p0_new - p0| < tol
+
+        Parameters
+        ----------
+        R : float
+            Internuclear distance in Bohr.
+        p0_init : float or None
+            Initial p0.  If None, uses sqrt((Z_A² + Z_B²) / 2).
+        tol : float
+            Convergence tolerance on |p0_new - p0|.
+        max_iter : int
+            Maximum iterations.
+        damping : float
+            Mixing parameter in (0, 1].  1.0 = no damping (bare iteration),
+            0.3 = 30% update per step.  Default 1.0.
+
+        Returns
+        -------
+        p0_converged : float
+            Final p0 value.
+        E_mol_converged : float
+            Final molecular energy (electronic + V_NN).
+        n_iterations : int
+            Number of iterations performed.
+        converged : bool
+            Whether the iteration converged to within tol.
+        """
+        if not self.use_sturmian:
+            raise ValueError("solve_sturmian_p0 requires use_sturmian=True")
+        if damping <= 0 or damping > 1.0:
+            raise ValueError(f"damping must be in (0, 1], got {damping}")
+
+        # Initialize p0 (Paper 9, Sec. VI.B, step 1)
+        if p0_init is not None:
+            p0 = p0_init
+        else:
+            p0 = np.sqrt((float(self.Z_A)**2 + float(self.Z_B)**2) / 2.0)
+
+        damp_str = f", damping={damping:.2f}" if damping < 1.0 else ""
+        print(f"\n{'='*60}")
+        print(f"Sturmian self-consistency loop: R={R:.3f} bohr{damp_str}")
+        print(f"p0_init = {p0:.6f}")
+        print(f"{'='*60}")
+
+        E_mol = 0.0
+        converged = False
+
+        # Dispatch to correct H1 builder
+        def _rebuild_h1(p0_val: float) -> None:
+            if self.use_sturmian == 'molecular':
+                self._build_molecular_sturmian_h1(p0_val)
+            else:
+                self._build_sturmian_h1(p0_val)
+
+        for iteration in range(1, max_iter + 1):
+            # Rebuild H1 with current p0
+            self.R = R
+            _rebuild_h1(p0)
+
+            # Run FCI
+            eigvals, eigvecs = self.compute_ground_state(n_states=1)
+            E_mol = eigvals[0]
+
+            # Update p0 = sqrt(-2 * E_mol) with optional damping
+            if E_mol >= 0:
+                print(f"  iter {iteration}: p0={p0:.6f}, E_mol={E_mol:.6f} "
+                      f"(POSITIVE — unbound, stopping)")
+                break
+
+            p0_target = np.sqrt(-2.0 * E_mol)
+            p0_new = (1.0 - damping) * p0 + damping * p0_target
+            delta = abs(p0_new - p0)
+
+            print(f"  iter {iteration}: p0={p0:.6f}, E_mol={E_mol:.6f} Ha, "
+                  f"p0_target={p0_target:.6f}, p0_new={p0_new:.6f}, "
+                  f"delta={delta:.2e}")
+
+            if delta < tol:
+                p0 = p0_new
+                converged = True
+                print(f"  CONVERGED at iteration {iteration}: "
+                      f"p0={p0:.6f}, E_mol={E_mol:.6f} Ha")
+                break
+
+            # Divergence check: if delta is growing after 5 iterations
+            if iteration >= 5 and delta > 1.0:
+                print(f"  DIVERGING at iteration {iteration}: "
+                      f"delta={delta:.4f} > 1.0, stopping early")
+                p0 = p0_new
+                break
+
+            p0 = p0_new
+
+        # Rebuild with final p0
+        self._sturmian_p0 = p0
+        _rebuild_h1(p0)
+
+        n_iterations = min(iteration, max_iter)
+        return p0, E_mol, n_iterations, converged
 
     @staticmethod
     def _mulliken_cross_attraction(
@@ -1893,128 +3159,489 @@ class MolecularLatticeIndex:
 
         return -float(Z_other) * (inner / R + outer)
 
+    def _cross_atom_h1_dmatrix(
+        self, R: float, p0: Optional[float] = None
+    ) -> csr_matrix:
+        """
+        Cross-atom one-electron coupling via Shibuya-Wulfman nuclear
+        attraction integrals on S3.
+
+        Uses the SW formula:
+            V^SW = -(Z_B/p0) * D^(n)_{(l'm'),(lm)}(gamma) * f(n, gamma)
+
+        where D is the SO(4) Wigner D-matrix (symmetrized: (D+D^T)/2)
+        and f(n, gamma) = sin(gamma) is the form factor encoding
+        R-dependence for fixed p0.
+
+        The coupling for each (i_A, j_B) pair is placed symmetrically
+        in both off-diagonal blocks to ensure Hermiticity. The effective
+        nuclear charge uses the arithmetic mean (Z_A + Z_B)/2 for
+        heteronuclear molecules.
+
+        Parameters
+        ----------
+        R : float
+            Internuclear distance in Bohr.
+        p0 : float or None
+            Momentum scale for bond angle. If None, uses
+            sqrt(Z_A^2 + Z_B^2).
+
+        Returns
+        -------
+        csr_matrix
+            Shape (n_spatial, n_spatial). Cross-atom H1 block.
+        """
+        from .wigner_so4 import bond_angle, d_matrix_block
+        from .shibuya_wulfman import sw_form_factor
+
+        nA = self._n_spatial_A
+        n = self._n_spatial
+        Z_A = float(self.Z_A)
+        Z_B = float(self.Z_B)
+
+        # Determine p0 from atomic charges if not provided
+        if p0 is None:
+            p0 = np.sqrt(Z_A**2 + Z_B**2)
+        self._dmatrix_p0 = p0
+
+        gamma = bond_angle(R, p0)
+        self._dmatrix_gamma = gamma
+
+        # Effective nuclear charge: arithmetic mean for heteronuclear
+        Z_eff = (Z_A + Z_B) / 2.0
+
+        print(f"[SW] p0={p0:.4f}, gamma={gamma:.4f} rad "
+              f"({np.degrees(gamma):.1f} deg), R={R:.3f} bohr, "
+              f"Z_eff={Z_eff:.2f}")
+
+        # --- OLD geometric-mean coupling (v0.9.16, FAILED) ---
+        # kappa = abs(self.kinetic_scale)  # 1/16
+        # scale = kappa * sqrt(Z_A * Z_B) / n_shell^2
+        # h_val = D_elem * scale
+        # Result: coupling ~0.108 Ha, 5x too weak, molecule unbound
+        # ---
+
+        states_A = self._li_A.lattice.states  # list of (n, l, m)
+        states_B = self._li_B.lattice.states
+
+        # Pre-compute symmetrized D-matrix blocks and form factors per shell
+        n_max = max(s[0] for s in states_A)
+        D_blocks: Dict[int, np.ndarray] = {}
+        f_factors: Dict[int, float] = {}
+        for n_shell in range(1, n_max + 1):
+            D_raw = d_matrix_block(n_shell, gamma)
+            D_blocks[n_shell] = (D_raw + D_raw.T) / 2.0  # Hermitian
+            f_factors[n_shell] = sw_form_factor(n_shell, gamma,
+                                               sturmian=self.use_sturmian)
+
+        # Build per-shell state index maps for efficient lookup
+        # shell_indices_A[n] = list of (local_idx_in_shell, global_spatial_idx)
+        shell_indices_A: Dict[int, List[Tuple[int, int]]] = {}
+        shell_indices_B: Dict[int, List[Tuple[int, int]]] = {}
+        for i_a, (n_a, l_a, m_a) in enumerate(states_A):
+            shell_indices_A.setdefault(n_a, []).append((len(shell_indices_A.get(n_a, [])), i_a))
+        for i_b, (n_b, l_b, m_b) in enumerate(states_B):
+            shell_indices_B.setdefault(n_b, []).append((len(shell_indices_B.get(n_b, [])), i_b))
+
+        rows: List[int] = []
+        cols: List[int] = []
+        data: List[float] = []
+
+        for n_shell in range(1, n_max + 1):
+            if n_shell not in shell_indices_A or n_shell not in shell_indices_B:
+                continue
+
+            D_sym = D_blocks[n_shell]
+            f = f_factors[n_shell]
+            scale = -(Z_eff / p0) * f
+
+            idxs_A = shell_indices_A[n_shell]
+            idxs_B = shell_indices_B[n_shell]
+
+            for local_a, global_a in idxs_A:
+                for local_b, global_b in idxs_B:
+                    h_val = scale * D_sym[local_a, local_b]
+
+                    if abs(h_val) >= self.threshold:
+                        j_b = global_b + nA
+                        # A->B coupling
+                        rows.append(global_a)
+                        cols.append(j_b)
+                        data.append(h_val)
+                        # B->A coupling (Hermitian)
+                        rows.append(j_b)
+                        cols.append(global_a)
+                        data.append(h_val)
+
+        H_cross = csr_matrix((data, (rows, cols)), shape=(n, n))
+        max_val = max(abs(v) for v in data) if data else 0.0
+        print(f"[SW] Cross-atom H1: {H_cross.nnz} nnz, "
+              f"|max|={max_val:.6f} Ha, "
+              f"f(1,gamma)={f_factors.get(1, 0):.4f}")
+        return H_cross
+
+    def _recompute_slater_f0_scaled(
+        self, li: 'LatticeIndex', Z_orb: float
+    ) -> Tuple[np.ndarray, Dict[Tuple[int, int, int, int], float]]:
+        """
+        Recompute Slater F0 integrals with scaled orbital exponent Z_orb.
+
+        When zeta != 1.0, the same-atom V_ee must use orbitals with
+        effective charge Z_orb instead of Z_nuclear.
+
+        Returns (vee_matrix, eri_dict) for the atom's spatial states.
+        """
+        states = li.lattice.states
+        n_sp = li.lattice.num_states
+        unique_nl = sorted(set((n, l) for n, l, m in states))
+
+        # Compute F0 integrals with Z_orb
+        f0_cache: Dict[Tuple[int, int, int, int], float] = {}
+        for n1, l1 in unique_nl:
+            for n2, l2 in unique_nl:
+                key = (n1, l1, n2, l2)
+                key_rev = (n2, l2, n1, l1)
+                if key in f0_cache or key_rev in f0_cache:
+                    continue
+                val = _compute_single_f0(n1, l1, n2, l2, Z_orb)
+                f0_cache[key] = val
+                f0_cache[key_rev] = val
+
+        # Fill vee matrix and ERI dict
+        vee = np.zeros((n_sp, n_sp))
+        eri: Dict[Tuple[int, int, int, int], float] = {}
+        for i in range(n_sp):
+            ni, li_val, _ = states[i]
+            for j in range(i, n_sp):
+                nj, lj, _ = states[j]
+                v = f0_cache[(ni, li_val, nj, lj)]
+                vee[i, j] = v
+                vee[j, i] = v
+
+        # Build ERI table matching LatticeIndex format
+        if hasattr(li, '_eri'):
+            for key_orig in li._eri:
+                a, b, c, d = key_orig
+                if a < n_sp and b < n_sp and c < n_sp and d < n_sp:
+                    na, la, _ = states[a]
+                    nb, lb, _ = states[b]
+                    nc, lc, _ = states[c]
+                    nd, ld, _ = states[d]
+                    # Recompute this ERI entry with scaled Z
+                    # For F0 (direct): (ab|ab) = F0(a,b)
+                    if a == c and b == d:
+                        eri[key_orig] = f0_cache[(na, la, nb, lb)]
+                    elif a == d and b == c:
+                        # Exchange: (ab|ba) — use same F0 for Mulliken approx
+                        eri[key_orig] = f0_cache[(na, la, nb, lb)]
+                    else:
+                        # Keep original for non-diagonal ERIs
+                        eri[key_orig] = li._eri[key_orig]
+
+        return vee, eri
+
     def _build_molecular_vee(self) -> None:
         """
         Build combined V_ee matrix and ERI table.
 
-        Same-atom Slater integrals are exact (cached). Cross-atom two-electron
-        integrals use Fourier convolution of momentum-space densities with
-        sin(qR)/(qR) structure factor (Paper 7, Section VI):
+        Same-atom Slater integrals are exact (cached). When zeta scaling is
+        active, same-atom integrals are recomputed with Z_orb = zeta * Z.
+        Cross-atom two-electron integrals use Fourier convolution of
+        momentum-space densities with sin(qR)/(qR) structure factor.
 
-            J_AB(a,b,R) = (2/π) ∫₀^∞ ρ̃_A(q) ρ̃_B(q) sin(qR)/(qR) dq
-
-        where ρ̃(q) is the spherically averaged charge form factor.
-        Note: no q² factor — the q² volume element cancels 1/q² from Coulomb.
-
-        Only s-orbital (l=0) cross-atom pairs are included. The l>0 pairs
-        require angular-dependent form factors; spherical averaging
-        underestimates repulsion and violates the variational bound.
-
-        Only direct Coulomb J is included; exchange K is neglected
-        (overestimates repulsion slightly, preserving variational bound).
-
-        Known limitation: cross-nuclear attraction is also restricted to
-        s-orbitals for balance (see _build_molecular_h1). The resulting
-        Hamiltonian has a ~0.2% variational violation at equilibrium, likely
-        due to incomplete screening of s-orbital cross-nuclear attraction
-        by cross-atom V_ee in the FCI ground state.
+        Controlled by self.cross_atom_vee:
+        - True: all (n,l) orbital pairs (monopole J + s-s Mulliken K)
+        - 's_only': s-orbital pairs only (v0.9.11 behavior)
+        - False: no cross-atom V_ee (diagnostic mode)
         """
         n = self._n_spatial
         nA = self._n_spatial_A
 
         self._vee_matrix = np.zeros((n, n))
-        # Only include same-atom V_ee for real (non-ghost) atoms
-        if not self._ghost_A:
-            self._vee_matrix[:nA, :nA] = self._li_A._vee_matrix
-        if not self._ghost_B:
-            self._vee_matrix[nA:, nA:] = self._li_B._vee_matrix
 
-        # ERI table: reindex atom B entries with offset
+        # Same-atom V_ee: use original if zeta=1.0, else recompute
         self._eri: Dict[Tuple[int, int, int, int], float] = {}
 
-        if not self._ghost_A and hasattr(self._li_A, '_eri'):
-            for key, val in self._li_A._eri.items():
-                self._eri[key] = val
+        if not self._ghost_A:
+            if abs(self.zeta_A - 1.0) < 1e-12:
+                self._vee_matrix[:nA, :nA] = self._li_A._vee_matrix
+                if hasattr(self._li_A, '_eri'):
+                    for key, val in self._li_A._eri.items():
+                        self._eri[key] = val
+            else:
+                vee_A, eri_A = self._recompute_slater_f0_scaled(
+                    self._li_A, self._Z_orb_A)
+                self._vee_matrix[:nA, :nA] = vee_A
+                for key, val in eri_A.items():
+                    self._eri[key] = val
 
-        if not self._ghost_B and hasattr(self._li_B, '_eri'):
-            for (a, b, c, d), val in self._li_B._eri.items():
-                self._eri[(a + nA, b + nA, c + nA, d + nA)] = val
+        if not self._ghost_B:
+            if abs(self.zeta_B - 1.0) < 1e-12:
+                self._vee_matrix[nA:, nA:] = self._li_B._vee_matrix
+                if hasattr(self._li_B, '_eri'):
+                    for (a, b, c, d), val in self._li_B._eri.items():
+                        self._eri[(a + nA, b + nA, c + nA, d + nA)] = val
+            else:
+                vee_B, eri_B = self._recompute_slater_f0_scaled(
+                    self._li_B, self._Z_orb_B)
+                self._vee_matrix[nA:, nA:] = vee_B
+                for (a, b, c, d), val in eri_B.items():
+                    self._eri[(a + nA, b + nA, c + nA, d + nA)] = val
 
-        # Cross-atom V_ee via Fourier convolution (skip for ghost atoms)
+        # Cross-atom V_ee (skip for ghost atoms or if disabled)
         n_cross = 0
-        if not self._ghost_A and not self._ghost_B:
+        if not self._ghost_A and not self._ghost_B and self.cross_atom_vee:
             n_cross = self._build_cross_atom_vee()
 
         n_eri = len(self._eri)
         print(f"[MolecularLatticeIndex] V_ee: {n_eri} ERI entries "
-              f"({n_cross} cross-atom)")
+              f"({n_cross} cross-atom J+K)")
 
     def _build_cross_atom_vee(self) -> int:
         """
-        Compute cross-atom direct Coulomb integrals J_AB(a,b,R) via
-        Fourier convolution of momentum-space form factors.
+        Compute cross-atom two-electron integrals.
 
-        J_AB(a,b,R) = (2/π) ∫₀^∞ ρ̃_A(q) ρ̃_B(q) sin(qR)/(qR) dq
+        J_AB uses Fourier convolution of spherically averaged density
+        form factors (monopole term, exact for s-orbitals, ~90% for l>0):
+            J_AB(R) = (2/pi) int_0^inf rho_A(q) rho_B(q) sin(qR)/(qR) dq
 
-        Uses adaptive quadrature (scipy.integrate.quad) with closed-form
-        form factors for s-orbitals. Only s-orbital pairs (l=0) are included;
-        l>0 cross-atom V_ee requires angular-dependent form factors that
-        preserve variational rigour (spherical averaging violates the
-        variational bound — see Paper 7 Section VI.E).
+        K_AB uses the Mulliken approximation (s-orbital pairs only):
+            K(aA, bB; R) = S(aA, bB)^2 * [F0(a,a; ZA) + F0(b,b; ZB)] / 2
 
-        Only direct Coulomb J is computed; exchange K is neglected
-        (overestimates repulsion slightly, preserves variational bound).
+        Controlled by self.cross_atom_vee:
+        - True: J for all (n,l) pairs + K for s-s pairs
+        - 's_only': J and K for s-s pairs only (v0.9.11 behavior)
 
         Returns
         -------
         int
-            Number of cross-atom ERI entries added.
+            Number of cross-atom ERI entries added (J + K).
         """
         nA = self._n_spatial_A
         states_A = self._li_A.lattice.states
         states_B = self._li_B.lattice.states
         R = self.R
-        count = 0
+        s_only = (self.cross_atom_vee == 's_only')
+        count_J = 0
+        count_K = 0
 
-        # Cache J by (n_a, n_b) since l=0 for all pairs, m doesn't matter
-        j_cache: Dict[Tuple[int, int], float] = {}
+        # Cache J by (n_a, l_a, n_b, l_b)
+        j_cache: Dict[Tuple[int, int, int, int], float] = {}
+        # Cache S by (n_a, n_b) — overlap only for s-orbitals
+        s_cache: Dict[Tuple[int, int], float] = {}
+
+        for i_a, (n_a, l_a, m_a) in enumerate(states_A):
+            if s_only and l_a > 0:
+                continue
+            for i_b, (n_b, l_b, m_b) in enumerate(states_B):
+                if s_only and l_b > 0:
+                    continue
+                j_b = i_b + nA
+
+                # --- Direct Coulomb J (monopole term) ---
+                # Use Z_orb (zeta-scaled) for orbital shapes in form factors
+                j_key = (n_a, l_a, n_b, l_b)
+                if j_key not in j_cache:
+                    j_cache[j_key] = compute_cross_atom_J(
+                        n_a, l_a, n_b, l_b, R,
+                        self._Z_orb_A, self._Z_orb_B
+                    )
+                j_ab = j_cache[j_key]
+
+                if abs(j_ab) > 1e-15:
+                    self._vee_matrix[i_a, j_b] = j_ab
+                    self._vee_matrix[j_b, i_a] = j_ab
+                    self._eri[(i_a, j_b, i_a, j_b)] = j_ab
+                    self._eri[(j_b, i_a, j_b, i_a)] = j_ab
+                    count_J += 2
+
+                # --- Exchange K via Mulliken (s-orbital pairs only) ---
+                if l_a == 0 and l_b == 0 and abs(j_ab) > 1e-15:
+                    s_key = (n_a, n_b)
+                    if s_key not in s_cache:
+                        s_cache[s_key] = compute_overlap_element(
+                            n_a, 0, n_b, 0,
+                            self._Z_orb_A, self._Z_orb_B, R
+                        )
+                    s_ab = s_cache[s_key]
+
+                    # F0 self-repulsion: use zeta-scaled values from ERI table
+                    f0_aa = self._eri.get((i_a, i_a, i_a, i_a), 0.0)
+                    f0_bb = self._eri.get(
+                        (i_b + nA, i_b + nA, i_b + nA, i_b + nA), 0.0)
+                    k_ab = s_ab * s_ab * (f0_aa + f0_bb) / 2.0
+
+                    if abs(k_ab) > 1e-15:
+                        self._eri[(i_a, j_b, j_b, i_a)] = k_ab
+                        self._eri[(j_b, i_a, i_a, j_b)] = k_ab
+                        count_K += 2
+
+        print(f"[MolecularLatticeIndex] Cross-atom V_ee: "
+              f"{count_J} Coulomb J, {count_K} exchange K entries "
+              f"(mode={'s_only' if s_only else 'all_l'})")
+        return count_J + count_K
+
+    def _compute_overlap_matrix(self) -> np.ndarray:
+        """
+        Compute the overlap matrix S between all spatial orbitals.
+
+        Same-atom blocks are identity (orthonormal hydrogenic basis).
+        Cross-atom blocks use Fourier-Bessel overlap:
+            S_{ij} = (2/pi) int_0^inf g_A(q) g_B(q) sin(qR)/(qR) q^2 dq
+
+        Only s-orbital (l=0) cross-atom pairs are computed; l>0 cross-atom
+        overlaps are set to zero (consistent with l=0 restriction on
+        cross-atom V_ee and cross-nuclear attraction).
+
+        Returns
+        -------
+        S : np.ndarray, shape (n_spatial, n_spatial)
+            Overlap matrix (symmetric positive semi-definite)
+        """
+        n = self._n_spatial
+        nA = self._n_spatial_A
+        S = np.eye(n)
+
+        # Skip cross-atom overlaps if either atom is a ghost
+        if self._ghost_A or self._ghost_B:
+            return S
+
+        states_A = self._li_A.lattice.states
+        states_B = self._li_B.lattice.states
+
+        # Cache by (na, nb) since l=0, m doesn't matter for s-orbitals
+        s_cache: Dict[Tuple[int, int], float] = {}
 
         for i_a, (n_a, l_a, m_a) in enumerate(states_A):
             if l_a > 0:
-                continue  # s-orbital pairs only
+                continue
             for i_b, (n_b, l_b, m_b) in enumerate(states_B):
                 if l_b > 0:
-                    continue  # s-orbital pairs only
+                    continue
                 j_b = i_b + nA
 
                 cache_key = (n_a, n_b)
-                if cache_key in j_cache:
-                    j_ab = j_cache[cache_key]
-                else:
-                    def integrand(q: float, _na=n_a, _nb=n_b) -> float:
-                        rho_a = _phi_s_orbital(_na, q / (2.0 * self.Z_A))
-                        rho_b = _phi_s_orbital(_nb, q / (2.0 * self.Z_B))
-                        qR = q * R
-                        if qR < 1e-10:
-                            sinc = 1.0
-                        else:
-                            sinc = np.sin(qR) / qR
-                        return rho_a * rho_b * sinc
+                if cache_key not in s_cache:
+                    s_cache[cache_key] = compute_overlap_element(
+                        n_a, 0, n_b, 0,
+                        self._Z_orb_A, self._Z_orb_B, self.R
+                    )
+                s_ab = s_cache[cache_key]
 
-                    result, _ = quad(integrand, 0, np.inf, limit=300)
-                    j_ab = (2.0 / np.pi) * result
-                    j_cache[cache_key] = j_ab
-
-                if abs(j_ab) < 1e-15:
+                if abs(s_ab) < 1e-15:
                     continue
 
-                self._vee_matrix[i_a, j_b] = j_ab
-                self._vee_matrix[j_b, i_a] = j_ab
-                self._eri[(i_a, j_b, i_a, j_b)] = j_ab
-                self._eri[(j_b, i_a, j_b, i_a)] = j_ab
-                count += 2
+                S[i_a, j_b] = s_ab
+                S[j_b, i_a] = s_ab
 
-        return count
+        return S
+
+    def _lowdin_orthogonalize(
+        self, S: np.ndarray, eigenvalue_threshold: float = 1e-6
+    ) -> None:
+        """
+        Apply Lowdin symmetric orthogonalization S^{-1/2} to all integrals.
+
+        Transforms the one-electron Hamiltonian and two-electron integrals
+        from the non-orthogonal atomic orbital basis to the orthogonalized
+        Lowdin basis, removing inter-center linear dependencies that cause
+        BSSE.
+
+        The transformation is:
+            H1' = X^T H1 X
+            (pq|rs)' = sum_{abcd} X_{ap} X_{bq} (ab|cd) X_{cr} X_{ds}
+
+        where X = S^{-1/2} computed via eigendecomposition:
+            S = U Lambda U^T  =>  X = U Lambda^{-1/2} U^T
+
+        Eigenvalues below eigenvalue_threshold are dropped (near-linear
+        dependencies), reducing the effective basis size.
+
+        Parameters
+        ----------
+        S : np.ndarray, shape (n_spatial, n_spatial)
+            Overlap matrix
+        eigenvalue_threshold : float
+            Eigenvalues below this are dropped (default 1e-6)
+        """
+        n = self._n_spatial
+
+        # Eigendecompose overlap matrix
+        eigvals, eigvecs = np.linalg.eigh(S)
+
+        # Drop near-zero eigenvalues (linear dependencies)
+        mask = eigvals > eigenvalue_threshold
+        n_kept = int(mask.sum())
+        n_dropped = n - n_kept
+
+        if n_dropped > 0:
+            print(f"[Lowdin] Dropping {n_dropped} near-dependent basis functions "
+                  f"(threshold={eigenvalue_threshold:.1e})")
+
+        # Build X = S^{-1/2} using only significant eigenvalues
+        # For full basis: X = U @ diag(1/sqrt(lambda)) @ U^T
+        # With truncation: X is n×n_kept (rectangular if any dropped)
+        lam_inv_sqrt = 1.0 / np.sqrt(eigvals[mask])
+        U_kept = eigvecs[:, mask]
+
+        # Full S^{-1/2} matrix (square, even with truncation the result
+        # projects back into the original n-dimensional space)
+        X = U_kept @ np.diag(lam_inv_sqrt) @ U_kept.T
+
+        # --- Transform H1 ---
+        H1_dense = self._H1_spatial.toarray()
+        H1_orth = X.T @ H1_dense @ X
+        self._h1_diag = np.diag(H1_orth).copy()
+        self._H1_spatial = csr_matrix(H1_orth)
+
+        # Rebuild off-diagonal dict
+        self._h1_offdiag = {i: [] for i in range(n)}
+        for r in range(n):
+            for c in range(n):
+                if r != c and abs(H1_orth[r, c]) >= self.threshold:
+                    self._h1_offdiag[r].append((c, float(H1_orth[r, c])))
+
+        # --- Transform V_ee (4-index) ---
+        # Build dense 4D ERI array from sparse dict
+        eri_4d = np.zeros((n, n, n, n))
+        for (a, b, c, d), val in self._eri.items():
+            eri_4d[a, b, c, d] = val
+
+        # 4-index transformation: (pq|rs) = sum_{abcd} X_{ap} X_{bq} (ab|cd) X_{cr} X_{ds}
+        # Done as 4 sequential contractions for efficiency
+        tmp = np.einsum('ap,abcd->pbcd', X, eri_4d)
+        tmp = np.einsum('bq,pbcd->pqcd', X, tmp)
+        tmp = np.einsum('cr,pqcd->pqrd', X, tmp)
+        eri_orth = np.einsum('ds,pqrd->pqrs', X, tmp)
+
+        # Rebuild ERI dict and vee_matrix from transformed integrals
+        self._eri = {}
+        self._vee_matrix = np.zeros((n, n))
+        for p in range(n):
+            for q in range(n):
+                val_J = eri_orth[p, q, p, q]
+                if abs(val_J) > 1e-15:
+                    self._vee_matrix[p, q] = val_J
+                    self._eri[(p, q, p, q)] = val_J
+                # Also store exchange-type integrals
+                val_K = eri_orth[p, q, q, p]
+                if abs(val_K) > 1e-15 and (p, q, q, p) != (p, q, p, q):
+                    self._eri[(p, q, q, p)] = val_K
+
+        # Store all non-negligible ERIs for full Slater-Condon
+        for a in range(n):
+            for b in range(n):
+                for c in range(n):
+                    for d in range(n):
+                        val = eri_orth[a, b, c, d]
+                        if abs(val) > 1e-15:
+                            self._eri[(a, b, c, d)] = val
+
+        self._overlap_matrix = S
+        self._lowdin_X = X
+        n_eri = len(self._eri)
+        print(f"[Lowdin] Orthogonalized: {n_kept}/{n} basis functions kept, "
+              f"{n_eri} ERI entries")
 
     def _enumerate_sd_basis(self) -> None:
         """Enumerate all N-electron Slater determinants over combined basis."""
@@ -2206,6 +3833,252 @@ class MolecularLatticeIndex:
         return H.tocsr()
 
     # ------------------------------------------------------------------
+    # Energy Decomposition (diagnostic instrumentation, v0.9.24)
+    # ------------------------------------------------------------------
+
+    def _build_1rdm_diagonal(self, civec: np.ndarray) -> np.ndarray:
+        """
+        Build diagonal of the one-particle reduced density matrix.
+
+        gamma_pp = sum_I |c_I|^2 * n_p(I)
+
+        where n_p(I) is the occupation of spatial orbital p in SD I
+        (0, 1, or 2 counting both spins).
+
+        Parameters
+        ----------
+        civec : np.ndarray, shape (n_sd,)
+            FCI ground-state coefficient vector.
+
+        Returns
+        -------
+        gamma_diag : np.ndarray, shape (n_spatial,)
+            Diagonal of spin-summed 1-RDM.
+        """
+        n_sp = self._n_spatial
+        gamma_diag = np.zeros(n_sp)
+        c_sq = civec * civec
+        for I, sd in enumerate(self.sd_basis):
+            for occ in sd:
+                gamma_diag[occ >> 1] += c_sq[I]
+        return gamma_diag
+
+    def _compute_h1_expectation(self, civec: np.ndarray) -> float:
+        """
+        Compute <psi|H1|psi> via sparse single-excitation walk.
+
+        Avoids building the full 1-RDM. Instead, iterates over SDs and
+        their single excitations through nonzero H1 off-diagonal elements.
+
+        Parameters
+        ----------
+        civec : np.ndarray, shape (n_sd,)
+            FCI coefficient vector.
+
+        Returns
+        -------
+        float
+            One-electron energy expectation value <H1>.
+        """
+        # Diagonal H1 contribution
+        h1_diag_val = 0.0
+        c_sq = civec * civec
+        for I, sd in enumerate(self.sd_basis):
+            for occ in sd:
+                h1_diag_val += c_sq[I] * self._h1_diag[occ >> 1]
+
+        # Off-diagonal H1 contribution (single excitations only)
+        h1_offdiag_val = 0.0
+        sd_index = self._sd_index
+        for I, sd in enumerate(self.sd_basis):
+            c_I = civec[I]
+            if abs(c_I) < 1e-15:
+                continue
+            occ_set = frozenset(sd)
+            for kp, p in enumerate(sd):
+                sigma_p = p & 1
+                sp_p = p >> 1
+                for r_sp, h_val in self._h1_offdiag[sp_p]:
+                    r = (r_sp << 1) | sigma_p
+                    if r in occ_set:
+                        continue
+                    new_sd = tuple(sorted(sd[:kp] + (r,) + sd[kp + 1:]))
+                    J = sd_index.get(new_sd)
+                    if J is None:
+                        continue
+                    c_J = civec[J]
+                    if abs(c_J) < 1e-15:
+                        continue
+                    phase = self._compute_phase(sd, kp, r)
+                    h1_offdiag_val += c_I * c_J * phase * h_val
+
+        return h1_diag_val + h1_offdiag_val
+
+    def _compute_bridge_expectation(self, civec: np.ndarray) -> Tuple[float, int, float]:
+        """
+        Compute <psi|V_bridge|psi> using bridge-only adjacency.
+
+        The bridge contribution is the off-diagonal inter-atomic part of
+        the combined adjacency matrix, scaled by kinetic_scale.
+
+        Returns
+        -------
+        v_bridge : float
+            Bridge hopping expectation value.
+        n_bridge_active : int
+            Number of active bridge connections.
+        max_bridge_elem : float
+            Largest bridge matrix element magnitude.
+        """
+        from scipy.sparse import block_diag as sp_block_diag
+
+        A_intra = sp_block_diag(
+            [self._li_A.lattice.adjacency, self._li_B.lattice.adjacency],
+            format='csr'
+        )
+        A_full = self._adjacency_combined
+        # Bridge adjacency = full - intra (only inter-atomic connections)
+        A_bridge = (A_full - A_intra).tocoo()
+
+        n_bridge_active = A_bridge.nnz // 2
+        if n_bridge_active == 0:
+            return 0.0, 0, 0.0
+
+        # Build bridge off-diagonal dict (spatial index → list of (target, weight))
+        n = self._n_spatial
+        bridge_offdiag: Dict[int, List[Tuple[int, float]]] = {i: [] for i in range(n)}
+        max_elem = 0.0
+        for r, c, v in zip(A_bridge.row, A_bridge.col, A_bridge.data):
+            if r != c and abs(v) >= 1e-15:
+                h_val = self.kinetic_scale * (-v)
+                bridge_offdiag[r].append((c, h_val))
+                max_elem = max(max_elem, abs(h_val))
+
+        # Single-excitation walk for bridge-only operator
+        v_bridge = 0.0
+        sd_index = self._sd_index
+        for I, sd in enumerate(self.sd_basis):
+            c_I = civec[I]
+            if abs(c_I) < 1e-15:
+                continue
+            occ_set = frozenset(sd)
+            for kp, p in enumerate(sd):
+                sigma_p = p & 1
+                sp_p = p >> 1
+                for r_sp, h_val in bridge_offdiag[sp_p]:
+                    r = (r_sp << 1) | sigma_p
+                    if r in occ_set:
+                        continue
+                    new_sd = tuple(sorted(sd[:kp] + (r,) + sd[kp + 1:]))
+                    J = sd_index.get(new_sd)
+                    if J is None:
+                        continue
+                    c_J = civec[J]
+                    if abs(c_J) < 1e-15:
+                        continue
+                    phase = self._compute_phase(sd, kp, r)
+                    v_bridge += c_I * c_J * phase * h_val
+
+        return v_bridge, n_bridge_active, max_elem
+
+    def decompose_energy(
+        self, civec: np.ndarray, E_total: float
+    ) -> Dict[str, float]:
+        """
+        Decompose the FCI ground-state energy into physical components.
+
+        Uses the diagonal 1-RDM for diagonal operators and sparse
+        single-excitation walks for off-diagonal operators (T, bridges).
+        V_ee is obtained as a residual: V_ee = E_total - V_NN - <H1>.
+
+        Components
+        ----------
+        T : kinetic energy (graph Laplacian, intra-atom only)
+        V_nA : nuclear attraction of A electrons to nucleus A
+        V_nB : nuclear attraction of B electrons to nucleus B
+        V_cross_A : cross-nuclear attraction of A electrons to nucleus B
+        V_cross_B : cross-nuclear attraction of B electrons to nucleus A
+        V_bridge : bridge hopping contribution (off-diagonal A-B block)
+        V_ee : electron-electron repulsion (residual)
+        V_NN : nuclear-nuclear repulsion
+
+        Parameters
+        ----------
+        civec : np.ndarray, shape (n_sd,)
+            FCI ground-state coefficient vector.
+        E_total : float
+            Total FCI energy (electronic + V_NN) from compute_ground_state.
+
+        Returns
+        -------
+        components : dict
+            Keys: 'T', 'V_nA', 'V_nB', 'V_cross_A', 'V_cross_B',
+                  'V_bridge', 'V_ee', 'V_NN', 'E_total', 'E_check'
+        """
+        n = self._n_spatial
+        nA = self._n_spatial_A
+
+        # Diagonal 1-RDM: gamma_pp = sum_I |c_I|^2 * n_p(I)
+        gamma_diag = self._build_1rdm_diagonal(civec)
+
+        # --- Nuclear attraction V_nA: -Z_A^2/(2n^2) for A-block ---
+        VnA_diag = np.zeros(n)
+        if not self._ghost_A:
+            for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
+                VnA_diag[i] = -float(self.Z_A)**2 / (2.0 * ni**2)
+        VnA_val = np.dot(VnA_diag, gamma_diag)
+
+        # --- Nuclear attraction V_nB: -Z_B^2/(2n^2) for B-block ---
+        VnB_diag = np.zeros(n)
+        if not self._ghost_B:
+            for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
+                VnB_diag[nA + j] = -float(self.Z_B)**2 / (2.0 * nj**2)
+        VnB_val = np.dot(VnB_diag, gamma_diag)
+
+        # --- Cross-nuclear V_cross_A and V_cross_B ---
+        # Uses same method as _build_molecular_h1 (exact or fourier).
+        Vcross_diag = np.zeros(n)
+        self._apply_cross_nuclear_diagonal(Vcross_diag)
+        Vcross_A_diag = np.zeros(n)
+        Vcross_A_diag[:nA] = Vcross_diag[:nA]
+        Vcross_B_diag = np.zeros(n)
+        Vcross_B_diag[nA:] = Vcross_diag[nA:]
+        Vcross_A_val = np.dot(Vcross_A_diag, gamma_diag)
+        Vcross_B_val = np.dot(Vcross_B_diag, gamma_diag)
+
+        # --- H1 total via sparse single-excitation walk ---
+        H1_total = self._compute_h1_expectation(civec)
+
+        # --- Bridge hopping (separate excitation walk) ---
+        V_bridge_val, n_bridge_active, max_bridge_elem = \
+            self._compute_bridge_expectation(civec)
+
+        # --- T = <H1> - diagonal_components - V_bridge ---
+        diag_sum = VnA_val + VnB_val + Vcross_A_val + Vcross_B_val
+        T_val = H1_total - diag_sum - V_bridge_val
+
+        # --- V_ee as residual: E_total = <H1> + <V_ee> + V_NN ---
+        E_elec = E_total - self.V_NN
+        V_ee_val = E_elec - H1_total
+
+        return {
+            'T': float(T_val),
+            'V_nA': float(VnA_val),
+            'V_nB': float(VnB_val),
+            'V_cross_A': float(Vcross_A_val),
+            'V_cross_B': float(Vcross_B_val),
+            'V_bridge': float(V_bridge_val),
+            'V_ee': float(V_ee_val),
+            'V_NN': float(self.V_NN),
+            'E_total': float(E_total),
+            'E_check': float(H1_total + V_ee_val + self.V_NN),
+            'H1_total': float(H1_total),
+            'H1_diag_sum': float(diag_sum),
+            'n_bridge_active': n_bridge_active,
+            'max_bridge_elem': float(max_bridge_elem),
+        }
+
+    # ------------------------------------------------------------------
     # Solver
     # ------------------------------------------------------------------
 
@@ -2261,6 +4134,9 @@ def compute_bsse_correction(
     n_electrons_B: int,
     vee_method: str = 'slater_full',
     fci_method: str = 'auto',
+    orthogonalize: bool = False,
+    zeta_A: float = 1.0,
+    zeta_B: float = 1.0,
 ) -> dict:
     """
     Boys-Bernardi counterpoise correction for Basis Set Superposition Error.
@@ -2273,6 +4149,9 @@ def compute_bsse_correction(
 
     BSSE = (E_A_ghost - E_A_own) + (E_B_ghost - E_B_own)
          = artificial lowering due to basis borrowing (negative number)
+
+    When zeta_A/zeta_B != 1.0, ghost atom fragment calculations use the
+    same zeta values as the supermolecule to ensure consistent basis space.
 
     Parameters
     ----------
@@ -2288,6 +4167,12 @@ def compute_bsse_correction(
         Two-electron integral method (default 'slater_full')
     fci_method : str
         FCI assembly method (default 'auto')
+    orthogonalize : bool
+        If True, use Lowdin orthogonalization (default False)
+    zeta_A : float
+        Orbital exponent scale for atom A (default 1.0)
+    zeta_B : float
+        Orbital exponent scale for atom B (default 1.0)
 
     Returns
     -------
@@ -2296,7 +4181,7 @@ def compute_bsse_correction(
     """
     import warnings
 
-    # Own-basis energies
+    # Own-basis energies (unscaled — isolated atoms at zeta=1.0)
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         li_A = LatticeIndex(
@@ -2312,12 +4197,15 @@ def compute_bsse_correction(
         E_B_own = li_B.compute_ground_state(n_states=1)[0][0]
 
     # Ghost-basis energies: atom A with ghost B orbitals
+    # Use same zeta_A, zeta_B as supermolecule for consistent basis space
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         mol_A_ghost = MolecularLatticeIndex(
             Z_A=Z_A, Z_B=0, nmax_A=nmax_A, nmax_B=nmax_B,
             R=R, n_electrons=n_electrons_A,
             vee_method=vee_method, fci_method=fci_method,
+            orthogonalize=orthogonalize,
+            zeta_A=zeta_A, zeta_B=zeta_B,
         )
         E_A_ghost = mol_A_ghost.compute_ground_state(n_states=1)[0][0]
 
@@ -2328,6 +4216,8 @@ def compute_bsse_correction(
             Z_A=0, Z_B=Z_B, nmax_A=nmax_A, nmax_B=nmax_B,
             R=R, n_electrons=n_electrons_B,
             vee_method=vee_method, fci_method=fci_method,
+            orthogonalize=orthogonalize,
+            zeta_A=zeta_A, zeta_B=zeta_B,
         )
         E_B_ghost = mol_B_ghost.compute_ground_state(n_states=1)[0][0]
 
@@ -2344,3 +4234,68 @@ def compute_bsse_correction(
         'BSSE_A': BSSE_A,
         'BSSE_B': BSSE_B,
     }
+
+
+# Cache for compute_atomic_p0 results
+_atomic_p0_cache: Dict[Tuple[int, int], float] = {}
+
+
+def compute_atomic_p0(Z: int, nmax: int) -> float:
+    """
+    Compute the self-consistent Sturmian p0 for an isolated atom.
+
+    For a single atom with nuclear charge Z and basis truncation nmax,
+    the self-consistent p0 satisfies p0 = sqrt(-2 * E_atom), where
+    E_atom is the ground-state eigenvalue of the atom at that p0.
+
+    For hydrogen (Z=1), p0 = 1.0 exactly at any nmax >= 1, since
+    E_H = -0.5 Ha and sqrt(1.0) = 1.0.
+
+    For Z=0 (ghost atoms), returns 0.0.
+
+    Results are cached by (Z, nmax) so each computation is done once.
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+    nmax : int
+        Maximum principal quantum number.
+
+    Returns
+    -------
+    float
+        Self-consistent p0 for the isolated atom.
+    """
+    if Z == 0:
+        return 0.0
+
+    key = (Z, nmax)
+    if key in _atomic_p0_cache:
+        return _atomic_p0_cache[key]
+
+    # Run single-atom FCI to get ground-state energy
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        li = LatticeIndex(
+            n_electrons=Z,
+            max_n=nmax,
+            nuclear_charge=Z,
+            vee_method='slater_full',
+            fci_method='auto',
+        )
+        eigvals, _ = li.compute_ground_state(n_states=1)
+        E_atom = eigvals[0]
+
+    if E_atom >= 0:
+        # Atom is unbound at this nmax — fall back to Z/1
+        p0 = float(Z)
+        print(f"[compute_atomic_p0] Z={Z}, nmax={nmax}: E_atom={E_atom:.6f} "
+              f"(positive, using p0={p0:.4f})")
+    else:
+        p0 = np.sqrt(-2.0 * E_atom)
+        print(f"[compute_atomic_p0] Z={Z}, nmax={nmax}: E_atom={E_atom:.6f} "
+              f"Ha, p0={p0:.6f}")
+
+    _atomic_p0_cache[key] = p0
+    return p0
