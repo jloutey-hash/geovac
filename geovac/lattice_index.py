@@ -2105,6 +2105,8 @@ class MolecularLatticeIndex:
         cross_nuclear_method: str = 'exact',
         zeta_A: float = 1.0,
         zeta_B: float = 1.0,
+        t_corr_lambda: float = 0.0,
+        t_corr_fock_weighted: bool = False,
     ) -> None:
         self.Z_A = Z_A
         self.Z_B = Z_B
@@ -2124,6 +2126,8 @@ class MolecularLatticeIndex:
         self.cross_nuclear_method = cross_nuclear_method
         self.zeta_A = zeta_A
         self.zeta_B = zeta_B
+        self.t_corr_lambda = t_corr_lambda
+        self.t_corr_fock_weighted = t_corr_fock_weighted
         # Effective orbital charges: zeta_scale * Z determines orbital shape
         self._Z_orb_A = zeta_A * float(Z_A) if Z_A > 0 else 0.0
         self._Z_orb_B = zeta_B * float(Z_B) if Z_B > 0 else 0.0
@@ -2425,6 +2429,7 @@ class MolecularLatticeIndex:
         else:
             # --- Standard path: cross-nuclear + bridge hopping ---
             self._apply_cross_nuclear_diagonal(h1_diag)
+            self._apply_overlap_kinetic_correction(h1_diag)
             self._h1_diag = h1_diag
 
             # Off-diagonal: kinetic hopping from combined graph Laplacian
@@ -2486,6 +2491,81 @@ class MolecularLatticeIndex:
                 if lj == 0:
                     h1_diag[nA + j] += self._fourier_cross_attraction(
                         nj, lj, Z_orb_B, float(self.Z_A), self.R)
+
+    def _apply_overlap_kinetic_correction(self, h1_diag: np.ndarray) -> None:
+        """
+        Add overlap-dependent kinetic correction to the H1 diagonal.
+
+        For each orbital a on atom A, adds:
+            h1_diag[a] += t_corr_lambda * sum_b S(a,b)^2 * w(a,b)
+
+        where S(a,b) is the STO overlap between orbital a and orbital b
+        on the other atom, and w(a,b) is:
+
+        - If t_corr_fock_weighted: w = (Z_A/n_a)^2 * (Z_B/n_b)^2
+          This weights by the Fock energy-shell p0^2 = Z^2/n^2, suppressing
+          diffuse orbitals and concentrating repulsion on compact cores.
+
+        - Otherwise: w = 1 (uniform weighting).
+
+        Only s-orbital (l=0) cross-atom overlaps are computed.
+
+        Parameters
+        ----------
+        h1_diag : np.ndarray
+            Diagonal of H1 matrix, modified in-place.
+        """
+        if abs(self.t_corr_lambda) < 1e-15:
+            return
+        if self._ghost_A or self._ghost_B:
+            return
+
+        nA = self._n_spatial_A
+        states_A = self._li_A.lattice.states
+        states_B = self._li_B.lattice.states
+        Z_orb_A = self._Z_orb_A
+        Z_orb_B = self._Z_orb_B
+        R = self.R
+        fock = self.t_corr_fock_weighted
+        Z_A = float(self.Z_A)
+        Z_B = float(self.Z_B)
+
+        # Cache overlap by (n_a, n_b) since only l=0 pairs are computed
+        s_cache: Dict[Tuple[int, int], float] = {}
+
+        def get_overlap(n_a: int, n_b: int) -> float:
+            key = (n_a, n_b)
+            if key not in s_cache:
+                s_cache[key] = compute_overlap_element(
+                    n_a, 0, n_b, 0, Z_orb_A, Z_orb_B, R
+                )
+            return s_cache[key]
+
+        # Atom A orbitals: sum over B partners
+        for i_a, (n_a, l_a, m_a) in enumerate(states_A):
+            if l_a > 0:
+                continue
+            sum_s2w = 0.0
+            for (n_b, l_b, m_b) in states_B:
+                if l_b > 0:
+                    continue
+                s_ab = get_overlap(n_a, n_b)
+                w = (Z_A / n_a)**2 * (Z_B / n_b)**2 if fock else 1.0
+                sum_s2w += s_ab * s_ab * w
+            h1_diag[i_a] += self.t_corr_lambda * sum_s2w
+
+        # Atom B orbitals: sum over A partners
+        for i_b, (n_b, l_b, m_b) in enumerate(states_B):
+            if l_b > 0:
+                continue
+            sum_s2w = 0.0
+            for (n_a, l_a, m_a) in states_A:
+                if l_a > 0:
+                    continue
+                s_ab = get_overlap(n_a, n_b)
+                w = (Z_A / n_a)**2 * (Z_B / n_b)**2 if fock else 1.0
+                sum_s2w += s_ab * s_ab * w
+            h1_diag[nA + i_b] += self.t_corr_lambda * sum_s2w
 
     def _build_atomic_sturmian_cross_nuclear(
         self, R: float

@@ -1,0 +1,59 @@
+LiH FCI Performance Profile
+Date: 2026-03-12
+System: LiH R=3.015 nmax=3
+
+=== TIMING (seconds) ===
+nmax3_construction = 3.332
+nmax3_directci_precomp = 0.422
+nmax3_assembly = 975.468
+nmax3_eigsh = 5.075
+nmax3_total = 984.297
+nmax2_construction = 0.106
+nmax2_assembly = 0.353
+nmax2_eigsh = 0.016
+nmax2_total = 0.476
+
+=== SIZES ===
+nmax3_n_spatial = 28
+nmax3_n_sp = 56
+nmax3_n_sd = 367290
+nmax2_n_spatial = 10
+nmax2_n_sp = 20
+nmax2_n_sd = 4845
+
+=== SPARSITY ===
+h1_nnz = 108
+h1_total = 784
+h1_density = 0.1378
+eri_dict_entries = 3394
+eri_max_possible = 614656
+eri_dict_density = 0.005522
+eri_4d_nnz = 3394
+eri_4d_total = 614656
+eri_4d_density = 0.005522
+ci_nnz = 8461158
+ci_total = 134901944100
+ci_density = 0.00006272
+
+=== MEMORY (MB) ===
+h1_dense = 0.0060
+eri_4d = 4.6895
+ci_csr = 98.2
+peak_tracked = 568.3
+
+=== ERI TYPES ===
+same_A = 1492
+same_B = 1492
+cross = 410
+
+=== ERI THRESHOLD ANALYSIS ===
+|ERI|>1e-04 = 3334
+|ERI|>1e-06 = 3394
+|ERI|>1e-08 = 3394
+|ERI|>1e-10 = 3394
+|ERI|>1e-12 = 3394
+
+=== ENERGIES (Ha) ===
+nmax3_E_elec = -9.112546
+nmax2_E_elec = -9.102037
+V_NN = 0.995025
