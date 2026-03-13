@@ -50,6 +50,7 @@ The prolate spheroidal lattice extends GeoVac from atoms to molecules with zero 
 | System | Method | Error | Status |
 |--------|--------|:-----:|:------:|
 | H$_2^+$ (prolate spheroidal) | Separated solver | **0.70%** | Zero free params |
+| H$_2$ (prolate CI, relaxed) | Eckart SCF + 2×2 CI | 58% $D_e$ | Zero free params |
 | H$_2$ (Full CI) | Tensor product | 1.72% | Cross-nuclear ceiling |
 | LiH ($D_e$, CP-corrected) | LCAO FCI | **1.0%** | nmax=3 |
 
@@ -225,7 +226,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 ### Current Limitations
 - **Multi-electron molecules:** The LCAO approach achieves correct-order binding energies but lacks R-dependent kinetic repulsion. Equilibrium geometry requires a Fock-weighted correction with adjustable lambda (see FCI-M paper, Sec. V).
 - **Basis convergence:** At nmax=3, BSSE (0.115 Ha) exceeds LiH experimental binding energy (0.092 Ha). Convergence at larger nmax not characterized.
-- **Two-electron diatomics:** H2 requires prolate spheroidal CI; not yet implemented.
+- **Two-electron diatomics:** H2 via prolate spheroidal CI achieves D_e = 0.101 Ha (58% of exact) with relaxed orbitals. HeH+ binding recovered with per-atom Z_eff optimization.
 - **Polyatomics:** No natural geometry identified beyond two-center systems.
 
 ### What GeoVac Does NOT Replace

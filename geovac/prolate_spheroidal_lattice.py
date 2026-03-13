@@ -53,7 +53,13 @@ class ProlateSpheroidalLattice:
     xi_max : float
         Maximum xi value.
     m : int
-        Azimuthal quantum number (0 for sigma states).
+        Azimuthal quantum number (0 for sigma, ±1 for pi, etc.).
+    n_angular : int
+        Angular excitation index (0 for gerade ground, 1 for ungerade, etc.).
+        Controls which eigenvalue of the angular equation is used.
+    n_radial : int
+        Radial excitation index (0 for no radial nodes, 1 for one node, etc.).
+        Controls which eigenvalue of the radial equation must vanish.
     """
 
     def __init__(
@@ -64,6 +70,8 @@ class ProlateSpheroidalLattice:
         N_xi: int = 5000,
         xi_max: float = 25.0,
         m: int = 0,
+        n_angular: int = 0,
+        n_radial: int = 0,
     ):
         self.R = R
         self.Z_A = Z_A
@@ -71,6 +79,8 @@ class ProlateSpheroidalLattice:
         self.N_xi = N_xi
         self.xi_max = xi_max
         self.m = m
+        self.n_angular = n_angular
+        self.n_radial = n_radial
 
         # Derived
         self._a = R * (Z_A + Z_B)
@@ -106,16 +116,23 @@ class ProlateSpheroidalLattice:
             diag[0] = -p_plus[0] / h**2 + q[0]
 
         evals = eigh_tridiagonal(diag, off, eigvals_only=True)
-        return np.max(evals)
+        # n_radial=0 → top eigenvalue, n_radial=1 → second from top, etc.
+        sorted_desc = np.sort(evals)[::-1]
+        if self.n_radial >= len(sorted_desc):
+            raise ValueError(
+                f"n_radial={self.n_radial} exceeds available eigenvalues"
+            )
+        return sorted_desc[self.n_radial]
 
     def _angular_separation_constant(self, c2: float) -> float:
         """Angular separation constant A for given c^2.
 
         Uses the spectral (Legendre basis) solver from molecular_sturmian.
+        n_angular=0 → largest A (gerade), n_angular=1 → next (ungerade), etc.
         """
         c = np.sqrt(max(c2, 1e-15))
         return _angular_sep_const(
-            self.m, 0, c, b=self._b, n_basis=50
+            self.m, self.n_angular, c, b=self._b, n_basis=50
         )
 
     def _residual(self, c2: float) -> float:
@@ -173,6 +190,99 @@ class ProlateSpheroidalLattice:
         E_elec, _, _ = self.solve()
         return E_elec + self.Z_A * self.Z_B / self.R
 
+    def solve_with_wavefunction(self) -> Dict:
+        """Solve and return energy + wavefunction on (xi, eta) grid.
+
+        Returns dict with keys:
+            E_elec, c2, A, xi_grid, eta_grid, F_xi, G_eta
+        where F_xi is the radial wavefunction and G_eta is the angular.
+        """
+        E_elec, c2, A = self.solve()
+        c = np.sqrt(max(c2, 1e-15))
+
+        # --- Radial wavefunction F(xi) ---
+        N = self.N_xi
+        xi_min = 1.0 + 5e-4
+        h = (self.xi_max - xi_min) / (N + 1)
+        xi = xi_min + (np.arange(N) + 1) * h
+
+        xi2_1 = xi**2 - 1
+        q = A + self._a * xi - c2 * xi**2
+        if self.m != 0:
+            q -= self.m**2 / xi2_1
+
+        p_plus = (xi + h / 2)**2 - 1
+        p_minus = (xi - h / 2)**2 - 1
+
+        diag = -(p_plus + p_minus) / h**2 + q
+        off = p_plus[:-1] / h**2
+
+        if self.m == 0:
+            diag[0] = -p_plus[0] / h**2 + q[0]
+
+        from scipy.linalg import eigh_tridiagonal as _eigh_tri
+        evals, evecs = _eigh_tri(diag, off)
+        idx_sorted = np.argsort(evals)[::-1]
+        F_xi = evecs[:, idx_sorted[self.n_radial]]
+        # Normalize: ensure positive at xi=1
+        if F_xi[0] < 0:
+            F_xi = -F_xi
+        F_xi /= np.sqrt(np.sum(F_xi**2) * h)
+
+        # --- Angular wavefunction G(eta) ---
+        n_eta = 200
+        eta = np.linspace(-1 + 1e-6, 1 - 1e-6, n_eta)
+        # Evaluate angular function using Legendre basis
+        from geovac.molecular_sturmian import _angular_sep_const
+        n_basis = 50
+        from math import factorial
+        m_abs = abs(self.m)
+        r_vals = np.arange(m_abs, m_abs + n_basis, dtype=float)
+        norms = np.array(
+            [2.0 / (2*r+1) * factorial(int(r+m_abs)) / factorial(int(r-m_abs))
+             for r in r_vals]
+        )
+
+        nu_mat = np.zeros((n_basis, n_basis))
+        for i in range(n_basis - 1):
+            r = r_vals[i]
+            val = ((r - m_abs + 1) * np.sqrt(norms[i+1])
+                   / ((2*r+1) * np.sqrt(norms[i])))
+            nu_mat[i+1, i] = val
+            nu_mat[i, i+1] = val
+
+        H_ang = np.diag(-r_vals * (r_vals + 1))
+        H_ang += c**2 * (nu_mat @ nu_mat)
+        H_ang += self._b * nu_mat
+
+        evals_ang, evecs_ang = np.linalg.eigh(H_ang)
+        # n_angular-th from top
+        idx_ang = n_basis - 1 - self.n_angular
+        coeffs = evecs_ang[:, idx_ang]
+
+        # Evaluate G(eta) = sum_r c_r * P_r^m(eta) / sqrt(norm_r)
+        from scipy.special import lpmv
+        G_eta = np.zeros(n_eta)
+        for j, r in enumerate(r_vals):
+            P_r = lpmv(m_abs, int(r), eta)
+            G_eta += coeffs[j] * P_r / np.sqrt(norms[j])
+
+        # Normalize
+        d_eta = eta[1] - eta[0]
+        norm_G = np.sqrt(np.sum(G_eta**2) * d_eta)
+        if norm_G > 0:
+            G_eta /= norm_G
+
+        return {
+            'E_elec': E_elec,
+            'c2': c2,
+            'A': A,
+            'xi_grid': xi,
+            'eta_grid': eta,
+            'F_xi': F_xi,
+            'G_eta': G_eta,
+        }
+
 
 def scan_h2plus_pes(
     R_values: np.ndarray,
@@ -181,6 +291,8 @@ def scan_h2plus_pes(
     N_xi: int = 5000,
     xi_max: float = 25.0,
     m: int = 0,
+    n_angular: int = 0,
+    n_radial: int = 0,
     verbose: bool = True,
 ) -> Dict[str, np.ndarray]:
     """Scan H2+ PES over a range of R values."""
@@ -192,7 +304,8 @@ def scan_h2plus_pes(
     for i, R in enumerate(R_values):
         lattice = ProlateSpheroidalLattice(
             R=R, Z_A=Z_A, Z_B=Z_B,
-            N_xi=N_xi, xi_max=max(xi_max, R * 3), m=m
+            N_xi=N_xi, xi_max=max(xi_max, R * 3), m=m,
+            n_angular=n_angular, n_radial=n_radial,
         )
         try:
             E_el, _, _ = lattice.solve()

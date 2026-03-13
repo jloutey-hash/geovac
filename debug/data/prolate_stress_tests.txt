@@ -1,0 +1,67 @@
+# Prolate Spheroidal Lattice Stress Tests
+# Date: 2026-03-13
+# PASS: 9  MARGINAL: 2  FAIL: 1
+
+1sigma_g baseline: PASS  err=1.0057%  time=3.6s
+  E_total = -0.5965396612396614
+  E_exact = -0.6026
+  error_pct = 1.0056984335112218
+
+1sigma_u antibonding: PASS  err=0.9579%  time=7.4s
+  E_total = -0.16589556471441136
+  E_ref = -0.1675
+  error_pct = 0.957871812291732
+  ordering_ok = True
+  E_ground = -0.5965396612396614
+
+1pi_u (m=1): PASS  err=0.1935%  time=25.5s
+  E_R15 = -0.12524188231716232
+  dissoc_limit = -0.125
+  dissoc_err_pct = 0.1935058537298584
+  has_minimum = True
+  R_min_approx = 8.0
+  E_min_approx = -0.13380915264841192
+
+State ordering: PASS  time=11.5s
+  energies = {'1sigma_g': -0.5965396612396614, '1sigma_u': -0.16589556471441136, '1pi_u': 0.07153378403944916}
+  ordering_correct = True
+
+United atom (R->0): PASS  err=4.4731%  time=10.7s
+  E_elec_R02 = -1.910537658638894
+  He_plus_limit = -2.0
+  error_pct = 4.4731170680552985
+
+Dissociation (R->inf): MARGINAL  err=27.1718%  time=29.1s
+  limit = -0.5
+  error_R50_pct = 27.171810070799907
+
+sigma_u dissociation: PASS  err=7.0534%  time=18.5s
+  limit = -0.5
+  error_R20_pct = 7.053352535254708
+
+HeH2+: FAIL  time=32.8s
+  R_eq = 5.0
+  E_min = -1.7459300063107803
+  D_e = -0.2540699936892197
+  E_R10 = -1.7532032160594315
+  dissoc_limit = -2.0
+  boundary = True
+
+Extreme asymmetry: PASS  time=7.7s
+
+Grid convergence: PASS  err=0.1383%  time=21.2s
+  E_extrapolated = -0.5998578926444692
+  err_5k_pct = 0.5531695832456924
+  err_10k_pct = 0.13829239581142772
+
+Z-scaling: PASS  time=96.2s
+
+H2+ PES: MARGINAL  err=8.0449%  time=305.6s
+  R_eq = 2.157656040538711
+  E_min = -0.601464688792115
+  D_e = 0.10146468879211501
+  k = 0.13960087993719772
+  R_err_pct = 8.044869330931935
+  E_err_pct = 0.18840212543727425
+  D_err_pct = 1.106541138289461
+

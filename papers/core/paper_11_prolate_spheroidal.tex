@@ -629,18 +629,40 @@ systems, it is clearly superior.
 
 \subsection{Limitations and extensions}
 
-The current implementation is limited to one-electron diatomics
-(H$_2^+$, HeH$^{2+}$, etc.), where the Schr\"odinger equation
-separates exactly.  The most important extensions are:
+The most important limitations and implemented extensions are:
 
 \paragraph{Two-electron systems (H$_2$).}
-With two electrons, the Schr\"odinger equation no longer separates
-in prolate spheroidal coordinates due to the electron--electron
-repulsion $1/r_{12}$.  A prolate spheroidal CI approach would
-construct single-particle orbitals from the separated H$_2^+$
-solutions and build Slater determinants for the two-electron problem.
-The $V_{ee}$ matrix elements in prolate spheroidal coordinates
-are analytically tractable~\cite{James1933}.
+We have implemented a prolate spheroidal CI using
+single-particle orbitals ($\sigma_g$, $\sigma_u$) from the separated
+H$_2^+$ solver and a 2$\times$2 CI in the $^1\Sigma_g^+$ sector.
+The $V_{ee}$ matrix elements are computed via azimuthal averaging
+of $1/r_{12}$ using the complete elliptic integral $K(k)$ on a
+two-dimensional $(\xi, \eta)$ quadrature grid.
+
+With frozen H$_2^+$ orbitals ($Z_{\mathrm{eff}} = 1$), the CI yields
+$D_e = 0.077$~Ha (44\% of exact 0.175~Ha) at $R_{\mathrm{eq}} = 1.77$~bohr.
+Optimizing the orbital exponent via the Eckart variational method
+($Z_{\mathrm{eff}}^* \approx 0.765$ at $R = 1.4$~bohr) reduces
+the Coulomb self-repulsion $J_{gg}$ from 0.80 to 0.68~Ha and improves the
+result to $D_e = 0.101$~Ha (58\% of exact) with $R_{\mathrm{eq}}$
+matching the exact value of 1.401~bohr within fitting precision.
+
+An important structural result is the \emph{pi orbital selection rule}:
+$\langle \sigma_g \sigma_g | \pi_+ \pi_- \rangle = 0$ by azimuthal
+symmetry, so $\pi$ orbitals cannot improve the $^1\Sigma_g^+$ ground
+state via CI mixing.  The 4$\sigma$ CI (6$\times$6 matrix) confirms
+this, adding only 0.1~mHa over the 2$\times$2 result.
+
+The remaining 42\% $D_e$ error arises from the minimal two-orbital
+CI basis and missing dynamic correlation.  The $V_{ee}$ integrals
+converge as $O(1/N_{\mathrm{grid}}^2)$ in grid size.
+
+\paragraph{Heteronuclear systems (HeH$^+$).}
+For heteronuclear diatomics, we have implemented independent
+per-atom orbital exponent optimization ($Z_{\mathrm{eff},A}$,
+$Z_{\mathrm{eff},B}$), which recovers binding in HeH$^+$---a
+system that is unbound with frozen HeH$^{2+}$ orbitals due to
+excessive Coulomb repulsion ($J_{11} \sim 1.3$~Ha).
 
 \paragraph{Excited states.}
 The current solver targets the ground $\sigma_g$ state.  Excited
@@ -678,8 +700,10 @@ coordinate system where separation occurs.}
 \end{quote}
 The atomic $S^3$ lattice (Papers~0, 1, 7) and the molecular prolate
 spheroidal lattice (this paper) are the first two instances of this
-principle.  Future work will extend the approach to two-electron
-diatomics (H$_2$), polyatomic systems with other natural coordinate
+principle.  The two-electron extension to H$_2$ via prolate
+spheroidal CI achieves 58\% of the exact binding energy with relaxed
+orbitals and zero free parameters.  Future work will pursue larger
+CI expansions, polyatomic systems with other natural coordinate
 systems, and higher-order discretization methods for improved
 convergence.
 

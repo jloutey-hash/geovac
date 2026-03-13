@@ -5,6 +5,39 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-03-13
+
+### Prolate Spheroidal Stress Tests Complete
+
+#### Two-Electron H2 CI
+- `geovac/prolate_scf.py` — Eckart SCF, grid SCF, relaxed-orbital CI
+- V_ee integrals via azimuthal averaging with complete elliptic integral K(k)
+- **Frozen CI:** D_e = 0.077 Ha (44% of exact), R_eq = 1.77 bohr
+- **Relaxed CI (Eckart Z_eff):** D_e = 0.101 Ha (58% of exact), R_eq = 1.40 bohr
+- Pi orbital selection rule proven: <sigma^2|pi^2> = 0 (fundamental symmetry)
+- 4-sigma CI (6x6) adds only 0.1 mHa — confirms minimal basis is the bottleneck
+
+#### Heteronuclear Extension
+- `geovac/prolate_heteronuclear_scf.py` — Per-atom Z_eff optimization
+- HeH+ binding recovered with independent Z_eff_A, Z_eff_B
+- Frozen HeH2+ orbitals unbound (J_11 ~ 1.3 Ha); optimized Z_eff restores binding
+
+#### Grid-Based SCF
+- `geovac/prolate_scf.py` — 2D finite-difference Fock solver (proof of concept)
+- Non-uniform xi grid via quadratic transformation (critical for accuracy)
+- H2 binding confirmed on 2D FD grid
+
+#### Tests
+- 95/95 stress tests pass across 8 phases
+- New test files: test_prolate_stress.py, test_prolate_h2_4sigma.py,
+  test_prolate_heh_plus.py, test_prolate_scf.py, test_prolate_relaxed_ci.py,
+  test_prolate_heteronuclear_scf.py, test_prolate_grid_scf.py
+
+#### Documentation
+- Paper 11 Sec. VIII.D updated: H2 CI results, pi selection rule, HeH+ extension
+- README updated: H2 prolate CI benchmark, scope corrections
+- `debug/PROLATE_STRESS_TESTS.md` — Phases 6-8 documented
+
 ## [1.0.0] - 2026-03-12
 
 ### The Natural Geometry Release
