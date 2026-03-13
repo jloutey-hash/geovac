@@ -25,7 +25,7 @@ Quick Start:
 >>> H = idx.assemble_hamiltonian()
 """
 
-__version__ = '0.9.37'
+__version__ = '1.0.0'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 

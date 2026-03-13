@@ -1,0 +1,85 @@
+% Extracted from Paper_8_Bond_Sphere_Sturmian.tex (Section XV)
+% Moved to archive during v1.0.0 cleanup, March 12, 2026
+% This section documents a negative result: no D-matrix critical points
+% map to R_eq ~ 3.015 bohr for LiH.
+
+\section{Harmonic Phase Locking: A Negative Result}
+\label{sec:phase_lock}
+
+\subsection{Hypothesis}
+
+If the equilibrium bond length $R_{\text{eq}}$ is determined by $SO(4)$
+representation theory alone, then a critical point (maximum, minimum, or
+steepest inflection) of some $D$-matrix element
+$D^n_{(l',m'),(l,m)}(\gamma)$ should map to $R \approx 3.015$~bohr
+(the experimental LiH equilibrium distance) under a physically motivated
+$p_0$ via the inverse stereographic map $R = 1/(p_0 |\tan(\gamma/2)|)$.
+Such a correspondence would constitute a closed-form geometric prediction
+of $R_{\text{eq}}$ from the $SO(4)$ Wigner $D$-matrix spectrum.
+
+\subsection{Method}
+
+Five $D$-matrix elements were evaluated on a dense grid of $10{,}000$
+points in $\gamma \in [0.01, \pi - 0.01]$:
+$D^1_{00,00}$, $D^2_{00,00}$, $D^2_{10,10}$, $D^2_{00,10}$, and
+$D^3_{00,00}$.
+Critical points (zero-crossings of the numerical derivative and second
+derivative) were located by interpolation and mapped to physical~$R$ via
+$R^* = 1/(p_0 |\tan(\gamma^*/2)|)$ for five physically motivated $p_0$
+values: $0.65$ ($Z_{\text{eff}}/n$ for Li $2s$), $0.92$
+($\sqrt{2 \times 0.42}$), $1.00$ (atomic H), $1.92$
+($\sqrt{2|E_{\text{Li},2s}|}$), and $2.00$ (converged dual-$p_0$ from
+v0.9.34).
+
+\subsection{Result}
+
+\begin{enumerate}
+
+\item $D^1_{00,00} = 1$ (constant): no critical points.
+
+\item $D^2_{10,10} = 1$ (constant, Theorem~\ref{thm:selection}):
+  no critical points.
+
+\item $D^2_{00,10} = 0$ (constant, Theorem~\ref{thm:selection}):
+  no critical points.
+
+\item $D^2_{00,00} = \cos\gamma$: single inflection at
+  $\gamma = \pi/2$, mapping to $R^* = 1/p_0$.  At $p_0 = 1.0$:
+  $R^* = 1.0$~bohr; at $p_0 = 0.65$: $R^* = 1.54$~bohr.  No value
+  maps near 3.015~bohr.
+
+\item $D^3_{00,00}$: minimum at $\gamma = \pi/2$ ($R^* = 1/p_0$,
+  same as above); inflections at $\gamma \approx 0.79$ and $2.36$.
+  The nearest $R^*$ to 3.015~bohr occurs at $p_0 = 0.65$,
+  $R^* = 3.71$~bohr (23\% error).
+
+\end{enumerate}
+
+No strong hits ($R^* \in [2.9, 3.1]$~bohr) and no near hits
+($R^* \in [2.8, 3.2]$~bohr) were found for any element at any $p_0$.
+
+At $R_{\text{eq}} = 3.015$~bohr, the derivatives $dD/d\gamma$ are large
+and non-zero for all non-trivial elements: $dD^2_{00,00}/d\gamma \in
+[-0.81, -0.32]$ and $dD^3_{00,00}/d\gamma \in [-1.31, -0.81]$
+across the tested $p_0$ values.  The $D$-matrices sit on smooth,
+steep slopes at $\gamma(R_{\text{eq}})$.
+
+\subsection{Conclusion}
+
+The equilibrium bond length $R_{\text{eq}}$ is \emph{not} a geometric
+fixed point of the $SO(4)$ representation.  It is an emergent variational
+balance---the point where the attractive cross-nuclear potential, the
+kinetic repulsion, electron--electron repulsion, and nuclear--nuclear
+repulsion reach a global energy minimum.  The $D$-matrices provide the
+coupling \emph{strengths} at each $R$, but the equilibrium is a
+dynamical property of the full many-body Hamiltonian, not a
+representation-theoretic resonance.
+
+This negative result is consistent with the Sturmian structural theorem
+(Theorem~\ref{thm:structural}): since the Sturmian eigenvalues are
+$\gamma$-independent, the bond sphere geometry alone cannot predict
+$R_{\text{eq}}$.  The equilibrium arises from the atom-centered LCAO
+architecture, where the distinct atomic length scales
+$p_0(A) \neq p_0(B)$ introduce $R$-dependent competition between
+attraction and repulsion that the single-$S^3$ Sturmian basis cannot
+access.

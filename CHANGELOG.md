@@ -5,6 +5,51 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-03-12
+
+### The Natural Geometry Release
+
+v1.0.0 marks the completion of the GeoVac theoretical framework: from atoms
+on S3 (Fock projection) to molecules on prolate spheroids (molecular Fock
+projection), unified by the natural geometry principle.
+
+#### Prolate Spheroidal Lattice (Paper 11)
+- `geovac/prolate_spheroidal_lattice.py` — `ProlateSpheroidalLattice` class:
+  separated prolate spheroidal solver for one-electron diatomics.
+- Spectral angular solver (Legendre basis, machine precision) + self-adjoint
+  FD radial solver + Brent root-finding in c^2.
+- **H2+ results:** R_eq = 2.001 bohr (0.21% error), E_min = -0.5984 Ha
+  (0.70% error), correct dissociation to H + p. Zero free parameters.
+- HeH2+ heteronuclear extension validated.
+- 11 tests in `tests/test_prolate_h2plus.py` (all passing).
+
+#### Nuclear Lattice (Paper 10)
+- `geovac/nuclear_lattice.py` — graph-based vibrational/rotational solver.
+- `geovac/coupled_en_lattice.py` — coupled electronic-nuclear framework.
+- Tests: `tests/test_nuclear_lattice.py`, `tests/test_coupled_en.py`.
+
+#### Paper Series (11 papers)
+- Paper 11 written: "The Molecular Fock Projection: Diatomic Molecules as
+  Prolate Spheroidal Lattices" (7 pages, revtex4-2).
+- Paper 10 written: "The Nuclear Lattice: Discrete Graph Structures for
+  Molecular Vibration and Rotation" (6 pages).
+- Forward references to Paper 11 added to Papers 7, 8-9, FCI, LCAO-FCI, 10.
+- All 6 updated/new papers compile cleanly (pdflatex, no errors).
+- `papers/PAPER_STATUS.md` updated with full inventory.
+
+#### Cleanup
+- `run_all.py` moved from root to `benchmarks/scripts/`.
+- `figures/` contents moved to `debug/plots/` and `debug/data/`.
+- `nul` (Windows artifact) removed.
+- `setup.py` description updated, version synced.
+- README.md rewritten for v1.0.0: updated benchmarks, project structure,
+  paper series table, prolate spheroidal quick-start example.
+
+#### Unchanged
+- All production code in geovac/ (lattice.py, hamiltonian.py, lattice_index.py,
+  direct_ci.py, etc.) unchanged from v0.9.37.
+- All existing tests pass.
+
 ## [0.9.37] - 2026-03-11
 
 ### Codebase Lock — LiH Benchmark Complete

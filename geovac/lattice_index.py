@@ -2078,6 +2078,14 @@ class MolecularLatticeIndex:
     zeta_B : float
         Orbital exponent scale for atom B (default 1.0). Same as zeta_A
         but for atom B orbitals.
+    overlap_edges : str, optional
+        Add R-dependent cross-atom edges to the adjacency matrix
+        proportional to orbital overlap. Makes the graph topology
+        (and hence kinetic energy via the degree matrix) R-dependent.
+        Modes: 's2' = S², 'fock' = S²×(Z/n)⁴, 'abs' = |S|,
+        'kappa' = S²×|κ|. Default: None (disabled).
+    overlap_edge_scale : float
+        Multiplicative scale for overlap edge weights (default 1.0).
     """
 
     # Reuse LatticeIndex static methods for fermionic phase computation
@@ -2107,6 +2115,11 @@ class MolecularLatticeIndex:
         zeta_B: float = 1.0,
         t_corr_lambda: float = 0.0,
         t_corr_fock_weighted: bool = False,
+        overlap_edges: Optional[str] = None,
+        overlap_edge_scale: float = 1.0,
+        cross_nuclear_attenuation: Optional[str] = None,
+        cross_nuclear_alpha: float = 1.0,
+        cross_nuclear_beta: Optional[float] = None,
     ) -> None:
         self.Z_A = Z_A
         self.Z_B = Z_B
@@ -2128,6 +2141,11 @@ class MolecularLatticeIndex:
         self.zeta_B = zeta_B
         self.t_corr_lambda = t_corr_lambda
         self.t_corr_fock_weighted = t_corr_fock_weighted
+        self.overlap_edges = overlap_edges
+        self.overlap_edge_scale = overlap_edge_scale
+        self.cross_nuclear_attenuation = cross_nuclear_attenuation
+        self.cross_nuclear_alpha = cross_nuclear_alpha
+        self.cross_nuclear_beta = cross_nuclear_beta
         # Effective orbital charges: zeta_scale * Z determines orbital shape
         self._Z_orb_A = zeta_A * float(Z_A) if Z_A > 0 else 0.0
         self._Z_orb_B = zeta_B * float(Z_B) if Z_B > 0 else 0.0
@@ -2305,12 +2323,118 @@ class MolecularLatticeIndex:
             data.extend(weights.tolist())
             data.extend(weights.tolist())
 
+        # --- Overlap-induced edges ---
+        # Add cross-atom edges proportional to orbital overlap.
+        # This makes the degree matrix (kinetic energy) R-dependent:
+        # as atoms approach, overlap grows → degree increases → kinetic
+        # energy rises → creates repulsive wall.
+        n_overlap_edges = 0
+        if self.overlap_edges and not self._ghost_A and not self._ghost_B:
+            n_overlap_edges = self._add_overlap_edges(
+                rows, cols, data, nA, N)
+
         self._adjacency_combined = coo_matrix(
             (data, (rows, cols)), shape=(N, N)
         ).tocsr()
         self._n_bridges_actual = n_actual
-        print(f"[MolecularLatticeIndex] Bridges: {n_actual} "
-              f"(requested {self.n_bridges})")
+        msg = (f"[MolecularLatticeIndex] Bridges: {n_actual} "
+               f"(requested {self.n_bridges})")
+        if n_overlap_edges > 0:
+            msg += f", overlap edges: {n_overlap_edges} (mode={self.overlap_edges})"
+        print(msg)
+
+    def _add_overlap_edges(
+        self,
+        rows: list, cols: list, data: list,
+        nA: int, N: int,
+    ) -> int:
+        """
+        Add overlap-induced cross-atom edges to the adjacency matrix.
+
+        These edges make the graph topology R-dependent: as atoms
+        approach, overlap grows, degree increases, kinetic energy rises.
+
+        Edge formulas (selected by self.overlap_edges):
+          's2'   : A[a,b] = scale * S²(a,b)
+          'fock' : A[a,b] = scale * S²(a,b) * (Z_A/n_a)² * (Z_B/n_b)²
+          'abs'  : A[a,b] = scale * |S(a,b)|
+          'kappa': A[a,b] = scale * S²(a,b) * |KINETIC_SCALE|
+
+        Only s-orbital (l=0) pairs are computed (overlap for l>0 not
+        yet implemented).
+
+        Parameters
+        ----------
+        rows, cols, data : list
+            Adjacency COO arrays, extended in-place.
+        nA : int
+            Number of spatial orbitals on atom A.
+        N : int
+            Total spatial orbitals.
+
+        Returns
+        -------
+        int
+            Number of overlap edges added.
+        """
+        states_A = self._li_A.lattice.states
+        states_B = self._li_B.lattice.states
+        Z_orb_A = self._Z_orb_A
+        Z_orb_B = self._Z_orb_B
+        R = self.R
+        scale = self.overlap_edge_scale
+        mode = self.overlap_edges
+        Z_A = float(self.Z_A)
+        Z_B = float(self.Z_B)
+
+        # Cache overlap by (n_a, n_b)
+        s_cache: Dict[Tuple[int, int], float] = {}
+
+        def get_overlap(n_a: int, n_b: int) -> float:
+            key = (n_a, n_b)
+            if key not in s_cache:
+                s_cache[key] = compute_overlap_element(
+                    n_a, 0, n_b, 0, Z_orb_A, Z_orb_B, R
+                )
+            return s_cache[key]
+
+        n_edges = 0
+        for i_a, (n_a, l_a, m_a) in enumerate(states_A):
+            if l_a > 0:
+                continue  # only s-orbital overlaps
+            for i_b, (n_b, l_b, m_b) in enumerate(states_B):
+                if l_b > 0:
+                    continue
+                s_ab = get_overlap(n_a, n_b)
+                if abs(s_ab) < 1e-12:
+                    continue
+
+                # Compute edge weight based on mode
+                if mode == 's2':
+                    w = scale * s_ab * s_ab
+                elif mode == 'fock':
+                    w = scale * s_ab * s_ab * (Z_A / n_a)**2 * (Z_B / n_b)**2
+                elif mode == 'abs':
+                    w = scale * abs(s_ab)
+                elif mode == 'kappa':
+                    w = scale * s_ab * s_ab * abs(self.kinetic_scale)
+                else:
+                    raise ValueError(
+                        f"Unknown overlap_edges mode '{mode}'. "
+                        f"Valid: 's2', 'fock', 'abs', 'kappa'"
+                    )
+
+                if abs(w) < 1e-12:
+                    continue
+
+                j_b = nA + i_b
+                # Symmetric edges
+                rows.extend([i_a, j_b])
+                cols.extend([j_b, i_a])
+                data.extend([w, w])
+                n_edges += 1
+
+        return n_edges
 
     def _build_molecular_h1(self) -> None:
         """
@@ -2451,6 +2575,82 @@ class MolecularLatticeIndex:
             print(f"[MolecularLatticeIndex] H1: {n} spatial states, "
                   f"off-diag nnz={H1_offdiag.nnz}")
 
+    def _compute_overlap_attenuation(self) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Compute per-orbital overlap-based attenuation factors for cross-nuclear.
+
+        For orbital a on atom A: S_a = sum_b S(a,b)^2 over all s-orbitals b on B.
+        Returns (f_A, f_B) arrays of attenuation factors, one per spatial orbital.
+
+        If cross_nuclear_beta is set, alpha becomes n-dependent:
+            alpha_eff(a) = alpha_0 * (n_a / Z_a)^beta
+        Core orbitals (low n/Z) are attenuated less; valence (high n/Z) more.
+        """
+        nA = self._n_spatial_A
+        nB = self._n_spatial_B
+        states_A = self._li_A.lattice.states
+        states_B = self._li_B.lattice.states
+        Z_orb_A = self._Z_orb_A
+        Z_orb_B = self._Z_orb_B
+        R = self.R
+        alpha0 = self.cross_nuclear_alpha
+        beta = self.cross_nuclear_beta
+        mode = self.cross_nuclear_attenuation
+
+        # Compute per-orbital effective alpha
+        if beta is not None:
+            # n-dependent: alpha_eff = alpha0 * (n/Z)^beta
+            alpha_A = np.array([
+                alpha0 * (float(n) / float(self.Z_A)) ** beta
+                for (n, l, m) in states_A
+            ])
+            alpha_B = np.array([
+                alpha0 * (float(n) / float(self.Z_B)) ** beta
+                for (n, l, m) in states_B
+            ])
+        else:
+            alpha_A = np.full(nA, alpha0)
+            alpha_B = np.full(nB, alpha0)
+
+        # Compute total squared overlap for each orbital
+        S2_A = np.zeros(nA)
+        S2_B = np.zeros(nB)
+
+        # Only s-orbital (l=0) overlaps are implemented; l>0 contribute
+        # negligibly to cross-nuclear attraction for ground states.
+        s_cache: Dict[Tuple[int, int], float] = {}
+        for i_a, (n_a, l_a, m_a) in enumerate(states_A):
+            if l_a != 0:
+                continue
+            for i_b, (n_b, l_b, m_b) in enumerate(states_B):
+                if l_b != 0:
+                    continue
+                key = (n_a, n_b)
+                if key not in s_cache:
+                    s_cache[key] = compute_overlap_element(
+                        n_a, 0, n_b, 0, Z_orb_A, Z_orb_B, R
+                    )
+                s2 = s_cache[key] ** 2
+                S2_A[i_a] += s2
+                S2_B[i_b] += s2
+
+        # Apply attenuation function with per-orbital alpha
+        def attenuate(S: np.ndarray, alpha: np.ndarray) -> np.ndarray:
+            if mode == 'linear':
+                return np.maximum(1.0 - alpha * S, 0.0)
+            elif mode == 'exp':
+                return np.exp(-alpha * S)
+            elif mode == 'pade':
+                return 1.0 / (1.0 + alpha * S)
+            elif mode == 'quadratic':
+                return np.maximum(1.0 - S, 0.0) ** 2
+            else:
+                return np.ones_like(S)
+
+        f_A = attenuate(S2_A, alpha_A)
+        f_B = attenuate(S2_B, alpha_B)
+        return f_A, f_B
+
     def _apply_cross_nuclear_diagonal(self, h1_diag: np.ndarray) -> None:
         """
         Apply cross-nuclear attraction to the h1 diagonal in-place.
@@ -2459,6 +2659,10 @@ class MolecularLatticeIndex:
         compute_exact_cross_nuclear() for ALL (n,l,m) orbitals.
         When cross_nuclear_method='fourier', uses the shell-theorem formula
         for s-orbitals only (v0.9.35 baseline).
+
+        If cross_nuclear_attenuation is set, each orbital's cross-nuclear
+        attraction is multiplied by f(S_a) where S_a is the total squared
+        overlap with the partner atom's orbitals.
 
         Orbital shapes use Z_orb (= zeta * Z_nuclear) to account for
         exponent relaxation, while the attracting charge remains Z_other.
@@ -2473,23 +2677,30 @@ class MolecularLatticeIndex:
         Z_orb_A = self._Z_orb_A
         Z_orb_B = self._Z_orb_B
 
+        # Compute attenuation factors if requested
+        if self.cross_nuclear_attenuation:
+            f_A, f_B = self._compute_overlap_attenuation()
+        else:
+            f_A = np.ones(nA)
+            f_B = np.ones(self._n_spatial_B)
+
         if self.cross_nuclear_method == 'exact':
             # Exact 2D quadrature for all orbitals
             for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
-                h1_diag[i] += compute_exact_cross_nuclear(
+                h1_diag[i] += f_A[i] * compute_exact_cross_nuclear(
                     ni, li, mi, Z_orb_A, float(self.Z_B), self.R)
             for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
-                h1_diag[nA + j] += compute_exact_cross_nuclear(
+                h1_diag[nA + j] += f_B[j] * compute_exact_cross_nuclear(
                     nj, lj, mj, Z_orb_B, float(self.Z_A), self.R)
         else:
             # Fourier/shell-theorem: s-orbitals only (l=0)
             for i, (ni, li, mi) in enumerate(self._li_A.lattice.states):
                 if li == 0:
-                    h1_diag[i] += self._fourier_cross_attraction(
+                    h1_diag[i] += f_A[i] * self._fourier_cross_attraction(
                         ni, li, Z_orb_A, float(self.Z_B), self.R)
             for j, (nj, lj, mj) in enumerate(self._li_B.lattice.states):
                 if lj == 0:
-                    h1_diag[nA + j] += self._fourier_cross_attraction(
+                    h1_diag[nA + j] += f_B[j] * self._fourier_cross_attraction(
                         nj, lj, Z_orb_B, float(self.Z_A), self.R)
 
     def _apply_overlap_kinetic_correction(self, h1_diag: np.ndarray) -> None:

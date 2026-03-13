@@ -1,6 +1,6 @@
 """
-GeoVac: Geometric Vacuum Quantum Solver
-A sparse-matrix quantum chemistry solver using AdS5 paraboloid lattice discretization.
+GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
+Sparse graph Laplacian solver exploiting Fock's S3 conformal projection.
 """
 
 from setuptools import setup, find_packages
@@ -12,10 +12,10 @@ long_description = (this_directory / "README.md").read_text(encoding='utf-8')
 
 setup(
     name='geovac',
-    version='0.7.0',
+    version='1.0.0',
     author='J. Loutey',
     author_email='jloutey@example.com',  # Update with your actual email
-    description='Topological Hartree-Fock quantum solver with universal constant -1/16',
+    description='Computational quantum chemistry via spectral graph theory on S3',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/jloutey-hash/geovac',
