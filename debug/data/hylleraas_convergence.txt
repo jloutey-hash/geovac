@@ -1,0 +1,35 @@
+# Hylleraas Convergence Study
+# Date: 2026-03-13
+# R = 1.4 bohr
+# D_e(exact) = 0.1745 Ha, E(exact) = -1.17475 Ha
+# James-Coolidge (1933): E = -1.17447 Ha (13 terms)
+#
+# Phase 9 of Prolate Spheroidal Stress Tests
+
+# === Phase 9a: p=0 CONVERGENCE (CI limit) ===
+# Grid: 18x14 (xi,eta), xi_max=12, best alpha=1.0
+# p_max j_max l_max  N_bf     E_total       D_e    %exact    time_s
+      0     0     0     1   -0.967030   -0.0330    -18.9%      0.7
+      0     1     0     3   -1.042131    0.0421     24.1%      4.7
+      0     1     1     6   -1.071220    0.0712     40.8%     16.4
+      0     2     0     6   -1.054105    0.0541     31.0%     17.7
+      0     2     1    12   -1.081174    0.0812     46.5%     64.4
+      0     2     2    27   -1.115120    0.1151     66.0%    322.2
+      0     3     1    20   -1.081809    0.0818     46.9%    176.0
+
+# === Phase 9b: p=0,1 COMPARISON ===
+# Grid: 10x8 (xi,eta), 8 phi points, xi_max=10, alpha=0.9
+# p_max j_max l_max  N_bf     E_total       D_e    %exact    time_s
+      0     1     0     3   -0.929825   -0.0702    -40.2%      0.8
+      1     1     0     6   -1.145435    0.1454     83.3%    109.1
+
+# KEY FINDING: Adding r12 terms dramatically improves D_e.
+# With just 6 basis functions (j_max=1, l_max=0, p_max=1),
+# the Hylleraas method achieves 83.3% of exact D_e,
+# while the same orbital space without r12 gives only -40% (unbound).
+#
+# For p=0 only, the best result is j_max=2, l_max=2 (27 functions)
+# at 66.0% — exceeding the prolate CI result of 58%.
+#
+# The r12 linear term captures the electron-electron cusp that
+# orbital products cannot represent, as predicted by Kato's theorem.
