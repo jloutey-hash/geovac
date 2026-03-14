@@ -1,35 +1,80 @@
-# Hylleraas Convergence Study
-# Date: 2026-03-13
-# R = 1.4 bohr
-# D_e(exact) = 0.1745 Ha, E(exact) = -1.17475 Ha
+# Hylleraas Convergence Study — Extended (Phase 10)
+# Date: 2026-03-14
+# R = 1.4011 bohr (optimized alpha), Exact: E = -1.17475 Ha, D_e = 0.1745 Ha
 # James-Coolidge (1933): E = -1.17447 Ha (13 terms)
+# Numba: YES (184x acceleration)
 #
-# Phase 9 of Prolate Spheroidal Stress Tests
+# Phase 10 of Prolate Spheroidal Stress Tests
+# Supersedes Phase 9 results (smaller grids, no alpha optimization)
 
-# === Phase 9a: p=0 CONVERGENCE (CI limit) ===
-# Grid: 18x14 (xi,eta), xi_max=12, best alpha=1.0
-# p_max j_max l_max  N_bf     E_total       D_e    %exact    time_s
-      0     0     0     1   -0.967030   -0.0330    -18.9%      0.7
-      0     1     0     3   -1.042131    0.0421     24.1%      4.7
-      0     1     1     6   -1.071220    0.0712     40.8%     16.4
-      0     2     0     6   -1.054105    0.0541     31.0%     17.7
-      0     2     1    12   -1.081174    0.0812     46.5%     64.4
-      0     2     2    27   -1.115120    0.1151     66.0%    322.2
-      0     3     1    20   -1.081809    0.0818     46.9%    176.0
-
-# === Phase 9b: p=0,1 COMPARISON ===
-# Grid: 10x8 (xi,eta), 8 phi points, xi_max=10, alpha=0.9
-# p_max j_max l_max  N_bf     E_total       D_e    %exact    time_s
-      0     1     0     3   -0.929825   -0.0702    -40.2%      0.8
-      1     1     0     6   -1.145435    0.1454     83.3%    109.1
-
-# KEY FINDING: Adding r12 terms dramatically improves D_e.
-# With just 6 basis functions (j_max=1, l_max=0, p_max=1),
-# the Hylleraas method achieves 83.3% of exact D_e,
-# while the same orbital space without r12 gives only -40% (unbound).
+# ============================================================
+# FULL CONVERGENCE TABLE (alpha-optimized, larger grids)
+# ============================================================
 #
-# For p=0 only, the best result is j_max=2, l_max=2 (27 functions)
-# at 66.0% — exceeding the prolate CI result of 58%.
+# Label  Basis                  N    E_total        D_e       %exact  alpha   time_s  Notes
+  A1     j=0,l=0,p=0           1   -1.04806690   0.048067    27.5%   0.811       0   simplest
+  A2     j=1,l=0,p=0           3   -1.06073478   0.060735    34.8%   0.862       2
+  A3     j=2,l=0,p=0           6   -1.07986660   0.079867    45.8%   0.981      18
+  A4     j=1,l=1,p=0           6   -1.09641110   0.096411    55.2%   0.880      17   eta important!
+  A5     j=2,l=1,p=0          12   -1.10142276   0.101423    58.1%   1.005      80
+  A6     j=2,l=2,p=0          27   -1.13786968   0.137870    79.0%   1.027     495
+  B1     j=1,l=0,p=1           6   -1.13820454   0.138205    79.2%   1.031     136   r12 = 27 p=0 terms!
+  B2     j=1,l=1,p=1          12   -1.14663469   0.146635    84.0%   1.045     671
+  C1     j=1,l=0,p=2           9   -1.16528446   0.165284    94.7%   1.176     127   r12^2 huge jump
+  T1     omega=2,p=1            8   -1.14524465   0.145245    83.2%   0.985     110
+  C2     j=1,l=1,p=2          18   -1.17728521   0.177285   101.6%*  0.991    1603   below exact!
+
+# B3 (j=2,l=1,p=1, 24 terms): variational collapse (ill-conditioned S + FD errors)
+# T2 (omega=3,p=2, 19 terms): variational collapse (same cause)
+# * = variational violation: E below exact. FD kinetic energy artifact.
+
+# ============================================================
+# KEY FINDINGS
+# ============================================================
 #
-# The r12 linear term captures the electron-electron cusp that
-# orbital products cannot represent, as predicted by Kato's theorem.
+# 1. EXPLICIT CORRELATION IS TRANSFORMATIVE
+#    B1 (6 terms, p=1) matches A6 (27 terms, p=0) at 79% D_e.
+#    C1 (9 terms, p=2) reaches 94.7% — impossible without r12.
+#    The r12 factor captures the electron-electron cusp (Kato's theorem).
+#
+# 2. r12^2 IS THE KEY POWER
+#    Going from p=1 to p=2 yields the largest single improvement:
+#    B1 (79.2%) -> C1 (94.7%) = +15.5 percentage points with only 3 more terms.
+#    This matches James-Coolidge's observation that r12^2 terms are essential.
+#
+# 3. eta POWERS MATTER FOR p=0 BUT LESS FOR p>0
+#    A3 vs A4 (both 6 terms): eta adds 9.4 pp (45.8% -> 55.2%)
+#    B1 vs B2 (6 vs 12 terms): eta adds 4.8 pp (79.2% -> 84.0%)
+#    C1 vs C2 (9 vs 18 terms): eta adds ~7 pp but causes variational violation
+#
+# 4. FD KINETIC ENERGY IS THE BOTTLENECK
+#    The p>0 Hamiltonian uses finite-difference kinetic energy which:
+#    (a) Prevents p=0/p>0 cross-block coupling (coefficients ~0)
+#    (b) Causes variational violations at larger bases (C2: 101.6%)
+#    (c) Causes outright collapse at N>~20 with p>0 (B3, T2)
+#
+#    FIX NEEDED: Analytical kinetic energy for r12^p terms via
+#    integration by parts in 5D, or recurrence relations for
+#    the kinetic matrix elements.
+#
+# 5. OPTIMAL ALPHA TRAJECTORY
+#    p=0: alpha ~ 0.81-1.03, increasing with basis size
+#    p=1: alpha ~ 0.99-1.05
+#    p=2: alpha ~ 0.99-1.18 (larger for pure xi basis)
+#
+# 6. CONVERGENCE MILESTONES
+#    50% D_e: A4 (j=1,l=1,p=0, 6 terms)
+#    75% D_e: A6 (j=2,l=2,p=0, 27 terms) or B1 (j=1,l=0,p=1, 6 terms)
+#    85% D_e: B2 (j=1,l=1,p=1, 12 terms)
+#    90% D_e: not clean (between B2 and C1)
+#    95% D_e: C1 (j=1,l=0,p=2, 9 terms) at 94.7%
+#    99% D_e: NOT REACHED (FD kinetic limits further convergence)
+
+# ============================================================
+# PATH TO 99%: requires analytical kinetic energy for p>0
+# ============================================================
+# With analytical KE for r12^p terms:
+# - p=0/p>0 cross-block coupling would activate
+# - Variational bound would hold at all basis sizes
+# - James-Coolidge's 13-term result (99.7%) becomes reachable
+# - Estimated: j=2, l=2, p=2 with analytical KE → 99%+

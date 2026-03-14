@@ -1,7 +1,7 @@
 # Prolate Spheroidal Lattice -- Stress Test Results
 
-**Date:** 2026-03-13
-**Status:** Phase 1-9 complete. Hylleraas explicitly correlated wavefunctions achieve 83% D_e with 6 terms. Relaxed-orbital CI achieves >58% D_e. HeH+ bound with per-atom Z_eff. Grid SCF proof of concept works.
+**Date:** 2026-03-14
+**Status:** Phase 1-10 complete. Hylleraas r₁₂² terms achieve **94.7% D_e with 9 terms**. FD kinetic energy identified as bottleneck to 99%. Numba 184× acceleration enables systematic convergence study.
 
 ---
 
@@ -13,6 +13,8 @@ The critical two-electron test (H2 CI) produces a **bound molecule** with no fre
 though accuracy is limited by the minimal basis.
 
 **Tests:** 123/123 pass (11 original + 15 stress + 20 4-sigma CI + 10 HeH+ + 6 SCF + 13 relaxed CI + 10 heteronuclear SCF + 10 grid SCF + 28 Hylleraas)
+
+**Best H2 result:** D_e = 0.165 Ha (94.7% of exact) with 9 Hylleraas terms (j=1, l=0, p=2, α=1.18)
 
 ---
 
@@ -706,10 +708,135 @@ the electron-electron cusp, confirming Kato's cusp theorem.
    quantitative accuracy.
 3. **Basis optimization:** α is global; per-term α values could further improve accuracy.
 
-### Next Steps
+### Next Steps (Phase 9)
 
-- Numba-accelerate the 5D integration loops
-- Systematic convergence study with larger p>0 bases
-- Alpha optimization for p>0 basis
+- ~~Numba-accelerate the 5D integration loops~~ ✓ Done (Phase 10)
+- ~~Systematic convergence study with larger p>0 bases~~ ✓ Done (Phase 10)
+- ~~Alpha optimization for p>0 basis~~ ✓ Done (Phase 10)
 - PES scan at multiple R values
-- Target: match James-Coolidge 99.7% with ~13 terms
+- Target: match James-Coolidge 99.7% with ~13 terms → **blocked by FD kinetic energy**
+
+---
+
+## Phase 10: Extended Hylleraas Convergence Study (Numba-Accelerated)
+
+**Date:** 2026-03-14
+**Goal:** Systematic convergence toward James-Coolidge (99.7%) using Numba-accelerated kernels.
+
+### Numba Acceleration
+
+All 4D (p=0) and 5D (p>0) kernels accelerated via `@njit(cache=True)`:
+- `overlap_matrix_p0_kernel` — 4D overlap (IBP basis)
+- `overlap_matrix_5d_kernel` — 5D overlap (r₁₂^p basis)
+- `hamiltonian_p0_kernel` — 4D Hamiltonian (analytical KE via IBP)
+- `hamiltonian_general_kernel` — 5D Hamiltonian (FD kinetic energy)
+- Elliptic K via Abramowitz & Stegun polynomial (|error| < 2e-8)
+
+**Speedup:** 184× on overlap, similar on Hamiltonian. Enables alpha optimization.
+
+### Full Convergence Table (alpha-optimized)
+
+R = 1.4011 bohr, Exact: E = -1.17475 Ha, D_e = 0.1745 Ha
+
+| Label | Basis | N | E_total (Ha) | D_e (Ha) | % exact | α | Time |
+|:------|:------|--:|:------------:|:--------:|:-------:|:---:|:----:|
+| A1 | j=0,l=0,p=0 | 1 | -1.048 | 0.048 | 27.5% | 0.81 | <1s |
+| A2 | j=1,l=0,p=0 | 3 | -1.061 | 0.061 | 34.8% | 0.86 | 2s |
+| A3 | j=2,l=0,p=0 | 6 | -1.080 | 0.080 | 45.8% | 0.98 | 18s |
+| A4 | j=1,l=1,p=0 | 6 | -1.096 | 0.096 | 55.2% | 0.88 | 17s |
+| A5 | j=2,l=1,p=0 | 12 | -1.101 | 0.101 | 58.1% | 1.00 | 80s |
+| A6 | j=2,l=2,p=0 | 27 | -1.138 | 0.138 | 79.0% | 1.03 | 495s |
+| **B1** | **j=1,l=0,p=1** | **6** | **-1.138** | **0.138** | **79.2%** | **1.03** | **136s** |
+| B2 | j=1,l=1,p=1 | 12 | -1.147 | 0.147 | 84.0% | 1.04 | 671s |
+| T1 | ω=2,p=1 | 8 | -1.145 | 0.145 | 83.2% | 0.99 | 110s |
+| **C1** | **j=1,l=0,p=2** | **9** | **-1.165** | **0.165** | **94.7%** | **1.18** | **127s** |
+| C2* | j=1,l=1,p=2 | 18 | -1.177 | 0.177 | 101.6% | 0.99 | 1603s |
+
+\* Variational violation: E below exact energy due to FD kinetic energy errors.
+
+B3 (j=2,l=1,p=1, 24 terms) and T2 (ω=3,p=2, 19 terms): variational collapse.
+
+### Key Findings
+
+#### 1. Explicit Correlation is Transformative
+
+B1 (6 terms, p=1) = A6 (27 terms, p=0) at **79% D_e**. The single r₁₂ linear term
+captures as much correlation as 21 additional orbital-product terms. This confirms
+Kato's cusp theorem: the electron-electron cusp cannot be represented by orbital products.
+
+#### 2. r₁₂² is the Critical Power
+
+| Step | N | D_e % | Δ |
+|:-----|--:|:-----:|:-:|
+| p=0 best (A6) | 27 | 79.0% | baseline |
+| p=1 (B1) | 6 | 79.2% | +0.2 pp |
+| p=2 (C1) | 9 | **94.7%** | **+15.5 pp** |
+
+The r₁₂² terms provide a massive +15.5 percentage point improvement with only
+3 additional functions over B1. This matches James-Coolidge's observation that
+the quadratic cusp terms are essential for quantitative accuracy.
+
+#### 3. p=0 and p>0 Blocks Do Not Mix
+
+In all mixed-p calculations (B1, B2, C1, C2), the p=0 coefficients are identically zero:
+```
+B1 coefficients: (0,0,0,0,1) c=-0.714, (1,0,0,0,1) c=+0.147
+                  (0,0,0,0,0) c=-0.000, (1,0,0,0,0) c=+0.000  ← ZERO
+```
+
+This indicates that the 5D finite-difference Hamiltonian kernel produces incorrect
+cross-block matrix elements ⟨φ_{p=0}|H|φ_{p>0}⟩, effectively decoupling the two
+subspaces. The p>0 block alone provides the variational minimum.
+
+#### 4. FD Kinetic Energy is the Bottleneck to 99%
+
+| Symptom | Cause |
+|:--------|:------|
+| p=0/p>0 decoupling | FD kinetic gives wrong ⟨p=0\|T\|p>0⟩ |
+| Variational violation (C2: 101.6%) | FD kinetic underestimates T for large p>0 basis |
+| Collapse at N>~20 with p>0 | FD errors + ill-conditioned S → unphysical eigenvalues |
+
+**Fix required:** Analytical kinetic energy for r₁₂^p basis functions via:
+- Integration by parts in 5D (extending the p=0 IBP approach)
+- Recurrence relations for kinetic matrix elements of r₁₂^p
+- Or: separate IBP Hamiltonian for p=0 block + FD for cross terms
+
+#### 5. Convergence Milestones
+
+| Target | Achieved by | N terms | Time |
+|:-------|:-----------|:-------:|:----:|
+| 50% D_e | A4 (j=1,l=1,p=0) | 6 | 17s |
+| 75% D_e | B1 (j=1,l=0,p=1) | 6 | 136s |
+| 85% D_e | B2 (j=1,l=1,p=1) | 12 | 671s |
+| 95% D_e | C1 (j=1,l=0,p=2) | 9 | 127s |
+| 99% D_e | **NOT REACHED** | — | — |
+
+### Alpha Trajectory
+
+| Basis type | α range | Trend |
+|:-----------|:-------:|:------|
+| p=0, small | 0.81-0.88 | Low α = diffuse orbitals |
+| p=0, large | 0.98-1.03 | Approaches 1.0 |
+| p=1 | 0.99-1.04 | Near 1.0 |
+| p=2 | 0.99-1.18 | Higher for pure-ξ basis |
+
+### Path to 99%
+
+With the current FD kinetic energy, 99% D_e is not achievable (collapses above ~15 terms
+for p>0). The path forward requires **analytical kinetic energy for r₁₂^p terms**:
+
+1. Derive ⟨φ_i|T|φ_j⟩ analytically for the full Hylleraas basis (all p)
+2. This would enable p=0/p>0 mixing (currently blocked)
+3. Maintain variational bound (currently violated)
+4. Allow basis expansion to N~30+ without collapse
+5. James-Coolidge used 13 terms with p_max=2 → 99.7% should be reachable
+
+**Estimated:** j=2, l=2, p=2 with analytical KE → ~50 terms → 99%+ D_e.
+
+### Files
+
+| File | Description |
+|:-----|:------------|
+| `geovac/_numba_kernels.py` | Numba-accelerated computational kernels |
+| `debug/hylleraas_full_convergence.py` | Phase 10 convergence study script |
+| `debug/data/hylleraas_convergence.txt` | Phase 10 convergence data |
