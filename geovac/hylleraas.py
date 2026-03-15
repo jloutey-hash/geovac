@@ -36,6 +36,19 @@ from scipy.optimize import minimize_scalar
 from typing import Dict, List, Tuple
 import time
 
+try:
+    from geovac._numba_kernels import (
+        NUMBA_AVAILABLE,
+        overlap_matrix_p0_kernel,
+        overlap_matrix_5d_kernel,
+        hamiltonian_p0_kernel,
+        hamiltonian_tvne_p0_kernel,
+        hamiltonian_general_kernel,
+        hamiltonian_analytical_kernel,
+    )
+except ImportError:
+    NUMBA_AVAILABLE = False
+
 
 # ============================================================
 # Basis function definition
@@ -379,16 +392,73 @@ def evaluate_basis_and_derivs(
 # Matrix element computation — p=0 (integration by parts)
 # ============================================================
 
+def _extract_basis_params(
+    basis: List[HylleraasBasisFunction],
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray,
+           np.ndarray, np.ndarray, np.ndarray]:
+    """Extract basis function parameters as numpy arrays for Numba kernels."""
+    n = len(basis)
+    bf_j = np.array([bf.j for bf in basis], dtype=np.int32)
+    bf_k = np.array([bf.k for bf in basis], dtype=np.int32)
+    bf_l = np.array([bf.l for bf in basis], dtype=np.int32)
+    bf_m = np.array([bf.m for bf in basis], dtype=np.int32)
+    bf_p = np.array([bf.p for bf in basis], dtype=np.int32)
+    bf_alpha = np.array([bf.alpha for bf in basis], dtype=np.float64)
+    bf_is_self = np.array([bf.is_self_exchange for bf in basis])
+    return bf_j, bf_k, bf_l, bf_m, bf_p, bf_alpha, bf_is_self
+
+
 def compute_overlap_matrix(
     basis: List[HylleraasBasisFunction],
     R: float,
     grids: Dict,
+    use_numba: bool = True,
 ) -> np.ndarray:
     """Compute overlap matrix S_ij = <φ_i | φ_j>.
 
     For p=0: 4D integral with (2π)² azimuthal factor.
     For p>0: 5D integral with explicit Δφ integration.
+
+    Uses Numba-accelerated kernels when available (use_numba=True).
     """
+    max_p = max(bf.p for bf in basis)
+    xi = grids['xi']
+    eta = grids['eta']
+    w_xi = grids['w_xi']
+    w_eta = grids['w_eta']
+
+    # Numba fast path
+    if use_numba and NUMBA_AVAILABLE:
+        bf_j, bf_k, bf_l, bf_m, bf_p, bf_alpha, bf_is_self = \
+            _extract_basis_params(basis)
+        xi_c = np.ascontiguousarray(xi)
+        eta_c = np.ascontiguousarray(eta)
+        w_xi_c = np.ascontiguousarray(w_xi)
+        w_eta_c = np.ascontiguousarray(w_eta)
+
+        if max_p == 0:
+            return overlap_matrix_p0_kernel(
+                bf_j, bf_k, bf_l, bf_m, bf_alpha, bf_is_self,
+                xi_c, eta_c, w_xi_c, w_eta_c, R,
+            )
+        else:
+            dphi = np.ascontiguousarray(grids['dphi'])
+            w_phi = np.ascontiguousarray(grids['w_phi'])
+            return overlap_matrix_5d_kernel(
+                bf_j, bf_k, bf_l, bf_m, bf_p, bf_alpha, bf_is_self,
+                xi_c, eta_c, w_xi_c, w_eta_c, dphi, w_phi, R,
+            )
+
+    # Python fallback
+    return _compute_overlap_matrix_python(basis, R, grids)
+
+
+def _compute_overlap_matrix_python(
+    basis: List[HylleraasBasisFunction],
+    R: float,
+    grids: Dict,
+) -> np.ndarray:
+    """Pure Python overlap matrix computation (fallback)."""
     n_basis = len(basis)
     S = np.zeros((n_basis, n_basis))
 
@@ -516,21 +586,78 @@ def compute_hamiltonian_matrix(
     grids: Dict,
     Z_A: float = 1.0,
     Z_B: float = 1.0,
+    use_numba: bool = True,
+    kinetic_method: str = 'analytical',
+    include_vee: bool = True,
 ) -> np.ndarray:
     """Compute Hamiltonian matrix H_ij = <φ_i | T+V_ne+V_ee | φ_j>.
 
     For p=0: kinetic energy via integration by parts (analytical derivatives),
     V_ne and V_ee via direct quadrature, V_ee uses elliptic integral kernel.
 
-    For p>0: full 5D numerical integration.
+    For p>0 with kinetic_method='analytical': full 5D integration with
+    exact analytical kinetic energy via integration by parts. The product
+    rule gives ∂φ/∂x = (∂g/∂x)r₁₂^p + g·(p/2)r₁₂^{p-2}·∂(r₁₂²)/∂x,
+    including the azimuthal ∂φ/∂Δφ term from r₁₂(Δφ) dependence.
+
+    For p>0 with kinetic_method='fd': legacy finite-difference kinetic
+    energy (kept for comparison).
+
+    Uses Numba-accelerated kernels when available (use_numba=True).
+
+    Parameters
+    ----------
+    kinetic_method : str
+        'analytical' (default) — exact IBP kinetic energy for all p.
+        'fd' — finite-difference kinetic energy (legacy, for comparison).
+    include_vee : bool
+        If False, compute T + V_ne only (no electron-electron repulsion).
+        Used when V_ee is computed separately (e.g., Neumann expansion).
     """
-    n_basis = len(basis)
     max_p = max(bf.p for bf in basis)
 
+    # Numba fast path
+    if use_numba and NUMBA_AVAILABLE:
+        bf_j, bf_k, bf_l, bf_m, bf_p, bf_alpha, bf_is_self = \
+            _extract_basis_params(basis)
+        xi = np.ascontiguousarray(grids['xi'])
+        eta = np.ascontiguousarray(grids['eta'])
+        w_xi = np.ascontiguousarray(grids['w_xi'])
+        w_eta = np.ascontiguousarray(grids['w_eta'])
+
+        if max_p == 0:
+            if include_vee:
+                return hamiltonian_p0_kernel(
+                    bf_j, bf_k, bf_l, bf_m, bf_alpha, bf_is_self,
+                    xi, eta, w_xi, w_eta, R, Z_A, Z_B,
+                )
+            else:
+                return hamiltonian_tvne_p0_kernel(
+                    bf_j, bf_k, bf_l, bf_m, bf_alpha, bf_is_self,
+                    xi, eta, w_xi, w_eta, R, Z_A, Z_B,
+                )
+        else:
+            dphi = np.ascontiguousarray(grids['dphi'])
+            w_phi = np.ascontiguousarray(grids['w_phi'])
+            if kinetic_method == 'analytical':
+                return hamiltonian_analytical_kernel(
+                    bf_j, bf_k, bf_l, bf_m, bf_p, bf_alpha, bf_is_self,
+                    xi, eta, w_xi, w_eta, dphi, w_phi, R, Z_A, Z_B,
+                )
+            else:
+                return hamiltonian_general_kernel(
+                    bf_j, bf_k, bf_l, bf_m, bf_p, bf_alpha, bf_is_self,
+                    xi, eta, w_xi, w_eta, dphi, w_phi, R, Z_A, Z_B,
+                )
+
+    # Python fallback (or include_vee=False path)
     if max_p == 0:
-        H = _hamiltonian_p0(basis, R, grids, Z_A, Z_B)
+        H = _hamiltonian_p0(basis, R, grids, Z_A, Z_B, include_vee=include_vee)
     else:
-        H = _hamiltonian_general(basis, R, grids, Z_A, Z_B)
+        if kinetic_method == 'analytical':
+            H = _hamiltonian_general_analytical(basis, R, grids, Z_A, Z_B)
+        else:
+            H = _hamiltonian_general(basis, R, grids, Z_A, Z_B)
 
     return H
 
@@ -545,6 +672,7 @@ def _hamiltonian_p0(
     grids: Dict,
     Z_A: float,
     Z_B: float,
+    include_vee: bool = True,
 ) -> np.ndarray:
     """Hamiltonian matrix for p=0 basis using integration by parts.
 
@@ -639,7 +767,7 @@ def _hamiltonian_p0(
                         )
                         T_ij += w_xi[a] * w_xi[c] * T_sum
 
-                        # --- Potential energy V_ne + V_ee ---
+                        # --- Potential energy V_ne (+ V_ee if included) ---
                         r1A = half_R * (xi1 + eta1)
                         r1B = half_R * abs(xi1 - eta1)
                         r2A = half_R * (xi2 + eta2)
@@ -651,119 +779,50 @@ def _hamiltonian_p0(
                             - Z_A / np.maximum(r2A, 1e-15)
                             - Z_B / np.maximum(r2B, 1e-15)
                         )
-
-                        # V_ee = 1/r₁₂ via elliptic integral (azimuthal average)
-                        rho1 = half_R * np.sqrt(max(
-                            (xi1**2 - 1) * (1 - eta1**2), 0.0
-                        ))
-                        z1 = half_R * xi1 * eta1
-                        rho2 = half_R * np.sqrt(np.maximum(
-                            (xi2**2 - 1) * (1 - eta2**2), 0.0
-                        ))
-                        z2 = half_R * xi2 * eta2
-
-                        dz = z1 - z2
-                        s = (rho1 + rho2)**2 + dz**2
-                        with np.errstate(divide='ignore', invalid='ignore'):
-                            k2 = np.where(
-                                s > 1e-30,
-                                4 * rho1 * rho2 / s,
-                                0.0
-                            )
-                            k2 = np.clip(k2, 0, 1 - 1e-15)
-                        s_safe = np.maximum(s, 1e-30)
-                        K_vals = ellipk(k2)
-                        # Phi-averaged 1/r₁₂: (4/π) K(k) / √s
-                        # Factor: the phi integral gives 2π for φ₁ and
-                        # the azimuthal average of 1/r₁₂ is
-                        # (1/2π) ∫ 1/r₁₂ dΔφ = (2/π) K(k)/√s
-                        # With (2π)² from both phi integrals:
-                        # V_ee_eff = (2π)² × (2/π) K(k)/√s = 8π K(k)/√s
-                        # But we already have phi_factor = (2π)²
-                        # So V_ee per point (before phi_factor) =
-                        # (1/(2π)²) × (2π) × ∫ (1/r₁₂) dΔφ/(2π) × (2π)
-                        # = (1/2π) ∫ (1/r₁₂) dΔφ = (2/π) K(k)/√s
-                        # Hmm, let me be more careful.
-                        #
-                        # Full integral:
-                        # ∫₀²π dφ₁ ∫₀²π dφ₂ (1/r₁₂) = 2π × ∫₀²π (1/r₁₂(Δφ)) dΔφ
-                        # = 2π × 2 × (2K(k)/√s)  [standard result]
-                        # = 8π K(k)/√s
-                        #
-                        # So with phi_factor = (2π)², we need:
-                        # V_ee_integral = (1/(2π)²) × 8π K(k)/√s = 2K(k)/(π√s)
-                        # No wait, phi_factor is applied to the ENTIRE matrix
-                        # element. For V_ne, the phi integrals are trivial
-                        # (both give 2π), so V_ne gets multiplied by (2π)².
-                        # For V_ee, the phi integral over 1/r₁₂ gives
-                        # 8π K(k)/√s (not (2π)²). So we should NOT apply
-                        # phi_factor to V_ee and instead use 8π K(k)/√s directly.
-                        #
-                        # Actually, let me restructure: do NOT include phi_factor
-                        # globally. Instead:
-                        # - T and V_ne: multiply by (2π)²
-                        # - V_ee: multiply by 8π K(k)/√s / (2π)² × (2π)²
-                        #        = 8π K(k)/√s
-                        # Wait, this is getting confused. Let me be precise.
-                        #
-                        # The full matrix element is:
-                        # <φ_i|O|φ_j> = ∫∫ φ_i O φ_j J₁J₂ dξ₁dη₁dφ₁ dξ₂dη₂dφ₂
-                        #
-                        # For p=0, φ_i and φ_j are independent of φ. So:
-                        # For T, V_ne (independent of φ):
-                        #   = (∫dφ₁)(∫dφ₂) × 4D integral = (2π)² × 4D
-                        #
-                        # For V_ee = 1/r₁₂ which depends on Δφ:
-                        #   = ∫dφ₁ ∫dφ₂ φ_i φ_j / r₁₂(Δφ) J₁J₂ dξ₁dη₁dξ₂dη₂
-                        #   = 2π × ∫dΔφ [φ_i φ_j / r₁₂(Δφ)] J₁J₂ dξ₁dη₁dξ₂dη₂
-                        #   = 2π × ∫ [φ_i φ_j J₁J₂] × [∫ 1/r₁₂ dΔφ] dξ₁dη₁dξ₂dη₂
-                        #
-                        # ∫₀²π 1/r₁₂(Δφ) dΔφ = (4/√s_max) K(k)
-                        # where s_max = (ρ₁+ρ₂)²+(z₁-z₂)², k² = 4ρ₁ρ₂/s_max
-                        # Actually: ∫₀²π 1/r₁₂ dΔφ = 4K(k)/(R/2 √s_max)???
-                        #
-                        # Let me use a known result. From the generating function
-                        # of elliptic integrals:
-                        # ∫₀²π dΔφ / √(a-b·cos(Δφ)) = 4K(b/(2a)) / √a  ??? No.
-                        #
-                        # r₁₂² = (R/2)²[(ξ₁η₁-ξ₂η₂)² + ρ₁² + ρ₂² - 2ρ₁ρ₂cos(Δφ)]
-                        #       = (R/2)²[Q + 2ρ₁ρ₂(1-cos(Δφ))]  ... hmm not quite.
-                        #
-                        # Actually let me use the standard cylindrical result:
-                        # 1/|r₁-r₂| in cylindrical coordinates:
-                        # |r₁-r₂|² = (z₁-z₂)² + ρ₁² + ρ₂² - 2ρ₁ρ₂cos(Δφ)
-                        #
-                        # ∫₀²π dΔφ/|r₁-r₂| = 4K(k)/√s_max
-                        # where s_max = (ρ₁+ρ₂)² + (z₁-z₂)²
-                        # and k² = 4ρ₁ρ₂ / s_max
-                        #
-                        # This is a well-known result from Jackson (electrostatics).
-                        #
-                        # So the V_ee contribution to the matrix element is:
-                        # 2π × ∫ φ_i φ_j J₁J₂ × [4K(k)/√s_max] d4D
-                        # = 8π × ∫ φ_i φ_j J₁J₂ K(k)/√s_max d4D
-                        #
-                        # This is NOT (2π)² × integral. So I need to handle
-                        # T/V_ne and V_ee with different phi factors.
-
-                        V_ee = np.where(
-                            s > 1e-30,
-                            K_vals / np.sqrt(s_safe),
-                            0.0
-                        )
-
                         # V_ne uses phi_factor = (2π)²
                         V_ne_integrand = fi * fj * V_ne * J1 * J2_arr
                         V_ne_sum = np.sum(V_ne_integrand * w_eta[b] * w_eta)
 
-                        # V_ee uses phi_factor = 8π
-                        V_ee_integrand = fi * fj * V_ee * J1 * J2_arr
-                        V_ee_sum = np.sum(V_ee_integrand * w_eta[b] * w_eta)
+                        if include_vee:
+                            # V_ee = 1/r₁₂ via elliptic integral (azimuthal average)
+                            # ∫₀²π dΔφ/|r₁-r₂| = 4K(k)/√s (Jackson)
+                            # Full phi integral: 2π × 4K(k)/√s = 8πK(k)/√s
+                            rho1 = half_R * np.sqrt(max(
+                                (xi1**2 - 1) * (1 - eta1**2), 0.0
+                            ))
+                            z1 = half_R * xi1 * eta1
+                            rho2 = half_R * np.sqrt(np.maximum(
+                                (xi2**2 - 1) * (1 - eta2**2), 0.0
+                            ))
+                            z2 = half_R * xi2 * eta2
 
-                        V_ij += w_xi[a] * w_xi[c] * (
-                            phi_factor * V_ne_sum
-                            + 8 * np.pi * V_ee_sum
-                        )
+                            dz = z1 - z2
+                            s = (rho1 + rho2)**2 + dz**2
+                            with np.errstate(divide='ignore', invalid='ignore'):
+                                k2 = np.where(
+                                    s > 1e-30,
+                                    4 * rho1 * rho2 / s,
+                                    0.0
+                                )
+                                k2 = np.clip(k2, 0, 1 - 1e-15)
+                            s_safe = np.maximum(s, 1e-30)
+                            K_vals = ellipk(k2)
+
+                            V_ee = np.where(
+                                s > 1e-30,
+                                K_vals / np.sqrt(s_safe),
+                                0.0
+                            )
+
+                            V_ee_integrand = fi * fj * V_ee * J1 * J2_arr
+                            V_ee_sum = np.sum(V_ee_integrand * w_eta[b] * w_eta)
+
+                            V_ij += w_xi[a] * w_xi[c] * (
+                                phi_factor * V_ne_sum
+                                + 8 * np.pi * V_ee_sum
+                            )
+                        else:
+                            V_ij += w_xi[a] * w_xi[c] * phi_factor * V_ne_sum
 
             H[i, j] = T_prefactor * phi_factor * T_ij + V_ij
             H[j, i] = H[i, j]
@@ -938,6 +997,245 @@ def _kinetic_fd_scalar(
 
 
 # ============================================================
+# General Hamiltonian (p > 0) — analytical IBP kinetic energy
+# ============================================================
+
+def _hamiltonian_general_analytical(
+    basis: List[HylleraasBasisFunction],
+    R: float,
+    grids: Dict,
+    Z_A: float,
+    Z_B: float,
+) -> np.ndarray:
+    """Hamiltonian for general basis with analytical IBP kinetic energy.
+
+    Pure Python fallback. Uses exact product-rule derivatives:
+        ∂φ/∂x = (∂g/∂x) r₁₂^p + g × (p/2) r₁₂^{p-2} ∂(r₁₂²)/∂x
+    with integration by parts for the kinetic energy, including the
+    azimuthal derivative term from r₁₂(Δφ) dependence.
+    """
+    n_basis = len(basis)
+    H = np.zeros((n_basis, n_basis))
+
+    xi = grids['xi']
+    eta = grids['eta']
+    w_xi = grids['w_xi']
+    w_eta = grids['w_eta']
+    dphi_arr = grids['dphi']
+    w_phi = grids['w_phi']
+    half_R = R / 2.0
+    T_prefactor = R / 4.0
+
+    for i in range(n_basis):
+        for j in range(i, n_basis):
+            val = 0.0
+
+            for a in range(len(xi)):
+                xi1 = xi[a]
+                xi1_sq_m1 = xi1**2 - 1.0
+                for c in range(len(xi)):
+                    xi2 = xi[c]
+                    xi2_sq_m1 = xi2**2 - 1.0
+                    w_ac = w_xi[a] * w_xi[c]
+                    for b in range(len(eta)):
+                        eta1 = eta[b]
+                        ome1_sq = 1.0 - eta1**2
+                        J1 = half_R**3 * (xi1**2 - eta1**2)
+
+                        r1A = half_R * (xi1 + eta1)
+                        r1B = half_R * abs(xi1 - eta1)
+
+                        for d in range(len(eta)):
+                            eta2 = eta[d]
+                            ome2_sq = 1.0 - eta2**2
+                            J2 = half_R**3 * (xi2**2 - eta2**2)
+
+                            r2A = half_R * (xi2 + eta2)
+                            r2B = half_R * abs(xi2 - eta2)
+
+                            v_ne = (-Z_A / max(r1A, 1e-15)
+                                    - Z_B / max(r1B, 1e-15)
+                                    - Z_A / max(r2A, 1e-15)
+                                    - Z_B / max(r2B, 1e-15))
+
+                            # φ denominators for IBP azimuthal term
+                            denom1 = xi1_sq_m1 * ome1_sq
+                            denom2 = xi2_sq_m1 * ome2_sq
+                            phi_fac1 = ((xi1**2 - eta1**2) / denom1
+                                        if denom1 > 1e-30 else 0.0)
+                            phi_fac2 = ((xi2**2 - eta2**2) / denom2
+                                        if denom2 > 1e-30 else 0.0)
+
+                            q_total = basis[i].p + basis[j].p
+
+                            T_phi_int = 0.0
+                            Vne_phi_int = 0.0
+                            Vee_phi_int = 0.0
+
+                            for ip in range(len(dphi_arr)):
+                                dp = dphi_arr[ip]
+                                r12, dr_dxi1, dr_deta1, dr_dxi2, dr_deta2, dr_ddphi = \
+                                    _r12_and_derivs_python(
+                                        xi1, eta1, xi2, eta2, dp, R)
+                                r12 = max(r12, 1e-15)
+
+                                phi_i, di_dxi1, di_deta1, di_dxi2, di_deta2, di_ddphi = \
+                                    _full_derivs_python(
+                                        basis[i], xi1, eta1, xi2, eta2,
+                                        r12, dr_dxi1, dr_deta1,
+                                        dr_dxi2, dr_deta2, dr_ddphi)
+
+                                phi_j, dj_dxi1, dj_deta1, dj_dxi2, dj_deta2, dj_ddphi = \
+                                    _full_derivs_python(
+                                        basis[j], xi1, eta1, xi2, eta2,
+                                        r12, dr_dxi1, dr_deta1,
+                                        dr_dxi2, dr_deta2, dr_ddphi)
+
+                                T1 = (xi1_sq_m1 * di_dxi1 * dj_dxi1
+                                      + ome1_sq * di_deta1 * dj_deta1
+                                      + phi_fac1 * di_ddphi * dj_ddphi) * J2
+                                T2 = (xi2_sq_m1 * di_dxi2 * dj_dxi2
+                                      + ome2_sq * di_deta2 * dj_deta2
+                                      + phi_fac2 * di_ddphi * dj_ddphi) * J1
+
+                                T_phi_int += (T1 + T2) * w_phi[ip]
+
+                                fifj = phi_i * phi_j
+                                Vne_phi_int += fifj * v_ne * w_phi[ip]
+                                if q_total > 0:
+                                    Vee_phi_int += fifj / r12 * w_phi[ip]
+
+                            w_total = w_ac * w_eta[b] * w_eta[d]
+                            val += w_total * T_prefactor * 2 * np.pi * T_phi_int
+                            val += w_total * 2 * np.pi * Vne_phi_int * J1 * J2
+
+                            if q_total > 0:
+                                val += w_total * 2 * np.pi * Vee_phi_int * J1 * J2
+                            else:
+                                # Elliptic K for V_ee when p_i+p_j=0
+                                fi_0 = float(evaluate_basis_function(
+                                    basis[i], xi1, eta1, xi2, eta2, 1.0, R))
+                                fj_0 = float(evaluate_basis_function(
+                                    basis[j], xi1, eta1, xi2, eta2, 1.0, R))
+                                rho1 = half_R * np.sqrt(max(
+                                    xi1_sq_m1 * ome1_sq, 0.0))
+                                z1c = half_R * xi1 * eta1
+                                rho2 = half_R * np.sqrt(max(
+                                    xi2_sq_m1 * ome2_sq, 0.0))
+                                z2c = half_R * xi2 * eta2
+                                dz = z1c - z2c
+                                s = (rho1 + rho2)**2 + dz**2
+                                if s > 1e-30:
+                                    k2 = 4.0 * rho1 * rho2 / s
+                                    k2 = min(max(k2, 0.0), 1 - 1e-15)
+                                    K_val = ellipk(k2)
+                                    V_ee_K = K_val / np.sqrt(s)
+                                else:
+                                    V_ee_K = 0.0
+                                val += w_total * 8 * np.pi * fi_0 * fj_0 * V_ee_K * J1 * J2
+
+            H[i, j] = val
+            H[j, i] = val
+
+    return H
+
+
+def _r12_and_derivs_python(
+    xi1: float, eta1: float, xi2: float, eta2: float,
+    dphi: float, R: float,
+) -> Tuple[float, float, float, float, float, float]:
+    """Python version of r₁₂ and ∂(r₁₂²)/∂x computation."""
+    half_R = R / 2.0
+    half_R_sq = half_R ** 2
+    cos_dp = np.cos(dphi)
+    sin_dp = np.sin(dphi)
+
+    diff = xi1 * eta1 - xi2 * eta2
+    xi1_sq_m1 = xi1**2 - 1.0
+    ome1_sq = 1.0 - eta1**2
+    xi2_sq_m1 = xi2**2 - 1.0
+    ome2_sq = 1.0 - eta2**2
+
+    rho1_sq = max(xi1_sq_m1 * ome1_sq, 0.0)
+    rho2_sq = max(xi2_sq_m1 * ome2_sq, 0.0)
+    rho1 = np.sqrt(rho1_sq)
+    rho2 = np.sqrt(rho2_sq)
+
+    S = diff**2 + rho1_sq + rho2_sq - 2.0 * rho1 * rho2 * cos_dp
+    r12 = half_R * np.sqrt(max(S, 0.0))
+
+    dS_dxi1 = 2.0 * eta1 * diff + 2.0 * xi1 * ome1_sq
+    if rho1 > 1e-15:
+        dS_dxi1 -= 2.0 * cos_dp * rho2 * xi1 * ome1_sq / rho1
+
+    dS_deta1 = 2.0 * xi1 * diff - 2.0 * eta1 * xi1_sq_m1
+    if rho1 > 1e-15:
+        dS_deta1 += 2.0 * cos_dp * rho2 * eta1 * xi1_sq_m1 / rho1
+
+    dS_dxi2 = -2.0 * eta2 * diff + 2.0 * xi2 * ome2_sq
+    if rho2 > 1e-15:
+        dS_dxi2 -= 2.0 * cos_dp * rho1 * xi2 * ome2_sq / rho2
+
+    dS_deta2 = -2.0 * xi2 * diff - 2.0 * eta2 * xi2_sq_m1
+    if rho2 > 1e-15:
+        dS_deta2 += 2.0 * cos_dp * rho1 * eta2 * xi2_sq_m1 / rho2
+
+    dS_ddphi = 2.0 * rho1 * rho2 * sin_dp
+
+    return (r12,
+            half_R_sq * dS_dxi1, half_R_sq * dS_deta1,
+            half_R_sq * dS_dxi2, half_R_sq * dS_deta2,
+            half_R_sq * dS_ddphi)
+
+
+def _full_derivs_python(
+    bf: HylleraasBasisFunction,
+    xi1: float, eta1: float, xi2: float, eta2: float,
+    r12: float,
+    dr12sq_dxi1: float, dr12sq_deta1: float,
+    dr12sq_dxi2: float, dr12sq_deta2: float,
+    dr12sq_ddphi: float,
+) -> Tuple[float, float, float, float, float, float]:
+    """Python version of full product-rule derivatives for φ = g × r₁₂^p."""
+    g, dg_dxi1, dg_deta1, dg_dxi2, dg_deta2 = _eval_unsym_and_derivs(
+        bf.j, bf.k, bf.l, bf.m, bf.alpha, xi1, eta1, xi2, eta2
+    )
+    if not bf.is_self_exchange:
+        g_e, de_dxi1, de_deta1, de_dxi2, de_deta2 = _eval_unsym_and_derivs(
+            bf.k, bf.j, bf.m, bf.l, bf.alpha, xi1, eta1, xi2, eta2
+        )
+        g += g_e
+        dg_dxi1 += de_dxi1
+        dg_deta1 += de_deta1
+        dg_dxi2 += de_dxi2
+        dg_deta2 += de_deta2
+    else:
+        g *= 2.0
+        dg_dxi1 *= 2.0
+        dg_deta1 *= 2.0
+        dg_dxi2 *= 2.0
+        dg_deta2 *= 2.0
+
+    p = bf.p
+    if p == 0:
+        return float(g), float(dg_dxi1), float(dg_deta1), \
+               float(dg_dxi2), float(dg_deta2), 0.0
+
+    r12_p = r12**p
+    r12_coupling = 0.5 * p * r12**(p - 2) if r12 > 1e-15 else 0.0
+
+    phi = float(g * r12_p)
+    g_coup = float(g * r12_coupling)
+    dphi_dxi1 = float(dg_dxi1 * r12_p) + g_coup * dr12sq_dxi1
+    dphi_deta1 = float(dg_deta1 * r12_p) + g_coup * dr12sq_deta1
+    dphi_dxi2 = float(dg_dxi2 * r12_p) + g_coup * dr12sq_dxi2
+    dphi_deta2 = float(dg_deta2 * r12_p) + g_coup * dr12sq_deta2
+    dphi_ddphi = g_coup * dr12sq_ddphi
+
+    return phi, dphi_dxi1, dphi_deta1, dphi_dxi2, dphi_deta2, dphi_ddphi
+
+
+# ============================================================
 # Solver: generalized eigenvalue problem
 # ============================================================
 
@@ -949,6 +1247,8 @@ def solve_hylleraas(
     Z_B: float = 1.0,
     n_states: int = 1,
     verbose: bool = True,
+    vee_method: str = 'numerical',
+    l_max_neumann: int = 20,
 ) -> Dict:
     """Solve the Hylleraas variational problem Hc = ESc.
 
@@ -965,6 +1265,11 @@ def solve_hylleraas(
         Number of states to return.
     verbose : bool
         Print progress.
+    vee_method : str
+        'numerical' (default) — V_ee via elliptic integral quadrature.
+        'neumann' — V_ee via Neumann expansion (exact, algebraic).
+    l_max_neumann : int
+        Neumann series truncation order (only used if vee_method='neumann').
 
     Returns
     -------
@@ -977,6 +1282,8 @@ def solve_hylleraas(
         print(f"\n  Hylleraas solver: {n_bf} basis functions, R={R:.4f}")
         print(f"  Grid: {grids['N_xi']}x{grids['N_eta']} (xi,eta), "
               f"{grids['N_phi']} phi points")
+        if vee_method == 'neumann':
+            print(f"  V_ee method: Neumann expansion (l_max={l_max_neumann})")
 
     # Step 1: Overlap matrix
     if verbose:
@@ -997,7 +1304,14 @@ def solve_hylleraas(
     if verbose:
         print("  Computing Hamiltonian matrix H...")
     t2 = time.time()
-    H = compute_hamiltonian_matrix(basis, R, grids, Z_A, Z_B)
+    if vee_method == 'neumann':
+        from geovac.neumann_vee import compute_hamiltonian_neumann
+        H = compute_hamiltonian_neumann(
+            basis, R, grids, Z_A, Z_B,
+            l_max=l_max_neumann, verbose=verbose,
+        )
+    else:
+        H = compute_hamiltonian_matrix(basis, R, grids, Z_A, Z_B)
     dt_H = time.time() - t2
     if verbose:
         print(f"    H computed in {dt_H:.1f}s")
@@ -1061,6 +1375,8 @@ def optimize_alpha(
     Z_A: float = 1.0,
     Z_B: float = 1.0,
     verbose: bool = True,
+    vee_method: str = 'numerical',
+    l_max_neumann: int = 20,
 ) -> Dict:
     """Optimize the nonlinear parameter α.
 
@@ -1077,6 +1393,10 @@ def optimize_alpha(
     Z_A, Z_B : float
         Nuclear charges.
     verbose : bool
+    vee_method : str
+        'numerical' or 'neumann'.
+    l_max_neumann : int
+        Neumann series truncation (only for vee_method='neumann').
 
     Returns
     -------
@@ -1088,7 +1408,10 @@ def optimize_alpha(
     def objective(alpha: float) -> float:
         basis = basis_generator(alpha)
         try:
-            result = solve_hylleraas(basis, R, grids, Z_A, Z_B, verbose=False)
+            result = solve_hylleraas(
+                basis, R, grids, Z_A, Z_B, verbose=False,
+                vee_method=vee_method, l_max_neumann=l_max_neumann,
+            )
             return result['E_total']
         except Exception:
             return 0.0
@@ -1118,7 +1441,8 @@ def optimize_alpha(
     alpha_opt = opt.x
     basis_opt = basis_generator(alpha_opt)
     result_opt = solve_hylleraas(
-        basis_opt, R, grids, Z_A, Z_B, verbose=verbose
+        basis_opt, R, grids, Z_A, Z_B, verbose=verbose,
+        vee_method=vee_method, l_max_neumann=l_max_neumann,
     )
 
     if verbose:

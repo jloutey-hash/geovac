@@ -1,0 +1,12 @@
+# H2 PES via Hylleraas basis with Neumann V_ee (j=2, l=2, p=0, 27 bf)
+# Uniform alpha=1.0, N_xi=30, N_eta=20, l_max_neumann=20
+# Morse fit (E_inf=-1.0 Ha): D_e=0.1614, R_e=1.422, omega_e=4500
+# R (bohr)    E_total (Ha)
+1.0000    -1.10541560
+1.2000    -1.15016697
+1.3000    -1.15833801
+1.4000    -1.16095515
+1.5000    -1.15971883
+1.6000    -1.15579301
+1.8000    -1.14292213
+2.0000    -1.12655461

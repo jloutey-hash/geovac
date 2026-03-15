@@ -201,7 +201,7 @@ Before implementing new physics (e.g., relativistic corrections, new potentials)
 2. **If code contradicts paper** → Flag it and ask user
 3. **If we change physics in code** → Prompt user to update papers/README
 
-**Authoritative source:** The core papers (`papers/core/`) — Paper 0, Paper 1, Paper 6, and Paper 7 — are the authoritative theoretical source. If the README or any documentation conflicts with these papers, the papers take precedence. Flag the conflict to the user rather than silently resolving it in favor of the README.
+**Authoritative source:** The core papers (`papers/core/`) — Papers 0, 1, 6, 7, 10, 11, 12, and 13 — are the authoritative theoretical source. If the README or any documentation conflicts with these papers, the papers take precedence. Flag the conflict to the user rather than silently resolving it in favor of the README.
 
 **Example:**
 ```
@@ -249,7 +249,10 @@ mv test_something.py debug/
 ### **Validation Benchmarks** (Critical Tests)
 - **Topological Integrity:** 18/18 symbolic proofs must pass → validates S³ conformal geometry (FOUNDATIONAL)
 - **H2+ (Single-electron):** Must be < 0.1% error → validates topology
+- **He (Hyperspherical):** Must be < 0.1% error → validates multi-electron natural geometry
 - **H2 Full CI:** Must be < 1.0% error → validates physics
+- **H2 Neumann V_ee:** 92.4% D_e → validates algebraic integral approach
+- **Hyperspherical tests:** 20/20 must pass → validates angular + adiabatic + radial solvers
 - **Muonic H:** Energy ratio = 206.77, topology identical → validates mass-independence
 - **Spectral Dimension:** d_s ≈ 1.8-2.0, mass-independent → validates holography
 - **Central Charge:** c ≈ 0.057, mass-independent → validates CFT connection
@@ -259,6 +262,10 @@ mv test_something.py debug/
   - **Paper 0:** Geometric packing framework and universal constant K = -1/16
   - **Paper 1:** Spectral graph theory foundations and eigenvalue methods
   - **Paper 7:** The Dimensionless Vacuum — formal proof that the graph Laplacian is a scale-invariant unit S³ topology and the Schrodinger equation is its flat-space projection (18/18 symbolic proofs)
+  - **Paper 10:** Nuclear lattice — rovibrational spectra from SU(2) algebraic chains
+  - **Paper 11:** Molecular Fock projection — prolate spheroidal lattice for diatomics (H₂⁺ at 0.70%)
+  - **Paper 12:** Algebraic two-electron integrals — Neumann expansion for V_ee (H₂ at 92.4% D_e); cusp diagnosis
+  - **Paper 13:** Hyperspherical lattice — two-electron atoms as coupled channel graphs (He at 0.05%); first non-trivial fiber bundle; ab initio molecular spectroscopy
 - **Conjectures (`papers/conjectures/`):**
   - **Paper 2:** Fine structure constant (α⁻¹) derivation (geometric ansatz)
   - **Paper 3:** Holographic entropy, spectral dimension, central charge
@@ -376,7 +383,7 @@ python debug/test_install.py
 3. ✅ Check `CHANGELOG.md` for recent changes
 4. ✅ **Ask user** if unsure about physics interpretation
 
-**Authoritative source:** The core papers (`papers/core/`) — Paper 0, Paper 1, Paper 6, and Paper 7 — take precedence over README and all other documentation. If a conflict is found, flag it to the user rather than silently resolving it in favor of the README.
+**Authoritative source:** The core papers (`papers/core/`) — Papers 0, 1, 6, 7, 10, 11, 12, and 13 — take precedence over README and all other documentation. If a conflict is found, flag it to the user rather than silently resolving it in favor of the README.
 
 ### **When Writing New Code**
 1. Read relevant sections from `papers/Paper_*.tex`
@@ -431,11 +438,14 @@ python debug/test_install.py
 | H (hydrogen) | < 0.1% | Basic validation |
 | He+ (helium ion) | < 0.1% | Z-scaling check |
 | H2+ (ionized H2) | < 0.1% | **Topological control** |
+| He (hyperspherical) | < 0.1% | **Multi-electron control** |
 | H2 Full CI | < 1.0% | **Accuracy control** |
+| H2 Neumann V_ee | 92.4% D_e | Algebraic integral accuracy |
 | Muonic H energy ratio | < 0.01% | Mass-independence |
 | Speed regression | < 10% | Performance control |
 | V_ee S³ overlap (1s-1s, 1s-2s, 2s-2s) | < 0.01% | Topological integrity |
 | Direct CI vs matrix CI (any system) | < 1e-8 Ha | Algorithmic consistency |
+| Hyperspherical He (20 tests) | 0 failures | Angular + adiabatic + radial |
 | LiH binding energy (CP-corrected) | report only | BSSE >> D_e at nmax=3 |
 
 ### **"Which paper has the physics I need?"**
@@ -462,11 +472,21 @@ python debug/test_install.py
 | Slater F⁰ master formula | Paper 7 | Sec VI.B | Core |
 | Node vs edge V_ee warning | Paper 7 | Sec VI.C | Core |
 | Excitation-driven Direct CI | K&H 1984 | `direct_ci.py` | Core |
+| Neumann V_ee expansion | Paper 12 | Sec III-V | Core |
+| Prolate spheroidal CI (H₂) | Paper 12 | Sec VI | Core |
+| Cusp diagnosis (7.6% gap) | Paper 12 | Sec VII | Core |
+| **Hyperspherical coordinates** | **Paper 13** | **Sec II** | **Core** |
+| Angular eigenvalue (Gaunt) | Paper 13 | Sec III | Core |
+| Adiabatic potential curves | Paper 13 | Sec IV | Core |
+| Fiber bundle structure | Paper 13 | Sec VII | Core |
+| Natural geometry hierarchy | Paper 13 | Sec VIII | Core |
+| Ab initio spectroscopy | Paper 13 | Sec IX | Core |
 
 ---
 
 ## 📖 Version History
 
+- **v2.5** (Mar 15, 2026): Added Papers 12, 13 to reference table; hyperspherical solver, Neumann V_ee, fiber bundle, ab initio spectroscopy; qubit encoding benchmarks
 - **v2.4** (Mar 7, 2026): Corrected sparse/dense rule to context-dependent; direct CI validated as O(N_SD × N_connected)
 - **v2.3** (Mar 6, 2026): Added excitation-driven Direct CI (Knowles-Handy 1984) references and algorithmic consistency tolerance
 - **v2.2** (Mar 6, 2026): Added V_ee S³ density-overlap (Paper 7 Sec VI) to theory reference table

@@ -1,0 +1,39 @@
+{
+  "title": "The Geometric Vacuum: Quantum Mechanics from Discrete Information Geometry (Papers 7, 11, 12, 13)",
+  "upload_type": "publication",
+  "publication_type": "workingpaper",
+  "description": "Four papers establishing the natural geometry hierarchy for quantum mechanics from discrete graph topology. Paper 7 proves that the discrete graph Laplacian on S^3 is mathematically equivalent to the Schrodinger equation (18/18 symbolic proofs). Paper 11 extends the framework to diatomic molecules via prolate spheroidal coordinates (H2+ at 0.70% error). Paper 12 introduces algebraic two-electron integrals via the Neumann expansion (H2 at 92.4% D_e). Paper 13 implements the hyperspherical adiabatic method for two-electron atoms (He at 0.05% error) and demonstrates ab initio molecular spectroscopy from electron lattice to rovibrational lines.",
+  "creators": [
+    {
+      "name": "Loutey, Josh",
+      "affiliation": "Independent Researcher, Kent, Washington"
+    }
+  ],
+  "keywords": [
+    "quantum mechanics",
+    "spectral graph theory",
+    "hydrogen atom",
+    "helium atom",
+    "information geometry",
+    "discrete lattice",
+    "molecular physics",
+    "hyperspherical coordinates",
+    "prolate spheroidal coordinates",
+    "Fock projection",
+    "natural geometry",
+    "fiber bundle"
+  ],
+  "license": {
+    "id": "CC-BY-4.0"
+  },
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/jloutey-hash/geovac",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "version": "1.1.0",
+  "language": "eng",
+  "access_right": "open"
+}

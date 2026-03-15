@@ -29,6 +29,15 @@ from geovac.prolate_spheroidal_lattice import (
 )
 from geovac.molecular_sturmian import _angular_sep_const
 
+try:
+    from geovac._numba_kernels import (
+        NUMBA_AVAILABLE as _NUMBA_AVAIL,
+        coulomb_potential_kernel,
+        vee_integral_kernel,
+    )
+except ImportError:
+    _NUMBA_AVAIL = False
+
 
 # ============================================================
 # Orbital generation on quadrature grid
@@ -215,11 +224,18 @@ def compute_vee_integral(
     W_2d = W_XI * W_ETA
 
     n_pts = len(xi) * len(eta)
-    rho_ac_flat = (rho_ac * J * W_2d).flatten()
-    rho_bd_flat = (rho_bd * J * W_2d).flatten()
-    rho_flat = rho_cyl.flatten()
-    z_flat = z_cyl.flatten()
+    rho_ac_flat = np.ascontiguousarray((rho_ac * J * W_2d).flatten())
+    rho_bd_flat = np.ascontiguousarray((rho_bd * J * W_2d).flatten())
+    rho_flat = np.ascontiguousarray(rho_cyl.flatten())
+    z_flat = np.ascontiguousarray(z_cyl.flatten())
 
+    # Numba fast path
+    if _NUMBA_AVAIL:
+        return vee_integral_kernel(
+            rho_ac_flat, rho_bd_flat, rho_flat, z_flat, n_pts
+        )
+
+    # Python/numpy fallback
     result = 0.0
     batch_size = 500
     n_batches = (n_pts + batch_size - 1) // batch_size
@@ -335,11 +351,17 @@ def compute_coulomb_potential(
     rho_cyl = (R / 2) * np.sqrt(np.maximum((XI ** 2 - 1) * (1 - ETA ** 2), 0.0))
     z_cyl = (R / 2) * XI * ETA
 
-    rho_w_flat = rho_weighted.flatten()
-    rho_flat = rho_cyl.flatten()
-    z_flat = z_cyl.flatten()
+    rho_w_flat = np.ascontiguousarray(rho_weighted.flatten())
+    rho_flat = np.ascontiguousarray(rho_cyl.flatten())
+    z_flat = np.ascontiguousarray(z_cyl.flatten())
     n_pts = N_xi * N_eta
 
+    # Numba fast path
+    if _NUMBA_AVAIL:
+        V_J = coulomb_potential_kernel(rho_w_flat, rho_flat, z_flat, n_pts)
+        return V_J.reshape(N_xi, N_eta)
+
+    # Python/numpy fallback
     V_J = np.zeros(n_pts)
     batch_size = 500
     n_batches = (n_pts + batch_size - 1) // batch_size
@@ -348,10 +370,10 @@ def compute_coulomb_potential(
         i_start = i_batch * batch_size
         i_end = min(i_start + batch_size, n_pts)
 
-        rho1 = rho_flat[i_start:i_end, np.newaxis]  # (batch, 1)
+        rho1 = rho_flat[i_start:i_end, np.newaxis]
         z1 = z_flat[i_start:i_end, np.newaxis]
 
-        rho2 = rho_flat[np.newaxis, :]  # (1, n_pts)
+        rho2 = rho_flat[np.newaxis, :]
         z2 = z_flat[np.newaxis, :]
 
         dz = z1 - z2
@@ -366,7 +388,6 @@ def compute_coulomb_potential(
         kernel = 4.0 * K_vals / np.sqrt(s_safe)
         kernel = np.where(s < 1e-30, 0.0, kernel)
 
-        # V_J[i] = sum_j rho_weighted[j] * kernel[i,j]
         V_J[i_start:i_end] = np.dot(kernel, rho_w_flat)
 
     return V_J.reshape(N_xi, N_eta)

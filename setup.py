@@ -27,6 +27,7 @@ setup(
         'numpy>=1.20.0',
         'scipy>=1.7.0',
         'networkx>=2.6.0',
+        'numba>=0.57.0',
     ],
     
     extras_require={

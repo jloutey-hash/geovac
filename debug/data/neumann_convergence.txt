@@ -1,0 +1,19 @@
+=== NEUMANN V_ee CONVERGENCE STUDY (COMPLETE) ===
+R = 1.4011, E_exact = -1.17475, D_e_exact = 0.1745
+
+Config      N   E_num       D_e%_num  t_num   E_neu       D_e%_neu  t_neu   dE
+j=0,l=0    1   -1.073192    41.9%      1s    -1.107907    61.8%      3s   -0.034716
+j=1,l=0    3   -1.083438    47.8%      8s    -1.115282    66.1%      9s   -0.031844
+j=1,l=1    6   -1.103485    59.3%     32s    -1.129606    74.3%     32s   -0.026121
+j=2,l=1   12   -1.107960    61.9%    152s    -1.132373    75.9%    131s   -0.024413
+j=2,l=2   27   -1.138836    79.6%    767s    -1.160961    92.2%    705s   -0.022125
+j=3,l=2   46   -1.139329    79.8%   2248s    -1.161162    92.4%   1907s   -0.021833
+j=3,l=3   72   -1.139792    80.1%   6076s    -1.161304    92.4%   5271s   -0.021512
+
+Key findings:
+1. Neumann (exact) V_ee gives 12-20 pp improvement over numerical V_ee at all basis sizes.
+2. Neumann plateaus at 92.4% D_e (27-72 bf). Remaining 7.6% is basis completeness, not V_ee.
+3. Numerical V_ee plateaus at ~80% D_e (grid-limited).
+4. Sweet spot: j=2,l=2 (27 bf) -- 92.2% in 705s. Diminishing returns beyond.
+
+Exact: E = -1.17475, D_e = 0.1745 Ha

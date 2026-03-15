@@ -342,5 +342,148 @@ class TestQuadratureGrids:
         assert abs(np.sum(grids['w_phi']) - 2 * np.pi) < 1e-10
 
 
+# ============================================================
+# Category 7: Numba acceleration
+# ============================================================
+
+class TestNumbaAcceleration:
+    """Tests for Numba-accelerated kernels vs pure Python."""
+
+    def _has_numba(self):
+        try:
+            from geovac._numba_kernels import NUMBA_AVAILABLE
+            return NUMBA_AVAILABLE
+        except ImportError:
+            return False
+
+    def test_numba_overlap_p0_consistency(self):
+        """Numba and Python overlap matrices match for p=0."""
+        if not self._has_numba():
+            pytest.skip("Numba not available")
+
+        from geovac.hylleraas import (
+            _compute_overlap_matrix_python,
+        )
+
+        basis = generate_basis(j_max=1, l_max=1, p_max=0, alpha=1.0)
+        grids = build_quadrature_grids(N_xi=10, N_eta=8, N_phi=8, xi_max=8.0)
+        R = 1.4
+
+        S_numba = compute_overlap_matrix(basis, R, grids, use_numba=True)
+        S_python = _compute_overlap_matrix_python(basis, R, grids)
+
+        assert np.allclose(S_numba, S_python, rtol=1e-6, atol=1e-10), (
+            f"Max diff: {np.max(np.abs(S_numba - S_python)):.2e}")
+
+    def test_numba_hamiltonian_p0_consistency(self):
+        """Numba and Python Hamiltonian matrices match for p=0."""
+        if not self._has_numba():
+            pytest.skip("Numba not available")
+
+        basis = generate_basis(j_max=1, l_max=0, p_max=0, alpha=1.0)
+        grids = build_quadrature_grids(N_xi=10, N_eta=8, N_phi=8, xi_max=8.0)
+        R = 1.4
+
+        H_numba = compute_hamiltonian_matrix(
+            basis, R, grids, use_numba=True)
+        H_python = compute_hamiltonian_matrix(
+            basis, R, grids, use_numba=False)
+
+        # Use larger tolerance for Hamiltonian due to ellipk approximation
+        assert np.allclose(H_numba, H_python, rtol=1e-4, atol=1e-8), (
+            f"Max diff: {np.max(np.abs(H_numba - H_python)):.2e}")
+
+    def test_numba_overlap_5d_consistency(self):
+        """Numba and Python overlap matrices match for p>0."""
+        if not self._has_numba():
+            pytest.skip("Numba not available")
+
+        from geovac.hylleraas import (
+            _compute_overlap_matrix_python,
+        )
+
+        basis = generate_basis(j_max=1, l_max=0, p_max=1, alpha=1.0)
+        grids = build_quadrature_grids(N_xi=8, N_eta=6, N_phi=8, xi_max=8.0)
+        R = 1.4
+
+        S_numba = compute_overlap_matrix(basis, R, grids, use_numba=True)
+        S_python = _compute_overlap_matrix_python(basis, R, grids)
+
+        assert np.allclose(S_numba, S_python, rtol=1e-6, atol=1e-10), (
+            f"Max diff: {np.max(np.abs(S_numba - S_python)):.2e}")
+
+    def test_numba_energy_consistency(self):
+        """Numba and Python give the same ground state energy."""
+        if not self._has_numba():
+            pytest.skip("Numba not available")
+
+        basis = generate_basis(j_max=1, l_max=0, p_max=0, alpha=1.0)
+        grids = build_quadrature_grids(N_xi=12, N_eta=8, N_phi=8, xi_max=10.0)
+
+        result_numba = solve_hylleraas(basis, R=1.4, grids=grids, verbose=False)
+        # Force Python path
+        S_py = compute_overlap_matrix(basis, 1.4, grids, use_numba=False)
+        H_py = compute_hamiltonian_matrix(basis, 1.4, grids, use_numba=False)
+        V_NN = 1.0 / 1.4
+        from scipy.linalg import eigh as _eigh
+        evals_py, _ = _eigh(H_py + V_NN * S_py, S_py)
+        E_py = evals_py[0]
+
+        assert abs(result_numba['E_total'] - E_py) < 1e-4, (
+            f"Energy mismatch: numba={result_numba['E_total']:.6f}, "
+            f"python={E_py:.6f}")
+
+    def test_numba_speedup_overlap(self):
+        """Numba overlap is at least 10x faster than Python for p=0."""
+        if not self._has_numba():
+            pytest.skip("Numba not available")
+
+        from geovac._numba_kernels import warmup_hylleraas_jit
+        from geovac.hylleraas import (
+            _compute_overlap_matrix_python,
+        )
+
+        # Warmup JIT
+        warmup_hylleraas_jit()
+
+        basis = generate_basis(j_max=1, l_max=1, p_max=0, alpha=1.0)
+        grids = build_quadrature_grids(N_xi=14, N_eta=10, N_phi=8, xi_max=10.0)
+        R = 1.4
+
+        import time
+
+        # Python timing
+        t0 = time.perf_counter()
+        _compute_overlap_matrix_python(basis, R, grids)
+        dt_python = time.perf_counter() - t0
+
+        # Numba timing
+        t0 = time.perf_counter()
+        compute_overlap_matrix(basis, R, grids, use_numba=True)
+        dt_numba = time.perf_counter() - t0
+
+        ratio = dt_python / max(dt_numba, 1e-9)
+        assert ratio > 10, (
+            f"Numba speedup only {ratio:.1f}x "
+            f"(python={dt_python:.3f}s, numba={dt_numba:.3f}s)")
+
+    def test_ellipk_approximation_accuracy(self):
+        """Elliptic K approximation matches scipy to < 1e-6."""
+        if not self._has_numba():
+            pytest.skip("Numba not available")
+
+        from geovac._numba_kernels import _ellipk_approx
+        from scipy.special import ellipk as scipy_ellipk
+
+        test_vals = [0.0, 0.1, 0.3, 0.5, 0.7, 0.9, 0.95, 0.99]
+        for m in test_vals:
+            K_approx = _ellipk_approx(m)
+            K_exact = scipy_ellipk(m)
+            rel_err = abs(K_approx - K_exact) / K_exact
+            assert rel_err < 1e-6, (
+                f"ellipk({m}): approx={K_approx:.10f}, "
+                f"exact={K_exact:.10f}, rel_err={rel_err:.2e}")
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v', '--tb=short'])

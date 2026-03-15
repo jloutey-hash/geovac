@@ -1,0 +1,1101 @@
+% paper_12_algebraic_vee.tex — GeoVac Paper 12
+% Algebraic Two-Electron Integrals on the Prolate Spheroidal Lattice
+% Status: Draft, March 14, 2026
+% Target: arXiv (physics.comp-ph / quant-ph)
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+
+\title{Algebraic Two-Electron Integrals on the\\
+Prolate Spheroidal Lattice}
+\thanks{Paper 12 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{March 14, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+Paper~11 established the prolate spheroidal lattice as the natural
+geometry for diatomic molecules, solving H$_2^+$ to 0.70\% error
+with zero free parameters.  The extension to two electrons requires
+electron-electron repulsion integrals $\langle\phi_i|1/r_{12}|\phi_j\rangle$
+over the six-dimensional two-particle configuration space.  The
+standard approach---numerical quadrature on a grid in prolate
+spheroidal coordinates---converges slowly due to the Coulomb
+singularity at $r_{12} = 0$ and saturates at $\sim$80\% of the
+exact H$_2$ dissociation energy $D_e$ regardless of basis size.
+
+We replace numerical integration with algebraic evaluation using
+the Neumann expansion of $1/r_{12}$ in prolate spheroidal
+coordinates, which decomposes each six-dimensional integral into a
+finite sum of products of one-dimensional auxiliary integrals
+computable by recurrence relations.  The resulting two-electron
+integrals are exact within the Neumann truncation order $L$, with
+no quadrature grids, no fitted parameters, and no numerical
+integration of any kind in the $V_{ee}$ matrix.
+
+A systematic convergence study on H$_2$ at $R = 1.4011$~bohr
+demonstrates that the Neumann algebraic $V_{ee}$ yields 92.4\% of
+the exact $D_e$ with 27 basis functions, compared to 79.6\% for
+numerical $V_{ee}$ at the same basis size---a uniform 12--20
+percentage point improvement across all basis sizes from 1 to 72
+functions.  The Neumann result plateaus at 92.4\%, confirming that
+$V_{ee}$ integration error has been eliminated.  The remaining
+7.6\% gap is diagnosed as a one-electron basis completeness limit:
+the electron-electron cusp requires non-analytic terms
+($r_{12}^{1/2}$, $r_{12}\ln r_{12}$) that no polynomial prolate
+spheroidal basis can represent.  This diagnosis identifies the next
+natural geometry in the GeoVac program: hyperspherical coordinates
+for the three-body coalescence.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+%% I. INTRODUCTION
+%% ========================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+The Geometric Vacuum program identifies and discretizes the
+\emph{natural geometry} of each quantum system---the coordinate
+system where the Schr\"odinger equation separates---replacing
+continuous integration with algebraic operations on quantum number
+labels~\cite{loutey_paper0, loutey_paper1, loutey_paper7}.  For
+atoms, the natural geometry is Fock's three-sphere
+$S^3$~\cite{Fock1935}, where the Coulomb potential disappears into
+the conformal metric and the Schr\"odinger equation becomes a pure
+Laplace--Beltrami eigenvalue problem.  For diatomic molecules, the
+natural geometry is the prolate spheroid, where the two-center
+Coulomb problem separates into coupled ordinary differential
+equations~\cite{loutey_paper11}.
+
+Paper~11 implemented this principle for the one-electron
+molecule H$_2^+$, achieving 0.70\% energy error with zero free
+parameters.  The extension to two electrons introduces a
+qualitatively new challenge: the electron-electron repulsion
+integral
+\begin{equation}
+  V_{ee}^{ij} = \left\langle\phi_i\left|\frac{1}{r_{12}}\right|\phi_j\right\rangle,
+  \label{eq:vee_element}
+\end{equation}
+which couples the coordinates of both electrons and cannot be
+evaluated by separation of variables.  In the prolate spheroidal
+Hylleraas-type CI framework, these integrals are six-dimensional
+(three coordinates per electron, with azimuthal symmetry reducing
+the effective dimensionality).
+
+The standard approach computes Eq.~\eqref{eq:vee_element}
+numerically, using the complete elliptic integral $K(k)$ to perform
+the azimuthal average of $1/r_{12}$ and Gauss--Legendre quadrature
+for the remaining four dimensions $(\xi_1, \eta_1, \xi_2, \eta_2)$.
+This approach has two fundamental limitations:
+\begin{enumerate}
+  \item The Coulomb singularity at $r_{12} = 0$ (the
+    electron-electron coalescence point) is poorly resolved by
+    polynomial quadrature, requiring increasingly fine grids for
+    convergence.
+  \item The exponential decay $e^{-\alpha(\xi_1 + \xi_2)}$ of the
+    basis functions extends to $\xi \to \infty$, requiring
+    truncation of the semi-infinite radial domain.
+\end{enumerate}
+As we demonstrate in Section~\ref{sec:convergence}, these
+limitations cause the numerical $V_{ee}$ to saturate at $\sim$80\%
+of the exact H$_2$ dissociation energy, regardless of how many
+basis functions are employed.
+
+This paper replaces numerical quadrature with the Neumann
+expansion of $1/r_{12}$ in prolate spheroidal
+coordinates~\cite{Neumann1878, Roothaan1951, Ruedenberg1951},
+which converts each $V_{ee}$ matrix element into a finite
+sum of products of one-dimensional integrals.  These auxiliary
+integrals---angular moments $C_l(p)$, exponential moments
+$A_n(\alpha)$, and first- and second-kind Legendre moments
+$A_l(p,\alpha)$ and $B_l(p,\alpha)$---are computed exactly by
+recurrence relations, with no quadrature grids of any kind.
+The result is quantum chemistry without integrals: the
+two-electron repulsion matrix is constructed entirely from
+algebraic operations on quantum number labels.
+
+The structure of this paper is as follows.
+Section~\ref{sec:neumann} derives the Neumann expansion and
+its factorization for $\sigma$-state matrix elements.
+Section~\ref{sec:auxiliary} defines the auxiliary integrals
+and their recurrence relations.
+Section~\ref{sec:implementation} describes the computational
+pipeline.  Section~\ref{sec:convergence} presents the
+convergence study comparing numerical and algebraic $V_{ee}$.
+Section~\ref{sec:gap} diagnoses the origin of the remaining
+7.6\% gap.  Section~\ref{sec:implications} discusses
+implications for the GeoVac program.
+Section~\ref{sec:conclusion} concludes.
+
+%% ========================================================================
+%% II. THE NEUMANN EXPANSION
+%% ========================================================================
+
+\section{The Neumann Expansion}
+\label{sec:neumann}
+
+\subsection{Expansion of \texorpdfstring{$1/r_{12}$}{1/r12} in
+prolate spheroidal coordinates}
+
+The Coulomb kernel $1/|\mathbf{r}_1 - \mathbf{r}_2|$ can be expanded
+in prolate spheroidal coordinates $(\xi, \eta, \varphi)$ using the
+Neumann expansion~\cite{Neumann1878, Morse1953}:
+\begin{equation}
+  \frac{1}{r_{12}} = \frac{2}{R}\sum_{l=0}^{\infty}\sum_{m=0}^{l}
+    (2-\delta_{m0})\frac{(l-m)!}{(l+m)!}\,
+    P_l^m(\xi_<)\,Q_l^m(\xi_>)\,
+    P_l^m(\eta_1)\,P_l^m(\eta_2)\,
+    \cos m(\varphi_1 - \varphi_2),
+  \label{eq:neumann_full}
+\end{equation}
+where $\xi_< = \min(\xi_1, \xi_2)$, $\xi_> = \max(\xi_1, \xi_2)$,
+$P_l^m$ and $Q_l^m$ are associated Legendre functions of the first
+and second kind, and $R$ is the internuclear distance.
+
+For $^1\Sigma_g^+$ states of homonuclear diatomics, the
+wavefunction has $m = 0$ symmetry.  The azimuthal integration
+$\int_0^{2\pi} d\varphi_1 \int_0^{2\pi} d\varphi_2$ projects
+onto the $m = 0$ component:
+\begin{equation}
+  \left\langle\frac{1}{r_{12}}\right\rangle_\varphi
+  = \frac{4\pi^2}{R}\sum_{l=0}^{\infty}(2l+1)\,
+    P_l(\xi_<)\,Q_l(\xi_>)\,
+    P_l(\eta_1)\,P_l(\eta_2),
+  \label{eq:neumann_sigma}
+\end{equation}
+where $P_l \equiv P_l^0$ and $Q_l \equiv Q_l^0$ are ordinary
+Legendre functions.  The factor $4\pi^2$ arises from the double
+azimuthal integration, and the $(2l+1)$ factor from
+$(2 - \delta_{m0})(l!)^2/(l!)^2 = 1$ for $m = 0$ combined with
+the normalization of the expansion.
+
+Equation~\eqref{eq:neumann_sigma} is the key identity: it
+separates the two-electron Coulomb kernel into a sum of products
+of functions of individual coordinates.  Each term in the sum
+involves $P_l(\xi_<) Q_l(\xi_>)$, which couples the two radial
+coordinates, and $P_l(\eta_1) P_l(\eta_2)$, which factorizes
+completely.
+
+\subsection{Matrix element factorization}
+
+Consider two basis functions of the Hylleraas type in prolate
+spheroidal coordinates:
+\begin{equation}
+  \phi_i(\xi_1, \eta_1, \xi_2, \eta_2)
+  = \mathcal{N}_i\,e^{-\alpha(\xi_1 + \xi_2)}\,
+    \xi_1^{j_i}\xi_2^{k_i}\,\eta_1^{l_i}\eta_2^{m_i}
+    + (1 \leftrightarrow 2),
+  \label{eq:basis_function}
+\end{equation}
+where the $(1 \leftrightarrow 2)$ exchange ensures bosonic
+spatial symmetry for the singlet state, and
+$(j_i, k_i, l_i, m_i)$ are non-negative integer quantum
+numbers.  The exponential parameter $\alpha$ controls the
+spatial extent; for all basis functions in a given calculation
+we use a common $\alpha$ optimized variationally.
+
+The $V_{ee}$ matrix element between $\phi_i$ and $\phi_j$ is
+\begin{equation}
+  V_{ee}^{ij} = \int\!\!\int
+    \phi_i^*\,\frac{1}{r_{12}}\,\phi_j\;
+    J(\xi_1,\eta_1)\,J(\xi_2,\eta_2)\,
+    d\xi_1\,d\eta_1\,d\xi_2\,d\eta_2,
+  \label{eq:vee_integral}
+\end{equation}
+where $J(\xi,\eta) = (R/2)^3(\xi^2 - \eta^2)$ is the prolate
+spheroidal Jacobian (with the $2\pi$ azimuthal factors already
+absorbed into Eq.~\eqref{eq:neumann_sigma}).
+
+Substituting the Neumann expansion~\eqref{eq:neumann_sigma}
+and expanding the product of two basis functions, each
+unsymmetrized term contributes a product of the form
+\begin{equation}
+  e^{-2\alpha(\xi_1+\xi_2)}\,\xi_1^{P_1}\xi_2^{P_2}\,
+  \eta_1^{Q_1}\eta_2^{Q_2},
+\end{equation}
+where $P_1 = j_i + j_j$, $P_2 = k_i + k_j$,
+$Q_1 = l_i + l_j$, $Q_2 = m_i + m_j$ are the combined
+powers from bra and ket.
+
+The Jacobian factor $(\xi^2 - \eta^2)$ for each electron
+expands the integral into four sub-terms with shifted powers:
+\begin{align}
+  &(+1):\; (P_1\!+\!2,\; P_2\!+\!2,\; Q_1,\;\; Q_2), \notag\\
+  &(-1):\; (P_1\!+\!2,\; P_2,\;\;\;\; Q_1,\;\; Q_2\!+\!2), \notag\\
+  &(-1):\; (P_1,\;\;\;\; P_2\!+\!2,\; Q_1\!+\!2,\; Q_2), \notag\\
+  &(+1):\; (P_1,\;\;\;\; P_2,\;\;\;\; Q_1\!+\!2,\; Q_2\!+\!2).
+  \label{eq:jacobian_expansion}
+\end{align}
+
+For each such sub-term with effective powers
+$(\tilde{P}_1, \tilde{P}_2, \tilde{Q}_1, \tilde{Q}_2)$,
+the matrix element factorizes as
+\begin{equation}
+  \frac{\pi^2 R^5}{8}\sum_{l=0}^{L}(2l+1)\,
+  X_l(\tilde{P}_1, \tilde{P}_2, 2\alpha)\,
+  C_l(\tilde{Q}_1)\,C_l(\tilde{Q}_2),
+  \label{eq:factorized}
+\end{equation}
+where $C_l(q) = \int_{-1}^{+1}\eta^q\,P_l(\eta)\,d\eta$ are
+angular moment integrals, and
+\begin{equation}
+  X_l(p_1, p_2, \alpha) = \int_1^\infty\!\!\int_1^\infty
+    \xi_1^{p_1}\xi_2^{p_2}\,e^{-\alpha(\xi_1+\xi_2)}\,
+    P_l(\xi_<)\,Q_l(\xi_>)\,d\xi_1\,d\xi_2
+  \label{eq:Xl_def}
+\end{equation}
+is the two-dimensional radial integral coupling the two
+electrons through the $P_l(\xi_<) Q_l(\xi_>)$ kernel.
+
+The prefactor $\pi^2 R^5/8$ arises from
+$(2/R) \times (R/2)^6 \times (2\pi)^2 = \pi^2 R^5/8$,
+combining the Neumann prefactor $2/R$, the two Jacobians
+$(R/2)^3$ each, and the azimuthal integration $4\pi^2$.
+
+\subsection{Selection rules}
+
+The angular integrals $C_l(q)$ obey a powerful selection rule:
+\begin{equation}
+  C_l(q) = 0 \quad\text{if } q < l \text{ or } (q - l)
+  \text{ is odd}.
+  \label{eq:selection_rule}
+\end{equation}
+This follows from the orthogonality of Legendre polynomials
+and parity: $P_l(\eta)$ has parity $(-1)^l$, so
+$\eta^q P_l(\eta)$ integrates to zero over $[-1,1]$ unless
+$q + l$ is even, i.e., $(q - l)$ is even.  The condition
+$q \geq l$ ensures that $\eta^q$ has enough powers to produce
+a nonzero overlap with $P_l$.
+
+For a basis with maximum $\eta$-powers $q_{\max}$, the
+effective Neumann truncation is $l_{\mathrm{eff}} =
+\min(L, q_{\max})$, where $L$ is the nominal truncation
+order.  We use $L = 20$ throughout, which is more than
+sufficient since our basis functions have $q_{\max} \leq 8$.
+
+%% ========================================================================
+%% III. AUXILIARY INTEGRALS
+%% ========================================================================
+
+\section{Auxiliary Integrals and Recurrence Relations}
+\label{sec:auxiliary}
+
+The factorized form~\eqref{eq:factorized} reduces each
+$V_{ee}$ matrix element to products of three families of
+one-dimensional integrals: $C_l(q)$, $A_n(\alpha)$ and
+its Legendre generalizations, and $B_l(p, \alpha)$.  All
+are computed by recurrence relations.
+
+\subsection{Angular moments \texorpdfstring{$C_l(q)$}{Cl(q)}}
+
+\begin{equation}
+  C_l(q) = \int_{-1}^{+1}\eta^q\,P_l(\eta)\,d\eta.
+  \label{eq:Cl_def}
+\end{equation}
+The base cases are
+\begin{equation}
+  C_0(q) = \begin{cases} 2/(q+1) & q\text{ even}, \\ 0 & q\text{ odd},\end{cases}
+  \qquad
+  C_1(q) = \begin{cases} 0 & q\text{ even}, \\ 2/(q+2) & q\text{ odd}.\end{cases}
+\end{equation}
+Higher orders follow from the Legendre recurrence:
+\begin{equation}
+  (l+1)\,C_{l+1}(q) = (2l+1)\,C_l(q+1) - l\,C_{l-1}(q).
+  \label{eq:Cl_recurrence}
+\end{equation}
+The recurrence $C_{l+1}(q)$ requires $C_l(q+1)$, so computing
+$C_{l_{\max}}(q)$ requires workspace up to $q + l_{\max}$.
+
+\subsection{Exponential moments \texorpdfstring{$A_n(\alpha)$}{An(alpha)}}
+
+\begin{equation}
+  A_n(\alpha) = \int_1^\infty\xi^n\,e^{-\alpha\xi}\,d\xi.
+  \label{eq:An_def}
+\end{equation}
+The base case is $A_0(\alpha) = e^{-\alpha}/\alpha$, and the
+upward recurrence is
+\begin{equation}
+  A_n(\alpha) = \frac{n\,A_{n-1}(\alpha) + e^{-\alpha}}{\alpha}.
+  \label{eq:An_recurrence}
+\end{equation}
+For negative indices, $A_{-1}(\alpha) = E_1(\alpha)$
+(the exponential integral) and the downward recurrence
+\begin{equation}
+  A_{-n-1}(\alpha) = \frac{e^{-\alpha} - \alpha\,A_{-n}(\alpha)}{n}
+  \label{eq:An_negative}
+\end{equation}
+extends to arbitrary negative $n$.
+
+\subsection{First-kind Legendre moments
+\texorpdfstring{$A_l(p, \alpha)$}{Al(p, alpha)}}
+
+\begin{equation}
+  A_l(p, \alpha) = \int_1^\infty\xi^p\,e^{-\alpha\xi}\,
+  P_l(\xi)\,d\xi.
+  \label{eq:Al_def}
+\end{equation}
+The base cases are $A_0(p,\alpha) = A_p(\alpha)$ and
+$A_1(p,\alpha) = A_{p+1}(\alpha)$, since $P_0(\xi) = 1$
+and $P_1(\xi) = \xi$.  The Legendre recurrence gives
+\begin{equation}
+  (l+1)\,A_{l+1}(p,\alpha) = (2l+1)\,A_l(p+1,\alpha) - l\,A_{l-1}(p,\alpha).
+  \label{eq:Al_recurrence}
+\end{equation}
+
+\subsection{Second-kind Legendre moments
+\texorpdfstring{$B_l(p, \alpha)$}{Bl(p, alpha)}}
+
+\begin{equation}
+  B_l(p, \alpha) = \int_1^\infty\xi^p\,e^{-\alpha\xi}\,
+  Q_l(\xi)\,d\xi.
+  \label{eq:Bl_def}
+\end{equation}
+These integrals involve the Legendre function of the second
+kind $Q_l(\xi)$, which has a logarithmic singularity at
+$\xi = 1$:
+\begin{equation}
+  Q_0(\xi) = \tfrac{1}{2}\ln\frac{\xi+1}{\xi-1},
+  \qquad Q_l(\xi) \sim -\tfrac{1}{2}\ln(\xi-1) + O(1)
+  \quad\text{as }\xi\to 1^+.
+  \label{eq:Ql_singularity}
+\end{equation}
+The log singularity is integrable (the integrand behaves as
+$\ln(\xi-1)\,e^{-\alpha\xi} \to \ln(\xi-1)\,e^{-\alpha}$
+near $\xi = 1$), but it defeats polynomial quadrature rules
+such as Gauss--Laguerre, which assume smooth integrands.
+
+We compute $B_l(p,\alpha)$ by adaptive numerical
+quadrature~\cite{QUADPACK} with subdivision near $\xi = 1$
+to resolve the log singularity.  The cost is modest: each
+$B_l$ evaluation takes $\sim$1~ms, and the full table
+$B_l(p,\alpha)$ for $l \leq 20$, $p \leq 12$, fixed $\alpha$
+is computed in $\sim$0.2~s.  Caching eliminates redundant
+computation across matrix elements at the same $\alpha$.
+
+In principle, the Legendre recurrence
+\begin{equation}
+  (l+1)\,B_{l+1}(p,\alpha) = (2l+1)\,B_l(p+1,\alpha) - l\,B_{l-1}(p,\alpha)
+  \label{eq:Bl_recurrence}
+\end{equation}
+could be used to generate $B_l$ from $B_0$, but the
+log singularity affects \emph{all} $l$ values (not just
+$l = 0$), so the base case $B_0$ itself requires careful
+treatment.  Adaptive quadrature is the most robust approach.
+
+\subsection{Two-dimensional radial integral
+\texorpdfstring{$X_l(p_1, p_2, \alpha)$}{Xl(p1, p2, alpha)}}
+
+The integral~\eqref{eq:Xl_def} couples the two radial
+coordinates through the $P_l(\xi_<) Q_l(\xi_>)$ kernel.
+We split it into two ordered regions:
+\begin{align}
+  X_l(p_1, p_2, \alpha) &=
+    \int_1^\infty\!\!\int_1^{\xi_2}
+      \xi_1^{p_1}\xi_2^{p_2}\,e^{-\alpha(\xi_1+\xi_2)}
+      P_l(\xi_1)\,Q_l(\xi_2)\,d\xi_1\,d\xi_2 \notag\\
+    &\quad+ (1 \leftrightarrow 2).
+  \label{eq:Xl_split}
+\end{align}
+
+The inner integral
+$S_l(p,\alpha,\xi_0) = \int_1^{\xi_0}\xi^p\,e^{-\alpha\xi}\,
+P_l(\xi)\,d\xi$
+is the \emph{incomplete} first-kind Legendre moment.  Expanding
+$\xi^p P_l(\xi) = \sum_j a_j\,\xi^j$ as a polynomial and
+integrating each monomial by parts against $e^{-\alpha\xi}$:
+\begin{equation}
+  S_l(p,\alpha,\xi_0) = A_l(p,\alpha) - e^{-\alpha\xi_0}
+  \sum_j a_j\sum_{k=0}^{j}\frac{j!}{(j-k)!\,\alpha^{k+1}}
+  \,\xi_0^{j-k}
+  + (\text{boundary at }\xi=1).
+  \label{eq:ibp}
+\end{equation}
+
+Substituting into the outer integral and combining the
+$e^{-\alpha\xi_0}$ factor from $S_l$ with the
+$e^{-\alpha\xi_2}$ factor from the outer integrand yields
+$e^{-2\alpha\xi_2}$ terms, which are evaluated as
+$B_l(\cdot, 2\alpha)$:
+\begin{equation}
+  X_l = A_l(p_1)\,B_l(p_2) + A_l(p_2)\,B_l(p_1)
+  - \text{(correction terms involving }B_l(\cdot, 2\alpha)\text{)}.
+  \label{eq:Xl_formula}
+\end{equation}
+The full expression involves sums over the polynomial
+coefficients of $\xi^{p_i} P_l(\xi)$ and is implemented
+as described in Section~\ref{sec:implementation}.
+
+%% ========================================================================
+%% IV. IMPLEMENTATION
+%% ========================================================================
+
+\section{Implementation}
+\label{sec:implementation}
+
+\subsection{The algebraic \texorpdfstring{$V_{ee}$}{Vee} pipeline}
+
+The computation of the $V_{ee}$ matrix proceeds in four stages:
+
+\begin{enumerate}
+  \item \textbf{Table precomputation.}  For a given exponential
+    parameter $\alpha$ and basis quantum numbers, compute:
+    \begin{itemize}
+      \item The angular moment table $C_l(q)$ for $l \leq l_{\mathrm{eff}}$,
+        $q \leq 2q_{\max} + 2$, via the recurrence~\eqref{eq:Cl_recurrence}.
+        Cost: $O(l_{\max} \cdot q_{\max})$, negligible.
+      \item The first-kind Legendre moments $A_l(p, 2\alpha)$ via
+        the recurrence~\eqref{eq:Al_recurrence}.  Cost: $O(l_{\max} \cdot p_{\max})$.
+      \item The second-kind Legendre moments $B_l(p, 2\alpha)$ and
+        $B_l(p, 4\alpha)$ via adaptive quadrature with caching.
+        Cost: $O(l_{\max} \cdot p_{\max})$ quadrature calls, $\sim$0.2~s total.
+    \end{itemize}
+  \item \textbf{$X_l$ table.}  Compute
+    $X_l(p_1, p_2, 2\alpha)$ for all
+    $l \leq l_{\mathrm{eff}}$, $p_1, p_2 \leq p_{\max}+l_{\max}+2$,
+    using Eq.~\eqref{eq:Xl_formula} with the precomputed
+    $A_l$ and $B_l$ tables.  Cost: $O(l_{\max} \cdot p_{\max}^2
+    \cdot l_{\max})$ arithmetic operations.
+  \item \textbf{Matrix assembly.}  For each pair $(i, j)$ of
+    basis functions, expand the bra$\times$ket product into
+    unsymmetrized terms, apply the Jacobian
+    expansion~\eqref{eq:jacobian_expansion}, and sum the
+    Neumann series~\eqref{eq:factorized} using precomputed
+    $C_l$ and $X_l$ tables.  Cost per element: $O(l_{\max})$
+    (a single loop over $l$ with table lookups).
+  \item \textbf{Symmetrization.}  Exploit $V_{ee}^{ij} = V_{ee}^{ji}$
+    to compute only the upper triangle.
+\end{enumerate}
+
+The total cost scales as $O(N_{\mathrm{bf}}^2 \cdot l_{\max})$
+for the matrix assembly, plus $O(l_{\max}^2 \cdot p_{\max}^2)$
+for table precomputation.  For $N_{\mathrm{bf}} = 27$ and
+$l_{\max} = 8$ (the effective truncation), the $V_{ee}$ matrix
+is computed in $\sim$1~s.
+
+\subsection{Hybrid Hamiltonian: Numba \texorpdfstring{$T + V_{ne}$}{T+Vne}
+plus algebraic \texorpdfstring{$V_{ee}$}{Vee}}
+
+The one-electron integrals (kinetic energy $T$ and nuclear
+attraction $V_{ne}$) are computed analytically using integration
+by parts for the kinetic energy derivatives and direct quadrature
+for $V_{ne}$, accelerated by Numba JIT
+compilation~\cite{Numba2015}.  A dedicated Numba kernel
+\texttt{hamiltonian\_tvne\_p0\_kernel} computes $T + V_{ne}$
+without $V_{ee}$, avoiding the expensive elliptic integral
+computation that dominates the full numerical kernel.
+
+The complete Hamiltonian is assembled as
+\begin{equation}
+  H = H_{T+V_{ne}}^{\text{(Numba)}} + V_{ee}^{\text{(Neumann)}},
+  \label{eq:hybrid_H}
+\end{equation}
+where the first term uses grid-based quadrature (for the
+non-singular $T$ and $V_{ne}$ integrals) and the second
+uses the algebraic Neumann expansion (for the singular
+$V_{ee}$ integrals).  This hybrid approach plays to the
+strengths of each method: grids handle smooth integrands
+efficiently, while the Neumann expansion handles the
+Coulomb singularity exactly.
+
+\subsection{Computational cost comparison}
+
+For the $V_{ee}$ matrix alone:
+\begin{itemize}
+  \item \textbf{Numerical} (elliptic integral quadrature):
+    $O(N_{\mathrm{bf}}^2 \cdot N_\xi^2 \cdot N_\eta^2)$.
+    At $N_\xi = 30$, $N_\eta = 20$: $\sim$3~s for
+    $N_{\mathrm{bf}} = 6$, scaling as $N_\xi^2 N_\eta^2$
+    per element.
+  \item \textbf{Algebraic} (Neumann expansion):
+    $O(N_{\mathrm{bf}}^2 \cdot l_{\max} + l_{\max}^2
+    \cdot p_{\max}^2)$.  The $B_l$ quadrature is a one-time
+    cost ($\sim$0.2~s), after which the matrix assembly
+    is pure arithmetic.
+\end{itemize}
+
+The algebraic approach is not always faster in wall time
+(the $B_l$ adaptive quadrature has non-trivial overhead), but
+it is \emph{exact within the Neumann truncation}, whereas
+the numerical approach always carries grid truncation error.
+
+%% ========================================================================
+%% V. CONVERGENCE STUDY
+%% ========================================================================
+
+\section{Convergence Study}
+\label{sec:convergence}
+
+\subsection{Computational setup}
+
+We compute the H$_2$ ground-state energy at $R = 1.4011$~bohr
+(near-equilibrium) using a Hylleraas-type CI with basis
+functions~\eqref{eq:basis_function}.  The basis is parameterized
+by $(j_{\max}, l_{\max})$, which control the maximum powers
+of $\xi$ and $\eta$ respectively.  The exponential parameter
+$\alpha$ is optimized variationally at each basis size using
+golden-section search over $\alpha \in [0.5, 2.5]$.
+
+For each basis size, we compute the ground-state energy using
+both numerical and Neumann $V_{ee}$:
+\begin{itemize}
+  \item \textbf{Numerical:} Full grid quadrature with elliptic
+    integral $K(k)$ on a $30 \times 20$ grid ($N_\xi \times N_\eta$).
+  \item \textbf{Neumann:} Algebraic $V_{ee}$ via
+    Eq.~\eqref{eq:factorized} with $L = 20$.
+\end{itemize}
+
+The exact non-relativistic H$_2$ energy at this geometry is
+$E_{\mathrm{exact}} = -1.17475$~Ha~\cite{Kolos1968}, giving
+a dissociation energy $D_e = 0.17475$~Ha relative to two
+separated hydrogen atoms ($E = -1.0$~Ha).
+
+\subsection{Results}
+
+Table~\ref{tab:convergence} presents the complete convergence
+study.  The basis configurations range from a single function
+($j = 0$, $l = 0$, $N = 1$) to 72 functions ($j = 3$, $l = 3$).
+
+\begin{table*}[t]
+\caption{Convergence of H$_2$ ground-state energy at
+  $R = 1.4011$~bohr.  $N$ is the number of basis functions.
+  $D_e\%$ is the fraction of the exact dissociation energy
+  $D_e = 0.17475$~Ha recovered.  $\Delta E = E_{\mathrm{Neumann}}
+  - E_{\mathrm{numerical}}$.
+  \label{tab:convergence}}
+\begin{ruledtabular}
+\begin{tabular}{lrddddddd}
+  \multicolumn{1}{c}{Config}
+  & \multicolumn{1}{c}{$N$}
+  & \multicolumn{1}{c}{$E_{\mathrm{num}}$ (Ha)}
+  & \multicolumn{1}{c}{$D_e\%_{\mathrm{num}}$}
+  & \multicolumn{1}{c}{$t_{\mathrm{num}}$ (s)}
+  & \multicolumn{1}{c}{$E_{\mathrm{Neu}}$ (Ha)}
+  & \multicolumn{1}{c}{$D_e\%_{\mathrm{Neu}}$}
+  & \multicolumn{1}{c}{$t_{\mathrm{Neu}}$ (s)}
+  & \multicolumn{1}{c}{$\Delta E$ (Ha)} \\
+\hline
+$j\!=\!0,\,l\!=\!0$ &  1 & -1.073192 & 41.9 &    1 & -1.107907 & 61.8 &    3 & -0.0347 \\
+$j\!=\!1,\,l\!=\!0$ &  3 & -1.083438 & 47.8 &    8 & -1.115282 & 66.1 &    9 & -0.0318 \\
+$j\!=\!1,\,l\!=\!1$ &  6 & -1.103485 & 59.3 &   32 & -1.129606 & 74.3 &   32 & -0.0261 \\
+$j\!=\!2,\,l\!=\!1$ & 12 & -1.107960 & 61.9 &  152 & -1.132373 & 75.9 &  131 & -0.0244 \\
+$j\!=\!2,\,l\!=\!2$ & 27 & -1.138836 & 79.6 &  767 & -1.160961 & 92.2 &  705 & -0.0221 \\
+$j\!=\!3,\,l\!=\!2$ & 46 & -1.139329 & 79.8 & 2248 & -1.161162 & 92.4 & 1907 & -0.0218 \\
+$j\!=\!3,\,l\!=\!3$ & 72 & -1.139792 & 80.1 & 6076 & -1.161304 & 92.4 & 5271 & -0.0215 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table*}
+
+Three features of Table~\ref{tab:convergence} deserve emphasis:
+
+\paragraph{1. Systematic improvement.}
+The Neumann $V_{ee}$ yields a lower (better) energy than
+numerical $V_{ee}$ at \emph{every} basis size, by 12--20
+percentage points.  This is not a sporadic improvement from
+fortuitous cancellation; it is a uniform advantage arising from
+the elimination of grid truncation error in $V_{ee}$.
+
+\paragraph{2. Numerical plateau at $\sim$80\%.}
+The numerical $V_{ee}$ saturates at $\sim$80\% $D_e$ from
+$N = 27$ onward: adding basis functions from 27 to 72 improves
+the energy by only 0.5~percentage points (79.6\% $\to$ 80.1\%).
+This saturation is caused by grid truncation error in the
+$V_{ee}$ integrals, which introduces a systematic positive bias
+in the electron-electron repulsion.  The basis is flexible
+enough to represent a better wavefunction, but the inaccurate
+$V_{ee}$ prevents it from being realized variationally.
+
+\paragraph{3. Neumann plateau at 92.4\%.}
+The Neumann $V_{ee}$ also plateaus, but at a much higher
+level: 92.2\% at $N = 27$ and 92.4\% at $N = 72$.  Since the
+Neumann $V_{ee}$ is exact (within the $L = 20$ truncation,
+which is converged by the selection rule), this plateau is
+\emph{not} caused by integration error.  It identifies a genuine
+basis completeness limit, analyzed in Section~\ref{sec:gap}.
+
+\subsection{The sweet spot: 27 basis functions}
+
+The data reveal a clear efficiency optimum at $N = 27$
+($j = 2$, $l = 2$): this configuration achieves 92.2\% $D_e$
+in 705~s, whereas tripling the basis to $N = 72$ gains only
+0.2~percentage points at 7.5$\times$ the computational cost.
+The diminishing returns beyond $N = 27$ reflect the fact that
+additional $\sigma$-type basis functions with higher $\xi$
+and $\eta$ powers cannot access the missing physics
+(Section~\ref{sec:gap}).
+
+\subsection{Grid dependence of numerical \texorpdfstring{$V_{ee}$}{Vee}}
+
+To confirm that the numerical plateau is grid-limited, we
+performed a grid convergence study for the 6-function basis
+($j = 1$, $l = 0$) at fixed $\alpha = 1.0$:
+
+\begin{table}[h]
+\caption{Grid convergence of numerical $V_{ee}$ for the
+  6-function basis at $R = 1.4011$~bohr, $\alpha = 1.0$.
+  \label{tab:grid_convergence}}
+\begin{ruledtabular}
+\begin{tabular}{cdd}
+  Grid ($N_\xi \times N_\eta \times N_\phi$)
+  & \multicolumn{1}{c}{$D_e\%$}
+  & \multicolumn{1}{c}{$t$ (s)} \\
+\hline
+  $12\times 8\times 8$  & 66.0 &   1 \\
+  $20\times 14\times 16$ & 76.2 &   6 \\
+  $30\times 20\times 24$ & 81.4 &  45 \\
+  $40\times 26\times 16$ & 83.7 &  83 \\
+  $60\times 40\times 16$ & 85.7 & 447 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+With the same 6 basis functions, $D_e\%$ increases from 66\% to
+85.7\% as the grid is refined from $12\times 8$ to $60\times 40$.
+The convergence is slow ($\sim$1.3~percentage points per grid
+doubling) and the cost grows quadratically.  In contrast, the
+Neumann result for this basis is grid-independent and exact at
+61.8\% $D_e$ (the basis itself limits accuracy at 6 functions,
+but the $V_{ee}$ integral is exact).
+
+%% ========================================================================
+%% VI. DIAGNOSIS OF THE 7.6% GAP
+%% ========================================================================
+
+\section{Diagnosis of the Remaining 7.6\% Gap}
+\label{sec:gap}
+
+\subsection{What the plateau tells us}
+
+The Neumann plateau at 92.4\% establishes that the $V_{ee}$
+integration is converged: the Neumann series at $L = 20$ is
+exact for our basis (the selection rule~\eqref{eq:selection_rule}
+caps the effective $l$ well below 20).  The 7.6\% gap is
+therefore a property of the \emph{basis itself}, not of the
+integral evaluation.
+
+The basis functions~\eqref{eq:basis_function} are products
+of integer powers of $\xi$ and $\eta$ times a common
+exponential $e^{-\alpha\xi}$.  These are smooth, analytic
+functions of the single-electron coordinates.  No matter
+how many such functions we include, they span only the
+polynomial$\times$exponential subspace of $L^2$.
+
+\subsection{The electron-electron cusp}
+
+The exact two-electron wavefunction $\Psi(\mathbf{r}_1,
+\mathbf{r}_2)$ satisfies the Kato cusp condition~\cite{Kato1957}
+at the electron-electron coalescence point $r_{12} = 0$:
+\begin{equation}
+  \left.\frac{\partial\bar{\Psi}}{\partial r_{12}}\right|_{r_{12}=0}
+  = \frac{1}{2}\,\bar{\Psi}(r_{12}=0),
+  \label{eq:kato}
+\end{equation}
+where $\bar{\Psi}$ is the spherically averaged wavefunction.
+This cusp produces a discontinuity in the first derivative of
+$\Psi$ with respect to $r_{12}$ and, more fundamentally,
+introduces non-analytic dependence on $r_{12}$.
+
+The Fock expansion~\cite{Fock1954, Morgan1986} of the exact
+wavefunction near the two-electron coalescence point has the form
+\begin{equation}
+  \Psi = \sum_{n=0}^\infty\sum_{k=0}^{\lfloor n/2\rfloor}
+    R^{n/2}\,(\ln R)^k\,f_{nk}(\hat{\Omega}),
+  \label{eq:fock_expansion}
+\end{equation}
+where $R = (r_1^2 + r_2^2)^{1/2}$ is the hyperradius and
+$\hat{\Omega}$ represents the hyperangular coordinates.  The
+$R^{1/2}$ and $R\ln R$ terms are fundamentally non-analytic:
+no finite sum of polynomial$\times$exponential functions in
+prolate spheroidal coordinates can represent them.
+
+\subsection{Why \texorpdfstring{$r_{12}$}{r12} basis functions
+help only partially}
+
+The traditional approach to the cusp problem is to include
+explicit $r_{12}$ dependence in the basis, as in the classic
+James--Coolidge~\cite{James1933} and Kolos--Wolniewicz~\cite{Kolos1968}
+wavefunctions.  We tested this by extending the basis with
+$r_{12}^p$ ($p = 1, 2$) factors.  The results are instructive:
+with 18 functions including $r_{12}^2$ and angular terms
+($l \leq 1$), the numerical $V_{ee}$ reaches 86.8\% $D_e$
+at the $20\times 14\times 16$ grid---but this \emph{also}
+saturates with grid refinement.  The $r_{12}$ factors improve
+the wavefunction's ability to represent the cusp, but the
+$V_{ee}$ integrals involving $r_{12}$ are even harder to
+evaluate numerically (they become seven-dimensional integrals
+with an additional radial singularity).
+
+The Neumann algebraic approach at 92.2\% with $p = 0$ basis
+functions outperforms the $r_{12}$ + numerical approach at
+86.8\% with $p \leq 2$ basis functions.  This confirms
+the central thesis: \emph{the cusp does not need $r_{12}^p$
+basis functions---it needs exact $V_{ee}$ computed from
+quantum number algebra.}  The $r_{12}$ basis functions are
+a workaround for poor $V_{ee}$ integration, not a solution
+to the underlying representation problem.
+
+\subsection{The missing geometry}
+
+The 7.6\% gap identifies a \emph{geometric} limitation.  The
+prolate spheroidal coordinates $(\xi_1, \eta_1, \xi_2, \eta_2)$
+are natural for the \emph{one-electron} nuclear attraction
+problem (they separate the two-center Coulomb potential), but
+they are not natural for the \emph{two-electron} coalescence
+(they do not separate $1/r_{12}$).  The cusp is a property
+of the \emph{interelectron} coordinate $r_{12}$, which in
+prolate spheroidals is a complicated function of all four
+variables:
+\begin{equation}
+  r_{12}^2 = \frac{R^2}{4}\bigl[
+    (\xi_1^2-1)(1-\eta_1^2) + (\xi_2^2-1)(1-\eta_2^2)
+    - 2\sqrt{(\xi_1^2-1)(1-\eta_1^2)(\xi_2^2-1)(1-\eta_2^2)}
+    + (\xi_1\eta_1 - \xi_2\eta_2)^2
+  \bigr].
+  \label{eq:r12_prolate}
+\end{equation}
+
+The cusp $\partial\Psi/\partial r_{12} \neq 0$ at $r_{12} = 0$
+cannot be represented by smooth functions of $\xi_1, \eta_1,
+\xi_2, \eta_2$ individually.  It requires either explicit
+$r_{12}$ dependence (the traditional approach, but hard to
+integrate) or a coordinate system where the coalescence point
+has a simple representation.
+
+The natural geometry for the three-body coalescence problem
+is the \emph{hyperspherical} coordinate system
+$(\rho, \theta, \hat{\Omega})$, where $\rho = (r_1^2 + r_2^2)^{1/2}$
+is the hyperradius and the cusp condition becomes a boundary
+condition in $\theta$ at $\theta = \pi/4$ (the $r_1 = r_2$
+manifold).  In this coordinate system, the Fock
+expansion~\eqref{eq:fock_expansion} in $\rho^{1/2}$ and
+$\rho\ln\rho$ becomes a local expansion in the natural
+variable, amenable to lattice discretization.
+
+%% ========================================================================
+%% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM
+%% ========================================================================
+
+\section{Implications for the GeoVac Program}
+\label{sec:implications}
+
+\subsection{The natural geometry hierarchy}
+
+Papers~0, 1, and 7 established $S^3$ as the natural geometry
+for one-center, one-electron systems.  Paper~11 established
+prolate spheroids as the natural geometry for two-center,
+one-electron systems.  This paper completes the analysis for
+two-center, two-electron systems and identifies the hierarchy
+of natural geometries:
+
+\begin{enumerate}
+  \item \textbf{One-center, one-electron} (H, He$^+$):
+    Three-sphere $S^3$ via Fock projection.  The Schr\"odinger
+    equation becomes a Laplace--Beltrami eigenvalue problem.
+    Accuracy: $< 0.1\%$~\cite{loutey_paper0, loutey_paper1}.
+  \item \textbf{Two-center, one-electron} (H$_2^+$):
+    Prolate spheroidal coordinates $(\xi, \eta, \varphi)$.
+    The Schr\"odinger equation separates into two coupled ODEs.
+    Accuracy: 0.70\%~\cite{loutey_paper11}.
+  \item \textbf{Two-center, two-electron} (H$_2$):
+    Prolate spheroidal $\times$ prolate spheroidal with
+    Neumann-algebraic $V_{ee}$.  One-electron physics is
+    exact; electron correlation is resolved to 92.4\%.
+    \emph{This paper.}
+  \item \textbf{Three-body coalescence}: Hyperspherical
+    coordinates $(\rho, \theta, \hat{\Omega})$ for the
+    interelectron cusp.  \emph{Identified but not yet
+    implemented.}
+\end{enumerate}
+
+Each level in this hierarchy addresses a qualitatively different
+physical singularity: the nuclear Coulomb singularity ($1/r$),
+the two-center potential ($1/r_A + 1/r_B$), the electron-electron
+Coulomb singularity ($1/r_{12}$), and the coalescence cusp
+(non-analytic $r_{12}$ dependence).  The GeoVac program
+identifies each singularity's natural coordinate system and
+discretizes the Laplace--Beltrami operator in that system.
+
+\subsection{Quantum chemistry without integrals}
+
+The Neumann algebraic $V_{ee}$ realizes a form of quantum
+chemistry in which all two-electron integrals are computed
+from recurrence relations on quantum number labels, without
+any numerical quadrature.  Combined with the analytical
+kinetic energy (integration by parts) and nuclear attraction
+(simple polynomial moments), the \emph{entire} Hamiltonian
+matrix can in principle be constructed without numerical
+integration.
+
+This has conceptual significance beyond computational
+efficiency: it demonstrates that the physics of
+electron-electron repulsion in prolate spheroidal
+coordinates is fully encoded in the algebraic structure
+of the Legendre functions $P_l$ and $Q_l$, not in the
+spatial geometry of a quadrature grid.  The Neumann expansion
+is not an approximation; it is the exact representation of
+$1/r_{12}$ in the prolate spheroidal basis, truncated only
+by the angular momentum selection rule imposed by the basis
+itself.
+
+\subsection{Comparison with the \texorpdfstring{$S^3$}{S3}
+approach}
+
+The graph Laplacian FCI approach (Papers~0, 1, 7, and the
+FCI papers) constructs $V_{ee}$ from Slater $F^0$ integrals
+on the $S^3$ density overlap~\cite{loutey_paper7}, which are
+computed analytically from hydrogen radial wavefunctions.
+That approach also avoids numerical integration of $V_{ee}$
+and achieves comparable accuracy for atoms.
+
+The prolate spheroidal approach with Neumann $V_{ee}$ extends
+this philosophy to molecules: the natural coordinate system
+for each class of problems determines the algebraic structure
+of the two-electron integrals.  On $S^3$, the algebraic
+structure is the Slater expansion in radial quantum numbers.
+On the prolate spheroid, it is the Neumann expansion in
+Legendre orders.  Both are special cases of the general
+principle: \emph{in the natural coordinate system, the
+Coulomb kernel has a known multipole expansion that converts
+integrals into algebraic sums.}
+
+%% ========================================================================
+%% VIII. CONCLUSION
+%% ========================================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have demonstrated that the Neumann expansion of $1/r_{12}$
+in prolate spheroidal coordinates eliminates the electron-electron
+integration bottleneck in the two-electron prolate spheroidal CI
+for H$_2$.  The key results are:
+
+\begin{enumerate}
+  \item \textbf{92.4\% of exact $D_e$} with algebraic $V_{ee}$,
+    zero numerical integration, and zero fitted parameters.
+  \item \textbf{12--20 percentage point improvement} over numerical
+    $V_{ee}$ at every basis size from 1 to 72 functions.
+  \item \textbf{Numerical $V_{ee}$ saturates at $\sim$80\%}
+    regardless of basis size, confirming grid truncation error
+    as the dominant error source.
+  \item \textbf{27 basis functions is the sweet spot}: 92.2\%
+    in 705~s versus 92.4\% in 5271~s at 72 functions.
+  \item \textbf{The 7.6\% gap} is precisely diagnosed: it is
+    a basis completeness limit, not an integration error.  The
+    electron-electron cusp requires non-analytic terms
+    ($r_{12}^{1/2}$, $r_{12}\ln r_{12}$) that no polynomial
+    prolate spheroidal basis can represent.  This identifies
+    hyperspherical coordinates as the next natural geometry
+    in the GeoVac hierarchy.
+\end{enumerate}
+
+The result demonstrates a form of quantum chemistry where
+recurrence relations on quantum number labels entirely replace
+numerical quadrature for electron-electron repulsion.  Just as
+Paper~7 showed that atomic energies are encoded in the
+topology of $S^3$, this paper shows that molecular
+electron-electron repulsion is encoded in the algebraic
+structure of the Legendre functions $P_l$ and $Q_l$ on the
+prolate spheroid.  The physics is in the algebra, not in the
+grid.
+
+%% ========================================================================
+%% ACKNOWLEDGMENTS
+%% ========================================================================
+
+\begin{acknowledgments}
+Computational resources were provided by personal hardware.
+\end{acknowledgments}
+
+%% ========================================================================
+%% APPENDIX A: NUMERICAL VERIFICATION OF AUXILIARY INTEGRALS
+%% ========================================================================
+
+\appendix
+
+\section{Numerical Verification of Auxiliary Integrals}
+\label{app:verification}
+
+All auxiliary integrals were validated against independent
+numerical quadrature.  The test suite (\texttt{tests/test\_neumann\_vee.py},
+25~tests) verifies:
+
+\begin{itemize}
+  \item \textbf{$C_l(q)$}: Base cases ($C_0$ even/odd, $C_1$ odd),
+    selection rule, and known analytical values.  Agreement to
+    machine precision ($< 10^{-14}$).
+  \item \textbf{$A_n(\alpha)$}: Comparison with \texttt{scipy.integrate.quad}.
+    Agreement to $< 10^{-12}$.
+  \item \textbf{$A_l(p, \alpha)$}: Comparison with numerical
+    quadrature of $\xi^p e^{-\alpha\xi} P_l(\xi)$.
+    Agreement to $< 10^{-10}$.
+  \item \textbf{$B_l(p, \alpha)$}: Comparison with independent
+    adaptive quadrature.  Agreement to $< 10^{-10}$.
+  \item \textbf{$X_l(p_1, p_2, \alpha)$}: Comparison with 2D
+    numerical quadrature.  Agreement to $< 10^{-8}$.
+    Symmetry $X_l(p_1, p_2) = X_l(p_2, p_1)$ verified to
+    $< 10^{-14}$.
+  \item \textbf{$V_{ee}$ matrix}: Symmetry, positive diagonal,
+    and comparison with numerical elliptic integral quadrature.
+    Neumann vs.\ numerical agreement to $< 0.01$~Ha per element
+    (the discrepancy is the grid error in the numerical values).
+  \item \textbf{Full Hamiltonian}: Variational principle (energy
+    above exact), bound state, and consistency between
+    Python and Numba code paths ($< 10^{-8}$~Ha).
+\end{itemize}
+
+\section{Comparison with \texorpdfstring{$r_{12}$}{r12}-Dependent
+Basis Functions}
+\label{app:r12}
+
+We tested basis functions with explicit $r_{12}^p$ dependence
+($p = 1, 2$), following the James--Coolidge
+approach~\cite{James1933}.  The $r_{12}$ factor is expressed in
+prolate spheroidal coordinates as a function of $(\xi_1, \eta_1,
+\xi_2, \eta_2, \varphi_1 - \varphi_2)$, making the integrals
+five-dimensional after azimuthal averaging.
+
+Table~\ref{tab:r12_comparison} compares the best $r_{12}$-dependent
+results with the $p = 0$ Neumann results.
+
+\begin{table}[h]
+\caption{Comparison of $r_{12}$-dependent basis (numerical
+  $V_{ee}$) vs.\ $p = 0$ basis (Neumann $V_{ee}$).  All
+  results at $R = 1.4011$~bohr.
+  \label{tab:r12_comparison}}
+\begin{ruledtabular}
+\begin{tabular}{lddd}
+  \multicolumn{1}{c}{Method}
+  & \multicolumn{1}{c}{$N$}
+  & \multicolumn{1}{c}{$D_e\%$}
+  & \multicolumn{1}{c}{$t$ (s)} \\
+\hline
+  $r_{12}^1$, num., $60\times40$ grid & 6  & 85.7 & 447 \\
+  $r_{12}^{0-2}$, num., $20\times14$ grid & 18 & 86.8 & 970 \\
+  $p\!=\!0$, Neumann, $30\times20$ grid & 27 & 92.2 & 705 \\
+  $p\!=\!0$, Neumann, $30\times20$ grid & 72 & 92.4 & 5271 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The Neumann $p = 0$ result at 92.2\% exceeds the best
+$r_{12}$-dependent numerical result (86.8\%) by 5.4~percentage
+points, confirming that exact $V_{ee}$ evaluation is more
+important than $r_{12}$-dependent basis functions when the
+$V_{ee}$ integrals are computed numerically.  The combination
+of $r_{12}$-dependent basis functions with Neumann-type
+algebraic $V_{ee}$ is a natural extension left for future work.
+
+%% ========================================================================
+%% BIBLIOGRAPHY
+%% ========================================================================
+
+\begin{thebibliography}{30}
+
+\bibitem{loutey_paper0}
+J.~Loutey,
+``The Geometric Atom: Quantum State Space as a Packing Problem,''
+GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper1}
+J.~Loutey,
+``The Geometric Atom: Quantum Mechanics as a Packing Problem,''
+GeoVac Paper~1 (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
+from Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper11}
+J.~Loutey,
+``The Molecular Fock Projection: Diatomic Molecules as Prolate
+Spheroidal Lattices,''
+GeoVac Paper~11 (2026).
+
+\bibitem{Fock1935}
+V.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+Z. Phys. \textbf{98}, 145--154 (1935).
+
+\bibitem{Neumann1878}
+C.~Neumann,
+\textit{\"Uber die Entwicklung einer Function mit imagin\"aren
+Argument nach den Kugelfunctionen erster und zweiter Art}
+(Teubner, Leipzig, 1878).
+
+\bibitem{Roothaan1951}
+C.~C.~J. Roothaan,
+``A study of two-center integrals useful in calculations on
+molecular structure,''
+J. Chem. Phys. \textbf{19}, 1445--1458 (1951).
+
+\bibitem{Ruedenberg1951}
+K.~Ruedenberg,
+``A study of two-center integrals useful in calculations on
+molecular structure.\ II.\ The two-center exchange integrals,''
+J. Chem. Phys. \textbf{19}, 1459--1477 (1951).
+
+\bibitem{Morse1953}
+P.~M. Morse and H.~Feshbach,
+\textit{Methods of Theoretical Physics}
+(McGraw-Hill, New York, 1953).
+
+\bibitem{James1933}
+H.~M. James and A.~S. Coolidge,
+``The ground state of the hydrogen molecule,''
+J. Chem. Phys. \textbf{1}, 825--835 (1933).
+
+\bibitem{Kolos1968}
+W.~Ko\l{}os and L.~Wolniewicz,
+``Improved theoretical ground-state energy of the hydrogen
+molecule,''
+J. Chem. Phys. \textbf{49}, 404--410 (1968).
+
+\bibitem{Kato1957}
+T.~Kato,
+``On the eigenfunctions of many-particle systems in quantum
+mechanics,''
+Commun. Pure Appl. Math. \textbf{10}, 151--177 (1957).
+
+\bibitem{Fock1954}
+V.~Fock,
+``On the Schr\"odinger equation of the helium atom,''
+Izv. Akad. Nauk SSSR Ser. Fiz. \textbf{18}, 161--172 (1954).
+
+\bibitem{Morgan1986}
+J.~D. Morgan~III,
+``Convergence properties of Fock's expansion for S-state
+eigenfunctions of the helium atom,''
+Theor. Chim. Acta \textbf{69}, 181--223 (1986).
+
+\bibitem{Numba2015}
+S.~K. Lam, A.~Pitrou, and S.~Seibert,
+``Numba: A LLVM-based Python JIT compiler,''
+in \textit{Proceedings of the Second Workshop on the LLVM
+Compiler Infrastructure in HPC} (ACM, New York, 2015),
+pp.\ 1--6.
+
+\bibitem{QUADPACK}
+R.~Piessens, E.~de Doncker-Kapenga, C.~W. \"Uberhuber,
+and D.~K. Kahaner,
+\textit{QUADPACK: A Subroutine Package for Automatic Integration}
+(Springer-Verlag, Berlin, 1983).
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+title: >-
+  The Geometric Vacuum: Quantum Mechanics from Discrete
+  Information Geometry
+message: >-
+  If you use this work, please cite the relevant paper(s)
+  from the GeoVac series.
+type: software
+authors:
+  - given-names: Josh
+    family-names: Loutey
+    affiliation: Independent Researcher, Kent, Washington
+repository-code: https://github.com/jloutey-hash/geovac
+license: MIT
+version: 1.1.0
+date-released: 2026-03-15
+references:
+  - type: article
+    title: >-
+      The Dimensionless Vacuum: Recovering the Schrodinger
+      Equation from Scale-Invariant Graph Topology
+    authors:
+      - given-names: Josh
+        family-names: Loutey
+    year: 2026
+    notes: GeoVac Paper 7
+  - type: article
+    title: >-
+      The Molecular Fock Projection: Diatomic Molecules as
+      Prolate Spheroidal Lattices
+    authors:
+      - given-names: Josh
+        family-names: Loutey
+    year: 2026
+    notes: GeoVac Paper 11
+  - type: article
+    title: >-
+      Algebraic Two-Electron Integrals on the Prolate
+      Spheroidal Lattice
+    authors:
+      - given-names: Josh
+        family-names: Loutey
+    year: 2026
+    notes: GeoVac Paper 12
+  - type: article
+    title: >-
+      The Hyperspherical Lattice: Two-Electron Atoms as
+      Coupled Channel Graphs
+    authors:
+      - given-names: Josh
+        family-names: Loutey
+    year: 2026
+    notes: GeoVac Paper 13

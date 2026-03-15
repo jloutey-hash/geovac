@@ -5,6 +5,61 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-03-15
+
+### The Multi-Particle Release
+
+#### Paper 12: Algebraic Two-Electron Integrals
+- `geovac/neumann_vee.py` — Neumann expansion of 1/r_12 in prolate spheroidal
+  coordinates: replaces 5D numerical quadrature with sums of 1D algebraic integrals
+- Auxiliary integral tables: C_l (eta moments), A_l (xi exponential moments),
+  B_l (second-kind Legendre), X_l (2D xi integrals via integration by parts)
+- H2 at R=1.4011 bohr: 92.4% D_e with 27 basis functions (vs 79.6% numerical)
+- Uniform 12-20 percentage point improvement over numerical V_ee at all basis sizes
+- Remaining 7.6% gap diagnosed as electron-electron cusp (basis completeness limit)
+- `tests/test_neumann_vee.py` — convergence and accuracy tests
+
+#### Paper 13: Hyperspherical Lattice for Two-Electron Atoms
+- `geovac/hyperspherical_angular.py` — Angular eigenvalue solver:
+  - Liouville substitution u = sin(a)cos(a)f for standard Schrodinger form
+  - FD discretization with Dirichlet BCs
+  - Gaunt integral coupling via Wigner 3j symbols
+  - L=0 partial-wave reduction for He ground state
+- `geovac/hyperspherical_adiabatic.py` — Adiabatic potential curves:
+  - mu(R) computed on R grid, V_eff(R) = mu/R^2 + 15/(8R^2)
+  - Asymptotic: V_eff -> -Z^2/2 (He+ threshold)
+- `geovac/hyperspherical_radial.py` — Hyperradial solver:
+  - Self-adjoint FD + cubic spline interpolation
+  - solve_helium() orchestrator: angular -> adiabatic -> radial
+- **He ground state:** E = -2.9052 Ha (0.05% error vs exact -2.9037 Ha)
+- Single-channel adiabatic, 600x600 sparse matrix, ~3 seconds runtime
+- First non-trivial fiber bundle in GeoVac (angular structure varies with R)
+- `tests/test_hyperspherical_he.py` — 20 tests (Gaunt, angular, adiabatic, solver)
+
+#### Ab Initio Molecular Spectroscopy
+- Full pipeline: electron lattice -> PES -> Morse fit -> nuclear lattice -> spectrum
+- H2 Morse parameters: R_e = 1.42 bohr (+1.5%), omega_e = 4500 cm-1 (+2.2%)
+- Rovibrational transitions: nu_01 = 4214 cm-1 (+1.3%), B_e = 59.1 cm-1 (-2.9%)
+- Zero experimental spectroscopic input at any stage
+- `benchmarks/ab_initio_nuclear/` — full pipeline scripts and results
+
+#### Qubit Encoding Benchmarks
+- GeoVac Pauli terms: O(Q^3.15) vs conventional O(Q^4.60)
+- ERI density: 10% (nmax=2) -> 1.3% (nmax=5), drops as ~1/M^2
+- Structural advantage from angular momentum selection rules (Wigner 3j)
+- `benchmarks/qubit_encoding/` — comparison scripts and results
+
+#### Zenodo Publication Cluster
+- `papers/zenodo/` — Papers 7, 11, 12, 13 prepared for upload
+- `.zenodo.json`, `CITATION.cff` — metadata files
+- All four papers compile cleanly with pdflatex
+- Cross-reference audit: all inter-paper references resolved
+
+#### Documentation
+- Paper 13 written: `papers/core/paper_13_hyperspherical.tex` (8 pages, revtex4-2)
+- README updated: v1.1.0 benchmarks, paper series, quick start examples
+- CLAUDE.md updated: Paper 12/13 in paper list, new modules, fiber bundle concept
+
 ## [1.0.1] - 2026-03-13
 
 ### Prolate Spheroidal Stress Tests Complete
