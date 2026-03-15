@@ -19,7 +19,7 @@ The hyperspherical lattice extends GeoVac to multi-electron systems:
 |--------|--------|:-----:|:-----------:|
 | He (hyperspherical, 1 ch.) | Adiabatic | **0.05%** | 600 |
 | H$_2$ (Neumann $V_{ee}$, 27 bf) | Algebraic CI | **92.4%** $D_e$ | 27 |
-| H$_2$ $\nu_{01}$ (ab initio) | Full pipeline | **+1.3%** | --- |
+| H$_2$ $\nu_{01}$ (ab initio) | Full pipeline | **-0.1%** | --- |
 
 ### Paper 12: Algebraic Two-Electron Integrals
 - Neumann expansion replaces numerical $V_{ee}$ quadrature with algebraic evaluation
@@ -34,7 +34,7 @@ The hyperspherical lattice extends GeoVac to multi-electron systems:
 
 ### Ab Initio Molecular Spectroscopy
 - Full pipeline: electron lattice -> PES -> Morse fit -> nuclear lattice -> rovibrational spectrum
-- H$_2$: $R_e$ = 1.42 bohr (+1.5%), $\omega_e$ = 4500 cm$^{-1}$ (+2.2%), $B_e$ = 59.1 cm$^{-1}$ (-2.9%)
+- H$_2$: $R_e$ = 1.42 bohr (+1.2%), $\omega_e$ = 4435 cm$^{-1}$ (+0.8%), $B_e$ = 59.5 cm$^{-1}$ (-2.2%)
 - Zero experimental spectroscopic input at any stage
 
 ### Qubit Encoding Benchmarks
@@ -76,10 +76,10 @@ The hyperspherical lattice extends GeoVac to multi-electron systems:
 
 | Benchmark | Ab Initio | Experiment | Error |
 |-----------|-----------|------------|:-----:|
-| H$_2$ $R_e$ (bohr) | 1.422 | 1.401 | +1.5% |
-| H$_2$ $\omega_e$ (cm$^{-1}$) | 4500 | 4401 | +2.2% |
-| H$_2$ $B_e$ (cm$^{-1}$) | 59.09 | 60.85 | -2.9% |
-| H$_2$ $\nu_{01}$ (cm$^{-1}$) | 4214 | 4161 | +1.3% |
+| H$_2$ $R_e$ (bohr) | 1.418 | 1.401 | +1.2% |
+| H$_2$ $\omega_e$ (cm$^{-1}$) | 4435 | 4401 | +0.8% |
+| H$_2$ $B_e$ (cm$^{-1}$) | 59.49 | 60.85 | -2.2% |
+| H$_2$ $\nu_{01}$ (cm$^{-1}$) | 4157 | 4161 | -0.1% |
 
 ### Dynamics & Spectroscopy
 

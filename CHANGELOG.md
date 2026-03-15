@@ -38,8 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Ab Initio Molecular Spectroscopy
 - Full pipeline: electron lattice -> PES -> Morse fit -> nuclear lattice -> spectrum
-- H2 Morse parameters: R_e = 1.42 bohr (+1.5%), omega_e = 4500 cm-1 (+2.2%)
-- Rovibrational transitions: nu_01 = 4214 cm-1 (+1.3%), B_e = 59.1 cm-1 (-2.9%)
+- H2 Morse parameters: R_e = 1.42 bohr (+1.2%), omega_e = 4435 cm-1 (+0.8%)
+- Rovibrational transitions: nu_01 = 4157 cm-1 (-0.1%), B_e = 59.5 cm-1 (-2.2%)
 - Zero experimental spectroscopic input at any stage
 - `benchmarks/ab_initio_nuclear/` — full pipeline scripts and results
 
