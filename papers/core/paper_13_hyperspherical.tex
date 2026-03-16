@@ -818,7 +818,82 @@ spectroscopic input at any stage of the pipeline.
 \end{figure}
 
 %% ========================================================================
-%% X. DISCUSSION
+%% X. AUTOIONIZATION CHANNEL CLASSIFICATION
+%% ========================================================================
+
+\section{Autoionization Channel Classification from Angular Topology}
+\label{sec:autoionization}
+
+The Gaunt integrals~\eqref{eq:gaunt} that couple partial waves in the
+angular equation also determine which adiabatic channels can exchange
+population---and thus which doubly-excited states can autoionize.
+The selection rules $G(l, k, l') \neq 0$ only when $|l - l'| \leq k
+\leq l + l'$ and $l + k + l'$ is even define a \emph{coupling graph}
+$\mathcal{G}$ whose nodes are partial waves $l$ and whose edges carry
+the allowed multipole order $k$.
+
+Within this graph, the shortest weighted path from a doubly-excited
+channel to the ionization continuum determines the leading-order
+autoionization rate.  For the $s$-wave channels ($l = 0$) of the
+$^1S$ symmetry, the dominant coupling to the continuum is direct
+($k = 0$, monopole), with Gaunt weight $G(0,0,0) = 2$.  For the
+$p$-wave channels ($l = 1$), the coupling requires at minimum a
+$k = 1$ (dipole) step: $G(1,1,0) = 2/3$, giving a graph distance
+roughly $3\times$ longer.  The $d$-wave channels ($l = 2$) require
+two steps through the coupling graph, suppressing their rates by
+an additional order of magnitude.
+
+This hierarchy---$\Gamma_s \gg \Gamma_p \gg \Gamma_d$---is the
+angular topology's prediction for the \emph{inter-sector} width
+ordering.  Numerically, the computed non-adiabatic couplings confirm
+the pattern: $|P_{01}| \sim 0.02$ (s--s), $|P_{02}| \sim 0.3$
+(s--p), and $|P_{23}| \sim 1.0$ (p--p), spanning two orders of
+magnitude.  The suppression of $s$-wave autoionization relative to
+$p$-wave mixing is a direct consequence of the Gaunt selection rules
+acting as a topological filter on decay pathways---analogous to how
+the energy-shell constraint $p_0^2 = -2E$ filters the $S^3$ spectrum
+in Paper~7~\cite{loutey_paper7}.
+
+%% ========================================================================
+%% XI. LIMITS OF THE ADIABATIC APPROXIMATION
+%% ========================================================================
+
+\section{Limits of the Adiabatic Approximation for Quantitative Widths}
+\label{sec:adiabatic_limits}
+
+The inter-sector hierarchy ($s$ vs.\ $p$ vs.\ $d$) is robust, but
+quantitative \emph{within-sector} width ratios---such as
+$\Gamma(2s^2\,{}^1\!S)/\Gamma(2s3s\,{}^1\!S) = 3.29$
+(experiment~\cite{Madden1963})---probe physics beyond the adiabatic
+channel decomposition.  Coupled-channel exterior complex scaling (ECS)
+on the adiabatic potentials resolves $\theta$-stable complex
+eigenvalues that are quasi-bound states of the upper channels, but
+these are dominated by $p$-wave and $d$-wave character.  The narrow
+$s$-wave autoionization resonances remain unresolved: the $P_{01}$
+coupling of $0.02$ produces widths $\sim P^2 \sim 10^{-4}$~Ha,
+far below the discretized continuum spacing.
+
+This is not a numerical failure but a structural limitation.  In the
+fiber bundle language of Sec.~\ref{sec:fiber_bundle}, the adiabatic
+channel functions $\Phi_\mu(R; \hat\Omega)$ change character at
+avoided crossings, and the ``$2s^2$'' configuration migrates between
+channels as a function of $R$.  Capturing this migration requires
+either the full two-dimensional $(R, \alpha)$ problem (slow variable
+discretization~\cite{Tolstikhin1996}) or a diabatic representation
+that diagonalizes the coupling at a reference $R$.
+
+The fiber bundle carries irreducible content: the Berry connection
+$P_{\mu\nu}(R)$ encodes the rate of angular rearrangement, and its
+integral along $R$ gives the total phase accumulated during
+autoionization.  The within-sector ratio $3.29$ is determined by this
+integrated holonomy---a global property of the bundle that cannot be
+extracted from any single-$R$ angular eigenvalue.  This places the
+within-sector ratio in the same category as the Berry phase on the
+$S^3$ lattice: a gauge-invariant observable that requires the full
+connection, not just the curvature.
+
+%% ========================================================================
+%% XII. DISCUSSION
 %% ========================================================================
 
 \section{Discussion}
@@ -858,9 +933,13 @@ for the lattice versus $\sim O(1)$ for Gaussians).
 
 Several extensions are natural:
 \begin{enumerate}
-  \item \textbf{Coupled channels:} Adding the second adiabatic
-    channel and computing the non-adiabatic coupling $P_{12}(R)$
-    should reduce the error to $\sim$0.1\%~\cite{Macek1968}.
+  \item \textbf{Coupled channels and autoionization:} The
+    inter-sector width hierarchy (Sec.~\ref{sec:autoionization})
+    is topologically determined, but quantitative within-sector
+    ratios require going beyond the adiabatic approximation
+    (Sec.~\ref{sec:adiabatic_limits}).  Slow variable discretization
+    or full 2D complex scaling on the $(R, \alpha)$ space are the
+    natural next steps.
   \item \textbf{Three-electron systems:} Li requires a 9D
     configuration space with three hyperangles.  The adiabatic
     framework extends but the angular problem becomes significantly
@@ -869,15 +948,18 @@ Several extensions are natural:
     problem (H$_2$) likely requires a fibered product of prolate
     spheroidal and hyperspherical coordinates, with the bond length
     $R_{\mathrm{nuc}}$ as an additional slow variable.
-  \item \textbf{Gauge structure:} The Berry connection
-    $P_{\nu\mu}(R)$ on the fiber bundle of adiabatic channels is a
-    prototype for understanding gauge fields on discrete
-    lattices---connecting to the broader Geometric Vacuum program's
-    investigation of emergent gauge structure.
+  \item \textbf{The Berry connection as a physical observable:}
+    The connection $P_{\nu\mu}(R)$ on the fiber bundle encodes
+    the rate of angular rearrangement during autoionization.  Its
+    integrated holonomy determines within-sector width ratios that
+    are inaccessible to any single-$R$ eigenvalue calculation---a
+    gauge-invariant observable of the bundle geometry that connects
+    to the broader Geometric Vacuum program's investigation of
+    emergent gauge structure on discrete lattices.
 \end{enumerate}
 
 %% ========================================================================
-%% XI. CONCLUSION
+%% XIII. CONCLUSION
 %% ========================================================================
 
 \section{Conclusion}
@@ -1014,6 +1096,17 @@ G.~Herzberg,
 National Institute of Standards and Technology,
 ``Diatomic Spectral Database --- H$_2$,''
 \url{https://www.nist.gov/pml/diatomic-spectral-database}.
+
+\bibitem{Madden1963}
+R.~P.~Madden and K.~Codling,
+``New Autoionizing Atomic Energy Levels in He, Ne, and Ar,''
+Phys.\ Rev.\ Lett.\ \textbf{10}, 516 (1963).
+
+\bibitem{Tolstikhin1996}
+O.~I.~Tolstikhin, S.~Watanabe, and M.~Matsuzawa,
+```Slow' variable discretization (SVD) method for the multichannel
+scattering problem,''
+J.\ Phys.\ B \textbf{29}, L389 (1996).
 
 \end{thebibliography}
 

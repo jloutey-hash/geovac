@@ -5,6 +5,42 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-03-15
+
+### The QA & Corrections Release
+
+#### Paper 1: Berry Phase Retraction
+- Section IV rewritten: "Geometric Curvature" -> "Geometric Phase Structure of the Lattice"
+- Retracted k = 2.113 claim (arg() = 0 for real SU(2)/SU(1,1) operators)
+- Documented log-holonomy as valid quantity (k = 1.0 exact)
+- Updated Discussion, Conclusion, and Appendix A/B references
+- Added erratum noting the retraction
+
+#### Paper 13: Autoionization & Adiabatic Limits
+- New Section X: Autoionization channel classification from angular topology
+- New Section XI: Limits of the adiabatic approximation for quantitative widths
+- Updated Discussion and Conclusion with new open questions
+
+#### New Modules
+- `geovac/berry_phase.py` — Log-holonomy computation on geometric lattice plaquettes
+- `geovac/hyperspherical_complex_scaling.py` — Exterior complex scaling for resonances
+- `geovac/hyperspherical_coupling.py` — Coupled-channel adiabatic solver
+- `geovac/hyperspherical_resonances.py` — Resonance detection and analysis
+
+#### QA Sprint
+- `debug/qa_sprint/berry_phase_reconciliation.md` — Full Berry phase investigation
+- `debug/qa_sprint/benchmark_audit.md` — Verified He energy, Neumann D_e, kappa, symbolic proofs
+- `debug/qa_sprint/test_health.md` — Test suite health check (528 pass, 0 fail, 1 xfail)
+- `debug/qa_sprint/cross_document_consistency.md` — 7/8 claims consistent; Berry phase sole issue (now corrected)
+
+#### Test Fixes
+- `tests/test_lih_validation.py`: Added missing assertions to 2 tests
+- `tests/test_hylleraas.py`: Made `test_energy_below_atoms` unconditional (enlarged basis to j_max=2)
+- `benchmarks/ab_initio_nuclear/results.md`: Annotated stale prolate CI numbers vs Paper 13 Hylleraas PES
+
+#### Test Suite
+- 528 passed, 0 failed, 1 xfailed (Sturmian structural theorem — expected)
+
 ## [1.1.0] - 2026-03-15
 
 ### The Multi-Particle Release

@@ -264,13 +264,14 @@ class TestEnergyValidation:
 
     def test_energy_below_atoms(self):
         """At equilibrium, H₂ energy must be below 2H = -1.0 Ha."""
-        basis = generate_basis(j_max=1, l_max=0, p_max=0, alpha=1.0)
+        basis = generate_basis(j_max=2, l_max=1, p_max=0, alpha=1.0)
         grids = build_quadrature_grids(N_xi=14, N_eta=10, N_phi=8, xi_max=10.0)
         result = solve_hylleraas(basis, R=1.4, grids=grids, verbose=False)
-        # With a reasonable basis, E_total should be < -1.0
-        # (molecule is bound). This may fail with very small grids.
-        if result['E_total'] < -1.0:
-            assert result['D_e'] > 0
+        # With j_max=2, l_max=1 basis, molecule must be bound (E < -1.0).
+        assert result['E_total'] < -1.0, (
+            f"Solver failed to find bound state: E={result['E_total']:.6f}")
+        assert result['D_e'] > 0, (
+            f"D_e should be positive for bound molecule, got {result['D_e']:.6f}")
 
     def test_r12_improves_energy(self):
         """Adding r₁₂ terms (p>0) must lower the energy vs p=0.

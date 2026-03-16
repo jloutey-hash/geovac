@@ -159,49 +159,99 @@ where the aliasing boundaries lie---a hallmark of mathematical rigor
 rather than a physical limitation.
 
 
-\section{Geometric Curvature: A Relativistic Scaling Correspondence}
+\section{Geometric Phase Structure of the Lattice}
 \label{sec:relativity}
 
-The lattice possesses intrinsic curvature---a geometric holonomy that manifests as the Berry phase for closed loops on the graph. We demonstrate that this curvature exhibits power-law scaling consistent with the kinematic form of relativistic corrections.
+The lattice carries a natural notion of parallel transport around closed loops
+(plaquettes).  We examine whether this transport produces a nontrivial
+geometric phase---a Berry holonomy---and find that the answer is negative for
+the real-valued transition operators used here.  We then characterize the
+\emph{log-holonomy}, which measures curvature of the edge-weight function,
+and discuss what would be required for a genuine geometric phase.
 
-\subsection{Berry Phase and Parallel Transport}
+\subsection{Flat Connection for Real Operators}
 
-To quantify lattice curvature, we compute the Berry phase $\theta$ accumulated when parallel-transporting a quantum state around closed loops (plaquettes). A \textbf{rectangular plaquette} on the paraboloid is constructed via radial ($T_\pm$) and azimuthal ($L_\pm$) operators:
+A \textbf{rectangular plaquette} on the lattice is constructed via radial
+($T_\pm$) and azimuthal ($L_\pm$) operators:
 \begin{equation}
-|n, l, m\rangle \xrightarrow{T_+} |n+1, l, m\rangle \xrightarrow{L_+} |n+1, l, m+1\rangle \xrightarrow{T_-} |n, l, m+1\rangle \xrightarrow{L_-} |n, l, m\rangle.
+|n, l, m\rangle \xrightarrow{T_+} |n+1, l, m\rangle \xrightarrow{L_+}
+|n+1, l, m+1\rangle \xrightarrow{T_-} |n, l, m+1\rangle \xrightarrow{L_-}
+|n, l, m\rangle.
 \label{eq:plaquette}
 \end{equation}
-This rectangular path in $(n,m)$ space at fixed $l$ forms the elementary unit of curvature. Note that $L_+$ increments the azimuthal quantum number $m$ by one unit while leaving $l$ unchanged within a given shell.
-
-For each plaquette, the Berry phase is computed from the holonomy (see Appendix~\ref{app:berry}). We identify 2,280 valid plaquettes on lattices with $n \leq 30$ and average the Berry phase within each radial shell.
-
-\subsection{The Scaling Law}
-
-Plotting the mean Berry phase $\langle \theta \rangle$ versus principal quantum number $n$ on a log-log scale reveals a power law:
+The Berry phase for this plaquette is the argument of the holonomy product:
 \begin{equation}
-\theta(n) = A \cdot n^{-k},
-\label{eq:berry_scaling}
+\theta = \arg\!\bigl(
+  \langle n,l,m|T_+|n\!+\!1,l,m\rangle\,
+  \langle n\!+\!1,l,m|L_+|n\!+\!1,l,m\!+\!1\rangle\,
+  \langle n\!+\!1,l,m\!+\!1|T_-|n,l,m\!+\!1\rangle\,
+  \langle n,l,m\!+\!1|L_-|n,l,m\rangle
+\bigr).
+\label{eq:berry_arg}
 \end{equation}
-with best-fit parameters:
-\begin{align}
-A &= 2.323, \\
-k &= 2.113 \pm 0.015, \\
-R^2 &= 0.9995.
-\end{align}
-
-The exponent $k \approx 2.11$ is remarkably close to $2$.
-
-\subsection{Physical Interpretation}
-
-In standard quantum mechanics, the leading relativistic correction to hydrogen energies arises from the mass-velocity term in the Dirac equation:
+Each matrix element is a Biedenharn--Louck coupling coefficient.  For the
+$SU(2)$ angular-momentum operators,
+$\langle l,m|L_+|l,m\!+\!1\rangle = \sqrt{(l-m)(l+m+1)}$,
+and for the $SU(1,1)$ radial operators,
+$\langle n,l|T_+|n\!+\!1,l\rangle = \sqrt{(n-l)(n+l+1)/4}$.
+All four factors are \textbf{real and positive}.  Therefore
 \begin{equation}
-\Delta E_{\text{rel}} \sim \frac{p^4}{8m^3c^2} \sim \frac{v^2}{c^2} \cdot E_{\text{kin}}.
+\theta = \arg(\text{positive real number}) = 0
+\qquad\text{for every plaquette at every $(n,l,m)$.}
+\label{eq:berry_zero}
 \end{equation}
-By the virial theorem, $v^2 \sim 1/n^2$ for the hydrogen atom, so the velocity-dependent factor scales as $v^2 \propto n^{-2}$.
+The lattice connection defined by these operators is \emph{flat}: it carries
+zero Berry curvature.
 
-Our Berry phase curvature $\theta(n) \propto n^{-2.11}$ demonstrates a scaling correspondence with this velocity-dependent kinematic factor. This suggests a deep connection: \textbf{geometric curvature in state space may encode velocity-dependent effects}. In this interpretation, regions of high curvature (low $n$) correspond to high-velocity quantum states. Rather than invoking Lorentz transformations on spacetime, the lattice geometry itself exhibits the scaling behavior characteristic of relativistic kinematics.
+\textbf{Erratum.}  An earlier version of this paper reported a fitted
+exponent $k = 2.113 \pm 0.015$ for the Berry phase scaling.  That value was
+a theoretical prediction placed as a placeholder pending numerical
+validation; the accompanying figure was never generated (it remained a
+\texttt{[Placeholder]}).  Subsequent computation confirms
+$\theta = 0$ identically for all plaquettes, as shown above.  The claimed
+$k = 2.113$ is therefore \textbf{retracted}.
 
-This correspondence indicates that relativistic effects may be understood as manifestations of state-space geometry rather than as corrections imposed from external principles.
+\subsection{Log-Holonomy of Edge Weights}
+
+Although the Berry phase vanishes, the lattice edge weights carry a
+well-defined \emph{log-holonomy}---the logarithmic circulation around a
+plaquette:
+\begin{equation}
+\Theta(n) = \ln w_{12} + \ln w_{23} - \ln w_{34} - \ln w_{41},
+\label{eq:log_holonomy}
+\end{equation}
+where $w_{ij}$ are the adjacency-matrix weights along each edge.  For the
+topological weights $w = 1/(n_1 n_2)$, the $T_\pm$ edges share the factor
+$1/\bigl(n(n+1)\bigr)$ and cancel, leaving
+\begin{equation}
+\Theta(n) = \ln\!\frac{1}{(n+1)^2} - \ln\!\frac{1}{n^2}
+           = -2\ln\!\frac{n+1}{n}
+           \;\sim\; \frac{2}{n}
+           \qquad (n \gg 1).
+\label{eq:log_holonomy_exact}
+\end{equation}
+The per-plaquette log-holonomy decays as $n^{-1}$ exactly ($k = 1.0$,
+$R^2 = 1.0$).  This measures the \textbf{curvature of the weight function}
+---how edge weights vary across the lattice---not a genuine geometric phase
+in the Berry sense.
+
+\subsection{Toward a Genuine Geometric Phase}
+
+A nonzero Berry phase requires complex-valued transition amplitudes.
+Possible extensions include:
+\begin{enumerate}
+\item Condon--Shortley sign conventions, which multiply $L_+$ by $(-1)^m$
+  (convention-dependent, yielding discrete $\{0,\pi\}$ phases);
+\item A $U(1)$ gauge extension---attaching phase factors
+  $e^{i f(n,l,m)}$ to the transition operators---which would produce
+  continuously varying curvature;
+\item An adiabatic Berry connection from eigenstates of a
+  parameter-dependent Hamiltonian (as in the hyperspherical $P_{\mu\nu}(R)$
+  connection of Ref.~\cite{paper13}).
+\end{enumerate}
+Whether any such extension recovers a scaling exponent near $k \approx 2$
+(the velocity-dependent kinematic factor $v^2 \propto n^{-2}$) remains an
+open question for future work.
 
 
 \section{Discussion: The Algebra-Geometry Duality}
@@ -214,7 +264,7 @@ Our results reveal a profound duality in the structure of the paraboloid lattice
 \begin{enumerate}
 \item \textbf{Algebraic Structure (Wave-like):} The operators $T_\pm, L_\pm$ and their eigenvalues reproduce the \textit{unperturbed} hydrogen spectrum (Eq.~\ref{eq:rydberg}) exactly. This represents the continuous, exact aspect---analogous to the wave description in quantum mechanics.
 
-\item \textbf{Geometric Structure (Particle-like):} The graph Laplacian $L = D - A$ encodes \textit{perturbations}---corrections arising from discrete connectivity. The weighted degree matrix $D$ breaks rotational symmetry, generating the centrifugal barrier. The curvature exhibits velocity-dependent scaling. This represents the discrete, textured aspect---analogous to the particle description.
+\item \textbf{Geometric Structure (Particle-like):} The graph Laplacian $L = D - A$ encodes \textit{perturbations}---corrections arising from discrete connectivity. The weighted degree matrix $D$ breaks rotational symmetry, generating the centrifugal barrier. The edge-weight log-holonomy decays as $n^{-1}$ (Section~\ref{sec:relativity}). This represents the discrete, textured aspect---analogous to the particle description.
 \end{enumerate}
 
 This mirrors the complementarity principle: algebra provides the wave-like continuous description (exact energies), while geometry provides the particle-like discrete description (forces as packing constraints).
@@ -231,8 +281,7 @@ A comprehensive computational search for the fine structure constant $\alpha \ap
 \begin{enumerate}
 \item \textbf{Operator ratios:} The gearing ratio $\|L_+\|/\|T_+\|$ converges to $\approx 1.77$, not $137$ or $1/\alpha$.
 \item \textbf{Commutator defects:} The operators commute exactly, $[T_+, L_+] = 0$, indicating perfect integrability rather than non-commutative geometry.
-\item \textbf{Holonomy defects:} Total curvature vanishes as $n \to \infty$, reflecting the asymptotic flatness of the paraboloid.
-\item \textbf{Berry phase exponent:} The deviation $k - 2 \approx 0.11$ is an $O(10\%)$ geometric correction, not the $O(0.7\%)$ scale of $\alpha$.
+\item \textbf{Holonomy defects:} The Berry phase is identically zero for real operators (Section~\ref{sec:relativity}); the log-holonomy decays as $n^{-1}$, reflecting the asymptotic flatness of the weight function.
 \end{enumerate}
 
 This null result is \textit{physically correct}. The fine structure constant $\alpha = e^2/(4\pi\epsilon_0 \hbar c)$ measures the strength of electromagnetic interactions---specifically, the coupling between electron and photon fields. Our lattice describes the \textit{kinematic} structure of the electron state space without electromagnetic interactions. The hydrogen spectrum $E_n = -1/(2n^2)$ is independent of $\alpha$; fine structure appears only through:
@@ -254,10 +303,10 @@ it vanishes as $n_{\max} \to \infty$ and exhibits the oscillatory
 decay characteristic of finite-size aliasing.
 
 By contrast, the overall eigenvalue spectrum
-($E_n \to -1/(2n^2)$) and the Berry phase scaling
-($\theta \propto n^{-2.11}$, Section~\ref{sec:relativity}) are
+($E_n \to -1/(2n^2)$) and the edge-weight log-holonomy
+($\Theta \propto n^{-1}$, Section~\ref{sec:relativity}) are
 \emph{convergent} properties that survive the continuum limit.
-These represent genuine physical content encoded in the topology.
+These represent genuine structural content encoded in the topology.
 
 This distinction is essential: the graph Laplacian does not generate
 electromagnetic forces or the Lamb shift. It encodes the
@@ -279,7 +328,7 @@ We have demonstrated that quantum mechanics, when formulated on a discrete parab
 \begin{itemize}
 \item \textbf{Algebraic exactness:} Transition operators reproduce the hydrogen spectrum without corrections.
 \item \textbf{Understood discretization artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $\sim$16\% at $n_{\max}=10$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates and decays to $<$0.01\% by $n_{\max}=30$, recovering the exact Coulomb degeneracy.
-\item \textbf{Geometric curvature:} Berry phase scaling ($\theta(n) \propto n^{-2.11}$, $R^2 = 0.9995$) is a convergent property consistent with velocity-dependent relativistic kinematics.
+\item \textbf{Geometric phase structure:} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
 \item \textbf{Kinematic completeness:} The lattice encodes all $\alpha$-independent physics---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}
 
@@ -362,6 +411,11 @@ J. Loutey,
 ``The Geometric Atom: Deriving the Fine Structure Constant from Lattice Helicity,''
 (companion paper, 2026).
 
+\bibitem{paper13}
+J. Loutey,
+``Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs,''
+(companion paper, 2026).
+
 \end{thebibliography}
 
 \appendix
@@ -377,18 +431,17 @@ D_{ii} = \sum_{j} |A_{ij}|,
 \end{equation}
 where $A_{ij}$ is the adjacency matrix constructed from transition operators. For complex-valued operators, the absolute value ensures symmetric (undirected) edge weights. This definition explains why degree values are non-integer (Table~\ref{tab:degrees})---they represent weighted sums of transition matrix elements, not simple edge counts.
 
-\subsection{Berry Phase Calculation}
+\subsection{Berry Phase and Log-Holonomy}
 
-For a closed loop on the lattice defined by a sequence of states $|s_0\rangle \to |s_1\rangle \to |s_2\rangle \to |s_3\rangle \to |s_0\rangle$, the Berry phase is computed as:
-\begin{equation}
-\theta = \arg\left( \prod_{i=0}^{3} \langle s_i | \hat{U}_i | s_{i+1} \rangle \right),
-\end{equation}
-where $\hat{U}_i$ is the transition operator connecting state $i$ to state $i+1$ (with indices modulo 4), and $\arg(\cdot)$ extracts the phase of the complex holonomy. For the plaquette defined in Eq.~\ref{eq:plaquette}, this becomes:
-\begin{equation}
-\theta = \arg\left( \langle n,l,m | T_+ | n+1,l,m \rangle \langle n+1,l,m | L_+ | n+1,l,m+1 \rangle \langle n+1,l,m+1 | T_- | n,l,m+1 \rangle \langle n,l,m+1 | L_- | n,l,m \rangle \right).
-\end{equation}
+For a plaquette (Eq.~\ref{eq:plaquette}), the Berry phase is
+$\theta = \arg(\prod_i \langle s_i | \hat{U}_i | s_{i+1}\rangle)$.
+As shown in Section~\ref{sec:relativity}, all four matrix elements are real
+and positive, so $\theta = 0$ identically.
 
-The geometric phase arises from the non-commutativity of parallel transport around the closed loop, manifesting as the total phase accumulated in traversing the plaquette.
+The log-holonomy (Eq.~\ref{eq:log_holonomy}) provides a nonzero measure of
+weight-function curvature.  For topological weights $w = 1/(n_1 n_2)$, the
+exact result is $\Theta(n) = -2\ln\bigl((n+1)/n\bigr)$, decaying as
+$n^{-1}$.
 
 
 \section{Computational Details}
@@ -409,11 +462,15 @@ Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.spars
 
 State identification was performed by computing overlap probabilities $|\langle n,l,m | \psi_k \rangle|^2$ for each eigenvector $|\psi_k\rangle$, selecting the eigenvector with maximal overlap for each target state.
 
-\subsection{Berry Phase Calculation}
+\subsection{Log-Holonomy Calculation}
 
-Rectangular plaquettes (Eq.~\ref{eq:plaquette}) were identified by searching for closed paths in $(n,m)$ space at fixed $l$. A total of 2,280 valid plaquettes were found for lattices with $n \leq 30$. Edge phases were computed from transition matrix elements using the $SU(2)$ gauge structure. Berry phases were averaged within radial shells to obtain $\theta(n)$.
-
-Power law fitting used logarithmic transformation and least-squares regression, yielding exponent $k = 2.113 \pm 0.015$ with $R^2 = 0.9995$.
+Rectangular plaquettes (Eq.~\ref{eq:plaquette}) were identified by searching
+for closed paths in $(n,m)$ space at fixed $l$.  The Berry phase
+$\theta = \arg(\cdot)$ is identically zero for all plaquettes because every
+$SU(2)/SU(1,1)$ matrix element is real and positive
+(Section~\ref{sec:relativity}).  The log-holonomy
+$\Theta(n) = -2\ln\bigl((n+1)/n\bigr)$ was computed analytically and
+verified numerically, giving power-law exponent $k = 1.0$ exactly.
 
 
 \section{Supplementary Data}
