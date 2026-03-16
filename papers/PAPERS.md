@@ -1,6 +1,6 @@
 # GeoVac Paper Series
 
-**Last Updated:** March 12, 2026
+**Last Updated:** March 15, 2026
 
 ## Reading Guide
 
@@ -8,10 +8,13 @@ The GeoVac papers form a narrative arc from atoms to molecules:
 
 1. **Start here:** Paper 7 (the theoretical foundation -- graph Laplacian = S3 = Schrodinger)
 2. **Atoms:** Papers 0, 1 (graph construction, eigenvalue methods), then FCI-A (multi-electron results)
-3. **Dynamics:** Paper 6 (time evolution, spectroscopy, AIMD on graph Hamiltonians)
-4. **Molecules -- the problem:** Paper 8-9 (bond sphere geometry, why single-S3 fails for binding)
-5. **Molecules -- the solution:** Paper 11 (prolate spheroidal lattice, H2+ with zero free params)
-6. **Molecules -- practical:** FCI-M (LCAO approach for LiH), Paper 10 (nuclear vibration/rotation)
+3. **Multi-electron atoms:** Paper 13 (hyperspherical lattice, He at 0.05%, fiber bundle)
+4. **Dynamics:** Paper 6 (time evolution, spectroscopy, AIMD on graph Hamiltonians)
+5. **Molecules -- the problem:** Paper 8-9 (bond sphere geometry, why single-S3 fails for binding)
+6. **Molecules -- the solution:** Paper 11 (prolate spheroidal lattice, H2+ with zero free params)
+7. **Molecules -- two-electron:** Paper 12 (algebraic V_ee, Neumann expansion, H2 92.4% D_e)
+8. **Molecules -- practical:** FCI-M (LCAO approach for LiH), Paper 10 (nuclear vibration/rotation)
+9. **Ab initio spectroscopy:** Paper 13 Sec. IX (full pipeline: PES -> Morse -> nuclear lattice)
 
 ## Paper Inventory
 
@@ -22,12 +25,14 @@ Defensible foundations. Strictly testable, all claims backed by numerical result
 | Paper | File | Status | Key Result |
 |:------|:-----|:------:|:-----------|
 | Paper 0 | `Paper_0_Geometric_Packing.tex` | Active | Universal constant K = -1/16 |
-| Paper 1 | `paper_1_spectrum.tex` | Active | Spectral graph theory, O(N) eigenvalue methods |
+| Paper 1 | `paper_1_spectrum.tex` | Active | Spectral graph theory, O(N) eigenvalue methods. **v1.2.0: Berry phase k=2.113 retracted** (arg()=0 for real operators); Section IV rewritten with erratum |
 | Paper 6 | `Paper_6_Quantum_Dynamics.tex` | Active | O(V) dynamics: Rabi, spectroscopy, AIMD |
 | Paper 7 | `Paper_7_Dimensionless_Vacuum.tex` | Active | S3 proof (18/18 symbolic), Schrodinger recovery |
 | Paper 10 | `paper_10_nuclear_lattice.tex` | Draft | Graph structures for molecular vibration/rotation |
 | Paper 11 | `paper_11_prolate_spheroidal.tex` | Draft | Prolate spheroidal lattice: H2+ 0.21% R_eq, 0.70% E_min |
 | FCI-A | `paper_fci_atoms.tex` | Draft | He 0.35%, Li 1.10%, Be 0.90% |
+| Paper 12 | `paper_12_neumann_vee.tex` | Active | Neumann V_ee expansion: H2 92.4% D_e, cusp diagnosis (7.6% gap) |
+| Paper 13 | `paper_13_hyperspherical.tex` | Active | Hyperspherical lattice: He 0.05%, fiber bundle, autoionization channels, ab initio spectroscopy |
 | FCI-M | `paper_fci_molecules.tex` | Scaffold | LiH D_e 1.0% (CP-corrected), R_eq analysis |
 
 ### Methods (`papers/methods/`)
@@ -65,3 +70,6 @@ Superseded material preserved for reference.
 - FCI papers renamed: `paper_geovac_fci.tex` -> `paper_fci_atoms.tex`, `paper_geovac_lcao_fci.tex` -> `paper_fci_molecules.tex`.
 - Paper 11 created on March 12, 2026. Forward references added to Papers 7, 8-9, FCI-A, FCI-M, and 10.
 - FCI-M paper scaffolded on March 11, 2026. Section structure and bibliography seeded; prose to be written.
+- Papers 12 and 13 added in v1.1.0 (March 15, 2026).
+- Paper 1 Berry phase section corrected in v1.2.0 (March 15, 2026): k=2.113 retracted, Section IV rewritten with erratum. See `debug/qa_sprint/berry_phase_reconciliation.md` for full analysis.
+- Paper 13 updated in v1.2.0: new Sections X (autoionization) and XI (adiabatic limits).
