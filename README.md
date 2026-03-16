@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.1.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.2.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.1.0** - The Multi-Particle Release
+**Version 1.2.0** - The QA & Corrections Release
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,9 +10,30 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.1.0
+## What's New in v1.2.0
 
-### The Multi-Particle Natural Geometry (Paper 13)
+### Paper 1: Berry Phase Correction
+- **Retracted k = 2.113:** The Berry phase exponent was never validated. All SU(2)/SU(1,1) matrix elements are real and positive, so `arg(product) = 0` for every plaquette. The claimed exponent was a theoretical placeholder.
+- Section IV rewritten as "Geometric Phase Structure of the Lattice" with erratum
+- The **log-holonomy** (weight-function curvature) is the valid measurable quantity: k = 1.0 exactly
+
+### Paper 13: Autoionization & Adiabatic Limits
+- New Section X: Autoionization channel classification from angular topology (Gaunt coupling graph)
+- New Section XI: Limits of the adiabatic approximation for quantitative widths
+
+### New Modules
+- `geovac/berry_phase.py` -- Log-holonomy on geometric lattice plaquettes
+- `geovac/hyperspherical_complex_scaling.py` -- Exterior complex scaling for resonances
+- `geovac/hyperspherical_coupling.py` -- Coupled-channel adiabatic solver
+- `geovac/hyperspherical_resonances.py` -- Resonance detection and analysis
+
+### QA Sprint
+- Comprehensive audit: He energy, Neumann D_e, omega_e, kappa, symbolic proofs all verified
+- Cross-document consistency: 7/8 claims consistent; Berry phase (sole issue) now corrected
+- Test fixes: 2 assertionless tests fixed, 1 conditional assertion made unconditional
+- **528 tests pass, 0 fail, 1 xfail**
+
+### Prior: v1.1.0 -- The Multi-Particle Natural Geometry (Paper 13)
 The hyperspherical lattice extends GeoVac to multi-electron systems:
 
 | System | Method | Error | Matrix dim. |
@@ -202,6 +223,10 @@ geovac/                 Core package
   hyperspherical_angular.py Hyperangular solver (Gaunt + Liouville FD)
   hyperspherical_adiabatic.py Adiabatic potential curves
   hyperspherical_radial.py  Hyperradial solver + solve_helium()
+  hyperspherical_complex_scaling.py  ECS for resonance detection
+  hyperspherical_coupling.py  Coupled-channel adiabatic solver
+  hyperspherical_resonances.py  Resonance analysis tools
+  berry_phase.py            Log-holonomy on geometric lattice
   nuclear_lattice.py      Nuclear vibration/rotation lattice
   coupled_en_lattice.py   Coupled electronic-nuclear lattice
   dynamics.py             TimePropagator (Crank-Nicolson)
@@ -234,6 +259,9 @@ tests/                  Unit tests (pytest) + validation
   test_neumann_vee.py       Neumann V_ee algebraic integrals
   test_direct_ci.py         6 tests (Direct CI consistency)
   test_lih_fci.py           50 tests (LiH heteronuclear FCI)
+  test_berry_phase.py       7 tests (log-holonomy, power-law)
+  test_complex_scaling.py   ECS resonance tests
+  test_hyperspherical_coupled.py  Coupled-channel tests
 
 demo/                   Demonstrations (H2, spectroscopy, AIMD)
 debug/                  Development scratchpad + generated data/plots
@@ -248,7 +276,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | # | Title | Key Result |
 |:-:|-------|------------|
 | 0 | Geometric Packing | Universal constant K = -1/16 |
-| 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling |
+| 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling, Berry phase correction |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
 | 7 | **Dimensionless Vacuum** | **S3 proof (18/18 symbolic), Schrodinger recovery** |
 | 8-9 | Bond Sphere + Sturmian (`methods/`) | SO(4) D-matrix, negative theorem |
@@ -295,7 +323,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.1.0},
+  version = {1.2.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```
