@@ -5,6 +5,50 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-03-18
+
+### Algebraic Structure & SO(3N) Generalization
+
+#### Added
+- **Paper 7, Section VI:** "Generalization to N Electrons"
+  - SO(3N) isometry group for N-electron atoms on S^(3N-1)
+  - General Casimir formula: μ_free = ν(ν + 3N - 2)/2
+  - Fermionic statistics determine ground-state irrep
+  - Table: H (SO(3)), He (SO(6)), Li (SO(9)), Be (SO(12))
+
+- **Paper 13, Section XII:** "Algebraic Structure of the Angular Problem"
+  - A. SO(6) Casimir eigenvalues verified to <0.001%
+  - B. Exact first-order formula: a₁ = (8/3π)(√2 - 4Z), match to 9×10⁻⁶
+  - C. Selection rules: Δν = 0 mod 4 from S₂ exchange symmetry
+  - D. Algebraic/transcendental boundary: a_n algebraic, μ(R) transcendental
+  - E. Topology flow S⁵ → S³ × ℝ: IPR, effective dimension, R_c ≈ 4.7 bohr
+  - F. Lithium generalization: SO(9) Casimir, [2,1] of S₃, ν=1 ground state
+  - G. Emerging pattern: quasi-Coulomb accuracy improves with electron count
+
+- **Debug scripts** for algebraic structure analysis:
+  - `debug_so6_casimir.py`: Casimir verification, free eigenvalue tables
+  - `debug_algebraic_coefficients.py`: Matrix element computation
+  - `debug_a2_final.py`: Second-order perturbation convergence
+  - `debug_closed_form_final.py`: Partial harmonic sum derivation (definitive)
+  - `debug_crossover_analysis.py`: Padé, interpolation, continued fractions
+  - `debug_curvature_correlation.py`: Conformal factor and Ricci flow tests
+  - `debug_topological_transition.py`: S⁵ → S³ × ℝ surgery characterization
+  - `debug_flow_comparison.py`: Symplectic impedance vs topology flow
+  - `debug_lithium_algebraic.py`: 3-electron SO(9) analysis
+
+#### Theoretical Advances
+- Perturbation coefficients are individually algebraic (rational × π^{-n})
+- Full eigenvalues are transcendental (topology flow integral)
+- Quasi-Coulomb accuracy improves with electron count:
+  He (2e): 5.5% error → Li (3e): ~0% error
+- Fermionic statistics as mechanism: higher irreps have larger μ_free
+- Surgery correction Δ = −0.16 Ha is dynamical, not algebraic
+
+#### Changed
+- Paper 7: Added Section VI before Discussion (~1.5 pages)
+- Paper 13: Added Section XII with 7 subsections (~3 pages)
+- Paper 13: Updated "Open questions" to reference lithium results
+
 ## [1.4.0] - 2026-03-17
 
 ### Papers 14-15, Level 4 Solver, Heteronuclear Extension

@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.4.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.5.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.4.0** - Papers 14-15, Level 4 Solver, Heteronuclear Extension
+**Version 1.5.0** - Algebraic Structure & SO(3N) Generalization
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,23 +10,19 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.4.0
+## What's New in v1.5.0
 
-### Paper 14: Structurally Sparse Qubit Hamiltonians
-- GeoVac Pauli terms scale as O(Q^3.15) vs O(Q^4.60) for conventional Gaussian bases
-- ERI density drops as ~1/M^2 (angular momentum selection rules)
-
-### Paper 15: Level 4 Natural Geometry
-- Molecule-frame hyperspherical coordinates for two-center, two-electron molecules
-- **H$_2$: 94.1% $D_e$** with variational 2D solver (29 channels, $\sigma$+$\pi$)
-- **HeH$^+$: 93.1% $D_e$** with charge-center origin (57 channels, $\sigma$+$\pi$)
-- Algebraic nuclear coupling via multipole expansion (1019× speedup)
-- $\pi$-channel support adds ~7 percentage points at each $l_{\max}$
-- Heteronuclear extension: $Z_A$, $Z_B$ parameters, odd-$k$ coupling, charge-center origin
-- Variational 2D solver diagnoses ~11% adiabatic approximation overestimate
-- Double-adiabatic fiber bundle: nuclear base, hyperradial base, angular fiber
+### Papers 7 & 13: Algebraic Structure of Multi-Electron Atoms
+- **SO(3N) Casimir eigenvalues** for N-electron systems on S^(3N-1)
+- **Exact perturbation formulas:** a₁ = (8/3π)(√2 - 4Z) for He, verified to 9×10⁻⁶
+- **Partial harmonic sums** determine all angular matrix elements algebraically
+- **Selection rules** from permutation group S_N (Δν = 0 mod 4 for He)
+- **Topology flow** S^(3N-1) → S^(3N-4) × ℝ explains algebraic vs transcendental boundary
+- **Li (3e):** SO(9) Casimir, [2,1] irrep of S₃, quasi-Coulomb ~0% error (vs He 5.5%)
+- **Emerging pattern:** accuracy improves with electron count due to Pauli exclusion
 
 ### Prior Releases
+- **v1.4.0:** Papers 14-15, Level 4 Solver (H₂ 94.1%, HeH⁺ 93.1%)
 - **v1.2.0:** QA & Corrections (Berry phase retraction, autoionization sections)
 - **v1.1.0:** Multi-Particle Natural Geometry (Papers 12-13, He 0.05%, H$_2$ 92.4% $D_e$)
 - **v1.0.x:** Paper 11, Direct CI, LiH benchmark, Bond Sphere theory
@@ -246,12 +242,12 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | 0 | Geometric Packing | Universal constant K = -1/16 |
 | 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling, Berry phase correction |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
-| 7 | **Dimensionless Vacuum** | **S3 proof (18/18 symbolic), Schrodinger recovery** |
+| 7 | **Dimensionless Vacuum** | **S3 proof (18/18 symbolic), SO(3N) generalization** |
 | 8-9 | Bond Sphere + Sturmian (`methods/`) | SO(4) D-matrix, negative theorem |
 | 10 | Nuclear Lattice | Vibration/rotation graph structures |
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H2+ 0.70% |
 | **12** | **Algebraic V_ee** | **Neumann expansion, H2 92.4% D_e** |
-| **13** | **Hyperspherical Lattice** | **He 0.05%, fiber bundle, ab initio spectroscopy** |
+| **13** | **Hyperspherical Lattice** | **He 0.05%, SO(6) Casimir, algebraic structure, Li SO(9)** |
 | **14** | **Qubit Hamiltonians** | **O(Q^3.15) Pauli scaling, structural sparsity** |
 | **15** | **Level 4 Geometry** | **H₂ 94.1%, HeH⁺ 93.1%, 2D solver** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
@@ -292,7 +288,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.4.0},
+  version = {1.5.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```
