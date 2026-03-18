@@ -334,6 +334,116 @@ where the coefficients $a_k(p)$ are \textit{rational functions} of $p$ and $p_0$
 
 
 %% ========================================================================
+\section{Generalization to $N$ Electrons}
+\label{sec:N_electron}
+%% ========================================================================
+
+The preceding sections established the $S^3$ structure for a single
+electron.  The framework generalizes naturally to $N$-electron atoms:
+the $N$-body configuration space $\mathbb{R}^{3N}$ maps, via the
+hyperspherical Fock projection, onto the unit sphere
+$S^{3N-1}$~\cite{loutey_paper13}.
+
+\subsection{The Angular Manifold and Its Isometry Group}
+
+For $N$ electrons at positions $\bm{r}_1, \ldots, \bm{r}_N \in
+\mathbb{R}^3$, the hyperradius $R = \sqrt{\sum_i r_i^2}$ separates
+a radial coordinate from a $(3N-1)$-dimensional angular manifold.
+In the limit $R \to 0$ (all electrons at the nucleus), the angular
+dynamics reduces to the Laplace--Beltrami operator on the unit
+$S^{3N-1}$, whose isometry group is $\mathrm{SO}(3N)$.
+
+The eigenvalues of the grand angular momentum operator $\Lambda^2$
+on $S^{3N-1}$ are the $\mathrm{SO}(3N)$ Casimir eigenvalues:
+\begin{equation}
+  \mu_{\mathrm{free}}(\nu) = \frac{\nu(\nu + 3N - 2)}{2},
+  \quad \nu = 0, 1, 2, \ldots
+  \label{eq:casimir_general}
+\end{equation}
+These are the ``free'' eigenvalues---the spectrum before any
+electron-electron or electron-nuclear interactions are included
+in the charge function $C/R$.
+
+\subsection{The Hierarchy of Spheres}
+
+Table~\ref{tab:N_electron} summarizes the angular manifold, symmetry
+group, and Casimir structure for the first few electron numbers.
+Each row represents a qualitatively different angular problem,
+but all share the same structural origin: the Laplace--Beltrami
+operator on a unit sphere of appropriate dimension.
+
+\begin{table}[h]
+\caption{Angular manifold structure for $N$-electron atoms.
+The centrifugal term $l_{\mathrm{eff}}(l_{\mathrm{eff}}+1)/(2R^2)$
+arises from extracting the Jacobian factor $R^{-(3N-1)/2}$.
+The effective quantum number $n_{\mathrm{eff}} = l_{\mathrm{eff}} + 1$
+determines the quasi-Coulomb energy.}
+\label{tab:N_electron}
+\begin{ruledtabular}
+\begin{tabular}{lccccc}
+  $N$ & $S^{d-1}$ & $\mathrm{SO}(d)$ & $\mu_{\mathrm{free}}$
+  & $l_{\mathrm{eff}}$ & $n_{\mathrm{eff}}$ \\
+  \hline
+  1 & $S^2$ & SO(3) & $\nu(\nu+1)/2$   & 0   & 1 \\
+  2 & $S^5$ & SO(6) & $\nu(\nu+4)/2$   & 3/2 & 5/2 \\
+  3 & $S^8$ & SO(9) & $\nu(\nu+7)/2$   & 3   & 4 \\
+  4 & $S^{11}$ & SO(12) & $\nu(\nu+10)/2$ & 9/2 & 11/2 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+For hydrogen ($N = 1$), $S^2$ recovers the familiar angular momentum
+eigenvalues $l(l+1)/2$ and the $\mathrm{SO}(3)$ rotation group, while
+$S^3$ (from the full 3D problem including the radial Fock projection)
+gives the $\mathrm{SO}(4)$ hydrogen symmetry of Section~\ref{sec:conformal}.
+For helium ($N = 2$), the angular manifold is $S^5$ with
+$\mathrm{SO}(6)$ symmetry, and the free eigenvalues
+$\nu(\nu+4)/2 = 0, 3, 8, 15, \ldots$ have been verified numerically
+to $< 0.001\%$ against the hyperspherical angular
+solver~\cite{loutey_paper13}.
+
+\subsection{Fermionic Statistics and Ground-State Selection}
+
+The permutation group $S_N$ acts on the angular manifold by
+exchanging electron coordinates.  Fermionic antisymmetry requires
+the spatial wavefunction to transform under a specific irreducible
+representation (irrep) of $S_N$, determined by the spin state.
+
+For helium ($N = 2$, singlet ${}^1S$), the spatial part is
+symmetric under $S_2$ exchange $\alpha \to \pi/2 - \alpha$.
+This selects even grand angular momentum $\nu = 0, 2, 4, \ldots$,
+and the ground state sits at $\nu = 0$ with $\mu_{\mathrm{free}} = 0$.
+
+For lithium ($N = 3$, doublet ${}^2S$), the spatial part transforms
+as the standard (mixed-symmetry) irrep $[2,1]$ of $S_3$.  This
+irrep first appears at $\nu = 1$, so the lowest allowed free
+eigenvalue is $\mu_{\mathrm{free}} = 1 \cdot 8/2 = 4$---not zero.
+The higher baseline reflects the Pauli exclusion principle encoded
+group-theoretically: more electrons require higher angular momentum
+to satisfy antisymmetry.
+
+\subsection{Implications for the Dimensionless Vacuum}
+
+The $N$-electron generalization preserves the core principle: at
+$R = 0$, the angular dynamics is a free particle on the unit
+$S^{3N-1}$, with pure integer-ratio eigenvalues determined by
+the $\mathrm{SO}(3N)$ Casimir.  No physical scale enters.  The
+electron-nuclear and electron-electron interactions enter through
+the charge function $C(\hat{\Omega})/R$, which acts as a
+perturbation that lifts the Casimir degeneracy---analogous to how
+the energy-shell constraint $p_0^2 = -2E$ projects the dimensionless
+$S^3$ eigenvalues into dimensionful energies for the single-electron
+case.
+
+The 18 symbolic proofs of Appendix~\ref{app:tests} verify the
+$N = 1$ case.  The generalization to $N > 1$ follows from the same
+algebraic structure: the Laplace--Beltrami operator on $S^{3N-1}$
+is the continuum limit of a discrete graph Laplacian on the
+$N$-electron angular lattice, and its spectrum is determined by
+the topology of the sphere alone.
+
+
+%% ========================================================================
 \section{Discussion and Conclusions}
 \label{sec:discussion}
 %% ========================================================================
@@ -445,6 +555,12 @@ J. Loutey,
 ``The Molecular Fock Projection: Diatomic Molecules as Prolate
 Spheroidal Lattices,''
 GeoVac Paper 11 (2026).
+
+\bibitem{loutey_paper13}
+J. Loutey,
+``The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel
+Graphs,''
+GeoVac Paper 13 (2026).
 
 \end{thebibliography}
 
