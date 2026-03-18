@@ -5,6 +5,31 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-03-17
+
+### Papers 14-15, Level 4 Solver, Heteronuclear Extension
+
+#### Added
+- Paper 14: Structurally sparse qubit Hamiltonians (O(Q^3.15) Pauli scaling)
+- Paper 15: Level 4 natural geometry for two-center two-electron molecules
+  - H₂: 94.1% D_e with variational 2D solver (29 channels, σ+π)
+  - HeH⁺: 93.1% D_e with charge-center origin (57 channels, σ+π)
+- `geovac/level4_multichannel.py` — Molecule-frame hyperspherical solver
+- Algebraic nuclear coupling via multipole expansion (replaces quadrature)
+- π-channel support (m_max parameter) for angular correlation
+- Heteronuclear molecules (Z_A, Z_B parameters, charge-center origin)
+- Variational 2D solver with shift-invert eigensolver
+- Wigner 3j symbols for generalized angular coupling
+- `tests/test_level4_multichannel.py` — Convergence and heteronuclear tests
+
+#### Changed
+- Nuclear coupling: 1019× speedup from algebraic vs quadrature
+- Channel enumeration: extended to (l₁, m₁, l₂, m₂) tuples
+
+#### Fixed
+- 2D solver ghost modes at large matrix sizes (shift-invert with sigma)
+- Adiabatic approximation diagnosed (~11% systematic overestimate)
+
 ## [1.2.0] - 2026-03-15
 
 ### The QA & Corrections Release

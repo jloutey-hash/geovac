@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.2.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.4.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.2.0** - The QA & Corrections Release
+**Version 1.4.0** - Papers 14-15, Level 4 Solver, Heteronuclear Extension
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,63 +10,26 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.2.0
+## What's New in v1.4.0
 
-### Paper 1: Berry Phase Correction
-- **Retracted k = 2.113:** The Berry phase exponent was never validated. All SU(2)/SU(1,1) matrix elements are real and positive, so `arg(product) = 0` for every plaquette. The claimed exponent was a theoretical placeholder.
-- Section IV rewritten as "Geometric Phase Structure of the Lattice" with erratum
-- The **log-holonomy** (weight-function curvature) is the valid measurable quantity: k = 1.0 exactly
-
-### Paper 13: Autoionization & Adiabatic Limits
-- New Section X: Autoionization channel classification from angular topology (Gaunt coupling graph)
-- New Section XI: Limits of the adiabatic approximation for quantitative widths
-
-### New Modules
-- `geovac/berry_phase.py` -- Log-holonomy on geometric lattice plaquettes
-- `geovac/hyperspherical_complex_scaling.py` -- Exterior complex scaling for resonances
-- `geovac/hyperspherical_coupling.py` -- Coupled-channel adiabatic solver
-- `geovac/hyperspherical_resonances.py` -- Resonance detection and analysis
-
-### QA Sprint
-- Comprehensive audit: He energy, Neumann D_e, omega_e, kappa, symbolic proofs all verified
-- Cross-document consistency: 7/8 claims consistent; Berry phase (sole issue) now corrected
-- Test fixes: 2 assertionless tests fixed, 1 conditional assertion made unconditional
-- **528 tests pass, 0 fail, 1 xfail**
-
-### Prior: v1.1.0 -- The Multi-Particle Natural Geometry (Paper 13)
-The hyperspherical lattice extends GeoVac to multi-electron systems:
-
-| System | Method | Error | Matrix dim. |
-|--------|--------|:-----:|:-----------:|
-| He (hyperspherical, 1 ch.) | Adiabatic | **0.05%** | 600 |
-| H$_2$ (Neumann $V_{ee}$, 27 bf) | Algebraic CI | **92.4%** $D_e$ | 27 |
-| H$_2$ $\nu_{01}$ (ab initio) | Full pipeline | **-0.1%** | --- |
-
-### Paper 12: Algebraic Two-Electron Integrals
-- Neumann expansion replaces numerical $V_{ee}$ quadrature with algebraic evaluation
-- 12-20 percentage point improvement over numerical integration at all basis sizes
-- Remaining 7.6% gap diagnosed as electron-electron cusp (basis limit)
-
-### Paper 13: Hyperspherical Lattice for He
-- Single-channel adiabatic solver: E = -2.9052 Ha (0.05% vs exact -2.9037 Ha)
-- First non-trivial fiber bundle in GeoVac (angular structure varies with R)
-- Structural prototype for electron-nuclear coupling in molecules
-- 20 new tests, all passing
-
-### Ab Initio Molecular Spectroscopy
-- Full pipeline: electron lattice -> PES -> Morse fit -> nuclear lattice -> rovibrational spectrum
-- H$_2$: $R_e$ = 1.42 bohr (+1.2%), $\omega_e$ = 4435 cm$^{-1}$ (+0.8%), $B_e$ = 59.5 cm$^{-1}$ (-2.2%)
-- Zero experimental spectroscopic input at any stage
-
-### Qubit Encoding Benchmarks
+### Paper 14: Structurally Sparse Qubit Hamiltonians
 - GeoVac Pauli terms scale as O(Q^3.15) vs O(Q^4.60) for conventional Gaussian bases
 - ERI density drops as ~1/M^2 (angular momentum selection rules)
 
-### Prior Milestones (v1.0.x, v0.9.x)
-- **Paper 11:** Prolate spheroidal lattice for H$_2^+$ (0.70% error, zero free params)
-- **Direct CI:** Excitation-driven FCI solver, O(N_SD^1.0) scaling, Be nmax=4 in 357s
-- **LiH benchmark:** D_e_CP = 0.093 Ha (1.0% error), BSSE diagnosed and corrected
-- **Bond Sphere theory (Paper 8-9):** SO(4) selection rules, Sturmian negative theorem
+### Paper 15: Level 4 Natural Geometry
+- Molecule-frame hyperspherical coordinates for two-center, two-electron molecules
+- **H$_2$: 94.1% $D_e$** with variational 2D solver (29 channels, $\sigma$+$\pi$)
+- **HeH$^+$: 93.1% $D_e$** with charge-center origin (57 channels, $\sigma$+$\pi$)
+- Algebraic nuclear coupling via multipole expansion (1019× speedup)
+- $\pi$-channel support adds ~7 percentage points at each $l_{\max}$
+- Heteronuclear extension: $Z_A$, $Z_B$ parameters, odd-$k$ coupling, charge-center origin
+- Variational 2D solver diagnoses ~11% adiabatic approximation overestimate
+- Double-adiabatic fiber bundle: nuclear base, hyperradial base, angular fiber
+
+### Prior Releases
+- **v1.2.0:** QA & Corrections (Berry phase retraction, autoionization sections)
+- **v1.1.0:** Multi-Particle Natural Geometry (Papers 12-13, He 0.05%, H$_2$ 92.4% $D_e$)
+- **v1.0.x:** Paper 11, Direct CI, LiH benchmark, Bond Sphere theory
 
 ---
 
@@ -90,6 +53,8 @@ The hyperspherical lattice extends GeoVac to multi-electron systems:
 | H$_2^+$ (prolate spheroidal) | Separated solver | **0.70%** | Zero free params |
 | H$_2$ (prolate CI, relaxed) | Eckart SCF + 2×2 CI | 58% $D_e$ | Zero free params |
 | **H$_2$ (Neumann $V_{ee}$)** | **Algebraic CI, 27 bf** | **92.4% $D_e$** | **Paper 12** |
+| **H$_2$ (Level 4, 2D)** | **Mol.-frame hypersp.** | **94.1% $D_e$** | **Paper 15** |
+| **HeH$^+$ (Level 4)** | **Charge-center hypersp.** | **93.1% $D_e$** | **Paper 15** |
 | H$_2$ (Full CI) | Tensor product | 1.72% | Cross-nuclear ceiling |
 | LiH ($D_e$, CP-corrected) | LCAO FCI | **1.0%** | nmax=3 |
 
@@ -226,6 +191,7 @@ geovac/                 Core package
   hyperspherical_complex_scaling.py  ECS for resonance detection
   hyperspherical_coupling.py  Coupled-channel adiabatic solver
   hyperspherical_resonances.py  Resonance analysis tools
+  level4_multichannel.py  Level 4 mol.-frame hyperspherical solver
   berry_phase.py            Log-holonomy on geometric lattice
   nuclear_lattice.py      Nuclear vibration/rotation lattice
   coupled_en_lattice.py   Coupled electronic-nuclear lattice
@@ -236,7 +202,7 @@ geovac/                 Core package
   dirac_hamiltonian.py    Relativistic Dirac solver
 
 papers/
-  core/                 Defensible foundations (Papers 0, 1, 6, 7, 10-13, FCI)
+  core/                 Defensible foundations (Papers 0, 1, 6, 7, 10-15, FCI)
     Paper 0:  Geometric packing & universal constant
     Paper 1:  Spectral graph theory & eigenvalue methods
     Paper 6:  Quantum dynamics & thermodynamics
@@ -245,6 +211,8 @@ papers/
     Paper 11: Molecular Fock Projection (prolate spheroidal)
     Paper 12: Algebraic V_ee (Neumann expansion)
     Paper 13: Hyperspherical lattice (multi-electron atoms)
+    Paper 14: Structurally sparse qubit Hamiltonians
+    Paper 15: Level 4 mol.-frame hyperspherical (H2 94.1%, HeH+ 93.1%)
     FCI-A:    Multi-electron atoms (He, Li, Be)
     FCI-M:    Heteronuclear diatomics (LiH benchmark)
   zenodo/               Publication cluster (Papers 7, 11, 12, 13)
@@ -284,6 +252,8 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H2+ 0.70% |
 | **12** | **Algebraic V_ee** | **Neumann expansion, H2 92.4% D_e** |
 | **13** | **Hyperspherical Lattice** | **He 0.05%, fiber bundle, ab initio spectroscopy** |
+| **14** | **Qubit Hamiltonians** | **O(Q^3.15) Pauli scaling, structural sparsity** |
+| **15** | **Level 4 Geometry** | **H₂ 94.1%, HeH⁺ 93.1%, 2D solver** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | LCAO FCI (Molecules) | LiH D_e 1.0% (CP-corrected) |
 
@@ -304,10 +274,9 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 
 ### Current Limitations
 - **Multi-electron molecules:** The LCAO approach achieves correct-order binding energies but lacks R-dependent kinetic repulsion. Equilibrium geometry requires a Fock-weighted correction with adjustable lambda (see FCI-M paper, Sec. V).
-- **H2 electron-electron cusp:** Prolate spheroidal CI saturates at 92.4% D_e due to missing non-analytic r_12 terms (Paper 12 diagnosis). The hyperspherical approach (Paper 13) resolves this for atoms but has not yet been combined with molecular coordinates.
+- **H2 electron-electron cusp:** Level 4 molecule-frame hyperspherical solver recovers 94.1% D_e (Paper 15), surpassing prolate spheroidal CI (92.4%, Paper 12). The remaining ~6% gap requires higher partial waves ($l_{\max} \ge 5$).
 - **Basis convergence:** At nmax=3, BSSE (0.115 Ha) exceeds LiH experimental binding energy (0.092 Ha). Convergence at larger nmax not characterized.
 - **Polyatomics:** No natural geometry identified beyond two-center systems.
-- **Level 4 geometry:** The combined two-center + two-electron natural coordinate system remains an open problem.
 
 ### What GeoVac Does NOT Replace
 - Production quantum chemistry for general molecules
@@ -323,7 +292,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.2.0},
+  version = {1.4.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

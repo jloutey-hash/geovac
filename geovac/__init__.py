@@ -37,6 +37,7 @@ from .atomic_solver import AtomicSolver, solve_hydrogen, solve_atom
 from .dynamics import TimePropagator
 from .lattice_index import LatticeIndex, MolecularLatticeIndex, compute_vee_s3_overlap, compute_bsse_correction, compute_cross_atom_J, compute_cross_atom_K, compute_overlap_element, compute_atomic_p0, compute_exact_cross_nuclear
 from .direct_ci import DirectCISolver
+from .qubit_encoding import JordanWignerEncoder, PauliAnalysis
 from .aimd import VelocityVerlet, LangevinThermostat, run_lih_aimd, run_li_nve
 from .benchmark import run_unitarity_test, run_scaling_benchmark, run_li_energy_audit
 
@@ -55,6 +56,8 @@ __all__ = [
     'TimePropagator',
     'LatticeIndex',
     'MolecularLatticeIndex',
+    'JordanWignerEncoder',
+    'PauliAnalysis',
     'compute_bsse_correction',
     'compute_cross_atom_K',
     'VelocityVerlet',

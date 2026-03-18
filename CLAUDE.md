@@ -252,6 +252,8 @@ mv test_something.py debug/
 - **He (Hyperspherical):** Must be < 0.1% error → validates multi-electron natural geometry
 - **H2 Full CI:** Must be < 1.0% error → validates physics
 - **H2 Neumann V_ee:** 92.4% D_e → validates algebraic integral approach
+- **H2 Level 4 (2D solver):** 94.1% D_e → validates molecule-frame hyperspherical geometry
+- **HeH⁺ Level 4:** 93.1% D_e → validates heteronuclear extension with charge-center origin
 - **Hyperspherical tests:** 20/20 must pass → validates angular + adiabatic + radial solvers
 - **Muonic H:** Energy ratio = 206.77, topology identical → validates mass-independence
 - **Spectral Dimension:** d_s ≈ 1.8-2.0, mass-independent → validates holography
@@ -266,6 +268,8 @@ mv test_something.py debug/
   - **Paper 11:** Molecular Fock projection — prolate spheroidal lattice for diatomics (H₂⁺ at 0.70%)
   - **Paper 12:** Algebraic two-electron integrals — Neumann expansion for V_ee (H₂ at 92.4% D_e); cusp diagnosis
   - **Paper 13:** Hyperspherical lattice — two-electron atoms as coupled channel graphs (He at 0.05%); first non-trivial fiber bundle; ab initio molecular spectroscopy
+  - **Paper 14:** Structurally sparse qubit Hamiltonians — O(Q^3.15) Pauli scaling vs O(Q^4.60) conventional
+  - **Paper 15:** Level 4 natural geometry — molecule-frame hyperspherical for two-center two-electron molecules (H₂ 94.1% D_e, HeH⁺ 93.1% D_e); variational 2D solver; heteronuclear extension; charge-center origin
 - **Conjectures (`papers/conjectures/`):**
   - **Paper 2:** Fine structure constant (α⁻¹) derivation (geometric ansatz)
   - **Paper 3:** Holographic entropy, spectral dimension, central charge
@@ -441,6 +445,8 @@ python debug/test_install.py
 | He (hyperspherical) | < 0.1% | **Multi-electron control** |
 | H2 Full CI | < 1.0% | **Accuracy control** |
 | H2 Neumann V_ee | 92.4% D_e | Algebraic integral accuracy |
+| H2 Level 4 (2D solver) | 94.1% D_e | Molecule-frame hyperspherical |
+| HeH⁺ Level 4 | 93.1% D_e | Heteronuclear extension |
 | Muonic H energy ratio | < 0.01% | Mass-independence |
 | Speed regression | < 10% | Performance control |
 | V_ee S³ overlap (1s-1s, 1s-2s, 2s-2s) | < 0.01% | Topological integrity |
@@ -481,11 +487,21 @@ python debug/test_install.py
 | Fiber bundle structure | Paper 13 | Sec VII | Core |
 | Natural geometry hierarchy | Paper 13 | Sec VIII | Core |
 | Ab initio spectroscopy | Paper 13 | Sec IX | Core |
+| Qubit Pauli scaling | Paper 14 | All | Core |
+| Structural sparsity | Paper 14 | Sec III | Core |
+| **Level 4 mol.-frame hypersp.** | **Paper 15** | **All** | **Core** |
+| Mol.-frame charge function | Paper 15 | Sec III | Core |
+| Multichannel expansion | Paper 15 | Sec V | Core |
+| Heteronuclear extension | Paper 15 | Sec V.D | Core |
+| Variational 2D solver | Paper 15 | Sec VI.D | Core |
+| HeH⁺ convergence | Paper 15 | Sec VI.E | Core |
+| Double-adiabatic fiber bundle | Paper 15 | Sec VII.C | Core |
 
 ---
 
 ## 📖 Version History
 
+- **v2.6** (Mar 17, 2026): Added Papers 14, 15 to reference table; Level 4 solver, heteronuclear extension, charge-center origin, 2D solver benchmarks
 - **v2.5** (Mar 15, 2026): Added Papers 12, 13 to reference table; hyperspherical solver, Neumann V_ee, fiber bundle, ab initio spectroscopy; qubit encoding benchmarks
 - **v2.4** (Mar 7, 2026): Corrected sparse/dense rule to context-dependent; direct CI validated as O(N_SD × N_connected)
 - **v2.3** (Mar 6, 2026): Added excitation-driven Direct CI (Knowles-Handy 1984) references and algorithmic consistency tolerance
@@ -497,6 +513,6 @@ python debug/test_install.py
 
 ---
 
-**Last Updated:** February 27, 2026
+**Last Updated:** March 17, 2026
 **Status:** Active (official project guidelines)
 **Compliance:** All current files organized per these standards

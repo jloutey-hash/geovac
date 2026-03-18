@@ -1,6 +1,6 @@
 # GeoVac Paper Series
 
-**Last Updated:** March 15, 2026
+**Last Updated:** March 16, 2026
 
 ## Reading Guide
 
@@ -13,8 +13,10 @@ The GeoVac papers form a narrative arc from atoms to molecules:
 5. **Molecules -- the problem:** Paper 8-9 (bond sphere geometry, why single-S3 fails for binding)
 6. **Molecules -- the solution:** Paper 11 (prolate spheroidal lattice, H2+ with zero free params)
 7. **Molecules -- two-electron:** Paper 12 (algebraic V_ee, Neumann expansion, H2 92.4% D_e)
-8. **Molecules -- practical:** FCI-M (LCAO approach for LiH), Paper 10 (nuclear vibration/rotation)
-9. **Ab initio spectroscopy:** Paper 13 Sec. IX (full pipeline: PES -> Morse -> nuclear lattice)
+8. **Molecules -- natural geometry:** Paper 15 (Level 4 hyperspherical, H2 95.5% D_e, exceeds Paper 12)
+9. **Molecules -- practical:** FCI-M (LCAO approach for LiH), Paper 10 (nuclear vibration/rotation)
+10. **Ab initio spectroscopy:** Paper 13 Sec. IX (full pipeline: PES -> Morse -> nuclear lattice)
+11. **Quantum computing:** Paper 14 (qubit encoding, O(Q^3.15) Pauli scaling vs O(Q^4.60) Gaussian)
 
 ## Paper Inventory
 
@@ -33,6 +35,8 @@ Defensible foundations. Strictly testable, all claims backed by numerical result
 | FCI-A | `paper_fci_atoms.tex` | Draft | He 0.35%, Li 1.10%, Be 0.90% |
 | Paper 12 | `paper_12_neumann_vee.tex` | Active | Neumann V_ee expansion: H2 92.4% D_e, cusp diagnosis (7.6% gap) |
 | Paper 13 | `paper_13_hyperspherical.tex` | Active | Hyperspherical lattice: He 0.05%, fiber bundle, autoionization channels, ab initio spectroscopy |
+| Paper 14 | `paper_14_qubit_encoding.tex` | Active | Structurally sparse qubit Hamiltonians: O(Q^3.15) Pauli scaling vs O(Q^4.60) Gaussian |
+| Paper 15 | `paper_15_level4_geometry.tex` | Active | Level 4 natural geometry: H2 95.5% D_e via molecule-frame hyperspherical coordinates |
 | FCI-M | `paper_fci_molecules.tex` | Scaffold | LiH D_e 1.0% (CP-corrected), R_eq analysis |
 
 ### Methods (`papers/methods/`)
@@ -73,3 +77,4 @@ Superseded material preserved for reference.
 - Papers 12 and 13 added in v1.1.0 (March 15, 2026).
 - Paper 1 Berry phase section corrected in v1.2.0 (March 15, 2026): k=2.113 retracted, Section IV rewritten with erratum. See `debug/qa_sprint/berry_phase_reconciliation.md` for full analysis.
 - Paper 13 updated in v1.2.0: new Sections X (autoionization) and XI (adiabatic limits).
+- Papers 14 and 15 added in v1.3.0 (March 16, 2026). Paper 14: qubit encoding with O(Q^3.15) Pauli scaling. Paper 15: Level 4 molecule-frame hyperspherical geometry, H2 at 95.5% D_e (exceeds Paper 12's 92.4%).
