@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.5.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.6.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.5.0** - Algebraic Structure & SO(3N) Generalization
+**Version 1.6.0** - Chemical Periodicity from Representation Theory
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,18 +10,24 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.5.0
+## What's New in v1.6.0
 
-### Papers 7 & 13: Algebraic Structure of Multi-Electron Atoms
-- **SO(3N) Casimir eigenvalues** for N-electron systems on S^(3N-1)
-- **Exact perturbation formulas:** a₁ = (8/3π)(√2 - 4Z) for He, verified to 9×10⁻⁶
-- **Partial harmonic sums** determine all angular matrix elements algebraically
-- **Selection rules** from permutation group S_N (Δν = 0 mod 4 for He)
-- **Topology flow** S^(3N-1) → S^(3N-4) × ℝ explains algebraic vs transcendental boundary
-- **Li (3e):** SO(9) Casimir, [2,1] irrep of S₃, quasi-Coulomb ~0% error (vs He 5.5%)
-- **Emerging pattern:** accuracy improves with electron count due to Pauli exclusion
+### Paper 16: Chemical Periodicity from S_N Representation Theory
+- **μ_free = 2(N-2)²** — universal Pauli centrifugal cost for all ground states
+- **Periodic table types** from Young diagram shape:
+  - Type A [1]: Hydrogen (trivial)
+  - Type B [2,2,...]: Noble gases (democratic, high IE)
+  - Type C [N-1,1]: Alkali metals (hierarchical, low IE)
+  - Type D [N-2,2]: Alkaline earths (core + pair)
+- **Periodic law** as irrep sequence C → D → E → B repeating each period
+- **Two-level physics:**
+  - Level 1 (topology): S^(3N-1), SO(3N), S_N — smooth, no limit
+  - Level 2 (metric): Relativistic, Hund's rule, Dirac limit at Zα=1
+- **Extended analysis:** H through Og (Z=118), transition metals (Sc-Zn), superheavy extrapolation
+- **Corrected:** Hund's rule is Level 2 (perturbative), not Level 1 (topological)
 
 ### Prior Releases
+- **v1.5.0:** Algebraic Structure & SO(3N) Generalization (Papers 7 & 13)
 - **v1.4.0:** Papers 14-15, Level 4 Solver (H₂ 94.1%, HeH⁺ 93.1%)
 - **v1.2.0:** QA & Corrections (Berry phase retraction, autoionization sections)
 - **v1.1.0:** Multi-Particle Natural Geometry (Papers 12-13, He 0.05%, H$_2$ 92.4% $D_e$)
@@ -198,7 +204,7 @@ geovac/                 Core package
   dirac_hamiltonian.py    Relativistic Dirac solver
 
 papers/
-  core/                 Defensible foundations (Papers 0, 1, 6, 7, 10-15, FCI)
+  core/                 Defensible foundations (Papers 0, 1, 6, 7, 10-16, FCI)
     Paper 0:  Geometric packing & universal constant
     Paper 1:  Spectral graph theory & eigenvalue methods
     Paper 6:  Quantum dynamics & thermodynamics
@@ -209,6 +215,7 @@ papers/
     Paper 13: Hyperspherical lattice (multi-electron atoms)
     Paper 14: Structurally sparse qubit Hamiltonians
     Paper 15: Level 4 mol.-frame hyperspherical (H2 94.1%, HeH+ 93.1%)
+    Paper 16: Chemical periodicity from S_N representation theory
     FCI-A:    Multi-electron atoms (He, Li, Be)
     FCI-M:    Heteronuclear diatomics (LiH benchmark)
   zenodo/               Publication cluster (Papers 7, 11, 12, 13)
@@ -250,6 +257,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | **13** | **Hyperspherical Lattice** | **He 0.05%, SO(6) Casimir, algebraic structure, Li SO(9)** |
 | **14** | **Qubit Hamiltonians** | **O(Q^3.15) Pauli scaling, structural sparsity** |
 | **15** | **Level 4 Geometry** | **H₂ 94.1%, HeH⁺ 93.1%, 2D solver** |
+| **16** | **Chemical Periodicity** | **μ_free = 2(N-2)², S_N irreps, periodic law** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | LCAO FCI (Molecules) | LiH D_e 1.0% (CP-corrected) |
 

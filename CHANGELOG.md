@@ -5,6 +5,42 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-03-18
+
+### Chemical Periodicity from Representation Theory
+
+#### Added
+- **Paper 16:** "Chemical Periodicity as S_N Representation Theory on S^(3N-1)"
+  - Derives periodic table structure from representation theory
+  - Universal formula: μ_free = 2(N-2)² for all ground states with S < N/2
+  - Theorem 1: λ₁ = 2 universally (spatial Young diagram first-column length)
+  - Structure types A/B/C/D/E from Young diagram shape
+  - Periodic law as irrep sequence: C → D → E → B within each period
+  - Two-level separation: topology (N-dependent) vs metric (Z-dependent)
+  - Dirac limit (Z ≈ 137) identified as metric singularity, not topological
+  - Extended analysis: H through Og (Z=118), transition metals (Sc-Zn)
+
+- **Debug scripts** for periodic table analysis:
+  - `debug_beryllium_periodic.py`: Be [2,2] irrep analysis, H/He/Li/Be comparison
+  - `debug_periodic_extended.py`: Na, Mg, Ne, Ar structure types and patterns
+  - `debug_transition_metals.py`: Cr/Cu anomalies, Hund's rule at Level 2
+  - `debug_superheavy_dirac.py`: Superheavy extrapolation, Dirac limit as metric singularity
+
+#### Theoretical Advances
+- S_N representation theory determines chemical periodicity
+- Alkali metals (Type C): [N-1,1] irrep — hierarchical, low IE
+- Noble gases (Type B): [2,2,...,2] irrep — democratic, high IE
+- Per-pair angular momentum contribution → 4 as N → ∞
+- Excitation fraction ν/(3N-2) → 1/3 (ground state never squeezed)
+- No topological limit to periodic table — ends from nuclear physics (Z ~ 126)
+- Relativistic metric correction: δ = (Zα)²/(1-(Zα)²) diverges at Z ~ 137
+
+#### Corrected
+- Falsified claim that Hund's rule arises from ν minimization
+- Falsified claim that half-filled shell stability is topological
+- Cr/Cu anomalies: both configs have same ν = N-2, difference is Level 2 (exchange pairs)
+- All corrections applied to `debug_periodic_extended.py` for consistency
+
 ## [1.5.0] - 2026-03-18
 
 ### Algebraic Structure & SO(3N) Generalization
