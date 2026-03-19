@@ -5,6 +5,21 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-03-18
+
+### Added
+- **FrozenCoreLatticeIndex**: Freeze core orbitals, solve active space FCI
+  - LiH: 257x SD reduction, 14x speedup, 1.33% error
+
+- **LockedShellMolecule**: Lock complete shells as single states
+  - LiH: 2,400x SD reduction, 0.35s runtime, 1.36% error
+  - BeH: 4,681x reduction
+  - BH: 10,610x reduction
+  - Realizes Paper 16 insight: Type C hierarchical structure is computationally separable
+
+### Known Limitations
+- Cross-atom integral engine slow for Z > 10 (NaCl blocked by integrals, not SD count)
+
 ## [1.6.0] - 2026-03-18
 
 ### Chemical Periodicity from Representation Theory

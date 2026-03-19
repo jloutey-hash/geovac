@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.6.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.6.1-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.6.0** - Chemical Periodicity from Representation Theory
+**Version 1.6.1** - Hierarchical Molecular Solvers
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,7 +10,12 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.6.0
+## What's New in v1.6.1
+
+### Hierarchical Molecular Solvers
+- **FrozenCoreLatticeIndex:** 14x speedup via frozen core orbitals
+- **LockedShellMolecule:** 2,400x speedup via locked complete shells
+- Theoretical basis: Paper 16 Type C structure
 
 ### Paper 16: Chemical Periodicity from S_N Representation Theory
 - **μ_free = 2(N-2)²** — universal Pauli centrifugal cost for all ground states
@@ -172,6 +177,8 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 | `full_ci` | O(N_SD) | < 1% for 2-4e | Quantitative benchmarks |
 | `direct` | O(N_SD * N_conn) | < 1% (same as full_ci) | Large determinant spaces |
 | `dirac` | O((2N)^2) | Relativistic corrections | Heavy atoms |
+| `frozen_core` | O(N_active^4) | < 2% | Core-valence separation |
+| `locked_shell` | O(N_active^4) | < 2% | Tensor product of shell states |
 | Prolate spheroidal | O(N_xi) | < 1% for 1e diatomics | Molecular PES |
 
 ---
@@ -183,6 +190,8 @@ geovac/                 Core package
   lattice.py              GeometricLattice (quantum state graph)
   lattice_index.py        LatticeIndex / MolecularLatticeIndex (N-electron FCI)
   direct_ci.py            DirectCISolver (excitation-driven FCI)
+  frozen_core.py          FrozenCoreLatticeIndex (frozen-core CI)
+  locked_shell.py         LockedShellMolecule (locked-shell CI)
   hamiltonian.py          MoleculeHamiltonian (molecular bonding)
   prolate_spheroidal_lattice.py   Prolate spheroidal solver (H2+)
   prolate_scf.py            Prolate spheroidal SCF + CI (H2)
@@ -229,6 +238,8 @@ tests/                  Unit tests (pytest) + validation
   test_hyperspherical_he.py 20 tests (hyperspherical He solver)
   test_neumann_vee.py       Neumann V_ee algebraic integrals
   test_direct_ci.py         6 tests (Direct CI consistency)
+  test_frozen_core.py       14 tests (frozen-core CI)
+  test_locked_shell.py      11 tests (locked-shell CI)
   test_lih_fci.py           50 tests (LiH heteronuclear FCI)
   test_berry_phase.py       7 tests (log-holonomy, power-law)
   test_complex_scaling.py   ECS resonance tests
@@ -296,7 +307,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.5.0},
+  version = {1.6.1},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```
