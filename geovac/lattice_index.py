@@ -2120,6 +2120,7 @@ class MolecularLatticeIndex:
         cross_nuclear_attenuation: Optional[str] = None,
         cross_nuclear_alpha: float = 1.0,
         cross_nuclear_beta: Optional[float] = None,
+        enumerate_sds: bool = True,
     ) -> None:
         self.Z_A = Z_A
         self.Z_B = Z_B
@@ -2233,7 +2234,13 @@ class MolecularLatticeIndex:
             S = self._compute_overlap_matrix()
             self._lowdin_orthogonalize(S)
 
-        self._enumerate_sd_basis()
+        if enumerate_sds:
+            self._enumerate_sd_basis()
+        else:
+            # Skip SD enumeration (used by FrozenCoreLatticeIndex)
+            self.sd_basis = []
+            self.n_sd = 0
+            self._sd_index = {}
 
         # Nuclear repulsion (exact; zero for ghost atoms)
         self.V_NN = float(Z_A * Z_B) / R if (Z_A > 0 and Z_B > 0) else 0.0
