@@ -44,10 +44,14 @@ $S < N/2$, the spatial irrep has $\lambda_1 = 2$, giving the
 universal result $\nu = N - 2$ and $\mufree = 2(N-2)^2$.  This
 formula, combined with the structure of the $S_N$ irrep, yields a
 classification of atoms into four types---A (trivial), B~(noble gas),
-C~(alkali), D~(alkaline earth)---that reproduces the periodic table's
-group structure.  The periodic law itself is the repetition of the
-$S_N$ irrep sequence $\mathrm{C} \to \mathrm{D} \to \cdots \to
-\mathrm{B}$ within each period.  In the per-pair limit, $\mufree$
+C~(alkali), D~(alkaline earth)---that recasts the periodic table's
+group structure in representation-theoretic language.  The periodic law
+corresponds to the repetition of the $S_N$ irrep sequence
+$\mathrm{C} \to \mathrm{D} \to \cdots \to \mathrm{B}$ within each
+period.  This classification maps onto, rather than predicts, the
+known periodic table structure; its value lies in providing a
+unified group-theoretic framework for a pattern that is usually
+described empirically.  In the per-pair limit, $\mufree$
 contributes exactly~4 units of angular momentum per antisymmetric
 electron pair as $N \to \infty$.  We show that the topological
 structure ($\nu$, $\mufree$) is smooth through $Z = 1/\alpha \approx
@@ -80,8 +84,8 @@ separate justification, and the distinction between noble gases, alkali
 metals, and transition metals is described rather than predicted.
 
 In this paper, we show that the periodic table's group structure
-follows from the representation theory of the symmetric group $S_N$
-acting on the spatial part of the $N$-electron wavefunction on the
+can be recast in the language of $S_N$ representation theory acting
+on the spatial part of the $N$-electron wavefunction on the
 hypersphere $S^{3N-1}$.  The key results are:
 
 \begin{enumerate}
@@ -91,10 +95,11 @@ hypersphere $S^{3N-1}$.  The key results are:
     quadratically, contributing exactly~4 units per electron pair in
     the large-$N$ limit (Sec.~\ref{sec:mu_formula}).
   \item The shape of the $S_N$ irrep classifies atoms into chemical
-    types that reproduce the group structure of the periodic table
+    types that recast the group structure of the periodic table in
+    representation-theoretic language
     (Sec.~\ref{sec:classification}).
-  \item The periodic law is the repetition of $S_N$ irrep sequences
-    (Sec.~\ref{sec:periodic_law}).
+  \item The periodic law corresponds to the repetition of $S_N$ irrep
+    sequences (Sec.~\ref{sec:periodic_law}).
   \item The Dirac instability at $Z\alpha \to 1$ is a metric
     singularity, not a topological one; the representation theory
     is smooth through $Z = 137$
@@ -102,7 +107,68 @@ hypersphere $S^{3N-1}$.  The key results are:
 \end{enumerate}
 
 %% ========================================================================
-%% II. THE HYPERSPHERICAL FRAMEWORK
+%% I-B. WHAT IS NEW VS. WHAT IS KNOWN
+%% ========================================================================
+
+\section{What is New vs.\ What is Known}
+\label{sec:new_vs_known}
+
+Several ingredients of the present analysis are standard; it is
+important to distinguish them from the new contributions.
+
+\subsection{Known results}
+
+\begin{itemize}
+  \item \textbf{Hyperspherical formulation.}  The separation of the
+    $N$-electron Schr\"odinger equation into hyperradial and angular
+    parts on $S^{3N-1}$, and the identification of the angular kinetic
+    energy with the $\mathrm{SO}(3N)$ Casimir, are
+    established~\cite{Avery2000, Fock1954}.
+
+  \item \textbf{$S_N$ representation theory for fermions.}  The use of
+    Young diagrams and Schur--Weyl duality to classify spatial--spin
+    factorizations of antisymmetric wavefunctions is textbook
+    material~\cite{Weyl1946, FultonHarris1991}.
+
+  \item \textbf{The Casimir eigenvalue formula.}  The expression
+    $\mufree = \nu(\nu + 3N - 2)/2$ follows directly from the
+    standard $\mathrm{SO}(3N)$ representation theory.
+
+  \item \textbf{The periodic table itself.}  The classification of
+    elements into noble gases, alkali metals, alkaline earths, and
+    transition metals is an empirical fact that guided the
+    construction presented here.
+\end{itemize}
+
+\subsection{New contributions}
+
+\begin{enumerate}
+  \item \textbf{The universal $\nu = N - 2$ result.}  Theorem~1 shows
+    that, for all ground-state atoms with $S < N/2$, the spatial
+    irrep has first-column length $\lambda_1 = 2$, yielding the
+    universal angular quantum number $\nu = N - 2$ and $\mufree =
+    2(N-2)^2$.  This specific identification appears to be new.
+
+  \item \textbf{The four-type classification (A/B/C/D).}  The
+    observation that the $S_N$ irrep shape naturally partitions atoms
+    into types that map onto the periodic table's group structure
+    provides a group-theoretic reformulation of the empirical pattern.
+
+  \item \textbf{The per-pair angular momentum limit.}  The result that
+    $\mufree / \binom{N}{2} \to 4$ as $N \to \infty$---each
+    antisymmetric electron pair contributes exactly~4 units of
+    angular momentum---connects the periodic pattern to a
+    quantitative angular momentum budget.
+
+  \item \textbf{The Dirac instability as metric vs.\ topological
+    singularity.}  The analysis showing that $\nu$, $\mufree$, and
+    the $S_N$ irrep are smooth through $Z = 137$ while the metric
+    diverges clarifies the nature of the upper limit on the periodic
+    table.
+\end{enumerate}
+
+%% ========================================================================
+%% III. THE HYPERSPHERICAL FRAMEWORK
 %% ========================================================================
 
 \section{The Hyperspherical Framework}
@@ -386,12 +452,17 @@ new shell) and ends with a noble gas (Type~B: closed shell).  The
 intermediate elements (Type~E) have partially filled subshells with
 varying spin and Young diagram shapes.
 
-This is the periodic law in group-theoretic language:
+In group-theoretic language, the periodic law can be understood as
+follows:
 \begin{quote}
 \emph{The chemical properties of elements are periodic functions of
 atomic number because the sequence of $S_N$ spatial irreps repeats
 whenever a new principal shell begins filling.}
 \end{quote}
+This is a reformulation, not a derivation from first principles: the
+shell-filling order itself (which determines where the sequence
+repeats) is an empirical input, not a consequence of $S_N$
+representation theory alone.
 
 The key distinction between Types~B and~D is worth emphasizing.
 Both have the same Young diagram shape $[2^{N/2}]$, but they differ
@@ -546,9 +617,9 @@ Paper~0~\cite{loutey_paper0} derived the $2n^2$ orbital degeneracy
 from the geometric packing of nodes on the discrete $S^3$ lattice.
 The present result extends this: the $S_N$ representation theory on
 $S^{3N-1}$ yields not just the orbital counting but the
-\emph{chemical classification} of atoms.  Where Paper~0 explained
-\emph{why} each shell holds $2n^2$ electrons, the present analysis
-explains why filling those shells produces the periodic pattern
+\emph{chemical classification} of atoms.  Where Paper~0 derived the $2n^2$ counting from geometric packing,
+the present analysis provides a group-theoretic framework for
+understanding why filling those shells produces the periodic pattern
 $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$.
 
 \subsection{Transition metals and Hund's rule}
@@ -568,6 +639,12 @@ that tips the energetic balance.
 This confirms that Hund's first rule is a \emph{perturbative} effect
 (exchange stabilization in the Coulomb interaction) rather than a
 \emph{topological} one (angular momentum reduction on $S^{3N-1}$).
+More broadly, the actual chemistry---which electron configuration wins
+energetically---is determined by exchange, correlation, and
+orbital-dependent Coulomb effects that operate below the resolution of
+the topological classification.  The Level~1 framework identifies
+which configurations are \emph{topologically equivalent}; it cannot
+determine which one is the ground state.
 
 \subsection{Physical chemistry correspondences}
 
@@ -583,9 +660,9 @@ chemical trends:
   \item \textbf{Electronegativity} increases across a period
     ($\mathrm{C} \to \mathrm{B}$), mirroring the transition from
     hierarchical to democratic irreps.
-  \item \textbf{The periodic law} itself is the statement that the
-    $S_N$ irrep sequence repeats whenever a new principal shell
-    begins to fill.
+  \item \textbf{The periodic law} can be understood as the
+    repetition of the $S_N$ irrep sequence whenever a new principal
+    shell begins to fill.
 \end{itemize}
 
 \subsection{Fractal structure: core and valence at every scale}
@@ -623,11 +700,12 @@ key results are:
     $\mufree = 2(N-2)^2$.
 
   \item The shape of the $S_N$ spatial irrep classifies atoms into
-    types (A/B/C/D/E) that reproduce the chemical group structure.
+    types (A/B/C/D/E) that recast the chemical group structure in
+    representation-theoretic language.
 
-  \item The periodic law is the repetition of the irrep sequence
-    $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$
-    within each period.
+  \item The periodic law corresponds to the repetition of the irrep
+    sequence $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to
+    \mathrm{B}$ within each period.
 
   \item Hund's first rule and configuration anomalies (Cr, Cu) are
     Level~2 perturbative effects, invisible to the Level~1 topology.
@@ -640,9 +718,13 @@ key results are:
 The approach separates the periodic table into a universal
 \emph{topological skeleton} (Level~1: $\nu$, $\mufree$, structure
 type) and a chemistry-specific \emph{metric flesh} (Level~2: $Z$,
-$\alpha$, Coulomb integrals).  This separation explains why the
-periodic table has the structure it does (topology) and why individual
-elements have the properties they do (metric).
+$\alpha$, Coulomb integrals).  This separation provides a
+group-theoretic framework for the periodic table's structure
+(topology) while leaving the element-specific chemistry to
+perturbative effects (metric).  The framework recasts, rather than
+derives from first principles, the empirical periodic pattern---its
+value lies in unifying the classification under a single
+mathematical structure.
 
 \begin{acknowledgments}
 This work uses the hyperspherical formalism developed in the Geometric

@@ -5,6 +5,27 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.2] - 2026-03-22
+
+### Documentation Review & Epistemic Tightening
+
+Comprehensive review of paper framing and project documentation. No code changes.
+
+#### Papers Revised
+- **Paper 0:** Added "What is New vs. What is Known" section; softened ontological claims (removed "Quantum mechanics may not be fundamental. Geometry is."); qualified axiom presentation to acknowledge structural choices beyond stated axioms; added forward reference to Paper 7 confirming energy eigenvalue conjecture
+- **Paper 1:** Removed alpha-at-n=5 Platonic solids speculation; fixed Berry phase section (correctly describes log-holonomy, removes retracted relativistic scaling claim from abstract); softened wavefunction-as-statistical-distribution to "one possible interpretation"; cleaned up conclusion to match Paper 7's epistemic standard
+- **Paper 16:** Qualified central claim from "derives" to "recasts in representation-theoretic language"; added "What is New vs. What is Known" section; strengthened Hund's rule acknowledgment (Level 1 topology cannot determine ground-state configuration); softened "periodic law IS" to "periodic law corresponds to"
+
+#### Project Documentation
+- **CLAUDE.md:** Restructured from ~544 to ~315 lines. Absorbed PAPERS.md. Added "Approaches That Failed" table (7 dead ends), "Natural Geometry Hierarchy" table, "Current Development Frontier" section, and "Project Context" paragraph. Removed emoji headers, directory structure rules, file naming conventions, common commands, documentation workflow, AdS/CFT section, and CLAUDE.md version history.
+- **README.md:** Added "Development Methodology" section (AI-augmented workflow disclosure). Added paper acknowledgment template in Citation section.
+- **PAPERS.md:** Retired. Content absorbed into CLAUDE.md Section 6.
+
+#### Principles Applied
+- All mathematical content preserved exactly — only framing, rhetoric, and interpretation changed
+- "What is New vs. What is Known" sections added to Papers 0 and 16 (Paper 7 already had one)
+- Downstream papers verified: no references to Papers 0/1 echo removed claims
+
 ## [1.7.1] - 2026-03-21
 
 ### Paper 2 Rewrite: Fine Structure Constant from Hopf Bundle Geometry

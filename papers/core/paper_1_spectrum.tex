@@ -12,7 +12,7 @@
 \date{\today}
 
 \begin{abstract}
-We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff ($\Delta E_{2p-2s} = 0.0035$ at $n_{\max}=10$, 16\% relative splitting) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays to $<$0.01\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Scaling correspondence:} Lattice curvature (Berry phase) exhibits power-law scaling $\theta(n) \propto n^{-2.11}$ ($R^2 = 0.9995$), consistent with the kinematic form of relativistic mass-velocity corrections. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
+We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff ($\Delta E_{2p-2s} = 0.0035$ at $n_{\max}=10$, 16\% relative splitting) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays to $<$0.01\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
 \end{abstract}
 
 \maketitle
@@ -28,10 +28,10 @@ This discrete structure possesses a natural geometry. The hydrogen atom's dynami
 This lattice exhibits a profound duality between \textit{algebra} and \textit{geometry}:
 \begin{itemize}
 \item \textbf{The Algebraic Skeleton:} Transition operators $T_\pm$ (radial) and $L_\pm$ (angular) generate the spectrum. Their eigenvalues reproduce the exact Rydberg formula $E_n = -1/(2n^2)$ without correction.
-\item \textbf{The Geometric Flesh:} The lattice \textit{topology}---the pattern of connections---generates physical corrections. High angular momentum states occupy high-connectivity nodes, creating an emergent centrifugal barrier. Lattice curvature exhibits scaling behavior consistent with relativistic kinematics.
+\item \textbf{The Geometric Flesh:} The lattice \textit{topology}---the pattern of connections---generates physical corrections. High angular momentum states occupy high-connectivity nodes, creating differential weighted connectivity at finite truncation. The edge-weight log-holonomy provides a measure of lattice curvature that decays as $n^{-1}$.
 \end{itemize}
 
-In this paper, we present computational evidence for this dual framework. Section~\ref{sec:algebra} demonstrates spectral exactness. Section~\ref{sec:geometry} analyzes the $s/p$ degeneracy breaking by the graph Laplacian, demonstrating it is a discretization artifact that vanishes in the continuum limit. Section~\ref{sec:relativity} reveals that Berry phase curvature scales with a power law consistent with velocity-dependent corrections. Section~\ref{sec:discussion} discusses the algebra-geometry duality and its connection to wave-particle complementarity. Section~\ref{sec:conclusion} summarizes our findings.
+In this paper, we present computational evidence for this dual framework. Section~\ref{sec:algebra} demonstrates spectral exactness. Section~\ref{sec:geometry} analyzes the $s/p$ degeneracy breaking by the graph Laplacian, demonstrating it is a discretization artifact that vanishes in the continuum limit. Section~\ref{sec:relativity} analyzes the geometric phase structure, showing that the Berry phase vanishes while the log-holonomy decays as $n^{-1}$. Section~\ref{sec:discussion} discusses the algebra-geometry duality and its connection to wave-particle complementarity. Section~\ref{sec:conclusion} summarizes our findings.
 
 
 \section{The Algebraic Skeleton: Exact Spectroscopy}
@@ -86,7 +86,7 @@ H = \beta L + V = \beta (D - A) + V,
 \end{equation}
 where $V_{ii} = -1/n_i^2$ is the diagonal Coulomb potential and $\beta$ is a scaling factor.
 
-\subsection{The Centrifugal Barrier as Connectivity Cost}
+\subsection{Differential Connectivity by Angular Momentum}
 
 The crucial observation is that the degree matrix $D$ is \textit{not rotationally invariant}. Computing the weighted degrees for states with $n=2$:
 \begin{align}
@@ -264,10 +264,10 @@ Our results reveal a profound duality in the structure of the paraboloid lattice
 \begin{enumerate}
 \item \textbf{Algebraic Structure (Wave-like):} The operators $T_\pm, L_\pm$ and their eigenvalues reproduce the \textit{unperturbed} hydrogen spectrum (Eq.~\ref{eq:rydberg}) exactly. This represents the continuous, exact aspect---analogous to the wave description in quantum mechanics.
 
-\item \textbf{Geometric Structure (Particle-like):} The graph Laplacian $L = D - A$ encodes \textit{perturbations}---corrections arising from discrete connectivity. The weighted degree matrix $D$ breaks rotational symmetry, generating the centrifugal barrier. The edge-weight log-holonomy decays as $n^{-1}$ (Section~\ref{sec:relativity}). This represents the discrete, textured aspect---analogous to the particle description.
+\item \textbf{Geometric Structure (Particle-like):} The graph Laplacian $L = D - A$ encodes \textit{perturbations}---corrections arising from discrete connectivity. The weighted degree matrix $D$ introduces differential connectivity between angular momentum sectors at finite truncation. The edge-weight log-holonomy decays as $n^{-1}$ (Section~\ref{sec:relativity}), measuring the curvature of the weight function. This represents the discrete aspect of the lattice formulation.
 \end{enumerate}
 
-This mirrors the complementarity principle: algebra provides the wave-like continuous description (exact energies), while geometry provides the particle-like discrete description (forces as packing constraints).
+This duality is suggestive: the algebraic operators provide exact spectral content, while the graph topology introduces finite-size corrections that must be controlled.
 
 \subsection{Why Calibration Fails}
 
@@ -292,7 +292,7 @@ This null result is \textit{physically correct}. The fine structure constant $\a
 \end{align}
 These require photon degrees of freedom, which are absent from our single-particle lattice.
 
-This clarifies the role of geometry: the lattice encodes \textit{kinematic} constraints (spectrum, centrifugal barrier, velocity-dependent scaling) but not \textit{dynamical} couplings. To incorporate fine structure, one must introduce a photon lattice and define interaction edges weighted by $\alpha$. The fine structure constant would then appear as the \textit{coupling strength between lattices}, not as an intrinsic geometric property of either lattice alone.
+This clarifies the role of geometry: the lattice encodes \textit{kinematic} constraints (spectrum, angular momentum structure) but not \textit{dynamical} couplings. To incorporate fine structure, one must introduce a photon lattice and define interaction edges weighted by $\alpha$. The fine structure constant would then appear as the \textit{coupling strength between lattices}, not as an intrinsic geometric property of either lattice alone.
 
 \subsection{Artifact vs.\ Physics: Drawing the Line}
 
@@ -316,9 +316,7 @@ new physics.
 
 \subsection{The Wavefunction as Distribution}
 
-If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? We propose it is a \textbf{statistical distribution} over lattice sites---a coarse-graining of the underlying discrete trajectories. The Schr\"odinger equation becomes a diffusion equation on the graph.
-
-This restores determinism at the microscopic level. Photon absorption transfers discrete angular momentum via edge traversal. The probabilistic nature of quantum mechanics reflects our macroscopic ignorance of exact lattice positions, not fundamental randomness.
+If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? One possible interpretation is that continuous wavefunctions correspond to statistical distributions over discrete lattice sites---a coarse-graining in which the Schr\"odinger equation becomes a diffusion equation on the graph. Under this reading, photon absorption would transfer discrete angular momentum via edge traversal. However, this interpretation is not required by the mathematical framework presented here; the graph-theoretic formulation is compatible with standard quantum-mechanical interpretation of $\psi$ as a probability amplitude.
 
 
 \section{Conclusion}
@@ -332,9 +330,7 @@ We have demonstrated that quantum mechanics, when formulated on a discrete parab
 \item \textbf{Kinematic completeness:} The lattice encodes all $\alpha$-independent physics---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}
 
-These results support a geometric interpretation: \textit{quantum mechanics describes combinatorial constraints in discrete information geometry}. The algebra-geometry duality suggests a deep connection to wave-particle complementarity. Critically, we do not claim the graph Laplacian replaces electromagnetic interactions or generates the Lamb shift; it encodes the kinematic manifold of the electron, and finite-lattice artifacts are quantitatively understood.
-
-The hydrogen atom, in this framework, is not a particle orbiting a nucleus. It is a graph---a network of quantum numbers connected by physically allowed transitions. The energy spectrum is exact, and the boundary effects are controlled.
+These results support a graph-theoretic reformulation of the hydrogen state space in which the algebraic operators encode the exact spectrum and the graph Laplacian introduces controlled, quantitatively understood finite-size artifacts. The algebra-geometry duality is suggestive of a connection to wave-particle complementarity, though we do not claim it establishes one. Critically, the graph Laplacian does not replace electromagnetic interactions or generate the Lamb shift; it encodes the kinematic manifold of the electron.
 
 
 \section{Limitations and Next Steps: Missing Photon Degrees of Freedom}
@@ -360,19 +356,9 @@ To incorporate electromagnetic interactions, one must construct a second geometr
 
 We conjecture that the fine structure constant $\alpha$ emerges as the \textit{geometric impedance}---the ratio of action densities between the electron paraboloid and the photon fiber. This hypothesis is explored in a companion paper \cite{companion_alpha}, which introduces a helical photon gauge fiber and computes the symplectic coupling ratio.
 
-\textbf{Why $n=5$ May Be Special:}
-
-The lattice exhibits topological transitions as $n$ increases:
-\begin{itemize}
-\item $n=1,2,3,4$: Limited angular momentum diversity ($l_{\text{max}} = 0,1,2,3$).
-\item $n=5$: First appearance of all five orbital symmetries ($s,p,d,f,g$), corresponding to the five Platonic solids.
-\end{itemize}
-
-If $\alpha$ is determined by a symplectic projection between the electron and photon manifolds, it may ``lock'' at this topological resonance---the first shell where maximal angular momentum diversity allows full geometric coupling. This hypothesis motivates the investigation in Ref.~\cite{companion_alpha}.
-
 \textbf{Outlook:}
 
-This framework invites generalization. If hydrogen is a paraboloid, what geometries describe molecules, nuclei, or quantum fields? The answer may lie in higher-dimensional lattices---discretizations of larger symmetry groups. Physics, at its core, may be the study of information under packing constraints. The vacuum is not empty; it is textured. And that texture is the origin of force.
+This framework invites generalization. If hydrogen is a paraboloid, what geometries describe molecules, nuclei, or quantum fields? The answer may lie in higher-dimensional lattices---discretizations of larger symmetry groups.
 
 
 \begin{acknowledgments}
@@ -496,7 +482,7 @@ $(3,2,0)$ & 6.124 & 3d & --- \\
 \begin{figure}[h]
 \centering
 \fbox{\parbox{0.9\columnwidth}{\centering [Placeholder: 3D visualization of paraboloid lattice showing nodes $(n,l,m)$ and edges from $T_\pm, L_\pm$ operators. Highlight color-coded shells for $n=1,2,3$ and pole vs. equator connectivity.]}}
-\caption{The paraboloid lattice structure for $n \leq 5$. Nodes represent quantum states $|n, l, m\rangle$, and edges represent transitions via $L_{\pm}$ and $T_{\pm}$ operators. The pole ($l=0$) has systematically lower weighted connectivity density than the equator ($l > 0$), generating the emergent centrifugal barrier.}
+\caption{The paraboloid lattice structure for $n \leq 5$. Nodes represent quantum states $|n, l, m\rangle$, and edges represent transitions via $L_{\pm}$ and $T_{\pm}$ operators. The pole ($l=0$) has systematically lower weighted connectivity than the equator ($l > 0$), producing differential degree values that contribute to finite-size splitting.}
 \label{fig:lattice}
 \end{figure}
 
@@ -509,8 +495,8 @@ $(3,2,0)$ & 6.124 & 3d & --- \\
 
 \begin{figure}[h]
 \centering
-\fbox{\parbox{0.9\columnwidth}{\centering [Placeholder: Log-log plot of Berry phase $\theta(n)$ vs. principal quantum number $n$. Data points shown as circles, power law fit $\theta = 2.323 \cdot n^{-2.113}$ as solid line. Annotate $R^2 = 0.9995$ and exponent $k = 2.11 \approx 2$ (velocity-dependent scaling).]}}
-\caption{Berry phase $\theta(n)$ versus principal quantum number $n$ (log-log plot). The power law fit $\theta \propto n^{-2.113}$ (solid line, $R^2 = 0.9995$) demonstrates a scaling correspondence with velocity-dependent kinematic factors ($\propto v^2 \propto n^{-2}$), suggesting that lattice curvature encodes velocity-dependent effects characteristic of relativistic corrections.}
+\fbox{\parbox{0.9\columnwidth}{\centering [Placeholder: Log-log plot of log-holonomy $\Theta(n)$ vs. principal quantum number $n$. Data points shown as circles, exact curve $\Theta = -2\ln((n+1)/n)$ as solid line. Annotate power-law exponent $k = 1.0$ exactly.]}}
+\caption{Log-holonomy $\Theta(n) = -2\ln((n{+}1)/n)$ versus principal quantum number $n$ (log-log plot). The exact $n^{-1}$ decay ($k = 1.0$, $R^2 = 1.0$) measures the curvature of the edge-weight function across the lattice. The Berry phase is identically zero for all plaquettes (Section~\ref{sec:relativity}).}
 \label{fig:relativity}
 \end{figure}
 
