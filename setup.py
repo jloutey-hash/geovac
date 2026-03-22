@@ -12,7 +12,7 @@ long_description = (this_directory / "README.md").read_text(encoding='utf-8')
 
 setup(
     name='geovac',
-    version='1.2.0',
+    version='1.7.6',
     author='J. Loutey',
     author_email='jloutey@example.com',  # Update with your actual email
     description='Computational quantum chemistry via spectral graph theory on S3',

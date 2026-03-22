@@ -449,6 +449,47 @@ encodes the coupling strength, and its value
 $\pi(42 + \pi^2/6 - 1/40)/3$ is not determined by the circulant
 structure alone.
 
+\subsection{Forced Hermiticity and the physical phase}
+
+The coupling parameters $b$, $c$ are necessarily complex conjugates.
+Setting $s = b + c$ and $p = bc = K/3$, the constraint $b^3 + c^3 = -1$
+reduces to $s^3 - Ks + 1 = 0$---the \textit{same cubic} as for
+$\alpha$. For real $b$ and $c$, one requires $s^2 \geq 4K/3$, but all
+three roots satisfy $s_i^2 < 4K/3 \approx 182.7$ (the largest is
+$s_1^2 \approx 137.1$). Therefore~\cite{phase3_audit}
+\begin{equation}\label{eq:polar}
+  b = \sqrt{K/3}\; e^{i\theta}, \qquad
+  c = \sqrt{K/3}\; e^{-i\theta},
+\end{equation}
+with universal modulus $|b| = |c| = \sqrt{K/3} \approx 6.76$. The
+determinant condition fixes the phase:
+\begin{equation}\label{eq:phase}
+  \cos(3\theta) = -\frac{1}{2(K/3)^{3/2}} \approx -0.00162.
+\end{equation}
+Three solutions separated by ${\sim}120^\circ$ correspond to the
+three roots. The physical root $\alpha$ has $\theta \approx 3\pi/2$
+(nearly pure imaginary coupling: $b \approx -i\sqrt{K/3}$).
+
+The circulant $M$ is therefore \textit{Hermitian}, not real symmetric,
+consistent with the $U(1)$ gauge structure of the Hopf fiber: the
+off-diagonal coupling carries a phase, as expected for a connection on
+a principal $U(1)$-bundle.
+
+\subsection{Self-referential property}
+
+The fact that $b + c$ satisfies the same cubic as $\alpha$ is
+structural, not coincidental. For any circulant of the
+form~(\ref{eq:circulant}), the $k = 0$ discrete Fourier transform (DFT)
+mode is $\lambda_0 = b + c$, which is by construction an eigenvalue
+of~$M$ and therefore satisfies its characteristic polynomial. All three
+eigenvalues of $M$ are the three cubic roots, regardless of which root
+$b + c$ equals~\cite{phase3_audit}.
+
+The circulant decomposition does not factor $K$ into independent
+spectral invariants of individual bundle components. The modulus
+$|b| = \sqrt{K/3}$ and the phase $\theta$ are both determined by $K$
+alone. The irreducible datum remains $K$ itself.
+
 
 %======================================================================
 \section{What Is and Is Not Established}
@@ -464,9 +505,9 @@ each link in the hypothetical derivation chain.
 Link & Description & Status \\
 \hline
 1 & Hopf bundle as geometric arena & $\checkmark$ \\
-2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\bullet$\footnotemark \\
+2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\bullet$\footnotemark[1] \\
 3 & Combination rule $K = \pi(B+F-\Delta)$ & $\times$ \\
-4 & $\mathbb{Z}_3$ circulant $\to$ cubic & $\circ$ \\
+4 & $\mathbb{Z}_3$ circulant $\to$ cubic & $\circ$\footnotemark[2] \\
 5 & $\alpha$ from cubic root & $\checkmark$ \\
 \hline\hline
 \end{tabular}
@@ -477,12 +518,17 @@ $\circ$ = partially established,
 $\times$ = not established.}
 \label{tab:chain}
 \end{table}
-\footnotetext{The selection principle $B/N = 3$ is algebraically
+\footnotetext[1]{The selection principle $B/N = 3$ is algebraically
 proven (Sec.~III), and the Casimir identity
 $\langle C_3\rangle_n = C_4(n)$ connects $B$ to the $SO(4)$
 representation theory. The remaining gap: why the degeneracy-weighted
 Casimir trace specifically (rather than some other spectral quantity)
-for each bundle component.}
+for each bundle component. The second selection principle
+(Sec.~\ref{sec:second_selection}) provides independent support.}
+\footnotetext[2]{The Hermiticity of the circulant is now proven:
+$b$ and $c$ are necessarily complex conjugates (Sec.~VI\,D). This is
+consistent with $U(1)$ gauge structure but does not yet derive
+$bc = K/3$.}
 
 \textbf{Link~1} (established): The Hopf fibration is the unique
 principal $U(1)$-bundle over $S^2$ with $c_1 = 1$. That $S^3$ is the
@@ -604,6 +650,17 @@ with this determinant product makes the agreement with CODATA
 $11{,}000\times$ \textit{worse}, confirming that the integer Casimir
 trace is the correct object, not the spectral determinant.
 
+A systematic search over additive corrections to the spectral
+determinant product finds the best candidates to be $+\pi/72$ (0.002\%
+residual) and $+1/24$ (0.003\% residual), but neither is derivable from
+first principles~\cite{phase2_kappa}. The quantity $\pi/72 =
+\pi/(|\lambda_3| \cdot n_{\max}^2)$ could be a finite-size correction,
+and $1/24$ appears in heat kernel coefficients, but both remain
+\textit{ad hoc}. A broader search over simple arithmetic combinations of
+spectral determinants and fibration data finds no exact bridge. This
+strengthens the conclusion that the integer Casimir trace $B = 42$---not
+the spectral determinant---is the correct object for the base invariant.
+
 
 \subsection{Algebraic structure of $\alpha$}
 
@@ -615,23 +672,134 @@ far more tightly than the Standard Model currently does, and would
 imply that $\alpha$ is transcendental (since $\pi$ is).
 
 
-\subsection{$S^3$ specificity}
+\subsection{$S^3$ specificity}\label{sec:s3_specificity}
 
-The selection principle $B/N = \dim(S^3)$ does not generalize to other
-round spheres. An analogous construction on $S^d$ using the Laplacian
-eigenvalues $k(k+d-1)$ with degeneracies
-$\binom{k+d}{d} - \binom{k+d-2}{d}$ yields no finite $n_{\max}$
-satisfying the dimension condition for any $d \neq 3$, at least
-through $n_{\max} = 50$. This specificity traces to the
-$SO(4) \to SO(3)$ branching rule unique to $S^3$: the quantity $B$ is
-the trace of the $SO(3)$ \textit{sub}-Casimir over $SO(4)$
-representations, not the total Laplacian eigenvalue. This branching
-exists because $SO(4) \cong (SU(2) \times SU(2))/\mathbb{Z}_2$, a
-structure that has no analogue for $SO(d+1)$ with $d \neq 3$. The
-three-sphere is the only sphere that is also a Lie group ($S^3 \cong
-SU(2)$) and the only one admitting a Hopf fibration with $S^1$ fiber.
+\textit{A universal algebraic identity.}
+For any round sphere $S^d$, define the \textit{formal} spectral moment
+\begin{equation}\label{eq:B_formal}
+  B_{\mathrm{formal}}(m) \;=\;
+  \tfrac{1}{2}\sum_{k=1}^{m} g_k\,|\lambda_k|,
+  \qquad
+  N(m) \;=\; \sum_{k=1}^{m} g_k,
+\end{equation}
+where $\lambda_k = -k(k+d-1)$ and
+$g_k = \binom{k+d}{d} - \binom{k+d-2}{d}$ are the eigenvalues and
+degeneracies of the Laplace--Beltrami operator on $S^d$. At $m = 2$
+these evaluate to $B_{\mathrm{formal}}(2) = \tfrac{1}{2}(d+1)d(d+4)$
+and $N(2) = (d+1)(d+4)/2$, giving
+\begin{equation}\label{eq:universal_identity}
+  \frac{B_{\mathrm{formal}}(2)}{N(2)} \;=\; d
+  \qquad\text{for all } d \geq 1.
+\end{equation}
+Setting $B_{\mathrm{formal}}(m)/N(m) = d$ yields the quadratic
+$m^2 + dm - 2(d+2) = 0$, whose unique positive root is $m = 2$
+regardless of~$d$. The dimension-matching condition is therefore a
+universal property of eigenvalue moments on round spheres, not a
+selection principle specific to~$S^3$.
+
+\textit{Why the formula is specific to $S^3$.}
+The quantity $B$ appearing in the formula (Sec.~\ref{sec:selection})
+is \textit{not} $B_{\mathrm{formal}}$. It is the
+degeneracy-weighted trace of the $SO(3)$ \textit{sub}-Casimir
+$l(l+1)$ over the $SO(4) \to SO(3)$ branching of each $S^3$ shell:
+\begin{equation}\label{eq:B_branch}
+  B \;=\; \sum_{n=1}^{m}\sum_{l=0}^{n-1}(2l+1)\,l(l+1).
+\end{equation}
+For $S^3$, $B = B_{\mathrm{formal}}$ because the diagonal
+$SO(3) \subset SO(4)$ embedding has index~1, giving the identity
+$\langle C_{SO(3)}\rangle_n = n(n+2)/2 = |\lambda_n|/2$. For all
+other spheres $S^d$ with $d \neq 3$, $B \neq B_{\mathrm{formal}}$
+and $B/N = d$ has no solution at any integer~$m$.
+
+Three independent properties of $S^3$ underlie this coincidence:
+\begin{enumerate}
+\item $SO(4) \cong (SU(2) \times SU(2))/\mathbb{Z}_2$ is a product
+  group, yielding the clean Clebsch--Gordan branching
+  $l = 0, \ldots, n{-}1$ within each shell. No analogous product
+  structure exists for $SO(d{+}1)$ with $d \neq 3$.
+\item $S^3 \cong SU(2)$ is the only sphere that is a Lie group,
+  enabling the Peter--Weyl decomposition that makes $B$ computable
+  as a representation-theoretic trace.
+\item The embedding index of diagonal $SO(3) \subset SO(4)$ is~1.
+  For the quaternionic Hopf fibration, the corresponding
+  $SO(5) \subset SO(8)$ embedding through $Sp(2) \times Sp(1)$ has
+  index ratio $5/14$, which would give $B/N = 5 \neq 7$ if used as
+  the branching factor.
+\end{enumerate}
 The formula is not one instance of a family parametrized by $d$; it
-exists only for $S^3$.
+exists only for~$S^3$.
+
+\textit{Quaternionic and octonionic Hopf fibrations.}
+Applying the combination rule $K = \pi(B + F - \Delta)$ formally to
+all four Hopf fibrations
+($S^0 \to S^1 \to S^1$, $S^1 \to S^3 \to S^2$,
+$S^3 \to S^7 \to S^4$, $S^7 \to S^{15} \to S^8$) yields
+$1/\alpha \approx 15.4$, $137.036$, $970.0$, and $7164.1$
+respectively~\cite{phase6_hopf}. Only the complex Hopf value matches
+a known coupling constant. The quaternionic value $K/\pi \approx 309$
+satisfies $K_{\mathrm{quat}}/K_{\mathrm{em}} \approx 7.08 \approx
+\dim(S^7)$, but the $1.1\%$ deviation from~7 and the absence of any
+coupling at $\alpha_W \approx 1/29.5$ rule out a weak-interaction
+interpretation. The representation-theoretic obstructions above
+explain why: without the $SO(4)$ product structure, the
+branching-based $B$ that makes the formula work has no natural
+generalization.
+
+
+\subsection{Transition operators and the Hopf geometry}
+
+The discrete graph Laplacian for hydrogen has two types of lattice
+transitions~\cite{phase2_kappa}: $T_\pm$ (changing $n$ by $\pm 1$,
+preserving $l$ and $m$) and $L_\pm$ (changing $m$ by $\pm 1$, preserving
+$n$ and $l$). We observe that these correspond naturally to the Hopf
+fibration:
+\begin{itemize}
+\item $L_\pm$ is motion along the Hopf fiber $S^1$. The magnetic quantum
+  number $m$ is the $U(1)$ charge (eigenvalue of $J_z$); incrementing
+  $m$ rotates around the fiber circle.
+\item $T_\pm$ is radial motion on $S^3$, perpendicular to the fiber.
+  Changing $n$ moves between eigenspaces of $\Delta_{S^3}$; in the Fock
+  stereographic picture, this changes the ``latitude'' on~$S^3$.
+\end{itemize}
+The angular momentum $l$ is conserved by both transitions---it labels
+the $SO(3)$ representation within each $SO(4)$ shell but does not
+contribute an independent transition type. The base $S^2$ constrains
+state labeling (which $l$, $m$ values exist) but does not generate
+lattice transitions. The Fock stereographic projection collapses the
+2-dimensional base directions into a single radial variable (the
+principal quantum number $n$), explaining why $d_{\max} = 2 \times 2 = 4$
+(two motion types $\times$ two directions) rather than~6.
+
+
+\subsection{Second selection principle}\label{sec:second_selection}
+
+The topological maximum degree $d_{\max} = 4$ gives an asymptotic
+bipartite spectral radius bound of $2 d_{\max} = 8$ for the graph
+Laplacian~\cite{phase1_kappa}. The $S^3$ Laplace--Beltrami eigenvalue
+$|\lambda_n| = n^2 - 1$ equals this bound uniquely at $n = 3$:
+\begin{equation}\label{eq:second_selection}
+  n^2 - 1 = 2\,d_{\max} \quad\Longrightarrow\quad n_{\max} = 3.
+\end{equation}
+This provides an independent selection of $n_{\max} = 3$, from the
+discrete--continuous compatibility condition rather than from the Casimir
+selection $B/N = \dim(S^3)$.
+
+We note a subtlety: $d_{\max} = 4$ is the topological maximum degree for
+interior nodes of the lattice class (first realized at $n_{\max} = 4$),
+not the realized maximum at $n_{\max} = 3$ (which is~$3$, since all 14
+nodes are boundary nodes)~\cite{phase2_kappa}. The selection principle
+should be read as: the $S^3$ eigenvalue at $n_{\max}$ matches the
+\textit{asymptotic} spectral radius bound of the lattice topology.
+
+The connection to $\kappa$ is immediate: if
+$\kappa = -E_1/|\lambda_{n_{\max}}| = -1/(2(n^2-1))$, then the Hopf
+selection $n_{\max} = 3$ gives $\kappa = -1/16$, the universal kinetic
+scale of the GeoVac program~\cite{paper7}.
+
+\textit{Status:} this is a structural observation, not a derivation. The
+two selection principles ($B/N = 3$ and $2d_{\max} = n^2 - 1$) are
+algebraically independent; whether they share a common origin in the
+Hopf fibration geometry is an open question.
 
 
 \subsection{Open questions}
@@ -665,6 +833,19 @@ exists only for $S^3$.
   angle, Yukawa couplings, mass ratios) finds no match at the $1\%$
   level. The other roots do not appear to encode additional coupling
   constants.
+
+\item \textit{Common origin of the two selection principles.} The
+  second selection principle ($2d_{\max} = n^2 - 1$ at $n = 3$) and
+  the Casimir selection ($B/N = 3$ at $n = 3$) are algebraically
+  independent. Whether they share a common origin in the Hopf
+  fibration geometry is open.
+
+\item \textit{Circulant phase and the Hopf connection.} The
+  Hermiticity of the circulant coupling and its $\theta \approx
+  3\pi/2$ phase at the physical root may encode the $U(1)$ gauge
+  structure. A derivation connecting the circulant phase to the Hopf
+  connection 1-form would ground Link~4 of
+  Table~\ref{tab:chain}.
 \end{enumerate}
 
 
@@ -678,8 +859,14 @@ $K = \pi(42 + \pi^2/6 - 1/40)$ is constructed from three spectral
 invariants of the Hopf fibration. The selection principle
 $B/N = \dim(S^3)$ is proven algebraically to select $n_{\max} = 3$
 uniquely, via the closed-form ratio $B/N = 3(m+2)(m-1)/10$; this
-result is specific to~$S^3$ and does not generalize to other round
-spheres. The formula contains no fitted parameters and achieves
+result is specific to~$S^3$: a formal spectral moment
+$B_{\mathrm{formal}}/N = d$ holds universally at $m = 2$ for all
+round spheres (Sec.~\ref{sec:s3_specificity}), but the
+branching-based $B$ that enters the formula coincides with
+$B_{\mathrm{formal}}$ only for $d = 3$, due to the unit embedding
+index of $SO(3) \subset SO(4)$. The quaternionic and octonionic Hopf
+fibrations yield $1/\alpha \approx 970$ and $7164$ respectively,
+matching no known coupling constants. The formula contains no fitted parameters and achieves
 $8.8 \times 10^{-8}$ relative agreement with experiment. A
 combinatorial search over $1.92 \times 10^9$ formulas yields a
 $p$-value of $5.2 \times 10^{-9}$, establishing that this precision
@@ -687,6 +874,14 @@ is very unlikely to be accidental. The cubic form is the
 characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
 circulant matrix, providing structural justification for the
 self-consistency equation.
+
+The circulant coupling is necessarily Hermitian ($b$ and $c$ are
+complex conjugates), with the physical root at phase
+$\theta \approx 3\pi/2$, consistent with $U(1)$ gauge structure. A
+second selection principle---the bipartite spectral radius bound
+$2d_{\max} = 8$ matching $|\lambda_3| = n^2 - 1 = 8$---independently
+selects $n_{\max} = 3$ and connects to the universal kinetic scale
+$\kappa = -1/16$.
 
 The combination rule $K = \pi(B + F - \Delta)$ remains conjectural.
 A systematic investigation of spectral determinants, analytic torsion,
@@ -713,6 +908,16 @@ determinants, analytic torsion, heat kernel expansions, and
 index-theoretic invariants of the Hopf bundle components, documented
 in the project repository, established that the combination rule
 (Link~3) lies outside the scope of standard smooth spectral geometry.
+A subsequent three-phase investigation of the universal kinetic scale
+$\kappa = -1/16$ established the transition operator--Hopf
+correspondence, a second selection principle from the bipartite
+spectral radius bound, and the forced Hermiticity of the circulant
+coupling~\cite{phase1_kappa,phase2_kappa,phase3_audit}.
+A further investigation applied the formula's recipe to all four Hopf
+fibrations, discovered the universal algebraic identity
+$B_{\mathrm{formal}}/N = d$, and confirmed the $S^3$ specificity of
+the branching-based selection
+principle~\cite{phase6_hopf}.
 Computational implementation and documentation drafting were performed
 with the assistance of large language models (Anthropic Claude) under
 the author's scientific direction. All results were validated against
@@ -767,6 +972,27 @@ B.~Robertson, ``Wyler's expression for the fine-structure constant,''
 J.~Loutey, ``Paper~2 Computational Audit: Phases 1--4,'' GeoVac
 supplementary material (2026). Available at
 \texttt{debug/alpha\_audit/} in the project repository.
+
+\bibitem{phase1_kappa}
+J.~Loutey, ``$\kappa = -1/16$ Investigation: Phase~1,'' GeoVac
+supplementary material (2026). Available at
+\texttt{debug/kappa\_investigation/} in the project repository.
+
+\bibitem{phase2_kappa}
+J.~Loutey, ``Spectral Determinants \& Second Selection Principle:
+Phase~2,'' GeoVac supplementary material (2026). Available at
+\texttt{debug/kappa\_investigation/phase2/} in the project repository.
+
+\bibitem{phase3_audit}
+J.~Loutey, ``Circulant Structure of the Cubic: Phase~3,'' GeoVac
+supplementary material (2026). Available at
+\texttt{debug/kappa\_investigation/phase3/} in the project repository.
+
+\bibitem{phase6_hopf}
+J.~Loutey, ``Quaternionic Hopf Fibration \& Universal Algebraic
+Identity: Phase~6,'' GeoVac supplementary material (2026). Available
+at \texttt{debug/kappa\_investigation/phase6/} in the project
+repository.
 
 \end{thebibliography}
 

@@ -5,6 +5,51 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.6] - 2026-03-22
+
+### Paper 2: Universal Algebraic Identity & Hopf Fibration Generalization
+
+No code changes. Paper 2 updated with Phase 5 (residual analysis) and Phase 6 (Hopf generalization) findings.
+
+#### Paper 2 Updated
+- **Proven:** Universal algebraic identity B_formal(m)/N(m) = d at m = 2 for ALL round spheres S^d, via quadratic m² + dm − 2(d+2) = 0
+- **Proven:** B_formal = B_branch ONLY for d = 3 (unit embedding index of SO(3) ⊂ SO(4)); this is the true source of S³ specificity
+- **Established (negative):** Quaternionic Hopf (S³→S⁷→S⁴) gives 1/α ≈ 970 — no match to weak coupling α_W ≈ 1/29.5
+- **Established (negative):** Octonionic Hopf (S⁷→S¹⁵→S⁸) gives 1/α ≈ 7164 — no match to strong coupling α_s ≈ 1/8.5
+- **Established (negative):** Formula residual (8.8×10⁻⁸) is intrinsic — matches no QED correction, spectral invariant, or mathematical constant
+- **Revised:** Sec VIII.E "S³ specificity" with sharper B_formal vs B_branch distinction and three-point representation-theoretic obstruction
+- **Added:** Quaternionic/octonionic Hopf negative results to Sec VIII.E and conclusion
+- **Added:** Bibliography entry for Phase 6 investigation
+
+#### Investigation Scripts (`debug/kappa_investigation/`)
+- `phase5/phase5_residual.py` — Residual structure analysis (50-digit precision, QED corrections, CODATA vintages)
+- `phase5/phase5_summary.md` — Phase 5 summary: residual is intrinsic, no known correction matches
+- `phase6/phase6_quaternionic_hopf.py` — All four Hopf fibrations, B_formal vs B_branch, representation theory
+- `phase6/phase6_summary.md` — Phase 6 summary: universal identity, quaternionic negative result, obstruction analysis
+
+## [1.7.5] - 2026-03-22
+
+### Paper 2: Kappa Investigation — Transition Operators, Second Selection, Circulant Hermiticity
+
+No code changes. Paper 2 updated with findings from three-phase kappa investigation.
+
+#### Paper 2 Updated
+- **Added:** Sec VIII — "Transition Operators and the Hopf Geometry": L± = Hopf fiber motion, T± = radial S3 motion, d_max = 4 from 2 motion types × 2 directions
+- **Added:** Sec VIII — "Second Selection Principle": bipartite spectral radius 2·d_max = 8 matches |λ₃| = n²−1 = 8, independently selecting n_max = 3
+- **Proven:** Circulant coupling (b, c) are necessarily complex conjugates; M is Hermitian, not real symmetric (Sec VI D)
+- **Proven:** Physical root at θ ≈ 3π/2 (nearly pure imaginary coupling); determinant condition fixes cos(3θ) = −1/(2(K/3)^{3/2})
+- **Proven:** Self-referential property (b+c satisfies same cubic) is the k=0 DFT mode of any circulant — structural, not coincidental
+- **Established (negative):** Best additive bridges to B = 42 are π/72 (0.002%) and 1/24 (0.003%), neither derived from first principles
+- **Established (negative):** Circulant does not factor K into independent spectral invariants of individual bundle components
+- **Updated:** Link 4 in derivation chain with footnote on forced Hermiticity result
+- **Updated:** Link 2 footnote noting second selection principle as independent support
+- **Added:** Two new open questions (common origin of selection principles; circulant phase ↔ Hopf connection)
+
+#### Investigation Scripts (`debug/kappa_investigation/`)
+- `kappa_investigation.py` — Phase 1: lambda_max analysis, d_max counting, kappa self-consistency
+- `phase2/phase2_spectral_determinants.py` — Phase 2: spectral determinant bridge search, d_max correction
+- `phase3/phase3_circulant.py` — Phase 3: circulant polar parameterization, Hermiticity proof, DFT analysis
+
 ## [1.7.4] - 2026-03-22
 
 ### Paper 2: Algebraic Selection Principle & Spectral Geometry Survey

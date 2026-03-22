@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.4-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.6-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.7.4** - Paper 2 Algebraic Selection Principle & Spectral Geometry Survey
+**Version 1.7.6** - Paper 2 Universal Algebraic Identity & Hopf Fibration Generalization
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,11 +18,13 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v1.7.4
+## What's New in v1.7.6
 
-- **Paper 2:** Algebraic selection principle (B/N = 3(m+2)(m-1)/10), S³ specificity proof, spectral geometry survey (negative results), det'(S²) fix
+- **Paper 2:** Universal algebraic identity B_formal/N = d for all round spheres S^d, quaternionic/octonionic Hopf negative results (1/α ≈ 970, 7164), S³ specificity sharpened (B_formal = B_branch only for d = 3), residual analysis (8.8×10⁻⁸ intrinsic, no structure)
+- **Paper 2 (v1.7.5):** Forced Hermiticity of circulant coupling, second selection principle (2·d_max = |λ₃|), transition operator–Hopf correspondence
 
 ### Prior Releases
+- **v1.7.4:** Paper 2 algebraic selection principle (B/N = 3(m+2)(m-1)/10), S³ specificity proof, spectral geometry survey (negative results)
 - **v1.7.3:** Paper 2 rewrite — statistical validation (p = 5.2×10⁻⁹), circulant Z₃ structure, derivation chain assessment
 - **v1.7.2:** Documentation review & epistemic tightening (Papers 0, 1, 16)
 - **v1.7.1:** Paper 2 rewrite — α from Hopf bundle (8.8×10⁻⁸, zero params, `hopf_bundle.py`)
@@ -287,7 +289,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 
 | # | Title | Key Result |
 |:-:|-------|------------|
-| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸ error, p = 5.2×10⁻⁹, zero params** |
+| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸, p = 5.2×10⁻⁹, universal B_formal/N = d, Hopf generalization negative, zero params** |
 | 0 | Geometric Packing | Universal constant K = -1/16 |
 | 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling, Berry phase correction |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
@@ -340,7 +342,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.7.3},
+  version = {1.7.6},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

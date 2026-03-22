@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v1.7.4 (March 22, 2026)
+**Version:** v1.7.6 (March 22, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The core papers in `papers/core/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -19,7 +19,7 @@
 - One-electron molecules: H2+ at 0.70% (prolate spheroidal, Paper 11)
 - Two-electron molecules: H2 at 94.1% D_e (Level 4 mol-frame hyperspherical, Paper 15)
 - Core-valence molecules: LiH R_eq = 3.21 bohr, 6.4% error (composed geometry, Paper 17)
-- Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9 (Paper 2, conjectural)
+- Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9, universal algebraic identity B_formal/N = d, Hopf generalization negative result, circulant Hermiticity, second selection principle (Paper 2, conjectural)
 
 **Active frontier:**
 - Extending composed geometry (Paper 17) to higher l_max with sigma+pi channels for LiH
@@ -123,7 +123,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 | Paper | File | Key Topic |
 |:------|:-----|:----------|
-| Paper 2 | `paper_2_alpha.tex` | Fine structure constant from Hopf bundle (8.8x10^-8, p = 5.2x10^-9, circulant structure, zero params) |
+| Paper 2 | `paper_2_alpha.tex` | Fine structure constant from Hopf bundle (8.8x10^-8, p = 5.2x10^-9, circulant Hermiticity, second selection, universal B_formal/N = d identity, Hopf generalization negative result, zero params) |
 | Paper 3 | `paper_3_holography.tex` | Holographic entropy, spectral dimension, central charge |
 | Paper 4 | `Paper_4_Universality.tex` | Mass-independence, universality, muonic hydrogen |
 | Paper 5 | `Paper_5_Geometric_Vacuum.tex` | Comprehensive geometric vacuum framework (synthesis) |
