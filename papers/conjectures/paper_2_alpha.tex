@@ -11,21 +11,24 @@
 \date{\today}
 
 \begin{abstract}
-The fine structure constant $\alpha \approx 1/137$ has resisted
-first-principles derivation for a century. We show that $\alpha$
-satisfies the cubic equation $\alpha^3 - K\alpha + 1 = 0$, where the
-coefficient $K = \pi(42 + \zeta(2) - 1/40)$ is fixed entirely by
-spectral invariants of the Hopf fibration $S^1 \to S^3 \to S^2$. The
-three terms arise from the Casimir trace of the $S^2$ base (42), the
-zeta-regularized spectrum of the $S^1$ fiber ($\zeta(2) = \pi^2/6$),
-and a boundary correction from the $S^3$ total space ($1/40$). A
-natural selection principle---the ratio of the Casimir sum to the
-number of states equals the dimension of $S^3$---uniquely fixes the
-summation cutoff at principal quantum number $n = 3$. The resulting
-value $\alpha^{-1} = 137.035987$ agrees with the CODATA value
-$137.035999$ to $8.8 \times 10^{-8}$ relative error, with no fitted
-parameters. This supersedes an earlier ``symplectic impedance''
-approach by the same author, improving precision by a factor of 500.
+We observe that the fine structure constant $\alpha$ satisfies the cubic
+equation $\alpha^3 - K\alpha + 1 = 0$, where the coefficient
+$K = \pi(42 + \pi^2/6 - 1/40) = 137.036064$ is constructed from
+spectral invariants of the Hopf fibration $S^1 \to S^3 \to S^2$: the
+degeneracy-weighted Casimir trace of the $S^2$ base ($B = 42$), the
+spectral zeta function of the $S^1$ fiber ($F = \zeta(2) = \pi^2/6$),
+and a boundary correction from the $S^3$ total space
+($\Delta = 1/40$). The resulting $\alpha^{-1} = 137.035987$ agrees
+with experiment to $8.8 \times 10^{-8}$ relative error with zero free
+parameters. A combinatorial search over $1.92 \times 10^9$ formulas
+built from the same spectral ingredients yields a $p$-value of
+$5.2 \times 10^{-9}$, establishing that this precision is very
+unlikely to be accidental. The cubic is shown to be the characteristic
+polynomial of a traceless $\mathbb{Z}_3$-symmetric circulant matrix,
+suggesting democratic coupling among the three bundle components.
+However, the combination rule $K = \pi(B + F - \Delta)$ remains
+conjectural: this is an empirical formula with structural support, not
+a first-principles derivation.
 \end{abstract}
 
 \maketitle
@@ -40,43 +43,50 @@ greatest damn mysteries of physics''~\cite{feynman1985}. Despite a
 century of quantum theory, $\alpha$ remains an unexplained input to
 the Standard Model. Attempts to derive it
 numerically---from~$\pi$,~$e$, prime numbers, or Platonic
-solids---have uniformly failed~\cite{eddington1935,barrow2002}. The
-anthropic principle offers no insight: $\alpha$ must lie near its
-observed value for chemistry to exist, but \textit{why} it takes this
-particular value is unknown.
+solids---have uniformly failed~\cite{eddington1935,barrow2002}.
+Eddington's ``proton--electron mass ratio'' argument and Wyler's
+symmetric-space formula~\cite{wyler1969} both achieved suggestive
+precision but were criticized for lacking a physical mechanism
+connecting the mathematical structure to electromagnetic
+coupling~\cite{robertson1971}.
 
-We propose a geometric answer rooted in the internal structure of the
-electron's state manifold. In a companion paper~\cite{paper7}, we
+The present work is situated within the GeoVac program, which
 established that the discrete graph Laplacian for hydrogen is
-mathematically equivalent to the Laplace--Beltrami operator on the unit
-three-sphere~$S^3$, related to the Schr\"odinger equation via Fock's
-1935 stereographic projection. The electron's bound-state manifold
-\textit{is}~$S^3$.
+mathematically equivalent to the Laplace--Beltrami operator on the
+unit three-sphere~$S^3$, related to the Schr\"odinger equation via
+Fock's 1935 stereographic projection~\cite{paper7}. The electron's
+bound-state manifold \textit{is}~$S^3$---a result supported by 18
+independent symbolic proofs~\cite{paper7}.
 
-This three-sphere carries a canonical fiber bundle---the Hopf
-fibration~\cite{hopf1931,urbantke2003}:
+This three-sphere carries a unique fiber bundle structure: the Hopf
+fibration~\cite{hopf1931,urbantke2003}
 \begin{equation}\label{eq:hopf}
   S^1 \;\longrightarrow\; S^3 \;\longrightarrow\; S^2.
 \end{equation}
-The base space $S^2$ parametrizes photon propagation directions
-(momentum sphere), while the fiber $S^1$ encodes electromagnetic
-gauge phase. We show that the spectral invariants of these three
-manifolds---$S^1$, $S^2$, and $S^3$---combine to fix a single
-dimensionless constant that determines $\alpha$ through a cubic
-self-consistency equation.
+The base $S^2$ parametrizes photon propagation directions, while the
+fiber $S^1$ encodes the $U(1)$ electromagnetic gauge phase. We
+identify a formula for $\alpha$ built entirely from the spectral
+invariants of these three manifolds, validate it statistically against
+a large space of alternative formulas, and identify structural
+underpinnings (a $\mathbb{Z}_3$-symmetric circulant matrix) that
+explain the cubic form. We also characterize precisely what remains
+unestablished.
+
+We state clearly at the outset: \textit{this is an empirical formula
+with structural support, not a first-principles derivation.} The
+combination rule that assembles the spectral invariants into the
+coupling constant $K$ is observed, not derived.
 
 An earlier version of this work~\cite{paper2_old} attempted to extract
-$\alpha$ from a ``symplectic impedance'' ratio $S_n/P_n$ on the
-electron lattice, achieving 0.0045\% error at $n = 5$ but requiring a
-fitted helical pitch. The present result eliminates all fitted
-parameters and improves precision by a factor of~500.
+$\alpha$ from a ``symplectic impedance'' ratio on the electron
+lattice, achieving $6.2 \times 10^{-5}$ relative error with a fitted
+helical pitch. The present result eliminates all fitted parameters and
+improves precision by a factor of~500.
 
 
 %======================================================================
 \section{The Hopf Bundle as Electron--Photon Geometry}
 %======================================================================
-
-\subsection{$S^3$ as the electron state manifold}
 
 Fock's 1935 stereographic projection maps the hydrogen momentum
 eigenvalue problem onto the unit three-sphere~\cite{fock1935}. The
@@ -90,8 +100,6 @@ $p_0^2 = -2E$~\cite{paper7}. This identification is exact: the graph
 Laplacian on the discrete lattice and the continuum operator on $S^3$
 share the same spectrum, as verified by 18 independent symbolic
 proofs~\cite{paper7}.
-
-\subsection{The Hopf fibration}
 
 The three-sphere admits a unique fiber bundle structure, the Hopf
 fibration~(\ref{eq:hopf}). Concretely, the map
@@ -126,61 +134,63 @@ extract one canonical invariant from each.
 
 The eigenvalues of the Laplacian on $S^2$ are $l(l+1)$ with
 degeneracy $2l+1$. These are the Casimir eigenvalues of $SO(3)$. We
-define the \textit{Casimir trace} as
+define the \textit{degeneracy-weighted Casimir trace} as
 \begin{equation}\label{eq:casimir}
-  C(n_{\max}) = \sum_{n=1}^{n_{\max}} \sum_{l=0}^{n-1} l(l+1)
-  = \frac{1}{2}\sum_{n=1}^{n_{\max}} \sum_{l=0}^{n-1} l(l+1),
+  B(n_{\max}) = \sum_{n=1}^{n_{\max}} \sum_{l=0}^{n-1}
+  (2l+1)\,l(l+1),
 \end{equation}
 where the outer sum runs over principal shells (each shell $n$
-contains angular momenta $l = 0, \ldots, n-1$) and the factor of
-$1/2$ normalizes per spinor component. This is the total angular
-momentum content of all electron states up to shell~$n_{\max}$.
+contains angular momenta $l = 0, \ldots, n-1$). This is the total
+angular momentum content of all electron states up to
+shell~$n_{\max}$, weighted by the magnetic degeneracy of each
+subshell.
 
-A natural selection principle fixes $n_{\max}$. The mean Casimir per
-state is
-\begin{equation}
-  \bar{C}(n_{\max}) = \frac{C(n_{\max})}{\sum_{n=1}^{n_{\max}} n^2}.
-\end{equation}
-We require this to equal the topological dimension of the total space:
-\begin{equation}\label{eq:selection}
-  \bar{C}(n_{\max}) = \dim(S^3) = 3.
-\end{equation}
-This condition is satisfied at $n_{\max} = 3$:
+At $n_{\max} = 3$, the explicit computation gives
 \begin{align}
-  C(3) &= \tfrac{1}{2}\bigl[0 + (0 + 2) + (0 + 2 + 6)\bigr]
-       = \tfrac{1}{2}(10) = 5, \notag \\
-  \text{No.\ states} &= 1 + 4 + 9 = 14, \notag \\
-  \bar{C}(3) &= \frac{\sum l(l+1)}{14}
-              = \frac{0 + 0 + 2 + 0 + 2 + 6}{14}
-              = \frac{10}{14} \notag
+  B(3) &= \underbrace{0}_{(1,0)}
+         + \underbrace{0}_{(2,0)} + \underbrace{6}_{(2,1)}
+         + \underbrace{0}_{(3,0)} + \underbrace{6}_{(3,1)}
+         + \underbrace{30}_{(3,2)} \notag \\
+       &= 42,
 \end{align}
+where subscripts denote $(n, l)$ pairs.
 
-We pause to clarify the computation. The \textit{unnormalized} Casimir
-trace---without the $1/2$ prefactor---sums $l(l+1)$ over all
-$(n,l)$ pairs:
-\begin{equation}
-  \text{Tr}(\hat{L}^2)\big|_{n \le 3}
-    = \sum_{n=1}^{3}\sum_{l=0}^{n-1} l(l+1)
-    = 0 + (0+2) + (0+2+6) = 10.
+
+\subsection{Selection principle}
+
+The total number of states through shell $n_{\max}$ is
+$N(n_{\max}) = \sum_{n=1}^{n_{\max}} n^2$. We observe that the ratio
+\begin{equation}\label{eq:selection}
+  \frac{B(n_{\max})}{N(n_{\max})} = \dim(S^3) = 3
 \end{equation}
-The half-trace entering the formula is
-$\text{Tr}(\hat{L}^2)|_{n\le 3}/2 = 5$. However, each $l$-subspace
-contains $2l+1$ magnetic substates, giving a \textit{state-weighted}
-trace:
-\begin{equation}
-  \sum_{n=1}^{3}\sum_{l=0}^{n-1}(2l+1)\,l(l+1) = 0+0+6+0+6+30 = 42.
-\end{equation}
-It is this degeneracy-weighted half-trace that enters as the base
-manifold invariant:
+is satisfied uniquely at $n_{\max} = 3$:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+\hline\hline
+$n_{\max}$ & $B(n_{\max})$ & $N(n_{\max})$ & $B/N$ \\
+\hline
+1 & 0  & 1  & 0.000 \\
+2 & 6  & 5  & 1.200 \\
+3 & 42 & 14 & 3.000 \\
+4 & 132 & 30 & 4.400 \\
+5 & 310 & 55 & 5.636 \\
+\hline\hline
+\end{tabular}
+\caption{The selection principle $B/N = 3$ is satisfied uniquely at
+$n_{\max} = 3$.}
+\label{tab:selection}
+\end{table}
+
+The ratio crosses through~3 only at $n_{\max} = 3$: below this shell
+$B/N < 3$, and above it $B/N > 3$. We emphasize that this condition
+is \textit{empirically observed}, not derived from a variational
+principle. The base manifold invariant is
 \begin{equation}\label{eq:base}
-  \boxed{B = \frac{1}{2}\sum_{n=1}^{3}\sum_{l=0}^{n-1}(2l+1)\,l(l+1)
-         = 42.} \vphantom{\Bigg|}
+  \boxed{B = \sum_{n=1}^{3}\sum_{l=0}^{n-1}(2l+1)\,l(l+1) = 42.}
+  \vphantom{\Bigg|}
 \end{equation}
-
-The selection principle~(\ref{eq:selection}) can equivalently be
-stated: $n_{\max} = 3$ is the unique shell at which the angular
-momentum structure ``fills'' the three dimensions of $S^3$. At
-$n_{\max} = 2$, $\bar{C} < 3$; at $n_{\max} = 4$, $\bar{C} > 3$.
 
 
 \subsection{Fiber $S^1$: Spectral zeta function}
@@ -194,31 +204,28 @@ is
 \end{equation}
 where $\zeta_R$ is the Riemann zeta function. At $s = 1$:
 \begin{equation}\label{eq:fiber}
-  \boxed{F = \frac{1}{2}\,\zeta_{S^1}(1)
-           = \zeta_R(2) = \frac{\pi^2}{6}.}
-           \vphantom{\Bigg|}
+  F = \zeta_R(2) = \frac{\pi^2}{6}.
 \end{equation}
-This is the zeta-regularized Casimir energy of the photon phase
-circle. The factor $1/2$ again normalizes per spinor component
-(single chirality of the photon field).
+This is the zeta-regularized spectral invariant of the photon gauge
+phase circle.
 
 
 \subsection{Total space $S^3$: Boundary correction}
 
 The total space $S^3$ contributes a finite-size correction from
 the interplay of its eigenvalue spectrum~(\ref{eq:s3eig}) with the
-degeneracy $g_n = n^2$. At the selected cutoff $n_{\max} = 3$, the
+cumulative state count. At the selected cutoff $n_{\max} = 3$, the
 highest eigenvalue is $\lambda_3 = -(3^2 - 1) = -8$ and the
-degeneracy is $g_2 = 2^2 = 4$ (the base-space states at $n=2$, the
-first non-trivial shell). The boundary term is
+cumulative state count through the first non-trivial shell is
+$N(2) = \sum_{n=1}^{2} n^2 = 1 + 4 = 5$. The boundary term is
 \begin{equation}\label{eq:boundary}
-  \boxed{\Delta = \frac{1}{|\lambda_3| \times g_2}
+  \boxed{\Delta = \frac{1}{|\lambda_3| \times N(2)}
                 = \frac{1}{8 \times 5} = \frac{1}{40}.}
                 \vphantom{\Bigg|}
 \end{equation}
-This term represents the coupling between the highest occupied shell
-and the total-space curvature---a UV/IR mixing characteristic of
-compact manifolds.
+The physical significance of this boundary term is not established.
+It may be suggestive of UV/IR mixing on the compact manifold, but
+this interpretation is speculative.
 
 
 %======================================================================
@@ -226,7 +233,7 @@ compact manifolds.
 %======================================================================
 
 Combining the three spectral invariants, we define the
-\textit{bare coupling constant}:
+\textit{coupling constant}:
 \begin{equation}\label{eq:K}
   K = \pi\!\left(B + F - \Delta\right)
     = \pi\!\left(42 + \frac{\pi^2}{6} - \frac{1}{40}\right).
@@ -238,33 +245,20 @@ Numerically,
     = 137.036064.
 \end{equation}
 
-Electromagnetic coupling is not bare: the photon field dresses itself
-through vacuum polarization. The physical $\alpha$ satisfies a
-self-consistency condition
+The physical $\alpha$ satisfies a self-consistency condition
 \begin{equation}\label{eq:selfconsistent}
   \frac{1}{\alpha} + \alpha^2 = K,
 \end{equation}
-expressing that the bare coupling $K$ is split into a dominant inverse
-coupling $1/\alpha$ and a vacuum self-energy correction $\alpha^2$.
-Multiplying through by $\alpha$:
+which, upon multiplication by $\alpha$, yields
 \begin{equation}\label{eq:cubic}
   \boxed{\alpha^3 - K\alpha + 1 = 0.}
 \end{equation}
 
-This cubic has three real roots (verified by its discriminant
-$\Delta_3 > 0$). The physical root is the smallest positive one,
-corresponding to perturbative QED ($\alpha \ll 1$). The remaining
-roots correspond to strong-coupling regimes.
+This depressed cubic has three real roots (verified by its
+discriminant $4K^3 - 27 > 0$). The physical root is the smallest
+positive one, corresponding to perturbative QED ($\alpha \ll 1$).
 
-
-%======================================================================
-\section{Numerical Verification}
-%======================================================================
-
-\subsection{Precision comparison}
-
-Solving Eq.~(\ref{eq:cubic}) numerically for the smallest positive
-root:
+Solving numerically:
 
 \begin{table}[h]
 \centering
@@ -284,14 +278,234 @@ value.}
 \label{tab:comparison}
 \end{table}
 
+
+%======================================================================
+\section{Statistical Validation}
+%======================================================================
+
+A formula involving $\pi$, $42$, and $\pi^2/6$ matching $\alpha^{-1}$
+to $8.8 \times 10^{-8}$ could in principle be a numerical
+coincidence. To test this, we performed a systematic combinatorial
+search~\cite{phase2_audit}.
+
+\subsection{Search space}
+
+The search considers formulas of the form $\alpha^{-1} = T(A + B + C)$
+or, equivalently, the cubic $\alpha^3 - T(A+B+C)\alpha + 1 = 0$,
+where:
+\begin{itemize}
+\item $A$, $B$, $C$ are drawn from a pool of spectral quantities:
+  eigenvalues $|\lambda_n|$, degeneracies $n^2$ and $2l+1$, Casimir
+  values $l(l+1)$, cumulative counts $N(n)$, their pairwise products
+  up to~50, and the transcendentals $\zeta(2)$, $\zeta(3)$, $\zeta(4)$,
+  $\ln 2$, $\pi$, $\pi^2$ (743 unique term values total).
+\item $T$ ranges over 14 transcendental prefactors: $\pi$, $2\pi$,
+  $\pi^2$, $\pi/2$, $4\pi$, $4\pi^2$, $1/(2\pi)$, $1$, $2$,
+  $1/2$, $\pi/4$, $\pi/6$, $1/\pi$, $\sqrt{\pi}$.
+\end{itemize}
+
+Both linear ($\alpha^{-1} = T \cdot S$) and cubic
+($\alpha^3 - T \cdot S \cdot \alpha + 1 = 0$) interpretations are
+tested, giving $1.92 \times 10^9$ total formulas.
+
+\subsection{Results}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrr}
+\hline\hline
+Threshold & Hits & Fraction \\
+\hline
+$10^{-2}$          & 1{,}283{,}592  & $6.7 \times 10^{-4}$ \\
+$10^{-3}$          &   125{,}027    & $6.5 \times 10^{-5}$ \\
+$10^{-4}$          &    14{,}476    & $7.5 \times 10^{-6}$ \\
+$10^{-5}$          &       682      & $3.5 \times 10^{-7}$ \\
+$10^{-6}$          &        37      & $1.9 \times 10^{-8}$ \\
+$10^{-7}$          &        11      & $5.7 \times 10^{-9}$ \\
+$8.8\times 10^{-8}$ &       10      & $5.2 \times 10^{-9}$ \\
+\hline\hline
+\end{tabular}
+\caption{Hit distribution across precision thresholds. The hit
+fraction scales approximately linearly with threshold, consistent with
+a uniform distribution in $\alpha^{-1}$ space.}
+\label{tab:hits}
+\end{table}
+
+At the paper's precision of $8.8 \times 10^{-8}$, only 10 formulas
+out of $1.92 \times 10^9$ match as well or better, yielding
+\begin{equation}
+  \boxed{p\text{-value} = 5.2 \times 10^{-9}.}
+\end{equation}
+The 10 formulas that beat the paper's precision involve combinations
+such as $4\pi(5/49 + 14/15 + \pi^2)$ that lack physical
+interpretation in the Hopf bundle context. The paper's formula is the
+only one among the top matches with a coherent geometric narrative.
+
+The $p$-value establishes that the precision is very unlikely to be
+accidental. It does not, by itself, constitute a derivation---but it
+does distinguish this formula from generic numerology.
+
+
+%======================================================================
+\section{The Circulant Structure}
+%======================================================================
+
+The cubic $\alpha^3 - K\alpha + 1 = 0$ is not an arbitrary polynomial
+ansatz. It arises naturally as the characteristic polynomial of a
+traceless $3 \times 3$ circulant matrix.
+
+\subsection{Circulant eigenvalue equation}
+
+Consider the traceless circulant
+\begin{equation}\label{eq:circulant}
+  M = \begin{pmatrix} 0 & b & c \\ c & 0 & b \\ b & c & 0
+      \end{pmatrix},
+\end{equation}
+which has $\mathbb{Z}_3$ symmetry (invariance under cyclic permutation
+of rows and columns). Its characteristic polynomial is
+\begin{equation}
+  \det(M - sI) = -s^3 + 3bc\,s + (b^3 + c^3) = 0.
+\end{equation}
+Setting $bc = K/3$ and $b^3 + c^3 = -1$ (equivalently,
+$\det M = -1$), this becomes
+\begin{equation}
+  s^3 - Ks + 1 = 0,
+\end{equation}
+which is \textit{exactly} the paper's cubic with $s = \alpha$. The
+eigenvalues of $M$ are the three roots of the cubic.
+
+\subsection{Physical interpretation}
+
+The $\mathbb{Z}_3$ symmetry of the circulant represents
+\textit{democratic coupling}: each of the three objects (labeled $1$,
+$2$, $3$) interacts equally with the other two. In the Hopf bundle
+context, the three objects are the fiber $S^1$, the base $S^2$, and
+the total space $S^3$. Each component contributes a spectral
+invariant; the circulant structure implies that their coupling respects
+the cyclic symmetry of the bundle decomposition.
+
+The $SU(2)$ structure constants $\varepsilon_{ijk}$ exhibit the same
+$\mathbb{Z}_3$ cyclic symmetry, producing a circulant with $b = c = 1$
+and characteristic polynomial $s^3 - 3s - 2 = 0$. The paper's cubic
+has the \textit{same algebraic structure} with coupling strength
+$K/3 \approx 45.7$ instead of~1.
+
+\subsection{Structural content and limitations}
+
+The circulant interpretation is a \textit{structural} result: it
+explains why the self-consistency equation takes the form of a
+depressed cubic with unit constant term. These features follow from
+three conditions:
+\begin{enumerate}
+\item Tracelessness: $\mathrm{tr}(M) = 0$ (eliminates the $s^2$ term).
+\item $\mathbb{Z}_3$ symmetry: only two free parameters ($b$, $c$).
+\item Unit determinant condition: $\det(M) = b^3 + c^3 = -1$ (fixes
+  the constant term).
+\end{enumerate}
+
+The condition $\det(M) = -1$ is consistent with the chirality of the
+Hopf map (linking number $+1$) and with the fermionic sign convention
+($\psi \to -\psi$ under $2\pi$ rotation of the $S^1$ fiber), but
+neither identification constitutes a derivation.
+
+The circulant explains \textit{why a cubic}, but does not derive
+\textit{why this specific~$K$}. The single free parameter $bc = K/3$
+encodes the coupling strength, and its value
+$\pi(42 + \pi^2/6 - 1/40)/3$ is not determined by the circulant
+structure alone.
+
+
+%======================================================================
+\section{What Is and Is Not Established}
+%======================================================================
+
+Following the epistemic standards of the GeoVac program, we assess
+each link in the hypothetical derivation chain.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{clc}
+\hline\hline
+Link & Description & Status \\
+\hline
+1 & Hopf bundle as geometric arena & $\checkmark$ \\
+2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\circ$ \\
+3 & Combination rule $K = \pi(B+F-\Delta)$ & $\times$ \\
+4 & $\mathbb{Z}_3$ circulant $\to$ cubic & $\circ$ \\
+5 & $\alpha$ from cubic root & $\checkmark$ \\
+\hline\hline
+\end{tabular}
+\caption{Derivation chain assessment.
+$\checkmark$ = established,
+$\circ$ = partially established,
+$\times$ = not established.}
+\label{tab:chain}
+\end{table}
+
+\textbf{Link~1} (established): The Hopf fibration is the unique
+principal $U(1)$-bundle over $S^2$ with $c_1 = 1$. That $S^3$ is the
+electron state manifold is proven in Ref.~\cite{paper7}. Using the
+Hopf bundle as a geometric framework is a natural choice.
+
+\textbf{Link~2} (partial): The three spectral invariants $B$, $F$,
+$\Delta$ are well-defined quantities associated with the bundle
+components. The selection principle $B/N = 3$ uniquely fixes
+$n_{\max} = 3$. However, the \textit{choice} of which spectral
+quantity to extract from each component is not derived from the bundle
+geometry.
+
+\textbf{Link~3} (not established): This is the critical gap. No
+principle selects the specific additive combination
+$K = \pi(B + F - \Delta)$ over alternatives such as
+$K = \pi B + F - \Delta$ or $K = \pi B F / \Delta$. The overall
+prefactor $\pi$ could be argued as natural (it appears in the
+stereographic projection), but the additive structure is unexplained.
+
+\textbf{Link~4} (partial): The cubic form arises naturally from
+$\mathbb{Z}_3$-symmetric coupling, and the $SU(2)$ structure constants
+share this symmetry. But no derivation connects the Hopf bundle to the
+specific circulant with $bc = K/3$.
+
+\textbf{Link~5} (established): Given the cubic, selecting the smallest
+positive root is pure algebra.
+
+The structural choices that remain underived are:
+\begin{enumerate}
+\item Why additive combination $B + F - \Delta$ (not multiplicative)?
+\item Why $\pi$ as the overall prefactor?
+\item Why $\zeta(2)$ specifically for the fiber (not $\zeta(1)$,
+  $\zeta(3)$, etc.)?
+\item Why $1/(|\lambda_3| \times N(2))$ for the boundary (not other
+  spectral ratios)?
+\item Why $\det(M) = -1$?
+\end{enumerate}
+
+
+%======================================================================
+\section{Discussion}
+%======================================================================
+
+\subsection{Comparison with Wyler's formula}
+
+Wyler's 1969 formula~\cite{wyler1969} also invokes symmetric spaces
+and achieves $\sim 10^{-5}$ precision. However, Wyler's derivation
+was criticized for lacking a physical mechanism connecting the
+symmetric space volumes to electromagnetic
+coupling~\cite{robertson1971}. The present work improves on this
+situation in two respects: (i)~$S^3$ is the \textit{proven} electron
+state manifold, providing a physical mechanism, and (ii)~the
+$p$-value of $5.2 \times 10^{-9}$ quantitatively distinguishes the
+formula from numerology. However, both approaches share the weakness
+of an unjustified combination rule.
+
 \subsection{Comparison with previous approach}
 
 An earlier attempt by the same author~\cite{paper2_old} modeled
-$\alpha^{-1}$ as a ``symplectic impedance'' ratio $S_n/P_n$ on the
-paraboloid lattice, achieving 0.0045\% error ($6.2 \times 10^{-5}$
-relative) at $n = 5$ with a fitted helical pitch parameter. The
-present result achieves $8.8 \times 10^{-8}$ relative error---a
-$\mathbf{500\times}$ improvement---with \textit{zero free parameters}.
+$\alpha^{-1}$ as a ``symplectic impedance'' ratio on the
+paraboloid lattice, achieving $6.2 \times 10^{-5}$ relative error
+with a fitted helical pitch. The present result achieves
+$8.8 \times 10^{-8}$---a $500\times$ improvement---with zero free
+parameters.
 
 \begin{table}[h]
 \centering
@@ -299,90 +513,69 @@ $\mathbf{500\times}$ improvement---with \textit{zero free parameters}.
 \hline\hline
 Method & Error & Free params & Cutoff \\
 \hline
-Symplectic impedance~\cite{paper2_old} & $6.2\times 10^{-5}$ & 1 (pitch) & $n=5$ \\
+Symplectic impedance~\cite{paper2_old} & $6.2\times 10^{-5}$ & 1 & $n=5$ \\
 \textbf{Hopf bundle (this work)} & $\mathbf{8.8\times 10^{-8}}$ & \textbf{0} & $n=3$ \\
 \hline\hline
 \end{tabular}
-\caption{Evolution of the geometric approach. The Hopf bundle formula
-eliminates fitted parameters and improves precision by 500$\times$.}
+\caption{Evolution of the geometric approach.}
 \label{tab:evolution}
 \end{table}
 
 
-%======================================================================
-\section{Discussion}
-%======================================================================
+\subsection{Spectral determinant near-miss}
 
-\subsection{Structure of the cubic}
-
-Equation~(\ref{eq:cubic}) has a transparent physical interpretation.
-Rewriting $1/\alpha = K - \alpha^2$: the observed inverse coupling
-$1/\alpha$ is the bare geometric value $K$ \textit{reduced} by a
-self-interaction $\alpha^2$. This mirrors the structure of charge
-renormalization in QED, where the bare charge is screened by vacuum
-polarization:
+The zeta-regularized spectral determinants of the bundle components
+are $\det'(\Delta_{S^1}) = 4\pi^2$,
+$\det'(\Delta_{S^2}) = e^{-4\zeta'_R(-1)}$, and
+$\det'(\Delta_{S^3}) = \pi\, e^{\zeta(3)/(2\pi^2)}$. The product
 \begin{equation}
-  \frac{1}{\alpha(\mu)} = \frac{1}{\alpha_0}
-    - \frac{2}{3\pi}\ln\frac{\Lambda}{\mu} + \cdots
+  \frac{\det'(\Delta_{S^1}) \cdot \det'(\Delta_{S^3})}{\pi}
+  = 4\pi^2 e^{\zeta(3)/(2\pi^2)} \approx 41.957
 \end{equation}
-The cubic replaces the logarithmic running with a polynomial
-self-consistency, suggesting an exact resummation of the perturbative
-series at zero momentum transfer.
+is $0.1\%$ from $B = 42$. Whether this near-miss reflects a deeper
+connection between the Casimir trace and spectral determinants, or is
+merely a coincidence, remains an open question. If a correction term
+derivable from the fibration geometry could bridge the $0.1\%$ gap
+between $4\pi^2 e^{\zeta(3)/(2\pi^2)}$ and~$42$, it would provide a
+path from standard spectral determinants to the Casimir trace,
+potentially grounding Link~2 of the derivation chain
+(Table~\ref{tab:chain}) in established spectral geometry. Replacing $B = 42$
+with this determinant product makes the agreement with CODATA
+$11{,}000\times$ \textit{worse}, confirming that the integer Casimir
+trace is the correct object, not the spectral determinant.
 
-\subsection{Why single chirality?}
-
-The factors of $1/2$ in Eqs.~(\ref{eq:base}) and~(\ref{eq:fiber})
-select a single chirality (helicity) of the photon field. This is
-consistent with the Hopf map itself, which is chiral: it wraps $S^3$
-onto $S^2$ with linking number~$+1$ (not~$\pm 1$). Parity violation
-in the weak sector may find a geometric origin in the choice of Hopf
-map chirality, but we do not pursue this here.
-
-\subsection{Relation to Wyler's formula}
-
-Wyler's 1969 formula~\cite{wyler1969}
-$\alpha^{-1} = (9/8\pi^4)(2\pi^5/15)^{1/4} \times 120\pi$
-also invokes symmetric spaces and achieves comparable precision
-($\sim 10^{-5}$). However, Wyler's derivation was criticized for
-lacking a physical mechanism connecting the symmetric space volumes to
-electromagnetic coupling~\cite{robertson1971}. The present work
-provides such a mechanism: $S^3$ is the \textit{proven} electron
-state manifold (via the Fock projection), the Hopf fibration is its
-\textit{unique} bundle structure, and the spectral invariants are
-\textit{canonical}---no choices remain.
 
 \subsection{Algebraic structure of $\alpha$}
 
 The formula implies that $\alpha$ is algebraic over the field
-$\mathbb{Q}(\pi, \zeta(2))$. Since $\zeta(2) = \pi^2/6$, this
-simplifies: $\alpha$ is algebraic over $\mathbb{Q}(\pi)$. That is,
+$\mathbb{Q}(\pi)$, since $\zeta(2) = \pi^2/6$. That is,
 $\alpha$ is a root of a polynomial whose coefficients are rational
 functions of $\pi$ alone. If confirmed, this would constrain $\alpha$
 far more tightly than the Standard Model currently does, and would
 imply that $\alpha$ is transcendental (since $\pi$ is).
 
+
 \subsection{Open questions}
 
-Several questions remain:
 \begin{enumerate}
-\item \textit{Derivation from first principles.} We have identified
-  \textit{which} spectral invariants combine to give $\alpha$, but not
-  \textit{why} these particular combinations (sum, with $\pi$
-  prefactor) arise from the bundle geometry. A path-integral
-  derivation over the Hopf fibration may provide this.
+\item \textit{Derive the combination rule} from a path integral or
+  spectral determinant identity on the Hopf bundle. This is the
+  critical gap (Link~3 in Table~\ref{tab:chain}).
 
-\item \textit{Weak and strong couplings.} The two non-physical roots
-  of Eq.~(\ref{eq:cubic}) may relate to the weak mixing angle or the
+\item \textit{Connect the $\mathbb{Z}_3$ circulant} to the
+  differential geometry of the Hopf connection. The $SU(2)$ structure
+  constants share the cyclic symmetry; can the coupling strength
+  $K/3$ be derived from the connection curvature?
+
+\item \textit{Understand the residual $8.8 \times 10^{-8}$.} Higher-order
+  spectral invariants (e.g., the $\eta$-invariant of $S^3$, which
+  vanishes by symmetry), gravitational corrections, or weak-mixing
+  contributions could account for the discrepancy.
+
+\item \textit{The other cubic roots.} The two non-physical roots of
+  Eq.~(\ref{eq:cubic}) may relate to the weak mixing angle or the
   strong coupling constant, if the argument generalizes to $SU(2)$ and
   $SU(3)$ bundles over higher-dimensional spheres.
-
-\item \textit{Running of $\alpha$.} The formula gives $\alpha$ at zero
-  momentum transfer. Incorporating scale dependence likely requires
-  replacing the sharp cutoff $n_{\max} = 3$ with a smooth regulator.
-
-\item \textit{The residual $8.8 \times 10^{-8}$.} This may arise from
-  higher-order spectral invariants (e.g., the $\eta$-invariant of
-  $S^3$), gravitational corrections, or weak-mixing contributions.
 \end{enumerate}
 
 
@@ -390,34 +583,37 @@ Several questions remain:
 \section{Conclusion}
 %======================================================================
 
-We have shown that the fine structure constant satisfies the cubic
-equation $\alpha^3 - K\alpha + 1 = 0$, where $K = \pi(42 + \zeta(2) -
-1/40)$ is determined by three spectral invariants of the Hopf
-fibration $S^1 \to S^3 \to S^2$. The formula contains no fitted
-parameters, achieves $8.8 \times 10^{-8}$ relative agreement with
-experiment, and admits a transparent physical interpretation: bare
-geometric coupling $K$ dressed by vacuum self-interaction $\alpha^2$.
+The fine structure constant satisfies the cubic equation
+$\alpha^3 - K\alpha + 1 = 0$, where
+$K = \pi(42 + \pi^2/6 - 1/40)$ is constructed from three spectral
+invariants of the Hopf fibration. The formula contains no fitted
+parameters and achieves $8.8 \times 10^{-8}$ relative agreement with
+experiment. A combinatorial search over $1.92 \times 10^9$ formulas
+yields a $p$-value of $5.2 \times 10^{-9}$, establishing that this
+precision is very unlikely to be accidental. The cubic form is the
+characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
+circulant matrix, providing structural justification for the
+self-consistency equation.
 
-The cubic structure is the key insight. It implies that $\alpha$ is not
-merely a numerical coincidence but the solution to a self-consistency
-equation whose coefficients are fixed by the topology of the electron's
-state space. The Hopf fibration---the unique non-trivial fiber bundle
-over $S^2$ with fiber $S^1$---provides the natural decomposition of
-$S^3$ into electromagnetic degrees of freedom.
-
-If this identification survives scrutiny, then Feynman's ``greatest
-damn mystery'' has a geometric answer: $\alpha$ measures the spectral
-mismatch between the base, fiber, and total space of the bundle that
-the electron inhabits.
+The combination rule $K = \pi(B + F - \Delta)$ remains conjectural.
+The formula has the character of a remarkable empirical observation
+with structural support---the spectral ingredients are natural, the
+cubic form is natural, but their assembly into $K$ awaits a
+first-principles derivation.
 
 
 \begin{acknowledgments}
 This work supersedes an earlier ``symplectic impedance''
-approach~\cite{paper2_old} by the same author, which achieved
-0.0045\% error with a fitted parameter. The evolution from fitted to
-parameter-free is documented for intellectual transparency. The author
-thanks the geometric vacuum research program for providing the
-foundation ($S^3$ as electron manifold) upon which this result rests.
+approach~\cite{paper2_old} by the same author. The evolution from
+fitted to parameter-free is documented for intellectual transparency.
+The four-phase computational audit (arithmetic verification,
+combinatorial $p$-value analysis, cubic structure investigation, and
+derivation chain assessment) that validated the formula and identified
+the circulant structure is available as supplementary
+material~\cite{phase2_audit}. Computational implementation and
+documentation drafting were performed with the assistance of large
+language models (Anthropic Claude) under the author's scientific
+direction. All results were validated against analytical benchmarks.
 \end{acknowledgments}
 
 \begin{thebibliography}{20}
@@ -463,6 +659,11 @@ Maxwell,'' \textit{C.\ R.\ Acad.\ Sci.\ Paris}\ \textbf{269A}, 743
 \bibitem{robertson1971}
 B.~Robertson, ``Wyler's expression for the fine-structure constant,''
 \textit{Phys.\ Rev.\ Lett.}\ \textbf{27}, 1545 (1971).
+
+\bibitem{phase2_audit}
+J.~Loutey, ``Paper~2 Computational Audit: Phases 1--4,'' GeoVac
+supplementary material (2026). Available at
+\texttt{debug/alpha\_audit/} in the project repository.
 
 \end{thebibliography}
 

@@ -5,6 +5,35 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.3] - 2026-03-22
+
+### Paper 2 Rewrite: Statistical Validation & Circulant Structure
+
+Complete rewrite of Paper 2 (fine structure constant from Hopf bundle) based on four-phase computational audit. No code changes.
+
+#### Paper 2 Revised
+- **Fixed:** Boundary term formula (Δ = 1/(|λ₃|×N(2)) = 1/40, where N(2) = 5 is cumulative state count, not g₂ = 4 as previously stated)
+- **Fixed:** Half-trace notation removed; B = 42 is the full degeneracy-weighted Casimir trace
+- **Added:** Section V — Statistical Validation (p-value = 5.2×10⁻⁹ from combinatorial search over 1.92×10⁹ formulas)
+- **Added:** Section VI — Circulant Structure (cubic is characteristic polynomial of traceless Z₃-symmetric circulant matrix)
+- **Added:** Section VII — What Is and Is Not Established (five-link derivation chain with explicit gap identification)
+- **Added:** Spectral determinant near-miss as open question (det'₁·det'₃/π ≈ 41.957, 0.1% from B = 42)
+- **Removed:** QED charge renormalization analogy (α² does not match any perturbative order, confirmed Phase 4)
+- **Removed:** "Single chirality" subsection and factors of 1/2
+- **Removed:** Overclaiming language ("greatest damn mystery has a geometric answer")
+- **Tone:** "We observe" throughout; abstract states "empirical formula with structural support, not a first-principles derivation"
+
+#### Computational Audit (`debug/alpha_audit/`)
+- Phase 1: Arithmetic verification, boundary term fix, sensitivity analysis
+- Phase 2: Combinatorial search (1.92B formulas, p = 5.2×10⁻⁹)
+- Phase 3: Cubic origin (circulant matrix, spectral determinants, heat kernel, topology, QED comparison)
+- Phase 4: Derivation chain assessment (Links 1,5 ✓; 2,4 ◐; 3 ✗)
+
+#### Principles Applied
+- All mathematical content preserved — only framing, evidence, and structural analysis added
+- Epistemic standards match v1.7.2 tightening (Papers 0, 1, 16)
+- Paper remains in `papers/conjectures/` (combination rule not derived)
+
 ## [1.7.2] - 2026-03-22
 
 ### Documentation Review & Epistemic Tightening

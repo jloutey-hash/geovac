@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.2-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.3-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.7.2** - Documentation Review & Epistemic Tightening
+**Version 1.7.3** - Paper 2 Rewrite: Statistical Validation & Circulant Structure
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,16 +18,13 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v1.7.1
+## What's New in v1.7.3
 
-### Paper 2 Rewrite: Fine Structure Constant from Hopf Bundle Geometry
-- **Formula:** α³ - Kα + 1 = 0, where K = π(42 + ζ(2) - 1/40) = 137.036064
-- **Precision:** 8.8×10⁻⁸ relative error, **zero free parameters**
-- **500× improvement** over previous symplectic impedance approach
-- **Selection principle:** ⟨Casimir⟩/state = dim(S³) uniquely fixes n=3 cutoff
-- **New module:** `hopf_bundle.py` — S³ embedding, Hopf projection, fiber analysis
+- **Paper 2 Rewrite:** Statistical validation (p = 5.2×10⁻⁹), circulant Z₃ structure, derivation chain assessment, boundary term fix
 
 ### Prior Releases
+- **v1.7.2:** Documentation review & epistemic tightening (Papers 0, 1, 16)
+- **v1.7.1:** Paper 2 rewrite — α from Hopf bundle (8.8×10⁻⁸, zero params, `hopf_bundle.py`)
 - **v1.7.0:** Composed Natural Geometries (Paper 17, LiH R_eq 6.4%, BeH⁺ bound)
 - **v1.6.1:** Hierarchical Molecular Solvers (FrozenCoreLatticeIndex, LockedShellMolecule)
 - **v1.6.0:** Chemical Periodicity from S_N Representation Theory (Paper 16)
@@ -289,7 +286,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 
 | # | Title | Key Result |
 |:-:|-------|------------|
-| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸ error, zero params** |
+| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸ error, p = 5.2×10⁻⁹, zero params** |
 | 0 | Geometric Packing | Universal constant K = -1/16 |
 | 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling, Berry phase correction |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
@@ -342,7 +339,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.7.2},
+  version = {1.7.3},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

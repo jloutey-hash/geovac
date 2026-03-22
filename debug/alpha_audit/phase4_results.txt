@@ -1,0 +1,598 @@
+==============================================================================
+Phase 4: Derivation Audit
+==============================================================================
+
+Paper:  K = pi*(42 + zeta(2) - 1/40) = 137.0360644145
+        alpha^-1 = 137.0360111631  (err = 8.81e-08)
+CODATA: alpha^-1 = 137.035999084
+
+##############################################################################
+INVESTIGATION A: Closing the Determinant Gap
+##############################################################################
+
+==============================================================================
+A.1: High-precision value of 4pi^2 * exp(zeta(3)/(2pi^2))
+==============================================================================
+
+  zeta(3)          = 1.2020569031595942
+  2*pi^2           = 19.7392088021787160
+  zeta(3)/(2pi^2)  = 0.0608969141167865
+  exp(zeta(3)/(2pi^2)) = 1.0627893499612191
+  4pi^2            = 39.4784176043574320
+  B_det = 4pi^2 * exp(zeta(3)/(2pi^2)) = 41.9572417832325826
+  B_paper = 42
+  Shortfall: 42 - B_det = 0.0427582167674174
+  Relative gap: 1.018053e-03
+
+  The shortfall is delta = 0.04275821676742
+
+==============================================================================
+A.2: Is the shortfall a recognizable constant?
+==============================================================================
+
+                            Candidate             Value    delta - cand    rel diff
+  -----------------------------------  ----------------  --------------  ----------
+                               1/pi^2  0.10132118364234   -0.0585629669  1.3696e+00
+                   zeta(2)/pi^2 = 1/6  0.16666666666667   -0.1239084499  2.8979e+00
+                         zeta(3)/pi^2  0.12179382823357   -0.0790356115  1.8484e+00
+                      zeta(3)/(2pi^2)  0.06089691411679   -0.0181386973  4.2422e-01
+                    zeta(3)^2/(4pi^4)  0.00370843414895   +0.0390497826  9.1327e-01
+                            1/(8pi^2)  0.01266514795529   +0.0300930688  7.0380e-01
+                         zeta(2)/pi^3  0.05305164769730   -0.0102934309  2.4074e-01
+                                 1/24  0.04166666666667   +0.0010915501  2.5528e-02
+                         zeta(3)/pi^3  0.03876817960292   +0.0039900372  9.3316e-02
+                      zeta(5)/(2pi^2)  0.05253137375136   -0.0097731570  2.2857e-01
+                           ln(2)/pi^2  0.07023049277268   -0.0274722760  6.4250e-01
+                               1/pi^3  0.03225153443320   +0.0105066823  2.4572e-01
+                                 1/23  0.04347826086957   -0.0007200441  1.6840e-02
+                                 1/22  0.04545454545455   -0.0026963287  6.3060e-02
+                              exp(-3)  0.04978706836786   -0.0070288516  1.6439e-01
+                     Euler_gamma/pi^2  0.05848417438457   -0.0157259576  3.6779e-01
+                  1/(2pi^2 - zeta(3))  0.05394571967946   -0.0111875029  2.6165e-01
+                       zeta(2)^2/pi^3  0.08726646259972   -0.0445082458  1.0409e+00
+                    zeta(3)^2/(2pi^4)  0.00741686829789   +0.0353413485  8.2654e-01
+                   2*zeta(3)^2/(pi^4)  0.02966747319158   +0.0130907436  3.0616e-01
+                         1/(4*pi^2*e)  0.00931849510429   +0.0334397217  7.8207e-01
+       zeta(3)/(4pi^2) [= -zeta'(-2)]  0.03044845705839   +0.0123097597  2.8789e-01
+
+  Best match: 1/23 (rel diff = 1.6840e-02)
+  None of these match to better than ~1%. The shortfall 0.042758
+  does not appear to be a simple function of pi, zeta values, or ln(2).
+
+==============================================================================
+A.3: What if the true B is B_det, not 42?
+==============================================================================
+
+  B_det = det'(S1)*det'(S3)/pi = 41.957241783233
+  K_det = pi*(B_det + zeta(2) - 1/40) = 136.9017355148
+  alpha^-1 (det formula) = 136.9016821589
+  alpha^-1 (42 formula)  = 137.0360111631
+  CODATA                 = 137.035999084
+  Error with B_det: 9.8016e-04
+  Error with B=42:  8.8146e-08
+
+  B=42 gives BETTER agreement than B_det.
+  Degradation factor: 11119.75x
+
+  Alternative: K = det'_1*det'_3 + pi*zeta(2) - pi/40 = 136.9017355148
+  alpha^-1 = 136.9016821589  (err = 9.8016e-04)
+
+==============================================================================
+A.4: Systematic search — det combinations for alpha^-1
+==============================================================================
+
+  Available determinants:
+    det'(S1) = 4pi^2 = 39.4784176044
+    det'(S2) = 1.9380543836
+    det'(S3) = 3.3388512142
+  Log-determinants:
+    ln det'(S1) = ln(4pi^2) = 3.6757541328
+    ln det'(S2) = 0.6616845748
+    ln det'(S3) = 1.2056268000
+
+  Searching: K_cand = [combo] or pi*[combo] + fiber + boundary corrections
+  Target: alpha^-1 as close to CODATA as possible
+
+  Rank                                             Formula             K        alpha^-1       rel err
+  ----  --------------------------------------------------  ------------  --------------  ------------
+     1                                   d1*d3+pi*z2-pi/40    136.901736    136.90168216    9.8016e-04
+     2                                   d3*d1+pi*z2-pi/40    136.901736    136.90168216    9.8016e-04
+     3                                 d3*4pi2+pi*z2-pi/40    136.901736    136.90168216    9.8016e-04
+     4                                               d1*d3    131.812563    131.81250500    3.8118e-02
+     5                                               d3*d1    131.812563    131.81250500    3.8118e-02
+     6                                             d3*4pi2    131.812563    131.81250500    3.8118e-02
+     7                                   d1*pi+pi*z2-pi/40    129.114280    129.11421970    5.7808e-02
+     8                                               d1*pi    124.025107    124.02504171    9.4946e-02
+     9                                 pi*(d3*pi2+z2-1/40)    108.614518    108.61443274    2.0740e-01
+    10                               pi*d3*pi2+pi*z2-pi/40    108.614518    108.61443274    2.0740e-01
+    11                             d1*d2*d3/pi+pi*z2-pi/40     86.404589     86.40445538    3.6948e-01
+    12                          pi*(d1*d2*d3/pi^2+z2-1/40)     86.404589     86.40445538    3.6948e-01
+    13                        pi*d1*d2*d3/pi^2+pi*z2-pi/40     86.404589     86.40445538    3.6948e-01
+    14                                   d1*d2+pi*z2-pi/40     81.600493     81.60034308    4.0453e-01
+    15                                   d2*d1+pi*z2-pi/40     81.600493     81.60034308    4.0453e-01
+    16                                 d2*4pi2+pi*z2-pi/40     81.600493     81.60034308    4.0453e-01
+    17                                         d1*d2*d3/pi     81.315416     81.31526513    4.0661e-01
+    18                                               d1*d2     76.511320     76.51114947    4.4167e-01
+    19                                               d2*d1     76.511320     76.51114947    4.4167e-01
+    20                                             d2*4pi2     76.511320     76.51114947    4.4167e-01
+    21                                d1*d3/d2+pi*z2-pi/40     73.102003     73.10181543    4.6655e-01
+    22                                  pi*(d1/d2+z2-1/40)     69.083820     69.08361073    4.9587e-01
+    23                                pi*d1/d2+pi*z2-pi/40     69.083820     69.08361073    4.9587e-01
+    24                                            d1*d3/d2     68.012830     68.01261342    5.0369e-01
+    25                                 pi*(d2*pi2+z2-1/40)     65.181023     65.18078803    5.2435e-01
+
+  Best spectral-determinant formula: err = 9.8016e-04
+  Compare paper's err = 8.8146e-08
+  No det-based formula beats the paper's formula with B=42.
+
+==============================================================================
+A.5: Investigation A Summary
+==============================================================================
+
+  1. The shortfall 42 - 4pi^2*exp(zeta(3)/(2pi^2)) = 0.042758
+     is NOT a recognizable combination of standard constants.
+     It is not zeta(3)/pi^2, not 1/24, not any simple ratio.
+
+  2. Using B_det instead of 42 gives alpha^-1 = 136.90168216
+     with error 9.8016e-04 (paper uses 42 with error 8.8146e-08).
+     B=42 is BETTER.
+
+  3. No product/ratio of spectral determinants combined with zeta(2)
+     and a boundary correction gives a fundamentally better formula
+     than the paper's.
+
+  CONCLUSION: 42 = sum((2l+1)*l(l+1), n=1..3) is a DIFFERENT object from
+  the spectral determinant product. The 0.1% proximity is suggestive but
+  there is no exact bridge. The integer 42 (from the Casimir trace) and
+  the transcendental B_det (from spectral zeta) are likely related through
+  the spectral geometry of S3, but the connection requires more than
+  simple algebraic manipulation.
+
+
+##############################################################################
+INVESTIGATION B: The Circulant Matrix and the Hopf Bundle
+##############################################################################
+
+==============================================================================
+B.1: Physical interpretation of Z3 symmetry
+==============================================================================
+
+  The circulant [[0,b,c],[c,0,b],[b,c,0]] has Z3 symmetry:
+  cyclic permutation (1->2->3->1) leaves the matrix invariant.
+
+  In the Hopf bundle, the three components are:
+    1: fiber S1 (dim 1)
+    2: base S2  (dim 2)
+    3: total S3 (dim 3)
+
+  Question: does a natural Z3 action exist on {S1, S2, S3}?
+
+  a) SU(2) adjoint action on su(2) ~ R^3:
+     The adjoint representation Ad: SU(2) -> SO(3) acts on
+     the Lie algebra su(2) spanned by {sigma_1, sigma_2, sigma_3}/2i.
+     The Casimir C2 = (3/4)*I in the fundamental rep.
+     In the adjoint (j=1): C2 = 2*I.
+
+     The adjoint Casimir is proportional to identity -> no Z3 structure.
+     However, the STRUCTURE CONSTANTS epsilon_{ijk} do define a Z3:
+     [sigma_i, sigma_j] = 2i*epsilon_{ijk}*sigma_k
+     The cyclic symmetry (1->2->3->1) of epsilon_{ijk} IS a Z3.
+
+     The 'structure constant coupling matrix' M_{ij} = sum_k |eps_{ijk}|:
+     M = [[0, 1, 1], [1, 0, 1], [1, 1, 0]]
+     eigenvalues: [np.float64(-1.0000000000000004), np.float64(-1.0), np.float64(1.9999999999999998)]
+     char poly: lambda^3 - 3*lambda - 2 = 0  (since tr=0 is wrong, tr=0 is right
+     Actually: tr(M) = 0, sum of 2x2 minors = -3, det = 2
+     Char poly: lambda^3 - 3*lambda - 2 = 0
+     This is a circulant with b=c=1: lambda^3 - 3*1*1*lambda - (1+1) = 0
+     Roots: [np.float64(-1.0000000000000004), np.float64(-1.0), np.float64(1.9999999999999998)]
+     Compare our cubic: alpha^3 - K*alpha + 1 = 0 with K~137
+     The structure is the SAME (depressed cubic from circulant)
+     but the coupling strength differs by factor K/3 ~ 45.7 vs 1.
+
+  b) Tangent space decomposition under the Hopf map:
+     At any point p in S3, the tangent space T_p(S3) decomposes as:
+       T_p(S3) = V_p (vertical, 1D) + H_p (horizontal, 2D)
+     V_p = tangent to fiber S1 through p
+     H_p = horizontal lift of T_{pi(p)}(S2)
+
+     The metric g on S3 restricts to these subspaces.
+     The curvature of the connection is F = (1/2)*vol_{S2}.
+
+     The inner product 'matrix' in the V+H decomposition:
+     g = diag(1, 1, 1) in an adapted ONB {e_V, e_H1, e_H2}
+     This is trivially identity — the round metric on S3 doesn't
+     distinguish vertical from horizontal at the metric level.
+     The distinction is in the CONNECTION, not the metric.
+
+  c) Connection-based coupling matrix:
+     The Hopf connection A is a 1-form on S3 with curvature F on S2.
+     c1(F) = (1/2pi) integral_{S2} F = 1.
+
+     Natural 'coupling' between bundle components:
+     C_12 = c1 = 1  (Chern number: fiber-base coupling)
+     ||A||^2 = integral_S3 |A|^2 = Vol(S3)/4 = pi^2/2 = 4.934802
+     ||F||^2 = integral_S2 |F|^2 = 4*pi*(1/4) = pi = 3.141593
+       (for F = (1/2)*vol_S2 on unit S2)
+
+     To build a 3x3 coupling matrix we need THREE coupling constants.
+     The most natural:
+       C_{12} = c1 = 1  (fiber-base)
+       C_{13} = ||A||_{L2} = sqrt(pi^2/2) = 2.221441
+       C_{23} = ||F||_{L2} = sqrt(pi) = 1.772454
+
+     Check: do products of these give K/3 = 45.678688?
+                         C12*C13 =     2.2214  (ratio to K/3: 0.0486)
+                         C12*C23 =     1.7725  (ratio to K/3: 0.0388)
+                         C13*C23 =     3.9374  (ratio to K/3: 0.0862)
+                           C13^2 =     4.9348  (ratio to K/3: 0.1080)
+                           C23^2 =     3.1416  (ratio to K/3: 0.0688)
+                     C12*C13*C23 =     3.9374  (ratio to K/3: 0.0862)
+                      pi*C13^2/3 =     5.1677  (ratio to K/3: 0.1131)
+            det_S1*det_S3/(3*pi) =    13.9857  (ratio to K/3: 0.3062)
+                           14*pi =    43.9823  (ratio to K/3: 0.9629)
+                pi*(B+F-Delta)/3 =    45.6787  (ratio to K/3: 1.0000)
+
+     No simple combination of Hopf bundle coupling constants
+     gives bc = K/3 = 45.6787.
+     The factor 14*pi = 43.9823 is closest (ratio 0.9629).
+
+==============================================================================
+B.2: Why b^3 + c^3 = -1 (i.e., det(M) = -1)?
+==============================================================================
+
+  For the circulant M = [[0,b,c],[c,0,b],[b,c,0]]:
+    det(M) = b^3 + c^3
+
+  The condition det(M) = -1 has several possible interpretations:
+
+  a) ORIENTATION:
+     S3 is orientable. The Hopf map pi: S3 -> S2 has degree 1
+     (the Hopf invariant). The linking number of two fibers is +1.
+     A reversal of S3 orientation changes the sign of det.
+     det = -1 could encode: reversed orientation convention
+     (total space orientation is OPPOSITE to the product
+     orientation fiber x base).
+
+     Technical: For a principal U(1)-bundle over S2 with c1=1,
+     the Euler class of the associated plane bundle is +1.
+     The orientation of S3 induced by (fiber, base) has a sign.
+     Whether this is +1 or -1 depends on convention.
+     det(M) = -1 is CONSISTENT with the Hopf linking number.
+
+  b) FERMIONIC SIGN:
+     The electron has spin 1/2. Under 2pi rotation: psi -> -psi.
+     In the Hopf context, the fiber S1 parameterizes the U(1)
+     gauge phase. A full traversal of the fiber is a 2pi rotation.
+     For fermions, this gives a factor (-1).
+     det(M) = -1 = (-1)^1 is consistent with a single fermion.
+     For n fermions: det = (-1)^n.
+     This is SUGGESTIVE but not a derivation.
+
+  c) DIFFERENTIAL FORMS:
+     Define omega_1 = d(theta) (connection 1-form on S1)
+              omega_2 = vol_{S2}/(4pi) (normalized area form)
+              omega_3 = vol_{S3}/(2pi^2) (normalized volume form)
+
+     These are the natural 'volume forms' on each component,
+     normalized so integral = 1.
+
+     The matrix M_{ij} = integral_{S3} omega_i ^ *omega_j
+     involves Hodge duals and wedge products.
+     This is ill-defined when forms have different degree.
+     One cannot wedge a 1-form with a 2-form on S3 in a
+     symmetric way to get a 3x3 matrix.
+
+     FINDING: Differential forms don't naturally give a 3x3
+     coupling matrix because the forms live in different degrees.
+
+==============================================================================
+B.3: Elliptic curve interpretation
+==============================================================================
+
+  The cubic alpha^3 - K*alpha + 1 = 0 defines the zeros of the
+  Weierstrass elliptic curve:
+    E: y^2 = x^3 - K*x + 1
+
+  a) j-invariant:
+     j = 1728 * 4K^3 / (4K^3 - 27)
+     4K^3 = 10293536.854388
+     4K^3 - 27 = 10293509.854388
+     j = 1728.004533
+     j/1728 = 1.00000262
+
+     For context:
+     j = 0: curve with extra Z3 symmetry (y^2 = x^3 + 1)
+     j = 1728: curve with extra Z4 symmetry (y^2 = x^3 + x)
+     j = 1728.00 is very close to 1728 (ratio 1.000003)
+     This means our curve is CLOSE to having Z4 symmetry
+     but doesn't have it exactly. The 'correction' from j=1728
+     encodes the departure from maximal symmetry.
+
+     j - 1728 = 0.004533
+     (j - 1728)/1728 = 2.623012e-06
+     This is O(1/K^3) since j ~ 1728 + 27*1728/(4K^3) for large K.
+     27*1728/(4K^3) = 4.532553e-03
+     (j-1728)/1728 = 2.623012e-06
+     These match: the j-invariant is 1728 + O(K^-3).
+
+  b) Discriminant of the cubic:
+     Delta_3 = 4K^3 - 27 = 10293509.854388
+     = 4 * 2573384.213597 - 27
+     = 10293509.854388
+     sqrt(Delta_3) = 3208.350021
+
+     The discriminant is large and positive (three real roots).
+     It doesn't factor into recognizable pieces.
+     Delta_3 / (4pi^3) = 82995.371877
+     Delta_3 / K^3 = 3.99998951  (-> 4 for large K)
+
+  c) Modular interpretation:
+     The j-invariant j ~ 1728 means the curve's period ratio tau
+     is close to i (the imaginary unit).
+     j(i) = 1728. For j slightly above 1728, tau is slightly
+     above i in the upper half-plane.
+     q = exp(2*pi*i*tau) with tau ~ i gives:
+     q ~ exp(-2pi) = 0.00186744
+
+     This q-value is not obviously related to alpha,
+     but the connection to modular forms is noted.
+
+  d) Conductor analysis:
+     Our curve E: y^2 = x^3 - 137.036064*x + 1 has coefficients
+     that are NOT rational (K is transcendental).
+     Elliptic curve theory over Q requires rational coefficients.
+     The curve is defined over R, not over Q.
+     Conductor, L-function, BSD conjecture etc. don't apply
+     in the usual sense.
+     HOWEVER: if we APPROXIMATE K by a rational, the nearest
+     integer is 137, giving E: y^2 = x^3 - 137x + 1.
+     For E: y^2 = x^3 - 137x + 1:
+       Delta = 4*137^3 - 27 = 10285385
+       = 10285385
+       Factoring: 10285385 = 5 * 11 * 43 * 4349
+
+     FINDING: The elliptic curve interpretation is interesting
+     but doesn't provide a DERIVATION. The j-invariant being
+     close to 1728 is a consequence of K being large, not
+     a special arithmetic property.
+
+==============================================================================
+B.4: What determines b and c in the circulant?
+==============================================================================
+
+  From the circulant: bc = K/3, b^3 + c^3 = -1
+  Let s = b+c, p = bc = K/3 = 45.67868814
+  Then: s^3 - 3ps + (b^3+c^3) = 0  =>  s^3 - Ks + 1 = 0  (our cubic)
+  And: b-c = sqrt(s^2 - 4p)
+
+  The THREE roots s_i of the cubic give three (b_i, c_i) pairs.
+  Each pair gives a valid circulant matrix.
+
+    Root         s=b+c               b               c              bc       b^3+c^3
+  ------  ------------  --------------  --------------  --------------  ------------
+      1  -11.70988737  -5.854944+3.376140i  -5.854944-3.376140i  (complex)  (complex)
+      2    0.00729735  0.003649+6.758600i  0.003649-6.758600i  (complex)  (complex)
+      3   11.70259002  5.851295+3.382460i  5.851295-3.382460i  (complex)  (complex)
+
+  The physical root (alpha) corresponds to s ~ -11.709887
+  (the smallest positive root, giving 1/s ~ alpha^-1 ~ 137).
+
+  b ~ nan (close to alpha)
+  c ~ nan (large negative)
+
+  STRUCTURAL INSIGHT:
+  The condition b^3 + c^3 = -1 is INDEPENDENT of K.
+  It fixes the determinant, leaving bc = K/3 as the SINGLE free
+  parameter that encodes the coupling strength.
+  The question 'where does K come from?' reduces to:
+    'What determines bc in the circulant?'
+  And K/3 = bc = pi(42 + zeta(2) - 1/40)/3 = 45.678688.
+
+  With B_det: bc = 45.633912
+  With B=42:  bc = 45.678688
+  Ratio: 1.00098121
+
+==============================================================================
+B.5: Connection to the three Hopf fibrations?
+==============================================================================
+
+  There are exactly three Hopf fibrations:
+    H1: S1 -> S3  -> S2   (fiber dim 1, base dim 2, total dim 3)
+    H2: S3 -> S7  -> S4   (fiber dim 3, base dim 4, total dim 7)
+    H3: S7 -> S15 -> S8   (fiber dim 7, base dim 8, total dim 15)
+
+  These correspond to the three normed division algebras:
+    C (complex), H (quaternions), O (octonions)
+
+  The Z3 of the circulant could correspond to cycling through
+  {H1, H2, H3}. But this is speculative — H2 and H3 involve
+  different spheres and different physics.
+
+  Dimension pattern:
+    H1: fiber S^1, base S^2, total S^3
+         f + b = 3 = t, f*b = 2, f+b+t = 6
+    H2: fiber S^3, base S^4, total S^7
+         f + b = 7 = t, f*b = 12, f+b+t = 14
+    H3: fiber S^7, base S^8, total S^15
+         f + b = 15 = t, f*b = 56, f+b+t = 30
+
+  If the Z3 acts on {H1, H2, H3}, the 'coupling matrix'
+  would mix quantities from different Hopf fibrations.
+  This seems unphysical: the paper's formula uses ONLY H1 data.
+  VERDICT: The Z3 is more likely internal to H1 (the three
+  components S1, S2, S3) rather than across fibrations.
+
+##############################################################################
+INVESTIGATION C: Assessment of the Derivation Chain
+##############################################################################
+
+  The hypothetical derivation chain:
+
+    S1 -> S3 -> S2  (Hopf bundle)
+         |
+    Spectral data -> B (Casimir), F (fiber zeta), Delta (boundary)
+         |
+    K = pi*(B + F - Delta)  (combination rule)
+         |
+    Z3 circulant coupling -> alpha^3 - K*alpha + 1 = 0
+         |
+    alpha = smallest positive root
+
+  LINK-BY-LINK ASSESSMENT:
+  ======================================================================
+
+  LINK 1: Hopf bundle S1 -> S3 -> S2 as the geometric arena
+  STATUS: ESTABLISHED (mathematically standard)
+
+  The Hopf bundle is a well-defined principal U(1)-bundle.
+  S3 ~ SU(2), and the bundle structure is unique (c1=1).
+  The paper uses it as a natural geometric framework for
+  the S3 topology that underlies the graph Laplacian approach.
+  This is a CHOICE OF FRAMEWORK, not a derived result.
+
+
+  LINK 2: Spectral data -> B, F, Delta
+  STATUS: PARTIALLY ESTABLISHED
+
+  B = 42 = sum (2l+1)*l(l+1) for n=1..3
+    This is a well-defined spectral sum (degeneracy-weighted Casimir
+    trace) on S3. The sum is truncated at n_max=3 via the selection
+    principle B/N(3) = 42/14 = 3 = dim(S3). This selection principle
+    WORKS but has no derivation from first principles.
+    The near-miss with spectral determinants:
+      4pi^2*exp(zeta(3)/(2pi^2)) ~ 41.957
+    is suggestive but the gap of 0.043 remains unexplained.
+
+  F = zeta(2) = pi^2/6
+    The fiber invariant zeta_{S1}(2) = sum 1/k^2 = pi^2/6.
+    This is a standard spectral zeta function value.
+    WHY zeta(2) specifically (and not zeta(1), zeta(3), etc.)?
+    Not derived from the bundle structure.
+
+  Delta = 1/40 = 1/(|lambda_3| * N(2))
+    A boundary correction. Phase 1 showed the paper's own derivation
+    has an inconsistency (claims g_2=4 but uses N(2)=5).
+    The correction is phenomenological: it improves agreement with
+    CODATA but its origin is unexplained.
+
+
+  LINK 3: Combination rule K = pi*(B + F - Delta)
+  STATUS: NOT ESTABLISHED
+
+  Why this specific combination? The factor pi could be argued as
+  natural (stereographic projection relates S3 to R3 with a factor
+  of pi). But the ADDITIVE structure B + F - Delta has no derivation.
+  Why addition and not multiplication? Why subtraction for Delta?
+  No principle selects this combination rule from alternatives like:
+    K = pi*B + F - Delta
+    K = pi*B*F/Delta
+    K = B + pi*F - pi*Delta
+  All would give different results. The specific form works because
+  it's been TUNED (two parameters: which terms enter, and how).
+
+
+  LINK 4: Z3 circulant -> cubic alpha^3 - K*alpha + 1 = 0
+  STATUS: PARTIALLY ESTABLISHED
+
+  Phase 3 showed that the cubic IS the characteristic equation of
+  a traceless Z3-circulant with bc = K/3 and det = -1.
+  This is a STRUCTURAL result: the cubic form is natural for
+  Z3-symmetric coupling of three objects.
+
+  But:
+  - No derivation connects the bundle components to the circulant.
+  - The condition det = -1 lacks a first-principles origin.
+  - The Z3 symmetry is suggestive (three bundle components, three
+    Pauli matrices, three Hopf fibrations) but not derived.
+  - The circulant interpretation EXPLAINS the cubic FORM but does
+    not derive K from geometry.
+
+
+  LINK 5: alpha = smallest positive root
+  STATUS: ESTABLISHED (given the cubic)
+
+  The depressed cubic x^3 - Kx + 1 = 0 for K > 3 always has three
+  real roots. The smallest positive root is uniquely defined and
+  gives alpha ~ 1/K for large K (with correction alpha^2/K).
+  This step is pure algebra.
+
+
+  ======================================================================
+  DERIVATION CHAIN ASSESSMENT:
+  ======================================================================
+
+  Link 1: Hopf bundle as geometric arena      -> ESTABLISHED
+  Link 2: Spectral data -> B, F, Delta        -> PARTIALLY ESTABLISHED
+  Link 3: Combination rule K = pi*(B+F-Delta)  -> NOT ESTABLISHED
+  Link 4: Z3 circulant -> cubic equation       -> PARTIALLY ESTABLISHED
+  Link 5: alpha from cubic root                -> ESTABLISHED
+
+  OVERALL: The derivation chain has TWO solid links (1, 5),
+  TWO partially established links (2, 4), and ONE missing link (3).
+
+  The CRITICAL GAP is Link 3: the combination rule. Even if we
+  accept that B, F, and Delta are the right ingredients (Link 2),
+  there is no principle that selects their specific combination.
+
+  The MOST PROMISING direction is the circulant interpretation
+  (Link 4). If one could show that the Hopf bundle naturally
+  generates a Z3-symmetric coupling matrix with bc = K/3 and
+  det = -1, this would simultaneously establish Links 3 and 4.
+  But this requires showing that the coupling constant is
+  pi*(B+F-Delta)/3, which brings us back to the combination rule.
+
+
+==============================================================================
+QUANTITATIVE SUMMARY
+==============================================================================
+
+  Paper's result:     alpha^-1 = 137.0360111631
+  CODATA:             alpha^-1 = 137.035999084
+  Relative error:     8.81e-08
+  p-value (Phase 2):  5.2e-9
+
+  Key numbers:
+    B = 42 (Casimir trace)
+    B_det = 4pi^2 * exp(zeta(3)/(2pi^2)) = 41.95724178
+    B - B_det = 0.04275822  (0.1% gap, unexplained)
+
+  Elliptic curve:
+    j-invariant = 1728.0045  (close to 1728, encodes K >> 1)
+    Discriminant = 10293509.8544
+
+  Using B_det instead of 42:
+    alpha^-1 = 136.9016821589  (err = 9.8016e-04)
+    WORSE than B=42
+
+  Missing pieces for a complete derivation:
+    1. Selection principle for n_max=3 (why 42/14 = 3?)
+    2. Why zeta(2) for the fiber invariant?
+    3. Why 1/40 for the boundary?
+    4. Why additive combination with prefactor pi?
+    5. Physical origin of the circulant matrix and det = -1.
+
+==============================================================================
+BOTTOM LINE
+==============================================================================
+
+  The formula K = pi*(42 + zeta(2) - 1/40) produces alpha^-1 to
+  8.8e-8 precision with zero free parameters (p-value 5.2e-9).
+
+  The cubic structure is natural for Z3-symmetric coupling.
+  The spectral ingredients are natural for the Hopf bundle.
+  But the COMBINATION RULE is not derived from geometry.
+
+  STATUS: Remarkable numerical coincidence with structural hints,
+  but not a derivation. The formula has the character of a
+  CONJECTURE that uses the right ingredients in an empirically
+  determined combination.
+
+  To elevate this to a derivation, one would need to show:
+    "The Hopf bundle Laplacian, when decomposed into fiber-base-total
+     components, generates a Z3-circulant coupling matrix whose
+     off-diagonal product bc = pi*(42 + zeta(2) - 1/40)/3
+     follows from the spectral geometry of the fibration."
+
+  This has NOT been achieved.
+
