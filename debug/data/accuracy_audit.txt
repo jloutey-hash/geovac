@@ -1,0 +1,219 @@
+===============================================================================================
+SECTION 1: ATOMIC ACCURACY SWEEP
+  Method: FrozenCoreLatticeIndex for Z>=3 (freeze 1s^2), full FCI for H/He
+  vee_method=slater_full, h1_method=hybrid
+===============================================================================================
+Atom  Z Ne nmax       N_SD       E_calc      E_ref     Err%    time Status   Method
+---------------------------------------------------------------------------------------------------------
+   H  1  1    3         28    -0.510367    -0.5000    2.07%    0.0s   FAIL     Full
+   H  1  1    4         60    -0.510372    -0.5000    2.07%    0.1s   FAIL     Full
+   H  1  1    5        110    -0.510372    -0.5000    2.07%    0.6s   FAIL     Full
+  He  2  2    3        378    -2.890601    -2.9037    0.45%    0.2s   PASS     Full
+  He  2  2    4      1,770    -2.892642    -2.9037    0.38%    2.8s   PASS     Full
+  He  2  2    5      5,995    -2.893582    -2.9037    0.35%    2.0s   PASS     Full
+  Li  3  3    3         26    -7.388679    -7.4781    1.20%    0.0s   FAIL       FC
+  Li  3  3    4         58    -7.422533    -7.4781    0.74%    0.1s   PASS       FC
+  Li  3  3    5        108    -7.429935    -7.4781    0.64%    0.7s   PASS       FC
+  Be  4  4    3        325   -14.598574   -14.6674    0.47%    0.1s   PASS       FC
+  Be  4  4    4      1,653   -14.608986   -14.6674    0.40%    0.9s   PASS       FC
+  Be  4  4    5      5,778   -14.613441   -14.6674    0.37%   11.1s   PASS       FC
+   B  5  5    3      2,600   -24.637432   -24.6539    0.07%    0.8s   PASS       FC
+   B  5  5    4     30,856   -24.663599   -24.6539    0.04%   47.4s   PASS       FC
+   B  5  5    5    204,156   -24.672649   -24.6539    0.08% 1048.7s   PASS       FC
+
+===============================================================================================
+SECTION 2: H1 METHOD COMPARISON (nmax=4)
+  Tests whether error comes from graph Laplacian kinetic term
+===============================================================================================
+Atom  h1_method       E_calc      E_ref     Err%                            Analysis
+-------------------------------------------------------------------------------------
+  He      exact    -2.843429    -2.9037    2.08%      No CI mixing (purely diagonal)
+  He     hybrid    -2.892642    -2.9037    0.38%   Best: exact diag + graph off-diag
+  He      graph    -3.026420    -2.9037    4.23%             Graph diag wrong for 1s
+  Li      exact    -7.320357    -7.4781    2.11%      No CI mixing (purely diagonal)
+  Li     hybrid    -7.422533    -7.4781    0.74%   Best: exact diag + graph off-diag
+  Li      graph    -4.573136    -7.4781   38.85%             Graph diag wrong for 1s
+
+===============================================================================================
+SECTION 3: BASIS CONVERGENCE (nmax = 2, 3, 4, 5)
+  Tests whether error is basis incompleteness or systematic
+===============================================================================================
+Atom nmax       E_calc      E_ref     Err%    Conv?
+-------------------------------------------------------
+   H    2    -0.510142    -0.5000    2.03%       --
+   H    3    -0.510367    -0.5000    2.07%  PLATEAU
+   H    4    -0.510372    -0.5000    2.07%  PLATEAU
+   H    5    -0.510372    -0.5000    2.07%  PLATEAU
+  He    2    -2.887550    -2.9037    0.56%       --
+  He    3    -2.890601    -2.9037    0.45%      YES
+  He    4    -2.892642    -2.9037    0.38%      YES
+  He    5    -2.893582    -2.9037    0.35%      YES
+  Li    2    -7.056180    -7.4781    5.64%       --
+  Li    3    -7.388679    -7.4781    1.20%      YES
+  Li    4    -7.422533    -7.4781    0.74%      YES
+  Li    5    -7.429935    -7.4781    0.64%      YES
+
+===============================================================================================
+SECTION 4: MOLECULAR BINDING ENERGIES
+===============================================================================================
+
+--- 4A: LiH Full FCI vs Locked Shell (nmax=3, R=3.015) ---
+  Full FCI: SKIPPED (367,290 SDs > limit)
+  Locked(a_nmax=2): E_mol=-8.007002, De(naive)=2.938eV (153 SDs)
+
+--- 4B: Dissociation-limit binding energies ---
+  De = E_mol(R=50) - E_mol(R_eq) [same locked-shell theory at both R]
+
+  Mol   E_mol(Req)  E_mol(R=50)    De_eV  De_ref  %recov    Err%       N_SD
+-------------------------------------------------------------------------------------
+  LiH      -8.0099      -7.8991   3.016eV  2.515eV  119.9%   19.9%      1,431
+   BH     -24.5384     -24.1403  10.832eV  3.520eV  307.7%  207.7%      1,326
+ NaCl    -547.8709    -546.6909  32.109eV  4.290eV  748.5%  648.5%  1,344,904
+
+===============================================================================================
+SECTION 5: EQUILIBRIUM GEOMETRY (PES scan)
+===============================================================================================
+
+  --- LiH PES scan (R_eq_expt = 3.015 bohr) ---
+    R = 2.111  E = -8.143170 Ha
+    R = 2.563  E = -8.058487 Ha
+    R = 3.015  E = -8.009908 Ha
+    R = 3.467  E = -7.987631 Ha
+    R = 3.920  E = -7.975991 Ha
+    R = 4.372  E = -7.962142 Ha
+    R = 4.824  E = -7.949751 Ha
+
+  --- BH PES scan (R_eq_expt = 2.329 bohr) ---
+    R = 1.630  E = -25.000465 Ha
+    R = 1.980  E = -24.732521 Ha
+    R = 2.329  E = -24.538390 Ha
+    R = 2.678  E = -24.412863 Ha
+    R = 3.028  E = -24.367819 Ha
+    R = 3.377  E = -24.352149 Ha
+    R = 3.726  E = -24.330078 Ha
+
+===============================================================================================
+SECTION 6: COMPREHENSIVE SUMMARY
+===============================================================================================
+
+ATOMIC ACCURACY:
+System Best nmax   Error%   Status
+----------------------------------------
+     H         3    2.07%     FAIL
+    He         5    0.35%     PASS
+    Li         5    0.64%     PASS
+    Be         5    0.37%     PASS
+     B         4    0.04%     PASS
+
+MOLECULAR BINDING ENERGIES:
+System  De_calc  De_ref  %recov   Status
+---------------------------------------------
+   LiH   3.016eV  2.515eV  119.9%     FAIL
+    BH  10.832eV  3.520eV  307.7%     FAIL
+  NaCl  32.109eV  4.290eV  748.5%     FAIL
+
+===============================================================================================
+ERROR SOURCE ANALYSIS
+===============================================================================================
+
+CRITICAL FINDING #1: H ATOM HAS 2.07% ERROR (should be exact)
+----------------------------------------------------------------------
+  H is 1-electron: no V_ee, so error is purely from H1.
+  h1_method='hybrid': diagonal is exact (-1/2n^2), off-diagonal from graph.
+  In the eigenbasis, off-diagonal H1 should be ZERO. Graph off-diagonal
+  elements create SPURIOUS COUPLING that lowers E below -0.5 Ha.
+  E_calc = -0.5104 < -0.5000 = E_exact: not a variational violation
+  because the hybrid Hamiltonian is not the real Hamiltonian.
+  ERROR PLATEAUS at nmax=2: this is a SYSTEMATIC error, not basis limit.
+
+CRITICAL FINDING #2: Li ANTI-CONVERGENCE with nmax
+----------------------------------------------------------------------
+  nmax=3: 0.25% error (E = -7.497, vs ref -7.478)
+  nmax=4: 0.72% error (E = -7.532)
+  nmax=5: 0.83% error (E = -7.540)
+  Energy keeps DECREASING past the exact answer. Same mechanism as H:
+  graph off-diagonal couples more states at higher nmax, causing
+  MORE spurious lowering. Error GROWS with basis size.
+  (He and Be happen to be above ref, so convergence appears normal)
+
+CRITICAL FINDING #3: ALL molecular De are catastrophically wrong
+----------------------------------------------------------------------
+  LiH: 120% recovery (19.9% error) -- moderate overbinding
+  BH:  308% recovery (208% error) -- severe overbinding
+  NaCl: 749% recovery (649% error) -- catastrophic overbinding
+  Overbinding scales with Z. PES has no minimum in expected range --
+  energy decreases monotonically as R -> 0.
+  ROOT CAUSE: Same as atomic -- graph off-diagonal + cross-atom bridges
+  create spurious coupling that grows stronger at short R.
+
+ROOT CAUSE DIAGNOSIS:
+----------------------------------------------------------------------
+  The graph Laplacian off-diagonal matrix elements in the hydrogenic
+  eigenbasis DO NOT correspond to exact H1 off-diagonal elements.
+  In the eigenbasis, exact off-diagonal H1 = 0. Graph off-diagonal
+  elements are non-zero and create DOWNWARD PRESSURE on energy.
+  This error is:
+    - SYSTEMATIC (not basis limit)
+    - GROWS with nmax (more states to mix)
+    - GROWS with Z (larger off-diagonal magnitudes)
+    - WORST for molecules (bridges add more spurious coupling)
+
+COMPARISON OF H1 METHODS (He nmax=4, ref = -2.9037 Ha):
+  exact:  -2.843 Ha (2.08% too HIGH) -- no CI mixing at all
+  hybrid: -2.893 Ha (0.38% too HIGH) -- best compromise
+  graph:  -3.026 Ha (4.23% too LOW)  -- spurious lowering
+
+  The 'hybrid' method cancels errors: exact diagonal prevents the worst
+  graph-diagonal errors, while graph off-diagonal provides CI mixing.
+  But it still has the spurious off-diagonal problem (visible in H: 2%).
+
+RANKED ACCURACY ISSUES (by severity and tractability):
+----------------------------------------------------------------------
+  #1 [CRITICAL] Graph off-diagonal spurious coupling
+     - Root cause of ALL accuracy failures
+     - 2% systematic floor even for H atom
+     - Anti-convergent: more basis = worse error
+     - FIX: Need exact or improved off-diagonal H1 matrix elements
+     - Paper 1 kinetic scale -1/16 gives correct spectrum shape
+       but wrong off-diagonal coupling strengths in eigenbasis
+
+  #2 [SEVERE] Molecular overbinding (De >> reference)
+     - Consequence of #1 amplified by cross-atom bridges
+     - Bridges create additional spurious off-diagonal coupling
+     - Scales with Z: NaCl 7x worse than LiH
+     - FIX: Fix #1, or attenuate bridge coupling strengths
+
+  #3 [MODERATE] R_eq too short (PES minimum shifted inward)
+     - Cross-nuclear attraction too strong at short R
+     - Combined with #1: spurious coupling + strong V_cross_ne
+     - Known issue documented in MEMORY.md
+
+  #4 [MINOR] Basis incompleteness (He: 0.35% at nmax=5)
+     - For He, error converges toward zero -- basis limit only
+     - Masked by #1 for Li, Be, B (anti-convergence)
+     - Would become limiting factor IF #1 is fixed
+
+  #5 [MINOR] Exchange K limited to s-s Mulliken
+     - Only affects heteronuclear molecules
+     - Negligible vs #1-#3 errors
+
+===============================================================================================
+SECTION 7: FROZEN-CORE TIMING COMPARISON
+  Shows speedup from FrozenCoreLatticeIndex vs raw LatticeIndex
+===============================================================================================
+Atom nmax       Method       N_SD     Time            E  Speedup
+---------------------------------------------------------------------------
+  Li    4     Full FCI     34,220     1.0s    -7.531799       --
+  Li    4  Frozen Core         58     0.2s    -7.422533     6.8x
+                             diff              1.09e-01 (frozen-core approx error)
+
+  Li    5     Full FCI    215,820    18.9s    -7.540306       --
+  Li    5  Frozen Core        108     0.7s    -7.429935    26.4x
+                             diff              1.10e-01 (frozen-core approx error)
+
+  Be    4     Full FCI    487,635       --      SKIPPED       --
+  Be    4  Frozen Core      1,653     1.0s   -14.608986       --
+
+  Be    5     Full FCI  5,773,185       --      SKIPPED       --
+  Be    5  Frozen Core      5,778    10.6s   -14.613441       --
+

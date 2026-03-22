@@ -254,6 +254,8 @@ mv test_something.py debug/
 - **H2 Neumann V_ee:** 92.4% D_e → validates algebraic integral approach
 - **H2 Level 4 (2D solver):** 94.1% D_e → validates molecule-frame hyperspherical geometry
 - **HeH⁺ Level 4:** 93.1% D_e → validates heteronuclear extension with charge-center origin
+- **LiH Composed (ab initio PK):** R_eq = 3.21 bohr (6.4% error vs 3.015) → validates composed geometry
+- **BeH⁺ Composed (ab initio PK):** Bound, physical constants → validates transferability
 - **Hyperspherical tests:** 20/20 must pass → validates angular + adiabatic + radial solvers
 - **Muonic H:** Energy ratio = 206.77, topology identical → validates mass-independence
 - **Spectral Dimension:** d_s ≈ 1.8-2.0, mass-independent → validates holography
@@ -270,6 +272,7 @@ mv test_something.py debug/
   - **Paper 13:** Hyperspherical lattice — two-electron atoms as coupled channel graphs (He at 0.05%); first non-trivial fiber bundle; ab initio molecular spectroscopy
   - **Paper 14:** Structurally sparse qubit Hamiltonians — O(Q^3.15) Pauli scaling vs O(Q^4.60) conventional
   - **Paper 15:** Level 4 natural geometry — molecule-frame hyperspherical for two-center two-electron molecules (H₂ 94.1% D_e, HeH⁺ 93.1% D_e); variational 2D solver; heteronuclear extension; charge-center origin
+  - **Paper 17:** Composed natural geometries — fiber bundle for core-valence diatomics (LiH R_eq 6.4%, BeH⁺ bound); ab initio Phillips-Kleinman pseudopotential; ρ-collapse cache; zero molecular fitting
 - **Conjectures (`papers/conjectures/`):**
   - **Paper 2:** Fine structure constant (α⁻¹) derivation (geometric ansatz)
   - **Paper 3:** Holographic entropy, spectral dimension, central charge
@@ -297,6 +300,26 @@ mv test_something.py debug/
 - Fine structure extraction is exploratory (algorithm incomplete)
 - Proton radius prediction needs full hyperfine calculation
 - AdS/CFT correspondence incomplete (boundary implemented, bulk in development)
+
+---
+
+## Composed Natural Geometries (Paper 17, v1.7.0)
+
+The composed geometry architecture handles molecules with core electrons by assigning each electron group its own natural coordinate system:
+
+- **Core electrons** → Level 3 hyperspherical (`core_screening.py`)
+- **Valence electrons** → Level 4 molecule-frame hyperspherical (`level4_multichannel.py`)
+- **Coupling** → Z_eff screening + Phillips-Kleinman pseudopotential (`ab_initio_pk.py`)
+- **PES scanning** → ρ-collapsed angular cache (`rho_collapse_cache.py`)
+- **General solver** → `ComposedDiatomicSolver` in `composed_diatomic.py`
+
+Key entry points:
+- `ComposedDiatomicSolver.LiH_ab_initio(l_max=2).run_all()` — full LiH pipeline
+- `ComposedDiatomicSolver.BeH_plus_ab_initio(l_max=2).run_all()` — full BeH⁺ pipeline
+- `CoreScreening(Z=3).solve()` — solve Li⁺ core, get Z_eff(r)
+- `AbInitioPK(core, n_core=2)` — derive PK parameters from core
+
+The architecture is a fiber bundle: G_total = G_nuc ⋉ G_core(R) ⋉ G_val(R, core_state)
 
 ---
 

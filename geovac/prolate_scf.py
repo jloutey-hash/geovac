@@ -53,6 +53,7 @@ def get_orbital_on_grid(
     N_eta_grid: int = 80,
     xi_max_grid: float = 12.0,
     m: int = 0,
+    n_radial: int = 0,
 ) -> Dict:
     """Solve for a one-electron orbital and evaluate on quadrature grid.
 
@@ -84,7 +85,7 @@ def get_orbital_on_grid(
     lat = ProlateSpheroidalLattice(
         R=R, Z_A=max(1, int(round(Z_A))), Z_B=max(1, int(round(Z_B))),
         N_xi=N_xi_solve, xi_max=max(25.0, R * 3),
-        m=m, n_angular=n_angular,
+        m=m, n_angular=n_angular, n_radial=n_radial,
     )
     # Override for fractional Z support
     lat._a = R * (Z_A + Z_B)
@@ -118,7 +119,7 @@ def get_orbital_on_grid(
     from scipy.linalg import eigh_tridiagonal
     evals, evecs = eigh_tridiagonal(diag, off)
     idx_sorted = np.argsort(evals)[::-1]
-    F_raw = evecs[:, idx_sorted[0]]
+    F_raw = evecs[:, idx_sorted[n_radial]]
     if F_raw[0] < 0:
         F_raw = -F_raw
 

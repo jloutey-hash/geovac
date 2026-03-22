@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.6.1-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.6.1** - Hierarchical Molecular Solvers
+**Version 1.7.0** - Composed Natural Geometries
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,28 +10,29 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.6.1
+## What's New in v1.7.0
 
-### Hierarchical Molecular Solvers
-- **FrozenCoreLatticeIndex:** 14x speedup via frozen core orbitals
-- **LockedShellMolecule:** 2,400x speedup via locked complete shells
-- Theoretical basis: Paper 16 Type C structure
+### Paper 17: Composed Natural Geometries for Core-Valence Diatomics
+- **Fiber bundle architecture:** G_total = G_nuc ⋉ G_core(R) ⋉ G_val(R, core_state)
+- **LiH:** R_eq = 3.21 bohr (6.4% error, improved from 17% LCAO), ω_e = 1471 cm⁻¹ (4.6%)
+- **BeH⁺:** Bound molecule, same code path, zero per-molecule tuning
+- **Ab initio pseudopotential:** A from core-valence energy gap, B from ⟨1/r²⟩-weighted core radius
+- **Zero experimental molecular data** in pseudopotential derivation
 
-### Paper 16: Chemical Periodicity from S_N Representation Theory
-- **μ_free = 2(N-2)²** — universal Pauli centrifugal cost for all ground states
-- **Periodic table types** from Young diagram shape:
-  - Type A [1]: Hydrogen (trivial)
-  - Type B [2,2,...]: Noble gases (democratic, high IE)
-  - Type C [N-1,1]: Alkali metals (hierarchical, low IE)
-  - Type D [N-2,2]: Alkaline earths (core + pair)
-- **Periodic law** as irrep sequence C → D → E → B repeating each period
-- **Two-level physics:**
-  - Level 1 (topology): S^(3N-1), SO(3N), S_N — smooth, no limit
-  - Level 2 (metric): Relativistic, Hund's rule, Dirac limit at Zα=1
-- **Extended analysis:** H through Og (Z=118), transition metals (Sc-Zn), superheavy extrapolation
-- **Corrected:** Hund's rule is Level 2 (perturbative), not Level 1 (topological)
+### New Modules
+- **ComposedDiatomicSolver** (`composed_diatomic.py`): General 2+2 diatomic solver with class methods `LiH()`, `BeH_plus()`, `LiH_ab_initio()`, `BeH_plus_ab_initio()`
+- **CoreScreening** (`core_screening.py`): Z_eff(r) extraction from hyperspherical 2e core solve
+- **AbInitioPK** (`ab_initio_pk.py`): Parameter-free Phillips-Kleinman pseudopotential (inv2 formula)
+- **AngularCache / FastAdiabaticPES** (`rho_collapse_cache.py`): ρ-collapsed angular eigenvalue cache, full PES in ~48 seconds
+
+### Performance
+- **ρ-collapse:** Angular eigenvalues cached as function of ρ=R/(2R_e), eliminating redundant solves
+- **Per-R-point cost:** ~2 seconds (1D tridiagonal radial solve)
+- **Full pipeline:** ~4 minutes per molecule on commodity hardware
 
 ### Prior Releases
+- **v1.6.1:** Hierarchical Molecular Solvers (FrozenCoreLatticeIndex, LockedShellMolecule)
+- **v1.6.0:** Chemical Periodicity from S_N Representation Theory (Paper 16)
 - **v1.5.0:** Algebraic Structure & SO(3N) Generalization (Papers 7 & 13)
 - **v1.4.0:** Papers 14-15, Level 4 Solver (H₂ 94.1%, HeH⁺ 93.1%)
 - **v1.2.0:** QA & Corrections (Berry phase retraction, autoionization sections)
@@ -63,6 +64,8 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 | **H$_2$ (Level 4, 2D)** | **Mol.-frame hypersp.** | **94.1% $D_e$** | **Paper 15** |
 | **HeH$^+$ (Level 4)** | **Charge-center hypersp.** | **93.1% $D_e$** | **Paper 15** |
 | H$_2$ (Full CI) | Tensor product | 1.72% | Cross-nuclear ceiling |
+| **LiH (composed, ab initio PK)** | **Composed Level 3+4** | **R_eq: 6.4%** | **Paper 17** |
+| **BeH⁺ (composed, ab initio PK)** | **Composed Level 3+4** | **Bound** | **Paper 17** |
 | LiH ($D_e$, CP-corrected) | LCAO FCI | **1.0%** | nmax=3 |
 
 ### Ab Initio Spectroscopy
@@ -73,6 +76,9 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 | H$_2$ $\omega_e$ (cm$^{-1}$) | 4435 | 4401 | +0.8% |
 | H$_2$ $B_e$ (cm$^{-1}$) | 59.49 | 60.85 | -2.2% |
 | H$_2$ $\nu_{01}$ (cm$^{-1}$) | 4157 | 4161 | -0.1% |
+| LiH $R_{\rm eq}$ (bohr) | 3.21 | 3.015 | +6.4% |
+| LiH $\omega_e$ (cm$^{-1}$) | 1471 | 1406 | +4.6% |
+| LiH $B_e$ (cm$^{-1}$) | 6.63 | 7.51 | -11.7% |
 
 ### Dynamics & Spectroscopy
 
@@ -154,6 +160,16 @@ E_total = lattice.total_energy()
 print(f"H2+ at R=2.0: {E_total:.6f} Ha")  # -0.597 Ha (0.70% error)
 ```
 
+### LiH Molecule (Composed Natural Geometry)
+```python
+from geovac.composed_diatomic import ComposedDiatomicSolver
+
+solver = ComposedDiatomicSolver.LiH_ab_initio(l_max=2)
+results = solver.run_all()
+print(f"LiH R_eq: {results['spectro']['R_eq']:.3f} bohr")  # 3.21 bohr (expt: 3.015)
+print(f"LiH ω_e: {results['spectro']['omega_e']:.0f} cm⁻¹")  # 1471 cm⁻¹ (expt: 1406)
+```
+
 ### Time Evolution (Rabi Oscillations)
 ```python
 from geovac import AtomicSolver, TimePropagator
@@ -180,6 +196,7 @@ psi_t = prop.evolve(psi[:, 0].astype(complex), n_steps=1000)
 | `frozen_core` | O(N_active^4) | < 2% | Core-valence separation |
 | `locked_shell` | O(N_active^4) | < 2% | Tensor product of shell states |
 | Prolate spheroidal | O(N_xi) | < 1% for 1e diatomics | Molecular PES |
+| Composed (Level 3+4) | O(N_rho * N_ch^2 + N_R * N_Re) | ~6% R_eq | Core-valence diatomics |
 
 ---
 
@@ -203,6 +220,12 @@ geovac/                 Core package
   hyperspherical_coupling.py  Coupled-channel adiabatic solver
   hyperspherical_resonances.py  Resonance analysis tools
   level4_multichannel.py  Level 4 mol.-frame hyperspherical solver
+  core_screening.py       Core electron screening Z_eff(r)
+  ab_initio_pk.py         Ab initio Phillips-Kleinman pseudopotential
+  rho_collapse_cache.py   ρ-collapsed angular cache + fast PES
+  pauli_projector.py      Core-valence Pauli projection
+  composed_diatomic.py    General composed diatomic solver
+  lih_composed.py         LiH composed solver (original)
   berry_phase.py            Log-holonomy on geometric lattice
   nuclear_lattice.py      Nuclear vibration/rotation lattice
   coupled_en_lattice.py   Coupled electronic-nuclear lattice
@@ -225,6 +248,7 @@ papers/
     Paper 14: Structurally sparse qubit Hamiltonians
     Paper 15: Level 4 mol.-frame hyperspherical (H2 94.1%, HeH+ 93.1%)
     Paper 16: Chemical periodicity from S_N representation theory
+    Paper 17: Composed natural geometries (LiH 6.4%, BeH⁺)
     FCI-A:    Multi-electron atoms (He, Li, Be)
     FCI-M:    Heteronuclear diatomics (LiH benchmark)
   zenodo/               Publication cluster (Papers 7, 11, 12, 13)
@@ -244,6 +268,13 @@ tests/                  Unit tests (pytest) + validation
   test_berry_phase.py       7 tests (log-holonomy, power-law)
   test_complex_scaling.py   ECS resonance tests
   test_hyperspherical_coupled.py  Coupled-channel tests
+  test_core_screening.py    21 tests (core screening Z_eff)
+  test_rho_collapse.py      9 tests (ρ-collapse cache)
+  test_z_eff_injection.py   7 tests (Z_eff injection)
+  test_lih_composed.py      12 tests (LiH composed solver)
+  test_composed_diatomic.py 22 tests (general composed solver)
+  test_ab_initio_pk.py      24 tests (ab initio PK)
+  test_ab_initio_pk_v2.py   7 tests (PK v2 validation)
 
 demo/                   Demonstrations (H2, spectroscopy, AIMD)
 debug/                  Development scratchpad + generated data/plots
@@ -269,6 +300,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | **14** | **Qubit Hamiltonians** | **O(Q^3.15) Pauli scaling, structural sparsity** |
 | **15** | **Level 4 Geometry** | **H₂ 94.1%, HeH⁺ 93.1%, 2D solver** |
 | **16** | **Chemical Periodicity** | **μ_free = 2(N-2)², S_N irreps, periodic law** |
+| **17** | **Composed Geometries** | **LiH R_eq 6.4%, BeH⁺, ab initio PK, zero molecular fitting** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | LCAO FCI (Molecules) | LiH D_e 1.0% (CP-corrected) |
 
@@ -285,13 +317,14 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 - Ab initio molecular spectroscopy (electron lattice -> PES -> rovibrational lines)
 - O(V) scaling for all single-particle operations
 - Efficient qubit encoding: O(Q^3.15) Pauli terms vs O(Q^4.60) conventional
+- Core-valence diatomics (LiH, BeH⁺) via composed Level 3+4 geometry with ab initio pseudopotential
 - Time-dependent dynamics via sparse Crank-Nicolson propagation
 
 ### Current Limitations
-- **Multi-electron molecules:** The LCAO approach achieves correct-order binding energies but lacks R-dependent kinetic repulsion. Equilibrium geometry requires a Fock-weighted correction with adjustable lambda (see FCI-M paper, Sec. V).
+- **Core-valence diatomics:** The composed geometry achieves R_eq within 6.4% for LiH with ab initio pseudopotential (Paper 17). D_e convergence requires extended R-grids. Higher l_max (3-4) expected to reduce R_eq error to ~2-3%.
 - **H2 electron-electron cusp:** Level 4 molecule-frame hyperspherical solver recovers 94.1% D_e (Paper 15), surpassing prolate spheroidal CI (92.4%, Paper 12). The remaining ~6% gap requires higher partial waves ($l_{\max} \ge 5$).
 - **Basis convergence:** At nmax=3, BSSE (0.115 Ha) exceeds LiH experimental binding energy (0.092 Ha). Convergence at larger nmax not characterized.
-- **Polyatomics:** No natural geometry identified beyond two-center systems.
+- **Polyatomics:** The composition pattern (core + bond pairs + lone pairs as typed hypergraph) is defined but not yet implemented beyond diatomics.
 
 ### What GeoVac Does NOT Replace
 - Production quantum chemistry for general molecules
@@ -307,7 +340,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.6.1},
+  version = {1.7.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

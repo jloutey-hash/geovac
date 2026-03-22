@@ -9,6 +9,8 @@ Tests verify:
 5. Auto-detection of closed shells
 6. PES produces bound molecule
 7. Solve completes in < 1 second
+8. Direct CI integration: matches matrix method exactly
+9. Auto dispatch to Direct CI for large active spaces
 """
 
 import time
@@ -196,3 +198,138 @@ class TestPES:
         # Energy at short R should be lower than at infinity
         D_e = energies[-1] - min(energies)
         assert D_e > 0, f"Molecule not bound: D_e = {D_e}"
+
+
+# ---------------------------------------------------------------------------
+# Tests: Direct CI integration
+# ---------------------------------------------------------------------------
+
+class TestDirectCI:
+    """Test Direct CI integration with LockedShellMolecule."""
+
+    def test_direct_matches_matrix(self):
+        """Direct CI must match matrix method to < 1e-8 Ha on LiH."""
+        from geovac.locked_shell import LockedShellMolecule
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        E_mat, _ = mol.solve(fci_method='matrix')
+        E_dir, _ = mol.solve(fci_method='direct')
+        diff = abs(E_mat[0] - E_dir[0])
+        print(f"\nDirect vs matrix: diff = {diff:.2e} Ha")
+        assert diff < 1e-8, f"Direct CI mismatch: {diff:.2e}"
+
+    def test_adapter_remapping(self):
+        """Adapter remaps to contiguous indices correctly."""
+        from geovac.locked_shell import LockedShellMolecule
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        adapter = mol._build_direct_ci_adapter()
+
+        # n_sp should be 2 * n_active_spatial
+        assert adapter.n_sp == 2 * len(mol._active_spatial)
+        # n_electrons should be active count
+        assert adapter.n_electrons == mol.n_active_el
+        # SD count preserved
+        assert adapter.n_sd == mol.n_sd
+        # All SD indices should be in range [0, n_sp)
+        for sd in adapter.sd_basis:
+            for s in sd:
+                assert 0 <= s < adapter.n_sp
+
+    def test_auto_dispatch(self):
+        """fci_method='auto' uses matrix for small, direct for large."""
+        from geovac.locked_shell import LockedShellMolecule
+        # Small system: 153 SDs → matrix
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        # auto should pick 'matrix' for 153 SDs (< 5000)
+        E_auto, _ = mol.solve(fci_method='auto')
+        E_mat, _ = mol.solve(fci_method='matrix')
+        assert abs(E_auto[0] - E_mat[0]) < 1e-10
+
+    def test_lazy_eri_4d_direct(self):
+        """Direct CI path must NOT build dense _eri_4d."""
+        from geovac.locked_shell import LockedShellMolecule
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        assert mol._eri_4d is None, "Dense ERI should not be built during init"
+        mol.solve(fci_method='direct')
+        assert mol._eri_4d is None, "Direct CI should not trigger dense ERI"
+
+    def test_matrix_builds_eri_4d(self):
+        """Matrix path should lazily build dense _eri_4d."""
+        from geovac.locked_shell import LockedShellMolecule
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        assert mol._eri_4d is None
+        mol.solve(fci_method='matrix')
+        assert mol._eri_4d is not None, "Matrix method should build dense ERI"
+
+
+# ---------------------------------------------------------------------------
+# Tests: ERI sparsity
+# ---------------------------------------------------------------------------
+
+class TestERISparsity:
+    """Verify ERI density scales as O(1/M^2), not O(1)."""
+
+    def test_eri_density_below_threshold(self):
+        """Molecular ERI density should be well below 5%."""
+        from geovac.locked_shell import LockedShellMolecule
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        n_eri = len(mol._parent._eri)
+        m4 = mol.n_spatial ** 4
+        density = n_eri / m4
+        print(f"\nERI density: {n_eri}/{m4} = {density:.4%}")
+        assert density < 0.05, f"ERI density {density:.2%} too high"
+
+    def test_adapter_sparse_remap(self):
+        """Adapter _eri should have fewer entries than O(M_active^4)."""
+        from geovac.locked_shell import LockedShellMolecule
+        mol = LockedShellMolecule(
+            Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
+            R=3.015, n_electrons=4,
+            locked_config={0: [(1, 0)]},
+            active_nmax=2,
+        )
+        adapter = mol._build_direct_ci_adapter()
+        n_active_spatial = len(mol._active_spatial)
+        m4_active = n_active_spatial ** 4
+        n_adapter_eri = len(adapter._eri)
+        density = n_adapter_eri / m4_active
+        print(f"\nAdapter ERI: {n_adapter_eri}/{m4_active} = {density:.4%}")
+        # Should be sparse — well below 10%
+        assert density < 0.10
+        # Should match parent entries in active block
+        active_set = set(mol._active_spatial)
+        expected = sum(
+            1 for (a, b, c, d) in mol._parent._eri
+            if a in active_set and b in active_set
+            and c in active_set and d in active_set
+        )
+        assert n_adapter_eri == expected

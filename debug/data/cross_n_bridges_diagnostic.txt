@@ -1,0 +1,89 @@
+Cross-n Overlap Bridges Diagnostic
+====================================
+Date: 2026-03-20
+Version: v0.9.37 (codebase locked, exploratory)
+
+Goal: Test whether SO(4) cross-shell coupling (Li 2s <-> H 1s)
+fixes LiH R_eq (2.5 vs 3.015 bohr experimental).
+
+Investigation Summary
+---------------------
+1. SO(4) D-matrix is block-diagonal in n by representation theory.
+   Different n-shells are different irreps -> zero coupling by theorem.
+   This is NOT an implementation limitation.
+
+2. SO(4,2) conformal group could couple different n, but no closed-form
+   "cross-n D-matrix" exists. The SW module explicitly notes this:
+   "Cross-n coupling would require the full SO(4,2) conformal group."
+
+3. Paper 8 Sec. "Geometric Inconsistency" explains: in the hydrogenic
+   basis, cross-n matrix elements involve convolution over mismatched
+   S3 spheres (bra on S3 with radius Z/n', ket on S3 with radius Z/n).
+   No closed-form SO(4) expression exists.
+
+Implementation: SW-Consistent Cross-n Bridges
+----------------------------------------------
+Formula: H_cross-n[i_A, j_B] = -K * (Z_eff/p0) * sin(gamma) * S(i_A, j_B)
+
+Same scale as D-matrix (-(Z_eff/p0)*sin(gamma)), but replaces D-matrix
+element (zero for cross-n) with STO overlap integral S.
+
+Parameters added to MolecularLatticeIndex:
+  use_cross_n_bridges: bool = False
+  cross_n_K: float = 1.0  (scale relative to same-n D-matrix coupling)
+
+Coupling Elements at R=3.015 bohr (K=1.0)
+------------------------------------------
+  Li 1s <-> H 1s: -0.131226 Ha  (same-n=1, D-matrix)
+  Li 2s <-> H 1s:  0.052178 Ha  (cross-n, SIGMA BOND)
+  Li 3s <-> H 1s: -0.035455 Ha  (cross-n)
+  Li 2s <-> H 2s: -0.128371 Ha  (same-n=2, D-matrix)
+
+STO Overlaps vs R
+-----------------
+  S(Li_2s, H_1s):
+    R=2.0: -0.615  R=3.0: -0.401  R=5.0: -0.112  R=8.0: -0.010
+  S(Li_3s, H_1s):  (Z/n=1 for both -> same exponent -> slow decay)
+    R=3.0: +0.269  R=6.0: +0.214  R=10.0: +0.030
+
+PES Comparison (hybrid D-matrix, nmax=3, 4 electrons)
+-----------------------------------------------------
+R(bohr)  E_no_bridges(Ha)  E_with_K1(Ha)  dE(mHa)
+2.0      -8.311644         -8.446472      -134.8
+2.5      -8.245674         -8.322450       -76.8
+3.0      -8.205978         -8.245556       -39.6
+3.5      -8.177843         -8.193647       -15.8
+4.0      -8.154321         -8.164957       -10.6
+5.0      -8.114244         -8.118862        -4.6
+6.0      -8.085237         -8.087122        -1.9
+8.0      -8.051192         -8.051495        -0.3
+
+Without bridges: R_eq ~ 2.0, D_e ~ 7.1 eV (ref: 2.515 eV at 3.015)
+With K=1.0:      R_eq ~ 2.0, D_e ~ 10.7 eV (WORSE)
+
+Conclusion
+----------
+Cross-n bridges create proper sigma hybridization (Li 2s <-> H 1s
+coupling is nonzero at 0.052 Ha, ~40% of same-n D-matrix coupling).
+However, they CANNOT fix R_eq because:
+
+1. Base PES is monotonically decreasing (no minimum) in hybrid path.
+   The Mulliken cross-nuclear diagonal overbinds at all R.
+
+2. Cross-n bridges add MORE binding at short R (where overlap is
+   largest), making the overbinding worse.
+
+3. In 4-electron LiH, both bonding and antibonding sigma orbitals
+   are occupied. Cross-n coupling gives net stabilization from
+   correlation mixing, not directed sigma bond formation.
+
+Root cause of wrong R_eq: Mulliken cross-nuclear diagonal is too
+strong at short R, not missing cross-shell off-diagonal coupling.
+
+The bottleneck is the DIAGONAL (potential energy landscape), not
+the OFF-DIAGONAL (hybridization/hopping).
+
+Files Modified
+--------------
+  geovac/lattice_index.py - Added _cross_n_overlap_bridges(), use_cross_n_bridges param
+  debug/test_cross_n_bridges.py - Diagnostic test script

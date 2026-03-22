@@ -303,6 +303,30 @@ w_{(n'l'm',B),(nlm,A)} = D^{(n)}_{(l'm'),(lm)}(g(\gamma(R))).
 \label{eq:cross_weight}
 \end{equation}
 
+\paragraph{Representation-theoretic constraint.}
+The $D$-matrix $D^{(n)}_{(l'm'),(lm)}(\gamma)$ is block-diagonal in the
+principal quantum number $n$ by the representation theory of $SO(4)$,
+not by approximation.  Each $n$-shell corresponds to a distinct irreducible
+representation of $SO(4)$ with $j = (n-1)/2$; different irreps are
+orthogonal under any group element.  The molecular field (second nucleus at
+bond angle $\gamma$) acts as an $SO(4)$ rotation, which cannot mix
+inequivalent representations.
+
+Cross-$n$ coupling---for example, Li~$2s$ $\leftrightarrow$ H~$1s$ in
+heteronuclear molecules---would require the full $SO(4,2)$ conformal
+group, whose generators include dilatations and special conformal
+transformations that connect different $n$-shells.  No closed-form
+``$SO(4,2)$ $D$-matrix'' for cross-nuclear coupling exists in the
+literature, and the standard Shibuya--Wulfman formula is exact only
+within a single $n$-manifold.
+
+This block-diagonality is the fundamental reason why LCAO approaches
+using $D$-matrix coupling fail to capture $\sigma$ hybridization between
+orbitals of different principal quantum number.  The symmetry breaking
+$SO(4) \to SO(2)$ caused by the second nucleus
+(Sec.~\ref{sec:heteronuclear}) breaks $l$-degeneracy \emph{within} each
+$n$-shell but does \emph{not} couple different $n$-shells.
+
 \paragraph{Hamiltonian structure.}
 \begin{equation}
 H_1 = \begin{pmatrix} H_A & V_{AB} \\ V_{AB}^\dagger & H_B \end{pmatrix},
@@ -903,6 +927,23 @@ $H_1 = -2.6$~Ha.  The self-consistent loop drives both $p_0$ values
 toward a single geometric mean ($p_0 \approx 2.0$), eliminating the
 scale separation that was the motivation for the extension.
 \end{corollary}
+
+\paragraph{Sturmian basis for heteronuclear systems.}
+The Sturmian basis resolves the geometric mismatch between $n$-shells by
+placing all orbitals on a single $S^3$ with shared momentum scale $p_0$.
+In this basis, different Sturmian $n$-shells genuinely do couple through
+the cross-nuclear operator $-Z_B/r_B$ (Eq.~\eqref{eq:sw_exact}), making
+the $D$-matrix formula exact rather than approximate---in contrast to the
+hydrogenic basis, where the block-diagonality constraint forbids cross-$n$
+coupling.
+
+However, the Sturmian approach fails for heteronuclear molecules (e.g.,
+LiH) because no single $p_0$ simultaneously satisfies the
+self-consistency condition $p_0 = \sqrt{-2E}$ for both atoms
+(Corollary~\ref{cor:dual_p0}).  Twenty-nine diagnostic versions
+(v0.9.20--34) explored Sturmian-based molecular Hamiltonians; all
+exhibited pathological behavior for LiH due to this $p_0$
+incompatibility.  The heteronuclear problem thus remains open.
 
 
 %% ========================================================================

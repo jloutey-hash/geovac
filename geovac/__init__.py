@@ -25,7 +25,7 @@ Quick Start:
 >>> H = idx.assemble_hamiltonian()
 """
 
-__version__ = '1.6.1'
+__version__ = '1.7.0'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 
@@ -39,7 +39,18 @@ from .lattice_index import LatticeIndex, MolecularLatticeIndex, compute_vee_s3_o
 from .direct_ci import DirectCISolver
 from .frozen_core import FrozenCoreLatticeIndex
 from .locked_shell import LockedShellMolecule
-from .qubit_encoding import JordanWignerEncoder, PauliAnalysis
+from .prolate_active_space import ProlateActiveSpace
+from .level4_sigma_channel import solve_level4_h2
+from .level4_multichannel import solve_level4_h2_multichannel, solve_level4_lih
+from .rho_collapse_cache import AngularCache, FastAdiabaticPES
+from .core_screening import CoreScreening
+from .ab_initio_pk import AbInitioPK
+from .composed_diatomic import ComposedDiatomicSolver
+try:
+    from .qubit_encoding import JordanWignerEncoder, PauliAnalysis
+except ImportError:
+    JordanWignerEncoder = None
+    PauliAnalysis = None
 from .aimd import VelocityVerlet, LangevinThermostat, run_lih_aimd, run_li_nve
 from .benchmark import run_unitarity_test, run_scaling_benchmark, run_li_energy_audit
 
@@ -71,6 +82,13 @@ __all__ = [
     'run_unitarity_test',
     'run_scaling_benchmark',
     'run_li_energy_audit',
+    'solve_level4_h2',
+    'solve_level4_h2_multichannel',
+    'AngularCache',
+    'FastAdiabaticPES',
+    'CoreScreening',
+    'AbInitioPK',
+    'ComposedDiatomicSolver',
     '__version__',
 ]
 

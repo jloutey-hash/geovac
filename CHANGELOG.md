@@ -5,6 +5,33 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-03-21
+
+### Paper 17: Composed Natural Geometries for Core-Valence Diatomics
+- **Fiber bundle architecture:** G_total = G_nuc ⋉ G_core(R) ⋉ G_val(R, core_state)
+- **LiH:** R_eq = 3.21 bohr (6.4% error, improved from 17% LCAO), ω_e = 1471 cm⁻¹ (4.6%)
+- **BeH⁺:** Bound molecule, same code path, zero per-molecule tuning
+- **Ab initio pseudopotential:** A from core-valence energy gap, B from ⟨1/r²⟩-weighted core radius
+- **Zero experimental molecular data** in pseudopotential derivation
+
+### New Modules
+- **CoreScreening** (`core_screening.py`): Z_eff(r) from hyperspherical 2e core solve
+- **AbInitioPK** (`ab_initio_pk.py`): Parameter-free Phillips-Kleinman pseudopotential
+- **AngularCache / FastAdiabaticPES** (`rho_collapse_cache.py`): ρ-collapsed cache, ~48s PES
+- **CoreValenceProjector** (`pauli_projector.py`): Pauli exclusion projection
+- **ComposedDiatomicSolver** (`composed_diatomic.py`): General 2+2 diatomic solver
+
+### Performance
+- **ρ-collapse:** Angular eigenvalues cached as function of ρ=R/(2R_e), eliminating redundant solves
+- **Per-R-point cost:** ~2 seconds (1D tridiagonal radial solve)
+- **Full pipeline:** ~4 minutes per molecule on commodity hardware
+
+### Modified
+- `level4_multichannel.py`: Z_A_func callable support for screened nuclear charges
+
+### Tests
+- 102 new tests across 7 test files (core_screening, rho_collapse, z_eff_injection, lih_composed, composed_diatomic, ab_initio_pk, ab_initio_pk_v2)
+
 ## [1.6.1] - 2026-03-18
 
 ### Added

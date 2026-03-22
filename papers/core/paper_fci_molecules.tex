@@ -498,11 +498,40 @@ reintroducing exactly the continuous spatial geometry that the discrete
 graph framework is designed to eliminate.  The Bond Sphere Sturmian
 alternative is mathematically falsified as a viable discrete framework.
 
+\paragraph{Cross-$n$ hybridization (v0.9.37).}
+A further hypothesis attributed the geometric error to the $D$-matrix's
+block-diagonality in $n$: the Shibuya--Wulfman formula connects only
+same-$n$ orbitals (Li~$1s \leftrightarrow$ H~$1s$, Li~$2s \leftrightarrow$
+H~$2s$), giving zero off-diagonal coupling for the chemically relevant
+Li~$2s \leftrightarrow$ H~$1s$ pair.  Overlap-based bridges using the
+Shibuya--Wulfman energy scale $-(Z_{\mathrm{eff}}/p_0)\sin\gamma$ were
+implemented, producing Li~$2s$--H~$1s$ coupling of 0.052~Ha (40\% of
+the same-$n$ $D$-matrix coupling).  However, the PES worsened: $D_e$
+increased from 7.1 to 10.7~eV because the cross-$n$ coupling adds
+binding at short~$R$ where the overlap is largest, reinforcing the
+existing overbinding.  Cross-shell hybridization is eliminated as a
+mechanism for the geometry error.
+
+\paragraph{Level~4 locked-core (v0.9.37).}
+The Level~4 molecule-frame hyperspherical solver (Paper~15) was extended
+to LiH by locking the Li~$1s^2$ core and treating the two active
+electrons in hyperspherical coordinates with effective charges
+$Z_{\mathrm{eff}}$.  Four core models were tested (bare $Z$, integer
+screening, Clementi--Raimondi, and Core Hartree with penetration); all
+produce monotonically attractive PES with $R_{\mathrm{eq}} \lesssim
+2.5$~bohr and $D_e > 12$~eV.  The failure has the same root cause:
+the core-to-H-nucleus attraction $V_{\mathrm{cross}} = -2Z_B\langle
+1s^2_Z | 1/r_B | 1s^2_Z \rangle$ behaves as $-2/R$ at large $R$ but
+saturates exponentially at short $R$ (exp$(-6R)$ decay for Li $1s$),
+providing insufficient repulsion to establish a minimum at
+$R \approx 3$~bohr.
+
 \medskip
 
 Having falsified BSSE as a geometric driver, eliminated integral
-incompleteness, ruled out orbital exponent relaxation, and
-mathematically disproven the Sturmian alternative, the $O(V)$
+incompleteness, ruled out orbital exponent relaxation, mathematically
+disproven the Sturmian alternative, excluded cross-$n$ hybridization
+and locked-core hyperspherical approaches, the $O(V)$
 Topological LCAO remains the only sound discrete framework for
 heteronuclear FCI.  The absence of an equilibrium geometry in the
 balanced Hamiltonian is traced to the $R$-independence of the graph

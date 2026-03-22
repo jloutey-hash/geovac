@@ -879,11 +879,30 @@ Level & System & Geometry & Best $D_e$ \\
 \end{tabular}
 \end{center}
 
-Future work: (i)~$l_{\max} \ge 5$ with $\sigma{+}\pi$ channels
+Future work includes: (i)~$l_{\max} \ge 5$ with $\sigma{+}\pi$ channels
 in the 2D solver; (ii)~non-uniform or finite-element radial grids
 for improved 2D convergence; (iii)~full potential energy surfaces
-with nuclear dynamics; (iv)~heteronuclear systems beyond HeH$^+$
-(e.g., LiH, LiHe$^+$).
+with nuclear dynamics.
+
+\paragraph{The locked-core boundary.}
+Extension to systems with core electrons (e.g., LiH) presents a
+fundamental challenge.  The locked-shell approach---treating core
+electrons as a fixed Hartree potential while solving the active electrons
+in molecular coordinates---violates the discrete lattice principle of
+Paper~0 by converting core electrons from graph nodes to a continuous
+potential.  This architectural mismatch produces systematic errors: the
+equilibrium geometry is too short ($R_{\rm eq} \approx 2.5$~bohr vs.\
+experimental 3.015~bohr) regardless of how the core potential is modeled
+(bare $Z_{\rm eff}$, Clementi--Raimondi screening, or Hartree with
+penetration).
+
+The resolution likely requires either (a)~a full 4-electron Level~4
+treatment with no locked core, which would involve an 8-dimensional
+angular eigenvalue problem, or (b)~identification of the natural graph
+structure that connects atomic core geometry ($S^3$) to molecular valence
+geometry (hyperspherical), preserving discrete topology throughout.
+HeH$^+$ succeeds because it has no core electrons; the two active
+electrons live entirely in the molecular geometry.
 
 %% ========================================================================
 %% REFERENCES
