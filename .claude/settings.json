@@ -64,7 +64,8 @@
       "Bash(mv paper_16_periodicity.aux papers/core/)",
       "Bash(mv paper_16_periodicity.out papers/core/)",
       "Bash(PYTHONIOENCODING=utf-8 python debug/alpha_eigenvalue_search.py)",
-      "Bash(PYTHONIOENCODING=utf-8 python debug/alpha_derivation_attempt.py)"
+      "Bash(PYTHONIOENCODING=utf-8 python debug/alpha_derivation_attempt.py)",
+      "Bash(gh release:*)"
     ],
     "additionalDirectories": [
       "\\tmp",

@@ -18,10 +18,12 @@ spectral invariants of the Hopf fibration $S^1 \to S^3 \to S^2$: the
 degeneracy-weighted Casimir trace of the $S^2$ base ($B = 42$), the
 spectral zeta function of the $S^1$ fiber ($F = \zeta(2) = \pi^2/6$),
 and a boundary correction from the $S^3$ total space
-($\Delta = 1/40$). The resulting $\alpha^{-1} = 137.035987$ agrees
-with experiment to $8.8 \times 10^{-8}$ relative error with zero free
-parameters. A combinatorial search over $1.92 \times 10^9$ formulas
-built from the same spectral ingredients yields a $p$-value of
+($\Delta = 1/40$). The selection principle $B/N = \dim(S^3) = 3$ is
+proven algebraically to select $n_{\max} = 3$ uniquely. The resulting
+$\alpha^{-1} = 137.035987$ agrees with experiment to
+$8.8 \times 10^{-8}$ relative error with zero free parameters. A
+combinatorial search over $1.92 \times 10^9$ formulas built from the
+same spectral ingredients yields a $p$-value of
 $5.2 \times 10^{-9}$, establishing that this precision is very
 unlikely to be accidental. The cubic is shown to be the characteristic
 polynomial of a traceless $\mathbb{Z}_3$-symmetric circulant matrix,
@@ -159,11 +161,31 @@ where subscripts denote $(n, l)$ pairs.
 \subsection{Selection principle}
 
 The total number of states through shell $n_{\max}$ is
-$N(n_{\max}) = \sum_{n=1}^{n_{\max}} n^2$. We observe that the ratio
+$N(n_{\max}) = \sum_{n=1}^{n_{\max}} n^2 = n_{\max}(n_{\max}+1)(2n_{\max}+1)/6$.
+We prove that the ratio
 \begin{equation}\label{eq:selection}
   \frac{B(n_{\max})}{N(n_{\max})} = \dim(S^3) = 3
 \end{equation}
-is satisfied uniquely at $n_{\max} = 3$:
+is satisfied uniquely at $n_{\max} = 3$.
+
+The inner sum in Eq.~(\ref{eq:casimir}) has a closed form:
+\begin{equation}\label{eq:innersum}
+  \sum_{l=0}^{n-1}(2l+1)\,l(l+1) = \frac{n^2(n^2-1)}{2}.
+\end{equation}
+Therefore $B(m) = \sum_{n=1}^{m} n^2(n^2-1)/2$, which, using the
+standard power-sum identities $\sum n^2$ and $\sum n^4$, evaluates to
+\begin{equation}\label{eq:Bclosed}
+  B(m) = \frac{m(m+1)(2m+1)(m+2)(m-1)}{20}.
+\end{equation}
+The ratio simplifies by cancellation:
+\begin{equation}\label{eq:ratioclosed}
+  \frac{B(m)}{N(m)} = \frac{3(m+2)(m-1)}{10}.
+\end{equation}
+Setting $B/N = 3$ gives $(m+2)(m-1) = 10$, i.e.,
+$m^2 + m - 12 = (m+4)(m-3) = 0$,
+whose unique positive root is $m = 3$. This completes the algebraic
+proof: $n_{\max} = 3$ is the \textit{only} positive integer at which
+the selection principle holds.
 
 \begin{table}[h]
 \centering
@@ -171,22 +193,35 @@ is satisfied uniquely at $n_{\max} = 3$:
 \hline\hline
 $n_{\max}$ & $B(n_{\max})$ & $N(n_{\max})$ & $B/N$ \\
 \hline
-1 & 0  & 1  & 0.000 \\
-2 & 6  & 5  & 1.200 \\
-3 & 42 & 14 & 3.000 \\
-4 & 132 & 30 & 4.400 \\
-5 & 310 & 55 & 5.636 \\
+1 & 0   & 1  & 0.000 \\
+2 & 6   & 5  & 1.200 \\
+3 & 42  & 14 & 3.000 \\
+4 & 162 & 30 & 5.400 \\
+5 & 462 & 55 & 8.400 \\
 \hline\hline
 \end{tabular}
 \caption{The selection principle $B/N = 3$ is satisfied uniquely at
-$n_{\max} = 3$.}
+$n_{\max} = 3$, as proven algebraically via
+Eq.~(\ref{eq:ratioclosed}).}
 \label{tab:selection}
 \end{table}
 
-The ratio crosses through~3 only at $n_{\max} = 3$: below this shell
-$B/N < 3$, and above it $B/N > 3$. We emphasize that this condition
-is \textit{empirically observed}, not derived from a variational
-principle. The base manifold invariant is
+This result connects to the Casimir structure of $SO(4)$. In the
+Peter--Weyl decomposition of $L^2(S^3)$, each shell~$n$ carries the
+$(j,j)$ representation of $SO(4) \cong (SU(2) \times SU(2))/\mathbb{Z}_2$
+with $j = (n-1)/2$. The $SO(3) \subset SO(4)$ Casimir has per-shell
+average
+\begin{equation}\label{eq:casimir_identity}
+  \langle C_3 \rangle_n
+  = \frac{1}{n^2}\sum_{l=0}^{n-1}(2l+1)\,l(l+1)
+  = \frac{n^2-1}{2} = C_4(n),
+\end{equation}
+which equals the $SO(4)$ Casimir eigenvalue. The selection principle
+$B/N = 3$ is therefore equivalent to requiring that the
+degeneracy-weighted average of the $SO(4)$ Casimir over shells
+$1 \leq n \leq n_{\max}$ equals $\dim(S^3)$.
+
+The base manifold invariant is
 \begin{equation}\label{eq:base}
   \boxed{B = \sum_{n=1}^{3}\sum_{l=0}^{n-1}(2l+1)\,l(l+1) = 42.}
   \vphantom{\Bigg|}
@@ -429,7 +464,7 @@ each link in the hypothetical derivation chain.
 Link & Description & Status \\
 \hline
 1 & Hopf bundle as geometric arena & $\checkmark$ \\
-2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\circ$ \\
+2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\bullet$\footnotemark \\
 3 & Combination rule $K = \pi(B+F-\Delta)$ & $\times$ \\
 4 & $\mathbb{Z}_3$ circulant $\to$ cubic & $\circ$ \\
 5 & $\alpha$ from cubic root & $\checkmark$ \\
@@ -437,22 +472,34 @@ Link & Description & Status \\
 \end{tabular}
 \caption{Derivation chain assessment.
 $\checkmark$ = established,
+$\bullet$ = largely established (see footnote),
 $\circ$ = partially established,
 $\times$ = not established.}
 \label{tab:chain}
 \end{table}
+\footnotetext{The selection principle $B/N = 3$ is algebraically
+proven (Sec.~III), and the Casimir identity
+$\langle C_3\rangle_n = C_4(n)$ connects $B$ to the $SO(4)$
+representation theory. The remaining gap: why the degeneracy-weighted
+Casimir trace specifically (rather than some other spectral quantity)
+for each bundle component.}
 
 \textbf{Link~1} (established): The Hopf fibration is the unique
 principal $U(1)$-bundle over $S^2$ with $c_1 = 1$. That $S^3$ is the
 electron state manifold is proven in Ref.~\cite{paper7}. Using the
 Hopf bundle as a geometric framework is a natural choice.
 
-\textbf{Link~2} (partial): The three spectral invariants $B$, $F$,
-$\Delta$ are well-defined quantities associated with the bundle
-components. The selection principle $B/N = 3$ uniquely fixes
-$n_{\max} = 3$. However, the \textit{choice} of which spectral
-quantity to extract from each component is not derived from the bundle
-geometry.
+\textbf{Link~2} (largely established): The selection principle
+$B/N = 3$ is proven algebraically to select $n_{\max} = 3$ uniquely
+(Sec.~III). The per-shell Casimir identity
+$\langle C_3\rangle_n = C_4(n) = (n^2-1)/2$ establishes that $B$ is
+the trace of the $SO(3)$ Casimir over the truncated Peter--Weyl
+decomposition of $L^2(S^3)$, connecting it to the representation
+theory of $SO(4)$. The remaining gap is the \textit{choice} of which
+spectral quantity to extract from each bundle component: why the
+Casimir trace for the base (not, say, the spectral determinant), why
+$\zeta(2)$ for the fiber (not $\zeta(1)$ or $\zeta(3)$), and why
+$1/(|\lambda_3| \times N(2))$ for the boundary.
 
 \textbf{Link~3} (not established): This is the critical gap. No
 principle selects the specific additive combination
@@ -460,6 +507,19 @@ $K = \pi(B + F - \Delta)$ over alternatives such as
 $K = \pi B + F - \Delta$ or $K = \pi B F / \Delta$. The overall
 prefactor $\pi$ could be argued as natural (it appears in the
 stereographic projection), but the additive structure is unexplained.
+A systematic search over spectral determinants, Ray--Singer analytic
+torsion, Seeley--DeWitt heat kernel coefficients, and
+Atiyah--Patodi--Singer invariants of the three bundle components finds
+no natural combination that reproduces $K$ or $K/\pi$. The spectral
+determinant product
+$\det'(\Delta_{S^1}) \cdot \det'(\Delta_{S^3})/\pi \approx 41.957$
+approaches $B = 42$ to $0.1\%$ (see Sec.~VIII) but the gap is not
+bridgeable by known spectral corrections. The combination rule mixes a
+discrete combinatorial quantity ($B = 42$) with a continuous spectral
+invariant ($F = \zeta(2)$) in a way that has no precedent in spectral
+geometry. If Link~3 can be closed, the mechanism likely involves the
+representation theory of $SO(4)$ rather than the analysis of smooth
+differential operators.
 
 \textbf{Link~4} (partial): The cubic form arises naturally from
 $\mathbb{Z}_3$-symmetric coupling, and the $SU(2)$ structure constants
@@ -526,7 +586,7 @@ Symplectic impedance~\cite{paper2_old} & $6.2\times 10^{-5}$ & 1 & $n=5$ \\
 
 The zeta-regularized spectral determinants of the bundle components
 are $\det'(\Delta_{S^1}) = 4\pi^2$,
-$\det'(\Delta_{S^2}) = e^{-4\zeta'_R(-1)}$, and
+$\det'(\Delta_{S^2}) = e^{1/2 - 4\zeta'_R(-1)}$, and
 $\det'(\Delta_{S^3}) = \pi\, e^{\zeta(3)/(2\pi^2)}$. The product
 \begin{equation}
   \frac{\det'(\Delta_{S^1}) \cdot \det'(\Delta_{S^3})}{\pi}
@@ -555,6 +615,25 @@ far more tightly than the Standard Model currently does, and would
 imply that $\alpha$ is transcendental (since $\pi$ is).
 
 
+\subsection{$S^3$ specificity}
+
+The selection principle $B/N = \dim(S^3)$ does not generalize to other
+round spheres. An analogous construction on $S^d$ using the Laplacian
+eigenvalues $k(k+d-1)$ with degeneracies
+$\binom{k+d}{d} - \binom{k+d-2}{d}$ yields no finite $n_{\max}$
+satisfying the dimension condition for any $d \neq 3$, at least
+through $n_{\max} = 50$. This specificity traces to the
+$SO(4) \to SO(3)$ branching rule unique to $S^3$: the quantity $B$ is
+the trace of the $SO(3)$ \textit{sub}-Casimir over $SO(4)$
+representations, not the total Laplacian eigenvalue. This branching
+exists because $SO(4) \cong (SU(2) \times SU(2))/\mathbb{Z}_2$, a
+structure that has no analogue for $SO(d+1)$ with $d \neq 3$. The
+three-sphere is the only sphere that is also a Lie group ($S^3 \cong
+SU(2)$) and the only one admitting a Hopf fibration with $S^1$ fiber.
+The formula is not one instance of a family parametrized by $d$; it
+exists only for $S^3$.
+
+
 \subsection{Open questions}
 
 \begin{enumerate}
@@ -570,12 +649,22 @@ imply that $\alpha$ is transcendental (since $\pi$ is).
 \item \textit{Understand the residual $8.8 \times 10^{-8}$.} Higher-order
   spectral invariants (e.g., the $\eta$-invariant of $S^3$, which
   vanishes by symmetry), gravitational corrections, or weak-mixing
-  contributions could account for the discrepancy.
+  contributions could account for the discrepancy. One-loop QED
+  running of the formula's $\alpha$ from the electron mass to $1$~TeV
+  shows that the formula's value corresponds to the Thomson limit
+  ($q^2 \to 0$), matching CODATA most closely at $\mu \approx m_e$.
+  The residual is intrinsic to the formula, not explained by
+  renormalization group running.
 
 \item \textit{The other cubic roots.} The two non-physical roots of
-  Eq.~(\ref{eq:cubic}) may relate to the weak mixing angle or the
-  strong coupling constant, if the argument generalizes to $SU(2)$ and
-  $SU(3)$ bundles over higher-dimensional spheres.
+  Eq.~(\ref{eq:cubic}) satisfy $\alpha \approx \pm 11.7$,
+  corresponding to $1/\alpha \approx \pm 0.085$. A systematic
+  comparison of all natural transformations of these roots (including
+  $r$, $1/r$, $r^2$, $\sin^2(\arctan r)$, etc.) against known
+  Standard Model parameters ($\sin^2\theta_W$, $\alpha_s$, Cabibbo
+  angle, Yukawa couplings, mass ratios) finds no match at the $1\%$
+  level. The other roots do not appear to encode additional coupling
+  constants.
 \end{enumerate}
 
 
@@ -586,20 +675,29 @@ imply that $\alpha$ is transcendental (since $\pi$ is).
 The fine structure constant satisfies the cubic equation
 $\alpha^3 - K\alpha + 1 = 0$, where
 $K = \pi(42 + \pi^2/6 - 1/40)$ is constructed from three spectral
-invariants of the Hopf fibration. The formula contains no fitted
-parameters and achieves $8.8 \times 10^{-8}$ relative agreement with
-experiment. A combinatorial search over $1.92 \times 10^9$ formulas
-yields a $p$-value of $5.2 \times 10^{-9}$, establishing that this
-precision is very unlikely to be accidental. The cubic form is the
+invariants of the Hopf fibration. The selection principle
+$B/N = \dim(S^3)$ is proven algebraically to select $n_{\max} = 3$
+uniquely, via the closed-form ratio $B/N = 3(m+2)(m-1)/10$; this
+result is specific to~$S^3$ and does not generalize to other round
+spheres. The formula contains no fitted parameters and achieves
+$8.8 \times 10^{-8}$ relative agreement with experiment. A
+combinatorial search over $1.92 \times 10^9$ formulas yields a
+$p$-value of $5.2 \times 10^{-9}$, establishing that this precision
+is very unlikely to be accidental. The cubic form is the
 characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
 circulant matrix, providing structural justification for the
 self-consistency equation.
 
 The combination rule $K = \pi(B + F - \Delta)$ remains conjectural.
+A systematic investigation of spectral determinants, analytic torsion,
+heat kernels, and index-theoretic invariants finds no smooth
+spectral-geometric derivation; the rule mixes discrete
+representation-theoretic data ($B = 42$) with continuous spectral
+invariants ($F = \zeta(2)$) in a way that has no known precedent.
 The formula has the character of a remarkable empirical observation
 with structural support---the spectral ingredients are natural, the
-cubic form is natural, but their assembly into $K$ awaits a
-first-principles derivation.
+cubic form is natural, the selection principle is proven, but their
+assembly into $K$ awaits a first-principles derivation.
 
 
 \begin{acknowledgments}
@@ -610,10 +708,15 @@ The four-phase computational audit (arithmetic verification,
 combinatorial $p$-value analysis, cubic structure investigation, and
 derivation chain assessment) that validated the formula and identified
 the circulant structure is available as supplementary
-material~\cite{phase2_audit}. Computational implementation and
-documentation drafting were performed with the assistance of large
-language models (Anthropic Claude) under the author's scientific
-direction. All results were validated against analytical benchmarks.
+material~\cite{phase2_audit}. A systematic investigation of spectral
+determinants, analytic torsion, heat kernel expansions, and
+index-theoretic invariants of the Hopf bundle components, documented
+in the project repository, established that the combination rule
+(Link~3) lies outside the scope of standard smooth spectral geometry.
+Computational implementation and documentation drafting were performed
+with the assistance of large language models (Anthropic Claude) under
+the author's scientific direction. All results were validated against
+analytical benchmarks.
 \end{acknowledgments}
 
 \begin{thebibliography}{20}

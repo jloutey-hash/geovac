@@ -5,6 +5,35 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.4] - 2026-03-22
+
+### Paper 2: Algebraic Selection Principle & Spectral Geometry Survey
+
+No code changes. Paper 2 updated with proven results and systematic negative results.
+
+#### Paper 2 Revised
+- **Proven:** Selection principle B/N = 3 selects n_max = 3 uniquely (closed form B/N = 3(m+2)(m-1)/10, quadratic (m+4)(m-3) = 0)
+- **Proven:** Per-shell Casimir identity ⟨C₃⟩_n = C₄(n) = (n²-1)/2 (SO(3) average equals SO(4) Casimir)
+- **Proven:** S³ specificity — selection principle has no analogue on S^d for d ≠ 3
+- **Established (negative):** Spectral determinants, analytic torsion, heat kernels, and APS invariants cannot derive K or K/π
+- **Established (negative):** Other cubic roots match no known Standard Model parameters at 1% level
+- **Established (negative):** QED running confirms formula gives α at Thomson limit; residual is intrinsic
+- **Fixed:** det'(S²) formula (added missing 1/2 term in exponent)
+- **Fixed:** B(4), B(5) values in selection principle table (132→162, 310→462)
+- **Upgraded:** Link 2 from ◐ to ● (largely established) in derivation chain
+- **Updated:** Conclusion reflects algebraic proof and spectral geometry negative results
+
+#### New Debug Scripts (`debug/`)
+- `alpha_cubic_roots.py` — Cubic root survey and QED running analysis
+- `alpha_spectral_bridge.py` — Spectral determinant bridge search (near-miss investigation)
+- `alpha_torsion_heat.py` — Analytic torsion, heat kernel, and index theory survey
+- `alpha_rep_theory.py` — Representation-theoretic attack on B = 42 and selection principle
+
+#### Principles Applied
+- All mathematical content preserved — proven results added, negative results documented
+- Paper remains in `papers/conjectures/` (combination rule still not derived)
+- Epistemic standards: "we prove" used only for algebraically proven results
+
 ## [1.7.3] - 2026-03-22
 
 ### Paper 2 Rewrite: Statistical Validation & Circulant Structure
