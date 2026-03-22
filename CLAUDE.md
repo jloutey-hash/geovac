@@ -274,7 +274,7 @@ mv test_something.py debug/
   - **Paper 15:** Level 4 natural geometry — molecule-frame hyperspherical for two-center two-electron molecules (H₂ 94.1% D_e, HeH⁺ 93.1% D_e); variational 2D solver; heteronuclear extension; charge-center origin
   - **Paper 17:** Composed natural geometries — fiber bundle for core-valence diatomics (LiH R_eq 6.4%, BeH⁺ bound); ab initio Phillips-Kleinman pseudopotential; ρ-collapse cache; zero molecular fitting
 - **Conjectures (`papers/conjectures/`):**
-  - **Paper 2:** Fine structure constant (α⁻¹) derivation (geometric ansatz)
+  - **Paper 2:** Fine structure constant from Hopf bundle spectral geometry (8.8×10⁻⁸ error, zero params)
   - **Paper 3:** Holographic entropy, spectral dimension, central charge
   - **Paper 4:** Mass-independence, universality, muonic hydrogen
   - **Paper 5:** Comprehensive geometric vacuum framework (synthesis)
@@ -486,7 +486,9 @@ python debug/test_install.py
 | Rabi oscillations | Paper 6 | — | Core |
 | Delta-kick spectroscopy | Paper 6 | — | Core |
 | AIMD / Langevin thermostat | Paper 6 | — | Core |
-| Fine structure α⁻¹ | Paper 2 | Sec 4-6 | Conjecture |
+| **Fine structure α (Hopf bundle)** | **Paper 2** | **Sec 3-5** | **Conjecture** |
+| Hopf fibration spectral invariants | Paper 2 | Sec 3 | Conjecture |
+| Cubic self-consistency (α³-Kα+1=0) | Paper 2 | Sec 4 | Conjecture |
 | Spectral dimension d_s | Paper 3 | Sec 4 | Conjecture |
 | Holographic entropy S | Paper 3 | Sec 5 | Conjecture |
 | Central charge c | Paper 3 | Sec 6 | Conjecture |
@@ -524,6 +526,7 @@ python debug/test_install.py
 
 ## 📖 Version History
 
+- **v2.7** (Mar 21, 2026): Updated Paper 2 in reference table; Hopf bundle α derivation (8.8×10⁻⁸, zero params), cubic self-consistency equation
 - **v2.6** (Mar 17, 2026): Added Papers 14, 15 to reference table; Level 4 solver, heteronuclear extension, charge-center origin, 2D solver benchmarks
 - **v2.5** (Mar 15, 2026): Added Papers 12, 13 to reference table; hyperspherical solver, Neumann V_ee, fiber bundle, ab initio spectroscopy; qubit encoding benchmarks
 - **v2.4** (Mar 7, 2026): Corrected sparse/dense rule to context-dependent; direct CI validated as O(N_SD × N_connected)
@@ -536,6 +539,6 @@ python debug/test_install.py
 
 ---
 
-**Last Updated:** March 17, 2026
+**Last Updated:** March 21, 2026
 **Status:** Active (official project guidelines)
 **Compliance:** All current files organized per these standards

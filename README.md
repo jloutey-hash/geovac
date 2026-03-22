@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.1-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.7.0** - Composed Natural Geometries
+**Version 1.7.1** - Fine Structure Constant from Hopf Bundle Geometry
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -10,27 +10,17 @@ For molecules, the natural geometry shifts from $S^3$ to prolate spheroidal coor
 
 ---
 
-## What's New in v1.7.0
+## What's New in v1.7.1
 
-### Paper 17: Composed Natural Geometries for Core-Valence Diatomics
-- **Fiber bundle architecture:** G_total = G_nuc ⋉ G_core(R) ⋉ G_val(R, core_state)
-- **LiH:** R_eq = 3.21 bohr (6.4% error, improved from 17% LCAO), ω_e = 1471 cm⁻¹ (4.6%)
-- **BeH⁺:** Bound molecule, same code path, zero per-molecule tuning
-- **Ab initio pseudopotential:** A from core-valence energy gap, B from ⟨1/r²⟩-weighted core radius
-- **Zero experimental molecular data** in pseudopotential derivation
-
-### New Modules
-- **ComposedDiatomicSolver** (`composed_diatomic.py`): General 2+2 diatomic solver with class methods `LiH()`, `BeH_plus()`, `LiH_ab_initio()`, `BeH_plus_ab_initio()`
-- **CoreScreening** (`core_screening.py`): Z_eff(r) extraction from hyperspherical 2e core solve
-- **AbInitioPK** (`ab_initio_pk.py`): Parameter-free Phillips-Kleinman pseudopotential (inv2 formula)
-- **AngularCache / FastAdiabaticPES** (`rho_collapse_cache.py`): ρ-collapsed angular eigenvalue cache, full PES in ~48 seconds
-
-### Performance
-- **ρ-collapse:** Angular eigenvalues cached as function of ρ=R/(2R_e), eliminating redundant solves
-- **Per-R-point cost:** ~2 seconds (1D tridiagonal radial solve)
-- **Full pipeline:** ~4 minutes per molecule on commodity hardware
+### Paper 2 Rewrite: Fine Structure Constant from Hopf Bundle Geometry
+- **Formula:** α³ - Kα + 1 = 0, where K = π(42 + ζ(2) - 1/40) = 137.036064
+- **Precision:** 8.8×10⁻⁸ relative error, **zero free parameters**
+- **500× improvement** over previous symplectic impedance approach
+- **Selection principle:** ⟨Casimir⟩/state = dim(S³) uniquely fixes n=3 cutoff
+- **New module:** `hopf_bundle.py` — S³ embedding, Hopf projection, fiber analysis
 
 ### Prior Releases
+- **v1.7.0:** Composed Natural Geometries (Paper 17, LiH R_eq 6.4%, BeH⁺ bound)
 - **v1.6.1:** Hierarchical Molecular Solvers (FrozenCoreLatticeIndex, LockedShellMolecule)
 - **v1.6.0:** Chemical Periodicity from S_N Representation Theory (Paper 16)
 - **v1.5.0:** Algebraic Structure & SO(3N) Generalization (Papers 7 & 13)
@@ -231,6 +221,7 @@ geovac/                 Core package
   coupled_en_lattice.py   Coupled electronic-nuclear lattice
   dynamics.py             TimePropagator (Crank-Nicolson)
   aimd.py                 VelocityVerlet, LangevinThermostat
+  hopf_bundle.py          Hopf fibration analysis (S³→S², α derivation)
   wigner_so4.py           SO(4) Wigner D-matrix elements
   atomic_solver.py        Single-electron atom solver
   dirac_hamiltonian.py    Relativistic Dirac solver
@@ -253,7 +244,8 @@ papers/
     FCI-M:    Heteronuclear diatomics (LiH benchmark)
   zenodo/               Publication cluster (Papers 7, 11, 12, 13)
   methods/              Paper 8-9: Bond Sphere & Sturmian negative theorem
-  conjectures/          Theoretical explorations (Papers 2-5; speculative)
+  conjectures/          Theoretical explorations (Papers 2-5)
+    Paper 2:  Fine structure α from Hopf bundle (8.8×10⁻⁸ error)
 
 tests/                  Unit tests (pytest) + validation
   test_fock_projection.py   10 proofs (stereographic geometry)
@@ -265,6 +257,7 @@ tests/                  Unit tests (pytest) + validation
   test_frozen_core.py       14 tests (frozen-core CI)
   test_locked_shell.py      11 tests (locked-shell CI)
   test_lih_fci.py           50 tests (LiH heteronuclear FCI)
+  test_hopf_bundle.py       41 tests (Hopf fibration, α formula)
   test_berry_phase.py       7 tests (log-holonomy, power-law)
   test_complex_scaling.py   ECS resonance tests
   test_hyperspherical_coupled.py  Coupled-channel tests
@@ -288,6 +281,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 
 | # | Title | Key Result |
 |:-:|-------|------------|
+| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸ error, zero params** |
 | 0 | Geometric Packing | Universal constant K = -1/16 |
 | 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling, Berry phase correction |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
@@ -340,7 +334,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.7.0},
+  version = {1.7.1},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

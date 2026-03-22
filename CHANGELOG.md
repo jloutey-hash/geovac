@@ -5,6 +5,29 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.1] - 2026-03-21
+
+### Paper 2 Rewrite: Fine Structure Constant from Hopf Bundle Geometry
+- **Cubic equation:** α³ - Kα + 1 = 0 where K = π(42 + ζ(2) - 1/40)
+- **Precision:** 8.8×10⁻⁸ relative error (500× improvement over v1 symplectic approach)
+- **Zero free parameters** — all terms derived from spectral geometry
+- **Selection principle:** n=3 cutoff from ⟨Casimir⟩/state = dim(S³)
+
+### New Modules
+- **hopf_bundle.py**: S³ embedding, Hopf projection, fiber analysis, discrete volume sums
+- **Debug scripts**: alpha_eigenvalue_search, alpha_zeta_analysis, alpha_derivation_attempt,
+  alpha_fiber_analysis, alpha_precision_analysis, hopf_convergence_analysis
+
+### Key Findings
+- 42 = degeneracy-weighted Casimir trace Tr(L²)|_{n≤3}
+- ζ(2) = π²/6 = S¹ fiber spectral zeta (single chirality)
+- 1/40 = 1/(λ₃ × g₂) = boundary term at n=3, l=2 cutoff
+- Cubic structure suggests bare coupling + α² self-interaction (renormalization)
+
+### Paper 2 Superseded
+- Old: "Geometric Impedance: Symplectic Framework" (0.0045% error, fitted pitch)
+- New: "Spectral Geometry of the Hopf Fibration" (8.8×10⁻⁸ error, no parameters)
+
 ## [1.7.0] - 2026-03-21
 
 ### Paper 17: Composed Natural Geometries for Core-Valence Diatomics
