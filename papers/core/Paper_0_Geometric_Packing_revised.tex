@@ -1,0 +1,791 @@
+\documentclass[aps,prl,reprint,amsmath,amssymb]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage{braket}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Angular Momentum as Information Geometry:\\Isotropic Packing and the Universal Angular Cross-Section}
+
+\author{Josh Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{\today}
+
+\begin{abstract}
+We show that the angular momentum quantum numbers $(\ell, m)$ emerge
+from a purely geometric construction: uniform-density packing of
+distinguishable states on concentric isotropic shells in two
+dimensions.  Starting from two axioms---discrete binary
+distinguishability and geometric indifference (maximum entropy)---the
+construction yields shell capacities $2k-1$ for shell~$k$, which is
+isomorphic to the spherical harmonic basis $Y_{\ell m}$ with
+$\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  The principal quantum
+number~$n$ corresponds to a cumulative grouping of the first~$n$
+shells, producing the $n^2$ orbital count, but this grouping is not
+forced by the axioms alone.  Similarly, a factor of~2 arises from the
+orientability of the compactified packing manifold ($S^2$),
+corresponding to spin multiplicity.  When the packing is interpreted
+as a graph, its Laplacian decomposes into $(\ell, m)$ sectors that
+spectrally converge to the hydrogen eigenvalues, as shown in
+subsequent papers.  This angular cross-section recurs as a universal
+structural factor inside every natural geometry developed in the
+Geometric Vacuum series---from $S^3$ for atoms through composed fiber
+bundles for multi-electron molecules---making it the foundational
+motif of the framework.  This is Paper~0 in the series.
+\end{abstract}
+
+\maketitle
+
+%% ================================================================
+%%  I.  INTRODUCTION
+%% ================================================================
+\section{Introduction}
+\label{sec:introduction}
+
+The hydrogen atom possesses $n^2$ orbital states per principal quantum
+number~$n$, each labeled by angular momentum
+$\ell = 0, 1, \ldots, n-1$ and magnetic quantum number
+$m = -\ell, \ldots, +\ell$, with a spin multiplicity of~2 giving
+$2n^2$ states total.  The standard derivation obtains these labels
+from the eigenvalue structure of the angular momentum operators
+$\hat{L}^2$ and $\hat{L}_z$ acting on the Hilbert space of the
+Schr\"odinger equation.  Here we ask: to what extent can this quantum
+number structure be recovered from geometry alone, without invoking
+operators, Hilbert spaces, or the eigenvalue equation?
+
+We present a construction based on uniform-density packing of
+distinguishable states on concentric isotropic shells in two
+dimensions.  The construction rests on two axioms:
+(i)~a minimum of two distinguishable states is required to define a
+metric (binary distinguishability), and (ii)~in the absence of
+external constraints, the distribution of states must maximize
+entropy, enforcing isotropy (geometric indifference).  These axioms,
+together with the natural choices of concentric shells and
+area-proportional state counting, produce the following results at
+three distinct levels of strength.
+
+\medskip
+
+\noindent\textbf{Strong claim: angular quantum numbers.}  Shell~$k$
+has capacity $2k - 1$, which is isomorphic to the spherical harmonic
+basis $Y_{\ell m}$ with $\ell = k - 1$.  The angular momentum labels
+$(\ell, m)$ and the per-shell degeneracy $2\ell + 1$ emerge directly
+from the packing.  This is the central, mathematically rigorous result
+of the paper.
+
+\medskip
+
+\noindent\textbf{Structural correspondences.}  The principal quantum
+number~$n$ arises when one groups the first $n$ shells cumulatively,
+yielding the count $\sum_{k=1}^{n}(2k-1) = n^2$.  This grouping is
+natural but not uniquely forced by the axioms.  The factor of~2 (spin
+multiplicity) arises from the orientability of the compactified
+packing manifold: conformally compactifying the plane to $S^2$
+introduces two orientations, corresponding to a $\mathbb{Z}_2$
+doubling.  The identification of this doubling with
+spin-$\tfrac{1}{2}$ is a structural correspondence, not a derivation
+from the axioms.
+
+\medskip
+
+\noindent\textbf{Series significance.}  The $(\ell, m)$ angular
+sector constructed here recurs as a universal structural factor inside
+every natural geometry developed in the Geometric Vacuum (GeoVac)
+series: $S^3$ for hydrogen~\cite{paper7}, prolate spheroidal
+coordinates for H$_2^+$~\cite{paper11}, hyperspherical coordinates for
+He~\cite{paper13}, molecule-frame hyperspherical coordinates for
+H$_2$~\cite{paper15}, and composed fiber bundles for
+LiH~\cite{paper17}.  In each case, the full geometry separates into a
+system-specific radial or hyperradial part and a universal angular
+cross-section whose structure is precisely the packing derived here.
+This universality is the reason the packing construction is
+foundational to the series rather than merely a curiosity about
+hydrogen.
+
+\medskip
+
+Several elements of this work connect to well-established results.
+The counting $\sum_{\ell=0}^{n-1}(2\ell+1) = n^2$ is standard SO(3)
+representation theory.  The relationship between hydrogen's
+``accidental'' degeneracy and the geometry of~$S^3$ was established by
+Fock~\cite{fock1935} and Bargmann~\cite{bargmann1936}.  What is new
+here is the specific packing algorithm that produces the $(\ell, m)$
+labeling from geometric--combinatorial reasoning independent of the
+operator formalism, and the observation that this angular sector is
+the universal fiber across the GeoVac natural geometries.
+
+The paper is organized as follows.
+Section~\ref{sec:construction} presents the packing algorithm.
+Section~\ref{sec:angular} establishes the isomorphism between shell
+capacity and the spherical harmonic basis.
+Section~\ref{sec:correspondences} discusses the structural
+correspondences for~$n$ and spin.
+Section~\ref{sec:cross-section} shows how the angular cross-section
+recurs across the GeoVac natural geometries.
+Section~\ref{sec:graph} constructs the graph topology and connects it
+to the spectral results of later papers.
+Sections~\ref{sec:scope} and~\ref{sec:discussion} address scope,
+limitations, and context.
+
+
+%% ================================================================
+%%  II.  THE PACKING CONSTRUCTION
+%% ================================================================
+\section{The Packing Construction}
+\label{sec:construction}
+
+\subsection{Axioms}
+
+The construction rests on two axioms, which contain no reference to
+quantum mechanics, operators, wavefunctions, or physical observables.
+
+\medskip
+
+\noindent\textbf{Axiom 1 (Binary Distinguishability).}
+To define a metric space, a minimum of two distinguishable states
+($N_{\mathrm{init}} = 2$) is required to establish a non-zero
+fundamental scale~$d_0$.  A single point cannot define a distance; two
+points create the first bit of spatial information.
+
+\medskip
+
+\noindent\textbf{Axiom 2 (Geometric Indifference).}
+In the absence of external constraints or privileged directions, the
+distribution of states must maximize entropy.  By the Principle of
+Indifference, this necessitates isotropy: states populate isotropic
+shells (circles) rather than anisotropic tilings (squares, hexagons),
+which would imply privileged directions not present in the axioms.
+
+\subsection{Algorithm}
+
+\noindent\textbf{Step 1.}  Place $N_{\mathrm{init}} = 2$ points on an
+isotropic shell of radius $r_1 = d_0$, separated by the fundamental
+distance~$d_0$.
+
+\textit{Rationale:} Two points are the minimum needed to define a
+distance (Axiom~1).  Isotropy requires a circular shell (Axiom~2).
+This fixes both $d_0$ and the fundamental area per state
+$\sigma_0 = \pi d_0^2 / 2$.
+
+\medskip
+
+\noindent\textbf{Step 2.}  Add concentric isotropic shell~$k$ at
+radius $r_k = k \cdot d_0$.
+
+\medskip
+
+\noindent\textbf{Step 3.}  Determine the state count~$N_k$ on
+shell~$k$ from uniform information density.  The annular area between
+shells $k-1$ and $k$ is
+\begin{equation}
+  A_k = \pi r_k^2 - \pi r_{k-1}^2
+      = \pi d_0^2 \bigl[k^2 - (k-1)^2\bigr]
+      = \pi d_0^2 (2k - 1) \,.
+  \label{eq:annular-area}
+\end{equation}
+Dividing by the fundamental area gives the state count:
+\begin{equation}
+  N_k = \frac{A_k}{\sigma_0}
+      = \frac{\pi d_0^2 (2k-1)}{\pi d_0^2 / 2}
+      = 2(2k - 1) \,.
+  \label{eq:Nk}
+\end{equation}
+
+\noindent\textbf{Step 4.}  Repeat for $k = 1, 2, 3, \ldots$
+
+\subsection{Resulting structure}
+
+The construction yields the distribution shown in
+Table~\ref{tab:packing}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccc}
+\toprule
+Shell $k$ & States $N_k = 2(2k-1)$ & Cumulative $\sum_{i=1}^{k} N_i$ \\
+\midrule
+1 & 2  & 2  \\
+2 & 6  & 8  \\
+3 & 10 & 18 \\
+4 & 14 & 32 \\
+5 & 18 & 50 \\
+$\vdots$ & $\vdots$ & $\vdots$ \\
+$k$ & $2(2k-1)$ & $2k^2$ \\
+\bottomrule
+\end{tabular}
+\caption{State distribution on isotropic shells.  Each shell~$k$
+  carries $2(2k-1)$ states; the cumulative count through shell~$k$ is
+  $2k^2$.}
+\label{tab:packing}
+\end{table}
+
+Two features of this table merit immediate comment.  First, the
+per-shell count $2(2k-1)$ factorizes as $2 \times (2k-1)$, where the
+factor $2k-1$ is an odd integer determined entirely by the area
+formula.  Second, the cumulative count $2k^2$ matches the hydrogen
+degeneracy $2n^2$ if one identifies $k = n$.  These observations are
+analyzed in the next two sections at appropriately different levels of
+strength.
+
+
+%% ================================================================
+%%  III.  ANGULAR QUANTUM NUMBERS FROM UNIFORM DENSITY
+%% ================================================================
+\section{Angular Quantum Numbers from Uniform Density}
+\label{sec:angular}
+
+This section contains the central result of the paper: the per-shell
+state count from the packing construction is isomorphic to the angular
+momentum labeling $(\ell, m)$.
+
+\subsection{The angular capacity of shell $k$}
+
+The factor of $2(2k-1)$ in Eq.~\eqref{eq:Nk} factorizes into a
+global factor of~2---whose origin in the initialization condition and
+manifold orientability is analyzed in
+Sec.~\ref{sec:correspondences}---and an angular capacity per shell:
+\begin{equation}
+  N_k^{\mathrm{angular}} = 2k - 1
+  \label{eq:angular-capacity}
+\end{equation}
+distinct angular slots.
+
+\subsection{Isomorphism with spherical harmonics}
+
+The spherical harmonics $Y_{\ell m}(\theta, \phi)$ for a given~$\ell$
+have $2\ell + 1$ independent components labeled by
+$m = -\ell, -\ell+1, \ldots, +\ell$.  Under the identification
+\begin{equation}
+  \ell = k - 1 \,,
+  \label{eq:ell-k}
+\end{equation}
+the angular capacity of shell~$k$ becomes
+\begin{equation}
+  N_k^{\mathrm{angular}} = 2(k-1) + 1 = 2\ell + 1 \,,
+  \label{eq:2ell-plus-1}
+\end{equation}
+which is precisely the dimension of the spin-$\ell$ irreducible
+representation of SO(3).  The $2k-1$ angular positions on shell~$k$
+are in one-to-one correspondence with the magnetic quantum numbers
+$m = -\ell, \ldots, +\ell$.
+
+This is not a coincidence that must be checked case by case: it is an
+algebraic identity.  The area formula
+(Eq.~\ref{eq:annular-area}) forces the annular area of shell~$k$ to
+be proportional to $2k-1$, which is the dimension of the
+$(k{-}1)$-th irreducible representation of SO(3).  The packing
+construction therefore generates the complete angular momentum basis
+$\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$ as a direct
+consequence of uniform density on isotropic shells.
+
+\subsection{What the construction produces}
+
+To be precise about the scope of this result:
+
+\begin{itemize}
+\item The construction produces the \emph{labeling} $(\ell, m)$ and
+  the \emph{degeneracy} $2\ell + 1$ per shell.  These are the angular
+  quantum numbers.
+
+\item It does \emph{not} produce the functional form of the spherical
+  harmonics, the eigenvalue $\ell(\ell+1)$ of $\hat{L}^2$, or the
+  commutation relations of angular momentum operators.  Those require
+  additional structure (the graph Laplacian and its continuum limit),
+  developed in Papers~1 and~7.
+
+\item The result is \emph{independent} of any specific physical
+  system.  The angular labeling emerges from 2D isotropic geometry,
+  not from the hydrogen atom.  Hydrogen merely happens to use this
+  same angular sector---as do all rotationally symmetric quantum
+  systems.
+\end{itemize}
+
+
+%% ================================================================
+%%  IV.  STRUCTURAL CORRESPONDENCES
+%% ================================================================
+\section{Structural Correspondences: $n$, Spin, and $2n^2$}
+\label{sec:correspondences}
+
+The angular quantum numbers $(\ell, m)$ emerge directly from the
+packing (Sec.~\ref{sec:angular}).  The principal quantum number~$n$
+and the spin factor of~2 involve additional identifications that are
+natural and mathematically grounded but not uniquely forced by the two
+axioms.  We present them here as structural correspondences.
+
+\subsection{The principal quantum number as cumulative grouping}
+
+If one groups the first $n$ shells cumulatively, the total angular
+state count is
+\begin{equation}
+  \sum_{k=1}^{n} (2k - 1) = n^2 \,,
+  \label{eq:n-squared}
+\end{equation}
+which matches the orbital degeneracy of hydrogen's $n$-th principal
+shell: $\sum_{\ell=0}^{n-1}(2\ell+1) = n^2$.  Including the spin
+factor gives $2n^2$.
+
+This grouping is natural---the shells are concentrically ordered, so
+cumulative counting is the simplest aggregation---but the axioms do
+not \emph{require} that shells be grouped this way.  The packing
+generates an infinite sequence of shells; the decision to collect the
+first~$n$ of them into a single principal shell is an additional
+structural choice that corresponds to, but is not derived from, the
+axioms.
+
+\subsection{The factor of 2 and orientability}
+
+The per-shell count $N_k = 2(2k-1)$ contains a factor of~2 that
+traces back to two sources:
+
+\begin{enumerate}
+\item \textbf{Initialization.}  Axiom~1 places
+  $N_{\mathrm{init}} = 2$ states on the first shell, fixing the
+  fundamental area $\sigma_0 = \pi d_0^2 / 2$.  This factor of~2
+  propagates through all subsequent shells via the uniform-density
+  condition.
+
+\item \textbf{Orientability.}  When the flat packing plane is
+  conformally compactified to the Riemann sphere
+  $S^2 \cong \mathbb{C}^*$, the resulting manifold is orientable: it
+  admits two distinct normal directions (inward and outward).  This
+  orientability provides a natural $\mathbb{Z}_2$ doubling of the
+  state space.  Mathematically, tracking this orientation lifts the
+  symmetry group from SO(3) to its double cover SU(2).
+\end{enumerate}
+
+The identification of this $\mathbb{Z}_2$ doubling with the
+spin-$\tfrac{1}{2}$ degree of freedom is consistent with the
+mathematical structure: orientability on $S^2$ and spinor
+representations of SU(2) both produce a factor of~2.  However, the
+packing construction does not derive the spin angular momentum algebra
+$[\hat{S}_i, \hat{S}_j] = i\epsilon_{ijk}\hat{S}_k$ or the
+eigenvalue $s(s+1)$.  The correspondence is between the \emph{counting}
+(a factor of~2) and spin \emph{multiplicity} ($2s+1 = 2$ for
+$s = 1/2$), not between the construction and the full spinor
+formalism.
+
+\subsection{A remark on the axioms}
+
+The construction follows from the two axioms together with several
+additional structural choices: concentric shells with linearly spaced
+radii ($r_k = k d_0$), area-proportional state counting, and the
+specific fundamental area $\sigma_0 = \pi d_0^2 / 2$ fixed by the
+initialization.  These choices are natural and mutually
+consistent---they are arguably the simplest possibilities compatible
+with the axioms---but they are not uniquely determined by the axioms
+alone.  The axioms constrain the construction; they do not uniquely
+fix every detail of it.
+
+This distinction matters for the epistemic status of the results.  The
+angular quantum numbers $(\ell, m)$ follow from any isotropic,
+uniform-density, concentric construction---a robust class.  The
+specific identification of~$n$ and the factor of~2 depend on the
+particular choices above.
+
+
+%% ================================================================
+%%  V.  UNIVERSAL ANGULAR CROSS-SECTION
+%% ================================================================
+\section{The Packing as Universal Angular Cross-Section}
+\label{sec:cross-section}
+
+The packing construction of Sec.~\ref{sec:construction} produces a
+universal $(\ell, m)$ angular labeling.  In the subsequent papers of
+the GeoVac series, this same angular sector appears as a structural
+factor inside every natural geometry used for quantum chemistry
+calculations.  The full geometry of each system separates into a
+system-specific radial (or hyperradial) coordinate and the universal
+angular cross-section derived here.
+
+Table~\ref{tab:cross-section} summarizes the hierarchy.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cllll}
+\toprule
+Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
+\midrule
+1 & H (1-center, 1$e$)
+  & $S^3$ (Fock projection)
+  & $Y_{\ell m}$ on $S^2 \subset S^3$
+  & \cite{paper7} \\
+2 & H$_2^+$ (2-center, 1$e$)
+  & Prolate spheroidal
+  & $m$ exact; $\ell$-like index from $\eta$-separation
+  & \cite{paper11} \\
+3 & He (1-center, 2$e$)
+  & Hyperspherical
+  & $Y_{\ell m}$ per electron in fiber
+  & \cite{paper13} \\
+4 & H$_2$ (2-center, 2$e$)
+  & Mol-frame hyperspherical
+  & $Y_{\ell m}$ angular channels
+  & \cite{paper15} \\
+5 & LiH (core + valence)
+  & Composed fiber bundle
+  & $Y_{\ell m}$ per electron group
+  & \cite{paper17} \\
+\bottomrule
+\end{tabular}
+\caption{The $(\ell, m)$ angular cross-section inside each natural
+  geometry of the GeoVac series.  In every case, the full coordinate
+  system separates into a system-specific radial part and the
+  universal angular labeling constructed in this paper.}
+\label{tab:cross-section}
+\end{table}
+
+\textbf{Level~1: Hydrogen on $S^3$.}
+Fock's 1935 stereographic projection~\cite{fock1935} maps the hydrogen
+momentum-space problem onto the three-sphere~$S^3$.  The eigenstates
+of the Laplace--Beltrami operator on $S^3$ are hyperspherical
+harmonics, which decompose as $Y_{n\ell m} = R_n(\chi) \,
+Y_{\ell m}(\theta, \phi)$.  The angular factor $Y_{\ell m}$ is
+precisely the per-shell structure of the packing, with $\ell = k - 1$.
+Paper~7~\cite{paper7} shows that the graph Laplacian on the $2n^2$
+packing is conformally equivalent to this $S^3$ operator.
+
+\textbf{Level~2: H$_2^+$ on prolate spheroids.}
+For one-electron diatomics, the natural geometry is the prolate
+spheroidal coordinate system $(\xi, \eta, \phi)$, in which the
+Schr\"odinger equation separates.  The azimuthal quantum number~$m$
+survives exactly as the quantum number of the $\phi$-equation
+($e^{im\phi}$), directly inheriting the packing's angular slot
+labeling.  The quantum number~$\ell$ is no longer exactly conserved in
+the two-center problem: it is replaced by a separation parameter from
+the $\eta$-equation that reduces to~$\ell$ in the united-atom limit.
+The angular structure is recognizably descended from the $(\ell, m)$
+packing---$m$ is exact, and the $\ell$-like index organizes the
+$\eta$-eigenstates into the same degeneracy pattern---even though the
+two-center potential breaks the full SO(3) symmetry to axial SO(2).
+Paper~11~\cite{paper11} constructs a discrete lattice in these
+coordinates.
+
+\textbf{Level~3: Helium in hyperspherical coordinates.}
+For two-electron atoms, the six-dimensional configuration space is
+parameterized by a hyperradius~$R$ and five angles.  The angular
+eigenstates decompose into single-electron angular momenta
+$(\ell_1, m_1)$ and $(\ell_2, m_2)$, each carrying the per-shell
+structure of the packing.  Paper~13~\cite{paper13} implements this as
+a fiber bundle: the base space is the hyperradius, and the fiber is
+the angular manifold.
+
+\textbf{Level~4: H$_2$ in molecule-frame hyperspherical coordinates.}
+For two-electron diatomics, the geometry combines the molecular axis
+(internuclear separation~$R$) with the hyperspherical treatment of the
+two electrons.  The angular channels are labeled by $(\ell, m)$
+quantum numbers that determine the multichannel expansion.
+Paper~15~\cite{paper15} recovers 94.1\% of the H$_2$ dissociation
+energy using this geometry.
+
+\textbf{Level~5: LiH via composed geometries.}
+For core--valence systems, the total geometry is a fiber bundle
+$G_{\mathrm{total}} = G_{\mathrm{nuc}} \rtimes G_{\mathrm{core}}(R)
+\rtimes G_{\mathrm{val}}(R)$, where each electron group occupies its
+own natural geometry.  The angular labeling $(\ell, m)$ appears
+independently in each fiber.  Paper~17~\cite{paper17} applies this to
+LiH and BeH$^+$.
+
+\medskip
+
+The invariance of the $(\ell, m)$ angular sector across all five
+levels is not imposed by hand: it is a consequence of rotational
+symmetry, which is present in every geometry that admits separation of
+variables.  The packing construction provides the combinatorial
+substrate for this universal angular factor.
+
+
+%% ================================================================
+%%  VI.  GRAPH TOPOLOGY AND THE BRIDGE TO DYNAMICS
+%% ================================================================
+\section{Graph Topology and the Bridge to Dynamics}
+\label{sec:graph}
+
+\subsection{Vertex set}
+
+The packing defines a graph $G = (V, E)$ with vertex set
+\begin{equation}
+  V = \bigl\{(n, \ell, m, s) : 1 \leq n \leq n_{\max},\;
+      0 \leq \ell < n,\;
+      -\ell \leq m \leq \ell,\;
+      s \in \{\uparrow, \downarrow\}\bigr\} \,,
+  \label{eq:vertex-set}
+\end{equation}
+with cardinality $|V| = 2n_{\max}^2$ for a lattice truncated at
+$n_{\max}$.
+
+\subsection{Edge set}
+
+Edges encode geometrically adjacent transitions:
+\begin{itemize}
+\item \textbf{Radial edges} ($\hat{T}_{\pm}$): connect
+  $(n, \ell, m, s)$ to $(n \pm 1, \ell, m, s)$ at fixed angular
+  quantum numbers $(\ell, m)$.  These correspond to radial excitation
+  and de-excitation.
+
+\item \textbf{Angular edges} ($\hat{L}_{\pm}$): connect
+  $(n, \ell, m, s)$ to $(n, \ell, m \pm 1, s)$ at fixed $n$ and
+  $\ell$.  These correspond to magnetic sublevel transitions within a
+  shell.
+\end{itemize}
+
+The full graph topology may also include edges connecting states with
+different~$\ell$ (e.g., $\ell$-changing transitions driven by
+non-spherical perturbations).  However, for the spherically symmetric
+Coulomb problem, the Hamiltonian is block-diagonal in~$\ell$: the
+spherical symmetry decouples the $\ell$~sectors, so that the graph
+Laplacian decomposes into independent $(\ell, m)$ blocks even if the
+underlying graph contains $\ell$-changing edges.  This
+block-diagonality is a consequence of the potential's symmetry, not a
+topological constraint on the graph itself.
+
+\subsection{Spectral convergence}
+
+The graph Laplacian $L = D - A$ defines a discrete Hamiltonian
+\begin{equation}
+  H = K_{\mathrm{vac}} \, L \,,
+  \label{eq:graph-hamiltonian}
+\end{equation}
+where $K_{\mathrm{vac}} = -1/16$ is the kinetic scale factor that
+maps dimensionless graph eigenvalues to physical energies in atomic
+units.  This constant is not derived from the packing alone; it is the
+bridge between the dimensionless graph topology and dimensionful
+physics, determined by requiring spectral agreement with the Rydberg
+formula.
+
+Within each $(\ell, m)$ sector, the radial edges form a
+one-dimensional path graph in $n = \ell+1, \ell+2, \ldots, n_{\max}$.
+As $n_{\max} \to \infty$, the ground-state eigenvalue of~$H$
+converges to $-0.5$~Ha, the exact hydrogen ground-state energy.  The
+$(\ell, m)$ angular structure is exact at every finite $n_{\max}$---it
+is encoded in the graph topology, not approximated by mesh refinement.
+
+The full proof of spectral equivalence between this graph Laplacian
+and the Laplace--Beltrami operator on the unit~$S^3$ (via Fock's
+stereographic projection) is given in Paper~7~\cite{paper7}, where
+18~symbolic proofs validate the conformal geometry.  The energy
+eigenvalues and dynamics built on this graph are developed in
+Papers~1 and~6.
+
+
+%% ================================================================
+%%  VII.  SCOPE AND LIMITATIONS
+%% ================================================================
+\section{Scope and Limitations}
+\label{sec:scope}
+
+\subsection{What the construction provides}
+
+\begin{itemize}
+\item[$\checkmark$] The angular quantum number labeling $(\ell, m)$
+  and the per-shell degeneracy $2\ell + 1$, as a direct consequence of
+  uniform-density isotropic packing.
+
+\item[$\checkmark$] A graph topology $(V, E)$ whose vertices carry
+  quantum number labels and whose edges encode allowed transitions.
+
+\item[$\checkmark$] The structural correspondences $n \leftrightarrow$
+  cumulative grouping and spin multiplicity $\leftrightarrow$
+  orientability, with their proper epistemic status identified.
+\end{itemize}
+
+\subsection{What the construction does not provide}
+
+\begin{itemize}
+\item[$\times$] Energy eigenvalues $E_n = -1/(2n^2)$.  These require
+  the graph Laplacian with the kinetic scale $K_{\mathrm{vac}}$
+  (Papers~1, 7).
+
+\item[$\times$] Wavefunctions $R_{n\ell}(r)$ or
+  $Y_{\ell m}(\theta, \phi)$ in their functional form.  The packing
+  produces the labels, not the functions.
+
+\item[$\times$] Time evolution and dynamics.  These require the
+  Hamiltonian as an operator, developed in Paper~6.
+
+\item[$\times$] The fine structure constant or any coupling constants.
+  The construction is purely kinematic.
+\end{itemize}
+
+\subsection{Choices beyond the axioms}
+
+As noted in Sec.~\ref{sec:correspondences}, the construction involves
+structural choices---concentric shells, linearly spaced radii
+($r_k = k d_0$), area-proportional counting, and the fundamental area
+$\sigma_0 = \pi d_0^2 / 2$---that are natural and mutually consistent
+but not uniquely determined by the two axioms.  The robustness of the
+$(\ell, m)$ result rests on the observation that any isotropic,
+uniform-density, concentric packing produces the same angular capacity
+$2k - 1$ per shell; the specific radial spacing affects only how
+shells are ordered, not their angular content.
+
+
+%% ================================================================
+%%  VIII.  DISCUSSION
+%% ================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Historical context}
+
+The connection between geometry and quantum mechanics has been
+recognized since the earliest days of quantum theory.
+Bohr~\cite{bohr1913} imposed quantization as a geometric constraint
+(integer wavelengths on circular orbits).
+Fock~\cite{fock1935} discovered that the hydrogen momentum-space
+problem maps onto $S^3$ via stereographic projection, revealing the
+SO(4) dynamical symmetry that explains the ``accidental''
+$n^2$~degeneracy.  Bargmann~\cite{bargmann1936} derived the same
+symmetry algebraically.  Barut and Kleinert~\cite{barut1967}
+extended the symmetry analysis to transition probabilities via
+noncompact dynamical groups.  Biedenharn~\cite{biedenharn1981}
+provided a comprehensive treatment of the angular momentum algebra
+underlying the $(\ell, m)$ structure.
+
+The present work operates at a different level: rather than analyzing
+the symmetries of the Schr\"odinger equation, it constructs the
+angular labeling from geometric--combinatorial reasoning that is
+logically independent of the operator formalism.  The result is the
+same $(\ell, m)$ basis---as it must be, since both approaches reflect
+the same underlying rotational symmetry---but obtained by a different
+route.
+
+\subsection{The kinematic--dynamic distinction}
+
+The packing construction produces the \emph{kinematic} structure of
+quantum mechanics: the state space, its labeling, and its
+combinatorial organization.  It does not produce the \emph{dynamics}:
+the Hamiltonian, the energy spectrum, or time evolution.  This
+separation is a feature of the construction, not a limitation.  It
+shows that the angular quantum numbers are determined by geometry
+alone, independently of the specific force law or potential.
+
+In the GeoVac series, dynamics are recovered when the graph Laplacian
+is equipped with the kinetic scale $K_{\mathrm{vac}} = -1/16$ and
+node weights encoding the Coulomb potential.  Paper~7~\cite{paper7}
+proves that this graph Laplacian is conformally equivalent to the
+Laplace--Beltrami operator on~$S^3$, with the $1/r$ Coulomb potential
+emerging as the coordinate distortion from stereographic projection
+rather than an independent force law.
+
+\subsection{Scope of the geometric analogy}
+
+The construction shows that information-theoretic reasoning under
+geometric constraints \emph{can} reproduce the angular quantum number
+structure.  It does not show that this is the \emph{only} way to
+obtain these labels, nor does it establish that quantum mechanics
+\emph{must} have a geometric origin.  The angular momentum algebra
+$[\hat{L}_i, \hat{L}_j] = i\epsilon_{ijk}\hat{L}_k$ is a consequence
+of rotational symmetry regardless of whether one arrives at it through
+operator theory or geometric packing.  What the construction
+demonstrates is that the \emph{state-counting} aspect of angular
+momentum---the degeneracy $2\ell + 1$---has a purely geometric
+derivation.
+
+
+%% ================================================================
+%%  IX.  CONCLUSIONS
+%% ================================================================
+\section{Conclusions}
+\label{sec:conclusions}
+
+The angular momentum quantum numbers $(\ell, m)$ emerge from
+uniform-density packing on isotropic shells: shell~$k$ carries
+$2k - 1$ angular slots, isomorphic to the spherical harmonic basis
+$Y_{\ell m}$ with $\ell = k - 1$.  This result follows from two
+axioms (binary distinguishability and geometric indifference) together
+with natural structural choices (concentric shells, uniform density).
+It is independent of the Schr\"odinger equation, operator postulates,
+or any specific physical system.
+
+The principal quantum number~$n$ corresponds to cumulative grouping of
+the first~$n$ shells, yielding $n^2$ orbital states.  The factor of~2
+corresponds to the orientability of the compactified packing manifold.
+These are structural correspondences---genuine mathematical
+observations that match hydrogen's quantum numbers---but they depend
+on identifications beyond what the two axioms alone determine.
+
+The $(\ell, m)$ angular sector constructed here recurs as the
+universal angular cross-section inside every natural geometry developed
+in the GeoVac series, from $S^3$ for single-electron
+atoms~\cite{paper7} through composed fiber bundles for core--valence
+molecules~\cite{paper17}.  When equipped with a graph Laplacian and
+kinetic scale, this packing becomes the foundation for a computational
+framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
+LiH, and BeH$^+$, with errors ranging from ${<}\,0.1\%$ for hydrogen
+to ${\sim}\,6\%$ for LiH equilibrium geometry, benchmarked against
+exact and experimental values.
+
+
+\section*{Acknowledgments}
+
+This work was developed using an AI-augmented workflow, with
+scientific direction and quality control by the author and
+implementation assistance from Anthropic's Claude.
+
+
+\begin{thebibliography}{99}
+
+\bibitem{fock1935}
+V.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+\textit{Z. Phys.} \textbf{98}, 145 (1935).
+
+\bibitem{bargmann1936}
+V.~Bargmann,
+``Zur Theorie des Wasserstoffatoms: Bemerkungen zur gleichnamigen
+Arbeit von V.~Fock,''
+\textit{Z. Phys.} \textbf{99}, 576 (1936).
+
+\bibitem{barut1967}
+A.~O.~Barut and H.~Kleinert,
+``Transition Probabilities of the Hydrogen Atom from Noncompact
+Dynamical Groups,''
+\textit{Phys. Rev.} \textbf{156}, 1541 (1967).
+
+\bibitem{biedenharn1981}
+L.~C.~Biedenharn and J.~D.~Louck,
+\textit{Angular Momentum in Quantum Physics: Theory and Application}
+(Addison-Wesley, Reading, MA, 1981).
+
+\bibitem{bohr1913}
+N.~Bohr,
+``On the Constitution of Atoms and Molecules,''
+\textit{Phil. Mag.} \textbf{26}, 1 (1913).
+
+\bibitem{paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
+from Graph Topology via Fock's Stereographic Projection,''
+GeoVac Paper~7 (2026).
+
+\bibitem{paper11}
+J.~Loutey,
+``Prolate Spheroidal Lattice for One-Electron Diatomics,''
+GeoVac Paper~11 (2026).
+
+\bibitem{paper13}
+J.~Loutey,
+``Hyperspherical Lattice for Two-Electron Atoms,''
+GeoVac Paper~13 (2026).
+
+\bibitem{paper15}
+J.~Loutey,
+``Molecule-Frame Hyperspherical Geometry for Two-Electron Diatomics,''
+GeoVac Paper~15 (2026).
+
+\bibitem{paper17}
+J.~Loutey,
+``Composed Natural Geometries for Core--Valence Molecules,''
+GeoVac Paper~17 (2026).
+
+\end{thebibliography}
+
+\end{document}

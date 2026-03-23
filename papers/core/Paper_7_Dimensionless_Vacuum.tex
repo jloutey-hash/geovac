@@ -12,7 +12,7 @@
 \date{\today}
 
 \begin{abstract}
-We demonstrate that the continuous Schr\"odinger equation for the hydrogen atom is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via Fock's stereographic projection, and that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit. This establishes a precise mathematical correspondence between the discrete graph formulation and wave mechanics. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
+Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
 \end{abstract}
 
 \maketitle
@@ -108,11 +108,11 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the universal kinetic scale---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum, consistent with the information-theoretic packing constraints of \cite{loutey_paper0}.
+where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum, determined by matching the Rydberg formula and consistent with the information-theoretic packing constraints of \cite{loutey_paper0}.
 
 \subsection{Intrinsic Dimensionlessness}
 
-A crucial observation about the graph $\mathcal{G}$ is that it carries \textit{no intrinsic physical scale}. The quantum numbers $(n, l, m)$ are pure integers. The edge weights $w_{ij} \propto 1/(n_i n_j)$ are dimensionless ratios. The graph Laplacian $L$ is a dimensionless matrix. The only dimensionful quantity in Eq.~\eqref{eq:hamiltonian} is the kinetic scale $\kappa$, which converts the dimensionless graph eigenvalues into physical energy units. But $\kappa$ is an \textit{external} parameter imposed at the measurement stage---it is not encoded in the graph topology itself.
+A crucial observation about the graph $\mathcal{G}$ is that it carries \textit{no intrinsic physical scale}. The quantum numbers $(n, l, m)$ are pure integers. The edge weights $w_{ij} \propto 1/(n_i n_j)$ are dimensionless ratios. The graph Laplacian $L$ is a dimensionless matrix. The only dimensionful quantity in Eq.~\eqref{eq:hamiltonian} is the kinetic scale factor $\kappa$, which converts the dimensionless graph eigenvalues into physical energy units. But $\kappa$ is an \textit{external} parameter imposed at the measurement stage---it is not encoded in the graph topology itself.
 
 This dimensionlessness is not accidental. It is a direct consequence of the graph's structure as a discrete analog of the unit three-sphere. To see this, we examine the continuum limit.
 
@@ -460,9 +460,9 @@ We have established a rigorous mathematical chain connecting the discrete GeoVac
 
 Each stage has been verified by independent symbolic computation. The 18 passing tests constitute a complete algebraic audit of the conformal transformation chain, covering: the unit sphere constraint, the conformal factor identities, the projection limits, the chordal distance identity, the dot-product form, the volume Jacobian, the inverse projection, the connection term, the conformal Laplacian of $\Omega^2$, the zero-mode annihilation, the eigenvalue equation for $n = 2$ and $n = 3$, the conformal decomposition, and the eigenvalue-to-energy mapping.
 
-\subsection{The Dimensionless Vacuum Hypothesis}
+\subsection{The Scale-Invariance Property}
 
-The mathematical evidence supports a precise structural observation: \textit{the Schr\"odinger equation for hydrogen is mathematically equivalent, under Fock's conformal projection, to the Laplace-Beltrami operator on a dimensionless, scale-invariant topology (unit $S^3$)}. The continuous equation and its dimensionful energy levels can be viewed as emergent properties of projecting this topology into observational coordinates. This is a mathematical equivalence under conformal projection, not a proof of physical priority---whether the graph or the differential equation is ``more fundamental'' is a question of physical interpretation, not of theorem.
+As Fock showed, the Schr\"odinger equation for hydrogen is mathematically equivalent, under conformal projection, to the Laplace-Beltrami operator on the unit $S^3$---a dimensionless, scale-invariant topology. What we add is the observation that the GeoVac discrete graph converges to this same structure, so the continuous equation and its dimensionful energy levels can be viewed as emergent properties of projecting a discrete topology into observational coordinates. This is a mathematical equivalence, not a proof of physical priority---whether the graph or the differential equation is ``more fundamental'' is a question of physical interpretation, not of theorem.
 
 Three features of the projection merit emphasis:
 
@@ -474,7 +474,7 @@ Three features of the projection merit emphasis:
 
 \subsection{Relation to the Coulomb Potential}
 
-A frequently asked question is: where does the $1/r$ Coulomb potential come from? In the standard formulation, $V(r) = -1/r$ is an input to the Schr\"odinger equation. In the topological formulation, it is an \textit{output} of the conformal projection.
+A frequently asked question is: where does the $1/r$ Coulomb potential come from? In the standard formulation, $V(r) = -1/r$ is an input to the Schr\"odinger equation. As Fock showed~\cite{fock1935}, in the $S^3$ formulation it is an \textit{output} of the conformal projection.
 
 The mechanism is the chordal distance identity, Eq.~\eqref{eq:chordal}. On $S^3$, the Green's function for the Laplace-Beltrami operator is $G(\mathbf{n}, \mathbf{n}') \propto 1/|\mathbf{n} - \mathbf{n}'|^2$, which is the natural interaction kernel on a sphere. Under stereographic projection, this becomes
 \begin{equation}
@@ -490,7 +490,7 @@ The results of this paper provide a formal justification for the GeoVac framewor
 
 \textit{Discretization artifacts:} The $s/p$ splitting at finite $n_{\max}$ is spectral aliasing on a compact manifold---it arises from boundary effects in the finite graph and decays as $n_{\max} \to \infty$.
 
-\textit{Universal kinetic scale:} The constant $\kappa = -1/16$ is the unique kinetic scale consistent with the Rydberg formula and the graph topology. It is not independently derived from topology alone---it is the bridge between the dimensionless graph and dimensionful physics, determined by requiring the graph eigenvalues to reproduce the hydrogen spectrum via the energy-shell projection mechanism. Its universality across all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph topology correctly encodes the \textit{relative} spectral structure.
+\textit{Kinetic scale factor:} The constant $\kappa = -1/16$ is the kinetic scale factor that bridges the dimensionless graph and dimensionful physics. It is not derived from topology alone---it is determined by requiring the graph eigenvalues to reproduce the hydrogen spectrum via the energy-shell projection mechanism. Its universality across all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph topology correctly encodes the \textit{relative} spectral structure.
 
 \subsection{Limitations}
 
@@ -498,7 +498,7 @@ Several caveats apply. First, the single-electron framework of Sections~\ref{sec
 
 \subsection{Concluding Remarks}
 
-Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. We have demonstrated that this sphere is intrinsically dimensionless---a pure topology with no physical scale---and that every dimensionful quantity in the Schr\"odinger equation is introduced by the act of projecting this topology into flat observational coordinates. Furthermore, we have shown that the GeoVac discrete graph Laplacian converges to this same $S^3$ structure in the continuum limit, establishing a rigorous mathematical foundation for the sparse graph computational approach.
+Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. The scale invariance of this sphere---the fact that it is intrinsically the \textit{unit} $S^3$ regardless of the energy-shell parameter---was implicit in Fock's treatment but has not, to our knowledge, been stated as an explicit organizing principle. We have articulated this scale-invariance property and, more importantly, demonstrated that the GeoVac discrete graph Laplacian converges to the same $S^3$ structure in the continuum limit, establishing a rigorous mathematical foundation for the sparse graph computational approach.
 
 Within this mathematical equivalence, the wave equation can be viewed as a continuous, dimensionful projection of a discrete, dimensionless topology. The Coulomb potential emerges as the coordinate distortion created by the stereographic flattening, and the energy levels emerge from the energy-shell constraint that parameterizes the projection.
 

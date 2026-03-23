@@ -5,6 +5,23 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.7] - 2026-03-22
+
+### Epistemic Calibration & Rhetorical Tightening
+
+No code changes. Rhetoric calibrated across the core paper series to properly distinguish known results from new contributions, and to use consistent terminology for κ = −1/16.
+
+#### Papers Revised
+- **Paper 0:** Rewrote Section I introduction — replaced top-down axiomatic presentation with bottom-up discovery narrative (naive spatial discretization produces angular momentum quantum numbers unsolicited). Axioms now presented as distillation of the construction, not the starting point.
+- **Paper 7:** Calibrated abstract to attribute Fock's 1935 S³ equivalence properly, foregrounding discrete graph convergence as this paper's new contribution. "Dimensionless Vacuum Hypothesis" → "Scale-Invariance Property." Added Fock attribution in Coulomb potential discussion (Sec VI.C). Concluding remarks now explicitly distinguish known (Fock's scale invariance) from new (graph convergence + organizing principle).
+- **Paper 16:** Title changed from "Chemical Periodicity as S_N Representation Theory" to "The Periodic Table Recast as S_N Representation Theory" — signals reframing rather than derivation.
+- **FCI-A (paper_fci_atoms):** Added benchmark scope paragraph acknowledging STO-3G is a minimal basis (1969), not a production standard; positions comparison honestly as minimal-basis test.
+- **Paper 6:** Removed dead TODO comment block from abstract (content was already written).
+
+#### Terminology Audit (All Papers)
+- **"universal kinetic scale" / "universal topological constant" → "kinetic scale factor"** throughout all .tex files (Papers 0, 2, 5, 7, 8-9, 14, FCI-A)
+- κ = −1/16 now consistently described as determined by Rydberg matching, not derived from topology alone
+
 ## [1.7.6] - 2026-03-22
 
 ### Paper 2: Universal Algebraic Identity & Hopf Fibration Generalization

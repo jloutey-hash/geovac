@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.6-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.7-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.7.6** - Paper 2 Universal Algebraic Identity & Hopf Fibration Generalization
+**Version 1.7.7** - Epistemic Calibration & Rhetorical Tightening
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,12 +18,19 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v1.7.6
+## What's New in v1.7.7
 
-- **Paper 2:** Universal algebraic identity B_formal/N = d for all round spheres S^d, quaternionic/octonionic Hopf negative results (1/α ≈ 970, 7164), S³ specificity sharpened (B_formal = B_branch only for d = 3), residual analysis (8.8×10⁻⁸ intrinsic, no structure)
-- **Paper 2 (v1.7.5):** Forced Hermiticity of circulant coupling, second selection principle (2·d_max = |λ₃|), transition operator–Hopf correspondence
+Epistemic calibration and rhetorical tightening across the core paper series. No code changes.
+
+- **Paper 0:** Rewrote Section I — bottom-up discovery narrative (naive spatial discretization produces angular momentum quantum numbers unsolicited). Axioms presented as distillation, not starting point.
+- **Paper 7:** Calibrated abstract to attribute Fock's 1935 S³ equivalence properly; foregrounded discrete graph convergence as this paper's contribution. "Dimensionless Vacuum Hypothesis" → "Scale-Invariance Property." Added Fock attribution in Coulomb potential discussion.
+- **Paper 16:** Title → "The Periodic Table Recast as S_N Representation Theory on S^{3N-1}" (signals reframing, not derivation).
+- **FCI-A:** Added benchmark scope paragraph — STO-3G comparison positioned honestly as minimal-basis test, not claim of production competitiveness.
+- **Paper 6:** Removed dead TODO comment block from abstract.
+- **Terminology audit (all papers):** "universal kinetic scale" / "universal topological constant" → "kinetic scale factor" throughout (Papers 0, 2, 5, 7, 8, 14, FCI-A). κ = −1/16 consistently described as determined by Rydberg matching.
 
 ### Prior Releases
+- **v1.7.6:** Paper 2 universal algebraic identity B_formal/N = d, quaternionic/octonionic Hopf negative results, residual analysis
 - **v1.7.4:** Paper 2 algebraic selection principle (B/N = 3(m+2)(m-1)/10), S³ specificity proof, spectral geometry survey (negative results)
 - **v1.7.3:** Paper 2 rewrite — statistical validation (p = 5.2×10⁻⁹), circulant Z₃ structure, derivation chain assessment
 - **v1.7.2:** Documentation review & epistemic tightening (Papers 0, 1, 16)
