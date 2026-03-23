@@ -3,12 +3,24 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v1.7.7 (March 22, 2026)
+**Version:** v1.8.0 (March 22, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The core papers in `papers/core/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
 
 **Project context:** GeoVac is an independent research project with no institutional affiliation, developed using an AI-augmented agentic workflow. The principal investigator provides scientific direction and quality control; implementation and documentation drafting are performed collaboratively with LLMs (Anthropic Claude). The primary dissemination channel is GitHub + Zenodo (DOI-stamped releases). The papers in `papers/core/` are written to academic standards but are not submitted to traditional journals. The project's viability case rests on producing a usable, benchmarked computational tool. Do not suggest formatting papers for specific journals or pursuing traditional peer review unless the user asks.
+
+---
+
+## 1.5. Positioning & Framing
+
+GeoVac is a discretization framework that exploits the natural geometry of separable quantum systems to produce sparse graph Hamiltonians. It is **not** a new foundation for quantum mechanics — it works because the graph Laplacian converges to the known continuous Laplace-Beltrami operators in the continuum limit (Paper 7).
+
+**Rhetoric rule:** When writing or editing papers, avoid language that implies quantum mechanics "emerges from" or "is derived from" graph topology. The correct framing: the graph topology is a computationally efficient discretization of known physics, and the natural geometry principle is an organizing principle for choosing coordinate systems. The underlying Fock/Bargmann mathematics is known; the new contributions are the discrete convergence, the systematic symbolic verification, and the computational methodology.
+
+**Lead with concrete advantages:** O(V) sparsity, angular momentum selection rules baked into the basis, zero-parameter construction from nuclear charges and geometry alone, efficient qubit encodings (Paper 14). These structural properties are the framework's actual selling points — not philosophical claims about the nature of quantum mechanics.
+
+**Benchmarking rule:** When comparing to other methods, always use the strongest available baseline (cc-pVTZ or better for atoms, explicitly correlated methods for molecules), not just STO-3G. If the comparison is unfavorable, say so honestly and identify what the framework offers instead (sparsity, scaling, structural insight). Position the framework as a computationally principled alternative, not as a replacement for production quantum chemistry.
 
 ---
 
@@ -19,6 +31,7 @@
 - One-electron molecules: H2+ at 0.70% (prolate spheroidal, Paper 11)
 - Two-electron molecules: H2 at 94.1% D_e (Level 4 mol-frame hyperspherical, Paper 15)
 - Core-valence molecules: LiH R_eq = 3.21 bohr, 6.4% error (composed geometry, Paper 17)
+- Qubit encoding: O(Q^3.15) Pauli terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm (Paper 14)
 - Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9, universal algebraic identity B_formal/N = d, Hopf generalization negative result, circulant Hermiticity, second selection principle (Paper 2, conjectural)
 
 **Active frontier:**
@@ -26,6 +39,7 @@
 - Polyatomic composition pattern (BeH2, H2O) via fiber bundle generalization
 - Improving Level 4 D_e recovery beyond 94% (channel convergence, cusp corrections)
 - Chemical periodicity as representation theory (Paper 16) -- computational exploitation of hierarchical structure
+- Quantum simulation cost: Gaussian scaling comparison at multiple basis sizes, VQE circuit benchmarks, commutator-based Trotter bounds
 
 **Architecture locked:** The LCAO/graph-concatenation approach (v0.9.x series) is superseded. All molecular work uses natural geometry (Papers 11, 13, 15, 17).
 
@@ -150,6 +164,9 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Rho-collapse cache | `geovac/rho_collapse_cache.py` | `AngularCache`, `FastAdiabaticPES` |
 | Quantum dynamics | `geovac/dynamics.py` | O(V) time evolution |
 | Hopf bundle | `geovac/hopf_bundle.py` | S3 embedding, Hopf projection, fiber analysis |
+| Gaussian reference | `geovac/gaussian_reference.py` | `h2_sto3g()`, `he_sto3g()`, `build_qubit_hamiltonian()` |
+| Measurement grouping | `geovac/measurement_grouping.py` | `qwc_groups()`, `analyze_measurement_cost()` |
+| Trotter bounds | `geovac/trotter_bounds.py` | `pauli_1norm()`, `trotter_steps_required()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
 
 ### Solver Methods
@@ -246,6 +263,9 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Muonic H energy ratio | < 0.01% | Mass-independence |
 | V_ee S3 overlap (1s-1s, 1s-2s, 2s-2s) | < 0.01% | Topological integrity |
 | Direct CI vs matrix CI | < 1e-8 Ha | Algorithmic consistency |
+| JW eigenvalue consistency | < 1e-4 Ha | Qubit encoding correctness |
+| H2 STO-3G Pauli terms | exactly 15 | Gaussian reference validation |
+| QWC grouping correctness | 0 violations | Measurement group integrity |
 | Speed regression | < 10% | Performance control |
 
 ---
@@ -280,6 +300,10 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Algebraic structure (SO(6)) | 13 | Sec XII | Core |
 | Qubit Pauli scaling | 14 | All | Core |
 | Structural sparsity | 14 | Sec III | Core |
+| QWC measurement groups | 14 | Sec III.E | Core |
+| Pauli 1-norm scaling | 14 | Sec III.F | Core |
+| Trotter error bounds | 14 | Sec III.F | Core |
+| Genuine Gaussian baselines | 14 | Sec III.G | Core |
 | Level 4 mol-frame hyperspherical | 15 | All | Core |
 | Mol-frame charge function | 15 | Sec III | Core |
 | Multichannel expansion | 15 | Sec V | Core |

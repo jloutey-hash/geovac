@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.7.7-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.8.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.7.7** - Epistemic Calibration & Rhetorical Tightening
+**Version 1.8.0** - Quantum Simulation Cost Analysis
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,18 +18,20 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v1.7.7
+## What's New in v1.8.0
 
-Epistemic calibration and rhetorical tightening across the core paper series. No code changes.
+Comprehensive expansion of Paper 14 (qubit encoding) with three new code modules, benchmark infrastructure, and quantitative simulation cost analysis.
 
-- **Paper 0:** Rewrote Section I — bottom-up discovery narrative (naive spatial discretization produces angular momentum quantum numbers unsolicited). Axioms presented as distillation, not starting point.
-- **Paper 7:** Calibrated abstract to attribute Fock's 1935 S³ equivalence properly; foregrounded discrete graph convergence as this paper's contribution. "Dimensionless Vacuum Hypothesis" → "Scale-Invariance Property." Added Fock attribution in Coulomb potential discussion.
-- **Paper 16:** Title → "The Periodic Table Recast as S_N Representation Theory on S^{3N-1}" (signals reframing, not derivation).
-- **FCI-A:** Added benchmark scope paragraph — STO-3G comparison positioned honestly as minimal-basis test, not claim of production competitiveness.
-- **Paper 6:** Removed dead TODO comment block from abstract.
-- **Terminology audit (all papers):** "universal kinetic scale" / "universal topological constant" → "kinetic scale factor" throughout (Papers 0, 2, 5, 7, 8, 14, FCI-A). κ = −1/16 consistently described as determined by Rydberg matching.
+- **New modules:** `gaussian_reference.py` (genuine Gaussian baselines from Szabo & Ostlund), `measurement_grouping.py` (QWC measurement groups), `trotter_bounds.py` (Pauli 1-norm and Trotter step bounds)
+- **Key result:** Pauli 1-norm scales as O(Q^1.69), R²=0.9972 — sub-quadratic simulation cost advantage for fault-tolerant quantum simulation
+- **Scaling confirmed:** O(Q^3.15) Pauli terms (R²=0.9995), O(Q^3.36) QWC groups (R²=1.0000)
+- **ERI density decay:** 10.4% → 3.9% → 2.1% → 1.3% over nmax=2–5, confirming ~1/M² selection rule
+- **Paper 14 expanded:** ~590 → ~850 lines with measurement cost (Sec III.E), simulation cost (Sec III.F), and genuine Gaussian comparison (Sec III.G)
+- **48 new tests** across 3 files, all passing
+- **Benchmark script:** `benchmarks/qubit_scaling_sweep.py` with systematic nmax sweep
 
 ### Prior Releases
+- **v1.7.7:** Epistemic calibration & rhetorical tightening (Papers 0, 7, 16, FCI-A, terminology audit)
 - **v1.7.6:** Paper 2 universal algebraic identity B_formal/N = d, quaternionic/octonionic Hopf negative results, residual analysis
 - **v1.7.4:** Paper 2 algebraic selection principle (B/N = 3(m+2)(m-1)/10), S³ specificity proof, spectral geometry survey (negative results)
 - **v1.7.3:** Paper 2 rewrite — statistical validation (p = 5.2×10⁻⁹), circulant Z₃ structure, derivation chain assessment
@@ -93,6 +95,15 @@ Epistemic calibration and rhetorical tightening across the core paper series. No
 | H$_2$ delta-kick spectroscopy | 20/35 peaks, 0.16% | PASS |
 | AIMD energy conservation | 0.0003% max drift | PASS |
 | Langevin bond dissociation | Correct thermal behavior | PASS |
+
+### Qubit Encoding (Paper 14)
+
+| Metric | GeoVac Scaling | R² | Gaussian (conventional) |
+|--------|:--------------:|:--:|:-----------------------:|
+| Pauli terms | O(Q^3.15) | 0.9995 | O(Q^4.60) |
+| QWC measurement groups | O(Q^3.36) | 1.0000 | — |
+| Pauli 1-norm (λ) | O(Q^1.69) | 0.9972 | — |
+| Trotter steps (ε=10⁻³) | O(Q^1.69) | 0.9972 | — |
 
 ### GeoVac vs PySCF (CI-validated)
 
@@ -236,6 +247,9 @@ geovac/                 Core package
   coupled_en_lattice.py   Coupled electronic-nuclear lattice
   dynamics.py             TimePropagator (Crank-Nicolson)
   aimd.py                 VelocityVerlet, LangevinThermostat
+  gaussian_reference.py   Genuine Gaussian baselines (H₂ STO-3G, He STO-3G)
+  measurement_grouping.py QWC measurement group analysis
+  trotter_bounds.py       Pauli 1-norm and Trotter error bounds
   hopf_bundle.py          Hopf fibration analysis (S³→S², α derivation)
   wigner_so4.py           SO(4) Wigner D-matrix elements
   atomic_solver.py        Single-electron atom solver
@@ -283,6 +297,9 @@ tests/                  Unit tests (pytest) + validation
   test_composed_diatomic.py 22 tests (general composed solver)
   test_ab_initio_pk.py      24 tests (ab initio PK)
   test_ab_initio_pk_v2.py   7 tests (PK v2 validation)
+  test_gaussian_reference.py  12 tests (Gaussian baseline integrals)
+  test_measurement_grouping.py 20 tests (QWC grouping correctness)
+  test_trotter_bounds.py    16 tests (1-norm, Trotter steps)
 
 demo/                   Demonstrations (H2, spectroscopy, AIMD)
 debug/                  Development scratchpad + generated data/plots
@@ -306,7 +323,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H2+ 0.70% |
 | **12** | **Algebraic V_ee** | **Neumann expansion, H2 92.4% D_e** |
 | **13** | **Hyperspherical Lattice** | **He 0.05%, SO(6) Casimir, algebraic structure, Li SO(9)** |
-| **14** | **Qubit Hamiltonians** | **O(Q^3.15) Pauli scaling, structural sparsity** |
+| **14** | **Qubit Hamiltonians** | **O(Q^3.15) terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm** |
 | **15** | **Level 4 Geometry** | **H₂ 94.1%, HeH⁺ 93.1%, 2D solver** |
 | **16** | **Chemical Periodicity** | **μ_free = 2(N-2)², S_N irreps, periodic law** |
 | **17** | **Composed Geometries** | **LiH R_eq 6.4%, BeH⁺, ab initio PK, zero molecular fitting** |
@@ -325,7 +342,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 - Few-electron atoms (2-4 electrons) via sparse Full CI
 - Ab initio molecular spectroscopy (electron lattice -> PES -> rovibrational lines)
 - O(V) scaling for all single-particle operations
-- Efficient qubit encoding: O(Q^3.15) Pauli terms vs O(Q^4.60) conventional
+- Efficient qubit encoding: O(Q^3.15) Pauli terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm vs O(Q^4.60) conventional
 - Core-valence diatomics (LiH, BeH⁺) via composed Level 3+4 geometry with ab initio pseudopotential
 - Time-dependent dynamics via sparse Crank-Nicolson propagation
 
@@ -349,7 +366,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.7.6},
+  version = {1.8.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

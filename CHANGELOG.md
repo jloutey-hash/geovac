@@ -5,6 +5,58 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-03-22
+
+### Quantum Simulation Cost Analysis (Paper 14 Expansion)
+
+Comprehensive expansion of Paper 14 (qubit encoding) with three new code modules, benchmark infrastructure, and three new results sections quantifying measurement and simulation costs.
+
+#### New Modules
+- **gaussian_reference.py**: Genuine Gaussian baseline Hamiltonians from published integrals
+  - `h2_sto3g(R)` — H₂ STO-3G from Szabo & Ostlund Table 3.15 (Hehre/Stewart/Pople JCP 1969)
+  - `he_sto3g()` — He STO-3G from analytical single-center integrals
+  - `build_qubit_hamiltonian()` — JW transform for Gaussian systems
+- **measurement_grouping.py**: Qubit-wise commuting (QWC) measurement group analysis
+  - `qwc_groups(qubit_op)` — Greedy sorted-insertion QWC partitioning
+  - `analyze_measurement_cost(qubit_op)` — Full measurement cost metrics
+  - `compare_measurement_cost()` — Side-by-side GeoVac vs Gaussian comparison
+- **trotter_bounds.py**: First-order Trotter error bounds and simulation cost
+  - `pauli_1norm(qubit_op)` — Pauli coefficient 1-norm (lambda)
+  - `trotter_steps_required()` — Steps for target accuracy from Campbell PRL 2019
+  - `analyze_trotter_cost(qubit_op)` — Full Trotter cost analysis
+
+#### New Benchmark
+- **benchmarks/qubit_scaling_sweep.py**: Systematic sweep across nmax=2–5
+  - Collects Pauli terms, QWC groups, 1-norms, Trotter steps
+  - Fits power-law scaling exponents with R² values
+  - Outputs `qubit_scaling_data.json` and `qubit_scaling_summary.txt`
+
+#### Scaling Exponents (GeoVac He, 2e)
+
+| Metric | Exponent | R² | Gaussian baseline |
+|--------|:--------:|:--:|:-----------------:|
+| Pauli terms | Q^3.15 | 0.9995 | Q^4.60 (conventional) |
+| QWC measurement groups | Q^3.36 | 1.0000 | — |
+| Pauli 1-norm (λ) | Q^1.69 | 0.9972 | — |
+| Trotter steps (ε=10⁻³) | Q^1.69 | 0.9972 | — |
+
+#### Paper 14 Expanded (~590 → ~850 lines)
+- **Sec III.E:** Measurement cost — QWC grouping analysis, O(Q^3.36) scaling
+- **Sec III.F:** Simulation cost — Pauli 1-norm, first-order Trotter bounds, O(Q^1.69) scaling
+- **Sec III.G:** Genuine Gaussian comparison — published integrals replace placeholder estimates
+- **Updated:** Abstract, discussion, limitations, and conclusion with new metrics
+- **New bibliography:** Campbell PRL 2019 (Trotter bounds), Hehre/Stewart/Pople JCP 1969 (STO-3G basis)
+
+#### ERI Density Decay
+- 10.4% → 3.9% → 2.1% → 1.3% over nmax=2–5
+- Confirms ~1/M² selection rule from angular momentum conservation
+
+#### Tests
+- 48 new tests across 3 files:
+  - `tests/test_gaussian_reference.py` — 12 tests (integral validation, JW consistency)
+  - `tests/test_measurement_grouping.py` — 20 tests (QWC correctness, grouping, scaling)
+  - `tests/test_trotter_bounds.py` — 16 tests (1-norm, Trotter steps, cost analysis)
+
 ## [1.7.7] - 2026-03-22
 
 ### Epistemic Calibration & Rhetorical Tightening
