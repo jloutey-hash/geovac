@@ -1,0 +1,22 @@
+{
+  "cc-pVDZ": {
+    "basis": "cc-pVDZ",
+    "n_spatial": 5,
+    "n_qubits": 10,
+    "fci_energy": -2.887594831091004,
+    "exact_he_energy": -2.903724,
+    "error_pct": 0.5554649446364723,
+    "n_pauli_terms": 178,
+    "integral_time_s": 60.1
+  },
+  "cc-pVTZ": {
+    "basis": "cc-pVTZ",
+    "n_spatial": 14,
+    "n_qubits": 28,
+    "fci_energy": -2.97450860546176,
+    "exact_he_energy": -2.903724,
+    "error_pct": 2.437718097923908,
+    "n_pauli_terms": 24807,
+    "integral_time_s": 1602.3
+  }
+}

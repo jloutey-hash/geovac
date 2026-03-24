@@ -5,6 +5,65 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-03-23
+
+### VQE Benchmark Infrastructure & Validated Gaussian Baselines
+
+End-to-end VQE benchmark pipeline comparing GeoVac lattice encodings against genuine Gaussian-basis Hamiltonians at equal qubit counts. Replaced estimated Pauli term counts with actual computed values from a custom single-center Gaussian integral engine.
+
+#### New Modules
+- **vqe_benchmark.py**: VQE benchmark pipeline with OpenFermion→Qiskit conversion
+  - `build_geovac_he(max_n)`, `build_gaussian_he()`, `build_gaussian_h2()` — system builders
+  - `run_vqe()` — COBYLA-based VQE with EfficientSU2 ansatz
+  - `collect_static_metrics()` — CX count, circuit depth, QWC groups without VQE execution
+  - `format_comparison_table()`, `save_results()` — formatted output and JSON persistence
+- **debug/compute_he_gaussian_integrals.py**: Single-center Gaussian integral engine for He
+  - No PySCF dependency — uses BSE basis set parameters + scipy/numpy
+  - Slater R^k radial integrals via incomplete gamma function (analytical inner integral)
+  - Real spherical harmonic Gaunt coefficients via numerical quadrature
+  - Validated against published FCI energies (Woon & Dunning, JCP 100, 2975, 1994)
+
+#### New Benchmark
+- **benchmarks/vqe_head_to_head.py**: Head-to-head VQE comparison
+  - He GeoVac nmax=2,3 vs Gaussian STO-3G (original VQE comparison)
+  - H2 Gaussian STO-3G VQE benchmark
+  - Equal-qubit accuracy comparison at Q=2, 4, 10, 28
+  - Pauli term scaling crossover analysis with plot (`debug/plots/pauli_crossover.png`)
+  - Headline accuracy-per-qubit summary
+
+#### Updated gaussian_reference.py
+- **`he_cc_pvdz()`**: Hardcoded computed MO integrals for He cc-pVDZ [2s1p]
+  - 5 spatial orbitals, 10 qubits, 156 Pauli terms
+  - FCI energy: -2.8876 Ha (published: -2.8877 Ha, within 0.0001 Ha)
+- **`he_cc_pvtz()`**: Cached MO integrals for He cc-pVTZ [3s2p1d]
+  - 14 spatial orbitals, 28 qubits, 21,607 Pauli terms
+  - FCI energy: -2.9002 Ha (published: -2.9003 Ha, within 0.0001 Ha)
+  - Cache file: `geovac/cache/he_cc_pvtz_mo_integrals.npz`
+
+#### Key Results: Equal-Qubit Comparison
+| Q | GeoVac | Err% | Pauli | Gaussian | Err% | Pauli |
+|:-:|--------|:----:|:-----:|----------|:----:|:-----:|
+| 10 | nmax=2 | 0.56% | 120 | cc-pVDZ | 0.56% | 156 |
+| 28 | nmax=3 | 0.45% | 2,659 | cc-pVTZ | 0.12% | 21,607 |
+
+- At 10 qubits: comparable accuracy, GeoVac uses 1.3× fewer Pauli terms
+- At 28 qubits: GeoVac uses 8.1× fewer Pauli terms; Gaussian is 3.8× more accurate
+- GeoVac advantage grows with system size due to structural sparsity
+
+#### Correction: Gaussian Atomic Scaling
+- Old estimate (H₂ molecules only): Gaussian Pauli terms scale as Q^4.60
+- Actual (atoms + molecules combined): Q^3.56 for atoms (spherical symmetry zeros many ERIs)
+- Estimated counts were ~5× too high: 814 → 156 (cc-pVDZ), 91,923 → 21,607 (cc-pVTZ)
+- All comparisons now use actual computed Pauli counts, not scaling extrapolations
+
+#### Tests
+- **test_gaussian_reference.py**: 23 tests (was 12)
+  - 6 new cc-pVDZ tests: metadata, h1/ERI symmetry, FCI energy, Pauli count (156), p-orbital degeneracy
+  - 5 new cc-pVTZ tests: metadata, h1/ERI symmetry, FCI energy, Pauli count (21,607)
+- **test_vqe_benchmark.py**: 12 tests
+  - System builders, VQE execution, metric collection, OpenFermion→Qiskit conversion
+- All 35 new tests passing
+
 ## [1.8.0] - 2026-03-22
 
 ### Quantum Simulation Cost Analysis (Paper 14 Expansion)

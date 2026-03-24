@@ -1,0 +1,119 @@
+{
+  "equal_qubit_comparison": [
+    {
+      "qubits": 2,
+      "geovac_encoding": "\u2014",
+      "geovac_error_pct": null,
+      "geovac_pauli": null,
+      "geovac_energy": null,
+      "gaussian_encoding": "He STO-3G (1 spatial)",
+      "gaussian_error_pct": 1.930899768710793,
+      "gaussian_pauli": 4,
+      "gaussian_energy": -2.847656
+    },
+    {
+      "qubits": 4,
+      "geovac_encoding": "\u2014",
+      "geovac_error_pct": null,
+      "geovac_pauli": null,
+      "geovac_energy": null,
+      "gaussian_encoding": "H2 STO-3G (2 spatial)",
+      "gaussian_error_pct": 3.1673052362707637,
+      "gaussian_pauli": 15,
+      "gaussian_energy": -1.1373
+    },
+    {
+      "qubits": 10,
+      "geovac_encoding": "He nmax=2 (5 spatial)",
+      "geovac_error_pct": 0.5564999177956912,
+      "geovac_pauli": 120,
+      "geovac_energy": -2.887564778326986,
+      "gaussian_encoding": "He cc-pVDZ (5 spatial)",
+      "gaussian_error_pct": 0.5554649443266663,
+      "gaussian_pauli": 156,
+      "gaussian_energy": -2.8875948311
+    },
+    {
+      "qubits": 28,
+      "geovac_encoding": "He nmax=3 (14 spatial)",
+      "geovac_error_pct": 0.45192168223546053,
+      "geovac_pauli": 2659,
+      "geovac_energy": -2.890601441651725,
+      "gaussian_encoding": "He cc-pVTZ (14 spatial)",
+      "gaussian_error_pct": 0.12025354280524227,
+      "gaussian_pauli": 21607,
+      "gaussian_energy": -2.900232169016714
+    }
+  ],
+  "crossover_analysis": {
+    "geovac_alpha": 3.147,
+    "gaussian_alpha": 3.559,
+    "crossover_qubits": 0.2
+  },
+  "geovac_measured_data": [
+    {
+      "nmax": 2,
+      "n_spatial": 5,
+      "n_qubits": 10,
+      "pauli_terms": 120
+    },
+    {
+      "nmax": 3,
+      "n_spatial": 14,
+      "n_qubits": 28,
+      "pauli_terms": 2659
+    },
+    {
+      "nmax": 4,
+      "n_spatial": 30,
+      "n_qubits": 60,
+      "pauli_terms": 31039
+    },
+    {
+      "nmax": 5,
+      "n_spatial": 55,
+      "n_qubits": 110,
+      "pauli_terms": 227338
+    }
+  ],
+  "gaussian_h2_data": [
+    {
+      "basis": "STO-3G",
+      "n_qubits": 4,
+      "pauli_terms": 15
+    },
+    {
+      "basis": "6-31G",
+      "n_qubits": 8,
+      "pauli_terms": 201
+    },
+    {
+      "basis": "cc-pVDZ",
+      "n_qubits": 20,
+      "pauli_terms": 23189
+    }
+  ],
+  "gaussian_he_data": [
+    {
+      "basis": "He STO-3G",
+      "n_qubits": 2,
+      "pauli_terms": 4
+    },
+    {
+      "basis": "He cc-pVDZ",
+      "n_qubits": 10,
+      "pauli_terms": 156
+    },
+    {
+      "basis": "He cc-pVTZ",
+      "n_qubits": 28,
+      "pauli_terms": 21607
+    }
+  ],
+  "notes": {
+    "geovac_pauli_terms": "Measured from JW encoding (Paper 14)",
+    "gaussian_pauli_q10_q28": "Actual JW term counts from computed MO integrals (single-center Gaussian engine, see gaussian_reference.py)",
+    "gaussian_fci_energies": "Computed from cc-pVDZ/cc-pVTZ basis sets; Woon & Dunning, JCP 100, 2975 (1994)",
+    "he_exact_energy": -2.903724
+  }
+}

@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.8.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-1.9.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 1.8.0** - Quantum Simulation Cost Analysis
+**Version 1.9.0** - VQE Benchmark Infrastructure & Validated Gaussian Baselines
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,19 +18,18 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v1.8.0
+## What's New in v1.9.0
 
-Comprehensive expansion of Paper 14 (qubit encoding) with three new code modules, benchmark infrastructure, and quantitative simulation cost analysis.
+VQE benchmark infrastructure with validated Gaussian baselines replacing estimated Pauli term counts.
 
-- **New modules:** `gaussian_reference.py` (genuine Gaussian baselines from Szabo & Ostlund), `measurement_grouping.py` (QWC measurement groups), `trotter_bounds.py` (Pauli 1-norm and Trotter step bounds)
-- **Key result:** Pauli 1-norm scales as O(Q^1.69), R²=0.9972 — sub-quadratic simulation cost advantage for fault-tolerant quantum simulation
-- **Scaling confirmed:** O(Q^3.15) Pauli terms (R²=0.9995), O(Q^3.36) QWC groups (R²=1.0000)
-- **ERI density decay:** 10.4% → 3.9% → 2.1% → 1.3% over nmax=2–5, confirming ~1/M² selection rule
-- **Paper 14 expanded:** ~590 → ~850 lines with measurement cost (Sec III.E), simulation cost (Sec III.F), and genuine Gaussian comparison (Sec III.G)
-- **48 new tests** across 3 files, all passing
-- **Benchmark script:** `benchmarks/qubit_scaling_sweep.py` with systematic nmax sweep
+- **New VQE pipeline:** `vqe_benchmark.py` — OpenFermion→Qiskit conversion, head-to-head He/H₂ comparison
+- **Computed Gaussian integrals:** Custom single-center integral engine (no PySCF dependency) produces actual He cc-pVDZ (156 Pauli terms) and cc-pVTZ (21,607 terms)
+- **Equal-qubit comparison:** At Q=10, GeoVac 120 vs Gaussian 156 Pauli terms (1.3× advantage, same 0.56% accuracy). At Q=28, GeoVac 2,659 vs Gaussian 21,607 (8.1× advantage)
+- **Scaling correction:** Gaussian atomic scaling is Q^3.56 (not Q^4.60 which applies to molecules). Old estimates were ~5× too high
+- **35 new tests** (23 gaussian_reference + 12 vqe_benchmark), all passing
 
 ### Prior Releases
+- **v1.8.0:** Quantum Simulation Cost Analysis — O(Q^1.69) Pauli 1-norm, measurement/simulation cost modules, 48 tests
 - **v1.7.7:** Epistemic calibration & rhetorical tightening (Papers 0, 7, 16, FCI-A, terminology audit)
 - **v1.7.6:** Paper 2 universal algebraic identity B_formal/N = d, quaternionic/octonionic Hopf negative results, residual analysis
 - **v1.7.4:** Paper 2 algebraic selection principle (B/N = 3(m+2)(m-1)/10), S³ specificity proof, spectral geometry survey (negative results)
@@ -100,10 +99,19 @@ Comprehensive expansion of Paper 14 (qubit encoding) with three new code modules
 
 | Metric | GeoVac Scaling | R² | Gaussian (conventional) |
 |--------|:--------------:|:--:|:-----------------------:|
-| Pauli terms | O(Q^3.15) | 0.9995 | O(Q^4.60) |
+| Pauli terms | O(Q^3.15) | 0.9995 | O(Q^4.60) molecules / O(Q^3.56) atoms |
 | QWC measurement groups | O(Q^3.36) | 1.0000 | — |
 | Pauli 1-norm (λ) | O(Q^1.69) | 0.9972 | — |
 | Trotter steps (ε=10⁻³) | O(Q^1.69) | 0.9972 | — |
+
+#### Equal-Qubit Comparison (He atom, validated v1.9.0)
+
+| Q | GeoVac Encoding | Error | Pauli Terms | Gaussian Encoding | Error | Pauli Terms | Advantage |
+|:-:|:----------------|:-----:|:-----------:|:------------------|:-----:|:-----------:|:---------:|
+| 10 | nmax=2 (5 spatial) | 0.56% | 120 | cc-pVDZ (5 spatial) | 0.56% | 156 | 1.3× |
+| 28 | nmax=3 (14 spatial) | 0.45% | 2,659 | cc-pVTZ (14 spatial) | 0.12% | 21,607 | 8.1× |
+
+Gaussian Pauli counts are actual JW term counts from computed MO integrals (not scaling estimates).
 
 ### GeoVac vs PySCF (CI-validated)
 
@@ -247,7 +255,8 @@ geovac/                 Core package
   coupled_en_lattice.py   Coupled electronic-nuclear lattice
   dynamics.py             TimePropagator (Crank-Nicolson)
   aimd.py                 VelocityVerlet, LangevinThermostat
-  gaussian_reference.py   Genuine Gaussian baselines (H₂ STO-3G, He STO-3G)
+  vqe_benchmark.py        VQE pipeline (OpenFermion→Qiskit, head-to-head comparison)
+  gaussian_reference.py   Gaussian baselines (H₂ STO-3G, He STO-3G/cc-pVDZ/cc-pVTZ)
   measurement_grouping.py QWC measurement group analysis
   trotter_bounds.py       Pauli 1-norm and Trotter error bounds
   hopf_bundle.py          Hopf fibration analysis (S³→S², α derivation)
@@ -297,7 +306,8 @@ tests/                  Unit tests (pytest) + validation
   test_composed_diatomic.py 22 tests (general composed solver)
   test_ab_initio_pk.py      24 tests (ab initio PK)
   test_ab_initio_pk_v2.py   7 tests (PK v2 validation)
-  test_gaussian_reference.py  12 tests (Gaussian baseline integrals)
+  test_gaussian_reference.py  23 tests (Gaussian baseline integrals, cc-pVDZ, cc-pVTZ)
+  test_vqe_benchmark.py     12 tests (VQE pipeline, system builders, metrics)
   test_measurement_grouping.py 20 tests (QWC grouping correctness)
   test_trotter_bounds.py    16 tests (1-norm, Trotter steps)
 
@@ -342,7 +352,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 - Few-electron atoms (2-4 electrons) via sparse Full CI
 - Ab initio molecular spectroscopy (electron lattice -> PES -> rovibrational lines)
 - O(V) scaling for all single-particle operations
-- Efficient qubit encoding: O(Q^3.15) Pauli terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm vs O(Q^4.60) conventional
+- Efficient qubit encoding: O(Q^3.15) Pauli terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm; 1.3×–8.1× fewer Pauli terms vs Gaussian at equal qubit count
 - Core-valence diatomics (LiH, BeH⁺) via composed Level 3+4 geometry with ab initio pseudopotential
 - Time-dependent dynamics via sparse Crank-Nicolson propagation
 
@@ -366,7 +376,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
   author = {J. Loutey},
   title = {GeoVac: Computational Quantum Chemistry via Spectral Graph Theory},
   year = {2026},
-  version = {1.8.0},
+  version = {1.9.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```

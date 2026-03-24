@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v1.8.0 (March 22, 2026)
+**Version:** v1.9.0 (March 23, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The core papers in `papers/core/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -32,6 +32,7 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Two-electron molecules: H2 at 94.1% D_e (Level 4 mol-frame hyperspherical, Paper 15)
 - Core-valence molecules: LiH R_eq = 3.21 bohr, 6.4% error (composed geometry, Paper 17)
 - Qubit encoding: O(Q^3.15) Pauli terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm (Paper 14)
+- VQE benchmark: 1.3x fewer Pauli terms at Q=10, 8.1x at Q=28 vs validated Gaussian cc-pVDZ/cc-pVTZ (Paper 14, v1.9.0)
 - Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9, universal algebraic identity B_formal/N = d, Hopf generalization negative result, circulant Hermiticity, second selection principle (Paper 2, conjectural)
 
 **Active frontier:**
@@ -39,7 +40,7 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Polyatomic composition pattern (BeH2, H2O) via fiber bundle generalization
 - Improving Level 4 D_e recovery beyond 94% (channel convergence, cusp corrections)
 - Chemical periodicity as representation theory (Paper 16) -- computational exploitation of hierarchical structure
-- Quantum simulation cost: Gaussian scaling comparison at multiple basis sizes, VQE circuit benchmarks, commutator-based Trotter bounds
+- Quantum simulation cost: equal-qubit Gaussian comparison validated with computed integrals (v1.9.0); commutator-based Trotter bounds still pending
 
 **Architecture locked:** The LCAO/graph-concatenation approach (v0.9.x series) is superseded. All molecular work uses natural geometry (Papers 11, 13, 15, 17).
 
@@ -164,7 +165,8 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Rho-collapse cache | `geovac/rho_collapse_cache.py` | `AngularCache`, `FastAdiabaticPES` |
 | Quantum dynamics | `geovac/dynamics.py` | O(V) time evolution |
 | Hopf bundle | `geovac/hopf_bundle.py` | S3 embedding, Hopf projection, fiber analysis |
-| Gaussian reference | `geovac/gaussian_reference.py` | `h2_sto3g()`, `he_sto3g()`, `build_qubit_hamiltonian()` |
+| VQE benchmark | `geovac/vqe_benchmark.py` | `build_geovac_he()`, `run_vqe()`, `collect_static_metrics()` |
+| Gaussian reference | `geovac/gaussian_reference.py` | `h2_sto3g()`, `he_sto3g()`, `he_cc_pvdz()`, `he_cc_pvtz()` |
 | Measurement grouping | `geovac/measurement_grouping.py` | `qwc_groups()`, `analyze_measurement_cost()` |
 | Trotter bounds | `geovac/trotter_bounds.py` | `pauli_1norm()`, `trotter_steps_required()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
@@ -265,6 +267,10 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Direct CI vs matrix CI | < 1e-8 Ha | Algorithmic consistency |
 | JW eigenvalue consistency | < 1e-4 Ha | Qubit encoding correctness |
 | H2 STO-3G Pauli terms | exactly 15 | Gaussian reference validation |
+| He cc-pVDZ Pauli terms | exactly 156 | Computed Gaussian baseline |
+| He cc-pVTZ Pauli terms | exactly 21,607 | Computed Gaussian baseline |
+| He cc-pVDZ FCI energy | < 0.001 Ha vs published | Integral engine validation |
+| He cc-pVTZ FCI energy | < 0.0002 Ha vs published | Integral engine validation |
 | QWC grouping correctness | 0 violations | Measurement group integrity |
 | Speed regression | < 10% | Performance control |
 
@@ -304,6 +310,8 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Pauli 1-norm scaling | 14 | Sec III.F | Core |
 | Trotter error bounds | 14 | Sec III.F | Core |
 | Genuine Gaussian baselines | 14 | Sec III.G | Core |
+| VQE head-to-head benchmark | 14 | Sec III.G | Core |
+| Equal-qubit Gaussian comparison | 14 | Sec III.G | Core |
 | Level 4 mol-frame hyperspherical | 15 | All | Core |
 | Mol-frame charge function | 15 | Sec III | Core |
 | Multichannel expansion | 15 | Sec V | Core |

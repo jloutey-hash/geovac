@@ -24,6 +24,7 @@ Author: GeoVac Development Team
 Date: March 2026
 """
 
+from pathlib import Path
 from typing import Dict, Any, Tuple
 
 import numpy as np
@@ -223,6 +224,169 @@ def h2_631g(R: float = 1.4) -> Dict[str, Any]:
         "Run the PySCF snippet in this function's docstring to generate "
         "the h1 (4x4) and eri (4x4x4x4) arrays, then hardcode them here."
     )
+
+
+# ---------------------------------------------------------------------------
+# He cc-pVDZ — computed MO integrals
+# ---------------------------------------------------------------------------
+# Integrals computed from cc-pVDZ basis set [2s1p] (Woon & Dunning, 1994)
+# using a single-center Gaussian integral engine with real spherical
+# harmonics, Slater R^k radial integrals, and real Gaunt coefficients.
+# See debug/compute_he_gaussian_integrals.py for the integral engine.
+#
+# FCI energy: -2.8875948311 Ha (exact within basis for 2 electrons)
+# Published reference: -2.8877 Ha (Woon & Dunning, JCP 100, 2975, 1994)
+# Difference: 0.0001 Ha — within numerical integration tolerance.
+
+def he_cc_pvdz() -> Dict[str, Any]:
+    """
+    Helium atom in cc-pVDZ basis (5 spatial orbitals, 10 spin-orbitals).
+
+    Basis: cc-pVDZ [2s1p] from Woon & Dunning, JCP 100, 2975 (1994).
+    MO basis: eigenstates of the core Hamiltonian (T + V_ne).
+    Orbital ordering: 1s, 2s, 2p_x, 2p_y, 2p_z.
+
+    FCI energy (exact within basis): -2.8876 Ha.
+    156 Pauli terms after Jordan-Wigner encoding.
+
+    Returns
+    -------
+    dict
+        Keys: h1, eri, nuclear_repulsion, n_electrons, n_spatial,
+              description, literature_energy, source.
+    """
+    n_spatial = 5
+
+    # One-electron integrals in MO basis (diagonal — eigenstates of h_core)
+    h1 = np.diag([-1.99362334, -0.03762721, 0.78499729, 0.78499729, 0.78499729])
+
+    # Two-electron integrals in chemist notation (pq|rs), MO basis
+    # Computed from cc-pVDZ Gaussians via Slater R^k expansion with
+    # real Gaunt coefficients. Only unique nonzero elements listed.
+    eri = np.zeros((n_spatial, n_spatial, n_spatial, n_spatial))
+
+    # s-s block
+    eri[0, 0, 0, 0] = 1.24534987
+    eri[0, 0, 1, 1] = 0.81704098;  eri[1, 1, 0, 0] = 0.81704098
+    eri[1, 1, 1, 1] = 0.62811238
+    eri[0, 0, 0, 1] = 0.33726197;  eri[0, 1, 0, 0] = 0.33726197
+    eri[0, 0, 1, 0] = 0.33726197;  eri[1, 0, 0, 0] = 0.33726197
+    eri[0, 1, 0, 1] = 0.18695371;  eri[1, 0, 1, 0] = 0.18695371
+    eri[0, 1, 1, 0] = 0.18695371;  eri[1, 0, 0, 1] = 0.18695371
+    eri[1, 1, 0, 1] = 0.16134384;  eri[0, 1, 1, 1] = 0.16134384
+    eri[1, 1, 1, 0] = 0.16134384;  eri[1, 0, 1, 1] = 0.16134384
+
+    # s-p Coulomb (same for all p components by spherical symmetry)
+    for p in range(2, 5):
+        eri[0, 0, p, p] = 1.03082782;  eri[p, p, 0, 0] = 1.03082782
+        eri[1, 1, p, p] = 0.70538742;  eri[p, p, 1, 1] = 0.70538742
+        eri[0, 1, p, p] = 0.18794441;  eri[p, p, 0, 1] = 0.18794441
+        eri[1, 0, p, p] = 0.18794441;  eri[p, p, 1, 0] = 0.18794441
+
+    # s-p exchange
+    for p in range(2, 5):
+        eri[0, p, 0, p] = 0.18720434;  eri[p, 0, p, 0] = 0.18720434
+        eri[0, p, p, 0] = 0.18720434;  eri[p, 0, 0, p] = 0.18720434
+        eri[1, p, 1, p] = 0.02447355;  eri[p, 1, p, 1] = 0.02447355
+        eri[1, p, p, 1] = 0.02447355;  eri[p, 1, 1, p] = 0.02447355
+        # Cross s-p exchange
+        eri[0, p, 1, p] = -0.00099483;  eri[p, 0, p, 1] = -0.00099483
+        eri[0, p, p, 1] = -0.00099483;  eri[p, 0, 1, p] = -0.00099483
+        eri[1, p, 0, p] = -0.00099483;  eri[p, 1, p, 0] = -0.00099483
+        eri[1, p, p, 0] = -0.00099483;  eri[p, 1, 0, p] = -0.00099483
+
+    # p-p block: Coulomb and exchange (spherical symmetry)
+    for p in range(2, 5):
+        eri[p, p, p, p] = 1.04053090
+        for q in range(2, 5):
+            if q != p:
+                eri[p, p, q, q] = 0.91311895
+                eri[p, q, p, q] = 0.06370597
+                eri[p, q, q, p] = 0.06370597
+
+    literature_energy = -2.8875948311
+
+    return {
+        'h1': h1,
+        'eri': eri,
+        'nuclear_repulsion': 0.0,
+        'n_electrons': 2,
+        'n_spatial': n_spatial,
+        'description': 'He cc-pVDZ [2s1p], 5 spatial orbitals (computed)',
+        'literature_energy': literature_energy,
+        'source': (
+            'MO integrals computed from cc-pVDZ basis (Woon & Dunning, '
+            'JCP 100, 2975, 1994) using single-center Gaussian integral '
+            'engine with real Gaunt coefficients. '
+            'See debug/compute_he_gaussian_integrals.py.'
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
+# He cc-pVTZ — cached MO integrals
+# ---------------------------------------------------------------------------
+
+def he_cc_pvtz() -> Dict[str, Any]:
+    """
+    Helium atom in cc-pVTZ basis (14 spatial orbitals, 28 spin-orbitals).
+
+    Basis: cc-pVTZ [3s2p1d] from Woon & Dunning, JCP 100, 2975 (1994).
+    MO integrals loaded from cache (computed by the single-center
+    Gaussian integral engine).
+
+    FCI energy (exact within basis): -2.9002 Ha.
+    21,607 Pauli terms after Jordan-Wigner encoding.
+
+    Returns
+    -------
+    dict
+        Keys: h1, eri, nuclear_repulsion, n_electrons, n_spatial,
+              description, literature_energy, source.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the cached integral file is not found. Run
+        debug/compute_he_gaussian_integrals.py to regenerate.
+    """
+    cache_path = Path(__file__).parent / 'cache' / 'he_cc_pvtz_mo_integrals.npz'
+    if not cache_path.exists():
+        raise FileNotFoundError(
+            f"cc-pVTZ integral cache not found at {cache_path}. "
+            "Run debug/compute_he_gaussian_integrals.py to generate it."
+        )
+
+    data = np.load(cache_path)
+    h1 = data['h1_mo']
+    eri = data['eri_mo']
+    literature_energy = float(data['fci_energy'])
+
+    return {
+        'h1': h1,
+        'eri': eri,
+        'nuclear_repulsion': 0.0,
+        'n_electrons': 2,
+        'n_spatial': 14,
+        'description': 'He cc-pVTZ [3s2p1d], 14 spatial orbitals (computed)',
+        'literature_energy': literature_energy,
+        'source': (
+            'MO integrals computed from cc-pVTZ basis (Woon & Dunning, '
+            'JCP 100, 2975, 1994) using single-center Gaussian integral '
+            'engine with real Gaunt coefficients. '
+            'See debug/compute_he_gaussian_integrals.py.'
+        ),
+    }
+
+
+# Gaussian scaling fit (H2 data from Paper 14) — kept for reference
+_GAUSS_ALPHA = 4.591
+_GAUSS_C = 0.02087
+
+
+def _estimate_gaussian_pauli_terms(n_qubits: int) -> int:
+    """Estimate Pauli term count for a dense-ERI Gaussian Hamiltonian."""
+    return int(round(_GAUSS_C * n_qubits ** _GAUSS_ALPHA))
 
 
 # ---------------------------------------------------------------------------

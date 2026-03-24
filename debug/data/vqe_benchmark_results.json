@@ -1,0 +1,62 @@
+[
+  {
+    "system": "He",
+    "encoding": "GeoVac nmax=2",
+    "n_qubits": 10,
+    "n_pauli_terms": 120,
+    "cx_count": 9,
+    "circuit_depth": 13,
+    "n_qwc_groups": 25,
+    "vqe_energy": -2.7395634787402114,
+    "exact_energy": -2.887564778326986,
+    "error_ha": 0.14800129958677477,
+    "error_pct": 5.125471147785803,
+    "n_iterations": 500,
+    "wall_time_s": 7.68
+  },
+  {
+    "system": "He",
+    "encoding": "STO-3G",
+    "n_qubits": 2,
+    "n_pauli_terms": 4,
+    "cx_count": 1,
+    "circuit_depth": 5,
+    "n_qwc_groups": 1,
+    "vqe_energy": -2.8476562495546456,
+    "exact_energy": -2.84765625,
+    "error_ha": 4.4535442000892544e-10,
+    "error_pct": 1.5639332170409452e-08,
+    "n_iterations": 118,
+    "wall_time_s": 0.41
+  },
+  {
+    "system": "He",
+    "encoding": "GeoVac nmax=3",
+    "n_qubits": 28,
+    "n_pauli_terms": 2659,
+    "cx_count": 27,
+    "circuit_depth": 31,
+    "n_qwc_groups": 791,
+    "vqe_energy": NaN,
+    "exact_energy": -2.890601441651725,
+    "error_ha": NaN,
+    "error_pct": NaN,
+    "n_iterations": 0,
+    "wall_time_s": 0.0
+  },
+  {
+    "system": "H2",
+    "encoding": "STO-3G",
+    "n_qubits": 4,
+    "n_pauli_terms": 15,
+    "cx_count": 6,
+    "circuit_depth": 11,
+    "n_qwc_groups": 5,
+    "vqe_energy": -1.133939378136958,
+    "exact_energy": -1.1372852150654738,
+    "error_ha": 0.003345836928515755,
+    "error_pct": 0.29419506067553464,
+    "n_iterations": 500,
+    "wall_time_s": 3.15
+  }
+]
