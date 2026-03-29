@@ -5,6 +5,94 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.11] - 2026-03-29
+
+### Paper 18: Spectral-Geometric Exchange Constants
+
+New observations paper cataloging the transcendental constants that appear when discrete algebraic structures are projected onto continuous coordinate systems across the GeoVac hierarchy. Identifies them as instances of Weyl's law and the Selberg trace formula.
+
+#### Paper content
+- **Section II.B expanded with Track J evidence:** Full partial-fraction decomposition of centrifugal singularity, associated Laguerre basis L_n^{|m|}(x), algebraic M_{-1} via DLMF 18.9.13, Stieltjes recurrence seeded by single transcendental e^a·E₁(a). Key observation: continuous math compressed from function (quadrature integrand) to constant (Stieltjes seed).
+- **Basis adaptation observation:** Identifying the exchange constant and absorbing it into the basis improves convergence (associated Laguerre stable by N=10 vs N≈20 for ordinary). The transcendental tells you where the curvature mismatch lives.
+- **π as founding example (Section III):** π is the primordial exchange constant (S¹ eigenvalue count ↔ circumference); all GeoVac constants are descendants.
+- **Computational cost observation (Section VI):** Exchange constants are conceptual tolls, not computational bottlenecks. κ: one multiply; seed: one function call; μ(R): millisecond diagonalization.
+- **α transcendence strengthened (Section V):** Two formal observations — structural match of K = π(B + F − Δ) to exchange constant pattern; α likely transcendental as root of cubic with transcendental coefficients.
+
+#### MD integration
+- Paper 18 added to CLAUDE.md: observations inventory, reading guide (item 11), topic-to-paper lookup (4 entries)
+- Paper 18 added to README.md Paper Series table
+
+**Files changed:**
+- `papers/observations/paper_18_exchange_constants.tex` — new paper
+- `CLAUDE.md` — Paper 18 registration, version bump
+- `README.md` — Paper 18 registration, version bump
+- `CHANGELOG.md` — this entry
+
+## [2.0.10] - 2026-03-29
+
+### Algebraic Laguerre Matrix Elements, Spectral Level 4 Hyperradial, & Associated Laguerre m≠0
+
+#### Track H — Level 3 Algebraic Laguerre Matrix Elements (COMPLETE)
+
+Replaced Gauss-Laguerre quadrature with algebraic three-term Laguerre recurrence for the hyperradial overlap (S) and kinetic (K) matrices in the Level 3 spectral solver.
+
+- **Overlap S:** Pentadiagonal M2 moment matrix from three-term recurrence x·Lₙ = -(n+1)Lₙ₊₁ + (2n+1)Lₙ - nLₙ₋₁. S = M2/(8α³). Machine-precision agreement with quadrature (< 1e-14 relative error).
+- **Kinetic K:** Derivative kernel Bₙ = -n/2 Lₙ₋₁ + 1/2 Lₙ + (n+1)/2 Lₙ₊₁ (tridiagonal expansion). K = BᵀB/(4α). Machine-precision agreement (< 1e-14 relative error).
+- **11× matrix build speedup:** 52 μs (algebraic) vs 585 μs (quadrature)
+- **V_eff stays quadrature:** Effective potential V_eff(R) = μ(R)/R² + 15/(8R²) is transcendental (Track G proven). Quadrature required — this is the algebraic boundary for Level 3.
+- **Energy agreement:** < 1e-14 Ha vs quadrature (end-to-end validation)
+- **Coupled-channel ceiling unchanged:** 0.15%–0.25% at l_max=3 (same physics, faster build)
+- `matrix_method='algebraic'` parameter in spectral radial solver
+- 11 new tests, 41/41 passing
+
+**Files changed:**
+- `geovac/hyperspherical_radial.py` — `_build_laguerre_matrices_algebraic()`, `matrix_method` parameter
+- `geovac/algebraic_coupled_channel.py` — `matrix_method` parameter wiring
+- `tests/test_hyperspherical_he.py` — 11 new tests
+
+#### Track I — Spectral Laguerre for Level 4 Hyperradial (COMPLETE)
+
+Applied spectral Laguerre pattern to the Level 4 molecule-frame hyperspherical solver, replacing FD R_e grid for all three solution pathways (adiabatic, coupled-channel, 2D variational).
+
+- **16× dimension reduction (adiabatic):** N_FD=400 → n_basis=25
+- **5× dimension reduction (2D):** N_FD×N_ang=16,000 → n_basis×N_ang=3,200
+- **Spectral-FD consistency:** < 0.0005 Ha (adiabatic), < 0.002 Ha (2D)
+- **D_e% preserved:** 90.0% for both spectral and FD at l_max=2 (H₂)
+- **No wall time speedup — structural finding:** Angular sweep (building H_ang at ~130 ρ-values) dominates 99% of Level 4 cost. FD radial uses `eigh_tridiagonal` (O(N), sub-ms) — already optimally fast, unlike Level 3's FD which used N_R=3000 with `eigsh`. Spectral radial substitution does not improve total runtime.
+- **Spectral value:** accuracy (< 0.0005 Ha with 16× fewer points), memory (400 → 25 grid), parameterization (just n_basis and α), extensibility (same basis for adiabatic, DBOC, and 2D)
+- **n_basis=20 optimal:** Convergence plateau at n_basis=15-20. Mild overlap matrix conditioning degradation at n_basis≥25 (~5e-5 Ha shift).
+- `radial_method='spectral'` parameter in Level 4 solver
+- 13 new tests, 58/58 passing (45 existing + 13 new)
+
+**Files changed:**
+- `geovac/level4_multichannel.py` — `radial_method`/`n_basis_radial`/`alpha_radial` parameter wiring, spectral radial solve
+- `tests/test_spectral_level4.py` — new (13 tests)
+
+#### Track J — Level 2 Algebraic m≠0 Associated Laguerre (COMPLETE)
+
+Eliminated the last remaining quadrature in the Level 2 prolate spheroidal radial solver. The centrifugal singularity m²/(ξ²−1) → m²/(x(x+2β)) for m≠0 states (π, δ, ...) was previously handled by Gauss-Laguerre quadrature. The associated Laguerre basis L_n^{|m|}(x) with weight x^|m|·e^{-x} absorbs the singularity, and the partial-fraction decomposition yields two algebraic components:
+
+- **Lowered moment M_{-1}^(α):** Computed from DLMF 18.9.13 summation identity L_n^(α)(x) = Σ L_k^(α−1)(x). Cumulative sum of h_p^(α−1) = Γ(p+α)/p!. Dense, positive definite.
+- **Stieltjes integral J^(α)(a):** Three-term recurrence seeded by single transcendental value S_0^(0)(a) = e^a·E₁(a). Miller's backward recurrence for numerical stability. Hybrid forward/backward assembly for matrix rows.
+- **Associated moment matrices M₀, M₁, M₂:** Generalization of ordinary Laguerre moments to weight x^α·e^{-x}. Band structure preserved (diagonal, tridiagonal, pentadiagonal).
+- **Associated kinetic matrix:** Derivative kernel G₀ (bidiagonal) + G₁ (diagonal) with weighted moment matrices P_k = M_k + 2β·M_{k-1}.
+
+**Results:**
+- Associated basis converges faster than ordinary for |m|=1: stable by N=10 (vs non-monotonic at N=40 for ordinary)
+- |m|=2 (δ states): algebraic-quadrature agreement ~5e-9 at N=20
+- PES scan (12 R-points, m=1): max algebraic-quadrature discrepancy 6e-4 (basis difference, not error); R_eq matches
+- Algebraic method is MORE ACCURATE than FD: converges below all FD grid values
+- `matrix_method='algebraic'` now works for ALL m values (auto-detected, no user change needed)
+- 119 tests passing: 77 associated Laguerre moment/stability tests + 42 kinetic/eigenvalue/PES tests
+
+**Qualitative distinction:** The m=0 algebraic construction is fully rational. For m≠0, the single transcendental seed e^a·E₁(a) is irreducible — the Stieltjes integral inherently involves an exponential integral. This is the algebraic boundary for Level 2.
+
+**Files changed:**
+- `geovac/prolate_spheroidal_lattice.py` — `_associated_laguerre_moment_matrices()`, `_lowered_moment_matrix()`, `_stieltjes_matrix()`, `_build_laguerre_matrices_algebraic_associated()`
+- `tests/test_associated_laguerre.py` — new (77 tests)
+- `tests/test_associated_kinetic.py` — new (42 tests)
+- `papers/core/paper_11_prolate_spheroidal.tex` — Sec V.D expanded: associated Laguerre subsection, convergence table
+
 ## [2.0.9] - 2026-03-28
 
 ### Five-lane sprint (2 rounds, 3 parallel PMs)

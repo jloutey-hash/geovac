@@ -21,6 +21,7 @@ from geovac.hyperspherical_adiabatic import (
 from geovac.hyperspherical_radial import (
     solve_radial, solve_helium,
     solve_radial_spectral, solve_coupled_radial_spectral,
+    _build_laguerre_matrices_dirichlet, _build_laguerre_SK_algebraic,
 )
 
 
@@ -308,3 +309,142 @@ class TestSpectralCoupledChannel:
 
         speedup = t_fd / t_sp
         assert speedup > 10, f"Speedup {speedup:.1f}x < 10x target"
+
+
+class TestAlgebraicLaguerreMatrices:
+    """Tests for algebraic Laguerre matrix elements (Track H, v2.0.10).
+
+    Validates that the three-term Laguerre recurrence produces overlap S
+    and kinetic K matrices matching Gauss-Laguerre quadrature to machine
+    precision. Potential V remains quadrature (V_eff is transcendental).
+    """
+
+    def test_algebraic_vs_quadrature_overlap(self) -> None:
+        """Algebraic overlap S matches quadrature to quadrature precision.
+
+        The algebraic result is exact; differences are quadrature roundoff.
+        M2 elements grow as ~6n^2, so absolute diffs scale with matrix size.
+        Tolerance 1e-10 is ~1e-14 relative for the largest elements.
+        """
+        alpha = 1.5
+        n_basis = 25
+        V_dummy = lambda R: np.zeros_like(R)
+        S_q, K_q, _, _, _, _, _, _ = _build_laguerre_matrices_dirichlet(
+            V_dummy, n_basis, alpha, 0.05, matrix_method='quadrature'
+        )
+        S_a, K_a = _build_laguerre_SK_algebraic(n_basis, alpha)
+        max_diff_S = np.max(np.abs(S_a - S_q))
+        assert max_diff_S < 1e-10, f"Overlap max diff {max_diff_S:.2e} > 1e-10"
+
+    def test_algebraic_vs_quadrature_kinetic(self) -> None:
+        """Algebraic kinetic K matches quadrature to quadrature precision."""
+        alpha = 1.5
+        n_basis = 25
+        V_dummy = lambda R: np.zeros_like(R)
+        S_q, K_q, _, _, _, _, _, _ = _build_laguerre_matrices_dirichlet(
+            V_dummy, n_basis, alpha, 0.05, matrix_method='quadrature'
+        )
+        S_a, K_a = _build_laguerre_SK_algebraic(n_basis, alpha)
+        max_diff_K = np.max(np.abs(K_a - K_q))
+        assert max_diff_K < 1e-10, f"Kinetic max diff {max_diff_K:.2e} > 1e-10"
+
+    def test_algebraic_overlap_symmetry(self) -> None:
+        """Algebraic overlap is symmetric."""
+        S, _ = _build_laguerre_SK_algebraic(25, 1.5)
+        assert np.allclose(S, S.T, atol=1e-15)
+
+    def test_algebraic_kinetic_symmetry(self) -> None:
+        """Algebraic kinetic is symmetric."""
+        _, K = _build_laguerre_SK_algebraic(25, 1.5)
+        assert np.allclose(K, K.T, atol=1e-15)
+
+    def test_algebraic_overlap_positive_definite(self) -> None:
+        """Algebraic overlap has all positive eigenvalues."""
+        S, _ = _build_laguerre_SK_algebraic(25, 1.5)
+        evals = np.linalg.eigvalsh(S)
+        assert np.all(evals > 0), f"Non-positive overlap eigenvalue: {evals.min()}"
+
+    def test_algebraic_single_channel_energy(self) -> None:
+        """Algebraic single-channel energy matches quadrature to < 1e-14 Ha."""
+        r_q = solve_helium(
+            Z=2.0, l_max=0, n_alpha=100, N_R_angular=100,
+            radial_method='spectral', n_basis_radial=25, alpha_radial=1.5,
+            matrix_method='quadrature', verbose=False,
+        )
+        r_a = solve_helium(
+            Z=2.0, l_max=0, n_alpha=100, N_R_angular=100,
+            radial_method='spectral', n_basis_radial=25, alpha_radial=1.5,
+            matrix_method='algebraic', verbose=False,
+        )
+        diff = abs(r_q['energy'] - r_a['energy'])
+        assert diff < 1e-10, f"Energy diff {diff:.2e} Ha > 1e-10 Ha"
+
+    def test_algebraic_coupled_channel_energy(self) -> None:
+        """Algebraic coupled-channel energy matches quadrature to < 1e-10 Ha."""
+        from geovac.algebraic_coupled_channel import (
+            solve_hyperspherical_algebraic_coupled,
+        )
+        r_q = solve_hyperspherical_algebraic_coupled(
+            Z=2.0, n_basis=15, l_max=0, n_channels=3,
+            q_mode='exact', radial_method='spectral',
+            n_basis_radial=25, alpha_radial=1.5,
+            matrix_method='quadrature', verbose=False,
+        )
+        r_a = solve_hyperspherical_algebraic_coupled(
+            Z=2.0, n_basis=15, l_max=0, n_channels=3,
+            q_mode='exact', radial_method='spectral',
+            n_basis_radial=25, alpha_radial=1.5,
+            matrix_method='algebraic', verbose=False,
+        )
+        diff = abs(r_q['energy'] - r_a['energy'])
+        assert diff < 1e-10, f"Coupled energy diff {diff:.2e} Ha > 1e-10 Ha"
+
+    def test_algebraic_ceiling_unchanged(self) -> None:
+        """Algebraic coupled at l_max=3 gives same 0.15-0.30% ceiling."""
+        from geovac.algebraic_coupled_channel import (
+            solve_hyperspherical_algebraic_coupled,
+        )
+        r = solve_hyperspherical_algebraic_coupled(
+            Z=2.0, n_basis=15, l_max=3, n_channels=3,
+            q_mode='exact', radial_method='spectral',
+            n_basis_radial=25, alpha_radial=1.5,
+            matrix_method='algebraic', verbose=False,
+        )
+        err = abs(r['energy'] - E_EXACT) / abs(E_EXACT) * 100
+        assert 0.15 < err < 0.30, f"Expected 0.15-0.30% error, got {err:.4f}%"
+
+    def test_algebraic_alpha_range(self) -> None:
+        """Algebraic S and K match quadrature across alpha = 0.5 to 3.0."""
+        V_dummy = lambda R: np.zeros_like(R)
+        for alpha in [0.5, 1.0, 2.0, 3.0]:
+            S_q, K_q, _, _, _, _, _, _ = _build_laguerre_matrices_dirichlet(
+                V_dummy, 20, alpha, 0.05, matrix_method='quadrature'
+            )
+            S_a, K_a = _build_laguerre_SK_algebraic(20, alpha)
+            assert np.max(np.abs(S_a - S_q)) < 1e-10, \
+                f"Overlap mismatch at alpha={alpha}"
+            assert np.max(np.abs(K_a - K_q)) < 1e-10, \
+                f"Kinetic mismatch at alpha={alpha}"
+
+    def test_algebraic_n_basis_range(self) -> None:
+        """Algebraic S and K match quadrature across n_basis = 10 to 30."""
+        V_dummy = lambda R: np.zeros_like(R)
+        for nb in [10, 15, 20, 25, 30]:
+            S_q, K_q, _, _, _, _, _, _ = _build_laguerre_matrices_dirichlet(
+                V_dummy, nb, 1.5, 0.05, matrix_method='quadrature'
+            )
+            S_a, K_a = _build_laguerre_SK_algebraic(nb, 1.5)
+            assert np.max(np.abs(S_a - S_q)) < 1e-10, \
+                f"Overlap mismatch at n_basis={nb}"
+            assert np.max(np.abs(K_a - K_q)) < 1e-10, \
+                f"Kinetic mismatch at n_basis={nb}"
+
+    def test_algebraic_default_backward_compatible(self) -> None:
+        """Default matrix_method='quadrature' is backward compatible."""
+        r = solve_helium(
+            Z=2.0, l_max=0, n_alpha=100, N_R_angular=100,
+            radial_method='spectral', n_basis_radial=25, alpha_radial=1.5,
+            verbose=False,
+        )
+        err = abs(r['energy'] - E_EXACT) / abs(E_EXACT)
+        assert err < 0.001

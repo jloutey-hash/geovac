@@ -1,0 +1,56 @@
+Track I — Spectral Laguerre for Level 4 Hyperradial
+Date: 2026-03-29
+
+=== Convergence Study: n_basis sweep (l_max=2, H2 at R=1.4) ===
+FD reference (N_R=400): E = -1.87130881 Ha
+
+n_basis         E (Ha)        dE_prev       dE vs FD
+-----------------------------------------------------
+     10    -1.87128380          ---          2.50e-05
+     15    -1.87130135     1.76e-05          7.46e-06
+     20    -1.87130383     2.48e-06          4.98e-06
+     25    -1.87126092     4.29e-05          4.79e-05
+     30    -1.87125125     9.67e-06          5.76e-05
+
+Note: n_basis=20 optimal (best FD agreement). n_basis>=25 shows
+slight overlap matrix conditioning degradation (~5e-5 Ha).
+
+=== Energy Comparison: Spectral vs FD (adiabatic, n_basis=25) ===
+System    l_max    FD E (Ha)     Sp E (Ha)     diff (Ha)    FD D_e%   Sp D_e%
+H2          2     -1.157072     -1.156975      0.000097      90.0      90.0
+HeH+        2     -2.861253     -2.860823      0.000430     (see*)     (see*)
+
+*HeH+ D_e% not meaningful at l_max=2 (system unbound at this truncation).
+
+=== Dimension Reduction ===
+Adiabatic:  N_FD=400 -> n_basis=25  = 16x reduction
+2D solver:  N_FD*N_ang=16000 -> n_basis*N_ang=3200  = 5x reduction
+
+=== Wall Time Comparison ===
+ADIABATIC (l_max=2, n_alpha=150):
+  Angular sweep:     45.12s (99% of total)
+  FD radial:          0.42ms per solve (N_R=400, tridiagonal)
+  Spectral radial:    2.39ms per solve (n_basis=25, dense GEP)
+  => No total speedup; angular sweep dominates
+  => Radial-only: FD is 6x faster (tridiagonal O(N) vs dense GEP O(N^3))
+
+2D SOLVER (l_max=1, n_alpha=80):
+  FD (n_Re=100):      0.79s (sparse eigsh)
+  Spectral (n_basis=20): 9.82s (dense kron assembly + eigh)
+  => Spectral is 12x slower due to quadrature-point H_ang builds and kron
+
+=== Root Cause: No Wall Time Speedup ===
+Level 4's FD radial uses eigh_tridiagonal (O(N), sub-ms). This is
+already optimally fast — unlike Level 3's FD which used N_R=3000
+with eigsh (sparse iterative, much slower).
+
+The spectral solver's value at Level 4 is:
+1. Accuracy: < 0.0005 Ha agreement with 16x fewer grid points
+2. Memory: 400 -> 25 radial grid points
+3. Parametric: fewer tuning parameters (just n_basis, alpha)
+4. Extensibility: same Laguerre basis for adiabatic, DBOC, and 2D pathways
+
+Wall time is dominated 99% by the angular sweep (building H_ang at
+~130 R_e points, each requiring a full angular eigenvalue solve).
+Speeding up Level 4 requires faster angular solves or caching, not
+a faster radial solver.

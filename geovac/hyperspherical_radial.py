@@ -98,11 +98,103 @@ def solve_radial(
     return evals, evecs.T, R_grid
 
 
+def _laguerre_moment_matrices(N: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Build Laguerre moment matrices M_k[i,j] = int_0^inf x^k L_i(x) L_j(x) e^{-x} dx.
+
+    Uses the three-term recurrence x*L_j = -(j+1)L_{j+1} + (2j+1)L_j - j*L_{j-1}
+    to derive closed-form band structure. M0 = identity, M1 = tridiagonal, M2 = pentadiagonal.
+
+    Same pattern as Level 2 (prolate_spheroidal_lattice.py).
+    """
+    M0 = np.eye(N)
+
+    # M1: tridiagonal
+    M1 = np.zeros((N, N))
+    for i in range(N):
+        M1[i, i] = 2 * i + 1
+        if i + 1 < N:
+            M1[i, i + 1] = -(i + 1)
+            M1[i + 1, i] = -(i + 1)
+
+    # M2: pentadiagonal (from two applications of the recurrence)
+    M2 = np.zeros((N, N))
+    for j in range(N):
+        M2[j, j] = 6 * j * j + 6 * j + 2
+        if j + 1 < N:
+            val = -4 * (j + 1) ** 2
+            M2[j, j + 1] = val
+            M2[j + 1, j] = val
+        if j + 2 < N:
+            val = (j + 1) * (j + 2)
+            M2[j, j + 2] = val
+            M2[j + 2, j] = val
+
+    return M0, M1, M2
+
+
+def _build_laguerre_SK_algebraic(
+    n_basis: int, alpha: float
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Build overlap S and kinetic K matrices algebraically for Level 3.
+
+    Basis: phi_n(R) = (R-R_min) * exp(-alpha*(R-R_min)) * L_n(2*alpha*(R-R_min))
+    In x-space (x = 2*alpha*(R-R_min)): phi_n = (x/(2a)) * exp(-x/2) * L_n(x).
+
+    Overlap: S_ij = 1/(8*alpha^3) * M2[i,j]
+        where M2[i,j] = int x^2 L_i L_j exp(-x) dx (pentadiagonal).
+
+    Kinetic: K_ij = 1/(4*alpha) * sum_k b[i,k] * b[j,k]
+        where B_n(x) = (1 - x/2) L_n(x) + x L_n'(x) is the derivative kernel
+        (dphi_n/dR = exp(-x/2) * B_n(x)), expanded in Laguerre polynomials as:
+            B_n = -n/2 * L_{n-1} + 1/2 * L_n + (n+1)/2 * L_{n+1}
+        This tridiagonal expansion follows from x*L_n'(x) = n*L_n - n*L_{n-1}
+        (derived via the three-term recurrence applied to L_n' = -sum_{k<n} L_k).
+
+    The potential V_eff(R) = mu(R)/R^2 + 15/(8R^2) is transcendental (Paper 13,
+    Track G) and cannot be algebraicized — it stays as quadrature.
+
+    Parameters
+    ----------
+    n_basis : int
+        Number of Laguerre basis functions.
+    alpha : float
+        Exponential decay parameter.
+
+    Returns
+    -------
+    S : ndarray of shape (n_basis, n_basis)
+        Overlap matrix (pentadiagonal, exact).
+    K : ndarray of shape (n_basis, n_basis)
+        Kinetic energy matrix (exact).
+    """
+    N = n_basis
+    _, _, M2 = _laguerre_moment_matrices(N)
+
+    # Overlap: S_ij = 1/(8*alpha^3) * M2[i,j]
+    S = M2 / (8.0 * alpha ** 3)
+
+    # Kinetic: expand B_n in Laguerre basis
+    # B_n = -n/2 * L_{n-1} + 1/2 * L_n + (n+1)/2 * L_{n+1}
+    # b matrix is N x (N+1) since B_{N-1} has an L_N term
+    b = np.zeros((N, N + 1))
+    for n in range(N):
+        if n > 0:
+            b[n, n - 1] = -n / 2.0
+        b[n, n] = 0.5
+        b[n, n + 1] = (n + 1) / 2.0
+
+    # K_ij = 1/(4*alpha) * sum_k b[i,k] b[j,k]  (orthogonality of L_k)
+    K = (b @ b.T) / (4.0 * alpha)
+
+    return S, K
+
+
 def _build_laguerre_matrices_dirichlet(
     V_func,
     n_basis: int,
     alpha: float,
     R_min: float,
+    matrix_method: str = 'quadrature',
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray,
            np.ndarray, np.ndarray, np.ndarray]:
     """Build Laguerre spectral matrices with Dirichlet BC at R_min.
@@ -112,6 +204,10 @@ def _build_laguerre_matrices_dirichlet(
 
     The (R-R_min) prefactor enforces phi_n(R_min)=0, matching the FD
     solver's Dirichlet BC. In terms of x: phi_n = (x/2a) exp(-x/2) L_n(x).
+
+    When matrix_method='algebraic', overlap S and kinetic K are computed
+    from closed-form Laguerre recurrence relations (zero quadrature error).
+    The potential V remains quadrature-based because V_eff(R) is transcendental.
 
     Returns S, K, V_mat, L_vals, B_vals, x_quad, w_quad, R_q.
     B_vals are the derivative kernel: dphi_n/dR = exp(-x/2) * B_n(x).
@@ -144,15 +240,20 @@ def _build_laguerre_matrices_dirichlet(
     inv_4a = 1.0 / (4.0 * alpha)
     x2_w = w_quad * x_quad**2
 
-    # Overlap: S_ij = 1/(8a^3) sum_k w_k x_k^2 L_i L_j
-    x2_wL = x2_w[np.newaxis, :] * L_vals
-    S = inv_8a3 * (x2_wL @ L_vals.T)
+    if matrix_method == 'algebraic':
+        # Overlap and kinetic from closed-form recurrence (exact)
+        S, K = _build_laguerre_SK_algebraic(N, alpha)
+    else:
+        # Overlap: S_ij = 1/(8a^3) sum_k w_k x_k^2 L_i L_j
+        x2_wL = x2_w[np.newaxis, :] * L_vals
+        S = inv_8a3 * (x2_wL @ L_vals.T)
 
-    # Kinetic: K_ij = 1/2 * 1/(4a) sum_k w_k B_i B_j
-    wB = w_quad[np.newaxis, :] * B_vals
-    K = inv_4a * (wB @ B_vals.T)
+        # Kinetic: K_ij = 1/(4a) sum_k w_k B_i B_j
+        wB = w_quad[np.newaxis, :] * B_vals
+        K = inv_4a * (wB @ B_vals.T)
 
     # Potential: V_ij = 1/(8a^3) sum_k w_k x_k^2 V(R_k) L_i L_j
+    # (always quadrature — V_eff(R) is transcendental)
     V_q = V_func(R_q)
     x2_wVL = (x2_w * V_q)[np.newaxis, :] * L_vals
     V_mat = inv_8a3 * (x2_wVL @ L_vals.T)
@@ -166,6 +267,7 @@ def solve_radial_spectral(
     alpha: float = 1.5,
     R_min: float = 0.05,
     n_states: int = 1,
+    matrix_method: str = 'quadrature',
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Spectral Laguerre solver for the hyperradial Schrodinger equation.
@@ -193,6 +295,10 @@ def solve_radial_spectral(
         Left boundary of the domain (bohr). Must be > 0.
     n_states : int
         Number of eigenstates to return.
+    matrix_method : str
+        'quadrature' (default): all matrix elements via Gauss-Laguerre.
+        'algebraic': overlap S and kinetic K from closed-form recurrence,
+        potential V via quadrature (V_eff is transcendental).
 
     Returns
     -------
@@ -204,7 +310,9 @@ def solve_radial_spectral(
         Evaluation grid points.
     """
     S, K, V_mat, L_vals, B_vals, x_quad, w_quad, R_q = \
-        _build_laguerre_matrices_dirichlet(V_eff_func, n_basis, alpha, R_min)
+        _build_laguerre_matrices_dirichlet(
+            V_eff_func, n_basis, alpha, R_min, matrix_method=matrix_method
+        )
     N = n_basis
     two_alpha = 2.0 * alpha
 
@@ -251,6 +359,7 @@ def solve_coupled_radial_spectral(
     R_min: float = 0.05,
     n_states: int = 5,
     include_Q: bool = False,
+    matrix_method: str = 'quadrature',
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
     Spectral Laguerre solver for the coupled-channel hyperradial equation.
@@ -281,6 +390,10 @@ def solve_coupled_radial_spectral(
         Number of eigenvalues to find.
     include_Q : bool
         Whether to include the Q (second-derivative) coupling term.
+    matrix_method : str
+        'quadrature' (default): all matrix elements via Gauss-Laguerre.
+        'algebraic': overlap S and kinetic K from closed-form recurrence,
+        potential V, P-coupling, Q-coupling via quadrature (R-dependent).
 
     Returns
     -------
@@ -299,7 +412,7 @@ def solve_coupled_radial_spectral(
     inv_4a2 = 1.0 / (4.0 * alpha**2)
     dim = n_ch * N
 
-    # Gauss-Laguerre quadrature
+    # Gauss-Laguerre quadrature (still needed for V, P, Q which are R-dependent)
     n_quad = max(3 * N + 10, 80)
     x_quad, w_quad = roots_laguerre(n_quad)
     R_q = R_min + x_quad / two_alpha
@@ -321,13 +434,17 @@ def solve_coupled_radial_spectral(
     x2_w = w_quad * x_quad**2
     x_w = w_quad * x_quad
 
-    # Overlap block: S_ij = inv_8a3 * sum_k w_k x_k^2 L_i L_j
-    x2_wL = x2_w[np.newaxis, :] * L_vals
-    S_block = inv_8a3 * (x2_wL @ L_vals.T)
+    if matrix_method == 'algebraic':
+        # Overlap and kinetic from closed-form recurrence (exact)
+        S_block, K_block = _build_laguerre_SK_algebraic(N, alpha)
+    else:
+        # Overlap block: S_ij = inv_8a3 * sum_k w_k x_k^2 L_i L_j
+        x2_wL = x2_w[np.newaxis, :] * L_vals
+        S_block = inv_8a3 * (x2_wL @ L_vals.T)
 
-    # Kinetic block: K_ij = inv_4a * sum_k w_k B_i B_j
-    wB = w_quad[np.newaxis, :] * B_vals
-    K_block = inv_4a * (wB @ B_vals.T)
+        # Kinetic block: K_ij = inv_4a * sum_k w_k B_i B_j
+        wB = w_quad[np.newaxis, :] * B_vals
+        K_block = inv_4a * (wB @ B_vals.T)
 
     # Build full block Hamiltonian and overlap
     H_full = np.zeros((dim, dim))
@@ -562,6 +679,7 @@ def solve_helium(
     radial_method: str = 'fd',
     n_basis_radial: int = 25,
     alpha_radial: float = 2.0,
+    matrix_method: str = 'quadrature',
 ) -> dict:
     """
     Full hyperspherical solver for He.
@@ -594,6 +712,8 @@ def solve_helium(
         Number of Laguerre basis functions (spectral method only).
     alpha_radial : float
         Exponential decay parameter for Laguerre basis (spectral method only).
+    matrix_method : str
+        'quadrature' (default) or 'algebraic' for spectral method.
 
     Returns
     -------
@@ -668,6 +788,7 @@ def solve_helium(
                 n_basis=n_basis_radial, alpha=alpha_radial,
                 R_min=R_min,
                 n_states=min(5, n_channels * 3),
+                matrix_method=matrix_method,
             )
         else:
             if verbose:
@@ -748,7 +869,8 @@ def solve_helium(
                       f"(spectral, n_basis={n_basis_radial})...")
             E, F, R_grid_rad = solve_radial_spectral(
                 V_eff_spline, n_basis=n_basis_radial,
-                alpha=alpha_radial, R_min=R_min, n_states=1
+                alpha=alpha_radial, R_min=R_min, n_states=1,
+                matrix_method=matrix_method,
             )
         else:
             if verbose:

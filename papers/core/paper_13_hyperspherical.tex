@@ -1626,6 +1626,32 @@ spectral solver uses $n_{\mathrm{ch}} \times n_{\mathrm{basis}} =
 coupled calculation at $l_{\max} = 3$, wall time drops from
 561~ms to 5.9~ms---a $95\times$ speedup.
 
+\subsection{Algebraic Laguerre matrix elements}
+\label{sec:algebraic_laguerre}
+
+The spectral Laguerre matrices of Sec.~\ref{sec:spectral_radial} can
+be computed without quadrature.  The three-term recurrence for Laguerre
+polynomials,
+\begin{equation}
+  x\,L_n(x) = -(n+1)\,L_{n+1}(x) + (2n+1)\,L_n(x) - n\,L_{n-1}(x),
+\end{equation}
+generates the moment matrix $M_{2}[i,j] = \int_0^\infty x^2\,
+L_i(x)\,L_j(x)\,e^{-x}\,dx$ as a pentadiagonal matrix from
+iterated application.  The overlap matrix is then $S = M_2 / (8\alpha^3)$,
+where $\alpha$ is the Laguerre scale parameter.
+
+For the kinetic matrix, the derivative identity
+$L_n'(x) = -L_{n-1}(x) + L_{n-2}(x) - \cdots$ yields a tridiagonal
+expansion kernel $B_n = -\tfrac{n}{2}\,L_{n-1} + \tfrac{1}{2}\,L_n
++ \tfrac{n+1}{2}\,L_{n+1}$, giving $K = B^T B / (4\alpha)$.
+
+Both algebraic matrices agree with Gauss--Laguerre quadrature to
+$< 10^{-14}$ relative error, and the resulting energies match to
+$< 10^{-14}$~Ha.  The algebraic build achieves an $11\times$ speedup
+(52~$\mu$s vs 585~$\mu$s).  The effective potential $V_{\mathrm{eff}}(R)$
+remains evaluated by quadrature, consistent with the transcendental
+character of $\mu(R)$ established in Sec.~\ref{sec:algebraic_boundary}.
+
 \subsection{Rayleigh--Schr\"odinger perturbation series for $\mu(R)$}
 \label{sec:perturbation_series}
 

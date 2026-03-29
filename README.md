@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.9-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.11-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 2.0.9** - Five-Lane Sprint: Algebraic & Spectral Infrastructure (Levels 2-3, 5)
+**Version 2.0.11** - Paper 18: Spectral-Geometric Exchange Constants
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,16 +18,13 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v2.0.9
+## What's New in v2.0.11
 
-Five-lane sprint across two rounds. Spectral and algebraic infrastructure at Levels 2-3; 2D solver integration at Level 5.
-
-- **Level 2 fully algebraic (m=0):** Laguerre three-term recurrence replaces all quadrature in the spectral radial solver for σ states. Machine-precision agreement (< 1e-14 Ha). 1.6× additional speedup. Production PES wiring: `scan_h2plus_pes(radial_method='spectral')` gives 287× speedup, 5000× E_min accuracy.
-- **Level 3 spectral hyperradial:** Spectral Laguerre replaces 3000-point FD grid. 120× dimension reduction, 95× coupled-channel speedup. Physics preserved (0.221% vs 0.220% at l_max=3).
-- **Level 3 μ(R) transcendental boundary:** Rayleigh-Schrödinger perturbation series validates a₁ to 10⁻¹⁵. Proven transcendental beyond R ≈ 2 bohr (Padé fails at R > 5). Confirms Paper 13 Sec XII.B.
-- **2D solver in composition pipeline:** Variational 2D solver integrated into composed LiH. 4× drift reduction (+0.400 → +0.100 bohr/l_max). 25% residual non-adiabatic divergence discovered — new finding.
+- **Paper 18: Spectral-Geometric Exchange Constants** — New observations paper cataloging the transcendental constants (κ, e^a E₁(a), μ(R)) that appear when discrete algebraic structures are projected onto continuous coordinate systems. Identifies them as Weyl-Selberg exchange constants. Updated with Track J evidence, basis adaptation observation, π as founding example, and strengthened α connection.
 
 ### Prior Releases
+- **v2.0.10:** Algebraic Laguerre matrix elements (Level 3, Track H: 11× build speedup), spectral Level 4 hyperradial (Track I: 16× dimension reduction), associated Laguerre m≠0 (Track J: single transcendental seed)
+- **v2.0.9:** Five-lane sprint — algebraic & spectral infrastructure (Levels 2-3, 5), 2D solver in composition pipeline
 - **v2.0.8:** Three-lane sprint — spectral Laguerre Level 2 (250× reduction, 5000× accuracy), Paper 14 expanded benchmarks, Level 3 convergence ceiling (0.19-0.20% floor)
 - **v2.0.6:** Algebraic Angular Solver & Coupled-Channel Integration (Level 3)
 - **v2.0.5:** Asymmetric Bond Diagnostic Arc — l_max divergence diagnosis (+0.23 bohr/l_max), R-dependent PK scaling (2.0% at l_max=4), negative results (eigenchannel rotation, spheroidal compression, self-consistent PK, projected PK)
@@ -376,6 +373,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | **15** | **Level 4 Geometry** | **H₂ 94.1%, HeH⁺ 93.1%, 2D solver** |
 | **16** | **Chemical Periodicity** | **μ_free = 2(N-2)², S_N irreps, periodic law** |
 | **17** | **Composed Geometries** | **LiH R_eq 5.3%, BeH₂ 11.7%, H₂O 26%, ab initio PK, zero molecular fitting** |
+| **18** | **Exchange Constants** | **Weyl--Selberg identification of κ, e^a E₁(a), μ(R); α connection** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | LCAO FCI (Molecules) | LiH D_e 1.0% (CP-corrected) |
 

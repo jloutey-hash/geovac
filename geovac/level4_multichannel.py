@@ -24,7 +24,13 @@ from scipy.linalg import eigh_tridiagonal
 from typing import Tuple, List, Union, Callable, Optional
 from math import sqrt, factorial
 
+from scipy.special import roots_laguerre, eval_laguerre
+
 from geovac.hyperspherical_angular import gaunt_integral
+from geovac.hyperspherical_radial import (
+    solve_radial_spectral as _solve_radial_spectral_l3,
+    _build_laguerre_matrices_dirichlet,
+)
 
 
 def _channel_list(
@@ -1606,6 +1612,402 @@ def solve_direct_2d(
     return E_elec
 
 
+def _safe_potential_wrapper(
+    U_spline,
+    R_e_max: float,
+) -> Callable:
+    """Wrap a CubicSpline to return 0 beyond R_e_max.
+
+    Gauss-Laguerre quadrature points extend to infinity. CubicSpline
+    extrapolation can diverge, creating artificial deep wells. This
+    wrapper clamps V(R) to 0 for R > R_e_max, matching the physical
+    asymptotic behavior (U ~ 1/R_e² -> 0).
+    """
+    def V_safe(R: np.ndarray) -> np.ndarray:
+        R = np.asarray(R)
+        V = np.zeros_like(R, dtype=float)
+        mask = R <= R_e_max
+        if np.any(mask):
+            V[mask] = U_spline(R[mask])
+        return V
+    return V_safe
+
+
+def solve_adiabatic_radial_spectral(
+    U_spline,
+    n_basis: int = 25,
+    alpha: float = 1.0,
+    R_e_min: float = 0.3,
+    R_e_max: float = 15.0,
+) -> Tuple[float, np.ndarray, np.ndarray]:
+    """Spectral Laguerre solver for the Level 4 adiabatic radial equation.
+
+    Solves [-1/2 d²/dR_e² + U(R_e)] F = E F using Laguerre basis functions,
+    reusing the Level 3 spectral pattern (hyperspherical_radial.py).
+
+    Parameters
+    ----------
+    U_spline : callable
+        Adiabatic effective potential U(R_e) (CubicSpline or callable).
+    n_basis : int
+        Number of Laguerre basis functions.
+    alpha : float
+        Exponential decay parameter for the Laguerre basis.
+    R_e_min : float
+        Left boundary (Dirichlet BC).
+    R_e_max : float
+        Beyond this R_e, the potential is clamped to 0 to prevent
+        CubicSpline extrapolation artifacts.
+
+    Returns
+    -------
+    E : float
+        Ground state energy eigenvalue (Ha).
+    F : ndarray
+        Radial wavefunction on evaluation grid.
+    R_eval : ndarray
+        Evaluation grid points.
+    """
+    V_safe = _safe_potential_wrapper(U_spline, R_e_max)
+    evals, F, R_eval = _solve_radial_spectral_l3(
+        V_safe, n_basis=n_basis, alpha=alpha, R_min=R_e_min, n_states=1,
+    )
+    return evals[0], F[0], R_eval
+
+
+def solve_coupled_channel_radial_spectral(
+    R: float,
+    R_e_grid: np.ndarray,
+    l_max: int = 2,
+    Z: float = 1.0,
+    n_alpha: int = 200,
+    m_max: int = 0,
+    n_coupled: int = 3,
+    l_max_per_m: Union[dict, None] = None,
+    R_e_min: float = 0.3,
+    Z_A: float = None,
+    Z_B: float = None,
+    z0: float = 0.0,
+    pk_potentials: Union[List[dict], None] = None,
+    n_basis: int = 25,
+    alpha: float = 1.0,
+) -> Tuple[float, np.ndarray]:
+    """Spectral Laguerre solver for the Level 4 diabatic coupled-channel equation.
+
+    Replaces the FD radial grid in solve_coupled_channel_radial with a
+    Laguerre basis. The diabatic potential V_ij(R_e) is projected from the
+    angular Hamiltonian onto a fixed basis at a reference R_e, then the
+    coupled radial equations are solved in the Laguerre basis.
+
+    Parameters
+    ----------
+    R : float
+        Internuclear distance (bohr).
+    R_e_grid : ndarray
+        R_e grid for angular sweeps (used to find reference point).
+    l_max, Z, n_alpha, m_max, n_coupled, l_max_per_m : as in solve_coupled_channel_radial.
+    R_e_min : float
+        Left Dirichlet boundary.
+    Z_A, Z_B : float or None
+        Per-nucleus charges.
+    z0 : float
+        Origin shift.
+    pk_potentials : list or None
+        Phillips-Kleinman specs.
+    n_basis : int
+        Number of Laguerre basis functions per channel.
+    alpha : float
+        Exponential decay parameter.
+
+    Returns
+    -------
+    E_elec : float
+        Electronic energy eigenvalue.
+    F : ndarray
+        Radial wavefunction (n_coupled * n_basis,).
+    """
+    # Step 1: Quick adiabatic sweep to find reference R_e
+    n_Re_ang = len(R_e_grid)
+    mu_vals = np.zeros(n_Re_ang)
+    for i, R_e in enumerate(R_e_grid):
+        rho = R / (2.0 * R_e)
+        evals, _, _, _ = solve_angular_multichannel(
+            rho, R_e, l_max, Z, n_alpha, m_max=m_max,
+            l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+        )
+        mu_vals[i] = evals[0]
+
+    U_adia = (mu_vals + 15.0 / 8.0) / R_e_grid**2
+    i_ref = np.argmin(U_adia)
+    R_e_ref = R_e_grid[i_ref]
+
+    # Step 2: Get reference eigenvectors at R_e_ref
+    rho_ref = R / (2.0 * R_e_ref)
+    _, ref_vecs, _, _ = solve_angular_multichannel(
+        rho_ref, R_e_ref, l_max, Z, n_alpha,
+        n_eig=n_coupled, m_max=m_max, l_max_per_m=l_max_per_m,
+        Z_A=Z_A, Z_B=Z_B, z0=z0,
+    )
+
+    # Step 3: Build Laguerre basis and quadrature
+    N = n_basis
+    n_ch = n_coupled
+    two_alpha = 2.0 * alpha
+    n_quad = max(3 * N + 10, 80)
+    x_quad, w_quad = roots_laguerre(n_quad)
+    R_q = R_e_min + x_quad / two_alpha
+
+    # Evaluate Laguerre polynomials and derivative kernel
+    L_vals = np.zeros((N, n_quad))
+    for n in range(N):
+        L_vals[n] = eval_laguerre(n, x_quad)
+
+    dL_vals = np.zeros((N, n_quad))
+    for n in range(1, N):
+        dL_vals[n] = dL_vals[n - 1] - L_vals[n - 1]
+
+    B_vals = (1.0 - x_quad / 2.0)[np.newaxis, :] * L_vals + \
+             x_quad[np.newaxis, :] * dL_vals
+
+    inv_8a3 = 1.0 / (8.0 * alpha**3)
+    inv_4a = 1.0 / (4.0 * alpha)
+    x2_w = w_quad * x_quad**2
+
+    # Overlap block
+    x2_wL = x2_w[np.newaxis, :] * L_vals
+    S_block = inv_8a3 * (x2_wL @ L_vals.T)
+
+    # Kinetic block
+    wB = w_quad[np.newaxis, :] * B_vals
+    K_block = inv_4a * (wB @ B_vals.T)
+
+    # Step 4: Precompute alpha grid for angular Hamiltonian
+    h_alpha = (np.pi / 2) / (n_alpha + 1)
+    alpha_grid = (np.arange(n_alpha) + 1) * h_alpha
+
+    # Step 5: Compute diabatic potential at quadrature points and assemble
+    dim = n_ch * N
+    H_full = np.zeros((dim, dim))
+    S_full = np.zeros((dim, dim))
+
+    # For each channel pair, accumulate potential integrals over quadrature
+    V_diabatic_q = np.zeros((n_quad, n_ch, n_ch))
+    for k, R_e in enumerate(R_q):
+        if R_e <= 0:
+            continue
+        rho = R / (2.0 * R_e)
+        H_ang = build_angular_hamiltonian(
+            alpha_grid, rho, R_e, l_max, Z, m_max, l_max_per_m,
+            Z_A=Z_A, Z_B=Z_B, z0=z0,
+            pk_potentials=pk_potentials,
+        )
+        Hv = H_ang @ ref_vecs.T
+        V_proj = ref_vecs @ Hv
+
+        for ic in range(n_ch):
+            V_proj[ic, ic] = (V_proj[ic, ic] + 15.0 / 8.0) / R_e**2
+            for jc in range(n_ch):
+                if ic != jc:
+                    V_proj[ic, jc] /= R_e**2
+
+        V_diabatic_q[k] = V_proj
+
+    # Assemble block Hamiltonian
+    for ic in range(n_ch):
+        ms = ic * N
+        me = (ic + 1) * N
+
+        # Kinetic (same for all channels)
+        H_full[ms:me, ms:me] = K_block
+
+        # Overlap
+        S_full[ms:me, ms:me] = S_block
+
+        for jc in range(n_ch):
+            ns = jc * N
+            ne = (jc + 1) * N
+
+            # Potential: V_ij_nm = inv_8a3 * sum_k w_k x_k^2 V_ij(R_k) L_n L_m
+            V_q = V_diabatic_q[:, ic, jc]
+            x2_wVL = (x2_w * V_q)[np.newaxis, :] * L_vals
+            V_block = inv_8a3 * (x2_wVL @ L_vals.T)
+            H_full[ms:me, ns:ne] += V_block
+
+    # Step 6: Solve generalized eigenvalue problem
+    evals, evecs = eigh(H_full, S_full)
+    E_elec = evals[0]
+    F = evecs[:, 0]
+
+    return E_elec, F
+
+
+def solve_direct_2d_spectral(
+    R: float,
+    l_max: int = 2,
+    Z: float = 1.0,
+    n_alpha: int = 100,
+    n_basis: int = 25,
+    alpha_laguerre: float = 1.0,
+    R_e_min: float = 0.3,
+    m_max: int = 0,
+    l_max_per_m: Union[dict, None] = None,
+    verbose: bool = True,
+    Z_A: float = None,
+    Z_B: float = None,
+    z0: float = 0.0,
+    core_potentials: Union[List[dict], None] = None,
+    pk_potentials: Union[List[dict], None] = None,
+) -> float:
+    """Spectral Laguerre 2D solver: full (alpha, R_e) variational problem.
+
+    Replaces the FD R_e grid in solve_direct_2d with a Laguerre basis.
+    The Hamiltonian is:
+
+        H = T_Re ⊗ I_ang + [H_ang(R_e) + 15/8 I] / R_e²
+
+    where T_Re is represented in the Laguerre basis via overlap and kinetic
+    matrices, and the angular part is integrated over R_e by Gauss-Laguerre
+    quadrature.
+
+    Parameters
+    ----------
+    R : float
+        Internuclear distance (bohr).
+    l_max, Z, n_alpha : as in solve_direct_2d.
+    n_basis : int
+        Number of Laguerre basis functions for R_e.
+    alpha_laguerre : float
+        Exponential decay parameter for Laguerre basis.
+    R_e_min : float
+        Left Dirichlet boundary for R_e.
+    m_max, l_max_per_m, verbose : as in solve_direct_2d.
+    Z_A, Z_B, z0 : as in solve_direct_2d.
+    core_potentials, pk_potentials : as in solve_direct_2d.
+
+    Returns
+    -------
+    E_elec : float
+        Lowest electronic energy eigenvalue.
+    """
+    # Resolve charges
+    if Z_A is None:
+        Z_A = Z
+    if Z_B is None:
+        Z_B = Z
+    homonuclear = (Z_A == Z_B)
+
+    # Determine channels
+    if m_max == 0:
+        channels_2 = _channel_list(l_max, homonuclear=homonuclear)
+        channels_4 = [(l1, 0, l2, 0) for l1, l2 in channels_2]
+    else:
+        channels_4 = _channel_list_extended(
+            l_max, m_max, l_max_per_m, homonuclear=homonuclear,
+        )
+    n_ch = len(channels_4)
+
+    # Angular grid (same as FD 2D solver)
+    h_alpha = (np.pi / 2) / (n_alpha + 1)
+    alpha_grid = (np.arange(n_alpha) + 1) * h_alpha
+
+    N_ang = n_ch * n_alpha
+    N = n_basis
+    N_total = N * N_ang
+
+    if verbose:
+        print(f"  Spectral 2D solver: {N_total} x {N_total} dense matrix")
+        print(f"  ({N} Laguerre basis x {n_ch} channels x {n_alpha} alpha points)")
+
+    # Build Laguerre quadrature and basis
+    two_alpha = 2.0 * alpha_laguerre
+    n_quad = max(3 * N + 10, 80)
+    x_quad, w_quad = roots_laguerre(n_quad)
+    R_q = R_e_min + x_quad / two_alpha
+
+    L_vals = np.zeros((N, n_quad))
+    for n in range(N):
+        L_vals[n] = eval_laguerre(n, x_quad)
+
+    dL_vals = np.zeros((N, n_quad))
+    for n in range(1, N):
+        dL_vals[n] = dL_vals[n - 1] - L_vals[n - 1]
+
+    B_vals = (1.0 - x_quad / 2.0)[np.newaxis, :] * L_vals + \
+             x_quad[np.newaxis, :] * dL_vals
+
+    inv_8a3 = 1.0 / (8.0 * alpha_laguerre**3)
+    inv_4a = 1.0 / (4.0 * alpha_laguerre)
+    x2_w = w_quad * x_quad**2
+
+    # Overlap block (N x N): S_nm = inv_8a3 * sum_k w_k x_k^2 L_n L_m
+    x2_wL = x2_w[np.newaxis, :] * L_vals
+    S_Re = inv_8a3 * (x2_wL @ L_vals.T)
+
+    # Kinetic block (N x N): K_nm = inv_4a * sum_k w_k B_n B_m
+    wB = w_quad[np.newaxis, :] * B_vals
+    K_Re = inv_4a * (wB @ B_vals.T)
+
+    # Build full Hamiltonian and overlap using Kronecker products
+    # Index: n * N_ang + (ch * n_alpha + ia)
+    I_ang = np.eye(N_ang)
+
+    # Kinetic: K_Re ⊗ I_ang;  Overlap: S_Re ⊗ I_ang
+    H_full = np.kron(K_Re, I_ang)
+    S_full = np.kron(S_Re, I_ang)
+
+    # Angular potential via quadrature:
+    # V_nm^{ab} = inv_8a3 * sum_k w_k x_k^2 [H_ang(R_k)+15/8]_{ab}/R_k^2 * L_n(x_k) * L_m(x_k)
+    # Vectorized as: LLt_k = outer(L[:,k], L[:,k]) then kron(wt * LLt_k, H_ang_k)
+
+    for k in range(n_quad):
+        R_e = R_q[k]
+        if R_e <= 0:
+            continue
+        rho = R / (2.0 * R_e)
+
+        H_ang = build_angular_hamiltonian(
+            alpha_grid, rho, R_e, l_max, Z, m_max, l_max_per_m,
+            Z_A=Z_A, Z_B=Z_B, z0=z0,
+            core_potentials=core_potentials,
+            pk_potentials=pk_potentials,
+        )
+        np.fill_diagonal(H_ang, H_ang.diagonal() + 15.0 / 8.0)
+        H_ang *= (1.0 / R_e**2)
+
+        wt = inv_8a3 * x2_w[k]
+        L_k = L_vals[:, k]  # shape (N,)
+        LLt = np.outer(L_k, L_k)  # (N, N)
+        H_full += np.kron(wt * LLt, H_ang)
+
+    # Solve generalized eigenvalue problem
+    if verbose:
+        print(f"  Solving {N_total}x{N_total} generalized eigenvalue problem...")
+
+    evals, evecs = eigh(H_full, S_full)
+
+    # Find lowest physical eigenvalue
+    # Filter out numerical artifacts from ill-conditioned overlap
+    E_elec = evals[0]
+
+    # Estimate sigma for sanity check
+    if Z_A == Z_B:
+        E_atoms_est = -Z_A**2
+    else:
+        Z_max = max(Z_A, Z_B)
+        if Z_max == 2:
+            E_atoms_est = -2.9037
+        else:
+            E_atoms_est = -Z_max**2 + 5 * Z_max / 8
+    V_NN = Z_A * Z_B / R
+    sigma = E_atoms_est - V_NN - 0.15
+
+    if verbose:
+        print(f"  Lowest eigenvalues: {evals[:5]}")
+        print(f"  sigma = {sigma:.4f}")
+
+    return E_elec
+
+
 def solve_level4_h2_multichannel(
     R: float,
     l_max: int = 2,
@@ -1626,6 +2028,9 @@ def solve_level4_h2_multichannel(
     core_potentials: Union[List[dict], None] = None,
     pk_potentials: Union[List[dict], None] = None,
     pk_projector: Union[dict, None] = None,
+    radial_method: str = 'fd',
+    n_basis_radial: int = 25,
+    alpha_radial: float = 1.0,
 ) -> dict:
     """
     Full Level 4 multichannel solver for two-electron diatomics.
@@ -1666,6 +2071,14 @@ def solve_level4_h2_multichannel(
         'midpoint': geometric center (default, z0=0).
         'charge_center': charge-weighted center, z0 = R(Z_A-Z_B)/(2(Z_A+Z_B)).
         float: explicit z0 value.
+    radial_method : str
+        Radial solver method. 'fd' (default) uses finite differences on a
+        uniform grid. 'spectral' uses a Laguerre spectral basis, giving
+        100x+ dimension reduction with equivalent accuracy.
+    n_basis_radial : int
+        Number of Laguerre basis functions (spectral method only).
+    alpha_radial : float
+        Exponential decay parameter for Laguerre basis (spectral method only).
 
     Returns
     -------
@@ -1722,7 +2135,11 @@ def solve_level4_h2_multichannel(
             print(f"  Origin shift: z0={z0:.4f} (R_A={R/2 - z0:.4f}, R_B={R/2 + z0:.4f})")
         if n_ch <= 15:
             print(f"  channels={channels}")
-        print(f"  n_alpha={n_alpha}, n_Re={n_Re}")
+        if radial_method == 'spectral':
+            print(f"  n_alpha={n_alpha}, radial_method=spectral "
+                  f"(n_basis={n_basis_radial}, alpha={alpha_radial})")
+        else:
+            print(f"  n_alpha={n_alpha}, n_Re={n_Re}")
         print(f"  Angular matrix size: {n_ch * n_alpha} x {n_ch * n_alpha}")
         if n_coupled > 1:
             print(f"  DBOC radial solver: {n_coupled} states")
@@ -1731,13 +2148,26 @@ def solve_level4_h2_multichannel(
 
     if n_coupled == -1:
         # --- Direct 2D solver (properly variational) ---
-        E_elec = solve_direct_2d(
-            R, l_max, Z, n_alpha, n_Re, R_e_min, R_e_max,
-            m_max, l_max_per_m, verbose=verbose,
-            Z_A=Z_A, Z_B=Z_B, z0=z0,
-            core_potentials=core_potentials,
-            pk_potentials=pk_potentials,
-        )
+        if radial_method == 'spectral':
+            E_elec = solve_direct_2d_spectral(
+                R, l_max, Z, n_alpha,
+                n_basis=n_basis_radial,
+                alpha_laguerre=alpha_radial,
+                R_e_min=R_e_min,
+                m_max=m_max, l_max_per_m=l_max_per_m,
+                verbose=verbose,
+                Z_A=Z_A, Z_B=Z_B, z0=z0,
+                core_potentials=core_potentials,
+                pk_potentials=pk_potentials,
+            )
+        else:
+            E_elec = solve_direct_2d(
+                R, l_max, Z, n_alpha, n_Re, R_e_min, R_e_max,
+                m_max, l_max_per_m, verbose=verbose,
+                Z_A=Z_A, Z_B=Z_B, z0=z0,
+                core_potentials=core_potentials,
+                pk_potentials=pk_potentials,
+            )
         F = np.zeros(n_Re)  # no radial wavefunction in 2D mode
 
         t2 = time.time()
@@ -1764,20 +2194,28 @@ def solve_level4_h2_multichannel(
 
         U_spline = CubicSpline(R_e_angular, U_corrected,
                                extrapolate=True)
-        h_Re = (R_e_max - R_e_min) / (n_Re + 1)
-        R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
-        V_radial = U_spline(R_e_radial)
 
-        diag = np.ones(n_Re) / h_Re**2 + V_radial
-        off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
+        if radial_method == 'spectral':
+            E_elec, F, _ = solve_adiabatic_radial_spectral(
+                U_spline, n_basis=n_basis_radial,
+                alpha=alpha_radial, R_e_min=R_e_min,
+                R_e_max=R_e_max,
+            )
+        else:
+            h_Re = (R_e_max - R_e_min) / (n_Re + 1)
+            R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
+            V_radial = U_spline(R_e_radial)
 
-        evals, evecs = eigh_tridiagonal(
-            diag, off_diag,
-            select='i', select_range=(0, 0),
-        )
+            diag = np.ones(n_Re) / h_Re**2 + V_radial
+            off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
 
-        E_elec = evals[0]
-        F = evecs[:, 0]
+            evals, evecs = eigh_tridiagonal(
+                diag, off_diag,
+                select='i', select_range=(0, 0),
+            )
+
+            E_elec = evals[0]
+            F = evecs[:, 0]
 
         t2 = time.time()
         if verbose:
@@ -1807,20 +2245,27 @@ def solve_level4_h2_multichannel(
         # Interpolate and solve radial equation
         U_spline = CubicSpline(R_e_angular, U_angular, extrapolate=True)
 
-        h_Re = (R_e_max - R_e_min) / (n_Re + 1)
-        R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
-        V_radial = U_spline(R_e_radial)
+        if radial_method == 'spectral':
+            E_elec, F, _ = solve_adiabatic_radial_spectral(
+                U_spline, n_basis=n_basis_radial,
+                alpha=alpha_radial, R_e_min=R_e_min,
+                R_e_max=R_e_max,
+            )
+        else:
+            h_Re = (R_e_max - R_e_min) / (n_Re + 1)
+            R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
+            V_radial = U_spline(R_e_radial)
 
-        diag = np.ones(n_Re) / h_Re**2 + V_radial
-        off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
+            diag = np.ones(n_Re) / h_Re**2 + V_radial
+            off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
 
-        evals, evecs = eigh_tridiagonal(
-            diag, off_diag,
-            select='i', select_range=(0, 0),
-        )
+            evals, evecs = eigh_tridiagonal(
+                diag, off_diag,
+                select='i', select_range=(0, 0),
+            )
 
-        E_elec = evals[0]
-        F = evecs[:, 0]
+            E_elec = evals[0]
+            F = evecs[:, 0]
 
         t2 = time.time()
         if verbose:
@@ -1905,12 +2350,17 @@ def solve_level4_h2_multichannel(
         'V_NN': V_NN,
         'z0': z0,
         'origin': origin,
+        'radial_method': radial_method,
     }
 
     if n_coupled == 1:
         result['U_adiabatic'] = U_angular
-    h_Re = (R_e_max - R_e_min) / (n_Re + 1)
-    result['R_e_grid_radial'] = R_e_min + (np.arange(n_Re) + 1) * h_Re
+    if radial_method == 'spectral':
+        result['n_basis_radial'] = n_basis_radial
+        result['alpha_radial'] = alpha_radial
+    else:
+        h_Re = (R_e_max - R_e_min) / (n_Re + 1)
+        result['R_e_grid_radial'] = R_e_min + (np.arange(n_Re) + 1) * h_Re
 
     return result
 

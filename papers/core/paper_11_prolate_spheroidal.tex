@@ -49,7 +49,11 @@ Laguerre basis---with Brent root-finding in the separation
 parameter $c^2 = -R^2 E_{\mathrm{elec}}/2$ to enforce self-consistency.
 For $\sigma$ states ($m = 0$), the spectral Laguerre matrix elements
 are computed algebraically from three-term recurrence relations,
-eliminating numerical quadrature entirely.
+eliminating numerical quadrature entirely.  For $\pi$ and $\delta$
+states ($m \neq 0$), an associated Laguerre basis absorbs the
+centrifugal $1/x$ singularity via partial-fraction decomposition and
+Stieltjes integral recurrence, reducing the non-algebraic content to
+a single transcendental seed value $e^a E_1(a)$.
 The method has \emph{zero} free parameters: all inputs are nuclear
 charges, internuclear distance, and basis/grid resolution.
 
@@ -501,8 +505,10 @@ sub-$0.01\%$ accuracy, and $N_b = 20$ reaches the
 $10^{-4}\%$ level.  The existing FD solver is preserved as the
 default for backward compatibility.
 
-\subsection{Algebraic matrix elements for \texorpdfstring{$\sigma$}{sigma} states}
+\subsection{Algebraic matrix elements}
 \label{sec:algebraic}
+
+\subsubsection{\texorpdfstring{$\sigma$}{Sigma} states (\texorpdfstring{$m = 0$}{m=0})}
 
 For $m = 0$ ($\sigma$ states), all matrix elements in the spectral
 Laguerre solver can be computed \emph{algebraically} from three-term
@@ -554,14 +560,110 @@ across all bond lengths, confirming exact equivalence.  The algebraic
 construction is approximately $1.6\times$ faster than quadrature,
 as it avoids computation of Gauss--Laguerre roots and weights.
 
+\subsubsection{\texorpdfstring{$\pi$, $\delta$}{Pi, delta} states (\texorpdfstring{$m \neq 0$}{m != 0}): associated Laguerre basis}
+\label{sec:algebraic_associated}
+
 For $m \neq 0$, the centrifugal term $m^2/(\xi^2 - 1)$ produces
-a $1/x$ singularity in the Laguerre variable, and the required
-integral $\int_0^\infty L_i\,L_j\,e^{-x}/x\,dx$ diverges at
-$x = 0$---it has no finite Laguerre moment expansion.  The solver
-therefore falls back to Gauss--Laguerre quadrature for $m \neq 0$
-states automatically.  Since the ground state $1s\sigma_g$ and all
-$\sigma$ excited states have $m = 0$, the algebraic method covers
-the primary use cases of the solver.
+a $1/x$ singularity in the Laguerre variable $x = 2\alpha(\xi - 1)$.
+In the \emph{ordinary} Laguerre basis, the required integral
+$\int_0^\infty L_i\,L_j\,e^{-x}/x\,dx$ diverges at $x = 0$---it
+has no finite Laguerre moment expansion.
+
+The obstruction is removed by switching to the \emph{associated
+Laguerre basis} $L_n^{(\lvert m\rvert)}(x)$ with weight
+$x^{\lvert m\rvert} e^{-x}$.  The basis functions
+\begin{equation}
+  \varphi_n(\xi) = (\xi - 1)^{\lvert m\rvert/2}\,
+    e^{-\alpha(\xi-1)}\,L_n^{(\lvert m\rvert)}\bigl(2\alpha(\xi-1)\bigr)
+  \label{eq:associated_basis}
+\end{equation}
+absorb the $(\xi-1)^{\lvert m\rvert/2}$ prefactor that enforces the
+Dirichlet condition at $\xi = 1$, converting the $1/x$ singularity
+into a \emph{lowered moment} $M_{-1}^{(\alpha_L)}$ that converges for
+$\alpha_L = \lvert m\rvert \geq 1$.
+
+The centrifugal matrix element decomposes via partial fractions:
+\begin{equation}
+  \frac{m^2}{\xi^2 - 1} = \frac{m^2}{(x/\beta)(x/\beta + 2)}
+  = \frac{m^2\beta}{2}\left(\frac{1}{x} - \frac{1}{x + 2\beta}\right),
+  \label{eq:partial_fraction}
+\end{equation}
+where $\beta = 2\alpha$.  The first term gives the lowered moment
+matrix $M_{-1}^{(\alpha_L)}$, computed algebraically from the
+summation identity (DLMF~18.9.13):
+\begin{equation}
+  L_n^{(\alpha)}(x) = \sum_{k=0}^{n} L_k^{(\alpha-1)}(x)
+  \quad\Longrightarrow\quad
+  M_{-1}[i,j] = \sum_{p=0}^{\min(i,j)} h_p^{(\alpha_L - 1)},
+  \label{eq:lowered_moment}
+\end{equation}
+where $h_p^{(\alpha)} = \Gamma(p + \alpha + 1)/p!$ is the
+orthogonality constant.
+
+The second term in~\eqref{eq:partial_fraction} gives a
+\emph{Stieltjes integral matrix}:
+\begin{equation}
+  J^{(\alpha_L)}_{ij}(a) = \int_0^\infty
+    \frac{x^{\alpha_L}\,e^{-x}\,L_i^{(\alpha_L)}(x)\,L_j^{(\alpha_L)}(x)}
+    {x + a}\,dx,
+  \label{eq:stieltjes}
+\end{equation}
+with $a = 2\beta$.  This is evaluated by a three-term recurrence
+seeded by the single transcendental value
+\begin{equation}
+  S_0^{(0)}(a) = e^a\,E_1(a),
+  \label{eq:stieltjes_seed}
+\end{equation}
+where $E_1$ is the exponential integral.  Higher orders
+$S_0^{(k)}(a) = \Gamma(k) - a\,S_0^{(k-1)}(a)$ are rational in~$a$
+for $k \geq 1$, and column entries follow from the associated
+Laguerre three-term recurrence applied to the denominator.
+Miller's backward recurrence is used to ensure numerical stability
+of the minimal solution.
+
+The overlap, potential, and kinetic matrices in the associated
+basis are assembled from $M_0^{(\alpha_L)}$, $M_1^{(\alpha_L)}$,
+$M_2^{(\alpha_L)}$ (band matrices from the associated three-term
+recurrence), $M_{-1}^{(\alpha_L)}$, and $J^{(\alpha_L)}(2\beta)$.
+The kinetic matrix uses a derivative kernel with coefficients
+$G_0[n,n] = \lvert m\rvert/2 + n$, $G_0[n,n-1] = -(n + \alpha_L)$
+and $G_1[n,n] = -1/2$, combined with weighted moment matrices
+$P_k = M_k + 2\beta\,M_{k-1}$.
+
+\emph{Qualitative distinction from $m = 0$:}  The $m = 0$ algebraic
+construction is \emph{fully rational}---every matrix element is a
+finite combination of integers and the Laguerre scale $\alpha$.
+For $m \neq 0$, the single transcendental seed $e^a E_1(a)$
+in~\eqref{eq:stieltjes_seed} propagates through the Stieltjes
+matrix.  All other matrix elements remain algebraic.
+
+Table~\ref{tab:associated_convergence} shows the convergence
+behavior.  The associated basis converges faster than the ordinary
+basis with quadrature for $\lvert m\rvert = 1$ (stable by
+$N = 10$ vs.\ non-monotonic at $N = 40$), and both bases agree
+to $\sim 5 \times 10^{-9}$ for $\lvert m\rvert = 2$.
+
+\begin{table}[h]
+\caption{\label{tab:associated_convergence}
+  H$_2^+$ $1\pi_u$ state ($m = 1$) at $R = 2.0$~bohr.
+  Energies from the associated Laguerre (algebraic) and ordinary
+  Laguerre (quadrature) spectral bases, compared to the FD
+  reference (extrapolated).  The associated basis converges by
+  $N = 10$; ordinary Laguerre is non-monotonic and slower.}
+\begin{ruledtabular}
+\begin{tabular}{rdd}
+  $N$ & \multicolumn{1}{c}{$E_{\mathrm{assoc}}$ (Ha)}
+      & \multicolumn{1}{c}{$E_{\mathrm{ord}}$ (Ha)} \\
+\hline
+   5  &  0.071\,228\,3  &  0.072\,583\,7 \\
+  10  &  0.071\,228\,2  &  0.071\,156\,5 \\
+  15  &  0.071\,228\,2  &  0.070\,794\,9 \\
+  20  &  0.071\,228\,2  &  0.070\,659\,0 \\
+  25  &  0.071\,228\,2  &  0.070\,770\,1 \\
+  30  &  0.071\,228\,2  &  0.070\,844\,7 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
 
 %% ========================================================================
 %% VI. ROOT-FINDING AND SELF-CONSISTENCY

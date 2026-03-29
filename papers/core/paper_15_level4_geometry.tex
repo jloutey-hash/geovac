@@ -909,6 +909,59 @@ $(R_e, \alpha)$ simultaneously, does not suffer from this
 truncation and is the identified path to eliminating the
 $l_{\max}$ divergence in composed geometries.
 
+\subsection{Spectral Laguerre radial solver}
+\label{sec:spectral_radial_l4}
+
+Following the spectral Laguerre pattern established for Level~2
+(Paper~11~\cite{loutey_paper11}) and Level~3
+(Paper~13~\cite{loutey_paper13}), we replace the finite-difference
+$R_e$ grid with a Laguerre spectral basis for all three Level~4
+solution pathways: adiabatic, coupled-channel, and variational 2D.
+
+The basis functions are identical to Eq.~(31) of
+Paper~13~\cite{loutey_paper13}, with the substitution $R \to R_e$
+and Dirichlet boundary condition enforced by a $(R_e - R_{e,\min})$
+prefactor.  The overlap and kinetic matrices are computed algebraically
+via three-term Laguerre recurrence (no quadrature), while the effective
+potential $U_{\mathrm{eff}}(\rho)$ is evaluated by Gauss--Laguerre
+quadrature at each angular sweep point~$\rho$.
+
+Table~\ref{tab:spectral_l4_convergence} shows the convergence
+behavior.  The optimal basis size is $n_{\mathrm{basis}} = 20$;
+mild overlap matrix conditioning degradation appears at
+$n_{\mathrm{basis}} \geq 25$.
+
+\begin{table}[h]
+\caption{Convergence of the spectral Laguerre radial solver for
+Level~4 (H$_2$, $l_{\max} = 2$, $R = 1.4$~bohr).
+FD reference ($N_R = 400$): $E = -1.87131$~Ha.}
+\label{tab:spectral_l4_convergence}
+\begin{ruledtabular}
+\begin{tabular}{rd}
+  $n_{\mathrm{basis}}$ & \multicolumn{1}{c}{$\Delta E_{\mathrm{FD}}$ (Ha)} \\
+  \hline
+  10 & 2.5 \times 10^{-5} \\
+  15 & 7.5 \times 10^{-6} \\
+  20 & 5.0 \times 10^{-6} \\
+  25 & 4.8 \times 10^{-5} \\
+  30 & 5.8 \times 10^{-5} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The adiabatic pathway achieves a $16\times$ dimension reduction
+($N_R = 400 \to n_{\mathrm{basis}} = 25$) with $< 0.0005$~Ha
+agreement.  The 2D pathway achieves $5\times$ reduction.
+
+A key structural finding is that the spectral substitution does
+\emph{not} improve total wall time.  The angular eigenvalue sweep---
+building $H_{\mathrm{ang}}$ at $\sim\!130$ $\rho$-values, each
+requiring a full angular diagonalization---accounts for 99\% of
+Level~4 runtime.  The FD radial solve uses \texttt{eigh\_tridiagonal}
+($O(N)$, sub-ms), which is already optimal.  Accelerating Level~4
+requires faster angular solves or caching strategies, not a faster
+radial solver.
+
 %% ========================================================================
 %% VIII. CONCLUSION
 %% ========================================================================

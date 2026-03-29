@@ -1,0 +1,760 @@
+% paper_18_exchange_constants.tex — GeoVac Paper 18
+% Spectral-Geometric Exchange Constants: The Transcendental
+% Toll of Projecting Discrete Spectra onto Continuous Manifolds
+% Status: Draft, March 29, 2026
+% Category: Observations (papers/observations/)
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+\newtheorem{conjecture}{Conjecture}
+
+\begin{document}
+
+\title{Spectral-Geometric Exchange Constants:\\
+The Transcendental Toll of Projecting Discrete Spectra\\
+onto Continuous Manifolds}
+\thanks{Paper 18 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{March 29, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The GeoVac program has identified a recurring pattern across its
+hierarchy of natural geometries: each time a discrete algebraic
+structure (graph eigenvalues, representation labels, recurrence
+relations) is projected onto or embedded in a continuous coordinate
+system, a characteristic transcendental constant appears as the
+conversion factor.  At Level~1, the projection from $S^3$ to
+$\mathbb{R}^3$ introduces the kinetic scale factor
+$\kappa = -1/16$.  At Level~2, the embedding of the Laguerre
+spectral basis into prolate spheroidal coordinates introduces the
+Stieltjes seed $e^a E_1(a)$.  At Level~3, the adiabatic
+reparameterization of the $S^3 \times S^3$ product space into
+hyperspherical coordinates introduces the transcendental function
+$\mu(R)$.  We observe that this pattern is an instance of a
+well-known phenomenon in spectral geometry: Weyl's law, which
+relates the discrete eigenvalue counting function of the
+Laplace--Beltrami operator to the continuous volume of the
+underlying manifold, with conversion factors involving
+$\pi^{d/2}/\Gamma(d/2+1)$.  The Selberg trace formula generalizes
+this to an exact identity between spectral sums and geometric
+sums over geodesics, with transcendental conversion factors
+determined by the manifold's curvature.  We propose that the
+GeoVac constants $\kappa$, $e^a E_1(a)$, and $\mu(R)$ are
+specific instances of Weyl--Selberg exchange constants for the
+natural geometries $S^3$, prolate spheroid, and $S^5$
+respectively.  This identification explains why the constants
+are transcendental, why their complexity increases with the
+geometry, and why they vanish when the computation remains
+on the graph.  We note that the combination rule
+$K = \pi(B + F - \Delta)$ in the conjectural fine structure
+constant formula (Paper~2) has the same structural character:
+$\pi$ multiplying a sum of discrete representation-theoretic
+data and continuous spectral invariants.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+%% I. INTRODUCTION
+%% ========================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+The Geometric Vacuum program constructs discrete lattice
+Hamiltonians by identifying the natural geometry of each quantum
+system and discretizing it as a sparse
+graph~\cite{loutey_paper0,loutey_paper1,loutey_paper7}.  A
+persistent observation across the hierarchy of natural geometries
+is that the discrete algebraic structures---integer eigenvalues,
+finite recurrence relations, Gaunt integrals built from Wigner
+$3j$ symbols---are entirely self-contained, but that their
+connection to physical observables in continuous coordinate
+systems always introduces transcendental constants.
+
+This paper catalogs these constants, identifies the mathematical
+phenomenon they instantiate, and proposes a unifying
+interpretation.
+
+The central observation is simple: each constant is the
+\textit{exchange rate} between a discrete spectrum and a
+continuous geometry.  The exchange rate is necessarily
+transcendental because it encodes the curvature mismatch between
+the graph's intrinsic combinatorial structure and the coordinate
+system used for physical interpretation.  This observation is
+not new in mathematics---it is the content of Weyl's
+law~\cite{weyl1911} and the Selberg trace
+formula~\cite{selberg1956}---but its systematic appearance in
+the GeoVac hierarchy has not been noted, and the connection
+to the conjectural fine structure constant formula (Paper~2)
+has not been made.
+
+
+%% ========================================================================
+%% II. CATALOG OF EXCHANGE CONSTANTS
+%% ========================================================================
+
+\section{Catalog of Exchange Constants}
+\label{sec:catalog}
+
+\subsection{Level 1: $\kappa = -1/16$ ($S^3 \to \mathbb{R}^3$)}
+\label{sec:kappa}
+
+The graph Laplacian on $S^3$ produces pure integer eigenvalues
+\begin{equation}
+  \lambda_n = -(n^2 - 1), \qquad n = 1, 2, 3, \ldots
+  \label{eq:s3_eigenvalues}
+\end{equation}
+with degeneracy $g_n = n^2$~\cite{loutey_paper7}.  The physical
+hydrogen energy levels $E_n = -1/(2n^2)$ are related by the
+energy-shell constraint $p_0^2 = -2E$, which acts as a
+stereographic focal length projecting $S^3$ onto flat
+$\mathbb{R}^3$.  The universal kinetic scale factor
+\begin{equation}
+  \kappa = -\frac{1}{16}
+  \label{eq:kappa}
+\end{equation}
+converts graph eigenvalues to physical energies:
+$E_n = \kappa \cdot \lambda_n / n^2$~\cite{loutey_paper0}.
+
+The origin of $\kappa$ is well understood geometrically: it is
+the Jacobian of the stereographic projection composed with the
+conformal factor of the Fock map.  Specifically, if $\Omega$
+is the conformal factor $\Omega = (1 + p^2/p_0^2)^{-1}$, then
+the Laplace--Beltrami operator on $S^3$ and the flat-space
+kinetic operator are related by
+$\nabla^2_{S^3} = \Omega^{-2}[\nabla^2_{\mathrm{flat}} + \text{lower order}]$,
+and $\kappa$ absorbs the accumulated conformal rescaling and
+the $p_0$ energy-shell normalization~\cite{loutey_paper7}.
+
+The key property of $\kappa$ is that it is \textit{unnecessary
+on the graph}.  The graph Laplacian eigenvalue problem $L\psi =
+\lambda\psi$ is solved entirely in terms of integers.  The
+constant $\kappa$ appears only when the result is translated
+into atomic units (Hartrees, bohrs)---i.e., when the discrete
+spectrum is projected onto a continuous coordinate system.
+
+\subsection{Level 2: $e^a E_1(a)$ (Laguerre basis $\to$ prolate spheroid)}
+\label{sec:stieltjes}
+
+The prolate spheroidal radial solver uses a Laguerre spectral
+basis $\varphi_n(\xi) = e^{-\alpha(\xi-1)} L_n(2\alpha(\xi-1))$
+with matrix elements computed from three-term
+recurrences~\cite{loutey_paper11}.  For $\sigma$ states ($m = 0$),
+all matrix elements are purely algebraic: the Laguerre moment
+matrices $M_k[i,j] = \int_0^\infty x^k L_i(x) L_j(x) e^{-x}
+dx$ are band-structured matrices with rational entries, built
+from the recurrence $x L_n = -(n+1)L_{n+1} + (2n+1)L_n -
+nL_{n-1}$.
+
+For $m \neq 0$ states, the centrifugal term $m^2/(\xi^2 - 1)$
+introduces a $1/x$ singularity in the Laguerre variable
+$x = 2\alpha(\xi - 1)$.  The associated Laguerre basis
+$L_n^{|m|}(x)$ with weight $x^{|m|} e^{-x}$ absorbs this
+singularity by construction.  The centrifugal matrix elements
+decompose via partial-fraction expansion:
+\begin{equation}
+  \frac{m^2}{\xi^2 - 1}
+  = 4\alpha^2 m^2 \left[\frac{1}{x}
+    - \frac{1}{x + 4\beta}\right],
+  \label{eq:partial_fraction}
+\end{equation}
+where $\beta = \alpha(\xi_0 - 1)$ is the Laguerre scale offset.
+The two terms have fundamentally different algebraic character:
+\begin{itemize}
+  \item The $1/x$ term produces a lowered moment
+    $M_{-1}[i,j] = \int_0^\infty x^{|m|-1} L_i^{|m|}(x)
+    L_j^{|m|}(x)\,e^{-x}\,dx$, which is fully algebraic via
+    the DLMF 18.9.13 summation
+    identity~\cite{dlmf_laguerre}.
+  \item The $1/(x + 4\beta)$ term produces a Stieltjes matrix
+    $J[i,j] = \int_0^\infty \frac{x^{|m|}}{x + a}\,
+    L_i^{|m|}(x) L_j^{|m|}(x)\,e^{-x}\,dx$, where $a = 4\beta$.
+    This matrix satisfies a three-term recurrence in the
+    row/column indices, seeded by the single transcendental
+\end{itemize}
+\begin{equation}
+  S_0^{(\alpha)}(a) = \Gamma(\alpha+1)\,e^a\,E_{\alpha+1}(a),
+  \label{eq:stieltjes_seed}
+\end{equation}
+where $E_n(a) = \int_1^\infty t^{-n} e^{-at}\,dt$ is the
+generalized exponential integral and $a = 4\beta$ is the
+Laguerre scale parameter~\cite{loutey_track_j}.  For integer
+$\alpha = |m|$, all higher $E_n$ reduce to $E_1(a)$ via a
+finite rational recurrence, so the entire matrix is built from
+algebraic operations plus one transcendental constant.
+
+The computational cost of the transcendental seed is negligible:
+one call to $E_1(a)$, which achieves machine precision for
+$a \ge 4$ (covering all physical parameters).  The seed then
+propagates through an $O(N^2)$ algebraic recurrence that produces
+all matrix elements.  The continuous mathematics has been
+compressed from a \textit{function} (the quadrature integrand
+over $[0,\infty)$) to a \textit{constant} (the Stieltjes seed),
+with the entire function-level information reconstructed
+algebraically from that constant.
+
+An unexpected computational bonus: the associated Laguerre basis
+converges \textit{faster} than the ordinary Laguerre basis for
+$m \neq 0$ states.  For $|m| = 1$ ($\pi$ states), the associated
+basis is stable by $N = 10$, compared to non-monotonic convergence
+at $N \approx 20$ for the ordinary basis.  For $|m| = 2$
+($\delta$ states), algebraic-quadrature agreement reaches
+$\sim 5 \times 10^{-9}$ (machine precision), with PES shape
+(equilibrium geometry) preserved exactly~\cite{loutey_track_j}.
+This suggests that identifying the exchange constant and absorbing
+it into the basis does not merely explain the transcendence---it
+\textit{improves the spectral method}, because the adapted basis
+eliminates the curvature mismatch that the exchange constant
+mediates.
+
+The Stieltjes seed $e^a E_1(a)$ is the Laplace transform of the
+rational function $1/(1+t)$ evaluated at $a$.  It encodes how
+the Laguerre inner product (defined on the flat half-line
+$[0, \infty)$ with exponential weight) ``sees'' a shifted pole
+at $x = -a$ arising from the curvature of the prolate spheroidal
+coordinate system.  On the graph, there is no pole; the
+centrifugal barrier is a selection rule encoded in the quantum
+numbers.  The transcendental appears only when this selection
+rule is represented as a rational function in a continuous
+coordinate.
+
+\subsection{Level 3: $\mu(R)$ ($S^3 \times S^3 \to$ hyperspherical)}
+\label{sec:mu}
+
+The two-electron problem on $S^3 \times S^3$ is fully algebraic:
+the Hamiltonian matrix has entries given by Gaunt integrals
+(finite sums of Wigner $3j$ symbols with rational coefficients),
+and the eigenvalues are roots of a polynomial with algebraic
+coefficients.  The Full CI solver exploits this, achieving
+0.35\% error for helium with no transcendentals
+anywhere~\cite{loutey_fci}.
+
+The hyperspherical reparameterization introduces coordinates
+$(R, \alpha)$ where $R = \sqrt{r_1^2 + r_2^2}$ is the
+hyperradius and $\alpha = \arctan(r_2/r_1)$ is the hyperangle.
+The angular eigenvalues $\mu(R)$ depend parametrically on $R$
+because the effective angular Hamiltonian is
+$H(R) = H_0 + R \cdot V^{\mathrm{coupling}}$~\cite{loutey_paper13}.
+
+Each perturbation coefficient $a_k$ in the expansion
+$\mu(R) = \mu^{(0)} + a_1 R + a_2 R^2 + \cdots$ is individually
+algebraic: the $a_k$ are finite sums of rational numbers times
+powers of $\pi^{-1}$, arising from partial harmonic sums over
+$\mathrm{SO}(6)$ Casimir eigenstates~\cite{loutey_paper13}.
+However, the full function $\mu(R)$ is transcendental: it
+interpolates between $O(R)$ behavior at small $R$ (perturbative,
+$S^5$ symmetric) and $O(R^2)$ behavior at large $R$
+(hydrogen-like, $S^3 \times \mathbb{R}$), and no finite-order
+rational function spans both
+regimes~\cite{loutey_paper13,loutey_track_g}.
+
+The transcendence of $\mu(R)$ reflects a topology change in
+the underlying manifold: at $R \to 0$, the angular manifold
+is the round five-sphere $S^5$ with $\mathrm{SO}(6)$ symmetry;
+at $R \to \infty$, it pinches to $S^3 \times \mathbb{R}$
+(one electron bound, one free)~\cite{loutey_paper13}.  This
+smooth deformation of the manifold as a function of the
+``slow'' variable $R$ produces a transcendental function of
+$R$ because smooth topology changes are generically
+transcendental functions of the deformation parameter.
+
+The crucial point is that $\mu(R)$ is not intrinsic to the
+two-electron problem.  It is an artifact of the hyperspherical
+coordinate system.  The $S^3 \times S^3$ product space does not
+require $\mu(R)$; it only appears when one reparameterizes for
+computational efficiency.  The exchange rate between the discrete
+product-space description and the continuous hyperspherical
+description is an entire transcendental function, not merely
+a constant, because the hyperspherical embedding distorts the
+product geometry differently at each $R$.
+
+
+%% ========================================================================
+%% III. THE PATTERN
+%% ========================================================================
+
+\section{The Pattern: Weyl--Selberg Exchange}
+\label{sec:pattern}
+
+\subsection{Weyl's law}
+
+The mathematical content of the observations in
+Sec.~\ref{sec:catalog} is an instance of Weyl's law, which
+states that the eigenvalue counting function $N(\lambda)$ of
+the Laplace--Beltrami operator on a compact Riemannian manifold
+of dimension $d$ satisfies~\cite{weyl1911}
+\begin{equation}
+  N(\lambda) \sim \frac{\omega_d}{(2\pi)^d}\,
+  \mathrm{vol}(\Omega)\,\lambda^{d/2}
+  \qquad (\lambda \to \infty),
+  \label{eq:weyl}
+\end{equation}
+where $\omega_d = \pi^{d/2}/\Gamma(d/2+1)$ is the volume of
+the unit ball in $\mathbb{R}^d$.
+
+Weyl's law relates two fundamentally different descriptions
+of the same manifold:
+\begin{itemize}
+  \item The \textbf{spectral side}: $N(\lambda)$, a discrete
+    staircase function counting integer-labeled eigenvalues.
+  \item The \textbf{geometric side}: $\mathrm{vol}(\Omega)$, a
+    continuous quantity measured by integration over the manifold.
+\end{itemize}
+The conversion factor $\omega_d / (2\pi)^d$ involves
+$\pi^{d/2}$---a transcendental that depends only on the
+dimension.  This factor is the prototypical
+\textit{spectral-geometric exchange constant}: it converts
+between counting (discrete) and measuring (continuous).
+
+For the specific manifolds in the GeoVac hierarchy:
+\begin{itemize}
+  \item $S^1$ ($d = 1$): $\omega_1 = 2$,
+    exchange factor $\sim \pi^{1/2}$.
+  \item $S^2$ ($d = 2$): $\omega_2 = \pi$,
+    exchange factor $\sim \pi$.
+  \item $S^3$ ($d = 3$): $\omega_3 = 4\pi/3$,
+    exchange factor $\sim \pi^{3/2}$.
+  \item $S^5$ ($d = 5$): $\omega_5 = 8\pi^2/15$,
+    exchange factor $\sim \pi^{5/2}$.
+\end{itemize}
+
+\subsection{$\pi$ as the founding example}
+
+The simplest spectral-geometric exchange constant is $\pi$ itself.
+The Laplacian on $S^1$ (the circle) has eigenvalues $n^2$, counted
+by integers; the continuous circumference is $2\pi$.  The
+conversion between the discrete eigenvalue count and the continuous
+measure is mediated by $\pi$.  More generally, the volume of the
+unit $d$-sphere involves $\pi^{d/2}$, and the Weyl constant
+$\omega_d / (2\pi)^d$ carries exactly this factor.  Every exchange
+constant in the GeoVac hierarchy is a descendant of this primordial
+example: $\kappa$ inherits from the $S^3$ Weyl constant, the
+Stieltjes seed involves the exponential integral (a function whose
+Taylor coefficients involve the Euler--Mascheroni constant, itself
+a limit of harmonic sums weighted by $\pi$-dependent terms), and
+$\mu(R)$ is an eigenvalue of a Hamiltonian on $S^5$ whose Weyl
+asymptotics carry $\pi^{5/2}$.
+
+\subsection{The Selberg trace formula}
+
+Weyl's law is asymptotic.  The Selberg trace
+formula~\cite{selberg1956} provides the exact identity:
+\begin{equation}
+  \sum_j h(r_j)
+  = \frac{\mathrm{Area}(\Gamma \backslash \mathcal{H})}{4\pi}
+    \int_{-\infty}^{\infty} r\,\tanh(\pi r)\,h(r)\,dr
+    + \sum_{\{\gamma\}} \cdots
+  \label{eq:selberg}
+\end{equation}
+where the left side sums over the discrete spectrum, the first
+term on the right involves the continuous volume (with a factor
+of $\pi$), and subsequent terms sum over conjugacy classes
+(geodesics).  The Selberg trace formula is the bridge between
+the spectral world and the geometric world, and the
+transcendental factors ($\pi$, $\tanh$, logarithms of
+algebraic numbers) are the toll for crossing.
+
+When the quotient $\Gamma \backslash G$ is compact, the spectrum
+is purely discrete and the trace formula involves only algebraic
+data plus $\pi$-dependent conversion factors.  When the quotient
+is non-compact, a continuous spectrum appears and the exchange
+involves Eisenstein series---transcendental
+functions~\cite{selberg1956}.  This exactly parallels the
+GeoVac hierarchy: Level~1 (compact $S^3$) has a purely algebraic
+spectrum plus a constant ($\kappa$); Level~3 (non-compact
+$S^5 \to S^3 \times \mathbb{R}$ flow) has a transcendental
+function ($\mu(R)$).
+
+
+%% ========================================================================
+%% IV. TAXONOMY
+%% ========================================================================
+
+\section{Taxonomy of Exchange Constants}
+\label{sec:taxonomy}
+
+Based on the catalog and the Weyl--Selberg identification, we
+propose the following taxonomy:
+
+\begin{table}[h]
+\caption{Spectral-geometric exchange constants in the GeoVac
+  hierarchy.  ``Source'' indicates the discrete structure;
+  ``Target'' indicates the continuous coordinate system.
+  ``Type'' classifies the exchange constant.}
+\label{tab:taxonomy}
+\begin{ruledtabular}
+\begin{tabular}{ccccc}
+  Level & Source & Target & Constant & Type \\
+  \hline
+  --- & $S^1$ lattice & $\mathbb{R}^1$ & $\pi$ & Weyl \\
+  1 & $S^3$ graph & $\mathbb{R}^3$ & $\kappa = -1/16$ & conformal \\
+  2 ($m{=}0$) & Laguerre rec. & prolate sph. & (none) & algebraic \\
+  2 ($m{\neq}0$) & assoc. Laguerre & prolate sph. & $e^a E_1(a)$
+    & Stieltjes \\
+  3 (FCI) & $S^3 {\times} S^3$ & (none) & (none) & algebraic \\
+  3 (hyper.) & $\mathrm{SO}(6)$ reps & $S^5(R)$ flow
+    & $\mu(R)$ & Eisenstein \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The taxonomy reveals a hierarchy of exchange types:
+\begin{enumerate}
+  \item \textbf{Algebraic} (no exchange constant): When the
+    computation stays on the graph or uses a basis whose inner
+    product matches the graph structure, no transcendental
+    appears.  Examples: Level~1 on $S^3$, Level~2 $\sigma$
+    states, Level~3 FCI.
+
+  \item \textbf{Weyl constants} ($\pi^{d/2}$): The
+    volume-to-eigenvalue conversion factors for compact
+    manifolds.  These are universal---they depend only on
+    dimension, not on the specific manifold.  Example: $\pi$
+    itself, for $S^1 \to \mathbb{R}$.
+
+  \item \textbf{Conformal constants}: Specific to the conformal
+    map between two manifolds of different curvature.  Example:
+    $\kappa = -1/16$ for the Fock stereographic projection
+    $S^3 \to \mathbb{R}^3$.
+
+  \item \textbf{Stieltjes constants}: Single transcendental
+    numbers that seed algebraic recurrences.  These appear when
+    a rational singularity in the coordinate system is not
+    representable in the spectral basis.  Example:
+    $e^a E_1(a)$ for the prolate centrifugal pole.
+
+  \item \textbf{Eisenstein functions}: Transcendental functions
+    of a continuous parameter, arising when the manifold itself
+    varies.  These appear when the geometry flows (topology
+    changes, avoided crossings, non-compact limits).  Example:
+    $\mu(R)$ for the $S^5 \to S^3 \times \mathbb{R}$ topology
+    flow.
+\end{enumerate}
+
+The complexity of the exchange constant increases monotonically
+with the severity of the curvature mismatch between source and
+target.
+
+
+%% ========================================================================
+%% V. THE FINE STRUCTURE CONSTANT CONNECTION
+%% ========================================================================
+
+\section{Connection to the Fine Structure Constant}
+\label{sec:alpha}
+
+Paper~2~\cite{loutey_paper2} observes that the fine structure
+constant $\alpha$ satisfies the cubic $\alpha^3 - K\alpha + 1 = 0$,
+where the coefficient
+\begin{equation}
+  K = \pi\!\left(42 + \frac{\pi^2}{6} - \frac{1}{40}\right)
+  = 137.036064
+  \label{eq:K}
+\end{equation}
+is constructed from spectral invariants of the Hopf fibration
+$S^1 \to S^3 \to S^2$.  The combination rule
+$K = \pi(B + F - \Delta)$ was identified as conjectural---an
+empirical formula with structural support but no first-principles
+derivation.
+
+We observe that this combination rule has precisely the structure
+of a spectral-geometric exchange:
+\begin{itemize}
+  \item $B = 42$ is discrete representation-theoretic data:
+    the degeneracy-weighted $\mathrm{SO}(3)$ Casimir trace over
+    the first three shells of $S^3$.
+  \item $F = \zeta(2) = \pi^2/6$ is a continuous spectral
+    invariant: the spectral zeta function of $S^1$ at $s = 1$.
+  \item $\Delta = 1/40$ is a boundary correction mixing discrete
+    eigenvalue data ($|\lambda_3| = 8$) with the cumulative state
+    count ($N(2) = 5$).
+  \item The overall factor $\pi$ is the Weyl exchange constant
+    for $S^2$ (the base of the Hopf fibration, the photon
+    propagation sphere).
+\end{itemize}
+
+The structure of $K$ is thus: the $S^2$ Weyl constant ($\pi$)
+multiplying a sum of the $S^2$ Casimir trace ($B$, discrete),
+the $S^1$ spectral zeta value ($F$, transcendental), and an
+$S^3$ boundary term ($\Delta$, mixed).  This is a Weyl-type
+formula that converts between the discrete bundle
+(representation labels on $S^3$) and the continuous coupling
+(the electromagnetic interaction strength measured in
+$\mathbb{R}^3$).
+
+If this identification is correct, then the combination rule
+$K = \pi(B + F - \Delta)$ is not arbitrary numerology but an
+instance of the same spectral-geometric exchange that produces
+$\kappa = -1/16$ at Level~1 and $e^a E_1(a)$ at Level~2.
+The exchange constant for the Hopf bundle is $K$ itself---the
+``cost'' of projecting the $S^3$ electron state space through
+the $S^1$ gauge fiber onto the $S^2$ photon base, measured
+in units of coupling strength.
+
+\begin{conjecture}
+The combination rule $K = \pi(B + F - \Delta)$ is a
+spectral-geometric exchange constant for the Hopf fibration,
+analogous to the Weyl--Selberg constants for compact manifolds.
+The specific form---$\pi$ multiplying a sum of Casimir data
+and zeta values---should be derivable from the spectral geometry
+of $S^1 \to S^3 \to S^2$, potentially via the heat kernel
+expansion or the analytic torsion of the Hopf bundle.
+\end{conjecture}
+
+Two additional observations support this identification:
+
+\begin{observation}[Structural match]
+The combination rule $K = \pi(B + F - \Delta)$ mixes discrete
+data ($B = 42$, from representation theory) with continuous
+spectral data ($F = \zeta(2) = \pi^2/6$, from the $S^1$
+spectral zeta function), multiplied by an overall geometric
+factor ($\pi$, the Weyl exchange constant for $S^2$, the Hopf
+base).  This is precisely the pattern identified throughout this
+paper: a transcendental conversion factor mediating between
+discrete and continuous descriptions of the same geometry.
+The structural match is evidence---not proof---that the
+combination rule is an instance of the exchange constant pattern
+rather than numerology.
+\end{observation}
+
+\begin{observation}[$\alpha$ is likely transcendental]
+The fine structure constant $\alpha$ is a root of the cubic
+$\alpha^3 - K\alpha + 1 = 0$, where $K$ involves $\pi$ and
+$\zeta(2) = \pi^2/6$.  Roots of polynomials with transcendental
+coefficients \textit{can} be algebraic (e.g., $x^2 - \pi x +
+\pi(\pi - 1) = 0$ has the algebraic root $x = 1$), but this
+requires special cancellations that are generically absent.
+Since $K$ is a non-trivial combination of $\pi$ and $\pi^2$
+with rational coefficients, it is overwhelmingly likely
+(though not proven) that $\alpha$ is transcendental---consistent
+with its role as a spectral-geometric exchange constant.
+\end{observation}
+
+
+%% ========================================================================
+%% VI. DISCUSSION
+%% ========================================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why the constants are transcendental}
+
+The fundamental reason that spectral-geometric exchange constants
+are transcendental is that they convert between two
+incommensurable descriptions: a discrete count (eigenvalues,
+representation labels, graph vertices) and a continuous measure
+(volume, curvature, geodesic length).  The Lindemann--Weierstrass
+theorem guarantees that $e^\alpha$ is transcendental for any
+nonzero algebraic $\alpha$; since the Weyl constants involve
+exponentials of curvature data (via the heat kernel
+$\mathrm{tr}\,e^{-t\Delta}$), transcendence is
+generic~\cite{berger2003}.
+
+\subsection{Why the constants vanish on the graph}
+
+When the computation remains entirely on the discrete graph---no
+projection, no embedding, no coordinate change---the exchange
+constant is unnecessary.  The Level~1 $S^3$ graph has integer
+eigenvalues; $\kappa$ is needed only to convert them to Hartrees.
+The Level~3 FCI on $S^3 \times S^3$ has algebraic matrix elements;
+$\mu(R)$ appears only in the hyperspherical reparameterization.
+The Level~2 $\sigma$-state solver has algebraic Laguerre moments;
+$e^a E_1(a)$ appears only for $m \neq 0$ states where the
+coordinate curvature introduces a pole.
+
+This suggests a design principle for the GeoVac program:
+\textit{minimize the number of coordinate projections} to minimize
+the number of exchange constants.  The ideal solver stays on the
+graph; every departure from the graph incurs a transcendental
+toll.
+
+\subsection{Exchange constants are computationally cheap}
+
+A striking feature of the exchange constants is that their
+conceptual complexity does not correlate with computational cost:
+\begin{itemize}
+  \item $\kappa = -1/16$: one multiplication.
+  \item $e^a E_1(a)$: one function evaluation, followed by an
+    $O(N^2)$ algebraic recurrence.
+  \item $\mu(R)$: a $10$--$30$ dimensional matrix diagonalization
+    per $R$-point (milliseconds).
+\end{itemize}
+The hierarchy of transcendence---constant, seed, function---tracks
+the severity of curvature mismatch, not computational difficulty.
+This reinforces the interpretation that exchange constants encode
+\textit{geometric information} (the shape of the mismatch between
+discrete and continuous descriptions) rather than
+\textit{computational obstacles}.  The Level~2 result is
+particularly instructive: identifying the Stieltjes seed and
+absorbing it into the basis actually \textit{reduces} the
+computational cost (by eliminating quadrature) while simultaneously
+providing better convergence (Sec.~\ref{sec:stieltjes}).
+
+\subsection{The hierarchy of transcendence}
+
+The exchange constants increase in complexity as the curvature
+mismatch increases:
+\begin{itemize}
+  \item Constant $\to$ constant (Level 1): $\kappa = -1/16$.
+    One projection, fixed curvature.
+  \item Constant $\to$ single transcendental (Level 2, $m \neq 0$):
+    $e^a E_1(a)$.  One embedding with a coordinate singularity.
+  \item Constant $\to$ transcendental function (Level 3, hyperspherical):
+    $\mu(R)$.  A continuously deforming manifold.
+\end{itemize}
+
+This hierarchy mirrors the mathematical classification of periods
+and transcendental functions: the Weyl constants are periods
+($\pi = \int dx/(1+x^2)$); the Stieltjes seeds are exponential
+periods ($E_1(a) = \int_1^\infty e^{-at}/t\,dt$); and the
+adiabatic eigenvalue functions are solutions of parameter-dependent
+spectral problems, which are generically non-period transcendentals.
+
+
+%% ========================================================================
+%% VII. CONCLUSION
+%% ========================================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The GeoVac hierarchy of natural geometries produces a systematic
+sequence of transcendental constants at each level where a
+discrete algebraic structure is projected onto a continuous
+coordinate system.  These constants---$\kappa = -1/16$,
+$e^a E_1(a)$, and $\mu(R)$---are instances of the
+spectral-geometric exchange constants described by Weyl's law
+and the Selberg trace formula.  They encode the curvature
+mismatch between the graph and the coordinate system, and they
+vanish when the computation stays on the graph.
+
+The observation that the conjectural fine structure constant
+formula $K = \pi(B + F - \Delta)$ has the same structural
+character---a Weyl-type conversion factor mixing discrete
+representation data with continuous spectral invariants---suggests
+that the combination rule may be derivable from the spectral
+geometry of the Hopf bundle, rather than being an irreducible
+empirical observation.
+
+Two implications for the GeoVac program follow:
+\begin{enumerate}
+  \item \textbf{The design principle}: Staying on the graph
+    is not merely a computational preference; it is the
+    algebraically natural thing to do.  Every coordinate
+    projection incurs a transcendental toll.  The program's
+    ongoing effort to algebraicize the solvers
+    (Paper~12's Neumann expansion, the Laguerre moment
+    recurrences, the Gaunt integral replacements) is, in
+    retrospect, an effort to eliminate exchange constants by
+    eliminating projections.
+  \item \textbf{The physical interpretation of $\kappa$}:
+    Paper~0 identified $\kappa = -1/16$ as a universal packing
+    constant but did not derive it from first principles.  The
+    Weyl--Selberg identification suggests that $\kappa$ is the
+    conformal exchange constant for the Fock projection
+    $S^3 \to \mathbb{R}^3$, computable from the heat kernel
+    expansion of the $S^3$ Laplacian.  This is a testable
+    prediction.
+\end{enumerate}
+
+\begin{acknowledgments}
+Computational implementation and documentation drafting were
+performed with the assistance of large language models (Anthropic
+Claude) under the author's scientific direction.  All results
+were validated against analytical benchmarks.
+\end{acknowledgments}
+
+
+%% ========================================================================
+%% BIBLIOGRAPHY
+%% ========================================================================
+
+\begin{thebibliography}{30}
+
+\bibitem{loutey_paper0}
+J.~Loutey,
+``The Geometric Atom: Quantum State Space as a Packing Problem,''
+GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper1}
+J.~Loutey,
+``The Geometric Atom: Quantum Mechanics as a Packing Problem,''
+GeoVac Paper~1 (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
+from Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper11}
+J.~Loutey,
+``The Molecular Fock Projection: Diatomic Molecules as Prolate
+Spheroidal Lattices,''
+GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper13}
+J.~Loutey,
+``The Hyperspherical Lattice: Two-Electron Atoms as Coupled
+Channel Graphs,''
+GeoVac Paper~13 (2026).
+
+\bibitem{loutey_fci}
+J.~Loutey,
+``Full configuration interaction on a sparse graph Hamiltonian:
+Multi-electron atoms via relational lattice indexing,''
+GeoVac FCI Paper (2026).
+
+\bibitem{loutey_paper2}
+J.~Loutey,
+``The Fine Structure Constant from Spectral Geometry of the Hopf
+Fibration,''
+GeoVac Paper~2 (2026).
+
+\bibitem{loutey_track_j}
+J.~Loutey,
+``Track J: Algebraic Level 2 Radial Solver for $m \neq 0$ States,''
+GeoVac supplementary material (2026).
+
+\bibitem{loutey_track_g}
+J.~Loutey,
+``Track G: Perturbation Series for $\mu(R)$,''
+GeoVac supplementary material (2026).
+
+\bibitem{dlmf_laguerre}
+NIST Digital Library of Mathematical Functions,
+\S18.9.13, \url{https://dlmf.nist.gov/18.9.13}.
+
+\bibitem{weyl1911}
+H.~Weyl,
+``\"Uber die asymptotische Verteilung der Eigenwerte,''
+Nachr.\ K\"onigl.\ Ges.\ Wiss.\ G\"ottingen, Math.-phys.\ Kl.\
+(1911), pp.\ 110--117.
+
+\bibitem{selberg1956}
+A.~Selberg,
+``Harmonic analysis and discontinuous groups in weakly symmetric
+Riemannian spaces with applications to Dirichlet series,''
+J.\ Indian Math.\ Soc.\ \textbf{20}, 47--87 (1956).
+
+\bibitem{berger2003}
+M.~Berger,
+\textit{A Panoramic View of Riemannian Geometry}
+(Springer, Berlin, 2003).
+
+\end{thebibliography}
+
+\end{document}

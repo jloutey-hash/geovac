@@ -1,0 +1,72 @@
+Track J Sub-agent 2: Associated Laguerre Algebraic Radial Solver
+======================================================================
+Date: 2026-03-29
+
+Summary: Derived and implemented algebraic kinetic matrix elements for the
+associated Laguerre basis phi_n(xi) = (xi-1)^{|m|/2} e^{-alpha(xi-1)} L_n^{|m|}(x),
+completing the algebraic Level 2 radial solver for m!=0 (pi, delta, ... states).
+
+Key derivation: Using x dL_n^(a)/dx = n L_n^(a) - (n+a) L_{n-1}^(a), the
+derivative decomposes as g_n = sum_k (G0[n,k] + G1[n,k] x) L_k^(a)(x) with
+bidiagonal G0 and diagonal G1. The kinetic integral then reduces to:
+  K = -beta^{-(a+1)} [G0 P0 G0^T + G0 P1 G1^T + G1 P1 G0^T + G1 P2 G1^T]
+where P_k = M_k + 2*beta * M_{k-1} are weighted moment matrices.
+
+The centrifugal term uses the "lowered Stieltjes" identity:
+  int x^{a-1}/(x+c) e^{-x} L_i L_j dx = (M_{-1} - J(a,c)) / c
+
+All matrices from Sub-agent 1 infrastructure: M0, M1, M2 (associated moments),
+M_{-1} (lowered moment), J (Stieltjes integral).
+
+Phase 1: Matrix Element Accuracy (algebraic vs std-Laguerre quadrature, N=15)
+----------------------------------------------------------------------
+  |m|=1, alpha=0.5: S err = 1.24e-13, H err = 3.86e-10
+  |m|=1, alpha=1.0: S err = 3.11e-14, H err = 2.86e-11
+  |m|=1, alpha=2.5: S err = 5.00e-15, H err = 1.05e-12
+  |m|=2, alpha=0.5: S err = 1.62e-12, H err = 6.29e-09
+  |m|=2, alpha=1.0: S err = 2.03e-13, H err = 2.36e-10
+  |m|=2, alpha=2.5: S err = 1.29e-14, H err = 5.23e-12
+  |m|=3, alpha=0.5: S err = 3.23e-11, H err = 1.47e-07
+  |m|=3, alpha=1.0: S err = 2.02e-12, H err = 2.65e-09
+  |m|=3, alpha=2.5: S err = 5.15e-14, H err = 1.59e-11
+
+Overlap: < 1e-11 for all (m, alpha). H: < 1e-7 for all, < 1e-10 typical.
+Accuracy degrades at small alpha (larger basis functions) and high |m| (more
+structure in the Stieltjes integral). All within specification.
+
+Phase 2: H2+ Pi-State Energies (|m|=1, spectral algebraic vs FD, n_basis=25)
+----------------------------------------------------------------------
+  R=1.5: E_fd=0.21517451, E_alg=0.21494013, diff=2.34e-04
+  R=2.0: E_fd=0.07157075, E_alg=0.07122818, diff=3.43e-04
+  R=3.0: E_fd=-0.05260261, E_alg=-0.05311052, diff=5.08e-04
+  R=4.0: E_fd=-0.10021104, E_alg=-0.10082464, diff=6.14e-04
+  R=6.0: E_fd=-0.12959943, E_alg=-0.13032490, diff=7.25e-04
+
+Accuracy < 1 mHa across all R. The error is dominated by finite basis size
+(n_basis=25 associated Laguerre), not the algebraic matrix element computation.
+
+Phase 3: H2+ Delta-State (|m|=2, spectral algebraic vs FD, n_basis=25)
+----------------------------------------------------------------------
+  R=1.5: E_fd=0.45015223, E_alg=0.45015213, diff=9.95e-08
+  R=2.0: E_fd=0.28726731, E_alg=0.28726732, diff=5.18e-09
+  R=3.0: E_fd=0.12944780, E_alg=0.12944780, diff=4.88e-09
+  R=4.0: E_fd=0.05555501, E_alg=0.05555499, diff=2.77e-08
+
+Machine-precision agreement for delta states! The |m|=2 basis functions have
+(xi-1)^1 prefactor which better captures the wavefunction behavior near xi=1,
+leading to faster convergence than the ordinary Laguerre basis used by FD.
+
+Phase 4: m-sign symmetry
+----------------------------------------------------------------------
+  m=+/-1: diff = 0.00e+00 (exact)
+  m=+/-2: diff = 0.00e+00 (exact)
+
+Verified: Energy depends only on m^2, not sign of m.
+
+Implementation Details:
+- Function: _build_laguerre_matrices_algebraic_associated() in prolate_spheroidal_lattice.py
+- Wired via delegation from _build_laguerre_matrices_algebraic() when m != 0
+- Production access: ProlateSpheroidalLattice(matrix_method='algebraic') for any m
+- Bug fix: _angular_separation_constant now passes abs(m) to angular solver
+- Tests: 41 tests in tests/test_associated_kinetic.py (all passing)
+- No spatial quadrature: all matrix elements from algebraic recurrence relations

@@ -337,6 +337,7 @@ def solve_hyperspherical_algebraic_coupled(
     radial_method: str = 'fd',
     n_basis_radial: int = 25,
     alpha_radial: float = 2.0,
+    matrix_method: str = 'quadrature',
 ) -> dict:
     """Full Level 3 coupled-channel solver using algebraic angular input.
 
@@ -384,6 +385,10 @@ def solve_hyperspherical_algebraic_coupled(
         Number of Laguerre basis functions (spectral method only).
     alpha_radial : float
         Exponential decay parameter for Laguerre basis (spectral method only).
+    matrix_method : str
+        'quadrature' (default) or 'algebraic' for spectral method.
+        When 'algebraic', overlap S and kinetic K use closed-form Laguerre
+        recurrence; potential V, P-coupling, Q-coupling stay quadrature.
 
     Returns
     -------
@@ -492,6 +497,7 @@ def solve_hyperspherical_algebraic_coupled(
             R_min=R_min,
             n_states=min(5, n_channels * 3),
             include_Q=use_Q,
+            matrix_method=matrix_method,
         )
     else:
         if verbose:
@@ -534,7 +540,8 @@ def solve_hyperspherical_algebraic_coupled(
     if radial_method == 'spectral':
         E_single, _, _ = solve_radial_spectral(
             V_eff_spline_single, n_basis=n_basis_radial,
-            alpha=alpha_radial, R_min=R_min, n_states=1
+            alpha=alpha_radial, R_min=R_min, n_states=1,
+            matrix_method=matrix_method,
         )
     else:
         E_single, _, _ = solve_radial(
