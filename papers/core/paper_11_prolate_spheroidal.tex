@@ -47,6 +47,9 @@ using a spectral angular solver (Legendre basis) and two radial
 solvers---a self-adjoint finite-difference (FD) scheme and a spectral
 Laguerre basis---with Brent root-finding in the separation
 parameter $c^2 = -R^2 E_{\mathrm{elec}}/2$ to enforce self-consistency.
+For $\sigma$ states ($m = 0$), the spectral Laguerre matrix elements
+are computed algebraically from three-term recurrence relations,
+eliminating numerical quadrature entirely.
 The method has \emph{zero} free parameters: all inputs are nuclear
 charges, internuclear distance, and basis/grid resolution.
 
@@ -435,7 +438,10 @@ $\langle \varphi_m | q(\xi) | \varphi_n \rangle$ with
 $q(\xi) = A + a\xi - c^2\xi^2 - m^2/(\xi^2 - 1)$ and the overlap
 matrix $S_{mn} = \langle \varphi_m | \varphi_n \rangle$ are computed
 via Gauss--Laguerre quadrature, which is exact for the polynomial
-content of the integrands.
+content of the integrands.  For $m = 0$ ($\sigma$ states), these
+matrix elements can alternatively be computed algebraically from
+Laguerre moment recurrences, eliminating quadrature entirely
+(Sec.~\ref{sec:algebraic}).
 
 \subsection{Generalized eigenvalue problem}
 
@@ -494,6 +500,68 @@ Spectral convergence is rapid: $N_b = 5$ already achieves
 sub-$0.01\%$ accuracy, and $N_b = 20$ reaches the
 $10^{-4}\%$ level.  The existing FD solver is preserved as the
 default for backward compatibility.
+
+\subsection{Algebraic matrix elements for \texorpdfstring{$\sigma$}{sigma} states}
+\label{sec:algebraic}
+
+For $m = 0$ ($\sigma$ states), all matrix elements in the spectral
+Laguerre solver can be computed \emph{algebraically} from three-term
+recurrence relations, eliminating Gauss--Laguerre quadrature entirely.
+
+Define the \emph{Laguerre moment matrices}
+\begin{equation}
+  M_k[i,j] = \int_0^\infty x^k\,L_i(x)\,L_j(x)\,e^{-x}\,dx,
+  \label{eq:laguerre_moment}
+\end{equation}
+where $L_n$ denotes the Laguerre polynomial of degree~$n$.
+The three-term recurrence
+\begin{equation}
+  x\,L_n(x) = -(n+1)\,L_{n+1}(x) + (2n+1)\,L_n(x) - n\,L_{n-1}(x)
+  \label{eq:laguerre_recurrence}
+\end{equation}
+gives $M_k$ as finite band matrices built recursively from
+$M_0 = \mathbf{I}$ (orthonormality): $M_1$ is tridiagonal with
+$M_1[n,n] = 2n+1$, $M_1[n, n\pm 1] = -(n+1)$ or $-n$;
+$M_2$ is pentadiagonal, and so on.  Higher moments are obtained by
+applying the recurrence~\eqref{eq:laguerre_recurrence} to reduce
+$M_k$ to a sum of products involving $M_{k-1}$.
+
+Under the substitution $x = 2\alpha(\xi - 1)$, each matrix element
+reduces to a finite linear combination of Laguerre moments:
+\begin{itemize}
+  \item \textbf{Overlap:} $S_{mn} = \delta_{mn}/(2\alpha)$.
+  \item \textbf{Potential:} The effective potential
+    $q(\xi) = A + a\xi - c^2\xi^2$ (at $m = 0$, no singular term)
+    becomes a quadratic in~$x$, giving
+    $\mathbf{V} = (2\alpha)^{-1}[q_0\,\mathbf{M}_0 + q_1\,\mathbf{M}_1
+    + q_2\,\mathbf{M}_2]$
+    where $q_0$, $q_1$, $q_2$ are determined by the coefficients $A$,
+    $a$, $c^2$, and $\alpha$.
+  \item \textbf{Kinetic:} Writing $\varphi_n' = -2\alpha\,\sum_{j \le n} L_j$
+    (from the Laguerre derivative identity) and using the
+    integration-by-parts form~\eqref{eq:ibp}, the kinetic matrix becomes
+    $\mathbf{K} = -\tfrac{1}{2}\,\mathbf{F}\,\mathbf{M}_1\,\mathbf{F}^T
+    - \tfrac{1}{8\alpha}\,\mathbf{F}\,\mathbf{M}_2\,\mathbf{F}^T$,
+    where $F_{nj} = 2$ for $j < n$, $F_{nn} = 1$.
+\end{itemize}
+
+The resulting overlap and Hamiltonian matrices agree with
+Gauss--Laguerre quadrature to machine precision: maximum discrepancy
+$4.4 \times 10^{-15}$ for the overlap and $4.1 \times 10^{-12}$ for the
+Hamiltonian (the latter reflecting accumulated floating-point arithmetic
+in the moment products).  PES energies agree to $< 2 \times 10^{-14}$~Ha
+across all bond lengths, confirming exact equivalence.  The algebraic
+construction is approximately $1.6\times$ faster than quadrature,
+as it avoids computation of Gauss--Laguerre roots and weights.
+
+For $m \neq 0$, the centrifugal term $m^2/(\xi^2 - 1)$ produces
+a $1/x$ singularity in the Laguerre variable, and the required
+integral $\int_0^\infty L_i\,L_j\,e^{-x}/x\,dx$ diverges at
+$x = 0$---it has no finite Laguerre moment expansion.  The solver
+therefore falls back to Gauss--Laguerre quadrature for $m \neq 0$
+states automatically.  Since the ground state $1s\sigma_g$ and all
+$\sigma$ excited states have $m = 0$, the algebraic method covers
+the primary use cases of the solver.
 
 %% ========================================================================
 %% VI. ROOT-FINDING AND SELF-CONSISTENCY
@@ -785,7 +853,9 @@ The spectral Laguerre radial solver (Sec.~\ref{sec:spectral_radial})
 has replaced the $O(1/N_\xi)$ FD scheme as the high-accuracy option,
 achieving $0.0002\%$ error with $N_b = 20$ basis functions---a
 $5000\times$ accuracy improvement over the FD solver at $250\times$
-smaller matrix dimension.
+smaller matrix dimension.  For $\sigma$ states, all matrix elements
+are now algebraic (Sec.~\ref{sec:algebraic}), with no remaining
+numerical quadrature in the radial solver.
 
 %% ========================================================================
 %% IX. CONCLUSION
@@ -803,7 +873,9 @@ energy to $0.0002\%$ accuracy and the equilibrium bond length to
 $0.38\%$ accuracy with zero free parameters.  The spectral solver
 achieves a $250\times$ dimension reduction and $270\times$ speedup
 over the finite-difference radial solver, whose $1.01\%$ error was
-a discretization artifact.
+a discretization artifact.  For $\sigma$ states, the spectral matrix
+elements are computed algebraically from Laguerre moment recurrences,
+eliminating numerical quadrature from the radial solver entirely.
 
 This result establishes the \emph{natural geometry principle} as
 the organizing idea of the GeoVac program:

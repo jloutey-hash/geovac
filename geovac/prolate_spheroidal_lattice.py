@@ -34,6 +34,124 @@ import time
 from geovac.molecular_sturmian import _angular_sep_const
 
 
+def _laguerre_moment_matrices(N: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Build Laguerre moment matrices M_k[i,j] = int_0^inf x^k L_i(x) L_j(x) e^{-x} dx.
+
+    Uses the three-term recurrence x*L_j = -(j+1)L_{j+1} + (2j+1)L_j - j*L_{j-1}
+    to derive closed-form band structure. M0 = identity, M1 = tridiagonal, M2 = pentadiagonal.
+
+    Parameters
+    ----------
+    N : int
+        Matrix dimension (number of Laguerre basis functions).
+
+    Returns
+    -------
+    M0, M1, M2 : np.ndarray
+        Moment matrices of shape (N, N).
+    """
+    M0 = np.eye(N)
+
+    # M1: tridiagonal
+    # M1[i,i] = 2i+1, M1[i,i+1] = M1[i+1,i] = -(i+1)
+    M1 = np.zeros((N, N))
+    for i in range(N):
+        M1[i, i] = 2 * i + 1
+        if i + 1 < N:
+            M1[i, i + 1] = -(i + 1)
+            M1[i + 1, i] = -(i + 1)
+
+    # M2: pentadiagonal
+    # From x^2 * L_j expanded via two applications of the recurrence:
+    # i=j:   6j^2 + 6j + 2
+    # i=j+1: -4(j+1)^2      (and symmetric)
+    # i=j+2: (j+1)(j+2)     (and symmetric)
+    M2 = np.zeros((N, N))
+    for j in range(N):
+        M2[j, j] = 6 * j * j + 6 * j + 2
+        if j + 1 < N:
+            val = -4 * (j + 1) ** 2
+            M2[j, j + 1] = val
+            M2[j + 1, j] = val
+        if j + 2 < N:
+            val = (j + 1) * (j + 2)
+            M2[j, j + 2] = val
+            M2[j + 2, j] = val
+
+    return M0, M1, M2
+
+
+def _build_laguerre_matrices_algebraic(
+    n_basis: int, alpha: float, A: float, a_param: float, c2: float, m: int
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Build H and S matrices for the radial eigenvalue problem using algebraic
+    Laguerre moment recurrence relations (no numerical quadrature).
+
+    Valid for m=0 (sigma states). For m!=0, raises NotImplementedError because
+    the m^2/(xi^2-1) term introduces a 1/x singularity in x-space that has no
+    finite Laguerre moment expansion.
+
+    Parameters
+    ----------
+    n_basis : int
+        Number of Laguerre basis functions.
+    alpha : float
+        Exponential decay parameter for the basis.
+    A : float
+        Angular separation constant.
+    a_param : float
+        R*(Z_A + Z_B).
+    c2 : float
+        Separation parameter c^2 = -R^2*E/2.
+    m : int
+        Azimuthal quantum number.
+
+    Returns
+    -------
+    H_mat, S : np.ndarray
+        Hamiltonian and overlap matrices, shape (n_basis, n_basis).
+    """
+    if m != 0:
+        raise NotImplementedError(
+            "Algebraic matrix elements are only available for m=0 (sigma states). "
+            "The m^2/(xi^2-1) term introduces a 1/x singularity in Laguerre space "
+            "that has no finite recurrence expansion."
+        )
+
+    N = n_basis
+    two_alpha = 2.0 * alpha
+    inv_2a = 1.0 / two_alpha
+
+    # Moment matrices
+    M0, M1, M2 = _laguerre_moment_matrices(N)
+
+    # --- Overlap: S_mn = delta_{mn} / (2*alpha) ---
+    S = inv_2a * M0
+
+    # --- Potential: V_mn = (1/(2a)) * [q0*M0 + q1*M1 + q2*M2]_{mn} ---
+    # q(xi) = A + a_param*xi - c2*xi^2, with xi = 1 + x/(2*alpha)
+    # q(x) = q0 + q1*x + q2*x^2
+    q0 = A + a_param - c2
+    q1 = (a_param - 2.0 * c2) / two_alpha
+    q2 = -c2 / (two_alpha ** 2)
+    V = inv_2a * (q0 * M0 + q1 * M1 + q2 * M2)
+
+    # --- Kinetic: K_mn = -(1/2)*F*M1*F^T - (1/(8*alpha))*F*M2*F^T ---
+    # where F[n,j] = 2 for j < n, 1 for j = n, 0 for j > n
+    # (Laguerre expansion coefficients of f_n = L_n + 2*sum_{j<n} L_j)
+    F = np.zeros((N, N))
+    for n in range(N):
+        F[n, :n] = 2.0
+        F[n, n] = 1.0
+
+    FM1 = F @ M1
+    FM2 = F @ M2
+    K = -0.5 * (FM1 @ F.T) - (1.0 / (8.0 * alpha)) * (FM2 @ F.T)
+
+    H_mat = K + V
+    return H_mat, S
+
+
 class ProlateSpheroidalLattice:
     """
     Separated prolate spheroidal solver for one-electron diatomics.
@@ -75,6 +193,7 @@ class ProlateSpheroidalLattice:
         n_radial: int = 0,
         radial_method: str = 'fd',
         n_basis: int = 20,
+        matrix_method: str = 'quadrature',
     ):
         self.R = R
         self.Z_A = Z_A
@@ -86,6 +205,7 @@ class ProlateSpheroidalLattice:
         self.n_radial = n_radial
         self.radial_method = radial_method
         self.n_basis = n_basis
+        self.matrix_method = matrix_method
 
         # Derived
         self._a = R * (Z_A + Z_B)
@@ -138,15 +258,38 @@ class ProlateSpheroidalLattice:
         polynomials: phi_n(xi) = exp(-alpha*(xi-1)) * L_n(2*alpha*(xi-1)).
 
         The Laguerre basis is orthogonal with weight exp(-x) on [0, inf),
-        so the overlap matrix S is diagonal.  Matrix elements of the
-        kinetic and potential operators are evaluated via Gauss-Laguerre
-        quadrature (exact for the polynomial content).
+        so the overlap matrix S is diagonal.  Matrix elements can be evaluated
+        via Gauss-Laguerre quadrature or algebraically via the three-term
+        recurrence (matrix_method='algebraic', m=0 only).
 
         Returns the largest eigenvalue of the generalized eigenvalue
         problem H c = lambda S c.  This should be 0 at the correct c^2.
         """
         N = self.n_basis
         alpha = max(np.sqrt(max(c2, 0.01)), 0.5)
+
+        if self.matrix_method == 'algebraic' and self.m == 0:
+            H_mat, S = _build_laguerre_matrices_algebraic(
+                N, alpha, A, self._a, c2, self.m
+            )
+        else:
+            H_mat, S = self._build_laguerre_matrices_quadrature(
+                N, alpha, A, c2
+            )
+
+        # Solve generalized eigenvalue problem H c = lambda S c
+        evals = eigh(H_mat, S, eigvals_only=True)
+        sorted_desc = np.sort(evals)[::-1]
+        if self.n_radial >= len(sorted_desc):
+            raise ValueError(
+                f"n_radial={self.n_radial} exceeds available eigenvalues"
+            )
+        return sorted_desc[self.n_radial]
+
+    def _build_laguerre_matrices_quadrature(
+        self, N: int, alpha: float, A: float, c2: float
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """Build H and S matrices via Gauss-Laguerre quadrature."""
         two_alpha = 2.0 * alpha
 
         # Gauss-Laguerre quadrature: integrates int_0^inf f(x) e^{-x} dx
@@ -194,15 +337,7 @@ class ProlateSpheroidalLattice:
         V = inv_2a * (wLq @ L_vals.T)
 
         H_mat = K + V
-
-        # Solve generalized eigenvalue problem H c = lambda S c
-        evals = eigh(H_mat, S, eigvals_only=True)
-        sorted_desc = np.sort(evals)[::-1]
-        if self.n_radial >= len(sorted_desc):
-            raise ValueError(
-                f"n_radial={self.n_radial} exceeds available eigenvalues"
-            )
-        return sorted_desc[self.n_radial]
+        return H_mat, S
 
     def _angular_separation_constant(self, c2: float) -> float:
         """Angular separation constant A for given c^2.
@@ -272,17 +407,13 @@ class ProlateSpheroidalLattice:
         E_elec, _, _ = self.solve()
         return E_elec + self.Z_A * self.Z_B / self.R
 
-    def solve_with_wavefunction(self) -> Dict:
-        """Solve and return energy + wavefunction on (xi, eta) grid.
+    def _radial_wavefunction_fd(
+        self, c2: float, A: float
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """Compute radial wavefunction F(xi) on the FD grid.
 
-        Returns dict with keys:
-            E_elec, c2, A, xi_grid, eta_grid, F_xi, G_eta
-        where F_xi is the radial wavefunction and G_eta is the angular.
+        Returns (xi_grid, F_xi) tuple.
         """
-        E_elec, c2, A = self.solve()
-        c = np.sqrt(max(c2, 1e-15))
-
-        # --- Radial wavefunction F(xi) ---
         N = self.N_xi
         xi_min = 1.0 + 5e-4
         h = (self.xi_max - xi_min) / (N + 1)
@@ -306,10 +437,73 @@ class ProlateSpheroidalLattice:
         evals, evecs = _eigh_tri(diag, off)
         idx_sorted = np.argsort(evals)[::-1]
         F_xi = evecs[:, idx_sorted[self.n_radial]]
-        # Normalize: ensure positive at xi=1
         if F_xi[0] < 0:
             F_xi = -F_xi
         F_xi /= np.sqrt(np.sum(F_xi**2) * h)
+        return xi, F_xi
+
+    def _radial_wavefunction_spectral(
+        self, c2: float, A: float
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """Compute radial wavefunction F(xi) from spectral Laguerre basis.
+
+        Evaluates the eigenvector on a uniform xi grid for visualization
+        and downstream use. Returns (xi_grid, F_xi) tuple.
+        """
+        N = self.n_basis
+        alpha = max(np.sqrt(max(c2, 0.01)), 0.5)
+        two_alpha = 2.0 * alpha
+
+        if self.matrix_method == 'algebraic' and self.m == 0:
+            H_mat, S = _build_laguerre_matrices_algebraic(
+                N, alpha, A, self._a, c2, self.m
+            )
+        else:
+            H_mat, S = self._build_laguerre_matrices_quadrature(
+                N, alpha, A, c2
+            )
+
+        evals, evecs = eigh(H_mat, S)
+        idx_sorted = np.argsort(evals)[::-1]
+        coeffs = evecs[:, idx_sorted[self.n_radial]]
+
+        # Evaluate on a uniform xi grid for output
+        n_out = 500
+        xi_grid = np.linspace(1.0 + 1e-4, self.xi_max, n_out)
+        x_out = two_alpha * (xi_grid - 1.0)
+        L_out = np.zeros((N, n_out))
+        for n in range(N):
+            L_out[n] = eval_laguerre(n, x_out)
+
+        # F(xi) = sum_n c_n * exp(-alpha*(xi-1)) * L_n(2*alpha*(xi-1))
+        F_xi = np.exp(-alpha * (xi_grid - 1.0)) * (coeffs @ L_out)
+
+        # Normalize: positive at xi=1, unit norm
+        if F_xi[0] < 0:
+            F_xi = -F_xi
+        dx = xi_grid[1] - xi_grid[0]
+        norm = np.sqrt(np.sum(F_xi**2) * dx)
+        if norm > 0:
+            F_xi /= norm
+
+        return xi_grid, F_xi
+
+    def solve_with_wavefunction(self) -> Dict:
+        """Solve and return energy + wavefunction on (xi, eta) grid.
+
+        Returns dict with keys:
+            E_elec, c2, A, xi_grid, eta_grid, F_xi, G_eta,
+            radial_method (str indicating which solver produced F_xi)
+        where F_xi is the radial wavefunction and G_eta is the angular.
+        """
+        E_elec, c2, A = self.solve()
+        c = np.sqrt(max(c2, 1e-15))
+
+        # --- Radial wavefunction F(xi) ---
+        if self.radial_method == 'spectral':
+            xi, F_xi = self._radial_wavefunction_spectral(c2, A)
+        else:
+            xi, F_xi = self._radial_wavefunction_fd(c2, A)
 
         # --- Angular wavefunction G(eta) ---
         n_eta = 200
@@ -363,6 +557,7 @@ class ProlateSpheroidalLattice:
             'eta_grid': eta,
             'F_xi': F_xi,
             'G_eta': G_eta,
+            'radial_method': self.radial_method,
         }
 
 
@@ -376,8 +571,21 @@ def scan_h2plus_pes(
     n_angular: int = 0,
     n_radial: int = 0,
     verbose: bool = True,
+    radial_method: str = 'fd',
+    n_basis: int = 20,
+    matrix_method: str = 'quadrature',
 ) -> Dict[str, np.ndarray]:
-    """Scan H2+ PES over a range of R values."""
+    """Scan H2+ PES over a range of R values.
+
+    Parameters
+    ----------
+    radial_method : str
+        'fd' (default) or 'spectral' for spectral Laguerre radial solver.
+    n_basis : int
+        Number of Laguerre basis functions (only used when radial_method='spectral').
+    matrix_method : str
+        'quadrature' (default) or 'algebraic' for algebraic Laguerre moments.
+    """
     n = len(R_values)
     E_elec = np.zeros(n)
     E_total = np.zeros(n)
@@ -388,6 +596,8 @@ def scan_h2plus_pes(
             R=R, Z_A=Z_A, Z_B=Z_B,
             N_xi=N_xi, xi_max=max(xi_max, R * 3), m=m,
             n_angular=n_angular, n_radial=n_radial,
+            radial_method=radial_method, n_basis=n_basis,
+            matrix_method=matrix_method,
         )
         try:
             E_el, _, _ = lattice.solve()

@@ -443,6 +443,380 @@ class AlgebraicAngularSolver:
         return self._coupling_full.copy()
 
 
+def perturbation_series_mu(
+    H0_diag: np.ndarray,
+    V_C: np.ndarray,
+    n_channels: int,
+    max_order: int = 10,
+) -> np.ndarray:
+    """Compute Rayleigh-Schrödinger perturbation coefficients for mu(R).
+
+    The angular Hamiltonian is H(R) = diag(H0) + R * V_C (linear matrix
+    pencil).  The eigenvalues mu_nu(R) can be expanded as a power series
+    in R:
+        mu_nu(R) = a_0 + a_1 * R + a_2 * R^2 + ... + a_k * R^k
+
+    where a_0 = H0_diag[nu] (SO(6) Casimir) and the higher-order
+    coefficients are computed via standard RS perturbation theory.
+
+    Parameters
+    ----------
+    H0_diag : ndarray of shape (dim,)
+        Zeroth-order eigenvalues (SO(6) Casimir values).
+    V_C : ndarray of shape (dim, dim)
+        R-independent coupling matrix (nuclear + V_ee).
+    n_channels : int
+        Number of channels to compute perturbation series for.
+    max_order : int
+        Maximum perturbation order (default 10).
+
+    Returns
+    -------
+    coeffs : ndarray of shape (n_channels, max_order + 1)
+        coeffs[nu, k] = a_k for channel nu.
+        coeffs[nu, 0] = H0_diag[nu] (zeroth order).
+        coeffs[nu, 1] = <nu|V_C|nu> (first order).
+    """
+    dim = len(H0_diag)
+
+    # Zeroth-order eigenvectors are identity (H0 is diagonal)
+    # We compute the RS correction vectors |psi_nu^(k)> and energies a_k
+
+    coeffs = np.zeros((n_channels, max_order + 1))
+
+    for nu in range(n_channels):
+        # a_0 = unperturbed eigenvalue
+        E0 = H0_diag[nu]
+        coeffs[nu, 0] = E0
+
+        # First order: a_1 = V_nn
+        coeffs[nu, 1] = V_C[nu, nu]
+
+        # Build RS correction vectors iteratively
+        # |psi^(0)> = e_nu (unit vector)
+        # |psi^(k)> = sum_{m != nu} c^(k)_m |m>
+        # where c^(k)_m = [sum_{j=1}^{k} a_j * c^(k-j)_m
+        #                  - sum_{m'} V_{m,m'} c^(k-1)_{m'}] / (E0 - E_m)
+        # but c^(k-1)_{m'} only involves m' != nu
+
+        # Store correction vector coefficients (excluding nu component)
+        # psi_k[m] = coefficient of |m> in |psi^(k)> for m != nu
+        psi_vectors = []  # psi_vectors[k] is dict/array for order k
+
+        # |psi^(0)> = e_nu → coefficients are all zero except nu
+        psi_0 = np.zeros(dim)
+        psi_0[nu] = 1.0
+        psi_vectors.append(psi_0)
+
+        # First-order wavefunction correction
+        psi_1 = np.zeros(dim)
+        for m in range(dim):
+            if m == nu:
+                continue
+            gap = E0 - H0_diag[m]
+            if abs(gap) < 1e-15:
+                continue
+            psi_1[m] = V_C[m, nu] / gap
+        psi_vectors.append(psi_1)
+
+        # Higher orders via RS recursion
+        for k in range(2, max_order + 1):
+            # a_k = <psi^(0)|V|psi^(k-1)> - sum_{j=1}^{k-1} a_j * <psi^(0)|psi^(k-j)>
+            # Since |psi^(0)> = e_nu:
+            # a_k = V[nu,:] @ psi^(k-1) - sum_{j=1}^{k-1} a_j * psi^(k-j)[nu]
+            # But psi^(j)[nu] = 0 for j >= 1 (intermediate normalization)
+            # So: a_k = sum_m V[nu,m] * psi^(k-1)[m] = V_C[nu,:] @ psi_{k-1}
+            a_k = V_C[nu, :] @ psi_vectors[k - 1]
+            coeffs[nu, k] = a_k
+
+            # |psi^(k)> correction vector
+            # For m != nu:
+            # psi^(k)[m] = (1/(E0 - E_m)) * [V_C[m,:] @ psi^(k-1)
+            #               - sum_{j=1}^{k} a_j * psi^(k-j)[m]]
+            psi_k = np.zeros(dim)
+            V_psi_prev = V_C @ psi_vectors[k - 1]
+
+            for m in range(dim):
+                if m == nu:
+                    continue
+                gap = E0 - H0_diag[m]
+                if abs(gap) < 1e-15:
+                    continue
+                val = V_psi_prev[m]
+                for j in range(1, k + 1):
+                    val -= coeffs[nu, j] * psi_vectors[k - j][m]
+                psi_k[m] = val / gap
+
+            psi_vectors.append(psi_k)
+
+    return coeffs
+
+
+def evaluate_perturbation_series(
+    coeffs: np.ndarray,
+    R: np.ndarray,
+) -> np.ndarray:
+    """Evaluate mu(R) from perturbation series coefficients.
+
+    Parameters
+    ----------
+    coeffs : ndarray of shape (n_channels, max_order + 1)
+        Perturbation coefficients from perturbation_series_mu().
+    R : ndarray of shape (N_R,)
+        Hyperradius values.
+
+    Returns
+    -------
+    mu : ndarray of shape (n_channels, N_R)
+        mu_nu(R) evaluated via the truncated power series.
+    """
+    n_channels, n_terms = coeffs.shape
+    R = np.asarray(R, dtype=float)
+    mu = np.zeros((n_channels, len(R)))
+
+    for nu in range(n_channels):
+        # Horner's method for numerical stability
+        result = np.full_like(R, coeffs[nu, n_terms - 1])
+        for k in range(n_terms - 2, -1, -1):
+            result = result * R + coeffs[nu, k]
+        mu[nu] = result
+
+    return mu
+
+
+def pade_approximant(
+    coeffs_1d: np.ndarray,
+    p_order: int,
+    q_order: int,
+) -> tuple:
+    """Construct [p/q] Padé approximant from power series coefficients.
+
+    Given a_0 + a_1*x + a_2*x^2 + ..., find polynomials P(x) and Q(x)
+    with deg(P) = p_order, deg(Q) = q_order, Q(0) = 1, such that
+    P(x)/Q(x) matches the power series through order p + q.
+
+    Parameters
+    ----------
+    coeffs_1d : ndarray of shape (n_terms,)
+        Power series coefficients [a_0, a_1, ..., a_{n-1}].
+    p_order : int
+        Degree of numerator polynomial.
+    q_order : int
+        Degree of denominator polynomial.
+
+    Returns
+    -------
+    p_coeffs : ndarray of shape (p_order + 1,)
+        Numerator polynomial coefficients [p_0, p_1, ..., p_p].
+    q_coeffs : ndarray of shape (q_order + 1,)
+        Denominator polynomial coefficients [1, q_1, ..., q_q].
+
+    Raises
+    ------
+    ValueError
+        If not enough series coefficients or singular system.
+    """
+    n_needed = p_order + q_order + 1
+    if len(coeffs_1d) < n_needed:
+        raise ValueError(
+            f"Need {n_needed} coefficients for [{p_order}/{q_order}] Padé, "
+            f"have {len(coeffs_1d)}"
+        )
+
+    c = coeffs_1d[:n_needed]
+
+    # Solve for q_coeffs from the linear system:
+    # sum_{j=0}^{q} q_j * c_{p+1+i-j} = 0, i = 0, ..., q-1
+    # with q_0 = 1.
+    if q_order == 0:
+        return c[:p_order + 1].copy(), np.array([1.0])
+
+    # Build the linear system for q_1, ..., q_q
+    A = np.zeros((q_order, q_order))
+    b = np.zeros(q_order)
+    for i in range(q_order):
+        row_idx = p_order + 1 + i  # index into c
+        b[i] = -c[row_idx] if row_idx < n_needed else 0.0
+        for j in range(q_order):
+            ci = row_idx - (j + 1)
+            if 0 <= ci < n_needed:
+                A[i, j] = c[ci]
+
+    try:
+        q_tail = np.linalg.solve(A, b)
+    except np.linalg.LinAlgError:
+        raise ValueError("Singular Padé system")
+
+    q_coeffs = np.zeros(q_order + 1)
+    q_coeffs[0] = 1.0
+    q_coeffs[1:] = q_tail
+
+    # Compute p_coeffs: p_k = sum_{j=0}^{min(k, q)} q_j * c_{k-j}
+    p_coeffs = np.zeros(p_order + 1)
+    for k in range(p_order + 1):
+        for j in range(min(k, q_order) + 1):
+            p_coeffs[k] += q_coeffs[j] * c[k - j]
+
+    return p_coeffs, q_coeffs
+
+
+def evaluate_pade(
+    p_coeffs: np.ndarray,
+    q_coeffs: np.ndarray,
+    R: np.ndarray,
+) -> np.ndarray:
+    """Evaluate a Padé approximant P(R)/Q(R).
+
+    Parameters
+    ----------
+    p_coeffs, q_coeffs : ndarray
+        Polynomial coefficients from pade_approximant().
+    R : ndarray
+        Evaluation points.
+
+    Returns
+    -------
+    result : ndarray
+        P(R)/Q(R) at each point.
+    """
+    R = np.asarray(R, dtype=float)
+    # Horner evaluation
+    p_val = np.full_like(R, p_coeffs[-1])
+    for k in range(len(p_coeffs) - 2, -1, -1):
+        p_val = p_val * R + p_coeffs[k]
+
+    q_val = np.full_like(R, q_coeffs[-1])
+    for k in range(len(q_coeffs) - 2, -1, -1):
+        q_val = q_val * R + q_coeffs[k]
+
+    return p_val / q_val
+
+
+def perturbation_series_P_matrix(
+    H0_diag: np.ndarray,
+    V_C: np.ndarray,
+    n_channels: int,
+    max_order: int = 10,
+) -> np.ndarray:
+    """Compute the first-derivative coupling P_μν(R) as a series in R.
+
+    The Hellmann-Feynman P-matrix is:
+        P_μν(R) = <Φ_μ(R)|V_C|Φ_ν(R)> / (μ_ν(R) - μ_μ(R))
+
+    Both numerator and denominator are power series in R (from the
+    perturbation expansion of eigenvectors and eigenvalues).  The ratio
+    is itself a power series, computable order by order.
+
+    For the numerator N_μν(R) = <Φ_μ(R)|V_C|Φ_ν(R)>:
+      N^(0) = V_C[μ,ν]  (zeroth-order eigenvectors are Kronecker deltas)
+      N^(k) = sum over correction vectors
+
+    For the denominator D_μν(R) = μ_ν(R) - μ_μ(R):
+      D^(0) = E0_ν - E0_μ
+      D^(k) = a_k(ν) - a_k(μ)
+
+    P = N/D is expanded via the standard series division formula.
+
+    Parameters
+    ----------
+    H0_diag : ndarray of shape (dim,)
+        Zeroth-order eigenvalues.
+    V_C : ndarray of shape (dim, dim)
+        R-independent coupling matrix.
+    n_channels : int
+        Number of channels.
+    max_order : int
+        Maximum order for the P series.
+
+    Returns
+    -------
+    P_coeffs : ndarray of shape (n_channels, n_channels, max_order + 1)
+        P_coeffs[mu, nu, k] = coefficient of R^k in P_μν(R).
+        Diagonal entries are zero by convention.
+    """
+    dim = len(H0_diag)
+
+    # First get eigenvalue coefficients and eigenvector corrections
+    mu_coeffs = perturbation_series_mu(H0_diag, V_C, dim, max_order)
+
+    # Build eigenvector correction vectors for all channels
+    # psi_vectors[nu][k] = correction vector at order k for channel nu
+    all_psi = []
+    for nu in range(dim):
+        E0 = H0_diag[nu]
+        psi_vecs = []
+
+        psi_0 = np.zeros(dim)
+        psi_0[nu] = 1.0
+        psi_vecs.append(psi_0)
+
+        psi_1 = np.zeros(dim)
+        for m in range(dim):
+            if m == nu:
+                continue
+            gap = E0 - H0_diag[m]
+            if abs(gap) < 1e-15:
+                continue
+            psi_1[m] = V_C[m, nu] / gap
+        psi_vecs.append(psi_1)
+
+        for k in range(2, max_order + 1):
+            V_psi_prev = V_C @ psi_vecs[k - 1]
+            psi_k = np.zeros(dim)
+            for m in range(dim):
+                if m == nu:
+                    continue
+                gap = E0 - H0_diag[m]
+                if abs(gap) < 1e-15:
+                    continue
+                val = V_psi_prev[m]
+                for j in range(1, k + 1):
+                    val -= mu_coeffs[nu, j] * psi_vecs[k - j][m]
+                psi_k[m] = val / gap
+            psi_vecs.append(psi_k)
+        all_psi.append(psi_vecs)
+
+    # Compute numerator N_μν^(k) = sum_{j=0}^{k} <psi_μ^(j)|V_C|psi_ν^(k-j)>
+    N_coeffs = np.zeros((n_channels, n_channels, max_order + 1))
+    for mu_idx in range(n_channels):
+        for nu_idx in range(n_channels):
+            if mu_idx == nu_idx:
+                continue
+            for k in range(max_order + 1):
+                val = 0.0
+                for j in range(k + 1):
+                    val += all_psi[mu_idx][j] @ V_C @ all_psi[nu_idx][k - j]
+                N_coeffs[mu_idx, nu_idx, k] = val
+
+    # Denominator D_μν^(k) = mu_coeffs[nu, k] - mu_coeffs[mu, k]
+    D_coeffs = np.zeros((n_channels, n_channels, max_order + 1))
+    for mu_idx in range(n_channels):
+        for nu_idx in range(n_channels):
+            if mu_idx == nu_idx:
+                continue
+            D_coeffs[mu_idx, nu_idx, :] = (
+                mu_coeffs[nu_idx, :max_order + 1]
+                - mu_coeffs[mu_idx, :max_order + 1]
+            )
+
+    # P = N / D via series division: P^(k) = (N^(k) - sum_{j=0}^{k-1} P^(j) D^(k-j)) / D^(0)
+    P_coeffs = np.zeros((n_channels, n_channels, max_order + 1))
+    for mu_idx in range(n_channels):
+        for nu_idx in range(n_channels):
+            if mu_idx == nu_idx:
+                continue
+            D0 = D_coeffs[mu_idx, nu_idx, 0]
+            if abs(D0) < 1e-15:
+                continue
+            for k in range(max_order + 1):
+                val = N_coeffs[mu_idx, nu_idx, k]
+                for j in range(k):
+                    val -= P_coeffs[mu_idx, nu_idx, j] * D_coeffs[mu_idx, nu_idx, k - j]
+                P_coeffs[mu_idx, nu_idx, k] = val / D0
+
+    return P_coeffs
+
+
 def solve_hyperspherical_algebraic(
     Z: float = 2.0,
     n_electrons: int = 2,

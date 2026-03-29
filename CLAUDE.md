@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v2.0.8 (March 28, 2026)
+**Version:** v2.0.9 (March 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/core/` and `papers/observations/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -47,17 +47,22 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Chemical periodicity as representation theory (Paper 16) -- computational exploitation of hierarchical structure
 - Quantum simulation cost: equal-qubit Gaussian comparison validated with computed integrals (v1.9.0); commutator-based Trotter bounds: r ~ Q^{1.47} (vs Q^{1.69} 1-norm), 7x fewer steps at Q=60 (Paper 14, v2.0.3)
 - Track B — Hyperradial algebraicization: COMPLETE. Algebraic spectral basis replaces FD angular solver (matrix dimension 200-800 → 10-30). Exact Hellmann-Feynman coupling matrices (R-independent dH/dR). Single-channel adiabatic approximation identified as bottleneck at l_max≥1 (energy dives below exact). Coupled-channel integration fixes convergence direction: error decreases monotonically with l_max (0.37% → 0.27% at l_max 1-3). Q-matrix closure overcorrects at l_max=0 (1.1%); improvement pathway identified (exact dP/dR). Sturmian variant investigated — modest improvement at l_max=0, counterproductive at l_max≥1 (converges faster to wrong adiabatic limit). Preserved as research artifact. (Paper 13, v2.0.6)
-- Track A — l_max divergence root cause: IDENTIFIED. HeH⁺ bare Level 4 drifts at +0.262 bohr/l_max with no Z_eff/PK/composition — divergence is intrinsic to the adiabatic approximation with asymmetric charges. PK-induced symmetry breaking causes composed LiH drift (+0.303). Three dead ends documented: algebraic PK projector (5.6× worse), enhanced Z_eff (destroys channel symmetry), single-channel DBOC (97% cancelled by P-coupling). Fix identified: variational 2D solver (Paper 15). **Next priority: reduce Level 4 iteration times for 2D solver integration into composition pipeline.** (v2.0.6)
-- Track C — Level 2 algebraicization (prolate spheroidal): COMPLETE. Spectral Laguerre basis replaces 5000-point FD radial ξ-solver. 250× dimension reduction, 270× speedup, 5000× accuracy improvement (1.01% → 0.0002%). n_basis=20 spectral functions achieve sub-0.001% accuracy. Existing FD solver preserved as default. Production wiring (PES scan, wavefunction reconstruction) is next step. (v2.0.8)
+- Track A — l_max divergence: 2D SOLVER INTEGRATED, PARTIAL FIX. Variational 2D solver (Paper 15) wired into composed LiH pipeline (v2.0.9). Reduces l_max drift by 4× (from +0.400 to +0.100 bohr/l_max). 75% of divergence is from adiabatic approximation (as diagnosed v2.0.6); 25% residual survives the 2D solver — likely PK-related or intrinsic to composed-geometry separation. Adiabatic still wins at l_max=2 (2.8% vs 6.1% R_eq error) due to error cancellation; 2D wins at l_max=3 (9.5% vs 16.1%). Default remains `level4_method='adiabatic'`. Next investigation: test with `pk_mode='none'` to isolate residual drift source. (v2.0.9)
+- Track C — Level 2 algebraicization (prolate spheroidal): COMPLETE. Spectral Laguerre basis replaces 5000-point FD radial ξ-solver. 250× dimension reduction, 270× speedup, 5000× accuracy improvement (1.01% → 0.0002%). Production wiring complete: `scan_h2plus_pes(radial_method='spectral')` gives 287× speedup with 5000× E_min accuracy (v2.0.9). Algebraic Laguerre matrix elements via three-term recurrence eliminate ALL quadrature for m=0 σ states — the Level 2 radial solver is now fully algebraic (`matrix_method='algebraic'`, machine-precision agreement with quadrature). m≠0 not algebraicizable (1/x singularity, falls back to quadrature). (v2.0.9)
 - Track D — Level 3 exact Q-matrix: COMPLETE. Algebraic dP/dR derived from Hellmann-Feynman quantities (verified vs FD to <1e-9, zero finite differences needed). Exact Q = PP + dP/dR replaces closure approximation. Results: 14-19% improvement over closure at l_max≥1, best coupled-channel error 0.22% at l_max=3. l_max=0 overcorrection (1.1%) is structural — dominated by diagonal DBOC, not fixable by Q-matrix improvement alone. q_mode='exact' recommended for l_max≥1 production use. (v2.0.6)
 - Track E — Level 3 coupled-channel convergence ceiling: COMPLETE. Extended to l_max=5 with q_mode='exact'. Error converges algebraically (~l_max⁻²) to structural floor of 0.19-0.20%, set by adiabatic channel truncation. Sub-0.1% requires variational 2D solver (Paper 15). 3 channels sufficient (4-5 contribute < 0.001%). n_basis and radial grid fully converged. (v2.0.8)
+- Track F — Level 3 spectral hyperradial: COMPLETE. Spectral Laguerre basis replaces 3000-point FD hyperradial grid. 120× dimension reduction (3000 → 25 basis functions, converged at n_basis=15), 95× coupled-channel speedup (561 ms → 5.9 ms). Spectral-FD consistency < 0.00003 Ha. Coupled-channel ceiling unchanged (0.221% at l_max=3 — same as FD's 0.220%). Alpha-insensitive. Default preserved (`radial_method='fd'`). (v2.0.9)
+- Track G — Level 3 perturbation series: COMPLETE (definitive negative result). Rayleigh-Schrödinger perturbation series for μ(R) exploiting linear matrix pencil H(R) = H₀ + R·V_C. a₁ validated to 10⁻¹⁵ against Paper 13 Table II. Raw series converges for R < 2 bohr; Padé extends to R ≈ 3 bohr; all orders fail beyond R ≈ 5 bohr. Root cause: μ(R) is transcendental (O(R) → O(R²) regime transition). Point-by-point R-grid diagonalization cannot be eliminated globally. Series provides exact R=0 derivatives for spline seeding. Confirms Paper 13 Sec XII.B. (v2.0.9)
 
 **Backlog:**
 - Q-matrix improvement for Level 3 coupled-channel — DONE (v2.0.6)
-- Track C implementation — DONE (v2.0.8). Production wiring (PES scan, wavefunction reconstruction) is next step.
-- Wire spectral radial solver into scan_h2plus_pes() and solve_with_wavefunction()
+- Track C implementation + production wiring + algebraic matrix elements — DONE (v2.0.9)
+- Track F spectral hyperradial — DONE (v2.0.9)
+- Track G perturbation series — DONE, definitive negative (v2.0.9)
 - Rebuild composed-geometry Hamiltonians with spectral Level 2 solver (expect accuracy improvement from elimination of FD error)
-- Apply spectral Laguerre pattern to Level 3 hyperradial solver (currently 3000-point FD; expect similar 100-250× reduction)
+- Track A next step: test composed LiH with `pk_mode='none'` to isolate residual 25% l_max drift source
+- Apply algebraic Laguerre matrix elements to Level 3 hyperradial (same three-term recurrence pattern — currently using quadrature)
+- Dense spectral PES scan (200+ R-points) for precision H₂⁺ spectroscopic constants (R_eq, ω_e, B_e, ν₀₁)
 
 **Architecture locked:** The LCAO/graph-concatenation approach (v0.9.x series) is superseded. All molecular work uses natural geometry (Papers 11, 13, 15, 17).
 
@@ -134,7 +139,7 @@ The core organizational principle of the project. Each electron configuration ha
 
 The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G_core(R) semi-direct G_val(R, core_state). Each electron group gets its own natural coordinate system, coupled via Z_eff screening and Phillips-Kleinman pseudopotential.
 
-**Algebraic structure:** At every level, matrix elements are computed from quantum number labels and Wigner 3j symbols (via Gaunt integrals), with no spatial quadrature in the unscreened atomic/molecular paths. The split-region Legendre expansion (Paper 15) terminates exactly via the 3j triangle inequality. Spatial quadrature enters only for the smooth Z_eff screening correction in composed geometries and for rho-collapse spline caching.
+**Algebraic structure:** At every level, angular matrix elements are computed from quantum number labels and Wigner 3j symbols (via Gaunt integrals), with no spatial quadrature. The split-region Legendre expansion (Paper 15) terminates exactly via the 3j triangle inequality. At Level 2, the radial solver for σ states (m=0) is fully algebraic: Laguerre matrix elements via three-term recurrence with zero numerical integration (v2.0.9). At Level 3, the angular problem is fully algebraic but the adiabatic eigenvalues μ(R) are proven transcendental (O(R) → O(R²) regime transition, v2.0.9 Track G) — point-by-point diagonalization is irreducible, though spectral radial solvers achieve 95-120× speedups. Spatial quadrature enters for: m≠0 centrifugal terms at Level 2 (1/x singularity), Level 3 hyperradial Laguerre matrix elements (algebraicizable via same three-term recurrence — backlog item), Z_eff screening in composed geometries, and rho-collapse spline caching.
 
 ---
 
@@ -220,6 +225,8 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Composed qubit | `geovac/composed_qubit.py` | `build_composed_lih()`, `build_composed_beh2()`, `build_composed_h2o()` |
 | Algebraic angular solver | `geovac/algebraic_angular.py` | `AlgebraicAngularSolver(Z, l_max)` |
 | Algebraic coupled-channel | `geovac/algebraic_coupled_channel.py` | `solve_hyperspherical_algebraic_coupled()` |
+| Hyperradial solver | `geovac/hyperspherical_radial.py` | `solve_radial()`, `solve_radial_spectral()` |
+| Perturbation series (Level 3) | `geovac/algebraic_angular.py` | `perturbation_series_mu()`, `pade_approximant()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
 
 ### Solver Methods
@@ -343,6 +350,16 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Spectral speedup | > 10× | Wall time reduction control |
 | l_max=5 coupled-channel floor | 0.15%–0.25% | Adiabatic ceiling characterization |
 | n_channels=5 vs 3 consistency | < 1 mHa | Channel truncation validation |
+| Spectral PES (H₂⁺) | R_eq < 0.5%, E_min < 0.001% | Spectral PES scan accuracy |
+| Algebraic vs quadrature matrices | < 1e-12 elementwise | Laguerre recurrence correctness |
+| Algebraic PES energy | < 1e-14 Ha vs quadrature | End-to-end algebraic validation |
+| Level 3 spectral-FD consistency | < 0.0001 Ha | Hyperradial spectral solver |
+| Level 3 spectral coupled-channel | 0.15%–0.25% at l_max=3 | Coupled-channel ceiling preserved |
+| Level 3 spectral dimension reduction | > 100× | 25 basis functions vs 3000 FD grid |
+| Level 3 spectral coupled speedup | > 50× | Coupled-channel wall time |
+| Perturbation a₁ vs Paper 13 | < 10⁻⁹ | RS series first-order validation |
+| Perturbation series convergence | converges R < 2 bohr | Convergence radius characterization |
+| 2D solver composed LiH | drift < +0.15 bohr/l_max | 2D vs adiabatic drift comparison |
 | Speed regression | < 10% | Performance control |
 
 ---
@@ -379,6 +396,12 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Coupled-channel convergence | 13 | Sec XIII.C | Core |
 | Hellmann-Feynman P-matrix | 13 | Sec XIII.A | Core |
 | Adiabatic bottleneck (l_max) | 13 | Sec XIII.B | Core |
+| Perturbation series μ(R) | 13 | Sec XII-XIII | Core |
+| Transcendental boundary (μ(R)) | 13 | Sec XII.B | Core |
+| Spectral Laguerre (Level 2) | 11 | Sec V | Core |
+| Algebraic Laguerre moments | 11 | Sec V | Core |
+| Spectral Laguerre (Level 3) | 13 | — | Core |
+| 2D solver in composition | 15, 17 | Sec VI.D, — | Core |
 | Qubit Pauli scaling | 14 | All | Core |
 | Structural sparsity | 14 | Sec III | Core |
 | QWC measurement groups | 14 | Sec III.E | Core |
@@ -475,6 +498,7 @@ Every PM session begins by reading CLAUDE.md and then executing the following:
 3. Check the failed approaches table (Section 3) for relevant dead ends
 4. Decompose the session goal into sub-agent tasks
 5. Draft sub-agent prompts using the standard template (13.3)
+6. Identify which papers need updating based on the session's results (see 13.8)
 
 ### 13.3 Sub-Agent Prompt Template
 
@@ -492,6 +516,10 @@ SUCCESS CRITERIA:
   - Numerical targets: [specific error thresholds if applicable]
   - Consistency check: [which papers or results to verify against]
 OUTPUT FORMAT: [what to report back — specific data, not just pass/fail]
+PAPER UPDATES:
+  - Papers affected: [list paper numbers]
+  - Autonomous changes: [list what can be committed directly per 13.8]
+  - Escalation changes: [list what needs plan-mode review, with proposed diffs]
 ```
 
 ### 13.4 Verification Gates
@@ -507,12 +535,60 @@ Before the PM agent accepts a sub-agent result, it checks:
 
 The following changes require escalation to plan mode (human review) and must NOT be made by sub-agents or the PM agent autonomously:
 
-- Any modification to papers in `papers/core/` or `papers/observations/` or `papers/conjectures/`
 - Any modification to CLAUDE.md
 - Any change to the natural geometry hierarchy (new levels, changed coordinate systems)
 - Any new entry in the failed approaches table
 - Any result that would change the "Best Result" column in the hierarchy table
 - Introduction of any fitted or empirical parameter
+- Paper changes in the **escalation tier** (see 13.8)
+
+### 13.8 Paper Update Policy
+
+Papers are the authoritative source for all physics (Section 1). Code that outpaces the papers creates documentation drift. PMs are expected to keep papers in sync with code results, subject to a tiered autonomy rule.
+
+#### Autonomous tier (PMs may commit directly)
+
+PMs may modify papers in `papers/core/`, `papers/observations/`, or `papers/conjectures/` WITHOUT plan-mode approval for changes that are strictly additive and factual:
+
+- Adding or updating benchmark tables (new numerical results, updated error percentages)
+- Adding rows to existing comparison tables
+- Updating numbers that have improved (e.g., error percentages, speedup factors, dimension counts)
+- Adding a subsection documenting a new solver variant, algorithm, or computational method with its results — provided it implements physics already described in the paper or in CLAUDE.md
+- Adding references to new code modules or test files
+- Fixing typos, grammatical errors, or LaTeX formatting issues
+
+**The test:** Does the change add evidence or detail for claims the paper already makes? If yes, autonomous. If it changes what the paper claims, escalate.
+
+#### Escalation tier (must go through plan-mode review)
+
+The following paper changes must NOT be made autonomously. The PM should draft the proposed changes and include them in the lane report under a **"Paper updates for review"** section with full diffs. These are reviewed in plan-mode chat at sprint-end.
+
+- Changing, softening, or strengthening any claim or conclusion
+- Reframing a result (e.g., from "demonstrated" to "proven", or vice versa)
+- Adding or modifying theoretical arguments or derivations
+- Changing the abstract or introduction framing
+- Adding a new section that introduces a new concept, principle, or interpretation
+- Documenting a negative result that changes the paper's narrative arc
+- Modifying or retracting any previously published result
+- Any change the PM is uncertain about
+
+#### PM report format for escalation-tier changes
+
+When a PM has escalation-tier paper changes, the lane report should include:
+
+```
+## Paper updates for review
+
+### Paper N — [title]
+
+**Type:** [new subsection / claim modification / narrative change / etc.]
+**Rationale:** [why this change is needed, in 1-2 sentences]
+
+**Proposed diff:**
+[exact LaTeX to add/change, with enough surrounding context to locate it]
+```
+
+These are reviewed in the plan-mode sprint-end chat. The human approves, modifies, or rejects each proposed change.
 
 ### 13.6 Track Management
 
@@ -527,4 +603,4 @@ The PM agent maintains a brief track status file at `debug/track_logs/STATUS.md`
 
 ### 13.7 General Guidance
 
-This protocol is a starting point and will be refined based on experience. The overriding principle is: **code changes can be autonomous** (the test suite catches errors), **but conceptual changes cannot** (those require human judgment in plan mode). When in doubt, escalate rather than proceeding.
+This protocol is a starting point and will be refined based on experience. The overriding principles are: **code changes can be autonomous** (the test suite catches errors); **factual paper updates are autonomous** (adding results, tables, and new-method subsections keeps papers in sync with code); **but conceptual changes cannot be autonomous** (claims, framing, and theoretical arguments require human judgment in plan mode). When in doubt, escalate rather than proceeding.

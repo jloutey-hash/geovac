@@ -227,5 +227,189 @@ class TestFDUnchanged:
         assert err < 1.5, f"FD error {err:.2f}% > 1.5% (regression)"
 
 
+from geovac.prolate_spheroidal_lattice import (
+    _laguerre_moment_matrices,
+    _build_laguerre_matrices_algebraic,
+)
+
+
+class TestLaguerreMomentMatrices:
+    """Validate the algebraic Laguerre moment matrices M0, M1, M2."""
+
+    def test_m0_is_identity(self):
+        """M0 = delta_{mn} (Laguerre orthonormality)."""
+        M0, _, _ = _laguerre_moment_matrices(10)
+        np.testing.assert_allclose(M0, np.eye(10), atol=1e-15)
+
+    def test_m1_tridiagonal_symmetry(self):
+        """M1 should be symmetric and tridiagonal."""
+        _, M1, _ = _laguerre_moment_matrices(10)
+        np.testing.assert_allclose(M1, M1.T, atol=1e-15)
+        # Check no entries beyond tridiagonal band
+        for i in range(10):
+            for j in range(10):
+                if abs(i - j) > 1:
+                    assert M1[i, j] == 0.0
+
+    def test_m1_known_values(self):
+        """Spot-check M1 entries against the recurrence formula."""
+        _, M1, _ = _laguerre_moment_matrices(5)
+        # M1[i,i] = 2i+1
+        for i in range(5):
+            assert M1[i, i] == 2 * i + 1
+        # M1[i,i+1] = -(i+1)
+        for i in range(4):
+            assert M1[i, i + 1] == -(i + 1)
+
+    def test_m2_pentadiagonal_symmetry(self):
+        """M2 should be symmetric and pentadiagonal."""
+        _, _, M2 = _laguerre_moment_matrices(10)
+        np.testing.assert_allclose(M2, M2.T, atol=1e-15)
+        for i in range(10):
+            for j in range(10):
+                if abs(i - j) > 2:
+                    assert M2[i, j] == 0.0
+
+    def test_m2_diagonal_values(self):
+        """M2[j,j] = 6j^2 + 6j + 2."""
+        _, _, M2 = _laguerre_moment_matrices(8)
+        for j in range(8):
+            expected = 6 * j * j + 6 * j + 2
+            assert M2[j, j] == expected, f"M2[{j},{j}]={M2[j,j]}, expected {expected}"
+
+    def test_moments_vs_quadrature(self):
+        """Moment matrices should match Gauss-Laguerre quadrature reference."""
+        from scipy.special import roots_laguerre, eval_laguerre
+        N = 8
+        M0, M1, M2 = _laguerre_moment_matrices(N)
+        n_quad = 200
+        x, w = roots_laguerre(n_quad)
+        L = np.array([eval_laguerre(n, x) for n in range(N)])
+        # Build reference moment matrices via quadrature
+        M0_ref = (w[np.newaxis, :] * L) @ L.T
+        M1_ref = (w[np.newaxis, :] * L * x[np.newaxis, :]) @ L.T
+        M2_ref = (w[np.newaxis, :] * L * (x**2)[np.newaxis, :]) @ L.T
+        np.testing.assert_allclose(M0, M0_ref, atol=1e-10)
+        np.testing.assert_allclose(M1, M1_ref, atol=1e-10)
+        np.testing.assert_allclose(M2, M2_ref, atol=1e-9)
+
+
+class TestAlgebraicVsQuadratureMatrices:
+    """Compare algebraic and quadrature matrix construction element-by-element."""
+
+    def _get_both_matrices(self, R: float = 2.0, n_basis: int = 20):
+        """Build H,S matrices both ways at converged c2, A."""
+        sq = ProlateSpheroidalLattice(
+            R=R, radial_method='spectral', n_basis=n_basis,
+            matrix_method='quadrature'
+        )
+        E, c2, A = sq.solve()
+        alpha = max(np.sqrt(max(c2, 0.01)), 0.5)
+        H_q, S_q = sq._build_laguerre_matrices_quadrature(n_basis, alpha, A, c2)
+        a_param = R * 2  # Z_A + Z_B = 2 for H2+
+        H_a, S_a = _build_laguerre_matrices_algebraic(n_basis, alpha, A, a_param, c2, m=0)
+        return H_q, S_q, H_a, S_a
+
+    def test_overlap_agreement_r2(self):
+        """Overlap matrices match to machine precision at R=2."""
+        _, S_q, _, S_a = self._get_both_matrices(R=2.0)
+        np.testing.assert_allclose(S_a, S_q, atol=1e-14)
+
+    def test_hamiltonian_agreement_r2(self):
+        """Hamiltonian matrices match to < 1e-11 at R=2."""
+        H_q, _, H_a, _ = self._get_both_matrices(R=2.0)
+        np.testing.assert_allclose(H_a, H_q, atol=1e-11)
+
+    def test_overlap_agreement_r05(self):
+        """Overlap matrices match at R=0.5 (strong binding).
+
+        The algebraic overlap is exactly diagonal; quadrature introduces
+        ~1e-14 off-diagonal noise from finite precision.
+        """
+        _, S_q, _, S_a = self._get_both_matrices(R=0.5)
+        np.testing.assert_allclose(S_a, S_q, atol=2e-14)
+
+    def test_hamiltonian_agreement_r05(self):
+        """Hamiltonian matrices match at R=0.5."""
+        H_q, _, H_a, _ = self._get_both_matrices(R=0.5)
+        np.testing.assert_allclose(H_a, H_q, atol=1e-11)
+
+    def test_hamiltonian_agreement_r8(self):
+        """Hamiltonian matrices match at R=8.0 (near dissociation)."""
+        H_q, _, H_a, _ = self._get_both_matrices(R=8.0)
+        np.testing.assert_allclose(H_a, H_q, atol=1e-11)
+
+
+class TestAlgebraicSolverEnergies:
+    """Verify algebraic solver produces identical energies to quadrature."""
+
+    def test_energy_r2(self):
+        """Algebraic and quadrature give same energy at R=2."""
+        sq = ProlateSpheroidalLattice(R=2.0, radial_method='spectral', matrix_method='quadrature')
+        sa = ProlateSpheroidalLattice(R=2.0, radial_method='spectral', matrix_method='algebraic')
+        Eq, _, _ = sq.solve()
+        Ea, _, _ = sa.solve()
+        assert abs(Ea - Eq) < 1e-13, f"Energy diff {abs(Ea-Eq):.2e} > 1e-13"
+
+    def test_energy_multiple_r(self):
+        """Algebraic matches quadrature across full PES range."""
+        for R in [0.5, 1.0, 2.0, 4.0, 8.0, 15.0]:
+            sq = ProlateSpheroidalLattice(R=R, radial_method='spectral', matrix_method='quadrature')
+            sa = ProlateSpheroidalLattice(R=R, radial_method='spectral', matrix_method='algebraic')
+            Eq, _, _ = sq.solve()
+            Ea, _, _ = sa.solve()
+            assert abs(Ea - Eq) < 1e-12, f"R={R}: diff {abs(Ea-Eq):.2e}"
+
+    def test_pes_scan_algebraic(self):
+        """Full PES scan with algebraic method matches quadrature."""
+        R_vals = np.linspace(1.0, 6.0, 10)
+        res_q = scan_h2plus_pes(R_vals, radial_method='spectral', matrix_method='quadrature', verbose=False)
+        res_a = scan_h2plus_pes(R_vals, radial_method='spectral', matrix_method='algebraic', verbose=False)
+        np.testing.assert_allclose(res_a['E_total'], res_q['E_total'], atol=1e-13)
+
+    def test_algebraic_accuracy_vs_exact(self):
+        """Algebraic solver achieves < 0.01% error vs exact H2+ at R=2."""
+        sa = ProlateSpheroidalLattice(R=2.0, radial_method='spectral', matrix_method='algebraic')
+        E_tot = sa.total_energy()
+        exact = -0.6026342
+        err_pct = abs(E_tot - exact) / abs(exact) * 100
+        assert err_pct < 0.01, f"Error {err_pct:.4f}% > 0.01%"
+
+    def test_heteronuclear_algebraic(self):
+        """Algebraic solver works for HeH2+ (heteronuclear)."""
+        sq = ProlateSpheroidalLattice(R=2.0, Z_A=2, Z_B=1, radial_method='spectral', matrix_method='quadrature')
+        sa = ProlateSpheroidalLattice(R=2.0, Z_A=2, Z_B=1, radial_method='spectral', matrix_method='algebraic')
+        Eq, _, _ = sq.solve()
+        Ea, _, _ = sa.solve()
+        assert abs(Ea - Eq) < 1e-12, f"HeH2+ diff {abs(Ea-Eq):.2e}"
+
+    def test_m_nonzero_raises(self):
+        """Algebraic method should raise NotImplementedError for m!=0."""
+        with pytest.raises(NotImplementedError, match="m=0"):
+            _build_laguerre_matrices_algebraic(20, 1.0, 0.8, 4.0, 2.0, m=1)
+
+    def test_m_nonzero_falls_back_to_quadrature(self):
+        """For m!=0, spectral solver with algebraic falls back to quadrature."""
+        sq = ProlateSpheroidalLattice(
+            R=2.0, m=1, n_angular=0, n_radial=0,
+            radial_method='spectral', matrix_method='quadrature'
+        )
+        sa = ProlateSpheroidalLattice(
+            R=2.0, m=1, n_angular=0, n_radial=0,
+            radial_method='spectral', matrix_method='algebraic'
+        )
+        Eq, _, _ = sq.solve()
+        Ea, _, _ = sa.solve()
+        assert abs(Ea - Eq) < 1e-13, f"m=1 fallback diff {abs(Ea-Eq):.2e}"
+
+    def test_quadrature_default_unchanged(self):
+        """Default matrix_method='quadrature' should not change results."""
+        s_default = ProlateSpheroidalLattice(R=2.0, radial_method='spectral')
+        s_explicit = ProlateSpheroidalLattice(R=2.0, radial_method='spectral', matrix_method='quadrature')
+        Ed, _, _ = s_default.solve()
+        Ee, _, _ = s_explicit.solve()
+        assert Ed == Ee, "Default should be quadrature"
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

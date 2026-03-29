@@ -40,7 +40,10 @@ from typing import Tuple, Optional
 
 from geovac.algebraic_angular import AlgebraicAngularSolver
 from geovac.hyperspherical_adiabatic import effective_potential
-from geovac.hyperspherical_radial import solve_radial, solve_coupled_radial
+from geovac.hyperspherical_radial import (
+    solve_radial, solve_coupled_radial,
+    solve_radial_spectral, solve_coupled_radial_spectral,
+)
 
 
 def _enforce_sign_consistency(
@@ -331,6 +334,9 @@ def solve_hyperspherical_algebraic_coupled(
     sigma: float = -3.0,
     q_mode: str = 'diagonal',
     verbose: bool = True,
+    radial_method: str = 'fd',
+    n_basis_radial: int = 25,
+    alpha_radial: float = 2.0,
 ) -> dict:
     """Full Level 3 coupled-channel solver using algebraic angular input.
 
@@ -372,6 +378,12 @@ def solve_hyperspherical_algebraic_coupled(
             off-diagonal Q elements are corrected.
     verbose : bool
         Print progress.
+    radial_method : str
+        'fd' (default) for finite-difference or 'spectral' for Laguerre basis.
+    n_basis_radial : int
+        Number of Laguerre basis functions (spectral method only).
+    alpha_radial : float
+        Exponential decay parameter for Laguerre basis (spectral method only).
 
     Returns
     -------
@@ -467,19 +479,33 @@ def solve_hyperspherical_algebraic_coupled(
                 )
 
     # --- Step 4: Solve coupled radial equation ---
-    if verbose:
-        print(f"Solving coupled-channel radial equation "
-              f"(N_R={N_R_radial}, {n_channels} ch, q_mode={q_mode})...")
-
-    E_all, F_all, R_grid_rad = solve_coupled_radial(
-        V_eff_splines, P_splines,
-        Q_splines=Q_splines_obj,
-        n_channels=n_channels,
-        R_min=R_min, R_max=R_max, N_R=N_R_radial,
-        n_states=min(5, n_channels * 3),
-        sigma=sigma,
-        include_Q=use_Q,
-    )
+    if radial_method == 'spectral':
+        if verbose:
+            print(f"Solving coupled-channel radial equation "
+                  f"(spectral, n_basis={n_basis_radial}, {n_channels} ch, "
+                  f"q_mode={q_mode})...")
+        E_all, F_all, R_grid_rad = solve_coupled_radial_spectral(
+            V_eff_splines, P_splines,
+            Q_splines=Q_splines_obj,
+            n_channels=n_channels,
+            n_basis=n_basis_radial, alpha=alpha_radial,
+            R_min=R_min,
+            n_states=min(5, n_channels * 3),
+            include_Q=use_Q,
+        )
+    else:
+        if verbose:
+            print(f"Solving coupled-channel radial equation "
+                  f"(N_R={N_R_radial}, {n_channels} ch, q_mode={q_mode})...")
+        E_all, F_all, R_grid_rad = solve_coupled_radial(
+            V_eff_splines, P_splines,
+            Q_splines=Q_splines_obj,
+            n_channels=n_channels,
+            R_min=R_min, R_max=R_max, N_R=N_R_radial,
+            n_states=min(5, n_channels * 3),
+            sigma=sigma,
+            include_Q=use_Q,
+        )
 
     t2 = time.time()
     E_exact = -2.903724
@@ -505,9 +531,15 @@ def solve_hyperspherical_algebraic_coupled(
     # Also compute single-channel adiabatic energy for comparison
     V_eff_single = effective_potential(R_grid, mu_curves[0])
     V_eff_spline_single = CubicSpline(R_grid, V_eff_single, extrapolate=True)
-    E_single, _, _ = solve_radial(
-        V_eff_spline_single, R_min, R_max, N_R_radial, n_states=1
-    )
+    if radial_method == 'spectral':
+        E_single, _, _ = solve_radial_spectral(
+            V_eff_spline_single, n_basis=n_basis_radial,
+            alpha=alpha_radial, R_min=R_min, n_states=1
+        )
+    else:
+        E_single, _, _ = solve_radial(
+            V_eff_spline_single, R_min, R_max, N_R_radial, n_states=1
+        )
 
     if verbose:
         err_s = abs(E_single[0] - E_exact) / abs(E_exact) * 100

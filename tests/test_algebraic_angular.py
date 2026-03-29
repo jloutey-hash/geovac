@@ -837,5 +837,198 @@ def test_dboc_lmax_scaling():
             f"l_max={l_max}: DBOC shift {shifts[i]:.6f} out of expected range"
 
 
+# ---------------------------------------------------------------------------
+# Perturbation series tests (Lane B — algebraic adiabatic curves)
+# ---------------------------------------------------------------------------
+
+def test_perturbation_a1_exact():
+    """Verify a_1 matches Paper 13 Table II exact formula.
+
+    a_1(n=1, Z=2) = (8/3pi)(sqrt(2) - 8) = -5.590189...
+    This is the primary validation gate for the perturbation series.
+    """
+    from geovac.algebraic_angular import AlgebraicAngularSolver, perturbation_series_mu
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=10, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=5)
+
+    a1_exact = (8.0 / (3.0 * pi)) * (sqrt(2) - 8.0)
+    assert abs(coeffs[0, 0] - 0.0) < 1e-12, "a_0 should be 0 (ground channel Casimir)"
+    assert abs(coeffs[0, 1] - a1_exact) < 1e-9, \
+        f"a_1 = {coeffs[0, 1]:.10f}, exact = {a1_exact:.10f}"
+
+
+def test_perturbation_a1_z_scaling():
+    """Verify a_1(Z) = (8/3pi)(sqrt(2) - 4Z) for multiple Z values."""
+    from geovac.algebraic_angular import AlgebraicAngularSolver, perturbation_series_mu
+
+    for Z in [1.0, 2.0, 3.0, 5.0]:
+        solver = AlgebraicAngularSolver(Z=Z, n_basis=10, l_max=0)
+        H0_diag = np.concatenate(solver._channel_casimir)
+        V_C = solver._coupling_full
+        coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=2)
+
+        a1_exact = (8.0 / (3.0 * pi)) * (sqrt(2) - 4.0 * Z)
+        assert abs(coeffs[0, 1] - a1_exact) < 1e-9, \
+            f"Z={Z}: a_1 = {coeffs[0, 1]:.10f}, exact = {a1_exact:.10f}"
+
+
+def test_perturbation_a2_matches_direct():
+    """Verify a_2 from perturbation_series_mu matches direct second-order PT."""
+    from geovac.algebraic_angular import AlgebraicAngularSolver, perturbation_series_mu
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=20, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=3)
+
+    # Direct second-order: a_2 = sum_{n!=0} |V[0,n]|^2 / (E0 - En)
+    a2_direct = sum(
+        V_C[0, n] ** 2 / (H0_diag[0] - H0_diag[n])
+        for n in range(1, len(H0_diag))
+    )
+
+    assert abs(coeffs[0, 2] - a2_direct) < 1e-10, \
+        f"a_2 series = {coeffs[0, 2]:.10f}, direct = {a2_direct:.10f}"
+
+
+def test_perturbation_convergence_small_R():
+    """Perturbation series matches numerical diagonalization for R < 2 bohr."""
+    from geovac.algebraic_angular import (
+        AlgebraicAngularSolver, perturbation_series_mu,
+        evaluate_perturbation_series,
+    )
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=10, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=15)
+
+    R_test = np.array([0.1, 0.5, 1.0])
+    mu_series = evaluate_perturbation_series(coeffs[:1], R_test)
+
+    for i, R in enumerate(R_test):
+        evals, _ = solver.solve(R, n_channels=1)
+        rel_err = abs(mu_series[0, i] - evals[0]) / abs(evals[0])
+        assert rel_err < 1e-6, \
+            f"R={R}: series={mu_series[0, i]:.8f}, exact={evals[0]:.8f}, rel_err={rel_err:.2e}"
+
+
+def test_perturbation_diverges_large_R():
+    """Perturbation series diverges for R >> convergence radius.
+
+    This confirms the algebraic/transcendental boundary noted in
+    Paper 13 Sec XII.B.  The convergence radius is ~2-3 bohr.
+    """
+    from geovac.algebraic_angular import (
+        AlgebraicAngularSolver, perturbation_series_mu,
+        evaluate_perturbation_series,
+    )
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=10, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=15)
+
+    R_large = np.array([10.0])
+    mu_series = evaluate_perturbation_series(coeffs[:1], R_large)
+    evals, _ = solver.solve(10.0, n_channels=1)
+
+    # Series should diverge wildly at R=10
+    rel_err = abs(mu_series[0, 0] - evals[0]) / abs(evals[0])
+    assert rel_err > 1.0, \
+        f"Series should diverge at R=10: rel_err = {rel_err:.2e}"
+
+
+def test_pade_extends_convergence():
+    """Padé approximant extends useful convergence beyond raw series.
+
+    [7/7] Padé on g(R) = mu(R) + Z^2*R^2/2 should be accurate to
+    < 1% at R = 3 bohr, where the raw series has > 1% error.
+    """
+    from geovac.algebraic_angular import (
+        AlgebraicAngularSolver, perturbation_series_mu,
+        evaluate_perturbation_series, pade_approximant, evaluate_pade,
+    )
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=10, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=14)
+
+    Z = 2.0
+    g_coeffs = coeffs[0].copy()
+    g_coeffs[2] += Z ** 2 / 2.0
+
+    p_c, q_c = pade_approximant(g_coeffs, 7, 7)
+
+    # At R=2, Padé should be excellent
+    R_test = np.array([2.0])
+    g_pade = evaluate_pade(p_c, q_c, R_test)
+    mu_pade = g_pade - Z ** 2 * R_test ** 2 / 2.0
+    evals, _ = solver.solve(2.0, n_channels=1)
+    rel_err_pade = abs(mu_pade[0] - evals[0]) / abs(evals[0])
+    assert rel_err_pade < 1e-4, \
+        f"Padé at R=2: rel_err = {rel_err_pade:.2e}"
+
+    # At R=3, Padé should still be reasonable (< 1%)
+    R_test = np.array([3.0])
+    g_pade = evaluate_pade(p_c, q_c, R_test)
+    mu_pade = g_pade - Z ** 2 * R_test ** 2 / 2.0
+    evals, _ = solver.solve(3.0, n_channels=1)
+    rel_err_pade = abs(mu_pade[0] - evals[0]) / abs(evals[0])
+    assert rel_err_pade < 0.01, \
+        f"Padé at R=3: rel_err = {rel_err_pade:.2e}"
+
+
+def test_pade_fails_beyond_transcendental_boundary():
+    """Padé cannot capture the transcendental μ(R) at large R.
+
+    Paper 13 Sec XII.B: μ(R) transitions from O(R) perturbative to
+    O(R²) asymptotic; no finite rational function spans both regimes.
+    """
+    from geovac.algebraic_angular import (
+        AlgebraicAngularSolver, perturbation_series_mu,
+        pade_approximant, evaluate_pade,
+    )
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=10, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=1, max_order=14)
+
+    Z = 2.0
+    g_coeffs = coeffs[0].copy()
+    g_coeffs[2] += Z ** 2 / 2.0
+    p_c, q_c = pade_approximant(g_coeffs, 7, 7)
+
+    # At R=10, Padé should fail badly (> 50% error)
+    R_test = np.array([10.0])
+    g_pade = evaluate_pade(p_c, q_c, R_test)
+    mu_pade = g_pade - Z ** 2 * R_test ** 2 / 2.0
+    evals, _ = solver.solve(10.0, n_channels=1)
+    rel_err = abs(mu_pade[0] - evals[0]) / abs(evals[0])
+    assert rel_err > 0.5, \
+        f"Expected Padé failure at R=10: rel_err = {rel_err:.2e}"
+
+
+def test_perturbation_multichannel_consistency():
+    """Higher channels have correct a_0 (Casimir) values."""
+    from geovac.algebraic_angular import AlgebraicAngularSolver, perturbation_series_mu
+
+    solver = AlgebraicAngularSolver(Z=2.0, n_basis=10, l_max=0)
+    H0_diag = np.concatenate(solver._channel_casimir)
+    V_C = solver._coupling_full
+    coeffs = perturbation_series_mu(H0_diag, V_C, n_channels=4, max_order=5)
+
+    # a_0 values should be Casimir: 0, 16, 48, 96 for l=0 singlet
+    expected_a0 = [0.0, 16.0, 48.0, 96.0]
+    for ch in range(4):
+        assert abs(coeffs[ch, 0] - expected_a0[ch]) < 1e-10, \
+            f"Channel {ch}: a_0 = {coeffs[ch, 0]}, expected {expected_a0[ch]}"
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

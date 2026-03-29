@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.6-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.9-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 2.0.6** - Algebraic Angular Solver & Coupled-Channel Integration (Level 3)
+**Version 2.0.9** - Five-Lane Sprint: Algebraic & Spectral Infrastructure (Levels 2-3, 5)
 
 GeoVac models quantum mechanics on **discrete, dimensionless graph topologies**. The discrete graph Laplacian -- a sparse matrix with O(V) nonzero entries -- is *mathematically equivalent* to the Schrodinger equation for hydrogen via Fock's 1935 conformal projection, as formally proven via 18 independent symbolic proofs (Paper 7). This equivalence is the computational foundation: by working directly on the graph topology, expensive continuous integration is replaced by O(N) sparse matrix eigenvalue problems that produce the same physics.
 
@@ -18,17 +18,18 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v2.0.6
+## What's New in v2.0.9
 
-Algebraic spectral basis replaces finite-difference angular solver at Level 3 (He). Coupled-channel integration resolves the l_max convergence problem.
+Five-lane sprint across two rounds. Spectral and algebraic infrastructure at Levels 2-3; 2D solver integration at Level 5.
 
-- **Algebraic angular solver:** Gegenbauer spectral basis reduces angular matrix dimension from 200-800 (FD) to 10-30 (algebraic). All matrix elements algebraic (SO(6) Casimir, Gaunt integrals, partial harmonic sums). Exact Hellmann-Feynman P-matrix from R-independent dH/dR.
-- **Coupled-channel convergence:** Single-channel error diverges with l_max (0.16% → 0.65%); coupled-channel error converges (0.37% → 0.27% at l_max 1-3). P-only and P+Q bracket exact energy from below and above.
-- **DBOC analysis:** +0.035 Ha correction, 23x the adiabatic error, with 97% cancelled by off-diagonal coupling. Confirms adiabatic approximation (not angular basis) is the accuracy bottleneck.
-- **Sturmian variant:** 1.6-3.6x faster angular convergence at l_max=0; counterproductive at l_max≥1 (converges faster to wrong adiabatic limit). Preserved as research artifact.
-- **Paper 13:** New section on algebraic angular solver and coupled-channel convergence
+- **Level 2 fully algebraic (m=0):** Laguerre three-term recurrence replaces all quadrature in the spectral radial solver for σ states. Machine-precision agreement (< 1e-14 Ha). 1.6× additional speedup. Production PES wiring: `scan_h2plus_pes(radial_method='spectral')` gives 287× speedup, 5000× E_min accuracy.
+- **Level 3 spectral hyperradial:** Spectral Laguerre replaces 3000-point FD grid. 120× dimension reduction, 95× coupled-channel speedup. Physics preserved (0.221% vs 0.220% at l_max=3).
+- **Level 3 μ(R) transcendental boundary:** Rayleigh-Schrödinger perturbation series validates a₁ to 10⁻¹⁵. Proven transcendental beyond R ≈ 2 bohr (Padé fails at R > 5). Confirms Paper 13 Sec XII.B.
+- **2D solver in composition pipeline:** Variational 2D solver integrated into composed LiH. 4× drift reduction (+0.400 → +0.100 bohr/l_max). 25% residual non-adiabatic divergence discovered — new finding.
 
 ### Prior Releases
+- **v2.0.8:** Three-lane sprint — spectral Laguerre Level 2 (250× reduction, 5000× accuracy), Paper 14 expanded benchmarks, Level 3 convergence ceiling (0.19-0.20% floor)
+- **v2.0.6:** Algebraic Angular Solver & Coupled-Channel Integration (Level 3)
 - **v2.0.5:** Asymmetric Bond Diagnostic Arc — l_max divergence diagnosis (+0.23 bohr/l_max), R-dependent PK scaling (2.0% at l_max=4), negative results (eigenchannel rotation, spheroidal compression, self-consistent PK, projected PK)
 - **v2.0.4:** H₂O Composed Solver — 5-block architecture, R_eq 26%, charge asymmetry diagnostic, lone pair coupling (negative result)
 - **v2.0.3:** Commutator-Based Trotter Bounds — r ~ Q^{1.47}, 7× fewer steps at Q=60

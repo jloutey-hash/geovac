@@ -136,6 +136,7 @@ class ComposedDiatomicSolver:
         pk_B: Optional[float] = None,
         pk_channel_mode: str = 'channel_blind',
         zeff_mode: str = 'screened',
+        level4_method: str = 'adiabatic',
         verbose: bool = True,
         label: str = '',
     ) -> None:
@@ -178,6 +179,14 @@ class ComposedDiatomicSolver:
             )
         self.pk_mode = pk_mode
         self.pk_channel_mode = pk_channel_mode
+
+        # Level 4 solver method
+        if level4_method not in ('adiabatic', 'variational_2d'):
+            raise ValueError(
+                f"level4_method must be 'adiabatic' or 'variational_2d', "
+                f"got '{level4_method}'"
+            )
+        self.level4_method = level4_method
 
         # Handle backward compatibility: use_pauli=False overrides pk_mode
         if not use_pauli:
@@ -365,6 +374,9 @@ class ComposedDiatomicSolver:
 
     def _solve_valence_at_R(self, R: float, n_Re: int = 300) -> float:
         """Solve Level 4 valence problem at a single R."""
+        # n_coupled=-1 activates the direct 2D variational solver,
+        # which bypasses the adiabatic approximation entirely.
+        n_coupled = -1 if self.level4_method == 'variational_2d' else 1
         result = solve_level4_h2_multichannel(
             R=R,
             Z_A=self.Z_A_eff,
@@ -377,6 +389,7 @@ class ComposedDiatomicSolver:
             l_max_per_m=self.l_max_per_m,
             pk_potentials=self.pk_potentials,
             pk_projector=self.pk_projector,
+            n_coupled=n_coupled,
         )
         return result['E_elec']
 

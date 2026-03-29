@@ -5,6 +5,92 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.9] - 2026-03-28
+
+### Five-lane sprint (2 rounds, 3 parallel PMs)
+
+#### Round 1
+
+##### Lane 1 / Track C: Spectral PES Production Wiring (COMPLETE)
+
+Wired spectral Laguerre radial solver into production PES scan and wavefunction reconstruction for H₂⁺.
+
+- **`scan_h2plus_pes(radial_method='spectral')`:** 287× speedup (0.53s vs 153s, 41 R-points), 5000× E_min accuracy (0.0005% vs 1.01%), 160× D_e accuracy (0.04% vs 5.9%)
+- **`solve_with_wavefunction(radial_method='spectral')`:** Spectral wavefunction reconstruction via Galerkin eigenvector on 500-point grid
+- R_eq: 0.38% (slightly worse than FD's 0.15% due to coarse 41-point grid + polynomial fit — underlying energies are far more precise)
+- Default behavior unchanged (`radial_method='fd'`)
+- 20 new tests (test_spectral_pes_wiring.py), 37 total, all passing
+
+**Files changed:**
+- `geovac/prolate_spheroidal_lattice.py` — `radial_method`/`n_basis` params in `scan_h2plus_pes()`, spectral wavefunction reconstruction
+- `tests/test_spectral_pes_wiring.py` — new (20 tests)
+
+##### Lane 2 / Track F: Spectral Laguerre for Level 3 Hyperradial (COMPLETE)
+
+Applied spectral Laguerre pattern to the Level 3 hyperradial solver, replacing 3000-point FD grid.
+
+- **Basis:** φₙ(R) = (R-R_min)·exp(-α(R-R_min))·Lₙ(2α(R-R_min)), Gauss-Laguerre quadrature
+- **120× dimension reduction:** 3000 FD grid → 25 spectral basis functions (converged at n_basis=15)
+- **95× coupled-channel speedup:** 561 ms → 5.9 ms (3-channel, l_max=0)
+- **Spectral-FD consistency:** < 0.00003 Ha across all l_max values tested (0-3)
+- **Coupled-channel physics preserved:** l_max=3 error 0.221% (spectral) vs 0.220% (FD) — same ceiling
+- Alpha-insensitive: energy spread < 0.001 Ha over α=[0.5, 3.0]
+- Default behavior unchanged (`radial_method='fd'`)
+- 10 new tests (test_hyperspherical_he.py), 131 total, all passing
+
+**Files changed:**
+- `geovac/hyperspherical_radial.py` — `solve_radial_spectral()`, `solve_coupled_radial_spectral()`, `_build_laguerre_matrices_dirichlet()`
+- `geovac/algebraic_coupled_channel.py` — `radial_method`/`n_basis_radial`/`alpha_radial` param wiring
+- `tests/test_hyperspherical_he.py` — 10 new tests
+
+##### Lane 3 / Track A: 2D Solver Integration into Composition Pipeline (COMPLETE)
+
+Integrated variational 2D solver (Paper 15) into composed diatomic pipeline for LiH.
+
+- **Clean integration:** 2D solver already accepts PK potentials through `build_angular_hamiltonian()` pathway. No interface gap.
+- **4× drift reduction:** l_max divergence rate +0.400 → +0.100 bohr/l_max (adiabatic → 2D)
+- **75% of divergence is adiabatic** (as diagnosed in v2.0.6); **25% residual is non-adiabatic** — likely PK-related or intrinsic to composed-geometry separation. This is new information.
+- **Adiabatic wins at l_max=2** (2.8% vs 6.1%) due to error cancellation; **2D wins at l_max=3** (9.5% vs 16.1%)
+- Wall time comparable (2D sometimes faster — avoids 130-point R_e angular sweep)
+- Default behavior unchanged (`level4_method='adiabatic'`)
+- 77/77 tests passing, zero regressions
+
+**Files changed:**
+- `geovac/composed_diatomic.py` — `level4_method` parameter (`'adiabatic'` default, `'variational_2d'`)
+
+#### Round 2
+
+##### Lane A / Track C+: Algebraic Laguerre Matrix Elements (COMPLETE)
+
+Replaced Gauss-Laguerre quadrature with algebraic three-term recurrence for all Level 2 radial matrix elements (m=0).
+
+- **All matrix elements algebraic** for m=0 (σ states): overlap S, kinetic K, potential V computed via Laguerre moments M_k[i,j] = ∫x^k·Lᵢ·Lⱼ·e^{-x}dx using three-term recurrence x·Lₙ = -(n+1)Lₙ₊₁ + (2n+1)Lₙ - nLₙ₋₁
+- **Machine-precision agreement:** overlap max diff 4.4e-15, Hamiltonian max diff 4.1e-12, energy diff ~1e-14 Ha
+- **1.6× speedup** over quadrature (eliminates GL root computation)
+- **m≠0 not algebraicizable:** m²/(ξ²-1) produces 1/x singularity in Laguerre space with no finite moment expansion. Falls back to quadrature automatically. Documented and tested.
+- Default behavior unchanged (`matrix_method='quadrature'`)
+- 19 new tests, 56 total, all passing
+
+**Files changed:**
+- `geovac/prolate_spheroidal_lattice.py` — `_laguerre_moment_matrices()`, `_build_laguerre_matrices_algebraic()`, `matrix_method` parameter
+- `tests/test_spectral_radial.py` — 19 new tests
+
+##### Lane B / Track G: Algebraic Adiabatic Curves — Perturbation Series (COMPLETE)
+
+Rayleigh-Schrödinger perturbation series for Level 3 angular eigenvalues μ(R), exploiting linear matrix pencil H(R) = H₀ + R·V_C.
+
+- **a₁ validated exactly:** -5.590189, matches Paper 13 Table II to ~10⁻¹⁵. Z-scaling formula confirmed for Z=1,2,3,5.
+- **Perturbation series to order 20:** coefficients decay rapidly (|a_k| < 10⁻⁴ for k≥7)
+- **Raw series convergence radius: R ≈ 2 bohr.** Padé [7/7] extends to R ≈ 3 bohr (< 1% error). All Padé orders fail beyond R ≈ 5 bohr.
+- **μ(R) proven transcendental:** transitions from O(R) to O(R²) asymptotic behavior. No finite rational function spans both regimes. Confirms Paper 13 Sec XII.B.
+- **P-matrix series** converges even more slowly (useful only R < 1 bohr)
+- **Practical implication:** Point-by-point R-grid diagonalization cannot be eliminated globally. Series provides exact analytical derivatives at R=0 (spline seeding), validated algebraic coefficients, and definitive convergence boundary.
+- 8 new tests, 83 total, all passing
+
+**Files changed:**
+- `geovac/algebraic_angular.py` — `perturbation_series_mu()`, `evaluate_perturbation_series()`, `pade_approximant()`, `evaluate_pade()`, `perturbation_series_P_matrix()`
+- `tests/test_algebraic_angular.py` — 8 new tests
+
 ## [2.0.8] - 2026-03-28
 
 ### Three-lane concurrent sprint (first 3-PM parallel session)

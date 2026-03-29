@@ -1116,8 +1116,25 @@ as a conformal factor on the angular manifold: the ratio
 $\mu_n(R)/\mu_n^{\mathrm{free}}$ is not constant across channels,
 ruling out a uniform conformal rescaling interpretation.  The
 deformation is inhomogeneous---different angular modes are
-distorted by different amounts---which is why the transition has
-no closed-form description.
+distorted by different amounts.
+
+The Rayleigh--Schr\"odinger perturbation series
+(Sec.~\ref{sec:perturbation_series}) makes this limitation
+quantitative.  The linear matrix pencil $H(R) = H_0 + R\,V_C$
+yields algebraic coefficients $\{a_k\}$ whose raw power series
+converges only for $R \lesssim 2$~bohr; Pad\'e resummation
+(orders $[3/3]$ through $[10/10]$) extends useful accuracy to
+$R \approx 3$~bohr but fails beyond $R \approx 5$~bohr at all
+tested orders.  The root cause is structural: at small $R$ the
+eigenvalues grow as $\mu \sim a_1 R$ (perturbative), while at
+large $R$ they approach $\mu \sim -Z^2 R^2/2$ (hydrogen-like
+asymptotic), and no finite-order rational approximation
+interpolates between these qualitatively distinct power-law
+regimes.  Point-by-point numerical diagonalization of the
+$N \times N$ coupling matrix ($N = 10$--$30$ in the algebraic
+basis) therefore remains irreducible for the full hyperradial
+range, though the per-$R$ cost is negligible compared to the
+radial integration.
 
 \subsection{Generalization to three electrons (lithium)}
 \label{sec:lithium}
@@ -1520,6 +1537,178 @@ error with exact $Q$-matrix converges algebraically
 ($\sim l_{\max}^{-2}$) from $0.31\%$ at $l_{\max} = 1$ to $0.21\%$
 at $l_{\max} = 5$, asymptoting to a structural floor of
 $0.19$--$0.20\%$ set by the adiabatic channel truncation.
+
+\subsection{Spectral Laguerre hyperradial solver}
+\label{sec:spectral_radial}
+
+The finite-difference hyperradial solver of Sec.~\ref{sec:radial} uses
+a uniform grid of $N_R = 2000$--$3000$ points, producing tridiagonal
+matrices of dimension $N_R$ per channel (or $n_{\mathrm{ch}} N_R$ for
+coupled-channel calculations).  Following the spectral Laguerre pattern
+established for the prolate spheroidal radial coordinate
+(Paper~11~\cite{loutey_paper11}), we replace the FD grid with a
+Laguerre spectral basis that achieves $120\times$ dimension reduction
+and $95\times$ coupled-channel speedup.
+
+The basis functions are
+\begin{equation}
+  \phi_n(R) = (R - R_{\min})\,
+  e^{-\alpha(R - R_{\min})}\,
+  L_n\!\bigl(2\alpha(R - R_{\min})\bigr),
+  \label{eq:laguerre_radial}
+\end{equation}
+where $L_n$ are Laguerre polynomials, $R_{\min}$ is the inner boundary
+of the radial domain, and $\alpha$ is a scale parameter controlling the
+exponential decay.  The $(R - R_{\min})$ prefactor enforces the Dirichlet
+boundary condition $F(R_{\min}) = 0$, matching the FD solver's boundary
+treatment.  Without this prefactor, the basis functions are nonzero at
+$R_{\min}$, providing spurious variational freedom that shifts the energy
+by $\sim\!0.005$~Ha below the FD result.
+
+The domain is mapped via $x = 2\alpha(R - R_{\min})$ to $[0, \infty)$,
+and all matrix elements are evaluated by Gauss--Laguerre quadrature.
+The resulting generalized eigenvalue problem
+$(K + V)\mathbf{c} = E\,S\,\mathbf{c}$
+is of dimension $n_{\mathrm{basis}}$, with $n_{\mathrm{basis}} = 25$
+sufficient for full convergence (Table~\ref{tab:spectral_radial_convergence}).
+
+\begin{table}[h]
+\caption{Convergence of the spectral Laguerre hyperradial solver with
+$n_{\mathrm{basis}}$ (single-channel, algebraic angular input, $l_{\max} = 0$).
+FD reference: $E = -2.90425$~Ha at $N_R = 2000$.}
+\label{tab:spectral_radial_convergence}
+\begin{ruledtabular}
+\begin{tabular}{rd}
+  $n_{\mathrm{basis}}$ & \multicolumn{1}{c}{$E$ (Ha)} \\
+  \hline
+  5  & -2.90267 \\
+  10 & -2.90415 \\
+  15 & -2.90418 \\
+  20 & -2.90419 \\
+  25 & -2.90419 \\
+  30 & -2.90419 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The spectral solver agrees with the FD solver to $< 0.00003$~Ha
+across all $l_{\max}$ values tested (Table~\ref{tab:spectral_fd_comparison}),
+confirming that it is a drop-in replacement that preserves all physics.
+The basis is also robust to the scale parameter: varying $\alpha$ across
+$[0.5, 3.0]$ produces an energy spread of $< 0.001$~Ha.
+
+\begin{table}[h]
+\caption{Spectral Laguerre vs.\ finite-difference hyperradial solver
+for coupled-channel calculations ($q_{\mathrm{mode}} = \mathrm{exact}$,
+$n_{\mathrm{channels}} = 3$, $n_{\mathrm{basis}} = 25$).
+Exact He: $-2.9037$~Ha.}
+\label{tab:spectral_fd_comparison}
+\begin{ruledtabular}
+\begin{tabular}{cdddc}
+  $l_{\max}$ & \multicolumn{1}{c}{FD $E$ (Ha)}
+  & \multicolumn{1}{c}{Spectral $E$ (Ha)}
+  & \multicolumn{1}{c}{$|\Delta|$ (Ha)}
+  & Speedup \\
+  \hline
+  0 & -2.871636 & -2.871616 & 0.000020 & --- \\
+  1 & -2.894687 & -2.894664 & 0.000022 & --- \\
+  2 & -2.896790 & -2.896766 & 0.000024 & --- \\
+  3 & -2.897329 & -2.897304 & 0.000024 & $95\times$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The computational advantage is substantial for coupled-channel
+calculations: the FD solver operates on matrices of dimension
+$n_{\mathrm{ch}} \times N_R = 3 \times 3000 = 9000$, while the
+spectral solver uses $n_{\mathrm{ch}} \times n_{\mathrm{basis}} =
+3 \times 25 = 75$ ($120\times$ reduction).  For the 3-channel
+coupled calculation at $l_{\max} = 3$, wall time drops from
+561~ms to 5.9~ms---a $95\times$ speedup.
+
+\subsection{Rayleigh--Schr\"odinger perturbation series for $\mu(R)$}
+\label{sec:perturbation_series}
+
+The linear matrix pencil structure of Eq.~\eqref{eq:H_spectral},
+$H(R) = H_0 + R\,V^{\mathrm{coupling}}$, permits a direct
+Rayleigh--Schr\"odinger perturbation expansion of the angular
+eigenvalues:
+\begin{equation}
+  \mu(R) = \mu^{(0)} + a_1 R + a_2 R^2 + a_3 R^3 + \cdots,
+  \label{eq:mu_series}
+\end{equation}
+where $\mu^{(0)} = \mu_{\mathrm{free}}$ and $a_k$ is the $k$-th order
+perturbation coefficient, computed by the standard recursion involving
+the resolvent $(H_0 - \mu^{(0)})^{-1}$ projected off the reference
+state.
+
+The first-order coefficient $a_1$ for the ground channel reproduces
+the closed-form result of Eq.~\eqref{eq:a1_exact}:
+$a_1 = -5.590189\ldots$ at $Z = 2$, matching to $\sim\!10^{-15}$
+(machine precision).  The second-order coefficient
+$a_2 = -0.2439$ matches the partial-sum expression
+Eq.~\eqref{eq:a2_sum} to the level of basis truncation
+($n_{\mathrm{basis}} = 15$; the direct sum gives $-0.2442$).
+Coefficients of order $k \ge 7$ satisfy $|a_k| < 10^{-4}$,
+indicating rapid convergence of the formal series at small $R$.
+
+Table~\ref{tab:perturbation_convergence} presents the convergence
+behavior.  The raw power series converges for $R \lesssim 2$~bohr,
+with a convergence radius set by the nearest avoided crossing in the
+complex $R$-plane.  Pad\'e acceleration (applied to the subtracted
+function $g(R) = \mu(R) + Z^2 R^2/2$ to remove the dominant asymptotic
+growth) extends useful accuracy to $R \approx 3$~bohr, but no
+finite-order Pad\'e approximant achieves useful accuracy beyond
+$R \approx 5$~bohr.
+
+\begin{table}[h]
+\caption{Convergence of the perturbation series and Pad\'e approximant
+for the ground-channel $\mu(R)$ at $Z = 2$.  ``Exact'' denotes the
+matrix diagonalization result.  Series is order 15; Pad\'e is $[7/7]$
+on $g(R) = \mu + Z^2 R^2/2$.}
+\label{tab:perturbation_convergence}
+\begin{ruledtabular}
+\begin{tabular}{dcc}
+  \multicolumn{1}{c}{$R$ (bohr)} & Series rel.\ error
+  & Pad\'e rel.\ error \\
+  \hline
+  0.1 & $\sim\!0$ & $\sim\!0$ \\
+  0.5 & $\sim\!10^{-14}$ & $\sim\!10^{-16}$ \\
+  1.0 & $10^{-9}$ & $10^{-12}$ \\
+  2.0 & $4 \times 10^{-5}$ & $10^{-6}$ \\
+  3.0 & \text{diverges} & $2 \times 10^{-3}$ \\
+  5.0 & \text{diverged} & $1.4 \times 10^{-2}$ \\
+  10.0 & \text{diverged} & \text{diverged} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The failure of Pad\'e acceleration at large $R$ is not a numerical
+artifact but a consequence of the transcendental character of $\mu(R)$
+discussed in Sec.~\ref{sec:algebraic_boundary}: the function
+interpolates between $O(R)$ perturbative behavior at small $R$ and
+$O(R^2)$ asymptotic behavior at large $R$, and no finite-order
+rational function spans both regimes.
+
+The perturbation series also provides algebraic $P$-matrix
+coefficients via differentiation of the eigenvector series, but the
+convergence is significantly worse ($\sim\!3\%$ error at $R = 1$~bohr,
+$\sim\!26\%$ at $R = 2$~bohr), owing to error amplification in
+eigenvector corrections.  Practical use of the $P$-matrix series is
+limited to $R < 1$~bohr.
+
+The perturbation series has three practical consequences:
+(i)~it provides exact analytical derivatives of $\mu(R)$ at $R = 0$,
+useful for seeding spline interpolations;
+(ii)~it supplies validated algebraic coefficients $\{a_k\}$ that
+characterize the short-range physics;
+(iii)~it establishes a quantitative convergence boundary at
+$R \approx 2$--$3$~bohr, beyond which point-by-point matrix
+diagonalization is required.  Since the He wavefunction extends to
+$R \approx 10$--$15$~bohr, the perturbation series does not
+eliminate the need for the $R$-grid diagonalization in production,
+but it does confirm and quantify the algebraic/transcendental
+boundary discussed in Sec.~\ref{sec:algebraic_boundary}.
 
 %% ========================================================================
 %% XIV. CONCLUSION
