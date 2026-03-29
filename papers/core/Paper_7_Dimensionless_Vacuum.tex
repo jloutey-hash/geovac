@@ -329,8 +329,204 @@ where the coefficients $a_k(p)$ are \textit{rational functions} of $p$ and $p_0$
 
 
 %% ========================================================================
-\input{paper7_section_vee}
+\section{Two-Electron Repulsion on $S^3$}
+\label{sec:vee_s3}
 %% ========================================================================
+
+We now extend the $S^3$ framework to the two-electron repulsion
+integral.
+
+\subsection{Momentum-Space Representation}
+
+The direct Coulomb integral (Slater $F^0$) between orbitals $a$ and $b$
+in position space is
+\begin{equation}
+  F^0(a,b) = \int_0^\infty \!\!\int_0^\infty
+  |R_a(r_1)|^2 \, |R_b(r_2)|^2 \, \frac{1}{r_>} \,
+  r_1^2 \, r_2^2 \, dr_1 \, dr_2 \,,
+  \label{eq:slater_f0}
+\end{equation}
+where $r_> = \max(r_1, r_2)$. For hydrogen-like orbitals with nuclear
+charge $Z$, exact values are known:
+\begin{align}
+  F^0(1s,1s) &= \tfrac{5}{8}Z, \quad
+  F^0(1s,2s) = \tfrac{17}{81}Z, \nonumber\\
+  F^0(2s,2s) &= \tfrac{77}{512}Z.
+  \label{eq:slater_exact}
+\end{align}
+
+An equivalent momentum-space representation exists for $s$-orbital pairs.
+Defining the density Fourier transform
+\begin{equation}
+  \tilde{\rho}_a(q)
+  = \frac{1}{q} \int_0^\infty |R_a(r)|^2 \, r \, \sin(qr) \, dr \,,
+  \label{eq:density_ft}
+\end{equation}
+the Slater integral becomes
+\begin{equation}
+  F^0(a,b) = \frac{2}{\pi} \int_0^\infty
+  \tilde{\rho}_a(q) \, \tilde{\rho}_b(q) \, dq \,.
+  \label{eq:f0_momentum}
+\end{equation}
+
+For the hydrogen $1s$ and $2s$ orbitals:
+\begin{align}
+  \tilde{\rho}_{1s}(q) &= \frac{16Z^4}{(q^2 + 4Z^2)^2} \,,
+  \label{eq:rho1s} \\[4pt]
+  \tilde{\rho}_{2s}(q) &= \frac{Z^4(Z^4 - 3Z^2 q^2 + 2q^4)}{(Z^2 + q^2)^4} \,.
+  \label{eq:rho2s}
+\end{align}
+
+\subsection{Fock Projection onto $S^3$}
+
+We apply the Fock stereographic projection with parameter $p_0 = 2Z$,
+under which $q = 2Z \tan u$ for $u \in [0, \pi/2)$ and
+$dq = 2Z/\cos^2 u \, du$. Define the \emph{projected density}
+\begin{equation}
+  \Phi_a(t) \equiv \tilde{\rho}_a(2Zt) \,,
+  \label{eq:projected_density}
+\end{equation}
+where $t = \tan u = q/(2Z)$ is the dimensionless momentum transfer.
+Under this substitution, Eq.~\eqref{eq:f0_momentum} becomes
+\begin{equation}
+  \boxed{
+    F^0(a,b) = \frac{4Z}{\pi} \int_0^\infty
+    \Phi_a(t) \, \Phi_b(t) \, dt
+  }
+  \label{eq:f0_s3}
+\end{equation}
+This is the master formula: $F^0$ is a \emph{single} integral over one
+$S^3$ coordinate, not a double integral over two points.
+
+\subsubsection{$1s$--$1s$ verification}
+
+Substituting $q = 2Zt$ into Eq.~\eqref{eq:rho1s}:
+\begin{equation}
+  \Phi_{1s}(t) = \frac{16Z^4}{(4Z^2 t^2 + 4Z^2)^2}
+  = \frac{1}{(t^2 + 1)^2} \,.
+  \label{eq:phi1s}
+\end{equation}
+Then
+\begin{equation}
+  F^0(1s,1s) = \frac{4Z}{\pi} \int_0^\infty
+  \frac{dt}{(t^2+1)^4}
+  = \frac{4Z}{\pi} \cdot \frac{5\pi}{32}
+  = \frac{5Z}{8} \,. \quad\checkmark
+\end{equation}
+
+In angular coordinates ($t = \tan u$, $dt = du/\cos^2 u$),
+the integrand becomes $\cos^6 u$, showing that the $1s$ density
+is \emph{constant} on $S^3$ (up to the conformal Jacobian).
+
+\subsubsection{$1s$--$2s$ verification (critical test)}
+
+Substituting into Eq.~\eqref{eq:rho2s}:
+\begin{equation}
+  \Phi_{2s}(t) = \frac{1 - 12t^2 + 32t^4}{(4t^2 + 1)^4} \,.
+  \label{eq:phi2s}
+\end{equation}
+This is \emph{not} constant on $S^3$---it has zeros at
+$t^2 = (3 \pm 1)/16$, corresponding to nodes in the $2s$ radial
+wavefunction. The integral evaluates to
+\begin{align}
+  F^0(1s,2s) &= \frac{4Z}{\pi} \int_0^\infty
+  \frac{1 - 12t^2 + 32t^4}{(t^2+1)^2 (4t^2+1)^4} \, dt \nonumber\\
+  &= \frac{4Z}{\pi} \cdot \frac{17\pi}{324}
+  = \frac{17Z}{81} \,. \quad\checkmark
+\end{align}
+
+\subsubsection{$2s$--$2s$ verification}
+
+\begin{align}
+  F^0(2s,2s) &= \frac{4Z}{\pi} \int_0^\infty
+  \frac{(1 - 12t^2 + 32t^4)^2}{(4t^2+1)^8} \, dt \nonumber\\
+  &= \frac{4Z}{\pi} \cdot \frac{77\pi}{2048}
+  = \frac{77Z}{512} \,. \quad\checkmark
+\end{align}
+
+All three Slater integrals are reproduced exactly by the $S^3$
+density-overlap formula~\eqref{eq:f0_s3}.
+
+\subsection{Structural Result: Node Property vs.\ Edge Property}
+\label{sec:node_vs_edge}
+
+The key structural finding is that
+Eq.~\eqref{eq:f0_s3} is a \emph{single} integral over one $S^3$
+coordinate (the momentum transfer $t$), not a double integral over
+two independent $S^3$ points. Each orbital $a$ contributes a density
+\emph{function} $\Phi_a(t)$ on $S^3$, and $V_{ee}$ is the weighted
+overlap:
+\begin{equation}
+  V_{ee}(a,b) = \langle \Phi_a | \Phi_b \rangle_{S^3}
+  \equiv \frac{4Z}{\pi} \int_0^\infty \Phi_a(t) \, \Phi_b(t) \, dt \,.
+\end{equation}
+
+In graph-theoretic language, $V_{ee}$ is a \textbf{node property}
+(each node carries a density profile) rather than an \textbf{edge
+property} (a pairwise distance between node coordinates).
+
+\paragraph{Failure of the chordal ansatz.}
+A naive chordal-distance ansatz $V_{ee} = \kappa_{ee}/d^2_{\text{chord}}$,
+where $d^2 = 2(1 - \boldsymbol{\xi}_a \cdot \boldsymbol{\xi}_b)$
+is the chordal distance between $S^3$ points assigned to each orbital,
+gives (with $\kappa_{ee} = 5Z/2$):
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Pair & Slater $F^0$ & $\kappa/d^2$ & Ratio \\
+\hline
+$1s$--$1s$ & $5Z/8$ & $5Z/8$ & 1.00 \\
+$1s$--$2s$ & $17Z/81$ & $25Z/4$ & 29.8 \\
+$2s$--$2s$ & $77Z/512$ & $5Z/8$ & 4.2 \\
+\hline
+\end{tabular}
+\end{center}
+The chordal ansatz is calibrated to reproduce $F^0(1s,1s)$ exactly
+(because the $1s$ density is constant on $S^3$, making a single point
+adequate), but overestimates $F^0(1s,2s)$ by a factor of~30.
+The fundamental reason is that the $2s$ density function has nodes
+and oscillations on $S^3$ that cannot be captured by a single coordinate
+point.
+
+\subsection{Natural Projection Scales}
+
+Each shell has a natural Fock projection scale:
+\begin{equation}
+  n = 1: \quad p_0 = 2Z \qquad\text{(denominator } q^2 + 4Z^2\text{)} \,,
+\end{equation}
+\begin{equation}
+  n = 2: \quad p_0 = Z \qquad\text{(denominator } q^2 + Z^2\text{)} \,.
+\end{equation}
+When all orbitals are projected using a \emph{single} $p_0 = 2Z$, the
+$n=1$ density becomes the constant function $\Phi_{1s} = 1/(1+t^2)^2$,
+while higher-shell densities acquire polynomial modulations. These
+modulations encode the radial node structure and are responsible for
+the reduced overlap integrals ($17/81 < 5/8$).
+
+\subsection{Implications}
+\label{sec:vee_implications}
+
+The density-overlap formula~\eqref{eq:f0_s3} has three implications
+for the computational framework:
+
+\begin{enumerate}
+  \item \textbf{Exact Slater integrals on $S^3$.}
+    The Fock projection converts position-space double radial integrals
+    into single rational-function integrals on $S^3$, which can be
+    evaluated in closed form via partial fractions.
+
+  \item \textbf{Graph implementation.}
+    In the graph Laplacian framework, each node (orbital state) should
+    carry a density profile $\Phi_a(t)$, and $V_{ee}$ matrix elements
+    should be computed as overlap integrals rather than pairwise edge
+    weights.
+
+  \item \textbf{Angular momentum extension.}
+    The $1D$ monopole formula~\eqref{eq:f0_momentum} applies to
+    $s$-orbital pairs. For $l > 0$, the full $3D$ angular convolution
+    is required, involving the multipole expansion of the orbital
+    density in spherical harmonics.
+\end{enumerate}
 
 
 %% ========================================================================
@@ -503,6 +699,8 @@ Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum
 Within this mathematical equivalence, the wave equation can be viewed as a continuous, dimensionful projection of a discrete, dimensionless topology. The Coulomb potential emerges as the coordinate distortion created by the stereographic flattening, and the energy levels emerge from the energy-shell constraint that parameterizes the projection.
 
 We emphasize that these are statements of mathematical equivalence, not claims about which formulation is physically prior. Whether the topological perspective points toward a deeper theory of quantum mechanics, or provides a computationally useful reformulation, is a question we leave to future investigation. What is established here is the precise mathematical chain connecting the discrete graph to the continuous equation, verified step by step through symbolic computation.
+
+The $S^3$ conformal equivalence established here is one instance of a broader pattern: the discrete graph topology defined by the quantum number node structure $\{(n, l, m)\}$ admits multiple conformally distinct continuum embeddings, of which $S^3$ is the natural one for the single-center Coulomb problem.  The same combinatorial skeleton reappears in prolate spheroidal coordinates for one-electron diatomics~\cite{loutey_paper11}, hyperspherical coordinates for two-electron atoms~\cite{loutey_paper13}, molecule-frame hyperspherical coordinates for two-electron molecules, and composed fiber bundles for core--valence systems.  The full hierarchy of these embeddings, and the sense in which the discrete node structure serves as a combinatorial invariant across them, is catalogued in Paper~0~\cite{loutey_paper0}.
 
 \subsection{Extension to Molecules}
 

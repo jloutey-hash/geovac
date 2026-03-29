@@ -1,0 +1,17 @@
+[
+  {
+    "scheme": "full",
+    "Z_eff_per_bond": 2.0,
+    "Z_eff_full": 2.0,
+    "pk_A": 13.014634763028335,
+    "pk_B": 12.531364019064931,
+    "pk_scaled": false,
+    "R_eq": 3.311131139037273,
+    "D_e": 2.8187619874748866,
+    "omega_e": 3497.1752058820102,
+    "E_min": -17.381722848839285,
+    "R_eq_error_pct": 32.075434345324,
+    "D_e_error_pct": 1817.5251615475422,
+    "omega_e_error_pct": 49.13327103974458,
+    "is_bound": true,
+    "has_repulsive_wall": 

@@ -1,0 +1,151 @@
+{
+  "sweep_data": [
+    {
+      "max_n": 1,
+      "M": 3,
+      "Q": 6,
+      "N_pauli": 10,
+      "N_pauli_h1": 7,
+      "N_pauli_eri": 3,
+      "ERI_density_total": 0.037,
+      "n_pk_nonzero": 1,
+      "wall_time_s": 0.15
+    },
+    {
+      "max_n": 2,
+      "M": 15,
+      "Q": 30,
+      "N_pauli": 334,
+      "N_pauli_h1": 35,
+      "N_pauli_eri": 299,
+      "ERI_density_total": 0.00385,
+      "n_pk_nonzero": 7,
+      "wall_time_s": 1.61
+    },
+    {
+      "max_n": 3,
+      "M": 42,
+      "Q": 84,
+      "N_pauli": 7879,
+      "N_pauli_h1": 109,
+      "N_pauli_eri": 7770,
+      "ERI_density_total": 0.00144,
+      "n_pk_nonzero": 26,
+      "wall_time_s": 17.4
+    },
+    {
+      "max_n": 4,
+      "M": 90,
+      "Q": 180,
+      "N_pauli": 92899,
+      "N_pauli_h1": 261,
+      "N_pauli_eri": 92638,
+      "ERI_density_total": 0.000778,
+      "n_pk_nonzero": 70,
+      "wall_time_s": 237.3
+    }
+  ],
+  "fit_4point": {
+    "alpha": 2.6773420570877833,
+    "a": 0.061659602694131066,
+    "R_squared": 0.9902419478881276,
+    "formula": "N_pauli = 0.0617 * Q^2.6773",
+    "n_points": 4
+  },
+  "he_single_geometry": {
+    "2": {
+      "Q": 10,
+      "N_pauli": 120
+    },
+    "3": {
+      "Q": 28,
+      "N_pauli": 2659
+    },
+    "4": {
+      "Q": 60,
+      "N_pauli": 31039
+    },
+    "5": {
+      "Q": 110,
+      "N_pauli": 227338
+    }
+  },
+  "he_exponent": 3.15,
+  "gaussian_molecular_exponent": 4.6,
+  "gaussian_lih_reference": {
+    "sto-3g": {
+      "Q": 12,
+      "N_pauli": 631,
+      "computed": false
+    },
+    "6-31g": {
+      "Q": 22,
+      "N_pauli": 10255,
+      "computed": false,
+      "source": "estimated Q^4.60"
+    },
+    "cc-pvdz": {
+      "Q": 56,
+      "N_pauli": 754155,
+      "computed": false,
+      "source": "estimated Q^4.60"
+    }
+  },
+  "equal_qubit_comparison": [
+    {
+      "max_n": 1,
+      "Q": 6,
+      "N_pauli_geovac": 10,
+      "N_pauli_gaussian_est": 26,
+      "gaussian_advantage_ratio": 2.6,
+      "note": "Gaussian estimated from Q^4.60 anchored at STO-3G"
+    },
+    {
+      "max_n": 2,
+      "Q": 30,
+      "N_pauli_geovac": 334,
+      "N_pauli_gaussian_est": 42712,
+      "gaussian_advantage_ratio": 127.9,
+      "note": "Gaussian estimated from Q^4.60 anchored at STO-3G"
+    },
+    {
+      "max_n": 3,
+      "Q": 84,
+      "N_pauli_geovac": 7879,
+      "N_pauli_gaussian_est": 4869455,
+      "gaussian_advantage_ratio": 618.0,
+      "note": "Gaussian estimated from Q^4.60 anchored at STO-3G"
+    },
+    {
+      "max_n": 4,
+      "Q": 180,
+      "N_pauli_geovac": 92899,
+      "N_pauli_gaussian_est": 162199365,
+      "gaussian_advantage_ratio": 1746.0,
+      "note": "Gaussian estimated from Q^4.60 anchored at STO-3G"
+    }
+  ],
+  "cross_center_eri_bound": {
+    "max_n_2": {
+      "max_n": 2,
+      "n_cross_center": 107,
+      "n_same_center": 107,
+      "ratio": 1.0,
+      "M_val": 5,
+      "upper_bound": 625,
+      "cross_fraction_of_upper": 0.1712,
+      "same_fraction_of_upper": 0.1712
+    },
+    "max_n_3": {
+      "max_n": 3,
+      "n_cross_center": 3800,
+      "n_same_center": 3800,
+      "ratio": 1.0,
+      "M_val": 14,
+      "upper_bound": 38416,
+      "cross_fraction_of_upper": 0.09891711786755518,
+      "same_fraction_of_upper": 0.09891711786755518
+    },
+    "interpretation": "Cross-center ERIs would increase the same-center count by a factor of 1.00x (max_n=2) to 1.00x (max_n=3). Since cross and same-center have identical selection rule structure, the ratio is exactly 1.0 \u2014 adding cross-center terms doubles the ERI count but does not change the scaling exponent."
+  }
+}

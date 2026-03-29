@@ -1,0 +1,53 @@
+{
+  "exact_energy": -2.903724,
+  "results": [
+    {
+      "n_basis": 10,
+      "N_R_radial": 3000,
+      "energy": -2.8955142434702443,
+      "error_pct": 0.2827319858828057,
+      "wall_time_s": 1.19,
+      "label": "n_basis=10"
+    },
+    {
+      "n_basis": 15,
+      "N_R_radial": 3000,
+      "energy": -2.897328605110187,
+      "error_pct": 0.22024802942059155,
+      "wall_time_s": 1.63,
+      "label": "n_basis=15"
+    },
+    {
+      "n_basis": 20,
+      "N_R_radial": 3000,
+      "energy": -2.8978039338697297,
+      "error_pct": 0.2038784033975094,
+      "wall_time_s": 2.37,
+      "label": "n_basis=20"
+    },
+    {
+      "n_basis": 25,
+      "N_R_radial": 3000,
+      "energy": -2.8979787111975464,
+      "error_pct": 0.19785932831266395,
+      "wall_time_s": 3.66,
+      "label": "n_basis=25"
+    },
+    {
+      "n_basis": 30,
+      "N_R_radial": 3000,
+      "energy": -2.898057416496411,
+      "error_pct": 0.1951488331394159,
+      "wall_time_s": 5.49,
+      "label": "n_basis=30"
+    },
+    {
+      "n_basis": 15,
+      "N_R_radial": 5000,
+      "energy": -2.897316499678587,
+      "error_pct": 0.2206649227479271,
+      "wall_time_s": 2.09,
+      "label": "n_basis=15, N_R=5000"
+    }
+  ]
+}

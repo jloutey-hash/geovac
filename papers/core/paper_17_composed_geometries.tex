@@ -216,6 +216,28 @@ the nucleus) and $Z_{\rm eff}(r\to\infty) = Z_A - 2$ (full screening
 by two electrons).  For Li$^+$: $Z_{\rm eff}(0) = 3.0$,
 $Z_{\rm eff}(2\text{ bohr}) \approx 1.01$.
 
+\paragraph{Algebraic core density.}
+The histogram-binned density can be replaced by an algebraic
+computation.  The Level~3 angular eigenvector provides channel
+expansion coefficients $c_{l}^{(\nu)}(\alpha)$ at each hyperangle.
+Via the coordinate-transform identity
+$r_1 = R_e \cos\alpha$, the one-electron density at radius $r$
+is obtained by summing $|c_l|^2$ contributions at the hyperangle
+$\alpha = \arccos(r/R_e)$, weighted by the hyperradial probability
+$|F(R_e)|^2$.  This avoids histogram binning entirely
+(\texttt{method='algebraic'} in \texttt{CoreScreening}).
+
+For Li$^+$, the resulting $Z_{\rm eff}(r)$ is well approximated
+by a closed-form expression
+\begin{equation}
+  Z_{\rm eff}(r) \approx 1 + 2(1 + ar + br^2)\,e^{-cr},
+  \label{eq:zeff_fit}
+\end{equation}
+which reproduces the ab initio curve to 0.7\% accuracy.
+The deviations from hydrogenic screening ratios
+(e.g., $Z_{\rm eff}(r)/Z_{\rm eff}^{\rm hydro}(r) \ne 1$)
+directly quantify electron correlation in the core.
+
 
 \subsection{Ab initio Phillips--Kleinman pseudopotential}
 \label{sec:pk}
@@ -265,6 +287,22 @@ For Be: $A = 13.01$~Ha$\cdot$bohr$^2$.
 No experimental molecular data enters these formulas.  Only atomic
 properties: $Z$, the core wavefunction (via the Level~3 solve), and
 the first ionization energy of the neutral atom.
+
+\paragraph{$l$-dependent pseudopotential.}
+The channel-blind PK barrier [Eq.~(\ref{eq:Vpk})] applies the
+same repulsion to all angular channels, but the $1s^2$ core is
+pure $l = 0$.  The exact PK projector $|1s\rangle\langle 1s|$ has
+non-zero matrix elements only for channels with $l = 0$ character.
+An $l$-dependent mode scales the per-electron PK barrier by
+$\delta_{l_i, 0}$: valence electrons in $l > 0$ channels
+experience no core repulsion, consistent with the angular
+orthogonality of the core.
+
+At $l_{\max} = 2$ this reduces $R_{\rm eq}$ error from 6.9\% to
+5.3\% for LiH.  The $l_{\max}$ divergence (Sec.~\ref{sec:outlook})
+is reduced but not eliminated: at $l_{\max} = 3$, $R_{\rm eq}$
+error is 14.7\% (vs 16.9\% channel-blind).  The remaining divergence
+is attributed to differential angular correlation, not PK artifacts.
 
 
 \subsection{\texorpdfstring{$Z_{\rm eff}$}{Z\_eff} injection into the
@@ -623,8 +661,10 @@ different starting points.
   energy-dependent~\cite{pk1959}.  Our Gaussian approximation captures
   the dominant repulsion but not its angular or energy dependence.
 
-\item Core--valence exchange integrals are omitted.  These would
-  contribute ${\sim}1$--5\% corrections to the binding energy.
+\item Core--valence exchange integrals are omitted for LiH (the core
+  and valence fibers have different channel structures).  For
+  polyatomics, the full 1-RDM inter-fiber exchange reduces
+  $R_{\rm eq}$ error to 11.7\% (Sec.~\ref{sec:outlook}).
 
 \item Only $\sigma$ channels at $l_{\max} = 2$.  Paper~15 showed that
   $\pi$ channels add ${\sim}7$~percentage points for H$_2$; similar
@@ -654,10 +694,362 @@ The composed geometry generalizes:
     natural-geometry subproblem and each hyperedge is a typed coupling.
 \end{itemize}
 
-The immediate next step is LiH at $l_{\max} = 4$ with $\sigma{+}\pi$
-channels, which should reduce the $R_{\rm eq}$ error from 6.4\% to
-${\sim}2$--3\% based on the $l_{\max}$ convergence pattern in
-Paper~15.
+We tested LiH at $l_{\max} = 2$--$7$ with $l$-dependent PK
+(applying the pseudopotential barrier only to $l = 0$ channels,
+where the $1s$ core resides), expecting the $l_{\max}$
+convergence pattern from Paper~15 (H$_2$) to reduce $R_{\rm eq}$
+error.  The result is the opposite: $R_{\rm eq}$ diverges
+monotonically from experiment.
+
+\begin{center}
+\begin{tabular}{lcccc}
+\hline
+$l_{\max}$ & $N_{\rm ch}$ & $R_{\rm eq}$ (bohr) & Error &
+  $\Delta R_{\rm eq}$ \\
+\hline
+2 &  5 & 2.80 &  7.0\% & --- \\
+3 &  8 & 3.02 &  0.0\% & $+0.21$ \\
+4 & 13 & 3.42 & 13.5\% & $+0.41$ \\
+5 & 18 & 3.47 & 15.2\% & $+0.05$ \\
+6 & 25 & 3.56 & 18.1\% & $+0.09$ \\
+7 & 32 & 3.64 & 20.7\% & $+0.08$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Mechanism: differential angular correlation.}
+The $l_{\max}$ divergence arises from \emph{differential angular
+correlation}: higher-$l$ channels provide angular correlation energy
+that preferentially stabilizes large-$R$ (diffuse) geometries over
+small-$R$ (compact) geometries, shifting the PES minimum outward.
+A diagnostic decomposition confirms this is entirely nuclear in
+origin.  Removing all electron--electron off-diagonal coupling
+while retaining the full nuclear coupling gives a ground-state
+channel weight $w(0{,}0) = 0.243$ and 8~channels for 90\% of
+the norm---massive spreading driven by the asymmetric nuclear
+potential.  Conversely, retaining only the $e$--$e$ coupling
+(diagonal nuclear) gives $w(0{,}0) = 0.9998$---the electron--electron
+interaction produces no channel mixing.  The spreading is 100\%
+nuclear.
+
+\paragraph{Eigenvalue convergence at fixed geometry.}
+At fixed internuclear geometry $(R, R_e)$, the angular eigenvalue
+$\mu_0$ converges exponentially with $l_{\max}$ at rate
+$\beta \approx 0.42$ per unit $l_{\max}$ (exponential fit
+$R^2 = 0.997$).  The divergence of $R_{\rm eq}$ is therefore not a
+failure of eigenvalue convergence but a differential effect: the
+converged eigenvalue improves faster at large~$R$ than at
+small~$R$, tilting the PES.  The overall drift rate is
+$+0.168$~bohr per unit $l_{\max}$ (linear fit, $R^2 = 0.89$).
+
+\paragraph{R-dependent pseudopotential scaling.}
+\label{par:rdep_pk}
+The self-consistent $l = 0$ content of the valence wavefunction
+decreases with~$R$: at $l_{\max} = 4$, the $l = 0$ fraction drops
+from 0.85 at $R = 2.0$~bohr to 0.33 at $R = 6.5$~bohr.  To
+compensate, we scale the PK barrier strength with~$R$:
+\begin{equation}
+  w_{\rm PK}(R) = \delta_{l_i, 0} \times
+    \min\!\bigl(\text{cap},\; R/R_{\rm ref}\bigr)\,,
+  \label{eq:rdep_pk}
+\end{equation}
+where $R_{\rm ref}$ is a reference distance and the cap prevents
+unbounded growth.  At $R < R_{\rm ref}$, the PK operates at
+standard $l$-dependent strength; at $R > R_{\rm ref}$, it
+strengthens to counteract the loss of effective core exclusion.
+
+For LiH with $R_{\rm ref} = 3.015$~bohr and cap $= 1.5$:
+
+\begin{center}
+\begin{tabular}{llccc}
+\hline
+Mode & $l_{\max}$ & $R_{\rm eq}$ (bohr) & Error \\
+\hline
+$l$-dependent     & 4 & 3.42 & 13.5\% \\
+$R$-dependent     & 4 & 3.08 &  2.0\% \\
+Self-consistent   & 4 & 3.19 &  5.9\% \\
+$l$-dependent     & 7 & 3.64 & 20.7\% \\
+$R$-dependent     & 7 & 3.61 & 19.7\% \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+The $R$-dependent scaling reduces $R_{\rm eq}$ error from 13.5\% to
+2.0\% at $l_{\max} = 4$, but the advantage erodes at higher
+$l_{\max}$: the asymptotic drift rates are $+0.168$ ($l$-dependent)
+and $+0.160$ ($R$-dependent) bohr per unit $l_{\max}$ over the
+range $l_{\max} = 2$--$7$.  Self-consistent PK (iteratively
+adjusting the barrier strength based on the eigenstate's $l = 0$
+content) achieves intermediate drift reduction (50\%).  The scaling
+delays the onset of divergence but does not eliminate the asymptotic
+drift, which reflects the fundamental limitation of the composed
+geometry's static core--valence partition.
+
+The reference distance $R_{\rm ref} = R_{\rm eq}^{\rm expt}$
+introduces a non-ab-initio parameter.  In principle, $R_{\rm ref}$
+is derivable from atomic properties: the PK barrier's characteristic
+radius $r_{\rm PK} = 1/\sqrt{2B}$ and the valence orbital extent
+define a natural length scale.  This derivation remains to be tested.
+
+\paragraph{Root cause: adiabatic approximation with asymmetric charges.}
+Subsequent diagnostics (v2.0.6) have traced the $l_{\max}$ divergence
+to the adiabatic multichannel approximation interacting with
+PK-induced angular symmetry breaking.  A bare HeH$^+$ Level~4
+calculation---with no $Z_{\rm eff}$, no Phillips--Kleinman
+pseudopotential, and no composition---exhibits the same qualitative
+drift: $+0.262$~bohr per $l_{\max}$.  In composed LiH, where
+$Z_A = Z_B = 1$ (symmetric), the PK barrier on atom~A breaks the
+$A \leftrightarrow B$ symmetry, producing an effective heteronuclear
+system with drift $+0.303$~bohr per $l_{\max}$.  The mechanism is
+that asymmetric nuclear coupling populates odd-$l$ channels forbidden
+in homonuclear systems; H$_2$ places 94\% of its channel weight in
+the $(0{,}0)$ channel, while HeH$^+$ places only 68\%, with 20\% in
+odd-$l$ channels that preferentially stabilize large-$R$ configurations.
+
+Three alternative mitigation strategies were tested and found
+insufficient.  (i)~An algebraic PK projector (rank-1
+$|\psi_{\rm core}\rangle\langle\psi_{\rm core}|$) produces
+drift $5.6\times$ worse than Gaussian PK ($+1.697$ vs $+0.303$
+bohr/$l_{\max}$), because the valence wavefunction avoids the
+core state in function space while still penetrating the core
+region in coordinate space.  (ii)~Enhanced $Z_{\rm eff}$ with a
+repulsive dip (PK-free) requires extreme parameters
+($Z_{\rm eff}(0) = -38$) due to $1/r^2$ vs $1/r$ shape mismatch,
+and the odd-$l$ channel population rises to 30.7\%---worse than
+bare HeH$^+$.  (iii)~Single-channel DBOC correction of $+0.035$~Ha
+is 97\% cancelled by off-diagonal $P$-matrix coupling in the
+complete-basis limit, overcorrecting by $23\times$.
+
+\paragraph{Path forward.}
+The $l$-dependent pseudopotential reduces the divergence rate by
+approximately $2.5\times$ relative to the channel-blind mode.
+$R$-dependent scaling [Eq.~(\ref{eq:rdep_pk})] provides a further
+factor of ${\sim}2$ improvement at moderate $l_{\max}$ but converges
+to the same asymptotic drift rate at $l_{\max} \ge 5$.
+None of these modifications eliminate the fundamental adiabatic
+truncation error.  The variational 2D solver
+(Paper~15~\cite{loutey_paper15}), which treats
+$(R_e, \alpha)$ simultaneously rather than via adiabatic separation,
+does not suffer from $l_{\max}$ truncation and is the identified
+resolution.  Integration of the 2D solver into the composition
+pipeline---contingent on reducing Level~4 iteration times---is the
+next milestone.
+
+Initial BeH$_2$ results validate the qualitative PES shape (bound state,
+repulsive wall, correct dissociation limit) but reveal a 32\%
+$R_{\rm eq}$ error with the block-diagonal approximation.  The
+core-valence composition validated for LiH is insufficient for
+valence-valence coupling between bond pairs sharing the Be nucleus:
+$Z_{\mathrm{eff}}$ partitioning and classical inter-bond repulsion both
+fail to improve accuracy.  Orbital-level inter-bond coupling (exchange
+and orthogonalization between bond-pair wavefunctions) is the bottleneck
+for quantitative polyatomic PES.  The Pauli term scaling
+($Q^{2.5}$, Paper~14) is unaffected by this limitation, as
+it depends on the block structure, not the inter-block coupling.
+
+\subsubsection{Inter-fiber coupling investigation}
+
+A systematic three-phase investigation of inter-fiber coupling confirms
+that the channel overlap between bond-pair fibers is the key quantity
+for polyatomic accuracy.
+
+\paragraph{Monopole Coulomb coupling (negative result).}
+The Slater $F^0$ integral between the two bond-pair densities,
+transformed to Be-centered coordinates, gives a monopole inter-fiber
+energy of ${\sim}1.6$~Ha that is nearly $R$-independent near
+equilibrium.  Adding this scalar repulsion worsens $R_{\rm eq}$ from
+32\% to 62\% error---the same failure mode as classical inter-bond
+repulsion and $Z_{\rm eff}$ partitioning.
+
+\paragraph{Inter-fiber channel overlap $S_{\rm avg}(R)$.}
+The parity-weighted overlap between ground adiabatic channels of the
+two fibers under $\pi$-rotation is
+\begin{equation}
+  S(\rho) \;=\; \sum_{l_1, l_2} (-1)^{l_1 + l_2}\,
+  \bigl|c^{0}_{l_1 l_2}(\rho)\bigr|^2,
+  \label{eq:S_overlap}
+\end{equation}
+where $c^{0}_{l_1 l_2}$ are the channel expansion coefficients
+extracted from the angular eigenvector at each $\rho = R/(2R_e)$,
+and $S_{\rm avg}(R)$ is the $|F(R_e)|^2$-weighted average over
+the hyperradius.  This is a purely algebraic quantity---no spatial
+integration is required.
+
+$S_{\rm avg}$ has strong $R$-dependence: it drops from 0.47 at
+$R = 2.0$~bohr to 0.24 at $R = 6.0$~bohr, with slope
+$dS/dR = -0.16$ at $R_{\rm eq}$.  The physical origin is a shift
+in channel composition: the $(0{,}0)$ $\sigma_s$ channel weight
+drops from 61\% at short $R$ to 20\% at large $R$ as odd-parity
+channels $(0{,}1)$ and $(1{,}0)$ grow.  Even-parity channels
+contribute positively to $S$; odd-parity channels contribute
+negatively.  The net effect is a monotonic decrease in $S$ as the
+wavefunction redistributes angular momentum.
+
+\paragraph{Exchange coupling via $S \cdot F^0$ (partial success).}
+Combining the overlap and the monopole integral as
+$E_{\rm exch}(R) = -S_{\rm avg}(R) \cdot F^0(R)$ reduces $R_{\rm eq}$
+error from 31\% to 20\%.  The ab initio coupling captures ${\sim}40\%$
+of the correction identified by a single-parameter fit
+($K_{\rm eff} \approx 1.6$ vs $K_{\rm fit} = 4.08$~Ha).  The
+remaining ${\sim}60\%$ is recovered by including the off-diagonal
+1-RDM elements (see ``Full one-particle density matrix exchange''
+below).
+
+The inter-fiber channel overlap $S(R)$---a purely algebraic quantity
+computed from angular eigenvector coefficients and parity
+phases---captures the $R$-dependent coupling between bond-pair fibers.
+This validates the fiber bundle framework for polyatomic molecules:
+each bond pair keeps its own natural geometry, and the coupling between
+fibers is mediated by quantum number overlap at the shared center.
+
+\paragraph{Channel-decomposed $F^0$ and direct exchange.}
+The monopole integral $F^0$ can be decomposed by angular channel,
+giving channel-specific direct Coulomb integrals $F^0_{\rm ch}$.
+A direct exchange formula
+$E_{\rm direct} = -\sum_{\rm ch} (-1)^{l_1 + l_2} F^0_{\rm ch}$
+avoids the $S \cdot F^0$ factorization and gives similar accuracy:
+$R_{\rm eq}$ error of 20.0\% (vs 19.2\% for the $S \cdot F^0$ path).
+
+\paragraph{Higher Slater multipoles (negative result).}
+Including $k = 1$ (dipole) and $k = 2$ (quadrupole) multipoles in
+the inter-fiber coupling does not recover the missing exchange.
+The $k = 1$ term is \emph{repulsive} and worsens $R_{\rm eq}$;
+$k = 2$ is negligibly small.  The total multipole correction
+$k = 0 + 1 + 2$ gives 20.5\% $R_{\rm eq}$ error, slightly worse
+than monopole alone (20.0\%).  This confirms that the missing
+exchange comes from off-diagonal 1-RDM terms, not higher angular
+multipoles.
+
+\paragraph{Full one-particle density matrix exchange.}
+The channel-resolved one-particle reduced density matrix
+$\gamma^A_{l_1, l_1'}$ is obtained by tracing electron~2 from the
+Level~4 ground-state eigenvector:
+\begin{equation}
+  \gamma^A_{l_1, l_1'}
+    = \sum_{l_2} \sum_j v_{(l_1, l_2), j}\, v_{(l_1', l_2), j},
+\end{equation}
+where the sum runs over all channels sharing the same $l_2$ and
+over the $\alpha$ grid, with the result $|F(R_e)|^2$-weighted
+over the hyperradius.  The off-diagonal elements
+$\gamma_{l_1 \ne l_1'}$ are 68--121\% of the diagonal norm
+(growing with $R$ as channel mixing increases).
+
+The full inter-fiber exchange between identical fibers $A$ and $B$
+in the channel representation is
+\begin{equation}
+  K_{AB}(R) = -\sum_{l_1, l_1'}
+    \bigl[\gamma^A_{l_1, l_1'}\bigr]^2\,
+    (-1)^{l_1 + l_1'}\,
+    F^0_{l_1, l_1'}(R),
+  \label{eq:full_exchange}
+\end{equation}
+where $F^0_{l_1, l_1'}$ is the $l_1$-marginal Slater monopole
+integral computed from Be-centered densities aggregated over $l_2$,
+and the parity factor arises from $\gamma^B_{l_1', l_1}
+= (-1)^{l_1 + l_1'} \gamma^A_{l_1', l_1}$ under the $\pi$-rotation
+relating the two fibers.  The diagonal limit $l_1 = l_1'$ recovers a
+quantity proportional to the existing $S \cdot F^0$ exchange; the
+off-diagonal terms capture inter-channel exchange.
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Method & $R_{\rm eq}$ (bohr) & Error vs 2.507 \\
+\hline
+Block-diagonal (no coupling) & 3.28 & 31\% \\
+Monopole $F^0$ (Phase~1)     & 4.06 & 62\% \\
+Exchange $S \cdot F^0$       & 3.01 & 20\% \\
+Full 1-RDM exchange [Eq.~(\ref{eq:full_exchange})] & 2.80 & 11.7\% \\
+Fitted model ($-K \cdot S$)  & 2.81 & 12\% \\
+\hline
+\end{tabular}
+\end{center}
+
+The full 1-RDM exchange matches the single-parameter fitted model
+with zero free parameters.  The off-diagonal terms are subtractive
+(${\sim}10\%$ of the diagonal magnitude at $R_{\rm eq}$),
+moderating the exchange and providing the correct $R$-dependence.
+This confirms that the off-diagonal $\gamma$ elements---not
+higher multipoles or kinetic corrections---carry the missing
+exchange physics.
+
+\paragraph{Kinetic orthogonalization (negative result).}
+L\"{o}wdin symmetric orthogonalization of overlapping fiber
+wavefunctions raises the kinetic energy by
+\begin{equation}
+  \Delta T(R) = \frac{1}{2} \sum_{l_1, l_1'}
+    \bigl|S^{AB}_{l_1, l_1'}\bigr|^2\,
+    \frac{T_{l_1} + T_{l_1'}}{2},
+\end{equation}
+where $S^{AB}_{l_1, l_1'} = (-1)^{l_1'} \gamma^A_{l_1, l_1'}$
+and $T_{l_1} = l_1(l_1+1)/(2\langle R_e^2 \rangle)$ is the
+centrifugal kinetic energy.  The correction is $+0.03$~Ha and
+nearly $R$-independent (it peaks at $R \sim 4.0$ where $l \ge 1$
+channel growth counteracts overlap decay).  Adding $\Delta T$ to
+the full exchange does not shift $R_{\rm eq}$.  The residual
+11.7\% error is attributed to basis truncation ($l_{\rm max} = 2$)
+and the adiabatic approximation.
+
+\paragraph{Transferability to core--valence exchange (LiH).}
+The full 1-RDM exchange is specific to the bond--bond (Level~4 +
+Level~4) topology of polyatomics like BeH$_2$.  In LiH, the two
+fibers are the Level~3 core (atom-centered hyperspherical) and
+the Level~4 valence (molecule-frame hyperspherical)---fundamentally
+different channel structures that cannot share $\gamma$ matrices.
+The PK pseudopotential already encodes core--valence orthogonality,
+so explicit exchange between these fibers is expected to be
+partially redundant.  Extending the 1-RDM exchange to heterogeneous
+fiber pairs would require a cross-level overlap formalism mapping
+Level~3 angular channels onto Level~4 channels, which is deferred
+to future work.
+
+\paragraph{Path forward.}
+The full 1-RDM exchange closes the gap between the diagonal
+$S \cdot F^0$ approximation and the fitted model.  The remaining
+11.7\% $R_{\rm eq}$ error points to three directions: (a)~$l_{\rm max}$
+convergence with full exchange (current results use $l_{\rm max} = 2$),
+(b)~non-adiabatic corrections (DBOC), and (c)~cusp corrections at the
+coalescence point.  Kinetic orthogonalization has been tested and found
+negligible.  Self-consistent Hartree iteration is deprioritized, as
+the kinetic correction is uniform and SCF is unlikely to provide
+differential $R$-dependence.
+
+\paragraph{H$_2$O: first triatomic PES.}
+The composed geometry extends to H$_2$O as a five-block decomposition:
+O~$1s^2$ core (Level~3, $Z=8$), two O--H bond pairs (Level~4 with
+charge-center origin, $Z_{\rm eff}=6$, $Z_B=1$), and two lone pairs
+(Level~3, $Z_{\rm eff}=6$).  The architecture introduces no free
+parameters.  Inter-fiber coupling at the H--O--H bond angle
+$\theta = 104.5^\circ$ generalizes the linear-molecule rotation
+$(-1)^{l_1 + l_2}$ to Wigner $d$-matrix phases
+$P_{l_1}(\cos\theta) \cdot P_{l_2}(\cos\theta)$, recovering the
+linear formula at $\theta = \pi$.  Six coupling pairs arise:
+one bond--bond, four bond--lone, and one lone--lone.
+
+The uncoupled PES with charge-center origin gives $R_{\rm eq} = 1.34$~bohr
+(26\% error vs 1.809 experimental), with the correct qualitative shape:
+repulsive wall, well-defined minimum, and smooth dissociation.  The
+bond--bond coupling (${\sim}0.5$~Ha) is consistent with BeH$_2$ and
+barely affects $R_{\rm eq}$.  However, the bond--lone and lone--lone
+couplings are unphysical: the $S \cdot F^0$ factorization produces
+$-28$~Ha (bond--lone, 4~pairs) and $-15$~Ha (lone--lone) at the
+experimental geometry---magnitudes that exceed the total electronic
+energy.  The Slater integrals scale as ${\sim}Z_{\rm eff}$, and at
+$Z_{\rm eff} = 6$ the compact lone pair densities drive $F^0$ far
+beyond the regime validated on BeH$_2$ ($Z_{\rm eff} = 2$).  Lone pair
+coupling is disabled for production use; only bond--bond coupling is
+validated.
+
+The dominant bottleneck is the Level~4 angular basis at high charge
+asymmetry ($Z_A/Z_B = 6{:}1$ for O--H bonds).  The bare bond pair
+$R_{\rm eq}$ error scales from 0.1\% at 1:1 (H$_2$) to 18\% at 2:1
+(BeH) to 56\% at 6:1 with midpoint origin; the charge-center origin
+$z_0 = R(Z_A - Z_B)/[2(Z_A + Z_B)]$ reduces the 6:1 error to 17\%,
+but does not fully resolve the basis limitation at $l_{\rm max} = 2$
+with 9~channels.  Improved angular basis convergence for asymmetric
+bonds---via non-uniform grids or adaptive channel selection---is
+the path to quantitative H$_2$O accuracy.
 
 
 %% ========================================================================
@@ -670,8 +1062,8 @@ Composed natural geometries solve the core-valence problem without a
 single high-dimensional coordinate system.  The key results:
 
 \begin{enumerate}
-\item LiH $R_{\rm eq}$ improves from 17\% error (LCAO) to 6.4\%
-  (composed, ab initio PK) with zero molecular fitting.
+\item LiH $R_{\rm eq}$ improves from 17\% error (LCAO) to 5.3\%
+  (composed, ab initio PK, $l$-dependent) with zero molecular fitting.
 
 \item The ab initio PK pseudopotential is derived entirely from the
   core wavefunction: $A$ from the core--valence energy gap
@@ -684,6 +1076,22 @@ single high-dimensional coordinate system.  The key results:
 \item The composition pattern---core graphs + valence graphs + typed
   coupling edges---provides a concrete framework for extending discrete
   graph quantum chemistry to general molecules.
+
+\item For polyatomics (BeH$_2$), the full 1-RDM inter-fiber exchange
+  [Eq.~(\ref{eq:full_exchange})] reduces $R_{\rm eq}$ error from
+  20\% (diagonal $S \cdot F^0$) to 11.7\%, matching a single-parameter
+  fitted model (12\%) with zero free parameters.
+
+\item The $l_{\max}$ divergence for asymmetric bonds arises from
+  differential angular correlation: higher-$l$ channels preferentially
+  stabilize large-$R$ geometries.  The channel spreading is entirely
+  nuclear in origin, with zero contribution from electron--electron
+  correlation.  $R$-dependent PK scaling
+  [Eq.~(\ref{eq:rdep_pk})] reduces $R_{\rm eq}$ error from 13.5\%
+  to 2.0\% at $l_{\max} = 4$ for LiH, though the asymptotic drift
+  rate is unchanged.  Full 4-electron Level~4 treatment, which
+  eliminates the pseudopotential entirely, remains the
+  architecturally clean resolution.
 \end{enumerate}
 
 The natural geometry hierarchy is now:
@@ -696,8 +1104,9 @@ Level & System & Geometry & Best result \\
 2 & H$_2^+$ & Prolate spheroid       & 0.70\% error \\
 3 & He      & Hyperspherical         & 0.05\% error \\
 4 & H$_2$   & Mol-frame hypersp.     & 94.1\% $D_e$ \\
-5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 6.4\% error \\
+5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\
 5 & BeH$^+$ & Composed (Level 3+4)   & Bound, physical \\
+5 & BeH$_2$ & Composed (Level 3+4+4) & $R_{\rm eq}$: 11.7\% error \\
 \bottomrule
 \end{tabular}
 \end{center}

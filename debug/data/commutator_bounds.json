@@ -1,0 +1,98 @@
+{
+  "description": "Commutator-based Trotter bound scaling sweep for GeoVac He",
+  "date": "2026-03-25",
+  "systems": [
+    {
+      "label": "He nmax=2",
+      "max_n": 2,
+      "n_qubits": 10,
+      "n_terms": 120,
+      "one_norm": 11.294294780514731,
+      "comm_bound": 3.5680673580607487,
+      "onenorm_bound": 63.78054729458105,
+      "tightening_ratio": 0.055942877717574876,
+      "n_anticommuting_pairs": 1996,
+      "n_total_pairs": 7140,
+      "anticommuting_fraction": 0.2795518207282913,
+      "step_comparison": [
+        {
+          "epsilon": 0.001,
+          "comm_steps": 60,
+          "onenorm_steps": 253,
+          "step_ratio": 0.23715415019762845
+        },
+        {
+          "epsilon": 1e-06,
+          "comm_steps": 1889,
+          "onenorm_steps": 7987,
+          "step_ratio": 0.23650932765744334
+        }
+      ],
+      "build_time_s": 0.025401100050657988,
+      "comm_time_s": 0.0008936000522226095
+    },
+    {
+      "label": "He nmax=3",
+      "max_n": 3,
+      "n_qubits": 28,
+      "n_terms": 2659,
+      "one_norm": 78.36076657061699,
+      "comm_bound": 91.6291120664584,
+      "onenorm_bound": 3070.2048687673837,
+      "tightening_ratio": 0.02984462470194876,
+      "n_anticommuting_pairs": 746944,
+      "n_total_pairs": 3533811,
+      "anticommuting_fraction": 0.21137067036126153,
+      "step_comparison": [
+        {
+          "epsilon": 0.001,
+          "comm_steps": 303,
+          "onenorm_steps": 1753,
+          "step_ratio": 0.1728465487735311
+        },
+        {
+          "epsilon": 1e-06,
+          "comm_steps": 9573,
+          "onenorm_steps": 55410,
+          "step_ratio": 0.1727666486193828
+        }
+      ],
+      "build_time_s": 0.8477649001870304,
+      "comm_time_s": 0.3186887998599559
+    },
+    {
+      "label": "He nmax=4",
+      "max_n": 4,
+      "n_qubits": 60,
+      "n_terms": 31039,
+      "one_norm": 261.571025613841,
+      "comm_bound": 673.2591460932667,
+      "onenorm_bound": 34209.70072033859,
+      "tightening_ratio": 0.01968035767389792,
+      "n_anticommuting_pairs": 58919992,
+      "n_total_pairs": 481694241,
+      "anticommuting_fraction": 0.12231824046241815,
+      "step_comparison": [
+        {
+          "epsilon": 0.001,
+          "comm_steps": 821,
+          "onenorm_steps": 5849,
+          "step_ratio": 0.140365874508463
+        },
+        {
+          "epsilon": 1e-06,
+          "comm_steps": 25948,
+          "onenorm_steps": 184959,
+          "step_ratio": 0.14029055087884343
+        }
+      ],
+      "build_time_s": 18.764475299976766,
+      "comm_time_s": 78.1552768999245
+    }
+  ],
+  "scaling": {
+    "alpha_1norm": 1.7600427301212822,
+    "alpha_comm": 1.4665139677931962,
+    "alpha_anticomm_fraction": -0.45053930696373967
+  }
+}

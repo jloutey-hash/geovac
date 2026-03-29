@@ -3,9 +3,18 @@ Core electron screening function from hyperspherical two-electron wavefunctions.
 
 Extracts Z_eff(r) -- the effective nuclear charge seen by an external electron
 at distance r from the nucleus -- from a solved two-electron hyperspherical
-system. Uses the adiabatic hyperspherical wavefunction psi(R, alpha) =
-F(R) * Phi_0(alpha; R) to compute the one-electron radial density via
-coordinate binning in (R, alpha) -> (r1, r2) space.
+system.
+
+Two methods are available:
+
+  histogram (original): Bins |psi(R,alpha)|^2 onto a radial grid by mapping
+      (R, alpha) -> (r1, r2) = (R cos alpha, R sin alpha). Simple but limited
+      by histogram resolution.
+
+  algebraic (new): Uses the exact coordinate transform identity
+      n(r) = (2/h_alpha) * integral |F(R)|^2 D(arccos(r/R); R) / sqrt(R^2-r^2) dR
+      where D(alpha; R) is the angular density interpolated to the exact alpha
+      via cubic spline. Eliminates binning artifacts entirely.
 
 Key relations:
     r1 = R * cos(alpha),  r2 = R * sin(alpha)
@@ -148,6 +157,165 @@ def compute_core_density(
     return r_grid, n_r_density
 
 
+def compute_core_density_algebraic(
+    Z: float,
+    l_max: int = 2,
+    n_alpha: int = 200,
+    n_radial: int = 600,
+    r_max: float = 20.0,
+    N_R_angular: int = 200,
+    N_R_radial: int = 2000,
+    R_max: float = 30.0,
+    verbose: bool = False,
+    helium_result: Optional[dict] = None,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Compute the one-electron density algebraically from channel coefficients.
+
+    Instead of histogram binning, evaluates the exact coordinate-transform
+    identity:
+
+        n(r) = (2/h_alpha) * sum_R |F(R)|^2 dR * D(arccos(r/R); R) / sqrt(R^2 - r^2)
+
+    where D(alpha; R) = sum_l |u_l(alpha)|^2 is the angular density in the
+    Liouville-substituted FD basis, interpolated to the exact hyperangle
+    alpha = arccos(r/R) via cubic spline. The factor 2 uses singlet exchange
+    symmetry. The Jacobian 1/sqrt(R^2 - r^2) comes from the delta function
+    delta(R cos alpha - r).
+
+    Parameters
+    ----------
+    Z : float
+        Nuclear charge.
+    l_max : int
+        Maximum partial wave in angular expansion.
+    n_alpha : int
+        Number of FD grid points for hyperangle alpha.
+    n_radial : int
+        Number of output r grid points.
+    r_max : float
+        Maximum r for the output grid (bohr).
+    N_R_angular : int
+        Number of R points for computing adiabatic curves.
+    N_R_radial : int
+        Number of grid points for the radial solve.
+    R_max : float
+        Maximum hyperradius (bohr).
+    verbose : bool
+        Print progress.
+    helium_result : dict, optional
+        Pre-solved helium result from solve_helium(). If None, solves
+        internally (avoids double-solve when called from CoreScreening).
+
+    Returns
+    -------
+    r_grid : ndarray of shape (n_radial,)
+        Radial distance grid (bohr).
+    n_r : ndarray of shape (n_radial,)
+        Radial number density n(r) normalized so that integral n(r) dr = 2.
+    """
+    # Step 1: Solve the two-electron problem (or use pre-solved)
+    if helium_result is None:
+        result = solve_helium(
+            Z=Z, l_max=l_max, n_alpha=n_alpha,
+            N_R_angular=N_R_angular, N_R_radial=N_R_radial,
+            R_max=R_max, verbose=verbose,
+        )
+    else:
+        result = helium_result
+
+    F_R = result['wavefunction']
+    R_rad = result['R_grid_radial']
+    R_ang = result['R_grid_angular']
+
+    # Step 2: Interpolate F(R) onto the angular R grid
+    F_spline = CubicSpline(R_rad, F_R)
+    F_on_ang = F_spline(R_ang)
+
+    # Step 3: Set up output r grid
+    dr = r_max / n_radial
+    r_grid = np.linspace(dr / 2, r_max - dr / 2, n_radial)
+
+    # Alpha FD grid (must match solve_angular)
+    h_alpha = (np.pi / 2) / (n_alpha + 1)
+    alpha_grid = (np.arange(n_alpha) + 1) * h_alpha
+
+    n_l = l_max + 1
+
+    # Step 4: Trapezoid weights for R_ang
+    dR = np.zeros(len(R_ang))
+    dR[0] = 0.5 * (R_ang[1] - R_ang[0])
+    dR[-1] = 0.5 * (R_ang[-1] - R_ang[-2])
+    for i in range(1, len(R_ang) - 1):
+        dR[i] = 0.5 * (R_ang[i + 1] - R_ang[i - 1])
+
+    # Step 5: Build angular density splines at each R
+    # D(alpha; R) = sum_l |u_l(alpha)|^2 interpolated as cubic spline
+    # Boundary conditions: u(0) = u(pi/2) = 0 (Dirichlet), so D(0) = D(pi/2) = 0
+    ang_splines = []
+    for i_R, R in enumerate(R_ang):
+        F_sq = F_on_ang[i_R] ** 2
+        if F_sq < 1e-30:
+            ang_splines.append(None)
+            continue
+
+        _, vecs = solve_angular(R, Z, l_max, n_alpha, n_channels=1)
+        u = vecs[0]
+
+        ang_density = np.zeros(n_alpha)
+        for l_idx in range(n_l):
+            ang_density += u[l_idx * n_alpha:(l_idx + 1) * n_alpha] ** 2
+
+        # Extend with boundary zeros for clean spline interpolation
+        alpha_ext = np.concatenate([[0.0], alpha_grid, [np.pi / 2]])
+        dens_ext = np.concatenate([[0.0], ang_density, [0.0]])
+        ang_splines.append(CubicSpline(alpha_ext, dens_ext))
+
+    # Step 6: Evaluate algebraic density at each r
+    # n(r) = (2/h_alpha) * sum_R |F(R)|^2 dR * D(arccos(r/R); R) / sqrt(R^2 - r^2)
+    n_r = np.zeros(n_radial)
+
+    for i_R, R in enumerate(R_ang):
+        F_sq = F_on_ang[i_R] ** 2
+        if F_sq < 1e-30 or ang_splines[i_R] is None:
+            continue
+
+        # r values that can be reached from this R: r < R
+        # The singularity at r=R is integrable (D ~ alpha^2 -> 0 while
+        # Jacobian ~ 1/alpha -> inf, product ~ alpha -> 0). Use absolute
+        # tolerance based on alpha grid spacing to avoid numerical issues.
+        mask = r_grid < R * np.cos(h_alpha * 0.5)
+        if not np.any(mask):
+            continue
+
+        r_valid = r_grid[mask]
+
+        # Exact hyperangle for each r at this R
+        alpha_vals = np.arccos(r_valid / R)
+
+        # Evaluate angular density at exact alpha values
+        ang_vals = ang_splines[i_R](alpha_vals)
+        ang_vals = np.maximum(ang_vals, 0.0)
+
+        # Jacobian from delta(R cos alpha - r)
+        jacobian = 1.0 / np.sqrt(R**2 - r_valid**2)
+
+        # Accumulate
+        n_r[mask] += F_sq * dR[i_R] * ang_vals * jacobian
+
+    # Apply symmetry factor and FD normalization
+    n_r *= 2.0 / h_alpha
+
+    # Renormalize to exactly 2
+    total = np.trapezoid(n_r, r_grid)
+    if verbose:
+        print(f"Algebraic density raw integral: {total:.6f} (target: 2.0)")
+    if total > 0:
+        n_r *= 2.0 / total
+
+    return r_grid, n_r
+
+
 def compute_z_eff(
     Z: float,
     r_grid: np.ndarray,
@@ -226,6 +394,12 @@ class CoreScreening:
     >>> cs.solve()
     >>> z_eff_at_1bohr = cs.z_eff(1.0)
     >>> z_eff_array = cs.z_eff(np.array([0.1, 0.5, 1.0, 2.0]))
+
+    Parameters
+    ----------
+    method : str
+        Density extraction method: 'algebraic' (exact coordinate transform
+        with spline interpolation) or 'histogram' (original binning method).
     """
 
     def __init__(
@@ -238,7 +412,10 @@ class CoreScreening:
         N_R_angular: int = 200,
         N_R_radial: int = 2000,
         R_max: float = 30.0,
+        method: str = 'algebraic',
     ) -> None:
+        if method not in ('algebraic', 'histogram'):
+            raise ValueError(f"method must be 'algebraic' or 'histogram', got '{method}'")
         self.Z = Z
         self.l_max = l_max
         self.n_alpha = n_alpha
@@ -247,6 +424,7 @@ class CoreScreening:
         self.N_R_angular = N_R_angular
         self.N_R_radial = N_R_radial
         self.R_max = R_max
+        self.method = method
 
         self._solved = False
         self._r_grid: Optional[np.ndarray] = None
@@ -256,6 +434,13 @@ class CoreScreening:
         self._n_r_spline: Optional[CubicSpline] = None
         self._helium_result: Optional[dict] = None
 
+        # Level 3 core eigenvector data (populated by solve())
+        self.core_eigenvector: Optional[np.ndarray] = None
+        self.core_l0_wavefunction: Optional[np.ndarray] = None
+        self.core_n_alpha: Optional[int] = None
+        self.core_h_alpha: Optional[float] = None
+        self.core_R_representative: Optional[float] = None
+
     def solve(self, verbose: bool = False) -> None:
         """Solve the two-electron problem and compute the screening function."""
         self._helium_result = solve_helium(
@@ -264,11 +449,19 @@ class CoreScreening:
             R_max=self.R_max, verbose=verbose,
         )
 
-        self._r_grid, self._n_r = compute_core_density(
-            self.Z, self.l_max, self.n_alpha, self.n_radial,
-            self.r_max, self.N_R_angular, self.N_R_radial,
-            self.R_max, verbose=verbose,
-        )
+        if self.method == 'algebraic':
+            self._r_grid, self._n_r = compute_core_density_algebraic(
+                self.Z, self.l_max, self.n_alpha, self.n_radial,
+                self.r_max, self.N_R_angular, self.N_R_radial,
+                self.R_max, verbose=verbose,
+                helium_result=self._helium_result,
+            )
+        else:
+            self._r_grid, self._n_r = compute_core_density(
+                self.Z, self.l_max, self.n_alpha, self.n_radial,
+                self.r_max, self.N_R_angular, self.N_R_radial,
+                self.R_max, verbose=verbose,
+            )
 
         # Cumulative integral for N_core
         self._N_core = np.zeros_like(self._r_grid)
@@ -282,7 +475,59 @@ class CoreScreening:
             self._r_grid, self._n_r, extrapolate=True
         )
 
+        # Extract and store the Level 3 core eigenvector at the peak
+        # of the hyperradial wavefunction (the most representative R).
+        self._extract_core_eigenvector(verbose=verbose)
+
         self._solved = True
+
+    def _extract_core_eigenvector(self, verbose: bool = False) -> None:
+        """
+        Extract and store the Level 3 angular eigenvector at the peak
+        of the hyperradial wavefunction.
+
+        The ground-state eigenvector from solve_angular() represents
+        the angular part of the 1s² core in the hyperspherical basis.
+        It is stored for use by the algebraic PK projector.
+        """
+        F_R = self._helium_result['wavefunction']
+        R_rad = self._helium_result['R_grid_radial']
+
+        # Find R at peak of |F(R)|²
+        i_peak = int(np.argmax(F_R**2))
+        R_peak = float(R_rad[i_peak])
+
+        # Solve angular problem at the representative R
+        n_alpha_core = self.n_alpha
+        _, vecs = solve_angular(
+            R_peak, self.Z, self.l_max, n_alpha_core, n_channels=1,
+        )
+
+        # Store full eigenvector and metadata
+        self.core_eigenvector = vecs[0].copy()  # shape ((l_max+1) * n_alpha,)
+        self.core_n_alpha = n_alpha_core
+        self.core_h_alpha = (np.pi / 2) / (n_alpha_core + 1)
+        self.core_R_representative = R_peak
+
+        # Extract l=0 slice and normalize
+        l0_slice = vecs[0][0:n_alpha_core].copy()
+        norm = np.sqrt(np.sum(l0_slice**2) * self.core_h_alpha)
+        if norm > 1e-15:
+            l0_slice /= norm
+        self.core_l0_wavefunction = l0_slice
+
+        if verbose:
+            # Report channel weights
+            n_l = self.l_max + 1
+            weights = []
+            for l_idx in range(n_l):
+                sl = vecs[0][l_idx * n_alpha_core:(l_idx + 1) * n_alpha_core]
+                w = np.sum(sl**2) * self.core_h_alpha
+                weights.append(w)
+            total = sum(weights)
+            print(f"  Core eigenvector at R={R_peak:.2f} bohr:")
+            for l_idx, w in enumerate(weights):
+                print(f"    l={l_idx}: weight={w/total*100:.1f}%")
 
     def _check_solved(self) -> None:
         if not self._solved:

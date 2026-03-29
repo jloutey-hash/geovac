@@ -88,6 +88,11 @@ class ComposedDiatomicSolver:
         Atomic mass of atom B in amu.
     l_max : int
         Maximum angular momentum in Level 4 solver.
+    m_max : int
+        Maximum |m| per electron. 0 = sigma-only, 1 = sigma+pi.
+    l_max_per_m : dict or None
+        Per-|m| angular momentum limit. E.g., {0: 4, 1: 2} uses l_max=4
+        for sigma and l_max=2 for pi. If None, uses l_max for all m values.
     n_alpha : int
         Number of alpha grid points.
     use_pauli : bool
@@ -100,6 +105,12 @@ class ComposedDiatomicSolver:
         PK barrier height parameter (used when pk_mode='manual').
     pk_B : float or None
         PK barrier width parameter (used when pk_mode='manual').
+    pk_channel_mode : str
+        'channel_blind' (default) - PK applied uniformly to all channels.
+        'l_dependent' - PK weight per electron is δ_{l_i, 0}, so only
+        channels with l=0 character see the PK barrier.  This prevents
+        unphysical repulsion in higher-l channels that are automatically
+        orthogonal to the 1s² core by angular momentum.
     zeff_mode : str or float
         'screened' (Z_A_eff = Z_A - n_core), or a float value.
     verbose : bool
@@ -116,11 +127,14 @@ class ComposedDiatomicSolver:
         M_A: float = 7.016,
         M_B: float = 1.008,
         l_max: int = 2,
+        m_max: int = 0,
+        l_max_per_m: Optional[Dict[int, int]] = None,
         n_alpha: int = 100,
         use_pauli: bool = True,
         pk_mode: str = 'ab_initio',
         pk_A: Optional[float] = None,
         pk_B: Optional[float] = None,
+        pk_channel_mode: str = 'channel_blind',
         zeff_mode: str = 'screened',
         verbose: bool = True,
         label: str = '',
@@ -134,6 +148,8 @@ class ComposedDiatomicSolver:
         self.M_A = M_A
         self.M_B = M_B
         self.l_max = l_max
+        self.m_max = m_max
+        self.l_max_per_m = l_max_per_m
         self.n_alpha = n_alpha
         self.verbose = verbose
         self.label = label or f"Z_A={Z_A},Z_B={Z_B}"
@@ -150,12 +166,18 @@ class ComposedDiatomicSolver:
         self.zeff_mode = zeff_mode
 
         # PK pseudopotential mode
-        if pk_mode not in ('ab_initio', 'manual', 'none'):
+        if pk_mode not in ('ab_initio', 'manual', 'none', 'algebraic'):
             raise ValueError(
-                f"pk_mode must be 'ab_initio', 'manual', or 'none', "
-                f"got '{pk_mode}'"
+                f"pk_mode must be 'ab_initio', 'manual', 'none', or "
+                f"'algebraic', got '{pk_mode}'"
+            )
+        if pk_channel_mode not in ('channel_blind', 'l_dependent'):
+            raise ValueError(
+                f"pk_channel_mode must be 'channel_blind' or 'l_dependent',"
+                f" got '{pk_channel_mode}'"
             )
         self.pk_mode = pk_mode
+        self.pk_channel_mode = pk_channel_mode
 
         # Handle backward compatibility: use_pauli=False overrides pk_mode
         if not use_pauli:
@@ -163,6 +185,7 @@ class ComposedDiatomicSolver:
         self.use_pauli = (self.pk_mode != 'none')
 
         self.pk_potentials: Optional[List[dict]] = None
+        self.pk_projector: Optional[dict] = None
         self.ab_initio_pk: Optional[AbInitioPK] = None
 
         if self.pk_mode == 'manual':
@@ -177,8 +200,9 @@ class ComposedDiatomicSolver:
                 'C_core': pk_A,
                 'beta_core': pk_B,
                 'atom': 'A',
+                'channel_mode': pk_channel_mode,
             }]
-        elif self.pk_mode == 'ab_initio':
+        elif self.pk_mode in ('ab_initio', 'algebraic'):
             # Will be set after solve_core()
             self.pk_A = 0.0
             self.pk_B = 0.0
@@ -221,6 +245,24 @@ class ComposedDiatomicSolver:
             M_A=7.016003, M_B=1.00782503,
             label='LiH',
             pk_mode='ab_initio',
+        )
+        defaults.update(kwargs)
+        return cls(l_max=l_max, **defaults)
+
+    @classmethod
+    def LiH_algebraic_pk(cls, l_max: int = 2,
+                          **kwargs) -> "ComposedDiatomicSolver":
+        """LiH with algebraic PK projector (rank-1, channel-space).
+
+        Replaces the Gaussian barrier with the exact Phillips-Kleinman
+        projector V_PK = E_shift * |core⟩⟨core| expressed in the Level 4
+        channel basis.  Zero fitted parameters.
+        """
+        defaults = dict(
+            Z_A=3, Z_B=1, n_core=2,
+            M_A=7.016003, M_B=1.00782503,
+            label='LiH',
+            pk_mode='algebraic',
         )
         defaults.update(kwargs)
         return cls(l_max=l_max, **defaults)
@@ -280,7 +322,17 @@ class ComposedDiatomicSolver:
             )
             self.pk_A = self.ab_initio_pk.A
             self.pk_B = self.ab_initio_pk.B
-            self.pk_potentials = [self.ab_initio_pk.pk_dict(atom='A')]
+            pk_d = self.ab_initio_pk.pk_dict(atom='A')
+            pk_d['channel_mode'] = self.pk_channel_mode
+            self.pk_potentials = [pk_d]
+        elif self.pk_mode == 'algebraic':
+            self.ab_initio_pk = AbInitioPK(
+                self.core, n_core=self.n_core,
+            )
+            self.pk_A = self.ab_initio_pk.A
+            self.pk_B = self.ab_initio_pk.B
+            self.pk_projector = self.ab_initio_pk.algebraic_projector(atom='A')
+            # No Gaussian pk_potentials — the projector replaces them
 
         self.timings['core'] = time.time() - t0
 
@@ -295,7 +347,14 @@ class ComposedDiatomicSolver:
             print(f"  Z_A_eff = {self.Z_A_eff:.3f} ({self.zeff_mode})")
             if self.use_pauli:
                 mode_str = f" ({self.pk_mode})"
-                print(f"  PK: A={self.pk_A:.4f}, B={self.pk_B:.4f}{mode_str}")
+                ch_str = (f", channel_mode={self.pk_channel_mode}"
+                          if self.pk_channel_mode != 'channel_blind' else "")
+                if self.pk_mode == 'algebraic':
+                    print(f"  PK: algebraic projector,"
+                          f" E_shift={self.pk_projector['energy_shift']:.4f} Ha")
+                else:
+                    print(f"  PK: A={self.pk_A:.4f}, B={self.pk_B:.4f}"
+                          f"{mode_str}{ch_str}")
                 if self.ab_initio_pk is not None:
                     print(f"  r_core = {self.ab_initio_pk.r_core:.4f} bohr")
             else:
@@ -314,7 +373,10 @@ class ComposedDiatomicSolver:
             n_alpha=self.n_alpha,
             n_Re=n_Re,
             verbose=False,
+            m_max=self.m_max,
+            l_max_per_m=self.l_max_per_m,
             pk_potentials=self.pk_potentials,
+            pk_projector=self.pk_projector,
         )
         return result['E_elec']
 
@@ -553,8 +615,9 @@ class ComposedDiatomicSolver:
         if self.verbose:
             print("=" * 64)
             print(f"{self.label} Composed Graph Pipeline")
+            m_str = f", m_max={self.m_max}" if self.m_max > 0 else ""
             print(f"  Z_A={self.Z_A_bare:.0f}, Z_B={self.Z_B:.0f},"
-                  f" n_core={self.n_core}, l_max={self.l_max}")
+                  f" n_core={self.n_core}, l_max={self.l_max}{m_str}")
             print("=" * 64)
 
         self.solve_core()
@@ -579,8 +642,9 @@ class ComposedDiatomicSolver:
         """Print comprehensive results table."""
         print("\n" + "=" * 64)
         print(f"{self.label} Composed Graph Results")
+        m_str = f", m_max={self.m_max}" if self.m_max > 0 else ""
         print(f"  Z_A={self.Z_A_bare:.0f}, Z_B={self.Z_B:.0f},"
-              f" l_max={self.l_max}")
+              f" l_max={self.l_max}{m_str}")
         print("=" * 64)
 
         print("\nPipeline timing:")
@@ -619,7 +683,9 @@ class ComposedDiatomicSolver:
         print(f"  {'D_e':14s} {s['D_e']:10.4f} {str(ref_D):>10s} {'Ha':>6s}")
 
         if self.use_pauli:
-            print(f"\nPK pseudopotential ({self.pk_mode}):"
+            ch_str = (f", channel_mode={self.pk_channel_mode}"
+                      if self.pk_channel_mode != 'channel_blind' else "")
+            print(f"\nPK pseudopotential ({self.pk_mode}{ch_str}):"
                   f" A={self.pk_A:.4f}, B={self.pk_B:.4f}")
             if self.ab_initio_pk is not None:
                 print(f"  r_core = {self.ab_initio_pk.r_core:.4f} bohr")

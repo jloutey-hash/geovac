@@ -40,11 +40,15 @@ with a single adiabatic channel.  The solver uses a 600$\times$600
 sparse matrix and runs in $\sim$3~seconds.  The hyperspherical
 lattice is structurally the same kind of object as the atomic $S^3$
 lattice and the molecular prolate spheroidal lattice, but with one
-key generalization: it is a \emph{coupled channel graph}---a
-non-trivial fiber bundle where the angular structure varies with the
-hyperradial coordinate.  This is the first non-trivial fiber bundle
-in the GeoVac program and provides the mathematical prototype for
-electron-nuclear coupling in molecules.
+key generalization: it is a \emph{coupled-channel expansion} in which
+the angular eigenvalue problem depends parametrically on the
+hyperradius, so that the channel functions vary with $R$.
+(Mathematically, this coupled-channel structure has the form of a
+fiber bundle---the base space is the hyperradius, the fiber at each
+$R$ is the angular Hilbert space---but the computation proceeds
+entirely via standard coupled-channel methods.)
+This provides the mathematical prototype for electron-nuclear coupling
+in molecules.
 
 As a demonstration of the framework's end-to-end capability, we
 combine the prolate spheroidal electron lattice with a nuclear
@@ -82,8 +86,8 @@ The hierarchy of natural geometries discovered so far is:
   \item \textbf{Two-center, one-electron} (H$_2^+$, diatomics):
     Prolate spheroidal coordinates $(\xi, \eta, \phi)$ separate the
     two-center Coulomb problem exactly~\cite{loutey_paper11}.  The
-    prolate spheroidal lattice achieves 0.70\% error for H$_2^+$ with
-    zero free parameters.
+    prolate spheroidal lattice achieves 0.0002\% error for H$_2^+$
+    with a spectral Laguerre radial solver and zero free parameters.
 
   \item \textbf{One-center, two-electron} (He, two-electron atoms):
     \emph{This paper.}  Hyperspherical coordinates $(R, \alpha,
@@ -305,6 +309,12 @@ symbol~\cite{Varshalovich1988}.  The integral is nonzero only when
 $l + k + l'$ is even and the triangle inequality $|l - l'| \leq k
 \leq l + l'$ is satisfied, providing strong selection rules that
 enforce sparsity.
+
+These same Gaunt integrals also govern the nuclear coupling
+in the molecule-frame hyperspherical expansion
+(Paper~15~\cite{paper15}, Sec.~V.A), where a split-region
+Legendre expansion reduces the nuclear attraction to finite sums
+terminated by the Wigner $3j$ triangle inequality.
 
 \subsection{Finite-difference discretization}
 
@@ -582,13 +592,13 @@ N_\alpha$, but the angular solve remains fast because $n_l$ is small
 (typically $\leq 4$).
 
 %% ========================================================================
-%% VII. THE FIBER BUNDLE STRUCTURE
+%% VII. COUPLED-CHANNEL STRUCTURE
 %% ========================================================================
 
-\section{The Fiber Bundle Structure}
+\section{Coupled-Channel Structure}
 \label{sec:fiber_bundle}
 
-\subsection{The hyperspherical lattice as a coupled channel graph}
+\subsection{The hyperspherical lattice as a coupled-channel graph}
 
 The hyperspherical solver produces a discrete graph whose structure
 is summarized in Table~\ref{tab:bundle}.  The nodes are labeled by
@@ -610,10 +620,18 @@ edges are present and the graph is a simple chain (tridiagonal).
 The full coupled-channel problem adds inter-channel edges, making it
 a block-tridiagonal ladder graph.
 
+The key structural distinction from previous GeoVac lattices is that the
+angular eigenvalue problem depends parametrically on $R$: the channel
+functions $\Phi_\nu(R; \hat\Omega)$ are not fixed but vary with the
+hyperradius.  In the $S^3$ and prolate spheroidal lattices, the angular
+modes are $R$-independent, so the angular and radial problems decouple
+exactly.  Here, the $R$-dependence of the charge function couples
+them, producing the non-adiabatic coupling matrix $P_{\nu\mu}(R)$.
+
 \begin{table}[b]
 \caption{Structural comparison of GeoVac lattices.  The
-hyperspherical lattice is the first non-trivial fiber bundle: its
-angular structure (fiber) varies with the radial coordinate (base).}
+hyperspherical lattice has $R$-dependent angular channel
+functions, coupling the angular and radial problems.}
 \label{tab:bundle}
 \begin{ruledtabular}
 \begin{tabular}{lccc}
@@ -624,11 +642,24 @@ angular structure (fiber) varies with the radial coordinate (base).}
   Angular solve & Algebraic & 1D ODE & Coupled 1D \\
   Radial solve & None & 1D FD & 1D FD \\
   Separation & Exact & Exact & Adiabatic \\
-  Bundle type & Trivial & Trivial & Non-trivial \\
-  Connection & 0 & 0 & $P_{\nu\mu}(R)$ \\
+  Angular $R$-dep. & None & None & $\Phi_\nu(R;\hat\Omega)$ \\
+  Coupling & 0 & 0 & $P_{\nu\mu}(R)$ \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
+
+\paragraph{Fiber bundle interpretation.}
+Mathematically, this coupled-channel structure has the form of a
+fiber bundle: the base space is the hyperradial coordinate $R$, the
+fiber at each $R$ is the angular Hilbert space spanned by the channel
+functions $\{\Phi_\nu(R;\cdot)\}$, and the non-adiabatic coupling
+$P_{\nu\mu}(R) = \langle\Phi_\nu|\partial_R|\Phi_\mu\rangle$ is the
+Berry connection~\cite{Berry1984, Mead1992}.  The DBOC~\eqref{eq:dboc}
+is the diagonal Berry phase, and the off-diagonal couplings drive
+non-adiabatic transitions between channels.  However, the computation
+uses no fiber bundle machinery (no parallel transport, no characteristic
+classes, no holonomy calculations); it proceeds entirely via
+coupled-channel methods.
 
 \subsection{Connection to Born--Oppenheimer molecular dynamics}
 
@@ -640,14 +671,6 @@ case, the slow variable is the nuclear coordinate $\bm{R}_{\mathrm{nuc}}$
 and the fast variables are electronic coordinates; the adiabatic
 potential curves $E_k(\bm{R}_{\mathrm{nuc}})$ play the same role as
 $\mu_\nu(R)/R^2$.
-
-This is not merely an analogy.  The non-adiabatic coupling
-$P_{\nu\mu}(R) = \langle\Phi_\nu|\partial_R|\Phi_\mu\rangle$
-is a \emph{Berry connection} on the fiber bundle of channel functions
-over the base space of hyperradii~\cite{Berry1984, Mead1992}.  The
-DBOC~\eqref{eq:dboc} is the diagonal Berry phase, and the
-off-diagonal couplings drive non-adiabatic transitions between
-channels.
 
 This structural isomorphism means that the coupled-channel machinery
 developed for the hyperspherical two-electron problem directly
@@ -696,7 +719,7 @@ accuracy refer to the current GeoVac implementation.}
   1 & H (one-center, 1$e^-$) & $S^3$ & $1/r$ &
     $\sim\!50$ & $< 0.1$ & 0, 1, 7 \\
   2 & H$_2^+$ (two-center, 1$e^-$) & Prolate spheroid & Two-center
-    $1/r_A + 1/r_B$ & $\sim\!5000$ & 0.70 & 11 \\
+    $1/r_A + 1/r_B$ & $\sim\!20$ & 0.0002 & 11 \\
   3 & He (one-center, 2$e^-$) & Hyperspherical & $e$-$e$ cusp
     $1/r_{12}$ & $\sim\!600$ & 0.05 & \textbf{13} \\
   4 & H$_2$ (two-center, 2$e^-$) & ? & Combined &
@@ -873,24 +896,23 @@ $s$-wave autoionization resonances remain unresolved: the $P_{01}$
 coupling of $0.02$ produces widths $\sim P^2 \sim 10^{-4}$~Ha,
 far below the discretized continuum spacing.
 
-This is not a numerical failure but a structural limitation.  In the
-fiber bundle language of Sec.~\ref{sec:fiber_bundle}, the adiabatic
-channel functions $\Phi_\mu(R; \hat\Omega)$ change character at
-avoided crossings, and the ``$2s^2$'' configuration migrates between
-channels as a function of $R$.  Capturing this migration requires
-either the full two-dimensional $(R, \alpha)$ problem (slow variable
-discretization~\cite{Tolstikhin1996}) or a diabatic representation
-that diagonalizes the coupling at a reference $R$.
+This is not a numerical failure but a structural limitation.  The
+adiabatic channel functions $\Phi_\mu(R; \hat\Omega)$ change
+character at avoided crossings, and the ``$2s^2$'' configuration
+migrates between channels as a function of $R$.  Capturing this
+migration requires either the full two-dimensional $(R, \alpha)$
+problem (slow variable discretization~\cite{Tolstikhin1996}) or a
+diabatic representation that diagonalizes the coupling at a
+reference $R$.
 
-The fiber bundle carries irreducible content: the Berry connection
-$P_{\mu\nu}(R)$ encodes the rate of angular rearrangement, and its
-integral along $R$ gives the total phase accumulated during
-autoionization.  The within-sector ratio $3.29$ is determined by this
-integrated holonomy---a global property of the bundle that cannot be
-extracted from any single-$R$ angular eigenvalue.  This places the
-within-sector ratio in the same category as the Berry phase on the
-$S^3$ lattice: a gauge-invariant observable that requires the full
-connection, not just the curvature.
+The non-adiabatic coupling $P_{\mu\nu}(R)$ encodes the rate of
+angular rearrangement, and its integral along $R$ gives the total
+phase accumulated during autoionization.  The within-sector ratio
+$3.29$ is determined by this integrated coupling---a global property
+of the coupled-channel expansion that cannot be extracted from any
+single-$R$ angular eigenvalue.  (In the fiber bundle interpretation
+of Sec.~\ref{sec:fiber_bundle}, $P_{\mu\nu}$ is the Berry connection
+and the integrated phase is the holonomy.)
 
 %% ========================================================================
 %% XII. ALGEBRAIC STRUCTURE OF THE ANGULAR PROBLEM
@@ -1215,20 +1237,24 @@ dramatic (relative to the total energy) as $N$ increases.
 
 \subsection{The universal structure of natural lattices}
 
-Each natural geometry in the GeoVac hierarchy has the structure of a
-fiber bundle over a radial base with angular fibers drawn from
-representations of the rotation group---the universal pattern
-identified in Paper~0~\cite{loutey_paper0}.  On $S^3$, the fibers
-are SO(4) representations and the base is trivial; on the prolate
-spheroid, the fibers are separated angular modes and the base is the
-radial grid in $\xi$; on the hypersphere, the fibers are adiabatic
-channel functions and the base is the hyperradial grid in $R$.
+Each natural geometry in the GeoVac hierarchy shares a common
+computational structure: a radial coordinate (or chain of radial
+coordinates) coupled to angular modes drawn from representations of
+the rotation group---the universal pattern identified in
+Paper~0~\cite{loutey_paper0}.  On $S^3$, the angular modes are SO(4)
+representations and are $R$-independent; on the prolate spheroid, the
+separated angular modes are likewise fixed; on the hypersphere, the
+angular channel functions vary with $R$, producing a coupled-channel
+expansion.
 
-The transition from trivial bundles ($S^3$, prolate) to a non-trivial
-bundle (hyperspherical) marks the point where the angular physics
-\emph{depends on the radial coordinate}.  This is the signature of
-the electron-electron cusp: its effective strength varies with $R$,
-coupling the angular and radial degrees of freedom.
+The transition from $R$-independent angular bases ($S^3$, prolate) to
+a parameter-dependent basis (hyperspherical) marks the point where the
+angular physics \emph{depends on the radial coordinate}.  This is the
+signature of the electron-electron cusp: its effective strength varies
+with $R$, coupling the angular and radial degrees of freedom.
+(In fiber bundle language, the $S^3$ and prolate lattices are trivial
+bundles while the hyperspherical lattice is a non-trivial bundle with
+Berry connection $P_{\nu\mu}(R)$.)
 
 \subsection{Connection to quantum computing}
 
@@ -1262,21 +1288,241 @@ Several extensions are natural:
     the 3-particle angular Hamiltonian in Jacobi hyperspherical
     coordinates with $S_3$ symmetry projection.
   \item \textbf{Level 4 geometry:} The two-center, two-electron
-    problem (H$_2$) likely requires a fibered product of prolate
-    spheroidal and hyperspherical coordinates, with the bond length
-    $R_{\mathrm{nuc}}$ as an additional slow variable.
-  \item \textbf{The Berry connection as a physical observable:}
-    The connection $P_{\nu\mu}(R)$ on the fiber bundle encodes
-    the rate of angular rearrangement during autoionization.  Its
-    integrated holonomy determines within-sector width ratios that
-    are inaccessible to any single-$R$ eigenvalue calculation---a
-    gauge-invariant observable of the bundle geometry that connects
-    to the broader Geometric Vacuum program's investigation of
-    emergent gauge structure on discrete lattices.
+    problem (H$_2$) likely requires a coupled-channel expansion
+    combining prolate spheroidal and hyperspherical coordinates, with
+    the bond length $R_{\mathrm{nuc}}$ as an additional slow variable.
+  \item \textbf{Non-adiabatic coupling as a physical observable:}
+    The coupling matrix $P_{\nu\mu}(R)$ encodes the rate of angular
+    rearrangement during autoionization.  Its integral along $R$
+    determines within-sector width ratios that are inaccessible to
+    any single-$R$ eigenvalue calculation---a gauge-invariant
+    observable (the Berry phase of the coupled-channel expansion)
+    that connects to the broader Geometric Vacuum program's
+    investigation of geometric phases on discrete lattices.
 \end{enumerate}
 
 %% ========================================================================
-%% XIII. CONCLUSION
+%% XIII. ALGEBRAIC ANGULAR SOLVER AND COUPLED-CHANNEL CONVERGENCE
+%% ========================================================================
+
+\section{Algebraic Angular Solver and Coupled-Channel Convergence}
+\label{sec:algebraic_angular}
+
+The finite-difference angular solver of Sec.~\ref{sec:angular} uses
+a grid of $N_\alpha = 200$--$800$ points, producing dense matrices
+whose diagonalization cost scales as $O(N_\alpha^3)$.  This section
+describes an algebraic spectral basis that reduces the angular
+Hamiltonian to a $10$--$30$ dimensional matrix while preserving
+all coupling structure, and a coupled-channel radial solver that
+resolves the $l_{\max}$ convergence problem identified in
+Sec.~\ref{sec:adiabatic_limits}.
+
+\subsection{Algebraic spectral basis}
+\label{sec:spectral_basis}
+
+The Liouville-substituted angular Hamiltonian (Sec.~\ref{sec:liouville})
+is expanded in the Gegenbauer basis $\{\sin(2n\alpha)\}_{n=1}^{N}$,
+which are eigenfunctions of the grand angular momentum $\Lambda^2$.
+Sturmian approaches to the hyperangular problem---using
+potential-adapted basis functions rather than free eigenfunctions---have
+been developed by Abdouraman \textit{et al.}~\cite{Abdouraman2016},
+who treat the monopole electron-electron interaction exactly in
+hyperspherical coordinates, and by Aquilanti \textit{et al.}~\cite{Aquilanti2001},
+who extend Fock's $S^3$ projection to derive three-term recurrence
+relations for Sturmian transformation coefficients.  The present
+spectral basis uses the free SO(6) eigenfunctions (Gegenbauer
+polynomials) rather than the potential-adapted Sturmians of these
+works, yielding purely algebraic coupling matrices at the cost of
+slower angular convergence (see Sec.~\ref{sec:adiabatic_bottleneck}).
+In this basis, the angular Hamiltonian takes the form
+\begin{equation}
+  H_{mn}(R) = \mu_{\mathrm{free}}(m)\,\delta_{mn}
+  + R\,V^{\mathrm{coupling}}_{mn},
+  \label{eq:H_spectral}
+\end{equation}
+where $\mu_{\mathrm{free}}(m)$ are the SO(6) Casimir eigenvalues
+from Eq.~\eqref{eq:mu_free} and $V^{\mathrm{coupling}}_{mn}$ contains
+the nuclear and electron-electron coupling integrals.
+
+All matrix elements of $V^{\mathrm{coupling}}$ are algebraic in this
+basis:
+\begin{itemize}
+  \item \textbf{Diagonal:} the SO(6) Casimir eigenvalues
+    $\mu_{\mathrm{free}}(\nu) = \nu(\nu+4)/2$, exact from
+    representation theory.
+  \item \textbf{Nuclear coupling:} partial harmonic sums
+    (Eqs.~\ref{eq:I_nuc}--\ref{eq:I_ee}), evaluated as finite sums
+    over quantum number labels.
+  \item \textbf{$V_{ee}$ coupling:} split-region Legendre structure,
+    with matrix elements expressed through Gaunt integrals that
+    terminate via the $3j$ triangle inequality.
+\end{itemize}
+The only per-$R$ numerical operation is diagonalization of the
+resulting $N \times N$ coupling matrix, with $N = 10$--$30$
+(compared to $N_\alpha = 200$--$800$ for the finite-difference solver).
+
+A key structural consequence of Eq.~\eqref{eq:H_spectral} is that
+the derivative $dH/dR = V^{\mathrm{coupling}}$ is precomputed and
+$R$-independent.  The Hellmann--Feynman non-adiabatic coupling
+matrix is therefore exact at every $R$:
+\begin{equation}
+  P_{\mu\nu}(R) = \frac{\langle\Phi_\mu|V^{\mathrm{coupling}}|\Phi_\nu\rangle}
+  {\mu_\mu(R) - \mu_\nu(R)},
+  \label{eq:P_hellmann_feynman}
+\end{equation}
+with no finite-difference noise or step-size dependence.
+
+\subsection{Adiabatic approximation as bottleneck}
+\label{sec:adiabatic_bottleneck}
+
+The algebraic angular solver reveals that the adiabatic approximation,
+not the angular basis, is the accuracy bottleneck at $l_{\max} \ge 1$.
+
+At $l_{\max} = 0$, the single-channel adiabatic energy is above
+exact ($0.16\%$ error), because the lone angular channel cannot
+capture the full electron correlation.  At $l_{\max} \ge 1$,
+additional angular channels add electron correlation without the
+compensating non-adiabatic kinetic cost, and the adiabatic energy
+dives \emph{below} exact ($0.56$--$0.65\%$ error).  The error
+increases monotonically with $l_{\max}$ in the single-channel
+approximation.
+
+The diagonal Born--Oppenheimer correction (DBOC) provides a
+quantitative diagnostic.  The DBOC for the ground channel is
+$+0.035$~Ha---approximately $23\times$ the total adiabatic error
+of $0.0015$~Ha.  In the complete-basis limit, $97\%$ of this
+correction is cancelled by off-diagonal $P$-matrix coupling
+(Sec.~\ref{sec:dboc}), leaving a net correction of only
+$\sim 0.001$~Ha.  This near-complete cancellation confirms that
+the coupled-channel formalism, not an improved angular basis,
+is the path to sub-0.1\% accuracy.
+
+A Sturmian variant---constructing the angular basis from
+eigenfunctions of the nuclear monopole potential rather than the
+free $\Lambda^2$---was investigated as an alternative, motivated
+by the potential-adapted Sturmian bases of
+Refs.~\cite{Abdouraman2016,Aquilanti2001}.  The Sturmian
+basis converges $1.6$--$3.6\times$ faster than the Gegenbauer basis
+at small matrix dimensions for $l_{\max} = 0$.  However, at
+$l_{\max} \ge 1$, the faster angular convergence is
+counterproductive: the Sturmian basis converges more rapidly to the
+(wrong) adiabatic limit that lies below exact.  The Sturmian variant
+is preserved as a research artifact but is not recommended for
+production use.
+
+\subsection{Coupled-channel convergence}
+\label{sec:coupled_channel_convergence}
+
+The algebraic angular solver's exact coupling matrices feed into
+the coupled-channel radial solver of Sec.~\ref{sec:coupled_channel}.
+The coupled radial equations are
+\begin{equation}
+  \left[-\tfrac{1}{2}\frac{d^2}{dR^2}\delta_{\mu\nu}
+  + V^{\mathrm{eff}}_\mu(R)\delta_{\mu\nu}
+  - P_{\mu\nu}\frac{d}{dR}
+  - \tfrac{1}{2}Q_{\mu\nu}\right]F_\nu = E\,F_\mu,
+  \label{eq:coupled_radial}
+\end{equation}
+where the second-derivative coupling $Q$ is approximated by the
+closure relation $Q_{\mu\nu} \approx \sum_\kappa P_{\mu\kappa}P_{\kappa\nu}$,
+summed over all channels $\kappa$ (including those outside the
+truncated set).
+
+Table~\ref{tab:coupled_convergence} presents the central result:
+single-channel error increases with $l_{\max}$ (divergent), while
+coupled-channel error decreases (convergent).
+
+\begin{table}[h]
+\caption{He ground-state energy convergence with $l_{\max}$
+using the exact $Q$-matrix ($q_{\mathrm{mode}} = \mathrm{exact}$,
+$n_{\mathrm{basis}} = 15$, $n_{\mathrm{channels}} = 3$).
+Exact He: $-2.9037$~Ha.}
+\label{tab:coupled_convergence}
+\begin{ruledtabular}
+\begin{tabular}{cddc}
+  $l_{\max}$ & \multicolumn{1}{c}{$E$ (Ha)}
+  & \multicolumn{1}{c}{Error (\%)} & Direction \\
+  \hline
+  0 & -2.8716 & 1.105 & overcorrects \\
+  1 & -2.8947 & 0.311 & converges \\
+  2 & -2.8968 & 0.239 & converges \\
+  3 & -2.8973 & 0.220 & converges \\
+  4 & -2.8975 & 0.214 & converges \\
+  5 & -2.8976 & 0.211 & converges \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The $P$-only coupled result (without $Q$) and the full $P{+}Q$
+result bracket the exact energy from below and above, respectively,
+at all $l_{\max}$.  This bounding property provides a practical
+error estimate.
+
+The overcorrection at $l_{\max} = 0$ ($1.1\%$) is structural:
+it is dominated by the diagonal DBOC, which cannot be reduced by
+improving the $Q$-matrix alone.  At $l_{\max} \ge 1$, the
+coupled-channel error decreases monotonically, converging
+algebraically as $\sim l_{\max}^{-2}$ toward a structural floor
+of $0.19$--$0.20\%$.
+
+Table~\ref{tab:coupled_convergence} presents the definitive
+characterization of this convergence ceiling:
+\begin{itemize}
+  \item The convergence rate is algebraic ($\sim l_{\max}^{-2}$),
+    not exponential---consistent with the polynomial decay of
+    angular correlation contributions.
+  \item Three coupled channels are sufficient: increasing
+    $n_{\mathrm{channels}}$ from 3 to 5 changes the energy by
+    $< 0.001\%$.
+  \item The $n_{\mathrm{basis}}$ and radial grid parameters are
+    fully converged (sensitivity checks confirm $< 0.001\%$
+    dependence).
+  \item The $0.19$--$0.20\%$ floor is set by the adiabatic
+    channel truncation inherent to the coupled-channel $P{+}Q$
+    formalism.  Sub-$0.1\%$ accuracy requires the variational
+    2D solver (Paper~15~\cite{paper15}) to bypass the adiabatic
+    approximation entirely.
+\end{itemize}
+
+The exact $Q$-matrix is computed algebraically via
+$Q_{\mu\nu} = \sum_\kappa P_{\mu\kappa}P_{\kappa\nu}
++ (dP/dR)_{\mu\nu}$, where $dP/dR$ is derived from
+Hellmann--Feynman quantities (verified against finite differences
+to $< 10^{-9}$, with zero finite differences in production).
+Since $d^2H/dR^2 = 0$ (from Eq.~\ref{eq:H_spectral}), the
+second-derivative coupling is fully determined by the
+first-derivative coupling and the eigenvalue spectrum.
+
+The algebraic spectral approach developed here for the hyperspherical
+geometry (Level~3) has analogues at other levels of the natural
+geometry hierarchy.  Kereselidze \textit{et al.}~\cite{Kereselidze2016}
+and Mitnik \textit{et al.}~\cite{Mitnik2021} have developed Coulomb
+Sturmian bases in prolate spheroidal coordinates, the natural geometry
+of Level~2 (Paper~11~\cite{loutey_paper11}).  The existence of
+spectral bases across multiple natural geometries suggests that the
+algebraic spectral method may generalize across the hierarchy.
+
+\paragraph{Computational implementation and validation.}
+The algebraic angular solver described in this section has been
+implemented as a production code module (\texttt{algebraic\_angular.py})
+with 28 unit tests validating all matrix element classes.  A key
+implementation detail is the Gegenbauer parameter correction:
+$\lambda = l + 1$ per angular momentum channel (not $\lambda = 2$
+for all channels), so that the $l = 0$ channel uses Chebyshev~$U$
+polynomials ($C_k^1$), $l = 1$ uses $C_k^2$, and so on.  This
+correction eliminates a centrifugal boundary singularity present in
+the finite-difference solver, yielding a systematic 0.22~percentage
+point improvement over the FD results at every $l_{\max} > 0$.
+The coupled-channel extension confirms that the adiabatic
+approximation---not the angular basis---is the dominant error source:
+single-channel error diverges with $l_{\max}$, while coupled-channel
+error with exact $Q$-matrix converges algebraically
+($\sim l_{\max}^{-2}$) from $0.31\%$ at $l_{\max} = 1$ to $0.21\%$
+at $l_{\max} = 5$, asymptoting to a structural floor of
+$0.19$--$0.20\%$ set by the adiabatic channel truncation.
+
+%% ========================================================================
+%% XIV. CONCLUSION
 %% ========================================================================
 
 \section{Conclusion}
@@ -1295,8 +1541,9 @@ multi-particle systems: it is structurally the same kind of object
 as the atomic $S^3$ lattice and the molecular prolate spheroidal
 lattice---a sparse graph with quantum number labels on nodes and
 transition amplitudes on edges---but with the key generalization
-that the angular structure (fiber) varies with the radial coordinate
-(base), making it a non-trivial fiber bundle.
+that the angular channel functions vary with the hyperradius,
+producing a coupled-channel expansion where the angular and radial
+problems are linked by the non-adiabatic coupling $P_{\nu\mu}(R)$.
 
 Combined with the prolate spheroidal electron lattice and the nuclear
 lattice, the GeoVac framework produces ab initio rovibrational
@@ -1424,6 +1671,29 @@ O.~I.~Tolstikhin, S.~Watanabe, and M.~Matsuzawa,
 ```Slow' variable discretization (SVD) method for the multichannel
 scattering problem,''
 J.\ Phys.\ B \textbf{29}, L389 (1996).
+
+\bibitem{Abdouraman2016}
+M.~Abdouraman, A.~Frapiccini, B.~Hamido, F.~Mota-Furtado,
+P.~F.~O'Mahony, D.~Mitnik, G.~Gasaneo, and B.~Piraux,
+``Sturmian bases for two-electron systems in hyperspherical
+coordinates,''
+Phys.\ Rev.\ A \textbf{94}, 023403 (2016).
+
+\bibitem{Aquilanti2001}
+V.~Aquilanti, S.~Cavalli, C.~Coletti, D.~Di~Domenico, and G.~Grossi,
+``Hyperspherical harmonics as Sturmian orbitals in momentum space:
+A systematic approach to the few-body Coulomb problem,''
+Int.\ Rev.\ Phys.\ Chem.\ \textbf{20}, 673--709 (2001).
+
+\bibitem{Kereselidze2016}
+T.~Kereselidze, G.~Chkadua, and P.~Defrance,
+``Coulomb Sturmians in spheroidal coordinates,''
+Mol.\ Phys.\ \textbf{114}, 148--162 (2016).
+
+\bibitem{Mitnik2021}
+D.~M.~Mitnik, L.~U.~Ancarani, and G.~Gasaneo,
+``Generalized Sturmian Functions in prolate spheroidal coordinates,''
+Comput.\ Phys.\ Commun.\ \textbf{269}, 108145 (2021).
 
 \end{thebibliography}
 

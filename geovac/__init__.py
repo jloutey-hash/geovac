@@ -25,7 +25,7 @@ Quick Start:
 >>> H = idx.assemble_hamiltonian()
 """
 
-__version__ = '1.9.0'
+__version__ = '2.0.8'
 __author__ = 'J. Loutey'
 __license__ = 'MIT'
 
@@ -46,6 +46,7 @@ from .rho_collapse_cache import AngularCache, FastAdiabaticPES
 from .core_screening import CoreScreening
 from .ab_initio_pk import AbInitioPK
 from .composed_diatomic import ComposedDiatomicSolver
+from .composed_triatomic import ComposedTriatomicSolver
 try:
     from .qubit_encoding import JordanWignerEncoder, PauliAnalysis
 except ImportError:

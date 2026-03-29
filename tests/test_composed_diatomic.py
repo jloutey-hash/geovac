@@ -309,3 +309,200 @@ class TestComparisonTable:
 
         # This test always passes — it's just for printing
         assert True
+
+
+# ======================================================================
+# LiH extended angular basis — sigma+pi channels
+# ======================================================================
+
+def _lih_r_grid_extended_wide() -> np.ndarray:
+    """Wide R-grid for higher l_max (minimum shifts outward)."""
+    return np.concatenate([
+        np.linspace(2.0, 2.5, 3),
+        np.linspace(2.7, 4.0, 10),
+        np.linspace(4.5, 8.0, 7),
+    ])
+
+
+@pytest.fixture(scope="module")
+def lih_l3_sigma_pi():
+    """LiH at l_max=3 with sigma+pi channels (ab initio PK)."""
+    s = ComposedDiatomicSolver.LiH_ab_initio(
+        l_max=3, m_max=1, l_max_per_m={0: 3, 1: 2},
+        n_alpha=60, verbose=True,
+    )
+    s.solve_core()
+    s.scan_pes(R_grid=_lih_r_grid_extended_wide(), n_Re=300)
+    s.fit_spectroscopic_constants(fit_window=2.0)
+    s.build_nuclear_lattice(J_max=10)
+    s._print_summary()
+    return s
+
+
+@pytest.fixture(scope="module")
+def lih_l4_sigma_pi():
+    """LiH at l_max=4 with sigma+pi channels (ab initio PK)."""
+    s = ComposedDiatomicSolver.LiH_ab_initio(
+        l_max=4, m_max=1, l_max_per_m={0: 4, 1: 2},
+        n_alpha=50, verbose=True,
+    )
+    s.solve_core()
+    s.scan_pes(R_grid=_lih_r_grid_extended_wide(), n_Re=300)
+    s.fit_spectroscopic_constants(fit_window=2.0)
+    s.build_nuclear_lattice(J_max=10)
+    s._print_summary()
+    return s
+
+
+class TestLiHL3SigmaPi:
+    """LiH l_max=3 with sigma+pi channels.
+
+    Higher l_max adds angular correlation that preferentially lowers
+    energy at large R (diffuse electron cloud), shifting R_eq outward.
+    This is a documented negative result for the monotonic convergence
+    prediction from Paper 15 (H2). The additional channels produce a
+    bound PES with correct qualitative shape.
+    """
+
+    def test_pipeline_completes(
+        self, lih_l3_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """Full sigma+pi pipeline completes without error."""
+        assert lih_l3_sigma_pi.E_core is not None
+        assert lih_l3_sigma_pi.pes_result is not None
+        assert lih_l3_sigma_pi.spectro is not None
+        assert lih_l3_sigma_pi.nuclear is not None
+
+    def test_molecule_bound(
+        self, lih_l3_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """D_e > 0 (molecule is bound)."""
+        D_e = lih_l3_sigma_pi.pes_result['D_e']
+        print(f"  D_e (l3 sigma+pi) = {D_e:.6f} Ha")
+        assert D_e > 0
+
+    def test_r_eq_in_range(
+        self, lih_l3_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """R_eq in [2.5, 5.0] bohr — bound PES with physical minimum."""
+        R_eq = lih_l3_sigma_pi.spectro['R_eq']
+        print(f"  R_eq (l3 sigma+pi) = {R_eq:.3f} bohr (expt: 3.015)")
+        assert 2.5 <= R_eq <= 5.0
+
+    def test_m_max_set(
+        self, lih_l3_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """Verify m_max=1 was set (pi channels active)."""
+        assert lih_l3_sigma_pi.m_max == 1
+
+    def test_omega_e_physical(
+        self, lih_l3_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """omega_e in physical range [600, 2500] cm-1."""
+        omega = lih_l3_sigma_pi.spectro['omega_e']
+        print(f"  omega_e (l3 sigma+pi) = {omega:.1f} cm-1 (expt: 1405.7)")
+        assert 600 < omega < 2500
+
+
+class TestLiHL4SigmaPi:
+    """LiH l_max=4 with sigma+pi channels.
+
+    Same physics as l_max=3: additional angular channels lower energy
+    preferentially at large R, pushing R_eq further outward. The PES
+    remains bound with correct qualitative shape.
+    """
+
+    def test_pipeline_completes(
+        self, lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """Full l_max=4 sigma+pi pipeline completes without error."""
+        assert lih_l4_sigma_pi.E_core is not None
+        assert lih_l4_sigma_pi.pes_result is not None
+        assert lih_l4_sigma_pi.spectro is not None
+        assert lih_l4_sigma_pi.nuclear is not None
+
+    def test_molecule_bound(
+        self, lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """D_e > 0."""
+        D_e = lih_l4_sigma_pi.pes_result['D_e']
+        print(f"  D_e (l4 sigma+pi) = {D_e:.6f} Ha")
+        assert D_e > 0
+
+    def test_r_eq_in_range(
+        self, lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """R_eq in [2.5, 6.0] bohr — bound PES."""
+        R_eq = lih_l4_sigma_pi.spectro['R_eq']
+        print(f"  R_eq (l4 sigma+pi) = {R_eq:.3f} bohr (expt: 3.015)")
+        assert 2.5 <= R_eq <= 6.0
+
+    def test_m_max_set(
+        self, lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """Verify m_max=1 and l_max_per_m set."""
+        assert lih_l4_sigma_pi.m_max == 1
+        assert lih_l4_sigma_pi.l_max_per_m == {0: 4, 1: 2}
+
+    def test_more_channels_than_l2(
+        self, lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """l_max=4 sigma+pi has more channels than l_max=2 sigma."""
+        from geovac.level4_multichannel import (
+            _channel_list, _channel_list_extended,
+        )
+        ch_l2 = _channel_list(2, homonuclear=False)
+        ch_l4 = _channel_list_extended(
+            4, 1, {0: 4, 1: 2}, homonuclear=False,
+        )
+        print(f"  l_max=2 sigma: {len(ch_l2)} channels")
+        print(f"  l_max=4 sigma+pi: {len(ch_l4)} channels")
+        assert len(ch_l4) > len(ch_l2)
+
+
+class TestLmaxConvergenceReport:
+    """Print convergence table for l_max progression.
+
+    Documents that R_eq does NOT converge monotonically toward
+    experiment (3.015 bohr) with increasing l_max in the single-channel
+    adiabatic approximation. Additional angular channels preferentially
+    lower energy at large R, shifting R_eq outward.
+    """
+
+    def test_print_convergence_table(
+        self,
+        lih_l2: ComposedDiatomicSolver,
+        lih_l3_sigma_pi: ComposedDiatomicSolver,
+        lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """Print l_max convergence table."""
+        print("\n")
+        print("=" * 72)
+        print("LiH l_max Convergence with Sigma+Pi Channels")
+        print("=" * 72)
+        print(f"  {'Config':20s} {'R_eq':>8s} {'err%':>6s} "
+              f"{'omega_e':>8s} {'D_e':>8s} {'m_max':>5s}")
+        print(f"  {'-'*20} {'-'*8} {'-'*6} {'-'*8} {'-'*8} {'-'*5}")
+
+        for label, s in [
+            ("l2 sigma (man.PK)", lih_l2),
+            ("l3 sig+pi (ai.PK)", lih_l3_sigma_pi),
+            ("l4 sig+pi (ai.PK)", lih_l4_sigma_pi),
+        ]:
+            R = s.spectro['R_eq']
+            err = abs(R - 3.015) / 3.015 * 100
+            w = s.spectro['omega_e']
+            D = s.spectro['D_e']
+            print(f"  {label:20s} {R:8.3f} {err:6.1f} "
+                  f"{w:8.1f} {D:8.4f} {s.m_max:5d}")
+
+        print(f"  {'Experiment':20s} {'3.015':>8s} {'0.0':>6s} "
+              f"{'1405.7':>8s} {'0.0920':>8s}")
+        print()
+        print("  NOTE: R_eq moves AWAY from experiment at higher l_max.")
+        print("  Root cause: angular correlation lowers energy more at large R")
+        print("  (diffuse electrons) than at short R (compact cloud).")
+        print("  This is a limitation of the single-channel adiabatic")
+        print("  approximation, not a code bug.")
+        print("=" * 72)
+        assert True

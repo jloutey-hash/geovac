@@ -15,6 +15,7 @@ Date: March 2026
 import math
 import warnings
 
+import numpy as np
 import pytest
 
 from openfermion import QubitOperator
@@ -28,6 +29,10 @@ from geovac.trotter_bounds import (
     TrotterAnalysis,
     analyze_trotter_cost,
     compare_trotter_cost,
+    _pauli_string_to_binary,
+    _symplectic_inner_product_matrix,
+    pauli_commutator_bound,
+    analyze_commutator_cost,
 )
 from geovac.gaussian_reference import h2_sto3g, build_qubit_hamiltonian
 from geovac.lattice_index import LatticeIndex
@@ -298,4 +303,140 @@ class TestScaling:
         assert lpq3 / lpq2 < q_ratio, (
             f"lambda/Q grew faster than Q itself: "
             f"{lpq3/lpq2:.2f}x vs Q ratio {q_ratio:.2f}x"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Commutator bound tests
+# ---------------------------------------------------------------------------
+
+class TestBinaryConversion:
+    """Tests for Pauli string -> binary vector conversion."""
+
+    def test_binary_conversion_identity(self) -> None:
+        """Identity term () converts to all-zeros."""
+        x, z = _pauli_string_to_binary((), n_qubits=4)
+        assert np.all(x == 0)
+        assert np.all(z == 0)
+        assert x.shape == (4,)
+
+    def test_binary_conversion_xyz(self) -> None:
+        """X, Y, Z on specific qubits convert correctly."""
+        # X0 -> x[0]=1, z[0]=0
+        x, z = _pauli_string_to_binary(((0, 'X'),), n_qubits=3)
+        assert x[0] == 1 and z[0] == 0
+        assert x[1] == 0 and z[1] == 0
+
+        # Y1 -> x[1]=1, z[1]=1
+        x, z = _pauli_string_to_binary(((1, 'Y'),), n_qubits=3)
+        assert x[1] == 1 and z[1] == 1
+
+        # Z2 -> x[2]=0, z[2]=1
+        x, z = _pauli_string_to_binary(((2, 'Z'),), n_qubits=3)
+        assert x[2] == 0 and z[2] == 1
+
+        # X0 Z2 -> x=[1,0,0], z=[0,0,1]
+        x, z = _pauli_string_to_binary(((0, 'X'), (2, 'Z')), n_qubits=3)
+        assert list(x) == [1, 0, 0]
+        assert list(z) == [0, 0, 1]
+
+
+class TestSymplecticProduct:
+    """Tests for symplectic inner product (commutativity check)."""
+
+    def test_symplectic_commuting_pair(self) -> None:
+        """Z0 and Z1 act on different qubits -> commute (s=0)."""
+        import numpy as np
+        X = np.array([[0, 0], [0, 0]], dtype=np.uint8)  # Z0, Z1
+        Z = np.array([[1, 0], [0, 1]], dtype=np.uint8)
+        S = _symplectic_inner_product_matrix(X, Z)
+        assert S[0, 1] == 0
+        assert S[1, 0] == 0
+
+    def test_symplectic_anticommuting_pair(self) -> None:
+        """X0 and Z0 anticommute (s=1)."""
+        import numpy as np
+        X = np.array([[1], [0]], dtype=np.uint8)  # X0, Z0
+        Z = np.array([[0], [1]], dtype=np.uint8)
+        S = _symplectic_inner_product_matrix(X, Z)
+        assert S[0, 1] == 1
+        assert S[1, 0] == 1
+
+
+class TestCommutatorBound:
+    """Tests for the commutator-based Trotter error bound."""
+
+    def test_comm_bound_two_anticommuting_terms(self) -> None:
+        """
+        H = a*X0 + b*Z0: X and Z anticommute.
+        comm_sum = |a|*|b| (one anticommuting pair).
+        comm_bound = t^2 * |a|*|b|.
+        onenorm_bound = t^2 * (|a|+|b|)^2 / 2.
+        """
+        a, b = 0.5, 0.3
+        op = QubitOperator(((0, 'X'),), a) + QubitOperator(((0, 'Z'),), b)
+        result = pauli_commutator_bound(op, time=1.0, epsilon=1e-3)
+
+        assert result['n_anticommuting_pairs'] == 1
+        assert result['n_total_pairs'] == 1
+        assert result['anticommuting_fraction'] == pytest.approx(1.0)
+        assert result['comm_bound'] == pytest.approx(a * b, rel=1e-10)
+        assert result['onenorm_bound'] == pytest.approx((a + b)**2 / 2, rel=1e-10)
+        assert result['tightening_ratio'] < 1.0
+
+    def test_comm_bound_commuting_terms(self) -> None:
+        """
+        H = a*Z0 + b*Z1: Z0 and Z1 commute (different qubits).
+        comm_bound = 0 (no anticommuting pairs).
+        """
+        op = QubitOperator(((0, 'Z'),), 0.5) + QubitOperator(((1, 'Z'),), 0.3)
+        result = pauli_commutator_bound(op, time=1.0, epsilon=1e-3)
+
+        assert result['n_anticommuting_pairs'] == 0
+        assert result['comm_bound'] == 0.0
+        assert result['comm_trotter_steps'] == 0
+
+    def test_comm_bound_tighter_than_onenorm(
+        self,
+        geovac_he_nmax2: LatticeIndex,
+    ) -> None:
+        """For GeoVac He nmax=2, comm_bound < onenorm_bound."""
+        enc = JordanWignerEncoder(geovac_he_nmax2)
+        qop = enc.build_qubit_operator()
+        result = pauli_commutator_bound(qop, time=1.0, epsilon=1e-3)
+
+        assert result['comm_bound'] < result['onenorm_bound'], (
+            f"Commutator bound {result['comm_bound']:.6f} should be tighter "
+            f"than 1-norm bound {result['onenorm_bound']:.6f}"
+        )
+        assert result['tightening_ratio'] < 1.0
+        print(f"\n  He nmax=2: tightening ratio = {result['tightening_ratio']:.4f}, "
+              f"anticomm fraction = {result['anticommuting_fraction']:.4f}")
+
+    def test_anticommuting_fraction_decreases(
+        self,
+        geovac_he_nmax2: LatticeIndex,
+        geovac_he_nmax3: LatticeIndex,
+    ) -> None:
+        """
+        Anticommuting fraction should decrease with system size.
+
+        As the system grows, selection rules make more pairs commute
+        (they act on disjoint qubit subsets).
+        """
+        enc2 = JordanWignerEncoder(geovac_he_nmax2)
+        enc3 = JordanWignerEncoder(geovac_he_nmax3)
+        qop2 = enc2.build_qubit_operator()
+        qop3 = enc3.build_qubit_operator()
+
+        r2 = pauli_commutator_bound(qop2, time=1.0, epsilon=1e-3)
+        r3 = pauli_commutator_bound(qop3, time=1.0, epsilon=1e-3)
+
+        print(f"\n  nmax=2: anticomm fraction = {r2['anticommuting_fraction']:.4f}")
+        print(f"  nmax=3: anticomm fraction = {r3['anticommuting_fraction']:.4f}")
+
+        assert r3['anticommuting_fraction'] < r2['anticommuting_fraction'], (
+            f"Anticommuting fraction should decrease: nmax=3 "
+            f"({r3['anticommuting_fraction']:.4f}) >= nmax=2 "
+            f"({r2['anticommuting_fraction']:.4f})"
         )

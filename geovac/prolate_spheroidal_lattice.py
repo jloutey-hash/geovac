@@ -25,8 +25,9 @@ Root-finding in c^2 matches the two equations.
 Reference: Bates, Ledsham & Stewart, Phil. Trans. A 246, 215 (1953).
 """
 import numpy as np
-from scipy.linalg import eigh_tridiagonal
+from scipy.linalg import eigh_tridiagonal, eigh
 from scipy.optimize import brentq
+from scipy.special import roots_laguerre, eval_laguerre
 from typing import Dict, Optional, Tuple
 import time
 
@@ -72,6 +73,8 @@ class ProlateSpheroidalLattice:
         m: int = 0,
         n_angular: int = 0,
         n_radial: int = 0,
+        radial_method: str = 'fd',
+        n_basis: int = 20,
     ):
         self.R = R
         self.Z_A = Z_A
@@ -81,6 +84,8 @@ class ProlateSpheroidalLattice:
         self.m = m
         self.n_angular = n_angular
         self.n_radial = n_radial
+        self.radial_method = radial_method
+        self.n_basis = n_basis
 
         # Derived
         self._a = R * (Z_A + Z_B)
@@ -124,6 +129,81 @@ class ProlateSpheroidalLattice:
             )
         return sorted_desc[self.n_radial]
 
+    def _radial_top_eigenvalue_spectral(
+        self, c2: float, A: float
+    ) -> float:
+        """Spectral Laguerre basis solver for the radial xi-equation.
+
+        Replaces the FD grid with a Galerkin expansion in Laguerre
+        polynomials: phi_n(xi) = exp(-alpha*(xi-1)) * L_n(2*alpha*(xi-1)).
+
+        The Laguerre basis is orthogonal with weight exp(-x) on [0, inf),
+        so the overlap matrix S is diagonal.  Matrix elements of the
+        kinetic and potential operators are evaluated via Gauss-Laguerre
+        quadrature (exact for the polynomial content).
+
+        Returns the largest eigenvalue of the generalized eigenvalue
+        problem H c = lambda S c.  This should be 0 at the correct c^2.
+        """
+        N = self.n_basis
+        alpha = max(np.sqrt(max(c2, 0.01)), 0.5)
+        two_alpha = 2.0 * alpha
+
+        # Gauss-Laguerre quadrature: integrates int_0^inf f(x) e^{-x} dx
+        n_quad = max(3 * N, 60)
+        x_quad, w_quad = roots_laguerre(n_quad)
+
+        # Map to xi: x = 2*alpha*(xi - 1), xi = 1 + x/(2*alpha)
+        xi_q = 1.0 + x_quad / two_alpha
+        xi2m1 = xi_q**2 - 1.0  # p(xi) = xi^2 - 1
+
+        # Evaluate Laguerre polynomials at quadrature points: L[n, k]
+        L_vals = np.zeros((N, n_quad))
+        for n in range(N):
+            L_vals[n] = eval_laguerre(n, x_quad)
+
+        # Derivatives of Laguerre polynomials: L'_n(x) = L'_{n-1}(x) - L_{n-1}(x)
+        dL_vals = np.zeros((N, n_quad))
+        for n in range(1, N):
+            dL_vals[n] = dL_vals[n - 1] - L_vals[n - 1]
+
+        # Derivative of basis function (without exponential factor):
+        # d/dxi [e^{-alpha*s} L_n(x)] = e^{-alpha*s} * D_n(x)
+        # where D_n(x) = -alpha * L_n(x) + 2*alpha * L'_n(x)
+        D_vals = -alpha * L_vals + two_alpha * dL_vals
+
+        # Build matrices via quadrature (factor 1/(2*alpha) from dxi = dx/(2*alpha))
+        inv_2a = 1.0 / two_alpha
+
+        # Overlap: S_ij = (1/2a) sum_k w_k L_i(x_k) L_j(x_k) = delta_ij / (2a)
+        # Use quadrature for generality (handles m != 0 basis modifications)
+        wL = w_quad[np.newaxis, :] * L_vals  # (N, n_quad)
+        S = inv_2a * (wL @ L_vals.T)
+
+        # Kinetic (integration by parts):
+        # K_ij = -(1/2a) sum_k w_k (xi^2-1) D_i(x_k) D_j(x_k)
+        wD = w_quad[np.newaxis, :] * D_vals * xi2m1[np.newaxis, :]
+        K = -inv_2a * (wD @ D_vals.T)
+
+        # Potential: V_ij = (1/2a) sum_k w_k q(xi_k) L_i(x_k) L_j(x_k)
+        # where q(xi) = A + a*xi - c^2*xi^2
+        q = A + self._a * xi_q - c2 * xi_q**2
+        if self.m != 0:
+            q -= self.m**2 / xi2m1
+        wLq = w_quad[np.newaxis, :] * L_vals * q[np.newaxis, :]
+        V = inv_2a * (wLq @ L_vals.T)
+
+        H_mat = K + V
+
+        # Solve generalized eigenvalue problem H c = lambda S c
+        evals = eigh(H_mat, S, eigvals_only=True)
+        sorted_desc = np.sort(evals)[::-1]
+        if self.n_radial >= len(sorted_desc):
+            raise ValueError(
+                f"n_radial={self.n_radial} exceeds available eigenvalues"
+            )
+        return sorted_desc[self.n_radial]
+
     def _angular_separation_constant(self, c2: float) -> float:
         """Angular separation constant A for given c^2.
 
@@ -138,6 +218,8 @@ class ProlateSpheroidalLattice:
     def _residual(self, c2: float) -> float:
         """Residual for root-finding: should be 0 at the correct c^2."""
         A = self._angular_separation_constant(c2)
+        if self.radial_method == 'spectral':
+            return self._radial_top_eigenvalue_spectral(c2, A)
         return self._radial_top_eigenvalue(c2, A)
 
     def solve(self) -> Tuple[float, float, float]:

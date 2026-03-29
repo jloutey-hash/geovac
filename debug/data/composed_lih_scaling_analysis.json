@@ -1,0 +1,87 @@
+{
+  "scaling_sweep": [
+    {
+      "max_n": 1,
+      "M": 3,
+      "Q": 6,
+      "N_pauli": 10,
+      "N_pauli_h1": 7,
+      "N_pauli_eri": 3,
+      "ERI_density_total": 0.037037037037037035,
+      "n_pk_nonzero": 1,
+      "wall_time_s": 0.15441009984351695
+    },
+    {
+      "max_n": 2,
+      "M": 15,
+      "Q": 30,
+      "N_pauli": 334,
+      "N_pauli_h1": 35,
+      "N_pauli_eri": 299,
+      "ERI_density_total": 0.003851851851851852,
+      "n_pk_nonzero": 7,
+      "wall_time_s": 1.6143287001177669
+    },
+    {
+      "max_n": 3,
+      "M": 42,
+      "Q": 84,
+      "N_pauli": 7879,
+      "N_pauli_h1": 109,
+      "N_pauli_eri": 7770,
+      "ERI_density_total": 0.0014384438582689312,
+      "n_pk_nonzero": 26,
+      "wall_time_s": 17.40219619986601
+    }
+  ],
+  "power_law_fit": {
+    "alpha": 2.4966573097050353,
+    "a": 0.09887876016729968,
+    "R_squared": 0.9907970168978135,
+    "formula": "N_pauli = 0.10 * Q^2.50"
+  },
+  "pk_impact": {
+    "N_pauli_without_pk": 334,
+    "N_pauli_with_pk": 334,
+    "delta_pauli": 0,
+    "n_pk_nonzero_h1_entries": 7,
+    "max_n_core": 2,
+    "max_n_val": 2
+  },
+  "he_comparison": [
+    {
+      "max_n": 1,
+      "composed_Q": 6,
+      "composed_N_pauli": 10
+    },
+    {
+      "max_n": 2,
+      "composed_Q": 30,
+      "composed_N_pauli": 334,
+      "he_Q": 10,
+      "he_N_pauli": 120,
+      "ratio_composed_over_he": 2.783333333333333
+    },
+    {
+      "max_n": 3,
+      "composed_Q": 84,
+      "composed_N_pauli": 7879,
+      "he_Q": 28,
+      "he_N_pauli": 2659,
+      "ratio_composed_over_he": 2.963144039112448
+    }
+  ],
+  "gaussian_lih_sto3g": {
+    "Q": 12,
+    "N_pauli": 631
+  },
+  "reference_exponents": {
+    "geovac_he_single_geometry": 3.15,
+    "gaussian_molecular": 4.6
+  },
+  "cross_center_nuclear_attraction": {
+    "status": "skipped",
+    "reason": "Two-center integrals require prolate spheroidal auxiliary functions",
+    "estimated_missing_entries_max_n2": 50
+  }
+}

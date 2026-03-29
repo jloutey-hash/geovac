@@ -1,0 +1,596 @@
+"""
+Algebraic angular eigenvalue solver for Level 3 hyperspherical method.
+
+Replaces the FD-based solve_angular() with a spectral basis expansion.
+Matrix dimension ~ n_l * n_basis instead of ~ n_alpha * n_l (orders of
+magnitude smaller for typical parameters).
+
+Each l-channel uses basis functions (after Liouville substitution):
+    u_{l,k}(alpha) = N (sin alpha cos alpha)^{l+1} C_k^{l+1}(cos 2 alpha)
+
+where C_k^lambda is the Gegenbauer polynomial and k = 0,2,4,... (singlet)
+or k = 1,3,5,... (triplet).  For l=0 this reduces to sin(2*n*alpha) with
+n = k+1 via the Chebyshev U_k identity:
+    sin(alpha) cos(alpha) * U_k(cos 2alpha) = sin(2(k+1) alpha) / 2
+
+The free eigenvalues are mu_free(l,k) = 2(l+k+1)^2 - 2, from the SO(6)
+Casimir nu(nu+4)/2 with nu = 2(l+k).
+
+The centrifugal singularity l(l+1)/cos^2(alpha) that plagues the FD solver
+is handled analytically by the basis functions (they are eigenfunctions of
+the centrifugal operator).  This eliminates the l_max degradation in
+Paper 13 Table I.
+
+References:
+  - Paper 13, Section III (angular equation), Section XII (algebraic structure)
+  - Paper 12 (Neumann expansion precedent)
+"""
+
+import numpy as np
+from scipy.linalg import eigh
+from scipy.integrate import quad as scipy_quad
+from typing import Tuple, Optional
+from math import sqrt, pi
+
+from geovac.hyperspherical_angular import gaunt_integral, _precompute_gaunt
+
+
+def _gegenbauer(k: int, lam: float, x: np.ndarray) -> np.ndarray:
+    """Evaluate Gegenbauer polynomial C_k^lambda(x) via stable recurrence.
+
+    C_0^lam(x) = 1
+    C_1^lam(x) = 2*lam*x
+    C_{n+1}^lam(x) = (2(n+lam)x C_n - (n+2lam-1) C_{n-1}) / (n+1)
+
+    Parameters
+    ----------
+    k : int
+        Polynomial degree.
+    lam : float
+        Gegenbauer parameter (lambda = l+1 for channel l).
+    x : ndarray
+        Evaluation points.
+
+    Returns
+    -------
+    ndarray
+        C_k^lambda(x) at each point.
+    """
+    if k == 0:
+        return np.ones_like(x, dtype=float)
+    c_prev = np.ones_like(x, dtype=float)
+    c_curr = 2.0 * lam * x
+    if k == 1:
+        return c_curr
+    for n in range(1, k):
+        c_next = (2.0 * (n + lam) * x * c_curr
+                  - (n + 2 * lam - 1) * c_prev) / (n + 1)
+        c_prev = c_curr
+        c_curr = c_next
+    return c_curr
+
+
+class AlgebraicAngularSolver:
+    """Spectral Gegenbauer solver for the Level 3 angular eigenvalue problem.
+
+    Replaces the FD-based solve_angular() with algebraic matrix elements
+    in the free SO(6) eigenbasis.  Matrix dimension ~ n_l * n_basis instead
+    of ~ n_alpha * n_l.
+
+    For channel l, the basis functions (after Liouville substitution) are:
+        u_{l,k}(alpha) = N_{l,k} (sin alpha cos alpha)^{l+1} C_k^{l+1}(cos 2 alpha)
+    where k = 0, 2, 4, ... (singlet) or 1, 3, 5, ... (triplet).
+
+    The free eigenvalues are mu_free(l,k) = 2(l+k+1)^2 - 2, corresponding
+    to SO(6) Casimir nu(nu+4)/2 with nu = 2(l+k).
+
+    Parameters
+    ----------
+    Z : float
+        Nuclear charge.
+    n_basis : int
+        Number of basis functions per l-channel.
+    l_max : int
+        Maximum partial wave (l1=l2=l for L=0 singlet).
+    symmetry : str
+        'singlet' selects even-k modes (exchange symmetric),
+        'triplet' selects odd-k modes (exchange antisymmetric).
+    n_quad : int
+        Number of Gauss-Legendre quadrature points per sub-interval.
+        The integration domain [0, pi/2] is split at pi/4 (where
+        max(cos, sin) has a kink), so total quadrature points = 2 * n_quad.
+    """
+
+    def __init__(
+        self,
+        Z: float,
+        n_basis: int = 10,
+        l_max: int = 0,
+        symmetry: str = 'singlet',
+        n_quad: int = 100,
+    ) -> None:
+        self.Z = Z
+        self.n_basis = n_basis
+        self.l_max = l_max
+        self.symmetry = symmetry
+        self.n_quad = n_quad
+        self.n_l = l_max + 1
+        self._total_dim = self.n_l * n_basis
+
+        # Backward-compatible basis_indices for l=0 channel
+        if symmetry == 'singlet':
+            self.basis_indices = np.array([2 * j + 1 for j in range(n_basis)])
+        elif symmetry == 'triplet':
+            self.basis_indices = np.array([2 * j + 2 for j in range(n_basis)])
+        else:
+            raise ValueError(f"Unknown symmetry: {symmetry}")
+
+        # SO(6) Casimir eigenvalues for l=0 channel (backward compat)
+        self._casimir_eigenvalues = (
+            2.0 * self.basis_indices.astype(float) ** 2 - 2.0
+        )
+
+        self._setup_quadrature(n_quad)
+        self._build_channels()
+        self._precompute_coupling()
+
+    def _setup_quadrature(self, n_quad: int) -> None:
+        """Setup Gauss-Legendre quadrature on [0, pi/4] and [pi/4, pi/2].
+
+        Splitting at pi/4 handles the kink in max(cos, sin) and clusters
+        quadrature nodes near the boundary singularities (1/sin near 0,
+        1/cos near pi/2), improving accuracy.
+        """
+        from numpy.polynomial.legendre import leggauss
+
+        nodes, weights = leggauss(n_quad)
+
+        # Map to [0, pi/4]
+        a1, b1 = 0.0, np.pi / 4.0
+        scale1 = (b1 - a1) / 2.0
+        alpha1 = scale1 * nodes + (b1 + a1) / 2.0
+        w1 = weights * scale1
+
+        # Map to [pi/4, pi/2]
+        a2, b2 = np.pi / 4.0, np.pi / 2.0
+        scale2 = (b2 - a2) / 2.0
+        alpha2 = scale2 * nodes + (b2 + a2) / 2.0
+        w2 = weights * scale2
+
+        # Concatenate
+        self._alpha = np.concatenate([alpha1, alpha2])
+        self._weights = np.concatenate([w1, w2])
+
+        # Precompute trig values at quadrature points
+        self._sin_a = np.sin(self._alpha)
+        self._cos_a = np.cos(self._alpha)
+
+    def _build_channels(self) -> None:
+        """Build orthonormalized basis functions for each l-channel.
+
+        Channel l uses basis functions:
+            u_{l,k}(alpha) = N (sin a cos a)^{l+1} C_k^{l+1}(cos 2a)
+        with k = 0,2,4,... (singlet) or 1,3,5,... (triplet).
+
+        The envelope (sin a cos a)^{l+1} absorbs the centrifugal singularity
+        l(l+1)/cos^2(a), ensuring all integrands are smooth.
+        """
+        self._channel_phi = []
+        self._channel_casimir = []
+
+        cos_2a = np.cos(2.0 * self._alpha)
+        sin_cos = self._sin_a * self._cos_a
+
+        for l in range(self.n_l):
+            # Gegenbauer k-indices: even for singlet, odd for triplet
+            if self.symmetry == 'singlet':
+                k_indices = np.array([2 * j for j in range(self.n_basis)])
+            else:
+                k_indices = np.array([2 * j + 1 for j in range(self.n_basis)])
+
+            # Free eigenvalues: mu = 2(l+k+1)^2 - 2
+            casimir = 2.0 * (l + k_indices + 1.0) ** 2 - 2.0
+
+            # Evaluate and normalize basis functions
+            envelope = sin_cos ** (l + 1)
+            lam = float(l + 1)
+
+            phi = np.zeros((self.n_basis, len(self._alpha)))
+            for j, kv in enumerate(k_indices):
+                raw = envelope * _gegenbauer(kv, lam, cos_2a)
+                norm_sq = np.dot(self._weights, raw * raw)
+                phi[j] = raw / np.sqrt(norm_sq)
+
+            self._channel_phi.append(phi)
+            self._channel_casimir.append(casimir)
+
+        # Store l=0 basis for backward compatibility
+        self._phi = self._channel_phi[0]
+
+    def _precompute_coupling(self) -> None:
+        """Build R-independent nuclear and V_ee coupling matrices.
+
+        Nuclear coupling is diagonal in l (isotropic potential).
+        V_ee coupling mixes channels l <-> l' via Gaunt integrals:
+
+            W_{ll'}(alpha) = sqrt((2l+1)(2l'+1))/2
+                             * sum_k G(l,k,l') * (min/max)^k / max
+
+        All integrands are smooth because the basis functions absorb
+        the boundary singularities.
+        """
+        dim = self._total_dim
+        nb = self.n_basis
+        nuclear = np.zeros((dim, dim))
+        vee = np.zeros((dim, dim))
+
+        V_nuc_alpha = -self.Z * (1.0 / self._cos_a + 1.0 / self._sin_a)
+        min_sc = np.minimum(self._sin_a, self._cos_a)
+        max_sc = np.maximum(self._sin_a, self._cos_a)
+
+        G = _precompute_gaunt(self.l_max)
+
+        for l in range(self.n_l):
+            phi_l = self._channel_phi[l]
+            i0, i1 = l * nb, (l + 1) * nb
+
+            # Nuclear: diagonal in l (potential is isotropic in theta_12)
+            weighted_nuc = phi_l * (self._weights * V_nuc_alpha)[np.newaxis, :]
+            nuclear[i0:i1, i0:i1] = weighted_nuc @ phi_l.T
+
+            # V_ee: l <-> lp coupling via Gaunt integrals
+            for lp in range(l, self.n_l):
+                phi_lp = self._channel_phi[lp]
+                j0, j1 = lp * nb, (lp + 1) * nb
+
+                # Build W_{ll'}(alpha) = norm * sum_k G(l,k,l') * f_k/max
+                W = np.zeros_like(self._alpha)
+                for k in range(abs(l - lp), l + lp + 1):
+                    if k > 2 * self.l_max:
+                        continue
+                    gv = G[l, k, lp]
+                    if abs(gv) < 1e-15:
+                        continue
+                    f_k = (min_sc / max_sc) ** k
+                    W += gv * f_k / max_sc
+
+                norm_ll = sqrt((2 * l + 1) * (2 * lp + 1)) / 2.0
+                W *= norm_ll
+
+                weighted_vee = phi_l * (self._weights * W)[np.newaxis, :]
+                block = weighted_vee @ phi_lp.T
+
+                vee[i0:i1, j0:j1] = block
+                if l != lp:
+                    vee[j0:j1, i0:i1] = block.T
+
+        self._nuclear_full = nuclear
+        self._vee_full = vee
+        self._coupling_full = nuclear + vee
+
+        # Backward-compatible l=0 block views
+        self._nuclear_matrix = nuclear[:nb, :nb].copy()
+        self._vee_matrix = vee[:nb, :nb].copy()
+        self._coupling_matrix = (nuclear[:nb, :nb] + vee[:nb, :nb]).copy()
+
+    def solve_with_dboc(
+        self, R: float, n_channels: int = 1
+    ) -> Tuple[np.ndarray, np.ndarray, float]:
+        """Solve angular problem and compute DBOC for the ground channel.
+
+        The DBOC (diagonal Born-Oppenheimer correction) accounts for the
+        kinetic energy cost of the angular eigenfunction changing shape
+        as R varies.  Uses the Hellmann-Feynman theorem:
+
+            P_{mu,0}(R) = <Phi_mu|V_coupling|Phi_0> / (mu_0 - mu_mu)
+
+        where V_coupling = dH/dR is the precomputed R-independent coupling
+        matrix.  The DBOC is then:
+
+            DBOC(R) = (1/2) sum_{mu != 0} |P_{mu,0}(R)|^2
+
+        This is a positive (repulsive) correction to V_eff(R), raising the
+        energy toward the exact value.
+
+        Parameters
+        ----------
+        R : float
+            Hyperradius (bohr).
+        n_channels : int
+            Number of eigenvalues/eigenvectors to return.
+
+        Returns
+        -------
+        eigenvalues : ndarray of shape (n_channels,)
+            Angular eigenvalues mu(R), sorted ascending.
+        eigenvectors : ndarray of shape (n_channels, total_dim)
+            Expansion coefficients in the multichannel basis.
+        dboc : float
+            Diagonal Born-Oppenheimer correction at this R (Hartree).
+        """
+        casimir_all = np.concatenate(self._channel_casimir)
+        H = np.diag(casimir_all) + R * self._coupling_full
+        evals, evecs = eigh(H)
+
+        # V_coupling applied to ground state eigenvector
+        phi_0 = evecs[:, 0]
+        V_phi_0 = self._coupling_full @ phi_0
+
+        dboc = 0.0
+        for mu in range(1, len(evals)):
+            numerator = evecs[:, mu] @ V_phi_0
+            denominator = evals[mu] - evals[0]
+            if abs(denominator) > 1e-12:
+                P_mu0 = numerator / denominator
+                dboc += P_mu0 ** 2
+
+        dboc *= 0.5
+
+        return evals[:n_channels], evecs[:, :n_channels].T, dboc
+
+    def solve(
+        self, R: float, n_channels: int = 1
+    ) -> Tuple[np.ndarray, np.ndarray]:
+        """Solve the angular eigenvalue problem at hyperradius R.
+
+        H_ang(R) = diag(casimir_all) + R * V_coupling
+
+        The coupling matrix V_coupling is precomputed once (R-independent);
+        only the R scaling and small-matrix diagonalization happen at each R.
+
+        Parameters
+        ----------
+        R : float
+            Hyperradius (bohr).
+        n_channels : int
+            Number of eigenvalues/eigenvectors to return.
+
+        Returns
+        -------
+        eigenvalues : ndarray of shape (n_channels,)
+            Angular eigenvalues mu(R), sorted ascending.
+        eigenvectors : ndarray of shape (n_channels, total_dim)
+            Expansion coefficients in the multichannel basis.
+        """
+        casimir_all = np.concatenate(self._channel_casimir)
+        H = np.diag(casimir_all) + R * self._coupling_full
+        evals, evecs = eigh(H)
+        return evals[:n_channels], evecs[:, :n_channels].T
+
+    def coupling_integral_quad(self, ni: int, nj: int) -> Tuple[float, float]:
+        """Compute coupling matrix element via scipy adaptive quadrature.
+
+        For verification against the GL quadrature.  Uses the l=0
+        sin(2*n*alpha) form directly.
+
+        Parameters
+        ----------
+        ni, nj : int
+            Basis function indices (the n in sin(2*n*alpha)).
+
+        Returns
+        -------
+        nuc_val : float
+            Nuclear coupling integral.
+        vee_val : float
+            V_ee monopole coupling integral.
+        """
+        Z = self.Z
+        norm = 4.0 / np.pi
+
+        def nuc_integrand(alpha: float) -> float:
+            s_i = np.sin(2 * ni * alpha)
+            s_j = np.sin(2 * nj * alpha)
+            return norm * s_i * s_j * (-Z) * (
+                1.0 / np.cos(alpha) + 1.0 / np.sin(alpha)
+            )
+
+        def vee_integrand_lo(alpha: float) -> float:
+            """V_ee on [0, pi/4] where max = cos."""
+            s_i = np.sin(2 * ni * alpha)
+            s_j = np.sin(2 * nj * alpha)
+            return norm * s_i * s_j / np.cos(alpha)
+
+        def vee_integrand_hi(alpha: float) -> float:
+            """V_ee on [pi/4, pi/2] where max = sin."""
+            s_i = np.sin(2 * ni * alpha)
+            s_j = np.sin(2 * nj * alpha)
+            return norm * s_i * s_j / np.sin(alpha)
+
+        nuc_val, nuc_err = scipy_quad(
+            nuc_integrand, 0, np.pi / 2,
+            limit=400, points=[np.pi / 4],
+        )
+        vee_lo, _ = scipy_quad(vee_integrand_lo, 0, np.pi / 4, limit=200)
+        vee_hi, _ = scipy_quad(vee_integrand_hi, np.pi / 4, np.pi / 2, limit=200)
+        vee_val = vee_lo + vee_hi
+
+        return nuc_val, vee_val
+
+    @property
+    def nuclear_matrix(self) -> np.ndarray:
+        """Nuclear coupling matrix for l=0 channel (backward compat)."""
+        return self._nuclear_matrix.copy()
+
+    @property
+    def vee_matrix(self) -> np.ndarray:
+        """V_ee coupling matrix for l=0 channel (backward compat)."""
+        return self._vee_matrix.copy()
+
+    @property
+    def coupling_matrix(self) -> np.ndarray:
+        """Total coupling matrix for l=0 channel (backward compat)."""
+        return self._coupling_matrix.copy()
+
+    @property
+    def casimir_eigenvalues(self) -> np.ndarray:
+        """SO(6) Casimir eigenvalues for l=0 channel (backward compat)."""
+        return self._casimir_eigenvalues.copy()
+
+    @property
+    def nuclear_matrix_full(self) -> np.ndarray:
+        """Full nuclear coupling matrix (all channels)."""
+        return self._nuclear_full.copy()
+
+    @property
+    def vee_matrix_full(self) -> np.ndarray:
+        """Full V_ee coupling matrix (all channels)."""
+        return self._vee_full.copy()
+
+    @property
+    def coupling_matrix_full(self) -> np.ndarray:
+        """Full coupling matrix (all channels)."""
+        return self._coupling_full.copy()
+
+
+def solve_hyperspherical_algebraic(
+    Z: float = 2.0,
+    n_electrons: int = 2,
+    n_basis: int = 10,
+    l_max: int = 0,
+    n_R: int = 200,
+    R_min: float = 0.1,
+    R_max: float = 30.0,
+    N_R_radial: int = 2000,
+    include_dboc: bool = False,
+    verbose: bool = True,
+) -> dict:
+    """Full Level 3 solver using algebraic angular matrix elements.
+
+    Drop-in replacement for the existing hyperspherical solver,
+    but using the AlgebraicAngularSolver for the angular eigenvalues.
+
+    Parameters
+    ----------
+    Z : float
+        Nuclear charge.
+    n_electrons : int
+        Number of electrons (must be 2).
+    n_basis : int
+        Number of Gegenbauer basis functions for the angular solver.
+    l_max : int
+        Maximum partial wave.
+    n_R : int
+        Number of R points for computing mu(R).
+    R_min, R_max : float
+        Hyperradial grid boundaries.
+    N_R_radial : int
+        Number of grid points for the radial solve.
+    include_dboc : bool
+        If True, include the diagonal Born-Oppenheimer correction (DBOC)
+        in the effective potential.  The DBOC is a positive (repulsive)
+        correction that accounts for the kinetic energy cost of the angular
+        eigenfunction changing shape as R varies.
+    verbose : bool
+        Print progress information.
+
+    Returns
+    -------
+    result : dict
+        Keys: 'energy', 'R_grid_angular', 'mu_curve', 'V_eff',
+        'R_grid_radial', 'wavefunction', 'solver', 'Z', 'n_basis', 'l_max'.
+        If include_dboc: also 'dboc_curve', 'energy_no_dboc'.
+    """
+    import time
+    from scipy.interpolate import CubicSpline
+    from geovac.hyperspherical_adiabatic import effective_potential
+    from geovac.hyperspherical_radial import solve_radial
+
+    if n_electrons != 2:
+        raise ValueError("Only two-electron systems are supported.")
+
+    t0 = time.time()
+
+    solver = AlgebraicAngularSolver(Z, n_basis, l_max)
+
+    # R grid: denser near origin where mu(R) changes rapidly
+    R_grid = np.concatenate([
+        np.linspace(R_min, 1.0, n_R // 3),
+        np.linspace(1.0, 5.0, n_R // 3),
+        np.linspace(5.0, R_max, n_R // 3 + 1),
+    ])
+    R_grid = np.unique(R_grid)
+
+    dboc_mode = "with DBOC" if include_dboc else "adiabatic"
+    if verbose:
+        print(f"Algebraic angular solver: Z={Z}, n_basis={n_basis}, "
+              f"l_max={l_max} ({dboc_mode})")
+        print(f"Computing mu(R) on {len(R_grid)} R points...")
+
+    # Solve angular problem at each R
+    mu = np.zeros(len(R_grid))
+    dboc_values = np.zeros(len(R_grid)) if include_dboc else None
+
+    for i, R in enumerate(R_grid):
+        if include_dboc:
+            evals, _, dboc = solver.solve_with_dboc(R, n_channels=1)
+            mu[i] = evals[0]
+            dboc_values[i] = dboc
+        else:
+            evals, _ = solver.solve(R, n_channels=1)
+            mu[i] = evals[0]
+
+    t1 = time.time()
+    if verbose:
+        print(f"  Angular solve: {t1 - t0:.2f}s")
+        V_eff_last = effective_potential(R_grid[-1:], mu[-1:])[0]
+        print(
+            f"  V_eff(R={R_grid[-1]:.1f}) = {V_eff_last:.4f} Ha "
+            f"(should approach {-Z**2 / 2:.1f})"
+        )
+        if include_dboc:
+            print(f"  DBOC peak: {np.max(dboc_values):.6f} Ha")
+
+    # Build V_eff and solve hyperradial equation
+    V_eff = effective_potential(R_grid, mu)
+    if include_dboc:
+        # DBOC is added directly to V_eff (both in Hartree).
+        # P_{mu0} = <Phi_mu|dPhi_0/dR> has units 1/bohr,
+        # so |P|^2 has units 1/bohr^2 = Hartree in atomic units.
+        V_eff_uncorrected = V_eff.copy()
+        V_eff = V_eff + dboc_values
+    V_eff_spline = CubicSpline(R_grid, V_eff, extrapolate=True)
+
+    if verbose:
+        print(f"Solving hyperradial equation (N_R={N_R_radial})...")
+
+    E, F, R_grid_rad = solve_radial(
+        V_eff_spline, R_min, R_max, N_R_radial, n_states=1
+    )
+
+    t2 = time.time()
+    E_exact = -2.903724
+    if verbose:
+        print(f"  Radial solve: {t2 - t1:.2f}s")
+        print(f"\n  Ground state energy: {E[0]:.6f} Ha")
+        print(f"  Exact He:            {E_exact:.6f} Ha")
+        err = abs(E[0] - E_exact) / abs(E_exact) * 100
+        print(f"  Error:               {err:.4f}%")
+        print(f"  Total time:          {t2 - t0:.2f}s")
+
+    result = {
+        'energy': E[0],
+        'R_grid_angular': R_grid,
+        'mu_curve': mu,
+        'V_eff': V_eff,
+        'R_grid_radial': R_grid_rad,
+        'wavefunction': F[0],
+        'solver': solver,
+        'Z': Z,
+        'n_basis': n_basis,
+        'l_max': l_max,
+        'include_dboc': include_dboc,
+    }
+
+    if include_dboc:
+        # Also solve without DBOC to measure the correction
+        V_eff_spline_nocorr = CubicSpline(
+            R_grid, V_eff_uncorrected, extrapolate=True
+        )
+        E_no, _, _ = solve_radial(
+            V_eff_spline_nocorr, R_min, R_max, N_R_radial, n_states=1
+        )
+        result['dboc_curve'] = dboc_values
+        result['energy_no_dboc'] = E_no[0]
+
+    return result

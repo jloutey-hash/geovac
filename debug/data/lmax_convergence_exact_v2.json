@@ -1,0 +1,83 @@
+[
+  {
+    "l_max": 0,
+    "n_channels": 3,
+    "energy": -2.8716361696491175,
+    "error_pct": 1.1050707017872923,
+    "wall_time_s": 0.58,
+    "total_dim": 15,
+    "status": "ok"
+  },
+  {
+    "l_max": 1,
+    "n_channels": 3,
+    "energy": -2.894686693766938,
+    "error_pct": 0.31124452804984204,
+    "wall_time_s": 0.76,
+    "total_dim": 30,
+    "status": "ok"
+  },
+  {
+    "l_max": 2,
+    "n_channels": 3,
+    "energy": -2.896789665512759,
+    "error_pct": 0.23882127181800686,
+    "wall_time_s": 0.97,
+    "total_dim": 45,
+    "status": "ok"
+  },
+  {
+    "l_max": 3,
+    "n_channels": 3,
+    "energy": -2.8973286066254356,
+    "error_pct": 0.2202609319680796,
+    "wall_time_s": 1.41,
+    "total_dim": 60,
+    "status": "ok"
+  },
+  {
+    "l_max": 4,
+    "n_channels": 3,
+    "energy": -2.8975218842132437,
+    "error_pct": 0.21360473590005374,
+    "wall_time_s": 1.6,
+    "total_dim": 75,
+    "status": "ok"
+  },
+  {
+    "l_max": 5,
+    "n_channels": 3,
+    "energy": -2.897607322764739,
+    "error_pct": 0.21066235775382883,
+    "wall_time_s": 2.01,
+    "total_dim": 90,
+    "status": "ok"
+  },
+  {
+    "l_max": 3,
+    "n_channels": 5,
+    "energy": -2.8973459006715103,
+    "error_pct": 0.21966535043796814,
+    "wall_time_s": 3.0,
+    "total_dim": 60,
+    "status": "ok"
+  },
+  {
+    "l_max": 4,
+    "n_channels": 5,
+    "energy": -2.8975388223243357,
+    "error_pct": 0.21302141224764032,
+    "wall_time_s": 4.12,
+    "total_dim": 75,
+    "status": "ok"
+  },
+  {
+    "l_max": 5,
+    "n_channels": 5,
+    "energy": -2.897624130013969,
+    "error_pct": 0.21008354079162578,
+    "wall_time_s": 5.6,
+    "total_dim": 90,
+    "status": "ok"
+  }
+]

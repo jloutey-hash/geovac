@@ -258,6 +258,53 @@ class AbInitioPK:
         result[safe] = self._A * np.exp(-self._B * r[safe]**2) / r[safe]**2
         return result
 
+    def algebraic_projector(self, atom: str = 'A') -> dict:
+        """
+        Return algebraic PK projector data for the Level 4 solver.
+
+        The algebraic projector replaces the Gaussian barrier with the
+        exact Phillips-Kleinman rank-1 projector:
+
+            V_PK = (E_val - E_core/N_core) * N_core * |core_l0⟩⟨core_l0|
+
+        where |core_l0⟩ is the l=0 slice of the Level 3 core eigenvector,
+        mapped into the Level 4 (l1=0, l2=0) channel via the atomic-limit
+        approximation (>98% fidelity for 1s² cores).
+
+        Parameters
+        ----------
+        atom : str
+            Which nucleus the core belongs to ('A' or 'B').
+
+        Returns
+        -------
+        dict
+            Algebraic projector specification for the Level 4 solver.
+
+        Raises
+        ------
+        RuntimeError
+            If the core eigenvector was not persisted during CoreScreening.solve().
+        """
+        if self._core.core_l0_wavefunction is None:
+            raise RuntimeError(
+                "Core eigenvector not available. Ensure CoreScreening.solve() "
+                "was called (requires geovac >= v2.0.6)."
+            )
+
+        energy_shift = abs(self._E_core_per_electron - self._E_val_est) * self._n_core
+
+        return {
+            'mode': 'algebraic',
+            'core_l0_wavefunction': self._core.core_l0_wavefunction.copy(),
+            'core_n_alpha': self._core.core_n_alpha,
+            'core_h_alpha': self._core.core_h_alpha,
+            'energy_shift': energy_shift,
+            'E_core_per_electron': self._E_core_per_electron,
+            'E_val': self._E_val_est,
+            'atom': atom,
+        }
+
     def pk_dict(self, atom: str = 'A') -> dict:
         """
         Return PK parameters as a dict compatible with the Level 4 solver.

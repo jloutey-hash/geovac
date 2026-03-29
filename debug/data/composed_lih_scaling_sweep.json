@@ -1,0 +1,56 @@
+{
+  "sweep_data": [
+    {
+      "max_n": 1,
+      "M": 3,
+      "Q": 6,
+      "N_pauli": 10,
+      "N_pauli_h1": 7,
+      "N_pauli_eri": 3,
+      "ERI_density_total": 0.037037037037037035,
+      "n_pk_nonzero": 1,
+      "wall_time_s": 0.2910806001164019
+    },
+    {
+      "max_n": 2,
+      "M": 15,
+      "Q": 30,
+      "N_pauli": 334,
+      "N_pauli_h1": 35,
+      "N_pauli_eri": 299,
+      "ERI_density_total": 0.003851851851851852,
+      "n_pk_nonzero": 7,
+      "wall_time_s": 3.4027239000424743
+    }
+  ],
+  "fit": {
+    "alpha": 2.179988350514463,
+    "a": 0.2012052642474499,
+    "R_squared": 1.0,
+    "formula": "N_pauli = 0.20 * Q^2.18"
+  },
+  "he_single_geometry": {
+    "2": {
+      "Q": 10,
+      "N_pauli": 120
+    },
+    "3": {
+      "Q": 28,
+      "N_pauli": 2659
+    },
+    "4": {
+      "Q": 60,
+      "N_pauli": 31039
+    },
+    "5": {
+      "Q": 110,
+      "N_pauli": 227338
+    }
+  },
+  "he_exponent": 3.15,
+  "gaussian_molecular_exponent": 4.6,
+  "gaussian_lih_sto3g": {
+    "Q": 12,
+    "N_pauli": 631
+  }
+}

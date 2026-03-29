@@ -1,0 +1,1112 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography,floatfix]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+
+%% ========================================================================
+\title{Composed Natural Geometries for Core-Valence Diatomics:\\
+LiH and BeH$^+$ from Discrete Graph Topology}
+\thanks{Paper 17 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{March 21, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+\begin{document}
+\begin{abstract}
+The natural geometry hierarchy assigns each separable quantum system
+a coordinate system where Coulomb singularities become boundary
+conditions:\ $S^3$ for atoms (Paper~7), prolate spheroids for
+H$_2^+$ (Paper~11), hyperspherical for He (Paper~13), molecule-frame
+hyperspherical for H$_2$ (Paper~15).
+Systems with core electrons resist a single natural geometry because
+core and valence electrons occupy different length scales.
+We introduce \emph{composed natural geometries}---fiber bundles where
+each electron group inhabits its own natural coordinate system,
+connected by screening functions and ab initio Phillips--Kleinman
+pseudopotentials derived entirely from the core wavefunction.
+For LiH ($Z_A=3$, $Z_B=1$, 4~electrons): the Li$^+$~$1s^2$ core is
+solved via Level~3 hyperspherical (Paper~13), yielding $Z_{\rm eff}(r)$
+and pseudopotential parameters; the two valence electrons are solved via
+Level~4 molecule-frame hyperspherical (Paper~15) with $Z_{\rm eff}$
+injection; the potential energy surface is scanned via a $\rho$-collapse
+adiabatic method that reduces per-$R$-point cost to seconds.
+Results: $R_{\rm eq} = 3.21$~bohr (6.4\% error vs.\ experiment 3.015,
+improved from 17\% in LCAO),
+$\omega_e = 1471$~cm$^{-1}$ (4.6\% error vs.\ 1406),
+with zero experimental molecular data in the pseudopotential.
+Total wall time is ${\sim}4$~minutes per molecule on commodity hardware.
+The same formula transfers to BeH$^+$ ($Z_A=4$) with no per-molecule
+tuning.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+%% I. INTRODUCTION
+%% ========================================================================
+\section{Introduction}
+\label{sec:intro}
+
+The Geometric Vacuum program constructs discrete lattice
+Hamiltonians by identifying the \emph{natural geometry} of each
+quantum system and discretizing it as a sparse graph~\cite{paper0,paper1,paper7}.
+Four levels of this hierarchy have been established:
+
+\begin{description}
+\item[Level~1] \emph{One-center, one-electron} (H).
+  Fock's stereographic projection~\cite{fock1935} maps the hydrogen atom
+  to the unit $S^3$, where the $1/r$ potential becomes the conformal
+  factor.  The discrete graph Laplacian reproduces hydrogenic energies
+  to $< 0.1\%$ (Paper~7~\cite{paper7}).
+
+\item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).
+  Prolate spheroidal coordinates separate the two-center Coulomb problem
+  exactly.  Paper~11~\cite{paper11} achieves 0.70\% error with a sparse
+  lattice and zero free parameters.
+
+\item[Level~3] \emph{One-center, two-electron} (He).
+  Hyperspherical coordinates $(R_e, \alpha, \hat{r}_1, \hat{r}_2)$
+  resolve the $e$--$e$ cusp as a boundary condition at $\alpha=\pi/4$,
+  $\theta_{12}=0$.  Paper~13~\cite{paper13} achieves 0.05\% error for
+  He with a single adiabatic channel.
+
+\item[Level~4] \emph{Two-center, two-electron} (H$_2$).
+  Molecule-frame hyperspherical coordinates
+  $(R_e, \alpha, \theta_1, \theta_2, \Phi)$ parameterized by
+  $\rho = R/(2R_e)$ resolve all five Coulomb singularities simultaneously.
+  Paper~15~\cite{paper15} recovers 94.1\% of $D_e$ for H$_2$ and
+  93.1\% for HeH$^+$ with $\sigma{+}\pi$ channels.
+\end{description}
+
+Level~4 handles H$_2$ and HeH$^+$ but these are \emph{core-free}
+systems: all electrons participate in bonding.  LiH has 2~core
+electrons on Li and 2~valence electrons, occupying different length
+scales.  The LCAO approach~\cite{fci_m} gives $R_{\rm eq} = 2.5$~bohr
+(17\% error vs.\ experiment 3.015) because the graph Laplacian's
+intra-atom kinetic energy is $R$-independent---the atomic lattice
+structure does not change as atoms approach~\cite{fci_m}.
+Paper~15 identified this as the ``locked-core boundary'' problem:
+a single Level~4 geometry for all four electrons would require $S^{11}$
+with ${\sim}10^6$ angular basis functions, computationally infeasible.
+
+We solve this by \emph{composing} geometries from different levels.
+Each electron group gets its own natural coordinate system.
+The inter-group coupling is handled by three typed edges:
+(i)~screening via $Z_{\rm eff}(r)$ from the core density,
+(ii)~Pauli exclusion via a Phillips--Kleinman~\cite{pk1959}
+pseudopotential, and
+(iii)~nuclear repulsion via bare charges.
+This is the first realization of a \emph{category} of natural
+geometries with morphisms preserving lattice structure.
+
+The key results: LiH $R_{\rm eq} = 3.21$~bohr (6.4\% error),
+$\omega_e = 1471$~cm$^{-1}$ (4.6\% error), with zero experimental
+molecular data.  The same code, with only $(Z_A, Z_B, M_A, M_B)$
+changed, produces a bound BeH$^+$ with physical spectroscopic
+constants.  We do not claim production accuracy; this is a proof of
+concept for the composed geometry architecture.
+
+
+%% ========================================================================
+%% II. THEORY
+%% ========================================================================
+\section{Theory: Composed Natural Geometries}
+\label{sec:theory}
+
+\subsection{The composition principle}
+\label{sec:composition}
+
+The composed graph for a core-valence diatomic is
+\begin{equation}
+  G_{\rm total} = G_{\rm nuc} \ltimes G_{\rm core}(R)
+    \ltimes G_{\rm val}(R, \text{core state})\,,
+  \label{eq:Gtotal}
+\end{equation}
+where $\ltimes$ denotes the semi-direct product (fiber bundle).
+Each layer inhabits a different natural geometry:
+
+\begin{description}
+\item[Layer~0 (nuclear):]
+  Morse $\text{SU}(2) \times \text{SO}(3)$ from Paper~10~\cite{paper10}.
+  States $\ket{v, J, M_J}$.
+
+\item[Layer~1 (core):]
+  Level~3 hyperspherical on the heavy atom at charge $Z_A$.
+  States parameterized by $(R_e^{\rm core}, \alpha_{\rm core})$.
+
+\item[Layer~2 (valence):]
+  Level~4 molecule-frame hyperspherical.
+  States parameterized by
+  $(R_e^{\rm val}, \alpha, \theta_1, \theta_2, \Phi; \rho)$.
+\end{description}
+
+Backward compatibility between levels fails for a fundamental reason:
+Level~4 coordinates require two electrons (hyperradius
+$R_e = \sqrt{r_1^2 + r_2^2}$, hyperangle $\alpha = \arctan(r_2/r_1)$),
+which are undefined for a single electron.  Level~4 cannot subsume
+Level~1.  Similarly, Level~3 requires two electrons and cannot
+represent one.  The hierarchy is a two-dimensional grid
+(centers~$\times$~electrons), not a linear tower.  Composition is
+necessary because no single coordinate system handles all electron
+groups simultaneously.
+
+The total energy at internuclear distance $R$ is
+\begin{equation}
+  E_{\rm total}(R) = E_{\rm core} + V_{\rm cross}(R)
+    + E_{\rm elec}(R) + V_{NN}(R)\,,
+  \label{eq:Etotal}
+\end{equation}
+where $E_{\rm core}$ is the $R$-independent core energy from the
+Level~3 solve, $V_{\rm cross}(R)$ is the core--$B$ nuclear attraction,
+$E_{\rm elec}(R)$ is the valence electronic energy from the Level~4
+solve, and $V_{NN}(R) = Z_A Z_B / R$ is the bare nuclear repulsion.
+
+The core-to-other-nucleus attraction for a $1s^2$ core is computed
+analytically:
+\begin{equation}
+  V_{\rm cross}(R) = -n_{\rm core}\, Z_B\,
+    \Braket{1s_{Z_A} | \frac{1}{r_B} | 1s_{Z_A}}\,,
+  \label{eq:Vcross}
+\end{equation}
+where the expectation value evaluates to
+\begin{equation}
+  \Braket{1s_Z | \frac{1}{r_B} | 1s_Z}
+    = \frac{1}{R}\bigl[1 - (1 + ZR)\,e^{-2ZR}\bigr]\,.
+  \label{eq:1s_expectation}
+\end{equation}
+This uses a hydrogenic $1s$ approximation for the core orbital; a more
+accurate treatment would integrate $Z_B/r_B$ against the numerically
+computed core density from the Level~3 solve.  For Li$^+$ ($Z=3$),
+the hydrogenic approximation is accurate to ${\sim}1\%$ because the
+two-electron core is well-described by an effective nuclear charge
+$Z_{\rm eff}^{\rm core} \approx 2.7$.
+
+
+\subsection{Core screening function}
+\label{sec:screening}
+
+The core is solved via the Level~3 adiabatic hyperspherical
+method~\cite{lin1995} (Paper~13~\cite{paper13}) at nuclear charge $Z_A$.  The one-electron
+density $n(r)$ is extracted by integrating $|\psi(R_e, \alpha)|^2$
+over the hyperangle and the coordinates of the second electron,
+using $r_1 = R_e \cos\alpha$, $r_2 = R_e \sin\alpha$.
+At each hyperradius $R_e$, the angular eigenfunction is resolved on a
+finite-difference grid of $n_\alpha = 200$ points, and contributions
+from both electrons are binned onto a radial grid.
+
+The cumulative electron count
+\begin{equation}
+  N_{\rm core}(r) = \int_0^r n(r')\,dr'
+  \label{eq:Ncore}
+\end{equation}
+gives the effective nuclear charge
+\begin{equation}
+  Z_{\rm eff}(r) = Z_A - N_{\rm core}(r)\,,
+  \label{eq:Zeff}
+\end{equation}
+with boundary conditions $Z_{\rm eff}(r\to 0) = Z_A$ (no screening at
+the nucleus) and $Z_{\rm eff}(r\to\infty) = Z_A - 2$ (full screening
+by two electrons).  For Li$^+$: $Z_{\rm eff}(0) = 3.0$,
+$Z_{\rm eff}(2\text{ bohr}) \approx 1.01$.
+
+\paragraph{Algebraic core density.}
+The histogram-binned density can be replaced by an algebraic
+computation.  The Level~3 angular eigenvector provides channel
+expansion coefficients $c_{l}^{(\nu)}(\alpha)$ at each hyperangle.
+Via the coordinate-transform identity
+$r_1 = R_e \cos\alpha$, the one-electron density at radius $r$
+is obtained by summing $|c_l|^2$ contributions at the hyperangle
+$\alpha = \arccos(r/R_e)$, weighted by the hyperradial probability
+$|F(R_e)|^2$.  This avoids histogram binning entirely
+(\texttt{method='algebraic'} in \texttt{CoreScreening}).
+
+For Li$^+$, the resulting $Z_{\rm eff}(r)$ is well approximated
+by a closed-form expression
+\begin{equation}
+  Z_{\rm eff}(r) \approx 1 + 2(1 + ar + br^2)\,e^{-cr},
+  \label{eq:zeff_fit}
+\end{equation}
+which reproduces the ab initio curve to 0.7\% accuracy.
+The deviations from hydrogenic screening ratios
+(e.g., $Z_{\rm eff}(r)/Z_{\rm eff}^{\rm hydro}(r) \ne 1$)
+directly quantify electron correlation in the core.
+
+
+\subsection{Ab initio Phillips--Kleinman pseudopotential}
+\label{sec:pk}
+
+The valence electrons must be orthogonal to the core.  In continuous
+quantum chemistry, this is enforced by the
+Phillips--Kleinman~\cite{pk1959} pseudopotential.
+We parameterize the PK barrier as
+\begin{equation}
+  V_{\rm PK}(r) = \frac{A\,e^{-Br^2}}{r^2}\,,
+  \label{eq:Vpk}
+\end{equation}
+where $A$ and $B$ are derived entirely from the core wavefunction.
+
+\paragraph{Barrier width $B$.}
+The PK barrier must be localized where the core density is concentrated.
+We define the inverse-square-weighted core radius
+\begin{equation}
+  r_{\rm eff} = \sqrt{\frac{\int n(r)\,dr}
+    {\int n(r)/r^2\,dr}}\,,
+  \label{eq:reff}
+\end{equation}
+which weights the inner core---where $1/r^2$ is large---more heavily
+than the diffuse tail.  Then
+\begin{equation}
+  B = \frac{1}{2\,r_{\rm eff}^2}\,.
+  \label{eq:B}
+\end{equation}
+For Li: $r_{\rm eff} = 0.267$~bohr, $B = 7.00$~bohr$^{-2}$.
+For Be: $r_{\rm eff} = 0.200$~bohr, $B = 12.53$~bohr$^{-2}$.
+
+\paragraph{Barrier height $A$.}
+The kinetic energy cost of core--valence orthogonalization is
+\begin{equation}
+  A = \bigl|E_{\rm core}/N_{\rm core} - E_{\rm val}\bigr|
+      \cdot N_{\rm core}\,,
+  \label{eq:A}
+\end{equation}
+where $E_{\rm core}$ is the total core energy from the hyperspherical
+solve, $N_{\rm core} = 2$, and $E_{\rm val}$ is estimated from the
+first ionization energy of the neutral atom (an atomic property, not
+a molecular one: $\text{IE}(\text{Li}) = 0.198$~Ha~\cite{nist},
+$\text{IE}(\text{Be}) = 0.343$~Ha~\cite{nist}).
+For Li: $A = 6.93$~Ha$\cdot$bohr$^2$.
+For Be: $A = 13.01$~Ha$\cdot$bohr$^2$.
+
+No experimental molecular data enters these formulas.  Only atomic
+properties: $Z$, the core wavefunction (via the Level~3 solve), and
+the first ionization energy of the neutral atom.
+
+\paragraph{$l$-dependent pseudopotential.}
+The channel-blind PK barrier [Eq.~(\ref{eq:Vpk})] applies the
+same repulsion to all angular channels, but the $1s^2$ core is
+pure $l = 0$.  The exact PK projector $|1s\rangle\langle 1s|$ has
+non-zero matrix elements only for channels with $l = 0$ character.
+An $l$-dependent mode scales the per-electron PK barrier by
+$\delta_{l_i, 0}$: valence electrons in $l > 0$ channels
+experience no core repulsion, consistent with the angular
+orthogonality of the core.
+
+At $l_{\max} = 2$ this reduces $R_{\rm eq}$ error from 6.9\% to
+5.3\% for LiH.  The $l_{\max}$ divergence (Sec.~\ref{sec:outlook})
+is reduced but not eliminated: at $l_{\max} = 3$, $R_{\rm eq}$
+error is 14.7\% (vs 16.9\% channel-blind).  The remaining divergence
+is attributed to differential angular correlation, not PK artifacts.
+
+
+\subsection{\texorpdfstring{$Z_{\rm eff}$}{Z\_eff} injection into the
+Level~4 solver}
+\label{sec:injection}
+
+The Level~4 angular Hamiltonian (Paper~15~\cite{paper15}) contains
+nuclear attraction terms $-Z_A/r_{1A} - Z_A/r_{2A}$.  We replace
+the constant $Z_A$ with the function $Z_{\rm eff}(r)$ from the core
+solution.  In the coupled-channel expansion, the nuclear coupling
+matrix element between channels $(l_1', l_2')$ and $(l_1, l_2)$ at
+fixed $\alpha$ involves a Gaunt integral weighted by the nuclear
+potential.  For constant $Z_A$, these are computed via an analytical
+multipole expansion.  For $Z_{\rm eff}(r)$, we add a smooth
+Gauss--Legendre quadrature correction for the
+$[Z_A - Z_{\rm eff}(r)]/r$ difference.
+
+Since $Z_{\rm eff}(0) = Z_A$, the correction vanishes at $r \to 0$,
+eliminating the $1/r$ singularity from the quadrature.  This ensures
+machine-precision backward compatibility when $Z_{\rm eff}$ is
+constant.
+
+
+\subsection{The \texorpdfstring{$\rho$}{rho}-collapse and fast PES
+scanning}
+\label{sec:rho_collapse}
+
+Paper~15 proved that the Level~4 angular eigenvalue problem depends
+on $(R, R_e)$ only through the dimensionless ratio
+$\rho = R/(2R_e)$.  This means the angular eigenvalue curves
+$\varepsilon_\nu(\rho)$ can be computed once on a one-dimensional grid
+of $\rho$ values and then interpolated via cubic splines.
+
+The effective radial potential is
+\begin{equation}
+  U(R_e; R) = \frac{\varepsilon_0(\rho) + 15/8}{R_e^2}\,,
+  \quad \rho = \frac{R}{2R_e}\,,
+  \label{eq:U_eff}
+\end{equation}
+and the electronic energy at each $R$ is obtained by solving the
+one-dimensional radial Schr\"odinger equation
+\begin{equation}
+  \Bigl[-\tfrac{1}{2}\frac{d^2}{dR_e^2} + U(R_e; R)\Bigr]
+    F(R_e) = E_{\rm elec}\,F(R_e)
+  \label{eq:radial}
+\end{equation}
+via a tridiagonal eigensolver (cost: milliseconds).
+
+The angular cache is built on a non-uniform $\rho$ grid of
+$n_\rho \approx 80$ points (denser at small $\rho$ where the
+eigenvalue changes rapidly), with the static Hamiltonian (kinetic,
+centrifugal, Liouville, $e$--$e$ coupling) precomputed once and the
+nuclear coupling added at each $\rho$.  Cache construction for a
+single $R$-point takes ${\sim}2$~seconds.
+
+
+%% ========================================================================
+%% III. COMPUTATIONAL DETAILS
+%% ========================================================================
+\section{Computational Details}
+\label{sec:details}
+
+All calculations use the following parameters unless stated otherwise.
+
+\paragraph{Core solve.}
+The Li$^+$ $1s^2$ core (or Be$^{2+}$ $1s^2$) is solved via the
+Level~3 adiabatic hyperspherical method with
+$l_{\max} = 2$, $n_\alpha = 200$, $N_{R}^{\rm angular} = 200$
+$R$-points for the adiabatic curves, and
+$N_{R}^{\rm radial} = 2000$ grid points for the radial solve.
+Wall time: ${\sim}3$~seconds.
+
+\paragraph{Angular cache.}
+$n_\rho = 80$, $\rho \in [0.02, 5.0]$, $l_{\max} = 2$
+($\sigma$ channels only; $n_{\rm ch}$ determined by $l_{\max}$).
+$n_\alpha = 100$ grid points in the angular finite-difference mesh.
+Cache build per $R$-point: ${\sim}2$~seconds.
+
+\paragraph{PES scan.}
+18 $R$-points, $R \in [2.0, 7.0]$~bohr, with denser sampling near
+the minimum.  Per-$R$ radial solve: $n_{R_e} = 300$ grid points,
+$R_e \in [0.3, 15.0]$~bohr, tridiagonal eigensolver.
+Total PES scan time: ${\sim}48$~seconds.
+
+\paragraph{Morse fit.}
+Nonlinear least-squares fit (Levenberg--Marquardt) to the Morse
+potential $E(R) = E_{\min} + D_e[1 - e^{-a(R-R_{\rm eq})}]^2$
+within $\pm 1.5$~bohr of the grid minimum.
+
+\paragraph{Reduced masses.}
+$\mu(\text{LiH}) = 1822.888 \times 7.016 \times 1.008 / (7.016 + 1.008)$~a.u.;
+$\mu(\text{BeH}^+) = 1822.888 \times 9.012 \times 1.008 / (9.012 + 1.008)$~a.u.
+
+\paragraph{Total pipeline time.}
+${\sim}4$~minutes per molecule on a single-core commodity workstation.
+
+\paragraph{What is not included.}
+Core--valence exchange integrals (deferred),
+non-adiabatic coupling between angular channels (DBOC only),
+$l_{\max} > 2$ (results at $l_{\max} = 3$ cited for comparison),
+$\pi$ channels ($\sigma$-only at $l_{\max} = 2$).
+
+All calculations were performed with GeoVac
+v1.6.1~\cite{geovac2026}.  The complete pipeline (core solve, angular
+cache, PES scan, Morse fit, nuclear lattice) is implemented in the
+class \texttt{ComposedDiatomicSolver} and is reproducible with the
+command
+\texttt{ComposedDiatomicSolver.LiH\_ab\_initio(l\_max=2).run\_all()}.
+
+
+%% ========================================================================
+%% IV. RESULTS
+%% ========================================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Ab initio pseudopotential parameters}
+\label{sec:pk_params}
+
+Table~\ref{tab:pk} collects the PK parameters for Li and Be cores,
+derived entirely from the core wavefunction and atomic ionization
+energies.
+
+\begin{table}[b]
+\caption{Ab initio Phillips--Kleinman pseudopotential parameters.
+  All quantities from the core wavefunction; no molecular data.}
+\label{tab:pk}
+\begin{ruledtabular}
+\begin{tabular}{lddd}
+\textrm{Quantity} & \multicolumn{1}{c}{Li ($Z{=}3$)}
+  & \multicolumn{1}{c}{Be ($Z{=}4$)}
+  & \multicolumn{1}{c}{Formula} \\
+\colrule
+$r_{\rm eff}$ (bohr)   & 0.267  & 0.200  & \multicolumn{1}{c}{Eq.~(\ref{eq:reff})} \\
+$A$ (Ha$\cdot$bohr$^2$) & 6.93  & 13.01  & \multicolumn{1}{c}{Eq.~(\ref{eq:A})} \\
+$B$ (bohr$^{-2}$)       & 7.00  & 12.53  & \multicolumn{1}{c}{Eq.~(\ref{eq:B})} \\
+$E_{\rm core}$ (Ha)     & -7.280 & -13.700 & \multicolumn{1}{c}{Level~3} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+$B$ scales approximately as $Z^2$ ($7.00/12.53 \approx 9/16 = (3/4)^2$),
+consistent with the core radius scaling as $1/Z$.
+
+
+\subsection{LiH potential energy surface}
+\label{sec:lih}
+
+Table~\ref{tab:lih} compares spectroscopic constants for LiH under
+different pseudopotential treatments.
+
+\begin{table}
+\caption{LiH spectroscopic constants at $l_{\max}=2$.
+  ``LCAO'' is the atom-centered Full CI result from Ref.~\cite{fci_m}.
+  ``No PK'' disables the pseudopotential; ``Ab initio PK'' uses
+  Eqs.~(\ref{eq:A})--(\ref{eq:B}); ``Fitted PK'' uses manually
+  chosen $A=5.0$, $B=7.0$.  Experimental data from
+  Ref.~\cite{huber1979}.}
+\label{tab:lih}
+\begin{ruledtabular}
+\begin{tabular}{lddddd}
+\textrm{Property}
+  & \multicolumn{1}{c}{LCAO}
+  & \multicolumn{1}{c}{No PK}
+  & \multicolumn{1}{c}{Ab initio}
+  & \multicolumn{1}{c}{Fitted}
+  & \multicolumn{1}{c}{Expt.} \\
+\colrule
+$R_{\rm eq}$ (bohr)      & 2.5   & 0.88  & 3.21  & 2.97  & 3.015 \\
+$\omega_e$ (cm$^{-1}$)   & \multicolumn{1}{c}{---}  & 2637  & 1471  & 1617  & 1406 \\
+$B_e$ (cm$^{-1}$)        & \multicolumn{1}{c}{---}  & \multicolumn{1}{c}{---}  & 6.63  & 7.84  & 7.51 \\
+Bound?                    & \multicolumn{1}{c}{Yes}
+  & \multicolumn{1}{c}{collapse}
+  & \multicolumn{1}{c}{Yes}
+  & \multicolumn{1}{c}{Yes}
+  & \multicolumn{1}{c}{Yes} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Without the PK pseudopotential, the valence electrons collapse into
+the core ($R_{\rm eq} = 0.88$~bohr).  The PK barrier is necessary, not
+merely helpful.  The ab initio PK gives $\omega_e$ closer to experiment
+(4.6\% error) than the fitted PK (15\% error), suggesting that the
+$\langle 1/r^2 \rangle$-weighted barrier width captures the correct
+PES curvature.
+The ab initio $R_{\rm eq}$ overshoots experiment (3.21 vs.\ 3.015~bohr)
+because the ab initio barrier height $A = 6.93$ exceeds the fitted
+value $A = 5.0$ by 39\%, producing stronger Pauli repulsion that
+pushes the equilibrium outward.  The barrier widths are nearly
+identical ($B = 7.00$ ab initio vs.\ $7.0$ fitted), so the overshoot
+is controlled entirely by $A$.  Reducing $A$ toward 5 would recover
+the fitted $R_{\rm eq}$ at the cost of reintroducing a fitted
+parameter; we retain the ab initio value as the parameter-free
+prediction.
+
+The $l_{\max}$ dependence provides a convergence indicator:
+$l_{\max} = 2$ gives $R_{\rm eq} = 2.97$~bohr (fitted) or 3.21~bohr
+(ab initio); $l_{\max} = 3$ gives $R_{\rm eq} = 3.23$~bohr (fitted).
+The experimental value (3.015) is bracketed by $l_{\max} = 2$ and
+$l_{\max} = 3$ with fitted PK, and within 6.4\% at $l_{\max} = 2$
+with the ab initio PK.
+
+$D_e$ is overestimated because the dissociation limit at $R = 7$~bohr
+has not fully converged to the separated-atom energy.  This is a grid
+convergence issue, not a structural limitation.
+
+% [Placeholder: Figure showing LiH PES comparing no-PK / ab-initio-PK / fitted-PK]
+
+
+\subsection{BeH$^+$ transferability}
+\label{sec:beh}
+
+The same \texttt{ComposedDiatomicSolver} class, with only
+$(Z_A, Z_B, M_A, M_B)$ changed, produces a bound BeH$^+$.
+Table~\ref{tab:beh} reports the results.
+
+\begin{table}
+\caption{BeH$^+$ spectroscopic constants at $l_{\max}=2$.
+  Reference values are indicative, from high-level ab initio
+  calculations on light hydride ions~\cite{bishop1979}.}
+\label{tab:beh}
+\begin{ruledtabular}
+\begin{tabular}{lddd}
+\textrm{Property}
+  & \multicolumn{1}{c}{Ab initio PK}
+  & \multicolumn{1}{c}{Fitted PK}
+  & \multicolumn{1}{c}{Reference} \\
+\colrule
+$R_{\rm eq}$ (bohr)     & 3.25  & 2.82  & \multicolumn{1}{c}{${\sim}\,2.48$} \\
+$\omega_e$ (cm$^{-1}$)  & 2857  & 3088  & \multicolumn{1}{c}{${\sim}\,2222$} \\
+Bound?  & \multicolumn{1}{c}{Yes}
+  & \multicolumn{1}{c}{Yes}
+  & \multicolumn{1}{c}{Yes} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+No molecule-specific code or parameter tuning is required.  The PK
+parameters are derived from the Be$^{2+}$ core solution using the
+identical formulas [Eqs.~(\ref{eq:reff})--(\ref{eq:A})].
+
+
+\subsection{Sensitivity analysis}
+\label{sec:sensitivity}
+
+% [Placeholder: Figure showing R_eq vs A and R_eq vs B]
+
+Scanning the PK parameters independently reveals gradual, monotonic
+dependence:
+\begin{itemize}
+  \item $A$ scan ($B$ fixed at 7.0): $A \in [1, 10]$ maps to an
+    $R_{\rm eq}$ range of ${\sim}1.5$~bohr.
+  \item $B$ scan ($A$ fixed at 6.93): $B \in [0.5, 10]$ maps to an
+    $R_{\rm eq}$ range of ${\sim}1.0$~bohr.
+\end{itemize}
+The equilibrium is not sharply tuned to specific PK values.
+The physics (core screening~+~Pauli repulsion) determines the
+equilibrium, not parameter adjustment.
+
+
+\subsection{$B$ formula comparison}
+\label{sec:B_compare}
+
+Four definitions of the core radius were tested, each producing a
+different $B = 1/(2r_{\rm core}^2)$ and hence a different LiH
+equilibrium.  Table~\ref{tab:B} reports the results.
+
+\begin{table}
+\caption{Effect of $B$ formula on LiH $R_{\rm eq}$ at $l_{\max}=2$.
+  All use ab initio $A = 6.93$.}
+\label{tab:B}
+\begin{ruledtabular}
+\begin{tabular}{ldddd}
+\textrm{Method} & \multicolumn{1}{c}{$r_{\rm core}$ (bohr)}
+  & \multicolumn{1}{c}{$B$ (bohr$^{-2}$)}
+  & \multicolumn{1}{c}{LiH $R_{\rm eq}$ (bohr)}
+  & \multicolumn{1}{c}{Error (\%)} \\
+\colrule
+RMS                 & 0.677  & 1.09  & 4.00  & 32.7 \\
+Peak                & 0.717  & 0.97  & 4.06  & 34.5 \\
+Median              & 0.500  & 2.00  & 3.75  & 24.4 \\
+Inv-sq (selected)   & 0.267  & 7.00  & 3.21  & 6.4  \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The inverse-square formula [Eq.~(\ref{eq:reff})] wins because it
+weights the inner core---where the PK barrier must act---via the
+$\langle 1/r^2 \rangle$ expectation.  The RMS and peak formulas are
+dominated by the diffuse tail and produce barriers that are too broad.
+The median is intermediate.  This is not parameter selection---it is
+choosing the physically correct moment of the core density for the
+purpose at hand (repulsive barrier localization).
+
+
+%% ========================================================================
+%% V. DISCUSSION
+%% ========================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{The composed geometry as a category}
+\label{sec:category}
+
+The composition $G_{\rm total} = G_{\rm nuc} \ltimes G_{\rm core}
+\ltimes G_{\rm val}$ is a fiber bundle with typed inter-layer edges.
+This is a mathematical structure (a category) where objects are natural
+geometries and morphisms are the continuous deformations
+($R \to \infty$ dissociation, $Z \to Z'$ isoelectronic substitution)
+that transform one composed geometry into another.  The
+LiH$\,{\to}\,$BeH$^+$ transfer is such a morphism: the same functor
+(\texttt{ComposedDiatomicSolver}) maps different input parameters to
+different molecules.
+
+% [Placeholder: Figure showing the composed graph architecture with
+%  three layers: nuclear, core, valence, and typed inter-layer edges]
+
+
+\subsection{What the $R_{\rm eq}$ improvement means}
+\label{sec:req}
+
+The LCAO approach gave $R_{\rm eq} = 2.5$~bohr because the graph
+Laplacian's kinetic energy is $R$-independent: the atomic lattice
+structure does not change as atoms approach.  The composed geometry
+fixes this because $Z_{\rm eff}(r)$ encodes the core's response to the
+approaching H atom: at large $R$, the valence sees $Z_{\rm eff} \approx 1$
+(screened Li$^+$); at small $R$, the PK barrier prevents core
+penetration.  The equilibrium is the balance between bonding
+stabilization (from shared valence density) and Pauli repulsion (from
+core orthogonalization).  This balance was absent in the LCAO approach.
+
+
+\subsection{Comparison with standard quantum chemistry}
+\label{sec:comparison}
+
+The pseudopotential concept has a long history in solid-state
+physics~\cite{heine1970,bachelet1982}.
+Standard pseudopotential methods (effective core potentials, ECPs) solve
+the same problem within Gaussian basis set frameworks.  Our approach is
+structurally different: the core is solved in its natural geometry
+(hyperspherical), the valence in its natural geometry (molecule-frame
+hyperspherical), and the coupling is through the core wavefunction
+itself rather than through fitted ECP parameters.  The analogy:
+ECPs are to our ab initio PK as Gaussian basis sets are to our
+natural geometry lattices---both solve the same physics from
+different starting points.
+
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+\begin{enumerate}
+\item The Gaussian$/r^2$ PK form [Eq.~(\ref{eq:Vpk})] is approximate.
+  The exact Phillips--Kleinman pseudopotential is nonlocal and
+  energy-dependent~\cite{pk1959}.  Our Gaussian approximation captures
+  the dominant repulsion but not its angular or energy dependence.
+
+\item Core--valence exchange integrals are omitted for LiH (the core
+  and valence fibers have different channel structures).  For
+  polyatomics, the full 1-RDM inter-fiber exchange reduces
+  $R_{\rm eq}$ error to 11.7\% (Sec.~\ref{sec:outlook}).
+
+\item Only $\sigma$ channels at $l_{\max} = 2$.  Paper~15 showed that
+  $\pi$ channels add ${\sim}7$~percentage points for H$_2$; similar
+  improvement is expected for LiH at $l_{\max} \geq 3$.
+
+\item The dissociation limit is not converged at $R = 7$~bohr.
+  $D_e$ values are upper bounds.
+
+\item Only two-core plus two-valence systems.  Extension to more
+  electrons requires composing additional Level~3/4 subproblems (e.g.,
+  lone pairs as Level~3, additional bonds as Level~4).
+\end{enumerate}
+
+
+\subsection{Outlook: the composition pattern for larger molecules}
+\label{sec:outlook}
+
+The composed geometry generalizes:
+\begin{itemize}
+  \item \textbf{BeH$_2$:} 1~core (Be~$1s^2$) + 2~bond pairs (Level~4
+    on each Be--H) + inter-bond coupling.
+  \item \textbf{H$_2$O:} 1~core (O~$1s^2$) + 2~bond pairs (Level~4 on
+    each O--H) + 2~lone pairs (Level~3 on O) + inter-pair coupling.
+  \item \textbf{General:} partition electrons into cores (Level~3 per
+    atom) + bond pairs (Level~4 per bond) + lone pairs (Level~3 on atoms).
+    The molecule is a \emph{hypergraph} where each hypernode is a
+    natural-geometry subproblem and each hyperedge is a typed coupling.
+\end{itemize}
+
+We tested LiH at $l_{\max} = 3$ and $l_{\max} = 4$ with
+$\sigma{+}\pi$ ($m_{\max} = 1$) channels, expecting the $l_{\max}$
+convergence pattern from Paper~15 (H$_2$) to reduce $R_{\rm eq}$
+error.  The result is the opposite: $R_{\rm eq}$ diverges
+monotonically from experiment.
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Configuration & $R_{\rm eq}$ (bohr) & Error \\
+\hline
+$l_{\max}=2$, $\sigma$ (manual PK) & 2.97 & 1.5\% \\
+$l_{\max}=2$, $\sigma$ (ab initio PK) & 3.21 & 6.4\% \\
+$l_{\max}=3$, $\sigma{+}\pi$ (ab initio PK) & 3.52 & 16.9\% \\
+$l_{\max}=4$, $\sigma{+}\pi$ (ab initio PK) & 4.00 & 32.8\% \\
+\hline
+\end{tabular}
+\end{center}
+
+The root cause is that the Phillips-Kleinman pseudopotential is
+channel-blind: it was derived from the $1s^2$ core (pure $l=0$), so
+it applies the same repulsive barrier to all angular channels.
+Higher-$l$ channels add correlation energy preferentially at large
+$R$ (where the valence cloud is diffuse and benefits most from
+angular flexibility) rather than at short $R$ (where the cloud is
+compact).  This shifts the PES minimum outward monotonically.
+The $l_{\max}$ convergence pattern from Paper~15 does not transfer
+to core-valence systems because the pseudopotential breaks the
+mechanism.
+
+The path forward is an $l$-dependent or $m$-dependent
+pseudopotential that modulates the core--valence barrier by angular
+channel, or a multi-channel adiabatic correction (DBOC) that
+captures non-adiabatic coupling between the angular states.
+
+Initial BeH$_2$ results validate the qualitative PES shape (bound state,
+repulsive wall, correct dissociation limit) but reveal a 32\%
+$R_{\rm eq}$ error with the block-diagonal approximation.  The
+core-valence composition validated for LiH is insufficient for
+valence-valence coupling between bond pairs sharing the Be nucleus:
+$Z_{\mathrm{eff}}$ partitioning and classical inter-bond repulsion both
+fail to improve accuracy.  Orbital-level inter-bond coupling (exchange
+and orthogonalization between bond-pair wavefunctions) is the bottleneck
+for quantitative polyatomic PES.  The Pauli term scaling
+($Q^{2.5}$, Paper~14) is unaffected by this limitation, as
+it depends on the block structure, not the inter-block coupling.
+
+\subsubsection{Inter-fiber coupling investigation}
+
+A systematic three-phase investigation of inter-fiber coupling confirms
+that the channel overlap between bond-pair fibers is the key quantity
+for polyatomic accuracy.
+
+\paragraph{Monopole Coulomb coupling (negative result).}
+The Slater $F^0$ integral between the two bond-pair densities,
+transformed to Be-centered coordinates, gives a monopole inter-fiber
+energy of ${\sim}1.6$~Ha that is nearly $R$-independent near
+equilibrium.  Adding this scalar repulsion worsens $R_{\rm eq}$ from
+32\% to 62\% error---the same failure mode as classical inter-bond
+repulsion and $Z_{\rm eff}$ partitioning.
+
+\paragraph{Inter-fiber channel overlap $S_{\rm avg}(R)$.}
+The parity-weighted overlap between ground adiabatic channels of the
+two fibers under $\pi$-rotation is
+\begin{equation}
+  S(\rho) \;=\; \sum_{l_1, l_2} (-1)^{l_1 + l_2}\,
+  \bigl|c^{0}_{l_1 l_2}(\rho)\bigr|^2,
+  \label{eq:S_overlap}
+\end{equation}
+where $c^{0}_{l_1 l_2}$ are the channel expansion coefficients
+extracted from the angular eigenvector at each $\rho = R/(2R_e)$,
+and $S_{\rm avg}(R)$ is the $|F(R_e)|^2$-weighted average over
+the hyperradius.  This is a purely algebraic quantity---no spatial
+integration is required.
+
+$S_{\rm avg}$ has strong $R$-dependence: it drops from 0.47 at
+$R = 2.0$~bohr to 0.24 at $R = 6.0$~bohr, with slope
+$dS/dR = -0.16$ at $R_{\rm eq}$.  The physical origin is a shift
+in channel composition: the $(0{,}0)$ $\sigma_s$ channel weight
+drops from 61\% at short $R$ to 20\% at large $R$ as odd-parity
+channels $(0{,}1)$ and $(1{,}0)$ grow.  Even-parity channels
+contribute positively to $S$; odd-parity channels contribute
+negatively.  The net effect is a monotonic decrease in $S$ as the
+wavefunction redistributes angular momentum.
+
+\paragraph{Exchange coupling via $S \cdot F^0$ (partial success).}
+Combining the overlap and the monopole integral as
+$E_{\rm exch}(R) = -S_{\rm avg}(R) \cdot F^0(R)$ reduces $R_{\rm eq}$
+error from 31\% to 20\%.  The ab initio coupling captures ${\sim}40\%$
+of the correction identified by a single-parameter fit
+($K_{\rm eff} \approx 1.6$ vs $K_{\rm fit} = 4.08$~Ha).  The
+remaining ${\sim}60\%$ is recovered by including the off-diagonal
+1-RDM elements (see ``Full one-particle density matrix exchange''
+below).
+
+The inter-fiber channel overlap $S(R)$---a purely algebraic quantity
+computed from angular eigenvector coefficients and parity
+phases---captures the $R$-dependent coupling between bond-pair fibers.
+This validates the fiber bundle framework for polyatomic molecules:
+each bond pair keeps its own natural geometry, and the coupling between
+fibers is mediated by quantum number overlap at the shared center.
+
+\paragraph{Channel-decomposed $F^0$ and direct exchange.}
+The monopole integral $F^0$ can be decomposed by angular channel,
+giving channel-specific direct Coulomb integrals $F^0_{\rm ch}$.
+A direct exchange formula
+$E_{\rm direct} = -\sum_{\rm ch} (-1)^{l_1 + l_2} F^0_{\rm ch}$
+avoids the $S \cdot F^0$ factorization and gives similar accuracy:
+$R_{\rm eq}$ error of 20.0\% (vs 19.2\% for the $S \cdot F^0$ path).
+
+\paragraph{Higher Slater multipoles (negative result).}
+Including $k = 1$ (dipole) and $k = 2$ (quadrupole) multipoles in
+the inter-fiber coupling does not recover the missing exchange.
+The $k = 1$ term is \emph{repulsive} and worsens $R_{\rm eq}$;
+$k = 2$ is negligibly small.  The total multipole correction
+$k = 0 + 1 + 2$ gives 20.5\% $R_{\rm eq}$ error, slightly worse
+than monopole alone (20.0\%).  This confirms that the missing
+exchange comes from off-diagonal 1-RDM terms, not higher angular
+multipoles.
+
+\paragraph{Full one-particle density matrix exchange.}
+The channel-resolved one-particle reduced density matrix
+$\gamma^A_{l_1, l_1'}$ is obtained by tracing electron~2 from the
+Level~4 ground-state eigenvector:
+\begin{equation}
+  \gamma^A_{l_1, l_1'}
+    = \sum_{l_2} \sum_j v_{(l_1, l_2), j}\, v_{(l_1', l_2), j},
+\end{equation}
+where the sum runs over all channels sharing the same $l_2$ and
+over the $\alpha$ grid, with the result $|F(R_e)|^2$-weighted
+over the hyperradius.  The off-diagonal elements
+$\gamma_{l_1 \ne l_1'}$ are 68--121\% of the diagonal norm
+(growing with $R$ as channel mixing increases).
+
+The full inter-fiber exchange between identical fibers $A$ and $B$
+in the channel representation is
+\begin{equation}
+  K_{AB}(R) = -\sum_{l_1, l_1'}
+    \bigl[\gamma^A_{l_1, l_1'}\bigr]^2\,
+    (-1)^{l_1 + l_1'}\,
+    F^0_{l_1, l_1'}(R),
+  \label{eq:full_exchange}
+\end{equation}
+where $F^0_{l_1, l_1'}$ is the $l_1$-marginal Slater monopole
+integral computed from Be-centered densities aggregated over $l_2$,
+and the parity factor arises from $\gamma^B_{l_1', l_1}
+= (-1)^{l_1 + l_1'} \gamma^A_{l_1', l_1}$ under the $\pi$-rotation
+relating the two fibers.  The diagonal limit $l_1 = l_1'$ recovers a
+quantity proportional to the existing $S \cdot F^0$ exchange; the
+off-diagonal terms capture inter-channel exchange.
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Method & $R_{\rm eq}$ (bohr) & Error vs 2.507 \\
+\hline
+Block-diagonal (no coupling) & 3.28 & 31\% \\
+Monopole $F^0$ (Phase~1)     & 4.06 & 62\% \\
+Exchange $S \cdot F^0$       & 3.01 & 20\% \\
+Full 1-RDM exchange [Eq.~(\ref{eq:full_exchange})] & 2.80 & 11.7\% \\
+Fitted model ($-K \cdot S$)  & 2.81 & 12\% \\
+\hline
+\end{tabular}
+\end{center}
+
+The full 1-RDM exchange matches the single-parameter fitted model
+with zero free parameters.  The off-diagonal terms are subtractive
+(${\sim}10\%$ of the diagonal magnitude at $R_{\rm eq}$),
+moderating the exchange and providing the correct $R$-dependence.
+This confirms that the off-diagonal $\gamma$ elements---not
+higher multipoles or kinetic corrections---carry the missing
+exchange physics.
+
+\paragraph{Kinetic orthogonalization (negative result).}
+L\"{o}wdin symmetric orthogonalization of overlapping fiber
+wavefunctions raises the kinetic energy by
+\begin{equation}
+  \Delta T(R) = \frac{1}{2} \sum_{l_1, l_1'}
+    \bigl|S^{AB}_{l_1, l_1'}\bigr|^2\,
+    \frac{T_{l_1} + T_{l_1'}}{2},
+\end{equation}
+where $S^{AB}_{l_1, l_1'} = (-1)^{l_1'} \gamma^A_{l_1, l_1'}$
+and $T_{l_1} = l_1(l_1+1)/(2\langle R_e^2 \rangle)$ is the
+centrifugal kinetic energy.  The correction is $+0.03$~Ha and
+nearly $R$-independent (it peaks at $R \sim 4.0$ where $l \ge 1$
+channel growth counteracts overlap decay).  Adding $\Delta T$ to
+the full exchange does not shift $R_{\rm eq}$.  The residual
+11.7\% error is attributed to basis truncation ($l_{\rm max} = 2$)
+and the adiabatic approximation.
+
+\paragraph{Transferability to core--valence exchange (LiH).}
+The full 1-RDM exchange is specific to the bond--bond (Level~4 +
+Level~4) topology of polyatomics like BeH$_2$.  In LiH, the two
+fibers are the Level~3 core (atom-centered hyperspherical) and
+the Level~4 valence (molecule-frame hyperspherical)---fundamentally
+different channel structures that cannot share $\gamma$ matrices.
+The PK pseudopotential already encodes core--valence orthogonality,
+so explicit exchange between these fibers is expected to be
+partially redundant.  Extending the 1-RDM exchange to heterogeneous
+fiber pairs would require a cross-level overlap formalism mapping
+Level~3 angular channels onto Level~4 channels, which is deferred
+to future work.
+
+\paragraph{Path forward.}
+The full 1-RDM exchange closes the gap between the diagonal
+$S \cdot F^0$ approximation and the fitted model.  The remaining
+11.7\% $R_{\rm eq}$ error points to three directions: (a)~$l_{\rm max}$
+convergence with full exchange (current results use $l_{\rm max} = 2$),
+(b)~non-adiabatic corrections (DBOC), and (c)~cusp corrections at the
+coalescence point.  Kinetic orthogonalization has been tested and found
+negligible.  Self-consistent Hartree iteration is deprioritized, as
+the kinetic correction is uniform and SCF is unlikely to provide
+differential $R$-dependence.
+
+\paragraph{H$_2$O: first triatomic PES.}
+The composed geometry extends to H$_2$O as a five-block decomposition:
+O~$1s^2$ core (Level~3, $Z=8$), two O--H bond pairs (Level~4 with
+charge-center origin, $Z_{\rm eff}=6$, $Z_B=1$), and two lone pairs
+(Level~3, $Z_{\rm eff}=6$).  The architecture introduces no free
+parameters.  Inter-fiber coupling at the H--O--H bond angle
+$\theta = 104.5^\circ$ generalizes the linear-molecule rotation
+$(-1)^{l_1 + l_2}$ to Wigner $d$-matrix phases
+$P_{l_1}(\cos\theta) \cdot P_{l_2}(\cos\theta)$, recovering the
+linear formula at $\theta = \pi$.  Six coupling pairs arise:
+one bond--bond, four bond--lone, and one lone--lone.
+
+The uncoupled PES with charge-center origin gives $R_{\rm eq} = 1.34$~bohr
+(26\% error vs 1.809 experimental), with the correct qualitative shape:
+repulsive wall, well-defined minimum, and smooth dissociation.  The
+bond--bond coupling (${\sim}0.5$~Ha) is consistent with BeH$_2$ and
+barely affects $R_{\rm eq}$.  However, the bond--lone and lone--lone
+couplings are unphysical: the $S \cdot F^0$ factorization produces
+$-28$~Ha (bond--lone, 4~pairs) and $-15$~Ha (lone--lone) at the
+experimental geometry---magnitudes that exceed the total electronic
+energy.  The Slater integrals scale as ${\sim}Z_{\rm eff}$, and at
+$Z_{\rm eff} = 6$ the compact lone pair densities drive $F^0$ far
+beyond the regime validated on BeH$_2$ ($Z_{\rm eff} = 2$).  Lone pair
+coupling is disabled for production use; only bond--bond coupling is
+validated.
+
+The dominant bottleneck is the Level~4 angular basis at high charge
+asymmetry ($Z_A/Z_B = 6{:}1$ for O--H bonds).  The bare bond pair
+$R_{\rm eq}$ error scales from 0.1\% at 1:1 (H$_2$) to 18\% at 2:1
+(BeH) to 56\% at 6:1 with midpoint origin; the charge-center origin
+$z_0 = R(Z_A - Z_B)/[2(Z_A + Z_B)]$ reduces the 6:1 error to 17\%,
+but does not fully resolve the basis limitation at $l_{\rm max} = 2$
+with 9~channels.  Improved angular basis convergence for asymmetric
+bonds---via non-uniform grids or adaptive channel selection---is
+the path to quantitative H$_2$O accuracy.
+
+
+%% ========================================================================
+%% VI. CONCLUSION
+%% ========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+Composed natural geometries solve the core-valence problem without a
+single high-dimensional coordinate system.  The key results:
+
+\begin{enumerate}
+\item LiH $R_{\rm eq}$ improves from 17\% error (LCAO) to 5.3\%
+  (composed, ab initio PK, $l$-dependent) with zero molecular fitting.
+
+\item The ab initio PK pseudopotential is derived entirely from the
+  core wavefunction: $A$ from the core--valence energy gap
+  [Eq.~(\ref{eq:A})], $B$ from the $\langle 1/r^2 \rangle$-weighted
+  core radius [Eq.~(\ref{eq:reff})].
+
+\item The architecture transfers to BeH$^+$ with no per-molecule
+  tuning.
+
+\item The composition pattern---core graphs + valence graphs + typed
+  coupling edges---provides a concrete framework for extending discrete
+  graph quantum chemistry to general molecules.
+
+\item For polyatomics (BeH$_2$), the full 1-RDM inter-fiber exchange
+  [Eq.~(\ref{eq:full_exchange})] reduces $R_{\rm eq}$ error from
+  20\% (diagonal $S \cdot F^0$) to 11.7\%, matching a single-parameter
+  fitted model (12\%) with zero free parameters.
+\end{enumerate}
+
+The natural geometry hierarchy is now:
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Level & System & Geometry & Best result \\
+\midrule
+1 & H       & $S^3$ (Fock)           & $<0.1\%$ error \\
+2 & H$_2^+$ & Prolate spheroid       & 0.70\% error \\
+3 & He      & Hyperspherical         & 0.05\% error \\
+4 & H$_2$   & Mol-frame hypersp.     & 94.1\% $D_e$ \\
+5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\
+5 & BeH$^+$ & Composed (Level 3+4)   & Bound, physical \\
+5 & BeH$_2$ & Composed (Level 3+4+4) & $R_{\rm eq}$: 11.7\% error \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+%% ========================================================================
+%% REFERENCES
+%% ========================================================================
+\begin{thebibliography}{25}
+
+\bibitem{fock1935}
+V.~A.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+Z.~Phys.\ \textbf{98}, 145 (1935).
+
+\bibitem{pk1959}
+J.~C.~Phillips and L.~Kleinman,
+``New method for calculating wave functions in crystals and molecules,''
+Phys.\ Rev.\ \textbf{116}, 287 (1959).
+
+\bibitem{lin1995}
+C.~D.~Lin,
+``Hyperspherical coordinate approach to atomic and other
+Coulombic three-body systems,''
+Phys.\ Rep.\ \textbf{257}, 1 (1995).
+
+\bibitem{huber1979}
+K.~P.~Huber and G.~Herzberg,
+\emph{Molecular Spectra and Molecular Structure.\ IV.\ Constants of
+Diatomic Molecules}
+(Van Nostrand Reinhold, New York, 1979).
+
+\bibitem{nist}
+A.~Kramida, Yu.~Ralchenko, J.~Reader, and NIST ASD Team,
+NIST Atomic Spectra Database (ver.~5.11),
+\url{https://physics.nist.gov/asd} (2024).
+
+\bibitem{heine1970}
+V.~Heine and D.~Weaire,
+``Pseudopotential theory of cohesion and structure,''
+Solid State Phys.\ \textbf{24}, 249 (1970).
+
+\bibitem{bachelet1982}
+G.~B.~Bachelet, D.~R.~Hamann, and M.~Schl\"uter,
+``Pseudopotentials that work: From H to Pu,''
+Phys.\ Rev.\ B \textbf{26}, 4199 (1982).
+
+\bibitem{bishop1979}
+D.~M.~Bishop and L.~M.~Cheung,
+``A theoretical investigation of HeH$^+$,''
+J.~Mol.\ Spectrosc.\ \textbf{75}, 462 (1979).
+
+\bibitem{paper0}
+J.~Loutey,
+``Geometric Packing and the Universal Constant''
+(Paper~0 in the Geometric Vacuum series).
+
+\bibitem{paper1}
+J.~Loutey,
+``Spectral Graph Theory for Atomic Structure''
+(Paper~1 in the Geometric Vacuum series).
+
+\bibitem{paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Scale-Invariant Graph Topology
+and the Schr\"odinger Equation''
+(Paper~7 in the Geometric Vacuum series).
+
+\bibitem{paper10}
+J.~Loutey,
+``Nuclear Lattice: Rovibrational Spectra from SU(2) Algebraic
+Chains'' (Paper~10 in the Geometric Vacuum series).
+
+\bibitem{paper11}
+J.~Loutey,
+``Molecular Fock Projection: Prolate Spheroidal Lattice
+for Diatomic Molecules''
+(Paper~11 in the Geometric Vacuum series).
+
+\bibitem{paper12}
+J.~Loutey,
+``Algebraic Two-Electron Integrals: Neumann Expansion
+for $V_{ee}$ on the Prolate Spheroidal Lattice''
+(Paper~12 in the Geometric Vacuum series).
+
+\bibitem{paper13}
+J.~Loutey,
+``Hyperspherical Lattice: Two-Electron Atoms as
+Coupled-Channel Graphs''
+(Paper~13 in the Geometric Vacuum series).
+
+\bibitem{paper15}
+J.~Loutey,
+``The Level~4 Natural Geometry: Two-Center Two-Electron Molecules
+as Hyperspherical Fiber Bundles''
+(Paper~15 in the Geometric Vacuum series).
+
+\bibitem{paper16}
+J.~Loutey,
+``Chemical Periodicity from $S_N$ Representation Theory''
+(Paper~16 in the Geometric Vacuum series).
+
+\bibitem{fci_a}
+J.~Loutey,
+``Full Configuration Interaction on the Geometric Lattice: Atoms''
+(FCI-A paper in the Geometric Vacuum series).
+
+\bibitem{fci_m}
+J.~Loutey,
+``Full Configuration Interaction on the Geometric Lattice: Molecules''
+(FCI-M paper in the Geometric Vacuum series).
+
+\bibitem{geovac2026}
+J.~Loutey,
+``GeoVac: Computational Quantum Chemistry via Spectral Graph Theory,''
+version 1.6.1 (2026),
+\url{https://github.com/jloutey-hash/geovac}.
+
+\end{thebibliography}
+
+\end{document}

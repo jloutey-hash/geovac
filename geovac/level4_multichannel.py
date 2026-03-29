@@ -764,6 +764,7 @@ def build_angular_hamiltonian(
     pk_potentials: Union[List[dict], None] = None,
     Z_A_func: Optional[Callable] = None,
     n_theta: int = 64,
+    pk_projector: Union[dict, None] = None,
 ) -> np.ndarray:
     """
     Build the full coupled-channel angular Hamiltonian.
@@ -924,15 +925,92 @@ def build_angular_hamiltonian(
     # Repulsive potential V_PK = |φ_core|² × (E_val - E_core) prevents active
     # electrons from collapsing into the locked core orbital.  Diagonal in
     # channels (monopole, spherically symmetric core).
+    #
+    # channel_mode='l_dependent': The exact PK operator is a projector onto
+    # core states.  For a 1s² core (pure l=0), the projector has non-zero
+    # matrix elements only for electrons with l=0 character.  Per-electron
+    # weight: δ_{l_i, 0}.  This prevents unphysical repulsion in higher-l
+    # channels that are automatically orthogonal to the core by angular
+    # momentum.  See Paper 17 Sec VI.A.
     if pk_potentials:
         V_pk_e1, V_pk_e2 = compute_pk_pseudopotential(
             alpha_grid, rho_A, R_e, pk_potentials, rho_B=rho_B,
         )
+        # Determine channel mode from pk_potentials
+        pk_ch_mode = 'channel_blind'
+        for p in pk_potentials:
+            if p.get('channel_mode') == 'l_dependent':
+                pk_ch_mode = 'l_dependent'
+                break
+
         for ic, (l1, m1, l2, m2) in enumerate(channels_4):
+            if pk_ch_mode == 'l_dependent':
+                # Per-electron PK weight: core is 1s² (pure l=0),
+                # so only l=0 electrons overlap with the core.
+                w1 = 1.0 if l1 == 0 else 0.0
+                w2 = 1.0 if l2 == 0 else 0.0
+            else:
+                w1 = 1.0
+                w2 = 1.0
+            if w1 == 0.0 and w2 == 0.0:
+                continue
             for i in range(n_alpha):
                 ii = idx(ic, i)
-                H[ii, ii] += R_e * V_pk_e1[i]
-                H[ii, ii] += R_e * V_pk_e2[i]
+                H[ii, ii] += R_e * w1 * V_pk_e1[i]
+                H[ii, ii] += R_e * w2 * V_pk_e2[i]
+
+    # --- Algebraic PK projector (rank-1, channel-space) ---
+    # Replaces the Gaussian PK with the exact Phillips-Kleinman projector:
+    #   V_PK = E_shift * |core⟩⟨core|
+    # where |core⟩ is the Level 3 core eigenvector mapped into the Level 4
+    # channel basis via the atomic-limit approximation (l=0 → (0,0) channel).
+    if pk_projector is not None and pk_projector.get('mode') == 'algebraic':
+        from scipy.interpolate import CubicSpline as _CS
+
+        core_l0 = pk_projector['core_l0_wavefunction']
+        core_n_alpha_src = pk_projector['core_n_alpha']
+        core_h_src = pk_projector['core_h_alpha']
+
+        # Interpolate to Level 4 α-grid if grids differ
+        if core_n_alpha_src != n_alpha:
+            core_alpha = np.array(
+                [(i + 1) * core_h_src for i in range(core_n_alpha_src)]
+            )
+            level4_alpha = alpha_grid
+            cs = _CS(core_alpha, core_l0, bc_type='clamped')
+            core_l0_interp = cs(level4_alpha)
+        else:
+            core_l0_interp = core_l0.copy()
+
+        # Normalize on Level 4 grid
+        norm = np.sqrt(np.sum(core_l0_interp**2) * h)
+        if norm > 1e-15:
+            core_l0_interp /= norm
+
+        # Build full core vector in Level 4 (channel, α) space
+        # Atomic-limit approximation: core maps to (l1=0, m1=0, l2=0, m2=0)
+        core_vec = np.zeros(n_ch * n_alpha)
+        ch_00 = None
+        for ic, ch_label in enumerate(channels_4):
+            if m_max == 0:
+                l1, l2 = ch_label[0], ch_label[1]
+                if l1 == 0 and l2 == 0:
+                    ch_00 = ic
+                    break
+            else:
+                l1, m1, l2, m2 = ch_label
+                if l1 == 0 and m1 == 0 and l2 == 0 and m2 == 0:
+                    ch_00 = ic
+                    break
+
+        if ch_00 is not None:
+            core_vec[ch_00 * n_alpha:(ch_00 + 1) * n_alpha] = core_l0_interp
+
+        # Add rank-1 projector: V_PK = R_e * E_shift * |core⟩⟨core|
+        # R_e factor: Hamiltonian is in charge-function form H u = μ u
+        # where μ has units of energy × R_e (matching existing R_e * V terms).
+        E_shift = pk_projector['energy_shift']
+        H += R_e * E_shift * np.outer(core_vec, core_vec)
 
     # --- E-e coupling ---
     # For m_max=0: original Gaunt-based coupling (exact backward compatibility).
@@ -977,6 +1055,7 @@ def solve_angular_multichannel(
     z0: float = 0.0,
     core_potentials: Union[List[dict], None] = None,
     pk_potentials: Union[List[dict], None] = None,
+    pk_projector: Union[dict, None] = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, list]:
     """
     Solve the coupled-channel angular eigenvalue problem.
@@ -1025,7 +1104,8 @@ def solve_angular_multichannel(
     H = build_angular_hamiltonian(alpha, rho, R_e, l_max, Z, m_max,
                                    l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
                                    core_potentials=core_potentials,
-                                   pk_potentials=pk_potentials)
+                                   pk_potentials=pk_potentials,
+                                   pk_projector=pk_projector)
 
     evals, evecs = eigh(H)
 
@@ -1052,6 +1132,7 @@ def compute_adiabatic_curve_mc(
     z0: float = 0.0,
     core_potentials: Union[List[dict], None] = None,
     pk_potentials: Union[List[dict], None] = None,
+    pk_projector: Union[dict, None] = None,
 ) -> np.ndarray:
     """
     Compute adiabatic potential U(R_e) with multichannel angular solver.
@@ -1092,6 +1173,7 @@ def compute_adiabatic_curve_mc(
             l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
             core_potentials=core_potentials,
             pk_potentials=pk_potentials,
+            pk_projector=pk_projector,
         )
         mu_vals[i] = evals[0]
 
@@ -1543,6 +1625,7 @@ def solve_level4_h2_multichannel(
     origin: str = 'midpoint',
     core_potentials: Union[List[dict], None] = None,
     pk_potentials: Union[List[dict], None] = None,
+    pk_projector: Union[dict, None] = None,
 ) -> dict:
     """
     Full Level 4 multichannel solver for two-electron diatomics.
@@ -1711,6 +1794,7 @@ def solve_level4_h2_multichannel(
             l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
             core_potentials=core_potentials,
             pk_potentials=pk_potentials,
+            pk_projector=pk_projector,
         )
 
         t1 = time.time()

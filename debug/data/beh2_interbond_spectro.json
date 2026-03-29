@@ -1,0 +1,25 @@
+{
+  "molecule": "BeH2",
+  "method": "inter-bond point charge",
+  "interbond_scale": 0.0,
+  "computed": {
+    "R_eq": 3.311131139037273,
+    "D_e": 2.8187619874748866,
+    "omega_e_sym": 3497.1752058820102
+  },
+  "reference": {
+    "R_eq": 2.507,
+    "omega_e": 2345.0,
+    "D_e": 0.147
+  },
+  "errors": {
+    "R_eq_pct": 32.075434345324,
+    "D_e_pct": 1817.5251615475422
+  },
+  "diagnosis": {
+    "v_inter_direction": "V_inter pushes R_eq outward (wrong direction)",
+    "reason": "V_inter ~ 1/R is monotonically decreasing, raises short-R PES more than long-R, shifting minimum to larger R.",
+    "best_scale_is_zero": true,
+    "conclusion": "Point charge Approach A fails \u2014 wrong sign of R_eq shift. The functional form 1/R cannot fix R_eq. Approach B (orbital overlap) needed."
+  }
+}

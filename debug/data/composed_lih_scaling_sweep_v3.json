@@ -1,0 +1,115 @@
+{
+  "sweep_data": [
+    {
+      "max_n": 1,
+      "Q": 6,
+      "N_pauli": 10
+    },
+    {
+      "max_n": 2,
+      "Q": 30,
+      "N_pauli": 334
+    },
+    {
+      "max_n": 3,
+      "Q": 84,
+      "N_pauli": 7879
+    },
+    {
+      "max_n": 4,
+      "Q": 180,
+      "N_pauli": 92899
+    }
+  ],
+  "geovac_fit_4point": {
+    "alpha": 2.6773,
+    "a": 0.0617,
+    "R_squared": 0.99,
+    "formula": "N_pauli = 0.0617 * Q^2.6773",
+    "n_points": 4
+  },
+  "gaussian_published_fit": {
+    "alpha": 4.25062041781546,
+    "C": 0.016032288582462258,
+    "R_squared": 0.9994491808864672,
+    "formula": "N_pauli = 0.0160 * Q^4.2506",
+    "n_points": 3,
+    "source": "D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati, S. Raman, A. Mezzacapo, S. Mostame, \"Refining resource estimation for the quantum computation of molecular spectra through Trotter error analysis,\" Quantum (2025). arXiv:2311.03719.",
+    "note": "JW encoding with 2-qubit reduction"
+  },
+  "gaussian_lih_published": {
+    "sto-3g": {
+      "Q": 10,
+      "N_pauli": 276,
+      "note": "2-qubit reduction from 12 -> 10 qubits"
+    },
+    "6-31g": {
+      "Q": 20,
+      "N_pauli": 5851,
+      "note": "2-qubit reduction"
+    },
+    "cc-pvdz": {
+      "Q": 36,
+      "N_pauli": 63519,
+      "note": "2-qubit reduction"
+    }
+  },
+  "gaussian_h2o_published": {
+    "sto-3g": {
+      "Q": 12,
+      "N_pauli": 551,
+      "note": "2-qubit reduction from 14 -> 12 qubits"
+    },
+    "6-31g": {
+      "Q": 24,
+      "N_pauli": 8921,
+      "note": "2-qubit reduction"
+    },
+    "cc-pvdz": {
+      "Q": 46,
+      "N_pauli": 107382,
+      "note": "2-qubit reduction"
+    }
+  },
+  "equal_qubit_comparison_v3": [
+    {
+      "max_n": 1,
+      "Q": 6,
+      "N_pauli_geovac": 10,
+      "N_pauli_gaussian_published_interp": 33,
+      "advantage_ratio": 3.3,
+      "note": "Gaussian interpolated from published power law Q^4.25"
+    },
+    {
+      "max_n": 2,
+      "Q": 30,
+      "N_pauli_geovac": 334,
+      "N_pauli_gaussian_published_interp": 30456,
+      "advantage_ratio": 91.2,
+      "note": "Gaussian interpolated from published power law Q^4.25"
+    },
+    {
+      "max_n": 3,
+      "Q": 84,
+      "N_pauli_geovac": 7879,
+      "N_pauli_gaussian_published_interp": 2423128,
+      "advantage_ratio": 307.5,
+      "note": "Gaussian interpolated from published power law Q^4.25"
+    },
+    {
+      "max_n": 4,
+      "Q": 180,
+      "N_pauli_geovac": 92899,
+      "N_pauli_gaussian_published_interp": 61844756,
+      "advantage_ratio": 665.7,
+      "note": "Gaussian interpolated from published power law Q^4.25"
+    }
+  ],
+  "reference": "D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati, S. Raman, A. Mezzacapo, S. Mostame, \"Refining resource estimation for the quantum computation of molecular spectra through Trotter error analysis,\" Quantum (2025). arXiv:2311.03719.",
+  "notes": [
+    "v3: Gaussian comparison uses published Trenev et al. data with 2-qubit reduction",
+    "v2 used Q^4.60 extrapolation from STO-3G anchor (overestimated Gaussian counts)",
+    "Published Gaussian STO-3G has Q=10 (2-qubit reduction), not Q=12",
+    "Advantage ratios are ~7x-22x range, not 128x-1746x as in v2"
+  ]
+}

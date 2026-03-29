@@ -3,12 +3,12 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v1.9.0 (March 23, 2026)
+**Version:** v2.0.8 (March 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
-**Authoritative source rule:** The core papers in `papers/core/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
+**Authoritative source rule:** The papers in `papers/core/` and `papers/observations/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
 
-**Project context:** GeoVac is an independent research project with no institutional affiliation, developed using an AI-augmented agentic workflow. The principal investigator provides scientific direction and quality control; implementation and documentation drafting are performed collaboratively with LLMs (Anthropic Claude). The primary dissemination channel is GitHub + Zenodo (DOI-stamped releases). The papers in `papers/core/` are written to academic standards but are not submitted to traditional journals. The project's viability case rests on producing a usable, benchmarked computational tool. Do not suggest formatting papers for specific journals or pursuing traditional peer review unless the user asks.
+**Project context:** GeoVac is an independent research project with no institutional affiliation, developed using an AI-augmented agentic workflow. The principal investigator provides scientific direction and quality control; implementation and documentation drafting are performed collaboratively with LLMs (Anthropic Claude). The primary dissemination channel is GitHub + Zenodo (DOI-stamped releases). The papers in `papers/core/` and `papers/observations/` are written to academic standards but are not submitted to traditional journals. The project's viability case rests on producing a usable, benchmarked computational tool. Do not suggest formatting papers for specific journals or pursuing traditional peer review unless the user asks.
 
 ---
 
@@ -16,7 +16,7 @@
 
 GeoVac is a discretization framework that exploits the natural geometry of separable quantum systems to produce sparse graph Hamiltonians. It is **not** a new foundation for quantum mechanics — it works because the graph Laplacian converges to the known continuous Laplace-Beltrami operators in the continuum limit (Paper 7).
 
-**Rhetoric rule:** When writing or editing papers, avoid language that implies quantum mechanics "emerges from" or "is derived from" graph topology. The correct framing: the graph topology is a computationally efficient discretization of known physics, and the natural geometry principle is an organizing principle for choosing coordinate systems. The underlying Fock/Bargmann mathematics is known; the new contributions are the discrete convergence, the systematic symbolic verification, and the computational methodology.
+**Rhetoric rule:** The GeoVac framework is demonstrably conformally equivalent to standard continuous quantum mechanics at every level where it has been tested (Paper 7 provides 18 symbolic proofs for the S³ case; subsequent papers verify operator convergence for each natural geometry). The papers should present this conformal equivalence as the primary result. The discrete graph topology and the continuous Laplace–Beltrami operators are dual descriptions connected by proven conformal maps — the mathematics supports both readings, and the interpretation of which is more fundamental is left as a choice for the reader. Avoid language that asserts ontological priority of either description. Lead with concrete computational results (sparsity, scaling, accuracy, structural insight) rather than interpretive claims about the nature of quantum mechanics.
 
 **Lead with concrete advantages:** O(V) sparsity, angular momentum selection rules baked into the basis, zero-parameter construction from nuclear charges and geometry alone, efficient qubit encodings (Paper 14). These structural properties are the framework's actual selling points — not philosophical claims about the nature of quantum mechanics.
 
@@ -28,19 +28,36 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 
 **Best results by system type:**
 - Atoms: He at 0.05% error (hyperspherical coordinates, Paper 13)
-- One-electron molecules: H2+ at 0.70% (prolate spheroidal, Paper 11)
+- One-electron molecules: H2+ at 0.0002% (spectral Laguerre, Paper 11)
 - Two-electron molecules: H2 at 94.1% D_e (Level 4 mol-frame hyperspherical, Paper 15)
-- Core-valence molecules: LiH R_eq = 3.21 bohr, 6.4% error (composed geometry, Paper 17)
+- Core-valence molecules: LiH R_eq 5.3% error with l-dependent PK at l_max=2 (composed geometry, Paper 17)
+- Polyatomic molecules: BeH₂ R_eq 11.7% error (full 1-RDM exchange, composed geometry, Paper 17)
+- Triatomic molecules: H₂O R_eq 26% error, uncoupled with charge-center origin (composed geometry, 5-block Level 3+4, zero parameters, Paper 17)
 - Qubit encoding: O(Q^3.15) Pauli terms, O(Q^3.36) QWC groups, O(Q^1.69) 1-norm (Paper 14)
 - VQE benchmark: 1.3x fewer Pauli terms at Q=10, 8.1x at Q=28 vs validated Gaussian cc-pVDZ/cc-pVTZ (Paper 14, v1.9.0)
+- Composed qubit encoding: universal Q^2.5 Pauli scaling across LiH/BeH2/H2O (exponent spread 0.02), 51x-1,712x advantage over published Gaussian baselines (Paper 14, v2.0.0)
 - Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9, universal algebraic identity B_formal/N = d, Hopf generalization negative result, circulant Hermiticity, second selection principle (Paper 2, conjectural)
 
 **Active frontier:**
-- Extending composed geometry (Paper 17) to higher l_max with sigma+pi channels for LiH
-- Polyatomic composition pattern (BeH2, H2O) via fiber bundle generalization
+- l-dependent PK pseudopotential for LiH composed geometry: reduces R_eq error from 6.9% to 5.3% at l_max=2 (higher l_max with channel-blind PK diverges — see Section 3). Remaining l_max divergence is from differential angular correlation. Diagnostic arc (v2.0.5) confirmed: divergence is linear (+0.23 bohr/l_max), angular spreading is 100% nuclear, Level 4 solver converges (β=0.42/l_max). R-dependent PK w_PK(R) = δ_{l,0} × min(cap, R/R_ref) achieves 2.0% at l_max=4 but requires empirical R_ref; ab initio R_ref derivation is the next milestone.
+- Polyatomic PES: BeH2 full 1-RDM exchange achieves 11.7% R_eq error (down from 20% diagonal S·F⁰, matches 12% fitted model with zero free parameters). Kinetic orthogonalization tested: +0.03 Ha uniform, no R_eq effect (negative result). Remaining 11.7% attributed to basis truncation (l_max=2) and adiabatic approximation. Next steps: l_max convergence with full exchange, non-adiabatic corrections, cusp corrections.
+- H₂O composed solver: 5-block architecture (O 1s² core + 2 O–H bond pairs + 2 lone pairs), R_eq 26% error with charge-center origin. Coupling architecture validated (bond-bond ~0.5 Ha, consistent with BeH₂), but lone pair coupling unphysical at Z_eff=6 (S·F⁰ produces −28 Ha bond-lone, −15 Ha lone-lone — exceeds total electronic energy). Bottleneck is Level 4 angular basis at 6:1 charge asymmetry (R_eq error scales: 0.1% at 1:1, 18% at 2:1, 17% at 6:1 with charge-center). Next step: improved angular basis or non-uniform grid for highly asymmetric bonds.
+- Algebraic audit confirmed: Level 4 nuclear coupling (Paper 15) uses split-region Legendre expansion with Gaunt integrals — not quadrature. Core screening (Paper 17) has algebraic density from channel coefficients. Paper 15 Section V.A corrected to match production code.
 - Improving Level 4 D_e recovery beyond 94% (channel convergence, cusp corrections)
 - Chemical periodicity as representation theory (Paper 16) -- computational exploitation of hierarchical structure
-- Quantum simulation cost: equal-qubit Gaussian comparison validated with computed integrals (v1.9.0); commutator-based Trotter bounds still pending
+- Quantum simulation cost: equal-qubit Gaussian comparison validated with computed integrals (v1.9.0); commutator-based Trotter bounds: r ~ Q^{1.47} (vs Q^{1.69} 1-norm), 7x fewer steps at Q=60 (Paper 14, v2.0.3)
+- Track B — Hyperradial algebraicization: COMPLETE. Algebraic spectral basis replaces FD angular solver (matrix dimension 200-800 → 10-30). Exact Hellmann-Feynman coupling matrices (R-independent dH/dR). Single-channel adiabatic approximation identified as bottleneck at l_max≥1 (energy dives below exact). Coupled-channel integration fixes convergence direction: error decreases monotonically with l_max (0.37% → 0.27% at l_max 1-3). Q-matrix closure overcorrects at l_max=0 (1.1%); improvement pathway identified (exact dP/dR). Sturmian variant investigated — modest improvement at l_max=0, counterproductive at l_max≥1 (converges faster to wrong adiabatic limit). Preserved as research artifact. (Paper 13, v2.0.6)
+- Track A — l_max divergence root cause: IDENTIFIED. HeH⁺ bare Level 4 drifts at +0.262 bohr/l_max with no Z_eff/PK/composition — divergence is intrinsic to the adiabatic approximation with asymmetric charges. PK-induced symmetry breaking causes composed LiH drift (+0.303). Three dead ends documented: algebraic PK projector (5.6× worse), enhanced Z_eff (destroys channel symmetry), single-channel DBOC (97% cancelled by P-coupling). Fix identified: variational 2D solver (Paper 15). **Next priority: reduce Level 4 iteration times for 2D solver integration into composition pipeline.** (v2.0.6)
+- Track C — Level 2 algebraicization (prolate spheroidal): COMPLETE. Spectral Laguerre basis replaces 5000-point FD radial ξ-solver. 250× dimension reduction, 270× speedup, 5000× accuracy improvement (1.01% → 0.0002%). n_basis=20 spectral functions achieve sub-0.001% accuracy. Existing FD solver preserved as default. Production wiring (PES scan, wavefunction reconstruction) is next step. (v2.0.8)
+- Track D — Level 3 exact Q-matrix: COMPLETE. Algebraic dP/dR derived from Hellmann-Feynman quantities (verified vs FD to <1e-9, zero finite differences needed). Exact Q = PP + dP/dR replaces closure approximation. Results: 14-19% improvement over closure at l_max≥1, best coupled-channel error 0.22% at l_max=3. l_max=0 overcorrection (1.1%) is structural — dominated by diagonal DBOC, not fixable by Q-matrix improvement alone. q_mode='exact' recommended for l_max≥1 production use. (v2.0.6)
+- Track E — Level 3 coupled-channel convergence ceiling: COMPLETE. Extended to l_max=5 with q_mode='exact'. Error converges algebraically (~l_max⁻²) to structural floor of 0.19-0.20%, set by adiabatic channel truncation. Sub-0.1% requires variational 2D solver (Paper 15). 3 channels sufficient (4-5 contribute < 0.001%). n_basis and radial grid fully converged. (v2.0.8)
+
+**Backlog:**
+- Q-matrix improvement for Level 3 coupled-channel — DONE (v2.0.6)
+- Track C implementation — DONE (v2.0.8). Production wiring (PES scan, wavefunction reconstruction) is next step.
+- Wire spectral radial solver into scan_h2plus_pes() and solve_with_wavefunction()
+- Rebuild composed-geometry Hamiltonians with spectral Level 2 solver (expect accuracy improvement from elimination of FD error)
+- Apply spectral Laguerre pattern to Level 3 hyperradial solver (currently 3000-point FD; expect similar 100-250× reduction)
 
 **Architecture locked:** The LCAO/graph-concatenation approach (v0.9.x series) is superseded. All molecular work uses natural geometry (Papers 11, 13, 15, 17).
 
@@ -59,6 +76,21 @@ Critical institutional memory. Do not re-derive these dead ends.
 | Single-S3 molecular encoding | One p0 cannot encode R-dependent bonding physics | Natural geometry principle: use coordinate system where separation occurs | Papers 8-9, 11 |
 | Orbital exponent relaxation (zeta) | Shifts PES uniformly, not differentially; R_eq unchanged | Not a mechanism for equilibrium geometry | v0.9.36 |
 | Mulliken cross-nuclear diagonal | Too strong at short R, drives R_eq inward | Bond sphere (Paper 8) or natural geometry approach | v0.9.35 diagnosis |
+| Z_eff partitioning for polyatomics | Dividing screened charge among bond pairs weakens bonds without adding inter-bond repulsion; R_eq goes from 32% to 103% error | Inter-bond orbital coupling needed (exchange/orthogonalization), not charge redistribution | v2.0.0 BeH2 diagnostic |
+| Classical inter-bond repulsion | Point-charge V_inter(R) has wrong R-dependence; pushes R_eq outward (wrong direction) at all scaling factors | Orbital-level inter-bond coupling required; scalar energy corrections cannot capture wavefunction modification | v2.0.0 BeH2 diagnostic |
+| Higher l_max / sigma+pi channels for LiH composed | PK pseudopotential is channel-blind (derived from l=0 core); higher-l channels add correlation preferentially at large R, pushing R_eq outward monotonically (l2: 6.4%, l3: 16.9%, l4: 32.8%) | l-dependent or m-dependent PK pseudopotential needed | Paper 17 Sec VI.A, v2.0.1 |
+| Monopole (F⁰) inter-fiber Coulomb coupling for BeH₂ | Monopole energy ~1.6 Ha, nearly R-independent near equilibrium; uniform repulsion pushes R_eq outward (32% → 62% error) | Exchange coupling via inter-fiber channel overlap S(R) — has correct R-dependence (20% R_eq error) | v2.0.1 |
+| Higher Slater multipoles (k≥1) for BeH₂ inter-fiber exchange | k=1 dipole is repulsive (worsens R_eq); k=2 quadrupole is negligibly small; total k=0+1+2 gives 20.5% error (worse than monopole alone at 20.0%) | Missing exchange is from off-diagonal 1-RDM terms, not higher angular multipoles | v2.0.1 |
+| Kinetic orthogonalization for BeH₂ | Löwdin correction is +0.03 Ha, nearly R-independent (peaks at R~4.0 where l≥1 channel growth counteracts overlap decay); no effect on R_eq | Residual 11.7% error is from basis truncation (l_max=2) and adiabatic approximation, not missing orthogonalization | v2.0.2 |
+| Lone pair inter-fiber coupling at Z_eff=6 (H₂O) | S·F⁰ produces −28 Ha bond-lone and −15 Ha lone-lone coupling — exceeds total electronic energy. Slater integrals scale as ~Z, unphysical at Z_eff=6 (validated only at Z_eff=2 for BeH₂) | Disable lone pair coupling; bond-bond only is validated (~0.5 Ha, consistent with BeH₂) | v2.0.4 H₂O diagnostic |
+| Midpoint origin for asymmetric bond pairs (Z_A ≫ Z_B) | Default midpoint origin places coordinate center far from electron density; R_eq error 56% at Z_A/Z_B=6:1 vs 17% with charge_center | Use origin='charge_center' with z0 = R(Z_A−Z_B)/(2(Z_A+Z_B)) | v2.0.4 H₂O diagnostic |
+| Eigenchannel rotation for l_max compression | Rotation to eigenchannels of coupling matrix does not reduce number of channels needed; all channels contribute at large R | Divergence is not from channel mixing but from PK coupling to higher-l channels | v2.0.5 diagnostic arc |
+| Prolate spheroidal basis compression | Spheroidal harmonics at 6:1 aspect ratio require 85% of spherical channels to capture 99% weight | Spheroidal basis provides no compression for asymmetric systems | v2.0.5 diagnostic arc |
+| Self-consistent PK iteration | Reduces drift rate by ~50% but does not eliminate l_max divergence; intermediate performance | R-dependent PK scaling is more effective | v2.0.5 diagnostic arc |
+| Projected PK (one-shot from core density) | PES collapses — no equilibrium geometry | PK must retain variational character; projection destroys it | v2.0.5 diagnostic arc |
+| Enhanced Z_eff (PK-free core exclusion) | 1/r² vs 1/r shape mismatch requires extreme A_rep (Z_eff(0)=−38); penetration effect (Z_eff>1) overwhelms repulsive dip; any Z_eff modification destroys homonuclear symmetry (31% odd-l channels vs 0% for PK) | Decoupled architecture (constant Z_A + PK) is essential; core exclusion cannot be encoded in the nuclear potential | v2.0.5 diagnostic arc, v2.0.6 |
+| Algebraic PK projector (rank-1 |core⟩⟨core|) | Rank-1 too weak; valence avoids core in function space while penetrating in coordinate space. Drift 5.6× worse than Gaussian PK (+1.697 vs +0.303 bohr/l_max) | Gaussian PK provides coordinate-space exclusion that rank-1 projector cannot. The l_max divergence root cause is the adiabatic approximation, not PK form | v2.0.6 algebraic PK diagnostic |
+| Single-channel DBOC correction | 97% cancelled by off-diagonal P-coupling; overcorrects by 23×. Requires full coupled-channel solver | Use coupled-channel hyperradial solver instead of single-channel + DBOC | v2.0.6 DBOC diagnostic |
 
 ---
 
@@ -66,9 +98,19 @@ Critical institutional memory. Do not re-derive these dead ends.
 
 The graph Laplacian is dimensionless and scale-invariant, topologically equivalent to the unit three-sphere S3. Physical energies emerge only through the energy-shell constraint p0^2 = -2E, which acts as a stereographic focal length. The 1/r Coulomb potential is not an input force law -- it is the coordinate distortion from stereographic projection (chordal distance identity). The universal kinetic scale kappa = -1/16 maps graph eigenvalues to the Rydberg spectrum. Eigenvalues of the Laplace-Beltrami operator on unit S3 are pure integers: lambda_n = -(n^2 - 1).
 
-For molecules, the natural geometry shifts from S3 (atoms) to prolate spheroidal coordinates (Paper 11), hyperspherical coordinates (Paper 13), molecule-frame hyperspherical (Paper 15), or composed fiber bundles (Paper 17). The choice of geometry is determined by where separation of variables occurs.
+For molecules, the natural geometry shifts from S3 (atoms) to prolate spheroidal coordinates (Paper 11), hyperspherical coordinates (Paper 13), molecule-frame hyperspherical (Paper 15), or composed fiber bundles (Paper 17). The choice of geometry is determined by where separation of variables occurs. At Level 1, the separated coordinates are all angular (on S3), making the problem fully discrete. At Levels 2+, separation produces continuous radial-like coordinates alongside discrete angular channels — a consequence of SO(4) symmetry breaking by multi-center or multi-electron potentials (Papers 8-9, negative theorem).
 
-**Prime directive:** Never modify the discrete graph Laplacian to artificially recover continuous differential terms (like 1/r or nabla^2). The graph is an exact, dimensionless S3 topology. The Schrodinger equation is its flat-space projection. If eigenvalues do not match expected physics, the issue is in the projection or energy-shell constraint, not the graph.
+**Prime directive (level-aware):** The framework preserves two distinct kinds of structure, and the rules differ by level:
+
+*Angular/symmetry structure (discrete at all levels):* The quantum number labeling (n, l, m), the per-shell degeneracy 2l+1, the selection rules from Gaunt integrals, and the channel structure are combinatorial invariants derived from the packing construction (Paper 0). These must never be modified, approximated, or bypassed at any level. They are the framework's core identity.
+
+*Radial/parametric structure (level-dependent):* At Level 1, Fock's SO(4) symmetry converts the radial coordinate into an angular coordinate on S3, making the entire problem discrete. The graph Laplacian is the exact object and must not be modified to artificially recover continuous differential terms (like 1/r or nabla^2). At Levels 2-4, the SO(4) symmetry is broken by multi-center or multi-electron physics, and the radial-like coordinates (internuclear distance R, hyperradius R_e, prolate spheroidal xi) currently require continuous numerical methods. However, this is not necessarily a fundamental feature of the physics — it may reflect algebraic structures that haven't been found yet. The project has already demonstrated this replacement in several cases: Paper 12's Neumann expansion replaced numerical quadrature of V_ee with algebraic recurrence relations; Gaunt integrals replace angular integration at all levels; the split-region Legendre expansion (Paper 15) terminates exactly via the 3j triangle inequality. In each case, what appeared to require continuous integration was replaced by algebraic evaluation once the right structure was identified.
+
+The places where continuous numerical methods currently survive are: Z_eff screening quadrature in composed geometries, spline caching for the rho-collapse, finite-difference radial grids in hyperspherical solvers, and the adiabatic potential curves U(R). These are computational tools for evaluating coupling matrix elements between discrete channel structures. Standard numerical methods (grid refinement, basis convergence, quadrature improvement) are appropriate for improving accuracy in these areas. Finding algebraic replacements for these numerical steps — as Paper 12 did for V_ee — is an ongoing goal of the project.
+
+The framework's long-term aspiration is: for every natural geometry, there exists an algebraic structure that computes all coupling matrix elements without spatial integration. This has been achieved for Level 1 (S3 graph eigenvalues), for angular couplings at all levels (Gaunt integrals), and for electron-electron repulsion in prolate spheroidal coordinates (Neumann expansion). It has not yet been achieved for the hyperradial coupling in Levels 3-4 or for Z_eff screening in Level 5. What must be preserved at every level is the discrete channel structure and selection rules, not the specific numerical method used to evaluate radial amplitudes within those channels.
+
+*Practical test:* If a proposed modification changes which quantum numbers label the states or which transitions are allowed, it violates the prime directive. If it changes how accurately the radial amplitude is computed within a given channel, it is a legitimate numerical improvement.
 
 **Topological integrity tests:** The 18 symbolic proofs in `tests/test_fock_projection.py` and `tests/test_fock_laplacian.py` validate S3 conformal geometry. These must never be broken or bypassed. Run before any release.
 
@@ -81,12 +123,18 @@ The core organizational principle of the project. Each electron configuration ha
 | Level | System | Natural Geometry | Best Result | Paper |
 |:-----:|:-------|:-----------------|:------------|:-----:|
 | 1 | H (1-center, 1e) | S3 (Fock) | < 0.1% | 7 |
-| 2 | H2+ (2-center, 1e) | Prolate spheroid | 0.70% | 11 |
+| 2 | H2+ (2-center, 1e) | Prolate spheroid | 0.0002% (spectral) | 11 |
 | 3 | He (1-center, 2e) | Hyperspherical | 0.05% | 13 |
+
+*Level 3 note:* The 0.05% result uses the original FD adiabatic solver at l_max=0. The algebraic spectral basis (v2.0.6) gives 0.16% single-channel at l_max=0 (removing lucky FD error cancellation). However, the algebraic solver enables coupled-channel integration, which shows convergent behavior: 0.37% → 0.27% at l_max 1-3, compared to divergent single-channel (0.56% → 0.65%). The coupled-channel solver with exact Q-matrix converges algebraically (~l_max⁻²) to a structural floor of 0.19-0.20% (v2.0.8, l_max=0-5 study). Sub-0.1% requires the variational 2D solver (Paper 15) to bypass the adiabatic approximation.
 | 4 | H2 (2-center, 2e) | Mol-frame hyperspherical | 94.1% D_e | 15 |
-| 5 | LiH (core+valence) | Composed (Level 3 + 4) | R_eq 6.4% | 17 |
+| 5 | LiH (core+valence) | Composed (Level 3 + 4) | R_eq 5.3% | 17 |
+| 5 | BeH₂ (polyatomic) | Composed (Level 3 + 4) + exchange | R_eq 11.7% | 17 |
+| 5 | H₂O (triatomic) | Composed (Level 3 + 4) + lone pairs | R_eq 26% | 17 |
 
 The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G_core(R) semi-direct G_val(R, core_state). Each electron group gets its own natural coordinate system, coupled via Z_eff screening and Phillips-Kleinman pseudopotential.
+
+**Algebraic structure:** At every level, matrix elements are computed from quantum number labels and Wigner 3j symbols (via Gaunt integrals), with no spatial quadrature in the unscreened atomic/molecular paths. The split-region Legendre expansion (Paper 15) terminates exactly via the 3j triangle inequality. Spatial quadrature enters only for the smooth Z_eff screening correction in composed geometries and for rho-collapse spline caching.
 
 ---
 
@@ -121,18 +169,18 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Paper 11 | `paper_11_prolate_spheroidal.tex` | Draft | Prolate spheroidal lattice: H2+ 0.70% E_min |
 | Paper 12 | `paper_12_algebraic_vee.tex` | Active | Neumann V_ee: H2 92.4% D_e, cusp diagnosis (7.6% gap) |
 | Paper 13 | `paper_13_hyperspherical.tex` | Active | Hyperspherical lattice: He 0.05%, fiber bundle, ab initio spectroscopy |
-| Paper 14 | `paper_14_qubit_encoding.tex` | Active | Structurally sparse qubits: O(Q^3.15) vs O(Q^4.60) Gaussian |
+| Paper 14 | `paper_14_qubit_encoding.tex` | Active | Structurally sparse qubits: O(Q^3.15) atoms, O(Q^2.5) composed; Trenev et al. Gaussian baselines |
 | Paper 15 | `paper_15_level4_geometry.tex` | Active | Level 4: H2 94.1% D_e, HeH+ 93.1% D_e |
-| Paper 16 | `paper_16_periodicity.tex` | Active | Periodic table from S_N representation theory on S^(3N-1) |
 | Paper 17 | `paper_17_composed_geometries.tex` | Active | Composed geometry: LiH R_eq 6.4%, BeH+ bound, ab initio PK |
+| Papers 8-9 | `Paper_8_Bond_Sphere_Sturmian.tex` | Draft | Bond sphere (positive), Sturmian structural theorem (negative), SO(4) selection rules |
 | FCI-A | `paper_fci_atoms.tex` | Draft | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | `paper_fci_molecules.tex` | Scaffold | LCAO LiH results and diagnostic arc |
 
-#### Methods (`papers/methods/`)
+#### Observations (`papers/observations/`)
 
 | Paper | File | Status | Key Result |
 |:------|:-----|:------:|:-----------|
-| Papers 8-9 | `Paper_8_Bond_Sphere_Sturmian.tex` | Draft | Bond sphere (positive), Sturmian structural theorem (negative), SO(4) selection rules |
+| Paper 16 | `paper_16_periodicity.tex` | Active | Periodic table from S_N representation theory on S^(3N-1) |
 
 #### Conjectures (`papers/conjectures/`)
 
@@ -169,6 +217,9 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Gaussian reference | `geovac/gaussian_reference.py` | `h2_sto3g()`, `he_sto3g()`, `he_cc_pvdz()`, `he_cc_pvtz()` |
 | Measurement grouping | `geovac/measurement_grouping.py` | `qwc_groups()`, `analyze_measurement_cost()` |
 | Trotter bounds | `geovac/trotter_bounds.py` | `pauli_1norm()`, `trotter_steps_required()` |
+| Composed qubit | `geovac/composed_qubit.py` | `build_composed_lih()`, `build_composed_beh2()`, `build_composed_h2o()` |
+| Algebraic angular solver | `geovac/algebraic_angular.py` | `AlgebraicAngularSolver(Z, l_max)` |
+| Algebraic coupled-channel | `geovac/algebraic_coupled_channel.py` | `solve_hyperspherical_algebraic_coupled()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
 
 ### Solver Methods
@@ -244,6 +295,12 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 - Scripts -> `debug/`, `demo/`, `tests/`, or `benchmarks/` (never root)
 - Documentation -> `docs/`
 
+### Changelog Protocol
+
+**Changelog granularity:** Each CHANGELOG entry should correspond to a releasable unit of work — a new feature, a completed diagnostic arc, a paper update, or a benchmark result. Do not create a new version entry for intermediate debugging steps, parameter sweeps, or exploratory runs. If a task requires multiple iterations to complete, document it as a single entry when the task concludes, noting the key findings and negative results. Intermediate data belongs in `debug/` with timestamped filenames, not in the CHANGELOG.
+
+**Version numbering:** Patch versions (x.y.Z) for bug fixes and documentation; minor versions (x.Y.0) for new features, completed diagnostic arcs, or paper additions; major versions (X.0.0) for architectural changes. A diagnostic arc that tests 10 hypotheses and finds 9 negative results is one minor version, not 10 patches.
+
 ---
 
 ## 10. Validation Benchmarks
@@ -253,7 +310,8 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Symbolic proofs (18 tests) | 0 failures | Topological foundation |
 | H (hydrogen) | < 0.1% | Basic validation |
 | He+ (helium ion) | < 0.1% | Z-scaling check |
-| H2+ (ionized H2) | < 0.1% | Topological control |
+| H2+ (ionized H2, FD) | < 0.1% | Topological control |
+| H2+ (prolate spheroidal, spectral) | < 0.001% | Spectral Laguerre accuracy control |
 | He (hyperspherical) | < 0.1% | Multi-electron control |
 | H2 Full CI | < 1.0% | Accuracy control |
 | H2 Neumann V_ee | 92.4% D_e | Algebraic integral accuracy |
@@ -272,6 +330,19 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | He cc-pVDZ FCI energy | < 0.001 Ha vs published | Integral engine validation |
 | He cc-pVTZ FCI energy | < 0.0002 Ha vs published | Integral engine validation |
 | QWC grouping correctness | 0 violations | Measurement group integrity |
+| LiH composed Pauli terms (Q=30) | exactly 334 | Composed qubit validation |
+| BeH2 composed Pauli terms (Q=50) | exactly 556 | Composed qubit validation |
+| H2O composed Pauli terms (Q=70) | exactly 778 | Composed qubit validation |
+| Composed cross-block ERIs | exactly 0 | Block-diagonal integrity |
+| Algebraic angular Casimir (R=0) | < 10⁻⁶ | SO(6) eigenvalue correctness |
+| Algebraic a₁ perturbation | < 10⁻⁸ | First-order perturbation theory |
+| Algebraic GL vs quad consistency | < 10⁻¹⁰ | Quadrature correctness |
+| Algebraic l_max monotonic convergence | monotonic | Centrifugal singularity elimination |
+| Spectral vs FD consistency | < 0.01 Ha | Spectral and FD agree within FD error |
+| Spectral dimension reduction | > 100× | 20 basis functions vs 5000 FD grid |
+| Spectral speedup | > 10× | Wall time reduction control |
+| l_max=5 coupled-channel floor | 0.15%–0.25% | Adiabatic ceiling characterization |
+| n_channels=5 vs 3 consistency | < 1 mHa | Channel truncation validation |
 | Speed regression | < 10% | Performance control |
 
 ---
@@ -304,6 +375,10 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Natural geometry hierarchy | 13 | Sec VIII | Core |
 | Ab initio spectroscopy | 13 | Sec IX | Core |
 | Algebraic structure (SO(6)) | 13 | Sec XII | Core |
+| Algebraic angular solver | 13 | Sec XIII | Core |
+| Coupled-channel convergence | 13 | Sec XIII.C | Core |
+| Hellmann-Feynman P-matrix | 13 | Sec XIII.A | Core |
+| Adiabatic bottleneck (l_max) | 13 | Sec XIII.B | Core |
 | Qubit Pauli scaling | 14 | All | Core |
 | Structural sparsity | 14 | Sec III | Core |
 | QWC measurement groups | 14 | Sec III.E | Core |
@@ -312,6 +387,9 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Genuine Gaussian baselines | 14 | Sec III.G | Core |
 | VQE head-to-head benchmark | 14 | Sec III.G | Core |
 | Equal-qubit Gaussian comparison | 14 | Sec III.G | Core |
+| Composed qubit Hamiltonians | 14 | Sec IV | Core |
+| Composed Pauli scaling (Q^2.5) | 14 | Sec IV.B | Core |
+| Trenev et al. Gaussian baselines | 14 | Sec IV.C | Core |
 | Level 4 mol-frame hyperspherical | 15 | All | Core |
 | Mol-frame charge function | 15 | Sec III | Core |
 | Multichannel expansion | 15 | Sec V | Core |
@@ -319,18 +397,19 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Variational 2D solver | 15 | Sec VI.D | Core |
 | HeH+ convergence | 15 | Sec VI.E | Core |
 | Double-adiabatic fiber bundle | 15 | Sec VII.C | Core |
-| Chemical periodicity (S_N reps) | 16 | All | Core |
-| Structure types A/B/C/D/E | 16 | Sec III | Core |
-| Hierarchical decomposition | 16 | Sec IV | Core |
-| Dirac limit (Z~137) | 16 | Sec VI | Core |
+| Chemical periodicity (S_N reps) | 16 | All | Observation |
+| Structure types A/B/C/D/E | 16 | Sec III | Observation |
+| Hierarchical decomposition | 16 | Sec IV | Observation |
+| Dirac limit (Z~137) | 16 | Sec VI | Observation |
 | Composed natural geometries | 17 | All | Core |
 | Core-valence fiber bundle | 17 | Sec II | Core |
 | Ab initio Phillips-Kleinman | 17 | Sec IV | Core |
 | Rho-collapse cache | 17 | Sec V | Core |
+| l_max divergence root cause | 17 | Sec VI.A | Core |
 | LiH/BeH+ benchmarks | 17 | Sec VI | Core |
-| Bond sphere theory | 8-9 | All | Methods |
-| Sturmian structural theorem | 8-9 | Sec IV | Methods |
-| SO(4) selection rules | 8-9 | Sec III | Methods |
+| Bond sphere theory | 8-9 | All | Core |
+| Sturmian structural theorem | 8-9 | Sec IV | Core |
+| SO(4) selection rules | 8-9 | Sec III | Core |
 | Fine structure alpha (Hopf bundle) | 2 | Sec 3-5 | Conjecture |
 | Hopf fibration spectral invariants | 2 | Sec 3 | Conjecture |
 | Cubic self-consistency (alpha) | 2 | Sec 4 | Conjecture |
@@ -341,3 +420,111 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Muonic hydrogen | 4 | Sec 5 | Conjecture |
 | Contact geometry | 4 | Sec 5 | Conjecture |
 | Comprehensive framework | 5 | All | Conjecture |
+
+---
+
+## 12. Algebraic Registry
+
+Tracks which matrix elements at each level are computed algebraically vs numerically. Status: **algebraic** (closed-form from quantum numbers), **algebraic-pending** (algebraic route identified but production code still uses quadrature), **numerical-required** (no known algebraic replacement).
+
+### Level 3 (Hyperspherical — He)
+
+| Matrix Element | Status | Notes |
+|:---------------|:------:|:------|
+| SO(6) Casimir eigenvalues | algebraic | Exact: ν(ν+4)/2 from representation theory |
+| Centrifugal barrier | algebraic | Diagonal in Gegenbauer spectral basis (confirmed Track B, v2.0.6) |
+| Nuclear coupling | algebraic | Partial harmonic sums (Eqs. 31-32, Paper 13) |
+| V_ee coupling | algebraic-pending | Split-region Legendre structure confirmed; GL quadrature still used in production |
+| Centrifugal matrix elements | algebraic | Diagonal in Gegenbauer basis (v2.0.6) |
+| Kinetic operator matrix | algebraic-pending | GL quadrature on smooth integrands; algebraic route via Gegenbauer recurrence identified |
+| Hellmann-Feynman P-matrix | algebraic | Exact from R-independent dH/dR (v2.0.6) |
+| Q-matrix (second derivative coupling) | algebraic | Exact Q = PP + dP/dR computed from Hellmann-Feynman quantities (v2.0.6) |
+| Coupled-channel radial solve | numerical-required | Coupled ODE integration on R grid |
+| Adiabatic potential curves U(R) | numerical-required | Small-matrix diagonalization at each R (10-30 dim, algebraic solver) or FD grid (200-800 dim, original) |
+
+### Level 2 (Prolate Spheroidal — H₂⁺)
+
+| Matrix Element | Status | Notes |
+|:---------------|:------:|:------|
+| Angular η-eigenfunctions | algebraic | Legendre spectral basis (n_basis=50), same as Mitnik et al. angular component |
+| Azimuthal m | algebraic | Exact separation of variables, integer quantum number |
+| Radial ξ-solver | algebraic | Spectral Laguerre basis (n_basis=20, α-adapted). 250× dimension reduction vs FD. Gauss-Laguerre quadrature for matrix elements; only small-matrix diagonalization is numerical (same status as angular solver). (v2.0.8) |
+| Separation parameter c² | numerical-required | Iterative root-finding (Brent method) for self-consistency between angular and radial equations |
+| Coupled-channel ceiling | characterized | Error floor 0.19-0.20% from adiabatic approximation; algebraic convergence ~l_max⁻²; 3 channels sufficient; n_basis and R-grid converged. Sub-0.1% requires non-adiabatic (2D variational) solver. (v2.0.8) |
+
+---
+
+## 13. Multi-Agent Protocol
+
+The GeoVac project uses an AI-augmented agentic workflow with a formalized planner–worker architecture for Claude Code sessions.
+
+### 13.1 Architecture
+
+Three layers:
+
+1. **Plan mode (human + chat):** Strategic direction, framing decisions, result synthesis. Conceptual changes to papers and CLAUDE.md originate here. This layer is not automated.
+2. **PM agent (main Claude Code session, full context):** Reads CLAUDE.md, README, and all papers relevant to the current track. Decomposes tasks into sub-agent work units. Evaluates sub-agent results against verification checklists. Does NOT write production code itself — it plans, delegates, and synthesizes.
+3. **Worker sub-agents (scoped context):** Execute specific coding, computation, or drafting tasks. Each receives only the files it needs. Reports results back to the PM agent.
+
+### 13.2 PM Session Kickoff
+
+Every PM session begins by reading CLAUDE.md and then executing the following:
+
+1. Identify the current track(s) and relevant papers from the plan mode directive
+2. Read those papers and any results from the previous session
+3. Check the failed approaches table (Section 3) for relevant dead ends
+4. Decompose the session goal into sub-agent tasks
+5. Draft sub-agent prompts using the standard template (13.3)
+
+### 13.3 Sub-Agent Prompt Template
+
+Every sub-agent dispatch uses this format:
+
+```
+CONTEXT FILES: [minimal set of files to read — list explicitly]
+TASK: [one clear deliverable, stated in one sentence]
+CONSTRAINTS:
+  - Failed approaches to avoid: [list relevant entries from Section 3]
+  - Structures that must be preserved: [quantum numbers, selection rules, etc.]
+  - Do NOT modify: [list any files that are off-limits]
+SUCCESS CRITERIA:
+  - Tests to pass: [specific test files or assertions]
+  - Numerical targets: [specific error thresholds if applicable]
+  - Consistency check: [which papers or results to verify against]
+OUTPUT FORMAT: [what to report back — specific data, not just pass/fail]
+```
+
+### 13.4 Verification Gates
+
+Before the PM agent accepts a sub-agent result, it checks:
+
+1. **Test gate:** Do all relevant tests pass? (Non-negotiable.)
+2. **Dead-end gate:** Does the approach match any entry in the failed approaches table? If so, reject unless the sub-agent explicitly explains what is different this time.
+3. **Prime directive gate:** Does the result modify any discrete structure — quantum number labeling, selection rules, channel structure, Gaunt integral coupling? If so, do NOT accept. Escalate to plan mode for human review.
+4. **Consistency gate:** Does the result contradict any established result in the papers? If uncertain, flag for PM review rather than accepting.
+
+### 13.5 Escalation Rules
+
+The following changes require escalation to plan mode (human review) and must NOT be made by sub-agents or the PM agent autonomously:
+
+- Any modification to papers in `papers/core/` or `papers/observations/` or `papers/conjectures/`
+- Any modification to CLAUDE.md
+- Any change to the natural geometry hierarchy (new levels, changed coordinate systems)
+- Any new entry in the failed approaches table
+- Any result that would change the "Best Result" column in the hierarchy table
+- Introduction of any fitted or empirical parameter
+
+### 13.6 Track Management
+
+Active work is organized into tracks. Each track has:
+
+- A name and one-sentence goal
+- A list of relevant papers and code modules
+- A current status (active / blocked / complete)
+- A log of sub-agent dispatches and results (maintained by the PM in `debug/track_logs/`)
+
+The PM agent maintains a brief track status file at `debug/track_logs/STATUS.md` that is updated at the end of each session. This file is read at the start of the next PM session to restore context.
+
+### 13.7 General Guidance
+
+This protocol is a starting point and will be refined based on experience. The overriding principle is: **code changes can be autonomous** (the test suite catches errors), **but conceptual changes cannot** (those require human judgment in plan mode). When in doubt, escalate rather than proceeding.
