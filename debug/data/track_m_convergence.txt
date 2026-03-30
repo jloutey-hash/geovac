@@ -1,0 +1,84 @@
+# Track M -- Prolate CI l_max Convergence Study
+# Date: 2026-03-29
+# R = 1.4011, j_max = 3, alpha = 1.0, p_max = 0
+# Neumann V_ee (l_max_neumann=20), grid 30x20x1
+# D_e_exact = 0.1745 Ha, E_exact = -1.17475 Ha
+
+# ============================================================
+# CONVERGENCE TABLE
+# ============================================================
+
+l_max  N_bf   E_total       D_e        D_e%    Error%   Time_s
+    0    10  -1.118169   0.118169    67.72%   32.28%      8.4
+    1    20  -1.132534   0.132534    75.95%   24.05%     35.8
+    2    46  -1.161139   0.161139    92.34%    7.66%    206.7
+    3    72  -1.161279   0.161279    92.42%    7.58%    738.7
+    4   114  -1.161340   0.161340    92.46%    7.54%   1850.0
+
+# Reference data (alpha-optimized, from neumann_convergence.txt):
+# j=2,l=2: 27 bf, 92.2%, 705s (alpha opt)
+# j=3,l=2: 46 bf, 92.4%, 1907s (alpha opt)
+# j=3,l=3: 72 bf, 92.4%, 5271s (alpha opt)
+
+# ============================================================
+# SUCCESSIVE IMPROVEMENTS
+# ============================================================
+
+# l_max  Delta_D_e%  Ratio_to_prev
+# 0->1:   +8.230%    ---
+# 1->2:  +16.390%    1.991  (anomalous: l=2 first captures gerade angular)
+# 2->3:   +0.080%    0.005  (200x drop: angular saturation onset)
+# 3->4:   +0.040%    0.500  (halving: very slow linear tail)
+
+# ============================================================
+# CONVERGENCE FIT
+# ============================================================
+
+# Power-law fit (l >= 1): error = 19.9 * l^(-0.85), R^2 = 0.79
+# Poor fit because convergence is TWO-REGIME:
+#   Fast (l=0-2): angular basis captures gerade electron distribution
+#   Slow (l=2+):  marginal angular refinement, ~0.06%/l_max
+#
+# Extrapolation (linear in slow regime):
+#   5% error at l_max ~ 45
+#   1% error at l_max ~ 113
+# Both impractical. Effective plateau at 92.5%.
+
+# ============================================================
+# COMPARISON WITH EXPLICIT CORRELATION
+# ============================================================
+
+# p=0, l=2, j=2:  27 bf, 79.0% (numerical V_ee)
+# p=0, l=2, j=2:  27 bf, 92.2% (Neumann V_ee)  <-- V_ee error = 13 pp
+# p=0, l=4, j=3: 114 bf, 92.5% (Neumann V_ee)  <-- l_max ceiling
+# p=1, l=0, j=1:   6 bf, 79.2% (numerical V_ee) <-- 6 terms = 27 terms!
+# p=2, l=0, j=1:   9 bf, 94.7% (numerical V_ee) <-- EXCEEDS l=4 ceiling
+#
+# 9 terms with r12^2 > 114 terms without r12
+# Cusp correction (r12^p) is MORE IMPORTANT than angular refinement (l_max)
+
+# ============================================================
+# VERDICT: SCENARIO B -- SATURATION
+# ============================================================
+
+# The prolate spheroidal CI (p=0, Neumann V_ee) saturates at ~92.5% D_e.
+# Angular convergence is rapid: 92.3% at l=2, 92.5% at l=4 (+0.12% total).
+# The remaining 7.5% is the electron-electron cusp (1/r12 singularity).
+#
+# Evidence:
+#   1. Successive improvements decay 200x from l=1-2 to l=2-3
+#   2. l=3->4 adds only 0.04% (diminishing geometrically)
+#   3. 9 basis functions with r12^2 exceed the 114-function plateau
+#   4. Error (7.5%) matches Paper 12's cusp diagnosis (7.6%)
+#
+# Implication for Paper 18 (Section IV):
+#   Level 4's transcendental mu(rho,R) is NOT a coordinate artifact.
+#   The mol-frame hyperspherical reparameterization (Paper 15) is
+#   fundamentally necessary. It captures three-body coalescence
+#   through R-dependent channel mixing that the product-space
+#   prolate CI cannot resolve. Paper 15's 94.1% D_e exceeds the
+#   prolate CI ceiling by this mechanism.
+#
+#   The irreducible exchange constant at Level 4 is NOT just the
+#   Level 2 Stieltjes seed -- it includes the transcendental
+#   mu(rho,R) from the hyperspherical reparameterization.

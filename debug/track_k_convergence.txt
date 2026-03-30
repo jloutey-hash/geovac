@@ -1,0 +1,35 @@
+======================================================================
+Track K -- Prolate CI l_max Convergence Study
+Paper 18 Scenario A vs B
+======================================================================
+
+Date: 2026-03-29 17:04
+R = 1.4011 bohr, E_exact = -1.17475 Ha, D_e_exact = 0.1745 Ha
+Alpha = 1.0 (fixed; within 0.2% of optimized per Paper 12)
+
+CONVERGENCE TABLE (p_max=0, Neumann V_ee)
+Config        N_bf         E (Ha)     D_e%   Error%     Time
+------------------------------------------------------------
+j=0,l=0          1    -1.06422679   36.81%   63.19%     1.5s
+j=1,l=0          3    -1.11319290   64.87%   35.13%     1.9s
+j=1,l=1          6    -1.12797111   73.34%   26.66%     6.0s
+j=2,l=1         12    -1.13237144   75.86%   24.14%    20.8s
+j=2,l=2         27    -1.16095997   92.24%    7.76%   107.5s
+j=3,l=2         46    -1.16113880   92.34%    7.66%   317.7s
+j=3,l=3         72    -1.16127888   92.42%    7.58%   790.0s
+j=4,l=3        110    -1.16135636   92.47%    7.53%  1146.0s
+
+Exact: E = -1.17475 Ha, D_e = 0.1745 Ha
+
+SATURATION REGION (l_max >= 2):
+  27 bf -> 46 bf: +0.10% D_e
+  46 bf -> 72 bf: +0.08% D_e
+  72 bf -> 110 bf: +0.05% D_e
+
+Saturation ceiling: 92.48% D_e (fit)
+
+VERDICT: SCENARIO B -- Prolate CI saturates. Level 4 mu(rho,R) is irreducible.
+
+NOTE: p_max>0 cusp terms INVALID with Neumann V_ee.
+Neumann decomposition requires separable basis functions;
+r12^p terms are non-separable. Would need full 6D quadrature.

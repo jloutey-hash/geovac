@@ -20,6 +20,8 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 
 **Lead with concrete advantages:** O(V) sparsity, angular momentum selection rules baked into the basis, zero-parameter construction from nuclear charges and geometry alone, efficient qubit encodings (Paper 14). These structural properties are the framework's actual selling points — not philosophical claims about the nature of quantum mechanics.
 
+**The π-free graph principle:** The GeoVac graph is π-free: all eigenvalues, degeneracies, and coupling coefficients are integers or rationals. Transcendental numbers (π, exponential integrals, spectral zeta values) enter exclusively when projecting the graph onto continuous manifolds for comparison with experiment or for computational convenience. This observation (Paper 18) motivates the design principle: stay on the graph whenever possible, and when projection is necessary, identify the minimal transcendental content (the exchange constant) required. The exchange constant taxonomy (intrinsic, calibration, embedding, flow) classifies projections by what determines them and predicts the computational cost of each departure from the graph.
+
 **Benchmarking rule:** When comparing to other methods, always use the strongest available baseline (cc-pVTZ or better for atoms, explicitly correlated methods for molecules), not just STO-3G. If the comparison is unfavorable, say so honestly and identify what the framework offers instead (sparsity, scaling, structural insight). Position the framework as a computationally principled alternative, not as a replacement for production quantum chemistry.
 
 ---
@@ -56,6 +58,7 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Track H — Level 3 algebraic Laguerre matrix elements: COMPLETE. Overlap S and kinetic K fully algebraic via three-term Laguerre recurrence (pentadiagonal M2 for S, tridiagonal derivative expansion for K). Machine-precision agreement (< 1e-14 relative error). 11× matrix build speedup (52 μs vs 585 μs). V_eff stays quadrature (transcendental, Track G). `matrix_method='algebraic'` in spectral solver. (v2.0.10)
 - Track I — Level 4 spectral Laguerre hyperradial: COMPLETE. Spectral Laguerre basis replaces FD R_e grid for all three Level 4 pathways (adiabatic, coupled-channel, 2D variational). 16× dimension reduction (400 → 25), < 0.0005 Ha FD agreement (adiabatic). No wall time speedup — angular sweep dominates 99% of Level 4 cost (structural finding: FD radial is already O(N) tridiagonal, sub-ms). Spectral value is accuracy, memory, and parameterization reduction. n_basis=20 optimal; mild conditioning at n_basis≥25. `radial_method='spectral'` in Level 4 solver. (v2.0.10)
 - Track J — Level 2 algebraic m≠0 (associated Laguerre): COMPLETE. Associated Laguerre basis L_n^{|m|}(x) with weight x^|m|·e^{-x} absorbs the 1/x centrifugal singularity. Partial-fraction decomposition splits centrifugal term into lowered moment M_{-1} (algebraic, DLMF 18.9.13 summation identity) plus Stieltjes integral J (three-term recurrence seeded by e^a·E₁(a)). All matrix elements algebraic except single transcendental seed. Associated basis converges faster than ordinary Laguerre for m=1 (stable by N=10 vs non-monotonic at N=40). m=2 delta states: algebraic-quadrature agreement ~5e-9. PES shape preserved (R_eq matches). `matrix_method='algebraic'` now works for ALL m values. 119 tests passing (77 associated Laguerre + 42 kinetic). Paper 11 Sec V.D updated. (v2.0.10)
+- Track K — Level 4 spectral angular: COMPLETE. Jacobi polynomial spectral basis replaces FD angular solver for Level 4 molecule-frame hyperspherical. 269× speedup (39.9s → 0.15s), 20× dimension reduction (1000 → 50). U_min agreement < 2e-5 Ha. D_e shift 0.3% (FD error cancellation removed). SO(6) Casimir free eigenvalues + precomputed V_ee coupling. `angular_method='spectral'` in solve_level4_h2_multichannel(). (v2.0.11)
 
 **Backlog:**
 - Q-matrix improvement for Level 3 coupled-channel — DONE (v2.0.6)
@@ -66,8 +69,9 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Track A next step: test composed LiH with `pk_mode='none'` to isolate residual 25% l_max drift source
 - Apply algebraic Laguerre matrix elements to Level 3 hyperradial — DONE (Track H, v2.0.10). Overlap S and kinetic K fully algebraic via three-term Laguerre recurrence (< 1e-14 relative error, 11× build speedup). Potential V_eff stays quadrature (transcendental, Track G). Energy agreement < 1e-14 Ha. `matrix_method='algebraic'` in spectral solver.
 - Apply spectral Laguerre to Level 4 hyperradial — DONE (Track I, v2.0.10). Three pathways (adiabatic, coupled-channel, 2D) all wired. 16× dimension reduction, < 0.0005 Ha FD agreement. No wall time speedup — angular sweep dominates 99% of Level 4 cost (structural finding). `radial_method='spectral'` in Level 4 solver.
-- Angular sweep caching/acceleration for Level 4 (identified as 99% bottleneck, Track I)
+- Angular sweep caching/acceleration for Level 4 — PARTIALLY RESOLVED (Track K, v2.0.11). Spectral Jacobi basis gives 269× speedup on angular sweep; angular now ~50% of total cost (was 99%). Further acceleration possible via caching or parallelization.
 - Dense spectral PES scan (200+ R-points) for precision H₂⁺ spectroscopic constants (R_eq, ω_e, B_e, ν₀₁)
+- **α combination rule derivation (Paper 2 → Paper 18):** Paper 18's exchange constant framework suggests that K = π(B + F − Δ) may be derivable rather than conjectural. If α is a spectral-geometric exchange constant for the Hopf fibration S¹ → S³ → S², the form of K should be constrained by the requirement that it is a Weyl-type projection from the discrete bundle (integer Casimir trace B = 42, rational boundary Δ = 1/40) to a continuous coupling constant. Research question: does the spectral geometry of fiber bundles (heat kernel, analytic torsion, index theory) constrain K to the form π × (Casimir trace + spectral zeta − boundary correction)? This is upstream of Paper 2 and downstream of Paper 18. Not yet investigated.
 
 **Architecture locked:** The LCAO/graph-concatenation approach (v0.9.x series) is superseded. All molecular work uses natural geometry (Papers 11, 13, 15, 17).
 
@@ -144,7 +148,7 @@ The core organizational principle of the project. Each electron configuration ha
 
 The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G_core(R) semi-direct G_val(R, core_state). Each electron group gets its own natural coordinate system, coupled via Z_eff screening and Phillips-Kleinman pseudopotential.
 
-**Algebraic structure:** At every level, angular matrix elements are computed from quantum number labels and Wigner 3j symbols (via Gaunt integrals), with no spatial quadrature. The split-region Legendre expansion (Paper 15) terminates exactly via the 3j triangle inequality. At Level 2, the radial solver is fully algebraic for all m: σ states (m=0) use ordinary Laguerre three-term recurrence with zero numerical integration (v2.0.9); π/δ states (m≠0) use associated Laguerre basis L_n^{|m|}(x) with partial-fraction decomposition and Stieltjes integral recurrence, reducing non-algebraic content to a single transcendental seed e^a·E₁(a) (Track J, v2.0.10). At Level 3, the angular problem is fully algebraic, and the hyperradial overlap S and kinetic K matrices are algebraic via three-term Laguerre recurrence (Track H, v2.0.10: pentadiagonal M2 for S, tridiagonal derivative expansion for K, < 1e-14 relative error, 11× build speedup). The adiabatic eigenvalues μ(R) are proven transcendental (O(R) → O(R²) regime transition, v2.0.9 Track G) — the potential V_eff(R) must stay quadrature, point-by-point diagonalization is irreducible, though spectral radial solvers achieve 95-120× speedups. At Level 4, the spectral Laguerre basis achieves 16× dimension reduction and < 0.0005 Ha FD agreement for the hyperradial coordinate; wall time is dominated by the angular sweep (99% of total cost), not the radial solve. n_basis=20 optimal (mild conditioning at n_basis≥25). Spatial quadrature enters for: Level 3 hyperradial potential matrix elements (V_eff transcendental), Level 4 angular eigenvalue sweeps (μ(ρ) transcendental), Z_eff screening in composed geometries, and rho-collapse spline caching.
+**Algebraic structure:** At every level, angular matrix elements are computed from quantum number labels and Wigner 3j symbols (via Gaunt integrals), with no spatial quadrature. The split-region Legendre expansion (Paper 15) terminates exactly via the 3j triangle inequality. At Level 2, the radial solver is fully algebraic for all m: σ states (m=0) use ordinary Laguerre three-term recurrence with zero numerical integration (v2.0.9); π/δ states (m≠0) use associated Laguerre basis L_n^{|m|}(x) with partial-fraction decomposition and Stieltjes integral recurrence, reducing non-algebraic content to a single transcendental seed e^a·E₁(a) (Track J, v2.0.10). At Level 3, the angular problem is fully algebraic, and the hyperradial overlap S and kinetic K matrices are algebraic via three-term Laguerre recurrence (Track H, v2.0.10: pentadiagonal M2 for S, tridiagonal derivative expansion for K, < 1e-14 relative error, 11× build speedup). The adiabatic eigenvalues μ(R) are proven transcendental (O(R) → O(R²) regime transition, v2.0.9 Track G) — the potential V_eff(R) must stay quadrature, point-by-point diagonalization is irreducible, though spectral radial solvers achieve 95-120× speedups. At Level 4, the spectral Laguerre basis achieves 16× dimension reduction for the hyperradial coordinate (Track I), and the spectral Jacobi basis achieves 20× dimension reduction for the angular sweep (Track K, 269× speedup, 1000→50 matrix dimension). The combined spectral solver reduces the angular sweep from 99% to ~50% of total cost. The angular eigenvalues μ(ρ) remain transcendental (computed by diagonalization at each ρ-point), but the per-point cost is now a 50×50 eigensolve rather than a 1000×1000 one. n_basis_radial=20 optimal (mild conditioning at n_basis≥25). Spatial quadrature enters for: Level 3 hyperradial potential matrix elements (V_eff transcendental), Level 4 angular eigenvalue sweeps (μ(ρ) transcendental, but spectral basis reduces cost 269×), Z_eff screening in composed geometries, and rho-collapse spline caching.
 
 ---
 
@@ -184,6 +188,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Paper 15 | `paper_15_level4_geometry.tex` | Active | Level 4: H2 94.1% D_e, HeH+ 93.1% D_e |
 | Paper 17 | `paper_17_composed_geometries.tex` | Active | Composed geometry: LiH R_eq 6.4%, BeH+ bound, ab initio PK |
 | Papers 8-9 | `Paper_8_Bond_Sphere_Sturmian.tex` | Draft | Bond sphere (positive), Sturmian structural theorem (negative), SO(4) selection rules |
+| Paper 18 | `paper_18_exchange_constants.tex` | Draft | Spectral-geometric exchange constants: Weyl-Selberg identification of κ, e^a E₁(a), μ(R); α connection |
 | FCI-A | `paper_fci_atoms.tex` | Draft | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | `paper_fci_molecules.tex` | Scaffold | LCAO LiH results and diagnostic arc |
 
@@ -192,7 +197,6 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Paper | File | Status | Key Result |
 |:------|:-----|:------:|:-----------|
 | Paper 16 | `paper_16_periodicity.tex` | Active | Periodic table from S_N representation theory on S^(3N-1) |
-| Paper 18 | `paper_18_exchange_constants.tex` | Draft | Spectral-geometric exchange constants: Weyl-Selberg identification of κ, e^a E₁(a), μ(R); α connection |
 
 #### Conjectures (`papers/conjectures/`)
 
@@ -233,6 +237,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Algebraic angular solver | `geovac/algebraic_angular.py` | `AlgebraicAngularSolver(Z, l_max)` |
 | Algebraic coupled-channel | `geovac/algebraic_coupled_channel.py` | `solve_hyperspherical_algebraic_coupled()` |
 | Hyperradial solver | `geovac/hyperspherical_radial.py` | `solve_radial()`, `solve_radial_spectral()` |
+| Spectral angular (Level 4) | `geovac/level4_spectral_angular.py` | `SpectralAngularSolver`, `angular_method='spectral'` |
 | Perturbation series (Level 3) | `geovac/algebraic_angular.py` | `perturbation_series_mu()`, `pade_approximant()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
 
@@ -373,6 +378,9 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Level 4 spectral vs FD consistency | < 0.001 Ha | Level 4 spectral hyperradial solver |
 | Level 4 spectral D_e% match | within 0.5% | D_e% preserved under spectral substitution |
 | Level 4 spectral convergence plateau | n_basis 20-30 within 0.0001 Ha | Convergence plateau verified |
+| Level 4 spectral angular vs FD U_min | < 2e-5 Ha | Angular spectral solver accuracy (Track K) |
+| Level 4 spectral angular speedup | > 200× | Angular sweep speedup control (Track K) |
+| Level 4 spectral angular dimension | 20× reduction | 1000 → 50 matrix dimension (Track K) |
 | Speed regression | < 10% | Performance control |
 
 ---
@@ -416,6 +424,7 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Spectral Laguerre (Level 3) | 13 | — | Core |
 | Algebraic Laguerre S, K (Level 3) | 13 | — | Core |
 | Spectral Laguerre (Level 4) | 15 | Sec VI.H | Core |
+| Spectral Jacobi angular (Level 4) | 15 | Sec VI.I | Core |
 | 2D solver in composition | 15, 17 | Sec VI.D, — | Core |
 | Qubit Pauli scaling | 14 | All | Core |
 | Structural sparsity | 14 | Sec III | Core |
@@ -439,10 +448,10 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Structure types A/B/C/D/E | 16 | Sec III | Observation |
 | Hierarchical decomposition | 16 | Sec IV | Observation |
 | Dirac limit (Z~137) | 16 | Sec VI | Observation |
-| Exchange constants (Weyl-Selberg) | 18 | All | Observation |
-| Stieltjes seed e^a E₁(a) | 18 | Sec II.B | Observation |
-| Transcendence hierarchy | 18 | Sec IV, VI | Observation |
-| α as exchange constant | 18 | Sec V | Observation |
+| Exchange constants (Weyl-Selberg) | 18 | All | Core |
+| Stieltjes seed e^a E₁(a) | 18 | Sec II.B | Core |
+| Transcendence hierarchy | 18 | Sec IV, VI | Core |
+| α as exchange constant | 18 | Sec V | Core |
 | Composed natural geometries | 17 | All | Core |
 | Core-valence fiber bundle | 17 | Sec II | Core |
 | Ab initio Phillips-Kleinman | 17 | Sec IV | Core |
@@ -504,7 +513,8 @@ Tracks which matrix elements at each level are computed algebraically vs numeric
 | Hyperradial overlap (S) | algebraic | Same Laguerre three-term recurrence as Level 3. Pentadiagonal M2 moment matrix. (Track I, v2.0.10) |
 | Hyperradial kinetic (K) | algebraic | Same derivative kernel as Level 3. Tridiagonal expansion. (Track I, v2.0.10) |
 | Hyperradial potential (U_eff) | numerical-required | Adiabatic curve from angular sweep. μ(ρ) transcendental (same root cause as Level 3, Track G). |
-| Angular eigenvalue sweep | numerical-required | Point-by-point diagonalization of H_ang at ~130 ρ-values. Dominates 99% of Level 4 wall time. |
+| Angular eigenvalue sweep (FD) | numerical-required | Point-by-point diagonalization of H_ang at ~130 ρ-values. FD: 1000×1000 matrices, 99% of wall time. |
+| Angular eigenvalue sweep (spectral) | numerical-required | Jacobi polynomial basis: 50×50 matrices, 269× speedup, ~50% of wall time. SO(6) Casimir free spectrum + precomputed V_ee coupling. `angular_method='spectral'`. (Track K, v2.0.11) |
 | 2D tensor product assembly | numerical-required | H_ang evaluated at each quadrature point for (R_e, α) tensor product. Dense kronecker assembly. |
 | Nuclear coupling (split-region Legendre) | algebraic | Gaunt integrals, exact via 3j triangle inequality (Paper 15). |
 

@@ -7,26 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.11] - 2026-03-29
 
-### Paper 18: Spectral-Geometric Exchange Constants
+### Exchange Constants & Algebraic Infrastructure
 
-New observations paper cataloging the transcendental constants that appear when discrete algebraic structures are projected onto continuous coordinate systems across the GeoVac hierarchy. Identifies them as instances of Weyl's law and the Selberg trace formula.
+#### Track J — Level 2 Algebraic m≠0 Associated Laguerre (COMPLETE)
 
-#### Paper content
-- **Section II.B expanded with Track J evidence:** Full partial-fraction decomposition of centrifugal singularity, associated Laguerre basis L_n^{|m|}(x), algebraic M_{-1} via DLMF 18.9.13, Stieltjes recurrence seeded by single transcendental e^a·E₁(a). Key observation: continuous math compressed from function (quadrature integrand) to constant (Stieltjes seed).
-- **Basis adaptation observation:** Identifying the exchange constant and absorbing it into the basis improves convergence (associated Laguerre stable by N=10 vs N≈20 for ordinary). The transcendental tells you where the curvature mismatch lives.
-- **π as founding example (Section III):** π is the primordial exchange constant (S¹ eigenvalue count ↔ circumference); all GeoVac constants are descendants.
-- **Computational cost observation (Section VI):** Exchange constants are conceptual tolls, not computational bottlenecks. κ: one multiply; seed: one function call; μ(R): millisecond diagonalization.
-- **α transcendence strengthened (Section V):** Two formal observations — structural match of K = π(B + F − Δ) to exchange constant pattern; α likely transcendental as root of cubic with transcendental coefficients.
+Associated Laguerre basis L_n^{|m|}(x) eliminates all quadrature for m≠0 states in the Level 2 prolate spheroidal radial solver.
 
-#### MD integration
-- Paper 18 added to CLAUDE.md: observations inventory, reading guide (item 11), topic-to-paper lookup (4 entries)
-- Paper 18 added to README.md Paper Series table
+- **Partial-fraction decomposition:** Centrifugal singularity m²/(x(x+2β)) split into algebraic lowered moment M_{-1} (DLMF 18.9.13) + Stieltjes integral J (three-term recurrence)
+- **Single transcendental seed:** e^a·E₁(a) — computationally negligible, irreducible algebraic boundary for Level 2
+- **Faster convergence:** Associated basis stable by N=10 (vs N≈20 for ordinary Laguerre at m=1)
+- **δ states (m=2):** Machine precision (~5e-9) vs FD
+- **Level 2 now fully algebraic for all m values** — `matrix_method='algebraic'` auto-detected
+- 119 tests passing (77 associated Laguerre + 42 kinetic), zero regressions
+- Paper 11 Sec V.D updated
 
 **Files changed:**
-- `papers/observations/paper_18_exchange_constants.tex` — new paper
-- `CLAUDE.md` — Paper 18 registration, version bump
+- `geovac/prolate_spheroidal_lattice.py` — associated Laguerre matrix construction
+- `tests/test_associated_laguerre.py` — new (77 tests)
+- `tests/test_associated_kinetic.py` — new (42 tests)
+- `papers/core/paper_11_prolate_spheroidal.tex` — Sec V.D expanded
+
+#### Track K — Level 4 Spectral Angular Solver (COMPLETE)
+
+Jacobi polynomial spectral basis replaces FD angular solver for Level 4 molecule-frame hyperspherical coordinates.
+
+- **269× speedup:** Angular sweep 39.9s → 0.15s (130 ρ-points, l_max=2)
+- **20× dimension reduction:** 1000×1000 FD → 50×50 spectral matrices
+- **Basis:** Jacobi polynomials with SO(6) Casimir free eigenvalues, precomputed V_ee coupling via Gaunt-type integrals
+- **Accuracy:** U_min agreement < 2e-5 Ha vs FD. D_e shifts 0.3% (90.0% → 89.7%) due to removal of FD error cancellation
+- Default behavior unchanged (`angular_method='fd'`); spectral via `angular_method='spectral'`
+- 18 new tests (test_spectral_angular_l4.py), 45/45 Level 4 multichannel tests unchanged
+
+**Files created:**
+- `geovac/level4_spectral_angular.py` — spectral Jacobi solver (340 lines)
+- `tests/test_spectral_angular_l4.py` — 18 tests
+
+**Files modified:**
+- `geovac/level4_multichannel.py` — `angular_method` parameter
+- `papers/core/paper_15_level4_geometry.tex` — Sec VI.I spectral Jacobi angular solver
+
+#### Track L — κ = -1/16 Derivation (COMPLETE, negative result)
+
+Investigated whether κ = -1/16 is a Weyl constant or heat kernel ratio. It is neither.
+
+- **κ = -E_H/λ_max = -(1/2)/(2·d_max)** — a graph calibration constant mapping the largest graph eigenvalue to the hydrogen ground state
+- Conformal coupling coincidence (c₃ = 1/8) is not causal
+- Paper 18 Sec VI.E documents the full derivation and negative result
+
+#### Track M — Prolate CI l_max Convergence (COMPLETE, Scenario B)
+
+Definitive convergence study for prolate spheroidal CI, establishing that Level 4's μ(ρ,R) is irreducible.
+
+- Prolate CI saturates at ~92.5% D_e
+- Angular convergence exhausted: l=2→3 gains +0.08%, l=3→4 gains +0.04%
+- 9 r₁₂² terms (p=2) exceed 114-function prolate CI plateau
+- Level 4's molecule-frame angular eigenvalue μ(ρ,R) is irreducible — not a coordinate artifact
+- Paper 18 Sec II.D documents the convergence study
+
+#### Paper 18 — Spectral-Geometric Exchange Constants (NEW)
+
+New core paper cataloging the transcendental constants that appear when discrete algebraic structures are projected onto continuous coordinate systems across the GeoVac hierarchy. Identifies them as instances of Weyl's law and the Selberg trace formula.
+
+- **Taxonomy:** intrinsic → calibration → embedding → flow
+- **Track J evidence (Sec II.B):** Partial-fraction decomposition, Stieltjes seed as exchange constant
+- **π as founding example (Sec III):** Primordial exchange constant (S¹ eigenvalue count ↔ circumference)
+- **α connection (Sec V):** Structural match to exchange constant pattern; α likely transcendental
+- **κ derivation (Sec VI.E):** Graph calibration constant, not Weyl (Track L negative result)
+- **Prolate CI convergence (Sec II.D):** μ(ρ,R) irreducibility (Track M)
+- Paper 18 moved from `papers/observations/` to `papers/core/`
+
+**Files changed:**
+- `papers/core/paper_18_exchange_constants.tex` — new paper
+- `CLAUDE.md` — Paper 18 registration (core inventory), version bump
 - `README.md` — Paper 18 registration, version bump
-- `CHANGELOG.md` — this entry
 
 ## [2.0.10] - 2026-03-29
 

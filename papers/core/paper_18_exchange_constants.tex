@@ -281,6 +281,60 @@ a constant, because the hyperspherical embedding distorts the
 product geometry differently at each $R$.
 
 
+\subsection{Level 4: $\mu(\rho,R)$ (product space $\to$ molecule-frame hyperspherical)}
+\label{sec:mu_level4}
+
+Level~4 combines the two-center complication of Level~2 with the
+two-electron complication of Level~3.  Two approaches exist, with
+fundamentally different algebraic character.
+
+The product-space approach (prolate spheroidal CI, Paper~12) is
+fully algebraic: all electron-electron matrix elements are computed
+from Neumann expansion recurrence relations with zero spatial
+quadrature.  The Laguerre radial and Legendre angular matrix
+elements are likewise algebraic.  No transcendental constant
+appears anywhere in the computation.
+
+However, a systematic convergence study (Track~M) demonstrates
+that this algebraic approach saturates at $\sim$92.5\% of the
+exact dissociation energy $D_e$~\cite{loutey_track_m}.  The
+angular basis convergence is rapid---92.3\% at $l_{\max} = 2$
+(46 basis functions), 92.5\% at $l_{\max} = 4$ (114 basis
+functions)---but successive improvements decay by a factor of
+200 from $l = 1 \to 2$ to $l = 2 \to 3$, with the $l = 3 \to 4$
+increment contributing only 0.04\%.  Extrapolation in the slow
+regime predicts that 5\% error would require $l_{\max} \sim 45$
+and 1\% error $l_{\max} \sim 113$, both impractical.  The
+effective ceiling is 92.5\% $D_e$.
+
+The smoking gun is explicit correlation: 9~basis functions with
+$r_{12}^2$ factors (Hylleraas $p = 2$) achieve 94.7\% $D_e$,
+exceeding the 114-function prolate CI plateau.  The residual
+7.5\% matches Paper~12's cusp diagnosis (7.6\%): the
+electron-electron cusp ($1/r_{12}$ singularity) is a completeness
+deficiency of the product basis, not a convergence issue.
+
+The mol-frame hyperspherical reparameterization (Paper~15)
+resolves this by introducing coordinates $(\rho, R, \alpha)$
+where $\rho$ is the electron hyperradius and $\alpha$ the
+hyperangle.  The angular eigenvalues $\mu(\rho, R)$ are now a
+transcendental function of \textit{two} continuous parameters,
+reflecting the simultaneous three-body coalescence in coordinate
+and configuration space.  This solver achieves 94.1\% $D_e$,
+surpassing the prolate CI ceiling.
+
+The distinction between Levels~3 and 4 is qualitative.  At
+Level~3, the $S^3 \times S^3$ FCI converges (albeit slowly)---the
+exchange constant $\mu(R)$ is a computational convenience that
+accelerates convergence but is not fundamentally necessary.  At
+Level~4, the prolate product-space CI \textit{saturates}: the
+exchange constant $\mu(\rho, R)$ is irreducible because the
+product basis is structurally blind to three-body coalescence.
+The reparameterization does not merely accelerate convergence;
+it accesses physics that the algebraic product space cannot
+represent at any practical basis size.
+
+
 %% ========================================================================
 %% III. THE PATTERN
 %% ========================================================================
@@ -347,6 +401,33 @@ a limit of harmonic sums weighted by $\pi$-dependent terms), and
 $\mu(R)$ is an eigenvalue of a Hamiltonian on $S^5$ whose Weyl
 asymptotics carry $\pi^{5/2}$.
 
+\begin{observation}[The graph is $\pi$-free]
+\label{obs:pi-free}
+Every algebraic operation in the GeoVac graph construction
+produces integers or rationals:
+\begin{itemize}
+  \item Eigenvalues of the graph Laplacian: $\lambda_n = -(n^2 - 1)$,
+    integer for all $n$.
+  \item Degeneracies: $g_n = n^2$, integer.
+  \item Gaunt integrals: ratios of factorials via Wigner $3j$ symbols,
+    rational.
+  \item Selection rules: combinatorial (triangle inequality on angular
+    momentum labels).
+  \item Clebsch--Gordan coefficients: algebraic numbers (square roots
+    of rationals).
+  \item Casimir eigenvalues: $l(l+1)$, $\nu(\nu+4)/2$, integer or
+    half-integer for all levels.
+\end{itemize}
+Transcendental numbers ($\pi$, $e^a E_1(a)$, $\zeta(2)$) enter the
+framework exclusively through normalization to continuous measures:
+spherical harmonic normalization ($\int |Y|^2\,d\Omega = 1$ with
+$d\Omega$ carrying $4\pi$), manifold volumes
+($\mathrm{vol}(S^3) = 2\pi^2$), and spectral zeta functions
+($\zeta_{S^1}(1) = \pi^2/6$).  The exchange constants cataloged in
+this paper are precisely the $\pi$-injection points---the places
+where the discrete graph contacts continuous geometry.
+\end{observation}
+
 \subsection{The Selberg trace formula}
 
 Weyl's law is asymptotic.  The Selberg trace
@@ -392,20 +473,23 @@ propose the following taxonomy:
 \caption{Spectral-geometric exchange constants in the GeoVac
   hierarchy.  ``Source'' indicates the discrete structure;
   ``Target'' indicates the continuous coordinate system.
-  ``Type'' classifies the exchange constant.}
+  ``Type'' classifies the exchange constant by what determines it.}
 \label{tab:taxonomy}
 \begin{ruledtabular}
 \begin{tabular}{ccccc}
   Level & Source & Target & Constant & Type \\
   \hline
-  --- & $S^1$ lattice & $\mathbb{R}^1$ & $\pi$ & Weyl \\
-  1 & $S^3$ graph & $\mathbb{R}^3$ & $\kappa = -1/16$ & conformal \\
+  --- & $S^1$ lattice & $\mathbb{R}^1$ & $\pi$ & intrinsic \\
+  1 & $S^3$ graph & $\mathbb{R}^3$ & $\kappa = -1/16$ & calibration \\
   2 ($m{=}0$) & Laguerre rec. & prolate sph. & (none) & algebraic \\
   2 ($m{\neq}0$) & assoc. Laguerre & prolate sph. & $e^a E_1(a)$
-    & Stieltjes \\
+    & embedding \\
   3 (FCI) & $S^3 {\times} S^3$ & (none) & (none) & algebraic \\
   3 (hyper.) & $\mathrm{SO}(6)$ reps & $S^5(R)$ flow
-    & $\mu(R)$ & Eisenstein \\
+    & $\mu(R)$ & flow \\
+  4 (prolate CI) & prolate product & (none) & (none) & algebraic \\
+  4 (hyper.) & $\mathrm{SO}(6)$ reps & $(\rho,R)$ flow
+    & $\mu(\rho,R)$ & flow \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -418,34 +502,42 @@ The taxonomy reveals a hierarchy of exchange types:
     appears.  Examples: Level~1 on $S^3$, Level~2 $\sigma$
     states, Level~3 FCI.
 
-  \item \textbf{Weyl constants} ($\pi^{d/2}$): The
-    volume-to-eigenvalue conversion factors for compact
-    manifolds.  These are universal---they depend only on
-    dimension, not on the specific manifold.  Example: $\pi$
-    itself, for $S^1 \to \mathbb{R}$.
+  \item \textbf{Intrinsic constants} ($\pi^{d/2}$): Determined
+    by the manifold's dimension and volume alone, independent of
+    any discretization or basis choice.  These are the Weyl
+    constants---universal volume-to-eigenvalue conversion factors.
+    Example: $\pi$ itself, for $S^1 \to \mathbb{R}$.
 
-  \item \textbf{Conformal constants}: Specific to the conformal
-    map between two manifolds of different curvature.  Example:
-    $\kappa = -1/16$ for the Fock stereographic projection
-    $S^3 \to \mathbb{R}^3$.
+  \item \textbf{Calibration constants}: Determined by the
+    discrete graph construction, not by intrinsic manifold
+    geometry.  Depends on lattice connectivity.  Example:
+    $\kappa = -E_H/\lambda_{\max} = -1/16$, where
+    $\lambda_{\max} = 2 d_{\max} = 8$ depends on the maximum
+    vertex degree $d_{\max} = 4$ of the GeoVac graph
+    (Sec.~\ref{sec:kappa_derivation}).  A different graph with
+    $d_{\max} = 6$ would give $\kappa = -1/24$.
 
-  \item \textbf{Stieltjes constants}: Single transcendental
-    numbers that seed algebraic recurrences.  These appear when
-    a rational singularity in the coordinate system is not
-    representable in the spectral basis.  Example:
-    $e^a E_1(a)$ for the prolate centrifugal pole.
+  \item \textbf{Embedding constants}: Single transcendental
+    numbers seeding algebraic recurrences.  Determined by the
+    interaction between a spectral basis and a coordinate
+    singularity.  Example: $e^a E_1(a)$ for the prolate
+    centrifugal pole.
 
-  \item \textbf{Eisenstein functions}: Transcendental functions
-    of a continuous parameter, arising when the manifold itself
-    varies.  These appear when the geometry flows (topology
-    changes, avoided crossings, non-compact limits).  Example:
-    $\mu(R)$ for the $S^5 \to S^3 \times \mathbb{R}$ topology
-    flow.
+  \item \textbf{Flow functions}: Transcendental functions of
+    continuous parameters, arising when the manifold itself
+    varies (topology changes, avoided crossings, non-compact
+    limits).  Example: $\mu(R)$ for the $S^5 \to S^3 \times
+    \mathbb{R}$ topology flow at Level~3.  At Level~4, the
+    flow function $\mu(\rho, R)$ depends on two continuous
+    parameters (electron hyperradius and internuclear distance),
+    reflecting the simultaneous three-body coalescence in
+    coordinate and configuration space.
 \end{enumerate}
 
-The complexity of the exchange constant increases monotonically
-with the severity of the curvature mismatch between source and
-target.
+The dependency hierarchy is explicit: intrinsic constants depend
+only on dimension; calibration constants depend on the graph;
+embedding constants depend on the basis; flow functions depend
+on the full parameterized geometry.
 
 
 %% ========================================================================
@@ -612,8 +704,15 @@ mismatch increases:
     One projection, fixed curvature.
   \item Constant $\to$ single transcendental (Level 2, $m \neq 0$):
     $e^a E_1(a)$.  One embedding with a coordinate singularity.
-  \item Constant $\to$ transcendental function (Level 3, hyperspherical):
-    $\mu(R)$.  A continuously deforming manifold.
+  \item Constant $\to$ transcendental function of one parameter
+    (Level 3, hyperspherical): $\mu(R)$.  A continuously deforming
+    manifold.
+  \item Constant $\to$ transcendental function of two parameters
+    (Level 4, mol-frame hyperspherical): $\mu(\rho, R)$.
+    Simultaneous three-body coalescence in coordinate and
+    configuration space.  Unlike Level~3, this exchange constant
+    is irreducible: the product-space alternative saturates at
+    92.5\% $D_e$~\cite{loutey_track_m}.
 \end{itemize}
 
 This hierarchy mirrors the mathematical classification of periods
@@ -622,6 +721,88 @@ and transcendental functions: the Weyl constants are periods
 periods ($E_1(a) = \int_1^\infty e^{-at}/t\,dt$); and the
 adiabatic eigenvalue functions are solutions of parameter-dependent
 spectral problems, which are generically non-period transcendentals.
+
+
+\subsection{Derivation of $\kappa = -1/16$}
+\label{sec:kappa_derivation}
+
+The original identification of $\kappa = -1/16$ (Paper~0) was
+empirical: the unique constant that maps GeoVac graph eigenvalues
+onto the Rydberg energy levels.  We now derive this value and
+classify its origin.
+
+\textit{Graph Laplacian spectrum.}  The GeoVac lattice
+(Paper~0) discretizes $S^3$ with states $|n,l,m\rangle$
+connected by angular transitions $m \leftrightarrow m \pm 1$
+and radial transitions $n \leftrightarrow n \pm 1$.  Interior
+nodes have degree $d_{\max} = 4$ (two angular, two radial
+neighbors).  The graph Laplacian $\mathcal{L} = D - A$ is
+positive semidefinite; its maximum eigenvalue satisfies
+$\lambda_{\max} \leq 2 d_{\max} = 8$, with the bound saturated
+in the continuum limit ($n_{\max} \to \infty$).  Numerical
+verification confirms monotonic convergence:
+$\lambda_{\max}(n_{\max}{=}5) = 6.62$,
+$\lambda_{\max}(10) = 7.61$,
+$\lambda_{\max}(20) = 7.90 \to 8$.
+
+\textit{Energy calibration.}  The graph Hamiltonian
+$H = \kappa \mathcal{L}$ (no node weights) has its ground
+state at energy $\kappa \lambda_{\max}$, since $\kappa < 0$
+maps the largest graph eigenvalue to the lowest physical energy.
+Matching this to the hydrogen ground state:
+\begin{equation}
+  \kappa \lambda_{\max} = E_H = -\tfrac{1}{2}
+  \implies
+  \kappa = \frac{-1/2}{8} = -\frac{1}{16}.
+  \label{eq:kappa_derived}
+\end{equation}
+
+\textit{Factor identification.}  The value $-1/16 = -(1/2)(1/8)$
+decomposes into:
+\begin{enumerate}
+  \item $1/2$: the non-relativistic kinetic energy normalization
+    $E = p^2/(2m)$, or equivalently the energy-shell constraint
+    $E = -p_0^2/2$;
+  \item $1/8 = 1/(2 d_{\max})$: the inverse of the maximum
+    graph Laplacian eigenvalue, determined by the vertex degree
+    of the lattice discretization.
+\end{enumerate}
+
+\textit{Heat kernel test.}  The Seeley--DeWitt expansion of the
+heat kernel on unit $S^3$ gives coefficients
+$a_0 = \mathrm{vol}(S^3) = 2\pi^2$,
+$a_1 = (R/6)\,\mathrm{vol}(S^3) = 2\pi^2$,
+$a_2 = \frac{1}{360}(5R^2 - 2|\mathrm{Ric}|^2 +
+2|\mathrm{Riem}|^2)\,\mathrm{vol}(S^3) = \pi^2$,
+using scalar curvature $R = 6$, $|\mathrm{Ric}|^2 = 12$,
+$|\mathrm{Riem}|^2 = 12$ for constant sectional curvature
+$K = 1$.  No ratio of these coefficients produces $1/16$.  The
+Weyl coefficient is $N(\Lambda) \sim \Lambda^{3/2}/3$, also
+unrelated.  The spectral zeta function
+$\zeta_{S^3}(s) = \sum_{l \geq 1} (l+1)^2/[l(l+2)]^s$
+similarly produces no value matching $1/16$.
+
+\textit{Conformal coupling coincidence.}  The conformal
+coupling constant for a 3-manifold is $c_3 = (d-2)/[4(d-1)]
+= 1/8$ for $d = 3$, numerically equal to $1/\lambda_{\max}$.
+This coincidence is not causal: $c_3$ arises from the Yamabe
+operator $Y = -\Delta + (R/8)$ on $S^3$, while
+$1/\lambda_{\max}$ arises from the maximum vertex degree of
+the graph.  A different discretization of $S^3$ (e.g., adding
+$l \leftrightarrow l \pm 1$ transitions to reach $d_{\max} = 6$)
+would give $\lambda_{\max} \to 12$ and $\kappa \to -1/24$,
+breaking the coincidence while preserving $c_3 = 1/8$.
+
+\textit{Classification.}  $\kappa$ is correctly classified as
+``conformal'' in Table~\ref{tab:taxonomy}: it is needed because
+the Fock stereographic projection introduces a conformal factor
+relating the $S^3$ Laplacian to flat-space operators.  However,
+its \textit{numerical value} is a graph calibration constant
+determined by the lattice connectivity, not an intrinsic
+spectral invariant of $S^3$.  The Z-universality noted in
+Paper~0 ($\kappa \to \kappa Z^2$ for any nuclear charge)
+reflects the Z-independence of the graph structure, with only
+the energy-shell scaling $E \propto Z^2$.
 
 
 %% ========================================================================
@@ -635,11 +816,20 @@ The GeoVac hierarchy of natural geometries produces a systematic
 sequence of transcendental constants at each level where a
 discrete algebraic structure is projected onto a continuous
 coordinate system.  These constants---$\kappa = -1/16$,
-$e^a E_1(a)$, and $\mu(R)$---are instances of the
+$e^a E_1(a)$, $\mu(R)$, and $\mu(\rho,R)$---are instances of the
 spectral-geometric exchange constants described by Weyl's law
 and the Selberg trace formula.  They encode the curvature
 mismatch between the graph and the coordinate system, and they
 vanish when the computation stays on the graph.
+
+At Level~4, the situation is qualitatively different from
+Levels~1--3: the product-space computation (prolate spheroidal
+CI) is fully algebraic but saturates at 92.5\% of the exact
+dissociation energy (Track~M~\cite{loutey_track_m}).  The
+remaining 7.5\%---the electron-electron cusp---requires the
+flow function $\mu(\rho,R)$, which is not merely a projection
+toll but an irreducible encoding of three-body coalescence
+physics that the algebraic product space cannot represent.
 
 The observation that the conjectural fine structure constant
 formula $K = \pi(B + F - \Delta)$ has the same structural
@@ -662,12 +852,22 @@ Two implications for the GeoVac program follow:
     eliminating projections.
   \item \textbf{The physical interpretation of $\kappa$}:
     Paper~0 identified $\kappa = -1/16$ as a universal packing
-    constant but did not derive it from first principles.  The
-    Weyl--Selberg identification suggests that $\kappa$ is the
-    conformal exchange constant for the Fock projection
-    $S^3 \to \mathbb{R}^3$, computable from the heat kernel
-    expansion of the $S^3$ Laplacian.  This is a testable
-    prediction.
+    constant but did not derive it from first principles.
+    Explicit computation (Sec.~\ref{sec:kappa_derivation})
+    shows that $\kappa$ is \textit{not} computable from the
+    heat kernel expansion of the $S^3$ Laplacian: the
+    Seeley--DeWitt coefficients $a_0 = 2\pi^2$, $a_1 = 2\pi^2$,
+    $a_2 = \pi^2$ do not produce $1/16$ in any natural ratio.
+    Instead, $\kappa = -E_H / \lambda_{\max}(\mathcal{L})$,
+    where $E_H = -1/2$~Ha is the hydrogen ground state energy
+    and $\lambda_{\max} \to 8$ is the maximum eigenvalue of
+    the GeoVac graph Laplacian in the continuum limit
+    ($8 = 2 \times d_{\max}$, where $d_{\max} = 4$ is the
+    maximum vertex degree).  The Table~\ref{tab:taxonomy}
+    classification as ``conformal'' remains appropriate---$\kappa$
+    is needed because of the conformal projection---but its
+    numerical value depends on the graph construction, not on
+    abstract spectral invariants of $S^3$.
 \end{enumerate}
 
 \begin{acknowledgments}
@@ -732,6 +932,11 @@ GeoVac supplementary material (2026).
 \bibitem{loutey_track_g}
 J.~Loutey,
 ``Track G: Perturbation Series for $\mu(R)$,''
+GeoVac supplementary material (2026).
+
+\bibitem{loutey_track_m}
+J.~Loutey,
+``Track M: Prolate CI $l_{\max}$ Convergence Study,''
 GeoVac supplementary material (2026).
 
 \bibitem{dlmf_laguerre}

@@ -20,7 +20,11 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ## What's New in v2.0.11
 
-- **Paper 18: Spectral-Geometric Exchange Constants** — New observations paper cataloging the transcendental constants (κ, e^a E₁(a), μ(R)) that appear when discrete algebraic structures are projected onto continuous coordinate systems. Identifies them as Weyl-Selberg exchange constants. Updated with Track J evidence, basis adaptation observation, π as founding example, and strengthened α connection.
+- **Track J — Level 2 Algebraic m≠0 (COMPLETE):** Associated Laguerre basis eliminates all quadrature for m≠0 states. Single transcendental seed e^a E₁(a). 119 new tests.
+- **Track K — Level 4 Spectral Angular (COMPLETE):** Jacobi polynomial basis replaces FD angular solver. 269× speedup (39.9s → 0.15s), 20× dimension reduction. 18 new tests.
+- **Track L — κ = -1/16 Derivation (negative result):** κ is a graph calibration constant, not a Weyl constant.
+- **Track M — Prolate CI Convergence (Scenario B):** Prolate CI saturates at ~92.5% D_e. Level 4's μ(ρ,R) is irreducible.
+- **Paper 18: Spectral-Geometric Exchange Constants** — New core paper cataloging the transcendental constants (κ, e^a E₁(a), μ(R)) that appear when discrete algebraic structures are projected onto continuous coordinate systems. Identifies them as Weyl-Selberg exchange constants.
 
 ### Prior Releases
 - **v2.0.10:** Algebraic Laguerre matrix elements (Level 3, Track H: 11× build speedup), spectral Level 4 hyperradial (Track I: 16× dimension reduction), associated Laguerre m≠0 (Track J: single transcendental seed)
@@ -260,6 +264,7 @@ geovac/                 Core package
   hyperspherical_coupling.py  Coupled-channel adiabatic solver
   hyperspherical_resonances.py  Resonance analysis tools
   level4_multichannel.py  Level 4 mol.-frame hyperspherical solver
+  level4_spectral_angular.py  Spectral Jacobi angular solver (Level 4)
   core_screening.py       Core electron screening Z_eff(r)
   ab_initio_pk.py         Ab initio Phillips-Kleinman pseudopotential
   rho_collapse_cache.py   ρ-collapsed angular cache + fast PES
@@ -289,7 +294,7 @@ geovac/                 Core package
   dirac_hamiltonian.py    Relativistic Dirac solver
 
 papers/
-  core/                 Defensible foundations (Papers 0, 1, 6-15, 17, FCI)
+  core/                 Defensible foundations (Papers 0, 1, 6-15, 17-18, FCI)
     Paper 0:  Geometric packing & universal constant
     Paper 1:  Spectral graph theory & eigenvalue methods
     Paper 6:  Quantum dynamics & thermodynamics
@@ -302,6 +307,7 @@ papers/
     Paper 14: Structurally sparse qubit Hamiltonians
     Paper 15: Level 4 mol.-frame hyperspherical (H2 94.1%, HeH+ 93.1%)
     Paper 17: Composed natural geometries (LiH 5.3%, BeH⁺)
+    Paper 18: Spectral-geometric exchange constants (Weyl-Selberg, α connection)
     FCI-A:    Multi-electron atoms (He, Li, Be)
     FCI-M:    Heteronuclear diatomics (LiH benchmark)
   observations/         Empirical observations & pattern recognition (Paper 16)

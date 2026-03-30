@@ -2031,6 +2031,9 @@ def solve_level4_h2_multichannel(
     radial_method: str = 'fd',
     n_basis_radial: int = 25,
     alpha_radial: float = 1.0,
+    angular_method: str = 'fd',
+    n_basis_angular: int = 10,
+    n_quad_angular: int = 100,
 ) -> dict:
     """
     Full Level 4 multichannel solver for two-electron diatomics.
@@ -2079,6 +2082,14 @@ def solve_level4_h2_multichannel(
         Number of Laguerre basis functions (spectral method only).
     alpha_radial : float
         Exponential decay parameter for Laguerre basis (spectral method only).
+    angular_method : str
+        Angular solver method. 'fd' (default) uses finite differences on a
+        uniform alpha grid. 'spectral' uses a Jacobi polynomial basis,
+        giving 30-250x speedup with < 1e-4 eigenvalue agreement.
+    n_basis_angular : int
+        Number of Jacobi basis functions per channel (spectral method only).
+    n_quad_angular : int
+        Gauss-Legendre quadrature order per sub-interval (spectral only).
 
     Returns
     -------
@@ -2135,12 +2146,18 @@ def solve_level4_h2_multichannel(
             print(f"  Origin shift: z0={z0:.4f} (R_A={R/2 - z0:.4f}, R_B={R/2 + z0:.4f})")
         if n_ch <= 15:
             print(f"  channels={channels}")
+        if angular_method == 'spectral':
+            ang_dim = n_ch * n_basis_angular
+            print(f"  angular_method=spectral (n_basis={n_basis_angular}), "
+                  f"matrix {ang_dim}x{ang_dim}")
+        else:
+            print(f"  angular_method=fd (n_alpha={n_alpha}), "
+                  f"matrix {n_ch * n_alpha}x{n_ch * n_alpha}")
         if radial_method == 'spectral':
-            print(f"  n_alpha={n_alpha}, radial_method=spectral "
+            print(f"  radial_method=spectral "
                   f"(n_basis={n_basis_radial}, alpha={alpha_radial})")
         else:
-            print(f"  n_alpha={n_alpha}, n_Re={n_Re}")
-        print(f"  Angular matrix size: {n_ch * n_alpha} x {n_ch * n_alpha}")
+            print(f"  n_Re={n_Re}")
         if n_coupled > 1:
             print(f"  DBOC radial solver: {n_coupled} states")
         elif n_coupled == -1:
@@ -2227,13 +2244,25 @@ def solve_level4_h2_multichannel(
             print(f"  Computing adiabatic curve on "
                   f"{len(R_e_angular)} R_e points...")
 
-        U_angular = compute_adiabatic_curve_mc(
-            R, R_e_angular, l_max, Z, n_alpha, m_max=m_max,
-            l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
-            core_potentials=core_potentials,
-            pk_potentials=pk_potentials,
-            pk_projector=pk_projector,
-        )
+        if angular_method == 'spectral':
+            from geovac.level4_spectral_angular import (
+                compute_adiabatic_curve_spectral,
+            )
+            U_angular = compute_adiabatic_curve_spectral(
+                R, R_e_angular, l_max, Z, n_basis=n_basis_angular,
+                n_quad=n_quad_angular, m_max=m_max,
+                l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+                core_potentials=core_potentials,
+                pk_potentials=pk_potentials,
+            )
+        else:
+            U_angular = compute_adiabatic_curve_mc(
+                R, R_e_angular, l_max, Z, n_alpha, m_max=m_max,
+                l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+                core_potentials=core_potentials,
+                pk_potentials=pk_potentials,
+                pk_projector=pk_projector,
+            )
 
         t1 = time.time()
         if verbose:
@@ -2351,6 +2380,7 @@ def solve_level4_h2_multichannel(
         'z0': z0,
         'origin': origin,
         'radial_method': radial_method,
+        'angular_method': angular_method,
     }
 
     if n_coupled == 1:

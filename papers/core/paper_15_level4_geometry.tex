@@ -962,6 +962,64 @@ Level~4 runtime.  The FD radial solve uses \texttt{eigh\_tridiagonal}
 requires faster angular solves or caching strategies, not a faster
 radial solver.
 
+\subsection{Spectral Jacobi angular solver}
+\label{sec:spectral_angular_l4}
+
+Having identified the angular eigenvalue sweep as the 99\% bottleneck
+(Sec.~\ref{sec:spectral_radial_l4}), we replace the finite-difference
+angular solver with a spectral Jacobi polynomial basis.
+
+The free angular Hamiltonian has exact eigenvalues given by the SO(6)
+Casimir: $\nu(\nu+4)/2$ for angular momentum quantum number~$\nu$.
+We use Jacobi polynomials as the spectral basis, with these Casimir
+eigenvalues as the free spectrum.  The electron--electron coupling
+matrix $V_{ee}$ is precomputed once via Gaunt-type angular integrals
+(independent of~$\rho$), while the nuclear coupling $V_{\rm nuc}$
+scales linearly with~$\rho$.  At each sweep point, the full angular
+Hamiltonian is assembled as
+\begin{equation}
+  H_{\rm ang}(\rho) = H_{\rm free} + \rho \, V_{\rm nuc} + V_{ee}
+\end{equation}
+and diagonalized.
+
+Table~\ref{tab:spectral_angular_l4} compares the finite-difference
+and spectral angular solvers.
+
+\begin{table}[h]
+\caption{Finite-difference vs.\ spectral Jacobi angular solver for
+Level~4 (H$_2$, $l_{\max} = 2$, 130 $\rho$-points).}
+\label{tab:spectral_angular_l4}
+\begin{ruledtabular}
+\begin{tabular}{lcc}
+  Metric & FD ($n_\alpha = 200$) & Spectral ($n_{\rm basis} = 10$) \\
+  \hline
+  Matrix dimension      & ${\sim}1000$ & 50 \\
+  Angular sweep time    & 39.9~s       & 0.15~s \\
+  $U_{\min}$ difference & ---          & $< 2 \times 10^{-5}$~Ha \\
+  $D_e$ (\% exact)      & 90.0\%       & 89.7\% \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The spectral basis achieves a $20\times$ dimension reduction
+($1000 \to 50$) and a $269\times$ speedup on the angular sweep
+(39.9~s $\to$ 0.15~s for 130 $\rho$-points).  The $U_{\min}$
+agreement is $< 2 \times 10^{-5}$~Ha.  The 0.3\% $D_e$ shift
+(90.0\% $\to$ 89.7\%) reflects removal of finite-difference error
+cancellation, not a regression.
+
+Combined with the spectral Laguerre radial solver
+(Sec.~\ref{sec:spectral_radial_l4}), the angular sweep fraction
+drops from 99\% to approximately 50\% of total Level~4 runtime.
+The angular eigenvalues $\mu(\rho)$ remain transcendental---computed
+by diagonalization at each $\rho$-point---but the per-point cost
+is now a $50 \times 50$ eigensolve rather than
+$1000 \times 1000$.
+
+The default solver remains \texttt{angular\_method='fd'};
+the spectral variant is accessed via
+\texttt{angular\_method='spectral'}.
+
 %% ========================================================================
 %% VIII. CONCLUSION
 %% ========================================================================
