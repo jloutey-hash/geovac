@@ -25,7 +25,7 @@ from scipy.sparse.linalg import eigs
 from typing import Tuple, List, Dict, Optional
 
 from geovac.hyperspherical_adiabatic import compute_adiabatic_curve, effective_potential
-from geovac.hyperspherical_resonances import (
+from geovac._archive.auxiliary.hyperspherical_resonances import (
     E_HE_EXACT, E_HE_PLUS, HARTREE_TO_EV, EXPERIMENTAL_RESONANCES,
 )
 

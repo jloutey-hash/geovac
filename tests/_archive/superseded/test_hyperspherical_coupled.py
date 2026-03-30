@@ -19,7 +19,7 @@ import pytest
 from typing import Dict
 
 from geovac.hyperspherical_angular import solve_angular, gaunt_integral
-from geovac.hyperspherical_coupling import (
+from geovac._archive.superseded.hyperspherical_coupling import (
     compute_coupling_matrices,
     _enforce_sign_consistency,
 )
@@ -32,7 +32,7 @@ from geovac.hyperspherical_radial import (
     solve_coupled_radial,
     solve_helium,
 )
-from geovac.hyperspherical_resonances import (
+from geovac._archive.auxiliary.hyperspherical_resonances import (
     detect_resonances,
     build_gaunt_coupling_graph,
     build_weighted_coupling_graph,

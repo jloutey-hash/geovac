@@ -15,7 +15,7 @@ The log-plaquette phase is:
 import numpy as np
 import pytest
 
-from geovac.berry_phase import (
+from geovac._archive.dead_ends.berry_phase import (
     compute_plaquette_phase,
     compute_berry_phase_at_n,
     compute_phase_convergence,

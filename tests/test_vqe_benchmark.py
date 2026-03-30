@@ -21,6 +21,8 @@ import warnings
 import numpy as np
 import pytest
 
+pytestmark = pytest.mark.slow
+
 from geovac.vqe_benchmark import (
     build_gaussian_he,
     build_gaussian_h2,

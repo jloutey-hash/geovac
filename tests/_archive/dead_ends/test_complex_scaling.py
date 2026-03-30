@@ -18,7 +18,7 @@ from typing import Dict
 from scipy.interpolate import CubicSpline
 
 from geovac.hyperspherical_adiabatic import compute_adiabatic_curve, effective_potential
-from geovac.hyperspherical_complex_scaling import (
+from geovac._archive.auxiliary.hyperspherical_complex_scaling import (
     solve_ecs_single_channel,
     solve_ecs_coupled,
     identify_resonances,
@@ -26,7 +26,7 @@ from geovac.hyperspherical_complex_scaling import (
     _smooth_theta,
 )
 from geovac.hyperspherical_coupling import compute_coupling_matrices
-from geovac.hyperspherical_resonances import E_HE_EXACT, E_HE_PLUS, HARTREE_TO_EV
+from geovac._archive.auxiliary.hyperspherical_resonances import E_HE_EXACT, E_HE_PLUS, HARTREE_TO_EV
 
 
 @pytest.fixture(scope="module")

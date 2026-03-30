@@ -27,7 +27,7 @@ def test_sturmian_orthonormality():
 
     U^T @ U should be identity (columns are orthonormal).
     """
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
 
     solver = SturmianAngularSolver(Z=2.0, n_basis=10, l_max=0,
                                     R0=1.5, n_construct=50)
@@ -43,7 +43,7 @@ def test_sturmian_orthonormality():
 
 def test_sturmian_orthonormality_multichannel():
     """Verify orthonormality with l_max > 0."""
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
 
     solver = SturmianAngularSolver(Z=2.0, n_basis=8, l_max=2,
                                     R0=1.5, n_construct=30)
@@ -65,7 +65,7 @@ def test_sturmian_full_dimension_matches_free():
 
     Eigenvalues should be identical (rotation within the same subspace).
     """
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
     from geovac.algebraic_angular import AlgebraicAngularSolver
 
     nb = 15
@@ -96,7 +96,7 @@ def test_sturmian_R0_eigenvalues():
     For ref='nuclear', V_residual = V_ee, so H(R0) != diag(mu_sturm).
     But H(R0) eigenvalues should match the free solver at R=R0.
     """
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
     from geovac.algebraic_angular import AlgebraicAngularSolver
 
     # Use large free basis as reference
@@ -121,7 +121,7 @@ def test_sturmian_improves_lmax0():
 
     At n_basis=10, n_construct=50, Sturmian should beat free by at least 20%.
     """
-    from geovac.algebraic_angular_sturmian import solve_hyperspherical_sturmian
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import solve_hyperspherical_sturmian
     from geovac.algebraic_angular import solve_hyperspherical_algebraic
 
     E_exact = -2.903724
@@ -150,7 +150,7 @@ def test_sturmian_improves_lmax0():
 
 def test_he_energy_sturmian_lmax0():
     """Sturmian solver should achieve < 0.15% at n_basis=15, l_max=0."""
-    from geovac.algebraic_angular_sturmian import solve_hyperspherical_sturmian
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import solve_hyperspherical_sturmian
 
     result = solve_hyperspherical_sturmian(
         Z=2.0, n_basis=15, l_max=0, R0=1.5, n_construct=50,
@@ -179,7 +179,7 @@ def test_he_energy_sturmian_lmax1_beats_fd():
     the same n_basis due to adiabatic approximation effects, but
     both beat the FD solver significantly.
     """
-    from geovac.algebraic_angular_sturmian import solve_hyperspherical_sturmian
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import solve_hyperspherical_sturmian
 
     result = solve_hyperspherical_sturmian(
         Z=2.0, n_basis=15, l_max=1, R0=1.5, n_construct=50,
@@ -200,7 +200,7 @@ def test_he_energy_sturmian_lmax1_beats_fd():
 
 def test_R0_sensitivity():
     """Verify R0 in [0.5, 3.0] gives similar results (< 0.03% spread)."""
-    from geovac.algebraic_angular_sturmian import solve_hyperspherical_sturmian
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import solve_hyperspherical_sturmian
 
     E_exact = -2.903724
     energies = []
@@ -225,7 +225,7 @@ def test_R0_sensitivity():
 
 def test_n_construct_convergence():
     """Verify energy converges as n_construct increases."""
-    from geovac.algebraic_angular_sturmian import solve_hyperspherical_sturmian
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import solve_hyperspherical_sturmian
 
     energies = []
     for nc in [15, 30, 50]:
@@ -252,7 +252,7 @@ def test_n_construct_convergence():
 
 def test_monopole_decomposition():
     """Verify nuclear monopole dominates V_coupling (> 95% Frobenius norm)."""
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
 
     solver = SturmianAngularSolver(Z=2.0, n_basis=10, l_max=0,
                                     R0=1.5, n_construct=50)
@@ -272,7 +272,7 @@ def test_monopole_decomposition():
 
 def test_sturmian_dboc_positive():
     """Verify DBOC is positive at all R in the Sturmian basis."""
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
 
     solver = SturmianAngularSolver(Z=2.0, n_basis=10, l_max=0,
                                     R0=1.5, n_construct=50)
@@ -288,7 +288,7 @@ def test_sturmian_dboc_positive():
 
 def test_sturmian_coupling_symmetry():
     """Verify projected coupling matrices are symmetric."""
-    from geovac.algebraic_angular_sturmian import SturmianAngularSolver
+    from geovac._archive.dead_ends.algebraic_angular_sturmian import SturmianAngularSolver
 
     solver = SturmianAngularSolver(Z=2.0, n_basis=10, l_max=1,
                                     R0=1.5, n_construct=30)

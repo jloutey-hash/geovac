@@ -10,7 +10,7 @@ import time
 import numpy as np
 import pytest
 
-from geovac.lih_composed import LiHComposedSolver, EXPT, MU_LIH_AU, HARTREE_TO_CM
+from geovac._archive.superseded.lih_composed import LiHComposedSolver, EXPT, MU_LIH_AU, HARTREE_TO_CM
 
 
 @pytest.fixture(scope="module")
