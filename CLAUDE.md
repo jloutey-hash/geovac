@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v2.0.13 (March 30, 2026)
+**Version:** v2.0.14 (March 30, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/core/` and `papers/observations/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -65,6 +65,9 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Track P2 — Algebraic V_eff matrix elements: COMPLETE (partial). Tier 1 (l_max=0): V_eff fully algebraic via Stieltjes moment decomposition. Single transcendental seed e^a·E₁(a), matching Track J pattern. Agreement < 1e-10 elementwise vs quadrature. Tier 2 (l_max=1): discriminant Δ(R) is degree 2 in R, positive; μ(R) involves √Δ, making V_eff integrals non-elementary (elliptic type). No closed-form Laguerre moments. Tier 3 (l_max=2): Cardano roots, even further from closed form. Conclusion: algebraic V_eff tractable only at l_max=0; l_max≥1 requires pointwise quadrature (radical obstruction, not transcendence). (v2.0.13)
 - Track S — Level 4 algebraic curve: COMPLETE (structural negative result). Level 4 angular Hamiltonian is NOT a linear pencil in ρ. Nuclear coupling V_nuc(ρ) is piecewise-smooth due to min(s,ρ)/max(s,ρ) terms in split-region Legendre expansion. Linearity residual 22.5% at l_max=1, 58.6% at l_max=2. No global algebraic curve P(ρ,μ)=0 exists — only pointwise P(μ) at fixed ρ. Point-by-point angular diagonalization is structurally irreducible at Level 4 (confirming Track K's spectral approach as optimal). 39 non-slow tests. (v2.0.13)
 - Track R — Algebraic defaults wiring: COMPLETE. Algebraic Z_eff (`zeff_method='spectral_laguerre'`) and algebraic exchange (`slater_method='algebraic_laguerre'`) wired as production defaults in composed-geometry pipeline. LiH: 0.000% Δ on R_eq, E_min, D_e, ω_e. Be (Z=4) auto-falls back to spline (Laguerre polynomial cancellation detected and handled). 147/147 tests pass. Wall time within noise (±7-16%). (v2.0.13)
+- Track U — Level 4 cusp factor: COMPLETE (negative result). Multiplicative Kato cusp factor f(α) = 1 + (R_e/2)sin(2α) implemented as generalized eigenvalue problem in Jacobi spectral basis. Preserves all symmetries (gerade, SO(6) Casimir, channel structure). Baseline reproduction to machine precision at γ=0. D_e degrades monotonically with γ (89.7% → 89.0% at l_max=2). Root cause: cusp is 2D in (α, θ₁₂), not separable in α alone. The slow convergence is dominated by the Gegenbauer expansion in θ₁₂ (channel l-sum), not the α profile. Alpha-only modifications cannot accelerate l_max convergence. 20 tests (14 fast, 6 including slow). (v2.0.14)
+- Track W — Cusp graph topology: COMPLETE (structural negative result). Determined that 1/r₁₂ CANNOT be absorbed into a conformally weighted graph Laplacian on the Level 4 angular space. Proof: Green's function on S⁵ has singularity 1/d³, but 1/r₁₂ ~ 1/d¹ (dimensionality mismatch). No fiber decomposition resolves this: coalescence manifold has codimension 2 (not 3), so no S³ fiber exists. The cusp is classified as an EMBEDDING exchange constant in Paper 18 taxonomy — the irreducible transcendental content when embedding the interacting two-electron problem on S⁵. S³ is the UNIQUE sphere matching the 1/d¹ singularity (verified n=1-99). 37 tests. (v2.0.14)
+- Track X — Perturbative cusp correction: COMPLETE. Schwartz partial-wave extrapolation (1962) applied as post-processing correction using known coalescence densities. He (Level 3): breaks through 0.19-0.20% adiabatic floor at l_max=1-2 (best 0.10% at l_max=2, from 0.24% uncorrected). Overcorrects at l_max=0 where adiabatic error dominates (1.6% vs 1.1% uncorrected). H₂ (Level 4): R-dependent correction, largest at short R (~2.5 mHa at R=1.0), vanishing at dissociation. Differential correction ~1.7 mHa estimates ~1.0 pp D_e improvement (94.1% → ~95.1%). Correction is basis-dependent (l_max), not an exchange constant. Composable to Level 5 per-fiber. `cusp_correction.py` module with `he_cusp_correction()`, `h2_cusp_correction()`. 23 tests (21 fast, 2 slow). (v2.0.14)
 
 **Backlog:**
 - Q-matrix improvement for Level 3 coupled-channel — DONE (v2.0.6)
@@ -112,6 +115,8 @@ Critical institutional memory. Do not re-derive these dead ends.
 | Algebraic PK projector (rank-1 |core⟩⟨core|) | Rank-1 too weak; valence avoids core in function space while penetrating in coordinate space. Drift 5.6× worse than Gaussian PK (+1.697 vs +0.303 bohr/l_max) | Gaussian PK provides coordinate-space exclusion that rank-1 projector cannot. The l_max divergence root cause is the adiabatic approximation, not PK form | v2.0.6 algebraic PK diagnostic |
 | Single-channel DBOC correction | 97% cancelled by off-diagonal P-coupling; overcorrects by 23×. Requires full coupled-channel solver | Use coupled-channel hyperradial solver instead of single-channel + DBOC | v2.0.6 DBOC diagnostic |
 | Spectral PK projector (rank-k) | Rank 1-3 projectors in Gegenbauer channel basis produce monotonically attractive PES — no equilibrium. Angular-space projectors cannot replace coordinate-space exclusion (extends v2.0.6 rank-1 finding to structural conclusion) | Gaussian PK provides coordinate-space exclusion that angular projectors categorically cannot replicate. The failure is structural, not a matter of rank | Track Q, v2.0.12 |
+| Alpha-only Kato cusp factor for Level 4 | f(α) = 1 + (R_e/2)sin(2α) modifies only the α profile; D_e degrades monotonically with γ (89.7% → 89.0% at l_max=2). Root cause: cusp is 2D in (α, θ₁₂), not separable in α alone. Slow l_max convergence is from Gegenbauer expansion in θ₁₂, not the α envelope | Perturbative cusp correction (Track X) addresses the correct physics. Genuine cusp improvement requires θ₁₂-dependent basis modification, not α-only factors | Track U, v2.0.14 |
+| Conformal graph absorption of 1/r₁₂ | Green's function on S⁵ has singularity 1/d³; 1/r₁₂ ~ 1/d¹ — dimensionality mismatch. Coalescence manifold has codimension 2, no S³ fiber exists (S³ requires codimension 3). S³ is the unique sphere matching 1/d¹ | 1/r₁₂ is an irreducible embedding exchange constant (Paper 18 taxonomy). Must be computed by spatial integration (Gaunt integrals, split-region Legendre); no graph construction can eliminate it | Track W, v2.0.14 |
 
 ---
 
@@ -250,6 +255,9 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Algebraic curve (Level 4) | `geovac/algebraic_curve_level4.py` | `extract_level4_matrices()`, `probe_rho_dependence()` |
 | Algebraic Z_eff | `geovac/algebraic_zeff.py` | `LaguerreZeffExpansion`, `fit_density_laguerre()` |
 | Algebraic Slater integrals | `geovac/algebraic_slater.py` | `slater_fk_integral_algebraic()`, `slater_f0_algebraic()` |
+| Cusp factor (Level 4) | `geovac/cusp_factor.py` | `CuspFactorSolver` (negative result — alpha-only factor insufficient) |
+| Cusp graph analysis | `geovac/cusp_graph.py` | `analyze_cusp_graph()` (theory: 1/r₁₂ cannot be absorbed into S⁵ graph) |
+| Cusp correction | `geovac/cusp_correction.py` | `he_cusp_correction()`, `h2_cusp_correction()`, `cusp_pes_correction()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
 
 ### Solver Methods
@@ -392,6 +400,13 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Level 4 spectral angular vs FD U_min | < 2e-5 Ha | Angular spectral solver accuracy (Track K) |
 | Level 4 spectral angular speedup | > 200× | Angular sweep speedup control (Track K) |
 | Level 4 spectral angular dimension | 20× reduction | 1000 → 50 matrix dimension (Track K) |
+| Cusp factor baseline reproduction | < 1e-14 eigenvalue diff | f=1 matches standard solver (Track U) |
+| Cusp factor D_e degradation | D_e decreases with γ | Negative result verified (Track U) |
+| S⁵ Green singularity order | 1/d³ (not 1/d¹) | Dimensionality mismatch proof (Track W) |
+| He cusp correction sign | ΔE < 0 | Cusp lowers energy (Track X) |
+| He cusp correction l_max=2 | error < 0.15% | Breaks through 0.19-0.20% floor (Track X) |
+| H₂ cusp correction R-dependent | varies with R | Required for D_e correction (Track X) |
+| Cusp correction convergence | → 0 as l_max → ∞ | Basis-dependent, not systematic error (Track X) |
 | Speed regression | < 10% | Performance control |
 
 ---
@@ -463,6 +478,10 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Stieltjes seed e^a E₁(a) | 18 | Sec II.B | Core |
 | Transcendence hierarchy | 18 | Sec IV, VI | Core |
 | α as exchange constant | 18 | Sec V | Core |
+| 1/r₁₂ embedding exchange constant | 18 | Sec II (new) | Core |
+| Cusp dimensionality obstruction | 7, 15 | — | Core |
+| Cusp correction (Schwartz) | 15 | — | Core |
+| Cusp diagnosis (7.6% gap) | 12 | Sec VII | Core |
 | Composed natural geometries | 17 | All | Core |
 | Core-valence fiber bundle | 17 | Sec II | Core |
 | Ab initio Phillips-Kleinman | 17 | Sec IV | Core |
@@ -528,6 +547,9 @@ Tracks which matrix elements at each level are computed algebraically vs numeric
 | Angular eigenvalue sweep (spectral) | numerical-required | Jacobi polynomial basis: 50×50 matrices, 269× speedup, ~50% of wall time. SO(6) Casimir free spectrum + precomputed V_ee coupling. `angular_method='spectral'`. Optimal approach given Track S's structural finding. (Track K, v2.0.11) |
 | 2D tensor product assembly | numerical-required | H_ang evaluated at each quadrature point for (R_e, α) tensor product. Dense kronecker assembly. |
 | Nuclear coupling (split-region Legendre) | algebraic | Gaunt integrals, exact via 3j triangle inequality (Paper 15). |
+| Cusp factor f(α) | negative result | Alpha-only cusp factor f(α) = 1 + (R_e/2)sin(2α) does not improve D_e. Cusp is 2D in (α, θ₁₂), not separable in α alone. Slow convergence dominated by θ₁₂ Gegenbauer expansion. (Track U, v2.0.14) |
+| 1/r₁₂ graph absorption | structural obstruction | Cannot absorb 1/r₁₂ into conformally weighted S⁵ Laplacian. Green's function singularity mismatch: 1/d³ (S⁵) vs 1/d¹ (Coulomb). Cusp is an embedding exchange constant. (Track W, v2.0.14) |
+| Cusp energy correction | corrective (post-processing) | Schwartz partial-wave extrapolation: ΔE_cusp ~ -A/(l_max+2)⁴. A = (10/π)⟨δ³(r₁₂)⟩. He: 0.10% at l_max=2 (from 0.24%). H₂: R-dependent, ~1.7 mHa differential, ~1.0 pp D_e. Basis-dependent, not exchange constant. (Track X, v2.0.14) |
 
 ### Level 5 (Composed Geometries — LiH, BeH₂, H₂O)
 
