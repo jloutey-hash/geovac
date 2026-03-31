@@ -383,13 +383,24 @@ class TestAlgebraicSolverEnergies:
         Ea, _, _ = sa.solve()
         assert abs(Ea - Eq) < 1e-12, f"HeH2+ diff {abs(Ea-Eq):.2e}"
 
-    def test_m_nonzero_raises(self):
-        """Algebraic method should raise NotImplementedError for m!=0."""
-        with pytest.raises(NotImplementedError, match="m=0"):
-            _build_laguerre_matrices_algebraic(20, 1.0, 0.8, 4.0, 2.0, m=1)
+    def test_m_nonzero_algebraic(self):
+        """Algebraic method supports m!=0 via associated Laguerre (Track J, v2.0.10)."""
+        H, S = _build_laguerre_matrices_algebraic(20, 1.0, 0.8, 4.0, 2.0, m=1)
+        assert H.shape == (20, 20)
+        assert S.shape == (20, 20)
+        assert np.allclose(H, H.T), "H not symmetric"
+        assert np.allclose(S, S.T), "S not symmetric"
 
-    def test_m_nonzero_falls_back_to_quadrature(self):
-        """For m!=0, spectral solver with algebraic falls back to quadrature."""
+    def test_m_nonzero_algebraic_vs_quadrature(self):
+        """For m!=0, algebraic (associated Laguerre) and quadrature agree (Track J, v2.0.10).
+
+        The associated Laguerre basis uses a different weight function from ordinary
+        Laguerre quadrature, so at finite n_basis they converge from different
+        directions.  At n_basis=20: algebraic is 3.1e-4 from FD, quadrature is
+        8.7e-4 from FD — algebraic is actually closer.  The mutual difference
+        (~5.7e-4) shrinks with increasing n_basis as both converge to the same
+        limit.  Tolerance 1e-3 covers the default n_basis=20 gap with ~1.8x margin.
+        """
         sq = ProlateSpheroidalLattice(
             R=2.0, m=1, n_angular=0, n_radial=0,
             radial_method='spectral', matrix_method='quadrature'
@@ -400,7 +411,9 @@ class TestAlgebraicSolverEnergies:
         )
         Eq, _, _ = sq.solve()
         Ea, _, _ = sa.solve()
-        assert abs(Ea - Eq) < 1e-13, f"m=1 fallback diff {abs(Ea-Eq):.2e}"
+        # Both converge to the same limit; gap is ~5.7e-4 at n_basis=20,
+        # shrinking with basis size.  1e-3 gives ~1.8x margin.
+        assert abs(Ea - Eq) < 1e-3, f"m=1 algebraic-quadrature diff {abs(Ea-Eq):.2e}"
 
     def test_quadrature_default_unchanged(self):
         """Default matrix_method='quadrature' should not change results."""

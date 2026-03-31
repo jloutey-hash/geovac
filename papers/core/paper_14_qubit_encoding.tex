@@ -86,23 +86,33 @@ ERI tensor entries.  As the basis grows, the ERI density decays as
 $\sim 1/M^2$, in stark contrast to Gaussian bases where the ERI tensor
 is nearly dense.
 
-Since each nonzero ERI entry generates $O(Q^2)$ Pauli terms under the
-Jordan--Wigner transformation~\cite{jordan1928,bravyi2002} and each
-nonzero one-electron integral generates $O(Q)$ terms, the total Pauli
-count scales as
+Under the Jordan--Wigner transformation~\cite{jordan1928,bravyi2002},
+each nonzero two-body operator
+$a^\dagger_p a^\dagger_q a_s a_r$ maps to a bounded number of Pauli
+string terms---typically 4 for density-type integrals ($p{=}s$, $q{=}r$)
+and 8 for exchange-type integrals (four distinct indices), independent
+of~$Q$.  (The JW $Z$-chains increase the \emph{weight} of each string
+but not the \emph{number} of distinct strings per integral.)  Similarly,
+each one-body term $a^\dagger_p a_q$ generates $O(1)$ Pauli strings.
+The total Pauli count therefore scales as
 \begin{equation}
-  N_{\mathrm{Pauli}} \sim \underbrace{n_{\mathrm{h1}} \cdot Q}_{\text{one-body}}
-  + \underbrace{n_{\mathrm{ERI}} \cdot Q^2}_{\text{two-body}},
+  N_{\mathrm{Pauli}} \sim C_1 \cdot n_{\mathrm{h1}}
+  + C_2 \cdot n_{\mathrm{ERI}},
   \label{eq:pauli_scaling}
 \end{equation}
-where $n_{\mathrm{h1}}$ and $n_{\mathrm{ERI}}$ are the numbers of nonzero
-one- and two-electron integrals, respectively.  For Gaussian bases with
+where $C_1, C_2$ are $O(1)$ constants and $n_{\mathrm{h1}}$,
+$n_{\mathrm{ERI}}$ are the numbers of nonzero one- and two-electron
+integrals.  For Gaussian bases with
 $n_{\mathrm{ERI}} \sim M^4$ and $Q = 2M$, the two-body term dominates at
-$O(Q^{4} \cdot Q^{2}/Q^{2}) \approx O(Q^{4\text{--}5})$.  For the GeoVac
-lattice with $n_{\mathrm{ERI}} \sim M^2$, the two-body contribution is
-$O(M^2 \cdot Q^2) = O(Q^4/4)$---but the sparse one-body graph Laplacian
-($n_{\mathrm{h1}} \sim M$) and the sublinear ERI growth combine to yield
-an empirical exponent of $\alpha \approx 3.15$ over the range tested.
+$O(Q^{4})$.  For the GeoVac lattice with
+$n_{\mathrm{ERI}} \sim M^2$, the leading-order prediction is
+$O(Q^2)$.  The empirical exponent of $\alpha \approx 3.15$ over the
+range $Q = 10$--$110$ exceeds this asymptotic estimate, reflecting
+spin-channel multiplicity (each spatial ERI generates up to four
+spin-orbital ERIs) and subleading combinatorial terms at moderate~$Q$.
+The scaling \emph{gap} between GeoVac and Gaussian encodings---roughly
+$1$--$1.5$ in exponent---is robust regardless of the per-integral
+counting and is the structural consequence of selection-rule sparsity.
 
 We validate this scaling with systematic benchmarks on atoms (H, He) and
 molecules (H$_2$) using the GeoVac lattice at increasing basis sizes

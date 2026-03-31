@@ -1,6 +1,6 @@
 % paper_18_exchange_constants.tex — GeoVac Paper 18
-% Spectral-Geometric Exchange Constants: The Transcendental
-% Toll of Projecting Discrete Spectra onto Continuous Manifolds
+% Spectral-Geometric Exchange Constants: Projecting Discrete
+% Spectra onto Continuous Manifolds
 % Status: Draft, March 29, 2026
 % Category: Observations (papers/observations/)
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
@@ -15,8 +15,7 @@
 \begin{document}
 
 \title{Spectral-Geometric Exchange Constants:\\
-The Transcendental Toll of Projecting Discrete Spectra\\
-onto Continuous Manifolds}
+Projecting Discrete Spectra onto Continuous Manifolds}
 \thanks{Paper 18 in the Geometric Vacuum series}
 
 \author{J.~Loutey}
@@ -40,8 +39,10 @@ $\kappa = -1/16$.  At Level~2, the embedding of the Laguerre
 spectral basis into prolate spheroidal coordinates introduces the
 Stieltjes seed $e^a E_1(a)$.  At Level~3, the adiabatic
 reparameterization of the $S^3 \times S^3$ product space into
-hyperspherical coordinates introduces the transcendental function
-$\mu(R)$.  We observe that this pattern is an instance of a
+hyperspherical coordinates introduces the adiabatic eigenvalue
+$\mu(R)$---an algebraic function of $R$ with transcendental
+coefficients inherited from the angular coupling matrix.
+We observe that this pattern is an instance of a
 well-known phenomenon in spectral geometry: Weyl's law, which
 relates the discrete eigenvalue counting function of the
 Laplace--Beltrami operator to the continuous volume of the
@@ -125,8 +126,13 @@ $\mathbb{R}^3$.  The universal kinetic scale factor
   \kappa = -\frac{1}{16}
   \label{eq:kappa}
 \end{equation}
-converts graph eigenvalues to physical energies:
-$E_n = \kappa \cdot \lambda_n / n^2$~\cite{loutey_paper0}.
+calibrates the ground state energy:
+$\kappa \cdot \lambda_{\max} = E_H = -1/2$~Ha, where
+$\lambda_{\max} \to 8$ is the maximum graph Laplacian eigenvalue
+in the continuum limit~\cite{loutey_paper0}.  Per-shell energies
+$E_n = -Z^2/(2n^2)$ emerge from the full graph Hamiltonian
+$H = \kappa \mathcal{L} + W$ (with node weights $W_{nn} = -Z/n^2$),
+not from $\kappa$ alone.
 
 The origin of $\kappa$ is well understood geometrically: it is
 the Jacobian of the stereographic projection composed with the
@@ -249,36 +255,69 @@ because the effective angular Hamiltonian is
 $H(R) = H_0 + R \cdot V^{\mathrm{coupling}}$~\cite{loutey_paper13}.
 
 Each perturbation coefficient $a_k$ in the expansion
-$\mu(R) = \mu^{(0)} + a_1 R + a_2 R^2 + \cdots$ is individually
-algebraic: the $a_k$ are finite sums of rational numbers times
-powers of $\pi^{-1}$, arising from partial harmonic sums over
+$\mu(R) = \mu^{(0)} + a_1 R + a_2 R^2 + \cdots$ has a closed
+form: the $a_k$ are finite sums of algebraic numbers (square
+roots of rationals from Clebsch--Gordan coefficients) times
+powers of $\pi^{-1}$ (from normalization over the angular domain
+$[0, \pi/2]$), arising from partial harmonic sums over
 $\mathrm{SO}(6)$ Casimir eigenstates~\cite{loutey_paper13}.
-However, the full function $\mu(R)$ is transcendental: it
-interpolates between $O(R)$ behavior at small $R$ (perturbative,
-$S^5$ symmetric) and $O(R^2)$ behavior at large $R$
-(hydrogen-like, $S^3 \times \mathbb{R}$), and no finite-order
-rational function spans both
-regimes~\cite{loutey_paper13,loutey_track_g}.
+For example, $a_1(n{=}1, Z) = (8/3\pi)(\sqrt{2} - 4Z)$.
+However, the full function $\mu(R)$ is not transcendental in the
+sense originally claimed.  The angular Hamiltonian
+$H(R) = H_0 + R \cdot V_C$ is a linear matrix pencil, so its
+eigenvalues satisfy the characteristic polynomial
+\begin{equation}
+  P(R, \mu) \;=\; \det\!\bigl(H_0 + R\,V_C - \mu\,I\bigr) = 0,
+  \label{eq:char_poly}
+\end{equation}
+which is a polynomial of degree $d$ in both $R$ and $\mu$ (where
+$d$ is the matrix dimension at a given truncation).  The coefficients
+of $P$ lie in $\mathbb{Q}(\pi, \sqrt{2})$, since $H_0$ has integer
+entries (SO(6) Casimir eigenvalues) and $V_C$ has entries involving
+$\pi^{-1}$ and $\sqrt{2}/\pi$ from the angular integrals.  This
+makes $\mu(R)$ an \emph{algebraic} function of $R$ over the
+coefficient ring $\mathbb{Q}(\pi, \sqrt{2})$---it is a root of
+a polynomial, not a transcendental
+function~\cite{loutey_track_p1}.
 
-The transcendence of $\mu(R)$ reflects a topology change in
-the underlying manifold: at $R \to 0$, the angular manifold
-is the round five-sphere $S^5$ with $\mathrm{SO}(6)$ symmetry;
-at $R \to \infty$, it pinches to $S^3 \times \mathbb{R}$
-(one electron bound, one free)~\cite{loutey_paper13}.  This
-smooth deformation of the manifold as a function of the
-``slow'' variable $R$ produces a transcendental function of
-$R$ because smooth topology changes are generically
-transcendental functions of the deformation parameter.
+The transcendental content of $\mu(R)$ is therefore
+\emph{inherited} from the coupling matrix $V_C$, which contains
+upstream exchange constants of embedding type ($\pi^{-1}$ from
+angular normalization, $\sqrt{2}$ from Gaunt-type integrals).
+The $R$-dependence itself introduces no new transcendentals:
+it is purely algebraic.
 
-The crucial point is that $\mu(R)$ is not intrinsic to the
+The failure of the Taylor/Pad\'e expansion at large $R$
+(Track~G~\cite{loutey_track_g}) is reinterpreted as a
+\emph{branch point} phenomenon, not evidence of transcendence.
+The algebraic curve $P(R, \mu) = 0$ has branch points where
+eigenvalue sheets meet---these are the zeros of the discriminant
+$\Delta(R) = \mathrm{disc}_\mu(P)$.  The Taylor series around
+$R = 0$ has a convergence radius set by the nearest branch point
+in the complex $R$-plane.  Pad\'e approximants, being rational
+functions, also cannot cross branch points where $\mu(R)$ has
+square-root type singularities.  But the implicit relation
+$P(R, \mu) = 0$ is exact for \emph{all} $R$, including $R > 5$
+where the series diverges.  This has been verified computationally
+to machine precision at $R = 50$~bohr~\cite{loutey_track_p1}.
+
+The $O(R) \to O(R^2)$ crossover, which was previously interpreted
+as a regime change requiring transcendental interpolation, is
+simply the behavior of an algebraic function whose dominant term
+changes character: at small $R$, the linear term $V_C \cdot R$
+dominates; at large $R$, higher-order terms in the characteristic
+polynomial dominate.  The crossover is smooth along the algebraic
+curve, even though it is singular from the perspective of a Taylor
+expansion centered at $R = 0$.
+
+The crucial point remains that $\mu(R)$ is not intrinsic to the
 two-electron problem.  It is an artifact of the hyperspherical
 coordinate system.  The $S^3 \times S^3$ product space does not
 require $\mu(R)$; it only appears when one reparameterizes for
 computational efficiency.  The exchange rate between the discrete
 product-space description and the continuous hyperspherical
-description is an entire transcendental function, not merely
-a constant, because the hyperspherical embedding distorts the
-product geometry differently at each $R$.
+description is an algebraic function of $R$, with transcendental
+content inherited from the angular coupling integrals.
 
 
 \subsection{Level 4: $\mu(\rho,R)$ (product space $\to$ molecule-frame hyperspherical)}
@@ -372,17 +411,22 @@ dimension.  This factor is the prototypical
 \textit{spectral-geometric exchange constant}: it converts
 between counting (discrete) and measuring (continuous).
 
-For the specific manifolds in the GeoVac hierarchy:
+For the specific manifolds in the GeoVac hierarchy, the ball
+volumes $\omega_d$ carry $\pi^{\lfloor d/2 \rfloor}$:
 \begin{itemize}
   \item $S^1$ ($d = 1$): $\omega_1 = 2$,
-    exchange factor $\sim \pi^{1/2}$.
+    Weyl constant $\omega_1/(2\pi)^1 = 1/\pi$.
   \item $S^2$ ($d = 2$): $\omega_2 = \pi$,
-    exchange factor $\sim \pi$.
+    Weyl constant $\omega_2/(2\pi)^2 = 1/(4\pi)$.
   \item $S^3$ ($d = 3$): $\omega_3 = 4\pi/3$,
-    exchange factor $\sim \pi^{3/2}$.
+    Weyl constant $\omega_3/(2\pi)^3 = 1/(6\pi^2)$.
   \item $S^5$ ($d = 5$): $\omega_5 = 8\pi^2/15$,
-    exchange factor $\sim \pi^{5/2}$.
+    Weyl constant $\omega_5/(2\pi)^5 = 1/(60\pi^3)$.
 \end{itemize}
+In each case, the Weyl constant involves inverse powers of $\pi$
+(specifically $\pi^{-\lceil d/2 \rceil}$), reflecting the
+transcendental cost of converting a discrete eigenvalue count
+into a continuous volume measure.
 
 \subsection{$\pi$ as the founding example}
 
@@ -409,8 +453,9 @@ produces integers or rationals:
   \item Eigenvalues of the graph Laplacian: $\lambda_n = -(n^2 - 1)$,
     integer for all $n$.
   \item Degeneracies: $g_n = n^2$, integer.
-  \item Gaunt integrals: ratios of factorials via Wigner $3j$ symbols,
-    rational.
+  \item Gaunt integrals (Legendre normalization,
+    $\int P_{l_1} P_k P_{l_2}\,dx$): ratios of factorials via
+    Wigner $3j$ symbols, rational.
   \item Selection rules: combinatorial (triangle inequality on angular
     momentum labels).
   \item Clebsch--Gordan coefficients: algebraic numbers (square roots
@@ -454,9 +499,9 @@ is non-compact, a continuous spectrum appears and the exchange
 involves Eisenstein series---transcendental
 functions~\cite{selberg1956}.  This exactly parallels the
 GeoVac hierarchy: Level~1 (compact $S^3$) has a purely algebraic
-spectrum plus a constant ($\kappa$); Level~3 (non-compact
-$S^5 \to S^3 \times \mathbb{R}$ flow) has a transcendental
-function ($\mu(R)$).
+spectrum plus a constant ($\kappa$); Level~3 ($S^5$ with $\mathrm{SO}(6) \to \mathrm{SO}(4)$
+symmetry crossover) has an algebraic function $\mu(R)$ with
+transcendental coefficients (Sec.~\ref{sec:algebraic_curve}).
 
 
 %% ========================================================================
@@ -473,7 +518,14 @@ propose the following taxonomy:
 \caption{Spectral-geometric exchange constants in the GeoVac
   hierarchy.  ``Source'' indicates the discrete structure;
   ``Target'' indicates the continuous coordinate system.
-  ``Type'' classifies the exchange constant by what determines it.}
+  ``Type'' classifies the exchange constant by what determines it.
+  ``Algebraic (implicit)'' indicates that the function satisfies a
+  polynomial equation $P(R,\mu) = 0$ with coefficients inherited from
+  upstream exchange constants (Sec.~\ref{sec:algebraic_curve}).
+  ``Piecewise'' indicates that the angular Hamiltonian has
+  piecewise-smooth parameter dependence (from the split-region
+  Legendre expansion), preventing a global characteristic polynomial.
+  The function is piecewise-algebraic within each region.}
 \label{tab:taxonomy}
 \begin{ruledtabular}
 \begin{tabular}{ccccc}
@@ -485,11 +537,11 @@ propose the following taxonomy:
   2 ($m{\neq}0$) & assoc. Laguerre & prolate sph. & $e^a E_1(a)$
     & embedding \\
   3 (FCI) & $S^3 {\times} S^3$ & (none) & (none) & algebraic \\
-  3 (hyper.) & $\mathrm{SO}(6)$ reps & $S^5(R)$ flow
-    & $\mu(R)$ & flow \\
+  3 (hyper.) & $\mathrm{SO}(6)$ reps & $S^5(R)$ param.
+    & $\mu(R)$ & alg.\ (implicit) \\
   4 (prolate CI) & prolate product & (none) & (none) & algebraic \\
-  4 (hyper.) & $\mathrm{SO}(6)$ reps & $(\rho,R)$ flow
-    & $\mu(\rho,R)$ & flow \\
+  4 (hyper.) & $\mathrm{SO}(6)$ reps & $(\rho,R)$ param.
+    & $\mu(\rho,R)$ & piecewise \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -523,15 +575,28 @@ The taxonomy reveals a hierarchy of exchange types:
     singularity.  Example: $e^a E_1(a)$ for the prolate
     centrifugal pole.
 
-  \item \textbf{Flow functions}: Transcendental functions of
-    continuous parameters, arising when the manifold itself
-    varies (topology changes, avoided crossings, non-compact
-    limits).  Example: $\mu(R)$ for the $S^5 \to S^3 \times
-    \mathbb{R}$ topology flow at Level~3.  At Level~4, the
-    flow function $\mu(\rho, R)$ depends on two continuous
-    parameters (electron hyperradius and internuclear distance),
-    reflecting the simultaneous three-body coalescence in
-    coordinate and configuration space.
+  \item \textbf{Algebraic (implicit) functions}: Functions of
+    continuous parameters defined implicitly by $P(R,\mu) = 0$,
+    where $P$ is the characteristic polynomial of the
+    parameter-dependent Hamiltonian $H(R) = H_0 + R \cdot V_C$.
+    The coefficients of $P$ lie in $\mathbb{Q}(\pi, \sqrt{2})$---a
+    transcendental extension of $\mathbb{Q}$---but the $R$-dependence
+    itself is algebraic: $\mu(R)$ is a root of a polynomial in $R$.
+    The transcendental content is \emph{inherited} from the angular
+    coupling matrix $V_C$ (which contains upstream exchange constants
+    of embedding type), not generated by the parameterization.
+    Example: $\mu(R)$ for the $\mathrm{SO}(6) \to \mathrm{SO}(4)$
+    symmetry crossover on $S^5$ at Level~3.  At $l_{\max} = 0$,
+    $\mu(R)$ is an explicit linear function of $R$; at higher
+    $l_{\max}$, it is an algebraic function of degree $l_{\max}+1$,
+    with branch points at eigenvalue crossings in the complex
+    $R$-plane.  At Level~4, the split-region Legendre expansion of
+    the nuclear charge function introduces piecewise-smooth
+    $\rho$-dependence at the region boundary $\rho = 1/2$, breaking
+    the linear pencil structure. The angular eigenvalues $\mu(\rho)$
+    are piecewise-algebraic within each region but do not satisfy a
+    single global characteristic polynomial. The product-space CI
+    saturation at 92.5\% $D_e$ remains the key irreducibility result.
 \end{enumerate}
 
 The dependency hierarchy is explicit: intrinsic constants depend
@@ -648,12 +713,26 @@ The fundamental reason that spectral-geometric exchange constants
 are transcendental is that they convert between two
 incommensurable descriptions: a discrete count (eigenvalues,
 representation labels, graph vertices) and a continuous measure
-(volume, curvature, geodesic length).  The Lindemann--Weierstrass
-theorem guarantees that $e^\alpha$ is transcendental for any
-nonzero algebraic $\alpha$; since the Weyl constants involve
-exponentials of curvature data (via the heat kernel
-$\mathrm{tr}\,e^{-t\Delta}$), transcendence is
-generic~\cite{berger2003}.
+(volume, curvature, geodesic length).  The Weyl constants involve
+$\pi^{d/2}$ (Sec.~\ref{sec:pattern}), and $\pi$ is
+transcendental by Lindemann's theorem (1882: $e^{i\pi} = -1$
+implies $\pi$ is transcendental, since $e^\alpha$ is
+transcendental for nonzero algebraic $\alpha$).  Since $\pi$
+enters every volume-to-eigenvalue conversion, transcendence is
+a structural feature of the discrete-to-continuous exchange, not
+an accident of particular
+manifolds~\cite{berger2003}.
+
+However, not all \emph{functions} that appear in the GeoVac hierarchy
+are transcendental.  The adiabatic eigenvalues $\mu(R)$ satisfy a
+polynomial equation $P(R,\mu) = 0$ (Sec.~\ref{sec:algebraic_curve}),
+making them algebraic functions of $R$.  The transcendental content
+in $\mu(R)$ is entirely inherited from the coefficients of $P$, which
+involve $\pi$ and $\sqrt{2}$ from the angular coupling integrals.
+The $R$-dependence itself is algebraic.  This distinction matters:
+the truly irreducible transcendentals are the \emph{constants} that
+enter the coupling matrix, not the parameterized functions built
+from them.
 
 \subsection{Why the constants vanish on the graph}
 
@@ -704,24 +783,90 @@ mismatch increases:
     One projection, fixed curvature.
   \item Constant $\to$ single transcendental (Level 2, $m \neq 0$):
     $e^a E_1(a)$.  One embedding with a coordinate singularity.
-  \item Constant $\to$ transcendental function of one parameter
-    (Level 3, hyperspherical): $\mu(R)$.  A continuously deforming
-    manifold.
-  \item Constant $\to$ transcendental function of two parameters
+  \item Constant $\to$ algebraic function of one parameter
+    (Level 3, hyperspherical): $\mu(R)$.  Defined implicitly by
+    $P(R,\mu) = 0$, a polynomial with coefficients in
+    $\mathbb{Q}(\pi, \sqrt{2})$.  The transcendental content is
+    inherited from the angular coupling matrix, not generated by
+    the parameterization.  Branch points of the algebraic curve
+    (eigenvalue crossings in the complex $R$-plane) set the
+    convergence radius of perturbation series expansions.
+  \item Constant $\to$ piecewise-algebraic function of two parameters
     (Level 4, mol-frame hyperspherical): $\mu(\rho, R)$.
-    Simultaneous three-body coalescence in coordinate and
-    configuration space.  Unlike Level~3, this exchange constant
-    is irreducible: the product-space alternative saturates at
-    92.5\% $D_e$~\cite{loutey_track_m}.
+    The split-region Legendre expansion introduces a region boundary
+    at $\rho = 1/2$ that breaks the linear pencil structure, so
+    $\mu(\rho)$ does not satisfy a global polynomial equation.
+    Within each region, the parameter dependence is algebraic.
+    The hyperspherical parameterization remains computationally
+    essential: the product-space CI saturates at 92.5\%
+    $D_e$~\cite{loutey_track_m}.
 \end{itemize}
 
-This hierarchy mirrors the mathematical classification of periods
-and transcendental functions: the Weyl constants are periods
+This hierarchy mirrors the mathematical classification of constants
+and functions: the Weyl constants are periods
 ($\pi = \int dx/(1+x^2)$); the Stieltjes seeds are exponential
-periods ($E_1(a) = \int_1^\infty e^{-at}/t\,dt$); and the
-adiabatic eigenvalue functions are solutions of parameter-dependent
-spectral problems, which are generically non-period transcendentals.
+periods ($E_1(a) = \int_1^\infty e^{-at}/t\,dt$); and the adiabatic
+eigenvalue functions are algebraic functions of the continuous
+parameters, built from transcendental data.  The ``non-period
+transcendental'' classification previously applied to $\mu(R)$ is
+therefore superseded: $\mu(R)$ is not transcendental as a function
+of $R$, though its coefficients are transcendental numbers.
+At Level~4, the piecewise-smooth parameter dependence places $\mu(\rho)$
+outside even the algebraic category, though it remains piecewise-algebraic
+within each Legendre region.
 
+
+\subsection{The algebraic curve refinement}
+\label{sec:algebraic_curve}
+
+The characteristic polynomial analysis~\cite{loutey_track_p1}
+refines the exchange constant taxonomy by distinguishing between
+transcendental \emph{constants} and algebraic \emph{functions} of
+continuous parameters:
+\begin{itemize}
+  \item \textbf{Truly irreducible transcendentals:}
+    The embedding constants $e^a E_1(a)$ (Level~2, $m \neq 0$) and the
+    angular coupling integrals $c/\pi$ and $c\sqrt{2}/\pi$
+    (Level~3 and~4) are irreducible---they cannot be eliminated by
+    any algebraic manipulation.  These are the genuine ``exchange
+    constants'' in the Weyl--Selberg sense.
+  \item \textbf{Algebraic functions of transcendental data:}
+    The adiabatic eigenvalues $\mu(R)$ and $\mu(\rho,R)$ are
+    algebraic functions whose coefficients inherit transcendentals
+    from the coupling matrix.  The $R$-dependence (or $(\rho,R)$-dependence)
+    is algebraic at every truncation: $\mu$ satisfies a polynomial
+    equation $P(R,\mu) = 0$ of degree $d$ equal to the matrix dimension.
+    At $l_{\max} = 0$, $P$ is linear and $\mu(R)$ is an explicit
+    rational function of $R$ (with transcendental coefficients).
+    At $l_{\max} = L$, $P$ has degree $L+1$ in both $R$ and $\mu$.
+  \item \textbf{Calibration constant:} $\kappa = -1/16$ is rational
+    (Sec.~\ref{sec:kappa_derivation}).
+\end{itemize}
+
+This refinement has a practical implication: the ``transcendental toll''
+of the adiabatic parameterization is \emph{inherited}, not \emph{accrued}.
+Moving from the product space $S^3 \times S^3$ to hyperspherical
+coordinates does not introduce new transcendental content; it
+rearranges existing transcendentals (from the angular coupling)
+into an algebraic function of $R$.  The toll is paid once, in the
+coupling matrix, and the $R$-dependence is algebraically determined.
+
+This does not yet eliminate the computational cost of pointwise
+diagonalization: at $l_{\max} \geq 1$, the characteristic polynomial
+has degree $\geq 2$ in $\mu$ and must be solved numerically at each
+$R$-point.  But it does mean that the solver operates on a known
+polynomial, not an opaque transcendental function.  Whether this
+algebraic structure can be exploited computationally---for instance,
+via resultant methods, homotopy continuation, or algebraic
+PES representations---is an open question.
+
+This algebraic structure is specific to Level~3, where the angular
+Hamiltonian $H(R) = H_0 + R \cdot V_C$ is a linear matrix pencil.
+At Level~4, the split-region Legendre expansion of the nuclear charge
+function introduces piecewise-smooth $\rho$-dependence that breaks
+the pencil structure (Track~S).  The Level~4 angular eigenvalues
+are piecewise-algebraic but do not satisfy a global characteristic
+polynomial.
 
 \subsection{Derivation of $\kappa = -1/16$}
 \label{sec:kappa_derivation}
@@ -813,14 +958,19 @@ the energy-shell scaling $E \propto Z^2$.
 \label{sec:conclusion}
 
 The GeoVac hierarchy of natural geometries produces a systematic
-sequence of transcendental constants at each level where a
-discrete algebraic structure is projected onto a continuous
-coordinate system.  These constants---$\kappa = -1/16$,
-$e^a E_1(a)$, $\mu(R)$, and $\mu(\rho,R)$---are instances of the
-spectral-geometric exchange constants described by Weyl's law
-and the Selberg trace formula.  They encode the curvature
-mismatch between the graph and the coordinate system, and they
-vanish when the computation stays on the graph.
+sequence of exchange constants at each level where a discrete
+algebraic structure is projected onto a continuous coordinate
+system.  The irreducible transcendentals---$\pi$,
+$e^a E_1(a)$---are instances of the Weyl--Selberg exchange
+constants, encoding the curvature mismatch between the graph and
+the coordinate system.  The Level~3 adiabatic eigenvalue $\mu(R)$,
+previously classified as transcendental, is in fact an algebraic
+function of $R$ with transcendental coefficients inherited from the
+angular coupling matrix.  The Level~4 eigenvalue $\mu(\rho,R)$ is
+piecewise-algebraic, with the region structure inherited from the
+split-region Legendre expansion.  The calibration constant
+$\kappa = -1/16$ is rational.  All exchange constants vanish when
+the computation stays on the graph.
 
 At Level~4, the situation is qualitatively different from
 Levels~1--3: the product-space computation (prolate spheroidal
@@ -844,12 +994,17 @@ Two implications for the GeoVac program follow:
   \item \textbf{The design principle}: Staying on the graph
     is not merely a computational preference; it is the
     algebraically natural thing to do.  Every coordinate
-    projection incurs a transcendental toll.  The program's
-    ongoing effort to algebraicize the solvers
-    (Paper~12's Neumann expansion, the Laguerre moment
-    recurrences, the Gaunt integral replacements) is, in
-    retrospect, an effort to eliminate exchange constants by
-    eliminating projections.
+    projection incurs a transcendental toll, though that toll
+    may be a constant (inherited from angular coupling) rather
+    than a function.  The adiabatic parameterization introduces
+    no new transcendental content; it rearranges upstream constants
+    into an algebraic function of $R$.  The program's ongoing effort
+    to algebraicize the solvers (Paper~12's Neumann expansion,
+    the Laguerre moment recurrences, the Gaunt integral replacements)
+    is, in retrospect, an effort to eliminate exchange constants by
+    eliminating projections---and the algebraic curve result shows
+    that this effort has been more successful than previously
+    recognized.
   \item \textbf{The physical interpretation of $\kappa$}:
     Paper~0 identified $\kappa = -1/16$ as a universal packing
     constant but did not derive it from first principles.
@@ -937,6 +1092,17 @@ GeoVac supplementary material (2026).
 \bibitem{loutey_track_m}
 J.~Loutey,
 ``Track M: Prolate CI $l_{\max}$ Convergence Study,''
+GeoVac supplementary material (2026).
+
+\bibitem{loutey_track_p1}
+J.~Loutey,
+``Track P1: Algebraic Curve for $\mu(R)$---Characteristic Polynomial
+of the Level~3 Angular Hamiltonian,''
+GeoVac supplementary material (2026).
+
+\bibitem{loutey_track_s}
+J.~Loutey,
+``Track S: Level~4 Algebraic Curve---Structural Negative Result,''
 GeoVac supplementary material (2026).
 
 \bibitem{dlmf_laguerre}

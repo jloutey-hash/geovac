@@ -305,6 +305,104 @@ class AbInitioPK:
             'atom': atom,
         }
 
+    def spectral_rank_k_projector(
+        self, rank: int = 3, atom: str = 'A',
+        n_basis: int = 10, n_quad: int = 100,
+    ) -> dict:
+        """
+        Return a rank-k spectral PK projector using Gegenbauer channel
+        coefficients from the AlgebraicAngularSolver.
+
+        Instead of mapping the FD grid wavefunction into Level 4 space
+        (rank-1 algebraic projector), this method:
+        1. Solves the core angular problem with the algebraic spectral solver
+        2. Extracts the Gegenbauer expansion coefficients per l-channel
+        3. Returns the top-k basis functions with their coefficients
+
+        The Level 4 solver then reconstructs each Gegenbauer basis function
+        on its own alpha grid and builds V_PK = E_shift * sum_i |psi_i><psi_i|
+        as a rank-k projector.
+
+        Parameters
+        ----------
+        rank : int
+            Number of spectral components to retain (1-5). rank=1 reproduces
+            the v2.0.6 algebraic PK failure case.
+        atom : str
+            Which nucleus the core belongs to ('A' or 'B').
+        n_basis : int
+            Number of Gegenbauer basis functions per l-channel in solver.
+        n_quad : int
+            Number of Gauss-Legendre quadrature points per sub-interval.
+
+        Returns
+        -------
+        dict
+            Spectral projector specification for the Level 4 solver.
+        """
+        from geovac.algebraic_angular import AlgebraicAngularSolver
+
+        Z_core = self._Z
+        l_max_core = self._core.l_max
+        R_rep = self._core.core_R_representative
+        if R_rep is None:
+            raise RuntimeError(
+                "Core representative R not available. "
+                "Ensure CoreScreening.solve() was called."
+            )
+
+        # Solve the core angular problem in the spectral basis
+        solver = AlgebraicAngularSolver(
+            Z=Z_core, n_basis=n_basis, l_max=l_max_core,
+            symmetry='singlet', n_quad=n_quad,
+        )
+        evals, evecs = solver.solve(R_rep, n_channels=1)
+
+        # evecs[0] has shape (n_l * n_basis,): Gegenbauer coefficients
+        # for each l-channel. Extract per-channel coefficient vectors.
+        coeffs_per_l = []
+        for l_idx in range(solver.n_l):
+            i0 = l_idx * n_basis
+            i1 = (l_idx + 1) * n_basis
+            coeffs_per_l.append(evecs[0][i0:i1].copy())
+
+        # Determine global top-k components by magnitude
+        # Each component is (l, basis_index, coefficient)
+        all_components = []
+        for l_idx, coeffs in enumerate(coeffs_per_l):
+            for j, c in enumerate(coeffs):
+                all_components.append((abs(c), l_idx, j, c))
+
+        all_components.sort(reverse=True)
+        top_k = all_components[:rank]
+
+        # Build list of spectral components for the Level 4 projector
+        spectral_components = []
+        for _, l_idx, j, c in top_k:
+            # Get the Gegenbauer k-index for this basis function
+            k_idx = 2 * j  # singlet: k = 0, 2, 4, ...
+            spectral_components.append({
+                'l': l_idx,
+                'k': k_idx,
+                'coeff': float(c),
+            })
+
+        energy_shift = (
+            abs(self._E_core_per_electron - self._E_val_est) * self._n_core
+        )
+
+        return {
+            'mode': 'spectral_rank_k',
+            'rank': rank,
+            'spectral_components': spectral_components,
+            'Z_core': float(Z_core),
+            'l_max_core': l_max_core,
+            'energy_shift': energy_shift,
+            'E_core_per_electron': self._E_core_per_electron,
+            'E_val': self._E_val_est,
+            'atom': atom,
+        }
+
     def pk_dict(self, atom: str = 'A') -> dict:
         """
         Return PK parameters as a dict compatible with the Level 4 solver.

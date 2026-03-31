@@ -1041,7 +1041,7 @@ This sparsity is ultimately responsible for the 0.05\% accuracy
 of the single-channel ($l = 0$) adiabatic approximation: the
 ground channel is only weakly coupled to excited channels.
 
-\subsection{The algebraic/transcendental boundary}
+\subsection{The algebraic curve and its branch points}
 \label{sec:algebraic_boundary}
 
 The perturbation coefficients $a_n$ (the $n$-th order correction
@@ -1058,13 +1058,39 @@ Eq.~\eqref{eq:a1_exact}.  The second-order coefficient
 converges to $a_2 = -0.2442$ (at $Z = 2$), where each term in the
 sum is an algebraic number.
 
-However, the full eigenvalue $\mu(R)$ at finite $R$ is
-\emph{transcendental}: it interpolates between the perturbative
-regime $\mu \sim a_1 R + a_2 R^2$ at small $R$ and the asymptotic
-regime $\mu \sim -Z^2 R^2/2$ at large $R$.  These two regimes have
-qualitatively different power-law character ($O(R)$ vs.\
-$O(R^2)$), and no finite-order rational or Pad\'e approximant
-captures the crossover.
+However, the full eigenvalue $\mu(R)$ at finite $R$ is not
+transcendental as a function of $R$.  The angular Hamiltonian
+$H(R) = H_0 + R \cdot V^{\mathrm{coupling}}$ is a linear matrix
+pencil, so its eigenvalues satisfy the characteristic polynomial
+\begin{equation}
+  P(R, \mu) = \det\!\bigl(H_0 + R\,V^{\mathrm{coupling}} - \mu\,I\bigr)
+  = 0,
+  \label{eq:char_poly}
+\end{equation}
+a polynomial of degree $d$ (the matrix dimension) in both $R$ and $\mu$.
+The coefficients of $P$ lie in $\mathbb{Q}(\pi, \sqrt{2})$: $H_0$ has
+integer entries (SO(6) Casimir eigenvalues), while the coupling matrix
+has entries of the form $c/\pi$ and $c\sqrt{2}/\pi$ from nuclear and
+electron-electron angular integrals.  This makes $\mu(R)$ an algebraic
+function of $R$ over $\mathbb{Q}(\pi, \sqrt{2})$, verified computationally
+to machine precision at $R = 50$~bohr.
+
+The $O(R) \to O(R^2)$ crossover between the perturbative regime
+$\mu \sim a_1 R$ and the asymptotic regime $\mu \sim -Z^2 R^2/2$ is a
+feature of the algebraic curve $P(R,\mu) = 0$: the dominant term in the
+polynomial shifts from linear to quadratic as $R$ increases, but the
+curve itself is smooth and well-defined at all $R$.  The Taylor series
+divergence at $R \approx 2$--$3$~bohr (Sec.~\ref{sec:perturbation_series})
+occurs at branch points of the algebraic curve---zeros of the discriminant
+$\Delta(R) = \mathrm{disc}_\mu(P)$---where eigenvalue sheets meet with
+square-root singularities.  Taylor series and Pad\'e approximants have
+finite convergence radii bounded by these branch points, but the implicit
+relation $P(R,\mu) = 0$ is exact for all $R$.
+
+The transcendental content in $\mu(R)$ is inherited from the angular
+coupling matrix: $\pi^{-1}$ from normalization on $[0, \pi/2]$,
+$\sqrt{2}$ from V$_{ee}$ Gaunt-type integrals (Paper~18).  The
+$R$-dependence itself introduces no new transcendentals.
 
 The gap between the perturbative quasi-Coulomb energy
 \begin{equation}
@@ -1076,8 +1102,10 @@ The gap between the perturbative quasi-Coulomb energy
 $\Delta = -0.160$~Ha at $Z = 2$.  This gap accumulates
 predominantly at intermediate $R$: 75\% of $|\Delta|$ is
 accounted for by $R \in [0.5, 2.0]$~bohr.  The deficit is a
-dynamical integral over the topology flow---it has no closed-form
-algebraic expression.
+dynamical integral over the algebraic curve---it is a definite
+integral whose integrand involves algebraic functions of
+transcendental data, not a transcendental function of $R$
+per se.
 
 \subsection{Topology flow: $S^5 \to S^3 \times \mathbb{R}$}
 \label{sec:topology_flow}
@@ -1649,8 +1677,10 @@ Both algebraic matrices agree with Gauss--Laguerre quadrature to
 $< 10^{-14}$ relative error, and the resulting energies match to
 $< 10^{-14}$~Ha.  The algebraic build achieves an $11\times$ speedup
 (52~$\mu$s vs 585~$\mu$s).  The effective potential $V_{\mathrm{eff}}(R)$
-remains evaluated by quadrature, consistent with the transcendental
-character of $\mu(R)$ established in Sec.~\ref{sec:algebraic_boundary}.
+remains evaluated by pointwise diagonalization of the angular
+Hamiltonian, which is computationally necessary even though $\mu(R)$
+is algebraic (Sec.~\ref{sec:algebraic_boundary}): the characteristic
+polynomial must be solved at each $R$-point.
 
 \subsection{Rayleigh--Schr\"odinger perturbation series for $\mu(R)$}
 \label{sec:perturbation_series}
@@ -1710,11 +1740,14 @@ on $g(R) = \mu + Z^2 R^2/2$.}
 \end{table}
 
 The failure of Pad\'e acceleration at large $R$ is not a numerical
-artifact but a consequence of the transcendental character of $\mu(R)$
-discussed in Sec.~\ref{sec:algebraic_boundary}: the function
-interpolates between $O(R)$ perturbative behavior at small $R$ and
-$O(R^2)$ asymptotic behavior at large $R$, and no finite-order
-rational function spans both regimes.
+artifact but a consequence of the branch point structure of the
+algebraic curve $P(R,\mu) = 0$
+(Sec.~\ref{sec:algebraic_boundary}): the nearest branch point
+in the complex $R$-plane (where eigenvalue sheets meet) sets a
+finite convergence radius that no Taylor or Pad\'e expansion can
+exceed.  However, the implicit relation $P(R,\mu) = 0$ is exact
+for all $R$, and has been verified computationally to machine
+precision at $R = 50$~bohr.
 
 The perturbation series also provides algebraic $P$-matrix
 coefficients via differentiation of the eigenvector series, but the
@@ -1733,8 +1766,10 @@ $R \approx 2$--$3$~bohr, beyond which point-by-point matrix
 diagonalization is required.  Since the He wavefunction extends to
 $R \approx 10$--$15$~bohr, the perturbation series does not
 eliminate the need for the $R$-grid diagonalization in production,
-but it does confirm and quantify the algebraic/transcendental
-boundary discussed in Sec.~\ref{sec:algebraic_boundary}.
+but it does confirm and quantify the branch point structure
+discussed in Sec.~\ref{sec:algebraic_boundary}, where the
+convergence radius of local expansions is set by the algebraic
+curve's discriminant zeros.
 
 %% ========================================================================
 %% XIV. CONCLUSION

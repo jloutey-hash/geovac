@@ -167,10 +167,21 @@ class ComposedDiatomicSolver:
         self.zeff_mode = zeff_mode
 
         # PK pseudopotential mode
-        if pk_mode not in ('ab_initio', 'manual', 'none', 'algebraic'):
+        # Parse spectral_rank_k mode with optional rank parameter
+        self._spectral_pk_rank = 3  # default rank
+        if pk_mode.startswith('spectral_rank_'):
+            try:
+                self._spectral_pk_rank = int(pk_mode.split('_')[-1])
+            except ValueError:
+                pass
+            pk_mode = 'spectral_rank_k'
+
+        if pk_mode not in (
+            'ab_initio', 'manual', 'none', 'algebraic', 'spectral_rank_k',
+        ):
             raise ValueError(
-                f"pk_mode must be 'ab_initio', 'manual', 'none', or "
-                f"'algebraic', got '{pk_mode}'"
+                f"pk_mode must be 'ab_initio', 'manual', 'none', 'algebraic',"
+                f" or 'spectral_rank_k', got '{pk_mode}'"
             )
         if pk_channel_mode not in ('channel_blind', 'l_dependent'):
             raise ValueError(
@@ -211,7 +222,7 @@ class ComposedDiatomicSolver:
                 'atom': 'A',
                 'channel_mode': pk_channel_mode,
             }]
-        elif self.pk_mode in ('ab_initio', 'algebraic'):
+        elif self.pk_mode in ('ab_initio', 'algebraic', 'spectral_rank_k'):
             # Will be set after solve_core()
             self.pk_A = 0.0
             self.pk_B = 0.0
@@ -272,6 +283,31 @@ class ComposedDiatomicSolver:
             M_A=7.016003, M_B=1.00782503,
             label='LiH',
             pk_mode='algebraic',
+        )
+        defaults.update(kwargs)
+        return cls(l_max=l_max, **defaults)
+
+    @classmethod
+    def LiH_spectral_pk(cls, l_max: int = 2, rank: int = 3,
+                         **kwargs) -> "ComposedDiatomicSolver":
+        """LiH with spectral rank-k PK projector.
+
+        Uses the top-k Gegenbauer spectral coefficients of the core
+        wavefunction from the AlgebraicAngularSolver to build a rank-k
+        PK projector.  Zero fitted parameters.
+
+        Parameters
+        ----------
+        l_max : int
+            Maximum angular momentum in Level 4 solver.
+        rank : int
+            Number of spectral components to retain (1-5).
+        """
+        defaults = dict(
+            Z_A=3, Z_B=1, n_core=2,
+            M_A=7.016003, M_B=1.00782503,
+            label='LiH',
+            pk_mode=f'spectral_rank_{rank}',
         )
         defaults.update(kwargs)
         return cls(l_max=l_max, **defaults)
@@ -342,6 +378,16 @@ class ComposedDiatomicSolver:
             self.pk_B = self.ab_initio_pk.B
             self.pk_projector = self.ab_initio_pk.algebraic_projector(atom='A')
             # No Gaussian pk_potentials — the projector replaces them
+        elif self.pk_mode == 'spectral_rank_k':
+            self.ab_initio_pk = AbInitioPK(
+                self.core, n_core=self.n_core,
+            )
+            self.pk_A = self.ab_initio_pk.A
+            self.pk_B = self.ab_initio_pk.B
+            self.pk_projector = self.ab_initio_pk.spectral_rank_k_projector(
+                rank=self._spectral_pk_rank, atom='A',
+            )
+            # No Gaussian pk_potentials — the spectral projector replaces them
 
         self.timings['core'] = time.time() - t0
 
@@ -360,6 +406,10 @@ class ComposedDiatomicSolver:
                           if self.pk_channel_mode != 'channel_blind' else "")
                 if self.pk_mode == 'algebraic':
                     print(f"  PK: algebraic projector,"
+                          f" E_shift={self.pk_projector['energy_shift']:.4f} Ha")
+                elif self.pk_mode == 'spectral_rank_k':
+                    rank = self.pk_projector.get('rank', '?')
+                    print(f"  PK: spectral rank-{rank} projector,"
                           f" E_shift={self.pk_projector['energy_shift']:.4f} Ha")
                 else:
                     print(f"  PK: A={self.pk_A:.4f}, B={self.pk_B:.4f}"

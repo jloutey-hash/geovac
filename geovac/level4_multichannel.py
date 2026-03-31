@@ -1018,6 +1018,82 @@ def build_angular_hamiltonian(
         E_shift = pk_projector['energy_shift']
         H += R_e * E_shift * np.outer(core_vec, core_vec)
 
+    # --- Spectral rank-k PK projector ---
+    # Replaces the rank-1 algebraic PK with a rank-k projector built from
+    # the k most significant Gegenbauer spectral coefficients of the core
+    # wavefunction. Each spectral component defines a basis function on the
+    # Level 4 alpha grid; the projector is the sum of outer products.
+    if pk_projector is not None and pk_projector.get('mode') == 'spectral_rank_k':
+        from geovac.algebraic_angular import _gegenbauer
+
+        spectral_components = pk_projector['spectral_components']
+        E_shift = pk_projector['energy_shift']
+
+        # For each spectral component, reconstruct the Gegenbauer basis
+        # function on the Level 4 FD alpha grid and map into the
+        # appropriate (l1, l2) channel.
+        cos_2a = np.cos(2.0 * alpha_grid)
+        sin_a = np.sin(alpha_grid)
+        cos_a = np.cos(alpha_grid)
+        sin_cos = sin_a * cos_a
+
+        # Precompute Level 4 grid spacing for normalization
+        h_l4 = alpha_grid[1] - alpha_grid[0]
+
+        for comp in spectral_components:
+            l_core = comp['l']   # l-channel index in Level 3
+            k_idx = comp['k']    # Gegenbauer k-index
+            c_j = comp['coeff']  # spectral coefficient
+
+            # Reconstruct the Gegenbauer basis function on the Level 4 grid
+            lam = float(l_core + 1)
+            envelope = sin_cos ** (l_core + 1)
+            geg = _gegenbauer(k_idx, lam, cos_2a)
+            phi_raw = envelope * geg
+
+            # Normalize on Level 4 grid
+            norm_sq = np.sum(phi_raw**2) * h_l4
+            if norm_sq < 1e-30:
+                continue
+            phi_norm = phi_raw / np.sqrt(norm_sq)
+
+            # Map into the appropriate Level 4 channel(s)
+            # For a 1s² core (l_core maps to l1=l_core, l2=l_core channel):
+            # In atomic limit, core l=0 maps to (l1=0, l2=0) in Level 4.
+            # Higher l-channels map to (l1=l, l2=l) channel.
+            target_l1 = l_core
+            target_l2 = l_core
+
+            target_ch = None
+            for ic, ch_label in enumerate(channels_4):
+                if m_max == 0:
+                    l1, l2 = ch_label[0], ch_label[1]
+                    if l1 == target_l1 and l2 == target_l2:
+                        target_ch = ic
+                        break
+                else:
+                    l1, m1, l2, m2 = ch_label
+                    if (l1 == target_l1 and m1 == 0
+                            and l2 == target_l2 and m2 == 0):
+                        target_ch = ic
+                        break
+
+            if target_ch is None:
+                continue
+
+            # Build channel vector
+            comp_vec = np.zeros(n_ch * n_alpha)
+            comp_vec[target_ch * n_alpha:(target_ch + 1) * n_alpha] = (
+                c_j * phi_norm
+            )
+
+            # Accumulate rank-k projector: V_PK += R_e * E_shift * |psi_i><psi_i|
+            # Note: the coefficient c_j is already included in comp_vec,
+            # so the outer product weight is just E_shift (not c_j² * E_shift).
+            # The sum over k components builds the rank-k approximation to
+            # the projector |core><core|.
+            H += R_e * E_shift * np.outer(comp_vec, comp_vec)
+
     # --- E-e coupling ---
     # For m_max=0: original Gaunt-based coupling (exact backward compatibility).
     # For m_max>0: generalized Wigner 3j coupling for all channel pairs.

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v2.0.11 (March 29, 2026)
+**Version:** v2.0.13 (March 30, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/core/` and `papers/observations/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -54,11 +54,17 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - Track D — Level 3 exact Q-matrix: COMPLETE. Algebraic dP/dR derived from Hellmann-Feynman quantities (verified vs FD to <1e-9, zero finite differences needed). Exact Q = PP + dP/dR replaces closure approximation. Results: 14-19% improvement over closure at l_max≥1, best coupled-channel error 0.22% at l_max=3. l_max=0 overcorrection (1.1%) is structural — dominated by diagonal DBOC, not fixable by Q-matrix improvement alone. q_mode='exact' recommended for l_max≥1 production use. (v2.0.6)
 - Track E — Level 3 coupled-channel convergence ceiling: COMPLETE. Extended to l_max=5 with q_mode='exact'. Error converges algebraically (~l_max⁻²) to structural floor of 0.19-0.20%, set by adiabatic channel truncation. Sub-0.1% requires variational 2D solver (Paper 15). 3 channels sufficient (4-5 contribute < 0.001%). n_basis and radial grid fully converged. (v2.0.8)
 - Track F — Level 3 spectral hyperradial: COMPLETE. Spectral Laguerre basis replaces 3000-point FD hyperradial grid. 120× dimension reduction (3000 → 25 basis functions, converged at n_basis=15), 95× coupled-channel speedup (561 ms → 5.9 ms). Spectral-FD consistency < 0.00003 Ha. Coupled-channel ceiling unchanged (0.221% at l_max=3 — same as FD's 0.220%). Alpha-insensitive. Default preserved (`radial_method='fd'`). (v2.0.9)
-- Track G — Level 3 perturbation series: COMPLETE (definitive negative result). Rayleigh-Schrödinger perturbation series for μ(R) exploiting linear matrix pencil H(R) = H₀ + R·V_C. a₁ validated to 10⁻¹⁵ against Paper 13 Table II. Raw series converges for R < 2 bohr; Padé extends to R ≈ 3 bohr; all orders fail beyond R ≈ 5 bohr. Root cause: μ(R) is transcendental (O(R) → O(R²) regime transition). Point-by-point R-grid diagonalization cannot be eliminated globally. Series provides exact R=0 derivatives for spline seeding. Confirms Paper 13 Sec XII.B. (v2.0.9)
+- Track G — Level 3 perturbation series: COMPLETE (definitive negative result). Rayleigh-Schrödinger perturbation series for μ(R) exploiting linear matrix pencil H(R) = H₀ + R·V_C. a₁ validated to 10⁻¹⁵ against Paper 13 Table II. Raw series converges for R < 2 bohr; Padé extends to R ≈ 3 bohr; all orders fail beyond R ≈ 5 bohr. Root cause: Taylor series divergence at branch point of algebraic curve P(R,μ)=0, where eigenvalue character changes (SO(6) Casimir → independent-atom limit). μ(R) is algebraic over Q(π,√2), not transcendental (corrected v2.0.13 by Track P1). Point-by-point R-grid diagonalization cannot be eliminated for l_max≥1 (radical obstruction, Track P2). Series provides exact R=0 derivatives for spline seeding. (v2.0.9, corrected v2.0.13)
 - Track H — Level 3 algebraic Laguerre matrix elements: COMPLETE. Overlap S and kinetic K fully algebraic via three-term Laguerre recurrence (pentadiagonal M2 for S, tridiagonal derivative expansion for K). Machine-precision agreement (< 1e-14 relative error). 11× matrix build speedup (52 μs vs 585 μs). V_eff stays quadrature (transcendental, Track G). `matrix_method='algebraic'` in spectral solver. (v2.0.10)
 - Track I — Level 4 spectral Laguerre hyperradial: COMPLETE. Spectral Laguerre basis replaces FD R_e grid for all three Level 4 pathways (adiabatic, coupled-channel, 2D variational). 16× dimension reduction (400 → 25), < 0.0005 Ha FD agreement (adiabatic). No wall time speedup — angular sweep dominates 99% of Level 4 cost (structural finding: FD radial is already O(N) tridiagonal, sub-ms). Spectral value is accuracy, memory, and parameterization reduction. n_basis=20 optimal; mild conditioning at n_basis≥25. `radial_method='spectral'` in Level 4 solver. (v2.0.10)
 - Track J — Level 2 algebraic m≠0 (associated Laguerre): COMPLETE. Associated Laguerre basis L_n^{|m|}(x) with weight x^|m|·e^{-x} absorbs the 1/x centrifugal singularity. Partial-fraction decomposition splits centrifugal term into lowered moment M_{-1} (algebraic, DLMF 18.9.13 summation identity) plus Stieltjes integral J (three-term recurrence seeded by e^a·E₁(a)). All matrix elements algebraic except single transcendental seed. Associated basis converges faster than ordinary Laguerre for m=1 (stable by N=10 vs non-monotonic at N=40). m=2 delta states: algebraic-quadrature agreement ~5e-9. PES shape preserved (R_eq matches). `matrix_method='algebraic'` now works for ALL m values. 119 tests passing (77 associated Laguerre + 42 kinetic). Paper 11 Sec V.D updated. (v2.0.10)
 - Track K — Level 4 spectral angular: COMPLETE. Jacobi polynomial spectral basis replaces FD angular solver for Level 4 molecule-frame hyperspherical. 269× speedup (39.9s → 0.15s), 20× dimension reduction (1000 → 50). U_min agreement < 2e-5 Ha. D_e shift 0.3% (FD error cancellation removed). SO(6) Casimir free eigenvalues + precomputed V_ee coupling. `angular_method='spectral'` in solve_level4_h2_multichannel(). (v2.0.11)
+- Track N — Z_eff algebraicization: COMPLETE. Laguerre spectral expansion of core density with incomplete gamma recurrence. Transcendental seed: exp(-2βr). Production default via Track R. 24 tests. (v2.0.12)
+- Track O — Algebraic inter-fiber exchange: COMPLETE. Hybrid Laguerre fit + cumulative-charge for Slater integrals. <5% error for compact Z≥2 densities. Lone pair Z_eff=6 confirmed as physics problem, not quadrature artifact. Production default via Track R. 27 tests. (v2.0.12)
+- Track P1 — Level 3 algebraic curve: COMPLETE. Characteristic polynomial P(R,μ)=det(H₀+R·V_C−μI) computed symbolically. Coefficients in Q(π,√2)[R], NOT rational. μ(R) is algebraic over Q(π,√2), correcting Paper 13 Sec XII.B's claim of transcendence. Track G's Taylor series divergence reinterpreted as branch point of algebraic curve, not transcendence. Polynomial structure: l_max=L gives degree L+1 in both R and μ. 67 tests. (v2.0.12)
+- Track P2 — Algebraic V_eff matrix elements: COMPLETE (partial). Tier 1 (l_max=0): V_eff fully algebraic via Stieltjes moment decomposition. Single transcendental seed e^a·E₁(a), matching Track J pattern. Agreement < 1e-10 elementwise vs quadrature. Tier 2 (l_max=1): discriminant Δ(R) is degree 2 in R, positive; μ(R) involves √Δ, making V_eff integrals non-elementary (elliptic type). No closed-form Laguerre moments. Tier 3 (l_max=2): Cardano roots, even further from closed form. Conclusion: algebraic V_eff tractable only at l_max=0; l_max≥1 requires pointwise quadrature (radical obstruction, not transcendence). (v2.0.13)
+- Track S — Level 4 algebraic curve: COMPLETE (structural negative result). Level 4 angular Hamiltonian is NOT a linear pencil in ρ. Nuclear coupling V_nuc(ρ) is piecewise-smooth due to min(s,ρ)/max(s,ρ) terms in split-region Legendre expansion. Linearity residual 22.5% at l_max=1, 58.6% at l_max=2. No global algebraic curve P(ρ,μ)=0 exists — only pointwise P(μ) at fixed ρ. Point-by-point angular diagonalization is structurally irreducible at Level 4 (confirming Track K's spectral approach as optimal). 39 non-slow tests. (v2.0.13)
+- Track R — Algebraic defaults wiring: COMPLETE. Algebraic Z_eff (`zeff_method='spectral_laguerre'`) and algebraic exchange (`slater_method='algebraic_laguerre'`) wired as production defaults in composed-geometry pipeline. LiH: 0.000% Δ on R_eq, E_min, D_e, ω_e. Be (Z=4) auto-falls back to spline (Laguerre polynomial cancellation detected and handled). 147/147 tests pass. Wall time within noise (±7-16%). (v2.0.13)
 
 **Backlog:**
 - Q-matrix improvement for Level 3 coupled-channel — DONE (v2.0.6)
@@ -105,6 +111,7 @@ Critical institutional memory. Do not re-derive these dead ends.
 | Enhanced Z_eff (PK-free core exclusion) | 1/r² vs 1/r shape mismatch requires extreme A_rep (Z_eff(0)=−38); penetration effect (Z_eff>1) overwhelms repulsive dip; any Z_eff modification destroys homonuclear symmetry (31% odd-l channels vs 0% for PK) | Decoupled architecture (constant Z_A + PK) is essential; core exclusion cannot be encoded in the nuclear potential | v2.0.5 diagnostic arc, v2.0.6 |
 | Algebraic PK projector (rank-1 |core⟩⟨core|) | Rank-1 too weak; valence avoids core in function space while penetrating in coordinate space. Drift 5.6× worse than Gaussian PK (+1.697 vs +0.303 bohr/l_max) | Gaussian PK provides coordinate-space exclusion that rank-1 projector cannot. The l_max divergence root cause is the adiabatic approximation, not PK form | v2.0.6 algebraic PK diagnostic |
 | Single-channel DBOC correction | 97% cancelled by off-diagonal P-coupling; overcorrects by 23×. Requires full coupled-channel solver | Use coupled-channel hyperradial solver instead of single-channel + DBOC | v2.0.6 DBOC diagnostic |
+| Spectral PK projector (rank-k) | Rank 1-3 projectors in Gegenbauer channel basis produce monotonically attractive PES — no equilibrium. Angular-space projectors cannot replace coordinate-space exclusion (extends v2.0.6 rank-1 finding to structural conclusion) | Gaussian PK provides coordinate-space exclusion that angular projectors categorically cannot replicate. The failure is structural, not a matter of rank | Track Q, v2.0.12 |
 
 ---
 
@@ -239,6 +246,10 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | Hyperradial solver | `geovac/hyperspherical_radial.py` | `solve_radial()`, `solve_radial_spectral()` |
 | Spectral angular (Level 4) | `geovac/level4_spectral_angular.py` | `SpectralAngularSolver`, `angular_method='spectral'` |
 | Perturbation series (Level 3) | `geovac/algebraic_angular.py` | `perturbation_series_mu()`, `pade_approximant()` |
+| Algebraic curve (Level 3) | `geovac/algebraic_curve.py` | `characteristic_polynomial()`, `algebraic_veff_matrix_lmax0()` |
+| Algebraic curve (Level 4) | `geovac/algebraic_curve_level4.py` | `extract_level4_matrices()`, `probe_rho_dependence()` |
+| Algebraic Z_eff | `geovac/algebraic_zeff.py` | `LaguerreZeffExpansion`, `fit_density_laguerre()` |
+| Algebraic Slater integrals | `geovac/algebraic_slater.py` | `slater_fk_integral_algebraic()`, `slater_f0_algebraic()` |
 | Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
 
 ### Solver Methods
@@ -476,7 +487,7 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 
 ## 12. Algebraic Registry
 
-Tracks which matrix elements at each level are computed algebraically vs numerically. Status: **algebraic** (closed-form from quantum numbers), **algebraic-pending** (algebraic route identified but production code still uses quadrature), **numerical-required** (no known algebraic replacement).
+Tracks which matrix elements at each level are computed algebraically vs numerically. Status: **algebraic** (closed-form from quantum numbers), **algebraic (implicit)** (defined by polynomial equation P=0 with known coefficient ring; pointwise diag is computational convenience, not mathematical necessity), **algebraic-pending** (algebraic route identified but production code still uses quadrature), **numerical-required** (no known algebraic replacement).
 
 ### Level 3 (Hyperspherical — He)
 
@@ -489,11 +500,11 @@ Tracks which matrix elements at each level are computed algebraically vs numeric
 | Centrifugal matrix elements | algebraic | Diagonal in Gegenbauer basis (v2.0.6) |
 | Hyperradial overlap (S) | algebraic | Pentadiagonal M2 moment matrix from three-term Laguerre recurrence. S = M2/(8α³). Machine-precision agreement with quadrature (< 1e-14 relative). (Track H, v2.0.10) |
 | Hyperradial kinetic (K) | algebraic | Derivative kernel B_n = -n/2 L_{n-1} + 1/2 L_n + (n+1)/2 L_{n+1} (tridiagonal). K = bbᵀ/(4α). Machine-precision agreement (< 1e-14 relative). 11× build speedup. (Track H, v2.0.10) |
-| Hyperradial potential (V_eff) | numerical-required | V_eff(R) = μ(R)/R² + 15/(8R²) is transcendental (Track G proven). Quadrature required. Analogous to Level 2 m≠0 centrifugal singularity. |
+| Hyperradial potential (V_eff) | algebraic at l_max=0; numerical-required at l_max≥1 | l_max=0: V_eff algebraic via Stieltjes moment decomposition (single transcendental seed e^a·E₁(a), Track P2 v2.0.13). l_max≥1: μ(R) is algebraic over Q(π,√2) (Track P1), but V_eff integrals are non-elementary (radical obstruction: √Δ(R) at l_max=1, Cardano at l_max=2). Quadrature required. |
 | Hellmann-Feynman P-matrix | algebraic | Exact from R-independent dH/dR (v2.0.6) |
 | Q-matrix (second derivative coupling) | algebraic | Exact Q = PP + dP/dR computed from Hellmann-Feynman quantities (v2.0.6) |
 | Coupled-channel radial solve | numerical-required | Coupled ODE integration on R grid |
-| Adiabatic potential curves U(R) | numerical-required | Small-matrix diagonalization at each R (10-30 dim, algebraic solver) or FD grid (200-800 dim, original) |
+| Adiabatic potential curves U(R) | algebraic (implicit) | μ(R) satisfies P(R,μ)=0, polynomial in both R and μ, coefficients in Q(π,√2)[R]. Degree L+1 in both variables at l_max=L. Point-by-point diagonalization is computational convenience. (Track P1, v2.0.12) |
 
 ### Level 2 (Prolate Spheroidal — H₂⁺)
 
@@ -512,11 +523,20 @@ Tracks which matrix elements at each level are computed algebraically vs numeric
 |:---------------|:------:|:------|
 | Hyperradial overlap (S) | algebraic | Same Laguerre three-term recurrence as Level 3. Pentadiagonal M2 moment matrix. (Track I, v2.0.10) |
 | Hyperradial kinetic (K) | algebraic | Same derivative kernel as Level 3. Tridiagonal expansion. (Track I, v2.0.10) |
-| Hyperradial potential (U_eff) | numerical-required | Adiabatic curve from angular sweep. μ(ρ) transcendental (same root cause as Level 3, Track G). |
-| Angular eigenvalue sweep (FD) | numerical-required | Point-by-point diagonalization of H_ang at ~130 ρ-values. FD: 1000×1000 matrices, 99% of wall time. |
-| Angular eigenvalue sweep (spectral) | numerical-required | Jacobi polynomial basis: 50×50 matrices, 269× speedup, ~50% of wall time. SO(6) Casimir free spectrum + precomputed V_ee coupling. `angular_method='spectral'`. (Track K, v2.0.11) |
+| Hyperradial potential (U_eff) | numerical-required | Adiabatic curve from angular sweep. μ(ρ) is piecewise-smooth in ρ (NOT algebraic — split-region Legendre expansion creates kinks at min/max boundaries). Structurally different from Level 3. (Track S, v2.0.13) |
+| Angular eigenvalue sweep (FD) | numerical-required | Point-by-point diagonalization of H_ang at ~130 ρ-values. FD: 1000×1000 matrices, 99% of wall time. Structurally irreducible: no global P(ρ,μ)=0 exists (Track S). |
+| Angular eigenvalue sweep (spectral) | numerical-required | Jacobi polynomial basis: 50×50 matrices, 269× speedup, ~50% of wall time. SO(6) Casimir free spectrum + precomputed V_ee coupling. `angular_method='spectral'`. Optimal approach given Track S's structural finding. (Track K, v2.0.11) |
 | 2D tensor product assembly | numerical-required | H_ang evaluated at each quadrature point for (R_e, α) tensor product. Dense kronecker assembly. |
 | Nuclear coupling (split-region Legendre) | algebraic | Gaunt integrals, exact via 3j triangle inequality (Paper 15). |
+
+### Level 5 (Composed Geometries — LiH, BeH₂, H₂O)
+
+| Matrix Element | Status | Notes |
+|:---------------|:------:|:------|
+| Z_eff screening function | algebraic | Laguerre spectral expansion: n(r) projected onto L_k(2βr)·r²·e^{-2βr} basis. N_core(r) = C_inf − e^{-X}·P(X), single transcendental seed e^{-2βr}. Production default `zeff_method='spectral_laguerre'`. Auto-fallback to spline for Z≥4 (polynomial cancellation). (Track N, v2.0.12; Track R wiring, v2.0.13) |
+| Slater F^k integrals | algebraic | Laguerre moment decomposition: F^k = c_A^T · R^k · c_B where R^k matrix uses incomplete gamma recurrence. Single transcendental seed γ(1,x) = 1−e^{-x}. Production default `slater_method='algebraic_laguerre'`. Agreement within 1.77% of numerical for compact Z≥2 densities. (Track O, v2.0.12; Track R wiring, v2.0.13) |
+| Phillips-Kleinman PK | algebraic | Ab initio from core eigenvector projection (Paper 17 Sec IV). Gaussian PK parameters A, B from core screening. |
+| Inter-fiber exchange coupling | algebraic | Full 1-RDM exchange via channel overlap S(R) and Slater F^0 (algebraic Laguerre). Bond-bond coupling validated (~0.5 Ha). Lone pair coupling disabled at Z_eff>4 (physics limitation). |
 
 ---
 
@@ -543,6 +563,8 @@ Every PM session begins by reading CLAUDE.md and then executing the following:
 5. Draft sub-agent prompts using the standard template (13.3)
 6. Identify which papers need updating based on the session's results (see 13.8)
 
+**Sprint standard:** The default workflow is one PM prompt per sprint, dispatching all tracks as parallel sub-agents. The PI provides the sprint plan (track definitions, PM prompts, exit criteria) in plan-mode chat. The PM executes without further approval cycles.
+
 ### 13.3 Sub-Agent Prompt Template
 
 Every sub-agent dispatch uses this format:
@@ -561,8 +583,7 @@ SUCCESS CRITERIA:
 OUTPUT FORMAT: [what to report back — specific data, not just pass/fail]
 PAPER UPDATES:
   - Papers affected: [list paper numbers]
-  - Autonomous changes: [list what can be committed directly per 13.8]
-  - Escalation changes: [list what needs plan-mode review, with proposed diffs]
+  - Changes to make: [list specific edits — apply directly to papers]
 ```
 
 ### 13.4 Verification Gates
@@ -583,55 +604,30 @@ The following changes require escalation to plan mode (human review) and must NO
 - Any new entry in the failed approaches table
 - Any result that would change the "Best Result" column in the hierarchy table
 - Introduction of any fitted or empirical parameter
-- Paper changes in the **escalation tier** (see 13.8)
 
 ### 13.8 Paper Update Policy
 
-Papers are the authoritative source for all physics (Section 1). Code that outpaces the papers creates documentation drift. PMs are expected to keep papers in sync with code results, subject to a tiered autonomy rule.
+Papers are the authoritative source for all physics (Section 1). Code that outpaces the papers creates documentation drift. PMs are expected to keep papers in sync with code results.
 
-#### Autonomous tier (PMs may commit directly)
+#### Paper edit policy
 
-PMs may modify papers in `papers/core/`, `papers/observations/`, or `papers/conjectures/` WITHOUT plan-mode approval for changes that are strictly additive and factual:
+PMs may edit papers in `papers/core/`, `papers/observations/`, and `papers/conjectures/` directly for ALL changes, including:
 
-- Adding or updating benchmark tables (new numerical results, updated error percentages)
-- Adding rows to existing comparison tables
-- Updating numbers that have improved (e.g., error percentages, speedup factors, dimension counts)
-- Adding a subsection documenting a new solver variant, algorithm, or computational method with its results — provided it implements physics already described in the paper or in CLAUDE.md
-- Adding references to new code modules or test files
-- Fixing typos, grammatical errors, or LaTeX formatting issues
+- Adding or updating benchmark tables and numerical results
+- Adding new subsections documenting methods and results
+- Correcting claims that are contradicted by new computational evidence
+- Reframing results based on new findings (e.g., reclassifying transcendental → algebraic when proven)
+- Updating abstracts and conclusions to reflect current best results
 
-**The test:** Does the change add evidence or detail for claims the paper already makes? If yes, autonomous. If it changes what the paper claims, escalate.
+**The guardrail is plan-mode review, not pre-approval.** The PI reviews all paper changes in periodic plan-mode sessions. PMs should make their best judgment and commit. If a change is wrong, it will be caught in review and corrected — this is faster than proposal cycles.
 
-#### Escalation tier (must go through plan-mode review)
+**PMs must still NOT:**
+- Introduce fitted or empirical parameters without PI direction
+- Change the natural geometry hierarchy (new levels, changed coordinates)
+- Delete or suppress negative results from Section 3
+- Remove the "conjectural" label from Paper 2
 
-The following paper changes must NOT be made autonomously. The PM should draft the proposed changes and include them in the lane report under a **"Paper updates for review"** section with full diffs. These are reviewed in plan-mode chat at sprint-end.
-
-- Changing, softening, or strengthening any claim or conclusion
-- Reframing a result (e.g., from "demonstrated" to "proven", or vice versa)
-- Adding or modifying theoretical arguments or derivations
-- Changing the abstract or introduction framing
-- Adding a new section that introduces a new concept, principle, or interpretation
-- Documenting a negative result that changes the paper's narrative arc
-- Modifying or retracting any previously published result
-- Any change the PM is uncertain about
-
-#### PM report format for escalation-tier changes
-
-When a PM has escalation-tier paper changes, the lane report should include:
-
-```
-## Paper updates for review
-
-### Paper N — [title]
-
-**Type:** [new subsection / claim modification / narrative change / etc.]
-**Rationale:** [why this change is needed, in 1-2 sentences]
-
-**Proposed diff:**
-[exact LaTeX to add/change, with enough surrounding context to locate it]
-```
-
-These are reviewed in the plan-mode sprint-end chat. The human approves, modifies, or rejects each proposed change.
+**Splinter file prohibition:** PMs must edit papers in-place. Do NOT create separate .tex diff files, proposal files, or draft directories. Proposed changes go directly into the paper. If the change is wrong, `git revert` is cheaper than context-loading splinter files in plan-mode review.
 
 ### 13.6 Track Management
 
@@ -647,3 +643,60 @@ The PM agent maintains a brief track status file at `debug/track_logs/STATUS.md`
 ### 13.7 General Guidance
 
 This protocol is a starting point and will be refined based on experience. The overriding principles are: **code changes can be autonomous** (the test suite catches errors); **factual paper updates are autonomous** (adding results, tables, and new-method subsections keeps papers in sync with code); **but conceptual changes cannot be autonomous** (claims, framing, and theoretical arguments require human judgment in plan mode). When in doubt, escalate rather than proceeding.
+
+---
+
+## 14. Test Architecture Policy
+
+### Main pipeline tests (`tests/`)
+
+The `tests/` directory contains ONLY tests that validate the main pipeline — the methods and results described in the active papers (Papers 0–18, FCI-A, FCI-M). Every test file in `tests/` should correspond to at least one paper result or a piece of infrastructure that the pipeline depends on.
+
+**The rule:** If a paper documents a method as its primary result, that method's tests live in `tests/`. If a method is documented as failed (Section 3), superseded (architecture locked), or was a one-off diagnostic, its tests live in `tests/_archive/`.
+
+### Archived tests (`tests/_archive/`)
+
+Archived tests are organized into three tiers:
+
+| Directory | Contents | When to use |
+|-----------|----------|-------------|
+| `tests/_archive/dead_ends/` | Tests for approaches documented as failed in Section 3 | Method confirmed dead; resolution documented |
+| `tests/_archive/superseded/` | Tests for approaches replaced by a newer architecture | New method has its own tests in `tests/`; old method explicitly "architecture locked" |
+| `tests/_archive/diagnostics/` | Tests from one-off investigation arcs | Diagnostic complete; resolution baked into main pipeline |
+
+Archived tests are **not** collected by default (`--ignore=tests/_archive` in pytest config). They can be run explicitly via `pytest tests/_archive/`.
+
+Archived tests have scientific value as institutional memory — they help prevent re-deriving failed approaches. **Do not delete archived tests.**
+
+### Archived code (`geovac/_archive/`)
+
+Follows the same three-tier structure (`dead_ends/`, `superseded/`, `auxiliary/`). Archived code modules are still importable from their `geovac._archive.*` paths. If a core module previously imported an archived module, a compatibility shim is left at the original location.
+
+### When new work produces dead ends
+
+When a track produces a negative result or a method is superseded:
+
+1. Document the failure or supersession in CLAUDE.md Section 3 (failed approaches) or Section 2 (active frontier, marking the track COMPLETE)
+2. Move the relevant tests to `tests/_archive/` in the same commit
+3. Move the relevant code module to `geovac/_archive/` in the same commit
+4. **Check for redirects first:** If any tests validate infrastructure that's still live (CI machinery, solver constructors, shared utilities), extract those tests and rewrite them to call the current architecture before archiving the rest
+5. Update import paths in archived files
+
+### Slow tests
+
+Core tests that are computationally expensive are marked with `@pytest.mark.slow` and skipped by default. Run them with `pytest --slow`. A test qualifies as slow if it takes >10 seconds or performs heavy computation not needed for fast regression (e.g., cc-pVTZ integral engine, full VQE pipeline).
+
+### Redirect-before-archive rule
+
+Before archiving a test file, the PM must check: does this file test any infrastructure that the main pipeline still depends on? If yes, extract those tests into a core test file that calls the current API, then archive the rest. This prevents coverage gaps from forming when methods are superseded.
+
+### Post-archive test commands
+
+| What You Want | Command |
+|---------------|---------|
+| Fast regression (daily dev) | `pytest` |
+| Full core + slow tests | `pytest --slow` |
+| Archived tests only | `pytest tests/_archive/` |
+| Everything | `pytest tests/ tests/_archive/ --slow` |
+| Specific archive tier | `pytest tests/_archive/dead_ends/` |
+| Topological proofs only | `pytest tests/test_fock_projection.py tests/test_fock_laplacian.py` |

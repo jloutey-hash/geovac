@@ -31,6 +31,13 @@ from typing import Optional, Tuple
 
 from geovac.hyperspherical_radial import solve_helium
 from geovac.hyperspherical_angular import solve_angular
+from geovac.algebraic_zeff import (
+    fit_density_laguerre,
+    n_core_algebraic,
+    z_eff_algebraic,
+    density_algebraic,
+    LaguerreZeffExpansion,
+)
 
 
 def compute_core_density(
@@ -400,6 +407,18 @@ class CoreScreening:
     method : str
         Density extraction method: 'algebraic' (exact coordinate transform
         with spline interpolation) or 'histogram' (original binning method).
+    zeff_method : str
+        Z_eff evaluation method: 'spectral_laguerre' (default, closed-form
+        via Laguerre expansion + incomplete gamma functions) or 'spline'
+        (cumulative_trapezoid + CubicSpline, legacy). The spectral method
+        eliminates numerical quadrature in the cumulative integral and
+        evaluates Z_eff(r) = Z - N_core(r) algebraically.
+    n_basis_zeff : int
+        Number of Laguerre basis functions for the spectral expansion
+        (only used when zeff_method='spectral_laguerre').
+    beta_zeff : float or None
+        Exponential decay parameter for the Laguerre basis. If None,
+        automatically estimated from the density profile.
     """
 
     def __init__(
@@ -413,9 +432,17 @@ class CoreScreening:
         N_R_radial: int = 2000,
         R_max: float = 30.0,
         method: str = 'algebraic',
+        zeff_method: str = 'spectral_laguerre',
+        n_basis_zeff: int = 30,
+        beta_zeff: Optional[float] = None,
     ) -> None:
         if method not in ('algebraic', 'histogram'):
             raise ValueError(f"method must be 'algebraic' or 'histogram', got '{method}'")
+        if zeff_method not in ('spline', 'spectral_laguerre'):
+            raise ValueError(
+                f"zeff_method must be 'spline' or 'spectral_laguerre', "
+                f"got '{zeff_method}'"
+            )
         self.Z = Z
         self.l_max = l_max
         self.n_alpha = n_alpha
@@ -425,6 +452,9 @@ class CoreScreening:
         self.N_R_radial = N_R_radial
         self.R_max = R_max
         self.method = method
+        self.zeff_method = zeff_method
+        self.n_basis_zeff = n_basis_zeff
+        self.beta_zeff = beta_zeff
 
         self._solved = False
         self._r_grid: Optional[np.ndarray] = None
@@ -433,6 +463,12 @@ class CoreScreening:
         self._N_core_spline: Optional[CubicSpline] = None
         self._n_r_spline: Optional[CubicSpline] = None
         self._helium_result: Optional[dict] = None
+
+        # Laguerre spectral expansion data (populated by solve() when
+        # zeff_method='spectral_laguerre')
+        self._laguerre_coeffs: Optional[np.ndarray] = None
+        self._laguerre_beta: Optional[float] = None
+        self._laguerre_expansion: Optional[LaguerreZeffExpansion] = None
 
         # Level 3 core eigenvector data (populated by solve())
         self.core_eigenvector: Optional[np.ndarray] = None
@@ -463,17 +499,60 @@ class CoreScreening:
                 self.R_max, verbose=verbose,
             )
 
-        # Cumulative integral for N_core
+        # Cumulative integral for N_core (always compute for grid properties)
         self._N_core = np.zeros_like(self._r_grid)
         self._N_core[1:] = cumulative_trapezoid(self._n_r, self._r_grid)
 
-        # Build interpolation splines
+        # Build interpolation splines (always built for backward compat)
         self._N_core_spline = CubicSpline(
             self._r_grid, self._N_core, extrapolate=True
         )
         self._n_r_spline = CubicSpline(
             self._r_grid, self._n_r, extrapolate=True
         )
+
+        # Fit Laguerre spectral expansion if requested
+        if self.zeff_method == 'spectral_laguerre':
+            self._laguerre_coeffs, self._laguerre_beta = fit_density_laguerre(
+                self._r_grid, self._n_r,
+                n_basis=self.n_basis_zeff,
+                beta=self.beta_zeff,
+            )
+            # Precompute the polynomial-exponential representation for fast eval
+            self._laguerre_expansion = LaguerreZeffExpansion(
+                self._laguerre_coeffs, self._laguerre_beta, n_electrons=2.0,
+            )
+
+            # Validate the spectral fit: check N_core at representative points.
+            # N_core(r) must be monotonically increasing toward n_electrons.
+            # If catastrophic cancellation in the polynomial-exponential form
+            # or incomplete gamma fallback produces non-monotonic behavior,
+            # silently fall back to the always-stable spline method.
+            r_check = np.array([0.5, 1.0, 2.0, 5.0, 10.0])
+            r_check = r_check[r_check < self.r_max]
+            n_core_spectral = self._laguerre_expansion.n_core(r_check)
+            n_core_spline = np.clip(self._N_core_spline(r_check), 0.0, 2.0)
+
+            # Check for non-monotonicity or large deviation from spline
+            is_monotonic = np.all(np.diff(n_core_spectral) >= -0.01)
+            max_dev = np.max(np.abs(n_core_spectral - n_core_spline))
+            fit_ok = is_monotonic and max_dev < 0.1
+
+            if not fit_ok:
+                # Spectral fit unreliable — fall back to spline
+                self._laguerre_expansion = None
+                self.zeff_method = 'spline'
+                if verbose:
+                    print(f"  Laguerre Z_eff fit: FAILED validation "
+                          f"(monotonic={is_monotonic}, max_dev={max_dev:.3f})")
+                    print(f"  Falling back to spline Z_eff evaluation")
+            elif verbose:
+                n_fit = self._laguerre_expansion.density(self._r_grid)
+                max_err = np.max(np.abs(n_fit - self._n_r))
+                rms_err = np.sqrt(np.mean((n_fit - self._n_r)**2))
+                print(f"  Laguerre Z_eff fit: n_basis={self.n_basis_zeff}, "
+                      f"beta={self._laguerre_beta:.4f}")
+                print(f"    Density max err: {max_err:.2e}, rms err: {rms_err:.2e}")
 
         # Extract and store the Level 3 core eigenvector at the peak
         # of the hyperradial wavefunction (the most representative R).
@@ -537,6 +616,11 @@ class CoreScreening:
         """
         Effective nuclear charge at distance r from the nucleus.
 
+        When zeff_method='spectral_laguerre', evaluates Z_eff algebraically
+        via Laguerre expansion coefficients and incomplete gamma functions.
+        When zeff_method='spline' (default), uses cumulative trapezoid +
+        cubic spline interpolation.
+
         Parameters
         ----------
         r : float or ndarray
@@ -549,9 +633,14 @@ class CoreScreening:
         """
         self._check_solved()
         r_arr = np.atleast_1d(np.asarray(r, dtype=float))
-        N_at_r = np.clip(self._N_core_spline(r_arr), 0.0, 2.0)
-        result = self.Z - N_at_r
-        result = np.where(r_arr <= 0, self.Z, result)
+
+        if (self.zeff_method == 'spectral_laguerre'
+                and self._laguerre_expansion is not None):
+            result = self._laguerre_expansion.z_eff(r_arr, self.Z)
+        else:
+            N_at_r = np.clip(self._N_core_spline(r_arr), 0.0, 2.0)
+            result = self.Z - N_at_r
+            result = np.where(r_arr <= 0, self.Z, result)
 
         if np.ndim(r) == 0:
             return float(result[0])
@@ -575,7 +664,12 @@ class CoreScreening:
         """
         self._check_solved()
         r_arr = np.atleast_1d(np.asarray(r, dtype=float))
-        result = np.clip(self._n_r_spline(r_arr), 0.0, None)
+
+        if (self.zeff_method == 'spectral_laguerre'
+                and self._laguerre_expansion is not None):
+            result = self._laguerre_expansion.density(r_arr)
+        else:
+            result = np.clip(self._n_r_spline(r_arr), 0.0, None)
 
         if np.ndim(r) == 0:
             return float(result[0])
