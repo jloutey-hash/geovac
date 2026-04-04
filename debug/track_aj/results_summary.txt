@@ -1,0 +1,105 @@
+Track AJ: 4-Electron Mol-Frame Hyperspherical LiH Solver
+=========================================================
+Date: 2026-03-31
+l_max: 0
+Module: geovac/n_electron_solver.py
+Tests: tests/test_n_electron_solver.py (26 passing, 3 slow)
+
+1. HEADLINE RESULT
+==================
+NO EQUILIBRIUM FOUND at l_max=0. PES is monotonically attractive.
+
+This is a STRUCTURAL negative result at l_max=0. The 4-electron solver
+without angular channels (l>0) cannot produce an equilibrium geometry
+for LiH. This parallels Track AD's finding with the composed geometry
+at pk_mode='none'.
+
+2. PES TABLE (parity projection, n_grid=12)
+============================================
+   R (bohr)    E_total (Ha)    D_e (Ha)
+   0.500       -12.144         +4.166
+   0.800       -8.968          +0.990
+   1.000       -7.820          -0.158
+   1.200       -6.955          -1.023
+   1.500       -5.931          -2.047
+   2.000       -4.578          -3.400
+   2.500       -3.864          -4.114
+   3.000       -3.360          -4.618
+   4.000       -2.692          -5.286
+   6.000       -1.929          -6.049
+  10.000       -1.190          -6.788
+
+E_exact (LiH) = -8.0705 Ha
+E_atoms (Li+H) = -7.9781 Ha
+D_e_exact = 0.0924 Ha
+R_eq_expt = 3.015 bohr
+
+3. ROOT CAUSE ANALYSIS
+======================
+At l_max=0, ALL 4 electrons are in s-waves. This means:
+(a) No angular differentiation between core (1s) and valence (2s)
+(b) No p-orbital character needed for bonding along internuclear axis
+(c) V_ee uses only the monopole (1/max), insufficient repulsion
+(d) S_4 [2,2] antisymmetry is EMPTY at l_max=0 -- the spatial
+    wavefunction with all l_i=0 is automatically fully symmetric [4],
+    which pairs with the quintet S=2 spin state, NOT the physical
+    singlet S=0 ground state
+
+The minimum nu for the [2,2] representation is nu_min=2 (from Paper 16),
+requiring at least l_max >= 1 angular channels to span the representation.
+
+4. CHANNEL TABLE
+================
+ l_max  sigma_channels  S4_reduced  angular_dim(n=10)  wall_time/rho
+   0         1              1            1000             ~0.07s
+   1        16            ~3            ~3000             ~2s (est)
+   2        81           ~14           ~14000             ~100s (est)
+
+At l_max=0: 1 channel, angular matrix dim = n_grid^3 = 1728 (n_grid=12)
+Wall time: ~5s per R_e point, ~50s per R value, ~500s for 10-point PES.
+
+5. PAULI PROJECTION METHODS TESTED
+====================================
+(a) none: No antisymmetry. E(R=3) = -3.67 Ha. Monotonically attractive.
+(b) node: +12/R_e^2 Pauli centrifugal. E(R=3) = -3.38 Ha. Still mono. attr.
+(c) parity: Half-grid (odd under pair exchange). E(R=3) = -3.36 Ha. Same.
+
+All three methods produce monotonically attractive PES. The issue is
+structural (insufficient angular basis), not from missing antisymmetry.
+
+6. ALGEBRAIC VS QUADRATURE ASSESSMENT
+======================================
+ALGEBRAIC:
+- Kinetic energy: FD stencil (exact for given grid)
+- Liouville centrifugal: exact formula p(p-2)/(8sin^2) + q(q-2)/(8cos^2) - (p+q)^2/8
+- Centrifugal constant: (3N-1)(3N-3)/8 = 99/8 (exact)
+- SO(12) Casimir: nu(nu+10)/2 (exact)
+
+QUADRATURE (on 3D FD grid):
+- V_ee: 1/max(s_i, s_j) -- piecewise due to max() function
+- V_nuc: -Z/max(s_i, rho) -- same piecewise structure
+- Both could use Gaunt integrals at l_max>0 (algebraic)
+
+7. COMPARISON WITH COMPOSED GEOMETRY
+======================================
+Track AD (composed, pk_mode='none'): PES monotonically attractive.
+Track AJ (full 4-electron, l_max=0): PES monotonically attractive.
+
+Both find the SAME structural result: without either PK (composed) or
+angular channels (full solver), LiH has no equilibrium. The equilibrium
+requires either:
+  - l_max >= 1 to provide angular channels for the [2,2] singlet (full solver)
+  - PK pseudopotential to enforce core-valence separation (composed solver)
+
+8. NEXT STEPS
+==============
+(a) l_max=1: 16 sigma channels, angular dim ~3000. Requires extending the
+    solver to handle multiple channels with Gaunt integral coupling (V_ee)
+    and multipole nuclear coupling (V_nuc at k>0). Estimated ~17 min/point.
+    This is the critical test: does the equilibrium appear?
+
+(b) S_4 [2,2] projection: At l_max>=1, implement the Young projector for
+    [2,2] spatial symmetry. This reduces channels from 16 to ~3 at l_max=1.
+
+(c) 1-RDM analysis: Extract natural orbital occupations from the 4-electron
+    wavefunction at l_max>=1 to test whether 1s^2 core emerges.

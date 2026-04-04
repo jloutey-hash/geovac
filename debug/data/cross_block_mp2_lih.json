@@ -1,0 +1,77 @@
+{
+  "molecule": "LiH",
+  "max_n": 2,
+  "R_bohr": 3.015,
+  "n_grid": 2000,
+  "sparsity": {
+    "total_within_eri": 195,
+    "total_cross_eri": 130,
+    "cross_to_within_ratio": 0.6666666666666666,
+    "cross_block_details": [
+      {
+        "block_i": 0,
+        "block_j": 1,
+        "label_i": "Li_core",
+        "label_j": "LiH_bond_Li",
+        "n_cross_eri": 130,
+        "max_magnitude": 0.890657477122121,
+        "min_magnitude": 0.0003949717032823556,
+        "mean_magnitude": 0.1416791695993169,
+        "wall_time_s": 0.7137909000739455
+      }
+    ],
+    "within_block_details": [
+      {
+        "block": 0,
+        "label": "Li_core",
+        "center_eri": 65,
+        "partner_eri": 0
+      },
+      {
+        "block": 1,
+        "label": "LiH_bond_Li",
+        "center_eri": 65,
+        "partner_eri": 65
+      }
+    ]
+  },
+  "mp2": {
+    "E_mp2_total_Ha": -0.0003371904987451123,
+    "E_mp2_total_mHa": -0.3371904987451123,
+    "E_mp2_os_mHa": -0.16859524937255616,
+    "E_mp2_ss_mHa": -0.16859524937255616,
+    "n_contributions": 2,
+    "pair_details": [
+      {
+        "block_i": 0,
+        "block_j": 1,
+        "label_i": "Li_core",
+        "label_j": "LiH_bond_Li",
+        "E_mp2_Ha": -0.0003371904987451123,
+        "E_mp2_mHa": -0.3371904987451123,
+        "E_mp2_os_mHa": -0.16859524937255616,
+        "E_mp2_ss_mHa": -0.16859524937255616,
+        "n_contributions": 2
+      }
+    ]
+  },
+  "eri_magnitudes": {
+    "max": 0.890657477122121,
+    "min_nonzero": 0.0003949717032823556,
+    "mean": 0.1416791695993169,
+    "median": 0.07358970792637881,
+    "top_10": [
+      0.890657477122121,
+      0.890657477122121,
+      0.5751492095667545,
+      0.5751492095667545,
+      0.5751492095667545,
+      0.5751492095667545,
+      0.5751492095667545,
+      0.5751492095667545,
+      0.5058440149914236,
+      0.5058440149914236
+    ]
+  },
+  "assessment": "SMALL"
+}

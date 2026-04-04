@@ -1,0 +1,37 @@
+{
+  "date": "2026-04-03",
+  "track": "BX-4: TC angular gradient composed",
+  "note": "Composed molecules use max_n=1-2 blocks; angular gradient affects l>0 orbitals",
+  "data": [
+    {
+      "system": "LiH",
+      "Q": 30,
+      "std_pauli": 334,
+      "tc_pauli": 1498,
+      "pauli_ratio": 4.485029940119761,
+      "std_1norm": 37.33424576695508,
+      "tc_1norm": 43.49483111212583,
+      "1norm_ratio": 1.1650116459731337
+    },
+    {
+      "system": "BeH2",
+      "Q": 50,
+      "std_pauli": 556,
+      "tc_pauli": 2496,
+      "pauli_ratio": 4.489208633093525,
+      "std_1norm": 354.8880647430748,
+      "tc_1norm": 367.4864182452298,
+      "1norm_ratio": 1.035499513096547
+    },
+    {
+      "system": "H2O",
+      "Q": 70,
+      "std_pauli": 778,
+      "tc_pauli": 3494,
+      "pauli_ratio": 4.4910025706940875,
+      "std_1norm": 28053.33404508323,
+      "tc_1norm": 28094.968559902987,
+      "1norm_ratio": 1.0014841200248372
+    }
+  ]
+}

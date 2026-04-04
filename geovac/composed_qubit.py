@@ -56,8 +56,16 @@ _PK_HELIKE_DEFAULTS = {
     3: {'A': 6.93, 'B': 7.00, 'source': 'Paper 17 Table 1, Li2+ inv2'},
     4: {'A': 12.32, 'B': 12.44,
         'source': 'Z²-scaled from Li2+ (Paper 17): A=6.93*(4/3)²=12.32, B=7.00*(4/3)²=12.44'},
+    5: {'A': 21.40, 'B': 18.46,
+        'source': 'Ab initio (Track BI, Level 3 inv2)'},
+    6: {'A': 31.37, 'B': 25.54,
+        'source': 'Ab initio (Track BI, Level 3 inv2)'},
+    7: {'A': 43.09, 'B': 33.05,
+        'source': 'Ab initio (Track BI, Level 3 inv2)'},
     8: {'A': 49.28, 'B': 49.78,
         'source': 'Z²-scaled from Li2+ (Paper 17): A=6.93*(8/3)²=49.28, B=7.00*(8/3)²=49.78'},
+    9: {'A': 71.80, 'B': 48.61,
+        'source': 'Ab initio (Track BI, Level 3 inv2)'},
 }
 
 
@@ -459,7 +467,762 @@ def _v_cross_nuc_1s(Z_core: float, n_core: int, Z_other: float,
 
 
 # ---------------------------------------------------------------------------
-# Main builder
+# General composed-geometry builder  (Track BH)
+# ---------------------------------------------------------------------------
+
+from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+
+
+def build_composed_hamiltonian(
+    spec: MolecularSpec,
+    pk_in_hamiltonian: bool = True,
+    verbose: bool = False,
+) -> Dict[str, Any]:
+    """
+    General builder for composed-geometry qubit Hamiltonians.
+
+    Consumes a :class:`MolecularSpec` that describes the block structure and
+    produces h1, ERI, fermion operator, and JW-transformed qubit operator.
+
+    Parameters
+    ----------
+    spec : MolecularSpec
+        Molecular specification (blocks, nuclear repulsion, etc.).
+    pk_in_hamiltonian : bool
+        If True (default), PK matrix elements are added to h1 for the
+        quantum Hamiltonian.  If False, PK is computed and returned
+        separately in ``h1_pk`` for classical 1-RDM post-processing.
+    verbose : bool
+        Print progress messages.
+
+    Returns
+    -------
+    dict
+        Keys include ``M``, ``Q``, ``N_pauli``, ``h1``, ``h1_pk``, ``eri``,
+        ``nuclear_repulsion``, ``qubit_op``, ``fermion_op``, ``wall_time_s``,
+        ``blocks``, and per-block metadata.
+    """
+    t0 = time.perf_counter()
+
+    # ------------------------------------------------------------------
+    # 1. Enumerate states per block and compute offsets
+    # ------------------------------------------------------------------
+    block_info: List[Dict[str, Any]] = []
+    offset = 0
+    for blk in spec.blocks:
+        info: Dict[str, Any] = {
+            'label': blk.label,
+            'block_type': blk.block_type,
+            'Z_center': blk.Z_center,
+            'n_electrons': blk.n_electrons,
+        }
+        center_states = _enumerate_states(blk.max_n)
+        info['center_states'] = center_states
+        info['center_offset'] = offset
+        info['center_M'] = len(center_states)
+        offset += len(center_states)
+
+        if blk.has_h_partner:
+            partner_n = blk.max_n_partner if blk.max_n_partner > 0 else blk.max_n
+            partner_states = _enumerate_states(partner_n)
+            info['partner_states'] = partner_states
+            info['partner_offset'] = offset
+            info['partner_M'] = len(partner_states)
+            info['Z_partner'] = blk.Z_partner
+            offset += len(partner_states)
+        else:
+            info['partner_states'] = None
+            info['partner_offset'] = None
+            info['partner_M'] = 0
+            info['Z_partner'] = None
+
+        info['pk_A'] = blk.pk_A
+        info['pk_B'] = blk.pk_B
+        block_info.append(info)
+
+    M = offset
+    Q = 2 * M
+
+    if verbose:
+        print(f"[build_composed_hamiltonian] {spec.name}: M={M}, Q={Q}")
+
+    # ------------------------------------------------------------------
+    # 2. Build h1  (M x M diagonal)
+    # ------------------------------------------------------------------
+    h1 = np.zeros((M, M))
+    for bi in block_info:
+        # Center orbitals
+        off_c = bi['center_offset']
+        Z_c = bi['Z_center']
+        for i, (n, l, m) in enumerate(bi['center_states']):
+            h1[off_c + i, off_c + i] = -Z_c ** 2 / (2.0 * n ** 2)
+
+        # Partner orbitals (if any)
+        if bi['partner_states'] is not None:
+            off_p = bi['partner_offset']
+            Z_p = bi['Z_partner']
+            for i, (n, l, m) in enumerate(bi['partner_states']):
+                h1[off_p + i, off_p + i] = -Z_p ** 2 / (2.0 * n ** 2)
+
+    # ------------------------------------------------------------------
+    # 3. PK pseudopotential  (always on center orbitals of blocks with pk_A>0)
+    # ------------------------------------------------------------------
+    h1_pk_full = np.zeros((M, M))
+    n_pk_nonzero = 0
+    for bi in block_info:
+        if bi['pk_A'] > 0.0:
+            h1_pk_block = _compute_pk_matrix_elements(
+                bi['Z_center'], bi['center_states'],
+                bi['pk_A'], bi['pk_B'],
+            )
+            off_c = bi['center_offset']
+            M_c = bi['center_M']
+            for i in range(M_c):
+                for j in range(M_c):
+                    if abs(h1_pk_block[i, j]) > 1e-15:
+                        h1_pk_full[off_c + i, off_c + j] = h1_pk_block[i, j]
+                        n_pk_nonzero += 1
+
+    if pk_in_hamiltonian:
+        h1 = h1 + h1_pk_full
+
+    # ------------------------------------------------------------------
+    # 4. Build ERI  (M x M x M x M), block-diagonal in chemist notation
+    # ------------------------------------------------------------------
+    eri = np.zeros((M, M, M, M))
+
+    # Cache: (Z, max_n) -> (rk_cache, eri_phys, states) to avoid recomputation
+    rk_eri_cache: Dict[Tuple[float, int], Tuple[
+        Dict[Tuple[int, ...], float],
+        Dict[Tuple[int, int, int, int], float],
+        List[Tuple[int, int, int]],
+    ]] = {}
+
+    def _get_rk_eri(Z: float, max_n: int) -> Tuple[
+        Dict[Tuple[int, ...], float],
+        Dict[Tuple[int, int, int, int], float],
+        List[Tuple[int, int, int]],
+    ]:
+        key = (Z, max_n)
+        if key not in rk_eri_cache:
+            st = _enumerate_states(max_n)
+            rk = _compute_rk_integrals_block(Z, st)
+            ep = _build_eri_block(Z, st, rk)
+            rk_eri_cache[key] = (rk, ep, st)
+        return rk_eri_cache[key]
+
+    for bi in block_info:
+        # Center sub-block
+        Z_c = bi['Z_center']
+        off_c = bi['center_offset']
+        max_n_c = len(set(n for n, l, m in bi['center_states']))  # infer from states
+        # We need the max_n that was used to generate center_states.
+        # Since _enumerate_states(max_n) generates all (n,l,m) up to max_n,
+        # max_n = max(n for n,l,m in states).
+        max_n_c = max(n for n, l, m in bi['center_states'])
+        _, eri_phys_c, _ = _get_rk_eri(Z_c, max_n_c)
+
+        for (a, b, c, d), val in eri_phys_c.items():
+            # phys <ab|cd> -> chemist (ac|bd)
+            eri[a + off_c, c + off_c, b + off_c, d + off_c] = val
+
+        # Partner sub-block (if any)
+        if bi['partner_states'] is not None:
+            Z_p = bi['Z_partner']
+            off_p = bi['partner_offset']
+            max_n_p = max(n for n, l, m in bi['partner_states'])
+            _, eri_phys_p, _ = _get_rk_eri(Z_p, max_n_p)
+
+            for (a, b, c, d), val in eri_phys_p.items():
+                eri[a + off_p, c + off_p, b + off_p, d + off_p] = val
+
+    # Symmetrize: enforce (pq|rs) = (rs|pq) exactly
+    eri = 0.5 * (eri + eri.transpose(2, 3, 0, 1))
+
+    # ------------------------------------------------------------------
+    # 5. JW transform
+    # ------------------------------------------------------------------
+    nuclear_repulsion = spec.nuclear_repulsion_constant
+
+    if verbose:
+        print(f"[build_composed_hamiltonian] Building fermion operator...")
+    fermion_op = build_fermion_op_from_integrals(h1, eri, nuclear_repulsion)
+
+    if verbose:
+        print(f"[build_composed_hamiltonian] Jordan-Wigner transform...")
+    qubit_op = jordan_wigner(fermion_op)
+    N_pauli = len(qubit_op.terms)
+
+    elapsed = time.perf_counter() - t0
+
+    if verbose:
+        print(f"[build_composed_hamiltonian] {spec.name}: Q={Q}, N_pauli={N_pauli}, "
+              f"wall_time={elapsed:.1f}s")
+
+    # ------------------------------------------------------------------
+    # 6. Build result dict
+    # ------------------------------------------------------------------
+    n_eri_total = int(np.count_nonzero(np.abs(eri) > 1e-15))
+
+    results: Dict[str, Any] = {
+        'M': M,
+        'Q': Q,
+        'N_pauli': N_pauli,
+        'nuclear_repulsion': nuclear_repulsion,
+        'wall_time_s': elapsed,
+        'n_eri_total': n_eri_total,
+        'ERI_density_total': n_eri_total / max(1, M ** 4),
+        'pk_in_hamiltonian': pk_in_hamiltonian,
+        'n_pk_nonzero': n_pk_nonzero,
+        'h1': h1,
+        'h1_pk': h1_pk_full,
+        'eri': eri,
+        'qubit_op': qubit_op,
+        'fermion_op': fermion_op,
+        'blocks': [
+            {
+                'label': bi['label'],
+                'block_type': bi['block_type'],
+                'Z_center': bi['Z_center'],
+                'center_offset': bi['center_offset'],
+                'center_M': bi['center_M'],
+                'partner_offset': bi['partner_offset'],
+                'partner_M': bi['partner_M'],
+                'Z_partner': bi['Z_partner'],
+            }
+            for bi in block_info
+        ],
+        'spec_name': spec.name,
+    }
+
+    return results
+
+
+# ---------------------------------------------------------------------------
+# Spec factory functions  (Track BH)
+# ---------------------------------------------------------------------------
+
+def lih_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 3.015,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+) -> MolecularSpec:
+    """Create a MolecularSpec for LiH (core + bond pair).
+
+    Parameters match :func:`build_composed_lih`.
+    """
+    Z_A = 3
+    Z_B = 1
+    n_core_electrons = 2
+    Z_eff_val = Z_A - n_core_electrons  # 1
+
+    if E_core is None:
+        E_core = -7.2799
+
+    # PK parameters
+    if include_pk:
+        if A_pk is None:
+            A_pk = _PK_DEFAULTS[Z_A]['A']
+        if B_pk is None:
+            B_pk = _PK_DEFAULTS[Z_A]['B']
+    else:
+        A_pk = 0.0
+        B_pk = 0.0
+
+    # Nuclear repulsion constant
+    V_NN = Z_A * Z_B / R
+    V_cross = _v_cross_nuc_1s(Z_A, n_core_electrons, Z_B, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='Li_core', block_type='core',
+            Z_center=float(Z_A), n_electrons=2, max_n=max_n_core,
+        ),
+        OrbitalBlock(
+            label='LiH_bond_Li', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_B),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+    ]
+    return MolecularSpec('LiH', blocks, nuclear_repulsion)
+
+
+def beh2_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 2.51,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+) -> MolecularSpec:
+    """Create a MolecularSpec for BeH2 (core + 2 bond pairs).
+
+    Parameters match :func:`build_composed_beh2`.
+    """
+    Z_A = 4
+    Z_B = 1
+    n_core_electrons = 2
+    Z_eff_val = Z_A - n_core_electrons  # 2
+
+    if E_core is None:
+        E_core = -13.65
+
+    # PK parameters -- uses _PK_HELIKE_DEFAULTS for Z=4
+    if include_pk:
+        if A_pk is None:
+            A_pk = _PK_HELIKE_DEFAULTS[Z_A]['A']
+        if B_pk is None:
+            B_pk = _PK_HELIKE_DEFAULTS[Z_A]['B']
+    else:
+        A_pk = 0.0
+        B_pk = 0.0
+
+    # Nuclear repulsion: linear H-Be-H
+    V_NN = 2.0 * Z_A * Z_B / R + Z_B * Z_B / (2.0 * R)
+    V_cross = 2.0 * _v_cross_nuc_1s(Z_A, n_core_electrons, Z_B, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='Be_core', block_type='core',
+            Z_center=float(Z_A), n_electrons=2, max_n=max_n_core,
+        ),
+        OrbitalBlock(
+            label='BeH2_bond1_Be', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_B),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='BeH2_bond2_Be', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_B),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+    ]
+    return MolecularSpec('BeH2', blocks, nuclear_repulsion)
+
+
+def h2o_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_OH: float = 1.809,
+    angle_HOH: float = 104.5,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+) -> MolecularSpec:
+    """Create a MolecularSpec for H2O (core + 2 bonds + 2 lone pairs).
+
+    Parameters match :func:`build_composed_h2o`.
+    """
+    Z_O = 8
+    Z_H = 1
+    n_core_electrons = 2
+    Z_eff_val = Z_O - n_core_electrons  # 6
+
+    if E_core is None:
+        E_core = -(Z_O - 5.0 / 16.0) ** 2
+
+    # PK parameters -- uses _PK_HELIKE_DEFAULTS for Z=8
+    if include_pk:
+        if A_pk is None:
+            A_pk = _PK_HELIKE_DEFAULTS[Z_O]['A']
+        if B_pk is None:
+            B_pk = _PK_HELIKE_DEFAULTS[Z_O]['B']
+    else:
+        A_pk = 0.0
+        B_pk = 0.0
+
+    # Nuclear repulsion
+    angle_rad = np.radians(angle_HOH)
+    R_HH = 2.0 * R_OH * np.sin(angle_rad / 2.0)
+    V_OH = 2.0 * Z_O * Z_H / R_OH
+    V_HH = Z_H * Z_H / R_HH
+    V_NN = V_OH + V_HH
+    V_cross = 2.0 * _v_cross_nuc_1s(Z_O, n_core_electrons, Z_H, R_OH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='O_core', block_type='core',
+            Z_center=float(Z_O), n_electrons=2, max_n=max_n_core,
+        ),
+        OrbitalBlock(
+            label='H2O_bond1_O', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='H2O_bond2_O', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='H2O_lone1', block_type='lone_pair',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='H2O_lone2', block_type='lone_pair',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+    ]
+    return MolecularSpec('H2O', blocks, nuclear_repulsion)
+
+
+def h2_bond_pair_spec(
+    max_n: int = 2,
+    R: float = 1.4,
+) -> MolecularSpec:
+    """Create a MolecularSpec for H2 (single bond pair, no core).
+
+    Parameters match :func:`build_h2_bond_pair`.
+    """
+    Z_eff = 1.0
+    V_NN = 1.0 / R  # Z_A * Z_B / R = 1*1/R
+
+    blocks = [
+        OrbitalBlock(
+            label='H2_bond_pair', block_type='bond_pair',
+            Z_center=Z_eff, n_electrons=2, max_n=max_n,
+        ),
+    ]
+    return MolecularSpec('H2', blocks, V_NN)
+
+
+def he_spec(
+    max_n: int = 2,
+) -> MolecularSpec:
+    """Create a MolecularSpec for He (single block, Z=2, no nuclear repulsion)."""
+    blocks = [
+        OrbitalBlock(
+            label='He', block_type='bond_pair',
+            Z_center=2.0, n_electrons=2, max_n=max_n,
+        ),
+    ]
+    return MolecularSpec('He', blocks, 0.0)
+
+
+def hf_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 1.733,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+) -> MolecularSpec:
+    """Create a MolecularSpec for HF (core + 1 bond + 3 lone pairs).
+
+    HF (hydrogen fluoride):
+        Core:    F 1s² (Z=9), 2 electrons
+        Bond:    F(Z_eff=7) + H(Z=1), 2 electrons
+        Lone 1-3: F(Z_eff=7), 2 electrons each
+        Total: 2 core + 2 bond + 6 lone = 10 electrons
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on F (Z=9).
+    max_n_val : int
+        Maximum n for valence orbitals (screened-F and H, per group).
+    R : float
+        F-H bond distance in bohr (default: 1.733, expt 0.917 Å).
+    E_core : float or None
+        Core energy in Ha. If None, uses variational He-like estimate
+        for F⁷⁺: -(Z-5/16)² = -(9-5/16)² Ha.
+    include_pk : bool
+        If True (default), include PK pseudopotential on F-side valence blocks.
+    A_pk, B_pk : float or None
+        PK parameters. If None, uses ab initio values for Z=9.
+    """
+    Z_F = 9
+    Z_H = 1
+    n_core_electrons = 2
+    Z_eff_val = Z_F - n_core_electrons  # 7
+
+    if E_core is None:
+        E_core = -(Z_F - 5.0 / 16.0) ** 2
+
+    # PK parameters
+    if include_pk:
+        if A_pk is None:
+            A_pk = _PK_HELIKE_DEFAULTS[Z_F]['A']
+        if B_pk is None:
+            B_pk = _PK_HELIKE_DEFAULTS[Z_F]['B']
+    else:
+        A_pk = 0.0
+        B_pk = 0.0
+
+    # Nuclear repulsion
+    V_FH = Z_F * Z_H / R
+    V_NN = V_FH
+    V_cross = _v_cross_nuc_1s(Z_F, n_core_electrons, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='F_core', block_type='core',
+            Z_center=float(Z_F), n_electrons=2, max_n=max_n_core,
+        ),
+        OrbitalBlock(
+            label='FH_bond', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='F_lone1', block_type='lone_pair',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='F_lone2', block_type='lone_pair',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='F_lone3', block_type='lone_pair',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+    ]
+    return MolecularSpec('HF', blocks, nuclear_repulsion)
+
+
+def nh3_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_NH: float = 1.912,
+    angle_HNH: float = 106.7,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+) -> MolecularSpec:
+    """Create a MolecularSpec for NH3 (core + 3 bonds + 1 lone pair).
+
+    NH3 (ammonia):
+        Core:    N 1s² (Z=7), 2 electrons
+        Bond 1-3: N(Z_eff=5) + H(Z=1), 2 electrons each
+        Lone:    N(Z_eff=5), 2 electrons
+        Total: 2 core + 6 bond + 2 lone = 10 electrons
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on N (Z=7).
+    max_n_val : int
+        Maximum n for valence orbitals (screened-N and H, per group).
+    R_NH : float
+        N-H bond distance in bohr (default: 1.912, expt 1.012 Å).
+    angle_HNH : float
+        H-N-H bond angle in degrees (default: 106.7°, experimental).
+    E_core : float or None
+        Core energy in Ha. If None, uses variational He-like estimate
+        for N⁵⁺: -(Z-5/16)² = -(7-5/16)² Ha.
+    include_pk : bool
+        If True (default), include PK pseudopotential on N-side valence blocks.
+    A_pk, B_pk : float or None
+        PK parameters. If None, uses ab initio values for Z=7.
+    """
+    Z_N = 7
+    Z_H = 1
+    n_core_electrons = 2
+    Z_eff_val = Z_N - n_core_electrons  # 5
+
+    if E_core is None:
+        E_core = -(Z_N - 5.0 / 16.0) ** 2
+
+    # PK parameters
+    if include_pk:
+        if A_pk is None:
+            A_pk = _PK_HELIKE_DEFAULTS[Z_N]['A']
+        if B_pk is None:
+            B_pk = _PK_HELIKE_DEFAULTS[Z_N]['B']
+    else:
+        A_pk = 0.0
+        B_pk = 0.0
+
+    # Nuclear repulsion for pyramidal geometry
+    angle_rad = np.radians(angle_HNH)
+    R_HH = 2.0 * R_NH * np.sin(angle_rad / 2.0)
+    V_NH = 3.0 * Z_N * Z_H / R_NH        # 3 N-H bonds
+    V_HH = 3.0 * Z_H * Z_H / R_HH        # 3 H-H pairs
+    V_NN = V_NH + V_HH
+    V_cross = 3.0 * _v_cross_nuc_1s(Z_N, n_core_electrons, Z_H, R_NH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='N_core', block_type='core',
+            Z_center=float(Z_N), n_electrons=2, max_n=max_n_core,
+        ),
+        OrbitalBlock(
+            label='NH3_bond1_N', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='NH3_bond2_N', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='NH3_bond3_N', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='NH3_lone', block_type='lone_pair',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+    ]
+    return MolecularSpec('NH3', blocks, nuclear_repulsion)
+
+
+def ch4_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_CH: float = 2.050,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+) -> MolecularSpec:
+    """Create a MolecularSpec for CH4 (core + 4 bonds, no lone pairs).
+
+    CH4 (methane):
+        Core:    C 1s² (Z=6), 2 electrons
+        Bond 1-4: C(Z_eff=4) + H(Z=1), 2 electrons each
+        Total: 2 core + 8 bond = 10 electrons
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on C (Z=6).
+    max_n_val : int
+        Maximum n for valence orbitals (screened-C and H, per group).
+    R_CH : float
+        C-H bond distance in bohr (default: 2.050, expt 1.085 Å).
+    E_core : float or None
+        Core energy in Ha. If None, uses variational He-like estimate
+        for C⁴⁺: -(Z-5/16)² = -(6-5/16)² Ha.
+    include_pk : bool
+        If True (default), include PK pseudopotential on C-side valence blocks.
+    A_pk, B_pk : float or None
+        PK parameters. If None, uses ab initio values for Z=6.
+    """
+    Z_C = 6
+    Z_H = 1
+    n_core_electrons = 2
+    Z_eff_val = Z_C - n_core_electrons  # 4
+
+    if E_core is None:
+        E_core = -(Z_C - 5.0 / 16.0) ** 2
+
+    # PK parameters
+    if include_pk:
+        if A_pk is None:
+            A_pk = _PK_HELIKE_DEFAULTS[Z_C]['A']
+        if B_pk is None:
+            B_pk = _PK_HELIKE_DEFAULTS[Z_C]['B']
+    else:
+        A_pk = 0.0
+        B_pk = 0.0
+
+    # Nuclear repulsion for tetrahedral geometry
+    # In a perfect tetrahedron, H-H distance = R_CH * sqrt(8/3)
+    R_HH = R_CH * np.sqrt(8.0 / 3.0)
+    V_CH = 4.0 * Z_C * Z_H / R_CH        # 4 C-H bonds
+    V_HH = 6.0 * Z_H * Z_H / R_HH        # 6 H-H pairs
+    V_NN = V_CH + V_HH
+    V_cross = 4.0 * _v_cross_nuc_1s(Z_C, n_core_electrons, Z_H, R_CH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='C_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+        ),
+        OrbitalBlock(
+            label='CH4_bond1_C', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='CH4_bond2_C', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='CH4_bond3_C', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+        OrbitalBlock(
+            label='CH4_bond4_C', block_type='bond',
+            Z_center=float(Z_eff_val), n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=A_pk, pk_B=B_pk,
+        ),
+    ]
+    return MolecularSpec('CH4', blocks, nuclear_repulsion)
+
+
+# ---------------------------------------------------------------------------
+# Main builder (original, now delegates to general builder)
 # ---------------------------------------------------------------------------
 
 def build_composed_lih(
@@ -468,6 +1231,7 @@ def build_composed_lih(
     R: float = 3.015,
     E_core: Optional[float] = None,
     include_pk: bool = True,
+    pk_in_hamiltonian: Optional[bool] = None,
     A_pk: Optional[float] = None,
     B_pk: Optional[float] = None,
     verbose: bool = True,
@@ -588,6 +1352,14 @@ def build_composed_lih(
         h1[idx, idx] = -Z_B**2 / (2.0 * n**2)
 
     # --- PK pseudopotential on valence-Li orbitals (Paper 17 Sec IV) ---
+    # pk_in_hamiltonian controls whether PK is added to the quantum Hamiltonian.
+    # When False (default when include_pk=True), PK is computed and returned
+    # separately for classical post-processing via 1-RDM.
+    if pk_in_hamiltonian is None:
+        pk_in_hamiltonian = include_pk  # backward compat: old behavior
+
+    # Full-size PK matrix (always computed when include_pk=True)
+    h1_pk_full = np.zeros((M, M))
     n_pk_nonzero = 0
     if include_pk:
         # Resolve PK parameters
@@ -611,16 +1383,22 @@ def build_composed_lih(
         h1_pk_val_li = _compute_pk_matrix_elements(
             Z_eff_val, states_val_li, A_pk, B_pk,
         )
+        # Store in full-size PK matrix
         for i in range(M_val_li):
             for j in range(M_val_li):
                 if abs(h1_pk_val_li[i, j]) > 1e-15:
-                    h1[offset_val_li + i, offset_val_li + j] += h1_pk_val_li[i, j]
+                    h1_pk_full[offset_val_li + i, offset_val_li + j] = h1_pk_val_li[i, j]
                     n_pk_nonzero += 1
+
+        # Only add PK to h1 if requested
+        if pk_in_hamiltonian:
+            h1 += h1_pk_full
 
         if verbose:
             diag_pk = np.diag(h1_pk_val_li)
             print(f"  Val-Li PK nonzero entries: {n_pk_nonzero}")
             print(f"  PK diagonal range: [{diag_pk.min():.6f}, {diag_pk.max():.6f}] Ha")
+            print(f"  PK in quantum Hamiltonian: {pk_in_hamiltonian}")
 
         # PK on valence-H orbitals: SKIPPED (two-center integration required)
         # The PK potential is centered on Li. For H-centered orbitals φ_H(r_H),
@@ -641,7 +1419,12 @@ def build_composed_lih(
     # overlap which decays exponentially with R.
     n_cross_nuc_estimate = M_val_li**2 + M_val_h**2
 
-    h1_desc = "diagonal + PK" if include_pk else "diagonal only"
+    if pk_in_hamiltonian:
+        h1_desc = "diagonal + PK"
+    elif include_pk:
+        h1_desc = "diagonal only (PK computed separately)"
+    else:
+        h1_desc = "diagonal only"
     if verbose:
         print(f"[composed_qubit] h1 constructed ({M}x{M}), {h1_desc}")
         if not include_pk:
@@ -789,12 +1572,15 @@ def build_composed_lih(
         'gaussian_lih_sto3g_qubits': 12,
         'wall_time_s': elapsed,
         'include_pk': include_pk,
+        'pk_in_hamiltonian': pk_in_hamiltonian,
         'A_pk': A_pk if include_pk else None,
         'B_pk': B_pk if include_pk else None,
         'n_pk_nonzero': n_pk_nonzero,
         'n_cross_nuc_estimate': n_cross_nuc_estimate,
         'approximations': [
-            'PK on val-Li included' if include_pk else 'PK disabled',
+            ('PK in quantum Hamiltonian' if pk_in_hamiltonian
+             else 'PK computed separately (classical correction)')
+            if include_pk else 'PK disabled',
             'PK on val-H skipped (two-center, negligible at R=3 bohr)',
             'Cross-center nuclear attraction skipped (two-center)',
             'Cross-block ERI = 0 (pseudopotential approximation)',
@@ -813,6 +1599,7 @@ def build_composed_lih(
 
     # Attach non-serializable objects for programmatic use
     results['h1'] = h1
+    results['h1_pk'] = h1_pk_full
     results['eri'] = eri
     results['qubit_op'] = qubit_op
     results['fermion_op'] = fermion_op
@@ -1450,6 +2237,7 @@ def build_composed_beh2(
     R: float = 2.51,
     E_core: Optional[float] = None,
     include_pk: bool = True,
+    pk_in_hamiltonian: Optional[bool] = None,
     A_pk: Optional[float] = None,
     B_pk: Optional[float] = None,
     verbose: bool = True,
@@ -1564,6 +2352,10 @@ def build_composed_beh2(
         h1[offset_b2_h + i, offset_b2_h + i] = -Z_B**2 / (2.0 * n**2)
 
     # --- PK pseudopotential on bond-Be orbitals ---
+    if pk_in_hamiltonian is None:
+        pk_in_hamiltonian = include_pk  # backward compat
+
+    h1_pk_full = np.zeros((M, M))
     n_pk_nonzero = 0
     if include_pk:
         if A_pk is None or B_pk is None:
@@ -1587,27 +2379,31 @@ def build_composed_beh2(
             Z_eff_val, states_bond_be, A_pk, B_pk,
         )
 
-        # Apply to bond 1 Be block
+        # Store in full-size PK matrix (both bond blocks)
         for i in range(M_bond_be):
             for j in range(M_bond_be):
                 if abs(h1_pk_bond_be[i, j]) > 1e-15:
-                    h1[offset_b1_be + i, offset_b1_be + j] += h1_pk_bond_be[i, j]
-                    n_pk_nonzero += 1
+                    h1_pk_full[offset_b1_be + i, offset_b1_be + j] = h1_pk_bond_be[i, j]
+                    h1_pk_full[offset_b2_be + i, offset_b2_be + j] = h1_pk_bond_be[i, j]
+                    n_pk_nonzero += 2
 
-        # Apply to bond 2 Be block (identical values)
-        for i in range(M_bond_be):
-            for j in range(M_bond_be):
-                if abs(h1_pk_bond_be[i, j]) > 1e-15:
-                    h1[offset_b2_be + i, offset_b2_be + j] += h1_pk_bond_be[i, j]
-                    n_pk_nonzero += 1
+        # Only add PK to h1 if requested
+        if pk_in_hamiltonian:
+            h1 += h1_pk_full
 
         if verbose:
             diag_pk = np.diag(h1_pk_bond_be)
             print(f"  Bond-Be PK nonzero entries: {n_pk_nonzero} (across 2 bonds)")
             print(f"  PK diagonal range: [{diag_pk.min():.6f}, {diag_pk.max():.6f}] Ha")
+            print(f"  PK in quantum Hamiltonian: {pk_in_hamiltonian}")
 
     if verbose:
-        h1_desc = "diagonal + PK" if include_pk else "diagonal only"
+        if pk_in_hamiltonian:
+            h1_desc = "diagonal + PK"
+        elif include_pk:
+            h1_desc = "diagonal only (PK computed separately)"
+        else:
+            h1_desc = "diagonal only"
         print(f"[composed_beh2] h1 constructed ({M}x{M}), {h1_desc}")
 
     # --- Construct ERI (M x M x M x M) in chemist notation ---
@@ -1757,12 +2553,15 @@ def build_composed_beh2(
         'Z_eff_val': Z_eff_val,
         'wall_time_s': elapsed,
         'include_pk': include_pk,
+        'pk_in_hamiltonian': pk_in_hamiltonian,
         'A_pk': A_pk if include_pk else None,
         'B_pk': B_pk if include_pk else None,
         'n_pk_nonzero': n_pk_nonzero,
         'approximations': [
             'Approach A: independent bond blocks, no cross-bond ERIs',
-            'PK on bond-Be: Z²-scaled from Li²⁺' if include_pk else 'PK disabled',
+            ('PK in quantum Hamiltonian' if pk_in_hamiltonian
+             else 'PK computed separately (classical correction)')
+            if include_pk else 'PK disabled',
             'PK on bond-H skipped (two-center, negligible at R~2.5 bohr)',
             'Cross-center nuclear attraction skipped',
             'Cross-block ERI = 0 (pseudopotential + Approach A)',
@@ -1784,6 +2583,7 @@ def build_composed_beh2(
 
     # Attach non-serializable objects
     results['h1'] = h1
+    results['h1_pk'] = h1_pk_full
     results['eri'] = eri
     results['qubit_op'] = qubit_op
     results['fermion_op'] = fermion_op
@@ -2016,6 +2816,7 @@ def build_composed_h2o(
     angle_HOH: float = 104.5,
     E_core: Optional[float] = None,
     include_pk: bool = True,
+    pk_in_hamiltonian: Optional[bool] = None,
     A_pk: Optional[float] = None,
     B_pk: Optional[float] = None,
     verbose: bool = True,
@@ -2156,6 +2957,10 @@ def build_composed_h2o(
         h1[offset_lp2 + i, offset_lp2 + i] = -Z_eff_val**2 / (2.0 * n**2)
 
     # --- PK pseudopotential on all O-side valence blocks ---
+    if pk_in_hamiltonian is None:
+        pk_in_hamiltonian = include_pk  # backward compat
+
+    h1_pk_full = np.zeros((M, M))
     n_pk_nonzero = 0
     if include_pk:
         if A_pk is None or B_pk is None:
@@ -2179,21 +2984,31 @@ def build_composed_h2o(
             Z_eff_val, states_val_o, A_pk, B_pk,
         )
 
-        # Apply to all 4 O-side valence blocks
+        # Store in full-size PK matrix (all 4 O-side blocks)
         for offset in [offset_b1_o, offset_b2_o, offset_lp1, offset_lp2]:
             for i in range(M_val_o):
                 for j in range(M_val_o):
                     if abs(h1_pk_val_o[i, j]) > 1e-15:
-                        h1[offset + i, offset + j] += h1_pk_val_o[i, j]
+                        h1_pk_full[offset + i, offset + j] = h1_pk_val_o[i, j]
                         n_pk_nonzero += 1
+
+        # Only add PK to h1 if requested
+        if pk_in_hamiltonian:
+            h1 += h1_pk_full
 
         if verbose:
             diag_pk = np.diag(h1_pk_val_o)
             print(f"  O-side PK nonzero entries: {n_pk_nonzero} (across 4 blocks)")
             print(f"  PK diagonal range: [{diag_pk.min():.6f}, {diag_pk.max():.6f}] Ha")
+            print(f"  PK in quantum Hamiltonian: {pk_in_hamiltonian}")
 
     if verbose:
-        h1_desc = "diagonal + PK" if include_pk else "diagonal only"
+        if pk_in_hamiltonian:
+            h1_desc = "diagonal + PK"
+        elif include_pk:
+            h1_desc = "diagonal only (PK computed separately)"
+        else:
+            h1_desc = "diagonal only"
         print(f"[composed_h2o] h1 constructed ({M}x{M}), {h1_desc}")
 
     # --- Construct ERI (M x M x M x M) in chemist notation ---
@@ -2347,12 +3162,15 @@ def build_composed_h2o(
         'Z_eff_val': Z_eff_val,
         'wall_time_s': elapsed,
         'include_pk': include_pk,
+        'pk_in_hamiltonian': pk_in_hamiltonian,
         'A_pk': A_pk if include_pk else None,
         'B_pk': B_pk if include_pk else None,
         'n_pk_nonzero': n_pk_nonzero,
         'approximations': [
             'Approach A: independent blocks (7), no cross-block ERIs',
-            'PK on all O-side valence blocks: Z²-scaled from Li²⁺' if include_pk else 'PK disabled',
+            ('PK in quantum Hamiltonian' if pk_in_hamiltonian
+             else 'PK computed separately (classical correction)')
+            if include_pk else 'PK disabled',
             'PK on bond-H skipped (two-center, negligible at R~1.8 bohr)',
             'Cross-center nuclear attraction skipped',
             'Cross-block ERI = 0 (pseudopotential + Approach A)',
@@ -2375,6 +3193,7 @@ def build_composed_h2o(
 
     # Attach non-serializable objects
     results['h1'] = h1
+    results['h1_pk'] = h1_pk_full
     results['eri'] = eri
     results['qubit_op'] = qubit_op
     results['fermion_op'] = fermion_op
@@ -2594,6 +3413,305 @@ def compare_all_molecules_scaling(
         print(f"\nResults saved to {out_path}")
 
     return output
+
+
+# ---------------------------------------------------------------------------
+# H2 Bond-Pair Qubit Encoding (Track AZ)
+# ---------------------------------------------------------------------------
+
+def build_h2_bond_pair(
+    max_n: int = 2,
+    R: float = 1.4,
+    verbose: bool = True,
+) -> Dict[str, Any]:
+    """
+    Build H2 qubit Hamiltonian using a single bond-pair block encoding.
+
+    H2 has no core electrons — it is a single bond pair of 2 electrons in
+    hydrogenic orbitals at Z_eff=1 (symmetric H-H). This is structurally
+    identical to the He atomic encoding but with Z=1 instead of Z=2, plus
+    nuclear repulsion V_NN = 1/R.
+
+    The encoding uses hydrogenic (n,l,m) states on a single center with
+    Z=1, which captures the correct angular momentum structure and Gaunt
+    integral selection rules. Two-center effects (cross-nuclear attraction,
+    prolate spheroidal splitting) are not included — this is the composed
+    pipeline's single-block approximation, not the exact Level 2 solver.
+
+    Parameters
+    ----------
+    max_n : int
+        Maximum principal quantum number (default 2).
+    R : float
+        Internuclear distance in bohr (default 1.4, experimental H2 R_eq).
+    verbose : bool
+        Print progress and results.
+
+    Returns
+    -------
+    dict with keys:
+        M, Q, N_pauli, h1, eri, nuclear_repulsion, qubit_op, fermion_op,
+        states, ERI_density, n_eri, wall_time_s
+    """
+    t0 = time.perf_counter()
+
+    Z_eff = 1.0  # Each electron sees Z=1 in the bond pair
+    Z_A = 1      # H nuclear charge
+    Z_B = 1      # H nuclear charge
+
+    # --- Define orbital basis ---
+    states = _enumerate_states(max_n)
+    M = len(states)
+    Q = 2 * M  # spin-orbitals = qubits under JW
+
+    if verbose:
+        print(f"[build_h2_bond_pair] Orbital basis:")
+        print(f"  Bond pair (Z_eff={Z_eff}): {M} orbitals, max_n={max_n}")
+        print(f"  Qubits Q = {Q}")
+        print(f"  R = {R:.4f} bohr")
+
+    # --- Construct h1 (M x M) ---
+    # Diagonal: exact hydrogenic eigenvalues at Z_eff=1
+    h1 = np.zeros((M, M))
+    for i, (n, l, m) in enumerate(states):
+        h1[i, i] = -Z_eff**2 / (2.0 * n**2)
+
+    if verbose:
+        print(f"[build_h2_bond_pair] h1 constructed ({M}x{M}), diagonal only")
+
+    # --- Construct ERI in physicist notation, then convert to chemist ---
+    if verbose:
+        print(f"[build_h2_bond_pair] Computing R^k integrals (Z={Z_eff})...")
+    rk_cache = _compute_rk_integrals_block(Z_eff, states)
+    eri_phys = _build_eri_block(Z_eff, states, rk_cache)
+    n_eri = len(eri_phys)
+
+    # Convert to chemist notation dense tensor
+    eri = _physicist_to_chemist(eri_phys, M, offset=0)
+
+    # Symmetrize: enforce (pq|rs) = (rs|pq)
+    eri = 0.5 * (eri + eri.transpose(2, 3, 0, 1))
+
+    n_eri_total = int(np.count_nonzero(np.abs(eri) > 1e-15))
+    eri_density = n_eri_total / max(1, M**4)
+
+    if verbose:
+        print(f"[build_h2_bond_pair] ERI statistics:")
+        print(f"  Physicist notation: {n_eri} nonzero")
+        print(f"  Chemist tensor:    {n_eri_total} nonzero / {M**4} = {eri_density:.1%}")
+
+    # --- Nuclear repulsion ---
+    V_NN = Z_A * Z_B / R
+
+    if verbose:
+        print(f"[build_h2_bond_pair] V_NN = {V_NN:.6f} Ha")
+
+    # --- JW transform ---
+    if verbose:
+        print(f"[build_h2_bond_pair] Building fermion operator...")
+    fermion_op = build_fermion_op_from_integrals(h1, eri, V_NN)
+
+    if verbose:
+        print(f"[build_h2_bond_pair] Jordan-Wigner transform...")
+    qubit_op = jordan_wigner(fermion_op)
+    N_pauli = len(qubit_op.terms)
+
+    elapsed = time.perf_counter() - t0
+
+    if verbose:
+        print(f"\n{'='*60}")
+        print(f"H2 BOND-PAIR QUBIT HAMILTONIAN -- RESULTS")
+        print(f"{'='*60}")
+        print(f"  Spatial orbitals M = {M}")
+        print(f"  Qubits           Q = {Q}")
+        print(f"  Pauli terms      N = {N_pauli:,}")
+        print(f"  ERI density          = {eri_density:.2%}")
+        print(f"  R                    = {R:.4f} bohr")
+        print(f"  V_NN                 = {V_NN:.6f} Ha")
+        print(f"  Wall time = {elapsed:.1f}s")
+        print(f"{'='*60}")
+
+    results: Dict[str, Any] = {
+        'M': M,
+        'Q': Q,
+        'N_pauli': N_pauli,
+        'ERI_density': eri_density,
+        'n_eri': n_eri,
+        'n_eri_total': n_eri_total,
+        'nuclear_repulsion': V_NN,
+        'R_bohr': R,
+        'max_n': max_n,
+        'Z_eff': Z_eff,
+        'wall_time_s': elapsed,
+        'h1': h1,
+        'eri': eri,
+        'qubit_op': qubit_op,
+        'fermion_op': fermion_op,
+        'states': states,
+    }
+
+    return results
+
+
+# ---------------------------------------------------------------------------
+# New molecule wrapper functions (Track BJ)
+# ---------------------------------------------------------------------------
+
+def build_composed_hf(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 1.733,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    pk_in_hamiltonian: Optional[bool] = None,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+    verbose: bool = True,
+) -> Dict[str, Any]:
+    """Build the composed HF qubit Hamiltonian and count Pauli terms.
+
+    Orbital basis (5 blocks):
+        Core:    F hydrogenic (Z=9) up to max_n_core
+        Bond:    screened F (Z_eff=7) + H (Z=1), up to max_n_val
+        Lone 1-3: screened F (Z_eff=7), up to max_n_val
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on F (Z=9).
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        F-H bond distance in bohr (default: 1.733, expt 0.917 Å).
+    E_core : float or None
+        Core energy in Ha.
+    include_pk : bool
+        If True (default), compute PK on F-side valence blocks.
+    pk_in_hamiltonian : bool or None
+        If True, add PK to h1. If None, uses include_pk value.
+    A_pk, B_pk : float or None
+        PK parameters.
+    verbose : bool
+        Print progress and results.
+
+    Returns
+    -------
+    dict
+        Keys include M, Q, N_pauli, h1, h1_pk, eri, nuclear_repulsion,
+        qubit_op, fermion_op, wall_time_s, blocks, spec_name.
+    """
+    spec = hf_spec(max_n_core, max_n_val, R, E_core, include_pk, A_pk, B_pk)
+    if pk_in_hamiltonian is None:
+        pk_in_hamiltonian = include_pk
+    return build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=pk_in_hamiltonian, verbose=verbose,
+    )
+
+
+def build_composed_nh3(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_NH: float = 1.912,
+    angle_HNH: float = 106.7,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    pk_in_hamiltonian: Optional[bool] = None,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+    verbose: bool = True,
+) -> Dict[str, Any]:
+    """Build the composed NH3 qubit Hamiltonian and count Pauli terms.
+
+    Orbital basis (5 blocks):
+        Core:    N hydrogenic (Z=7) up to max_n_core
+        Bond 1-3: screened N (Z_eff=5) + H (Z=1), up to max_n_val
+        Lone:    screened N (Z_eff=5), up to max_n_val
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on N (Z=7).
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_NH : float
+        N-H bond distance in bohr (default: 1.912, expt 1.012 Å).
+    angle_HNH : float
+        H-N-H bond angle in degrees (default: 106.7°).
+    E_core : float or None
+        Core energy in Ha.
+    include_pk : bool
+        If True (default), compute PK on N-side valence blocks.
+    pk_in_hamiltonian : bool or None
+        If True, add PK to h1. If None, uses include_pk value.
+    A_pk, B_pk : float or None
+        PK parameters.
+    verbose : bool
+        Print progress and results.
+
+    Returns
+    -------
+    dict
+        Keys include M, Q, N_pauli, h1, h1_pk, eri, nuclear_repulsion,
+        qubit_op, fermion_op, wall_time_s, blocks, spec_name.
+    """
+    spec = nh3_spec(
+        max_n_core, max_n_val, R_NH, angle_HNH, E_core, include_pk, A_pk, B_pk,
+    )
+    if pk_in_hamiltonian is None:
+        pk_in_hamiltonian = include_pk
+    return build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=pk_in_hamiltonian, verbose=verbose,
+    )
+
+
+def build_composed_ch4(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_CH: float = 2.050,
+    E_core: Optional[float] = None,
+    include_pk: bool = True,
+    pk_in_hamiltonian: Optional[bool] = None,
+    A_pk: Optional[float] = None,
+    B_pk: Optional[float] = None,
+    verbose: bool = True,
+) -> Dict[str, Any]:
+    """Build the composed CH4 qubit Hamiltonian and count Pauli terms.
+
+    Orbital basis (5 blocks):
+        Core:    C hydrogenic (Z=6) up to max_n_core
+        Bond 1-4: screened C (Z_eff=4) + H (Z=1), up to max_n_val
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on C (Z=6).
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_CH : float
+        C-H bond distance in bohr (default: 2.050, expt 1.085 Å).
+    E_core : float or None
+        Core energy in Ha.
+    include_pk : bool
+        If True (default), compute PK on C-side valence blocks.
+    pk_in_hamiltonian : bool or None
+        If True, add PK to h1. If None, uses include_pk value.
+    A_pk, B_pk : float or None
+        PK parameters.
+    verbose : bool
+        Print progress and results.
+
+    Returns
+    -------
+    dict
+        Keys include M, Q, N_pauli, h1, h1_pk, eri, nuclear_repulsion,
+        qubit_op, fermion_op, wall_time_s, blocks, spec_name.
+    """
+    spec = ch4_spec(max_n_core, max_n_val, R_CH, E_core, include_pk, A_pk, B_pk)
+    if pk_in_hamiltonian is None:
+        pk_in_hamiltonian = include_pk
+    return build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=pk_in_hamiltonian, verbose=verbose,
+    )
 
 
 # ---------------------------------------------------------------------------

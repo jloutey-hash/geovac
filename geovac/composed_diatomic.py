@@ -28,6 +28,7 @@ from geovac.core_screening import CoreScreening
 from geovac.ab_initio_pk import AbInitioPK
 from geovac.level4_multichannel import solve_level4_h2_multichannel
 from geovac.nuclear_lattice import NuclearLattice, HARTREE_TO_CM, AMU_TO_ME
+from geovac.cusp_correction import cusp_correction_h2_point
 
 
 # Reference data for known molecules (used for comparison, not computation)
@@ -113,6 +114,24 @@ class ComposedDiatomicSolver:
         orthogonal to the 1s² core by angular momentum.
     zeff_mode : str or float
         'screened' (Z_A_eff = Z_A - n_core), or a float value.
+    pk_rref : float, str, or None
+        R-dependent PK reference distance.  When set, the PK barrier
+        amplitude is scaled by w_PK(R) = min(1, R / R_ref), reducing
+        the barrier at small R where the core is more compressed.
+        - None (default): constant PK (no R-dependence).
+        - 'auto': derive R_ref from core screening (r_half_screen).
+        - float: use the specified R_ref value directly (bohr).
+        - str (other): name of an R_ref candidate from pk_rref module
+          ('r_half_screen', 'r_pk_width', 'r_avg', 'r_rms', 'r_median',
+          'r_inv2').
+    cusp_correction : bool
+        If True, apply Schwartz partial-wave cusp correction to each
+        bond pair's electronic energy.  The correction is additive and
+        per-fiber: each bond pair receives its own cusp correction via
+        cusp_correction_h2_point(R, l_max).  Default False.
+        NOTE: Do NOT apply cusp correction to lone pairs (e.g. H2O).
+        The Schwartz formula assumes a bond-pair geometry with two nuclei
+        and two electrons; lone pairs lack the second nucleus.
     verbose : bool
         Print progress information.
     label : str
@@ -135,8 +154,10 @@ class ComposedDiatomicSolver:
         pk_A: Optional[float] = None,
         pk_B: Optional[float] = None,
         pk_channel_mode: str = 'channel_blind',
+        pk_rref: Optional[float | str] = None,
         zeff_mode: str = 'screened',
         level4_method: str = 'adiabatic',
+        cusp_correction: bool = False,
         verbose: bool = True,
         label: str = '',
     ) -> None:
@@ -190,6 +211,8 @@ class ComposedDiatomicSolver:
             )
         self.pk_mode = pk_mode
         self.pk_channel_mode = pk_channel_mode
+        self.pk_rref_setting = pk_rref  # raw setting ('auto', float, or str)
+        self.pk_rref: Optional[float] = None  # resolved R_ref (set in solve_core)
 
         # Level 4 solver method
         if level4_method not in ('adiabatic', 'variational_2d'):
@@ -198,6 +221,7 @@ class ComposedDiatomicSolver:
                 f"got '{level4_method}'"
             )
         self.level4_method = level4_method
+        self.cusp_correction = cusp_correction
 
         # Handle backward compatibility: use_pauli=False overrides pk_mode
         if not use_pauli:
@@ -389,6 +413,23 @@ class ComposedDiatomicSolver:
             )
             # No Gaussian pk_potentials — the spectral projector replaces them
 
+        # Resolve R-dependent PK reference distance
+        if self.pk_rref_setting is not None and self.use_pauli:
+            if isinstance(self.pk_rref_setting, (int, float)):
+                self.pk_rref = float(self.pk_rref_setting)
+            elif self.pk_rref_setting == 'auto':
+                from geovac.pk_rref import select_rref
+                self.pk_rref = select_rref(
+                    self.core, self.ab_initio_pk, self.n_core,
+                    method='r_half_screen',
+                )
+            elif isinstance(self.pk_rref_setting, str):
+                from geovac.pk_rref import select_rref
+                self.pk_rref = select_rref(
+                    self.core, self.ab_initio_pk, self.n_core,
+                    method=self.pk_rref_setting,
+                )
+
         self.timings['core'] = time.time() - t0
 
         if self.verbose:
@@ -416,6 +457,9 @@ class ComposedDiatomicSolver:
                           f"{mode_str}{ch_str}")
                 if self.ab_initio_pk is not None:
                     print(f"  r_core = {self.ab_initio_pk.r_core:.4f} bohr")
+                if self.pk_rref is not None:
+                    print(f"  R_ref = {self.pk_rref:.4f} bohr"
+                          f"  (pk_rref='{self.pk_rref_setting}')")
             else:
                 print(f"  PK: disabled (pk_mode='none')")
             print(f"  Time: {self.timings['core']:.1f}s")
@@ -427,6 +471,18 @@ class ComposedDiatomicSolver:
         # n_coupled=-1 activates the direct 2D variational solver,
         # which bypasses the adiabatic approximation entirely.
         n_coupled = -1 if self.level4_method == 'variational_2d' else 1
+
+        # Apply R-dependent PK scaling if R_ref is set
+        pk_pots = self.pk_potentials
+        if pk_pots is not None and self.pk_rref is not None:
+            from geovac.pk_rref import pk_weight_r_dependent
+            w = pk_weight_r_dependent(R, self.pk_rref, cap=1.0)
+            pk_pots = []
+            for p in self.pk_potentials:
+                p_scaled = dict(p)
+                p_scaled['C_core'] = p['C_core'] * w
+                pk_pots.append(p_scaled)
+
         result = solve_level4_h2_multichannel(
             R=R,
             Z_A=self.Z_A_eff,
@@ -437,7 +493,7 @@ class ComposedDiatomicSolver:
             verbose=False,
             m_max=self.m_max,
             l_max_per_m=self.l_max_per_m,
-            pk_potentials=self.pk_potentials,
+            pk_potentials=pk_pots,
             pk_projector=self.pk_projector,
             n_coupled=n_coupled,
         )
@@ -473,6 +529,7 @@ class ComposedDiatomicSolver:
         V_NN_bare_arr = np.zeros(n_R)
         V_cross_arr = np.zeros(n_R)
         E_composed = np.zeros(n_R)
+        delta_cusp_arr = np.zeros(n_R)
         wall_times = np.zeros(n_R)
 
         for i, R in enumerate(R_grid):
@@ -484,9 +541,25 @@ class ComposedDiatomicSolver:
                 V_cross = _v_cross_nuc_1s(
                     self.Z_A_bare, self.n_core, self.Z_B, R)
 
+                # Apply Schwartz cusp correction to bond-pair electronic
+                # energy.  The correction is per-fiber and additive: each
+                # bond pair receives one cusp_correction_h2_point(R, l_max).
+                # For single-bond diatomics (LiH, BeH+) there is one pair.
+                delta_cusp = 0.0
+                if self.cusp_correction:
+                    # Determine effective l_max for cusp correction.
+                    # If l_max_per_m is set, use the sigma (m=0) l_max.
+                    l_max_cusp = self.l_max
+                    if self.l_max_per_m is not None:
+                        l_max_cusp = self.l_max_per_m.get(0, self.l_max)
+                    delta_cusp = cusp_correction_h2_point(
+                        R, l_max=l_max_cusp)
+                    E_elec = E_elec + delta_cusp
+
                 E_elec_arr[i] = E_elec
                 V_NN_bare_arr[i] = V_NN_bare
                 V_cross_arr[i] = V_cross
+                delta_cusp_arr[i] = delta_cusp
                 E_composed[i] = (self.E_core + V_cross
                                  + E_elec + V_NN_bare)
             except Exception as e:
@@ -496,9 +569,11 @@ class ComposedDiatomicSolver:
             wall_times[i] = time.time() - ti
 
             if self.verbose and not np.isnan(E_composed[i]):
+                cusp_str = (f"  dC={delta_cusp*1000:+.2f}mHa"
+                            if self.cusp_correction else "")
                 print(f"  {R:6.3f}  {E_elec:10.4f}  {V_NN_bare:8.4f}"
                       f"  {V_cross:8.4f}  {E_composed[i]:12.6f}"
-                      f"  {wall_times[i]:6.1f}s")
+                      f"  {wall_times[i]:6.1f}s{cusp_str}")
 
         self.timings['pes_scan'] = time.time() - t0
 
@@ -525,6 +600,7 @@ class ComposedDiatomicSolver:
             'V_NN_bare': V_NN_bare_arr,
             'V_cross_nuc': V_cross_arr,
             'E_composed': E_composed,
+            'delta_cusp': delta_cusp_arr,
             'wall_times': wall_times,
             'R_eq': R_eq,
             'E_min': E_min,
@@ -534,6 +610,18 @@ class ComposedDiatomicSolver:
             'E_valid': E_valid,
         }
 
+        # If cusp correction is active, also store uncorrected PES
+        if self.cusp_correction:
+            E_composed_uncorr = E_composed - delta_cusp_arr
+            valid_unc = ~np.isnan(E_composed_uncorr)
+            E_valid_unc = E_composed_uncorr[valid_unc]
+            i_min_unc = np.argmin(E_valid_unc)
+            self.pes_result['E_composed_uncorrected'] = E_composed_uncorr
+            self.pes_result['R_eq_uncorrected'] = R_grid[valid_unc][i_min_unc]
+            self.pes_result['E_min_uncorrected'] = E_valid_unc[i_min_unc]
+            self.pes_result['D_e_uncorrected'] = (
+                E_valid_unc[-1] - E_valid_unc[i_min_unc])
+
         if self.verbose:
             ref_R = self.ref.get('R_eq', '?')
             ref_D = self.ref.get('D_e', '?')
@@ -541,6 +629,13 @@ class ComposedDiatomicSolver:
             print(f"  E_min = {E_min:.6f} Ha")
             print(f"  E_dissoc = {E_dissoc:.6f} Ha")
             print(f"  D_e = {D_e:.6f} Ha  (ref: {ref_D})")
+            if self.cusp_correction:
+                dc_eq = delta_cusp_arr[np.argmin(E_composed[valid])]
+                print(f"  Cusp correction at R_eq: {dc_eq*1000:.3f} mHa")
+                print(f"  R_eq (uncorrected): "
+                      f"{self.pes_result['R_eq_uncorrected']:.3f} bohr")
+                print(f"  D_e (uncorrected): "
+                      f"{self.pes_result['D_e_uncorrected']:.6f} Ha")
             print(f"  PES time: {self.timings['pes_scan']:.1f}s"
                   f"  (avg {wall_times[valid].mean():.1f}s/pt)")
 

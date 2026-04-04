@@ -1,0 +1,114 @@
+{
+  "date": "2026-04-03",
+  "track": "BX-3: TC in second quantization",
+  "he_benchmark": {
+    "data": [
+      {
+        "max_n": 1,
+        "Q": 2,
+        "std_pauli": 4,
+        "tc_pauli": 4,
+        "std_err_pct": 5.3,
+        "tc_err_pct": 3.303,
+        "tc_1norm_ratio": 1.07
+      },
+      {
+        "max_n": 2,
+        "Q": 10,
+        "std_pauli": 282,
+        "tc_pauli": 188,
+        "std_err_pct": 6.394,
+        "tc_err_pct": 3.611,
+        "tc_1norm_ratio": 1.17
+      },
+      {
+        "max_n": 3,
+        "Q": 28,
+        "std_pauli": 5901,
+        "tc_pauli": 6107,
+        "std_err_pct": 8.206,
+        "tc_err_pct": 3.629,
+        "tc_1norm_ratio": 2.99
+      }
+    ],
+    "exact_he": -2.9037
+  },
+  "composed_benchmark": {
+    "full_pk": [
+      {
+        "system": "LiH",
+        "Q": 30,
+        "std_pauli": 334,
+        "tc_pauli": 562,
+        "pauli_ratio": 1.68,
+        "std_1norm": 37.3,
+        "tc_1norm": 42.7,
+        "1norm_ratio": 1.14
+      },
+      {
+        "system": "BeH2",
+        "Q": 50,
+        "std_pauli": 556,
+        "tc_pauli": 936,
+        "pauli_ratio": 1.68,
+        "std_1norm": 354.9,
+        "tc_1norm": 364.7,
+        "1norm_ratio": 1.03
+      },
+      {
+        "system": "H2O",
+        "Q": 70,
+        "std_pauli": 778,
+        "tc_pauli": 1310,
+        "pauli_ratio": 1.68,
+        "std_1norm": 28053.3,
+        "tc_1norm": 28087.1,
+        "1norm_ratio": 1.0
+      }
+    ],
+    "electronic_only": [
+      {
+        "system": "LiH",
+        "Q": 30,
+        "std_pauli": 334,
+        "tc_pauli": 562,
+        "std_1norm": 33.3,
+        "tc_1norm": 38.6,
+        "1norm_ratio": 1.16
+      },
+      {
+        "system": "BeH2",
+        "Q": 50,
+        "std_pauli": 556,
+        "tc_pauli": 936,
+        "std_1norm": 67.4,
+        "tc_1norm": 77.9,
+        "1norm_ratio": 1.16
+      },
+      {
+        "system": "H2O",
+        "Q": 70,
+        "std_pauli": 778,
+        "tc_pauli": 1310,
+        "std_1norm": 360.8,
+        "tc_1norm": 393.5,
+        "1norm_ratio": 1.09
+      }
+    ]
+  },
+  "key_findings": [
+    "BCH constant shift is -1/4 (not +1/4) -- sign error found and fixed",
+    "TC improves He accuracy: 3.3-3.6% vs 5.3-8.2% standard",
+    "TC eliminates standard basis divergence (standard gets worse with max_n)",
+    "Composed Pauli ratio is exactly 1.68x (constant factor, scaling O(Q^2.5) preserved)",
+    "1-norm overhead: 9-16% electronic-only, vanishes with PK dominance",
+    "Non-Hermiticity confirmed (0.34 at He max_n=2)",
+    "Implementation covers radial gradient only; angular gradient for l>0 missing"
+  ],
+  "limitations": [
+    "Angular gradient for p/d orbitals not implemented (affects max_n>=2 accuracy)",
+    "Non-Hermiticity requires non-Hermitian eigensolver (QPE via LCU, or biorthogonal)",
+    "R_eq improvement not tested (needs PES scan)",
+    "Cross-block perturbative correction (Direction B) not yet started"
+  ]
+}

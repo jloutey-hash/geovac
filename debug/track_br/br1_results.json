@@ -1,0 +1,107 @@
+{
+  "description": "Track BR-1: LiH qubit metrics + single-point energy convergence",
+  "qubit_metrics": [
+    {
+      "max_n": 1,
+      "Q": 6,
+      "M": 3,
+      "N_pauli_full": 10,
+      "N_pauli_elec": 10,
+      "1_norm_full_Ha": 16.0106,
+      "1_norm_elec_Ha": 16.3855,
+      "n_qwc_full": 1,
+      "n_qwc_elec": 1,
+      "nuclear_repulsion": -6.331249,
+      "wall_time_s": 0.1
+    },
+    {
+      "max_n": 2,
+      "Q": 30,
+      "M": 15,
+      "N_pauli_full": 334,
+      "N_pauli_elec": 334,
+      "1_norm_full_Ha": 37.3342,
+      "1_norm_elec_Ha": 33.2557,
+      "n_qwc_full": 21,
+      "n_qwc_elec": 21,
+      "nuclear_repulsion": -6.331249,
+      "wall_time_s": 1.1
+    },
+    {
+      "max_n": 3,
+      "Q": 84,
+      "M": 42,
+      "N_pauli_full": 7879,
+      "N_pauli_elec": 7879,
+      "1_norm_full_Ha": 202.4943,
+      "1_norm_elec_Ha": 181.8912,
+      "n_qwc_full": 790,
+      "n_qwc_elec": 790,
+      "nuclear_repulsion": -6.331249,
+      "wall_time_s": 15.1
+    }
+  ],
+  "energy_convergence": [
+    {
+      "l_max": 2,
+      "R": 3.015,
+      "E_composed": -8.184438,
+      "E_elec": -1.192621,
+      "E_core": -7.323542,
+      "V_NN": 0.995025,
+      "V_cross": -0.6633,
+      "E_exact_ref": -8.0706,
+      "error_Ha": -0.113838,
+      "error_pct": -1.411,
+      "pk_A": 6.9273,
+      "pk_B": 6.7958,
+      "wall_time_s": 66.4
+    },
+    {
+      "l_max": 3,
+      "R": 3.015,
+      "E_composed": -8.203568,
+      "E_elec": -1.21107,
+      "E_core": -7.324223,
+      "V_NN": 0.995025,
+      "V_cross": -0.6633,
+      "E_exact_ref": -8.0706,
+      "error_Ha": -0.132968,
+      "error_pct": -1.648,
+      "pk_A": 6.928,
+      "pk_B": 6.7959,
+      "wall_time_s": 117.8
+    },
+    {
+      "l_max": 4,
+      "R": 3.015,
+      "E_composed": -8.236286,
+      "E_elec": -1.24381,
+      "E_core": -7.324469,
+      "V_NN": 0.995025,
+      "V_cross": -0.6633,
+      "E_exact_ref": -8.0706,
+      "error_Ha": -0.165686,
+      "error_pct": -2.053,
+      "pk_A": 6.9283,
+      "pk_B": 6.7959,
+      "wall_time_s": 252.7
+    }
+  ],
+  "gaussian_baselines": {
+    "sto-3g": {"Q": 10, "N_pauli": 276},
+    "6-31g": {"Q": 20, "N_pauli": 5851},
+    "cc-pvdz": {"Q": 36, "N_pauli": 63519}
+  },
+  "analysis": {
+    "energy_convergence_direction": "monotonic decreasing (DIVERGING from exact, going below)",
+    "dE_l2_to_l3": -0.01913,
+    "dE_l3_to_l4": -0.032718,
+    "note": "E_composed drops further below E_exact with increasing l_max. The error grows from -1.4% to -2.1%. This is NOT converging toward exact at fixed R=3.015. The variational bound is violated (E < E_exact), likely because the composed approximation with PK overcounts correlation at higher l_max. The core energy also slightly decreases with l_max (-7.3235 to -7.3245), contributing ~1 mHa. The dominant effect is E_elec dropping by ~50 mHa from l_max=2 to l_max=4.",
+    "qubit_scaling": {
+      "max_n_1_to_2_pauli_ratio": 33.4,
+      "max_n_2_to_3_pauli_ratio": 23.6,
+      "note": "Pauli terms scale roughly as max_n^5 (from Q^2.5 with Q ~ max_n^2)"
+    }
+  }
+}

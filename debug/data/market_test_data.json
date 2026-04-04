@@ -1,0 +1,148 @@
+{
+  "date": "2026-04-03",
+  "track": "CA: Quantum Resource Market Test",
+  "description": "Head-to-head comparison of GeoVac composed Hamiltonians vs Gaussian baselines",
+  "note_on_methodology": "Gaussian raw JW values computed from OpenFermion cached integrals (LiH STO-3G) and GeoVac gaussian_reference.py (He). Trenev Pauli counts from published data. DF/THC lambda values for small molecules NOT available in published literature — QPE papers benchmark at FeMoco scale (152+ qubits). PySCF unavailable on Windows build environment.",
+
+  "geovac_composed": {
+    "LiH_full_pk": {
+      "Q": 30, "pauli_terms": 334, "one_norm_Ha": 37.33, "qwc_groups": 21,
+      "accuracy": "5.3% R_eq error", "max_n": 2
+    },
+    "LiH_electronic_only": {
+      "Q": 30, "pauli_terms": 334, "one_norm_Ha": 33.26, "qwc_groups": 21,
+      "note": "PK partitioned classically (Track BF)"
+    },
+    "BeH2_full_pk": {
+      "Q": 50, "pauli_terms": 556, "one_norm_Ha": 354.89, "qwc_groups": 21,
+      "accuracy": "11.7% R_eq error", "max_n": 2
+    },
+    "BeH2_electronic_only": {
+      "Q": 50, "pauli_terms": 556, "one_norm_Ha": 67.40, "qwc_groups": 21
+    },
+    "H2O_full_pk": {
+      "Q": 70, "pauli_terms": 778, "one_norm_Ha": 28053.33, "qwc_groups": 21,
+      "accuracy": "26% R_eq error", "max_n": 2
+    },
+    "H2O_electronic_only": {
+      "Q": 70, "pauli_terms": 778, "one_norm_Ha": 360.81, "qwc_groups": 21,
+      "note": "PK partitioned classically; PK was 98.7% of total 1-norm"
+    }
+  },
+
+  "geovac_tc_composed": {
+    "source": "debug/data/tc_composed_benchmark.json",
+    "LiH": {
+      "Q": 30, "pauli_terms": 562, "one_norm_Ha": 38.6, "pauli_ratio_vs_std": 1.68,
+      "note": "TC radial-only, electronic 1-norm"
+    },
+    "BeH2": {
+      "Q": 50, "pauli_terms": 936, "one_norm_Ha": 77.9, "pauli_ratio_vs_std": 1.68
+    },
+    "H2O": {
+      "Q": 70, "pauli_terms": 1310, "one_norm_Ha": 393.5, "pauli_ratio_vs_std": 1.68
+    }
+  },
+
+  "gaussian_raw_jw": {
+    "LiH_STO3G_computed": {
+      "Q": 12, "pauli_terms": 907, "one_norm_Ha": 34.31, "qwc_groups": 273,
+      "fci_energy_Ha": -7.880982, "hf_energy_Ha": -7.862568,
+      "source": "OpenFermion cached H1-Li1_sto-3g_singlet_1.45.hdf5 (R=1.45 Å)",
+      "note": "Full 6 spatial orbitals, no frozen core, no qubit reduction"
+    },
+    "LiH_STO3G_trenev": {
+      "Q": 10, "pauli_terms": 276,
+      "source": "Trenev et al. 2025 (arXiv:2311.03719), Table 5, 2-qubit reduction",
+      "note": "With frozen-core and 2-qubit reduction"
+    },
+    "LiH_631G_trenev": {
+      "Q": 20, "pauli_terms": 5851,
+      "source": "Trenev et al. 2025, Table 5"
+    },
+    "LiH_ccpVDZ_trenev": {
+      "Q": 36, "pauli_terms": 63519,
+      "source": "Trenev et al. 2025, Table 5"
+    },
+    "H2O_STO3G_trenev": {
+      "Q": 12, "pauli_terms": 551,
+      "source": "Trenev et al. 2025, Table 5"
+    },
+    "H2O_631G_trenev": {
+      "Q": 24, "pauli_terms": 8921,
+      "source": "Trenev et al. 2025, Table 5"
+    },
+    "H2O_ccpVDZ_trenev": {
+      "Q": 46, "pauli_terms": 107382,
+      "source": "Trenev et al. 2025, Table 5"
+    },
+    "He_ccpVDZ_computed": {
+      "Q": 10, "pauli_terms": 156, "one_norm_Ha": 42.95, "qwc_groups": 25,
+      "fci_energy_Ha": -2.8876,
+      "source": "GeoVac gaussian_reference.py (computed integrals)"
+    },
+    "He_ccpVTZ_computed": {
+      "Q": 28, "pauli_terms": 21607, "one_norm_Ha": 530.47, "qwc_groups": 8615,
+      "fci_energy_Ha": -2.9002,
+      "source": "GeoVac gaussian_reference.py (computed integrals)"
+    },
+    "H2_STO3G_computed": {
+      "Q": 4, "pauli_terms": 15, "one_norm_Ha": 1.98, "qwc_groups": 5,
+      "source": "GeoVac gaussian_reference.py"
+    },
+    "H2_631G_computed": {
+      "Q": 8, "pauli_terms": 265, "one_norm_Ha": 12.17,
+      "source": "OpenFermion cached H2_6-31g_singlet_0.75.hdf5"
+    }
+  },
+
+  "gaussian_compressed": {
+    "note": "DF/THC/SCDF lambda values for LiH and H2O at Q<100 NOT found in published literature",
+    "published_references": {
+      "Lee_2021_THC": {
+        "paper": "Lee et al., PRX Quantum 2, 030305 (2021)",
+        "systems": "FeMoco (Q=152,304), H chains, H2O cc-pVDZ ~48 qubits",
+        "FeMoco_ccpVDZ_lambda_THC_Ha": 306,
+        "FeMoco_ccpVTZ_lambda_THC_Ha": 1170,
+        "H2O_ccpVDZ_lambda_THC_Ha": "~25 (unverified from training data, LOW confidence)",
+        "note": "Table I/II focus on FeMoco and hydrogen chains"
+      },
+      "von_Burg_2021_DF": {
+        "paper": "von Burg et al., Phys. Rev. Research 3, 033055 (2021)",
+        "systems": "Rh catalysts (Q=56-140)",
+        "FeMoco_lambda_DF_Ha": "~590",
+        "note": "No small molecule data"
+      },
+      "Rocca_2024_SCDF": {
+        "paper": "Rocca et al., J. Chem. Theory Comput. 20, 4639 (2024)",
+        "systems": "FeMoco, P450, H chains",
+        "improvement": "1.5-3x lambda reduction vs standard DF",
+        "note": "No LiH or H2O data at Q<100"
+      }
+    },
+    "structural_observation": "DF/THC do not produce Pauli decompositions. They produce block-encoded representations where lambda controls QPE query complexity. Direct Pauli-count comparison only applies against raw JW."
+  },
+
+  "key_comparisons": {
+    "equal_system_LiH": {
+      "geovac_Q30_pauli": 334,
+      "geovac_Q30_1norm_elec": 33.26,
+      "gaussian_STO3G_Q12_pauli": 907,
+      "gaussian_STO3G_Q12_1norm": 34.31,
+      "gaussian_ccpVDZ_Q36_pauli": 63519,
+      "pauli_ratio_vs_STO3G": 0.37,
+      "pauli_ratio_vs_ccpVDZ": 0.0053,
+      "1norm_ratio_vs_STO3G": 0.97,
+      "note": "GeoVac has ~same 1-norm as STO-3G but 2.7x fewer Pauli terms at 2.5x more qubits"
+    },
+    "equal_qubit_He": {
+      "geovac_He_Q10_pauli": 120,
+      "geovac_He_Q10_1norm": 11.29,
+      "gaussian_ccpVDZ_Q10_pauli": 156,
+      "gaussian_ccpVDZ_Q10_1norm": 42.95,
+      "gaussian_ccpVTZ_Q28_pauli": 21607,
+      "gaussian_ccpVTZ_Q28_1norm": 530.47,
+      "note": "At equal Q=10, GeoVac has 3.8x lower 1-norm; at Q~28, GeoVac He has 1-norm ~78 vs Gaussian 530"
+    }
+  }
+}

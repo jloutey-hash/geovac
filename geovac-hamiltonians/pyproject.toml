@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geovac-hamiltonians"
+version = "0.2.0"
+description = "Structurally sparse qubit Hamiltonians from geometric quantum chemistry"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    {name = "GeoVac Development Team"},
+]
+keywords = [
+    "quantum chemistry",
+    "qubit Hamiltonian",
+    "quantum computing",
+    "Pauli strings",
+    "Jordan-Wigner",
+    "VQE",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "numpy>=1.22",
+    "scipy>=1.8",
+    "openfermion>=1.5",
+]
+
+[project.optional-dependencies]
+qiskit = ["qiskit>=1.0"]
+pennylane = ["pennylane>=0.33"]
+all = ["qiskit>=1.0", "pennylane>=0.33"]
+
+[project.urls]
+Homepage = "https://github.com/jlouthan/geometric-vacuum"
+Documentation = "https://github.com/jlouthan/geometric-vacuum"
+
+[tool.setuptools.packages.find]
+where = ["src"]

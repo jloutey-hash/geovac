@@ -1,0 +1,127 @@
+Track AS — Full N-Electron vs Composed Qubit Encoding Comparison
+=================================================================
+
+Date: April 2026
+System: LiH (4 electrons)
+
+1. COMPARISON TABLE
+===================
+
+| Encoding              | Q  | dim  | N_Pauli  | N_QWC |  ||H||_1 | Source          |
+|-----------------------|----|------|----------|-------|----------|-----------------|
+| Full l=1, g=4         |  7 |  128 |       45 |     4 |    98.93 | Direct Pauli    |
+| Full l=1, g=5         |  8 |  250 |    4,069 |   725 | 1,010.36 | Direct Pauli    |
+| Full l=1, g=6         |  9 |  432 |    7,064 |   830 | 1,756.66 | Direct Pauli    |
+| Full l=1, g=7         | 10 |  686 |   51,907 | 8,415 | 3,762.14 | Direct Pauli    |
+| Full l=2, g=4         | 10 |  768 |    3,288 |    48 |   738.51 | Direct Pauli    |
+| Composed (1,1)        |  6 |  N/A |       10 |     1 |    16.01 | JW from h1+ERI  |
+| Composed (1,2)        | 22 |  N/A |      226 |    21 |    28.97 | JW from h1+ERI  |
+| Composed (2,2)        | 30 |  N/A |      334 |    21 |    37.33 | JW from h1+ERI  |
+| Gaussian STO-3G       | 10 |  N/A |      276 |   -- |       -- | Published       |
+
+2. STRUCTURAL BREAKDOWN
+========================
+
+COMPOSED ENCODING (second-quantized):
+  - Q = 2*M (M spatial orbitals -> 2M spin-orbitals -> 2M qubits)
+  - h1 is block-diagonal: core, val-Li, val-H blocks
+  - ERI tensor is block-diagonal: zero cross-block by PK approximation
+  - Gaunt selection rules: most (pq|rs) integrals are zero
+  - JW transform exploits sparsity -> O(Q^2.5) scaling
+  - Pauli terms come from: h1 diagonals (Z strings), ERI (XXYY/ZZII strings)
+  - At Q=30 (standard LiH): 334 Pauli terms
+
+FULL N-ELECTRON ENCODING (direct spatial):
+  - Q = ceil(log2(D)) where D = n_ch_S4 * n_grid^3
+  - H_ang is the FULL 4-electron angular Hamiltonian in coordinate space
+  - NOT second-quantized: fermion statistics are built into S4 projection
+  - Matrix structure: FD kinetic (banded) + potential (diagonal) + channel coupling
+  - Matrix sparsity (nnz/dim^2):
+    - l=1,g=4: 832/16384 = 5.1%
+    - l=1,g=6: 3024/186624 = 1.6%
+    - l=2,g=4: ~1-2%
+  - Pauli terms STRONGLY depend on dim vs 2^Q alignment:
+    - dim = 128 = 2^7 exactly: only 45 Pauli terms (0.27% density)
+    - dim = 250, padded to 256: 4,069 terms (6.2% density!)
+    - dim = 686, padded to 1024: 51,907 terms (5.0% density)
+  - Zero-padding to 2^Q introduces MANY Pauli terms to encode
+    "this subspace is physical, this is padding"
+
+3. SCALING ANALYSIS
+====================
+
+The Pauli term count for the full encoding is NOT well-described by a power law
+in Q. The dominant factor is the dim/2^Q ratio (padding overhead), not the
+physical Hamiltonian structure.
+
+When dim = 2^Q exactly (n_grid=4, l_max=1): 45 terms at Q=7
+When dim << 2^Q (n_grid=7): 51,907 terms at Q=10
+
+The composed encoding scales as Q^2.5 (verified across LiH/BeH2/H2O, Paper 14).
+At Q=30, composed gives 334 terms.
+
+A comparable full encoding at Q=30 would require dim ~ 2^30 ~ 10^9, which means
+~10^9 FD grid points. This is:
+  - n_grid ~ 100, l_max ~ 50 channels
+  - Wall time: years per rho-point
+  - Matrix: 10^9 x 10^9 dense FD matrix -> intractable
+
+4. FUNDAMENTAL ARCHITECTURAL DIFFERENCE
+========================================
+
+The two encodings answer different questions:
+
+COMPOSED (JW of second-quantized H):
+  - "What is the energy of 4 electrons distributed across M spatial orbitals?"
+  - Qubits represent orbital OCCUPATION NUMBERS
+  - Antisymmetry is handled by the fermion algebra (anticommutation)
+  - Block-diagonal structure from PK approximation -> O(Q^2.5) scaling
+  - Cost: M spatial orbitals -> O(M^5) ERI computation, then O(M^2.5) Pauli terms
+
+FULL (direct Pauli decomposition of H_ang):
+  - "What is the angular eigenvalue of the 4-electron Schrodinger equation?"
+  - Qubits represent GRID POINT INDICES in the 11-dimensional angular space
+  - Antisymmetry is handled by S4 projection (subspace reduction, not JW)
+  - No block-diagonal structure -> exponential Pauli scaling with Q
+  - Cost: D-dimensional eigenvalue problem, where D ~ n_ch * n_grid^3
+
+The composed encoding has an EXPONENTIAL advantage because:
+  1. It works in a compact orbital basis (M ~ 10-20 orbitals)
+  2. Block-diagonal ERI eliminates most inter-orbital coupling
+  3. Gaunt selection rules make the remaining ERIs sparse
+
+The full encoding has dense coupling because:
+  1. The FD kinetic energy couples all neighboring grid points
+  2. Channel coupling (V_ee, V_nuc) is dense in the coupled basis
+  3. Padding to 2^Q wastes qubits when dim is not a power of 2
+
+5. VERDICT
+==========
+
+DENSER. The full N-electron Hamiltonian encoding is categorically denser than
+the composed-geometry encoding for quantum simulation.
+
+At comparable qubit counts:
+  - Full Q=7: 45 Pauli terms (best case, exact 2^Q alignment)
+  - Composed Q=6: 10 Pauli terms
+  - Ratio: 4.5x denser (best case)
+
+  - Full Q=10: 3,288-51,907 terms (depending on padding)
+  - Composed Q=30: 334 terms at 3x the qubits
+  - Even at 3x MORE qubits, composed is 10-155x sparser
+
+The full encoding is structurally unsuitable for quantum simulation because:
+  1. The coordinate-space Hamiltonian produces dense Pauli decompositions
+  2. The 1-norm is orders of magnitude larger (738-3762 vs 16-37 Ha)
+  3. The dimension scales exponentially with accuracy (n_grid^3 per channel)
+
+The composed-geometry encoding is the correct approach for quantum computing
+applications. The full N-electron solver's value is as a CLASSICAL benchmark
+(Track AJ/AM) validating the composed approximation, not as a quantum circuit.
+
+This result provides additional justification for the PK approximation:
+  - PK enables block-diagonal ERIs -> sparse Pauli Hamiltonians
+  - The "cost" of PK (introducing an approximate pseudopotential) is
+    RECOVERED through exponentially better quantum resource scaling
+  - Classified as a quantum-computing exchange constant: the irreducible
+    computational cost of maintaining O(Q^2.5) Pauli scaling

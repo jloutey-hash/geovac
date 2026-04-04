@@ -1,0 +1,57 @@
+[
+  {
+    "system": "He (n_max=1)",
+    "Q": 2,
+    "N_pauli_total": 4,
+    "N_pauli_elec": 4,
+    "1_norm_total_Ha": 3.3749,
+    "1_norm_electronic_Ha": 3.3749,
+    "1_norm_PK_Ha": 0.0,
+    "PK_fraction_pct": 0.0,
+    "wall_time_s": 2.4
+  },
+  {
+    "system": "He (n_max=2)",
+    "Q": 10,
+    "N_pauli_total": 120,
+    "N_pauli_elec": 120,
+    "1_norm_total_Ha": 11.2943,
+    "1_norm_electronic_Ha": 11.2943,
+    "1_norm_PK_Ha": 0.0,
+    "PK_fraction_pct": 0.0,
+    "wall_time_s": 0.5
+  },
+  {
+    "system": "LiH (n_max=1)",
+    "Q": 6,
+    "N_pauli_total": 10,
+    "N_pauli_elec": 10,
+    "1_norm_total_Ha": 16.0106,
+    "1_norm_electronic_Ha": 16.3855,
+    "1_norm_PK_Ha": -0.3749,
+    "PK_fraction_pct": -2.34,
+    "wall_time_s": 0.3
+  },
+  {
+    "system": "LiH (n_max=2)",
+    "Q": 30,
+    "N_pauli_total": 334,
+    "N_pauli_elec": 334,
+    "1_norm_total_Ha": 37.3342,
+    "1_norm_electronic_Ha": 33.2557,
+    "1_norm_PK_Ha": 4.0786,
+    "PK_fraction_pct": 10.92,
+    "wall_time_s": 2.6
+  },
+  {
+    "system": "H2O (n_max=2)",
+    "Q": 70,
+    "N_pauli_total": 778,
+    "N_pauli_elec": 778,
+    "1_norm_total_Ha": 28053.334,
+    "1_norm_electronic_Ha": 360.8129,
+    "1_norm_PK_Ha": 27692.5212,
+    "PK_fraction_pct": 98.71,
+    "wall_time_s": 3.9
+  }
+]

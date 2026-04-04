@@ -1,0 +1,40 @@
+Track X2: 2D Solver Cusp Correction Results
+============================================
+Date: 2026-03-30
+
+HEADLINE TABLE
+--------------
+| Solver    | l_max | Channels | D_e uncorr | dE_cusp(R_eq) | D_e corr |
+|-----------|-------|----------|------------|---------------|----------|
+| Adiabatic | 2     | sigma    | 89.7%      | -1.74 mHa     | 90.7%    |
+| 2D        | 2     | sigma    | 79.8%      | -1.74 mHa     | 80.8%    |
+| 2D        | 4     | sigma+pi | 94.1%      | -0.39 mHa     | 94.3%    |
+
+KEY FINDINGS
+------------
+1. Cusp correction is solver-independent: identical dE_cusp at same l_max
+   (difference = 0.000000 mHa at l_max=2, R=1.4)
+
+2. Correction magnitude scales as ~1/(l_max+1/2)^4:
+   - l_max=2: -1.74 mHa at R_eq
+   - l_max=4: -0.39 mHa at R_eq
+   - Ratio: 0.223
+
+3. Paper 15 projection of ~95.1% was INCORRECT. It applied an l_max=2
+   correction differential (1.74 mHa) to the l_max=4 baseline. The
+   correct l_max=4 correction differential is only 0.39 mHa, giving 94.3%.
+
+4. The validated best D_e for H2 in the GeoVac framework is:
+   94.3% with 2D variational solver + Schwartz cusp correction at l_max=4
+
+GRID PARAMETERS
+---------------
+- 2D solver (l_max=2): n_alpha=60, n_Re=120, m_max=0 (5 channels)
+- 2D solver (l_max=4): n_alpha=60, n_Re=120, m_max=1 (29 channels)
+- Adiabatic solver: angular_method='spectral', n_Re=400 (default)
+
+WALL TIMES
+----------
+- Adiabatic l_max=2: 1.6s total (10 R-points)
+- 2D l_max=2: 43.8s total (10 R-points, ~4s per point)
+- 2D l_max=4: 2059.5s total (10 R-points, ~206s per point avg)

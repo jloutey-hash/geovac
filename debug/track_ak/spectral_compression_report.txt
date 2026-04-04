@@ -1,0 +1,61 @@
+========================================================================
+TRACK AK: 4-Electron Spectral Compression Analysis
+========================================================================
+
+1. COMPRESSION TABLE
+------------------------------------------------------------------------
+l_max | Full dim | S4-reduced |   Spectral |    Ratio |   L4 ref |      Verdict
+-------------------------------------------------------------------------------
+    0 |        1 |          1 |        125 |   1000.0 |       10 |    PRACTICAL
+    1 |       16 |          1 |        125 |   1000.0 |       20 |    PRACTICAL
+    2 |       81 |          6 |        750 |   1000.0 |       50 |    PRACTICAL
+    3 |      256 |         20 |       2500 |   1000.0 |       80 |    TRACTABLE
+
+
+2. COUPLING MATRIX CLASSIFICATION
+------------------------------------------------------------------------
+                          Term | Count | rho-dep? | Algebraic?
+------------------------------------------------------------------------
+       H_free (SO(12) Casimir) |     1 |       No |       True
+               V_ee intra-pair |     2 |       No |       True
+               V_ee cross-pair |     4 |       No |    PARTIAL
+    V_nuc (nuclear attraction) |     8 |      Yes |       True
+           Centrifugal barrier |     1 |       No |       True
+
+
+3. CROSS-PAIR V_EE ANALYSIS
+------------------------------------------------------------------------
+Algebraic verdict: Cross-pair V_ee has Gaunt integral structure for the ANGULAR part (directions), but the HYPERANGULAR part requires 3D numerical integration (reducible to nested 1D). This is analogous to the Level 4 split-region Legendre expansion but in 3D instead of 1D. It is rho-INDEPENDENT and can be precomputed once, but the precomputation cost scales as O(n_ch^2 * n_basis^3 * n_quad^3) instead of O(n_ch^2 * n_basis * n_quad) at Level 4.
+
+
+4. TRACTABILITY AT l_max=2
+------------------------------------------------------------------------
+  Spectral dim: 750
+  Cost per rho: 0.42 s
+  Total (130 rho): 54.8 s (0.02 hrs)
+  V_ee precomp: 70.3 s
+  Level 4 ref dim: 50
+  Level 4 ref time: 0.0163 s
+  Ratio to L4 (dim): 15.0x
+  Ratio to L4 (time): 3375.0x
+  VERDICT: PRACTICAL
+
+
+5. RECOMMENDED SPECTRAL BASIS
+------------------------------------------------------------------------
+  n_basis_per_angle=3: dim=162, time=0.6s, PRACTICAL
+  n_basis_per_angle=4: dim=384, time=7.4s, PRACTICAL
+  n_basis_per_angle=5: dim=750, time=54.8s, PRACTICAL
+  n_basis_per_angle=6: dim=1296, time=283.0s, TRACTABLE
+  n_basis_per_angle=7: dim=2058, time=1133.1s, TRACTABLE
+
+
+6. SO(12) FREE SPECTRUM (l_max=0)
+------------------------------------------------------------------------
+  nu=0: mu_free=0.0, SO(12) degeneracy=1, spectral multiplicity=1
+  nu=2: mu_free=12.0, SO(12) degeneracy=77, spectral multiplicity=3
+  nu=4: mu_free=28.0, SO(12) degeneracy=1287, spectral multiplicity=6
+  nu=6: mu_free=48.0, SO(12) degeneracy=11011, spectral multiplicity=7
+  nu=8: mu_free=72.0, SO(12) degeneracy=63206, spectral multiplicity=6
+  nu=10: mu_free=100.0, SO(12) degeneracy=277134, spectral multiplicity=3
+  nu=12: mu_free=132.0, SO(12) degeneracy=999362, spectral multiplicity=1

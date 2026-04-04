@@ -1,0 +1,89 @@
+{
+  "date": "2026-04-03",
+  "track": "BX-4: TC angular gradient for l>0 orbitals",
+  "system": "He (Z=2)",
+  "exact_he": -2.9037,
+  "method": "correct FCI via apply_op_string (non-Hermitian safe)",
+  "data": [
+    {
+      "max_n": 1,
+      "Q": 2,
+      "N_SD": 1,
+      "radial_only": {
+        "E_tc": -2.9998255531447953,
+        "err_pct": 3.31045056806127,
+        "N_pauli": 4,
+        "n_tc_integrals": 1,
+        "non_hermiticity": 0.0
+      },
+      "full_angular": {
+        "E_tc": -2.9998255531447953,
+        "err_pct": 3.31045056806127,
+        "N_pauli": 4,
+        "n_tc_integrals": 1,
+        "non_hermiticity": 0.0
+      },
+      "dE_mHa": 0.0
+    },
+    {
+      "max_n": 2,
+      "Q": 10,
+      "N_SD": 45,
+      "radial_only": {
+        "E_tc": -3.008851822856575,
+        "err_pct": 3.6213046408573426,
+        "N_pauli": 188,
+        "n_tc_integrals": 65,
+        "non_hermiticity": 1.2931744613500582
+      },
+      "full_angular": {
+        "E_tc": -3.008548134552549,
+        "err_pct": 3.6108459741897825,
+        "N_pauli": 500,
+        "n_tc_integrals": 91,
+        "non_hermiticity": 1.2958641832479256
+      },
+      "dE_mHa": 0.3036883040259397
+    },
+    {
+      "max_n": 3,
+      "Q": 28,
+      "N_SD": 378,
+      "radial_only": {
+        "E_tc": -3.0093752863493615,
+        "err_pct": 3.639332105567424,
+        "N_pauli": -1,
+        "n_tc_integrals": 1492,
+        "non_hermiticity": 3.9351257164482156
+      },
+      "full_angular": {
+        "E_tc": -3.0089571418992325,
+        "err_pct": 3.6249317043507348,
+        "N_pauli": -1,
+        "n_tc_integrals": 3449,
+        "non_hermiticity": 3.940797526194684
+      },
+      "dE_mHa": 0.4181444501289988
+    },
+    {
+      "max_n": 4,
+      "Q": 60,
+      "N_SD": 1770,
+      "radial_only": {
+        "E_tc": -3.0095551368363216,
+        "err_pct": 3.645525944013549,
+        "N_pauli": -1,
+        "n_tc_integrals": 17024,
+        "non_hermiticity": 7.8400488922794995
+      },
+      "full_angular": {
+        "E_tc": -3.0090915873591415,
+        "err_pct": 3.629561847268703,
+        "N_pauli": -1,
+        "n_tc_integrals": 55316,
+        "non_hermiticity": 7.853110568963011
+      },
+      "dE_mHa": 0.46354947718008077
+    }
+  ]
+}

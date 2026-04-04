@@ -1,0 +1,21 @@
+{
+  "description": "l_max=6 with full pi channels (l_max_per_m=None), single point at R=1.4",
+  "l_max": 6,
+  "m_max": 1,
+  "l_max_per_m": null,
+  "n_channels": 61,
+  "R": 1.4,
+  "E_total": -1.167344,
+  "D_e": 0.167344,
+  "D_e_pct": 95.92,
+  "cusp_correction_mHa": -0.143,
+  "D_e_corrected": 0.167486,
+  "D_e_pct_corrected": 96.00,
+  "wall_time_s": 754.4,
+  "n_alpha": 60,
+  "n_Re": 120,
+  "angular_method": "spectral",
+  "n_basis_angular": 10,
+  "n_quad_angular": 100,
+  "note": "New best Level 4 result. Previous best: 94.1% at l_max=4 with 29ch full pi (Paper 15). This is +1.9 pp improvement."
+}

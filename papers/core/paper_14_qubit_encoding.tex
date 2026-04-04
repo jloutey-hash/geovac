@@ -714,11 +714,11 @@ composed-system exponent of~2.5 (Sec.~\ref{sec:composed}).
 The structural sparsity demonstrated for single-geometry systems
 (Secs.~\ref{sec:results}--\ref{sec:genuine_gaussian}) extends naturally
 to multi-center molecules via the composed natural geometry
-framework~\cite{loutey_paper17}.  We demonstrate this for three
-systems of increasing complexity: LiH (3~orbital blocks), BeH$_2$
-(5~blocks), and H$_2$O (7~blocks), using the pseudopotential
-approximation to decompose each many-electron problem into coupled
-single-center blocks.
+framework~\cite{loutey_paper17}.  We demonstrate this for four
+systems of increasing complexity: H$_2$ (1~orbital block, the
+single-block limit), LiH (3~blocks), BeH$_2$ (5~blocks), and H$_2$O
+(7~blocks), using the pseudopotential approximation to decompose each
+many-electron problem into coupled single-center blocks.
 
 
 \subsection{Composition principle}
@@ -735,6 +735,11 @@ exactly zero.
 
 The block decomposition for each molecule is:
 \begin{itemize}
+\item \textbf{H$_2$} (1~block): Single bond-pair block at $Z_{\mathrm{eff}} = 1$
+  (2~electrons, no core, no Phillips--Kleinman barrier).  This is the
+  single-block limit of the composed framework, structurally identical
+  to the He encoding but at $Z = 1$ with R-dependent nuclear repulsion
+  $V_{NN} = 1/R$.
 \item \textbf{LiH} (3~blocks): Li core ($Z = 3$, 2~electrons) +
   Li-valence ($Z_{\mathrm{eff}} = 1$) + H-valence ($Z = 1$).
 \item \textbf{BeH$_2$} (5~blocks): Be core ($Z = 4$, 2~electrons) +
@@ -766,6 +771,10 @@ all three data points per molecule.}
 Molecule & $N_b$ & $n_{\max}$ & $M$ & $Q$ & Pauli terms
   & \multicolumn{1}{c}{$\alpha$ (fit)} \\
 \hline
+H$_2$\textsuperscript{a} & 1 & 2 &  5 &  10 &       112 & \\
+      &   & 3 & 14 &  28 &     2\,627 & \\
+      &   & 4 & 30 &  60 &    30\,955 & 3.13 \\
+\hline
 LiH   & 3 & 1 &  3 &   6 &        10 & \\
       &   & 2 & 15 &  30 &       334 & \\
       &   & 3 & 42 &  84 &     7\,879 & 2.50 \\
@@ -781,9 +790,16 @@ H$_2$O & 7 & 1 &  7 &  14 &        22 & \\
 \end{ruledtabular}
 \end{table}
 
-The central result is that all three molecules exhibit the same Pauli
-scaling exponent $\alpha \approx 2.5$, with a spread of only~0.02
-across molecules ranging from 3 to~7 orbital blocks.  This
+{\footnotesize \textsuperscript{a}H$_2$ is the single-block limit of
+the composed framework: no core, no PK, one bond-pair block at
+$Z_{\mathrm{eff}} = 1$.  Its $\alpha = 3.13$ is consistent with the
+single-geometry He exponent (3.15) and higher than the multi-block
+$\alpha \approx 2.5$ because no cross-block sparsity is available.
+The Pauli count is R-independent (verified at $R = 0.5$--$3.0$~bohr).}
+
+The central result is that the three multi-block molecules exhibit the
+same Pauli scaling exponent $\alpha \approx 2.5$, with a spread of
+only~0.02 across molecules ranging from 3 to~7 orbital blocks.  This
 universality arises because the block-diagonal ERI structure ensures
 that the total ERI count scales as the \emph{sum} of per-block
 counts, each of which obeys the same Gaunt integral selection rules.
@@ -818,6 +834,10 @@ Pauli term count scaling ($\alpha = 2.52$) is unaffected.}
 Molecule & $n_{\max}$ & $Q$ & \multicolumn{1}{c}{$\lambda$}
  & $r(10^{-3})$ & $r(10^{-4})$ \\
 \hline
+H$_2$ & 2 &  10 &     8.17 &        183 &        578 \\
+      & 3 &  28 &    42.08 &        941 &      2{,}976 \\
+      & 4 &  60 &   133.37 &      2{,}983 &      9{,}434 \\
+\hline
 LiH   & 1 &   6 &    16.01 &        359 &      1{,}133 \\
       & 2 &  30 &    37.33 &        835 &      2{,}640 \\
       & 3 &  84 &   202.49 &      4{,}528 &     14{,}319 \\
@@ -825,6 +845,9 @@ LiH   & 1 &   6 &    16.01 &        359 &      1{,}133 \\
 BeH$_2$ & 1 &  10 &   198.20 &      4{,}432 &     14{,}015 \\
       & 2 &  50 &   354.89 &      7{,}936 &     25{,}095 \\
       & 3 & 140 &   735.60 &     16{,}449 &     52{,}015 \\
+\hline
+H$_2$O$^\dagger$ & 1 &  14 & 18{,}913 &  422{,}904 & 1{,}337{,}503 \\
+      & 2 &  70 & 28{,}053 &  627{,}356 & 1{,}983{,}698 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -841,6 +864,35 @@ step count on fewer qubits.
 For BeH$_2$, the 1-norm is dominated by the $Z^2$-scaled PK barrier
 on the Be core, giving larger absolute values but moderate growth:
 $\lambda = 355$ at $Q = 50$ to $\lambda = 736$ at $Q = 140$.
+
+$^\dagger$\textbf{H$_2$O 1-norm.}  The raw H$_2$O 1-norms are
+dominated by the $Z^2$-scaled Phillips--Kleinman barrier at
+$Z_{\mathrm{eff}} = 6$.  PK contributes 98.7\% of the total 1-norm:
+the single PK diagonal element on the O-side 1s orbital is
+$\sim 2{,}387$~Ha, replicated across four O-side valence blocks
+(2~bond + 2~lone pair).  Excluding PK, the electronic 1-norm is
+$\lambda_{\mathrm{elec}} = 251$~Ha ($n_{\max} = 1$) and $361$~Ha
+($n_{\max} = 2$), comparable to BeH$_2$'s total 1-norm.  For LiH
+($Z = 3$), PK contributes only 10.9\% of the 1-norm ($\lambda_{\mathrm{elec}} = 33$
+vs.\ $\lambda_{\mathrm{total}} = 37$ at $Q = 30$).  The $Z^2$ scaling
+of PK parameters inflates the raw 1-norm for heavier atoms.
+
+\textbf{PK classical partitioning.}
+Because PK is a one-body operator, its energy contribution
+$E_{\mathrm{PK}} = \mathrm{Tr}(h^{(1)}_{\mathrm{PK}} \cdot \gamma)$
+can be computed classically from the 1-RDM $\gamma$ measured during VQE,
+with zero additional quantum circuits.  The operator decomposition
+$H_{\mathrm{full}} = H_{\mathrm{elec}} + H_{\mathrm{PK}}$ is verified
+to machine precision ($< 10^{-12}$) for all three composed systems,
+and the algebraic identity
+$E_{\mathrm{full}} = \langle\psi|H_{\mathrm{elec}}|\psi\rangle
++ \langle\psi|H_{\mathrm{PK}}|\psi\rangle$
+holds with residual $< 10^{-13}$~Ha.
+This quantum--classical partitioning reduces the H$_2$O quantum
+Hamiltonian 1-norm from $28{,}053$~Ha to $361$~Ha ($78\times$),
+with no approximation.  The partitioned 1-norms across all composed
+systems are comparable: LiH $33$~Ha, BeH$_2$ $355$~Ha, H$_2$O
+$361$~Ha.
 
 The commutator-based bound (Sec.~\ref{sec:onenorm}) provides an
 additional $4$--$5\times$ step reduction for composed systems at
@@ -915,16 +967,46 @@ sizes, this would at most double the total Pauli count---shifting
 the exponent by at most $\log 2 / \log Q_{\max} \approx 0.13$,
 keeping it well below~3.0 even in the worst case.
 
-In practice, many cross-block ERIs will be numerically small due to
-the exponential decay of orbital overlap with internuclear distance,
-so the actual impact is expected to be significantly less than~$2\times$.
+Empirical verification (Track~CB, v2.0.37): for LiH at $n_{\max}=2$
+($Q = 30$), the cross-block Coulomb ERI count is~130 versus~195
+within-block (ratio~$2/3$), and the Pauli count with cross-block
+ERIs included is~854 ($2.56\times$ the composed~334).  The $\le
+2\times$ bound is slightly exceeded because the theoretical bound
+counts only same-angular-set pairs, while the core block
+($Z = 3$, max $l = 1$) has different radial extent than valence
+($Z_{\mathrm{eff}} = 1$), producing additional nonzero quadruplets.
+The 1-norm increases from~37.3 to~85.7~Ha ($2.30\times$), and QWC
+groups from~21 to~88 ($4.19\times$).
+
+Importantly, simply adding cross-block ERIs while removing the PK
+pseudopotential does \emph{not} improve accuracy: a 4-electron FCI
+test gives 29\% error (coupled) versus 15\% (composed with PK)
+versus 10.9\% (no PK, no cross-block).  The root cause is that the
+composed orbital basis uses different effective charges per block,
+so cross-block ERIs add electron--electron repulsion without the
+balancing cross-center nuclear attraction (one-body terms where
+each orbital feels all nuclei).  This confirms that the
+pseudopotential is not redundant in second quantization for the
+composed basis: PK encodes a one-body effective potential that
+approximates both core--valence repulsion and orthogonality
+enforcement, and replacing it with explicit two-body terms is
+incomplete without also adding two-center one-body terms.
+The block-diagonal ERI structure thus remains the correct
+operating point for the composed architecture.
 
 
 \subsection{Limitations of the composed-system analysis}
 \label{sec:composed_limitations}
 
-Several approximations enter the composed-system results, and we
-document them explicitly:
+The comparison in this section quantifies quantum \emph{simulation cost}
+(Pauli terms, measurement groups, 1-norm), not basis-set quality.
+GeoVac uses hydrogenic spin-orbitals in natural geometry blocks while
+Gaussian methods use contracted GTOs; the physical content per qubit
+differs.  The metrics that determine quantum simulation cost---Pauli
+term count, 1-norm, and qubit count---are independent of the classical
+PES accuracy.  Several approximations enter the composed-system
+results, and we document them below, distinguishing those that affect
+simulation cost from those that affect only energy accuracy:
 \begin{enumerate}
 \item \textbf{Cross-block ERIs set to zero:} The pseudopotential
   approximation eliminates all cross-block two-electron integrals.
@@ -947,12 +1029,15 @@ document them explicitly:
   published Gaussian Pauli counts use a 2-qubit reduction
   (particle number and spin symmetry); GeoVac does not.  This
   makes the comparison conservative for GeoVac.
-\item \textbf{Resource estimation, not basis-set quality:} The
-  comparison quantifies quantum simulation cost (Pauli terms,
-  measurement groups).  GeoVac uses hydrogenic spin-orbitals while
-  Gaussian uses contracted GTOs; the physical content per qubit
-  differs.  This comparison should not be interpreted as a
-  basis-set quality comparison.
+\item \textbf{$R_{\mathrm{eq}}$ error measures PES shape, not
+  single-point quality:} The reported $R_{\mathrm{eq}}$ errors
+  (5.3\% for LiH, 11.7\% for BeH$_2$, 26\% for H$_2$O) reflect
+  the equilibrium distance of the composed PES, not the energy
+  accuracy at any particular geometry.  For quantum simulation at
+  a fixed nuclear configuration---the standard use case in
+  fault-tolerant resource estimation~\cite{lee2021,reiher2017}---the
+  relevant comparison is simulation cost at the same geometry and
+  qubit count.
 \item \textbf{Valence-valence coupling not captured:} The
   block-diagonal approximation eliminates inter-bond-pair electron
   interactions.  For BeH$_2$, this produces a qualitatively correct PES
@@ -968,6 +1053,96 @@ document them explicitly:
   Pauli term scaling, which remains valid as a lower bound.
 \end{enumerate}
 
+
+\subsection{Transcorrelated variant}
+\label{sec:tc_composed}
+
+The electron-electron cusp ($1/r_{12}$ singularity) limits basis
+convergence at each level of the natural geometry hierarchy
+(Paper~18, Sec.~II).  The transcorrelated (TC) method removes
+this singularity via a similarity transformation
+$H_{\mathrm{TC}} = e^{-J} H\, e^{J}$ with Jastrow factor
+$J = \tfrac{1}{2} r_{12}$.  For the composed qubit pipeline,
+the TC transformation replaces the standard Coulomb ERI with a
+gradient operator $G = -\tfrac{1}{2}\,\hat{r}_{12} \cdot
+(\nabla_1 - \nabla_2)$, while leaving one-body integrals unchanged.
+A constant shift of $-\tfrac{1}{4}$ per electron pair arises from
+the Baker-Campbell-Hausdorff second-order term
+$\tfrac{1}{2}|\nabla J|^2$.  The BCH expansion terminates exactly
+at second order for two-electron blocks, and three-body terms vanish
+between composed blocks (no shared electrons).
+
+The TC Hamiltonian is non-Hermitian: the gradient operator $G$ breaks
+the chemist symmetry $\langle pq|rs\rangle \ne \langle rs|pq\rangle$,
+so the Jordan-Wigner transformation produces additional Pauli terms
+from the antisymmetric part of the ERI.  However, the Gaunt angular
+selection rules---which determine \emph{which} index quadruplets are
+nonzero---are preserved, because $J = \tfrac{1}{2}r_{12}$ is
+rotationally invariant.  The TC transformation densifies the radial
+integrals within each allowed angular channel but does not create
+new angular channels.
+
+Table~\ref{tab:tc_composed} compares standard and TC composed
+Hamiltonians at the production operating point ($n_{\max} = 2$).
+
+\begin{table}[t]
+\caption{Standard vs.\ transcorrelated (TC) composed Hamiltonians
+at $n_{\max} = 2$.  ``Pauli ratio'' is TC/Standard Pauli term count.
+``1-norm ratio (elec.)''\ compares electronic-only 1-norms with PK
+classically partitioned.  The TC constant factor of $1.68\times$ is
+uniform across all molecules.}
+\label{tab:tc_composed}
+\begin{ruledtabular}
+\begin{tabular}{lrrrr}
+Molecule & $Q$ & {Std Pauli} & {TC Pauli}
+  & {1-norm ratio} \\
+\hline
+LiH    &  30 &    334 &    562 & 1.09 \\
+BeH$_2$ &  50 &    556 &    934 & 1.16 \\
+H$_2$O  &  70 &    778 & 1\,307 & 1.00 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The Pauli ratio is exactly $1.68\times$ for all three molecules,
+independent of system size, confirming that the TC overhead is a
+constant factor rather than a change in scaling exponent.  The
+$O(Q^{2.5})$ composed scaling is preserved.  Electronic-only
+1-norm overhead ranges from 9\% (LiH) to 16\% (BeH$_2$);
+for H$_2$O, the electronic 1-norm ratio is $1.00\times$ because
+the dominant PK contribution is unchanged by TC.
+
+For He at the atomic level, the TC variant eliminates a basis
+divergence: standard hydrogenic FCI error grows from
+5.3\% ($n_{\max} = 1$) to 8.2\% ($n_{\max} = 3$), while TC
+error converges to a 3.3--3.6\% plateau.  The plateau persists
+even with the full gradient operator (Track BX-4); the
+radial-only restriction accounts for only 0.01~pp of the
+$\sim$3.3\% floor, which is intrinsic to the hydrogenic basis
+at this truncation level.
+
+\textit{Angular gradient benchmark (Track BX-4).}
+The full angular gradient term of $G$ was implemented and benchmarked
+for $l > 0$ orbitals.  For He, including the angular gradient reduces
+the FCI error by 0.010--0.014~pp: radial-only gives 3.621\% at
+$n_{\max} = 2$ and 3.639\% at $n_{\max} = 3$; full TC gives 3.611\%
+and 3.625\%, respectively.  The accuracy gain is negligible.  The
+Pauli cost, however, is substantial: 188 $\to$ 500 terms at
+$n_{\max} = 2$ ($2.66\times$), and 1{,}492 $\to$ 3{,}449 ERIs at
+$n_{\max} = 3$ ($2.31\times$).  For the composed pipeline at
+$n_{\max} = 2$, including the angular gradient increases Pauli counts
+from 562 $\to$ 1{,}498 (LiH), 936 $\to$ 2{,}496 (BeH$_2$), and
+1{,}310 $\to$ 3{,}494 (H$_2$O)---a uniform $2.67\times$ ratio---bringing
+the total TC/standard ratio to $4.49\times$.  The angular gradient is
+therefore a \emph{negative result for quantum efficiency}: the cost
+exceeds the accuracy benefit by more than two orders of magnitude at the
+composed operating point.  The radial-only TC Hamiltonian
+(\texttt{include\_angular=False}) remains the default for the composed
+pipeline.
+
+A PES scan for LiH confirms that both the standard and TC Pauli
+counts are $R$-independent (334 and 562 at all sampled bond lengths),
+consistent with the selection-rule origin of the sparsity.
 
 \subsection{Discussion of composed results}
 \label{sec:composed_discussion}
@@ -1156,6 +1331,50 @@ fewer steps.  The product $N_{\mathrm{Pauli}} \times r$ determines
 the total gate budget, and both factors are simultaneously reduced
 by the GeoVac encoding.
 
+\subsection{Context: fault-tolerant Gaussian compression methods}
+\label{sec:ft_gaussian}
+
+The fault-tolerant QPE literature employs block-encoding methods---double
+factorization (DF)~\cite{motta2021}, tensor hypercontraction
+(THC)~\cite{lee2021}, and symmetry-compressed double factorization
+(SCDF)~\cite{rocca2024}---that do not produce Pauli decompositions.
+These methods target the block-encoding 1-norm~$\lambda$ and Toffoli
+gate count rather than Pauli term count, and are implemented as
+sequences of rotations within a linear combination of unitaries (LCU)
+circuit.  Published benchmarks focus on large active spaces: FeMoCo at
+108--152~qubits~\cite{lee2021}, cytochrome~P450 at
+96--116~qubits~\cite{caesura2025}, and similar production-scale systems.
+To our knowledge, no published DF, THC, or SCDF $\lambda$~values exist
+for molecules at the 10--70~qubit operating scale of the present work
+(LiH at $Q = 30$, H$_2$O at $Q = 70$), because these systems are too
+small for the overhead of block-encoding to be beneficial.
+The Pauli term advantage reported here (190$\times$--1,712$\times$,
+Sec.~\ref{sec:composed_gaussian}) is therefore against raw
+Jordan--Wigner encoding, the representation used by VQE and other
+near-term variational algorithms.  The 1-norm comparison
+(Sec.~\ref{sec:onenorm}) and its scaling ($\lambda \sim Q^{1.69}$)
+are the metrics relevant for both VQE shot budgets and fault-tolerant
+qubitization query complexity.
+
+\paragraph{Computed 1-norm comparison.}
+To quantify the 1-norm comparison directly, we compute Gaussian raw
+Jordan--Wigner baselines from published molecular integrals.
+For LiH~STO-3G (6~spatial orbitals, $Q = 12$, FCI $E = -7.881$~Ha),
+the raw JW Hamiltonian has 907~Pauli terms, $\lambda = 34.3$~Ha, and
+273~QWC groups.  The composed GeoVac LiH ($Q = 30$, electronic-only
+with PK partitioned classically) has 334~Pauli terms,
+$\lambda = 33.3$~Ha, and 21~QWC groups.  At comparable accuracy
+($\sim$5\% $R_\mathrm{eq}$ error for both minimal-basis representations),
+GeoVac achieves 2.7$\times$ fewer Pauli terms and 13$\times$ fewer
+QWC groups, with essentially identical 1-norm ($0.97\times$).
+The 1-norm parity reflects that $\lambda$ is dominated by one-body
+terms (core energies, PK), which scale with nuclear charge rather than
+orbital count.  The Pauli and QWC advantage are the VQE-relevant
+metrics.  For the validated He equal-qubit comparison at $Q = 28$,
+the GeoVac lattice has $6.8\times$ lower 1-norm than Gaussian
+cc-pVTZ ($\lambda = 78.4$ vs.\ $530.5$~Ha), demonstrating that the
+1-norm advantage grows with basis size for single-center systems.
+
 \subsection{Limitations}
 \label{sec:limitations}
 
@@ -1270,6 +1489,20 @@ Software implementing the encoder
 (\texttt{geovac.trotter\_bounds}), together with all benchmarks
 reported here, are available as part of the open-source GeoVac package.
 
+\paragraph{Note added v2.0.24.}
+The full $N$-electron quantum encoding comparison (Track~AS,
+v2.0.23) has confirmed that the composed architecture is categorically
+sparser than direct grid encoding of the exact 4-electron angular
+Hamiltonian: at $Q = 10$, the full Jordan--Wigner encoding produces
+3{,}288~Pauli terms with a 1-norm of 739~Ha, compared to
+334~terms and 37~Ha for the composed encoding at $Q = 30$.
+The root cause is structural: the full encoding maps finite-difference
+grid points in the 11-dimensional angular space (dense FD coupling),
+while the composed encoding maps orbital occupations with
+block-diagonal ERIs from Gaunt selection rules.  Cross-pair $V_{ee}$
+costs more in Pauli terms than the PK/$Z_{\rm eff}$/exchange overhead
+it replaces.  This validates the composed architecture as the quantum
+computing approach for multi-electron molecules.
 
 %% ========================================================================
 \begin{acknowledgments}
@@ -1420,6 +1653,18 @@ GeoVac Paper~13 (2026).
 J.~Loutey,
 ``Composed Natural Geometries for Core-Valence Diatomics,''
 GeoVac Paper~17 (2026).
+
+\bibitem{rocca2024}
+D.~Rocca, C.~L.~Cortes, J.~F.~Gonthier, P.~D.~Johnson, and R.~M.~Parrish,
+``Reducing the runtime of fault-tolerant quantum simulations in chemistry
+through symmetry-compressed double factorization,''
+J.\ Chem.\ Theory Comput.\ \textbf{20}, 4639--4653 (2024).
+
+\bibitem{caesura2025}
+A.~Caesura, C.~L.~Cortes, W.~Pol, R.~M.~Parrish, and P.~D.~Johnson,
+``Efficient fault-tolerant implementations of real-space quantum chemistry
+Hamiltonians using BLISS,''
+PRX Quantum \textbf{6}, 030337 (2025).
 
 \bibitem{trenev2025}
 D.~Trenev, P.~J.~Ollitrault, S.~M.~Harwood, T.~P.~Gujarati,

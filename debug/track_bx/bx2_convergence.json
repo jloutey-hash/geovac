@@ -1,0 +1,76 @@
+{
+  "track": "BX-2",
+  "date": "2026-04-03",
+  "method": "Transcorrelated (TC) correction for He at Level 3",
+  "jastrow": "J = +(1/2)*r_12 (linear Kato cusp)",
+  "result": "NEGATIVE \u2014 adiabatic separation incompatible with TC",
+  "root_cause": "The TC operator G = -d/dr_12 decomposes into angular G_ang (R-independent, O(1)) and radial G_R = -(sqrt(u)/2)*d/dR. The standard V_ee = 1/(R*sqrt(u)) enters the angular eigenvalue as R*C_ee, which is O(R). Removing V_ee and replacing with G_ang gives angular eigenvalues that are O(R) too negative. The G_R term in the radial equation cannot compensate because it is a first-order derivative (modifies the radial kinetic energy), not a potential term. The net effect is ~45-47% error. The TC method requires a variational or FCI framework where H_TC is constructed and diagonalized directly, not an adiabatic separation.",
+  "approaches_tested": [
+    {
+      "name": "Direct TC angular replacement",
+      "description": "Replace V_ee in angular Hamiltonian with G_tilde_ang, use eig for non-Hermitian",
+      "result": "~47% error \u2014 G_R dropped entirely"
+    },
+    {
+      "name": "Perturbative TC correction",
+      "description": "Solve standard angular problem, compute TC correction as Delta_V_eff",
+      "result": "~47% error \u2014 same fundamental issue"
+    },
+    {
+      "name": "Full TC with G_R in radial equation",
+      "description": "TC angular eigenvalues + first-derivative G_R coupling in radial equation",
+      "result": "~45% error \u2014 G_R helps ~2% but angular eigenvalue still wrong by O(R)"
+    }
+  ],
+  "convergence": [
+    {
+      "l_max": 0,
+      "energy_std": -2.896727,
+      "energy_tc_direct": -4.275362,
+      "energy_tc_full": -4.233098,
+      "err_std_pct": 0.241,
+      "err_tc_direct_pct": 47.24,
+      "err_tc_full_pct": 45.78,
+      "max_imag": 0.0
+    },
+    {
+      "l_max": 1,
+      "energy_std": -2.917782,
+      "energy_tc_direct": -4.266975,
+      "energy_tc_full": -4.223253,
+      "err_std_pct": 0.4841,
+      "err_tc_direct_pct": 46.95,
+      "err_tc_full_pct": 45.44,
+      "max_imag": 0.556
+    },
+    {
+      "l_max": 2,
+      "energy_std": -2.919935,
+      "energy_tc_direct": -4.266682,
+      "energy_tc_full": -4.222954,
+      "err_std_pct": 0.5583,
+      "err_tc_direct_pct": 46.94,
+      "err_tc_full_pct": 45.43,
+      "max_imag": 0.882
+    },
+    {
+      "l_max": 3,
+      "energy_std": -2.920463,
+      "energy_tc_direct": -4.266644,
+      "energy_tc_full": -4.222916,
+      "err_std_pct": 0.5765,
+      "err_tc_direct_pct": 46.94,
+      "err_tc_full_pct": 45.43,
+      "max_imag": 1.04
+    }
+  ],
+  "key_observations": [
+    "V_ee contributes O(R) to angular eigenvalue; G_ang contributes O(1)",
+    "G_R = -(sqrt(u)/2)*d/dR is a first-order radial coupling, not a potential",
+    "Including G_R helps ~2% but cannot compensate for missing V_ee repulsion",
+    "Large imaginary eigenvalues (up to 1.04) at l_max >= 1 from non-Hermitian TC",
+    "TC convergence with l_max is negligible (45.78% -> 45.43%) \u2014 not the expected exponential",
+    "The adiabatic separation fundamentally requires V_ee to be a multiplicative operator"
+  ],
+  "conclusion": "The TC Jastrow approach is structurally incompatible with the adiabatic hyperspherical method. The adiabatic separation exploits the multiplicative nature of V_ee to include it entirely in the angular eigenvalue problem. The TC transformation replaces this multiplicative operator with a first-order differential operator that couples angular and radial degrees of freedom, breaking the clean adiabatic separation. This is analogous to how the cusp (Track U-Y) is an embedding exchange constant \u2014 the TC handles the cusp by removing V_ee, but this removal is incompatible with the adiabatic framework. The Schwartz post-correction (Track X) remains the correct approach for the adiabatic solver."
+}

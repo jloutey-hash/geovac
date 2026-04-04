@@ -1,0 +1,602 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{observation}{Observation}
+
+\begin{document}
+
+\title{Toward PK-Free Molecular Hamiltonians:\\
+Two-Center Sturmian Integrals and Coupled Composition}
+\thanks{Paper 19 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{April 3, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The composed natural geometry framework (Paper~17) constructs
+molecular Hamiltonians by partitioning electrons into single-center
+blocks and coupling them via Phillips--Kleinman (PK) pseudopotentials.
+This produces structurally sparse qubit Hamiltonians---$O(Q^{2.5})$
+Pauli scaling, 51--1{,}712$\times$ fewer terms than Gaussian
+baselines (Paper~14)---but PK limits accuracy to 5.3--26\%
+equilibrium bond length error.  PK cannot be improved: six
+modification attempts have failed (v2.0.6--23), and the overcounting
+diverges at higher angular momentum.
+
+We report a negative result (Track~CB, v2.0.37): replacing PK with
+explicit cross-block electron-electron integrals \emph{without}
+corresponding cross-center nuclear attraction integrals produces an
+unbalanced Hamiltonian (29\% error, worse than PK's 15\%).  The root
+cause is identified: two-center one-body integrals
+$\langle \psi_{nlm}^A | V_B | \psi_{n'l'm'}^A \rangle$, where an
+orbital on center~$A$ feels the nuclear potential of center~$B$, are
+required for energy balance but absent from the single-center
+framework.
+
+We observe that these missing integrals are precisely the
+Shibuya--Wulfman integrals of the Coulomb Sturmian
+literature~\cite{shibuya1965,avery2004,avery2012}, which are computed
+via Fock's momentum-space projection onto $S^3$---the same conformal
+map that underlies the GeoVac framework (Paper~7).  The mathematical
+foundation is therefore already in place.  We review the convergence
+properties of the Shibuya--Wulfman expansion, identify the Coulomb
+resolution technique~\cite{hoggan2011} as a potentially faster
+alternative, and outline the ``coupled composition'' architecture
+that would result from incorporating two-center integrals.  If the
+angular expansion converges in few terms at molecular bond lengths,
+the coupled Hamiltonian would be PK-free, structurally sparse, and
+significantly more accurate than the current composed framework.
+This paper documents the mathematical connections and research path;
+implementation and benchmarks are deferred.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction: The PK Problem}
+\label{sec:intro}
+%% ========================================================================
+
+The composed natural geometry framework~\cite{loutey_paper17}
+partitions electrons into groups---core, bond pairs, lone pairs---each
+inhabiting its own natural coordinate system.  Inter-group coupling is
+approximated by the Phillips--Kleinman (PK) pseudopotential, a
+one-body operator that provides core-valence orthogonality and an
+effective repulsive barrier.
+
+PK is the framework's accuracy bottleneck.  At $l_{\max} = 2$ (the
+optimal operating point), LiH achieves 5.3\% $R_{\rm eq}$ error;
+BeH$_2$ gives 11.7\%; H$_2$O gives 26\%.  These errors are
+structural, not numerical: the $l_{\max}$ divergence
+(+0.15--0.22~bohr per additional angular channel) is confirmed to
+originate in PK overcounting, not in the adiabatic approximation
+(Track~BQ, v2.0.32).  Six attempts to modify PK have failed
+(projector, spectral, self-consistent, $R$-dependent, $l$-dependent,
+$l$-dependent on 2D solver), and the ab initio $R_{\rm ref}$
+derivation failed because the relevant scale (${\sim}3$~bohr) is
+molecular, not atomic (Track~AD, v2.0.18).
+
+At the same time, PK is essential for the composed framework's
+sparsity: it makes the electron repulsion integral (ERI) tensor
+block-diagonal, yielding $O(Q^{2.5})$ Pauli scaling
+(Paper~14)~\cite{loutey_paper14}.  Without PK, the block
+decomposition has no coupling at all.
+
+The question motivating this paper is: \emph{can PK be replaced by
+explicit inter-block integrals that preserve structural sparsity while
+eliminating the accuracy ceiling?}
+
+
+%% ========================================================================
+\section{The Negative Result: Coupled Composition Without $V_{ne}$}
+\label{sec:negative}
+%% ========================================================================
+
+Track~CB (v2.0.37) tested the simplest version of this idea: remove
+PK from the composed LiH Hamiltonian and add explicit cross-block
+two-electron integrals $\langle pq | rs \rangle$ where $p, q$ belong
+to one block and $r, s$ to another.
+
+The cross-block ERIs were computed using existing infrastructure
+(\texttt{cross\_block\_mp2.py}, originally built for Track~BX-3b).
+Key census results for LiH at $n_{\max} = 2$, $Q = 30$:
+
+\begin{table}[h]
+\caption{Cross-block ERI census for LiH at $n_{\max} = 2$.}
+\label{tab:census}
+\begin{ruledtabular}
+\begin{tabular}{lrr}
+Metric & Within-block & Cross-block \\
+\hline
+Nonzero ERIs & 195 & 130 \\
+Max $|\langle pq|rs\rangle|$ (Ha) & --- & 0.891 \\
+Mean $|\langle pq|rs\rangle|$ (Ha) & --- & 0.142 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The cross-block/within-block ERI ratio is 2/3, consistent with the
+selection-rule counting bound of $\le 2\times$ from Paper~14,
+Sec.~V.E.  Gaunt selection rules ($|\Delta l| \le 1$,
+$|\Delta m| \le 1$) are preserved across block boundaries.
+
+The resulting qubit Hamiltonian has 854 Pauli terms (2.56$\times$ the
+composed value of 334) and 1-norm 85.7~Ha (2.30$\times$ the composed
+value of 37.3~Ha).  However, the FCI energy tells the real story:
+
+\begin{table}[h]
+\caption{FCI accuracy for LiH at $n_{\max} = 2$ under different
+coupling schemes.  Exact: $-8.071$~Ha.}
+\label{tab:fci}
+\begin{ruledtabular}
+\begin{tabular}{lrr}
+Configuration & $E_{\mathrm{FCI}}$ (Ha) & Error \\
+\hline
+No PK, no cross-block (decoupled) & $-7.195$ & 10.9\% \\
+Composed (PK, no cross-block) & $-6.863$ & 15.0\% \\
+Coupled (no PK, with cross-block $V_{ee}$) & $-5.734$ & 29.0\% \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The coupled Hamiltonian is \emph{worse} than both alternatives.  The
+root cause is clear: cross-block ERIs add inter-group electron-electron
+\emph{repulsion} without the balancing cross-center electron-nucleus
+\emph{attraction}.  The Hamiltonian is energetically unbalanced.
+
+\begin{observation}
+\label{obs:decoupled}
+The decoupled configuration (no PK, no cross-block interactions)
+gives 10.9\% error---better than PK's 15.0\%.  This implies that
+PK overcorrects at $n_{\max} = 2$: the blocks are more accurate
+when left independent than when coupled via PK.
+\end{observation}
+
+This observation is consistent with the $l_{\max}$ divergence
+diagnostic: PK's repulsive barrier systematically overcounts the
+core-valence interaction energy, and the overcounting worsens with
+basis size.
+
+
+%% ========================================================================
+\section{The Missing Piece: Two-Center Nuclear Attraction}
+\label{sec:twocenter}
+%% ========================================================================
+
+The coupled Hamiltonian of Sec.~\ref{sec:negative} is incomplete.
+A physically balanced molecular Hamiltonian requires, for each
+electron:
+\begin{enumerate}
+\item Kinetic energy (within-block, already present).
+\item Same-center nuclear attraction $V_A = -Z_A / r_A$ (within-block, already present).
+\item Cross-center nuclear attraction $V_B = -Z_B / r_B$, where the
+  electron on center~$A$ feels the potential of nucleus~$B$ (missing).
+\item Electron-electron repulsion, both within-block (present) and
+  cross-block (added in Track~CB).
+\end{enumerate}
+
+Item~3 requires two-center one-body integrals of the form
+\begin{equation}
+\label{eq:vne_cross}
+I_{nlm, n'l'm'}^{AB} = \left\langle \psi_{nlm}^A \left|
+  \frac{-Z_B}{|\mathbf{r} - \mathbf{R}_B|} \right|
+  \psi_{n'l'm'}^A \right\rangle
+\end{equation}
+where $\psi_{nlm}^A$ is a hydrogenic orbital centered on nucleus~$A$,
+and the potential is from nucleus~$B$ at position~$\mathbf{R}_B$.
+These integrals are standard in the Slater-type orbital (STO)
+literature but have never been computed in the GeoVac framework,
+which has until now been strictly single-center at each level.
+
+
+%% ========================================================================
+\section{Connection to Coulomb Sturmian Theory}
+\label{sec:sturmian}
+%% ========================================================================
+
+GeoVac's hydrogenic orbitals are Coulomb Sturmians with the
+identification $k = Z/n$, where $k$ is the Sturmian exponent.
+This is not merely a notational correspondence: the entire GeoVac
+framework---the graph Laplacian on $S^3$ (Paper~7), the Fock
+projection, the angular momentum selection rules---is built on the
+same mathematical structure that the Avery group has developed for
+molecular Coulomb Sturmian calculations since the
+1990s~\cite{avery2000,avery2004,avery2012,avery2014}.
+
+\subsection{Shibuya--Wulfman integrals}
+
+When a Coulomb Sturmian centered on $A$ is expanded in the basis
+centered on $B$, the expansion coefficients are the Shibuya--Wulfman
+integrals~\cite{shibuya1965}:
+\begin{equation}
+\label{eq:sw}
+S_{\tau', \tau} = \int d^3\mathbf{r}\; \chi_{\tau'}^*(\mathbf{r} -
+\mathbf{R}_B)\, \frac{k}{r_A}\, \chi_\tau(\mathbf{r} - \mathbf{R}_A)
+\end{equation}
+where $\chi_\tau$ denotes a Coulomb Sturmian with quantum numbers
+$\tau = (n, l, m)$, and the weighting $k/r_A$ arises from the
+potential-weighted orthogonality of the Sturmian basis.
+
+In Fock's momentum-space representation, Coulomb Sturmians map to
+hyperspherical harmonics on $S^3$, and Shibuya--Wulfman integrals
+become overlap integrals of translated hyperspherical harmonics.
+The translation is parameterized by
+\begin{equation}
+S \equiv k \cdot R_{AB}
+\end{equation}
+where $R_{AB} = |\mathbf{R}_A - \mathbf{R}_B|$ is the internuclear
+distance and $k$ is the common Sturmian exponent.
+
+The nuclear attraction integral of Eq.~(\ref{eq:vne_cross}) is
+closely related to the Shibuya--Wulfman integral: both involve a
+Coulomb potential centered on a different nucleus acting on an orbital.
+Koga and Matsuhashi~\cite{koga1987} derived sum rules for nuclear
+attraction integrals over hydrogenic orbitals that express them as
+finite sums over Clebsch--Gordan coefficients---the same angular
+momentum algebra that generates Gaunt integrals in the GeoVac
+framework.
+
+\emph{Heterogeneous exponents.}  The standard Shibuya--Wulfman
+formalism assumes a common Sturmian exponent~$k$ across all centers.
+GeoVac's composed blocks use different effective charges
+$Z_{\mathrm{eff}}$ per block, giving different exponents
+$k_b = Z_{\mathrm{eff},b}/n$ for each block~$b$.  The generalized
+overlap integrals between Sturmians of different exponents exist in
+the literature---Koga and Matsuhashi~\cite{koga1987} treat this
+case explicitly---but the convergence properties may differ from the
+common-$k$ case.  Any implementation must use these generalized
+integrals, and the convergence diagnostic (Sec.~\ref{sec:path})
+must be performed with the actual heterogeneous exponents of the
+LiH block decomposition, not with a uniform~$k$.
+
+\subsection{The convergence challenge}
+
+The Shibuya--Wulfman expansion has a well-documented convergence
+limitation.  When a Sturmian on center~$A$ is expanded in the
+angular basis of center~$B$, the expansion involves hyperspherical
+harmonics of increasing angular momentum~$L$.  The rate of convergence
+is controlled by the parameter $S = k \cdot R_{AB}$.
+
+For $S \ll 1$ (nuclei close together relative to the orbital scale),
+convergence is rapid.  For $S \gtrsim 3$ (typical molecular bond
+lengths), convergence is slow, requiring many angular terms.  The
+Avery group explicitly notes this: the expansion ``is very slowly
+convergent if $S$ is large''~\cite{avery2012}.
+
+For LiH at equilibrium ($R_{AB} \approx 3$~bohr), with $k \approx 1$
+for the valence orbitals, $S \approx 3$.  This places the system
+squarely in the slow-convergence regime.  Each additional angular
+momentum channel in the expansion adds orbitals and therefore Pauli
+terms to the qubit Hamiltonian.  If $L_{\max} = 5$--10 is required
+for convergence, the Pauli count could approach the full Level~4N
+encoding (${\sim}3{,}288$ terms), defeating the purpose of the block
+decomposition.
+
+\subsection{The Coulomb resolution alternative}
+
+A potentially more efficient route was developed by Hoggan and
+collaborators~\cite{hoggan2011}.  The ``Coulomb resolution'' technique
+decomposes multi-center integrals over exponential-type orbitals into
+sums of one-electron overlap-like products, each involving orbitals on
+at most two centers.  Crucially, these two-center integrals are
+separable in prolate spheroidal coordinates---the same coordinate
+system used at Level~2 of the GeoVac hierarchy (Paper~11).
+
+The Coulomb resolution sidesteps the slowly convergent angular
+expansion of Shibuya--Wulfman by working directly in the two-center
+coordinate system where the integrals are most naturally expressed.
+GeoVac already possesses prolate spheroidal infrastructure from
+Paper~11, including the Neumann expansion machinery for $V_{ee}$
+(Paper~12).  The question is whether this infrastructure can be
+extended to compute the one-body cross-center integrals of
+Eq.~(\ref{eq:vne_cross}).
+
+
+%% ========================================================================
+\section{The Coupled Composition Architecture}
+\label{sec:architecture}
+%% ========================================================================
+
+If two-center integrals can be computed efficiently, the resulting
+``coupled composition'' Hamiltonian would have the following structure
+for a molecule with $B$ blocks:
+
+\begin{equation}
+\label{eq:coupled}
+H = \sum_{b=1}^{B} H_b^{(1)} + \sum_{b=1}^{B} V_{ee}^{(b)} +
+\sum_{b < b'} V_{ee}^{(b,b')} + \sum_{b=1}^{B} \sum_{a \ne a_b}
+V_{ne}^{(b,a)}
+\end{equation}
+
+where $H_b^{(1)}$ is the one-body Hamiltonian within block~$b$
+(kinetic + same-center nuclear attraction), $V_{ee}^{(b)}$ is the
+within-block ERI, $V_{ee}^{(b,b')}$ is the cross-block ERI, and
+$V_{ne}^{(b,a)}$ is the cross-center nuclear attraction (electron in
+block~$b$ feeling nucleus~$a$ from a different center).
+
+Compared to the current composed Hamiltonian:
+\begin{itemize}
+\item PK is \emph{eliminated entirely}.  Core-valence orthogonality is
+  enforced by the occupation number representation in second
+  quantization, not by a pseudopotential.
+\item Cross-block ERIs are included, subject to Gaunt selection rules.
+  Track~CB established that these add ${\sim}2/3$ of the within-block
+  ERI count (130 vs.~195 for LiH at $n_{\max} = 2$).
+\item Cross-center nuclear attraction is included via two-center
+  integrals.  The number of one-body terms is bounded by the number
+  of orbital pairs times the number of off-center nuclei.
+\end{itemize}
+
+\begin{conjecture}
+\label{conj:sparsity}
+The Gaunt selection rules that enforce ERI sparsity within each block
+also constrain the cross-block ERIs and the angular expansion of the
+cross-center nuclear attraction.  If the two-center integral expansion
+converges in $L_{\max} \le 3$ angular terms at molecular bond lengths,
+the coupled Hamiltonian should have $\lesssim 1{,}500$ Pauli terms for
+LiH at $n_{\max} = 2$---roughly $4.5\times$ the current composed
+count of 334, but well below the full Level~4N count of 3{,}288 and
+potentially below the Gaussian STO-3G count of 907 after the PK
+one-body terms are removed.
+\end{conjecture}
+
+This conjecture is falsifiable by computing the two-center integrals
+and performing the Jordan--Wigner transformation.
+
+\begin{conjecture}
+\label{conj:accuracy}
+With a balanced Hamiltonian (all one-body and two-body terms present,
+no PK), the FCI accuracy on the coupled Hamiltonian should be
+significantly better than the composed framework's 5.3\% $R_{\rm eq}$
+error, bounded below by the hydrogenic FCI accuracy floor
+(${\sim}0.35\%$ for He at $n_{\max} = 5$, Paper~FCI-A).
+\end{conjecture}
+
+
+%% ========================================================================
+\section{Relationship to Existing GeoVac Infrastructure}
+\label{sec:infrastructure}
+%% ========================================================================
+
+The coupled composition program connects to multiple existing
+components:
+
+\emph{Paper~7 (Dimensionless Vacuum):} The $S^3$ conformal projection
+that defines GeoVac's graph Laplacian is identical to Fock's
+1935 momentum-space mapping~\cite{fock1935}, which is the foundation
+of Shibuya--Wulfman theory.  The 18 symbolic proofs of Paper~7
+validate the same mathematical structure that generates the
+Shibuya--Wulfman integrals.
+
+\emph{Paper~11 (Prolate Spheroidal):} The prolate spheroidal
+coordinate system and Neumann expansion machinery are directly
+applicable to the Coulomb resolution technique for two-center
+integrals.
+
+\emph{Paper~12 (Algebraic $V_{ee}$):} The Neumann expansion of
+$1/r_{12}$ in prolate spheroidal coordinates demonstrates that
+multi-center Coulomb integrals can be decomposed into algebraically
+evaluable components via angular momentum recurrence.
+
+\emph{Paper~14 (Qubit Encoding):} Section~V.E already bounds
+cross-block ERI counts at $\le 2\times$ within-block; Track~CB's
+empirical ratio of 2/3 is tighter.  The coupled Hamiltonian would
+feed directly into the Jordan--Wigner encoding pipeline.
+
+\emph{Paper~16 (Chemical Periodicity):} The $S_N$ representation
+theory and atomic classifier determine the block decomposition.
+Coupled composition uses the same block structure---it changes how
+blocks are coupled, not how they are defined.
+
+\emph{Paper~18 (Exchange Constants):} PK is classified as a
+``calibration exchange constant''---a transcendental quantity that
+enters when projecting between the graph and continuous coordinates.
+If coupled composition eliminates PK, it removes one exchange constant
+from the framework, consistent with the algebraicization program
+(Sec.~XII of Paper~18).
+
+\emph{Track~BX-3b (Cross-Block MP2):} The \texttt{cross\_block\_mp2.py}
+module already computes cross-block ERIs for LiH.  This infrastructure
+would be reused for the cross-block ERI component of the coupled
+Hamiltonian.
+
+
+%% ========================================================================
+\section{Research Path}
+\label{sec:path}
+%% ========================================================================
+
+The following steps are required to test the conjectures of
+Sec.~\ref{sec:architecture}:
+
+\begin{enumerate}
+\item \textbf{Two-center integral implementation.}  Compute the
+  nuclear attraction integrals of Eq.~(\ref{eq:vne_cross}) for
+  hydrogenic orbitals.  Two approaches are available:
+  (a)~direct Shibuya--Wulfman expansion via Clebsch--Gordan
+  coefficients (well-documented but slowly convergent at $S \gtrsim 3$),
+  or (b)~Coulomb resolution via prolate spheroidal decomposition
+  (faster but requires new infrastructure building on Paper~11;
+  note that Paper~12's Neumann expansion handles $V_{ee}$, not
+  $V_{ne}$---the one-electron case is simpler but still requires
+  implementation).
+  \emph{Concrete diagnostic:} compute the Shibuya--Wulfman integrals
+  for the LiH $1s$--$2s$ cross-center case at $R = 3.015$~bohr with
+  the actual heterogeneous exponents ($k_{\mathrm{core}} = 3/1$,
+  $k_{\mathrm{val}} = 1/2$), and measure how many $L$ channels are
+  needed for 1\% relative convergence.
+  \emph{Decision gate:} if $L_{\max} > 5$ is required for 1\%
+  convergence on this simplest case, abort the direct SW route and
+  proceed to Coulomb resolution (approach~b).
+
+\item \textbf{Balanced coupled Hamiltonian.}  Construct the
+  Hamiltonian of Eq.~(\ref{eq:coupled}) with all four interaction
+  types present.  Perform Jordan--Wigner transformation and measure
+  Pauli count, 1-norm, and QWC groups.
+
+\item \textbf{FCI benchmark.}  Diagonalize the coupled Hamiltonian
+  for LiH at $n_{\max} = 2$ ($Q = 30$, 4~electrons).  Compare energy
+  and $R_{\rm eq}$ to exact, to composed (PK), and to Gaussian
+  STO-3G.
+
+\item \textbf{Scaling study.}  If Step~3 is positive, extend to
+  $n_{\max} = 3$ and to BeH$_2$/H$_2$O to verify that the sparsity
+  advantage persists and that accuracy improves for polyatomics.
+\end{enumerate}
+
+The critical risk is Step~1: if the angular expansion requires
+$L_{\max} > 5$ for convergence, the Pauli count will approach the
+full Level~4N encoding and the approach loses its structural advantage.
+The Coulomb resolution route (approach~b) is the fallback if direct
+expansion is too slow.
+
+
+%% ========================================================================
+\section{Discussion}
+\label{sec:discussion}
+%% ========================================================================
+
+The composed framework's PK pseudopotential was a necessary compromise
+for \emph{classical} solvers that could not handle the full
+inter-group Coulomb interaction.  In second quantization on a quantum
+computer, antisymmetry is enforced by the fermionic algebra, not by
+coordinate-space projectors.  The occupation number representation
+naturally prevents double-occupancy without PK.  This suggests that
+PK's \emph{antisymmetry enforcement} role is a classical solver
+artifact.  However, PK also approximates the physical core-valence
+Coulomb interaction energy---this role must be \emph{replaced} by
+explicit inter-block integrals, not simply removed.
+
+Track~CB's negative result confirms this distinction.  The failure
+was not because PK was needed for antisymmetry, but because the
+replacement was incomplete: cross-block $V_{ee}$ was added without
+the balancing cross-center $V_{ne}$.  The 10.9\% error of the fully
+decoupled Hamiltonian (better than PK's 15.0\%) reinforces the
+interpretation that PK overcorrects the Coulomb interaction, but the
+remaining 10.9\% error shows that inter-block coupling \emph{is}
+needed for quantitative accuracy.
+
+A practical concern: Track~CB found that adding cross-block ERIs
+increases the 1-norm from 37.3 to 85.7~Ha.  Even if PK is
+eliminated, the net quantum resource cost could increase if the
+balanced coupled Hamiltonian has higher 1-norm than the composed
+Hamiltonian with PK classically partitioned (Track~BF: electronic-only
+1-norm 33.3~Ha).  The sparsity advantage in Pauli count may be
+partially offset by a 1-norm disadvantage.  This tradeoff must be
+quantified for the balanced Hamiltonian.
+
+The mathematical infrastructure for computing the missing integrals
+exists in the Coulomb Sturmian literature and connects directly to
+GeoVac's $S^3$ foundation.  The open question is convergence: does
+the Shibuya--Wulfman expansion converge fast enough at molecular bond
+lengths to preserve the structural sparsity that is GeoVac's primary
+computational advantage?
+
+If the answer is yes, the composed framework would be superseded by
+coupled composition: same block structure, same Gaunt selection
+rules, same $O(Q^{2.5})$ scaling class, but without PK and with
+significantly better accuracy.  Paper~17's composed architecture
+would then move to the archive, replaced by the coupled composition
+as the production molecular Hamiltonian builder.
+
+If the answer is no, the composed framework with PK remains the
+production architecture, and the accuracy ceiling is accepted as the
+structural cost of maintaining block-diagonal sparsity.  In either
+case, this paper documents the mathematical connections and the
+concrete data (Track~CB census, FCI benchmarks) that define the
+research frontier.
+
+\emph{Relationship to the LCAO negative result.}  The coupled
+composition program reconstructs a multi-center molecular Hamiltonian
+from atom-centered orbitals, which is superficially similar to the
+LCAO approach abandoned in v0.9.x (Section~3 of the project
+guidelines).  The key difference: LCAO used unstructured graph
+concatenation with no natural geometry, producing $R$-independent
+kinetic energies.  Coupled composition retains the natural geometry
+block structure---each electron group inhabits its own optimal
+coordinate system---and Gaunt selection rules enforce sparsity within
+and across blocks.  The block decomposition provides physical
+structure that LCAO lacked.
+
+
+%% ========================================================================
+%% BIBLIOGRAPHY
+%% ========================================================================
+
+\begin{thebibliography}{30}
+
+\bibitem{loutey_paper7}
+J.~Loutey, ``The Dimensionless Vacuum: Conformal Equivalence of
+  Graph and Continuum Quantum Mechanics,'' GeoVac Paper~7 (2025).
+
+\bibitem{loutey_paper11}
+J.~Loutey, ``Prolate Spheroidal Lattice for Diatomic Molecules,''
+  GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper12}
+J.~Loutey, ``Algebraic Two-Electron Integrals on the Prolate
+  Spheroidal Lattice,'' GeoVac Paper~12 (2026).
+
+\bibitem{loutey_paper14}
+J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral
+  Graph Theory,'' GeoVac Paper~14 (2026).
+
+\bibitem{loutey_paper17}
+J.~Loutey, ``Composed Natural Geometries for Core-Valence Diatomics,''
+  GeoVac Paper~17 (2026).
+
+\bibitem{fock1935}
+V.~Fock, ``Zur Theorie des Wasserstoffatoms,''
+  Z.~Phys.\ \textbf{98}, 145 (1935).
+
+\bibitem{shibuya1965}
+T.~I.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum
+  space,'' Proc.\ Roy.\ Soc.\ A \textbf{286}, 376 (1965).
+
+\bibitem{koga1987}
+T.~Koga and T.~Matsuhashi, ``Sum rules for nuclear attraction
+  integrals over hydrogenic orbitals,''
+  J.~Chem.\ Phys.\ \textbf{87}, 4696 (1987).
+
+\bibitem{avery2000}
+J.~Avery, \emph{Hyperspherical Harmonics and Generalized Sturmians}
+  (Kluwer Academic, Dordrecht, 2000).
+
+\bibitem{avery2004}
+J.~Avery, ``Many-center Coulomb Sturmians and Shibuya--Wulfman
+  integrals,'' Int.\ J.\ Quantum Chem.\ \textbf{100}, 121 (2004).
+
+\bibitem{hoggan2011}
+P.~E.~Hoggan, ``How Exponential Type Orbitals Recently Became a Viable
+  Basis Set Choice in Molecular Electronic Structure Work,'' in
+  \emph{Solving the Schr\"odinger Equation: Has Everything Been
+  Tried?}, edited by P.~Popelier (Imperial College Press, 2011),
+  Chap.~7.
+
+\bibitem{avery2012}
+J.~S.~Avery and J.~E.~Avery, ``Coulomb Sturmians as a basis for
+  molecular calculations,'' Mol.\ Phys.\ \textbf{110}, 1593 (2012).
+
+\bibitem{avery2014}
+J.~E.~Avery and J.~S.~Avery, ``Molecular integrals for Slater type
+  orbitals using Coulomb Sturmians,''
+  J.~Math.\ Chem.\ \textbf{52}, 301 (2014).
+
+\bibitem{herbst2018}
+M.~F.~Herbst, J.~E.~Avery, and A.~Dreuw, ``Quantum chemistry with
+  Coulomb Sturmians: Construction and convergence of Coulomb Sturmian
+  basis sets at Hartree--Fock level,'' arXiv:1811.05777 (2018).
+
+\end{thebibliography}
+
+\end{document}

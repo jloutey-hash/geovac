@@ -1,0 +1,40 @@
+{
+  "description": "Track AC: Channel diagnostic data for even-odd staircase analysis",
+  "date": "2026-03-31",
+  "channel_counts": {
+    "1": {"sigma": 2, "pi": 2, "delta": 0, "total_m2": 4, "frozen": 4},
+    "2": {"sigma": 5, "pi": 4, "delta": 2, "total_m2": 11, "frozen": 9},
+    "3": {"sigma": 8, "pi": 10, "delta": 4, "total_m2": 22, "frozen": 12},
+    "4": {"sigma": 13, "pi": 16, "delta": 10, "total_m2": 39, "frozen": 17},
+    "5": {"sigma": 18, "pi": 26, "delta": 16, "total_m2": 60, "frozen": 22},
+    "6": {"sigma": 25, "pi": 36, "delta": 26, "total_m2": 87, "frozen": 29},
+    "7": {"sigma": 32, "pi": 50, "delta": 36, "total_m2": 118, "frozen": 36}
+  },
+  "new_sigma_per_lmax": {
+    "1": [["0,0"], ["1,1"]],
+    "2": [["0,2"], ["2,0"], ["2,2"]],
+    "3": [["1,3"], ["3,1"], ["3,3"]],
+    "4": [["0,4"], ["4,0"], ["2,4"], ["4,2"], ["4,4"]],
+    "5": [["1,5"], ["5,1"], ["3,5"], ["5,3"], ["5,5"]],
+    "6": [["0,6"], ["6,0"], ["2,6"], ["6,2"], ["4,6"], ["6,4"], ["6,6"]],
+    "7": [["1,7"], ["7,1"], ["3,7"], ["7,3"], ["5,7"], ["7,5"], ["7,7"]]
+  },
+  "sigma_only_2d_results": {
+    "2": {"n_ch": 5, "E_min": -1.139195, "D_e_pct": 79.78},
+    "3": {"n_ch": 8, "E_min": -1.140323, "D_e_pct": 80.43},
+    "4": {"n_ch": 13, "E_min": -1.152329, "D_e_pct": 87.31},
+    "5": {"n_ch": 18, "E_min": -1.152478, "D_e_pct": 87.39}
+  },
+  "delta_single_point": {
+    "l_max": 4, "m_max": 2, "n_ch": 39, "R": 1.4,
+    "E_total": -1.164915, "D_e_pct": 94.52, "wall_time_s": 384.3
+  },
+  "dissociation_data": {
+    "R_values": [5.0, 10.0, 15.0, 20.0, 30.0, 50.0],
+    "E_sigma_pi": [-0.941442, -0.728866, -0.576441, -0.381060, -0.092335, 0.024098],
+    "E_sigma": [-0.940255, -0.728711, -0.576409, -0.380994, -0.090147, 0.031325],
+    "note": "R_e_max=15.0 is too small for R > 10 bohr; U_min at grid boundary"
+  },
+  "verdict": "PHYSICS (selection rule effect, not a bug)",
+  "staircase_explanation": "Even l_max adds (0,L) and (L,0) channels with strong nuclear coupling to (0,0); odd l_max adds only (l,L) cross-terms with weaker coupling. Pi channels are decoupled from sigma in angular equation."
+}

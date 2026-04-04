@@ -1,0 +1,30 @@
+{
+  "H2_STO-3G": {
+    "n_qubits": 4,
+    "n_pauli": 15,
+    "1_norm": 1.984064285714286,
+    "description": "H2 STO-3G at R=1.4 bohr (Szabo & Ostlund)",
+    "fci_energy": -1.1373
+  },
+  "He_STO-3G": {
+    "n_qubits": 2,
+    "n_pauli": 4,
+    "1_norm": 3.375,
+    "description": "He STO-3G (zeta=1.6875, analytical STO integrals)",
+    "fci_energy": -2.84765625
+  },
+  "He_cc-pVDZ": {
+    "n_qubits": 10,
+    "n_pauli": 156,
+    "1_norm": 42.95408900000003,
+    "description": "He cc-pVDZ [2s1p], 5 spatial orbitals (computed)",
+    "fci_energy": -2.8875948311
+  },
+  "He_cc-pVTZ": {
+    "n_qubits": 28,
+    "n_pauli": 21607,
+    "1_norm": 530.4729023103722,
+    "description": "He cc-pVTZ [3s2p1d], 14 spatial orbitals (computed)",
+    "fci_energy": -2.900232169016714
+  }
+}

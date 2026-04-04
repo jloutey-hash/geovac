@@ -1,0 +1,50 @@
+{
+  "system": "LiH",
+  "max_n": 2,
+  "n_grid": 2000,
+  "Q": 30,
+  "M": 15,
+  "N_pauli_coupled": 854,
+  "N_pauli_composed": 334,
+  "pauli_ratio": 2.55688622754491,
+  "one_norm_coupled": 85.69206193342283,
+  "one_norm_composed": 37.33424576695508,
+  "one_norm_ratio": 2.2952669907495427,
+  "n_qwc_coupled": 88,
+  "n_qwc_composed": 21,
+  "qwc_ratio": 4.190476190476191,
+  "cross_block_eri_count": 130,
+  "within_block_eri_count": 195,
+  "cross_within_ratio": 0.6666666666666666,
+  "cross_block_partial_1norm": 18.418292047911198,
+  "pk_removed_1norm": 10.61871893064162,
+  "cross_block_details": [
+    {
+      "block_i": 0,
+      "block_j": 1,
+      "label_i": "Li_core",
+      "label_j": "LiH_bond_Li",
+      "n_cross_eri": 130,
+      "wall_time_s": 1.4596007999498397,
+      "max_magnitude": 0.890657477122121,
+      "mean_magnitude": 0.1416791695993169
+    }
+  ],
+  "fci": {
+    "exact_diag": true,
+    "E_coupled": -14.137830653331424,
+    "eigenvalues": [
+      -14.137830653331424,
+      -12.009404208329315,
+      -11.897342771161401,
+      -11.844992864785315,
+      -11.815478887311418,
+      -11.793609610651973
+    ],
+    "n_electrons": 2,
+    "n_det": 225,
+    "E_composed": -14.1378306533314,
+    "E_no_pk_no_cross": -14.137830653331404
+  },
+  "wall_time_s": 5.048379800049588
+}

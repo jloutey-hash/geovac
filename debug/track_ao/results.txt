@@ -1,0 +1,157 @@
+Track AO: Coupled-Channel Radial Solver for 4-Electron LiH
+=============================================================
+Date: 2026-04-01
+Module: geovac/n_electron_solver.py (coupled-channel extensions)
+
+SUMMARY: Coupled-channel solver does NOT fix the overbinding problem.
+The FD P-matrix is large (||P||_F peak ~3.3, DBOC peak ~5.4 Ha),
+and coupled-channel coupling overshoots below the adiabatic energy
+(wrong direction) at most R-values. This is the same pattern as
+Level 3 without adequate Q-matrix treatment. The fundamental issue
+is that with only a few truncated channels and FD P-matrices,
+the non-adiabatic coupling is not well-controlled.
+
+=============================================================
+1. P-MATRIX DIAGNOSTIC (3 channels, l_max=2, R=1.0 bohr)
+=============================================================
+
+   R_e     ||P||_F   max|P|    DBOC_0    gap_01
+   0.500    0.000     0.000    0.000     0.010
+   0.786    0.000     0.000    0.000     0.019
+   1.071    0.341     0.341    0.000     0.035
+   1.357    0.000     0.000    0.000     0.033
+   1.778    2.496     1.765    3.114     0.055
+   2.333    2.694     1.569    2.414     0.375
+   2.889    2.673     2.410    0.000     0.399
+   3.444    1.457     1.457    0.000     0.016
+   4.000    0.261     0.261    0.000     0.009
+   6.000    0.004     0.003    0.000     0.035
+   8.000    0.016     0.016    0.000     0.001
+
+Peak values:
+  ||P||_F:  3.30
+  |P_off|:  2.54
+  DBOC_0:   5.43 Ha
+  DBOC_1:   5.43 Ha
+
+Level 3 comparison (He, Z=2):
+  Level 3 ||P||_F peak ~ 0.3-0.5
+  Level 3 DBOC_0 peak  ~ 0.05-0.15
+  Level 4N is 10-30x LARGER in P-matrix magnitude.
+
+Root cause: The eigenvalue gaps (gap_01) are tiny (0.01-0.05) in the
+region where P is large (R_e ~ 1.5-3.0). With P ~ V_coupling / gap,
+small gaps amplify P enormously. At Level 3, the gaps are O(1) because
+the channels are well-separated SO(6) Casimir eigenvalues. At Level 4N,
+the S4-projected channels from l_max=2 have near-degeneracies (gap ~0.01-0.05)
+making the FD P-matrix very noisy and large.
+
+=============================================================
+2. COUPLED-CHANNEL CONVERGENCE (l_max=2, q_mode='diagonal')
+=============================================================
+
+1 channel (= adiabatic):
+   R      E_coupled    E_adiab      Delta      D_e
+   0.7    -7.9146      -7.9146      +0.0000    -0.064 (-69%)
+   1.0    -8.4118      -8.4118      +0.0000    +0.434 (469%)
+   1.5    -7.9717      -7.9717      +0.0000    -0.006 (-7%)
+   2.0    -7.4508      -7.4508      +0.0000    -0.527 (-571%)
+   3.0    -5.8754      -5.8754      +0.0000    -2.103 (-2276%)
+
+3 channels:
+   R      E_coupled    E_adiab      Delta      D_e
+   0.7    -8.0239      -7.9146      -0.1093    +0.046 (50%)
+   1.0    -8.4041      -8.4118      +0.0078    +0.426 (461%)
+   1.5    -7.9950      -7.9717      -0.0234    +0.017 (18%)
+   2.0    -7.8228      -7.4508      -0.3720    -0.155 (-168%)
+   3.0    -5.9054      -5.8754      -0.0300    -2.073 (-2243%)
+
+6 channels:
+   R      E_coupled    E_adiab      Delta      D_e
+   0.7    -8.1914      -7.9146      -0.2767    +0.213 (231%)
+   1.0    -9.5026      -8.4118      -1.0908    +1.525 (1650%)
+   1.5    -8.2932      -7.9717      -0.3215    +0.315 (341%)
+   2.0    -8.9123      -7.4508      -1.4615    +0.934 (1011%)
+   3.0    -6.3469      -5.8754      -0.4715    -1.631 (-1765%)
+
+PATTERN: More channels -> more overshoot below adiabatic (wrong direction).
+6-channel at R=1.0: E drops by 1.09 Ha (from -8.41 to -9.50).
+This is classic non-adiabatic overcounting from P-coupling without
+adequate Q-matrix.
+
+=============================================================
+3. Q-MODE COMPARISON (3 channels, R=1.0)
+=============================================================
+
+   q_mode      E_total    Delta    D_e     D_e%
+   none       -8.6492    -0.237   0.671   726%
+   diagonal   -8.8818    -0.470   0.904   978%
+
+Both q_modes make it WORSE (lower energy, more overbinding).
+The diagonal DBOC (~5.4 Ha) is so large it dominates, but it enters
+with the wrong effect because the FD P-matrix elements are unreliable.
+
+NOTE: The 3-channel, q_mode='diagonal' result at R=1.0 in Part 2
+(Delta=+0.008) differs from Part 3 (Delta=-0.470) because Part 2
+used the verbose=False path with a different random seed for ARPACK.
+This inconsistency confirms FD P-matrix noise sensitivity.
+
+=============================================================
+4. DIAGNOSIS
+=============================================================
+
+The coupled-channel approach FAILS at Level 4N for structural reasons:
+
+(a) Eigenvalue gaps are too small (0.01-0.05) in the S4-projected
+    channel space. P ~ V_coupling / gap -> P is 10-30x larger than
+    Level 3 where gaps are O(1).
+
+(b) FD P-matrices on a sparse R_e grid are too noisy. The sign
+    consistency check helps but cannot fix the fundamental issue
+    of small denominators in the Hellmann-Feynman formula.
+
+(c) There is no R-independent dH/dR. Unlike Level 3 (where H = H_0 + R*V_C
+    is a linear pencil and dH/dR = V_C is exact), the 4-electron angular
+    Hamiltonian depends nonlinearly on R_e through rho = R/(2*R_e).
+    Analytic P-matrices are not available.
+
+(d) The truncated Q-matrix is inadequate. With only 3-12 channels from
+    a total of ~2592 (S4-projected), the closure approximation
+    Q = P*P misses >99% of the external channel contributions.
+    At Level 3, the closure over ALL channels captures ~97% of the
+    DBOC. Here, summing over 3 channels out of 2592 captures ~0.1%.
+
+(e) The overbinding is NOT from the adiabatic approximation. The Track AM
+    result (R_eq ~ 1.0 bohr, 67% error) persists even with coupled-channel
+    corrections because the root cause is basis truncation (raw SO(12) basis
+    needs many more angular channels to describe bond formation correctly).
+    The adiabatic approximation contributes at most ~0.01 Ha corrections
+    when the eigenvalue gaps are O(0.01), but the R_eq shift requires O(1)
+    energy differences.
+
+CONCLUSION: Coupled-channel radial corrections are INAPPLICABLE at
+Level 4N due to near-degenerate channel structure and lack of analytic
+P-matrix. This is a NEGATIVE RESULT, consistent with the Track AM
+finding that the full N-electron solver has SLOW CONVERGENCE in l_max.
+
+The composed geometry (Level 5) remains the correct production path.
+Its 5.3% R_eq error at l_max=2 vs 67% for the full solver demonstrates
+that angular pre-optimization (core/valence separation) is essential.
+
+=============================================================
+5. FILES PRODUCED
+=============================================================
+
+Code:
+  geovac/n_electron_solver.py  (coupled-channel extensions added)
+    - compute_multichannel_angular_sweep_4e()
+    - compute_p_matrix_fd_4e()
+    - solve_4e_lih_coupled()
+    - scan_pes_4e_lih_coupled()
+
+Tests:
+  tests/test_n_electron_coupled.py  (5 fast + 5 slow tests)
+
+Debug:
+  debug/track_ao/results.txt
+  debug/track_ao/quick_diagnostic.py

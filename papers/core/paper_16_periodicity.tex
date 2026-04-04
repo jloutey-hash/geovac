@@ -1,0 +1,815 @@
+% paper_16_periodicity.tex — GeoVac Paper 16
+% Chemical Periodicity as S_N Representation Theory on S^{3N-1}
+% Status: Draft, March 18, 2026
+% Target: Journal of Chemical Physics or Physical Review Letters
+\documentclass[aps,prl,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newcommand{\Nelectron}{N}
+\newcommand{\mufree}{\mu_{\mathrm{free}}}
+\newcommand{\neff}{n_{\mathrm{eff}}}
+\newcommand{\leff}{l_{\mathrm{eff}}}
+\newcommand{\Zeff}{Z_{\mathrm{eff}}}
+\newcommand{\Ha}{\,\mathrm{Ha}}
+\newcommand{\eV}{\,\mathrm{eV}}
+
+\begin{document}
+
+\title{The Periodic Table Recast as $S_N$ Representation Theory\\
+on $S^{3N-1}$}
+\thanks{Paper 16 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{March 18, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The non-relativistic $N$-electron Schr\"odinger equation, after
+separation of the hyperradius, reduces to angular dynamics on the
+hypersphere $S^{3N-1}$.  The angular kinetic energy is the
+$\mathrm{SO}(3N)$ Casimir operator with eigenvalue
+$\mufree = \nu(\nu + 3N - 2)/2$.  Fermionic antisymmetry restricts
+the spatial wavefunction to a specific $S_N$ irreducible
+representation---the conjugate of the spin Young diagram---whose
+first-column length $\lambda_1$ fixes the minimum angular quantum
+number $\nu = N - \lambda_1$.  For all atoms with ground-state spin
+$S < N/2$, the spatial irrep has $\lambda_1 = 2$, giving the
+universal result $\nu = N - 2$ and $\mufree = 2(N-2)^2$.  This
+formula, combined with the structure of the $S_N$ irrep, yields a
+classification of atoms into four types---A (trivial), B~(noble gas),
+C~(alkali), D~(alkaline earth)---that recasts the periodic table's
+group structure in representation-theoretic language.  The periodic law
+corresponds to the repetition of the $S_N$ irrep sequence
+$\mathrm{C} \to \mathrm{D} \to \cdots \to \mathrm{B}$ within each
+period.  This classification maps onto, rather than predicts, the
+known periodic table structure; its value lies in providing a
+unified group-theoretic framework for a pattern that is usually
+described empirically.  In the per-pair limit, $\mufree$
+contributes exactly~4 units of angular momentum per antisymmetric
+electron pair as $N \to \infty$.  We show that the topological
+structure ($\nu$, $\mufree$) is smooth through $Z = 1/\alpha \approx
+137$ and that the Dirac instability is a \emph{metric} singularity on
+$S^{3N-1}$, not a topological one.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+%% I. INTRODUCTION
+%% ========================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+The periodic table of elements, established empirically by Mendeleev
+in 1869~\cite{Mendeleev1869}, received its first theoretical
+justification from quantum mechanics through the shell model and the
+aufbau principle.  The $2n^2$ orbital counting rule, the grouping of
+elements by valence shell, and the progression of ionization energies
+across a period are all consequences of the hydrogen-like
+Schr\"odinger equation and its multi-electron extensions.
+
+Despite this success, the periodic law itself---the recurrence of
+chemical properties with increasing atomic number---has not been
+derived from a single mathematical principle.  Shell-filling rules are
+empirical (the Madelung rule has exceptions), Hund's rules require
+separate justification, and the distinction between noble gases, alkali
+metals, and transition metals is described rather than predicted.
+
+In this paper, we show that the periodic table's group structure
+can be recast in the language of $S_N$ representation theory acting
+on the spatial part of the $N$-electron wavefunction on the
+hypersphere $S^{3N-1}$.  The key results are:
+
+\begin{enumerate}
+  \item The ground-state angular quantum number is universally $\nu =
+    N - 2$ for atoms with spin $S < N/2$ (Sec.~\ref{sec:framework}).
+  \item The Pauli centrifugal cost $\mufree = 2(N-2)^2$ grows
+    quadratically, contributing exactly~4 units per electron pair in
+    the large-$N$ limit (Sec.~\ref{sec:mu_formula}).
+  \item The shape of the $S_N$ irrep classifies atoms into chemical
+    types that recast the group structure of the periodic table in
+    representation-theoretic language
+    (Sec.~\ref{sec:classification}).
+  \item The periodic law corresponds to the repetition of $S_N$ irrep
+    sequences (Sec.~\ref{sec:periodic_law}).
+  \item The Dirac instability at $Z\alpha \to 1$ is a metric
+    singularity, not a topological one; the representation theory
+    is smooth through $Z = 137$
+    (Sec.~\ref{sec:topology_vs_metric}).
+\end{enumerate}
+
+%% ========================================================================
+%% I-B. WHAT IS NEW VS. WHAT IS KNOWN
+%% ========================================================================
+
+\section{What is New vs.\ What is Known}
+\label{sec:new_vs_known}
+
+Several ingredients of the present analysis are standard; it is
+important to distinguish them from the new contributions.
+
+\subsection{Known results}
+
+\begin{itemize}
+  \item \textbf{Hyperspherical formulation.}  The separation of the
+    $N$-electron Schr\"odinger equation into hyperradial and angular
+    parts on $S^{3N-1}$, and the identification of the angular kinetic
+    energy with the $\mathrm{SO}(3N)$ Casimir, are
+    established~\cite{Avery2000, Fock1954}.
+
+  \item \textbf{$S_N$ representation theory for fermions.}  The use of
+    Young diagrams and Schur--Weyl duality to classify spatial--spin
+    factorizations of antisymmetric wavefunctions is textbook
+    material~\cite{Weyl1946, FultonHarris1991}.
+
+  \item \textbf{The Casimir eigenvalue formula.}  The expression
+    $\mufree = \nu(\nu + 3N - 2)/2$ follows directly from the
+    standard $\mathrm{SO}(3N)$ representation theory.
+
+  \item \textbf{The periodic table itself.}  The classification of
+    elements into noble gases, alkali metals, alkaline earths, and
+    transition metals is an empirical fact that guided the
+    construction presented here.
+\end{itemize}
+
+\subsection{New contributions}
+
+\begin{enumerate}
+  \item \textbf{The universal $\nu = N - 2$ result.}  Theorem~1 shows
+    that, for all ground-state atoms with $S < N/2$, the spatial
+    irrep has first-column length $\lambda_1 = 2$, yielding the
+    universal angular quantum number $\nu = N - 2$ and $\mufree =
+    2(N-2)^2$.  This specific identification appears to be new.
+
+  \item \textbf{The four-type classification (A/B/C/D).}  The
+    observation that the $S_N$ irrep shape naturally partitions atoms
+    into types that map onto the periodic table's group structure
+    provides a group-theoretic reformulation of the empirical pattern.
+
+  \item \textbf{The per-pair angular momentum limit.}  The result that
+    $\mufree / \binom{N}{2} \to 4$ as $N \to \infty$---each
+    antisymmetric electron pair contributes exactly~4 units of
+    angular momentum---connects the periodic pattern to a
+    quantitative angular momentum budget.
+
+  \item \textbf{The Dirac instability as metric vs.\ topological
+    singularity.}  The analysis showing that $\nu$, $\mufree$, and
+    the $S_N$ irrep are smooth through $Z = 137$ while the metric
+    diverges clarifies the nature of the upper limit on the periodic
+    table.
+\end{enumerate}
+
+%% ========================================================================
+%% III. THE HYPERSPHERICAL FRAMEWORK
+%% ========================================================================
+
+\section{The Hyperspherical Framework}
+\label{sec:framework}
+
+\subsection{Configuration space and angular dynamics}
+\label{sec:config}
+
+Consider $N$ electrons in a central potential $V(r_1, \ldots, r_N)$.
+After extracting the center-of-mass motion, the configuration space is
+$\mathbb{R}^{3N}$.  Introducing hyperspherical coordinates
+$(R, \hat{\Omega})$ where $R = \sqrt{\sum_i r_i^2}$ is the
+hyperradius and $\hat{\Omega} \in S^{3N-1}$ collects $3N-1$ angular
+variables, the kinetic energy separates as~\cite{Avery2000,
+Fock1954}:
+\begin{equation}
+  T = -\frac{1}{2}\left(\frac{\partial^2}{\partial R^2}
+    + \frac{3N-1}{R}\frac{\partial}{\partial R}
+    - \frac{\Lambda^2}{R^2}\right),
+  \label{eq:kinetic}
+\end{equation}
+where $\Lambda^2$ is the grand angular momentum operator---the
+Laplace--Beltrami operator on $S^{3N-1}$.  Its eigenvalues are the
+$\mathrm{SO}(3N)$ Casimir invariants:
+\begin{equation}
+  \Lambda^2 Y_\nu = \nu(\nu + 3N - 2)\, Y_\nu \equiv 2\mufree\, Y_\nu,
+  \label{eq:casimir}
+\end{equation}
+with $\nu = 0, 1, 2, \ldots$ and hyperspherical harmonics $Y_\nu$.
+The effective angular momentum quantum numbers are
+\begin{equation}
+  \leff = \frac{3N - 3}{2}, \quad \neff = \frac{3N - 1}{2}.
+  \label{eq:eff_qn}
+\end{equation}
+
+The centrifugal barrier in the hyperradial equation is
+$\leff(\leff + 1)/R^2 = (3N-3)(3N-1)/(4R^2)$, showing that even in
+the lowest angular channel, $N$-electron atoms face a centrifugal cost
+that grows as $\sim 9N^2/4$.
+
+\subsection{Fermionic antisymmetry and $S_N$ irreps}
+\label{sec:sn_irreps}
+
+The total wavefunction must be antisymmetric under $S_N$ (permutation
+of electrons).  Since the total state factorizes as $|\Psi\rangle =
+|\text{spatial}\rangle \otimes |\text{spin}\rangle$, the spatial and
+spin parts must carry conjugate $S_N$ irreducible representations.
+
+For $N$ spin-1/2 fermions with total spin $S$, the spin irrep is a
+Young diagram with at most two rows: $[n_\uparrow, n_\downarrow]$
+where $n_\uparrow = N/2 + S$ and $n_\downarrow = N/2 - S$.  By
+Schur--Weyl duality~\cite{Weyl1946, FultonHarris1991}, the spatial
+irrep is the \emph{conjugate} (transposed) Young diagram.
+
+\noindent\textbf{Theorem 1} (Universal $\lambda_1$).
+\label{thm:lambda1}
+\textit{For any $N$-electron atom with ground-state spin $S < N/2$, the
+spatial Young diagram has first-column length $\lambda_1 = 2$.}
+
+\medskip\noindent\textit{Proof.}
+The spin diagram has two rows: $[n_\uparrow, n_\downarrow]$ with
+$n_\downarrow \geq 1$ (since $S < N/2$ implies $n_\downarrow > 0$).
+The conjugate diagram has $n_\downarrow$ columns of height~2 and
+$n_\uparrow - n_\downarrow = 2S$ columns of height~1.  Therefore the
+first column has height $\lambda_1 = 2$, independent of $S$ (provided
+$S < N/2$). \hfill$\square$
+
+\subsection{The ground-state angular quantum number}
+\label{sec:nu_gs}
+
+The minimum $\nu$ compatible with a given $S_N$ irrep is determined by
+the constraint that the hyperspherical harmonic $Y_\nu$ must transform
+in that irrep under particle permutations.  For the spatial irrep with
+first-column length $\lambda_1$, the minimum angular excitation
+is~\cite{Avery2000}:
+\begin{equation}
+  \nu_{\min} = N - \lambda_1.
+  \label{eq:nu_min}
+\end{equation}
+
+By Theorem~\ref{thm:lambda1}, all atoms with $S < N/2$ have
+\begin{equation}
+  \boxed{\nu = N - 2}
+  \label{eq:nu_universal}
+\end{equation}
+as their ground-state angular quantum number.  This is a
+\emph{universal} result: it depends only on the electron count $N$,
+not on the nuclear charge $Z$, the spin $S$ (provided $S < N/2$), or
+any details of the electron configuration.
+
+The sole exception is the maximally polarized state $S = N/2$ (all
+spins parallel), which has $\lambda_1 = N$ and $\nu = 0$.  This state
+is completely symmetric in space and carries zero angular momentum---it
+is the Laughlin-like state with no Pauli nodes.
+
+%% ========================================================================
+%% III. THE mu_free FORMULA
+%% ========================================================================
+
+\section{The $\mufree$ Formula}
+\label{sec:mu_formula}
+
+Substituting $\nu = N - 2$ into Eq.~(\ref{eq:casimir}):
+\begin{align}
+  \mufree &= \frac{\nu(\nu + 3N - 2)}{2}
+           = \frac{(N-2)(N - 2 + 3N - 2)}{2} \notag \\
+          &= \frac{(N-2)(4N-4)}{2}
+           = \boxed{2(N-2)^2}.
+  \label{eq:mu_formula}
+\end{align}
+
+This is the \emph{Pauli centrifugal cost}: the minimum angular kinetic
+energy imposed by fermionic antisymmetry on $S^{3N-1}$.
+
+\subsection{Asymptotic behavior}
+\label{sec:asymptotic}
+
+Several limits of Eq.~(\ref{eq:mu_formula}) are physically
+informative:
+
+\begin{enumerate}
+  \item \textbf{Per-electron scaling.}  $\mufree / N^2 = 2 - 8/N +
+    8/N^2 \to 2$ as $N \to \infty$.
+
+  \item \textbf{Per-pair scaling.}  The number of electron pairs is
+    $\binom{N}{2} = N(N-1)/2$.  The Pauli cost per pair is
+    \begin{equation}
+      \frac{\mufree}{\binom{N}{2}}
+        = \frac{4(N-2)^2}{N(N-1)} \longrightarrow 4
+        \quad (N \to \infty).
+      \label{eq:per_pair}
+    \end{equation}
+    Each antisymmetric electron pair contributes exactly~4 units
+    of angular momentum to the ground-state Casimir.
+
+  \item \textbf{Excitation fraction.}  The ratio $\nu/(3N-2) =
+    (N-2)/(3N-2) \to 1/3$ monotonically from below.  The ground state
+    always sits at approximately one-third of the natural angular
+    scale of the sphere, regardless of $N$.
+
+  \item \textbf{Fractional ionization cost.}  Removing one electron
+    changes the sphere dimension by $3/(3N-1) \to 0$.  For heavy
+    atoms, ionization is a \emph{small perturbation} to the angular
+    topology.
+\end{enumerate}
+
+Table~\ref{tab:mu_values} collects these quantities for atoms across
+the periodic table.
+
+\begin{table}[h]
+\centering
+\caption{Ground-state hyperspherical parameters for neutral atoms
+($S < N/2$).  $\nu = N-2$, $\mufree = 2(N-2)^2$, and the asymptotic
+ratios $\mufree/N^2 \to 2$, $\mufree/\binom{N}{2} \to 4$,
+$\nu/(3N-2) \to 1/3$.}
+\label{tab:mu_values}
+\begin{tabular}{lrrrrrc}
+\toprule
+Atom & $N$ & $S^{3N-1}$ & $\nu$ & $\mufree$ & $\mufree/N^2$ & Type \\
+\midrule
+H     &   1 & $S^2$    &   0 &       0 & 0.00 & A \\
+He    &   2 & $S^5$    &   0 &       0 & 0.00 & B \\
+Li    &   3 & $S^8$    &   1 &       2 & 0.22 & C \\
+Be    &   4 & $S^{11}$ &   2 &       8 & 0.50 & D \\
+N     &   7 & $S^{20}$ &   5 &      50 & 1.02 & E \\
+Ne    &  10 & $S^{29}$ &   8 &     128 & 1.28 & B \\
+Na    &  11 & $S^{32}$ &   9 &     162 & 1.34 & C \\
+Mg    &  12 & $S^{35}$ &  10 &     200 & 1.39 & D \\
+Ar    &  18 & $S^{53}$ &  16 &     512 & 1.58 & B \\
+Kr    &  36 & $S^{107}$&  34 &   2312 & 1.78 & B \\
+Xe    &  54 & $S^{161}$&  52 &   5408 & 1.85 & B \\
+Rn    &  86 & $S^{257}$&  84 &  14112 & 1.91 & B \\
+Og    & 118 & $S^{353}$& 116 &  26912 & 1.93 & B \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% ========================================================================
+%% IV. STRUCTURE TYPE CLASSIFICATION
+%% ========================================================================
+
+\section{Structure Type Classification}
+\label{sec:classification}
+
+While $\nu = N - 2$ and $\mufree = 2(N-2)^2$ are universal, the
+\emph{shape} of the $S_N$ irrep varies with the electron
+configuration.  This shape encodes the internal structure of the
+atom---how the $N$~electrons partition into core and valence.
+
+We define four structure types based on the spatial Young diagram:
+
+\subsection{Type A: Trivial ($N = 1$)}
+
+The hydrogen atom has a single electron.  The trivial irrep $[1]$ of
+$S_1$ gives $\lambda_1 = 1$, $\nu = 0$, $\mufree = 0$.  There is no
+Pauli constraint.  The wavefunction lives on $S^2$ (a single
+electron's angular space).
+
+\subsection{Type B: Noble gas (democratic structure)}
+
+Noble gases have closed-shell ground states with $S = 0$.  The spin
+diagram is $[N/2,\, N/2]$ and the spatial irrep is its conjugate:
+$[2, 2, \ldots, 2]$ ($N/2$ rows of length~2).
+
+This is the most \emph{democratic} irrep: all columns have the same
+height.  No electron is distinguished.  The wavefunction has the full
+point-group symmetry of the Young diagram, and ionization requires
+breaking this symmetry---a costly operation reflected in the high
+ionization energies of noble gases (He:~$24.6\eV$, Ne:~$21.6\eV$,
+Ar:~$15.8\eV$).
+
+\subsection{Type C: Alkali metal (hierarchical structure)}
+
+Alkali metals have one valence electron outside a noble-gas core, with
+$S = 1/2$.  The spin diagram is $[(N+1)/2, \,(N-1)/2]$ and the
+spatial irrep is $[2, 2, \ldots, 2, 1]$ ($= [2^{(N-1)/2}, 1]$).
+
+This is a \emph{hierarchical} irrep: one column (the valence electron)
+is shorter than the rest.  The wavefunction has a natural
+decomposition into a symmetric core and a weakly bound valence
+electron.  Ionization removes the short column---a topologically clean
+surgery on $S^{3N-1}$:
+\begin{equation}
+  S^{3N-1} \to S^{3(N-1)-1} \times \mathbb{R}.
+  \label{eq:ionization_surgery}
+\end{equation}
+The low cost of this surgery explains the low ionization energies
+of alkali metals (Li:~$5.4\eV$, Na:~$5.1\eV$, K:~$4.3\eV$).
+
+\subsection{Type D: Alkaline earth (core + pair)}
+
+Alkaline earth metals have two valence electrons outside a noble-gas
+core, with $S = 0$.  The spatial irrep is $[2, 2, \ldots, 2]$ (same
+shape as Type~B) but the \emph{occupancy pattern} distinguishes the
+core from the two valence electrons.
+
+The ionization energy is intermediate (Be:~$9.3\eV$, Mg:~$7.6\eV$,
+Ca:~$6.1\eV$)---higher than alkali metals (the valence pair is harder
+to break) but lower than noble gases (the valence pair is still
+distinguishable from the core).
+
+Table~\ref{tab:types} summarizes the classification.
+
+\begin{table}[h]
+\centering
+\caption{Structure type classification.  The spatial Young diagram is
+the conjugate of the spin diagram.  IE$_1$ is the first ionization
+energy (experimental).}
+\label{tab:types}
+\begin{tabular}{cllcr}
+\toprule
+Type & Spatial irrep & Chemistry & Examples & IE$_1$ range \\
+\midrule
+A & $[1]$       & Monatomic       & H            & $13.6\eV$ \\
+B & $[2^{N/2}]$ & Noble gas       & He, Ne, Ar   & $15$--$25\eV$ \\
+C & $[2^{(N-1)/2}, 1]$ & Alkali  & Li, Na, K    & $4$--$5\eV$ \\
+D & $[2^{N/2}]$ & Alkaline earth  & Be, Mg, Ca   & $6$--$9\eV$ \\
+E & Various     & Open shell      & B--F, d-block& $8$--$17\eV$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% ========================================================================
+%% V. THE PERIODIC LAW AS IRREP SEQUENCE
+%% ========================================================================
+
+\section{The Periodic Law as Irrep Sequence}
+\label{sec:periodic_law}
+
+The periodic table's group structure arises because the sequence of
+$S_N$ structure types \emph{repeats} with each period.  Within a given
+period (defined by the outermost principal quantum number $n$), the
+element sequence is:
+\begin{equation}
+  \mathrm{C} \to \mathrm{D} \to \underbrace{\mathrm{E} \to \cdots \to
+  \mathrm{E}}_{p\text{- and }d\text{-block}} \to \mathrm{B}.
+  \label{eq:period_sequence}
+\end{equation}
+Each period begins with an alkali metal (Type~C: one electron in the
+new shell) and ends with a noble gas (Type~B: closed shell).  The
+intermediate elements (Type~E) have partially filled subshells with
+varying spin and Young diagram shapes.
+
+In group-theoretic language, the periodic law can be understood as
+follows:
+\begin{quote}
+\emph{The chemical properties of elements are periodic functions of
+atomic number because the sequence of $S_N$ spatial irreps repeats
+whenever a new principal shell begins filling.}
+\end{quote}
+This is a reformulation, not a derivation from first principles: the
+shell-filling order itself (which determines where the sequence
+repeats) is an empirical input, not a consequence of $S_N$
+representation theory alone.
+
+The key distinction between Types~B and~D is worth emphasizing.
+Both have the same Young diagram shape $[2^{N/2}]$, but they differ
+in the \emph{occupancy pattern}: Type~B fills all available subshells,
+while Type~D has two electrons in a new shell above a closed core.
+This distinction is invisible at Level~1 (representation theory) and
+becomes visible only at Level~2 (the perturbative energy, which
+depends on $Z$, orbital angular momenta, and electron--electron
+repulsion).
+
+\subsection{Isoelectronic series}
+\label{sec:isoelectronic}
+
+Atoms with the same $N$ but different $Z$ share identical $S_N$ irreps
+and structure types.  The 10-electron series
+\begin{equation}
+  \text{Ne},\ \text{Na}^+,\ \text{Mg}^{2+},\ \text{Al}^{3+},\ \ldots
+\end{equation}
+all have the Type~B spatial irrep $[2,2,2,2,2]$ with $\nu = 8$ and
+$\mufree = 128$.  Their chemistry differs only through the nuclear
+charge~$Z$, which enters at Level~2.  This cleanly separates
+\emph{topology} (same for the series) from \emph{potential} (varies
+with $Z$).
+
+\subsection{Topology flow: ionization as surgery}
+\label{sec:topology_flow}
+
+Ionization changes the electron count $N \to N - 1$, transforming the
+configuration space via Eq.~(\ref{eq:ionization_surgery}).  This is a
+codimension-3 surgery that removes three dimensions (one electron's
+$\mathbb{R}^3$) from the hypersphere.  The fractional dimension loss
+is $3/(3N-1)$, which decreases monotonically:
+\begin{equation}
+  \frac{3}{3N - 1} \to 0 \quad (N \to \infty).
+\end{equation}
+For heavy atoms, ionization is a negligible topological perturbation.
+This correlates with the empirical observation that ionization energies
+decrease down a group: removing one electron from $S^{353}$ (Og) is
+geometrically less disruptive than removing one from $S^5$ (He).
+
+%% ========================================================================
+%% VI. TWO-LEVEL SEPARATION
+%% ========================================================================
+
+\section{Topology versus Metric: Two-Level Structure}
+\label{sec:topology_vs_metric}
+
+The preceding analysis reveals a clean two-level separation:
+
+\begin{itemize}
+  \item \textbf{Level 1 (Topological).}  The quantities $\nu$,
+    $\mufree$, the $S_N$ irrep, and the structure type depend only
+    on the electron count $N$ and the total spin $S$.  They are
+    independent of $Z$, the orbital angular momenta, and all
+    details of the electron--electron interaction.  They are
+    \emph{universal}.
+
+  \item \textbf{Level 2 (Perturbative/Metric).}  The binding energy,
+    ionization energy, electron configuration, and Hund's rules all
+    depend on $Z$, the fine-structure constant $\alpha$, and the
+    shape of the potential.  These quantities determine the
+    \emph{chemistry} within a given topological class.
+\end{itemize}
+
+An important consequence: \emph{Hund's first rule is not a topological
+effect.}  Since $\lambda_1 = 2$ for all spatial irreps with $S < N/2$,
+the angular quantum number $\nu = N - 2$ is independent of the spin
+value.  The preference for high-spin ground states (Hund's first rule)
+enters through the perturbative Coulomb and exchange integrals at
+Level~2, not through a reduction of $\nu$ at Level~1.
+
+\subsection{The Dirac limit as metric singularity}
+\label{sec:dirac_limit}
+
+The Dirac equation for hydrogen-like atoms predicts that the 1s
+binding energy diverges at $Z\alpha = 1$ ($Z \approx 137$ for a point
+nucleus):
+\begin{equation}
+  E_{\mathrm{1s}}^{\mathrm{Dirac}}
+    = mc^2 \left(\sqrt{1 - (Z\alpha)^2} - 1\right).
+  \label{eq:dirac_1s}
+\end{equation}
+Does this ``Dirac dive'' have a topological signature on $S^{3N-1}$?
+
+At $N = 137$: $\nu = 135$, $\mufree = 36{,}450$, and $\nu/(3N-2) =
+0.3301$.  All formulas are perfectly smooth.  The excitation fraction
+approaches $1/3$ from below with no singularity, no phase transition,
+and no special structure at $N = 137$.
+
+The Dirac instability is instead a \emph{metric} effect.  The
+non-relativistic Fock projection yields the round metric on $S^3$.
+Relativistic corrections warp this metric by a conformal factor
+\begin{equation}
+  \delta_{\mathrm{1s}} = \frac{(Z\alpha)^2}{1 - (Z\alpha)^2},
+  \label{eq:metric_correction}
+\end{equation}
+which diverges at $Z\alpha \to 1$.  This ``pinch'' is a conical
+singularity at the nuclear pole of $S^{3N-1}$---the geometric avatar
+of the Dirac dive.  The topology ($S_N$ irrep, $\nu$, $\mufree$)
+is oblivious; the metric (curvature, conformal factor) is singular.
+
+Table~\ref{tab:metric} quantifies the transition from perturbative
+to singular.
+
+\begin{table}[h]
+\centering
+\caption{Relativistic metric correction $\delta_{1\mathrm{s}} =
+(Z\alpha)^2/[1 - (Z\alpha)^2]$ for the innermost electron.  The
+non-relativistic $\mufree$ formula becomes unreliable when
+$\delta \gtrsim 1$.}
+\label{tab:metric}
+\begin{tabular}{rlrl}
+\toprule
+$Z$ & $(Z\alpha)^2$ & $\delta_{1\mathrm{s}}$ & Regime \\
+\midrule
+  1 & 0.00005 & 0.00005 & Non-relativistic \\
+ 29 & 0.045   & 0.047   & Mildly relativistic \\
+ 47 & 0.118   & 0.133   & Relativistic \\
+ 79 & 0.332   & 0.498   & Strongly relativistic \\
+118 & 0.741   & 2.87    & Near-singular \\
+137 & 0.999   & $\sim 10^3$ & Conical singularity \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Three limits on the periodic table}
+
+The periodic table terminates due to physics beyond the
+non-relativistic $S_N$ representation theory:
+\begin{enumerate}
+  \item \textbf{Nuclear instability} ($Z \sim 126$): proton--proton
+    Coulomb repulsion overwhelms the strong nuclear force.
+  \item \textbf{Dirac instability, point nucleus} ($Z \sim 137$): the
+    1s binding energy reaches $mc^2$.
+  \item \textbf{Dirac instability, finite nucleus} ($Z \sim 170$):
+    spontaneous $e^+e^-$ pair creation from the vacuum.
+\end{enumerate}
+The SO$(3N)$ topology predicts no limit: $\mufree = 2(N-2)^2$ is
+defined for all $N$.  The physical end of the periodic table is set by
+nuclear physics ($Z \lesssim 130$), not by electronic topology.
+
+%% ========================================================================
+%% VII. DISCUSSION
+%% ========================================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Connection to Paper 0's orbital counting}
+
+Paper~0~\cite{loutey_paper0} derived the $2n^2$ orbital degeneracy
+from the geometric packing of nodes on the discrete $S^3$ lattice.
+The present result extends this: the $S_N$ representation theory on
+$S^{3N-1}$ yields not just the orbital counting but the
+\emph{chemical classification} of atoms.  Where Paper~0 derived the $2n^2$ counting from geometric packing,
+the present analysis provides a group-theoretic framework for
+understanding why filling those shells produces the periodic pattern
+$\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$.
+
+\subsection{Transition metals and Hund's rule}
+
+The transition metals (Type~E) have partially filled $d$-shells with
+ground-state spins $S \geq 1$.  The ``anomalous'' configurations of
+Cr~($[\mathrm{Ar}]\,3d^5\,4s^1$, $S = 3$) and
+Cu~($[\mathrm{Ar}]\,3d^{10}\,4s^1$, $S = 1/2$) are often cited as
+evidence for exchange stabilization.  In the present framework, both
+the ``expected'' and ``anomalous'' configurations of Cr have
+$\nu = 22$ and $\mufree = 1012$---the topological Level~1 cannot
+distinguish them.  The anomaly lives entirely at Level~2, in the
+exchange pair count: the half-filled $3d^5\,4s^1$ configuration has
+141~exchange pairs versus 136 for $3d^4\,4s^2$, a difference of~5
+that tips the energetic balance.
+
+This confirms that Hund's first rule is a \emph{perturbative} effect
+(exchange stabilization in the Coulomb interaction) rather than a
+\emph{topological} one (angular momentum reduction on $S^{3N-1}$).
+More broadly, the actual chemistry---which electron configuration wins
+energetically---is determined by exchange, correlation, and
+orbital-dependent Coulomb effects that operate below the resolution of
+the topological classification.  The Level~1 framework identifies
+which configurations are \emph{topologically equivalent}; it cannot
+determine which one is the ground state.
+
+\subsection{Physical chemistry correspondences}
+
+The structure type classification connects naturally to familiar
+chemical trends:
+\begin{itemize}
+  \item \textbf{Ionization energy} correlates with the topological
+    cost of surgery on $S^{3N-1}$.  Type~B (noble gas) has the highest
+    surgery cost; Type~C (alkali) has the lowest.
+  \item \textbf{Atomic radius} correlates with the location of the
+    surgery: Type~C atoms have a weakly bound outer electron (large
+    radius), while Type~B atoms are compact.
+  \item \textbf{Electronegativity} increases across a period
+    ($\mathrm{C} \to \mathrm{B}$), mirroring the transition from
+    hierarchical to democratic irreps.
+  \item \textbf{The periodic law} can be understood as the
+    repetition of the $S_N$ irrep sequence whenever a new principal
+    shell begins to fill.
+\end{itemize}
+
+\subsection{Fractal structure: core and valence at every scale}
+
+A striking feature of the classification is its \emph{scale
+invariance}.  The core--valence decomposition at each ionization step
+produces the same Types~B/C/D structure at every level:
+\begin{align*}
+  \text{Na} &\to \text{Na}^+ + e^-
+    & (\text{C} &\to \text{B} + \text{A}), \\
+  \text{Na}^+ &\to \text{Na}^{2+} + e^-
+    & (\text{B} &\to \text{C} + \text{A}).
+\end{align*}
+Each ionization peels off one column from the Young diagram,
+converting one type into another in a predictable sequence.  This
+self-similar structure is a direct consequence of the recursive
+nature of $S_N \supset S_{N-1}$ representations.
+
+%% ========================================================================
+%% VIII. CONCLUSION
+%% ========================================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have shown that the group structure of the periodic table---the
+classification of elements into noble gases, alkali metals, alkaline
+earths, and open-shell atoms---follows from the $S_N$ representation
+theory of fermionic wavefunctions on the hypersphere $S^{3N-1}$.  The
+key results are:
+
+\begin{enumerate}
+  \item The ground-state angular quantum number $\nu = N - 2$ is
+    universal for $S < N/2$, yielding the Pauli centrifugal cost
+    $\mufree = 2(N-2)^2$.
+
+  \item The shape of the $S_N$ spatial irrep classifies atoms into
+    types (A/B/C/D/E) that recast the chemical group structure in
+    representation-theoretic language.
+
+  \item The periodic law corresponds to the repetition of the irrep
+    sequence $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to
+    \mathrm{B}$ within each period.
+
+  \item Hund's first rule and configuration anomalies (Cr, Cu) are
+    Level~2 perturbative effects, invisible to the Level~1 topology.
+
+  \item The Dirac instability at $Z\alpha \to 1$ is a metric
+    singularity on $S^{3N-1}$, not a topological one; the
+    representation theory is smooth through all $N$.
+\end{enumerate}
+
+The approach separates the periodic table into a universal
+\emph{topological skeleton} (Level~1: $\nu$, $\mufree$, structure
+type) and a chemistry-specific \emph{metric flesh} (Level~2: $Z$,
+$\alpha$, Coulomb integrals).  This separation provides a
+group-theoretic framework for the periodic table's structure
+(topology) while leaving the element-specific chemistry to
+perturbative effects (metric).  The framework recasts, rather than
+derives from first principles, the empirical periodic pattern---its
+value lies in unifying the classification under a single
+mathematical structure.
+
+\begin{acknowledgments}
+This work uses the hyperspherical formalism developed in the Geometric
+Vacuum program (Papers~0--15).  The $S_N$ analysis was informed by the
+classical references of Avery~\cite{Avery2000} and
+Fock~\cite{Fock1935, Fock1954}.
+\end{acknowledgments}
+
+%% ========================================================================
+%% REFERENCES
+%% ========================================================================
+
+\begin{thebibliography}{25}
+
+\bibitem{Mendeleev1869}
+D.~I.~Mendeleev,
+\emph{Zh.\ Russ.\ Khim.\ Obshch.} \textbf{1}, 60 (1869).
+
+\bibitem{Fock1935}
+V.~Fock,
+\emph{Z.\ Phys.} \textbf{98}, 145 (1935).
+
+\bibitem{Fock1954}
+V.~Fock,
+\emph{Izv.\ Akad.\ Nauk SSSR, Ser.\ Fiz.} \textbf{18}, 161 (1954).
+
+\bibitem{Avery2000}
+J.~Avery,
+\emph{Hyperspherical Harmonics and Generalized Sturmians}
+(Kluwer, Dordrecht, 2000).
+
+\bibitem{Weyl1946}
+H.~Weyl,
+\emph{The Classical Groups: Their Invariants and Representations}
+(Princeton University Press, Princeton, 1946).
+
+\bibitem{FultonHarris1991}
+W.~Fulton and J.~Harris,
+\emph{Representation Theory: A First Course}
+(Springer, New York, 1991).
+
+\bibitem{loutey_paper0}
+J.~Loutey,
+``Geometric packing and the universal constant,''
+GeoVac Paper~0 (2025).
+
+\bibitem{loutey_paper1}
+J.~Loutey,
+``Spectral graph theory for quantum chemistry,''
+GeoVac Paper~1 (2025).
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The dimensionless vacuum: Schr\"odinger recovery from $S^3$,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper13}
+J.~Loutey,
+``The hyperspherical lattice: two-electron atoms as coupled channel
+graphs,''
+GeoVac Paper~13 (2026).
+
+\bibitem{KnowlesHandy1984}
+P.~J.~Knowles and N.~C.~Handy,
+\emph{Chem.\ Phys.\ Lett.} \textbf{111}, 315 (1984).
+
+\bibitem{Dirac1928}
+P.~A.~M.~Dirac,
+\emph{Proc.\ R.\ Soc.\ London A} \textbf{117}, 610 (1928).
+
+\bibitem{Greiner1985}
+W.~Greiner, B.~M\"uller, and J.~Rafelski,
+\emph{Quantum Electrodynamics of Strong Fields}
+(Springer, Berlin, 1985).
+
+\bibitem{Pyykkoe2012}
+P.~Pyykk\"o,
+\emph{Phys.\ Chem.\ Chem.\ Phys.} \textbf{13}, 161 (2011).
+
+\bibitem{Schwerdtfeger2015}
+P.~Schwerdtfeger, L.~F.~Pashtedsky, A.~Pernpointner, and B.~Fricke,
+``Relativistic effects in superheavy elements,''
+in \emph{The Chemistry of Superheavy Elements}, 2nd ed.\
+(Springer, Berlin, 2015).
+
+\end{thebibliography}
+
+\end{document}

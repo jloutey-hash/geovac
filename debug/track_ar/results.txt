@@ -1,0 +1,169 @@
+Track AR: 2D Variational Solver for 4-Electron LiH
+====================================================
+Date: 2026-04-01
+Module: geovac/n_electron_2d.py
+Tests: tests/test_n_electron_2d.py (8 fast + 3 slow)
+
+SUMMARY: The 2D variational solver produces a STRUCTURALLY CORRECT
+result: R_eq ~ 1.1 bohr (same as adiabatic, 63.5% error), variational
+bound respected (E_total > exact at all R), but NO BINDING (D_e < 0
+at all R). The solver swings from overbinding (adiabatic: D_e = 0.49 Ha,
+5.3x exact) to underbinding (2D: D_e = -0.19 Ha, unbound). This is a
+PARTIAL SUCCESS: the 2D solver correctly eliminates the adiabatic
+overbinding, but the angular basis at l_max=2 is insufficient for
+quantitative binding.
+
+====================================================
+1. HEADLINE COMPARISON
+====================================================
+
+| Method      | l_max | R_eq  | R_eq err | E_min    | D_e     | D_e/exact | Time/pt |
+|-------------|-------|-------|----------|----------|---------|-----------|---------|
+| Adiabatic   | 2     | ~1.1  | 64%      | -8.46    | 0.49    | 530%      | 69s     |
+| 2D (S4)     | 2     | 1.1   | 63.5%    | -7.79    | -0.19   | -203%     | 65s     |
+| Exact       | -     | 3.015 | -        | -8.07    | 0.092   | 100%      | -       |
+| Composed L5 | 2     | 2.85  | 5.3%     | -8.065   | 0.087   | 94%       | 0.1s    |
+
+Key findings:
+  1. R_eq UNCHANGED: 2D gives ~1.1 bohr, same as adiabatic. The R_eq
+     position is set by the angular basis, not the adiabatic approximation.
+  2. D_e SWUNG from +0.49 to -0.19: The 2D solver raises the energy
+     by ~0.7 Ha at R=1.0 relative to adiabatic, converting overbinding
+     to underbinding.
+  3. Variational bound RESPECTED: E_total > exact at all R values.
+  4. Dissociation limit WRONG: At R=6.0, E_total = -3.79 vs E_atoms =
+     -7.98 (4.2 Ha too high). The angular basis cannot describe
+     well-separated atoms.
+
+====================================================
+2. FULL PES DATA (l_max=2, n_grid=4, n_Re=50, S4 [2,2])
+====================================================
+
+   R (bohr)    E_total (Ha)    D_e (Ha)     time (s)
+   --------    ------------    ---------    --------
+   0.5000      -5.0500         -2.9281      81.5
+   0.7000      -6.8650         -1.1131      69.8
+   0.8000      -7.2931         -0.6850      64.5
+   0.9000      -7.5757         -0.4024      60.9
+   1.0000      -7.7696         -0.2085      59.7
+   1.1000      -7.7908         -0.1873      57.7  <-- min
+   1.2000      -7.7595         -0.2186      50.2
+   1.5000      -7.5058         -0.4723      48.4
+   2.0000      -6.8683         -1.1098      54.1
+   2.5000      -6.2738         -1.7043      57.8
+   3.0000      -5.8087         -2.1694      64.8
+   4.0000      -4.9591         -3.0190      73.1
+   6.0000      -3.7903         -4.1878      99.9
+
+Total scan time: 843s
+
+====================================================
+3. VARIATIONAL BOUND CHECK
+====================================================
+
+PASSED. E_total > E_exact = -8.0705 Ha at all R values.
+
+The minimum E_total = -7.7908 Ha is 0.280 Ha ABOVE exact. This is
+a proper variational upper bound, unlike the adiabatic result which
+is -8.46 Ha (0.39 Ha BELOW exact, violating the variational principle).
+
+The adiabatic solver violates the variational principle because it
+optimizes the radial wavefunction on a single adiabatic surface,
+missing the non-adiabatic coupling that raises the energy.
+
+====================================================
+4. DIAGNOSIS: WHY NO BINDING?
+====================================================
+
+The 2D solver correctly removes the adiabatic overbinding, but the
+resulting energy is ABOVE the atomic limit (-7.978) at all R. This
+means l_max=2 with S4 [2,2] projection does not have enough angular
+channels to describe LiH binding.
+
+Root causes (ranked by importance):
+
+(a) DISSOCIATION LIMIT: The solver cannot describe separated Li+H
+    because the angular basis (12 S4 channels on a 3-hyperangle grid)
+    is optimized for the compact molecule, not for two well-separated
+    atoms. At R >> R_e, the nuclear potential varies rapidly in the
+    hyperangles, requiring many more basis functions.
+
+(b) ANGULAR BASIS TRUNCATION: At l_max=2, only 12 S4 [2,2] channels
+    survive. This is insufficient for quantitative binding. The
+    composed geometry (Level 5) achieves 5.3% R_eq error at the same
+    l_max because it pre-optimizes the core/valence separation
+    analytically, effectively providing infinite angular resolution
+    within each subspace.
+
+(c) GRID COARSENESS: n_grid=4 gives only 4^3 = 64 FD grid points
+    per channel in the 3D hyperangle space. This is very coarse.
+    The n_grid=6 production grid (216 points) was too expensive for
+    the 2D solver (dim = 12*216*n_Re ~ 130k).
+
+====================================================
+5. COMPARISON WITH TRACK AO (COUPLED-CHANNEL)
+====================================================
+
+Track AO attempted coupled-channel radial corrections and FAILED:
+  - P-matrix magnitudes 10-30x larger than Level 3
+  - More channels -> more overshoot below adiabatic (wrong direction)
+  - Root cause: near-degenerate S4 channels (gaps 0.01-0.05)
+
+The 2D solver SUCCEEDS in a structural sense:
+  - It correctly raises the energy (2D > adiabatic)
+  - It respects the variational bound
+  - It produces a physical PES shape
+  - But it does not produce binding at l_max=2
+
+The coupled-channel failure and the 2D underbinding point to the
+same conclusion: the S4 [2,2] angular basis at l_max=2 is
+fundamentally insufficient for quantitative LiH binding. The
+composed geometry's 144x angular compression is not a luxury --
+it is essential.
+
+====================================================
+6. ASSESSMENT
+====================================================
+
+Does the 2D solver fix the adiabatic overcounting?
+  YES -- it eliminates the D_e overcounting (0.49 -> -0.19 Ha).
+
+Does it produce a useful R_eq?
+  NO -- R_eq is unchanged at ~1.1 bohr (63.5% error).
+
+Does it produce binding?
+  NO -- E_total > E_atoms at all R values.
+
+Is this a positive or negative result?
+  MIXED:
+  (+) Confirms that the adiabatic approximation is the source of
+      D_e overcounting at Level 4N (not basis truncation alone).
+  (+) Variational bound respected, physical PES shape.
+  (-) No binding means the 2D solver at l_max=2 is not a production
+      path for LiH.
+  (-) R_eq unchanged, suggesting the R_eq error is from angular
+      basis inadequacy, not the adiabatic approximation.
+
+CONCLUSION: The full N-electron approach (Level 4N) requires either
+higher l_max (intractable at l_max>=4) or a fundamentally better
+angular basis to achieve binding. The composed geometry (Level 5)
+remains the correct production path. Its 5.3% R_eq error at l_max=2
+demonstrates that angular pre-optimization (core/valence separation)
+is essential and cannot be replaced by brute-force angular expansion.
+
+====================================================
+7. FILES PRODUCED
+====================================================
+
+Code:
+  geovac/n_electron_2d.py
+    - solve_4e_lih_2d()
+    - scan_pes_4e_lih_2d()
+
+Tests:
+  tests/test_n_electron_2d.py (8 fast, 3 slow)
+
+Data:
+  debug/track_ar/pes_4e_lih_2d_lmax2.npz
+  debug/track_ar/pes_4e_lih_2d_lmax2.txt
+  debug/track_ar/results.txt

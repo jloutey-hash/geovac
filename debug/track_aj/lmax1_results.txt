@@ -1,0 +1,175 @@
+Track AJ: 4-Electron Mol-Frame Hyperspherical LiH Solver — l_max=1 Follow-Up
+=============================================================================
+Date: 2026-03-31
+l_max: 1
+Module: geovac/n_electron_solver.py (extended)
+Tests: tests/test_n_electron_solver.py (41 passing, 5 slow)
+
+1. HEADLINE RESULT
+==================
+NO EQUILIBRIUM FOUND at l_max=1. PES is monotonically attractive.
+
+This extends the l_max=0 negative result. Despite adding 16 multichannel
+angular momentum configurations (l=0 and l=1 for each of 4 electrons),
+the 4-electron solver still produces a monotonically attractive PES for LiH.
+
+Two symmetry enforcement methods were tested:
+(a) Parity (pair antisymmetry in alpha space): all 16 channels included
+(b) S_4 [2,2] projection (channel space only): 2 channels survive
+
+Both methods give monotonically attractive PES.
+
+2. PES TABLES
+=============
+
+(a) Parity multichannel (n_grid=8, 16 channels, dim=8192):
+   R (bohr)    E_total (Ha)    D_e (Ha)     time (s)
+   1.000       -13.264         +5.286        94.6
+   1.500       -10.802         +2.824        97.2
+   2.000        -9.500         +1.522        94.8
+   2.500        -7.781         -0.197        77.6
+   3.000        -6.668         -1.310        70.1
+   3.200        -6.212         -1.766        34.2
+   3.500        -5.750         -2.229        36.2
+   4.000        -5.019         -2.959        36.1
+   5.000        -4.227         -3.751        70.6
+   6.000        -3.687         -4.292        34.7
+   8.000        -2.908         -5.070        36.8
+  10.000        -2.421         -5.557        37.6
+
+(b) S_4 [2,2] projection (n_grid=8, 2 channels, dim=1024):
+   R (bohr)    E_total (Ha)    D_e (Ha)     time (s)
+   1.000        -6.141         -1.837        83.1
+   1.500        -5.656         -2.323        81.4
+   2.000        -5.039         -2.939        80.8
+   2.500        -4.601         -3.377        81.0
+   3.000        -4.155         -3.824        80.0
+   3.200        -3.959         -4.019        78.0
+   3.500        -3.674         -4.304        78.3
+   4.000        -3.359         -4.619        78.0
+   5.000        -2.900         -5.078        76.1
+   6.000        -2.552         -5.426        78.1
+   8.000        -2.067         -5.911        80.2
+  10.000        -1.705         -6.273        80.8
+
+(c) Parity + Pauli correction (+12/R_e^2):
+   R (bohr)    E_total (Ha)    D_e (Ha)
+   0.500       -15.820         +7.841
+   1.000       -12.961         +4.983
+   2.500        -7.703         -0.276
+   3.000        -6.592         -1.387
+  10.000        -2.325         -5.653
+
+All three: monotonically attractive.
+
+3. ROOT CAUSE ANALYSIS
+======================
+The monotonically attractive PES at l_max=1 has the SAME root cause as l_max=0:
+the adiabatic approximation in hyperspherical coordinates produces a monotonically
+decreasing U_min(R) in the effective potential. As R increases, the nuclei separate,
+and the angular eigenvalue mu(R_e) becomes more negative at large R_e, pulling
+U_min downward without bound.
+
+The equilibrium in real LiH arises from the interplay of:
+(1) Nuclear repulsion V_NN = Z_A*Z_B/R (repulsive, short-range dominance)
+(2) Electronic energy E_elec(R) (attractive, decreasing as nuclei provide
+    more binding at short R)
+
+In the full 4-electron solver, E_elec(R) decreases monotonically as R decreases
+(nuclei provide stronger attraction to all 4 electrons at shorter distances),
+and this decrease is faster than V_NN increases. The result is net monotonic
+attraction.
+
+This differs from the composed geometry where:
+- The PK pseudopotential creates a repulsive core exclusion effect
+- The Level 4 valence solver naturally has an equilibrium (from e-e repulsion
+  at short R_e in the restricted 2-electron space)
+
+4. KEY PHYSICS FINDING: S_4 [2,2] vs PARITY
+=============================================
+At l_max=1, the S_4 [2,2] projector in channel space has rank 2. The two
+surviving channels are superpositions of the 6 channels with exactly two l=0
+and two l=1 electrons: (0011), (0101), (0110), (1001), (1010), (1100).
+
+The (0,0,0,0) channel (all s-wave) is EXCLUDED because it has [4] (fully
+symmetric) spatial character, which pairs with the S=2 quintet, not the
+singlet. This is physically correct: the singlet ground state of LiH
+must have [2,2] spatial symmetry.
+
+However, the [2,2] projected space at l_max=1 misses the dominant contribution
+from the core electrons. In reality, the core electrons ARE in s-waves, but
+their antisymmetry with valence electrons requires BOTH s-wave and p-wave
+channels simultaneously in the coupled angular expansion. The [2,2] projection
+correctly captures this coupling, but only 2 effective channels are far too
+few for accurate energies.
+
+Parity antisymmetry (pair exchange via half-grids) includes all 16 channels
+and gives lower energies, but enforces only partial antisymmetry (within each
+electron pair, not between pairs). The full [2,2] symmetry requires cross-pair
+antisymmetry that mixes alpha coordinates with channel labels — this is not
+captured by either approach at l_max=1.
+
+5. CHANNEL TABLE
+================
+ l_max  sigma_raw  S4_[2,2]_rank  parity_dim(n=8)  S4_dim(n=8)  wall_time
+   0        1           0            512              0            ~5s
+   1       16           2           8192            1024           ~35s (parity)
+                                                                   ~0.9s (S4)
+
+6. COMPARISON WITH l_max=0
+===========================
+                    l_max=0 (parity)    l_max=1 (parity)    l_max=1 (S4)
+E(R=3.0)            -3.360 Ha           -6.668 Ha           -4.155 Ha
+E(R=1.0)            -7.820 Ha          -13.264 Ha           -6.141 Ha
+Equilibrium?        NO                  NO                   NO
+Channels            1                   16                   2
+
+l_max=1 parity gives lower energies due to additional channels (variational
+freedom), but the PES shape is unchanged: monotonically attractive.
+
+7. SOLVER MODIFICATIONS
+========================
+Extended geovac/n_electron_solver.py with:
+- _enumerate_channels_4e(l_max): enumerate (l1,l2,l3,l4) channels
+- _s4_permutation_matrices_channels(): S_4 representations on channel space
+- _s4_characters_22(): [2,2] irrep characters
+- _build_s4_22_projector(): Young projector for [2,2]
+- _s4_channel_basis(): eigenvectors of projector
+- _centrifugal_4e_multichannel(): per-channel centrifugal from l_i
+- _vee_coupling_4e(): V_ee coupling via Gaunt integrals between channels
+- _vnuc_coupling_4e(): nuclear coupling via Gaunt integrals
+- build_angular_hamiltonian_4e_parity_multichannel(): half-grid + all channels
+- build_angular_hamiltonian_4e_multichannel(): full grid + optional S_4
+- solve_angular_4e_multichannel(): sparse eigensolve, symmetry parameter
+- compute_adiabatic_curve_4e_multichannel(): adiabatic U(R_e)
+- solve_4e_lih_multichannel(): single-R solver
+- scan_pes_4e_lih_multichannel(): PES scan
+
+Optimized S_4 projection: eigendecompose the 16x16 channel projector (trivial)
+instead of the full (n_ch*n_grid^3)^2 matrix. Speedup: 99s -> 0.9s at n_grid=8.
+
+15 new tests in tests/test_n_electron_solver.py (41 total, 5 slow).
+
+8. ASSESSMENT
+==============
+The l_max=1 result confirms the Track AJ/AG finding: the full 4-electron
+mol-frame hyperspherical solver for LiH does not produce an equilibrium at
+low l_max. The PES is monotonically attractive at both l_max=0 and l_max=1.
+
+This is a STRUCTURAL result, not a numerical convergence issue:
+- The adiabatic approximation produces a monotonically decreasing U_min(R)
+- Nuclear repulsion V_NN = Z_A*Z_B/R is insufficient to overcome the
+  monotonic electronic energy decrease
+- The equilibrium in real LiH requires either:
+  (a) Much higher l_max (l_max >= 3-4?) to describe core-valence correlation
+  (b) The composed geometry approach with PK pseudopotential
+
+This strengthens the case that the composed geometry (Level 5) is not just
+a computational convenience but encodes essential core-valence separation
+physics that the full solver needs many more channels to reproduce.
+
+The 144x compression ratio of composed vs full (from Track AG) is confirmed
+as necessary, not just convenient. At l_max=2, the full solver would have
+81 channels, ~14000 angular dimension per R_e point — potentially tractable
+but still unlikely to produce equilibrium without adequate l_max for both
+core and valence description simultaneously.

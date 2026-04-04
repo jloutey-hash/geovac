@@ -1,0 +1,98 @@
+{
+  "h2o_nmax1": {
+    "Q": 14,
+    "N_pauli": 22,
+    "one_norm": 18913.04099573236,
+    "max_coeff": 9395.27536419588,
+    "by_weight": {
+      "0": 9395.27536419588,
+      "1": 9512.452314036516,
+      "2": 5.313317499969864
+    },
+    "M": 7,
+    "wall_time_s": 0.15361279994249344,
+    "nuclear_repulsion": -52.11459410533607,
+    "pk_decomposition": {
+      "with_pk": 18913.04099573236,
+      "without_pk": 251.48795910539633,
+      "pk_contribution": 18661.553036626963,
+      "pk_fraction": 0.986702933750202,
+      "n_pauli_with_pk": 22,
+      "n_pauli_without_pk": 22
+    }
+  },
+  "h2o_nmax2": {
+    "Q": 70,
+    "N_pauli": 778,
+    "one_norm": 28053.33404508323,
+    "max_coeff": 10598.498712476125,
+    "by_weight": {
+      "0": 10598.498712476125,
+      "1": 10783.133825060862,
+      "2": 78.51372332481127,
+      "3": 6586.137157121627,
+      "4": 6.612933432571684,
+      "6": 0.4376936672195377
+    },
+    "M": 35,
+    "wall_time_s": 2.3715135001111776,
+    "nuclear_repulsion": -52.11459410533607,
+    "pk_decomposition": {
+      "with_pk": 28053.33404508323,
+      "without_pk": 360.8128762784757,
+      "pk_contribution": 27692.521168804753,
+      "pk_fraction": 0.9871383246034632,
+      "n_pauli_with_pk": 778,
+      "n_pauli_without_pk": 778
+    }
+  },
+  "h2o_scaling": {
+    "exponent": 0.2449649028069282,
+    "Q_values": [
+      14,
+      70
+    ],
+    "norm_values": [
+      18913.04099573236,
+      28053.33404508323
+    ]
+  },
+  "beh2_nmax1_verify": {
+    "Q": 10,
+    "N_pauli": 16,
+    "one_norm": 198.20158012694353,
+    "expected": 198.2,
+    "match": true
+  },
+  "beh2_nmax2_verify": {
+    "Q": 50,
+    "N_pauli": 556,
+    "one_norm": 354.8880647430748,
+    "expected": 354.89,
+    "match": true
+  },
+  "lih_nmax1": {
+    "Q": 6,
+    "N_pauli": 10,
+    "one_norm": 16.010580684010616
+  },
+  "lih_nmax2": {
+    "Q": 30,
+    "N_pauli": 334,
+    "one_norm": 37.33424576695508,
+    "pk_decomposition": {
+      "with_pk": 37.33424576695508,
+      "without_pk": 33.25565758127947,
+      "pk_contribution": 4.078588185675606,
+      "pk_fraction": 0.10924522785687575,
+      "n_pauli_with_pk": 334,
+      "n_pauli_without_pk": 334
+    }
+  },
+  "lih_scaling": {
+    "exponent": 0.5260601975017475
+  },
+  "beh2_scaling": {
+    "exponent": 0.3619386808406901
+  }
+}

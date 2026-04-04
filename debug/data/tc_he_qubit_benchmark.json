@@ -1,0 +1,52 @@
+{
+  "date": "2026-04-03",
+  "track": "BX-3: TC in second quantization",
+  "system": "He (Z=2)",
+  "method": "TC J=+(1/2)r_12, radial gradient only",
+  "constant_shift": -0.25,
+  "data": [
+    {
+      "max_n": 1,
+      "Q": 2,
+      "std_pauli": 4,
+      "tc_pauli": 4,
+      "std_energy": -2.749808,
+      "tc_energy": -2.999599,
+      "std_err_pct": 5.3,
+      "tc_err_pct": 3.303,
+      "tc_1norm_ratio": 1.07
+    },
+    {
+      "max_n": 2,
+      "Q": 10,
+      "std_pauli": 282,
+      "tc_pauli": 188,
+      "std_energy": -3.089349,
+      "tc_energy": -3.008557,
+      "std_err_pct": 6.394,
+      "tc_err_pct": 3.611,
+      "tc_1norm_ratio": 1.17
+    },
+    {
+      "max_n": 3,
+      "Q": 28,
+      "std_pauli": 5901,
+      "tc_pauli": 6107,
+      "std_energy": -3.14199,
+      "tc_energy": -3.009074,
+      "std_err_pct": 8.206,
+      "tc_err_pct": 3.629,
+      "tc_1norm_ratio": 2.99
+    }
+  ],
+  "exact_he": -2.9037,
+  "notes": [
+    "Bug fix: constant shift was +1/4 (wrong), corrected to -1/4",
+    "TC eliminates standard basis divergence (5.3->8.2% worsening)",
+    "TC converges to ~3.6% plateau (missing angular gradient for l>0)",
+    "At max_n=2 (composed operating point): 33% fewer Pauli terms, 17% higher 1-norm",
+    "At max_n=3: 3.5% more Pauli terms, 3x higher 1-norm",
+    "Non-Hermiticity confirmed: 0.34 at max_n=2",
+    "Radial gradient only - angular gradient for p/d orbitals not yet implemented"
+  ]
+}

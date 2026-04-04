@@ -1,0 +1,8 @@
+name,value_bohr
+r_avg,0.576659
+r_rms,0.677357
+r_median,0.500974
+r_peak,0.816667
+r_pk_inv2,0.383602
+r_steepest,0.357515
+r_half_screen,0.500620

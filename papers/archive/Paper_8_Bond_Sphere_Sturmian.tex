@@ -96,6 +96,8 @@ Section~\ref{sec:uniform} states the uniform diagonal theorem.
 Section~\ref{sec:structural_theorem} proves the Sturmian structural
 theorem: the Hamiltonian is proportional to the overlap matrix, making
 eigenvalues geometry-independent.
+Section~\ref{sec:multi_electron} extends the structural theorem to
+multi-electron systems via Coulomb and generalized Sturmian CI.
 Section~\ref{sec:selection_rules} derives the $SO(4)$ selection rules
 for $\sigma$-bond formation.
 Section~\ref{sec:conclusion} concludes.
@@ -123,6 +125,14 @@ distance and angular pole separation on $S^3$.
 
 \item \textit{Avery (2000s)}~\cite{Avery2006}: Extended the Sturmian
 basis to general molecular systems with practical computational methods.
+De~Fazio, Cavalli, and Aquilanti~\cite{DeFazio2003} developed the
+\emph{hyperquantization algorithm}, discretizing scattering problems
+on $S^3$ via hyperspherical harmonics---arriving at sparse discrete
+Hamiltonians from the continuous side, converging with GeoVac's
+graph-first construction (see Sec.~\ref{sec:multi_electron}).
+Avery~\cite{Avery2004} formulated the generalized Sturmian secular
+equation for multi-electron atoms using configuration-dependent
+scaling parameters.
 
 \item \textit{$SO(4)$ representation theory}~\cite{Bander1966,%
 Biedenharn1981}: The Wigner $D$-matrix elements of $SO(4)$ in the
@@ -947,6 +957,161 @@ incompatibility.  The heteronuclear problem thus remains open.
 
 
 %% ========================================================================
+\section{Multi-Electron Sturmian CI: Computational Verification}
+\label{sec:multi_electron}
+%% ========================================================================
+
+The structural theorem (Theorem~\ref{thm:structural}) proves
+$H \propto S$ for one-electron molecular Sturmians with shared
+momentum scale~$p_0$.  The natural question is whether multi-electron
+Sturmians---where the electron--electron repulsion $V_{ee}$ introduces
+coupling beyond one-body structure---can circumvent this limitation and
+produce basis sets that outperform standard hydrogenic FCI for atoms
+and molecules.  Tracks~BU-1 and BU-1b (v2.0.33) tested this for
+helium (two electrons) using both Coulomb and generalized Sturmian CI.
+
+\paragraph{Convergent discovery: Aquilanti and Avery.}
+The GeoVac framework and the Aquilanti group
+(Perugia)~\cite{Aquilanti1986,Aquilanti1990,Aquilanti2001} independently
+arrived at the same mathematical structure---Fock projection onto~$S^3$,
+hyperspherical harmonic expansions, angular momentum algebra via
+Wigner~$3j$ and Gaunt coefficients, and sparse discrete
+Hamiltonians---from opposite directions.  GeoVac proceeds graph $\to$
+continuous (Paper~7~\cite{loutey_paper7}): the discrete graph Laplacian
+is the primary object, and the Schr\"odinger equation emerges via
+stereographic projection.  Aquilanti and collaborators proceed continuous
+$\to$ discrete: the hyperquantization
+algorithm~\cite{DeFazio2003,AquilantiCapecchi2000} discretizes continuous
+scattering problems on~$S^3$ via harmonic analysis and discrete
+polynomials.  Avery~\cite{Avery2004} formulated the generalized Sturmian
+secular equation for multi-electron systems, using
+configuration-dependent scaling parameters that are closely related to
+the $\beta_k$ eigenvalues of Sec.~\ref{sec:beta}.  Neither group
+previously combined these bases with qubit encoding for quantum
+simulation---the application explored in
+Paper~14~\cite{loutey_paper14}.
+
+\paragraph{Methods.}
+Two Sturmian variants were tested against standard hydrogenic FCI for
+the He ground state (exact: $-2.9037$~Ha).
+
+\emph{Coulomb Sturmian CI:} Each orbital $(n,l,m)$ uses
+$Z_{\mathrm{eff}} = n k$, where $k$ is a common scaling parameter
+optimized variationally.  The basis is L\"owdin-orthogonalized before
+standard FCI via Slater--Condon rules with full $R^k$ Slater integrals
+and Gaunt angular coefficients.
+
+\emph{Generalized Sturmian CI:} Each Slater determinant~$\nu$ receives
+its own scaling $\beta_\nu$ from the isoenergetic condition
+$E_{\mathrm{trial}} = -\beta_\nu^2 Z^2 / 2 \sum_i 1/n_i^2$.
+All orbitals within one configuration share
+$Z_{\mathrm{eff}} = \beta_\nu Z$.  A self-consistency loop iterates
+$E_{\mathrm{trial}} \to \beta_\nu \to (H, S) \to$ generalized
+eigenvalue $\to E_{\mathrm{new}}$ until convergence.
+
+\paragraph{Results.}
+
+\begin{table}[h]
+\caption{He ground state energy comparison (exact: $-2.9037$~Ha).
+  $\Delta E$ is energy difference from standard FCI at same
+  $n_{\max}$.}
+\label{tab:sturmian_he}
+\begin{ruledtabular}
+\begin{tabular}{llccr}
+$n_{\max}$ & Method & $E$ (Ha) & Error (\%) & $\Delta E$ (mHa) \\
+\hline
+2 & Standard FCI       & $-2.8078$ & 3.30 & --- \\
+2 & Coulomb Sturmian   & $-2.8116$ & 3.17 & $-3.8$ \\
+2 & Generalized        & $-2.8249$ & 2.72 & $-17.1$ \\
+\hline
+3 & Standard FCI       & $-2.8172$ & 2.98 & --- \\
+3 & Coulomb Sturmian   & $-2.8440$ & 2.06 & $-26.8$ \\
+3 & Generalized        & $-2.8319$ & 2.47 & $-14.7$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The Coulomb Sturmian improves on standard FCI at both basis sizes,
+with the advantage growing from 0.13~percentage points (pp) at
+$n_{\max} = 2$ to 0.92~pp at $n_{\max} = 3$.  The generalized
+Sturmian is best at $n_{\max} = 2$ ($-17.1$~mHa, 2.72\% error) but
+exhibits crossover at $n_{\max} = 3$: it is 12.1~mHa \emph{worse}
+than the Coulomb variant.
+
+\paragraph{$\beta$ differentiation.}
+The generalized Sturmian at $n_{\max} = 3$ produces six distinct
+$\beta$ values ranging from $0.84$ (the $1s^2$ configuration) to
+$2.52$ (the $3d^2$ configuration)---a factor~$3\times$ spread.
+Configuration-level differentiation \emph{is} present: compact core
+configurations receive smaller~$\beta$ (more diffuse orbitals), while
+high-$n$ configurations receive larger~$\beta$ (more contracted).
+However, the isoenergetic constraint forces all orbitals within a
+single configuration to share one $Z_{\mathrm{eff}} = \beta_\nu Z$,
+removing the $n$-dependent radial differentiation that the Coulomb
+Sturmian provides ($Z_{\mathrm{eff}} = nk$).  At small basis
+($n_{\max} = 2$), between-configuration flexibility dominates and the
+generalized method wins.  At larger basis ($n_{\max} = 3$), the loss
+of within-configuration orbital flexibility outweighs this gain.
+
+\paragraph{Structural finding.}
+The generalized Sturmian's isoenergetic constraint removes
+$n$-dependent radial differentiation---a multi-electron analog of the
+single-electron structural theorem
+(Theorem~\ref{thm:structural}).  In the one-electron case,
+$H \propto S$ makes eigenvalues geometry-independent.  In the
+multi-electron case, the constraint
+$Z_{\mathrm{eff}} = \beta_\nu Z$ (uniform within each
+configuration) limits the radial flexibility that $V_{ee}$ can
+exploit, and no variant tested overcomes the fundamental tradeoff
+between mathematical elegance and radial flexibility.
+
+\paragraph{Gaunt sparsity preservation.}
+The Gaunt selection rule sparsity is exactly preserved in both
+Sturmian variants: the electron repulsion integral (ERI) nonzero
+counts are identical to the standard hydrogenic basis at each
+$n_{\max}$ (65~at $n_{\max} = 2$; 1492~at $n_{\max} = 3$).
+This is expected: Gaunt coefficients depend only on
+$(l, m)$ quantum numbers, not on radial functions or scaling
+parameters.  The result confirms that the angular selection rule
+structure identified in Paper~7~\cite{loutey_paper7} is
+\emph{basis-independent}---a property of the $S^3$ topology, not of
+the specific radial representation.
+
+\paragraph{Qubit encoding comparison.}
+Track~BU-2 compared the Sturmian and standard qubit Hamiltonians
+(via L\"owdin orthogonalization and Jordan--Wigner transformation;
+see Paper~14~\cite{loutey_paper14} for methodology).
+At $Q = 10$ qubits ($n_{\max} = 2$), the Sturmian Hamiltonian has
+$\sim$7\% fewer Pauli terms (112 vs.\ 120) but $2.8\times$ higher
+Pauli 1-norm (31.4 vs.\ 11.3~Ha).  At $Q = 28$ ($n_{\max} = 3$),
+the Pauli term count is nearly identical (2627 vs.\ 2659), while
+the 1-norm inflation grows to $4.5\times$ (349 vs.\ 78~Ha).
+The 1-norm inflation is structural: the L\"owdin $S^{-1/2}$
+transformation spreads overlap matrix structure into coefficient
+magnitudes, inflating operator weights throughout the qubit
+Hamiltonian.  Since the Pauli 1-norm controls Trotter error bounds
+and measurement shot budgets, the Sturmian basis is
+\emph{disadvantaged} for quantum simulation despite its modest
+energetic advantages in classical FCI.
+
+\paragraph{Negative conclusion.}
+The multi-electron Sturmian direction does not bypass the accuracy
+ceilings established by the natural geometry hierarchy
+(Papers~11--17).  The investigation yields four structural findings:
+(a)~the single-electron structural theorem extends qualitatively to
+multi-electron systems---structural constraints on scaling parameters
+limit radial flexibility regardless of $V_{ee}$ coupling;
+(b)~the convergent discovery with Aquilanti and Avery confirms that
+$S^3$ harmonic analysis and Gaunt-based angular algebra are
+canonical structures, arrived at independently from both directions;
+(c)~Gaunt selection rule sparsity is basis-independent, depending only
+on the angular quantum numbers, not on radial functions;
+(d)~L\"owdin orthogonalization inflates the Pauli 1-norm by
+$3$--$5\times$, making nonorthogonal bases structurally disadvantaged
+for qubit Hamiltonians.
+
+
+%% ========================================================================
 \section{$SO(4)$ Selection Rules for $\sigma$-Bond Formation}
 \label{sec:selection_rules}
 %% ========================================================================
@@ -1188,6 +1353,29 @@ J.~Loutey,
 ``The Molecular Fock Projection: Diatomic Molecules as Prolate
 Spheroidal Lattices,''
 GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper14}
+J.~Loutey,
+``Structurally Sparse Qubit Hamiltonians from Natural Geometry,''
+GeoVac Paper~14 (2026).
+
+\bibitem{DeFazio2003}
+P.~De~Fazio, S.~Cavalli, and V.~Aquilanti,
+``Orthogonal polynomials of a discrete variable as expansion basis
+sets in quantum mechanics: Hyperquantization algorithm,''
+Int. J. Quantum Chem. \textbf{93}, 91--111 (2003).
+
+\bibitem{AquilantiCapecchi2000}
+V.~Aquilanti and G.~Capecchi,
+``Harmonic analysis and discrete polynomials. From semiclassical
+information to time-frequency analysis,''
+Theor. Chem. Acc. \textbf{104}, 183--188 (2000).
+
+\bibitem{Avery2004}
+J.~Avery,
+``The generalized Sturmian method and inelastic scattering of fast
+electrons,''
+J. Phys. Chem. A \textbf{108}, 8848--8851 (2004).
 
 \end{thebibliography}
 

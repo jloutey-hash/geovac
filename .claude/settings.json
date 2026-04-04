@@ -65,7 +65,10 @@
       "Bash(mv paper_16_periodicity.out papers/core/)",
       "Bash(PYTHONIOENCODING=utf-8 python debug/alpha_eigenvalue_search.py)",
       "Bash(PYTHONIOENCODING=utf-8 python debug/alpha_derivation_attempt.py)",
-      "Bash(gh release:*)"
+      "Bash(gh release:*)",
+      "Bash(find /c/Users/jlout/OneDrive/Desktop/Project_Geometric -type f \\\\\\(-name *negative* -o -name *failed* -o -name *obstruction* -o -name *dead* \\\\\\))",
+      "Bash(find . -name \"*.md\" -type f -exec grep -l \"missing\\\\|limitation\\\\|bottleneck\\\\|ceiling\\\\|accurate\\\\|error\\\\|why\\\\|fails\" {})",
+      "WebSearch"
     ],
     "additionalDirectories": [
       "\\tmp",

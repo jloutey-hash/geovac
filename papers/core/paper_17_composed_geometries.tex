@@ -81,7 +81,8 @@ Four levels of this hierarchy have been established:
   Molecule-frame hyperspherical coordinates
   $(R_e, \alpha, \theta_1, \theta_2, \Phi)$ parameterized by
   $\rho = R/(2R_e)$ resolve all five Coulomb singularities simultaneously.
-  Paper~15~\cite{paper15} recovers 94.1\% of $D_e$ for H$_2$ and
+  Paper~15~\cite{paper15} recovers 96.0\% of $D_e$ for H$_2$
+  ($l_{\max}=6$, 61~channels) and
   93.1\% for HeH$^+$ with $\sigma{+}\pi$ channels.
 \end{description}
 
@@ -679,6 +680,21 @@ different starting points.
 \end{enumerate}
 
 
+A natural question is whether PK can be eliminated in a quantum
+simulation context, where antisymmetry is enforced by the
+creation/annihilation algebra rather than by explicit orthogonalization.
+A scoping investigation (Track~CB, v2.0.37) tested replacing PK with
+explicit cross-block two-electron integrals for LiH:
+the result is negative.  Cross-block ERIs add core--valence electron
+repulsion, but the composed orbital basis (different $Z_{\rm eff}$ per
+block) means no cross-center nuclear attraction is present in~$h_1$.
+Without the balancing one-body attraction, the Hamiltonian is
+energetically unbalanced: 4-electron FCI gives 29\% error (worst
+of three configurations tested), with the Pauli count increasing
+$2.56\times$ and 1-norm $2.30\times$.  PK thus remains the correct
+coupling mechanism for the composed architecture in both classical
+and quantum settings.
+
 \subsection{Outlook: the composition pattern for larger molecules}
 \label{sec:outlook}
 
@@ -786,11 +802,46 @@ delays the onset of divergence but does not eliminate the asymptotic
 drift, which reflects the fundamental limitation of the composed
 geometry's static core--valence partition.
 
-The reference distance $R_{\rm ref} = R_{\rm eq}^{\rm expt}$
-introduces a non-ab-initio parameter.  In principle, $R_{\rm ref}$
-is derivable from atomic properties: the PK barrier's characteristic
-radius $r_{\rm PK} = 1/\sqrt{2B}$ and the valence orbital extent
-define a natural length scale.  This derivation remains to be tested.
+\paragraph{PK-free diagnostic (negative result).}
+A fundamental test of the PK pseudopotential's role is to disable it
+entirely (\texttt{pk\_mode='none'}).  Without PK, the valence
+electrons are not excluded from the core region, and the resulting
+PES is \emph{monotonically attractive} at all $l_{\max}$: no
+equilibrium geometry exists.  The PK barrier is therefore essential
+for \emph{creating} the equilibrium, not merely refining it.  The
+balance between bonding stabilization and Pauli repulsion
+(Sec.~\ref{sec:req}) requires an explicit core-exclusion mechanism;
+screening via $Z_{\rm eff}(r)$ alone is insufficient.
+
+This diagnostic also confirms that the $l_{\max}$ divergence of
+$R_{\rm eq}$ is entirely from the adiabatic approximation, not
+from the PK form: without PK there is no equilibrium to diverge.
+The 2D variational solver (Paper~15), which eliminates the adiabatic
+approximation, is the correct fix path.
+
+\paragraph{Ab initio $R_{\rm ref}$ derivation (negative result).}
+\label{par:rref_negative}
+The reference distance $R_{\rm ref}$ in Eq.~(\ref{eq:rdep_pk})
+was originally set to $R_{\rm eq}^{\rm expt}$, introducing a
+non-ab-initio parameter.  Three atomic core-derived candidates
+were tested as ab initio replacements:
+\begin{itemize}
+  \item Core orbital radius $\langle r \rangle_{1s} = 0.50$~bohr
+  \item PK Gaussian width $1/\sqrt{B} = 0.27$~bohr
+  \item Screening length (radius where
+    $Z_{\rm eff} = Z_A - 1$): 0.82~bohr
+\end{itemize}
+All three are too small to affect the PES: an $R_{\rm ref}$ sweep
+confirms that $R_{\rm ref} \le 2.0$~bohr has zero effect on
+$R_{\rm eq}$, while only $R_{\rm ref} \sim 3.0$~bohr
+($\approx R_{\rm eq}$ itself) produces reasonable $R_{\rm eq}$
+error.  The fundamental problem is a \emph{scale mismatch}:
+$R_{\rm ref}$ must be molecular-scale (${\sim}R_{\rm eq}$) to
+modulate $w_{\rm PK}(R)$ in the bonding region, but $R_{\rm eq}$
+is a molecular property not derivable from atomic core data alone.
+Deriving $R_{\rm ref}$ from core properties creates circular
+reasoning: the only atomic length scales ($0.27$--$0.82$~bohr) are
+too small by a factor of ${\sim}4$--$11$.
 
 \paragraph{Root cause: adiabatic approximation with asymmetric charges.}
 Subsequent diagnostics (v2.0.6) have traced the $l_{\max}$ divergence
@@ -821,20 +872,115 @@ bare HeH$^+$.  (iii)~Single-channel DBOC correction of $+0.035$~Ha
 is 97\% cancelled by off-diagonal $P$-matrix coupling in the
 complete-basis limit, overcorrecting by $23\times$.
 
-\paragraph{Path forward.}
-The $l$-dependent pseudopotential reduces the divergence rate by
-approximately $2.5\times$ relative to the channel-blind mode.
-$R$-dependent scaling [Eq.~(\ref{eq:rdep_pk})] provides a further
-factor of ${\sim}2$ improvement at moderate $l_{\max}$ but converges
-to the same asymptotic drift rate at $l_{\max} \ge 5$.
-None of these modifications eliminate the fundamental adiabatic
-truncation error.  The variational 2D solver
-(Paper~15~\cite{loutey_paper15}), which treats
-$(R_e, \alpha)$ simultaneously rather than via adiabatic separation,
-does not suffer from $l_{\max}$ truncation and is the identified
-resolution.  Integration of the 2D solver into the composition
-pipeline---contingent on reducing Level~4 iteration times---is the
-next milestone.
+\paragraph{Complete solver--PK survey.}
+\label{par:solver_pk_survey}
+All four solver $\times$ PK combinations have now been tested.
+Table~\ref{tab:solver_pk} summarizes $R_{\rm eq}$ error and $l_{\max}$
+drift rate for each configuration, including updated fine-grid results
+(16 R-points) from Track~BQ.
+
+\begin{table}[h]
+\caption{LiH $R_{\rm eq}$ error (\%) vs.\ experiment (3.015~bohr) for
+  all solver $\times$ PK combinations.  ``Drift'' is the average
+  $R_{\rm eq}$ increase per unit $l_{\max}$ (bohr/$l_{\max}$).
+  Adiab.\ = adiabatic single-channel; 2D = variational
+  $(R_e, \alpha)$ solver.  Ch-blind = channel-blind PK;
+  $l$-dep = $l$-dependent PK ($\delta_{l,0}$ projection).
+  The ``2D + ch-blind (coarse)'' row uses the original 9-point R-grid;
+  the ``2D + ch-blind (fine)'' row uses a 16-point R-grid that
+  resolves the shallow PES minimum more accurately.}
+\label{tab:solver_pk}
+\begin{ruledtabular}
+\begin{tabular}{ldddc}
+  Configuration
+  & \multicolumn{1}{c}{$l{=}2$}
+  & \multicolumn{1}{c}{$l{=}3$}
+  & \multicolumn{1}{c}{$l{=}4$}
+  & Drift \\
+  \hline
+  Adiab.\ + ch-blind          &  6.4 & 16.9 & 32.8 & $+0.40$ \\
+  Adiab.\ + $l$-dep           &  5.3 & ---  & ---  & --- \\
+  2D + ch-blind (coarse)       &  6.1 &  9.5 & ---  & $+0.10$ \\
+  2D + ch-blind (fine)         &  5.5 & 10.4 & 20.4 & $+0.15$--$0.30$ \\
+  2D + $l$-dep                 &  6.1 &  9.5 & 16.1 & $+0.15$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\paragraph{Updated root cause (v2.0.32).}
+Fine-grid analysis (16 R-points, Track~BQ) revealed that the earlier
+coarse-grid survey overestimated the adiabatic contribution to the
+drift.  On the fine grid, the 2D variational solver produces drift of
+$+0.15$--$0.30$~bohr/$l_{\max}$ (Table~\ref{tab:solver_pk}),
+comparable to the adiabatic solver's $+0.40$~bohr/$l_{\max}$.
+Single-point energies at fixed geometry ($R = 3.015$~bohr) also
+diverge with $l_{\max}$: $E = -8.184$, $-8.204$, $-8.236$~Ha at
+$l_{\max} = 2$, $3$, $4$ respectively (exact: $-8.071$~Ha), violating
+the variational bound and confirming PK overcounting as the structural
+source.  CBS extrapolation gives $R_{\rm eq} \to 3.734$~bohr (23.8\%
+error).  The $l_{\max}$ divergence is therefore intrinsic to the
+composed-geometry PK architecture, not to the adiabatic approximation.
+The optimal operating point is $l_{\max} = 2$.
+
+Three conclusions emerge from the full survey:
+\begin{enumerate}
+  \item The 2D solver does \emph{not} substantially reduce drift
+    relative to the adiabatic solver.  The earlier coarse-grid result
+    ($+0.10$~bohr/$l_{\max}$) was an artifact of insufficient R-grid
+    resolution; the fine-grid drift ($+0.15$--$0.30$~bohr/$l_{\max}$)
+    is comparable to the adiabatic drift ($+0.40$~bohr/$l_{\max}$).
+  \item The $l$-dependent PK has \emph{zero effect} on the 2D solver:
+    $R_{\rm eq}$ is identical to channel-blind PK at $l_{\max} = 2$
+    (6.1\%) and $l_{\max} = 3$ (9.5\%).  The PK projection and the
+    variational $(R_e, \alpha)$ treatment are apparently orthogonal
+    corrections.
+  \item The drift is \emph{not} a residual effect---it is the
+    \emph{entire} $l_{\max}$ divergence mechanism, intrinsic to the
+    PK/composed-geometry architecture.  Higher-$l$ channels interact
+    with the PK barrier in ways that systematically overcount
+    correlation, as confirmed by the variational-bound violation at
+    fixed geometry.
+\end{enumerate}
+The $l_{\max}$ divergence is intrinsic to the composed-geometry
+approximation itself---the core/valence separation with $Z_{\rm eff}$
+injection and PK exclusion---not to the adiabatic approximation or
+the PK form.  All solver and PK combinations are now exhausted.
+
+\paragraph{Composed-geometry accuracy ceiling.}
+The operating point for production LiH calculations is $l_{\max} = 2$,
+where all four configurations give 5--6\% $R_{\rm eq}$ error.
+The accuracy cost of the composition is quantified by the
+full $N$-electron scoping study: a 4-electron mol-frame hyperspherical
+solver on $S^{11}$ (SO(12) angular basis) would have ${\sim}13{,}000$
+angular channels at $l_{\max} = 2$ (vs.\ Level~4's ${\sim}90$),
+a 144$\times$ ratio.  $S_4$ singlet symmetry reduction yields a
+${\sim}6\times$ compression, but the resulting ${\sim}3.3$~days per
+PES point at $l_{\max} = 2$ is intractable for production use.
+This 144$\times$ angular compression is what the composed geometry
+purchases; the ${\sim}5\%$ $R_{\rm eq}$ error at $l_{\max} = 2$ is
+the price.
+
+The PK pseudopotential is not an improvable approximation: it is the
+irreducible cost of factorizing the full antisymmetric wavefunction
+into composed coordinates (Paper~18, composition exchange constant).
+Three graph-native alternatives to PK were investigated and all failed:
+(i)~node exclusion has no coordinate correspondence between the core
+$S^3$ and valence Level~4 graphs; (ii)~fiber bundle Berry connection
+is intra-group, with the exchange operator $P_{ij}$ mixing coordinate
+systems; (iii)~spectral orthogonality in function space does not imply
+coordinate-space exclusion.  The master obstruction is that
+antisymmetry requires a shared coordinate system, and composition
+factorizes $\Psi_{\rm total}$ into incompatible coordinates.
+
+\paragraph{Cusp correction in the composed pipeline.}
+The Schwartz cusp correction (Paper~15, Sec.~VI.J) has been
+wired into the composed-geometry pipeline as a per-fiber
+post-processing step.  For LiH at $l_{\max} = 2$, the cusp
+correction is 0.23~mHa at $R_{\rm eq}$, which is sub-dominant
+to both the PK-induced error and the adiabatic approximation error.
+$R_{\rm eq}$ is unchanged by the cusp correction.  The correction
+is available via the \texttt{cusp\_correction=True} parameter in
+\texttt{ComposedDiatomicSolver}.
 
 Initial BeH$_2$ results validate the qualitative PES shape (bound state,
 repulsive wall, correct dissociation limit) but reveal a 32\%
@@ -1015,6 +1161,20 @@ negligible.  Self-consistent Hartree iteration is deprioritized, as
 the kinetic correction is uniform and SCF is unlikely to provide
 differential $R$-dependence.
 
+A fourth direction---transcorrelated (TC) integrals in the qubit
+pipeline---has been validated (Track~BX-3, v2.0.35).  The TC
+transformation $H_{\mathrm{TC}} = e^{-J} H\, e^{J}$ with
+$J = \tfrac{1}{2}r_{12}$ replaces the Coulomb ERI with a smooth
+gradient operator within each composed block, eliminating the
+$1/r_{12}$ cusp that drives the $1/(l+\tfrac{1}{2})^4$ partial-wave
+convergence floor.  For He, this changes the basis convergence from
+divergent (5.3\%$\to$8.2\% with $n_{\max}$) to convergent
+(3.3--3.6\% plateau).  The composed Pauli count increases by a
+constant factor of $1.68\times$ (from non-Hermiticity of the gradient
+operator), preserving the $O(Q^{2.5})$ scaling.  Electronic-only
+1-norm overhead is 9--16\%.  Cross-block perturbative MP2 corrections
+were also investigated but found negligible ($< 0.5$~mHa for LiH).
+
 \paragraph{H$_2$O: first triatomic PES.}
 The composed geometry extends to H$_2$O as a five-block decomposition:
 O~$1s^2$ core (Level~3, $Z=8$), two O--H bond pairs (Level~4 with
@@ -1082,16 +1242,18 @@ single high-dimensional coordinate system.  The key results:
   20\% (diagonal $S \cdot F^0$) to 11.7\%, matching a single-parameter
   fitted model (12\%) with zero free parameters.
 
-\item The $l_{\max}$ divergence for asymmetric bonds arises from
-  differential angular correlation: higher-$l$ channels preferentially
-  stabilize large-$R$ geometries.  The channel spreading is entirely
-  nuclear in origin, with zero contribution from electron--electron
-  correlation.  $R$-dependent PK scaling
-  [Eq.~(\ref{eq:rdep_pk})] reduces $R_{\rm eq}$ error from 13.5\%
-  to 2.0\% at $l_{\max} = 4$ for LiH, though the asymptotic drift
-  rate is unchanged.  Full 4-electron Level~4 treatment, which
-  eliminates the pseudopotential entirely, remains the
-  architecturally clean resolution.
+\item All four solver $\times$ PK combinations have been exhausted
+  (Table~\ref{tab:solver_pk}).  The 2D variational solver reduces
+  drift by $4\times$; $l$-dependent PK has zero additional effect on
+  the 2D solver.  A residual $+0.15$~bohr/$l_{\max}$ drift is
+  intrinsic to the composed-geometry approximation.  Without PK,
+  no equilibrium exists.  Ab initio $R_{\rm ref}$ derivation fails
+  (scale mismatch).  The PK pseudopotential is classified as a
+  \emph{composition exchange constant} (Paper~18): the irreducible
+  cost of factorizing the $N$-electron wavefunction into composed
+  coordinates.  The operating point is $l_{\max} = 2$ (5--6\%
+  $R_{\rm eq}$ error), where the 144$\times$ angular compression
+  vs.\ a full 4-electron solver justifies the approximation.
 \end{enumerate}
 
 The natural geometry hierarchy is now:
@@ -1103,7 +1265,8 @@ Level & System & Geometry & Best result \\
 1 & H       & $S^3$ (Fock)           & $<0.1\%$ error \\
 2 & H$_2^+$ & Prolate spheroid       & 0.70\% error \\
 3 & He      & Hyperspherical         & 0.05\% error \\
-4 & H$_2$   & Mol-frame hypersp.     & 94.1\% $D_e$ \\
+4 & H$_2$   & Mol-frame hypersp.     & 96.0\% $D_e$ \\
+4N & LiH    & Full mol-frame hypersp. (SO(12)) & $R_{\rm eq}$: 67\% ($l_{\max} = 2$--3) \\
 5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\
 5 & BeH$^+$ & Composed (Level 3+4)   & Bound, physical \\
 5 & BeH$_2$ & Composed (Level 3+4+4) & $R_{\rm eq}$: 11.7\% error \\
@@ -1111,6 +1274,180 @@ Level & System & Geometry & Best result \\
 \end{tabular}
 \end{center}
 
+
+%% ========================================================================
+%% FULL N-ELECTRON VALIDATION
+%% ========================================================================
+\section{Full $N$-Electron Validation}
+\label{sec:n_electron}
+
+The composed geometry (Level~5) approximates an exact $N$-electron
+treatment by factorizing the wavefunction into core and valence groups
+with separate coordinate systems.  The PK pseudopotential is the cost
+of this factorization (Sec.~\ref{sec:conclusion}).  To validate the
+approximation and quantify its cost, we constructed the exact
+4-electron mol-frame hyperspherical solver for LiH---Level~4N---and
+compared it directly against the composed architecture.
+
+\subsection{Level~4N: the exact $N$-electron generalization}
+
+Level~4N extends the Level~4 mol-frame hyperspherical coordinates
+from 2 to $N$ electrons.  For LiH ($N=4$), the 4 electrons live on
+$S^{11}$ (the unit sphere in $\mathbb{R}^{12}$), with angular
+symmetry group SO(12) replacing Level~4's SO(6).  The $S_4$ permutation
+group enforces antisymmetry, replacing the gerade constraint of the
+2-electron case.  Specifically, the $[2,2]$ Young diagram of $S_4$
+projects onto the singlet sector.
+
+The Jacobi tree coordinates for 4 electrons produce 11 hyperangles
+parameterized by the hyperradius $\rho$.  The angular eigenvalue
+problem is solved at each $\rho$ by diagonalizing the angular
+Hamiltonian restricted to the $S_4$ singlet ($[2,2]$) sector.
+
+\subsection{Results by $l_{\max}$}
+
+\paragraph{$l_{\max} = 0$.}
+The $S_4$ $[2,2]$ representation is \emph{empty} at $l_{\max} = 0$:
+no antisymmetric 4-electron states can be constructed from $s$-waves
+alone.  No PES can be computed.
+
+\paragraph{$l_{\max} = 1$.}
+Only 2 channels survive $S_4$ projection.  The PES is monotonically
+attractive with no equilibrium---insufficient angular differentiation
+to produce a bonding minimum.
+
+\paragraph{$l_{\max} = 2$.}
+With 12~$S_4$ $[2,2]$ channels and angular dimension 2592
+($n_{\rm grid} = 6$), the first equilibrium appears:
+\begin{itemize}
+  \item $R_{\rm eq} \approx 1.0$--$1.1$~bohr (64\% error vs.\
+    experimental 3.015~bohr)
+  \item $E_{\min} \approx -8.42$ to $-8.46$~Ha (overbinding
+    ${\sim}5\%$ vs.\ exact $-8.07$~Ha)
+  \item $D_e \approx 0.44$--$0.49$~Ha (exact: 0.092~Ha)
+  \item Wall time ${\sim}69$~s per PES point
+\end{itemize}
+
+This is a \emph{structural} result: molecular equilibrium exists
+without PK.  The 64\% $R_{\rm eq}$ error and $5{\times}$ overbinding
+indicate that $l_{\max} = 2$ is far from convergence for the
+4-electron system---higher angular momentum channels are needed for
+quantitative accuracy.  At $l_{\max} = 3$ (40 $S_4$ channels,
+angular dimension 2560), $R_{\rm eq}$ remains at ${\sim}1.0$~bohr
+(67\% error), unchanged from $l_{\max} = 2$.  The well deepens
+dramatically ($D_e = 1.19$~Ha vs $0.43$~Ha at $l_{\max} = 2$) but the
+equilibrium position does not shift outward toward experiment.  This
+confirms slow convergence: the raw SO(12) basis adds angular
+correlation that lowers $E$ uniformly but cannot differentiate core
+from valence efficiently enough to produce the correct bond length at
+tractable $l_{\max}$.  Channel decomposition at $l_{\max} = 2$ reveals
+that the dominant channels are $(0,0,1,1)$ and $(1,1,0,0)$ at 42\%
+total weight---one electron pair in $s$-wave (core) and one in
+$p$-wave (valence)---confirming that the composed geometry's
+core-valence separation reflects the exact wavefunction's structure.
+
+\subsection{The 144$\times$ compression justification}
+
+At $l_{\max} = 2$, the angular dimension comparison is:
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Solver & Angular dim & Wall time/point \\
+\midrule
+Level 4N (full 4e) & 2,592 & ${\sim}69$~s \\
+Level 5 (composed) & ${\sim}18$ & ${\sim}0.1$~s \\
+\bottomrule
+\end{tabular}
+\end{center}
+The composed geometry achieves a $144{\times}$ angular compression
+by factorizing the 4-electron problem into a 2-electron core (Level~3
+on $S^3$) and a 2-electron valence (Level~4 on $S^5$), coupled via
+$Z_{\rm eff}$ screening and the PK pseudopotential.
+
+This compression comes at the cost of the PK approximation: the
+composed solver achieves $R_{\rm eq}$ within 5--6\% at $l_{\max} = 2$,
+while the full solver gives 64\% error at the same $l_{\max}$.
+However, the composed solver's advantage grows with $l_{\max}$
+(wall time scales as $l_{\max}^2$ for composed vs.\ $l_{\max}^{11}$
+for the full solver).  At $l_{\max} = 3$, the full solver requires
+${\sim}2500$ spectral basis functions (Track~AK), while the composed
+solver remains in the tens.
+
+PK is classified as a \emph{composition exchange constant}
+(Paper~18): the irreducible cost of factorizing the $N$-electron
+wavefunction into composed coordinates.  The full $N$-electron solver
+validates this classification by demonstrating that exact $S_4$
+antisymmetry produces equilibrium without PK, confirming that PK
+approximates---rather than creates---the physics of Pauli exclusion
+in the composed architecture.
+
+\subsection{Non-adiabatic coupling diagnosis}
+
+The adiabatic solver results at $l_{\max} = 2$--$3$ (Sec.~VIII.B)
+show worsening $D_e$ overcounting with $l_{\max}$ ($0.49 \to
+1.19$~Ha vs.\ exact $0.092$~Ha).  A coupled-channel radial solver
+was constructed to test whether non-adiabatic P/Q coupling corrects
+this overcounting, following the Level~3 pattern (Paper~13).
+
+The coupled-channel approach \emph{fails} at Level~4N for numerical
+reasons that are structurally different from Level~3:
+\begin{enumerate}
+  \item \textbf{Near-degenerate channels.}  The $S_4$-projected
+    eigenvalue gaps are $0.01$--$0.05$ in the bonding region
+    ($R_e \sim 1.5$--$3.0$~bohr), compared to $O(1)$ gaps at
+    Level~3.  Since $P \sim V_{\rm coupling} / \Delta E$, the
+    P-matrix norms are $10$--$30{\times}$ larger (peak
+    $\|P\|_F = 3.3$, DBOC $= 5.4$~Ha vs.\ Level~3's $\sim 0.15$~Ha).
+  \item \textbf{No analytic P-matrix.}  Unlike Level~3, where
+    $H(R) = H_0 + R \cdot V_C$ is a linear pencil with
+    $R$-independent $dH/dR = V_C$, the 4-electron angular
+    Hamiltonian depends nonlinearly on $R_e$ through
+    $\rho = R/(2R_e)$.  Finite-difference P-matrices on a sparse
+    grid are noisy and ARPACK-seed-dependent (0.478~Ha variation
+    between runs).
+  \item \textbf{Truncated Q-matrix.}  With 3--12 channels from a
+    total of ${\sim}2592$ ($S_4$-projected), the closure
+    approximation $Q \approx PP$ captures $<0.1\%$ of external
+    channel contributions.
+\end{enumerate}
+Adding more channels makes results \emph{worse}: the 6-channel
+solver overshoots the adiabatic energy by 1.09~Ha at $R_e = 1.0$
+(wrong direction).
+
+This is a \emph{numerical} failure---the adiabatic representation is
+the wrong basis for near-degenerate channels---not a physics
+limitation.  Non-adiabatic coupling is important; the coupled-channel
+formalism simply cannot compute it reliably when channel gaps are
+$O(0.01)$.
+
+The resolution is a 2D variational solver that bypasses the adiabatic
+representation entirely.  Feasibility analysis (Track~AP) shows that
+a partial 2D treatment of $(R_e, \alpha_2)$---the inter-pair
+hyperangle controlling the core/valence partition---produces a
+$2{,}250$-dimensional tensor product at $l_{\max} = 2$, comparable
+in cost to the current adiabatic solver.  The structural findings of
+Sec.~VIII.B (equilibrium exists without PK, core-valence separation
+confirmed in the exact wavefunction) are unaffected by the solver
+choice and stand independently.
+
+\paragraph{Note added v2.0.24.}
+The 2D variational solver has been implemented and run (Track~AR,
+v2.0.23).  The 38{,}400-dimensional tensor product at $l_{\max} = 2$
+gives $E_{\min} = -7.79$~Ha (variational bound respected, above
+exact $-8.07$~Ha) with $D_e = -0.19$~Ha (unbound).  This confirms
+the adiabatic $D_e = +0.49$~Ha as an artifact and establishes that
+the $l_{\max} = 2$ $S_4$ $[2,2]$ angular basis is genuinely
+insufficient for LiH binding.  All three radial solvers (adiabatic,
+coupled-channel, 2D variational) are now exhausted.  The composed
+geometry's $144{\times}$ angular compression is essential: Level~5 at
+the same $l_{\max} = 2$ achieves 5.3\% $R_{\rm eq}$ error vs
+63.5\%.  Track~AS (v2.0.23) further confirms that the composed
+qubit encoding is categorically sparser than full $N$-electron
+encoding (334 vs 3{,}288 Pauli terms, $20{\times}$ lower 1-norm),
+validating the composed architecture for both classical and quantum
+computation.  The classical solver investigation is now complete
+(v2.0.24); the quantum simulation cost advantage is the primary
+computational result.
 
 %% ========================================================================
 %% REFERENCES

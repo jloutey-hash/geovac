@@ -1,0 +1,104 @@
+{
+  "full_4e": [
+    {
+      "l_max": 1,
+      "n_grid": 4,
+      "Q": 7,
+      "dim": 128,
+      "N_pauli": 45,
+      "N_qwc": 4,
+      "one_norm": 98.93185507645056,
+      "density": 0.00274658203125,
+      "ham_info": {
+        "l_max": 1,
+        "n_grid": 4,
+        "n_ch_raw": 16,
+        "dim": 128,
+        "Q": 7,
+        "R": 3.0,
+        "R_e": 3.0,
+        "Z_A": 3.0,
+        "Z_B": 1.0,
+        "s4_projection": true,
+        "build_time_s": 0.03737969999201596
+      }
+    },
+    {
+      "l_max": 1,
+      "n_grid": 6,
+      "Q": 9,
+      "dim": 432,
+      "N_pauli": 7064,
+      "N_qwc": 830,
+      "one_norm": 1756.6575377177105,
+      "density": 0.026947021484375,
+      "ham_info": {
+        "l_max": 1,
+        "n_grid": 6,
+        "n_ch_raw": 16,
+        "dim": 432,
+        "Q": 9,
+        "R": 3.0,
+        "R_e": 3.0,
+        "Z_A": 3.0,
+        "Z_B": 1.0,
+        "s4_projection": true,
+        "build_time_s": 0.1481962997931987
+      }
+    },
+    {
+      "l_max": 2,
+      "n_grid": 4,
+      "Q": 10,
+      "dim": 768,
+      "N_pauli": 3288,
+      "N_qwc": 48,
+      "one_norm": 738.5146019720426,
+      "density": 0.00313568115234375,
+      "ham_info": {
+        "l_max": 2,
+        "n_grid": 4,
+        "n_ch_raw": 81,
+        "dim": 768,
+        "Q": 10,
+        "R": 3.0,
+        "R_e": 3.0,
+        "Z_A": 3.0,
+        "Z_B": 1.0,
+        "s4_projection": true,
+        "build_time_s": 1.1706087000202388
+      }
+    }
+  ],
+  "composed": [
+    {
+      "max_n_core": 1,
+      "max_n_val": 1,
+      "Q": 6,
+      "N_pauli": 10,
+      "N_qwc": 1,
+      "one_norm": 16.010580684010616
+    },
+    {
+      "max_n_core": 1,
+      "max_n_val": 2,
+      "Q": 22,
+      "N_pauli": 226,
+      "N_qwc": 21,
+      "one_norm": 28.967426691580265
+    },
+    {
+      "max_n_core": 2,
+      "max_n_val": 2,
+      "Q": 30,
+      "N_pauli": 334,
+      "N_qwc": 21,
+      "one_norm": 37.33424576695508
+    }
+  ],
+  "scaling": {
+    "alpha": 13.503909199520965,
+    "prefactor": 2.545177869061731e-10
+  },
+  "verdict": "Comparable density 1.1%. Scaling exponent ~13.5. Further investigation needed."
+}

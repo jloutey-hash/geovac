@@ -1,0 +1,122 @@
+Track AF Summary: 2D + l-dependent PK for LiH
+======================================================================
+
+HEADLINE: NEGATIVE RESULT. l-dependent PK does NOT improve the 2D
+solver's l_max drift rate. The combination 2D + l-dep PK shows drift
+of +0.15 bohr/l_max (average), matching or exceeding 2D + channel-blind.
+R_eq does NOT converge with increasing l_max. The prediction that
+"with the 2D solver, l_max drift should be eliminated" is FALSIFIED.
+
+======================================================================
+HEADLINE TABLE (grid R_eq values)
+======================================================================
+
+Config                       l=2 R_eq  l=2 err%  l=3 R_eq  l=3 err%  l=4 R_eq  l=4 err%  drift
+-------                      --------  --------  --------  --------  --------  --------  -----
+adiab + channel-blind PK       ---       6.4%      ---      16.9%      ---      32.8%    +0.40
+adiab + l-dep PK                ---       5.3%      ---        ?        ---        ?        ?
+2D + channel-blind PK           ---       6.1%      ---       9.5%      ---        ?      +0.10
+2D + l-dep PK                  3.200      6.1%     3.300      9.5%     3.500     16.1%    +0.15
+2D + l-dep PK + cusp           3.200      6.1%      ---        ---      ---        ---      ---
+
+Experiment: R_eq = 3.015 bohr, D_e = 0.092 Ha, omega_e = 1405.65 cm-1
+
+======================================================================
+SPECTROSCOPIC CONSTANTS
+======================================================================
+
+Config              R_eq(Morse)  R_eq err%  D_e(grid)  omega_e   t/pt
+----                -----------  ---------  ---------  -------   ----
+2D+l-dep l=2          3.186       5.7%      0.137 Ha   1597    13.3s
+2D+l-dep l=3          3.416      13.3%      0.094 Ha   1434    30.9s
+2D+l-dep l=4          3.658      21.3%      0.070 Ha   1338   113.5s
+2D+l-dep+cusp l=2     3.183       5.6%      0.137 Ha   1596    13.4s
+
+NOTE: Morse fit R_eq values are unreliable at l_max>=3 due to
+insufficient data at large R. Grid minimum values are more trustworthy.
+
+======================================================================
+DRIFT ANALYSIS
+======================================================================
+
+Grid minimum drift:
+  l=2 -> l=3: R_eq 3.200 -> 3.300, dR = +0.100 bohr
+  l=3 -> l=4: R_eq 3.300 -> 3.500, dR = +0.200 bohr
+  Average drift: +0.150 bohr/l_max (ACCELERATING)
+
+Comparison:
+  adiab + channel-blind PK: +0.400 bohr/l_max
+  2D + channel-blind PK:    +0.100 bohr/l_max
+  2D + l-dep PK:            +0.150 bohr/l_max (this work)
+
+The drift accelerates from l=3 to l=4. At l_max=4, the PES is
+extremely flat (R=3.5 and R=3.8 differ by only 0.07 mHa), making
+R_eq poorly defined.
+
+======================================================================
+CUSP CORRECTION RESULT
+======================================================================
+
+At l_max=2, cusp correction is -0.17 mHa at R_eq (sub-dominant).
+Grid R_eq unchanged (3.200 bohr with and without cusp). Cusp is a
+nearly uniform energy shift that does not affect equilibrium geometry
+at this level of error. Higher l_max cusp runs were not performed
+(expected to be even smaller, scaling as ~1/(l+1/2)^4).
+
+======================================================================
+INTERPRETATION
+======================================================================
+
+1. l-dependent PK is IRRELEVANT to the 2D solver. When the 2D solver
+   handles all channel coupling variationally, the PK channel mode
+   makes no difference. The identical drift at l=2 and l=3 between
+   2D+channel-blind and 2D+l-dep confirms this.
+
+2. The 2D solver removes 75% of the adiabatic drift (reducing +0.40
+   to +0.10 at l=2->3), but a residual +0.10-0.20 drift remains that
+   is NOT from:
+   - The adiabatic approximation (removed by 2D solver)
+   - PK channel coupling (removed by l-dependent PK)
+   - PK form/parameters (tested extensively in Tracks AD, Q, etc.)
+   - Cusp correction (sub-mHa, no R_eq effect)
+
+3. The remaining drift source is the composed-geometry approximation
+   itself: the core/valence separation with Z_A_eff = Z_A - n_core.
+   As l_max increases, valence electrons probe regions where the
+   core screening approximation breaks down. This is intrinsic to
+   the composed architecture.
+
+4. The accelerating drift (l=3->4 is +0.200 vs l=2->3 is +0.100)
+   suggests the problem worsens at higher l_max. The even-odd
+   staircase from Track AC may contribute (l_max=4 is even, gaining
+   more from directly-coupled channels than odd l_max=3).
+
+5. The Morse D_e at l_max=3 (grid: 0.094 Ha) is coincidentally close
+   to experiment (0.092 Ha), but this is NOT meaningful because R_eq
+   is 9.5% wrong and the dissociation limit is unconverged.
+
+======================================================================
+CODE CHANGES
+======================================================================
+
+NONE. The existing composed_diatomic.py already supports:
+  level4_method='variational_2d' + pk_channel_mode='l_dependent'
+No wiring changes were needed.
+
+======================================================================
+FILES
+======================================================================
+
+PES data:
+  debug/track_af/pes_2d_ldep_lmax2.txt
+  debug/track_af/pes_2d_ldep_lmax3.txt
+  debug/track_af/pes_2d_ldep_lmax4.txt
+  debug/track_af/pes_2d_ldep_lmax2_cusp.txt
+
+Run scripts:
+  debug/track_af/run_lmax2_dense.py
+  debug/track_af/run_lmax3_dense.py
+  debug/track_af/run_lmax4_dense.py
+  debug/track_af/run_cusp_lmax2.py
+  debug/track_af/run_cusp_all.py (not yet run)
+  debug/track_af/run_2d_ldep_pk.py (full suite, not yet run)

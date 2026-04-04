@@ -1,0 +1,64 @@
+========================================================================
+TRACK AK: Detailed Supplement
+========================================================================
+
+
+A. S4 CHANNEL ANALYSIS (sigma only, heteronuclear)
+------------------------------------------------------------------------
+  l_max=0: raw=     1, S4[2,2]=    1, ratio=1.000
+  l_max=1: raw=    16, S4[2,2]=    1, ratio=0.062
+  l_max=2: raw=    81, S4[2,2]=    6, ratio=0.074
+  l_max=3: raw=   256, S4[2,2]=   20, ratio=0.078
+  l_max=4: raw=   625, S4[2,2]=   50, ratio=0.080
+
+
+B. S4 CHANNEL ANALYSIS (full m, heteronuclear)
+------------------------------------------------------------------------
+  l_max=0: S4_full=     1
+  l_max=1: S4_full=     6
+  l_max=2: S4_full=    94
+  l_max=3: S4_full=   678
+
+
+C. SPECTRAL DIMENSIONS vs LEVEL 4
+------------------------------------------------------------------------
+  l_max=0: 4e_spec=   125, L4_spec=  10, ratio=  12.5x, time=       0.3s, PRACTICAL
+  l_max=1: 4e_spec=   125, L4_spec=  20, ratio=   6.2x, time=       0.3s, PRACTICAL
+  l_max=2: 4e_spec=   750, L4_spec=  50, ratio=  15.0x, time=      54.8s, PRACTICAL
+  l_max=3: 4e_spec=  2500, L4_spec=  80, ratio=  31.2x, time=    2031.2s, TRACTABLE
+  l_max=4: 4e_spec=  6250, L4_spec= 130, ratio=  48.1x, time=   31738.3s, INTRACTABLE
+
+
+D. SO(12) vs SO(6) DEGENERACY GROWTH
+------------------------------------------------------------------------
+  nu=0: SO(6)=     1, SO(12)=       1, ratio=1.0x
+  nu=1: SO(6)=     6, SO(12)=      12, ratio=2.0x
+  nu=2: SO(6)=    20, SO(12)=      77, ratio=3.9x
+  nu=3: SO(6)=    50, SO(12)=     352, ratio=7.0x
+  nu=4: SO(6)=   105, SO(12)=    1287, ratio=12.3x
+  nu=5: SO(6)=   196, SO(12)=    4004, ratio=20.4x
+  nu=6: SO(6)=   336, SO(12)=   11011, ratio=32.8x
+  nu=7: SO(6)=   540, SO(12)=   27456, ratio=50.8x
+
+
+E. SPECTRAL MULTIPLICITY vs SO(12) DEGENERACY (l_max=0)
+------------------------------------------------------------------------
+  nu=0: mu=0.0, SO(12) degen=       1, spectral mult=   1, compression=1.0x
+  nu=2: mu=12.0, SO(12) degen=      77, spectral mult=   3, compression=25.7x
+  nu=4: mu=28.0, SO(12) degen=    1287, spectral mult=   6, compression=214.5x
+  nu=6: mu=48.0, SO(12) degen=   11011, spectral mult=  10, compression=1101.1x
+  nu=8: mu=72.0, SO(12) degen=   63206, spectral mult=  15, compression=4213.7x
+  nu=10: mu=100.0, SO(12) degen=  277134, spectral mult=  18, compression=15396.3x
+  nu=12: mu=132.0, SO(12) degen=  999362, spectral mult=  19, compression=52598.0x
+  nu=14: mu=168.0, SO(12) degen= 3105322, spectral mult=  18, compression=172517.9x
+
+
+F. n_basis SENSITIVITY AT l_max=2
+------------------------------------------------------------------------
+  n_basis=2: dim=    48, time=       0.0s, L4_ratio=   1.0x, PRACTICAL
+  n_basis=3: dim=   162, time=       0.6s, L4_ratio=   3.2x, PRACTICAL
+  n_basis=4: dim=   384, time=       7.4s, L4_ratio=   7.7x, PRACTICAL
+  n_basis=5: dim=   750, time=      54.8s, L4_ratio=  15.0x, PRACTICAL
+  n_basis=6: dim=  1296, time=     283.0s, L4_ratio=  25.9x, TRACTABLE
+  n_basis=7: dim=  2058, time=    1133.1s, L4_ratio=  41.2x, TRACTABLE
+  n_basis=8: dim=  3072, time=    3768.8s, L4_ratio=  61.4x, INTRACTABLE

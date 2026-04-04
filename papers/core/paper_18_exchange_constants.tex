@@ -352,6 +352,11 @@ exceeding the 114-function prolate CI plateau.  The residual
 7.5\% matches Paper~12's cusp diagnosis (7.6\%): the
 electron-electron cusp ($1/r_{12}$ singularity) is a completeness
 deficiency of the product basis, not a convergence issue.
+The transcorrelated approach (Paper~14, Sec.~IV; Paper~15,
+Sec.~VI.J) removes this singularity via a Jastrow similarity
+transformation, converting $1/r_{12}$ from a hard embedding
+constant to a smooth gradient operator at the cost of
+non-Hermiticity (Sec.~\ref{sec:taxonomy}).
 
 The mol-frame hyperspherical reparameterization (Paper~15)
 resolves this by introducing coordinates $(\rho, R, \alpha)$
@@ -542,6 +547,8 @@ propose the following taxonomy:
   4 (prolate CI) & prolate product & (none) & (none) & algebraic \\
   4 (hyper.) & $\mathrm{SO}(6)$ reps & $(\rho,R)$ param.
     & $\mu(\rho,R)$ & piecewise \\
+  5 (composed) & Level 3+4 fibers & full $N$-electron
+    & PK pseudopot. & composition \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -572,8 +579,19 @@ The taxonomy reveals a hierarchy of exchange types:
   \item \textbf{Embedding constants}: Single transcendental
     numbers seeding algebraic recurrences.  Determined by the
     interaction between a spectral basis and a coordinate
-    singularity.  Example: $e^a E_1(a)$ for the prolate
-    centrifugal pole.
+    singularity.  Examples: $e^a E_1(a)$ for the prolate
+    centrifugal pole; the $1/r_{12}$ electron-electron cusp,
+    which is the embedding exchange constant for the two-electron
+    coalescence in any product basis.
+    The cusp embedding constant is unique in being \emph{removable}
+    by a similarity transformation: the transcorrelated (TC)
+    Jastrow factor $J = \tfrac{1}{2} r_{12}$ satisfies
+    $e^{-J} (1/r_{12})\, e^{J} = \text{smooth}$, converting
+    the algebraic partial-wave convergence $1/(l+\tfrac{1}{2})^4$
+    to exponential.  This makes $1/r_{12}$ a ``soft'' embedding
+    constant---present in any product-space representation but
+    eliminable by a non-unitary change of basis---in contrast to
+    $e^a E_1(a)$, which is structurally irreducible.
 
   \item \textbf{Algebraic (implicit) functions}: Functions of
     continuous parameters defined implicitly by $P(R,\mu) = 0$,
@@ -597,12 +615,116 @@ The taxonomy reveals a hierarchy of exchange types:
     are piecewise-algebraic within each region but do not satisfy a
     single global characteristic polynomial. The product-space CI
     saturation at 92.5\% $D_e$ remains the key irreducibility result.
+
+  \item \textbf{Composition constants}: The accuracy cost of
+    factorizing a full $N$-electron wavefunction into composed
+    coordinates.  Unlike the preceding types, which convert between
+    discrete and continuous descriptions, composition constants
+    convert between a single-geometry and a multi-geometry
+    (factorized) description.  The factorization destroys inter-group
+    antisymmetry---the exchange operator $P_{ij}$ mixes coordinate
+    systems that composition separates---and the PK pseudopotential
+    is the local approximation to this nonlocal effect.  Example:
+    PK for LiH composed geometry (Level~3 core + Level~4 valence),
+    which achieves 144$\times$ angular compression at the cost of
+    ${\sim}5\%$ $R_{\rm eq}$ error at $l_{\max} = 2$.
 \end{enumerate}
 
 The dependency hierarchy is explicit: intrinsic constants depend
 only on dimension; calibration constants depend on the graph;
 embedding constants depend on the basis; flow functions depend
-on the full parameterized geometry.
+on the full parameterized geometry; composition constants depend
+on the factorization topology (which groups share coordinates).
+
+\paragraph{Irreducibility of the Level~4 piecewise structure.}
+The piecewise-smooth $\rho$-dependence of $\mu(\rho,R)$ at Level~4
+is not a coordinate artifact: it cannot be resolved by geometric
+elevation to any higher-dimensional space (Track~Z).  Three approaches
+were ruled out: (i)~algebraic blow-up of $|s - \rho|$ produces smooth
+sheets but with $\rho$-dependent integration limits ($\alpha = \arccos\rho$,
+$\arcsin\rho$), making matrix elements transcendental in~$\rho$;
+(ii)~Lie algebra elevation fails because $\min(s,\rho)/\max(s,\rho)$
+is $C^0$ but not~$C^1$, incompatible with matrix elements of any
+finite-dimensional Lie group representation (which are real-analytic);
+(iii)~$S^3 \times S^3$ product space fails because two-center nuclear
+attraction cannot be smooth on any single compact manifold.
+The piecewise structure thus belongs to the embedding category
+in the taxonomy: it is the irreducible geometric content of placing
+two nuclei at finite separation in hyperspherical coordinates, analogous
+to the $1/r_{12}$ codimension obstruction (Track~W) but affecting the
+nuclear rather than the electronic coupling.
+
+\paragraph{Even-odd staircase and channel convergence rate.}
+An extended convergence study at Level~4 (Paper~15, Track~AA)
+reveals a pronounced even-odd staircase in $D_e$ vs $l_{\max}$:
+even increments produce large gains ($+42$, $+6.8$, $+1.7$~pp)
+while odd increments produce near-zero gains ($+0.66$, $+0.08$~pp).
+The root cause (Track~AC) connects directly to the exchange constant
+structure: the nuclear coupling matrix
+$\langle l_1' l_2' | V_{\rm nuc} | l_1 l_2 \rangle$ is diagonal
+in one electron's angular momentum index (Kronecker delta), so
+direct coupling from the ground channel $(0,0)$ requires a
+$\Delta l = 2$ transition enforced by the gerade constraint
+$l_1 + l_2 = \text{even}$.  Odd-$l_{\max}$ channels couple only
+indirectly through the electron-electron multipole expansion.
+
+This selection rule constrains the \emph{convergence rate} of the
+partial-wave expansion: the nuclear coupling---a piecewise exchange
+constant in the taxonomy---couples to the ground state only through
+quadrupolar ($\Delta l = 2$) transitions, producing an algebraic
+convergence rate $\sim (l + 1/2)^{-2}$ with an even-odd modulation.
+The $\sigma$ and $\pi$ channel sectors are completely decoupled
+(both nuclear and $e$--$e$ coupling conserve $m$), with $\pi$
+contributing a constant ${\sim}6.6$~pp additive offset.
+
+\paragraph{PK pseudopotential as composition exchange constant.}
+The Phillips--Kleinman pseudopotential in the composed geometry
+(Paper~17) enforces core-valence orthogonality, which is a
+Pauli exclusion effect---distinct from the Coulomb exchange
+constants cataloged above.  Without PK, no equilibrium
+geometry exists (the PES is monotonically attractive), establishing
+PK as essential for creating the bonding minimum.  Ab initio
+derivation of the $R$-dependent PK scaling parameter $R_{\rm ref}$
+from core properties fails due to a fundamental scale mismatch:
+all core-derived candidates ($0.27$--$0.82$~bohr) are too small
+by a factor of $4$--$11$.
+
+A complete survey of all solver $\times$ PK combinations
+(Paper~17, Table~VI) confirms that PK is not an improvable
+approximation.  The 2D variational solver eliminates ${\sim}75\%$
+of the $l_{\max}$ drift (from the adiabatic approximation), but
+$l$-dependent PK has zero additional effect on the 2D solver.
+The residual drift ($+0.15$~bohr/$l_{\max}$) is intrinsic to
+the composed-geometry factorization.
+
+Three graph-native alternatives to PK were investigated and all
+failed: (i)~node exclusion between the core $S^3$ and valence
+Level~4 graphs has no coordinate correspondence;
+(ii)~the fiber bundle Berry connection is intra-group, and the
+exchange operator $P_{ij}$ mixes coordinate systems;
+(iii)~spectral orthogonality (function-space) does not imply
+coordinate-space exclusion.  The master obstruction is that
+antisymmetry requires a shared coordinate system; composition
+factorizes $\Psi_{\rm total}$ into incompatible coordinates.
+
+PK therefore defines a sixth exchange type in the taxonomy:
+\textbf{composition constants} convert between a single-geometry
+(full $N$-electron) and a composed-geometry (factorized) description.
+Unlike the other exchange constants, which convert between discrete
+and continuous descriptions, composition constants measure the
+accuracy cost of the factorization itself.  The ``exchange rate''
+is quantified by the 144$\times$ angular compression that composed
+LiH achieves over a full 4-electron solver on $S^{11}$
+(Paper~17, Sec.~V): the ${\sim}5\%$ $R_{\rm eq}$ error at
+$l_{\max} = 2$ is the irreducible cost of this compression.
+
+This classification is validated by the full 4-electron Level~4N
+solver (Paper~17, Sec.~VIII): exact $S_4$ antisymmetry produces
+molecular equilibrium without PK at $l_{\max} \geq 2$, confirming
+that PK approximates---rather than creates---the physics of Pauli
+exclusion.  The composition exchange constant is the cost of
+replacing exact inter-group antisymmetry with a pseudopotential
+in the factorized coordinate system.
 
 
 %% ========================================================================
@@ -701,7 +823,179 @@ with its role as a spectral-geometric exchange constant.
 
 
 %% ========================================================================
-%% VI. DISCUSSION
+%% VI. OBSERVABLE CLASSIFICATION
+%% ========================================================================
+
+\section{Observable Classification by Transcendental Content}
+\label{sec:observable_classification}
+
+The exchange constant taxonomy (Sec.~\ref{sec:taxonomy}) classifies the
+\emph{constants themselves} by their mathematical origin.  A complementary
+classification addresses the \emph{observables}: given a physical quantity
+to be computed, what class of transcendental content does it require?
+
+The conformal equivalence between the graph and continuous descriptions
+(Paper~7) implies a natural partition of observables into three classes,
+determined by what type of projection is needed to evaluate them.
+
+\begin{enumerate}
+  \item \textbf{Class~S (spectral observables):} Energy eigenvalues,
+    degeneracies, selection rules, and transition amplitudes between
+    eigenstates.  These require only the graph eigenvalue spectrum
+    and the calibration constant $\kappa$.  No transcendental content
+    beyond $\kappa = -1/16$ (rational) is needed.
+
+  \item \textbf{Class~P (single-particle spatial observables):}
+    Electron density $\rho(\mathbf{r})$, expectation values
+    $\langle r^k \rangle$, momentum distributions, and any quantity
+    requiring the wavefunction evaluated at a point in $\mathbb{R}^3$.
+    These require the conformal projection $S^3 \to \mathbb{R}^3$,
+    which introduces $\pi$ through the volume element
+    $d\Omega_{S^3} = 2\pi^2$ and the spherical harmonic
+    normalization $\int |Y_{lm}|^2 d\Omega = 1$ (with
+    $d\Omega$ carrying $4\pi$).
+
+  \item \textbf{Class~C (multi-particle correlated observables):}
+    Correlation energies, adiabatic potential energy surfaces,
+    multi-electron expectation values, and any quantity requiring
+    the inter-particle coordinate.  These require the higher exchange
+    constants: $e^a E_1(a)$ at Level~2 for $m \neq 0$ states
+    (Sec.~\ref{sec:stieltjes}), $\mu(R)$ at Level~3
+    (Sec.~\ref{sec:mu}), $\mu(\rho,R)$ at Level~4
+    (Sec.~\ref{sec:mu_level4}), and the PK composition constant
+    at Level~5.
+\end{enumerate}
+
+\noindent This classification is stated as a structural claim:
+
+\medskip
+\noindent\textbf{Claim~4.}
+\textit{The class of transcendental content required to evaluate a
+quantum-mechanical observable is determined by the type of projection
+linking the graph description to the coordinate system in which the
+observable is defined.  Spectral observables (Class~S) require no
+transcendental content.  Single-particle spatial observables (Class~P)
+require the Weyl constants ($\pi^{d/2}$).  Multi-particle correlated
+observables (Class~C) require the embedding, flow, or composition
+exchange constants of Sec.~\ref{sec:taxonomy}.}
+
+\medskip
+
+Claim~4 is falsifiable: for any observable, one can determine
+its class, identify the required exchange constants, and verify
+that no additional transcendental content enters the computation.
+The following worked examples illustrate each class.
+
+\subsection{Example 1: Hydrogen energy levels (Class~S)}
+
+The hydrogen energy spectrum $E_n = -Z^2/(2n^2)$ is a spectral
+observable.  The graph Laplacian on $S^3$ has eigenvalues
+$\lambda_n = -(n^2 - 1)$, which are integers for all $n$
+(Paper~7, Eq.~(12); Paper~0, Sec.~II).  The degeneracies
+$g_n = n^2$ are integers.  The Fock conformal mapping (Paper~7,
+Sec.~IV) converts these integer eigenvalues to the Rydberg
+spectrum via the energy-shell constraint $p_0^2 = -2E$
+and the stereographic focal length:
+\begin{equation}
+  E_n = -\frac{Z^2}{2n^2}\;\text{Ha},
+  \label{eq:hydrogen_class_s}
+\end{equation}
+with the calibration constant $\kappa = -1/16$ (rational)
+mediating between graph eigenvalues and physical energies
+(Sec.~\ref{sec:kappa_derivation}).  Every quantity in this
+derivation---eigenvalues, degeneracies, $\kappa$---is an
+integer or rational number.  No transcendental content enters.
+
+Selection rules provide a second example.  The dipole selection
+rule $\Delta l = \pm 1$ follows from the triangle inequality
+on the Gaunt integral
+$\int Y_{l_1 m_1} Y_{1q} Y_{l_2 m_2}\,d\Omega$, which
+reduces to a product of Wigner $3j$ symbols---rational numbers
+computed from factorials of integers~\cite{loutey_paper0}.
+No transcendental content enters.
+
+\subsection{Example 2: Electron density (Class~P)}
+
+The electron density $\rho(\mathbf{r}) = |\psi(\mathbf{r})|^2$
+requires evaluating the wavefunction in position space.  On the
+graph, the state $|n, l, m\rangle$ is a node with an integer
+label; in $\mathbb{R}^3$, the corresponding wavefunction is
+$\psi_{nlm}(\mathbf{r}) = R_{nl}(r)\,Y_{lm}(\theta,\phi)$.
+The conformal projection $S^3 \to \mathbb{R}^3$ (Paper~7,
+Sec.~III) introduces the conformal factor
+$\Omega = 2p_0/(p^2 + p_0^2)$, which mediates between the
+unit-sphere measure $d\Omega_{S^3}$ and the flat-space volume
+element $d^3\mathbf{r}$.  The spherical harmonic normalization
+$\int |Y_{lm}|^2\,d\Omega = 1$ introduces $\pi$ through the
+solid angle $\oint d\Omega = 4\pi$.  The radial normalization
+$\int_0^\infty |R_{nl}|^2\,r^2\,dr = 1$ introduces no additional
+transcendentals for hydrogen (the integrals are rational multiples
+of $a_0^{-3}$ times exponentials, evaluated in closed form).
+
+The density is thus a Class~P observable: it requires the $\pi$
+that enters through the projection from the dimensionless $S^3$
+topology to the dimensionful $\mathbb{R}^3$ coordinate system.
+
+\subsection{Example 3: Helium ground state energy (Class~C)}
+
+The helium ground state energy $E_0 = -2.9037$~Ha~\cite{drake2006}
+is a correlated observable.  The Level~3 hyperspherical solver
+(Paper~13) computes it via the adiabatic potential $U(R)$, which
+depends on the angular eigenvalue $\mu(R)$.  The function $\mu(R)$
+satisfies the characteristic polynomial $P(R,\mu) = 0$
+(Sec.~\ref{sec:algebraic_curve}), with coefficients in
+$\mathbb{Q}(\pi, \sqrt{2})$ inherited from the angular coupling
+matrix~\cite{loutey_track_p1}.  The energy is obtained by
+integrating the hyperradial Schr\"odinger equation with
+$U(R)$ as the effective potential---a definite integral over
+the algebraic curve, producing a transcendental number.
+
+On the $S^3 \times S^3$ product space (Level~3 FCI), the same
+energy can in principle be computed without $\mu(R)$: the
+Hamiltonian matrix has entries given by Gaunt integrals (rational)
+and the Slater $F^0$ direct Coulomb integrals (algebraic on $S^3$,
+Paper~7 Sec.~VI).  The FCI result (0.35\% error) demonstrates that
+the correlated energy \emph{can} be approximated within the
+algebraic framework, but the $\mu(R)$ parameterization is needed
+to achieve sub-0.1\% accuracy.  The transition from Class~S to
+Class~C reflects the physical content: electron-electron
+correlation couples the two $S^3$ factors, and the coupling
+strength varies with the hyperradial coordinate $R$---a spatial
+degree of freedom that exists only in the projected description.
+
+\subsection{Boundary cases}
+
+Two boundary cases clarify the classification:
+
+\begin{itemize}
+  \item \textbf{Ionization energies} are spectral (Class~S) when
+    computed as eigenvalue differences $\Delta E = E_n - E_m$,
+    which involve only $\kappa$ and integer quantum numbers.
+    However, photoionization \emph{cross sections} require the
+    dipole matrix element $\langle \psi_f | \mathbf{r} | \psi_i
+    \rangle$, which is a spatial observable (Class~P) because
+    it evaluates the wavefunction at positions in $\mathbb{R}^3$.
+
+  \item \textbf{Two-electron energies} computed via FCI on
+    $S^3 \times S^3$ are formally Class~S (graph eigenvalues
+    of the product-space Hamiltonian), but achieve limited
+    accuracy due to the product-basis completeness deficiency
+    (Sec.~\ref{sec:mu_level4}).  High-accuracy two-electron
+    energies require the Class~C exchange constants.
+    The classification thus tracks both the type of observable
+    and the accuracy target.
+\end{itemize}
+
+The classification does not assert that one class is more
+fundamental than another.  The conformal equivalence
+(Paper~7) ensures that all three descriptions---graph, projected
+single-particle, correlated multi-particle---are mathematically
+equivalent.  The classification identifies which exchange
+constants mediate between them.
+
+
+%% ========================================================================
+%% VII. DISCUSSION
 %% ========================================================================
 
 \section{Discussion}
@@ -951,7 +1245,7 @@ the energy-shell scaling $E \propto Z^2$.
 
 
 %% ========================================================================
-%% VII. CONCLUSION
+%% VIII. CONCLUSION
 %% ========================================================================
 
 \section{Conclusion}
@@ -1024,6 +1318,25 @@ Two implications for the GeoVac program follow:
     numerical value depends on the graph construction, not on
     abstract spectral invariants of $S^3$.
 \end{enumerate}
+
+\paragraph{Note added v2.0.24.}
+The exchange constant taxonomy has been validated by the full
+$N$-electron solver (Tracks~AJ--AS, v2.0.19--23).  The PK
+pseudopotential, classified here as a \emph{composition exchange
+constant}, has been confirmed as an approximation to exact $S_4$
+antisymmetry: the full 4-electron solver produces molecular
+equilibrium without PK at $l_{\max} \geq 2$ (Paper~17, Sec.~VIII).
+The 2D variational solver (Track~AR) confirmed that adiabatic $D_e$
+overcounting was an artifact, and that the $l_{\max} = 2$ angular
+basis is genuinely insufficient for binding---the composed geometry's
+$144{\times}$ angular compression via core/valence pre-optimization
+is essential.  The quantum encoding comparison (Track~AS) confirmed
+that the composed architecture produces categorically sparser qubit
+Hamiltonians than the full $N$-electron encoding, with the structural
+sparsity arising from Gaunt selection rules (the same algebraic
+structure that produces the exchange constants classified in this
+paper).  The classical solver investigation across all levels is now
+complete (v2.0.24).
 
 \begin{acknowledgments}
 Computational implementation and documentation drafting were
@@ -1104,6 +1417,12 @@ GeoVac supplementary material (2026).
 J.~Loutey,
 ``Track S: Level~4 Algebraic Curve---Structural Negative Result,''
 GeoVac supplementary material (2026).
+
+\bibitem{drake2006}
+G.~W.~F.~Drake,
+``High precision calculations for helium,''
+in \textit{Springer Handbook of Atomic, Molecular, and Optical Physics},
+edited by G.~W.~F.~Drake (Springer, New York, 2006), pp.~199--219.
 
 \bibitem{dlmf_laguerre}
 NIST Digital Library of Mathematical Functions,
