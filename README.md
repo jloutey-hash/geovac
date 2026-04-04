@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.26-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.38-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 2.0.26** - Quantum MVP: Export Pipeline & Competitive Benchmark
+**Version 2.0.38** - TC Integrals, Market Test, Coupled Composition & Paper 19
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for quantum simulation of molecular systems, achieving O(Q^2.5) Pauli term scaling -- a 51x to 1,712x advantage over published Gaussian baselines (Paper 14). The sparsity is intrinsic to the basis: angular momentum selection rules in the Gaunt integrals enforce block-diagonal electron repulsion integrals, producing Hamiltonians that are sparse in structure and concentrated in weight (O(Q^1.69) 1-norm).
 
@@ -18,13 +18,34 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v2.0.26
+## What's New in v2.0.38
 
-**Quantum MVP: consumable Hamiltonian export and competitive Gaussian benchmark.**
+### Transcorrelated Integrals (v2.0.35-36, Tracks BX-3/BX-4)
 
-### Ecosystem Export Pipeline
+TC-modified qubit Hamiltonians via the composed pipeline bypass the adiabatic solver entirely:
 
-GeoVac Hamiltonians now export to OpenFermion, Qiskit, and PennyLane:
+| System | Standard err% | TC err% | Pauli ratio |
+|--------|:------------:|:-------:|:-----------:|
+| He (max_n=1) | 5.3% | 3.3% | 1.68× |
+| He (max_n=3) | 8.2% (diverging) | 3.6% (converging) | 1.68× |
+
+O(Q^2.5) scaling preserved. TC angular gradient (Track BX-4) is a **negative result**: 2.67× Pauli increase for <0.02 pp accuracy. Radial-only is the default.
+
+### Quantum Resource Market Test (v2.0.36, Track CA)
+
+Head-to-head 1-norm comparison against computed Gaussian baselines:
+
+| Metric | GeoVac LiH (Q=30) | Gaussian STO-3G (Q=12) | Advantage |
+|--------|:-----------------:|:---------------------:|:---------:|
+| Pauli terms | 334 | 907 | 2.7× |
+| QWC groups | 21 | 273 | 13× |
+| 1-norm (λ) | 33.3 Ha | 34.3 Ha | 0.97× (match) |
+
+He equal-qubit at Q=28: GeoVac λ=78.4 vs Gaussian cc-pVTZ λ=530.5 (6.8× lower).
+
+### General Composed Builder (v2.0.30, Tracks BG-BK)
+
+Single `build_composed_hamiltonian(spec)` for all molecules, driven by `MolecularSpec` dataclass and atomic classifier:
 
 ```python
 from geovac.ecosystem_export import hamiltonian
@@ -34,72 +55,51 @@ op_of = h.to_openfermion()   # QubitOperator
 op_pl = h.to_pennylane()     # qml.Hamiltonian
 ```
 
-VQE validated on statevector simulator: H₂ converges to 0.031 mHa of exact diagonalization.
+Six composed molecules: LiH (334), BeH₂ (556), H₂O (778), HF (667), NH₃ (889), CH₄ (1000 Pauli terms). Consistent ~Q^2.2 within-molecule scaling.
 
-### Head-to-Head Gaussian Comparison (CLEAR WIN)
+### Coupled Composition (v2.0.37, Track CB — NEGATIVE)
 
-| System | GeoVac | Gaussian (cc-pVDZ est.) | Advantage |
-|--------|:------:|:----------------------:|:---------:|
-| He (Q=28) | 2,665 terms | 21,607 (cc-pVTZ) | 8.1x |
-| LiH (Q~30) | 334 terms | ~63,500 | 190x |
-| H₂O (Q=70) | 778 terms | ~580,000 | 746x |
+Replacing PK with cross-block ERIs *without* cross-center V_ne: 29% error (worst). Decoupled blocks (10.9%) outperform PK (15.0%), confirming PK overcorrection. Root cause: missing two-center nuclear attraction integrals.
 
-Scaling: Q^2.5 (GeoVac) vs Q^3.9-4.3 (Gaussian). Accuracy caveat: GeoVac R_eq errors 5.3%-26% vs Gaussian <0.1%.
+### Paper 19 — PK-Free Research Path (v2.0.38, Track CC — Conjectural)
 
-### Quantum Encoding Benchmarks
+Documents the mathematical connection between GeoVac's S³ framework and the Coulomb Sturmian / Shibuya-Wulfman integral formalism. Outlines a PK-free coupled composition architecture via two-center integrals. Critical unknown: angular expansion convergence at molecular bond lengths.
+
+### Ecosystem & Infrastructure (v2.0.27-29)
+
+- **Ecosystem export:** OpenFermion, Qiskit, PennyLane via `geovac.ecosystem_export`
+- **PK partitioning:** Classical 1-RDM evaluation removes PK from quantum circuit (78× 1-norm reduction for H₂O)
+- **geovac-hamiltonians:** Standalone PyPI package (92 KB wheel, 5 systems)
+- **IBM Quantum demo:** VQE on Aer simulator and IBM hardware modes
+- **VQE validation:** H₂ converges to 0.031 mHa on statevector simulator
+
+### Quantum Encoding Summary
 
 | Metric | GeoVac (Composed) | Gaussian Baselines | Advantage |
 |--------|:-----------------:|:------------------:|:---------:|
 | Pauli scaling (molecules) | O(Q^2.5) | O(Q^3.9-4.3) | Structural |
 | LiH (Q=30) | 334 terms | 17,065 (Trenev) | 51x |
-| BeH2 (Q=50) | 556 terms | 256,000 (Trenev) | 460x |
-| H2O (Q=70) | 778 terms | 1.33M (Trenev) | 1,712x |
-| He 1-norm (Q=28) | 37 Ha | 251 Ha | 6.8x |
+| BeH₂ (Q=50) | 556 terms | 256,000 (Trenev) | 460x |
+| H₂O (Q=70) | 778 terms | 1.33M (Trenev) | 1,712x |
+| He 1-norm (Q=28) | 78.4 Ha | 530.5 Ha (cc-pVTZ) | 6.8x |
 | Full vs composed (Q=10) | 334 terms | 3,288 terms (full N-e) | 10x sparser |
 
 ### Classical Validation Benchmarks (Complete)
 
-- H2 at 96.0% D_e (Level 4, l_max=6 with cusp correction, CBS ~97%)
+- H₂ at 96.0% D_e (Level 4, l_max=6 with cusp correction, CBS ~97%)
 - LiH R_eq at 5.3% (Level 5 composed, l-dependent PK, l_max=2)
-- BeH2 R_eq at 11.7% (full 1-RDM exchange, zero free parameters)
-- H2O R_eq at 26% (5-block composed, charge-center origin)
+- BeH₂ R_eq at 11.7% (full 1-RDM exchange, zero free parameters)
+- H₂O R_eq at 26% (5-block composed, charge-center origin)
 - Full 4-electron LiH equilibrium without PK (Level 4N structural validation)
 
 ### Prior Releases
-- **v2.0.21:** Track AM (l_max=3 convergence, 67% R_eq unchanged), Track AN (full documentation update)
-- **v2.0.20:** Track AJ (first PK-free equilibrium at l_max=2), Track AK (1000x spectral compression)
-- **v2.0.19:** Track AF (2D + l-dependent PK, negative), Track AG (4-electron scoping), Track AH (graph-native antisymmetry, negative), Track AI (paper consolidation)
-- **v2.0.17:** Cusp Attack sprint (Tracks U/W/X), Track Z geometric elevation, Track AA convergence (96.0% D_e at l_max=6), Track AB cusp wiring, Tracks AC/AD diagnostics
-- **v2.0.14:** Cusp Attack sprint — Track U (alpha-only cusp factor, negative), Track W (cusp graph topology, negative), Track X (Schwartz cusp correction, positive: He 0.10% at l_max=2)
-- **v2.0.13:** Algebraic curve, algebraic defaults, paper revisions
-- **v2.0.12:** Algebraic Z_eff (Track N), algebraic Slater integrals (Track O), algebraic curve (Tracks P1/P2), spectral PK projector (Track Q, negative)
-- **v2.0.11:** Paper 18: Exchange Constants, Track J (algebraic m≠0), Track K (spectral angular 269× speedup)
-- **v2.0.10:** Algebraic Laguerre matrix elements (Level 3, Track H: 11× build speedup), spectral Level 4 hyperradial (Track I: 16× dimension reduction), associated Laguerre m≠0 (Track J: single transcendental seed)
-- **v2.0.9:** Five-lane sprint — algebraic & spectral infrastructure (Levels 2-3, 5), 2D solver in composition pipeline
-- **v2.0.8:** Three-lane sprint — spectral Laguerre Level 2 (250× reduction, 5000× accuracy), Paper 14 expanded benchmarks, Level 3 convergence ceiling (0.19-0.20% floor)
-- **v2.0.6:** Algebraic Angular Solver & Coupled-Channel Integration (Level 3)
-- **v2.0.5:** Asymmetric Bond Diagnostic Arc — l_max divergence diagnosis (+0.23 bohr/l_max), R-dependent PK scaling (2.0% at l_max=4), negative results (eigenchannel rotation, spheroidal compression, self-consistent PK, projected PK)
-- **v2.0.4:** H₂O Composed Solver — 5-block architecture, R_eq 26%, charge asymmetry diagnostic, lone pair coupling (negative result)
-- **v2.0.3:** Commutator-Based Trotter Bounds — r ~ Q^{1.47}, 7× fewer steps at Q=60
-- **v2.0.2:** Full 1-RDM Exchange — BeH₂ R_eq 11.7%, algebraic methods, l-dependent PK (LiH 5.3%)
-- **v2.0.1:** BeH₂ Polyatomic Diagnostic — inter-fiber exchange coupling (20% R_eq), failed approaches documented
-- **v2.0.0:** Composed Multi-Center Qubit Hamiltonians — universal Q^2.5 Pauli scaling, 51×–1,712× Gaussian advantage
-- **v1.9.0:** VQE Benchmark Infrastructure — validated Gaussian baselines, equal-qubit comparison, 35 tests
-- **v1.8.0:** Quantum Simulation Cost Analysis — O(Q^1.69) Pauli 1-norm, measurement/simulation cost modules, 48 tests
-- **v1.7.7:** Epistemic calibration & rhetorical tightening (Papers 0, 7, 16, FCI-A, terminology audit)
-- **v1.7.6:** Paper 2 universal algebraic identity B_formal/N = d, quaternionic/octonionic Hopf negative results, residual analysis
-- **v1.7.4:** Paper 2 algebraic selection principle (B/N = 3(m+2)(m-1)/10), S³ specificity proof, spectral geometry survey (negative results)
-- **v1.7.3:** Paper 2 rewrite — statistical validation (p = 5.2×10⁻⁹), circulant Z₃ structure, derivation chain assessment
-- **v1.7.2:** Documentation review & epistemic tightening (Papers 0, 1, 16)
-- **v1.7.1:** Paper 2 rewrite — α from Hopf bundle (8.8×10⁻⁸, zero params, `hopf_bundle.py`)
-- **v1.7.0:** Composed Natural Geometries (Paper 17, LiH R_eq 6.4%, BeH⁺ bound)
-- **v1.6.1:** Hierarchical Molecular Solvers (FrozenCoreLatticeIndex, LockedShellMolecule)
-- **v1.6.0:** Chemical Periodicity from S_N Representation Theory (Paper 16)
-- **v1.5.0:** Algebraic Structure & SO(3N) Generalization (Papers 7 & 13)
-- **v1.4.0:** Papers 14-15, Level 4 Solver (H₂ 94.1%, HeH⁺ 93.1%)
-- **v1.2.0:** QA & Corrections (Berry phase retraction, autoionization sections)
-- **v1.1.0:** Multi-Particle Natural Geometry (Papers 12-13, He 0.05%, H$_2$ 92.4% $D_e$)
-- **v1.0.x:** Paper 11, Direct CI, LiH benchmark, Bond Sphere theory
+- **v2.0.26:** Ecosystem export pipeline, head-to-head Gaussian comparison (190× fewer Pauli for LiH)
+- **v2.0.21:** Track AM (l_max=3 convergence), Track AN (full documentation update)
+- **v2.0.14-20:** Cusp attack (3 tracks), N-electron architecture (Tracks AF-AS), spectral solvers
+- **v2.0.6-13:** Algebraic infrastructure, spectral bases, exchange constants (Paper 18)
+- **v2.0.0-5:** Composed multi-center qubit Hamiltonians, diagnostics, polyatomics
+- **v1.7-1.9:** VQE benchmarks, measurement cost analysis, Paper 2 rewrite, Paper 17
+- **v1.0-1.6:** Foundation papers (0, 1, 6-16), solvers, Direct CI, Bond Sphere theory
 
 ---
 
@@ -335,7 +335,16 @@ geovac/                 Core package
   gaussian_reference.py   Gaussian baselines (H₂ STO-3G, He STO-3G/cc-pVDZ/cc-pVTZ)
   measurement_grouping.py QWC measurement group analysis
   trotter_bounds.py       Pauli 1-norm and Trotter error bounds
-  composed_qubit.py       Composed multi-center qubit Hamiltonians (LiH, BeH₂, H₂O)
+  composed_qubit.py       General composed qubit Hamiltonians (6 molecules via MolecularSpec)
+  atomic_classifier.py    Atomic classification Z→block decomposition (Z=1-10)
+  molecular_spec.py       MolecularSpec dataclass for general composed builder
+  ecosystem_export.py     OpenFermion, Qiskit, PennyLane export pipeline
+  pk_partitioning.py      Classical PK energy from VQE 1-RDM
+  tc_integrals.py         Transcorrelated integrals for composed pipeline
+  coupled_composition.py  Coupled composition (Track CB, negative result)
+  cross_block_mp2.py      Cross-block ERI computation
+  n_electron_2d.py        2D variational solver for full N-electron (Track AR)
+  n_electron_qubit.py     Full N-electron quantum encoding comparison (Track AS)
   cusp_factor.py          Cusp factor solver (Track U, negative result)
   cusp_graph.py           Cusp graph analysis (Track W, negative result)
   cusp_correction.py      Schwartz cusp correction (Track X)
@@ -354,7 +363,7 @@ geovac/                 Core package
   dirac_hamiltonian.py    Relativistic Dirac solver
 
 papers/
-  core/                 Defensible foundations (Papers 0, 1, 6-15, 17-18, FCI)
+  core/                 Defensible foundations (Papers 0, 1, 6-16, 17-18, FCI)
     Paper 0:  Geometric packing & universal constant
     Paper 1:  Spectral graph theory & eigenvalue methods
     Paper 6:  Quantum dynamics & thermodynamics
@@ -364,11 +373,10 @@ papers/
     Paper 13: Hyperspherical lattice (multi-electron atoms)
     Paper 14: Structurally sparse qubit Hamiltonians
     Paper 15: Level 4 mol.-frame hyperspherical (H2 96.0%, HeH+ 93.1%)
+    Paper 16: Chemical periodicity from S_N representation theory (atomic classifier)
     Paper 17: Composed natural geometries (LiH 5.3%, BeH⁺)
     Paper 18: Spectral-geometric exchange constants (Weyl-Selberg, α connection)
     FCI-A:    Multi-electron atoms (He, Li, Be)
-  observations/         Empirical observations & pattern recognition (Paper 16)
-    Paper 16: Chemical periodicity from S_N representation theory
   conjectures/          Theoretical explorations (Papers 2-5, 19)
     Paper 2:  Fine structure α from Hopf bundle (8.8×10⁻⁸ error)
     Paper 19: PK-free molecular Hamiltonians via Coulomb Sturmian two-center integrals
