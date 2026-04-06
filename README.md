@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.38-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.43-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 2.0.38** - TC Integrals, Market Test, Coupled Composition & Paper 19
+**Version 2.0.43** - Balanced Coupled Composition (LiH/BeH₂/H₂O), TC Integrals, Market Test & Paper 19
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for quantum simulation of molecular systems, achieving O(Q^2.5) Pauli term scaling -- a 51x to 1,712x advantage over published Gaussian baselines (Paper 14). The sparsity is intrinsic to the basis: angular momentum selection rules in the Gaunt integrals enforce block-diagonal electron repulsion integrals, producing Hamiltonians that are sparse in structure and concentrated in weight (O(Q^1.69) 1-norm).
 
@@ -18,7 +18,22 @@ This workflow is itself a research contribution — an experiment in whether age
 
 ---
 
-## What's New in v2.0.38
+## What's New in v2.0.42
+
+### Balanced Coupled Composition (v2.0.39-42, Track CD — MIXED)
+
+- **v2.0.39-42 — Track CD: Balanced coupled composition.** Cross-center nuclear attraction integrals via multipole expansion replace PK pseudopotential. Non-collinear geometries via Wigner D-matrix rotation (Sprint 5). Complete polyatomic census:
+
+| System | Blocks | Q | Composed Pauli | Balanced Pauli | Ratio | λ_comp (Ha) | λ_bal (Ha) | λ ratio |
+|--------|:------:|:-:|:--------------:|:--------------:|:-----:|:-----------:|:----------:|:-------:|
+| LiH | 2 | 30 | 334 | 878 | 2.63× | 37.3 | 74.1 | 1.98× |
+| BeH₂ | 3 | 50 | 556 | 2,652 | 4.77× | 354.9 | 304.7 | 0.86× |
+| H₂O | 5 | 70 | 778 | 5,798 | 7.45× | 361/28,053 | 1,509.3 | 4.18×/0.054× |
+
+- LiH is the only bound 4e FCI config (1.8% energy, 7.0% R_eq). n_max=3 analytical: 0.20% energy.
+- BeH₂: balanced 1-norm < composed (0.86×) — balanced cheaper for QPE.
+- H₂O: balanced eliminates PK (18.6× cheaper than composed w/ PK). FCI infeasible (10e).
+- Pauli ratio grows with block count: 2.63× → 4.77× → 7.45×.
 
 ### Transcorrelated Integrals (v2.0.35-36, Tracks BX-3/BX-4)
 
@@ -61,9 +76,9 @@ Six composed molecules: LiH (334), BeH₂ (556), H₂O (778), HF (667), NH₃ (8
 
 Replacing PK with cross-block ERIs *without* cross-center V_ne: 29% error (worst). Decoupled blocks (10.9%) outperform PK (15.0%), confirming PK overcorrection. Root cause: missing two-center nuclear attraction integrals.
 
-### Paper 19 — PK-Free Research Path (v2.0.38, Track CC — Conjectural)
+### Paper 19 — Balanced Coupled Composition (v2.0.39-43, Track CD — Supporting)
 
-Documents the mathematical connection between GeoVac's S³ framework and the Coulomb Sturmian / Shibuya-Wulfman integral formalism. Outlines a PK-free coupled composition architecture via two-center integrals. Critical unknown: angular expansion convergence at molecular bond lengths.
+Balanced coupled architecture: cross-center V_ne via multipole expansion (exact termination at L_max=2*l_max by Gaunt selection rules), analytical integrals via incomplete gamma functions. LiH 0.20% energy error at n_max=3, 878 Pauli terms. 3-molecule census: LiH/BeH₂/H₂O. Only bound 4-electron FCI configuration. PK-free, regime-dependent 1-norm advantage over composed framework.
 
 ### Ecosystem & Infrastructure (v2.0.27-29)
 
@@ -377,9 +392,9 @@ papers/
     Paper 17: Composed natural geometries (LiH 5.3%, BeH⁺)
     Paper 18: Spectral-geometric exchange constants (Weyl-Selberg, α connection)
     FCI-A:    Multi-electron atoms (He, Li, Be)
-  conjectures/          Theoretical explorations (Papers 2-5, 19)
+    Paper 19: Balanced coupled composition (0.20% energy, PK-free, 3-molecule census)
+  conjectures/          Theoretical explorations (Papers 2-5)
     Paper 2:  Fine structure α from Hopf bundle (8.8×10⁻⁸ error)
-    Paper 19: PK-free molecular Hamiltonians via Coulomb Sturmian two-center integrals
   archive/              Historical papers, superseded versions (Papers 8-9, 10, FCI-M)
     Paper 8-9: Bond Sphere & Sturmian negative theorem, SO(4) selection rules
     Paper 10: Nuclear lattice for vibration/rotation

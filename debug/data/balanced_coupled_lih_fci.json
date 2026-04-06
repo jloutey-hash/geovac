@@ -1,0 +1,99 @@
+{
+  "track": "CD",
+  "version": "v2.0.39",
+  "system": "LiH",
+  "max_n": 2,
+  "Q": 30,
+  "M": 15,
+  "R_eq_exact": 3.015,
+  "E_exact": -8.0706,
+  "D_e_exact": 0.092,
+  "phase1": {
+    "L_max_needed": 2,
+    "convergence": "exact_by_selection_rules",
+    "ss_needs": "L=0_only",
+    "sp_needs": "L=1_only",
+    "pp_needs": "L=0_and_L=2",
+    "grid_accuracy_Z1": "0.18%_at_n_grid_4000",
+    "decision": "PROCEED"
+  },
+  "resources": {
+    "balanced": {
+      "N_pauli": 878,
+      "one_norm_Ha": 74.06,
+      "n_qwc": 87
+    },
+    "composed_PK": {
+      "N_pauli": 334,
+      "one_norm_Ha": 37.33,
+      "n_qwc": 21
+    },
+    "coupled_CB": {
+      "N_pauli": 854,
+      "one_norm_Ha": 85.69,
+      "n_qwc": 88
+    },
+    "gaussian_sto3g": {
+      "N_pauli": 907,
+      "one_norm_Ha": 34.3,
+      "n_qwc": 273
+    }
+  },
+  "fci_4electron": {
+    "R_points": [
+      2.0,
+      2.5,
+      3.0,
+      3.015,
+      3.5,
+      4.0,
+      5.0
+    ],
+    "balanced": {
+      "E_at_Req": -7.924,
+      "R_eq": 3.226,
+      "R_eq_err_pct": 7.0,
+      "E_err_pct": 1.8,
+      "D_e": 0.037,
+      "bound": true,
+      "variational_bound": "OK"
+    },
+    "decoupled": {
+      "E_at_Req": -7.195,
+      "bound": false,
+      "E_err_pct": 10.9
+    },
+    "composed_PK": {
+      "E_at_Req": -6.863,
+      "bound": false,
+      "E_err_pct": 15.0
+    },
+    "coupled_CB": {
+      "E_at_Req": -5.734,
+      "bound": false,
+      "E_err_pct": 29.0
+    }
+  },
+  "cross_vne_census": {
+    "core_to_H": {
+      "nonzero": 11,
+      "max_mag": 0.373,
+      "trace": -1.646
+    },
+    "val_Li_to_H": {
+      "nonzero": 11,
+      "max_mag": 0.328,
+      "trace": -1.182
+    },
+    "H_to_Li": {
+      "nonzero": 11,
+      "max_mag": 0.985,
+      "trace": -3.544
+    },
+    "total_vne_terms": 33,
+    "total_vne_trace": -6.372
+  },
+  "conjecture1_pauli_le_1500": true,
+  "conjecture2_Req_lt_5pct": false,
+  "classification": "PARTIAL_POSITIVE"
+}

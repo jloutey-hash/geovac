@@ -1,0 +1,69 @@
+{
+  "track": "CD Phase 4A",
+  "classification": "MIXED",
+  "system": "LiH",
+  "n_max": 3,
+  "Q": 84,
+  "M": 42,
+  "resources": {
+    "N_pauli": 19959,
+    "one_norm_Ha": 448.85,
+    "n_qwc": 2298,
+    "N_pauli_composed": 7879,
+    "pauli_ratio": 2.53,
+    "pauli_scaling_exponent": 3.03,
+    "one_norm_scaling_exponent": 1.75
+  },
+  "vne_termination": {
+    "L_max_needed": 4,
+    "confirmed": true,
+    "nonzero_terms": 168,
+    "vne_trace": -12.542
+  },
+  "fci_pes": {
+    "R_points": [
+      2.5,
+      3.015,
+      3.5
+    ],
+    "E_fci": [
+      -8.008859,
+      -8.048108,
+      -8.050195
+    ],
+    "E_exact": -8.0706,
+    "R_eq_fit": 3.287,
+    "R_eq_error_pct": 9.0,
+    "E_eq_fit": -8.053445,
+    "E_eq_error_pct": 0.21,
+    "variational_bound": "OK at all R",
+    "fci_dim": 741321,
+    "fci_nnz": 22785273,
+    "fci_time_s_per_point": [
+      8536,
+      6854,
+      8610
+    ]
+  },
+  "convergence_analysis": {
+    "energy_direction": "CONVERGENT",
+    "energy_nmax2": -7.924,
+    "energy_nmax3": -8.048,
+    "error_nmax2_pct": 1.8,
+    "error_nmax3_pct": 0.28,
+    "improvement_factor": 6.4,
+    "r_eq_direction": "DIVERGENT",
+    "r_eq_nmax2": 3.226,
+    "r_eq_nmax3": 3.287,
+    "r_eq_drift": 0.061,
+    "r_eq_drift_vs_PK": "0.061 vs 0.15-0.22 bohr (smaller)",
+    "note": "3-point parabolic fit is coarse; finer scan needed"
+  },
+  "grid_convergence": {
+    "Z3_core_n4000": 9e-08,
+    "Z1_val_n4000": 0.00178,
+    "Z1_val_n8000": 0.000883,
+    "Z1_val_n32000": 0.00022,
+    "convergence_order": "O(1/n_grid)"
+  }
+}

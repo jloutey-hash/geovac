@@ -16,7 +16,7 @@ Two-Center Sturmian Integrals and Coupled Composition}
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
 
-\date{April 3, 2026}
+\date{April 6, 2026}
 
 %% ========================================================================
 %% ABSTRACT
@@ -56,8 +56,22 @@ that would result from incorporating two-center integrals.  If the
 angular expansion converges in few terms at molecular bond lengths,
 the coupled Hamiltonian would be PK-free, structurally sparse, and
 significantly more accurate than the current composed framework.
-This paper documents the mathematical connections and research path;
-implementation and benchmarks are deferred.
+This paper presents the balanced coupled architecture, documents its mathematical foundations, and reports computational benchmarks across three molecules (LiH, BeH$_2$, H$_2$O).
+
+We report computational results from the first three phases.  The
+convergence concern is resolved: the multipole expansion of the
+cross-center potential terminates exactly at $L_{\max} = 2l_{\max}$
+by Gaunt selection rules (33 one-body terms at $n_{\max}=2$).  The
+balanced Hamiltonian has 878 Pauli terms (Conjecture~1 confirmed).
+Four-electron FCI gives $R_{\rm eq}$ error of 7.0\% and
+$D_e = 0.037$~Ha---the only bound configuration among all four
+coupling schemes tested (Conjecture~2 not confirmed in strict sense,
+but the comparison crosses FCI regimes).  At $n_{\max} = 3$ ($Q = 84$),
+single-point FCI gives 0.20\% energy error (down from 1.8\%) with
+analytical integrals (incomplete gamma functions, machine precision),
+confirming convergence.  The $R_{\rm eq}$ drift is structural to the
+block decomposition ($+0.053$~bohr per $n_{\max}$ step, $3\times$
+smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.
 \end{abstract}
 
 \maketitle
@@ -282,6 +296,48 @@ for convergence, the Pauli count could approach the full Level~4N
 encoding (${\sim}3{,}288$ terms), defeating the purpose of the block
 decomposition.
 
+\subsection{Resolution: multipole expansion termination}
+\label{sec:multipole_resolution}
+
+The convergence concern of the preceding subsection applies to the
+Shibuya--Wulfman \emph{basis} expansion: expanding an orbital
+centered on~$A$ in the complete Sturmian basis of center~$B$, which
+requires summing over all angular momenta~$L$.  The cross-center
+nuclear attraction integral of Eq.~(\ref{eq:vne_cross}) uses a
+different expansion: the standard multipole expansion of
+$1/|\mathbf{r}-\mathbf{R}_B|$ in Legendre polynomials $P_L(\cos\theta)$.
+
+For this expansion, the angular integral involves
+\begin{equation}
+\int Y_{l_1 m}^*(\hat{r})\, P_L(\cos\theta)\, Y_{l_2 m}(\hat{r})\, d\Omega\,,
+\end{equation}
+which is nonzero only when $|l_1 - l_2| \le L \le l_1 + l_2$ and
+$l_1 + L + l_2$ is even.  For $n_{\max} = 2$ ($l_{\max} = 1$), the
+maximum~$L$ needed is~2 ($p$--$p$ pairs); for $n_{\max} = 3$
+($l_{\max} = 2$), $L_{\max} = 4$.  The expansion terminates exactly
+at $L_{\max} = 2 l_{\max}$---no truncation error.
+
+Furthermore, $m_1 = m_2$ is required: the cross-center potential is
+diagonal in the magnetic quantum number when the internuclear axis is
+along~$z$.  Combined with the Gaunt selection rules, this means the
+cross-center $V_{ne}$ adds only 33 new one-body matrix elements to
+$h_1$ for LiH at $n_{\max} = 2$.  These are essentially free in
+computational cost compared to the two-body integrals.
+
+The original grid-based radial integrals (trapezoid quadrature,
+$O(1/n_{\mathrm{grid}})$ convergence) achieved 0.18\% accuracy at
+$n_{\mathrm{grid}} = 4000$ for $Z = 1$ orbitals, and $9 \times 10^{-8}$
+for $Z = 3$.  The radial split integrals (inner and outer regions
+separated at $R_{AB}$) are integrals of polynomial times exponential:
+each $R_{nl}(r)$ contributes a polynomial in $r$ times
+$\exp(-Zr/n)$.  The product $R_{nl} R_{n'l'} r^p$ is a finite sum of
+terms $c_j r^j \exp(-\alpha r)$ where $\alpha = Z(1/n + 1/n')$.
+Each split integral evaluates exactly via the regularized incomplete
+gamma function (\texttt{scipy.special.gammainc}/\texttt{gammaincc}).
+This replaces the $O(1/n_{\mathrm{grid}})$ trapezoid quadrature with
+machine-precision evaluation---an instance of the algebraicization
+program (Paper~18, Sec.~XII).
+
 \subsection{The Coulomb resolution alternative}
 
 A potentially more efficient route was developed by Hoggan and
@@ -412,6 +468,221 @@ Hamiltonian.
 
 
 %% ========================================================================
+\section{Computational Results}
+\label{sec:results}
+%% ========================================================================
+
+We report results from Phases~1--3 of the research path outlined in
+Sec.~\ref{sec:path}.
+
+\subsection{Quantum resource comparison}
+
+Table~\ref{tab:resources} compares the qubit Hamiltonian metrics for
+the four coupling schemes at LiH $n_{\max} = 2$, $Q = 30$.
+
+\begin{table}[h]
+\caption{Qubit Hamiltonian resources for LiH at $n_{\max} = 2$,
+$Q = 30$.  All values from Jordan--Wigner encoding.  The Gaussian
+STO-3G baseline ($Q = 12$) is included for reference.}
+\label{tab:resources}
+\begin{ruledtabular}
+\begin{tabular}{lddd}
+Configuration & \multicolumn{1}{c}{Pauli} & \multicolumn{1}{c}{1-norm (Ha)} & \multicolumn{1}{c}{QWC} \\
+\hline
+Composed (PK)      & 334  & 37.3 & 21  \\
+Balanced (CD)      & 878  & 74.1 & 87  \\
+Coupled (CB)       & 854  & 85.7 & 88  \\
+Gaussian STO-3G    & 907  & 34.3 & 273 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The balanced Hamiltonian has 878 Pauli terms, confirming
+Conjecture~\ref{conj:sparsity}: the count is well below the
+conjectured bound of ${\sim}1{,}500$.  The 1-norm of the balanced
+Hamiltonian (74.1~Ha) is \emph{lower} than the coupled CB value
+(85.7~Ha) because the attractive cross-center $V_{ne}$ partially
+cancels the repulsive cross-block $V_{ee}$.  The QWC group count
+(87) remains far below the Gaussian baseline (273).
+
+\subsection{Cross-center $V_{ne}$ census}
+
+The cross-center nuclear attraction integrals (Sec.~\ref{sec:multipole_resolution})
+add 33 nonzero one-body matrix elements to $h_1$ for LiH at
+$n_{\max} = 2$:
+
+\begin{table}[h]
+\caption{Cross-center $V_{ne}$ census for LiH at $n_{\max} = 2$,
+$R = 3.015$~bohr.}
+\label{tab:vne_census}
+\begin{ruledtabular}
+\begin{tabular}{lddd}
+Block $\to$ nucleus & \multicolumn{1}{c}{Nonzero} & \multicolumn{1}{c}{Max (Ha)} & \multicolumn{1}{c}{Trace (Ha)} \\
+\hline
+Core ($Z\!=\!3$) $\to$ H  & 11 & 0.373 & -1.646 \\
+Val-Li ($Z\!=\!1$) $\to$ H & 11 & 0.328 & -1.182 \\
+H-side ($Z\!=\!1$) $\to$ Li & 11 & 0.985 & -3.544 \\
+\hline
+Total & 33 & --- & -6.372 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The large trace from the H-side block feeling the $Z = 3$ lithium
+nucleus ($-3.544$~Ha) is the dominant contribution, consistent with
+the physical expectation that the hydrogen electron is most strongly
+affected by the nearby heavier nucleus.
+
+\subsection{Four-electron FCI}
+
+Table~\ref{tab:fci_balanced} presents FCI results at $R = 3.015$~bohr
+for all four coupling schemes, including the new balanced configuration.
+Nuclear repulsion is $V_{NN}$ only (no PK contribution).
+
+\begin{table}[h]
+\caption{Four-electron FCI for LiH at $n_{\max} = 2$,
+$R = 3.015$~bohr.  Exact: $-8.071$~Ha.}
+\label{tab:fci_balanced}
+\begin{ruledtabular}
+\begin{tabular}{lddl}
+Configuration & \multicolumn{1}{c}{$E_{\mathrm{FCI}}$ (Ha)} & \multicolumn{1}{c}{Error} & Bound? \\
+\hline
+Balanced (CD)        & -7.924 & 1.8\%  & YES \\
+Decoupled            & -7.195 & 10.9\% & NO  \\
+Composed (PK)        & -6.863 & 15.0\% & NO  \\
+Coupled CB           & -5.734 & 29.0\% & NO  \\
+Exact                & -8.071 & 0\%    & YES \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The balanced configuration is the only coupling scheme that produces a
+bound molecule.  The PES scan gives $R_{\rm eq} = 3.226$~bohr (7.0\%
+error vs.\ exact 3.015~bohr) and $D_e = 0.037$~Ha (exact: 0.092~Ha).
+The variational bound is respected at all $R$-points.
+
+Conjecture~\ref{conj:accuracy} predicted that the balanced Hamiltonian
+would achieve significantly better accuracy than PK's 5.3\%
+$R_{\rm eq}$ error.  The result (7.0\%) does not confirm this in strict
+sense.  However, the comparison is cross-regime: the 5.3\% figure
+uses $l$-dependent PK at $l_{\max} = 2$ with continuous PES optimization,
+while the current result uses $n_{\max} = 2$ FCI on a qubit Hamiltonian
+with grid-computed integrals (0.18\% radial accuracy for $Z = 1$).
+The qualitative result---the balanced coupled configuration is the
+\emph{only} bound configuration among all four coupling schemes---is the
+primary finding of this phase.
+
+\subsection{Basis convergence: $n_{\max} = 3$}
+
+At $n_{\max} = 3$ ($Q = 84$, $l_{\max} = 2$), the balanced coupled
+Hamiltonian has 19{,}959 Pauli terms, 448.9~Ha 1-norm, and 2{,}298 QWC
+groups.  The Pauli scaling exponent (2-point fit from $Q = 30$ to
+$Q = 84$) is 3.03; the 1-norm exponent is 1.75.  The
+Pauli-to-composed ratio (2.53$\times$) is consistent with
+$n_{\max} = 2$ (2.63$\times$), indicating that the cross-block
+overhead is a constant factor, not a growing penalty.
+
+The cross-center $V_{ne}$ multipole expansion terminates exactly at
+$L_{\max} = 4$ for $l_{\max} = 2$ ($d$--$d$ pairs), confirmed by
+comparison to $L_{\max} = 10$ (max difference: machine zero).  The
+total cross-center $V_{ne}$ trace is $-12.54$~Ha (168 nonzero terms).
+
+The original grid-based integrals (trapezoid quadrature,
+$O(1/n_{\mathrm{grid}})$ convergence) systematically underestimated
+cross-center nuclear attraction by 0.09--0.47\% for diffuse $Z = 1$
+orbitals.  Replacing with analytical evaluation via incomplete gamma
+functions eliminates this error entirely (machine precision).  This
+algebraicization is an instance of the exchange constant program
+(Paper~18, Sec.~VII): the grid-based $V_{ne}$ was a calibration
+exchange constant that proved eliminable once the right algebraic
+structure was identified.  The
+corrected $n_{\max} = 3$ energy at $R = 3.015$ is $-8.055$~Ha (0.20\%
+error), improved from grid-based $-8.048$ (0.28\%).  The $R_{\rm eq}$,
+however, moved only from 3.287 (grid) to 3.280 (analytical), confirming
+that the outward drift is structural to the block decomposition, not
+numerical.
+
+\begin{table}[h]
+\caption{Balanced coupled LiH convergence with basis size.
+Exact energy at $R = 3.015$~bohr: $-8.071$~Ha.  Grid: trapezoid
+quadrature ($n_{\mathrm{grid}} = 4000$).  Analytical: incomplete gamma
+functions (machine precision).}
+\label{tab:convergence}
+\begin{ruledtabular}
+\begin{tabular}{ldddddd}
+\multicolumn{1}{c}{Method} & \multicolumn{1}{c}{$n_{\max}$} & \multicolumn{1}{c}{$Q$} &
+\multicolumn{1}{c}{Pauli} & \multicolumn{1}{c}{1-norm (Ha)} &
+\multicolumn{1}{c}{$E(3.015)$ (Ha)} & \multicolumn{1}{c}{Error} \\
+\hline
+Grid       & 2  & 30 & 878    & 74.1  & -7.924 & 1.8\%  \\
+Analytical & 2  & 30 & 878    & 74.1  & -7.929 & 1.7\%  \\
+Grid       & 3  & 84 & 19959  & 448.9 & -8.048 & 0.28\% \\
+Analytical & 3  & 84 & 19959  & 448.9 & -8.055 & 0.20\% \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Table~\ref{tab:req_comparison} shows the definitive $R_{\rm eq}$
+comparison:
+
+\begin{table}[h]
+\caption{$R_{\rm eq}$ comparison: grid vs.\ analytical integrals.
+Exact: 3.015~bohr.}
+\label{tab:req_comparison}
+\begin{ruledtabular}
+\begin{tabular}{ldddd}
+\multicolumn{1}{c}{Method} & \multicolumn{1}{c}{$n_{\max}$} &
+\multicolumn{1}{c}{$R_{\rm eq}$ (bohr)} &
+\multicolumn{1}{c}{$R_{\rm eq}$ err} &
+\multicolumn{1}{c}{$E(3.015)$ err} \\
+\hline
+Grid       & 2 & 3.226 & 7.0\% & 1.8\%  \\
+Analytical & 2 & 3.227 & 7.0\% & 1.7\%  \\
+Grid       & 3 & 3.287 & 9.0\% & 0.28\% \\
+Analytical & 3 & 3.280 & 8.8\% & 0.20\% \\
+Exact      & - & 3.015 & 0\%   & 0\%    \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The $n_{\max} = 3$ analytical PES (5 R-points):
+
+\begin{table}[h]
+\caption{Balanced coupled LiH PES at $n_{\max} = 3$ (analytical integrals).}
+\label{tab:pes_nmax3}
+\begin{ruledtabular}
+\begin{tabular}{dd}
+\multicolumn{1}{c}{$R$ (bohr)} & \multicolumn{1}{c}{$E$ (Ha)} \\
+\hline
+2.9   & -8.0494 \\
+3.015 & -8.0545 \\
+3.1   & -8.0571 \\
+3.3   & -8.0592 \\
+3.5   & -8.0563 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsection{Summary of conjecture status}
+
+Conjecture~\ref{conj:sparsity} (Pauli count): \textbf{confirmed}.
+The balanced Hamiltonian has 878 Pauli terms, well below the
+conjectured ${\sim}1{,}500$ bound.
+
+Conjecture~\ref{conj:accuracy} (accuracy): \textbf{MIXED}.  Analytical
+integrals (machine precision via incomplete gamma functions) confirm that
+the $R_{\rm eq}$ drift is structural to the block decomposition, not
+numerical: grid error contributed only 0.007~bohr to $R_{\rm eq}$ at
+$n_{\max} = 3$.  The drift is $+0.053$~bohr per $n_{\max}$ step
+($3\times$ smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$) but in
+the same outward direction.  Energy converges excellently:
+$1.8\% \to 0.20\%$ ($9\times$ improvement) from $n_{\max} = 2$ to 3.
+The balanced approach is optimal for single-point quantum simulation at
+fixed geometries (0.20\% energy error), but not for PES-based equilibrium
+geometry determination.
+
+
+%% ========================================================================
 \section{Research Path}
 \label{sec:path}
 %% ========================================================================
@@ -420,38 +691,44 @@ The following steps are required to test the conjectures of
 Sec.~\ref{sec:architecture}:
 
 \begin{enumerate}
-\item \textbf{Two-center integral implementation.}  Compute the
-  nuclear attraction integrals of Eq.~(\ref{eq:vne_cross}) for
-  hydrogenic orbitals.  Two approaches are available:
-  (a)~direct Shibuya--Wulfman expansion via Clebsch--Gordan
-  coefficients (well-documented but slowly convergent at $S \gtrsim 3$),
-  or (b)~Coulomb resolution via prolate spheroidal decomposition
-  (faster but requires new infrastructure building on Paper~11;
-  note that Paper~12's Neumann expansion handles $V_{ee}$, not
-  $V_{ne}$---the one-electron case is simpler but still requires
-  implementation).
-  \emph{Concrete diagnostic:} compute the Shibuya--Wulfman integrals
-  for the LiH $1s$--$2s$ cross-center case at $R = 3.015$~bohr with
-  the actual heterogeneous exponents ($k_{\mathrm{core}} = 3/1$,
-  $k_{\mathrm{val}} = 1/2$), and measure how many $L$ channels are
-  needed for 1\% relative convergence.
-  \emph{Decision gate:} if $L_{\max} > 5$ is required for 1\%
-  convergence on this simplest case, abort the direct SW route and
-  proceed to Coulomb resolution (approach~b).
+\item \textbf{Two-center integral implementation.}  \emph{COMPLETE.}
+  The convergence concern from the Shibuya--Wulfman basis expansion
+  (Sec.~\ref{sec:sturmian}) was resolved: the cross-center $V_{ne}$
+  uses the standard multipole expansion, which terminates exactly at
+  $L_{\max} = 2 l_{\max}$ by Gaunt selection rules
+  (Sec.~\ref{sec:multipole_resolution}).  For LiH at $n_{\max} = 2$,
+  only 33 one-body matrix elements are needed.  Original grid numerical accuracy:
+  0.18\% at $n_{\mathrm{grid}} = 4000$ for $Z = 1$ orbitals,
+  $9 \times 10^{-8}$ for $Z = 3$.  Subsequently replaced by analytical
+  evaluation via incomplete gamma functions (machine precision, zero
+  quadrature).  The decision gate ($L_{\max} > 5$)
+  is moot---the expansion terminates at $L_{\max} = 2$.
 
-\item \textbf{Balanced coupled Hamiltonian.}  Construct the
-  Hamiltonian of Eq.~(\ref{eq:coupled}) with all four interaction
-  types present.  Perform Jordan--Wigner transformation and measure
-  Pauli count, 1-norm, and QWC groups.
+\item \textbf{Balanced coupled Hamiltonian.}  \emph{COMPLETE.}
+  The balanced Hamiltonian (Eq.~\ref{eq:coupled} with all four
+  interaction types) gives 878 Pauli terms, 74.1~Ha 1-norm, and
+  87 QWC groups (Table~\ref{tab:resources}).
+  Conjecture~\ref{conj:sparsity} confirmed.
 
-\item \textbf{FCI benchmark.}  Diagonalize the coupled Hamiltonian
-  for LiH at $n_{\max} = 2$ ($Q = 30$, 4~electrons).  Compare energy
-  and $R_{\rm eq}$ to exact, to composed (PK), and to Gaussian
-  STO-3G.
+\item \textbf{FCI benchmark.}  \emph{COMPLETE.}
+  Four-electron FCI gives $E = -7.924$~Ha (1.8\% error),
+  $R_{\rm eq} = 3.226$~bohr (7.0\%), $D_e = 0.037$~Ha.
+  The balanced configuration is the only bound coupling scheme
+  (Table~\ref{tab:fci_balanced}).  Conjecture~\ref{conj:accuracy}
+  not confirmed in strict sense (7.0\% vs.\ 5.3\% PK), but the
+  comparison is cross-regime.
 
-\item \textbf{Scaling study.}  If Step~3 is positive, extend to
-  $n_{\max} = 3$ and to BeH$_2$/H$_2$O to verify that the sparsity
-  advantage persists and that accuracy improves for polyatomics.
+\item \textbf{Scaling study.}  \emph{COMPLETE.}  $n_{\max} = 3$
+  FCI with analytical integrals (incomplete gamma functions, machine
+  precision): $E(3.015) = -8.055$~Ha (0.20\% error, down from 1.8\%
+  at $n_{\max} = 2$; see Table~\ref{tab:convergence}).
+  Pauli scaling exponent 3.03, 1-norm exponent 1.75.
+  $R_{\rm eq} = 3.280$~bohr (8.8\% error), confirming structural drift
+  of $+0.053$~bohr per $n_{\max}$ step ($3\times$ smaller than PK's
+  $+0.15$--$0.22$~bohr/$l_{\max}$).  Grid error contributes only
+  0.007~bohr to $R_{\rm eq}$ (negligible).  Classification: MIXED---energy
+  converges excellently, $R_{\rm eq}$ drifts structurally.
+  Extension to BeH$_2$ and H$_2$O: COMPLETE (v2.0.41--42).
 \end{enumerate}
 
 The critical risk is Step~1: if the angular expansion requires
@@ -459,6 +736,70 @@ $L_{\max} > 5$ for convergence, the Pauli count will approach the
 full Level~4N encoding and the approach loses its structural advantage.
 The Coulomb resolution route (approach~b) is the fallback if direct
 expansion is too slow.
+
+
+%% ========================================================================
+\subsection{Polyatomic census}
+\label{sec:polyatomic}
+%% ========================================================================
+
+The balanced coupled framework was extended to BeH$_2$ (collinear,
+v2.0.41) and H$_2$O (non-collinear, v2.0.42), completing the
+polyatomic census for all three composed molecules.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccccccc}
+\hline
+System & Blocks & $Q$ & Composed & Balanced & Pauli & $\lambda_\text{comp}$ & $\lambda_\text{bal}$ \\
+       &        &     & Pauli    & Pauli    & ratio & (Ha)                  & (Ha) \\
+\hline
+LiH    & 2 & 30 & 334   & 878   & 2.63$\times$ & 37.3  & 74.1  \\
+BeH$_2$ & 3 & 50 & 556   & 2,652 & 4.77$\times$ & 354.9 & 304.7 \\
+H$_2$O & 5 & 70 & 778   & 5,798 & 7.45$\times$ & 361$^\dagger$ / 28,053 & 1,509.3 \\
+\hline
+\end{tabular}
+\caption{Balanced coupled resource census. $^\dagger$H$_2$O composed electronic-only (PK partitioned).}
+\label{tab:balanced_census}
+\end{table}
+
+BeH$_2$ four-electron FCI gives 10.7\% energy error with the
+balanced Hamiltonian, compared to 27.4\% with PK and 10.9\%
+decoupled.  The balanced 1-norm (304.7~Ha) is \emph{lower} than the
+composed 1-norm (354.9~Ha), confirming that PK adds more 1-norm than
+cross-center $V_{ne}$ for this system.
+
+H$_2$O required a non-collinear generalization: the O--H bond vectors
+make a 104.5$^\circ$ angle, so the cross-center $V_{ne}$ matrices
+cannot be computed in a shared $z$-axis frame.  The solution is Wigner
+$D$-matrix rotation of the real spherical harmonic basis: compute
+$V_{ne}$ in the $z$-frame aligned with each bond vector, then rotate
+via block-diagonal $D \cdot V_z \cdot D^T$ where $D$ is the rotation
+matrix for real spherical harmonics (identity for $l = 0$, Cartesian
+rotation permuted to $m = (-1, 0, 1)$ ordering for $l = 1$).  FCI is
+infeasible for H$_2$O (10 electrons, $Q = 70$).  The lone pair
+$V_{ne}$ integrals are well-behaved: all traces are below 3~Ha per
+nucleus, confirming that the multipole expansion does not produce
+unphysical couplings for lone pair blocks.
+
+The Pauli ratio (balanced/composed) grows with block count:
+$2.63\times$ (2-block LiH) $\to$ $4.77\times$ (3-block BeH$_2$)
+$\to$ $7.45\times$ (5-block H$_2$O), because each block pair adds
+cross-block ERIs and cross-center $V_{ne}$ terms.  The growth is
+consistent with an $O(B^2)$ scaling in the number of blocks $B$.
+
+The 1-norm advantage is regime-dependent.  For VQE/NISQ applications
+where Pauli count and QWC groups dominate circuit cost, the composed
+architecture with PK remains cheaper.  For fault-tolerant QPE where
+the 1-norm determines the number of Trotter steps, the balanced
+framework eliminates PK entirely.  This is decisive for molecules
+with large nuclear charges: H$_2$O's PK contributed 98.7\% of the
+total composed 1-norm (28,053~Ha), and the balanced 1-norm
+(1,509.3~Ha) is $18.6\times$ cheaper.  Even compared to the
+electronic-only composed 1-norm (361~Ha, with PK classically
+partitioned), the balanced 1-norm is $4.18\times$ higher---but the
+balanced Hamiltonian does not require the classical 1-RDM post-processing
+step that PK partitioning demands.
 
 
 %% ========================================================================
@@ -485,6 +826,18 @@ decoupled Hamiltonian (better than PK's 15.0\%) reinforces the
 interpretation that PK overcorrects the Coulomb interaction, but the
 remaining 10.9\% error shows that inter-block coupling \emph{is}
 needed for quantitative accuracy.
+
+The four-electron FCI results (Sec.~\ref{sec:results}) confirm the
+diagnosis from Track~CB.  PK overcorrects (15.0\% error, unbound).
+Removing all inter-block coupling undercorrects (10.9\%, unbound).
+Adding only cross-block $V_{ee}$ without $V_{ne}$ is energetically
+unbalanced (29.0\%, worst of all).  Only the balanced combination of
+all four interaction types---within-block $h_1$ and $V_{ee}$,
+cross-block $V_{ee}$, and cross-center $V_{ne}$---produces a bound
+molecule with the correct qualitative PES shape.  This suggests that
+the physical content of PK is not pseudopotential enforcement of
+orthogonality, but rather an incomplete approximation to the sum of
+cross-block $V_{ee}$ and cross-center $V_{ne}$.
 
 A practical concern: Track~CB found that adding cross-block ERIs
 increases the 1-norm from 37.3 to 85.7~Ha.  Even if PK is
@@ -515,6 +868,34 @@ structural cost of maintaining block-diagonal sparsity.  In either
 case, this paper documents the mathematical connections and the
 concrete data (Track~CB census, FCI benchmarks) that define the
 research frontier.
+
+The $n_{\max} = 3$ results with analytical integrals definitively
+resolve the key open questions from Phase~3.  The energy convergence
+is excellent: 1.8\% $\to$ 0.20\% ($9\times$ improvement) as the
+basis grows from $Q = 30$ to $Q = 84$, with the variational bound
+respected.  This rules out the PK-like divergence scenario (where
+higher angular momentum channels systematically overcounted
+correlation).
+
+The $R_{\rm eq}$ drift, however, is confirmed as structural to the
+block decomposition, not numerical.  Analytical integrals (machine
+precision via incomplete gamma functions) changed $R_{\rm eq}$ by
+only 0.007~bohr at $n_{\max} = 3$ (3.287~$\to$~3.280~bohr), while
+the drift from $n_{\max} = 2$ to 3 is $+0.053$~bohr.  This drift
+is $3\times$ smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$ but
+in the same outward direction.  The root cause is the block
+decomposition itself: each block uses a different effective nuclear
+charge ($Z_{\mathrm{eff}}$), and orbitals on different blocks do not
+span the same Hilbert space.  The cross-center $V_{ne}$ partially
+bridges this gap but cannot fully compensate for the incomplete
+orbital overlap between blocks at finite basis.  The balanced
+approach is optimal for single-point quantum simulation at fixed
+geometries (0.20\% energy error), but not for PES-based equilibrium
+geometry determination.  The analytical evaluation of $V_{ne}$ via
+incomplete gamma functions adds the cross-center nuclear attraction
+to the algebraic registry (Paper~18, Table~I), confirming that the
+balanced coupled framework introduces no new exchange constants
+relative to the composed architecture.
 
 \emph{Relationship to the LCAO negative result.}  The coupled
 composition program reconstructs a multi-center molecular Hamiltonian

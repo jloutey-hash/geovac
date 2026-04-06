@@ -1,0 +1,21 @@
+{
+  "system": "BeH2",
+  "n_max": 2,
+  "Q": 50,
+  "M": 25,
+  "R": 2.51,
+  "N_pauli_balanced": 2652,
+  "N_pauli_composed": 556,
+  "pauli_ratio": 4.76978417266187,
+  "one_norm_balanced": 304.73289397138984,
+  "one_norm_composed": 354.8880647430748,
+  "one_norm_ratio": 0.8586732669975945,
+  "n_qwc_balanced": 138,
+  "n_qwc_composed": 21,
+  "cross_vne_count": 110,
+  "fci_4e": {
+    "E_balanced": -14.145991411220942,
+    "E_composed": -11.496911894033113,
+    "E_decoupled": -14.171349929113239
+  }
+}

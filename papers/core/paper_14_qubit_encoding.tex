@@ -994,6 +994,24 @@ incomplete without also adding two-center one-body terms.
 The block-diagonal ERI structure thus remains the correct
 operating point for the composed architecture.
 
+\textit{Note added (v2.0.42).}
+Paper~19~\cite{loutey_paper19} resolves the incompleteness identified above.
+The ``balanced coupled'' Hamiltonian adds both cross-block ERIs
+\emph{and} cross-center nuclear attraction integrals
+$\langle \psi_{nlm}^A | V_B | \psi_{n'l'm'}^A \rangle$, computed
+analytically via incomplete gamma functions (machine precision).
+The multipole expansion of $V_{ne}$ terminates exactly at
+$L_{\max} = 2 l_{\max}$ by Gaunt selection rules.  The resulting
+Hamiltonian produces the only bound LiH configuration in
+4-electron FCI (1.8\% energy error vs PK's 15.0\%) and achieves
+0.20\% energy error at $n_{\max} = 3$ with analytical integrals.
+The resource tradeoff is regime-dependent: for VQE/NISQ (Pauli-count
+dominated), composed with PK remains cheaper; for QPE (1-norm
+dominated), balanced coupled eliminates PK entirely, which is
+decisive for heavy atoms where PK's $Z^2$ barrier dominates
+the 1-norm.  See Sec.~\ref{sec:balanced_coupled} for the
+resource census.
+
 
 \subsection{Limitations of the composed-system analysis}
 \label{sec:composed_limitations}
@@ -1012,11 +1030,17 @@ simulation cost from those that affect only energy accuracy:
   approximation eliminates all cross-block two-electron integrals.
   Selection-rule counting (Sec.~\ref{sec:cross_block}) bounds the
   impact at $\le 2\times$ the reported Pauli counts.
+  \textit{Resolved:} Paper~19~\cite{loutey_paper19} includes all
+  cross-block ERIs with Gaunt selection rules preserved across
+  block boundaries.
 \item \textbf{Cross-center nuclear attraction omitted:} One-body
   cross-center terms (e.g., H~orbital feeling the Li~nucleus) are
   not included.  These affect $N_{\mathrm{h1}}$ but not ERI scaling;
   at typical bond lengths the cross-center overlap decays
   exponentially.
+  \textit{Resolved:} Paper~19 computes these integrals analytically
+  via incomplete gamma functions.  33~terms at $n_{\max}=2$,
+  168 at $n_{\max}=3$.
 \item \textbf{Phillips--Kleinman parameters $Z^2$-scaled:} The
   repulsive barrier coefficients are $Z^2$-scaled from the
   Li$^{2+}$ core, not computed ab initio for each system.  This
@@ -1051,6 +1075,9 @@ simulation cost from those that affect only energy accuracy:
   orthogonalization), not scalar energy corrections.  This limitation
   applies to the \emph{accuracy} of composed polyatomic PES, not to the
   Pauli term scaling, which remains valid as a lower bound.
+  \textit{Partially resolved:} Paper~19 includes cross-block ERIs
+  and cross-center $V_{ne}$ between all block pairs.  BeH$_2$
+  4-electron FCI improves from 27.4\% (PK) to 10.7\% (balanced).
 \end{enumerate}
 
 
@@ -1143,6 +1170,52 @@ pipeline.
 A PES scan for LiH confirms that both the standard and TC Pauli
 counts are $R$-independent (334 and 562 at all sampled bond lengths),
 consistent with the selection-rule origin of the sparsity.
+
+\subsection{Balanced coupled variant}
+\label{sec:balanced_coupled}
+
+Paper~19~\cite{loutey_paper19} presents a PK-free alternative: the
+balanced coupled Hamiltonian includes all four interaction
+types---within-block $h_1$ and ERI, cross-block ERI, and cross-center
+nuclear attraction $\langle \psi^A | V_B | \psi^A \rangle$---with no
+pseudopotential.  Cross-center $V_{ne}$ integrals are computed
+analytically via incomplete gamma functions; the multipole expansion
+terminates exactly at $L_{\max} = 2 l_{\max}$ by Gaunt selection
+rules.
+
+Table~\ref{tab:balanced} compares composed and balanced encodings
+at $n_{\max} = 2$.
+
+\begin{table}[t]
+\caption{Composed vs.\ balanced coupled resource census at
+$n_{\max} = 2$.  $\lambda$~values are electronic-only 1-norms
+(PK classically partitioned for composed; absent from balanced).
+H$_2$O composed~$\lambda$ is electronic-only (361~Ha);
+full composed with PK is 28{,}053~Ha.}
+\label{tab:balanced}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+System & $Q$ & \multicolumn{2}{c}{Pauli terms}
+  & \multicolumn{2}{c}{$\lambda$ (Ha)} \\
+  & & Comp. & Bal. & Comp. & Bal. \\
+\hline
+LiH     &  30 &    334 &    878 &  37.3 &   74.1 \\
+BeH$_2$ &  50 &    556 & 2{,}652 & 354.9 &  304.7 \\
+H$_2$O  &  70 &    778 & 5{,}798 &  361  & 1{,}509 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The Pauli ratio grows with block count ($2.63\times$ to $7.45\times$),
+but the 1-norm ratio favors balanced for BeH$_2$ ($0.86\times$
+composed) where PK's $Z^2$-scaled barrier is costly.  For H$_2$O,
+the balanced 1-norm (1{,}509~Ha) is $18.6\times$ lower than the
+full composed 1-norm with PK (28{,}053~Ha).  Composed and balanced
+are thus complementary encoding strategies: composed is cheaper for
+VQE (Pauli-count dominated), balanced is cheaper for QPE on heavy
+atoms (1-norm dominated, PK eliminated).  The balanced coupled
+encoding is available via \texttt{build\_balanced\_hamiltonian()}
+in the production codebase.
 
 \subsection{Discussion of composed results}
 \label{sec:composed_discussion}
@@ -1672,6 +1745,12 @@ S.~Raman, A.~Mezzacapo, and S.~Mostame,
 ``Refining resource estimation for the quantum computation of
 molecular spectra through Trotter error analysis,''
 Quantum (2025); arXiv:2311.03719.
+
+\bibitem{loutey_paper19}
+J.~Loutey,
+``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian
+Integrals and Coupled Composition,''
+GeoVac Paper~19 (2026).
 
 \end{thebibliography}
 

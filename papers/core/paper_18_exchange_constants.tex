@@ -549,6 +549,8 @@ propose the following taxonomy:
     & $\mu(\rho,R)$ & piecewise \\
   5 (composed) & Level 3+4 fibers & full $N$-electron
     & PK pseudopot. & composition \\
+  5 (balanced) & hydrogenic $\times$ multipole & cross-center $V_{ne}$
+    & $\gamma(k,\alpha R)$ & algebraic \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1298,7 +1300,17 @@ Two implications for the GeoVac program follow:
     is, in retrospect, an effort to eliminate exchange constants by
     eliminating projections---and the algebraic curve result shows
     that this effort has been more successful than previously
-    recognized.
+    recognized.  The cross-center nuclear attraction integrals of
+    Paper~19 provide the most recent example: the multipole expansion
+    of $V_{ne}^{(b,a)}$ terminates exactly at $L_{\max} = 2 l_{\max}$
+    by Gaunt selection rules, and the radial split integrals evaluate
+    analytically via incomplete gamma functions for hydrogenic
+    wavefunctions (machine precision, zero quadrature).  In the
+    exchange constant taxonomy, the grid-based $V_{ne}$ was a
+    calibration exchange constant---transcendental content from
+    projection between the single-center basis and the two-center
+    geometry---that proved algebraic once the polynomial-times-exponential
+    structure of the integrand was identified.
   \item \textbf{The physical interpretation of $\kappa$}:
     Paper~0 identified $\kappa = -1/16$ as a universal packing
     constant but did not derive it from first principles.

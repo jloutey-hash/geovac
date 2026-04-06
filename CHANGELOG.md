@@ -5,6 +5,211 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.43] - 2026-04-06
+
+### Track CD Sprint 6: Paper Updates & Paper 19 Promotion
+
+**Paper 19 promoted** from `papers/conjectures/` to `papers/methods/` (Supporting tier). Conjecture 1 confirmed, Conjecture 2 characterized (MIXED), production code with 26 tests, analytical integrals, and 3-molecule census.
+
+**Paper 14 updated:**
+- New subsection "Balanced coupled variant" (Sec V.H): resource census table
+- Cross-block ERI bound (Sec V.E): "Note added" with regime-dependent tradeoff
+- Limitations (Sec V.F): 3 items annotated as resolved by Paper 19
+
+**Paper 17 corrected:**
+- Limitations (Sec IV.F): PK conclusion corrected — classical only, not quantum
+- Conclusion item 6: caveat added (balanced coupled produces equilibrium in FCI)
+- Hierarchy table: balanced coupled row added
+
+### Files Modified
+- `papers/core/paper_14_qubit_encoding.tex` — balanced coupled subsection, resolved annotations
+- `papers/core/paper_17_composed_geometries.tex` — PK classical-only correction
+- `papers/methods/paper_19_coupled_composition.tex` — promoted, abstract updated
+- `CLAUDE.md` — v2.0.43, Paper 19 tier change
+- `CHANGELOG.md` — this entry
+- `README.md` — Paper 19 tier, version
+
+### Files Moved
+- `papers/conjectures/paper_19_coupled_composition.tex` → `papers/methods/paper_19_coupled_composition.tex`
+
+---
+
+## [2.0.42] - 2026-04-06
+
+### Track CD Sprint 5: H₂O Non-Collinear Extension
+
+**Non-collinear V_ne (Wigner D-matrix rotation):**
+- Generalized `shibuya_wulfman.py` to handle off-center nuclei at arbitrary 3D positions
+- Rotation approach: compute V_ne in z-frame, then rotate via block-diagonal real spherical harmonic rotation matrix D @ V_z @ D^T
+- For l=0: identity (s-orbitals rotation-invariant). For l=1: Cartesian rotation matrix permuted to (m=-1,m=0,m=1)=(y,z,x) basis
+- Validated: z-axis reproduces existing (< 1e-14), -z matches nuc_parity=-1, s-s rotation-invariant, Hermiticity preserved at all angles
+- 7 new tests in test_shibuya_wulfman.py (26 total, all pass)
+
+**3D nuclear positions in balanced_coupled.py:**
+- Generalized from 1D (collinear) to 3D nuclear positions
+- Added `_get_nuclei_for_h2o()` with bond angle geometry
+- Uses `direction=` parameter on compute_cross_center_vne instead of nuc_parity
+- LiH and BeH₂ backward compatibility verified (identical Pauli counts)
+
+**H₂O balanced coupled (n_max=2, Q=70):**
+- 5,798 Pauli terms (7.45× composed 778)
+- 1,509.3 Ha 1-norm (0.054× composed w/ PK 28,053; 4.18× electronic-only 361)
+- 168 QWC groups (composed: 21)
+- 226 cross-center V_ne terms
+- Lone pair V_ne well-behaved (all < 3 Ha/nucleus)
+- FCI infeasible (10 electrons)
+
+**Complete polyatomic census:**
+
+| System | Q | Composed Pauli | Balanced Pauli | Ratio | λ_comp (Ha) | λ_bal (Ha) | λ ratio |
+|--------|---|---------------|----------------|-------|-------------|-----------|---------|
+| LiH | 30 | 334 | 878 | 2.63× | 37.3 | 74.1 | 1.98× |
+| BeH₂ | 50 | 556 | 2,652 | 4.77× | 354.9 | 304.7 | 0.86× |
+| H₂O | 70 | 778 | 5,798 | 7.45× | 361/28,053 | 1,509.3 | 4.18×/0.054× |
+
+**Documentation:** CLAUDE.md sections 2/6/7/10/11 updated. Paper 19 polyatomic census added.
+
+### Files Modified
+- `geovac/shibuya_wulfman.py` — direction parameter, Wigner D rotation
+- `geovac/balanced_coupled.py` — 3D positions, H₂O nuclei
+- `tests/test_shibuya_wulfman.py` — 7 new rotation tests
+- `papers/conjectures/paper_19_coupled_composition.tex` — polyatomic census
+- `CLAUDE.md` — sections 1, 2, 6, 7, 10, 11
+- `CHANGELOG.md` — this entry
+- `README.md` — Track CD census
+
+### Files Created
+- `debug/data/balanced_coupled_h2o.json` — H₂O resource metrics
+
+---
+
+## [2.0.41] - 2026-04-06
+
+### Track CD Sprint 4 — Paper 18 Cross-Reference + BeH₂ Extension
+
+Extended balanced coupled Hamiltonian to BeH₂ (first polyatomic). Paper 18 cross-referenced with V_ne algebraicization.
+
+**Code generalizations:**
+- `balanced_coupled.py`: Added `nuclei` parameter for explicit nuclear positions. Added `_get_nuclei_for_beh2()`, `_get_sub_block_positions()` for multi-atom collinear support. Added `nuc_parity` passing for (-1)^L sign flip.
+- `shibuya_wulfman.py`: Added `nuc_parity` parameter for (-1)^L sign when nucleus is in -z direction. Required for symmetric molecules (BeH₂: H atoms at ±R).
+
+**BeH₂ balanced coupled (n_max=2, Q=50):**
+
+| Metric | Composed (PK) | Balanced (CD) | Ratio |
+|:---|:---:|:---:|:---:|
+| Pauli terms | 556 | 2,652 | 4.77× |
+| 1-norm (Ha) | 354.9 | 304.7 | 0.86× |
+| QWC groups | 21 | 138 | 6.57× |
+
+Key finding: balanced 1-norm is LOWER than composed — PK adds more 1-norm than cross-center V_ne. For QPE cost (1-norm dominated), balanced is cheaper.
+
+4-electron FCI: balanced -14.146 Ha (10.7%), decoupled -14.171 (10.5%), composed PK -11.497 (27.4%). PK catastrophically overcorrects for BeH₂.
+
+**H₂O: DEFERRED.** Non-collinear geometry (104.5° bond angle) requires general multipole expansion with Y_LM(θ_B,φ_B) for M≠0. Current code assumes collinear z-axis. Code gap, not physics limitation.
+
+**Paper 18:** V_ne algebraicization added to exchange constant taxonomy table and Conclusion (Sec VII). Cross-referenced from Paper 19.
+
+**Files modified:**
+- `geovac/balanced_coupled.py` — Multi-atom collinear generalization
+- `geovac/shibuya_wulfman.py` — nuc_parity parameter
+- `papers/core/paper_18_exchange_constants.tex` — V_ne taxonomy entry + Conclusion example
+- `papers/conjectures/paper_19_coupled_composition.tex` — Paper 18 cross-reference, BeH₂ results
+
+**Files created:**
+- `debug/data/balanced_coupled_beh2.json` — BeH₂ resource and FCI data
+
+---
+
+## [2.0.40] - 2026-04-05
+
+### Track CD Sprint 3 — Analytical Integrals + Definitive R_eq Resolution
+
+Replaced grid-based trapezoid quadrature in V_ne radial split integrals with analytical evaluation via incomplete gamma functions. Machine-precision V_ne integrals (zero grid error). Re-ran all PES scans to determine whether the R_eq drift from Sprint 2 was numerical or structural.
+
+**Analytical integrals:**
+- Hydrogenic radial wavefunction R_nl(r) decomposed into polynomial × exponential
+- Split integrals evaluated via scipy.special.gammainc/gammaincc
+- Machine precision: 1s-1s benchmarks match closed-form formula to 1e-16 relative error
+- 1.8× faster than grid-based (no array allocation)
+
+**Definitive PES comparison:**
+
+| Method | R_eq | R_eq err | E(3.015) | E err |
+|--------|------|----------|----------|-------|
+| n_max=2 analytical | 3.227 | 7.0% | -7.929 | 1.7% |
+| n_max=3 analytical | 3.280 | 8.8% | -8.055 | 0.20% |
+| Exact | 3.015 | 0% | -8.071 | 0% |
+
+**Root cause resolution:** The R_eq drift is STRUCTURAL to the block decomposition (+0.053 bohr per n_max step), not from grid numerical error (which contributed only 0.007 bohr). The drift is 3× smaller than PK's +0.15-0.22 bohr/l_max but in the same outward direction. Root cause: each block uses a different Z_eff, and orbitals on different blocks do not span the same Hilbert space.
+
+**Classification: MIXED (confirmed).** Energy converges excellently (1.8% → 0.20%). R_eq drifts structurally. Balanced coupled is optimal for single-point quantum simulation at fixed geometries (not for PES-based geometry optimization).
+
+**Files modified:**
+- `geovac/shibuya_wulfman.py` — Analytical radial integrals via incomplete gamma functions
+- `tests/test_shibuya_wulfman.py` — Added cross-validation and machine-precision tests (19 tests)
+
+**Files created:**
+- `debug/data/balanced_coupled_lih_nmax3_analytical.json` — Definitive PES data
+- `debug/data/balanced_coupled_lih_nmax2_analytical.json` — n_max=2 analytical PES
+
+---
+
+## [2.0.39] - 2026-04-04
+
+### Track CD — Balanced Coupled Composition via Two-Center Integrals (Phase 1–3)
+
+Implemented and benchmarked the balanced coupled Hamiltonian that replaces PK with explicit cross-center nuclear attraction integrals (Shibuya–Wulfman theory). PARTIAL POSITIVE result: the balanced Hamiltonian is the only configuration producing bound LiH in 4-electron FCI.
+
+**Phase 1 — Convergence Diagnostic (PROCEED):**
+- The multipole expansion of cross-center V_ne terminates exactly at L_max = 2*l_max by Gaunt selection rules. For n_max=2 (l_max=1), only L=0,1,2 are needed. The slow Shibuya–Wulfman basis expansion convergence concern (Paper 19 Sec III.B) does not apply — it describes a different mathematical object.
+- Cross-center V_ne is m-diagonal (no m-changing terms), Hermitian, and adds only 33 one-body terms to h1 for LiH at n_max=2. Computation time: <0.01s per sub-block.
+- Grid accuracy: 9e-8 relative error for Z=3 (compact) orbitals, 0.18% for Z=1 (diffuse) at n_grid=4000.
+
+**Phase 2 — Balanced Hamiltonian Resources (LiH n_max=2, Q=30):**
+
+| Metric | Composed (PK) | Balanced (CD) | Coupled (CB) | Gaussian STO-3G |
+|:-------|:---:|:---:|:---:|:---:|
+| Pauli terms | 334 | 878 | 854 | 907 |
+| 1-norm (Ha) | 37.3 | 74.1 | 85.7 | 34.3 |
+| QWC groups | 21 | 87 | 88 | 273 |
+
+Conjecture 1 confirmed: 878 < 1,500 Pauli terms. V_ne (attractive) partially cancels cross-block V_ee (repulsive), giving lower 1-norm than Track CB.
+
+**Phase 3 — 4-Electron FCI Benchmark:**
+
+| Configuration | E(3.015) Ha | Error | Bound? |
+|:---|:---:|:---:|:---:|
+| **Balanced (CD)** | **−7.924** | **1.8%** | **YES** |
+| Decoupled | −7.195 | 10.9% | NO |
+| Composed (PK) | −6.863 | 15.0% | NO |
+| Coupled CB | −5.734 | 29.0% | NO |
+| Exact | −8.071 | 0% | YES |
+
+R_eq = 3.226 bohr (7.0% error), D_e = 0.037 Ha (exact 0.092). Variational bound respected at all R-points. Conjecture 2 not confirmed in strict sense (7.0% > 5.3%), but comparison is cross-regime (4e FCI vs 2e classical PES).
+
+**Key insight:** The convergence concern about Shibuya–Wulfman integrals does not apply to the multipole expansion of 1/|r−R_B|. The expansion terminates exactly by Gaunt selection rules, making cross-center V_ne essentially free.
+
+**Files created:**
+- `geovac/shibuya_wulfman.py` — Cross-center V_ne via multipole expansion
+- `geovac/balanced_coupled.py` — Balanced coupled Hamiltonian builder
+- `tests/test_shibuya_wulfman.py` — 17 tests (angular, analytical, matrix, convergence)
+- `debug/data/sw_convergence_lih.json` — V_ne convergence data
+- `debug/data/balanced_coupled_lih_fci.json` — Phase 3 FCI data
+
+**Phase 4A — n_max=3 Scaling Diagnostic (CONVERGENT):**
+- Resources: 19,959 Pauli terms (exponent 3.03), 448.9 Ha 1-norm (exponent 1.75), 2,298 QWC groups. Pauli ratio 2.53× (consistent with n_max=2's 2.63×).
+- V_ne: L_max=4 termination confirmed for d-orbital pairs (l_max=2). 168 nonzero terms (vs 33 at n_max=2).
+- 4-electron FCI at R=3.015: E=-8.048 Ha (0.28% error, exact -8.071). Improved from -7.924 (1.8%) at n_max=2. Variational bound OK. CONVERGENT.
+- Grid convergence (B1): V_ne numerical accuracy 0.18% at n_grid=4000 for Z=1 orbitals. O(1/n_grid) convergence. Z=3 orbitals: 9e-8 (essentially exact).
+- FCI computation: 741,321 determinants, 22.8M nonzero, 114 min wall time.
+- PES scan (R=2.5, R=3.5) running; R_eq determination pending.
+
+**Files created (Phase 4A):**
+- `debug/data/balanced_coupled_lih_nmax3.json` — n_max=3 resource and FCI data
+- `debug/data/vne_grid_convergence.json` — V_ne grid accuracy study
+
+---
+
 ## [2.0.38] - 2026-04-03
 
 ### Paper 19 — Coupled Composition via Two-Center Sturmian Integrals (Conjectural)

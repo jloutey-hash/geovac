@@ -1,0 +1,223 @@
+{
+  "system": "H2O",
+  "n_max": 2,
+  "Q": 70,
+  "M": 35,
+  "R_OH": 1.809,
+  "angle_HOH": 104.5,
+  "N_pauli_balanced": 5798,
+  "N_pauli_composed": 778,
+  "N_pauli_composed_elec_only": 778,
+  "pauli_ratio": 7.4524421593830334,
+  "one_norm_balanced": 1509.258825112322,
+  "one_norm_composed": 28053.33404508323,
+  "one_norm_composed_elec_only": 360.8128762784757,
+  "one_norm_ratio": 0.05379962405491131,
+  "one_norm_ratio_vs_elec": 4.182940588704143,
+  "n_qwc_balanced": 168,
+  "n_qwc_composed": 21,
+  "cross_vne_count": 226,
+  "cross_vne_details": [
+    {
+      "sub_block": "O_core_center",
+      "Z_orb": 8.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5665534791927627,
+      "trace": -2.7636670847080027
+    },
+    {
+      "sub_block": "O_core_center",
+      "Z_orb": 8.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5665534791927627,
+      "trace": -2.7636670847080027
+    },
+    {
+      "sub_block": "H2O_bond1_O_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_bond1_O_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_bond1_O_partner",
+      "Z_orb": 1.0,
+      "Z_nuc": 8.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 4.088963387905834,
+      "trace": -11.50588296001128
+    },
+    {
+      "sub_block": "H2O_bond1_O_partner",
+      "Z_orb": 1.0,
+      "Z_nuc": 1.0,
+      "R_AB": 2.860714877805225,
+      "n_nonzero": 11,
+      "max_magnitude": 0.34514312127211066,
+      "trace": -1.2108963566847295
+    },
+    {
+      "sub_block": "H2O_bond2_O_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_bond2_O_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_bond2_O_partner",
+      "Z_orb": 1.0,
+      "Z_nuc": 8.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 4.088963387905834,
+      "trace": -11.50588296001128
+    },
+    {
+      "sub_block": "H2O_bond2_O_partner",
+      "Z_orb": 1.0,
+      "Z_nuc": 1.0,
+      "R_AB": 2.860714877805225,
+      "n_nonzero": 11,
+      "max_magnitude": 0.34514312127211066,
+      "trace": -1.2108963566847295
+    },
+    {
+      "sub_block": "H2O_lone1_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_lone1_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_lone2_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    },
+    {
+      "sub_block": "H2O_lone2_center",
+      "Z_orb": 6.0,
+      "Z_nuc": 1.0,
+      "R_AB": 1.809,
+      "n_nonzero": 17,
+      "max_magnitude": 0.5755512880332138,
+      "trace": -2.7588933237914706
+    }
+  ],
+  "fci_result": "infeasible (10 electrons, Q=70)",
+  "vne_census": {
+    "core_to_H1": {
+      "trace": -2.7637,
+      "max_mag": 0.5666,
+      "n_nz": 17
+    },
+    "core_to_H2": {
+      "trace": -2.7637,
+      "max_mag": 0.5666,
+      "n_nz": 17
+    },
+    "bond1_center_to_H1": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "bond1_center_to_H2": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "bond1_partner_to_O": {
+      "trace": -11.5059,
+      "max_mag": 4.089,
+      "n_nz": 17
+    },
+    "bond1_partner_to_H2": {
+      "trace": -1.2109,
+      "max_mag": 0.3451,
+      "n_nz": 11
+    },
+    "bond2_center_to_H1": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "bond2_center_to_H2": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "bond2_partner_to_O": {
+      "trace": -11.5059,
+      "max_mag": 4.089,
+      "n_nz": 17
+    },
+    "bond2_partner_to_H2": {
+      "trace": -1.2109,
+      "max_mag": 0.3451,
+      "n_nz": 11
+    },
+    "lone1_to_H1": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "lone1_to_H2": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "lone2_to_H1": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "lone2_to_H2": {
+      "trace": -2.7589,
+      "max_mag": 0.5756,
+      "n_nz": 17
+    },
+    "total_trace": -53.032,
+    "lone_pair_flag": "ALL BELOW 10 Ha threshold"
+  }
+}

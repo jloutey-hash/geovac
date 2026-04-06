@@ -68,7 +68,13 @@
       "Bash(gh release:*)",
       "Bash(find /c/Users/jlout/OneDrive/Desktop/Project_Geometric -type f \\\\\\(-name *negative* -o -name *failed* -o -name *obstruction* -o -name *dead* \\\\\\))",
       "Bash(find . -name \"*.md\" -type f -exec grep -l \"missing\\\\|limitation\\\\|bottleneck\\\\|ceiling\\\\|accurate\\\\|error\\\\|why\\\\|fails\" {})",
-      "WebSearch"
+      "WebSearch",
+      "Bash(tasklist //FI \"IMAGENAME eq python.exe\" //FO TABLE)",
+      "Bash(tasklist //FI \"PID eq 140536\" //FO TABLE)",
+      "Bash(powershell.exe -Command \"Get-Process -Id 140536 | Select-Object CPU, WorkingSet64\")",
+      "Bash(powershell.exe -Command \"try { Get-Process -Id 140536 | Select-Object CPU, WorkingSet64 } catch { Write-Host 'Process finished' }\")",
+      "Bash(powershell.exe -Command 'Get-Process python | Select-Object Id, CPU, @{N='\\\\''MB'\\\\'';E={[math]::Round\\($_.WorkingSet64/1MB,0\\)}} | Format-Table')",
+      "Bash(powershell.exe -Command 'Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CPU -gt 10 } | Measure-Object | Select-Object Count')"
     ],
     "additionalDirectories": [
       "\\tmp",

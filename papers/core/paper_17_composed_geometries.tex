@@ -692,8 +692,20 @@ Without the balancing one-body attraction, the Hamiltonian is
 energetically unbalanced: 4-electron FCI gives 29\% error (worst
 of three configurations tested), with the Pauli count increasing
 $2.56\times$ and 1-norm $2.30\times$.  PK thus remains the correct
-coupling mechanism for the composed architecture in both classical
-and quantum settings.
+coupling mechanism for the composed architecture in \emph{classical}
+solvers.  In quantum settings, Paper~19~\cite{loutey_paper19}
+demonstrates that the missing one-body cross-center integrals
+$\langle \psi_{nlm}^A | V_B | \psi_{n'l'm'}^A \rangle$ can be
+computed analytically via incomplete gamma functions (the multipole
+expansion terminates exactly at $L_{\max} = 2 l_{\max}$ by Gaunt
+selection rules).  The resulting ``balanced coupled''
+Hamiltonian---with all four interaction types and no PK---produces
+the only bound LiH in 4-electron FCI (1.8\% energy error vs
+PK's 15.0\%) and achieves 0.20\% energy error at $n_{\max} = 3$.
+For BeH$_2$, PK overcorrects: 27.4\% error in 4-electron FCI vs
+10.7\% balanced.  The balanced 1-norm is lower than composed for
+BeH$_2$ (304.7 vs 354.9~Ha).  See Paper~19 for the full resource
+census and convergence analysis.
 
 \subsection{Outlook: the composition pattern for larger molecules}
 \label{sec:outlook}
@@ -1247,7 +1259,12 @@ single high-dimensional coordinate system.  The key results:
   drift by $4\times$; $l$-dependent PK has zero additional effect on
   the 2D solver.  A residual $+0.15$~bohr/$l_{\max}$ drift is
   intrinsic to the composed-geometry approximation.  Without PK,
-  no equilibrium exists.  Ab initio $R_{\rm ref}$ derivation fails
+  no equilibrium exists in the classical composed solver.
+  (Paper~19~\cite{loutey_paper19} shows that the balanced coupled
+  Hamiltonian---which replaces PK with explicit cross-block ERIs
+  and cross-center $V_{ne}$---produces equilibrium in 4-electron
+  FCI, and is the \emph{only} coupling scheme that does so.)
+  Ab initio $R_{\rm ref}$ derivation fails
   (scale mismatch).  The PK pseudopotential is classified as a
   \emph{composition exchange constant} (Paper~18): the irreducible
   cost of factorizing the $N$-electron wavefunction into composed
@@ -1270,6 +1287,7 @@ Level & System & Geometry & Best result \\
 5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\
 5 & BeH$^+$ & Composed (Level 3+4)   & Bound, physical \\
 5 & BeH$_2$ & Composed (Level 3+4+4) & $R_{\rm eq}$: 11.7\% error \\
+5b & LiH/BeH$_2$/H$_2$O & Balanced coupled (Paper~19) & $E$: 0.20\%; $R_{\rm eq}$: 8.8\% (drift) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1561,6 +1579,12 @@ J.~Loutey,
 ``GeoVac: Computational Quantum Chemistry via Spectral Graph Theory,''
 version 1.6.1 (2026),
 \url{https://github.com/jloutey-hash/geovac}.
+
+\bibitem{loutey_paper19}
+J.~Loutey,
+``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian
+Integrals and Coupled Composition,''
+GeoVac Paper~19 (2026).
 
 \end{thebibliography}
 
