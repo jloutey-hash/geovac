@@ -1,8 +1,8 @@
 # GeoVac: Computational Quantum Chemistry via Spectral Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.0.43-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.4.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
-**Version 2.0.43** - Balanced Coupled Composition (LiH/BeH₂/H₂O), TC Integrals, Market Test & Paper 19
+**Version 2.4.0** - Transition metal scoping, d-orbital sparsity, 30-molecule library
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for quantum simulation of molecular systems, achieving O(Q^2.5) Pauli term scaling -- a 51x to 1,712x advantage over published Gaussian baselines (Paper 14). The sparsity is intrinsic to the basis: angular momentum selection rules in the Gaunt integrals enforce block-diagonal electron repulsion integrals, producing Hamiltonians that are sparse in structure and concentrated in weight (O(Q^1.69) 1-norm).
 
@@ -471,7 +471,8 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 | **18** | **Exchange Constants** | **Weyl--Selberg identification of κ, e^a E₁(a), μ(R); α connection** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | LCAO FCI (Molecules) | LiH D_e 1.0% (CP-corrected) |
-| **19** | **Coupled Composition** | **PK-free molecular Hamiltonians via two-center Sturmian integrals (conjectural)** |
+| **19** | **Coupled Composition** | **Balanced coupled: 0.20% energy, PK-free, 3-molecule census** |
+| **20** | **Resource Benchmarks** | **30 molecules, FCI PES, 2.7×–190× Pauli advantage vs Gaussian, d-orbital sparsity** |
 
 ---
 
@@ -480,6 +481,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 ### What GeoVac Does Well
 - **Structurally sparse qubit Hamiltonians:** O(Q^2.5) Pauli scaling for composed molecules (vs O(Q^3.9-4.3) Gaussian); 51x-1,712x fewer Pauli terms across LiH/BeH2/H2O; O(Q^1.69) 1-norm for fault-tolerant simulation cost
 - **Block-diagonal electron repulsion integrals:** Gaunt selection rules enforce basis-intrinsic sparsity, compatible with all downstream optimizations (tapering, grouping, tensor factorization)
+- **d-Orbital sparsity advantage:** d-orbital blocks have 4.0% ERI density (vs 8.9% for s/p), producing fewer Pauli terms per qubit. Transition metal hydrides (ScH, TiH) are cheaper to encode than main-group molecules at the same qubit count
 - Classical validation benchmarks: H2 96.0% D_e (Level 4), LiH R_eq 5.3% (Level 5), BeH2 R_eq 11.7% (exchange coupling), He 0.05% (hyperspherical)
 - Ab initio molecular spectroscopy (electron lattice -> PES -> rovibrational lines)
 - O(V) scaling for all single-particle operations
@@ -490,6 +492,7 @@ ADSCFT/                 AdS/CFT correspondence research (retained, tested)
 - **Core-valence diatomics:** The composed geometry achieves R_eq within 5.3% for LiH with l-dependent ab initio pseudopotential at l_max=2 (Paper 17). The l_max divergence is now understood to be an adiabatic approximation artifact (v2.0.6 diagnostic): bare HeH⁺ Level 4 drifts at +0.262 bohr/l_max with no PK or Z_eff, and PK-induced symmetry breaking adds +0.303 for composed LiH. Three mitigation attempts failed (algebraic PK projector, enhanced Z_eff, single-channel DBOC). The variational 2D solver (Paper 15) is the identified fix; integration into the composition pipeline is the next milestone.
 - **H2 electron-electron cusp:** Level 4 molecule-frame hyperspherical solver recovers 96.0% D_e at l_max=6 with Schwartz cusp correction (Paper 15), surpassing prolate spheroidal CI (92.4%, Paper 12). CBS extrapolation estimates 96-97% with frozen π channels; reaching >99% requires higher π channels (m_max>=2) or δ channels.
 - **Basis convergence:** At nmax=3, BSSE (0.115 Ha) exceeds LiH experimental binding energy (0.092 Ha). Convergence at larger nmax not characterized.
+- **Transition metals:** ScH and TiH demonstrated with [Ar] frozen cores and d-orbital valence blocks. General transition metal classification (Z=23-30) is not yet automated. d-Orbital blocks are structurally sparser than s/p (4.0% vs 8.9% ERI density).
 - **Polyatomics:** The composition pattern (core + bond pairs + lone pairs) produces PES for BeH₂ (`composed_triatomic.py`, R_eq 11.7%) and H₂O (`composed_water.py`, R_eq 26%). Qubit Hamiltonians with O(Q^2.5) Pauli scaling in `composed_qubit.py`.
 - **Polyatomic accuracy (BeH₂):** Full 1-RDM exchange reduces R_eq error from 31% (block-diagonal) to 11.7%, matching the fitted model with zero free parameters. Residual error attributed to basis truncation (l_max=2) and adiabatic approximation.
 - **Triatomic accuracy (H₂O):** R_eq = 1.34 bohr (26% error vs 1.809 expt). The bottleneck is the Level 4 angular basis at 6:1 charge asymmetry (O–H bonds), not the coupling framework. Bond-bond coupling is validated (~0.5 Ha, consistent with BeH₂); lone pair coupling is unphysical at Z_eff=6 (S·F⁰ breakdown). The Pauli scaling advantage (Q^2.5, Paper 14) is unaffected.

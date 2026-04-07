@@ -1,0 +1,93 @@
+{
+  "track_cz": {
+    "description": "d-orbital block architecture scoping",
+    "result": "POSITIVE",
+    "eri_density": {
+      "s_only_lmax0": {
+        "n_sp": 3,
+        "Q": 6,
+        "eri_pct": 100.0,
+        "pauli": 118,
+        "pauli_per_Q": 19.67
+      },
+      "sp_lmax1": {
+        "n_sp": 9,
+        "Q": 18,
+        "eri_pct": 8.92,
+        "pauli": 976,
+        "pauli_per_Q": 54.22
+      },
+      "spd_lmax2": {
+        "n_sp": 14,
+        "Q": 28,
+        "eri_pct": 3.88,
+        "pauli": 2627,
+        "pauli_per_Q": 93.82
+      },
+      "d_only": {
+        "n_sp": 5,
+        "Q": 10,
+        "eri_pct": 4.0,
+        "pauli": 56,
+        "pauli_per_Q": 5.6
+      }
+    },
+    "gaunt_selection_rules": {
+      "d_d_nonzero": "15/75 (20%)",
+      "k_values": [
+        0,
+        2,
+        4
+      ],
+      "note": "Gaunt rules more restrictive for d-d than s-p: 20% vs 38.5%"
+    },
+    "key_finding": "d-only block at Q=10 has 56 Pauli terms vs 112 for s+p block (0.50x)"
+  },
+  "track_da": {
+    "description": "Transition metal hydride Hamiltonians",
+    "result": "POSITIVE",
+    "ScH": {
+      "electrons_encoded": 3,
+      "blocks": 2,
+      "Q": 30,
+      "N_pauli_composed": 278,
+      "N_pauli_balanced": 574,
+      "pauli_ratio": 2.06,
+      "one_norm_composed": 786.03,
+      "one_norm_balanced": 844.96,
+      "qwc_balanced": 29,
+      "pauli_per_Q": 9.27
+    },
+    "TiH": {
+      "electrons_encoded": 4,
+      "blocks": 2,
+      "Q": 30,
+      "N_pauli_composed": 278,
+      "N_pauli_balanced": 574,
+      "pauli_ratio": 2.06,
+      "one_norm_composed": 885.79,
+      "one_norm_balanced": 951.03,
+      "qwc_balanced": 29,
+      "pauli_per_Q": 9.27
+    },
+    "comparison": {
+      "KH_main_group": {
+        "Q": 20,
+        "N_pauli": 223,
+        "pauli_per_Q": 11.15
+      },
+      "ScH_d_block": {
+        "Q": 30,
+        "N_pauli": 278,
+        "pauli_per_Q": 9.27
+      },
+      "TiH_d_block": {
+        "Q": 30,
+        "N_pauli": 278,
+        "pauli_per_Q": 9.27
+      }
+    },
+    "key_finding": "d-orbital blocks are CHEAPER per qubit than s/p blocks (9.27 vs 11.15 Pauli/Q)"
+  },
+  "version": "v2.4.0"
+}

@@ -1,0 +1,184 @@
+{
+  "track": "CN-CO",
+  "version": "v2.1.1",
+  "date": "2026-04-06",
+  "description": "Convergence validation and 1-norm cleanup",
+  "nah_convergence": {
+    "nmax2": {
+      "Q": 20,
+      "M": 10,
+      "Pauli": 239,
+      "one_norm_total": 191.1,
+      "one_norm_nonidentity": 18.91,
+      "identity": -172.19,
+      "QWC": 29,
+      "E_fci_R3566": -169.114598,
+      "R_eq": "none (overattraction)"
+    },
+    "nmax3": {
+      "Q": 56,
+      "M": 28,
+      "Pauli": 5349,
+      "one_norm_total": 228.08,
+      "one_norm_nonidentity": null,
+      "identity": null,
+      "QWC": 801,
+      "E_fci_R3566": -169.516635,
+      "energy_improvement_Ha": 0.402,
+      "R_eq": "none (overattraction persists)",
+      "pes_R": [
+        2.5,
+        3.0,
+        3.566,
+        4.0,
+        5.0,
+        6.0
+      ],
+      "pes_E": [
+        -171.479,
+        -170.365,
+        -169.517,
+        -169.019,
+        -168.052,
+        -167.208
+      ]
+    },
+    "convergence_note": "Energy improves 0.40 Ha from n_max=2 to n_max=3. PES shape unchanged (monotonically attractive). Overattraction is structural to frozen-core treatment, not basis limitation."
+  },
+  "nmax3_resource_table": {
+    "NaH": {
+      "Q": 56,
+      "Pauli_bal": 5349,
+      "Pauli_comp": 5253,
+      "one_norm_bal": 228.08,
+      "one_norm_comp": 211.44,
+      "QWC_bal": 801
+    },
+    "HCl": {
+      "Q": 140,
+      "Pauli_bal": 66939,
+      "Pauli_comp": 13131,
+      "one_norm_bal": 4663.14,
+      "one_norm_comp": 1251.97,
+      "QWC_bal": 3554
+    },
+    "MgH2": {
+      "Q": 112,
+      "Pauli_bal": 34473,
+      "Pauli_comp": 10505,
+      "one_norm_bal": 663.82,
+      "one_norm_comp": 347.82,
+      "QWC_bal": 2965
+    },
+    "SiH4": {
+      "Q": 224,
+      "Pauli_bal": 164769,
+      "Pauli_comp": 21009,
+      "one_norm_bal": 4765.67,
+      "one_norm_comp": 780.44,
+      "QWC_bal": 4525
+    }
+  },
+  "one_norm_table_nmax2": {
+    "first_row": {
+      "LiH": {
+        "Q": 30,
+        "Pauli": 334,
+        "lam_total": 33.26,
+        "lam_nonid": 26.61,
+        "E_ident": -6.65,
+        "QWC": 21
+      },
+      "BeH2": {
+        "Q": 50,
+        "Pauli": 556,
+        "lam_total": 67.39,
+        "lam_nonid": 52.14,
+        "E_ident": -15.25,
+        "QWC": 21
+      },
+      "H2O": {
+        "Q": 70,
+        "Pauli": 778,
+        "lam_total": 360.81,
+        "lam_nonid": 175.55,
+        "E_ident": -185.27,
+        "QWC": 21
+      },
+      "HF": {
+        "Q": 60,
+        "Pauli": 667,
+        "lam_total": 478.6,
+        "lam_nonid": 215.06,
+        "E_ident": -263.54,
+        "QWC": 21
+      },
+      "NH3": {
+        "Q": 80,
+        "Pauli": 889,
+        "lam_total": 269.53,
+        "lam_nonid": 149.44,
+        "E_ident": -120.09,
+        "QWC": 21
+      },
+      "CH4": {
+        "Q": 90,
+        "Pauli": 1000,
+        "lam_total": 197.04,
+        "lam_nonid": 129.05,
+        "E_ident": -67.98,
+        "QWC": 21
+      }
+    },
+    "second_row": {
+      "NaH": {
+        "Q": 20,
+        "Pauli": 239,
+        "lam_total": 191.1,
+        "lam_nonid": 18.91,
+        "E_ident": -172.19,
+        "QWC": 29
+      },
+      "MgH2": {
+        "Q": 40,
+        "Pauli": 1501,
+        "lam_total": 302.92,
+        "lam_nonid": 103.22,
+        "E_ident": -199.7,
+        "QWC": 109
+      },
+      "HCl": {
+        "Q": 50,
+        "Pauli": 2936,
+        "lam_total": 1168.73,
+        "lam_nonid": 798.77,
+        "E_ident": -369.96,
+        "QWC": 133
+      },
+      "H2S": {
+        "Q": 60,
+        "Pauli": 4119,
+        "lam_total": 1100.88,
+        "lam_nonid": 810.9,
+        "E_ident": -289.98,
+        "QWC": 141
+      },
+      "PH3": {
+        "Q": 70,
+        "Pauli": 5582,
+        "lam_total": 1047.58,
+        "lam_nonid": 829.03,
+        "E_ident": -218.56,
+        "QWC": 159
+      },
+      "SiH4": {
+        "Q": 80,
+        "Pauli": 7273,
+        "lam_total": 1003.7,
+        "lam_nonid": 848.57,
+        "E_ident": -155.13,
+        "QWC": 169
+      }
+    }
+  }
+}

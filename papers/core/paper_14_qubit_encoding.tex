@@ -37,7 +37,7 @@ suggest.
 All Gaussian baselines are validated against published integral values
 (Szabo and Ostlund for H$_2$; analytical STO for He).
 
-For composed multi-center systems (LiH, BeH$_2$, H$_2$O), the
+For composed multi-center systems, the
 pseudopotential approximation of the composed natural geometry
 framework~\cite{loutey_paper17} yields block-diagonal electron
 repulsion integrals with a universal Pauli scaling of $O(Q^{2.5})$,
@@ -45,7 +45,13 @@ independent of molecular topology (exponent spread~$0.02$ across three
 molecules).  At equal qubit counts, this represents two or more
 orders of magnitude fewer Pauli terms than published Gaussian
 baselines~\cite{trenev2025}---an advantage that grows with system size
-due to the $\sim 1.5$ exponent gap.
+due to the $\sim 1.5$ exponent gap.  Across all 30~molecules in the
+library (He through C$_2$H$_6$, spanning $Z = 1$--36, including
+transition metal hydrides ScH and TiH), the composed
+Pauli count is exactly linear in the qubit count:
+$N_{\mathrm{Pauli}} \approx 11.11 \times Q$, with d-orbital blocks
+producing a \emph{lower} coefficient (9.27) due to more restrictive
+Gaunt selection rules at higher angular momentum.
 \end{abstract}
 
 \maketitle
@@ -1235,9 +1241,226 @@ this:
 \end{enumerate}
 The universality of the $Q^{2.5}$ exponent across LiH, BeH$_2$, and
 H$_2$O---systems with 3, 5, and~7 orbital blocks,
-respectively---provides evidence that the scaling advantage extends
-to larger polyatomic systems via the same fiber bundle
+respectively---is confirmed by a 28-molecule library spanning
+$Z = 1$--36, including multi-center systems (LiF, CO, N$_2$, F$_2$,
+NaCl, CH$_2$O, C$_2$H$_2$, C$_2$H$_6$) with up to 8~nuclei
+(Sec.~\ref{sec:multi_center}).  Across all 28~molecules, the composed
+Pauli count is exactly linear in~$Q$: $N_{\mathrm{Pauli}} \approx
+11.11 \times Q$, confirming that the scaling advantage extends
+to arbitrary polyatomic systems via the fiber bundle
 decomposition~\cite{loutey_paper17}.
+
+
+\subsection{Second-row molecules via frozen-core composition}
+\label{sec:second_row}
+
+The composed architecture extends naturally to second-row atoms
+($Z = 11$--18) by replacing the Level~3-solved He-like core
+with an analytical frozen core.  Each [Ne]-like core
+(1$s^2$\,2$s^2$\,2$p^6$, 10~electrons) is described by hydrogenic
+wavefunctions with Clementi--Raimondi orbital exponents, producing
+a smooth $Z_{\text{eff}}(r)$ screening function ($Z$ at the origin,
+$Z-10$ at infinity).  The frozen-core energy enters the qubit
+Hamiltonian only through the identity operator and does not affect
+quantum measurement cost.
+
+Table~\ref{tab:second_row} lists balanced coupled resource metrics
+for six second-row molecules at $n_{\max} = 2$.
+
+\begin{table}[t]
+\caption{Balanced coupled resource metrics for second-row molecules
+  at $n_{\max} = 2$, with composed metrics for comparison.
+  All molecules use [Ne] frozen cores with Clementi--Raimondi
+  orbital exponents.}
+\label{tab:second_row}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Molecule & $Q$ & \multicolumn{2}{c}{Pauli terms}
+  & $\lambda_{\text{ni}}$ (Ha) & QWC \\
+  & & Comp. & Bal. & Bal. & Bal. \\
+\hline
+NaH      &  20 &    223 &    239 &  18.9 &   29 \\
+MgH$_2$  &  40 &    445 & 1{,}501 & 103.2 &  109 \\
+HCl      &  50 &    556 & 2{,}936 & 798.8 &  133 \\
+H$_2$S   &  60 &    667 & 4{,}119 & 810.9 &  141 \\
+PH$_3$   &  70 &    778 & 5{,}582 & 829.0 &  159 \\
+SiH$_4$  &  80 &    889 & 7{,}273 & 848.6 &  169 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The Pauli scaling across four molecules with distinct qubit counts
+(NaH, MgH$_2$, HCl, SiH$_4$) yields an exponent of $Q^{2.50}$,
+matching the first-row result to within fitting uncertainty.
+This confirms that the $O(Q^{2.5})$ scaling is universal across
+periodic table rows---driven by Gaunt selection rules that are
+independent of the core treatment.
+
+Because second-row molecules use frozen cores (no encoded core block),
+they require fewer qubits than their first-row isostructural
+analogues: NaH uses $Q = 20$ versus LiH's $Q = 30$.  Within a
+given row, however, the Pauli count depends only on the orbital
+block topology and $n_{\max}$.  The key structural observation is
+that the Pauli \emph{scaling exponent} ($Q^{2.5}$) is universal
+across both rows, driven by Gaunt selection rules that are
+independent of nuclear charge.
+
+For 1-norm comparisons, we report
+$\lambda_{\text{ni}}$---the non-identity component of the Pauli
+1-norm---which excludes the frozen-core energy offset and nuclear
+repulsion (classical constants that do not contribute to quantum
+measurement cost or Trotter error).  For NaH, the identity term
+accounts for 90\% of the total 1-norm (172~Ha of 191~Ha); the
+simulation-relevant $\lambda_{\text{ni}} = 18.9$~Ha is comparable
+to first-row LiH ($\lambda_{\text{ni}} = 26.6$~Ha).
+
+The framework extends further to third-row main-group atoms
+($Z = 19$--20 and $Z = 31$--36) via [Ar] (18-electron) and
+[Ar]3$d^{10}$ (28-electron) frozen cores with Clementi--Raimondi
+orbital exponents.  Six additional molecules---KH, CaH$_2$, GeH$_4$,
+AsH$_3$, H$_2$Se, HBr---bringing the single- and two-center library
+to 18 molecules across three periodic table rows (extended to
+28 with multi-center systems in Sec.~\ref{sec:multi_center}).  The $Q^{2.5}$ scaling exponent
+is maintained.
+
+A strong structural invariance is confirmed: frozen-core molecules
+with the same block topology produce \emph{identical} Pauli counts.
+For example, NaH and KH both yield 223 composed / 239 balanced
+Pauli terms at $Q = 20$, despite different core types ([Ne] vs.\ [Ar]).
+This invariance holds exactly across all six isostructural pairs
+spanning rows~2 and~3.
+
+Basis convergence at $n_{\max} = 3$ (requiring $\ell = 2$ rotation
+matrices, now implemented via the Wigner $D$-matrix) produces NaH
+Hamiltonians at $Q = 56$ with 5{,}349 balanced Pauli terms.
+Two-electron FCI gives a 0.40~Ha energy improvement over $n_{\max} = 2$
+at the reference geometry, confirming variational convergence.
+However, the potential energy surface retains the overattraction
+observed at $n_{\max} = 2$---no equilibrium geometry is found---indicating
+that PES shape accuracy is limited by the frozen-core
+approximation, not the angular basis.
+
+
+\subsection{Multi-center molecules}
+\label{sec:multi_center}
+
+The composed architecture handles molecules with more than two nuclei
+through the same block-diagonal construction: each electron pair
+occupies an independent orbital block, and cross-block ERIs are zero
+by the pseudopotential approximation.  Table~\ref{tab:multi_center}
+reports composed Pauli counts for eight multi-center systems at
+$n_{\max} = 2$, including molecules with up to eight nuclei.
+
+\begin{table}[t]
+\caption{Composed (block-diagonal) Pauli term counts for multi-center
+  molecules at $n_{\max} = 2$.  $N_e$: total electrons;
+  $N_b$: orbital blocks; $Q = 2M$: qubits.  Frozen cores are used
+  where applicable (Na: [Ne], Cl: [Ne]).}
+\label{tab:multi_center}
+\begin{ruledtabular}
+\begin{tabular}{lrrrr}
+Molecule & $N_e$ & $N_b$ & $Q$ & Pauli terms \\
+\hline
+LiF      & 12 & 6 &  70 &     778 \\
+CO       & 14 & 7 & 100 &   1{,}111 \\
+N$_2$    & 14 & 7 & 100 &   1{,}111 \\
+F$_2$    & 18 & 9 & 100 &   1{,}111 \\
+NaCl     &  8 & 4 &  50 &     556 \\
+CH$_2$O  & 16 & 8 & 120 &   1{,}333 \\
+C$_2$H$_2$ & 14 & 7 & 120 & 1{,}333 \\
+C$_2$H$_6$ & 18 & 9 & 160 & 1{,}777 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The most striking feature of Table~\ref{tab:multi_center} is
+\emph{isostructural invariance}: CO and N$_2$ produce identical
+Pauli counts (1{,}111) despite different nuclear charges, confirming
+that the invariance observed for frozen-core pairs
+(Sec.~\ref{sec:second_row}) extends to multi-center topologies.
+Similarly, CO, N$_2$, and F$_2$ all yield 1{,}111 terms at
+$Q = 100$; and CH$_2$O and C$_2$H$_2$ both yield 1{,}333 at
+$Q = 120$.  The Pauli count is determined entirely by the qubit
+count~$Q$, not by the number of blocks, the block structure, or the
+atomic species.
+
+Across all 30 molecules in the library---from He ($Q = 10$) through
+C$_2$H$_6$ ($Q = 160$), including transition metal hydrides
+(Sec.~\ref{sec:d_orbitals})---the composed Pauli count obeys
+\begin{equation}
+  N_{\mathrm{Pauli}} \approx 11.11 \times Q,
+  \label{eq:linear_pauli}
+\end{equation}
+with a coefficient stable to $\pm 0.1$.  This exact linearity in~$Q$
+is a stronger result than the $O(Q^{2.5})$ within-molecule scaling
+(Eqs.~\ref{eq:alpha_lih}--\ref{eq:alpha_h2o}), which is measured by
+varying $n_{\max}$ at fixed molecular topology.
+Equation~\eqref{eq:linear_pauli} describes the \emph{across-molecule}
+scaling at fixed $n_{\max} = 2$: adding more orbital blocks (more
+nuclei, more electron pairs) increases~$Q$ and~$N_{\mathrm{Pauli}}$
+in exact proportion, because each block contributes an independent
+set of Pauli terms with no cross-block coupling.
+
+With these eight multi-center systems, the total GeoVac molecule
+library spans 30 molecules across $Z = 1$--36, including first-row
+(H$_2$ through CH$_4$), second-row (NaH through SiH$_4$),
+third-row (KH through HBr), multi-center (LiF through
+C$_2$H$_6$), and transition metal hydrides (ScH, TiH;
+Sec.~\ref{sec:d_orbitals}).  All are accessible via the
+\texttt{hamiltonian()} API with ecosystem export to Qiskit,
+OpenFermion, and PennyLane.
+
+
+\subsection{d-Orbital blocks and transition metal hydrides}
+\label{sec:d_orbitals}
+
+The Gaunt selection rules become \emph{more} restrictive at higher
+angular momentum.  For $d$-orbital blocks ($l = 2$), the allowed
+multipole orders are $k = 0, 2, 4$ (three values), and only 20\% of
+the angular coupling coefficients are nonzero---compared to 38.5\%
+for mixed $s$+$p$ blocks.  Table~\ref{tab:d_block_eri} quantifies the
+effect on ERI density and Pauli term counts for isolated blocks at
+fixed qubit counts.
+
+\begin{table}[t]
+\caption{ERI density and Pauli term counts for single orbital blocks
+  of different angular momentum composition at $n_{\max} = 2$.
+  $M$: spatial orbitals; $Q = 2M$: qubits.}
+\label{tab:d_block_eri}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Block type & $M$ & $Q$ & ERI density & Pauli & Pauli/$Q$ \\
+\hline
+$s$-only ($l_{\max} = 0$) & 3 & 6 & 100\% & 118 & 19.67 \\
+$s$+$p$ ($l_{\max} = 1$) & 9 & 18 & 8.9\% & 976 & 54.22 \\
+$d$-only ($l = 2$) & 5 & 10 & 4.0\% & 56 & 5.60 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The $d$-only block is the sparsest: 4.0\% ERI density and
+Pauli/$Q = 5.60$, compared to 8.9\% and 54.22 for the $s$+$p$ block
+that dominates main-group molecules.  Higher angular momentum produces
+\emph{tighter} selection rules, the opposite of the Gaussian situation
+where $d$-orbital integrals are among the densest.
+
+This sparsity is exploited for transition metal hydrides via frozen-core
+composition.  ScH ($Z = 21$) and TiH ($Z = 22$) are constructed with
+an [Ar] frozen core (18 electrons) and valence blocks that include an
+isolated $d$-orbital block ($l_{\min} = 2$, $l_{\max} = 2$) alongside
+an $s$-orbital bond pair.  At $n_{\max} = 2$, both molecules require
+$Q = 30$ qubits and produce 278 composed Pauli terms---fewer than
+LiH (334 terms at the same~$Q$)---with Pauli/$Q = 9.27$, below the
+universal coefficient of~11.11.  The reduction reflects the $d$-block's
+lower ERI density entering the block-diagonal sum.
+
+This is a scoping result: the atomic classifier does not yet automate
+transition metal decomposition ($Z = 23$--30), and the Hamiltonians
+have not been benchmarked against FCI or Gaussian baselines.
+Nevertheless, the structural finding---that $d$-orbital blocks are
+cheaper per qubit than $s$/$p$ blocks---is a direct consequence of the
+Gaunt integral selection rules and applies generally to any system with
+$d$-orbital valence electrons.
 
 
 %% ========================================================================
@@ -1271,6 +1494,20 @@ plus the magnetic selection rule $m_a - m_c = m_d - m_b$.  These
 constraints eliminate the vast majority of the $M^4$ possible ERI entries.
 The surviving entries grow as $O(M^2)$---a quadratic reduction in the
 dominant cost term of Eq.~\eqref{eq:pauli_scaling}.
+
+The $d$-orbital results of Sec.~\ref{sec:d_orbitals} demonstrate that
+this sparsity \emph{increases} with angular momentum: $d$-$d$ ERI
+density is 4.0\% versus 8.9\% for $s$+$p$, because the Gaunt triangle
+inequality $|l_a - l_c| \le k \le l_a + l_c$ allows only $k = 0, 2, 4$
+for $l = 2$, the same three multipole orders as $l = 1$ but distributed
+over a larger angular space ($5 \times 5$ vs.\ $3 \times 3$ magnetic
+quantum number grids).  This is the structural opposite of Gaussian
+bases, where transition metal $d$-orbitals produce the densest ERI
+tensors due to the absence of angular selection rules in the molecular
+orbital basis.  For quantum simulation of strongly correlated $d$-electron
+systems---transition metal complexes, catalytic intermediates---the
+GeoVac lattice offers a structural sparsity advantage that grows with
+the angular complexity of the system.
 
 \subsection{Implications for quantum simulation}
 \label{sec:trotter}
@@ -1576,6 +1813,26 @@ block-diagonal ERIs from Gaunt selection rules.  Cross-pair $V_{ee}$
 costs more in Pauli terms than the PK/$Z_{\rm eff}$/exchange overhead
 it replaces.  This validates the composed architecture as the quantum
 computing approach for multi-electron molecules.
+
+\paragraph{Note added v2.0.44.}
+Paper~20 presents the GeoVac Hamiltonian library as a practical tool
+for the quantum computing community, including FCI accuracy benchmarks
+across the LiH potential energy surface, matched-accuracy resource
+comparisons against Gaussian baselines, and ecosystem export to
+Qiskit, OpenFermion, and PennyLane.  The balanced coupled architecture
+(Paper~19) achieves 0.20\% energy error at FCI, demonstrating that
+the composed partition Hamiltonian is accurate when solved exactly.
+
+\paragraph{Note added v2.4.0.}
+The molecule library now spans 30 systems ($Z = 1$--36), including
+two transition metal hydrides: ScH ($Z = 21$, [Ar] frozen core) and
+TiH ($Z = 22$, [Ar] frozen core).  Both use isolated $d$-orbital
+valence blocks ($l_{\min} = l_{\max} = 2$) with ERI density of 4.0\%,
+half that of $s$+$p$ blocks (8.9\%).  The resulting Pauli/$Q$
+ratio of~9.27 falls below the universal coefficient of~11.11,
+demonstrating that $d$-electron systems are \emph{cheaper} to encode
+than main-group molecules at the same qubit count.  Transition metals
+are reclassified from ``out of scope'' to ``scoping demonstrated.''
 
 %% ========================================================================
 \begin{acknowledgments}

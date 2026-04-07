@@ -1,0 +1,122 @@
+[
+  {
+    "molecule": "LiH",
+    "Q": 30,
+    "Pauli": 334,
+    "one_norm_total": 33.2557,
+    "one_norm_nonidentity": 26.6087,
+    "identity_coeff": -6.6469,
+    "ratio": 0.8001,
+    "QWC": 21
+  },
+  {
+    "molecule": "BeH2",
+    "Q": 50,
+    "Pauli": 556,
+    "one_norm_total": 67.3918,
+    "one_norm_nonidentity": 52.1429,
+    "identity_coeff": -15.2488,
+    "ratio": 0.7737,
+    "QWC": 21
+  },
+  {
+    "molecule": "H2O",
+    "Q": 70,
+    "Pauli": 778,
+    "one_norm_total": 360.8129,
+    "one_norm_nonidentity": 175.5471,
+    "identity_coeff": -185.2658,
+    "ratio": 0.4865,
+    "QWC": 21
+  },
+  {
+    "molecule": "HF",
+    "Q": 60,
+    "Pauli": 667,
+    "one_norm_total": 478.6019,
+    "one_norm_nonidentity": 215.0584,
+    "identity_coeff": -263.5436,
+    "ratio": 0.4493,
+    "QWC": 21
+  },
+  {
+    "molecule": "NH3",
+    "Q": 80,
+    "Pauli": 889,
+    "one_norm_total": 269.5315,
+    "one_norm_nonidentity": 149.4396,
+    "identity_coeff": -120.0918,
+    "ratio": 0.5544,
+    "QWC": 21
+  },
+  {
+    "molecule": "CH4",
+    "Q": 90,
+    "Pauli": 1000,
+    "one_norm_total": 197.0381,
+    "one_norm_nonidentity": 129.0543,
+    "identity_coeff": -67.9837,
+    "ratio": 0.655,
+    "QWC": 21
+  },
+  {
+    "molecule": "NaH",
+    "Q": 20,
+    "Pauli": 239,
+    "one_norm_total": 191.0957,
+    "one_norm_nonidentity": 18.9107,
+    "identity_coeff": -172.1851,
+    "ratio": 0.099,
+    "QWC": 29
+  },
+  {
+    "molecule": "MgH2",
+    "Q": 40,
+    "Pauli": 1501,
+    "one_norm_total": 302.9163,
+    "one_norm_nonidentity": 103.2212,
+    "identity_coeff": -199.6951,
+    "ratio": 0.3408,
+    "QWC": 109
+  },
+  {
+    "molecule": "HCl",
+    "Q": 50,
+    "Pauli": 2936,
+    "one_norm_total": 1168.7312,
+    "one_norm_nonidentity": 798.7733,
+    "identity_coeff": -369.9579,
+    "ratio": 0.6835,
+    "QWC": 133
+  },
+  {
+    "molecule": "H2S",
+    "Q": 60,
+    "Pauli": 4119,
+    "one_norm_total": 1100.8791,
+    "one_norm_nonidentity": 810.8954,
+    "identity_coeff": -289.9837,
+    "ratio": 0.7366,
+    "QWC": 141
+  },
+  {
+    "molecule": "PH3",
+    "Q": 70,
+    "Pauli": 5582,
+    "one_norm_total": 1047.5804,
+    "one_norm_nonidentity": 829.0252,
+    "identity_coeff": -218.5551,
+    "ratio": 0.7914,
+    "QWC": 159
+  },
+  {
+    "molecule": "SiH4",
+    "Q": 80,
+    "Pauli": 7273,
+    "one_norm_total": 1003.6974,
+    "one_norm_nonidentity": 848.5656,
+    "identity_coeff": -155.1318,
+    "ratio": 0.8454,
+    "QWC": 169
+  }
+]

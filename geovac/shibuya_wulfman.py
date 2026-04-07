@@ -39,6 +39,127 @@ from geovac.composed_qubit import (
 # ---------------------------------------------------------------------------
 
 
+def _small_wigner_d_element(l: int, m1: int, m2: int, beta: float) -> float:
+    """Complex small Wigner d-matrix element d^l_{m1,m2}(beta).
+
+    Uses the standard sum formula (Varshalovich et al., Eq. 4.3.1).
+    Exact for integer l; numerically stable for l <= ~10.
+
+    Parameters
+    ----------
+    l : int
+        Angular momentum quantum number (>= 0).
+    m1, m2 : int
+        Magnetic quantum numbers (-l <= m1, m2 <= l).
+    beta : float
+        Euler angle (radians).
+
+    Returns
+    -------
+    float
+        d^l_{m1,m2}(beta).
+    """
+    cb = np.cos(beta / 2.0)
+    sb = np.sin(beta / 2.0)
+
+    s_min = max(0, m2 - m1)
+    s_max = min(l + m2, l - m1)
+
+    result = 0.0
+    for s in range(s_min, s_max + 1):
+        num = np.sqrt(
+            float(
+                factorial(l + m1) * factorial(l - m1)
+                * factorial(l + m2) * factorial(l - m2)
+            )
+        )
+        denom = float(
+            factorial(l + m2 - s)
+            * factorial(s)
+            * factorial(m1 - m2 + s)
+            * factorial(l - m1 - s)
+        )
+        power_c = 2 * l + m2 - m1 - 2 * s
+        power_s = m1 - m2 + 2 * s
+        sign = (-1) ** (m1 - m2 + s)
+        result += sign * (num / denom) * cb ** power_c * sb ** power_s
+
+    return result
+
+
+def _build_rotation_matrix_real_sh(
+    l: int, theta: float, phi: float,
+) -> np.ndarray:
+    """Build (2l+1)x(2l+1) rotation matrix for real spherical harmonics.
+
+    The rotation maps the z-axis to the direction (theta, phi).
+    Real spherical harmonics ordered: m = -l, -l+1, ..., 0, ..., l.
+
+    Algorithm:
+    1. Compute complex Wigner D-matrix via small d-matrix
+    2. Convert to real SH basis via unitary transformation U
+    3. R_real = U @ D_complex @ U^dagger
+
+    Parameters
+    ----------
+    l : int
+        Angular momentum quantum number (>= 0).
+    theta : float
+        Polar angle (radians), 0 <= theta <= pi.
+    phi : float
+        Azimuthal angle (radians).
+
+    Returns
+    -------
+    np.ndarray
+        (2l+1) x (2l+1) real orthogonal rotation matrix.
+    """
+    dim = 2 * l + 1
+
+    if l == 0:
+        return np.array([[1.0]])
+
+    # 1. Complex Wigner D-matrix: D^l_{m1,m2} = e^{-i*m1*phi} * d^l_{m1,m2}(theta)
+    D_cplx = np.zeros((dim, dim), dtype=complex)
+    for i, m1 in enumerate(range(-l, l + 1)):
+        phase = np.exp(-1j * m1 * phi)
+        for j, m2 in enumerate(range(-l, l + 1)):
+            D_cplx[i, j] = phase * _small_wigner_d_element(l, m1, m2, theta)
+
+    # 2. Unitary transformation U: Y^real = U @ Y^complex
+    #    m > 0 (cosine-like):  U[m_r, -|m|] = 1/sqrt(2),  U[m_r, +|m|] = (-1)^m / sqrt(2)
+    #    m = 0:                U[0, 0] = 1
+    #    m < 0 (sine-like):    U[m_r, -|m|] = i/sqrt(2),   U[m_r, +|m|] = -i*(-1)^|m| / sqrt(2)
+    U = np.zeros((dim, dim), dtype=complex)
+    for idx, m_r in enumerate(range(-l, l + 1)):
+        if m_r > 0:
+            idx_neg = l - m_r   # column for complex m = -|m_r|
+            idx_pos = l + m_r   # column for complex m = +|m_r|
+            U[idx, idx_neg] = 1.0 / np.sqrt(2)
+            U[idx, idx_pos] = (-1) ** m_r / np.sqrt(2)
+        elif m_r == 0:
+            U[idx, l] = 1.0
+        else:
+            M = abs(m_r)
+            idx_neg = l - M
+            idx_pos = l + M
+            U[idx, idx_neg] = 1j / np.sqrt(2)
+            U[idx, idx_pos] = -1j * (-1) ** M / np.sqrt(2)
+
+    # 3. R_real = U @ D_complex @ U^dagger
+    R_real = U @ D_cplx @ U.conj().T
+
+    # Result must be real-valued (imaginary parts are numerical noise)
+    max_imag = np.max(np.abs(R_real.imag))
+    if max_imag > 1e-10:
+        raise RuntimeError(
+            f"Rotation matrix for l={l} has imaginary parts: "
+            f"max |imag| = {max_imag:.2e}"
+        )
+
+    return R_real.real
+
+
 def _build_rotation_matrix_l1(
     direction: Tuple[float, float, float],
 ) -> np.ndarray:
@@ -61,21 +182,7 @@ def _build_rotation_matrix_l1(
     nx, ny, nz = direction
     theta = np.arccos(np.clip(nz, -1.0, 1.0))
     phi = np.arctan2(ny, nx)
-
-    ct, st = np.cos(theta), np.sin(theta)
-    cp, sp = np.cos(phi), np.sin(phi)
-
-    # Cartesian rotation R_xyz = R_z(phi) @ R_y(theta)
-    # in (x, y, z) row/column order
-    R_xyz = np.array([
-        [cp * ct, -sp, cp * st],
-        [sp * ct,  cp, sp * st],
-        [-st,      0.0, ct],
-    ])
-
-    # Permute from (x, y, z) to (y, z, x) = (m=-1, m=0, m=+1)
-    perm = [1, 2, 0]
-    return R_xyz[np.ix_(perm, perm)]
+    return _build_rotation_matrix_real_sh(1, theta, phi)
 
 
 def _build_block_rotation_matrix(
@@ -85,9 +192,10 @@ def _build_block_rotation_matrix(
     """
     Build block-diagonal rotation matrix for a set of orbitals.
 
-    For l=0 orbitals the block is 1x1 identity.  For each group of l=1
-    orbitals (m=-1, 0, +1 with the same n) the block is the 3x3 real
-    spherical harmonic rotation matrix D^1.
+    For each group of orbitals with the same (n, l), the block is the
+    (2l+1) x (2l+1) real spherical harmonic rotation matrix.  l=0 blocks
+    are 1x1 identity.  General l is supported via the Wigner D-matrix
+    converted to the real SH basis.
 
     Parameters
     ----------
@@ -100,46 +208,42 @@ def _build_block_rotation_matrix(
     -------
     np.ndarray
         Block-diagonal rotation matrix of shape (N, N).
-
-    Raises
-    ------
-    NotImplementedError
-        If any orbital has l >= 2 (requires Ivanic-Ruedenberg recursion).
     """
     N = len(states)
     D = np.eye(N)
 
-    # Pre-compute D^1 only if l=1 orbitals exist
-    D1: Optional[np.ndarray] = None
-    max_l = max(l for _, l, _ in states) if states else 0
-    if max_l >= 2:
-        raise NotImplementedError(
-            f"Rotation for l={max_l} not implemented "
-            "(need Ivanic-Ruedenberg recursion)"
-        )
-    if max_l >= 1:
-        D1 = _build_rotation_matrix_l1(direction)
+    if N == 0:
+        return D
+
+    nx, ny, nz = direction
+    theta = np.arccos(np.clip(nz, -1.0, 1.0))
+    phi = np.arctan2(ny, nx)
+
+    # Pre-compute rotation matrices for each unique l value
+    max_l = max(l_val for _, l_val, _ in states)
+    D_l: Dict[int, np.ndarray] = {}
+    for l_val in range(1, max_l + 1):
+        D_l[l_val] = _build_rotation_matrix_real_sh(l_val, theta, phi)
 
     i = 0
     while i < N:
         _, l, m = states[i]
         if l == 0:
-            # D^0 = 1, already identity
             i += 1
-        elif l == 1:
-            assert i + 2 < N, "Incomplete l=1 block"
-            assert (
-                states[i][2] == -1
-                and states[i + 1][2] == 0
-                and states[i + 2][2] == 1
-            ), f"Expected m=-1,0,+1 at index {i}, got {[states[i+k][2] for k in range(3)]}"
-            D[i : i + 3, i : i + 3] = D1
-            i += 3
-        else:
-            raise NotImplementedError(
-                f"Rotation for l={l} not implemented "
-                "(need Ivanic-Ruedenberg recursion)"
-            )
+            continue
+
+        dim = 2 * l + 1
+        assert i + dim - 1 < N, f"Incomplete l={l} block at index {i}"
+
+        # Verify m ordering: -l, -l+1, ..., l
+        expected_ms = list(range(-l, l + 1))
+        actual_ms = [states[i + k][2] for k in range(dim)]
+        assert actual_ms == expected_ms, (
+            f"Expected m={expected_ms} at index {i}, got {actual_ms}"
+        )
+
+        D[i : i + dim, i : i + dim] = D_l[l]
+        i += dim
 
     return D
 

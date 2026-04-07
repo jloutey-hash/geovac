@@ -239,7 +239,7 @@ def _get_sub_blocks(
     # Reconstruct offsets by walking through all blocks
     offset = 0
     for i, b in enumerate(spec.blocks):
-        center_states = _enumerate_states(b.max_n)
+        center_states = _enumerate_states(b.max_n, l_min=b.l_min)
         if i == blk_idx:
             center_offset = offset
             center_states_list = center_states
@@ -408,7 +408,7 @@ def cross_block_mp2_energy(
     offset = 0
     block_data: List[Dict[str, Any]] = []
     for blk in spec.blocks:
-        center_states = _enumerate_states(blk.max_n)
+        center_states = _enumerate_states(blk.max_n, l_min=blk.l_min)
         n_center = len(center_states)
 
         # Center sub-block
@@ -628,7 +628,7 @@ def analyze_cross_block_sparsity(
     # Within-block ERI counts
     total_within = 0
     for bi, blk in enumerate(spec.blocks):
-        center_states = _enumerate_states(blk.max_n)
+        center_states = _enumerate_states(blk.max_n, l_min=blk.l_min)
         rk = _compute_rk_integrals_block(blk.Z_center, center_states)
         eri_phys = _build_eri_block(blk.Z_center, center_states, rk)
         n_eri = len(eri_phys)

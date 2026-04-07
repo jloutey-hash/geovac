@@ -1,0 +1,184 @@
+{
+  "composed_metrics": {
+    "He": {
+      "blocks": 1,
+      "e": 2,
+      "Q": 10,
+      "N_pauli": 112
+    },
+    "H2": {
+      "blocks": 1,
+      "e": 2,
+      "Q": 10,
+      "N_pauli": 112
+    },
+    "LiH": {
+      "blocks": 2,
+      "e": 4,
+      "Q": 30,
+      "N_pauli": 334
+    },
+    "BeH2": {
+      "blocks": 3,
+      "e": 6,
+      "Q": 50,
+      "N_pauli": 556
+    },
+    "H2O": {
+      "blocks": 5,
+      "e": 10,
+      "Q": 70,
+      "N_pauli": 778
+    },
+    "HF": {
+      "blocks": 5,
+      "e": 10,
+      "Q": 60,
+      "N_pauli": 667
+    },
+    "NH3": {
+      "blocks": 5,
+      "e": 10,
+      "Q": 80,
+      "N_pauli": 889
+    },
+    "CH4": {
+      "blocks": 5,
+      "e": 10,
+      "Q": 90,
+      "N_pauli": 1000
+    },
+    "NaH": {
+      "blocks": 1,
+      "e": 2,
+      "Q": 20,
+      "N_pauli": 223
+    },
+    "MgH2": {
+      "blocks": 2,
+      "e": 4,
+      "Q": 40,
+      "N_pauli": 445
+    },
+    "HCl": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 50,
+      "N_pauli": 556
+    },
+    "H2S": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 60,
+      "N_pauli": 667
+    },
+    "PH3": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 70,
+      "N_pauli": 778
+    },
+    "SiH4": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 80,
+      "N_pauli": 889
+    },
+    "KH": {
+      "blocks": 1,
+      "e": 2,
+      "Q": 20,
+      "N_pauli": 223
+    },
+    "CaH2": {
+      "blocks": 2,
+      "e": 4,
+      "Q": 40,
+      "N_pauli": 445
+    },
+    "GeH4": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 80,
+      "N_pauli": 889
+    },
+    "AsH3": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 70,
+      "N_pauli": 778
+    },
+    "H2Se": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 60,
+      "N_pauli": 667
+    },
+    "HBr": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 50,
+      "N_pauli": 556
+    },
+    "LiF": {
+      "blocks": 6,
+      "e": 12,
+      "Q": 70,
+      "N_pauli": 778,
+      "multi_center": true
+    },
+    "CO": {
+      "blocks": 7,
+      "e": 14,
+      "Q": 100,
+      "N_pauli": 1111,
+      "multi_center": true
+    },
+    "N2": {
+      "blocks": 7,
+      "e": 14,
+      "Q": 100,
+      "N_pauli": 1111,
+      "multi_center": true
+    },
+    "F2": {
+      "blocks": 9,
+      "e": 18,
+      "Q": 100,
+      "N_pauli": 1111,
+      "multi_center": true
+    },
+    "NaCl": {
+      "blocks": 4,
+      "e": 8,
+      "Q": 50,
+      "N_pauli": 556,
+      "multi_center": true
+    },
+    "CH2O": {
+      "blocks": 8,
+      "e": 16,
+      "Q": 120,
+      "N_pauli": 1333,
+      "multi_center": true
+    },
+    "C2H2": {
+      "blocks": 7,
+      "e": 14,
+      "Q": 120,
+      "N_pauli": 1333,
+      "multi_center": true
+    },
+    "C2H6": {
+      "blocks": 9,
+      "e": 18,
+      "Q": 160,
+      "N_pauli": 1777,
+      "multi_center": true
+    }
+  },
+  "scaling_law": "N_pauli = 11.11 * Q (coefficient stable across 28 molecules, Q=10-160)",
+  "isostructural_invariance": "Pauli count depends only on Q, not block count or block structure",
+  "version": "v2.3.0",
+  "track": "CU-CX"
+}

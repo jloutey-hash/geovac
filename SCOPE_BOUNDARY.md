@@ -1,6 +1,6 @@
-# GeoVac Atomic and Molecular Scope Boundary — v2.0.30
+# GeoVac Atomic and Molecular Scope Boundary — v2.1.0
 
-GeoVac's composed architecture handles any first-row molecule (atoms H through Ne) built from 1s² cores + valence blocks. The atomic classifier (`geovac/atomic_classifier.py`) maps Z to block decomposition for Z=1-10, and the general composed builder (`geovac/composed_qubit.py`) constructs qubit Hamiltonians from `MolecularSpec` dataclasses. Second-row atoms (Na-Ar) are feasible but require external core data that the framework does not currently compute. Transition metals are out of scope.
+GeoVac's composed architecture handles any first-row molecule (atoms H through Ne) built from 1s² cores + valence blocks, and second-row molecules (Na through Ar) via frozen-core [Ne] treatment. The atomic classifier (`geovac/atomic_classifier.py`) maps Z to block decomposition for Z=1-18, and the general composed builder (`geovac/composed_qubit.py`) constructs qubit Hamiltonians from `MolecularSpec` dataclasses. First-row cores (He-like) are solved by the Level 3 hyperspherical solver; second-row cores ([Ne]-like) use analytical Clementi-Raimondi Slater orbital exponents via `geovac/neon_core.py`. Transition metals are out of scope.
 
 ---
 
@@ -66,30 +66,49 @@ This means the O(Q^2.5) Pauli scaling is a property of the composed architecture
 
 ---
 
-## Second Row (Z=11-18): Partially Feasible
+## Second Row (Z=11-18): Implemented (Frozen-Core)
 
 | Atom | Config | Core | Valence | Status |
 |:-----|:-------|:-----|:--------|:-------|
-| Na (11) | [Ne] 3s¹ | 1s² 2s² 2p⁶ | 1e | Needs 10e core |
-| Mg (12) | [Ne] 3s² | 1s² 2s² 2p⁶ | 2e | Needs 10e core |
-| Al (13) | [Ne] 3s² 3p¹ | 10e | 3e | Needs 10e core |
-| Si (14) | [Ne] 3s² 3p² | 10e | 4e | Needs 10e core |
-| P (15)  | [Ne] 3s² 3p³ | 10e | 5e | Needs 10e core |
-| S (16)  | [Ne] 3s² 3p⁴ | 10e | 6e | Needs 10e core |
-| Cl (17) | [Ne] 3s² 3p⁵ | 10e | 7e | Needs 10e core |
-| Ar (18) | [Ne] 3s² 3p⁶ | 10e | 8e | No molecular interest |
+| Na (11) | [Ne] 3s¹ | 1s² 2s² 2p⁶ | 1e | Implemented (NaH) |
+| Mg (12) | [Ne] 3s² | 1s² 2s² 2p⁶ | 2e | Implemented (MgH₂) |
+| Al (13) | [Ne] 3s² 3p¹ | 10e | 3e | Classifier ready, no molecule tested |
+| Si (14) | [Ne] 3s² 3p² | 10e | 4e | Implemented (SiH₄) |
+| P (15)  | [Ne] 3s² 3p³ | 10e | 5e | Implemented (PH₃) |
+| S (16)  | [Ne] 3s² 3p⁴ | 10e | 6e | Implemented (H₂S) |
+| Cl (17) | [Ne] 3s² 3p⁵ | 10e | 7e | Implemented (HCl) |
+| Ar (18) | [Ne] 3s² 3p⁶ | 10e | 8e | Classifier ready, no molecular interest |
 
-**The 10-electron core problem:** The first-row composed architecture uses a 2-electron (He-like) core solved by the Level 3 (hyperspherical) solver. Second-row atoms have a 10-electron [Ne] core: 1s² + 2s² + 2p⁶.
+**Implementation (v2.1.0, Tracks CH-CL):** The frozen-core approach (Approach 1 below) has been implemented using Clementi-Raimondi Slater orbital exponents for the [Ne] core. The `FrozenCore(Z)` class in `geovac/neon_core.py` provides analytical Z_eff(r) screening from tabulated STO exponents, requiring no ab initio core solution. The atomic classifier (`geovac/atomic_classifier.py`) has been extended to Z=11-18 with frozen-core classification. Six second-row molecules have been built: NaH, MgH₂, HCl, H₂S, PH₃, SiH₄. All use the balanced coupled builder with cross-center V_ne from multipole expansion.
 
-### Approach 1: Frozen-core tabulation (RECOMMENDED)
+**Pauli scaling confirmed:** Q^2.50 across 4 second-row molecules, matching the first-row Q^2.5 exponent. Resource table at n_max=2:
 
-Solve the 10-electron Ne-like core once (using the full N-electron solver or external data), tabulate its properties (energy, density, Z_eff(r), PK parameters), and use these as inputs to the composed valence solver.
+| Molecule | Q | Pauli | 1-norm (Ha) | QWC |
+|:---------|:--|:------|:------------|:----|
+| NaH | 20 | 239 | 191 | 29 |
+| MgH₂ | 40 | 1,501 | 303 | 109 |
+| HCl | 50 | 2,936 | 1,169 | 133 |
+| SiH₄ | 80 | 7,273 | 1,004 | 167 |
 
-- **Pro:** Reuses existing valence infrastructure unchanged.
-- **Con:** The 10-electron core solution itself is expensive. The current N-electron solver (Level 4N) handles 4 electrons at l_max=2 with difficulty (Track AK: 750 spectral dim). A 10-electron version would require SO(30) angular machinery.
-- **Feasibility:** Yes, if core properties are tabulated externally (e.g., from NIST atomic data or Hartree-Fock calculations). The GeoVac valence solver only needs E_core, n_core(r), and the resulting Z_eff(r) and PK parameters — it does not need to solve the core quantum mechanically.
+**Known limitations:**
+- **Frozen-core approximation:** Core polarization neglected (standard assumption in quantum chemistry, but means second-row cores are less accurate than first-row Level 3-solved cores).
+- **NaH accuracy:** 2-electron FCI PES shows overattraction at n_max=2 (no equilibrium found). This is consistent with known balanced coupled accuracy limitations at small basis sets (first-row LiH also has significant error at n_max=2).
+- **n_max=3 blocked:** The Wigner D-matrix rotation in `shibuya_wulfman.py` currently handles l=0 and l=1 only. Second-row atoms with n_max=3 require l=2 rotation (Ivanic-Ruedenberg recursion), which has not been implemented.
+- **1-norm values** include large E_core constants from the frozen-core energy; electronic-only 1-norms should be separated for fair comparison.
 
-### Approach 2: Recursive composition
+**343 new tests passing** (atomic classifier Z=11-18, FrozenCore screening, balanced coupled builders, ecosystem export).
+
+### Design approaches considered
+
+#### Approach 1: Frozen-core tabulation (IMPLEMENTED)
+
+Uses Clementi-Raimondi Slater orbital exponents for analytical Z_eff(r) screening of the [Ne] core. No ab initio core solution required.
+
+- **Pro:** Reuses existing valence infrastructure unchanged. Analytical Z_eff(r) is fast and well-characterized.
+- **Con:** Core polarization neglected. Clementi-Raimondi exponents are empirically fitted (introduces external parameters).
+- **Status:** Production implementation in `geovac/neon_core.py`.
+
+#### Approach 2: Recursive composition
 
 Treat the 10-electron core as nested composed blocks: 1s² (Level 3) + 2s² (Level 4 with PK from 1s² core) + 2p⁶ (three Level 4 pairs with PK from 1s²+2s²).
 
@@ -97,7 +116,7 @@ Treat the 10-electron core as nested composed blocks: 1s² (Level 3) + 2s² (Lev
 - **Con:** The 2p⁶ subshell has 3 pairs in 3 spatial orientations (m=-1,0,+1). These pairs interact strongly via exchange, which the current composed architecture handles poorly at high Z_eff (lone pair coupling is unphysical at Z_eff >= 6).
 - **Feasibility:** Unlikely to be rigorous. The 2s-2p exchange coupling within the [Ne] core is a major correlation effect that recursive composition would struggle to capture.
 
-### Approach 3: Effective core potential (ECP) from literature
+#### Approach 3: Effective core potential (ECP) from literature
 
 Use published ECPs (e.g., Stuttgart/Cologne) for the [Ne] core and focus GeoVac on the valence electrons only.
 
@@ -105,26 +124,41 @@ Use published ECPs (e.g., Stuttgart/Cologne) for the [Ne] core and focus GeoVac 
 - **Con:** Introduces external parameters, losing the ab initio character.
 - **Feasibility:** Straightforward if the goal is practical computation rather than foundational purity.
 
-**Assessment:** Second-row atoms are feasible with approach (1) or (3) but require external core data. A fully ab initio treatment via recursive composition (approach 2) is unlikely to work without significant advances in the many-electron solver. Near-term recommendation: tabulate [Ne] core properties from NIST/HF data and use the existing composed valence infrastructure.
-
 ---
 
-## Transition Metals (Z=21-30): Out of Scope
+## Transition Metals (Z=21-30): Scoping Demonstrated (v2.4.0, Track CZ/DA)
 
-| Atom | Config | Core | Issue |
-|:-----|:-------|:-----|:------|
-| Sc (21) | [Ar] 3d¹ 4s² | 18e | 3d/4s near-degeneracy |
-| Ti-Zn | [Ar] 3d^n 4s^m | 18e | Multi-reference, strong correlation |
+| Atom | Config | Core | Scoping Status |
+|:-----|:-------|:-----|:---------------|
+| Sc (21) | [Ar] 3d¹ 4s² | 18e | ScH Hamiltonian built: Q=30, 278 Pauli (composed) |
+| Ti (22) | [Ar] 3d² 4s² | 18e | TiH Hamiltonian built: Q=30, 278 Pauli (composed) |
+| V-Zn (23-30) | [Ar] 3d^n 4s^m | 18e | Not yet tested; same architecture should apply |
 
-Transition metals are out of scope for the foreseeable future, for four compounding reasons:
+**Track CZ scoping result (POSITIVE):** d-orbital blocks are structurally feasible and actually CHEAPER per qubit than s/p blocks. Key measurements:
 
-1. **18-electron core.** The [Ar] core requires solving (or tabulating) an 18-electron system. The recursive composition challenges from the 10-electron case are compounded.
+- d-only block (5 orbitals, Q=10): 56 Pauli terms, Pauli/Q = 5.60 (vs 11.20 for s+p block at same Q)
+- d-d ERI density: 4.0% (vs 8.9% for s+p), due to more restrictive Gaunt selection rules at l=2
+- Gaunt coefficients: only 20% nonzero for d-d interactions (k = 0, 2, 4)
+- d-block Pauli count is 0.50x that of s+p block at same Q
 
-2. **3d/4s near-degeneracy.** The Madelung rule predicts 4s fills before 3d, but 3d and 4s are nearly degenerate. PK cannot reproduce the s-d energy ordering (wrong sign, wrong magnitude — same structural issue as s-p splitting). The composed architecture would need explicit 3d-4s correlation, which is a multi-reference problem.
+**Track DA result (POSITIVE):** ScH and TiH transition metal hydrides produce valid qubit Hamiltonians:
 
-3. **Strong correlation.** Transition metal chemistry involves partially filled d-shells with strong electron correlation. This is one of the hardest problems in quantum chemistry and is far beyond the current composed architecture's capabilities.
+| Molecule | Encoded e | Blocks | Q | Pauli (comp) | Pauli (bal) | Pauli/Q |
+|:---------|:---------:|:------:|:-:|:------------:|:-----------:|:-------:|
+| ScH | 3 | 2 | 30 | 278 | 574 | 9.27 |
+| TiH | 4 | 2 | 30 | 278 | 574 | 9.27 |
 
-4. **Spin-orbit coupling.** For heavier transition metals (Z > 30), spin-orbit effects become significant. The current framework is non-relativistic.
+Implementation: [Ar] frozen core (18e via FrozenCore), d-orbital block with `l_min=2` for isolated d-shell.
+
+**Remaining limitations for production use:**
+
+1. **3d/4s near-degeneracy.** The Madelung rule (4s before 3d) is handled by manual block assignment. PK cannot reproduce the s-d energy ordering. Balanced coupled (PK-free) bypasses this.
+
+2. **Strong correlation.** Partially filled d-shells require FCI or equivalent correlated treatment. The quantum computer handles this — the classical solver cannot.
+
+3. **Spin-orbit coupling.** For heavier transition metals, spin-orbit effects become significant. The current framework is non-relativistic.
+
+4. **Atomic classifier.** Z=21-30 still raises `NotImplementedError` in `atomic_classifier.py`. Transition metal specs are built manually via `sch_spec()` / `tih_spec()` rather than through the general classifier.
 
 ---
 
@@ -132,7 +166,9 @@ Transition metals are out of scope for the foreseeable future, for four compound
 
 | Category | Atoms | Status | Bottleneck |
 |:---------|:------|:-------|:-----------|
-| Fully operational | H, He, Li, Be, C, N, O, F | Production | Validation |
+| Fully operational (first row) | H, He, Li, Be, C, N, O, F | Production | Validation |
 | Architecturally ready, untested | B, Ne | Need testing | PK validation, molecular targets |
-| Feasible with external data | Na-Ar | Approach (1) or (3) | 10e core tabulation |
-| Out of scope | Z > 20 | Fundamental | Multi-reference, many-electron core |
+| Implemented with frozen-core | Na, Mg, Si, P, S, Cl | Production (v2.1.0) | Accuracy at n_max=2; l=2 rotation for n_max=3 |
+| Classifier ready, untested | Al, Ar | Need molecular targets | No molecules built yet |
+| Scoping demonstrated | Sc (21), Ti (22) | Track CZ/DA (v2.4.0) | d-block feasible, Pauli/Q lower than s/p |
+| Not yet tested | V-Zn (23-30) | Architecturally feasible | Same framework, manual spec required |

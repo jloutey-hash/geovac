@@ -57,7 +57,7 @@ def _get_block_geometry(spec: MolecularSpec) -> List[Dict[str, Any]]:
     offset = 0
 
     for b_idx, blk in enumerate(spec.blocks):
-        center_states = _enumerate_states(blk.max_n)
+        center_states = _enumerate_states(blk.max_n, l_min=blk.l_min)
         max_n_c = blk.max_n
 
         # Determine the actual nuclear charge at this center
@@ -143,46 +143,253 @@ def _get_nuclei_for_h2o(
     ]
 
 
+def _get_nuclei_for_nah(R: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for Na-H (collinear along z-axis)."""
+    return [
+        {'Z': 11.0, 'position': (0.0, 0.0, 0.0), 'label': 'Na'},
+        {'Z': 1.0, 'position': (0.0, 0.0, R), 'label': 'H'},
+    ]
+
+
+def _get_nuclei_for_mgh2(R: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for linear H-Mg-H (collinear along z-axis)."""
+    return [
+        {'Z': 12.0, 'position': (0.0, 0.0, 0.0), 'label': 'Mg'},
+        {'Z': 1.0, 'position': (0.0, 0.0, R), 'label': 'H1'},
+        {'Z': 1.0, 'position': (0.0, 0.0, -R), 'label': 'H2'},
+    ]
+
+
+def _get_nuclei_for_hcl(R: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for H-Cl (collinear along z-axis)."""
+    return [
+        {'Z': 17.0, 'position': (0.0, 0.0, 0.0), 'label': 'Cl'},
+        {'Z': 1.0, 'position': (0.0, 0.0, R), 'label': 'H'},
+    ]
+
+
+def _get_nuclei_for_h2s(
+    R_SH: float = 2.534, angle_HSH: float = 92.1,
+) -> List[Dict[str, Any]]:
+    """Nuclear positions for bent H-S-H (S at origin, in xz plane)."""
+    half_angle = np.radians(angle_HSH / 2.0)
+    return [
+        {'Z': 16.0, 'position': (0.0, 0.0, 0.0), 'label': 'S'},
+        {
+            'Z': 1.0,
+            'position': (
+                R_SH * np.sin(half_angle),
+                0.0,
+                R_SH * np.cos(half_angle),
+            ),
+            'label': 'H1',
+        },
+        {
+            'Z': 1.0,
+            'position': (
+                -R_SH * np.sin(half_angle),
+                0.0,
+                R_SH * np.cos(half_angle),
+            ),
+            'label': 'H2',
+        },
+    ]
+
+
+def _get_nuclei_for_ph3(
+    R_PH: float = 2.683, angle_HPH: float = 93.3,
+) -> List[Dict[str, Any]]:
+    """Nuclear positions for pyramidal PH3 (P at origin, C3v in xz plane)."""
+    half_angle = np.radians(angle_HPH / 2.0)
+    # Place 3 H atoms symmetrically around z-axis
+    # The P-H bonds make angle theta with z-axis, where
+    # cos(angle_HPH) = 1 - 2*sin²(theta) => theta from geometry
+    # For simplicity, use the same planar arrangement as NH3:
+    # H1 in xz plane, H2/H3 rotated ±120°
+    sin_a = np.sin(half_angle)
+    cos_a = np.cos(half_angle)
+    return [
+        {'Z': 15.0, 'position': (0.0, 0.0, 0.0), 'label': 'P'},
+        {
+            'Z': 1.0,
+            'position': (R_PH * sin_a, 0.0, R_PH * cos_a),
+            'label': 'H1',
+        },
+        {
+            'Z': 1.0,
+            'position': (
+                R_PH * sin_a * np.cos(2.0 * np.pi / 3.0),
+                R_PH * sin_a * np.sin(2.0 * np.pi / 3.0),
+                R_PH * cos_a,
+            ),
+            'label': 'H2',
+        },
+        {
+            'Z': 1.0,
+            'position': (
+                R_PH * sin_a * np.cos(4.0 * np.pi / 3.0),
+                R_PH * sin_a * np.sin(4.0 * np.pi / 3.0),
+                R_PH * cos_a,
+            ),
+            'label': 'H3',
+        },
+    ]
+
+
+def _get_nuclei_for_sih4(R_SiH: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for tetrahedral SiH4 (Si at origin)."""
+    s = R_SiH / np.sqrt(3.0)
+    return [
+        {'Z': 14.0, 'position': (0.0, 0.0, 0.0), 'label': 'Si'},
+        {'Z': 1.0, 'position': (s, s, s), 'label': 'H1'},
+        {'Z': 1.0, 'position': (s, -s, -s), 'label': 'H2'},
+        {'Z': 1.0, 'position': (-s, s, -s), 'label': 'H3'},
+        {'Z': 1.0, 'position': (-s, -s, s), 'label': 'H4'},
+    ]
+
+
+# ----- Third-row nuclei generators -----
+
+def _get_nuclei_for_kh(R: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for K-H (collinear along z-axis)."""
+    return [
+        {'Z': 19.0, 'position': (0.0, 0.0, 0.0), 'label': 'K'},
+        {'Z': 1.0, 'position': (0.0, 0.0, R), 'label': 'H'},
+    ]
+
+
+def _get_nuclei_for_cah2(R: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for linear H-Ca-H (collinear along z-axis)."""
+    return [
+        {'Z': 20.0, 'position': (0.0, 0.0, 0.0), 'label': 'Ca'},
+        {'Z': 1.0, 'position': (0.0, 0.0, R), 'label': 'H1'},
+        {'Z': 1.0, 'position': (0.0, 0.0, -R), 'label': 'H2'},
+    ]
+
+
+def _get_nuclei_for_geh4(R_GeH: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for tetrahedral GeH4 (Ge at origin)."""
+    s = R_GeH / np.sqrt(3.0)
+    return [
+        {'Z': 32.0, 'position': (0.0, 0.0, 0.0), 'label': 'Ge'},
+        {'Z': 1.0, 'position': (s, s, s), 'label': 'H1'},
+        {'Z': 1.0, 'position': (s, -s, -s), 'label': 'H2'},
+        {'Z': 1.0, 'position': (-s, s, -s), 'label': 'H3'},
+        {'Z': 1.0, 'position': (-s, -s, s), 'label': 'H4'},
+    ]
+
+
+def _get_nuclei_for_ash3(
+    R_AsH: float = 2.862, angle_HAsH: float = 91.8,
+) -> List[Dict[str, Any]]:
+    """Nuclear positions for pyramidal AsH3 (As at origin)."""
+    half_angle = np.radians(angle_HAsH / 2.0)
+    sin_a, cos_a = np.sin(half_angle), np.cos(half_angle)
+    return [
+        {'Z': 33.0, 'position': (0.0, 0.0, 0.0), 'label': 'As'},
+        {'Z': 1.0, 'position': (R_AsH * sin_a, 0.0, R_AsH * cos_a), 'label': 'H1'},
+        {'Z': 1.0, 'position': (
+            R_AsH * sin_a * np.cos(2 * np.pi / 3),
+            R_AsH * sin_a * np.sin(2 * np.pi / 3),
+            R_AsH * cos_a,
+        ), 'label': 'H2'},
+        {'Z': 1.0, 'position': (
+            R_AsH * sin_a * np.cos(4 * np.pi / 3),
+            R_AsH * sin_a * np.sin(4 * np.pi / 3),
+            R_AsH * cos_a,
+        ), 'label': 'H3'},
+    ]
+
+
+def _get_nuclei_for_h2se(
+    R_SeH: float = 2.764, angle_HSeH: float = 90.6,
+) -> List[Dict[str, Any]]:
+    """Nuclear positions for bent H-Se-H (Se at origin, in xz plane)."""
+    half_angle = np.radians(angle_HSeH / 2.0)
+    return [
+        {'Z': 34.0, 'position': (0.0, 0.0, 0.0), 'label': 'Se'},
+        {'Z': 1.0, 'position': (
+            R_SeH * np.sin(half_angle), 0.0, R_SeH * np.cos(half_angle),
+        ), 'label': 'H1'},
+        {'Z': 1.0, 'position': (
+            -R_SeH * np.sin(half_angle), 0.0, R_SeH * np.cos(half_angle),
+        ), 'label': 'H2'},
+    ]
+
+
+def _get_nuclei_for_hbr(R: float) -> List[Dict[str, Any]]:
+    """Nuclear positions for H-Br (collinear along z-axis)."""
+    return [
+        {'Z': 35.0, 'position': (0.0, 0.0, 0.0), 'label': 'Br'},
+        {'Z': 1.0, 'position': (0.0, 0.0, R), 'label': 'H'},
+    ]
+
+
 def _get_sub_block_positions(
     spec: MolecularSpec,
     nuclei: List[Dict[str, Any]],
 ) -> Dict[str, Tuple[float, float, float]]:
     """Map each sub-block label to its 3D center position.
 
-    Convention:
-    - Core center-side and lone pair center-side: on the heavy atom
-    - Bond center-side: on the heavy atom
-    - Bond partner-side: on the corresponding H atom
+    If OrbitalBlock has explicit ``center_nucleus_idx`` / ``partner_nucleus_idx``
+    (>= 0), those indices into the ``nuclei`` list are used directly.  This is
+    the multi-center code path.
 
-    For multi-bond systems (BeH₂, H₂O), partner-side blocks are matched
-    to nuclei by the bond block index: bond1 partner → first H, bond2
-    partner → second H.
+    Legacy (single-heavy-atom) behavior when indices are -1:
+    - Core / lone-pair / bond center-side: on the first nucleus with Z > 1.5
+    - Bond partner-side: on sequential H nuclei (Z <= 1.5)
     """
     positions: Dict[str, Tuple[float, float, float]] = {}
-    # Find the heavy atom position (first nucleus with Z > 1.5)
-    heavy_pos: Tuple[float, float, float] = (0.0, 0.0, 0.0)
-    for nuc in nuclei:
-        if nuc['Z'] > 1.5:
-            heavy_pos = tuple(nuc['position'])
-            break
 
-    # H nuclei, in order
-    h_nuclei = [n for n in nuclei if n['Z'] <= 1.5]
-    h_idx = 0
+    # Check whether any block uses explicit nucleus indices
+    has_explicit = any(
+        blk.center_nucleus_idx >= 0 for blk in spec.blocks
+    )
 
-    for b_idx, blk in enumerate(spec.blocks):
-        label_c = blk.label + '_center'
-        # All center-side orbitals are on the heavy atom
-        positions[label_c] = heavy_pos
-
-        if blk.has_h_partner:
-            label_p = blk.label + '_partner'
-            if h_idx < len(h_nuclei):
-                positions[label_p] = tuple(h_nuclei[h_idx]['position'])
-                h_idx += 1
+    if has_explicit:
+        # --- Multi-center code path ---
+        for blk in spec.blocks:
+            label_c = blk.label + '_center'
+            if blk.center_nucleus_idx >= 0:
+                positions[label_c] = tuple(
+                    nuclei[blk.center_nucleus_idx]['position']
+                )
             else:
-                # Fallback: use the last H position
-                positions[label_p] = tuple(h_nuclei[-1]['position']) if h_nuclei else heavy_pos
+                positions[label_c] = (0.0, 0.0, 0.0)
+
+            if blk.has_h_partner:
+                label_p = blk.label + '_partner'
+                if blk.partner_nucleus_idx >= 0:
+                    positions[label_p] = tuple(
+                        nuclei[blk.partner_nucleus_idx]['position']
+                    )
+                else:
+                    positions[label_p] = (0.0, 0.0, 0.0)
+    else:
+        # --- Legacy single-heavy-atom code path ---
+        heavy_pos: Tuple[float, float, float] = (0.0, 0.0, 0.0)
+        for nuc in nuclei:
+            if nuc['Z'] > 1.5:
+                heavy_pos = tuple(nuc['position'])
+                break
+
+        h_nuclei = [n for n in nuclei if n['Z'] <= 1.5]
+        h_idx = 0
+
+        for blk in spec.blocks:
+            label_c = blk.label + '_center'
+            positions[label_c] = heavy_pos
+
+            if blk.has_h_partner:
+                label_p = blk.label + '_partner'
+                if h_idx < len(h_nuclei):
+                    positions[label_p] = tuple(h_nuclei[h_idx]['position'])
+                    h_idx += 1
+                else:
+                    positions[label_p] = (
+                        tuple(h_nuclei[-1]['position']) if h_nuclei
+                        else heavy_pos
+                    )
 
     return positions
 
@@ -276,7 +483,10 @@ def build_balanced_hamiltonian(
 
     # Get sub-block geometry and nuclei
     sub_blocks = _get_block_geometry(spec)
-    if nuclei is None:
+    if nuclei is None and spec.nuclei:
+        # Multi-center path: nuclei stored in spec
+        nuclei_list = spec.nuclei
+    elif nuclei is None:
         name = spec.name.lower().replace(' ', '').replace('-', '')
         if name in ('lih',):
             nuclei_list = _get_nuclei_for_lih(spec, R)
@@ -284,6 +494,30 @@ def build_balanced_hamiltonian(
             nuclei_list = _get_nuclei_for_beh2(R)
         elif name in ('h2o', 'h₂o'):
             nuclei_list = _get_nuclei_for_h2o()
+        elif name in ('nah',):
+            nuclei_list = _get_nuclei_for_nah(R)
+        elif name in ('mgh2', 'mgh₂'):
+            nuclei_list = _get_nuclei_for_mgh2(R)
+        elif name in ('hcl',):
+            nuclei_list = _get_nuclei_for_hcl(R)
+        elif name in ('h2s', 'h₂s'):
+            nuclei_list = _get_nuclei_for_h2s(R)
+        elif name in ('ph3', 'ph₃'):
+            nuclei_list = _get_nuclei_for_ph3(R)
+        elif name in ('sih4', 'sih₄'):
+            nuclei_list = _get_nuclei_for_sih4(R)
+        elif name in ('kh',):
+            nuclei_list = _get_nuclei_for_kh(R)
+        elif name in ('cah2', 'cah₂'):
+            nuclei_list = _get_nuclei_for_cah2(R)
+        elif name in ('geh4', 'geh₄'):
+            nuclei_list = _get_nuclei_for_geh4(R)
+        elif name in ('ash3', 'ash₃'):
+            nuclei_list = _get_nuclei_for_ash3()
+        elif name in ('h2se', 'h₂se'):
+            nuclei_list = _get_nuclei_for_h2se()
+        elif name in ('hbr',):
+            nuclei_list = _get_nuclei_for_hbr(R)
         else:
             raise ValueError(
                 f"No default nuclei for '{spec.name}'. "

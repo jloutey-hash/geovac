@@ -74,7 +74,9 @@
       "Bash(powershell.exe -Command \"Get-Process -Id 140536 | Select-Object CPU, WorkingSet64\")",
       "Bash(powershell.exe -Command \"try { Get-Process -Id 140536 | Select-Object CPU, WorkingSet64 } catch { Write-Host 'Process finished' }\")",
       "Bash(powershell.exe -Command 'Get-Process python | Select-Object Id, CPU, @{N='\\\\''MB'\\\\'';E={[math]::Round\\($_.WorkingSet64/1MB,0\\)}} | Format-Table')",
-      "Bash(powershell.exe -Command 'Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CPU -gt 10 } | Measure-Object | Select-Object Count')"
+      "Bash(powershell.exe -Command 'Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CPU -gt 10 } | Measure-Object | Select-Object Count')",
+      "Bash(gh auth:*)",
+      "Bash(bibtex paper_20_resource_benchmarks)"
     ],
     "additionalDirectories": [
       "\\tmp",

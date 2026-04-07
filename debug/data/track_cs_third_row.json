@@ -1,0 +1,59 @@
+{
+  "results": [
+    {
+      "name": "KH",
+      "Q": 20,
+      "pauli_comp": 223,
+      "pauli_bal": 239,
+      "one_norm_bal": 643.63,
+      "qwc_bal": 29,
+      "time": 1.2
+    },
+    {
+      "name": "CaH2",
+      "Q": 40,
+      "pauli_comp": 445,
+      "pauli_bal": 1501,
+      "one_norm_bal": 805.36,
+      "qwc_bal": 114,
+      "time": 5.1
+    },
+    {
+      "name": "GeH4",
+      "Q": 80,
+      "pauli_comp": 889,
+      "pauli_bal": 7273,
+      "one_norm_bal": 2840.58,
+      "qwc_bal": 167,
+      "time": 22.0
+    },
+    {
+      "name": "AsH3",
+      "Q": 70,
+      "pauli_comp": 778,
+      "pauli_bal": 5582,
+      "one_norm_bal": 2998.67,
+      "qwc_bal": 159,
+      "time": 16.4
+    },
+    {
+      "name": "H2Se",
+      "Q": 60,
+      "pauli_comp": 667,
+      "pauli_bal": 4119,
+      "one_norm_bal": 3154.07,
+      "qwc_bal": 142,
+      "time": 11.7
+    },
+    {
+      "name": "HBr",
+      "Q": 50,
+      "pauli_comp": 556,
+      "pauli_bal": 2936,
+      "one_norm_bal": 3311.29,
+      "qwc_bal": 132,
+      "time": 8.4
+    }
+  ],
+  "scaling_exponent": 1.0
+}

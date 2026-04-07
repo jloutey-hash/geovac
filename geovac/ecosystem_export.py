@@ -120,8 +120,35 @@ class GeoVacHamiltonian:
 
     @property
     def one_norm(self) -> float:
-        """Pauli 1-norm of the electronic Hamiltonian (PK excluded)."""
+        """Pauli 1-norm of the electronic Hamiltonian (PK excluded).
+
+        Includes the identity term (constant energy offset from nuclear
+        repulsion, frozen-core energy, etc.).  For the simulation-relevant
+        1-norm excluding the identity, use ``one_norm_nonidentity``.
+        """
         return sum(abs(c) for c in self._qubit_op.terms.values())
+
+    @property
+    def one_norm_nonidentity(self) -> float:
+        """Pauli 1-norm excluding the identity term.
+
+        This is the simulation-relevant 1-norm: the identity term is a
+        classical constant (nuclear repulsion + frozen-core energy) that
+        does not contribute to quantum measurement cost or Trotter error.
+        """
+        return sum(
+            abs(c) for term, c in self._qubit_op.terms.items() if term != ()
+        )
+
+    @property
+    def identity_coefficient(self) -> float:
+        """Coefficient of the identity Pauli string.
+
+        This is the classical energy offset (nuclear repulsion +
+        frozen-core energy + h1/eri trace contributions).
+        """
+        coeff = self._qubit_op.terms.get((), 0.0)
+        return float(coeff.real) if hasattr(coeff, 'real') else float(coeff)
 
     @property
     def one_norm_full(self) -> float:
@@ -334,6 +361,32 @@ _SYSTEM_REGISTRY: Dict[str, str] = {
     'ch4': 'CH4',
     'he': 'He',
     'h2': 'H2',
+    # Second-row molecules (frozen [Ne] core, Track CJ)
+    'nah': 'NaH',
+    'mgh2': 'MgH2',
+    'hcl': 'HCl',
+    'h2s': 'H2S',
+    'ph3': 'PH3',
+    'sih4': 'SiH4',
+    # Third-row molecules (frozen [Ar] and [Ar]3d10 cores, Track CS)
+    'kh': 'KH',
+    'cah2': 'CaH2',
+    'geh4': 'GeH4',
+    'ash3': 'AsH3',
+    'h2se': 'H2Se',
+    'hbr': 'HBr',
+    # Multi-center molecules (Track CU)
+    'lif': 'LiF',
+    'co': 'CO',
+    'n2': 'N2',
+    'f2': 'F2',
+    'nacl': 'NaCl',
+    'ch2o': 'CH2O',
+    'c2h2': 'C2H2',
+    'c2h6': 'C2H6',
+    # Transition metal hydrides (Track DA)
+    'sch': 'ScH',
+    'tih': 'TiH',
 }
 
 
@@ -394,6 +447,35 @@ def hamiltonian(
         return _build_he(max_n=max_n, verbose=verbose)
     elif canonical == 'H2':
         return _build_h2(max_n=max_n, R=R, verbose=verbose)
+    elif canonical == 'NaH':
+        return _build_nah(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'MgH2':
+        return _build_mgh2(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'HCl':
+        return _build_hcl(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'H2S':
+        return _build_h2s(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'PH3':
+        return _build_ph3(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'SiH4':
+        return _build_sih4(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'KH':
+        return _build_kh(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'CaH2':
+        return _build_cah2(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'GeH4':
+        return _build_geh4(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'AsH3':
+        return _build_ash3(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'H2Se':
+        return _build_h2se(R=R, l_max=l_max, verbose=verbose)
+    elif canonical == 'HBr':
+        return _build_hbr(R=R, l_max=l_max, verbose=verbose)
+    elif canonical in ('LiF', 'CO', 'N2', 'F2', 'NaCl',
+                        'CH2O', 'C2H2', 'C2H6',
+                        'ScH', 'TiH'):
+        return _build_multi_center(canonical, R=R, max_n=max_n,
+                                    verbose=verbose)
     else:
         raise ValueError(f"System {canonical!r} not yet implemented.")
 
@@ -674,4 +756,287 @@ def _build_h2(
         'Q': result['Q'],
         'N_pauli': result['N_pauli'],
     }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+# ---------------------------------------------------------------------------
+# Second-row molecule builders (frozen [Ne] core, balanced coupled, Track CJ)
+# ---------------------------------------------------------------------------
+
+def _build_nah(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build NaH balanced coupled Hamiltonian (frozen [Ne] core)."""
+    from geovac.composed_qubit import nah_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 3.566
+    spec = nah_spec(max_n_val=l_max, R=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'NaH', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ne]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_mgh2(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build MgH2 balanced coupled Hamiltonian (frozen [Ne] core)."""
+    from geovac.composed_qubit import mgh2_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 3.268
+    spec = mgh2_spec(max_n_val=l_max, R=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'MgH2', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ne]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_hcl(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build HCl balanced coupled Hamiltonian (frozen [Ne] core)."""
+    from geovac.composed_qubit import hcl_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.409
+    spec = hcl_spec(max_n_val=l_max, R=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'HCl', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ne]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_h2s(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build H2S balanced coupled Hamiltonian (frozen [Ne] core)."""
+    from geovac.composed_qubit import h2s_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.534
+    spec = h2s_spec(max_n_val=l_max, R_SH=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'H2S', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ne]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_ph3(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build PH3 balanced coupled Hamiltonian (frozen [Ne] core)."""
+    from geovac.composed_qubit import ph3_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.683
+    spec = ph3_spec(max_n_val=l_max, R_PH=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'PH3', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ne]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_sih4(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build SiH4 balanced coupled Hamiltonian (frozen [Ne] core)."""
+    from geovac.composed_qubit import sih4_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.798
+    spec = sih4_spec(max_n_val=l_max, R_SiH=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'SiH4', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ne]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+# ---------------------------------------------------------------------------
+# Third-row builders (frozen [Ar] and [Ar]3d10 cores, Track CS)
+# ---------------------------------------------------------------------------
+
+def _build_kh(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build KH balanced coupled Hamiltonian (frozen [Ar] core)."""
+    from geovac.composed_qubit import kh_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 4.244
+    spec = kh_spec(max_n_val=l_max, R=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'KH', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ar]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_cah2(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build CaH2 balanced coupled Hamiltonian (frozen [Ar] core)."""
+    from geovac.composed_qubit import cah2_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 3.779
+    spec = cah2_spec(max_n_val=l_max, R=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'CaH2', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ar]',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_geh4(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build GeH4 balanced coupled Hamiltonian (frozen [Ar]3d10 core)."""
+    from geovac.composed_qubit import geh4_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.871
+    spec = geh4_spec(max_n_val=l_max, R_GeH=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'GeH4', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ar]3d10',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_ash3(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build AsH3 balanced coupled Hamiltonian (frozen [Ar]3d10 core)."""
+    from geovac.composed_qubit import ash3_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.862
+    spec = ash3_spec(max_n_val=l_max, R_AsH=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'AsH3', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ar]3d10',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_h2se(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build H2Se balanced coupled Hamiltonian (frozen [Ar]3d10 core)."""
+    from geovac.composed_qubit import h2se_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.764
+    spec = h2se_spec(max_n_val=l_max, R_SeH=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'H2Se', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ar]3d10',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_hbr(
+    R: Optional[float] = None, l_max: int = 2, verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build HBr balanced coupled Hamiltonian (frozen [Ar]3d10 core)."""
+    from geovac.composed_qubit import hbr_spec
+    from geovac.balanced_coupled import build_balanced_hamiltonian
+    if R is None:
+        R = 2.673
+    spec = hbr_spec(max_n_val=l_max, R=R)
+    result = build_balanced_hamiltonian(spec, R=R, verbose=verbose)
+    meta = {
+        'system': 'HBr', 'R_bohr': R, 'l_max': l_max,
+        'M': result['M'], 'Q': result['Q'], 'N_pauli': result['N_pauli'],
+        'encoding': 'balanced_coupled', 'frozen_core': '[Ar]3d10',
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+# ---------------------------------------------------------------------------
+# Multi-center molecule builder (Track CU)
+# ---------------------------------------------------------------------------
+
+_MULTI_CENTER_SPEC_FNS: Dict[str, str] = {
+    'LiF': 'lif_spec',
+    'CO': 'co_spec',
+    'N2': 'n2_spec',
+    'F2': 'f2_spec',
+    'NaCl': 'nacl_spec',
+    'CH2O': 'ch2o_spec',
+    'C2H2': 'c2h2_spec',
+    'C2H6': 'c2h6_spec',
+    'ScH': 'sch_spec',
+    'TiH': 'tih_spec',
+}
+
+
+def _build_multi_center(
+    canonical: str,
+    R: Optional[float] = None,
+    max_n: int = 2,
+    verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build multi-center composed Hamiltonian via general spec factory."""
+    import inspect
+    import geovac.composed_qubit as cq
+
+    spec_fn_name = _MULTI_CENTER_SPEC_FNS[canonical]
+    spec_fn = getattr(cq, spec_fn_name)
+
+    sig = inspect.signature(spec_fn)
+    kwargs: Dict[str, Any] = {}
+    if 'max_n_val' in sig.parameters:
+        kwargs['max_n_val'] = max_n
+    if 'max_n_core' in sig.parameters:
+        kwargs['max_n_core'] = max_n
+    if R is not None and 'R' in sig.parameters:
+        kwargs['R'] = R
+
+    spec = spec_fn(**kwargs)
+    result = cq.build_composed_hamiltonian(spec, pk_in_hamiltonian=False,
+                                            verbose=verbose)
+
+    meta = {
+        'system': canonical,
+        'max_n': max_n,
+        'M': result['M'],
+        'Q': result['Q'],
+        'N_pauli': result['N_pauli'],
+        'encoding': 'composed',
+        'multi_center': True,
+    }
+    if R is not None:
+        meta['R_bohr'] = R
+
     return GeoVacHamiltonian(result['qubit_op'], metadata=meta)

@@ -123,11 +123,23 @@ _TRENEV_REFERENCE = (
 # Hydrogenic state enumeration
 # ---------------------------------------------------------------------------
 
-def _enumerate_states(max_n: int) -> List[Tuple[int, int, int]]:
-    """Generate (n, l, m) states up to max_n in canonical order."""
+def _enumerate_states(
+    max_n: int, l_min: int = 0,
+) -> List[Tuple[int, int, int]]:
+    """Generate (n, l, m) states up to max_n in canonical order.
+
+    Parameters
+    ----------
+    max_n : int
+        Maximum principal quantum number.
+    l_min : int
+        Minimum angular momentum (default 0). Set to 2 for d-only blocks.
+    """
     states: List[Tuple[int, int, int]] = []
     for n in range(1, max_n + 1):
         for l in range(n):
+            if l < l_min:
+                continue
             for m in range(-l, l + 1):
                 states.append((n, l, m))
     return states
@@ -516,7 +528,7 @@ def build_composed_hamiltonian(
             'Z_center': blk.Z_center,
             'n_electrons': blk.n_electrons,
         }
-        center_states = _enumerate_states(blk.max_n)
+        center_states = _enumerate_states(blk.max_n, l_min=blk.l_min)
         info['center_states'] = center_states
         info['center_offset'] = offset
         info['center_M'] = len(center_states)
@@ -598,29 +610,25 @@ def build_composed_hamiltonian(
         List[Tuple[int, int, int]],
     ]] = {}
 
-    def _get_rk_eri(Z: float, max_n: int) -> Tuple[
+    def _get_rk_eri(
+        Z: float, states: List[Tuple[int, int, int]],
+    ) -> Tuple[
         Dict[Tuple[int, ...], float],
         Dict[Tuple[int, int, int, int], float],
-        List[Tuple[int, int, int]],
     ]:
-        key = (Z, max_n)
+        key = (Z, tuple(states))
         if key not in rk_eri_cache:
-            st = _enumerate_states(max_n)
-            rk = _compute_rk_integrals_block(Z, st)
-            ep = _build_eri_block(Z, st, rk)
-            rk_eri_cache[key] = (rk, ep, st)
+            rk = _compute_rk_integrals_block(Z, states)
+            ep = _build_eri_block(Z, states, rk)
+            rk_eri_cache[key] = (rk, ep)
         return rk_eri_cache[key]
 
     for bi in block_info:
         # Center sub-block
         Z_c = bi['Z_center']
         off_c = bi['center_offset']
-        max_n_c = len(set(n for n, l, m in bi['center_states']))  # infer from states
-        # We need the max_n that was used to generate center_states.
-        # Since _enumerate_states(max_n) generates all (n,l,m) up to max_n,
-        # max_n = max(n for n,l,m in states).
-        max_n_c = max(n for n, l, m in bi['center_states'])
-        _, eri_phys_c, _ = _get_rk_eri(Z_c, max_n_c)
+        center_states = bi['center_states']
+        _, eri_phys_c = _get_rk_eri(Z_c, center_states)
 
         for (a, b, c, d), val in eri_phys_c.items():
             # phys <ab|cd> -> chemist (ac|bd)
@@ -630,8 +638,8 @@ def build_composed_hamiltonian(
         if bi['partner_states'] is not None:
             Z_p = bi['Z_partner']
             off_p = bi['partner_offset']
-            max_n_p = max(n for n, l, m in bi['partner_states'])
-            _, eri_phys_p, _ = _get_rk_eri(Z_p, max_n_p)
+            partner_states = bi['partner_states']
+            _, eri_phys_p = _get_rk_eri(Z_p, partner_states)
 
             for (a, b, c, d), val in eri_phys_p.items():
                 eri[a + off_p, c + off_p, b + off_p, d + off_p] = val
@@ -1219,6 +1227,1782 @@ def ch4_spec(
         ),
     ]
     return MolecularSpec('CH4', blocks, nuclear_repulsion)
+
+
+# ---------------------------------------------------------------------------
+# Frozen-core cross-nuclear attraction for second-row molecules
+# ---------------------------------------------------------------------------
+
+# Module-level cache for FrozenCore objects to avoid re-solving
+_FROZEN_CORE_CACHE: Dict[int, Any] = {}
+
+
+def _v_cross_frozen_core(
+    Z_heavy: int,
+    Z_other: float,
+    R: float,
+) -> float:
+    """Core-to-other-nucleus attraction for frozen Ne-like core.
+
+    Computes the electrostatic interaction between the frozen [Ne] core
+    density centered on atom with nuclear charge Z_heavy and a point
+    nucleus of charge Z_other at distance R.
+
+    V_cross = -Z_other * [N_core(R)/R + integral_R^inf n_core(r)/r dr]
+
+    The first term is the enclosed core charge at R divided by R (Gauss's
+    law). The second term is the potential from core density beyond R.
+
+    Parameters
+    ----------
+    Z_heavy : int
+        Nuclear charge of the heavy atom (11-18).
+    Z_other : float
+        Charge of the other nucleus.
+    R : float
+        Internuclear distance (bohr).
+
+    Returns
+    -------
+    float
+        V_cross in Hartree.
+    """
+    from geovac.neon_core import FrozenCore
+
+    if Z_heavy not in _FROZEN_CORE_CACHE:
+        fc = FrozenCore(Z_heavy)
+        fc.solve()
+        _FROZEN_CORE_CACHE[Z_heavy] = fc
+    fc = _FROZEN_CORE_CACHE[Z_heavy]
+
+    r_grid = fc.r_grid
+    n_r = fc.n_r
+
+    # N_core(R): cumulative core electrons inside radius R
+    N_core_at_R = float(np.interp(R, r_grid, fc.N_core))
+
+    # Tail integral: integral_R^inf n(r)/r dr
+    mask = r_grid >= R
+    if np.any(mask):
+        tail = float(np.trapezoid(n_r[mask] / r_grid[mask], r_grid[mask]))
+    else:
+        tail = 0.0
+
+    return -Z_other * (N_core_at_R / R + tail)
+
+
+# ---------------------------------------------------------------------------
+# Second-row molecule spec factories (frozen [Ne] core, Track CJ)
+# ---------------------------------------------------------------------------
+
+def nah_spec(
+    max_n_val: int = 2,
+    R: float = 3.566,
+) -> MolecularSpec:
+    """Create a MolecularSpec for NaH (frozen [Ne] core + 1 bond pair).
+
+    NaH (sodium hydride):
+        Frozen core: Na [Ne] (10 electrons, not encoded as qubits)
+        Bond:  Na(Z_eff=1) + H(Z=1), 2 electrons
+        Total encoded: 2 electrons
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals (Na-side and H-side).
+    R : float
+        Na-H bond distance in bohr (default: 3.566, NIST).
+    """
+    from geovac.neon_core import _NIST_CORE_ENERGIES
+
+    Z_Na = 11
+    Z_H = 1
+    Z_eff_val = 1.0  # Na valence: Z - 10
+
+    E_core = _NIST_CORE_ENERGIES[Z_Na]
+
+    # Nuclear repulsion
+    V_NN = Z_Na * Z_H / R
+    V_cross_core_H = _v_cross_frozen_core(Z_Na, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross_core_H + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='NaH_bond_Na', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('NaH', blocks, nuclear_repulsion)
+
+
+def mgh2_spec(
+    max_n_val: int = 2,
+    R: float = 3.268,
+) -> MolecularSpec:
+    """Create a MolecularSpec for MgH2 (frozen [Ne] core + 2 bond pairs).
+
+    MgH2 (magnesium dihydride):
+        Frozen core: Mg [Ne] (10 electrons, not encoded as qubits)
+        Bond 1-2: Mg(Z_eff=2) + H(Z=1), 2 electrons each
+        Total encoded: 4 electrons
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        Mg-H bond distance in bohr (default: 3.268, experimental).
+    """
+    from geovac.neon_core import _NIST_CORE_ENERGIES
+
+    Z_Mg = 12
+    Z_H = 1
+    Z_eff_val = 2.0  # Mg valence: Z - 10
+
+    E_core = _NIST_CORE_ENERGIES[Z_Mg]
+
+    # Nuclear repulsion: linear H-Mg-H
+    V_MgH = 2.0 * Z_Mg * Z_H / R
+    V_HH = Z_H * Z_H / (2.0 * R)
+    V_NN = V_MgH + V_HH
+    V_cross = 2.0 * _v_cross_frozen_core(Z_Mg, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='MgH2_bond1_Mg', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='MgH2_bond2_Mg', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('MgH2', blocks, nuclear_repulsion)
+
+
+def hcl_spec(
+    max_n_val: int = 2,
+    R: float = 2.409,
+) -> MolecularSpec:
+    """Create a MolecularSpec for HCl (frozen [Ne] core + 1 bond + 2 lone pairs).
+
+    HCl (hydrogen chloride):
+        Frozen core: Cl [Ne] (10 electrons, not encoded as qubits)
+        3s² is treated as a lone pair block (not frozen)
+        Bond:   Cl(Z_eff=7) + H(Z=1), 2 electrons
+        Lone 1-2: Cl(Z_eff=7), 2 electrons each
+        Total encoded: 2 bond + 4 lone = 6 electrons (of 8 valence)
+
+    Wait -- Cl has Z=17, so Z_eff_val = 17-10 = 7. Cl has 7 valence
+    electrons (3s² 3p⁵). In the composed framework: 1 bond pair (2e)
+    + 2 lone pairs (4e) = 6 electrons encoded. The 7th valence electron
+    would need another block. Actually for HCl: Cl has 7 valence e-,
+    H has 1 e-, total 8 valence = 4 pairs. Structure: 1 bond + 3 lone
+    pairs (like HF).
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        H-Cl bond distance in bohr (default: 2.409, expt 1.275 Ang).
+    """
+    from geovac.neon_core import _NIST_CORE_ENERGIES
+
+    Z_Cl = 17
+    Z_H = 1
+    Z_eff_val = 7.0  # Cl valence: Z - 10
+
+    E_core = _NIST_CORE_ENERGIES[Z_Cl]
+
+    # Nuclear repulsion
+    V_NN = Z_Cl * Z_H / R
+    V_cross = _v_cross_frozen_core(Z_Cl, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='ClH_bond', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='Cl_lone1', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='Cl_lone2', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='Cl_lone3', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('HCl', blocks, nuclear_repulsion)
+
+
+def h2s_spec(
+    max_n_val: int = 2,
+    R_SH: float = 2.534,
+    angle_HSH: float = 92.1,
+) -> MolecularSpec:
+    """Create a MolecularSpec for H2S (frozen [Ne] core + 2 bonds + 2 lone pairs).
+
+    H2S (hydrogen sulfide):
+        Frozen core: S [Ne] (10 electrons, not encoded as qubits)
+        Bond 1-2: S(Z_eff=6) + H(Z=1), 2 electrons each
+        Lone 1-2: S(Z_eff=6), 2 electrons each
+        Total encoded: 4 bond + 4 lone = 8 electrons (of 8 valence)
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_SH : float
+        S-H bond distance in bohr (default: 2.534, expt 1.341 Ang).
+    angle_HSH : float
+        H-S-H angle in degrees (default: 92.1).
+    """
+    from geovac.neon_core import _NIST_CORE_ENERGIES
+
+    Z_S = 16
+    Z_H = 1
+    Z_eff_val = 6.0  # S valence: Z - 10
+
+    E_core = _NIST_CORE_ENERGIES[Z_S]
+
+    # Nuclear repulsion
+    angle_rad = np.radians(angle_HSH)
+    R_HH = 2.0 * R_SH * np.sin(angle_rad / 2.0)
+    V_SH = 2.0 * Z_S * Z_H / R_SH
+    V_HH = Z_H * Z_H / R_HH
+    V_NN = V_SH + V_HH
+    V_cross = 2.0 * _v_cross_frozen_core(Z_S, Z_H, R_SH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='H2S_bond1_S', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='H2S_bond2_S', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='S_lone1', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='S_lone2', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('H2S', blocks, nuclear_repulsion)
+
+
+def ph3_spec(
+    max_n_val: int = 2,
+    R_PH: float = 2.683,
+    angle_HPH: float = 93.3,
+) -> MolecularSpec:
+    """Create a MolecularSpec for PH3 (frozen [Ne] core + 3 bonds + 1 lone pair).
+
+    PH3 (phosphine):
+        Frozen core: P [Ne] (10 electrons, not encoded as qubits)
+        Bond 1-3: P(Z_eff=5) + H(Z=1), 2 electrons each
+        Lone 1:   P(Z_eff=5), 2 electrons
+        Total encoded: 6 bond + 2 lone = 8 electrons (of 8 valence: 3s² 3p³ + 3H)
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_PH : float
+        P-H bond distance in bohr (default: 2.683, expt 1.42 Ang).
+    angle_HPH : float
+        H-P-H angle in degrees (default: 93.3).
+    """
+    from geovac.neon_core import _NIST_CORE_ENERGIES
+
+    Z_P = 15
+    Z_H = 1
+    Z_eff_val = 5.0  # P valence: Z - 10
+
+    E_core = _NIST_CORE_ENERGIES[Z_P]
+
+    # Nuclear repulsion: pyramidal geometry
+    # 3 P-H bonds + 3 H-H pairs
+    angle_rad = np.radians(angle_HPH)
+    R_HH = 2.0 * R_PH * np.sin(angle_rad / 2.0)
+    V_PH = 3.0 * Z_P * Z_H / R_PH
+    V_HH = 3.0 * Z_H * Z_H / R_HH
+    V_NN = V_PH + V_HH
+    V_cross = 3.0 * _v_cross_frozen_core(Z_P, Z_H, R_PH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='PH3_bond1_P', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='PH3_bond2_P', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='PH3_bond3_P', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='P_lone1', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('PH3', blocks, nuclear_repulsion)
+
+
+def sih4_spec(
+    max_n_val: int = 2,
+    R_SiH: float = 2.798,
+) -> MolecularSpec:
+    """Create a MolecularSpec for SiH4 (frozen [Ne] core + 4 bond pairs).
+
+    SiH4 (silane):
+        Frozen core: Si [Ne] (10 electrons, not encoded as qubits)
+        Bond 1-4: Si(Z_eff=4) + H(Z=1), 2 electrons each
+        Total encoded: 8 electrons (of 8 valence: 3s² 3p² + 4H)
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_SiH : float
+        Si-H bond distance in bohr (default: 2.798, expt 1.48 Ang).
+    """
+    from geovac.neon_core import _NIST_CORE_ENERGIES
+
+    Z_Si = 14
+    Z_H = 1
+    Z_eff_val = 4.0  # Si valence: Z - 10
+
+    E_core = _NIST_CORE_ENERGIES[Z_Si]
+
+    # Nuclear repulsion for tetrahedral geometry
+    R_HH = R_SiH * np.sqrt(8.0 / 3.0)
+    V_SiH = 4.0 * Z_Si * Z_H / R_SiH
+    V_HH = 6.0 * Z_H * Z_H / R_HH
+    V_NN = V_SiH + V_HH
+    V_cross = 4.0 * _v_cross_frozen_core(Z_Si, Z_H, R_SiH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='SiH4_bond1_Si', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='SiH4_bond2_Si', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='SiH4_bond3_Si', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='SiH4_bond4_Si', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('SiH4', blocks, nuclear_repulsion)
+
+
+# ---------------------------------------------------------------------------
+# Third-row s-block specs (Z=19-20, [Ar] frozen core)
+# ---------------------------------------------------------------------------
+
+
+def kh_spec(
+    max_n_val: int = 2,
+    R: float = 4.244,
+) -> MolecularSpec:
+    """Create a MolecularSpec for KH (frozen [Ar] core + 1 bond pair).
+
+    KH (potassium hydride):
+        Frozen core: K [Ar] (18 electrons, not encoded as qubits)
+        Bond: K(Z_eff=1) + H(Z=1), 2 electrons
+        Total encoded: 2 electrons
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        K-H bond distance in bohr (default: 4.244, expt 2.244 Ang).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_K, Z_H = 19, 1
+    Z_eff_val = 1.0
+
+    fc = FrozenCore(Z_K)
+    fc.solve()
+    E_core = fc.energy
+
+    V_NN = Z_K * Z_H / R
+    V_cross = _v_cross_frozen_core(Z_K, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='KH_bond_K', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('KH', blocks, nuclear_repulsion)
+
+
+def cah2_spec(
+    max_n_val: int = 2,
+    R: float = 3.779,
+) -> MolecularSpec:
+    """Create a MolecularSpec for CaH2 (frozen [Ar] core + 2 bond pairs).
+
+    CaH2 (calcium dihydride):
+        Frozen core: Ca [Ar] (18 electrons)
+        Bond 1-2: Ca(Z_eff=2) + H(Z=1), 2 electrons each
+        Total encoded: 4 electrons
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        Ca-H bond distance in bohr (default: 3.779, expt 2.00 Ang).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Ca, Z_H = 20, 1
+    Z_eff_val = 2.0
+
+    fc = FrozenCore(Z_Ca)
+    fc.solve()
+    E_core = fc.energy
+
+    V_CaH = 2.0 * Z_Ca * Z_H / R
+    V_HH = Z_H * Z_H / (2.0 * R)
+    V_NN = V_CaH + V_HH
+    V_cross = 2.0 * _v_cross_frozen_core(Z_Ca, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='CaH2_bond1_Ca', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='CaH2_bond2_Ca', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('CaH2', blocks, nuclear_repulsion)
+
+
+# ---------------------------------------------------------------------------
+# Third-row p-block specs (Z=31-36, [Ar]3d10 frozen core)
+# ---------------------------------------------------------------------------
+
+
+def geh4_spec(
+    max_n_val: int = 2,
+    R_GeH: float = 2.871,
+) -> MolecularSpec:
+    """Create a MolecularSpec for GeH4 (frozen [Ar]3d10 core + 4 bond pairs).
+
+    GeH4 (germane):
+        Frozen core: Ge [Ar]3d10 (28 electrons)
+        Bond 1-4: Ge(Z_eff=4) + H(Z=1), 2 electrons each
+        Total encoded: 8 electrons
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_GeH : float
+        Ge-H bond distance in bohr (default: 2.871, expt 1.52 Ang).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Ge, Z_H = 32, 1
+    Z_eff_val = 4.0
+
+    fc = FrozenCore(Z_Ge)
+    fc.solve()
+    E_core = fc.energy
+
+    R_HH = R_GeH * np.sqrt(8.0 / 3.0)
+    V_GeH = 4.0 * Z_Ge * Z_H / R_GeH
+    V_HH = 6.0 * Z_H * Z_H / R_HH
+    V_NN = V_GeH + V_HH
+    V_cross = 4.0 * _v_cross_frozen_core(Z_Ge, Z_H, R_GeH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = []
+    for i in range(1, 5):
+        blocks.append(OrbitalBlock(
+            label=f'GeH4_bond{i}_Ge', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ))
+    return MolecularSpec('GeH4', blocks, nuclear_repulsion)
+
+
+def ash3_spec(
+    max_n_val: int = 2,
+    R_AsH: float = 2.862,
+    angle_HAsH: float = 91.8,
+) -> MolecularSpec:
+    """Create a MolecularSpec for AsH3 (frozen [Ar]3d10 core + 3 bonds + 1 lone pair).
+
+    AsH3 (arsine):
+        Frozen core: As [Ar]3d10 (28 electrons)
+        Bond 1-3: As(Z_eff=5) + H(Z=1), 2 electrons each
+        Lone pair: As(Z_eff=5), 2 electrons
+        Total encoded: 8 electrons
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_As, Z_H = 33, 1
+    Z_eff_val = 5.0
+
+    fc = FrozenCore(Z_As)
+    fc.solve()
+    E_core = fc.energy
+
+    half_angle = np.radians(angle_HAsH / 2.0)
+    sin_a, cos_a = np.sin(half_angle), np.cos(half_angle)
+    h_positions = [
+        (R_AsH * sin_a, 0.0, R_AsH * cos_a),
+        (R_AsH * sin_a * np.cos(2 * np.pi / 3), R_AsH * sin_a * np.sin(2 * np.pi / 3), R_AsH * cos_a),
+        (R_AsH * sin_a * np.cos(4 * np.pi / 3), R_AsH * sin_a * np.sin(4 * np.pi / 3), R_AsH * cos_a),
+    ]
+
+    V_AsH = 3.0 * Z_As * Z_H / R_AsH
+    V_HH = 0.0
+    for i in range(3):
+        for j in range(i + 1, 3):
+            d = np.linalg.norm(np.array(h_positions[i]) - np.array(h_positions[j]))
+            V_HH += Z_H * Z_H / d
+    V_NN = V_AsH + V_HH
+    V_cross = 3.0 * _v_cross_frozen_core(Z_As, Z_H, R_AsH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='AsH3_lone_As', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=False,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    for i in range(1, 4):
+        blocks.append(OrbitalBlock(
+            label=f'AsH3_bond{i}_As', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ))
+    return MolecularSpec('AsH3', blocks, nuclear_repulsion)
+
+
+def h2se_spec(
+    max_n_val: int = 2,
+    R_SeH: float = 2.764,
+    angle_HSeH: float = 90.6,
+) -> MolecularSpec:
+    """Create a MolecularSpec for H2Se (frozen [Ar]3d10 core + 2 bonds + 2 lone pairs).
+
+    H2Se (hydrogen selenide):
+        Frozen core: Se [Ar]3d10 (28 electrons)
+        Lone pair 1-2: Se(Z_eff=6), 2 electrons each
+        Bond 1-2: Se(Z_eff=6) + H(Z=1), 2 electrons each
+        Total encoded: 8 electrons
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Se, Z_H = 34, 1
+    Z_eff_val = 6.0
+
+    fc = FrozenCore(Z_Se)
+    fc.solve()
+    E_core = fc.energy
+
+    half_angle = np.radians(angle_HSeH / 2.0)
+    h1_pos = np.array([R_SeH * np.sin(half_angle), 0.0, R_SeH * np.cos(half_angle)])
+    h2_pos = np.array([-R_SeH * np.sin(half_angle), 0.0, R_SeH * np.cos(half_angle)])
+    R_HH = float(np.linalg.norm(h1_pos - h2_pos))
+
+    V_SeH = 2.0 * Z_Se * Z_H / R_SeH
+    V_HH = Z_H * Z_H / R_HH
+    V_NN = V_SeH + V_HH
+    V_cross = 2.0 * _v_cross_frozen_core(Z_Se, Z_H, R_SeH)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='H2Se_lone1_Se', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=False,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='H2Se_lone2_Se', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=False,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='H2Se_bond1_Se', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='H2Se_bond2_Se', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('H2Se', blocks, nuclear_repulsion)
+
+
+def hbr_spec(
+    max_n_val: int = 2,
+    R: float = 2.673,
+) -> MolecularSpec:
+    """Create a MolecularSpec for HBr (frozen [Ar]3d10 core + 1 bond + 3 lone pairs).
+
+    HBr (hydrogen bromide):
+        Frozen core: Br [Ar]3d10 (28 electrons)
+        Lone pair 1-3: Br(Z_eff=7), 2 electrons each
+        Bond: Br(Z_eff=7) + H(Z=1), 2 electrons
+        Total encoded: 8 electrons
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        H-Br bond distance in bohr (default: 2.673, expt 1.414 Ang).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Br, Z_H = 35, 1
+    Z_eff_val = 7.0
+
+    fc = FrozenCore(Z_Br)
+    fc.solve()
+    E_core = fc.energy
+
+    V_NN = Z_Br * Z_H / R
+    V_cross = _v_cross_frozen_core(Z_Br, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    blocks = [
+        OrbitalBlock(
+            label='HBr_lone1_Br', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=False,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='HBr_lone2_Br', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=False,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='HBr_lone3_Br', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=False,
+            pk_A=0.0, pk_B=0.0,
+        ),
+        OrbitalBlock(
+            label='HBr_bond_Br', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            pk_A=0.0, pk_B=0.0,
+        ),
+    ]
+    return MolecularSpec('HBr', blocks, nuclear_repulsion)
+
+
+# ---------------------------------------------------------------------------
+# Multi-center molecule spec factories (Track CU, v2.3.0)
+# ---------------------------------------------------------------------------
+
+
+def _compute_multi_center_nuclear_repulsion(
+    nuclei: List[Dict[str, Any]],
+    core_blocks: List[Dict[str, Any]],
+) -> float:
+    """Compute nuclear repulsion constant for multi-center molecules.
+
+    Includes V_NN (all nucleus pairs) + E_core (each He-like core) +
+    V_cross (each core's classical interaction with every other nucleus).
+
+    Parameters
+    ----------
+    nuclei : list of dict
+        ``{'Z': float, 'position': (x,y,z), 'label': str}``
+    core_blocks : list of dict
+        ``{'Z_core': float, 'n_core_e': int, 'E_core': float, 'nuc_idx': int}``
+        Each entry describes one He-like 1s² core block.
+
+    Returns
+    -------
+    float
+        Total nuclear repulsion constant (Ha).
+    """
+    import numpy as np
+
+    total = 0.0
+
+    # V_NN between all nucleus pairs
+    for i in range(len(nuclei)):
+        for j in range(i + 1, len(nuclei)):
+            pi = np.array(nuclei[i]['position'])
+            pj = np.array(nuclei[j]['position'])
+            R_ij = float(np.linalg.norm(pj - pi))
+            if R_ij > 1e-10:
+                total += nuclei[i]['Z'] * nuclei[j]['Z'] / R_ij
+
+    # E_core for each core block
+    for cb in core_blocks:
+        total += cb['E_core']
+
+    # V_cross: each core's classical interaction with every OTHER nucleus
+    for cb in core_blocks:
+        core_nuc_pos = np.array(nuclei[cb['nuc_idx']]['position'])
+        for j, nuc in enumerate(nuclei):
+            if j == cb['nuc_idx']:
+                continue
+            nuc_pos = np.array(nuc['position'])
+            R_AB = float(np.linalg.norm(nuc_pos - core_nuc_pos))
+            if R_AB < 1e-10:
+                continue
+            v_cross = _v_cross_nuc_1s(
+                cb['Z_core'], cb['n_core_e'], nuc['Z'], R_AB,
+            )
+            total += v_cross
+
+    return total
+
+
+def lif_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 2.955,
+) -> MolecularSpec:
+    """Create a MolecularSpec for LiF (two He-like cores + bond + lone pairs).
+
+    LiF (lithium fluoride):
+        Li core: 1s² on Li (Z=3), 2 electrons
+        F core:  1s² on F (Z=9), 2 electrons
+        σ bond:  Li-side (Z_eff=1) + F-side (Z_eff=7), 2 electrons
+        F lone pairs 1-3: F (Z_eff=7), 2 electrons each
+        Total: 12 electrons, 6 blocks, Q = 70 (n_max=2)
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals on both Li and F.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        Li-F bond distance in bohr (default: 2.955, expt 1.564 Å).
+    """
+    Z_Li, Z_F = 3, 9
+    Z_eff_Li_val = 1.0   # Li valence: Z - 2 core
+    Z_eff_F_val = 7.0    # F valence: Z - 2 core
+
+    nuclei = [
+        {'Z': float(Z_Li), 'position': (0.0, 0.0, 0.0), 'label': 'Li'},
+        {'Z': float(Z_F), 'position': (0.0, 0.0, R), 'label': 'F'},
+    ]
+
+    E_core_Li = -7.2799                # He-like Li²⁺
+    E_core_F = -(Z_F - 5.0 / 16.0) ** 2  # He-like F⁷⁺
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_Li), 'n_core_e': 2, 'E_core': E_core_Li, 'nuc_idx': 0},
+            {'Z_core': float(Z_F), 'n_core_e': 2, 'E_core': E_core_F, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='Li_core', block_type='core',
+            Z_center=float(Z_Li), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='F_core', block_type='core',
+            Z_center=float(Z_F), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='LiF_sigma', block_type='bond',
+            Z_center=Z_eff_Li_val, n_electrons=2,
+            max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_F_val,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='F_lone1', block_type='lone_pair',
+            Z_center=Z_eff_F_val, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='F_lone2', block_type='lone_pair',
+            Z_center=Z_eff_F_val, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='F_lone3', block_type='lone_pair',
+            Z_center=Z_eff_F_val, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+    ]
+    return MolecularSpec('LiF', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def co_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 2.132,
+) -> MolecularSpec:
+    """Create a MolecularSpec for CO (two cores + triple bond + 2 lone pairs).
+
+    CO (carbon monoxide):
+        C core:  1s² on C (Z=6), 2e
+        O core:  1s² on O (Z=8), 2e
+        σ bond:  C-side (Z_eff=4) + O-side (Z_eff=6), 2e
+        π₁ bond: C-side (Z_eff=4) + O-side (Z_eff=6), 2e
+        π₂ bond: C-side (Z_eff=4) + O-side (Z_eff=6), 2e
+        C lone:  C (Z_eff=4), 2e
+        O lone:  O (Z_eff=6), 2e
+        Total: 14e, 7 blocks, Q = 100 (n_max=2)
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        C-O bond distance in bohr (default: 2.132, expt 1.128 Å).
+    """
+    Z_C, Z_O = 6, 8
+    Z_eff_C = 4.0
+    Z_eff_O = 6.0
+
+    nuclei = [
+        {'Z': float(Z_C), 'position': (0.0, 0.0, 0.0), 'label': 'C'},
+        {'Z': float(Z_O), 'position': (0.0, 0.0, R), 'label': 'O'},
+    ]
+
+    E_core_C = -(Z_C - 5.0 / 16.0) ** 2
+    E_core_O = -(Z_O - 5.0 / 16.0) ** 2
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_C), 'n_core_e': 2, 'E_core': E_core_C, 'nuc_idx': 0},
+            {'Z_core': float(Z_O), 'n_core_e': 2, 'E_core': E_core_O, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='C_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='O_core', block_type='core',
+            Z_center=float(Z_O), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CO_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_O,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CO_pi1', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_O,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CO_pi2', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_O,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='C_lone', block_type='lone_pair',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='O_lone', block_type='lone_pair',
+            Z_center=Z_eff_O, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+    ]
+    return MolecularSpec('CO', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def n2_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 2.074,
+) -> MolecularSpec:
+    """Create a MolecularSpec for N₂ (two cores + triple bond + 2 lone pairs).
+
+    N₂ (dinitrogen):
+        N₁ core: 1s² on N₁ (Z=7), 2e
+        N₂ core: 1s² on N₂ (Z=7), 2e
+        σ bond:  N₁-side (Z_eff=5) + N₂-side (Z_eff=5), 2e
+        π₁ bond: N₁-side (Z_eff=5) + N₂-side (Z_eff=5), 2e
+        π₂ bond: N₁-side (Z_eff=5) + N₂-side (Z_eff=5), 2e
+        N₁ lone: N₁ (Z_eff=5), 2e
+        N₂ lone: N₂ (Z_eff=5), 2e
+        Total: 14e, 7 blocks, Q = 100 (n_max=2)
+
+    Same block topology as CO → isostructural invariance predicted.
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        N-N bond distance in bohr (default: 2.074, expt 1.098 Å).
+    """
+    Z_N = 7
+    Z_eff_N = 5.0
+
+    nuclei = [
+        {'Z': float(Z_N), 'position': (0.0, 0.0, 0.0), 'label': 'N1'},
+        {'Z': float(Z_N), 'position': (0.0, 0.0, R), 'label': 'N2'},
+    ]
+
+    E_core_N = -(Z_N - 5.0 / 16.0) ** 2
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_N), 'n_core_e': 2, 'E_core': E_core_N, 'nuc_idx': 0},
+            {'Z_core': float(Z_N), 'n_core_e': 2, 'E_core': E_core_N, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='N1_core', block_type='core',
+            Z_center=float(Z_N), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='N2_core', block_type='core',
+            Z_center=float(Z_N), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='NN_sigma', block_type='bond',
+            Z_center=Z_eff_N, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_N,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='NN_pi1', block_type='bond',
+            Z_center=Z_eff_N, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_N,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='NN_pi2', block_type='bond',
+            Z_center=Z_eff_N, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_N,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='N1_lone', block_type='lone_pair',
+            Z_center=Z_eff_N, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='N2_lone', block_type='lone_pair',
+            Z_center=Z_eff_N, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+    ]
+    return MolecularSpec('N2', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def f2_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R: float = 2.668,
+) -> MolecularSpec:
+    """Create a MolecularSpec for F₂ (two cores + single bond + 6 lone pairs).
+
+    F₂ (difluorine):
+        F₁ core: 1s² on F₁ (Z=9), 2e
+        F₂ core: 1s² on F₂ (Z=9), 2e
+        σ bond:  F₁-side (Z_eff=7) + F₂-side (Z_eff=7), 2e
+        F₁ lone 1-3: (Z_eff=7), 6e
+        F₂ lone 1-3: (Z_eff=7), 6e
+        Total: 18e, 9 blocks, Q = 100 (n_max=2)
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        F-F bond distance in bohr (default: 2.668, expt 1.412 Å).
+    """
+    Z_F = 9
+    Z_eff_F = 7.0
+
+    nuclei = [
+        {'Z': float(Z_F), 'position': (0.0, 0.0, 0.0), 'label': 'F1'},
+        {'Z': float(Z_F), 'position': (0.0, 0.0, R), 'label': 'F2'},
+    ]
+
+    E_core_F = -(Z_F - 5.0 / 16.0) ** 2
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_F), 'n_core_e': 2, 'E_core': E_core_F, 'nuc_idx': 0},
+            {'Z_core': float(Z_F), 'n_core_e': 2, 'E_core': E_core_F, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='F1_core', block_type='core',
+            Z_center=float(Z_F), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='F2_core', block_type='core',
+            Z_center=float(Z_F), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='FF_sigma', block_type='bond',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_F,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='F1_lone1', block_type='lone_pair',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='F1_lone2', block_type='lone_pair',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='F1_lone3', block_type='lone_pair',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='F2_lone1', block_type='lone_pair',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='F2_lone2', block_type='lone_pair',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='F2_lone3', block_type='lone_pair',
+            Z_center=Z_eff_F, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+    ]
+    return MolecularSpec('F2', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def nacl_spec(
+    max_n_val: int = 2,
+    R: float = 4.461,
+) -> MolecularSpec:
+    """Create a MolecularSpec for NaCl (two frozen cores + bond + lone pairs).
+
+    NaCl (sodium chloride):
+        Na frozen core: [Ne] 10e (not encoded)
+        Cl frozen core: [Ne] 10e (not encoded)
+        σ bond:  Na-side (Z_eff=1) + Cl-side (Z_eff=7), 2e
+        Cl lone 1-3: (Z_eff=7), 6e
+        Total encoded: 8e, 4 blocks, Q = 50 (n_max=2)
+
+    Parameters
+    ----------
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R : float
+        Na-Cl bond distance in bohr (default: 4.461, expt 2.361 Å).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Na, Z_Cl = 11, 17
+    Z_eff_Na_val = 1.0   # Na: Z=11, [Ne] 10e core, 1 valence
+    Z_eff_Cl_val = 7.0   # Cl: Z=17, [Ne] 10e core, 7 valence
+
+    nuclei = [
+        {'Z': float(Z_Na), 'position': (0.0, 0.0, 0.0), 'label': 'Na'},
+        {'Z': float(Z_Cl), 'position': (0.0, 0.0, R), 'label': 'Cl'},
+    ]
+
+    # Frozen core energies
+    fc_Na = FrozenCore(Z_Na)
+    fc_Na.solve()
+    fc_Cl = FrozenCore(Z_Cl)
+    fc_Cl.solve()
+
+    # Nuclear repulsion: V_NN + E_frozen(Na) + E_frozen(Cl) +
+    # V_cross(Na_core→Cl_nuc) + V_cross(Cl_core→Na_nuc)
+    V_NN = Z_Na * Z_Cl / R
+    E_frozen = fc_Na.energy + fc_Cl.energy
+    V_cross_Na = _v_cross_frozen_core(Z_Na, Z_Cl, R)
+    V_cross_Cl = _v_cross_frozen_core(Z_Cl, Z_Na, R)
+    nuclear_repulsion = V_NN + E_frozen + V_cross_Na + V_cross_Cl
+
+    blocks = [
+        OrbitalBlock(
+            label='NaCl_sigma', block_type='bond',
+            Z_center=Z_eff_Na_val, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_Cl_val,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='Cl_lone1', block_type='lone_pair',
+            Z_center=Z_eff_Cl_val, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='Cl_lone2', block_type='lone_pair',
+            Z_center=Z_eff_Cl_val, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='Cl_lone3', block_type='lone_pair',
+            Z_center=Z_eff_Cl_val, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+    ]
+    return MolecularSpec('NaCl', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def ch2o_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_CO: float = 2.278,
+    R_CH: float = 2.109,
+    angle_HCH: float = 116.5,
+) -> MolecularSpec:
+    """Create a MolecularSpec for CH₂O (formaldehyde).
+
+    CH₂O (formaldehyde, planar):
+        C core:  1s² on C (Z=6), 2e
+        O core:  1s² on O (Z=8), 2e
+        C-O σ:   C-side (Z_eff=4) + O-side (Z_eff=6), 2e
+        C-O π:   C-side (Z_eff=4) + O-side (Z_eff=6), 2e
+        C-H₁ σ:  C-side (Z_eff=4) + H (Z=1), 2e
+        C-H₂ σ:  C-side (Z_eff=4) + H (Z=1), 2e
+        O lone 1-2: O (Z_eff=6), 4e
+        Total: 16e, 8 blocks, Q = 90 (n_max=2)
+
+    Geometry: C at origin, O along +z, H atoms in xz plane.
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_CO : float
+        C-O bond distance in bohr (default: 2.278, expt 1.205 Å).
+    R_CH : float
+        C-H bond distance in bohr (default: 2.109, expt 1.116 Å).
+    angle_HCH : float
+        H-C-H angle in degrees (default: 116.5).
+    """
+    Z_C, Z_O, Z_H = 6, 8, 1
+    Z_eff_C = 4.0
+    Z_eff_O = 6.0
+
+    half_angle = np.radians(angle_HCH / 2.0)
+    nuclei = [
+        {'Z': float(Z_C), 'position': (0.0, 0.0, 0.0), 'label': 'C'},
+        {'Z': float(Z_O), 'position': (0.0, 0.0, R_CO), 'label': 'O'},
+        {'Z': float(Z_H), 'position': (
+            R_CH * np.sin(half_angle), 0.0, -R_CH * np.cos(half_angle),
+        ), 'label': 'H1'},
+        {'Z': float(Z_H), 'position': (
+            -R_CH * np.sin(half_angle), 0.0, -R_CH * np.cos(half_angle),
+        ), 'label': 'H2'},
+    ]
+
+    E_core_C = -(Z_C - 5.0 / 16.0) ** 2
+    E_core_O = -(Z_O - 5.0 / 16.0) ** 2
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_C), 'n_core_e': 2, 'E_core': E_core_C, 'nuc_idx': 0},
+            {'Z_core': float(Z_O), 'n_core_e': 2, 'E_core': E_core_O, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='C_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='O_core', block_type='core',
+            Z_center=float(Z_O), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CO_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_O,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CO_pi', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_O,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CH1_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=2,
+        ),
+        OrbitalBlock(
+            label='CH2_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=3,
+        ),
+        OrbitalBlock(
+            label='O_lone1', block_type='lone_pair',
+            Z_center=Z_eff_O, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='O_lone2', block_type='lone_pair',
+            Z_center=Z_eff_O, n_electrons=2, max_n=max_n_val,
+            center_nucleus_idx=1,
+        ),
+    ]
+    return MolecularSpec('CH2O', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def c2h2_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_CC: float = 2.273,
+    R_CH: float = 2.003,
+) -> MolecularSpec:
+    """Create a MolecularSpec for C₂H₂ (acetylene, linear).
+
+    C₂H₂:
+        C₁ core: 1s² on C₁ (Z=6), 2e
+        C₂ core: 1s² on C₂ (Z=6), 2e
+        C-C σ:   C₁-side (Z_eff=4) + C₂-side (Z_eff=4), 2e
+        C-C π₁:  C₁-side (Z_eff=4) + C₂-side (Z_eff=4), 2e
+        C-C π₂:  C₁-side (Z_eff=4) + C₂-side (Z_eff=4), 2e
+        C₁-H σ:  C₁-side (Z_eff=4) + H (Z=1), 2e
+        C₂-H σ:  C₂-side (Z_eff=4) + H (Z=1), 2e
+        Total: 14e, 7 blocks, Q = 100 (n_max=2)
+
+    Geometry: linear along z-axis: H--C--C--H.
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_CC : float
+        C-C bond distance in bohr (default: 2.273, expt 1.203 Å).
+    R_CH : float
+        C-H bond distance in bohr (default: 2.003, expt 1.060 Å).
+    """
+    Z_C, Z_H = 6, 1
+    Z_eff_C = 4.0
+
+    nuclei = [
+        {'Z': float(Z_C), 'position': (0.0, 0.0, 0.0), 'label': 'C1'},
+        {'Z': float(Z_C), 'position': (0.0, 0.0, R_CC), 'label': 'C2'},
+        {'Z': float(Z_H), 'position': (0.0, 0.0, -R_CH), 'label': 'H1'},
+        {'Z': float(Z_H), 'position': (0.0, 0.0, R_CC + R_CH), 'label': 'H2'},
+    ]
+
+    E_core_C = -(Z_C - 5.0 / 16.0) ** 2
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_C), 'n_core_e': 2, 'E_core': E_core_C, 'nuc_idx': 0},
+            {'Z_core': float(Z_C), 'n_core_e': 2, 'E_core': E_core_C, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='C1_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='C2_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CC_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_C,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CC_pi1', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_C,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CC_pi2', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_C,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='C1H_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=2,
+        ),
+        OrbitalBlock(
+            label='C2H_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=1, partner_nucleus_idx=3,
+        ),
+    ]
+    return MolecularSpec('C2H2', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def c2h6_spec(
+    max_n_core: int = 2,
+    max_n_val: int = 2,
+    R_CC: float = 2.898,
+    R_CH: float = 2.063,
+) -> MolecularSpec:
+    """Create a MolecularSpec for C₂H₆ (ethane).
+
+    C₂H₆:
+        C₁ core: 1s² on C₁ (Z=6), 2e
+        C₂ core: 1s² on C₂ (Z=6), 2e
+        C-C σ:   C₁-side (Z_eff=4) + C₂-side (Z_eff=4), 2e
+        3× C₁-H σ: C₁-side (Z_eff=4) + H (Z=1), 6e
+        3× C₂-H σ: C₂-side (Z_eff=4) + H (Z=1), 6e
+        Total: 18e, 9 blocks, Q = 120 (n_max=2)
+
+    Geometry: staggered, C-C along z-axis.
+
+    Parameters
+    ----------
+    max_n_core : int
+        Maximum n for core orbitals.
+    max_n_val : int
+        Maximum n for valence orbitals.
+    R_CC : float
+        C-C bond distance in bohr (default: 2.898, expt 1.534 Å).
+    R_CH : float
+        C-H bond distance in bohr (default: 2.063, expt 1.091 Å).
+    """
+    Z_C, Z_H = 6, 1
+    Z_eff_C = 4.0
+
+    # Tetrahedral angle from C to H: 109.47 degrees with C-C axis
+    theta_HCC = np.radians(109.47)
+    sin_t = np.sin(theta_HCC)
+    cos_t = np.cos(theta_HCC)
+    # C-H projection onto z (C-C axis)
+    hz = R_CH * cos_t
+
+    # C1 methyl H atoms: 3 equally spaced around z, pointing toward -z
+    c1_h = []
+    for k in range(3):
+        phi = 2.0 * np.pi * k / 3.0
+        c1_h.append((
+            R_CH * sin_t * np.cos(phi),
+            R_CH * sin_t * np.sin(phi),
+            hz,
+        ))
+
+    # C2 methyl H atoms: staggered (rotated 60 degrees)
+    c2_h = []
+    for k in range(3):
+        phi = 2.0 * np.pi * k / 3.0 + np.pi / 3.0
+        c2_h.append((
+            R_CH * sin_t * np.cos(phi),
+            R_CH * sin_t * np.sin(phi),
+            R_CC - hz,
+        ))
+
+    nuclei = [
+        {'Z': float(Z_C), 'position': (0.0, 0.0, 0.0), 'label': 'C1'},
+        {'Z': float(Z_C), 'position': (0.0, 0.0, R_CC), 'label': 'C2'},
+        {'Z': float(Z_H), 'position': c1_h[0], 'label': 'H1'},
+        {'Z': float(Z_H), 'position': c1_h[1], 'label': 'H2'},
+        {'Z': float(Z_H), 'position': c1_h[2], 'label': 'H3'},
+        {'Z': float(Z_H), 'position': c2_h[0], 'label': 'H4'},
+        {'Z': float(Z_H), 'position': c2_h[1], 'label': 'H5'},
+        {'Z': float(Z_H), 'position': c2_h[2], 'label': 'H6'},
+    ]
+
+    E_core_C = -(Z_C - 5.0 / 16.0) ** 2
+
+    nuclear_repulsion = _compute_multi_center_nuclear_repulsion(
+        nuclei,
+        [
+            {'Z_core': float(Z_C), 'n_core_e': 2, 'E_core': E_core_C, 'nuc_idx': 0},
+            {'Z_core': float(Z_C), 'n_core_e': 2, 'E_core': E_core_C, 'nuc_idx': 1},
+        ],
+    )
+
+    blocks = [
+        OrbitalBlock(
+            label='C1_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=0,
+        ),
+        OrbitalBlock(
+            label='C2_core', block_type='core',
+            Z_center=float(Z_C), n_electrons=2, max_n=max_n_core,
+            center_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='CC_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=Z_eff_C,
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='C1H1_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=2,
+        ),
+        OrbitalBlock(
+            label='C1H2_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=3,
+        ),
+        OrbitalBlock(
+            label='C1H3_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=0, partner_nucleus_idx=4,
+        ),
+        OrbitalBlock(
+            label='C2H4_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=1, partner_nucleus_idx=5,
+        ),
+        OrbitalBlock(
+            label='C2H5_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=1, partner_nucleus_idx=6,
+        ),
+        OrbitalBlock(
+            label='C2H6_sigma', block_type='bond',
+            Z_center=Z_eff_C, n_electrons=2, max_n=max_n_val,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_val,
+            center_nucleus_idx=1, partner_nucleus_idx=7,
+        ),
+    ]
+    return MolecularSpec('C2H6', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+# ---------------------------------------------------------------------------
+# Transition metal hydride spec factories (Track CZ/DA, v2.4.0)
+# ---------------------------------------------------------------------------
+
+
+def sch_spec(
+    max_n_bond: int = 2,
+    max_n_d: int = 3,
+    R: float = 3.489,
+) -> MolecularSpec:
+    """Create a MolecularSpec for ScH (scandium hydride).
+
+    ScH:
+        [Ar] frozen core: 18e (not encoded)
+        Sc-H sigma bond: Sc-side (Z_eff=3) + H (Z=1), 2e
+        Sc 3d block: d-only (l_min=2), 1e
+        Total encoded: 3 electrons
+
+    Parameters
+    ----------
+    max_n_bond : int
+        Maximum n for bond pair orbitals.
+    max_n_d : int
+        Maximum n for d-orbital block (must be >= 3 for l=2).
+    R : float
+        Sc-H bond distance in bohr (default: 3.489, expt 1.846 Ang).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Sc, Z_H = 21, 1
+    Z_eff_val = 3.0  # 21 - 18 core electrons
+
+    fc = FrozenCore(Z_Sc)
+    fc.solve()
+    E_core = fc.energy
+
+    V_NN = Z_Sc * Z_H / R
+    V_cross = _v_cross_frozen_core(Z_Sc, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    nuclei = [
+        {'Z': float(Z_Sc), 'position': (0.0, 0.0, 0.0), 'label': 'Sc'},
+        {'Z': float(Z_H), 'position': (0.0, 0.0, R), 'label': 'H'},
+    ]
+
+    blocks = [
+        OrbitalBlock(
+            label='ScH_sigma', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2, max_n=max_n_bond,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_bond,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='Sc_3d', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=1, max_n=max_n_d,
+            l_min=2,
+            center_nucleus_idx=0,
+        ),
+    ]
+    return MolecularSpec('ScH', blocks, nuclear_repulsion, nuclei=nuclei)
+
+
+def tih_spec(
+    max_n_bond: int = 2,
+    max_n_d: int = 3,
+    R: float = 3.417,
+) -> MolecularSpec:
+    """Create a MolecularSpec for TiH (titanium hydride).
+
+    TiH:
+        [Ar] frozen core: 18e (not encoded)
+        Ti-H sigma bond: Ti-side (Z_eff=4) + H (Z=1), 2e
+        Ti 3d block: d-only (l_min=2), 2e (d-d electron pair)
+        Total encoded: 4 electrons
+
+    Parameters
+    ----------
+    max_n_bond : int
+        Maximum n for bond pair orbitals.
+    max_n_d : int
+        Maximum n for d-orbital block (must be >= 3 for l=2).
+    R : float
+        Ti-H bond distance in bohr (default: 3.417, expt 1.808 Ang).
+    """
+    from geovac.neon_core import FrozenCore
+
+    Z_Ti, Z_H = 22, 1
+    Z_eff_val = 4.0  # 22 - 18 core electrons
+
+    fc = FrozenCore(Z_Ti)
+    fc.solve()
+    E_core = fc.energy
+
+    V_NN = Z_Ti * Z_H / R
+    V_cross = _v_cross_frozen_core(Z_Ti, Z_H, R)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    nuclei = [
+        {'Z': float(Z_Ti), 'position': (0.0, 0.0, 0.0), 'label': 'Ti'},
+        {'Z': float(Z_H), 'position': (0.0, 0.0, R), 'label': 'H'},
+    ]
+
+    blocks = [
+        OrbitalBlock(
+            label='TiH_sigma', block_type='bond',
+            Z_center=Z_eff_val, n_electrons=2, max_n=max_n_bond,
+            has_h_partner=True, Z_partner=float(Z_H),
+            max_n_partner=max_n_bond,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ),
+        OrbitalBlock(
+            label='Ti_3d', block_type='lone_pair',
+            Z_center=Z_eff_val, n_electrons=2, max_n=max_n_d,
+            l_min=2,
+            center_nucleus_idx=0,
+        ),
+    ]
+    return MolecularSpec('TiH', blocks, nuclear_repulsion, nuclei=nuclei)
 
 
 # ---------------------------------------------------------------------------

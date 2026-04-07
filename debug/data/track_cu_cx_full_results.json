@@ -1,0 +1,99 @@
+{
+  "multi_center_balanced": {
+    "LiF": {
+      "e": 12,
+      "blocks": 6,
+      "Q": 70,
+      "P_comp": 778,
+      "P_bal": 6034,
+      "lam_comp": 505.3,
+      "lam_bal": 1954.7,
+      "qwc_comp": 21,
+      "qwc_bal": 159
+    },
+    "CO": {
+      "e": 14,
+      "blocks": 7,
+      "Q": 100,
+      "P_comp": 1111,
+      "P_bal": 12111,
+      "lam_comp": 535.4,
+      "lam_bal": 4461.3,
+      "qwc_comp": 21,
+      "qwc_bal": 193
+    },
+    "N2": {
+      "e": 14,
+      "blocks": 7,
+      "Q": 100,
+      "P_comp": 1111,
+      "P_bal": 12111,
+      "lam_comp": 516.9,
+      "lam_bal": 4567.9,
+      "qwc_comp": 21,
+      "qwc_bal": 193
+    },
+    "F2": {
+      "e": 18,
+      "blocks": 9,
+      "Q": 100,
+      "P_comp": 1111,
+      "P_bal": 12631,
+      "lam_comp": 938.5,
+      "lam_bal": 6390.9,
+      "qwc_comp": 21,
+      "qwc_bal": 202
+    },
+    "NaCl": {
+      "e": 8,
+      "blocks": 4,
+      "Q": 50,
+      "P_comp": 556,
+      "P_bal": 2936,
+      "lam_comp": 924.3,
+      "lam_bal": 1355.9,
+      "qwc_comp": 21,
+      "qwc_bal": 136
+    },
+    "CH2O": {
+      "e": 16,
+      "blocks": 8,
+      "Q": 120,
+      "P_comp": 1333,
+      "P_bal": 17573,
+      "lam_comp": 538.7,
+      "lam_bal": 5183.6,
+      "qwc_comp": 21,
+      "qwc_bal": 189
+    },
+    "C2H2": {
+      "e": 14,
+      "blocks": 7,
+      "Q": 120,
+      "P_comp": 1333,
+      "P_bal": 17289,
+      "lam_comp": 372.3,
+      "lam_bal": 4380.9,
+      "qwc_comp": 21,
+      "qwc_bal": 193
+    },
+    "C2H6": {
+      "e": 18,
+      "blocks": 9,
+      "Q": 160,
+      "P_comp": 1777,
+      "P_bal": 31421,
+      "lam_comp": 378.2,
+      "lam_bal": 6006.0,
+      "qwc_comp": 21,
+      "qwc_bal": 215
+    }
+  },
+  "scaling": {
+    "composed_slope": 11.1,
+    "composed_intercept": 1.0,
+    "composed_R2": 1.0,
+    "balanced_Q_exponent": 2.025,
+    "balanced_block_exponent": 2.491
+  }
+}

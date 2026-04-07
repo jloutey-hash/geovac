@@ -5,6 +5,101 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-04-06
+
+### Track CZ: d-Orbital Block Scoping (POSITIVE)
+- d-orbital ERI density 4.0% (vs 8.9% for s/p blocks)
+- Pauli/Q = 5.60 for d-only blocks (0.50x s+p blocks)
+- Gaunt selection rules at l=2 produce MORE sparsity, not less
+- l_min field added to OrbitalBlock for isolated d-shell encoding
+
+### Track DA: Transition Metal Hydrides (POSITIVE)
+- ScH (Z=21): [Ar] frozen core + d-orbital block, Q=30, 278 Pauli terms
+- TiH (Z=22): [Ar] frozen core + d-orbital block, Q=30, 278 Pauli terms
+- Both isostructural (same blocks, same Pauli count)
+- Pauli/Q = 9.27 (below universal 11.11 coefficient)
+
+### Track DB: Documentation
+- SCOPE_BOUNDARY.md: transition metals reclassified from "out of scope" to "scoping demonstrated"
+- CLAUDE.md: v2.4.0 updates
+
+### Tracks DC-DE: Paper Updates + Release
+- Paper 14: d-orbital sparsity subsection (§d_orbitals), ERI density table, discussion paragraph on Gaussian contrast, Note added v2.4.0
+- Paper 20: 30-molecule library, transition metal hydrides table, updated scope/conclusion/nuclear scaling
+- README.md: v2.4.0, 30 molecules, transition metal scoping, d-orbital sparsity in "What GeoVac Does Well"
+
+### Files Modified
+- `papers/core/paper_14_qubit_encoding.tex` — d-orbital subsection, discussion, note
+- `papers/applications/paper_20_resource_benchmarks.tex` — 30 molecules, TM table, scope, conclusion
+- `geovac/molecular_spec.py` — l_min field on OrbitalBlock
+- `geovac/composed_qubit.py` — sch_spec(), tih_spec()
+- `geovac/atomic_classifier.py` — Z=21-22 entries
+- `geovac/neon_core.py` — [Ar] frozen core for Z=19-22
+- `SCOPE_BOUNDARY.md` — transition metal reclassification
+- `CLAUDE.md` — v2.4.0, transition metal status
+- `README.md` — v2.4.0, 30 molecules, d-orbital sparsity
+- `CHANGELOG.md` — this entry
+
+### Files Created
+- `debug/data/track_cz_da_transition_metals.json` — benchmark data
+- `tests/test_multi_center.py` — multi-center molecule tests
+
+---
+
+## [2.0.45] - 2026-04-06
+
+### Track CG: Paper 20 Pre-arXiv Fixes
+
+Five fixes to Paper 20 (`papers/applications/paper_20_resource_benchmarks.tex`) before arXiv posting:
+
+1. **Author name:** Fixed `J. Louthan` → `J. Loutey` (matching all other papers in the series).
+2. **GitHub URL:** Fixed `jlouthan/geovac` → `jloutey-hash/geovac` (matching README) in both `\url{}` and `git clone` listing.
+3. **Affiliation:** Added "Kent, Washington" to match other papers in the series.
+4. **H₂O STO-3G advantage:** Corrected misleading `1.4×` Pauli advantage (implied GeoVac wins) to `0.71×` (correctly shows GeoVac loses at minimal basis). Added footnote to Advantage column header defining direction. Added explanatory paragraph: GeoVac uses 70 qubits vs STO-3G's 12; meaningful comparison is at cc-pVDZ (138× advantage).
+5. **Dissociation limit promoted:** Moved dissociation limit discussion from Limitations (Sec V) to new Sec III.D (Applicability: single-point vs. dissociation) in the Accuracy section, where users will see it. Limitations retains one-sentence cross-reference.
+
+**Sprint 4 (Gaussian 1-norm gaps) DEFERRED:** PySCF not available in environment. LiH 6-31G and cc-pVDZ 1-norm values remain "---" in Table V.
+
+Paper compiles cleanly at 5 pages (≤ 8 page limit). All cross-references resolve.
+
+### Files Modified
+- `papers/applications/paper_20_resource_benchmarks.tex` — all five fixes applied
+- `CLAUDE.md` — version bump to v2.0.45
+- `CHANGELOG.md` — this entry
+- `README.md` — version bump to v2.0.45
+
+---
+
+## [2.0.44] - 2026-04-06
+
+### Track CE: FCI Accuracy Characterization + Track CF: Paper 20 (Applications)
+
+**Track CE — FCI accuracy characterization for balanced coupled Hamiltonians.**
+
+Compiled FCI PES data for LiH balanced coupled across two basis sizes:
+- **n_max=2 (Q=30):** 7 R-points [2.0–5.0 bohr], FCI dim 11,025. Energy error 1.8% at R=3.015, R_eq=3.227 bohr (7.0% error). 878 Pauli terms, 74.1 Ha 1-norm, 87 QWC groups.
+- **n_max=3 (Q=84):** 5 R-points [2.9–3.5 bohr], FCI dim 741,321. Energy error 0.20% at R=3.015, R_eq=3.28 bohr (8.8% error). 19,959 Pauli terms, 448.9 Ha 1-norm, 2,298 QWC groups.
+- **Key finding:** 9× energy improvement from n_max=2→3 demonstrates rapid basis convergence. R_eq drift +0.053 bohr/n_max is 3× smaller than PK's +0.15–0.22.
+- **Gaussian comparison:** Composed 334 Pauli vs STO-3G 907 (2.7×), vs 6-31G 5,851 (17.5×), vs cc-pVDZ 63,519 (190×). Electronic 1-norm 33.3 Ha matches STO-3G 34.3 Ha (0.97×). QWC groups: 21 vs 273 (13×).
+
+**Track CF — Paper 20: Resource benchmarks for quantum computing community.**
+
+New paper targeting quantum computing researchers/engineers who need molecular Hamiltonians for VQE/QPE. Self-contained: does not require knowledge of spectral graph theory, Fock projection, or natural geometry. Contains: FCI PES accuracy tables, matched-accuracy Gaussian comparison, within-molecule scaling exponents, available systems table, Python API examples, honest limitations section.
+
+### Files Created
+- `papers/applications/paper_20_resource_benchmarks.tex` — 5-page PRA-format applications paper
+- `papers/applications/paper_20_refs.bib` — bibliography
+- `debug/data/track_ce_summary.json` — comprehensive Track CE data compilation
+
+### Files Modified
+- `papers/methods/paper_19_coupled_composition.tex` — forward reference to Paper 20
+- `papers/core/paper_14_qubit_encoding.tex` — note added v2.0.44 referencing Paper 20
+- `CLAUDE.md` — v2.0.44, Paper 20 in paper series, Track CE results in quantum computing status
+- `README.md` — v2.0.44, Paper 20 in paper series table
+- `CHANGELOG.md` — this entry
+
+---
+
 ## [2.0.43] - 2026-04-06
 
 ### Track CD Sprint 6: Paper Updates & Paper 19 Promotion
