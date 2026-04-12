@@ -1,0 +1,696 @@
+{
+  "meta": {
+    "track": "alpha-D",
+    "phase": "4B",
+    "max_n": 3,
+    "targets": {
+      "K_alpha_137.036": 137.035999084,
+      "K/pi_43.6199": 43.619913271510086,
+      "B_42": 42.0,
+      "F_pi2/6": 1.6449340668482264,
+      "Delta_1/40": 0.025,
+      "B+F_43.6449": 43.64493406684823,
+      "B+F-Delta_43.6199": 43.61993406684823,
+      "pi*(B+F-Delta)_137.0357": 137.03606441448156
+    },
+    "mpmath_dps": 50
+  },
+  "s3_graph": {
+    "nodes": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        -1
+      ],
+      [
+        2,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1
+      ],
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        3,
+        1,
+        -1
+      ],
+      [
+        3,
+        1,
+        0
+      ],
+      [
+        3,
+        1,
+        1
+      ],
+      [
+        3,
+        2,
+        -2
+      ],
+      [
+        3,
+        2,
+        -1
+      ],
+      [
+        3,
+        2,
+        0
+      ],
+      [
+        3,
+        2,
+        1
+      ],
+      [
+        3,
+        2,
+        2
+      ]
+    ],
+    "n_nodes": 14,
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        12,
+        13
+      ]
+    ],
+    "n_edges": 13,
+    "degree_sequence": [
+      1,
+      2,
+      2,
+      3,
+      2,
+      1,
+      2,
+      3,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ]
+  },
+  "s3_invariants": {
+    "name": "S3 (n_max=3)",
+    "n_nodes": 14,
+    "zero_modes": 3,
+    "n_nonzero_eigs": 11,
+    "eigenvalues": [
+      0.0,
+      0.0,
+      0.0,
+      0.3819660112501052,
+      0.9999999999999998,
+      1.0000000000000007,
+      1.3819660112501049,
+      1.999999999999999,
+      2.6180339887498953,
+      3.0,
+      3.0,
+      3.0000000000000004,
+      3.6180339887498945,
+      4.999999999999999
+    ],
+    "trace": 26.0,
+    "zeta_1": 7.699999999999999,
+    "zeta_2": 10.223333333333331,
+    "zeta_3": 20.644111111111105,
+    "zeta_1_str": "7.6999999999999995077",
+    "logdet_prime": 7.2078598714324755,
+    "logdet_prime_str": "7.2078598714324750865",
+    "det_prime": 1350.0,
+    "alg_connectivity": 0.3819660112501052,
+    "largest_eig": 4.999999999999999,
+    "spectral_entropy": 2.2360712934207645
+  },
+  "s2_quotient": {
+    "sectors": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "sector_weights": {
+      "[1, 0]": 1,
+      "[2, 0]": 1,
+      "[2, 1]": 3,
+      "[3, 0]": 1,
+      "[3, 1]": 3,
+      "[3, 2]": 5
+    },
+    "A_S2": [
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "intra_sector_edge_counts": [
+      0.0,
+      0.0,
+      2.0,
+      0.0,
+      2.0,
+      4.0
+    ],
+    "description": "Nodes are (n,l). Off-diagonal entries = # of S^3 edges crossing sectors. Intra_sector_edge_counts records the # of angular L+/- edges inside each sector (which become the S^1 fiber)."
+  },
+  "s2_invariants": {
+    "name": "S2 quotient (n_max=3)",
+    "n_nodes": 6,
+    "zero_modes": 3,
+    "n_nonzero_eigs": 3,
+    "eigenvalues": [
+      0.0,
+      0.0,
+      0.0,
+      0.9999999999999998,
+      3.0,
+      6.0
+    ],
+    "trace": 10.0,
+    "zeta_1": 1.5000000000000002,
+    "zeta_2": 1.1388888888888893,
+    "zeta_3": 1.0416666666666672,
+    "zeta_1_str": "1.5000000000000002",
+    "logdet_prime": 2.8903717578961645,
+    "logdet_prime_str": "2.8903717578961644922",
+    "det_prime": 17.999999999999996,
+    "alg_connectivity": 0.9999999999999998,
+    "largest_eig": 6.0,
+    "spectral_entropy": 0.8979457248567797
+  },
+  "fibers_path": {
+    "[2, 1]": {
+      "name": "fiber_path_(2, 1)",
+      "n_nodes": 3,
+      "zero_modes": 1,
+      "n_nonzero_eigs": 2,
+      "eigenvalues": [
+        0.0,
+        0.9999999999999998,
+        3.0
+      ],
+      "trace": 4.0,
+      "zeta_1": 1.3333333333333335,
+      "zeta_2": 1.1111111111111116,
+      "zeta_3": 1.0370370370370376,
+      "zeta_1_str": "1.3333333333333335333",
+      "logdet_prime": 1.0986122886681096,
+      "logdet_prime_str": "1.0986122886681094914",
+      "det_prime": 2.9999999999999996,
+      "alg_connectivity": 0.9999999999999998,
+      "largest_eig": 3.0,
+      "spectral_entropy": 0.5623351446188083
+    },
+    "[3, 1]": {
+      "name": "fiber_path_(3, 1)",
+      "n_nodes": 3,
+      "zero_modes": 1,
+      "n_nonzero_eigs": 2,
+      "eigenvalues": [
+        0.0,
+        0.9999999999999998,
+        3.0
+      ],
+      "trace": 4.0,
+      "zeta_1": 1.3333333333333335,
+      "zeta_2": 1.1111111111111116,
+      "zeta_3": 1.0370370370370376,
+      "zeta_1_str": "1.3333333333333335333",
+      "logdet_prime": 1.0986122886681096,
+      "logdet_prime_str": "1.0986122886681094914",
+      "det_prime": 2.9999999999999996,
+      "alg_connectivity": 0.9999999999999998,
+      "largest_eig": 3.0,
+      "spectral_entropy": 0.5623351446188083
+    },
+    "[3, 2]": {
+      "name": "fiber_path_(3, 2)",
+      "n_nodes": 5,
+      "zero_modes": 1,
+      "n_nonzero_eigs": 4,
+      "eigenvalues": [
+        0.0,
+        0.3819660112501052,
+        1.3819660112501049,
+        2.6180339887498953,
+        3.6180339887498945
+      ],
+      "trace": 8.0,
+      "zeta_1": 3.9999999999999996,
+      "zeta_2": 7.599999999999999,
+      "zeta_3": 18.399999999999995,
+      "zeta_1_str": "3.9999999999999997621",
+      "logdet_prime": 1.6094379124341005,
+      "logdet_prime_str": "1.6094379124341003949",
+      "det_prime": 5.0,
+      "alg_connectivity": 0.3819660112501052,
+      "largest_eig": 3.6180339887498945,
+      "spectral_entropy": 1.1729838118904259
+    }
+  },
+  "fibers_cycle": {
+    "[2, 1]": {
+      "name": "fiber_cycle_(2, 1)",
+      "n_nodes": 3,
+      "zero_modes": 1,
+      "n_nonzero_eigs": 2,
+      "eigenvalues": [
+        0.0,
+        3.0,
+        3.0
+      ],
+      "trace": 6.0,
+      "zeta_1": 0.6666666666666666,
+      "zeta_2": 0.2222222222222222,
+      "zeta_3": 0.07407407407407407,
+      "zeta_1_str": "0.66666666666666666667",
+      "logdet_prime": 2.1972245773362196,
+      "logdet_prime_str": "2.1972245773362193828",
+      "det_prime": 9.0,
+      "alg_connectivity": 3.0,
+      "largest_eig": 3.0,
+      "spectral_entropy": 0.6931471805599453
+    },
+    "[3, 1]": {
+      "name": "fiber_cycle_(3, 1)",
+      "n_nodes": 3,
+      "zero_modes": 1,
+      "n_nonzero_eigs": 2,
+      "eigenvalues": [
+        0.0,
+        3.0,
+        3.0
+      ],
+      "trace": 6.0,
+      "zeta_1": 0.6666666666666666,
+      "zeta_2": 0.2222222222222222,
+      "zeta_3": 0.07407407407407407,
+      "zeta_1_str": "0.66666666666666666667",
+      "logdet_prime": 2.1972245773362196,
+      "logdet_prime_str": "2.1972245773362193828",
+      "det_prime": 9.0,
+      "alg_connectivity": 3.0,
+      "largest_eig": 3.0,
+      "spectral_entropy": 0.6931471805599453
+    },
+    "[3, 2]": {
+      "name": "fiber_cycle_(3, 2)",
+      "n_nodes": 5,
+      "zero_modes": 1,
+      "n_nonzero_eigs": 4,
+      "eigenvalues": [
+        0.0,
+        1.381966011250105,
+        1.381966011250105,
+        3.618033988749894,
+        3.618033988749894
+      ],
+      "trace": 9.999999999999998,
+      "zeta_1": 2.0000000000000004,
+      "zeta_2": 1.2000000000000004,
+      "zeta_3": 0.8000000000000003,
+      "zeta_1_str": "2.0000000000000002886",
+      "logdet_prime": 3.2188758248682,
+      "logdet_prime_str": "3.2188758248682000606",
+      "det_prime": 24.999999999999982,
+      "alg_connectivity": 1.381966011250105,
+      "largest_eig": 3.618033988749894,
+      "spectral_entropy": 1.2826616662949935
+    }
+  },
+  "fiber_logdet_sum_path": 3.8066624897703196,
+  "fiber_logdet_sum_cycle": 7.613324979540639,
+  "casimir_weighted_trace": {
+    "value": 42,
+    "target_B_42": 42.0,
+    "match": true,
+    "breakdown": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "2l+1": 1,
+        "l(l+1)": 0,
+        "contribution": 0
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "2l+1": 1,
+        "l(l+1)": 0,
+        "contribution": 0
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "2l+1": 3,
+        "l(l+1)": 2,
+        "contribution": 6
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "2l+1": 1,
+        "l(l+1)": 0,
+        "contribution": 0
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "2l+1": 3,
+        "l(l+1)": 2,
+        "contribution": 6
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "2l+1": 5,
+        "l(l+1)": 6,
+        "contribution": 30
+      }
+    ],
+    "description": "Sum over all (n,l) sectors at n_max=3 of (2l+1)*l(l+1). This is the degeneracy-weighted Casimir trace of the SO(3) orbital angular momentum operator, truncated at the n_max=3 shell. It equals exactly 42 -- the 'B = 42' of Paper 2."
+  },
+  "s2_weighted_invariants": {
+    "name": "S2 quotient (2l+1)-weighted",
+    "n_nodes": 6,
+    "zero_modes": 3,
+    "n_nonzero_eigs": 3,
+    "eigenvalues": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      2.0000000000000004,
+      2.999999999999999
+    ],
+    "trace": 6.0,
+    "zeta_1": 1.8333333333333333,
+    "zeta_2": 1.3611111111111112,
+    "zeta_3": 1.162037037037037,
+    "zeta_1_str": "1.8333333333333333444",
+    "logdet_prime": 1.791759469228055,
+    "logdet_prime_str": "1.7917594692280548675",
+    "det_prime": 5.999999999999999,
+    "alg_connectivity": 1.0,
+    "largest_eig": 2.999999999999999,
+    "spectral_entropy": 1.0114042647073518
+  },
+  "graph_exchange_constant": {
+    "zeta1_diff": 6.199999999999999,
+    "logdet_diff": 4.317488113536311,
+    "vn_entropy_diff": 1.3381255685639848,
+    "fiber_logdet_sum_path": 3.8066624897703196,
+    "fiber_logdet_sum_cycle": 7.613324979540639
+  },
+  "candidates": {
+    "S3_trace": 26.0,
+    "S3_logdet": 7.2078598714324755,
+    "S3_detp": 1350.0,
+    "S3_zeta1": 7.699999999999999,
+    "S3_zeta2": 10.223333333333331,
+    "S3_zeta3": 20.644111111111105,
+    "S3_entropy": 2.2360712934207645,
+    "S3_alg_conn": 0.3819660112501052,
+    "S3_largest_eig": 4.999999999999999,
+    "S2_trace": 10.0,
+    "S2_logdet": 2.8903717578961645,
+    "S2_detp": 17.999999999999996,
+    "S2_zeta1": 1.5000000000000002,
+    "S2_zeta2": 1.1388888888888893,
+    "S2_zeta3": 1.0416666666666672,
+    "S2_entropy": 0.8979457248567797,
+    "S2_alg_conn": 0.9999999999999998,
+    "S2_largest_eig": 6.0,
+    "fiber_logdet_sum_path": 3.8066624897703196,
+    "fiber_logdet_sum_cycle": 7.613324979540639,
+    "S3_over_S2_logdet": 2.493748373973496,
+    "S3_minus_S2_logdet": 4.317488113536311,
+    "S3_over_S2_zeta1": 5.133333333333332,
+    "S3_minus_S2_zeta1": 6.199999999999999,
+    "S3_detp_over_S2_detp": 75.00000000000001,
+    "S2_weighted_degree_trace": 22.0,
+    "S2_logdet_times_pi": 9.080370680750006,
+    "S2_logdet_times_pi2_6": 4.754470970419395,
+    "S2_logdet_times_42": 121.39561383163891,
+    "S2_logdet_plus_42": 44.89037175789616,
+    "S2_logdet_plus_pi2_6": 4.535305824744391,
+    "S3_logdet_times_pi": 22.644159620196938,
+    "S3_logdet_times_42": 302.730114600164,
+    "S3_logdet_plus_42": 49.207859871432476,
+    "S3_trace_times_pi": 81.68140899333463,
+    "S2_trace_times_pi": 31.41592653589793,
+    "casimir_weighted_trace": 42.0,
+    "casimir_times_pi": 131.94689145077132,
+    "casimir_times_pi_plus_F": 137.1146042308213,
+    "pi_times_(casimir+F-Delta)": 137.03606441448156,
+    "S2w_trace": 6.0,
+    "S2w_zeta1": 1.8333333333333333,
+    "S2w_logdet": 1.791759469228055,
+    "gec_zeta1_diff": 6.199999999999999,
+    "gec_logdet_diff": 4.317488113536311,
+    "gec_vn_entropy_diff": 1.3381255685639848,
+    "gec_fiber_logdet_sum_path": 3.8066624897703196,
+    "gec_fiber_logdet_sum_cycle": 7.613324979540639
+  },
+  "near_misses": [
+    {
+      "candidate": "casimir_weighted_trace",
+      "candidate_value": 42.0,
+      "target": "B_42",
+      "target_value": 42.0,
+      "rel_error": 0.0
+    },
+    {
+      "candidate": "pi_times_(casimir+F-Delta)",
+      "candidate_value": 137.03606441448156,
+      "target": "pi*(B+F-Delta)_137.0357",
+      "target_value": 137.03606441448156,
+      "rel_error": 0.0
+    },
+    {
+      "candidate": "pi_times_(casimir+F-Delta)",
+      "candidate_value": 137.03606441448156,
+      "target": "K_alpha_137.036",
+      "target_value": 137.035999084,
+      "rel_error": 4.7673955747486345e-07
+    },
+    {
+      "candidate": "casimir_times_pi_plus_F",
+      "candidate_value": 137.1146042308213,
+      "target": "pi*(B+F-Delta)_137.0357",
+      "target_value": 137.03606441448156,
+      "rel_error": 0.0005731324573229781
+    },
+    {
+      "candidate": "casimir_times_pi_plus_F",
+      "candidate_value": 137.1146042308213,
+      "target": "K_alpha_137.036",
+      "target_value": 137.035999084,
+      "rel_error": 0.000573609470115367
+    },
+    {
+      "candidate": "S2_logdet_plus_42",
+      "candidate_value": 44.89037175789616,
+      "target": "B+F_43.6449",
+      "target_value": 43.64493406684823,
+      "rel_error": 0.028535675850497863
+    },
+    {
+      "candidate": "S2_logdet_plus_42",
+      "candidate_value": 44.89037175789616,
+      "target": "B+F-Delta_43.6199",
+      "target_value": 43.61993406684823,
+      "rel_error": 0.0291251630298424
+    },
+    {
+      "candidate": "S2_logdet_plus_42",
+      "candidate_value": 44.89037175789616,
+      "target": "K/pi_43.6199",
+      "target_value": 43.619913271510086,
+      "rel_error": 0.029125653654517084
+    },
+    {
+      "candidate": "casimir_times_pi",
+      "candidate_value": 131.94689145077132,
+      "target": "K_alpha_137.036",
+      "target_value": 137.035999084,
+      "rel_error": 0.037137012662703105
+    },
+    {
+      "candidate": "casimir_weighted_trace",
+      "candidate_value": 42.0,
+      "target": "K/pi_43.6199",
+      "target_value": 43.619913271510086,
+      "rel_error": 0.03713701266270321
+    },
+    {
+      "candidate": "casimir_weighted_trace",
+      "candidate_value": 42.0,
+      "target": "B+F-Delta_43.6199",
+      "target_value": 43.61993406684823,
+      "rel_error": 0.037137471697358745
+    },
+    {
+      "candidate": "casimir_times_pi",
+      "candidate_value": 131.94689145077132,
+      "target": "pi*(B+F-Delta)_137.0357",
+      "target_value": 137.03606441448156,
+      "rel_error": 0.03713747169735875
+    },
+    {
+      "candidate": "casimir_weighted_trace",
+      "candidate_value": 42.0,
+      "target": "B+F_43.6449",
+      "target_value": 43.64493406684823,
+      "rel_error": 0.037689003363569895
+    }
+  ]
+}

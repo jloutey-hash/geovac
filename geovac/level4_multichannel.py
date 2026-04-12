@@ -21,16 +21,10 @@ import numpy as np
 from scipy.linalg import eigh
 from scipy.interpolate import CubicSpline
 from scipy.linalg import eigh_tridiagonal
-from typing import Tuple, List, Union, Callable, Optional
-from math import sqrt, factorial
-
-from scipy.special import roots_laguerre, eval_laguerre
+from typing import Tuple, List, Union
+from math import sqrt
 
 from geovac.hyperspherical_angular import gaunt_integral
-from geovac.hyperspherical_radial import (
-    solve_radial_spectral as _solve_radial_spectral_l3,
-    _build_laguerre_matrices_dirichlet,
-)
 
 
 def _channel_list(
@@ -261,357 +255,6 @@ def compute_nuclear_coupling(
     return V
 
 
-def compute_nuclear_coupling_screened(
-    l1p: int, l2p: int, l1: int, l2: int,
-    m1: int, m2: int,
-    alpha: np.ndarray, rho: float,
-    Z_A_func: Callable, Z_B: float, R_e: float,
-    Z_A_bare: float = None,
-    rho_A: float = None, rho_B: float = None,
-    n_theta: int = 64,
-) -> np.ndarray:
-    """
-    Nuclear coupling with screened Z_A using analytical base + smooth correction.
-
-    Strategy: compute the exact analytical coupling with constant Z_A (handling
-    the 1/r singularity via multipole expansion), then add a smooth quadrature
-    correction for the difference (Z_A - Z_eff(r)) / r.  Since Z_eff(0) = Z_A
-    (no screening at the nucleus), the correction vanishes at r → 0, removing
-    the 1/r singularity from the quadrature integrand.
-
-    Parameters
-    ----------
-    l1p, l2p, l1, l2 : int
-        Bra/ket channel angular momenta.
-    m1, m2 : int
-        Shared magnetic quantum numbers.
-    alpha : ndarray
-        Alpha grid points.
-    rho : float
-        R / (2 R_e).
-    Z_A_func : callable
-        Z_eff(r) → effective nuclear charge at distance r (bohr) from A.
-    Z_B : float
-        Constant charge for nucleus B.
-    R_e : float
-        Electronic hyperradius (bohr).
-    Z_A_bare : float or None
-        Bare nuclear charge for nucleus A (used for analytical base).
-        If None, uses Z_A_func(0.0).
-    rho_A, rho_B : float or None
-        Nuclear distances from origin in R_e units.
-    n_theta : int
-        Gauss-Legendre quadrature order.
-
-    Returns
-    -------
-    V : ndarray of shape (n_alpha,)
-        Nuclear coupling (charge function units, without R_e factor).
-    """
-    from scipy.special import lpmv
-
-    if rho_A is None:
-        rho_A = rho
-    if rho_B is None:
-        rho_B = rho
-    if Z_A_bare is None:
-        Z_A_bare = float(Z_A_func(0.0))
-
-    # Step 1: Analytical base with constant Z_A_bare (exact, no singularity)
-    V_base = compute_nuclear_coupling(
-        l1p, l2p, l1, l2, m1, m2, alpha, rho,
-        Z=Z_A_bare, Z_A=Z_A_bare, Z_B=Z_B,
-        rho_A=rho_A, rho_B=rho_B,
-    )
-
-    # Step 2: Smooth quadrature correction for (Z_A_bare - Z_eff(r)) / r
-    # This correction vanishes at r → 0 since Z_eff(0) = Z_A_bare.
-    n_alpha = len(alpha)
-    cos_a = np.cos(alpha)
-    sin_a = np.sin(alpha)
-    am1 = abs(m1)
-    am2 = abs(m2)
-
-    nodes, weights = np.polynomial.legendre.leggauss(n_theta)
-
-    dV = np.zeros(n_alpha)
-
-    # --- Electron 1 correction (requires l2p == l2) ---
-    if l2p == l2:
-        norm_l1p = sqrt(
-            (2 * l1p + 1) / 2.0
-            * factorial(l1p - am1) / factorial(l1p + am1)
-        )
-        norm_l1 = sqrt(
-            (2 * l1 + 1) / 2.0
-            * factorial(l1 - am1) / factorial(l1 + am1)
-        )
-        Theta_l1p = norm_l1p * lpmv(am1, l1p, nodes)
-        Theta_l1 = norm_l1 * lpmv(am1, l1, nodes)
-        TT_w = Theta_l1p * Theta_l1 * weights
-
-        s1 = cos_a
-        for ia in range(n_alpha):
-            # Distance electron 1 → nucleus A
-            r1A_sq = s1[ia] ** 2 + rho_A ** 2 - 2 * s1[ia] * rho_A * nodes
-            r1A = np.sqrt(np.maximum(r1A_sq, 1e-30))
-
-            # Smooth correction: -(Z_eff(r) - Z_A_bare) / r
-            # = (Z_A_bare - Z_eff(r)) / r
-            z_eff_A = Z_A_func(R_e * r1A)
-            delta_V = -(z_eff_A - Z_A_bare) / r1A
-
-            dV[ia] += np.dot(TT_w, delta_V)
-
-    # --- Electron 2 correction (requires l1p == l1) ---
-    if l1p == l1:
-        norm_l2p = sqrt(
-            (2 * l2p + 1) / 2.0
-            * factorial(l2p - am2) / factorial(l2p + am2)
-        )
-        norm_l2 = sqrt(
-            (2 * l2 + 1) / 2.0
-            * factorial(l2 - am2) / factorial(l2 + am2)
-        )
-        Theta_l2p = norm_l2p * lpmv(am2, l2p, nodes)
-        Theta_l2 = norm_l2 * lpmv(am2, l2, nodes)
-        TT_w = Theta_l2p * Theta_l2 * weights
-
-        s2 = sin_a
-        for ia in range(n_alpha):
-            r2A_sq = s2[ia] ** 2 + rho_A ** 2 - 2 * s2[ia] * rho_A * nodes
-            r2A = np.sqrt(np.maximum(r2A_sq, 1e-30))
-
-            z_eff_A = Z_A_func(R_e * r2A)
-            delta_V = -(z_eff_A - Z_A_bare) / r2A
-
-            dV[ia] += np.dot(TT_w, delta_V)
-
-    return V_base + dV
-
-
-def compute_core_screening_analytical(
-    alpha: np.ndarray,
-    rho_A: float,
-    R_e: float,
-    core_potentials: List[dict],
-    rho_B: float = None,
-) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Analytical monopole core-active screening from locked-shell quantum numbers.
-
-    For a hydrogenic core orbital (n, l=0) with nuclear charge Z_core, the
-    electrostatic potential of the core charge density at distance r from the
-    nucleus is:
-
-        φ_core(r) = (n_core/r) × [1 - (1 + Z r) exp(-2 Z r)]
-
-    The angle-averaged (k=0 monopole) penetration correction — the difference
-    between this screened potential and the point-charge n_core/r already
-    captured by Z_eff — is evaluated analytically:
-
-        ⟨V_pen⟩(s, ρ) = -n_core/(2 R_e² s ρ) × [F(b) - F(a)]
-
-    where a = R_e|s-ρ|, b = R_e(s+ρ), and F(u) = [-3/(4Z) - u/2] exp(-2Zu).
-
-    This formula derives entirely from the core's quantum numbers (n=1, l=0)
-    and nuclear charge — no numerical quadrature needed.
-
-    The monopole (k=0 Legendre component) only contributes to diagonal
-    channels (l' = l for each electron), consistent with the spherical
-    symmetry of the s-orbital core.
-
-    Parameters
-    ----------
-    alpha : ndarray
-        Alpha grid points.
-    rho_A : float
-        Distance of nucleus A from origin in R_e units.
-    R_e : float
-        Electronic hyperradius.
-    core_potentials : list of dict
-        Each entry: {'Z_core': float, 'n_core': int, 'atom': str,
-                     'n_q': int, 'l_q': int}.
-        Only l_q=0 (s-orbital) cores are supported.
-    rho_B : float or None
-        Distance of nucleus B from origin in R_e units (for B-atom cores).
-
-    Returns
-    -------
-    V_pen_e1 : ndarray of shape (n_alpha,)
-        Monopole penetration for electron 1 (at s1 = cos α).
-        In charge-function units (divide by R_e already applied).
-    V_pen_e2 : ndarray of shape (n_alpha,)
-        Monopole penetration for electron 2 (at s2 = sin α).
-    """
-    n_alpha = len(alpha)
-    V_e1 = np.zeros(n_alpha)
-    V_e2 = np.zeros(n_alpha)
-
-    # Filter to s-orbital cores by atom
-    cores_A = [c for c in core_potentials
-               if c.get('atom') == 'A' and c.get('l_q', 0) == 0]
-    cores_B = [c for c in core_potentials
-               if c.get('atom') == 'B' and c.get('l_q', 0) == 0]
-
-    if not cores_A and not cores_B:
-        return V_e1, V_e2
-
-    cos_a = np.cos(alpha)
-    sin_a = np.sin(alpha)
-
-    def _F(u: np.ndarray, Z: float) -> np.ndarray:
-        """Antiderivative: F(u) = [-3/(4Z) - u/2] exp(-2Zu)."""
-        return (-3.0 / (4.0 * Z) - u / 2.0) * np.exp(-2.0 * Z * u)
-
-    def _monopole_pen(s: np.ndarray, rho_nuc: float,
-                      Z_core: float, n_core: int) -> np.ndarray:
-        """Angle-averaged penetration at electron distance s from origin.
-
-        Returns V_pen / R_e (charge-function units, ready to multiply by R_e
-        in the Hamiltonian assembly).
-        """
-        # Physical distances: a = R_e|s - rho|, b = R_e(s + rho)
-        a = R_e * np.abs(s - rho_nuc)
-        b = R_e * (s + rho_nuc)
-
-        # Denominator: 2 * R_e^2 * s * rho
-        denom = 2.0 * R_e**2 * s * rho_nuc
-        # Guard against s ≈ 0 (alpha near boundaries)
-        safe = denom > 1e-30
-
-        Fb = _F(b, Z_core)
-        Fa = _F(a, Z_core)
-
-        result = np.zeros_like(s)
-        result[safe] = -n_core / denom[safe] * (Fb[safe] - Fa[safe])
-
-        # Convert to charge-function units: divide by R_e
-        # (build_angular_hamiltonian will multiply by R_e)
-        return result / R_e
-
-    # Accumulate penetration from all core shells
-    for c in cores_A:
-        V_e1 += _monopole_pen(cos_a, rho_A, c['Z_core'], c['n_core'])
-        V_e2 += _monopole_pen(sin_a, rho_A, c['Z_core'], c['n_core'])
-
-    if rho_B is not None:
-        for c in cores_B:
-            V_e1 += _monopole_pen(cos_a, rho_B, c['Z_core'], c['n_core'])
-            V_e2 += _monopole_pen(sin_a, rho_B, c['Z_core'], c['n_core'])
-
-    return V_e1, V_e2
-
-
-def compute_pk_pseudopotential(
-    alpha: np.ndarray,
-    rho_A: float,
-    R_e: float,
-    pk_potentials: List[dict],
-    rho_B: float = None,
-) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Effective core potential (ECP) in hyperspherical coordinates.
-
-    Uses the Gaussian/r² form from the Fuentealba-Durand-Barthelat
-    pseudopotential:
-
-        V_ECP(r) = C × exp(-β r²) / r²
-
-    The 1/r² divergence at r→0 overwhelms the nuclear -Z/r, creating a
-    repulsive barrier that prevents active electrons from collapsing into
-    the locked core orbital.  At r >> 1/√β, V_ECP → 0 and the electron
-    sees only the nuclear potential.
-
-    The angle-averaged (monopole) component uses the exponential integral
-    E₁:
-
-        ⟨V_ECP⟩(s, ρ, R_e) = C / (4 R_e² s ρ) × [E₁(β a²) - E₁(β b²)]
-
-    where a = R_e|s-ρ|, b = R_e(s+ρ).
-
-    Parameters
-    ----------
-    alpha : ndarray
-        Alpha grid points.
-    rho_A : float
-        Distance of nucleus A from origin in R_e units.
-    R_e : float
-        Electronic hyperradius.
-    pk_potentials : list of dict
-        Each entry: {'C_core': float, 'beta_core': float,
-                     'atom': str ('A' or 'B')}.
-        C_core: amplitude of Gaussian/r² repulsive core (Ha × bohr²).
-        beta_core: Gaussian exponent (1/bohr²).
-    rho_B : float or None
-        Distance of nucleus B from origin in R_e units.
-
-    Returns
-    -------
-    V_pk_e1, V_pk_e2 : ndarray of shape (n_alpha,)
-        ECP for electrons 1 and 2, in charge-function units.
-    """
-    from scipy.special import exp1
-
-    n_alpha = len(alpha)
-    V_e1 = np.zeros(n_alpha)
-    V_e2 = np.zeros(n_alpha)
-
-    pks_A = [p for p in pk_potentials if p.get('atom') == 'A']
-    pks_B = [p for p in pk_potentials if p.get('atom') == 'B']
-
-    if not pks_A and not pks_B:
-        return V_e1, V_e2
-
-    cos_a = np.cos(alpha)
-    sin_a = np.sin(alpha)
-
-    def _ecp_mono(s: np.ndarray, rho_nuc: float,
-                  C: float, beta: float) -> np.ndarray:
-        """Monopole ECP at electron distance s from origin.
-
-        V_ECP(r) = C exp(-β r²) / r²
-        ⟨V_ECP⟩ = C / (4 R_e² s ρ) × [E₁(β a²) - E₁(β b²)]
-
-        Returns V_ECP / R_e (charge-function units).
-        """
-        a = R_e * np.abs(s - rho_nuc)
-        b = R_e * (s + rho_nuc)
-
-        denom = 4.0 * R_e**2 * s * rho_nuc
-        safe = denom > 1e-30
-
-        # E₁(x) = ∫_x^∞ exp(-t)/t dt, monotonically decreasing.
-        # E₁(β a²) > E₁(β b²) since a < b, so result is positive (repulsive).
-        ba2 = beta * a**2
-        bb2 = beta * b**2
-        # Clamp argument to avoid overflow in exp1 at very small values
-        ba2 = np.maximum(ba2, 1e-30)
-
-        E1_a = exp1(ba2)
-        E1_b = exp1(bb2)
-
-        result = np.zeros_like(s)
-        result[safe] = C / denom[safe] * (E1_a[safe] - E1_b[safe])
-
-        return result / R_e
-
-    for p in pks_A:
-        C = p['C_core']
-        beta = p['beta_core']
-        V_e1 += _ecp_mono(cos_a, rho_A, C, beta)
-        V_e2 += _ecp_mono(sin_a, rho_A, C, beta)
-
-    if rho_B is not None:
-        for p in pks_B:
-            C = p['C_core']
-            beta = p['beta_core']
-            V_e1 += _ecp_mono(cos_a, rho_B, C, beta)
-            V_e2 += _ecp_mono(sin_a, rho_B, C, beta)
-
-    return V_e1, V_e2
-
-
 def _ee_coupling(
     l1p: int, l2p: int, l1: int, l2: int,
     alpha: np.ndarray, l_max: int,
@@ -766,11 +409,6 @@ def build_angular_hamiltonian(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
-    core_potentials: Union[List[dict], None] = None,
-    pk_potentials: Union[List[dict], None] = None,
-    Z_A_func: Optional[Callable] = None,
-    n_theta: int = 64,
-    pk_projector: Union[dict, None] = None,
 ) -> np.ndarray:
     """
     Build the full coupled-channel angular Hamiltonian.
@@ -801,17 +439,6 @@ def build_angular_hamiltonian(
     z0 : float
         Origin shift along internuclear axis. Positive = toward nucleus A.
         Nuclear positions: A at R/2 - z0, B at R/2 + z0 from origin.
-    pk_potentials : list of dict or None
-        Phillips-Kleinman pseudopotential specs. Each entry:
-        {'Z_core': float, 'E_core': float, 'E_val': float, 'atom': str}.
-        Creates a repulsive barrier where the core density lives, enforcing
-        core-active orthogonality.
-    Z_A_func : callable or None
-        If provided, Z_eff(r) callable for nucleus A.  Replaces the constant
-        Z_A in the nuclear coupling via Gauss-Legendre quadrature.  When
-        None (default), the fast analytical multipole path is used.
-    n_theta : int
-        Gauss-Legendre quadrature order (only used when Z_A_func is not None).
 
     Returns
     -------
@@ -879,7 +506,6 @@ def build_angular_hamiltonian(
             H[jj, ii] = kinetic_off
 
     # --- Nuclear coupling (diagonal in m1, m2 due to axial symmetry) ---
-    _use_screened = Z_A_func is not None
     for ic, (l1p, m1p, l2p, m2p) in enumerate(channels_4):
         for jc, (l1, m1, l2, m2) in enumerate(channels_4):
             if jc < ic:
@@ -889,19 +515,11 @@ def build_angular_hamiltonian(
             if m1p != m1 or m2p != m2:
                 continue
 
-            if _use_screened:
-                V_nuc = compute_nuclear_coupling_screened(
-                    l1p, l2p, l1, l2, m1, m2, alpha_grid, rho,
-                    Z_A_func=Z_A_func, Z_B=Z_B, R_e=R_e,
-                    Z_A_bare=Z_A,
-                    rho_A=rho_A, rho_B=rho_B, n_theta=n_theta,
-                )
-            else:
-                V_nuc = compute_nuclear_coupling(
-                    l1p, l2p, l1, l2, m1, m2, alpha_grid, rho,
-                    Z=Z, Z_A=Z_A, Z_B=Z_B,
-                    rho_A=rho_A, rho_B=rho_B,
-                )
+            V_nuc = compute_nuclear_coupling(
+                l1p, l2p, l1, l2, m1, m2, alpha_grid, rho,
+                Z=Z, Z_A=Z_A, Z_B=Z_B,
+                rho_A=rho_A, rho_B=rho_B,
+            )
 
             for i in range(n_alpha):
                 ii = idx(ic, i)
@@ -910,189 +528,6 @@ def build_angular_hamiltonian(
                 H[ii, jj] += val
                 if ic != jc:
                     H[jj, ii] += val
-
-    # --- Core penetration correction (analytical monopole from core quantum numbers) ---
-    # The k=0 monopole of the penetration potential is diagonal in (l, m)
-    # because the s-orbital core is spherically symmetric. Derived from
-    # the analytical angle-average of V_pen(r_A) — no quadrature needed.
-    if core_potentials:
-        V_pen_e1, V_pen_e2 = compute_core_screening_analytical(
-            alpha_grid, rho_A, R_e, core_potentials, rho_B=rho_B,
-        )
-        for ic, (l1, m1, l2, m2) in enumerate(channels_4):
-            for i in range(n_alpha):
-                ii = idx(ic, i)
-                # Electron 1 penetration (diagonal in l1, acts on all channels)
-                H[ii, ii] += R_e * V_pen_e1[i]
-                # Electron 2 penetration (diagonal in l2, acts on all channels)
-                H[ii, ii] += R_e * V_pen_e2[i]
-
-    # --- Phillips-Kleinman pseudopotential (core-active orthogonality) ---
-    # Repulsive potential V_PK = |φ_core|² × (E_val - E_core) prevents active
-    # electrons from collapsing into the locked core orbital.  Diagonal in
-    # channels (monopole, spherically symmetric core).
-    #
-    # channel_mode='l_dependent': The exact PK operator is a projector onto
-    # core states.  For a 1s² core (pure l=0), the projector has non-zero
-    # matrix elements only for electrons with l=0 character.  Per-electron
-    # weight: δ_{l_i, 0}.  This prevents unphysical repulsion in higher-l
-    # channels that are automatically orthogonal to the core by angular
-    # momentum.  See Paper 17 Sec VI.A.
-    if pk_potentials:
-        V_pk_e1, V_pk_e2 = compute_pk_pseudopotential(
-            alpha_grid, rho_A, R_e, pk_potentials, rho_B=rho_B,
-        )
-        # Determine channel mode from pk_potentials
-        pk_ch_mode = 'channel_blind'
-        for p in pk_potentials:
-            if p.get('channel_mode') == 'l_dependent':
-                pk_ch_mode = 'l_dependent'
-                break
-
-        for ic, (l1, m1, l2, m2) in enumerate(channels_4):
-            if pk_ch_mode == 'l_dependent':
-                # Per-electron PK weight: core is 1s² (pure l=0),
-                # so only l=0 electrons overlap with the core.
-                w1 = 1.0 if l1 == 0 else 0.0
-                w2 = 1.0 if l2 == 0 else 0.0
-            else:
-                w1 = 1.0
-                w2 = 1.0
-            if w1 == 0.0 and w2 == 0.0:
-                continue
-            for i in range(n_alpha):
-                ii = idx(ic, i)
-                H[ii, ii] += R_e * w1 * V_pk_e1[i]
-                H[ii, ii] += R_e * w2 * V_pk_e2[i]
-
-    # --- Algebraic PK projector (rank-1, channel-space) ---
-    # Replaces the Gaussian PK with the exact Phillips-Kleinman projector:
-    #   V_PK = E_shift * |core⟩⟨core|
-    # where |core⟩ is the Level 3 core eigenvector mapped into the Level 4
-    # channel basis via the atomic-limit approximation (l=0 → (0,0) channel).
-    if pk_projector is not None and pk_projector.get('mode') == 'algebraic':
-        from scipy.interpolate import CubicSpline as _CS
-
-        core_l0 = pk_projector['core_l0_wavefunction']
-        core_n_alpha_src = pk_projector['core_n_alpha']
-        core_h_src = pk_projector['core_h_alpha']
-
-        # Interpolate to Level 4 α-grid if grids differ
-        if core_n_alpha_src != n_alpha:
-            core_alpha = np.array(
-                [(i + 1) * core_h_src for i in range(core_n_alpha_src)]
-            )
-            level4_alpha = alpha_grid
-            cs = _CS(core_alpha, core_l0, bc_type='clamped')
-            core_l0_interp = cs(level4_alpha)
-        else:
-            core_l0_interp = core_l0.copy()
-
-        # Normalize on Level 4 grid
-        norm = np.sqrt(np.sum(core_l0_interp**2) * h)
-        if norm > 1e-15:
-            core_l0_interp /= norm
-
-        # Build full core vector in Level 4 (channel, α) space
-        # Atomic-limit approximation: core maps to (l1=0, m1=0, l2=0, m2=0)
-        core_vec = np.zeros(n_ch * n_alpha)
-        ch_00 = None
-        for ic, ch_label in enumerate(channels_4):
-            if m_max == 0:
-                l1, l2 = ch_label[0], ch_label[1]
-                if l1 == 0 and l2 == 0:
-                    ch_00 = ic
-                    break
-            else:
-                l1, m1, l2, m2 = ch_label
-                if l1 == 0 and m1 == 0 and l2 == 0 and m2 == 0:
-                    ch_00 = ic
-                    break
-
-        if ch_00 is not None:
-            core_vec[ch_00 * n_alpha:(ch_00 + 1) * n_alpha] = core_l0_interp
-
-        # Add rank-1 projector: V_PK = R_e * E_shift * |core⟩⟨core|
-        # R_e factor: Hamiltonian is in charge-function form H u = μ u
-        # where μ has units of energy × R_e (matching existing R_e * V terms).
-        E_shift = pk_projector['energy_shift']
-        H += R_e * E_shift * np.outer(core_vec, core_vec)
-
-    # --- Spectral rank-k PK projector ---
-    # Replaces the rank-1 algebraic PK with a rank-k projector built from
-    # the k most significant Gegenbauer spectral coefficients of the core
-    # wavefunction. Each spectral component defines a basis function on the
-    # Level 4 alpha grid; the projector is the sum of outer products.
-    if pk_projector is not None and pk_projector.get('mode') == 'spectral_rank_k':
-        from geovac.algebraic_angular import _gegenbauer
-
-        spectral_components = pk_projector['spectral_components']
-        E_shift = pk_projector['energy_shift']
-
-        # For each spectral component, reconstruct the Gegenbauer basis
-        # function on the Level 4 FD alpha grid and map into the
-        # appropriate (l1, l2) channel.
-        cos_2a = np.cos(2.0 * alpha_grid)
-        sin_a = np.sin(alpha_grid)
-        cos_a = np.cos(alpha_grid)
-        sin_cos = sin_a * cos_a
-
-        # Precompute Level 4 grid spacing for normalization
-        h_l4 = alpha_grid[1] - alpha_grid[0]
-
-        for comp in spectral_components:
-            l_core = comp['l']   # l-channel index in Level 3
-            k_idx = comp['k']    # Gegenbauer k-index
-            c_j = comp['coeff']  # spectral coefficient
-
-            # Reconstruct the Gegenbauer basis function on the Level 4 grid
-            lam = float(l_core + 1)
-            envelope = sin_cos ** (l_core + 1)
-            geg = _gegenbauer(k_idx, lam, cos_2a)
-            phi_raw = envelope * geg
-
-            # Normalize on Level 4 grid
-            norm_sq = np.sum(phi_raw**2) * h_l4
-            if norm_sq < 1e-30:
-                continue
-            phi_norm = phi_raw / np.sqrt(norm_sq)
-
-            # Map into the appropriate Level 4 channel(s)
-            # For a 1s² core (l_core maps to l1=l_core, l2=l_core channel):
-            # In atomic limit, core l=0 maps to (l1=0, l2=0) in Level 4.
-            # Higher l-channels map to (l1=l, l2=l) channel.
-            target_l1 = l_core
-            target_l2 = l_core
-
-            target_ch = None
-            for ic, ch_label in enumerate(channels_4):
-                if m_max == 0:
-                    l1, l2 = ch_label[0], ch_label[1]
-                    if l1 == target_l1 and l2 == target_l2:
-                        target_ch = ic
-                        break
-                else:
-                    l1, m1, l2, m2 = ch_label
-                    if (l1 == target_l1 and m1 == 0
-                            and l2 == target_l2 and m2 == 0):
-                        target_ch = ic
-                        break
-
-            if target_ch is None:
-                continue
-
-            # Build channel vector
-            comp_vec = np.zeros(n_ch * n_alpha)
-            comp_vec[target_ch * n_alpha:(target_ch + 1) * n_alpha] = (
-                c_j * phi_norm
-            )
-
-            # Accumulate rank-k projector: V_PK += R_e * E_shift * |psi_i><psi_i|
-            # Note: the coefficient c_j is already included in comp_vec,
-            # so the outer product weight is just E_shift (not c_j² * E_shift).
-            # The sum over k components builds the rank-k approximation to
-            # the projector |core><core|.
-            H += R_e * E_shift * np.outer(comp_vec, comp_vec)
 
     # --- E-e coupling ---
     # For m_max=0: original Gaunt-based coupling (exact backward compatibility).
@@ -1135,9 +570,6 @@ def solve_angular_multichannel(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
-    core_potentials: Union[List[dict], None] = None,
-    pk_potentials: Union[List[dict], None] = None,
-    pk_projector: Union[dict, None] = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, list]:
     """
     Solve the coupled-channel angular eigenvalue problem.
@@ -1184,10 +616,7 @@ def solve_angular_multichannel(
     alpha = (np.arange(n_alpha) + 1) * h
 
     H = build_angular_hamiltonian(alpha, rho, R_e, l_max, Z, m_max,
-                                   l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
-                                   core_potentials=core_potentials,
-                                   pk_potentials=pk_potentials,
-                                   pk_projector=pk_projector)
+                                   l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0)
 
     evals, evecs = eigh(H)
 
@@ -1212,9 +641,6 @@ def compute_adiabatic_curve_mc(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
-    core_potentials: Union[List[dict], None] = None,
-    pk_potentials: Union[List[dict], None] = None,
-    pk_projector: Union[dict, None] = None,
 ) -> np.ndarray:
     """
     Compute adiabatic potential U(R_e) with multichannel angular solver.
@@ -1253,9 +679,6 @@ def compute_adiabatic_curve_mc(
         evals, _, _, _ = solve_angular_multichannel(
             rho, R_e, l_max, Z, n_alpha, m_max=m_max,
             l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
-            core_potentials=core_potentials,
-            pk_potentials=pk_potentials,
-            pk_projector=pk_projector,
         )
         mu_vals[i] = evals[0]
 
@@ -1377,7 +800,6 @@ def solve_coupled_channel_radial(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
-    pk_potentials: Union[List[dict], None] = None,
 ) -> Tuple[float, np.ndarray]:
     """
     Diabatic coupled-channel radial solver.
@@ -1461,7 +883,6 @@ def solve_coupled_channel_radial(
         H_ang = build_angular_hamiltonian(
             alpha_grid, rho, R_e, l_max, Z, m_max, l_max_per_m,
             Z_A=Z_A, Z_B=Z_B, z0=z0,
-            pk_potentials=pk_potentials,
         )
         # Project: V_ij = phi_i^T H_ang phi_j
         # H_ang is (N_ang x N_ang), ref_vecs is (n_coupled x N_ang)
@@ -1525,8 +946,6 @@ def solve_direct_2d(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
-    core_potentials: Union[List[dict], None] = None,
-    pk_potentials: Union[List[dict], None] = None,
 ) -> float:
     """
     Direct 2D solver: solve the full (alpha, R_e) problem without
@@ -1631,8 +1050,6 @@ def solve_direct_2d(
         H_ang = build_angular_hamiltonian(
             alpha_grid, rho, R_e, l_max, Z, m_max, l_max_per_m,
             Z_A=Z_A, Z_B=Z_B, z0=z0,
-            core_potentials=core_potentials,
-            pk_potentials=pk_potentials,
         )
         # Add 15/8 to diagonal and scale
         np.fill_diagonal(H_ang, H_ang.diagonal() + 15.0 / 8.0)
@@ -1688,402 +1105,6 @@ def solve_direct_2d(
     return E_elec
 
 
-def _safe_potential_wrapper(
-    U_spline,
-    R_e_max: float,
-) -> Callable:
-    """Wrap a CubicSpline to return 0 beyond R_e_max.
-
-    Gauss-Laguerre quadrature points extend to infinity. CubicSpline
-    extrapolation can diverge, creating artificial deep wells. This
-    wrapper clamps V(R) to 0 for R > R_e_max, matching the physical
-    asymptotic behavior (U ~ 1/R_e² -> 0).
-    """
-    def V_safe(R: np.ndarray) -> np.ndarray:
-        R = np.asarray(R)
-        V = np.zeros_like(R, dtype=float)
-        mask = R <= R_e_max
-        if np.any(mask):
-            V[mask] = U_spline(R[mask])
-        return V
-    return V_safe
-
-
-def solve_adiabatic_radial_spectral(
-    U_spline,
-    n_basis: int = 25,
-    alpha: float = 1.0,
-    R_e_min: float = 0.3,
-    R_e_max: float = 15.0,
-) -> Tuple[float, np.ndarray, np.ndarray]:
-    """Spectral Laguerre solver for the Level 4 adiabatic radial equation.
-
-    Solves [-1/2 d²/dR_e² + U(R_e)] F = E F using Laguerre basis functions,
-    reusing the Level 3 spectral pattern (hyperspherical_radial.py).
-
-    Parameters
-    ----------
-    U_spline : callable
-        Adiabatic effective potential U(R_e) (CubicSpline or callable).
-    n_basis : int
-        Number of Laguerre basis functions.
-    alpha : float
-        Exponential decay parameter for the Laguerre basis.
-    R_e_min : float
-        Left boundary (Dirichlet BC).
-    R_e_max : float
-        Beyond this R_e, the potential is clamped to 0 to prevent
-        CubicSpline extrapolation artifacts.
-
-    Returns
-    -------
-    E : float
-        Ground state energy eigenvalue (Ha).
-    F : ndarray
-        Radial wavefunction on evaluation grid.
-    R_eval : ndarray
-        Evaluation grid points.
-    """
-    V_safe = _safe_potential_wrapper(U_spline, R_e_max)
-    evals, F, R_eval = _solve_radial_spectral_l3(
-        V_safe, n_basis=n_basis, alpha=alpha, R_min=R_e_min, n_states=1,
-    )
-    return evals[0], F[0], R_eval
-
-
-def solve_coupled_channel_radial_spectral(
-    R: float,
-    R_e_grid: np.ndarray,
-    l_max: int = 2,
-    Z: float = 1.0,
-    n_alpha: int = 200,
-    m_max: int = 0,
-    n_coupled: int = 3,
-    l_max_per_m: Union[dict, None] = None,
-    R_e_min: float = 0.3,
-    Z_A: float = None,
-    Z_B: float = None,
-    z0: float = 0.0,
-    pk_potentials: Union[List[dict], None] = None,
-    n_basis: int = 25,
-    alpha: float = 1.0,
-) -> Tuple[float, np.ndarray]:
-    """Spectral Laguerre solver for the Level 4 diabatic coupled-channel equation.
-
-    Replaces the FD radial grid in solve_coupled_channel_radial with a
-    Laguerre basis. The diabatic potential V_ij(R_e) is projected from the
-    angular Hamiltonian onto a fixed basis at a reference R_e, then the
-    coupled radial equations are solved in the Laguerre basis.
-
-    Parameters
-    ----------
-    R : float
-        Internuclear distance (bohr).
-    R_e_grid : ndarray
-        R_e grid for angular sweeps (used to find reference point).
-    l_max, Z, n_alpha, m_max, n_coupled, l_max_per_m : as in solve_coupled_channel_radial.
-    R_e_min : float
-        Left Dirichlet boundary.
-    Z_A, Z_B : float or None
-        Per-nucleus charges.
-    z0 : float
-        Origin shift.
-    pk_potentials : list or None
-        Phillips-Kleinman specs.
-    n_basis : int
-        Number of Laguerre basis functions per channel.
-    alpha : float
-        Exponential decay parameter.
-
-    Returns
-    -------
-    E_elec : float
-        Electronic energy eigenvalue.
-    F : ndarray
-        Radial wavefunction (n_coupled * n_basis,).
-    """
-    # Step 1: Quick adiabatic sweep to find reference R_e
-    n_Re_ang = len(R_e_grid)
-    mu_vals = np.zeros(n_Re_ang)
-    for i, R_e in enumerate(R_e_grid):
-        rho = R / (2.0 * R_e)
-        evals, _, _, _ = solve_angular_multichannel(
-            rho, R_e, l_max, Z, n_alpha, m_max=m_max,
-            l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
-        )
-        mu_vals[i] = evals[0]
-
-    U_adia = (mu_vals + 15.0 / 8.0) / R_e_grid**2
-    i_ref = np.argmin(U_adia)
-    R_e_ref = R_e_grid[i_ref]
-
-    # Step 2: Get reference eigenvectors at R_e_ref
-    rho_ref = R / (2.0 * R_e_ref)
-    _, ref_vecs, _, _ = solve_angular_multichannel(
-        rho_ref, R_e_ref, l_max, Z, n_alpha,
-        n_eig=n_coupled, m_max=m_max, l_max_per_m=l_max_per_m,
-        Z_A=Z_A, Z_B=Z_B, z0=z0,
-    )
-
-    # Step 3: Build Laguerre basis and quadrature
-    N = n_basis
-    n_ch = n_coupled
-    two_alpha = 2.0 * alpha
-    n_quad = max(3 * N + 10, 80)
-    x_quad, w_quad = roots_laguerre(n_quad)
-    R_q = R_e_min + x_quad / two_alpha
-
-    # Evaluate Laguerre polynomials and derivative kernel
-    L_vals = np.zeros((N, n_quad))
-    for n in range(N):
-        L_vals[n] = eval_laguerre(n, x_quad)
-
-    dL_vals = np.zeros((N, n_quad))
-    for n in range(1, N):
-        dL_vals[n] = dL_vals[n - 1] - L_vals[n - 1]
-
-    B_vals = (1.0 - x_quad / 2.0)[np.newaxis, :] * L_vals + \
-             x_quad[np.newaxis, :] * dL_vals
-
-    inv_8a3 = 1.0 / (8.0 * alpha**3)
-    inv_4a = 1.0 / (4.0 * alpha)
-    x2_w = w_quad * x_quad**2
-
-    # Overlap block
-    x2_wL = x2_w[np.newaxis, :] * L_vals
-    S_block = inv_8a3 * (x2_wL @ L_vals.T)
-
-    # Kinetic block
-    wB = w_quad[np.newaxis, :] * B_vals
-    K_block = inv_4a * (wB @ B_vals.T)
-
-    # Step 4: Precompute alpha grid for angular Hamiltonian
-    h_alpha = (np.pi / 2) / (n_alpha + 1)
-    alpha_grid = (np.arange(n_alpha) + 1) * h_alpha
-
-    # Step 5: Compute diabatic potential at quadrature points and assemble
-    dim = n_ch * N
-    H_full = np.zeros((dim, dim))
-    S_full = np.zeros((dim, dim))
-
-    # For each channel pair, accumulate potential integrals over quadrature
-    V_diabatic_q = np.zeros((n_quad, n_ch, n_ch))
-    for k, R_e in enumerate(R_q):
-        if R_e <= 0:
-            continue
-        rho = R / (2.0 * R_e)
-        H_ang = build_angular_hamiltonian(
-            alpha_grid, rho, R_e, l_max, Z, m_max, l_max_per_m,
-            Z_A=Z_A, Z_B=Z_B, z0=z0,
-            pk_potentials=pk_potentials,
-        )
-        Hv = H_ang @ ref_vecs.T
-        V_proj = ref_vecs @ Hv
-
-        for ic in range(n_ch):
-            V_proj[ic, ic] = (V_proj[ic, ic] + 15.0 / 8.0) / R_e**2
-            for jc in range(n_ch):
-                if ic != jc:
-                    V_proj[ic, jc] /= R_e**2
-
-        V_diabatic_q[k] = V_proj
-
-    # Assemble block Hamiltonian
-    for ic in range(n_ch):
-        ms = ic * N
-        me = (ic + 1) * N
-
-        # Kinetic (same for all channels)
-        H_full[ms:me, ms:me] = K_block
-
-        # Overlap
-        S_full[ms:me, ms:me] = S_block
-
-        for jc in range(n_ch):
-            ns = jc * N
-            ne = (jc + 1) * N
-
-            # Potential: V_ij_nm = inv_8a3 * sum_k w_k x_k^2 V_ij(R_k) L_n L_m
-            V_q = V_diabatic_q[:, ic, jc]
-            x2_wVL = (x2_w * V_q)[np.newaxis, :] * L_vals
-            V_block = inv_8a3 * (x2_wVL @ L_vals.T)
-            H_full[ms:me, ns:ne] += V_block
-
-    # Step 6: Solve generalized eigenvalue problem
-    evals, evecs = eigh(H_full, S_full)
-    E_elec = evals[0]
-    F = evecs[:, 0]
-
-    return E_elec, F
-
-
-def solve_direct_2d_spectral(
-    R: float,
-    l_max: int = 2,
-    Z: float = 1.0,
-    n_alpha: int = 100,
-    n_basis: int = 25,
-    alpha_laguerre: float = 1.0,
-    R_e_min: float = 0.3,
-    m_max: int = 0,
-    l_max_per_m: Union[dict, None] = None,
-    verbose: bool = True,
-    Z_A: float = None,
-    Z_B: float = None,
-    z0: float = 0.0,
-    core_potentials: Union[List[dict], None] = None,
-    pk_potentials: Union[List[dict], None] = None,
-) -> float:
-    """Spectral Laguerre 2D solver: full (alpha, R_e) variational problem.
-
-    Replaces the FD R_e grid in solve_direct_2d with a Laguerre basis.
-    The Hamiltonian is:
-
-        H = T_Re ⊗ I_ang + [H_ang(R_e) + 15/8 I] / R_e²
-
-    where T_Re is represented in the Laguerre basis via overlap and kinetic
-    matrices, and the angular part is integrated over R_e by Gauss-Laguerre
-    quadrature.
-
-    Parameters
-    ----------
-    R : float
-        Internuclear distance (bohr).
-    l_max, Z, n_alpha : as in solve_direct_2d.
-    n_basis : int
-        Number of Laguerre basis functions for R_e.
-    alpha_laguerre : float
-        Exponential decay parameter for Laguerre basis.
-    R_e_min : float
-        Left Dirichlet boundary for R_e.
-    m_max, l_max_per_m, verbose : as in solve_direct_2d.
-    Z_A, Z_B, z0 : as in solve_direct_2d.
-    core_potentials, pk_potentials : as in solve_direct_2d.
-
-    Returns
-    -------
-    E_elec : float
-        Lowest electronic energy eigenvalue.
-    """
-    # Resolve charges
-    if Z_A is None:
-        Z_A = Z
-    if Z_B is None:
-        Z_B = Z
-    homonuclear = (Z_A == Z_B)
-
-    # Determine channels
-    if m_max == 0:
-        channels_2 = _channel_list(l_max, homonuclear=homonuclear)
-        channels_4 = [(l1, 0, l2, 0) for l1, l2 in channels_2]
-    else:
-        channels_4 = _channel_list_extended(
-            l_max, m_max, l_max_per_m, homonuclear=homonuclear,
-        )
-    n_ch = len(channels_4)
-
-    # Angular grid (same as FD 2D solver)
-    h_alpha = (np.pi / 2) / (n_alpha + 1)
-    alpha_grid = (np.arange(n_alpha) + 1) * h_alpha
-
-    N_ang = n_ch * n_alpha
-    N = n_basis
-    N_total = N * N_ang
-
-    if verbose:
-        print(f"  Spectral 2D solver: {N_total} x {N_total} dense matrix")
-        print(f"  ({N} Laguerre basis x {n_ch} channels x {n_alpha} alpha points)")
-
-    # Build Laguerre quadrature and basis
-    two_alpha = 2.0 * alpha_laguerre
-    n_quad = max(3 * N + 10, 80)
-    x_quad, w_quad = roots_laguerre(n_quad)
-    R_q = R_e_min + x_quad / two_alpha
-
-    L_vals = np.zeros((N, n_quad))
-    for n in range(N):
-        L_vals[n] = eval_laguerre(n, x_quad)
-
-    dL_vals = np.zeros((N, n_quad))
-    for n in range(1, N):
-        dL_vals[n] = dL_vals[n - 1] - L_vals[n - 1]
-
-    B_vals = (1.0 - x_quad / 2.0)[np.newaxis, :] * L_vals + \
-             x_quad[np.newaxis, :] * dL_vals
-
-    inv_8a3 = 1.0 / (8.0 * alpha_laguerre**3)
-    inv_4a = 1.0 / (4.0 * alpha_laguerre)
-    x2_w = w_quad * x_quad**2
-
-    # Overlap block (N x N): S_nm = inv_8a3 * sum_k w_k x_k^2 L_n L_m
-    x2_wL = x2_w[np.newaxis, :] * L_vals
-    S_Re = inv_8a3 * (x2_wL @ L_vals.T)
-
-    # Kinetic block (N x N): K_nm = inv_4a * sum_k w_k B_n B_m
-    wB = w_quad[np.newaxis, :] * B_vals
-    K_Re = inv_4a * (wB @ B_vals.T)
-
-    # Build full Hamiltonian and overlap using Kronecker products
-    # Index: n * N_ang + (ch * n_alpha + ia)
-    I_ang = np.eye(N_ang)
-
-    # Kinetic: K_Re ⊗ I_ang;  Overlap: S_Re ⊗ I_ang
-    H_full = np.kron(K_Re, I_ang)
-    S_full = np.kron(S_Re, I_ang)
-
-    # Angular potential via quadrature:
-    # V_nm^{ab} = inv_8a3 * sum_k w_k x_k^2 [H_ang(R_k)+15/8]_{ab}/R_k^2 * L_n(x_k) * L_m(x_k)
-    # Vectorized as: LLt_k = outer(L[:,k], L[:,k]) then kron(wt * LLt_k, H_ang_k)
-
-    for k in range(n_quad):
-        R_e = R_q[k]
-        if R_e <= 0:
-            continue
-        rho = R / (2.0 * R_e)
-
-        H_ang = build_angular_hamiltonian(
-            alpha_grid, rho, R_e, l_max, Z, m_max, l_max_per_m,
-            Z_A=Z_A, Z_B=Z_B, z0=z0,
-            core_potentials=core_potentials,
-            pk_potentials=pk_potentials,
-        )
-        np.fill_diagonal(H_ang, H_ang.diagonal() + 15.0 / 8.0)
-        H_ang *= (1.0 / R_e**2)
-
-        wt = inv_8a3 * x2_w[k]
-        L_k = L_vals[:, k]  # shape (N,)
-        LLt = np.outer(L_k, L_k)  # (N, N)
-        H_full += np.kron(wt * LLt, H_ang)
-
-    # Solve generalized eigenvalue problem
-    if verbose:
-        print(f"  Solving {N_total}x{N_total} generalized eigenvalue problem...")
-
-    evals, evecs = eigh(H_full, S_full)
-
-    # Find lowest physical eigenvalue
-    # Filter out numerical artifacts from ill-conditioned overlap
-    E_elec = evals[0]
-
-    # Estimate sigma for sanity check
-    if Z_A == Z_B:
-        E_atoms_est = -Z_A**2
-    else:
-        Z_max = max(Z_A, Z_B)
-        if Z_max == 2:
-            E_atoms_est = -2.9037
-        else:
-            E_atoms_est = -Z_max**2 + 5 * Z_max / 8
-    V_NN = Z_A * Z_B / R
-    sigma = E_atoms_est - V_NN - 0.15
-
-    if verbose:
-        print(f"  Lowest eigenvalues: {evals[:5]}")
-        print(f"  sigma = {sigma:.4f}")
-
-    return E_elec
-
-
 def solve_level4_h2_multichannel(
     R: float,
     l_max: int = 2,
@@ -2101,15 +1122,6 @@ def solve_level4_h2_multichannel(
     E_exact: float = None,
     D_e_exact: float = None,
     origin: str = 'midpoint',
-    core_potentials: Union[List[dict], None] = None,
-    pk_potentials: Union[List[dict], None] = None,
-    pk_projector: Union[dict, None] = None,
-    radial_method: str = 'fd',
-    n_basis_radial: int = 25,
-    alpha_radial: float = 1.0,
-    angular_method: str = 'fd',
-    n_basis_angular: int = 10,
-    n_quad_angular: int = 100,
 ) -> dict:
     """
     Full Level 4 multichannel solver for two-electron diatomics.
@@ -2150,22 +1162,6 @@ def solve_level4_h2_multichannel(
         'midpoint': geometric center (default, z0=0).
         'charge_center': charge-weighted center, z0 = R(Z_A-Z_B)/(2(Z_A+Z_B)).
         float: explicit z0 value.
-    radial_method : str
-        Radial solver method. 'fd' (default) uses finite differences on a
-        uniform grid. 'spectral' uses a Laguerre spectral basis, giving
-        100x+ dimension reduction with equivalent accuracy.
-    n_basis_radial : int
-        Number of Laguerre basis functions (spectral method only).
-    alpha_radial : float
-        Exponential decay parameter for Laguerre basis (spectral method only).
-    angular_method : str
-        Angular solver method. 'fd' (default) uses finite differences on a
-        uniform alpha grid. 'spectral' uses a Jacobi polynomial basis,
-        giving 30-250x speedup with < 1e-4 eigenvalue agreement.
-    n_basis_angular : int
-        Number of Jacobi basis functions per channel (spectral method only).
-    n_quad_angular : int
-        Gauss-Legendre quadrature order per sub-interval (spectral only).
 
     Returns
     -------
@@ -2222,18 +1218,8 @@ def solve_level4_h2_multichannel(
             print(f"  Origin shift: z0={z0:.4f} (R_A={R/2 - z0:.4f}, R_B={R/2 + z0:.4f})")
         if n_ch <= 15:
             print(f"  channels={channels}")
-        if angular_method == 'spectral':
-            ang_dim = n_ch * n_basis_angular
-            print(f"  angular_method=spectral (n_basis={n_basis_angular}), "
-                  f"matrix {ang_dim}x{ang_dim}")
-        else:
-            print(f"  angular_method=fd (n_alpha={n_alpha}), "
-                  f"matrix {n_ch * n_alpha}x{n_ch * n_alpha}")
-        if radial_method == 'spectral':
-            print(f"  radial_method=spectral "
-                  f"(n_basis={n_basis_radial}, alpha={alpha_radial})")
-        else:
-            print(f"  n_Re={n_Re}")
+        print(f"  n_alpha={n_alpha}, n_Re={n_Re}")
+        print(f"  Angular matrix size: {n_ch * n_alpha} x {n_ch * n_alpha}")
         if n_coupled > 1:
             print(f"  DBOC radial solver: {n_coupled} states")
         elif n_coupled == -1:
@@ -2241,26 +1227,11 @@ def solve_level4_h2_multichannel(
 
     if n_coupled == -1:
         # --- Direct 2D solver (properly variational) ---
-        if radial_method == 'spectral':
-            E_elec = solve_direct_2d_spectral(
-                R, l_max, Z, n_alpha,
-                n_basis=n_basis_radial,
-                alpha_laguerre=alpha_radial,
-                R_e_min=R_e_min,
-                m_max=m_max, l_max_per_m=l_max_per_m,
-                verbose=verbose,
-                Z_A=Z_A, Z_B=Z_B, z0=z0,
-                core_potentials=core_potentials,
-                pk_potentials=pk_potentials,
-            )
-        else:
-            E_elec = solve_direct_2d(
-                R, l_max, Z, n_alpha, n_Re, R_e_min, R_e_max,
-                m_max, l_max_per_m, verbose=verbose,
-                Z_A=Z_A, Z_B=Z_B, z0=z0,
-                core_potentials=core_potentials,
-                pk_potentials=pk_potentials,
-            )
+        E_elec = solve_direct_2d(
+            R, l_max, Z, n_alpha, n_Re, R_e_min, R_e_max,
+            m_max, l_max_per_m, verbose=verbose,
+            Z_A=Z_A, Z_B=Z_B, z0=z0,
+        )
         F = np.zeros(n_Re)  # no radial wavefunction in 2D mode
 
         t2 = time.time()
@@ -2287,28 +1258,20 @@ def solve_level4_h2_multichannel(
 
         U_spline = CubicSpline(R_e_angular, U_corrected,
                                extrapolate=True)
+        h_Re = (R_e_max - R_e_min) / (n_Re + 1)
+        R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
+        V_radial = U_spline(R_e_radial)
 
-        if radial_method == 'spectral':
-            E_elec, F, _ = solve_adiabatic_radial_spectral(
-                U_spline, n_basis=n_basis_radial,
-                alpha=alpha_radial, R_e_min=R_e_min,
-                R_e_max=R_e_max,
-            )
-        else:
-            h_Re = (R_e_max - R_e_min) / (n_Re + 1)
-            R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
-            V_radial = U_spline(R_e_radial)
+        diag = np.ones(n_Re) / h_Re**2 + V_radial
+        off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
 
-            diag = np.ones(n_Re) / h_Re**2 + V_radial
-            off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
+        evals, evecs = eigh_tridiagonal(
+            diag, off_diag,
+            select='i', select_range=(0, 0),
+        )
 
-            evals, evecs = eigh_tridiagonal(
-                diag, off_diag,
-                select='i', select_range=(0, 0),
-            )
-
-            E_elec = evals[0]
-            F = evecs[:, 0]
+        E_elec = evals[0]
+        F = evecs[:, 0]
 
         t2 = time.time()
         if verbose:
@@ -2320,25 +1283,10 @@ def solve_level4_h2_multichannel(
             print(f"  Computing adiabatic curve on "
                   f"{len(R_e_angular)} R_e points...")
 
-        if angular_method == 'spectral':
-            from geovac.level4_spectral_angular import (
-                compute_adiabatic_curve_spectral,
-            )
-            U_angular = compute_adiabatic_curve_spectral(
-                R, R_e_angular, l_max, Z, n_basis=n_basis_angular,
-                n_quad=n_quad_angular, m_max=m_max,
-                l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
-                core_potentials=core_potentials,
-                pk_potentials=pk_potentials,
-            )
-        else:
-            U_angular = compute_adiabatic_curve_mc(
-                R, R_e_angular, l_max, Z, n_alpha, m_max=m_max,
-                l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
-                core_potentials=core_potentials,
-                pk_potentials=pk_potentials,
-                pk_projector=pk_projector,
-            )
+        U_angular = compute_adiabatic_curve_mc(
+            R, R_e_angular, l_max, Z, n_alpha, m_max=m_max,
+            l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+        )
 
         t1 = time.time()
         if verbose:
@@ -2350,27 +1298,20 @@ def solve_level4_h2_multichannel(
         # Interpolate and solve radial equation
         U_spline = CubicSpline(R_e_angular, U_angular, extrapolate=True)
 
-        if radial_method == 'spectral':
-            E_elec, F, _ = solve_adiabatic_radial_spectral(
-                U_spline, n_basis=n_basis_radial,
-                alpha=alpha_radial, R_e_min=R_e_min,
-                R_e_max=R_e_max,
-            )
-        else:
-            h_Re = (R_e_max - R_e_min) / (n_Re + 1)
-            R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
-            V_radial = U_spline(R_e_radial)
+        h_Re = (R_e_max - R_e_min) / (n_Re + 1)
+        R_e_radial = R_e_min + (np.arange(n_Re) + 1) * h_Re
+        V_radial = U_spline(R_e_radial)
 
-            diag = np.ones(n_Re) / h_Re**2 + V_radial
-            off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
+        diag = np.ones(n_Re) / h_Re**2 + V_radial
+        off_diag = -0.5 * np.ones(n_Re - 1) / h_Re**2
 
-            evals, evecs = eigh_tridiagonal(
-                diag, off_diag,
-                select='i', select_range=(0, 0),
-            )
+        evals, evecs = eigh_tridiagonal(
+            diag, off_diag,
+            select='i', select_range=(0, 0),
+        )
 
-            E_elec = evals[0]
-            F = evecs[:, 0]
+        E_elec = evals[0]
+        F = evecs[:, 0]
 
         t2 = time.time()
         if verbose:
@@ -2455,164 +1396,11 @@ def solve_level4_h2_multichannel(
         'V_NN': V_NN,
         'z0': z0,
         'origin': origin,
-        'radial_method': radial_method,
-        'angular_method': angular_method,
     }
 
     if n_coupled == 1:
         result['U_adiabatic'] = U_angular
-    if radial_method == 'spectral':
-        result['n_basis_radial'] = n_basis_radial
-        result['alpha_radial'] = alpha_radial
-    else:
-        h_Re = (R_e_max - R_e_min) / (n_Re + 1)
-        result['R_e_grid_radial'] = R_e_min + (np.arange(n_Re) + 1) * h_Re
-
-    return result
-
-
-def solve_level4_lih(
-    R: float,
-    core_model: str = 'zeff',
-    l_max: int = 4,
-    m_max: int = 0,
-    n_alpha: int = 200,
-    n_Re: int = 400,
-    n_coupled: int = 1,
-    R_e_max: float = None,
-    verbose: bool = True,
-) -> dict:
-    """
-    Convenience wrapper for Level 4 LiH with locked Li 1s² core.
-
-    Solves two active electrons in hyperspherical coordinates with the
-    Li 1s² core locked.  Three core models control how the active
-    electrons see the screened Li nucleus:
-
-      'bare'     — Z_eff_A = 3 (no screening).  Diagnostic only.
-      'zeff'     — Z_eff_A = 1 (integer screening, Z - n_core).
-      'hartree'  — Z_eff_A = 1 + penetration correction from the
-                   analytical Core Hartree potential:
-                   V_H(r) = (2/r)[1 - (1 + Z_core r) exp(-2 Z_core r)]
-      'clementi' — Z_eff_A = 1.279 (Clementi-Raimondi), Z_eff_B = 1.0.
-
-    The 'hartree' model is mathematically equivalent to 'zeff' +
-    `penetration=True` in the LockedShellMolecule hyperspherical path.
-
-    Parameters
-    ----------
-    R : float
-        Internuclear distance (bohr).
-    core_model : str
-        'bare', 'zeff', or 'hartree'.
-    l_max : int
-        Maximum angular momentum per electron.
-    m_max : int
-        Maximum |m| per electron.
-    n_alpha : int
-        FD grid points for alpha.
-    n_Re : int
-        Grid points for radial equation.
-    n_coupled : int
-        Radial solver mode (1=adiabatic, -1=direct 2D).
-    R_e_max : float or None
-        Hyperradial boundary (auto-scaled if None).
-    verbose : bool
-        Print diagnostics.
-
-    Returns
-    -------
-    result : dict
-        Keys: E_total, D_e, E_elec, E_locked, V_NN, E_core_isolated,
-        V_cross_nuc, core_model, and all keys from solve_level4_h2_multichannel.
-    """
-    from .locked_shell import LockedShellMolecule
-
-    # Map core_model to LockedShellMolecule kwargs
-    hyper_kwargs: dict = {
-        'l_max': l_max,
-        'm_max': m_max,
-        'n_alpha': n_alpha,
-        'n_Re': n_Re,
-        'n_coupled': n_coupled,
-        'origin': 'charge_center',
-    }
-
-    if core_model == 'bare':
-        hyper_kwargs['zeff_mode'] = 'bare'
-        hyper_kwargs['penetration'] = False
-    elif core_model == 'hartree':
-        hyper_kwargs['zeff_mode'] = 'screened'
-        hyper_kwargs['penetration'] = True
-    elif core_model == 'clementi':
-        hyper_kwargs['zeff_mode'] = 'clementi'
-        hyper_kwargs['penetration'] = False
-    else:  # 'zeff' (default)
-        hyper_kwargs['zeff_mode'] = 'screened'
-        hyper_kwargs['penetration'] = False
-
-    if R_e_max is not None:
-        hyper_kwargs['R_e_max'] = R_e_max
-
-    hyper_kwargs['verbose'] = verbose
-
-    mol = LockedShellMolecule(
-        Z_A=3, Z_B=1,
-        nmax_A=3, nmax_B=3,
-        R=R,
-        n_electrons=4,
-        locked_config={0: [(1, 0)]},
-        active_method='hyperspherical',
-        hyperspherical_kwargs=hyper_kwargs,
-    )
-
-    eigvals, eigvecs = mol.solve()
-
-    E_total = eigvals[0]
-
-    # Dissociation limit: Li(1s²2s) + H(1s)
-    # Li ground state: E ≈ -7.478 Ha (exact nonrelativistic)
-    # H ground state: E = -0.500 Ha
-    # Total: -7.978 Ha
-    E_Li_exact = -7.478
-    E_H = -0.500
-    E_atoms = E_Li_exact + E_H
-    D_e = E_atoms - E_total
-    D_e_eV = D_e * 27.2114
-
-    # Experimental reference
-    D_e_expt_eV = 2.515
-    D_e_expt_Ha = D_e_expt_eV / 27.2114
-
-    if verbose:
-        print(f"\n  === LiH Level 4 Results (core_model='{core_model}') ===")
-        print(f"  R         = {R:.4f} bohr")
-        print(f"  E_total   = {E_total:.6f} Ha")
-        print(f"  E_atoms   = {E_atoms:.6f} Ha (Li + H)")
-        print(f"  D_e       = {D_e:.6f} Ha = {D_e_eV:.3f} eV")
-        print(f"  D_e(expt) = {D_e_expt_Ha:.6f} Ha = {D_e_expt_eV:.3f} eV")
-        if D_e > 0:
-            print(f"  D_e/expt  = {D_e / D_e_expt_Ha * 100:.1f}%")
-        else:
-            print(f"  ** UNBOUND **")
-
-    result = {
-        'E_total': E_total,
-        'D_e': D_e,
-        'D_e_eV': D_e_eV,
-        'E_atoms': E_atoms,
-        'E_locked': mol.E_locked,
-        'E_core_isolated': mol._E_core_isolated,
-        'V_cross_nuc': mol._V_cross_nuc,
-        'V_NN': mol.V_NN,
-        'E_elec': mol._E_elec,
-        'core_model': core_model,
-        'R': R,
-        'Z_eff_A': mol._Z_eff_A,
-        'Z_eff_B': mol._Z_eff_B,
-    }
-
-    if hasattr(mol, '_level4_result'):
-        result['level4'] = mol._level4_result
+    h_Re = (R_e_max - R_e_min) / (n_Re + 1)
+    result['R_e_grid_radial'] = R_e_min + (np.arange(n_Re) + 1) * h_Re
 
     return result

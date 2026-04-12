@@ -1,0 +1,533 @@
+{
+  "base_data": {
+    "hopf_casimir_sum (21/8)": "63/4",
+    "raw_w_sum": "47/16",
+    "hopf_only_sum": "49/8"
+  },
+  "targets": {
+    "K = 137.036064": "137.03606400000000000000000000000000000000000000000",
+    "K (pi*(B+F-Delta))": "pi*(pi**2/6 + 1679/40)",
+    "K/pi": "pi**2/6 + 1679/40",
+    "B + F": "pi**2/6 + 42",
+    "F = pi^2/6": "pi**2/6",
+    "B = 42": "42"
+  },
+  "results": {
+    "variant_a_uniform_fiber": {
+      "name": "variant_a_uniform_fiber",
+      "symbolic": "21*pi**2/4",
+      "numeric": 51.815423105719134,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.6218847681897873
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.621884769333441
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.18788403087247202
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.18720360595244978
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 30.5
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.23370055013616983
+        }
+      ]
+    },
+    "variant_b_L=2l+1": {
+      "name": "variant_b_L=2l+1",
+      "symbolic": "409/16",
+      "numeric": 25.5625,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.8134615133137507
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.8134615138779582
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.41397206238723167
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.41430774163050604
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 14.540136541143555
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.3913690476190476
+        }
+      ]
+    },
+    "variant_b_L=l(l+1)": {
+      "name": "variant_b_L=l(l+1)",
+      "symbolic": "131/4",
+      "numeric": 32.75,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.7610118165682284
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.7610118172910759
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.24919648090686894
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.24962654428945028
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 18.909612585719373
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.22023809523809523
+        }
+      ]
+    },
+    "variant_b_L=sqrt(l(l+1))": {
+      "name": "variant_b_L=sqrt(l(l+1))",
+      "symbolic": "97/16",
+      "numeric": 6.0625,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.9557598210059507
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.9557598211397602
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.8610153790991723
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.8610949900688486
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 2.6855580549900364
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.8556547619047619
+        }
+      ]
+    },
+    "variant_c_raw_w_sum_times_zetaS1": {
+      "name": "variant_c_raw_w_sum_times_zetaS1",
+      "symbolic": "47*pi**2/48",
+      "numeric": 9.66398764273333,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.9294785083528572
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.9294785085661577
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.7784502005912453
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.7785771052390272
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 4.875
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.769905056125397
+        }
+      ]
+    },
+    "variant_c_averaged_over_6_cells": {
+      "name": "variant_c_averaged_over_6_cells",
+      "symbolic": "47*pi**2/288",
+      "numeric": 1.6106646071222217,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.9882464180588095
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.9882464180943596
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.9630750334318742
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.9630961842065046
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 0.020833333333333332
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.9616508426875662
+        }
+      ]
+    },
+    "variant_c_hopf_weighted": {
+      "name": "variant_c_hopf_weighted",
+      "symbolic": "49*pi**2/24",
+      "numeric": 20.150442318890775,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.8529551876293617
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.852955188074116
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.5380450991051497
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.5383097087962695
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 11.25
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.5202275638359339
+        }
+      ]
+    },
+    "variant_d_asymptotic_series_sym": {
+      "name": "variant_d_asymptotic_series_sym",
+      "symbolic": "2119*pi/1680",
+      "numeric": 3.9625207339028403,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.9710841028395062
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.9710841029269658
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.909158030183397
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.9092100648420343
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 1.4089237457980444
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.9056542682404085
+        }
+      ]
+    },
+    "variant_d_I_regularized": {
+      "method": "Exact double-sum: I(1) = S(1) + 2 sum_k S(1+k^2), S(a) = sum_l (2l+1)/(a + l(l+1))^2",
+      "numeric_I_full_exact": "3.937469040540146458984847306181257",
+      "numeric_I_asymptotic_sum": "3.9625207339028404001799650768864682",
+      "numeric_I_residual (I_exact - I_asym)": "-0.025051693362693941195117770705211184",
+      "pslq_I_full": {
+        "{1, pi, pi^2, pi^3}": null,
+        "{1, pi, pi^2}": [
+          23890702,
+          -297943335,
+          194992169,
+          -41411136
+        ],
+        "{pi, pi^2}": null,
+        "{1, pi}": null,
+        "{1, pi, zeta3, log2}": null,
+        "{1, pi, pi^2, coth(pi)}": null
+      },
+      "pslq_I_residual": {
+        "{1, pi, pi^2, pi^3}": null,
+        "{1, pi, pi^2}": null,
+        "{pi, pi^2}": null,
+        "{1, pi}": null,
+        "{1, pi, zeta3, log2}": null,
+        "{1, pi, pi^2, coth(pi)}": null
+      },
+      "asymptotic_terms": [
+        {
+          "a_k": "1",
+          "t_exp": "-1",
+          "gamma_arg": "1/2",
+          "term_symbolic": "pi",
+          "term_numeric": 3.141592653589793
+        },
+        {
+          "a_k": "1/3",
+          "t_exp": "0",
+          "gamma_arg": "3/2",
+          "term_symbolic": "pi/6",
+          "term_numeric": 0.5235987755982989
+        },
+        {
+          "a_k": "1/15",
+          "t_exp": "1",
+          "gamma_arg": "5/2",
+          "term_symbolic": "pi/20",
+          "term_numeric": 0.15707963267948966
+        },
+        {
+          "a_k": "4/315",
+          "t_exp": "2",
+          "gamma_arg": "7/2",
+          "term_symbolic": "pi/42",
+          "term_numeric": 0.07479982508547127
+        },
+        {
+          "a_k": "1/315",
+          "t_exp": "3",
+          "gamma_arg": "9/2",
+          "term_symbolic": "pi/48",
+          "term_numeric": 0.06544984694978737
+        }
+      ],
+      "asymptotic_symbolic_sum": "2119*pi/1680",
+      "interpretation": "I(1) ~ 3.93747 (exact double sum, 30+ correct digits). I_asym (linear in pi, from S^2 Weyl + theta_S1 inversion) ~ 3.96252. Residual ~ -0.02506 does NOT PSLQ-identify with any simple basis {1, pi, pi^2, pi^3, zeta(3), log 2, coth(pi)}. No pi^2 term."
+    },
+    "variant_d_asymp_x_hopfcas": {
+      "name": "variant_d_asymp_x_hopfcas",
+      "symbolic": "6357*pi/320",
+      "numeric": 62.409701558969736,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.5445746197222233
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.5445746210997104
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.43076102461149757
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.4299414787379604
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 36.9405489963192
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.4859452752135652
+        }
+      ]
+    },
+    "variant_d_asymp_x_rawsum": {
+      "name": "variant_d_asymp_x_rawsum",
+      "symbolic": "99593*pi/26880",
+      "numeric": 11.639904655839594,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.9150595520910496
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.9150595523479619
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.7331517136637287
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.7333045654734757
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 6.076213503281755
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.7228594129562002
+        }
+      ]
+    },
+    "variant_d_numeric_products": {
+      "I_full * hopf_cas_sum (=63/4)": "62.015137388507306729",
+      "I_full * raw_w_sum": "11.566315306586680223",
+      "I_full alone": "3.937469040540146459"
+    },
+    "variant_e_resolvent_at_minus1": {
+      "name": "variant_e_resolvent_at_minus1",
+      "symbolic": "63*pi*coth(pi)/4",
+      "numeric": 49.665232495260305,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.637575459732554
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.6375754608287493
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.1385902697410676
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.13793808049271342
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 29.192840853750027
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.18250553560143587
+        }
+      ]
+    },
+    "variant_e_resolvent_pos_k": {
+      "name": "variant_e_resolvent_pos_k",
+      "symbolic": "-63/8 + 63*pi/(8*tanh(pi))",
+      "numeric": 16.957616247630153,
+      "comparisons": [
+        {
+          "target": "K = 137.036064",
+          "target_num": 137.036064,
+          "rel_err": 0.8762543541265885
+        },
+        {
+          "target": "K (pi*(B+F-Delta))",
+          "target_num": 137.03606441448153,
+          "rel_err": 0.8762543545008716
+        },
+        {
+          "target": "K/pi",
+          "target_num": 43.619934066848224,
+          "rel_err": 0.6112415891862114
+        },
+        {
+          "target": "B + F",
+          "target_num": 43.64493406684823,
+          "rel_err": 0.6114642716229739
+        },
+        {
+          "target": "F = pi^2/6",
+          "target_num": 1.6449340668482264,
+          "rel_err": 9.308994499774553
+        },
+        {
+          "target": "B = 42",
+          "target_num": 42.0,
+          "rel_err": 0.5962472321992821
+        }
+      ]
+    }
+  },
+  "near_misses": []
+}

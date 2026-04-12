@@ -1,0 +1,84 @@
+{
+  "system": "He",
+  "Z": 2,
+  "exact_energy": -2.903724,
+  "method": "Algebraic Casimir CI (Track DI Sprint 2)",
+  "description": "Two-electron FCI with analytical Slater integrals as functions of orbital exponent k. Three modes: (1) Self-consistent: k^2=-2E (Fock energy-shell). (2) Variational: minimize E(k). (3) Fixed k=Z. Off-diagonal one-body elements (k-Z)*<a|1/r|b> included for k!=Z.",
+  "results": [
+    {
+      "n_max": 1,
+      "n_spatial": 1,
+      "n_configs": 1,
+      "self_consistent": {
+        "k_star": 2.25,
+        "E_star": -2.53125,
+        "error_pct": 12.827459
+      },
+      "variational": {
+        "k_opt": 1.6875,
+        "E_opt": -2.84765625,
+        "error_pct": 1.930891
+      },
+      "fixed_kZ": {
+        "E": -2.75,
+        "error_pct": 5.294029
+      },
+      "polynomial_structure": {
+        "is_polynomial": true,
+        "max_residual": 2.220446049250313e-15
+      }
+    },
+    {
+      "n_max": 2,
+      "n_spatial": 5,
+      "n_configs": 7,
+      "self_consistent": {
+        "k_star": 2.3480889774,
+        "E_star": -2.7567609229,
+        "error_pct": 5.061193
+      },
+      "variational": {
+        "k_opt": 1.762531179,
+        "E_opt": -2.8570670348,
+        "error_pct": 1.606798
+      },
+      "fixed_kZ": {
+        "E": -2.8338855606,
+        "error_pct": 2.405134
+      },
+      "polynomial_structure": {
+        "is_polynomial": true,
+        "max_residual": 2.220446049250313e-15
+      }
+    },
+    {
+      "n_max": 3,
+      "n_spatial": 14,
+      "n_configs": 31,
+      "self_consistent": {
+        "k_star": 2.3562400376,
+        "E_star": -2.7759335574,
+        "error_pct": 4.400916
+      },
+      "variational": {
+        "k_opt": 1.7848243833,
+        "E_opt": -2.8601218003,
+        "error_pct": 1.501596
+      },
+      "fixed_kZ": {
+        "E": -2.8435284665,
+        "error_pct": 2.073046
+      },
+      "polynomial_structure": {
+        "is_polynomial": true,
+        "max_residual": 2.220446049250313e-15
+      }
+    }
+  ],
+  "findings": {
+    "self_consistency_vs_variational": "The self-consistency condition k^2=-2E (from Fock projection) gives WORSE energies than variational optimization or fixed k=Z. At n_max=1: SC gives k*=9/4 (E=-2.531 Ha, 12.8%%) vs variational k*=27/16 (E=-2.848 Ha, 1.9%%). The self-consistent energy is algebraically interesting (exact rational at n_max=1) but numerically inferior.",
+    "variational_optimized": "Variational optimization of k gives remarkably good energies. At n_max=2 (7 configs): 1.6%% error. At n_max=3 (31 configs): further improvement. Variational bound respected (E_var > E_exact at all n_max tested).",
+    "matrix_polynomial": "H(k) is confirmed as a matrix polynomial in k at all tested n_max (residual < 1e-8). The polynomial degree depends on whether off-diagonal h1 terms are included: with them, H(k) has a k*(k-Z) contribution making it still quadratic in k.",
+    "nmax1_exact": "At n_max=1 (1s^2 only): self-consistent k* = 9/4 (exact rational), E* = -81/32 (exact rational). Variational k* = 27/16, E* = -729/256."
+  }
+}

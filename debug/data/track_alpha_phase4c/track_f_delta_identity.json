@@ -1,0 +1,277 @@
+{
+  "track": "alpha-F",
+  "phase": "4C",
+  "goal": "Test whether Delta = 1/(B - N_init) is a structural identity",
+  "definitions": {
+    "lambda_abs_n": "n^2 - 1",
+    "N_m": "m(m+1)(2m+1)/6 (sum of squares 1..m)",
+    "B_m": "sum_{n=1}^{m} sum_{l=0}^{n-1} (2l+1)*l*(l+1)",
+    "B_m_closed_form": "m**5/10 + m**4/4 - m**2/4 - m/10",
+    "N_init": 2,
+    "Delta_paper2": "1/(|lambda_{n_max}| * N(n_max - 1))",
+    "Delta_candidate": "1/(B(n_max) - N_init)"
+  },
+  "subtask_1": {
+    "table": [
+      {
+        "m": 1,
+        "lambda_abs": 0,
+        "N_m_minus_1": 0,
+        "LHS": 0,
+        "B_m": 0,
+        "RHS": -2,
+        "LHS_minus_RHS": 2,
+        "Delta_paper2": "None",
+        "Delta_candidate": "-1/2",
+        "agree": false
+      },
+      {
+        "m": 2,
+        "lambda_abs": 3,
+        "N_m_minus_1": 1,
+        "LHS": 3,
+        "B_m": 6,
+        "RHS": 4,
+        "LHS_minus_RHS": -1,
+        "Delta_paper2": "1/3",
+        "Delta_candidate": "1/4",
+        "agree": false
+      },
+      {
+        "m": 3,
+        "lambda_abs": 8,
+        "N_m_minus_1": 5,
+        "LHS": 40,
+        "B_m": 42,
+        "RHS": 40,
+        "LHS_minus_RHS": 0,
+        "Delta_paper2": "1/40",
+        "Delta_candidate": "1/40",
+        "agree": true
+      },
+      {
+        "m": 4,
+        "lambda_abs": 15,
+        "N_m_minus_1": 14,
+        "LHS": 210,
+        "B_m": 162,
+        "RHS": 160,
+        "LHS_minus_RHS": 50,
+        "Delta_paper2": "1/210",
+        "Delta_candidate": "1/160",
+        "agree": false
+      },
+      {
+        "m": 5,
+        "lambda_abs": 24,
+        "N_m_minus_1": 30,
+        "LHS": 720,
+        "B_m": 462,
+        "RHS": 460,
+        "LHS_minus_RHS": 260,
+        "Delta_paper2": "1/720",
+        "Delta_candidate": "1/460",
+        "agree": false
+      },
+      {
+        "m": 6,
+        "lambda_abs": 35,
+        "N_m_minus_1": 55,
+        "LHS": 1925,
+        "B_m": 1092,
+        "RHS": 1090,
+        "LHS_minus_RHS": 835,
+        "Delta_paper2": "1/1925",
+        "Delta_candidate": "1/1090",
+        "agree": false
+      },
+      {
+        "m": 7,
+        "lambda_abs": 48,
+        "N_m_minus_1": 91,
+        "LHS": 4368,
+        "B_m": 2268,
+        "RHS": 2266,
+        "LHS_minus_RHS": 2102,
+        "Delta_paper2": "1/4368",
+        "Delta_candidate": "1/2266",
+        "agree": false
+      },
+      {
+        "m": 8,
+        "lambda_abs": 63,
+        "N_m_minus_1": 140,
+        "LHS": 8820,
+        "B_m": 4284,
+        "RHS": 4282,
+        "LHS_minus_RHS": 4538,
+        "Delta_paper2": "1/8820",
+        "Delta_candidate": "1/4282",
+        "agree": false
+      }
+    ],
+    "LHS_symbolic": "m**5/3 - m**4/2 - m**3/6 + m**2/2 - m/6",
+    "RHS_symbolic": "m**5/10 + m**4/4 - m**2/4 - m/10 - 2",
+    "LHS_minus_RHS_symbolic": "7*m**5/30 - 3*m**4/4 - m**3/6 + 3*m**2/4 - m/15 + 2",
+    "polynomial_identity_holds": false,
+    "coincidence_at_m_3": true
+  },
+  "subtask_2": {
+    "target": "1/40",
+    "manual_checks": [
+      {
+        "formula": "1/(B - N_init) = 1/40",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "kappa^2 * B",
+        "value": "21/128",
+        "equals_1/40": false
+      },
+      {
+        "formula": "|kappa|/B",
+        "value": "1/672",
+        "equals_1/40": false
+      },
+      {
+        "formula": "B * |kappa|^2",
+        "value": "21/128",
+        "equals_1/40": false
+      },
+      {
+        "formula": "1/(|lambda_3| * N(2)) [Paper 2]",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "N_init / (B * N(2))",
+        "value": "1/105",
+        "equals_1/40": false
+      },
+      {
+        "formula": "1/(d_max^2 * N(2))",
+        "value": "1/80",
+        "equals_1/40": false
+      },
+      {
+        "formula": "1/(8*5)",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "1/(2*20)",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "1/(4*10)",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "1/(d_max * 2 * N(2))",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "1/(|lambda_3| * (B - N_init)/|lambda_3|)",
+        "value": "1/40",
+        "equals_1/40": true
+      },
+      {
+        "formula": "|kappa| * (|lambda_3|/N(2))",
+        "value": "1/10",
+        "equals_1/40": false
+      },
+      {
+        "formula": "2*|kappa| * (|lambda_3|/N(2))",
+        "value": "1/5",
+        "equals_1/40": false
+      }
+    ],
+    "systematic_single_quantity": [
+      {
+        "form": "8/(1*N(2))",
+        "q_value": 5,
+        "equals_1/40": true
+      },
+      {
+        "form": "5/(1*|lambda_3|)",
+        "q_value": 8,
+        "equals_1/40": true
+      },
+      {
+        "form": "10/(2*|lambda_3|)",
+        "q_value": 8,
+        "equals_1/40": true
+      },
+      {
+        "form": "1/(1*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "2/(2*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "3/(3*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "4/(4*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "5/(5*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "6/(6*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "7/(7*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "8/(8*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "9/(9*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "10/(10*B-N_init)",
+        "q_value": 40,
+        "equals_1/40": true
+      },
+      {
+        "form": "10/(1*d_max)",
+        "q_value": 4,
+        "equals_1/40": true
+      },
+      {
+        "form": "10/(11*B+N_init)",
+        "q_value": 44,
+        "equals_1/40": true
+      }
+    ],
+    "two_quantity_products": [
+      "1/(N(2)*|lambda_3|) = 1/40",
+      "2/(N(2)*d_max) = 1/10",
+      "1/(|lambda_3|*N(2)) = 1/40",
+      "2/(d_max*N(2)) = 1/10"
+    ]
+  }
+}

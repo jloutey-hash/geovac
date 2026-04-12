@@ -25,7 +25,7 @@ if sys.platform == 'win32':
 # Add parent to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from geovac import GeometricLattice, AtomicSolver, UNIVERSAL_KINETIC_SCALE
+from geovac import GeometricLattice, HeliumHamiltonian, UNIVERSAL_KINETIC_SCALE
 from scipy.sparse.linalg import eigsh
 import time
 
@@ -49,10 +49,10 @@ def test_hydrogen_convergence():
         try:
             # Build Hamiltonian for H atom (Z=1)
             t_start = time.time()
-            solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+            h = HeliumHamiltonian(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
 
             # Get single-particle eigenvalue (H atom has 1 electron)
-            eigenvalues, wavefunctions = eigsh(solver.hamiltonian, k=1, which='SA')
+            eigenvalues, wavefunctions = eigsh(h.h1, k=1, which='SA')
             E = eigenvalues[0]
             t_elapsed = (time.time() - t_start) * 1000
 
@@ -143,11 +143,11 @@ def test_laplacian_eigenvalues():
     print("\n" + "-"*80)
 
     max_n = 20
-    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+    h = HeliumHamiltonian(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
 
     # Get lowest 10 eigenvalues
-    k_states = min(10, solver.lattice.num_states - 1)
-    eigenvalues, wavefunctions = eigsh(solver.hamiltonian, k=k_states, which='SA')
+    k_states = min(10, h.lattice.num_states - 1)
+    eigenvalues, wavefunctions = eigsh(h.h1, k=k_states, which='SA')
 
     # Expected (hydrogenic) eigenvalues
     expected = [-0.5 / n**2 for n in range(1, k_states+1)]
@@ -189,8 +189,8 @@ def test_kinetic_scale_optimization():
     results = []
 
     for scale in scales_to_test:
-        solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=scale)
-        eigenvalues, _ = eigsh(solver.hamiltonian, k=1, which='SA')
+        h = HeliumHamiltonian(max_n=max_n, Z=1, kinetic_scale=scale)
+        eigenvalues, _ = eigsh(h.h1, k=1, which='SA')
         E = eigenvalues[0]
         error = abs(E + 0.5)
 

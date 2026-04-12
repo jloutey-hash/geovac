@@ -1,0 +1,102 @@
+{
+  "z_orb_scan": [
+    {
+      "Z_orb": 1.0,
+      "E": -3.89115,
+      "err_pct": 51.79,
+      "N_pauli": 120,
+      "one_norm_ni": 4.43
+    },
+    {
+      "Z_orb": 1.5,
+      "E": -3.949786,
+      "err_pct": 51.06,
+      "N_pauli": 120,
+      "one_norm_ni": 5.78
+    },
+    {
+      "Z_orb": 2.0,
+      "E": -3.933332,
+      "err_pct": 51.26,
+      "N_pauli": 120,
+      "one_norm_ni": 9.0
+    },
+    {
+      "Z_orb": 2.5,
+      "E": -4.038318,
+      "err_pct": 49.96,
+      "N_pauli": 120,
+      "one_norm_ni": 14.73
+    },
+    {
+      "Z_orb": 3.0,
+      "E": -4.069205,
+      "err_pct": 49.58,
+      "N_pauli": 120,
+      "one_norm_ni": 21.43
+    },
+    {
+      "Z_orb": 3.5,
+      "E": -4.180219,
+      "err_pct": 48.2,
+      "N_pauli": 120,
+      "one_norm_ni": 28.97
+    },
+    {
+      "Z_orb": 4.0,
+      "E": -4.122074,
+      "err_pct": 48.92,
+      "N_pauli": 120,
+      "one_norm_ni": 37.31
+    }
+  ],
+  "center_position_scan": [
+    {
+      "frac": 0.0,
+      "d_A": 0.0,
+      "E": -7.15334,
+      "err_pct": 11.36
+    },
+    {
+      "frac": 0.02,
+      "d_A": 0.06,
+      "E": -6.907126,
+      "err_pct": 14.42
+    },
+    {
+      "frac": 0.05,
+      "d_A": 0.151,
+      "E": -6.031404,
+      "err_pct": 25.27
+    },
+    {
+      "frac": 0.1,
+      "d_A": 0.302,
+      "E": -4.828594,
+      "err_pct": 40.17
+    },
+    {
+      "frac": 0.15,
+      "d_A": 0.452,
+      "E": -4.322436,
+      "err_pct": 46.44
+    },
+    {
+      "frac": 0.2,
+      "d_A": 0.603,
+      "E": -4.150155,
+      "err_pct": 48.58
+    },
+    {
+      "frac": 0.25,
+      "d_A": 0.754,
+      "E": -4.069205,
+      "err_pct": 49.58
+    }
+  ],
+  "conclusion": "NEGATIVE: charge-center orbital placement catastrophically degrades core electron description",
+  "root_cause": "Hydrogenic 1s orbital (radius ~a0/Z=0.33 bohr) is catastrophically sensitive to center displacement; at max_n=2, no compensation from higher-n orbitals",
+  "best_twocenter_error": 48.2,
+  "sprint4_error": 11.4,
+  "all_gates": "FAIL"
+}

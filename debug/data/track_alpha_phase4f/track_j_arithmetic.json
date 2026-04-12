@@ -1,0 +1,661 @@
+{
+  "meta": {
+    "phase": "4F",
+    "track": "alpha-J",
+    "date": "2026-04-10",
+    "targets_symbolic": {
+      "F = pi^2/6": "pi**2/6",
+      "2F = pi^2/3": "pi**2/3",
+      "F/2 = pi^2/12": "pi**2/12",
+      "F - Delta": "-1/40 + pi**2/6",
+      "B + F": "pi**2/6 + 42",
+      "K/pi": "pi**2/6 + 1679/40",
+      "Delta = 1/40": "1/40",
+      "B = 42": "42",
+      "B - N_init = 40": "40"
+    },
+    "targets_numeric": {
+      "F = pi^2/6": 1.6449340668482264,
+      "2F = pi^2/3": 3.289868133696453,
+      "F/2 = pi^2/12": 0.8224670334241132,
+      "F - Delta": 1.6199340668482265,
+      "B + F": 43.64493406684823,
+      "K/pi": 43.619934066848224,
+      "Delta = 1/40": 0.025,
+      "B = 42": 42.0,
+      "B - N_init = 40": 40.0
+    }
+  },
+  "subtask_1": {
+    "epstein_table": [
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=1",
+        "s": 1,
+        "symbolic": "25/24",
+        "numeric": 1.0416666666666667
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=1",
+        "s": 2,
+        "symbolic": "155/576",
+        "numeric": 0.2690972222222222
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=2l+1",
+        "s": 1,
+        "symbolic": "59/24",
+        "numeric": 2.4583333333333335
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=2l+1",
+        "s": 2,
+        "symbolic": "337/576",
+        "numeric": 0.5850694444444444
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=n^2",
+        "s": 1,
+        "symbolic": "145/24",
+        "numeric": 6.041666666666667
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=n^2",
+        "s": 2,
+        "symbolic": "755/576",
+        "numeric": 1.3107638888888888
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=(2l+1)l(l+1)",
+        "s": 1,
+        "symbolic": "13/2",
+        "numeric": 6.5
+      },
+      {
+        "Q": "Q1=n^2-1",
+        "weight": "w=(2l+1)l(l+1)",
+        "s": 2,
+        "symbolic": "59/48",
+        "numeric": 1.2291666666666667
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=1",
+        "s": 1,
+        "symbolic": "7/6",
+        "numeric": 1.1666666666666667
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=1",
+        "s": 2,
+        "symbolic": "19/36",
+        "numeric": 0.5277777777777778
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=2l+1",
+        "s": 1,
+        "symbolic": "23/6",
+        "numeric": 3.8333333333333335
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=2l+1",
+        "s": 2,
+        "symbolic": "59/36",
+        "numeric": 1.6388888888888888
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=n^2",
+        "s": 1,
+        "symbolic": "8",
+        "numeric": 8.0
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=n^2",
+        "s": 2,
+        "symbolic": "7/2",
+        "numeric": 3.5
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=(2l+1)l(l+1)",
+        "s": 1,
+        "symbolic": "11",
+        "numeric": 11.0
+      },
+      {
+        "Q": "Q2=l(l+1)",
+        "weight": "w=(2l+1)l(l+1)",
+        "s": 2,
+        "symbolic": "23/6",
+        "numeric": 3.8333333333333335
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=1",
+        "s": 1,
+        "symbolic": "11/6",
+        "numeric": 1.8333333333333333
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=1",
+        "s": 2,
+        "symbolic": "251/216",
+        "numeric": 1.162037037037037
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=2l+1",
+        "s": 1,
+        "symbolic": "3",
+        "numeric": 3.0,
+        "HIT": "3"
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=2l+1",
+        "s": 2,
+        "symbolic": "49/36",
+        "numeric": 1.3611111111111112
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=n^2",
+        "s": 1,
+        "symbolic": "6",
+        "numeric": 6.0
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=n^2",
+        "s": 2,
+        "symbolic": "11/6",
+        "numeric": 1.8333333333333333
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=(2l+1)l(l+1)",
+        "s": 1,
+        "symbolic": "11/2",
+        "numeric": 5.5
+      },
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=(2l+1)l(l+1)",
+        "s": 2,
+        "symbolic": "59/72",
+        "numeric": 0.8194444444444444
+      }
+    ],
+    "rational_hits": [
+      {
+        "Q": "Q3=n^2",
+        "weight": "w=2l+1",
+        "s": 1,
+        "symbolic": "3",
+        "numeric": 3.0,
+        "HIT": "3"
+      }
+    ]
+  },
+  "subtask_2": {
+    "D_B_formula": "(1/2)*(zeta(s-4) - zeta(s-2))",
+    "D_B_at_6_symbolic": "pi**2*(15 - pi**2)/180",
+    "D_B_at_6_numeric": 0.28130541656854413,
+    "2_D_B_at_6_symbolic": "pi**2*(15 - pi**2)/90",
+    "2_D_B_at_6_numeric": 0.5626108331370883,
+    "F_numeric": 1.6449340668482264,
+    "2_D_B_6_minus_F_sym": "-pi**4/90",
+    "2_D_B_6_minus_F_num": -1.0823232337111381,
+    "D_B_reg_at_5_symbolic": "-zeta(3)/2 + EulerGamma/2",
+    "D_B_reg_at_5_numeric": -0.3124206191290307,
+    "D_B_residue_at_5": "1/2 (from zeta(1) pole)",
+    "table": [
+      {
+        "s": 4,
+        "symbolic": "-pi**2/12 - 1/4",
+        "numeric_real": -1.0724670334241133,
+        "2*D_B": -2.1449340668482266,
+        "4*D_B": -4.289868133696453,
+        "matches": []
+      },
+      {
+        "s": 5,
+        "symbolic": "zoo",
+        "numeric_real": NaN,
+        "2*D_B": NaN,
+        "4*D_B": NaN,
+        "matches": []
+      },
+      {
+        "s": 6,
+        "symbolic": "pi**2*(15 - pi**2)/180",
+        "numeric_real": 0.28130541656854413,
+        "2*D_B": 0.5626108331370883,
+        "4*D_B": 1.1252216662741765,
+        "matches": []
+      },
+      {
+        "s": 7,
+        "symbolic": "-zeta(5)/2 + zeta(3)/2",
+        "numeric_real": 0.08256457400811218,
+        "2*D_B": 0.16512914801622436,
+        "4*D_B": 0.3302582960324487,
+        "matches": []
+      },
+      {
+        "s": 8,
+        "symbolic": "-pi**6/1890 + pi**4/180",
+        "numeric_real": 0.03249008586334452,
+        "2*D_B": 0.06498017172668905,
+        "4*D_B": 0.1299603434533781,
+        "matches": []
+      },
+      {
+        "s": 9,
+        "symbolic": "-zeta(7)/2 + zeta(5)/2",
+        "numeric_real": 0.014289238880723549,
+        "2*D_B": 0.028578477761447098,
+        "4*D_B": 0.057156955522894196,
+        "matches": []
+      },
+      {
+        "s": 10,
+        "symbolic": "pi**6*(10 - pi**2)/18900",
+        "numeric_real": 0.0066328528932524,
+        "2*D_B": 0.0132657057865048,
+        "4*D_B": 0.0265314115730096,
+        "matches": []
+      },
+      {
+        "s": 11,
+        "symbolic": "-zeta(9)/2 + zeta(7)/2",
+        "numeric_real": 0.003170442277920306,
+        "2*D_B": 0.006340884555840612,
+        "4*D_B": 0.012681769111681224,
+        "matches": []
+      },
+      {
+        "s": 12,
+        "symbolic": "-pi**10/187110 + pi**8/18900",
+        "numeric_real": 0.001541390535063127,
+        "2*D_B": 0.003082781070126254,
+        "4*D_B": 0.006165562140252508,
+        "matches": []
+      }
+    ]
+  },
+  "subtask_3": {
+    "D_N_formula": "(1/6)*(2*zeta(s-3) + 3*zeta(s-2) + zeta(s-1))",
+    "D_N_table": [
+      {
+        "s": 4,
+        "symbolic": "zoo",
+        "numeric": null
+      },
+      {
+        "s": 5,
+        "symbolic": "pi**4/540 + pi**2/18 + zeta(3)/2",
+        "numeric": 1.3297270128143956
+      },
+      {
+        "s": 6,
+        "symbolic": "zeta(5)/6 + zeta(3)/3 + pi**4/180",
+        "numeric": 1.1146685437659956
+      },
+      {
+        "s": 7,
+        "symbolic": "pi**6/5670 + pi**4/270 + zeta(5)/2",
+        "numeric": 1.0487954658061391
+      },
+      {
+        "s": 8,
+        "symbolic": "zeta(7)/6 + zeta(5)/3 + pi**6/1890",
+        "numeric": 1.0223723289370017
+      },
+      {
+        "s": 10,
+        "symbolic": "zeta(9)/6 + zeta(7)/3 + pi**8/18900",
+        "numeric": 1.0051565026972935
+      }
+    ],
+    "D_n2_formula": "Sum_n n^2 * n^{-s} = zeta(s-2)",
+    "D_n2_table": [
+      {
+        "s": 3,
+        "symbolic": "pole",
+        "numeric": null,
+        "matches": []
+      },
+      {
+        "s": 4,
+        "symbolic": "pi**2/6",
+        "numeric": 1.6449340668482264,
+        "matches": [
+          "EXACT = F = pi^2/6"
+        ]
+      },
+      {
+        "s": 5,
+        "symbolic": "zeta(3)",
+        "numeric": 1.2020569031595942,
+        "matches": []
+      },
+      {
+        "s": 6,
+        "symbolic": "pi**4/90",
+        "numeric": 1.0823232337111381,
+        "matches": []
+      },
+      {
+        "s": 7,
+        "symbolic": "zeta(5)",
+        "numeric": 1.03692775514337,
+        "matches": []
+      },
+      {
+        "s": 8,
+        "symbolic": "pi**6/945",
+        "numeric": 1.0173430619844492,
+        "matches": []
+      },
+      {
+        "s": 10,
+        "symbolic": "pi**8/9450",
+        "numeric": 1.0040773561979444,
+        "matches": []
+      }
+    ],
+    "D_n2_at_4_symbolic": "pi**2/6",
+    "D_n2_at_4_exact": "pi^2/6 = F",
+    "s_equals_4_interpretations": {
+      "s = 4 = d_max": "Paper 0: d_max = 4 (packing axiom)",
+      "s = 4 = dim(S^3) + 1": "dim(S^3) = 3, +1 = 4",
+      "s = 4 = 2*N_init": "N_init = 2 (Paper 0), 2*2 = 4",
+      "s = 4 = dim(R^4) = ambient": "S^3 embeds in R^4",
+      "s = 4 = (n_max = 3) + 1": "one past shell cutoff",
+      "s = 4 = Casimir power": "(s-2) = 2 = eigenvalue index of zeta(2)"
+    },
+    "D_lambda_formula": "Sum (n^2-1) * n^{-s} = zeta(s-2) - zeta(s)",
+    "D_lambda_table": [
+      {
+        "s": 3,
+        "symbolic": "pole",
+        "numeric": null
+      },
+      {
+        "s": 4,
+        "symbolic": "pi**2*(15 - pi**2)/90",
+        "numeric": 0.5626108331370883
+      },
+      {
+        "s": 5,
+        "symbolic": "-zeta(5) + zeta(3)",
+        "numeric": 0.16512914801622436
+      },
+      {
+        "s": 6,
+        "symbolic": "-pi**6/945 + pi**4/90",
+        "numeric": 0.06498017172668905
+      },
+      {
+        "s": 7,
+        "symbolic": "-zeta(7) + zeta(5)",
+        "numeric": 0.028578477761447098
+      },
+      {
+        "s": 8,
+        "symbolic": "pi**6*(10 - pi**2)/9450",
+        "numeric": 0.0132657057865048
+      }
+    ],
+    "D_lmax_formula": "Sum (n-1) * n^{-s} = zeta(s-1) - zeta(s)",
+    "D_lmax_table": [
+      {
+        "s": 3,
+        "symbolic": "-zeta(3) + pi**2/6",
+        "numeric": 0.44287716368863217
+      },
+      {
+        "s": 4,
+        "symbolic": "-pi**4/90 + zeta(3)",
+        "numeric": 0.11973366944845609
+      },
+      {
+        "s": 5,
+        "symbolic": "-zeta(5) + pi**4/90",
+        "numeric": 0.045395478567768266
+      },
+      {
+        "s": 6,
+        "symbolic": "-pi**6/945 + zeta(5)",
+        "numeric": 0.019584693158920786
+      },
+      {
+        "s": 7,
+        "symbolic": "-zeta(7) + pi**6/945",
+        "numeric": 0.008993784602526313
+      }
+    ],
+    "all_exact_hits": [
+      {
+        "series": "D_n2",
+        "s": 4,
+        "mult": "",
+        "target": "F = pi^2/6",
+        "symbolic": "pi**2/6"
+      },
+      {
+        "series": "D_n2",
+        "s": 4,
+        "mult": "2*",
+        "target": "2F = pi^2/3",
+        "symbolic": "pi**2/3"
+      },
+      {
+        "series": "D_n2",
+        "s": 4,
+        "mult": "(1/2)*",
+        "target": "F/2 = pi^2/12",
+        "symbolic": "pi**2/12"
+      }
+    ]
+  },
+  "subtask_4": {
+    "ratio_1_formula": "D_B(s)/D_{n^2}(s) = (1/2)*(zeta(s-4)/zeta(s-2) - 1)",
+    "ratio_1_table": [
+      {
+        "s": 4,
+        "ratio": -0.6519817754635067,
+        "eq_to_3": false
+      },
+      {
+        "s": 5,
+        "error": "zeta(1) pole"
+      },
+      {
+        "s": 6,
+        "ratio": 0.2599088773175333,
+        "eq_to_3": false
+      },
+      {
+        "s": 7,
+        "ratio": 0.0796242299413582,
+        "eq_to_3": false
+      },
+      {
+        "s": 8,
+        "ratio": 0.03193621412227321,
+        "eq_to_3": false
+      },
+      {
+        "s": 10,
+        "ratio": 0.006605918211688877,
+        "eq_to_3": false
+      },
+      {
+        "s": 12,
+        "ratio": 0.0015398590295719883,
+        "eq_to_3": false
+      }
+    ],
+    "ratio_1_root_scan": [
+      {
+        "s": 4.5,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -8.088608558088179
+      },
+      {
+        "s": 5,
+        "error": "zeta(1) pole"
+      },
+      {
+        "s": 5.5,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -4.681461945484966
+      },
+      {
+        "s": 6,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.480182245364934
+      },
+      {
+        "s": 6.5,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.7280954733294545
+      },
+      {
+        "s": 7,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.840751540117283
+      },
+      {
+        "s": 7.5,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.900966802775248
+      },
+      {
+        "s": 8,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.936127571755454
+      },
+      {
+        "s": 9,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.971658156154335
+      },
+      {
+        "s": 10,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.986788163576622
+      },
+      {
+        "s": 15,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.999628570322838
+      },
+      {
+        "s": 20,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.999988535077621
+      },
+      {
+        "s": 30,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.999999988823779
+      },
+      {
+        "s": 50,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -5.999999999999989
+      },
+      {
+        "s": 100,
+        "f(s) = zeta(s-4)/zeta(s-2) - 7": -6.0
+      }
+    ],
+    "ratio_1_sign_changes": [],
+    "ratio_1_root_s_star": "no sign change in scan",
+    "ratio_2_table": [
+      {
+        "s": 4.5,
+        "ratio": -0.8100972215576071,
+        "eq_to_3": false
+      },
+      {
+        "s": 5,
+        "error": "zeta(1) pole"
+      },
+      {
+        "s": 5.5,
+        "ratio": 0.6261586557926749,
+        "eq_to_3": false
+      },
+      {
+        "s": 6,
+        "ratio": 0.252366874567153,
+        "eq_to_3": false
+      },
+      {
+        "s": 6.5,
+        "ratio": 0.13353509772019687,
+        "eq_to_3": false
+      },
+      {
+        "s": 7,
+        "ratio": 0.07872323698944507,
+        "eq_to_3": false
+      },
+      {
+        "s": 8,
+        "ratio": 0.031779113091925715,
+        "eq_to_3": false
+      },
+      {
+        "s": 10,
+        "ratio": 0.006598826029034751,
+        "eq_to_3": false
+      },
+      {
+        "s": 12,
+        "ratio": 0.001539467560567929,
+        "eq_to_3": false
+      }
+    ]
+  },
+  "subtask_5": {
+    "D_n2_4_trunc_nmax3_sym": "49/36",
+    "D_n2_4_trunc_nmax3_num": 1.3611111111111112,
+    "D_n2_4_tail_sym": "-49/36 + pi**2/6",
+    "D_n2_4_tail_num": 0.2838229557371153,
+    "D_n2_4_tail_vs_Delta": {
+      "tail": 0.2838229557371153,
+      "Delta": 0.025,
+      "ratio_tail_over_Delta": 11.352918229484612,
+      "Delta_over_tail": 0.08808307959119309
+    },
+    "D_B_6_trunc_nmax3_sym": "371/2592",
+    "D_B_6_trunc_nmax3_num": 0.1431327160493827,
+    "D_B_6_tail_sym": "-pi**4/180 - 371/2592 + pi**2/12",
+    "D_B_6_tail_num": 0.13817270051916142,
+    "D_B_6_tail_vs_Delta": {
+      "tail": 0.13817270051916142,
+      "Delta": 0.025,
+      "ratio_tail_over_Delta": 5.526908020766457,
+      "Delta_over_tail": 0.18093299114851613
+    },
+    "misc_ratios": {
+      "49/36_times_pi^2": 13.433628212593849,
+      "F_minus_49/36": 0.2838229557371153,
+      "F_div_49/36": 1.2085229878884929
+    },
+    "D_n2_4_tail_clean_checks": {
+      "tail_times_1": 0.2838229557371153,
+      "tail_times_2": 0.5676459114742306,
+      "tail_times_42": 11.920564140958843,
+      "tail_times_40": 11.352918229484612,
+      "Delta/tail": 0.08808307959119309,
+      "1/tail": 3.5233231836477237
+    },
+    "D_n2_4_trunc_nmax2_sym": "5/4",
+    "D_n2_4_tail_nmax2_num": 0.39493406684822646
+  }
+}

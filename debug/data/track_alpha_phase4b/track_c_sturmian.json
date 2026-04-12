@@ -1,0 +1,137 @@
+{
+  "subtask_1": {
+    "n=1,l=0": {
+      "k": "1",
+      "hydrogenic_norm_sq_check": "1",
+      "sturmian_norm_sq_nk": "1",
+      "expected_nk": "1",
+      "overlap_psi_sturmian": "1",
+      "ratio_R_nl (psi/sturmian at r=1)": "1"
+    },
+    "n=2,l=0": {
+      "k": "1/2",
+      "hydrogenic_norm_sq_check": "1",
+      "sturmian_norm_sq_nk": "4",
+      "expected_nk": "4",
+      "overlap_psi_sturmian": "2",
+      "ratio_R_nl (psi/sturmian at r=1)": "1/2"
+    },
+    "n=2,l=1": {
+      "k": "1/2",
+      "hydrogenic_norm_sq_check": "1",
+      "sturmian_norm_sq_nk": "4",
+      "expected_nk": "4",
+      "overlap_psi_sturmian": "2",
+      "ratio_R_nl (psi/sturmian at r=1)": "1/2"
+    },
+    "n=3,l=0": {
+      "k": "1/3",
+      "hydrogenic_norm_sq_check": "1",
+      "sturmian_norm_sq_nk": "9",
+      "expected_nk": "9",
+      "overlap_psi_sturmian": "3",
+      "ratio_R_nl (psi/sturmian at r=1)": "1/3"
+    },
+    "n=3,l=1": {
+      "k": "1/3",
+      "hydrogenic_norm_sq_check": "1",
+      "sturmian_norm_sq_nk": "9",
+      "expected_nk": "9",
+      "overlap_psi_sturmian": "3",
+      "ratio_R_nl (psi/sturmian at r=1)": "1/3"
+    },
+    "n=3,l=2": {
+      "k": "1/3",
+      "hydrogenic_norm_sq_check": "1",
+      "sturmian_norm_sq_nk": "9",
+      "expected_nk": "9",
+      "overlap_psi_sturmian": "3",
+      "ratio_R_nl (psi/sturmian at r=1)": "1/3"
+    },
+    "_matches_kappa_targets": [
+      [
+        "n=2,l=0",
+        "R_nl",
+        "1/2"
+      ],
+      [
+        "n=2,l=1",
+        "R_nl",
+        "1/2"
+      ]
+    ],
+    "_kappa_geovac": "-1/16"
+  },
+  "subtask_2": {
+    "norm_phi_1s": "4",
+    "inv_r_ground": "1",
+    "exp_r_ground": "3/2",
+    "Fock_weighted_ratio (p0 free)": "7/(16*p0**4)",
+    "Fock_weighted_ratio at p0=1": "7/16",
+    "conformal_factor_squared at p0=1": "4",
+    "kappa_target": "-1/16",
+    "any_match_to_kappa": false
+  },
+  "subtask_3": {
+    "B (sum of (2l+1) l(l+1), n=1..3)": 42,
+    "angular_sums_n1to3": {
+      "sum (2l+1)": 14,
+      "sum (2l+1) l": 16,
+      "sum (2l+1) l^2": 26,
+      "sum (2l+1) l(l+1)": 42,
+      "sum (2l+1) n^2": 98,
+      "sum (2l+1) (n^2 - 1)": 84,
+      "sum n^2 (from n=1..3)": 14
+    },
+    "sturmian_norm_sq (n^2 at k=1/n)": {
+      "n=1,l=0": 1,
+      "n=2,l=0": 4,
+      "n=2,l=1": 4,
+      "n=3,l=0": 9,
+      "n=3,l=1": 9,
+      "n=3,l=2": 9
+    },
+    "S3_volume": "2*pi^2",
+    "S2_volume": "4*pi",
+    "S1_volume": "2*pi",
+    "ratio_S3_to_S2": "pi/2",
+    "ratio_S1": "2*pi",
+    "fiber_avg_l(l+1)": 10,
+    "base_only_l(l+1)": 10,
+    "B_over_fiber_avg": 4.2,
+    "B_equals_pi_times_something": false,
+    "sturm_weighted_n^2_(2l+1)": 98,
+    "sturm_weighted_n^2_(2l+1)l(l+1)": 348,
+    "K/pi_numeric": 43.61993406684823
+  },
+  "key_identity": {
+    "formula": "sum_{n,l in 1..3 shell} (2l+1) * l(l+1) * <n,l|(p^2+p0^2)^{-2}|n,l>_{p0=1} = 6 * B * |kappa|",
+    "LHS_value": "252/16 = 63/4",
+    "RHS_value": "6 * 42 / 16 = 252/16 = 63/4",
+    "B": 42,
+    "kappa": "-1/16",
+    "n_cells": 6,
+    "factor_16_origin": "d_max^2 where d_max=4 is Paper 0 max angular degree; equivalently Omega(0)^4 for p0=1 with Omega = 2/p0",
+    "notes": "Fock projection weight w(p)=1/(p^2+p0^2)^2 has all <w> terms with denominators dividing 32 = 2*16. Factoring 1/16 out gives integer/half-integer numerators {7,10,6,10,17/2,11/2}. Hopf base weighting recovers 6B exactly."
+  },
+  "fock_weight_elements_at_p0_1": {
+    "n=1,l=0": "7/16",
+    "n=2,l=0": "5/8",
+    "n=2,l=1": "3/8",
+    "n=3,l=0": "5/8",
+    "n=3,l=1": "17/32",
+    "n=3,l=2": "11/32"
+  },
+  "hopf_sums_at_p0_1": {
+    "sum_w": "49/8",
+    "sum_16_w": "47",
+    "sum_2l1_16_w": "98 = sum (2l+1)*n^2",
+    "sum_2l1_l_l1_16_w": "252 = 6 * 42 = 6*B"
+  },
+  "verdicts": {
+    "subtask_1_kappa_in_sturmian_norm": "NO - Sturmian ratios are 1/n, not 1/16",
+    "subtask_2_kappa_in_Fock_weight": "YES - factor of 16 in denominator = d_max^2 = Omega(0)^4",
+    "subtask_3_K_from_Hopf_restriction": "PARTIAL - B=42 and |kappa|=1/16 linked by exact identity; F=pi^2/6 and Delta=1/40 not recovered",
+    "overall": "Positive result: first exact rational link between kappa and B in the Sturmian/Fock formalism."
+  }
+}

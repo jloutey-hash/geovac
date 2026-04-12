@@ -10,9 +10,6 @@ Date: March 2026
 
 import pytest
 import numpy as np
-
-pytestmark = pytest.mark.slow
-
 from geovac.hopf_bundle import (
     fock_chi, state_to_hopf_angles, state_to_s3, lattice_to_s3,
     hopf_project, fiber_angle, decompose_hopf,

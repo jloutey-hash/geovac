@@ -31,16 +31,13 @@ pytestmark = pytest.mark.filterwarnings("ignore::UserWarning")
 
 def _build_lih(R: float, nmax: int = 2, n_bridges: int = 10,
                fci_method: str = 'matrix',
-               cross_atom_vee: object = True,
-               zeta_A: float = 1.0,
-               zeta_B: float = 1.0) -> MolecularLatticeIndex:
+               cross_atom_vee: object = True) -> MolecularLatticeIndex:
     """Helper to build LiH at given R with small basis for test speed."""
     return MolecularLatticeIndex(
         Z_A=3, Z_B=1, nmax_A=nmax, nmax_B=nmax,
         R=R, n_electrons=4,
         n_bridges=n_bridges, vee_method='slater_full',
         fci_method=fci_method, cross_atom_vee=cross_atom_vee,
-        zeta_A=zeta_A, zeta_B=zeta_B,
     )
 
 
@@ -731,65 +728,3 @@ class TestCrossAtomVeeAllL:
             f"E(cross_vee=False) = {E_off[0]:.6f} at R=2.0"
         print(f"\n  R=2.0: E(all_l)={E_on[0]:.4f}, E(off)={E_off[0]:.4f}, "
               f"delta={E_on[0] - E_off[0]:.4f} Ha")
-
-
-class TestOrbitalExponentRelaxation:
-    """Tests for orbital exponent relaxation (v0.9.36)."""
-
-    def test_exponent_regression_zeta_one(self):
-        """zeta_B=1.0 gives identical energy to baseline (no regression).
-
-        The parametrization must not change the default code path.
-        """
-        mol_baseline = _build_lih(R=3.015, nmax=2)
-        E_baseline, _ = mol_baseline.compute_ground_state(n_states=1)
-
-        mol_zeta = _build_lih(R=3.015, nmax=2, zeta_B=1.0)
-        E_zeta, _ = mol_zeta.compute_ground_state(n_states=1)
-
-        diff = abs(E_zeta[0] - E_baseline[0])
-        assert diff < 1e-4, \
-            f"zeta_B=1.0 energy {E_zeta[0]:.6f} differs from baseline " \
-            f"{E_baseline[0]:.6f} by {diff:.2e} Ha (threshold 1e-4)"
-        print(f"\n  E(baseline)={E_baseline[0]:.6f}, E(zeta=1)={E_zeta[0]:.6f}, "
-              f"diff={diff:.2e} Ha")
-
-    def test_contraction_lowers_energy(self):
-        """At R=3.015, E(zeta_B=1.3) < E(zeta_B=1.0) — variational improvement.
-
-        Contracting the H orbital under Li's Coulomb field should lower the
-        total energy at equilibrium-like distances.
-        """
-        mol_fixed = _build_lih(R=3.015, nmax=2, zeta_B=1.0)
-        E_fixed, _ = mol_fixed.compute_ground_state(n_states=1)
-
-        mol_contracted = _build_lih(R=3.015, nmax=2, zeta_B=1.3)
-        E_contracted, _ = mol_contracted.compute_ground_state(n_states=1)
-
-        assert E_contracted[0] < E_fixed[0], \
-            f"E(zeta_B=1.3)={E_contracted[0]:.6f} should be < " \
-            f"E(zeta_B=1.0)={E_fixed[0]:.6f} at R=3.015"
-        print(f"\n  E(zeta=1.0)={E_fixed[0]:.6f}, E(zeta=1.3)={E_contracted[0]:.6f}, "
-              f"delta={E_contracted[0] - E_fixed[0]:.4f} Ha")
-
-    def test_free_atom_limit(self):
-        """At large R, optimal zeta_B approaches 1.0 (free H).
-
-        At R=20 the H atom is essentially free, so the optimal exponent
-        should be near 1.0.
-        """
-        from scipy.optimize import minimize_scalar
-
-        def energy_at_zeta(zeta_B: float) -> float:
-            mol = _build_lih(R=20.0, nmax=2, zeta_B=zeta_B)
-            E, _ = mol.compute_ground_state(n_states=1)
-            return E[0]
-
-        result = minimize_scalar(energy_at_zeta, bounds=(0.8, 2.0),
-                                 method='bounded')
-        zeta_opt = result.x
-
-        assert 0.95 <= zeta_opt <= 1.05, \
-            f"Optimal zeta_B at R=20 is {zeta_opt:.4f}, expected ~1.0 " \
-            f"(free atom limit)"
-        print(f"\n  R=20: zeta_B*={zeta_opt:.4f} (expected ~1.0)")

@@ -1,0 +1,820 @@
+\documentclass[twocolumn,prc,amsmath,amssymb,superscriptaddress]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red!60!black},
+  commentstyle=\color{green!50!black},
+  breaklines=true,
+  frame=single,
+  xleftmargin=1em,
+  xrightmargin=0.5em,
+}
+
+\begin{document}
+
+\title{Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{April 9, 2026}
+
+\begin{abstract}
+We present structurally sparse qubit Hamiltonians for the nuclear shell
+model, constructed by applying the GeoVac angular-sparsity framework to
+the harmonic oscillator (HO) single-particle basis with a Mayer--Jensen
+spin--orbit term. The HO shell closures $2, 8, 20, 40, 70, 112$ emerge
+directly from graph state counting, and the physical magic numbers
+$2, 8, 20, 28, 50, 82, 126$ are recovered with a spin--orbit strength
+$v_{ls}/\hbar\omega \approx 0.17$ and a Nilsson $\ell(\ell+1)$ correction
+$d_{\ell\ell}/\hbar\omega \approx 0.02$. We build the first two-species
+qubit encoding for the deuteron ($1p+1n$, $16$ qubits, $592$ non-identity
+Pauli terms, $1$-norm $\approx 227$~MeV) using the Minnesota
+nucleon--nucleon potential and Moshinsky--Talmi brackets, and extend the
+architecture to helium-4 ($2p+2n$, $16$ qubits, $712$ Pauli terms) with
+intra-species antisymmetrization and proton--proton Coulomb repulsion.
+Despite a Hilbert-space dimension $12.25\times$ larger than the deuteron,
+He-4 requires only $1.20\times$ more Pauli terms --- a direct consequence
+of the angular selection rules that carry through to multi-particle
+systems. A composed nuclear--electronic deuterium encoding ($26$ qubits)
+validates the multi-block architecture and quantifies the
+$\sim 10^{13}$ coefficient ratio between nuclear, electronic, and
+hyperfine scales. We state and apply the Fock projection rigidity
+theorem: the $S^3$ conformal projection that makes electronic Hamiltonians
+equivalent to a graph Laplacian is unique to the Coulomb potential and
+does \emph{not} extend to HO or Woods--Saxon systems. For nuclear
+Hamiltonians, the GeoVac contribution is therefore the angular machinery
+and qubit encoding, not the conformal projection. All nuclear physics
+inputs (Minnesota parameters, spin--orbit strength, $\hbar\omega$)
+follow the standard shell-model literature; the quantitative binding
+energies at $N_{\mathrm{shells}}=2$ are far from experiment and should
+be read as encoding-validation benchmarks, not as a nuclear-structure
+calculation.
+\end{abstract}
+
+\maketitle
+
+%% =====================================================================
+\section{Introduction}
+%% =====================================================================
+
+Nuclear quantum simulation is an active frontier in quantum
+computing~\cite{Roggero2020,Hagen2014,Romero2022}. Exact solvers
+(no-core shell model, NCSM~\cite{Navratil2000,BarrettNavratilVary2013})
+remain the gold standard for light nuclei $A \lesssim 16$, but scale
+factorially with the number of active nucleons, and their extension to
+medium-mass nuclei requires importance truncation or symmetry-adapted
+bases. On current and near-term quantum hardware, the practical
+bottleneck is the resource cost of the qubit Hamiltonian: the nuclear
+interaction is short-ranged and contains tensor and three-body
+components that produce dense Pauli representations in conventional
+encodings. Resource estimates for ab initio nuclear simulation using
+second-quantized Hamiltonians therefore sit at the edge of current
+hardware feasibility.
+
+The GeoVac framework~\cite{Paper14,Paper22} exploits angular-momentum
+selection rules to produce structurally sparse qubit Hamiltonians for
+molecular electronic structure, with Pauli counts that are orders of
+magnitude below Gaussian-basis baselines for the same system size. The
+angular selection rules, which are derived from Wigner $3j$ symbols and
+the Gaunt integral, are \emph{independent of the radial potential}:
+they depend only on the single-particle angular basis, not on whether
+the interaction is Coulombic, Yukawa, or nucleon--nucleon. This paper
+investigates whether that sparsity carries over to nuclear shell model
+Hamiltonians.
+
+We report three results. First, the harmonic oscillator shell closures
+and the Mayer--Jensen magic numbers are reproduced on the GeoVac
+$(n_r, \ell, m_\ell, \sigma)$ graph via an explicit spin--orbit term.
+Second, the deuteron and He-4 qubit Hamiltonians, built from the
+Minnesota NN potential using Moshinsky--Talmi brackets, exhibit Pauli
+counts that grow sub-linearly in the Hilbert-space dimension --- the
+deuteron has $16$ qubits and $592$ Pauli terms, while He-4 has the
+same $16$ qubits but only $712$ Pauli terms despite a $12.25\times$
+larger Hilbert space. Third, a composed nuclear--electronic encoding
+for deuterium demonstrates that the block architecture used for
+core--valence molecular systems extends to nucleon--electron systems,
+though the $10^{13}$ coefficient ratio between nuclear-scale and
+hyperfine terms makes a single-pass quantum simulation impractical
+without block partitioning.
+
+We also state the Fock projection rigidity theorem, which identifies
+the parts of the GeoVac framework that transfer to non-Coulomb systems
+(the angular machinery) and the parts that do not (the $S^3$ conformal
+projection). This delineation is the main conceptual contribution of
+the paper.
+
+The paper is organized as follows. Section~\ref{sec:shell} constructs
+the nuclear shell model on the GeoVac lattice. Section~\ref{sec:rigidity}
+states the Fock projection rigidity theorem. Sections~\ref{sec:deuteron}
+and~\ref{sec:he4} present the deuteron and He-4 qubit Hamiltonians.
+Section~\ref{sec:ne} presents the composed nuclear--electronic
+encoding. Sections~\ref{sec:discussion} and~\ref{sec:conclusion}
+conclude.
+
+%% =====================================================================
+\section{Nuclear Shell Model on the Hyperspherical Lattice}
+\label{sec:shell}
+%% =====================================================================
+
+\subsection{Harmonic oscillator basis and shell closures}
+
+The standard starting point for the nuclear shell model is the
+three-dimensional isotropic harmonic oscillator with single-particle
+energies
+\begin{equation}
+  E_N^{\mathrm{HO}} = \hbar\omega \left(N + \tfrac{3}{2}\right),
+  \qquad
+  N = 2 n_r + \ell,
+\label{eq:ho-energy}
+\end{equation}
+and degeneracy $(N+1)(N+2)$ per major shell including spin. Summing
+these degeneracies yields the HO shell closures
+\[
+  2, \; 8, \; 20, \; 40, \; 70, \; 112, \; \ldots
+\]
+These are the correct magic numbers of a pure 3D isotropic oscillator
+but disagree with the experimentally observed nuclear magic numbers
+above $N=20$.
+
+On the GeoVac lattice, each state $(n_r, \ell, m_\ell, \sigma)$ is a
+graph node with diagonal energy given by
+Eq.~\eqref{eq:ho-energy}. Because the HO shell spacing is uniform in
+$N$, the HO magic numbers are recovered by simple state counting at any
+choice of kinetic coupling; they do not depend on the graph off-diagonal
+structure. This is a numerical confirmation of the packing counting
+rule from Paper~0~\cite{Paper0} as applied to the HO shell degeneracies.
+
+\subsection{Spin--orbit term and the real magic numbers}
+
+Mayer and Jensen~\cite{Mayer1949,Jensen1949} recognized that the
+observed nuclear magic numbers $28, 50, 82, 126$ require an additional
+spin--orbit interaction whose sign is \emph{opposite} to the atomic
+case: the nuclear spin--orbit coupling lowers the $j = \ell + 1/2$
+sub-shell below $j = \ell - 1/2$. Adding the Nilsson $\ell(\ell+1)$
+term, which mimics the flattening of the Woods--Saxon mean field
+relative to the pure HO, one writes
+\begin{equation}
+  E(N,\ell,j) = \hbar\omega\left(N + \tfrac{3}{2}\right)
+  - v_{ls}\,\langle\boldsymbol{\ell}\cdot\mathbf{s}\rangle
+  - d_{\ell\ell}\,\ell(\ell+1),
+\label{eq:mayer-jensen}
+\end{equation}
+with $\langle \boldsymbol{\ell}\cdot\mathbf{s}\rangle = \ell/2$ for
+$j = \ell + 1/2$ and $-(\ell+1)/2$ for $j = \ell - 1/2$.
+
+A two-parameter scan over $(v_{ls}, d_{\ell\ell})$ identifies the range
+of parameters for which all seven physical magic numbers $2, 8, 20, 28,
+50, 82, 126$ are recovered simultaneously as gaps in the single-particle
+spectrum. With seven HO shells and the midpoint of the valid region we
+obtain
+\begin{equation}
+  \frac{v_{ls}}{\hbar\omega} \approx 0.171, \qquad
+  \frac{d_{\ell\ell}}{\hbar\omega} \approx 0.021 ,
+\label{eq:optimal}
+\end{equation}
+which is consistent with the Mayer--Jensen parameters tabulated in
+standard shell-model references~\cite{Suhonen2007,Talmi1993}. These
+are nuclear-physics inputs; the GeoVac framework contributes nothing
+to their determination. Table~\ref{tab:levels} gives the level
+ordering, with shell closures marked.
+
+\begin{table}[t]
+  \centering
+  \caption{Level ordering from Eq.~\eqref{eq:mayer-jensen} at
+    $v_{ls}/\hbar\omega = 0.171$, $d_{\ell\ell}/\hbar\omega = 0.021$.
+    Shell closures at the experimentally observed magic numbers are
+    marked with $\star$.}
+  \label{tab:levels}
+  \begin{ruledtabular}
+  \begin{tabular}{llr}
+    Shell & Levels (in order) & Cumul. \\
+    \hline
+    1 & $0s_{1/2}$ & $2^\star$ \\
+    2 & $0p_{3/2},\;0p_{1/2}$ & $8^\star$ \\
+    3 & $0d_{5/2},\;1s_{1/2},\;0d_{3/2}$ & $20^\star$ \\
+    4 & $0f_{7/2}$ & $28^\star$ \\
+    5 & $1p_{3/2},\;0f_{5/2},\;1p_{1/2},\;0g_{9/2}$ & $50^\star$ \\
+    6 & $1d_{5/2},\;0h_{11/2},\;2s_{1/2},\;0g_{7/2},\;1d_{3/2}$ & $82^\star$ \\
+    7 & $1f_{7/2},\;0i_{13/2},\;2p_{3/2},\;0h_{9/2},\;1f_{5/2},\;2p_{1/2}$
+      & $126^\star$ \\
+  \end{tabular}
+  \end{ruledtabular}
+\end{table}
+
+The spin--orbit operator is implemented directly in the
+$(m_\ell, m_s)$ basis via
+\[
+  \boldsymbol{\ell}\cdot\mathbf{s} = \ell_z s_z
+  + \tfrac{1}{2}(\ell_+ s_- + \ell_- s_+),
+\]
+producing an off-diagonal coupling between $(m_\ell, {\uparrow})$ and
+$(m_\ell + 1, {\downarrow})$ within each $(n_r, \ell)$ subspace. The
+two-body electron-repulsion-like integrals are unchanged because
+spin--orbit is a one-body operator. The net effect on single-particle
+Hamiltonian sparsity is a modest increase from pure diagonal to a
+block-tridiagonal structure within each $(n_r, \ell)$ submatrix; the
+overall qubit encoding cost is dominated by the two-body terms in all
+cases we consider.
+
+%% =====================================================================
+\section{The Fock Projection Rigidity Theorem}
+\label{sec:rigidity}
+%% =====================================================================
+
+The GeoVac framework for electronic structure uses a conformal
+projection, originally due to Fock~\cite{Fock1935}, that maps the
+bound-state spectrum of the hydrogen atom onto the free Laplacian on
+the three-sphere $S^3$. The projection is
+\[
+  p_0 = \sqrt{-2 E_n} = Z/n ,
+\]
+and it works because the hydrogen spectrum is $\ell$-degenerate within
+each principal quantum number $n$: all orbitals $(n,\ell,m)$ with the
+same $n$ have the same energy. The conformal projection then identifies
+the radial Schr\"odinger equation on $\mathbb{R}^3$ with the Laplace
+equation on $S^3$, and the graph Laplacian on the $(n,\ell,m)$ lattice
+converges to the continuous $S^3$ Laplacian in the asymptotic limit
+(Paper~7~\cite{Paper7}).
+
+For nuclear shell model Hamiltonians the projection fails, for reasons
+that are elementary but worth stating precisely. We summarize the
+result as
+
+\textbf{Theorem (Fock projection rigidity).}
+\emph{The $S^3$ Fock projection $p_0 = \sqrt{-2 E_n}$ maps a one-particle
+central-field Hamiltonian onto the free Laplacian on $S^3$ if and only
+if the spectrum $E_{n\ell}$ is independent of $\ell$ within each $n$.
+The Coulomb potential $-Z/r$ is the unique central potential exhibiting
+this accidental degeneracy, as a consequence of its hidden SO(4)
+symmetry (the Runge--Lenz vector). Any deformation
+$V(r) = -Z/r + \delta V(r)$ with $\delta V \not\equiv 0$ lifts the
+$\ell$-degeneracy, breaking the conformal equivalence between the
+radial Schr\"odinger problem and the $S^3$ graph Laplacian.}
+
+The proof is standard and amounts to observing that Fock's
+stereographic construction in momentum space requires the hydrogenic
+relation $E_n \propto -1/n^2$ with no $\ell$-dependence; this fails for
+any potential that does not have the SO(4) symmetry of the pure Coulomb
+problem~\cite{Bander1966}. The consequence for the GeoVac lattice is
+that the graph node weights, which depend only on $n$ in the Coulomb
+case, cannot absorb an $\ell$-dependent correction without reducing the
+graph Laplacian to the trivial diagonal of the corrected spectrum. In
+that regime the off-diagonal adjacency structure contributes nothing.
+
+The relevant central potentials for nuclear physics --- the 3D
+harmonic oscillator, the Woods--Saxon well, the square well, and the
+Yukawa potential --- all have $\ell$-dependent spectra. The 3D harmonic
+oscillator has its own accidental degeneracy (the SU(3) group of the
+isotropic oscillator groups states with common $N = 2n_r + \ell$),
+but the degeneracy pattern is different from Coulomb's SO(4), and no
+stereographic projection onto a compact manifold produces the graph
+Laplacian form that underlies the GeoVac electronic framework. The
+Bargmann--Segal transform~\cite{Bargmann1961} is the natural analogue
+for the HO, mapping the $L^2$ Hilbert space to a holomorphic
+reproducing-kernel space on $\mathbb{C}^3$; whether this can be
+discretized into a graph whose Laplacian converges to the HO
+Hamiltonian is an open question.
+
+\emph{Negative result, positive implication.} The rigidity theorem
+tells us what \emph{cannot} be carried over from Papers~7 and 11--15
+to the nuclear setting: the conformal projection, the claim that
+the $S^3$ graph Laplacian \emph{is} the quantum kinetic operator in
+some dual description, and the $-1/16$ kinetic constant. What
+\emph{can} be carried over is the angular machinery: the Wigner $3j$
+coupling coefficients, the Gaunt integral selection rules, the block
+structure of the two-body interaction tensor, and the O($Q^{2.5}$)
+Pauli scaling that follows~\cite{Paper22}. For nuclear shell models,
+we use the angular machinery to assemble the qubit Hamiltonian and use
+explicit radial matrix elements (Slater-like integrals computed from
+HO wavefunctions) for the radial part of the two-body interaction. The
+radial part is no longer related to the graph; it is a precomputed
+numerical table.
+
+%% =====================================================================
+\section{The Deuteron: First Nuclear Qubit Hamiltonian}
+\label{sec:deuteron}
+%% =====================================================================
+
+\subsection{System and interaction}
+
+The deuteron is a bound state of one proton and one neutron in the
+$^3S_1$ channel, with experimental binding energy $2.2246$ MeV and an
+rms charge radius of $\sim 2.1$ fm. The large radius is a consequence
+of the small binding; the deuteron wavefunction extends well beyond
+the range of the nuclear force, and accurate binding-energy
+calculations require oscillator bases with many major shells. We use
+the Minnesota potential~\cite{Thompson1977}, a phenomenological
+soft-core central interaction composed of three Gaussian terms:
+\begin{equation}
+  V_{\mathrm{NN}}(r) = \sum_{i=1}^{3} V_i \, e^{-\kappa_i r^2}
+  \left[\tfrac{1}{2}(u + (2 - u) P^\sigma)\right],
+\label{eq:minnesota}
+\end{equation}
+with $(V_R, V_S, V_T) = (200, -178, -91.4)$ MeV and the standard
+$u$ and range parameters of Ref.~\cite{Thompson1977}. The operator
+$P^\sigma$ is the spin exchange. The two-body matrix elements in the
+HO basis are computed by transforming the antisymmetrized
+two-nucleon wavefunction to relative and center-of-mass coordinates
+using Moshinsky--Talmi brackets~\cite{Moshinsky1959,Talmi1952}.
+
+\subsection{Two-species qubit encoding}
+
+Protons and neutrons are distinct fermion species for the purposes of
+antisymmetrization: Pauli exclusion applies within each species but
+not between them. We therefore allocate two separate Jordan--Wigner
+registers, one of size $Q_p$ for the proton orbitals and one of size
+$Q_n$ for the neutron orbitals, and combine them by tensor product.
+At $N_{\mathrm{shells}} = 2$ (major shells $N=0$ and $N=1$) each
+species has
+\[
+  Q_p = Q_n =
+  \underbrace{2}_{0s_{1/2}} + \underbrace{6}_{0p} = 8,
+\]
+giving a total $Q = 16$ qubits. The single-particle states are labeled
+in the uncoupled $(n_r, \ell, m_\ell, m_s)$ basis; the coupling to
+$j$-scheme is performed implicitly via the Minnesota matrix elements.
+
+The one-body Hamiltonian is
+\[
+  h_1 = \hbar\omega (2 n_r + \ell + \tfrac{3}{2}) \, \delta_{ij},
+\]
+diagonal in the HO basis. The two-body Hamiltonian is
+\[
+  \hat V_{\mathrm{pn}} = \sum_{ijkl} V_{ijkl}
+  \, a^\dagger_{p,i} a^\dagger_{n,j} a_{n,l} a_{p,k},
+\]
+where $V_{ijkl}$ is computed from Eq.~\eqref{eq:minnesota} via
+Moshinsky--Talmi brackets. Because protons and neutrons are on
+different registers, each term factorizes as
+\[
+  a^\dagger_{p,i} a_{p,k} \otimes a^\dagger_{n,j} a_{n,l},
+\]
+yielding a tensor-product Pauli string that has support on both
+registers.
+
+\subsection{Resource counts}
+
+Table~\ref{tab:deuteron} summarizes the qubit Hamiltonian at
+$N_{\mathrm{shells}}=2$, $\hbar\omega = 10$ MeV. The non-identity Pauli
+term count is $592$, with a $1$-norm of $\approx 227$ MeV dominated by
+the HO diagonal and the Minnesota spin-triplet contribution. Of the
+$592$ terms, $80$ are $Z$-only (number-operator products) and the
+remaining $512$ carry at least one $X$ or $Y$, reflecting the
+off-diagonal angular couplings generated by the Minnesota operator.
+
+\begin{table}[t]
+  \centering
+  \caption{Deuteron qubit Hamiltonian at $N_{\mathrm{shells}}=2$,
+    $\hbar\omega = 10$ MeV. ``Non-$I$'' denotes the non-identity Pauli
+    terms. Hilbert-space dimension is
+    $\binom{Q_p}{1}\binom{Q_n}{1} = 64$.}
+  \label{tab:deuteron}
+  \begin{ruledtabular}
+  \begin{tabular}{lr}
+    Quantity & Value \\
+    \hline
+    $N_{\mathrm{shells}}$ & 2 \\
+    Qubits $Q = Q_p + Q_n$ & $8 + 8 = 16$ \\
+    Non-$I$ Pauli terms & $592$ \\
+    $Z$-only terms & $80$ \\
+    $XY$-containing terms & $512$ \\
+    $1$-norm (non-$I$) & $\approx 227.3$ MeV \\
+    Hilbert dim. ($1p+1n$) & $64$ \\
+  \end{tabular}
+  \end{ruledtabular}
+\end{table}
+
+\subsection{Binding energy at $N_{\mathrm{shells}}=2$}
+
+Diagonalizing the $(Q_p = 8)\times(Q_n = 8) = 64$-dimensional FCI
+matrix at $\hbar\omega = 10$ MeV and subtracting the HO zero-point
+energy gives a bound-state energy that is far from the experimental
+$-2.2246$ MeV. This is expected: the deuteron's rms radius of
+$\sim 2.1$ fm is comparable to the HO length at $\hbar\omega = 10$
+MeV, so $N_{\mathrm{shells}}=2$ has insufficient radial flexibility to
+describe the long tail of the wavefunction. Converged Minnesota
+calculations require $N_{\mathrm{shells}} \gtrsim 6$--$8$. We therefore
+emphasize that the results in Table~\ref{tab:deuteron} are
+\emph{encoding-validation} benchmarks, not nuclear-structure
+predictions. The Pauli count and $1$-norm characterize the cost of
+the qubit Hamiltonian, and the FCI diagonalization verifies that the
+Pauli encoding reproduces the matrix representation.
+
+%% =====================================================================
+\section{Helium-4: Antisymmetrization Within Species}
+\label{sec:he4}
+%% =====================================================================
+
+We extend the deuteron encoding to He-4, a doubly magic nucleus with
+two protons and two neutrons, experimental binding energy $28.296$
+MeV. The architecture is the same as for the deuteron, with two
+changes:
+
+\begin{enumerate}
+  \item Intra-species antisymmetrization: protons fill a $2$-particle
+    Slater determinant on the proton register, neutrons fill a
+    $2$-particle Slater determinant on the neutron register. The
+    resulting two-body terms include $pp$ and $nn$ antisymmetrized
+    matrix elements in addition to the $pn$ cross-species terms.
+  \item Coulomb repulsion between the two protons, added as a
+    conventional two-body Coulomb matrix element in the HO basis
+    (approximately $0.7$ MeV for the ground state).
+\end{enumerate}
+
+Both changes leave the number of qubits unchanged ($Q = 16$) because
+adding particles does not add spin orbitals; they only increase the
+Hilbert-space dimension. At $N_{\mathrm{shells}}=2$ the $pp$ pair
+occupies a $2$-particle subspace of dimension $\binom{8}{2} = 28$, and
+similarly for $nn$, so the full He-4 Hilbert space has dimension
+$28 \times 28 = 784$.
+
+Table~\ref{tab:he4} compares He-4 to the deuteron. The key observation
+is that the Pauli count grows by only $20\%$ ($592 \rightarrow 712$)
+even though the Hilbert-space dimension grows by a factor of
+$784/64 = 12.25$. The angular selection rules responsible for the
+deuteron sparsity carry over to the antisymmetrized pairs without
+introducing new classes of terms; only the $pp$ and $nn$ blocks are
+added, and those blocks share the same angular structure as the $pn$
+block. The Coulomb correction is a small additional contribution that
+does not add any new Pauli terms (it modifies only the existing $pp$
+coefficients).
+
+\begin{table}[t]
+  \centering
+  \caption{Comparison of deuteron and He-4 qubit Hamiltonians at
+    $N_{\mathrm{shells}}=2$. Both systems use $16$ qubits; the
+    difference is the Hilbert-space dimension and the number of
+    particles. Pauli counts refer to non-identity terms.}
+  \label{tab:he4}
+  \begin{ruledtabular}
+  \begin{tabular}{lrrr}
+    System & $Q$ & Pauli & Hilbert dim. \\
+    \hline
+    Deuteron ($1p+1n$)       & 16 & 592 & 64 \\
+    He-4 ($2p+2n$, no Coulomb) & 16 & 712 & 784 \\
+    He-4 ($2p+2n$, + Coulomb)  & 16 & 712 & 784 \\
+  \end{tabular}
+  \end{ruledtabular}
+\end{table}
+
+The $1$-norm of the He-4 Hamiltonian at $\hbar\omega = 10$ MeV is
+$\approx 557$ MeV (without Coulomb) and $\approx 552$ MeV (with
+Coulomb), reflecting the dominance of the HO diagonal piece. The
+ground-state energy from FCI diagonalization is far from the
+experimental $-28.296$ MeV at $N_{\mathrm{shells}}=2$, for the same
+reason as in the deuteron: the HO basis is too small to describe the
+$\alpha$-particle charge distribution. Converged Minnesota
+calculations of He-4 require $N_{\mathrm{shells}} \gtrsim 6$. As with
+the deuteron, we emphasize that Table~\ref{tab:he4} is an
+encoding-validation benchmark. The physical result of interest is the
+sub-linear Pauli scaling, which is a direct consequence of the
+angular-sparsity theorem of Paper~22~\cite{Paper22} and confirms that
+the theorem applies to multi-particle systems beyond the single-nucleon
+case.
+
+%% =====================================================================
+\section{Composed Nuclear--Electronic Deuterium}
+\label{sec:ne}
+%% =====================================================================
+
+The composed architecture used for core--valence molecular electronic
+structure~\cite{Paper14,Paper17} extends naturally to the
+nuclear--electronic case: the nuclear block is the deuteron
+Hamiltonian from Sec.~\ref{sec:deuteron}, the electronic block is a
+single-electron hydrogen Hamiltonian on the $(n, \ell, m)$ lattice at
+$n_{\max}=2$, and the coupling between them is given by two
+one-body-like operators.
+
+\subsection{Blocks and couplings}
+
+\textbf{Nuclear block (Block A).} One proton and one neutron in the
+HO basis at $N_{\mathrm{shells}}=2$, $16$ qubits, as described in
+Sec.~\ref{sec:deuteron}. Energy scale $\sim 10^1$--$10^2$ MeV after
+conversion to atomic units.
+
+\textbf{Electronic block (Block B).} A single electron in the
+hydrogenic $1s$--$2p$ manifold (Coulomb potential $-1/r$), $Q_e = 10$
+qubits (5 spatial orbitals $\times$ 2 spins: $1s$, $2s$, $2p_{-1}$,
+$2p_0$, $2p_{+1}$). The ground state is the exact hydrogenic $1s$ at
+$-0.5$ Ha.
+
+\textbf{Finite-size coupling.} A one-body operator on the electronic
+register shifts the $1s$ energy by the finite nuclear-size correction
+$\Delta E_{1s} = (2/5) Z^4 R_{\mathrm{nuc}}^2 / n^3$
+\cite{Foldy1958,Friar1979}. At the proton charge radius
+$R_{\mathrm{nuc}} = 0.8414$ fm, the shift is
+$\Delta E \approx 1.01 \times 10^{-10}$ Ha, far below the subtraction
+precision of float$64$ arithmetic when combined with the nuclear-scale
+terms. The shift is reported analytically rather than by numerical
+subtraction.
+
+\textbf{Hyperfine coupling.} The proton spin $\mathbf{I}$ couples to
+the electron spin $\mathbf{S}$ via
+$H_{\mathrm{hf}} = A_{\mathrm{hf}} \, \mathbf{I}\cdot\mathbf{S}$, where
+the hyperfine constant for the hydrogen $21$-cm transition is
+$A_{\mathrm{hf}} = 1420.4$ MHz $\approx 2.16 \times 10^{-7}$ Ha. The
+singlet--triplet gap is $A_{\mathrm{hf}}$, and the maximum shift of
+any single ground-state manifold member is $3 A_{\mathrm{hf}}/4
+\approx 1.62 \times 10^{-7}$ Ha.
+
+The composed Hamiltonian is
+\begin{equation}
+  H = H_{\mathrm{nuc}} \otimes I_{e}
+    + I_{\mathrm{nuc}} \otimes H_{e}
+    + V_{\mathrm{fs}} + H_{\mathrm{hf}},
+\label{eq:composed-ne}
+\end{equation}
+with $V_{\mathrm{fs}}$ the finite-size shift on the electronic register
+and $H_{\mathrm{hf}}$ the cross-register hyperfine operator.
+
+\subsection{Resource counts and coefficient hierarchy}
+
+The composed Hamiltonian uses $Q = 16 + 10 = 26$ qubits. The Pauli
+count on the full register is $614$ non-identity terms, of which
+$592$ come from the nuclear block, $10$ from the electronic block
+diagonal (one $Z$ per spin-orbital plus the absorbed finite-size
+shift), and $12$ from the cross-register hyperfine operator. The
+finite-size shift is absorbed into the diagonal electronic terms and
+does not add new Pauli strings.
+
+The coefficient hierarchy spans $\sim 13$ orders of magnitude
+(Table~\ref{tab:ne-scales}): the nuclear diagonal dominates at
+$\sim 3 \times 10^5$ Ha (after conversion from MeV to
+Ha via $1$ Ha $\approx 27.2$ eV), the electronic binding is $\sim 0.5$ Ha,
+the hyperfine coefficient is $\sim 10^{-8}$ Ha per Pauli string (the
+$A_{\mathrm{hf}}/16$ from the $\mathbf{I}\cdot\mathbf{S}$ decomposition),
+and the finite-size shift is $\sim 10^{-10}$ Ha but does not appear in
+the Pauli list because it is below the float$64$ subtraction floor
+relative to the nuclear-scale diagonal.
+
+\begin{table}[t]
+  \centering
+  \caption{Coefficient hierarchy in the composed nuclear--electronic
+    deuterium Hamiltonian (atomic units).}
+  \label{tab:ne-scales}
+  \begin{ruledtabular}
+  \begin{tabular}{lc}
+    Contribution & Scale (Ha) \\
+    \hline
+    Max Pauli coeff (nuclear)    & $\sim 3 \times 10^{5}$ \\
+    Electronic binding scale     & $\sim 10^{-1}$ \\
+    Hyperfine coeff (per Pauli)  & $\sim 10^{-8}$ \\
+    Finite-size shift (analytic) & $\sim 10^{-10}$ \\
+    \hline
+    Pauli coeff ratio max/min    & $\sim 2 \times 10^{13}$ \\
+  \end{tabular}
+  \end{ruledtabular}
+\end{table}
+
+\subsection{Multi-scale precision problem}
+
+The $\sim 10^{13}$ coefficient ratio is the central obstacle to
+running Eq.~\eqref{eq:composed-ne} as a single-pass quantum simulation
+on near-term hardware. To resolve a hyperfine shift of $10^{-7}$ Ha
+against a diagonal that contains $10^5$ Ha entries requires an
+effective energy precision of $\sim 10^{-12}$ in relative terms,
+which is well beyond the scope of VQE or QPE at current shot counts. The
+finite-size shift is not only below VQE precision but below the
+float$64$ subtraction floor of the nuclear diagonal, and must be
+computed analytically as a perturbative shift rather than by direct
+diagonalization.
+
+The practical consequence is that the composed nuclear--electronic
+Hamiltonian should be solved in block-partitioned form: the nuclear
+block is solved first (using the deuteron Hamiltonian in isolation),
+the electronic block is solved second (at fixed proton charge
+distribution), and the cross-block couplings are treated
+perturbatively as classical corrections. This is the quantum-chemistry
+analogue of the Born--Oppenheimer approximation, and it is appropriate
+whenever the block energies span orders of magnitude. The composed
+Hamiltonian in Eq.~\eqref{eq:composed-ne} is most useful as an
+\emph{architectural} object: it lets one write down the full
+Hamiltonian on a single qubit register, verify correctness by
+comparison with the block decomposition, and reason about the cost
+of adding cross-block couplings, even if the single-pass solution is
+not practical.
+
+\subsection{Known limitation}
+
+The Pauli encoding of the off-diagonal one-body terms in the deuteron
+builder of Sec.~\ref{sec:deuteron} carries a known sign issue: the
+$a^\dagger_i a_j$ operator for $i \neq j$ is currently encoded using
+$XY - YX$ with a real coefficient, which yields the Hermitian
+combination $A \otimes A - C \otimes C$ rather than the expected
+$A \otimes A + C \otimes C$. This affects only the off-diagonal piece
+of the single-particle Hamiltonian, which in the HO basis is
+identically zero for the diagonal kinetic term, so the deuteron FCI
+spectrum is unaffected. The cross-register hyperfine term in the
+composed Hamiltonian is built via the matrix-form code path in
+\texttt{nuclear\_electronic.py}, which bypasses the Pauli builder and
+yields the correct spectrum directly. We report this as a known issue;
+it does not affect the Pauli counts or the $1$-norms reported in
+Tables~\ref{tab:deuteron}--\ref{tab:ne-scales}, which are read from
+the term list of the encoded Hamiltonian.
+
+%% =====================================================================
+\section{Discussion}
+\label{sec:discussion}
+%% =====================================================================
+
+The results of Sections~\ref{sec:shell}--\ref{sec:ne} suggest a natural
+partition of the GeoVac framework into a universal component and a
+Coulomb-specific component:
+
+\begin{itemize}
+  \item \textbf{Universal (applies to HO, Woods--Saxon, NN potentials).}
+    The angular selection rules from Wigner $3j$ symbols and the Gaunt
+    integral; the $O(Q^4)$ single-center and $O(Q^{2.5})$ composed
+    Pauli scaling; the block structure of the two-body tensor; the
+    qubit encoding via Jordan--Wigner on species-specific registers.
+  \item \textbf{Coulomb-specific.} The $S^3$ conformal projection
+    $p_0 = \sqrt{-2E_n}$; the SO(4) hidden symmetry and the Runge--Lenz
+    vector; the $-1/16$ kinetic constant; the Hopf bundle structure
+    underlying the fine-structure constant
+    conjecture~\cite{Paper2}.
+\end{itemize}
+
+The nuclear shell model fits squarely in the universal category. The
+Fock rigidity theorem makes this precise: the conformal projection
+simply does not survive the transition from Coulomb to HO or
+Woods--Saxon, so any claim that the GeoVac $S^3$ machinery extends
+directly to nuclei would be incorrect. What does extend is the
+angular machinery --- and the results of Sections~\ref{sec:deuteron}
+and~\ref{sec:he4} demonstrate that this machinery is sufficient to
+produce structurally sparse qubit Hamiltonians for simple nuclei.
+
+\emph{Directions for follow-up work.} (i) Larger
+$N_{\mathrm{shells}}$ for converged binding energies; the interesting
+physics question is whether the sub-linear Pauli scaling persists as
+the basis grows, or whether the Minnesota potential's short range
+eventually fills in the angular zeros. (ii) Three-body forces (chiral
+EFT at N$^2$LO); these introduce new classes of Pauli terms beyond
+the two-body pattern studied here, and their effect on sparsity is an
+open question. (iii) Larger nuclei such as $^6$Li, $^{12}$C, and
+$^{16}$O; the composed architecture should apply, with nucleon
+blocks labelled by single-particle $(n_r, \ell, j)$ orbitals. (iv)
+Hardware implementation and comparison with NCSM benchmarks on
+actual quantum simulators; the $16$-qubit deuteron is within reach
+of current ion-trap and superconducting platforms.
+
+A final note on possible Coulomb-free projections. The Bargmann--Segal
+transform~\cite{Bargmann1961} gives a natural holomorphic
+representation of the HO Hilbert space, in which the HO Hamiltonian
+becomes a first-order differential operator. Whether the
+Bargmann--Segal space admits a discrete graph structure whose
+Laplacian converges to the HO Hamiltonian --- a strict HO analogue of
+the $S^3$ Fock projection --- is an open question that we leave for
+future work.
+
+%% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%% =====================================================================
+
+We have constructed qubit Hamiltonians for the nuclear shell model on
+the GeoVac hyperspherical lattice. The HO shell closures and
+Mayer--Jensen magic numbers are reproduced from the graph spectrum with
+standard spin--orbit and orbital-correction parameters. The deuteron
+and He-4 qubit Hamiltonians, built from the Minnesota potential via
+Moshinsky--Talmi brackets, show sub-linear Pauli scaling: He-4 requires
+only $20\%$ more Pauli terms than the deuteron despite a $12.25\times$
+larger Hilbert space. The composed nuclear--electronic deuterium
+encoding demonstrates that the multi-block architecture extends to
+nucleon--electron systems but faces a $\sim 10^{13}$ coefficient ratio that
+requires block-partitioned simulation. The Fock projection rigidity
+theorem precisely delineates which parts of the GeoVac framework
+transfer to non-Coulomb systems (the angular machinery) and which do
+not (the $S^3$ conformal projection). The binding energies reported
+here at $N_{\mathrm{shells}}=2$ are not converged and should not be
+read as nuclear-structure predictions; they are encoding-validation
+benchmarks that verify the qubit Hamiltonian reproduces the matrix
+representation.
+
+\begin{thebibliography}{99}
+
+\bibitem{Mayer1949}
+M.~G. Mayer,
+``On Closed Shells in Nuclei. II,''
+Phys.~Rev.~\textbf{75}, 1969 (1949).
+
+\bibitem{Jensen1949}
+O.~Haxel, J.~H.~D.~Jensen, and H.~E.~Suess,
+``On the ``Magic Numbers'' in Nuclear Structure,''
+Phys.~Rev.~\textbf{75}, 1766 (1949).
+
+\bibitem{Suhonen2007}
+J.~Suhonen,
+\emph{From Nucleons to Nucleus: Concepts of Microscopic Nuclear Theory}
+(Springer, Berlin, 2007).
+
+\bibitem{Talmi1993}
+I.~Talmi,
+\emph{Simple Models of Complex Nuclei: The Shell Model and the
+Interacting Boson Model}
+(Harwood, Chur, 1993).
+
+\bibitem{Thompson1977}
+D.~R. Thompson, M.~Lemere, and Y.~C. Tang,
+``Systematic Investigation of Scattering Problems with the
+Resonating-Group Method,''
+Nucl.~Phys.~A~\textbf{286}, 53 (1977).
+
+\bibitem{Moshinsky1959}
+M.~Moshinsky,
+``Transformation Brackets for Harmonic Oscillator Functions,''
+Nucl.~Phys.~\textbf{13}, 104 (1959).
+
+\bibitem{Talmi1952}
+I.~Talmi,
+``Nuclear Spectroscopy with Harmonic Oscillator Wavefunctions,''
+Helv.~Phys.~Acta \textbf{25}, 185 (1952).
+
+\bibitem{Roggero2020}
+A.~Roggero, A.~C.~Y. Li, J.~Carlson, R.~Gupta, and G.~N. Perdue,
+``Quantum Computing for Neutrino-Nucleus Scattering,''
+Phys.~Rev.~D~\textbf{101}, 074038 (2020).
+
+\bibitem{Hagen2014}
+G.~Hagen, T.~Papenbrock, M.~Hjorth-Jensen, and D.~J. Dean,
+``Coupled-Cluster Computations of Atomic Nuclei,''
+Rep.~Prog.~Phys.~\textbf{77}, 096302 (2014).
+
+\bibitem{Romero2022}
+A.~M. Romero \emph{et al.},
+``Solving Nuclear Structure Problems with the Adaptive Variational
+Quantum Algorithm,''
+Phys.~Rev.~C~\textbf{105}, 064317 (2022).
+
+\bibitem{Navratil2000}
+P.~Navr\'atil, J.~P. Vary, and B.~R. Barrett,
+``Large-Basis Ab Initio No-Core Shell Model and Its Application to
+$^{12}$C,''
+Phys.~Rev.~Lett.~\textbf{84}, 5728 (2000).
+
+\bibitem{BarrettNavratilVary2013}
+B.~R. Barrett, P.~Navr\'atil, and J.~P. Vary,
+``Ab Initio No Core Shell Model,''
+Prog.~Part.~Nucl.~Phys.~\textbf{69}, 131 (2013).
+
+\bibitem{Fock1935}
+V.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+Z.~Phys.~\textbf{98}, 145 (1935).
+
+\bibitem{Bander1966}
+M.~Bander and C.~Itzykson,
+``Group Theory and the Hydrogen Atom,''
+Rev.~Mod.~Phys.~\textbf{38}, 330 (1966).
+
+\bibitem{Bargmann1961}
+V.~Bargmann,
+``On a Hilbert Space of Analytic Functions and an Associated Integral
+Transform,''
+Commun.~Pure Appl.~Math.~\textbf{14}, 187 (1961).
+
+\bibitem{Foldy1958}
+L.~L. Foldy,
+``Neutron-Electron Interaction,''
+Rev.~Mod.~Phys.~\textbf{30}, 471 (1958).
+
+\bibitem{Friar1979}
+J.~L. Friar,
+``Nuclear Finite-Size Effects in Light Muonic Atoms,''
+Ann.~Phys.~(N.Y.) \textbf{122}, 151 (1979).
+
+\bibitem{Paper0}
+J.~Loutey, ``GeoVac Paper 0: The Geometric Packing Construction,''
+technical report, Zenodo (2026).
+
+\bibitem{Paper2}
+J.~Loutey, ``GeoVac Paper 2: Fine Structure Constant from the Hopf
+Bundle,'' technical report, Zenodo (2026). (Conjectural.)
+
+\bibitem{Paper7}
+J.~Loutey, ``GeoVac Paper 7: The Dimensionless Vacuum,''
+technical report, Zenodo (2026).
+
+\bibitem{Paper14}
+J.~Loutey, ``GeoVac Paper 14: Structurally Sparse Qubit Hamiltonians,''
+technical report, Zenodo (2026).
+
+\bibitem{Paper17}
+J.~Loutey, ``GeoVac Paper 17: Composed Natural Geometries for
+Molecules,'' technical report, Zenodo (2026).
+
+\bibitem{Paper22}
+J.~Loutey, ``GeoVac Paper 22: Angular Sparsity Theorem,''
+technical report, Zenodo (2026).
+
+\end{thebibliography}
+
+\end{document}

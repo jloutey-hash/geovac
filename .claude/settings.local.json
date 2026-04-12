@@ -10,11 +10,7 @@
       "Bash(for paper in Paper_0_Geometric_Packing.tex paper_1_spectrum.tex paper_3_holography.tex)",
       "Bash(do echo \"=== Compiling $paper ===\")",
       "Bash(done)",
-      "Bash(grep:*)",
-      "Bash(python3:*)",
-      "Bash(where:*)",
-      "Bash(git push:*)",
-      "Bash(git status:*)"
+      "Bash(grep:*)"
     ]
   }
 }

@@ -1,0 +1,1 @@
+Track alpha-G (2026-04-10): Paper 18 Sec V lines 764-768, 771-774, 807-811 corrected. "S^2 Weyl exchange constant" -> "omega_2 = pi, the 2D ball volume, numerator of the S^2 Weyl density and Paper 0 packing-plane prefactor sigma_0 = pi d_0^2/2". No other claims modified; conjecture status unchanged.

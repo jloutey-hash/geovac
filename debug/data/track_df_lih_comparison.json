@@ -1,0 +1,110 @@
+{
+  "max_n_2": {
+    "nested": {
+      "M": 5,
+      "Q": 10,
+      "N_pauli": 120,
+      "Pauli_per_Q": 12.0,
+      "n_eri_nonzero": 65,
+      "ERI_density_pct": 10.4,
+      "n_h1_nonzero": 11,
+      "h1_density_pct": 44.0,
+      "one_norm_Ha": 16.36,
+      "one_norm_ni_Ha": 13.49,
+      "wall_time_s": 0.52,
+      "R": 3.015,
+      "max_n": 2,
+      "nuclear_repulsion": 0.9950248756218905,
+      "FCI_energy_Ha": -7.15334,
+      "FCI_error_pct": 11.364
+    },
+    "composed": {
+      "Q": 30,
+      "N_pauli": 334,
+      "Pauli_per_Q": 11.13,
+      "ERI_density_pct": 0.39,
+      "one_norm_Ha": 37.33,
+      "one_norm_ni_Ha": 37.23
+    },
+    "composed_nopk": {
+      "Q": 30,
+      "N_pauli": 334,
+      "one_norm_ni_Ha": 26.61
+    }
+  },
+  "max_n_3": {
+    "nested": {
+      "M": 14,
+      "Q": 28,
+      "N_pauli": 2675,
+      "Pauli_per_Q": 95.54,
+      "n_eri_nonzero": 1492,
+      "ERI_density_pct": 3.88,
+      "n_h1_nonzero": 56,
+      "h1_density_pct": 28.57,
+      "one_norm_Ha": 100.54,
+      "one_norm_ni_Ha": 87.89,
+      "wall_time_s": 4.18,
+      "R": 3.015,
+      "max_n": 3,
+      "nuclear_repulsion": 0.9950248756218905
+    },
+    "composed": {
+      "Q": 66,
+      "N_pauli": 5364,
+      "Pauli_per_Q": 81.27,
+      "ERI_density_pct": 0.26,
+      "one_norm_Ha": 108.38,
+      "one_norm_ni_Ha": 94.36
+    },
+    "composed_nopk": {
+      "Q": 66,
+      "N_pauli": 5364,
+      "one_norm_ni_Ha": 80.51
+    }
+  },
+  "pes_n2": [
+    {
+      "R": 2.0,
+      "E": -7.197923,
+      "N_pauli": 120,
+      "one_norm_ni": 13.33
+    },
+    {
+      "R": 2.5,
+      "E": -7.179936,
+      "N_pauli": 120,
+      "one_norm_ni": 13.41
+    },
+    {
+      "R": 3.015,
+      "E": -7.15334,
+      "N_pauli": 120,
+      "one_norm_ni": 13.49
+    },
+    {
+      "R": 3.5,
+      "E": -7.134624,
+      "N_pauli": 120,
+      "one_norm_ni": 13.56
+    },
+    {
+      "R": 4.0,
+      "E": -7.12227,
+      "N_pauli": 120,
+      "one_norm_ni": 13.62
+    },
+    {
+      "R": 5.0,
+      "E": -7.110217,
+      "N_pauli": 120,
+      "one_norm_ni": 13.71
+    },
+    {
+      "R": 6.0,
+      "E": -7.105569,
+      "N_pauli": 120,
+      "one_norm_ni": 13.78
+    }
+  ]
+}

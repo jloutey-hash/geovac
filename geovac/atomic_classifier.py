@@ -1,23 +1,20 @@
 """
-Atomic Classifier for Composed Geometry (Track BG/CH/CR, v2.2.0)
-=================================================================
+Atomic Classifier for Composed Geometry (Track BG, v2.0.30)
+============================================================
 
 Classifies atoms by nuclear charge Z, returning the composed-geometry
 block specification needed by the general builder.  Structure types
 follow Paper 16 (Chemical Periodicity as Representation Theory):
 
   Type A: single electron (H)            -- Level 1 system
-  Type B: closed shell pair (He, Ne, Ar) -- Level 3 system
-  Type C: single valence over closed core -- simplest composed (Li, Na, K)
-  Type D: s² valence over closed core     -- paired valence (Be, Mg, Ca)
-  Type E: open p-shell valence            -- exchange coupling important (B-F, Al-Cl, Ga-Br)
+  Type B: closed shell pair (He, Ne)      -- Level 3 system
+  Type C: single valence over closed core -- simplest composed (Li)
+  Type D: s² valence over closed core     -- paired valence (Be)
+  Type E: open p-shell valence            -- exchange coupling important (B-F)
 
-Coverage:
-  First row (Z=1-10):   He-like cores, PK from Level 3 solver
-  Second row (Z=11-18): [Ne] frozen cores (10e)
-  Third row s-block (Z=19-20): [Ar] frozen cores (18e)
-  Third row d-block (Z=21-30): OUT OF SCOPE (transition metals)
-  Third row p-block (Z=31-36): [Ar]3d¹⁰ frozen cores (28e)
+PK parameters from Paper 17 Table 1 (computed for Li, Be) or ab initio
+from Level 3 hyperspherical solver (Track BI, v2.0.30) for Z=5-9.
+Z²-scaled values available as fallback but have 5-26% errors.
 
 Author: GeoVac Development Team
 Date: April 2026
@@ -159,187 +156,6 @@ _ATOM_DATA = {
         'group_type': 'noble_gas',
         'pk_source': 'z2_scaled',
     },
-    # ----- Second row (Z=11-18) -----
-    11: {
-        'structure_type': 'C',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 1,
-        'Z_eff_valence': 1.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s1',
-        'period': 3,
-        'group_type': 'alkali_metal',
-        'pk_source': 'frozen_core',
-    },
-    12: {
-        'structure_type': 'D',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 2,
-        'Z_eff_valence': 2.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2',
-        'period': 3,
-        'group_type': 'alkaline_earth',
-        'pk_source': 'frozen_core',
-    },
-    13: {
-        'structure_type': 'E',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 3,
-        'Z_eff_valence': 3.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2 3p1',
-        'period': 3,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    14: {
-        'structure_type': 'E',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 4,
-        'Z_eff_valence': 4.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2 3p2',
-        'period': 3,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    15: {
-        'structure_type': 'E',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 5,
-        'Z_eff_valence': 5.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2 3p3',
-        'period': 3,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    16: {
-        'structure_type': 'E',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 6,
-        'Z_eff_valence': 6.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2 3p4',
-        'period': 3,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    17: {
-        'structure_type': 'E',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 7,
-        'Z_eff_valence': 7.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2 3p5',
-        'period': 3,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    18: {
-        'structure_type': 'B',
-        'n_core_electrons': 10,
-        'n_valence_electrons': 8,
-        'Z_eff_valence': 8.0,
-        'core_config': '1s2 2s2 2p6',
-        'valence_config': '3s2 3p6',
-        'period': 3,
-        'group_type': 'noble_gas',
-        'pk_source': 'frozen_core',
-    },
-    # ----- Third row s-block (Z=19-20), [Ar] frozen core -----
-    19: {
-        'structure_type': 'C',
-        'n_core_electrons': 18,
-        'n_valence_electrons': 1,
-        'Z_eff_valence': 1.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6',
-        'valence_config': '4s1',
-        'period': 4,
-        'group_type': 'alkali_metal',
-        'pk_source': 'frozen_core',
-    },
-    20: {
-        'structure_type': 'D',
-        'n_core_electrons': 18,
-        'n_valence_electrons': 2,
-        'Z_eff_valence': 2.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6',
-        'valence_config': '4s2',
-        'period': 4,
-        'group_type': 'alkaline_earth',
-        'pk_source': 'frozen_core',
-    },
-    # ----- Z=21-30 (transition metals): OUT OF SCOPE -----
-    # Handled by explicit check in classify_atom()
-    # ----- Third row p-block (Z=31-36), [Ar]3d10 frozen core -----
-    31: {
-        'structure_type': 'E',
-        'n_core_electrons': 28,
-        'n_valence_electrons': 3,
-        'Z_eff_valence': 3.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
-        'valence_config': '4s2 4p1',
-        'period': 4,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    32: {
-        'structure_type': 'E',
-        'n_core_electrons': 28,
-        'n_valence_electrons': 4,
-        'Z_eff_valence': 4.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
-        'valence_config': '4s2 4p2',
-        'period': 4,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    33: {
-        'structure_type': 'E',
-        'n_core_electrons': 28,
-        'n_valence_electrons': 5,
-        'Z_eff_valence': 5.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
-        'valence_config': '4s2 4p3',
-        'period': 4,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    34: {
-        'structure_type': 'E',
-        'n_core_electrons': 28,
-        'n_valence_electrons': 6,
-        'Z_eff_valence': 6.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
-        'valence_config': '4s2 4p4',
-        'period': 4,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    35: {
-        'structure_type': 'E',
-        'n_core_electrons': 28,
-        'n_valence_electrons': 7,
-        'Z_eff_valence': 7.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
-        'valence_config': '4s2 4p5',
-        'period': 4,
-        'group_type': 'p_block',
-        'pk_source': 'frozen_core',
-    },
-    36: {
-        'structure_type': 'B',
-        'n_core_electrons': 28,
-        'n_valence_electrons': 8,
-        'Z_eff_valence': 8.0,
-        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
-        'valence_config': '4s2 4p6',
-        'period': 4,
-        'group_type': 'noble_gas',
-        'pk_source': 'frozen_core',
-    },
 }
 
 
@@ -479,18 +295,9 @@ def classify_atom(Z: int) -> AtomClassification:
     if Z < 1:
         raise ValueError(f"Nuclear charge Z must be >= 1, got {Z}")
 
-    # Transition metals (Z=21-30): explicitly out of scope
-    if 21 <= Z <= 30:
-        raise NotImplementedError(
-            f"Transition metals (Z={Z}, Z=21-30) are out of scope. "
-            "Multi-reference d-electron correlations require treatment "
-            "beyond the composed geometry framework. "
-            "See SCOPE_BOUNDARY.md for details."
-        )
-
-    # Unsupported atoms (Z > 36)
-    if Z > 36:
-        N = Z
+    # Unsupported atoms (Z > 10)
+    if Z > 10:
+        N = Z  # neutral atom
         nu = max(N - 2, 0)
         mu_free = 2.0 * nu ** 2 if nu > 0 else 0.0
         return AtomClassification(
@@ -510,9 +317,9 @@ def classify_atom(Z: int) -> AtomClassification:
             group_type='unknown',
             supported=False,
             support_note=(
-                f'Z={Z} is beyond supported range (Z=1-36). '
-                'Extension requires frozen-core data for heavier '
-                'noble gas cores.'
+                f'Z={Z} is beyond the first row (Z=1-10). '
+                'Second-row and heavier atoms require additional '
+                'core shells and PK parameterization not yet implemented.'
             ),
         )
 
@@ -527,9 +334,6 @@ def classify_atom(Z: int) -> AtomClassification:
         pk_params = None
     elif pk_source == 'computed':
         pk_params = dict(_PK_COMPUTED[Z])
-    elif pk_source == 'frozen_core':
-        # Frozen-core PK not yet computed; params pending
-        pk_params = None
     else:
         # z2_scaled
         pk_params = pk_params_z2_scaled(Z)

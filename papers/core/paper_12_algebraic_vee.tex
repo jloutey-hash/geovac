@@ -172,19 +172,16 @@ $\int_0^{2\pi} d\varphi_1 \int_0^{2\pi} d\varphi_2$ projects
 onto the $m = 0$ component:
 \begin{equation}
   \left\langle\frac{1}{r_{12}}\right\rangle_\varphi
-  = \frac{8\pi^2}{R}\sum_{l=0}^{\infty}(2l+1)\,
+  = \frac{4\pi^2}{R}\sum_{l=0}^{\infty}(2l+1)\,
     P_l(\xi_<)\,Q_l(\xi_>)\,
     P_l(\eta_1)\,P_l(\eta_2),
   \label{eq:neumann_sigma}
 \end{equation}
 where $P_l \equiv P_l^0$ and $Q_l \equiv Q_l^0$ are ordinary
-Legendre functions.  The factor $8\pi^2 = 2 \times 4\pi^2$ combines
-the $2/R$ prefactor of the Neumann
-expansion~\eqref{eq:neumann_full} with the $4\pi^2$ from
-$\int_0^{2\pi}\!\int_0^{2\pi}\!\cos 0\,d\varphi_1\,d\varphi_2$.
-The $(2l+1)$ factor arises from the Legendre polynomial
-normalization in the angular completeness relation
-$\int_{-1}^{1}P_l(\eta)\,P_{l'}(\eta)\,d\eta = 2\delta_{ll'}/(2l+1)$.
+Legendre functions.  The factor $4\pi^2$ arises from the double
+azimuthal integration, and the $(2l+1)$ factor from
+$(2 - \delta_{m0})(l!)^2/(l!)^2 = 1$ for $m = 0$ combined with
+the normalization of the expansion.
 
 Equation~\eqref{eq:neumann_sigma} is the key identity: it
 separates the two-electron Coulomb kernel into a sum of products

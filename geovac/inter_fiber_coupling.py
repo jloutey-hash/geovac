@@ -546,7 +546,6 @@ def compute_channel_f0_matrix(
     R: float,
     n_r: int = 300,
     r_max: float = 10.0,
-    slater_method: str = 'algebraic_laguerre',
 ) -> Dict[str, Any]:
     """
     Decompose F^0 into a channel-channel matrix M(ch, ch').
@@ -603,16 +602,11 @@ def compute_channel_f0_matrix(
         P_ch_Be_list.append(P_Be_ic)
 
     # Step 3: F^0 matrix
-    if slater_method == 'algebraic_laguerre':
-        from geovac.algebraic_slater import slater_fk_integral_algebraic
-        _fk_func = lambda r, pa, pb: slater_fk_integral_algebraic(r, pa, pb, k=0)
-    else:
-        _fk_func = slater_f0_integral
-
     F0_matrix = np.zeros((n_ch, n_ch))
     for ic in range(n_ch):
         for jc in range(ic, n_ch):
-            f0_ij = _fk_func(d_grid_ref, P_ch_Be_list[ic], P_ch_Be_list[jc])
+            f0_ij = slater_f0_integral(d_grid_ref, P_ch_Be_list[ic],
+                                       P_ch_Be_list[jc])
             F0_matrix[ic, jc] = f0_ij
             F0_matrix[jc, ic] = f0_ij
 
@@ -626,7 +620,6 @@ def compute_channel_f0_matrix(
         'channels': channels,
         'P_ch_Be': P_ch_Be_list,
         'd_grid': d_grid_ref,
-        'slater_method': slater_method,
     }
 
 
@@ -636,7 +629,6 @@ def compute_channel_fk_matrix(
     k: int = 0,
     n_r: int = 300,
     r_max: float = 10.0,
-    slater_method: str = 'algebraic_laguerre',
 ) -> Dict[str, Any]:
     """
     Decompose F^k into a channel-channel matrix M_k(ch, ch').
@@ -673,7 +665,7 @@ def compute_channel_fk_matrix(
     if k == 0:
         # Delegate to optimized F^0 path
         f0_result = compute_channel_f0_matrix(
-            channel_data, R, n_r=n_r, r_max=r_max, slater_method=slater_method)
+            channel_data, R, n_r=n_r, r_max=r_max)
         return {
             'Fk_total': f0_result['F0_total'],
             'Fk_matrix': f0_result['F0_matrix'],
@@ -707,16 +699,11 @@ def compute_channel_fk_matrix(
         P_ch_Be_list.append(P_Be_ic)
 
     # Step 3: F^k matrix
-    if slater_method == 'algebraic_laguerre':
-        from geovac.algebraic_slater import slater_fk_integral_algebraic
-        _fk_func = lambda r, pa, pb: slater_fk_integral_algebraic(r, pa, pb, k=k)
-    else:
-        _fk_func = lambda r, pa, pb: slater_fk_integral(r, pa, pb, k=k)
-
     Fk_matrix = np.zeros((n_ch, n_ch))
     for ic in range(n_ch):
         for jc in range(ic, n_ch):
-            fk_ij = _fk_func(d_grid_ref, P_ch_Be_list[ic], P_ch_Be_list[jc])
+            fk_ij = slater_fk_integral(d_grid_ref, P_ch_Be_list[ic],
+                                        P_ch_Be_list[jc], k=k)
             Fk_matrix[ic, jc] = fk_ij
             Fk_matrix[jc, ic] = fk_ij
 
@@ -1153,7 +1140,6 @@ def monopole_inter_fiber_energy(
     n_sample_Re: int = 10,
     method: str = 'numerical',
     channel_data: Optional[Dict[str, Any]] = None,
-    slater_method: str = 'algebraic_laguerre',
 ) -> Dict[str, Any]:
     """
     Compute monopole (k=0) inter-fiber coupling energy from a Level 4 result.
@@ -1211,16 +1197,11 @@ def monopole_inter_fiber_energy(
             r_grid_origin, P_origin, R)
 
         # Step 3: F^0 integral
-        if slater_method == 'algebraic_laguerre':
-            from geovac.algebraic_slater import slater_f0_algebraic
-            E_mono = slater_f0_algebraic(d_grid, P_Be, P_Be)
-        else:
-            E_mono = slater_f0_integral(d_grid, P_Be, P_Be)
+        E_mono = slater_f0_integral(d_grid, P_Be, P_Be)
 
         # Step 4: Channel decomposition of F^0
         f0_matrix_result = compute_channel_f0_matrix(
-            channel_data, R, n_r=n_r, r_max=r_max,
-            slater_method=slater_method)
+            channel_data, R, n_r=n_r, r_max=r_max)
 
         dr_origin = r_grid_origin[1] - r_grid_origin[0]
         dr_Be = d_grid[1] - d_grid[0]
@@ -1249,11 +1230,7 @@ def monopole_inter_fiber_energy(
     d_grid, P_Be = transform_to_center_density(r_grid_origin, P_origin, R)
 
     # Step 3: F^0 integral (identical fibers by D_inf_h symmetry)
-    if slater_method == 'algebraic_laguerre':
-        from geovac.algebraic_slater import slater_f0_algebraic
-        E_mono = slater_f0_algebraic(d_grid, P_Be, P_Be)
-    else:
-        E_mono = slater_f0_integral(d_grid, P_Be, P_Be)
+    E_mono = slater_f0_integral(d_grid, P_Be, P_Be)
 
     dr_origin = r_grid_origin[1] - r_grid_origin[0]
     dr_Be = d_grid[1] - d_grid[0]
@@ -1725,7 +1702,6 @@ def _compute_l1_indexed_f0_matrix(
     R: float,
     n_r: int = 300,
     r_max: float = 10.0,
-    slater_method: str = 'algebraic_laguerre',
 ) -> Dict[str, Any]:
     """
     Compute F^0 matrix indexed by unique l1 values (not channels).
@@ -1755,7 +1731,7 @@ def _compute_l1_indexed_f0_matrix(
     """
     # Get per-channel F^0 data (includes Be-centered densities)
     f0_result = compute_channel_f0_matrix(
-        channel_data, R, n_r=n_r, r_max=r_max, slater_method=slater_method)
+        channel_data, R, n_r=n_r, r_max=r_max)
 
     channels = f0_result['channels']
     P_ch_Be = f0_result['P_ch_Be']
@@ -1776,16 +1752,10 @@ def _compute_l1_indexed_f0_matrix(
         P_l1_Be[idx] += P_ch_Be[ic]
 
     # Compute F^0 matrix between l1-marginal densities
-    if slater_method == 'algebraic_laguerre':
-        from geovac.algebraic_slater import slater_fk_integral_algebraic
-        _fk_func = lambda r, pa, pb: slater_fk_integral_algebraic(r, pa, pb, k=0)
-    else:
-        _fk_func = slater_f0_integral
-
     F0_l1_matrix = np.zeros((n_l, n_l))
     for i in range(n_l):
         for j in range(i, n_l):
-            f0_ij = _fk_func(d_grid, P_l1_Be[i], P_l1_Be[j])
+            f0_ij = slater_f0_integral(d_grid, P_l1_Be[i], P_l1_Be[j])
             F0_l1_matrix[i, j] = f0_ij
             F0_l1_matrix[j, i] = f0_ij
 
@@ -1810,7 +1780,6 @@ def full_exchange_inter_fiber_energy(
     n_sample_Re: int = 10,
     use_approximate_f0: bool = False,
     bond_angle: float = np.pi,
-    slater_method: str = 'algebraic_laguerre',
 ) -> Dict[str, Any]:
     """
     Compute full exchange inter-fiber energy using the off-diagonal 1-RDM.
@@ -1911,8 +1880,7 @@ def full_exchange_inter_fiber_energy(
     else:
         # Exact: l1-indexed F^0 from aggregated channel densities
         f0_l1 = _compute_l1_indexed_f0_matrix(
-            channel_data, R, n_r=n_r, r_max=r_max,
-            slater_method=slater_method)
+            channel_data, R, n_r=n_r, r_max=r_max)
         F0_l1_matrix = f0_l1['F0_l1_matrix']
 
     # Step 5: Full exchange contraction (general bond angle)

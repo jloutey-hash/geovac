@@ -161,8 +161,8 @@ h_{pq}^{\text{(hybrid)}} =
 \label{eq:h1_hybrid}
 \end{equation}
 where $L = D - A$ is the graph Laplacian of the quantum number
-adjacency graph and $\kappa = -1/16$ is the kinetic scale
-factor validated in prior work~\cite{Loutey2026a}.
+adjacency graph and $\kappa = -1/16$ is the universal kinetic
+scale factor validated in prior work~\cite{Loutey2026a}.
 The off-diagonal Laplacian entries provide configuration interaction
 mixing between orbitals connected by selection rules
 $\Delta l = \pm 1$, $\Delta m_l = 0, \pm 1$.
@@ -342,17 +342,6 @@ hydrogen, respectively.
 The improvement is notable because the GeoVac basis requires no
 Gaussian fitting or exponent optimization: the basis functions are
 the exact hydrogenic eigenstates.
-
-A note on the scope of this comparison is warranted.  STO-3G is a
-minimal Gaussian basis introduced by Hehre, Stewart, and Pople in
-1969~\cite{hehre1969}; it is not used in production quantum chemistry,
-where correlation-consistent bases such as cc-pVDZ or cc-pVTZ are
-standard.  The comparison is included to demonstrate that the
-hydrogenic graph basis outperforms a minimal Gaussian basis of
-comparable size, not to claim competitiveness with modern
-large-basis calculations.  A fair assessment of practical viability
-would require benchmarking against cc-pVDZ or cc-pVTZ at comparable
-computational cost, which we leave to future work.
 
 % --- Figure 1 ---
 \begin{figure}

@@ -1,0 +1,90 @@
+{
+  "inputs": {
+    "B": "42",
+    "F_symbolic": "pi^2/6",
+    "F_value": "1.644934066848226436472415",
+    "Delta": "1/40",
+    "K_over_pi": "43.61993406684822643647242",
+    "K": "137.0360644144815412137155"
+  },
+  "subtask1_packing_vs_weyl": {
+    "paper0_sigma0_prefactor": "pi/2",
+    "weyl_S2_constant": "0.07957747154594766788444188",
+    "vol_S2": "12.56637061435917295385057",
+    "ratio_sigma0_prefactor_to_weyl": "19.73920880217871723766898",
+    "ratio_equals_2_pi_squared": true,
+    "verdict": "sigma_0 and the S^2 Weyl constant are BOTH pi-type geometric exchanges, but they are not the same object. sigma_0 sits on a EUCLIDEAN packing plane (R^2) and has units [length^2], whereas the Weyl constant 1/(4 pi) is a dimensionless count density on the unit S^2 base of the Hopf bundle. The outer pi in K is a pi^1 of type 'area-per-state on a 2-manifold', which matches the class but NOT the specific Weyl constant of S^2."
+  },
+  "subtask2_casimir_trace": {
+    "T_c2": "42.0",
+    "T_c2_squared": "153.0",
+    "T_lambda": "84.0",
+    "T_c2_cubed": "589.5",
+    "B_identity": "B = sum_{n=1}^{3} n^2 * (n^2-1)/2 = 42",
+    "B_from_casimir_trace": 42,
+    "closest_nearmiss": [
+      {
+        "name": "42 + F - 1/(8*5)",
+        "value": "43.61993406684822643647242",
+        "abs_diff": "0.0",
+        "rel_diff": "0.0"
+      },
+      {
+        "name": "42 + pi^2/6 - 1/40",
+        "value": "43.61993406684822643647242",
+        "abs_diff": "0.0",
+        "rel_diff": "0.0"
+      },
+      {
+        "name": "42 + pi^2/6 - 1/50",
+        "value": "43.62493406684822643647242",
+        "abs_diff": "0.005",
+        "rel_diff": "0.0001146264914646"
+      },
+      {
+        "name": "42 + pi^2/6 - 1/30",
+        "value": "43.61160073351489310313908",
+        "abs_diff": "0.00833333333333333",
+        "rel_diff": "0.000191044152441"
+      },
+      {
+        "name": "42 + pi^2/6 - 1/60",
+        "value": "43.62826740018155976980575",
+        "abs_diff": "0.00833333333333333",
+        "rel_diff": "0.000191044152441"
+      }
+    ]
+  },
+  "delta_decomposition_candidates": [
+    {
+      "form": "1/(|lambda_3| * N(2))",
+      "value": "0.025",
+      "matches_1_over_40": true
+    },
+    {
+      "form": "1/(c_2(3)^2)",
+      "value": "0.0625",
+      "matches_1_over_40": false
+    },
+    {
+      "form": "1/(c_2(3) * c_2(2))",
+      "value": "0.1666666666666666666666667",
+      "matches_1_over_40": false
+    },
+    {
+      "form": "1/(dim V_3 * c_2(3))",
+      "value": "0.02777777777777777777777778",
+      "matches_1_over_40": false
+    },
+    {
+      "form": "1/(2 * dim V_3 * N(2))",
+      "value": "0.01111111111111111111111111",
+      "matches_1_over_40": false
+    },
+    {
+      "form": "1/(T_c2 - 2)",
+      "value": "0.025",
+      "matches_1_over_40": true
+    }
+  ]
+}

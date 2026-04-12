@@ -1,0 +1,281 @@
+{
+  "targets": {
+    "K": "137.035999084",
+    "K_formula": "137.036064414481541213715508524",
+    "K_over_pi": "43.6199340668482264364724151666",
+    "B": "42.0",
+    "F": "1.64493406684822643647241516665",
+    "B_plus_F": "43.6449340668482264364724151666",
+    "F_minus_D": "1.61993406684822643647241516665",
+    "two_F": "3.28986813369645287294483033329"
+  },
+  "degeneracy_verify": {
+    "d_S5_0_to_6": [
+      1,
+      6,
+      20,
+      50,
+      105,
+      196,
+      336
+    ],
+    "lambda_S5_0_to_6": [
+      0,
+      5,
+      12,
+      21,
+      32,
+      45,
+      60
+    ],
+    "lambda_S3_1_to_6": [
+      0,
+      3,
+      8,
+      15,
+      24,
+      35
+    ]
+  },
+  "subtask_1_zetas": {
+    "s=1": {
+      "zeta_S5": "1778111141667.18747500156238282",
+      "zeta_S3": "99999.749990000049999500005",
+      "ratio": "17781155.8713396597958100485534",
+      "S5_status": "DIV (partial)",
+      "S3_status": "DIV (partial)"
+    },
+    "s=2": {
+      "zeta_S5": "3333.68867509260074641018992216",
+      "zeta_S3": "0.884957033474112384912874126658",
+      "ratio": "3767.06274880420057914629073238",
+      "S5_status": "DIV (partial)",
+      "S3_status": "CONV"
+    },
+    "s=3": {
+      "zeta_S5": "0.0822016857294567347851571424056",
+      "zeta_S3": "0.174366758355986641017093585933",
+      "ratio": "0.471429798342835647593592856927",
+      "S5_status": "CONV",
+      "S3_status": "CONV"
+    },
+    "s=4": {
+      "zeta_S5": "0.0110464853330804620462831659035",
+      "zeta_S3": "0.0520132750358781216599120219639",
+      "ratio": "0.212378192403011181690361308585",
+      "S5_status": "CONV",
+      "S3_status": "CONV"
+    },
+    "s=5": {
+      "zeta_S5": "0.00201768853226213474933811618735",
+      "zeta_S3": "0.0167607609327857766898286019301",
+      "ratio": "0.120381678394763564936997190223",
+      "S5_status": "CONV",
+      "S3_status": "CONV"
+    }
+  },
+  "subtask_1_hits": [],
+  "subtask_2_truncation": [
+    {
+      "nu_max": 1,
+      "B_S5": 30,
+      "N_S5": 7,
+      "ratio": "30/7",
+      "ratio_float": 4.285714285714286,
+      "note": ""
+    },
+    {
+      "nu_max": 2,
+      "B_S5": 270,
+      "N_S5": 27,
+      "ratio": "10",
+      "ratio_float": 10.0,
+      "note": ""
+    },
+    {
+      "nu_max": 3,
+      "B_S5": 1320,
+      "N_S5": 77,
+      "ratio": "120/7",
+      "ratio_float": 17.142857142857142,
+      "note": ""
+    },
+    {
+      "nu_max": 4,
+      "B_S5": 4680,
+      "N_S5": 182,
+      "ratio": "180/7",
+      "ratio_float": 25.714285714285715,
+      "note": ""
+    },
+    {
+      "nu_max": 5,
+      "B_S5": 13500,
+      "N_S5": 378,
+      "ratio": "250/7",
+      "ratio_float": 35.714285714285715,
+      "note": ""
+    },
+    {
+      "nu_max": 6,
+      "B_S5": 33660,
+      "N_S5": 714,
+      "ratio": "330/7",
+      "ratio_float": 47.142857142857146,
+      "note": ""
+    },
+    {
+      "nu_max": 7,
+      "B_S5": 75240,
+      "N_S5": 1254,
+      "ratio": "60",
+      "ratio_float": 60.0,
+      "note": ""
+    }
+  ],
+  "subtask_2_truncation_even": [
+    {
+      "nu_max": 2,
+      "B_even": 240,
+      "N_even": 21,
+      "ratio": "80/7",
+      "ratio_float": 11.428571428571429
+    },
+    {
+      "nu_max": 4,
+      "B_even": 3600,
+      "N_even": 126,
+      "ratio": "200/7",
+      "ratio_float": 28.571428571428573
+    },
+    {
+      "nu_max": 6,
+      "B_even": 23760,
+      "N_even": 462,
+      "ratio": "360/7",
+      "ratio_float": 51.42857142857143
+    },
+    {
+      "nu_max": 8,
+      "B_even": 102960,
+      "N_even": 1287,
+      "ratio": "80",
+      "ratio_float": 80.0
+    }
+  ],
+  "subtask_3_slater": {
+    "F0_1s1s": "5/8",
+    "table_size": 145,
+    "all_rational": true,
+    "max_denom": 48828125,
+    "ratio_hits": [],
+    "verdict": "NEGATIVE: pi^2 does NOT appear in He V_ee Slater integrals."
+  },
+  "subtask_4_heat_kernel": {
+    "vol_S3": "2*pi**2",
+    "vol_S5": "pi**3",
+    "vol_ratio": "pi/2",
+    "R_S3": 6,
+    "R_S5": 20,
+    "seeley_dewitt": {
+      "S3": {
+        "a_0": "1",
+        "a_1": "1",
+        "a_2": "1/2"
+      },
+      "S5": {
+        "a_0": "1",
+        "a_1": "10/3",
+        "a_2": "16/3"
+      },
+      "ratio": {
+        "a_0_S5_over_S3": "1",
+        "a_1_S5_over_S3": "10/3",
+        "a_2_S5_over_S3": "32/3"
+      }
+    },
+    "determinant_note": "Spectral determinants det'(Delta_{S^d}) involve zeta'_spec(0) which, for odd d, are known to reduce to combinations of zeta_R(odd integers) and log(2). For S^5 specifically, the result involves zeta_R(3) and zeta_R(5), NOT pi^2 as an additive term. Pi^2 appears only through the volume factor, which we computed above as vol(S^5)/vol(S^3) = pi/2 (single power of pi)."
+  },
+  "subtask_5_fiber": {
+    "zeta_differences": [
+      {
+        "s": 3,
+        "diff": "-0.0921671555693668425094691074256",
+        "best_target": "K_formula",
+        "rel_err": "1.000672576"
+      },
+      {
+        "s": 4,
+        "diff": "-0.040966789702773373577013854288",
+        "best_target": "K_formula",
+        "rel_err": "1.000298949"
+      },
+      {
+        "s": 5,
+        "diff": "-0.0147430724005236419403292323124",
+        "best_target": "K_formula",
+        "rel_err": "1.000107585"
+      }
+    ],
+    "truncation_pairs": [
+      {
+        "n_max": 1,
+        "nu_max": 0,
+        "B_S3": 0,
+        "B_S5": 0,
+        "diff": 0
+      },
+      {
+        "n_max": 2,
+        "nu_max": 1,
+        "B_S3": 12,
+        "B_S5": 30,
+        "diff": 18
+      },
+      {
+        "n_max": 3,
+        "nu_max": 2,
+        "B_S3": 84,
+        "B_S5": 270,
+        "diff": 186
+      },
+      {
+        "n_max": 4,
+        "nu_max": 3,
+        "B_S3": 324,
+        "B_S5": 1320,
+        "diff": 996
+      },
+      {
+        "n_max": 5,
+        "nu_max": 4,
+        "B_S3": 924,
+        "B_S5": 4680,
+        "diff": 3756
+      }
+    ]
+  },
+  "near_misses": [
+    {
+      "quantity": "a_1(S^5)",
+      "value": "3.33333333333333",
+      "target": "two_F",
+      "target_val": "3.28986813369645",
+      "rel_err": "0.013211836"
+    },
+    {
+      "quantity": "vol(S^5)/vol(S^3)",
+      "value": "1.5707963267949",
+      "target": "F_minus_D",
+      "target_val": "1.61993406684823",
+      "rel_err": "0.030333173"
+    },
+    {
+      "quantity": "vol(S^5)/vol(S^3)",
+      "value": "1.5707963267949",
+      "target": "F",
+      "target_val": "1.64493406684823",
+      "rel_err": "0.045070341"
+    }
+  ]
+}

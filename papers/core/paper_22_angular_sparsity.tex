@@ -1,0 +1,646 @@
+\documentclass[twocolumn,pra,amsmath,amssymb,superscriptaddress]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Potential-Independent Angular Sparsity\\for Qubit Hamiltonians in Spherical Fermion Systems}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{April 9, 2026}
+
+\begin{abstract}
+For any $N$-fermion system whose single-particle orbitals are products
+of spherical harmonics and arbitrary radial functions, the fraction of
+nonzero two-body matrix elements is determined solely by angular
+momentum selection rules and is independent of the radial potential.
+Exact enumeration of the Gaunt coefficients yields the angular ERI
+density $D(l_{\max})$: $7.81\%$ at $l_{\max}=1$, $2.76\%$ at
+$l_{\max}=2$, $1.44\%$ at $l_{\max}=3$, $0.90\%$ at $l_{\max}=4$, and
+$0.62\%$ at $l_{\max}=5$.  At $l_{\max}=2$, $97.24\%$ of all possible
+two-body matrix elements are guaranteed to vanish by the
+Wigner--Eckart theorem before any property of the potential is
+invoked.  The bound is independent of the number of radial quantum
+numbers retained at fixed $l_{\max}$, and therefore independent of
+qubit count.  Numerical verification across five potentials (Coulomb,
+harmonic oscillator, Woods--Saxon, square well, Yukawa) confirms the
+theorem: angular sparsity patterns are bit-identical across all
+potentials at matched orbital counts.  The radial-angular
+factorization and the Gaunt selection rules are standard results from
+Condon \& Shortley and Slater; the contribution of this paper is the
+explicit quantitative bound at each $l_{\max}$, framed as a universal
+resource guarantee for qubit Hamiltonian sparsity that applies to
+electronic structure, nuclear shell models, quantum dots, and any
+other spherical-potential fermion system.
+\end{abstract}
+
+\maketitle
+
+%=================================================================
+\section{Introduction}
+\label{sec:intro}
+%=================================================================
+
+Quantum simulation of fermionic systems requires encoding
+second-quantized Hamiltonians as sums of Pauli operators.  The
+number of Pauli terms, the number of qubitwise-commuting (QWC)
+measurement groups, and the Pauli 1-norm $\lambda$ are the dominant
+resource metrics for near-term variational~\cite{Peruzzo2014} and
+fault-tolerant~\cite{Lee2021} quantum algorithms.  All three metrics
+scale with the number of nonzero two-body matrix elements in the
+chosen orbital basis, making Hamiltonian sparsity the central
+structural resource for quantum simulation.
+
+Existing sparsity analyses are potential-specific.  In quantum
+chemistry, the Coulomb $1/r_{12}$ interaction produces sparsity
+governed by the multipole expansion and the basis set's spatial
+locality~\cite{Whitten1973, Dunlap2000}.  In nuclear structure
+physics, the nucleon--nucleon (NN) interaction in a harmonic
+oscillator (HO) basis produces sparsity governed by
+Talmi--Moshinsky brackets and center-of-mass
+factorization~\cite{Suhonen2007}.  These analyses are carried out
+independently, obscuring a structural feature that is common to both
+domains: the angular momentum selection rules imposed by the
+spherical harmonic component of the basis are identical.
+
+In this paper we state the resulting potential-independent sparsity
+bound explicitly.  For any rotationally invariant (central) two-body
+interaction expanded in a spherical harmonic basis, the zero
+structure of the two-body matrix elements depends only on the
+angular quantum numbers $(l, m)$ and is independent of the radial
+wavefunctions, the radial potential, and the radial quantum numbers.
+The underlying factorization of two-body integrals into angular
+(Gaunt) coefficients and radial (Slater-type) integrals has been
+standard since Condon and Shortley~\cite{CondonShortley1935} and
+Slater~\cite{Slater1960}, and we claim no mathematical originality
+for it.  The contribution of this paper is the explicit quantitative
+ERI density at each $l_{\max}$, verified numerically across five
+potentials, and framed as a universal resource bound for the quantum
+computing community.
+
+This result was identified in the course of extending the GeoVac
+spectral graph theory framework~\cite{GeoVac_Paper7, GeoVac_Paper14}
+from electronic to nuclear structure applications.  In the
+companion paper~\cite{GeoVac_Paper23} we show that a separate
+feature of the GeoVac framework---namely the reduction of the
+one-body graph Laplacian spectrum to pure integers on $S^3$---is
+special to the Coulomb potential, so that the universal--specific
+partition identified here is sharp: angular sparsity is universal
+across spherical fermion systems, while the $S^3$ Fock projection
+and the $\pi$-free graph structure are Coulomb-specific.
+
+%=================================================================
+\section{Two-Body Matrix Element Factorization}
+\label{sec:factorization}
+%=================================================================
+
+Consider $N$ fermions in a single-particle basis
+$\{|n, l, m\rangle\}$ where $n$ labels the radial quantum number,
+$l$ is the orbital angular momentum, and $m$ is the magnetic quantum
+number.  The spatial orbitals are
+\begin{equation}
+  \phi_{nlm}(\mathbf{r}) = R_{nl}(r)\, Y_l^m(\hat{r}),
+\end{equation}
+where $R_{nl}(r)$ are radial wavefunctions determined by the
+single-particle potential $V(r)$ and $Y_l^m$ are spherical
+harmonics.
+
+Let $\hat{V}_{12} = V(|\mathbf{r}_1 - \mathbf{r}_2|)$ be a
+rotationally invariant two-body interaction.  We expand $\hat{V}_{12}$
+in Legendre polynomials:
+\begin{equation}
+  V(|\mathbf{r}_1 - \mathbf{r}_2|)
+  = \sum_{k=0}^{\infty} v_k(r_1, r_2)\, P_k(\cos\theta_{12}),
+  \label{eq:legendre}
+\end{equation}
+where $v_k(r_1, r_2)$ are radial expansion coefficients that depend
+on the specific form of $V$.  For the Coulomb interaction,
+$v_k = r_<^k / r_>^{k+1}$; for other potentials, $v_k$ takes
+different forms but the angular structure is identical.
+
+\begin{widetext}
+\noindent\textbf{Theorem 1} (Radial--Angular Factorization).
+\textit{For any rotationally invariant two-body interaction $V(|\mathbf{r}_1 - \mathbf{r}_2|)$, the two-body matrix element factorizes as}
+\begin{equation}
+  \langle n_1 l_1 m_1,\, n_2 l_2 m_2 \,|\, \hat{V}_{12} \,|\, n_3 l_3 m_3,\, n_4 l_4 m_4 \rangle
+  = \sum_k c^k(l_1 m_1;\, l_3 m_3)\; c^k(l_2 m_2;\, l_4 m_4)\; R^k(n_1 l_1, n_2 l_2;\, n_3 l_3, n_4 l_4),
+  \label{eq:factorization}
+\end{equation}
+\end{widetext}
+\textit{where the Gaunt coefficients}
+\begin{equation}
+  c^k(l\, m;\, l'\, m') = (-1)^m \sqrt{(2l+1)(2l'+1)}
+  \begin{pmatrix} l & k & l' \\ 0 & 0 & 0 \end{pmatrix}
+  \begin{pmatrix} l & k & l' \\ -m & q & m' \end{pmatrix}
+  \label{eq:gaunt}
+\end{equation}
+\textit{with $q = m - m'$ depend only on angular quantum numbers, and
+the Slater-type radial integrals}
+\begin{equation}
+  R^k = \int_0^\infty \!\!\int_0^\infty
+  R_{n_1 l_1}(r_1)\, R_{n_3 l_3}(r_1)\,
+  v_k(r_1, r_2)\,
+  R_{n_2 l_2}(r_2)\, R_{n_4 l_4}(r_2)\,
+  r_1^2 r_2^2\, dr_1\, dr_2
+  \label{eq:slater}
+\end{equation}
+\textit{depend on the potential $V$ through the radial wavefunctions
+and the expansion coefficients $v_k$.  The sum over $k$ is bounded:
+$\max(|l_1 - l_3|, |l_2 - l_4|) \leq k \leq \min(l_1 + l_3, l_2 + l_4)$,
+with the parity constraints $l_1 + l_3 + k$ even and $l_2 + l_4 + k$
+even.}
+
+\textit{Proof.}  Substituting the Legendre expansion
+(\ref{eq:legendre}) into the two-body integral and applying the
+spherical harmonic addition theorem
+$P_k(\cos\theta_{12}) = \frac{4\pi}{2k+1} \sum_q Y_k^{q*}(\hat{r}_1) Y_k^q(\hat{r}_2)$
+yields a product of two angular integrals (Gaunt integrals) and one
+radial integral for each $k$.  The Gaunt integral
+$\int Y_{l_1}^{m_1*} Y_k^q Y_{l_3}^{m_3}\, d\Omega$ evaluates to
+a product of Wigner 3$j$ symbols by the Wigner--Eckart
+theorem~\cite{Messiah1962}, giving Eq.~(\ref{eq:gaunt}).  The bounds
+on $k$ follow from the triangle inequality of the 3$j$ symbol:
+$|l - l'| \leq k \leq l + l'$, applied to both Gaunt coefficients.
+The parity constraint follows from the 3$j$ symbol
+$(l\; k\; l';\; 0\; 0\; 0)$, which vanishes unless $l + k + l'$ is
+even~\cite{CondonShortley1935}.  \hfill$\square$
+
+The factorization (\ref{eq:factorization}) is a standard result of
+angular momentum algebra~\cite{CondonShortley1935, Slater1960,
+Messiah1962}.  The key observation for quantum computing applications
+is the following:
+
+\medskip
+\noindent\textbf{Theorem 2} (Potential-Independent Sparsity).
+\textit{A two-body matrix element
+$\langle n_1 l_1 m_1, n_2 l_2 m_2 | \hat{V}_{12} | n_3 l_3 m_3, n_4 l_4 m_4 \rangle$
+vanishes identically for every central potential whenever
+$c^k(l_1 m_1; l_3 m_3) \cdot c^k(l_2 m_2; l_4 m_4) = 0$
+for every allowed $k$.  Conversely, whenever at least one Gaunt
+product is nonzero, the matrix element is generically nonzero.  The
+zero condition depends only on
+$(l_1, m_1, l_2, m_2, l_3, m_3, l_4, m_4)$ and is independent of the
+radial potential $V(r)$, the radial wavefunctions $R_{nl}(r)$, and
+the radial quantum numbers $(n_1, n_2, n_3, n_4)$.}
+
+\textit{Proof.}  The symmetry direction is immediate: if all angular
+factors vanish in Eq.~(\ref{eq:factorization}), every term in the sum
+is zero regardless of $R^k$.  This is the statement that the zero
+pattern generated by angular selection rules is a lower bound on
+sparsity.
+
+For the converse, suppose there exists at least one $k^*$ for which
+$c^{k^*}(l_1 m_1; l_3 m_3) \cdot c^{k^*}(l_2 m_2; l_4 m_4) \neq 0$.
+The corresponding Slater integral $R^{k^*}$ is a weighted inner
+product of the radial functions $R_{n_1 l_1} R_{n_3 l_3}$ and
+$R_{n_2 l_2} R_{n_4 l_4}$ mediated by $v_{k^*}(r_1, r_2) > 0$ on a
+set of positive measure (true for any physical central potential that
+does not vanish identically in its multipole component).  For any
+Sturm--Liouville potential with a discrete spectrum---including
+Coulomb, harmonic oscillator, Woods--Saxon, square well, and
+Yukawa---the radial products $R_{n l}(r) R_{n' l'}(r)$ are linearly
+independent as a function of $r$ for distinct index tuples, and the
+bilinear functional defined by $v_{k^*}$ is nondegenerate on this
+family.  Therefore $R^{k^*} = 0$ can hold only for a measure-zero
+subset of the space of central potentials---pathological choices in
+which two or more $R^k$ contributions conspire to cancel
+accidentally.  Any infinitesimal perturbation of the potential
+restores $R^{k^*} \neq 0$.  \hfill$\square$
+
+\textit{Remark.}  The theorem classifies zero matrix elements into
+two types: \emph{symmetry-protected zeros} (those forced by the
+Gaunt selection rules) and \emph{accidental zeros} (those produced
+by fine-tuned cancellations in $R^k$ for specific potentials).  Only
+symmetry-protected zeros transfer across potentials; accidental
+zeros are fragile under perturbation.  Below, when we refer to the
+``angular ERI density'' $D(l_{\max})$, we mean the density after
+symmetry-protected zeros are removed.
+
+%=================================================================
+\section{ERI Density Bounds}
+\label{sec:bounds}
+%=================================================================
+
+\noindent\textbf{Definition.}  The \textit{angular ERI density}
+$D(l_{\max})$ is the fraction of four-index combinations
+$(l_1 m_1, l_2 m_2, l_3 m_3, l_4 m_4)$ with $l_i \leq l_{\max}$
+for which the matrix element is not forced to vanish by Gaunt
+selection rules.  Equivalently, $D(l_{\max})$ is the fraction of
+four-index combinations for which (i) $m$-conservation
+$m_1 + m_2 = m_3 + m_4$ holds, and (ii) at least one value of $k$
+satisfies the triangle and parity conditions for both Gaunt factors
+with both factors nonzero.
+
+The total number of angular orbital labels at $l_{\max}$ is
+$N_{\mathrm{orb}} = (l_{\max} + 1)^2$, so the total number of
+unrestricted four-index combinations is $N_{\mathrm{orb}}^4$.  The
+angular ERI density counts the fraction that survives Gaunt
+selection rules.
+
+\medskip
+\noindent\textbf{Theorem 3} (ERI Density at Low $l_{\max}$).
+\textit{Exact enumeration of the Gaunt selection rules gives:}
+
+\begin{center}
+\begin{tabular}{cccrr}
+\toprule
+$l_{\max}$ & Shells & $N_{\mathrm{orb}}$ & $N_{\mathrm{orb}}^4$ & $D(l_{\max})$ \\
+\midrule
+0 & $s$                 & 1  &           1 & $100.00\%$ \\
+1 & $s + p$             & 4  &         256 & $7.8125\%$ \\
+2 & $s + p + d$         & 9  &       6{,}561 & $2.7587\%$ \\
+3 & $s + p + d + f$     & 16 &      65{,}536 & $1.4404\%$ \\
+4 & $s + p + d + f + g$ & 25 &     390{,}625 & $0.9024\%$ \\
+5 & through $h$         & 36 &   1{,}679{,}616 & $0.6190\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{These values are obtained by exact enumeration of the
+$N_{\mathrm{orb}}^4$ four-index combinations, applying the conditions
+of the definition above.  The enumeration is implemented in
+\texttt{geovac/nuclear/potential\_sparsity.py} as
+\texttt{angular\_zero\_count}, and the values in the table are
+reproduced by \texttt{debug/verify\_paper22\_lmax3.py}.}
+
+The density decreases monotonically with $l_{\max}$: the number of
+orbitals grows as $(l_{\max}+1)^2$ and the number of four-index
+combinations as $(l_{\max}+1)^8$, while the number of Gaunt-allowed
+transitions grows more slowly (polynomially).  The asymptotic
+behavior $D(l_{\max}) \to 0$ as $l_{\max} \to \infty$ reflects the
+fact that most high-$l$ four-index combinations fail the triangle
+and parity conditions for every $k$.
+
+\medskip
+\noindent\textbf{Independence from radial quantum numbers.}
+When the full orbital set includes $n_{\max}$ radial quantum numbers
+for each $(l, m)$, the total number of spatial orbitals becomes
+$N_{\mathrm{spatial}} = n_{\max} \times (l_{\max}+1)^2$.  The total
+ERI count scales as $N_{\mathrm{spatial}}^4 = n_{\max}^4 \times
+N_{\mathrm{orb}}^4$.  By Theorem~2, every angular-forbidden element
+remains zero for all values of the radial quantum numbers, and every
+angular-allowed element is generically nonzero.  The ERI density at
+fixed $l_{\max}$ is therefore independent of $n_{\max}$:
+\begin{equation}
+  D(l_{\max},\, n_{\max}) = D(l_{\max}) \quad \forall\; n_{\max} \geq 1.
+  \label{eq:nmax_independence}
+\end{equation}
+This means the angular sparsity guarantee is independent of the
+qubit count $Q = 2 \times n_{\max} \times (l_{\max}+1)^2$ at fixed
+$l_{\max}$.
+
+%=================================================================
+\section{Numerical Verification}
+\label{sec:verification}
+%=================================================================
+
+To verify Theorems~1--3, we constructed single-particle bases and
+computed all two-body matrix elements for five distinct radial
+potentials at $n_{\max} = 2$, $l_{\max} = 2$ ($N_{\mathrm{spatial}} = 18$
+orbitals, $Q = 36$ qubits):
+
+\begin{enumerate}
+\item \textbf{Coulomb:} $V(r) = -Z/r$ (hydrogen-like,
+  electronic structure)
+\item \textbf{Harmonic oscillator:} $V(r) = \tfrac{1}{2}\omega^2 r^2$
+  (nuclear shell model, quantum dots)
+\item \textbf{Woods--Saxon:}
+  $V(r) = -V_0 / (1 + e^{(r-R_0)/a})$ (nuclear mean field)
+\item \textbf{Square well:}
+  $V(r) = -V_0\, \Theta(R_0 - r)$ (textbook benchmark)
+\item \textbf{Yukawa:}
+  $V(r) = -V_0\, e^{-\mu r}/r$ (screened Coulomb, meson exchange)
+\end{enumerate}
+
+For each potential, we solved the radial Schr\"odinger equation
+numerically (or analytically where available) to obtain radial
+wavefunctions $R_{nl}(r)$, then computed all
+$N_{\mathrm{spatial}}^4 = 104{,}976$ two-body matrix elements using
+the Coulomb interaction $1/|\mathbf{r}_1 - \mathbf{r}_2|$ as the
+two-body operator.  (The single-particle potential determines the
+\textit{basis}; the two-body operator is the standard Coulomb
+repulsion in all cases.  This is the physically relevant scenario
+for electronic structure.  For nuclear structure, the two-body NN
+force is itself expanded in Legendre polynomials, and the same
+factorization applies.)
+
+\begin{table}[b]
+\caption{ERI sparsity decomposition at $n_{\max}=2$, $l_{\max}=2$
+($N_{\mathrm{spatial}} = 18$).  Angular zeros are determined by
+Gaunt selection rules; radial zeros count additional vanishings from
+radial integral structure.}
+\label{tab:sparsity}
+\begin{ruledtabular}
+\begin{tabular}{lccc}
+Potential & Angular & Radial & ERI \\
+          & zeros (\%) & zeros (\%) & density (\%) \\
+\midrule
+Coulomb        & 97.24 & 0.00 & 2.76 \\
+Harmonic osc.  & 97.24 & 0.00 & 2.76 \\
+Woods--Saxon   & 97.24 & 0.00 & 2.76 \\
+Square well    & 97.24 & 0.00 & 2.76 \\
+Yukawa         & 97.24 & 0.00 & 2.76 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The results (Table~\ref{tab:sparsity}) confirm Theorem~2 to machine
+precision:
+
+\begin{itemize}
+\item The angular zero pattern is \textit{bit-identical} across all
+  five potentials.  Not merely close---every element that is zero
+  for Coulomb is zero for all other potentials, and every nonzero
+  element is nonzero for all potentials.
+\item Radial zeros contribute exactly $0.00\%$ additional sparsity.
+  No Slater integral $R^k$ accidentally vanishes for any of the five
+  potentials tested.
+\item The ERI density is $2.76\%$ for all potentials, matching the
+  angular-only prediction of Theorem~3 at $l_{\max}=2$.
+\end{itemize}
+
+\noindent The bit-identical angular patterns are not a numerical
+coincidence: they are a direct consequence of the Gaunt coefficients
+being pure functions of $(l, m)$ quantum numbers, evaluated
+identically regardless of what potential produced the radial
+wavefunctions.
+
+%=================================================================
+\section{Implications for Quantum Simulation}
+\label{sec:implications}
+%=================================================================
+
+\subsection{Universal resource bound}
+
+Theorem~2 provides a \textit{potential-independent} upper bound on
+the number of nonzero two-body Pauli terms in any qubit Hamiltonian
+constructed from a spherical harmonic basis at angular momentum
+cutoff $l_{\max}$.  At $l_{\max} = 2$, at most $2.76\%$ of all
+possible two-body terms are nonzero; at $l_{\max}=3$, at most
+$1.44\%$.  This bound applies identically to:
+
+\begin{itemize}
+\item \textit{Electronic structure:} Coulomb repulsion in
+  hydrogen-like or Slater-type bases~\cite{GeoVac_Paper14}.
+\item \textit{Nuclear shell model:} NN interaction in the harmonic
+  oscillator $j$-$j$ basis~\cite{Suhonen2007}.  The central
+  component of the NN force respects the same Gaunt selection
+  rules.
+\item \textit{Quantum dots:} Electron--electron repulsion in
+  parabolic confinement bases~\cite{Reimann2002}.
+\item \textit{Trapped ions and cold atoms:} Any system where
+  single-particle states are expanded in spherical harmonics.
+\end{itemize}
+
+The bound means that qubit Hamiltonian sparsity estimates derived
+for one physical domain transfer directly to others at matched
+$l_{\max}$, without re-analysis of the interaction potential.
+
+\subsection{Composed architectures: O($Q^{2.5}$) Pauli scaling for
+arbitrary spherical potentials}
+
+The angular sparsity of Theorem~2 applies to single-center orbital
+bases.  In the GeoVac composed architecture~\cite{GeoVac_Paper14,
+GeoVac_Paper17}, a molecular Hilbert space is decomposed into
+block-diagonal orbital subspaces (core, bond, lone pair), each
+centered on a specific nucleus and each carrying its own spherical
+harmonic basis.  Cross-block electron repulsion integrals are
+suppressed structurally by the spatial factorization, and
+within-block integrals are subject to the angular selection rules
+of Theorem~2.  The resulting Pauli scaling measured across the
+LiH/BeH$_2$/H$_2$O/HF/NH$_3$/CH$_4$ library is
+$O(Q^{2.5})$~\cite{GeoVac_Paper14}, with exponent spread less than
+$0.05$ across molecules.
+
+\medskip
+\noindent\textbf{Corollary 1} (Potential-Independent $O(Q^{2.5})$
+Composed Sparsity). \textit{In any composed block architecture
+whose per-block single-particle bases are spherical harmonic
+products $R_{nl}(r) Y_l^m$ and whose inter-block couplings respect
+the block decomposition, the Pauli scaling $O(Q^{2.5})$ observed for
+the Coulomb interaction in
+Ref.~\cite{GeoVac_Paper14} holds for any central two-body interaction
+whatsoever, with exactly the same scaling exponent.  The radial
+potential affects only the magnitudes of the surviving ERIs, not
+which ERIs survive.}
+
+\textit{Proof sketch.}  The composed Pauli scaling decomposes into a
+block-diagonal factor (same for all potentials, depending only on
+the fiber-bundle structure) and a within-block angular factor
+(identical for all central potentials by Theorem~2).  The radial
+integrals $R^k$ merely renormalize the coefficients of surviving
+Pauli strings.  Since the Pauli count is determined by which strings
+have nonzero coefficient, the count is potential-independent; the
+Pauli 1-norm $\lambda$ and the QWC group count may differ, but the
+number of terms and the scaling exponent match.  \hfill$\square$
+
+This corollary means that the quantum resource advantages of the
+GeoVac composed architecture---$51\times$ to $1{,}712\times$ fewer
+Pauli terms than published Gaussian baselines for electronic
+structure---apply equally to nuclear shell model Hamiltonians,
+quantum dot Hamiltonians, and any other composed block architecture
+built from spherical harmonic bases.  The angular selection rule
+structure is a computational resource that belongs to the geometry
+of angular momentum, not to the Coulomb potential.
+
+\subsection{Non-central interactions}
+
+Theorems~1--3 apply to central (rotationally invariant) two-body
+interactions.  Non-central interactions---tensor forces
+($S_{12}$), spin-orbit coupling ($\mathbf{L} \cdot \mathbf{S}$),
+and velocity-dependent potentials---have modified selection rules.
+The tensor force, for example, couples states with
+$|\Delta L| = 0, 2$ and mixes partial waves, expanding the set of
+allowed transitions relative to the central-force case.  For such
+interactions, the angular sparsity bound of Theorem~3 is a
+\textit{lower} bound on the ERI density (i.e., the Hamiltonian
+may be denser than the central-force prediction).  The Gaunt
+selection rules for the central component still apply to that
+component, but additional nonzero terms appear from the non-central
+components.  A complete sparsity analysis for nuclear Hamiltonians
+with tensor and spin-orbit forces requires extending the angular
+classification to include spin-dependent Gaunt-type coefficients,
+which is beyond the scope of this paper.
+
+%=================================================================
+\section{Universal vs.\ Coulomb-Specific Structure}
+\label{sec:universal}
+%=================================================================
+
+The GeoVac spectral graph theory framework exhibits two distinct
+kinds of structure that are sometimes conflated.  Theorem~2 and its
+corollary allow us to draw a sharp line between them.
+
+\medskip
+\noindent\textbf{Universal across spherical fermion systems.}
+The following properties depend only on the angular momentum
+content of the basis, not on the specific radial potential:
+\begin{itemize}
+\item Radial--angular factorization of two-body matrix elements
+  (Theorem~1).
+\item Gaunt-selection-rule sparsity $D(l_{\max})$ (Theorem~3).
+\item $O(Q^4) \to O(Q^{2.5})$ reduction from single-center to
+  composed block architectures (Corollary~1).
+\item Bit-identical zero patterns across Coulomb, harmonic,
+  Woods--Saxon, square well, and Yukawa potentials
+  (Table~\ref{tab:sparsity}).
+\end{itemize}
+These properties hold for any central two-body interaction and any
+radial single-particle potential that produces a complete orbital
+basis.
+
+\medskip
+\noindent\textbf{Coulomb-specific.}
+The following properties are tied to the $SO(4)$ accidental
+degeneracy of the hydrogen atom and do not extend to generic central
+potentials:
+\begin{itemize}
+\item The Fock stereographic projection from momentum space to $S^3$
+  that maps the hydrogen Schr\"odinger equation to an integer
+  eigenvalue problem on the three-sphere~\cite{GeoVac_Paper7}.
+\item The $\pi$-free graph structure in which all one-body
+  eigenvalues, degeneracies, and coupling coefficients are
+  integers or rationals before projection to continuous manifolds.
+\item The universal constant $K = -1/16$ that maps graph eigenvalues
+  to the Rydberg spectrum.
+\item The hydrogen shell degeneracy sequence $n^2$ as
+  $O(n^2)$-dimensional $SO(4)$ irreducible representations.
+\end{itemize}
+A companion paper~\cite{GeoVac_Paper23} establishes that the $S^3$
+Fock projection is rigid in the following sense: modifying the
+Coulomb potential $-Z/r$ to any other central form breaks the
+$SO(4)$ symmetry, removes the shell degeneracy, and destroys the
+integer spectrum.  The Coulomb case is the unique central potential
+for which the one-body Hamiltonian admits a $\pi$-free graph
+Laplacian interpretation.
+
+\medskip
+This partition clarifies the scope of each structural feature.  The
+angular sparsity results of this paper apply broadly across
+quantum-simulation domains; the $S^3$ graph Laplacian machinery
+applies only to Coulomb systems.  The two classes of result should
+be cited and deployed accordingly.
+
+%=================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%=================================================================
+
+The zero structure of two-body matrix elements in a spherical
+harmonic basis is determined entirely by the Wigner 3$j$ symbols
+(Gaunt coefficients) that encode angular momentum selection rules.
+This structure is independent of the radial potential that defines
+the single-particle orbitals, independent of the specific form of
+the two-body interaction (provided it is rotationally invariant),
+and independent of the number of radial quantum numbers retained in
+the basis.
+
+The explicit angular ERI densities obtained by exact enumeration are
+$7.81\%$ at $l_{\max}=1$, $2.76\%$ at $l_{\max}=2$, $1.44\%$ at
+$l_{\max}=3$, $0.90\%$ at $l_{\max}=4$, and $0.62\%$ at $l_{\max}=5$.
+Numerical verification across five potentials (Coulomb, harmonic
+oscillator, Woods--Saxon, square well, Yukawa) at $l_{\max}=2$
+confirms the theorem to machine precision: the angular zero patterns
+are bit-identical and radial zeros contribute no additional
+sparsity.
+
+The universal--specific partition is sharp.  Angular sparsity,
+radial--angular factorization, and the $O(Q^{2.5})$ Pauli scaling of
+composed block architectures are universal across spherical fermion
+systems.  The $S^3$ Fock projection, the $\pi$-free graph Laplacian,
+and the integer spectrum of the unperturbed hydrogen problem are
+Coulomb-specific and break under any modification of the radial
+potential~\cite{GeoVac_Paper23}.  Sparsity-aware quantum simulation
+techniques developed for electronic structure (qubit tapering, Pauli
+grouping, tensor factorization) transfer directly to nuclear
+structure, quantum dots, and other spherical-potential systems
+without modification, because the angular structure of the
+spherical harmonic basis is a computational resource that belongs
+to the geometry of angular momentum, not to any particular physical
+potential.
+
+%=================================================================
+\begin{thebibliography}{20}
+
+\bibitem{Peruzzo2014}
+A.~Peruzzo \textit{et al.},
+``A variational eigenvalue solver on a photonic quantum processor,''
+Nat.\ Commun.\ \textbf{5}, 4213 (2014).
+
+\bibitem{Lee2021}
+J.~Lee \textit{et al.},
+``Even more efficient quantum computations of chemistry through
+tensor hypercontraction,''
+PRX Quantum \textbf{2}, 030305 (2021).
+
+\bibitem{Whitten1973}
+J.~L.~Whitten,
+``Coulombic potential energy integrals and approximations,''
+J.\ Chem.\ Phys.\ \textbf{58}, 4496 (1973).
+
+\bibitem{Dunlap2000}
+B.~I.~Dunlap, N.~R\"osch, and S.~B.~Trickey,
+``Robust and variational fitting,''
+Mol.\ Phys.\ \textbf{98}, 1639 (2000).
+
+\bibitem{Suhonen2007}
+J.~Suhonen,
+\textit{From Nucleons to Nucleus: Concepts of Microscopic Nuclear Theory}
+(Springer, Berlin, 2007).
+
+\bibitem{CondonShortley1935}
+E.~U.~Condon and G.~H.~Shortley,
+\textit{The Theory of Atomic Spectra}
+(Cambridge University Press, Cambridge, 1935).
+
+\bibitem{Slater1960}
+J.~C.~Slater,
+\textit{Quantum Theory of Atomic Structure}, Vol.~I
+(McGraw-Hill, New York, 1960).
+
+\bibitem{Messiah1962}
+A.~Messiah,
+\textit{Quantum Mechanics}, Vol.~II
+(North-Holland, Amsterdam, 1962).
+
+\bibitem{GeoVac_Paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Spectral Graph Theory and Conformal
+Equivalence on $S^3$,''
+GeoVac Technical Report (2025).
+
+\bibitem{GeoVac_Paper14}
+J.~Loutey,
+``Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory,''
+GeoVac Technical Report (2025).
+
+\bibitem{GeoVac_Paper17}
+J.~Loutey,
+``Composed Natural Geometries for Core-Valence Molecular
+Electronic Structure,''
+GeoVac Technical Report (2025).
+
+\bibitem{GeoVac_Paper18}
+J.~Loutey,
+``Exchange Constants and the Transcendental Taxonomy of
+Observables,''
+GeoVac Technical Report (2026).
+
+\bibitem{GeoVac_Paper23}
+J.~Loutey,
+``Fock Rigidity: The $S^3$ Projection is Coulomb-Specific,''
+GeoVac Technical Report (2026).
+
+\bibitem{Reimann2002}
+S.~M.~Reimann and M.~Manninen,
+``Electronic structure of quantum dots,''
+Rev.\ Mod.\ Phys.\ \textbf{74}, 1283 (2002).
+
+\end{thebibliography}
+
+\end{document}

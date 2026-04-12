@@ -1,0 +1,1164 @@
+% paper_21_geometric_vacuum_synthesis.tex — GeoVac Paper 21
+% The Geometric Vacuum: Quantum Structure from Compact Manifold Topology
+% Status: Draft, April 7, 2026
+% Category: Synthesis (papers/synthesis/)
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+\newtheorem{conjecture}{Conjecture}
+
+\begin{document}
+
+\title{The Geometric Vacuum:\\
+Quantum Structure from Compact Manifold Topology}
+\thanks{Paper 21 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{April 7, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The non-relativistic quantum mechanics of Coulomb systems can be
+reformulated as spectral geometry on compact manifolds.  The angular
+momentum quantum numbers $(l, m)$ and their degeneracies $2l+1$ emerge
+from a geometric packing construction on isotropic shells, independent
+of the Schr\"odinger equation.  The hydrogen energy spectrum, the
+$1/r$ Coulomb potential, and the $n^2$ degeneracy all follow from the
+Laplace--Beltrami operator on the unit three-sphere $S^3$, with physical
+scales entering exclusively through stereographic projection---as
+demonstrated by Fock in 1935 and verified here through 18 independent
+symbolic proofs.  For $N$-electron atoms, the framework extends to
+$S^{3N-1}$, where the permutation group $S_N$ acting on the
+hyperspherical angular basis produces chemical periodicity as a
+representation-theoretic consequence.  A new sparsity mechanism from
+angular momentum recoupling---6$j$ coefficients producing additional
+zeros beyond Gaunt selection rules---reduces electron repulsion integral
+density by 18--26\%.  The exchange constant taxonomy classifies
+transcendental content (where $\pi$ and other transcendentals enter the
+otherwise rational graph spectrum) as instances of the Weyl--Selberg
+spectral-geometric conversion.  The Hopf fibration
+$S^1 \to S^3 \to S^2$ of the electron's proven state manifold yields
+the fine structure constant $\alpha^{-1} = 137.035987$ from spectral
+invariants of the bundle components, with zero free parameters and
+$p$-value $5.2 \times 10^{-9}$; the combination rule remains conjectural.
+These results are mathematically exact for single-center systems and
+suggest a concrete research program: high-precision atomic spectra on
+$S^{3N-1}$, compared with experimental fine structure data, can test the
+$\alpha$ conjecture computationally.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+%% I. INTRODUCTION
+%% ========================================================================
+
+\section{Introduction}
+\label{sec:introduction}
+
+The Schr\"odinger equation for hydrogen presupposes continuous flat
+space, a radial Coulomb potential $V(r) = -Z/r$, and quantized energy
+levels $E_n = -Z^2/(2n^2)$ as boundary-condition eigenvalues.  Fock
+showed in 1935~\cite{Fock1935} that these are not independent
+assumptions: the hydrogen problem on the unit three-sphere $S^3$ is a
+free particle, with the $1/r$ potential emerging from stereographic
+projection and the Rydberg spectrum from the energy-shell constraint
+$p_0^2 = -2E$.  Bargmann~\cite{Bargmann1936} identified the underlying
+SO(4) symmetry, and Barut and Kleinert~\cite{BarutKleinert1967}
+extended the dynamical algebra to SO(4,2).
+
+These foundational results are well known.  What is new in the present
+work is their extension into a complete computational framework:
+\begin{enumerate}
+\item A geometric packing construction derives the angular quantum
+  numbers $(l, m)$ and their degeneracies $2l+1$ from two axioms
+  (binary distinguishability and geometric indifference), independent
+  of operators or dynamics (Paper~0~\cite{Paper0}).
+\item The discrete graph Laplacian on the resulting lattice converges
+  to the Laplace--Beltrami operator on the unit $S^3$, verified
+  through 18 independent symbolic proofs (Paper~7~\cite{Paper7}).
+\item The framework extends to $N$-electron atoms on $S^{3N-1}$, where
+  the permutation group $S_N$ produces chemical periodicity as
+  representation theory (Papers~13, 16~\cite{Paper13,Paper16}).
+\item A new sparsity mechanism from angular momentum
+  recoupling---6$j$ coefficients producing additional zeros beyond
+  Gaunt selection rules---yields 18--26\% lower electron repulsion
+  integral (ERI) density in coupled bases.
+\item The composed molecular architecture assigns each electron group
+  its own natural coordinate system, producing structurally sparse qubit
+  Hamiltonians: $N_{\text{Pauli}} \approx 11.11 \times Q$ across a
+  library of 30 molecules spanning three rows of the periodic table
+  ($Z = 1$--36), with open-source ecosystem export to OpenFermion,
+  Qiskit, and PennyLane
+  (Papers~14, 17, 19, 20~\cite{Paper14,Paper17,Paper19,Paper20}).
+\item The Hopf fibration $S^1 \to S^3 \to S^2$ suggests a topological
+  origin for the electromagnetic coupling constant $\alpha$
+  (Paper~2~\cite{Paper2}, conjectural).
+\end{enumerate}
+
+\noindent\textit{Scope.}  The reformulation is mathematically exact for
+single-center Coulomb systems (atoms), where the $S^{3N-1}$ structure
+provides 18 symbolic proofs, 0.004\% He ground-state accuracy, and a
+new 6$j$ recoupling sparsity mechanism.  For molecules, the composed
+architecture factorizes the $N$-body problem into coupled natural
+geometries, producing practical qubit Hamiltonians with $O(Q^{2.5})$
+Pauli scaling and characterized FCI accuracy (0.20\% energy error for
+LiH at fixed geometry via the balanced coupled Hamiltonian).  This paper
+covers both: the single-center mathematical foundations
+(Secs.~\ref{sec:kinematics}--\ref{sec:exchange}) and the molecular
+computational pipeline that builds on them (Sec.~\ref{sec:pipeline}).
+
+%% ========================================================================
+%% II. KINEMATICS: QUANTUM NUMBERS FROM GEOMETRY
+%% ========================================================================
+
+\section{Kinematics: Quantum Numbers from Geometry}
+\label{sec:kinematics}
+
+The angular structure of quantum mechanics---the quantum numbers
+$(l, m)$, the degeneracy $2l + 1$ per shell, and the cumulative count
+$n^2$---can be derived from two axioms without reference to the
+Schr\"odinger equation, angular momentum operators, or any specific
+physical system.
+
+\subsection{Two axioms}
+
+\begin{enumerate}
+\item \textbf{Binary distinguishability.}  A minimum of two
+  distinguishable states is required to establish a nonzero fundamental
+  scale $d_0$.  A single point cannot define a distance; two points
+  create the first bit of spatial information.
+\item \textbf{Geometric indifference.}  In the absence of external
+  constraints or privileged directions, the distribution of states
+  must maximize entropy.  By the principle of indifference, this
+  necessitates isotropy: states populate isotropic shells (circles)
+  rather than anisotropic tilings (squares, hexagons), which would
+  imply privileged directions not present in the axioms.
+\end{enumerate}
+
+\subsection{Packing construction}
+
+The two-point initialization fixes the fundamental area per state
+$\sigma_0 = \pi d_0^2 / 2$.  States are distributed on linearly
+spaced shells with radius $r_k = k \cdot d_0$, $k = 1, 2, 3, \ldots$
+The annular area of shell $k$ is
+\begin{equation}
+A_k = \pi d_0^2 \bigl[ k^2 - (k-1)^2 \bigr] = \pi d_0^2 (2k - 1),
+\label{eq:annular_area}
+\end{equation}
+and the angular capacity per shell is
+\begin{equation}
+N_k^{\text{angular}} = \frac{A_k}{\sigma_0} = 2(2k - 1).
+\label{eq:shell_capacity}
+\end{equation}
+The factor $(2k-1)$ is the dimension of the spin-$(k-1)$ irreducible
+representation of SO(3).  With the identification $l = k - 1$, each
+shell carries exactly $2l + 1$ angular states---the spherical harmonic
+basis $Y_{lm}$ with $m = -l, \ldots, +l$.  The global factor of 2
+arises from orientability of the compactified packing manifold on $S^2$.
+
+The cumulative state count through shell $n$ is
+\begin{equation}
+\sum_{k=1}^{n} (2k - 1) = n^2,
+\label{eq:cumulative}
+\end{equation}
+reproducing the $n^2$ orbital count (or $2n^2$ including the spin
+factor).
+
+\subsection{What the construction establishes}
+
+The packing construction derives the \textit{kinematic} structure of
+quantum mechanics---the state-counting aspect of angular momentum---from
+pure geometry.  It produces the quantum number labeling $(l, m)$, the
+per-shell degeneracy $2l+1$, and the cumulative count $n^2$.  It does
+not produce energy eigenvalues, wavefunctions, or dynamics; those
+require the \textit{dynamic} structure provided by $S^3$ (Sec.~\ref{sec:dynamics}).
+
+%% ========================================================================
+%% III. DYNAMICS: THE SCHRÖDINGER EQUATION FROM S³
+%% ========================================================================
+
+\section{Dynamics: The Schr\"odinger Equation from $S^3$}
+\label{sec:dynamics}
+
+\subsection{The paraboloid lattice}
+
+The quantum numbers $(n, l, m)$ from the packing construction label
+nodes of a discrete graph---the paraboloid lattice.  Edges are generated
+by the ladder operators $L_\pm$ (angular momentum raising/lowering) and
+$T_\pm$ (radial transitions), producing a sparse adjacency structure.
+The graph Hamiltonian is
+\begin{equation}
+H = \kappa \cdot \mathcal{L},
+\label{eq:graph_hamiltonian}
+\end{equation}
+where $\mathcal{L} = D - A$ is the graph Laplacian ($D$ = degree
+matrix, $A$ = adjacency matrix) and $\kappa = -1/16$ is the universal
+kinetic scale factor.
+
+\subsection{Continuum limit: the unit $S^3$}
+
+In the continuum limit ($n_{\max} \to \infty$), the graph Laplacian
+converges to the Laplace--Beltrami operator $\Delta_{S^3}$ on the unit
+three-sphere.  The eigenfunctions are Gegenbauer polynomials
+$C_{n-1}^1(\cos\chi)$ in the $l = 0$ sector, where $\chi$ is the
+hyperspherical angle, and the eigenvalues are pure dimensionless
+integers:
+\begin{equation}
+\Delta_{S^3}\, C_{n-1}^1(\cos\chi) = -(n^2 - 1)\, C_{n-1}^1(\cos\chi).
+\label{eq:s3_eigenvalues}
+\end{equation}
+These eigenvalues $\lambda_n = -(n^2 - 1)$ are topological invariants
+of the unit sphere, carrying no physical dimensions.
+
+\subsection{Stereographic projection: Fock's map}
+
+Fock's stereographic projection~\cite{Fock1935} maps the unit $S^3$ to
+flat momentum space $\mathbb{R}^3$.  A point
+$\mathbf{n} = (n_1, n_2, n_3, n_4) \in S^3$ maps to momentum
+$\mathbf{p} = (p_1, p_2, p_3) \in \mathbb{R}^3$ via
+\begin{equation}
+n_i = \frac{2p_0\, p_i}{p^2 + p_0^2}, \quad
+n_4 = \frac{p^2 - p_0^2}{p^2 + p_0^2},
+\label{eq:stereographic}
+\end{equation}
+with conformal factor
+\begin{equation}
+\Omega(\mathbf{p}) = \frac{2p_0}{p^2 + p_0^2}.
+\label{eq:conformal_factor}
+\end{equation}
+The unit sphere constraint $\sum_{i=1}^{4} n_i^2 = 1$ holds for
+\textit{all} $p_0 > 0$, confirming scale invariance: the projection
+always produces the unit $S^3$ regardless of the choice of $p_0$.
+
+\subsection{Emergence of the Coulomb potential}
+
+The chordal distance identity
+\begin{equation}
+|\mathbf{n}(\mathbf{p}) - \mathbf{n}(\mathbf{q})|^2
+= \Omega(\mathbf{p})\, \Omega(\mathbf{q})\, |\mathbf{p} - \mathbf{q}|^2
+\label{eq:chordal}
+\end{equation}
+relates the Euclidean distance on $S^3$ (left side) to the flat-space
+distance (right side), weighted by conformal factors.  The free-particle
+Green's function on $S^3$, which depends on the chordal distance
+$|\mathbf{n} - \mathbf{n}'|^{-2}$, transforms under stereographic
+projection into a kernel proportional to
+$1/|\mathbf{p} - \mathbf{p}'|^2$.  Upon Fourier transformation to
+position space, this becomes the $1/r$ Coulomb potential.
+
+The Coulomb potential is therefore not an input force law---it is the
+coordinate distortion introduced by stereographic projection.
+
+\subsection{Energy-shell constraint and the Rydberg spectrum}
+
+The parameter $p_0$ is fixed by the energy-shell constraint
+\begin{equation}
+p_0^2 = -2E,
+\label{eq:energy_shell}
+\end{equation}
+which converts the dimensionless integer eigenvalues into physical
+energies.  For the $n$-th level, $p_0 = 1/n$ (in atomic units), and
+\begin{equation}
+E_n = -\frac{p_0^2}{2} = -\frac{1}{2n^2}.
+\label{eq:rydberg}
+\end{equation}
+The complete chain is:
+\begin{equation}
+\text{Graph} \;\xrightarrow{\;\text{continuum}\;}\; S^3
+\;\xrightarrow{\;\text{stereo.}\;}\; \mathbb{R}^3
+\;\xrightarrow{\;p_0^2 = -2E\;}\; E_n = -\frac{1}{2n^2}.
+\label{eq:chain}
+\end{equation}
+
+\subsection{Symbolic verification}
+
+Every algebraic step in this chain has been verified through 18
+independent symbolic proofs~\cite{Paper7}, implemented in the
+\texttt{sympy} computer algebra system and collected in the test suite
+\texttt{test\_fock\_projection.py} and \texttt{test\_fock\_laplacian.py}.
+These verify:
+\begin{itemize}
+\item Module I (Tests 1--10): Stereographic projection geometry---unit
+  sphere constraint, conformal factor identities, chordal distance
+  relation, volume Jacobian, inverse projection round-trip.
+\item Module II (Tests 11--18): Conformal Laplacian and
+  eigenvalues---connection term, zero-mode annihilation
+  ($\Delta_{S^3}(1) = 0$), eigenvalue verification at $n = 2$ and
+  $n = 3$, rational decomposition of conformally weighted Laplacian,
+  eigenvalue-to-energy mapping.
+\end{itemize}
+All 18 tests pass with symbolic (exact) agreement, constituting a
+machine-verified proof of the graph-to-Schr\"odinger equivalence.
+
+%% ========================================================================
+%% IV. THE MULTI-ELECTRON GENERALIZATION
+%% ========================================================================
+
+\section{The Multi-Electron Generalization}
+\label{sec:multielectron}
+
+\subsection{$N$ electrons on $S^{3N-1}$}
+
+For an $N$-electron atom, the $3N$ spatial coordinates are collected
+into a hyperradius $R = \sqrt{\sum_i r_i^2}$ and $3N-1$ angular
+coordinates on $S^{3N-1}$.  The kinetic energy operator separates as
+\begin{equation}
+T = -\frac{1}{2}\left(\frac{\partial^2}{\partial R^2}
++ \frac{3N-1}{R}\frac{\partial}{\partial R}
+- \frac{\Lambda^2}{R^2}\right),
+\label{eq:kinetic_N}
+\end{equation}
+where $\Lambda^2$ is the grand angular momentum operator (the
+Laplace--Beltrami operator on $S^{3N-1}$).  Its eigenvalues are the
+SO($3N$) Casimir invariants:
+\begin{equation}
+\Lambda^2 Y_\nu = \nu(\nu + 3N - 2)\, Y_\nu,
+\label{eq:casimir_3N}
+\end{equation}
+with $\nu = 0, 1, 2, \ldots$ and $Y_\nu$ the hyperspherical harmonics.
+
+At hyperradius $R = 0$, the system is a free particle on the unit
+$S^{3N-1}$.  The total Coulomb interaction enters as a geometric
+perturbation through the charge function $C(\hat{\Omega})/R$, where
+$C$ encodes the nuclear attraction and electron-electron repulsion in
+angular coordinates.  In the adiabatic hyperspherical
+method~\cite{Macek1968,Lin1995}, the angular eigenvalue problem is
+solved parametrically at each $R$, yielding adiabatic eigenvalues
+$\mu_\nu(R)$ that define effective radial potentials
+$V_{\text{eff}}(R) = \mu_\nu(R)/R^2 + (3N-1)(3N-3)/(8R^2)$.
+
+For helium ($N = 2$, $S^5$), the single-channel adiabatic approximation
+yields a ground-state energy of $-2.9052$~Ha, a 0.05\% error relative
+to the exact nonrelativistic value $-2.903724$~Ha~\cite{Paper13}.
+
+\subsection{Chemical periodicity from $S_N$ representation theory}
+
+The total wavefunction must be antisymmetric under electron permutation.
+Writing $|\Psi\rangle = |\text{spatial}\rangle \otimes |\text{spin}\rangle$
+and applying Schur--Weyl duality, the spatial symmetry is determined by
+the conjugate of the spin Young diagram.
+
+\begin{theorem}[Universal $\lambda_1$~\cite{Paper16}]
+For any $N$-electron atom with ground-state spin $S < N/2$, the spatial
+Young diagram has first-column length $\lambda_1 = 2$, independent of
+$Z$, $S$, or electron configuration.
+\end{theorem}
+
+\noindent\textit{Proof.}  The spin diagram has two rows
+$[n_\uparrow, n_\downarrow]$ with $n_\downarrow \geq 1$ (since
+$S < N/2$).  Its conjugate has $n_\downarrow$ columns of height~2 and
+$2S$ columns of height~1.  The first-column length is~2.  \qed
+
+This fixes the minimum grand angular momentum quantum number at
+$\nu = N - \lambda_1 = N - 2$, giving a universal free eigenvalue:
+\begin{equation}
+\boxed{\mu_{\text{free}} = \frac{(N-2)(4N-4)}{2} = 2(N-2)^2.}
+\label{eq:mu_free}
+\end{equation}
+This ``Pauli centrifugal cost'' depends only on the electron count $N$,
+not on the nuclear charge $Z$, spin state $S$, or orbital
+configuration---it is purely topological.
+
+The periodic table structure follows from the sequence of $S_N$ spatial
+irreducible representations as shells fill.  Five structure types emerge:
+\begin{description}
+\item[Type A] ($N = 1$): Hydrogen.  $\nu = 0$, no antisymmetry
+  constraint.
+\item[Type B] (Noble gases): Closed-shell, democratic Young diagram
+  $[2^{N/2}]$.  Maximal Pauli centrifugal barrier.
+\item[Type C] (Alkali metals): One electron in new shell above closed
+  core.  Hierarchical diagram $[2^{(N-1)/2}, 1]$.
+\item[Type D] (Alkaline earths): Two electrons above closed core.
+  Same diagram shape as Type~B but different occupancy pattern.
+\item[Type E] (Open-shell): Partially filled $p$- and $d$-subshells.
+  Varying spin and diagram shapes.
+\end{description}
+
+The periodic law is the group-theoretic statement: \textit{chemical
+properties of elements are periodic functions of atomic number because
+the sequence of $S_N$ spatial irreps repeats whenever a new principal
+shell begins filling.}
+
+\subsection{Angular momentum recoupling sparsity}
+
+For $N$-electron systems, organizing the $S^{3N-1}$ angular basis
+hierarchically via pairwise (H-set) coupling---where electrons are
+grouped into pairs with definite intermediate angular momenta
+$l_{12}, l_{34}, \ldots$---produces a new sparsity mechanism.
+
+When a two-body operator (e.g., the electron-electron repulsion
+$V_{ee}(1,2)$) acts on a pair, it preserves the angular momenta of
+spectator pairs.  The matrix element of $V_{ee}$ between coupled states
+involves Wigner 6$j$ symbols from recoupling:
+\begin{equation}
+\begin{Bmatrix} l_1 & l_2 & l_{12} \\ l_{12}' & l_1' & k \end{Bmatrix},
+\label{eq:6j}
+\end{equation}
+where $k$ is the multipole order from the Gaunt integral.  These 6$j$
+coefficients vanish for certain combinations of angular momenta,
+producing \textit{additional zeros} beyond the bare Gaunt selection
+rules ($|l - l'| \leq k \leq l + l'$, $l + k + l' = \text{even}$).
+
+The resulting ERI density reduction is quantified in
+Table~\ref{tab:eri_density}.
+
+\begin{table}[t]
+\caption{ERI density (fraction of nonzero electron repulsion integrals)
+in uncoupled vs.\ H-set coupled bases for four-electron systems.}
+\label{tab:eri_density}
+\begin{ruledtabular}
+\begin{tabular}{ccccc}
+$l_{\max}$ & Uncoupled & H-set & Reduction \\
+\hline
+1 & 12.5\% & 9.2\% & 26\% \\
+2 & 5.1\% & 4.2\% & 18\% \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+This sparsity mechanism is basis-agnostic: it applies to any encoding
+with angular momentum pair coupling and follows from the representation
+theory of SO(3), not from any particular choice of radial basis or
+physical system.
+
+\paragraph{Three-layer structure of the He ground state (v2.6.0).}
+The graph-native FCI (Track~DI Sprints~2--3D) makes the exchange constant
+structure fully explicit.  Using the graph Laplacian $\kappa\mathcal{L}$
+as the one-body operator and exact rational Slater integrals as the
+two-body operator, the He ground state is computed with zero free
+parameters.  At $n_{\max} = 7$ (1,218~configurations): 0.19\% error.
+Replacing $\kappa\mathcal{L}$ with the diagonal hydrogenic operator
+degrades to 1.41\% (variational~$k$) or 1.85\% (fixed $k = Z$),
+demonstrating that the graph topology (off-diagonal $T_\pm$ couplings)
+accounts for $\sim$86\% of the CI correlation energy.
+
+FCI basis invariance was verified (Sprint~3D): transforming $V_{ee}$
+to the graph eigenbasis gives identical energies ($< 3 \times 10^{-15}$~Ha),
+confirming the $\sim$0.14\% convergence floor is irreducible
+transcendental content from the electron-electron cusp at
+$\alpha = \pi/4$ on~$S^5$ (embedding exchange constant, Paper~18),
+not basis mismatch between the graph and hydrogenic operators.
+
+%% ========================================================================
+%% V. THE EXCHANGE CONSTANT TAXONOMY
+%% ========================================================================
+
+\section{Where Continuous Physics Enters}
+\label{sec:exchange}
+
+\subsection{The $\pi$-free graph}
+
+The graph Laplacian on the paraboloid lattice is $\pi$-free: all
+eigenvalues, degeneracies, and coupling coefficients are integers or
+rationals.  Transcendental numbers---$\pi$, exponential integrals,
+spectral zeta values---enter exclusively when projecting the discrete
+graph onto continuous manifolds for comparison with experiment or
+computational convenience.
+
+This observation motivates a classification of exactly
+\textit{where} continuous physics enters the otherwise discrete
+framework.
+
+\subsection{Four types of exchange constant}
+
+Each projection from the discrete algebraic structure to a continuous
+coordinate system introduces a characteristic transcendental constant,
+classified by what determines it~\cite{Paper18}:
+
+\begin{description}
+\item[Intrinsic:] Determined by dimension alone.  Example: $\pi$ for
+  $S^1 \to \mathbb{R}$.
+
+\item[Calibration:] Determined by graph connectivity.  Example: the
+  kinetic scale factor $\kappa = -1/16$, which maps the graph
+  eigenvalue $\lambda_{\max} = 8$ to the hydrogen ground state
+  $E_H = -1/2$~Ha.
+
+\item[Embedding:] Seeded by coordinate singularities.  Example: the
+  Stieltjes seed $e^a E_1(a)$ that enters when embedding the Laguerre
+  spectral basis into prolate spheroidal coordinates (Paper~11), and
+  the $1/r_{12}$ cusp---an embedding exchange constant that cannot be
+  absorbed into the $S^5$ graph
+  (Paper~15~\cite{Paper15}).
+
+\item[Flow:] Parameter-dependent algebraic functions with
+  transcendental coefficients.  Example: the adiabatic eigenvalue
+  $\mu(R)$, which satisfies a polynomial equation
+  $P(R, \mu) = 0$ at each hyperradius but whose $R$-dependence is
+  transcendental (Paper~13).
+\end{description}
+
+\noindent These form a dependency hierarchy: intrinsic $\to$ calibration
+$\to$ embedding $\to$ flow, with each level incorporating the
+transcendental content of the previous levels.
+
+\subsection{Weyl--Selberg identification}
+
+The exchange constants are instances of a known mathematical
+structure.  Weyl's law relates the eigenvalue counting function
+$N(\Lambda)$ of a compact Riemannian manifold $\mathcal{M}$ to its
+volume:
+\begin{equation}
+N(\Lambda) \sim \frac{\mathrm{Vol}(\mathcal{M})}{(2\pi)^d}\,
+\Lambda^{d/2},
+\label{eq:weyl}
+\end{equation}
+providing the precise conversion between discrete eigenvalue sums and
+continuous manifold volumes.  The Selberg trace formula generalizes
+this to an exact identity between spectral data and geometric data
+(lengths of closed geodesics) on hyperbolic manifolds.
+
+The GeoVac exchange constants---$\kappa$, $e^a E_1(a)$,
+$\mu(R)$---are specific instances of this spectral-geometric
+conversion for the conformal and hyperspherical hierarchies.  The
+exchange constant taxonomy tells us exactly where continuous physics
+enters the discrete framework, and why it takes the specific
+transcendental form it does: the graph is $\pi$-free; $\pi$ enters
+when you project it.
+
+\subsection{Observable classification}
+
+The exchange constant hierarchy induces a classification of physical
+observables by their transcendental content~\cite{Paper18}:
+
+\begin{description}
+\item[Class S (Spectral):] Energy eigenvalues, degeneracies, selection
+  rules.  Require graph eigenvalues and $\kappa$ only.  \textit{No
+  transcendental content} beyond the calibration constant.
+
+\item[Class P (Single-particle spatial):] Electron density $\rho(r)$,
+  radial moments $\langle r^k \rangle$, momentum distributions.
+  Require the $S^3 \to \mathbb{R}^3$ conformal projection, introducing
+  $\pi$ through $\mathrm{Vol}(S^3) = 2\pi^2$.
+
+\item[Class C (Multi-particle correlated):] Correlation energies,
+  adiabatic potential energy surfaces, multi-electron expectation
+  values.  Require embedding and flow constants ($e^a E_1(a)$,
+  $\mu(R)$, PK pseudopotential).
+\end{description}
+
+\noindent
+The He ground state provides a concrete census of all four exchange
+constant types (Paper~18, Note added v2.6.0): intrinsic ($\pi$ from
+$\mathrm{Vol}(S^5)$), calibration ($\kappa = -1/16$), embedding
+(e-e cusp at $\alpha = \pi/4$), and flow ($\mu(R)$, bypassed by the
+2D variational solver).  The three-layer decomposition---rational
+Slater integrals, algebraic optimal exponents, transcendental
+cusp---demonstrates that each layer corresponds to a distinct exchange
+constant class.
+
+%% ========================================================================
+%% VI. THE HOPF FIBRATION AND ELECTROMAGNETIC COUPLING
+%% ========================================================================
+
+\section{The Hopf Fibration and Electromagnetic Coupling}
+\label{sec:alpha}
+
+The results of Secs.~\ref{sec:dynamics}--\ref{sec:exchange} establish
+$S^3$ as the proven state manifold for a single bound electron.
+The three-sphere possesses a unique nontrivial fiber bundle---the Hopf
+fibration~\cite{Hopf1931}---which we now examine for physical content.
+
+\textit{The results of this section are conjectural.  The numerical
+agreement is statistically significant but the combination rule
+(Eq.~\ref{eq:combination_rule}) has not been derived from first
+principles.  We present the evidence and identify explicitly which
+links in the derivation chain are established, partially established,
+and open.}
+
+\subsection{The Hopf bundle as electron-photon geometry}
+
+The Hopf fibration
+\begin{equation}
+S^1 \;\longrightarrow\; S^3 \;\longrightarrow\; S^2
+\label{eq:hopf}
+\end{equation}
+is the unique principal $U(1)$-bundle over $S^2$ with first Chern
+number $c_1 = 1$.  Its three components admit a physical interpretation:
+\begin{itemize}
+\item $S^3$ (total space): The electron bound-state manifold, proven by
+  Fock's stereographic projection (Sec.~\ref{sec:dynamics}).
+\item $S^2$ (base): The photon momentum sphere, parametrizing
+  propagation directions of the electromagnetic field.
+\item $S^1$ (fiber): The $U(1)$ gauge phase of the electromagnetic
+  potential.
+\end{itemize}
+Electromagnetic coupling is then the cost of projecting the electron's
+$S^3$ onto the photon's $S^2$---a projection whose geometry is entirely
+determined by the Hopf map.
+
+\subsection{Spectral invariants}
+
+Each bundle component contributes a spectral invariant.
+
+\textit{Base $S^2$---Casimir trace.}  The SO(3) Casimir eigenvalue for
+angular momentum $l$ is $l(l+1)$, with degeneracy $2l+1$.  Summing
+over the hydrogen shells up to a cutoff $n_{\max}$:
+\begin{equation}
+B(n_{\max}) = \sum_{n=1}^{n_{\max}} \sum_{l=0}^{n-1}
+(2l+1)\, l(l+1).
+\label{eq:casimir_trace}
+\end{equation}
+At $n_{\max} = 3$: $B(3) = 0 + 0 + 6 + 0 + 6 + 30 = 42$.  The
+closed-form expression is $B(m) = m(m+1)(2m+1)(m+2)(m-1)/20$.
+
+\textit{Fiber $S^1$---spectral zeta function.}  The $S^1$ zeta function
+at $s = 1$ gives
+\begin{equation}
+F = \zeta_R(2) = \frac{\pi^2}{6} = 1.644934\ldots
+\label{eq:fiber_zeta}
+\end{equation}
+
+\textit{Total $S^3$---boundary correction.}  At cutoff $n_{\max} = 3$,
+the highest eigenvalue is $|\lambda_3| = 8$ and the cumulative state
+count through shell~2 is $N(2) = 5$:
+\begin{equation}
+\Delta = \frac{1}{|\lambda_3| \times N(2)} = \frac{1}{40} = 0.025.
+\label{eq:boundary}
+\end{equation}
+
+\subsection{The selection principle}
+
+The cutoff $n_{\max} = 3$ is not arbitrary.  The ratio $B/N$, where
+$N(n_{\max}) = \sum_{n=1}^{n_{\max}} n^2$ is the total state count,
+equals the dimension of $S^3$ at exactly one value:
+\begin{equation}
+\frac{B(n_{\max})}{N(n_{\max})} = \dim(S^3) = 3
+\quad\Leftrightarrow\quad n_{\max} = 3.
+\label{eq:selection}
+\end{equation}
+This follows from the closed-form ratio
+$B(m)/N(m) = 3(m+2)(m-1)/10$; setting this equal to~3 gives
+$(m+4)(m-3) = 0$, with unique positive root $m = 3$.  The proof is
+algebraic and specific to $S^3$: the $SO(4) \cong (SU(2) \times
+SU(2))/\mathbb{Z}_2$ product structure yields the clean
+Clebsch--Gordan branching $l = 0, \ldots, n-1$ within each shell,
+and $S^3 \cong SU(2)$ is the only sphere that is a Lie group.
+
+\subsection{The combination rule and cubic equation}
+
+The conjectural combination rule is
+\begin{equation}
+K = \pi\!\left(B + F - \Delta\right) = \pi\!\left(42 + \frac{\pi^2}{6}
+- \frac{1}{40}\right) = 137.036064.
+\label{eq:combination_rule}
+\end{equation}
+The self-consistency condition $\alpha^{-1} + \alpha^2 = K$ yields
+the depressed cubic
+\begin{equation}
+\alpha^3 - K\alpha + 1 = 0,
+\label{eq:cubic}
+\end{equation}
+whose discriminant $4K^3 - 27 > 0$ confirms three real roots.
+Selecting the smallest positive root (corresponding to perturbative
+QED):
+\begin{equation}
+\alpha^{-1} = 137.035987.
+\label{eq:alpha_result}
+\end{equation}
+The CODATA~2018 experimental value is
+$\alpha^{-1} = 137.035999\ldots$, giving a relative error of
+$8.8 \times 10^{-8}$ with zero free parameters.
+
+\subsection{Circulant structure}
+
+The cubic~(\ref{eq:cubic}) is the characteristic polynomial of a
+traceless $\mathbb{Z}_3$-symmetric circulant matrix:
+\begin{equation}
+M = \begin{pmatrix} 0 & b & c \\ c & 0 & b \\ b & c & 0 \end{pmatrix},
+\label{eq:circulant}
+\end{equation}
+with $bc = K/3$ and $b^3 + c^3 = -1$.  The $U(1)$ gauge structure of
+the Hopf fiber forces Hermiticity: $c = b^*$, so
+$b = \sqrt{K/3}\, e^{i\theta}$ with phase determined by
+$\cos(3\theta) = -1/[2(K/3)^{3/2}] \approx -0.00162$.  The physical
+root corresponds to $\theta \approx 3\pi/2$ (nearly pure imaginary
+coupling), encoding a democratic interaction among three bundle
+components.
+
+\subsection{Statistical significance}
+
+To assess whether the numerical agreement is coincidental, a
+combinatorial search was conducted over $1.92 \times 10^9$ formulas of
+the form $\alpha^{-1} = T(A + B + C)$ (or cubic variants), where
+$A, B, C$ are drawn from 743 spectral terms and $T$ from 14
+transcendental prefactors~\cite{Paper2}.  Only 10 formulas achieve
+precision $\leq 8.8 \times 10^{-8}$, giving
+\begin{equation}
+p\text{-value} = 5.2 \times 10^{-9}.
+\label{eq:pvalue}
+\end{equation}
+This distinguishes the result from numerology but does not constitute a
+derivation.
+
+\subsection{Derivation chain}
+
+Table~\ref{tab:chain} summarizes the status of each link.
+
+\begin{table}[t]
+\caption{Derivation chain for $\alpha$ from the Hopf bundle.}
+\label{tab:chain}
+\begin{ruledtabular}
+\begin{tabular}{clc}
+Link & Description & Status \\
+\hline
+1 & Hopf bundle as geometric arena & $\checkmark$ \\
+2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\bullet$ \\
+3 & Combination rule $K = \pi(B+F-\Delta)$ & $\times$ \\
+4 & $\mathbb{Z}_3$ circulant $\to$ cubic & $\circ$ \\
+5 & $\alpha$ from cubic root & $\checkmark$ \\
+\end{tabular}
+\end{ruledtabular}
+\begin{flushleft}
+$\checkmark$ = established; $\bullet$ = largely established
+(selection principle $B/N = 3$ proven; gap: why these specific
+spectral quantities); $\circ$ = partially established (Hermiticity
+proven; gap: why $bc = K/3$); $\times$ = not established (critical
+gap: no principle selects this additive combination).
+\end{flushleft}
+\end{table}
+
+Link~3---the combination rule---is the critical open problem.  No
+known spectral-geometric invariant (spectral determinant, Ray--Singer
+analytic torsion, Seeley--DeWitt heat kernel, Atiyah--Patodi--Singer
+$\eta$-invariant) reproduces $K$.  The rule mixes a discrete
+combinatorial quantity ($B = 42$) with a continuous spectral invariant
+($F = \pi^2/6$) in a manner without precedent in the spectral geometry
+literature.
+
+\textit{Negative result:} Applying the combination rule to the three
+higher-dimensional Hopf fibrations ($S^3 \to S^7 \to S^4$,
+$S^7 \to S^{15} \to S^8$) does not yield known coupling constants.
+Only the complex Hopf fibration produces a physically meaningful
+result~\cite{Paper2}.
+
+%% ========================================================================
+%% VII. ATOMIC SPECTRA: A TESTABLE PREDICTION PROGRAM
+%% ========================================================================
+
+\section{Atomic Spectra: A Testable Prediction Program}
+\label{sec:spectra}
+
+\subsection{Non-relativistic energies from $S^{3N-1}$}
+
+For single-center systems, the hyperspherical framework on $S^{3N-1}$
+is mathematically exact and computationally convergent.  Current
+results include He at 0.004\% (2D variational + cusp correction on $S^5$,
+Paper~13~\cite{Paper13}), Li at 1.10\%, and Be at 0.90\%
+(multi-electron FCI).
+
+The coupled-channel framework, already prototyped through $l_{\max} = 5$
+with algebraic convergence $\sim l_{\max}^{-2}$ to a structural floor
+of 0.19--0.20\%~\cite{Paper13}, provides a clear path to higher
+precision.  The literature benchmark for hyperspherical He is 0.1~ppm
+with 11 adiabatic channels~\cite{Lin1995}.
+
+\subsection{Fine structure as a test of the $\alpha$ conjecture}
+
+The non-relativistic energy $E_{\text{NR}}$ computed from $S^{3N-1}$ can
+be compared with the experimental energy:
+\begin{equation}
+E_{\text{exp}} = E_{\text{NR}} + E_{\text{rel}}(\alpha)
++ E_{\text{QED}}(\alpha) + \cdots
+\label{eq:energy_decomposition}
+\end{equation}
+If $E_{\text{NR}}$ is computed to sufficient precision, the residual
+$E_{\text{exp}} - E_{\text{NR}}$ isolates the $\alpha$-dependent
+relativistic and QED corrections.  Fine structure splitting scales as
+$\alpha^2$; the Lamb shift as $\alpha^5$.  An independent determination
+of $\alpha$ from geometric atomic spectra would test the Hopf conjecture
+computationally.
+
+\subsection{Milestones}
+
+A concrete research program proceeds in four phases:
+\begin{enumerate}
+\item \textbf{He ground state to $<$0.01\% [ACHIEVED].}  The 2D
+  variational solver on $S^5$ achieves 0.004\% with Schwartz cusp
+  correction at $l_{\max} = 4$ (v2.6.0).  The adiabatic 0.20\% floor
+  is bypassed by treating the hyperradius and hyperangle simultaneously.
+
+\item \textbf{He excited states and transition energies.}  Separate
+  adiabatic potential curves for ${}^1S$ and ${}^3S$ states.  Transition
+  energies are more precisely measured than absolute energies; residuals
+  vs.\ experiment constrain $\alpha^2$ corrections.
+
+\item \textbf{$\alpha$ extraction.}  Compute non-relativistic He energy
+  to precision better than the fine structure splitting
+  ($\sim$0.36~cm$^{-1}$ for He~$2\,{}^3P$).  Test: does the extracted
+  $\alpha$ match $1/137.035987$ (Hopf) vs.\ $1/137.035999$ (CODATA)?
+  The $8.8 \times 10^{-8}$ difference corresponds to $\sim$0.0001~cm$^{-1}$
+  in He fine structure.
+
+\item \textbf{Li and Be.}  Ground-state energies to $< 0.01\%$ via
+  coupled channels on $S^8$ (Li, 3 electrons) and $S^{11}$ (Be, 4
+  electrons).  The H-set coupling from Sec.~\ref{sec:multielectron}
+  provides the angular framework for Be.  Multi-electron convergence
+  validates the $S^{3N-1}$ framework beyond He.
+\end{enumerate}
+
+\noindent
+\textit{Status (v2.6.0).}  The 2D variational solver on~$S^5$
+achieves 0.022\% raw at $l_{\max} = 7$ and 0.004\% with Schwartz
+cusp correction at $l_{\max} = 4$, breaking the adiabatic 0.20\%
+floor (Paper~13, Note added v2.6.0).  Phase~1 target ($< 0.01\%$)
+is achieved.  The graph-native CI provides the complementary
+algebraic path: 0.19\% at $n_{\max} = 7$ with zero parameters and
+a fully rational FCI matrix.  Sprint~3D verified FCI basis invariance
+($< 3 \times 10^{-15}$~Ha), confirming the convergence floor is
+from the cusp, not basis mismatch.  Both the continuous (2D
+variational) and algebraic (graph-native) paths converge to the
+same exact answer from different directions.
+
+%% ========================================================================
+%% VIII. COMPUTATIONAL PIPELINE: FROM ATOMS TO MOLECULES
+%% ========================================================================
+
+\section{Computational Pipeline: From Atoms to Molecules}
+\label{sec:pipeline}
+
+The mathematical framework of
+Secs.~\ref{sec:kinematics}--\ref{sec:exchange} is implemented as a
+complete computational pipeline, from single atoms on $S^3$ through
+polyatomic molecules via composed fiber bundles.  This section
+describes the pipeline's structure, the molecular architecture, and the
+30-molecule library it produces.
+
+\subsection{Natural geometry hierarchy}
+
+Each electron configuration has a natural coordinate system where the
+Schr\"odinger equation partially or fully separates.  The choice of
+geometry is determined by the symmetry of the physical system: one-center
+one-electron problems retain full SO(4) symmetry on~$S^3$; each
+additional center or electron breaks a symmetry and introduces a
+continuous radial-like coordinate.  The hierarchy is summarized in
+Table~\ref{tab:hierarchy}.
+
+\begin{table}[t]
+\caption{Natural geometry hierarchy.  Each level uses the coordinate
+system where the physics naturally separates.  ``Best result'' is the
+current accuracy for the prototypical system at that level.}
+\label{tab:hierarchy}
+\begin{ruledtabular}
+\begin{tabular}{cllll}
+Level & System & Geometry & Best result & Ref. \\
+\hline
+1 & H & $S^3$ (Fock) & $<0.1$\% & \cite{Paper7} \\
+2 & H$_2^+$ & Prolate spheroid & 0.0002\% & \cite{Paper11} \\
+3 & He & $S^5$ (hypersp.) & 0.004\% & \cite{Paper13} \\
+4 & H$_2$ & Mol-frame hypersp. & 96.0\% $D_e$ & \cite{Paper15} \\
+5 & LiH, BeH$_2$, \ldots & Composed bundles & 0.20\% $E$ & \cite{Paper17} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+At Level~1, Fock's SO(4) symmetry makes the entire problem discrete:
+the graph Laplacian is the exact kinetic operator.  At Level~2, the
+second nucleus breaks SO(4) to axial symmetry, introducing a continuous
+radial coordinate in prolate spheroidal geometry~\cite{Paper11}.  At
+Level~3, the second electron introduces a hyperradius~$R$ and
+hyperangle~$\alpha$ on~$S^5$~\cite{Paper13}.  At Level~4, two centers
+plus two electrons produce molecule-frame hyperspherical coordinates on
+SO(6)~\cite{Paper15}.  In each case, the angular channels remain
+discrete---labeled by quantum numbers and coupled through Gaunt
+integrals---while the radial-like coordinates require numerical or
+spectral solvers.
+
+\subsection{The composed architecture}
+
+For systems beyond H$_2$, the full $N$-electron hyperspherical space
+$S^{3N-1}$ becomes computationally prohibitive (the angular basis grows
+combinatorially).  The composed architecture~\cite{Paper17} factorizes
+the problem by assigning each electron group---core pair, bond pair,
+lone pair---its own natural coordinate system:
+\begin{equation}
+G_{\text{total}} = G_{\text{nuc}} \ltimes G_{\text{core}}(R)
+\ltimes G_{\text{val}}(R, \text{core}).
+\label{eq:composed_bundle}
+\end{equation}
+Each fiber is a Level~3 or Level~4 sub-problem solved independently.
+The fibers couple through three mechanisms: (i)~$Z_{\text{eff}}(r)$
+screening from inner shells, (ii)~Slater direct integrals $F^0$ for
+inter-group Coulomb repulsion, and (iii)~a Phillips-Kleinman
+pseudopotential (PK) enforcing core-valence orthogonality.
+
+Gaunt selection rules make electron repulsion integrals (ERIs)
+block-diagonal between groups: cross-block ERIs vanish identically
+because the orbitals in different blocks have independent angular
+quantum numbers.  This structural sparsity---not an approximation but
+a selection rule---produces $O(Q^{2.5})$ Pauli term scaling in the
+Jordan-Wigner qubit encoding, compared with $O(Q^{3.9\text{--}4.3})$
+for Gaussian baselines~\cite{Paper14}.
+
+\subsection{Balanced coupled composition}
+
+The composed architecture's PK pseudopotential is the accuracy
+bottleneck (5.3--26\% equilibrium distance error).  The balanced coupled
+variant~\cite{Paper19} eliminates PK entirely by adding cross-center
+nuclear attraction integrals: each orbital feels all nuclei, not just
+its own center.
+
+The cross-center matrix elements
+$\langle \phi_a | V_B | \phi_b \rangle$ are computed via a multipole
+expansion of $1/|\mathbf{r} - \mathbf{R}_B|$ in the Sturmian basis
+centered on nucleus~$A$.  By the Gaunt triangle inequality, the
+expansion terminates exactly at $L = 2l_{\max}$, yielding a finite,
+analytically evaluated sum (incomplete gamma functions, machine
+precision, zero quadrature).
+
+The balanced coupled LiH Hamiltonian at $n_{\max} = 3$ ($Q = 84$
+qubits) gives $E = -8.055$~Ha (0.20\% error vs.\ exact $-8.071$~Ha),
+a $9\times$ improvement over $n_{\max} = 2$.  It is the only
+configuration among four tested that produces a bound 4-electron LiH
+at $n_{\max} = 2$.  Extension to BeH$_2$ (2,652~Pauli terms, 10.7\%
+energy error) and H$_2$O (5,798~Pauli terms) is implemented.  The
+method is optimal for single-point quantum simulation at fixed
+geometries rather than potential energy surface scanning.
+
+\subsection{The 30-molecule library}
+
+The composed and balanced architectures have been applied to 30
+molecules spanning three rows of the periodic table:
+\begin{itemize}
+\item \textbf{First row} ($Z = 1$--10, 8 systems): H$_2$, He, LiH,
+  BeH$_2$, H$_2$O, HF, NH$_3$, CH$_4$.  Composed encoding with He
+  frozen cores.
+\item \textbf{Second row} ($Z = 11$--18, 6 systems): NaH, MgH$_2$,
+  HCl, H$_2$S, PH$_3$, SiH$_4$.  [Ne] frozen cores via
+  Clementi-Raimondi $Z_{\text{eff}}(r)$ screening.
+\item \textbf{Third row} ($Z = 19$--36, 6 systems): KH, CaH$_2$,
+  GeH$_4$, AsH$_3$, H$_2$Se, HBr.  [Ar] or [Ar]$3d^{10}$ frozen
+  cores.
+\item \textbf{Multi-center} (8 systems): LiF, CO, N$_2$, F$_2$,
+  NaCl, CH$_2$O, C$_2$H$_2$, C$_2$H$_6$.
+\item \textbf{Transition metals} (2 systems): ScH, TiH.  [Ar] frozen
+  cores with $d$-orbital valence blocks.
+\end{itemize}
+
+A universal linear scaling law holds across the entire library:
+\begin{equation}
+N_{\text{Pauli}} = 11.11 \times Q \quad (\pm\, 0.1),
+\label{eq:linear_scaling}
+\end{equation}
+where $Q$ is the qubit count.  This coefficient is stable across all
+30 molecules ($Q = 10$--160), independent of block count, molecular
+structure, or atomic species.  Isostructural invariance is exact:
+molecules with identical block topology produce identical Pauli counts
+regardless of nuclear charges (NaH $=$ KH $= 239$;
+CO $=$ N$_2$ $=$ F$_2$ $= 1{,}111$).  The $d$-orbital blocks in
+transition metal hydrides are sparser still, with Pauli/$Q = 9.27$
+(ERI density 4.0\% vs.\ 8.9\% for $s$+$p$ blocks).
+
+\subsection{Code access}
+
+The composed Hamiltonians for all 30 molecules are available as a
+standalone Python package:
+\begin{verbatim}
+pip install geovac-hamiltonians
+from geovac.ecosystem_export import hamiltonian
+h = hamiltonian("LiH", R=3.015)
+qop = h.to_openfermion()
+\end{verbatim}
+The \texttt{hamiltonian()} API returns qubit operators in OpenFermion,
+Qiskit, and PennyLane formats.  The package is a 92~KB wheel with no
+heavy dependencies.  The full source code, including all solvers,
+test suite ($\sim$1000 tests), and paper sources, is available at
+\texttt{github.com/jloutey-hash/geovac} with Zenodo DOI-stamped
+releases~\cite{Paper20}.
+
+%% ========================================================================
+%% IX. SCOPE AND HONEST LIMITATIONS
+%% ========================================================================
+
+\section{Scope and Honest Limitations}
+\label{sec:limitations}
+
+\subsection{What the framework does}
+
+\begin{enumerate}
+\item Derives quantum number structure $(l, m, 2l+1)$ from geometric
+  axioms, independent of the Schr\"odinger equation.
+\item Provides a mathematically exact formulation for single-center
+  Coulomb systems, verified through 18 symbolic proofs.
+\item Produces computationally efficient qubit encodings:
+  $O(Q^{2.5})$ Pauli scaling for composed molecular Hamiltonians,
+  51--1,712$\times$ fewer Pauli terms than Gaussian
+  baselines~\cite{Paper14}.
+\item Identifies a new sparsity mechanism (6$j$ recoupling) that is
+  basis-agnostic.
+\item Classifies transcendental content through the exchange constant
+  taxonomy.
+\item Suggests a topological origin for $\alpha$ with zero free
+  parameters and $p = 5.2 \times 10^{-9}$ (conjectural).
+\end{enumerate}
+
+\subsection{What the framework does not do}
+
+\begin{enumerate}
+\item Replace computational quantum chemistry for molecules.  The
+  molecular limitation is fundamental: the multi-center $N$-body
+  problem does not separate in any known coordinate system.
+\item Provide convergent molecular potential energy surfaces.  The
+  composed approximation has characterized accuracy ceilings
+  (5.3--26\% equilibrium distance error).
+\item Derive the combination rule for $\alpha$ (Link~3 remains open).
+\item Account for relativistic effects.  The framework is
+  non-relativistic; fine structure enters as a correction
+  (Sec.~\ref{sec:spectra}).
+\item Explain why $S^3$ is the physical manifold.  The framework takes
+  Fock's 1935 result as given and builds upon it.
+\end{enumerate}
+
+\subsection{The molecular boundary}
+
+Six nested approaches to molecular electronic structure within the
+$S^{3N-1}$ framework have been tested: single-center, charge-center,
+heterogeneous Löwdin, and three variants of the composed
+architecture.  All single-basis approaches fail for heteronuclear
+molecular potential energy surfaces.  The root cause is that core and
+valence electrons occupy different length scales; any unified-basis
+approach faces orthogonalization penalties that destroy the sparsity
+advantage.  The composed architecture~\cite{Paper17}---which assigns
+each electron group its own natural coordinate system---provides
+practical molecular Hamiltonians with $N_{\text{Pauli}} \approx
+11.11 \times Q$ across 30 molecules.
+
+This molecular limitation does not affect the single-center mathematical
+structure, just as turbulence does not invalidate the Navier--Stokes
+equations.
+
+%% ========================================================================
+%% IX. CONCLUSION
+%% ========================================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The kinematic structure of non-relativistic quantum
+mechanics---quantum numbers, degeneracies, selection rules---emerges
+from the spectral theory of Laplace--Beltrami operators on compact
+manifolds, specifically the unit hyperspheres $S^{3N-1}$ for
+$N$-electron systems.  The dynamic structure---energy levels, the
+Coulomb potential---enters through projection parameters that map the
+dimensionless topology into physical observables.  Transcendental
+content is classified by the exchange constant taxonomy, appearing at
+precisely identifiable steps in the projection chain.
+
+For single-center systems, these results are mathematically proven and
+computationally validated: 18 symbolic proofs for $S^3$, a 0.004\% He
+ground state on $S^5$ via 2D variational solution with Schwartz cusp
+correction~\cite{Paper13}, chemical periodicity from $S_N$
+representation theory on $S^{3N-1}$~\cite{Paper16}, and a 6$j$
+recoupling sparsity mechanism reducing ERI density by 18--26\%.  For
+molecules, the composed architecture produces structurally sparse qubit
+Hamiltonians with $N_{\text{Pauli}} \approx 11.11 \times Q$ across 30
+molecules ($Z = 1$--36), $O(Q^{2.5})$ Pauli scaling, and balanced
+coupled FCI energy at 0.20\% error for
+LiH~\cite{Paper17,Paper19,Paper20}.
+
+The Hopf fibration of the electron's $S^3$ state manifold suggests---but
+does not yet prove---that the electromagnetic coupling constant $\alpha$
+is determined by the same topology~\cite{Paper2}.  A systematic program
+of high-precision atomic spectra computation on $S^{3N-1}$, compared
+with experimental fine structure data, offers a concrete and testable
+path forward.
+
+The full framework is available as open-source software
+(\texttt{pip install geovac-hamiltonians}), with ecosystem export to
+OpenFermion, Qiskit, and PennyLane~\cite{Paper20}.
+
+%% ========================================================================
+%% ACKNOWLEDGMENTS
+%% ========================================================================
+
+\begin{acknowledgments}
+This work was developed using an AI-augmented agentic workflow, with
+implementation and documentation drafting performed collaboratively
+with Anthropic's Claude.
+\end{acknowledgments}
+
+%% ========================================================================
+%% REFERENCES
+%% ========================================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{Fock1935}
+V.~Fock, Z.\ Phys.\ \textbf{98}, 145 (1935).
+
+\bibitem{Bargmann1936}
+V.~Bargmann, Z.\ Phys.\ \textbf{99}, 576 (1936).
+
+\bibitem{BarutKleinert1967}
+A.~O.~Barut and H.~Kleinert, Phys.\ Rev.\ \textbf{156}, 1541 (1967).
+
+\bibitem{Hopf1931}
+H.~Hopf, Math.\ Ann.\ \textbf{104}, 637 (1931).
+
+\bibitem{Macek1968}
+J.~Macek, J.\ Phys.\ B \textbf{1}, 831 (1968).
+
+\bibitem{Lin1995}
+C.~D.~Lin, Phys.\ Rep.\ \textbf{257}, 1 (1995).
+
+\bibitem{Paper0}
+J.~Loutey, ``Geometric packing and the origin of quantum numbers,''
+GeoVac Paper~0 (2025).
+
+\bibitem{Paper2}
+J.~Loutey, ``The fine structure constant from Hopf bundle spectral
+invariants,'' GeoVac Paper~2 (2025).
+
+\bibitem{Paper7}
+J.~Loutey, ``The dimensionless vacuum: Schr\"odinger recovery from the
+unit $S^3$,'' GeoVac Paper~7 (2025).
+
+\bibitem{Paper13}
+J.~Loutey, ``Hyperspherical lattice for two-electron atoms,'' GeoVac
+Paper~13 (2026).
+
+\bibitem{Paper14}
+J.~Loutey, ``Structurally sparse qubit Hamiltonians from natural
+geometry,'' GeoVac Paper~14 (2026).
+
+\bibitem{Paper15}
+J.~Loutey, ``Molecule-frame hyperspherical geometry for $\text{H}_2$,''
+GeoVac Paper~15 (2026).
+
+\bibitem{Paper16}
+J.~Loutey, ``Chemical periodicity as $S_N$ representation theory,''
+GeoVac Paper~16 (2026).
+
+\bibitem{Paper17}
+J.~Loutey, ``Composed natural geometries for polyatomic molecules,''
+GeoVac Paper~17 (2026).
+
+\bibitem{Paper18}
+J.~Loutey, ``Spectral-geometric exchange constants: Projecting discrete
+spectra onto continuous manifolds,'' GeoVac Paper~18 (2026).
+
+\bibitem{Paper11}
+J.~Loutey, ``The prolate spheroidal lattice for H$_2^+$,'' GeoVac
+Paper~11 (2026).
+
+\bibitem{Paper19}
+J.~Loutey, ``Balanced coupled composition: PK-free molecular
+Hamiltonians via Shibuya-Wulfman integrals,'' GeoVac Paper~19 (2026).
+
+\bibitem{Paper20}
+J.~Loutey, ``Quantum resource benchmarks for structurally sparse
+Hamiltonians,'' GeoVac Paper~20 (2026).
+
+\end{thebibliography}
+
+\end{document}

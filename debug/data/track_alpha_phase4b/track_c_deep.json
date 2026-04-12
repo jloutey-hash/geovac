@@ -1,0 +1,88 @@
+{
+  "subtask_2_extended": {
+    "n=1,l=0": {
+      "norm_check": "1",
+      "weighted": "7/(16*p0**4)",
+      "at_p0=Z/n=1/1": "7/16",
+      "at_p0=1": "7/16"
+    },
+    "n=2,l=0": {
+      "norm_check": "1",
+      "weighted": "5/(8*p0**4)",
+      "at_p0=Z/n=1/2": "10",
+      "at_p0=1": "5/8"
+    },
+    "n=2,l=1": {
+      "norm_check": "1",
+      "weighted": "3/(8*p0**4)",
+      "at_p0=Z/n=1/2": "6",
+      "at_p0=1": "3/8"
+    },
+    "n=3,l=0": {
+      "norm_check": "1",
+      "weighted": "5/(8*p0**4)",
+      "at_p0=Z/n=1/3": "405/8",
+      "at_p0=1": "5/8"
+    },
+    "n=3,l=1": {
+      "norm_check": "1",
+      "weighted": "17/(32*p0**4)",
+      "at_p0=Z/n=1/3": "1377/32",
+      "at_p0=1": "17/32"
+    },
+    "n=3,l=2": {
+      "norm_check": "1",
+      "weighted": "11/(32*p0**4)",
+      "at_p0=Z/n=1/3": "891/32",
+      "at_p0=1": "11/32"
+    }
+  },
+  "subtask_2_hopf_sums": {
+    "terms": {
+      "n=1,l=0": {
+        "(2l+1)": 1,
+        "w at p0=1": "7/16",
+        "w at p0=1/n": "7/16",
+        "w * (2l+1) l(l+1) at p0=1": "0"
+      },
+      "n=2,l=0": {
+        "(2l+1)": 1,
+        "w at p0=1": "5/8",
+        "w at p0=1/n": "10",
+        "w * (2l+1) l(l+1) at p0=1": "0"
+      },
+      "n=2,l=1": {
+        "(2l+1)": 3,
+        "w at p0=1": "3/8",
+        "w at p0=1/n": "6",
+        "w * (2l+1) l(l+1) at p0=1": "9/4"
+      },
+      "n=3,l=0": {
+        "(2l+1)": 1,
+        "w at p0=1": "5/8",
+        "w at p0=1/n": "405/8",
+        "w * (2l+1) l(l+1) at p0=1": "0"
+      },
+      "n=3,l=1": {
+        "(2l+1)": 3,
+        "w at p0=1": "17/32",
+        "w at p0=1/n": "1377/32",
+        "w * (2l+1) l(l+1) at p0=1": "51/16"
+      },
+      "n=3,l=2": {
+        "(2l+1)": 5,
+        "w at p0=1": "11/32",
+        "w at p0=1/n": "891/32",
+        "w * (2l+1) l(l+1) at p0=1": "165/16"
+      }
+    },
+    "total_at_p0_1": "49/8"
+  },
+  "kappa_derivation": {
+    "Omega(p=0, p0=1)": 2,
+    "Omega(0)^4": 16,
+    "d_max squared": 16,
+    "kappa": "-1/16 = -1/Omega(0)^4 = -1/d_max^2",
+    "7/16 decomposition": "7 = 2*n^2 + 1 at n=1? No: 7 = 7. But 7/16 = (1 - 9/16). Geometric meaning: <w> for 1s = 7/(16 p0^4), where the 16 = Omega(0)^4 = d_max^2 appears as the Fock conformal factor to the fourth power. The 7 is the numerator from the Laguerre moment integral."
+  }
+}

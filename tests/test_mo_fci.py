@@ -98,10 +98,6 @@ class TestDissociationLimit:
     """Test 4: Dissociation limit at large R."""
 
     @pytest.mark.slow
-    @pytest.mark.xfail(reason="Sturmian structural theorem (Paper 8 Sec XII): "
-                       "shared-p0 MO Sturmian FCI fails for heteronuclear "
-                       "molecules — H proportional to S, eigenvalues "
-                       "geometry-independent. See v0.9.34 diagnostic.")
     def test_lih_dissociation(self) -> None:
         """At R=20, E_mol should be within 30% of E_atoms=-7.892 Ha."""
         fci = MOSturmianFCI(

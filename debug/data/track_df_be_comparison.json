@@ -1,0 +1,88 @@
+{
+  "max_n_2": {
+    "nested": {
+      "M": 5,
+      "Q": 10,
+      "N_pauli": 112,
+      "Pauli_per_Q": 11.2,
+      "n_eri_nonzero": 65,
+      "ERI_density_pct": 10.4,
+      "n_h1_nonzero": 5,
+      "h1_density_pct": 20.0,
+      "one_norm_Ha": 25.91,
+      "one_norm_ni_Ha": 18.95,
+      "wall_time_s": 0.54,
+      "FCI_energy_Ha": -13.946739,
+      "FCI_error_pct": 4.913
+    },
+    "composed": {
+      "M": 6,
+      "Q": 12,
+      "N_pauli": 115,
+      "Pauli_per_Q": 9.58,
+      "n_eri_nonzero": 66,
+      "ERI_density_pct": 5.09,
+      "n_h1_nonzero": 8,
+      "h1_density_pct": 22.22,
+      "one_norm_Ha": 178.47,
+      "one_norm_ni_Ha": 121.35,
+      "wall_time_s": 0.54,
+      "FCI_energy_Ha": -14.523656,
+      "FCI_error_pct": 0.98
+    },
+    "composed_nopk": {
+      "M": 6,
+      "Q": 12,
+      "N_pauli": 115,
+      "Pauli_per_Q": 9.58,
+      "n_eri_nonzero": 66,
+      "ERI_density_pct": 5.09,
+      "n_h1_nonzero": 6,
+      "h1_density_pct": 16.67,
+      "one_norm_Ha": 24.63,
+      "one_norm_ni_Ha": 17.77,
+      "wall_time_s": 0.56
+    }
+  },
+  "max_n_3": {
+    "nested": {
+      "M": 14,
+      "Q": 28,
+      "N_pauli": 2627,
+      "Pauli_per_Q": 93.82,
+      "n_eri_nonzero": 1492,
+      "ERI_density_pct": 3.88,
+      "n_h1_nonzero": 14,
+      "h1_density_pct": 7.14,
+      "one_norm_Ha": 129.47,
+      "one_norm_ni_Ha": 114.6,
+      "wall_time_s": 3.74
+    },
+    "composed": {
+      "M": 15,
+      "Q": 30,
+      "N_pauli": 2630,
+      "Pauli_per_Q": 87.67,
+      "n_eri_nonzero": 1493,
+      "ERI_density_pct": 2.95,
+      "n_h1_nonzero": 27,
+      "h1_density_pct": 12.0,
+      "one_norm_Ha": 277.89,
+      "one_norm_ni_Ha": 205.72,
+      "wall_time_s": 4.0
+    },
+    "composed_nopk": {
+      "M": 15,
+      "Q": 30,
+      "N_pauli": 2630,
+      "Pauli_per_Q": 87.67,
+      "n_eri_nonzero": 1493,
+      "ERI_density_pct": 2.95,
+      "n_h1_nonzero": 15,
+      "h1_density_pct": 6.67,
+      "one_norm_Ha": 76.74,
+      "one_norm_ni_Ha": 70.67,
+      "wall_time_s": 3.86
+    }
+  }
+}

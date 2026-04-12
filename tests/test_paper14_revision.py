@@ -5,7 +5,7 @@ import pytest
 
 PAPER_PATH = os.path.join(
     os.path.dirname(os.path.dirname(__file__)),
-    "papers", "core", "paper_14_qubit_encoding.tex",
+    "paper_14_qubit_encoding_revised.tex",
 )
 
 

@@ -13,7 +13,7 @@ Date: April 2026
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 
 @dataclass
@@ -38,7 +38,7 @@ class OrbitalBlock:
     max_n : int
         Maximum principal quantum number for center orbitals.
     has_h_partner : bool
-        If True, this bond block also has partner-side orbitals.
+        If True, this bond block also has partner (H-side) orbitals.
     Z_partner : float
         Nuclear charge for the partner-side orbitals (when ``has_h_partner``).
     max_n_partner : int
@@ -47,12 +47,6 @@ class OrbitalBlock:
         PK barrier height (Ha*bohr^2).  0 means no PK on this block.
     pk_B : float
         PK barrier width exponent (bohr^-2).  0 means no PK.
-    center_nucleus_idx : int
-        Index into ``MolecularSpec.nuclei`` for center-side orbital position.
-        -1 (default) triggers legacy single-heavy-atom behavior.
-    partner_nucleus_idx : int
-        Index into ``MolecularSpec.nuclei`` for partner-side orbital position.
-        -1 (default) triggers legacy sequential-H assignment.
     """
 
     label: str
@@ -65,9 +59,6 @@ class OrbitalBlock:
     max_n_partner: int = 0
     pk_A: float = 0.0
     pk_B: float = 0.0
-    center_nucleus_idx: int = -1
-    partner_nucleus_idx: int = -1
-    l_min: int = 0
 
     def __post_init__(self) -> None:
         if self.max_n_partner == 0 and self.has_h_partner:
@@ -88,15 +79,9 @@ class MolecularSpec:
         Combined V_NN + V_cross + E_core constant (Ha).
     description : str
         Optional human-readable description.
-    nuclei : list of dict
-        Nuclear positions for multi-center molecules.  Each entry:
-        ``{'Z': float, 'position': (x, y, z), 'label': str}``.
-        Empty list (default) triggers legacy single-heavy-atom behavior
-        in the balanced coupled builder.
     """
 
     name: str
     blocks: List[OrbitalBlock]
     nuclear_repulsion_constant: float
     description: str = ''
-    nuclei: List[Dict[str, Any]] = field(default_factory=list)

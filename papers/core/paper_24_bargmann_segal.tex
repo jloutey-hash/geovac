@@ -1,0 +1,941 @@
+\documentclass[twocolumn,pra,amsmath,amssymb,superscriptaddress]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{The Bargmann--Segal Lattice:\\
+$\pi$-Free Discretization of the Harmonic Oscillator on $S^5$}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{April 10, 2026}
+
+\begin{abstract}
+We construct a discrete graph encoding of the three-dimensional
+isotropic harmonic oscillator on the holomorphic sector of $S^5$ and
+verify by exact rational arithmetic that the resulting graph and its
+projection to physical energies contain no transcendental constants.
+The Bargmann--Segal transform~\cite{bargmann1961, hall1994} maps the
+harmonic oscillator Hamiltonian to $\hbar\omega(\hat{N} + 3/2)$ on the
+Fock--Bargmann space, where $\hat{N}$ is the Euler number operator on
+holomorphic monomials. Restricting to the unit sphere $S^5 \subset
+\mathbb{C}^3$ identifies the eigenspaces with the symmetric SU(3)
+irreps $(N, 0)$, of dimension $(N+1)(N+2)/2$, which match the harmonic
+oscillator shell degeneracies exactly.  The graph constructed from
+these states with dipole transition weights computed by exact
+\texttt{fractions.Fraction} arithmetic is bit-exactly $\pi$-free at
+$N_{\max} = 5$ (56 nodes, 165 edges, zero irrationals encountered).
+The single $\pi$ in the entire ecosystem is the Gaussian normalization
+$\pi^{-3}$ of the continuous Bargmann measure, which the discrete
+graph never invokes.  The Coulomb problem on $S^3$ and the harmonic
+oscillator on $S^5$ are both natural sphere quotients, but they live
+on different spheres with different geometric character (Riemannian vs
+complex), have natural operators of different order (second vs first),
+yield spectra of different growth (quadratic vs linear), and demand
+projections of different type (nonlinear vs linear-affine).  This
+structural asymmetry refines the exchange constant
+taxonomy~\cite{paper18}: calibration $\pi$ is Coulomb-specific. It is
+the transcendental cost of mapping a quadratic Riemannian eigenvalue
+to an inverse-square physical energy, and it has no analog for the
+harmonic oscillator's linear complex-analytic projection.
+\end{abstract}
+
+\maketitle
+
+%================================================================
+\section{Introduction}
+%================================================================
+
+Fock's 1935 stereographic projection~\cite{fock1935} maps the
+hydrogen Schr\"odinger equation onto the free Laplacian on the
+three-sphere $S^3$.  Paper~0~\cite{paper0} discretized this
+construction: nodes labeled by quantum numbers $(n, l, m)$, edges
+from angular-momentum selection rules, and a graph Laplacian whose
+eigenvalues converge to those of the continuous Laplace--Beltrami
+operator.  The kinetic constant $\kappa = -1/16$ then maps the
+discrete eigenvalues $n^2 - 1$ to physical Rydberg energies
+$E_n = -Z^2 / (2 n^2)$.  Paper~7~\cite{paper7} validated this
+$S^3$ reduction with eighteen independent symbolic proofs.
+Paper~18~\cite{paper18} identified a transcendental cost in the
+projection: $\pi$ enters through the spectral zeta values of $S^3$
+as a \emph{calibration} exchange constant.
+
+The harmonic oscillator $V(r) = \frac{1}{2} m \omega^2 r^2$ has a
+different dynamical symmetry group (SU(3) instead of SO(4)) and a
+qualitatively different spectrum (linear in shell index instead of
+inverse-square).  The natural question is whether an analogous
+discretization exists for the harmonic oscillator, and if so, what
+role $\pi$ plays.
+
+We answer both questions in this paper.  The discretization exists,
+via the Bargmann--Segal transform~\cite{bargmann1961, hall1994}
+applied to the Hardy space $H^2(S^5)$.  The graph is bit-exactly
+$\pi$-free at every finite $N_{\max}$.  The single $\pi$ in the
+entire construction appears in the Gaussian normalization $\pi^{-3}$
+of the continuous Bargmann measure, which is never used by the
+discrete graph.  We further show that the Coulomb / harmonic
+oscillator asymmetry has a structural origin in the difference
+between Riemannian and complex natural geometries, and that this
+asymmetry refines the exchange constant taxonomy of Paper~18:
+\emph{calibration} exchange constants are tied to second-order
+Riemannian operators with nonlinear projections, while linear
+projections from first-order complex-analytic operators introduce no
+calibration constants of any kind.  The result has direct
+implications for the framing of the fine-structure constant
+conjecture~\cite{paper2_alpha} and for the precision of nuclear
+shell-model qubit Hamiltonians built on harmonic oscillator
+single-particle bases~\cite{paper23}.
+
+The plan of the paper is as follows.  Section~\ref{sec:bs}
+summarizes the Bargmann--Segal construction and its identification
+with the SU(3) symmetric representation theory.
+Section~\ref{sec:graph} constructs the graph and states the
+$\pi$-free certificate (Theorem~\ref{thm:pi-free}).
+Section~\ref{sec:asymmetry} presents the Coulomb / HO structural
+asymmetry as the conceptual centerpiece (Theorem~\ref{thm:asymmetry}).
+Section~\ref{sec:rigidity} states the harmonic oscillator rigidity
+theorem (Theorem~\ref{thm:rigidity}), the dual of the Fock projection
+rigidity theorem of Paper~23~\cite{paper23}.  Section~\ref{sec:imp}
+discusses implications for the $\alpha$ conjecture, for nuclear
+quantum simulation, and for the framework's universal /
+Coulomb-specific partition.
+
+%================================================================
+\section{The Bargmann--Segal construction}
+\label{sec:bs}
+%================================================================
+
+\subsection{The Bargmann transform}
+
+The Bargmann transform~\cite{bargmann1961} is the integral operator
+\begin{equation}
+  [B f](z) =
+  \pi^{-3/4}
+  \int_{\mathbb{R}^3}
+  \exp\!\Bigl(
+    -\tfrac{1}{2}(z^2 + x^2) + \sqrt{2}\, z \cdot x
+  \Bigr)\, f(x)\, d^3 x,
+  \label{eq:bargmann-kernel}
+\end{equation}
+mapping $L^2(\mathbb{R}^3)$ unitarily onto the
+Fock--Bargmann space $F^2(\mathbb{C}^3)$ of holomorphic functions on
+$\mathbb{C}^3$ that are square-integrable against the Gaussian
+measure
+\begin{equation}
+  d\mu(z) = \pi^{-3}\, e^{-|z|^2}\, d^6 z.
+  \label{eq:bargmann-measure}
+\end{equation}
+The harmonic-oscillator eigenstates $|N, l, m\rangle$ map under $B$
+to solid harmonic polynomials of total degree $N$ in the complex
+coordinates $z_1, z_2, z_3$.  The transform is unitary, so the
+eigenvalue equations carry across exactly.
+
+\subsection{The Euler operator}
+\label{sec:euler}
+
+The number (Euler) operator on $F^2(\mathbb{C}^3)$ is
+\begin{equation}
+  \hat{N} = \sum_{i = 1}^{3} z_i\, \frac{\partial}{\partial z_i},
+  \label{eq:euler}
+\end{equation}
+which acts on the monomial $z_1^a z_2^b z_3^c$ with eigenvalue
+$a + b + c = N$.  By multinomial counting, the eigenspace
+$\hat{N} = N$ has dimension
+\begin{equation}
+  \dim\bigl\{ z_1^a z_2^b z_3^c \,:\, a + b + c = N \bigr\}
+  \;=\;
+  \binom{N + 2}{2}
+  \;=\;
+  \frac{(N+1)(N+2)}{2},
+  \label{eq:dim}
+\end{equation}
+which matches the 3D harmonic oscillator shell degeneracy and the
+Weyl dimension formula for the symmetric irreducible representation
+$(N, 0)$ of SU(3).
+
+Under the Bargmann transform, the harmonic oscillator Hamiltonian
+maps to
+\begin{equation}
+  H_{\mathrm{HO}}
+  \;=\;
+  -\tfrac{1}{2 m}\nabla^2 + \tfrac{1}{2} m \omega^2 r^2
+  \;\stackrel{B}{\longleftrightarrow}\;
+  \hbar \omega \bigl(\hat{N} + \tfrac{3}{2}\bigr),
+  \label{eq:H-bargmann}
+\end{equation}
+so the spectrum is
+\begin{equation}
+  E_N \;=\; \hbar\omega\bigl(N + \tfrac{3}{2}\bigr)
+  \label{eq:HO-spectrum}
+\end{equation}
+on the eigenspace of dimension $(N+1)(N+2)/2$.  The HO Hamiltonian
+is a linear affine function of the Euler operator; the projection
+from the discrete eigenvalue to the physical energy involves only
+the universal scale $\hbar\omega$ and the additive zero-point
+shift $3/2$.
+
+The unitary equivalence of the Schr\"odinger and Bargmann pictures
+is rigorous and originates with Bargmann~\cite{bargmann1961} and
+Segal~\cite{segal1963}; the modern functional-analytic treatment is
+due to Hall~\cite{hall1994}, who extended the construction to
+arbitrary compact Lie groups.
+
+\subsection{The $S^5$ Hardy space and SU(3) symmetric representations}
+
+The unit sphere
+$S^5 = \{ z \in \mathbb{C}^3 \,:\, |z| = 1 \}$
+carries a Cauchy--Riemann (CR) structure inherited from
+$\mathbb{C}^3$.  The Hardy space $H^2(S^5)$ consists of boundary
+values of holomorphic functions on the unit ball $B^3 \subset
+\mathbb{C}^3$ that are square-integrable on $S^5$ with respect to
+the surface measure.  Restriction to $S^5$ identifies $H^2(S^5)$
+with the closure of the polynomial algebra $\mathbb{C}[z_1, z_2,
+z_3]$, with the natural SU(3) action by linear transformations of
+the coordinates.
+
+The decomposition by polynomial degree gives an orthogonal direct
+sum
+\begin{equation}
+  H^2(S^5)
+  \;=\;
+  \bigoplus_{N = 0}^{\infty}
+  \mathcal{H}_N,
+  \qquad
+  \dim \mathcal{H}_N = \frac{(N+1)(N+2)}{2},
+  \label{eq:hardy-decomp}
+\end{equation}
+where $\mathcal{H}_N$ is the space of homogeneous degree-$N$
+holomorphic polynomials.  Each $\mathcal{H}_N$ transforms as the
+SU(3) irreducible representation $(N, 0)$ — the symmetric tensor
+representation of rank $N$ on the fundamental $\mathbf{3}$.
+
+By the Borel--Weil theorem~\cite{borelweil}, this is the same data
+as the space of holomorphic sections of the line bundle
+$\mathcal{O}(N)$ over $\mathbb{CP}^2$, where $\mathbb{CP}^2 =
+\mathrm{SU}(3) / \mathrm{U}(2)$ is the natural quotient.  The
+fibration
+\begin{equation}
+  S^1 \;\longrightarrow\; S^5 \;\longrightarrow\; \mathbb{CP}^2
+  \label{eq:s5-fibration}
+\end{equation}
+is the structural analog of the Hopf fibration $S^1 \to S^3 \to
+S^2$ that played a central role in Paper~7~\cite{paper7} and the
+$\alpha$-conjecture of Paper~2~\cite{paper2_alpha}.
+
+The CR Laplacian (Kohn Laplacian) $\Box_b$ on the holomorphic
+sector of $S^5$, the Dolbeault Laplacian on $\mathcal{O}(N) \to
+\mathbb{CP}^2$, and the Euler operator on the Bargmann monomials
+all act on the same SU(3) irreducibles $(N, 0)$ and produce
+spectra that are linear in the shell index $N$ up to additive and
+multiplicative normalizations~\cite{follandstein1974}.  For the
+discretization in Section~\ref{sec:graph} we use the Bargmann
+description, which is the most elementary: the Euler operator is
+diagonal on the monomial basis, requires no differential geometry,
+and is amenable to immediate exact arithmetic.
+
+%================================================================
+\section{The Bargmann graph}
+\label{sec:graph}
+%================================================================
+
+\subsection{Graph construction}
+
+\paragraph{Nodes.}
+The nodes of the Bargmann graph at cutoff $N_{\max}$ are triples
+$(N, l, m_l)$ with $N = 0, 1, 2, \ldots, N_{\max}$; for each $N$,
+the orbital angular momentum runs over $l = N, N - 2, \ldots, 1$
+or $0$ (same parity as $N$); and for each $l$, the magnetic
+quantum number runs over $m_l = -l, \ldots, +l$.  This is the
+SU(3) $\to$ SO(3) branching of the symmetric irrep $(N, 0)$.  The
+total node count is
+\begin{equation}
+  |V(N_{\max})|
+  \;=\;
+  \sum_{N = 0}^{N_{\max}}
+  \frac{(N+1)(N+2)}{2}.
+  \label{eq:node-count}
+\end{equation}
+At $N_{\max} = 5$ this gives $1 + 3 + 6 + 10 + 15 + 21 = 56$
+nodes.
+
+\paragraph{Edges.}
+Edges connect states under SU(3) dipole selection rules:
+\begin{equation}
+  \Delta N = \pm 1,
+  \qquad
+  \Delta l = \pm 1,
+  \qquad
+  \Delta m_l = 0, \pm 1.
+\end{equation}
+These are the matrix elements of the position operator $z_q$
+($q = 0, \pm 1$ in spherical components) between adjacent shells,
+which raise $N$ by one and change $l$ by $\pm 1$ by the standard
+angular-momentum dipole rule.
+
+\paragraph{Edge weights.}
+For each allowed transition the edge weight is the squared matrix
+element
+\begin{equation}
+  w_{(N,l,m_l) \to (N+1,l',m_l')}
+  \;=\;
+  R^{2}_{n_r,\, l \to l'}
+  \;\times\;
+  \bigl|
+  C^{l' m_l'}_{l\, m_l;\, 1\, q}
+  \bigr|^2,
+  \label{eq:edge-weight}
+\end{equation}
+where the radial reduced matrix elements (in HO units $\hbar = m =
+\omega = 1$) are
+\begin{align}
+  \bigl|\langle n_r, l + 1 \,|\, r \,|\, n_r, l \rangle\bigr|^2
+  &= n_r + l + \tfrac{3}{2}
+  = \tfrac{2 n_r + 2 l + 3}{2},
+  \\[2pt]
+  \bigl|\langle n_r + 1, l - 1 \,|\, r \,|\, n_r, l \rangle\bigr|^2
+  &= n_r + 1,
+\end{align}
+and the squared rank-1 Wigner $3j$ coefficients factorize into
+elementary rationals via the closed-form expressions of
+Edmonds~\cite{edmonds} and Varshalovich~\cite{varshalovich}.  Both
+factors in Eq.~\eqref{eq:edge-weight} are exact rational numbers,
+so the edge weight is exact rational.
+
+\paragraph{Implementation.}
+The reference implementation in
+\texttt{geovac/nuclear/bargmann\_graph.py} uses Python's
+\texttt{fractions.Fraction} type throughout the construction.  No
+floating-point arithmetic is used in the build path; the squared
+$3j$ tables are evaluated symbolically from the closed-form
+expressions, and the radial reduced matrix elements are constructed
+directly from the integer formulas above.  Conversion to floating
+point occurs only when the dense Hamiltonian or adjacency is
+required for numerical eigensolvers.
+
+\subsection{The $\pi$-free certificate}
+\label{sec:pi-free}
+
+\begin{theorem}[Bargmann graph rationality]
+\label{thm:pi-free}
+Let $G(N_{\max})$ be the Bargmann graph constructed in
+Section~\ref{sec:graph} with diagonal entries
+\begin{equation}
+  D_v
+  \;=\;
+  \mathrm{Fraction}\!\left( 2 N_v + 3,\, 2 \right),
+\end{equation}
+in units of $\hbar\omega$, and adjacency weights given by
+Eq.~\eqref{eq:edge-weight} computed in exact rational arithmetic.
+Then every diagonal entry and every nonzero adjacency weight is a
+rational number, and no transcendental constant appears in the
+construction at any finite $N_{\max}$.
+\end{theorem}
+
+\begin{proof}[Proof.]
+The diagonal entries are $\mathrm{Fraction}(2 N + 3, 2)$ by
+construction (Section~\ref{sec:euler}, Eq.~\eqref{eq:HO-spectrum}).
+The adjacency weights are products of two rational factors:
+the squared radial reduced matrix elements (which are rational
+linear functions of the integer quantum numbers $n_r$ and $l$) and
+the squared rank-1 Wigner $3j$ coefficients (which are rational
+quotients of polynomials in the integer quantum numbers $l$, $l'$,
+$m_l$, $m_l'$ by the Edmonds~\cite{edmonds} formulas).  The product
+of two rationals is rational, and the construction terminates after
+finitely many additions and multiplications of rationals at any
+finite $N_{\max}$.  $\hfill\square$
+\end{proof}
+
+\paragraph{Numerical verification.}
+An independent run of the function
+\texttt{verify\_pi\_free(N\_max=5)} in the reference
+implementation returns the certificate:
+\begin{quote}\small
+\texttt{N\_max: 5}\\
+\texttt{n\_nodes: 56}\\
+\texttt{n\_edges: 165}\\
+\texttt{all\_diagonal\_rational: True}\\
+\texttt{all\_adjacency\_rational: True}\\
+\texttt{irrationals\_encountered: []}\\
+\texttt{pi\_free: True}
+\end{quote}
+The 17 supporting unit tests are listed in
+\texttt{tests/test\_bargmann\_graph.py} and cover node enumeration,
+shell degeneracies, parity of $l$ within each shell, the diagonal
+HO spectrum, the dipole selection rules, Hermiticity of the
+adjacency, exact rationality of every entry, and graph Laplacian
+positivity.  All 17 pass.
+
+\paragraph{Where the only $\pi$ lives.}
+The single $\pi$ in the entire ecosystem appears in the Gaussian
+normalization $\pi^{-3}$ of the continuous Bargmann measure
+Eq.~\eqref{eq:bargmann-measure}.  In Paper~18's exchange constant
+taxonomy~\cite{paper18}, this is an \emph{embedding} exchange
+constant: it quantifies the cost of representing the Bargmann
+Hilbert space as a measure space in $6$ real dimensions, and it is
+fixed by the requirement that the Gaussian have unit total integral.
+The discrete graph never invokes this normalization.  No analogous
+$\pi$ enters the spectrum, the degeneracies, the selection rules,
+the Wigner $3j$ coefficients, or the radial matrix elements.
+
+\subsection{Hamiltonian and graph Laplacian roles}
+\label{sec:roles}
+
+The HO Hamiltonian on the Bargmann graph is a diagonal matrix:
+\begin{equation}
+  H_{\mathrm{HO}}
+  \;=\;
+  \hbar\omega \,
+  \mathrm{diag}\!\left( N_v + \tfrac{3}{2} \right)_{v \in V}.
+  \label{eq:H-graph}
+\end{equation}
+The eigenvalues are $\hbar\omega(3/2, 5/2, 7/2, 9/2, \ldots)$
+with multiplicities $1, 3, 6, 10, \ldots = (N+1)(N+2)/2$.  No
+off-diagonal terms are needed to recover the spectrum: it is
+simply the diagonal.
+
+The adjacency matrix $A$ encodes dipole transition amplitudes
+between HO states (electromagnetic absorption and emission lines).
+It plays no role in the construction of the spectrum; its role is
+to describe the connectivity structure that determines selection
+rules for transition processes.
+
+This is qualitatively different from the Coulomb / $S^3$ case of
+Paper~0~\cite{paper0} and Paper~7~\cite{paper7}, where the graph
+Laplacian $D - A$ on the $(n, l, m)$ lattice has eigenvalue $n^2 -
+1$ on the $n$-th shell and the universal kinetic constant $\kappa
+= -1/16$ converts these to Rydberg energies.  There the
+off-diagonal structure of $A$ is essential to the spectrum.  In the
+Bargmann graph, by contrast, the off-diagonal structure is
+spectroscopically informative but spectrally inert.  This is the
+first key structural difference between the Coulomb and the
+harmonic oscillator discretizations, and it motivates the
+asymmetry analysis of Section~\ref{sec:asymmetry}.
+
+%================================================================
+\section{The Coulomb / HO asymmetry}
+\label{sec:asymmetry}
+%================================================================
+
+The Bargmann graph and the Coulomb $S^3$ graph are both natural
+discretizations of central-potential quantum mechanics, but they
+differ in every structural feature except the use of angular
+momentum as a labeling system.  Table~\ref{tab:asymmetry}
+summarizes the comparison.
+
+\begin{table*}[t]
+\centering
+\caption{Structural comparison of the Coulomb and harmonic oscillator
+discretizations.  Each row is a feature; each column is a system.
+The asymmetry has a causal structure: the geometry choice (row 2)
+determines the operator order (row 3), which determines the
+spectrum growth (row 4), which determines the projection type
+(row 6), which determines whether transcendental constants are
+needed (row 9).}
+\label{tab:asymmetry}
+\begin{ruledtabular}
+\begin{tabular}{lll}
+Property & Coulomb ($S^3$, Riemannian) & HO ($S^5$ Hardy, complex) \\
+\hline
+Symmetry group & $\mathrm{SO}(4)$ & $\mathrm{SU}(3)$ \\
+Manifold & $S^3$ & $S^5$ (holomorphic sector) \\
+Natural operator & Laplace--Beltrami (2nd order) & Euler / Dolbeault (1st order) \\
+Eigenvalue $\lambda_N$ & $n^2 - 1$ (quadratic in $n$) & $N$ (linear in $N$) \\
+Shell degeneracy & $n^2$ & $(N+1)(N+2)/2$ \\
+Projection $E(\lambda)$ & $E_n = -Z^2 / [2(\lambda + 1)]$ (nonlinear) & $E_N = \hbar\omega(\lambda + 3/2)$ (linear-affine) \\
+Projection constant & $p_0 = Z / n$ (state-dependent) & $\hbar\omega$ (universal) \\
+Graph Laplacian role & computes spectrum via $D - A$ & encodes transitions only \\
+Transcendentals in projection & $\pi$ (calibration exchange constant) & none \\
+$\pi$-free graph & yes & yes \\
+$\pi$ in full pipeline & enters at projection & never enters \\
+\end{tabular}
+\end{ruledtabular}
+\end{table*}
+
+\subsection{The causal chain}
+\label{sec:causal}
+
+The asymmetry is not a list of independent observations.  It has a
+single causal structure in which each step is forced by the
+previous one.
+
+\begin{enumerate}
+\item \emph{Geometry choice.}  $\mathrm{SO}(4)$ symmetry of the
+  Coulomb problem (the Runge--Lenz vector closes with the angular
+  momenta into $\mathfrak{so}(4)$) makes $S^3$ the natural
+  manifold, by Fock's reduction~\cite{fock1935}.  $\mathrm{SU}(3)$
+  symmetry of the harmonic oscillator (the ladder operators
+  $a_i = (x_i + i p_i / m\omega) \sqrt{m\omega / 2\hbar}$
+  transform as the fundamental $\mathbf{3}$ and generate
+  $\mathfrak{su}(3)$ under commutation) makes $\mathbb{C}^3$ and
+  its quotients $\mathbb{CP}^2$ and $S^5$ natural,
+  by~\cite{jauchhill1940}.
+
+\item \emph{Operator order.}  A real Riemannian metric on $S^3$
+  makes the scalar Laplace--Beltrami operator (second-order in
+  derivatives) the natural object.  A complex Cauchy--Riemann or
+  K\"ahler structure on $S^5$ or $\mathbb{CP}^2$ makes the
+  Dolbeault, Kohn, or Euler operators (first-order in $\hat{N}$
+  on holomorphic sections) natural.  This is not a free choice;
+  it follows from the requirement that the operator be invariant
+  under the dynamical symmetry group acting holomorphically on
+  the manifold's structure.
+
+\item \emph{Spectrum growth.}  A second-order self-adjoint
+  operator on a compact Riemannian manifold has eigenvalues that
+  grow polynomially with shell index, typically as $n^2$ for
+  round spheres (Weyl asymptotics).  A first-order equivariant
+  operator on the symmetric irreducible representations of a
+  compact Lie group has eigenvalues linear in the highest weight.
+  These growths are different by definition.
+
+\item \emph{Projection type.}  Mapping a quadratic mathematical
+  eigenvalue $\lambda_n = n^2 - 1$ to an inverse-square physical
+  energy $E_n = -Z^2 / (2 n^2)$ is a \emph{nonlinear} operation:
+  $E = -Z^2 / [2(\lambda + 1)]$.  Mapping a linear mathematical
+  eigenvalue $\lambda_N = N$ to a linear physical energy $E_N =
+  \hbar\omega(N + 3/2)$ is a \emph{linear-affine} operation.
+
+\item \emph{Spectral zeta and boundary corrections.}  A nonlinear
+  projection on a compact manifold requires regularization at the
+  boundary of the spectrum, captured by spectral zeta values
+  $\zeta_M(s) = \sum_n \lambda_n^{-s}$.  For round $S^d$ these
+  involve $\pi$ through Bernoulli numbers and Riemann zeta values
+  at integer arguments.  A linear-affine projection has no such
+  regularization: every term in the spectrum is finite, the sum
+  is unconditionally convergent (or trivially conditionally
+  convergent with the additive constant absorbed), and no
+  transcendental seed appears.
+
+\item \emph{Calibration exchange constant.}  The transcendentals
+  in the spectral zeta are inherited by the physical spectrum as
+  what Paper~18~\cite{paper18} terms \emph{calibration} exchange
+  constants.  They are the cost of going from the dimensionless
+  graph to a physical energy via the nonlinear projection.  For
+  the harmonic oscillator this cost is zero; for the Coulomb
+  problem it is $\pi$.
+\end{enumerate}
+
+We summarize this causal chain as a structural observation:
+
+\begin{theorem}[Structural origin of calibration $\pi$]
+\label{thm:asymmetry}
+A quantum system whose spectrum is encoded by a self-adjoint
+graph Laplacian on a compact Riemannian manifold via a nonlinear
+projection requires a calibration exchange constant arising from
+the spectral zeta values of the manifold.  A quantum system
+whose spectrum is encoded by a first-order equivariant operator
+on a compact complex manifold via a linear-affine projection
+requires no such calibration constant.  The Coulomb potential and
+the three-dimensional isotropic harmonic oscillator instantiate
+the two cases respectively.
+\end{theorem}
+
+This is a structural description rather than a stand-alone
+theorem in the strict mathematical sense.  Each link in the
+causal chain is established by independent classical results
+(Weyl asymptotics; Borel--Weil; Folland--Stein; Paper~18); the
+contribution of the present paper is to assemble them into a
+single statement that the role of $\pi$ in the Coulomb projection
+is structurally tied to second-order Riemannian geometry, and
+that there is no analogous role for $\pi$ in the harmonic
+oscillator's complex-analytic projection.
+
+\subsection{Refinement of the exchange constant taxonomy}
+\label{sec:taxonomy}
+
+Paper~18~\cite{paper18} classified exchange constants into four
+types: \emph{intrinsic} (internal to the discrete graph),
+\emph{calibration} (from projecting graph $\to$ physical
+spectrum), \emph{embedding} (from embedding the graph into a
+continuous space for measurement), and \emph{flow} (from
+time-dependent dynamics).
+
+The Bargmann graph supplies a worked example that refines this
+classification.  The Coulomb $S^3$ graph has both calibration and
+embedding $\pi$: calibration $\pi$ in Paper~2's $K = \pi(B + F -
+\Delta)$~\cite{paper2_alpha}, embedding $\pi$ in the
+electron-electron $1/r_{12}$ Slater integrals and the radial
+normalization of hydrogenic functions.  The harmonic oscillator
+graph has only embedding $\pi$ (the $\pi^{-3}$ Gaussian
+normalization), and that embedding $\pi$ is never used by the
+graph itself.
+
+The refinement is therefore: \emph{calibration} exchange
+constants are tied to nonlinear projections from second-order
+Riemannian operators.  They are not a generic feature of quantum
+discretization, but a specific feature of the Coulomb / $S^3$
+construction (and, we expect, of any other system whose dynamical
+symmetry group naturally acts on a Riemannian manifold rather
+than a complex one).
+
+%================================================================
+\section{The harmonic oscillator rigidity theorem}
+\label{sec:rigidity}
+%================================================================
+
+The Fock projection rigidity theorem of Paper~23~\cite{paper23}
+states that the $S^3$ Fock projection $p_0 = \sqrt{-2 E_n}$ maps
+a one-electron central-field Hamiltonian onto the free Laplacian
+on $S^3$ if and only if the spectrum is $l$-degenerate within each
+$n$-shell, which is unique to the Coulomb potential by
+$\mathrm{SO}(4)$ symmetry.
+
+The harmonic oscillator analog has the same structural form:
+
+\begin{theorem}[Bargmann--Segal rigidity for the 3D HO]
+\label{thm:rigidity}
+The three-dimensional isotropic harmonic oscillator $V(r) =
+\frac{1}{2} m \omega^2 r^2$ is the unique central-field
+potential whose bound-state spectrum arises from the Euler
+operator on the Hardy space $H^2(S^5)$ restricted to the
+symmetric irreducible representations $(N, 0)$ of $\mathrm{SU}(3)$.
+\end{theorem}
+
+\begin{proof}[Proof.]
+The argument has three independent classical inputs.
+
+\emph{Step 1 (Jauch--Hill, 1940).}  Jauch and
+Hill~\cite{jauchhill1940} proved that the three-dimensional
+isotropic harmonic oscillator is the unique central-field
+potential whose dynamical symmetry group includes
+$\mathrm{SU}(3)$.  The proof constructs the explicit
+$\mathfrak{su}(3)$ generators as bilinears in the position and
+momentum operators (the angular momentum $\mathbf{L}$ and the
+quadrupole tensor $Q_{ij} = \frac{1}{2}(p_i p_j / m\omega +
+m\omega x_i x_j)$); the requirement that these close into
+$\mathfrak{su}(3)$ under commutation forces $V(r) \propto r^2$.
+Both directions of the equivalence
+\[
+  V(r) = \tfrac{1}{2} m\omega^2 r^2
+  \;\;\Longleftrightarrow\;\;
+  \mathrm{SU}(3)\text{ dynamical symmetry}
+\]
+are established by this construction; see also
+Wybourne~\cite{wybourne1974}, Chapter~16, and
+Iachello~\cite{iachello2006}, Chapter~4, for modern treatments.
+
+\emph{Step 2 (Borel--Weil).}  The Borel--Weil
+theorem~\cite{borelweil} identifies the symmetric irreducible
+representations $(N, 0)$ of $\mathrm{SU}(3)$ with the spaces of
+holomorphic sections of the line bundle $\mathcal{O}(N) \to
+\mathbb{CP}^2$.  By restriction along the fibration $S^1 \to S^5
+\to \mathbb{CP}^2$ (Eq.~\eqref{eq:s5-fibration}), this is the
+same data as the homogeneous degree-$N$ subspace
+$\mathcal{H}_N$ of the Hardy space $H^2(S^5)$
+(Eq.~\eqref{eq:hardy-decomp}).  Hence the $(N, 0)$ irreducible
+decomposition of an $\mathrm{SU}(3)$-equivariant Hilbert space
+coincides exactly with the Hardy-space decomposition by
+holomorphic degree.
+
+\emph{Step 3 (Bargmann--Segal--Hall).}  The Bargmann
+transform~\cite{bargmann1961}, made rigorous as a unitary
+intertwiner of group representations by
+Hall~\cite{hall1994}, establishes a unique (up to phase)
+unitary equivalence between $L^2(\mathbb{R}^3)$ with the
+Schr\"odinger representation of the harmonic oscillator and
+$F^2(\mathbb{C}^3)$ with the Bargmann representation, under
+which the harmonic oscillator Hamiltonian maps to
+$\hbar\omega(\hat{N} + 3/2)$ (Eq.~\eqref{eq:H-bargmann}).
+The Euler operator $\hat{N}$ is the unique self-adjoint operator
+on $F^2(\mathbb{C}^3)$ that is diagonal on the monomial basis
+with eigenvalue $a + b + c$ on $z_1^a z_2^b z_3^c$.
+
+\emph{Combination.}  Suppose $V(r)$ is a central-field potential
+whose bound-state spectrum arises from the Euler operator on the
+Hardy-space sectors $\mathcal{H}_N$, with each $\mathcal{H}_N$
+carrying the $(N, 0)$ irreducible representation of
+$\mathrm{SU}(3)$.  By Step~2, the Hilbert space of $V(r)$ then
+decomposes under $\mathrm{SU}(3)$ into the symmetric irreducible
+representations $(N, 0)$, one per $N$, and the Hamiltonian is
+linear in $\hat{N}$ on each.  By Step~3, this is exactly the
+image of the harmonic oscillator under the Bargmann transform.
+By the uniqueness of the Bargmann intertwiner (up to phase) and
+of the Schr\"odinger representation, the original Hamiltonian
+must be unitarily equivalent to the harmonic oscillator
+Hamiltonian.  By Step~1, the only central-field potential with
+this property is $V(r) = \frac{1}{2} m \omega^2 r^2$, completing
+the converse.  $\hfill\square$
+\end{proof}
+
+\paragraph{Remark on the converse step.}
+The crucial input to the converse direction is the biconditional
+form of the Jauch--Hill theorem (Step~1): the algebraic closure
+of the angular momentum and quadrupole generators into
+$\mathfrak{su}(3)$ \emph{forces} $V \propto r^2$.  This is the
+HO analog of the corresponding biconditional Fock--Bargmann
+result for the Coulomb problem (the Runge--Lenz closure forces
+$V \propto -1/r$).  Both biconditional results are standard
+classical group theory~\cite{wybourne1974, iachello2006}.
+
+The harmonic oscillator and the Coulomb problem are therefore
+both rigid: the natural compact manifold and the natural
+operator together uniquely determine the physical potential
+through the closure conditions of the dynamical symmetry
+algebra.  These two rigidity results are independent (Coulomb
+uses $S^3$ and Laplace--Beltrami; HO uses $S^5$ Hardy space
+and the Euler operator) and do not derive from each other, but
+they have parallel structures and parallel proofs.  Together
+they exhaust the two potentials that classical group theory
+identifies as having full $\mathrm{SO}(4)$ and $\mathrm{SU}(3)$
+dynamical symmetries respectively.
+
+%================================================================
+\section{Implications}
+\label{sec:imp}
+%================================================================
+
+\subsection{For the fine-structure constant conjecture}
+\label{sec:alpha}
+
+Paper~2~\cite{paper2_alpha} conjectures the fine-structure
+constant from the cubic equation $\alpha^3 - K \alpha + 1 = 0$
+with $K = \pi (B + F - \Delta)$, where $B = 42$, $F = \zeta(2) =
+\pi^2/6$, $\Delta = 1/40$ are spectral invariants of the Hopf
+fibration $S^1 \to S^3 \to S^2$.  The numerical value $K =
+137.036064$ matches $1/\alpha$ to $8.8 \times 10^{-8}$, with a
+combinatorial $p$-value of $5.2 \times 10^{-9}$.  The combination
+rule $K = \pi(B + F - \Delta)$ is empirical and the conjecture
+remains conjectural.
+
+The Coulomb / HO asymmetry developed in Section~\ref{sec:asymmetry}
+provides structural support for one element of the formula: the
+prefactor $\pi$.  By Theorem~\ref{thm:asymmetry}, calibration
+$\pi$ of this type is tied to second-order Riemannian operators
+with nonlinear projections.  The harmonic oscillator's
+complex / first-order construction has no such $\pi$.  Therefore
+$\pi$ in $K = \pi(B + F - \Delta)$ is structurally Coulomb-specific:
+it comes from the spectral zeta values of $S^3$, which exist
+because the Coulomb projection $E_n = -Z^2/(2 n^2)$ is nonlinear,
+and there is no analog in any other dynamical-symmetry-classified
+central potential.
+
+This does not derive Paper~2's combination rule.  It explains why
+$\pi$ appears in $K$, but does not explain the additive
+combination $B + F - \Delta$ or the values of $B$, $F$, $\Delta$
+themselves.  Paper~2 remains conjectural and its conjectural
+status is unchanged by this paper.  The contribution here is to
+sharpen the framing: any future derivation of the combination
+rule must rely on the $\mathrm{SO}(4)$ / Riemannian features of
+$S^3$ that distinguish the Coulomb problem from every other
+central potential, not on the broader $\mathrm{SO}(3)$ angular
+momentum structure that $S^3$ shares with $S^5$ and other
+manifolds.
+
+\subsection{For nuclear quantum simulation}
+\label{sec:nuclear}
+
+Paper~23~\cite{paper23} constructs nuclear shell-model qubit
+Hamiltonians on the harmonic oscillator single-particle basis,
+producing the deuteron and helium-4 qubit Hamiltonians via the
+Minnesota nucleon-nucleon potential and Moshinsky--Talmi
+brackets.  Theorem~\ref{thm:pi-free} of the present paper
+implies that the single-particle structure of these Hamiltonians
+is exactly rational at the graph level: the diagonal HO
+energies, the orbital labeling, and the dipole transition
+selection rules are all built from rational arithmetic on
+integers.  Any floating-point error in nuclear Pauli coefficients
+comes from the nucleon--nucleon interaction matrix elements
+(which involve Gaussian integrals via Moshinsky--Talmi brackets),
+not from the single-particle basis or the graph topology.  This
+is a precision guarantee for nuclear qubit Hamiltonians built
+within the GeoVac framework.
+
+\subsection{The universal / Coulomb-specific partition completed}
+\label{sec:partition}
+
+Combined with Paper~22~\cite{paper22} (potential-independent
+angular sparsity) and Paper~23~\cite{paper23} (Fock projection
+rigidity theorem), the present paper completes a three-way
+partition of the GeoVac framework's claims:
+
+\paragraph{Universal across spherical fermion systems.}
+The angular-momentum selection rules from Wigner $3j$ symbols
+and the Gaunt integral; the ERI density bound (1.44\% at
+$l_{\max} = 3$, independent of $V(r)$); the block-diagonal
+structure of two-body operators; and the $O(Q^{2.5})$ composed
+Pauli scaling.  These are the Paper~22 results.
+
+\paragraph{Coulomb-specific.}
+The $S^3$ Fock conformal projection; the calibration exchange
+constant $\pi$; the Hopf bundle structure underlying the
+$\alpha$ conjecture; the kinetic constant $\kappa = -1/16$ from
+the $S^3$ Laplacian.  These are the Paper~23 / Track NH results
+and the present paper.
+
+\paragraph{Harmonic-oscillator-specific (this paper).}
+The $S^5$ Hardy-space discretization; the linear-affine
+projection $E_N = \hbar\omega(N + 3/2)$; the bit-exactly
+$\pi$-free graph at every $N_{\max}$; the embedding $\pi^{-3}$
+in the continuous Bargmann measure that the discrete graph
+never invokes; the Bargmann--Segal rigidity theorem
+(Theorem~\ref{thm:rigidity}).
+
+The two natural geometries ($S^3$ for Coulomb and $S^5$ Hardy
+for HO) are not in competition; they are the discrete encodings
+of two physically distinct potentials with two distinct
+dynamical symmetry groups.  The asymmetry between them is
+structural and informs which features of the GeoVac framework
+extend to nuclear, atomic, and molecular systems beyond the
+electronic Coulomb problem.
+
+%================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%================================================================
+
+We constructed a discrete graph encoding of the three-dimensional
+isotropic harmonic oscillator on the holomorphic sector of $S^5$,
+proved that the graph and its projection to physical energies are
+bit-exactly $\pi$-free in exact rational arithmetic
+(Theorem~\ref{thm:pi-free}), and developed the structural origin
+of this fact in terms of the difference between Riemannian and
+complex natural geometries (Theorem~\ref{thm:asymmetry}).  We
+stated and proved the harmonic oscillator analog of the Fock
+projection rigidity theorem (Theorem~\ref{thm:rigidity}), based on
+the Jauch--Hill biconditional uniqueness of $\mathrm{SU}(3)$
+dynamical symmetry, the Borel--Weil identification of $(N, 0)$
+irreducibles with the holomorphic Hardy-space sectors, and the
+Bargmann--Segal--Hall unitary intertwiner.
+
+Calibration $\pi$ is Coulomb-specific.  It is the cost of mapping
+a quadratic Riemannian eigenvalue to an inverse-square physical
+energy, and it has no analog for the harmonic oscillator's linear
+complex-analytic projection.  This refines Paper~18's exchange
+constant taxonomy and sharpens Paper~2's framing of the
+fine-structure constant conjecture: any geometric derivation of
+$\alpha$ must rely on the $\mathrm{SO}(4)$ / Riemannian features
+of the Coulomb problem, not on the angular momentum structure
+shared with other central potentials.
+
+Future work includes extending the discretization to anisotropic
+harmonic oscillators (which break $\mathrm{SU}(3)$ to a smaller
+subgroup, with corresponding modifications of the manifold), and
+identifying the natural compact manifolds for other
+dynamical-symmetry-classified central potentials such as the
+Morse oscillator ($\mathrm{SU}(1, 1)$), the Kepler problem in
+$n$ dimensions ($\mathrm{SO}(n + 1)$), and the P\"oschl--Teller
+hierarchy.  Each such system should be classifiable by whether
+its natural operator is first-order (no calibration exchange
+constant) or second-order (calibration exchange constant
+required), providing a structural taxonomy of where transcendental
+constants enter the discrete-to-physical map.
+
+\begin{thebibliography}{99}
+
+\bibitem{fock1935}
+V.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+\textit{Z.\ Phys.}\ \textbf{98}, 145 (1935).
+
+\bibitem{bargmann1961}
+V.~Bargmann,
+``On a Hilbert space of analytic functions and an associated
+integral transform,''
+\textit{Comm.\ Pure Appl.\ Math.}\ \textbf{14}, 187 (1961).
+
+\bibitem{segal1963}
+I.~E.\ Segal,
+``Mathematical problems of relativistic physics,''
+in \textit{Proc.\ Summer Sem.\ Boulder, Colorado, 1960}
+(American Mathematical Society, Providence, 1963).
+
+\bibitem{hall1994}
+B.~C.\ Hall,
+``The Segal--Bargmann `coherent state' transform for compact Lie
+groups,''
+\textit{J.\ Funct.\ Anal.}\ \textbf{122}, 103 (1994).
+
+\bibitem{follandstein1974}
+G.~B.\ Folland and E.~M.\ Stein,
+``Estimates for the $\bar{\partial}_b$ complex and analysis on the
+Heisenberg group,''
+\textit{Comm.\ Pure Appl.\ Math.}\ \textbf{27}, 429 (1974).
+
+\bibitem{jauchhill1940}
+J.~M.\ Jauch and E.~L.\ Hill,
+``On the problem of degeneracy in quantum mechanics,''
+\textit{Phys.\ Rev.}\ \textbf{57}, 641 (1940).
+
+\bibitem{borelweil}
+A.~Borel and A.~Weil, ``Repr\'esentations lin\'eaires et espaces
+homog\`enes k\"ahl\'eriens des groupes de Lie compacts,'' as
+exposited in J.-P.\ Serre, \textit{Repr\'esentations lin\'eaires et
+espaces homog\`enes K\"ahleriens des groupes de Lie compacts}
+(S\'eminaire Bourbaki, expos\'e 100, 1954).  Modern textbook
+treatment in W.~Fulton and J.~Harris,
+\textit{Representation Theory: A First Course} (Springer, 1991),
+Lecture~23.
+
+\bibitem{wybourne1974}
+B.~G.\ Wybourne,
+\textit{Classical Groups for Physicists}
+(Wiley-Interscience, New York, 1974), Chapter~16.
+
+\bibitem{iachello2006}
+F.~Iachello,
+\textit{Lie Algebras and Applications}
+(Springer, Berlin, 2006), Chapter~4.
+
+\bibitem{rowe1985}
+D.~J.\ Rowe,
+``Microscopic theory of the nuclear collective model,''
+\textit{Rep.\ Prog.\ Phys.}\ \textbf{48}, 1419 (1985).
+
+\bibitem{edmonds}
+A.~R.\ Edmonds,
+\textit{Angular Momentum in Quantum Mechanics}
+(Princeton University Press, 1957).
+
+\bibitem{varshalovich}
+D.~A.\ Varshalovich, A.~N.\ Moskalev, and V.~K.\ Khersonskii,
+\textit{Quantum Theory of Angular Momentum}
+(World Scientific, Singapore, 1988).
+
+\bibitem{paper0}
+J.~Loutey,
+``Geometric Packing and the Universal Constant $K = -1/16$,''
+GeoVac Paper~0 (2026).
+
+\bibitem{paper2_alpha}
+J.~Loutey,
+``The Fine Structure Constant from Spectral Geometry of the Hopf
+Fibration,''
+GeoVac Paper~2 (2026). [Conjectural.]
+
+\bibitem{paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: $S^3$ Conformal Geometry and the
+Schr\"odinger Equation,''
+GeoVac Paper~7 (2026).
+
+\bibitem{paper14}
+J.~Loutey,
+``Structurally Sparse Qubit Hamiltonians from Hyperspherical
+Lattices,''
+GeoVac Paper~14 (2026).
+
+\bibitem{paper18}
+J.~Loutey,
+``Spectral-Geometric Exchange Constants and the $\pi$-Free Graph
+Principle,''
+GeoVac Paper~18 (2026).
+
+\bibitem{paper22}
+J.~Loutey,
+``Potential-Independent Angular Sparsity for Qubit Hamiltonians in
+Spherical Fermion Systems,''
+GeoVac Paper~22 (2026).
+
+\bibitem{paper23}
+J.~Loutey,
+``Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice,''
+GeoVac Paper~23 (2026).
+
+\end{thebibliography}
+
+\end{document}

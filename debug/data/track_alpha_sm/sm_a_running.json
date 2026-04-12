@@ -1,0 +1,210 @@
+{
+  "description": "Track SM-A: QED one-loop running test for Paper 2 Delta = 1/40.",
+  "precision_dps": 50,
+  "targets": {
+    "one_over_40": "0.025",
+    "pi_over_40": "0.078539816339744830961566084582"
+  },
+  "fermion_content": [
+    {
+      "name": "e",
+      "mass_GeV": "0.00051099895",
+      "charge": "-1.0",
+      "N_c": 1
+    },
+    {
+      "name": "u",
+      "mass_GeV": "0.00216",
+      "charge": "0.666666666666667",
+      "N_c": 3
+    },
+    {
+      "name": "d",
+      "mass_GeV": "0.00467",
+      "charge": "-0.333333333333333",
+      "N_c": 3
+    },
+    {
+      "name": "s",
+      "mass_GeV": "0.0934",
+      "charge": "-0.333333333333333",
+      "N_c": 3
+    },
+    {
+      "name": "mu",
+      "mass_GeV": "0.1056583755",
+      "charge": "-1.0",
+      "N_c": 1
+    },
+    {
+      "name": "c",
+      "mass_GeV": "1.27",
+      "charge": "0.666666666666667",
+      "N_c": 3
+    },
+    {
+      "name": "tau",
+      "mass_GeV": "1.77686",
+      "charge": "-1.0",
+      "N_c": 1
+    },
+    {
+      "name": "b",
+      "mass_GeV": "4.18",
+      "charge": "-0.333333333333333",
+      "N_c": 3
+    },
+    {
+      "name": "t",
+      "mass_GeV": "172.69",
+      "charge": "0.666666666666667",
+      "N_c": 3
+    }
+  ],
+  "scale_table": [
+    {
+      "scale_name": "m_e (sanity)",
+      "mu_GeV": "0.00051099895",
+      "delta_inv_alpha": "0.0",
+      "ratio_to_one_over_40": "0.0",
+      "ratio_to_pi_over_40": "0.0"
+    },
+    {
+      "scale_name": "2*Rydberg (H binding)",
+      "mu_GeV": "2.7211386245988e-8",
+      "delta_inv_alpha": "0.0",
+      "ratio_to_one_over_40": "0.0",
+      "ratio_to_pi_over_40": "0.0"
+    },
+    {
+      "scale_name": "Bohr momentum p0=alpha*m_e",
+      "mu_GeV": "3.7289395006838245616e-6",
+      "delta_inv_alpha": "0.0",
+      "ratio_to_one_over_40": "0.0",
+      "ratio_to_pi_over_40": "0.0"
+    },
+    {
+      "scale_name": "inv Bohr radius 1/a0",
+      "mu_GeV": "3.7289395006838245616e-6",
+      "delta_inv_alpha": "0.0",
+      "ratio_to_one_over_40": "0.0",
+      "ratio_to_pi_over_40": "0.0"
+    },
+    {
+      "scale_name": "classical r_e scale 1/r_e",
+      "mu_GeV": "0.0700252516441249618",
+      "delta_inv_alpha": "2.2199227554624118602",
+      "ratio_to_one_over_40": "88.796910218496474407",
+      "ratio_to_pi_over_40": "28.26493438512189162"
+    },
+    {
+      "scale_name": "muon mass",
+      "mu_GeV": "0.1056583755",
+      "delta_inv_alpha": "2.461425207988875374",
+      "ratio_to_one_over_40": "98.457008319555014959",
+      "ratio_to_pi_over_40": "31.339839112194088059"
+    },
+    {
+      "scale_name": "tau mass",
+      "mu_GeV": "1.77686",
+      "delta_inv_alpha": "4.9521666610758313471",
+      "ratio_to_one_over_40": "198.08666644303325389",
+      "ratio_to_pi_over_40": "63.052944250008421987"
+    },
+    {
+      "scale_name": "charm mass",
+      "mu_GeV": "1.27",
+      "delta_inv_alpha": "4.5720838764239467078",
+      "ratio_to_one_over_40": "182.88335505695786831",
+      "ratio_to_pi_over_40": "58.213579933090037208"
+    },
+    {
+      "scale_name": "bottom mass",
+      "mu_GeV": "4.18",
+      "delta_inv_alpha": "6.1018882624009566216",
+      "ratio_to_one_over_40": "244.07553049603826486",
+      "ratio_to_pi_over_40": "77.691654332442269196"
+    },
+    {
+      "scale_name": "M_Z",
+      "mu_GeV": "91.1876",
+      "delta_inv_alpha": "10.462886034045900794",
+      "ratio_to_one_over_40": "418.51544136183603174",
+      "ratio_to_pi_over_40": "133.21760250604494603"
+    },
+    {
+      "scale_name": "top mass",
+      "mu_GeV": "172.69",
+      "delta_inv_alpha": "11.366290739289496999",
+      "ratio_to_one_over_40": "454.65162957157987994",
+      "ratio_to_pi_over_40": "144.72010846220454874"
+    },
+    {
+      "scale_name": "GUT ~1e16 GeV",
+      "mu_GeV": "10000000000000000.0",
+      "delta_inv_alpha": "65.164673750907847351",
+      "ratio_to_one_over_40": "2606.586950036313894",
+      "ratio_to_pi_over_40": "829.70239539421313744"
+    },
+    {
+      "scale_name": "Planck mass",
+      "mu_GeV": "12209100000000000000.0",
+      "delta_inv_alpha": "77.230488845382623133",
+      "ratio_to_one_over_40": "3089.2195538153049253",
+      "ratio_to_pi_over_40": "983.32912457169031216"
+    }
+  ],
+  "inverse_solutions": {
+    "1/40": {
+      "target_value": "0.025",
+      "mu_electron_only_GeV": "0.00057488916167771823054",
+      "mu_electron_only_eV": "574889.16167771823054",
+      "mu_electron_only_MeV": "574.88916167771823054",
+      "ratio_to_m_e": "1.1250300253605574543",
+      "ratio_to_p0_bohr": "154.16961352478184807",
+      "ratio_to_Rydberg": "42253.57403557335489",
+      "ratio_to_alpha2_m_e": "21126.787017762639344",
+      "closest_natural_scale": {
+        "name": "m_e",
+        "value_GeV": "0.00051099895",
+        "ratio_mu_over_scale": 1.1250300253605574,
+        "log_distance": "0.117809724509617"
+      }
+    },
+    "pi/40": {
+      "target_value": "0.078539816339744830962",
+      "mu_electron_only_GeV": "0.0007398723715521448644",
+      "mu_electron_only_eV": "739872.3715521448644",
+      "mu_electron_only_MeV": "739.8723715521448644",
+      "ratio_to_m_e": "1.4478941131917098155",
+      "ratio_to_p0_bohr": "198.41361636906813859",
+      "ratio_to_Rydberg": "54379.616302071370929",
+      "ratio_to_alpha2_m_e": "27189.808151004748845",
+      "closest_natural_scale": {
+        "name": "(3/2)*m_e",
+        "value_GeV": "0.000766498425",
+        "ratio_mu_over_scale": 0.9652627421278065,
+        "log_distance": "0.0353549430673134"
+      }
+    },
+    "1/40_multiflavor": {
+      "error": "Could not find root within given tolerance. (0.00062500000000000000000000000000000000000000000000000083524 > 2.6101217871994098106841176437026190222804657032275866191e-54)\nTry another starting point or tweak arguments."
+    },
+    "pi/40_multiflavor": {
+      "error": "Could not find root within given tolerance. (0.0061685027506808491367715568749225944595710621295254981105 > 2.6101217871994098106841176437026190222804657032275866191e-54)\nTry another starting point or tweak arguments."
+    }
+  },
+  "verdict": {
+    "pass_one_over_40": false,
+    "pass_pi_over_40": false,
+    "best_one_over_40": {
+      "scale": "classical r_e scale 1/r_e",
+      "rel_err": "87.79691022"
+    },
+    "best_pi_over_40": {
+      "scale": "classical r_e scale 1/r_e",
+      "rel_err": "27.26493439"
+    },
+    "summary_text": "Best hit for 1/40 target:  classical r_e scale 1/r_e, rel err = 87.7969  FAIL\nBest hit for pi/40 target: classical r_e scale 1/r_e, rel err = 27.2649  FAIL\n\nInverse-solve (electron-only region):\n  Delta=1/40  -> mu = 574.88916 MeV\n  Delta=pi/40 -> mu = 739.87237 MeV"
+  }
+}

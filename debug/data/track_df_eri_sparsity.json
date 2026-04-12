@@ -1,0 +1,76 @@
+{
+  "l_max_1": {
+    "l_max": 1,
+    "uncoupled": {
+      "n_states": 16,
+      "s4_22_dim": 2,
+      "vee_12": {
+        "nonzero": 32,
+        "total": 256,
+        "density_pct": 12.5
+      },
+      "vee_13": {
+        "nonzero": 32,
+        "total": 256,
+        "density_pct": 12.5
+      },
+      "total_density_pct": 12.5
+    },
+    "hset": {
+      "n_states": 14,
+      "vee_12": {
+        "nonzero": 24,
+        "total": 196,
+        "density_pct": 12.244897959183673
+      },
+      "vee_34": {
+        "nonzero": 24,
+        "total": 196,
+        "density_pct": 12.244897959183673
+      },
+      "vee_13": {
+        "nonzero": 15,
+        "total": 196,
+        "density_pct": 7.653061224489796
+      },
+      "total_density_pct": 9.183673469387756
+    }
+  },
+  "l_max_2": {
+    "l_max": 2,
+    "uncoupled": {
+      "n_states": 81,
+      "s4_22_dim": 12,
+      "vee_12": {
+        "nonzero": 333,
+        "total": 6561,
+        "density_pct": 5.075445816186557
+      },
+      "vee_13": {
+        "nonzero": 333,
+        "total": 6561,
+        "density_pct": 5.075445816186557
+      },
+      "total_density_pct": 5.075445816186557
+    },
+    "hset": {
+      "n_states": 91,
+      "vee_12": {
+        "nonzero": 283,
+        "total": 8281,
+        "density_pct": 3.417461659219901
+      },
+      "vee_34": {
+        "nonzero": 283,
+        "total": 8281,
+        "density_pct": 3.417461659219901
+      },
+      "vee_13": {
+        "nonzero": 385,
+        "total": 8281,
+        "density_pct": 4.649196956889265
+      },
+      "total_density_pct": 4.23861852433281
+    }
+  }
+}

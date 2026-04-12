@@ -162,60 +162,14 @@ class DirectCISolver:
         """
         Build the FCI Hamiltonian via excitation-driven iteration.
 
-        Uses Numba-accelerated kernels if available, with automatic
-        fallback to pure Python. The Numba path gives ~40-100x speedup.
+        Complexity: O(N_SD x n_el x n_sp) for singles
+                  + O(N_SD x C(n_el,2) x |eri_targets|) for doubles
+        versus O(N^2_SD) for the pairwise loop.
 
         Returns
         -------
         H : csr_matrix, shape (n_sd, n_sd)
         """
-        # Try Numba-accelerated path
-        try:
-            from geovac.direct_ci_numba import (
-                assemble_hamiltonian_numba, NUMBA_AVAILABLE,
-            )
-            if NUMBA_AVAILABLE:
-                return self._assemble_numba()
-        except ImportError:
-            pass
-
-        return self._assemble_python()
-
-    def _assemble_numba(self) -> csr_matrix:
-        """Numba-accelerated Hamiltonian assembly."""
-        from geovac.direct_ci_numba import assemble_hamiltonian_numba
-
-        t0 = time.perf_counter()
-        diag_idx, diag_val, off_row, off_col, off_val = \
-            assemble_hamiltonian_numba(
-                self._idx.sd_basis,
-                self._H1_dense,
-                self._eri_4d,
-                self._h1_diag_arr,
-                self.n_sp,
-                self._idx.threshold,
-                self._spatial_targets,
-                self.n_spatial,
-            )
-
-        n_sd = self.n_sd
-        H_diag = csr_matrix(
-            (diag_val, (diag_idx, diag_idx)), shape=(n_sd, n_sd)
-        )
-        H_upper = csr_matrix(
-            (off_val, (off_row, off_col)), shape=(n_sd, n_sd)
-        )
-        H = H_upper + H_upper.T + H_diag
-
-        elapsed = time.perf_counter() - t0
-        print(
-            f"[DirectCI] Hamiltonian assembled (Numba): shape={H.shape}, "
-            f"nnz={H.nnz:,}, total={elapsed:.3f}s"
-        )
-        return H.tocsr()
-
-    def _assemble_python(self) -> csr_matrix:
-        """Pure Python Hamiltonian assembly (fallback)."""
         t0 = time.perf_counter()
 
         idx = self._idx

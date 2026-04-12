@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "track": "DI Sprint 3D",
+    "description": "FCI basis invariance test: graph-native vs graph-consistent",
+    "E_exact_He": -2.903724377,
+    "timestamp": "2026-04-08 12:33:13"
+  },
+  "comparison": [
+    {
+      "n_max": 1,
+      "n_configs": 1,
+      "E_native": -2.75,
+      "E_consistent": -2.75,
+      "difference_Ha": 0.0,
+      "error_native_pct": 5.294041618330915,
+      "error_consistent_pct": 5.294041618330915,
+      "time_native_s": 0.00042247772216796875,
+      "time_consistent_s": 0.0005254745483398438
+    },
+    {
+      "n_max": 2,
+      "n_configs": 7,
+      "E_native": -2.890053195389319,
+      "E_consistent": -2.890053195389318,
+      "difference_Ha": 8.881784197001252e-16,
+      "error_native_pct": 0.47081540241796677,
+      "error_consistent_pct": 0.4708154024179974,
+      "time_native_s": 0.016591787338256836,
+      "time_consistent_s": 0.018877506256103516
+    },
+    {
+      "n_max": 3,
+      "n_configs": 31,
+      "E_native": -2.8937575256850616,
+      "E_consistent": -2.8937575256850625,
+      "difference_Ha": 8.881784197001252e-16,
+      "error_native_pct": 0.3432437112104894,
+      "error_consistent_pct": 0.3432437112104588,
+      "time_native_s": 0.506023645401001,
+      "time_consistent_s": 0.5172338485717773
+    },
+    {
+      "n_max": 4,
+      "n_configs": 101,
+      "E_native": -2.896122015894597,
+      "E_consistent": -2.896122015894594,
+      "difference_Ha": 2.6645352591003757e-15,
+      "error_native_pct": 0.2618141434366325,
+      "error_consistent_pct": 0.26181414343672427,
+      "time_native_s": 4.317020893096924,
+      "time_consistent_s": 7.318053483963013
+    }
+  ],
+  "basis_invariance_verified": true,
+  "conclusion": "FCI is invariant under orbital rotation. The 0.075% floor is NOT from basis mismatch. It is from cusp + finite-n_max truncation (embedding exchange constant content).",
+  "floor_characterization": {
+    "E_inf": -2.8995719972256473,
+    "C": 0.042066995991294626,
+    "p": 1.8016589176657867,
+    "floor_pct": 0.14300185676172347,
+    "E_inf_minus_exact_mHa": 4.152379774352788
+  }
+}

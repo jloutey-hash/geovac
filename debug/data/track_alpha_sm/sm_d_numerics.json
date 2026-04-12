@@ -1,0 +1,171 @@
+{
+  "description": "Track SM-D: One-loop photon self-energy on S^3 at n_max=3",
+  "precision_dps": 50,
+  "targets": {
+    "1/40": "0.025",
+    "pi/40": "0.078539816339744830961566084581987572104929234984378"
+  },
+  "structural_check": {
+    "graph_lambda_n": [
+      0,
+      -3,
+      -8,
+      -15
+    ],
+    "graph_N(n)_cumulative": [
+      1,
+      5,
+      14,
+      30
+    ],
+    "paper2_Delta_inv": 40,
+    "dirac_degeneracy_k": [
+      4,
+      12,
+      24,
+      40,
+      60
+    ],
+    "dirac_g_at_k3": 40,
+    "interpretation": "Delta = 1/40 = 1/g_3^Dirac, where g_3^Dirac = 2*(3+1)*(3+2) = 40 is the degeneracy of the third Dirac eigenmode on unit S^3. This is a STRUCTURAL identification: Delta is the reciprocal of the number of charged-spinor states at the selection-cutoff mode."
+  },
+  "vacuum_polarization": {
+    "massless_M=0": {
+      "shift_1_over_alpha": "3.4735183617055813519249093010146905677058874704853",
+      "shift_times_pi": "10.912379767243508567710892782726273329119776454462",
+      "ratio_to_1_over_40": "138.94073446822325407699637204058762270823549881941",
+      "ratio_to_pi_over_40": "44.226209374872425519663145590381865521889330314944",
+      "breakdown": [
+        {
+          "n": 0,
+          "|lambda_n|": "1.5",
+          "g_n": 4,
+          "log(lam^2+M^2)": "0.81093021621632876395602623092869827314398084692499",
+          "contribution": "3.2437208648653150558241049237147930925759233877"
+        },
+        {
+          "n": 1,
+          "|lambda_n|": "2.5",
+          "g_n": 12,
+          "log(lam^2+M^2)": "1.8325814637483101303670544235360221429002024398165",
+          "contribution": "21.990977564979721564404653082432265714802429277798"
+        },
+        {
+          "n": 2,
+          "|lambda_n|": "3.5",
+          "g_n": 24,
+          "log(lam^2+M^2)": "2.5055259369907359913762412439700063231231691904432",
+          "contribution": "60.132622487777663793029789855280151754956060570637"
+        },
+        {
+          "n": 3,
+          "|lambda_n|": "4.5",
+          "g_n": 40,
+          "log(lam^2+M^2)": "3.0081547935525481467465167047737496824389619625705",
+          "contribution": "120.32619174210192586986066819094998729755847850282"
+        }
+      ]
+    },
+    "M_f=1_compton": {
+      "shift_1_over_alpha": "3.5927960574501025233890158509113413507470259141656",
+      "shift_times_pi": "11.287101699931614823435006172277166379731331640137",
+      "ratio_to_1_over_40": "143.71184229800410093556063403645365402988103656662",
+      "ratio_to_pi_over_40": "45.744900165140559400210716434498969748126597881796",
+      "breakdown": [
+        {
+          "n": 0,
+          "|lambda_n|": "1.5",
+          "g_n": 4,
+          "log(lam^2+M^2)": "1.1786549963416461172190231986489654686542676760397",
+          "contribution": "4.7146199853665844688760927945958618746170707041588"
+        },
+        {
+          "n": 1,
+          "|lambda_n|": "2.5",
+          "g_n": 12,
+          "log(lam^2+M^2)": "1.9810014688665834083488077894455584693435126452022",
+          "contribution": "23.772017626399000900185693473346701632122151742427"
+        },
+        {
+          "n": 2,
+          "|lambda_n|": "3.5",
+          "g_n": 24,
+          "log(lam^2+M^2)": "2.5839975524322312153100048961127046342089774841907",
+          "contribution": "62.015941258373549167440117506704911221015459620577"
+        },
+        {
+          "n": 3,
+          "|lambda_n|": "4.5",
+          "g_n": 40,
+          "log(lam^2+M^2)": "3.0563568953704258360158297081829610389628040981338",
+          "contribution": "122.25427581481703344063318832731844155851216392535"
+        }
+      ]
+    },
+    "M_f=1_over_alpha_bohr": {
+      "M_f": "137.035999084",
+      "shift_1_over_alpha": "13.295065450662214908122199954167614283060195153012",
+      "shift_times_pi": "41.767679948795888047782644438139974407268657882595",
+      "ratio_to_1_over_40": "531.80261802648859632488799816670457132240780612047",
+      "ratio_to_pi_over_40": "169.27803081625349036910633116424724115385326879759"
+    }
+  },
+  "combinatorial_interpretation": {
+    "comment": "Delta = 1/40 coincides with g_3^Dirac = 2*4*5 = 40 (single-chirality degeneracy of the n=3 Dirac mode on unit S^3)",
+    "by_n": {
+      "n<=0": {
+        "g_n": 4,
+        "cumulative_modes": 4,
+        "1/g_n": "0.25",
+        "1/cumulative": "0.25"
+      },
+      "n<=1": {
+        "g_n": 12,
+        "cumulative_modes": 16,
+        "1/g_n": "0.083333333333333333333333333333333333333333333333333",
+        "1/cumulative": "0.0625"
+      },
+      "n<=2": {
+        "g_n": 24,
+        "cumulative_modes": 40,
+        "1/g_n": "0.041666666666666666666666666666666666666666666666667",
+        "1/cumulative": "0.025"
+      },
+      "n<=3": {
+        "g_n": 40,
+        "cumulative_modes": 80,
+        "1/g_n": "0.025",
+        "1/cumulative": "0.0125"
+      },
+      "n<=4": {
+        "g_n": 60,
+        "cumulative_modes": 140,
+        "1/g_n": "0.016666666666666666666666666666666666666666666666667",
+        "1/cumulative": "0.0071428571428571428571428571428571428571428571428571"
+      }
+    },
+    "delta_target": "0.025",
+    "hits": {
+      "g_3_Dirac = 40 (single chirality)": true,
+      "1/g_3 = 1/40 matches Delta exactly": true
+    }
+  },
+  "continuum_running_check": {
+    "formula": "1/alpha(q^2) - 1/alpha(m^2) = (1/(3 pi)) log(q^2/m^2) (electron loop)",
+    "q/m_for_1/40_shift": "1.1250300253605574542537228772279312434789724164035",
+    "q_GeV_for_1/40_shift (m_e=0.511 MeV)": "0.0005748903429592448591236523902634728654177549047822",
+    "q/m_for_pi/40_shift": "1.447894113191709815456148414767959059185285796122",
+    "q_GeV_for_pi/40_shift (m_e=0.511 MeV)": "0.00073987389184096371569809183994642707924368104181836"
+  },
+  "verdict": {
+    "massless_hits_1/40_at_5pct": false,
+    "massless_hits_pi/40_at_5pct": false,
+    "M=1_hits_1/40_at_5pct": false,
+    "M=1_hits_pi/40_at_5pct": false,
+    "heavy_hits_1/40_at_5pct": false,
+    "heavy_hits_pi/40_at_5pct": false,
+    "structural_40_match": true,
+    "status": "partial",
+    "comment": "The spectral-sum vacuum polarization on S^3 with the n_max=3 cutoff does NOT directly reproduce Delta = 1/40 at any mass normalization tested. HOWEVER, there is a clean structural observation: the third Dirac eigenmode on S^3 has degeneracy g_3 = 40, and Delta = 1/g_3 exactly. This recasts Delta as a reciprocal mode-counting invariant rather than a perturbative shift. It is consistent with Paper 2's decomposition Delta = 1/(|lam_3|*N(2)) = 1/(8*5), because 8*5 = 40 = g_3^Dirac is numerically the same decomposition but with different structural meaning (Dirac modes vs Laplace eigenvalue * state count). To complete the calculation one would need the on-shell-renormalized S^3 vacuum polarization with Camporesi-Higuchi's zeta-regularization and match it to the classical r_e scale where SM-A found best agreement (87.8 percent relative error for 1/40)."
+  }
+}
