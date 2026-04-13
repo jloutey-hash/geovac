@@ -348,6 +348,8 @@ _SYSTEM_REGISTRY: Dict[str, str] = {
     'kh': 'KH', 'cah2': 'CaH2',
     # Third-row p-block hydrides ([Ar]3d10 frozen core)
     'geh4': 'GeH4', 'ash3': 'AsH3', 'h2se': 'H2Se', 'hbr': 'HBr',
+    # Multi-center diatomics
+    'lif': 'LiF', 'co': 'CO', 'n2': 'N2', 'f2': 'F2', 'nacl': 'NaCl',
     # Transition metal hydrides (Z=21-30)
     'sch': 'ScH', 'tih': 'TiH', 'vh': 'VH', 'crh': 'CrH', 'mnh': 'MnH',
     'feh': 'FeH', 'coh': 'CoH', 'nih': 'NiH', 'cuh': 'CuH', 'znh': 'ZnH',
@@ -359,6 +361,12 @@ _HYDRIDE_Z: Dict[str, int] = {
     'NaH': 11, 'MgH2': 12, 'SiH4': 14, 'PH3': 15, 'H2S': 16, 'HCl': 17,
     'KH': 19, 'CaH2': 20,
     'GeH4': 32, 'AsH3': 33, 'H2Se': 34, 'HBr': 35,
+}
+
+# Multi-center diatomics: canonical name → spec factory name
+_MULTI_CENTER: Dict[str, str] = {
+    'LiF': 'lif_spec', 'CO': 'co_spec', 'N2': 'n2_spec',
+    'F2': 'f2_spec', 'NaCl': 'nacl_spec',
 }
 
 # Canonical name -> Z for transition metal hydrides
@@ -415,6 +423,9 @@ def hamiltonian(
     if canonical in _HYDRIDE_Z:
         return _build_hydride(_HYDRIDE_Z[canonical], R=R, max_n=max_n,
                               verbose=verbose, core_method=core_method)
+    elif canonical in _MULTI_CENTER:
+        return _build_multi_center(canonical, R=R, max_n=max_n,
+                                   verbose=verbose)
     elif canonical in _TM_HYDRIDE_Z:
         return _build_tm_hydride(_TM_HYDRIDE_Z[canonical], R=R,
                                  verbose=verbose)
@@ -469,6 +480,36 @@ def _build_hydride(
 # ---------------------------------------------------------------------------
 # TM hydride builder (spec-driven)
 # ---------------------------------------------------------------------------
+
+def _build_multi_center(
+    canonical: str,
+    R: Optional[float] = None,
+    max_n: int = 2,
+    verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build a multi-center diatomic via spec factory + general builder."""
+    from geovac import molecular_spec as ms
+    from geovac.composed_qubit import build_composed_hamiltonian
+
+    factory = getattr(ms, _MULTI_CENTER[canonical])
+    kwargs = {'max_n': max_n}
+    if R is not None:
+        kwargs['R'] = R
+    spec = factory(**kwargs)
+
+    result = build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=False, verbose=verbose,
+    )
+    meta = {
+        'system': spec.name,
+        'R_bohr': R,
+        'max_n': max_n,
+        'M': result['M'],
+        'Q': result['Q'],
+        'N_pauli': result['N_pauli'],
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
 
 def _build_tm_hydride(
     Z: int,

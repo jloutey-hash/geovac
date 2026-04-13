@@ -39,15 +39,15 @@ LiH requires 334 Pauli terms at 30 qubits versus 907 for Gaussian STO-3G
 at 12 qubits, with 13$\times$ fewer qubitwise-commuting measurement groups.
 The balanced coupled architecture (PK-free) achieves 0.20\% energy error
 at the equilibrium geometry of LiH when solved exactly, with 878 Pauli terms
-at 30 qubits.  The library covers 30 molecules across three rows of the periodic table
+at 30 qubits.  The library covers 38 molecules across three rows of the periodic table
 ($Z=1$--36), including multi-center systems
 (CO, N$_2$, F$_2$, CH$_2$O, C$_2$H$_2$, C$_2$H$_6$), mixed
-frozen-core molecules (NaCl), and transition metal hydrides (ScH, TiH),
+frozen-core molecules (NaCl), and the full first transition series as hydrides (ScH through ZnH),
 with Pauli scaling $O(Q^{2.5})$
 confirmed universal across all three rows, compared to
 $O(Q^{3.9\text{--}4.3})$ for Gaussian baselines.  The composed Pauli
-count is exactly linear in qubit count (coefficient $\approx 11.11$
-for main-group molecules; $9.27$ for $d$-orbital blocks, which are
+count is exactly linear in qubit count (coefficient $11.10$, exact,
+for main-group molecules; $9.23$ for $d$-orbital blocks, which are
 sparser due to more restrictive Gaunt selection rules),
 so adding atoms to a molecule increases quantum cost linearly.
 Second- and third-row molecules use analytical frozen cores
@@ -392,24 +392,27 @@ point infeasible.
 \section{Available Systems}
 \label{sec:systems}
 
-Table~\ref{tab:molecules} lists all 30 molecules currently available
+Table~\ref{tab:molecules} lists all 38 molecules currently available
 in the GeoVac Hamiltonian library, spanning three rows of the periodic
 table ($Z = 1$--36).
 Table~\ref{tab:multicenter} lists the 8 multi-center molecules added
 in v2.2, including heteronuclear diatomics (LiF, CO), homonuclear
 diatomics (N$_2$, F$_2$), a mixed frozen-core system (NaCl), and
 polyatomics with multiple heavy atoms (CH$_2$O, C$_2$H$_2$, C$_2$H$_6$).
-Table~\ref{tab:transition_metals} lists the two transition metal
-hydrides added in v2.4, which use [Ar] frozen cores and isolated
-$d$-orbital valence blocks.
+Table~\ref{tab:transition_metals} lists all ten first-row transition metal
+hydrides (v2.8), which use [Ar] frozen cores and isolated
+$d$-orbital valence blocks spanning $Z = 21$--30.
 
 \begin{table}[h]
 \caption{GeoVac Hamiltonian library at $n_{\max}=2$.  First-row
   molecules use composed encoding (PK classically partitioned);
   second- and third-row molecules use balanced coupled encoding
-  with frozen cores.
+  with frozen cores and cross-center $V_{ne}$.
   $\lambda_{\text{ni}}$ is the non-identity 1-norm (simulation-relevant).
-  Isostructural pairs (rows 2--3) produce identical Pauli counts.}
+  Isostructural pairs (rows 2--3) produce identical Pauli counts.
+  The \texttt{hamiltonian()} API currently returns composed encoding
+  for all rows; balanced data shown here are from Paper~19's
+  \texttt{build\_balanced\_hamiltonian()}.}
 \label{tab:molecules}
 \begin{ruledtabular}
 \begin{tabular}{llrrrr}
@@ -462,18 +465,30 @@ C$_2$H$_6$ & He & 18 & 9 & 160 & 1{,}777 & 21 \\
 \end{table}
 
 \begin{table}[h]
-\caption{Transition metal hydrides added in v2.4 at $n_{\max}=2$.
-  Both use [Ar] frozen cores (18 electrons) with $d$-orbital valence
-  blocks ($l_{\min} = l_{\max} = 2$).  The Pauli/$Q$ ratio of~9.27
-  falls below the main-group coefficient of~11.11, reflecting
-  sparser $d$-orbital ERIs (4.0\% density vs.\ 8.9\% for $s$+$p$).}
+\caption{First-row transition metal hydrides ($Z = 21$--30) at $n_{\max}=2$
+  (bond) / $n_{\max}=3$ (d-block).
+  All use [Ar] frozen cores (18 electrons) with $d$-orbital valence
+  blocks ($l_{\min} = 2$).  The Pauli/$Q$ ratio of~9.23
+  falls below the main-group coefficient of~11.10, reflecting
+  sparser $d$-orbital ERIs (4.0\% density vs.\ 8.9\% for $s$+$p$).
+  Isostructural invariance holds: all ten hydrides share the same
+  block topology and produce identical Pauli counts.
+  Cr and Cu have anomalous configurations ($3d^5 4s^1$ and $3d^{10} 4s^1$).}
 \label{tab:transition_metals}
 \begin{ruledtabular}
-\begin{tabular}{llrrrr}
-Molecule & Core & $Q$ & Pauli (comp.) & Pauli/$Q$ & QWC \\
+\begin{tabular}{llcrrr}
+Molecule & Config.\ & Core & $Q$ & Pauli & Pauli/$Q$ \\
 \colrule
-ScH & Ar & 30 & 278 & 9.27 & --- \\
-TiH & Ar & 30 & 278 & 9.27 & --- \\
+ScH & $3d^1 4s^2$ & Ar & 30 & 277 & 9.23 \\
+TiH & $3d^2 4s^2$ & Ar & 30 & 277 & 9.23 \\
+VH  & $3d^3 4s^2$ & Ar & 30 & 277 & 9.23 \\
+CrH & $3d^5 4s^1$ & Ar & 30 & 277 & 9.23 \\
+MnH & $3d^5 4s^2$ & Ar & 30 & 277 & 9.23 \\
+FeH & $3d^6 4s^2$ & Ar & 30 & 277 & 9.23 \\
+CoH & $3d^7 4s^2$ & Ar & 30 & 277 & 9.23 \\
+NiH & $3d^8 4s^2$ & Ar & 30 & 277 & 9.23 \\
+CuH & $3d^{10} 4s^1$ & Ar & 30 & 277 & 9.23 \\
+ZnH & $3d^{10} 4s^2$ & Ar & 30 & 277 & 9.23 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -482,9 +497,9 @@ TiH & Ar & 30 & 278 & 9.27 & --- \\
 
 A key practical result visible in Tables~\ref{tab:molecules}
 and~\ref{tab:multicenter} is that the composed Pauli term count is
-\emph{exactly linear} in the qubit count $Q$ across all 30 molecules:
+\emph{exactly linear} in the qubit count $Q$ across all 38 molecules:
 \begin{equation}
-  N_{\text{Pauli}} \approx 11.11 \times Q\,.
+  N_{\text{Pauli}} = 11.10 \times Q\,.
   \label{eq:linear}
 \end{equation}
 This linearity arises because the composed architecture constructs
@@ -516,10 +531,10 @@ sparsity is a property of the Gaunt selection rules, not the core
 treatment.
 
 Transition metal hydrides (Table~\ref{tab:transition_metals}) fall
-\emph{below} the 11.11 coefficient: ScH and TiH both have
-Pauli/$Q = 9.27$.  This reflects the sparser ERI tensor of $d$-orbital
+\emph{below} the 11.10 coefficient: all ten first-row hydrides have
+Pauli/$Q = 9.23$.  This reflects the sparser ERI tensor of $d$-orbital
 blocks (4.0\% density vs.\ 8.9\% for $s$+$p$), which produce fewer
-Pauli terms per qubit.  The 11.11 coefficient is therefore an upper
+Pauli terms per qubit.  The 11.10 coefficient is therefore an upper
 bound that applies to $s$/$p$-dominated main-group molecules;
 $d$-orbital systems are cheaper.
 
@@ -582,15 +597,16 @@ supported.  Second-row molecules use analytical [Ne] frozen cores
 with Clementi--Raimondi orbital exponents; the frozen-core energy
 enters only through the identity operator and does not affect
 quantum measurement cost.
-Transition metal hydrides (ScH, TiH) have been demonstrated with
-[Ar] frozen cores and isolated $d$-orbital valence blocks.
+The full first transition series ($Z = 21$--30) is implemented as
+hydrides with [Ar] frozen cores and isolated $d$-orbital valence blocks.
 $d$-Orbital blocks are structurally sparser than $s$/$p$ blocks
 (4.0\% vs.\ 8.9\% ERI density), producing a lower Pauli-per-qubit
-ratio.  General transition metal classification ($Z = 23$--30) is
-not yet automated.  Main-group third-row atoms
+ratio.  The atomic classifier handles all ten elements automatically,
+including the anomalous configurations of Cr ($3d^5 4s^1$) and Cu ($3d^{10} 4s^1$).
+Main-group third-row atoms
 ($Z=19$--20 and $Z=31$--36) are supported via [Ar]
 and [Ar]3$d^{10}$ frozen cores~\cite{GeoVac_ScopeBoundary}.
-The library currently includes 30 molecules.
+The library currently includes 38 molecules.
 
 \paragraph{Qubit count.}
 GeoVac Hamiltonians use more qubits than Gaussian alternatives at the
@@ -605,15 +621,15 @@ the bottleneck, this tradeoff is favorable.
 
 The GeoVac Hamiltonian library provides structurally sparse qubit
 Hamiltonians for molecular quantum simulation across three rows
-of the periodic table (30~molecules, $Z = 1$--36), including
-multi-center systems with multiple heavy atoms and initial transition
-metal hydrides (ScH, TiH) whose $d$-orbital blocks are sparser than
+of the periodic table (38~molecules, $Z = 1$--36), including
+multi-center systems with multiple heavy atoms and the full first
+transition series as hydrides (ScH through ZnH) whose $d$-orbital blocks are sparser than
 main-group $s$/$p$ blocks.  The
 structural sparsity---$O(Q^{2.5})$ Pauli scaling from Gaunt selection
 rules---is confirmed universal across all three rows and all molecular
 topologies, independent of the core treatment (Level~3-solved or frozen).
 The composed Pauli count is exactly linear in $Q$ (coefficient
-$\approx 11.11$), meaning that adding atoms to a molecule increases
+$\approx 11.10$), meaning that adding atoms to a molecule increases
 quantum cost linearly.
 For LiH, this yields 2.7$\times$ fewer Pauli terms
 and 13$\times$ fewer measurement groups than Gaussian STO-3G, growing
@@ -638,8 +654,7 @@ Future directions include: (i)~quantum resource estimation for
 fault-tolerant algorithms using GeoVac Hamiltonians, (ii)~hardware
 demonstrations on trapped-ion or superconducting platforms,
 (iii)~compatibility benchmarks with tensor factorization and
-active-space reduction techniques, and (iv)~automated atomic classification for transition metals
-($Z = 21$--30) and extension to heavier main-group atoms
+active-space reduction techniques, and (iv)~extension to heavier main-group atoms
 ($Z = 37$--54) via [Kr] and [Kr]4$d^{10}$ frozen cores.
 
 The library is open-source and pip-installable. All Hamiltonians

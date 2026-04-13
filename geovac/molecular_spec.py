@@ -89,6 +89,7 @@ class MolecularSpec:
     nuclear_repulsion_constant: float
     description: str = ''
     core_method: str = 'pk'  # 'pk' or 'downfolded'
+    nuclei: Optional[List[Dict]] = None  # [{'Z': float, 'position': (x,y,z), 'label': str}]
 
 
 # ---------------------------------------------------------------------------
@@ -591,3 +592,181 @@ def h2se_spec(**kw) -> MolecularSpec:
 def hbr_spec(**kw) -> MolecularSpec:
     """HBr spec."""
     return hydride_spec(35, **kw)
+
+
+# ---------------------------------------------------------------------------
+# Multi-center molecule spec factories
+# ---------------------------------------------------------------------------
+
+# Experimental equilibrium bond lengths in bohr
+_MULTI_CENTER_REQ = {
+    'LiF': 2.955, 'CO': 2.132, 'N2': 2.074, 'F2': 2.668,
+    'NaCl': 4.461, 'CH2O': 2.273, 'C2H2': 2.273, 'C2H6': 2.896,
+}
+
+
+def _diatomic_multi_center_spec(
+    name: str,
+    Z_A: int, Z_B: int,
+    R: Optional[float] = None,
+    max_n: int = 2,
+) -> MolecularSpec:
+    """Create a MolecularSpec for a homonuclear or heteronuclear diatomic
+    with two heavy-atom centers (e.g. CO, N₂, F₂, LiF, NaCl).
+
+    Each heavy atom contributes: core (if first-row) + bond + lone pairs.
+    """
+    from geovac.atomic_classifier import classify_atom
+
+    if R is None:
+        R = _MULTI_CENTER_REQ.get(name)
+        if R is None:
+            raise ValueError(f"No default R_eq for {name}. Provide R.")
+
+    cls_A = classify_atom(Z_A)
+    cls_B = classify_atom(Z_B)
+    sym_A = _ELEMENT_DATA[Z_A][0] if Z_A in _ELEMENT_DATA else f'Z{Z_A}'
+    sym_B = _ELEMENT_DATA[Z_B][0] if Z_B in _ELEMENT_DATA else f'Z{Z_B}'
+
+    n_val_A = cls_A.n_valence_electrons
+    n_val_B = cls_B.n_valence_electrons
+    Z_eff_A = cls_A.Z_eff_valence
+    Z_eff_B = cls_B.Z_eff_valence
+    n_core_A = cls_A.n_core_electrons
+    n_core_B = cls_B.n_core_electrons
+    core_type_A = _ELEMENT_DATA.get(Z_A, ('?', 0, 0, 'frozen'))[3]
+    core_type_B = _ELEMENT_DATA.get(Z_B, ('?', 0, 0, 'frozen'))[3]
+
+    # Bond order and lone pair counts from standard chemistry
+    # n_bonds shared bonds (2e each), remaining valence → lone pairs
+    _BOND_DATA = {
+        'LiF':  (1, 0, 3),   # 1 bond, 0 LP on Li, 3 LP on F
+        'CO':   (3, 1, 1),   # triple bond, 1 LP on C, 1 LP on O
+        'N2':   (3, 1, 1),   # triple bond, 1 LP per N
+        'F2':   (1, 3, 3),   # single bond, 3 LP per F
+        'NaCl': (1, 0, 3),   # 1 bond, 0 LP on Na, 3 LP on Cl
+    }
+    if name in _BOND_DATA:
+        n_bonds, n_lp_A, n_lp_B = _BOND_DATA[name]
+    else:
+        # Default: single bond, remaining as lone pairs
+        n_bonds = 1
+        n_lp_A = (n_val_A - 1) // 2
+        n_lp_B = (n_val_B - 1) // 2
+
+    # PK parameters (first-row explicit core only)
+    pk_A_a, pk_B_a = 0.0, 0.0
+    pk_A_b, pk_B_b = 0.0, 0.0
+    if core_type_A == 'explicit' and Z_A in _PK_PARAMS:
+        pk_A_a, pk_B_a = _PK_PARAMS[Z_A]
+    if core_type_B == 'explicit' and Z_B in _PK_PARAMS:
+        pk_A_b, pk_B_b = _PK_PARAMS[Z_B]
+
+    blocks: List[OrbitalBlock] = []
+
+    # Atom A core
+    if core_type_A == 'explicit':
+        blocks.append(OrbitalBlock(
+            label=f'{sym_A}_core', block_type='core',
+            Z_center=float(Z_A), n_electrons=2, max_n=max_n,
+            center_nucleus_idx=0,
+        ))
+
+    # Shared bond blocks (center on A, partner on B)
+    for i in range(n_bonds):
+        suffix = f'_{i+1}' if n_bonds > 1 else ''
+        blocks.append(OrbitalBlock(
+            label=f'{name}_bond{suffix}', block_type='bond',
+            Z_center=float(Z_eff_A), n_electrons=2, max_n=max_n,
+            has_h_partner=True, Z_partner=float(Z_eff_B),
+            max_n_partner=max_n,
+            pk_A=pk_A_a, pk_B=pk_B_a,
+            center_nucleus_idx=0, partner_nucleus_idx=1,
+        ))
+
+    # Lone pairs on A
+    for i in range(n_lp_A):
+        suffix = f'_{i+1}' if n_lp_A > 1 else ''
+        blocks.append(OrbitalBlock(
+            label=f'{sym_A}_lp{suffix}', block_type='lone_pair',
+            Z_center=float(Z_eff_A), n_electrons=2, max_n=max_n,
+            pk_A=pk_A_a, pk_B=pk_B_a,
+            center_nucleus_idx=0,
+        ))
+
+    # Atom B core
+    if core_type_B == 'explicit':
+        blocks.append(OrbitalBlock(
+            label=f'{sym_B}_core', block_type='core',
+            Z_center=float(Z_B), n_electrons=2, max_n=max_n,
+            center_nucleus_idx=1,
+        ))
+
+    # Lone pairs on B
+    for i in range(n_lp_B):
+        suffix = f'_{i+1}' if n_lp_B > 1 else ''
+        blocks.append(OrbitalBlock(
+            label=f'{sym_B}_lp{suffix}', block_type='lone_pair',
+            Z_center=float(Z_eff_B), n_electrons=2, max_n=max_n,
+            pk_A=pk_A_b, pk_B=pk_B_b,
+            center_nucleus_idx=1,
+        ))
+
+    # Nuclear repulsion
+    V_NN = float(Z_A * Z_B) / R
+    # Core energies
+    E_core_A = _FIRST_ROW_CORE_ENERGY.get(Z_A, 0.0) if core_type_A == 'explicit' else 0.0
+    E_core_B = _FIRST_ROW_CORE_ENERGY.get(Z_B, 0.0) if core_type_B == 'explicit' else 0.0
+
+    # Frozen core contributions
+    if core_type_A == 'frozen':
+        from geovac.neon_core import FrozenCore
+        from geovac.composed_qubit import _v_cross_nuc_frozen_core
+        fc = FrozenCore(Z_A)
+        fc.solve()
+        E_core_A = fc.energy
+        V_NN += _v_cross_nuc_frozen_core(Z_A, float(Z_B), R)
+    if core_type_B == 'frozen':
+        from geovac.neon_core import FrozenCore
+        from geovac.composed_qubit import _v_cross_nuc_frozen_core
+        fc = FrozenCore(Z_B)
+        fc.solve()
+        E_core_B = fc.energy
+        V_NN += _v_cross_nuc_frozen_core(Z_B, float(Z_A), R)
+
+    nuclear_repulsion = V_NN + E_core_A + E_core_B
+
+    nuclei = [
+        {'Z': float(Z_A), 'position': (0.0, 0.0, 0.0), 'label': sym_A},
+        {'Z': float(Z_B), 'position': (0.0, 0.0, R), 'label': sym_B},
+    ]
+
+    return MolecularSpec(
+        name=name,
+        blocks=blocks,
+        nuclear_repulsion_constant=nuclear_repulsion,
+        description=f'{name}: {sym_A}(Z={Z_A}) + {sym_B}(Z={Z_B}), R={R:.3f} bohr',
+        nuclei=nuclei,
+    )
+
+
+# Convenience factories
+def lif_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
+    """LiF spec."""
+    return _diatomic_multi_center_spec('LiF', 3, 9, R=R, **kw)
+
+def co_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
+    """CO spec."""
+    return _diatomic_multi_center_spec('CO', 6, 8, R=R, **kw)
+
+def n2_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
+    """N₂ spec."""
+    return _diatomic_multi_center_spec('N2', 7, 7, R=R, **kw)
+
+def f2_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
+    """F₂ spec."""
+    return _diatomic_multi_center_spec('F2', 9, 9, R=R, **kw)
+
+def nacl_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
+    """NaCl spec."""
+    return _diatomic_multi_center_spec('NaCl', 11, 17, R=R, **kw)
