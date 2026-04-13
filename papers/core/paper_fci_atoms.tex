@@ -23,9 +23,9 @@ Multi-electron atoms via relational lattice indexing}
 % ======================================================================
 
 \author{J.~Loutey}
-\affiliation{Independent Researcher}
+\affiliation{Independent Researcher, Kent, Washington}
 
-\date{\today}
+\date{March 12, 2026}
 
 % ======================================================================
 \begin{abstract}
@@ -161,8 +161,8 @@ h_{pq}^{\text{(hybrid)}} =
 \label{eq:h1_hybrid}
 \end{equation}
 where $L = D - A$ is the graph Laplacian of the quantum number
-adjacency graph and $\kappa = -1/16$ is the universal kinetic
-scale factor validated in prior work~\cite{Loutey2026a}.
+adjacency graph and $\kappa = -1/16$ is the kinetic scale
+factor validated in prior work~\cite{Loutey2026a}.
 The off-diagonal Laplacian entries provide configuration interaction
 mixing between orbitals connected by selection rules
 $\Delta l = \pm 1$, $\Delta m_l = 0, \pm 1$.
@@ -342,6 +342,17 @@ hydrogen, respectively.
 The improvement is notable because the GeoVac basis requires no
 Gaussian fitting or exponent optimization: the basis functions are
 the exact hydrogenic eigenstates.
+
+A note on the scope of this comparison is warranted.  STO-3G is a
+minimal Gaussian basis introduced by Hehre, Stewart, and Pople in
+1969~\cite{hehre1969}; it is not used in production quantum chemistry,
+where correlation-consistent bases such as cc-pVDZ or cc-pVTZ are
+standard.  The comparison is included to demonstrate that the
+hydrogenic graph basis outperforms a minimal Gaussian basis of
+comparable size, not to claim competitiveness with modern
+large-basis calculations.  A fair assessment of practical viability
+would require benchmarking against cc-pVDZ or cc-pVTZ at comparable
+computational cost, which we leave to future work.
 
 % --- Figure 1 ---
 \begin{figure}
@@ -925,5 +936,26 @@ Spheroidal Lattices,''
 GeoVac Paper~11 (2026).
 
 \end{thebibliography}
+
+\paragraph{Note added v2.6.0.}
+The numerical Slater integrals (Sec.~III, 2000-point grid) have been
+replaced by exact rational values from the $S^3$ density overlap
+formula (Paper~7, Sec.~V).  Combined with the graph Laplacian as the
+one-body operator, this yields a ``graph-native'' FCI where the
+entire Hamiltonian matrix is rational.  For He at $n_{\max} = 5$:
+graph-native achieves 0.22\% error vs.\ the 0.35\% reported in
+the original paper, confirming that the analytical integrals are more
+accurate than the grid-based numerics.  At $n_{\max} = 7$: 0.19\%
+with 1,218 configurations.
+
+A variant using exact hydrogenic one-body matrix elements (diagonal,
+with variational orbital exponent $k$) achieves 1.41\% at
+$n_{\max} = 7$ --- 7$\times$ worse than graph-native, demonstrating
+that the graph Laplacian's off-diagonal inter-shell couplings are
+the dominant source of one-body correlation.  FCI basis invariance
+was verified (Sprint~3D): transforming $V_{ee}$ to the graph
+eigenbasis gives identical energies ($< 3 \times 10^{-15}$~Ha),
+confirming the convergence floor ($\sim$0.14\%) is from the
+electron-electron cusp, not basis mismatch.
 
 \end{document}

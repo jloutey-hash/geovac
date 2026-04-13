@@ -1399,6 +1399,27 @@ antisymmetry produces equilibrium without PK, confirming that PK
 approximates---rather than creates---the physics of Pauli exclusion
 in the composed architecture.
 
+\paragraph{Independent validation via nested hyperspherical encoding
+(v2.5.0).}
+Track~DF tested the alternative to composed factorization: placing all
+4~electrons in a single $S^{11}$ Hilbert space with H-set coupled
+hyperspherical harmonics.  Three molecular variants were tested for LiH:
+(i)~single-center (all orbitals at $Z = 3$): correct dissociation energy
+(4.7\% error) but $R_{\rm eq} = 2.0$~bohr (33.7\% error)---orbitals
+too compact on the hydrogen side;
+(ii)~two-center (charge-center origin): catastrophic energy degradation
+(48.2\% error)---the truncated orbital basis cannot represent the
+1$s^2$ core density off-center;
+(iii)~heterogeneous (per-pair $Z_{\rm eff}$): $R_{\rm eq}$ improved to
+17.1\% error, but L\"owdin orthogonalization destroyed Gaunt sparsity
+(1{,}711 vs.\ 120~Pauli terms) and introduced BSSE-like overbinding.
+The composed architecture's block-diagonal factorization is therefore
+not merely a computational convenience---it is the structurally optimal
+decomposition for multi-scale electronic systems.  Each block maintains
+its own orthonormal basis at the appropriate length scale, avoiding the
+cross-scale orthogonalization penalties that afflict unified-basis
+approaches.
+
 \subsection{Non-adiabatic coupling diagnosis}
 
 The adiabatic solver results at $l_{\max} = 2$--$3$ (Sec.~VIII.B)
@@ -1466,6 +1487,16 @@ validating the composed architecture for both classical and quantum
 computation.  The classical solver investigation is now complete
 (v2.0.24); the quantum simulation cost advantage is the primary
 computational result.
+
+\paragraph{Note added v2.5.0.}
+The necessity of the composed factorization has been independently
+validated by a 6-sprint investigation (Track~DF) that tested nested
+hyperspherical alternatives on $S^{11}$ with H-set coupled angular
+bases.  All three molecular variants failed to simultaneously achieve
+correct equilibrium geometry and Gaunt-level sparsity, confirming that
+the block-diagonal architecture is structurally required for
+multi-scale molecular systems.  See Paper~14 for the novel 6$j$
+recoupling sparsity result that emerged from this investigation.
 
 %% ========================================================================
 %% REFERENCES

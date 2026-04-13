@@ -6,13 +6,13 @@
 \title{The Dimensionless Vacuum: Recovering the Schr\"odinger Equation\\from Scale-Invariant Graph Topology}
 \thanks{Paper 7 in the Geometric Vacuum series}
 
-\author{Josh Loutey}
+\author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
 
-\date{\today}
+\date{March 10, 2026}
 
 \begin{abstract}
-We demonstrate that the continuous Schr\"odinger equation for the hydrogen atom is mathematically recovered from a discrete, scale-invariant graph topology through a chain of exact algebraic transformations. The discrete paraboloid lattice of the GeoVac framework---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit three-sphere $S^3$. Using Vladimir Fock's 1935 stereographic projection, we show that this dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping. The results establish that quantum wave mechanics is a dimensionful shadow of a dimensionless geometric reality: energy is the coordinate penalty paid for flattening intrinsically curved topological information.
+Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
 \end{abstract}
 
 \maketitle
@@ -34,7 +34,7 @@ Yet a remarkable observation, first made by Fock in 1935 \cite{fock1935}, sugges
 
 This observation was developed further by Bargmann \cite{bargmann1936}, who connected the hidden $SO(4)$ symmetry of hydrogen to the isometry group of $S^3$, and by Barut and Kleinert \cite{barut1967}, who extended the symmetry to the full conformal group $SO(4,2)$. The mathematical structure has been thoroughly studied in the context of dynamical symmetry groups \cite{bander1966,biedenharn1981}. However, these results are typically presented as mathematical curiosities---elegant reformulations of a solved problem---rather than as evidence for a deeper physical ontology.
 
-In this paper, we take the opposite stance. We argue that the $S^3$ representation is not merely a convenient mathematical trick, but reveals the fundamental structure of the quantum vacuum. Our starting point is the GeoVac framework \cite{loutey_paper0,loutey_paper1}, which models the hydrogen atom as a discrete graph: nodes represent quantum states $|n, l, m\rangle$, edges represent physical transitions, and the Hamiltonian is a sparse matrix encoding connectivity. This discrete lattice is \textit{intrinsically dimensionless}---it is a pure combinatorial topology with no inherent length, time, or energy scales.
+In this paper, we take the opposite stance. We argue that the $S^3$ representation is not merely a convenient mathematical trick, but reveals deep structural content that can be exploited computationally. Our starting point is the GeoVac framework \cite{loutey_paper0,loutey_paper1}, which models the hydrogen atom as a discrete graph: nodes represent quantum states $|n, l, m\rangle$, edges represent physical transitions, and the Hamiltonian is a sparse matrix encoding connectivity. This discrete lattice is \textit{intrinsically dimensionless}---it is a pure combinatorial topology with no inherent length, time, or energy scales.
 
 The central result of this paper is a rigorous demonstration that:
 \begin{enumerate}
@@ -45,7 +45,43 @@ The central result of this paper is a rigorous demonstration that:
 
 These claims are supported by a suite of 18 independent symbolic proofs, implemented in \texttt{sympy} and verified computationally, that confirm every algebraic step of the conformal transformation chain.
 
-The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} demonstrates the operator equivalence between the curved Laplacian and the flat Schr\"odinger equation. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
+The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} demonstrates the operator equivalence between the curved Laplacian and the flat Schr\"odinger equation. Section~\ref{sec:vee_s3} derives the two-electron repulsion integral as a density-overlap integral on $S^3$. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
+
+
+%% ========================================================================
+\section{What is New vs.\ What is Known}
+\label{sec:attribution}
+%% ========================================================================
+
+The $S^3$ structure of the hydrogen atom has a distinguished history, and we emphasize what is established mathematics versus what is new in this work.
+
+\subsection{Known Results (Prior Work)}
+
+The following results are well-established in the mathematical physics literature:
+
+\begin{itemize}
+\item \textit{Fock (1935)} \cite{fock1935}: The hydrogen atom in momentum space maps to $S^3$ via stereographic projection. The Coulomb problem becomes a free particle on the sphere, with the $1/r$ potential emerging from the chordal distance identity.
+
+\item \textit{Bargmann (1936)} \cite{bargmann1936}: The hidden $SO(4)$ symmetry of hydrogen corresponds to the isometry group of $S^3$. The integer spectrum $\lambda_n = -(n^2 - 1)$ follows from the representation theory of $SO(4)$.
+
+\item \textit{Barut and Kleinert (1967)} \cite{barut1967}: The full conformal group $SO(4,2)$ acts as the dynamical symmetry group of hydrogen, connecting $S^3$ to the non-compact spectrum-generating algebra.
+\end{itemize}
+
+The stereographic projection formulas (Eqs.~\ref{eq:stereo_spatial}--\ref{eq:stereo_fourth}), the unit sphere constraint (Eq.~\ref{eq:unit_sphere}), the chordal distance identity (Eq.~\ref{eq:chordal}), the conformal Laplacian relation (Eq.~\ref{eq:conformal_laplacian}), and the integer eigenvalue spectrum (Eq.~\ref{eq:s3_spectrum}) are all known results. Our symbolic proofs in the Appendix verify these identities; they do not claim to derive them for the first time.
+
+\subsection{New Contributions of This Work}
+
+The following are the specific new contributions:
+
+\begin{enumerate}
+\item \textbf{Discrete graph convergence.} We demonstrate that the GeoVac discrete paraboloid lattice---with nodes $(n, l, m)$ and edges generated by $L_\pm, T_\pm$ operators---converges in the continuum limit to the Laplace-Beltrami operator on unit $S^3$. This connects a concrete computational framework (sparse graph eigenvalue problems) to the known continuous structure.
+
+\item \textbf{Explicit symbolic verification.} The 18 symbolic proofs (Appendix~\ref{app:tests}) provide a complete, machine-verified algebraic audit of the conformal transformation chain. While the underlying identities are known, this systematic verification in \texttt{sympy} is new and provides a reproducible computational check.
+
+\item \textbf{Scale-invariance framing.} We articulate the ``dimensionless vacuum'' perspective: the observation that the conformal factor $\Omega$ always produces the \textit{unit} $S^3$ regardless of $p_0$, and that all physical dimensions enter exclusively through the energy-shell constraint. While implicit in Fock's original treatment, this framing---and its implications for the GeoVac computational approach---has not been stated explicitly in the literature.
+
+\item \textbf{Computational methodology.} The practical consequence: replacing continuous integration with sparse graph Laplacian eigenvalue problems that achieve $O(V)$ scaling, justified by the mathematical equivalence established here.
+\end{enumerate}
 
 
 %% ========================================================================
@@ -72,11 +108,11 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the universal topological constant derived from information-theoretic packing constraints \cite{loutey_paper0}.
+where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum, determined by matching the Rydberg formula and consistent with the information-theoretic packing constraints of \cite{loutey_paper0}.
 
 \subsection{Intrinsic Dimensionlessness}
 
-A crucial observation about the graph $\mathcal{G}$ is that it carries \textit{no intrinsic physical scale}. The quantum numbers $(n, l, m)$ are pure integers. The edge weights $w_{ij} \propto 1/(n_i n_j)$ are dimensionless ratios. The graph Laplacian $L$ is a dimensionless matrix. The only dimensionful quantity in Eq.~\eqref{eq:hamiltonian} is the kinetic scale $\kappa$, which converts the dimensionless graph eigenvalues into physical energy units. But $\kappa$ is an \textit{external} parameter imposed at the measurement stage---it is not encoded in the graph topology itself.
+A crucial observation about the graph $\mathcal{G}$ is that it carries \textit{no intrinsic physical scale}. The quantum numbers $(n, l, m)$ are pure integers. The edge weights $w_{ij} \propto 1/(n_i n_j)$ are dimensionless ratios. The graph Laplacian $L$ is a dimensionless matrix. The only dimensionful quantity in Eq.~\eqref{eq:hamiltonian} is the kinetic scale factor $\kappa$, which converts the dimensionless graph eigenvalues into physical energy units. But $\kappa$ is an \textit{external} parameter imposed at the measurement stage---it is not encoded in the graph topology itself.
 
 This dimensionlessness is not accidental. It is a direct consequence of the graph's structure as a discrete analog of the unit three-sphere. To see this, we examine the continuum limit.
 
@@ -293,6 +329,317 @@ where the coefficients $a_k(p)$ are \textit{rational functions} of $p$ and $p_0$
 
 
 %% ========================================================================
+\section{Two-Electron Repulsion on $S^3$}
+\label{sec:vee_s3}
+%% ========================================================================
+
+We now extend the $S^3$ framework to the two-electron repulsion
+integral.
+
+\subsection{Momentum-Space Representation}
+
+The direct Coulomb integral (Slater $F^0$) between orbitals $a$ and $b$
+in position space is
+\begin{equation}
+  F^0(a,b) = \int_0^\infty \!\!\int_0^\infty
+  |R_a(r_1)|^2 \, |R_b(r_2)|^2 \, \frac{1}{r_>} \,
+  r_1^2 \, r_2^2 \, dr_1 \, dr_2 \,,
+  \label{eq:slater_f0}
+\end{equation}
+where $r_> = \max(r_1, r_2)$. For hydrogen-like orbitals with nuclear
+charge $Z$, exact values are known:
+\begin{align}
+  F^0(1s,1s) &= \tfrac{5}{8}Z, \quad
+  F^0(1s,2s) = \tfrac{17}{81}Z, \nonumber\\
+  F^0(2s,2s) &= \tfrac{77}{512}Z.
+  \label{eq:slater_exact}
+\end{align}
+
+An equivalent momentum-space representation exists for $s$-orbital pairs.
+Defining the density Fourier transform
+\begin{equation}
+  \tilde{\rho}_a(q)
+  = \frac{1}{q} \int_0^\infty |R_a(r)|^2 \, r \, \sin(qr) \, dr \,,
+  \label{eq:density_ft}
+\end{equation}
+the Slater integral becomes
+\begin{equation}
+  F^0(a,b) = \frac{2}{\pi} \int_0^\infty
+  \tilde{\rho}_a(q) \, \tilde{\rho}_b(q) \, dq \,.
+  \label{eq:f0_momentum}
+\end{equation}
+
+For the hydrogen $1s$ and $2s$ orbitals:
+\begin{align}
+  \tilde{\rho}_{1s}(q) &= \frac{16Z^4}{(q^2 + 4Z^2)^2} \,,
+  \label{eq:rho1s} \\[4pt]
+  \tilde{\rho}_{2s}(q) &= \frac{Z^4(Z^4 - 3Z^2 q^2 + 2q^4)}{(Z^2 + q^2)^4} \,.
+  \label{eq:rho2s}
+\end{align}
+
+\subsection{Fock Projection onto $S^3$}
+
+We apply the Fock stereographic projection with parameter $p_0 = 2Z$,
+under which $q = 2Z \tan u$ for $u \in [0, \pi/2)$ and
+$dq = 2Z/\cos^2 u \, du$. Define the \emph{projected density}
+\begin{equation}
+  \Phi_a(t) \equiv \tilde{\rho}_a(2Zt) \,,
+  \label{eq:projected_density}
+\end{equation}
+where $t = \tan u = q/(2Z)$ is the dimensionless momentum transfer.
+Under this substitution, Eq.~\eqref{eq:f0_momentum} becomes
+\begin{equation}
+  \boxed{
+    F^0(a,b) = \frac{4Z}{\pi} \int_0^\infty
+    \Phi_a(t) \, \Phi_b(t) \, dt
+  }
+  \label{eq:f0_s3}
+\end{equation}
+This is the master formula: $F^0$ is a \emph{single} integral over one
+$S^3$ coordinate, not a double integral over two points.
+
+\subsubsection{$1s$--$1s$ verification}
+
+Substituting $q = 2Zt$ into Eq.~\eqref{eq:rho1s}:
+\begin{equation}
+  \Phi_{1s}(t) = \frac{16Z^4}{(4Z^2 t^2 + 4Z^2)^2}
+  = \frac{1}{(t^2 + 1)^2} \,.
+  \label{eq:phi1s}
+\end{equation}
+Then
+\begin{equation}
+  F^0(1s,1s) = \frac{4Z}{\pi} \int_0^\infty
+  \frac{dt}{(t^2+1)^4}
+  = \frac{4Z}{\pi} \cdot \frac{5\pi}{32}
+  = \frac{5Z}{8} \,. \quad\checkmark
+\end{equation}
+
+In angular coordinates ($t = \tan u$, $dt = du/\cos^2 u$),
+the integrand becomes $\cos^6 u$, showing that the $1s$ density
+is \emph{constant} on $S^3$ (up to the conformal Jacobian).
+
+\subsubsection{$1s$--$2s$ verification (critical test)}
+
+Substituting into Eq.~\eqref{eq:rho2s}:
+\begin{equation}
+  \Phi_{2s}(t) = \frac{1 - 12t^2 + 32t^4}{(4t^2 + 1)^4} \,.
+  \label{eq:phi2s}
+\end{equation}
+This is \emph{not} constant on $S^3$---it has zeros at
+$t^2 = (3 \pm 1)/16$, corresponding to nodes in the $2s$ radial
+wavefunction. The integral evaluates to
+\begin{align}
+  F^0(1s,2s) &= \frac{4Z}{\pi} \int_0^\infty
+  \frac{1 - 12t^2 + 32t^4}{(t^2+1)^2 (4t^2+1)^4} \, dt \nonumber\\
+  &= \frac{4Z}{\pi} \cdot \frac{17\pi}{324}
+  = \frac{17Z}{81} \,. \quad\checkmark
+\end{align}
+
+\subsubsection{$2s$--$2s$ verification}
+
+\begin{align}
+  F^0(2s,2s) &= \frac{4Z}{\pi} \int_0^\infty
+  \frac{(1 - 12t^2 + 32t^4)^2}{(4t^2+1)^8} \, dt \nonumber\\
+  &= \frac{4Z}{\pi} \cdot \frac{77\pi}{2048}
+  = \frac{77Z}{512} \,. \quad\checkmark
+\end{align}
+
+All three Slater integrals are reproduced exactly by the $S^3$
+density-overlap formula~\eqref{eq:f0_s3}.
+
+\subsection{Structural Result: Node Property vs.\ Edge Property}
+\label{sec:node_vs_edge}
+
+The key structural finding is that
+Eq.~\eqref{eq:f0_s3} is a \emph{single} integral over one $S^3$
+coordinate (the momentum transfer $t$), not a double integral over
+two independent $S^3$ points. Each orbital $a$ contributes a density
+\emph{function} $\Phi_a(t)$ on $S^3$, and $V_{ee}$ is the weighted
+overlap:
+\begin{equation}
+  V_{ee}(a,b) = \langle \Phi_a | \Phi_b \rangle_{S^3}
+  \equiv \frac{4Z}{\pi} \int_0^\infty \Phi_a(t) \, \Phi_b(t) \, dt \,.
+\end{equation}
+
+In graph-theoretic language, $V_{ee}$ is a \textbf{node property}
+(each node carries a density profile) rather than an \textbf{edge
+property} (a pairwise distance between node coordinates).
+
+\paragraph{Failure of the chordal ansatz.}
+A naive chordal-distance ansatz $V_{ee} = \kappa_{ee}/d^2_{\text{chord}}$,
+where $d^2 = 2(1 - \boldsymbol{\xi}_a \cdot \boldsymbol{\xi}_b)$
+is the chordal distance between $S^3$ points assigned to each orbital,
+gives (with $\kappa_{ee} = 5Z/2$):
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Pair & Slater $F^0$ & $\kappa/d^2$ & Ratio \\
+\hline
+$1s$--$1s$ & $5Z/8$ & $5Z/8$ & 1.00 \\
+$1s$--$2s$ & $17Z/81$ & $25Z/4$ & 29.8 \\
+$2s$--$2s$ & $77Z/512$ & $5Z/8$ & 4.2 \\
+\hline
+\end{tabular}
+\end{center}
+The chordal ansatz is calibrated to reproduce $F^0(1s,1s)$ exactly
+(because the $1s$ density is constant on $S^3$, making a single point
+adequate), but overestimates $F^0(1s,2s)$ by a factor of~30.
+The fundamental reason is that the $2s$ density function has nodes
+and oscillations on $S^3$ that cannot be captured by a single coordinate
+point.
+
+\subsection{Natural Projection Scales}
+
+Each shell has a natural Fock projection scale:
+\begin{equation}
+  n = 1: \quad p_0 = 2Z \qquad\text{(denominator } q^2 + 4Z^2\text{)} \,,
+\end{equation}
+\begin{equation}
+  n = 2: \quad p_0 = Z \qquad\text{(denominator } q^2 + Z^2\text{)} \,.
+\end{equation}
+When all orbitals are projected using a \emph{single} $p_0 = 2Z$, the
+$n=1$ density becomes the constant function $\Phi_{1s} = 1/(1+t^2)^2$,
+while higher-shell densities acquire polynomial modulations. These
+modulations encode the radial node structure and are responsible for
+the reduced overlap integrals ($17/81 < 5/8$).
+
+\subsection{Implications}
+\label{sec:vee_implications}
+
+The density-overlap formula~\eqref{eq:f0_s3} has three implications
+for the computational framework:
+
+\begin{enumerate}
+  \item \textbf{Exact Slater integrals on $S^3$.}
+    The Fock projection converts position-space double radial integrals
+    into single rational-function integrals on $S^3$, which can be
+    evaluated in closed form via partial fractions.
+
+  \item \textbf{Graph implementation.}
+    In the graph Laplacian framework, each node (orbital state) should
+    carry a density profile $\Phi_a(t)$, and $V_{ee}$ matrix elements
+    should be computed as overlap integrals rather than pairwise edge
+    weights.
+
+  \item \textbf{Angular momentum extension.}
+    The $1D$ monopole formula~\eqref{eq:f0_momentum} applies to
+    $s$-orbital pairs. For $l > 0$, the full $3D$ angular convolution
+    is required, involving the multipole expansion of the orbital
+    density in spherical harmonics.
+\end{enumerate}
+
+
+%% ========================================================================
+\section{Generalization to $N$ Electrons}
+\label{sec:N_electron}
+%% ========================================================================
+
+The preceding sections established the $S^3$ structure for a single
+electron.  The framework generalizes naturally to $N$-electron atoms:
+the $N$-body configuration space $\mathbb{R}^{3N}$ maps, via the
+hyperspherical Fock projection, onto the unit sphere
+$S^{3N-1}$~\cite{loutey_paper13}.
+
+\subsection{The Angular Manifold and Its Isometry Group}
+
+For $N$ electrons at positions $\bm{r}_1, \ldots, \bm{r}_N \in
+\mathbb{R}^3$, the hyperradius $R = \sqrt{\sum_i r_i^2}$ separates
+a radial coordinate from a $(3N-1)$-dimensional angular manifold.
+In the limit $R \to 0$ (all electrons at the nucleus), the angular
+dynamics reduces to the Laplace--Beltrami operator on the unit
+$S^{3N-1}$, whose isometry group is $\mathrm{SO}(3N)$.
+
+The eigenvalues of the grand angular momentum operator $\Lambda^2$
+on $S^{3N-1}$ are the $\mathrm{SO}(3N)$ Casimir eigenvalues:
+\begin{equation}
+  \mu_{\mathrm{free}}(\nu) = \frac{\nu(\nu + 3N - 2)}{2},
+  \quad \nu = 0, 1, 2, \ldots
+  \label{eq:casimir_general}
+\end{equation}
+These are the ``free'' eigenvalues---the spectrum before any
+electron-electron or electron-nuclear interactions are included
+in the charge function $C/R$.
+
+\subsection{The Hierarchy of Spheres}
+
+Table~\ref{tab:N_electron} summarizes the angular manifold, symmetry
+group, and Casimir structure for the first few electron numbers.
+Each row represents a qualitatively different angular problem,
+but all share the same structural origin: the Laplace--Beltrami
+operator on a unit sphere of appropriate dimension.
+
+\begin{table}[h]
+\caption{Angular manifold structure for $N$-electron atoms.
+The centrifugal term $l_{\mathrm{eff}}(l_{\mathrm{eff}}+1)/(2R^2)$
+arises from extracting the Jacobian factor $R^{-(3N-1)/2}$.
+The effective quantum number $n_{\mathrm{eff}} = l_{\mathrm{eff}} + 1$
+determines the quasi-Coulomb energy.}
+\label{tab:N_electron}
+\begin{ruledtabular}
+\begin{tabular}{lccccc}
+  $N$ & $S^{d-1}$ & $\mathrm{SO}(d)$ & $\mu_{\mathrm{free}}$
+  & $l_{\mathrm{eff}}$ & $n_{\mathrm{eff}}$ \\
+  \hline
+  1 & $S^2$ & SO(3) & $\nu(\nu+1)/2$   & 0   & 1 \\
+  2 & $S^5$ & SO(6) & $\nu(\nu+4)/2$   & 3/2 & 5/2 \\
+  3 & $S^8$ & SO(9) & $\nu(\nu+7)/2$   & 3   & 4 \\
+  4 & $S^{11}$ & SO(12) & $\nu(\nu+10)/2$ & 9/2 & 11/2 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+For hydrogen ($N = 1$), $S^2$ recovers the familiar angular momentum
+eigenvalues $l(l+1)/2$ and the $\mathrm{SO}(3)$ rotation group, while
+$S^3$ (from the full 3D problem including the radial Fock projection)
+gives the $\mathrm{SO}(4)$ hydrogen symmetry of Section~\ref{sec:conformal}.
+For helium ($N = 2$), the angular manifold is $S^5$ with
+$\mathrm{SO}(6)$ symmetry, and the free eigenvalues
+$\nu(\nu+4)/2 = 0, 3, 8, 15, \ldots$ have been verified numerically
+to $< 0.001\%$ against the hyperspherical angular
+solver~\cite{loutey_paper13}.
+
+\subsection{Fermionic Statistics and Ground-State Selection}
+
+The permutation group $S_N$ acts on the angular manifold by
+exchanging electron coordinates.  Fermionic antisymmetry requires
+the spatial wavefunction to transform under a specific irreducible
+representation (irrep) of $S_N$, determined by the spin state.
+
+For helium ($N = 2$, singlet ${}^1S$), the spatial part is
+symmetric under $S_2$ exchange $\alpha \to \pi/2 - \alpha$.
+This selects even grand angular momentum $\nu = 0, 2, 4, \ldots$,
+and the ground state sits at $\nu = 0$ with $\mu_{\mathrm{free}} = 0$.
+
+For lithium ($N = 3$, doublet ${}^2S$), the spatial part transforms
+as the standard (mixed-symmetry) irrep $[2,1]$ of $S_3$.  This
+irrep first appears at $\nu = 1$, so the lowest allowed free
+eigenvalue is $\mu_{\mathrm{free}} = 1 \cdot 8/2 = 4$---not zero.
+The higher baseline reflects the Pauli exclusion principle encoded
+group-theoretically: more electrons require higher angular momentum
+to satisfy antisymmetry.
+
+\subsection{Implications for the Dimensionless Vacuum}
+
+The $N$-electron generalization preserves the core principle: at
+$R = 0$, the angular dynamics is a free particle on the unit
+$S^{3N-1}$, with pure integer-ratio eigenvalues determined by
+the $\mathrm{SO}(3N)$ Casimir.  No physical scale enters.  The
+electron-nuclear and electron-electron interactions enter through
+the charge function $C(\hat{\Omega})/R$, which acts as a
+perturbation that lifts the Casimir degeneracy---analogous to how
+the energy-shell constraint $p_0^2 = -2E$ projects the dimensionless
+$S^3$ eigenvalues into dimensionful energies for the single-electron
+case.
+
+The 18 symbolic proofs of Appendix~\ref{app:tests} verify the
+$N = 1$ case.  The generalization to $N > 1$ follows from the same
+algebraic structure: the Laplace--Beltrami operator on $S^{3N-1}$
+is the continuum limit of a discrete graph Laplacian on the
+$N$-electron angular lattice, and its spectrum is determined by
+the topology of the sphere alone.
+
+
+%% ========================================================================
 \section{Discussion and Conclusions}
 \label{sec:discussion}
 %% ========================================================================
@@ -309,9 +656,9 @@ We have established a rigorous mathematical chain connecting the discrete GeoVac
 
 Each stage has been verified by independent symbolic computation. The 18 passing tests constitute a complete algebraic audit of the conformal transformation chain, covering: the unit sphere constraint, the conformal factor identities, the projection limits, the chordal distance identity, the dot-product form, the volume Jacobian, the inverse projection, the connection term, the conformal Laplacian of $\Omega^2$, the zero-mode annihilation, the eigenvalue equation for $n = 2$ and $n = 3$, the conformal decomposition, and the eigenvalue-to-energy mapping.
 
-\subsection{The Dimensionless Vacuum Hypothesis}
+\subsection{The Scale-Invariance Property}
 
-The mathematical evidence supports a precise physical claim: \textit{the fundamental quantum vacuum is a dimensionless, scale-invariant topology}. The continuous Schr\"odinger equation and its dimensionful energy levels are not fundamental---they are emergent properties of a specific projection of this topology into observational coordinates.
+As Fock showed, the Schr\"odinger equation for hydrogen is mathematically equivalent, under conformal projection, to the Laplace-Beltrami operator on the unit $S^3$---a dimensionless, scale-invariant topology. What we add is the observation that the GeoVac discrete graph converges to this same structure, so the continuous equation and its dimensionful energy levels can be viewed as emergent properties of projecting a discrete topology into observational coordinates. This is a mathematical equivalence, not a proof of physical priority---whether the graph or the differential equation is ``more fundamental'' is a question of physical interpretation, not of theorem.
 
 Three features of the projection merit emphasis:
 
@@ -323,7 +670,7 @@ Three features of the projection merit emphasis:
 
 \subsection{Relation to the Coulomb Potential}
 
-A frequently asked question is: where does the $1/r$ Coulomb potential come from? In the standard formulation, $V(r) = -1/r$ is an input to the Schr\"odinger equation. In the topological formulation, it is an \textit{output} of the conformal projection.
+A frequently asked question is: where does the $1/r$ Coulomb potential come from? In the standard formulation, $V(r) = -1/r$ is an input to the Schr\"odinger equation. As Fock showed~\cite{fock1935}, in the $S^3$ formulation it is an \textit{output} of the conformal projection.
 
 The mechanism is the chordal distance identity, Eq.~\eqref{eq:chordal}. On $S^3$, the Green's function for the Laplace-Beltrami operator is $G(\mathbf{n}, \mathbf{n}') \propto 1/|\mathbf{n} - \mathbf{n}'|^2$, which is the natural interaction kernel on a sphere. Under stereographic projection, this becomes
 \begin{equation}
@@ -339,19 +686,25 @@ The results of this paper provide a formal justification for the GeoVac framewor
 
 \textit{Discretization artifacts:} The $s/p$ splitting at finite $n_{\max}$ is spectral aliasing on a compact manifold---it arises from boundary effects in the finite graph and decays as $n_{\max} \to \infty$.
 
-\textit{Universal kinetic scale:} The constant $\kappa = -1/16$ is the unique prefactor that maps the dimensionless graph Laplacian eigenvalues to the physical hydrogen spectrum, consistent with the energy-shell projection mechanism.
+\textit{Kinetic scale factor:} The constant $\kappa = -1/16$ is the kinetic scale factor that bridges the dimensionless graph and dimensionful physics. It is not derived from topology alone---it is determined by requiring the graph eigenvalues to reproduce the hydrogen spectrum via the energy-shell projection mechanism. Its universality across all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph topology correctly encodes the \textit{relative} spectral structure.
 
 \subsection{Limitations}
 
-Several caveats apply. First, this paper addresses only the single-electron hydrogen atom. Multi-electron systems require additional structure beyond the unit $S^3$, such as tensor products of spheres or more complex topological spaces. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence---only demonstrated it empirically through $n_{\max} = 30$.
+Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence---only demonstrated it empirically through $n_{\max} = 30$.
 
 \subsection{Concluding Remarks}
 
-Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. We have demonstrated that this sphere is intrinsically dimensionless---a pure topology with no physical scale---and that every dimensionful quantity in the Schr\"odinger equation is introduced by the act of projecting this topology into flat observational coordinates.
+Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. The scale invariance of this sphere---the fact that it is intrinsically the \textit{unit} $S^3$ regardless of the energy-shell parameter---was implicit in Fock's treatment but has not, to our knowledge, been stated as an explicit organizing principle. We have articulated this scale-invariance property and, more importantly, demonstrated that the GeoVac discrete graph Laplacian converges to the same $S^3$ structure in the continuum limit, establishing a rigorous mathematical foundation for the sparse graph computational approach.
 
-The wave equation is a continuous, dimensionful shadow of a discrete, dimensionless geometric reality. The Coulomb potential is not a force law imposed on space; it is the coordinate distortion created by flattening a sphere. Energy is not a property of the vacuum; it is the penalty paid for representing compact topology in non-compact coordinates.
+Within this mathematical equivalence, the wave equation can be viewed as a continuous, dimensionful projection of a discrete, dimensionless topology. The Coulomb potential emerges as the coordinate distortion created by the stereographic flattening, and the energy levels emerge from the energy-shell constraint that parameterizes the projection.
 
-Whether this perspective points toward a deeper theory of quantum mechanics, or merely provides an elegant reformulation, is a question we leave to future investigation.
+We emphasize that these are statements of mathematical equivalence, not claims about which formulation is physically prior. Whether the topological perspective points toward a deeper theory of quantum mechanics, or provides a computationally useful reformulation, is a question we leave to future investigation. What is established here is the precise mathematical chain connecting the discrete graph to the continuous equation, verified step by step through symbolic computation.
+
+The $S^3$ conformal equivalence established here is one instance of a broader pattern: the discrete graph topology defined by the quantum number node structure $\{(n, l, m)\}$ admits multiple conformally distinct continuum embeddings, of which $S^3$ is the natural one for the single-center Coulomb problem.  The same combinatorial skeleton reappears in prolate spheroidal coordinates for one-electron diatomics~\cite{loutey_paper11}, hyperspherical coordinates for two-electron atoms~\cite{loutey_paper13}, molecule-frame hyperspherical coordinates for two-electron molecules, and composed fiber bundles for core--valence systems.  The full hierarchy of these embeddings, and the sense in which the discrete node structure serves as a combinatorial invariant across them, is catalogued in Paper~0~\cite{loutey_paper0}.
+
+\subsection{Extension to Molecules}
+
+The principle that the graph Laplacian should discretize the Laplace-Beltrami operator on the natural conformal manifold extends beyond single-center systems.  For diatomic molecules, the two-center Coulomb problem separates in prolate spheroidal coordinates $(\xi, \eta, \varphi)$, just as the single-center problem separates in spherical coordinates (leading to $S^3$ via Fock's projection).  Discretizing the Laplace-Beltrami operator on the prolate spheroid yields a molecular lattice with $R$-dependence built into the metric---no fitted parameters are required.  For H$_2^+$, this approach achieves $R_{\mathrm{eq}} = 2.001$~bohr (0.21\% error) and $E_{\min} = -0.598$~Ha (0.70\% error) with zero free parameters~\cite{loutey_paper11}.  This suggests a general principle: every separable quantum system has a natural lattice defined by the coordinate system in which separation occurs.
 
 
 %% ========================================================================
@@ -394,6 +747,18 @@ GeoVac Paper 0 (2026).
 J. Loutey,
 ``The Geometric Atom: Quantum Mechanics as a Packing Problem,''
 GeoVac Paper 1 (2026).
+
+\bibitem{loutey_paper11}
+J. Loutey,
+``The Molecular Fock Projection: Diatomic Molecules as Prolate
+Spheroidal Lattices,''
+GeoVac Paper 11 (2026).
+
+\bibitem{loutey_paper13}
+J. Loutey,
+``The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel
+Graphs,''
+GeoVac Paper 13 (2026).
 
 \end{thebibliography}
 
@@ -449,5 +814,39 @@ The Laplace-Beltrami operator $\Delta_{\tilde{g}} f = \tilde{g}^{ij}\left(\parti
 \end{equation}
 Setting $n = 3$ and $g = g_{\text{flat}}$ gives Eq.~\eqref{eq:conformal_laplacian}, with the connection correction proportional to $(n - 2) = 1$.
 
+\paragraph{Note added v2.6.0.}
+The $S^3$ density overlap formula (Sec.~V) provides exact rational
+Slater integrals for all hydrogenic orbital pairs, enabling a fully
+graph-native FCI calculation for helium.  Using the graph Laplacian
+$\kappa \mathcal{L}$ as the one-body operator and rational Slater
+integrals as the two-body operator, the He ground state is computed
+with \emph{zero free parameters}: no orbital exponent, no variational
+optimization, no numerical quadrature.  The FCI matrix at each
+$n_{\max}$ is a rational matrix whose ground-state eigenvalue is an
+algebraic number.
+
+At $n_{\max} = 7$ (1,218 singlet configurations), the graph-native
+energy is $-2.8983$~Ha (0.19\% error vs.\ exact $-2.903724$~Ha),
+with a convergence floor estimated at $\sim$0.14\%.
+The graph's off-diagonal one-body structure (inter-shell $T_\pm$
+couplings) is the dominant ingredient: replacing the graph Laplacian
+with the diagonal hydrogenic operator degrades the result to 1.41\%
+(variational exponent) or 1.85\% (fixed $k = Z$).
+
+FCI basis invariance was verified computationally (Sprint~3D):
+transforming $V_{ee}$ to the graph eigenbasis yields energies
+identical to the graph-native result (to machine precision,
+$< 3 \times 10^{-15}$~Ha), confirming that the convergence floor
+is not from basis mismatch but from the electron-electron cusp
+(embedding exchange constant, Paper~18).
+
+At $n_{\max} = 1$, the graph-native energy reduces to
+$E = -Z^2/2 + 5Z/8 = -11/8$~Ha for $Z = 2$, an exact rational.
+The variationally optimized single-exponent result $k^* = 27/16$,
+$E^* = -729/256$~Ha is also an exact rational.
+A 2D variational solver treating hyperradius and hyperangle
+simultaneously (Paper~13, Note added v2.6.0) achieves 0.004\% with
+cusp correction, bracketing the exact answer between continuous and
+algebraic methods.
 
 \end{document}

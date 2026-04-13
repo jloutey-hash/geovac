@@ -761,12 +761,16 @@ of a spectral-geometric exchange:
   \item $\Delta = 1/40$ is a boundary correction mixing discrete
     eigenvalue data ($|\lambda_3| = 8$) with the cumulative state
     count ($N(2) = 5$).
-  \item The overall factor $\pi$ is the Weyl exchange constant
-    for $S^2$ (the base of the Hopf fibration, the photon
-    propagation sphere).
+  \item The overall factor $\pi$ is $\omega_2 = \pi$, the 2D
+    ball volume, which serves as the numerator of the $S^2$ Weyl
+    density and as the packing-plane prefactor
+    $\sigma_0 = \pi d_0^2 / 2$ in Paper~0 (the base of the Hopf
+    fibration, the photon propagation sphere).
 \end{itemize}
 
-The structure of $K$ is thus: the $S^2$ Weyl constant ($\pi$)
+The structure of $K$ is thus: the 2D ball volume $\omega_2 = \pi$
+(the numerator of the $S^2$ Weyl density, and the same $\pi$ that
+fixes Paper~0's packing-plane prefactor $\sigma_0 = \pi d_0^2 / 2$)
 multiplying a sum of the $S^2$ Casimir trace ($B$, discrete),
 the $S^1$ spectral zeta value ($F$, transcendental), and an
 $S^3$ boundary term ($\Delta$, mixed).  This is a Weyl-type
@@ -801,8 +805,10 @@ The combination rule $K = \pi(B + F - \Delta)$ mixes discrete
 data ($B = 42$, from representation theory) with continuous
 spectral data ($F = \zeta(2) = \pi^2/6$, from the $S^1$
 spectral zeta function), multiplied by an overall geometric
-factor ($\pi$, the Weyl exchange constant for $S^2$, the Hopf
-base).  This is precisely the pattern identified throughout this
+factor ($\omega_2 = \pi$, the 2D ball volume that enters as the
+numerator of the $S^2$ Weyl density and as the packing-plane
+prefactor $\sigma_0 = \pi d_0^2 / 2$ in Paper~0, with $S^2$ the
+Hopf base).  This is precisely the pattern identified throughout this
 paper: a transcendental conversion factor mediating between
 discrete and continuous descriptions of the same geometry.
 The structural match is evidence---not proof---that the
@@ -822,6 +828,174 @@ with rational coefficients, it is overwhelmingly likely
 (though not proven) that $\alpha$ is transcendental---consistent
 with its role as a spectral-geometric exchange constant.
 \end{observation}
+
+\subsection{Three-tier structure of the combination rule}
+\label{sec:alpha_three_tier}
+
+An ongoing computational investigation into the origin of the three
+components of $K = \pi(B + F - \Delta)$---using exact-rational
+symbolic computation and high-precision arithmetic---has pinned down
+$B$ and $F$ as genuinely different objects on the Fock $(n,l)$
+lattice, and has eliminated a broad family of candidate mechanisms
+for $\Delta$. We observe that the three terms appear to occupy
+three categorically distinct tiers of the exchange-constant
+taxonomy rather than specializing a single common generator. We
+summarize the four structural findings below; none of them alters
+the conjectural status of Paper~2's cubic identity.
+
+\paragraph{1. A $\kappa$--$B$ identity from the Fock weight.}
+The Fock projection of the hydrogenic basis onto $S^3$ carries a
+residual momentum-space weight
+$w(p) = (p^2 + p_0^2)^{-2}$
+after the overall $(2p_0)^{5/2}$ prefactor of the Fock map is
+stripped.  Computation reveals that the diagonal matrix elements
+$\langle n,l|w|n,l\rangle_{p_0 = 1}$ for $n \le 3$ are exact
+rationals whose denominators divide $32 = 2\,d_{\max}^2$:
+\begin{equation}
+  \{\langle n,l|w|n,l\rangle_{p_0 = 1}\}_{(n,l)}
+  = \Bigl\{ \tfrac{7}{16},\, \tfrac{5}{8},\, \tfrac{3}{8},\,
+            \tfrac{5}{8},\, \tfrac{17}{32},\, \tfrac{11}{32} \Bigr\}
+  \label{eq:fock_weight_values}
+\end{equation}
+for $(n,l) \in \{(1,0),(2,0),(2,1),(3,0),(3,1),(3,2)\}$.  Weighted
+by the Hopf base factor $(2l+1)\,l(l+1)$ and summed,
+\begin{equation}
+  \sum_{n=1}^{3}\sum_{l=0}^{n-1} (2l+1)\,l(l+1)\,
+    \langle n,l|w|n,l\rangle_{p_0 = 1}
+  = \frac{63}{4}
+  = 6\,B\,|\kappa|,
+  \label{eq:kappa_B_identity}
+\end{equation}
+with $B = 42$ the Casimir trace of Paper~2 and $\kappa = -1/16$
+the calibration constant of Sec.~\ref{sec:kappa_derivation}.
+Equivalently, averaging over the six $(n,l)$ cells gives
+$B\,|\kappa| = 21/8$.  This is the first exact rational algebraic
+link in the GeoVac framework between the calibration constant and
+the Hopf base invariant: $|\kappa| = 1/d_{\max}^2$ appears as the
+universal denominator factor of the Fock-weight matrix elements,
+while $B$ appears in the Hopf-weighted sum.  The identity
+(\ref{eq:kappa_B_identity}) is verified by exact-rational symbolic
+computation with no fitted parameters.
+
+\paragraph{2. A Dirichlet identity for $F$.}
+Define the Dirichlet series of the $S^3$ Fock shell degeneracy
+$g_n = n^2$,
+\begin{equation}
+  D_{n^2}(s) \;:=\; \sum_{n=1}^{\infty} g_n\, n^{-s}
+             \;=\; \sum_{n=1}^{\infty} n^{-(s-2)}
+             \;=\; \zeta_R(s - 2),
+  \label{eq:Dn2_def}
+\end{equation}
+evaluated at the packing exponent $s = d_{\max} = 4$ of Paper~0:
+\begin{equation}
+  D_{n^2}(d_{\max}) = \zeta_R(2) = \frac{\pi^2}{6} = F.
+  \label{eq:F_dirichlet}
+\end{equation}
+The exponent $s = 4$ admits three independent natural readings:
+$s = d_{\max}$ from Paper~0's packing axiom; $s = \dim(\mathbb{R}^4)$,
+the ambient Euclidean space into which $S^3$ is stereographically
+projected in Paper~7; and $s = 2 N_{\mathrm{init}}$ from the same
+packing axiom.  The weight $n^2$ is the degeneracy of the $n$-th
+$S^3$ shell in Fock's projection.  To our knowledge
+(\ref{eq:F_dirichlet}) is the first identification of $F$ from a
+graph-intrinsic quantity in the GeoVac framework---that is, $F$ is
+produced here without invoking an embedding metric or a
+sphere-spectral construction.  No other natural Dirichlet series
+on the shell lattice (per-shell Casimir, state count, Laplacian
+eigenvalue, $l$-max weight) produces an exact hit at any integer
+$s$ in the range $[3, 12]$.
+
+\paragraph{3. Three-tier classification.}
+Combining the $\kappa$--$B$ identity (\ref{eq:kappa_B_identity})
+with the Dirichlet identity (\ref{eq:F_dirichlet}) and the
+Paper~2 canonical form $1/\Delta = |\lambda_{n_{\max}}|\, N(n_{\max}{-}1)$,
+the three components of $K = \pi(B + F - \Delta)$ have
+categorically different origins:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}lccl@{}}
+\hline
+Component & Value & Type & Origin \\
+\hline
+$B$      & $42$        & rational, finite sum       & Casimir trace
+   truncated at $n_{\max}=3$ \\
+$F$      & $\pi^2/6$   & transcendental, infinite   & Fock-degeneracy
+   Dirichlet at $s = d_{\max}$ \\
+         &             & series                     & \\
+$\Delta$ & $1/40$      & rational, boundary product & $|\lambda_{n_{\max}}|
+   \cdot N(n_{\max}{-}1)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent The three objects do not arise from a single common
+generator.  $B$ is a finite sum over the first three shells;
+$F$ is an infinite Dirichlet series with no meaningful
+finite truncation at $n_{\max} = 3$ (the tail $\pi^2/6 - 49/36
+\approx 0.284$ is not $\Delta$, nor any rational multiple of it);
+and $\Delta$ is a boundary product at the truncation edge.
+The combination rule $K = \pi(B + F - \Delta)$ therefore assembles
+objects from three distinct tiers of the exchange-constant
+taxonomy rather than specializing a single common Dirichlet
+series, spectral construction, or arithmetic generator.
+
+\paragraph{4. Negative results on candidate mechanisms.}
+The three-tier reading is supported by the systematic elimination
+of alternative unifying mechanisms.  Computation (exact rational
+symbolic arithmetic and \texttt{mpmath} at 50 decimal places)
+has ruled out, within the tolerance indicated:
+(i) the Hopf-twist spectral comparison $S^3$ versus $S^1 \times S^2$
+(cleanest near-miss $\sim 6.8 \times 10^{-3}$);
+(ii) higher Casimir traces on $S^3$ at all orders through
+$n_{\max} = 3$;
+(iii) Hopf graph quotient Laplacian invariants for
+$S^3 \to S^2$ over the $m$-fiber;
+(iv) the discrete $S^1$ fiber spectral zeta (path-graph Laplacian,
+in four weighting schemes);
+(v) the continuous $S^1$ fiber via Mellin and heat-kernel expansions
+(the Jacobi inversion $\theta_{S^1}(t) \sim \sqrt{\pi/t}$ forces every
+order to be linear in $\pi$: the $\sqrt{\pi}\cdot\sqrt{\pi}\cdot\mathbb{Q}
+= \pi\cdot\mathbb{Q}$ structure collapses any expected $\zeta_R(2)$
+contribution to $\pi$ times a rational at every order);
+(vi) $S^5$ spectral geometry, including zetas, Seeley--DeWitt
+coefficients, and functional determinants (all rational, or
+reducible to $\zeta_R(\mathrm{odd})$ and $\log 2$);
+and (vii) a $\zeta$-combination scan for $\Delta$ over $3{,}228$
+candidates built from Riemann and Hurwitz zetas, Bernoulli numbers,
+and Stieltjes constants, with zero strict hits within $10^{-25}$
+of $1/40$.
+
+The structural reason for these negative results is that
+round-sphere Laplace--Beltrami operators produce (i) integer powers
+of $\pi$ in their volumes, (ii) rational Seeley--DeWitt
+coefficients, and (iii) $\zeta_R(\mathrm{odd}) + \log 2$ combinations
+in their spectral determinants---but never $\pi^2 = 2\zeta_R(2)$
+additively next to a rational.  This is consistent with the
+$\pi$-free certificate of the Bargmann--Segal lattice
+(Paper~24), which shows that the
+analogous lattice for the 3D harmonic oscillator on the Hardy
+space of $S^5$ is bit-exactly rational in exact arithmetic; and the
+same rigidity holds for $S^5$ Laplace--Beltrami spectral invariants
+generally.
+
+\paragraph{Reframed open question.}
+The derivation question ``where does each piece of $K$ come from?''
+has been partially answered: $B$ from a finite Casimir truncation
+(with the $\kappa$--$B$ link of Eq.~\ref{eq:kappa_B_identity}), $F$
+from an infinite Dirichlet series at the packing exponent
+(Eq.~\ref{eq:F_dirichlet}), and $\Delta$ from a boundary product at
+the truncation edge (irreducible to $\zeta$-content within the
+candidate set tested).  The remaining structural question is no
+longer a derivation question about any single component: it is a
+question about why the \emph{additive} combination
+$B + F - \Delta$, multiplied by the overall factor $\omega_2 = \pi$,
+equals $\alpha^{-1}$ to $8.8 \times 10^{-8}$.  That is a question
+about the conspiracy of three categorically different objects---a
+finite sum, an infinite Dirichlet series, and a boundary
+product---rather than the specialization of a single generator.
+Paper~2's identification remains conjectural.
 
 
 %% ========================================================================
@@ -964,6 +1138,34 @@ Class~C reflects the physical content: electron-electron
 correlation couples the two $S^3$ factors, and the coupling
 strength varies with the hyperradial coordinate $R$---a spatial
 degree of freedom that exists only in the projected description.
+
+\paragraph{Three-layer decomposition (v2.6.0).}
+The algebraic Casimir CI (Track~DI Sprint~2) makes the exchange
+constant structure of the He ground state fully explicit.  At each
+$n_{\max}$, the FCI matrix $H(k) = Bk + Ck^2$ has rational entries
+as a function of the orbital exponent~$k$, so the variationally
+optimal energy $E^*$ is an algebraic number---a root of a polynomial
+with rational coefficients.  At $n_{\max} = 1$: $k^* = 27/16$,
+$E^* = -729/256$~Ha (exact rationals).  This reveals a three-layer
+structure:
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Layer & Content & Exchange type \\
+\hline
+Rational & Slater integrals, Gaunt coefficients & None (graph-intrinsic) \\
+Algebraic & Optimal exponents at finite $n_{\max}$ & Calibration \\
+Transcendental & e-e cusp ($\alpha = \pi/4$ on $S^5$) & Embedding \\
+\hline
+\end{tabular}
+\end{center}
+The Fock energy-shell self-consistency $k^2 = -2E$, which is exact
+at Level~1 (one electron, one scale), over-constrains the
+two-electron problem: self-consistent~$k$ gives 5--13\% error vs.\
+1.5--1.9\% for variational~$k$.  This is the first instance where a
+single calibration constant is insufficient---the transition from
+calibration to embedding exchange constants corresponds to the
+physical content of electron-electron correlation.
 
 \subsection{Boundary cases}
 
@@ -1349,6 +1551,44 @@ sparsity arising from Gaunt selection rules (the same algebraic
 structure that produces the exchange constants classified in this
 paper).  The classical solver investigation across all levels is now
 complete (v2.0.24).
+
+\paragraph{Note added v2.6.0.}
+The He exchange constant census is now computationally explicit
+(Track~DI Sprints~1--3D).  A 2D variational solver on $S^5$ breaks
+the adiabatic 0.20\% floor: 0.022\% raw at $l_{\max} = 7$, 0.004\%
+with Schwartz cusp correction at $l_{\max} = 4$ (Paper~13, Note
+added v2.6.0).  A graph-native FCI using the graph Laplacian
+$\kappa\mathcal{L}$ as the one-body operator and exact rational
+Slater integrals as the two-body operator achieves 0.19\% at
+$n_{\max} = 7$ (1,218~configurations) with zero free parameters.
+The graph's off-diagonal $T_\pm$ inter-shell couplings are the
+dominant ingredient: replacing $\kappa\mathcal{L}$ with the diagonal
+hydrogenic operator degrades to 1.41\% (variational~$k$) or 1.85\%
+(fixed $k = Z$).  FCI basis invariance verified (Sprint~3D):
+transforming $V_{ee}$ to the graph eigenbasis gives identical
+energies ($< 3 \times 10^{-15}$~Ha), confirming the $\sim$0.14\%
+convergence floor is embedding exchange constant content (cusp),
+not basis mismatch.  The three-layer structure is refined:
+
+\begin{center}
+\begin{tabular}{llll}
+\hline
+Layer & Content & Exchange type & Contribution \\
+\hline
+Rational & Graph h$_1$ + Slater $V_{ee}$ & None (graph-intrinsic) & 98.6\% \\
+Topological & Graph off-diagonal ($T_\pm$) & Calibration ($\kappa$) & Dominant \\
+Transcendental & e-e cusp + truncation & Embedding & $\sim$0.14\% \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+The calibration exchange constant $\kappa = -1/16$ has a dual role:
+it sets the overall energy scale (Level~1) and determines the
+strength of inter-shell coupling in the graph Laplacian (Level~3).
+The Fock self-consistency $k^2 = -2E$, exact at Level~1, fails at
+Level~3 (5--13\% error), marking the transition from single
+calibration constants to irreducible embedding content.
 
 \begin{acknowledgments}
 Computational implementation and documentation drafting were
