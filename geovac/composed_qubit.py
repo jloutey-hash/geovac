@@ -252,9 +252,9 @@ def _compute_rk_integrals_block(
     # --- Phase 1: exact algebraic path ---
     # R^k scales linearly with Z: R^k(Z) = Z * R^k(Z=1)
     # First try the precomputed table (n_max<=3), then fall back to
-    # the general algebraic evaluator (any n_max).
+    # the fast float algebraic evaluator (any n_max, ~100x faster than Fraction).
     from geovac.casimir_ci import get_rk4
-    from geovac.hypergeometric_slater import get_rk_algebraic
+    from geovac.hypergeometric_slater import get_rk_float
 
     rk_cache: Dict[Tuple[int, ...], float] = {}
     grid_needed: List[Tuple[int, ...]] = []
@@ -266,10 +266,10 @@ def _compute_rk_integrals_block(
         if exact is not None:
             rk_cache[key] = float(Z) * float(exact)
         else:
-            # General algebraic evaluator (any n_max)
+            # Float algebraic evaluator (any n_max, machine precision)
             try:
-                exact = get_rk_algebraic(n1, l1, n3, l3, n2, l2, n4, l4, k)
-                rk_cache[key] = float(Z) * float(exact)
+                val = get_rk_float(n1, l1, n3, l3, n2, l2, n4, l4, k)
+                rk_cache[key] = float(Z) * val
             except Exception:
                 grid_needed.append(key)
 

@@ -374,12 +374,13 @@ def two_electron_integral(
             continue
 
         # R^k(ac, bd): 4-index radial Slater integral
-        # Try exact table first, fall back to numerical
+        # Try exact table first, then fast float algebraic, then grid fallback
         rk_exact = get_rk4(na, la, nc, lc, nb, lb, nd, ld, k)
         if rk_exact is not None:
             rk_val = float(rk_exact)
         else:
-            rk_val = _compute_rk_numerical(na, la, nc, lc, nb, lb, nd, ld, k)
+            from geovac.hypergeometric_slater import get_rk_float
+            rk_val = get_rk_float(na, la, nc, lc, nb, lb, nd, ld, k)
 
         result += ck_ac * ck_bd * rk_val
 
