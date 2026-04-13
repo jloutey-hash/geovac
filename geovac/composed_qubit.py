@@ -25,6 +25,7 @@ Author: GeoVac Development Team
 Date: March 2026
 """
 
+import functools
 import json
 import time
 from math import factorial
@@ -115,11 +116,21 @@ _TRENEV_REFERENCE = (
 # Hydrogenic state enumeration
 # ---------------------------------------------------------------------------
 
-def _enumerate_states(max_n: int) -> List[Tuple[int, int, int]]:
-    """Generate (n, l, m) states up to max_n in canonical order."""
+def _enumerate_states(
+    max_n: int, l_min: int = 0,
+) -> List[Tuple[int, int, int]]:
+    """Generate (n, l, m) states up to max_n with l >= l_min in canonical order.
+
+    Parameters
+    ----------
+    max_n : int
+        Maximum principal quantum number.
+    l_min : int
+        Minimum angular momentum (default 0). Use l_min=2 for d-only blocks.
+    """
     states: List[Tuple[int, int, int]] = []
     for n in range(1, max_n + 1):
-        for l in range(n):
+        for l in range(max(l_min, 0), n):
             for m in range(-l, l + 1):
                 states.append((n, l, m))
     return states
@@ -129,9 +140,10 @@ def _enumerate_states(max_n: int) -> List[Tuple[int, int, int]]:
 # Wigner 3j symbol (self-contained, matches LatticeIndex implementation)
 # ---------------------------------------------------------------------------
 
+@functools.lru_cache(maxsize=4096)
 def _wigner3j(j1: int, j2: int, j3: int,
               m1: int, m2: int, m3: int) -> float:
-    """Wigner 3j symbol for integer arguments via Racah formula."""
+    """Wigner 3j symbol for integer arguments via Racah formula (cached)."""
     if m1 + m2 + m3 != 0:
         return 0.0
     if abs(j1 - j2) > j3 or j3 > j1 + j2:
@@ -209,19 +221,18 @@ def _compute_rk_integrals_block(
     Compute R^k(n1l1, n2l2, n3l3, n4l4) Slater radial integrals for a
     single-center block at nuclear charge Z.
 
+    Uses exact rational Slater integrals from Paper 7 (casimir_ci table)
+    when available (n_max <= 3). Falls back to grid quadrature for
+    quantum numbers not in the table.
+
+    The algebraic path gives machine-precision results (exact rationals
+    scaled by Z). The grid path has O(1/n_grid) error (~0.01% at n_grid=2000).
+
     Returns dict mapping (n1,l1,n2,l2,n3,l3,n4,l4,k) -> float.
     """
     unique_nl = sorted(set((n, l) for n, l, m in states))
-    r_max = 80.0 / max(Z, 0.5)
-    r_grid = np.linspace(0, r_max, n_grid + 1)[1:]
-    dr = r_grid[1] - r_grid[0]
 
-    # Pre-compute radial wavefunctions
-    R_on_grid: Dict[Tuple[int, int], np.ndarray] = {}
-    for n, l in unique_nl:
-        R_on_grid[(n, l)] = _radial_wf_grid(Z, n, l, r_grid)
-
-    # Determine needed integrals
+    # Determine all needed integrals
     needed: List[Tuple[int, ...]] = []
     for n1, l1 in unique_nl:
         for n2, l2 in unique_nl:
@@ -238,38 +249,78 @@ def _compute_rk_integrals_block(
     if not needed:
         return {}
 
+    # --- Phase 1: exact algebraic path ---
+    # R^k scales linearly with Z: R^k(Z) = Z * R^k(Z=1)
+    # First try the precomputed table (n_max<=3), then fall back to
+    # the general algebraic evaluator (any n_max).
+    from geovac.casimir_ci import get_rk4
+    from geovac.hypergeometric_slater import get_rk_algebraic
+
+    rk_cache: Dict[Tuple[int, ...], float] = {}
+    grid_needed: List[Tuple[int, ...]] = []
+
+    for key in needed:
+        n1, l1, n2, l2, n3, l3, n4, l4, k = key
+        # Fast path: precomputed table (n_max<=3)
+        exact = get_rk4(n1, l1, n3, l3, n2, l2, n4, l4, k)
+        if exact is not None:
+            rk_cache[key] = float(Z) * float(exact)
+        else:
+            # General algebraic evaluator (any n_max)
+            try:
+                exact = get_rk_algebraic(n1, l1, n3, l3, n2, l2, n4, l4, k)
+                rk_cache[key] = float(Z) * float(exact)
+            except Exception:
+                grid_needed.append(key)
+
+    # If all integrals resolved algebraically, skip grid entirely
+    if not grid_needed:
+        return rk_cache
+
+    # --- Phase 2: grid fallback for integrals not in algebraic table ---
+    r_max = 80.0 / max(Z, 0.5)
+    r_grid = np.linspace(0, r_max, n_grid + 1)[1:]
+    dr = r_grid[1] - r_grid[0]
+
+    # Pre-compute radial wavefunctions (only for needed (n,l) pairs)
+    grid_nl = set()
+    for key in grid_needed:
+        n1, l1, n2, l2, n3, l3, n4, l4, k = key
+        grid_nl.update([(n1, l1), (n2, l2), (n3, l3), (n4, l4)])
+
+    R_on_grid: Dict[Tuple[int, int], np.ndarray] = {}
+    for n, l in grid_nl:
+        R_on_grid[(n, l)] = _radial_wf_grid(Z, n, l, r_grid)
+
     # Group by (n2,l2,n4,l4,k) to reuse Y^k potential
     from collections import defaultdict
     yk_groups: Dict[Tuple[int, ...], List[Tuple[int, ...]]] = defaultdict(list)
-    for key in needed:
+    for key in grid_needed:
         n1, l1, n2, l2, n3, l3, n4, l4, k = key
         yk_key = (n2, l2, n4, l4, k)
         yk_groups[yk_key].append(key)
 
-    # Compute Y^k potentials
+    # Compute Y^k potentials (vectorized cumulative sum)
     yk_cache: Dict[Tuple[int, ...], np.ndarray] = {}
     for yk_key in yk_groups:
         n2, l2, n4, l4, k = yk_key
         f_r = R_on_grid[(n2, l2)] * R_on_grid[(n4, l4)] * r_grid ** 2
-        yk = np.zeros(n_grid)
-        for i in range(n_grid):
-            r1 = r_grid[i]
-            inner = np.sum(f_r[:i + 1] * (r_grid[:i + 1] / r1) ** k) * dr
-            if i + 1 < n_grid:
-                outer = np.sum(
-                    f_r[i + 1:]
-                    * (r1 / r_grid[i + 1:]) ** k
-                    / r_grid[i + 1:]
-                ) * dr
-            else:
-                outer = 0.0
-            yk[i] = inner / r1 + outer
-        yk_cache[yk_key] = yk
 
-    # Compute R^k integrals
-    rk_cache: Dict[Tuple[int, ...], float] = {}
+        # Vectorized Y^k via cumulative trapezoid
+        # Inner integral: I_<(r) = (1/r^{k+1}) * integral_0^r f(r') r'^k dr'
+        inner_integrand = f_r * r_grid ** k * dr
+        inner_cumsum = np.cumsum(inner_integrand)
+        inner_part = inner_cumsum / r_grid ** (k + 1)
+
+        # Outer integral: I_>(r) = r^k * integral_r^inf f(r') / r'^{k+1} dr'
+        outer_integrand = f_r / r_grid ** (k + 1) * dr
+        outer_cumsum_rev = np.cumsum(outer_integrand[::-1])[::-1]
+        outer_part = r_grid ** k * outer_cumsum_rev
+
+        yk_cache[yk_key] = inner_part + outer_part
+
+    # Compute R^k integrals from Y^k
     for yk_key, keys in yk_groups.items():
-        n2, l2, n4, l4, k = yk_key
         yk = yk_cache[yk_key]
         for key in keys:
             n1, l1, _, _, n3, l3, _, _, _ = key
@@ -458,8 +509,228 @@ def _v_cross_nuc_1s(Z_core: float, n_core: int, Z_other: float,
     return -n_core * Z_other * expectation
 
 
+def _v_cross_nuc_frozen_core(
+    Z: int, Z_other: float, R: float,
+) -> float:
+    """Core-to-other-nucleus electrostatic attraction using frozen-core density.
+
+    Computes V_cross = -Z_other * integral n_core(r) * min(1/R, 1/r) dr,
+    which gives the electrostatic potential of the frozen core at the
+    partner nucleus located at distance R.
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge of the heavy atom (must have FrozenCore data).
+    Z_other : float
+        Nuclear charge of the partner nucleus (e.g. 1.0 for H).
+    R : float
+        Internuclear distance in bohr.
+
+    Returns
+    -------
+    float
+        V_cross in Hartree (negative, attractive).
+    """
+    from geovac.neon_core import FrozenCore
+    fc = FrozenCore(Z)
+    fc.solve()
+    r = fc.r_grid
+    n_r = fc.n_r
+    # Electrostatic potential of core density at distance R:
+    # phi(R) = integral_0^R n(r)/R dr + integral_R^inf n(r)/r dr
+    phi = np.trapezoid(n_r * np.where(r < R, 1.0 / R, 1.0 / r), r)
+    return -Z_other * phi
+
+
 # ---------------------------------------------------------------------------
-# Main builder
+# General composed Hamiltonian builder (MolecularSpec-driven)
+# ---------------------------------------------------------------------------
+
+def build_composed_hamiltonian(
+    spec: 'MolecularSpec',
+    pk_in_hamiltonian: bool = True,
+    verbose: bool = False,
+) -> Dict[str, Any]:
+    """Build a composed qubit Hamiltonian from a MolecularSpec.
+
+    Iterates over the blocks in *spec*, enumerating hydrogenic orbitals
+    per block (respecting ``l_min``), assembling block-diagonal h1 and
+    ERI tensors, and performing a Jordan-Wigner transformation.
+
+    This is the general builder consumed by ``balanced_coupled`` and
+    ``coupled_composition``.  The per-molecule builders
+    (``build_composed_lih``, etc.) remain for backward compatibility.
+
+    Parameters
+    ----------
+    spec : MolecularSpec
+        Molecular specification with block list and nuclear repulsion.
+    pk_in_hamiltonian : bool
+        If True, include PK pseudopotential in the quantum Hamiltonian.
+        If False, PK is computed but returned separately in ``h1_pk``.
+    verbose : bool
+        Print build progress.
+
+    Returns
+    -------
+    dict
+        Keys: M, Q, N_pauli, h1, h1_pk, eri, nuclear_repulsion,
+        qubit_op, fermion_op, wall_time_s, spec_name, blocks.
+    """
+    from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+
+    t0 = time.perf_counter()
+
+    # --- Phase 1: enumerate orbitals per sub-block ---
+    sub_blocks = []  # list of (label, Z, states, offset, block_ref)
+    offset = 0
+    for blk in spec.blocks:
+        # Center-side orbitals
+        l_min = getattr(blk, 'l_min', 0)
+        center_states = _enumerate_states(blk.max_n, l_min=l_min)
+        sub_blocks.append({
+            'label': blk.label + '_center',
+            'Z': blk.Z_center,
+            'states': center_states,
+            'offset': offset,
+            'n_orbitals': len(center_states),
+            'block': blk,
+            'side': 'center',
+        })
+        offset += len(center_states)
+
+        # Partner-side orbitals (e.g., H in a bond)
+        if blk.has_h_partner:
+            partner_max_n = blk.max_n_partner if blk.max_n_partner > 0 else blk.max_n
+            partner_states = _enumerate_states(partner_max_n)
+            sub_blocks.append({
+                'label': blk.label + '_partner',
+                'Z': blk.Z_partner,
+                'states': partner_states,
+                'offset': offset,
+                'n_orbitals': len(partner_states),
+                'block': blk,
+                'side': 'partner',
+            })
+            offset += len(partner_states)
+
+    M = offset
+    Q = 2 * M  # spin-orbitals = qubits under JW
+
+    if verbose:
+        print(f"[build_composed_hamiltonian] {spec.name}: M={M} spatial, Q={Q} qubits")
+        for sb in sub_blocks:
+            print(f"  {sb['label']}: {sb['n_orbitals']} orbitals (Z={sb['Z']:.1f})")
+
+    # --- Phase 2: build h1 (M x M) ---
+    h1 = np.zeros((M, M))
+    h1_pk = np.zeros((M, M))
+
+    for sb in sub_blocks:
+        Z_sb = sb['Z']
+        off = sb['offset']
+        for i, (n, l, m) in enumerate(sb['states']):
+            h1[off + i, off + i] = -Z_sb ** 2 / (2.0 * n ** 2)
+
+    # Core potential on center-side orbitals (PK or downfolded)
+    core_method = getattr(spec, 'core_method', 'pk')
+    for sb in sub_blocks:
+        blk = sb['block']
+        if sb['side'] != 'center':
+            continue
+
+        if core_method == 'downfolded' and blk.pk_A > 0:
+            # Use exact mean-field (2J-K) from core instead of PK Gaussian
+            from geovac.downfolding import compute_downfolded_potential
+            # Z_core is the parent nuclear charge (before screening)
+            Z_core_nuc = blk.Z_center + 2.0  # reconstruct: Z_eff = Z - n_core
+            df_mat = compute_downfolded_potential(
+                sb['states'], sb['Z'], Z_core_nuc,
+            )
+            off = sb['offset']
+            n_sb = sb['n_orbitals']
+            for i in range(n_sb):
+                for j in range(n_sb):
+                    if abs(df_mat[i, j]) > 1e-15:
+                        h1_pk[off + i, off + j] = df_mat[i, j]
+                        if pk_in_hamiltonian:
+                            h1[off + i, off + j] += df_mat[i, j]
+        elif blk.pk_A > 0 and blk.pk_B > 0:
+            # Standard PK Gaussian barrier
+            pk_mat = _compute_pk_matrix_elements(
+                sb['Z'], sb['states'], blk.pk_A, blk.pk_B,
+            )
+            off = sb['offset']
+            n_sb = sb['n_orbitals']
+            for i in range(n_sb):
+                for j in range(n_sb):
+                    if abs(pk_mat[i, j]) > 1e-15:
+                        h1_pk[off + i, off + j] = pk_mat[i, j]
+                        if pk_in_hamiltonian:
+                            h1[off + i, off + j] += pk_mat[i, j]
+
+    # --- Phase 3: build ERI (M x M x M x M) ---
+    eri = np.zeros((M, M, M, M))
+
+    for sb in sub_blocks:
+        Z_sb = sb['Z']
+        states = sb['states']
+        off = sb['offset']
+        n_sb = sb['n_orbitals']
+
+        if n_sb == 0:
+            continue
+
+        if verbose:
+            print(f"  Computing ERI for {sb['label']} ({n_sb} orbs, Z={Z_sb:.1f})...")
+
+        rk_cache = _compute_rk_integrals_block(Z_sb, states)
+        eri_phys = _build_eri_block(Z_sb, states, rk_cache)
+
+        # Convert from physicist (pq|rs) to chemist (pr|qs) and place in full tensor
+        for (a, b, c, d), val in eri_phys.items():
+            p, q, r, s = off + a, off + b, off + c, off + d
+            eri[p, r, q, s] += val
+
+    # Symmetrize ERI
+    eri = 0.5 * (eri + eri.transpose(2, 3, 0, 1))
+
+    # --- Phase 4: JW transform ---
+    nuclear_repulsion = spec.nuclear_repulsion_constant
+
+    fermion_op = build_fermion_op_from_integrals(h1, eri, nuclear_repulsion)
+    qubit_op = jordan_wigner(fermion_op)
+
+    # Count Pauli terms
+    N_pauli = len(qubit_op.terms) - (1 if () in qubit_op.terms else 0)
+
+    wall_time = time.perf_counter() - t0
+
+    if verbose:
+        print(f"  N_pauli = {N_pauli}, wall_time = {wall_time:.2f}s")
+
+    return {
+        'M': M,
+        'Q': Q,
+        'N_pauli': N_pauli,
+        'h1': h1,
+        'h1_pk': h1_pk if np.any(h1_pk) else None,
+        'eri': eri,
+        'nuclear_repulsion': nuclear_repulsion,
+        'qubit_op': qubit_op,
+        'fermion_op': fermion_op,
+        'wall_time_s': wall_time,
+        'spec_name': spec.name,
+        'blocks': [
+            {'label': sb['label'], 'n_orbitals': sb['n_orbitals'], 'Z': sb['Z']}
+            for sb in sub_blocks
+        ],
+    }
+
+
+# ---------------------------------------------------------------------------
+# Main builder (LiH-specific, backward compatible)
 # ---------------------------------------------------------------------------
 
 def build_composed_lih(
@@ -471,9 +742,15 @@ def build_composed_lih(
     A_pk: Optional[float] = None,
     B_pk: Optional[float] = None,
     verbose: bool = True,
+    pk_in_hamiltonian: bool = True,
 ) -> Dict[str, Any]:
     """
     Build the composed LiH qubit Hamiltonian and count Pauli terms.
+
+    .. deprecated:: v2.8.0
+        Use ``build_composed_hamiltonian(lih_spec(...))`` instead.
+        This per-molecule builder is retained for backward compatibility
+        but is no longer used in production code.
 
     Orbital basis:
         Core block:    hydrogenic (n,l,m) on Li center, Z_A=3, up to max_n_core
@@ -735,7 +1012,7 @@ def build_composed_lih(
     if verbose:
         print(f"[composed_qubit] Jordan-Wigner transform...")
     qubit_op = jordan_wigner(fermion_op)
-    N_pauli = len(qubit_op.terms)
+    N_pauli = len(qubit_op.terms) - (1 if () in qubit_op.terms else 0)
 
     elapsed = time.perf_counter() - t0
 
@@ -1457,6 +1734,11 @@ def build_composed_beh2(
     """
     Build the composed BeH2 qubit Hamiltonian and count Pauli terms.
 
+    .. deprecated:: v2.8.0
+        Use ``build_composed_hamiltonian(beh2_spec(...))`` instead.
+        This per-molecule builder is retained for backward compatibility
+        but is no longer used in production code.
+
     Uses Approach A: independent bond blocks with no cross-bond ERIs.
 
     Orbital basis:
@@ -1710,7 +1992,7 @@ def build_composed_beh2(
     if verbose:
         print(f"[composed_beh2] Jordan-Wigner transform...")
     qubit_op = jordan_wigner(fermion_op)
-    N_pauli = len(qubit_op.terms)
+    N_pauli = len(qubit_op.terms) - (1 if () in qubit_op.terms else 0)
 
     elapsed = time.perf_counter() - t0
 
@@ -2023,6 +2305,11 @@ def build_composed_h2o(
     """
     Build the composed H2O qubit Hamiltonian and count Pauli terms.
 
+    .. deprecated:: v2.8.0
+        Use ``build_composed_hamiltonian(h2o_spec(...))`` instead.
+        This per-molecule builder is retained for backward compatibility
+        but is no longer used in production code.
+
     Uses Approach A: 7 independent orbital blocks with no cross-block ERIs.
 
     Orbital basis (7 blocks):
@@ -2290,7 +2577,7 @@ def build_composed_h2o(
     if verbose:
         print(f"[composed_h2o] Jordan-Wigner transform...")
     qubit_op = jordan_wigner(fermion_op)
-    N_pauli = len(qubit_op.terms)
+    N_pauli = len(qubit_op.terms) - (1 if () in qubit_op.terms else 0)
 
     elapsed = time.perf_counter() - t0
 

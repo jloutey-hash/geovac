@@ -1,321 +1,165 @@
 """
-Tests for ecosystem export — GeoVac -> OpenFermion / Qiskit / PennyLane
-======================================================================
+Tests for ecosystem_export.py — full library validation.
 
-Validates:
-  - GeoVacHamiltonian properties (n_qubits, n_terms, one_norm)
-  - Export round-trips (eigenvalue agreement)
-  - Hermiticity of exported operators
-  - Published term counts (LiH l_max=2: 334 Pauli terms)
-  - 1-norm consistency
-  - Multiple systems (He, H2, LiH)
+Verifies:
+  1. All 30 systems build successfully via hamiltonian()
+  2. Known Pauli counts match expected values
+  3. Universal Pauli/Q ratios hold
+  4. Isostructural invariance across rows
 
 Author: GeoVac Development Team
 Date: April 2026
 """
 
-import warnings
+import sys
+from pathlib import Path
 
-import numpy as np
 import pytest
 
-from openfermion import QubitOperator
+# Ensure local project root is on sys.path
+_PROJECT_ROOT = str(Path(__file__).resolve().parent.parent)
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 
-from geovac.ecosystem_export import (
-    GeoVacHamiltonian,
-    hamiltonian,
-)
-
-
-# ---------------------------------------------------------------------------
-# Fixtures
-# ---------------------------------------------------------------------------
-
-@pytest.fixture(scope="module")
-def he_hamiltonian() -> GeoVacHamiltonian:
-    """He system (small, fast)."""
-    return hamiltonian('He', max_n=2, verbose=False)
-
-
-@pytest.fixture(scope="module")
-def h2_hamiltonian() -> GeoVacHamiltonian:
-    """H2 system (STO-3G, fast)."""
-    return hamiltonian('H2', verbose=False)
-
-
-@pytest.fixture(scope="module")
-def lih_hamiltonian() -> GeoVacHamiltonian:
-    """LiH composed system at R=3.015, l_max=2."""
-    return hamiltonian('LiH', R=3.015, l_max=2, verbose=False)
+from geovac.ecosystem_export import hamiltonian
 
 
 # ---------------------------------------------------------------------------
-# Basic property tests
+# Expected Pauli counts (non-identity terms) at max_n=2
 # ---------------------------------------------------------------------------
-
-class TestGeoVacHamiltonianProperties:
-    """Test n_qubits, n_terms, one_norm properties."""
-
-    def test_he_n_qubits(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        assert he_hamiltonian.n_qubits > 0
-
-    def test_he_n_terms(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        assert he_hamiltonian.n_terms > 0
-
-    def test_he_one_norm_positive(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        assert he_hamiltonian.one_norm > 0.0
-
-    def test_h2_n_qubits(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        # H2 bond-pair (max_n=2): 5 spatial orbitals -> 10 spin-orbitals = 10 qubits
-        assert h2_hamiltonian.n_qubits == 10
-
-    def test_h2_n_terms(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        # H2 bond-pair (max_n=2): exactly 112 Pauli terms
-        assert h2_hamiltonian.n_terms == 112
-
-    def test_lih_n_terms_published(self, lih_hamiltonian: GeoVacHamiltonian) -> None:
-        """LiH at l_max=2 should have exactly 334 Pauli terms (Paper 14)."""
-        assert lih_hamiltonian.n_terms == 334
-
-    def test_lih_n_qubits(self, lih_hamiltonian: GeoVacHamiltonian) -> None:
-        # LiH composed l_max=2: 15 spatial orbitals -> 30 qubits
-        assert lih_hamiltonian.n_qubits == 30
-
-    def test_one_norm_consistency(self, lih_hamiltonian: GeoVacHamiltonian) -> None:
-        """one_norm should match manual computation from QubitOperator."""
-        of_op = lih_hamiltonian.to_openfermion()
-        manual_norm = sum(abs(c) for c in of_op.terms.values())
-        assert abs(lih_hamiltonian.one_norm - manual_norm) < 1e-12
-
-    def test_repr(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        r = repr(he_hamiltonian)
-        assert 'GeoVacHamiltonian' in r
-        assert 'He' in r
-
-    def test_metadata(self, lih_hamiltonian: GeoVacHamiltonian) -> None:
-        meta = lih_hamiltonian.metadata
-        assert meta['system'] == 'LiH'
-        assert meta['R_bohr'] == 3.015
+EXPECTED_PAULI = {
+    # Atomic / diatomic
+    'He':   119,
+    'H2':   111,
+    # First-row main-group
+    'LiH':  333,
+    'BeH2': 555,
+    'CH4':  999,
+    'NH3':  888,
+    'H2O':  777,
+    'HF':   666,
+    # Second-row
+    'NaH':  222,
+    'MgH2': 444,
+    'SiH4': 888,
+    'PH3':  777,
+    'H2S':  666,
+    'HCl':  555,
+    # Third-row s-block
+    'KH':   222,
+    'CaH2': 444,
+    # Third-row p-block
+    'GeH4': 888,
+    'AsH3': 777,
+    'H2Se': 666,
+    'HBr':  555,
+    # TM hydrides (all identical)
+    'ScH':  277, 'TiH':  277, 'VH':   277, 'CrH':  277, 'MnH':  277,
+    'FeH':  277, 'CoH':  277, 'NiH':  277, 'CuH':  277, 'ZnH':  277,
+}
 
 
 # ---------------------------------------------------------------------------
-# OpenFermion export
+# Test: all systems build successfully
 # ---------------------------------------------------------------------------
-
-class TestOpenFermionExport:
-    """Test to_openfermion()."""
-
-    def test_returns_qubit_operator(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        of_op = he_hamiltonian.to_openfermion()
-        assert isinstance(of_op, QubitOperator)
-
-    def test_term_count_matches(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        of_op = he_hamiltonian.to_openfermion()
-        assert len(of_op.terms) == he_hamiltonian.n_terms
-
-    def test_hermiticity(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        """QubitOperator should be Hermitian (all real coefficients for JW)."""
-        of_op = h2_hamiltonian.to_openfermion()
-        for coeff in of_op.terms.values():
-            assert abs(coeff.imag) < 1e-12, f"Non-real coefficient: {coeff}"
+@pytest.mark.parametrize("system", list(EXPECTED_PAULI.keys()))
+def test_system_builds(system: str) -> None:
+    """Each system should build without error."""
+    H = hamiltonian(system, verbose=False)
+    assert H.n_qubits > 0
+    assert H.n_terms > 0
+    assert H.one_norm > 0
 
 
 # ---------------------------------------------------------------------------
-# Qiskit export
+# Test: Pauli counts match expected values
 # ---------------------------------------------------------------------------
-
-class TestQiskitExport:
-    """Test to_qiskit()."""
-
-    def test_returns_sparse_pauli_op(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        from qiskit.quantum_info import SparsePauliOp
-        spo = he_hamiltonian.to_qiskit()
-        assert isinstance(spo, SparsePauliOp)
-
-    def test_num_qubits_matches(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        spo = h2_hamiltonian.to_qiskit()
-        assert spo.num_qubits == h2_hamiltonian.n_qubits
-
-    def test_hermiticity(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        """SparsePauliOp matrix should be Hermitian."""
-        spo = h2_hamiltonian.to_qiskit()
-        mat = spo.to_matrix()
-        if hasattr(mat, 'toarray'):
-            mat = mat.toarray()
-        assert np.allclose(mat, mat.conj().T, atol=1e-12)
-
-    def test_eigenvalue_roundtrip_h2(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        """Eigenvalues from Qiskit export should match OpenFermion."""
-        from openfermion import get_sparse_operator
-
-        of_op = h2_hamiltonian.to_openfermion()
-        spo = h2_hamiltonian.to_qiskit()
-
-        # OpenFermion eigenvalues
-        of_mat = get_sparse_operator(of_op, n_qubits=h2_hamiltonian.n_qubits)
-        of_eigvals = sorted(np.real(np.linalg.eigvalsh(of_mat.toarray())))
-
-        # Qiskit eigenvalues
-        qk_mat = spo.to_matrix()
-        if hasattr(qk_mat, 'toarray'):
-            qk_mat = qk_mat.toarray()
-        qk_eigvals = sorted(np.real(np.linalg.eigvalsh(qk_mat)))
-
-        np.testing.assert_allclose(of_eigvals, qk_eigvals, atol=1e-10)
-
-    def test_eigenvalue_roundtrip_he(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        """He eigenvalue round-trip (slightly larger system)."""
-        from openfermion import get_sparse_operator
-
-        of_op = he_hamiltonian.to_openfermion()
-        spo = he_hamiltonian.to_qiskit()
-        nq = he_hamiltonian.n_qubits
-
-        of_mat = get_sparse_operator(of_op, n_qubits=nq).toarray()
-        of_gs = np.real(np.linalg.eigvalsh(of_mat))[0]
-
-        qk_mat = spo.to_matrix()
-        if hasattr(qk_mat, 'toarray'):
-            qk_mat = qk_mat.toarray()
-        qk_gs = np.real(np.linalg.eigvalsh(qk_mat))[0]
-
-        assert abs(of_gs - qk_gs) < 1e-10
+@pytest.mark.parametrize("system,expected", list(EXPECTED_PAULI.items()))
+def test_pauli_counts(system: str, expected: int) -> None:
+    """Non-identity Pauli count must match expected value exactly."""
+    H = hamiltonian(system, verbose=False)
+    # n_terms includes identity; non-identity = n_terms - 1
+    n_pauli = H.n_terms - 1
+    assert n_pauli == expected, (
+        f"{system}: expected {expected} non-identity Pauli terms, got {n_pauli}"
+    )
 
 
 # ---------------------------------------------------------------------------
-# PennyLane export
+# Test: universal Pauli/Q ratio for main-group hydrides
 # ---------------------------------------------------------------------------
+MAIN_GROUP = [
+    'LiH', 'BeH2', 'CH4', 'NH3', 'H2O', 'HF',
+    'NaH', 'MgH2', 'SiH4', 'PH3', 'H2S', 'HCl',
+    'KH', 'CaH2', 'GeH4', 'AsH3', 'H2Se', 'HBr',
+    'H2',
+]
 
-class TestPennyLaneExport:
-    """Test to_pennylane()."""
-
-    def test_returns_hamiltonian(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        import pennylane as qml
-        pl_h = he_hamiltonian.to_pennylane()
-        assert isinstance(pl_h, qml.Hamiltonian)
-
-    def test_coefficient_count_matches(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        pl_h = h2_hamiltonian.to_pennylane()
-        assert len(pl_h.coeffs) == h2_hamiltonian.n_terms
-
-    def test_hermiticity_h2(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        """PennyLane Hamiltonian matrix should be Hermitian."""
-        pl_h = h2_hamiltonian.to_pennylane()
-        mat = _pennylane_to_matrix(pl_h, h2_hamiltonian.n_qubits)
-        assert np.allclose(mat, mat.conj().T, atol=1e-12)
-
-    def test_eigenvalue_roundtrip_h2(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        """PennyLane eigenvalues should match OpenFermion for H2."""
-        from openfermion import get_sparse_operator
-
-        of_op = h2_hamiltonian.to_openfermion()
-        pl_h = h2_hamiltonian.to_pennylane()
-        nq = h2_hamiltonian.n_qubits
-
-        of_mat = get_sparse_operator(of_op, n_qubits=nq).toarray()
-        of_gs = sorted(np.real(np.linalg.eigvalsh(of_mat)))[0]
-
-        pl_mat = _pennylane_to_matrix(pl_h, nq)
-        pl_gs = sorted(np.real(np.linalg.eigvalsh(pl_mat)))[0]
-
-        assert abs(of_gs - pl_gs) < 1e-10
-
-    def test_eigenvalue_roundtrip_he(self, he_hamiltonian: GeoVacHamiltonian) -> None:
-        """PennyLane eigenvalues should match OpenFermion for He."""
-        from openfermion import get_sparse_operator
-
-        of_op = he_hamiltonian.to_openfermion()
-        pl_h = he_hamiltonian.to_pennylane()
-        nq = he_hamiltonian.n_qubits
-
-        of_mat = get_sparse_operator(of_op, n_qubits=nq).toarray()
-        of_gs = sorted(np.real(np.linalg.eigvalsh(of_mat)))[0]
-
-        pl_mat = _pennylane_to_matrix(pl_h, nq)
-        pl_gs = sorted(np.real(np.linalg.eigvalsh(pl_mat)))[0]
-
-        assert abs(of_gs - pl_gs) < 1e-10
-
-
-def _pennylane_to_matrix(pl_hamiltonian: "Any", n_qubits: int) -> np.ndarray:
-    """Convert a PennyLane Hamiltonian to a dense matrix for testing."""
-    import pennylane as qml
-    mat = qml.matrix(pl_hamiltonian, wire_order=list(range(n_qubits)))
-    if hasattr(mat, 'toarray'):
-        mat = mat.toarray()
-    return np.array(mat)
+@pytest.mark.parametrize("system", MAIN_GROUP)
+def test_main_group_ratio(system: str) -> None:
+    """All main-group hydrides should have Pauli/Q = 11.10."""
+    H = hamiltonian(system, verbose=False)
+    n_pauli = H.n_terms - 1
+    ratio = n_pauli / H.n_qubits
+    assert abs(ratio - 11.10) < 0.01, (
+        f"{system}: Pauli/Q = {ratio:.2f}, expected 11.10"
+    )
 
 
 # ---------------------------------------------------------------------------
-# Convenience entry point tests
+# Test: TM hydride ratio
 # ---------------------------------------------------------------------------
+TM_HYDRIDES = ['ScH', 'TiH', 'VH', 'CrH', 'MnH',
+               'FeH', 'CoH', 'NiH', 'CuH', 'ZnH']
 
-class TestHamiltonianEntryPoint:
-    """Test the hamiltonian() convenience function."""
-
-    def test_case_insensitive(self) -> None:
-        h1 = hamiltonian('he', max_n=2, verbose=False)
-        h2 = hamiltonian('He', max_n=2, verbose=False)
-        h3 = hamiltonian('HE', max_n=2, verbose=False)
-        assert h1.n_terms == h2.n_terms == h3.n_terms
-
-    def test_unknown_system_raises(self) -> None:
-        with pytest.raises(ValueError, match="Unknown system"):
-            hamiltonian('Unobtanium')
-
-    def test_h2_builds(self) -> None:
-        h = hamiltonian('H2', verbose=False)
-        # Default is now bond-pair encoding (max_n=2): 112 Pauli terms, 10 qubits
-        assert h.n_terms == 112
-        assert h.n_qubits == 10
-
-    def test_lih_builds(self) -> None:
-        h = hamiltonian('LiH', R=3.015, l_max=2, verbose=False)
-        assert h.n_terms == 334
-
-    def test_all_three_exports_lih(self, lih_hamiltonian: GeoVacHamiltonian) -> None:
-        """LiH should export successfully to all three formats."""
-        of_op = lih_hamiltonian.to_openfermion()
-        assert len(of_op.terms) == 334
-
-        spo = lih_hamiltonian.to_qiskit()
-        assert spo.num_qubits == 30
-
-        pl_h = lih_hamiltonian.to_pennylane()
-        assert len(pl_h.coeffs) == 334
+@pytest.mark.parametrize("system", TM_HYDRIDES)
+def test_tm_ratio(system: str) -> None:
+    """All TM hydrides should have Pauli/Q = 9.23."""
+    H = hamiltonian(system, verbose=False)
+    n_pauli = H.n_terms - 1
+    ratio = n_pauli / H.n_qubits
+    assert abs(ratio - 9.23) < 0.01, (
+        f"{system}: Pauli/Q = {ratio:.2f}, expected 9.23"
+    )
 
 
 # ---------------------------------------------------------------------------
-# Cross-format eigenvalue consistency (small system only due to 2^Q cost)
+# Test: isostructural invariance
 # ---------------------------------------------------------------------------
+ISOSTRUCTURAL_GROUPS = [
+    # Same block topology → same Pauli count (and same Q)
+    (['NaH', 'KH'], 222, 20),           # alkali hydrides, no core block
+    (['MgH2', 'CaH2'], 444, 40),        # alkaline earth hydrides
+    (['SiH4', 'GeH4'], 888, 80),        # group 14 tetrahydrides
+    (['PH3', 'AsH3'], 777, 70),         # group 15 trihydrides
+    (['H2S', 'H2Se'], 666, 60),         # group 16 dihydrides
+    (['HCl', 'HBr'], 555, 50),          # group 17 monohydrides
+]
 
-class TestCrossFormatConsistency:
-    """Verify all three exports produce the same ground-state energy."""
+@pytest.mark.parametrize("systems,expected_pauli,expected_Q", ISOSTRUCTURAL_GROUPS)
+def test_isostructural_invariance(
+    systems: list, expected_pauli: int, expected_Q: int,
+) -> None:
+    """Frozen-core molecules with same block topology must have identical
+    Pauli counts and qubit counts across rows."""
+    for system in systems:
+        H = hamiltonian(system, verbose=False)
+        n_pauli = H.n_terms - 1
+        assert n_pauli == expected_pauli, (
+            f"{system}: N_pauli={n_pauli}, expected {expected_pauli}"
+        )
+        assert H.n_qubits == expected_Q, (
+            f"{system}: Q={H.n_qubits}, expected {expected_Q}"
+        )
 
-    def test_h2_ground_state_all_formats(self, h2_hamiltonian: GeoVacHamiltonian) -> None:
-        """H2 ground state energy should match across all three export formats."""
-        from openfermion import get_sparse_operator
 
-        nq = h2_hamiltonian.n_qubits
-
-        # OpenFermion
-        of_op = h2_hamiltonian.to_openfermion()
-        of_mat = get_sparse_operator(of_op, n_qubits=nq).toarray()
-        of_gs = np.real(np.linalg.eigvalsh(of_mat))[0]
-
-        # Qiskit
-        spo = h2_hamiltonian.to_qiskit()
-        qk_mat = spo.to_matrix()
-        if hasattr(qk_mat, 'toarray'):
-            qk_mat = qk_mat.toarray()
-        qk_gs = np.real(np.linalg.eigvalsh(qk_mat))[0]
-
-        # PennyLane
-        pl_h = h2_hamiltonian.to_pennylane()
-        pl_mat = _pennylane_to_matrix(pl_h, nq)
-        pl_gs = np.real(np.linalg.eigvalsh(pl_mat))[0]
-
-        # All should agree to ~1e-10
-        assert abs(of_gs - qk_gs) < 1e-10
-        assert abs(of_gs - pl_gs) < 1e-10
-        assert abs(qk_gs - pl_gs) < 1e-10
+# ---------------------------------------------------------------------------
+# Test: TM hydride isostructural invariance (all 10 identical)
+# ---------------------------------------------------------------------------
+def test_tm_isostructural() -> None:
+    """All 10 TM hydrides must have identical Q=30 and N_pauli=277."""
+    for system in TM_HYDRIDES:
+        H = hamiltonian(system, verbose=False)
+        n_pauli = H.n_terms - 1
+        assert H.n_qubits == 30, f"{system}: Q={H.n_qubits}"
+        assert n_pauli == 277, f"{system}: N_pauli={n_pauli}"

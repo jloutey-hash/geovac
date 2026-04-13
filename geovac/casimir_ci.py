@@ -141,7 +141,7 @@ _add_gk(1, 0, 2, 1, 1, 112, 2187)
 _add_gk(2, 0, 2, 1, 1, 45, 512)
 
 # === R^2 (k=2): direct integrals ===
-_add_fk(2, 1, 2, 1, 2, 43, 512)
+_add_fk(2, 1, 2, 1, 2, 45, 512)  # corrected: was 43/512 (typo), verified algebraically + numerically
 
 
 def get_rk4(n1: int, l1: int, n3: int, l3: int,

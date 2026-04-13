@@ -33,6 +33,7 @@ _PK_COMPUTED = {
     5: {'A': 21.40, 'B': 18.46},   # B⁴⁺ core (Track BI, Level 3 solver, inv2)
     6: {'A': 31.37, 'B': 25.54},   # C⁵⁺ core (Track BI, Level 3 solver, inv2)
     7: {'A': 43.09, 'B': 33.05},   # N⁶⁺ core (Track BI, Level 3 solver, inv2)
+    8: {'A': 49.28, 'B': 49.78},   # O⁷⁺ core (Track BI, Level 3 solver, inv2)
     9: {'A': 71.80, 'B': 48.61},   # F⁸⁺ core (Track BI, Level 3 solver, inv2)
 }
 
@@ -132,7 +133,7 @@ _ATOM_DATA = {
         'valence_config': '2s2 2p4',
         'period': 2,
         'group_type': 'p_block',
-        'pk_source': 'z2_scaled',
+        'pk_source': 'computed',
     },
     9: {
         'structure_type': 'E',
@@ -155,6 +156,317 @@ _ATOM_DATA = {
         'period': 2,
         'group_type': 'noble_gas',
         'pk_source': 'z2_scaled',
+    },
+    # ------------------------------------------------------------------
+    # Second row (Z=11-18): frozen-core [Ne] (10 electrons)
+    # ------------------------------------------------------------------
+    11: {
+        'structure_type': 'C',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 1,
+        'Z_eff_valence': 1.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s1',
+        'period': 3,
+        'group_type': 'alkali_metal',
+        'pk_source': 'frozen_core',
+    },
+    12: {
+        'structure_type': 'D',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 2,
+        'Z_eff_valence': 2.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2',
+        'period': 3,
+        'group_type': 'alkaline_earth',
+        'pk_source': 'frozen_core',
+    },
+    13: {
+        'structure_type': 'E',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 3,
+        'Z_eff_valence': 3.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2 3p1',
+        'period': 3,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    14: {
+        'structure_type': 'E',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 4,
+        'Z_eff_valence': 4.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2 3p2',
+        'period': 3,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    15: {
+        'structure_type': 'E',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 5,
+        'Z_eff_valence': 5.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2 3p3',
+        'period': 3,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    16: {
+        'structure_type': 'E',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 6,
+        'Z_eff_valence': 6.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2 3p4',
+        'period': 3,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    17: {
+        'structure_type': 'E',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 7,
+        'Z_eff_valence': 7.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2 3p5',
+        'period': 3,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    18: {
+        'structure_type': 'B',
+        'n_core_electrons': 10,
+        'n_valence_electrons': 8,
+        'Z_eff_valence': 8.0,
+        'core_config': '1s2 2s2 2p6',
+        'valence_config': '3s2 3p6',
+        'period': 3,
+        'group_type': 'noble_gas',
+        'pk_source': 'frozen_core',
+    },
+    # ------------------------------------------------------------------
+    # Fourth row s-block (Z=19-20): frozen-core [Ar] (18 electrons)
+    # ------------------------------------------------------------------
+    19: {
+        'structure_type': 'C',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 1,
+        'Z_eff_valence': 1.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '4s1',
+        'period': 4,
+        'group_type': 'alkali_metal',
+        'pk_source': 'frozen_core',
+    },
+    20: {
+        'structure_type': 'D',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 2,
+        'Z_eff_valence': 2.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '4s2',
+        'period': 4,
+        'group_type': 'alkaline_earth',
+        'pk_source': 'frozen_core',
+    },
+    # ------------------------------------------------------------------
+    # First transition series (Z=21-30): frozen-core [Ar], type F (d-block)
+    # n_d = 3d electron count, n_s = 4s electron count
+    # Cr (Z=24) and Cu (Z=29) have anomalous configurations.
+    # ------------------------------------------------------------------
+    21: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 3,
+        'Z_eff_valence': 3.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d1 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 1, 'n_s': 2,
+    },
+    22: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 4,
+        'Z_eff_valence': 4.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d2 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 2, 'n_s': 2,
+    },
+    23: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 5,
+        'Z_eff_valence': 5.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d3 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 3, 'n_s': 2,
+    },
+    24: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 6,
+        'Z_eff_valence': 6.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d5 4s1',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 5, 'n_s': 1,
+    },
+    25: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 7,
+        'Z_eff_valence': 7.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d5 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 5, 'n_s': 2,
+    },
+    26: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 8,
+        'Z_eff_valence': 8.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d6 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 6, 'n_s': 2,
+    },
+    27: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 9,
+        'Z_eff_valence': 9.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d7 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 7, 'n_s': 2,
+    },
+    28: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 10,
+        'Z_eff_valence': 10.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d8 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 8, 'n_s': 2,
+    },
+    29: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 11,
+        'Z_eff_valence': 11.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d10 4s1',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 10, 'n_s': 1,
+    },
+    30: {
+        'structure_type': 'F',
+        'n_core_electrons': 18,
+        'n_valence_electrons': 12,
+        'Z_eff_valence': 12.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6',
+        'valence_config': '3d10 4s2',
+        'period': 4,
+        'group_type': 'd_block',
+        'pk_source': 'frozen_core',
+        'n_d': 10, 'n_s': 2,
+    },
+    # ------------------------------------------------------------------
+    # Fourth row p-block (Z=31-36): frozen-core [Ar]3d10 (28 electrons)
+    # Isostructural with second-row p-block (Z=13-18) under [Ar]3d10 core
+    # ------------------------------------------------------------------
+    31: {
+        'structure_type': 'E',
+        'n_core_electrons': 28,
+        'n_valence_electrons': 3,
+        'Z_eff_valence': 3.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
+        'valence_config': '4s2 4p1',
+        'period': 4,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    32: {
+        'structure_type': 'E',
+        'n_core_electrons': 28,
+        'n_valence_electrons': 4,
+        'Z_eff_valence': 4.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
+        'valence_config': '4s2 4p2',
+        'period': 4,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    33: {
+        'structure_type': 'E',
+        'n_core_electrons': 28,
+        'n_valence_electrons': 5,
+        'Z_eff_valence': 5.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
+        'valence_config': '4s2 4p3',
+        'period': 4,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    34: {
+        'structure_type': 'E',
+        'n_core_electrons': 28,
+        'n_valence_electrons': 6,
+        'Z_eff_valence': 6.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
+        'valence_config': '4s2 4p4',
+        'period': 4,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    35: {
+        'structure_type': 'E',
+        'n_core_electrons': 28,
+        'n_valence_electrons': 7,
+        'Z_eff_valence': 7.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
+        'valence_config': '4s2 4p5',
+        'period': 4,
+        'group_type': 'p_block',
+        'pk_source': 'frozen_core',
+    },
+    36: {
+        'structure_type': 'B',
+        'n_core_electrons': 28,
+        'n_valence_electrons': 8,
+        'Z_eff_valence': 8.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10',
+        'valence_config': '4s2 4p6',
+        'period': 4,
+        'group_type': 'noble_gas',
+        'pk_source': 'frozen_core',
     },
 }
 
@@ -295,8 +607,8 @@ def classify_atom(Z: int) -> AtomClassification:
     if Z < 1:
         raise ValueError(f"Nuclear charge Z must be >= 1, got {Z}")
 
-    # Unsupported atoms (Z > 10)
-    if Z > 10:
+    # Unsupported atoms (Z > 36)
+    if Z > 36:
         N = Z  # neutral atom
         nu = max(N - 2, 0)
         mu_free = 2.0 * nu ** 2 if nu > 0 else 0.0
@@ -317,9 +629,9 @@ def classify_atom(Z: int) -> AtomClassification:
             group_type='unknown',
             supported=False,
             support_note=(
-                f'Z={Z} is beyond the first row (Z=1-10). '
-                'Second-row and heavier atoms require additional '
-                'core shells and PK parameterization not yet implemented.'
+                f'Z={Z} is beyond the fourth-row p-block (Z=1-36). '
+                'Heavier atoms require additional core shells not yet '
+                'implemented in the atomic classifier.'
             ),
         )
 
@@ -330,7 +642,7 @@ def classify_atom(Z: int) -> AtomClassification:
 
     # Determine PK parameters
     pk_source = data['pk_source']
-    if pk_source == 'none':
+    if pk_source in ('none', 'frozen_core'):
         pk_params = None
     elif pk_source == 'computed':
         pk_params = dict(_PK_COMPUTED[Z])

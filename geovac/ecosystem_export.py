@@ -98,20 +98,25 @@ class GeoVacHamiltonian:
         self._metadata = metadata or {}
         self._h1_pk = h1_pk
         self._qubit_op_full = qubit_op_full
+        # Cached derived quantities (computed lazily)
+        self._cached_n_qubits: Optional[int] = None
+        self._cached_one_norm: Optional[float] = None
 
     # ------------------------------------------------------------------
-    # Properties
+    # Properties (cached after first access)
     # ------------------------------------------------------------------
 
     @property
     def n_qubits(self) -> int:
         """Number of qubits in the encoding."""
-        max_q = -1
-        for term in self._qubit_op.terms:
-            for q, _ in term:
-                if q > max_q:
-                    max_q = q
-        return max_q + 1 if max_q >= 0 else 0
+        if self._cached_n_qubits is None:
+            max_q = -1
+            for term in self._qubit_op.terms:
+                for q, _ in term:
+                    if q > max_q:
+                        max_q = q
+            self._cached_n_qubits = max_q + 1 if max_q >= 0 else 0
+        return self._cached_n_qubits
 
     @property
     def n_terms(self) -> int:
@@ -121,7 +126,11 @@ class GeoVacHamiltonian:
     @property
     def one_norm(self) -> float:
         """Pauli 1-norm of the electronic Hamiltonian (PK excluded)."""
-        return sum(abs(c) for c in self._qubit_op.terms.values())
+        if self._cached_one_norm is None:
+            self._cached_one_norm = sum(
+                abs(c) for c in self._qubit_op.terms.values()
+            )
+        return self._cached_one_norm
 
     @property
     def one_norm_full(self) -> float:
@@ -325,42 +334,67 @@ def _openfermion_to_pennylane(qubit_op: Any) -> Any:
 # Convenience entry point
 # ---------------------------------------------------------------------------
 
+# Maps lowercase key -> canonical name for dispatch
 _SYSTEM_REGISTRY: Dict[str, str] = {
-    'lih': 'LiH',
-    'beh2': 'BeH2',
-    'h2o': 'H2O',
-    'hf': 'HF',
-    'nh3': 'NH3',
-    'ch4': 'CH4',
-    'he': 'He',
-    'h2': 'H2',
+    # Atomic / diatomic
+    'he': 'He', 'h2': 'H2',
+    # First-row main-group hydrides
+    'lih': 'LiH', 'beh2': 'BeH2', 'ch4': 'CH4',
+    'nh3': 'NH3', 'h2o': 'H2O', 'hf': 'HF',
+    # Second-row main-group hydrides ([Ne] frozen core)
+    'nah': 'NaH', 'mgh2': 'MgH2', 'sih4': 'SiH4',
+    'ph3': 'PH3', 'h2s': 'H2S', 'hcl': 'HCl',
+    # Third-row s-block hydrides ([Ar] frozen core)
+    'kh': 'KH', 'cah2': 'CaH2',
+    # Third-row p-block hydrides ([Ar]3d10 frozen core)
+    'geh4': 'GeH4', 'ash3': 'AsH3', 'h2se': 'H2Se', 'hbr': 'HBr',
+    # Transition metal hydrides (Z=21-30)
+    'sch': 'ScH', 'tih': 'TiH', 'vh': 'VH', 'crh': 'CrH', 'mnh': 'MnH',
+    'feh': 'FeH', 'coh': 'CoH', 'nih': 'NiH', 'cuh': 'CuH', 'znh': 'ZnH',
+}
+
+# Canonical name -> Z for main-group hydrides (used by _build_hydride)
+_HYDRIDE_Z: Dict[str, int] = {
+    'LiH': 3, 'BeH2': 4, 'CH4': 6, 'NH3': 7, 'H2O': 8, 'HF': 9,
+    'NaH': 11, 'MgH2': 12, 'SiH4': 14, 'PH3': 15, 'H2S': 16, 'HCl': 17,
+    'KH': 19, 'CaH2': 20,
+    'GeH4': 32, 'AsH3': 33, 'H2Se': 34, 'HBr': 35,
+}
+
+# Canonical name -> Z for transition metal hydrides
+_TM_HYDRIDE_Z: Dict[str, int] = {
+    'ScH': 21, 'TiH': 22, 'VH': 23, 'CrH': 24, 'MnH': 25,
+    'FeH': 26, 'CoH': 27, 'NiH': 28, 'CuH': 29, 'ZnH': 30,
 }
 
 
 def hamiltonian(
     system: str,
     R: Optional[float] = None,
-    l_max: int = 2,
     max_n: int = 2,
     verbose: bool = False,
+    core_method: str = 'pk',
 ) -> GeoVacHamiltonian:
     """
-    Build a GeoVac composed/atomic qubit Hamiltonian and return as a
-    ``GeoVacHamiltonian`` object with export methods.
+    Build a GeoVac qubit Hamiltonian and return as a
+    ``GeoVacHamiltonian`` object with ecosystem export methods.
+
+    Supports 28 molecular systems: 14 main-group hydrides (first/second/
+    third row), 10 transition metal hydrides, plus He and H2.
 
     Parameters
     ----------
     system : str
-        Chemical system: 'LiH', 'BeH2', 'H2O', 'He', or 'H2'.
-        Case-insensitive.
+        Chemical system name (case-insensitive). Examples:
+        'LiH', 'BeH2', 'H2O', 'HF', 'NH3', 'CH4',
+        'NaH', 'MgH2', 'SiH4', 'PH3', 'H2S', 'HCl',
+        'KH', 'CaH2', 'GeH4', 'AsH3', 'H2Se', 'HBr',
+        'ScH', ..., 'ZnH', 'He', 'H2'.
     R : float, optional
-        Internuclear distance in bohr.  Uses experimental equilibrium
-        defaults if not specified (LiH: 3.015, BeH2: 2.502, H2O: 1.809).
-    l_max : int
-        Maximum angular momentum for composed systems (default 2).
-        For atomic systems (He), this controls max_n.
+        Internuclear distance in bohr. Uses experimental equilibrium
+        default if not specified.
     max_n : int
-        Maximum principal quantum number for atomic / H2 systems.
+        Maximum principal quantum number (default 2).
     verbose : bool
         Print build progress.
 
@@ -375,21 +409,15 @@ def hamiltonian(
     if canonical is None:
         raise ValueError(
             f"Unknown system {system!r}. "
-            f"Supported: {list(_SYSTEM_REGISTRY.values())}"
+            f"Supported: {sorted(set(_SYSTEM_REGISTRY.values()))}"
         )
 
-    if canonical == 'LiH':
-        return _build_lih(R=R, l_max=l_max, verbose=verbose)
-    elif canonical == 'BeH2':
-        return _build_beh2(R=R, l_max=l_max, verbose=verbose)
-    elif canonical == 'H2O':
-        return _build_h2o(R=R, l_max=l_max, verbose=verbose)
-    elif canonical == 'HF':
-        return _build_hf(R=R, l_max=l_max, verbose=verbose)
-    elif canonical == 'NH3':
-        return _build_nh3(R=R, l_max=l_max, verbose=verbose)
-    elif canonical == 'CH4':
-        return _build_ch4(R=R, l_max=l_max, verbose=verbose)
+    if canonical in _HYDRIDE_Z:
+        return _build_hydride(_HYDRIDE_Z[canonical], R=R, max_n=max_n,
+                              verbose=verbose, core_method=core_method)
+    elif canonical in _TM_HYDRIDE_Z:
+        return _build_tm_hydride(_TM_HYDRIDE_Z[canonical], R=R,
+                                 verbose=verbose)
     elif canonical == 'He':
         return _build_he(max_n=max_n, verbose=verbose)
     elif canonical == 'H2':
@@ -399,202 +427,75 @@ def hamiltonian(
 
 
 # ---------------------------------------------------------------------------
-# Per-system builders (thin wrappers around existing pipeline)
+# Unified builder for main-group hydrides (spec-driven)
 # ---------------------------------------------------------------------------
 
-def _build_lih(
+def _build_hydride(
+    Z: int,
     R: Optional[float] = None,
-    l_max: int = 2,
+    max_n: int = 2,
     verbose: bool = False,
+    core_method: str = 'pk',
 ) -> GeoVacHamiltonian:
-    """Build LiH composed Hamiltonian (PK separated by default)."""
-    from geovac.composed_qubit import build_composed_lih
+    """Build any main-group hydride via hydride_spec + general builder."""
+    from geovac.molecular_spec import hydride_spec
+    from geovac.composed_qubit import build_composed_hamiltonian
 
-    if R is None:
-        R = 3.015
-    # Electronic-only Hamiltonian (PK computed but not included)
-    result = build_composed_lih(
-        max_n_core=l_max, max_n_val=l_max, R=R,
-        include_pk=True, pk_in_hamiltonian=False, verbose=verbose,
+    spec = hydride_spec(Z, R=R, max_n=max_n, core_method=core_method)
+
+    # For PK: build without PK in Hamiltonian (partitioned classically)
+    # For downfolded: include in Hamiltonian (it IS the effective potential)
+    include_in_ham = (core_method == 'downfolded')
+    result = build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=include_in_ham, verbose=verbose,
     )
-    # Full Hamiltonian (for one_norm_full reference)
-    result_full = build_composed_lih(
-        max_n_core=l_max, max_n_val=l_max, R=R,
-        include_pk=True, pk_in_hamiltonian=True, verbose=False,
-    )
+
+    h1_pk = result.get('h1_pk')
+
     meta = {
-        'system': 'LiH',
+        'system': spec.name,
         'R_bohr': R,
-        'l_max': l_max,
-        'M': result.get('M'),
-        'Q': result.get('Q'),
-        'N_pauli': result.get('N_pauli'),
+        'max_n': max_n,
+        'M': result['M'],
+        'Q': result['Q'],
+        'N_pauli': result['N_pauli'],
     }
     return GeoVacHamiltonian(
         result['qubit_op'], metadata=meta,
-        h1_pk=result['h1_pk'], qubit_op_full=result_full['qubit_op'],
+        h1_pk=h1_pk,
     )
 
 
-def _build_beh2(
+# ---------------------------------------------------------------------------
+# TM hydride builder (spec-driven)
+# ---------------------------------------------------------------------------
+
+def _build_tm_hydride(
+    Z: int,
     R: Optional[float] = None,
-    l_max: int = 2,
     verbose: bool = False,
 ) -> GeoVacHamiltonian:
-    """Build BeH2 composed Hamiltonian (PK separated by default)."""
-    from geovac.composed_qubit import build_composed_beh2
+    """Build a transition metal hydride (Z=21-30) via spec + general builder."""
+    from geovac.molecular_spec import transition_metal_hydride_spec
+    from geovac.composed_qubit import build_composed_hamiltonian
 
-    if R is None:
-        R = 2.502
-    result = build_composed_beh2(
-        max_n_core=l_max, max_n_val=l_max, R=R,
-        include_pk=True, pk_in_hamiltonian=False, verbose=verbose,
-    )
-    result_full = build_composed_beh2(
-        max_n_core=l_max, max_n_val=l_max, R=R,
-        include_pk=True, pk_in_hamiltonian=True, verbose=False,
+    spec = transition_metal_hydride_spec(Z, R=R)
+    result = build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=False, verbose=verbose,
     )
     meta = {
-        'system': 'BeH2',
+        'system': spec.name,
         'R_bohr': R,
-        'l_max': l_max,
-        'M': result.get('M'),
-        'Q': result.get('Q'),
-        'N_pauli': result.get('N_pauli'),
+        'M': result['M'],
+        'Q': result['Q'],
+        'N_pauli': result['N_pauli'],
     }
-    return GeoVacHamiltonian(
-        result['qubit_op'], metadata=meta,
-        h1_pk=result['h1_pk'], qubit_op_full=result_full['qubit_op'],
-    )
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
 
 
-def _build_h2o(
-    R: Optional[float] = None,
-    l_max: int = 2,
-    verbose: bool = False,
-) -> GeoVacHamiltonian:
-    """Build H2O composed Hamiltonian (PK separated by default)."""
-    from geovac.composed_qubit import build_composed_h2o
-
-    if R is None:
-        R = 1.809
-    result = build_composed_h2o(
-        max_n_core=l_max, max_n_val=l_max, R_OH=R,
-        include_pk=True, pk_in_hamiltonian=False, verbose=verbose,
-    )
-    result_full = build_composed_h2o(
-        max_n_core=l_max, max_n_val=l_max, R_OH=R,
-        include_pk=True, pk_in_hamiltonian=True, verbose=False,
-    )
-    meta = {
-        'system': 'H2O',
-        'R_bohr': R,
-        'l_max': l_max,
-        'M': result.get('M'),
-        'Q': result.get('Q'),
-        'N_pauli': result.get('N_pauli'),
-    }
-    return GeoVacHamiltonian(
-        result['qubit_op'], metadata=meta,
-        h1_pk=result['h1_pk'], qubit_op_full=result_full['qubit_op'],
-    )
-
-
-def _build_hf(
-    R: Optional[float] = None,
-    l_max: int = 2,
-    verbose: bool = False,
-) -> GeoVacHamiltonian:
-    """Build HF composed Hamiltonian (PK separated by default)."""
-    from geovac.composed_qubit import build_composed_hf
-
-    if R is None:
-        R = 1.733
-    result = build_composed_hf(
-        max_n_core=l_max, max_n_val=l_max, R=R,
-        include_pk=True, pk_in_hamiltonian=False, verbose=verbose,
-    )
-    result_full = build_composed_hf(
-        max_n_core=l_max, max_n_val=l_max, R=R,
-        include_pk=True, pk_in_hamiltonian=True, verbose=False,
-    )
-    meta = {
-        'system': 'HF',
-        'R_bohr': R,
-        'l_max': l_max,
-        'M': result.get('M'),
-        'Q': result.get('Q'),
-        'N_pauli': result.get('N_pauli'),
-    }
-    return GeoVacHamiltonian(
-        result['qubit_op'], metadata=meta,
-        h1_pk=result['h1_pk'], qubit_op_full=result_full['qubit_op'],
-    )
-
-
-def _build_nh3(
-    R: Optional[float] = None,
-    l_max: int = 2,
-    verbose: bool = False,
-) -> GeoVacHamiltonian:
-    """Build NH3 composed Hamiltonian (PK separated by default)."""
-    from geovac.composed_qubit import build_composed_nh3
-
-    if R is None:
-        R = 1.912
-    result = build_composed_nh3(
-        max_n_core=l_max, max_n_val=l_max, R_NH=R,
-        include_pk=True, pk_in_hamiltonian=False, verbose=verbose,
-    )
-    result_full = build_composed_nh3(
-        max_n_core=l_max, max_n_val=l_max, R_NH=R,
-        include_pk=True, pk_in_hamiltonian=True, verbose=False,
-    )
-    meta = {
-        'system': 'NH3',
-        'R_bohr': R,
-        'l_max': l_max,
-        'M': result.get('M'),
-        'Q': result.get('Q'),
-        'N_pauli': result.get('N_pauli'),
-    }
-    return GeoVacHamiltonian(
-        result['qubit_op'], metadata=meta,
-        h1_pk=result['h1_pk'], qubit_op_full=result_full['qubit_op'],
-    )
-
-
-def _build_ch4(
-    R: Optional[float] = None,
-    l_max: int = 2,
-    verbose: bool = False,
-) -> GeoVacHamiltonian:
-    """Build CH4 composed Hamiltonian (PK separated by default)."""
-    from geovac.composed_qubit import build_composed_ch4
-
-    if R is None:
-        R = 2.050
-    result = build_composed_ch4(
-        max_n_core=l_max, max_n_val=l_max, R_CH=R,
-        include_pk=True, pk_in_hamiltonian=False, verbose=verbose,
-    )
-    result_full = build_composed_ch4(
-        max_n_core=l_max, max_n_val=l_max, R_CH=R,
-        include_pk=True, pk_in_hamiltonian=True, verbose=False,
-    )
-    meta = {
-        'system': 'CH4',
-        'R_bohr': R,
-        'l_max': l_max,
-        'M': result.get('M'),
-        'Q': result.get('Q'),
-        'N_pauli': result.get('N_pauli'),
-    }
-    return GeoVacHamiltonian(
-        result['qubit_op'], metadata=meta,
-        h1_pk=result['h1_pk'], qubit_op_full=result_full['qubit_op'],
-    )
-
+# ---------------------------------------------------------------------------
+# He atomic builder
+# ---------------------------------------------------------------------------
 
 def _build_he(
     max_n: int = 2,
@@ -622,49 +523,37 @@ def _build_he(
     return GeoVacHamiltonian(qubit_op, metadata=meta)
 
 
+# ---------------------------------------------------------------------------
+# H2 builder (bond-pair encoding)
+# ---------------------------------------------------------------------------
+
 def _build_h2(
     max_n: int = 2,
     R: Optional[float] = None,
-    basis: Optional[str] = None,
     verbose: bool = False,
 ) -> GeoVacHamiltonian:
-    """
-    Build H2 qubit Hamiltonian.
-
-    By default, uses the GeoVac bond-pair encoding (single-center
-    hydrogenic basis at Z_eff=1). Pass ``basis='sto-3g'`` to fall back
-    to the Gaussian STO-3G reference.
-
-    Parameters
-    ----------
-    max_n : int
-        Maximum principal quantum number for bond-pair encoding.
-    R : float or None
-        Internuclear distance in bohr (default 1.4).
-    basis : str or None
-        If 'sto-3g', use Gaussian reference instead of bond-pair.
-    verbose : bool
-        Print progress.
-    """
-    if basis is not None and basis.lower().replace('-', '') == 'sto3g':
-        # Gaussian STO-3G fallback
-        from geovac.gaussian_reference import h2_sto3g, build_qubit_hamiltonian
-        sys_data = h2_sto3g()
-        _, qubit_op, _ = build_qubit_hamiltonian(sys_data)
-        meta = {
-            'system': 'H2',
-            'basis': 'STO-3G',
-            'R_bohr': 1.4,
-            'Q': 4,
-        }
-        return GeoVacHamiltonian(qubit_op, metadata=meta)
-
-    # GeoVac bond-pair encoding
-    from geovac.composed_qubit import build_h2_bond_pair
+    """Build H2 qubit Hamiltonian using bond-pair encoding (Z_eff=1)."""
+    from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+    from geovac.composed_qubit import build_composed_hamiltonian
 
     if R is None:
         R = 1.4
-    result = build_h2_bond_pair(max_n=max_n, R=R, verbose=verbose)
+    # H2 bond-pair: single bond block with Z_eff=1, 2 electrons
+    spec = MolecularSpec(
+        name='H2',
+        blocks=[
+            OrbitalBlock(
+                label='H2_bond',
+                block_type='bond_pair',
+                Z_center=1.0,
+                n_electrons=2,
+                max_n=max_n,
+            ),
+        ],
+        nuclear_repulsion_constant=1.0 / R,
+        description=f'H2 bond-pair encoding at R={R:.3f} bohr',
+    )
+    result = build_composed_hamiltonian(spec, verbose=verbose)
     meta = {
         'system': 'H2',
         'encoding': 'bond-pair',
