@@ -13,6 +13,8 @@ Date: March 2026
 import warnings
 
 import pytest
+
+pytestmark = pytest.mark.slow
 import numpy as np
 from scipy.sparse.linalg import eigsh
 

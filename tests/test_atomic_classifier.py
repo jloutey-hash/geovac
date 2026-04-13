@@ -299,18 +299,30 @@ class TestEdgeCases:
         with pytest.raises(ValueError, match="Z must be >= 1"):
             classify_atom(-1)
 
-    @pytest.mark.parametrize("Z", [11, 12, 15, 20, 50])
+    @pytest.mark.parametrize("Z", [50])
     def test_unsupported_z(self, Z: int) -> None:
         c = classify_atom(Z)
         assert c.supported is False
         assert c.support_note != ''
         assert c.pk_params is None
 
+    @pytest.mark.parametrize("Z", [21, 25, 30])
+    def test_transition_metal_raises(self, Z: int) -> None:
+        """Transition metals (Z=21-30) raise NotImplementedError."""
+        with pytest.raises(NotImplementedError, match="Transition metals"):
+            classify_atom(Z)
+
+    def test_third_row_supported(self) -> None:
+        """Z=19-20 and Z=31-36 are now supported (v2.2.0)."""
+        for Z in [19, 20, 31, 32, 33, 34, 35, 36]:
+            c = classify_atom(Z)
+            assert c.supported is True
+            assert c.period == 4
+
     def test_unsupported_has_correct_N(self) -> None:
-        c = classify_atom(11)
-        assert c.N_electrons == 11
-        assert c.nu == 9  # 11 - 2
-        assert c.mu_free == pytest.approx(2.0 * 81)  # 2 * 9^2
+        c = classify_atom(50)
+        assert c.N_electrons == 50
+        assert c.supported is False
 
     def test_all_supported_atoms_return_true(self) -> None:
         for Z in range(1, 11):

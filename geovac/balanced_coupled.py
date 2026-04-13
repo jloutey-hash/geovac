@@ -483,7 +483,7 @@ def build_balanced_hamiltonian(
 
     # Get sub-block geometry and nuclei
     sub_blocks = _get_block_geometry(spec)
-    if nuclei is None and spec.nuclei:
+    if nuclei is None and getattr(spec, 'nuclei', None):
         # Multi-center path: nuclei stored in spec
         nuclei_list = spec.nuclei
     elif nuclei is None:

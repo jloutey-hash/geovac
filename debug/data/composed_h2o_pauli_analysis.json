@@ -1,148 +1,49 @@
 {
-  "lih_data": [
-    {
-      "max_n": 1,
-      "M": 3,
-      "Q": 6,
-      "N_pauli": 10,
-      "ERI_density": 0.037037037037037035,
-      "wall_time_s": 0.1542020000051707
-    },
-    {
-      "max_n": 2,
-      "M": 15,
-      "Q": 30,
-      "N_pauli": 334,
-      "ERI_density": 0.003851851851851852,
-      "wall_time_s": 1.5602144000586122
-    },
-    {
-      "max_n": 3,
-      "M": 42,
-      "Q": 84,
-      "N_pauli": 7879,
-      "ERI_density": 0.0014384438582689312,
-      "wall_time_s": 16.80809250008315
-    }
-  ],
-  "beh2_data": [
-    {
-      "max_n": 1,
-      "M": 5,
-      "Q": 10,
-      "N_pauli": 16,
-      "ERI_density": 0.008,
-      "wall_time_s": 0.14994210004806519
-    },
-    {
-      "max_n": 2,
-      "M": 25,
-      "Q": 50,
-      "N_pauli": 556,
-      "ERI_density": 0.000832,
-      "wall_time_s": 1.8503214998636395
-    },
-    {
-      "max_n": 3,
-      "M": 70,
-      "Q": 140,
-      "N_pauli": 13131,
-      "ERI_density": 0.00031070387338608916,
-      "wall_time_s": 34.269848299911246
-    }
-  ],
-  "h2o_data": [
-    {
-      "max_n": 1,
-      "M": 7,
-      "Q": 14,
-      "N_pauli": 22,
-      "ERI_density": 0.0029154518950437317,
-      "wall_time_s": 0.14288009982556105
-    },
-    {
-      "max_n": 2,
-      "M": 35,
-      "Q": 70,
-      "N_pauli": 778,
-      "ERI_density": 0.0003032069970845481,
-      "wall_time_s": 2.4430019001010805
-    },
-    {
-      "max_n": 3,
-      "M": 98,
-      "Q": 196,
-      "N_pauli": 18383,
-      "ERI_density": 0.00011323027455761266,
-      "wall_time_s": 69.19489630009048
-    }
-  ],
-  "lih_fit": {
-    "alpha": 2.4966573097050353,
-    "a": 0.09887876016729968,
-    "R_squared": 0.9907970168978135
-  },
-  "beh2_fit": {
-    "alpha": 2.5129126554052634,
-    "a": 0.04272953152731881,
-    "R_squared": 0.991384144985593
-  },
-  "h2o_fit": {
-    "alpha": 2.520088676261444,
-    "a": 0.024792769628067007,
-    "R_squared": 0.9916354205845496
-  },
-  "gaussian_lih_published": {
-    "sto-3g": {
-      "Q": 10,
-      "N_pauli": 276,
-      "note": "2-qubit reduction from 12 -> 10 qubits"
-    },
-    "6-31g": {
-      "Q": 20,
-      "N_pauli": 5851,
-      "note": "2-qubit reduction"
-    },
-    "cc-pvdz": {
-      "Q": 36,
-      "N_pauli": 63519,
-      "note": "2-qubit reduction"
-    }
-  },
-  "gaussian_h2o_published": {
-    "sto-3g": {
-      "Q": 12,
-      "N_pauli": 551,
-      "note": "2-qubit reduction from 14 -> 12 qubits"
-    },
-    "6-31g": {
-      "Q": 24,
-      "N_pauli": 8921,
-      "note": "2-qubit reduction"
-    },
-    "cc-pvdz": {
-      "Q": 46,
-      "N_pauli": 107382,
-      "note": "2-qubit reduction"
-    }
-  },
-  "gaussian_lih_fit": {
-    "alpha": 4.25062041781546,
-    "C": 0.016032288582462258,
-    "R_squared": 0.9994491808864672,
-    "formula": "N_pauli = 0.0160 * Q^4.2506",
-    "n_points": 3,
-    "source": "D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati, S. Raman, A. Mezzacapo, S. Mostame, \"Refining resource estimation for the quantum computation of molecular spectra through Trotter error analysis,\" Quantum (2025). arXiv:2311.03719.",
-    "note": "JW encoding with 2-qubit reduction"
-  },
-  "gaussian_h2o_fit": {
-    "alpha": 3.9247175082792545,
-    "C": 0.032714505903491294,
-    "R_squared": 0.9997993310320155,
-    "formula": "N_pauli = 0.0327 * Q^3.9247",
-    "n_points": 3,
-    "source": "D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati, S. Raman, A. Mezzacapo, S. Mostame, \"Refining resource estimation for the quantum computation of molecular spectra through Trotter error analysis,\" Quantum (2025). arXiv:2311.03719.",
-    "note": "JW encoding with 2-qubit reduction"
-  },
-  "reference": "D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati, S. Raman, A. Mezzacapo, S. Mostame, \"Refining resource estimation for the quantum computation of molecular spectra through Trotter error analysis,\" Quantum (2025). arXiv:2311.03719."
+  "M": 35,
+  "Q": 70,
+  "N_pauli": 778,
+  "M_core": 5,
+  "M_bond": 10,
+  "M_bond_o": 5,
+  "M_bond_h": 5,
+  "M_lone": 5,
+  "n_blocks": 7,
+  "ERI_density_total": 0.0003032069970845481,
+  "ERI_density_core": 0.104,
+  "n_eri_core": 65,
+  "n_eri_val_o": 65,
+  "n_eri_val_h": 65,
+  "n_eri_val_o_total": 260,
+  "n_eri_val_h_total": 130,
+  "n_eri_total": 455,
+  "nuclear_repulsion": -52.11459410533607,
+  "V_OH": 8.844665561083472,
+  "V_HH": 0.349562973842123,
+  "V_NN": 9.194228534925594,
+  "V_cross_nuc": -2.2111663902616647,
+  "E_core": -59.09765625,
+  "R_OH_bohr": 1.809,
+  "R_HH_bohr": 2.860714877805225,
+  "angle_HOH_deg": 104.5,
+  "max_n_core": 2,
+  "max_n_val": 2,
+  "Z_O": 8,
+  "Z_H": 1,
+  "Z_eff_val": 6,
+  "wall_time_s": 1.7478526999984751,
+  "include_pk": true,
+  "pk_in_hamiltonian": true,
+  "A_pk": 49.28,
+  "B_pk": 49.78,
+  "n_pk_nonzero": 28,
+  "approximations": [
+    "Approach A: independent blocks (7), no cross-block ERIs",
+    "PK in quantum Hamiltonian",
+    "PK on bond-H skipped (two-center, negligible at R~1.8 bohr)",
+    "Cross-center nuclear attraction skipped",
+    "Cross-block ERI = 0 (pseudopotential + Approach A)",
+    "E_core = -59.0977 Ha (O2+ He-like variational estimate: -(Z-5/16)\u00b2)",
+    "Valence Z_eff = 6 (constant screening)",
+    "4 O-side valence blocks share identical R^k integrals (computed once)"
+  ]
 }

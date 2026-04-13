@@ -1,189 +1,333 @@
 """
-Tests for Shibuya-Wulfman nuclear attraction integrals.
+Tests for Shibuya-Wulfman two-center nuclear attraction integrals.
 
-Six tests validating the SW coupling module:
-    1. R-dependence: coupling decreases with R for n=1
-    2. Dissociation limit: V^SW -> 0 at R=100
-    3. Sign convention: V^SW is negative (attractive)
-    4. Magnitude: n=1 diagonal in [-0.7, -0.3] Ha at R=3.015
-    5. D-matrix factorization: V^SW = -(Z_B/p0) * D * f(n, gamma)
-    6. Matrix symmetry: V_AB = V_AB^T (Hermitian)
+Track CD Phase 1A: validates the multipole expansion implementation
+for cross-center V_ne matrix elements.
 """
 
 import numpy as np
 import pytest
 
 from geovac.shibuya_wulfman import (
-    sw_form_factor,
-    sw_nuclear_attraction,
-    sw_coupling_matrix,
-    sw_coupling_matrix_AB,
+    _angular_coefficient,
+    _radial_split_integral,
+    compute_cross_center_vne,
+    compute_cross_center_vne_element,
+    convergence_study,
 )
-from geovac.wigner_so4 import bond_angle, d_matrix_block
+from geovac.composed_qubit import _enumerate_states
 
 
-# LiH parameters
-Z_A = 3.0  # Li
-Z_B = 1.0  # H
-R_EQ = 3.015  # Experimental equilibrium distance (Bohr)
+# ---------------------------------------------------------------------------
+# Angular coefficient tests
+# ---------------------------------------------------------------------------
+
+class TestAngularCoefficient:
+    """Verify Gaunt selection rules and angular coefficient values."""
+
+    def test_m_diagonal(self) -> None:
+        """m1 != m2 must give zero (z-axis potential, M=0)."""
+        assert _angular_coefficient(1, 1, 1, 0, 1) == 0.0
+        assert _angular_coefficient(1, -1, 1, 0, 1) == 0.0
+        assert _angular_coefficient(0, 0, 1, 1, 1) == 0.0
+
+    def test_parity_rule(self) -> None:
+        """l1 + L + l2 must be even."""
+        assert _angular_coefficient(0, 0, 0, 0, 1) == 0.0
+        assert _angular_coefficient(1, 0, 0, 0, 0) == 0.0
+
+    def test_triangle_inequality(self) -> None:
+        """L must satisfy |l1-l2| <= L <= l1+l2."""
+        assert _angular_coefficient(0, 0, 0, 0, 2) == 0.0
+        assert _angular_coefficient(1, 0, 1, 0, 3) == 0.0
+
+    def test_ss_L0(self) -> None:
+        """For s-s (l=l'=0), L=0 coefficient should be exactly 1.0."""
+        assert _angular_coefficient(0, 0, 0, 0, 0) == pytest.approx(1.0)
+
+    def test_sp_L1(self) -> None:
+        """For s-p (l=0, l'=1), only L=1 is allowed and nonzero."""
+        assert _angular_coefficient(0, 0, 1, 0, 0) == 0.0
+        val = _angular_coefficient(0, 0, 1, 0, 1)
+        assert abs(val) > 0.1
+
+    def test_pp_L0_and_L2(self) -> None:
+        """For p-p (l=l'=1), L=0 and L=2 are allowed."""
+        assert abs(_angular_coefficient(1, 0, 1, 0, 0)) > 0.1
+        assert abs(_angular_coefficient(1, 0, 1, 0, 2)) > 0.1
+        assert _angular_coefficient(1, 0, 1, 0, 1) == 0.0
 
 
-def _default_p0(Z_A: float, Z_B: float) -> float:
-    """Default momentum scale: sqrt(Z_A^2 + Z_B^2)."""
-    return np.sqrt(Z_A**2 + Z_B**2)
+# ---------------------------------------------------------------------------
+# Analytical validation tests
+# ---------------------------------------------------------------------------
+
+class TestAnalyticalValidation:
+    """Validate against known analytical results."""
+
+    def test_1s_core_z3(self) -> None:
+        """Core 1s-1s: <1s_Z=3|-1/|r-R||1s_Z=3> vs analytical formula."""
+        Z_orb, Z_nuc, R = 3.0, 1.0, 3.015
+        val = compute_cross_center_vne_element(
+            Z_orb, 1, 0, 0, 1, 0, 0, Z_nuc, R, L_max=2,
+        )
+        exact = -Z_nuc * (1.0 / R) * (1.0 - (1.0 + Z_orb * R) * np.exp(-2 * Z_orb * R))
+        assert val == pytest.approx(exact, rel=1e-12)
+
+    def test_1s_valence_z1(self) -> None:
+        """Valence 1s-1s: Z=1 orbitals feeling Z_nuc=1."""
+        Z_orb, Z_nuc, R = 1.0, 1.0, 3.015
+        val = compute_cross_center_vne_element(
+            Z_orb, 1, 0, 0, 1, 0, 0, Z_nuc, R, L_max=2,
+        )
+        exact = -Z_nuc * (1.0 / R) * (1.0 - (1.0 + Z_orb * R) * np.exp(-2 * Z_orb * R))
+        assert val == pytest.approx(exact, rel=1e-12)
+
+    def test_h_side_feeling_li(self) -> None:
+        """H-side 1s-1s: Z_orb=1 feeling Z_nuc=3."""
+        Z_orb, Z_nuc, R = 1.0, 3.0, 3.015
+        val = compute_cross_center_vne_element(
+            Z_orb, 1, 0, 0, 1, 0, 0, Z_nuc, R, L_max=2,
+        )
+        exact = -Z_nuc * (1.0 / R) * (1.0 - (1.0 + Z_orb * R) * np.exp(-2 * Z_orb * R))
+        assert val == pytest.approx(exact, rel=1e-12)
+
+    def test_large_r_point_charge(self) -> None:
+        """At large R, V_ne -> -Z_B/R."""
+        val = compute_cross_center_vne_element(
+            1.0, 1, 0, 0, 1, 0, 0, 1.0, 30.0, L_max=2, n_grid=4000,
+        )
+        assert val == pytest.approx(-1.0 / 30.0, rel=0.01)
 
 
-class TestSWRDependence:
-    """Test 1: R-dependence — coupling decreases with R for n=1."""
+# ---------------------------------------------------------------------------
+# Matrix property tests
+# ---------------------------------------------------------------------------
 
-    def test_n1_diagonal_decreases_with_R(self) -> None:
-        """The 1s-1s SW element magnitude should decrease as R increases."""
-        p0 = _default_p0(Z_A, Z_B)
-        R_values = [2.0, 3.0, 5.0, 8.0, 15.0]
-        magnitudes = []
-        for R in R_values:
-            gamma = bond_angle(R, p0)
-            v = sw_nuclear_attraction(1, 0, 0, 1, 0, 0, Z_B, p0, gamma)
-            magnitudes.append(abs(v))
+class TestMatrixProperties:
+    """Verify structural properties of the V_ne matrix."""
 
-        # Each subsequent magnitude should be smaller
-        for i in range(len(magnitudes) - 1):
-            assert magnitudes[i] > magnitudes[i + 1], (
-                f"|V(R={R_values[i]})| = {magnitudes[i]:.6f} should be > "
-                f"|V(R={R_values[i+1]})| = {magnitudes[i+1]:.6f}"
+    def test_hermiticity(self) -> None:
+        """V_ne matrix must be symmetric."""
+        states = _enumerate_states(2)
+        vne = compute_cross_center_vne(3.0, states, 1.0, 3.015, L_max=2, n_grid=4000)
+        np.testing.assert_allclose(vne, vne.T, atol=1e-14)
+
+    def test_m_diagonal_matrix(self) -> None:
+        """All off-m-diagonal elements must be zero."""
+        states = _enumerate_states(2)
+        vne = compute_cross_center_vne(1.0, states, 1.0, 3.015, L_max=2, n_grid=4000)
+        for i, (_, _, m1) in enumerate(states):
+            for j, (_, _, m2) in enumerate(states):
+                if m1 != m2:
+                    assert abs(vne[i, j]) < 1e-14
+
+    def test_all_diagonal_negative(self) -> None:
+        """Diagonal V_ne elements must be negative (attractive)."""
+        states = _enumerate_states(2)
+        vne = compute_cross_center_vne(1.0, states, 1.0, 3.015, L_max=2, n_grid=4000)
+        for i in range(len(states)):
+            assert vne[i, i] < 0
+
+    def test_nonzero_count_nmax2(self) -> None:
+        """For n_max=2 (5 orbitals), check nonzero element count."""
+        states = _enumerate_states(2)
+        vne = compute_cross_center_vne(3.0, states, 1.0, 3.015, L_max=2, n_grid=4000)
+        nz = np.count_nonzero(np.abs(vne) > 1e-10)
+        assert 8 <= nz <= 15
+
+
+# ---------------------------------------------------------------------------
+# Convergence tests
+# ---------------------------------------------------------------------------
+
+class TestConvergence:
+    """Verify L_max convergence properties."""
+
+    def test_ss_converges_at_L0(self) -> None:
+        """s-s integrals need only L=0."""
+        conv = convergence_study(3.0, 1, 0, 0, 1, 0, 0, 1.0, 3.015, range(4), n_grid=4000)
+        vals = list(conv.values())
+        for v in vals[1:]:
+            assert v == pytest.approx(vals[0], abs=1e-14)
+
+    def test_sp_converges_at_L1(self) -> None:
+        """s-p integrals need only L=1."""
+        conv = convergence_study(3.0, 1, 0, 0, 2, 1, 0, 1.0, 3.015, range(4), n_grid=4000)
+        assert conv[0] == pytest.approx(0.0, abs=1e-14)
+        for L in range(2, 4):
+            assert conv[L] == pytest.approx(conv[1], abs=1e-14)
+
+    def test_lmax2_sufficient_for_nmax2(self) -> None:
+        """For n_max=2 (l_max=1), L_max=2 equals L_max=10."""
+        states = _enumerate_states(2)
+        vne_L2 = compute_cross_center_vne(1.0, states, 1.0, 3.015, L_max=2, n_grid=8000)
+        vne_L10 = compute_cross_center_vne(1.0, states, 1.0, 3.015, L_max=10, n_grid=8000)
+        np.testing.assert_allclose(vne_L2, vne_L10, atol=1e-12)
+
+
+# ---------------------------------------------------------------------------
+# Analytical vs grid cross-validation
+# ---------------------------------------------------------------------------
+
+class TestAnalyticalVsGrid:
+    """Verify analytical integrals match grid at high resolution."""
+
+    def test_analytical_vs_grid_nmax2(self) -> None:
+        """All n_max=2 V_ne elements: analytical vs grid at n_grid=32000."""
+        from geovac.shibuya_wulfman import _radial_split_integral_grid
+
+        states = _enumerate_states(2)
+        # Analytical
+        vne_anal = compute_cross_center_vne(1.0, states, 1.0, 3.015, L_max=2)
+        # Grid-based at high resolution
+        N = len(states)
+        vne_grid = np.zeros((N, N))
+        unique_nl = sorted(set((n, l) for n, l, m in states))
+        from geovac.shibuya_wulfman import _angular_coefficient
+        rad_cache: dict = {}
+        for n1, l1 in unique_nl:
+            for n2, l2 in unique_nl:
+                for L in range(3):
+                    if (l1 + L + l2) % 2 != 0 or abs(l1 - l2) > L or L > l1 + l2:
+                        continue
+                    rad_cache[(n1, l1, n2, l2, L)] = _radial_split_integral_grid(
+                        1.0, n1, l1, n2, l2, L, 3.015, n_grid=32000,
+                    )
+        for i, (n1, l1, m1) in enumerate(states):
+            for j, (n2, l2, m2) in enumerate(states):
+                if m1 != m2:
+                    continue
+                val = 0.0
+                for L in range(3):
+                    if (l1 + L + l2) % 2 != 0 or abs(l1 - l2) > L or L > l1 + l2:
+                        continue
+                    ang = _angular_coefficient(l1, m1, l2, m2, L)
+                    if abs(ang) < 1e-15:
+                        continue
+                    val += ang * rad_cache.get((n1, l1, n2, l2, L), 0.0)
+                vne_grid[i, j] = -1.0 * val
+
+        # Grid at 32K should agree with analytical to ~0.5%
+        # (2s orbitals with nodes converge slower on uniform grids)
+        mask = np.abs(vne_anal) > 1e-10
+        rel_err = np.abs(vne_anal[mask] - vne_grid[mask]) / np.abs(vne_anal[mask])
+        assert np.max(rel_err) < 5e-3, f"Max rel error {np.max(rel_err):.2e} > 5e-3"
+
+    def test_analytical_machine_precision_1s1s(self) -> None:
+        """1s-1s integrals at machine precision vs closed-form formula."""
+        R = 3.015
+        for Z_orb, Z_nuc in [(3.0, 1.0), (1.0, 1.0), (1.0, 3.0)]:
+            val = compute_cross_center_vne_element(
+                Z_orb, 1, 0, 0, 1, 0, 0, Z_nuc, R, L_max=2,
             )
+            exact = -Z_nuc / R * (1.0 - (1.0 + Z_orb * R) * np.exp(-2 * Z_orb * R))
+            assert val == pytest.approx(exact, rel=1e-12)
 
 
-class TestSWDissociationLimit:
-    """Test 2: Dissociation limit — V^SW -> 0 at R=100."""
+# ---------------------------------------------------------------------------
+# Non-collinear rotation tests
+# ---------------------------------------------------------------------------
 
-    def test_vanishes_at_large_R(self) -> None:
-        """At R=100 Bohr, all SW matrix elements should be negligible."""
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(100.0, p0)
-        V = sw_coupling_matrix(3, Z_B, p0, gamma)
 
-        max_element = np.max(np.abs(V))
-        # sin(gamma) ~ gamma ~ 2/(p0*R) ~ 0.006 at R=100, so V ~ 0.002
-        assert max_element < 0.01, (
-            f"V^SW should vanish at R=100, but max element = {max_element:.6e}"
+class TestNonCollinearRotation:
+    """Verify direction-based rotation for off-axis nuclei."""
+
+    def test_z_axis_reproduces_existing(self) -> None:
+        """direction=(0,0,1) must match nuc_parity=+1 exactly."""
+        states = _enumerate_states(2)
+        vne_old = compute_cross_center_vne(
+            3.0, states, 1.0, 3.015, L_max=2, nuc_parity=1,
         )
-
-
-class TestSWSignConvention:
-    """Test 3: Sign convention — V^SW is negative (attractive)."""
-
-    def test_diagonal_negative(self) -> None:
-        """Diagonal SW elements (same orbital) should be negative."""
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(R_EQ, p0)
-
-        # 1s-1s
-        v_1s = sw_nuclear_attraction(1, 0, 0, 1, 0, 0, Z_B, p0, gamma)
-        assert v_1s < 0, f"V^SW(1s,1s) = {v_1s:.6f} should be negative"
-
-        # 2s-2s
-        v_2s = sw_nuclear_attraction(2, 0, 0, 2, 0, 0, Z_B, p0, gamma)
-        assert v_2s < 0, f"V^SW(2s,2s) = {v_2s:.6f} should be negative"
-
-
-class TestSWMagnitude:
-    """Test 4: Magnitude — n=1 diagonal is negative and physically reasonable."""
-
-    def test_n1_magnitude_range(self) -> None:
-        """At equilibrium, the 1s-1s SW element should be negative and nonzero.
-
-        With fixed p0 = sqrt(Z_A^2+Z_B^2) and f=sin(gamma), the n=1 diagonal
-        is -(Z_B/p0)*sin(gamma) ~ -0.066 Ha. This is SMALLER than the Mulliken
-        estimate (~0.5 Ha) because sin(gamma) ~ 0.21 at R_eq with the large
-        fixed p0. This is a known limitation of the fixed-p0 + sin(gamma) ansatz.
-        """
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(R_EQ, p0)
-        v_1s = sw_nuclear_attraction(1, 0, 0, 1, 0, 0, Z_B, p0, gamma)
-
-        # Must be attractive (negative)
-        assert v_1s < 0, f"V^SW(1s,1s) = {v_1s:.6f} should be negative"
-        # Must be nonzero and not too large
-        assert -1.0 < v_1s < -0.01, (
-            f"V^SW(1s,1s) = {v_1s:.4f} Ha outside reasonable range [-1.0, -0.01]"
+        vne_new = compute_cross_center_vne(
+            3.0, states, 1.0, 3.015, L_max=2, direction=(0, 0, 1),
         )
+        np.testing.assert_allclose(vne_new, vne_old, atol=1e-14)
 
+    def test_neg_z_matches_nuc_parity(self) -> None:
+        """direction=(0,0,-1) must match nuc_parity=-1 exactly."""
+        states = _enumerate_states(2)
+        vne_parity = compute_cross_center_vne(
+            3.0, states, 1.0, 3.015, L_max=2, nuc_parity=-1,
+        )
+        vne_dir = compute_cross_center_vne(
+            3.0, states, 1.0, 3.015, L_max=2, direction=(0, 0, -1),
+        )
+        np.testing.assert_allclose(vne_dir, vne_parity, atol=1e-14)
 
-class TestSWFactorization:
-    """Test 5: D-matrix factorization — V^SW = -(Z_B/p0) * D * f(n, gamma)."""
+    def test_ss_rotation_invariant(self) -> None:
+        """s-s matrix elements must be the same for any direction."""
+        states = _enumerate_states(2)
+        dirs = [
+            (0, 0, 1),
+            (0, 0, -1),
+            (1, 0, 0),
+            (0, 1, 0),
+            (1 / np.sqrt(2), 0, 1 / np.sqrt(2)),
+            (np.sin(52.25 * np.pi / 180), 0, np.cos(52.25 * np.pi / 180)),
+        ]
+        vne_ref = compute_cross_center_vne(
+            1.0, states, 1.0, 3.015, L_max=2, direction=dirs[0],
+        )
+        # s-orbital indices: 0 (1s) and 1 (2s)
+        s_indices = [i for i, (n, l, m) in enumerate(states) if l == 0]
+        for d in dirs[1:]:
+            vne = compute_cross_center_vne(
+                1.0, states, 1.0, 3.015, L_max=2, direction=d,
+            )
+            for i in s_indices:
+                for j in s_indices:
+                    np.testing.assert_allclose(
+                        vne[i, j], vne_ref[i, j], atol=1e-14,
+                    )
 
-    def test_factorization_n1(self) -> None:
-        """Verify V^SW = -(Z_B/p0) * f * (D+D^T)/2 per shell block."""
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(R_EQ, p0)
+    def test_hermiticity_arbitrary_direction(self) -> None:
+        """V_ne must be symmetric for any direction."""
+        states = _enumerate_states(2)
+        direction = (np.sin(52.25 * np.pi / 180), 0, np.cos(52.25 * np.pi / 180))
+        vne = compute_cross_center_vne(
+            1.0, states, 1.0, 3.015, L_max=2, direction=direction,
+        )
+        np.testing.assert_allclose(vne, vne.T, atol=1e-14)
 
-        # Compute via sw_coupling_matrix
-        V = sw_coupling_matrix(2, Z_B, p0, gamma)
+    def test_90deg_px_stronger_than_pz(self) -> None:
+        """For nucleus along x, p_x coupling > p_z coupling to s orbital."""
+        states = _enumerate_states(2)
+        vne = compute_cross_center_vne(
+            1.0, states, 1.0, 3.015, L_max=2, direction=(1, 0, 0),
+        )
+        # p orbital indices for n=2: m=-1(y) at 2, m=0(z) at 3, m=+1(x) at 4
+        # s orbital at 0 (1s)
+        assert abs(vne[0, 4]) > abs(vne[0, 3]) + 1e-10  # s-px > s-pz
+        assert abs(vne[0, 3]) < 1e-14  # s-pz should be zero for x-axis
 
-        # n=1 block: indices [0] — 1x1, D is trivially symmetric
-        D1 = d_matrix_block(1, gamma)  # 1x1
-        D1_sym = (D1 + D1.T) / 2.0
-        f1 = sw_form_factor(1, gamma)
-        V1_expected = -(Z_B / p0) * f1 * D1_sym
-
+    def test_x_axis_sp_equals_z_axis_sp(self) -> None:
+        """s-p coupling along nucleus direction should be same magnitude."""
+        states = _enumerate_states(2)
+        vne_z = compute_cross_center_vne(
+            1.0, states, 1.0, 3.015, L_max=2, direction=(0, 0, 1),
+        )
+        vne_x = compute_cross_center_vne(
+            1.0, states, 1.0, 3.015, L_max=2, direction=(1, 0, 0),
+        )
+        # s-pz for z-axis should equal s-px for x-axis
         np.testing.assert_allclose(
-            V[0:1, 0:1], V1_expected, atol=1e-12,
-            err_msg="n=1 block factorization failed"
+            abs(vne_z[0, 3]), abs(vne_x[0, 4]), atol=1e-14,
         )
 
-        # n=2 block: indices [1:5] — 4x4, symmetrized
-        D2 = d_matrix_block(2, gamma)  # 4x4
-        D2_sym = (D2 + D2.T) / 2.0
-        f2 = sw_form_factor(2, gamma)
-        V2_expected = -(Z_B / p0) * f2 * D2_sym
-
-        np.testing.assert_allclose(
-            V[1:5, 1:5], V2_expected, atol=1e-12,
-            err_msg="n=2 block factorization failed"
+    def test_h2o_angle_direction(self) -> None:
+        """Test at the H2O half-bond-angle (52.25 deg)."""
+        half_angle = 52.25 * np.pi / 180
+        direction = (np.sin(half_angle), 0, np.cos(half_angle))
+        states = _enumerate_states(2)
+        vne = compute_cross_center_vne(
+            6.0, states, 1.0, 1.809, L_max=2, direction=direction,
         )
-
-    def test_cross_n_zero(self) -> None:
-        """Cross-n blocks should be exactly zero."""
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(R_EQ, p0)
-        V = sw_coupling_matrix(2, Z_B, p0, gamma)
-
-        # n=1 to n=2 cross block: V[0, 1:5] and V[1:5, 0]
-        np.testing.assert_allclose(
-            V[0, 1:5], 0.0, atol=1e-15,
-            err_msg="Cross-n block (1->2) should be zero"
-        )
-        np.testing.assert_allclose(
-            V[1:5, 0], 0.0, atol=1e-15,
-            err_msg="Cross-n block (2->1) should be zero"
-        )
-
-
-class TestSWSymmetry:
-    """Test 6: Matrix symmetry — V = V^T."""
-
-    def test_single_center_symmetry(self) -> None:
-        """Single-center SW matrix should be symmetric."""
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(R_EQ, p0)
-        V = sw_coupling_matrix(3, Z_B, p0, gamma)
-
-        np.testing.assert_allclose(
-            V, V.T, atol=1e-12,
-            err_msg="Single-center SW matrix is not symmetric"
-        )
-
-    def test_two_center_symmetry(self) -> None:
-        """Two-center combined SW matrix should be symmetric."""
-        p0 = _default_p0(Z_A, Z_B)
-        gamma = bond_angle(R_EQ, p0)
-        V = sw_coupling_matrix_AB(3, Z_A, Z_B, p0, gamma)
-
-        np.testing.assert_allclose(
-            V, V.T, atol=1e-12,
-            err_msg="Two-center SW matrix is not symmetric"
-        )
+        # Must be symmetric
+        np.testing.assert_allclose(vne, vne.T, atol=1e-14)
+        # All diagonal must be negative (attractive)
+        for i in range(len(states)):
+            assert vne[i, i] < 0
 
 
 if __name__ == "__main__":

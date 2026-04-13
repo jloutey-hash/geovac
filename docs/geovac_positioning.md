@@ -8,15 +8,15 @@ GeoVac is a discretization framework that exploits the natural geometry of quant
 
 Head-to-head Pauli term counts, GeoVac composed encoding vs Gaussian Jordan-Wigner:
 
-| System | GeoVac qubits | GeoVac Pauli terms | Gaussian basis | Gaussian Pauli terms | Advantage |
+| System | GeoVac Q | GeoVac Pauli | Gaussian basis | Gaussian Pauli | Advantage |
 |--------|:---:|:---:|--------|:---:|:---:|
-| He | 10 | 118 | cc-pVDZ (10 qubits) | 156 | 1.3x |
-| He | 28 | 2,659 | cc-pVTZ (28 qubits) | 21,607 | 8.1x |
-| LiH | 30 | 334 | cc-pVDZ (~30 qubits) | ~63,500 | 190x |
-| BeH2 | 50 | 556 | estimated | ~200,000 | ~360x |
-| H2O | 70 | 778 | estimated | ~560,000 | ~720x |
+| He | 10 | 118 | cc-pVDZ (10 qubits) | 156 | 1.3× |
+| He | 28 | 2,659 | cc-pVTZ (28 qubits) | 21,607 | 8.1× |
+| LiH | 30 | 334 | Trenev et al. | 17,065 | 51× |
+| BeH₂ | 50 | 556 | Trenev et al. | 256,000 | 460× |
+| H₂O | 70 | 778 | Trenev et al. | 1.33M | 1,712× |
 
-GeoVac Pauli terms scale as Q^2.5 across all composed systems (LiH, BeH2, H2O), with an exponent spread of just 0.02. Gaussian Jordan-Wigner scaling is Q^3.9-4.3.
+30 molecules tested (3 periodic table rows + multi-center + transition metals). Universal scaling: N_Pauli = 11.11 × Q across all composed systems. Gaussian Jordan-Wigner scaling is Q^3.9-4.3.
 
 ## Why It's Sparse
 
@@ -44,7 +44,7 @@ GeoVac's 1-norm scaling (Q^1.69 for atoms) and commutator-based Trotter bounds (
 
 ## Honest Limitations
 
-GeoVac's classical accuracy is substantially below production quantum chemistry. The best classical results are H2 at 96.0% dissociation energy, LiH equilibrium bond length at 5.3% error, BeH2 at 11.7%, and H2O at 26% -- compared to sub-0.1% for Gaussian methods with correlating basis sets. The framework currently covers five systems (H2, He, LiH, BeH2, H2O). The value proposition is structural sparsity for quantum simulation, not classical accuracy.
+GeoVac's classical accuracy is substantially below production quantum chemistry. The best classical results are H2 at 96.0% dissociation energy, LiH equilibrium bond length at 5.3% error, BeH2 at 11.7%, and H2O at 26% -- compared to sub-0.1% for Gaussian methods with correlating basis sets. For atoms, the 2D variational solver achieves 0.004% He accuracy (zero free parameters). The framework covers 30 molecules across 3 periodic table rows. The value proposition is structural sparsity for quantum simulation, not classical accuracy.
 
 Note on H2O 1-norm: The Phillips-Kleinman pseudopotential (PK) is a one-body operator whose energy contribution can be computed classically from the 1-RDM measured during VQE, with zero additional quantum circuits. This quantum-classical partitioning (v2.0.29) reduces the H2O quantum Hamiltonian 1-norm from 28,053 Ha to 361 Ha (78x reduction), with no approximation. The partitioned 1-norms across all composed systems are comparable: LiH 33 Ha, BeH2 355 Ha, H2O 361 Ha.
 
@@ -61,7 +61,7 @@ print(f"{H.n_terms} Pauli terms, {H.n_qubits} qubits")
 qiskit_op = H.to_qiskit()  # SparsePauliOp for VQE
 ```
 
-The `geovac-hamiltonians` package (v0.1.0, 92 KB) is a standalone wheel with no heavy dependencies. It bundles pre-computed Hamiltonians for H2, He, LiH, BeH2, and H2O. Export to OpenFermion, Qiskit, and PennyLane is available in the full `geovac` package.
+The `geovac-hamiltonians` package is a standalone wheel with no heavy dependencies. Export to OpenFermion, Qiskit, and PennyLane is available. The full `geovac` package supports all 30 molecules with `hamiltonian('LiH', R=3.015)` API.
 
 ## Collaboration Opportunities
 
@@ -69,12 +69,12 @@ The `geovac-hamiltonians` package (v0.1.0, 92 KB) is a standalone wheel with no 
 - **Resource estimation:** End-to-end fault-tolerant resource estimates (T-count, logical qubit count) comparing GeoVac Hamiltonians to DF/THC Gaussian Hamiltonians at matched accuracy.
 - **Hardware demonstrations:** VQE or ADAPT-VQE runs on current hardware using GeoVac's compact Hamiltonians. H2 at 10 qubits and LiH at 30 qubits are natural targets.
 - **Measurement optimization:** Benchmarking classical shadows, derandomized shadows, or other measurement protocols on GeoVac's structurally sparse Hamiltonians.
-- **Extending the molecule set:** The composed architecture is systematic (core pairs + bond pairs + lone pairs). New molecules require computing the Level 3/4 building blocks and coupling integrals.
-- **Improving classical accuracy:** The 5-26% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the adiabatic approximation. Higher angular momentum or non-adiabatic solvers would improve the Hamiltonian quality.
+- **Extending the molecule set:** The composed architecture is systematic (core pairs + bond pairs + lone pairs) and now covers 30 molecules. New molecules require only a `MolecularSpec` definition and atomic classifier entry.
+- **Improving classical accuracy:** The 5-26% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the pseudopotential approximation. The balanced coupled architecture (Paper 19) achieves 0.20% energy error at n_max=3 for LiH.
 
 ## Papers and Citation
 
-The GeoVac paper series is available at [github.com/jlouthan/geometric-vacuum](https://github.com/jlouthan/geometric-vacuum) with DOI-stamped releases on Zenodo.
+The GeoVac paper series is available at [github.com/jloutey-hash/geovac](https://github.com/jloutey-hash/geovac) with DOI-stamped releases on Zenodo.
 
 Key papers:
 - **Paper 14** (qubit encoding): Pauli scaling analysis, composed sparsity, Gaussian baselines

@@ -22,14 +22,9 @@ Date: February 2026
 
 import numpy as np
 import sys
-import io
 import time
 
 sys.path.insert(0, '.')
-
-if sys.platform == 'win32':
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 from geovac import (
     MoleculeHamiltonian,
@@ -121,11 +116,7 @@ def test_lih_bridge_r_dependence() -> dict:
     print(f"    [{'PASS' if correction_active else 'FAIL'}] Ω_Li·Ω_H < 0.95 at R_eq  (actual: {omega_eq:.4f})")
     print(f"    Status: {'OK PASS' if passed else 'FAIL'}")
 
-    return {
-        'test': 'lih_bridge_r_dep',
-        'results': results,
-        'passed': passed,
-    }
+    assert passed, "LiH bridge R-dependence validation failed"
 
 
 def test_lih_conformal_factors() -> dict:
@@ -217,12 +208,7 @@ def test_lih_conformal_factors() -> dict:
     print(f"    [{'PASS' if converging else 'FAIL'}] p₀(R) → Z as R → ∞")
     print(f"    Status: {'OK PASS' if passed else 'FAIL'}")
 
-    return {
-        'test': 'lih_conformal',
-        'p0_A': p0_A_actual,
-        'p0_B': p0_B_actual,
-        'passed': passed,
-    }
+    assert passed, "LiH conformal factors validation failed"
 
 
 # ==============================================================================

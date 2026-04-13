@@ -51,6 +51,18 @@ from ADSCFT.bulk.symplectic import (
 from ADSCFT.fine_structure import FineStructureCalculator
 from ADSCFT.proton_radius import ProtonRadiusCalculator, solve_proton_radius_puzzle
 from ADSCFT.hyperfine_impedance import HyperfineImpedanceCalculator
+from ADSCFT.muonic_hydrogen import (
+    MuonicHydrogenSolver,
+    MUON_ELECTRON_MASS_RATIO,
+    MUON_REDUCED_MASS_RATIO,
+    solve_muonic_hydrogen,
+)
+from ADSCFT.holographic_analysis import (
+    compute_spectral_dimension,
+    compute_holographic_entropy,
+    extract_central_charge,
+    compare_holographic_properties,
+)
 
 __version__ = '0.1.0-alpha'
 
@@ -66,4 +78,12 @@ __all__ = [
     'ProtonRadiusCalculator',
     'solve_proton_radius_puzzle',
     'HyperfineImpedanceCalculator',
+    'MuonicHydrogenSolver',
+    'MUON_ELECTRON_MASS_RATIO',
+    'MUON_REDUCED_MASS_RATIO',
+    'solve_muonic_hydrogen',
+    'compute_spectral_dimension',
+    'compute_holographic_entropy',
+    'extract_central_charge',
+    'compare_holographic_properties',
 ]
