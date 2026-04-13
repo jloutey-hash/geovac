@@ -5,6 +5,94 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.2] - 2026-04-13
+
+### Added
+
+- **5 multi-center diatomic molecules:** LiF (Q=70), CO (Q=100), N₂ (Q=100), F₂ (Q=100), NaCl (Q=50)
+
+### Fixed
+
+- Paper 14 corrections: composed coefficient 11.11→11.10 (exact), TM Pauli/Q 9.27→9.23, 1-norm table corrected to electronic-only
+- Paper 20 corrections: same coefficient fixes, table caption clarifies composed vs balanced per row
+- Balanced coupled fix for `spec.nuclei` attribute
+
+---
+
+## [2.8.1] - 2026-04-12
+
+### Added
+
+- **Algebraic Slater integrals:** `geovac/hypergeometric_slater.py` with exact Fraction-arithmetic R^k evaluator for arbitrary n_max. Validated 144/145 table entries, found+fixed F²(2p,2p) typo (43/512→45/512). 8x speedup.
+- **Float algebraic path:** `compute_rk_float()` gives machine-precision (1.5e-12) at 25x faster than Fraction. Corrected systematic grid bias (0.06-0.44% per integral).
+- **DUCC downfolding:** `geovac/downfolding.py` computes exact (2J-K) core potential. Root cause of l_max divergence: PK underestimates p-orbital potential by 109x. H₂O 1-norm 9% lower with downfolding.
+- **Ecosystem export:** 30→35 molecules via `hamiltonian()` API
+- **He graph-native FCI convergence** to n_max=8 (0.207%, 2262 configs) and n_max=9 (0.201%, 3927 configs) with exact algebraic integrals
+- **He 2D variational best:** 0.019% self-consistent cusp correction, 0.004% with exact coalescence density
+- **Wigner 3j caching, property caching, double-build elimination**
+- 418 files restored from OneDrive migration
+- 7 broken test imports fixed, 2908 tests collect cleanly
+
+### Fixed
+
+- O (Z=8) PK parameter gap fixed
+- `casimir_ci.py` F²(2p,2p) typo corrected (43/512→45/512)
+- Pip reinstalled to correct directory
+
+---
+
+## [2.8.0] - 2026-04-12
+
+### Added
+
+- **Full first transition series (Z=21-30)** as hydrides: ScH, TiH, VH, CrH, MnH, FeH, CoH, NiH, CuH, ZnH
+- **General `build_composed_hamiltonian(spec)`** in `composed_qubit.py` — MolecularSpec-driven builder consumed by balanced_coupled and coupled_composition
+- **Atomic classifier extended to Z=1-30** — second row (Z=11-18), K/Ca (Z=19-20), and all first-row transition metals with structure type F
+- **`l_min` field on `OrbitalBlock`** — restricts angular momentum enumeration for d-only blocks (l_min=2)
+- **`_v_cross_nuc_frozen_core`** — frozen-core electrostatic potential for multi-shell cores
+- **`transition_metal_hydride_spec(Z)`** — spec factory for all 10 TM hydrides with convenience aliases
+- **10 TM hydrides in ecosystem export** — accessible via `hamiltonian('ScH')` etc.
+- **48 new tests** in `tests/test_transition_metals.py`
+- **Cr/Cu anomalous configurations** correctly handled (3d⁵4s¹ and 3d¹⁰4s¹)
+
+### Key Results
+
+- All 10 TM hydrides: Q=30 qubits, 277 Pauli terms, Pauli/Q = 9.23
+- Isostructural invariance confirmed: identical block topology → identical Pauli count
+- d-block ERI density sparser than s/p (confirming Track CZ: 4.0% vs 8.9%)
+- Pauli/Q = 9.23 < 11.11 main-group coefficient — transition metals are cheaper per qubit
+- Library expanded from 30 to 38 molecules
+
+### Changed
+
+- `SCOPE_BOUNDARY.md` updated to v2.8.0 — transition metals now "Fully Implemented"
+- Paper 20 (Resource Benchmarks) updated with full 10-molecule TM hydride table
+- Paper 20 future directions: TM classifier item (iv) removed (completed)
+
+---
+
+## [2.7.1] - 2026-04-12
+
+### Changed
+
+- Outreach-ready documentation correction (tag only)
+
+---
+
+## [2.7.0] - 2026-04-12
+
+### Added
+
+- Papers 22 (Angular Sparsity Theorem), 23 (Nuclear Shell Hamiltonians), 24 (Bargmann-Segal Lattice)
+- Paper 21 (Geometric Vacuum Synthesis)
+- Precision He: 2D variational solver (0.004%), graph-native CI (0.19%), excited states
+- Nuclear shell model: deuteron (16Q/592 Pauli), He-4 (16Q/712 Pauli), composed nuclear-electronic (26Q/614 Pauli)
+- `geovac/casimir_ci.py`, `geovac/level3_variational.py`, `geovac/nuclear/` package
+- Alpha structural decomposition phases 4B-4H (paused — combination rule open)
+- Papers 8-9 promoted from archive to methods tier
+
+---
+
 ## [0.4.0] - 2026-02-15
 
 ### 🌟 Major Scientific Breakthrough
