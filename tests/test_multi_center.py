@@ -14,18 +14,16 @@ Author: GeoVac Development Team (Track CU, v2.3.0)
 import pytest
 import numpy as np
 
-from geovac.composed_qubit import (
-    build_composed_hamiltonian,
-    lif_spec,
-    co_spec,
-    n2_spec,
-    f2_spec,
-    nacl_spec,
-    ch2o_spec,
-    c2h2_spec,
-    c2h6_spec,
+from geovac.composed_qubit import build_composed_hamiltonian
+from geovac.molecular_spec import (
+    MolecularSpec, OrbitalBlock,
+    lif_spec, co_spec, n2_spec, f2_spec, nacl_spec,
 )
-from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+
+# Polyatomic multi-center specs not yet implemented
+ch2o_spec = None
+c2h2_spec = None
+c2h6_spec = None
 
 
 # ---------------------------------------------------------------------------
@@ -224,13 +222,13 @@ class TestBackwardCompatibility:
 
     def test_molecular_spec_default_nuclei_empty(self):
         """Legacy specs should have empty nuclei list."""
-        from geovac.composed_qubit import lih_spec as legacy_lih_spec
+        from geovac.molecular_spec import lih_spec as legacy_lih_spec
         spec = legacy_lih_spec()
         assert spec.nuclei == []
 
     def test_orbital_block_default_indices(self):
         """Legacy OrbitalBlocks should have -1 nucleus indices."""
-        from geovac.composed_qubit import lih_spec as legacy_lih_spec
+        from geovac.molecular_spec import lih_spec as legacy_lih_spec
         spec = legacy_lih_spec()
         for blk in spec.blocks:
             assert blk.center_nucleus_idx == -1

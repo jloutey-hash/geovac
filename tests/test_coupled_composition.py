@@ -15,10 +15,10 @@ import pytest
 
 from geovac.composed_qubit import (
     build_composed_hamiltonian,
-    lih_spec,
     _enumerate_states,
     _ck_coefficient,
 )
+from geovac.molecular_spec import lih_spec
 from geovac.coupled_composition import (
     build_coupled_hamiltonian,
     coupled_fci_energy,

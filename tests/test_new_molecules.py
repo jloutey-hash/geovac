@@ -9,15 +9,13 @@ ab initio PK parameters from Track BI.
 import numpy as np
 import pytest
 
-from geovac.composed_qubit import (
-    build_composed_hamiltonian,
-    build_composed_hf,
-    build_composed_nh3,
-    build_composed_ch4,
-    hf_spec,
-    nh3_spec,
-    ch4_spec,
-)
+from geovac.composed_qubit import build_composed_hamiltonian
+from geovac.molecular_spec import hf_spec, nh3_spec, ch4_spec
+
+# Legacy per-molecule builders no longer exist; tests use spec-driven path
+build_composed_hf = None
+build_composed_nh3 = None
+build_composed_ch4 = None
 
 
 # ---------------------------------------------------------------------------

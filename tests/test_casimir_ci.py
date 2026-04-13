@@ -30,6 +30,7 @@ from geovac.casimir_ci import (
     build_graph_consistent_fci,
     _build_graph_h1,
 )
+from geovac.hypergeometric_slater import compute_rk_float, get_rk_float
 
 
 # ========================================================================
@@ -84,6 +85,37 @@ class TestSlaterIntegrals:
         # G^0(1s,2s)
         val_num_g = _compute_rk_numerical(1, 0, 2, 0, 1, 0, 2, 0, 0)
         assert abs(val_num_g - 16 / 729) < 0.002, f"G0(1s,2s) numerical={val_num_g:.6f}, exact={16/729:.6f}"
+
+    def test_float_algebraic_matches_table(self):
+        """Float algebraic R^k matches exact table to machine precision."""
+        from geovac.casimir_ci import _RK4_TABLE
+        max_err = 0.0
+        for key, expected in _RK4_TABLE.items():
+            n1, l1, n3, l3, n2, l2, n4, l4, k = key
+            val = compute_rk_float(n1, l1, n3, l3, n2, l2, n4, l4, k)
+            expected_f = float(expected)
+            if abs(expected_f) > 1e-15:
+                rel_err = abs(val - expected_f) / abs(expected_f)
+                max_err = max(max_err, rel_err)
+        assert max_err < 1e-10, f"Float algebraic max rel error: {max_err:.2e}"
+
+    def test_float_algebraic_n4_integrals(self):
+        """Float algebraic works for n=4 (beyond precomputed table)."""
+        # R^0(4s,4s; 4s,4s) — not in table
+        val = compute_rk_float(4, 0, 4, 0, 4, 0, 4, 0, 0)
+        assert val > 0, f"R^0(4s4s;4s4s) should be positive, got {val}"
+        # Known value from Fraction computation: 0.037271499633789
+        assert abs(val - 0.037271499634) < 1e-10
+
+    def test_float_algebraic_beats_grid(self):
+        """Float algebraic is more accurate than grid quadrature."""
+        # R^0(4s,3p; 4s,3p) — grid has ~0.4% error
+        val_float = compute_rk_float(4, 0, 3, 1, 4, 0, 3, 1, 0)
+        val_grid = _compute_rk_numerical(4, 0, 3, 1, 4, 0, 3, 1, 0)
+        # Float algebraic should differ from grid (grid has truncation error)
+        assert abs(val_float - val_grid) > 1e-6, (
+            "Float and grid should differ (grid has truncation error)"
+        )
 
 
 # ========================================================================

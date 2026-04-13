@@ -14,13 +14,20 @@ from geovac.composed_qubit import (
     build_composed_lih,
     build_composed_beh2,
     build_composed_h2o,
-    build_h2_bond_pair,
+)
+from geovac.molecular_spec import (
     lih_spec,
     beh2_spec,
     h2o_spec,
-    h2_bond_pair_spec,
-    he_spec,
 )
+
+# Legacy aliases — these functions may not exist in all versions
+try:
+    from geovac.composed_qubit import build_h2_bond_pair
+except ImportError:
+    build_h2_bond_pair = None
+h2_bond_pair_spec = None  # no longer in composed_qubit
+he_spec = None  # no longer in composed_qubit
 
 
 # ---------------------------------------------------------------------------
