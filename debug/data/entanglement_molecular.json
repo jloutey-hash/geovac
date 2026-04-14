@@ -1,0 +1,853 @@
+{
+  "part1_h2_bond_pair": {
+    "R=1.0": {
+      "R_bohr": 1.0,
+      "E0_total": 0.4878096416209816,
+      "E0_electronic": -0.5121903583790184,
+      "nuclear_repulsion": 1.0,
+      "von_neumann_entropy": 0.3033139076822055,
+      "n_configs": 15,
+      "M": 5,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "R=1.4": {
+      "R_bohr": 1.4,
+      "E0_total": 0.20209535590669592,
+      "E0_electronic": -0.5121903583790184,
+      "nuclear_repulsion": 0.7142857142857143,
+      "von_neumann_entropy": 0.3033139076822055,
+      "n_configs": 15,
+      "M": 5,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "R=2.0": {
+      "R_bohr": 2.0,
+      "E0_total": -0.012190358379018384,
+      "E0_electronic": -0.5121903583790184,
+      "nuclear_repulsion": 0.5,
+      "von_neumann_entropy": 0.3033139076822055,
+      "n_configs": 15,
+      "M": 5,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "R=3.0": {
+      "R_bohr": 3.0,
+      "E0_total": -0.17885702504568507,
+      "E0_electronic": -0.5121903583790184,
+      "nuclear_repulsion": 0.3333333333333333,
+      "von_neumann_entropy": 0.3033139076822055,
+      "n_configs": 15,
+      "M": 5,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "R=5.0": {
+      "R_bohr": 5.0,
+      "E0_total": -0.3121903583790184,
+      "E0_electronic": -0.5121903583790184,
+      "nuclear_repulsion": 0.2,
+      "von_neumann_entropy": 0.3033139076822055,
+      "n_configs": 15,
+      "M": 5,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    }
+  },
+  "part2_lih_blocks": {
+    "R=2.0": {
+      "R_bohr": 2.0,
+      "blocks": {
+        "Li_core_center": {
+          "label": "Li_core_center",
+          "Z": 3.0,
+          "n_orbitals": 5,
+          "E0": -7.189882389103113,
+          "entropy": 0.006115492108334376,
+          "occupation_numbers": [
+            1.9985940193938256,
+            0.0011812190665080602,
+            0.00022476153966657868,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.0,
+          "layer_S_topological": 0.0,
+          "layer_S_full": 0.006115492108334376,
+          "frac_vee_pct": 100.0,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 0.0
+        },
+        "LiH_bond_center": {
+          "label": "LiH_bond_center",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        },
+        "LiH_bond_partner": {
+          "label": "LiH_bond_partner",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        }
+      }
+    },
+    "R=3.015": {
+      "R_bohr": 3.015,
+      "blocks": {
+        "Li_core_center": {
+          "label": "Li_core_center",
+          "Z": 3.0,
+          "n_orbitals": 5,
+          "E0": -7.189882389103113,
+          "entropy": 0.006115492108334376,
+          "occupation_numbers": [
+            1.9985940193938256,
+            0.0011812190665080602,
+            0.00022476153966657868,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.0,
+          "layer_S_topological": 0.0,
+          "layer_S_full": 0.006115492108334376,
+          "frac_vee_pct": 100.0,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 0.0
+        },
+        "LiH_bond_center": {
+          "label": "LiH_bond_center",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        },
+        "LiH_bond_partner": {
+          "label": "LiH_bond_partner",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        }
+      }
+    },
+    "R=4.0": {
+      "R_bohr": 4.0,
+      "blocks": {
+        "Li_core_center": {
+          "label": "Li_core_center",
+          "Z": 3.0,
+          "n_orbitals": 5,
+          "E0": -7.189882389103113,
+          "entropy": 0.006115492108334376,
+          "occupation_numbers": [
+            1.9985940193938256,
+            0.0011812190665080602,
+            0.00022476153966657868,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.0,
+          "layer_S_topological": 0.0,
+          "layer_S_full": 0.006115492108334376,
+          "frac_vee_pct": 100.0,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 0.0
+        },
+        "LiH_bond_center": {
+          "label": "LiH_bond_center",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        },
+        "LiH_bond_partner": {
+          "label": "LiH_bond_partner",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        }
+      }
+    },
+    "R=6.0": {
+      "R_bohr": 6.0,
+      "blocks": {
+        "Li_core_center": {
+          "label": "Li_core_center",
+          "Z": 3.0,
+          "n_orbitals": 5,
+          "E0": -7.189882389103113,
+          "entropy": 0.006115492108334376,
+          "occupation_numbers": [
+            1.9985940193938256,
+            0.0011812190665080602,
+            0.00022476153966657868,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.0,
+          "layer_S_topological": 0.0,
+          "layer_S_full": 0.006115492108334376,
+          "frac_vee_pct": 100.0,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 0.0
+        },
+        "LiH_bond_center": {
+          "label": "LiH_bond_center",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        },
+        "LiH_bond_partner": {
+          "label": "LiH_bond_partner",
+          "Z": 1.0,
+          "n_orbitals": 5,
+          "E0": -0.5121903583790184,
+          "entropy": 0.3033139076822055,
+          "occupation_numbers": [
+            1.8300822540084334,
+            0.16414603168398084,
+            0.005771714307585504,
+            0.0,
+            0.0
+          ],
+          "layer_S_rational": 0.6931471805599454,
+          "layer_S_topological": 0.6931471805599454,
+          "layer_S_full": 0.3033139076822055,
+          "frac_vee_pct": -128.5246943856542,
+          "frac_h1_offdiag_pct": 0.0,
+          "frac_rational_pct": 228.52469438565416
+        }
+      }
+    }
+  },
+  "part3_h2_dissociation": {
+    "0.500": {
+      "R_bohr": 0.5,
+      "E0_total": 1.4878096416209816,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "0.714": {
+      "R_bohr": 0.714,
+      "E0_total": 0.8883698657106176,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "0.929": {
+      "R_bohr": 0.929,
+      "E0_total": 0.5642359064218427,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "1.143": {
+      "R_bohr": 1.143,
+      "E0_total": 0.36270028029114787,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "1.357": {
+      "R_bohr": 1.357,
+      "E0_total": 0.2247293173763243,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "1.571": {
+      "R_bohr": 1.571,
+      "E0_total": 0.12434687904937125,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "1.786": {
+      "R_bohr": 1.786,
+      "E0_total": 0.0477200559546882,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "2.000": {
+      "R_bohr": 2.0,
+      "E0_total": -0.012190358379018384,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "2.500": {
+      "R_bohr": 2.5,
+      "E0_total": -0.11219035837901836,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "3.000": {
+      "R_bohr": 3.0,
+      "E0_total": -0.17885702504568507,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "3.500": {
+      "R_bohr": 3.5,
+      "E0_total": -0.22647607266473269,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "4.000": {
+      "R_bohr": 4.0,
+      "E0_total": -0.2621903583790184,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "4.500": {
+      "R_bohr": 4.5,
+      "E0_total": -0.2899681361567962,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "5.000": {
+      "R_bohr": 5.0,
+      "E0_total": -0.3121903583790184,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "6.000": {
+      "R_bohr": 6.0,
+      "E0_total": -0.34552369171235175,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "6.800": {
+      "R_bohr": 6.8,
+      "E0_total": -0.3651315348496066,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "7.600": {
+      "R_bohr": 7.6,
+      "E0_total": -0.38061141101059737,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "8.400": {
+      "R_bohr": 8.4,
+      "E0_total": -0.3931427393313993,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "9.200": {
+      "R_bohr": 9.2,
+      "E0_total": -0.4034947062051053,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    },
+    "10.000": {
+      "R_bohr": 10.0,
+      "E0_total": -0.4121903583790184,
+      "E0_electronic": -0.5121903583790184,
+      "von_neumann_entropy": 0.3033139076822055,
+      "S_over_ln2": 0.4375894704457708,
+      "occupation_numbers": [
+        1.8300822540084334,
+        0.16414603168398084,
+        0.005771714307585504,
+        0.0,
+        0.0
+      ],
+      "layer_S_rational": 0.6931471805599454,
+      "layer_S_topological": 0.6931471805599454,
+      "layer_S_full": 0.3033139076822055,
+      "frac_vee_pct": -128.5246943856542,
+      "frac_h1_offdiag_pct": 0.0,
+      "frac_rational_pct": 228.52469438565416,
+      "layer_E_rational": -0.3931755829903978,
+      "layer_E_topological": -0.3931755829903978,
+      "layer_E_full": -0.5121903583790184
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "s_siam": {
+    "n_spatial": 5,
+    "n_qubits": 10,
+    "geovac": {
+      "n_pauli": 27,
+      "l1_norm": 10.872135954999578,
+      "qwc_groups": 17
+    },
+    "rotated_samples": [
+      {
+        "n_pauli": 875,
+        "l1_norm": 24.89212698924218,
+        "qwc_groups": 288
+      },
+      {
+        "n_pauli": 875,
+        "l1_norm": 22.251587856079073,
+        "qwc_groups": 288
+      },
+      {
+        "n_pauli": 875,
+        "l1_norm": 28.844540807005583,
+        "qwc_groups": 288
+      },
+      {
+        "n_pauli": 875,
+        "l1_norm": 16.373554873790482,
+        "qwc_groups": 288
+      },
+      {
+        "n_pauli": 875,
+        "l1_norm": 22.736980157305094,
+        "qwc_groups": 288
+      }
+    ],
+    "rotated_mean_pauli": 875.0
+  },
+  "d_siam": {
+    "n_spatial": 9,
+    "n_qubits": 18,
+    "nnz_gaunt_impurity_U": 85,
+    "nnz_ratio": 0.136,
+    "geovac": {
+      "n_pauli": 367,
+      "l1_norm": 188.5407346756855,
+      "qwc_groups": 134
+    },
+    "rotated_samples": [
+      {
+        "n_pauli": 1383,
+        "l1_norm": 148.12089525390485,
+        "qwc_groups": 452
+      },
+      {
+        "n_pauli": 1383,
+        "l1_norm": 119.75489911447059,
+        "qwc_groups": 452
+      },
+      {
+        "n_pauli": 1383,
+        "l1_norm": 147.8139459077324,
+        "qwc_groups": 452
+      },
+      {
+        "n_pauli": 1383,
+        "l1_norm": 134.17882752901895,
+        "qwc_groups": 452
+      },
+      {
+        "n_pauli": 1383,
+        "l1_norm": 139.90349428262004,
+        "qwc_groups": 452
+      }
+    ],
+    "rotated_mean_pauli": 1383.0
+  },
+  "sparsity_ratio_s": 32.407407407407405,
+  "sparsity_ratio_d": 3.768392370572207,
+  "runtime_seconds": 3.1675925254821777
+}

@@ -1,0 +1,106 @@
+{
+  "geovac": {
+    "deuteron_N2": {
+      "nucleus": "deuteron",
+      "N_shells": 2,
+      "freeze_0s": false,
+      "n_spatial_per_species": 4,
+      "n_species": 2,
+      "qubit_count": 16,
+      "eri_density": 0.1484375,
+      "n_allowed_eris": 38,
+      "n_total_eris": 256,
+      "pauli_estimate": 678
+    },
+    "Li6_N2": {
+      "nucleus": "Li-6",
+      "N_shells": 2,
+      "freeze_0s": false,
+      "n_spatial_per_species": 4,
+      "n_species": 2,
+      "qubit_count": 16,
+      "eri_density": 0.1484375,
+      "n_allowed_eris": 38,
+      "n_total_eris": 256,
+      "pauli_estimate": 678
+    },
+    "Li6_valence": {
+      "nucleus": "Li-6",
+      "N_shells": 2,
+      "freeze_0s": true,
+      "n_spatial_per_species": 3,
+      "n_species": 2,
+      "qubit_count": 12,
+      "eri_density": 0.2345679012345679,
+      "n_allowed_eris": 19,
+      "n_total_eris": 81,
+      "pauli_estimate": 347
+    },
+    "Be8_N2": {
+      "nucleus": "Be-8",
+      "N_shells": 2,
+      "freeze_0s": false,
+      "n_spatial_per_species": 4,
+      "n_species": 2,
+      "qubit_count": 16,
+      "eri_density": 0.1484375,
+      "n_allowed_eris": 38,
+      "n_total_eris": 256,
+      "pauli_estimate": 678
+    },
+    "O16_N3": {
+      "nucleus": "O-16",
+      "N_shells": 3,
+      "freeze_0s": false,
+      "n_spatial_per_species": 10,
+      "n_species": 2,
+      "qubit_count": 40,
+      "eri_density": 0.0902,
+      "n_allowed_eris": 902,
+      "n_total_eris": 10000,
+      "pauli_estimate": 15414
+    },
+    "N4": {
+      "nucleus": "N=4_shell",
+      "N_shells": 4,
+      "freeze_0s": false,
+      "n_spatial_per_species": 20,
+      "n_species": 2,
+      "qubit_count": 80,
+      "eri_density": 0.0670375,
+      "n_allowed_eris": 10726,
+      "n_total_eris": 160000,
+      "pauli_estimate": 182502
+    },
+    "N5": {
+      "nucleus": "N=5_shell",
+      "N_shells": 5,
+      "freeze_0s": false,
+      "n_spatial_per_species": 35,
+      "n_species": 2,
+      "qubit_count": 140,
+      "eri_density": 0.05352369845897543,
+      "n_allowed_eris": 80319,
+      "n_total_eris": 1500625,
+      "pauli_estimate": 1365703
+    }
+  },
+  "published_refs": {
+    "Perez-Obiol 2023 (2p identical, 4q JW)": {
+      "Q": 4,
+      "paulis": 19
+    },
+    "p-shell (12q JW, generic 2-body)": {
+      "Q": 12,
+      "paulis": 2500
+    },
+    "sd-shell (24q JW, generic 2-body)": {
+      "Q": 24,
+      "paulis": 40000
+    },
+    "Li-6 (24q, Givens ansatz 2025)": {
+      "Q": 24,
+      "paulis": 5000
+    }
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "he_convergence": [
+    {
+      "n_max": 2,
+      "l_max": 1,
+      "n_configs": 7,
+      "E_ci": -2.8894787019709867,
+      "coalescence": 0.18842487149897683,
+      "delta_E_schwartz": -0.17771110933639914,
+      "delta_E_hurwitz": -0.022382188188874844,
+      "E_corrected_schwartz": -3.0671898113073857,
+      "E_corrected_hurwitz": -2.9118608901598617,
+      "error_uncorrected_pct": 0.49058719179279126,
+      "error_schwartz_pct": 5.629523029991338,
+      "error_hurwitz_pct": 0.28022257486805713,
+      "elapsed_s": 0.006602048873901367
+    },
+    {
+      "n_max": 3,
+      "l_max": 2,
+      "n_configs": 31,
+      "E_ci": -2.8931097422339294,
+      "coalescence": 0.18606305990045124,
+      "delta_E_schwartz": -0.0379044553087491,
+      "delta_E_hurwitz": -0.006939856521971876,
+      "E_corrected_schwartz": -2.9310141975426784,
+      "E_corrected_hurwitz": -2.9000495987559014,
+      "error_uncorrected_pct": 0.36553948536674324,
+      "error_schwartz_pct": 0.9398344175506513,
+      "error_hurwitz_pct": 0.12654099508419425,
+      "elapsed_s": 0.022912979125976562
+    },
+    {
+      "n_max": 4,
+      "l_max": 3,
+      "n_configs": 101,
+      "E_ci": -2.8954055606978044,
+      "coalescence": 0.18425533722535664,
+      "delta_E_schwartz": -0.013679369194392827,
+      "delta_E_hurwitz": -0.002964040139857267,
+      "E_corrected_schwartz": -2.909084929892197,
+      "E_corrected_hurwitz": -2.8983696008376616,
+      "error_uncorrected_pct": 0.2864748613227551,
+      "error_schwartz_pct": 0.18462257060922638,
+      "error_hurwitz_pct": 0.18439766184177198,
+      "elapsed_s": 0.2677781581878662
+    },
+    {
+      "n_max": 5,
+      "l_max": 4,
+      "n_configs": 266,
+      "E_ci": -2.896475793482458,
+      "coalescence": 0.18343881190791103,
+      "delta_E_schwartz": -0.0064077242622877315,
+      "delta_E_hurwitz": -0.0015269663065674774,
+      "E_corrected_schwartz": -2.902883517744746,
+      "E_corrected_hurwitz": -2.8980027597890254,
+      "error_uncorrected_pct": 0.249617612333055,
+      "error_schwartz_pct": 0.028944977389522106,
+      "error_hurwitz_pct": 0.19703113005831588,
+      "elapsed_s": 2.4446210861206055
+    },
+    {
+      "n_max": 6,
+      "l_max": 5,
+      "n_configs": 602,
+      "E_ci": -2.897085430122391,
+      "coalescence": 0.18297014491200486,
+      "delta_E_schwartz": -0.003500598407331147,
+      "delta_E_hurwitz": -0.000886592629518634,
+      "E_corrected_schwartz": -2.9005860285297222,
+      "E_corrected_hurwitz": -2.89797202275191,
+      "error_uncorrected_pct": 0.2286226196983185,
+      "error_schwartz_pct": 0.10806713965506787,
+      "error_hurwitz_pct": 0.19808966858041838,
+      "elapsed_s": 17.853480100631714
+    },
+    {
+      "n_max": 7,
+      "l_max": 6,
+      "n_configs": 1218,
+      "E_ci": -2.8974642807775655,
+      "coalescence": 0.18267702372246927,
+      "delta_E_schwartz": -0.002117356490832693,
+      "delta_E_hurwitz": -0.0005594251410694216,
+      "E_corrected_schwartz": -2.899581637268398,
+      "E_corrected_hurwitz": -2.898023705918635,
+      "error_uncorrected_pct": 0.2155755582291744,
+      "error_schwartz_pct": 0.14265690305283685,
+      "error_hurwitz_pct": 0.19630977604500555,
+      "elapsed_s": 106.83179903030396
+    }
+  ],
+  "z_scaling": [
+    {
+      "Z": 2,
+      "n_max": 4,
+      "E_ci": -2.8954055606978044,
+      "coalescence": 0.18425533722535664,
+      "delta_E_hurwitz": -0.002964040139857267,
+      "E_corrected": -2.8983696008376616,
+      "E_exact": -2.903724,
+      "error_raw_pct": 0.2864748613227551,
+      "error_hurwitz_pct": 0.18439766184177198,
+      "elapsed_s": 0.11172986030578613
+    },
+    {
+      "Z": 3,
+      "n_max": 4,
+      "E_ci": -7.234107137897525,
+      "coalescence": 0.8320623490802102,
+      "delta_E_hurwitz": -0.013385046200975245,
+      "E_corrected": -7.2474921840985,
+      "E_exact": -7.279913,
+      "error_raw_pct": 0.6292089218988524,
+      "error_hurwitz_pct": 0.445346199899633,
+      "elapsed_s": 0.10860347747802734
+    },
+    {
+      "Z": 4,
+      "n_max": 4,
+      "E_ci": -13.593460768622492,
+      "coalescence": 2.1699513730395568,
+      "delta_E_hurwitz": -0.03490711893659333,
+      "E_corrected": -13.628367887559085,
+      "E_exact": -13.655566,
+      "error_raw_pct": 0.4547979291192186,
+      "error_hurwitz_pct": 0.1991723553671486,
+      "elapsed_s": 0.09957695007324219
+    },
+    {
+      "Z": 5,
+      "n_max": 4,
+      "E_ci": -21.95999606568409,
+      "coalescence": 4.43291975055618,
+      "delta_E_hurwitz": -0.07131056432489807,
+      "E_corrected": -22.031306630008988,
+      "E_exact": -22.030972,
+      "error_raw_pct": 0.32216433444655596,
+      "error_hurwitz_pct": 0.0015189071503040278,
+      "elapsed_s": 0.09395742416381836
+    },
+    {
+      "Z": 6,
+      "n_max": 4,
+      "E_ci": -32.329737981282356,
+      "coalescence": 7.858997550114133,
+      "delta_E_hurwitz": -0.12642447458163789,
+      "E_corrected": -32.456162455863996,
+      "E_exact": -32.406247,
+      "error_raw_pct": 0.2360934258065861,
+      "error_hurwitz_pct": 0.1540303505802317,
+      "elapsed_s": 0.09315037727355957
+    },
+    {
+      "Z": 8,
+      "n_max": 4,
+      "E_ci": -59.07358788993751,
+      "coalescence": 19.154420495490143,
+      "delta_E_hurwitz": -0.3081293169537799,
+      "E_corrected": -59.38171720689129,
+      "E_exact": -59.15657,
+      "error_raw_pct": 0.14027539132592617,
+      "error_hurwitz_pct": 0.38059543832795933,
+      "elapsed_s": 0.09164142608642578
+    },
+    {
+      "Z": 10,
+      "n_max": 4,
+      "E_ci": -93.82011622280118,
+      "coalescence": 37.96344442868797,
+      "delta_E_hurwitz": -0.6107023808827098,
+      "E_corrected": -94.43081860368389,
+      "E_exact": -93.906665,
+      "error_raw_pct": 0.09216467989660634,
+      "error_hurwitz_pct": 0.5581644324009218,
+      "elapsed_s": 0.0920712947845459
+    }
+  ],
+  "comparison": {
+    "n_max_7_raw": 0.2155755582291744,
+    "n_max_7_hurwitz": 0.19630977604500555
+  },
+  "metadata": {
+    "description": "DBBSC cusp correction for GeoVac graph-native CI",
+    "date": "2026-04-13",
+    "method": "Schwartz/Hurwitz partial-wave extrapolation",
+    "note": "Coalescence density computed from singlet CI wavefunction"
+  }
+}

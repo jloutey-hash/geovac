@@ -1,0 +1,873 @@
+{
+  "sphere_eigenvalues": {
+    "1": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -1,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 3
+      },
+      {
+        "l": 2,
+        "eigenvalue": -4,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 5
+      },
+      {
+        "l": 3,
+        "eigenvalue": -9,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 7
+      },
+      {
+        "l": 4,
+        "eigenvalue": -16,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 9
+      },
+      {
+        "l": 5,
+        "eigenvalue": -25,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 11
+      },
+      {
+        "l": 6,
+        "eigenvalue": -36,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 13
+      },
+      {
+        "l": 7,
+        "eigenvalue": -49,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 15
+      },
+      {
+        "l": 8,
+        "eigenvalue": -64,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 17
+      },
+      {
+        "l": 9,
+        "eigenvalue": -81,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 19
+      },
+      {
+        "l": 10,
+        "eigenvalue": -100,
+        "degeneracy": 2,
+        "cumulative_degeneracy": 21
+      }
+    ],
+    "2": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -2,
+        "degeneracy": 3,
+        "cumulative_degeneracy": 4
+      },
+      {
+        "l": 2,
+        "eigenvalue": -6,
+        "degeneracy": 5,
+        "cumulative_degeneracy": 9
+      },
+      {
+        "l": 3,
+        "eigenvalue": -12,
+        "degeneracy": 7,
+        "cumulative_degeneracy": 16
+      },
+      {
+        "l": 4,
+        "eigenvalue": -20,
+        "degeneracy": 9,
+        "cumulative_degeneracy": 25
+      },
+      {
+        "l": 5,
+        "eigenvalue": -30,
+        "degeneracy": 11,
+        "cumulative_degeneracy": 36
+      },
+      {
+        "l": 6,
+        "eigenvalue": -42,
+        "degeneracy": 13,
+        "cumulative_degeneracy": 49
+      },
+      {
+        "l": 7,
+        "eigenvalue": -56,
+        "degeneracy": 15,
+        "cumulative_degeneracy": 64
+      },
+      {
+        "l": 8,
+        "eigenvalue": -72,
+        "degeneracy": 17,
+        "cumulative_degeneracy": 81
+      },
+      {
+        "l": 9,
+        "eigenvalue": -90,
+        "degeneracy": 19,
+        "cumulative_degeneracy": 100
+      },
+      {
+        "l": 10,
+        "eigenvalue": -110,
+        "degeneracy": 21,
+        "cumulative_degeneracy": 121
+      }
+    ],
+    "3": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -3,
+        "degeneracy": 4,
+        "cumulative_degeneracy": 5
+      },
+      {
+        "l": 2,
+        "eigenvalue": -8,
+        "degeneracy": 9,
+        "cumulative_degeneracy": 14
+      },
+      {
+        "l": 3,
+        "eigenvalue": -15,
+        "degeneracy": 16,
+        "cumulative_degeneracy": 30
+      },
+      {
+        "l": 4,
+        "eigenvalue": -24,
+        "degeneracy": 25,
+        "cumulative_degeneracy": 55
+      },
+      {
+        "l": 5,
+        "eigenvalue": -35,
+        "degeneracy": 36,
+        "cumulative_degeneracy": 91
+      },
+      {
+        "l": 6,
+        "eigenvalue": -48,
+        "degeneracy": 49,
+        "cumulative_degeneracy": 140
+      },
+      {
+        "l": 7,
+        "eigenvalue": -63,
+        "degeneracy": 64,
+        "cumulative_degeneracy": 204
+      },
+      {
+        "l": 8,
+        "eigenvalue": -80,
+        "degeneracy": 81,
+        "cumulative_degeneracy": 285
+      },
+      {
+        "l": 9,
+        "eigenvalue": -99,
+        "degeneracy": 100,
+        "cumulative_degeneracy": 385
+      },
+      {
+        "l": 10,
+        "eigenvalue": -120,
+        "degeneracy": 121,
+        "cumulative_degeneracy": 506
+      }
+    ],
+    "4": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -4,
+        "degeneracy": 5,
+        "cumulative_degeneracy": 6
+      },
+      {
+        "l": 2,
+        "eigenvalue": -10,
+        "degeneracy": 14,
+        "cumulative_degeneracy": 20
+      },
+      {
+        "l": 3,
+        "eigenvalue": -18,
+        "degeneracy": 30,
+        "cumulative_degeneracy": 50
+      },
+      {
+        "l": 4,
+        "eigenvalue": -28,
+        "degeneracy": 55,
+        "cumulative_degeneracy": 105
+      },
+      {
+        "l": 5,
+        "eigenvalue": -40,
+        "degeneracy": 91,
+        "cumulative_degeneracy": 196
+      },
+      {
+        "l": 6,
+        "eigenvalue": -54,
+        "degeneracy": 140,
+        "cumulative_degeneracy": 336
+      },
+      {
+        "l": 7,
+        "eigenvalue": -70,
+        "degeneracy": 204,
+        "cumulative_degeneracy": 540
+      },
+      {
+        "l": 8,
+        "eigenvalue": -88,
+        "degeneracy": 285,
+        "cumulative_degeneracy": 825
+      },
+      {
+        "l": 9,
+        "eigenvalue": -108,
+        "degeneracy": 385,
+        "cumulative_degeneracy": 1210
+      },
+      {
+        "l": 10,
+        "eigenvalue": -130,
+        "degeneracy": 506,
+        "cumulative_degeneracy": 1716
+      }
+    ],
+    "5": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -5,
+        "degeneracy": 6,
+        "cumulative_degeneracy": 7
+      },
+      {
+        "l": 2,
+        "eigenvalue": -12,
+        "degeneracy": 20,
+        "cumulative_degeneracy": 27
+      },
+      {
+        "l": 3,
+        "eigenvalue": -21,
+        "degeneracy": 50,
+        "cumulative_degeneracy": 77
+      },
+      {
+        "l": 4,
+        "eigenvalue": -32,
+        "degeneracy": 105,
+        "cumulative_degeneracy": 182
+      },
+      {
+        "l": 5,
+        "eigenvalue": -45,
+        "degeneracy": 196,
+        "cumulative_degeneracy": 378
+      },
+      {
+        "l": 6,
+        "eigenvalue": -60,
+        "degeneracy": 336,
+        "cumulative_degeneracy": 714
+      },
+      {
+        "l": 7,
+        "eigenvalue": -77,
+        "degeneracy": 540,
+        "cumulative_degeneracy": 1254
+      },
+      {
+        "l": 8,
+        "eigenvalue": -96,
+        "degeneracy": 825,
+        "cumulative_degeneracy": 2079
+      },
+      {
+        "l": 9,
+        "eigenvalue": -117,
+        "degeneracy": 1210,
+        "cumulative_degeneracy": 3289
+      },
+      {
+        "l": 10,
+        "eigenvalue": -140,
+        "degeneracy": 1716,
+        "cumulative_degeneracy": 5005
+      }
+    ],
+    "6": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -6,
+        "degeneracy": 7,
+        "cumulative_degeneracy": 8
+      },
+      {
+        "l": 2,
+        "eigenvalue": -14,
+        "degeneracy": 27,
+        "cumulative_degeneracy": 35
+      },
+      {
+        "l": 3,
+        "eigenvalue": -24,
+        "degeneracy": 77,
+        "cumulative_degeneracy": 112
+      },
+      {
+        "l": 4,
+        "eigenvalue": -36,
+        "degeneracy": 182,
+        "cumulative_degeneracy": 294
+      },
+      {
+        "l": 5,
+        "eigenvalue": -50,
+        "degeneracy": 378,
+        "cumulative_degeneracy": 672
+      },
+      {
+        "l": 6,
+        "eigenvalue": -66,
+        "degeneracy": 714,
+        "cumulative_degeneracy": 1386
+      },
+      {
+        "l": 7,
+        "eigenvalue": -84,
+        "degeneracy": 1254,
+        "cumulative_degeneracy": 2640
+      },
+      {
+        "l": 8,
+        "eigenvalue": -104,
+        "degeneracy": 2079,
+        "cumulative_degeneracy": 4719
+      },
+      {
+        "l": 9,
+        "eigenvalue": -126,
+        "degeneracy": 3289,
+        "cumulative_degeneracy": 8008
+      },
+      {
+        "l": 10,
+        "eigenvalue": -150,
+        "degeneracy": 5005,
+        "cumulative_degeneracy": 13013
+      }
+    ],
+    "7": [
+      {
+        "l": 0,
+        "eigenvalue": 0,
+        "degeneracy": 1,
+        "cumulative_degeneracy": 1
+      },
+      {
+        "l": 1,
+        "eigenvalue": -7,
+        "degeneracy": 8,
+        "cumulative_degeneracy": 9
+      },
+      {
+        "l": 2,
+        "eigenvalue": -16,
+        "degeneracy": 35,
+        "cumulative_degeneracy": 44
+      },
+      {
+        "l": 3,
+        "eigenvalue": -27,
+        "degeneracy": 112,
+        "cumulative_degeneracy": 156
+      },
+      {
+        "l": 4,
+        "eigenvalue": -40,
+        "degeneracy": 294,
+        "cumulative_degeneracy": 450
+      },
+      {
+        "l": 5,
+        "eigenvalue": -55,
+        "degeneracy": 672,
+        "cumulative_degeneracy": 1122
+      },
+      {
+        "l": 6,
+        "eigenvalue": -72,
+        "degeneracy": 1386,
+        "cumulative_degeneracy": 2508
+      },
+      {
+        "l": 7,
+        "eigenvalue": -91,
+        "degeneracy": 2640,
+        "cumulative_degeneracy": 5148
+      },
+      {
+        "l": 8,
+        "eigenvalue": -112,
+        "degeneracy": 4719,
+        "cumulative_degeneracy": 9867
+      },
+      {
+        "l": 9,
+        "eigenvalue": -135,
+        "degeneracy": 8008,
+        "cumulative_degeneracy": 17875
+      },
+      {
+        "l": 10,
+        "eigenvalue": -160,
+        "degeneracy": 13013,
+        "cumulative_degeneracy": 30888
+      }
+    ]
+  },
+  "cumulative_sequences": {
+    "1": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19,
+      21
+    ],
+    "2": [
+      1,
+      4,
+      9,
+      16,
+      25,
+      36,
+      49,
+      64,
+      81,
+      100,
+      121
+    ],
+    "3": [
+      1,
+      5,
+      14,
+      30,
+      55,
+      91,
+      140,
+      204,
+      285,
+      385,
+      506
+    ],
+    "4": [
+      1,
+      6,
+      20,
+      50,
+      105,
+      196,
+      336,
+      540,
+      825,
+      1210,
+      1716
+    ],
+    "5": [
+      1,
+      7,
+      27,
+      77,
+      182,
+      378,
+      714,
+      1254,
+      2079,
+      3289,
+      5005
+    ],
+    "6": [
+      1,
+      8,
+      35,
+      112,
+      294,
+      672,
+      1386,
+      2640,
+      4719,
+      8008,
+      13013
+    ],
+    "7": [
+      1,
+      9,
+      44,
+      156,
+      450,
+      1122,
+      2508,
+      5148,
+      9867,
+      17875,
+      30888
+    ]
+  },
+  "known_sequence_matches": {
+    "1": [],
+    "2": [
+      "hydrogen_n2 (orbital)",
+      "hydrogen_2n2 (with spin factor 2)",
+      "noble_gas 36 at l=5"
+    ],
+    "3": [],
+    "4": [
+      "nuclear_magic 20 at l=2",
+      "nuclear_magic 50 at l=3"
+    ],
+    "5": [],
+    "6": [
+      "nuclear_magic 8 at l=1"
+    ],
+    "7": []
+  },
+  "spin_doubled_matches": {
+    "1": [
+      "noble_gas 2 at l=0",
+      "noble_gas 10 at l=2",
+      "noble_gas 18 at l=4",
+      "nuclear_magic 2 at l=0",
+      "HO_magic 2 at l=0"
+    ],
+    "2": [
+      "noble_gas 2 at l=0",
+      "noble_gas 18 at l=2",
+      "nuclear_magic 2 at l=0",
+      "nuclear_magic 8 at l=1",
+      "nuclear_magic 50 at l=4",
+      "HO_magic 2 at l=0",
+      "HO_magic 8 at l=1"
+    ],
+    "3": [
+      "noble_gas 2 at l=0",
+      "noble_gas 10 at l=1",
+      "nuclear_magic 2 at l=0",
+      "nuclear_magic 28 at l=2",
+      "HO_magic 2 at l=0"
+    ],
+    "4": [
+      "noble_gas 2 at l=0",
+      "nuclear_magic 2 at l=0",
+      "HO_magic 2 at l=0",
+      "HO_magic 40 at l=2"
+    ],
+    "5": [
+      "noble_gas 2 at l=0",
+      "noble_gas 54 at l=2",
+      "nuclear_magic 2 at l=0",
+      "HO_magic 2 at l=0"
+    ],
+    "6": [
+      "noble_gas 2 at l=0",
+      "nuclear_magic 2 at l=0",
+      "HO_magic 2 at l=0",
+      "HO_magic 70 at l=2"
+    ],
+    "7": [
+      "noble_gas 2 at l=0",
+      "noble_gas 18 at l=1",
+      "nuclear_magic 2 at l=0",
+      "HO_magic 2 at l=0"
+    ]
+  },
+  "s3_verification": {
+    "degeneracies_match_n_squared": true,
+    "note": "S^3 harmonic degeneracy g_l = (l+1)^2 matches n^2 with n=l+1"
+  },
+  "flat_packing": {
+    "2": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19
+    ],
+    "3": [
+      1,
+      7,
+      19,
+      37,
+      61,
+      91,
+      127,
+      169,
+      217,
+      271
+    ],
+    "4": [
+      1,
+      15,
+      65,
+      175,
+      369,
+      671,
+      1105,
+      1695,
+      2465,
+      3439
+    ],
+    "5": [
+      1,
+      31,
+      211,
+      781,
+      2101,
+      4651,
+      9031,
+      15961,
+      26281,
+      40951
+    ],
+    "6": [
+      1,
+      63,
+      665,
+      3367,
+      11529,
+      31031,
+      70993,
+      144495,
+      269297,
+      468559
+    ]
+  },
+  "flat_packing_matches": {
+    "2": [
+      "Exact match with S^2 harmonic degeneracies",
+      "Proportional to S^2 degeneracies (ratio = 1)"
+    ],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "packing_sphere_correspondence": {
+    "1": {
+      "flat_packing_capacity": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "matching_sphere": null
+    },
+    "2": {
+      "flat_packing_capacity": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13
+      ],
+      "matching_sphere": 2
+    },
+    "3": {
+      "flat_packing_capacity": [
+        1,
+        7,
+        19,
+        37,
+        61,
+        91,
+        127
+      ],
+      "matching_sphere": null
+    },
+    "4": {
+      "flat_packing_capacity": [
+        1,
+        15,
+        65,
+        175,
+        369,
+        671,
+        1105
+      ],
+      "matching_sphere": null
+    },
+    "5": {
+      "flat_packing_capacity": [
+        1,
+        31,
+        211,
+        781,
+        2101,
+        4651,
+        9031
+      ],
+      "matching_sphere": null
+    },
+    "6": {
+      "flat_packing_capacity": [
+        1,
+        63,
+        665,
+        3367,
+        11529,
+        31031,
+        70993
+      ],
+      "matching_sphere": null
+    },
+    "7": {
+      "flat_packing_capacity": [
+        1,
+        127,
+        2059,
+        14197,
+        61741,
+        201811,
+        543607
+      ],
+      "matching_sphere": null
+    }
+  },
+  "s5_ho_verification": {
+    "degeneracies_match": false,
+    "note": "S^5 harmonic degeneracy matches 3D isotropic HO: (N+1)(N+2)/2"
+  },
+  "ho_sphere_correspondence": {
+    "1": {
+      "d_sphere": 1,
+      "match": false
+    },
+    "2": {
+      "d_sphere": 3,
+      "match": false
+    },
+    "3": {
+      "d_sphere": 5,
+      "match": false
+    },
+    "4": {
+      "d_sphere": 7,
+      "match": false
+    }
+  },
+  "exceptional_lie": {
+    "G2_symmetric_a0": [
+      1,
+      7,
+      27,
+      77,
+      182,
+      378,
+      714,
+      1254
+    ],
+    "G2_symmetric_0b": [
+      1,
+      14,
+      77,
+      273,
+      748,
+      1729,
+      3542,
+      6630
+    ],
+    "F4_fundamental": [
+      26,
+      52,
+      273,
+      1274
+    ],
+    "E6_fundamental": [
+      27,
+      78,
+      351,
+      2925,
+      351,
+      27
+    ],
+    "E7_fundamental": [
+      133,
+      912,
+      8645,
+      365750
+    ],
+    "E8_fundamental": [
+      248,
+      30380,
+      2450240,
+      146325270
+    ]
+  },
+  "summary": "\nINVERSE PACKING PROBLEM -- KEY FINDINGS\n========================================\n\n1. LAPLACE-BELTRAMI EIGENVALUES ON S^d:\n   Eigenvalue: lambda_l = -l(l+d-1)\n   Degeneracy: g_l = C(l+d,d) - C(l+d-2,d)\n\n   Known physical correspondences:\n   - S^2: g_l = 2l+1 = SO(3) irrep dim = angular momentum states\n   - S^3: g_l = (l+1)^2 = n^2 hydrogen orbital degeneracy (Fock, Paper 7)\n   - S^5: g_l matches 3D HO via Bargmann-Segal holomorphic sector (Paper 24),\n     but the FULL S^5 harmonic degeneracy is LARGER than the HO degeneracy.\n     The HO selects the holomorphic sector (SU(3) (N,0) irreps).\n   - S^6: g_l matches G2 symmetric irrep (a,0) dimensions exactly! (SURPRISE)\n\n2. THE S^2 UNIQUENESS:\n   Paper 0's flat 2D packing gives shell capacity 2k-1 = 2l+1.\n   This EXACTLY matches the S^2 harmonic degeneracy.\n   For d >= 3 flat packing, k^d-(k-1)^d does NOT match any S^d degeneracy.\n   The d=2 flat-to-sphere correspondence is UNIQUE.\n\n3. CUMULATIVE DEGENERACIES WITH SPIN FACTOR 2:\n   - S^2 x 2: 2, 8, 18, 32, 50, 72, 98 = hydrogen 2n^2 shell capacities\n     Hits nuclear magic 2, 8, 50 and noble gas 2, 18.\n   - S^3 x 2: 2, 10, 28, 60, 110, ... -> hits nuclear magic 2, 28\n   - HO magic numbers 2, 8, 20, 40, 70, 112 come from filling HO shells\n     with capacity 2*(N+1)(N+2)/2 (3D HO with spin), NOT from S^5 cumulative.\n     The S^5 cumulative x2 is 2, 14, 54, ... which does NOT match HO magic.\n\n4. S^3 vs HYDROGEN:\n   S^3 gives ORBITAL degeneracy n^2 per shell.\n   Hydrogen with spin has 2n^2 per shell.\n   The cumulative sum_n^2 = N(N+1)(2N+1)/6 does NOT equal 2N^2.\n   Noble gas numbers come from Madelung-rule filling of 2n^2 states,\n   not from cumulative S^3 sums.\n\n5. BARGMANN-SEGAL GENERALIZATION:\n   For d-dimensional HO, the Bargmann space is C^d with unit sphere S^{2d-1}.\n   The HO shell degeneracy C(N+d-1,d-1) = SU(d) symmetric irrep (N,0,...,0) dim.\n   The FULL S^{2d-1} Laplace-Beltrami degeneracy is LARGER for all d.\n   The ratio S^{2d-1}_full / SU(d)_(N,0) = N+1 for d=2 (S^3), and grows\n   faster for d >= 3. The HO lives in a HOLOMORPHIC SUBSECTOR of S^{2d-1}.\n\n6. G2 = S^6 SURPRISE:\n   The G2 exceptional Lie group symmetric irreps (a,0) have dimensions:\n   1, 7, 27, 77, 182, 378, 714, 1254\n   These EXACTLY match the S^6 spherical harmonic degeneracies!\n   This means dim(a,0)_{G2} = C(a+6,6) - C(a+4,6) for all a.\n   Algebraically: the Weyl dimension formula for G2 (a,0) reduces to\n   (a+1)(a+2)(a+3)(a+4)(2a+5)/120 which equals the S^6 harmonic formula.\n   IMPLICATION: G2 is the \"angular momentum group\" of S^6 in the same way\n   that SO(3) is the angular momentum group of S^2. This suggests a potential\n   physical system on S^6 or S^7 whose symmetry group is G2.\n   G2 is the automorphism group of the octonions -- this S^6 = G2/SU(3)\n   connection is known in differential geometry (S^6 has a nearly-Kahler\n   structure from the octonion cross product).\n\n7. PHYSICS ENCODED BY EACH SPHERE:\n   - S^1: Fourier modes, 1D periodic systems, particle on a ring\n   - S^2: Angular momentum, universal angular cross-section (Paper 0)\n   - S^3: Hydrogen/Coulomb problem via Fock projection (Paper 7)\n   - S^4: No known single-particle quantum system identified (\"orphan\")\n   - S^5: 3D HO via Bargmann-Segal holomorphic sector (Paper 24)\n   - S^6: G2 symmetric irreps -- octonion geometry, nearly-Kahler structure\n   - S^7: Quaternionic structure, Sp(2) action, 4D HO Bargmann space\n   - General pattern: S^{2d-1} hosts d-dim HO (holomorphic sector only)\n\nSURPRISES:\na) The flat-to-sphere correspondence (Paper 0) is unique to d=2. No higher-d\n   analog of the packing construction recovers spherical harmonic degeneracies.\n\nb) G2 symmetric irreps = S^6 harmonics. This was not expected and connects\n   exceptional Lie algebras to the sphere-packing framework. S^6 = G2/SU(3)\n   is one of only two spheres (S^2 and S^6) that admit an almost-complex\n   structure, and the only non-Kahler one.\n\nc) S^4 is an \"orphan\" -- no known quantum system has its degeneracy pattern\n   g_l = (l+1)(l+2)(2l+3)/6. This is curious given S^3 (Coulomb) and S^5 (HO)\n   are the two fundamental QM potentials, and S^6 has the G2 connection.\n   S^4 = SO(5)/SO(4), related to Sp(2) -- could encode a 5D rotational system?\n\nd) The HO magic numbers do NOT come from S^5 cumulative degeneracies.\n   They come from filling HO shells (with spin), which are SU(3) (N,0) irreps\n   (a proper subset of S^5 harmonics). The Bargmann-Segal construction\n   selects the holomorphic sector, not the full Laplace-Beltrami spectrum.\n\ne) The S^{2d-1} harmonic degeneracy always exceeds the d-dim HO degeneracy\n   by a factor that grows with N. At N=1: ratio = 2 for all d >= 2.\n   The non-holomorphic harmonics are \"extra\" degrees of freedom that the\n   HO does not use. Their physical meaning (if any) is unclear.\n"
+}
