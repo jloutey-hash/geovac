@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-04-13T16:27:13.218024",
+  "description": "H- variational-k investigation",
+  "E_exact": -0.527751,
+  "results": [
+    {
+      "n_max": 1,
+      "E_exact": -0.527751,
+      "n_configs": 1,
+      "E_std_k1": -0.375,
+      "variational_std_k1": true,
+      "k_std_opt": 0.6875000102306067,
+      "E_std_opt": -0.47265624999999994,
+      "variational_std_opt": true,
+      "E_graph_k1": -0.375,
+      "variational_graph_k1": true,
+      "k_gvar_opt": 0.6875000000000004,
+      "E_gvar_opt": -0.47265624999999994,
+      "variational_gvar_opt": true
+    },
+    {
+      "n_max": 2,
+      "E_exact": -0.527751,
+      "n_configs": 7,
+      "E_std_k1": -0.5146675200158466,
+      "variational_std_k1": true,
+      "k_std_opt": 1.0222151935152082,
+      "E_std_opt": -0.5147934006054666,
+      "variational_std_opt": true,
+      "E_graph_k1": -0.6099273129862248,
+      "variational_graph_k1": false,
+      "k_gvar_opt": 1.1576336666244573,
+      "E_gvar_opt": -0.6147743282888806,
+      "variational_gvar_opt": false
+    },
+    {
+      "n_max": 3,
+      "E_exact": -0.527751,
+      "n_configs": 31,
+      "E_std_k1": -0.5156018731540716,
+      "variational_std_k1": true,
+      "k_std_opt": 1.0221995061449733,
+      "E_std_opt": -0.5157229085695229,
+      "variational_std_opt": true,
+      "E_graph_k1": -0.6292322608121077,
+      "variational_graph_k1": false,
+      "k_gvar_opt": 1.1535902730884064,
+      "E_gvar_opt": -0.6338890253148604,
+      "variational_gvar_opt": false
+    },
+    {
+      "n_max": 4,
+      "E_exact": -0.527751,
+      "n_configs": 101,
+      "E_std_k1": -0.5160246474337481,
+      "variational_std_k1": true,
+      "k_std_opt": 1.0226693512008973,
+      "E_std_opt": -0.5161478724605173,
+      "variational_std_opt": true,
+      "E_graph_k1": -0.6365118353147197,
+      "variational_graph_k1": false,
+      "k_gvar_opt": 1.1786278161412598,
+      "E_gvar_opt": -0.6424420707342533,
+      "variational_gvar_opt": false
+    },
+    {
+      "n_max": 5,
+      "E_exact": -0.527751,
+      "n_configs": 266,
+      "E_std_k1": -0.5162237591325188,
+      "variational_std_k1": true,
+      "k_std_opt": 1.0227153572454981,
+      "E_std_opt": -0.5163460423444259,
+      "variational_std_opt": true,
+      "E_graph_k1": -0.6384698733465868,
+      "variational_graph_k1": false,
+      "k_gvar_opt": 1.1720267749174922,
+      "E_gvar_opt": -0.6440537273655981,
+      "variational_gvar_opt": false
+    }
+  ]
+}

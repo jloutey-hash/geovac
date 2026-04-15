@@ -1,0 +1,133 @@
+{
+  "n_bond_orbitals": 10,
+  "n_bond_configs": 25,
+  "bond_orbital_indices": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "bond_orbital_info": [
+    {
+      "global_idx": 5,
+      "sub_block": "LiH_bond_center",
+      "nlm": [
+        1,
+        0,
+        0
+      ],
+      "center": "X"
+    },
+    {
+      "global_idx": 6,
+      "sub_block": "LiH_bond_center",
+      "nlm": [
+        2,
+        0,
+        0
+      ],
+      "center": "X"
+    },
+    {
+      "global_idx": 7,
+      "sub_block": "LiH_bond_center",
+      "nlm": [
+        2,
+        1,
+        -1
+      ],
+      "center": "X"
+    },
+    {
+      "global_idx": 8,
+      "sub_block": "LiH_bond_center",
+      "nlm": [
+        2,
+        1,
+        0
+      ],
+      "center": "X"
+    },
+    {
+      "global_idx": 9,
+      "sub_block": "LiH_bond_center",
+      "nlm": [
+        2,
+        1,
+        1
+      ],
+      "center": "X"
+    },
+    {
+      "global_idx": 10,
+      "sub_block": "LiH_bond_partner",
+      "nlm": [
+        1,
+        0,
+        0
+      ],
+      "center": "H"
+    },
+    {
+      "global_idx": 11,
+      "sub_block": "LiH_bond_partner",
+      "nlm": [
+        2,
+        0,
+        0
+      ],
+      "center": "H"
+    },
+    {
+      "global_idx": 12,
+      "sub_block": "LiH_bond_partner",
+      "nlm": [
+        2,
+        1,
+        -1
+      ],
+      "center": "H"
+    },
+    {
+      "global_idx": 13,
+      "sub_block": "LiH_bond_partner",
+      "nlm": [
+        2,
+        1,
+        0
+      ],
+      "center": "H"
+    },
+    {
+      "global_idx": 14,
+      "sub_block": "LiH_bond_partner",
+      "nlm": [
+        2,
+        1,
+        1
+      ],
+      "center": "H"
+    }
+  ],
+  "E_full": -2.579965860796761,
+  "E_kin": -3.0700449350131085,
+  "S_full": 0.07932567931249805,
+  "S_kin": -0.0,
+  "w_B_dimless": 0.04221033200241933,
+  "V_frobenius": 1.1661303477196983,
+  "V_diag_fraction_unsquared": 0.9577481499979199,
+  "kin_frobenius": 7.945653194871728,
+  "reference_predictions": {
+    "S_pred_he_like_ref": 0.004325766600413296,
+    "S_pred_low_Z_band": 0.003885606094626549,
+    "ratio_S_bond_over_S_pred_ref": 18.33794715251605,
+    "ratio_S_bond_over_S_pred_low_Z": 20.415265310140025
+  },
+  "wall_seconds": 2.0773301124572754
+}

@@ -1,0 +1,263 @@
+{
+  "rows": [
+    {
+      "S_B": 0.03954502764024503,
+      "w_B_dimless": 0.08223958785144443,
+      "delta_B": 0.2634151616856636,
+      "kin_frobenius": 5.704302104552317,
+      "n_max": 2,
+      "system": "HeLike_Z2_nmax2",
+      "kind": "single_center",
+      "Z": 2.0
+    },
+    {
+      "S_B": 0.00935807579829679,
+      "w_B_dimless": 0.051221316843156665,
+      "delta_B": 0.2631763677708122,
+      "kin_frobenius": 12.828496112171527,
+      "n_max": 2,
+      "system": "HeLike_Z3_nmax2",
+      "kind": "single_center",
+      "Z": 3.0
+    },
+    {
+      "S_B": 0.003862766732545213,
+      "w_B_dimless": 0.03744731090284642,
+      "delta_B": 0.2631360695301641,
+      "kin_frobenius": 22.804364987870194,
+      "n_max": 2,
+      "system": "HeLike_Z4_nmax2",
+      "kind": "single_center",
+      "Z": 4.0
+    },
+    {
+      "S_B": 0.0013314502132305143,
+      "w_B_dimless": 0.024499917019202334,
+      "delta_B": 0.2631210930290351,
+      "kin_frobenius": 51.308274795592176,
+      "n_max": 2,
+      "system": "HeLike_Z6_nmax2",
+      "kind": "single_center",
+      "Z": 6.0
+    },
+    {
+      "S_B": 0.00041550733966760434,
+      "w_B_dimless": 0.014556504007062291,
+      "delta_B": 0.2631178836739179,
+      "kin_frobenius": 142.52206517764188,
+      "n_max": 2,
+      "system": "HeLike_Z10_nmax2",
+      "kind": "single_center",
+      "Z": 10.0
+    },
+    {
+      "S_B": 0.04081105136647098,
+      "w_B_dimless": 0.10443952594881536,
+      "delta_B": 0.2009153064866663,
+      "kin_frobenius": 7.412022578466942,
+      "n_max": 3,
+      "system": "HeLike_Z2_nmax3",
+      "kind": "single_center",
+      "Z": 2.0
+    },
+    {
+      "S_B": 0.011211717937421746,
+      "w_B_dimless": 0.06404631864472168,
+      "delta_B": 0.20241900128274115,
+      "kin_frobenius": 16.64847966031733,
+      "n_max": 3,
+      "system": "HeLike_Z3_nmax3",
+      "kind": "single_center",
+      "Z": 3.0
+    },
+    {
+      "S_B": 0.004984212431364122,
+      "w_B_dimless": 0.046280821558969884,
+      "delta_B": 0.20268338965264013,
+      "kin_frobenius": 29.5887416809039,
+      "n_max": 3,
+      "system": "HeLike_Z4_nmax3",
+      "kind": "single_center",
+      "Z": 4.0
+    },
+    {
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "delta_B": 0.2027825033906775,
+      "kin_frobenius": 66.56751741652981,
+      "n_max": 3,
+      "system": "HeLike_Z6_nmax3",
+      "kind": "single_center",
+      "Z": 6.0
+    },
+    {
+      "S_B": 0.0005855700034359207,
+      "w_B_dimless": 0.017714676588318476,
+      "delta_B": 0.20280380425589908,
+      "kin_frobenius": 184.90551422230436,
+      "n_max": 3,
+      "system": "HeLike_Z10_nmax3",
+      "kind": "single_center",
+      "Z": 10.0
+    },
+    {
+      "S_B": 0.04187943008973696,
+      "w_B_dimless": 0.11054006052203875,
+      "delta_B": 0.16243267650655135,
+      "kin_frobenius": 9.165225054991392,
+      "n_max": 4,
+      "system": "HeLike_Z2_nmax4",
+      "kind": "single_center",
+      "Z": 2.0
+    },
+    {
+      "S_B": 0.011975181544890363,
+      "w_B_dimless": 0.06890817329267976,
+      "delta_B": 0.16411559337428253,
+      "kin_frobenius": 20.53384211186499,
+      "n_max": 4,
+      "system": "HeLike_Z3_nmax4",
+      "kind": "single_center",
+      "Z": 3.0
+    },
+    {
+      "S_B": 0.005436015305172925,
+      "w_B_dimless": 0.049642634842138794,
+      "delta_B": 0.16440315553755586,
+      "kin_frobenius": 36.47824324084524,
+      "n_max": 4,
+      "system": "HeLike_Z4_nmax4",
+      "kind": "single_center",
+      "Z": 4.0
+    },
+    {
+      "S_B": 0.002016715963703004,
+      "w_B_dimless": 0.03186515346708666,
+      "delta_B": 0.16451028157159764,
+      "kin_frobenius": 82.05400279693855,
+      "n_max": 4,
+      "system": "HeLike_Z6_nmax4",
+      "kind": "single_center",
+      "Z": 6.0
+    },
+    {
+      "S_B": 0.0006564899037704963,
+      "w_B_dimless": 0.018742269904751398,
+      "delta_B": 0.1645332558459328,
+      "kin_frobenius": 227.91466372943452,
+      "n_max": 4,
+      "system": "HeLike_Z10_nmax4",
+      "kind": "single_center",
+      "Z": 10.0
+    },
+    {
+      "S_B": 0.009860875039266638,
+      "w_B_dimless": 0.028877623079183675,
+      "delta_B": 0.10743879545729935,
+      "kin_frobenius": 9.230232717125068,
+      "n_orb": 10,
+      "n_cfg": 25,
+      "block_label": "LiH_bond",
+      "R": 2.0,
+      "max_n": 2,
+      "system": "LiH_bond_R2_nmax2",
+      "kind": "bond_LiH"
+    },
+    {
+      "S_B": 0.07932567931250037,
+      "w_B_dimless": 0.04221033200241933,
+      "delta_B": 0.06812726276004705,
+      "kin_frobenius": 7.945653194871728,
+      "n_orb": 10,
+      "n_cfg": 25,
+      "block_label": "LiH_bond",
+      "R": 3.015,
+      "max_n": 2,
+      "system": "LiH_bond_R3.015_nmax2",
+      "kind": "bond_LiH"
+    },
+    {
+      "S_B": 0.17289212577213212,
+      "w_B_dimless": 0.05137552789911296,
+      "delta_B": 0.0458885565498927,
+      "kin_frobenius": 7.126244529327632,
+      "n_orb": 10,
+      "n_cfg": 25,
+      "block_label": "LiH_bond",
+      "R": 4.0,
+      "max_n": 2,
+      "system": "LiH_bond_R4_nmax2",
+      "kind": "bond_LiH"
+    },
+    {
+      "S_B": 0.2449731966276564,
+      "w_B_dimless": 0.05677886241790395,
+      "delta_B": 0.036039018328714464,
+      "kin_frobenius": 6.474922443758879,
+      "n_orb": 10,
+      "n_cfg": 25,
+      "block_label": "LiH_bond",
+      "R": 5.0,
+      "max_n": 2,
+      "system": "LiH_bond_R5_nmax2",
+      "kind": "bond_LiH"
+    },
+    {
+      "S_B": 0.693147180559945,
+      "w_B_dimless": 0.03127428326904572,
+      "delta_B": 0.037758378777472075,
+      "kin_frobenius": 15.585018715789333,
+      "n_orb": 10,
+      "n_cfg": 25,
+      "block_label": "BeH2_bond_1",
+      "R": null,
+      "max_n": 2,
+      "system": "BeH2_bond1_nmax2",
+      "kind": "bond_BeH2"
+    },
+    {
+      "S_B": 0.0008366227867208436,
+      "w_B_dimless": 0.0154326544793888,
+      "delta_B": 0.17920283949470323,
+      "kin_frobenius": 74.30659087008205,
+      "n_orb": 10,
+      "n_cfg": 25,
+      "block_label": "H2O_bond_1",
+      "R": null,
+      "max_n": 2,
+      "system": "H2O_bond1_nmax2",
+      "kind": "bond_H2O"
+    }
+  ],
+  "n_max_fits": {
+    "n_max_2": {
+      "gamma": 2.6269880158528753,
+      "A": 0.7340509428026321,
+      "r2": 0.9950944723577372,
+      "n": 5
+    },
+    "n_max_3": {
+      "gamma": 2.378284447856224,
+      "A": 0.17923399791821867,
+      "r2": 0.9981743974649023,
+      "n": 5
+    },
+    "n_max_4": {
+      "gamma": 2.317173886502485,
+      "A": 0.09380234415298715,
+      "r2": 0.9979093229403893,
+      "n": 5
+    }
+  },
+  "combined_power_law": {
+    "gamma": 2.1982424413209527,
+    "A": 0.16641302972274286,
+    "r2": 0.8971601442211103,
+    "n": 21
+  },
+  "combined_bounded": {
+    "c": 0.6470821363720001,
+    "gamma": 0.7234201253830758,
+    "r2": 0.3732906386602691
+  }
+}

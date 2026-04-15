@@ -1,0 +1,129 @@
+{
+  "description": "Z-sweep of graph-native CI variational bound crossover",
+  "date": "2026-04-13",
+  "method": "graph-native CI: h1=graph Laplacian (diag=-Z^2/2n^2, offdiag=kappa=-1/16), V_ee=Slater at k=Z",
+  "Z_crossover_vs_nmax": {
+    "2": 1.761569,
+    "3": 1.785191,
+    "4": 1.811733,
+    "5": 1.824105,
+    "6": 1.831515,
+    "7": 1.83622
+  },
+  "Z_crossover_extrapolated": {
+    "linear_1_over_nmax": 1.8661,
+    "quadratic_1_over_nmax": 1.8877
+  },
+  "summary_nmax7": {
+    "0.50": {
+      "E_CI": -0.2742,
+      "E_exact": null,
+      "delta": null,
+      "variational": null
+    },
+    "0.75": {
+      "E_CI": -0.41053,
+      "E_exact": null,
+      "delta": null,
+      "variational": null
+    },
+    "0.90": {
+      "E_CI": -0.535575,
+      "E_exact": null,
+      "delta": null,
+      "variational": null
+    },
+    "0.95": {
+      "E_CI": -0.585316,
+      "E_exact": -0.46642,
+      "delta": -0.118896,
+      "variational": false
+    },
+    "1.00": {
+      "E_CI": -0.640059,
+      "E_exact": -0.52775,
+      "delta": -0.112309,
+      "variational": false
+    },
+    "1.10": {
+      "E_CI": -0.766477,
+      "E_exact": -0.68017,
+      "delta": -0.086307,
+      "variational": false
+    },
+    "1.25": {
+      "E_CI": -0.999394,
+      "E_exact": -0.93892,
+      "delta": -0.060474,
+      "variational": false
+    },
+    "1.50": {
+      "E_CI": -1.498884,
+      "E_exact": -1.47017,
+      "delta": -0.028714,
+      "variational": false
+    },
+    "2.00": {
+      "E_CI": -2.897464,
+      "E_exact": -2.90372,
+      "delta": 0.006256,
+      "variational": true
+    },
+    "3.00": {
+      "E_CI": -7.237143,
+      "E_exact": -7.27991,
+      "delta": 0.042767,
+      "variational": true
+    },
+    "5.00": {
+      "E_CI": -21.963437,
+      "E_exact": -22.031,
+      "delta": 0.067563,
+      "variational": true
+    },
+    "10.00": {
+      "E_CI": -93.823637,
+      "E_exact": -93.907,
+      "delta": 0.083363,
+      "variational": true
+    }
+  },
+  "energy_decomposition_nmax7": {
+    "0.50": {
+      "h1_diag": -0.096935,
+      "h1_offdiag": -0.197005,
+      "V_ee": 0.01974
+    },
+    "0.75": {
+      "h1_diag": -0.292068,
+      "h1_offdiag": -0.157932,
+      "V_ee": 0.039471
+    },
+    "1.00": {
+      "h1_diag": -0.650799,
+      "h1_offdiag": -0.141723,
+      "V_ee": 0.152463
+    },
+    "1.50": {
+      "h1_diag": -1.989852,
+      "h1_offdiag": -0.084747,
+      "V_ee": 0.575715
+    },
+    "2.00": {
+      "h1_diag": -3.795006,
+      "h1_offdiag": -0.055583,
+      "V_ee": 0.953124
+    },
+    "5.00": {
+      "h1_diag": -24.895199,
+      "h1_offdiag": -0.01577,
+      "V_ee": 2.947532
+    },
+    "10.00": {
+      "h1_diag": -99.919672,
+      "h1_offdiag": -0.006874,
+      "V_ee": 6.102909
+    }
+  },
+  "physical_interpretation": "The crossover occurs at Z_c ~ 1.84 (n_max=7), extrapolating to ~1.87-1.89 at CBS. Below Z_c, the graph off-diagonal (kappa=-1/16) creates artificial inter-shell coupling that lowers E_CI below exact. Above Z_c, the Z^2-scaled diagonal dominates and the graph approximation is variational. The off-diagonal importance scales as 1/(8Z^2): 12.5% at Z=1, 3.1% at Z=2, 0.5% at Z=5."
+}

@@ -1,4 +1,4 @@
-# GeoVac Atomic and Molecular Scope Boundary — v2.0.30
+# GeoVac Atomic and Molecular Scope Boundary — v2.9.0
 
 GeoVac's composed architecture handles any first-row molecule (atoms H through Ne) built from 1s² cores + valence blocks. The atomic classifier (`geovac/atomic_classifier.py`) maps Z to block decomposition for Z=1-10, and the general composed builder (`geovac/composed_qubit.py`) constructs qubit Hamiltonians from `MolecularSpec` dataclasses. Second-row atoms (Na-Ar) are feasible but require external core data that the framework does not currently compute. Transition metals are out of scope.
 
@@ -128,6 +128,25 @@ Transition metals are out of scope for the foreseeable future, for four compound
 
 ---
 
+## Exotic Atoms (v2.9.0)
+
+The hyperspherical framework (Level 3) extends to exotic two-particle systems via sign flips in the charge function. No new angular machinery is required; Gaunt selection rules are preserved.
+
+| System | Particles | Charge function | Status | Error |
+|:-------|:----------|:----------------|:-------|:------|
+| He | e⁻e⁻ + Z=2 nucleus | -Z/sinα - Z/cosα + 1/r₁₂ | Production | 0.019% |
+| H⁻ | e⁻e⁻ + Z=1 nucleus | Same as He at Z=1 | Tested (graph-native CI over-binds, standard CI works) | 2.1% (std FCI) |
+| PsH | e⁻e⁺ + Z=1 proton | -1/sinα + 1/cosα - 1/r₁₂ | Prototype | 4.1% |
+| Ps (positronium) | e⁻e⁺ (no nucleus) | Reduces to 1-body; graph identical to H | Trivial | exact |
+
+**Key differences from standard He:**
+- **PsH:** nuclear term sign-flipped for positron (+1/cosα), V_ee attractive (-1/r₁₂), alpha parity mixing required (distinguishable particles double the angular basis). Shallow well (0.042 Ha depth at l_max=3 vs He's 4.47 Ha).
+- **H⁻:** same framework as He at Z=1. Graph-native CI violates variational bound (Z < Z_c ≈ 1.84); standard Casimir FCI is properly variational.
+
+**Graph validity boundary:** The graph Laplacian CI is non-variational below Z_c ≈ 1.84, where the rigid kappa=-1/16 inter-shell coupling overestimates correlation for weakly-bound/asymmetric systems. Standard (non-graph) FCI is always variational. Details in CLAUDE.md Section 2.
+
+---
+
 ## Near-Term Reachability Summary
 
 | Category | Atoms | Status | Bottleneck |
@@ -135,4 +154,5 @@ Transition metals are out of scope for the foreseeable future, for four compound
 | Fully operational | H, He, Li, Be, C, N, O, F | Production | Validation |
 | Architecturally ready, untested | B, Ne | Need testing | PK validation, molecular targets |
 | Feasible with external data | Na-Ar | Approach (1) or (3) | 10e core tabulation |
+| Exotic atoms | PsH, H⁻ | Prototype (v2.9.0) | Asymptotic convergence (PsH), graph validity (H⁻) |
 | Out of scope | Z > 20 | Fundamental | Multi-reference, many-electron core |

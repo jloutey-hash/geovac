@@ -1,0 +1,222 @@
+{
+  "rows": [
+    {
+      "S_B": 0.04081105136647098,
+      "w_B_dimless": 0.10443952594881536,
+      "delta_B": 0.2009153064866663,
+      "gap_absolute": 1.4891887880387764,
+      "kin_frobenius": 7.412022578466942,
+      "system": "He-like_Z2",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.011211717937421746,
+      "w_B_dimless": 0.06404631864472168,
+      "delta_B": 0.20241900128274115,
+      "gap_absolute": 3.3699686257174637,
+      "kin_frobenius": 16.64847966031733,
+      "system": "He-like_Z3",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.004984212431364122,
+      "w_B_dimless": 0.046280821558969884,
+      "delta_B": 0.20268338965264013,
+      "gap_absolute": 5.997146459441959,
+      "kin_frobenius": 29.5887416809039,
+      "system": "He-like_Z4",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.002815707582828573,
+      "w_B_dimless": 0.03638181738984572,
+      "delta_B": 0.20275626167645633,
+      "gap_absolute": 9.373169572238837,
+      "kin_frobenius": 46.22875513061026,
+      "system": "He-like_Z5",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "delta_B": 0.2027825033906775,
+      "gap_absolute": 13.498727826226439,
+      "kin_frobenius": 66.56751741652981,
+      "system": "He-like_Z6",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "delta_B": 0.20279376334891672,
+      "gap_absolute": 18.3740650124798,
+      "kin_frobenius": 90.60468482389328,
+      "system": "He-like_Z7",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.0009475627472664976,
+      "w_B_dimless": 0.02216105554295047,
+      "delta_B": 0.2027992306797982,
+      "gap_absolute": 23.99928402773262,
+      "kin_frobenius": 118.34011375331764,
+      "system": "He-like_Z8",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.0007334010824585513,
+      "w_B_dimless": 0.019725728184190435,
+      "delta_B": 0.20280214098097213,
+      "gap_absolute": 30.374434242006238,
+      "kin_frobenius": 149.77373559806804,
+      "system": "He-like_Z9",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.0005855700034359207,
+      "w_B_dimless": 0.017714676588318476,
+      "delta_B": 0.20280380425589908,
+      "gap_absolute": 37.49954171217658,
+      "kin_frobenius": 184.90551422230436,
+      "system": "He-like_Z10",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.00039965858412933307,
+      "w_B_dimless": 0.014711671547636194,
+      "delta_B": 0.20280544732650369,
+      "gap_absolute": 53.99968172820542,
+      "kin_frobenius": 266.26346796922775,
+      "system": "He-like_Z12",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.0002530299649626033,
+      "w_B_dimless": 0.01172116698147682,
+      "delta_B": 0.20280635095188834,
+      "gap_absolute": 84.37479630029233,
+      "kin_frobenius": 416.03626269232825,
+      "system": "He-like_Z15",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.00014211849419430963,
+      "w_B_dimless": 0.008786227852307874,
+      "delta_B": 0.20280677951514714,
+      "gap_absolute": 149.99988541737793,
+      "kin_frobenius": 739.619680249273,
+      "system": "He-like_Z20",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 6.405372314432378e-05,
+      "w_B_dimless": 0.005847258151343087,
+      "delta_B": 0.20280693869818447,
+      "gap_absolute": 337.49994907413657,
+      "kin_frobenius": 1664.1439944833498,
+      "system": "He-like_Z30",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 2.3847781137045032e-05,
+      "w_B_dimless": 0.0035023628902324973,
+      "delta_B": 0.20280697280368692,
+      "gap_absolute": 937.4999816666716,
+      "kin_frobenius": 4622.62203664049,
+      "system": "He-like_Z50",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 6.3276789978025065e-06,
+      "w_B_dimless": 0.0017527459287052212,
+      "delta_B": 0.20280697756451188,
+      "gap_absolute": 3749.9999954166624,
+      "kin_frobenius": 18490.488051496188,
+      "system": "He-like_Z100",
+      "kind": "single_center"
+    },
+    {
+      "S_B": 0.0021964862430990796,
+      "w_B_dimless": 0.021410125185812073,
+      "delta_B": 0.11943245338192811,
+      "gap_absolute": 1.219464701903516,
+      "kin_frobenius": 10.210496957672303,
+      "R": 1.5,
+      "E_full": -4.009088069011368,
+      "system": "LiH_bond_R1.5",
+      "kind": "bond"
+    },
+    {
+      "S_B": 0.009860875039266638,
+      "w_B_dimless": 0.028877623079183675,
+      "delta_B": 0.10743879545729935,
+      "gap_absolute": 0.9916850849184726,
+      "kin_frobenius": 9.230232717125068,
+      "R": 2.0,
+      "E_full": -3.359813006844362,
+      "system": "LiH_bond_R2",
+      "kind": "bond"
+    },
+    {
+      "S_B": 0.07932567931250037,
+      "w_B_dimless": 0.04221033200241933,
+      "delta_B": 0.06812726276004705,
+      "gap_absolute": 0.5413156030072335,
+      "kin_frobenius": 7.945653194871728,
+      "R": 3.015,
+      "E_full": -2.579965860796761,
+      "system": "LiH_bond_R3.015",
+      "kind": "bond"
+    },
+    {
+      "S_B": 0.17289212577213212,
+      "w_B_dimless": 0.05137552789911296,
+      "delta_B": 0.0458885565498927,
+      "gap_absolute": 0.3270130750724145,
+      "kin_frobenius": 7.126244529327632,
+      "R": 4.0,
+      "E_full": -2.1715782825816534,
+      "system": "LiH_bond_R4",
+      "kind": "bond"
+    },
+    {
+      "S_B": 0.2449731966276564,
+      "w_B_dimless": 0.05677886241790395,
+      "delta_B": 0.036039018328714464,
+      "gap_absolute": 0.23334984862763086,
+      "kin_frobenius": 6.474922443758879,
+      "R": 5.0,
+      "E_full": -1.8838309247395133,
+      "system": "LiH_bond_R5",
+      "kind": "bond"
+    },
+    {
+      "S_B": 0.6931471805599454,
+      "w_B_dimless": 0.05858323981304156,
+      "delta_B": 0.03461565629131128,
+      "gap_absolute": 0.20554645275727523,
+      "kin_frobenius": 5.93796203161598,
+      "R": 6.0,
+      "E_full": -1.682586008212531,
+      "system": "LiH_bond_R6",
+      "kind": "bond"
+    },
+    {
+      "S_B": 0.6931471805599453,
+      "w_B_dimless": 0.058692394090111684,
+      "delta_B": 0.04503006034146692,
+      "gap_absolute": 0.23131661037634932,
+      "kin_frobenius": 5.136937606173633,
+      "R": 8.0,
+      "E_full": -1.5046281611426957,
+      "system": "LiH_bond_R8",
+      "kind": "bond"
+    }
+  ],
+  "universal_w_over_delta": {
+    "gamma": 2.2279226855669654,
+    "A": 0.1566506381923567,
+    "r2": 0.9900741971943114,
+    "max_rel_deviation": 0.7605004342142005
+  }
+}

@@ -1,0 +1,540 @@
+{
+  "unique_Z_points": [
+    {
+      "Z": 2.0,
+      "S_B": 0.04081105136647098,
+      "w_B_dimless": 0.10443952594881536,
+      "V_frobenius": 1.978237449591172,
+      "V_diag_fraction": 0.9202580563910049,
+      "wall_seconds": 0.04590725898742676
+    },
+    {
+      "Z": 3.0,
+      "S_B": 0.011211717937421746,
+      "w_B_dimless": 0.06404631864472168,
+      "V_frobenius": 2.9673561743867607,
+      "V_diag_fraction": 0.9332087781501818,
+      "wall_seconds": 0.015219449996948242
+    },
+    {
+      "Z": 4.0,
+      "S_B": 0.004984212431364122,
+      "w_B_dimless": 0.046280821558969884,
+      "V_frobenius": 3.956474899182346,
+      "V_diag_fraction": 0.9381924711327381,
+      "wall_seconds": 0.014123916625976562
+    },
+    {
+      "Z": 5.0,
+      "S_B": 0.002815707582828573,
+      "w_B_dimless": 0.03638181738984572,
+      "V_frobenius": 4.945593623977936,
+      "V_diag_fraction": 0.9403973388213069,
+      "wall_seconds": 0.013820171356201172
+    },
+    {
+      "Z": 6.0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "Z": 7.0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "Z": 8.0,
+      "S_B": 0.0009475627472664976,
+      "w_B_dimless": 0.02216105554295047,
+      "V_frobenius": 7.912949798364695,
+      "V_diag_fraction": 0.9434819034185694,
+      "wall_seconds": 0.013864517211914062
+    },
+    {
+      "Z": 9.0,
+      "S_B": 0.0007334010824585513,
+      "w_B_dimless": 0.019725728184190435,
+      "V_frobenius": 8.902068523160287,
+      "V_diag_fraction": 0.9433225024038848,
+      "wall_seconds": 0.013641595840454102
+    },
+    {
+      "Z": 10.0,
+      "S_B": 0.0005855700034359207,
+      "w_B_dimless": 0.017714676588318476,
+      "V_frobenius": 9.89118724795587,
+      "V_diag_fraction": 0.9435754733189838,
+      "wall_seconds": 0.017621755599975586
+    },
+    {
+      "Z": 12.0,
+      "S_B": 0.00039965858412933307,
+      "w_B_dimless": 0.014711671547636194,
+      "V_frobenius": 11.869424697547045,
+      "V_diag_fraction": 0.9439729637695722,
+      "wall_seconds": 0.013934850692749023
+    },
+    {
+      "Z": 15.0,
+      "S_B": 0.0002530299649626033,
+      "w_B_dimless": 0.01172116698147682,
+      "V_frobenius": 14.836780871933797,
+      "V_diag_fraction": 0.9444442232664628,
+      "wall_seconds": 0.01348733901977539
+    },
+    {
+      "Z": 20.0,
+      "S_B": 0.00014211849419430963,
+      "w_B_dimless": 0.008786227852307874,
+      "V_frobenius": 19.78237449591174,
+      "V_diag_fraction": 0.9445047261179452,
+      "wall_seconds": 0.020070552825927734
+    },
+    {
+      "Z": 30.0,
+      "S_B": 6.405372314432378e-05,
+      "w_B_dimless": 0.005847258151343087,
+      "V_frobenius": 29.6735617438676,
+      "V_diag_fraction": 0.9447040314843567,
+      "wall_seconds": 0.0133514404296875
+    },
+    {
+      "Z": 50.0,
+      "S_B": 2.3847781137045032e-05,
+      "w_B_dimless": 0.0035023628902324973,
+      "V_frobenius": 49.455936239779355,
+      "V_diag_fraction": 0.9448982600990042,
+      "wall_seconds": 0.013696432113647461
+    },
+    {
+      "Z": 100.0,
+      "S_B": 6.3276789978025065e-06,
+      "w_B_dimless": 0.0017527459287052212,
+      "V_frobenius": 98.91187247955871,
+      "V_diag_fraction": 0.9447968848896355,
+      "wall_seconds": 0.01361393928527832
+    }
+  ],
+  "block_rows": [
+    {
+      "molecule": "LiH",
+      "block_label": "Li_core",
+      "block_type": "core",
+      "Z_eff": 3.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.011211717937421746,
+      "w_B_dimless": 0.06404631864472168,
+      "V_frobenius": 2.9673561743867607,
+      "V_diag_fraction": 0.9332087781501818,
+      "wall_seconds": 0.015219449996948242
+    },
+    {
+      "molecule": "BeH2",
+      "block_label": "Be_core",
+      "block_type": "core",
+      "Z_eff": 4.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.004984212431364122,
+      "w_B_dimless": 0.046280821558969884,
+      "V_frobenius": 3.956474899182346,
+      "V_diag_fraction": 0.9381924711327381,
+      "wall_seconds": 0.014123916625976562
+    },
+    {
+      "molecule": "CH4",
+      "block_label": "C_core",
+      "block_type": "core",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "NH3",
+      "block_label": "N_core",
+      "block_type": "core",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "NH3",
+      "block_label": "N_lp",
+      "block_type": "lone_pair",
+      "Z_eff": 5.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.002815707582828573,
+      "w_B_dimless": 0.03638181738984572,
+      "V_frobenius": 4.945593623977936,
+      "V_diag_fraction": 0.9403973388213069,
+      "wall_seconds": 0.013820171356201172
+    },
+    {
+      "molecule": "H2O",
+      "block_label": "O_core",
+      "block_type": "core",
+      "Z_eff": 8.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0009475627472664976,
+      "w_B_dimless": 0.02216105554295047,
+      "V_frobenius": 7.912949798364695,
+      "V_diag_fraction": 0.9434819034185694,
+      "wall_seconds": 0.013864517211914062
+    },
+    {
+      "molecule": "H2O",
+      "block_label": "O_lp_1",
+      "block_type": "lone_pair",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "H2O",
+      "block_label": "O_lp_2",
+      "block_type": "lone_pair",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "HF",
+      "block_label": "F_core",
+      "block_type": "core",
+      "Z_eff": 9.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0007334010824585513,
+      "w_B_dimless": 0.019725728184190435,
+      "V_frobenius": 8.902068523160287,
+      "V_diag_fraction": 0.9433225024038848,
+      "wall_seconds": 0.013641595840454102
+    },
+    {
+      "molecule": "HF",
+      "block_label": "F_lp_1",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "HF",
+      "block_label": "F_lp_2",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "HF",
+      "block_label": "F_lp_3",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "PH3",
+      "block_label": "P_lp",
+      "block_type": "lone_pair",
+      "Z_eff": 5.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.002815707582828573,
+      "w_B_dimless": 0.03638181738984572,
+      "V_frobenius": 4.945593623977936,
+      "V_diag_fraction": 0.9403973388213069,
+      "wall_seconds": 0.013820171356201172
+    },
+    {
+      "molecule": "H2S",
+      "block_label": "S_lp_1",
+      "block_type": "lone_pair",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "H2S",
+      "block_label": "S_lp_2",
+      "block_type": "lone_pair",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "HCl",
+      "block_label": "Cl_lp_1",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "HCl",
+      "block_label": "Cl_lp_2",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "HCl",
+      "block_label": "Cl_lp_3",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "AsH3",
+      "block_label": "As_lp",
+      "block_type": "lone_pair",
+      "Z_eff": 5.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.002815707582828573,
+      "w_B_dimless": 0.03638181738984572,
+      "V_frobenius": 4.945593623977936,
+      "V_diag_fraction": 0.9403973388213069,
+      "wall_seconds": 0.013820171356201172
+    },
+    {
+      "molecule": "H2Se",
+      "block_label": "Se_lp_1",
+      "block_type": "lone_pair",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "H2Se",
+      "block_label": "Se_lp_2",
+      "block_type": "lone_pair",
+      "Z_eff": 6.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.001817727831328882,
+      "w_B_dimless": 0.029989140860709064,
+      "V_frobenius": 5.934712348773522,
+      "V_diag_fraction": 0.9417272939283672,
+      "wall_seconds": 0.013863086700439453
+    },
+    {
+      "molecule": "HBr",
+      "block_label": "Br_lp_1",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "HBr",
+      "block_label": "Br_lp_2",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    },
+    {
+      "molecule": "HBr",
+      "block_label": "Br_lp_3",
+      "block_type": "lone_pair",
+      "Z_eff": 7.0,
+      "n_max_native": 2,
+      "l_min": 0,
+      "S_B": 0.0012756368409442755,
+      "w_B_dimless": 0.025552784408431343,
+      "V_frobenius": 6.923831073569108,
+      "V_diag_fraction": 0.9424377538952886,
+      "wall_seconds": 0.014206171035766602
+    }
+  ],
+  "combined_fit_unique_Z": {
+    "alpha": 2.1119493052035385,
+    "A": 3.2931189547496094,
+    "r2": 0.9957620772661391,
+    "n": 15
+  },
+  "band_fits": {
+    "Z<=4.5": {
+      "alpha": 2.588189695126167,
+      "A": 14.024099754819892,
+      "r2": 0.9997600082169925,
+      "n": 3
+    },
+    "5<=Z<=10": {
+      "alpha": 2.17842572307402,
+      "A": 3.8026304166295155,
+      "r2": 0.9997970554619064,
+      "n": 6
+    },
+    "Z>10": {
+      "alpha": 1.9469379916777099,
+      "A": 1.4498677538028244,
+      "r2": 0.9999165896939565,
+      "n": 6
+    }
+  },
+  "local_log_log_slope": [
+    [
+      2.0,
+      2.642104426629308
+    ],
+    [
+      3.0,
+      2.5835210171564165
+    ],
+    [
+      4.0,
+      2.443243945335613
+    ],
+    [
+      5.0,
+      2.3247430408298277
+    ],
+    [
+      6.0,
+      2.2409195479859485
+    ],
+    [
+      7.0,
+      2.1535599036195427
+    ],
+    [
+      8.0,
+      2.1385624131760257
+    ],
+    [
+      9.0,
+      2.149240636204873
+    ],
+    [
+      10.0,
+      2.0699558874619104
+    ],
+    [
+      12.0,
+      2.0316795320021424
+    ],
+    [
+      15.0,
+      2.0058940112259713
+    ],
+    [
+      20.0,
+      1.9754664335290992
+    ],
+    [
+      30.0,
+      1.9407171546679716
+    ],
+    [
+      50.0,
+      1.9213225478730698
+    ],
+    [
+      100.0,
+      1.9165758655242364
+    ]
+  ],
+  "library_coverage": {
+    "LiH": 1,
+    "BeH2": 1,
+    "CH4": 1,
+    "NH3": 2,
+    "H2O": 3,
+    "HF": 4,
+    "PH3": 1,
+    "H2S": 2,
+    "HCl": 3,
+    "AsH3": 1,
+    "H2Se": 2,
+    "HBr": 3
+  }
+}

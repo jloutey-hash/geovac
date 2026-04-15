@@ -39,9 +39,52 @@ from scipy.linalg import eigh
 from scipy.special import roots_laguerre, eval_laguerre
 from typing import Tuple, Optional, Dict, List
 
-from geovac.algebraic_angular import AlgebraicAngularSolver
-from geovac.hyperspherical_radial import _build_laguerre_SK_algebraic
+from geovac.algebraic_angular import AlgebraicAngularSolver, _gegenbauer
 from geovac.cusp_correction import cusp_correction_he, cusp_correction_he_extrapolated
+
+
+def _build_laguerre_SK_algebraic(
+    n_basis: int, alpha: float
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Build overlap S and kinetic K matrices algebraically (Track H).
+
+    Basis: phi_n(R) = (R-R_min) exp(-alpha(R-R_min)) L_n(2 alpha (R-R_min)).
+
+    Overlap: S_ij = M2[i,j] / (8 alpha^3), pentadiagonal from Laguerre
+    three-term recurrence x L_n = -(n+1)L_{n+1} + (2n+1)L_n - n L_{n-1}.
+
+    Kinetic: K_ij = (b b^T)[i,j] / (4 alpha), where the derivative kernel
+    B_n = -n/2 L_{n-1} + 1/2 L_n + (n+1)/2 L_{n+1} is tridiagonal.
+    """
+    N = n_basis
+
+    # M2[i,j] = int_0^inf x^2 L_i(x) L_j(x) exp(-x) dx (pentadiagonal)
+    # Built from three-term recurrence: x L_n = -(n+1)L_{n+1} + (2n+1)L_n - n L_{n-1}
+    # M2 = T^T T where T is the tridiagonal x-multiplication matrix
+    T = np.zeros((N, N))
+    for n in range(N):
+        T[n, n] = 2 * n + 1
+        if n + 1 < N:
+            T[n, n + 1] = -(n + 1)
+            T[n + 1, n] = -(n + 1)
+    M2 = T @ T
+    # Correct diagonal: <L_n|x^2|L_n> = 6n^2 + 6n + 2
+    for n in range(N):
+        M2[n, n] = 6 * n * n + 6 * n + 2
+
+    S = M2 / (8.0 * alpha ** 3)
+
+    # Derivative kernel B_n expanded in Laguerre basis (tridiagonal)
+    b = np.zeros((N, N + 1))
+    for n in range(N):
+        if n > 0:
+            b[n, n - 1] = -n / 2.0
+        b[n, n] = 0.5
+        b[n, n + 1] = (n + 1) / 2.0
+
+    K = (b @ b.T) / (4.0 * alpha)
+
+    return S, K
 
 
 def _build_radial_operator_matrices(
@@ -119,46 +162,162 @@ def _build_angular_sin_matrices(ang: 'AlgebraicAngularSolver') -> Tuple[np.ndarr
 
     These are needed for the cusp correlation factor [1 + gamma R sin(alpha)].
 
+    IMPORTANT: These matrices are BLOCK-DIAGONAL in l (partial wave quantum
+    number). The full angular basis includes both alpha and theta_12 coordinates;
+    different l-channels are orthogonal via Y_l(theta_12) orthogonality. Since
+    sin(alpha) depends only on alpha (not theta_12), it preserves l:
+        <phi_j Y_{l_j} | sin(alpha) | phi_k Y_{l_k}> = 0 for l_j != l_k
+    Cross-channel elements computed in alpha-only quadrature are spurious.
+
     Returns
     -------
     sin_a : ndarray (dim_alpha, dim_alpha)
-        <chi_j | sin(alpha) | chi_k> via quadrature
+        <chi_j | sin(alpha) | chi_k> via quadrature, block-diagonal in l
     sin2_a : ndarray (dim_alpha, dim_alpha)
-        <chi_j | sin^2(alpha) | chi_k> via quadrature
+        <chi_j | sin^2(alpha) | chi_k> via quadrature, block-diagonal in l
     """
     dim = ang._total_dim
+    nb = ang.n_basis
     sin_a = np.zeros((dim, dim))
     sin2_a = np.zeros((dim, dim))
-
-    # Get all basis functions evaluated at quadrature points
-    # ang._phi has shape (n_basis_per_channel, n_quad) for a single channel
-    # ang._channel_phi is a list of (n_basis, n_quad) arrays per channel
-    # We need the full basis across all channels
 
     weights = ang._weights
     sin_vals = ang._sin_a
     sin2_vals = sin_vals ** 2
 
-    # Build full phi matrix (dim_alpha x n_quad)
-    phi_all = np.zeros((dim, len(weights)))
-    offset = 0
-    for ch_phi in ang._channel_phi:
+    # Compute WITHIN-channel matrix elements only (block-diagonal in l)
+    for l_idx, ch_phi in enumerate(ang._channel_phi):
         n_ch = ch_phi.shape[0]
-        phi_all[offset:offset + n_ch] = ch_phi
-        offset += n_ch
-
-    # Compute angular matrix elements via quadrature
-    # <j|f(alpha)|k> = sum_q w_q phi_j(alpha_q) f(alpha_q) phi_k(alpha_q)
-    for j in range(dim):
-        for k in range(j, dim):
-            val_sin = np.sum(weights * phi_all[j] * sin_vals * phi_all[k])
-            val_sin2 = np.sum(weights * phi_all[j] * sin2_vals * phi_all[k])
-            sin_a[j, k] = val_sin
-            sin_a[k, j] = val_sin
-            sin2_a[j, k] = val_sin2
-            sin2_a[k, j] = val_sin2
+        i0 = l_idx * nb
+        i1 = i0 + n_ch
+        for j in range(n_ch):
+            for k in range(j, n_ch):
+                val_sin = np.sum(weights * ch_phi[j] * sin_vals * ch_phi[k])
+                val_sin2 = np.sum(weights * ch_phi[j] * sin2_vals * ch_phi[k])
+                sin_a[i0 + j, i0 + k] = val_sin
+                sin_a[i0 + k, i0 + j] = val_sin
+                sin2_a[i0 + j, i0 + k] = val_sin2
+                sin2_a[i0 + k, i0 + j] = val_sin2
 
     return sin_a, sin2_a
+
+
+def _build_angular_cusp_matrices(
+    ang: 'AlgebraicAngularSolver',
+    sin_a: np.ndarray,
+    sin2_a: np.ndarray,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Build the correct angular Casimir matrices for cusped basis via IBP.
+
+    The angular operator Lambda^2 is a differential operator (not just a
+    multiplicative eigenvalue). When it acts on sin(alpha)*chi_k, the product
+    rule gives extra terms from the angular kinetic energy. The formula
+    sin_a @ diag(casimir) @ sin_a is WRONG — it treats Lambda^2 as diagonal.
+
+    Correct computation via integration by parts:
+        <sin chi_j|Lambda^2 + c|sin chi_k>
+        = <(sin chi_j)'|(sin chi_k)'> + <sin chi_j|(V_cent + c)|sin chi_k>
+
+    where (sin chi_k)' = cos(alpha) chi_k + sin(alpha) dchi_k/dalpha,
+    and dchi_k/dalpha is computed algebraically from the Gegenbauer derivative
+    recurrence: d/du C_n^lambda(u) = 2*lambda*C_{n-1}^{lambda+1}(u).
+
+    Parameters
+    ----------
+    ang : AlgebraicAngularSolver
+        Angular solver with precomputed basis and quadrature.
+    sin_a, sin2_a : ndarray
+        Block-diagonal sin/sin^2 matrices from _build_angular_sin_matrices.
+
+    Returns
+    -------
+    sin_casimir_sin : ndarray (dim, dim)
+        <sin chi_j|(Lambda^2 + 15/8)|sin chi_k>, block-diagonal in l.
+        Replaces the incorrect sin_a @ diag(casimir+15/8) @ sin_a in H_11.
+    casimir_sin : ndarray (dim, dim)
+        <chi_j|(Lambda^2 + 15/8)|sin chi_k>, block-diagonal in l.
+        Replaces the incorrect diag(casimir+15/8) @ sin_a in H_01.
+    """
+    dim = ang._total_dim
+    nb = ang.n_basis
+    weights = ang._weights
+    alpha = ang._alpha
+    sin_vals = ang._sin_a
+    cos_vals = ang._cos_a
+    cos_2a = np.cos(2.0 * alpha)
+    sin_2a = np.sin(2.0 * alpha)
+    sin_cos = sin_vals * cos_vals
+
+    sin_casimir_sin = np.zeros((dim, dim))
+    casimir_sin = np.zeros((dim, dim))
+
+    for l_idx in range(ang.n_l):
+        l = l_idx
+        lam = float(l + 1)
+        ch_phi = ang._channel_phi[l_idx]
+        casimir_vals = ang._channel_casimir[l_idx]
+        i0 = l_idx * nb
+
+        # Gegenbauer k-indices
+        if ang.symmetry == 'singlet':
+            k_indices = np.array([2 * j for j in range(nb)])
+        else:
+            k_indices = np.array([2 * j + 1 for j in range(nb)])
+
+        # --- Compute dchi_k/dalpha at quadrature points ---
+        # Using d/du C_n^lambda(u) = 2*lambda*C_{n-1}^{lambda+1}(u)
+        # and the product rule on the envelope (sin cos)^{l+1}.
+        dphi_da = np.zeros((nb, len(alpha)))
+        envelope_l = sin_cos ** l
+        for j, kv in enumerate(k_indices):
+            raw = sin_cos ** (l + 1) * _gegenbauer(kv, lam, cos_2a)
+            norm = np.sqrt(np.dot(weights, raw * raw))
+            N_val = 1.0 / norm
+
+            C_n = _gegenbauer(kv, lam, cos_2a)
+            C_nm1 = (_gegenbauer(kv - 1, lam + 1.0, cos_2a)
+                     if kv >= 1 else np.zeros_like(cos_2a))
+
+            dphi_da[j] = N_val * envelope_l * (
+                (l + 1) * cos_2a * C_n
+                - 4.0 * lam * sin_2a * sin_cos * C_nm1
+            )
+
+        # d(sin chi_k)/dalpha = cos chi_k + sin dchi_k/dalpha
+        d_sin_chi = cos_vals[np.newaxis, :] * ch_phi + sin_vals[np.newaxis, :] * dphi_da
+
+        # --- IBP kinetic matrices ---
+        # kin_ang[j,k] = <(sin chi_j)'|(sin chi_k)'>
+        kin_ang = (d_sin_chi * weights[np.newaxis, :]) @ d_sin_chi.T
+
+        # kin_01[j,k] = <chi_j'|(sin chi_k)'>
+        kin_01 = (dphi_da * weights[np.newaxis, :]) @ d_sin_chi.T
+
+        # IBP_free[j,k] = <chi_j'|chi_k'> (kinetic part of Lambda^2)
+        IBP_free = (dphi_da * weights[np.newaxis, :]) @ dphi_da.T
+
+        # --- V_total: the non-kinetic part of (Lambda^2 + 15/8) ---
+        # Lambda^2 includes the S^4 metric cotangent term beyond -d^2/dalpha^2.
+        # We extract it algebraically:
+        #   V_total_mat = diag(casimir + 15/8) - IBP_free
+        # This is exact: within the orthonormal channel basis,
+        #   <chi_j|Lambda^2 + 15/8|chi_k> = (casimir_k + 15/8) delta_{jk}
+        #   <chi_j|(-d^2/da^2)|chi_k> = IBP_free[j,k]
+        # So V_total_mat captures the remainder (cotangent + centrifugal + 15/8).
+        V_total_mat = np.diag(casimir_vals + 15.0 / 8.0) - IBP_free
+
+        # --- Angular Casimir matrices via resolution of identity ---
+        # sin_casimir_sin = kin_ang + sin_a_block @ V_total_mat @ sin_a_block
+        # casimir_sin     = kin_01  + V_total_mat @ sin_a_block
+        sin_a_block = sin_a[i0:i0 + nb, i0:i0 + nb]
+        V_sin = V_total_mat @ sin_a_block
+
+        sin_casimir_sin[i0:i0 + nb, i0:i0 + nb] = (
+            kin_ang + sin_a_block @ V_sin
+        )
+        casimir_sin[i0:i0 + nb, i0:i0 + nb] = kin_01 + V_sin
+
+    return sin_casimir_sin, casimir_sin
 
 
 def solve_he_cusped_2d(
@@ -171,20 +330,164 @@ def solve_he_cusped_2d(
     symmetry: str = 'singlet',
     n_quad_alpha: int = 100,
 ) -> Dict:
-    """Solve He with variational r₁₂ cusp correlation factor.
+    """Solve He with angular-only cusp basis augmentation (documented negative).
 
-    Solves the standard 2D variational problem, then augments the
-    basis with a single cusped function |c⟩ = r₁₂ |ψ₀⟩ and solves
-    the (dim+1) × (dim+1) generalized eigenvalue problem.
+    Augments the standard 2D tensor-product basis with sin(alpha)-multiplied
+    functions phi_n(R) sin(alpha) chi_j(alpha), doubling the basis dimension.
+    Angular matrices use IBP + Gegenbauer derivative recurrence for the
+    Casimir terms (the angular Laplacian is a differential operator on S^4).
 
-    In hyperspherical coordinates r₁₂ = R sin(α), so the cusp function
-    is constructed from the existing radial and angular operators.
-
-    This is a 1-function augmentation that captures the dominant cusp
-    correlation without basis doubling or linear dependence issues.
-    The variational principle guarantees the result is a LOWER BOUND
-    on the exact energy — it cannot overshoot.
+    RESULT: Variational bound respected but cusped basis performs ~5% WORSE
+    than standard at all l_max. The sin(alpha) augmentation adds negligible
+    new content beyond the existing multi-channel Gegenbauer basis.
+    The TC approach (solve_he_tc_2d) is the correct cusp correction method.
     """
+    E_EXACT = -2.903724377034119598
+
+    # Build angular solver
+    ang = AlgebraicAngularSolver(
+        Z=Z, n_basis=n_basis_alpha, l_max=l_max,
+        symmetry=symmetry, n_quad=n_quad_alpha,
+    )
+    dim_alpha = ang._total_dim
+    casimir_all = np.concatenate(ang._channel_casimir)
+    coupling = ang._coupling_full
+
+    # Build radial operator matrices
+    S_R, K_R, M_inv_R, M_inv_R2, M_R, M_R2 = _build_radial_operator_matrices(
+        n_basis_R, alpha_R, R_min,
+    )
+
+    # Build angular sin matrices for cusp factor (block-diagonal in l)
+    sin_a, sin2_a = _build_angular_sin_matrices(ang)
+
+    # Standard 2D Hamiltonian
+    I_alpha = np.eye(dim_alpha)
+    ang_diag = np.diag(casimir_all + 15.0 / 8.0)
+
+    H_00 = (np.kron(K_R, I_alpha)
+            + np.kron(M_inv_R2, ang_diag)
+            + np.kron(M_inv_R, coupling))
+    S_00 = np.kron(S_R, I_alpha)
+
+    # Solve standard problem for comparison
+    dim_std = n_basis_R * dim_alpha
+    evals_std, evecs_std = eigh(H_00, S_00)
+    E_0 = evals_std[0]
+
+    # --- Angular matrices for cross blocks (IBP-based, algebraic) ---
+    # The angular Casimir Lambda^2 is a differential operator. Using
+    # sin_a @ diag(casimir) @ sin_a treats it as multiplicative — WRONG.
+    # Correct matrices use IBP + Gegenbauer derivative + algebraic V_extra.
+    sin_casimir_sin, casimir_sin = _build_angular_cusp_matrices(ang, sin_a, sin2_a)
+
+    # Coupling is multiplicative in alpha, so it commutes with sin(alpha):
+    coupling_sin = coupling @ sin_a
+    sin_coup_sin = sin_a @ coupling @ sin_a
+
+    # --- Angular-only cusp augmentation: {phi_n chi_j, phi_n sin(a) chi_j} ---
+    # Using sin(alpha) alone (no R factor) avoids adding radial kinetic energy.
+    # The cusp is in the alpha direction (alpha->0 where r12->0); R is the
+    # hyperradius which doesn't participate in the coalescence singularity.
+    # With no R factor, the radial part is identical for both blocks:
+    #   K_R_cross = K_R, K_R_RR = K_R (no product rule in R)
+    dim_full = 2 * dim_std
+
+    # Overlap: <phi_n chi_j|phi_m sin(a) chi_k> = S_R[n,m] sin_a[j,k]
+    S_full = np.zeros((dim_full, dim_full))
+    S_full[:dim_std, :dim_std] = S_00
+    S_01 = np.kron(S_R, sin_a)
+    S_full[:dim_std, dim_std:] = S_01
+    S_full[dim_std:, :dim_std] = S_01.T
+    S_full[dim_std:, dim_std:] = np.kron(S_R, sin2_a)
+
+    # Hamiltonian:
+    # H = K_R (x) I + M_{1/R^2} (x) (Lambda^2+15/8) + M_{1/R} (x) C
+    #
+    # H_01[nj,mk] = <phi_n chi_j|H|phi_m sin(a) chi_k>
+    #   = K_R[n,m] sin_a[j,k]                       (radial K, angular overlap)
+    #   + M_inv_R2[n,m] casimir_sin[j,k]             (radial 1/R^2, angular IBP)
+    #   + M_inv_R[n,m] coupling_sin[j,k]             (radial 1/R, angular C*sin)
+    H_full = np.zeros((dim_full, dim_full))
+    H_full[:dim_std, :dim_std] = H_00
+
+    H_01 = (np.kron(K_R, sin_a)
+            + np.kron(M_inv_R2, casimir_sin)
+            + np.kron(M_inv_R, coupling_sin))
+    H_full[:dim_std, dim_std:] = H_01
+    H_full[dim_std:, :dim_std] = H_01.T
+
+    # H_11[nj,mk] = <phi_n sin(a) chi_j|H|phi_m sin(a) chi_k>
+    #   = K_R[n,m] sin2_a[j,k]                      (radial K, angular sin^2 overlap)
+    #   + M_inv_R2[n,m] sin_casimir_sin[j,k]         (radial 1/R^2, angular IBP)
+    #   + M_inv_R[n,m] sin_coup_sin[j,k]             (radial 1/R, angular sin*C*sin)
+    H_11 = (np.kron(K_R, sin2_a)
+            + np.kron(M_inv_R2, sin_casimir_sin)
+            + np.kron(M_inv_R, sin_coup_sin))
+    H_full[dim_std:, dim_std:] = H_11
+
+    # Solve via canonical orthogonalization (handles near-singular overlap)
+    S_evals, S_evecs = np.linalg.eigh(S_full)
+    tol = 1e-8 * S_evals.max()
+    mask = S_evals > tol
+    X = S_evecs[:, mask] @ np.diag(1.0 / np.sqrt(S_evals[mask]))
+    H_orth = X.T @ H_full @ X
+    H_orth = 0.5 * (H_orth + H_orth.T)
+    evals_orth = np.linalg.eigvalsh(H_orth)
+    E_cusped = evals_orth[0]
+
+    error_std = abs((E_0 - E_EXACT) / E_EXACT) * 100.0
+    error_cusped = abs((E_cusped - E_EXACT) / E_EXACT) * 100.0
+
+    return {
+        'E_standard': E_0,
+        'E_cusped': E_cusped,
+        'error_standard_pct': error_std,
+        'error_cusped_pct': error_cusped,
+        'improvement_factor': error_std / max(error_cusped, 1e-15),
+        'dim_standard': dim_std,
+        'dim_cusped': dim_full,
+        'dim_effective': int(np.sum(mask)),
+        'l_max': l_max,
+        'E_exact': E_EXACT,
+    }
+
+
+def solve_he_tc_2d(
+    Z: float = 2.0,
+    n_basis_R: int = 25,
+    n_basis_alpha: int = 15,
+    l_max: int = 0,
+    alpha_R: float = 1.5,
+    R_min: float = 0.05,
+    gamma_tc: float = 1.0,
+    symmetry: str = 'singlet',
+    n_quad_alpha: int = 100,
+) -> Dict:
+    """Solve He via transcorrelated (TC) 2D solver with Jastrow cusp factor.
+
+    The similarity transformation e^{-J} H e^{J} with J = gamma*r12/2
+    removes the electron-electron cusp from the wavefunction, allowing
+    the smooth Gegenbauer basis to converge at the improved rate l^{-8}
+    (Kutzelnigg-Morgan) instead of the standard l^{-4}.
+
+    The BCH expansion terminates exactly at second order for two electrons:
+        H_TC = H - (gamma/2)[H, r12] + (gamma^2/8)[[H, r12], r12]
+
+    All matrix elements are algebraic:
+    - Single commutator: IBP derivative + Gegenbauer recurrence
+    - Double commutator: -kron(S_R, I + cos^2(alpha)) (exact, closed form)
+
+    H_TC is non-Hermitian; solved via scipy.linalg.eig.
+
+    Parameters
+    ----------
+    gamma_tc : float
+        Jastrow cusp parameter. gamma=1 satisfies the singlet Kato condition
+        (removes the cusp exactly). Default 1.0.
+    """
+    from scipy.linalg import eig
+
     E_EXACT = -2.903724377034119598
 
     # Build angular solver
@@ -201,8 +504,22 @@ def solve_he_cusped_2d(
         n_basis_R, alpha_R, R_min,
     )
 
-    # Build angular sin matrices for cusp factor
+    # Build angular sin/sin2/cos2 matrices (block-diagonal in l)
     sin_a, sin2_a = _build_angular_sin_matrices(ang)
+    # cos2_a[j,k] = <chi_j|cos^2(alpha)|chi_k>, block-diagonal in l
+    nb = ang.n_basis
+    cos2_a = np.zeros((dim_alpha, dim_alpha))
+    weights = ang._weights
+    cos_vals = ang._cos_a
+    cos2_vals = cos_vals ** 2
+    for l_idx, ch_phi in enumerate(ang._channel_phi):
+        n_ch = ch_phi.shape[0]
+        i0 = l_idx * nb
+        for j in range(n_ch):
+            for k in range(j, n_ch):
+                val = np.sum(weights * ch_phi[j] * cos2_vals * ch_phi[k])
+                cos2_a[i0 + j, i0 + k] = val
+                cos2_a[i0 + k, i0 + j] = val
 
     # Standard 2D Hamiltonian
     I_alpha = np.eye(dim_alpha)
@@ -213,170 +530,84 @@ def solve_he_cusped_2d(
             + np.kron(M_inv_R, coupling_full))
     S_00 = np.kron(S_R, I_alpha)
 
-    # Solve standard problem first
     dim_std = n_basis_R * dim_alpha
-    evals_std, evecs_std = eigh(H_00, S_00)
+
+    # Solve standard problem for comparison
+    evals_std = eigh(H_00, S_00, eigvals_only=True)
     E_0 = evals_std[0]
-    c_0 = evecs_std[:, 0]
 
-    # r₁₂ operator = R sin(α) in tensor product basis
-    r12_op = np.kron(M_R, sin_a)
+    # --- Single commutator [H, R sin(alpha)] ---
+    # = kron(-D_R, sin_a) + kron(M_inv_R, comm_ang) + kron(S_R, comm_coup)
 
-    # Cusp vector: |c⟩ = r₁₂ |ψ₀⟩ in the tensor product basis
-    # |c⟩ = r12_op @ c_0 ... but this is in the non-orthonormal basis.
-    # Actually: r₁₂|ψ₀⟩ has expansion coefficients r12_op @ S_00^{-1} @ ???
-    # Simpler: define the cusp vector as r12_op @ c_0 directly.
-    # This is the representation of r₁₂ ψ₀ in the original basis.
-    c_cusp = r12_op @ c_0
-
-    # Build augmented (dim+1) × (dim+1) problem:
-    # Basis: {φ₁, ..., φ_dim, |c⟩}
-    # S_aug[i,j] = S_00[i,j] for i,j < dim
-    # S_aug[i,dim] = <φᵢ|c⟩ = (S_00 @ c_cusp)[i] = S_00 @ r12_op @ c_0
-    # ... wait, this isn't right either.
-
-    # Let me think about this more carefully.
-    # The augmented basis is: the original dim functions PLUS one new function.
-    # The new function is f_cusp(R,α) = R sin(α) ψ₀(R,α)
-    # where ψ₀ = Σ_i c_0[i] φ_i(R,α).
-    #
-    # f_cusp in the original basis has "coefficients" that don't fit
-    # in the original space — it's genuinely a new function.
-    #
-    # The matrix elements:
-    # <φ_i|f_cusp> = <φ_i|R sin(α)|ψ₀> = Σ_j c_0[j] <φ_i|R sin(α)|φ_j>
-    #             = (r12_op @ c_0)[i] = c_cusp[i]
-    # <f_cusp|f_cusp> = c_0^T r12_op^T S_00^{-1} r12_op c_0 ... no.
-    # Actually: <f_cusp|f_cusp> = <ψ₀|R²sin²(α)|ψ₀> = c_0^T r12sq_op c_0
-    r12sq_op = np.kron(M_R2, sin2_a)
-    S_cc = float(c_0 @ r12sq_op @ c_0)
-
-    # <φ_i|H|f_cusp> = <φ_i|H|R sin(α) ψ₀>
-    # = Σ_j c_0[j] <φ_i|H R sin(α)|φ_j>
-    # H R sin(α) ≠ R sin(α) H because H contains d²/dR² which doesn't commute with R.
-    # We need H_r12 where (H_r12)_ij = <φ_i|H · R sin(α)|φ_j>
-    # = <φ_i|[K_R ⊗ I + M_{1/R²} ⊗ ang_diag + M_{1/R} ⊗ coupling] · [M_R ⊗ sin_a]|φ_j>
-    # This doesn't factor because K_R and M_R don't commute.
-    #
-    # But we CAN compute: <φ_i|H|f_cusp> = (H_00 @ S_00^{-1} @ c_cusp)[i]???
-    # No. H|f_cusp> is NOT H_00 applied to the expansion of f_cusp in the basis,
-    # because f_cusp is NOT in the basis.
-    #
-    # The correct approach: express everything in the quadrature grid.
-    # Evaluate ψ₀, r₁₂ψ₀, and H(r₁₂ψ₀) at quadrature points.
-    # But H involves derivatives which are hard to evaluate pointwise.
-
-    # ALTERNATIVE: use the Rayleigh quotient directly.
-    # The trial wavefunction is ψ(γ) = ψ₀ + γ f_cusp
-    # where f_cusp = r₁₂ ψ₀.
-    # E(γ) = <ψ|H|ψ> / <ψ|ψ>
-    # = (E₀ + 2γ H₀c + γ² Hcc) / (1 + 2γ S₀c + γ² Scc)
-    # where H₀c = <ψ₀|H|f_cusp>, Hcc = <f_cusp|H|f_cusp>
-    #       S₀c = <ψ₀|f_cusp>, Scc = <f_cusp|f_cusp>
-
-    # <ψ₀|f_cusp> = <ψ₀|r₁₂|ψ₀> = c_0^T r12_op c_0
-    S_0c = float(c_0 @ r12_op @ c_0)
-
-    # <ψ₀|H|f_cusp> = <ψ₀|H r₁₂|ψ₀>
-    # Use: H r₁₂ = r₁₂ H + [H, r₁₂]
-    # <ψ₀|r₁₂ H|ψ₀> = E₀ <ψ₀|r₁₂|ψ₀> = E₀ S_0c
-    # <ψ₀|[H, r₁₂]|ψ₀> = <ψ₀|H r₁₂ - r₁₂ H|ψ₀>
-    #
-    # The commutator [H, r₁₂] = [-1/2 d²/dR², R sin(α)]
-    # = -sin(α)/2 [d²/dR², R] = -sin(α)/2 * 2 d/dR = -sin(α) d/dR
-    # (using [d²/dR², R] = 2 d/dR)
-    #
-    # So: <ψ₀|[H, r₁₂]|ψ₀> = -<ψ₀|sin(α) d/dR|ψ₀>
-    # = -c_0^T (D_R ⊗ sin_a) c_0
-    # where D_R[n,m] = <φ_n|d/dR|φ_m> (first derivative matrix)
-
-    # Build D_R by quadrature
+    # D_R: anti-symmetric radial derivative matrix (correct x weights)
     n_quad_r = max(3 * n_basis_R + 10, 80)
     x_q, w_q = roots_laguerre(n_quad_r)
-    two_alpha = 2.0 * alpha_R
-    R_q = R_min + x_q / two_alpha
+    two_alpha_r = 2.0 * alpha_R
     inv_8a3 = 1.0 / (8.0 * alpha_R ** 3)
 
     L_vals = np.zeros((n_basis_R, len(x_q)))
     dL_vals = np.zeros((n_basis_R, len(x_q)))
     for n in range(n_basis_R):
         L_vals[n] = eval_laguerre(n, x_q)
-        # Derivative of L_n(x): L_n'(x) = -L_{n-1}^{(1)}(x) for n>=1
-        # = sum_{k=0}^{n-1} (-1) * L_k(x)  (standard identity)
         if n > 0:
             for k in range(n):
                 dL_vals[n] += -eval_laguerre(k, x_q)
 
-    # phi_n(R) ∝ x exp(-x/2) L_n(x) where x = 2α(R-Rmin)
-    # d(phi_n)/dR = 2α d(phi_n)/dx
-    # d/dx [x e^{-x/2} L_n(x)] = e^{-x/2} [L_n + x L_n' - x/2 L_n]
-    #                            = e^{-x/2} [(1-x/2)L_n + x L_n']
-    # D_R matrix: <phi_n|d/dR|phi_m> (weighted)
-    # = inv_8a3 * 2α * sum_q w_q x_q^2 L_n(x_q) * [(1-x_q/2)L_m(x_q) + x_q dL_m(x_q)]
     dphi = (1 - x_q / 2)[np.newaxis, :] * L_vals + x_q[np.newaxis, :] * dL_vals
-    x2_w = w_q * x_q ** 2
-    D_R = inv_8a3 * two_alpha * ((x2_w[np.newaxis, :] * L_vals) @ dphi.T)
+    x1_w = w_q * x_q
+    D_R = inv_8a3 * two_alpha_r * ((x1_w[np.newaxis, :] * L_vals) @ dphi.T)
 
-    # Commutator contribution
-    commutator_op = np.kron(D_R, sin_a)
-    comm_expect = -float(c_0 @ commutator_op @ c_0)
+    # Angular commutator: [Lambda^2 + 15/8, sin(alpha)]
+    # = <chi_j|(Lambda^2+15/8) sin|chi_k> - <chi_j|sin (Lambda^2+15/8)|chi_k>
+    # = casimir_sin[j,k] - sin_a[j,k] * (casimir_k + 15/8)
+    sin_casimir_sin, casimir_sin = _build_angular_cusp_matrices(ang, sin_a, sin2_a)
+    comm_ang = casimir_sin - sin_a @ ang_diag  # casimir_sin - sin_a * diag(casimir+15/8)
 
-    # H_0c = E₀ S_0c + comm_expect
-    H_0c = E_0 * S_0c + comm_expect
+    # Coupling commutator: [C, sin(alpha)] = C*sin - sin*C
+    # Exact operator value is 0 (both multiplicative in alpha), but matrix
+    # truncation gives small nonzero values. Include for completeness.
+    comm_coup = coupling_full @ sin_a - sin_a @ coupling_full
 
-    # For Hcc = <f_cusp|H|f_cusp>, we need <r₁₂ψ₀|H|r₁₂ψ₀>
-    # = <ψ₀|r₁₂ H r₁₂|ψ₀> = <ψ₀|r₁₂(r₁₂H + [H,r₁₂])|ψ₀>
-    # = <ψ₀|r₁₂² H|ψ₀> + <ψ₀|r₁₂[H,r₁₂]|ψ₀>
-    # = E₀ <ψ₀|r₁₂²|ψ₀> + <ψ₀|r₁₂ · (-sin(α) d/dR)|ψ₀>
-    # First term:
-    Hcc_term1 = E_0 * S_cc
-    # Second term: <ψ₀|R sin(α) · (-sin(α) d/dR)|ψ₀>
-    # = -<ψ₀|R sin²(α) d/dR|ψ₀>
-    # = -c_0^T (M_R ⊗ sin2_a · D_R_component) c_0
-    # Hmm, R and d/dR are both radial operators, sin² is angular.
-    # = -c_0^T kron(M_R @ D_R, sin2_a) c_0  ← NO, order matters
-    # The operator is R · d/dR (both on radial) × sin²(α) (on angular)
-    # <φ_n χ_j | R d/dR | φ_m χ_k> = <φ_n|R d/dR|φ_m> <χ_j|sin²(α)|χ_k> ← wrong
-    # Actually: the full operator is R sin²(α) d/dR
-    # = (R d/dR) ⊗ sin²(α) in the tensor product
-    # So: M_R_D[n,m] = <φ_n|R d/dR|φ_m>
-    # Compute by quadrature:
-    R_dphi = R_q[np.newaxis, :] * dphi
-    M_R_D = inv_8a3 * two_alpha * ((x2_w[np.newaxis, :] * L_vals) @ R_dphi.T)
+    # Assemble single commutator matrix
+    comm_mat = (np.kron(-D_R, sin_a)
+                + np.kron(M_inv_R, comm_ang)
+                + np.kron(S_R, comm_coup))
 
-    Rsin2d_op = np.kron(M_R_D, sin2_a)
-    Hcc_term2 = -float(c_0 @ Rsin2d_op @ c_0)
-    Hcc = Hcc_term1 + Hcc_term2
+    # --- Double commutator [[H, R sin], R sin] ---
+    # Algebraic result (exact for 2 electrons):
+    #   = -kron(S_R, sin2_a) + kron(S_R, -2*cos2_a)
+    #   = -kron(S_R, sin2_a + 2*cos2_a)
+    #   = -kron(S_R, I + cos2_a)
+    # since sin^2 + 2*cos^2 = 1 + cos^2.
+    dcomm_mat = -np.kron(S_R, I_alpha + cos2_a)
 
-    # Rayleigh quotient: E(γ) = (E₀ + 2γ H₀c + γ² Hcc) / (1 + 2γ S₀c + γ² Scc)
-    # Minimize analytically: dE/dγ = 0 gives
-    # (H₀c + γ Hcc)(1 + 2γ S₀c + γ² Scc) = (E₀ + 2γ H₀c + γ² Hcc)(S₀c + γ Scc)
-    # This is a quadratic in γ. Solve numerically for simplicity.
-    from scipy.optimize import minimize_scalar
+    # --- TC Hamiltonian ---
+    # H_TC = H - (gamma/2) [H, r12] + (gamma^2/8) [[H, r12], r12]
+    g = gamma_tc
+    H_TC = H_00 - (g / 2.0) * comm_mat + (g ** 2 / 8.0) * dcomm_mat
 
-    def E_gamma(gamma):
-        num = E_0 + 2 * gamma * H_0c + gamma ** 2 * Hcc
-        den = 1.0 + 2 * gamma * S_0c + gamma ** 2 * S_cc
-        return num / den
+    # H_TC is non-Hermitian. Solve via generalized Schur decomposition.
+    # Use scipy.linalg.eig which handles the non-symmetric GEP.
+    evals_tc, evecs_tc = eig(H_TC, S_00)
 
-    result_opt = minimize_scalar(E_gamma, bounds=(-2.0, 2.0), method='bounded')
-    gamma_opt = result_opt.x
-    E_cusped = result_opt.fun
+    # Filter real eigenvalues (bound-state eigenvalues must be real)
+    real_mask = np.abs(evals_tc.imag) < 1e-6 * np.abs(evals_tc.real).max()
+    real_evals = evals_tc[real_mask].real
+    real_evals.sort()
+    E_tc = real_evals[0] if len(real_evals) > 0 else np.nan
 
     error_std = abs((E_0 - E_EXACT) / E_EXACT) * 100.0
-    error_cusped = abs((E_cusped - E_EXACT) / E_EXACT) * 100.0
+    error_tc = abs((E_tc - E_EXACT) / E_EXACT) * 100.0
 
     return {
         'E_standard': E_0,
-        'E_cusped': E_cusped,
-        'gamma_optimal': gamma_opt,
+        'E_tc': E_tc,
         'error_standard_pct': error_std,
-        'error_cusped_pct': error_cusped,
-        'improvement_factor': error_std / max(error_cusped, 1e-15),
-        'r12_expectation': S_0c,
-        'H_0c': H_0c,
-        'Hcc': Hcc,
-        'S_cc': S_cc,
+        'error_tc_pct': error_tc,
+        'improvement_factor': error_std / max(error_tc, 1e-15),
+        'gamma_tc': gamma_tc,
+        'dim': dim_std,
+        'n_real_evals': int(np.sum(real_mask)),
         'l_max': l_max,
         'E_exact': E_EXACT,
     }

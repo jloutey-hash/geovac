@@ -1,0 +1,91 @@
+{
+  "track": "EP-2",
+  "two_fermion_ho": {
+    "status": "not_feasible",
+    "reason": "geovac/nuclear/bargmann_graph.py implements the single-particle SU(3) (N,0) dipole graph only. No V(r12) two-body interaction, no Moshinsky-Talmi bracket wiring onto Bargmann-Segal nodes, no 2-fermion 1-RDM machinery. New wiring required \u2014 out of scope for a scoping sprint per instructions."
+  },
+  "spectral_entropy": {
+    "HO_adjacency": {
+      "name": "HO_bargmann_adj_Nmax5",
+      "n_eigs": 56,
+      "n_nonzero": 44,
+      "n_distinct_levels": 45,
+      "min": -1.3525601200924195,
+      "max": 1.3525601200924182,
+      "spectral_entropy": 3.5406828145393003,
+      "spectral_entropy_normalized": 0.9356515283493267,
+      "n_nodes": 56
+    },
+    "HO_laplacian": {
+      "name": "HO_bargmann_laplacian_Nmax5",
+      "n_eigs": 56,
+      "n_nonzero": 55,
+      "n_distinct_levels": 55,
+      "min": 1.8403529585125565e-16,
+      "max": 3.4062162195138654,
+      "spectral_entropy": 3.71383145051537,
+      "spectral_entropy_normalized": 0.9267588390706587,
+      "n_nodes": 56
+    },
+    "Coulomb_adjacency": {
+      "name": "Coulomb_S3_adj_maxn3",
+      "n_eigs": 14,
+      "n_nonzero": 12,
+      "n_distinct_levels": 11,
+      "min": -2.414213562373095,
+      "max": 2.414213562373095,
+      "spectral_entropy": 2.367611196861765,
+      "spectral_entropy_normalized": 0.9527968372831057,
+      "n_nodes": 14
+    },
+    "Coulomb_laplacian": {
+      "name": "Coulomb_S3_laplacian_maxn3",
+      "n_eigs": 14,
+      "n_nonzero": 11,
+      "n_distinct_levels": 9,
+      "min": 3.9250536344271737e-17,
+      "max": 4.999999999999999,
+      "spectral_entropy": 2.2360712934207645,
+      "spectral_entropy_normalized": 0.9325141588903689,
+      "n_nodes": 14
+    }
+  },
+  "ratios": {
+    "adj_norm_HO_over_Coulomb": 0.9820052835369724,
+    "lap_norm_HO_over_Coulomb": 0.9938281689721916,
+    "distinct_levels_HO_adj": 45,
+    "distinct_levels_Coulomb_adj": 11
+  },
+  "structural": {
+    "HO_distinct_per_node": 0.8035714285714286,
+    "Coulomb_distinct_per_node": 0.7857142857142857,
+    "HO_sample_adj_eigs_first5": [
+      -1.3525601200924195,
+      -0.7518499096637462,
+      -0.6173619751717964,
+      -0.49365017685040746,
+      -0.4773147692584272
+    ],
+    "HO_sample_adj_eigs_last5": [
+      0.4773147692584274,
+      0.4936501768504079,
+      0.6173619751717956,
+      0.7518499096637463,
+      1.3525601200924182
+    ],
+    "Coulomb_sample_adj_eigs_first5": [
+      -2.414213562373095,
+      -1.732050807568878,
+      -1.4142135623730951,
+      -1.0,
+      -1.0
+    ],
+    "Coulomb_sample_adj_eigs_last5": [
+      1.0,
+      1.0000000000000002,
+      1.4142135623730954,
+      1.7320508075688772,
+      2.414213562373095
+    ]
+  }
+}

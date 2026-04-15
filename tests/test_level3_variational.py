@@ -28,27 +28,27 @@ class TestRadialOperators:
     """Validate the radial operator matrices."""
 
     def test_overlap_positive_definite(self) -> None:
-        S_R, K_R, M_inv_R, M_inv_R2 = _build_radial_operator_matrices(20, 1.5, 0.05)
+        S_R, K_R, M_inv_R, M_inv_R2, _, _ = _build_radial_operator_matrices(20, 1.5, 0.05)
         eigs = np.linalg.eigvalsh(S_R)
         assert np.all(eigs > 0), "Overlap matrix must be positive definite"
 
     def test_kinetic_positive_semidefinite(self) -> None:
-        S_R, K_R, M_inv_R, M_inv_R2 = _build_radial_operator_matrices(20, 1.5, 0.05)
+        S_R, K_R, M_inv_R, M_inv_R2, _, _ = _build_radial_operator_matrices(20, 1.5, 0.05)
         eigs = np.linalg.eigvalsh(K_R)
         assert np.all(eigs >= -1e-12), "Kinetic matrix must be positive semidefinite"
 
     def test_inv_R_positive_definite(self) -> None:
-        S_R, K_R, M_inv_R, M_inv_R2 = _build_radial_operator_matrices(20, 1.5, 0.05)
+        S_R, K_R, M_inv_R, M_inv_R2, _, _ = _build_radial_operator_matrices(20, 1.5, 0.05)
         eigs = np.linalg.eigvalsh(M_inv_R)
         assert np.all(eigs > 0), "1/R operator matrix must be positive definite"
 
     def test_inv_R2_positive_definite(self) -> None:
-        S_R, K_R, M_inv_R, M_inv_R2 = _build_radial_operator_matrices(20, 1.5, 0.05)
+        S_R, K_R, M_inv_R, M_inv_R2, _, _ = _build_radial_operator_matrices(20, 1.5, 0.05)
         eigs = np.linalg.eigvalsh(M_inv_R2)
         assert np.all(eigs > 0), "1/R^2 operator matrix must be positive definite"
 
     def test_matrices_symmetric(self) -> None:
-        S_R, K_R, M_inv_R, M_inv_R2 = _build_radial_operator_matrices(20, 1.5, 0.05)
+        S_R, K_R, M_inv_R, M_inv_R2, _, _ = _build_radial_operator_matrices(20, 1.5, 0.05)
         for name, M in [("S_R", S_R), ("K_R", K_R), ("M_inv_R", M_inv_R),
                          ("M_inv_R2", M_inv_R2)]:
             assert np.allclose(M, M.T, atol=1e-14), f"{name} must be symmetric"

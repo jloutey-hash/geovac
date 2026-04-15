@@ -684,6 +684,51 @@ they exhaust the two potentials that classical group theory
 identifies as having full $\mathrm{SO}(4)$ and $\mathrm{SU}(3)$
 dynamical symmetries respectively.
 
+\subsection{Two-fermion entanglement rigidity (corollary)}
+\label{sec:entanglement-rigidity}
+
+The HO rigidity theorem of
+Section~\ref{sec:ho-rigidity-theorem} has a direct
+quantum-information corollary established empirically in
+Paper~27~\cite{paper27_entropy}: \emph{the spatial 1-RDM
+von Neumann entropy of the closed-shell two-fermion ground
+state on the Bargmann--Segal graph is identically zero for
+any central two-body interaction $V(r_{12})$.}
+
+The mechanism is the Moshinsky--Talmi (MT) lab-to-relative
+transformation~\cite{moshinsky_smirnov_1996}: any central
+$V(r_{12})$ on the 3D HO basis preserves the total HO quantum
+number $N_{\mathrm{tot}} = N_{\mathrm{rel}} + N_{CM}$.  The
+two-body Hamiltonian therefore commutes with the one-body
+Hamiltonian $H_{HO}$ at the operator level (both are
+diagonal in $N_{\mathrm{tot}}$), and the closed-shell ground
+state of $H_{HO}+V$ lies entirely within the lowest
+$N_{\mathrm{tot}}$ sector.  For two fermions in the
+$M_L=0, M_S=0$ singlet at the lowest shell ($N_{\mathrm{tot}}=0$),
+that sector is one-dimensional --- a single Slater determinant
+$|(0s)^{2}\rangle$ --- so the spatial 1-RDM has occupation
+$(2,0,\ldots,0)$ exactly and the von Neumann entropy is zero.
+Numerical verification at $N_{\max}\in\{2,3\}$ with the
+Minnesota NN singlet potential at $\hbar\omega = 10$~MeV gives
+$S_{\mathrm{full}}=0$ and $\lVert[H_{HO},V]\rVert_F /
+\lVert H_{HO}\rVert_F < 10^{-15}$ (Paper~27,
+Sec.~VII.A;~\cite{paper27_entropy}).
+
+This is the structural dual of the corresponding statement
+for the Coulomb $S^3$ basis, where Paper~27 establishes a
+universal but \emph{nonzero} two-variable scaling
+$S_B = A(\tilde{w}_B/\delta_B)^{\gamma}$ with
+$\gamma\to 2$ at large $Z, n_{\max}$.  The Coulomb result is
+nontrivial because $V_{ee} = 1/r_{12}$ does not preserve any
+HO-like total-quanta quantum number on $S^3$; it couples
+across shells, generating the second-order
+Rayleigh--Schr\"odinger entanglement amplitude that
+Paper~27 measures.  The HO basis kills this amplitude at
+the operator level by the MT conservation law, completing
+the universal/Coulomb-specific partition stated in the
+abstract: the HO graph is $\pi$-free in eigenvalues, in the
+Bargmann measure, and now also in two-fermion entanglement.
+
 %================================================================
 \section{Implications}
 \label{sec:imp}
@@ -935,6 +980,17 @@ GeoVac Paper~22 (2026).
 J.~Loutey,
 ``Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice,''
 GeoVac Paper~23 (2026).
+
+\bibitem{paper27_entropy}
+J.~Loutey,
+``Entropy as a Projection Artifact: One-Body Operators are
+Entanglement-Inert on Sparse Lattices,''
+GeoVac Paper~27 (2026).
+
+\bibitem{moshinsky_smirnov_1996}
+M.~Moshinsky and Yu.~F.~Smirnov,
+\emph{The Harmonic Oscillator in Modern Physics}
+(Harwood Academic, 1996).
 
 \end{thebibliography}
 

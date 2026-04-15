@@ -1,0 +1,72 @@
+{
+  "description": "TC 2D cusp correction for He (Track DI, v2.8.2)",
+  "method": "BCH similarity transformation H_TC = H - (g/2)[H,r12] + (g^2/8)[[H,r12],r12]",
+  "double_commutator": "[[H, R sin(a)], R sin(a)] = -kron(S_R, I + cos^2(a)) (exact, algebraic)",
+  "gamma_optimal": 0.11,
+  "gamma_kato_singlet": 1.0,
+  "non_hermitian_solver": "scipy.linalg.eig",
+  "results_gamma_0.11": {
+    "l0": {
+      "std_pct": 0.897,
+      "tc_pct": 0.845,
+      "improve": 1.1
+    },
+    "l1": {
+      "std_pct": 0.157,
+      "tc_pct": 0.105,
+      "improve": 1.5
+    },
+    "l2": {
+      "std_pct": 0.079,
+      "tc_pct": 0.027,
+      "improve": 2.9
+    },
+    "l3": {
+      "std_pct": 0.06,
+      "tc_pct": 0.008,
+      "improve": 7.6
+    },
+    "l4": {
+      "std_pct": 0.053,
+      "tc_pct": 0.001,
+      "improve": 48.8
+    },
+    "l5": {
+      "std_pct": 0.05,
+      "tc_pct": 0.002,
+      "improve": 26.3
+    },
+    "l6": {
+      "std_pct": 0.049,
+      "tc_pct": 0.003,
+      "improve": 14.2
+    },
+    "l7": {
+      "std_pct": 0.048,
+      "tc_pct": 0.004,
+      "improve": 11.2
+    }
+  },
+  "gamma_scan_l4": {
+    "0.08": 0.02563,
+    "0.09": 0.01831,
+    "0.10": 0.01013,
+    "0.11": 0.00109,
+    "0.12": 0.00881,
+    "0.14": 0.0312
+  },
+  "dead_ends": [
+    "Commutator expectation <psi|[H,r12]|psi>=0 for real wavefunctions (fundamental)",
+    "R sin(a) basis doubling: Hcc/Scc=-0.84 >> E0=-2.90 (R adds kinetic energy)",
+    "sin(a)-only augmentation: ~5% worse (negligible new content)",
+    "Hermitized TC: wrong convergence (anti-symmetric part significant)",
+    "Angular cross-channel overlaps 0.98 in plain inner product (fixed by block-diagonal l)",
+    "sin_a @ diag(casimir) @ sin_a wrong (Lambda^2 is differential, not multiplicative)"
+  ],
+  "algebraic_results": {
+    "double_commutator": "-kron(S_R, I + cos^2(alpha))",
+    "angular_casimir_decomposition": "V_extra = diag(casimir) - IBP_free",
+    "gegenbauer_derivative": "d/du C_n^lambda(u) = 2*lambda*C_{n-1}^{lambda+1}(u)",
+    "D_R_fix": "uses x weight (not x^2), anti-symmetric to 1e-14"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "system": "PsH (positronium hydride)",
+  "method": "Level 3 hyperspherical, adiabatic, Gegenbauer spectral",
+  "l_max": 0,
+  "n_basis": 20,
+  "E_psh_raw": -0.491018781997671,
+  "E_psh_shifted": -0.7126412832559859,
+  "E_exact": -0.789,
+  "error_raw_percent": 37.76694778229772,
+  "error_shifted_percent": 9.67791086742892,
+  "E_he_lmax0": -2.8996053028680415,
+  "E_hminus_lmax0": -0.5232840190346522,
+  "R_min_well": 3.6206896551724137,
+  "V_min_well": -0.5194442056458128,
+  "well_depth_below_threshold": 0.01944420564581284,
+  "asymptotic_shift": -0.22162250125854677
+}

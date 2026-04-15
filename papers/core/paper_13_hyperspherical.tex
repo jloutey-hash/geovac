@@ -1347,6 +1347,27 @@ Several extensions are natural:
     observable (the Berry phase of the coupled-channel expansion)
     that connects to the broader Geometric Vacuum program's
     investigation of geometric phases on discrete lattices.
+  \item \textbf{Exotic atoms (v2.9.0):} The hyperspherical framework
+    extends to matter--antimatter systems via sign flips in the charge
+    function.  Positronium hydride (PsH $= e^- e^+ p$) uses the
+    modified angular charge function
+    $C(\alpha, \theta_{12}) = -1/\sin\alpha + 1/\cos\alpha - 1/r_{12}$
+    (nuclear repulsion for the positron, attractive $e^-$--$e^+$
+    interaction).  Both alpha parities enter (distinguishable particles),
+    doubling the angular basis, while Gaunt selection rules are
+    preserved.  A prototype solver finds PsH bound at 4.1\% error
+    ($E = -0.756$~Ha vs exact $-0.789$~Ha at $l_{\max}=3$).
+    H$^-$ ($Z=1$) is found bound by the graph-native CI at $n_{\max}
+    \ge 2$, though the graph topology over-binds by 21\% (the graph
+    Laplacian is non-variational below $Z_c \approx 1.84$).
+  \item \textbf{Cusp as full-rank off-diagonal $V_{ee}$ (v2.9.0):}
+    Energy decomposition of the graph-native CI ground state shows that
+    $\langle h_1 \rangle$ converges by $n_{\max}=2$ and diagonal $V_{ee}$
+    (mean-field repulsion) by $n_{\max}=3$.  All remaining convergence
+    is off-diagonal $V_{ee}$ correlation.  The $V_{ee}$ supermatrix is
+    full rank in the graph eigenbasis at every $n_{\max}$ tested---the
+    cusp distributes broadly across all angular channels with no
+    low-rank shortcut.
 \end{enumerate}
 
 %% ========================================================================

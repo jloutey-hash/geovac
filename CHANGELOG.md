@@ -5,6 +5,96 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.2] - 2026-04-15
+
+### Added — Paper 27 (entropy as projection artifact)
+
+- **New core paper:** `papers/core/paper_27_entropy_projection.tex` ("Entropy as a Projection Artifact: One-Body Operators are Entanglement-Inert on Sparse Lattices"). Five results:
+  1. Operator-theoretic floor (theorem): non-degenerate one-body GS has S_kin=0 in its natural-orbital basis. Verified S_kin/S_full ~ 1e-14 for He at n_max=2,3 (EP-1).
+  2. Area-law identity: A_n = g_n² = 4n⁴ pair count corrects Paper 5's one-particle mislabeling.
+  3. Cusp localization: (1s,1s) is the unique hot-node on the V_ee pair graph.
+  4. **HO zero-entropy rigidity (theorem, EP-2b):** on Bargmann-Segal HO basis, [H_HO, V_central]=0 exactly via Moshinsky-Talmi total-quanta conservation. Closed-shell 2-fermion GS is a single Slater determinant for ANY central two-body V. S=0 identically. New module `geovac/nuclear/ho_two_fermion.py`.
+  5. **Universal scaling (EP-2c→2N):** S_B = A(w̃_B/δ_B)^γ with γ_∞ ≈ 1.96 (Richardson on n_max=2..5). Below second-order Rayleigh-Schrödinger γ=2; residue attributed to multi-shell aggregation. Verified across He-like Z∈[2,100], LiH R-sweep, HF/H₂O R-sweeps, Be analytical degenerate-PT.
+- **Paper 24 extension:** §V.C HO entanglement rigidity corollary — structural dual of Fock rigidity, completing the π-free partition.
+- **Paper 26 cross-reference:** S~Z^{-2.56} (Paper 26 §III) derives from Paper 27 §VI.B's universal curve. Reproduced at n_max=4: measured α_Z=-2.546, R²=0.995.
+- **CLAUDE.md Section 2** consolidated with the full EP-1 → EP-2N sprint arc.
+
+### Added — Cusp attack sprints
+
+- **CUSP-1** (`debug/cusp1_screened_ci.py`): w̃/δ-based 2nd-order-RS configuration screening for He graph-native CI at n_max=7. **11× config compression** (1218→109) at the full-CI floor, 22× (→56) at floor+0.01pp. Top-scored states are exactly the cusp-relevant (1s,ns), (2s,2s), (2p_-1, 2p_+1) singlet configs. Useful for VQE/qubit compactness; doesn't break the accuracy floor (which is structural).
+- **CUSP-2** (`debug/cusp2_hotnode_patch.py`): Tested Schwartz-tail patch on the (1s,1s) hot-node. **Decisive negative diagnosis of a long-standing misunderstanding**: the 0.20% floor for graph-native CI on He at Z=2 is NOT the cusp. Linear fit err_abs = -A/(l+2)⁴ + c gives irreducible c ≈ 6 mHa — the small-Z graph-validity-boundary artifact (Z_c ≈ 1.84). Z=10 confirms: error sign flips (under-binding +85 mHa). **For He graph-native CI, the cusp contribution is below 1 mHa at l_max≥4; the reported ceiling is basis-internal.** Real cusp work should be conducted at Z≥4 where the small-Z artifact is suppressed.
+- **CUSP-3** (`debug/cusp3_tc_high_lmax.py`): TC benchmarked with proper particle-number-projected FCI at He composed n_max=2,3,4,5. **Decisive structural negative**: TC error plateaus at 3.40→3.47%, ratios approaching 1 (0.987→0.994→0.997). Standard continues to improve 2.48→2.02 and is still decreasing. Pauli ratio TC/Std worsens 1.68→2.73. **TC is now confirmed dead at every accessible n_max in second quantization on the composed basis**, not just small n_max. Section 3 updated with this extended-n_max evidence.
+
+### Added — Paper 27 EP-2 sprint chain (drivers, data, tests)
+
+- Drivers: `debug/ep2{b,c,d,e,f,g,h,i,j,k,L,M,N}_*.py` (13 scripts, one per sprint).
+- Data: `debug/data/ep2{b,c,c_multi_block,d,e,f,g,h,i,j,k,L,M,N}_*.json`.
+- Tests (`tests/test_paper27_entropy.py`): 27 tests total (26 passing + 1 `--slow`-gated). Includes:
+  - EP-1 reproduction at n_max=2,3
+  - Area-law pair counting (combinatorial + leading-order + one-body counter-check)
+  - Energy-graph structural invariants at n_max=3,4 (commutator ratio, diagonality, (1s,1s)=5/8)
+  - EP-2b HO commutator + single-SD ground state
+  - EP-2c/2d/2g/2h/2i/2L dimensionless power law + Z-range artifact + asymptote below 2
+  - EP-2n Be analytical degenerate-PT
+  - Paper 26 / Paper 27 Z-scaling consistency
+  - Proposition non-degeneracy qualifier (Li/Be)
+
+### Fixed
+
+- **Paper 27 abstract + conclusion:** γ → 2 asymptote corrected to γ_∞ ≈ 1.96 based on n_max=5 Richardson extrapolation. Previous "γ → 2 from above" claim was an artifact of limited n_max coverage.
+- **Paper 27 Section II.C (Scope of the proposition):** added non-degeneracy qualifier, open-shell qualifier, and Be analytical degenerate-PT subsection.
+- **Paper 27 Section V (wording fix):** ‖V_ee^diag(H_1)‖_F / ‖V_ee‖_F is unsquared Frobenius ratio; previous text incorrectly stated squared formula. n_max=4 value 0.94 corrected to 0.892.
+- **Paper 27 Section VII consolidated:** 1111→900 lines, sprint chronology collapsed into two clean subsections (HO rigidity + Universal scaling). Methods/robustness collected into one paragraph.
+
+### Status
+
+- Paper 27 core content complete and regression-locked.
+- Cusp problem: fundamentally re-diagnosed at He Z=2 (not cusp, graph-validity). No breakthrough on the cusp itself at Z≥4, but three structural facts established (see Section 3 updates).
+
+---
+
+## [2.9.1] - 2026-04-14
+
+### Added (documentation only — no production code changes)
+
+- **Energy graph characterization for V_ee on S³ (exploratory sprint):** Tested the hypothesis that a "second graph" — nodes = electron pair-states |(n₁l₁m₁)(n₂l₂m₂)⟩, edges = ⟨ab|1/r₁₂|cd⟩ — could be a Paper-12-style algebraic generator for V_ee on S³ (analog of the Neumann expansion for H₂ in prolate spheroidal coordinates).
+- Findings:
+  1. Pair-state graph at n_max=3 has 31 nodes, n_max=4 has 101 nodes (singlet M_L=0 sector).
+  2. Within-parity blocks are ~47% dense at both sizes — orbital-level Gaunt sparsity (Paper 22) does NOT survive projection to pair-states.
+  3. Diagonal V_ii are exact rationals (⟨1s1s|V|1s1s⟩ = 5/8, ⟨2s2s|V|2s2s⟩ = 77/512), but cross-shell entries mix 2^k and 3^j denominators — V's spectrum is non-rational. Consistent with Paper 18's classification of 1/r₁₂ as embedding exchange constant.
+  4. No three-term recurrence in (n,l) for the Slater integrals: V(1s·ns) ratios drift {2.70, 2.20}, V(ns·ns) drift {4.16, 2.26}. Neumann-style separability is specific to prolate spheroidal coordinates, not S³.
+  5. **Main new finding:** In the H₁ eigenbasis, 92% of V's Frobenius mass is diagonal at n_max=3, 94% at n_max=4 (residual ‖[H₁,V]‖/‖V‖ = 6.1% → 5.3%, saturating not vanishing). The wavefunction graph nearly diagonalizes V_ee.
+  6. **Cusp signature:** The (1s1s) pair-state is simultaneously the highest-diagonal node, largest weighted hub, and head of the hottest off-diagonal edge. The cusp is concentrated on one pair-state at coalescence, NOT smeared across all angular channels.
+- Assessment: NEGATIVE on the Paper-12 analog hypothesis (no clean algebraic generator for V_ee on S³); POSITIVE PARTIAL on wavefunction-graph near-diagonalization of V_ee. The "energy graph as distinct object" framing is less useful than hoped — the two graphs share most eigenstructure.
+- Documentation: Paper 18 updated with a new paragraph in the embedding-constants section making the graph-theoretic characterization of 1/r₁₂ explicit. CLAUDE.md Section 3 (failed approaches) records the Paper-12 analog negative result; Section 2 cusp paragraph extended with the saturation finding; Section 11 topic lookup updated.
+- Pointers: `debug/energy_graph_exploration.md`, `debug/data/energy_graph_nmax3.json`, `debug/data/energy_graph_nmax4.json`.
+- No production code changed; no new tests added.
+
+---
+
+## [2.9.0] - 2026-04-13
+
+### Added
+
+- **111 Pauli count derivation (Investigation 1):** Analytically derived N_Pauli = 55 + 56 per s/p block at max_n=2. 55 = Q(Q+1)/2 direct terms (universal, from k=0 monopole). 56 exchange terms from 3 Gaunt channels: s-s (16), s-p cross-Coulomb (24), k=1 dipole (16). Pure l-shells (e.g., d-only) have zero exchange → Pauli/Q = (Q+1)/2 = 5.5. Universal coefficient 11.1 = 111/10. Key files: `debug/` analysis scripts.
+- **He energy decomposition (Investigation 2):** `<h1>` converges by n_max=2 (within 0.04 Ha of limit). `<V_ee>` is the slow component — ALL remaining convergence struggle is off-diagonal V_ee correlation. `<V_ee>/|E|` ratio: 0.4545 (n_max=1) → 0.3290 (n_max=7) → 0.3257 (exact). Finite basis overestimates electron coalescence probability.
+- **V_ee spectral analysis (Investigation 5):** V_ee is FULL RANK in the graph eigenbasis at every n_max (2-5). No low-rank shortcut exists for the cusp. Diagonal V_ee (mean-field) converges instantly (locked by n_max=3 at -2.787 Ha). Off-diagonal V_ee correlation converges as ~n_max^(-1) toward ~0.109 Ha. Cusp distributes broadly across all angular channels.
+- **Graph-native CI variational boundary (Z-sweep):** The graph Laplacian CI crosses from non-variational (over-binding) to variational at Z_c ≈ 1.84 (n_max=7, extrapolated CBS ~1.87-1.89). Below Z_c, kappa=-1/16 off-diagonal coupling dominates Z²-scaled diagonal, creating artificial stabilization. Relative importance scales as 1/(8Z²): 12.5% at Z=1, 3.1% at Z=2, 0.13% at Z=10.
+- **H⁻ variational-k investigation:** Standard (non-graph) FCI is ALWAYS variational for H⁻. Graph-native FCI over-binds by 21% (E=-0.640 vs exact -0.528 Ha). Variational-k optimization makes it WORSE (k_opt=1.16, energy drops further). Over-binding is specific to graph h1 topology, not orbital exponent.
+- **TC gamma optimal scan (Investigation 4):** gamma_opt decreases with l_max, approximately gamma_opt ~ 0.51/(l_max+1.7). l_max=3 sweet spot (0.001% error, 33x improvement) is a near-cancellation, not systematic. TC roughly doubles convergence exponent (~l⁻¹ to ~l⁻²) but does not achieve theoretical l⁻⁸. Large-gamma floor ~0.35% from non-Hermitian contamination.
+- **PsH exotic atom solver:** Standalone positronium hydride (e⁻e⁺ in proton field) solver using Level 3 hyperspherical framework with sign-flipped charge function. PsH IS bound: V_eff minimum at R=3.62 bohr, well depth 0.042 Ha below H+e⁺ threshold (l_max=3). Energy -0.756 Ha (4.1% error vs exact -0.789 Ha). Alpha parity mixing essential (distinguishable particles). Gaunt selection rules preserved.
+- **H⁻ binding via graph-native CI:** H⁻ found bound at n_max≥2 but with massive over-binding (21% error). Confirms correlation required for H⁻ (n_max=1 correctly unbound).
+- Analysis scripts in `debug/`: `he_energy_decomposition.py`, `vee_spectral_analysis.py`, `z_sweep_variational.py`, `h_minus_variational_k.py`, `tc_gamma_scan.py`, `psh_solver.py`, `positronium_analysis.py`
+- Plots in `debug/plots/`: `vee_graph_eigenbasis.png`, `vee_sv_decay.png`, `psh_adiabatic_curves.png`, `psh_mu_comparison.png`, `psh_charge_function.png`
+
+### Key Scientific Findings
+
+- **Cusp characterization:** The electron-electron cusp is a full-rank, broadly-distributed, off-diagonal V_ee object in the graph eigenbasis. h1 and diagonal V_ee converge fast; ALL convergence struggle is off-diagonal V_ee. No rank-reduction or channel-dominant shortcut exists. TC similarity transformation is the structurally correct response (modifies effective V_ee).
+- **Graph validity boundary:** Z_c ≈ 1.84. The graph Laplacian with kappa=-1/16 is reliable when Z² >> kappa (nuclear potential dominates graph topology). He (Z=2) barely qualifies. H⁻ (Z=1) does not. The graph's rigid inter-shell coupling overestimates correlation for asymmetric/weakly-bound systems.
+- **Exotic atoms:** PsH demonstrates the hyperspherical framework extends to matter-antimatter systems via sign flips. The composed geometry insight applies: systems with disparate particle-nucleus distance scales need composed blocks, not single-center coordinates.
+
+---
+
 ## [2.8.2] - 2026-04-13
 
 ### Added

@@ -1600,6 +1600,38 @@ systems---transition metal complexes, catalytic intermediates---the
 GeoVac lattice offers a structural sparsity advantage that grows with
 the angular complexity of the system.
 
+\subsubsection{Analytical Pauli count for the $s$+$p$ block}
+\label{sec:111}
+
+The 111 non-identity Pauli terms per $s$+$p$ block at $n_{\max}=2$ ($M=5$
+spatial orbitals, $Q=10$ qubits) decompose exactly as $55 + 56$: a direct
+sector and an exchange sector.
+
+The 55 \emph{direct} terms equal $Q(Q+1)/2$ and arise because all $M^2 = 25$
+Coulomb integrals $\langle ab | ab \rangle$ are nonzero: the $k=0$ monopole
+coefficient $c^0(l,m;l,m) = 1$ for any angular momentum.  Under
+Jordan--Wigner encoding, the number-operator products $n_p n_q$ map to $Z$
+and $ZZ$ strings, giving $\binom{Q}{1} + \binom{Q}{2} = 55$ terms.
+
+The 56 \emph{exchange} terms arise from 40 non-direct ERIs across three
+Gaunt channels: (i)~$s$--$s$ exchange ($1s \leftrightarrow 2s$, 12 ERIs
+$\to$ 16 Pauli terms), (ii)~$s$--$p$ cross-Coulomb (off-diagonal $s \times$
+diagonal $p$, 24 ERIs $\to$ 24 terms), and (iii)~$k=1$ dipole coupling
+($s \leftrightarrow 2p_0$, 16 ERIs $\to$ 16 terms).  The total 65 nonzero
+ERI quartets per block follow from $7^2 + 4^2 = 65$ allowed Gaunt pair
+combinations at $k=0$ and $k=1$.
+
+For pure $l$-shells (e.g., the $d$-only blocks of Sec.~\ref{sec:d_orbitals}),
+the Gaunt $m$-conservation rule forces $a = c$ for every allowed pair,
+eliminating all exchange terms.  The Pauli count reduces to $Q(Q+1)/2 = 55$
+for $Q=10$, giving $\text{Pauli}/Q = 5.5$ versus the $s$+$p$ value of $11.1$.
+This explains the reduced coefficient observed for transition metal hydrides.
+
+The universal composed scaling $N_{\text{Pauli}} = n_{\text{sub}} \times 111$
+follows from the block-diagonal ERI structure (zero cross-block coupling):
+$N_{\text{Pauli}} / Q = 111/10 = 11.1$ for any molecule built from $s$+$p$
+sub-blocks at $n_{\max} = 2$.
+
 \subsection{Implications for quantum simulation}
 \label{sec:trotter}
 
