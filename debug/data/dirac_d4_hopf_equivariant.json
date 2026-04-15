@@ -1,0 +1,572 @@
+{
+  "meta": {
+    "track": "D4 Orduz Hopf-equivariant Dirac decomposition",
+    "n_ch_max": 5,
+    "convention": "Hopf U(1) = maximal torus of SU(2)_R; charges keyed as 2q (integer), so actual charge q = (2q)/2 \u2208 \u00bd\u2124.",
+    "targets": {
+      "B": 42,
+      "Delta_inverse": 40,
+      "F": "pi**2/6"
+    }
+  },
+  "levels": [
+    {
+      "n_ch": 0,
+      "g_n_plus": 2,
+      "g_n_full_dirac": 4,
+      "partition_plus": {
+        "0": 2
+      },
+      "partition_minus": {
+        "-1": 1,
+        "1": 1
+      },
+      "partition_full": {
+        "-1": 1,
+        "0": 2,
+        "1": 1
+      },
+      "sum_mult_full_eq_g": true,
+      "charge_support_full_2q": [
+        -1,
+        0,
+        1
+      ],
+      "moment_q2_plus": "0",
+      "moment_q2_minus": "1/2",
+      "moment_q2_full": "1/2",
+      "moment_q4_full": "1/8"
+    },
+    {
+      "n_ch": 1,
+      "g_n_plus": 6,
+      "g_n_full_dirac": 12,
+      "partition_plus": {
+        "-1": 3,
+        "1": 3
+      },
+      "partition_minus": {
+        "-2": 2,
+        "0": 2,
+        "2": 2
+      },
+      "partition_full": {
+        "-2": 2,
+        "-1": 3,
+        "0": 2,
+        "1": 3,
+        "2": 2
+      },
+      "sum_mult_full_eq_g": true,
+      "charge_support_full_2q": [
+        -2,
+        -1,
+        0,
+        1,
+        2
+      ],
+      "moment_q2_plus": "3/2",
+      "moment_q2_minus": "4",
+      "moment_q2_full": "11/2",
+      "moment_q4_full": "35/8"
+    },
+    {
+      "n_ch": 2,
+      "g_n_plus": 12,
+      "g_n_full_dirac": 24,
+      "partition_plus": {
+        "-2": 4,
+        "0": 4,
+        "2": 4
+      },
+      "partition_minus": {
+        "-3": 3,
+        "-1": 3,
+        "1": 3,
+        "3": 3
+      },
+      "partition_full": {
+        "-3": 3,
+        "-2": 4,
+        "-1": 3,
+        "0": 4,
+        "1": 3,
+        "2": 4,
+        "3": 3
+      },
+      "sum_mult_full_eq_g": true,
+      "charge_support_full_2q": [
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3
+      ],
+      "moment_q2_plus": "8",
+      "moment_q2_minus": "15",
+      "moment_q2_full": "23",
+      "moment_q4_full": "155/4"
+    },
+    {
+      "n_ch": 3,
+      "g_n_plus": 20,
+      "g_n_full_dirac": 40,
+      "partition_plus": {
+        "-3": 5,
+        "-1": 5,
+        "1": 5,
+        "3": 5
+      },
+      "partition_minus": {
+        "-4": 4,
+        "-2": 4,
+        "0": 4,
+        "2": 4,
+        "4": 4
+      },
+      "partition_full": {
+        "-4": 4,
+        "-3": 5,
+        "-2": 4,
+        "-1": 5,
+        "0": 4,
+        "1": 5,
+        "2": 4,
+        "3": 5,
+        "4": 4
+      },
+      "sum_mult_full_eq_g": true,
+      "charge_support_full_2q": [
+        -4,
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "moment_q2_plus": "25",
+      "moment_q2_minus": "40",
+      "moment_q2_full": "65",
+      "moment_q4_full": "749/4"
+    },
+    {
+      "n_ch": 4,
+      "g_n_plus": 30,
+      "g_n_full_dirac": 60,
+      "partition_plus": {
+        "-4": 6,
+        "-2": 6,
+        "0": 6,
+        "2": 6,
+        "4": 6
+      },
+      "partition_minus": {
+        "-5": 5,
+        "-3": 5,
+        "-1": 5,
+        "1": 5,
+        "3": 5,
+        "5": 5
+      },
+      "partition_full": {
+        "-5": 5,
+        "-4": 6,
+        "-3": 5,
+        "-2": 6,
+        "-1": 5,
+        "0": 6,
+        "1": 5,
+        "2": 6,
+        "3": 5,
+        "4": 6,
+        "5": 5
+      },
+      "sum_mult_full_eq_g": true,
+      "charge_support_full_2q": [
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "moment_q2_plus": "60",
+      "moment_q2_minus": "175/2",
+      "moment_q2_full": "295/2",
+      "moment_q4_full": "5167/8"
+    },
+    {
+      "n_ch": 5,
+      "g_n_plus": 42,
+      "g_n_full_dirac": 84,
+      "partition_plus": {
+        "-5": 7,
+        "-3": 7,
+        "-1": 7,
+        "1": 7,
+        "3": 7,
+        "5": 7
+      },
+      "partition_minus": {
+        "-6": 6,
+        "-4": 6,
+        "-2": 6,
+        "0": 6,
+        "2": 6,
+        "4": 6,
+        "6": 6
+      },
+      "partition_full": {
+        "-6": 6,
+        "-5": 7,
+        "-4": 6,
+        "-3": 7,
+        "-2": 6,
+        "-1": 7,
+        "0": 6,
+        "1": 7,
+        "2": 6,
+        "3": 7,
+        "4": 6,
+        "5": 7,
+        "6": 6
+      },
+      "sum_mult_full_eq_g": true,
+      "charge_support_full_2q": [
+        -6,
+        -5,
+        -4,
+        -3,
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "moment_q2_plus": "245/2",
+      "moment_q2_minus": "168",
+      "moment_q2_full": "581/2",
+      "moment_q4_full": "14357/8"
+    }
+  ],
+  "cumulative_tests": {
+    "0": {
+      "total_so_far": 4,
+      "partition_cumulative_full": {
+        "-1": 1,
+        "0": 2,
+        "1": 1
+      }
+    },
+    "1": {
+      "total_so_far": 16,
+      "partition_cumulative_full": {
+        "-2": 2,
+        "-1": 4,
+        "0": 4,
+        "1": 4,
+        "2": 2
+      }
+    },
+    "2": {
+      "total_so_far": 40,
+      "partition_cumulative_full": {
+        "-3": 3,
+        "-2": 6,
+        "-1": 7,
+        "0": 8,
+        "1": 7,
+        "2": 6,
+        "3": 3
+      }
+    },
+    "3": {
+      "total_so_far": 80,
+      "partition_cumulative_full": {
+        "-4": 4,
+        "-3": 8,
+        "-2": 10,
+        "-1": 12,
+        "0": 12,
+        "1": 12,
+        "2": 10,
+        "3": 8,
+        "4": 4
+      }
+    },
+    "4": {
+      "total_so_far": 140,
+      "partition_cumulative_full": {
+        "-5": 5,
+        "-4": 10,
+        "-3": 13,
+        "-2": 16,
+        "-1": 17,
+        "0": 18,
+        "1": 17,
+        "2": 16,
+        "3": 13,
+        "4": 10,
+        "5": 5
+      }
+    },
+    "5": {
+      "total_so_far": 224,
+      "partition_cumulative_full": {
+        "-6": 6,
+        "-5": 12,
+        "-4": 16,
+        "-3": 20,
+        "-2": 22,
+        "-1": 24,
+        "0": 24,
+        "1": 24,
+        "2": 22,
+        "3": 20,
+        "4": 16,
+        "5": 12,
+        "6": 6
+      }
+    },
+    "delta_inv_readings": {
+      "point_degeneracy_g3": 40,
+      "cumulative_0_to_2": 40,
+      "match": true,
+      "structural_note": "Both readings happen to equal 40 at n_ch=3, but this is a coincidence: cum_{0..n-1} != g_n in general (e.g. cum_{0..1}=16 while g_2=24)."
+    }
+  },
+  "B_tests": {
+    "point_degeneracies_0_to_5": [
+      4,
+      12,
+      24,
+      40,
+      60,
+      84
+    ],
+    "cumulative_0_to_n": [
+      4,
+      16,
+      40,
+      80,
+      140,
+      224
+    ],
+    "sum_lam2_g_n_0_to_2": "378",
+    "sum_lam2_g_n_0_to_2_factored": {
+      "value": 378,
+      "as_multiple_of_42": "9"
+    },
+    "sum_lam2_g_n_0_to_3": "1188",
+    "sum_lam2_g_n_0_to_3_over_42": "198/7",
+    "sum_lam_g_n_0_to_2": "120",
+    "hopf_charge_Casimir_mom2_0_to_2": "29",
+    "hopf_charge_Casimir_mom2_0_to_3": "94",
+    "charge_truncation_hits_42": "no hit"
+  },
+  "F_tests": {
+    "D_dirac_at_s_4": "-pi**4/12 + pi**2",
+    "D_dirac_at_s_3": "diverges (zeta(1) pole)",
+    "D_dirac_at_s_5": "-31*zeta(5)/2 + 14*zeta(3)",
+    "D_dirac_at_s_6": "pi**4*(10 - pi**2)/30",
+    "Ds4_equals_F": "pi**2*(10 - pi**2)/12  (nonzero iff no match)",
+    "Ds4_float": 1.7521801482558221,
+    "F_float": 1.6449340668482264,
+    "charge_sector_supports": {
+      "q=1/2": {
+        "first_few_(n,mult)": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            9
+          ]
+        ]
+      },
+      "q=3/2": {
+        "first_few_(n,mult)": [
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            11
+          ]
+        ]
+      },
+      "q=5/2": {
+        "first_few_(n,mult)": [
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            11
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            13
+          ]
+        ]
+      },
+      "q=7/2": {
+        "first_few_(n,mult)": [
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            9
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            11
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            13
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            15
+          ]
+        ]
+      }
+    }
+  },
+  "verdict": {
+    "B_42_hit": true,
+    "B_42_via_sum_lam2_g": "\u03a3_{n\u22642} |\u03bb_n|^2 g_n = 378 = 9\u00b742. Numerical multiple exists but no clean structural interpretation: the factor 9 = |\u03bb_0|^2 \u00b7 ... does not match Paper 2's (2l+1)\u00b7l(l+1) construction. TREAT AS near-miss, NOT a structural identity.",
+    "F_hit": false,
+    "F_Ds4_minus_F": "-0.10724608140759574",
+    "F_structural": "D_dirac(s=4) = -pi**4/12 + pi**2 \u2014 mixture of \u03b6(2) and \u03b6(4) with rational parts. No clean \u03b6(2) isolation. F does NOT lift to the Dirac Dirichlet series at packing exponent s=4.",
+    "Delta_hit": true,
+    "Delta_structural": "g_3^Dirac = 40 = \u0394^{-1} reproduced. Hopf decomposition at n=3 splits cleanly as 20 + 20 across the two chirality sectors and as 20 + 20 across half-integer / integer charge parity. This is TRUE BY CONSTRUCTION (Phase 4H SM-D already observed it), not a NEW result. The refinement is that the '40' carries a natural 4\u00d75 + 5\u00d74 (charges \u00d7 mult) labeling \u2014 consistent with, but not equivalent to, Paper 2's |\u03bb_3|\u00b7N(2) = 8\u00b75 factorization.",
+    "final": "Of {B, F, \u0394}: \u0394 reproduced (was known, Phase 4H). B hit as numerical multiple 378 = 9\u00b742 with no structural interpretation. F does NOT lift. \nVerdict for D5: NO Hopf-Dirac lift of the full K combination rule. \u0394 already had a spectral home (Phase 4H SM-D). B and F remain scalar-sector-only invariants. The Hopf-equivariant Dirac decomposition on S\u00b3 is categorically different from Phase 4B's scalar graph quotient (first-order operator; charge-q twists are nontrivial line bundles over S\u00b2), but this categorical difference does not manifest as new identities for B or F. Paper 2's K combination rule remains a three-tier coincidence.",
+    "categorical_distinction_from_phase4B": "Phase 4B \u03b1-D tested the SCALAR graph morphism S\u00b3 \u2192 S\u00b2 under the Hopf quotient: nodes (n,l,m) \u2192 sectors labeled by scalar spherical harmonic content on S\u00b2. The Laplace\u2013Beltrami is second-order and bosonic, so the quotient map is a deformation-retract-like averaging; no line bundle can appear, and all charge content is trivial. Negative result was structural: no spectral invariant of the quotient hits K targets. \nD4 tests the DIRAC decomposition: first-order operator, spinor bundle, and U(1) Hopf action gives a NONTRIVIAL direct-sum decomposition over half-integer charges q (line bundles O(2q) over S\u00b2 with q \u2208 1/2 \u2124). Each charge sector is a twisted Dirac on S\u00b2 with its own Baum-Friedrich spectrum. This is genuinely new content not available in the scalar case. The charge-parity split (half-int vs int) mirrors the chirality split (+ vs \u2212) exactly and reproduces \u0394^{-1}=40 as a 20+20 partition \u2014 the first place chirality/charge have structural content on the graph. But the new decomposition does NOT provide additional handles on B=42 or F=\u03c0\u00b2/6, so it does not rescue the common-generator hypothesis."
+  },
+  "Delta_tests": {
+    "partition_at_n_ch_3": {
+      "-4": 4,
+      "-3": 5,
+      "-2": 4,
+      "-1": 5,
+      "0": 4,
+      "1": 5,
+      "2": 4,
+      "3": 5,
+      "4": 4
+    },
+    "sum": 40,
+    "half_integer_charge_states": 20,
+    "integer_charge_states": 20,
+    "half_plus_int_eq_40": true,
+    "factorization_comparison": {
+      "paper_2": "|\u03bb_3|\u00b7N(2) = 8\u00b75 = 40",
+      "D4_by_chirality": "(+):20  (-):20  = 20 + 20 = 40",
+      "D4_by_charge_parity": "half-int:20  int:20 = 20 + 20 = 40",
+      "D4_by_charge_count_x_mult_plus": "4 charges \u00d7 5 mult = 20",
+      "D4_by_charge_count_x_mult_minus": "5 charges \u00d7 4 mult = 20",
+      "matches_8_times_5": "yes \u2014 4 half-int charges \u00d7 5 mult = 20, 5 int charges \u00d7 4 mult = 20; combined 5\u00b78 = 40."
+    }
+  }
+}

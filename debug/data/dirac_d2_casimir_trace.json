@@ -1,0 +1,675 @@
+{
+  "B_scalar_paper2": 42,
+  "spectrum_formulas": {
+    "lambda_abs": "n + 3/2 (CH; n >= 0)",
+    "g_dirac": "2(n+1)(n+2)",
+    "g_weyl": "(n+1)(n+2)"
+  },
+  "paper2_scalar_cutoff": "m = 3, i.e., n_CH in {0, 1, 2}",
+  "candidate_a_truncated_casimir_traces": {
+    "dirac": {
+      "per_level": [
+        {
+          "n_ch": 0,
+          "lambda_abs": "3/2",
+          "g": 4,
+          "lambda_times_g": "6",
+          "lambda2_times_g": "9"
+        },
+        {
+          "n_ch": 1,
+          "lambda_abs": "5/2",
+          "g": 12,
+          "lambda_times_g": "30",
+          "lambda2_times_g": "75"
+        },
+        {
+          "n_ch": 2,
+          "lambda_abs": "7/2",
+          "g": 24,
+          "lambda_times_g": "84",
+          "lambda2_times_g": "294"
+        }
+      ],
+      "sum_g": "40",
+      "sum_lambda_g": "120",
+      "sum_lambda2_g": "378",
+      "sum_4lambda2_g": "1512",
+      "classify_sum_g": "UNRELATED",
+      "classify_sum_lambda_g": "UNRELATED",
+      "classify_sum_lambda2_g": "INT_MULT_B (value = 9 * B)",
+      "classify_sum_4lambda2_g": "INT_MULT_B (value = 36 * B)"
+    },
+    "weyl": {
+      "per_level": [
+        {
+          "n_ch": 0,
+          "lambda_abs": "3/2",
+          "g": 2,
+          "lambda_times_g": "3",
+          "lambda2_times_g": "9/2"
+        },
+        {
+          "n_ch": 1,
+          "lambda_abs": "5/2",
+          "g": 6,
+          "lambda_times_g": "15",
+          "lambda2_times_g": "75/2"
+        },
+        {
+          "n_ch": 2,
+          "lambda_abs": "7/2",
+          "g": 12,
+          "lambda_times_g": "42",
+          "lambda2_times_g": "147"
+        }
+      ],
+      "sum_g": "20",
+      "sum_lambda_g": "60",
+      "sum_lambda2_g": "189",
+      "sum_4lambda2_g": "756",
+      "classify_sum_g": "UNRELATED",
+      "classify_sum_lambda_g": "SMALL_RATIONAL_MULT_B (10/7)",
+      "classify_sum_lambda2_g": "SMALL_RATIONAL_MULT_B (9/2)",
+      "classify_sum_4lambda2_g": "INT_MULT_B (value = 18 * B)"
+    }
+  },
+  "candidate_b_single_level_weyl": {
+    "g_weyl_at_n5_symbolic": "42",
+    "g_weyl_at_n5_value": 42,
+    "equals_B": true,
+    "g_dirac_at_n5": 84,
+    "g_dirac_at_n5_over_B": "2",
+    "n_solving_weyl_equals_42": [
+      "-8",
+      "5"
+    ],
+    "positive_integer_n_weyl_equals_42": [
+      5
+    ],
+    "n_solving_dirac_equals_42": [],
+    "note": "n_CH = 5 corresponds to n_Fock = 6, OUTSIDE Paper 2's scalar cutoff m ≤ 3 (n_Fock ≤ 3). Candidate (b) is a single-level coincidence, not a truncated-trace identity. No independent structural argument (d_max=4, N_init=2, l_max=2) picks n=5.",
+    "structural_check_n_eq_d_max_plus_1": {
+      "d_max": 4,
+      "n_candidate": 5,
+      "value": 42,
+      "note": "n = d_max + 1 = 5 would give a Paper-0 tie to the packing exponent, but no derivation connects d_max+1 to a Weyl-degeneracy truncation."
+    }
+  },
+  "candidate_c_cumulative_sums": {
+    "closed_form_dirac": "2*N**3/3 + 4*N**2 + 22*N/3 + 4",
+    "dirac_cumulative_table": [
+      {
+        "n_max_ch": 0,
+        "cumulative_g_dirac": 4
+      },
+      {
+        "n_max_ch": 1,
+        "cumulative_g_dirac": 16
+      },
+      {
+        "n_max_ch": 2,
+        "cumulative_g_dirac": 40
+      },
+      {
+        "n_max_ch": 3,
+        "cumulative_g_dirac": 80
+      },
+      {
+        "n_max_ch": 4,
+        "cumulative_g_dirac": 140
+      },
+      {
+        "n_max_ch": 5,
+        "cumulative_g_dirac": 224
+      },
+      {
+        "n_max_ch": 6,
+        "cumulative_g_dirac": 336
+      },
+      {
+        "n_max_ch": 7,
+        "cumulative_g_dirac": 480
+      }
+    ],
+    "n_max_where_dirac_cumulative_equals_42": [],
+    "dirac_solve_eq42": [
+      "-2 + (-1/2 - sqrt(3)*I/2)*(sqrt(321477)/18 + 63/2)**(1/3) + 1/(3*(-1/2 - sqrt(3)*I/2)*(sqrt(321477)/18 + 63/2)**(1/3))",
+      "-2 + 1/(3*(-1/2 + sqrt(3)*I/2)*(sqrt(321477)/18 + 63/2)**(1/3)) + (-1/2 + sqrt(3)*I/2)*(sqrt(321477)/18 + 63/2)**(1/3)",
+      "-2 + 1/(3*(sqrt(321477)/18 + 63/2)**(1/3)) + (sqrt(321477)/18 + 63/2)**(1/3)"
+    ],
+    "closed_form_weyl": "N**3/3 + 2*N**2 + 11*N/3 + 2",
+    "weyl_cumulative_table": [
+      {
+        "n_max_ch": 0,
+        "cumulative_g_weyl": 2
+      },
+      {
+        "n_max_ch": 1,
+        "cumulative_g_weyl": 8
+      },
+      {
+        "n_max_ch": 2,
+        "cumulative_g_weyl": 20
+      },
+      {
+        "n_max_ch": 3,
+        "cumulative_g_weyl": 40
+      },
+      {
+        "n_max_ch": 4,
+        "cumulative_g_weyl": 70
+      },
+      {
+        "n_max_ch": 5,
+        "cumulative_g_weyl": 112
+      },
+      {
+        "n_max_ch": 6,
+        "cumulative_g_weyl": 168
+      },
+      {
+        "n_max_ch": 7,
+        "cumulative_g_weyl": 240
+      }
+    ],
+    "n_max_where_weyl_cumulative_equals_42": [],
+    "weyl_solve_eq42": [
+      "-2 + (-1/2 - sqrt(3)*I/2)*(sqrt(321486)/9 + 63)**(1/3) + 1/(3*(-1/2 - sqrt(3)*I/2)*(sqrt(321486)/9 + 63)**(1/3))",
+      "-2 + 1/(3*(-1/2 + sqrt(3)*I/2)*(sqrt(321486)/9 + 63)**(1/3)) + (-1/2 + sqrt(3)*I/2)*(sqrt(321486)/9 + 63)**(1/3)",
+      "-2 + 1/(3*(sqrt(321486)/9 + 63)**(1/3)) + (sqrt(321486)/9 + 63)**(1/3)"
+    ],
+    "note": "Cumulative Dirac sum produces 12, 40, 84, 160, ... — never 42. Cumulative Weyl produces 2, 6, 12, 20, 30, 42, 56, ... — hits 42 at n_max = 5 (see candidate (d)). This is the same n=5 that lights up single-level Weyl, pointing at the same coincidence."
+  },
+  "candidate_d_variants": {
+    "d1_two_j_plus_1_weight": {
+      "note": "Σ(2j+1) over a single chirality sector = (n+1)(n+2) = g_Weyl. No new info.",
+      "equivalent_to": "candidate_a_weyl_sum_g"
+    },
+    "d2_weighted_sums": {
+      "dirac": {
+        "n": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 0
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 12
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 60
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 180
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 420
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 840
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 1512
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 2520
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 3960
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 5940
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        },
+        "n**2": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 0
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 12
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 108
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 468
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 1428
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 3528
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 7560
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 14616
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 26136
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 43956
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        },
+        "2n+3": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 12
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 72
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 240
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 600
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 1260
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 2352
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 4032
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 6480
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 9900
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 14520
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        },
+        "(2n+3)**2": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 36
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 336
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 1512
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 4752
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 12012
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 26208
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 51408
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 93024
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 158004
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 255024
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        }
+      },
+      "weyl": {
+        "n": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 0
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 6
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 30
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 90
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 210
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 420
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 756
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 1260
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 1980
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 2970
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        },
+        "n**2": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 0
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 6
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 54
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 234
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 714
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 1764
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 3780
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 7308
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 13068
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 21978
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        },
+        "2n+3": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 6
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 36
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 120
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 300
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 630
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 1176
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 2016
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 3240
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 4950
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 7260
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        },
+        "(2n+3)**2": {
+          "table": [
+            {
+              "n_max_ch": 0,
+              "sum": 18
+            },
+            {
+              "n_max_ch": 1,
+              "sum": 168
+            },
+            {
+              "n_max_ch": 2,
+              "sum": 756
+            },
+            {
+              "n_max_ch": 3,
+              "sum": 2376
+            },
+            {
+              "n_max_ch": 4,
+              "sum": 6006
+            },
+            {
+              "n_max_ch": 5,
+              "sum": 13104
+            },
+            {
+              "n_max_ch": 6,
+              "sum": 25704
+            },
+            {
+              "n_max_ch": 7,
+              "sum": 46512
+            },
+            {
+              "n_max_ch": 8,
+              "sum": 79002
+            },
+            {
+              "n_max_ch": 9,
+              "sum": 127512
+            }
+          ],
+          "matches_42_or_simple_multiple": []
+        }
+      }
+    },
+    "d3_all_hits_of_42": [],
+    "d4_integer_combinations_in_m3_window": {
+      "dirac": {
+        "g_values_n0_n1_n2": [
+          4,
+          12,
+          24
+        ],
+        "integer_linear_combos_hitting_42": [],
+        "total_combos_hitting_42": 0
+      },
+      "weyl": {
+        "g_values_n0_n1_n2": [
+          2,
+          6,
+          12
+        ],
+        "integer_linear_combos_hitting_42": [
+          {
+            "coeffs": [
+              -3,
+              2,
+              3
+            ],
+            "g_values": [
+              2,
+              6,
+              12
+            ],
+            "sum": 42
+          },
+          {
+            "coeffs": [
+              0,
+              1,
+              3
+            ],
+            "g_values": [
+              2,
+              6,
+              12
+            ],
+            "sum": 42
+          },
+          {
+            "coeffs": [
+              0,
+              3,
+              2
+            ],
+            "g_values": [
+              2,
+              6,
+              12
+            ],
+            "sum": 42
+          },
+          {
+            "coeffs": [
+              3,
+              0,
+              3
+            ],
+            "g_values": [
+              2,
+              6,
+              12
+            ],
+            "sum": 42
+          },
+          {
+            "coeffs": [
+              3,
+              2,
+              2
+            ],
+            "g_values": [
+              2,
+              6,
+              12
+            ],
+            "sum": 42
+          }
+        ],
+        "total_combos_hitting_42": 5
+      }
+    }
+  },
+  "candidate_e_structural_closed_forms": {
+    "B_scalar_m_closed_form": "m*(m - 1)*(m + 1)*(m + 2)*(2*m + 1)/20  [m(m-1)(m+1)(m+2)(2m+1)/20]",
+    "B_at_m_1_to_4": [
+      0,
+      6,
+      42,
+      162
+    ],
+    "dirac_lambda2_g_cum_closed_form": "(N + 1)*(N + 2)*(N + 3)*(2*N + 3)*(2*N + 5)/10  [ (N+1)(N+2)(N+3)(2N+3)(2N+5)/10 ]",
+    "dirac_lambda2_g_at_m3_window": 378,
+    "ratio_dirac_lambda2_to_B_scalar_closed": "2*(2*m + 3)/(m - 1)",
+    "note_ratio": "ratio = 2(2m+3)/(m-1); it equals 9 at m=3 only by virtue of 2·9/1 = 18 (no — rechecked), specifically 2·9/2 = 9. This is a single-point rational coincidence at m=3.",
+    "top_weyl_single_level_lambdag_closed": "m*(m + 1)*(2*m + 1)/2  [m(m+1)(2m+1)/2]",
+    "ratio_B_over_top_Weyl_lambdag_closed": "(m - 1)*(m + 2)/10  [(m-1)(m+2)/10]",
+    "m_where_ratio_is_1_symbolic": [
+      3
+    ],
+    "ratio_1_interpretation": "B(m) = top_Weyl_|λ|·g only when (m-1)(m+2)=10, uniquely m=3. This is the CLEANEST single-level correspondence, but it is a point coincidence, not a universal identity.",
+    "cumulative_weyl_lambdag_closed_form": "(N + 1)*(N + 2)**2*(N + 3)/4  [(N+1)(N+2)²(N+3)/4]",
+    "cumulative_weyl_lambdag_at_N2": 60,
+    "cumulative_dirac_lambdag_closed_form": "(N + 1)*(N + 2)**2*(N + 3)/2  [(N+1)(N+2)²(N+3)/2]",
+    "cumulative_dirac_lambdag_at_N2": 120
+  },
+  "verdict_summary": {
+    "within_m3_window_unweighted": "Cumulative Σ g_n^Dirac (n=0..2) = 40 = Δ^{-1} (not B). Cumulative Σ g_n^Weyl (n=0..2) = 20 (not B).",
+    "within_m3_window_|lambda|_weighted": "Cumulative Σ|λ|·g^Dirac (n=0..2) = 120 (= 20·6, unrelated to B=42). Cumulative Σ|λ|·g^Weyl  (n=0..2) = 60. However, SINGLE-LEVEL at n_CH=2 (top of window): |λ|·g^Weyl = (7/2)·12 = 42 = B EXACTLY, and |λ|·g^Dirac = 84 = 2B.",
+    "within_m3_window_|lambda|^2_weighted": "Cumulative Σ|λ|²·g^Dirac (n=0..2) = 378 = 9·B. Integer multiple of B, but coefficient 9 is not structural (closed-form ratio 2(2m+3)/(m-1) hits 9 only at m=3; varies with m).",
+    "cleanest_single_hit": "Top-of-window Weyl single-level |λ|·g at n_CH = m-1: m(m+1)(2m+1)/2. Equals B(m)=m(m-1)(m+1)(m+2)(2m+1)/20 iff (m-1)(m+2)=10, uniquely m=3. So at Paper 2's cutoff and ONLY at that cutoff, the top-shell Weyl weighted degeneracy equals the scalar truncated Casimir trace.",
+    "verdict_for_D5": "B-doesn't-lift (nuanced)",
+    "one_line_reason": "No closed-form Dirac-sector trace reproduces B(m)=m(m-1)(m+1)(m+2)(2m+1)/20 as a universal identity. Every apparent hit — 9·B at m=3 from Σ|λ|²·g^Dirac, 1·B at m=3 from top-shell |λ|·g^Weyl — is a single-point rational coincidence at m=3 whose ratio is non-constant in m (respectively 2(2m+3)/(m-1) and 10/[(m-1)(m+2)]). The scalar B(m) carries a factor (m-1)(m+2) that no Dirac truncation produces. The only TRUNCATED trace identity the Dirac sector does reproduce at m=3 is Δ^{-1} = 40 (Phase 4H SM-D, already known). B remains a scalar-Laplace-Beltrami quantity.",
+    "why_structurally": "B(m) in closed form has the factor (m-1)(m+2) — it vanishes at m=1 (the scalar ground state contributes no Casimir mass, since l=0 gives l(l+1)=0) and grows as m^5. The Dirac/Weyl degeneracies (n+1)(n+2) have NO (n-1)(n+2) factor — the Dirac ground state n_CH=0 contributes g=4 (Dirac) or g=2 (Weyl) with |λ|=3/2 ≠ 0, because the Dirac operator has no zero mode on S³. This is the structural reason no universal Dirac identity can reproduce B: the Dirac spectrum is gapped, the scalar spectrum has a zero mode, and B(m) carries the (m-1)-factor signature of that zero-mode gap."
+  }
+}

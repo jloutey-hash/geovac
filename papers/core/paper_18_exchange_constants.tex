@@ -666,6 +666,98 @@ embedding constants depend on the basis; flow functions depend
 on the full parameterized geometry; composition constants depend
 on the factorization topology (which groups share coordinates).
 
+\paragraph{Odd-zeta content from first-order spectral operators (new tier).}
+The Phase 4I Dirac-on-$S^3$ Tier 1 sprint (2026) identified a
+structurally new kind of transcendental content in the framework: the
+Apéry constant $\zeta_R(3)$, and more generally odd Riemann zetas
+$\zeta_R(2k+1)$, arising natively from first-order spectral operators
+(the Dirac operator) on curved space. The mechanism is the
+Dirac-sector Dirichlet series at the packing exponent $s = d_{\max}$:
+with the Camporesi--Higuchi spectrum $|\lambda_n| = n + 3/2$ and
+degeneracy $g_n^{\text{Dirac}} = 2(n+1)(n+2)$ on unit $S^3$, the Fock
+Dirichlet series evaluates to
+\begin{equation}\label{eq:dirac_dirichlet_zeta3}
+  D_{g_n^{\text{Dirac}}}^{\text{Fock}}(4)
+  \;=\; \sum_{m \geq 1} \frac{2m(m+1)}{m^4}
+  \;=\; 2\,\zeta_R(2) + 2\,\zeta_R(3)
+  \;=\; \frac{\pi^2}{3} + 2\,\zeta_R(3),
+\end{equation}
+a closed-form symbolic identity (sympy-exact, see
+\texttt{debug/dirac\_d3\_memo.md}). The two summands correspond to the
+two homogeneity classes of $g_m^{\text{Dirac}} = 2m^2 + 2m$: the
+weight-$m^2$ subchannel produces $2\zeta_R(2) = \pi^2/3$ (the familiar
+scalar $F$ content of Paper~2), while the weight-$m$ subchannel produces
+$2\zeta_R(3)$ (a channel structurally absent from the scalar Fock
+degeneracy $g_n = n^2$, which has only one homogeneity class).
+
+This odd-zeta content is categorically different from the
+calibration-tier content cataloged above. Calibration constants
+($\kappa$, $\pi^{d/2}$ Weyl prefactors, $F = \pi^2/6$ from the scalar
+Fock Dirichlet series) carry \emph{even-zeta} or $\pi^{\text{even}}$
+content arising from second-order Riemannian operators (the
+Laplace--Beltrami and its conformal rescalings) through Jacobi-$\theta$
+inversion in heat-kernel / Mellin analysis. The Phase 4D result
+(Track~$\alpha$-H) established structurally that Hopf-fiber tensor
+traces, heat-kernel asymptotics on round spheres, and spectral
+determinants on odd-dimensional spheres all produce only integer (or
+half-integer) powers of $\pi$ and rationals, not $\zeta_R(3)$. The
+odd-zeta content $\zeta_R(3)$ first enters the framework through the
+\emph{first-order} Dirac operator, via half-integer Hurwitz-zeta
+identities in the Camporesi--Higuchi index, and is $\mathbb{Q}$-linearly
+independent of $\zeta_R(2)$ by Apéry's theorem (irrationality 1978;
+algebraic independence from $\pi$ remains open).
+
+The appropriate taxonomic classification of $\zeta_R(3)$ is therefore a
+\emph{new tier adjacent to calibration but categorically distinct}:
+
+\begin{itemize}
+  \item \textbf{Source:} first-order spectral operator on curved
+    space (Dirac on $S^3$ in the present instance).
+  \item \textbf{Mechanism:} Dirichlet series $\sum_n g_n \cdot
+    (n+c)^{-s}$ at the packing exponent $s = d_{\max}$, where the
+    shifted index $n + c$ ($c$ half-integer) and the mixed-homogeneity
+    degeneracy together lift the scalar $\zeta_R(\text{even})$ result
+    to $\zeta_R(\text{even}) + \zeta_R(\text{odd})$.
+  \item \textbf{Dependency:} depends on the spectral sector (scalar
+    vs.\ spinor) of the chosen operator, not on the discretization,
+    basis, or factorization topology.
+  \item \textbf{Algebraic independence:} $\zeta_R(3)$ is
+    $\mathbb{Q}$-linearly independent of $\zeta_R(2)$ (Apéry), so no
+    rational combination of Dirac-sector Dirichlet series reduces to
+    a multiple of the scalar calibration content alone.
+\end{itemize}
+
+Within the $K = \pi(B + F - \Delta)$ combination rule of Paper~2 this
+new tier is a \emph{byproduct rather than a summand}. $\zeta_R(3)$
+appears in the Dirac Dirichlet series at $s = d_{\max}$ but is not used
+by the formula for $\alpha^{-1}$; the formula uses only $B$ (scalar
+Casimir trace), $F = \zeta_R(2)$ (scalar Fock Dirichlet), and
+$\Delta^{-1} = g_3^{\text{Dirac}}$ (single-level spinor degeneracy). The
+Phase 4I sprint confirmed that $\zeta_R(3)$ is structurally present
+on $S^3$ without participating in $K$; see Paper~2 \S IV for the full
+record. The taxonomic placement of $\zeta_R(3)$ as a distinct tier is
+recorded here for use in future applications that may require
+relativistic or spin-dependent spectral quantities.
+
+\paragraph{Parallel to Paper 24.}
+Paper~24 established that the Bargmann--Segal lattice is bit-exactly
+$\pi$-free in rational arithmetic and that calibration $\pi$ is
+structurally Coulomb-specific: the Coulomb/HO asymmetry arises because
+second-order Riemannian operators (Coulomb via $-\Delta_{\text{LB}}$)
+have nonlinear conformal projections that introduce $\pi$, whereas
+first-order complex-analytic operators (the HO via the Bargmann Euler
+operator on $H^2(S^5)$) have linear projections and no $\pi$.
+Eq.~(\ref{eq:dirac_dirichlet_zeta3}) is the first-order, spinor analog
+of that result on $S^3$: the Camporesi--Higuchi Dirac spectrum is
+itself bit-exactly $\pi$-free in rational arithmetic (51/51 sympy tests
+in \texttt{tests/test\_dirac\_s3.py}, v2.10.0), and $\pi^2$ enters
+Eq.~(\ref{eq:dirac_dirichlet_zeta3}) only through the infinite-sum
+analysis of the Dirichlet series at $s = 4$, not through the spectrum
+itself. The $\zeta_R(3)$ content enters simultaneously and
+inseparably. Cross-reference: Paper~24 \S IV (Coulomb/HO asymmetry)
+for the second-order/scalar parallel; Paper~2 \S IV
+(\S\,\texttt{zeta3\_aside}) for the $K$-combination-rule implications.
+
 \paragraph{Irreducibility of the Level~4 piecewise structure.}
 The piecewise-smooth $\rho$-dependence of $\mu(\rho,R)$ at Level~4
 is not a coordinate artifact: it cannot be resolved by geometric

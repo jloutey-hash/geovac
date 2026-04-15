@@ -1,0 +1,392 @@
+%======================================================================
+% Paper 2, Section IV — DROP-IN REWRITE (proposed by Track D5)
+% Replaces the current §IV "The Formula" (lines 272-322 of
+% papers/conjectures/paper_2_alpha.tex) with a structurally
+% upgraded version that reflects the Phase 4B-4I sprint series.
+% Conjectural status of K = π(B + F − Δ) is preserved.
+%
+% Status: drop-in proposal, NOT auto-applied. PI to review per
+% CLAUDE.md §13.5 (reframing a conjectural paper requires PI approval).
+%======================================================================
+\section{The Formula and its Three Homes}\label{sec:formula}
+%======================================================================
+
+Combining the three spectral invariants of the previous section, we
+define the \textit{coupling constant}:
+\begin{equation}\label{eq:K}
+  K = \pi\!\left(B + F - \Delta\right)
+    = \pi\!\left(42 + \frac{\pi^2}{6} - \frac{1}{40}\right).
+\end{equation}
+Numerically,
+\begin{equation}
+  K = \pi\,(42 + 1.644934 - 0.025000)
+    = \pi \times 43.619934
+    = 137.036064.
+\end{equation}
+
+The physical $\alpha$ satisfies a self-consistency condition
+\begin{equation}\label{eq:selfconsistent}
+  \frac{1}{\alpha} + \alpha^2 = K,
+\end{equation}
+which, upon multiplication by $\alpha$, yields the depressed cubic
+\begin{equation}\label{eq:cubic}
+  \boxed{\alpha^3 - K\alpha + 1 = 0.}
+\end{equation}
+This cubic has three real roots (discriminant $4K^3 - 27 > 0$). The
+physical root is the smallest positive one, corresponding to
+perturbative QED ($\alpha \ll 1$).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline\hline
+Quantity & Value & Source \\
+\hline
+$K$ & $137.036064$ & Eq.~(\ref{eq:K}) \\
+$\alpha^{-1}$ (formula) & $137.035987$ & Eq.~(\ref{eq:cubic}) \\
+$\alpha^{-1}$ (CODATA 2018) & $137.035999\ldots$ & Experiment \\
+\hline
+Relative error & $8.8 \times 10^{-8}$ & \\
+\hline\hline
+\end{tabular}
+\caption{Comparison of the Hopf bundle formula with the experimental
+value.}
+\label{tab:comparison}
+\end{table}
+
+%----------------------------------------------------------------------
+\subsection{The structural question and the verdict of the Phase 4B--4I
+program}\label{sec:structural_question}
+%----------------------------------------------------------------------
+
+The three ingredients $B = 42$, $F = \pi^2/6$, and $\Delta = 1/40$ enter
+Eq.~(\ref{eq:K}) as an additive combination. A natural question is
+whether they share a common spectral generator: a single construction
+on the geometry of the electron (here, a sector of $S^3$) that
+simultaneously produces all three. Over the period 2025--2026 we
+carried out an extended structural-decomposition program, documented in
+detail in the project's change log, to test this hypothesis across a
+wide range of spectral-theoretic mechanisms.
+
+The program ran for eight phases (4B through 4I) and eliminated nine
+distinct mechanisms:
+Hopf-twist spectral comparison on $S^1 \times S^2$;
+packing-$\pi$ hypothesis with $\pi$ forced by Paper~0 axioms;
+scalar Hopf graph morphism between $S^3$ and $S^2$;
+$S^1$ fiber Fock-weight traces (discrete and continuous);
+$S^5$ spectral geometry;
+$\zeta$-combination search for $\Delta$;
+the Standard-Model running / one-loop vacuum polarization origin for
+$\Delta$;
+and most recently, the Dirac-on-$S^3$ lift of $B$, $F$, and $\Delta$ as
+a common generator (Tier 1, 2026).
+
+The program produced four positive structural identifications, each of
+which resolves the internal content of one of the three ingredients but
+does not unify them:
+\begin{enumerate}
+  \item $\kappa \leftrightarrow B$ via the Fock momentum-space weight
+    (Phase 4B track~$\alpha$-C): the universal kinetic constant
+    $\kappa = -1/16$ of Paper~7 has an exact algebraic relationship to
+    the Casimir trace $B$ at the selection cutoff $m=3$.
+  \item $F$ as the scalar Fock-degeneracy Dirichlet series at the
+    packing exponent (Phase 4F track~$\alpha$-J): with $g_n = n^2$ the
+    degeneracy of the $n$-th $S^3$ shell,
+    \begin{equation}\label{eq:F_dirichlet}
+      F \;=\; D_{n^2}(s)\Big|_{s = d_{\max}}
+        \;=\; \sum_{n\geq 1}\,\frac{n^2}{n^{s}}\Bigg|_{s=4}
+        \;=\; \zeta_R(2) \;=\; \frac{\pi^2}{6},
+    \end{equation}
+    where $d_{\max}=4$ is the maximum degree in Paper~0's packing
+    axioms.
+  \item $\Delta^{-1}$ as a single-level Dirac degeneracy on $S^3$
+    (Phase 4H track SM-D): with the Camporesi--Higuchi spectrum
+    $|\lambda_n|_{\text{Dirac}} = n + 3/2$ and degeneracy
+    $g_n^{\text{Dirac}} = 2(n+1)(n+2)$ on unit $S^3$,
+    \begin{equation}\label{eq:Delta_dirac}
+      \Delta^{-1} \;=\; g_3^{\text{Dirac}} \;=\; 2 \cdot 4 \cdot 5 \;=\; 40,
+    \end{equation}
+    with the Paper-2 cutoff value $n=3$ being the unique integer at
+    which this identity holds.
+  \item $\zeta(3)$ natively in the Dirac sector at $s = d_{\max}$
+    (Tier 1 track~D3, 2026): the Dirac analog of
+    Eq.~(\ref{eq:F_dirichlet}) evaluates to
+    \begin{equation}\label{eq:D_dirac_zeta3}
+      D_{g_n^{\text{Dirac}}}^{\text{Fock}}(4)
+      \;=\; \sum_{m\geq 1}\frac{2m(m+1)}{m^4}
+      \;=\; 2\,\zeta_R(2) + 2\,\zeta_R(3)
+      \;=\; \frac{\pi^2}{3} + 2\,\zeta_R(3),
+    \end{equation}
+    a closed form mixing $F$ with the Apéry constant $\zeta(3)$. We
+    return to this in \S\ref{sec:zeta3_aside}.
+\end{enumerate}
+
+The combined verdict of Phases 4B--4I is stated in the following
+summary.
+
+\begin{theorem}[Three homes, structural mystery]\label{thm:three_homes}
+The three ingredients of the combination rule $K = \pi(B + F - \Delta)$
+have the following canonical spectral homes on $S^3$:
+\begin{itemize}
+  \item[$(B)$] Finite truncated Casimir trace on the scalar
+    Laplace--Beltrami spectrum at the selection cutoff $m = 3$, with
+    degeneracy weight $(2l+1)\,l(l+1)$.
+  \item[$(F)$] Infinite Dirichlet series of the scalar Fock-shell
+    degeneracy at the packing exponent,
+    $F = \sum_{n} n^2 \cdot n^{-d_{\max}} = \zeta_R(2)$.
+  \item[$(\Delta)$] Reciprocal of the single-level Dirac degeneracy at
+    the selection cutoff, $\Delta^{-1} = g_3^{\text{Dirac}} = 40$.
+\end{itemize}
+These three objects live in two different spectral sectors of $S^3$ (the
+scalar and spinor Laplace--Beltrami sectors); they are three different
+object types (finite trace, infinite Dirichlet series, single-level
+degeneracy); and no spectral construction on $S^3$ simultaneously
+generates all three. The K combination rule is therefore a
+\emph{cross-sector sum} with three separate algebraic origins, and its
+validity to $8.8 \times 10^{-8}$ is a structural mystery in the sense
+that the sum $B + F - \Delta$ collapses to $\alpha^{-1}/\pi$ through no
+currently known common-generator mechanism.
+\end{theorem}
+
+Theorem~\ref{thm:three_homes} is a structural statement about how each
+ingredient arises, not a proof of Eq.~(\ref{eq:K}). The combination
+rule itself \emph{remains conjectural}. What the Phase 4B--4I program
+has achieved is to move the open question from ``how is each piece
+derived'' (answered by the four positive identifications above) to
+``why does the cross-sector sum close to $\alpha^{-1}/\pi$.''
+
+%----------------------------------------------------------------------
+\subsection{The three obstructions to unification}\label{sec:obstructions}
+%----------------------------------------------------------------------
+
+The Tier 1 Dirac-on-$S^3$ sprint of 2026 (tracks D1--D5) was the last of
+the nine mechanisms tested. Because the Dirac sector was the most
+structurally promising (it already contained $\Delta^{-1} = 40$ as a
+clean identity), a detailed record of why it also fails to lift $B$ and
+$F$ is worth inlining. The arguments are short and closed-form.
+
+\paragraph{Obstruction 1 (to lifting $B$).}
+The scalar Laplacian on $S^3$ has a zero mode at $(n=1, l=0)$ whose
+Casimir weight $l(l+1)$ vanishes. This gives the closed-form identity
+\begin{equation}\label{eq:Bclosed_repeat}
+  B(m) \;=\; \frac{m(m-1)(m+1)(m+2)(2m+1)}{20},
+\end{equation}
+with an explicit factor $(m-1)$ enforced by the zero mode. The Dirac
+operator on $S^3$ has no zero mode: $|\lambda_n| = n+3/2 \geq 3/2$, and
+the ground-level contribution $g_0^{\text{Weyl}}\cdot|\lambda_0|^k$ is
+strictly positive for every $k \geq 0$. Cumulative Dirac/Weyl traces
+therefore have closed forms
+\begin{equation}
+  \sum_{n=0}^{N} g_n^{\text{Dirac}}
+  \;=\; \frac{(N+1)(N+2)(2N+3)}{3},
+  \qquad
+  \sum_{n=0}^{N} g_n^{\text{Weyl}}
+  \;=\; \frac{(N+1)(N+2)(2N+3)}{6},
+\end{equation}
+neither of which carries the $(m-1)$ factor of $B(m)$. The cleanest
+single-point coincidence is at Paper~2's cutoff $m=3$:
+$|\lambda_{m-1}|\cdot g_{m-1}^{\text{Weyl}} = (7/2)\cdot 12 = 42 = B(3)$,
+which holds because $(m-1)(m+2) = 10$ at $m=3$ and at no other integer
+$m$.
+
+Paper 2's $B = 42$ therefore lives on the scalar Laplace--Beltrami
+sector of $S^3$ and does not lift to the Dirac spectrum as a universal
+identity. The single-point hit at $m=3$ is a consequence of the
+elementary identity $(m-1)(m+2) = 10$, not a spectral theorem.
+
+\paragraph{Obstruction 2 (to lifting $F$).}
+The Dirac-sector Dirichlet series at $s = d_{\max}=4$ has the closed
+form of Eq.~(\ref{eq:D_dirac_zeta3}), which mixes $F = \zeta_R(2)$
+additively with $\zeta_R(3)$. The mechanism is that the Dirac degeneracy
+factorizes as a mixture of two homogeneity classes,
+\begin{equation}
+  g_m^{\text{Dirac}} \;=\; 2\,m^2 \;+\; 2\,m,
+\end{equation}
+and at $s = 4$ the $m^2$ subchannel produces $2\zeta(2) = 2F$ (the
+scalar F content) while the $m$ subchannel produces $2\zeta(3)$ (a
+channel absent from the scalar degeneracy). By Apéry's theorem and
+standard zeta-independence results, $\zeta_R(2)$ and $\zeta_R(3)$ are
+$\mathbb{Q}$-linearly independent, so no rational combination of
+Dirac-sector Dirichlet series collapses to a rational multiple of $F$.
+The only way to isolate $F$ from the Dirac Dirichlet series is to
+subtract the $2\zeta(3)$ channel by hand, which is equivalent to
+projecting onto the $m^2$ sub-weight, i.e.\ returning to the scalar
+sector.
+
+An equivalent restatement in the Camporesi--Higuchi half-integer index:
+the Hurwitz-regularized Dirac spectral zeta at $s=4$ evaluates to
+\begin{equation}\label{eq:D_dirac_ch}
+  D_{\text{dirac}}^{\text{CH}}(4)
+  \;=\; \sum_{n\geq 0}\frac{2(n+1)(n+2)}{(n+3/2)^{4}}
+  \;=\; \pi^{2} - \frac{\pi^{4}}{12},
+\end{equation}
+an inseparable mixture of $\pi^{2}$ and $\pi^{4}$ with no rational
+multiple of $F$ extractable.
+
+Paper 2's $F = \pi^{2}/6$ therefore lives on the scalar Fock-degeneracy
+arithmetic at the packing exponent and does not lift to the Dirac
+Dirichlet series.
+
+\paragraph{Obstruction 3 (to unifying $\Delta$ with $B$ or $F$).}
+The Orduz $S^{1}$-equivariant decomposition of the Dirac spinor bundle
+over the Hopf fibration $S^{1} \to S^{3} \to S^{2}$ (2026, Tier 1 track
+D4) gives, at the Paper-2 cutoff $n_{\text{CH}} = 3$, a 40-dimensional
+spin-Dirac level with a clean charge-parity factorization
+\begin{equation}\label{eq:Delta_hopf}
+  \Delta^{-1} \;=\; g_{3}^{\text{Dirac}} \;=\; 40
+  \;=\; \underbrace{4 \cdot 5}_{\text{half-integer charges}}
+      + \underbrace{5 \cdot 4}_{\text{integer charges}}
+  \;=\; \underbrace{20}_{(+)\,\text{chirality}}
+      + \underbrace{20}_{(-)\,\text{chirality}}.
+\end{equation}
+This is structurally cleaner than Paper~2's scalar factorization
+$\Delta^{-1} = |\lambda_{3}|\cdot N(2) = 8 \cdot 5$: the Dirac
+decomposition is a single polynomial $g_{n}^{\text{Dirac}} = 2(n+1)(n+2)$
+at a single level, whereas the scalar factorization is a product of two
+distinct cumulative objects. However, the Dirac refinement does not
+produce $B$ or $F$, and the scalar ``8'' in Paper~2's factorization is
+an eigenvalue of $-\Delta_{\text{LB}}$, not a Dirac/spinor quantity.
+The two factorizations of 40 are structurally distinct and
+noncombinable.
+
+Together, obstructions 1--3 close the Dirac-on-$S^{3}$ avenue for
+unifying the three ingredients of $K$. All supporting computations are
+exact sympy symbolic identities; no floating-point evaluation enters
+the arguments above. Sources:
+\texttt{geovac/dirac\_s3.py},
+\texttt{debug/dirac\_d2\_memo.md},
+\texttt{debug/dirac\_d3\_memo.md},
+\texttt{debug/dirac\_d4\_memo.md},
+\texttt{docs/dirac\_s3\_verdict.md}.
+
+%----------------------------------------------------------------------
+\subsection{Connection to the framework's rigidity theorems}\label{sec:rigidity_connection}
+%----------------------------------------------------------------------
+
+Theorem~\ref{thm:three_homes} is consistent with, and sharpens, three
+established results elsewhere in the GeoVac framework:
+
+\begin{itemize}
+  \item \textbf{Paper~7 (S$^{3}$ scalar proof chain):} the 18 symbolic
+    proofs of Paper~7 validate the scalar Laplace--Beltrami on $S^{3}$
+    as the geometric home of the Coulomb spectrum. $B$ and $F$ both
+    live on this sector, reinforcing that Paper~7's $S^{3}$ machinery
+    is the ingredient-generating geometry for two of the three pieces
+    of $K$.
+  \item \textbf{Paper~23 (Fock projection rigidity theorem):} the $S^{3}$
+    conformal projection is unique to the $-Z/r$ potential because only
+    $-Z/r$ produces an $l$-independent spectrum within each $n$-shell.
+    Paper~23 deferred the Dirac-sector analog as an explicit open
+    problem (Explorer Gap \#1, Tier 1 scoping). Theorem~\ref{thm:three_homes}
+    is \emph{compatible} with that rigidity theorem but independent of
+    it: $\Delta$ lives on the spinor spectrum as a single-level
+    degeneracy, not as a manifestation of a Dirac Fock projection.
+    A Dirac analog of the Fock rigidity theorem remains open and is
+    deferred to Tier 2 or beyond.
+  \item \textbf{Paper~24 (HO rigidity theorem):} the Bargmann--Segal
+    lattice is bit-exactly $\pi$-free in rational arithmetic, and
+    Paper~24 \S V identifies the Coulomb/HO asymmetry as ``calibration
+    $\pi$ is structurally Coulomb-specific.'' The Dirac-on-$S^{3}$
+    spectrum of Camporesi--Higuchi is \emph{also} bit-exactly $\pi$-free
+    in rational arithmetic (Tier 1 D1 module, 51/51 symbolic tests),
+    and the $\pi$ content in Eqs.~(\ref{eq:D_dirac_zeta3})
+    and~(\ref{eq:D_dirac_ch}) enters only through the infinite-sum
+    analysis, not through the spectrum itself. The Dirac sector on
+    $S^{3}$ is therefore a \emph{structural twin} of the
+    Bargmann--Segal HO lattice in its rational-arithmetic certification,
+    and the Paper~2 $\pi$ content in $K = \pi(B + F - \Delta)$ is the
+    Coulomb-specific calibration of Paper~24's taxonomy.
+\end{itemize}
+
+%----------------------------------------------------------------------
+\subsection{An aside: $\zeta(3)$ in the Dirac sector}\label{sec:zeta3_aside}
+%----------------------------------------------------------------------
+
+Eq.~(\ref{eq:D_dirac_zeta3}) is the first appearance of the Apéry
+constant $\zeta_R(3)$ as a structural object in the GeoVac framework.
+It is produced natively by the weight-$m$ subchannel of the Dirac
+degeneracy $g_{m}^{\text{Dirac}} = 2m(m+1)$ at the Paper-0 packing
+exponent $d_{\max} = 4$.
+
+We emphasize that $\zeta(3)$ is \emph{not} part of the $K$ combination
+rule. It is a \emph{byproduct} of the Dirac sector — a transcendental
+that appears when one asks ``what is the Dirac analog of $F$?'' and
+receives the answer ``$F$ plus $\zeta(3)$, inseparably.''
+
+Structurally, $\zeta(3)$ has the following features within the
+framework:
+
+\begin{itemize}
+  \item It is transcendental of unknown arithmetic type (Apéry 1978
+    proved irrationality; algebraic independence from $\pi$ is open).
+  \item It is not reachable from any scalar Laplace--Beltrami spectral
+    construction on odd-dimensional spheres, as established in Phase~4E
+    track~$\alpha$-I: round-sphere spectral invariants produce
+    integer powers of $\pi$ in volumes, pure rationals in Seeley--DeWitt
+    coefficients and heat-kernel expansions, and $\zeta_{R}(\text{odd})
+    + \log 2$ in spectral determinants, but $\pi^{2}$ and $\zeta(3)$
+    never appear \emph{additively alongside a rational}.
+  \item It appears for the first time in the framework in
+    Eq.~(\ref{eq:D_dirac_zeta3}) as the weight-$m$ subchannel of a
+    first-order spectral operator at the packing exponent.
+\end{itemize}
+
+This suggests — and we flag for future work — that the Paper~18
+exchange-constant taxonomy (intrinsic / calibration / embedding / flow)
+may benefit from a distinction between \emph{even-zeta content} (arising
+from second-order Laplace--Beltrami operators through Jacobi-$\theta$
+inversion, which systematically lowers the power of $\pi$ by $1/2$ at
+each asymptotic order) and \emph{odd-zeta content} (arising from
+first-order spectral operators through half-integer Hurwitz
+identities). We do not add a tier to Paper~18 here; we simply record
+the phenomenology.
+
+$\zeta(3)$ has no role in reproducing $\alpha^{-1}$. Its inclusion in
+the present section is for completeness: the Dirac-on-$S^{3}$ sector
+carries new content beyond what $K$ uses, and that content is worth
+naming.
+
+%----------------------------------------------------------------------
+\subsection{Closure of the structural decomposition program}\label{sec:closure}
+%----------------------------------------------------------------------
+
+With Theorem~\ref{thm:three_homes} and the three obstructions of
+\S\ref{sec:obstructions}, the structural-decomposition program for
+$\alpha$ that began in 2025 and ran through Phases 4B--4I reaches its
+natural stopping point. The program has achieved:
+
+\begin{enumerate}
+  \item A canonical spectral home for each of $B$, $F$, $\Delta$,
+    established in closed form.
+  \item A complete enumeration of the mechanisms by which these three
+    ingredients might share a common spectral generator, with nine
+    mechanisms eliminated and no surviving candidate.
+  \item Identification of $\zeta(3)$ as a new framework transcendental
+    in the Dirac sector, distinct from the Riemann-zeta-at-even-integer
+    content of the scalar sector.
+\end{enumerate}
+
+The program has \emph{not} achieved a derivation of Eq.~(\ref{eq:K})
+from first principles. The agreement of
+\begin{equation}
+  \pi\!\left(42 + \frac{\pi^{2}}{6} - \frac{1}{40}\right)
+\end{equation}
+with $\alpha^{-1}$ to $8.8 \times 10^{-8}$ — that is, 7 decimal digits,
+which cannot be reproduced in the extensive combinatorial search of
+\S\ref{sec:statistical} — remains a structural coincidence of unknown
+origin. We have made the mystery sharper (three spectral homes across
+two sectors of $S^{3}$), but we have not resolved it.
+
+Accordingly, the result of this paper retains its \emph{conjectural}
+status. Future work on the structural origin of $\alpha$ within the
+geometric-vacuum framework is, at the time of this writing, on hold.
+The next research direction in the project is the spin-full
+generalization of the composed qubit encoding (Paper~14), which builds
+on the Dirac-on-$S^{3}$ infrastructure developed in the Tier 1 sprint
+but is independent of the $\alpha$ program. That direction has a clean
+engineering motivation (heavy-element relativistic chemistry) and does
+not require the $\alpha$ conjecture to be resolved.
+
+%======================================================================
+% End of proposed Paper 2 §IV rewrite
+%======================================================================

@@ -89,3 +89,45 @@ Last updated: 2026-03-28
 - **Public benchmarking:** Create a standalone reproduction script that an outsider can run to verify Paper 14's Pauli scaling claims against Gaussian baselines. High priority for credibility.
 - **Level 2 spectral radial solver:** Ready for implementation (Track C audit complete). High priority — unblocks Level 4 improvements.
 - **Level 3 n_channels convergence:** Test whether increasing n_channels from 3 to 5-10 with exact Q pushes He accuracy below 0.1%.
+
+---
+
+## Session Summary 2026-04-15 — Dirac-on-S³ Tier 1 Sprint
+
+### Tracks
+- D1: completed — dirac_s3.py module, 51/51 tests, π-free both sectors
+- D2: completed — B does not lift; spectral gap obstruction
+- D3: completed — F does not lift; Apéry Q-linear independence; ζ(3) new transcendental
+- D4: completed — Hopf decomposition clean, no K-unification
+- D5: completed — Paper 2 §IV rewrite, CLAUDE.md edits, Paper 18 ζ(3) entry (all applied)
+
+### Results
+Three-tier coincidence formally documented:
+- B = 42 home = scalar Laplace-Beltrami (finite Casimir truncation with zero-mode factor (m-1))
+- F = π²/6 home = scalar Fock-degeneracy Dirichlet series D_{n²}(d_max)
+- Δ = 1/40 home = Dirac spectrum single-level g_3^Dirac(S³)
+New transcendental: ζ(3) enters via Dirac Dirichlet series at s=4.
+Hopf decomposition of Δ = 20+20 chirality split, alternating {4,5,4,5,4,5,4,5,4} over q ∈ {-2..+2}.
+
+### Files Modified
+- `papers/conjectures/paper_2_alpha.tex` — §IV rewrite applied
+- `papers/core/paper_18_exchange_constants.tex` — new ζ(3) taxonomy entry
+- `CLAUDE.md` — 5 mechanical edits (version bump, Phase 4I summary, §3 row, §10 benchmarks, §11 mappings)
+
+### Files Created
+- `geovac/dirac_s3.py`
+- `tests/test_dirac_s3.py`
+- `docs/dirac_s3_design_memo.md`
+- `docs/dirac_s3_tier1_sprint_plan.md`
+- `docs/dirac_s3_leader_prompt.md`
+- `docs/dirac_s3_explorer_prompt.md`
+- `docs/dirac_s3_verdict.md`
+- `docs/paper2_section4_rewrite.tex` (proposal archive)
+- `docs/claude_md_proposed_updates.md` (proposal archive)
+- `debug/dirac_d{2,3,4}_*.py`, `debug/data/dirac_d{2,3,4}_*.json`, `debug/dirac_d{2,3,4}_memo.md`
+
+### Decisions
+- Common-generator theorem for α: dead — B, F, Δ have three categorically different spectral homes with proven non-unification obstructions.
+- Tier 1b proof sprint: not opened — per sprint plan's "all negative" decision branch.
+- Tier 2 (spin-ful composed qubit encoding): confirmed as next research phase.
+- ζ(3) added to Paper 18 taxonomy as a new tier (odd-zeta, first-order operator origin).
