@@ -1,0 +1,83 @@
+{
+  "geovac": {
+    "LiH": {
+      "name": "LiH",
+      "Q": 30,
+      "N_pauli_rel": 805,
+      "N_pauli_rel_total": 806,
+      "lambda_total_rel": 46.95752334999791,
+      "lambda_ni_rel": 35.89509038382916,
+      "qwc_rel": 55,
+      "N_pauli_scalar": 333,
+      "lambda_ni_scalar": 37.22696679639545,
+      "qwc_scalar": 21,
+      "wall_rel_s": 0.34360718727111816,
+      "wall_scalar_s": 0.10458874702453613
+    },
+    "BeH": {
+      "name": "BeH",
+      "Q": 30,
+      "N_pauli_rel": 805,
+      "N_pauli_rel_total": 806,
+      "lambda_total_rel": 171.8072359394949,
+      "lambda_ni_rel": 141.32478360003333,
+      "qwc_rel": 52,
+      "N_pauli_scalar": 333,
+      "lambda_ni_scalar": 139.11824008892262,
+      "qwc_scalar": 21,
+      "wall_rel_s": 0.20524001121520996,
+      "wall_scalar_s": 0.10360932350158691
+    },
+    "CaH": {
+      "name": "CaH",
+      "Q": 20,
+      "N_pauli_rel": 534,
+      "N_pauli_rel_total": 535,
+      "lambda_total_rel": 694.5816707807635,
+      "lambda_ni_rel": 13.866405671789515,
+      "qwc_rel": 52,
+      "N_pauli_scalar": 222,
+      "lambda_ni_scalar": 16.597493301070987,
+      "qwc_scalar": 21,
+      "wall_rel_s": 0.14460277557373047,
+      "wall_scalar_s": 0.050618648529052734
+    }
+  },
+  "sunaga_2025": {
+    "citation": "Sunaga et al., PRA 111, 022817 (2025); arXiv:2406.04992",
+    "basis": "cv2z Dyall, DC Hamiltonian -> JW",
+    "active_space_18q": "3 occ + 15 unocc spinorbitals",
+    "RaH_18q": {
+      "Q": 18,
+      "pauli_rel": 47099,
+      "pauli_nonrel": 12556,
+      "pdm_integrals_rel": 107,
+      "pdm_integrals_nonrel": 67,
+      "method": "VQE-UCCSD"
+    },
+    "SrH_12q": {
+      "Q": 12,
+      "two_qubit_gates_UCCSD_initial": 9148,
+      "two_qubit_gates_ES_VQE": 2960,
+      "two_qubit_gates_PyZX": 144,
+      "two_qubit_gates_Qiskit_L3": 26,
+      "two_qubit_gates_RLZX_Cflow": 13,
+      "parameters_UCCSD": 104,
+      "parameters_ES_VQE": 32
+    },
+    "SrH_6q": {
+      "Q": 6,
+      "two_qubit_gates_UCCSD_initial": 280,
+      "two_qubit_gates_ES_VQE": 148,
+      "two_qubit_gates_Qiskit_L3": 60,
+      "two_qubit_gates_RLZX_Cflow": 28,
+      "pdm_pauli_terms": 19,
+      "qwc_cliques_dominant": 1
+    },
+    "deferred": [
+      "Per-molecule Pauli counts for BeH/MgH/CaH/SrH/BaH at 18q",
+      "Per-molecule 1-norms (lambda) at 18q or 12q",
+      "Per-molecule QWC group counts"
+    ]
+  }
+}

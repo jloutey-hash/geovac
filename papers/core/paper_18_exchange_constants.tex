@@ -739,6 +739,170 @@ record. The taxonomic placement of $\zeta_R(3)$ as a distinct tier is
 recorded here for use in future applications that may require
 relativistic or spin-dependent spectral quantities.
 
+\paragraph{Spinor-intrinsic content from first-order operators on a
+spinor bundle (new subtier).}
+The Dirac-on-$S^3$ Tier 2 sprint (2026, Track T5) identified a second
+piece of structurally new transcendental content in the GeoVac
+framework: the fine-structure constant squared~$\alpha^2$ and the
+relativistic radial coefficient $\gamma := \sqrt{1 - (Z\alpha)^2}$,
+arising jointly from first-order spectral operators acting on curved-space
+\emph{spinor bundles}. The mechanism is the Breit--Pauli reduction of
+the Dirac equation: the leading-order spin-orbit coupling
+\begin{equation}\label{eq:bp_so}
+  H_{\mathrm{SO}}
+  \;=\; \tfrac{1}{2 m^2 c^2}\,\tfrac{1}{r}\,\tfrac{dV}{dr}\,\mathbf{L}\cdot\mathbf{S}
+  \;=\; \tfrac{Z\alpha^2}{2}\,\tfrac{1}{r^3}\,\mathbf{L}\cdot\mathbf{S}
+  \quad\text{(Coulomb),}
+\end{equation}
+when evaluated in the $(\kappa, m_j)$ basis using Szmytkowski's
+reduction $\langle \mathbf{L}\cdot\mathbf{S}\rangle = -(\kappa+1)/2$ and
+the closed-form hydrogenic $\langle 1/r^3\rangle_{n,l}
+= Z^3/[n^3\, l(l+\tfrac{1}{2})(l+1)]$, produces matrix elements
+\begin{equation}\label{eq:bp_so_matrix}
+  \langle n,\kappa,m_j|\,H_{\mathrm{SO}}\,|n,\kappa,m_j\rangle
+  \;=\; -\,\frac{Z^4\,\alpha^2\,(\kappa+1)}{4\,n^3\, l(l+\tfrac{1}{2})(l+1)},
+\end{equation}
+with $l = |\kappa + \tfrac{1}{2}| - \tfrac{1}{2}$ and the Kramers
+cancellation $H_{\mathrm{SO}} = 0$ at $l=0$ (where $\kappa = -1$ forces
+the numerator to zero before the formally divergent $\langle 1/r^3\rangle$
+is evaluated). Symbolically, Eq.~(\ref{eq:bp_so_matrix}) is a sympy-exact
+rational in $(Z, n, l)$ times $\alpha^2$, with zero $\pi$, zero $\zeta$,
+and zero transcendentals beyond~$\alpha$ itself.
+
+The full-Dirac radial corrections enter through
+$\gamma := \sqrt{1 - (Z\alpha)^2}$, which appears in the Martínez-y-Romero
+recursions for relativistic $\langle r^k\rangle_{\text{Dirac}}$ but is not
+required at the Breit--Pauli leading order (Track T1 reserved $\gamma$
+symbolically; Track T2 does not bind it). Algebraically, $\gamma$
+satisfies the polynomial relation
+\begin{equation}\label{eq:gamma_def}
+  \gamma^2 + (Z\alpha)^2 \;=\; 1,
+\end{equation}
+so $\gamma \in \mathbb{Q}(\alpha^2)[\sqrt{\cdot}]$, i.e.\ it is
+algebraic of degree~2 over $\mathbb{Q}(\alpha^2)$. This is the
+relativistic analog of the non-relativistic radial matrix elements
+already registered as algebraic in Sec.~\ref{sec:algebraic_registry}.
+
+This spinor-intrinsic content is categorically different from the
+four existing tiers (intrinsic, calibration, embedding, flow/composition)
+and from the newly added odd-zeta tier. The distinctions:
+
+\begin{itemize}
+  \item \textbf{Source:} a first-order spectral operator (the Dirac
+    operator or the Breit--Pauli reduction of it) acting on a
+    \emph{spinor bundle} over curved space. Calibration constants and
+    the odd-zeta tier both arise on scalar fields; the spinor-intrinsic
+    content requires the bundle to carry spin.
+
+  \item \textbf{Mechanism:} the $\alpha^2$ prefactor is not a basis
+    regularization (as $\kappa$ is) and not a spectral sum (as
+    $\zeta_R(2)$ and $\zeta_R(3)$ are); it is the coupling strength that
+    multiplies the spin-orbit operator, arising from the Foldy--Wouthuysen /
+    Breit--Pauli expansion of the relativistic kinetic energy. It is
+    present in the Hamiltonian \emph{coefficients}, not in the basis or
+    spectrum.
+
+  \item \textbf{Dependency:} depends only on the existence of spin
+    coupling in the operator. Independent of discretization, basis
+    choice, and factorization topology. Any first-order operator that
+    couples $\mathbf{L}$ and $\mathbf{S}$ will introduce $\alpha^2$;
+    any full-Dirac radial recursion will introduce~$\gamma$.
+
+  \item \textbf{Algebraic status:} $\alpha$ is transcendental (a
+    dimensionless physical constant whose value must be supplied
+    empirically), but $\alpha^2$ appears polynomially in every
+    spinor-intrinsic coefficient to the order at which the Breit--Pauli
+    expansion is truncated ($\alpha^2$ at leading order, $\alpha^4$ with
+    Darwin + mass-velocity, etc.). $\gamma$ is algebraic of degree~2
+    over $\mathbb{Q}(\alpha^2)$ via Eq.~(\ref{eq:gamma_def}). Together
+    they generate the ring
+    \[
+      R_{\mathrm{sp}} \;:=\; \mathbb{Q}\bigl(\alpha^2\bigr)
+        \bigl[\gamma\bigr]/\bigl(\gamma^2 + (Z\alpha)^2 - 1\bigr),
+    \]
+    in which every Tier-2 coefficient lies. A sympy-based certifier
+    (``\texttt{geovac/spinor\_certificate.py}::verify\_spinor\_pi\_free})''
+    mechanically checks that this ring is clean: no $\pi$, no $\zeta$,
+    no $E_1$, no unregistered transcendental.
+\end{itemize}
+
+\paragraph{Updated structural partition.}
+With the Tier 2 addition, the full Paper 18 partition of transcendental
+content across bundle and operator-order now reads:
+
+\begin{table}[h]
+\caption{Operator-order $\times$ bundle classification of transcendental
+  content in the GeoVac framework, after the Tier 1 and Tier 2
+  Dirac-on-$S^3$ sprints.}
+\label{tab:bundle_operator_tiers}
+\begin{ruledtabular}
+\begin{tabular}{llll}
+  Tier & Example transcendentals & Operator order & Bundle \\
+  \hline
+  Intrinsic         & $\pi^{d/2}$ Weyl prefactors & --- & scalar \\
+  Calibration       & $\kappa = -1/16$, $F = \pi^2/6$ (even $\zeta$)
+                    & 2nd (Laplace--Beltrami)
+                    & scalar on curved space \\
+  Embedding         & $e^a E_1(a)$,  $1/r_{12}$
+                    & ---
+                    & projection from graph to $\mathbb{R}^3$ \\
+  Flow / composition & piecewise $\mu(\rho,R)$, PK pseudopot.
+                    & ---
+                    & multi-geometry factorization \\
+  Odd-zeta (Tier 1 new) & $\zeta_R(3), \zeta_R(5), \dots$
+                    & 1st (Dirac)
+                    & Dirac spectrum on curved space \\
+  Spinor-intrinsic (Tier 2 new)
+                    & $\alpha^2$, $\gamma = \sqrt{1-(Z\alpha)^2}$
+                    & 1st (Dirac / Breit--Pauli)
+                    & spinor bundle over curved space \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The two Tier-1/Tier-2 additions are parallel but distinct: Tier 1
+($\zeta$) enters through the \emph{spectrum} of the curved-space Dirac
+operator (Camporesi--Higuchi eigenvalues $n+3/2$ and degeneracies
+$2(n+1)(n+2)$ produce the Dirichlet-series identity
+Eq.~(\ref{eq:dirac_dirichlet_zeta3})); Tier 2 ($\alpha^2$, $\gamma$)
+enters through the \emph{coupling} of spin to orbital angular momentum
+in the Hamiltonian, not through the basis or spectrum. Neither
+introduces $\pi$ beyond what is already present in the calibration
+tier; both are orthogonal to the embedding and flow tiers.
+
+\paragraph{Why ``spinor-intrinsic'', not ``calibration''.}
+Calibration constants live in the \emph{scalar} spectrum on curved
+space (Paper~24 HO rigidity: the Bargmann--Segal edge weights are
+$\pi$-free rationals; the calibration $\pi^2/6$ enters only through an
+infinite-sum analysis of the scalar Fock Dirichlet series at $s = 4$).
+Spinor-intrinsic $\alpha^2$ is a \emph{coupling} content --- it does
+not appear in the basis construction or in the spectrum of the
+operator; it appears in the Hamiltonian coefficients once spin is
+coupled to orbital angular momentum. This distinction is taxonomic, not
+cosmetic: it predicts that any future tier of the framework introducing
+relativistic or QED corrections (e.g., $\alpha^4$ Darwin and
+mass-velocity, $\alpha^3$ Lamb shift, Breit interaction
+corrections $\alpha^2$ in $V_{ee}$) will populate this same subtier,
+adding powers of $\alpha$ and algebraic combinations of $\gamma$, but
+will \emph{not} create new subtiers and will \emph{not} bleed into
+calibration or embedding content.
+
+\paragraph{Certification and taxonomy wiring.}
+The spinor-intrinsic ring $R_{\mathrm{sp}}$ is certified mechanically by
+\texttt{verify\_spinor\_pi\_free} in
+\texttt{geovac/spinor\_certificate.py}
+(Track~T5, v2.11.0). The certifier walks the sympy expression tree of a
+coefficient and rejects any appearance of $\pi$, $\zeta$, $\log$, $E_1$,
+or any Symbol outside the registered set $\{Z, \alpha, \gamma\}$
+(user-extensible for downstream indices). T3's symbolic spin-orbit block
+\texttt{build\_so\_hamiltonian\_block(n\_max, Z\_sym, alpha\_sym)} passes the
+certifier cleanly for all tested $n_{\max}$ up to~4; manual contamination
+by $\pi \cdot \alpha^2 / 96$ is rejected with a clear diagnostic. See
+the design memos \texttt{spin\_orbit\_design\_memo.md} §``Paper 18
+classification'' and \texttt{spin\_ful\_composed\_design\_memo.md} §8 for
+the per-block audit, and the sprint plan
+\texttt{docs/dirac\_s3\_tier2\_sprint\_plan.md} Track~T5 for scope.
+
 \paragraph{Parallel to Paper 24.}
 Paper~24 established that the Bargmann--Segal lattice is bit-exactly
 $\pi$-free in rational arithmetic and that calibration $\pi$ is

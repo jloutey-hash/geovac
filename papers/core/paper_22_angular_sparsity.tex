@@ -565,6 +565,165 @@ to the geometry of angular momentum, not to any particular physical
 potential.
 
 %=================================================================
+%% Spinor-block angular sparsity — Dirac-on-S^3 Tier 2 drop-in (T6).
+%=================================================================
+
+\section{Spinor-block angular sparsity}
+\label{sec:paper22_spinor}
+
+The potential-independence theorem of \S\ref{sec:theorem} stated that
+the ERI density $d(l_{\max})$ of the scalar Coulomb Hamiltonian on
+$S^3$ depends only on $l_{\max}$ --- not on the potential $V(r)$ ---
+because the zero/nonzero structure of the ERI tensor is fixed by the
+Gaunt 3j triangle rules. This section extends the theorem to the
+$jj$-coupled spinor (Dirac) basis used in the Dirac-on-$S^3$ Tier 2
+sprint, where one-body orbitals are labeled by $(n, \kappa, m_j)$ with
+$\kappa = -(l+1)$ for $j = l + 1/2$ and $\kappa = +l$ for $j = l - 1/2$.
+
+\subsection{Restatement in the spinor basis}
+
+The claim is that the spinor ERI density
+$d_{\mathrm{spinor}}(l_{\max})$, defined as the fraction of nonzero
+entries in the 4-index Coulomb tensor over the $jj$-coupled
+one-body basis $\{|n, \kappa, m_j\rangle : l(\kappa) \leq l_{\max}\}$,
+depends only on $l_{\max}$ and is independent of $V(r)$.
+The proof is structurally identical to the scalar case: the full-Gaunt
+$jj$-coupled Coulomb reduction
+(Dyall \S 9.3~\cite{Dyall}, Grant \S 7.5~\cite{Grant}),
+\[
+  \langle a b \,|\, V \,|\, c d \rangle \neq 0
+  \iff \exists k \geq 0 \text{ satisfying}
+\]
+\begin{enumerate}
+  \item parity: $(l_a + l_c + k)$ and $(l_b + l_d + k)$ both even,
+  \item $j$-triangles: $|j_a - j_c| \leq k \leq j_a + j_c$ and analogous for $(b, d)$,
+  \item reduced 3j: $\left(\begin{smallmatrix} j_a & k & j_c \\ 1/2 & 0 & -1/2\end{smallmatrix}\right) \neq 0$ and analogous for $(b, d)$,
+  \item bottom-row 3j: $\left(\begin{smallmatrix} j_a & k & j_c \\ -m_{j,a} & m_{j,a} - m_{j,c} & m_{j,c}\end{smallmatrix}\right) \neq 0$ and analogous for $(b, d)$,
+  \item $m$-conservation: $m_{j,a} + m_{j,b} = m_{j,c} + m_{j,d}$,
+\end{enumerate}
+gives a selection rule whose triangle and parity conditions depend
+only on $(l_a, l_b, l_c, l_d, j_a, j_b, j_c, j_d, m_{j,a}, m_{j,b}, m_{j,c}, m_{j,d}, k)$
+--- not on any radial matrix element $R^k$ or any property of $V(r)$.
+Replacing Gaunt 3j by the pair of $jj$-coupled reduced 3j symbols
+(one per pair) preserves the $V$-independence; the radial factor
+$R^k(n_a l_a, n_b l_b, n_c l_c, n_d l_d)$ appears as a
+multiplicative weight on each nonzero entry but does not change the
+zero/nonzero pattern.
+
+\subsection{Numerical values of $d_{\mathrm{spinor}}(l_{\max})$}
+
+Table~\ref{tab:d_spinor} reports $d_{\mathrm{spinor}}(l_{\max})$ for
+$l_{\max} = 0, \dots, 5$, in both the \emph{pair-diagonal-$m$}
+convention that Paper~22's existing scalar table uses (stricter rule:
+$m_a = m_c$ and $m_b = m_d$ per pair), and the \emph{full-Gaunt}
+convention (physically correct Coulomb selection rule:
+$m_{j,a} + m_{j,b} = m_{j,c} + m_{j,d}$ global). The two conventions
+give quantitatively similar ratios; the scalar column of the
+pair-diagonal-$m$ table reproduces Paper~22 \S\ref{sec:theorem}'s
+published numbers bit-exactly. All densities are exact rationals
+from \texttt{sympy.Fraction}; percentages are their 4-decimal
+renderings.
+
+\begin{table}[h]
+\caption{Spinor-block angular sparsity density $d_{\mathrm{spinor}}(l_{\max})$
+in the $jj$-coupled basis, compared to the scalar density
+$d_{\mathrm{scalar}}(l_{\max})$ of
+\S\ref{sec:theorem}. $Q_{\mathrm{scalar}} = (l_{\max}+1)^2$,
+$Q_{\mathrm{spinor}} = 2(l_{\max}+1)^2$. The pair-diagonal-$m$
+convention is the one published in Paper~22 \S\ref{sec:theorem}; the
+full-Gaunt convention is the physically correct Coulomb selection rule.}
+\label{tab:d_spinor}
+\begin{ruledtabular}
+\begin{tabular}{c|cccccc|cccc}
+ & \multicolumn{6}{c|}{pair-diagonal-$m$ convention} & \multicolumn{4}{c}{full-Gaunt convention} \\
+$l_{\max}$ & $Q_{\mathrm{sc}}$ & $Q_{\mathrm{sp}}$ & $d_{\mathrm{sc}}$ & $d_{\mathrm{sp}}$ & ratio (exact) & ratio & $d_{\mathrm{sc}}^{\mathrm{FG}}$ & $d_{\mathrm{sp}}^{\mathrm{FG}}$ & ratio \\
+\hline
+0 & 1  & 2  & 100.0000\% & 25.0000\% & $1/4$        & 0.2500 & 100.0000\% & 25.0000\% & 0.2500 \\
+1 & 4  & 8  & 7.8125\%   & 4.2969\%  & $11/20$      & 0.5500 & 14.8438\%  & 8.5938\%  & 0.5789 \\
+2 & 9  & 18 & 2.7587\%   & 2.1071\%  & $553/724$    & 0.7638 & 8.5200\%   & 6.4586\%  & 0.7581 \\
+3 & 16 & 32 & 1.4404\%   & 1.2329\%  & $101/118$    & 0.8559 & 6.0608\%   & 5.1674\%  & 0.8526 \\
+4 & 25 & 50 & 0.9024\%   & 0.8106\%  & $2533/2820$  & 0.8982 & 4.8274\%   & 4.3034\%  & 0.8915 \\
+5 & 36 & 72 & 0.6190\%   & 0.5722\%  & $9611/10396$ & 0.9245 & 3.9863\%   & 3.6794\%  & 0.9230 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsection{Structural interpretation}
+
+Three observations on Table~\ref{tab:d_spinor}.
+
+\textbf{(i) $d_{\mathrm{spinor}} \leq d_{\mathrm{scalar}}$ at every $l_{\max}$, monotonically.}
+The $j$-triangle rules can only add zeros on top of the $l$-triangle
+and parity rules; they never remove a forbidden transition. The
+spinor density is therefore bounded above by the scalar density in
+both conventions.
+
+\textbf{(ii) The ratio $d_{\mathrm{spinor}}/d_{\mathrm{scalar}}$ saturates to 1 as $l_{\max}$ grows.}
+From $0.25$ at $l_{\max}=0$ (pure spin-dilution floor, single
+$s_{1/2}$ orbital with two $m_j$ branches) to $0.92$ at $l_{\max}=5$.
+The structural reason: the $j$-triangle
+$|j_a - j_c| \leq k \leq j_a + j_c$ differs from the $l$-triangle
+$|l_a - l_c| \leq k \leq l_a + l_c$ by at most $1$ (recall
+$j = l \pm 1/2$). The extra zeros are boundary corrections to the
+triangle set, and their relative size shrinks as $O(1/l_{\max})$ as
+$l_{\max}$ grows.
+
+\textbf{(iii) Prefactor inflation at matched $l_{\max}$.}
+Absolute Pauli count in the spinor basis is inflated by
+$(2Q_{\mathrm{scalar}}/Q_{\mathrm{scalar}})^4 = 16\times$ from the
+quadrupling of index ranges; times the density ratio
+$d_{\mathrm{spinor}}/d_{\mathrm{scalar}} \approx 0.86$ at $l_{\max}=3$,
+the absolute nonzero count is $\sim 14\times$ larger. At matched
+\emph{qubit count} $Q$ --- the regime relevant to
+Paper~14~\S\ref{sec:spinor_composed}'s
+Table~\ref{tab:spinor_resource} --- the multiplier is milder:
+$\sim 2.4\times$ at $n_{\max}=2$, $\sim 5.9\times$ at $n_{\max}=3$.
+The distinction between matched-$l_{\max}$ and matched-$Q$
+multipliers is structurally important and should be stated
+alongside any sparsity-exponent comparison.
+
+\subsection{Sharpened universal/Coulomb-specific partition}
+
+Paper~22 \S\ref{sec:universal_partition} identified angular sparsity
+as a \emph{universal} property of the $S^3$ angular basis, in contrast
+to the $S^3$ Fock projection and the Hopf bundle which are
+\emph{Coulomb-specific} structures. Tier 2's verification tightens
+this statement:
+
+\begin{quote}
+Angular sparsity is universal across scalar Schr\"odinger \emph{and}
+spinor Dirac systems. The sparsity density depends only on the
+multiplet structure of the angular basis (Gaunt 3j for scalars,
+$jj$-coupled reduced 3j for spinors), not on the radial Hamiltonian
+or its spectrum. The $S^3$ Fock projection and the BJL algebra that
+would otherwise lift it to the Dirac sector remain scalar-Schr\"odinger-
+specific structures --- the spinor basis can be built on the same
+$S^3$ graph, but the exact mapping of hydrogenic shells to graph
+nodes is a scalar phenomenon (Tier 1 Explorer Finding 2.1).
+\end{quote}
+
+The Tier 2 extension therefore \emph{strengthens} Paper~22's universal
+result --- the same potential-independence theorem now applies to
+scalar and spinor Hamiltonians on the same $S^3$ basis --- while
+preserving the Tier-1 finding that the Fock map itself does not lift.
+
+\subsection{Implementation and verification}
+
+The exact-rational sympy computation of $d_{\mathrm{spinor}}(l_{\max})$
+lives in \texttt{debug/tier2\_t0\_spinor\_density.py} (Dirac-on-$S^3$
+Tier 2 Track T0) and runs all six $l_{\max}$ values in under 10
+seconds on a laptop. All selection-rule decisions are sympy symbolic
+(\texttt{wigner\_3j(...) == 0} is a symbolic boolean); no floating
+point enters the zero/nonzero decision. The data dump including
+integer numerators and denominators for every density is available
+in \texttt{debug/data/tier2\_t0\_spinor\_density.json}.
+
+The scalar column of Table~\ref{tab:d_spinor} reproduces Paper~22
+\S\ref{sec:theorem}'s published scalar values bit-exactly, which
+validates the selection-rule implementation against the existing
+reference.
+
+%=================================================================
 \begin{thebibliography}{20}
 
 \bibitem{Peruzzo2014}

@@ -13,7 +13,7 @@ Date: April 2026
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
@@ -62,6 +62,12 @@ class OrbitalBlock:
     l_min: int = 0
     center_nucleus_idx: int = -1
     partner_nucleus_idx: int = -1
+    # Track T3 (Dirac-on-S^3 Tier 2): optional spinor labels populated when
+    # the parent MolecularSpec has relativistic=True.  Each entry is a
+    # DiracLabel (see geovac.dirac_matrix_elements) carrying (n, kappa, 2*m_j).
+    # Non-relativistic builds leave this None.
+    spinor_labels: Optional[List[Any]] = None
+    spinor_partner_labels: Optional[List[Any]] = None
 
     def __post_init__(self) -> None:
         if self.max_n_partner == 0 and self.has_h_partner:
@@ -90,6 +96,11 @@ class MolecularSpec:
     description: str = ''
     core_method: str = 'pk'  # 'pk' or 'downfolded'
     nuclei: Optional[List[Dict]] = None  # [{'Z': float, 'position': (x,y,z), 'label': str}]
+    # Track T3 (Dirac-on-S^3 Tier 2): when True, the general composed builder
+    # dispatches to the spinor (DiracLabel) pipeline — one spin-orbital per
+    # (n, kappa, m_j) label — and wires in T1 matrix elements + T2 spin-orbit
+    # as a diagonal h1 update.  Default False preserves legacy scalar path.
+    relativistic: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -770,3 +781,109 @@ def f2_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
 def nacl_spec(R: Optional[float] = None, **kw) -> MolecularSpec:
     """NaCl spec."""
     return _diatomic_multi_center_spec('NaCl', 11, 17, R=R, **kw)
+
+
+# ---------------------------------------------------------------------------
+# Relativistic (spinor) specs — Track T3, Dirac-on-S^3 Tier 2
+# ---------------------------------------------------------------------------
+#
+# Each relativistic spec reuses the scalar block decomposition of an existing
+# hydride spec and sets ``relativistic=True`` so the composed builder's
+# relativistic branch (geovac.composed_qubit.build_composed_hamiltonian) takes
+# over.  Spin-orbit and (κ, m_j) basis enumeration are the composed builder's
+# job; specs just carry the flag and block topology.
+
+def lih_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
+                          include_pk: bool = True) -> MolecularSpec:
+    """Relativistic LiH spec (Dirac κ, m_j basis).
+
+    Reuses lih_spec() block topology; flips relativistic=True.
+    """
+    spec = lih_spec(R=R, max_n=max_n, include_pk=include_pk)
+    spec.relativistic = True
+    spec.name = 'LiH_rel'
+    return spec
+
+
+def beh_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
+                          include_pk: bool = True) -> MolecularSpec:
+    """Relativistic BeH spec — BeH₂ block template with one H block removed.
+
+    Derived from beh2_spec() by discarding one of the two equivalent bond
+    blocks and halving the explicit-electron bookkeeping.  Be has Z=4, one
+    bond pair (2e), one lone pair on Be (none in BeH₂'s composed template —
+    Be contributes 2s² via the bond block, so BeH carries only a core + 1
+    bond block; the remaining 2s electron is a radical open shell captured
+    by a single-occupied bond block).  For structural Pauli counting we
+    follow the closed-shell sigma-bond template (2e in the bond block)
+    since BeH in its ²Σ⁺ ground state still has the same block topology.
+    """
+    beh2 = beh2_spec(R=R, max_n=max_n, include_pk=include_pk)
+    # Keep core + first bond block; drop the second bond.
+    new_blocks: List[OrbitalBlock] = []
+    bond_count = 0
+    for blk in beh2.blocks:
+        if blk.block_type == 'bond':
+            if bond_count == 0:
+                new_blocks.append(blk)
+                bond_count += 1
+            # skip second bond
+        else:
+            new_blocks.append(blk)
+    # Nuclear repulsion: recompute for Be + single H.
+    from geovac.atomic_classifier import classify_atom  # noqa: F401
+    Z_Be = 4.0
+    Z_H = 1.0
+    R_val = R if R is not None else _HYDRIDE_REQ.get('BeH2', 2.502)
+    E_core = _FIRST_ROW_CORE_ENERGY.get(4, -13.65)
+    V_NN = Z_Be * Z_H / R_val
+    nuclear_repulsion = V_NN + E_core
+    spec = MolecularSpec(
+        name='BeH_rel',
+        blocks=new_blocks,
+        nuclear_repulsion_constant=nuclear_repulsion,
+        description='BeH: explicit 1s² core, 1 sigma bond block, relativistic (κ,m_j) basis',
+        core_method='pk',
+        relativistic=True,
+    )
+    return spec
+
+
+def cah_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
+                          include_pk: bool = True) -> MolecularSpec:
+    """Relativistic CaH spec — CaH₂ block template with one H block removed.
+
+    Ca is Z=20 ([Ar] frozen core, structure type D).  Single Ca–H σ bond
+    plus the [Ar] frozen core handled via neon_core.FrozenCore at Z=20.
+    """
+    cah2 = cah2_spec(R=R, max_n=max_n, include_pk=include_pk)
+    new_blocks: List[OrbitalBlock] = []
+    bond_count = 0
+    for blk in cah2.blocks:
+        if blk.block_type == 'bond':
+            if bond_count == 0:
+                new_blocks.append(blk)
+                bond_count += 1
+        else:
+            new_blocks.append(blk)
+    # Nuclear repulsion (Ca frozen core + 1 H).
+    from geovac.neon_core import FrozenCore
+    from geovac.composed_qubit import _v_cross_nuc_frozen_core
+    Z_Ca = 20
+    Z_H = 1.0
+    R_val = R if R is not None else _HYDRIDE_REQ.get('CaH2', 3.807)
+    fc = FrozenCore(Z_Ca)
+    fc.solve()
+    E_core = fc.energy
+    V_NN = float(Z_Ca) * Z_H / R_val
+    V_cross = _v_cross_nuc_frozen_core(Z_Ca, Z_H, R_val)
+    nuclear_repulsion = V_NN + V_cross + E_core
+    spec = MolecularSpec(
+        name='CaH_rel',
+        blocks=new_blocks,
+        nuclear_repulsion_constant=nuclear_repulsion,
+        description='CaH: [Ar] frozen core, 1 sigma bond block, relativistic (κ,m_j) basis',
+        core_method='pk',
+        relativistic=True,
+    )
+    return spec

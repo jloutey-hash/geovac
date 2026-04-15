@@ -551,6 +551,8 @@ def build_composed_hamiltonian(
     spec: 'MolecularSpec',
     pk_in_hamiltonian: bool = True,
     verbose: bool = False,
+    relativistic: bool = False,
+    alpha_num: float = 7.2973525693e-3,
 ) -> Dict[str, Any]:
     """Build a composed qubit Hamiltonian from a MolecularSpec.
 
@@ -579,6 +581,20 @@ def build_composed_hamiltonian(
         qubit_op, fermion_op, wall_time_s, spec_name, blocks.
     """
     from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+
+    # Track T3 (Dirac-on-S^3 Tier 2): dispatch to relativistic (spinor) path
+    # when the caller or the spec requests it.  The spec flag takes
+    # precedence to avoid silent downgrades.
+    if relativistic or getattr(spec, 'relativistic', False):
+        from geovac.composed_qubit_relativistic import (
+            build_composed_hamiltonian_relativistic,
+        )
+        return build_composed_hamiltonian_relativistic(
+            spec,
+            alpha_num=alpha_num,
+            pk_in_hamiltonian=pk_in_hamiltonian,
+            verbose=verbose,
+        )
 
     t0 = time.perf_counter()
 

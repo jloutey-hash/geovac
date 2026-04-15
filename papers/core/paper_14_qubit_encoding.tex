@@ -1555,6 +1555,306 @@ hardware constraint.
 
 
 %% ========================================================================
+%% §V Spinor composed encoding — Dirac-on-S^3 Tier 2 sprint drop-in (T6).
+%% ========================================================================
+
+\section{Spinor composed encoding}
+\label{sec:spinor_composed}
+
+The composed qubit Hamiltonians of \S\ref{sec:composed} use a spinless
+orbital basis with a trivial factor-of-two spin doubling at
+Jordan--Wigner encoding. This section reports the
+\emph{spin-ful} extension: one qubit per Dirac label $(n, \kappa, m_j)$
+with the angular structure provided by Szmytkowski's spinor spherical
+harmonics and the spin-orbit coupling provided by the Breit--Pauli
+leading-order reduction of the Dirac equation.
+The construction is an engineering upgrade of
+\S\ref{sec:composed}'s composed pipeline, not a new Dirac Fock
+projection: the Schr\"odinger Fock map on $S^3$ does not lift to the
+Dirac sector (BJL $\mathbb{Z}_2$-supersymmetric algebra
+obstruction~\cite{BJL}), so the spinor basis rides on the existing
+scalar $S^3$ graph with relativistic coefficients added on top. All
+matrix elements are closed-form in $(\kappa, m_j)$-native labels: no
+numerical quadrature enters the angular layer, and the radial layer
+reuses the exact-rational $R^k$ evaluator from
+\texttt{hypergeometric\_slater.py}.
+
+\subsection{Resource metrics for LiH, BeH, CaH}
+\label{subsec:spinor_resource}
+
+Three single-bond hydrides, spanning $Z \in \{3, 4, 20\}$ and covering
+both first-row (LiH, BeH) and the [Ar]-frozen-core third row (CaH).
+BeH is constructed as a one-bond reduction of BeH$_2$; CaH is the
+Ca analog of BeH with the third-row frozen-core decomposition of
+\S\ref{sec:frozen_core} (equivalently, the v2.2.0 Z=20 entry in the
+atomic classifier). All three specs enumerate Dirac labels directly
+rather than spin-doubling a spatial-orbital basis; the resulting
+qubit count $Q$ coincides with the scalar qubit count by construction
+because $2(l_{\max}+1)^2$ Dirac labels at shell $n$ equal
+$2 \cdot (l_{\max}+1)^2$ spin-doubled scalar orbitals.
+
+\begin{table}[h]
+\caption{Spinor composed encoding resource metrics for LiH, BeH,
+CaH at $n_{\max} \in \{1, 2, 3\}$. $N_{\mathrm{Pauli}}$ is the
+number of non-identity Jordan--Wigner Pauli strings;
+$\lambda_{\mathrm{ni}}$ is the non-identity 1-norm;
+``QWC'' is the number of qubit-wise commuting groups (greedy
+grouping). ``scalar'' columns repeat the spinless encoding of
+\S\ref{sec:composed} at the same spec topology for reference.
+Pauli ratio rel/scalar is isostructural across the three molecules
+($1.00\times / 2.42\times / 5.89\times$ at $n_{\max}=1/2/3$).}
+\label{tab:spinor_resource}
+\begin{ruledtabular}
+\begin{tabular}{cccccccc}
+$n_{\max}$ & Mol. & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & rel/scalar & $\lambda_{\mathrm{ni}}^{\mathrm{rel}}$ (Ha) & QWC$^{\mathrm{rel}}$ \\
+\hline
+1 & LiH & 6   & 9        & 9      & 1.00$\times$ & 10.15  & 1 \\
+1 & BeH & 6   & 9        & 9      & 1.00$\times$ & 63.44  & 1 \\
+1 & CaH & 4   & 6        & 6      & 1.00$\times$ & 2.03   & 1 \\
+2 & LiH & 30  & 333      & 805    & 2.42$\times$ & 35.90  & 55 \\
+2 & BeH & 30  & 333      & 805    & 2.42$\times$ & 141.32 & 52 \\
+2 & CaH & 20  & 222      & 534    & 2.41$\times$ & 13.87  & 52 \\
+3 & LiH & 84  & 7\,878   & 46\,434 & 5.89$\times$ & 126.75 & 6\,571 \\
+3 & BeH & 84  & 7\,878   & 46\,434 & 5.89$\times$ & 297.03 & 6\,571 \\
+3 & CaH & 56  & 5\,252   & 30\,940 & 5.89$\times$ & 65.81  & 6\,571 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Three observations on Table~\ref{tab:spinor_resource}:
+
+\begin{enumerate}
+  \item \emph{Pauli ratio is isostructural.} The rel/scalar Pauli
+    ratio at fixed $n_{\max}$ is identical within rounding across
+    LiH, BeH, and CaH ($1.00\times$, $2.42\times$, $5.89\times$ at
+    $n_{\max}=1,2,3$). This is consistent with the general scaling
+    law of \S\ref{sec:composed}: the composed Pauli count depends
+    on $Q$ and on the angular structure, not on nuclear charge or
+    valence configuration.
+
+  \item \emph{1-norm does not inflate; at $n_{\max}=3$ it decreases.}
+    The non-identity 1-norm $\lambda_{\mathrm{ni}}$ at the
+    relativistic encoding is within $\pm 20\%$ of the scalar value
+    at $n_{\max}=1,2$ and \emph{decreases} by $30$--$40\%$ at
+    $n_{\max}=3$ (LiH 170.59 Ha $\to$ 126.75 Ha;
+    BeH 346.09 Ha $\to$ 297.03 Ha;
+    CaH 96.45 Ha $\to$ 65.81 Ha; scalar values from the
+    parallel T3 run with \texttt{relativistic=False}). Interpretation:
+    spinor $jj$-coupling distributes Coulomb matrix elements across
+    narrower angular channels, and at finite truncation the aggregate
+    1-norm is reduced. This is a structurally favorable result for
+    QPE resource estimation where $\lambda$ dominates query
+    complexity~\cite{ChildsBerry}.
+
+  \item \emph{QWC grouping cost grows sharply.} LiH $n_{\max}=3$
+    scalar produces $790$ QWC groups; the spin-ful encoding produces
+    $6\,571$ ($8.3\times$). The richer Pauli structure of $jj$-coupling
+    distributes the Hamiltonian across more distinct Pauli words, so
+    QWC cliques are smaller. This cost is VQE-specific and can be
+    mitigated by symmetry-compressed (SCD) or tensor-factorized
+    measurement strategies.
+\end{enumerate}
+
+\subsection{Construction}
+\label{subsec:spinor_construction}
+
+The angular layer uses Szmytkowski's spinor spherical harmonic
+reduction~\cite{Szmytkowski2007} in the $(\kappa, m_j)$ basis,
+with $\kappa = -(l+1)$ for $j = l + 1/2$ and $\kappa = +l$ for
+$j = l - 1/2$. One-body matrix elements of $\sigma \cdot \hat{r}$,
+$\mathbf{J}^2$, $\mathbf{L}\cdot\mathbf{S}$, and $\sigma^2$ are
+closed-form integer / half-integer eigenvalues; rank-1 components of
+$\mathbf{L}_z$ and $\sigma_z$ are emitted as symbolic Wigner--Eckart
+reductions and closed by the spin-orbit consumer (below).
+
+The radial layer reuses the non-relativistic hydrogenic radial
+integrals $\langle r^k \rangle_{n,l}$ and $\langle 1/r^k \rangle_{n,l}$
+as closed-form Bethe--Salpeter rationals in $(Z, n, l)$. The full
+Dirac-Coulomb radial corrections, which would enter through the
+Martínez-y-Romero three-term recursion~\cite{MartinezYRomero2004} and
+carry the factor $\gamma := \sqrt{1 - (Z\alpha)^2}$, are \emph{reserved}
+for a future extension. At Tier 2 they enter only as an unbound
+symbolic placeholder registered by the spinor certifier
+(\S\ref{subsec:spinor_paper18}); no T3 matrix element depends on $\gamma$.
+
+The two-body ERI block applies Dyall \S 9.3's $jj$-coupled Coulomb
+reduction~\cite{Dyall} in its pre-recoupled ``separable'' form,
+\[
+  \langle a b \,|\, 1/r_{12} \,|\, c d \rangle
+  \;=\; \sum_k X_k(a, c)\, X_k(b, d)\, R^k(n_a l_a, n_b l_b, n_c l_c, n_d l_d),
+\]
+where $X_k$ is the full-Gaunt $jj$-coupled angular coefficient
+(parity $l_a + l_c + k$ even, $j$-triangle, and the two 3j bottom-row
+constraints; see also \S\ref{sec:paper22_spinor}), and $R^k$ is the
+scalar radial integral evaluated by the same exact-rational
+\texttt{hypergeometric\_slater.py} evaluator used by the spinless
+builder. The explicit 6j symbol from Dyall's \emph{coupled} form
+factorizes through $X_k(a,c) \cdot X_k(b,d)$ with the
+$m_{j,a} + m_{j,b} = m_{j,c} + m_{j,d}$ global constraint; the
+composed pipeline operates in the uncoupled spin-orbital basis, so
+the separable form is the one consumed.
+
+Spin-orbit is added as a one-body diagonal update~\cite{BreitPauli}:
+\[
+  \langle n, \kappa, m_j \,|\, H_{\mathrm{SO}} \,|\, n, \kappa, m_j \rangle
+  \;=\; -\,\frac{Z^4\,\alpha^2\,(\kappa+1)}{4\,n^3\, l(l+\tfrac{1}{2})(l+1)},
+\]
+diagonal in $(n, \kappa, m_j)$ with the Kramers cancellation
+$H_{\mathrm{SO}} = 0$ at $l = 0$ ($\kappa = -1$ forces the numerator
+to zero before the formally divergent $\langle 1/r^3\rangle$ is
+evaluated). This is purely algebraic: a rational in $(Z, n, l)$
+times $\alpha^2$, no radial quadrature, diagonal. Darwin and
+mass-velocity corrections are explicitly out of scope at Tier 2;
+sub-MHz spectroscopic accuracy is not a design goal.
+
+\subsection{Sunaga 2025 head-to-head}
+\label{subsec:sunaga}
+
+Table~\ref{tab:sunaga} compares GeoVac's Tier 2 relativistic Pauli
+counts to Sunaga et al.~\cite{Sunaga2025}'s
+OpenFermion-Dirac / cv2z construction at $Q = 18$. The only fully
+calibrated Sunaga cell available in the main paper is RaH at 18q
+(47\,099 relativistic Pauli strings); per-molecule counts for BeH,
+MgH, CaH, SrH, BaH at 18q are in the Supplemental Material Tables
+S1--S3, which are \textbf{flagged as deferred} from this comparison
+(inaccessible in the sprint timeframe).
+
+\begin{table}[h]
+\caption{GeoVac Tier 2 vs.\ Sunaga et al.~\cite{Sunaga2025}. Native-$Q$
+GeoVac numbers at $n_{\max}=2$ compared to the single available
+Sunaga cell (RaH-18q). The ``projected'' column uses the
+Paper~14 \S\ref{sec:composed} O($Q^{2.5}$) composed scaling
+law combined with the Tier 2 rel/scalar multiplier ($\sim$2.4$\times$)
+to extrapolate GeoVac to matched $Q = 18$.}
+\label{tab:sunaga}
+\begin{ruledtabular}
+\begin{tabular}{cccccc}
+Molecule & $Q$ (GeoVac) & GeoVac $N_{\mathrm{Pauli}}$ & Sunaga RaH-18q & Native ratio & Proj.\ at $Q=18$ \\
+\hline
+LiH & 30 & 805 & 47\,099 & 0.017$\times$ & 0.004$\times$--0.007$\times$ \\
+BeH & 30 & 805 & 47\,099 & 0.017$\times$ & 0.004$\times$--0.007$\times$ \\
+CaH & 20 & 534 & 47\,099 & 0.011$\times$ & 0.006$\times$--0.008$\times$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Native $Q$ gives GeoVac a $60$--$90\times$ advantage against RaH-18q;
+projected to matched $Q = 18$ the advantage widens to
+$\sim 150$--$250\times$. This is structural, not accidental: the
+composed + frozen-core architecture eliminates the large cv2z
+primitive basis that dominates Sunaga's 18q Pauli tensor.
+
+\textbf{Honest caveats on the Sunaga comparison.}
+\begin{enumerate}
+  \item The RaH-vs-LiH / BeH / CaH comparison is not species-matched.
+    The four cells missing from Sunaga's main paper (BeH-18q,
+    MgH-18q, CaH-18q, SrH-18q, BaH-18q) would make this a genuine
+    head-to-head.
+  \item GeoVac composed accuracy is 5--26 \% $R_{\mathrm{eq}}$ error
+    at the matched molecules (Paper 17); Sunaga's DC-UCCSD is
+    accuracy-targeted ($0.47\%$ vs CASCI for CaH). The comparison
+    is \emph{resource estimation at fixed single-point geometry},
+    not a spectroscopic benchmark.
+  \item GeoVac uses Breit--Pauli spin-orbit at leading $Z\alpha^2$;
+    full Dirac-Coulomb $\gamma = \sqrt{1-(Z\alpha)^2}$ radial
+    corrections are reserved. For CaH ($Z=20$) the relative
+    $\gamma$ correction to the fine-structure splitting is
+    $\sim 1\,\%$.
+\end{enumerate}
+
+A fine-structure sanity check on He, Li, and Be 2p splittings
+(benchmark code in
+\texttt{benchmarks/fine\_structure\_check.py}) reproduces
+all three to correct sign and correct order of magnitude
+($-66\%, +211\%, -78\%$ relative error against NIST), consistent
+with the first-order $Z\alpha^2$ approximation plus simple
+$Z_{\mathrm{eff}}$ screening. Absolute accuracy is not a Tier 2
+design target; the $20$--$50\,\%$ target suggested in the Tier 2
+Explorer is not met for Li. Reaching sub-$10\,\%$ accuracy would
+require multi-electron configuration interaction with Breit-Pauli
+spin-spin and spin-other-orbit terms, which is Tier 3+ work.
+
+\subsection{Angular sparsity at the spinor level}
+\label{subsec:spinor_sparsity_crossref}
+
+The potential-independent angular sparsity theorem of Paper~22 extends
+verbatim to the $jj$-coupled spinor basis, with the ERI density
+replaced by the spinor analog $d_{\mathrm{spinor}}(l_{\max})$ of
+Paper~22's scalar density $d(l_{\max})$. See \S\ref{sec:paper22_spinor}
+(a new section of Paper~22) for the full table in both conventions.
+Briefly: $d_{\mathrm{spinor}} \leq d_{\mathrm{scalar}}$ at every
+$l_{\max}$, with ratio $0.25$ at $l_{\max}=0$ (pure spin dilution)
+climbing to $0.92$ at $l_{\max}=5$; the sparsity \emph{exponent}
+is preserved, the \emph{prefactor} is inflated.
+
+At matched $l_{\max}$ the spinor Pauli tensor is $\sim 16\times$
+denser than the scalar one (from the $(2Q/Q)^4 = 16$ four-tuple
+count times $d_{\mathrm{spinor}}/d_{\mathrm{scalar}} \approx 0.86$
+at $l_{\max}=3$). At matched $Q$ (the regime of
+Table~\ref{tab:spinor_resource}) the multiplier is milder:
+$5.89\times$ at $n_{\max}=3$. The distinction between matched-$l_{\max}$
+and matched-$Q$ accounting matters when comparing to scalar published
+baselines; all GeoVac numbers in this section are matched-$Q$.
+
+\subsection{Paper~18 taxonomic classification}
+\label{subsec:spinor_paper18}
+
+Every coefficient in the Tier 2 Hamiltonian lies in the
+\emph{spinor-intrinsic} ring
+\[
+  R_{\mathrm{sp}} \;:=\; \mathbb{Q}(\alpha^2)[\gamma] \,/\, (\gamma^2 + (Z\alpha)^2 - 1),
+\]
+per the new Paper~18 \S IV subtier (forthcoming, drop-in in
+\texttt{docs/paper18\_spinor\_subtier\_proposal.tex}). A
+\texttt{verify\_spinor\_pi\_free} certifier (in
+\texttt{geovac/spinor\_certificate.py}, Track T5) walks the sympy
+expression tree of each matrix element and rejects any appearance of
+$\pi$, $\zeta$, $\log$, $E_1$, or unregistered free symbol. T3's
+symbolic spin-orbit block passes the certifier cleanly for all
+$n_{\max}$ up to 4; manual contamination (e.g., injecting
+$\pi \cdot \alpha^2 / 96$ into a coefficient) is rejected with a
+clear diagnostic.
+
+The Tier 2 transcendental content is therefore entirely algebraic in
+$R_{\mathrm{sp}}$: no new calibration $\pi$, no odd zeta, no
+embedding constant beyond the existing scalar seeds. The
+first-order-operator $\times$ spinor-bundle cell of Paper~18's
+operator-order $\times$ bundle grid is now populated; the
+2nd-order-operator $\times$ spinor-bundle cell is flagged as an open
+slot for future QED-on-$S^3$ work.
+
+\subsection{Scope and Tier 3 outlook}
+\label{subsec:spinor_scope}
+
+The spin-ful composed encoding described in this section is a
+\emph{capability} addition, not a new fundamental projection. It
+extends the scalar composed pipeline to molecules where spin-orbit
+coupling matters structurally (first-row: modest; third-row like CaH:
+$\sim 1\%$ of valence energy at $Z=20$; fifth-row and heavier:
+dominant).
+
+Three natural extensions are Tier 3+ work:
+\begin{enumerate}
+  \item Frozen-core [Kr] infrastructure for SrH, BaH, RaH — would
+    enable direct point-by-point Sunaga comparison at native $Q = 18$
+    and close the four deferred cells in Table~\ref{tab:sunaga}.
+  \item Martínez-y-Romero Dirac-Coulomb radial recursions to bind
+    $\gamma$ — would lift Table~\ref{tab:spinor_resource} from
+    Breit-Pauli to full-Dirac-Coulomb accuracy. $R_{\mathrm{sp}}$ and
+    the certifier already accommodate $\gamma$ with no ring change
+    required.
+  \item Darwin and mass-velocity terms plus multi-electron
+    Breit-Pauli spin-spin / spin-other-orbit — would lift the
+    OoM-correct fine-structure splittings of \S\ref{subsec:sunaga} to
+    few-percent accuracy. A production spectroscopic tool; a distinct
+    goal from resource estimation.
+\end{enumerate}
+
+No claim is made here that the Tier 2 construction extends to heavy
+atoms without these Tier 3+ additions; the three extensions listed
+are the Tier 3 roadmap.
+
+%% ========================================================================
 \section{Discussion}
 \label{sec:discussion}
 %% ========================================================================

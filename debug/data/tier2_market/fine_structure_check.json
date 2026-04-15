@@ -1,0 +1,99 @@
+{
+  "geovac_single_particle_2p": {
+    "He": {
+      "atom": "He (2^3P, 1s2p)",
+      "Z_nuc": 2,
+      "Z_eff_valence_2p": 1.0,
+      "H_SO_2p_3h_bare_Ha": 8.875225753444886e-06,
+      "H_SO_2p_1h_bare_Ha": -1.7750451506889772e-05,
+      "dE_2p_signed_bare_Ha": 2.6625677260334657e-05,
+      "dE_2p_signed_bare_MHz": 175188.54053958386,
+      "dE_2p_abs_bare_MHz": 175188.54053958386,
+      "H_SO_2p_3h_Zeff_Ha": 5.547016095903054e-07,
+      "H_SO_2p_1h_Zeff_Ha": -1.1094032191806108e-06,
+      "dE_2p_signed_Zeff_Ha": 1.664104828770916e-06,
+      "dE_2p_signed_Zeff_MHz": 10949.283783723991,
+      "dE_2p_abs_Zeff_MHz": 10949.283783723991
+    },
+    "Li": {
+      "atom": "Li (2^2P, 1s^2 2p)",
+      "Z_nuc": 3,
+      "Z_eff_valence_2p": 1.3,
+      "H_SO_2p_3h_bare_Ha": 4.493083037681474e-05,
+      "H_SO_2p_1h_bare_Ha": -8.986166075362948e-05,
+      "dE_2p_signed_bare_Ha": 0.0001347924911304442,
+      "dE_2p_signed_bare_MHz": 886891.9864816433,
+      "dE_2p_abs_bare_MHz": 886891.9864816433,
+      "H_SO_2p_3h_Zeff_Ha": 1.5842832671508714e-06,
+      "H_SO_2p_1h_Zeff_Ha": -3.1685665343017428e-06,
+      "dE_2p_signed_Zeff_Ha": 4.752849801452614e-06,
+      "dE_2p_signed_Zeff_MHz": 31272.249414694095,
+      "dE_2p_abs_Zeff_MHz": 31272.249414694095
+    },
+    "Be": {
+      "atom": "Be (2s2p 3P)",
+      "Z_nuc": 4,
+      "Z_eff_valence_2p": 1.95,
+      "H_SO_2p_3h_bare_Ha": 0.00014200361205511818,
+      "H_SO_2p_1h_bare_Ha": -0.00028400722411023636,
+      "dE_2p_signed_bare_Ha": 0.0004260108361653545,
+      "dE_2p_signed_bare_MHz": 2803016.648633342,
+      "dE_2p_abs_bare_MHz": 2803016.648633342,
+      "H_SO_2p_3h_Zeff_Ha": 8.020434039951285e-06,
+      "H_SO_2p_1h_Zeff_Ha": -1.604086807990257e-05,
+      "dE_2p_signed_Zeff_Ha": 2.4061302119853852e-05,
+      "dE_2p_signed_Zeff_MHz": 158315.76266188882,
+      "dE_2p_abs_Zeff_MHz": 158315.76266188882
+    }
+  },
+  "comparison": {
+    "Li_Zeff": {
+      "ref_key": "Li_2^2P_3/2-2^2P_1/2",
+      "ref_MHz": 10053.0,
+      "geovac_MHz": 31272.249414694095,
+      "sign_correct": true,
+      "order_of_magnitude_correct": true,
+      "log10_distance": 0.49286343863855153,
+      "relative_error": 2.1107380299108818
+    },
+    "Li_bare": {
+      "ref_key": "Li_2^2P_3/2-2^2P_1/2",
+      "ref_MHz": 10053.0,
+      "geovac_MHz": 886891.9864816433,
+      "sign_correct": true,
+      "order_of_magnitude_correct": false,
+      "log10_distance": 1.9455750482898544,
+      "relative_error": 87.22162404074837
+    },
+    "He_total_span_vs_1particle_SO": {
+      "ref_key": "He_2^3P_total_span",
+      "ref_MHz": 31908.0,
+      "geovac_MHz": 10949.283783723991,
+      "note": "GeoVac single-particle H_SO vs total 2^3P_0-to-2^3P_2 span (one-particle SO only)",
+      "sign_correct": true,
+      "relative_error": -0.6568483206805819,
+      "log10_distance": -0.4645138714130532
+    },
+    "Be_total_span_vs_1particle_SO": {
+      "ref_key": "Be_2s2p_3P_total_span",
+      "ref_MHz": 726000.0,
+      "geovac_MHz": 158315.76266188882,
+      "note": "GeoVac single-particle H_SO vs total 2s2p 3P_0-to-3P_2 span",
+      "sign_correct": true,
+      "relative_error": -0.7819342112095194,
+      "log10_distance": -0.6614124632838831
+    }
+  },
+  "reference_MHz": {
+    "He_2^3P_0-2^3P_1": 29617.0,
+    "He_2^3P_1-2^3P_2": 2291.0,
+    "Li_2^2P_3/2-2^2P_1/2": 10053.0,
+    "Be_2s2p_3P_0-3P_1": 156000.0,
+    "Be_2s2p_3P_1-3P_2": 570000.0
+  },
+  "notes": {
+    "scope": "Sign + order-of-magnitude sanity check only.  He/Be 2^3P fine-structure involves multi-electron spin-spin and SOO terms beyond the one-particle H_SO; these are not computed here.",
+    "reference": "Tier 2 Explorer T2-3.  NIST ASD / Puchalski-Pachucki 2017.",
+    "formula": "H_SO(n, kappa) = -Z^4 alpha^2 (kappa+1) / [4 n^3 l(l+1/2)(l+1)]"
+  }
+}

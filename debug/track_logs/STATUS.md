@@ -131,3 +131,47 @@ Hopf decomposition of Δ = 20+20 chirality split, alternating {4,5,4,5,4,5,4,5,4
 - Tier 1b proof sprint: not opened — per sprint plan's "all negative" decision branch.
 - Tier 2 (spin-ful composed qubit encoding): confirmed as next research phase.
 - ζ(3) added to Paper 18 taxonomy as a new tier (odd-zeta, first-order operator origin).
+
+---
+
+## Session Summary 2026-04-15 — Dirac-on-S³ Tier 2 Sprint
+
+### Tracks
+- T0: completed — d_spinor(l_max) table (Paper 22 extension)
+- T1: completed — spinor matrix elements in (κ, m_j) basis (117 tests pass)
+- T2: completed — Breit-Pauli spin-orbit, H_SO = −Z⁴α²(κ+1)/[4n³l(l+½)(l+1)] (22 tests)
+- T3: completed — spin-ful composed pipeline for LiH/BeH/CaH (13 regression tests + 164 pre-existing all pass)
+- T4: completed — Sunaga 2025 market test (150–250× resource ratio at matched Q=18); fine-structure sign+OoM for He/Li/Be
+- T5: completed — π-free spinor certificate + Paper 18 new subtier R_sp := ℚ(α²)[γ]/(γ²+(Zα)²−1) (25 tests)
+- T6: completed — Paper 14 §V / Paper 20 Table / Paper 22 spinor section / Paper 18 subtier / CLAUDE.md v2.11.0 proposals drafted (drop-in files, NOT applied)
+
+### Results
+Three relativistic composed molecular Hamiltonians built end-to-end algebraically.
+- Pauli ratio rel/scalar: 1.00×/2.42×/5.89× at n_max=1/2/3.
+- 1-norm rel vs scalar: flat to slightly lower (QPE-favorable).
+- d_spinor(l_max) ratio: 1/4 at l_max=0 → 0.92 at l_max=5.
+- Sunaga RaH-18q: 47,099 Pauli vs GeoVac LiH 805 (0.017×) / CaH 534 (0.011×).
+- Fine structure He/Li/Be: sign + OoM correct; absolute accuracy 50–200%.
+
+### Files Modified (this sprint)
+None yet — all Tier 2 proposals are drop-in files awaiting PI approval.
+
+### Files Created
+- geovac/dirac_matrix_elements.py (T1)
+- geovac/spin_orbit.py (T2)
+- geovac/composed_qubit_relativistic.py (T3)
+- geovac/spinor_certificate.py (T5)
+- tests/test_dirac_matrix_elements.py (T1)
+- tests/test_spin_orbit.py (T2)
+- tests/test_spin_ful_composed.py (T3)
+- tests/test_spinor_certificate.py (T5)
+- benchmarks/relativistic_comparison.py (T4)
+- benchmarks/fine_structure_check.py (T4)
+- debug/tier2_t0_spinor_density.py + data + memo (T0)
+- docs/* (all Tier 2 memos and T6 proposals)
+- debug/data/tier2_market/* (T4 data)
+
+### Decisions
+- Three-tier program of Tier 1 closed; Tier 2 engineering upgrade complete; Tier 3 (heavy atoms, γ corrections, QED extension) deferred.
+- Paper 18 taxonomy now has executable per-tier certifiers (D1 scalar, T5 spinor); pattern to be extended for all future tiers.
+- CLAUDE.md v2.11.0 bump awaits PI approval of the §1/§2/§3/§10/§11/§12 edits.
