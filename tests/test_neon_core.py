@@ -44,18 +44,23 @@ class TestFrozenCoreInterface:
             fc.z_eff(1.0)
 
     def test_invalid_z_low(self):
-        """Z < 11 raises ValueError."""
-        with pytest.raises(ValueError, match="Z=11-18"):
+        """Z=10 (Ne) is not in any frozen-core table (it's a target core,
+        not a FrozenCore use case)."""
+        with pytest.raises(ValueError, match="No frozen-core data"):
             FrozenCore(Z=10)
 
-    def test_invalid_z_high(self):
-        """Z > 18 raises ValueError."""
-        with pytest.raises(ValueError, match="Z=11-18"):
-            FrozenCore(Z=19)
+    def test_invalid_z_unsupported(self):
+        """Z in unsupported range (e.g., 4d or 5p block) raises ValueError."""
+        # Z=39 (Y) — 4d block, not implemented
+        with pytest.raises(ValueError, match="No frozen-core data"):
+            FrozenCore(Z=39)
+        # Z=57 (La) — lanthanide, not implemented
+        with pytest.raises(ValueError, match="No frozen-core data"):
+            FrozenCore(Z=57)
 
     def test_invalid_z_he_core(self):
-        """Z in He-core range raises ValueError."""
-        with pytest.raises(ValueError, match="Z=11-18"):
+        """Z in He-core range (Z=3-10) uses CoreScreening, not FrozenCore."""
+        with pytest.raises(ValueError, match="No frozen-core data"):
             FrozenCore(Z=3)
 
 

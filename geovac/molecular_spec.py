@@ -304,6 +304,12 @@ _ELEMENT_DATA = {
     34: ('Se', 4, 28, 'frozen'),
     35: ('Br', 4, 28, 'frozen'),
     36: ('Kr', 4, 28, 'frozen'),
+    # Fifth row s-block ([Kr] frozen core) -- Sprint 3 HA-C (v2.12.0)
+    37: ('Rb', 5, 36, 'frozen'),
+    38: ('Sr', 5, 36, 'frozen'),
+    # Sixth row s-block ([Xe] frozen core) -- Sprint 3 HA-C (v2.12.0)
+    55: ('Cs', 6, 54, 'frozen'),
+    56: ('Ba', 6, 54, 'frozen'),
 }
 
 # Experimental R_eq in bohr for XHn hydrides (CRC / NIST)
@@ -314,6 +320,20 @@ _HYDRIDE_REQ = {
     'SiH4': 2.800, 'PH3':  2.680, 'H2S':  2.534, 'HCl':  2.409,
     'KH':   4.243, 'CaH2': 3.807,
     'GeH4': 2.870, 'AsH3': 2.820, 'H2Se': 2.760, 'HBr':  2.670,
+    # Fifth row (Sprint 3 HA-C, v2.12.0) -- experimental R_eq from CRC Handbook.
+    # RbH:   5.054 bohr (2.674 A);  SrH2:  4.120 bohr (2.180 A, estimated).
+    # Sixth row: CsH: 5.569 bohr (2.947 A);  BaH2: 4.302 bohr (2.276 A, est.).
+    'RbH':  5.054, 'SrH2': 4.120,
+    'CsH':  5.569, 'BaH2': 4.302,
+}
+
+# Monohydride R_eq for open-shell alkaline-earth diatomics (SrH, BaH).
+# Experimental R_eq from spectroscopic data.
+#   SrH 2Sigma+: R_eq = 2.1458 A = 4.055 bohr (NIST/CRC)
+#   BaH 2Sigma+: R_eq = 2.2318 A = 4.218 bohr (NIST/CRC)
+_MONOHYDRIDE_REQ = {
+    'SrH':  4.055,
+    'BaH':  4.218,
 }
 
 # He-like core energies for first-row atoms (2-electron core, Z=Z_heavy)
@@ -849,6 +869,125 @@ def beh_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
     return spec
 
 
+def _alkaline_earth_monohydride_spec(
+    Z: int,
+    name: str,
+    R: Optional[float] = None,
+    max_n: int = 2,
+    include_pk: bool = True,
+    relativistic: bool = False,
+) -> MolecularSpec:
+    """Build a monohydride ``MH`` spec for an alkaline-earth M.
+
+    Derived from the ``MH_2`` hydride template by dropping one of the two
+    equivalent sigma-bond blocks.  Applies to Ca (Z=20), Sr (Z=38), Ba (Z=56),
+    all frozen-core structure type D.  For structural Pauli counting we
+    follow the closed-shell sigma-bond template (2e in the bond block) even
+    though MH in its ²Σ⁺ ground state is formally an open-shell radical;
+    the additional unpaired electron is an occupation issue, not a block-
+    topology issue.
+
+    Parameters
+    ----------
+    Z : int
+        Alkaline-earth nuclear charge (must classify as structure type D).
+    name : str
+        Base molecule name (e.g. ``'CaH'``, ``'SrH'``, ``'BaH'``); the
+        ``_rel`` suffix is appended automatically when ``relativistic=True``.
+    R : float, optional
+        Internuclear distance in bohr.  Defaults to the experimental
+        monohydride equilibrium if tabulated in ``_MONOHYDRIDE_REQ``,
+        else the dihydride equilibrium in ``_HYDRIDE_REQ``.
+    max_n, include_pk : as in ``hydride_spec``.
+    relativistic : bool
+        If True, flip ``MolecularSpec.relativistic=True`` so the composed
+        builder dispatches to the spinor (Dirac κ, m_j) path.
+
+    Returns
+    -------
+    MolecularSpec
+        Monohydride spec with the single σ-bond block + frozen core.
+    """
+    from geovac.neon_core import FrozenCore
+    from geovac.composed_qubit import _v_cross_nuc_frozen_core
+
+    # Start from the dihydride template (two bond blocks, same Z_eff).
+    dihyd = hydride_spec(Z, R=R, max_n=max_n, include_pk=include_pk)
+    new_blocks: List[OrbitalBlock] = []
+    bond_count = 0
+    for blk in dihyd.blocks:
+        if blk.block_type == 'bond':
+            if bond_count == 0:
+                # Relabel the kept bond block to the monohydride name (e.g.
+                # SrH2_bond_1 -> SrH_bond) for cleaner output.
+                import dataclasses
+                kept = dataclasses.replace(blk, label=f'{name}_bond')
+                new_blocks.append(kept)
+                bond_count += 1
+            # drop subsequent bond(s)
+        else:
+            new_blocks.append(blk)
+
+    # Rebuild nuclear repulsion for a single M–H pair.
+    Z_H = 1.0
+    R_val = R if R is not None else _MONOHYDRIDE_REQ.get(
+        name, _HYDRIDE_REQ.get(f'{_ELEMENT_DATA[Z][0]}H2', 4.0)
+    )
+    fc = FrozenCore(Z)
+    fc.solve()
+    E_core = fc.energy
+    V_NN = float(Z) * Z_H / R_val
+    V_cross = _v_cross_nuc_frozen_core(Z, Z_H, R_val)
+    nuclear_repulsion = V_NN + V_cross + E_core
+
+    core_tag = {19: '[Ar]', 20: '[Ar]', 37: '[Kr]', 38: '[Kr]',
+                55: '[Xe]', 56: '[Xe]'}.get(Z, 'frozen')
+    basis_tag = 'relativistic (κ,m_j) basis' if relativistic else 'scalar basis'
+    spec_name = f'{name}_rel' if relativistic else name
+
+    return MolecularSpec(
+        name=spec_name,
+        blocks=new_blocks,
+        nuclear_repulsion_constant=nuclear_repulsion,
+        description=(
+            f'{name}: {core_tag} frozen core, 1 sigma bond block, {basis_tag}'
+        ),
+        core_method='pk',
+        relativistic=relativistic,
+    )
+
+
+def srh_spec(R: Optional[float] = None, max_n: int = 2,
+             include_pk: bool = True) -> MolecularSpec:
+    """SrH composed spec (Sprint 3 Track HA-C, v2.12.0).
+
+    Sr (Z=38): [Kr] frozen core + 1 σ-bond block.  Sr contributes one 5s
+    electron to the Sr–H bond; the second 5s electron is the unpaired
+    radical electron (²Σ⁺ ground state).  For structural Pauli counting we
+    use the closed-shell σ-bond template, identical in block topology to
+    CaH (Z=20) and KH (Z=19) — isostructural at Q=20, 222 Pauli at
+    ``max_n=2``.
+    """
+    return _alkaline_earth_monohydride_spec(
+        38, 'SrH', R=R, max_n=max_n, include_pk=include_pk,
+        relativistic=False,
+    )
+
+
+def bah_spec(R: Optional[float] = None, max_n: int = 2,
+             include_pk: bool = True) -> MolecularSpec:
+    """BaH composed spec (Sprint 3 Track HA-C, v2.12.0).
+
+    Ba (Z=56): [Xe] frozen core + 1 σ-bond block.  Same monohydride block
+    topology as SrH, CaH, KH — isostructural at Q=20, 222 Pauli at
+    ``max_n=2``.
+    """
+    return _alkaline_earth_monohydride_spec(
+        56, 'BaH', R=R, max_n=max_n, include_pk=include_pk,
+        relativistic=False,
+    )
+
+
 def cah_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
                           include_pk: bool = True) -> MolecularSpec:
     """Relativistic CaH spec — CaH₂ block template with one H block removed.
@@ -887,3 +1026,35 @@ def cah_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
         relativistic=True,
     )
     return spec
+
+
+def srh_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
+                          include_pk: bool = True) -> MolecularSpec:
+    """Relativistic SrH spec (Sprint 3 Track HA-D, v2.12.0).
+
+    Sr (Z=38): [Kr] frozen core (36e) + 1 σ-bond block, spin-orbit-coupled
+    (Dirac κ, m_j) basis.  Isostructural block-topology with CaH_rel / BaH_rel;
+    all three share the same block-level spinor count and qubit layout, only
+    differing in the frozen-core screening Z_eff(r) and the spin-orbit
+    coefficient −Z⁴α²(κ+1)/[4n³l(l+½)(l+1)] (Z⁴ scaling is dominant).
+
+    Used for the Sunaga 2025 (PRA 111, 022817) head-to-head comparison.
+    """
+    return _alkaline_earth_monohydride_spec(
+        38, 'SrH', R=R, max_n=max_n, include_pk=include_pk,
+        relativistic=True,
+    )
+
+
+def bah_spec_relativistic(R: Optional[float] = None, max_n: int = 2,
+                          include_pk: bool = True) -> MolecularSpec:
+    """Relativistic BaH spec (Sprint 3 Track HA-D, v2.12.0).
+
+    Ba (Z=56): [Xe] frozen core (54e) + 1 σ-bond block, spin-orbit-coupled
+    (Dirac κ, m_j) basis.  Same isostructural invariance as SrH_rel; used
+    for the Sunaga 2025 comparison.
+    """
+    return _alkaline_earth_monohydride_spec(
+        56, 'BaH', R=R, max_n=max_n, include_pk=include_pk,
+        relativistic=True,
+    )

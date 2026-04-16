@@ -1,0 +1,105 @@
+{
+  "scalar_native_q": [
+    {
+      "system": "LiH",
+      "Z": 3,
+      "Q": 30,
+      "N_Pauli": 334,
+      "lambda_ni": 32.59227982121736,
+      "lambda_full": 32.59227982121736
+    },
+    {
+      "system": "NaH",
+      "Z": 11,
+      "Q": 20,
+      "N_Pauli": 223,
+      "lambda_ni": 171.45656535191884,
+      "lambda_full": 171.45656535191884
+    },
+    {
+      "system": "KH",
+      "Z": 19,
+      "Q": 20,
+      "N_Pauli": 223,
+      "lambda_ni": 608.6623092995585,
+      "lambda_full": 608.6623092995585
+    },
+    {
+      "system": "CaH2",
+      "Z": 20,
+      "Q": 40,
+      "N_Pauli": 445,
+      "lambda_ni": 704.6332787132915,
+      "lambda_full": 704.6332787132915
+    },
+    {
+      "system": "SrH",
+      "Z": 38,
+      "Q": 20,
+      "N_Pauli": 223,
+      "lambda_ni": 3145.863769150641,
+      "lambda_full": 3145.863769150641
+    },
+    {
+      "system": "BaH",
+      "Z": 56,
+      "Q": 20,
+      "N_Pauli": 223,
+      "lambda_ni": 7897.8828290308375,
+      "lambda_full": 7897.8828290308375
+    }
+  ],
+  "sunaga_rah_q18_pauli": 47099,
+  "relativistic_native_q": [
+    {
+      "system": "LiH",
+      "Z": 3,
+      "Q": 30,
+      "N_Pauli": 801,
+      "lambda_ni": 25.789802262487584,
+      "lambda_total": 43.39236597362261,
+      "qwc_groups": 52,
+      "ratio_to_sunaga_rah": 0.017006730503832352
+    },
+    {
+      "system": "BeH",
+      "Z": 4,
+      "Q": 30,
+      "N_Pauli": 801,
+      "lambda_ni": 41.638441996154015,
+      "lambda_total": 75.13448499443119,
+      "qwc_groups": 52,
+      "ratio_to_sunaga_rah": 0.017006730503832352
+    },
+    {
+      "system": "CaH",
+      "Z": 20,
+      "Q": 20,
+      "N_Pauli": 534,
+      "lambda_ni": 13.866405671789515,
+      "lambda_total": 694.5816707807635,
+      "qwc_groups": 52,
+      "ratio_to_sunaga_rah": 0.011337820335888236
+    },
+    {
+      "system": "SrH",
+      "Z": 38,
+      "Q": 20,
+      "N_Pauli": 534,
+      "lambda_ni": 13.866405671789515,
+      "lambda_total": 3150.1038005747664,
+      "qwc_groups": 52,
+      "ratio_to_sunaga_rah": 0.011337820335888236
+    },
+    {
+      "system": "BaH",
+      "Z": 56,
+      "Q": 20,
+      "N_Pauli": 534,
+      "lambda_ni": 13.866405671789515,
+      "lambda_total": 7902.1228604549115,
+      "qwc_groups": 52,
+      "ratio_to_sunaga_rah": 0.011337820335888236
+    }
+  ]
+}

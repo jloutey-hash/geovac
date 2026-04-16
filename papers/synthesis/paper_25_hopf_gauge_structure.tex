@@ -1,0 +1,1023 @@
+% paper_25_hopf_gauge_structure.tex -- GeoVac Paper 25
+% The Hopf Graph as a Lattice Gauge Structure: A Framework Observation
+% Status: Draft, April 15, 2026
+% Category: Synthesis (papers/synthesis/)
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}{Proposition}
+
+\begin{document}
+
+\title{The Hopf Graph as a Lattice Gauge Structure:\\
+A Framework Observation}
+\thanks{Paper 25 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{April 15, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The GeoVac framework places Coulomb bound-state quantum numbers on a
+discrete graph that converges to the unit three-sphere $S^3$ in the
+continuum limit.  This paper documents a framework observation: the
+same graph, viewed through its incidence structure, instantiates the
+combinatorial ingredients of a lattice gauge theory.  Nodes carry
+scalar matter (0-forms), edges carry a $U(1)$ connection (1-forms),
+and the Hopf quotient $S^3 \to S^2$ (collapsing the magnetic quantum
+number $m_l$ along its $2l+1$ fiber) produces the discrete base graph
+on which gauge-neutral propagation lives.  The node Laplacian
+$L_0 = B B^{\top}$ is the matter propagator of the graph; the edge
+Laplacian $L_1 = B^{\top} B$ is the discrete Hodge--1 Laplacian, whose
+kernel counts independent cycles and whose structure is the
+combinatorial analog of a photon propagator in temporal gauge.
+Nothing about the mathematical decomposition is new: graph Hodge
+theory (Lim; Schaub \emph{et al.}), lattice gauge theory (Wilson), and
+the conformal invariance of 4D Maxwell (Cunningham; Bateman) are all
+established separately.  What is new is the synthesis: the GeoVac
+graph is a concrete case where all three structures coexist on a
+single, physically motivated discretization.  Under the conjectural
+interpretation of Paper~2, in which the bundle
+$S^1 \to S^3 \to S^2$ is read as
+(gauge phase)--(electron states)--(photon momenta), the
+combinatorial formula $K = \pi(B + F - \Delta)$ becomes a
+cross-sector spectral invariant of this lattice gauge structure.  We
+do not claim a new derivation of the fine-structure constant.  We do
+claim that the Paper~2 conjecture belongs inside an established
+mathematical frame---one that makes its components
+(selection principle, combination rule, circulant Hermiticity) into
+gauge-theoretic statements rather than free-floating numerology.  We
+close with open questions: whether the $S^5$ Bargmann--Segal lattice
+of the 3D harmonic oscillator admits an analogous SU(3) gauge
+structure, and whether the rank-2 Breit extension of Paper~22 lifts
+the $U(1)$ 1-form picture to a higher-form gauge theory.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+%% I. INTRODUCTION
+%% ========================================================================
+
+\section{Introduction}
+\label{sec:introduction}
+
+The computational framework documented in Papers~0, 7, 14, 16, 18,
+22, and 24 reformulates non-relativistic Coulomb bound-state physics
+as spectral graph theory on a discretization of the unit
+$S^3$~\cite{Paper0,Paper7,Paper14,Paper16,Paper18,Paper22,Paper24}.
+The graph's nodes are quantum-number triples $(n, l, m_l)$, its edges
+are the $L_\pm$ and $T_\pm$ ladder-operator transitions between
+neighboring states, and its graph Laplacian converges to the
+Laplace--Beltrami operator on the unit $S^3$ in the
+continuum limit (Paper~7, eighteen symbolic proofs).
+
+Separately, Paper~2 conjectures that the Hopf fibration
+$S^1 \to S^3 \to S^2$---the same $S^3$ that hosts the electron's
+bound-state manifold---is more than a geometric coincidence.  In the
+Paper~2 reading, $S^3$ is the electron state space, $S^2$ is the
+photon momentum sphere, and $S^1$ is the $U(1)$ gauge
+phase~\cite{Paper2}.  The fine-structure constant is then
+reinterpreted as the cost of projecting $S^3$ onto $S^2$, i.e.\ the
+information absorbed in the fiber.  A combinatorial formula
+\begin{equation}
+K = \pi \left( B + F - \Delta \right)
+\label{eq:K_intro}
+\end{equation}
+reproduces $\alpha^{-1}$ at $8.8 \times 10^{-8}$ with zero free
+parameters and $p$-value $5.2 \times 10^{-9}$
+(Paper~2~\cite{Paper2}).  Seven sprints of structural decomposition
+(Phases 4B--4H) have identified each of $B$, $F$, $\Delta$ as
+spectrally natural objects on distinct corners of the Hopf bundle,
+but the additive combination rule itself remains unexplained.
+
+This paper makes one observation.  The GeoVac Hopf graph is
+simultaneously:
+\begin{enumerate}
+\item \emph{A discretization of $S^3$} (Fock projection; Paper~7).
+\item \emph{A simplicial complex carrying a discrete Hodge
+  decomposition} (Lim~\cite{Lim2020}; Schaub \emph{et
+  al.}~\cite{Schaub2020}).
+\item \emph{A lattice gauge structure} in the Wilson
+  sense~\cite{Wilson1974}, with matter on nodes and a $U(1)$
+  connection implicit on edges through the ladder-operator phases.
+\end{enumerate}
+No single paper in the literature has articulated (1)--(3) as one
+object.  Lattice gauge theory has been formulated on flat hypercubic
+lattices and, separately, on topologically nontrivial manifolds (S\({}^4\) for
+instanton physics~\cite{BergLuscher1981,Luscher1982}, S\({}^3 \times
+\mathbb{R}\) for finite-volume confinement
+studies~\cite{Aharony2004}).  Graph Hodge theory has been applied to
+signal processing and network analysis~\cite{Lim2020,Schaub2020}.
+Conformal Maxwell theory on the conformal boundary of
+AdS$_5$~\cite{EastwoodSinger1985,Maldacena1998} is a separate fourth
+thread.  The communities have not overlapped on the specific case
+where all four threads meet.
+
+We do not claim a new derivation of $\alpha$.  We do claim that the
+Paper~2 conjecture can be placed inside an established mathematical
+framework.  In that framework, $B$ is a Casimir-weighted node-trace
+on the $S^2$ quotient graph; $F$ is a spectral zeta of the infinite
+Fock-degeneracy lattice at the packing exponent; $\Delta$ is a
+boundary-mode count on the squared-Dirac sector.  The $\mathbb{Z}_3$
+circulant structure of the cubic self-consistency equation
+(Paper~2~\cite{Paper2}) becomes a three-fold projection structure on
+the three bundle components.  What remains conjectural is not the
+existence of these quantities---they are computable and have been
+computed in Phases 4B--4G~\cite{Paper2}---but their additive
+combination and its physical interpretation.
+
+\paragraph*{Scope.} This is an observational synthesis paper.  No new
+experimental or computational prediction is derived.  The purpose is
+(i) to document a framework connection that has not been made in
+either the GeoVac papers or the broader literature, (ii) to place the
+conjectural components of Paper~2 inside an established mathematical
+vocabulary, and (iii) to identify open questions (e.g., the $S^5$
+Bargmann--Segal analog, the Breit tensor extension) that become
+natural within the lattice-gauge framing.  The paper is a
+companion to Paper~21's broader synthesis~\cite{Paper21}, focused on
+one specific structural observation.
+
+\paragraph*{What is conjectural and what is sharp.} The
+\emph{mathematical} decomposition of the Hopf graph into
+node-Laplacian, edge-Laplacian, and $S^2$-quotient components is
+sharp: these are exactly computable, exactly described in Sections
+II--III.  The \emph{physical} interpretation of the bundle components
+(electron/photon/gauge) is Paper~2's conjecture, flagged throughout
+as such.  The interpretive gap is deliberate: we do not assert the
+conjecture is correct.  We assert that if it is correct, the
+mathematics already in the literature places it in a specific
+lattice-gauge context.
+
+The remainder of this paper is organized as follows.  Section~II
+surveys graph Hodge theory in the form we need (incidence matrix,
+node/edge Laplacians, discrete Hodge decomposition, Betti numbers).
+Section~III describes the GeoVac Hopf graph and its $S^2$ quotient in
+this language.  Section~IV states the framework observation formally
+and traces Paper~2's $(B, F, \Delta)$ ingredients to corresponding
+spectral invariants.  Section~V discusses what the observation does
+and does not predict.  Section~VI reviews related work and discusses
+why the gap remained.  Section~VII lists open questions.  Section~VIII
+concludes.
+
+%% ========================================================================
+%% II. GRAPH HODGE THEORY: THE TOOLS
+%% ========================================================================
+
+\section{Graph Hodge Theory: The Tools}
+\label{sec:hodge}
+
+This section collects the combinatorial machinery we use in
+Sections~III--IV.  The content is standard; our contribution is the
+identification in Section~III that the GeoVac graph is exactly the
+kind of simplicial 1-complex to which this machinery applies.
+
+\subsection{Incidence matrix and boundary operators}
+
+Let $G = (V, E)$ be an undirected graph with $|V| = N_0$ nodes and
+$|E| = N_1$ edges.  Fix an orientation on each edge (a choice, but
+the Laplacians below are orientation-independent).  The signed
+node-edge incidence matrix $B \in \mathbb{R}^{N_0 \times N_1}$ has
+entries
+\begin{equation}
+B_{iv,\, e} =
+\begin{cases}
++1 & \text{if edge $e$ starts at node $v$},\\
+-1 & \text{if edge $e$ ends at node $v$},\\
+0  & \text{otherwise}.
+\end{cases}
+\label{eq:incidence}
+\end{equation}
+Geometrically, $B$ is the discrete exterior derivative from 0-cochains
+(scalar functions on nodes) to 1-cochains (scalar functions on
+oriented edges), $d_0 = B^{\top}$, and its transpose $B$ is the
+discrete boundary operator $\partial_1$ from 1-chains to 0-chains.
+
+\subsection{Node and edge Laplacians}
+
+The combinatorial Hodge--0 and Hodge--1 Laplacians
+are~\cite{Lim2020,Schaub2020}
+\begin{align}
+L_0 &= B B^{\top} \in \mathbb{R}^{N_0 \times N_0},
+\label{eq:L0}\\
+L_1 &= B^{\top} B \in \mathbb{R}^{N_1 \times N_1}.
+\label{eq:L1}
+\end{align}
+$L_0$ is the familiar node Laplacian $D - A$
+(degree matrix minus adjacency matrix).  $L_1$ is the edge Laplacian,
+acting on functions defined on edges.  If the simplicial complex has
+triangular 2-faces with incidence matrix $B_2$, the full Hodge--1
+Laplacian acquires an upper piece $B_2 B_2^{\top}$; we work with
+triangle-free simplicial 1-complexes throughout this paper, so
+$L_1 = B^{\top} B$ is the complete edge Laplacian.
+
+\subsection{Discrete Hodge decomposition}
+
+The cochain space $\mathbb{R}^{N_1}$ (edge functions) decomposes
+orthogonally:
+\begin{equation}
+\mathbb{R}^{N_1} = \operatorname{im}(d_0) \oplus \ker(L_1).
+\label{eq:hodge_decomp}
+\end{equation}
+The first summand contains \emph{gradient} edge functions,
+$\omega = d_0 f = B^{\top} f$ for some node function $f$---the edge
+function is ``pure gauge'' in the sense that it is a gradient.  The
+second summand, $\ker(L_1)$, contains the \emph{harmonic} 1-cochains:
+edge functions that are not gradients but whose Hodge--1 Laplacian
+vanishes.  By the combinatorial Hodge theorem, the dimension of the
+harmonic subspace equals the first Betti number of the graph:
+\begin{equation}
+\dim \ker(L_1) = \beta_1 = N_1 - N_0 + c,
+\label{eq:betti1}
+\end{equation}
+where $c$ is the number of connected components.  $\beta_1$ counts
+independent cycles: edge functions that circulate without being
+gradients.  These are the combinatorial analog of a non-trivial
+holonomy along a loop, i.e., the analog of a Wilson loop in the
+Wilson formulation of lattice gauge theory.
+
+\subsection{Node versus edge spectra}
+
+The nonzero eigenvalues of $L_0 = B B^{\top}$ and $L_1 = B^{\top} B$
+coincide by the singular-value decomposition: if $B = U \Sigma V^{\top}$
+then $L_0 = U \Sigma^2 U^{\top}$ and $L_1 = V \Sigma^2 V^{\top}$.
+The edge Laplacian therefore contributes no new eigenvalues, only new
+kernel dimensions (the $\beta_1$ harmonic 1-forms beyond the
+$c$ harmonic 0-forms).  This relation, elementary in matrix algebra,
+will matter in Section~IV: the edge Laplacian's \emph{topological}
+content (counting cycles) is distinct from its \emph{spectral}
+content (shared with the node Laplacian).
+
+\subsection{Lattice gauge theory dictionary}
+
+The ingredients of Wilson's~\cite{Wilson1974} lattice gauge theory
+map directly to the graph-Hodge ingredients:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Wilson & Graph Hodge & Role \\
+\midrule
+Site $x$            & Node $v$         & Matter location \\
+Link $(x, x+\hat{\mu})$ & Edge $e$     & Gauge-field location \\
+Link variable $U_e \in G$ & Edge phase $\theta_e \in [0, 2\pi)$ & $U(1)$ connection \\
+Plaquette $P$       & Triangle/cycle   & Curvature / $F_{\mu\nu}$ \\
+Wilson loop $W_C$   & Holonomy $\prod_{e \in C} e^{i\theta_e}$ & Gauge-invariant observable \\
+Plaquette action $\mathrm{Re}\,\mathrm{tr}\,U_P$ & Curvature norm $|F|^2$ & Gauge kinetic term \\
+Gauge transformation & $\theta_e \to \theta_e + (\phi_{t(e)} - \phi_{h(e)})$ & 0-coboundary shift \\
+Matter propagator  & $(L_0 + m^2)^{-1}$ & Covariant Laplacian \\
+Photon propagator  & $(L_1 + m^2)^{-1}$ & Hodge--1 resolvent \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The match is exact at the level of combinatorial data.  The only
+question is whether a given graph carries the physical content that
+makes this dictionary nontrivial.  For a random graph with arbitrary
+$U(1)$ phases, the dictionary is empty: there is no physical
+interpretation of the gauge degrees of freedom.  For the GeoVac Hopf
+graph, the ladder-operator structure provides a canonical assignment
+of edge phases through the angular-momentum and radial transition
+amplitudes.  Section~III makes this explicit.
+
+%% ========================================================================
+%% III. THE GEOVAC HOPF GRAPH
+%% ========================================================================
+
+\section{The GeoVac Hopf Graph}
+\label{sec:hopfgraph}
+
+\subsection{Nodes and edges}
+
+The GeoVac graph at cutoff $n_{\max}$ has nodes labeled by
+$(n, l, m_l)$ with $n = 1, \ldots, n_{\max}$, $l = 0, \ldots, n-1$,
+and $m_l = -l, \ldots, +l$.  The total node count is
+$N_0(n_{\max}) = \sum_{n=1}^{n_{\max}} n^2$.  Edges come in two
+kinds~\cite{Paper7,Paper14}:
+\begin{itemize}
+\item \textbf{Angular} edges connect
+  $(n, l, m_l) \leftrightarrow (n, l, m_l \pm 1)$ at fixed
+  $(n, l)$---these are the $L_\pm$ transitions of the orbital
+  angular-momentum ladder.
+\item \textbf{Radial} edges connect
+  $(n, l, m_l) \leftrightarrow (n', l, m_l)$ where $n' = n \pm 1$
+  (and sometimes, depending on the discretization scheme, with
+  $\Delta l = \pm 1$)---these are the $T_\pm$ hydrogenic radial
+  transitions.
+\end{itemize}
+At $n_{\max} = 3$ the graph has $N_0 = 1 + 4 + 9 = 14$ nodes and
+$N_1 = 13$ edges, with $c = 3$ connected components (s-chain,
+p-block, d-chain).  The first Betti number is
+$\beta_1 = N_1 - N_0 + c = 13 - 14 + 3 = 2$~\cite{Q1B}.  The two
+independent cycles both live in the p-block, where the angular
+$m_l$-ladder and the radial $n$-transition together form square-like
+loops.
+
+\subsection{The Hopf quotient: $S^3 \to S^2$}
+
+The Hopf fibration $S^1 \to S^3 \to S^2$ projects the $S^3$ onto the
+base $S^2 \cong \mathbb{CP}^1$, collapsing each $S^1$ fiber to a
+point.  On the GeoVac graph, the natural discrete implementation of
+this quotient collapses each magnetic fiber $\{(n, l, m_l) :
+m_l = -l, \ldots, +l\}$ at fixed $(n, l)$ to a single sector label
+$(n, l)$.  The Hopf base is then a graph on $(n, l)$ sectors.
+
+At $n_{\max} = 3$, the base graph has 6 sectors,
+\begin{equation}
+\{(1,0),\, (2,0),\, (2,1),\, (3,0),\, (3,1),\, (3,2)\},
+\label{eq:s2_sectors}
+\end{equation}
+with sector weights $(2l+1) = 1, 1, 3, 1, 3, 5$ (the fiber
+dimensions).  Inter-sector edges of the base graph count the number
+of $S^3$ edges crossing between sectors; intra-sector angular edges
+collapse into ``fiber'' structure that does not appear in the base.
+Track~$\alpha$-D~\cite{Paper2} computed this base graph explicitly:
+its Laplacian has eigenvalues $\{0, 0, 0, 1, 3, 6\}$ (three zero
+modes reflecting the three disconnected components inherited from
+the $S^3$ graph).
+
+\subsection{$U(1)$ phase on edges}
+
+The $L_\pm$ and $T_\pm$ ladder operators act on the spherical
+harmonic basis with computable matrix elements.  For angular edges,
+\begin{equation}
+\braket{n, l, m_l + 1 | L_+ | n, l, m_l}
+= \hbar \sqrt{l(l+1) - m_l(m_l+1)} \, e^{i\phi_{L_+}}.
+\label{eq:Lplus}
+\end{equation}
+For radial edges, the amplitudes are the hydrogenic Clebsch--Gordan
+coefficients times a phase.  Under a global $U(1)$ rotation of the
+wavefunctions $\psi_{n,l,m_l} \to e^{i\chi}\psi_{n,l,m_l}$, the edge
+amplitudes pick up no phase; under a node-dependent
+$\psi \to e^{i\chi_v}\psi$, the edge amplitude for $e = (v, v')$ picks
+up the phase $e^{i(\chi_{v'} - \chi_v)}$---this is exactly the
+$U(1)$ gauge transformation in the Wilson dictionary of Section~II.E.
+
+The GeoVac graph is therefore naturally equipped with a $U(1)$ bundle:
+each edge carries a complex phase, and the phases transform
+covariantly under node-local $U(1)$ redefinitions of the wavefunctions.
+The curvature of this bundle is the holonomy around each closed
+cycle.  At $n_{\max} = 3$, $\beta_1 = 2$ cycles (both in the
+p-block) carry nontrivial holonomy.
+
+\subsection{Node and edge Laplacians of the GeoVac graph}
+
+With the incidence matrix $B$ as in Eq.~(\ref{eq:incidence}), the
+node Laplacian $L_0 = B B^{\top}$ is the one whose continuum limit
+is $-\Delta_{S^3}$ (Paper~7).  The edge Laplacian
+$L_1 = B^{\top} B$ has explicit spectrum at $n_{\max} = 3$
+computed in Track Q1--B~\cite{Q1B}:
+\begin{equation}
+\mathrm{spec}(L_1) = \{0^{(2)},\, \tfrac{3-\sqrt{5}}{2},\, 1^{(2)},\,
+  \tfrac{5-\sqrt{5}}{2},\, 2,\, \tfrac{3+\sqrt{5}}{2},\, 3^{(3)},\,
+  \tfrac{5+\sqrt{5}}{2},\, 5\}.
+\label{eq:L1_spectrum}
+\end{equation}
+The two zero modes confirm $\beta_1 = 2$.  The golden-ratio
+eigenvalues come from the path graph $P_5$ of the d-chain; the
+eigenvalues $\{1, 3, 3, 5\}$ come from the p-block (which contains
+both cycles).  The characteristic polynomial factors completely over
+$\mathbb{Q}(\sqrt{5})$: all edge-Laplacian spectral invariants are
+algebraic numbers with denominator dividing $2^k$ times a power of
+$\sqrt{5}$.
+
+Observation~1 follows directly:
+
+\begin{observation}[Edge Laplacian is algebraic on a finite
+    Hopf graph]
+\label{obs:edge_algebraic}
+The edge Laplacian $L_1 = B^{\top} B$ of the GeoVac graph at any
+finite $n_{\max}$ has integer-valued entries, hence algebraic
+eigenvalues.  No transcendental spectral invariant can live on the
+edge Laplacian of a finite Hopf graph.  Transcendentals enter only
+through spectral zeta functions in the continuum limit
+($n_{\max} \to \infty$), consistent with the Phase~4C--4D finding
+that $F = \pi^2/6$ is not accessible from any finite-graph
+Hopf-fiber trace~\cite{Paper2}.
+\end{observation}
+
+\subsection{The matter and gauge propagators}
+
+Under the Paper~2 interpretation:
+\begin{itemize}
+\item $L_0 = B B^{\top}$ is the matter propagator's inverse: bound
+  electron states propagate by the $S^3$ Laplace--Beltrami operator
+  in the continuum.
+\item $L_1 = B^{\top} B$ is the gauge-sector propagator's inverse:
+  the $U(1)$ photon-like edge modes, in temporal gauge, propagate by
+  the discrete Hodge--1 Laplacian.  The kernel dimension
+  $\beta_1$ counts independent Wilson-loop classes.
+\end{itemize}
+This is the observational claim of the paper.  We now formalize it.
+
+%% ========================================================================
+%% IV. THE FRAMEWORK OBSERVATION
+%% ========================================================================
+
+\section{The Framework Observation, Formalized}
+\label{sec:framework}
+
+\begin{proposition}[Lattice gauge structure of the GeoVac graph]
+\label{prop:gauge_structure}
+Let $G$ be the GeoVac graph at cutoff $n_{\max}$, with nodes labeled
+by $(n, l, m_l)$, edges labeled by angular and radial ladder-operator
+transitions, and signed incidence matrix $B$.  Then:
+\begin{enumerate}
+\item $G$ is a triangle-free simplicial 1-complex, so its
+  combinatorial Hodge Laplacians are $L_0 = B B^{\top}$ and
+  $L_1 = B^{\top} B$.
+\item The node Laplacian $L_0$ converges to the Laplace--Beltrami
+  operator $-\Delta_{S^3}$ in the continuum limit
+  (Paper~7~\cite{Paper7}).
+\item The edge Laplacian $L_1$ has kernel dimension
+  $\beta_1(G) = N_1 - N_0 + c$; these harmonic 1-forms are the
+  discrete analog of topologically nontrivial $U(1)$ connections.
+\item The Hopf quotient (collapsing $m_l$-fibers) yields a
+  sub-graph $G^{S^2}$ on $(n, l)$ sectors, with Laplacian spectrum
+  $\{0, 0, 0, 1, 3, 6\}$ at $n_{\max} = 3$ (Track
+  $\alpha$-D~\cite{Paper2}).
+\item Natural $U(1)$ phases on edges arise from the
+  ladder-operator amplitudes; a node-local redefinition
+  $\psi_v \to e^{i\chi_v} \psi_v$ acts as a gauge transformation in
+  the Wilson sense on these phases.
+\end{enumerate}
+\end{proposition}
+
+This proposition collects facts already scattered across
+Papers~0, 2, 7, 14, and the Phase~4B Track $\alpha$-D data set.  The
+new content is the unified \emph{reading} of those facts.  The reading
+is not a new computational claim; it is a dictionary that places the
+GeoVac graph in the Wilson--Hodge frame.
+
+\subsection{Where Paper~2's $(B, F, \Delta)$ live in this frame}
+
+The three structural ingredients of Paper~2's conjectural combination
+rule $K = \pi(B + F - \Delta)$ have, by the Phase~4B--4H sprint
+program, been localized on distinct components of the Hopf bundle.
+In the present framework, the localizations acquire gauge-theoretic
+labels.
+
+\paragraph*{$B = 42$: Casimir-weighted node-trace on the $S^2$
+quotient.}  The Phase~4B track $\alpha$-D finding~\cite{Paper2} is
+that
+\begin{equation}
+B(n_{\max}) = \sum_{n=1}^{n_{\max}} \sum_{l=0}^{n-1}
+  (2l+1)\,l(l+1)
+\label{eq:B_casimir}
+\end{equation}
+is the trace of the orbital-angular-momentum Casimir $\hat{L}^2$,
+weighted by the fiber dimension $2l+1$, summed over the sectors of
+$G^{S^2}$.  In lattice-gauge language, $B$ is a \emph{matter
+operator expectation value on the $S^2$ base}: the photon propagates
+on the sectors (the $(n, l)$ labels), and the Casimir
+$\hat{L}^2$ is a gauge-invariant operator diagonal in this basis.
+$B = 42$ at $n_{\max} = 3$ is the value of this operator summed over
+the base nodes, weighted by their $U(1)$ fiber dimensions.
+
+\paragraph*{$F = \pi^2 / 6$: Dirichlet zeta of the infinite
+Fock-degeneracy lattice.}  The Phase~4F Track $\alpha$-J
+result~\cite{Paper2} is that
+\begin{equation}
+F = \sum_{n=1}^{\infty} \frac{n^2}{n^4}
+  = \zeta_R(2) = \frac{\pi^2}{6}.
+\label{eq:F_zeta}
+\end{equation}
+The weight $g_n = n^2$ is the Fock degeneracy of the $n$-th $S^3$
+shell; the exponent $s = 4$ is the packing exponent
+$d_{\max} = \dim(\mathbb{R}^4)$ from Paper~0.  This is not a
+finite-graph spectrum: it is the analytic continuation of a graph
+spectral sum to the full infinite Hopf lattice.  In gauge-theoretic
+language, $F$ is a \emph{regularized gauge-field partition function}
+on the infinite base: a spectral zeta of the photon-sector degrees
+of freedom summed over all shells.
+
+\paragraph*{$\Delta = 1/40$: Dirac-mode boundary count.} The Phase~4H
+Track SM-D result~\cite{Paper2} is that
+\begin{equation}
+\Delta^{-1} = g_3^{\mathrm{Dirac}}(S^3)
+  = 2(n+1)(n+2)\bigg|_{n=3} = 40.
+\label{eq:Delta_dirac}
+\end{equation}
+This is the single-chirality Dirac mode count of the third
+Camporesi--Higuchi eigenspace on the unit $S^3$.  In
+lattice-gauge-coupled-to-matter language, $\Delta$ is a
+\emph{boundary-mode correction} counting the charged-spinor states at
+the truncation edge.  Its entry with a minus sign in the combination
+$K = \pi(B + F - \Delta)$ is consistent (under the Paper~2 reading)
+with a vacuum-polarization correction that reduces, rather than
+enhances, the effective coupling at the cutoff.
+
+\subsection{What the framework observation claims}
+
+\begin{observation}[Framework observation]
+\label{obs:framework}
+Under the Paper~2 conjecture identifying $S^1 \to S^3 \to S^2$ with
+(gauge phase)--(electron states)--(photon momenta), the Paper~2
+combination rule $K = \pi(B + F - \Delta)$ is an additive combination
+of (i)~a finite matter-operator trace on the $S^2$ base, (ii)~an
+infinite gauge-field spectral zeta on the Fock lattice, and (iii)~a
+boundary-mode count on the charged-spinor spectrum.  All three
+quantities are intrinsic spectral invariants of the discrete
+lattice-gauge structure of the Hopf graph.
+\end{observation}
+
+\begin{observation}[What the framework observation does \emph{not}
+claim]
+\label{obs:not_claim}
+The framework observation does not derive the additive combination
+rule itself.  It does not explain why the three invariants combine
+with a common prefactor $\pi$, nor why $F$ enters with a plus sign
+and $\Delta$ with a minus.  The combination rule remains an
+empirical numerical match at $8.8 \times 10^{-8}$, with $p$-value
+$5.2 \times 10^{-9}$ against an exhaustive combinatorial search
+(Paper~2)~\cite{Paper2}, and its status as conjecture is unchanged.
+\end{observation}
+
+\subsection{Circulant structure reread}
+
+Paper~2 shows that the cubic self-consistency equation
+$\alpha^3 - K\alpha + 1 = 0$ is the characteristic polynomial of a
+traceless $\mathbb{Z}_3$-symmetric circulant
+matrix~\cite{Paper2}.  The $\mathbb{Z}_3$ action
+permutes three abstract coordinates; in Paper~2's interpretation,
+these are $(B, F, \Delta)$ or the three Hopf-bundle components.  The
+$U(1)$ gauge structure forces Hermiticity of the circulant, which in
+turn forces the specific product relation $bc = K/3$ between
+off-diagonal entries.
+
+In the present framework, the $\mathbb{Z}_3$ symmetry is the cyclic
+permutation of the three distinct \emph{tiers} identified in
+Section~IV.A: a finite matter trace, an infinite gauge zeta, and a
+boundary Dirac mode count.  The Hermiticity arises from the
+compatibility of the $U(1)$ gauge structure across the three tiers.
+This is the same observation as Paper~2, rewritten in
+lattice-gauge language.  It does not sharpen the conjecture; it does
+label its components with established gauge-theoretic names.
+
+%% ========================================================================
+%% V. WHAT THIS PREDICTS AND DOES NOT PREDICT
+%% ========================================================================
+
+\section{What This Predicts, and What It Does Not}
+\label{sec:predictions}
+
+\subsection{What this does \emph{not} produce}
+
+This paper does \emph{not}:
+\begin{itemize}
+\item Derive the fine-structure constant $\alpha$ from first
+  principles.  Paper~2 is, and remains, a conjecture.  The present
+  paper shifts the conjecture into gauge-theoretic language without
+  removing any of its undetermined inputs.
+\item Prove the combination rule $K = \pi(B + F - \Delta)$.  Phases
+  4B--4H eliminated nine specific derivation mechanisms; the
+  additive rule remains a numerical coincidence at $p = 5.2 \times
+  10^{-9}$~\cite{Paper2}.
+\item Produce a continuum limit in which the edge Laplacian
+  $L_1$ of the GeoVac graph converges to the Hodge--1 Laplacian on
+  the unit $S^3$.  Such a convergence is a mathematically
+  well-posed but computationally nontrivial question; at present, we
+  have only the finite-$n_{\max}$ edge-Laplacian spectrum
+  (Section~III.D).
+\item Give the photon dynamical content.  The edge Laplacian is a
+  combinatorial object; no dispersion relation, Lorentz structure,
+  or QED vertex emerges from it alone.
+\end{itemize}
+
+\subsection{What the framework observation does make available}
+
+What the observation does provide is a set of \emph{natural next
+computations} that become well posed in the lattice-gauge frame but
+would have been ad hoc before:
+
+\paragraph*{Continuum-limit edge-Laplacian convergence.} If the
+GeoVac graph node Laplacian $L_0$ converges to $-\Delta_{S^3}$ in
+the continuum (Paper~7), does $L_1$ converge to the
+Hodge--1 Laplacian on $S^3$?  The continuous Hodge--1 spectrum on
+$S^3$ is known exactly: eigenvalues $n(n+2)$ with degeneracy
+$2n(n+2)$, $n \geq 1$, and zero $\beta_1$
+(Ikeda--Taniguchi~\cite{IkedaTaniguchi1978}).  The finite-$n_{\max}$
+graph has $\beta_1 = 2$ at $n_{\max} = 3$, $\beta_1 = ?$ at higher
+$n_{\max}$ (monotone or asymptotic behavior computable).  If
+$\beta_1 / N_1 \to 0$ and the nonzero spectrum converges to
+$n(n+2)$, we have a discretization of the Hodge--1 structure on
+$S^3$ compatible with the Hodge--0 convergence of Paper~7.
+
+\paragraph*{Higher Hopf bundles.} The $S^5$ Bargmann--Segal lattice
+of Paper~24~\cite{Paper24} is built on the Hardy space
+$\mathcal{H}^2(S^5)$ of the holomorphic SU(3) $(N, 0)$
+representations.  $S^5 \to \mathbb{CP}^2$ is the next complex Hopf
+fibration after $S^3 \to S^2 = \mathbb{CP}^1$.  Does the
+Bargmann--Segal graph carry an analogous SU(3) non-abelian gauge
+structure?  Candidate check: the SU(3) Casimir values on the
+$(N, 0)$ irreps, weighted by fiber dimensions and summed under an
+analogous selection principle, produce a non-abelian analog of
+$B = 42$.  Paper~24's HO rigidity theorem~\cite{Paper24} already
+rules out calibration-$\pi$ content on the $S^5$ graph, consistent
+with the expectation that a non-abelian SU(3) gauge-like structure
+would give a structurally different (likely pure-rational)
+combination rule, rather than an $\alpha$-like transcendental.
+
+\paragraph*{Rank-2 Breit extension.} Paper~22's Sprint 2 extension
+to the rank-2 Breit interaction opens a second family of edges
+carrying rank-2 tensor content~\cite{Paper22}.  In the Hodge
+vocabulary, this is a 2-cochain structure built on top of the
+1-cochain $U(1)$ connection.  A natural question: does the combined
+1-form + 2-form simplicial structure carry a higher-form gauge
+theory (e.g., a 2-form $B$-field of the kind familiar in string
+compactifications)?  This is speculative; we flag it only to point
+out that the lattice-gauge frame opens a coherent question where
+previously there was just an observation about integral sparsity.
+
+\paragraph*{Paper~2 tests independent of $\alpha$.} If the Paper~2
+interpretation holds, the $U(1)$-Hopf structure of the GeoVac graph
+should show up in observables beyond $\alpha$.  Candidates within
+the GeoVac pipeline: (i)~systematic relations between the spin-orbit
+splittings computed in Tier~2 (Paper~14 Sec.~V~\cite{Paper14}) and
+the edge-Laplacian structure of the spinor-bundle graph of
+Paper~18 Sec.~IV~\cite{Paper18}; (ii)~the rank-2 Breit tensor
+contribution to ERI density (Paper~22 Sprint 2
+extension~\cite{Paper22}) interpreted as a 2-form contribution to
+the gauge-sector Hamiltonian.  These are testable against the
+existing GeoVac codebase and give $\alpha$-independent pressure on
+the Paper~2 interpretation.  We leave the tests to future sprints.
+
+%% ========================================================================
+%% VI. RELATED WORK
+%% ========================================================================
+
+\section{Related Work}
+\label{sec:relatedwork}
+
+\subsection{Lattice gauge theory on curved manifolds}
+
+Wilson~\cite{Wilson1974} formulated lattice gauge theory on flat
+hypercubic lattices in Euclidean $\mathbb{R}^4$, with matter on sites
+and gauge fields on links.  Luscher~\cite{Luscher1982} developed the
+topology of lattice gauge fields on discretized $S^4$, with
+continuity constraints ensuring a well-defined integer topological
+charge; Berg and Luscher~\cite{BergLuscher1981} used $S^4$ lattices
+for instanton studies.  These are \emph{compactification} strategies,
+not claims that $S^3$ or $S^4$ is a \emph{natural} geometry for the
+physics.  Aharony \emph{et al.}~\cite{Aharony2004} formulated large-$N$
+Yang--Mills on $S^3 \times \mathbb{R}$ as a probe of the
+Hagedorn/deconfinement phase transition, again as a
+finite-volume/infrared-regulator choice rather than as a natural
+arena.  The category distinction matters: these works treat the
+manifold as a regulator; the GeoVac framework treats it as the
+physical arena of the electron bound states (via Fock's
+projection~\cite{Fock1935}), \emph{and} as a geometric regulator of
+the gauge degrees of freedom.
+
+Witten~\cite{Witten1989} formulated Chern--Simons theory on $S^3$ and
+computed the Jones polynomial of knots from its partition function.
+This is a \emph{topological} gauge theory in three spacetime
+dimensions without local dynamical degrees of freedom.  The GeoVac
+lattice-gauge reading would be a dynamical 3+1-dimensional theory
+(matter + photon propagation); the shared vocabulary of
+``connections on $S^3$'' is suggestive but not structurally identical.
+
+Recent work (post-2015) on simplicial lattice gauge theory
+(e.g., work on tensor-network formulations and categorical
+symmetries) has developed abstract combinatorial gauge theories on
+simplicial complexes, but without the specific physical motivation
+(Fock projection) that the GeoVac graph carries.
+
+\subsection{Graph Hodge theory}
+
+Lim~\cite{Lim2020} and Schaub \emph{et al.}~\cite{Schaub2020}
+articulated the combinatorial Hodge theory of graphs and simplicial
+complexes in modern form, motivated by applications in signal
+processing, ranking, and random walks.  The mathematical framework is
+standard (going back to Eckmann in the 1940s and to algebraic
+topology generally), but its packaging in a form usable by
+engineers and data scientists is recent.  The Hodge Laplacian
+$L_1 = B^{\top} B + B_2 B_2^{\top}$, its kernel as $\beta_1$, and
+the exact/coexact/harmonic decomposition of edge functions are all
+standard content of these surveys.  The gap is that these surveys do
+not connect to lattice gauge theory or to quantum field theory on
+graphs; the communities are disjoint.
+
+\subsection{Conformal Maxwell theory and the AdS/CFT boundary}
+
+The conformal invariance of source-free Maxwell theory in 4D is a
+classical result of Cunningham~\cite{Cunningham1909} and
+Bateman~\cite{Bateman1910}.  Under conformal compactification of
+Minkowski space, the conformal boundary is $S^3 \times \mathbb{R}$,
+which is also the conformal boundary of AdS$_5$
+(Maldacena~\cite{Maldacena1998}).  Eastwood and
+Singer~\cite{EastwoodSinger1985} developed a conformally invariant
+Maxwell gauge on this boundary; the photon modes expand in vector
+spherical harmonics on $S^3$.  The continuous Hodge--1 spectrum on
+$S^3$ (Ikeda--Taniguchi~\cite{IkedaTaniguchi1978}) is the relevant
+continuum limit.
+
+Under the Paper~2 interpretation, the GeoVac $S^3$ (from Fock's
+momentum-space projection of the electron) and the
+conformal-compactification $S^3$ (from the conformal boundary of
+AdS$_5$) are \emph{distinct} manifolds that happen to carry the same
+topology.  Whether they can be unified into a single mathematical
+object---so that one $S^3$ carries both matter and gauge content in
+a coherent way---is an open foundational question; it is not
+resolved by the present observation.  The present observation is
+more modest: the GeoVac graph, as a finite combinatorial object,
+carries both matter and gauge content simultaneously via its
+node-Laplacian / edge-Laplacian structure, regardless of how the
+continuum limit is ultimately interpreted.
+
+\subsection{Why the gap remained}
+
+Three communities would have had to overlap for the
+framework observation to be routine:
+\begin{enumerate}
+\item \emph{Lattice gauge theorists}, who know Wilson's formulation
+  but work on flat hypercubic lattices, not on Fock-projected
+  momentum-space $S^3$ lattices.
+\item \emph{Graph Hodge theorists}, who know $L_0$/$L_1$ but work
+  on engineering applications (ranking, signal processing), not on
+  physical lattice gauge theory.
+\item \emph{Atomic/quantum chemistry theorists}, who know Fock's
+  1935 projection but treat it as a solved analytical curiosity, not
+  as a computational framework underlying a discrete gauge theory.
+\end{enumerate}
+The GeoVac project arrived at (3) for purely computational reasons
+(sparse qubit Hamiltonians from angular-momentum selection rules;
+see Paper~14~\cite{Paper14}).  The overlap with (1) and (2) was
+invisible from inside any single community.  Recognizing it from
+within the GeoVac pipeline required the Paper~2 conjecture, which in
+turn required the Phase~4B--4H structural decomposition to
+identify the three spectral homes of $B$, $F$, $\Delta$.  We flag
+the gap to place future GeoVac work at the intersection
+deliberately, rather than leaving the connection implicit.
+
+%% ========================================================================
+%% VII. OPEN QUESTIONS
+%% ========================================================================
+
+\section{Open Questions}
+\label{sec:open}
+
+\subsection{SU(3) gauge structure on the Bargmann--Segal $S^5$ lattice}
+
+Paper~24~\cite{Paper24} constructs the Bargmann--Segal lattice
+of the 3D isotropic harmonic oscillator on the Hardy space
+$\mathcal{H}^2(S^5)$ of SU(3) $(N, 0)$ symmetric representations.
+Its nodes are labeled $(N, l, m_l)$, its edges are the
+$\Delta N = \pm 1$, $\Delta l = \pm 1$ dipole transitions.  The
+underlying bundle is $S^5 \to \mathbb{CP}^2$, the next complex Hopf
+fibration.
+
+If the present framework observation generalizes, the Bargmann--Segal
+graph carries an SU(3) non-abelian gauge structure: nodes carry
+matter, edges carry SU(3)-valued connections, and the $\mathbb{CP}^2$
+quotient is the base of the non-abelian bundle.  A natural first
+check is whether an analog of the $B = 42$ Casimir-weighted trace
+exists with the SU(3) quadratic Casimir replacing the SO(3) orbital
+Casimir, and whether an analog of the selection principle
+$B/N = \dim = 5$ holds at any natural cutoff.  Paper~24's HO rigidity
+theorem~\cite{Paper24} already establishes that the Bargmann--Segal
+graph is bit-exactly $\pi$-free in exact rational arithmetic at every
+$N_{\max}$; this is consistent with an SU(3) gauge-like structure
+producing only rational invariants at finite $N_{\max}$, with
+transcendental content (if any) entering only in the infinite limit,
+as it does for the $S^3$ Hopf case via the infinite Dirichlet series
+of Paper~4F~\cite{Paper2}.
+
+Whether the non-abelian case produces a physical coupling constant
+(e.g., QCD $\alpha_s$ at some reference scale) is a highly speculative
+question that we flag but do not investigate.  The Phase~4H negative
+result~\cite{Paper2} showed that the naive generalization of
+Paper~2's selection principle to higher Hopf bundles does not produce
+the Standard Model couplings.  Any non-abelian extension must avoid
+reproducing that known-negative path.
+
+\subsection{Rank-2 Breit tensor: a 2-form gauge structure?}
+
+Paper~22's Sprint 2 extension treats the rank-2 Breit interaction as
+a genuinely new tensor sector of the GeoVac graph, with sparsity
+density depending on $l_{\max}$ but structurally distinct from the
+rank-0 Coulomb sector~\cite{Paper22}.  In the present framework, the
+rank-0 Coulomb edges are 1-cochains (a $U(1)$ connection on nodes);
+the rank-2 Breit edges would be 2-cochains (a 2-form on faces or
+pairs of edges).
+
+A 2-cochain sector on the GeoVac graph would correspond (in the
+continuum) to a $B$-field of the kind familiar from string
+compactifications, or to the 2-form part of a higher-form gauge
+theory.  Its combinatorial Laplacian is $L_2 = B_2^{\top} B_2 +
+B_3 B_3^{\top}$, if triangle and tetrahedral faces are included.
+Whether the Breit tensor structure closes into a well-defined
+higher-form gauge theory on the GeoVac graph---or whether it is
+better viewed as a nonlinear coupling on the $U(1)$ sector---is an
+open question.  The Sprint 2 computational data (ERI densities at
+rank-2 $l_{\max}$ values) are the input to such a test; the test
+itself has not been performed.
+
+\subsection{Observables beyond $\alpha$}
+
+The Paper~2 interpretation, if correct, should have implications
+beyond the fine-structure constant.  Candidate observables to test:
+\begin{itemize}
+\item \emph{Magnetic moment anomalies.}  The $U(1)$ Hopf structure
+  places the $g$-factor in a specific combinatorial context (via
+  the spinor-bundle analog of the $U(1)$ matter-gauge coupling).
+  Paper~14 Tier~2~\cite{Paper14} computes relativistic spin-orbit
+  splittings; whether these decompose into Hopf-base and
+  Hopf-fiber contributions with the same $\mathbb{Z}_3$ circulant
+  structure as Paper~2 is computable.
+\item \emph{$\alpha$-dependence at finite $n_{\max}$.}  If
+  $K = \pi(B + F - \Delta)$ is indeed the lattice-gauge invariant
+  producing $\alpha^{-1}$, then at $n_{\max} \neq 3$ the truncated
+  $B(n_{\max})$ and $\Delta(n_{\max})$ differ and give different
+  ``$\alpha$'' values.  The selection principle $B/N = 3$
+  uniquely at $n_{\max} = 3$ says that only this cutoff reproduces
+  the physical $\alpha$.  This is a prediction: no other
+  $n_{\max}$ produces a recognizable physical coupling.  Paper~2's
+  negative result on higher Hopf bundles is consistent with this
+  selection criterion; a systematic $n_{\max}$ scan is the obvious
+  next test.
+\item \emph{Sharpness of the combination rule.}  Under what class of
+  modifications to $G$ (e.g., edge reweightings, adding or removing
+  specific transitions) does $K$ remain within $10^{-7}$ of
+  $\alpha^{-1}$?  A combinatorial robustness check would distinguish
+  a genuine spectral invariant (stable under small perturbations)
+  from a fine-tuned numerical coincidence (collapsing under any
+  perturbation).
+\end{itemize}
+None of these tests has been performed.  The present paper's
+contribution is to identify them as well-posed within the framework,
+not to execute them.
+
+%% ========================================================================
+%% VIII. CONCLUSION
+%% ========================================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The GeoVac framework builds a discrete graph on the unit $S^3$
+whose node Laplacian converges to the Laplace--Beltrami operator on
+$S^3$ in the continuum limit.  Section~III of this paper made the
+observation---previously implicit in the Paper~2 conjecture but never
+stated as its own claim---that the same graph, together with its
+signed incidence matrix $B$, carries all the combinatorial
+ingredients of a lattice gauge theory.  The node Laplacian
+$L_0 = B B^{\top}$ is the matter propagator; the edge Laplacian
+$L_1 = B^{\top} B$ is the discrete Hodge--1 Laplacian; the Hopf
+quotient collapsing $m_l$-fibers produces the $S^2$ base graph on
+which gauge-neutral propagation lives.
+
+Under the Paper~2 conjectural interpretation, the three components
+of the Hopf bundle acquire physical labels: $S^3$ as electron bound
+states, $S^1$ as $U(1)$ gauge phase, $S^2$ as photon momentum sphere.
+The Paper~2 combination rule $K = \pi(B + F - \Delta)$ becomes a
+cross-sector spectral invariant of the lattice-gauge structure:
+$B$ is a Casimir-weighted matter trace on the $S^2$ base, $F$ is a
+spectral zeta of the photon-sector modes in the infinite-shell
+limit, and $\Delta$ is a Dirac-mode boundary count.  The additive
+rule itself remains conjectural, just as in Paper~2; what changes
+is the vocabulary available to talk about it.
+
+What is sharp in this paper is the mathematics: the GeoVac graph
+\emph{is} a discrete Hodge 1-complex, \emph{is} a Wilson lattice
+gauge structure under the natural $U(1)$ edge-phase assignment, and
+\emph{has} an exactly computable $S^2$ quotient that is Paper~2's
+base graph.  What is conjectural is the physical interpretation of
+the bundle components and the additive combination rule.  The
+separation is deliberate and honest: the mathematical decomposition
+needs no further justification, while the physical reading remains
+Paper~2's conjecture.
+
+The framework observation does not resolve the open problem of why
+$K = \pi(B + F - \Delta)$ reproduces $\alpha^{-1}$.  It does locate
+the three quantities in a single mathematical context, and it does
+point to natural next questions: continuum-limit convergence of the
+edge Laplacian, non-abelian generalizations on the Bargmann--Segal
+$S^5$ lattice, higher-form analogs via the Breit rank-2 tensor, and
+independent observables beyond $\alpha$.  These are the tractable
+research directions that the observational synthesis makes
+well-posed.
+
+The broader takeaway is that the GeoVac project arrived at
+lattice gauge structure without intending to: the requirements of a
+sparse, $\pi$-free, quantum-number-labeled graph for computational
+quantum chemistry happened to coincide, at the Hopf base of $S^3$,
+with the incidence structure that lattice gauge theorists know as a
+Wilson lattice with a $U(1)$ connection.  That the same graph
+carries both content is either a coincidence of independent
+constructions or a signal that the physical arena of Coulomb
+bound-state quantum mechanics is, in its discrete form, exactly a
+lattice gauge theory of matter coupled to $U(1)$ gauge fields on
+the Hopf base.  The present paper does not adjudicate between these
+two readings.  It documents that both are consistent with the
+established mathematics, and it points to the follow-up computations
+that could distinguish them.
+
+%% ========================================================================
+%% ACKNOWLEDGMENTS
+%% ========================================================================
+
+\begin{acknowledgments}
+This paper was developed using an AI-augmented agentic workflow, with
+implementation and documentation drafting performed collaboratively
+with Anthropic's Claude.  The framework observation benefited from
+the Phase~4B--4I alpha-sprint series, which systematically identified
+the three spectral homes of the $(B, F, \Delta)$ ingredients over
+approximately nine months of sustained computational decomposition.
+\end{acknowledgments}
+
+%% ========================================================================
+%% REFERENCES
+%% ========================================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{Fock1935}
+V.~Fock, Z.\ Phys.\ \textbf{98}, 145 (1935).
+
+\bibitem{Wilson1974}
+K.~G.~Wilson, Phys.\ Rev.\ D \textbf{10}, 2445 (1974).
+
+\bibitem{Luscher1982}
+M.~L\"uscher, Commun.\ Math.\ Phys.\ \textbf{85}, 39 (1982).
+
+\bibitem{BergLuscher1981}
+B.~Berg and M.~L\"uscher, Nucl.\ Phys.\ B \textbf{190}, 412 (1981).
+
+\bibitem{Aharony2004}
+O.~Aharony, J.~Marsano, S.~Minwalla, K.~Papadodimas, and M.~Van
+Raamsdonk, Adv.\ Theor.\ Math.\ Phys.\ \textbf{8}, 603 (2004).
+
+\bibitem{Witten1989}
+E.~Witten, Commun.\ Math.\ Phys.\ \textbf{121}, 351 (1989).
+
+\bibitem{Maldacena1998}
+J.~M.~Maldacena, Adv.\ Theor.\ Math.\ Phys.\ \textbf{2}, 231 (1998).
+
+\bibitem{Cunningham1909}
+E.~Cunningham, Proc.\ London Math.\ Soc.\ \textbf{8}, 77 (1909).
+
+\bibitem{Bateman1910}
+H.~Bateman, Proc.\ London Math.\ Soc.\ \textbf{8}, 223 (1910).
+
+\bibitem{EastwoodSinger1985}
+M.~Eastwood and M.~Singer, Phys.\ Lett.\ A \textbf{107}, 73 (1985).
+
+\bibitem{IkedaTaniguchi1978}
+A.~Ikeda and Y.~Taniguchi, Osaka J.\ Math.\ \textbf{15}, 515 (1978).
+
+\bibitem{Lim2020}
+L.-H.~Lim, SIAM Review \textbf{62}, 685 (2020).
+
+\bibitem{Schaub2020}
+M.~T.~Schaub, A.~R.~Benson, P.~Horn, G.~Lippner, and A.~Jadbabaie,
+SIAM Review \textbf{62}, 353 (2020).
+
+\bibitem{Paper0}
+J.~Loutey, ``Geometric packing and the origin of quantum numbers,''
+GeoVac Paper~0 (2025).
+
+\bibitem{Paper2}
+J.~Loutey, ``The fine structure constant from Hopf bundle spectral
+invariants,'' GeoVac Paper~2 (2025).
+
+\bibitem{Paper7}
+J.~Loutey, ``The dimensionless vacuum: Schr\"odinger recovery from the
+unit $S^3$,'' GeoVac Paper~7 (2025).
+
+\bibitem{Paper14}
+J.~Loutey, ``Structurally sparse qubit Hamiltonians from natural
+geometry,'' GeoVac Paper~14 (2026).
+
+\bibitem{Paper18}
+J.~Loutey, ``Spectral-geometric exchange constants: Projecting
+discrete spectra onto continuous manifolds,'' GeoVac Paper~18 (2026).
+
+\bibitem{Paper21}
+J.~Loutey, ``The geometric vacuum: Quantum structure from compact
+manifold topology,'' GeoVac Paper~21 (2026).
+
+\bibitem{Paper22}
+J.~Loutey, ``Potential-independent angular sparsity theorem,''
+GeoVac Paper~22 (2026).
+
+\bibitem{Paper24}
+J.~Loutey, ``The Bargmann--Segal lattice: $\pi$-free discretization
+of the 3D harmonic oscillator on $S^5$,'' GeoVac Paper~24 (2026).
+
+\bibitem{Q1B}
+GeoVac Track Q1-B, ``Edge Laplacian of the GeoVac $S^3$ graph at
+$n_{\max} = 3$,'' internal memo, April 2026.
+
+\end{thebibliography}
+
+\end{document}

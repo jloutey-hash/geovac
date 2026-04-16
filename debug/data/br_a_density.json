@@ -1,0 +1,263 @@
+{
+  "task": "Track BR-A: Breit-Pauli angular sparsity extension",
+  "operator": "Breit-Pauli (SS_tensor + SS_scalar + SOO)",
+  "basis": "jj-coupled spinor orbitals (kappa, m_j)",
+  "arithmetic": "exact sympy Rational + wigner_3j",
+  "convention": "full-Gaunt (physically correct Coulomb selection)",
+  "n_max_independent": true,
+  "notes": {
+    "Coulomb_ranks": "(L1=L2=k) K=0 bipolar; reproduces Paper 22 spinor fullgaunt.",
+    "SS_tensor_ranks": "(L1,L2) with triangle(L1,L2,2), (L1+L2) even, L1+L2>=2; K=2.",
+    "SS_scalar_ranks": "Same as Coulomb (different radial weight 1/r^3, identical angular).",
+    "SOO_ranks": "(L1,L2) with triangle(L1,L2,1), (L1+L2) odd; K=1.",
+    "Breit_union": "quartets allowed by ANY of Coulomb / SS_tensor / SOO."
+  },
+  "rows": [
+    {
+      "l_max": 0,
+      "Q_spinor": 2,
+      "Q_spinor_pow4": 16,
+      "coulomb": {
+        "nonzero": 4,
+        "total": 16,
+        "density_num": 1,
+        "density_den": 4,
+        "density_pct": 25.0
+      },
+      "SS_tensor": {
+        "nonzero": 0,
+        "total": 16,
+        "density_num": 0,
+        "density_den": 1,
+        "density_pct": 0.0
+      },
+      "SS_scalar": {
+        "nonzero": 4,
+        "total": 16,
+        "density_num": 1,
+        "density_den": 4,
+        "density_pct": 25.0
+      },
+      "SOO": {
+        "nonzero": 0,
+        "total": 16,
+        "density_num": 0,
+        "density_den": 1,
+        "density_pct": 0.0
+      },
+      "Breit": {
+        "nonzero": 4,
+        "total": 16,
+        "density_num": 1,
+        "density_den": 4,
+        "density_pct": 25.0
+      },
+      "breit_over_coulomb_ratio": 1.0
+    },
+    {
+      "l_max": 1,
+      "Q_spinor": 8,
+      "Q_spinor_pow4": 4096,
+      "coulomb": {
+        "nonzero": 352,
+        "total": 4096,
+        "density_num": 11,
+        "density_den": 128,
+        "density_pct": 8.59375
+      },
+      "SS_tensor": {
+        "nonzero": 1280,
+        "total": 4096,
+        "density_num": 5,
+        "density_den": 16,
+        "density_pct": 31.25
+      },
+      "SS_scalar": {
+        "nonzero": 352,
+        "total": 4096,
+        "density_num": 11,
+        "density_den": 128,
+        "density_pct": 8.59375
+      },
+      "SOO": {
+        "nonzero": 912,
+        "total": 4096,
+        "density_num": 57,
+        "density_den": 256,
+        "density_pct": 22.265625
+      },
+      "Breit": {
+        "nonzero": 2208,
+        "total": 4096,
+        "density_num": 69,
+        "density_den": 128,
+        "density_pct": 53.90625
+      },
+      "breit_over_coulomb_ratio": 6.2727272727272725
+    },
+    {
+      "l_max": 2,
+      "Q_spinor": 18,
+      "Q_spinor_pow4": 104976,
+      "coulomb": {
+        "nonzero": 6780,
+        "total": 104976,
+        "density_num": 565,
+        "density_den": 8748,
+        "density_pct": 6.4586191129401005
+      },
+      "SS_tensor": {
+        "nonzero": 30316,
+        "total": 104976,
+        "density_num": 7579,
+        "density_den": 26244,
+        "density_pct": 28.87898186252096
+      },
+      "SS_scalar": {
+        "nonzero": 6780,
+        "total": 104976,
+        "density_num": 565,
+        "density_den": 8748,
+        "density_pct": 6.4586191129401005
+      },
+      "SOO": {
+        "nonzero": 19936,
+        "total": 104976,
+        "density_num": 1246,
+        "density_den": 6561,
+        "density_pct": 18.991007468373724
+      },
+      "Breit": {
+        "nonzero": 50268,
+        "total": 104976,
+        "density_num": 4189,
+        "density_den": 8748,
+        "density_pct": 47.885230909922264
+      },
+      "breit_over_coulomb_ratio": 7.414159292035398
+    },
+    {
+      "l_max": 3,
+      "Q_spinor": 32,
+      "Q_spinor_pow4": 1048576,
+      "coulomb": {
+        "nonzero": 54184,
+        "total": 1048576,
+        "density_num": 6773,
+        "density_den": 131072,
+        "density_pct": 5.167388916015625
+      },
+      "SS_tensor": {
+        "nonzero": 259304,
+        "total": 1048576,
+        "density_num": 32413,
+        "density_den": 131072,
+        "density_pct": 24.729156494140625
+      },
+      "SS_scalar": {
+        "nonzero": 54184,
+        "total": 1048576,
+        "density_num": 6773,
+        "density_den": 131072,
+        "density_pct": 5.167388916015625
+      },
+      "SOO": {
+        "nonzero": 163296,
+        "total": 1048576,
+        "density_num": 5103,
+        "density_den": 32768,
+        "density_pct": 15.5731201171875
+      },
+      "Breit": {
+        "nonzero": 422616,
+        "total": 1048576,
+        "density_num": 52827,
+        "density_den": 131072,
+        "density_pct": 40.303802490234375
+      },
+      "breit_over_coulomb_ratio": 7.799645651852946
+    },
+    {
+      "l_max": 4,
+      "Q_spinor": 50,
+      "Q_spinor_pow4": 6250000,
+      "coulomb": {
+        "nonzero": 268964,
+        "total": 6250000,
+        "density_num": 67241,
+        "density_den": 1562500,
+        "density_pct": 4.303424
+      },
+      "SS_tensor": {
+        "nonzero": 1319956,
+        "total": 6250000,
+        "density_num": 329989,
+        "density_den": 1562500,
+        "density_pct": 21.119296000000002
+      },
+      "SS_scalar": {
+        "nonzero": 268964,
+        "total": 6250000,
+        "density_num": 67241,
+        "density_den": 1562500,
+        "density_pct": 4.303424
+      },
+      "SOO": {
+        "nonzero": 814672,
+        "total": 6250000,
+        "density_num": 50917,
+        "density_den": 390625,
+        "density_pct": 13.034752
+      },
+      "Breit": {
+        "nonzero": 2134644,
+        "total": 6250000,
+        "density_num": 533661,
+        "density_den": 1562500,
+        "density_pct": 34.154304
+      },
+      "breit_over_coulomb_ratio": 7.936541693312116
+    },
+    {
+      "l_max": 5,
+      "Q_spinor": 72,
+      "Q_spinor_pow4": 26873856,
+      "coulomb": {
+        "nonzero": 988800,
+        "total": 26873856,
+        "density_num": 2575,
+        "density_den": 69984,
+        "density_pct": 3.679412437128487
+      },
+      "SS_tensor": {
+        "nonzero": 4904960,
+        "total": 26873856,
+        "density_num": 2395,
+        "density_den": 13122,
+        "density_pct": 18.25179088553574
+      },
+      "SS_scalar": {
+        "nonzero": 988800,
+        "total": 26873856,
+        "density_num": 2575,
+        "density_den": 69984,
+        "density_pct": 3.679412437128487
+      },
+      "SOO": {
+        "nonzero": 2995568,
+        "total": 26873856,
+        "density_num": 187223,
+        "density_den": 1679616,
+        "density_pct": 11.146774024538942
+      },
+      "Breit": {
+        "nonzero": 7900544,
+        "total": 26873856,
+        "density_num": 61723,
+        "density_den": 209952,
+        "density_pct": 29.39862444749276
+      },
+      "breit_over_coulomb_ratio": 7.990032362459547
+    }
+  ]
+}

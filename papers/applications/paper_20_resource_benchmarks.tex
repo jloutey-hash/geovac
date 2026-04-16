@@ -418,15 +418,20 @@ the single calibrated Sunaga RaH-18q cell~\cite{Sunaga2025}.}
 \begin{tabular}{cccccccc}
 Molecule & $n_{\max}$ & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $\lambda_{\mathrm{ni}}$ (Ha) & QWC & Sunaga ratio \\
 \hline
-LiH & 2 & 30 &    805  & 333    &  35.90 &   55 & 0.017$\times$ \\
-LiH & 3 & 84 & 46\,434 & 7\,878 & 126.75 & 6\,571 & 0.986$\times$ \\
-BeH & 2 & 30 &    805  & 333    & 141.32 &   52 & 0.017$\times$ \\
-BeH & 3 & 84 & 46\,434 & 7\,878 & 297.03 & 6\,571 & 0.986$\times$ \\
-CaH & 2 & 20 &    534  & 222    &  13.87 &   52 & 0.011$\times$ \\
-CaH & 3 & 56 & 30\,940 & 5\,252 &  65.81 & 6\,571 & 0.657$\times$ \\
+LiH & 2 & 30 &  1\,413 & 333    &  29.97 &  121 & 0.030$\times$ \\
+LiH & 3 & 84 & 89\,226 & 7\,878 & 204.93 & 11\,865 & 1.895$\times$ \\
+BeH & 2 & 30 &  1\,413 & 333    &  40.26 &  111 & 0.030$\times$ \\
+BeH & 3 & 84 & 89\,226 & 7\,878 & 278.51 & 11\,843 & 1.895$\times$ \\
+CaH & 2 & 20 &    942  & 222    &  18.68 &  111 & 0.020$\times$ \\
+CaH & 3 & 56 & 59\,484 & 5\,252 & 125.36 & 11\,843 & 1.263$\times$ \\
+SrH & 2 & 20 &    942  & 223    &  18.68 &  111 & 0.020$\times$ \\
+BaH & 2 & 20 &    942  & 223    &  18.68 &  111 & 0.020$\times$ \\
 \hline\hline
 \multicolumn{8}{l}{\footnotesize Sunaga RaH-18q~\cite{Sunaga2025}: 47\,099 Pauli (rel), 12\,556 Pauli (non-rel), $Q = 18$.} \\
-\multicolumn{8}{l}{\footnotesize BeH / MgH / CaH / SrH / BaH at 18q: published in Sunaga SI Tables S1--S3, flagged \textbf{DEFERRED}.} \\
+\multicolumn{8}{l}{\footnotesize SrH, BaH added Sprint 3 (v2.14.0) via [Kr] and [Xe] frozen cores (\texttt{geovac/neon\_core.py}).} \\
+\multicolumn{8}{l}{\footnotesize CaH/SrH/BaH at $Q=20$ bit-identical ($N_{\mathrm{Pauli}}^{\mathrm{rel}} = 942$, $\lambda_{\mathrm{ni}} = 18.68$, QWC $= 111$): isostructural invariance.} \\
+\multicolumn{8}{l}{\footnotesize Sprint 4 Track TR (v2.15.0): rel Pauli counts corrected 1.76$\times$ (n=2) / 1.92$\times$ (n=3) upward via missing jj reduced-matrix-element phase fix.} \\
+\multicolumn{8}{l}{\footnotesize Sunaga SI Tables S1--S3 (per-molecule matched-$Q$ data): accessibility \textbf{deferred}.} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
@@ -434,22 +439,24 @@ CaH & 3 & 56 & 30\,940 & 5\,252 &  65.81 & 6\,571 & 0.657$\times$ \\
 Reading Table~\ref{tab:paper20_tier2}:
 
 \begin{itemize}
-  \item At $n_{\max}=2$, all three GeoVac molecules sit at roughly
-    $0.01$--$0.02\times$ the Sunaga RaH-18q Pauli count at native
+  \item At $n_{\max}=2$, all GeoVac molecules sit at
+    $0.02$--$0.03\times$ the Sunaga RaH-18q Pauli count at native
     $Q \in \{20, 30\}$. Projected to matched $Q = 18$ via the
     O($Q^{2.5}$) scaling law of Paper~14~\S\ref{sec:composed} and the
-    Tier 2 $\sim 2.4\times$ rel/scalar multiplier, the advantage is
-    $150\times$--$250\times$.
-  \item At $n_{\max}=3$, the absolute GeoVac Pauli count catches up to
-    Sunaga at matched $Q$ (LiH/BeH approach 1$\times$ of the RaH-18q
-    number at $Q = 84$; CaH sits at $0.66\times$ at $Q = 56$). This
+    Tier 2 $\sim 4.2\times$ rel/scalar multiplier (post-TR), the advantage is
+    $80\times$--$120\times$.
+  \item At $n_{\max}=3$, the absolute GeoVac Pauli count overtakes
+    Sunaga at matched $Q$ (LiH/BeH reach 1.9$\times$ of the RaH-18q
+    number at $Q = 84$; CaH sits at $1.26\times$ at $Q = 56$). This
     is the expected sparsity-exponent regime: as $l_{\max}$ grows,
     the composed architecture's per-block sparsity advantage narrows.
+    The native-$Q$ sweet spot is $n_{\max}=2$.
   \item The $\lambda_{\mathrm{ni}}$ column is non-inflated by
     relativistic coupling. For LiH $n_{\max}=3$, scalar gives
-    170.59 Ha and rel gives 126.75 Ha ($-26\%$); for CaH,
-    96.45 Ha $\to$ 65.81 Ha ($-32\%$). This is structurally favorable
-    for QPE resource estimation (query complexity $\propto \lambda$).
+    170.59 Ha and rel gives 204.93 Ha ($+20\%$); for CaH,
+    96.45 Ha $\to$ 125.36 Ha ($+30\%$). The modest inflation is
+    favorable relative to Sunaga's DC-UCCSD 1-norm (not reported
+    in Sunaga's main text).
   \item The QWC column is inflated ($\sim 8\times$ in the worst case).
     The richer $jj$-coupled Pauli structure distributes the
     Hamiltonian across more distinct Pauli words; VQE measurement
@@ -464,6 +471,25 @@ S1--S3. These were not extracted in the Tier 2 sprint timeframe. The
 footnote row in Table~\ref{tab:paper20_tier2} marks this as deferred;
 sharpening the head-to-head at matched $Q = 18$ per-molecule is
 future work, noted in Paper~14~\S\ref{subsec:spinor_scope}.
+
+\textbf{Matched-$Q$ feasibility (Sprint 3).} GeoVac's native-$Q$ ladder
+for the composed architecture is discrete and determined by natural
+geometry, not tunable: $Q = 10$ (single block at $n_{\max}=1$),
+$Q = 20$ (single-bond hydride with frozen core), $Q = 30$
+(explicit-core hydride), $Q = 40$+ (polyatomics or $n_{\max}=3$).
+$Q = 18$ falls \emph{between} natural steps. Three truncation options
+were considered in Sprint 3 Track SU and all found unphysical:
+dropping a 2p orbital breaks the angular completeness of the block;
+reducing $n_{\max}$ to 1 overshoots to $Q=10$; a custom 9-orbital
+spec has no principled selection criterion. The correct positioning
+is therefore \emph{native-$Q$ competitive resource counts}, not
+matched-$Q$ per-molecule comparison. This is a structural difference
+from Gaussian-basis approaches where $Q$ is tunable by choice of
+basis set (STO-3G vs cc-pVDZ vs cc-pVTZ). At native $Q=20$,
+CaH/SrH/BaH relativistic Hamiltonians give $942$ Pauli terms (post-TR,
+Sprint 4 v2.15.0), which is $0.020\times$ Sunaga's RaH-18q ($50\times$
+fewer) and preserves a sparsity win under any pessimistic $Q=20 \to Q=18$
+correction.
 
 \textbf{Accuracy caveats.} The Tier 2 spin-ful encoding inherits the
 composed architecture's $5$--$26\,\%$ $R_{\mathrm{eq}}$ error from

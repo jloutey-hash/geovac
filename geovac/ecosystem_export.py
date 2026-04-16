@@ -353,6 +353,9 @@ _SYSTEM_REGISTRY: Dict[str, str] = {
     # Transition metal hydrides (Z=21-30)
     'sch': 'ScH', 'tih': 'TiH', 'vh': 'VH', 'crh': 'CrH', 'mnh': 'MnH',
     'feh': 'FeH', 'coh': 'CoH', 'nih': 'NiH', 'cuh': 'CuH', 'znh': 'ZnH',
+    # Fifth/sixth-row s-block alkaline-earth monohydrides
+    # (Sprint 3 HA-C, v2.12.0, unblocks Sunaga 2025 comparison)
+    'srh': 'SrH', 'bah': 'BaH',
 }
 
 # Canonical name -> Z for main-group hydrides (used by _build_hydride)
@@ -429,6 +432,10 @@ def hamiltonian(
     elif canonical in _TM_HYDRIDE_Z:
         return _build_tm_hydride(_TM_HYDRIDE_Z[canonical], R=R,
                                  verbose=verbose)
+    elif canonical in ('SrH', 'BaH'):
+        return _build_alkaline_earth_monohydride(
+            canonical, R=R, max_n=max_n, verbose=verbose,
+        )
     elif canonical == 'He':
         return _build_he(max_n=max_n, verbose=verbose)
     elif canonical == 'H2':
@@ -527,6 +534,42 @@ def _build_tm_hydride(
     meta = {
         'system': spec.name,
         'R_bohr': R,
+        'M': result['M'],
+        'Q': result['Q'],
+        'N_pauli': result['N_pauli'],
+    }
+    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+
+
+def _build_alkaline_earth_monohydride(
+    canonical: str,
+    R: Optional[float] = None,
+    max_n: int = 2,
+    verbose: bool = False,
+) -> GeoVacHamiltonian:
+    """Build a heavy-atom alkaline-earth monohydride (SrH, BaH).
+
+    Sprint 3 HA-C (v2.12.0): these monohydrides use the dihydride-minus-one-
+    bond block template with a [Kr] (SrH) or [Xe] (BaH) frozen core.
+    Unblocks the Sunaga 2025 (PRA 111, 022817) matched-Q comparison.
+    """
+    from geovac.molecular_spec import srh_spec, bah_spec
+    from geovac.composed_qubit import build_composed_hamiltonian
+
+    if canonical == 'SrH':
+        spec = srh_spec(R=R, max_n=max_n)
+    elif canonical == 'BaH':
+        spec = bah_spec(R=R, max_n=max_n)
+    else:
+        raise ValueError(f"Unexpected monohydride {canonical!r}")
+
+    result = build_composed_hamiltonian(
+        spec, pk_in_hamiltonian=False, verbose=verbose,
+    )
+    meta = {
+        'system': spec.name,
+        'R_bohr': R,
+        'max_n': max_n,
         'M': result['M'],
         'Q': result['Q'],
         'N_pauli': result['N_pauli'],

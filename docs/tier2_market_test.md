@@ -45,27 +45,31 @@ flagged **DEFERRED: fetchable via direct paper read**.
 
 ### 1.2 Head-to-head table (matched-molecule basis)
 
-GeoVac Tier 2 supports LiH (Z=3), BeH (Z=4), and CaH (Z=20) in the
-relativistic composed pipeline.  SrH (Z=38) is **not** yet in scope
-(requires [Kr] frozen-core tabulation; deferred per Tier 2 sprint plan).
+GeoVac Tier 2 supports LiH (Z=3), BeH (Z=4), CaH (Z=20), SrH (Z=38, Sprint 3),
+and BaH (Z=56, Sprint 3) in the relativistic composed pipeline.
 
-The only fully calibrated Sunaga baseline is RaH-18q.  We report both
-the GeoVac values and their ratio to that one calibrated Sunaga number:
+The only fully calibrated Sunaga baseline is RaH-18q.  Values below are
+post-TR (Sprint 4 v2.15.0 — missing jj reduced-matrix-element phase fixed;
+Pauli counts 1.76× higher than pre-TR):
 
 | Molecule | Q (GeoVac) | GeoVac N_pauli (rel) | GeoVac λ_ni (Ha) | GeoVac QWC | Sunaga RaH-18q N_pauli | Ratio |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| LiH | 30 | 805 | 35.90 | 55 | 47,099 | **0.017×** |
-| BeH | 30 | 805 | 141.32 | 52 | 47,099 | **0.017×** |
-| CaH | 20 | 534 | 13.87 | 52 | 47,099 | **0.011×** |
+| LiH | 30 | 1,413 | 29.97 | 121 | 47,099 | **0.030×** |
+| BeH | 30 | 1,413 | 40.26 | 111 | 47,099 | **0.030×** |
+| CaH | 20 | 942 | 18.68 | 111 | 47,099 | **0.020×** |
+| SrH | 20 | 942 | 18.68 | 111 | 47,099 | **0.020×** |
+| BaH | 20 | 942 | 18.68 | 111 | 47,099 | **0.020×** |
 
 Scalar (non-relativistic) GeoVac for context (no Sunaga-comparable
 non-rel molecular number):
 
 | Molecule | N_pauli (scalar) | λ_ni (scalar, Ha) | QWC (scalar) | rel/scalar Pauli ratio |
 |:---|:---:|:---:|:---:|:---:|
-| LiH | 333 | 37.23 | 21 | 2.42× |
-| BeH | 333 | 139.12 | 52 | 2.42× |
-| CaH | 222 | 16.60 | 52 | 2.40× |
+| LiH | 333 | 37.23 | 21 | 4.24× |
+| BeH | 333 | 139.12 | 52 | 4.24× |
+| CaH | 222 | 16.60 | 52 | 4.24× |
+| SrH | 223 | 171.46 | 52 | 4.22× |
+| BaH | 223 | 608.66 | 52 | 4.22× |
 
 ### 1.3 Matched-Q honesty
 
@@ -78,14 +82,14 @@ notes:
   or BeH (Be-core + bond) this gives Q=30; CaH with the [Ar] frozen core
   gives Q=20.  No intermediate Q=18 point is naturally accessible.
 - **Scaling law**: Paper 14 §IV.B gives O(Q^2.5) Pauli scaling for
-  scalar composed.  Tier 2 T3 memo shows rel/scalar ≈ 2.4× at n_max=2
-  independent of molecule.  Assuming the same multiplier holds for
-  composed-rel at Q=18, the extrapolated Sunaga-matched GeoVac Pauli
-  count would be ~200–300 for CaH/BeH — roughly a **150×–250× reduction**
-  from Sunaga's 47,099 at Q=18.  This is structural, not accidental:
-  GeoVac's composed architecture with frozen-core PK eliminates the
-  large cv2z Dyall primitive basis that dominates Sunaga's 18q Pauli
-  count.
+  scalar composed.  Tier 2 T3 memo (post-TR Sprint 4) shows rel/scalar
+  ≈ 4.24× at n_max=2 independent of molecule.  Assuming the same
+  multiplier holds for composed-rel at Q=18, the extrapolated
+  Sunaga-matched GeoVac Pauli count would be ~400–600 for CaH/BeH —
+  roughly a **80×–120× reduction** from Sunaga's 47,099 at Q=18.
+  This is structural, not accidental: GeoVac's composed architecture
+  with frozen-core PK eliminates the large cv2z Dyall primitive basis
+  that dominates Sunaga's 18q Pauli count.
 
 ### 1.4 1-norm observation
 

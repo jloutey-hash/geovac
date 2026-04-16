@@ -1,0 +1,264 @@
+{
+  "track": "BR-C",
+  "date": "2026-04-15",
+  "description": "He 2^3P fine-structure multiplet benchmark via Breit-Pauli PT.",
+  "method": "Closed-form LS-coupled matrix elements (Bethe-Salpeter \u00a739) + direct sympy radial integration.",
+  "reference_source": "Drake 2006 / NIST ASD",
+  "reference_values_MHz": {
+    "E(P0) - E(P1)": 29616.951,
+    "E(P1) - E(P2)": 2291.178,
+    "E(P0) - E(P2)": 31908.129
+  },
+  "reference_values_Ha": {
+    "E(P0) - E(P1)": 4.5012726079704285e-06,
+    "E(P1) - E(P2)": 3.4822007070830723e-07,
+    "E(P0) - E(P2)": 4.849492678678736e-06
+  },
+  "angular_coefficients": {
+    "X_of_J": {
+      "0": -4,
+      "1": -2,
+      "2": 2
+    },
+    "f_SS": {
+      "0": -2.0,
+      "1": 1.0,
+      "2": -0.2
+    },
+    "f_SOO": {
+      "0": 2.0,
+      "1": 1.0,
+      "2": -1.0
+    },
+    "SS_only_splitting_ratio_(P0-P1)/(P1-P2)": -2.5,
+    "SOO_only_splitting_ratio_(P0-P1)/(P1-P2)": 0.5,
+    "NIST_splitting_ratio_(P0-P1)/(P1-P2)": 12.926516839809043
+  },
+  "result_Zeff_1.0": {
+    "Z_nuc": 2,
+    "Z_eff_2p": 1.0,
+    "alpha": 0.0072973525693,
+    "zeta_2p_Ha": 4.437612876722442e-06,
+    "zeta_2p_MHz": 29198.09008993064,
+    "M2_retarded": 0.06929850918858724,
+    "M0_retarded": 0.13168724279835392,
+    "A_SS": 5.535359220832978e-06,
+    "A_SOO": -5.167404311826942e-06,
+    "E_SO_J_Ha": {
+      "0": -8.875225753444884e-06,
+      "1": -4.437612876722442e-06,
+      "2": 4.437612876722442e-06
+    },
+    "E_SS_J_Ha": {
+      "0": -1.1070718441665957e-05,
+      "1": 5.535359220832978e-06,
+      "2": -1.1070718441665958e-06
+    },
+    "E_SOO_J_Ha": {
+      "0": -1.0334808623653884e-05,
+      "1": -5.167404311826942e-06,
+      "2": 5.167404311826942e-06
+    },
+    "E_total_J_Ha": {
+      "0": -3.0280752818764725e-05,
+      "1": -4.069657967716406e-06,
+      "2": 8.497945344382788e-06
+    },
+    "splittings_computed_Ha": {
+      "E(P0) - E(P1)": -2.6211094851048318e-05,
+      "E(P1) - E(P2)": -1.2567603312099194e-05,
+      "E(P0) - E(P2)": -3.8778698163147514e-05
+    },
+    "splittings_computed_MHz": {
+      "E(P0) - E(P1)": -172460.71932752183,
+      "E(P1) - E(P2)": -82690.85743058485,
+      "E(P0) - E(P2)": -255151.5767581067
+    },
+    "NIST_reference_MHz": {
+      "E(P0) - E(P1)": 29616.951,
+      "E(P1) - E(P2)": 2291.178,
+      "E(P0) - E(P2)": 31908.129
+    },
+    "rel_errors": {
+      "E(P0) - E(P1)": -6.8230409783749115,
+      "E(P1) - E(P2)": -37.090979151591384,
+      "E(P0) - E(P2)": -8.996444315431553
+    },
+    "SO_only_baseline_MHz": {
+      "E(P0) - E(P1)": -29198.09008993064,
+      "E(P1) - E(P2)": -58396.18017986128,
+      "E(P0) - E(P2)": -87594.27026979192
+    },
+    "SO_only_rel_errors": {
+      "E(P0) - E(P1)": -1.9858573926104224,
+      "E(P1) - E(P2)": -26.487404374457718,
+      "E(P0) - E(P2)": -3.7452023360502245
+    }
+  },
+  "result_Zeff_1.34": {
+    "Z_nuc": 2,
+    "Z_eff_2p": 1.34,
+    "alpha": 0.0072973525693,
+    "zeta_2p_Ha": 1.0677358093133379e-05,
+    "zeta_2p_MHz": 70253.6413577425,
+    "M2_retarded": 0.06929850918858724,
+    "M0_retarded": 0.13168724279835392,
+    "A_SS": 5.535359220832978e-06,
+    "A_SOO": -5.167404311826942e-06,
+    "E_SO_J_Ha": {
+      "0": -2.1354716186266758e-05,
+      "1": -1.0677358093133379e-05,
+      "2": 1.0677358093133379e-05
+    },
+    "E_SS_J_Ha": {
+      "0": -1.1070718441665957e-05,
+      "1": 5.535359220832978e-06,
+      "2": -1.1070718441665958e-06
+    },
+    "E_SOO_J_Ha": {
+      "0": -1.0334808623653884e-05,
+      "1": -5.167404311826942e-06,
+      "2": 5.167404311826942e-06
+    },
+    "E_total_J_Ha": {
+      "0": -4.2760243251586595e-05,
+      "1": -1.0309403184127343e-05,
+      "2": 1.4737690560793727e-05
+    },
+    "splittings_computed_Ha": {
+      "E(P0) - E(P1)": -3.2450840067459256e-05,
+      "E(P1) - E(P2)": -2.504709374492107e-05,
+      "E(P0) - E(P2)": -5.749793381238032e-05
+    },
+    "splittings_computed_MHz": {
+      "E(P0) - E(P1)": -213516.2705953337,
+      "E(P1) - E(P2)": -164801.95996620858,
+      "E(P0) - E(P2)": -378318.23056154227
+    },
+    "NIST_reference_MHz": {
+      "E(P0) - E(P1)": 29616.951,
+      "E(P1) - E(P2)": 2291.178,
+      "E(P0) - E(P2)": 31908.129
+    },
+    "rel_errors": {
+      "E(P0) - E(P1)": -8.209259001553999,
+      "E(P1) - E(P2)": -72.9289203921339,
+      "E(P0) - E(P2)": -12.856484300961121
+    },
+    "SO_only_baseline_MHz": {
+      "E(P0) - E(P1)": -70253.6413577425,
+      "E(P1) - E(P2)": -140507.282715485,
+      "E(P0) - E(P2)": -210760.92407322748
+    },
+    "SO_only_rel_errors": {
+      "E(P0) - E(P1)": -3.3720754157895083,
+      "E(P1) - E(P2)": -62.325345615000224,
+      "E(P0) - E(P2)": -7.605242321579791
+    }
+  },
+  "sensitivity_scan": {
+    "zeta_2p_fixed_Ha": 4.437612876722442e-06,
+    "A_SS_fit_Ha": -1.2019896035045233e-06,
+    "A_SOO_fit_Ha": 5.3329166741792994e-06,
+    "M_ret_implied_from_A_SS": -0.015048000366362831,
+    "N_implied_from_A_SOO": 0.2002922450398646,
+    "fit_splittings_Ha": {
+      "E(P0) - E(P1)": 4.501272607970428e-06,
+      "E(P1) - E(P2)": 3.4822007070828606e-07,
+      "E(P0) - E(P2)": 4.849492678678714e-06
+    },
+    "fit_splittings_MHz": {
+      "E(P0) - E(P1)": 29616.950999999994,
+      "E(P1) - E(P2)": 2291.1779999998607,
+      "E(P0) - E(P2)": 31908.128999999855
+    },
+    "fit_residual_max": 2.1175823681357508e-20,
+    "fit_cost": 2.245664866988379e-40,
+    "direct_sympy_M2_ret": 0.06929850918858724,
+    "direct_sympy_M0_ret": 0.13168724279835392,
+    "direct_BS_A_SS": 5.535359220832978e-06,
+    "direct_BS_A_SOO": -5.167404311826942e-06,
+    "fit_vs_direct_A_SS_ratio": -0.21714753380064178,
+    "fit_vs_direct_A_SOO_ratio": -1.0320300778426683
+  },
+  "alternative_conventions": {
+    "BS_direct": {
+      "desc": "Bethe-Salpeter \u00a739.12-17 as cited, with positive A_SS, A_SOO",
+      "signs": [
+        1,
+        1,
+        1
+      ],
+      "dP0P1_MHz": -172460.71932752183,
+      "dP1P2_MHz": -82690.85743058485,
+      "dP0P2_MHz": -255151.5767581067,
+      "err_P0P1_rel": -6.8230409783749115,
+      "err_P1P2_rel": -37.090979151591384,
+      "err_P0P2_rel": -8.996444315431553,
+      "max_rel_err": 37.090979151591384
+    },
+    "SS_flipped": {
+      "desc": "Sign-flip on f_SS only",
+      "signs": [
+        1,
+        -1,
+        1
+      ],
+      "dP0P1_MHz": 46064.76502619386,
+      "dP1P2_MHz": -170101.05117207114,
+      "dP0P2_MHz": -124036.28614587727,
+      "err_P0P1_rel": 0.5553513603136886,
+      "err_P1P2_rel": -75.24174427830188,
+      "err_P0P2_rel": -4.887294242350508,
+      "max_rel_err": 75.24174427830188
+    },
+    "SOO_flipped": {
+      "desc": "Sign-flip on f_SOO only",
+      "signs": [
+        1,
+        1,
+        -1
+      ],
+      "dP0P1_MHz": -104460.94520605514,
+      "dP1P2_MHz": 53308.69081234858,
+      "dP0P2_MHz": -51152.25439370657,
+      "err_P0P1_rel": -4.5270661455345325,
+      "err_P1P2_rel": 22.266935529386448,
+      "err_P0P2_rel": -2.603110429749942,
+      "max_rel_err": 22.266935529386448
+    },
+    "SS_SOO_flipped": {
+      "desc": "Sign-flip on both f_SS and f_SOO",
+      "signs": [
+        1,
+        -1,
+        -1
+      ],
+      "dP0P1_MHz": 114064.53914766059,
+      "dP1P2_MHz": -34101.502929137714,
+      "dP0P2_MHz": 79963.03621852286,
+      "err_P0P1_rel": 2.8513261931540685,
+      "err_P1P2_rel": -15.883829597324047,
+      "err_P0P2_rel": 1.506039643331104,
+      "max_rel_err": 15.883829597324047
+    },
+    "all_flipped": {
+      "desc": "Sign-flip on all three terms",
+      "signs": [
+        -1,
+        -1,
+        -1
+      ],
+      "dP0P1_MHz": 172460.71932752183,
+      "dP1P2_MHz": 82690.85743058485,
+      "dP0P2_MHz": 255151.5767581067,
+      "err_P0P1_rel": 4.8230409783749115,
+      "err_P1P2_rel": 35.090979151591384,
+      "err_P0P2_rel": 6.996444315431553,
+      "max_rel_err": 35.090979151591384
+    },
+    "best_convention": "SS_SOO_flipped",
+    "best_max_rel_err_pct": 1588.3829597324047
+  },
+  "known_issue_BR_B": "The BR-B compute_rk_breit_retarded_algebraic function returns 0 for several convergent Breit-Pauli retarded integrals (e.g. (1s,1s;1s,1s) l=2 gives 0 vs published 83/640 from Bethe-Salpeter \u00a738). The region splitting in _T_kernel_breit_retarded fails when m1<0 AND m2<0 even though the combined integral is convergent. This script bypasses BR-B by using direct sympy integration."
+}

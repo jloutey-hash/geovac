@@ -1,0 +1,35 @@
+{
+  "track": "DC-A",
+  "topic": "Two-electron Dirac-Coulomb coalescence",
+  "checks": {
+    "kato_singlet_cusp_slope": "1/2 (verified symbolically)",
+    "pack_brown_triplet_second_cusp": "1/4 (verified symbolically)",
+    "dirac_coulomb_single_particle_gamma_alpha_zero": "|κ| (recovers NR)",
+    "gamma_series_correction": "-Z**2*alpha**2*Abs(kappa)/(2*kappa**2)",
+    "dirac_coulomb_two_electron_LL_cusp_slope": "1/2 · (1 + O(α²))",
+    "alpha2_cusp_correction_mechanism": "Darwin / orbit-orbit δ³(r₁₂) is a contact term, not a kink; preserves slope 1/2",
+    "singlet_energy_PW_rate_nonrel": "(l_max + 1)^{-4}   [Schwartz 1962]",
+    "singlet_energy_PW_rate_dirac_coulomb": "(l_max + 1)^{-4}   [Salomonson-Öster 1989, Kutzelnigg-Morgan 1992]",
+    "triplet_energy_PW_rate_nonrel": "(l_max + 1)^{-6}   [Pack-Brown 1966]",
+    "triplet_energy_PW_rate_dirac_coulomb": "(l_max + 1)^{-6}   [same: α² rescales A only]",
+    "geovac_kappa_to_l_bridge": "κ=-(l+1) for j=l+1/2 (κ<0); κ=+l for j=l-1/2 (κ>0); verified"
+  },
+  "prediction": "Dirac-Coulomb cusp has SAME l_max^{-4} energy convergence as non-relativistic Kato, with amplitude modified by factor (1 + c·(Zα)²), c = 3/8 at leading order.",
+  "verdict": "The relativistic cusp slope is 1/2 · (1 + O(α²)) for the singlet and the second cusp for the triplet is 1/4 · (1 + O(α²)). Neither the α² Darwin contact term nor the orbit-orbit δ³(r_{12}) correction changes the r₁₂¹ kink structure; they only modify the AMPLITUDE of the Schwartz coefficient A. Therefore the partial-wave energy convergence is (l_max+1)^{-4} for singlet and (l_max+1)^{-6} for triplet, identical to the non-relativistic exponents.",
+  "taxonomy_classification": "1/r₁₂ remains an embedding exchange constant (Paper 18 §II.B). The α² correction is a spinor-intrinsic O(α²) multiplicative amplitude on the Schwartz coefficient — it lives in the same cell as Tier-2 H_SO (Paper 18 §IV subtier, R_sp = ℚ(α²)[γ]/(γ²+(Zα)²−1)).",
+  "references": [
+    "T. Kato, CPAM 10, 151 (1957)",
+    "C. Schwartz, PRA 126, 1015 (1962)",
+    "R. T. Pack and W. B. Brown, JCP 45, 556 (1966)",
+    "W. Kutzelnigg, IJQC 25, 107 (1984)",
+    "W. Kutzelnigg, TCA 73, 173 (1988)",
+    "S. Salomonson and P. Öster, PRA 40, 5559 (1989)",
+    "W. Kutzelnigg and J. D. Morgan III, JCP 96, 4484 (1992)",
+    "M. J. Esteban, M. Lewin, E. Séré, BAMS 45, 535 (2008)"
+  ],
+  "uncertainty_flags": [
+    "Kutzelnigg 1988 Eq. 5.2 coefficient c = 3/8 was not directly retrieved from the paper in this run; it is the value commonly cited in relativistic MBPT literature but has not been symbolically re-derived here.",
+    "The leading O(α²) multiplicative structure of the Schwartz coefficient is well established in Salomonson-Öster tables; the exact coefficient requires evaluating ⟨δ³(r_{12})⟩ on Dirac-Coulomb eigenstates, which involves the γ-radial factor and is left for Track DC-B or a later sprint.",
+    "The prediction same-exponent-l⁻⁴ is robust (it follows from the r₁₂¹ kink being preserved). The amplitude correction is the model-dependent piece."
+  ]
+}

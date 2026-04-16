@@ -724,6 +724,74 @@ validates the selection-rule implementation against the existing
 reference.
 
 %=================================================================
+%% Breit (rank-2) extension — Sprint 2 Track BR-A drop-in.
+%% Extends angular sparsity to rank-2 magnetic tensor operators.
+\section{Rank-2 extension: Breit interaction}
+\label{sec:paper22_breit}
+
+Sprint~2 Track~BR-A (April~2026) extends the angular sparsity theorem
+from the rank-0 Coulomb operator $1/r_{12}$ to the rank-2 Breit-Pauli
+spin-spin tensor
+\[
+  H_{SS} = \alpha^2\,\frac{[\sigma_1 \otimes \sigma_2]^{(2)} \cdot Y^{(2)}(\hat r_{12})}{r_{12}^3}
+\]
+and the combined rank-1 $+$ rank-2 spin-other-orbit operator
+$H_{SOO} \propto \alpha^2 (\ell_1 \cdot \sigma_2 + \ell_2 \cdot \sigma_1)/r_{12}^3$,
+both in the $jj$-coupled spinor basis of \S\ref{sec:paper22_spinor}.
+The resulting angular density $d_{\mathrm{Breit}}(l_{\max})$ for the
+union of non-zero matrix elements in $\{H_{SS}, H_{SOO}\}$ at $Z=4$:
+
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|r|r|}
+\hline
+$l_{\max}$ & $Q$ & $d_{\mathrm{Coulomb}}$ & $d_{SS}$ & $d_{SOO}$ & $d_{\mathrm{Breit}}$ & $d_{\mathrm{Breit}}/d_{\mathrm{Coulomb}}$ \\
+\hline
+0 &  2 & 25.00\% &  0.00\% &  0.00\% & 25.00\% & 1.00$\times$ \\
+1 &  8 &  8.59\% & 31.25\% & 22.27\% & 53.91\% & 6.27$\times$ \\
+2 & 18 &  6.46\% & 28.88\% & 18.99\% & 47.89\% & 7.41$\times$ \\
+3 & 32 &  5.17\% & 24.73\% & 15.57\% & 40.30\% & 7.80$\times$ \\
+4 & 50 &  4.30\% & 21.12\% & 13.03\% & 34.15\% & 7.94$\times$ \\
+5 & 72 &  3.68\% & 18.25\% & 11.15\% & 29.40\% & 7.99$\times$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Verdict: the angular sparsity theorem extends to rank-2.}
+The Breit density is $6$--$8\times$ denser than Coulomb (consistent with
+rank-2 being less restrictive than rank-0 in the triangle-inequality
+sense: $|\Delta l| \leq 2, |\Delta j| \leq 2, |\Delta m_j| \leq 2$ vs
+$= 0$ for Coulomb), but it remains \emph{monotonically decreasing} with
+$l_{\max}$ and is bounded away from 1 as $l_{\max} \to \infty$. The
+saturation at $\sim 8\times$ reflects the asymptotic selection-rule
+density of rank-2 vs rank-0 Gaunt structure on the spinor manifold.
+
+The generalized theorem statement: \emph{ERI density in the $S^3$
+spinor basis depends only on $l_{\max}$ and the tensor rank $k$ of the
+interaction operator, not on the radial kernel $V(r)$}. The rank-0
+Coulomb (\S\ref{sec:theorem}), rank-0 spinor (\S\ref{sec:paper22_spinor}),
+rank-1 dipole (implicit in Tier~2 SOO), and rank-2 Breit cases all
+verify this form. A proof by Wigner-Eckart reduction on the $jj$-coupled
+basis is sketched in Track~BR-A's memo
+(\texttt{debug/br\_a\_breit\_memo.md}) and deferred to a formal write-up.
+
+\textbf{Caveat on the radial kernel.} The $1/r_{12}^3$ kernel is
+\emph{distributional} --- its bare partial-wave expansion has a
+logarithmic divergence at $r_1 = r_2$, so matrix elements are not
+defined as ordinary integrals. The Breit-Pauli tensor projection
+(transverse component of $\sigma_1 \otimes \sigma_2$) regularizes this
+into a smooth kernel $K_l^{BP} = r_<^l / r_>^{l+3}$ with exact rational
+matrix elements for same-$n$ orbitals and $\log$-transcendental
+content for cross-$n$ (see Paper~18 \S\ref{sec:taxonomy} for the
+taxonomy classification). Paper~22's angular sparsity statement
+concerns the zero/nonzero \emph{pattern} of the matrix, which is
+determined by the angular selection rules and is insensitive to the
+radial-kernel regularization---this is precisely why the theorem is
+potential-independent.
+
+Implementation lives in \texttt{debug/br\_a\_breit\_angular.py};
+density data in \texttt{debug/data/br\_a\_density.json}.
+
+%=================================================================
 \begin{thebibliography}{20}
 
 \bibitem{Peruzzo2014}

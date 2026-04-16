@@ -175,12 +175,18 @@ def test_relativistic_identity_contains_nuclear_repulsion():
 def test_relativistic_pauli_ratio_lih_nmax2():
     """LiH relativistic / scalar Pauli ratio at n_max=2.
 
+    Track TR (Sprint 4, April 2026) fixed the missing
+    (−1)^{j_a+1/2} reduced-matrix-element phase in ``jj_angular_Xk``.
+    Before the fix the corrupted X_k caused accidental cancellations that
+    removed ~60% of the true Pauli terms (805 was the buggy count);
+    after the fix the counts reflect the correct (κ, m_j)-basis density.
+
     T0 prediction (fullgaunt, l_max=1): d_spinor/d_scalar ≈ 0.58.  In Pauli
     space, both scalar (spin-doubled JW, Q=2M=30) and spinor (Q=30 directly)
     have the same qubit count at n_max=2.  The relative Pauli count is
     dominated by the additional σ,τ independence in the spinor basis
     (scalar JW has σ=τ restriction in one-body) plus the angular-density
-    ratio.  Observed ratio ~4.3× at n_max=2.
+    ratio.  Observed ratio ≈ 4.24× at n_max=2 post-TR-fix.
     """
     from geovac.composed_qubit import build_composed_hamiltonian
     from geovac.molecular_spec import lih_spec, lih_spec_relativistic
@@ -188,6 +194,117 @@ def test_relativistic_pauli_ratio_lih_nmax2():
     r_scalar = build_composed_hamiltonian(lih_spec(max_n=2))
     r_rel = build_composed_hamiltonian(lih_spec_relativistic(max_n=2))
     ratio = r_rel['N_pauli'] / r_scalar['N_pauli']
-    # Observed 805 / 333 ≈ 2.42 (post-Hermitian symmetrization).  Pin ±20%.
-    assert 1.9 < ratio < 3.0, (
-        f"LiH n_max=2 rel/scalar Pauli ratio {ratio:.2f} outside [1.9, 3.0]")
+    # Observed 1413 / 333 ≈ 4.24 (post-TR fix, April 2026).  Pin ±15%.
+    assert 3.7 < ratio < 4.9, (
+        f"LiH n_max=2 rel/scalar Pauli ratio {ratio:.2f} outside [3.7, 4.9]")
+
+
+def test_relativistic_alpha_zero_matches_scalar_fci():
+    """At α=0, spinor FCI must equal scalar FCI for He-like 2e system.
+
+    SU(2) basis-invariance of FCI: jj coupling is a unitary rotation of
+    LS coupling, so the ground-state energy is invariant.
+
+    Regression: Track DC-B (Sprint 2) found a 0.95–1.66 mHa gap growing
+    with n_max; Track TR (Sprint 4) diagnosed the cause as a missing
+    (−1)^{j_a+1/2} reduced-matrix-element phase in ``jj_angular_Xk``
+    and restored machine-precision agreement.
+    """
+    import numpy as np
+    from itertools import combinations
+    from geovac.casimir_ci import build_fci_matrix
+    from geovac.composed_qubit_relativistic import (
+        enumerate_dirac_labels, _build_spinor_eri_block, _X_CACHE,
+    )
+    from geovac.composed_qubit import _compute_rk_integrals_block
+    from geovac.spin_orbit import so_diagonal_matrix_element
+    from openfermion import FermionOperator
+    import sympy as sp
+    from sympy import Integer
+
+    _X_CACHE.clear()
+
+    def scalar_E(Z, n_max):
+        H = build_fci_matrix(Z=Z, n_max=n_max, k_orb=float(Z),
+                             l_max=None, m_total=0)
+        return float(np.linalg.eigvalsh(H)[0])
+
+    def spinor_E_alpha_zero(Z, n_max):
+        labs = enumerate_dirac_labels(max_n=n_max, l_min=0)
+        Q = len(labs)
+        unique_nl = sorted({(lab.n_fock, lab.l) for lab in labs})
+        scalar_proxy = [(n, l, 0) for (n, l) in unique_nl]
+        rk = _compute_rk_integrals_block(float(Z), scalar_proxy)
+        eri = _build_spinor_eri_block(float(Z), labs, rk)
+        # Symmetrize
+        sym = {}
+        for (a, b, c, d), val in eri.items():
+            sym[(a, b, c, d)] = sym.get((a, b, c, d), 0.0) + 0.5 * val
+            sym[(c, d, a, b)] = sym.get((c, d, a, b), 0.0) + 0.5 * val
+        fop = FermionOperator((), 0.0)
+        Z_int = Integer(int(Z))
+        alpha_sp = sp.Float(0.0)
+        for i, lab in enumerate(labs):
+            val = -float(Z) ** 2 / (2.0 * lab.n_fock ** 2)
+            so_expr = so_diagonal_matrix_element(
+                lab.n_fock, lab.kappa, Z=Z_int, alpha=alpha_sp,
+            )
+            val += float(so_expr)
+            if abs(val) > 1e-14:
+                fop += FermionOperator(((i, 1), (i, 0)), val)
+        for (a, b, c, d), val in sym.items():
+            if a == b or c == d:
+                continue
+            if abs(val) < 1e-14:
+                continue
+            fop += FermionOperator(
+                ((a, 1), (b, 1), (d, 0), (c, 0)), 0.5 * val)
+        # Build 2e sector FCI matrix
+        dets = list(combinations(range(Q), 2))
+        N_SD = len(dets)
+        det_index = {d: i for i, d in enumerate(dets)}
+        H = np.zeros((N_SD, N_SD), dtype=complex)
+        for term, coeff in fop.terms.items():
+            for J, ket in enumerate(dets):
+                state = list(ket)
+                phase = 1.0
+                ok = True
+                # Apply right-to-left
+                for idx, typ in reversed(term):
+                    if typ == 0:
+                        if idx not in state:
+                            ok = False
+                            break
+                        pos = state.index(idx)
+                        phase *= (-1) ** pos
+                        state.pop(pos)
+                    else:
+                        if idx in state:
+                            ok = False
+                            break
+                        pos = 0
+                        while pos < len(state) and state[pos] < idx:
+                            pos += 1
+                        phase *= (-1) ** pos
+                        state.insert(pos, idx)
+                if not ok:
+                    continue
+                new_det = tuple(state)
+                if len(term) == 0:
+                    H[J, J] += coeff
+                    continue
+                I = det_index.get(new_det)
+                if I is not None:
+                    H[I, J] += coeff * phase
+        H_sym = 0.5 * (H.real + H.real.T)
+        return float(np.linalg.eigvalsh(H_sym)[0])
+
+    # Test at Z=4 (Be 2+) for n_max=2, 3
+    for n_max in [2, 3]:
+        E_scalar = scalar_E(4, n_max)
+        E_spinor_0 = spinor_E_alpha_zero(4, n_max)
+        gap = abs(E_spinor_0 - E_scalar)
+        assert gap < 1e-10, (
+            f"Z=4 n_max={n_max}: spinor(α=0) vs scalar gap "
+            f"{gap:.3e} Ha > 1e-10 Ha. TR fix regression."
+        )

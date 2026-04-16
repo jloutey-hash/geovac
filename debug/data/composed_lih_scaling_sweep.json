@@ -9,7 +9,7 @@
       "N_pauli_eri": 2,
       "ERI_density_total": 0.037037037037037035,
       "n_pk_nonzero": 1,
-      "wall_time_s": 0.001244099999894388
+      "wall_time_s": 0.0012122999905841425
     },
     {
       "max_n": 2,
@@ -20,7 +20,7 @@
       "N_pauli_eri": 298,
       "ERI_density_total": 0.003851851851851852,
       "n_pk_nonzero": 7,
-      "wall_time_s": 0.11189720000402303
+      "wall_time_s": 0.10953720001270995
     }
   ],
   "fit": {

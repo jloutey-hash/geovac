@@ -6,12 +6,14 @@ the Level 3 hyperspherical solver (which handles only 2-electron He-like
 cores).
 
 Supported core types:
-  [Ne] (10 electrons): Z=11-18 (Na through Ar)
-  [Ar] (18 electrons): Z=19-20 (K, Ca)
+  [Ne]     (10 electrons): Z=11-18 (Na through Ar)
+  [Ar]     (18 electrons): Z=19-20 (K, Ca) and Z=21-30 (transition metals)
   [Ar]3d¹⁰ (28 electrons): Z=31-36 (Ga through Kr)
+  [Kr]     (36 electrons): Z=37-38 (Rb, Sr)             [Sprint 3, v2.12.0]
+  [Xe]     (54 electrons): Z=55-56 (Cs, Ba)             [Sprint 3, v2.12.0]
 
 The core density is computed analytically using hydrogenic radial
-wavefunctions with Clementi-Raimondi effective nuclear charges (1963).
+wavefunctions with Clementi-Raimondi effective nuclear charges (1963, 1967).
 
     N_core(r) = integral_0^r n_core(r') dr'
     Z_eff(r)  = Z - N_core(r)
@@ -22,7 +24,8 @@ The hydrogenic wavefunctions use Z_eff = n * zeta for each shell,
 where zeta are the Clementi-Raimondi Slater orbital exponents.
 
 References:
-  - Clementi & Raimondi, J. Chem. Phys. 38, 2686 (1963)
+  - Clementi & Raimondi, J. Chem. Phys. 38, 2686 (1963) — Z=2-36
+  - Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967) — Z=37-86
   - NIST Atomic Spectra Database (core energies)
   - Paper 17, Section III (Z_eff screening usage in composed geometries)
 """
@@ -83,6 +86,34 @@ _CLEMENTI_ZETA_AR3D10 = {
     36: (35.4095, 25.8637, 29.5964, 21.0325, 22.2610, 18.0860),
 }
 
+# [Kr] core (36 electrons): 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s² 4p⁶
+# Sprint 3 Track HA-A (v2.12.0): fifth-row s-block support for Sunaga 2025
+# comparison (SrH).
+# Source: Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967),
+# Table III (single-zeta Hartree-Fock orbital exponents for neutral atoms).
+_CLEMENTI_ZETA_KR = {
+    # Z: (zeta_1s, zeta_2s, zeta_2p, zeta_3s, zeta_3p, zeta_3d, zeta_4s, zeta_4p)
+    # Rb (Z=37): [Kr] 5s¹ — only core orbitals listed here
+    37: (36.3242, 26.7156, 30.5810, 21.8410, 23.2214, 18.9867, 11.5472, 11.8892),
+    # Sr (Z=38): [Kr] 5s² — only core orbitals listed here
+    38: (37.3108, 27.5192, 31.5922, 22.6526, 24.0714, 19.9645, 12.4213, 12.7489),
+}
+
+# [Xe] core (54 electrons): [Kr] + 4d¹⁰ 5s² 5p⁶
+# Sprint 3 Track HA-A (v2.12.0): sixth-row s-block support for Sunaga 2025
+# comparison (BaH).
+# Source: Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967),
+# Table III.
+_CLEMENTI_ZETA_XE = {
+    # Z: (z1s, z2s, z2p, z3s, z3p, z3d, z4s, z4p, z4d, z5s, z5p)
+    # Cs (Z=55): [Xe] 6s¹ — only core orbitals listed here
+    55: (54.2678, 42.0318, 46.4901, 36.9232, 38.4598, 33.2295, 25.2794, 25.5744,
+         20.7221, 13.1181, 12.3118),
+    # Ba (Z=56): [Xe] 6s² — only core orbitals listed here
+    56: (55.2540, 42.9170, 47.5009, 37.9057, 39.4558, 34.2470, 26.1764, 26.4651,
+         21.6420, 14.0101, 13.1947),
+}
+
 # Backward-compatible alias
 _CLEMENTI_ZETA = _CLEMENTI_ZETA_NE
 
@@ -134,11 +165,29 @@ _NIST_CORE_ENERGIES_AR3D10 = {
     36: -2752.06,    # Kr⁸⁺
 }
 
+_NIST_CORE_ENERGIES_KR = {
+    # [Kr]-like ions (36 electrons)
+    # Source: Clementi & Roetti, At. Data Nucl. Data Tables 14, 177 (1974),
+    # Hartree-Fock total energies of Rb⁺, Sr²⁺
+    37: -2938.36,    # Rb⁺
+    38: -3131.54,    # Sr²⁺
+}
+
+_NIST_CORE_ENERGIES_XE = {
+    # [Xe]-like ions (54 electrons)
+    # Source: Clementi & Roetti, At. Data Nucl. Data Tables 14, 177 (1974),
+    # Hartree-Fock total energies of Cs⁺, Ba²⁺
+    55: -7553.93,    # Cs⁺
+    56: -7883.54,    # Ba²⁺
+}
+
 # Unified lookup
 _NIST_CORE_ENERGIES = {
     **_NIST_CORE_ENERGIES_NE,
     **_NIST_CORE_ENERGIES_AR,
     **_NIST_CORE_ENERGIES_AR3D10,
+    **_NIST_CORE_ENERGIES_KR,
+    **_NIST_CORE_ENERGIES_XE,
 }
 
 
@@ -182,14 +231,18 @@ class FrozenCore:
 
     Supported core types:
       'Ne'     — 10 electrons (1s² 2s² 2p⁶), Z=11-18
-      'Ar'     — 18 electrons (+ 3s² 3p⁶), Z=19-20
+      'Ar'     — 18 electrons (+ 3s² 3p⁶), Z=19-20 (and Z=21-30 TM)
       'Ar3d10' — 28 electrons (+ 3d¹⁰), Z=31-36
+      'Kr'     — 36 electrons (+ 4s² 4p⁶), Z=37-38
+      'Xe'     — 54 electrons (+ 4d¹⁰ 5s² 5p⁶), Z=55-56
 
     Usage
     -----
     >>> fc = FrozenCore(Z=11)           # auto-detects [Ne] core
     >>> fc = FrozenCore(Z=19)           # auto-detects [Ar] core
     >>> fc = FrozenCore(Z=32)           # auto-detects [Ar]3d10 core
+    >>> fc = FrozenCore(Z=37)           # auto-detects [Kr] core
+    >>> fc = FrozenCore(Z=55)           # auto-detects [Xe] core
     >>> fc.solve()
     >>> z_eff_at_1bohr = fc.z_eff(1.0)
 
@@ -198,12 +251,13 @@ class FrozenCore:
     Z : int
         Nuclear charge.
     core_type : str, optional
-        Core type: 'Ne', 'Ar', or 'Ar3d10'. Auto-detected from Z
-        if not specified.
+        Core type: 'Ne', 'Ar', 'Ar3d10', 'Kr', or 'Xe'. Auto-detected from
+        Z if not specified.
     n_radial : int
         Number of radial grid points for density computation.
     r_max : float
-        Maximum radial distance (bohr).
+        Maximum radial distance (bohr). Auto-adjusted for deep cores
+        if smaller than the default 20.0.
     """
 
     # Core type → (n_core_electrons, zeta_table, energy_table)
@@ -211,6 +265,8 @@ class FrozenCore:
         'Ne': (10, _CLEMENTI_ZETA_NE, _NIST_CORE_ENERGIES_NE),
         'Ar': (18, _CLEMENTI_ZETA_AR, _NIST_CORE_ENERGIES_AR),
         'Ar3d10': (28, _CLEMENTI_ZETA_AR3D10, _NIST_CORE_ENERGIES_AR3D10),
+        'Kr': (36, _CLEMENTI_ZETA_KR, _NIST_CORE_ENERGIES_KR),
+        'Xe': (54, _CLEMENTI_ZETA_XE, _NIST_CORE_ENERGIES_XE),
     }
 
     def __init__(
@@ -228,11 +284,16 @@ class FrozenCore:
                 core_type = 'Ar'
             elif Z in _CLEMENTI_ZETA_AR3D10:
                 core_type = 'Ar3d10'
+            elif Z in _CLEMENTI_ZETA_KR:
+                core_type = 'Kr'
+            elif Z in _CLEMENTI_ZETA_XE:
+                core_type = 'Xe'
             else:
                 raise ValueError(
                     f"No frozen-core data for Z={Z}. "
                     f"Supported: Z=11-30 ([Ne] or [Ar]), "
-                    f"Z=31-36 ([Ar]3d10). "
+                    f"Z=31-36 ([Ar]3d10), "
+                    f"Z=37-38 ([Kr]), Z=55-56 ([Xe]). "
                     f"For Z=3-10 (He-like cores), use CoreScreening."
                 )
 
@@ -310,6 +371,57 @@ class FrozenCore:
             + 10.0 * R_3d ** 2 * r ** 2
         )
 
+    def _build_density_kr(self, r: np.ndarray) -> np.ndarray:
+        """Build [Kr] core density (36 electrons)."""
+        (z1s, z2s, z2p, z3s, z3p, z3d, z4s, z4p) = self._zeta_table[self.Z]
+        R_1s = _hydrogenic_radial(1, 0, 1 * z1s, r)
+        R_2s = _hydrogenic_radial(2, 0, 2 * z2s, r)
+        R_2p = _hydrogenic_radial(2, 1, 2 * z2p, r)
+        R_3s = _hydrogenic_radial(3, 0, 3 * z3s, r)
+        R_3p = _hydrogenic_radial(3, 1, 3 * z3p, r)
+        R_3d = _hydrogenic_radial(3, 2, 3 * z3d, r)
+        R_4s = _hydrogenic_radial(4, 0, 4 * z4s, r)
+        R_4p = _hydrogenic_radial(4, 1, 4 * z4p, r)
+        return (
+            2.0 * R_1s ** 2 * r ** 2
+            + 2.0 * R_2s ** 2 * r ** 2
+            + 6.0 * R_2p ** 2 * r ** 2
+            + 2.0 * R_3s ** 2 * r ** 2
+            + 6.0 * R_3p ** 2 * r ** 2
+            + 10.0 * R_3d ** 2 * r ** 2
+            + 2.0 * R_4s ** 2 * r ** 2
+            + 6.0 * R_4p ** 2 * r ** 2
+        )
+
+    def _build_density_xe(self, r: np.ndarray) -> np.ndarray:
+        """Build [Xe] core density (54 electrons)."""
+        (z1s, z2s, z2p, z3s, z3p, z3d,
+         z4s, z4p, z4d, z5s, z5p) = self._zeta_table[self.Z]
+        R_1s = _hydrogenic_radial(1, 0, 1 * z1s, r)
+        R_2s = _hydrogenic_radial(2, 0, 2 * z2s, r)
+        R_2p = _hydrogenic_radial(2, 1, 2 * z2p, r)
+        R_3s = _hydrogenic_radial(3, 0, 3 * z3s, r)
+        R_3p = _hydrogenic_radial(3, 1, 3 * z3p, r)
+        R_3d = _hydrogenic_radial(3, 2, 3 * z3d, r)
+        R_4s = _hydrogenic_radial(4, 0, 4 * z4s, r)
+        R_4p = _hydrogenic_radial(4, 1, 4 * z4p, r)
+        R_4d = _hydrogenic_radial(4, 2, 4 * z4d, r)
+        R_5s = _hydrogenic_radial(5, 0, 5 * z5s, r)
+        R_5p = _hydrogenic_radial(5, 1, 5 * z5p, r)
+        return (
+            2.0 * R_1s ** 2 * r ** 2
+            + 2.0 * R_2s ** 2 * r ** 2
+            + 6.0 * R_2p ** 2 * r ** 2
+            + 2.0 * R_3s ** 2 * r ** 2
+            + 6.0 * R_3p ** 2 * r ** 2
+            + 10.0 * R_3d ** 2 * r ** 2
+            + 2.0 * R_4s ** 2 * r ** 2
+            + 6.0 * R_4p ** 2 * r ** 2
+            + 10.0 * R_4d ** 2 * r ** 2
+            + 2.0 * R_5s ** 2 * r ** 2
+            + 6.0 * R_5p ** 2 * r ** 2
+        )
+
     def solve(self, verbose: bool = False) -> None:
         """Compute core density and screening function analytically.
 
@@ -333,6 +445,10 @@ class FrozenCore:
             self._n_r = self._build_density_ar(r)
         elif self.core_type == 'Ar3d10':
             self._n_r = self._build_density_ar3d10(r)
+        elif self.core_type == 'Kr':
+            self._n_r = self._build_density_kr(r)
+        elif self.core_type == 'Xe':
+            self._n_r = self._build_density_xe(r)
         else:
             raise ValueError(f"Unknown core_type={self.core_type!r}")
 

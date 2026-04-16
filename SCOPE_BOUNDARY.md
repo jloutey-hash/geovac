@@ -1,4 +1,4 @@
-# GeoVac Atomic and Molecular Scope Boundary — v2.9.0
+# GeoVac Atomic and Molecular Scope Boundary — v2.12.0
 
 GeoVac's composed architecture handles any first-row molecule (atoms H through Ne) built from 1s² cores + valence blocks. The atomic classifier (`geovac/atomic_classifier.py`) maps Z to block decomposition for Z=1-10, and the general composed builder (`geovac/composed_qubit.py`) constructs qubit Hamiltonians from `MolecularSpec` dataclasses. Second-row atoms (Na-Ar) are feasible but require external core data that the framework does not currently compute. Transition metals are out of scope.
 
@@ -109,6 +109,48 @@ Use published ECPs (e.g., Stuttgart/Cologne) for the [Ne] core and focus GeoVac 
 
 ---
 
+## Fifth Row (Z=37-54): Partially Supported
+
+Sprint 3 Track HA-A+B (v2.12.0) extended the FrozenCore infrastructure to the [Kr] core, enabling the fifth-row s-block for head-to-head comparison with Sunaga 2025 (PRA 111, 022817) on SrH. Fifth-row d-block and p-block remain out of scope.
+
+| Atom | Config | Core | Valence | Status |
+|:-----|:-------|:-----|:--------|:-------|
+| Rb (37) | [Kr] 5s¹ | 1s²…4p⁶ (36e) | 1e | Supported (v2.12.0) |
+| Sr (38) | [Kr] 5s² | 36e | 2e | Supported (v2.12.0) — unblocks SrH |
+| Y (39) – Cd (48) | [Kr] 4d^n 5s^m | 36e | — | Out of scope (4d transition metals) |
+| In (49) – Xe (54) | [Kr] 4d¹⁰ 5s² 5p^x | 46e | — | Needs [Kr]4d¹⁰ core (not yet implemented) |
+
+**Support mechanism:** The [Kr] frozen core (36 electrons: 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s² 4p⁶) is constructed analytically from hydrogenic wavefunctions with Clementi-Raimondi-Reinhardt (1967) single-zeta orbital exponents. Density normalizes to 36 within 0.15% on a r ∈ [0.001, 15] bohr grid; Z_eff(r → ∞) = Z − 36 exactly by analytical normalization in `FrozenCore.solve()`. Rb and Sr inherit the alkali-metal / alkaline-earth composed architecture from K and Ca (Z=19-20, [Ar] core), producing isostructural Pauli counts with [Kr] substituted for [Ar].
+
+**What's out of scope:**
+- **Yttrium through cadmium (Z=39-48):** 4d transition metals. Same multi-reference correlation issues as the 3d series (see below) plus compounding 4d/5s near-degeneracy. Will not be added without fundamental solver advances.
+- **Indium through xenon (Z=49-54):** 5p block. Requires a [Kr]4d¹⁰ (46-electron) frozen core analogous to the [Ar]3d¹⁰ core for the fourth-row p-block. Straightforward to add by analogy but deferred pending a concrete target molecule.
+
+---
+
+## Sixth Row (Z=55-56): Partially Supported
+
+Sprint 3 Track HA-A+B (v2.12.0) also extended FrozenCore to the [Xe] core, enabling sixth-row alkalis and alkaline earths for Sunaga 2025 comparison on BaH.
+
+| Atom | Config | Core | Valence | Status |
+|:-----|:-------|:-----|:--------|:-------|
+| Cs (55) | [Xe] 6s¹ | 54e | 1e | Supported (v2.12.0) |
+| Ba (56) | [Xe] 6s² | 54e | 2e | Supported (v2.12.0) — unblocks BaH |
+| La (57) – Lu (71) | 4f^n | 54e+ | — | Out of scope (lanthanides, 4f correlation) |
+| Hf (72) – Hg (80) | [Xe]4f¹⁴ 5d^n 6s^m | 68e | — | Out of scope (5d transition metals) |
+| Tl (81) – Rn (86) | [Xe]4f¹⁴ 5d¹⁰ 6s² 6p^x | 78e | — | Needs [Xe]4f¹⁴5d¹⁰ core (not implemented) |
+
+**Support mechanism:** The [Xe] frozen core (54 electrons) is constructed via the same hydrogenic + CR exponent pattern. Density normalizes to 54 within 0.24%; Z_eff(r → ∞) = Z − 54 exactly.
+
+**What's out of scope:**
+- **Lanthanides (Z=57-71):** 4f correlation is genuinely multi-reference and not amenable to the current frozen-core treatment. Partially filled 4f shells also break the isostructural symmetry that composed architecture relies on.
+- **5d transition metals (Z=72-80):** Same reasons as 3d/4d plus relativistic effects.
+- **6p block (Z=81-86):** Requires a 78-electron [Xe]4f¹⁴5d¹⁰ core. Feasible but deferred.
+
+Relativistic effects become significant for both fifth- and sixth-row atoms. The current FrozenCore treatment is non-relativistic; spin-orbit splitting and mass-velocity corrections are captured separately via the Tier 2 spin-ful composed pipeline (`geovac/composed_qubit_relativistic.py`) and Tier 3 fine-structure infrastructure (v2.12.0) when `relativistic=True` is set on the `MolecularSpec`.
+
+---
+
 ## Transition Metals (Z=21-30): Out of Scope
 
 | Atom | Config | Core | Issue |
@@ -154,5 +196,10 @@ The hyperspherical framework (Level 3) extends to exotic two-particle systems vi
 | Fully operational | H, He, Li, Be, C, N, O, F | Production | Validation |
 | Architecturally ready, untested | B, Ne | Need testing | PK validation, molecular targets |
 | Feasible with external data | Na-Ar | Approach (1) or (3) | 10e core tabulation |
+| Second & third row s-block | Na–Ar, K, Ca | Supported (v2.1.0, v2.2.0) | [Ne], [Ar] frozen cores |
+| Third-row p-block (Ga–Kr) | Ga, Ge, As, Se, Br, Kr | Supported (v2.2.0) | [Ar]3d¹⁰ frozen core |
+| First transition series (ScH–ZnH) | Z=21–30 | Supported for hydrides (v2.8.0) | d-block composed blocks |
+| Fifth-row s-block | Rb, Sr | Supported (v2.12.0) | [Kr] frozen core — unblocks SrH |
+| Sixth-row s-block | Cs, Ba | Supported (v2.12.0) | [Xe] frozen core — unblocks BaH |
 | Exotic atoms | PsH, H⁻ | Prototype (v2.9.0) | Asymptotic convergence (PsH), graph validity (H⁻) |
-| Out of scope | Z > 20 | Fundamental | Multi-reference, many-electron core |
+| Out of scope | 4d/5d TM, lanthanides, 5p/6p block | Fundamental | Multi-reference, f-shell correlation |

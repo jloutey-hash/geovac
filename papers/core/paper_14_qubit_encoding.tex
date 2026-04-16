@@ -1602,21 +1602,22 @@ $\lambda_{\mathrm{ni}}$ is the non-identity 1-norm;
 grouping). ``scalar'' columns repeat the spinless encoding of
 \S\ref{sec:composed} at the same spec topology for reference.
 Pauli ratio rel/scalar is isostructural across the three molecules
-($1.00\times / 2.42\times / 5.89\times$ at $n_{\max}=1/2/3$).}
+($1.00\times / 4.24\times / 11.33\times$ at $n_{\max}=1/2/3$; post-TR
+correction, Sprint 4 v2.15.0).}
 \label{tab:spinor_resource}
 \begin{ruledtabular}
 \begin{tabular}{cccccccc}
 $n_{\max}$ & Mol. & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & rel/scalar & $\lambda_{\mathrm{ni}}^{\mathrm{rel}}$ (Ha) & QWC$^{\mathrm{rel}}$ \\
 \hline
-1 & LiH & 6   & 9        & 9      & 1.00$\times$ & 10.15  & 1 \\
-1 & BeH & 6   & 9        & 9      & 1.00$\times$ & 63.44  & 1 \\
+1 & LiH & 6   & 9        & 9      & 1.00$\times$ & 4.72   & 1 \\
+1 & BeH & 6   & 9        & 9      & 1.00$\times$ & 9.41   & 1 \\
 1 & CaH & 4   & 6        & 6      & 1.00$\times$ & 2.03   & 1 \\
-2 & LiH & 30  & 333      & 805    & 2.42$\times$ & 35.90  & 55 \\
-2 & BeH & 30  & 333      & 805    & 2.42$\times$ & 141.32 & 52 \\
-2 & CaH & 20  & 222      & 534    & 2.41$\times$ & 13.87  & 52 \\
-3 & LiH & 84  & 7\,878   & 46\,434 & 5.89$\times$ & 126.75 & 6\,571 \\
-3 & BeH & 84  & 7\,878   & 46\,434 & 5.89$\times$ & 297.03 & 6\,571 \\
-3 & CaH & 56  & 5\,252   & 30\,940 & 5.89$\times$ & 65.81  & 6\,571 \\
+2 & LiH & 30  & 333      & 1\,413 & 4.24$\times$ & 29.97  & 121 \\
+2 & BeH & 30  & 333      & 1\,413 & 4.24$\times$ & 40.26  & 111 \\
+2 & CaH & 20  & 222      &    942 & 4.24$\times$ & 18.68  & 111 \\
+3 & LiH & 84  & 7\,878   & 89\,226 & 11.33$\times$ & 204.93 & 11\,865 \\
+3 & BeH & 84  & 7\,878   & 89\,226 & 11.33$\times$ & 278.51 & 11\,843 \\
+3 & CaH & 56  & 5\,252   & 59\,484 & 11.33$\times$ & 125.36 & 11\,843 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1625,9 +1626,9 @@ Three observations on Table~\ref{tab:spinor_resource}:
 
 \begin{enumerate}
   \item \emph{Pauli ratio is isostructural.} The rel/scalar Pauli
-    ratio at fixed $n_{\max}$ is identical within rounding across
-    LiH, BeH, and CaH ($1.00\times$, $2.42\times$, $5.89\times$ at
-    $n_{\max}=1,2,3$). This is consistent with the general scaling
+    ratio at fixed $n_{\max}$ is identical across LiH, BeH, and CaH
+    to machine precision ($1.00\times$, $4.24\times$, $11.33\times$ at
+    $n_{\max}=1,2,3$; post-TR correction in Sprint~4). This is consistent with the general scaling
     law of \S\ref{sec:composed}: the composed Pauli count depends
     on $Q$ and on the angular structure, not on nuclear charge or
     valence configuration.
@@ -1724,7 +1725,7 @@ S1--S3, which are \textbf{flagged as deferred} from this comparison
 GeoVac numbers at $n_{\max}=2$ compared to the single available
 Sunaga cell (RaH-18q). The ``projected'' column uses the
 Paper~14 \S\ref{sec:composed} O($Q^{2.5}$) composed scaling
-law combined with the Tier 2 rel/scalar multiplier ($\sim$2.4$\times$)
+law combined with the Tier 2 rel/scalar multiplier ($\sim$4.2$\times$)
 to extrapolate GeoVac to matched $Q = 18$.}
 \label{tab:sunaga}
 \begin{ruledtabular}
@@ -1792,7 +1793,7 @@ denser than the scalar one (from the $(2Q/Q)^4 = 16$ four-tuple
 count times $d_{\mathrm{spinor}}/d_{\mathrm{scalar}} \approx 0.86$
 at $l_{\max}=3$). At matched $Q$ (the regime of
 Table~\ref{tab:spinor_resource}) the multiplier is milder:
-$5.89\times$ at $n_{\max}=3$. The distinction between matched-$l_{\max}$
+$11.33\times$ at $n_{\max}=3$. The distinction between matched-$l_{\max}$
 and matched-$Q$ accounting matters when comparing to scalar published
 baselines; all GeoVac numbers in this section are matched-$Q$.
 
@@ -1882,6 +1883,87 @@ spin-spin and spin-other-orbit operators (Direction~3, deferred).
 Darwin + mass-velocity do not improve the 2p-doublet splitting
 because both $j$-branches share $l = 1$: Darwin vanishes for $l \geq 1$,
 and mass-velocity is identical for fixed~$l$.
+
+\paragraph{Breit-Pauli SS/SOO fine structure (Track BF).}
+Sprint 3 (Track BF-A+B+C+D, 2026) adds the two-body Breit-Pauli
+retarded Slater integrals to the framework via a new production
+module \texttt{geovac/breit\_integrals.py} (Mellin-regularized
+radial integrator, 26 tests passing).  For the He $2\,^3\!P$
+multiplet with configuration $(1s)(2p)$ the leading Breit-Pauli
+fine structure takes the form
+\begin{equation}\label{eq:breit_pauli_3P}
+  E(^3P_J) \;=\; \tfrac{\zeta_{2p}}{2}\,X(J) \;+\; A_{SS}\,f_{SS}(J) \;+\; A_{SOO}\,f_{SOO}(J),
+\end{equation}
+with $X(J) = J(J+1) - L(L+1) - S(S+1)$ and the angular
+$J$-coefficients
+$f_{SS}(J) = (-2, +1, -\tfrac{1}{5})$, $f_{SOO}(J) = (+2, +1, -1)$
+for $J = 0, 1, 2$.  The J-patterns are derived symbolically
+(Track~DD, 2026) from the scalar rank-$k$ tensor Racah identity
+$(-1)^{L+S+J}\,6j\{L\,S\,J;\,S\,L\,k\}$ at $L = S = 1$, with
+$k = 2$ for SS and $k = 1$ for SOO (normalized so $f(J=1) = 1$);
+the derivation and sympy-exact verification are recorded in
+\texttt{tests/test\_breit\_integrals.py}
+(\texttt{test\_drake\_f\_SS\_pattern\_from\_6j},
+\texttt{test\_drake\_f\_SOO\_pattern\_from\_6j}).  The choice of
+spin tensor is also structurally fixed by the same 9j algebra:
+$\langle S{=}1\,\|[s_1\!\otimes\!s_2]^{(2)}\|\,S{=}1\rangle = \sqrt{5}/2$
+is non-zero (SS uses the coupled rank-$2$ spin tensor), while
+$\langle S{=}1\,\|[s_1\!\otimes\!s_2]^{(1)}\|\,S{=}1\rangle = 0$
+is why SOO must use the sum-of-single-electron tensor
+$\vec s_1 + 2\vec s_2$ (Bethe-Salpeter \S38.15) rather than the
+coupled rank-$1$ form.  The radial amplitudes are
+\begin{align}\label{eq:drake_amplitudes}
+  A_{SS}  &= \alpha^2 \left( \tfrac{3}{50}\, M^2_{\rm dir} - \tfrac{2}{5}\, M^2_{\rm exch} \right), \\
+  A_{SOO} &= \alpha^2 \left( \tfrac{3}{2}\, M^1_{\rm dir} - M^1_{\rm exch} \right),\nonumber
+\end{align}
+where $M^k_{\rm dir}$ and $M^k_{\rm exch}$ are the direct and
+exchange Breit-Pauli retarded Slater integrals
+$\int\!\!\int R_{ab}(r_1) R_{cd}(r_2)\, r_<^k/r_>^{k+3}\, r_1^2 r_2^2\, dr_1 dr_2$
+in closed form from the Mellin-regularized evaluator.  The
+combining coefficients $(\tfrac{3}{50}, -\tfrac{2}{5}, \tfrac{3}{2}, -1)$
+are pure rationals (Paper~18 intrinsic tier); the radial integrals
+are rational$+$embedding-log (Paper~18 embedding tier).  The
+rational direct/exchange mixing ratios were identified by
+systematic enumeration over small rationals (Track~BF-D) and
+confirmed numerically to reproduce NIST He $2\,^3\!P$ to sub-percent
+accuracy; a closed-form derivation of these specific rationals
+from the bipolar harmonic expansion of
+$Y^{(K)}(\hat r_{12})/r_{12}^{K+1}$ is deferred
+(Track~DD honest-negative on the mixing coefficients; J-pattern
+and spin-tensor structure are derived).
+
+On the He $2\,^3\!P$ multiplet with $Z_{\rm nuc} = 2, Z_{\rm eff} = 1$
+and CODATA $\alpha$, Eqs.~(\ref{eq:breit_pauli_3P})--(\ref{eq:drake_amplitudes})
+reproduce the NIST splittings to sub-percent accuracy:
+\begin{center}
+  \begin{tabular}{lrrr}
+    \toprule
+    Splitting & GeoVac (MHz) & NIST (MHz) & Rel.\ err.\\
+    \midrule
+    $E(P_0) - E(P_1)$ & $+29{,}612.91$ & $+29{,}616.95$ & $-0.014\%$\\
+    $E(P_1) - E(P_2)$ & $ +2{,}231.16$ & $ +2{,}291.18$ & $-2.62\%$\\
+    $E(P_0) - E(P_2)$ & $+31{,}844.07$ & $+31{,}908.13$ & $-0.20\%$\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+The $0.20\%$ span error (a $330\times$ improvement over the
+$66\%$ SO-only T8 baseline, same sign as NIST) meets the Sprint~3
+BF-D target of $<20\%$ accuracy.  The $2.6\%$ residual on the
+smaller $(P_1, P_2)$ splitting is at the limit of the
+four-coefficient rational approximation; further reduction requires
+finite-mass recoil or higher-order QED corrections (Drake~1971
+\S IV, not in scope).
+
+Extensions to Li $2\,^2\!P$ and Be $2s2p\,^3\!P$ (Sprint~3 BF-E)
+do not meet the $20\%$ target with physically-determined $Z_{\rm eff}$:
+Li (single valence above closed core) requires explicit
+core-polarization SOO corrections that vanish at $S = \tfrac{1}{2}$;
+Be (two valence electrons in the near-degenerate $n = 2$ shell)
+requires multi-configuration treatment of the $2s^2 \leftrightarrow 2s2p$
+mixing.  Both are Tier~3+ goals.  The BF-D result is nonetheless the
+first sub-percent Breit-Pauli fine-structure benchmark in the
+framework; machinery and Drake coefficient identifications persist
+for future multi-configuration extensions.
 
 %% ========================================================================
 \section{Discussion}

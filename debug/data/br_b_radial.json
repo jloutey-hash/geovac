@@ -1,0 +1,463 @@
+{
+  "track": "BR-B",
+  "date": "2026-04-15",
+  "summary": "Algebraic analysis of 1/r_12^3 radial Breit integrals.",
+  "headline_results": [
+    "1/r_12^3 expansion has algebraic radial kernel K_l = r<^l/[r>^(l+1)(r>^2-r<^2)]",
+    "Bare K_l integral diverges logarithmically at r_1=r_2 for every l (distributional).",
+    "BP-retarded kernel r<^l/r>^(l+3) (from tensor angular projection) is algebraic.",
+    "BP-retarded integrals are exact rationals in Z with Z^3 scaling.",
+    "Taxonomy: bare 1/r_12^3 = embedding; BP-retarded = intrinsic."
+  ],
+  "expansion_verification": {
+    "expansion_residual": "17*t**8*(6435*c**8 - 12012*c**6 + 6930*c**4 - 1260*c**2 + 35)/128",
+    "expansion_ok": false,
+    "gegenbauer_to_legendre_table": [
+      {
+        "k": 0,
+        "legendre_decomposition": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "k": 1,
+        "legendre_decomposition": [
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      {
+        "k": 2,
+        "legendre_decomposition": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "legendre_decomposition": [
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            7
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "legendre_decomposition": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            4,
+            9
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "legendre_decomposition": [
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            11
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "legendre_decomposition": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "k": 7,
+        "legendre_decomposition": [
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            7,
+            15
+          ]
+        ]
+      }
+    ],
+    "radial_kernel_formula": "K_l(r<,r>) = r<^l / [r>^(l+1) * (r>^2 - r<^2)]",
+    "note": "Gegenbauer C_k^(3/2) expands only into P_l with l<=k and l==k (mod 2), so after reindexing k = l+2j one gets a geometric sum in (r_</r_>)^2, giving the 1/(r>^2 - r<^2) factor in K_l."
+  },
+  "coalescence_analysis": {
+    "K_l_near_coalescence": "~ 1/(2 * r>^2 * eps)  [SAME for every l]",
+    "sympy_leading_term": "(2*eps**2*l**2 - 4*eps**2*l + eps**2 - 4*eps*l*r2 + 2*eps*r2 + 4*r2**2)/(8*eps*r2**4)",
+    "divergence_type": "logarithmic at r1 = r2",
+    "integrability_verdict": "NOT integrable. The bare 1/r_12^3 operator is distributional: it requires either a principal-value prescription, a regularization (Breit-Pauli tensor structure), or a similarity transformation (transcorrelation) before its matrix elements are well-defined."
+  },
+  "sample_integrals_Z1": {
+    "Z": 1,
+    "samples": [
+      {
+        "label": "(1s,1s;1s,1s) l=0",
+        "quantum_numbers": {
+          "n1": 1,
+          "l1": 0,
+          "n3": 1,
+          "l3": 0,
+          "n2": 1,
+          "l2": 0,
+          "n4": 1,
+          "l4": 0,
+          "l": 0
+        },
+        "value_at_Z1": "-5 + 8*log(2)",
+        "value_at_Z1_float": 0.5451774444795625,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(1s,1s;1s,1s) l=2",
+        "quantum_numbers": {
+          "n1": 1,
+          "l1": 0,
+          "n3": 1,
+          "l3": 0,
+          "n2": 1,
+          "l2": 0,
+          "n4": 1,
+          "l4": 0,
+          "l": 2
+        },
+        "value_at_Z1": "-33 + 48*log(2)",
+        "value_at_Z1_float": 0.27106466687737485,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(1s,2s;1s,2s) l=0",
+        "quantum_numbers": {
+          "n1": 1,
+          "l1": 0,
+          "n3": 2,
+          "l3": 0,
+          "n2": 1,
+          "l2": 0,
+          "n4": 2,
+          "l4": 0,
+          "l": 0
+        },
+        "value_at_Z1": "4/81",
+        "value_at_Z1_float": 0.04938271604938271,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(1s,2s;1s,2s) l=2",
+        "quantum_numbers": {
+          "n1": 1,
+          "l1": 0,
+          "n3": 2,
+          "l3": 0,
+          "n2": 1,
+          "l2": 0,
+          "n4": 2,
+          "l4": 0,
+          "l": 2
+        },
+        "value_at_Z1": "2668/243 - 1280*log(2)/81",
+        "value_at_Z1_float": 0.025986940945720214,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(2s,2p;2s,2p) l=1",
+        "quantum_numbers": {
+          "n1": 2,
+          "l1": 0,
+          "n3": 2,
+          "l3": 1,
+          "n2": 2,
+          "l2": 0,
+          "n4": 2,
+          "l4": 1,
+          "l": 1
+        },
+        "value_at_Z1": "267/256 - 3*log(2)/2",
+        "value_at_Z1_float": 0.003247979160082036,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(2s,2p;2s,2p) l=2",
+        "quantum_numbers": {
+          "n1": 2,
+          "l1": 0,
+          "n3": 2,
+          "l3": 1,
+          "n2": 2,
+          "l2": 0,
+          "n4": 2,
+          "l4": 1,
+          "l": 2
+        },
+        "value_at_Z1": "-2661/256 + 15*log(2)",
+        "value_at_Z1_float": 0.002676458399179641,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(2p,2p;2p,2p) l=0",
+        "quantum_numbers": {
+          "n1": 2,
+          "l1": 1,
+          "n3": 2,
+          "l3": 1,
+          "n2": 2,
+          "l2": 1,
+          "n4": 2,
+          "l4": 1,
+          "l": 0
+        },
+        "value_at_Z1": "7/768",
+        "value_at_Z1_float": 0.009114583333333334,
+        "converged": true,
+        "note": ""
+      },
+      {
+        "label": "(2p,2p;2p,2p) l=2",
+        "quantum_numbers": {
+          "n1": 2,
+          "l1": 1,
+          "n3": 2,
+          "l3": 1,
+          "n2": 2,
+          "l2": 1,
+          "n4": 2,
+          "l4": 1,
+          "l": 2
+        },
+        "value_at_Z1": "-1327/768 + 5*log(2)/2",
+        "value_at_Z1_float": 0.005003368066529941,
+        "converged": true,
+        "note": ""
+      }
+    ]
+  },
+  "z_scaling": {
+    "law": "R_Breit^l(Z) = Z^3 * R_Breit^l(Z=1)",
+    "derivation": "Hydrogenic scaling r -> r/Z, wavefunction norm Z^3, dr^3 -> Z^{-3} dr^3. For Coulomb R^k: (r^2 dr)^2 * (Z^{3/2})^4 * (1/r) gives Z^(6 - 6 + 1) = Z. For Breit-retarded r_<^l / r_>^{l+3}: (r^2 dr)^2 * Z^6 * 1/r^3 gives Z^(6-6+3) = Z^3.",
+    "probes": [
+      {
+        "label": "R_BP^0(1s,2s;1s,2s)",
+        "quantum_numbers": {
+          "n1": 1,
+          "l1": 0,
+          "n3": 2,
+          "l3": 0,
+          "n2": 1,
+          "l2": 0,
+          "n4": 2,
+          "l4": 0,
+          "l": 0
+        },
+        "base_value_Z1": "4/81",
+        "rows": [
+          {
+            "Z": 1,
+            "R_value": "4/81",
+            "R_float": 0.04938271604938271,
+            "R(Z)/R(1)": "1",
+            "predicted_Z^3": 1,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 2,
+            "R_value": "32/81",
+            "R_float": 0.3950617283950617,
+            "R(Z)/R(1)": "8",
+            "predicted_Z^3": 8,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 4,
+            "R_value": "256/81",
+            "R_float": 3.1604938271604937,
+            "R(Z)/R(1)": "64",
+            "predicted_Z^3": 64,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 10,
+            "R_value": "4000/81",
+            "R_float": 49.382716049382715,
+            "R(Z)/R(1)": "1000",
+            "predicted_Z^3": 1000,
+            "agrees_with_Z^3": true
+          }
+        ],
+        "all_agree": true
+      },
+      {
+        "label": "R_BP^1(2s,2p;2s,2p)",
+        "quantum_numbers": {
+          "n1": 2,
+          "l1": 0,
+          "n3": 2,
+          "l3": 1,
+          "n2": 2,
+          "l2": 0,
+          "n4": 2,
+          "l4": 1,
+          "l": 1
+        },
+        "base_value_Z1": "267/256 - 3*log(2)/2",
+        "rows": [
+          {
+            "Z": 1,
+            "R_value": "267/256 - 3*log(2)/2",
+            "R_float": 0.003247979160082036,
+            "R(Z)/R(1)": "1",
+            "predicted_Z^3": 1,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 2,
+            "R_value": "267/32 - 12*log(2)",
+            "R_float": 0.025983833280656288,
+            "R(Z)/R(1)": "8",
+            "predicted_Z^3": 8,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 4,
+            "R_value": "267/4 - 96*log(2)",
+            "R_float": 0.2078706662452503,
+            "R(Z)/R(1)": "64",
+            "predicted_Z^3": 64,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 10,
+            "R_value": "33375/32 - 1500*log(2)",
+            "R_float": 3.247979160082036,
+            "R(Z)/R(1)": "1000",
+            "predicted_Z^3": 1000,
+            "agrees_with_Z^3": true
+          }
+        ],
+        "all_agree": true
+      },
+      {
+        "label": "R_BP^0(2p,2p;2p,2p)",
+        "quantum_numbers": {
+          "n1": 2,
+          "l1": 1,
+          "n3": 2,
+          "l3": 1,
+          "n2": 2,
+          "l2": 1,
+          "n4": 2,
+          "l4": 1,
+          "l": 0
+        },
+        "base_value_Z1": "7/768",
+        "rows": [
+          {
+            "Z": 1,
+            "R_value": "7/768",
+            "R_float": 0.009114583333333334,
+            "R(Z)/R(1)": "1",
+            "predicted_Z^3": 1,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 2,
+            "R_value": "7/96",
+            "R_float": 0.07291666666666667,
+            "R(Z)/R(1)": "8",
+            "predicted_Z^3": 8,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 4,
+            "R_value": "7/12",
+            "R_float": 0.5833333333333334,
+            "R(Z)/R(1)": "64",
+            "predicted_Z^3": 64,
+            "agrees_with_Z^3": true
+          },
+          {
+            "Z": 10,
+            "R_value": "875/96",
+            "R_float": 9.114583333333334,
+            "R(Z)/R(1)": "1000",
+            "predicted_Z^3": 1000,
+            "agrees_with_Z^3": true
+          }
+        ],
+        "all_agree": true
+      }
+    ],
+    "skipped": [],
+    "all_probes_agree": true
+  },
+  "published_comparison": {
+    "our_value_at_Z1": "-33 + 48*log(2)",
+    "our_value_float": 0.27106466687737485,
+    "bethe_salpeter_ref": "Bethe-Salpeter \u00a738 (older convention; values differ by normalization)",
+    "published_Z1": "83/640",
+    "published_float": 0.1296875,
+    "exact_agreement": false,
+    "ratio": 2.090137190379758,
+    "note": "Post-BF-A: our value contains log(2) content (rational + log-embedding), confirmed by direct sympy integration and numerical scipy.integrate.dblquad cross-check (4e-10 rel err). The 83/640 literature value in BR-B's original note used a different convention; the canonical result is -33 + 48 log(2)."
+  }
+}

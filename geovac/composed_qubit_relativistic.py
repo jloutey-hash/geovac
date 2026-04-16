@@ -93,14 +93,34 @@ _X_CACHE: Dict[Tuple[int, int, int, int, int], float] = {}
 
 def jj_angular_Xk(kappa_a: int, two_m_a: int,
                   kappa_c: int, two_m_c: int, k: int) -> float:
-    """Full-Gaunt jj-coupled angular coefficient X_k(a,c).
+    """Full-Gaunt jj-coupled angular coefficient X_k(a,c) = ⟨κ_a m_a | C^k_q | κ_c m_c⟩.
 
-    X_k = Π(l_a+k+l_c even)
-          · (−1)^{(2j_a − two_m_a)/2}
-          · √((2j_a+1)(2j_c+1))
-          · 3j(j_a k j_c; ½ 0 −½)
-          · 3j(j_a k j_c; −m_j,a  q  m_j,c)
+    Grant (Relativistic Quantum Theory of Atoms and Molecules, 2007)
+    Eqs. 8.9.9 and 8.9.11; Johnson (Atomic Structure Theory, 2007)
+    Eq. 3.69:
+
+      ⟨κ_a m_a | C^k_q | κ_c m_c⟩ = (−1)^{j_a − m_a} · 3j(j_a k j_c; −m_a, q, m_c)
+                                     · ⟨κ_a || C^k || κ_c⟩
+
+      ⟨κ_a || C^k || κ_c⟩ = (−1)^{j_a + 1/2} · √((2j_a+1)(2j_c+1))
+                            · 3j(j_a k j_c; 1/2, 0, −1/2) · π(l_a+k+l_c even)
+
+    Combined:
+
+      X_k(a,c) = π(l_a+k+l_c even)
+               · (−1)^{j_a − m_a + j_a + 1/2}
+               · √((2j_a+1)(2j_c+1))
+               · 3j(j_a k j_c; 1/2 0 −1/2)
+               · 3j(j_a k j_c; −m_a, q, m_c)
     with q = m_j,a − m_j,c = (two_m_a − two_m_c)/2.
+
+    Regression: Track TR (Sprint 4, April 2026) restored the missing
+    (−1)^{j_a + 1/2} reduced-matrix-element phase. The bug caused a
+    0.95–1.66 mHa gap between spinor FCI at α=0 and scalar FCI
+    for Z=4 He-like at n_max=2,3,4 (reported in DC-B §5). After the fix
+    the spinor↔scalar agreement is restored to machine precision.
+    The phase matters for cross-κ pairings (e.g. s₁/₂ × p₃/₂) where
+    the sign mismatch produces a net wrong-sign direct Coulomb integral.
 
     Returns 0 if any selection rule (parity, triangle, q-integer) fails.
     Caches float value (the exact sympy expression is a combination of
@@ -146,10 +166,14 @@ def jj_angular_Xk(kappa_a: int, two_m_a: int,
         _X_CACHE[key] = 0.0
         return 0.0
 
-    # Phase (−1)^{j_a − m_j,a}, always an integer because 2(j_a − m_j,a) is
-    # an even integer (j_a half-int, m_j,a half-int, diff integer).
-    phase_exp = (two_j_a - two_m_a) // 2
-    phase = (-1) ** phase_exp
+    # Phase (−1)^{j_a − m_a + j_a + 1/2} = (−1)^{2j_a + 1/2 − m_a}.
+    # Writing 2(...) to work with (2j_a, 2m_a) integer arithmetic:
+    # exponent × 2 = (two_j_a - two_m_a) + (two_j_a + 1), all integers.
+    # The (−1)^{j_a + 1/2} factor is the reduced-matrix-element phase,
+    # missing from earlier versions of this function (Track TR fix).
+    phase_exp = (two_j_a - two_m_a) // 2  # (-1)^(j_a - m_a)
+    red_phase_exp = (two_j_a + 1) // 2     # (-1)^(j_a + 1/2)
+    phase = (-1) ** (phase_exp + red_phase_exp)
 
     prefac = sqrt(Integer(two_j_a + 1) * Integer(two_j_c + 1))
     expr = Integer(phase) * prefac * w_red * w_m

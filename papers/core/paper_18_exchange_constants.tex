@@ -595,6 +595,47 @@ The taxonomy reveals a hierarchy of exchange types:
     eliminable by a non-unitary change of basis---in contrast to
     $e^a E_1(a)$, which is structurally irreducible.
 
+    The $1/r_{12}$ classification is \emph{universal across second-order
+    central-field operators}: Sprint~2 Track~DC-A (April~2026) extended
+    the analysis to the two-electron Dirac-Coulomb Hamiltonian and
+    proved, via the Pauli-reduced LL block (Kutzelnigg 1984, 1988), that
+    the cusp condition $(\partial_{r_{12}} \Psi_{LL})|_{r_{12}=0^+} = \tfrac12 [1+O(\alpha^2)] \Psi_{LL}(0)$
+    survives relativistic corrections with only an
+    $O((Z\alpha)^2)$ amplitude rescaling---the Kutzelnigg-Morgan 1992
+    Theorem~3 Sobolev-regularity class is preserved.  The partial-wave
+    energy convergence exponent is $l^{-4}$ for singlet (Schwartz 1962)
+    and $l^{-6}$ for triplet (Pack-Brown 1966) in both Schrödinger-Coulomb
+    and Dirac-Coulomb.  Numerical verification at Z=4 (Be$^{2+}$) via
+    Track~DC-B: fitted exponent matches to $\Delta p = +0.019$ within
+    fit-noise.  The Dirac program therefore does \emph{not} regularize
+    the e-e cusp; full QED (vacuum polarization modifying the photon
+    propagator at distances $\lesssim 1/m_e c$) would be required to
+    soften the $1/r_{12}$ kernel itself.
+
+    A \emph{distributional} sub-category of embedding constants appears
+    in Sprint~2 Track~BR-B.  The Breit spin-spin interaction contains a
+    $1/r_{12}^3$ kernel whose bare partial-wave expansion
+    \[
+      \frac{1}{r_{12}^3} = \sum_l (2l+1)\, K_l(r_<, r_>)\, P_l(\cos\theta_{12}),
+      \qquad K_l(r_<, r_>) = \frac{r_<^l}{r_>^{l+1}\,(r_>^2 - r_<^2)}
+    \]
+    has a \emph{logarithmic divergence} at coalescence $r_< \to r_>$
+    for every $l$---the operator is not in $L^1_{\rm loc}$ and its
+    matrix elements are undefined as ordinary integrals.  The Breit-Pauli
+    tensor projection (transverse $\sigma_1\!\cdot\!\sigma_2 - 3(\sigma_1\!\cdot\!\hat r_{12})(\sigma_2\!\cdot\!\hat r_{12})$)
+    regularizes this by eliminating the longitudinal component, leaving
+    a smooth kernel $K_l^{BP}(r_<, r_>) = r_<^l / r_>^{l+3}$ whose matrix
+    elements are exact rationals for same-$n$ orbitals (e.g.\
+    $R_{BP}^0(1s,1s;1s,1s) = 0$, $R_{BP}^2(2p,2p;2p,2p) = 7/768$,
+    $R_{BP}^1(2s,2p;2s,2p) = 1/256$ at $Z=1$) with $Z^3$ scaling.
+    For \emph{different-$n$} orbitals, a new transcendental appears:
+    $M_{\rm ret}^2(1s,2p;1s,2p) = 21344/729 - (10240/243)\log(2)$,
+    the first documented example of a $\log$-embedding constant in the
+    GeoVac framework.  The Breit-Pauli regularization is thus both
+    \emph{distributional} (the bare operator requires regularization
+    before having matrix elements) and \emph{multi-scale} (cross-$n$
+    integrals introduce $\log$ content absent from same-$n$).
+
     A graph-theoretic characterization of $1/r_{12}$ on the $S^3$
     pair-state lattice (v2.9.1) makes the embedding nature explicit.
     Building the graph whose nodes are singlet pair-states

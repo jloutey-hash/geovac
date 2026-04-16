@@ -468,6 +468,67 @@ _ATOM_DATA = {
         'group_type': 'noble_gas',
         'pk_source': 'frozen_core',
     },
+    # ------------------------------------------------------------------
+    # Fifth row s-block (Z=37-38): frozen-core [Kr] (36 electrons)
+    # Sprint 3 Track HA-B (v2.12.0): enables Sunaga 2025 comparison for SrH.
+    # Isostructural with K, Ca (Z=19-20) under [Kr] core.
+    # Rest of fifth row (Z=39-54) OUT OF SCOPE for Sprint 3:
+    #   4d block (Z=39-48): transition metals, multi-reference
+    #   5p block (Z=49-54): needs [Kr]4d10 core (not yet implemented)
+    # ------------------------------------------------------------------
+    37: {
+        'structure_type': 'C',
+        'n_core_electrons': 36,
+        'n_valence_electrons': 1,
+        'Z_eff_valence': 1.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6',
+        'valence_config': '5s1',
+        'period': 5,
+        'group_type': 'alkali_metal',
+        'pk_source': 'frozen_core',
+    },
+    38: {
+        'structure_type': 'D',
+        'n_core_electrons': 36,
+        'n_valence_electrons': 2,
+        'Z_eff_valence': 2.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6',
+        'valence_config': '5s2',
+        'period': 5,
+        'group_type': 'alkaline_earth',
+        'pk_source': 'frozen_core',
+    },
+    # ------------------------------------------------------------------
+    # Sixth row s-block (Z=55-56): frozen-core [Xe] (54 electrons)
+    # Sprint 3 Track HA-B (v2.12.0): enables Sunaga 2025 comparison for BaH.
+    # Isostructural with K, Ca (Z=19-20) under [Xe] core.
+    # Rest of sixth row (Z=57-86) OUT OF SCOPE for Sprint 3:
+    #   Lanthanides (Z=57-71): 4f-shell, not treatable by frozen-core
+    #   5d block (Z=72-80): transition metals, multi-reference
+    #   6p block (Z=81-86): needs [Xe]4f14 5d10 core (not yet implemented)
+    # ------------------------------------------------------------------
+    55: {
+        'structure_type': 'C',
+        'n_core_electrons': 54,
+        'n_valence_electrons': 1,
+        'Z_eff_valence': 1.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6',
+        'valence_config': '6s1',
+        'period': 6,
+        'group_type': 'alkali_metal',
+        'pk_source': 'frozen_core',
+    },
+    56: {
+        'structure_type': 'D',
+        'n_core_electrons': 54,
+        'n_valence_electrons': 2,
+        'Z_eff_valence': 2.0,
+        'core_config': '1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6',
+        'valence_config': '6s2',
+        'period': 6,
+        'group_type': 'alkaline_earth',
+        'pk_source': 'frozen_core',
+    },
 }
 
 
@@ -607,11 +668,36 @@ def classify_atom(Z: int) -> AtomClassification:
     if Z < 1:
         raise ValueError(f"Nuclear charge Z must be >= 1, got {Z}")
 
-    # Unsupported atoms (Z > 36)
-    if Z > 36:
+    # Unsupported atoms: Z=39-54 (4d block + 5p block),
+    # Z=57-86 (lanthanides + 5d + 6p), Z > 86 (actinides etc.)
+    if Z not in _ATOM_DATA:
         N = Z  # neutral atom
         nu = max(N - 2, 0)
         mu_free = 2.0 * nu ** 2 if nu > 0 else 0.0
+
+        if 39 <= Z <= 54:
+            note = (
+                f'Z={Z} is in the fifth row but not in the s-block. '
+                'Supported fifth-row atoms: Z=37 (Rb), Z=38 (Sr). '
+                'The 4d block (Z=39-48) is out of scope due to '
+                'multi-reference correlation; the 5p block (Z=49-54) '
+                'requires a [Kr]4d10 frozen core not yet implemented.'
+            )
+        elif 57 <= Z <= 86:
+            note = (
+                f'Z={Z} is in the sixth row but not in the s-block. '
+                'Supported sixth-row atoms: Z=55 (Cs), Z=56 (Ba). '
+                'Lanthanides (Z=57-71), 5d block (Z=72-80), and 6p '
+                'block (Z=81-86) are out of scope for the current '
+                'frozen-core infrastructure.'
+            )
+        else:
+            note = (
+                f'Z={Z} is beyond the supported range. '
+                'Supported: Z=1-38 (rows 1-5 s-block + 4th row p/d) '
+                'and Z=55-56 (6th row s-block).'
+            )
+
         return AtomClassification(
             Z=Z,
             N_electrons=N,
@@ -628,11 +714,7 @@ def classify_atom(Z: int) -> AtomClassification:
             period=0,
             group_type='unknown',
             supported=False,
-            support_note=(
-                f'Z={Z} is beyond the fourth-row p-block (Z=1-36). '
-                'Heavier atoms require additional core shells not yet '
-                'implemented in the atomic classifier.'
-            ),
+            support_note=note,
         )
 
     data = _ATOM_DATA[Z]
