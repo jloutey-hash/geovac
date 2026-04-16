@@ -1,0 +1,55 @@
+% Paper 24 §V drop-in: Spinor-Lichnerowicz corollary
+% Insert as a new subsection after §V.B (Two-fermion entanglement rigidity)
+% Track T9, Tier 3 sprint, 2026-04-15
+
+\subsection{Spinor-Lichnerowicz corollary: the operator-order discriminant}
+\label{sec:spinor-lichnerowicz}
+
+The HO rigidity theorem of Section~\ref{sec:ho-rigidity-theorem}
+and the Coulomb/HO asymmetry of Section~\ref{sec:coulomb-ho-asymmetry}
+established that calibration~$\pi$ (even-zeta content) enters from
+second-order Riemannian operators on scalar bundles: the HO via
+the Bargmann--Segal Euler operator on $H^2(S^5)$, and the Coulomb
+system via the Fock projection to $-\Delta_{\mathrm{LB}}$ on~$S^3$.
+The first-order/second-order distinction was identified as the
+structural origin of the $\pi$-free property of the Bargmann graph
+(first-order, complex-analytic, linear projection) versus the
+calibration~$\pi$ of the Fock Dirichlet series (second-order,
+Riemannian, nonlinear projection).
+
+The Dirac-on-$S^3$ Tier~3 sprint (Track~T9) extends this result to
+spinor bundles.  The squared Dirac operator on unit~$S^3$ satisfies
+the Lichnerowicz identity $D^2 = \nabla^*\nabla + R/4$
+\cite{lichnerowicz1963}, where $R = 6$.  Its spectral zeta evaluates
+at every integer~$s$ to a two-term polynomial in~$\pi^2$ with
+rational coefficients (Paper~18, Eq.~\ref{eq:zeta_d2}), with
+\emph{no odd-zeta content} at any~$s$.
+
+The mechanism is algebraic: squaring maps the first-order Dirac
+sum $\sum g_n \cdot (\text{odd})^{-s}$ (which produces
+$\zeta_R(\text{odd})$ at odd~$s$, as in Tier~1 Track~D3) to the
+second-order sum $\sum g_n \cdot (\text{odd})^{-2s}$, which is always
+$\mathbb{Q} \cdot \pi^{2s}$ by the Bernoulli formula.  The
+odd-zeta content of~$D$ is structurally lost upon squaring.
+
+\begin{corollary}[Operator-order transcendental discriminant]
+The operator-order distinction (first-order vs.\ second-order) is
+bundle-independent on round~$S^3$.  All second-order operators---scalar
+Laplace--Beltrami, spinor connection Laplacian $\nabla^*\nabla$,
+squared Dirac~$D^2$---produce exclusively $\pi^{\mathrm{even}}$
+spectral-zeta content.  All first-order operators (Dirac~$D$) can
+produce odd-zeta content ($\zeta_R(3), \zeta_R(5), \ldots$) via
+half-integer eigenvalue sums.  The bundle type (scalar vs.\ spinor)
+modulates rational coefficients and the eigenvalue/charge lattice
+(integer vs.\ half-integer) but does not change the transcendental
+class.
+\end{corollary}
+
+This corollary completes the universal/Coulomb-specific partition
+stated in the abstract: the Bargmann graph is $\pi$-free because
+it encodes a first-order operator (the Euler operator); calibration
+$\pi$ is second-order; and this pattern persists on spinor bundles.
+Cross-reference: Paper~18 \S IV (taxonomy closure via
+Eq.~\ref{eq:zeta_d2}); Tier~1 Track~D3 ($\zeta(3)$ from
+first-order Dirac); T9 debug memo
+(\texttt{debug/dirac\_t9\_memo.md}).

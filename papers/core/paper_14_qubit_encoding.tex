@@ -1854,6 +1854,35 @@ No claim is made here that the Tier 2 construction extends to heavy
 atoms without these Tier 3+ additions; the three extensions listed
 are the Tier 3 roadmap.
 
+\paragraph{Tier 3 fine-structure verification (Tracks T7, T8).}
+The full $\alpha^4$ one-body fine-structure ladder has been verified
+exactly.  The three terms---spin-orbit (Tier~2, Track~T2), Darwin, and
+mass-velocity (Tier~3, Track~T8)---combine to the Dirac formula
+\begin{equation}\label{eq:dirac_fs}
+  E_{\mathrm{SO}} + E_{\mathrm{D}} + E_{\mathrm{MV}}
+  \;=\; -\frac{(Z\alpha)^4}{2n^4}\left[\frac{n}{j+\tfrac{1}{2}}
+        - \frac{3}{4}\right],
+\end{equation}
+verified as an exact sympy symbolic equality for all 16 hydrogenic
+states $(n,l,j)$ through $n = 4$ and all $Z$ tested (including symbolic
+$Z$).  All six Dirac accidental degeneracies through $n = 4$ are
+confirmed ($E_{\mathrm{FS}}$ depends on $(n,j)$ only, not on~$l$
+separately).  This provides a correctness certificate for the
+single-particle component of the spin-ful composed pipeline.
+
+Relativistic radial corrections through $\gamma = \sqrt{\kappa^2 -
+(Z\alpha)^2}$ are implemented for $n_r = 0$ states (exact Pochhammer
+ratios, Track~T7); full $n_r \geq 1$ requires the Kramers--Pasternak
+three-term recursion (deferred).
+
+Fine-structure accuracy for multi-electron He/Li/Be remains at
+sign-correct and order-of-magnitude level (66--211\% relative error
+in the 2p-doublet splitting); improvement requires multi-electron
+spin-spin and spin-other-orbit operators (Direction~3, deferred).
+Darwin + mass-velocity do not improve the 2p-doublet splitting
+because both $j$-branches share $l = 1$: Darwin vanishes for $l \geq 1$,
+and mass-velocity is identical for fixed~$l$.
+
 %% ========================================================================
 \section{Discussion}
 \label{sec:discussion}

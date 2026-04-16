@@ -175,3 +175,37 @@ None yet — all Tier 2 proposals are drop-in files awaiting PI approval.
 - Three-tier program of Tier 1 closed; Tier 2 engineering upgrade complete; Tier 3 (heavy atoms, γ corrections, QED extension) deferred.
 - Paper 18 taxonomy now has executable per-tier certifiers (D1 scalar, T5 spinor); pattern to be extended for all future tiers.
 - CLAUDE.md v2.11.0 bump awaits PI approval of the §1/§2/§3/§10/§11/§12 edits.
+
+---
+
+## Session Summary 2026-04-15 — Dirac-on-S³ Tier 3 Sprint
+
+### Tracks
+- T7: completed — gamma = sqrt(kappa^2-(Z*alpha)^2) radial corrections, exact for n_r=0, NR limit verified (31 tests)
+- T8: completed — Darwin + mass-velocity alpha^4 ladder; Dirac formula exact for all (n,l,j) through n=4; honest negative on He/Li/Be splitting accuracy (43 tests)
+- T9: completed — D^2 spectral zeta theorem: zeta_{D^2}(s) = 2^{2s-1}[lambda(2s-2)-lambda(2s)] = polynomial in pi^2 at every integer s; 4th cell of Paper 18 degenerate with calibration; operator order is the transcendental discriminant
+
+### Results
+- zeta_{D^2}(1) = -pi^2/4; zeta_{D^2}(2) = pi^2-pi^4/12; zeta_{D^2}(3) = pi^4(10-pi^2)/30; zeta_{D^2}(4) = pi^6(168-17pi^2)/1260
+- No zeta(odd) content at any s — theorem, not numerical
+- Darwin+MV don't improve 2p doublet splittings (shared l=1 -> Darwin=0, MV cancels)
+- gamma radial <1/r> = Z(gamma*n_r+kappa^2)/(gamma*N_D^3), algebraic over Q(Z,alpha,gamma_kappa)
+
+### Files Modified
+- papers/core/paper_18_exchange_constants.tex — empty-cell closure paragraph + table row + bibitems added
+- papers/core/paper_24_bargmann_segal.tex — spinor-Lichnerowicz corollary subsection + bibitem added
+- papers/core/paper_14_qubit_encoding.tex — §V Dirac formula verification paragraph added
+- CLAUDE.md — v2.12.0 + §2/§3/§10/§11/§12 edits
+- debug/track_logs/STATUS.md — this session summary
+
+### Files Created
+- docs/tier3_verdict.md
+- docs/paper18_empty_cell_proposal.tex
+- docs/paper24_d2_corollary_proposal.tex
+- docs/paper14_tier3_update_proposal.tex
+- docs/claude_md_tier3_updates.md
+
+### Decisions
+- Paper 18 2x2 grid: 4th cell (2nd-order x spinor-bundle) is degenerate with calibration (pi^{even}). Grid effectively 3-tier: operator order is the primary discriminant.
+- Fine-structure accuracy for multi-electron atoms requires Direction 3 (SS/SOO) — deferred.
+- Full gamma radial corrections for n_r>=1 states require Kramers-Pasternak recursion — deferred.

@@ -1,0 +1,69 @@
+% Paper 18 §IV drop-in: squared Dirac operator and the completeness of the taxonomic grid
+% Insert after the "Certification and taxonomy wiring" paragraph, before "Parallel to Paper 24"
+% Track T9, Tier 3 sprint, 2026-04-15
+
+\paragraph{The squared Dirac operator and the completeness of the taxonomic grid.}
+The Tier 3 Dirac-on-$S^3$ sprint (2026, Track T9) probed the last open
+cell in the operator-order $\times$ bundle classification
+(Table~\ref{tab:bundle_operator_tiers}): the squared Dirac operator
+$D^2$ on the unit three-sphere, a second-order operator on spinor
+sections.
+
+By the Lichnerowicz formula~\cite{lichnerowicz1963}, $D^2 = \nabla^*\nabla + R/4$,
+where $R = 6$ is the scalar curvature of unit $S^3$, so $R/4 = 3/2$ is a
+rational constant shift.  The eigenvalues of $D^2$ are
+$(n + 3/2)^2 = (2n+3)^2/4$ with degeneracies $g_n = 2(n+1)(n+2)$ (full
+Dirac, both chiralities).  The spectral zeta function evaluates in closed
+form at every integer $s$ via a partial-fraction identity: substituting
+$m = n+1$ and using $m(m+1) = [(2m+1)^2 - 1]/4$,
+\begin{equation}\label{eq:zeta_d2}
+  \zeta_{D^2}(s)
+  \;=\; 2^{2s-1}\bigl[\lambda(2s{-}2) - \lambda(2s)\bigr],
+\end{equation}
+where $\lambda(a) = (1 - 2^{-a})\,\zeta_R(a)$ is the Dirichlet lambda
+function.  Since $\zeta_R(2k) = (-1)^{k+1}\,(2\pi)^{2k}\,B_{2k}/(2\cdot(2k)!)$
+(Bernoulli formula), every term is a rational multiple of $\pi^{2k}$.
+At every integer $s$, $\zeta_{D^2}(s)$ is therefore a two-term polynomial
+in $\pi^2$ with rational coefficients:
+$c_{2s-2}\,\pi^{2s-2} + c_{2s}\,\pi^{2s}$.  Explicitly:
+$\zeta_{D^2}(1) = -\pi^2/4$ (analytic continuation),
+$\zeta_{D^2}(2) = \pi^2 - \pi^4/12$,
+$\zeta_{D^2}(3) = \pi^4/3 - \pi^6/30$,
+$\zeta_{D^2}(4) = \pi^6(168 - 17\pi^2)/1260$.
+
+\emph{No odd-zeta content appears at any~$s$.}  The structural mechanism
+is algebraic: $D^2$ eigenvalues are perfect squares of odd half-integers,
+so the spectral sums reduce to $\sum_k f(k)\,k^{-2s}$ over odd integers,
+with exponent $2s$ (always even).  By the Bernoulli formula, such sums
+are always $\mathbb{Q} \cdot \pi^{2s}$.  Squaring the operator maps the
+first-order Dirichlet $\lambda(\text{odd})$ to $\lambda(\text{even})$,
+structurally eliminating the odd-zeta content that Tier~1 (Track~D3)
+found in the first-order Dirac spectral zeta via
+Eq.~(\ref{eq:dirac_dirichlet_zeta3}).  The Hopf-equivariant per-charge
+decomposition (half-integer charges for spinor modes) confirms this
+universally across all Hopf sectors.
+
+The (2nd-order, spinor-bundle) cell of Table~\ref{tab:bundle_operator_tiers}
+is therefore \textbf{filled and degenerate with the scalar calibration
+cell}: both produce $\pi^{\text{even}}$ content exclusively.  The
+Lichnerowicz constant shift $R/4 = 3/2$ modifies rational coefficients
+but does not introduce new transcendental content.  Operator order---first
+vs.\ second---is the primary discriminant for transcendental class on
+round~$S^3$.  Bundle type (scalar vs.\ spinor) modulates the
+degeneracy lattice ($n^2$ vs.\ $2(n+1)(n+2)$), the eigenvalue lattice
+(integer vs.\ half-integer), the Hopf charge lattice (integer vs.\
+half-integer), and the rational coefficients in the $\pi^{2k}$
+expansions, but it does \emph{not} change the transcendental class.
+
+The taxonomic grid thus collapses to three effective tiers:
+\begin{enumerate}
+  \item \textbf{First-order operators:} produce odd-zeta content
+    ($\zeta_R(3), \zeta_R(5), \ldots$) via sums over
+    $(\text{odd})^{-s}$ at odd~$s$, plus coupling content ($\alpha^2$,
+    $\gamma$) in the spinor sector.
+  \item \textbf{Second-order operators:} produce $\pi^{\text{even}}$
+    content exclusively, on both scalar and spinor bundles. This is the
+    calibration tier of Paper~24.
+  \item \textbf{Basis and composition tiers:} unchanged (embedding,
+    flow, composition constants are operator-independent).
+\end{enumerate}

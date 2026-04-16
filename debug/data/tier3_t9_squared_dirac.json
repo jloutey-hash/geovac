@@ -1,0 +1,56 @@
+{
+  "track": "T9",
+  "title": "D\u00b2 on S\u00b3: Paper 18 empty-cell probe",
+  "lichnerowicz": {
+    "R_scalar_curvature": 6,
+    "R_over_4": 1.5,
+    "D2_eigenvalue": "(n + 3/2)^2",
+    "nabla_sq_eigenvalue": "n^2 + 3n + 3/4",
+    "verification": "PASS"
+  },
+  "convergence_region": "Re(s) > 3/2",
+  "spectral_zeta": {
+    "s=1": {
+      "sympy_expr": "-pi**2/4",
+      "numerical": -2.4674011002723395,
+      "a1": 0,
+      "a2": 2,
+      "prefactor": 2,
+      "closed_form": "-pi^2/4",
+      "closed_form_sympy": "-pi**2/4"
+    },
+    "s=2": {
+      "sympy_expr": "-pi**4/12 + pi**2",
+      "numerical": 1.7521801482558221,
+      "a1": 2,
+      "a2": 4,
+      "prefactor": 8,
+      "closed_form": "pi^2 * (12 - pi^2) / 12",
+      "closed_form_sympy": "-pi**4/12 + pi**2"
+    },
+    "s=3": {
+      "sympy_expr": "pi**4*(10 - pi**2)/30",
+      "numerical": 0.42339055882399784,
+      "a1": 4,
+      "a2": 6,
+      "prefactor": 32,
+      "closed_form": "pi^4 * (10 - pi^2) / 30",
+      "closed_form_sympy": "pi**4*(10 - pi**2)/30"
+    },
+    "s=4": {
+      "sympy_expr": "pi**6*(168 - 17*pi**2)/1260",
+      "numerical": 0.16536289480268834,
+      "a1": 6,
+      "a2": 8,
+      "prefactor": 128,
+      "closed_form_sympy": "pi**6*(168 - 17*pi**2)/1260"
+    }
+  },
+  "structural_pattern": "zeta_{D^2}(s) = c_{2s-2} * pi^{2s-2} + c_{2s} * pi^{2s}, all coefficients rational",
+  "verdict": "DEGENERATE WITH SCALAR CALIBRATION",
+  "empty_cell_status": "FILLED (degenerate \u2014 same transcendental class as scalar)",
+  "transcendental_class": "pi^{even} only, no zeta(odd)",
+  "mechanism": "D^2 eigenvalues are (odd/2)^2; sums over odd^{-2s} = Dirichlet lambda(2s) = rational * pi^{2s}",
+  "paper_18_implication": "Operator order (1st vs 2nd) is the primary discriminant for transcendental content, not bundle type",
+  "paper_24_implication": "First-order/second-order distinction is operator-intrinsic, not bundle-dependent"
+}

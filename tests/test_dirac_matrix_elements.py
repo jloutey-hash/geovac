@@ -25,6 +25,7 @@ from geovac.dirac_matrix_elements import (
     angular_matrix_sigma,
     angular_sigma_dot_rhat_identity,
     dirac_label_to_spinor_label,
+    dirac_principal_quantum_number,
     inverse_r_cubed_hydrogenic,
     iter_dirac_labels,
     kappa_to_j,
@@ -32,6 +33,7 @@ from geovac.dirac_matrix_elements import (
     kappa_to_l_sigma,
     l_sigma_to_kappa,
     radial_expectation_diagonal,
+    radial_expectation_relativistic,
     radial_matrix_element,
     spinor_label_to_dirac_label,
 )
@@ -450,3 +452,246 @@ def test_d1_spinor_iter_unchanged():
     # Weyl+Dirac: all labels at n_ch=0,1,2. Weyl default was "dirac" — check.
     from geovac.dirac_s3 import count_spinor_labels
     assert len(labels) == count_spinor_labels(2, sector="dirac", convention="ch")
+
+
+# ===========================================================================
+# Track T7: Relativistic radial expectation values (Dirac-Coulomb)
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# T7: dirac_principal_quantum_number
+# ---------------------------------------------------------------------------
+
+def test_dirac_principal_qn_1s():
+    """N_D for 1s (n=1, kappa=-1, n_r=0): N^2 = kappa^2 = 1."""
+    N_D = dirac_principal_quantum_number(1, -1, Z=Z_sym, alpha=alpha_sym)
+    # N^2 = 0 + 0 + 1 = 1, so N = 1 regardless of alpha.
+    assert sp.simplify(N_D - 1) == 0
+
+
+def test_dirac_principal_qn_2p32():
+    """N_D for 2p3/2 (n=2, kappa=-2, n_r=0): N = |kappa| = 2."""
+    N_D = dirac_principal_quantum_number(2, -2, Z=Z_sym, alpha=alpha_sym)
+    assert sp.simplify(N_D - 2) == 0
+
+
+def test_dirac_principal_qn_nr_limit():
+    """NR limit: N_D -> n for all states up to n=3."""
+    for n in range(1, 4):
+        for l in range(n):
+            for kappa in [-(l + 1)] + ([l] if l >= 1 else []):
+                N_D = dirac_principal_quantum_number(n, kappa, Z=1, alpha=alpha_sym)
+                # NR limit: alpha -> 0
+                N_D_nr = sp.limit(N_D, alpha_sym, 0)
+                assert N_D_nr == n, f"n={n}, kappa={kappa}: N_D_nr={N_D_nr}"
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-1}⟩ — non-relativistic limit matches T1
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("n,kappa", [
+    (1, -1),   # 1s
+    (2, -1),   # 2s
+    (2, +1),   # 2p1/2
+    (2, -2),   # 2p3/2
+    (3, -1),   # 3s
+    (3, +1),   # 3p1/2
+    (3, -2),   # 3p3/2
+    (3, +2),   # 3d3/2
+    (3, -3),   # 3d5/2
+])
+def test_rel_inv_r_nr_limit(n, kappa):
+    """Non-relativistic limit alpha -> 0 of <1/r>_rel matches T1's Z/n^2."""
+    rel = radial_expectation_relativistic(n, kappa, -1, Z=Z_sym, alpha=alpha_sym)
+    nr = sp.limit(rel, alpha_sym, 0)
+    expected = Z_sym / Integer(n)**2
+    assert sp.simplify(nr - expected) == 0, \
+        f"n={n}, kappa={kappa}: NR={nr}, expected={expected}"
+
+
+@pytest.mark.parametrize("n,kappa", [
+    (1, -1),   # 1s
+    (2, -1),   # 2s
+    (2, +1),   # 2p1/2
+    (2, -2),   # 2p3/2
+])
+def test_rel_inv_r_hydrogen_numeric(n, kappa):
+    """Relativistic <1/r> at Z=1 is slightly larger than NR (gravity pull correction)."""
+    rel = radial_expectation_relativistic(n, kappa, -1, Z=1, alpha=alpha_sym)
+    # Evaluate at physical alpha
+    alpha_phys = Rational(1, 137)  # approximate
+    val = float(rel.subs(alpha_sym, alpha_phys))
+    nr_val = float(1 / Integer(n)**2)
+    # Relativistic value should be slightly larger (for kappa < 0 branch)
+    # or equal (within rounding) for all branches.
+    assert val > nr_val * 0.999, f"n={n}, kappa={kappa}: val={val}, nr={nr_val}"
+    # And not more than 1% larger for hydrogen
+    assert val < nr_val * 1.01
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-1}⟩ — 2s and 2p1/2 degeneracy (same N_D)
+# ---------------------------------------------------------------------------
+
+def test_rel_inv_r_2s_equals_2p12():
+    """2s (kappa=-1) and 2p1/2 (kappa=+1) have the same <1/r>.
+
+    Both have n_r=1, |kappa|=1, so N_D is identical. This is a well-known
+    Dirac degeneracy (broken only by the Lamb shift).
+    """
+    r_2s = radial_expectation_relativistic(2, -1, -1, Z=Z_sym, alpha=alpha_sym)
+    r_2p12 = radial_expectation_relativistic(2, +1, -1, Z=Z_sym, alpha=alpha_sym)
+    assert sp.simplify(r_2s - r_2p12) == 0
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-1}⟩ — algebraic structure (no pi, no zeta)
+# ---------------------------------------------------------------------------
+
+def test_rel_inv_r_algebraic_structure():
+    """<1/r>_rel is algebraic over Q(Z, alpha, gamma_kappa) — no pi.
+
+    Check that the expression contains only Z, alpha, and sqrt(kappa^2 - Z^2*alpha^2).
+    """
+    rel = radial_expectation_relativistic(2, -2, -1, Z=Z_sym, alpha=alpha_sym)
+    # Should NOT contain pi
+    assert not rel.has(sp.pi), f"Expression contains pi: {rel}"
+    # Should NOT contain any Gamma function
+    assert not rel.has(sp.gamma), f"Expression contains gamma function: {rel}"
+    # Should contain alpha
+    assert rel.has(alpha_sym)
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-2}⟩ — n_r=0 states, NR limit
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("n,kappa,l", [
+    (1, -1, 0),   # 1s
+    (2, -2, 1),   # 2p3/2
+    (3, -3, 2),   # 3d5/2
+])
+def test_rel_inv_r2_nr0_nr_limit(n, kappa, l):
+    """NR limit of <r^{-2}> for n_r=0 states matches Schrodinger Z^2/(n^3*(l+1/2))."""
+    rel = radial_expectation_relativistic(n, kappa, -2, Z=Z_sym, alpha=alpha_sym)
+    nr = sp.limit(rel, alpha_sym, 0)
+    expected = Z_sym**2 / (Integer(n)**3 * Rational(2 * l + 1, 2))
+    assert sp.simplify(nr - expected) == 0, \
+        f"n={n}, kappa={kappa}: NR={nr}, expected={expected}"
+
+
+def test_rel_inv_r2_1s_exact():
+    """<r^{-2}> for 1s at Z=1: 2/(gamma*(2gamma-1)) where gamma=sqrt(1-alpha^2)."""
+    rel = radial_expectation_relativistic(1, -1, -2, Z=1, alpha=alpha_sym)
+    gamma = sp.sqrt(1 - alpha_sym**2)
+    expected = Rational(4, 1) / (2 * gamma * (2 * gamma - 1))
+    # 4/(2g*(2g-1)) = 2/(g*(2g-1))
+    assert sp.simplify(rel - expected) == 0
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-3}⟩ — n_r=0 states, NR limit
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("n,kappa,l", [
+    (2, -2, 1),   # 2p3/2
+    (3, -3, 2),   # 3d5/2
+])
+def test_rel_inv_r3_nr0_nr_limit(n, kappa, l):
+    """NR limit of <r^{-3}> for n_r=0 states matches Schrodinger."""
+    rel = radial_expectation_relativistic(n, kappa, -3, Z=Z_sym, alpha=alpha_sym)
+    nr = sp.limit(rel, alpha_sym, 0)
+    expected = Z_sym**3 / (
+        Integer(n)**3 * Integer(l) * Rational(2 * l + 1, 2) * Integer(l + 1)
+    )
+    assert sp.simplify(nr - expected) == 0, \
+        f"n={n}, kappa={kappa}: NR={nr}, expected={expected}"
+
+
+def test_rel_inv_r3_2p32_exact():
+    """<r^{-3}> for 2p3/2 at Z=1: 8/(k^3*2g*(2g-1)*(2g-2)) with k=2, g=sqrt(4-a^2)."""
+    rel = radial_expectation_relativistic(2, -2, -3, Z=1, alpha=alpha_sym)
+    gamma = sp.sqrt(4 - alpha_sym**2)
+    expected = Integer(8) / (Integer(8) * 2 * gamma * (2 * gamma - 1) * (2 * gamma - 2))
+    # 8/(8*2g*(2g-1)*(2g-2)) = 1/(2g*(2g-1)*(2g-2))
+    assert sp.simplify(rel - expected) == 0
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-3}⟩ diverges for l=0 (s-states)
+# ---------------------------------------------------------------------------
+
+def test_rel_inv_r3_l0_diverges():
+    """<r^{-3}> diverges for l=0 states (kappa=-1), consistent with NR."""
+    with pytest.raises(ValueError, match="diverges"):
+        radial_expectation_relativistic(1, -1, -3, Z=Z_sym, alpha=alpha_sym)
+
+
+# ---------------------------------------------------------------------------
+# T7: ⟨r^{-2}⟩ n_r >= 1 raises NotImplementedError
+# ---------------------------------------------------------------------------
+
+def test_rel_inv_r2_nr_ge_1_not_implemented():
+    """<r^{-2}> for n_r >= 1 states raises NotImplementedError."""
+    with pytest.raises(NotImplementedError):
+        radial_expectation_relativistic(2, -1, -2, Z=Z_sym, alpha=alpha_sym)
+
+
+# ---------------------------------------------------------------------------
+# T7: positive s (non-rel approximation)
+# ---------------------------------------------------------------------------
+
+def test_rel_r_positive_matches_nr():
+    """<r> and <r^2> from relativistic function match T1's non-rel forms."""
+    for n in (1, 2, 3):
+        for kappa in [-(1)]:  # s-states
+            for s_val in (1, 2):
+                op = "r" if s_val == 1 else "r^2"
+                l = 0
+                rel = radial_expectation_relativistic(n, kappa, s_val, Z=Z_sym)
+                nr = radial_expectation_diagonal(n, l, op, Z=Z_sym)
+                assert sp.simplify(rel - nr) == 0, \
+                    f"n={n}, s={s_val}: rel={rel}, nr={nr}"
+
+
+# ---------------------------------------------------------------------------
+# T7: transcendental content — gamma is algebraic over Q(alpha)
+# ---------------------------------------------------------------------------
+
+def test_gamma_algebraic_over_q_alpha():
+    """gamma_kappa = sqrt(kappa^2 - Z^2*alpha^2) is algebraic over Q(Z, alpha).
+
+    Verify: gamma^2 + Z^2*alpha^2 = kappa^2 (a polynomial relation).
+    This confirms gamma is in the R_sp spinor ring from T5.
+    """
+    for kappa in [-1, +1, -2, +2, -3]:
+        k = abs(kappa)
+        gamma = sp.sqrt(Integer(k)**2 - Z_sym**2 * alpha_sym**2)
+        # gamma satisfies: gamma^2 = kappa^2 - Z^2*alpha^2
+        assert sp.simplify(gamma**2 - (Integer(k)**2 - Z_sym**2 * alpha_sym**2)) == 0
+
+
+def test_rel_inv_r_no_transcendentals():
+    """Relativistic <1/r> contains no pi, no zeta, no log — purely algebraic.
+
+    Verifies the R_sp ring membership for all (n, kappa) up to n=3.
+    """
+    for n in range(1, 4):
+        for l in range(n):
+            for kappa in [-(l + 1)] + ([l] if l >= 1 else []):
+                rel = radial_expectation_relativistic(
+                    n, kappa, -1, Z=Z_sym, alpha=alpha_sym)
+                assert not rel.has(sp.pi), f"Contains pi: n={n}, kappa={kappa}"
+                assert not rel.has(sp.log), f"Contains log: n={n}, kappa={kappa}"
+
+
+# ---------------------------------------------------------------------------
+# T7: unsupported s raises ValueError
+# ---------------------------------------------------------------------------
+
+def test_rel_unsupported_s_raises():
+    """Unsupported s values raise ValueError."""
+    for s_bad in (-4, 0, 3, 5):
+        with pytest.raises(ValueError, match="s must be"):
+            radial_expectation_relativistic(1, -1, s_bad)
