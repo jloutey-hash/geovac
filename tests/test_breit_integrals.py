@@ -730,6 +730,89 @@ def test_2config_2s2p_2p2_parity_forbidden():
 
 
 # ---------------------------------------------------------------------------
+# Sprint 6 Track DP: NIST extraction confirms Drake combining coefficients
+# ---------------------------------------------------------------------------
+
+
+def test_drake_nist_extraction_confirms_coefficients():
+    """Sprint 6 DP: Independent confirmation of Drake (3/50, -2/5, 3/2, -1)
+    via NIST extraction.
+
+    The three NIST He 2^3P splittings form a linear system in (zeta, A_SS, A_SOO)
+    that can be solved analytically. The extracted A_SS and A_SOO must match
+    the Drake predictions (alpha^2 * combining_rationals * M^k) to <0.2%.
+
+    The 0.1% residual is consistent with higher-order corrections (mass
+    polarization, QED) not included in the Breit-Pauli approximation.
+    """
+    from geovac.breit_integrals import breit_ss_radial
+
+    ALPHA = 7.2973525693e-3
+    HA_TO_MHZ = 6.5796839204e9
+    Z = 2
+
+    # NIST splittings in Ha
+    s01 = 29616.951 / HA_TO_MHZ  # P0-P1
+    s12 = 2291.178 / HA_TO_MHZ   # P1-P2
+
+    # Solve: s01 = -zeta - 3*A_SS + A_SOO, s12 = -2*zeta + 6/5*A_SS + 2*A_SOO
+    # => A_SS = 5/36 * (s12 - 2*s01)
+    zeta = ALPHA**2 * Z * 1.0**3 / 24.0
+    A_SS_nist = 5.0 / 36 * (s12 - 2 * s01)
+    A_SOO_nist = s01 + zeta + 3 * A_SS_nist
+
+    # Drake predictions
+    M2d = float(breit_ss_radial(1, 0, 2, 1, 1, 0, 2, 1, 2, Z=Z))
+    M2e = float(breit_ss_radial(1, 0, 2, 1, 2, 1, 1, 0, 2, Z=Z))
+    M1d = float(breit_ss_radial(1, 0, 2, 1, 1, 0, 2, 1, 1, Z=Z))
+    M1e = float(breit_ss_radial(1, 0, 2, 1, 2, 1, 1, 0, 1, Z=Z))
+
+    A_SS_drake = ALPHA**2 * (3.0 / 50 * M2d - 2.0 / 5 * M2e)
+    A_SOO_drake = ALPHA**2 * (3.0 / 2 * M1d - 1.0 * M1e)
+
+    # Both must match within 0.2%
+    err_ss = abs(A_SS_nist - A_SS_drake) / abs(A_SS_drake)
+    err_soo = abs(A_SOO_nist - A_SOO_drake) / abs(A_SOO_drake)
+
+    assert err_ss < 0.002, (
+        f"A_SS NIST/Drake mismatch: {err_ss*100:.3f}% >= 0.2%"
+    )
+    assert err_soo < 0.002, (
+        f"A_SOO NIST/Drake mismatch: {err_soo*100:.3f}% >= 0.2%"
+    )
+
+    # Pin regression values
+    assert abs(err_ss - 0.0009) < 0.001, (
+        f"A_SS error {err_ss*100:.3f}% drifted from regression 0.09%"
+    )
+    assert abs(err_soo - 0.0007) < 0.001, (
+        f"A_SOO error {err_soo*100:.3f}% drifted from regression 0.07%"
+    )
+
+
+def test_drake_z3_scaling_independence():
+    """Sprint 6 DP: Drake radial integrals scale as Z^3, confirming
+    Z-independence of the angular combining coefficients.
+
+    At any Z, M^k(Z) = Z^3 * M^k(Z=1). This means the angular combining
+    rationals (3/50, -2/5, 3/2, -1) are Z-INDEPENDENT: they come from
+    angular momentum algebra, not from the nuclear charge.
+    """
+    from geovac.breit_integrals import breit_ss_radial
+    from sympy import simplify
+
+    for k in (0, 1, 2):
+        for label, args in [('dir', (1, 0, 2, 1, 1, 0, 2, 1)),
+                            ('exch', (1, 0, 2, 1, 2, 1, 1, 0))]:
+            v1 = breit_ss_radial(*args, k, Z=1)
+            for Z in (2, 3, 4, 10):
+                vZ = breit_ss_radial(*args, k, Z=Z)
+                assert simplify(vZ - Z**3 * v1) == 0, (
+                    f"M^{k}_{label}: Z^3 scaling failed at Z={Z}"
+                )
+
+
+# ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
 

@@ -9,14 +9,23 @@ Generalizes the LiH pipeline (lih_composed.py) to any diatomic with:
 Architecture:
   Layer 0 (nuclear): Morse SU(2) x SO(3) -- from fitted PES
   Layer 1 (core):    Atom A^{n_core+} 1s^2 via hyperspherical (Z=Z_A)
-  Layer 2 (valence): 2 valence e- in Level 4 with Z_A_eff + PK pseudopotential
+  Layer 2 (valence): 2 valence e- in Level 4 with Z_A_eff
+
+ARCHITECTURAL NOTE (Sprint 6 audit, v2.16.0):
+  This module's classical PES path was superseded for accuracy work by
+  balanced_coupled.py (Track CD, v2.0.39), which replaces PK with
+  explicit cross-center V_ne integrals and achieves 0.20% energy error
+  at n_max=3 vs PK's 5.3% R_eq error. The PK pseudopotential remains
+  live only in the quantum pipeline (composed_qubit.py) where it provides
+  the sparsity advantage (334 vs 878 Pauli terms) critical for quantum
+  simulation. In the quantum pipeline, PK is partitioned classically
+  via pk_partitioning.py (pk_in_hamiltonian=False).
+
+  For classical PES benchmarks, use balanced_coupled.build_balanced_hamiltonian.
+  For quantum resource estimation, use composed_qubit.build_composed_hamiltonian.
 
 The total energy at each R is:
   E_total(R) = E_core + V_cross_nuc(R) + E_elec(R) + V_NN_bare(R)
-
-Phillips-Kleinman pseudopotential parameters scale with Z_A:
-  B_core ~ Z_A^2 (core orbital width scales as 1/Z_A)
-  A_core ~ Z_A (barrier height scales linearly)
 """
 
 import time
@@ -333,7 +342,22 @@ class ComposedDiatomicSolver:
         return self.E_core
 
     def _solve_valence_at_R(self, R: float, n_Re: int = 300) -> float:
-        """Solve Level 4 valence problem at a single R."""
+        """Solve Level 4 valence problem at a single R.
+
+        NOTE (Sprint 6 convention audit, v2.16.0): The pk_potentials kwarg
+        was passed to solve_level4_h2_multichannel which never accepted it,
+        causing a TypeError on every call. This is an evolutionary artifact:
+        Track CB (v2.0.37) confirmed PK overcorrects (decoupled 10.9% vs
+        PK 15.0%), and Track CD (v2.0.39) replaced PK with balanced coupled
+        (PK-free, cross-center V_ne) for classical PES accuracy. The
+        classical PES path through composed_diatomic was effectively
+        superseded by balanced_coupled.py. PK remains live only in the
+        quantum pipeline (composed_qubit.py) where it provides sparsity
+        (334 vs 878 Pauli terms) and is partitioned classically via
+        pk_partitioning.py (pk_in_hamiltonian=False is the ecosystem
+        default). The broken kwarg is removed rather than fixed because
+        the balanced coupled path is the correct classical PES solver.
+        """
         result = solve_level4_h2_multichannel(
             R=R,
             Z_A=self.Z_A_eff,
@@ -344,7 +368,6 @@ class ComposedDiatomicSolver:
             verbose=False,
             m_max=self.m_max,
             l_max_per_m=self.l_max_per_m,
-            pk_potentials=self.pk_potentials,
         )
         return result['E_elec']
 

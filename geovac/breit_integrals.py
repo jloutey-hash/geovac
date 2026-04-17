@@ -96,9 +96,22 @@ coefficients (3/50, -2/5) are a convention-dependent combining identity
 rather than a direct Racah-algebra output; a fully symbolic closed-form
 derivation remains open. (See debug/dv_drake_bipolar_memo.md.)
 
+Track DP (Sprint 6, 2026) independently confirmed the combining rationals
+via NIST extraction: the three NIST He 2^3P splittings were solved as a
+linear system for (zeta, A_SS, A_SOO) and compared to the Drake predictions.
+Result: A_SS match 0.09%, A_SOO match 0.07% — consistent with higher-order
+corrections (mass polarization, QED) not included in the Breit-Pauli level.
+Z^3 scaling of the radial integrals verified to machine precision at
+Z=1,2,3,4,10, confirming Z-independence of the angular combining coefficients.
+PSLQ identification of the rationals from NIST data was attempted but failed
+due to insufficient NIST precision (~6 sig figs). Structural finding: the
+rank-2 tensor operator C^(2)(hat_12)/r_12^3 has zero exchange angular
+integral for (1s)(2p), confirming that Drake's M^k_exch refers to Slater
+integral orbital ordering, not wavefunction antisymmetrization exchange.
+
 Author: GeoVac Development Team (Track BF, April 2026; J-pattern Racah
 derivation in Track DD, April 2026; bipolar structure characterization
-in Track DV, April 2026)
+in Track DV, April 2026; NIST confirmation in Track DP, April 2026)
 """
 
 from __future__ import annotations
