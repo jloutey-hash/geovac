@@ -28,36 +28,26 @@ Projecting Discrete Spectra onto Continuous Manifolds}
 %% ========================================================================
 
 \begin{abstract}
-The GeoVac program has identified a recurring pattern across its
-hierarchy of natural geometries: each time a discrete algebraic
-structure (graph eigenvalues, representation labels, recurrence
-relations) is projected onto or embedded in a continuous coordinate
-system, a characteristic transcendental constant appears as the
-conversion factor.  At Level~1, the projection from $S^3$ to
-$\mathbb{R}^3$ introduces the kinetic scale factor
-$\kappa = -1/16$.  At Level~2, the embedding of the Laguerre
-spectral basis into prolate spheroidal coordinates introduces the
-Stieltjes seed $e^a E_1(a)$.  At Level~3, the adiabatic
-reparameterization of the $S^3 \times S^3$ product space into
-hyperspherical coordinates introduces the adiabatic eigenvalue
-$\mu(R)$---an algebraic function of $R$ with transcendental
-coefficients inherited from the angular coupling matrix.
-We observe that this pattern is an instance of a
-well-known phenomenon in spectral geometry: Weyl's law, which
-relates the discrete eigenvalue counting function of the
-Laplace--Beltrami operator to the continuous volume of the
-underlying manifold, with conversion factors involving
-$\pi^{d/2}/\Gamma(d/2+1)$.  The Selberg trace formula generalizes
-this to an exact identity between spectral sums and geometric
-sums over geodesics, with transcendental conversion factors
-determined by the manifold's curvature.  We propose that the
-GeoVac constants $\kappa$, $e^a E_1(a)$, and $\mu(R)$ are
-specific instances of Weyl--Selberg exchange constants for the
-natural geometries $S^3$, prolate spheroid, and $S^5$
-respectively.  This identification explains why the constants
-are transcendental, why their complexity increases with the
-geometry, and why they vanish when the computation remains
-on the graph.  We note that the combination rule
+Compact Lie groups have discrete unitary representations
+(Peter--Weyl theorem); the GeoVac graph exploits this discreteness
+directly.  We show that the transcendental conversion factors
+appearing throughout the GeoVac hierarchy---$\kappa = -1/16$
+($S^3 \to \mathbb{R}^3$), the Stieltjes seed $e^a E_1(a)$
+(Laguerre basis $\to$ prolate spheroid), the adiabatic eigenvalue
+$\mu(R)$ ($S^3 \times S^3 \to$ hyperspherical)---are manifestations
+of a single structural pattern: they arise when discrete
+representations of compact groups are projected onto non-compact
+coordinate systems used for measurement.  The taxonomy classifies
+these factors by the type of compactness mismatch they mediate,
+and connects them to the Weyl--Selberg exchange constants of
+spectral geometry.  This identification explains why the constants
+are transcendental (compact$\to$non-compact projection introduces
+$\pi^{d/2}$), why their complexity increases with the geometry,
+and why they vanish when the computation remains on the graph.
+The falsifiable claim: the transcendental content of any GeoVac
+observable is determined entirely by the type of projection
+linking the compact discrete description to the non-compact
+coordinate system.  We note that the combination rule
 $K = \pi(B + F - \Delta)$ in the conjectural fine structure
 constant formula (Paper~2) has the same structural character:
 $\pi$ multiplying a sum of discrete representation-theoretic
@@ -84,22 +74,38 @@ $3j$ symbols---are entirely self-contained, but that their
 connection to physical observables in continuous coordinate
 systems always introduces transcendental constants.
 
-This paper catalogs these constants, identifies the mathematical
-phenomenon they instantiate, and proposes a unifying
-interpretation.
+The thesis of this paper is that these transcendental conversion
+factors are consequences of \emph{compactness}.  Compact Lie groups
+have discrete unitary representations (the Peter--Weyl
+theorem~\cite{peter_weyl1927}); the GeoVac graph exploits this
+discreteness directly.  Transcendental numbers enter when---and only
+when---those discrete representations are translated into non-compact
+coordinate systems used for measurement.  The taxonomy developed below
+classifies the resulting conversion factors by the type of
+compact-to-non-compact projection that produces them.  This yields a
+falsifiable structural claim: the transcendental content of any GeoVac
+observable is determined entirely by the type of projection linking
+the compact discrete description to the non-compact coordinate system
+(Claim~4, Sec.~\ref{sec:observable_classification}).
 
-The central observation is simple: each constant is the
-\textit{exchange rate} between a discrete spectrum and a
-continuous geometry.  The exchange rate is necessarily
-transcendental because it encodes the curvature mismatch between
-the graph's intrinsic combinatorial structure and the coordinate
-system used for physical interpretation.  This observation is
-not new in mathematics---it is the content of Weyl's
-law~\cite{weyl1911} and the Selberg trace
-formula~\cite{selberg1956}---but its systematic appearance in
-the GeoVac hierarchy has not been noted, and the connection
-to the conjectural fine structure constant formula (Paper~2)
-has not been made.
+The simplest instance is already visible in Paper~0's packing
+construction~\cite{loutey_paper0}.  Axiom~2 (geometric indifference)
+forces states onto isotropic shells---circles, i.e.\ copies of~$S^1$.
+The shell is compact; its circumference $2\pi r$ introduces $\pi$
+into the area formula $\sigma_0 = \pi d_0^2/2$ and hence into the
+state count $N_k = A_k / \sigma_0 = 2(2k-1)$.  The integer state count
+is a consequence of compact topology; $\pi$ is the price of expressing
+that count as a ratio of continuous areas.  This pattern---compact
+geometry producing integer quantum numbers, with $\pi$ entering
+through projection onto non-compact coordinates---recurs at every level
+of the hierarchy.
+
+The mathematical framework is not new: the conversion factors are
+instances of Weyl's law~\cite{weyl1911} and the Selberg trace
+formula~\cite{selberg1956}.  What is new is their systematic
+identification across the GeoVac hierarchy, and the observation
+that the conjectural fine structure constant formula (Paper~2)
+has the same structural character.
 
 
 %% ========================================================================
@@ -111,6 +117,10 @@ has not been made.
 
 \subsection{Level 1: $\kappa = -1/16$ ($S^3 \to \mathbb{R}^3$)}
 \label{sec:kappa}
+
+The compactness of $S^3$ is what makes the graph eigenvalues discrete
+integers; $\kappa$ converts this discrete spectrum to the non-compact
+$\mathbb{R}^3$ energy scale.
 
 The graph Laplacian on $S^3$ produces pure integer eigenvalues
 \begin{equation}
@@ -153,6 +163,11 @@ spectrum is projected onto a continuous coordinate system.
 
 \subsection{Level 2: $e^a E_1(a)$ (Laguerre basis $\to$ prolate spheroid)}
 \label{sec:stieltjes}
+
+The Laguerre spectral basis inherits the compact angular structure of
+$S^3$; the Stieltjes seed $e^a E_1(a)$ enters when this basis is
+embedded in the non-compact prolate spheroidal coordinate, whose
+curvature introduces a pole absent from the compact description.
 
 The prolate spheroidal radial solver uses a Laguerre spectral
 basis $\varphi_n(\xi) = e^{-\alpha(\xi-1)} L_n(2\alpha(\xi-1))$
@@ -239,6 +254,11 @@ coordinate.
 \subsection{Level 3: $\mu(R)$ ($S^3 \times S^3 \to$ hyperspherical)}
 \label{sec:mu}
 
+On the compact product space $S^3 \times S^3$, the two-electron
+Hamiltonian has purely algebraic matrix elements; the adiabatic
+eigenvalue $\mu(R)$ enters only when this compact description is
+reparameterized into the non-compact hyperspherical coordinate~$R$.
+
 The two-electron problem on $S^3 \times S^3$ is fully algebraic:
 the Hamiltonian matrix has entries given by Gaunt integrals
 (finite sums of Wigner $3j$ symbols with rational coefficients),
@@ -322,6 +342,12 @@ content inherited from the angular coupling integrals.
 
 \subsection{Level 4: $\mu(\rho,R)$ (product space $\to$ molecule-frame hyperspherical)}
 \label{sec:mu_level4}
+
+At Level~4 the compact product basis (prolate spheroidal CI) is fully
+algebraic but structurally incomplete; the non-compact mol-frame
+hyperspherical reparameterization introduces $\mu(\rho,R)$ as the
+irreducible cost of accessing three-body coalescence physics that the
+compact description cannot represent.
 
 Level~4 combines the two-center complication of Level~2 with the
 two-electron complication of Level~3.  Two approaches exist, with
@@ -433,6 +459,30 @@ In each case, the Weyl constant involves inverse powers of $\pi$
 transcendental cost of converting a discrete eigenvalue count
 into a continuous volume measure.
 
+\subsection{Compactness as the source of discreteness}
+
+The Peter--Weyl theorem states that the unitary representations of a
+compact Lie group form a discrete, countable, orthogonal decomposition
+of $L^2(G)$~\cite{peter_weyl1927}.  This is the structural reason that
+quantum numbers are integers: $\mathrm{SO}(4)$ is compact, so its
+irreducible representations are labeled by discrete indices $(n, l, m)$
+with finite multiplicities $g_n = n^2$.  The graph Laplacian on $S^3$
+inherits this discreteness directly---its eigenvalues $\lambda_n =
+-(n^2-1)$ are integers because the underlying group is compact.
+
+Exchange constants arise when these discrete representations are
+expressed in non-compact coordinate systems.  The stereographic
+projection $S^3 \to \mathbb{R}^3$ maps the compact manifold (finite
+volume $2\pi^2$) onto flat space (infinite volume), introducing the
+conformal factor $\Omega = (1 + p^2/p_0^2)^{-1}$ and the calibration
+constant $\kappa$.  More generally, every exchange constant in
+the taxonomy (Sec.~\ref{sec:taxonomy}) mediates a
+compact$\to$non-compact translation: $e^a E_1(a)$ converts compact
+angular structure into a non-compact radial coordinate with a pole;
+$\mu(R)$ converts the compact product space $S^3 \times S^3$ into
+non-compact hyperspherical coordinates.  The transcendental content
+is the toll for crossing the compactness boundary.
+
 \subsection{$\pi$ as the founding example}
 
 The simplest spectral-geometric exchange constant is $\pi$ itself.
@@ -515,6 +565,17 @@ transcendental coefficients (Sec.~\ref{sec:algebraic_curve}).
 
 \section{Taxonomy of Exchange Constants}
 \label{sec:taxonomy}
+
+The following taxonomy classifies exchange constants by the type of
+compactness mismatch they mediate.  The hierarchy---intrinsic,
+calibration, embedding, flow, composition---can be read as increasing
+departure from compactness: intrinsic constants convert between
+compact manifolds of different dimension; calibration constants convert
+between a compact manifold and flat space; embedding constants arise
+from coordinate singularities in the non-compact description;
+flow functions encode parameter-dependent symmetry breaking; and
+composition constants measure the cost of factorizing a single compact
+space into multiple incompatible coordinate systems.
 
 Based on the catalog and the Weyl--Selberg identification, we
 propose the following taxonomy:
@@ -1710,6 +1771,42 @@ outside even the algebraic category, though it remains piecewise-algebraic
 within each Legendre region.
 
 
+\subsection{Compactness at the construction level}
+
+The compactness thesis applies not only to the exchange constants but
+to the packing construction itself.  Paper~0's Axiom~2 (geometric
+indifference) forces states onto isotropic shells---copies of $S^1$,
+the simplest compact manifold.  The circumference of the circle
+introduces $\pi$ into the fundamental area $\sigma_0 = \pi d_0^2/2$
+and thus into every state count $N_k = A_k/\sigma_0 = 2(2k-1)$.
+The graph is $\pi$-free in its algebraic operations
+(Observation~\ref{obs:pi-free}), but the node count per shell---$2l+1$
+for angular momentum $l$---reflects the compact $S^1$ topology of the
+angular shell.  The $\pi$ in $\sigma_0$ is not a coordinate artifact; it
+is the conversion factor between the discrete count of states fitting on
+a compact circle and the continuous Euclidean area that circle encloses.
+This is the exchange constant pattern at its most elementary: compact
+geometry determines discrete quantum numbers, and $\pi$ is the toll for
+expressing them in terms of continuous measures.
+
+\subsection{Structural parallels}
+
+The pattern of compact geometry determining coupling constants via
+projection has a structural parallel in string compactification, where
+the geometry of a compact internal manifold determines the low-energy
+coupling constants of the effective theory through dimensional
+reduction~\cite{polchinski1998}.  In both cases, the compact manifold's
+topology constrains the discrete spectrum, and the coupling constants
+encode the projection from the compact description to the non-compact
+one in which measurements are performed.  This is a mathematical
+observation about the structure of the projection, not a physical claim
+about the relationship between the two frameworks.  We note also that
+$\mathrm{SO}(4,2) = \mathrm{Iso}(\mathrm{AdS}_5)$, the isometry group
+of five-dimensional anti-de~Sitter space, is the conformal group of the
+boundary $\mathbb{R}^{3,1}$; the Fock projection
+$S^3 \to \mathbb{R}^3$ is a Euclidean section of this conformal
+boundary correspondence.
+
 \subsection{The algebraic curve refinement}
 \label{sec:algebraic_curve}
 
@@ -1851,10 +1948,18 @@ the energy-shell scaling $E \propto Z^2$.
 \section{Conclusion}
 \label{sec:conclusion}
 
-The GeoVac hierarchy of natural geometries produces a systematic
-sequence of exchange constants at each level where a discrete
-algebraic structure is projected onto a continuous coordinate
-system.  The irreducible transcendentals---$\pi$,
+Compactness is the organizing principle behind the exchange constants
+cataloged in this paper.  Compact Lie groups have discrete unitary
+representations (Peter--Weyl); the GeoVac graph exploits this
+discreteness at every level.  Transcendental conversion factors
+arise when---and only when---those discrete representations are
+projected onto non-compact coordinate systems for physical
+interpretation.  The taxonomy classifies these factors by the type
+of compactness mismatch: from the elementary $\pi$ of the $S^1$
+packing shell, through the calibration $\kappa$ of the $S^3 \to
+\mathbb{R}^3$ stereographic projection, to the composition constants
+that measure the cost of factorizing a single compact space into
+multiple coordinate systems.  The irreducible transcendentals---$\pi$,
 $e^a E_1(a)$---are instances of the Weyl--Selberg exchange
 constants, encoding the curvature mismatch between the graph and
 the coordinate system.  The Level~3 adiabatic eigenvalue $\mu(R)$,
@@ -2103,6 +2208,17 @@ R.~Camporesi and A.~Higuchi,
 On the eigenfunctions of the Dirac operator on spheres and
 real hyperbolic spaces,
 \textit{J.\ Geom.\ Phys.}\ \textbf{20}, 1--18 (1996).
+
+\bibitem{peter_weyl1927}
+F.~Peter and H.~Weyl,
+``Die Vollst\"andigkeit der primitiven Darstellungen einer
+geschlossenen kontinuierlichen Gruppe,''
+\textit{Math.\ Ann.}\ \textbf{97}, 737--755 (1927).
+
+\bibitem{polchinski1998}
+J.~Polchinski,
+\textit{String Theory}, Vol.~2: Superstring Theory and Beyond
+(Cambridge University Press, Cambridge, 1998).
 
 \end{thebibliography}
 

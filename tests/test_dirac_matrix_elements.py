@@ -629,13 +629,106 @@ def test_rel_inv_r3_l0_diverges():
 
 
 # ---------------------------------------------------------------------------
-# T7: ⟨r^{-2}⟩ n_r >= 1 raises NotImplementedError
+# Kramers-Pasternak: ⟨r^{-2}⟩ and ⟨r^{-3}⟩ for n_r >= 1 (direct integration)
 # ---------------------------------------------------------------------------
 
-def test_rel_inv_r2_nr_ge_1_not_implemented():
-    """<r^{-2}> for n_r >= 1 states raises NotImplementedError."""
+def test_rel_inv_r2_nr_ge_1_now_works():
+    """<r^{-2}> for n_r >= 1 states no longer raises (direct integration)."""
+    # This was previously NotImplementedError; now computed via direct wavefunction integration
+    val = radial_expectation_relativistic(2, -1, -2, Z=1, alpha=Rational(1, 137))
+    assert float(val) > 0, f"<1/r^2> must be positive, got {float(val)}"
+    # NR value for 2s: Z^2/(n^3*(l+1/2)) = 1/(8*0.5) = 0.25
+    assert abs(float(val) - 0.25) / 0.25 < 1e-3, f"Must be close to NR, got {float(val)}"
+
+
+def test_rel_inv_r2_2s_nr_limit():
+    """<1/r^2> for 2s matches NR Z^2/(n^3*(l+1/2)) to O(alpha^2)."""
+    val = radial_expectation_relativistic(2, -1, -2, Z=1, alpha=Rational(1, 137))
+    nr = 0.25  # Z^2/(8*0.5)
+    assert abs(float(val) - nr) / nr < 2e-4
+
+
+def test_rel_inv_r2_2p12_nr_limit():
+    """<1/r^2> for 2p1/2 matches NR Z^2/(n^3*(l+1/2)) to O(alpha^2)."""
+    val = radial_expectation_relativistic(2, 1, -2, Z=1, alpha=Rational(1, 137))
+    nr = 1.0 / (8 * 1.5)  # Z^2/(n^3*(l+1/2)) for n=2, l=1
+    assert abs(float(val) - nr) / nr < 2e-4
+
+
+def test_rel_inv_r2_3states_nr_limits():
+    """<1/r^2> for n=3 states matches NR to O(alpha^2)."""
+    Za = Rational(1, 137)
+    for kappa, l_val in [(-1, 0), (1, 1), (-2, 1), (2, 2)]:
+        val = float(radial_expectation_relativistic(3, kappa, -2, Z=1, alpha=Za))
+        nr = 1.0 / (27 * (l_val + 0.5))
+        assert abs(val - nr) / nr < 2e-4, f"kappa={kappa}: got {val}, NR={nr}"
+
+
+def test_rel_inv_r3_3p32_nr_limit():
+    """<1/r^3> for 3p3/2 (n_r=1, kappa=-2) matches NR to O(alpha^2)."""
+    val = float(radial_expectation_relativistic(3, -2, -3, Z=1, alpha=Rational(1, 137)))
+    nr = 1.0 / (27 * 1 * 1.5 * 2)  # Z^3/(n^3*l*(l+1/2)*(l+1))
+    assert abs(val - nr) / nr < 1e-4
+
+
+def test_rel_inv_r3_3d32_nr_limit():
+    """<1/r^3> for 3d3/2 (n_r=1, kappa=+2) matches NR to O(alpha^2)."""
+    val = float(radial_expectation_relativistic(3, 2, -3, Z=1, alpha=Rational(1, 137)))
+    nr = 1.0 / (27 * 2 * 2.5 * 3)  # l=2
+    assert abs(val - nr) / nr < 1e-4
+
+
+def test_rel_inv_r3_p12_not_implemented():
+    """<1/r^3> for p_{1/2} states (kappa=+1, n_r>=1) raises NotImplementedError."""
     with pytest.raises(NotImplementedError):
-        radial_expectation_relativistic(2, -1, -2, Z=Z_sym, alpha=alpha_sym)
+        radial_expectation_relativistic(2, 1, -3, Z=1, alpha=Rational(1, 137))
+
+
+def test_direct_matches_pochhammer_r2():
+    """Direct wavefunction integration matches Pochhammer for n_r=0, s=-2."""
+    from geovac.dirac_matrix_elements import dirac_radial_expectation_direct
+    Za = Rational(1, 137)
+    for n, kappa in [(1, -1), (2, -2), (3, -3)]:
+        poch = float(radial_expectation_relativistic(n, kappa, -2, Z=1, alpha=Za))
+        direct = float(dirac_radial_expectation_direct(n, kappa, -2, Z=1, alpha=Za))
+        assert abs(poch - direct) < 1e-12, f"n={n},k={kappa}: {poch} vs {direct}"
+
+
+def test_direct_matches_pochhammer_r3():
+    """Direct wavefunction integration matches Pochhammer for n_r=0, s=-3."""
+    from geovac.dirac_matrix_elements import dirac_radial_expectation_direct
+    Za = Rational(1, 137)
+    for n, kappa in [(2, -2), (3, -3)]:
+        poch = float(radial_expectation_relativistic(n, kappa, -3, Z=1, alpha=Za))
+        direct = float(dirac_radial_expectation_direct(n, kappa, -3, Z=1, alpha=Za))
+        assert abs(poch - direct) < 1e-12, f"n={n},k={kappa}: {poch} vs {direct}"
+
+
+def test_direct_r0_is_one():
+    """Direct integration gives <r^0> = 1 (normalization)."""
+    from geovac.dirac_matrix_elements import dirac_radial_expectation_direct
+    Za = Rational(1, 137)
+    for n, kappa in [(1, -1), (2, -1), (2, 1), (3, -2), (3, 2)]:
+        val = float(dirac_radial_expectation_direct(n, kappa, 0, Z=1, alpha=Za))
+        assert abs(val - 1.0) < 1e-12, f"n={n},k={kappa}: <r^0>={val}"
+
+
+def test_direct_inv_r_matches_hf():
+    """Direct integration <1/r> matches Hellmann-Feynman for n_r >= 1."""
+    from geovac.dirac_matrix_elements import dirac_radial_expectation_direct
+    Za = Rational(1, 137)
+    for n, kappa in [(2, -1), (2, 1), (3, -1), (3, 1), (3, -2), (3, 2)]:
+        hf = float(radial_expectation_relativistic(n, kappa, -1, Z=1, alpha=Za))
+        direct = float(dirac_radial_expectation_direct(n, kappa, -1, Z=1, alpha=Za))
+        assert abs(hf - direct) < 1e-12, f"n={n},k={kappa}: HF={hf} vs {direct}"
+
+
+def test_rel_inv_r2_higher_Z():
+    """<1/r^2> at Z=4 (larger relativistic effects) still positive and physical."""
+    Za = Rational(4, 137)
+    for n, kappa in [(2, -1), (2, 1), (3, -2), (3, 2)]:
+        val = float(radial_expectation_relativistic(n, kappa, -2, Z=4, alpha=Rational(1, 137)))
+        assert val > 0, f"n={n},k={kappa}: <1/r^2> must be positive, got {val}"
 
 
 # ---------------------------------------------------------------------------
