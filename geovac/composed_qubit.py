@@ -553,6 +553,7 @@ def build_composed_hamiltonian(
     verbose: bool = False,
     relativistic: bool = False,
     alpha_num: float = 7.2973525693e-3,
+    include_breit: bool = False,
 ) -> Dict[str, Any]:
     """Build a composed qubit Hamiltonian from a MolecularSpec.
 
@@ -573,6 +574,9 @@ def build_composed_hamiltonian(
         If False, PK is computed but returned separately in ``h1_pk``.
     verbose : bool
         Print build progress.
+    include_breit : bool
+        If True and the build is relativistic, include Breit-Pauli SS+SOO
+        two-body corrections (α²-suppressed). Default False.
 
     Returns
     -------
@@ -594,6 +598,7 @@ def build_composed_hamiltonian(
             alpha_num=alpha_num,
             pk_in_hamiltonian=pk_in_hamiltonian,
             verbose=verbose,
+            include_breit=include_breit,
         )
 
     t0 = time.perf_counter()

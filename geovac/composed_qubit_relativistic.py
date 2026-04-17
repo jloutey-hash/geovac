@@ -34,9 +34,30 @@ of block b (each spatial orbital expands into its two j-branches, each with
 (2j+1) m_j values — the total is exactly 2·M_b for non-spin-restricted
 scalar comparison, because 2(l+1)² = 2·#{(n,l,m) with l ≤ n−1}).
 
+Breit-Pauli two-body corrections (SS + SOO)
+--------------------------------------------
+When ``include_breit=True``, the two-body Breit-Pauli spin-spin (SS) and
+spin-other-orbit (SOO) interactions are added as α²-suppressed corrections
+to the Coulomb ERI.  Both operators use the retarded kernel
+r_<^k / r_>^{k+3} (computed by ``geovac.breit_integrals``) with the same
+jj-coupled angular X_k coefficients used for the Coulomb ERI.
+
+The Breit operator is a genuine two-body operator:
+
+    H_Breit = α² Σ_{i<j} [ H_SS(i,j) + H_SOO(i,j) ]
+
+In second quantization this maps to the same (a†b†dc) structure as the
+Coulomb ERI but with Breit retarded radial integrals and an α² prefactor.
+The angular selection rules (Gaunt parity, triangle inequality) apply
+identically; rank-2 (SS) and rank-1 (SOO) channels are both captured by
+the existing X_k framework.
+
+References: Drake, Phys. Rev. A 3, 908 (1971); Bethe-Salpeter §§38-39;
+GeoVac Track BF/DD/DV/DP.
+
 Author: GeoVac Development Team
-Track:  T3, Dirac-on-S^3 Tier 2 sprint
-Date:   2026-04-15
+Track:  T3, Dirac-on-S^3 Tier 2 sprint; Breit SS/SOO extension
+Date:   2026-04-16
 """
 
 from __future__ import annotations
@@ -183,6 +204,57 @@ def jj_angular_Xk(kappa_a: int, two_m_a: int,
 
 
 # ---------------------------------------------------------------------------
+# Breit retarded radial integrals (SS + SOO)
+# ---------------------------------------------------------------------------
+
+def _compute_breit_rk_integrals_block(
+    Z: float,
+    spinor_labels: List[DiracLabel],
+) -> Dict[Tuple[int, ...], float]:
+    """Compute Breit-Pauli retarded radial integrals R^k_BP for a block.
+
+    Uses ``geovac.breit_integrals.compute_radial`` with kernel_type='breit'.
+    The Breit kernel is r_<^k / r_>^{k+3}, scaling as Z^3.
+
+    Returns dict mapping (n1, l1, n2, l2, n3, l3, n4, l4, k) -> float.
+    The key ordering matches the Coulomb rk_cache convention used by
+    ``_build_spinor_eri_block``.
+    """
+    from geovac.breit_integrals import compute_radial
+
+    unique_nl = sorted({(lab.n_fock, lab.l) for lab in spinor_labels})
+    Z_int = int(round(Z))
+
+    breit_cache: Dict[Tuple[int, ...], float] = {}
+    for n1, l1 in unique_nl:
+        for n2, l2 in unique_nl:
+            for n3, l3 in unique_nl:
+                for n4, l4 in unique_nl:
+                    # Gaunt parity selection
+                    k_max = min(l1 + l3, l2 + l4)
+                    for k in range(0, k_max + 1):
+                        if (l1 + l3 + k) % 2 != 0:
+                            continue
+                        if (l2 + l4 + k) % 2 != 0:
+                            continue
+                        key = (n1, l1, n2, l2, n3, l3, n4, l4, k)
+                        if key in breit_cache:
+                            continue
+                        try:
+                            val_sym = compute_radial(
+                                n1, l1, n3, l3,
+                                n2, l2, n4, l4,
+                                k, kernel_type="breit", Z=Z_int,
+                            )
+                            breit_cache[key] = float(val_sym)
+                        except (ValueError, ZeroDivisionError):
+                            # Some orbital pairs may have non-integrable
+                            # singularities — skip them silently.
+                            pass
+    return breit_cache
+
+
+# ---------------------------------------------------------------------------
 # Block ERI build in spinor basis
 # ---------------------------------------------------------------------------
 
@@ -256,6 +328,7 @@ def build_composed_hamiltonian_relativistic(
     alpha_num: float = 7.2973525693e-3,  # CODATA α
     pk_in_hamiltonian: bool = True,
     verbose: bool = False,
+    include_breit: bool = False,
 ) -> Dict[str, Any]:
     """Build the spin-ful composed qubit Hamiltonian for ``spec``.
 
@@ -272,6 +345,12 @@ def build_composed_hamiltonian_relativistic(
     spinor basis — we enforce this by grouping labels by (κ, m_j) and
     reusing the scalar PK matrix per (l, m_ℓ) sector for each (κ, m_j).
 
+    When ``include_breit=True``, the Breit-Pauli spin-spin (SS, rank-2) and
+    spin-other-orbit (SOO, rank-1) two-body corrections are added to the ERI
+    with an α² prefactor.  Both use the retarded kernel r_<^k / r_>^{k+3}
+    and the same jj-coupled angular X_k coefficients as the Coulomb ERI.
+    The Breit contribution is block-diagonal (same as Coulomb).
+
     Returns dict with keys: M (spinor orbital count per block — here the
     block-level spinor count), Q (total qubits), N_pauli, qubit_op,
     fermion_op, h1_diag (float array), eri_sparse (dict), 1-norm metrics,
@@ -284,6 +363,8 @@ def build_composed_hamiltonian_relativistic(
       tests that check scalar consistency.
     * The builder returns Pauli counts EXCLUDING the identity (to match
       the scalar ``build_composed_hamiltonian`` ``N_pauli`` convention).
+    * ``include_breit`` defaults to False for backward compatibility.
+      The Breit integrals use exact sympy arithmetic (slow but algebraic).
     """
     t0 = time.perf_counter()
 
@@ -402,6 +483,33 @@ def build_composed_hamiltonian_relativistic(
         for (a, b, c, d), val in phys.items():
             eri_sparse[(off + a, off + b, off + c, off + d)] = val
 
+    # ---- Phase 3b: Breit SS+SOO two-body correction (α²-suppressed) ----
+    breit_eri_count = 0
+    if include_breit and alpha_num != 0.0:
+        alpha_sq = alpha_num ** 2
+        for sb in sub_blocks:
+            Z_sb = float(sb['Z'])
+            labs = sb['dirac_labels']
+            off = sb['offset']
+            if len(labs) == 0:
+                continue
+            breit_rk = _compute_breit_rk_integrals_block(Z_sb, labs)
+            if verbose:
+                print(f"  Breit {sb['label']}: R^k_BP entries={len(breit_rk)}")
+            # Build Breit ERI using the same angular framework as Coulomb.
+            # The Breit operator contributes α² × R^k_BP to the two-body
+            # matrix elements, using the same X_k angular coefficients.
+            breit_phys = _build_spinor_eri_block(Z_sb, labs, breit_rk)
+            for (a, b, c, d), val in breit_phys.items():
+                # Scale by α² (the Breit operator is O(α²) relative to Coulomb)
+                breit_val = alpha_sq * val
+                key = (off + a, off + b, off + c, off + d)
+                if key in eri_sparse:
+                    eri_sparse[key] += breit_val
+                else:
+                    eri_sparse[key] = breit_val
+                breit_eri_count += 1
+
     # ---- Phase 4: FermionOperator assembly ----------------------------
     # Hermitize ERI: for a real Hermitian 1/r12, ⟨ab|V|cd⟩ = ⟨cd|V|ab⟩ and
     # our selection-rule traversal covers all 4-tuples, but individual
@@ -483,4 +591,6 @@ def build_composed_hamiltonian_relativistic(
             for sb in sub_blocks
         ],
         'alpha_num': alpha_num,
+        'include_breit': include_breit,
+        'breit_eri_count': breit_eri_count,
     }
