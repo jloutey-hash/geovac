@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v2.18.2 (April 16, 2026)
+**Version:** v2.19.1 (April 16, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/core/`, `papers/supporting/`, and `papers/observations/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -119,6 +119,7 @@ The classical solver investigation comprised 30+ tracks across four phases. Key 
 - Paper 18 compactness thesis reframe (v2.18.1): abstract, introduction, and conclusion rewritten around "compactness is fundamental" — the S³ graph arises because compact Lie groups have discrete spectra, and the exchange constant taxonomy classifies departures from compactness. New Peter-Weyl subsection in Section III deriving the graph Laplacian from harmonic analysis on compact groups. Paper 0 U(1) construction-level argument added. String compactification structural parallel noted. ~115 lines added. Paper 18 §IV motivic ζ(3) subsection added: operator-order → motivic-weight correspondence (2nd-order operators produce ζ(2k) = periods of ℚ(−1)^k; 1st-order Dirac produces ζ(3) = period of ℚ(−3)). Five geometric sources of ζ(3) as periods. Zagier dimension conjecture as organizing principle. QED loop-order prediction: odd-zeta absent at one loop (T9 theorem), expected at two loops.
 - Kramers-Pasternak direct integration (v2.18.1): `dirac_radial_expectation_direct()` in `geovac/dirac_matrix_elements.py`. Confluent hypergeometric polynomial expansion of Dirac-Coulomb radial wavefunctions, direct sympy integration of r^s weighted products. ⟨r⁻²⟩ works for ALL states (all n_r, all κ). ⟨r⁻³⟩ for |κ|≥2 states. p₁/₂ (|κ|=1, n_r≥1) limitation documented (sympy integral does not converge for near-singular integrand). Resolves T7 deferred item for most states. 12 new tests, 108 total in `tests/test_dirac_matrix_elements.py`.
 - One-loop QED vacuum polarization on S³ (v2.18.2): new module `geovac/qed_vacuum_polarization.py`. Seeley-DeWitt heat kernel coefficients a₀=a₁=√π, a₂=√π/8 on unit S³ (exact sympy). Vacuum polarization coefficient 1/(48π²). β(α) = 2α²/(3π) — reproduces standard QED beta function from S³ spectral data alone (Camporesi-Higuchi spectrum + heat kernel expansion). No odd-zeta at one loop confirmed (T9 theorem). Transcendental classification: all one-loop quantities are calibration π (even-zeta only). Two-loop computation in progress (ζ(3) prediction from Track D3 weight-m subchannel). 33 new tests in `tests/test_qed_vacuum_polarization.py`. Key files: `geovac/qed_vacuum_polarization.py`, `debug/qed_s3_memo.md`.
+- Two-loop QED vertex parity and Catalan's constant (v2.19.1): new module `geovac/qed_vertex.py`. The two-loop sunset diagram on S³ with vertex parity selection rule (n₁+n₂+n_γ odd, from γ^μ coupling) splits the Dirac Dirichlet series into even/odd sub-sums exposing Catalan's constant G = β(2) and Dirichlet β(4). Exact Hurwitz decomposition: D_even(4) = π²/2 − π⁴/24 − 4G + 4β(4); D_odd(4) = π²/2 − π⁴/24 + 4G − 4β(4); D(4) = π² − π⁴/12 (G and β(4) cancel in full sum). Mechanism: vertex parity acts as Dirichlet character χ₋₄ on the mode sum; quarter-integer Hurwitz shifts ζ(s,3/4) and ζ(s,5/4) produce L(s,χ₋₄) in the difference. This reveals a three-axis taxonomy: (1) operator order (1st vs 2nd) determines motivic weight; (2) bundle type (scalar vs spinor) modulates coefficients; (3) diagram topology (vertex parity) introduces Dirichlet L-function characters. The Dirichlet β-values are a genuinely new transcendental class from the INTERACTION vertex, not from free propagators. Verified by PSLQ at 80-digit precision. 35 new tests in `tests/test_qed_vertex.py`. Key files: `geovac/qed_vertex.py`, `debug/qed_vertex_memo.md`. Paper 18 §IV updated with new subsection "Dirichlet L-values from vertex topology."
 - Paper 3 CFT diagnostic (v2.18.2, research finding): spectral dimension d_s≈2 is a graph topology artifact (any tridiagonal graph gives d_s→2), central charge not genuine CFT (no conformal symmetry in graph Laplacian), Berry phase data retracted (v1.2.0), hyperradius is not holographic (no area-law entropy). Paper stays conjectural with caveats documented.
 - Sprint 4 (April 2026, v2.15.0) completed three parallel tracks. **(DD) Drake 1971 fine-structure J-pattern derived from Racah 6j algebra**: f_SS(J) = (-2,+1,-1/5) and f_SOO(J) = (+2,+1,-1) at L=S=1 both derived symbolically from the identity (-1)^(L+S+J)·6j{L,S,J;S,L,k}·(-6) at k=2 (SS) and k=1 (SOO). Spin-tensor choice structurally fixed: ⟨S=1‖[s₁⊗s₂]^(2)‖S=1⟩=√5/2 (non-zero, rank-2 for SS) while ⟨S=1‖[s₁⊗s₂]^(1)‖S=1⟩=0 (vanishes, forcing SOO's s₁+2s₂ form per Bethe-Salpeter §38.15). HONEST NEGATIVE: direct/exchange mixing ratios (3/50, -2/5, 3/2, -1) NOT closed from 9j alone — requires full Varshalovich §5.17 / Brink-Satchler App. 5 bipolar harmonic machinery (future sprint). 5 new tests pass, Paper 14 §V updated. **(TR) Tier-2 T3 spinor FCI α=0 regression FIXED**: missing (-1)^(j_a+1/2) reduced-matrix-element phase in jj_angular_Xk per Grant 2007 Eq. 8.9.9/8.9.11 and Johnson Eq. 3.69. Diagnostic signature: X_0 diagonal gave -1 for j=1/2 and j=5/2 (must be +1 for unit-charge density). Single-line fix in `geovac/composed_qubit_relativistic.py`. Verification: spinor FCI at α=0 now matches scalar FCI at Z=4, Be²⁺, n_max=2,3,4 to 1-ULP (gaps < 1e-14 Ha). **Downstream impact: Pauli counts at n_max=2 increase 1.76× (533→942 for CaH/SrH/BaH rel, 805→1413 for LiH/BeH rel); at n_max=3 increase 1.92× (30,940→59,484 for CaH rel, 46,434→89,226 for LiH/BeH rel); rel/scalar ratio corrected 2.42×→4.24× (n=2) and 5.89×→11.33× (n=3)**. Isostructural invariance preserved. SO shift corrected from contaminated ~10⁻⁸ Ha to physically correct ~10⁻¹²-10⁻¹¹ Ha. GeoVac still wins Sunaga head-to-head ~80-120× at matched Q=18 (revised from 150-250× projection). Paper 14 §V, Paper 20 Tier-2 table, `docs/tier2_market_test.md` all updated with post-TR values. **(QG) Paper 25 drafted** (papers/synthesis/paper_25_hopf_gauge_structure.tex, 1023 lines, 8 sections, 23 refs): framework observation that GeoVac's Hopf graph at finite n_max is simultaneously a discretization of S³ (Paper 7), a triangle-free simplicial 1-complex carrying discrete Hodge decomposition (Lim 2020, Schaub 2020), and a Wilson-type lattice gauge structure with matter on nodes and U(1) connection on edges via ladder-operator phases. Under Paper 2's conjectural interpretation, B = Casimir matter trace on S² base, F = Fock-Dirichlet gauge zeta, Δ⁻¹ = Dirac-mode boundary count. CLAUDE.md §1.5 rhetoric enforced: sharp mathematical observation separated from conjectural physical interpretation at every step; no new α derivation. Data: `debug/dd_drake_derivation.md`, `debug/tr_fix_memo.md`, `debug/qg_paper25_memo.md`, `docs/sprint4_final_summary.md`.
 
@@ -443,6 +444,7 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 | Breit retarded integrals | `geovac/breit_integrals.py` | `compute_radial()`, exact Fraction/sympy r_<^k / r_>^{k+3} kernel |
 | Breit composed pipeline | `geovac/composed_qubit.py` | `build_composed_hamiltonian(spec, include_breit=True)` passthrough to relativistic builder |
 | QED vacuum polarization | `geovac/qed_vacuum_polarization.py` | `seeley_dewitt_coefficients_s3()`, `vacuum_polarization_coefficient()`, `beta_function_qed()`, `spectral_zeta_massive()`, `spectral_zeta_derivative_at_zero()`, `classify_transcendental_content()` |
+| QED vertex coupling | `geovac/qed_vertex.py` | `two_loop_odd_even_split()`, `two_loop_sunset_vertex_restricted()`, `two_loop_transcendental_classification()`, `vertex_allowed_triples()`, `reduced_coupling_squared()` |
 
 ### Solver Methods
 
@@ -738,6 +740,10 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Vacuum polarization coefficient | 1/(48π²) (exact) | Standard Dirac fermion VP from S³ spectral data |
 | β(α) QED one-loop | 2α²/(3π) (exact) | Reproduces standard QED beta function |
 | No odd-zeta at one loop | structural theorem | T9 guarantees ζ_{D²}(s) is polynomial in π² |
+| D_even(4) decomposition | π²/2 − π⁴/24 − 4G + 4β(4) (PSLQ 80 digits) | Vertex parity exposes Catalan G and Dirichlet β(4) |
+| D_odd(4) opposite sign | π²/2 − π⁴/24 + 4G − 4β(4) (PSLQ 80 digits) | Opposite Dirichlet content in odd-n sub-sum |
+| D_even(4) + D_odd(4) cancellation | = D(4) to 1e-60 | Dirichlet L-values cancel in full (unrestricted) sum |
+| Vertex selection rule consistency | matches hodge1_s3 exactly | SO(4) triangle + parity: n₁+n₂+n_γ odd |
 | Fine-structure Dirac formula (n<=4) | exact symbolic | Dirac formula verified for all (n,l,j) through n=4 |
 | Dirac accidental degeneracy | 6/6 pairs confirmed | E_FS depends on (n,j) only |
 | gamma radial <1/r> NR limit | Z/n^2 | Hellmann-Feynman all-state formula |
@@ -977,6 +983,12 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Motivic weight and operator order | 18 | §IV (new) | Core |
 | ζ(3) as period of Q(−3) | 18 | §IV | Core |
 | Zagier dimension conjecture | 18 | §IV | Core |
+| Catalan constant G from vertex parity | 18 | §IV (new) | Core |
+| Dirichlet beta function β(s) on S³ | 18 | §IV (new) | Core |
+| Vertex parity selection rule (two-loop sunset) | 18 | §IV (new) | Core |
+| Two-loop sunset diagram on S³ | 18 | §IV (new) | Core |
+| Three-axis transcendental taxonomy | 18 | §IV (new) | Core |
+| Dirichlet L-function L(s, χ₋₄) | 18 | §IV (new) | Core |
 | Compactness thesis (Peter-Weyl) | 18 | §III (new) | Core |
 
 ---
@@ -1071,6 +1083,7 @@ Tracks which matrix elements at each level are computed algebraically vs numeric
 | Darwin + mass-velocity α⁴ corrections | algebraic | Closed-form rationals in (Z, n, l) times α²; verified Dirac formula exact. (T8, v2.12.0) |
 | Breit retarded radial R^k_BP(n₁l₁,n₂l₂;n₃l₃,n₄l₄) | algebraic | Exact Fraction/sympy arithmetic via r_<^k / r_>^{k+3} kernel; Z³ scaling verified; `geovac/breit_integrals.py`. (v2.18.0) |
 | Seeley-DeWitt coefficients a₀, a₁, a₂ on S³ | algebraic | Exact sympy Rational on unit S³ (a₀=a₁=√π, a₂=√π/8). `geovac/qed_vacuum_polarization.py`. (v2.18.2) |
+| QED vertex even/odd Dirac split D_even(s), D_odd(s) | algebraic | Exact Hurwitz zeta at quarter-integer shifts: D_even via ζ(s,3/4), D_odd via ζ(s,5/4). At s=4: D_even = π²/2 − π⁴/24 − 4G + 4β(4), D_odd = π²/2 − π⁴/24 + 4G − 4β(4). PSLQ-verified at 80 digits. `geovac/qed_vertex.py`. (v2.19.1) |
 
 ---
 

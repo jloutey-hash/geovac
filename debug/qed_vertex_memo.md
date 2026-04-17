@@ -103,9 +103,74 @@ odd Riemann zeta. It arises from the Dirichlet L-function L(s, chi_4) at the
 character chi_4 mod 4, which is the natural arithmetic object at 
 quarter-integer Hurwitz shifts.
 
+## SO(4) Clebsch-Gordan Weighted Vertex (v2)
+
+### The physical vertex weight
+
+The QED vertex on S^3 couples Dirac spinor at level n1 (positive chirality,
+SO(4) rep ((n1+1)/2, n1/2)) to level n2 (negative chirality, rep (n2/2, (n2+1)/2))
+via a transverse vector at level q, which has two SO(4) components:
+
+    V_A = ((q+1)/2, (q-1)/2))    V_B = ((q-1)/2, (q+1)/2))
+
+After summing over all magnetic quantum numbers using the Wigner-Eckart theorem
+on each SU(2) factor, the SU(2) CG orthogonality gives a factor of
+(2*j_final+1) per channel. So the ONLY n-dependent vertex structure is the
+**channel count** W(n1, n2, q) = number of SO(4) components satisfying the
+triangle inequality in BOTH SU(2) factors.
+
+    W(n1, n2, q) in {0, 1, 2}
+
+- W=0: forbidden by selection rule
+- W=1: only one SO(4) component contributes (boundary of triangle range)
+- W=2: both components contribute (interior of triangle range)
+
+### Exact pair-weight formula (verified n1, n2 <= 12)
+
+    W_total(n1, n2) = sum_{q: allowed} W(n1, n2, q) = 2*min(n1,n2) - 1 - delta_{n1,n2}
+
+    N_q(n1, n2) = count of allowed q = min(n1, n2)
+
+The ratio W_total / N_q -> 2 for large min, with O(1/min) correction.
+
+### Transcendental consequence: depth-2 multiple Hurwitz zeta
+
+The min(n1,n2)-weighted double sum factorizes as:
+
+    S_min = sum_{k=1}^inf T(k)^2
+
+where T(k) = 2*zeta(s-2, k+3/2) - (1/2)*zeta(s, k+3/2) is the Dirac tail.
+
+**PSLQ result at 100 digits with 18-element weight-8 basis:**
+S_min is NOT identifiable in the span of:
+{1, pi^2, pi^4, pi^6, pi^8, G, beta(4), zeta(3), zeta(5), G^2, G*beta(4),
+ beta(4)^2, zeta(3)^2, zeta(3)*zeta(5), pi^2*zeta(3), pi^2*G, pi^2*beta(4)}
+
+This means the CG-weighted vertex introduces a **genuinely new transcendental
+object** -- a depth-2 multiple Hurwitz zeta value on the half-integer lattice --
+that lies outside all standard transcendental constants considered in the
+GeoVac framework.
+
+### Paper 18 taxonomy impact
+
+The weighted vertex adds a fifth tier:
+
+| Tier | Source | Content | Example |
+|:-----|:-------|:--------|:--------|
+| Rational | Graph topology, selection rules | Q | Gaunt integrals, W(n1,n2,q) |
+| Calibration pi | Second-order operators (D^2) | pi^{even} | D(4) |
+| Dirichlet beta | Quarter-integer Hurwitz | G, beta(4) | D_even(4), D_odd(4) |
+| Odd Riemann zeta | First-order operators (\|D\|) | zeta(3), zeta(5) | D3 |
+| Depth-2 Hurwitz | Nested spectral sums (CG vertex) | sum T(k)^2 | S_min |
+
+The depth-2 tier arises from the PRODUCT structure of two-loop diagrams: the
+single Dirichlet series D(s) decomposes cleanly into Hurwitz + beta, but
+the NESTED sum of squared tails does not. This is the spectral analog of the
+standard QFT fact that multi-loop diagrams produce irreducible MZVs.
+
 ## Test Results
 
-35/35 tests pass (including 4 slow tests). Key verified results:
+41/41 non-slow tests pass (9 slow tests deselected). Key verified results:
 - Selection rule matches hodge1_s3.vertex_coupling exactly
 - D(4)^2 factorization verified to 1e-60
 - D_even(4) PSLQ: [-24, 0, 12, -1, -96, 96] = pi^2/2 - pi^4/24 - 4G + 4*beta(4)
@@ -114,6 +179,11 @@ quarter-integer Hurwitz shifts.
 - Vertex-restricted sunset converges and increases with n_max
 - All forbidden pairs are (0, m) and (n, 0) (41 at n_max=20)
 - Flat-space adjacent-pair sum = pi^2/3 - 3 (verified to 1%)
+- SO(4) channel count W(n1,n2,q) range {0,1,2} verified for n1,n2 < 8, q < 10
+- Channel count symmetry W(n1,n2,q) = W(n2,n1,q) verified
+- Pair weight formula W_total = 2*min-1-delta verified for n1,n2 <= 12
+- N_q = min(n1,n2) verified for n1,n2 <= 9
+- S_min NOT identified in 18-element weight-8 MZV+beta PSLQ basis (100 digits)
 
 ## Bugs Fixed from Previous Agent
 

@@ -960,6 +960,50 @@ compact to non-compact geometry---they are \emph{periods} of specific
 mixed Tate motives, and the operator order on the compact space
 determines the motivic weight of the resulting transcendental content.
 
+\paragraph{Dirichlet $L$-values from vertex topology.}
+The operator-order discriminant classifies free-propagator content.
+A third axis emerges when interaction vertices are included.  The
+QED vertex on~$S^3$ couples Dirac spinor harmonics at levels $n_1$,
+$n_2$ to a transverse vector harmonic at level~$n_\gamma$ with
+SO(4) selection rules requiring $n_1 + n_2 + n_\gamma$ odd (the
+$\gamma^\mu$ coupling flips parity).  When this selection rule is
+imposed on the two-loop sunset diagram, it splits the Dirac Dirichlet
+series into even- and odd-$n$ sub-sums with structurally different
+transcendental content.  At $s = 4$ (the packing exponent), the
+exact Hurwitz decomposition gives:
+\begin{align}
+  D_{\text{even}}(4) &= \tfrac{\pi^2}{2} - \tfrac{\pi^4}{24}
+    - 4G + 4\beta(4), \label{eq:d_even4} \\
+  D_{\text{odd}}(4) &= \tfrac{\pi^2}{2} - \tfrac{\pi^4}{24}
+    + 4G - 4\beta(4), \label{eq:d_odd4}
+\end{align}
+where $G = \sum_{n \ge 0} (-1)^n/(2n{+}1)^2 \approx 0.9159$ is
+Catalan's constant and $\beta(4) = \sum_{n \ge 0} (-1)^n/(2n{+}1)^4
+\approx 0.9889$ is the Dirichlet beta function at~4.  Both are values
+of the $L$-function $L(s, \chi_{-4})$ for the unique non-principal
+character mod~4.  Crucially, $G$ and $\beta(4)$ cancel in the full sum
+$D_{\text{even}} + D_{\text{odd}} = D(4) = \pi^2 - \pi^4/12$---the
+Dirichlet content is invisible without vertex restriction.  The
+mechanism is the Hurwitz quarter-shift: even-$n$ modes involve
+$\zeta(s, 3/4)$ and odd-$n$ modes $\zeta(s, 5/4)$, whose difference
+is $4^s \beta(s)$ (a Dirichlet $L$-value), while their sum reduces
+to Riemann zeta ($\pi^{\text{even}}$).
+
+This extends the taxonomy to three axes:
+(1)~\emph{operator order} (1st~vs 2nd) determines motivic weight
+(odd~vs even~zeta);
+(2)~\emph{bundle type} (scalar~vs spinor) modulates coefficients
+within the same weight class;
+(3)~\emph{diagram topology}---specifically, vertex parity from the
+interaction structure---introduces Dirichlet $L$-function characters.
+The Dirichlet $\beta$-values are a genuinely new transcendental class:
+they arise from the \emph{interaction} (how electron and photon modes
+couple at the vertex), not from the free propagators.  In the GeoVac
+exchange-constant taxonomy, they represent a ``vertex exchange
+constant'' tier that lives beyond both calibration~$\pi$ and
+Riemann odd-zeta.  Verified by PSLQ at 80-digit precision;
+35/35 tests pass in \texttt{tests/test\_qed\_vertex.py}.
+
 \paragraph{Irreducibility of the Level~4 piecewise structure.}
 The piecewise-smooth $\rho$-dependence of $\mu(\rho,R)$ at Level~4
 is not a coordinate artifact: it cannot be resolved by geometric
@@ -1738,7 +1782,7 @@ of~$R$ with transcendental coefficients; the Level~4 eigenvalue
 $\mu(\rho,R)$ is piecewise-algebraic.  All exchange constants
 vanish when the computation stays on the graph.
 
-\paragraph{2. The operator-order discriminant.}
+\paragraph{2. The operator-order discriminant and vertex topology.}
 Operator order on the compact space determines the motivic weight
 of the transcendental content: second-order operators
 ($\Delta_{\text{LB}}$, $D^2$) produce $\pi^{\text{even}}$
@@ -1748,6 +1792,11 @@ The even/odd Hurwitz discriminant (Eq.~\ref{eq:hurwitz_discriminant})
 makes this partition computationally sharp.  The spinor-intrinsic ring
 $R_{\mathrm{sp}}$ (Eq.~\ref{eq:ring_sp}) captures all
 relativistic content from Breit--Pauli through full-Dirac corrections.
+A third axis---diagram topology---introduces Dirichlet $L$-function
+values ($G$, $\beta(4)$) when the QED vertex parity selection rule
+splits the mode sum into even/odd sectors
+(Eqs.~\ref{eq:d_even4}--\ref{eq:d_odd4}).  These cancel in the
+unrestricted sum, appearing only with vertex restriction.
 
 \paragraph{3. The QED beta function from spectral data.}
 The operator-order discriminant predicts: no odd-zeta at one loop
@@ -1765,9 +1814,9 @@ through Level~5 (Tracks~AJ--AS, v2.0.19--23).  The falsifiable claim
 has held across all tested cases.  The motivic correspondence between
 operator order and loop order is verified at one and two loops.
 
-What remains open: (i)~the full vertex function (whether the
-operator-order discriminant predicts the physical two-loop coefficient,
-not just the transcendental class); (ii)~a potential Ap\'ery recurrence
+What remains open: (i)~the full vertex function (the three-axis
+taxonomy classifies the transcendental content; whether it predicts
+the physical two-loop coefficient is unresolved); (ii)~a potential Ap\'ery recurrence
 connection between $\zeta_R(3)$ on $S^3$ and the irrationality proof;
 (iii)~the conjectural combination rule $K = \pi(B + F - \Delta)$ of
 Paper~2, whose three-tier structure (Sec.~\ref{sec:alpha_three_tier})
@@ -1961,6 +2010,11 @@ J.~Schwinger,
 A.~Petermann,
 ``Fourth order magnetic moment of the electron,''
 \textit{Helv.\ Phys.\ Acta} \textbf{30}, 407--408 (1957).
+
+\bibitem{adamchik2003}
+V.~S.~Adamchik,
+``A certain series associated with Catalan's constant,''
+\textit{Z.\ Anal.\ Anwend.}\ \textbf{22}, 817--826 (2003).
 
 \end{thebibliography}
 

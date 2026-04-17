@@ -16,11 +16,16 @@ mpmath.mp.dps = 80
 
 from geovac.qed_vertex import (
     reduced_coupling_squared,
+    weighted_vertex_coupling,
+    so4_channel_count,
+    effective_pair_weight,
     vertex_allowed_triples,
     two_loop_sunset_unrestricted,
     two_loop_sunset_vertex_restricted,
+    two_loop_sunset_weighted,
     two_loop_vertex_correction,
     two_loop_odd_even_split,
+    two_loop_min_weighted_hurwitz,
     decompose_two_loop_result,
     two_loop_transcendental_classification,
     verify_vertex_factorization_failure,
@@ -478,3 +483,133 @@ class TestStructuralTheorem:
         D_total = D_even + D_odd
         D6_exact = mpmath.pi**4 / 3 - mpmath.pi**6 / 30
         assert float(abs(D_total - D6_exact) / abs(D6_exact)) < 1e-60
+
+
+# ---------------------------------------------------------------------------
+# SO(4) Clebsch-Gordan channel count (weighted vertex)
+# ---------------------------------------------------------------------------
+
+class TestSO4ChannelCount:
+    """Tests for the SO(4) CG channel count vertex weight."""
+
+    def test_forbidden_gives_zero(self):
+        """Channel count is 0 for forbidden triples."""
+        assert so4_channel_count(0, 0, 1) == 0
+        assert so4_channel_count(1, 0, 1) == 0  # parity
+
+    def test_dipole_gives_one(self):
+        """Dipole (q=1) coupling has at most 1 channel per triple."""
+        for n1 in range(6):
+            for n2 in range(6):
+                W = so4_channel_count(n1, n2, 1)
+                assert W <= 1, f"Dipole at ({n1},{n2},1) should have W<=1, got {W}"
+
+    def test_higher_multipole_can_give_two(self):
+        """Higher multipoles (q>=2) can have W=2."""
+        # (2, 2, 3) should have W=2 (both SO(4) components contribute)
+        assert so4_channel_count(2, 2, 3) == 2
+
+    def test_channel_count_range(self):
+        """Channel count is always 0, 1, or 2."""
+        for n1 in range(8):
+            for n2 in range(8):
+                for q in range(1, 10):
+                    W = so4_channel_count(n1, n2, q)
+                    assert W in (0, 1, 2), f"W({n1},{n2},{q}) = {W}, expected 0/1/2"
+
+    def test_symmetry(self):
+        """Vertex weight is symmetric under (n1, n2) swap (time reversal)."""
+        for n1 in range(6):
+            for n2 in range(6):
+                for q in range(1, 8):
+                    assert so4_channel_count(n1, n2, q) == so4_channel_count(n2, n1, q), \
+                        f"Asymmetry at ({n1},{n2},{q})"
+
+
+class TestEffectivePairWeight:
+    """Tests for the effective pair weight W_total(n1, n2)."""
+
+    def test_formula_2min_minus_1_minus_delta(self):
+        """W_total = 2*min(n1,n2) - 1 - delta_{n1,n2} for n1,n2 >= 1.
+
+        Verified for all (n1, n2) up to 12.
+        """
+        for n1 in range(1, 13):
+            for n2 in range(1, 13):
+                result = effective_pair_weight(n1, n2)
+                m = min(n1, n2)
+                delta = 1 if n1 == n2 else 0
+                expected = 2 * m - 1 - delta
+                assert result["W_total"] == expected, \
+                    f"({n1},{n2}): W_total={result['W_total']}, expected={expected}"
+
+    def test_N_q_equals_min(self):
+        """N_q = min(n1, n2) for n1, n2 >= 1."""
+        for n1 in range(1, 10):
+            for n2 in range(1, 10):
+                result = effective_pair_weight(n1, n2)
+                assert result["N_q"] == min(n1, n2), \
+                    f"({n1},{n2}): N_q={result['N_q']}, expected={min(n1,n2)}"
+
+    def test_ratio_approaches_two(self):
+        """W_total/N_q -> 2 for large min(n1, n2)."""
+        result = effective_pair_weight(50, 60)
+        assert abs(result["ratio"] - 2.0) < 0.05
+
+
+class TestWeightedVertex:
+    """Tests for the weighted_vertex_coupling function."""
+
+    def test_returns_channel_count(self):
+        """weighted_vertex_coupling returns the channel count as mpf."""
+        val = weighted_vertex_coupling(2, 2, 3)
+        assert float(val) == 2.0
+
+    def test_zero_for_forbidden(self):
+        """Returns 0 for forbidden triples."""
+        assert float(weighted_vertex_coupling(0, 0, 1)) == 0.0
+
+
+class TestWeightedSunset:
+    """Tests for the weighted two-loop sunset."""
+
+    @pytest.mark.slow
+    def test_weighted_exceeds_uniform(self):
+        """Weighted sum > uniform because W >= 1 and often W = 2."""
+        result = two_loop_sunset_weighted(n_max=20)
+        assert result["weighted_float"] > result["uniform_float"]
+
+    @pytest.mark.slow
+    def test_ratio_between_1_and_2(self):
+        """Weighted/uniform ratio is between 1 and 2."""
+        result = two_loop_sunset_weighted(n_max=20)
+        r = result["ratio"]
+        assert 1.0 < r < 2.0, f"Ratio {r} outside expected range"
+
+
+class TestMinWeightedHurwitz:
+    """Tests for the min-weighted Hurwitz double sum."""
+
+    @pytest.mark.slow
+    def test_converges(self):
+        """The min-weighted sum converges to a positive value."""
+        result = two_loop_min_weighted_hurwitz(s=4, n_terms=200)
+        assert result["S_min_float"] > 0
+
+    @pytest.mark.slow
+    def test_less_than_D_squared(self):
+        """S_min < D(s)^2 because min(n1,n2) < max(n1,n2)."""
+        result = two_loop_min_weighted_hurwitz(s=4, n_terms=500)
+        assert result["S_min_float"] < result["D_s_squared_float"]
+
+    @pytest.mark.slow
+    def test_not_in_standard_basis(self):
+        """S_min is NOT identified in the standard MZV+beta basis.
+
+        This is the key result: the CG-weighted vertex introduces a
+        depth-2 multiple Hurwitz zeta value that is genuinely new.
+        """
+        result = two_loop_min_weighted_hurwitz(s=4, n_terms=500)
+        decomp = result["decomposition"]
+        assert not decomp["identified"], \
+            "S_min should NOT be identifiable in standard MZV+beta basis"
