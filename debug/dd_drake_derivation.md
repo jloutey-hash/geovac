@@ -5,6 +5,19 @@
 **Status:** **Partial positive** — J-pattern closed algebraically;
 direct/exchange mixing coefficients confirmed to match BF-D rational search
 but not closed from pure 9j.
+
+**Sprint 5 DV update (2026):** the bipolar harmonic expansion was
+fully characterized (see `debug/dv_drake_bipolar_memo.md`). The
+angular-allowed channels for He (1s)(2p) ^3P are unique:
+(k_1=0, k_2=2) direct and (k_1=1, k_2=1) exchange. The bipolar
+radial kernel decomposes piecewise into a hybrid of Drake M^K pieces
+(e.g., bipolar(0,2,K=2) direct = M^0_dir_Region_I + M^2_dir_Region_II),
+which is NOT Drake's M^2_dir = M^2_dir_I + M^2_dir_II basis. Hence the
+rational ratios (3/50, -2/5, 3/2, -1) are confirmed to be a
+CONVENTION-DEPENDENT combining identity specific to how Drake's M^K
+integrates the piecewise kernel, rather than a direct Racah-algebra
+output. Sprint 5 DV closes with honest-partial status on the mixing
+ratio derivation.
 **Deliverables:** `debug/dd_drake_derivation.py`,
 `debug/dd_drake_reduced_me.py`, `debug/dd_drake_direct_sd.py`,
 `debug/dd_drake_verification.py`, this memo, 5 new tests in

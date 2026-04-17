@@ -57,6 +57,10 @@ References
 - H.A. Bethe & E.E. Salpeter, Quantum Mechanics of One- and Two-Electron Atoms §§38-39
 - W.R. Johnson, Atomic Structure Theory (Springer, 2007), Ch. 8
 - A.R. Edmonds, Angular Momentum in Quantum Mechanics (1957), Chs. 6-7
+- D.A. Varshalovich, A.N. Moskalev, V.K. Khersonskii, Quantum Theory of Angular
+  Momentum (World Scientific, 1988), §5.17 (bipolar harmonic expansion).
+- D.M. Brink & G.R. Satchler, Angular Momentum (3rd ed., 1993), App. 5.
+- R.A. Sack, J. Math. Phys. 5, 245 (1964) (Gegenbauer expansion of r_12^{-n}).
 - GeoVac Paper 18 (exchange-constant taxonomy)
 - ``geovac/hypergeometric_slater.py`` (Coulomb R^k algebraic machinery, same pattern)
 
@@ -81,9 +85,20 @@ radial amplitudes
 
 where the combining rationals (3/50, -2/5, 3/2, -1) were identified by
 rational search (Track BF-D) and reproduce NIST He 2^3P to sub-percent.
+Sprint 5 Track DV (2026) fully characterized the bipolar channel structure
+underlying these ratios: for He (1s)(2p) ^3P, only (k_1=0, k_2=2) direct
+and (k_1=1, k_2=1) exchange channels are angular-allowed (no higher (k_1,k_2)
+channels contribute at any L>=K). The piecewise decomposition of the bipolar
+radial kernel into Drake's M^K basis reveals a structural mismatch:
+bipolar(0,2,K=2) direct = M^0_dir_Region_I + M^2_dir_Region_II, which is
+NOT proportional to M^2_dir_total. This confirms that Drake's rational
+coefficients (3/50, -2/5) are a convention-dependent combining identity
+rather than a direct Racah-algebra output; a fully symbolic closed-form
+derivation remains open. (See debug/dv_drake_bipolar_memo.md.)
 
 Author: GeoVac Development Team (Track BF, April 2026; J-pattern Racah
-derivation in Track DD, April 2026)
+derivation in Track DD, April 2026; bipolar structure characterization
+in Track DV, April 2026)
 """
 
 from __future__ import annotations

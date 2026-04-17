@@ -766,7 +766,8 @@ deliberately, rather than leaving the connection implicit.
 \section{Open Questions}
 \label{sec:open}
 
-\subsection{SU(3) gauge structure on the Bargmann--Segal $S^5$ lattice}
+\subsection{Gauge structure on the Bargmann--Segal $S^5$ lattice: answered (mixed)}
+\label{sec:s5_bargmann_open}
 
 Paper~24~\cite{Paper24} constructs the Bargmann--Segal lattice
 of the 3D isotropic harmonic oscillator on the Hardy space
@@ -774,31 +775,125 @@ $\mathcal{H}^2(S^5)$ of SU(3) $(N, 0)$ symmetric representations.
 Its nodes are labeled $(N, l, m_l)$, its edges are the
 $\Delta N = \pm 1$, $\Delta l = \pm 1$ dipole transitions.  The
 underlying bundle is $S^5 \to \mathbb{CP}^2$, the next complex Hopf
-fibration.
+fibration.  The question posed in the first draft of this paper was
+whether the Bargmann--Segal graph carries an analogous gauge
+structure, with three candidate outcomes: (a) abelian $U(1)$ analog,
+(b) non-abelian $\mathrm{SU}(3)$ analog, or (c) no gauge structure.
+Sprint~5 Track~S5 (April~2026) resolved the question with a
+\emph{mixed} verdict: (a) is confirmed, (b) is not natural, and (c)
+holds on the spectral side (the $m_l$-quotient is not a
+$\mathbb{CP}^2$ discretization).  The data sharpen Paper~24's
+Coulomb/HO asymmetry rather than bridge it.  Paper~24
+Corollary~4 (the gauge-structure-reduction corollary added by the
+same sprint) documents the result in the Paper~24 vocabulary; we
+summarize here in the Paper~25 vocabulary.
 
-If the present framework observation generalizes, the Bargmann--Segal
-graph carries an SU(3) non-abelian gauge structure: nodes carry
-matter, edges carry SU(3)-valued connections, and the $\mathbb{CP}^2$
-quotient is the base of the non-abelian bundle.  A natural first
-check is whether an analog of the $B = 42$ Casimir-weighted trace
-exists with the SU(3) quadratic Casimir replacing the SO(3) orbital
-Casimir, and whether an analog of the selection principle
-$B/N = \dim = 5$ holds at any natural cutoff.  Paper~24's HO rigidity
-theorem~\cite{Paper24} already establishes that the Bargmann--Segal
-graph is bit-exactly $\pi$-free in exact rational arithmetic at every
-$N_{\max}$; this is consistent with an SU(3) gauge-like structure
-producing only rational invariants at finite $N_{\max}$, with
-transcendental content (if any) entering only in the infinite limit,
-as it does for the $S^3$ Hopf case via the infinite Dirichlet series
-of Paper~4F~\cite{Paper2}.
+\paragraph*{Positive transfer: the abelian $U(1)$ Wilson--Hodge
+structure is universal.} At $N_{\max} = 5$, the Bargmann graph has
+56~nodes and 165~edges; the signed incidence matrix~$B$, node
+Laplacian $L_0 = B B^{\top}$, and edge Laplacian
+$L_1 = B^{\top} B$ are well-defined; the first Betti number
+$\beta_1 = E - V + c = 110$ counts independent cycle
+classes.  Under a node-local $U(1)$ gauge transformation
+$\psi_v \to e^{i\chi_v}\psi_v$, the dipole edge amplitudes transform
+covariantly, exactly as in Section~III.C for the $S^3$ case.  The
+combinatorial Hodge decomposition and the SVD identity between
+nonzero spectra of $L_0$ and $L_1$ apply unchanged.  In short: the
+combinatorial Wilson--Hodge vocabulary of Section~II generalizes
+verbatim to the $S^5$ Bargmann graph (and, more generally, to any
+finite triangle-free simplicial 1-complex with a chosen orientation).
 
-Whether the non-abelian case produces a physical coupling constant
-(e.g., QCD $\alpha_s$ at some reference scale) is a highly speculative
-question that we flag but do not investigate.  The Phase~4H negative
-result~\cite{Paper2} showed that the naive generalization of
-Paper~2's selection principle to higher Hopf bundles does not produce
-the Standard Model couplings.  Any non-abelian extension must avoid
-reproducing that known-negative path.
+\paragraph*{Negative: no natural non-abelian $\mathrm{SU}(3)$
+lattice structure.} A Wilson lattice gauge theory requires each
+link variable to live in a fixed group acting on a fixed matter
+irrep.  The Bargmann graph has \emph{different} $\mathrm{SU}(3)$
+irreps on different shells---the dimension of $(N, 0)$ grows as
+$(N+1)(N+2)/2$---and the dipole operator intertwines
+$(N, 0) \otimes (1, 0) \to (N+1, 0)$ as a Clebsch--Gordan
+coupling, not as an $\mathrm{SU}(3)$ group element.  The natural
+gauge group of the Bargmann graph is therefore $U(1)$, not
+$\mathrm{SU}(3)$.  An SU(3)-covariant reformulation
+(replacing $(N, l, m_l)$ labels by full weight-space labels of
+$(N, 0)$ and promoting edges to SU(3) link variables) would be a
+different construction, and would not correspond to a Wilson
+lattice on the $S^5$ Hardy space in any natural sense.
+
+\paragraph*{Negative: the $m_l$-quotient is not a $\mathbb{CP}^2$
+discretization.} Collapsing the $m_l$-fibers at fixed $(N, l)$
+yields a 12-sector graph at $N_{\max} = 5$ with sectors
+$\{(0,0), (1,1), (2,0), (2,2), (3,1), (3,3), (4,0), (4,2), (4,4),$
+$(5,1), (5,3), (5,5)\}$ and fiber dimensions $(2l+1) = 1, 3, 1, 5,
+3, 7, 1, 5, 9, 3, 7, 11$.  Its Laplacian eigenvalues are
+$\{0, 2.22, 4.87, 4.94, 11.65, 12.11, 18.74, 28.09, 33.58, 50.61,
+63.77, 99.43\}$ (12 distinct values, multiplicity scheme).  The
+scalar Laplace--Beltrami spectrum on $\mathbb{CP}^2$ with the
+Fubini--Study K\"ahler metric of constant holomorphic sectional
+curvature~$K = 4$ is
+$\lambda_k = 4k(k+2)$ with degeneracy $(k+1)^3$, giving
+$\{0, 12, 32, 60, 96, 140, \ldots\}$ with multiplicities
+$\{1, 8, 27, 64, 125, 216, \ldots\}$.  A least-squares fit of the
+quotient spectrum to the $\mathbb{CP}^2$ sequence under a single
+linear rescaling has a $24.98\%$ maximum relative residual; the
+ratios $\lambda_{\text{quot},k} / \lambda_{\mathbb{CP}^2, k}$ range
+between~$0.08$ and~$0.19$, with no uniform fit.  The quotient is a
+combinatorial SO(3)-labeled graph, not a spectral discretization
+of the Kähler $\mathbb{CP}^2$.
+
+\paragraph*{Structural interpretation: two-layer Coulomb/HO
+asymmetry becomes three-layer.} Paper~24 established the
+Coulomb/HO asymmetry at the level of the \emph{spectrum} (on
+$S^3$, $L_0 = D - A$ computes the Coulomb spectrum via
+$\kappa = -1/16$; on $S^5$, $L_0$ is spectrally inert and the HO
+spectrum is in the diagonal).  The present sprint adds a third
+layer at the level of \emph{gauge-structure content}: the abelian
+$U(1)$ Wilson vocabulary is universal, but its physical content is
+not.  On $S^3$, the dictionary (matter propagator, photon
+propagator) $= (L_0, L_1)$ is nontrivial---both sides carry
+physical spectrum and physical gauge content.  On $S^5$, the
+dictionary is trivial on the matter side (the HO spectrum is not
+in $L_0$) and only combinatorial on the gauge side ($L_1$
+generates cycle classes, but there is no ``photon propagator on
+$S^5$'' interpretation tied to the HO physics).
+
+An immediate consequence is that the Paper~2 combination rule
+$K = \pi(B + F - \Delta)$ has no natural $S^5$ analog.  A candidate
+Fock-degeneracy Dirichlet analog $F_{S^5} = \sum_{N \geq 1}
+g_N^{\text{HO}} / N^{d_{\max}}$ with
+$g_N^{\text{HO}} = (N+1)(N+2)/2$ and packing exponent
+$d_{\max} = \dim \mathbb{C}^3 = 6$ evaluates to
+$\tfrac{1}{2}[\zeta_R(4) + 3\zeta_R(5) + 2\zeta_R(6)]$, a mixed
+even/odd-zeta combination with no clean $\zeta_R(2) = \pi^2/6$
+projection.  The analogs of $B$ and $\Delta$ are
+spectrum-computing-tied (both rely on the Coulomb projection),
+which Paper~23's Fock projection rigidity theorem restricts to
+$S^3$ alone.  Together with Phase~4H's SM-running negative
+result~\cite{Paper2} for alternative origins of $\Delta$, the
+combined picture is that the S^5 graph is a lattice gauge
+structure with abelian $U(1)$ content but without $\alpha$-like
+spectral content.  This is consistent with Paper~24's operator-order
+transcendental discriminant: first-order complex-analytic
+operators give linear spectra, linear projections, and $\pi$-free
+lattices; second-order Riemannian operators give quadratic
+spectra, nonlinear projections, and $\pi$ from spectral zeta
+regularization.  Only the second-order Coulomb case carries
+Wilson-structure content of the $\alpha$-relevant kind.
+
+\paragraph*{What remains open.} The sprint answers the three
+candidate outcomes listed above; one narrow follow-up remains, but
+is well outside the Paper~25 frame: \emph{if} the Bargmann graph
+were rebuilt in a genuinely SU(3)-covariant basis (not the SO(3)
+adaptation of Paper~24), with nodes labeled by SU(3) weight-space
+coordinates and edges carrying SU(3) intertwiners rather than
+$U(1)$ phases, \emph{would} a different gauge-structure dictionary
+emerge?  The answer is technically yes (this is classical
+representation theory), but the construction is no longer a Wilson
+lattice in the natural sense, and it has no known tie to the
+harmonic oscillator's physical spectrum.  We record this as a
+speculative direction for future work and do not pursue it here.
+Data backing the Sprint~5 verdict: \texttt{debug/s5\_bargmann\_segal\_graph.py},
+\texttt{debug/s5\_edge\_laplacian\_analysis.py},
+\texttt{debug/data/s5\_graph\_spectrum.json},
+\texttt{debug/s5\_gauge\_structure\_memo.md}.
 
 \subsection{Rank-2 Breit tensor: a 2-form gauge structure?}
 

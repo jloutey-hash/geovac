@@ -499,6 +499,237 @@ def test_drake_combining_coefficients_reproduce_nist():
 
 
 # ---------------------------------------------------------------------------
+# Sprint 5 Track CP: Li 2^2P and Be 2s2p ^3P fine-structure closure
+# ---------------------------------------------------------------------------
+
+
+def test_li_2P_zval_convention_closes_lt_20pct_nist():
+    """Sprint 5 CP: Li 2^2P doublet splitting within 20% of NIST.
+
+    Closes the Sprint 3 BF-E Li honest negative via the standard convention
+    zeta = alpha^2/2 * Z_val * <1/r^3>_2p with Z_val = 1 (asymptotic charge
+    of Li 2p above [He] core) and Z_eff = 1 (full-shield hydrogenic).
+
+    Result: +8.89% error vs NIST 0.3354 cm^-1 = 10,055 MHz.
+    Core polarization (Migdalek-Bylicki) is NOT required; adding it worsens
+    the result to +24.95%.
+    """
+    ALPHA = 7.2973525693e-3
+    HA_TO_MHZ = 6.5796839204e9
+
+    # Pure Coulomb Li 2p: Z_val = 1 (asymptotic), Z_slater = 1 (full shield)
+    Z_val = 1.0
+    Z_slater = 1.0
+    r3_inv = Z_slater**3 / 24.0
+    zeta = ALPHA**2 / 2.0 * Z_val * r3_inv  # std convention
+    split_Ha = 1.5 * zeta
+    split_MHz = split_Ha * HA_TO_MHZ
+
+    NIST_MHZ = 0.33540 * 29979.2458  # 10,055.04 MHz
+    rel_err = abs(split_MHz - NIST_MHZ) / NIST_MHZ
+
+    assert rel_err < 0.20, (
+        f"Li 2^2P err {rel_err*100:.2f}% >= 20% (split = {split_MHz:,.1f} MHz, "
+        f"NIST = {NIST_MHZ:,.1f} MHz)"
+    )
+    # Also pin the specific value for regression:
+    assert abs(rel_err - 0.0889) < 0.005, (
+        f"Li 2^2P err {rel_err*100:.2f}% drifted from regression value 8.89%"
+    )
+
+
+def test_li_2P_core_polarization_worsens_accuracy():
+    """Sprint 5 CP: Core polarization (Migdalek-Bylicki) WORSENS Li 2^2P accuracy.
+
+    Documents the negative result: starting from the +8.9% baseline, adding
+    the MB core-polarization correction (alpha_d = 0.192, r_c = 0.55 a.u.)
+    increases the error to +25%. CP is attractive and increases zeta_2p,
+    whereas the baseline is already over-predicting the splitting.
+    """
+    import numpy as np
+    from scipy.integrate import quad
+
+    ALPHA = 7.2973525693e-3
+    HA_TO_MHZ = 6.5796839204e9
+    NIST_MHZ = 0.33540 * 29979.2458
+
+    alpha_d = 0.192  # MB Table I
+    r_c = 0.55       # MB Table I
+    Z_slater = 1.0
+    Z_val = 1.0
+
+    def R_2p(r):
+        return (Z_slater**1.5 / (2 * np.sqrt(6))) * (Z_slater * r) * np.exp(-Z_slater * r / 2)
+
+    def dVcp_dr(r):
+        cutoff = 1.0 - np.exp(-(r / r_c)**6)
+        dWdr = 6.0 * r**5 / r_c**6 * np.exp(-(r / r_c)**6)
+        return (alpha_d * 2.0 / r**5) * cutoff - (alpha_d / (2.0 * r**4)) * dWdr
+
+    def integrand(r):
+        return R_2p(r)**2 * r * dVcp_dr(r)
+
+    me_cp, _ = quad(integrand, 0.0, 100.0, limit=200, epsabs=1e-14)
+    zeta_coulomb = ALPHA**2 / 2.0 * Z_val * (Z_slater**3 / 24.0)
+    zeta_cp = ALPHA**2 / 2.0 * me_cp
+    zeta_total = zeta_coulomb + zeta_cp
+    split = 1.5 * zeta_total * HA_TO_MHZ
+    err_bare = abs(1.5 * zeta_coulomb * HA_TO_MHZ - NIST_MHZ) / NIST_MHZ
+    err_cp = abs(split - NIST_MHZ) / NIST_MHZ
+
+    # CP should make things worse (positive Delta_zeta on top of over-prediction)
+    assert err_cp > err_bare, (
+        f"Expected CP to worsen Li 2^2P accuracy (bare err={err_bare*100:.2f}% "
+        f"vs with-CP err={err_cp*100:.2f}%), but got improvement."
+    )
+    # Pin specific values for regression (bare 8.9%, with CP ~25%):
+    assert 0.22 < err_cp < 0.28, f"CP-corrected err {err_cp*100:.2f}% outside [22%, 28%]"
+
+
+def test_be_2s2p_3P_slater_rules_span_lt_20pct_nist():
+    """Sprint 5 CP: Be 2s2p ^3P multiplet span within 20% of NIST.
+
+    Closes the Sprint 3 BF-E Be honest negative via:
+      - standard convention: zeta = alpha^2/2 * Z_val * <1/r^3>_2p
+      - Z_val = 1 (Be 2p in 2s2p sees [He] + 2s at large r -> Z_val = 4-3 = 1)
+      - Z_eff = 1.95 (Slater's rules: 0.85 per 1s + 0.35 per same-shell 2s)
+
+    Result: +2.76% error on E(P_0) - E(P_2) span = -2.343 cm^-1 = -70,241 MHz.
+    """
+    from geovac.breit_integrals import breit_ss_radial
+    ALPHA = 7.2973525693e-3
+    HA_TO_MHZ = 6.5796839204e9
+
+    Z_nuc = 4
+    Z_eff = 1.95  # Slater's rules
+    Z_val = 1.0   # asymptotic
+
+    # Breit-Pauli radial integrals at Z_nuc = 4 (2s, 2p)
+    M1_dir = float(breit_ss_radial(2, 0, 2, 1, 2, 0, 2, 1, 1, Z=Z_nuc))
+    M2_dir = float(breit_ss_radial(2, 0, 2, 1, 2, 0, 2, 1, 2, Z=Z_nuc))
+    M1_exc = float(breit_ss_radial(2, 0, 2, 1, 2, 1, 2, 0, 1, Z=Z_nuc))
+    M2_exc = float(breit_ss_radial(2, 0, 2, 1, 2, 1, 2, 0, 2, Z=Z_nuc))
+
+    A_SS = ALPHA**2 * (3/50 * M2_dir - 2/5 * M2_exc)
+    A_SOO = ALPHA**2 * (3/2 * M1_dir - 1 * M1_exc)
+
+    # zeta in std convention scaled to match Sprint 3 E_SO(J) = (zeta/2) X(J):
+    r3_inv = Z_eff**3 / 24.0
+    zeta = ALPHA**2 * Z_val * r3_inv   # this is "2 * std_zeta" to match Sprint 3 convention
+
+    # ^3P (L=1, S=1) multiplet
+    f_SS = {0: -2.0, 1: 1.0, 2: -0.2}
+    f_SOO = {0: 2.0, 1: 1.0, 2: -1.0}
+    X_J = {0: -4.0, 1: -2.0, 2: 2.0}
+    E = {J: (zeta / 2) * X_J[J] + A_SS * f_SS[J] + A_SOO * f_SOO[J] for J in (0, 1, 2)}
+
+    split_P0_P2 = (E[0] - E[2]) * HA_TO_MHZ
+    # NIST: P0 at 21978.925, P2 at 21981.268 cm^-1 -> P0 - P2 = -2.343 cm^-1
+    NIST_P0_P2_MHz = -2.343 * 29979.2458
+
+    rel_err = abs(split_P0_P2 - NIST_P0_P2_MHz) / abs(NIST_P0_P2_MHz)
+    assert rel_err < 0.20, (
+        f"Be 2s2p^3P span err {rel_err*100:.2f}% >= 20% "
+        f"(GeoVac = {split_P0_P2:,.0f} MHz, NIST = {NIST_P0_P2_MHz:,.0f} MHz)"
+    )
+    # Pin the specific value:
+    assert rel_err < 0.05, (
+        f"Be 2s2p^3P span err {rel_err*100:.2f}% drifted from regression value 2.76%"
+    )
+
+
+def test_be_2s2p_3P_individual_splittings_lt_20pct():
+    """Sprint 5 CP: All three Be 2s2p ^3P splittings within 20% of NIST."""
+    from geovac.breit_integrals import breit_ss_radial
+    ALPHA = 7.2973525693e-3
+    HA_TO_MHZ = 6.5796839204e9
+
+    Z_nuc = 4
+    Z_eff = 1.95
+    Z_val = 1.0
+
+    M1_dir = float(breit_ss_radial(2, 0, 2, 1, 2, 0, 2, 1, 1, Z=Z_nuc))
+    M2_dir = float(breit_ss_radial(2, 0, 2, 1, 2, 0, 2, 1, 2, Z=Z_nuc))
+    M1_exc = float(breit_ss_radial(2, 0, 2, 1, 2, 1, 2, 0, 1, Z=Z_nuc))
+    M2_exc = float(breit_ss_radial(2, 0, 2, 1, 2, 1, 2, 0, 2, Z=Z_nuc))
+    A_SS = ALPHA**2 * (3/50 * M2_dir - 2/5 * M2_exc)
+    A_SOO = ALPHA**2 * (3/2 * M1_dir - 1 * M1_exc)
+    zeta = ALPHA**2 * Z_val * (Z_eff**3 / 24.0)
+
+    f_SS = {0: -2.0, 1: 1.0, 2: -0.2}
+    f_SOO = {0: 2.0, 1: 1.0, 2: -1.0}
+    X_J = {0: -4.0, 1: -2.0, 2: 2.0}
+    E = {J: (zeta / 2) * X_J[J] + A_SS * f_SS[J] + A_SOO * f_SOO[J] for J in (0, 1, 2)}
+
+    # NIST P0=21978.925, P1=21978.271, P2=21981.268 cm^-1
+    NIST = {
+        "P0-P1": (21978.925 - 21978.271) * 29979.2458,  # +19,606 MHz
+        "P1-P2": (21978.271 - 21981.268) * 29979.2458,  # -89,848 MHz
+        "P0-P2": (21978.925 - 21981.268) * 29979.2458,  # -70,241 MHz
+    }
+    GeoVac = {
+        "P0-P1": (E[0] - E[1]) * HA_TO_MHZ,
+        "P1-P2": (E[1] - E[2]) * HA_TO_MHZ,
+        "P0-P2": (E[0] - E[2]) * HA_TO_MHZ,
+    }
+    for key in NIST:
+        rel_err = abs(GeoVac[key] - NIST[key]) / abs(NIST[key])
+        # P0-P1 is the tightest (cancellation-sensitive); allow <20%
+        assert rel_err < 0.20, (
+            f"Be 2s2p^3P {key} err {rel_err*100:.2f}% >= 20% "
+            f"(GeoVac = {GeoVac[key]:,.0f} MHz, NIST = {NIST[key]:,.0f} MHz)"
+        )
+
+
+def test_2config_2s2p_2p2_parity_forbidden():
+    """Sprint 5 CP: <2s2p ^3P | 1/r_{12} | 2p^2 ^3P> = 0 by parity.
+
+    The 2s2p product has odd parity (l1+l2 = 0+1 = 1), while 2p^2 has even
+    parity (l1+l2 = 1+1 = 2). The 1/r_{12} operator is parity-even, so the
+    off-diagonal coupling vanishes. Verified via direct Slater-Condon
+    evaluation: both direct and exchange two-electron integrals are zero.
+    """
+    import numpy as np
+    from sympy.physics.wigner import wigner_3j
+    from geovac.hypergeometric_slater import compute_rk_float
+
+    def c_k(l1, m1, l2, m2, k):
+        q = m1 - m2
+        if abs(q) > k:
+            return 0.0
+        w1 = float(wigner_3j(l1, k, l2, 0, 0, 0))
+        w2 = float(wigner_3j(l1, k, l2, -m1, q, m2))
+        return ((-1)**m1) * np.sqrt((2*l1 + 1) * (2*l2 + 1)) * w1 * w2
+
+    def two_e_integral(n1, l1, m1, n2, l2, m2, n3, l3, m3, n4, l4, m4):
+        if m1 + m2 != m3 + m4:
+            return 0.0
+        total = 0.0
+        k_min = max(abs(l1 - l3), abs(l2 - l4))
+        k_max = min(l1 + l3, l2 + l4)
+        for k in range(k_min, k_max + 1):
+            # Both parity conditions must hold for any contribution:
+            if (l1 + l3 + k) % 2 != 0:
+                continue
+            if (l2 + l4 + k) % 2 != 0:
+                continue
+            ck1 = c_k(l1, m1, l3, m3, k)
+            ck2 = c_k(l2, m2, l4, m4, k)
+            if ck1 == 0 or ck2 == 0:
+                continue
+            rk = compute_rk_float(n1, l1, n3, l3, n2, l2, n4, l4, k)
+            total += ck1 * ck2 * rk
+        return total
+
+    # <(2s, m=0)(2p_0) | 1/r_12 | (2p_{-1})(2p_{+1})>
+    direct = two_e_integral(2, 0, 0, 2, 1, 0, 2, 1, -1, 2, 1, +1)
+    exchange = two_e_integral(2, 0, 0, 2, 1, 0, 2, 1, +1, 2, 1, -1)
+    # Both must be exactly zero by parity:
+    assert direct == 0.0, f"Direct integral should be 0 by parity, got {direct}"
+    assert exchange == 0.0, f"Exchange integral should be 0 by parity, got {exchange}"
+
+
+# ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
 

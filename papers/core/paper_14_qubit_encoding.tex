@@ -1926,11 +1926,32 @@ are rational$+$embedding-log (Paper~18 embedding tier).  The
 rational direct/exchange mixing ratios were identified by
 systematic enumeration over small rationals (Track~BF-D) and
 confirmed numerically to reproduce NIST He $2\,^3\!P$ to sub-percent
-accuracy; a closed-form derivation of these specific rationals
-from the bipolar harmonic expansion of
-$Y^{(K)}(\hat r_{12})/r_{12}^{K+1}$ is deferred
-(Track~DD honest-negative on the mixing coefficients; J-pattern
-and spin-tensor structure are derived).
+accuracy.
+Sprint~5 Track~DV (2026) fully characterized the bipolar harmonic
+expansion of
+$Y^{(K)}(\hat r_{12})/r_{12}^{K+1}$
+(Varshalovich~\S5.17, Brink--Satchler App.~5) for the He
+$(1s)(2p)$ configuration: only a single bipolar channel
+$(k_1\!=\!0, k_2\!=\!2)$ is angular-allowed for the direct path,
+and only $(k_1\!=\!1, k_2\!=\!1)$ is allowed for the exchange path
+(no higher $(k_1, k_2)$ channels contribute at any $L\geq K$).  The
+piecewise decomposition of the bipolar kernel into Region~I
+$(r_1<r_2)$ and Region~II $(r_1>r_2)$ contributions was derived
+symbolically (using the production module's
+\texttt{\_t\_kernel\_region\_I}), and the identity
+\[
+  \text{Bipolar}(0, 2, K{=}2)_{\mathrm{dir}} = M^0_{\mathrm{dir},\mathrm{I}} + M^2_{\mathrm{dir},\mathrm{II}}
+\]
+was established, in contrast to Drake's
+$M^2_{\mathrm{dir}} = M^2_{\mathrm{dir},\mathrm{I}} + M^2_{\mathrm{dir},\mathrm{II}}$.
+This structural mismatch between the bipolar basis and Drake's
+$M^K$ basis shows that the rational coefficients
+$(\tfrac{3}{50}, -\tfrac{2}{5}, \tfrac{3}{2}, -1)$ are a
+convention-dependent combining identity
+$\bigl(\text{specific to how Drake's}\ M^K\ \text{integrates the piecewise kernel}\bigr)$
+rather than a direct Racah-algebra output; a fully first-principles
+derivation remains open.  (Sprint~5 Track~DV honest-partial; details
+in \texttt{debug/dv\_drake\_bipolar\_memo.md}.)
 
 On the He $2\,^3\!P$ multiplet with $Z_{\rm nuc} = 2, Z_{\rm eff} = 1$
 and CODATA $\alpha$, Eqs.~(\ref{eq:breit_pauli_3P})--(\ref{eq:drake_amplitudes})
@@ -1955,15 +1976,54 @@ finite-mass recoil or higher-order QED corrections (Drake~1971
 \S IV, not in scope).
 
 Extensions to Li $2\,^2\!P$ and Be $2s2p\,^3\!P$ (Sprint~3 BF-E)
-do not meet the $20\%$ target with physically-determined $Z_{\rm eff}$:
-Li (single valence above closed core) requires explicit
-core-polarization SOO corrections that vanish at $S = \tfrac{1}{2}$;
-Be (two valence electrons in the near-degenerate $n = 2$ shell)
-requires multi-configuration treatment of the $2s^2 \leftrightarrow 2s2p$
-mixing.  Both are Tier~3+ goals.  The BF-D result is nonetheless the
-first sub-percent Breit-Pauli fine-structure benchmark in the
-framework; machinery and Drake coefficient identifications persist
-for future multi-configuration extensions.
+were initially reported as honest negatives at $+118\%$ (Li) and $88\%$
+(Be span); Sprint~5 Track~CP closed both to $<20\%$ via a convention
+refinement rather than new physics.  The standard
+Breit-Pauli single-particle spin-orbit formula for a valence electron
+above a closed core is
+\begin{equation}\label{eq:zeta_std}
+  \zeta_{\rm valence} = \frac{\alpha^{2}}{2}\,Z_{\rm val}\,
+                          \langle 1/r^{3} \rangle_{\rm valence},
+\end{equation}
+with $Z_{\rm val}$ the \emph{asymptotic} nuclear charge (nuclear charge
+minus the count of shielding core and same-shell electrons) and
+$\langle 1/r^{3} \rangle = Z_{\rm eff}^{3}/[n^{3}l(l{+}\tfrac{1}{2})(l{+}1)]$
+on a hydrogenic orbital with Slater exponent $Z_{\rm eff}$.
+For Li~$2p$ above $[\mathrm{He}]$: $Z_{\rm val} = 3 - 2 = 1$,
+$Z_{\rm eff} = 1$ (full-shield hydrogenic), giving
+$\zeta_{2p} = \alpha^{2}/48$ and doublet splitting
+$(3/2)\zeta = 10{,}949$~MHz vs NIST $10{,}055$~MHz, relative error
+$+8.89\%$.  For Be~$2s2p\,^3\!P$: $Z_{\rm val} = 4 - 3 = 1$
+(shielding from $[\mathrm{He}]$ plus the $2s$), with Slater's rules
+$Z_{\rm eff}(2p) = 4 - 2\cdot 0.85 - 0.35 = 1.95$; the
+$E(P_{0}){-}E(P_{2})$ span closes to $+2.76\%$ of NIST, and all
+three individual splittings are below $20\%$ ($+18.9\%$, $+6.3\%$,
+$+2.8\%$).  The Sprint~3 BR-C convention used
+$Z_{\rm nuc}$ (not $Z_{\rm val}$) in the prefactor;
+this happens to coincide with the standard form for He
+(where $Z_{\rm nuc} = 2 = 2Z_{\rm val}$ combined with the explicit
+$(\zeta/2)$ factor in $E_{SO}(J)$), but over-counts by a factor
+of $Z_{\rm nuc}$ for heavier atoms.
+The suggested 2-configuration mixing $2s2p \leftrightarrow 2p^{2}$
+is \emph{forbidden by parity}: $2s2p$ has odd parity $(-1)^{0+1} = -1$,
+while $2p^{2}$ has even parity $(-1)^{1+1} = +1$, and the
+parity-even $1/r_{12}$ operator gives zero coupling.  This is verified
+symbolically in \texttt{tests/test\_breit\_integrals.py}
+(\texttt{test\_2config\_2s2p\_2p2\_parity\_forbidden}).
+Core polarization (Migdalek-Bylicki
+Phys.~Rev.~A \textbf{57}, 3456 (1998), with $\alpha_{d}({\rm Li}^{+}) = 0.192$
+and $r_{c} = 0.55$~a.u.) is a small correction for Li that
+\emph{worsens} agreement (from $+8.9\%$ to $+25\%$) because it is
+attractive and increases $\zeta_{2p}$; the Sprint~3 hypothesis that CP
+was needed for Li was incorrect.  The $\sim 8\%$ Li residual is
+consistent with higher-order $(Z\alpha)^{4}$ relativistic corrections
+and QED Lamb shift at the $1\%$ level.
+The BF-D result is the first sub-percent Breit-Pauli fine-structure
+benchmark in the framework, and Sprint~5 CP extends the coverage to
+Li~$2\,^2\!P$ ($8.9\%$) and Be~$2s2p\,^3\!P$ ($2.8\%$ span, $<20\%$
+on all components) using the same production
+\texttt{geovac/breit\_integrals.py} module with no modifications;
+the extension is a convention cleanup plus Slater's 1930 screening rules.
 
 %% ========================================================================
 \section{Discussion}

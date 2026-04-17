@@ -780,6 +780,157 @@ Cross-reference: Paper~18 \S IV (taxonomy closure);
 Tier~1 Track~D3 ($\zeta(3)$ from first-order Dirac); T9 debug memo
 (\texttt{debug/dirac\_t9\_memo.md}).
 
+\subsection{Gauge-structure corollary: reduced Wilson content on $S^5$}
+\label{sec:gauge-structure-reduced}
+
+Paper~25~\cite{paper25} observes that the GeoVac $S^3$ Coulomb graph
+at finite~$n_{\max}$ is simultaneously a Fock discretization of
+$S^3$, a triangle-free simplicial 1-complex with discrete Hodge
+decomposition, and an abelian Wilson-type $U(1)$ lattice gauge
+structure with matter on nodes and a $U(1)$ connection on edges.
+The same three structural layers are available on the
+Bargmann--Segal graph of the present paper, but with reduced
+physical content.  This corollary documents the transfer pattern.
+
+\paragraph{Positive transfer (abelian $U(1)$ Wilson--Hodge
+structure).}
+The Bargmann graph at $N_{\max} = 5$ has 56 nodes, 165 edges, one
+connected component, and Euler characteristic $V - E = -109$.  The
+signed incidence matrix $B\in\mathbb{Z}^{56\times 165}$, oriented
+along the creation-operator direction ($N\to N+1$), gives a discrete
+exterior derivative $d_0 = B^\top$ with node Laplacian $L_0 = BB^\top$
+and edge Laplacian $L_1 = B^\top B$.  The first Betti number is
+$\beta_1 = E - V + c = 110$, counting the independent cycle classes
+that carry Wilson-loop holonomies in the abelian interpretation.
+Under a node-local $U(1)$ gauge transformation
+$\psi_v \mapsto e^{i\chi_v}\psi_v$, the dipole edge amplitudes
+$\langle w\,|\,z_q\,|\,v\rangle$ transform covariantly as
+$U_{vw}\mapsto e^{-i\chi_v}U_{vw}e^{i\chi_w}$.  The combinatorial
+Hodge decomposition
+$\mathbb{R}^{165} = \mathrm{im}\,d_0 \oplus \ker L_1$ and the
+SVD identity between nonzero spectra of $L_0$ and $L_1$ both hold.
+At this level of abstraction, the Bargmann graph is a lattice
+gauge structure in exactly the Paper~25 sense.
+
+\paragraph{Reduced content (no spectrum-computing role for $L_0$).}
+On $S^3$, the node Laplacian $L_0 = D - A$ is precisely the operator
+whose eigenvalues $n^2 - 1$ are mapped to the Coulomb spectrum by
+the kinetic constant $\kappa = -1/16$.  The Wilson dictionary in
+Paper~25 identifies $L_0$ with the matter propagator's inverse
+(covariant Laplacian $-\nabla^2 + m^2$), and this identification has
+spectral content: the matter spectrum is literally the spectrum of
+$L_0$ up to $\kappa$-scaling.  On $S^5$, by contrast, the Bargmann
+node Laplacian is spectrally inert for the physical HO spectrum: the
+HO energies $\hbar\omega(N + 3/2)$ live in the diagonal
+(Eq.~\eqref{eq:H-graph}), not in~$L_0 = D - A$.  The graph adjacency
+$A$ encodes dipole transition amplitudes only, and Theorem~3 below
+shows that the node Laplacian $L_0$ computed from $A$ plays no role
+in reconstructing the spectrum.
+
+\paragraph{Reduced content (no Wilson SU(3) structure).}
+The complex Hopf fibration $S^1\to S^5\to\mathbb{CP}^2$ of
+Eq.~\eqref{eq:s5-fibration} suggests a potential non-abelian
+$\mathrm{SU}(3)$ gauge structure, with link variables valued in the
+fundamental rep $\mathbf{3}$ and node matter in the symmetric
+irreps $(N, 0)$.  This does not materialize.  The dipole operator
+$z_q$ is the fundamental $\mathbf{3}$ and intertwines
+$(N, 0)\otimes(1, 0)\to(N+1, 0)$ as a Clebsch--Gordan coupling, not
+as a group element of $\mathrm{SU}(3)$.  A Wilson lattice gauge
+structure requires the link variables to live in a fixed group
+(the same $\mathrm{SU}(3)$ on every edge) acting uniformly on a
+fixed matter irrep.  The Bargmann graph has \emph{different}
+$\mathrm{SU}(3)$ irreps on different shells (the representation
+dimension grows as $(N+1)(N+2)/2$), which is structurally a
+representation tower, not a lattice matter-gauge system.  The
+natural gauge group of the Bargmann graph is therefore $U(1)$,
+inherited from the phase ambiguity of the node wavefunctions,
+not $\mathrm{SU}(3)$.
+
+\paragraph{Reduced content (no $\mathbb{CP}^2$ base spectrum).}
+The natural discrete Hopf quotient collapsing the $m_l$-fibers of
+the (SO(3)-adapted) Bargmann basis at fixed $(N, l)$ gives a
+12-sector graph at $N_{\max} = 5$:
+\[
+\begin{aligned}
+& (0,0), (1,1), (2,0), (2,2), (3,1), (3,3), \\
+& (4,0), (4,2), (4,4), (5,1), (5,3), (5,5)
+\end{aligned}
+\]
+with fiber dimensions $(2l+1) = 1, 3, 1, 5, 3, 7, 1, 5, 9, 3, 7, 11$.
+The scalar Laplace--Beltrami spectrum on $\mathbb{CP}^2$ with the
+Fubini--Study K\"ahler metric of constant holomorphic sectional
+curvature~$K = 4$ is~\cite{berger_gauduchon_mazet}
+\begin{equation}
+  \lambda_k = 4k(k+2),\qquad k = 0, 1, 2, \ldots,
+\end{equation}
+with degeneracy $(k+1)^3$ (the dimension of the $(k, k)$
+$\mathrm{SU}(3)$ irrep).  The 12-sector quotient Laplacian under
+the natural multiplicity weighting has eigenvalues
+$\{0, 2.22, 4.87, 4.94, 11.65, 12.11, 18.74, 28.09, 33.58, 50.61,
+63.77, 99.43\}$.  The best single-scale rescaling against the
+analytic CP$^2$ sequence $\{0, 12, 32, 60, 96, 140, \ldots\}$ has
+a maximum relative residual of $24.98\%$; the ratios
+$\lambda_{\mathrm{quot},k}/\lambda_{\mathrm{CP}^2,k}$ vary between
+$0.08$ and $0.19$ across the 12 pairs, with no uniform rescaling.
+The $m_l$-quotient is therefore a combinatorial SO(3)-labeled graph
+on 12 sectors, not a spectral discretization of $\mathbb{CP}^2$.
+At this $N_{\max}$, there are simply too few sectors to represent
+the four-dimensional $\mathbb{CP}^2$ Laplacian, and the weighting
+scheme in the quotient is inherited from SO(3) branching, not from
+the K\"ahler volume form on $\mathbb{CP}^2$.
+
+\begin{corollary}[Gauge-structure reduction on the Bargmann graph]
+\label{cor:gauge-structure-reduction}
+The abelian $U(1)$ Wilson--Hodge structure of the $S^3$ Coulomb
+graph (Paper~25) transfers to the Bargmann--Segal $S^5$ graph at
+the combinatorial level (incidence matrix, node/edge Laplacians,
+discrete Hodge decomposition, $\beta_1$ Wilson-loop classes), but
+the physical content of the structure is strictly reduced:
+\begin{enumerate}
+\item The node Laplacian $L_0 = D - A$ is spectrum-computing on
+  $S^3$ (via $\kappa = -1/16$) but spectrally inert on $S^5$ (the
+  HO spectrum is in the diagonal).
+\item The natural gauge group of the graph is $U(1)$; no Wilson
+  $\mathrm{SU}(3)$ lattice structure emerges from the $(N, 0)$
+  symmetric irreps, because transitions between distinct irreps
+  are Clebsch--Gordan intertwiners, not group elements.
+\item The $m_l$-fiber-collapse quotient does not produce a
+  spectral discretization of $\mathbb{CP}^2$ at finite $N_{\max}$.
+\end{enumerate}
+\end{corollary}
+
+The corollary extends the Coulomb/HO asymmetry of
+Theorem~\ref{thm:asymmetry} from a two-layer statement
+(spectrum: yes $S^3$, no $S^5$; calibration~$\pi$: yes $S^3$,
+no $S^5$) to a three-layer statement adding gauge-structure
+content (Wilson interpretability: full on $S^3$, reduced on $S^5$).
+The universal content --- that the Wilson--Hodge vocabulary applies
+combinatorially to any simplicial 1-complex --- is preserved, but
+the Coulomb-specific content --- that the graph Laplacian
+simultaneously computes the physical spectrum and supports a
+nontrivial matter-gauge double --- is not.
+
+A practical consequence for the Paper~2 fine-structure-constant
+conjecture~\cite{paper2_alpha}: the $S^5$ analog of the Paper~2
+combination rule $K = \pi(B + F - \Delta)$ does not exist in
+natural form.  A candidate $F$-analog (the Dirichlet series
+$\sum_{N\geq 1} g_N^{\mathrm{HO}} / N^{d_{\max}}$ with
+$g_N^{\mathrm{HO}} = (N+1)(N+2)/2$ and packing exponent
+$d_{\max} = \dim\mathbb{C}^3 = 6$) evaluates to
+$\tfrac{1}{2}[\zeta_R(4) + 3\zeta_R(5) + 2\zeta_R(6)]$, a mixed
+even/odd zeta combination with no clean $\zeta_R(2) = \pi^2/6$
+projection; and Paper~23's Fock projection rigidity theorem
+establishes that the spectrum-computing projection with
+calibration~$\pi$ is unique to $S^3$ (not $S^5$), so the $B$ and
+$\Delta$ analogs (both tied to the Coulomb projection) also do not
+lift.  The $S^5$ graph is thus a lattice gauge structure with
+abelian $U(1)$ content but without $\alpha$-like spectral content,
+consistent with the operator-order transcendental discriminant of
+Section~\ref{sec:spinor-lichnerowicz}.  Cross-reference: Paper~25
+\S VII.1 (the open question answered here); debug memo
+\texttt{debug/s5\_gauge\_structure\_memo.md}; numerical data
+\texttt{debug/data/s5\_graph\_spectrum.json}.
+
 %================================================================
 \section{Implications}
 \label{sec:imp}
@@ -1047,6 +1198,19 @@ M.~Moshinsky and Yu.~F.~Smirnov,
 A.~Lichnerowicz,
 \textit{Spineurs harmoniques},
 C.~R.\ Acad.\ Sci.\ Paris \textbf{257}, 7--9 (1963).
+
+\bibitem{paper25}
+J.~Loutey,
+\textit{The Hopf Graph as a Lattice Gauge Structure: A Framework
+Observation}, Paper~25 of the Geometric Vacuum series
+(synthesis, 2026).
+
+\bibitem{berger_gauduchon_mazet}
+M.~Berger, P.~Gauduchon, and E.~Mazet,
+\textit{Le Spectre d'une Vari\'et\'e Riemannienne},
+Lecture Notes in Mathematics \textbf{194}, Springer (1971);
+see also Ch.~5 for the scalar Laplace spectrum on
+$\mathbb{CP}^n$ with the Fubini--Study metric.
 
 \end{thebibliography}
 

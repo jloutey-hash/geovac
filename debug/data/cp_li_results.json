@@ -1,0 +1,122 @@
+{
+  "NIST": {
+    "split_cm": 0.3354,
+    "split_MHz": 10055.03904132,
+    "split_Ha": 1.5281948438266636e-06
+  },
+  "params": {
+    "alpha_d_Li": 0.192,
+    "r_c_Li": 0.55,
+    "convention": "standard: zeta = alpha^2/2 * Z_val * <1/r^3>_2p (+ CP)",
+    "references": [
+      "Migdalek & Bylicki, Phys. Rev. A 57, 3456 (1998), Table I",
+      "Johnson, Atomic Structure Theory, Ch. 9"
+    ]
+  },
+  "cases": [
+    {
+      "Z_slater": 1.0,
+      "Z_val": 1.0,
+      "alpha_d": 0.192,
+      "r_c": 0.55,
+      "include_cp": false,
+      "<1/r^3>_2p": 0.041666666666666664,
+      "<(1/r) dV_cp/dr>_2p": 0.0,
+      "zeta_coulomb_Ha": 1.1094032191806106e-06,
+      "zeta_cp_Ha": 0.0,
+      "zeta_total_Ha": 1.1094032191806106e-06,
+      "split_Ha": 1.6641048287709158e-06,
+      "split_MHz": 10949.28378372399,
+      "split_cm": 0.3652287938442178,
+      "label": "Pure Coulomb, Z_slater=1, Z_val=1 (standard full-shield)",
+      "err_pct": 8.893498461111843
+    },
+    {
+      "Z_slater": 1.0,
+      "Z_val": 1.0,
+      "alpha_d": 0.192,
+      "r_c": 0.55,
+      "include_cp": true,
+      "<1/r^3>_2p": 0.041666666666666664,
+      "<(1/r) dV_cp/dr>_2p": 0.006144421568797743,
+      "zeta_coulomb_Ha": 1.1094032191806106e-06,
+      "zeta_cp_Ha": 1.6359938564224786e-07,
+      "zeta_total_Ha": 1.2730026048228585e-06,
+      "split_Ha": 1.9095039072342876e-06,
+      "split_MHz": 12563.932154370415,
+      "split_cm": 0.4190876661268353,
+      "label": "With CP, Z_slater=1, Z_val=1 (+ MB core polarization)",
+      "err_pct": 24.95159991662304
+    },
+    {
+      "Z_slater": 1.28,
+      "Z_val": 1.0,
+      "alpha_d": 0.192,
+      "r_c": 0.55,
+      "include_cp": false,
+      "<1/r^3>_2p": 0.08738133333333335,
+      "<(1/r) dV_cp/dr>_2p": 0.0,
+      "zeta_coulomb_Ha": 2.3265871799110564e-06,
+      "zeta_cp_Ha": 0.0,
+      "zeta_total_Ha": 2.3265871799110564e-06,
+      "split_Ha": 3.4898807698665844e-06,
+      "split_MHz": 22962.31238560434,
+      "split_cm": 0.7659402954679893,
+      "label": "Pure Coulomb, Z_slater=1.28 (CR), Z_val=1",
+      "err_pct": 128.36621808471767
+    },
+    {
+      "Z_slater": 1.28,
+      "Z_val": 1.0,
+      "alpha_d": 0.192,
+      "r_c": 0.55,
+      "include_cp": true,
+      "<1/r^3>_2p": 0.08738133333333335,
+      "<(1/r) dV_cp/dr>_2p": 0.015693659451331683,
+      "zeta_coulomb_Ha": 2.3265871799110564e-06,
+      "zeta_cp_Ha": 4.1785431158475806e-07,
+      "zeta_total_Ha": 2.7444414914958143e-06,
+      "split_Ha": 4.116662237243722e-06,
+      "split_MHz": 27086.336328110407,
+      "split_cm": 0.903502926965872,
+      "label": "With CP, Z_slater=1.28 (CR), Z_val=1",
+      "err_pct": 169.38071763622492
+    },
+    {
+      "Z_slater": 0.9,
+      "Z_val": 1.0,
+      "alpha_d": 0.192,
+      "r_c": 0.55,
+      "include_cp": false,
+      "<1/r^3>_2p": 0.030375000000000003,
+      "<(1/r) dV_cp/dr>_2p": 0.0,
+      "zeta_coulomb_Ha": 8.087549467826653e-07,
+      "zeta_cp_Ha": 0.0,
+      "zeta_total_Ha": 8.087549467826653e-07,
+      "split_Ha": 1.2131324201739979e-06,
+      "split_MHz": 7982.02787833479,
+      "split_cm": 0.2662517907124348,
+      "label": "Pure Coulomb, Z_slater=0.9 (diffuse HF-like), Z_val=1",
+      "err_pct": -20.616639621849448
+    },
+    {
+      "Z_slater": 0.9,
+      "Z_val": 1.0,
+      "alpha_d": 0.192,
+      "r_c": 0.55,
+      "include_cp": true,
+      "<1/r^3>_2p": 0.030375000000000003,
+      "<(1/r) dV_cp/dr>_2p": 0.004047735043707878,
+      "zeta_coulomb_Ha": 8.087549467826653e-07,
+      "zeta_cp_Ha": 1.0777368690911256e-07,
+      "zeta_total_Ha": 9.165286336917778e-07,
+      "split_Ha": 1.3747929505376667e-06,
+      "split_MHz": 9045.703070531958,
+      "split_cm": 0.3017321760199804,
+      "label": "With CP, Z_slater=0.9 (diffuse HF-like), Z_val=1",
+      "err_pct": -10.038110907777636
+    }
+  ],
+  "physical_err_pct": 8.893498461111843,
+  "target_met": true
+}
