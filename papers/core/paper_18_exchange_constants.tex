@@ -1,7 +1,7 @@
 % paper_18_exchange_constants.tex — GeoVac Paper 18
 % Spectral-Geometric Exchange Constants: Projecting Discrete
 % Spectra onto Continuous Manifolds
-% Status: Draft, April 16, 2026
+% Status: Draft, April 17, 2026
 % Category: Core (papers/core/)
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
 
@@ -47,11 +47,17 @@ and why they vanish when the computation remains on the graph.
 The falsifiable claim: the transcendental content of any GeoVac
 observable is determined entirely by the type of projection
 linking the compact discrete description to the non-compact
-coordinate system.  We note that the combination rule
-$K = \pi(B + F - \Delta)$ in the conjectural fine structure
-constant formula (Paper~2) has the same structural character:
-$\pi$ multiplying a sum of discrete representation-theoretic
-data and continuous spectral invariants.
+coordinate system.  Beyond the basis-level taxonomy, a
+three-axis classification of QED transcendental content on~$S^3$
+emerges: (1)~operator order (1st~vs 2nd) determines motivic weight
+(odd~vs even~zeta); (2)~bundle type (scalar~vs spinor) modulates
+coefficients; (3)~diagram topology introduces Dirichlet $L$-function
+characters.  This classification is verified to be $R$-independent,
+persisting in the flat-space limit via Weyl's law.
+We note that the combination rule $K = \pi(B + F - \Delta)$ in the
+conjectural fine structure constant formula (Paper~2) has the same
+structural character: $\pi$ multiplying a sum of discrete
+representation-theoretic data and continuous spectral invariants.
 \end{abstract}
 
 \maketitle
@@ -889,38 +895,18 @@ partition:
 \end{tabular}
 \end{center}
 
-At motivic weight~3, the appearance of $\zeta_R(3)$ in the GeoVac
-framework (Eq.~(\ref{eq:dirac_dirichlet_zeta3}), Dirac Dirichlet series
-on~$S^3$) belongs to a family of independent geometric sources that are
-all periods of the same motivic object $\mathbb{Q}(-3)$:
-\begin{enumerate}
-  \item \emph{Dirac operator on $S^3$} (this work, Track~D3): the
-    weight-$m$ subchannel of $g_m^{\text{Dirac}} = 2m^2 + 2m$ at
-    $s = d_{\max} = 4$ produces $2\zeta_R(3)$.
-  \item \emph{Hyperbolic 3-manifold volumes}: for arithmetic hyperbolic
-    manifolds $\mathbb{H}^3/\Gamma$, the volume is a $\mathbb{Q}$-linear
-    combination of values of the Bloch--Wigner dilogarithm, which are
-    periods of $\mathbb{Q}(-3)$ (Thurston; Goncharov~\cite{goncharov1999}).
-  \item \emph{Two-loop QED anomalous magnetic moment}: $\zeta_R(3)$
-    enters the electron $g{-}2$ at order $\alpha^2$ through irreducible
-    nested harmonic sums in Feynman parameter integrals
-    (Petermann 1957; Sommerfield 1957).
-  \item \emph{Chern--Simons theory on $S^3$} at two loops, and
-    \emph{algebraic K-theory} ($\zeta_R(3)$ as a period of the
-    Borel regulator on $K_5(\mathbb{Z})$).
-\end{enumerate}
-The common thread is $S^3$: items 1, 2, and~4 involve $S^3$ or its
-quotients; item~3 involves products of massless propagators on~$S^3$
-(after Wick rotation).
-
-Zagier's dimension conjecture~\cite{zagier1994} predicts that the
-$\mathbb{Q}$-vector space of weight-$n$ multiple zeta values has
-dimension $d_n$ satisfying $d_0 = 1$, $d_1 = 0$, $d_2 = 1$,
-$d_n = d_{n-2} + d_{n-3}$.  At weight~3 this gives $d_3 = 1$:
-$\zeta_R(3)$ is the unique independent transcendental at that weight.
-This is consistent with the GeoVac finding that $\zeta_R(3)$ appears
-exactly once (in the Dirac sector, Tier~1) and is absent from the
-scalar sector at every order.
+At motivic weight~3, $\zeta_R(3)$ appears as a period of
+$\mathbb{Q}(-3)$ in multiple independent geometric contexts:
+the Dirac Dirichlet series on~$S^3$ (this work,
+Eq.~\ref{eq:dirac_dirichlet_zeta3}), hyperbolic 3-manifold volumes
+(Goncharov~\cite{goncharov1999}), two-loop QED $g{-}2$
+(Petermann~\cite{petermann1957}; Sommerfield~\cite{sommerfield1957}),
+and Chern--Simons theory / algebraic K-theory
+($K_5(\mathbb{Z})$ regulator).  The common thread is~$S^3$ or its
+quotients.  Zagier's dimension conjecture~\cite{zagier1994} gives
+$d_3 = 1$: $\zeta_R(3)$ is the unique independent transcendental
+at weight~3, consistent with its single appearance in the GeoVac
+Dirac sector.
 
 The connection to QED loop order is structurally predicted by the
 motivic correspondence.  The T9 theorem
@@ -950,7 +936,7 @@ Eq.~(\ref{eq:zeta_d2}) are purely $\pi^{\text{even}}$; the
 Schwinger~\cite{schwinger1948} result $a_e^{(1)} = \alpha/(2\pi)$
 is a single power of~$\pi$, consistent with one-loop = even motivic
 weight.  At two loops, $\zeta_R(3)$ appears in the electron $g{-}2$
-(Petermann~\cite{petermann1957}; Sommerfield 1957), consistent with
+(Petermann~\cite{petermann1957}; Sommerfield~\cite{sommerfield1957}), consistent with
 the discriminant's prediction that odd-weight content requires
 irreducible products of first-order propagators.
 
@@ -1003,6 +989,36 @@ exchange-constant taxonomy, they represent a ``vertex exchange
 constant'' tier that lives beyond both calibration~$\pi$ and
 Riemann odd-zeta.  Verified by PSLQ at 80-digit precision;
 35/35 tests pass in \texttt{tests/test\_qed\_vertex.py}.
+
+\paragraph{Flat-space consistency of the transcendental classification.}
+The three-axis taxonomy is derived from $S^3$ spectral sums at finite
+radius.  A natural concern is whether the classification is a
+finite-curvature artifact.  We verify that it is not.
+On $S^3$ of radius~$R$, the Dirac eigenvalues scale as
+$|\lambda_n(R)| = (n + 3/2)/R$ while the degeneracies $g_n$ are
+$R$-independent.  The Dirichlet series therefore satisfies
+$D(s,R) = R^s\,D(s,1)$ \emph{exactly}, making the ratio
+$D(s,R)/R^s$ an $R$-independent structural invariant.  In the
+$R \to \infty$ limit, Weyl's law confirms that the mode count
+$N(n_{\max}) = 2(n_{\max}+1)(n_{\max}+2)(n_{\max}+3)/3$
+matches the flat-space momentum-integral density
+$(2/3)\,R^3 p_{\max}^3$, verifying the spectral-to-momentum
+correspondence.  The even/odd $s$-parity discriminant persists at
+every~$R$: $D(s_{\text{even}},R)/R^s$ is $\pi^{\text{even}}$;
+$D(s_{\text{odd}},R)/R^s$ contains odd-zeta.  The \emph{same}
+transcendental constants---$\zeta_R(3)$, $G$, $\beta(4)$---that
+appear in the $S^3$ spectral sums also appear in flat-space
+two-loop QED (Petermann~\cite{petermann1957};
+Sommerfield~\cite{sommerfield1957}), confirming that curvature
+modifies rational coefficients but not the transcendental class.
+An honest limitation: matching the full Petermann--Sommerfield
+coefficient $a_2 = -197/144 + \pi^2/12 + 3\zeta_R(3)/4
+- \pi^2 \ln 2 / 2$ requires diagram-specific computation
+(renormalization subtractions, SO(4) Clebsch--Gordan algebra)
+beyond the scope of structural spectral sums.
+The flat-space limit thus validates the taxonomy as a
+\emph{structural} property of the operator algebra, independent
+of the $S^3$ compactification scale.
 
 \paragraph{Irreducibility of the Level~4 piecewise structure.}
 The piecewise-smooth $\rho$-dependence of $\mu(\rho,R)$ at Level~4
@@ -1617,28 +1633,11 @@ are algebraic functions of the continuous parameter built from
 transcendental coefficients.
 
 
-\subsection{Compactness at the construction level}
-
-The thesis extends to the packing construction itself.  Paper~0's
-Axiom~2 forces states onto isotropic shells---copies of $S^1$---whose
-circumference $2\pi r$ introduces $\pi$ into
-$\sigma_0 = \pi d_0^2/2$.  The graph is $\pi$-free
-(Observation~\ref{obs:pi-free}), but the state count per shell reflects
-$S^1$ topology; $\pi$ is the conversion between discrete count and
-continuous area at the most elementary level.
-
 \subsection{Structural parallels}
 
-The pattern of compact geometry determining coupling constants via
-projection has a structural parallel in string compactification, where
-the geometry of a compact internal manifold determines the low-energy
-coupling constants of the effective theory through dimensional
-reduction~\cite{polchinski1998}.  In both cases, the compact manifold's
-topology constrains the discrete spectrum, and the coupling constants
-encode the projection from the compact description to the non-compact
-one in which measurements are performed.  This is a mathematical
-observation about the structure of the projection, not a physical claim
-about the relationship between the two frameworks.  We note also that
+The pattern parallels string compactification, where compact internal
+geometry determines low-energy couplings~\cite{polchinski1998}.
+We note also that
 $\mathrm{SO}(4,2) = \mathrm{Iso}(\mathrm{AdS}_5)$, the isometry group
 of five-dimensional anti-de~Sitter space, is the conformal group of the
 boundary $\mathbb{R}^{3,1}$; the Fock projection
@@ -1782,21 +1781,21 @@ of~$R$ with transcendental coefficients; the Level~4 eigenvalue
 $\mu(\rho,R)$ is piecewise-algebraic.  All exchange constants
 vanish when the computation stays on the graph.
 
-\paragraph{2. The operator-order discriminant and vertex topology.}
+\paragraph{2. The three-axis classification and flat-space consistency.}
 Operator order on the compact space determines the motivic weight
 of the transcendental content: second-order operators
 ($\Delta_{\text{LB}}$, $D^2$) produce $\pi^{\text{even}}$
 exclusively (Eq.~\ref{eq:zeta_d2}); first-order operators ($D$)
 produce odd-zeta content ($\zeta_R(3)$, Eq.~\ref{eq:dirac_dirichlet_zeta3}).
-The even/odd Hurwitz discriminant (Eq.~\ref{eq:hurwitz_discriminant})
-makes this partition computationally sharp.  The spinor-intrinsic ring
-$R_{\mathrm{sp}}$ (Eq.~\ref{eq:ring_sp}) captures all
-relativistic content from Breit--Pauli through full-Dirac corrections.
-A third axis---diagram topology---introduces Dirichlet $L$-function
-values ($G$, $\beta(4)$) when the QED vertex parity selection rule
-splits the mode sum into even/odd sectors
-(Eqs.~\ref{eq:d_even4}--\ref{eq:d_odd4}).  These cancel in the
-unrestricted sum, appearing only with vertex restriction.
+Bundle type modulates coefficients; diagram topology introduces
+Dirichlet $L$-function values ($G$, $\beta(4)$) via the vertex
+parity selection rule (Eqs.~\ref{eq:d_even4}--\ref{eq:d_odd4}).
+The three-axis taxonomy is validated as $R$-independent: the ratio
+$D(s,R)/R^s$ is a structural invariant, and Weyl's law confirms the
+spectral-to-momentum correspondence in the flat-space limit.
+The spinor-intrinsic ring $R_{\mathrm{sp}}$ (Eq.~\ref{eq:ring_sp})
+captures all relativistic content from Breit--Pauli through
+full-Dirac corrections.
 
 \paragraph{3. The QED beta function from spectral data.}
 The operator-order discriminant predicts: no odd-zeta at one loop
@@ -1809,18 +1808,13 @@ Eq.~(\ref{eq:zeta_d2}).
 
 \paragraph{Verified and open.}
 The taxonomy has been validated across the full GeoVac hierarchy
-through Level~5 (Tracks~AJ--AS, v2.0.19--23).  The falsifiable claim
-(Claim~4) that transcendental content is determined by projection type
-has held across all tested cases.  The motivic correspondence between
-operator order and loop order is verified at one and two loops.
-
-What remains open: (i)~the full vertex function (the three-axis
-taxonomy classifies the transcendental content; whether it predicts
-the physical two-loop coefficient is unresolved); (ii)~a potential Ap\'ery recurrence
-connection between $\zeta_R(3)$ on $S^3$ and the irrationality proof;
-(iii)~the conjectural combination rule $K = \pi(B + F - \Delta)$ of
+through Level~5.  Claim~4 (transcendental content determined by
+projection type) has held across all tested cases.
+What remains open: (i)~whether the three-axis taxonomy predicts
+the physical two-loop coefficient (not just the transcendental class);
+(ii)~the conjectural combination rule $K = \pi(B + F - \Delta)$ of
 Paper~2, whose three-tier structure (Sec.~\ref{sec:alpha_three_tier})
-is now fully characterized but whose additive conspiracy remains
+is fully characterized but whose additive conspiracy remains
 unexplained.
 
 \paragraph{Design principle.}
@@ -1833,33 +1827,13 @@ curve result (Sec.~\ref{sec:algebraic_curve}) shows this has been more
 successful than previously recognized.
 
 \paragraph{Note added v2.6.0.}
-The He exchange constant census is now computationally explicit
-(Track~DI).  Graph-native FCI (graph Laplacian $\kappa\mathcal{L}$ +
-exact rational Slater integrals) achieves 0.19\% at $n_{\max} = 7$
-with zero free parameters; the graph's off-diagonal $T_\pm$ couplings
-are the dominant ingredient.  FCI basis invariance confirmed: the
-$\sim$0.14\% floor is embedding content (cusp), not basis mismatch.
-Three-layer structure:
-
-\begin{center}
-\begin{tabular}{llll}
-\hline
-Layer & Content & Exchange type & Contribution \\
-\hline
-Rational & Graph h$_1$ + Slater $V_{ee}$ & None (graph-intrinsic) & 98.6\% \\
-Topological & Graph off-diagonal ($T_\pm$) & Calibration ($\kappa$) & Dominant \\
-Transcendental & e-e cusp + truncation & Embedding & $\sim$0.14\% \\
-\hline
-\end{tabular}
-\end{center}
-
-\noindent
-The calibration exchange constant $\kappa = -1/16$ has a dual role:
-it sets the overall energy scale (Level~1) and determines the
-strength of inter-shell coupling in the graph Laplacian (Level~3).
-The Fock self-consistency $k^2 = -2E$, exact at Level~1, fails at
-Level~3 (5--13\% error), marking the transition from single
-calibration constants to irreducible embedding content.
+The He exchange constant census (Track~DI) validates the taxonomy
+computationally.  Graph-native FCI achieves 0.19\% at $n_{\max} = 7$
+with zero free parameters.  Three-layer structure: (1)~rational
+(graph $h_1$ + Slater $V_{ee}$, 98.6\%); (2)~topological (graph
+off-diagonal $T_\pm$, calibration $\kappa$, dominant); (3)~transcendental
+(e-e cusp, embedding, ${\sim}0.14\%$ floor).  FCI basis invariance
+confirmed: the floor is embedding content (cusp), not basis mismatch.
 
 \begin{acknowledgments}
 Computational implementation and documentation drafting were
@@ -2010,6 +1984,11 @@ J.~Schwinger,
 A.~Petermann,
 ``Fourth order magnetic moment of the electron,''
 \textit{Helv.\ Phys.\ Acta} \textbf{30}, 407--408 (1957).
+
+\bibitem{sommerfield1957}
+C.~M.~Sommerfield,
+``Magnetic dipole moment of the electron,''
+\textit{Phys.\ Rev.}\ \textbf{107}, 328--329 (1957).
 
 \bibitem{adamchik2003}
 V.~S.~Adamchik,

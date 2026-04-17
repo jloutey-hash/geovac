@@ -1,0 +1,75 @@
+{
+  "S_min_str": "2.479536998027333865731691209670955682167441567672740594791720118019787071400695160261244367875711826",
+  "S_min_float": 2.479536998027334,
+  "D4_squared_float": 3.070135271941795,
+  "ratio_Smin_D4sq": 0.8076311883349295,
+  "precision_dps": 150,
+  "n_terms": 10000,
+  "component_sums": {
+    "sum_22": 0.6320854093186428,
+    "sum_24": 0.024598124187605517,
+    "sum_44": 0.0015664365065652158
+  },
+  "attempts": {
+    "original_18": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "with_polylog": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "with_gamma_cross": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "with_beta3_mzv": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "hurwitz_products": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "component_sum_hz2sq": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "component_sum_hz2_hz4": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "component_sum_hz4sq": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "with_polygamma": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "ultra_wide_47": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "ratio_Smin_D4sq": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "ratio_direct": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "ratio_sum22_hz2sq": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "double_hurwitz": {
+      "identified": false,
+      "error": "no relation"
+    },
+    "even_odd_products": {
+      "identified": false,
+      "error": "no relation"
+    }
+  }
+}
