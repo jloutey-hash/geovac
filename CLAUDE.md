@@ -341,7 +341,9 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 
 #### Observations (`papers/observations/`)
 
-(No active observation papers — Paper 16 promoted to Core.)
+| Paper | File | Key Result |
+|:------|:-----|:-----------|
+| Paper 28 | `paper_28_qed_s3.tex` | QED on S³: three-axis taxonomy, S_min irreducible constant, depth-k tower, flat-space consistency |
 
 #### Conjectures (`papers/conjectures/`)
 
