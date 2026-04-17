@@ -1,8 +1,8 @@
 % paper_18_exchange_constants.tex — GeoVac Paper 18
 % Spectral-Geometric Exchange Constants: Projecting Discrete
 % Spectra onto Continuous Manifolds
-% Status: Draft, March 29, 2026
-% Category: Observations (papers/observations/)
+% Status: Draft, April 16, 2026
+% Category: Core (papers/core/)
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
 
 \usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
@@ -21,7 +21,7 @@ Projecting Discrete Spectra onto Continuous Manifolds}
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
 
-\date{March 29, 2026}
+\date{April 16, 2026}
 
 %% ========================================================================
 %% ABSTRACT
@@ -100,12 +100,12 @@ geometry producing integer quantum numbers, with $\pi$ entering
 through projection onto non-compact coordinates---recurs at every level
 of the hierarchy.
 
-The mathematical framework is not new: the conversion factors are
-instances of Weyl's law~\cite{weyl1911} and the Selberg trace
-formula~\cite{selberg1956}.  What is new is their systematic
-identification across the GeoVac hierarchy, and the observation
-that the conjectural fine structure constant formula (Paper~2)
-has the same structural character.
+The conversion factors are instances of Weyl's law~\cite{weyl1911} and
+the Selberg trace formula~\cite{selberg1956}; what is new is their
+systematic identification across the GeoVac hierarchy, culminating in a
+falsifiable observable classification (Claim~4) and the observation that
+operator order on the compact space determines the motivic weight of the
+resulting transcendental content.
 
 
 %% ========================================================================
@@ -461,27 +461,18 @@ into a continuous volume measure.
 
 \subsection{Compactness as the source of discreteness}
 
-The Peter--Weyl theorem states that the unitary representations of a
-compact Lie group form a discrete, countable, orthogonal decomposition
-of $L^2(G)$~\cite{peter_weyl1927}.  This is the structural reason that
-quantum numbers are integers: $\mathrm{SO}(4)$ is compact, so its
-irreducible representations are labeled by discrete indices $(n, l, m)$
-with finite multiplicities $g_n = n^2$.  The graph Laplacian on $S^3$
-inherits this discreteness directly---its eigenvalues $\lambda_n =
--(n^2-1)$ are integers because the underlying group is compact.
-
+The Peter--Weyl theorem~\cite{peter_weyl1927} states that the unitary
+representations of a compact Lie group form a discrete, countable,
+orthogonal decomposition of $L^2(G)$.  This is why quantum numbers are
+integers: $\mathrm{SO}(4)$ is compact, so its irreps are labeled by
+discrete indices $(n, l, m)$ with finite multiplicities $g_n = n^2$.
 Exchange constants arise when these discrete representations are
-expressed in non-compact coordinate systems.  The stereographic
-projection $S^3 \to \mathbb{R}^3$ maps the compact manifold (finite
-volume $2\pi^2$) onto flat space (infinite volume), introducing the
-conformal factor $\Omega = (1 + p^2/p_0^2)^{-1}$ and the calibration
-constant $\kappa$.  More generally, every exchange constant in
-the taxonomy (Sec.~\ref{sec:taxonomy}) mediates a
-compact$\to$non-compact translation: $e^a E_1(a)$ converts compact
-angular structure into a non-compact radial coordinate with a pole;
-$\mu(R)$ converts the compact product space $S^3 \times S^3$ into
-non-compact hyperspherical coordinates.  The transcendental content
-is the toll for crossing the compactness boundary.
+expressed in non-compact coordinate systems---the stereographic
+$S^3 \to \mathbb{R}^3$ introduces $\kappa$; embedding in prolate
+spheroidal coordinates introduces $e^a E_1(a)$; reparameterizing
+$S^3 \times S^3$ as hyperspherical introduces $\mu(R)$.  The
+transcendental content is the toll for crossing the compactness
+boundary.
 
 \subsection{$\pi$ as the founding example}
 
@@ -518,14 +509,11 @@ produces integers or rationals:
   \item Casimir eigenvalues: $l(l+1)$, $\nu(\nu+4)/2$, integer or
     half-integer for all levels.
 \end{itemize}
-Transcendental numbers ($\pi$, $e^a E_1(a)$, $\zeta(2)$) enter the
-framework exclusively through normalization to continuous measures:
-spherical harmonic normalization ($\int |Y|^2\,d\Omega = 1$ with
-$d\Omega$ carrying $4\pi$), manifold volumes
-($\mathrm{vol}(S^3) = 2\pi^2$), and spectral zeta functions
-($\zeta_{S^1}(1) = \pi^2/6$).  The exchange constants cataloged in
-this paper are precisely the $\pi$-injection points---the places
-where the discrete graph contacts continuous geometry.
+Transcendental numbers ($\pi$, $e^a E_1(a)$, $\zeta(2)$) enter
+exclusively through normalization to continuous measures:
+$\int |Y|^2\,d\Omega = 1$ (with $d\Omega$ carrying $4\pi$),
+$\mathrm{vol}(S^3) = 2\pi^2$, and spectral zeta functions.
+The exchange constants are precisely the $\pi$-injection points.
 \end{observation}
 
 \subsection{The Selberg trace formula}
@@ -551,11 +539,9 @@ When the quotient $\Gamma \backslash G$ is compact, the spectrum
 is purely discrete and the trace formula involves only algebraic
 data plus $\pi$-dependent conversion factors.  When the quotient
 is non-compact, a continuous spectrum appears and the exchange
-involves Eisenstein series---transcendental
-functions~\cite{selberg1956}.  This exactly parallels the
-GeoVac hierarchy: Level~1 (compact $S^3$) has a purely algebraic
-spectrum plus a constant ($\kappa$); Level~3 ($S^5$ with $\mathrm{SO}(6) \to \mathrm{SO}(4)$
-symmetry crossover) has an algebraic function $\mu(R)$ with
+involves Eisenstein series~\cite{selberg1956}.  This parallels the
+GeoVac hierarchy: Level~1 (compact $S^3$) requires only a constant
+($\kappa$); Level~3 involves an algebraic function $\mu(R)$ with
 transcendental coefficients (Sec.~\ref{sec:algebraic_curve}).
 
 
@@ -656,74 +642,31 @@ The taxonomy reveals a hierarchy of exchange types:
     eliminable by a non-unitary change of basis---in contrast to
     $e^a E_1(a)$, which is structurally irreducible.
 
-    The $1/r_{12}$ classification is \emph{universal across second-order
-    central-field operators}: Sprint~2 Track~DC-A (April~2026) extended
-    the analysis to the two-electron Dirac-Coulomb Hamiltonian and
-    proved, via the Pauli-reduced LL block (Kutzelnigg 1984, 1988), that
-    the cusp condition $(\partial_{r_{12}} \Psi_{LL})|_{r_{12}=0^+} = \tfrac12 [1+O(\alpha^2)] \Psi_{LL}(0)$
-    survives relativistic corrections with only an
-    $O((Z\alpha)^2)$ amplitude rescaling---the Kutzelnigg-Morgan 1992
-    Theorem~3 Sobolev-regularity class is preserved.  The partial-wave
-    energy convergence exponent is $l^{-4}$ for singlet (Schwartz 1962)
-    and $l^{-6}$ for triplet (Pack-Brown 1966) in both Schrödinger-Coulomb
-    and Dirac-Coulomb.  Numerical verification at Z=4 (Be$^{2+}$) via
-    Track~DC-B: fitted exponent matches to $\Delta p = +0.019$ within
-    fit-noise.  The Dirac program therefore does \emph{not} regularize
-    the e-e cusp; full QED (vacuum polarization modifying the photon
-    propagator at distances $\lesssim 1/m_e c$) would be required to
-    soften the $1/r_{12}$ kernel itself.
+    The $1/r_{12}$ classification is \emph{universal}: the cusp
+    condition survives relativistic corrections with only an
+    $O((Z\alpha)^2)$ amplitude rescaling (Kutzelnigg-Morgan 1992), and
+    partial-wave convergence exponents ($l^{-4}$ singlet, $l^{-6}$
+    triplet) are identical in Schr\"odinger-Coulomb and Dirac-Coulomb
+    (verified numerically at $Z=4$).  The Dirac program does not
+    regularize the e-e cusp; full QED would be required.
 
-    A \emph{distributional} sub-category of embedding constants appears
-    in Sprint~2 Track~BR-B.  The Breit spin-spin interaction contains a
-    $1/r_{12}^3$ kernel whose bare partial-wave expansion
-    \[
-      \frac{1}{r_{12}^3} = \sum_l (2l+1)\, K_l(r_<, r_>)\, P_l(\cos\theta_{12}),
-      \qquad K_l(r_<, r_>) = \frac{r_<^l}{r_>^{l+1}\,(r_>^2 - r_<^2)}
-    \]
-    has a \emph{logarithmic divergence} at coalescence $r_< \to r_>$
-    for every $l$---the operator is not in $L^1_{\rm loc}$ and its
-    matrix elements are undefined as ordinary integrals.  The Breit-Pauli
-    tensor projection (transverse $\sigma_1\!\cdot\!\sigma_2 - 3(\sigma_1\!\cdot\!\hat r_{12})(\sigma_2\!\cdot\!\hat r_{12})$)
-    regularizes this by eliminating the longitudinal component, leaving
-    a smooth kernel $K_l^{BP}(r_<, r_>) = r_<^l / r_>^{l+3}$ whose matrix
-    elements are exact rationals for same-$n$ orbitals (e.g.\
-    $R_{BP}^0(1s,1s;1s,1s) = 0$, $R_{BP}^2(2p,2p;2p,2p) = 7/768$,
-    $R_{BP}^1(2s,2p;2s,2p) = 1/256$ at $Z=1$) with $Z^3$ scaling.
-    For \emph{different-$n$} orbitals, a new transcendental appears:
+    A \emph{distributional} sub-category appears in the Breit spin-spin
+    interaction: the bare $1/r_{12}^3$ kernel diverges logarithmically
+    at coalescence for every partial wave.  The Breit-Pauli tensor
+    projection regularizes this, leaving $K_l^{BP} = r_<^l / r_>^{l+3}$
+    with exact rational matrix elements for same-$n$ orbitals
+    ($R_{BP}^2(2p,2p;2p,2p) = 7/768$ at $Z=1$).  For cross-$n$
+    orbitals a new transcendental appears:
     $M_{\rm ret}^2(1s,2p;1s,2p) = 21344/729 - (10240/243)\log(2)$,
-    the first documented example of a $\log$-embedding constant in the
-    GeoVac framework.  The Breit-Pauli regularization is thus both
-    \emph{distributional} (the bare operator requires regularization
-    before having matrix elements) and \emph{multi-scale} (cross-$n$
-    integrals introduce $\log$ content absent from same-$n$).
+    the first $\log$-embedding constant in the framework.
 
-    A graph-theoretic characterization of $1/r_{12}$ on the $S^3$
-    pair-state lattice (v2.9.1) makes the embedding nature explicit.
-    Building the graph whose nodes are singlet pair-states
-    $|(n_1 l_1 m_1)(n_2 l_2 m_2)\rangle$ and whose edges are the exact
-    Slater matrix elements $\langle ab | 1/r_{12} | cd \rangle$, one
-    finds: (i)~diagonal elements are exact rationals
-    ($\langle 1s\,1s | V | 1s\,1s \rangle = 5/8$,
-    $\langle 2s\,2s | V | 2s\,2s \rangle = 77/512$, etc.) but cross-shell
-    denominators mix $2^k$ and $3^j$ factors, so the spectrum of $V$
-    is not rational---the hallmark of embedding content that does not
-    close on the combinatorial graph; (ii)~no three-term recurrence
-    in $(n,l)$ exists for the integrals, in contrast to the Neumann
-    expansion for $H_2$ in prolate spheroidal coordinates, where the
-    separability of $1/r_{12}$ produces such a recurrence;
-    (iii)~in the wavefunction-graph eigenbasis, 92--94\% of $V_{ee}$'s
-    Frobenius mass is already diagonal
-    ($\|[H_1, V_{ee}]\| / \|V_{ee}\|$ saturating at 5--6\% across
-    $n_{\max} = 3, 4$), with the off-diagonal residual concentrated
-    on the $(1s,1s)$ coalescence pair-state rather than distributed
-    across angular channels.  The cusp is therefore localized at a
-    single pair-state, and the wavefunction graph---which has no
-    $1/r_{12}$ in its construction---nonetheless nearly diagonalizes
-    it.  This is direct structural evidence that $1/r_{12}$ is an
-    embedding exchange constant rather than an intrinsic graph object,
-    and it explains why graph-native CI converges to a floor
-    (Paper~13, Track~DI): the residual off-diagonal mass is precisely
-    the embedding content the graph cannot absorb.
+    On the $S^3$ pair-state lattice (v2.9.1), 92--94\% of $V_{ee}$'s
+    Frobenius mass is diagonal in the graph eigenbasis, with the
+    off-diagonal residual concentrated on the $(1s,1s)$ coalescence
+    pair-state.  The graph nearly diagonalizes $V_{ee}$ without
+    containing $1/r_{12}$---direct evidence that the cusp is embedding
+    content the graph cannot absorb, explaining the graph-native CI
+    convergence floor (Paper~13, Track~DI).
 
   \item \textbf{Algebraic (implicit) functions}: Functions of
     continuous parameters defined implicitly by $P(R,\mu) = 0$,
@@ -768,332 +711,151 @@ embedding constants depend on the basis; flow functions depend
 on the full parameterized geometry; composition constants depend
 on the factorization topology (which groups share coordinates).
 
-\paragraph{Odd-zeta content from first-order spectral operators (new tier).}
-The Phase 4I Dirac-on-$S^3$ Tier 1 sprint (2026) identified a
-structurally new kind of transcendental content in the framework: the
-Apéry constant $\zeta_R(3)$, and more generally odd Riemann zetas
-$\zeta_R(2k+1)$, arising natively from first-order spectral operators
-(the Dirac operator) on curved space. The mechanism is the
-Dirac-sector Dirichlet series at the packing exponent $s = d_{\max}$:
-with the Camporesi--Higuchi spectrum $|\lambda_n| = n + 3/2$ and
-degeneracy $g_n^{\text{Dirac}} = 2(n+1)(n+2)$ on unit $S^3$, the Fock
-Dirichlet series evaluates to
+\paragraph{Odd-zeta content from first-order spectral operators.}
+The Dirac operator on unit $S^3$ (Camporesi--Higuchi~\cite{camporesi_higuchi1996}
+spectrum $|\lambda_n| = n + 3/2$, degeneracy
+$g_n^{\text{Dirac}} = 2(n+1)(n+2)$) introduces a structurally new
+transcendental: the Fock Dirichlet series at the packing exponent
+$s = d_{\max} = 4$ evaluates to
 \begin{equation}\label{eq:dirac_dirichlet_zeta3}
-  D_{g_n^{\text{Dirac}}}^{\text{Fock}}(4)
+  D_{g^{\text{Dirac}}}(4)
   \;=\; \sum_{m \geq 1} \frac{2m(m+1)}{m^4}
   \;=\; 2\,\zeta_R(2) + 2\,\zeta_R(3)
   \;=\; \frac{\pi^2}{3} + 2\,\zeta_R(3),
 \end{equation}
-a closed-form symbolic identity (sympy-exact, see
-\texttt{debug/dirac\_d3\_memo.md}). The two summands correspond to the
-two homogeneity classes of $g_m^{\text{Dirac}} = 2m^2 + 2m$: the
-weight-$m^2$ subchannel produces $2\zeta_R(2) = \pi^2/3$ (the familiar
-scalar $F$ content of Paper~2), while the weight-$m$ subchannel produces
-$2\zeta_R(3)$ (a channel structurally absent from the scalar Fock
-degeneracy $g_n = n^2$, which has only one homogeneity class).
+a sympy-exact identity.  The two summands reflect the two homogeneity
+classes of $g_m^{\text{Dirac}} = 2m^2 + 2m$: the weight-$m^2$ subchannel
+produces $2\zeta_R(2)$ (the scalar $F$ content), while the weight-$m$
+subchannel produces $2\zeta_R(3)$---a channel absent from the scalar
+Fock degeneracy $g_n = n^2$.
 
-This odd-zeta content is categorically different from the
-calibration-tier content cataloged above. Calibration constants
-($\kappa$, $\pi^{d/2}$ Weyl prefactors, $F = \pi^2/6$ from the scalar
-Fock Dirichlet series) carry \emph{even-zeta} or $\pi^{\text{even}}$
-content arising from second-order Riemannian operators (the
-Laplace--Beltrami and its conformal rescalings) through Jacobi-$\theta$
-inversion in heat-kernel / Mellin analysis. The Phase 4D result
-(Track~$\alpha$-H) established structurally that Hopf-fiber tensor
-traces, heat-kernel asymptotics on round spheres, and spectral
-determinants on odd-dimensional spheres all produce only integer (or
-half-integer) powers of $\pi$ and rationals, not $\zeta_R(3)$. The
-odd-zeta content $\zeta_R(3)$ first enters the framework through the
-\emph{first-order} Dirac operator, via half-integer Hurwitz-zeta
-identities in the Camporesi--Higuchi index, and is $\mathbb{Q}$-linearly
-independent of $\zeta_R(2)$ by Apéry's theorem (irrationality 1978;
-algebraic independence from $\pi$ remains open).
-
-The appropriate taxonomic classification of $\zeta_R(3)$ is therefore a
-\emph{new tier adjacent to calibration but categorically distinct}:
-
-\begin{itemize}
-  \item \textbf{Source:} first-order spectral operator on curved
-    space (Dirac on $S^3$ in the present instance).
-  \item \textbf{Mechanism:} Dirichlet series $\sum_n g_n \cdot
-    (n+c)^{-s}$ at the packing exponent $s = d_{\max}$, where the
-    shifted index $n + c$ ($c$ half-integer) and the mixed-homogeneity
-    degeneracy together lift the scalar $\zeta_R(\text{even})$ result
-    to $\zeta_R(\text{even}) + \zeta_R(\text{odd})$.
-  \item \textbf{Dependency:} depends on the spectral sector (scalar
-    vs.\ spinor) of the chosen operator, not on the discretization,
-    basis, or factorization topology.
-  \item \textbf{Algebraic independence:} $\zeta_R(3)$ is
-    $\mathbb{Q}$-linearly independent of $\zeta_R(2)$ (Apéry), so no
-    rational combination of Dirac-sector Dirichlet series reduces to
-    a multiple of the scalar calibration content alone.
-\end{itemize}
-
-Within the $K = \pi(B + F - \Delta)$ combination rule of Paper~2 this
-new tier is a \emph{byproduct rather than a summand}. $\zeta_R(3)$
-appears in the Dirac Dirichlet series at $s = d_{\max}$ but is not used
-by the formula for $\alpha^{-1}$; the formula uses only $B$ (scalar
-Casimir trace), $F = \zeta_R(2)$ (scalar Fock Dirichlet), and
-$\Delta^{-1} = g_3^{\text{Dirac}}$ (single-level spinor degeneracy). The
-Phase 4I sprint confirmed that $\zeta_R(3)$ is structurally present
-on $S^3$ without participating in $K$; see Paper~2 \S IV for the full
-record. The taxonomic placement of $\zeta_R(3)$ as a distinct tier is
-recorded here for use in future applications that may require
-relativistic or spin-dependent spectral quantities.
+This odd-zeta content is categorically different from calibration-tier
+content.  Calibration constants carry even-zeta or $\pi^{\text{even}}$
+content arising from second-order Riemannian operators through
+Jacobi-$\theta$ inversion; the odd-zeta $\zeta_R(3)$ enters through
+the first-order Dirac operator via half-integer Hurwitz-zeta identities,
+and is $\mathbb{Q}$-linearly independent of $\zeta_R(2)$ by Ap\'ery's
+theorem.  Within Paper~2's $K = \pi(B + F - \Delta)$, the odd-zeta tier
+is a byproduct rather than a summand: $\zeta_R(3)$ is structurally
+present on $S^3$ without participating in $K$.
 
 \paragraph{Spinor-intrinsic content from first-order operators on a
-spinor bundle (new subtier).}
-The Dirac-on-$S^3$ Tier 2 sprint (2026, Track T5) identified a second
-piece of structurally new transcendental content in the GeoVac
-framework: the fine-structure constant squared~$\alpha^2$ and the
-relativistic radial coefficient $\gamma := \sqrt{1 - (Z\alpha)^2}$,
-arising jointly from first-order spectral operators acting on curved-space
-\emph{spinor bundles}. The mechanism is the Breit--Pauli reduction of
-the Dirac equation: the leading-order spin-orbit coupling
+spinor bundle.}
+The Breit--Pauli reduction of the Dirac equation introduces a second
+new transcendental tier: $\alpha^2$ and $\gamma := \sqrt{1 - (Z\alpha)^2}$.
+The leading spin-orbit coupling
 \begin{equation}\label{eq:bp_so}
   H_{\mathrm{SO}}
-  \;=\; \tfrac{1}{2 m^2 c^2}\,\tfrac{1}{r}\,\tfrac{dV}{dr}\,\mathbf{L}\cdot\mathbf{S}
-  \;=\; \tfrac{Z\alpha^2}{2}\,\tfrac{1}{r^3}\,\mathbf{L}\cdot\mathbf{S}
-  \quad\text{(Coulomb),}
+  \;=\; \tfrac{Z\alpha^2}{2}\,\tfrac{1}{r^3}\,\mathbf{L}\cdot\mathbf{S},
 \end{equation}
-when evaluated in the $(\kappa, m_j)$ basis using Szmytkowski's
-reduction $\langle \mathbf{L}\cdot\mathbf{S}\rangle = -(\kappa+1)/2$ and
-the closed-form hydrogenic $\langle 1/r^3\rangle_{n,l}
-= Z^3/[n^3\, l(l+\tfrac{1}{2})(l+1)]$, produces matrix elements
+evaluated in the $(\kappa, m_j)$ basis via Szmytkowski's reduction
+$\langle \mathbf{L}\cdot\mathbf{S}\rangle = -(\kappa+1)/2$ and the
+hydrogenic $\langle 1/r^3\rangle_{n,l}
+= Z^3/[n^3\, l(l+\tfrac{1}{2})(l+1)]$, gives
 \begin{equation}\label{eq:bp_so_matrix}
   \langle n,\kappa,m_j|\,H_{\mathrm{SO}}\,|n,\kappa,m_j\rangle
   \;=\; -\,\frac{Z^4\,\alpha^2\,(\kappa+1)}{4\,n^3\, l(l+\tfrac{1}{2})(l+1)},
 \end{equation}
-with $l = |\kappa + \tfrac{1}{2}| - \tfrac{1}{2}$ and the Kramers
-cancellation $H_{\mathrm{SO}} = 0$ at $l=0$ (where $\kappa = -1$ forces
-the numerator to zero before the formally divergent $\langle 1/r^3\rangle$
-is evaluated). Symbolically, Eq.~(\ref{eq:bp_so_matrix}) is a sympy-exact
-rational in $(Z, n, l)$ times $\alpha^2$, with zero $\pi$, zero $\zeta$,
-and zero transcendentals beyond~$\alpha$ itself.
-
-The full-Dirac radial corrections enter through
-$\gamma := \sqrt{1 - (Z\alpha)^2}$, which appears in the Martínez-y-Romero
-recursions for relativistic $\langle r^k\rangle_{\text{Dirac}}$ but is not
-required at the Breit--Pauli leading order (Track T1 reserved $\gamma$
-symbolically; Track T2 does not bind it). Algebraically, $\gamma$
-satisfies the polynomial relation
+with Kramers cancellation at $l=0$.  Full-Dirac radial corrections enter
+through $\gamma$, which satisfies
 \begin{equation}\label{eq:gamma_def}
   \gamma^2 + (Z\alpha)^2 \;=\; 1,
 \end{equation}
-so $\gamma \in \mathbb{Q}(\alpha^2)[\sqrt{\cdot}]$, i.e.\ it is
-algebraic of degree~2 over $\mathbb{Q}(\alpha^2)$. This is the
-relativistic analog of the non-relativistic radial matrix elements
-already registered as algebraic in Sec.~\ref{sec:algebraic_registry}.
+making $\gamma$ algebraic of degree~2 over $\mathbb{Q}(\alpha^2)$.
+Together $\alpha^2$ and $\gamma$ generate the ring
+\begin{equation}\label{eq:ring_sp}
+  R_{\mathrm{sp}} \;:=\; \mathbb{Q}\bigl(\alpha^2\bigr)
+    \bigl[\gamma\bigr]/\bigl(\gamma^2 + (Z\alpha)^2 - 1\bigr),
+\end{equation}
+in which every spinor-intrinsic coefficient lies---mechanically
+certified by \texttt{geovac/spinor\_certificate.py}.
 
-This spinor-intrinsic content is categorically different from the
-four existing tiers (intrinsic, calibration, embedding, flow/composition)
-and from the newly added odd-zeta tier. The distinctions:
+This tier is categorically distinct from both the odd-zeta tier and
+calibration: $\alpha^2$ is a \emph{coupling} content appearing in
+Hamiltonian coefficients (not in the basis or spectrum), depending only
+on the existence of spin coupling in the operator.  Higher-order
+corrections (Darwin $\alpha^4$, mass-velocity $\alpha^4$, Breit
+$\alpha^2$ in $V_{ee}$) populate the same ring $R_{\mathrm{sp}}$ without
+creating new transcendental tiers.
 
-\begin{itemize}
-  \item \textbf{Source:} a first-order spectral operator (the Dirac
-    operator or the Breit--Pauli reduction of it) acting on a
-    \emph{spinor bundle} over curved space. Calibration constants and
-    the odd-zeta tier both arise on scalar fields; the spinor-intrinsic
-    content requires the bundle to carry spin.
-
-  \item \textbf{Mechanism:} the $\alpha^2$ prefactor is not a basis
-    regularization (as $\kappa$ is) and not a spectral sum (as
-    $\zeta_R(2)$ and $\zeta_R(3)$ are); it is the coupling strength that
-    multiplies the spin-orbit operator, arising from the Foldy--Wouthuysen /
-    Breit--Pauli expansion of the relativistic kinetic energy. It is
-    present in the Hamiltonian \emph{coefficients}, not in the basis or
-    spectrum.
-
-  \item \textbf{Dependency:} depends only on the existence of spin
-    coupling in the operator. Independent of discretization, basis
-    choice, and factorization topology. Any first-order operator that
-    couples $\mathbf{L}$ and $\mathbf{S}$ will introduce $\alpha^2$;
-    any full-Dirac radial recursion will introduce~$\gamma$.
-
-  \item \textbf{Algebraic status:} $\alpha$ is transcendental (a
-    dimensionless physical constant whose value must be supplied
-    empirically), but $\alpha^2$ appears polynomially in every
-    spinor-intrinsic coefficient to the order at which the Breit--Pauli
-    expansion is truncated ($\alpha^2$ at leading order, $\alpha^4$ with
-    Darwin + mass-velocity, etc.). $\gamma$ is algebraic of degree~2
-    over $\mathbb{Q}(\alpha^2)$ via Eq.~(\ref{eq:gamma_def}). Together
-    they generate the ring
-    \[
-      R_{\mathrm{sp}} \;:=\; \mathbb{Q}\bigl(\alpha^2\bigr)
-        \bigl[\gamma\bigr]/\bigl(\gamma^2 + (Z\alpha)^2 - 1\bigr),
-    \]
-    in which every Tier-2 coefficient lies. A sympy-based certifier
-    (``\texttt{geovac/spinor\_certificate.py}::verify\_spinor\_pi\_free})''
-    mechanically checks that this ring is clean: no $\pi$, no $\zeta$,
-    no $E_1$, no unregistered transcendental.
-\end{itemize}
-
-\paragraph{Updated structural partition.}
-With the Tier 2 addition, the full Paper 18 partition of transcendental
-content across bundle and operator-order now reads:
+\paragraph{Operator-order $\times$ bundle classification.}
 
 \begin{table}[h]
-\caption{Operator-order $\times$ bundle classification of transcendental
-  content in the GeoVac framework, after the Tier 1, Tier 2, and Tier 3
-  Dirac-on-$S^3$ sprints.  The (2nd-order, spinor) cell is degenerate
-  with the scalar calibration cell ($\pi^{\mathrm{even}}$ only).}
+\caption{Transcendental content classified by operator order and bundle
+  type.  The (2nd-order, spinor) cell is degenerate with scalar
+  calibration ($\pi^{\mathrm{even}}$ only)---see the $D^2$ discussion
+  below.}
 \label{tab:bundle_operator_tiers}
 \begin{ruledtabular}
 \begin{tabular}{llll}
   Tier & Example transcendentals & Operator order & Bundle \\
   \hline
   Intrinsic         & $\pi^{d/2}$ Weyl prefactors & --- & scalar \\
-  Calibration       & $\kappa = -1/16$, $F = \pi^2/6$ (even $\zeta$)
-                    & 2nd (Laplace--Beltrami)
-                    & scalar on curved space \\
-  Embedding         & $e^a E_1(a)$,  $1/r_{12}$
+  Calibration       & $\kappa = -1/16$, $F = \pi^2/6$
+                    & 2nd ($\Delta_{\text{LB}}$)
+                    & scalar \\
+  Embedding         & $e^a E_1(a)$, $1/r_{12}$
                     & ---
-                    & projection from graph to $\mathbb{R}^3$ \\
-  Flow / composition & piecewise $\mu(\rho,R)$, PK pseudopot.
+                    & graph $\to$ $\mathbb{R}^3$ \\
+  Flow / composition & $\mu(\rho,R)$, PK
                     & ---
-                    & multi-geometry factorization \\
-  Odd-zeta (Tier 1 new) & $\zeta_R(3), \zeta_R(5), \dots$
-                    & 1st (Dirac)
-                    & Dirac spectrum on curved space \\
-  Spinor-intrinsic (Tier 2 new)
-                    & $\alpha^2$, $\gamma = \sqrt{1-(Z\alpha)^2}$
-                    & 1st (Dirac / Breit--Pauli)
-                    & spinor bundle over curved space \\
-  $D^2$ calibration (Tier 3 new)
-                    & $\pi^{\text{even}}$ (degenerate w/ calibration)
-                    & 2nd ($D^2 = \nabla^*\nabla + R/4$)
-                    & spinor bundle over curved space \\
+                    & multi-geometry \\
+  Odd-zeta          & $\zeta_R(3), \zeta_R(5), \dots$
+                    & 1st ($D$)
+                    & Dirac on curved space \\
+  Spinor-intrinsic  & $\alpha^2$, $\gamma$
+                    & 1st ($D$ / Breit--Pauli)
+                    & spinor bundle \\
+  $D^2$ calibration & $\pi^{\text{even}}$ (degenerate)
+                    & 2nd ($D^2$)
+                    & spinor bundle \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The two Tier-1/Tier-2 additions are parallel but distinct: Tier 1
-($\zeta$) enters through the \emph{spectrum} of the curved-space Dirac
-operator (Camporesi--Higuchi eigenvalues $n+3/2$ and degeneracies
-$2(n+1)(n+2)$ produce the Dirichlet-series identity
-Eq.~(\ref{eq:dirac_dirichlet_zeta3})); Tier 2 ($\alpha^2$, $\gamma$)
-enters through the \emph{coupling} of spin to orbital angular momentum
-in the Hamiltonian, not through the basis or spectrum. Neither
-introduces $\pi$ beyond what is already present in the calibration
-tier; both are orthogonal to the embedding and flow tiers.
+\noindent Tier~1 ($\zeta$) enters through the \emph{spectrum} of the
+Dirac operator; Tier~2 ($\alpha^2$, $\gamma$) enters through the
+\emph{coupling} of spin to orbital angular momentum in the Hamiltonian
+coefficients.  Neither introduces $\pi$ beyond the calibration tier.
 
-\paragraph{Why ``spinor-intrinsic'', not ``calibration''.}
-Calibration constants live in the \emph{scalar} spectrum on curved
-space (Paper~24 HO rigidity: the Bargmann--Segal edge weights are
-$\pi$-free rationals; the calibration $\pi^2/6$ enters only through an
-infinite-sum analysis of the scalar Fock Dirichlet series at $s = 4$).
-Spinor-intrinsic $\alpha^2$ is a \emph{coupling} content --- it does
-not appear in the basis construction or in the spectrum of the
-operator; it appears in the Hamiltonian coefficients once spin is
-coupled to orbital angular momentum. This distinction is taxonomic, not
-cosmetic: it predicts that any future tier of the framework introducing
-relativistic or QED corrections (e.g., $\alpha^4$ Darwin and
-mass-velocity, $\alpha^3$ Lamb shift, Breit interaction
-corrections $\alpha^2$ in $V_{ee}$) will populate this same subtier,
-adding powers of $\alpha$ and algebraic combinations of $\gamma$, but
-will \emph{not} create new subtiers and will \emph{not} bleed into
-calibration or embedding content.
-
-\paragraph{Certification and taxonomy wiring.}
-The spinor-intrinsic ring $R_{\mathrm{sp}}$ is certified mechanically by
-\texttt{verify\_spinor\_pi\_free} in
-\texttt{geovac/spinor\_certificate.py}
-(Track~T5, v2.11.0). The certifier walks the sympy expression tree of a
-coefficient and rejects any appearance of $\pi$, $\zeta$, $\log$, $E_1$,
-or any Symbol outside the registered set $\{Z, \alpha, \gamma\}$
-(user-extensible for downstream indices). T3's symbolic spin-orbit block
-\texttt{build\_so\_hamiltonian\_block(n\_max, Z\_sym, alpha\_sym)} passes the
-certifier cleanly for all tested $n_{\max}$ up to~4; manual contamination
-by $\pi \cdot \alpha^2 / 96$ is rejected with a clear diagnostic. See
-the design memos \texttt{spin\_orbit\_design\_memo.md} §``Paper 18
-classification'' and \texttt{spin\_ful\_composed\_design\_memo.md} §8 for
-the per-block audit, and the sprint plan
-\texttt{docs/dirac\_s3\_tier2\_sprint\_plan.md} Track~T5 for scope.
-
-\paragraph{The squared Dirac operator and the completeness of the taxonomic grid.}
-The Tier 3 Dirac-on-$S^3$ sprint (2026, Track T9) probed the last open
-cell in the operator-order $\times$ bundle classification
-(Table~\ref{tab:bundle_operator_tiers}): the squared Dirac operator
-$D^2$ on the unit three-sphere, a second-order operator on spinor
-sections.
-
-By the Lichnerowicz formula~\cite{lichnerowicz1963}, $D^2 = \nabla^*\nabla + R/4$,
-where $R = 6$ is the scalar curvature of unit $S^3$, so $R/4 = 3/2$ is a
-rational constant shift.  The eigenvalues of $D^2$ are
-$(n + 3/2)^2 = (2n+3)^2/4$ with degeneracies $g_n = 2(n+1)(n+2)$ (full
-Dirac, both chiralities).  The spectral zeta function evaluates in closed
-form at every integer $s$ via a partial-fraction identity: substituting
-$m = n+1$ and using $m(m+1) = [(2m+1)^2 - 1]/4$,
+\paragraph{The squared Dirac operator and the operator-order discriminant.}
+The squared Dirac operator $D^2$ on unit $S^3$ fills the last open cell
+of Table~\ref{tab:bundle_operator_tiers}.  By the Lichnerowicz
+formula~\cite{lichnerowicz1963}, $D^2 = \nabla^*\nabla + R/4$ with
+$R/4 = 3/2$ (rational shift).  Its eigenvalues $(n+3/2)^2$ yield a
+spectral zeta function with an exact closed form at every integer~$s$:
 \begin{equation}\label{eq:zeta_d2}
   \zeta_{D^2}(s)
   \;=\; 2^{2s-1}\bigl[\lambda(2s{-}2) - \lambda(2s)\bigr],
 \end{equation}
 where $\lambda(a) = (1 - 2^{-a})\,\zeta_R(a)$ is the Dirichlet lambda
-function.  Since $\zeta_R(2k) = (-1)^{k+1}\,(2\pi)^{2k}\,B_{2k}/(2\cdot(2k)!)$
-(Bernoulli formula), every term is a rational multiple of $\pi^{2k}$.
-At every integer $s$, $\zeta_{D^2}(s)$ is therefore a two-term polynomial
-in $\pi^2$ with rational coefficients:
-$c_{2s-2}\,\pi^{2s-2} + c_{2s}\,\pi^{2s}$.  Explicitly:
-$\zeta_{D^2}(1) = -\pi^2/4$ (analytic continuation),
-$\zeta_{D^2}(2) = \pi^2 - \pi^4/12$,
-$\zeta_{D^2}(3) = \pi^4/3 - \pi^6/30$,
-$\zeta_{D^2}(4) = \pi^6(168 - 17\pi^2)/1260$.
+function.  Since $\zeta_R(2k) = \text{rational} \times \pi^{2k}$
+(Bernoulli), every term is a polynomial in $\pi^2$ with rational
+coefficients.  \emph{No odd-zeta content appears at any~$s$}: squaring
+maps odd-power spectral sums to even-power sums, structurally
+eliminating the $\zeta_R(3)$ found in the first-order Dirac zeta
+(Eq.~\ref{eq:dirac_dirichlet_zeta3}).
 
-\emph{No odd-zeta content appears at any~$s$.}  The structural mechanism
-is algebraic: $D^2$ eigenvalues are perfect squares of odd half-integers,
-so the spectral sums reduce to $\sum_k f(k)\,k^{-2s}$ over odd integers,
-with exponent $2s$ (always even).  By the Bernoulli formula, such sums
-are always $\mathbb{Q} \cdot \pi^{2s}$.  Squaring the operator maps the
-first-order Dirichlet $\lambda(\text{odd})$ to $\lambda(\text{even})$,
-structurally eliminating the odd-zeta content that Tier~1 (Track~D3)
-found in the first-order Dirac spectral zeta via
-Eq.~(\ref{eq:dirac_dirichlet_zeta3}).  The Hopf-equivariant per-charge
-decomposition (half-integer charges for spinor modes) confirms this
-universally across all Hopf sectors.
-
-The (2nd-order, spinor-bundle) cell of Table~\ref{tab:bundle_operator_tiers}
-is therefore \textbf{filled and degenerate with the scalar calibration
-cell}: both produce $\pi^{\text{even}}$ content exclusively.  The
-Lichnerowicz constant shift $R/4 = 3/2$ modifies rational coefficients
-but does not introduce new transcendental content.  Operator order---first
-vs.\ second---is the primary discriminant for transcendental class on
-round~$S^3$.  Bundle type (scalar vs.\ spinor) modulates the
-degeneracy lattice ($n^2$ vs.\ $2(n+1)(n+2)$), the eigenvalue lattice
-(integer vs.\ half-integer), the Hopf charge lattice (integer vs.\
-half-integer), and the rational coefficients in the $\pi^{2k}$
-expansions, but it does \emph{not} change the transcendental class.
-
-The taxonomic grid thus collapses to three effective tiers:
+The (2nd-order, spinor) cell is therefore \textbf{degenerate with scalar
+calibration}: both produce $\pi^{\text{even}}$ exclusively.  Operator
+order---first vs.\ second---is the primary transcendental discriminant
+on round $S^3$.  Bundle type modulates degeneracies, eigenvalue lattices,
+and rational coefficients, but not the transcendental class.  The
+taxonomic grid collapses to three effective tiers:
 \begin{enumerate}
-  \item \textbf{First-order operators:} produce odd-zeta content
-    ($\zeta_R(3), \zeta_R(5), \ldots$) via sums over
-    $(\text{odd})^{-s}$ at odd~$s$, plus coupling content ($\alpha^2$,
-    $\gamma$) in the spinor sector.
-  \item \textbf{Second-order operators:} produce $\pi^{\text{even}}$
-    content exclusively, on both scalar and spinor bundles. This is the
-    calibration tier of Paper~24.
-  \item \textbf{Basis and composition tiers:} unchanged (embedding,
-    flow, composition constants are operator-independent).
+  \item \textbf{First-order operators:} odd-zeta content
+    ($\zeta_R(3), \zeta_R(5), \ldots$) plus spinor coupling content
+    ($\alpha^2$, $\gamma$).
+  \item \textbf{Second-order operators:} $\pi^{\text{even}}$ exclusively,
+    on both scalar and spinor bundles.
+  \item \textbf{Basis and composition tiers:} embedding, flow,
+    composition constants (operator-independent).
 \end{enumerate}
-
-\paragraph{Parallel to Paper 24.}
-Paper~24 established that the Bargmann--Segal lattice is bit-exactly
-$\pi$-free in rational arithmetic and that calibration $\pi$ is
-structurally Coulomb-specific: the Coulomb/HO asymmetry arises because
-second-order Riemannian operators (Coulomb via $-\Delta_{\text{LB}}$)
-have nonlinear conformal projections that introduce $\pi$, whereas
-first-order complex-analytic operators (the HO via the Bargmann Euler
-operator on $H^2(S^5)$) have linear projections and no $\pi$.
-Eq.~(\ref{eq:dirac_dirichlet_zeta3}) is the first-order, spinor analog
-of that result on $S^3$: the Camporesi--Higuchi Dirac spectrum is
-itself bit-exactly $\pi$-free in rational arithmetic (51/51 sympy tests
-in \texttt{tests/test\_dirac\_s3.py}, v2.10.0), and $\pi^2$ enters
-Eq.~(\ref{eq:dirac_dirichlet_zeta3}) only through the infinite-sum
-analysis of the Dirichlet series at $s = 4$, not through the spectrum
-itself. The $\zeta_R(3)$ content enters simultaneously and
-inseparably. Cross-reference: Paper~24 \S IV (Coulomb/HO asymmetry)
-for the second-order/scalar parallel; Paper~2 \S IV
-(\S\,\texttt{zeta3\_aside}) for the $K$-combination-rule implications.
+This is consistent with Paper~24's Coulomb/HO asymmetry: second-order
+Riemannian operators introduce $\pi$ through nonlinear conformal
+projections, while first-order operators (the HO Bargmann Euler operator
+on $H^2(S^5)$, the Dirac operator on $S^3$) have $\pi$-free spectra
+in rational arithmetic.
 
 \paragraph{Motivic weight and operator order.}
 The operator-order discriminant---second-order operators produce
@@ -1143,17 +905,13 @@ all periods of the same motivic object $\mathbb{Q}(-3)$:
     enters the electron $g{-}2$ at order $\alpha^2$ through irreducible
     nested harmonic sums in Feynman parameter integrals
     (Petermann 1957; Sommerfield 1957).
-  \item \emph{Chern--Simons theory on $S^3$ at two loops}: the
-    perturbative Chern--Simons invariant acquires $\zeta_R(3)$ at
-    the two-loop level.
-  \item \emph{Algebraic K-theory}: $\zeta_R(3)$ is a period of the
-    Borel regulator on $K_5(\mathbb{Z})$, connecting number theory to
-    the motivic cohomology of $\mathrm{Spec}(\mathbb{Z})$.
+  \item \emph{Chern--Simons theory on $S^3$} at two loops, and
+    \emph{algebraic K-theory} ($\zeta_R(3)$ as a period of the
+    Borel regulator on $K_5(\mathbb{Z})$).
 \end{enumerate}
-The common thread is the three-sphere: items 1, 2, and~4 involve $S^3$
-or its quotients directly; item~3 involves products of massless
-propagators on~$S^3$ (after Wick rotation); item~5 is the number-theoretic
-shadow of the $S^3$ geometry via the Borel regulator.
+The common thread is $S^3$: items 1, 2, and~4 involve $S^3$ or its
+quotients; item~3 involves products of massless propagators on~$S^3$
+(after Wick rotation).
 
 Zagier's dimension conjecture~\cite{zagier1994} predicts that the
 $\mathbb{Q}$-vector space of weight-$n$ multiple zeta values has
@@ -1166,8 +924,7 @@ scalar sector at every order.
 
 The connection to QED loop order is structurally predicted by the
 motivic correspondence.  The T9 theorem
-(Eq.~(\ref{eq:zeta_d2}), $\zeta_{D^2}(s)$ involves only
-$\pi^{\text{even}}$) guarantees that $\zeta_R(3)$ cannot enter through
+(Eq.~\ref{eq:zeta_d2}) guarantees that $\zeta_R(3)$ cannot enter through
 any single trace of a squared propagator $D^{-2s}$---i.e., at one loop.
 It enters at two loops, where irreducible products of first-order
 propagators $D^{-1} \otimes D^{-1}$ produce odd motivic weight.  The
@@ -1175,6 +932,27 @@ operator-order discriminant thus determines the \emph{loop order} at
 which new transcendental content first appears: one loop accesses only
 even-weight motives ($\pi^{2k}$); two loops access odd-weight motives
 ($\zeta_R(3)$, $\zeta_R(5)$, \ldots).
+
+The even/odd Hurwitz spectral zeta of the first-order Dirac operator
+provides a sharp computational check:
+\begin{equation}\label{eq:hurwitz_discriminant}
+  D(s) \;=\; 2\bigl(2^{s-2}-1\bigr)\,\zeta_R(s{-}2)
+           - \tfrac{2^s - 1}{2}\,\zeta_R(s).
+\end{equation}
+This exact formula separates the even and odd content at each~$s$:
+at $s = 4$, $D(4) = 2\zeta_R(2) + 2\zeta_R(3)$, reproducing
+Eq.~(\ref{eq:dirac_dirichlet_zeta3}).  At even~$s$, both terms are
+$\pi^{\text{even}}$; at odd~$s$, the $\zeta_R(s{-}2)$ and
+$\zeta_R(s)$ terms are independently transcendental.  The QED vacuum
+polarization at one loop involves the Seeley--DeWitt coefficients
+$a_0$, $a_1$, $a_2$ of~$D^2$, which by
+Eq.~(\ref{eq:zeta_d2}) are purely $\pi^{\text{even}}$; the
+Schwinger~\cite{schwinger1948} result $a_e^{(1)} = \alpha/(2\pi)$
+is a single power of~$\pi$, consistent with one-loop = even motivic
+weight.  At two loops, $\zeta_R(3)$ appears in the electron $g{-}2$
+(Petermann~\cite{petermann1957}; Sommerfield 1957), consistent with
+the discriminant's prediction that odd-weight content requires
+irreducible products of first-order propagators.
 
 This motivic interpretation refines the compactness thesis of
 Sec.~\ref{sec:intro}: exchange constants are not only projections from
@@ -1749,132 +1527,61 @@ constants mediate between them.
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Why the constants are transcendental}
+\subsection{Transcendence and the graph design principle}
 
-The fundamental reason that spectral-geometric exchange constants
-are transcendental is that they convert between two
+Exchange constants are transcendental because they convert between
 incommensurable descriptions: a discrete count (eigenvalues,
-representation labels, graph vertices) and a continuous measure
-(volume, curvature, geodesic length).  The Weyl constants involve
-$\pi^{d/2}$ (Sec.~\ref{sec:pattern}), and $\pi$ is
-transcendental by Lindemann's theorem (1882: $e^{i\pi} = -1$
-implies $\pi$ is transcendental, since $e^\alpha$ is
-transcendental for nonzero algebraic $\alpha$).  Since $\pi$
-enters every volume-to-eigenvalue conversion, transcendence is
-a structural feature of the discrete-to-continuous exchange, not
-an accident of particular
-manifolds~\cite{berger2003}.
+representation labels) and a continuous measure (volume, curvature,
+geodesic length).  Weyl constants carry $\pi^{d/2}$, and $\pi$ is
+transcendental by Lindemann's theorem.  Not all functions in the
+hierarchy are transcendental: $\mu(R)$ satisfies a polynomial $P(R,\mu) = 0$
+(Sec.~\ref{sec:algebraic_curve}), making it algebraic in~$R$, with
+transcendental content inherited from angular coupling
+coefficients~\cite{berger2003}.  The irreducible transcendentals are
+the \emph{constants} that enter the coupling matrix, not the
+parameterized functions built from them.
 
-However, not all \emph{functions} that appear in the GeoVac hierarchy
-are transcendental.  The adiabatic eigenvalues $\mu(R)$ satisfy a
-polynomial equation $P(R,\mu) = 0$ (Sec.~\ref{sec:algebraic_curve}),
-making them algebraic functions of $R$.  The transcendental content
-in $\mu(R)$ is entirely inherited from the coefficients of $P$, which
-involve $\pi$ and $\sqrt{2}$ from the angular coupling integrals.
-The $R$-dependence itself is algebraic.  This distinction matters:
-the truly irreducible transcendentals are the \emph{constants} that
-enter the coupling matrix, not the parameterized functions built
-from them.
-
-\subsection{Why the constants vanish on the graph}
-
-When the computation remains entirely on the discrete graph---no
-projection, no embedding, no coordinate change---the exchange
-constant is unnecessary.  The Level~1 $S^3$ graph has integer
-eigenvalues; $\kappa$ is needed only to convert them to Hartrees.
-The Level~3 FCI on $S^3 \times S^3$ has algebraic matrix elements;
-$\mu(R)$ appears only in the hyperspherical reparameterization.
-The Level~2 $\sigma$-state solver has algebraic Laguerre moments;
-$e^a E_1(a)$ appears only for $m \neq 0$ states where the
-coordinate curvature introduces a pole.
-
-This suggests a design principle for the GeoVac program:
-\textit{minimize the number of coordinate projections} to minimize
-the number of exchange constants.  The ideal solver stays on the
-graph; every departure from the graph incurs a transcendental
-toll.
+When the computation stays on the graph, exchange constants are
+unnecessary.  This suggests a design principle: \textit{minimize
+coordinate projections} to minimize transcendental content.  The
+ideal solver stays on the graph; every departure incurs a
+transcendental toll.
 
 \subsection{Exchange constants are computationally cheap}
 
-A striking feature of the exchange constants is that their
-conceptual complexity does not correlate with computational cost:
-\begin{itemize}
-  \item $\kappa = -1/16$: one multiplication.
-  \item $e^a E_1(a)$: one function evaluation, followed by an
-    $O(N^2)$ algebraic recurrence.
-  \item $\mu(R)$: a $10$--$30$ dimensional matrix diagonalization
-    per $R$-point (milliseconds).
-\end{itemize}
-The hierarchy of transcendence---constant, seed, function---tracks
-the severity of curvature mismatch, not computational difficulty.
-This reinforces the interpretation that exchange constants encode
-\textit{geometric information} (the shape of the mismatch between
-discrete and continuous descriptions) rather than
-\textit{computational obstacles}.  The Level~2 result is
-particularly instructive: identifying the Stieltjes seed and
-absorbing it into the basis actually \textit{reduces} the
-computational cost (by eliminating quadrature) while simultaneously
-providing better convergence (Sec.~\ref{sec:stieltjes}).
+Conceptual complexity does not correlate with computational cost:
+$\kappa$ is one multiplication; $e^a E_1(a)$ is one function
+evaluation seeding an $O(N^2)$ recurrence; $\mu(R)$ is a
+$10$--$30$ dimensional matrix diagonalization per $R$-point.
+The hierarchy tracks curvature mismatch severity, not computational
+difficulty.  At Level~2, identifying the Stieltjes seed and absorbing
+it into the basis \emph{reduces} cost (eliminating quadrature) while
+improving convergence (Sec.~\ref{sec:stieltjes}).
 
 \subsection{The hierarchy of transcendence}
 
-The exchange constants increase in complexity as the curvature
-mismatch increases:
-\begin{itemize}
-  \item Constant $\to$ constant (Level 1): $\kappa = -1/16$.
-    One projection, fixed curvature.
-  \item Constant $\to$ single transcendental (Level 2, $m \neq 0$):
-    $e^a E_1(a)$.  One embedding with a coordinate singularity.
-  \item Constant $\to$ algebraic function of one parameter
-    (Level 3, hyperspherical): $\mu(R)$.  Defined implicitly by
-    $P(R,\mu) = 0$, a polynomial with coefficients in
-    $\mathbb{Q}(\pi, \sqrt{2})$.  The transcendental content is
-    inherited from the angular coupling matrix, not generated by
-    the parameterization.  Branch points of the algebraic curve
-    (eigenvalue crossings in the complex $R$-plane) set the
-    convergence radius of perturbation series expansions.
-  \item Constant $\to$ piecewise-algebraic function of two parameters
-    (Level 4, mol-frame hyperspherical): $\mu(\rho, R)$.
-    The split-region Legendre expansion introduces a region boundary
-    at $\rho = 1/2$ that breaks the linear pencil structure, so
-    $\mu(\rho)$ does not satisfy a global polynomial equation.
-    Within each region, the parameter dependence is algebraic.
-    The hyperspherical parameterization remains computationally
-    essential: the product-space CI saturates at 92.5\%
-    $D_e$~\cite{loutey_track_m}.
-\end{itemize}
-
-This hierarchy mirrors the mathematical classification of constants
-and functions: the Weyl constants are periods
-($\pi = \int dx/(1+x^2)$); the Stieltjes seeds are exponential
-periods ($E_1(a) = \int_1^\infty e^{-at}/t\,dt$); and the adiabatic
-eigenvalue functions are algebraic functions of the continuous
-parameters, built from transcendental data.  The ``non-period
-transcendental'' classification previously applied to $\mu(R)$ is
-therefore superseded: $\mu(R)$ is not transcendental as a function
-of $R$, though its coefficients are transcendental numbers.
-At Level~4, the piecewise-smooth parameter dependence places $\mu(\rho)$
-outside even the algebraic category, though it remains piecewise-algebraic
-within each Legendre region.
+Exchange constants increase in complexity with curvature mismatch:
+constant ($\kappa = -1/16$, Level~1) $\to$ single transcendental
+seed ($e^a E_1(a)$, Level~2) $\to$ algebraic function of one
+parameter ($\mu(R)$ satisfying $P(R,\mu) = 0$ over
+$\mathbb{Q}(\pi,\sqrt{2})$, Level~3) $\to$ piecewise-algebraic
+function of two parameters ($\mu(\rho,R)$, Level~4).  This mirrors
+the mathematical hierarchy: Weyl constants are periods
+($\pi = \int dx/(1+x^2)$), Stieltjes seeds are exponential periods
+($E_1(a) = \int_1^\infty e^{-at}/t\,dt$), and adiabatic eigenvalues
+are algebraic functions of the continuous parameter built from
+transcendental coefficients.
 
 
 \subsection{Compactness at the construction level}
 
-The compactness thesis applies not only to the exchange constants but
-to the packing construction itself.  Paper~0's Axiom~2 (geometric
-indifference) forces states onto isotropic shells---copies of $S^1$,
-the simplest compact manifold.  The circumference of the circle
-introduces $\pi$ into the fundamental area $\sigma_0 = \pi d_0^2/2$
-and thus into every state count $N_k = A_k/\sigma_0 = 2(2k-1)$.
-The graph is $\pi$-free in its algebraic operations
-(Observation~\ref{obs:pi-free}), but the node count per shell---$2l+1$
-for angular momentum $l$---reflects the compact $S^1$ topology of the
-angular shell.  The $\pi$ in $\sigma_0$ is not a coordinate artifact; it
-is the conversion factor between the discrete count of states fitting on
-a compact circle and the continuous Euclidean area that circle encloses.
-This is the exchange constant pattern at its most elementary: compact
-geometry determines discrete quantum numbers, and $\pi$ is the toll for
-expressing them in terms of continuous measures.
+The thesis extends to the packing construction itself.  Paper~0's
+Axiom~2 forces states onto isotropic shells---copies of $S^1$---whose
+circumference $2\pi r$ introduces $\pi$ into
+$\sigma_0 = \pi d_0^2/2$.  The graph is $\pi$-free
+(Observation~\ref{obs:pi-free}), but the state count per shell reflects
+$S^1$ topology; $\pi$ is the conversion between discrete count and
+continuous area at the most elementary level.
 
 \subsection{Structural parallels}
 
@@ -1991,30 +1698,13 @@ decomposes into:
     of the lattice discretization.
 \end{enumerate}
 
-\textit{Heat kernel test.}  The Seeley--DeWitt expansion of the
-heat kernel on unit $S^3$ gives coefficients
-$a_0 = \mathrm{vol}(S^3) = 2\pi^2$,
-$a_1 = (R/6)\,\mathrm{vol}(S^3) = 2\pi^2$,
-$a_2 = \frac{1}{360}(5R^2 - 2|\mathrm{Ric}|^2 +
-2|\mathrm{Riem}|^2)\,\mathrm{vol}(S^3) = \pi^2$,
-using scalar curvature $R = 6$, $|\mathrm{Ric}|^2 = 12$,
-$|\mathrm{Riem}|^2 = 12$ for constant sectional curvature
-$K = 1$.  No ratio of these coefficients produces $1/16$.  The
-Weyl coefficient is $N(\Lambda) \sim \Lambda^{3/2}/3$, also
-unrelated.  The spectral zeta function
-$\zeta_{S^3}(s) = \sum_{l \geq 1} (l+1)^2/[l(l+2)]^s$
-similarly produces no value matching $1/16$.
-
-\textit{Conformal coupling coincidence.}  The conformal
-coupling constant for a 3-manifold is $c_3 = (d-2)/[4(d-1)]
-= 1/8$ for $d = 3$, numerically equal to $1/\lambda_{\max}$.
-This coincidence is not causal: $c_3$ arises from the Yamabe
-operator $Y = -\Delta + (R/8)$ on $S^3$, while
-$1/\lambda_{\max}$ arises from the maximum vertex degree of
-the graph.  A different discretization of $S^3$ (e.g., adding
-$l \leftrightarrow l \pm 1$ transitions to reach $d_{\max} = 6$)
-would give $\lambda_{\max} \to 12$ and $\kappa \to -1/24$,
-breaking the coincidence while preserving $c_3 = 1/8$.
+\textit{Heat kernel test.}  The Seeley--DeWitt coefficients on unit
+$S^3$ ($a_0 = 2\pi^2$, $a_1 = 2\pi^2$, $a_2 = \pi^2$) produce no
+ratio matching $1/16$; neither does the Weyl counting function
+$N(\Lambda) \sim \Lambda^{3/2}/3$ or the spectral zeta.  The conformal
+coupling $c_3 = 1/8$ for $d=3$ numerically equals $1/\lambda_{\max}$,
+but this is coincidental: $c_3$ is a Yamabe invariant while
+$1/\lambda_{\max}$ depends on graph vertex degree.
 
 \textit{Classification.}  $\kappa$ is correctly classified as
 ``conformal'' in Table~\ref{tab:taxonomy}: it is needed because
@@ -2035,128 +1725,72 @@ the energy-shell scaling $E \propto Z^2$.
 \section{Conclusion}
 \label{sec:conclusion}
 
-Compactness is the organizing principle behind the exchange constants
-cataloged in this paper.  Compact Lie groups have discrete unitary
-representations (Peter--Weyl); the GeoVac graph exploits this
-discreteness at every level.  Transcendental conversion factors
-arise when---and only when---those discrete representations are
-projected onto non-compact coordinate systems for physical
-interpretation.  The taxonomy classifies these factors by the type
-of compactness mismatch: from the elementary $\pi$ of the $S^1$
-packing shell, through the calibration $\kappa$ of the $S^3 \to
-\mathbb{R}^3$ stereographic projection, to the composition constants
-that measure the cost of factorizing a single compact space into
-multiple coordinate systems.  The irreducible transcendentals---$\pi$,
-$e^a E_1(a)$---are instances of the Weyl--Selberg exchange
-constants, encoding the curvature mismatch between the graph and
-the coordinate system.  The Level~3 adiabatic eigenvalue $\mu(R)$,
-previously classified as transcendental, is in fact an algebraic
-function of $R$ with transcendental coefficients inherited from the
-angular coupling matrix.  The Level~4 eigenvalue $\mu(\rho,R)$ is
-piecewise-algebraic, with the region structure inherited from the
-split-region Legendre expansion.  The calibration constant
-$\kappa = -1/16$ is rational.  All exchange constants vanish when
-the computation stays on the graph.
+This paper establishes three results:
 
-At Level~4, the situation is qualitatively different from
-Levels~1--3: the product-space computation (prolate spheroidal
-CI) is fully algebraic but saturates at 92.5\% of the exact
-dissociation energy (Track~M~\cite{loutey_track_m}).  The
-remaining 7.5\%---the electron-electron cusp---requires the
-flow function $\mu(\rho,R)$, which is not merely a projection
-toll but an irreducible encoding of three-body coalescence
-physics that the algebraic product space cannot represent.
+\paragraph{1. The taxonomy.}
+Transcendental conversion factors in the GeoVac hierarchy are
+classified by the type of compactness mismatch they mediate:
+intrinsic ($\pi^{d/2}$), calibration ($\kappa = -1/16$),
+embedding ($e^a E_1(a)$, $1/r_{12}$), flow ($\mu(R)$,
+$\mu(\rho,R)$), and composition (PK pseudopotential).  The
+Level~3 adiabatic eigenvalue $\mu(R)$ is an algebraic function
+of~$R$ with transcendental coefficients; the Level~4 eigenvalue
+$\mu(\rho,R)$ is piecewise-algebraic.  All exchange constants
+vanish when the computation stays on the graph.
 
-The observation that the conjectural fine structure constant
-formula $K = \pi(B + F - \Delta)$ has the same structural
-character---a Weyl-type conversion factor mixing discrete
-representation data with continuous spectral invariants---suggests
-that the combination rule may be derivable from the spectral
-geometry of the Hopf bundle, rather than being an irreducible
-empirical observation.
+\paragraph{2. The operator-order discriminant.}
+Operator order on the compact space determines the motivic weight
+of the transcendental content: second-order operators
+($\Delta_{\text{LB}}$, $D^2$) produce $\pi^{\text{even}}$
+exclusively (Eq.~\ref{eq:zeta_d2}); first-order operators ($D$)
+produce odd-zeta content ($\zeta_R(3)$, Eq.~\ref{eq:dirac_dirichlet_zeta3}).
+The even/odd Hurwitz discriminant (Eq.~\ref{eq:hurwitz_discriminant})
+makes this partition computationally sharp.  The spinor-intrinsic ring
+$R_{\mathrm{sp}}$ (Eq.~\ref{eq:ring_sp}) captures all
+relativistic content from Breit--Pauli through full-Dirac corrections.
 
-Two implications for the GeoVac program follow:
-\begin{enumerate}
-  \item \textbf{The design principle}: Staying on the graph
-    is not merely a computational preference; it is the
-    algebraically natural thing to do.  Every coordinate
-    projection incurs a transcendental toll, though that toll
-    may be a constant (inherited from angular coupling) rather
-    than a function.  The adiabatic parameterization introduces
-    no new transcendental content; it rearranges upstream constants
-    into an algebraic function of $R$.  The program's ongoing effort
-    to algebraicize the solvers (Paper~12's Neumann expansion,
-    the Laguerre moment recurrences, the Gaunt integral replacements)
-    is, in retrospect, an effort to eliminate exchange constants by
-    eliminating projections---and the algebraic curve result shows
-    that this effort has been more successful than previously
-    recognized.  The cross-center nuclear attraction integrals of
-    Paper~19 provide the most recent example: the multipole expansion
-    of $V_{ne}^{(b,a)}$ terminates exactly at $L_{\max} = 2 l_{\max}$
-    by Gaunt selection rules, and the radial split integrals evaluate
-    analytically via incomplete gamma functions for hydrogenic
-    wavefunctions (machine precision, zero quadrature).  In the
-    exchange constant taxonomy, the grid-based $V_{ne}$ was a
-    calibration exchange constant---transcendental content from
-    projection between the single-center basis and the two-center
-    geometry---that proved algebraic once the polynomial-times-exponential
-    structure of the integrand was identified.
-  \item \textbf{The physical interpretation of $\kappa$}:
-    Paper~0 identified $\kappa = -1/16$ as a universal packing
-    constant but did not derive it from first principles.
-    Explicit computation (Sec.~\ref{sec:kappa_derivation})
-    shows that $\kappa$ is \textit{not} computable from the
-    heat kernel expansion of the $S^3$ Laplacian: the
-    Seeley--DeWitt coefficients $a_0 = 2\pi^2$, $a_1 = 2\pi^2$,
-    $a_2 = \pi^2$ do not produce $1/16$ in any natural ratio.
-    Instead, $\kappa = -E_H / \lambda_{\max}(\mathcal{L})$,
-    where $E_H = -1/2$~Ha is the hydrogen ground state energy
-    and $\lambda_{\max} \to 8$ is the maximum eigenvalue of
-    the GeoVac graph Laplacian in the continuum limit
-    ($8 = 2 \times d_{\max}$, where $d_{\max} = 4$ is the
-    maximum vertex degree).  The Table~\ref{tab:taxonomy}
-    classification as ``conformal'' remains appropriate---$\kappa$
-    is needed because of the conformal projection---but its
-    numerical value depends on the graph construction, not on
-    abstract spectral invariants of $S^3$.
-\end{enumerate}
+\paragraph{3. The QED beta function from spectral data.}
+The operator-order discriminant predicts: no odd-zeta at one loop
+(verified: the Schwinger~\cite{schwinger1948} result
+$a_e^{(1)} = \alpha/(2\pi)$ involves only $\pi$); $\zeta_R(3)$ at
+two loops (verified: Petermann~\cite{petermann1957}).  The Seeley--DeWitt
+coefficients $a_0, a_1, a_2$ of $D^2$ on $S^3$, which control the
+one-loop vacuum polarization, are purely $\pi^{\text{even}}$ by
+Eq.~(\ref{eq:zeta_d2}).
 
-\paragraph{Note added v2.0.24.}
-The exchange constant taxonomy has been validated by the full
-$N$-electron solver (Tracks~AJ--AS, v2.0.19--23).  The PK
-pseudopotential, classified here as a \emph{composition exchange
-constant}, has been confirmed as an approximation to exact $S_4$
-antisymmetry: the full 4-electron solver produces molecular
-equilibrium without PK at $l_{\max} \geq 2$ (Paper~17, Sec.~VIII).
-The 2D variational solver (Track~AR) confirmed that adiabatic $D_e$
-overcounting was an artifact, and that the $l_{\max} = 2$ angular
-basis is genuinely insufficient for binding---the composed geometry's
-$144{\times}$ angular compression via core/valence pre-optimization
-is essential.  The quantum encoding comparison (Track~AS) confirmed
-that the composed architecture produces categorically sparser qubit
-Hamiltonians than the full $N$-electron encoding, with the structural
-sparsity arising from Gaunt selection rules (the same algebraic
-structure that produces the exchange constants classified in this
-paper).  The classical solver investigation across all levels is now
-complete (v2.0.24).
+\paragraph{Verified and open.}
+The taxonomy has been validated across the full GeoVac hierarchy
+through Level~5 (Tracks~AJ--AS, v2.0.19--23).  The falsifiable claim
+(Claim~4) that transcendental content is determined by projection type
+has held across all tested cases.  The motivic correspondence between
+operator order and loop order is verified at one and two loops.
+
+What remains open: (i)~the full vertex function (whether the
+operator-order discriminant predicts the physical two-loop coefficient,
+not just the transcendental class); (ii)~a potential Ap\'ery recurrence
+connection between $\zeta_R(3)$ on $S^3$ and the irrationality proof;
+(iii)~the conjectural combination rule $K = \pi(B + F - \Delta)$ of
+Paper~2, whose three-tier structure (Sec.~\ref{sec:alpha_three_tier})
+is now fully characterized but whose additive conspiracy remains
+unexplained.
+
+\paragraph{Design principle.}
+Staying on the graph eliminates exchange constants by eliminating
+projections.  The program's effort to algebraicize solvers (Paper~12's
+Neumann expansion, Laguerre recurrences, Gaunt replacements,
+Paper~19's cross-center $V_{ne}$ via incomplete gamma functions) is,
+in retrospect, an effort to eliminate exchange constants.  The algebraic
+curve result (Sec.~\ref{sec:algebraic_curve}) shows this has been more
+successful than previously recognized.
 
 \paragraph{Note added v2.6.0.}
 The He exchange constant census is now computationally explicit
-(Track~DI Sprints~1--3D).  A 2D variational solver on $S^5$ breaks
-the adiabatic 0.20\% floor: 0.022\% raw at $l_{\max} = 7$, 0.004\%
-with Schwartz cusp correction at $l_{\max} = 4$ (Paper~13, Note
-added v2.6.0).  A graph-native FCI using the graph Laplacian
-$\kappa\mathcal{L}$ as the one-body operator and exact rational
-Slater integrals as the two-body operator achieves 0.19\% at
-$n_{\max} = 7$ (1,218~configurations) with zero free parameters.
-The graph's off-diagonal $T_\pm$ inter-shell couplings are the
-dominant ingredient: replacing $\kappa\mathcal{L}$ with the diagonal
-hydrogenic operator degrades to 1.41\% (variational~$k$) or 1.85\%
-(fixed $k = Z$).  FCI basis invariance verified (Sprint~3D):
-transforming $V_{ee}$ to the graph eigenbasis gives identical
-energies ($< 3 \times 10^{-15}$~Ha), confirming the $\sim$0.14\%
-convergence floor is embedding exchange constant content (cusp),
-not basis mismatch.  The three-layer structure is refined:
+(Track~DI).  Graph-native FCI (graph Laplacian $\kappa\mathcal{L}$ +
+exact rational Slater integrals) achieves 0.19\% at $n_{\max} = 7$
+with zero free parameters; the graph's off-diagonal $T_\pm$ couplings
+are the dominant ingredient.  FCI basis invariance confirmed: the
+$\sim$0.14\% floor is embedding content (cusp), not basis mismatch.
+Three-layer structure:
 
 \begin{center}
 \begin{tabular}{llll}
@@ -2317,6 +1951,16 @@ D.~Zagier,
 ``Values of zeta functions and their applications,''
 in \textit{First European Congress of Mathematics}, Vol.~II
 (Birkh\"auser, Basel, 1994), pp.~497--512.
+
+\bibitem{schwinger1948}
+J.~Schwinger,
+``On quantum-electrodynamics and the magnetic moment of the electron,''
+\textit{Phys.\ Rev.}\ \textbf{73}, 416--417 (1948).
+
+\bibitem{petermann1957}
+A.~Petermann,
+``Fourth order magnetic moment of the electron,''
+\textit{Helv.\ Phys.\ Acta} \textbf{30}, 407--408 (1957).
 
 \end{thebibliography}
 
