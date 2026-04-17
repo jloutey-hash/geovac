@@ -1095,6 +1095,93 @@ inseparably. Cross-reference: Paper~24 \S IV (Coulomb/HO asymmetry)
 for the second-order/scalar parallel; Paper~2 \S IV
 (\S\,\texttt{zeta3\_aside}) for the $K$-combination-rule implications.
 
+\paragraph{Motivic weight and operator order.}
+The operator-order discriminant---second-order operators produce
+$\pi^{\text{even}}$ content, first-order operators produce odd-zeta
+content---has a natural interpretation in the theory of mixed Tate
+motives over $\mathrm{Spec}(\mathbb{Z})$.  In this framework
+(Goncharov~\cite{goncharov1999}, Zagier~\cite{zagier1994}), the Riemann
+zeta value $\zeta_R(n)$ is a \emph{period} of the mixed Tate motive
+$\mathfrak{M}(n) = \mathbb{Q}(-n)$ of weight~$n$.  Even zeta values
+$\zeta_R(2k) = \text{rational} \times \pi^{2k}$ are periods of motives
+that factor through the de~Rham cohomology of even-dimensional compact
+manifolds (the Bernoulli formula).  Odd zeta values $\zeta_R(2k{+}1)$
+are periods of genuinely independent motives: they do not reduce to
+powers of~$\pi$, and $\zeta_R(3)$ in particular is irrational (Ap\'ery
+1978) and conjectured algebraically independent from~$\pi$.
+
+The GeoVac operator-order discriminant maps onto this motivic
+partition:
+\begin{center}
+\begin{tabular}{llll}
+  \hline
+  Operator order & Motivic weight & Transcendental class & Example \\
+  \hline
+  2nd ($\Delta_{\text{LB}},\; D^2$)
+    & even ($2k$) & $\zeta_R(2k) = \text{rat} \cdot \pi^{2k}$
+    & $\kappa$, $\mathrm{Vol}(S^3)$, $a_2$ \\
+  1st ($D$)
+    & odd ($2k{+}1$) & $\zeta_R(2k{+}1) \perp \mathbb{Q}(\pi)$
+    & D3: $\zeta_R(3)$ in Dirac Dirichlet \\
+  \hline
+\end{tabular}
+\end{center}
+
+At motivic weight~3, the appearance of $\zeta_R(3)$ in the GeoVac
+framework (Eq.~(\ref{eq:dirac_dirichlet_zeta3}), Dirac Dirichlet series
+on~$S^3$) belongs to a family of independent geometric sources that are
+all periods of the same motivic object $\mathbb{Q}(-3)$:
+\begin{enumerate}
+  \item \emph{Dirac operator on $S^3$} (this work, Track~D3): the
+    weight-$m$ subchannel of $g_m^{\text{Dirac}} = 2m^2 + 2m$ at
+    $s = d_{\max} = 4$ produces $2\zeta_R(3)$.
+  \item \emph{Hyperbolic 3-manifold volumes}: for arithmetic hyperbolic
+    manifolds $\mathbb{H}^3/\Gamma$, the volume is a $\mathbb{Q}$-linear
+    combination of values of the Bloch--Wigner dilogarithm, which are
+    periods of $\mathbb{Q}(-3)$ (Thurston; Goncharov~\cite{goncharov1999}).
+  \item \emph{Two-loop QED anomalous magnetic moment}: $\zeta_R(3)$
+    enters the electron $g{-}2$ at order $\alpha^2$ through irreducible
+    nested harmonic sums in Feynman parameter integrals
+    (Petermann 1957; Sommerfield 1957).
+  \item \emph{Chern--Simons theory on $S^3$ at two loops}: the
+    perturbative Chern--Simons invariant acquires $\zeta_R(3)$ at
+    the two-loop level.
+  \item \emph{Algebraic K-theory}: $\zeta_R(3)$ is a period of the
+    Borel regulator on $K_5(\mathbb{Z})$, connecting number theory to
+    the motivic cohomology of $\mathrm{Spec}(\mathbb{Z})$.
+\end{enumerate}
+The common thread is the three-sphere: items 1, 2, and~4 involve $S^3$
+or its quotients directly; item~3 involves products of massless
+propagators on~$S^3$ (after Wick rotation); item~5 is the number-theoretic
+shadow of the $S^3$ geometry via the Borel regulator.
+
+Zagier's dimension conjecture~\cite{zagier1994} predicts that the
+$\mathbb{Q}$-vector space of weight-$n$ multiple zeta values has
+dimension $d_n$ satisfying $d_0 = 1$, $d_1 = 0$, $d_2 = 1$,
+$d_n = d_{n-2} + d_{n-3}$.  At weight~3 this gives $d_3 = 1$:
+$\zeta_R(3)$ is the unique independent transcendental at that weight.
+This is consistent with the GeoVac finding that $\zeta_R(3)$ appears
+exactly once (in the Dirac sector, Tier~1) and is absent from the
+scalar sector at every order.
+
+The connection to QED loop order is structurally predicted by the
+motivic correspondence.  The T9 theorem
+(Eq.~(\ref{eq:zeta_d2}), $\zeta_{D^2}(s)$ involves only
+$\pi^{\text{even}}$) guarantees that $\zeta_R(3)$ cannot enter through
+any single trace of a squared propagator $D^{-2s}$---i.e., at one loop.
+It enters at two loops, where irreducible products of first-order
+propagators $D^{-1} \otimes D^{-1}$ produce odd motivic weight.  The
+operator-order discriminant thus determines the \emph{loop order} at
+which new transcendental content first appears: one loop accesses only
+even-weight motives ($\pi^{2k}$); two loops access odd-weight motives
+($\zeta_R(3)$, $\zeta_R(5)$, \ldots).
+
+This motivic interpretation refines the compactness thesis of
+Sec.~\ref{sec:intro}: exchange constants are not only projections from
+compact to non-compact geometry---they are \emph{periods} of specific
+mixed Tate motives, and the operator order on the compact space
+determines the motivic weight of the resulting transcendental content.
+
 \paragraph{Irreducibility of the Level~4 piecewise structure.}
 The piecewise-smooth $\rho$-dependence of $\mu(\rho,R)$ at Level~4
 is not a coordinate artifact: it cannot be resolved by geometric
@@ -2219,6 +2306,17 @@ geschlossenen kontinuierlichen Gruppe,''
 J.~Polchinski,
 \textit{String Theory}, Vol.~2: Superstring Theory and Beyond
 (Cambridge University Press, Cambridge, 1998).
+
+\bibitem{goncharov1999}
+A.~B.~Goncharov,
+``Volumes of hyperbolic manifolds and mixed Tate motives,''
+\textit{J. Amer. Math. Soc.} \textbf{12}, 569--618 (1999).
+
+\bibitem{zagier1994}
+D.~Zagier,
+``Values of zeta functions and their applications,''
+in \textit{First European Congress of Mathematics}, Vol.~II
+(Birkh\"auser, Basel, 1994), pp.~497--512.
 
 \end{thebibliography}
 
