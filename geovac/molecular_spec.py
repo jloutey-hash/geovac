@@ -63,6 +63,7 @@ class OrbitalBlock:
     center_nucleus_idx: int = -1
     partner_nucleus_idx: int = -1
     Z_nuc_center: float = 0.0
+    n_val_offset: int = 0
     # Track T3 (Dirac-on-S^3 Tier 2): optional spinor labels populated when
     # the parent MolecularSpec has relativistic=True.  Each entry is a
     # DiracLabel (see geovac.dirac_matrix_elements) carrying (n, kappa, 2*m_j).
@@ -448,6 +449,9 @@ def hydride_spec(
     n_H = _n_hydrogens(n_valence, cls.structure_type)
     n_bonds = n_H
     n_lone_pairs = (n_valence - n_bonds) // 2
+    # For frozen-core atoms, block n=1 maps to physical n = period.
+    # n_val_offset = period - 1 so physical_n = block_n + n_val_offset.
+    n_val_off = period - 1 if core_type != 'explicit' else 0
 
     formula = _hydride_formula(symbol, n_H)
 
@@ -511,6 +515,7 @@ def hydride_spec(
             pk_A=pk_A,
             pk_B=pk_B,
             Z_nuc_center=float(Z),
+            n_val_offset=n_val_off,
         ))
 
     # Lone pair blocks
@@ -525,6 +530,7 @@ def hydride_spec(
             pk_A=pk_A,
             pk_B=pk_B,
             Z_nuc_center=float(Z),
+            n_val_offset=n_val_off,
         ))
 
     # Description

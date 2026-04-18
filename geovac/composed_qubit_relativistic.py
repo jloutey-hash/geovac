@@ -375,10 +375,12 @@ def build_composed_hamiltonian_relativistic(
         l_min = getattr(blk, 'l_min', 0)
         center_labels = enumerate_dirac_labels(blk.max_n, l_min=l_min)
         Z_nuc = getattr(blk, 'Z_nuc_center', 0.0) or blk.Z_center
+        n_offset = getattr(blk, 'n_val_offset', 0)
         sub_blocks.append({
             'label': blk.label + '_center',
             'Z': blk.Z_center,
             'Z_nuc': Z_nuc,
+            'n_val_offset': n_offset,
             'dirac_labels': center_labels,
             'offset': q_offset,
             'n_orbitals': len(center_labels),
@@ -412,21 +414,45 @@ def build_composed_hamiltonian_relativistic(
     h1 = np.zeros((Q, Q))
     h1_so = np.zeros(Q)  # track SO separately for 1-norm reporting
 
+    # Cache screened ⟨1/r³⟩ per (Z_nuc, n, l) to avoid redundant solves
+    _screened_r3_cache: Dict[tuple, float] = {}
+
     for sb in sub_blocks:
         Z_sb = float(sb['Z'])
         Z_so = float(sb['Z_nuc'])
         off = sb['offset']
+        n_offset = sb.get('n_val_offset', 0)
+        use_screened = (abs(Z_so - Z_sb) > 0.5) and (n_offset > 0)  # frozen-core only
         for i, lab in enumerate(sb['dirac_labels']):
             # Non-rel kinetic-plus-Coulomb: -Z_eff²/(2n²)
             h1[off + i, off + i] = -Z_sb ** 2 / (2.0 * lab.n_fock ** 2)
-            # SO coupling: the operator prefactor uses Z_nuc (nuclear
-            # potential gradient dV/dr ~ Z_nuc/r²) while the wavefunction
-            # ⟨1/r³⟩ uses Z_eff (orbital shape set by core screening).
-            so_expr = so_diagonal_matrix_element(
-                lab.n_fock, lab.kappa, Z=Integer(int(round(Z_so))),
-                alpha=sp.Float(alpha_num),
-                Z_wfn=Integer(int(round(Z_sb))))
-            so_val = float(so_expr)
+
+            l_val = abs(lab.kappa + 1) if lab.kappa < 0 else lab.kappa
+            if l_val == 0:
+                # Kramers cancellation: SO = 0 for s-states
+                so_val = 0.0
+            elif use_screened:
+                # Frozen-core: use ⟨(1/r)dV/dr⟩ from screened potential.
+                # Physical n = block n + n_val_offset (e.g., Sr block n=2
+                # is physical n=6 because [Kr] core fills through n=4).
+                n_phys = lab.n_fock + n_offset
+                cache_key = (int(round(Z_so)), n_phys, l_val)
+                if cache_key not in _screened_r3_cache:
+                    from geovac.neon_core import screened_xi_so
+                    _screened_r3_cache[cache_key] = screened_xi_so(
+                        int(round(Z_so)), n_phys, l_val,
+                        alpha=alpha_num, n_grid=6000)
+                xi_so = _screened_r3_cache[cache_key]
+                ls_val = -(lab.kappa + 1) / 2.0
+                so_val = xi_so * ls_val
+            else:
+                # No frozen core: use standard analytic formula
+                so_expr = so_diagonal_matrix_element(
+                    lab.n_fock, lab.kappa, Z=Integer(int(round(Z_so))),
+                    alpha=sp.Float(alpha_num),
+                    Z_wfn=Integer(int(round(Z_sb))))
+                so_val = float(so_expr)
+
             h1[off + i, off + i] += so_val
             h1_so[off + i] = so_val
 

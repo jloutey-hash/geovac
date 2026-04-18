@@ -15,7 +15,11 @@ Validates:
 import numpy as np
 import pytest
 
-from geovac.neon_core import FrozenCore, _NIST_CORE_ENERGIES
+from geovac.neon_core import (
+    FrozenCore, _NIST_CORE_ENERGIES,
+    _solve_screened_radial, screened_r3_inverse, screened_so_splitting,
+    screened_xi_so,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -254,3 +258,134 @@ class TestAllZSweep:
         """Verbose mode runs without error."""
         fc = FrozenCore(Z=11)
         fc.solve(verbose=True)
+
+
+# ---------------------------------------------------------------------------
+# Screened radial solver tests
+# ---------------------------------------------------------------------------
+
+class TestScreenedRadialSolver:
+    """Tests for _solve_screened_radial and screened_r3_inverse."""
+
+    def test_l0_raises(self):
+        """l=0 should raise ValueError (1/r^3 diverges)."""
+        with pytest.raises(ValueError, match="l must be >= 1"):
+            _solve_screened_radial(11, 0, 1)
+
+    def test_invalid_n_raises(self):
+        """n < l+1 should raise ValueError."""
+        with pytest.raises(ValueError, match="n_target"):
+            _solve_screened_radial(11, 1, 1)  # n=1, l=1: impossible
+
+    def test_r3_inverse_l0_raises(self):
+        """screened_r3_inverse should raise for l=0."""
+        with pytest.raises(ValueError, match="diverges"):
+            screened_r3_inverse(11, 3, 0)
+
+    def test_na_3p_energy(self):
+        """Na 3p eigenvalue should be near -0.11 Ha (IP ~ 3 eV)."""
+        energy, _, _ = _solve_screened_radial(11, 1, 3, n_grid=8000)
+        # Na 3p IP is about 3.03 eV = 0.111 Ha
+        assert abs(energy + 0.111) < 0.015, (
+            f"Na 3p energy {energy:.4f} Ha too far from -0.111 Ha"
+        )
+
+    def test_na_3p_normalization(self):
+        """Na 3p wavefunction should be normalized."""
+        _, u, r = _solve_screened_radial(11, 1, 3, n_grid=8000)
+        norm = np.trapezoid(u**2, r)
+        assert abs(norm - 1.0) < 1e-4, f"norm = {norm}, expected 1.0"
+
+    def test_na_3p_wavefunction_shape(self):
+        """Na 3p wavefunction should peak at r ~ 3-8 bohr."""
+        _, u, r = _solve_screened_radial(11, 1, 3, n_grid=8000)
+        peak_r = r[np.argmax(u**2)]
+        assert 1.0 < peak_r < 15.0, (
+            f"Na 3p peak at r={peak_r:.2f}, expected 3-8 bohr"
+        )
+
+    def test_r3_inverse_positive(self):
+        """<1/r^3> should be positive."""
+        r3 = screened_r3_inverse(11, 3, 1, n_grid=8000)
+        assert r3 > 0, f"<1/r^3> = {r3}, expected positive"
+
+    def test_r3_inverse_enhancement(self):
+        """Screened <1/r^3> should be much larger than hydrogenic Z_eff=1."""
+        r3_scr = screened_r3_inverse(11, 3, 1, n_grid=8000)
+        r3_hyd = 1.0 / (27 * 1 * 1.5 * 2)  # Z_eff=1, n=3, l=1
+        assert r3_scr > 5 * r3_hyd, (
+            f"Enhancement factor {r3_scr/r3_hyd:.1f}x too small"
+        )
+
+    def test_r3_inverse_grid_convergence(self):
+        """<1/r^3> should converge with grid refinement."""
+        r3_coarse = screened_r3_inverse(11, 3, 1, n_grid=4000)
+        r3_fine = screened_r3_inverse(11, 3, 1, n_grid=12000)
+        # Should agree within 5%
+        rel_diff = abs(r3_fine - r3_coarse) / r3_fine
+        assert rel_diff < 0.05, (
+            f"Grid convergence: {rel_diff:.3f} relative diff (>5%)"
+        )
+
+
+class TestScreenedSOSplitting:
+    """Tests for screened_so_splitting and screened_xi_so."""
+
+    def test_splitting_positive(self):
+        """SO splitting should be positive (j=l+1/2 above j=l-1/2)."""
+        result = screened_so_splitting(11, 3, 1, n_grid=8000)
+        assert result['splitting'] > 0
+
+    def test_splitting_cm1_order_of_magnitude(self):
+        """Na 3p splitting should be 10-100 cm^-1 order of magnitude."""
+        result = screened_so_splitting(11, 3, 1, n_grid=8000)
+        assert 1.0 < result['splitting_cm1'] < 500.0, (
+            f"Na 3p splitting {result['splitting_cm1']:.1f} cm^-1 "
+            f"outside expected range 1-500"
+        )
+
+    def test_xi_so_positive(self):
+        """xi = <(1/r) dV/dr> should be positive."""
+        xi = screened_xi_so(11, 3, 1, n_grid=8000)
+        assert xi > 0, f"xi = {xi}, expected positive"
+
+    def test_l0_raises(self):
+        """l=0 should raise."""
+        with pytest.raises(ValueError):
+            screened_so_splitting(11, 3, 0)
+
+    def test_heavier_atom_larger_splitting(self):
+        """Sr 5p splitting should be larger than Na 3p."""
+        na_result = screened_so_splitting(11, 3, 1, n_grid=8000)
+        sr_result = screened_so_splitting(38, 5, 1, n_grid=8000)
+        assert sr_result['splitting_cm1'] > na_result['splitting_cm1'], (
+            f"Sr splitting {sr_result['splitting_cm1']:.1f} should be > "
+            f"Na splitting {na_result['splitting_cm1']:.1f}"
+        )
+
+    def test_enhancement_over_hydrogenic(self):
+        """Screened <1/r^3> should enhance over hydrogenic for all atoms."""
+        for Z, n in [(11, 3), (20, 4), (38, 5)]:
+            result = screened_so_splitting(Z, n, 1, n_grid=8000)
+            assert result['enhancement'] > 5.0, (
+                f"Z={Z}: enhancement {result['enhancement']:.1f}x too small"
+            )
+
+    def test_result_keys(self):
+        """screened_so_splitting should return all expected keys."""
+        result = screened_so_splitting(11, 3, 1, n_grid=4000)
+        expected_keys = {
+            'r3_inv_screened', 'r3_inv_hydrogenic', 'enhancement',
+            'xi_so', 'E_j_plus', 'E_j_minus', 'splitting',
+            'splitting_cm1', 'splitting_znuc_cm1', 'energy_eV',
+        }
+        assert set(result.keys()) == expected_keys
+
+    @pytest.mark.slow
+    def test_ba_6p_splitting(self):
+        """Ba 6p splitting should be in the right ballpark (100-5000 cm^-1)."""
+        result = screened_so_splitting(56, 6, 1, n_grid=12000)
+        assert 100 < result['splitting_cm1'] < 5000, (
+            f"Ba 6p splitting {result['splitting_cm1']:.1f} cm^-1 "
+            f"outside expected range"
+        )

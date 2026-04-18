@@ -8,7 +8,7 @@ cores).
 Supported core types:
   [Ne]     (10 electrons): Z=11-18 (Na through Ar)
   [Ar]     (18 electrons): Z=19-20 (K, Ca) and Z=21-30 (transition metals)
-  [Ar]3d¹⁰ (28 electrons): Z=31-36 (Ga through Kr)
+  [Ar]3d10 (28 electrons): Z=31-36 (Ga through Kr)
   [Kr]     (36 electrons): Z=37-38 (Rb, Sr)             [Sprint 3, v2.12.0]
   [Xe]     (54 electrons): Z=55-56 (Cs, Ba)             [Sprint 3, v2.12.0]
 
@@ -24,8 +24,8 @@ The hydrogenic wavefunctions use Z_eff = n * zeta for each shell,
 where zeta are the Clementi-Raimondi Slater orbital exponents.
 
 References:
-  - Clementi & Raimondi, J. Chem. Phys. 38, 2686 (1963) — Z=2-36
-  - Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967) — Z=37-86
+  - Clementi & Raimondi, J. Chem. Phys. 38, 2686 (1963) -- Z=2-36
+  - Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967) -- Z=37-86
   - NIST Atomic Spectra Database (core energies)
   - Paper 17, Section III (Z_eff screening usage in composed geometries)
 """
@@ -34,7 +34,8 @@ import numpy as np
 from scipy.special import genlaguerre
 from scipy.interpolate import CubicSpline
 from scipy.integrate import cumulative_trapezoid
-from typing import Optional, Union
+from scipy.linalg import eigh_tridiagonal
+from typing import Optional, Tuple, Union
 
 
 # ---------------------------------------------------------------------------
@@ -43,7 +44,7 @@ from typing import Optional, Union
 # Source: Clementi & Raimondi, J. Chem. Phys. 38, 2686 (1963), Table II
 # ---------------------------------------------------------------------------
 
-# [Ne] core (10 electrons): 1s² 2s² 2p⁶
+# [Ne] core (10 electrons): 1s2 2s2 2p6
 _CLEMENTI_ZETA_NE = {
     # Z: (zeta_1s, zeta_2s, zeta_2p)
     11: (10.6259, 6.5714, 6.8018),
@@ -56,7 +57,7 @@ _CLEMENTI_ZETA_NE = {
     18: (17.5075, 12.2304, 14.0082),
 }
 
-# [Ar] core (18 electrons): 1s² 2s² 2p⁶ 3s² 3p⁶
+# [Ar] core (18 electrons): 1s2 2s2 2p6 3s2 3p6
 _CLEMENTI_ZETA_AR = {
     # Z: (zeta_1s, zeta_2s, zeta_2p, zeta_3s, zeta_3p)
     # Clementi & Raimondi, J. Chem. Phys. 38, 2686 (1963)
@@ -75,7 +76,7 @@ _CLEMENTI_ZETA_AR = {
     30: (29.3245, 21.8278, 26.0979, 16.2195, 18.6670),
 }
 
-# [Ar]3d¹⁰ core (28 electrons): 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰
+# [Ar]3d10 core (28 electrons): 1s2 2s2 2p6 3s2 3p6 3d10
 _CLEMENTI_ZETA_AR3D10 = {
     # Z: (zeta_1s, zeta_2s, zeta_2p, zeta_3s, zeta_3p, zeta_3d)
     31: (30.4769, 21.8412, 24.5607, 16.8963, 17.3682, 13.0686),
@@ -86,30 +87,30 @@ _CLEMENTI_ZETA_AR3D10 = {
     36: (35.4095, 25.8637, 29.5964, 21.0325, 22.2610, 18.0860),
 }
 
-# [Kr] core (36 electrons): 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s² 4p⁶
+# [Kr] core (36 electrons): 1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6
 # Sprint 3 Track HA-A (v2.12.0): fifth-row s-block support for Sunaga 2025
 # comparison (SrH).
 # Source: Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967),
 # Table III (single-zeta Hartree-Fock orbital exponents for neutral atoms).
 _CLEMENTI_ZETA_KR = {
     # Z: (zeta_1s, zeta_2s, zeta_2p, zeta_3s, zeta_3p, zeta_3d, zeta_4s, zeta_4p)
-    # Rb (Z=37): [Kr] 5s¹ — only core orbitals listed here
+    # Rb (Z=37): [Kr] 5s1
     37: (36.3242, 26.7156, 30.5810, 21.8410, 23.2214, 18.9867, 11.5472, 11.8892),
-    # Sr (Z=38): [Kr] 5s² — only core orbitals listed here
+    # Sr (Z=38): [Kr] 5s2
     38: (37.3108, 27.5192, 31.5922, 22.6526, 24.0714, 19.9645, 12.4213, 12.7489),
 }
 
-# [Xe] core (54 electrons): [Kr] + 4d¹⁰ 5s² 5p⁶
+# [Xe] core (54 electrons): [Kr] + 4d10 5s2 5p6
 # Sprint 3 Track HA-A (v2.12.0): sixth-row s-block support for Sunaga 2025
 # comparison (BaH).
 # Source: Clementi, Raimondi & Reinhardt, J. Chem. Phys. 47, 1300 (1967),
 # Table III.
 _CLEMENTI_ZETA_XE = {
     # Z: (z1s, z2s, z2p, z3s, z3p, z3d, z4s, z4p, z4d, z5s, z5p)
-    # Cs (Z=55): [Xe] 6s¹ — only core orbitals listed here
+    # Cs (Z=55): [Xe] 6s1
     55: (54.2678, 42.0318, 46.4901, 36.9232, 38.4598, 33.2295, 25.2794, 25.5744,
          20.7221, 13.1181, 12.3118),
-    # Ba (Z=56): [Xe] 6s² — only core orbitals listed here
+    # Ba (Z=56): [Xe] 6s2
     56: (55.2540, 42.9170, 47.5009, 37.9057, 39.4558, 34.2470, 26.1764, 26.4651,
          21.6420, 14.0101, 13.1947),
 }
@@ -127,58 +128,58 @@ _CLEMENTI_ZETA = _CLEMENTI_ZETA_NE
 
 _NIST_CORE_ENERGIES_NE = {
     # [Ne]-like ions (10 electrons)
-    11: -161.859,    # Na⁺
-    12: -199.615,    # Mg²⁺
-    13: -241.877,    # Al³⁺
-    14: -288.854,    # Si⁴⁺
-    15: -340.719,    # P⁵⁺
-    16: -397.505,    # S⁶⁺
-    17: -459.482,    # Cl⁷⁺
+    11: -161.859,    # Na+
+    12: -199.615,    # Mg2+
+    13: -241.877,    # Al3+
+    14: -288.854,    # Si4+
+    15: -340.719,    # P5+
+    16: -397.505,    # S6+
+    17: -459.482,    # Cl7+
     18: -526.818,    # Ar (neutral, same as Ne-like with Z=18)
 }
 
 _NIST_CORE_ENERGIES_AR = {
     # [Ar]-like ions (18 electrons)
     # Source: Clementi & Roetti, At. Data Nucl. Data Tables 14, 177 (1974)
-    19: -599.02,     # K⁺
-    20: -676.05,     # Ca²⁺
+    19: -599.02,     # K+
+    20: -676.05,     # Ca2+
     # Transition metals Z=21-30 (Track CZ)
-    21: -759.74,     # Sc³⁺
-    22: -848.41,     # Ti⁴⁺
-    23: -942.88,     # V⁵⁺
-    24: -1043.36,    # Cr⁶⁺
-    25: -1149.87,    # Mn⁷⁺
-    26: -1262.44,    # Fe⁸⁺
-    27: -1381.41,    # Co⁹⁺
-    28: -1506.87,    # Ni¹⁰⁺
-    29: -1638.96,    # Cu¹¹⁺
-    30: -1777.85,    # Zn¹²⁺
+    21: -759.74,     # Sc3+
+    22: -848.41,     # Ti4+
+    23: -942.88,     # V5+
+    24: -1043.36,    # Cr6+
+    25: -1149.87,    # Mn7+
+    26: -1262.44,    # Fe8+
+    27: -1381.41,    # Co9+
+    28: -1506.87,    # Ni10+
+    29: -1638.96,    # Cu11+
+    30: -1777.85,    # Zn12+
 }
 
 _NIST_CORE_ENERGIES_AR3D10 = {
-    # [Ar]3d¹⁰-like ions (28 electrons)
-    31: -1923.26,    # Ga³⁺
-    32: -2075.36,    # Ge⁴⁺
-    33: -2234.24,    # As⁵⁺
-    34: -2399.87,    # Se⁶⁺
-    35: -2572.44,    # Br⁷⁺
-    36: -2752.06,    # Kr⁸⁺
+    # [Ar]3d10-like ions (28 electrons)
+    31: -1923.26,    # Ga3+
+    32: -2075.36,    # Ge4+
+    33: -2234.24,    # As5+
+    34: -2399.87,    # Se6+
+    35: -2572.44,    # Br7+
+    36: -2752.06,    # Kr8+
 }
 
 _NIST_CORE_ENERGIES_KR = {
     # [Kr]-like ions (36 electrons)
     # Source: Clementi & Roetti, At. Data Nucl. Data Tables 14, 177 (1974),
-    # Hartree-Fock total energies of Rb⁺, Sr²⁺
-    37: -2938.36,    # Rb⁺
-    38: -3131.54,    # Sr²⁺
+    # Hartree-Fock total energies of Rb+, Sr2+
+    37: -2938.36,    # Rb+
+    38: -3131.54,    # Sr2+
 }
 
 _NIST_CORE_ENERGIES_XE = {
     # [Xe]-like ions (54 electrons)
     # Source: Clementi & Roetti, At. Data Nucl. Data Tables 14, 177 (1974),
-    # Hartree-Fock total energies of Cs⁺, Ba²⁺
-    55: -7553.93,    # Cs⁺
-    56: -7883.54,    # Ba²⁺
+    # Hartree-Fock total energies of Cs+, Ba2+
+    55: -7553.93,    # Cs+
+    56: -7883.54,    # Ba2+
 }
 
 # Unified lookup
@@ -230,11 +231,11 @@ class FrozenCore:
     hydrogenic wavefunctions with Clementi-Raimondi orbital exponents.
 
     Supported core types:
-      'Ne'     — 10 electrons (1s² 2s² 2p⁶), Z=11-18
-      'Ar'     — 18 electrons (+ 3s² 3p⁶), Z=19-20 (and Z=21-30 TM)
-      'Ar3d10' — 28 electrons (+ 3d¹⁰), Z=31-36
-      'Kr'     — 36 electrons (+ 4s² 4p⁶), Z=37-38
-      'Xe'     — 54 electrons (+ 4d¹⁰ 5s² 5p⁶), Z=55-56
+      'Ne'     -- 10 electrons (1s2 2s2 2p6), Z=11-18
+      'Ar'     -- 18 electrons (+ 3s2 3p6), Z=19-20 (and Z=21-30 TM)
+      'Ar3d10' -- 28 electrons (+ 3d10), Z=31-36
+      'Kr'     -- 36 electrons (+ 4s2 4p6), Z=37-38
+      'Xe'     -- 54 electrons (+ 4d10 5s2 5p6), Z=55-56
 
     Usage
     -----
@@ -260,7 +261,7 @@ class FrozenCore:
         if smaller than the default 20.0.
     """
 
-    # Core type → (n_core_electrons, zeta_table, energy_table)
+    # Core type -> (n_core_electrons, zeta_table, energy_table)
     _CORE_REGISTRY = {
         'Ne': (10, _CLEMENTI_ZETA_NE, _NIST_CORE_ENERGIES_NE),
         'Ar': (18, _CLEMENTI_ZETA_AR, _NIST_CORE_ENERGIES_AR),
@@ -354,7 +355,7 @@ class FrozenCore:
         )
 
     def _build_density_ar3d10(self, r: np.ndarray) -> np.ndarray:
-        """Build [Ar]3d¹⁰ core density (28 electrons)."""
+        """Build [Ar]3d10 core density (28 electrons)."""
         z1s, z2s, z2p, z3s, z3p, z3d = self._zeta_table[self.Z]
         R_1s = _hydrogenic_radial(1, 0, 1 * z1s, r)
         R_2s = _hydrogenic_radial(2, 0, 2 * z2s, r)
@@ -561,3 +562,350 @@ class FrozenCore:
         """The cumulative core electron count on the internal grid."""
         self._check_solved()
         return self._N_core
+
+
+# ---------------------------------------------------------------------------
+# Screened radial solver for valence <1/r^3>
+# ---------------------------------------------------------------------------
+
+# Physical fine-structure constant (CODATA 2018)
+_ALPHA_PHYSICAL = 7.2973525693e-3
+
+
+def _solve_screened_radial(
+    Z: int,
+    l: int,
+    n_target: int,
+    core_type: Optional[str] = None,
+    n_grid: int = 12000,
+    r_max: float = 80.0,
+) -> Tuple[float, np.ndarray, np.ndarray]:
+    """Solve the radial Schrodinger equation with Z_eff(r) screening.
+
+    Uses a uniform radial grid and second-order finite differences:
+
+        [-1/2 d^2u/dr^2 + V_eff(r) u] = E u
+
+    where u(r) = r*R(r) is the reduced radial wavefunction,
+    V_eff(r) = -Z_eff(r)/r + l(l+1)/(2r^2), and Z_eff(r) comes from
+    the FrozenCore screening profile.
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+    l : int
+        Orbital angular momentum quantum number (must be >= 1).
+    n_target : int
+        Principal quantum number of the desired state. The solver
+        returns the (n_target - l - 1)th eigenstate (counting radial
+        nodes n_r = 0, 1, 2, ...).
+    core_type : str, optional
+        Core type for FrozenCore. Auto-detected if None.
+    n_grid : int
+        Number of grid points.
+    r_max : float
+        Maximum radius in bohr.
+
+    Returns
+    -------
+    energy : float
+        Eigenvalue in Hartree.
+    u_grid : ndarray
+        Reduced radial wavefunction u(r) = r*R(r) on the r-grid,
+        normalized so that integral |u|^2 dr = 1.
+    r_grid : ndarray
+        The radial grid points.
+    """
+    if l < 1:
+        raise ValueError("l must be >= 1 for screened radial solver "
+                         "(l=0 has divergent 1/r^3)")
+    n_r_target = n_target - l - 1  # number of radial nodes
+    if n_r_target < 0:
+        raise ValueError(f"n_target={n_target} < l+1={l+1}: no such state")
+
+    # Build FrozenCore and get Z_eff(r)
+    fc = FrozenCore(Z=Z, core_type=core_type)
+    fc.solve()
+
+    # Uniform radial grid starting just above zero.
+    # The l(l+1)/(2r^2) centrifugal barrier keeps u(r) ~ r^{l+1} near
+    # the origin, so a small but nonzero r_min is safe for l >= 1.
+    h = r_max / n_grid
+    r = np.linspace(h, r_max, n_grid)
+
+    # Z_eff on the grid
+    z_eff_vals = fc.z_eff(r)
+
+    # Effective potential V_eff(r) = -Z_eff(r)/r + l(l+1)/(2r^2)
+    v_eff = -z_eff_vals / r + l * (l + 1) / (2.0 * r**2)
+
+    # Standard FD Hamiltonian: H u = [-1/2 d^2/dr^2 + V_eff] u = E u
+    # Tridiagonal with:
+    #   diagonal:     1/h^2 + V_eff[i]
+    #   off-diagonal: -1/(2h^2)
+    diag = 1.0 / h**2 + v_eff
+    offdiag = np.full(n_grid - 1, -1.0 / (2.0 * h**2))
+
+    # Solve for the lowest few eigenvalues
+    n_eigs = n_r_target + 5
+    n_eigs = min(n_eigs, n_grid - 2)
+
+    evals, evecs = eigh_tridiagonal(
+        diag, offdiag,
+        select='i', select_range=(0, n_eigs - 1),
+    )
+
+    if n_r_target >= len(evals):
+        raise ValueError(
+            f"Could not find state with n_r={n_r_target} radial nodes. "
+            f"Only {len(evals)} eigenvalues found."
+        )
+    energy = evals[n_r_target]
+    u_vec = evecs[:, n_r_target]
+
+    # Normalize: integral |u|^2 dr = 1
+    norm_sq = np.trapezoid(u_vec**2, r)
+    if norm_sq > 0:
+        u_vec /= np.sqrt(norm_sq)
+
+    return energy, u_vec, r
+
+
+def screened_r3_inverse(
+    Z: int,
+    n: int,
+    l: int,
+    core_type: Optional[str] = None,
+    n_grid: int = 12000,
+    r_max: float = 80.0,
+) -> float:
+    """Compute <1/r^3> for a valence electron in a screened potential.
+
+    Solves the radial Schrodinger equation with the FrozenCore Z_eff(r)
+    screening profile and computes the expectation value of 1/r^3 using
+    the resulting wavefunction.
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+    n : int
+        Principal quantum number of the valence state.
+    l : int
+        Orbital angular momentum (must be >= 1; l=0 diverges).
+    core_type : str, optional
+        Core type for FrozenCore. Auto-detected if None.
+    n_grid : int
+        Number of radial grid points.
+    r_max : float
+        Maximum radius in bohr.
+
+    Returns
+    -------
+    float
+        <1/r^3> in atomic units (bohr^{-3}).
+
+    Raises
+    ------
+    ValueError
+        If l=0 (divergent) or n < l+1 (invalid state).
+    """
+    if l < 1:
+        raise ValueError(
+            "<1/r^3> diverges for l=0. Spin-orbit has Kramers "
+            "cancellation at l=0 so this is never needed."
+        )
+
+    energy, u_vec, r = _solve_screened_radial(
+        Z, l, n, core_type=core_type,
+        n_grid=n_grid, r_max=r_max,
+    )
+
+    # <1/r^3> = integral |R(r)|^2 / r^3 * r^2 dr
+    #         = integral |u(r)|^2 / r^3 dr
+    # where u = r*R, so |R|^2 = |u|^2/r^2
+    integrand = u_vec**2 / r**3
+    result = np.trapezoid(integrand, r)
+
+    return result
+
+
+def screened_xi_so(
+    Z: int,
+    n: int,
+    l: int,
+    core_type: Optional[str] = None,
+    alpha: float = _ALPHA_PHYSICAL,
+    n_grid: int = 12000,
+) -> float:
+    """Compute the SO coupling constant xi = <(1/r) dV/dr> for screened potential.
+
+    For V(r) = -Z_eff(r)/r, the spin-orbit coupling function is:
+        xi(r) = (alpha^2 / 2) * (1/r) * dV/dr
+
+    where dV/dr = Z_eff(r)/r^2 - Z_eff'(r)/r (chain rule on -Z_eff/r).
+
+    This returns <xi>_{nl} = integral |R_{nl}|^2 * xi(r) * r^2 dr
+    computed with the screened wavefunction.
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+    n, l : int
+        Quantum numbers (l >= 1).
+    core_type : str, optional
+        Core type for FrozenCore.
+    alpha : float
+        Fine-structure constant.
+    n_grid : int
+        Number of grid points.
+
+    Returns
+    -------
+    float
+        <xi>_{nl} in Hartree. Multiply by L.S eigenvalue to get H_SO.
+    """
+    if l < 1:
+        raise ValueError("l must be >= 1")
+
+    energy, u_vec, r = _solve_screened_radial(
+        Z, l, n, core_type=core_type, n_grid=n_grid,
+    )
+    h = r[1] - r[0]
+
+    # Get Z_eff(r) on the grid
+    fc = FrozenCore(Z=Z, core_type=core_type)
+    fc.solve()
+    z_eff_r = fc.z_eff(r)
+
+    # dZ_eff/dr via finite differences (Z_eff decreases with r, so dZ/dr < 0)
+    dz_dr = np.gradient(z_eff_r, r)
+
+    # V(r) = -Z_eff(r)/r
+    # dV/dr = Z_eff(r)/r^2 - Z_eff'(r)/r
+    # (1/r) dV/dr = Z_eff(r)/r^3 - Z_eff'(r)/r^2
+    one_over_r_dVdr = z_eff_r / r**3 - dz_dr / r**2
+
+    # xi(r) = (alpha^2 / 2) * (1/r) dV/dr
+    xi_r = alpha**2 / 2.0 * one_over_r_dVdr
+
+    # <xi> = integral |u|^2 / r^2 * xi(r) * r^2 dr = integral |u|^2 * xi(r) / 1 dr
+    # Wait: |R|^2 r^2 dr = |u|^2/r^2 * r^2 dr = |u|^2 dr
+    # So <xi> = integral |u|^2 * xi(r) dr... no.
+    # <xi> = integral R*(r) * xi(r) * R(r) * r^2 dr
+    #       = integral |R|^2 * xi(r) * r^2 dr
+    #       = integral (|u|^2/r^2) * xi(r) * r^2 dr
+    #       = integral |u|^2 * xi(r) dr
+    result = np.trapezoid(u_vec**2 * xi_r, r)
+
+    return result
+
+
+def screened_so_splitting(
+    Z: int,
+    n: int,
+    l: int,
+    core_type: Optional[str] = None,
+    alpha: float = _ALPHA_PHYSICAL,
+    n_grid: int = 12000,
+) -> dict:
+    """Compute spin-orbit splitting using screened <1/r^3>.
+
+    The SO Hamiltonian is:
+        H_SO = (Z_nuc * alpha^2 / 2) * L.S * <1/r^3>_screened
+
+    where <1/r^3>_screened is computed from the FrozenCore-screened
+    radial wavefunction.
+
+    L.S eigenvalues:
+        j = l + 1/2:  L.S = l/2
+        j = l - 1/2:  L.S = -(l+1)/2
+
+    The splitting between j=l+1/2 and j=l-1/2 is:
+        Delta = (Z_nuc * alpha^2 / 2) * (2l+1)/2 * <1/r^3>
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge (= Z_nuc in the SO operator).
+    n : int
+        Principal quantum number.
+    l : int
+        Orbital angular momentum (>= 1).
+    core_type : str, optional
+        Core type for FrozenCore. Auto-detected if None.
+    alpha : float
+        Fine-structure constant.
+    n_grid : int
+        Number of radial grid points.
+
+    Returns
+    -------
+    dict with keys:
+        'r3_inv_screened' : float -- <1/r^3> from screened wavefunction
+        'r3_inv_hydrogenic' : float -- hydrogenic <1/r^3> at Z_eff_asymptotic
+        'enhancement' : float -- ratio screened/hydrogenic
+        'E_j_plus' : float -- SO energy for j = l + 1/2 (Ha)
+        'E_j_minus' : float -- SO energy for j = l - 1/2 (Ha)
+        'splitting' : float -- E(j+) - E(j-) (Ha)
+        'splitting_cm1' : float -- splitting in cm^{-1}
+        'energy_eV' : float -- eigenvalue of the screened radial solver (eV)
+    """
+    if l < 1:
+        raise ValueError("l must be >= 1 for SO splitting")
+
+    # Screened <1/r^3>
+    r3_inv = screened_r3_inverse(Z, n, l, core_type=core_type, n_grid=n_grid)
+
+    # Get eigenvalue too
+    energy, _, _ = _solve_screened_radial(Z, l, n, core_type=core_type,
+                                          n_grid=n_grid)
+
+    # Full screened SO parameter xi = <(1/r) dV/dr> (alpha^2/2 included)
+    xi_val = screened_xi_so(Z, n, l, core_type=core_type,
+                            alpha=alpha, n_grid=n_grid)
+
+    # Asymptotic Z_eff for hydrogenic comparison
+    fc = FrozenCore(Z=Z, core_type=core_type)
+    fc.solve()
+    z_eff_asym = fc.z_eff(50.0)  # far from nucleus
+
+    # Hydrogenic <1/r^3> at the asymptotic Z_eff
+    r3_inv_hyd = z_eff_asym**3 / (n**3 * l * (l + 0.5) * (l + 1))
+
+    # --- Method 1: Z_nuc * <1/r^3> (approximate, overcounts) ---
+    prefactor_znuc = Z * alpha**2 / 2.0 * r3_inv
+
+    # --- Method 2: <(1/r) dV/dr> (correct screened potential) ---
+    # xi_val already includes alpha^2/2
+
+    # L.S eigenvalues
+    ls_plus = l / 2.0           # j = l + 1/2
+    ls_minus = -(l + 1) / 2.0   # j = l - 1/2
+
+    # Use the correct screened xi for the splittings
+    e_j_plus = xi_val * ls_plus
+    e_j_minus = xi_val * ls_minus
+    splitting = e_j_plus - e_j_minus  # = xi_val * (2l+1)/2
+
+    # Also compute the Z_nuc*<1/r^3> version for comparison
+    splitting_znuc = prefactor_znuc * (2 * l + 1) / 2.0
+
+    # Conversion: 1 Ha = 219474.63 cm^{-1}
+    ha_to_cm1 = 219474.63
+    ha_to_ev = 27.211386
+
+    return {
+        'r3_inv_screened': r3_inv,
+        'r3_inv_hydrogenic': r3_inv_hyd,
+        'enhancement': r3_inv / r3_inv_hyd if r3_inv_hyd > 0 else float('inf'),
+        'xi_so': xi_val,
+        'E_j_plus': e_j_plus,
+        'E_j_minus': e_j_minus,
+        'splitting': splitting,
+        'splitting_cm1': splitting * ha_to_cm1,
+        'splitting_znuc_cm1': splitting_znuc * ha_to_cm1,
+        'energy_eV': energy * ha_to_ev,
+    }
