@@ -35,18 +35,32 @@ def compute_T_k(k, s=4):
 
 
 def compute_S_min_with_tail(n_terms=5000, s=4):
-    """Compute S_min = sum_{k=1}^n_terms T(k)^2, with tail correction."""
-    S = mpmath.mpf(0)
-    for k in range(1, n_terms + 1):
-        S += compute_T_k(k, s)**2
+    """Compute S_min = sum_{k=1}^inf T(k)^2 via mpmath.nsum Levin u-transform.
 
-    # Tail estimate: T(k) ~ 2/(k+3/2)^2 for large k
-    # T(k)^2 ~ 4/(k+3/2)^4 - 2/(k+3/2)^6 + 1/4*(k+3/2)^8
-    a_tail = mpmath.mpf(n_terms + 1) + mpmath.mpf(3) / 2
-    tail = (4 * mpmath.hurwitz(4, a_tail)
-            - 2 * mpmath.hurwitz(6, a_tail)
-            + mpmath.mpf(1) / 4 * mpmath.hurwitz(8, a_tail))
-    return S, S + tail, tail
+    Historical note (erratum): an earlier version of this tail formula
+    used (4*h(4,a) - 2*h(6,a) + (1/4)*h(8,a)), assuming T(k) ~ 2/a^2.
+    But the actual leading asymptotic is T(k) ~ 2/a (so T(k)^2 ~ 4/a^2).
+    The buggy tail was off by a factor a^2 ~ 1e8 at n_terms=10000,
+    producing S_min ~ 2.47954 (wrong at the 4th decimal). Three
+    independent methods (direct+explicit tail, Euler-Maclaurin 26-term,
+    Levin) agree at >= 80 digits on the correct value:
+        S_min = 2.47993693803422255441357950082938214468...
+    See debug/smin_verification_memo.md for the full audit.
+
+    n_terms is retained as a signature-compat parameter; it controls
+    only the partial-sum return value, not S_min itself.
+    """
+    def term(k):
+        return compute_T_k(int(k), s) ** 2
+
+    S_corrected = mpmath.nsum(term, [1, mpmath.inf], method='levin')
+
+    # Partial sum for compatibility with existing callers.
+    S_partial = mpmath.mpf(0)
+    for k in range(1, int(n_terms) + 1):
+        S_partial += compute_T_k(k, s) ** 2
+    tail = S_corrected - S_partial
+    return S_partial, S_corrected, tail
 
 
 print("=" * 70)

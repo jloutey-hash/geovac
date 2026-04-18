@@ -74,6 +74,18 @@ mpmath.mp.dps = 100
 
 # Exact coefficients of T(k)^2 = sum_{j >= 2} c_j / a^j, derived symbolically
 # (see smin_chi_neg4_memo.md §2 for derivation).
+#
+# Known erratum (Sprint 5 S_min verification, 2026-04-17): the
+# coefficients for j >= 6 below are wrong, which introduces a ~6.5e-20
+# error at the 20th digit of S_min computed from this asymptotic
+# expansion. The true S_min value (verified by three independent methods
+# to >= 80 digits) is 2.47993693803422255441357950082938214468... See
+# `debug/smin_verification_memo.md` for the audit. This error does NOT
+# affect RH-P's PSLQ negative result — a 20-th-digit numerical shift
+# does not change Q-linear independence against a finite basis. The
+# dictionary is preserved as-is for reproducibility; for numerically
+# correct computation of S_min use `debug/smin_identification.py`
+# (post-patch) which delegates to mpmath.nsum Levin.
 T_SQUARED_COEFFS: Dict[int, Fraction] = {
     2: Fraction(4, 1),
     3: Fraction(4, 1),
@@ -100,6 +112,10 @@ def tail_total(N: int) -> mpmath.mpf:
     """Total tail sum_{k=N+1}^inf T(k)^2 via asymptotic expansion.
 
     Uses sum_{k=N+1}^inf 1/(k+3/2)^j = hurwitz(j, N+5/2).
+
+    Known limitation: T_SQUARED_COEFFS above has c_j wrong for j>=6,
+    producing a ~6.5e-20 error at 20th digit. See the dictionary's
+    docstring for context.
     """
     a0 = mpmath.mpf(N + 1) + mpmath.mpf(3) / 2
     S = mpmath.mpf(0)
@@ -114,12 +130,10 @@ def tail_even(N: int) -> mpmath.mpf:
     k even, k = 2m, first m >= ceil((N+1)/2).  k + 3/2 = 2m + 3/2 = 2(m+3/4).
     So 1/(k+3/2)^j = 2^{-j}/(m+3/4)^j, summed over m >= m0, gives
     2^{-j} * hurwitz(j, m0 + 3/4).
+
+    Same 20th-digit limitation as tail_total.
     """
     m0 = (N + 2) // 2  # smallest even k > N is k = 2*m0; need k >= N+1 => m0 >= (N+1)/2
-    # Convert: if N+1 <= 2*m, i.e. m >= ceil((N+1)/2)
-    # For N even: smallest even k > N is k = N+2, m = (N+2)/2
-    # For N odd:  smallest even k > N is k = N+1, m = (N+1)/2
-    # Both give m0 = (N+2)//2
     S = mpmath.mpf(0)
     for j, c in T_SQUARED_COEFFS.items():
         c_mp = mpmath.mpf(c.numerator) / c.denominator
@@ -135,11 +149,9 @@ def tail_odd(N: int) -> mpmath.mpf:
     k odd, k = 2m+1, first m >= ceil((N)/2).  k + 3/2 = 2m + 5/2 = 2(m+5/4).
     So 1/(k+3/2)^j = 2^{-j}/(m+5/4)^j, summed m >= m0, gives
     2^{-j} * hurwitz(j, m0 + 5/4).
+
+    Same 20th-digit limitation as tail_total.
     """
-    # Smallest odd k >= N+1:
-    # N even => N+1 is odd, so k = N+1, m = N/2
-    # N odd  => N+2 is odd, so k = N+2, m = (N+1)/2
-    # Both give m0 = (N+1)//2 when we set k = 2m+1 => m = (k-1)/2
     m0 = (N + 1) // 2
     S = mpmath.mpf(0)
     for j, c in T_SQUARED_COEFFS.items():
