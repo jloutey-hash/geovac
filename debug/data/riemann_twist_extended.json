@@ -1,0 +1,27 @@
+{
+  "S3 Coulomb max_n=3": {
+    "chi_-3": -608,
+    "chi_s": 164,
+    "chi_m4_half": 448
+  },
+  "S5 Bargmann-Segal N_max=2": {
+    "chi_-3": -54829368,
+    "chi_s": 47908548,
+    "chi_m4_half": 9714840
+  },
+  "S5 Bargmann-Segal N_max=3": {
+    "chi_-3": -1356526491608,
+    "chi_s": 1278236512256,
+    "chi_m4_half": 88885813520
+  },
+  "Dirac-S3 rule A n_max=3": {
+    "chi_-3": -11184,
+    "chi_s": 7188,
+    "chi_m4_half": 4912
+  },
+  "Dirac-S3 rule B n_max=3": {
+    "chi_-3": -580562056424732640,
+    "chi_s": 570513296668135408,
+    "chi_m4_half": 10412386618297568
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "track": "RH-E",
+  "hypothesis": "Paper 29 Hypothesis 1 \u2014 Hopf-U(1) block decomposition",
+  "methodology": "Z_2 m-reflection decomposition at the node-level matrix (I - sA + s^2 Q) via Ihara-Bass. The Z_2 acts as m \u2192 -m (m = m_l for scalar S^5, m = m_j for Dirac-S^3). Both A and Q commute with the reflection; the block determinants are the non-trivial factor polynomials P_d.",
+  "scalar_S5": {
+    "graph": "scalar S^5 Bargmann-Segal N_max=3",
+    "V": 20,
+    "E": 42,
+    "beta_1": 23,
+    "dim_sym": 13,
+    "dim_antisym": 7,
+    "fixed_points_count": 6,
+    "det_sym_degree": 24,
+    "det_antisym_degree": 12,
+    "det_sym_factored": "(s - 1)*(s + 1)*(829440*s**22 + 2453184*s**20 + 3308104*s**18 + 2696682*s**16 + 1470640*s**14 + 557227*s**12 + 146654*s**10 + 25709*s**8 + 2630*s**6 + 79*s**4 - 12*s**2 - 1)",
+    "det_antisym_factored": "432*s**12 + 666*s**10 + 374*s**8 + 135*s**6 + 47*s**4 + 11*s**2 + 1",
+    "sym_block_contains_P12": false,
+    "sym_block_contains_P22": true,
+    "antisym_block_contains_P12": true,
+    "antisym_block_contains_P22": false,
+    "product_equals_full_det": true,
+    "target_P12_degree": 12,
+    "target_P22_degree": 22,
+    "target_P12_expr": "432*s**12 + 666*s**10 + 374*s**8 + 135*s**6 + 47*s**4 + 11*s**2 + 1",
+    "target_P22_expr": "829440*s**22 + 2453184*s**20 + 3308104*s**18 + 2696682*s**16 + 1470640*s**14 + 557227*s**12 + 146654*s**10 + 25709*s**8 + 2630*s**6 + 79*s**4 - 12*s**2 - 1"
+  },
+  "dirac_S3_ruleB": {
+    "graph": "Dirac-S^3 Rule B n_max=3",
+    "V": 28,
+    "E": 106,
+    "beta_1": 79,
+    "dim_sym": 14,
+    "dim_antisym": 14,
+    "fixed_points_count": 0,
+    "det_sym_degree": 28,
+    "det_antisym_degree": 28,
+    "det_sym_factored": "(s - 1)*(s + 1)*(9*s**2 + 1)**2*(538876800*s**22 + 1088750160*s**20 + 925413984*s**18 + 456734400*s**16 + 148182464*s**14 + 33353711*s**12 + 5288330*s**10 + 580341*s**8 + 41332*s**6 + 1589*s**4 + 10*s**2 - 1)",
+    "det_antisym_factored": "(9*s**2 + 1)**2*(538876800*s**24 + 1108028160*s**22 + 934113744*s**20 + 450036324*s**18 + 145121264*s**16 + 35278007*s**14 + 7106943*s**12 + 1222735*s**10 + 170871*s**8 + 17793*s**6 + 1257*s**4 + 53*s**2 + 1)",
+    "sym_block_contains_P22": true,
+    "sym_block_contains_P24": false,
+    "antisym_block_contains_P22": false,
+    "antisym_block_contains_P24": true,
+    "product_equals_full_det": true,
+    "target_P22_degree": 22,
+    "target_P24_degree": 24
+  },
+  "verdict": {
+    "scalar_S5_hypothesis_validated": true,
+    "dirac_ruleB_hypothesis_validated": true,
+    "overall_verdict": "VALIDATED (both graphs)"
+  }
+}

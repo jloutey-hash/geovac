@@ -1,0 +1,992 @@
+{
+  "sprint": "RH-A",
+  "description": "Ihara zeta of the GeoVac Hopf graphs (S^3 Coulomb + S^5 Bargmann-Segal) at small max_n / N_max, with sanity witnesses.",
+  "K_4": {
+    "label": "K_4",
+    "V": 4,
+    "E": 6,
+    "c": 1,
+    "beta_1": 3,
+    "degree_sequence": {
+      "min": 3,
+      "max": 3,
+      "mean": 3.0,
+      "histogram": [
+        0,
+        0,
+        0,
+        4
+      ]
+    },
+    "regular": true,
+    "adjacency_spectrum_top10": [
+      3.0,
+      -0.9999999999999996,
+      -0.9999999999999999,
+      -1.0
+    ],
+    "adjacency_spectrum_bottom5": [
+      3.0,
+      -0.9999999999999996,
+      -0.9999999999999999,
+      -1.0
+    ],
+    "zeta_inverse_degree": 12,
+    "zeta_inverse_expanded": "16*s**12 - 24*s**10 - 16*s**9 - 3*s**8 + 24*s**7 + 16*s**6 - 6*s**4 - 8*s**3 + 1",
+    "zeta_inverse_factored": "(s - 1)**3*(s + 1)**2*(2*s - 1)*(2*s**2 + s + 1)**3",
+    "zeta_inverse_numerator_coeffs": [
+      "16",
+      "0",
+      "-24",
+      "-16",
+      "-3",
+      "24",
+      "16",
+      "0",
+      "-6",
+      "-8",
+      "0",
+      "0",
+      "1"
+    ],
+    "zeta_inverse_denominator_coeffs": [
+      "1"
+    ],
+    "ramanujan": {
+      "is_ramanujan": true,
+      "deviation": -2.220446049250313e-16,
+      "explanation": "V=4, E=6, regular=True, q_max=2, q_min=2, rho(T)=2.000000 (Perron), max|mu_nontrivial|=1.414214, sqrt(q_max)=1.414214, deviation=-0.000000 (Ramanujan)"
+    },
+    "functional_equation_report": {
+      "V": 4,
+      "E": 6,
+      "c": 1,
+      "r_betti1": 3,
+      "regular": true,
+      "q_effective": 2,
+      "critical_radius": 0.7071067811865475,
+      "functional_equation": "Xi_G(s) := (1 - s^2)^2 (1 - (2*s)^2)^2 zeta_G(s)^(-1) satisfies Xi_G(s) = Xi_G(1/(2*s))",
+      "zero_symmetry": "s -> 1/(2*s)"
+    },
+    "hashimoto_spectral_radius": 2.0000000000000018,
+    "top_smallest_abs_zeros": [
+      {
+        "re": 0.49999999999999956,
+        "im": 0.0,
+        "abs": 0.49999999999999956,
+        "arg": 0.0
+      },
+      {
+        "re": -0.25000000000000006,
+        "im": -0.6614378277661477,
+        "abs": 0.7071067811865476,
+        "arg": -1.9321634507016046
+      },
+      {
+        "re": -0.25000000000000006,
+        "im": 0.6614378277661477,
+        "abs": 0.7071067811865476,
+        "arg": 1.9321634507016046
+      },
+      {
+        "re": -0.2500000000000001,
+        "im": 0.6614378277661478,
+        "abs": 0.7071067811865477,
+        "arg": 1.9321634507016046
+      },
+      {
+        "re": -0.2500000000000001,
+        "im": -0.6614378277661478,
+        "abs": 0.7071067811865477,
+        "arg": -1.9321634507016046
+      },
+      {
+        "re": -0.25,
+        "im": 0.6614378277661482,
+        "abs": 0.707106781186548,
+        "arg": 1.9321634507016041
+      },
+      {
+        "re": -0.25,
+        "im": -0.6614378277661482,
+        "abs": 0.707106781186548,
+        "arg": -1.9321634507016041
+      },
+      {
+        "re": 0.9999999999999996,
+        "im": 0.0,
+        "abs": 0.9999999999999996,
+        "arg": 0.0
+      },
+      {
+        "re": -0.9999999999999998,
+        "im": -0.0,
+        "abs": 0.9999999999999998,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": 1.0000000000000007,
+        "im": 0.0,
+        "abs": 1.0000000000000007,
+        "arg": 0.0
+      },
+      {
+        "re": -1.000000000000001,
+        "im": -0.0,
+        "abs": 1.000000000000001,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": 1.000000000000002,
+        "im": 0.0,
+        "abs": 1.000000000000002,
+        "arg": 0.0
+      }
+    ],
+    "n_zeros": 12,
+    "critical_radii": {
+      "q_min": 2,
+      "q_max": 2,
+      "inv_sqrt_q_max": 0.7071067811865475,
+      "inv_sqrt_q_min": 0.7071067811865475
+    },
+    "zero_distribution_vs_critical_radius": {
+      "n_inside": 1,
+      "n_on": 6,
+      "n_outside": 5
+    }
+  },
+  "K_3_3": {
+    "label": "K_{3,3}",
+    "V": 6,
+    "E": 9,
+    "c": 1,
+    "beta_1": 4,
+    "degree_sequence": {
+      "min": 3,
+      "max": 3,
+      "mean": 3.0,
+      "histogram": [
+        0,
+        0,
+        0,
+        6
+      ]
+    },
+    "regular": true,
+    "adjacency_spectrum_top10": [
+      3.000000000000001,
+      2.19729312224151e-16,
+      0.0,
+      0.0,
+      -2.3645481440394187e-16,
+      -3.000000000000001
+    ],
+    "adjacency_spectrum_bottom5": [
+      2.19729312224151e-16,
+      0.0,
+      0.0,
+      -2.3645481440394187e-16,
+      -3.000000000000001
+    ],
+    "zeta_inverse_degree": 18,
+    "zeta_inverse_expanded": "-64*s**18 + 144*s**16 - 168*s**12 + 36*s**10 + 81*s**8 - 12*s**6 - 18*s**4 + 1",
+    "zeta_inverse_factored": "-(s - 1)**4*(s + 1)**4*(2*s - 1)*(2*s + 1)*(2*s**2 + 1)**4",
+    "zeta_inverse_numerator_coeffs": [
+      "-64",
+      "0",
+      "144",
+      "0",
+      "0",
+      "0",
+      "-168",
+      "0",
+      "36",
+      "0",
+      "81",
+      "0",
+      "-12",
+      "0",
+      "-18",
+      "0",
+      "0",
+      "0",
+      "1"
+    ],
+    "zeta_inverse_denominator_coeffs": [
+      "1"
+    ],
+    "ramanujan": {
+      "is_ramanujan": true,
+      "deviation": -2.220446049250313e-16,
+      "explanation": "V=6, E=9, regular=True, q_max=2, q_min=2, rho(T)=2.000000 (Perron), max|mu_nontrivial|=1.414214, sqrt(q_max)=1.414214, deviation=-0.000000 (Ramanujan)"
+    },
+    "functional_equation_report": {
+      "V": 6,
+      "E": 9,
+      "c": 1,
+      "r_betti1": 4,
+      "regular": true,
+      "q_effective": 2,
+      "critical_radius": 0.7071067811865475,
+      "functional_equation": "Xi_G(s) := (1 - s^2)^3 (1 - (2*s)^2)^3 zeta_G(s)^(-1) satisfies Xi_G(s) = Xi_G(1/(2*s))",
+      "zero_symmetry": "s -> 1/(2*s)"
+    },
+    "hashimoto_spectral_radius": 1.9999999999999993,
+    "top_smallest_abs_zeros": [
+      {
+        "re": -0.5000000000000002,
+        "im": -0.0,
+        "abs": 0.5000000000000002,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": 0.5000000000000003,
+        "im": 0.0,
+        "abs": 0.5000000000000003,
+        "arg": 0.0
+      },
+      {
+        "re": 6.93889390390723e-17,
+        "im": 0.7071067811865476,
+        "abs": 0.7071067811865476,
+        "arg": 1.5707963267948966
+      },
+      {
+        "re": 6.93889390390723e-17,
+        "im": -0.7071067811865476,
+        "abs": 0.7071067811865476,
+        "arg": -1.5707963267948966
+      },
+      {
+        "re": 2.775557561562893e-17,
+        "im": 0.7071067811865478,
+        "abs": 0.7071067811865478,
+        "arg": 1.5707963267948966
+      },
+      {
+        "re": 2.775557561562893e-17,
+        "im": -0.7071067811865478,
+        "abs": 0.7071067811865478,
+        "arg": -1.5707963267948966
+      },
+      {
+        "re": -2.220446049250316e-16,
+        "im": -0.707106781186548,
+        "abs": 0.707106781186548,
+        "arg": -1.570796326794897
+      },
+      {
+        "re": -2.220446049250316e-16,
+        "im": 0.707106781186548,
+        "abs": 0.707106781186548,
+        "arg": 1.570796326794897
+      },
+      {
+        "re": 8.326672684688704e-17,
+        "im": -0.7071067811865488,
+        "abs": 0.7071067811865488,
+        "arg": -1.5707963267948966
+      },
+      {
+        "re": 8.326672684688704e-17,
+        "im": 0.7071067811865488,
+        "abs": 0.7071067811865488,
+        "arg": 1.5707963267948966
+      },
+      {
+        "re": -0.9999999999999996,
+        "im": -0.0,
+        "abs": 0.9999999999999996,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": -1.0000000000000004,
+        "im": -0.0,
+        "abs": 1.0000000000000004,
+        "arg": -3.141592653589793
+      }
+    ],
+    "n_zeros": 18,
+    "critical_radii": {
+      "q_min": 2,
+      "q_max": 2,
+      "inv_sqrt_q_max": 0.7071067811865475,
+      "inv_sqrt_q_min": 0.7071067811865475
+    },
+    "zero_distribution_vs_critical_radius": {
+      "n_inside": 2,
+      "n_on": 8,
+      "n_outside": 8
+    }
+  },
+  "S3_Coulomb_max_n_2": {
+    "label": "S^3 Coulomb max_n=2",
+    "V": 5,
+    "E": 3,
+    "c": 2,
+    "beta_1": 0,
+    "degree_sequence": {
+      "min": 1,
+      "max": 2,
+      "mean": 1.2,
+      "histogram": [
+        0,
+        4,
+        1
+      ]
+    },
+    "regular": false,
+    "adjacency_spectrum_top10": [
+      1.4142135623730954,
+      1.0,
+      -8.066464163292153e-17,
+      -1.0,
+      -1.4142135623730951
+    ],
+    "adjacency_spectrum_bottom5": [
+      1.4142135623730954,
+      1.0,
+      -8.066464163292153e-17,
+      -1.0,
+      -1.4142135623730951
+    ],
+    "zeta_inverse_degree": 0,
+    "zeta_inverse_expanded": "1",
+    "zeta_inverse_factored": "1",
+    "zeta_inverse_numerator_coeffs": [
+      "1"
+    ],
+    "zeta_inverse_denominator_coeffs": [
+      "1"
+    ],
+    "ramanujan": {
+      "is_ramanujan": true,
+      "deviation": -1.0,
+      "explanation": "V=5, E=3, regular=False, q_max=1, q_min=0, rho(T)=0.000000 (Perron), max|mu_nontrivial|=0.000000, sqrt(q_max)=1.000000, deviation=-1.000000 (Ramanujan)"
+    },
+    "functional_equation_report": {
+      "V": 5,
+      "E": 3,
+      "c": 2,
+      "r_betti1": 0,
+      "regular": false,
+      "q_max": 1,
+      "q_min": 0,
+      "q_avg_nb": 0.2,
+      "critical_radius_qmax": 1.0,
+      "critical_radius_qmin": null,
+      "functional_equation": "Irregular graph: the symmetric completed xi has no uniform closed form in s alone (Terras 2011 \u00a73, \u00a74). The Hashimoto T-spectrum {mu} determines the zeros of zeta_G via s = 1/mu.  For zeros on a single critical circle |s| = 1/sqrt(q), the graph must be regular or satisfy the Kotani-Sunada uniform bound.",
+      "zero_symmetry": "s_j = 1 / mu_j (mu_j eigenvalues of Hashimoto T)",
+      "hashimoto_spectral_radius": 0.0
+    },
+    "hashimoto_spectral_radius": 0.0,
+    "top_smallest_abs_zeros": [],
+    "n_zeros": 0,
+    "critical_radii": {
+      "q_min": 0,
+      "q_max": 1,
+      "inv_sqrt_q_max": 1.0,
+      "inv_sqrt_q_min": null
+    },
+    "zero_distribution_vs_critical_radius": {
+      "n_inside": 0,
+      "n_on": 0,
+      "n_outside": 0
+    }
+  },
+  "S3_Coulomb_max_n_3": {
+    "label": "S^3 Coulomb max_n=3",
+    "V": 14,
+    "E": 13,
+    "c": 3,
+    "beta_1": 2,
+    "degree_sequence": {
+      "min": 1,
+      "max": 3,
+      "mean": 1.8571428571428572,
+      "histogram": [
+        0,
+        4,
+        8,
+        2
+      ]
+    },
+    "regular": false,
+    "adjacency_spectrum_top10": [
+      2.414213562373095,
+      1.7320508075688772,
+      1.4142135623730954,
+      1.0000000000000002,
+      1.0,
+      0.41421356237309515,
+      -3.2672969942134236e-18,
+      -8.066464163292153e-17,
+      -0.4142135623730949,
+      -1.0
+    ],
+    "adjacency_spectrum_bottom5": [
+      -1.0,
+      -1.0,
+      -1.4142135623730951,
+      -1.732050807568878,
+      -2.414213562373095
+    ],
+    "zeta_inverse_degree": 16,
+    "zeta_inverse_expanded": "4*s**16 - 5*s**14 - 3*s**12 + 6*s**8 + 2*s**6 - 4*s**4 - s**2 + 1",
+    "zeta_inverse_factored": "-(s - 1)**2*(s + 1)**2*(s**2 - s + 1)*(s**2 + s + 1)*(2*s**3 - s**2 + s - 1)*(2*s**3 + s**2 + s + 1)",
+    "zeta_inverse_numerator_coeffs": [
+      "4",
+      "0",
+      "-5",
+      "0",
+      "-3",
+      "0",
+      "0",
+      "0",
+      "6",
+      "0",
+      "2",
+      "0",
+      "-4",
+      "0",
+      "-1",
+      "0",
+      "1"
+    ],
+    "zeta_inverse_denominator_coeffs": [
+      "-1",
+      "0",
+      "1"
+    ],
+    "ramanujan": {
+      "is_ramanujan": true,
+      "deviation": -0.19849680135965397,
+      "explanation": "V=14, E=13, regular=False, q_max=2, q_min=0, rho(T)=1.353210 (Perron), max|mu_nontrivial|=1.215717, sqrt(q_max)=1.414214, deviation=-0.198497 (Ramanujan)"
+    },
+    "functional_equation_report": {
+      "V": 14,
+      "E": 13,
+      "c": 3,
+      "r_betti1": 2,
+      "regular": false,
+      "q_max": 2,
+      "q_min": 0,
+      "q_avg_nb": 0.8571428571428571,
+      "critical_radius_qmax": 0.7071067811865475,
+      "critical_radius_qmin": null,
+      "functional_equation": "Irregular graph: the symmetric completed xi has no uniform closed form in s alone (Terras 2011 \u00a73, \u00a74). The Hashimoto T-spectrum {mu} determines the zeros of zeta_G via s = 1/mu.  For zeros on a single critical circle |s| = 1/sqrt(q), the graph must be regular or satisfy the Kotani-Sunada uniform bound.",
+      "zero_symmetry": "s_j = 1 / mu_j (mu_j eigenvalues of Hashimoto T)",
+      "hashimoto_spectral_radius": 1.353209964199327
+    },
+    "hashimoto_spectral_radius": 1.353209964199327,
+    "top_smallest_abs_zeros": [
+      {
+        "re": -0.7389836215045049,
+        "im": -0.0,
+        "abs": 0.7389836215045049,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": 0.7389836215045061,
+        "im": 0.0,
+        "abs": 0.7389836215045061,
+        "arg": 0.0
+      },
+      {
+        "re": -0.11949181075225321,
+        "im": 0.8138345589017524,
+        "abs": 0.8225600173237586,
+        "arg": 1.7165803664967103
+      },
+      {
+        "re": -0.11949181075225321,
+        "im": -0.8138345589017524,
+        "abs": 0.8225600173237586,
+        "arg": -1.7165803664967103
+      },
+      {
+        "re": 0.11949181075225312,
+        "im": 0.8138345589017534,
+        "abs": 0.8225600173237596,
+        "arg": 1.4250122870930833
+      },
+      {
+        "re": 0.11949181075225312,
+        "im": -0.8138345589017534,
+        "abs": 0.8225600173237596,
+        "arg": -1.4250122870930833
+      },
+      {
+        "re": -0.49999999999999983,
+        "im": 0.8660254037844377,
+        "abs": 0.999999999999999,
+        "arg": 2.0943951023931957
+      },
+      {
+        "re": -0.49999999999999983,
+        "im": -0.8660254037844377,
+        "abs": 0.999999999999999,
+        "arg": -2.0943951023931957
+      },
+      {
+        "re": 0.4999999999999995,
+        "im": -0.8660254037844385,
+        "abs": 0.9999999999999996,
+        "arg": -1.047197551196598
+      },
+      {
+        "re": 0.4999999999999995,
+        "im": 0.8660254037844385,
+        "abs": 0.9999999999999996,
+        "arg": 1.047197551196598
+      },
+      {
+        "re": -0.9999999999999998,
+        "im": -0.0,
+        "abs": 0.9999999999999998,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": -0.9999999999999998,
+        "im": -0.0,
+        "abs": 0.9999999999999998,
+        "arg": -3.141592653589793
+      }
+    ],
+    "n_zeros": 14,
+    "critical_radii": {
+      "q_min": 0,
+      "q_max": 2,
+      "inv_sqrt_q_max": 0.7071067811865475,
+      "inv_sqrt_q_min": null
+    },
+    "zero_distribution_vs_critical_radius": {
+      "n_inside": 0,
+      "n_on": 0,
+      "n_outside": 14
+    }
+  },
+  "S5_Bargmann_Segal_N_max_2": {
+    "label": "S^5 Bargmann-Segal N_max=2",
+    "V": 10,
+    "E": 15,
+    "c": 1,
+    "beta_1": 6,
+    "degree_sequence": {
+      "min": 1,
+      "max": 5,
+      "mean": 3.0,
+      "histogram": [
+        0,
+        2,
+        2,
+        3,
+        0,
+        3
+      ]
+    },
+    "regular": false,
+    "adjacency_spectrum_top10": [
+      3.5145910082625273,
+      1.414213562373095,
+      0.8047670747739296,
+      2.14994693361735e-18,
+      -1.3406194702180948e-17,
+      -2.3789614130576925e-16,
+      -2.846994529863268e-16,
+      -0.8047670747739293,
+      -1.414213562373095,
+      -3.5145910082625273
+    ],
+    "adjacency_spectrum_bottom5": [
+      -2.3789614130576925e-16,
+      -2.846994529863268e-16,
+      -0.8047670747739293,
+      -1.414213562373095,
+      -3.5145910082625273
+    ],
+    "zeta_inverse_degree": 26,
+    "zeta_inverse_expanded": "-288*s**26 + 900*s**24 - 324*s**22 - 1407*s**20 + 968*s**18 + 1050*s**16 - 750*s**14 - 531*s**12 + 276*s**10 + 177*s**8 - 42*s**6 - 30*s**4 + 1",
+    "zeta_inverse_factored": "-(s - 1)**6*(s + 1)**6*(2*s**2 + 1)**2*(3*s**4 + 3*s**2 + 1)*(24*s**6 + 21*s**4 + s**2 - 1)",
+    "zeta_inverse_numerator_coeffs": [
+      "-288",
+      "0",
+      "900",
+      "0",
+      "-324",
+      "0",
+      "-1407",
+      "0",
+      "968",
+      "0",
+      "1050",
+      "0",
+      "-750",
+      "0",
+      "-531",
+      "0",
+      "276",
+      "0",
+      "177",
+      "0",
+      "-42",
+      "0",
+      "-30",
+      "0",
+      "0",
+      "0",
+      "1"
+    ],
+    "zeta_inverse_denominator_coeffs": [
+      "1"
+    ],
+    "ramanujan": {
+      "is_ramanujan": true,
+      "deviation": -0.2078452307153924,
+      "explanation": "V=10, E=15, regular=False, q_max=4, q_min=0, rho(T)=2.357244 (Perron), max|mu_nontrivial|=1.792155, sqrt(q_max)=2.000000, deviation=-0.207845 (Ramanujan)"
+    },
+    "functional_equation_report": {
+      "V": 10,
+      "E": 15,
+      "c": 1,
+      "r_betti1": 6,
+      "regular": false,
+      "q_max": 4,
+      "q_min": 0,
+      "q_avg_nb": 2.0,
+      "critical_radius_qmax": 0.5,
+      "critical_radius_qmin": null,
+      "functional_equation": "Irregular graph: the symmetric completed xi has no uniform closed form in s alone (Terras 2011 \u00a73, \u00a74). The Hashimoto T-spectrum {mu} determines the zeros of zeta_G via s = 1/mu.  For zeros on a single critical circle |s| = 1/sqrt(q), the graph must be regular or satisfy the Kotani-Sunada uniform bound.",
+      "zero_symmetry": "s_j = 1 / mu_j (mu_j eigenvalues of Hashimoto T)",
+      "hashimoto_spectral_radius": 2.3572438504657205
+    },
+    "hashimoto_spectral_radius": 2.3572438504657205,
+    "top_smallest_abs_zeros": [
+      {
+        "re": 0.42422424807786857,
+        "im": 0.0,
+        "abs": 0.42422424807786857,
+        "arg": 0.0
+      },
+      {
+        "re": -0.42422424807786946,
+        "im": -0.0,
+        "abs": 0.42422424807786946,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": -3.4566802252093296e-17,
+        "im": -0.5579875226954757,
+        "abs": 0.5579875226954757,
+        "arg": -1.5707963267948968
+      },
+      {
+        "re": -3.4566802252093296e-17,
+        "im": 0.5579875226954757,
+        "abs": 0.5579875226954757,
+        "arg": 1.5707963267948968
+      },
+      {
+        "re": -1.6653345369377309e-16,
+        "im": -0.7071067811865467,
+        "abs": 0.7071067811865467,
+        "arg": -1.5707963267948968
+      },
+      {
+        "re": -1.6653345369377309e-16,
+        "im": 0.7071067811865467,
+        "abs": 0.7071067811865467,
+        "arg": 1.5707963267948968
+      },
+      {
+        "re": 2.7755575615628873e-17,
+        "im": -0.707106781186547,
+        "abs": 0.707106781186547,
+        "arg": -1.5707963267948966
+      },
+      {
+        "re": 2.7755575615628873e-17,
+        "im": 0.707106781186547,
+        "abs": 0.707106781186547,
+        "arg": 1.5707963267948966
+      },
+      {
+        "re": 0.19665994659516414,
+        "im": -0.7339449125069346,
+        "abs": 0.7598356856515918,
+        "arg": -1.3089969389957472
+      },
+      {
+        "re": 0.19665994659516414,
+        "im": 0.7339449125069346,
+        "abs": 0.7598356856515918,
+        "arg": 1.3089969389957472
+      },
+      {
+        "re": -0.19665994659516467,
+        "im": -0.7339449125069348,
+        "abs": 0.7598356856515922,
+        "arg": -1.8325957145940466
+      },
+      {
+        "re": -0.19665994659516467,
+        "im": 0.7339449125069348,
+        "abs": 0.7598356856515922,
+        "arg": 1.8325957145940466
+      }
+    ],
+    "n_zeros": 26,
+    "critical_radii": {
+      "q_min": 0,
+      "q_max": 4,
+      "inv_sqrt_q_max": 0.5,
+      "inv_sqrt_q_min": null
+    },
+    "zero_distribution_vs_critical_radius": {
+      "n_inside": 2,
+      "n_on": 0,
+      "n_outside": 24
+    }
+  },
+  "S5_Bargmann_Segal_N_max_3": {
+    "label": "S^5 Bargmann-Segal N_max=3",
+    "V": 20,
+    "E": 42,
+    "c": 1,
+    "beta_1": 23,
+    "degree_sequence": {
+      "min": 1,
+      "max": 9,
+      "mean": 4.2,
+      "histogram": [
+        0,
+        2,
+        2,
+        4,
+        3,
+        5,
+        1,
+        2,
+        0,
+        1
+      ]
+    },
+    "regular": false,
+    "adjacency_spectrum_top10": [
+      5.05604519230762,
+      2.9208096264818875,
+      1.7320508075688774,
+      1.6117628666335084,
+      1.047936374758488,
+      0.8604980125150692,
+      0.6847416489820998,
+      2.1866792975808598e-16,
+      1.8440775167418403e-16,
+      -3.754895296281334e-18
+    ],
+    "adjacency_spectrum_bottom5": [
+      -1.0479363747584878,
+      -1.6117628666335078,
+      -1.7320508075688772,
+      -2.920809626481891,
+      -5.05604519230762
+    ],
+    "zeta_inverse_degree": 80,
+    "zeta_inverse_expanded": "358318080*s**80 - 6629133312*s**78 + 56947408128*s**76 - 299883547728*s**74 + 1074026977124*s**72 - 2732475834424*s**70 + 4962617419380*s**68 - 6139465005744*s**66 + 4158761236993*s**64 + 989542749820*s**62 - 5830033874688*s**60 + 6272179121040*s**58 - 2284676901548*s**56 - 1883039955468*s**54 + 2716546498492*s**52 - 971840350448*s**50 - 502711805276*s**48 + 553175957500*s**46 - 54505425944*s**44 - 131231873168*s**42 + 42334204708*s**40 + 23224764004*s**38 - 12633099140*s**36 - 3134076944*s**34 + 2653914742*s**32 + 251457748*s**30 - 395941904*s**28 + 3485872*s**26 + 40270444*s**24 - 6028292*s**22 - 2140028*s**20 + 1437104*s**18 - 31516*s**16 - 223052*s**14 + 5032*s**12 + 22176*s**10 + 1464*s**8 - 1052*s**6 - 176*s**4 + 1",
+    "zeta_inverse_factored": "(s - 1)**23*(s + 1)**23*(432*s**12 + 666*s**10 + 374*s**8 + 135*s**6 + 47*s**4 + 11*s**2 + 1)*(829440*s**22 + 2453184*s**20 + 3308104*s**18 + 2696682*s**16 + 1470640*s**14 + 557227*s**12 + 146654*s**10 + 25709*s**8 + 2630*s**6 + 79*s**4 - 12*s**2 - 1)",
+    "zeta_inverse_numerator_coeffs": [
+      "358318080",
+      "0",
+      "-6629133312",
+      "0",
+      "56947408128",
+      "0",
+      "-299883547728",
+      "0",
+      "1074026977124",
+      "0",
+      "-2732475834424",
+      "0",
+      "4962617419380",
+      "0",
+      "-6139465005744",
+      "0",
+      "4158761236993",
+      "0",
+      "989542749820",
+      "0",
+      "-5830033874688",
+      "0",
+      "6272179121040",
+      "0",
+      "-2284676901548",
+      "0",
+      "-1883039955468",
+      "0",
+      "2716546498492",
+      "0",
+      "-971840350448",
+      "0",
+      "-502711805276",
+      "0",
+      "553175957500",
+      "0",
+      "-54505425944",
+      "0",
+      "-131231873168",
+      "0",
+      "42334204708",
+      "0",
+      "23224764004",
+      "0",
+      "-12633099140",
+      "0",
+      "-3134076944",
+      "0",
+      "2653914742",
+      "0",
+      "251457748",
+      "0",
+      "-395941904",
+      "0",
+      "3485872",
+      "0",
+      "40270444",
+      "0",
+      "-6028292",
+      "0",
+      "-2140028",
+      "0",
+      "1437104",
+      "0",
+      "-31516",
+      "0",
+      "-223052",
+      "0",
+      "5032",
+      "0",
+      "22176",
+      "0",
+      "1464",
+      "0",
+      "-1052",
+      "0",
+      "-176",
+      "0",
+      "0",
+      "0",
+      "1"
+    ],
+    "zeta_inverse_denominator_coeffs": [
+      "1"
+    ],
+    "ramanujan": {
+      "is_ramanujan": true,
+      "deviation": -0.35684814984682545,
+      "explanation": "V=20, E=42, regular=False, q_max=8, q_min=0, rho(T)=3.905305 (Perron), max|mu_nontrivial|=2.471579, sqrt(q_max)=2.828427, deviation=-0.356848 (Ramanujan)"
+    },
+    "functional_equation_report": {
+      "V": 20,
+      "E": 42,
+      "c": 1,
+      "r_betti1": 23,
+      "regular": false,
+      "q_max": 8,
+      "q_min": 0,
+      "q_avg_nb": 3.2,
+      "critical_radius_qmax": 0.35355339059327373,
+      "critical_radius_qmin": null,
+      "functional_equation": "Irregular graph: the symmetric completed xi has no uniform closed form in s alone (Terras 2011 \u00a73, \u00a74). The Hashimoto T-spectrum {mu} determines the zeros of zeta_G via s = 1/mu.  For zeros on a single critical circle |s| = 1/sqrt(q), the graph must be regular or satisfy the Kotani-Sunada uniform bound.",
+      "zero_symmetry": "s_j = 1 / mu_j (mu_j eigenvalues of Hashimoto T)",
+      "hashimoto_spectral_radius": 3.9053048959005703
+    },
+    "hashimoto_spectral_radius": 3.9053048959005703,
+    "top_smallest_abs_zeros": [
+      {
+        "re": -0.25606195333166126,
+        "im": -0.0,
+        "abs": 0.25606195333166126,
+        "arg": -3.141592653589793
+      },
+      {
+        "re": 0.25606195333166143,
+        "im": 0.0,
+        "abs": 0.25606195333166143,
+        "arg": 0.0
+      },
+      {
+        "re": -4.543612171120641e-16,
+        "im": -0.40459965477765764,
+        "abs": 0.40459965477765764,
+        "arg": -1.5707963267948977
+      },
+      {
+        "re": -4.543612171120641e-16,
+        "im": 0.40459965477765764,
+        "abs": 0.40459965477765764,
+        "arg": 1.5707963267948977
+      },
+      {
+        "re": 3.302016573167581e-16,
+        "im": -0.46721443688403075,
+        "abs": 0.46721443688403075,
+        "arg": -1.570796326794896
+      },
+      {
+        "re": 3.302016573167581e-16,
+        "im": 0.46721443688403075,
+        "abs": 0.46721443688403075,
+        "arg": 1.570796326794896
+      },
+      {
+        "re": 2.096099769024e-17,
+        "im": -0.5240400855925673,
+        "abs": 0.5240400855925673,
+        "arg": -1.5707963267948966
+      },
+      {
+        "re": 2.096099769024e-17,
+        "im": 0.5240400855925673,
+        "abs": 0.5240400855925673,
+        "arg": 1.5707963267948966
+      },
+      {
+        "re": -6.169892621200881e-17,
+        "im": 0.5270989906025303,
+        "abs": 0.5270989906025303,
+        "arg": 1.5707963267948968
+      },
+      {
+        "re": -6.169892621200881e-17,
+        "im": -0.5270989906025303,
+        "abs": 0.5270989906025303,
+        "arg": -1.5707963267948968
+      },
+      {
+        "re": -0.14901689239631632,
+        "im": 0.5280662803155723,
+        "abs": 0.548689375353469,
+        "arg": 1.845837937195974
+      },
+      {
+        "re": -0.14901689239631632,
+        "im": -0.5280662803155723,
+        "abs": 0.548689375353469,
+        "arg": -1.845837937195974
+      }
+    ],
+    "n_zeros": 80,
+    "critical_radii": {
+      "q_min": 0,
+      "q_max": 8,
+      "inv_sqrt_q_max": 0.35355339059327373,
+      "inv_sqrt_q_min": null
+    },
+    "zero_distribution_vs_critical_radius": {
+      "n_inside": 2,
+      "n_on": 0,
+      "n_outside": 78
+    }
+  }
+}

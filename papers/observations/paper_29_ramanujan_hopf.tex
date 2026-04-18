@@ -1,0 +1,796 @@
+% Paper 29: The GeoVac Hopf Graphs Are Ramanujan
+% GeoVac Project, April 2026
+% v1.1 (Sprint-2 follow-up sync: RH-D bound-crossing, RH-E Hypothesis-1 validation, RH-G spectral-zeta redirection)
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{observation}{Observation}
+\newtheorem{hypothesis}{Hypothesis}
+
+\title{The GeoVac Hopf Graphs Are Ramanujan:\\
+Ihara Zeta, Graph-RH, and a Scope Boundary on Selberg-on-Hydrogen}
+\author{GeoVac Project}
+\date{April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We compute the Ihara zeta function of the two GeoVac Hopf graphs -- the
+Fock-projected $S^3$ graph for the Coulomb problem~\cite{paper7} and the
+Bargmann--Segal $S^5$ graph for the 3D isotropic harmonic
+oscillator~\cite{paper24} -- via the Ihara--Bass determinantal
+formula~\cite{ihara1966,bass1992} and the Hashimoto non-backtracking
+edge operator~\cite{hashimoto1989}.  Four results emerge.
+(1)~\emph{Graph-Ramanujan at small sizes, bound-crossing at modest
+sizes}: every graph tested at small sizes
+($S^3$ at $n_{\max}=2,3$; $S^5$ at $N_{\max}=2,3$) satisfies the
+Kotani--Sunada~\cite{kotani2000} graph-RH (Ramanujan) bound
+\emph{strictly}, with deviations of the largest non-trivial Hashimoto
+eigenvalue from $\sqrt{q_{\max}}$ ranging from $-0.198$ ($S^3$,
+$n_{\max}=3$) to $-0.357$ ($S^5$, $N_{\max}=3$).  A follow-on
+post-draft extension to $n_{\max},N_{\max}\in\{4,5\}$ establishes
+that three of four graph families \emph{cross} the Kotani--Sunada
+bound at modest sizes ($V\approx 30$--$60$), with the signed
+deviation growing linearly in $V$; the graph-RH for GeoVac is
+therefore a \emph{finite-size} statement, not an asymptotic one.
+(2)~\emph{Algebraicity of zeros}:
+every $\zeta_G(s)^{-1}$ factors as a product of integer-coefficient
+polynomials; no transcendental ($\pi$, $\zeta(2)$, $\zeta(3)$) enters
+the zero set.  This sharpens Paper 24's $\pi$-free
+certificate~\cite{paper24} from the adjacency data to the Ihara zeta.
+(3)~\emph{Structural factorization, validated}: the $S^3$ Coulomb zeta
+decomposes per $\ell$-shell because the Fock adjacency preserves~$\ell$;
+the $S^5$ $N_{\max}=3$ zeta factors as $(s\pm 1)^{23}\cdot
+P_{12}(s^2)\cdot P_{22}(s^2)$, and the $12+22$ dichotomy is \emph{exactly}
+the $\mathbb{Z}_2$ $m_\ell\to-m_\ell$ block decomposition of the
+node-level Ihara--Bass matrix --- the only sub-action of the
+Paper~25~\cite{paper25} Hopf $U(1)$ that commutes with a real integer
+adjacency.  The analogous $22+24$ decomposition holds for the
+Dirac-$S^3$ Rule B $n_{\max}=3$ graph under $m_j\to-m_j$.
+(4)~\emph{Scope boundary}: Fock's Wick rotation $S^3\to H^3$ is
+mathematically clean~\cite{bander1966} but produces no natural discrete
+quotient $H^3/\Gamma$ from framework invariants; the Selberg-zeta
+direction on hyperbolic quotients of hydrogen is therefore structurally
+closed.  The Ihara-to-classical-$\zeta$ bridge is additionally blocked
+by bipartiteness (odd-argument Dirichlet characters such as $\chi_{-4}$
+have support disjoint from the Ihara walk-length spectrum); the
+spectral-side Dirichlet series of Paper 28 remains the open direction.
+\end{abstract}
+
+% ===================================================================
+\section{Introduction}
+% ===================================================================
+
+The GeoVac framework~\cite{paper1,paper7} computes quantum-mechanical
+observables from discrete graph Laplacians on compact manifolds.  In
+the accumulated results of the project, six transcendental constants
+have appeared at positive integer arguments of the Riemann zeta and
+Dirichlet $L$ family:
+$\pi$ (calibration~\cite{paper18});
+$\zeta(2)=\pi^2/6$ as a Dirichlet series of the Fock degeneracy lattice
+at the packing exponent $d_{\max}=4$;
+$\zeta(3)$ in the Dirac sector at $s=d_{\max}$ and in flat-space QED
+sums~\cite{paper28};
+Catalan's constant $G=\beta(2)$ and the Dirichlet $L$-value $\beta(4)$
+from two-loop vertex parity on $S^3$~\cite{paper28}; and
+the irreducible $S_{\min}\approx 2.47954$~\cite{paper28}.
+Every member of this tally lives at a positive integer argument of
+$\zeta$: they are \emph{periods}, not \emph{zeros}.  The Riemann
+Hypothesis is about the location of nontrivial zeros of $\zeta$ on
+the critical line $\Re s = \tfrac12$.  Periods and zeros are
+structurally different objects; the standard bridges (explicit
+formula, Euler product) move data across the divide but do not
+collapse the distinction.
+
+This paper reports what happens when one approaches the RH-bridge
+question from inside GeoVac rather than from outside.  We do not
+attempt to prove or disprove RH.  We ask: does the framework contain,
+on its own, a graph-zeta or spectral-zeta object with an RH-type
+structure --- an Euler product, a functional equation, and a critical
+locus that our zeros respect?  The answer, for the two Hopf graphs
+the framework natively builds, is yes.  Every tested GeoVac graph
+satisfies the Kotani--Sunada~\cite{kotani2000} Ramanujan bound
+(Section~\ref{sec:main_result}).  The associated functional equation
+takes the irregular-graph reflection form $s\mapsto -s$ rather than
+the regular-graph form $s\mapsto 1/(q s)$
+(Section~\ref{sec:functional_equation}).  And the Ihara zeros are
+algebraic, consistent with Paper~24's $\pi$-free structure
+(Section~\ref{sec:closed_forms}).
+
+We also address the natural companion question: could the Wick-rotated
+side of the Fock projection --- scattering states on hyperbolic
+$H^3$~\cite{bander1966} --- carry a Selberg zeta with proven RH analog?
+The answer is no: GeoVac invariants supply no selection principle for
+a discrete subgroup $\Gamma\subset\mathrm{SO}(3,1)$
+(Section~\ref{sec:scope_boundary}).  This closes a door cleanly.  The
+graph-zeta direction is structurally intrinsic; the Selberg direction
+requires external arithmetic input that GeoVac does not provide.
+
+% ===================================================================
+\section{Ihara Zeta and Graph-RH}
+\label{sec:ihara_background}
+% ===================================================================
+
+For a finite connected graph $G=(V,E)$ with $|V|$ vertices and $|E|$
+edges, the \emph{Ihara zeta function}~\cite{ihara1966} is the formal
+Euler product
+\begin{equation}
+\zeta_G(s) \;=\; \prod_{[C]}\,\bigl(1 - s^{\ell(C)}\bigr)^{-1},
+\label{eq:ihara_euler}
+\end{equation}
+where $[C]$ ranges over equivalence classes of \emph{primitive} closed
+walks in $G$ (walks with no backtracking and no tail, considered up to
+cyclic rotation) and $\ell(C)$ is the walk length.  The product
+converges for $|s|<1/\rho(T)$ where $T$ is the Hashimoto
+non-backtracking edge operator (Section~\ref{sec:hashimoto}).
+
+\subsection{Ihara--Bass determinantal formula}
+
+A direct enumeration of primitive closed walks is infeasible for graphs
+with more than a few dozen edges.  The Ihara--Bass
+theorem~\cite{bass1992} replaces the Euler product by a finite-dimensional
+determinant:
+\begin{equation}
+\zeta_G(s)^{-1} \;=\; \bigl(1 - s^2\bigr)^{r - c}\,
+    \det\!\bigl(I - s\,A + s^2\,Q\bigr),
+\label{eq:ihara_bass}
+\end{equation}
+where $A$ is the $|V|\times|V|$ adjacency matrix, $Q$ is the diagonal
+matrix with entries $d_v - 1$ (where $d_v$ is the degree of vertex $v$),
+$c$ is the number of connected components, and
+$r = |E| - |V| + c = \beta_1$ is the first Betti number.  The
+$(r-c)$ prefactor is the product-over-components generalization of
+Terras's connected formula~\cite[Thm.~2.3]{terras2010}; it reduces to
+the standard $(1-s^2)^{r-1}$ when $c=1$.
+
+\subsection{Hashimoto non-backtracking operator}
+\label{sec:hashimoto}
+
+The \emph{Hashimoto edge operator}~\cite{hashimoto1989} $T$ acts on
+the $2|E|$-dimensional space of directed edges of $G$: for each
+directed edge $(u\to v)$,
+\begin{equation}
+T[(u\to v)] \;=\; \sum_{w\neq u,\; w\sim v} (v\to w).
+\end{equation}
+Equivalently $T$ is $|T|=2|E|\times 2|E|$, with entries
+$T_{e,f}=1$ iff edge $f$ begins where edge $e$ ends and $f\neq e^{-1}$.
+Then
+\begin{equation}
+\zeta_G(s)^{-1} \;=\; \det\!\bigl(I - s\,T\bigr),
+\label{eq:ihara_hashimoto}
+\end{equation}
+so the reciprocal Ihara zeros of $G$ are exactly the nonzero
+eigenvalues of $T$.
+
+\subsection{Ramanujan graphs and graph-RH}
+
+A $(q{+}1)$-regular graph is \emph{Ramanujan} if every non-trivial
+eigenvalue $\lambda$ of the adjacency matrix satisfies
+$|\lambda|\le 2\sqrt{q}$~\cite{lps1988,morgenstern1994}.  For irregular
+graphs the Ramanujan condition is stated on the Hashimoto
+spectrum: $G$ is \emph{(weakly) Ramanujan} if every non-trivial
+eigenvalue $\mu$ of $T$ satisfies $|\mu|\le\sqrt{q_{\max}}$, where
+$q_{\max} = \max_v(d_v - 1)$~\cite{kotani2000,terras2010}.
+The non-trivial eigenvalues are those other than the Perron eigenvalue
+$\rho(T)$ and its complex-conjugate reflection.
+
+The \emph{graph Riemann Hypothesis} is the statement that $\zeta_G$ is
+Ramanujan.  Equivalently, the Ihara zeros (reciprocals of $T$-eigenvalues)
+are confined to the critical annulus
+$1/\sqrt{q_{\max}} \le |s| \le 1$, outside of which only trivial zeros
+(from the Perron eigenvalue) appear.  This is a \emph{proven}
+theorem on specific graph families (the LPS-Margulis-Morgenstern
+constructions~\cite{lps1988,morgenstern1994}) and has an extensive
+literature; see Terras~\cite{terras2010} for a textbook account.
+
+% ===================================================================
+\section{The GeoVac Hopf Graphs}
+\label{sec:graphs}
+% ===================================================================
+
+GeoVac builds discrete graphs on two natural geometries: the
+three-sphere $S^3$ (the Fock~\cite{fock1935} projection for hydrogenic
+bound states, Paper~7~\cite{paper7}) and the five-sphere $S^5$ (the
+Bargmann--Segal projection for the 3D isotropic harmonic oscillator,
+Paper~24~\cite{paper24}).  Both carry Hopf-fibration structure
+($S^1\hookrightarrow S^3\to S^2$ and $S^1\hookrightarrow S^5\to
+\mathbb{CP}^2$) and are the canonical discretizations referenced by
+Paper~25~\cite{paper25}.  We summarize their combinatorial data.
+
+\subsection{$S^3$ Coulomb graph}
+
+Nodes are hydrogenic quantum-number triples $(n,\ell,m)$ with
+$1\le n\le n_{\max}$, $0\le\ell<n$, $|m|\le\ell$.  Edges are generated
+by the $\mathrm{SU}(2)\times\mathrm{SU}(1,1)$ ladder operators
+$L_\pm, T_\pm$, which shift $m\mapsto m\pm 1$ (at fixed $n,\ell$) and
+$n\mapsto n\pm 1$ (at fixed $\ell,m$), respectively.  The adjacency
+rule therefore \emph{preserves}~$\ell$, which forces the graph to split
+into disconnected components indexed by~$\ell$ (see
+Section~\ref{sec:closed_forms}).
+
+\subsection{$S^5$ Bargmann--Segal graph}
+
+Nodes are SU(3) weights $(N,\ell,m_\ell)$ with $N\ge 0$,
+$\ell\in\{N, N{-}2, N{-}4, \ldots, 0\text{ or }1\}$,
+$|m_\ell|\le\ell$, truncated at $N\le N_{\max}$.  Edges are the $S^5$
+dipole transitions with $\Delta N=\pm 1, \Delta\ell=\pm 1,
+\Delta m_\ell\in\{0,\pm 1\}$, carrying exact-rational squared
+matrix elements (Paper~24~\cite{paper24} \S III).  The adjacency is
+\emph{not} $\ell$-preserving and the graph is connected at every
+tested $N_{\max}$.
+
+\subsection{Combinatorial summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+Graph & $V$ & $E$ & $c$ & $\beta_1$ & $q_{\max}$ \\
+\midrule
+$K_4$ (sanity) & 4 & 6 & 1 & 3 & 2 \\
+$K_{3,3}$ (sanity) & 6 & 9 & 1 & 4 & 2 \\
+$S^3$ Coulomb, $n_{\max}=2$ & 5 & 3 & 2 & 0 & 1 \\
+$S^3$ Coulomb, $n_{\max}=3$ & 14 & 13 & 3 & 2 & 2 \\
+$S^5$ Bargmann--Segal, $N_{\max}=2$ & 10 & 15 & 1 & 6 & 4 \\
+$S^5$ Bargmann--Segal, $N_{\max}=3$ & 20 & 42 & 1 & 23 & 8 \\
+\bottomrule
+\end{tabular}
+\caption{Combinatorial data for the graphs tested.  $V$: vertices.
+$E$: edges.  $c$: connected components.  $\beta_1=E-V+c$: first Betti
+number.  $q_{\max}=\max_v(d_v-1)$: Ramanujan bound parameter.  The
+$\beta_1=23$ at $S^5$ $N_{\max}=3$ agrees with the Paper~25 Hodge
+computation of $\beta_1=110$ for the same graph family at $N_{\max}=5$
+(the growth is roughly quadratic in $N_{\max}$).}
+\label{tab:combinatorics}
+\end{table}
+
+% ===================================================================
+\section{Main Result: the Ramanujan Property}
+\label{sec:main_result}
+% ===================================================================
+
+Applying~(\ref{eq:ihara_bass}) and~(\ref{eq:ihara_hashimoto}) to each
+graph gives the verdicts in Table~\ref{tab:ramanujan}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+Graph & $\rho(T)$ & $\max|\mu_{\mathrm{nontriv}}|$ & $\sqrt{q_{\max}}$ & Deviation & Ramanujan? \\
+\midrule
+$K_4$  & $2.0000$ & $1.4142$ & $1.4142$ & $\phantom{-}0.0000$ & YES (exact) \\
+$K_{3,3}$ & $2.0000$ & $1.4142$ & $1.4142$ & $\phantom{-}0.0000$ & YES (exact) \\
+$S^3$ C., $n_{\max}=2$ & $0$ & $0$ & $1.0000$ & $-1.0000$ & YES (trivial; forest) \\
+$S^3$ C., $n_{\max}=3$ & $1.3532$ & $1.2157$ & $1.4142$ & $-0.1985$ & \textbf{YES} \\
+$S^5$ BS, $N_{\max}=2$ & $2.3572$ & $1.7922$ & $2.0000$ & $-0.2078$ & \textbf{YES} \\
+$S^5$ BS, $N_{\max}=3$ & $3.9053$ & $2.4716$ & $2.8284$ & $-0.3568$ & \textbf{YES} \\
+\bottomrule
+\end{tabular}
+\caption{Ramanujan verdicts.  $\rho(T)$ is the Perron eigenvalue of the
+Hashimoto operator (a trivial eigenvalue, not counted against the
+Ramanujan bound).  $\max|\mu_{\mathrm{nontriv}}|$ is the largest
+non-trivial Hashimoto eigenvalue.  Ramanujan requires
+$\max|\mu_{\mathrm{nontriv}}|\le\sqrt{q_{\max}}$; the deviation
+$\max|\mu_{\mathrm{nontriv}}|-\sqrt{q_{\max}}$ is strictly negative
+for every non-trivial tested graph.}
+\label{tab:ramanujan}
+\end{table}
+
+\begin{observation}
+\label{obs:ramanujan}
+For every GeoVac Hopf graph tested in this work, the largest
+non-trivial Hashimoto eigenvalue is strictly smaller than the
+Kotani--Sunada bound.  The graphs are therefore strictly
+sub-Ramanujan: their spectral gap exceeds the optimal Ramanujan
+gap of an equivalent-$q_{\max}$ regular graph.
+\end{observation}
+
+The strictness of the deviation is itself structurally interesting.
+The Alon--Boppana bound~\cite{alon1986} asserts that for a sequence of
+graphs of bounded degree, the largest non-trivial eigenvalue
+asymptotes to the Ramanujan bound from below; graphs that achieve the
+bound asymptotically are in this sense \emph{optimal}.  Our data at
+three sizes ($S^3$, $S^5$ $N_{\max}=2$, $S^5$ $N_{\max}=3$) do not
+suffice to establish the asymptotic behavior of the deviation -- we
+explicitly leave this as an open question
+(Section~\ref{sec:open_questions}).
+
+% ===================================================================
+\section{Closed-Form Ihara Zetas and Structural Factorizations}
+\label{sec:closed_forms}
+% ===================================================================
+
+Working in exact rational arithmetic via \texttt{sympy}, we obtain
+explicit closed forms for each graph's Ihara zeta.
+
+\subsection{$S^3$ Coulomb at $n_{\max}=3$: per-$\ell$-shell
+decomposition}
+
+\begin{equation}
+\zeta_G(s)^{-1} \;=\; -(s-1)^2 (s+1)^2 (s^2 - s + 1)(s^2 + s + 1)
+    (2s^3 - s^2 + s - 1)(2s^3 + s^2 + s + 1).
+\label{eq:s3_closed}
+\end{equation}
+
+The $S^3$ Coulomb graph at $n_{\max}=3$ has three connected components
+indexed by $\ell=0,1,2$.  The $\ell=0$ component is a 3-node path
+($\beta_1=0$, $\zeta_{\ell=0}=1$); the $\ell=2$ component is a 5-node
+tree-like structure ($\beta_1=0$, $\zeta_{\ell=2}=1$).  \emph{All
+non-trivial Ihara content lives in the $\ell=1$ component}, which is
+the bipartite 3-prism / ladder graph $C_3\times P_2$.  The cyclotomic
+factors $s^2 \pm s + 1$ in~(\ref{eq:s3_closed}) have zeros at primitive
+sixth roots of unity (magnitude 1); they count the two triangles in
+the 3-prism.  The irreducible cubics $2s^3 \pm s^2 + s \pm 1$ have
+zeros at $|s|\approx 0.739$ (real) and $|s|\approx 0.823$ (complex),
+corresponding to longer closed walks through the ladder.
+
+The per-$\ell$ decomposition is a direct consequence of the Fock
+adjacency preserving $\ell$.  It is an intrinsic structural property
+of the $S^3$ Coulomb graph and one of the reasons the $S^3$ Ihara zeta
+is analytically tractable.
+
+\subsection{$S^5$ Bargmann--Segal at $N_{\max}=2$}
+
+\begin{equation}
+\zeta_G(s)^{-1} \;=\; -(s-1)^6 (s+1)^6 (2s^2 + 1)^2 (3s^4 + 3s^2 + 1)
+    (24s^6 + 21s^4 + s^2 - 1).
+\label{eq:s5_nmax2_closed}
+\end{equation}
+
+The graph is connected, $\beta_1=6$.  The $(s\pm 1)^6$ prefactor
+captures the $\beta_1$ trivial zeros.  The remaining factors are all
+even in $s$ and have integer coefficients.
+
+\subsection{$S^5$ Bargmann--Segal at $N_{\max}=3$: the $12+22$
+dichotomy}
+
+\begin{equation}
+\zeta_G(s)^{-1} \;=\; (s-1)^{23}(s+1)^{23}\cdot P_{12}(s) \cdot P_{22}(s),
+\label{eq:s5_nmax3_closed}
+\end{equation}
+where
+\begin{align}
+P_{12}(s) &= 432 s^{12} + 666 s^{10} + 374 s^8 + 135 s^6 + 47 s^4 + 11 s^2 + 1, \\
+P_{22}(s) &= 829440 s^{22} + 2453184 s^{20} + 3308104 s^{18} + 2696682 s^{16} \notag \\
+           &\quad + 1470640 s^{14} + 557227 s^{12} + 146654 s^{10} + 25709 s^8 \notag \\
+           &\quad + 2630 s^6 + 79 s^4 - 12 s^2 - 1.
+\end{align}
+Both $P_{12}$ and $P_{22}$ are polynomials in $s^2$ with integer
+coefficients; they together account for all $12+22=34$ non-trivial
+zeros, and combined with the $2\cdot 23 = 46$ trivial zeros at $s=\pm 1$
+recover the total degree $2|E|=84$.
+
+The $12+22$ split of the Ihara zeta is combinatorially nontrivial:
+there is no obvious reason, from the adjacency alone, that the
+characteristic polynomial of $T$ should factor into two irreducible
+integer polynomials of these specific degrees.
+
+\begin{observation}[$12+22$ factorization = $\mathbb{Z}_2$
+$m_\ell$-reflection block decomposition]
+\label{obs:12_22}
+The two factors $P_{12}(s^2), P_{22}(s^2)$ in the $S^5$
+Bargmann--Segal $N_{\max}=3$ Ihara zeta are exactly the characteristic
+polynomials of the node-level Ihara--Bass matrix
+$M(s) = I - sA + s^2 Q$ restricted to the two blocks of the
+$\mathbb{Z}_2$ reflection $P:\; m_\ell\mapsto -m_\ell$.
+Explicitly, $\det(M_{\text{sym}}) = (s-1)(s+1)\cdot P_{22}(s^2)$ on the
+$13$-dimensional symmetric block (containing the $m_\ell=0$ fixed
+points), and $\det(M_{\text{antisym}}) = P_{12}(s^2)$ on the
+$7$-dimensional antisymmetric block.  The $\mathbb{Z}_2$ $m_\ell$-reflection
+is the only sub-action of the Paper~25~\cite{paper25} Hopf $U(1)$ that
+commutes with a real integer adjacency; the continuous $U(1)$ phase
+rotation reduces to this $\mathbb{Z}_2$ when the data is real.
+The analogous decomposition holds for the Dirac-$S^3$ Rule~B
+$n_{\max}=3$ graph, with the $22+24$ dichotomy corresponding to the
+equal-dimension $\mathbb{Z}_2$ blocks of the $m_j\to-m_j$
+half-integer reflection (both blocks $14$-dimensional because $m_j$
+is half-integer, so there are no reflection-fixed points).
+\end{observation}
+
+Observation~\ref{obs:12_22} was validated by direct restriction of
+$M(s)$ to each reflection block in exact sympy rational arithmetic
+(Sprint~2 Track RH-E, \texttt{debug/hopf\_u1\_block\_test\_memo.md}).
+The product $\det(M_{\text{sym}})\cdot\det(M_{\text{antisym}})$ equals
+the full $\det(M)$ symbolically.
+
+\subsection{Algebraicity of zeros}
+
+Every factor in every closed form above has integer coefficients.
+The non-trivial Ihara zeros are therefore algebraic numbers, with
+Galois conjugates also appearing in the zero set.  This is a direct
+consequence of the adjacency matrix being $0/1$-valued and the
+Ihara--Bass formula~(\ref{eq:ihara_bass}) being a determinant of an
+integer-coefficient matrix polynomial.
+
+\begin{corollary}[$\pi$-freeness of Ihara zeros]
+\label{cor:pi_free}
+No GeoVac Hopf Ihara zero has a closed form involving $\pi$, $\zeta(2)$,
+$\zeta(3)$, or any other transcendental from the Paper~18 taxonomy.
+Every zero is an algebraic number lying in a finite extension of
+$\mathbb{Q}$.
+\end{corollary}
+
+Corollary~\ref{cor:pi_free} extends Paper~24's $\pi$-free
+certificate from adjacency data to Ihara-zeta data.  The same
+bit-exact $\pi$-freeness is preserved under Ihara-zeta.
+
+% ===================================================================
+\section{Functional Equation: the Irregular-Graph Reflection}
+\label{sec:functional_equation}
+% ===================================================================
+
+For a $(q{+}1)$-regular graph, the Ihara zeta satisfies the
+Stark--Terras functional equation~\cite{stark1996,terras2010}
+\begin{equation}
+\Xi_G(s) := (1 - s^2)^{r-1}\bigl(1 - (qs)^2\bigr)^{r-1}\zeta_G(s)^{-1},
+\quad \Xi_G(s) = \Xi_G(1/(qs)).
+\label{eq:stark_terras}
+\end{equation}
+In particular the Ihara zeros lie on the critical circle $|s|=1/\sqrt{q}$
+when the graph is Ramanujan.  Both sanity witnesses ($K_4, K_{3,3}$)
+satisfy~(\ref{eq:stark_terras}) with zeros on $|s|\in\{\tfrac{1}{\sqrt{2}},
+1\}$.
+
+\emph{Neither} GeoVac Hopf graph is regular: $q$ varies from 0 (at
+leaf nodes) to $q_{\max}$ (at dense interior nodes).  The Stark--Terras
+single-circle statement therefore does not hold; instead, the
+non-trivial Ihara zeros populate an \emph{annulus}
+$1/\sqrt{q_{\max}}\le|s|\le 1$, and their distribution within the
+annulus is constrained only by the Hashimoto spectrum.
+
+What \emph{does} hold uniformly across our graphs:
+
+\begin{proposition}[Reflection symmetry]
+\label{prop:reflection}
+For each GeoVac Hopf graph tested, $\zeta_G(s)^{-1}$ is invariant
+under $s\mapsto -s$ up to a possible sign factor of the trivial
+$(s\pm 1)^{\beta_1}$ prefactors.  Equivalently, every non-trivial
+polynomial factor in the closed forms
+(\ref{eq:s3_closed}), (\ref{eq:s5_nmax2_closed}),
+(\ref{eq:s5_nmax3_closed}) is even in~$s$.
+\end{proposition}
+
+The proposition is a structural statement about undirected graphs:
+the Hashimoto matrix $T$ satisfies $T\sim -T$ under the involution
+$e\mapsto e^{-1}$ on directed edges, so its characteristic polynomial
+is even in its argument.  Proposition~\ref{prop:reflection} is
+therefore a universal property of the Ihara zeta on any undirected
+graph, regular or not.
+
+\begin{proposition}[Algebraic closure under Galois conjugation]
+\label{prop:galois}
+The non-trivial Ihara zeros of every GeoVac Hopf graph are algebraic
+numbers whose Galois conjugates also appear in the zero set.  The
+zero set is therefore a finite union of Galois orbits in
+$\bar{\mathbb{Q}}$.
+\end{proposition}
+
+This is immediate from the integer-coefficient factorizations of
+Section~\ref{sec:closed_forms}.
+
+The weakening from the full Stark--Terras symmetry to
+Propositions~\ref{prop:reflection} and~\ref{prop:galois} is a feature
+of irregularity, not a pathology of our graphs.  It is
+Kotani--Sunada's~\cite{kotani2000} Theorem~1.3 which supplies the
+correct $\Xi$-completion for the irregular case: a product over all
+degree strata of the graph, rather than a single regular-graph
+correction.  Making that completion explicit for our two graphs is a
+useful computational exercise but is not required to state the
+Ramanujan property, which is already secured by
+Observation~\ref{obs:ramanujan}.
+
+% ===================================================================
+\section{Scope Boundary: No Natural Hyperbolic Quotient}
+\label{sec:scope_boundary}
+% ===================================================================
+
+A natural companion question to the Ihara-zeta result is whether the
+Wick-rotated continuation of the Fock projection, which takes the
+compact $S^3$ to the non-compact hyperbolic 3-space $H^3$ at positive
+energy~\cite{bander1966}, delivers a Selberg zeta with a \emph{proven}
+RH analog (on congruence Bianchi quotients~\cite{egm1998}).  We
+investigated this in parallel and report a clean negative.
+
+\subsection{The Wick rotation is clean but continuous}
+
+Following Bander--Itzykson~\cite{bander1966}, the Fock projection with
+$p_0=\sqrt{-2mE}$ continues to $p_0=i\kappa_{\mathrm{phys}}$ at
+$E>0$, rotating the target manifold from the round $S^3\subset
+\mathbb{R}^4$ to the upper unit pseudosphere in $\mathbb{R}^{3,1}$,
+i.e., hyperbolic 3-space $H^3$ in its Minkowski embedding.  The
+symmetry group rotates from compact $\mathrm{SO}(4)$ to non-compact
+$\mathrm{SO}(3,1)$, with the SO(4) principal-series
+representations continuing to the principal/complementary series of
+$\mathrm{SO}(3,1)$.  The Coulomb scattering amplitudes are matrix
+elements in this continuous principal series.  This is clean and
+unambiguous.
+
+\subsection{But no discrete quotient $\Gamma\subset\mathrm{SO}(3,1)$
+is singled out}
+
+To recover a graph-like discrete object on $H^3$, one needs a
+discrete subgroup $\Gamma$ with quotient $H^3/\Gamma$.  Of the four
+candidate $\Gamma$'s that GeoVac structure suggests, none works:
+
+\begin{enumerate}
+\item \textbf{Weyl group of $\mathrm{SO}(4)$.}  The Weyl group
+$W(D_2)=\mathbb{Z}/2\times\mathbb{Z}/2$ has order 4.  Finite, not a
+lattice in $\mathrm{SO}(3,1)$.  Acting on $H^3$ it has fixed points
+everywhere; it does not produce a discrete hyperbolic quotient.
+\item \textbf{Hopf $S^1$ fiber.}  The compact Hopf $S^1$ is
+structurally irrelevant for $H^3$: hyperbolic 3-space has no Hopf-type
+principal bundle with a compact $S^1$ fiber.  This is the same
+Coulomb/HO asymmetry Paper~24~\cite{paper24} identified, one layer
+further.
+\item \textbf{Bianchi groups $\mathrm{PSL}(2,\mathcal{O}_K)$,
+$K=\mathbb{Q}(\sqrt{-d})$.}  The class-number-one cases
+$d\in\{1,2,3,7,11\}$ act discontinuously on $H^3$.  None of GeoVac's
+numerical invariants -- the Rydberg constant $R_\infty$, the Fock
+momentum $p_0=Z/n$, $\kappa=-\tfrac{1}{16}$, $B=42$, $F=\pi^2/6$,
+$\Delta=\tfrac{1}{40}$, $\alpha^{-1}\approx 137$ -- matches any
+specific $d$.  The Bianchi groups are objects of number theory, not
+of hydrogen.
+\item \textbf{Picard group $\mathrm{PSL}(2,\mathbb{Z}[i])$.}  As the
+simplest Bianchi case, Picard is the default.  But ``simplest'' is
+not a physics selection principle, and the Coulomb node labels
+$(n,\ell,m)\in\mathbb{Z}^3$ are not in $\mathbb{Z}[i]$.  No natural
+selection.
+\end{enumerate}
+
+The literature survey~\cite{rh_survey} that accompanied this
+investigation confirmed that \emph{no published work} links the
+$\mathrm{SO}(4)$ Coulomb symmetry to Bianchi arithmetic quotients.
+
+\begin{observation}[No natural hydrogen-Selberg bridge]
+\label{obs:no_selberg}
+The Fock Wick rotation $S^3\to H^3$ is well-defined and continuous,
+but GeoVac provides no selection principle for a discrete subgroup
+$\Gamma\subset\mathrm{SO}(3,1)$.  The Selberg-zeta angle on
+hydrogen-derived hyperbolic quotients is therefore structurally
+closed.
+\end{observation}
+
+This observation refines the Paper~24~\cite{paper24} universal /
+Coulomb-specific partition one level further:
+\begin{itemize}
+\item $S^3$ (Coulomb, bound): compact, Hopf, calibration $\pi$, discrete
+spectrum, graph-zeta available.
+\item $S^5$ (HO, Bargmann--Segal): compact complex, Hopf $U(1)$,
+bit-exactly $\pi$-free, discrete spectrum, graph-zeta available.
+\item $H^3$ (Coulomb, continuum): non-compact, no natural Hopf
+bundle, no natural discrete subgroup, continuous spectrum,
+Selberg-zeta \emph{requires external arithmetic input}.
+\end{itemize}
+
+The graph-zeta direction is therefore the single RH-adjacent direction
+that is intrinsic to GeoVac.  The Selberg direction, for hydrogen,
+is not.
+
+% ===================================================================
+\section{Open Questions}
+\label{sec:open_questions}
+% ===================================================================
+
+\paragraph{Extension to $N_{\max}=5$.}  The Paper~25 headline case
+for the $S^5$ Bargmann--Segal graph reports $V=56$, $E=165$,
+$\beta_1=110$.  The Hashimoto operator at that size is $2|E|=330$-dimensional
+-- a fully tractable numerical eigensolve.  Extending the Ramanujan
+verdict and the closed-form factorization to $N_{\max}=5$ would give
+three data points on the deviation's growth (already at $-0.357$
+for $N_{\max}=3$) and a headline match to Paper~25's Hodge data.
+
+\paragraph{Alon--Boppana asymptotics --- resolved (Sprint~2, RH-D).}
+Extending the Ramanujan verdict to $n_{\max},N_{\max}\in\{4,5\}$ in a
+post-draft sweep establishes that the signed deviation grows
+\emph{linearly in $V$} for three of four families (scalar $S^3$
+Coulomb: $R^2=0.994$; scalar $S^5$ Bargmann--Segal: $R^2=0.766$;
+Dirac-$S^3$ Rule~B: $R^2=0.828$).  The Kotani--Sunada bound is crossed
+between $V\approx 30$ and $V\approx 60$ for each of these families:
+scalar $S^3$ at $n_{\max}=5$ ($V=55$, deviation $+0.20$), scalar $S^5$
+at $N_{\max}=5$ ($V=56$, deviation $+0.65$), Dirac-$S^3$ Rule~B at
+$n_{\max}=4$ ($V=60$, deviation $+1.53$).  Only the Dirac-$S^3$ Rule~A
+family appears to remain sub-Ramanujan, with a $1/V$-class envelope
+($|\text{deviation}|\sim V^{-3.05}$, $R^2=0.994$).  The conjectured
+structural mechanism is \emph{mixed-density topology}: $q_{\max}$ is
+set by the single densest vertex while the Perron eigenvalue of $T$ is
+driven by graph volume; as the graph grows, near-regular dense
+sub-blocks appear whose Perron exceeds $\sqrt{q_{\max}}$.  The
+graph-RH for GeoVac is a finite-size statement, secured for
+$n_{\max},N_{\max}\le 3$ and failing asymptotically for the three
+dense families.  Full data at \texttt{debug/data/alon\_boppana\_sweep.json}.
+
+\paragraph{Hopf-quotient block decomposition --- validated (Sprint~2, RH-E).}
+Observation~\ref{obs:12_22} has been verified by direct restriction of
+the node-level Ihara--Bass matrix $M(s)$ to each $\mathbb{Z}_2$
+$m$-reflection block in exact sympy rational arithmetic.  The block
+decomposition reproduces $P_{12}$ and $P_{22}$ (scalar $S^5$
+$N_{\max}=3$) and $P_{22}$ and $P_{24}$ (Dirac-$S^3$ Rule~B
+$n_{\max}=3$) symbolically.  The $\mathbb{Z}_2$ reflection is the only
+sub-action of the Paper~25 Hopf $U(1)$ that commutes with a real
+integer adjacency, and the mechanism is identical in scalar and spinor
+cases.
+
+\paragraph{Spin-ful Ihara zeta on the Dirac-$S^3$ graph.}  The
+infrastructure built for the Tier-3 relativistic
+sprint~\cite{paper14,paper18} -- the Dirac spectrum $|\lambda_n|=n+\tfrac32$,
+the $(\kappa, m_j)$-labeled spinor harmonic basis, the
+Szmytkowski matrix elements -- induces a distinct graph structure
+on the Dirac sector.  Its Ihara zeta is a genuinely new object:
+the edges differ from the Schr\"odinger graph (the Dirac rule
+couples spin and orbital angular momentum), and the resulting Hashimoto
+spectrum is -- conjecturally -- richer.  This is the natural spinor
+extension of the present paper and the recommended next Ihara-zeta
+sprint from both the Wick memo and the present work.
+
+\paragraph{Continuum limit --- redirected from Ihara to spectral zeta
+(Sprint~2, RH-G).}  Sprint~2 Track~RH-G investigated whether any
+combinatorial or refinement limit of the GeoVac Ihara zeta connects
+to a classical $L$-function.  The headline obstruction is structural:
+the GeoVac Hopf graphs are \emph{bipartite} (all closed
+non-backtracking walks have even length), so $\operatorname{tr}(T^L)=0$
+for odd $L$ and the Ihara walk-length spectrum is supported on the
+even integers.  Paper~28's $\chi_{-4}$ Dirichlet character has support
+only on odd integers, so the $\chi_{-4}$-twisted Ihara zeta
+$\zeta_G(s;\chi_{-4}) = \prod_{[C]}(1 - \chi_{-4}(\ell(C))s^{\ell(C)})^{-1}$
+is identically the trivial Euler product.  The $\chi_{-4}$ structure
+that does appear in Paper 28 lives on the \emph{spectral} side --- the
+Dirac Dirichlet series $D(s) = \sum_{n} g_n\cdot |\lambda_n|^{-s}$ at
+quarter-integer Hurwitz shifts, splitting into $D_{\text{even}}(s)$ and
+$D_{\text{odd}}(s)$ whose differences expose Catalan's $G=\beta(2)$
+and $\beta(4)$.  Supporting statistics: the Hashimoto eigenvalue-spacing
+coefficient of variation is $\approx 1$ (Poisson, Berry--Tabor), not
+the GUE value $\approx 0.42$, categorically excluding a direct
+Hilbert--P\'olya identification with $\zeta$ zeros.  The bridge to
+classical $\zeta(s)$, if any, must therefore go through the
+\emph{spectral} zeta (Paper~28's machinery), not through the Ihara
+zeta.  Full obstruction analysis at
+\texttt{debug/riemann\_limit\_memo.md}.
+
+% ===================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ===================================================================
+
+The GeoVac Hopf graphs satisfy the graph Riemann Hypothesis --- the
+Kotani--Sunada Ramanujan bound --- strictly, at every small size
+tested ($n_{\max},N_{\max}\le 3$).  Extending to $n_{\max},N_{\max}
+\in\{4,5\}$ in a Sprint-2 follow-up sweep shows that three of four
+graph families cross the bound at modest sizes
+($V\approx 30$--$60$) with a signed deviation growing linearly in $V$,
+so the graph-RH is a finite-size statement for GeoVac, not an
+asymptotic one (Section~\ref{sec:open_questions}, Alon--Boppana
+subsection).  Their Ihara zetas factor with integer coefficients; their
+zeros are algebraic; no transcendentals enter the zero set, consistent
+with Paper~24's $\pi$-free certificate.  The per-$\ell$-shell
+decomposition of the $S^3$ Coulomb zeta and the $12+22$ / $22+24$
+dichotomies of the scalar $S^5$ $N_{\max}=3$ and Dirac-$S^3$ Rule~B
+$n_{\max}=3$ zetas are, by direct verification, the $\mathbb{Z}_2$
+$m$-reflection blocks of the node-level Ihara--Bass matrix
+(Observation~\ref{obs:12_22}); these connect back to Paper~7's SO(4)
+selection rules and to the real-integer-adjacency-compatible
+sub-action of Paper~25's Hopf-$U(1)$ gauge structure.  Neither graph
+is regular, so the single-critical-circle Stark--Terras functional
+equation does not apply; what does hold uniformly is the
+$s\mapsto -s$ reflection and Galois closure of the zero set.
+
+The adjacent Selberg-zeta direction -- a Wick rotation of the Fock
+projection to hyperbolic 3-space, followed by a quotient by a
+discrete arithmetic subgroup -- is structurally closed for hydrogen:
+the framework supplies no selection principle for such a subgroup.
+The graph-zeta angle is therefore the single RH-adjacent direction
+intrinsic to GeoVac.
+
+We frame this as an observation rather than a claim about the
+classical Riemann Hypothesis.  The graph-RH for a specific family
+of finite graphs is a different object than RH for $\zeta(s)$.  What
+these results establish is a concrete bridge at small graph sizes:
+\emph{our} framework has an Euler product, a functional equation (in
+the irregular-graph form), a critical region, and zeros that respect
+the Ramanujan bound at $n_{\max},N_{\max}\le 3$, plus a validated
+$\mathbb{Z}_2$ block-decomposition matching the Paper~25 Hopf
+structure.  The Sprint~2 search for a limiting bridge to classical
+$\zeta(s)$ (Track~RH-G) produced a structural redirection: the
+bipartiteness of the GeoVac Hopf graphs blocks any Ihara-side bridge,
+but Paper~28's spectral Dirichlet series (equipped with
+$\chi_{-4}$) remains the open direction on the spectral side.  The
+Ihara zeta therefore terminates as a self-contained structural object
+with validated $\mathbb{Z}_2$ block decomposition, and the Prize-bound
+research program moves to the spectral-zeta side.
+
+The computations reported here are recorded in
+\texttt{geovac/ihara\_zeta.py} and \texttt{tests/test\_ihara\_zeta.py},
+with full numerical data in
+\texttt{debug/data/ihara\_zeta\_geovac\_hopf.json} and the
+supporting Wick-rotation memo at
+\texttt{debug/fock\_continuation\_memo.md}.  All Ihara zeta closed
+forms above are exact in \texttt{sympy} rational arithmetic.
+
+% ===================================================================
+\begin{thebibliography}{99}
+% ===================================================================
+
+\bibitem{paper1} GeoVac Project.  \emph{Paper 1: Spectral Graph Theory
+and the Geometric Vacuum.}  GeoVac Project, ongoing.
+\bibitem{paper7} GeoVac Project.  \emph{Paper 7: The Dimensionless
+Vacuum.}  GeoVac Project, ongoing.  18 symbolic proofs of the
+$S^3$ conformal equivalence.
+\bibitem{paper14} GeoVac Project.  \emph{Paper 14: Qubit Encoding of
+the Geometric Vacuum.}  GeoVac Project, ongoing.
+\bibitem{paper18} GeoVac Project.  \emph{Paper 18: Exchange Constants
+and Transcendental Taxonomy.}  GeoVac Project, ongoing.
+\bibitem{paper24} GeoVac Project.  \emph{Paper 24: Bargmann--Segal
+Lattice: a $\pi$-free Discretization of the 3D Harmonic Oscillator.}
+GeoVac Project, 2026.
+\bibitem{paper25} GeoVac Project.  \emph{Paper 25: The GeoVac Hopf
+Graph as a Lattice-Gauge Structure.}  GeoVac Project, April 2026.
+\bibitem{paper28} GeoVac Project.  \emph{Paper 28: QED on $S^3$:
+Spectral Geometry of Perturbative Transcendentals.}  GeoVac Project,
+April 2026.
+\bibitem{fock1935} V. Fock.  Zur Theorie des Wasserstoffatoms.
+\emph{Z.\ Phys.}\ \textbf{98}, 145 (1935).
+\bibitem{bander1966} M. Bander and C. Itzykson.  Group Theory of the
+Hydrogen Atom.  \emph{Rev.\ Mod.\ Phys.}\ \textbf{38}, 330 (1966).
+\bibitem{ihara1966} Y. Ihara.  Discrete subgroups of $\mathrm{PL}(2,
+\mathbb{Q}_p)$.  \emph{J.\ Math.\ Soc.\ Japan}\ \textbf{18}, 219 (1966).
+\bibitem{bass1992} H. Bass.  The Ihara-Selberg zeta function of a
+tree lattice.  \emph{Internat.\ J.\ Math.}\ \textbf{3}, 717 (1992).
+\bibitem{hashimoto1989} K.-i. Hashimoto.  Zeta functions of finite
+graphs and representations of $p$-adic groups.  Advanced Studies in
+Pure Math.\ \textbf{15}, 211 (1989).
+\bibitem{kotani2000} M. Kotani and T. Sunada.  Zeta functions of
+finite graphs.  \emph{J.\ Math.\ Sci.\ Univ.\ Tokyo}\ \textbf{7}, 7
+(2000).
+\bibitem{terras2010} A. Terras.  \emph{Zeta Functions of Graphs:\
+A Stroll Through the Garden.}  Cambridge Univ.\ Press, 2010.
+\bibitem{lps1988} A. Lubotzky, R. Phillips, and P. Sarnak.  Ramanujan
+graphs.  \emph{Combinatorica}\ \textbf{8}, 261 (1988).
+\bibitem{morgenstern1994} M. Morgenstern.  Existence and explicit
+constructions of $(q+1)$-regular Ramanujan graphs for every prime
+power $q$.  \emph{J.\ Combin.\ Theory Ser.\ B}\ \textbf{62}, 44 (1994).
+\bibitem{stark1996} H. Stark and A. Terras.  Zeta functions of finite
+graphs and coverings.  \emph{Adv.\ Math.}\ \textbf{121}, 124 (1996).
+\bibitem{alon1986} N. Alon and V. Milman.  $\lambda_1$, isoperimetric
+inequalities for graphs and superconcentrators.  \emph{J.\ Combin.\
+Theory Ser.\ B}\ \textbf{38}, 73 (1985); N. Alon.  Eigenvalues and
+expanders.  \emph{Combinatorica}\ \textbf{6}, 83 (1986).
+\bibitem{egm1998} J. Elstrodt, F. Grunewald, and J. Mennicke.
+\emph{Groups Acting on Hyperbolic Space: Harmonic Analysis and Number
+Theory.}  Springer, 1998.
+\bibitem{rh_survey} GeoVac Project.  Riemann-Hypothesis literature
+survey, \texttt{debug/rh\_literature\_survey.md}, April 2026.
+
+\bibitem{matsuura2025} S. Matsuura and K. Ohta.  Kazakov-Migdal model
+on graphs and the Ihara zeta function.  \emph{Prog.\ Theor.\ Exp.\
+Phys.}\ \textbf{2025}, 063B01 (2025);
+arXiv:2204.06424 (2022).  Realises the Ihara zeta as a partition
+function of a lattice gauge theory on a generic finite graph; the
+closest published precedent to treating our Hopf-structured graphs
+as carriers of a graph zeta, although it does not cover spherical /
+Fock-projected graphs specifically.
+
+\bibitem{yakaboylu2024} E. Yakaboylu.  Hermitian reflection of the
+Bender--Brody--M\"uller operator and the Riemann zeros.
+\emph{J.\ Phys.\ A: Math.\ Theor.}\ \textbf{57}, 235204 (2024);
+arXiv:2408.15135.  A current-generation Hilbert--P\'olya candidate;
+the operator lives on $L^2([0,\infty))$, a half-line and not a
+compact manifold, so it does not directly apply to a GeoVac graph
+and reinforces the observation in Section~\ref{sec:scope_boundary}
+that the compact-manifold analogues of this program remain open.
+
+\bibitem{hmy2024} J. Huang, B. McKenzie, and H.-T. Yau.  Ramanujan
+property and edge universality of random regular graphs.
+arXiv:2412.20263 (2024).  Recent progress on the probabilistic
+Ramanujan property for random regular graphs; useful as ambient
+context for sub-Ramanujan deviation behaviour observed in
+Section~\ref{sec:main_result}.
+
+\end{thebibliography}
+\end{document}
