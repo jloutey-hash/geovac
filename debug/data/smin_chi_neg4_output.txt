@@ -1,0 +1,94 @@
+========================================================================
+ Track RH-P: depth-2 chi_{-4} analog of RH-J.1 for S_min
+========================================================================
+
+§1 Convergence at varying n_terms (with asymptotic tail correction)
+------------------------------------------------------------------------
+  N=  500: S_total=2.47993693803422443622 tail=7.98e-03
+          S_even=0.91613480023028914800  tail=3.98e-03
+          S_odd =1.56380213780393551026  tail=3.99e-03
+  N= 1000: S_total=2.47993693803422265987 tail=3.99e-03
+          S_even=0.91613480023028814880  tail=2.00e-03
+          S_odd =1.56380213780393440004  tail=2.00e-03
+  N= 2000: S_total=2.47993693803422265987 tail=2.00e-03
+          S_even=0.91613480023028814880  tail=9.99e-04
+          S_odd =1.56380213780393440004  tail=1.00e-03
+  N= 4000: S_total=2.47993693803422265987 tail=1.00e-03
+          S_even=0.91613480023028814880  tail=5.00e-04
+          S_odd =1.56380213780393440004  tail=5.00e-04
+
+§2 Main computation: n_terms = 4000 (tail residual ~ 10^{-42})
+------------------------------------------------------------------------
+  S_min^total = 2.47993693803422255447852790477854280438
+  S_min^even  = 0.916134800230288120678123325689874308437
+  S_min^odd   = 1.563802137803934433800404579088668495943
+  S_min^diff  = -0.6476673375736463131222812533987941875061
+  Tail total: 9.996e-04
+  Tail even:  4.998e-04
+  Tail odd:   4.999e-04
+  Partial sanity err = 6.858e-100
+  Tail sanity err    = 2.790e-104
+  Ratio even/odd = 0.585838053346587
+  Compute time: 6.7s
+
+§3 PSLQ attempts on S_min^diff = S_min^even - S_min^odd
+------------------------------------------------------------------------
+  [miss] S_min_diff.minimal_beta (basis size 6): PSLQ returned None
+  [miss] S_min_diff.extended_beta (basis size 9): PSLQ returned None
+  [miss] S_min_diff.beta_with_products (basis size 15): PSLQ returned None
+  [miss] S_min_diff.zeta_beta_mixed (basis size 12): PSLQ returned None
+  [miss] S_min_diff.D_basis (basis size 13): zero coefficient on value
+  [miss] S_min_diff.ultra_wide (basis size 24): PSLQ returned None
+  [miss] S_min_diff.depth2_RH_J1_analog (basis size 12): zero coefficient on value
+
+§4 PSLQ attempts on S_min^even alone
+------------------------------------------------------------------------
+  [miss] S_min_even.minimal_beta
+  [miss] S_min_even.extended_beta
+  [miss] S_min_even.beta_with_products
+  [miss] S_min_even.zeta_beta_mixed
+  [miss] S_min_even.D_basis
+  [miss] S_min_even.ultra_wide
+  [miss] S_min_even.depth2_RH_J1_analog
+
+§5 PSLQ attempts on S_min^odd alone
+------------------------------------------------------------------------
+  [miss] S_min_odd.minimal_beta
+  [miss] S_min_odd.extended_beta
+  [miss] S_min_odd.beta_with_products
+  [miss] S_min_odd.zeta_beta_mixed
+  [miss] S_min_odd.D_basis
+  [miss] S_min_odd.ultra_wide
+  [miss] S_min_odd.depth2_RH_J1_analog
+
+§6 PSLQ on S_even / S_odd and S_even * S_odd
+------------------------------------------------------------------------
+  Ratio   S_even/S_odd = 0.585838053346586990219852667153
+  Product S_even*S_odd = 1.43265355911670496715014658475
+
+§7 Numerical exploration of S_min^diff / known constants
+------------------------------------------------------------------------
+  S_diff / S_min                           = -0.261162825409195
+  S_diff / pi^2                            = -0.065622421249443
+  S_diff / pi^4                            = -0.006648941394470
+  S_diff / G                               = -0.707086971050942
+  S_diff / beta(4)                         = -0.654907635047266
+  S_diff / G^2                             = -0.771958003167242
+  S_diff / zeta(3)                         = -0.538799233107234
+  S_diff / D(4)^2                          = -0.210957264161201
+  S_diff / (D_even(4) - D_odd(4))          = -1.109339183501411
+  S_diff / (D_even(4) - D_odd(4))^2        = -1.900101105394469
+
+Wrote debug\data\smin_chi_neg4.json
+
+========================================================================
+ VERDICT
+========================================================================
+  Total attempts:       35
+  PSLQ identifications: 0
+  of which:
+    S_min_diff:  0
+    S_min_even:  0
+    S_min_odd:   0
+    ratio:       0
+    product:     0

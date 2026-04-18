@@ -1,6 +1,6 @@
 % Paper 29: The GeoVac Hopf Graphs Are Ramanujan
 % GeoVac Project, April 2026
-% v1.2 (Sprint-3 sync: RH-F Galois structure, RH-M spectral GUE signature, RH-K weighted Ihara with alpha^2)
+% v1.3 (Sprint-4 sync: RH-N HP operator reconstruction, RH-O FE hunt clean negative, RH-P depth-2 negative, RH-Q SU(2) Wilson gauge positive)
 
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
@@ -763,6 +763,107 @@ structural implications for Paper~18's taxonomy and no immediate
 RH-adjacent use. Full analysis in
 \texttt{debug/ihara\_zeta\_weighted\_memo.md}; module
 \texttt{geovac/ihara\_zeta\_weighted.py}.
+
+\paragraph{Hilbert--P\'olya operator reconstruction
+(Sprint~4, RH-N).}  Given the GUE-like zeros of $D(s)$,
+$D_{\mathrm{even}}$, $D_{\mathrm{odd}}$ (RH-M), a Hilbert--P\'olya
+operator $H^\star$ --- a Hermitian matrix whose eigenvalues are
+$\{\mathrm{Im}(\rho_n)\}$ --- can be explicitly reconstructed
+from the zero list. Four independent constructions (diagonal,
+tridiagonal Jacobi via Lanczos, Toeplitz via DCT,
+companion-matrix unitary-conjugate) all reproduce the spectrum;
+cross-construction Frobenius distances $0.40$--$0.81$ quantify
+that eigenvalues alone do not determine the operator.  The
+structural headline is a \emph{Weyl law} observed across all
+three zero sets: $\gamma_n \approx 18.5 \sqrt{n} + \text{const}$,
+with RMS residual $0.8$--$0.9$ and outperforming both linear
+($2\times$--$4\times$) and $n\log n$ ($3\times$--$5\times$) fits.
+This $\sqrt{n}$ growth is the Weyl density of a \emph{1D
+harmonic-oscillator-like} system, categorically different from
+the linear $n + 3/2$ growth of the Dirac operator on $S^3$ and
+from the $\log$-density of classical Riemann zeros.  $H^\star$ is
+therefore \emph{not} a small deformation of any native GeoVac
+Hamiltonian.  Module \texttt{geovac/hp\_operator.py} (13 tests);
+full analysis in \texttt{debug/hp\_operator\_memo.md}.
+
+\paragraph{Functional equation hunt on the spectral Dirichlet
+series (Sprint~4, RH-O).}  A systematic grid search was performed
+over 13{,}080 candidate completed-$\xi$ templates of the form
+$\xi_G(s) = P(s)\cdot \rho^s \cdot \prod_i \Gamma((s+a_i)/b_i)
+\cdot G(s)$, covering 8 prefactors, 9 scale parameters $\rho$,
+30 single-Gamma factors, and 55 Gamma pairs, tested at 10 complex
+points against 15 candidate reflection axes, in mpmath 50-digit
+precision.  The sanity anchors (classical $\xi_\zeta$, $\xi_\beta$,
+and the RH-J identity itself) all close to residual $\sim 10^{-51}$.
+The global best residual across all GeoVac templates and all
+axes is $0.594$ --- $48$ orders of magnitude worse than the sanity
+threshold.  The search therefore produces a clean negative.  The
+structural obstruction: each of $D(s)$, $D_{\mathrm{even}}(s)$,
+$D_{\mathrm{odd}}(s)$ is a linear combination of \emph{two}
+Hurwitz pieces at \emph{different exponents} $s$ and $s-2$ with
+mismatched weights, and no single Gamma product can simultaneously
+complete both; for $D_{\mathrm{diff}}$, the two $\beta$ pieces
+require different reflection axes ($c=1$ for $\beta(s)$,
+$c=5$ for $\beta(s-2)$).  The missing critical-line-forcing
+ingredient of classical RH is therefore \emph{structurally}
+absent from GeoVac's spectral zeta, not merely undiscovered.
+Combined with RH-M's non-critical-line zero distribution and
+RH-N's $\sqrt{n}$ Weyl law, Sprint~4 closes the direct
+spectral-to-classical-RH bridge.  Full analysis in
+\texttt{debug/functional\_equation\_hunt\_memo.md}.
+
+\paragraph{Depth-2 $\chi_{-4}$ analog for $S_{\min}$
+(Sprint~4, RH-P).}  The depth-1 identity~(\ref{eq:D_diff_closed})
+of Paper~28 has no depth-2 analog for the CG-weighted irreducible
+constant $S_{\min}$.  Splitting $S_{\min} = \sum_k T(k)^2$ by the
+parity of $k$ gives $S_{\min}^{\mathrm{even}} + S_{\min}^{\mathrm{odd}} =
+S_{\min}$ (sanity); the difference $S_{\min}^{\mathrm{diff}}$ is
+numerically irreducible against $\chi_{-4}$ / $\beta(s)$ /
+$\zeta(s)$ bases up to weight~$8$ (35 PSLQ attempts across 7 basis
+strategies at 100 dps, zero identifications). The structural
+obstruction: RH-J.1's telescoping relied on the \emph{linear}
+Hurwitz identity $\zeta(s, 3/4) - \zeta(s, 5/4) = 4^s(1 - \beta(s))$
+with uniform $2^{2s-1}$ prefactors.  At depth~$2$, $T(k)^2$ is a
+\emph{quadratic} object; the Bernoulli-asymptotic tail coefficients
+scramble the uniform prefactor structure, and $S_{\min}^{\mathrm{even}}$,
+$S_{\min}^{\mathrm{odd}}$ live in a weight-$2$ multiple-zeta-value
+sector not spanned by products of standard Dirichlet-$L$ values.
+Full analysis in \texttt{debug/smin\_chi\_neg4\_memo.md}.  A
+side-finding concerning the published numerical value of $S_{\min}$
+is under independent verification at the time of writing; the
+irreducibility claim is unaffected either way.
+
+\paragraph{SU(2) Wilson lattice gauge on $S^3 = \mathrm{SU}(2)$
+(Sprint~4, RH-Q).}  A self-consistent non-abelian Wilson lattice
+gauge theory with gauge group $\mathrm{SU}(2)$ was constructed on
+the Fock-projected $S^3$ Coulomb Hopf graph, extending Paper~25's
+$U(1)$ Wilson--Hodge structure.  Link variables $U_e \in
+\mathrm{SU}(2)$ on directed edges; plaquettes are primitive
+closed non-backtracking walks (our Ihara cycles); action
+$S_W = \beta \sum_{\mathrm{plaq}} (1 - \tfrac{1}{2}\,\mathrm{Re}\,
+\mathrm{Tr}\,U_{\mathrm{plaq}})$; character expansion via
+$\mathrm{SU}(2)$ Haar.  Three structural results: (i)~Paper~25's
+$U(1)$ action is \emph{exactly} the maximal-torus limit of this
+$\mathrm{SU}(2)$ theory (diagonal $U_e$ reduce to $U(1)$ to machine
+precision), elevating the abelian construction to a Cartan
+projection of a genuinely non-abelian theory; (ii)~weak-coupling
+linearization around the trivial vacuum yields exactly the
+discrete Hodge-1 Laplacian $L_1 = B^T B$ of Paper~25 as the
+kinetic term, retroactively identifying $L_1$ as the
+$\mathrm{SU}(2)$ kinetic sector; (iii)~plaquette counts grow
+$(0, 0, 0) \to (2, 1, 1) \to (8, 7, 18)$ at length $(L=4, 6, 8)$
+for $n_{\max} = 2, 3, 4$; Monte-Carlo Wilson loops on $n_{\max}=3$
+at $\beta \in \{0.5, 1, 2, 5\}$ give
+$\langle W \rangle = 0.126, 0.158, 0.332, 0.681$, monotonic but
+without an area/perimeter-law crossover at this size (only one
+plaquette class exists).  This is a gauge-invariant, Haar-normalizable
+non-abelian lattice gauge theory on a compact finite graph; it is
+\emph{not} a continuum Yang--Mills mass-gap result (the Millennium
+Problem is specifically about $\mathbb{R}^4$ continuum QFT with
+a non-abelian simple gauge group; our construction is a discrete
+compact-graph version).  Module
+\texttt{geovac/su2\_wilson\_gauge.py} (26 tests);
+full analysis in \texttt{debug/su2\_wilson\_gauge\_memo.md}.
 
 % ===================================================================
 \section{Conclusion}

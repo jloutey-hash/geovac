@@ -1,0 +1,1589 @@
+{
+  "sprint": "RH-P (Sprint 4)",
+  "mpmath_dps": 100,
+  "n_terms": 4000,
+  "tail_method": "asymptotic expansion in 1/a, 10 terms, residual O(1/N^11)",
+  "convergence_records": [
+    {
+      "n_terms": 500,
+      "S_total_float": 2.4799369380342244,
+      "S_even_float": 0.9161348002302891,
+      "S_odd_float": 1.5638021378039355,
+      "S_diff_float": -0.6476673375736464,
+      "tail_total_float": 0.007976065618106562,
+      "partial_sanity_err": 3.7147090216673937e-100,
+      "tail_sanity_err": 2.2323972485981933e-103
+    },
+    {
+      "n_terms": 1000,
+      "S_total_float": 2.4799369380342227,
+      "S_even_float": 0.9161348002302881,
+      "S_odd_float": 1.5638021378039344,
+      "S_diff_float": -0.6476673375736464,
+      "tail_total_float": 0.003994008212232505,
+      "partial_sanity_err": 4.5719495651291e-100,
+      "tail_sanity_err": 5.5809931214954833e-104
+    },
+    {
+      "n_terms": 2000,
+      "S_total_float": 2.4799369380342227,
+      "S_even_float": 0.9161348002302881,
+      "S_odd_float": 1.5638021378039344,
+      "S_diff_float": -0.6476673375736464,
+      "tail_total_float": 0.0019985010271530994,
+      "partial_sanity_err": 4.0004558694879624e-100,
+      "tail_sanity_err": 2.7904965607477417e-104
+    },
+    {
+      "n_terms": 4000,
+      "S_total_float": 2.4799369380342227,
+      "S_even_float": 0.9161348002302881,
+      "S_odd_float": 1.5638021378039344,
+      "S_diff_float": -0.6476673375736464,
+      "tail_total_float": 0.0009996251284331698,
+      "partial_sanity_err": 6.85792434769365e-100,
+      "tail_sanity_err": 2.7904965607477417e-104
+    }
+  ],
+  "main_values": {
+    "S_min_total_str": "2.479936938034222554478527904778542804380120692746775765244277678213498853763477130313478675427506071",
+    "S_min_even_str": "0.9161348002302881206781233256898743084370093700482533095392535800573660954251477320636942385495177567",
+    "S_min_odd_str": "1.563802137803934433800404579088668495943111322698522455705024098156132758338329398249784436877988314",
+    "S_min_diff_str": "-0.6476673375736463131222812533987941875061019526502691461657705180987666629131816661860901983284705571",
+    "S_min_total_float": 2.4799369380342227,
+    "S_min_even_float": 0.9161348002302881,
+    "S_min_odd_float": 1.5638021378039344,
+    "S_min_diff_float": -0.6476673375736464,
+    "partial_sanity_err": 6.85792434769365e-100,
+    "tail_sanity_err": 2.7904965607477417e-104,
+    "ratio_even_odd": 0.585838053346587
+  },
+  "T_samples": {
+    "1": 0.9620566914656987,
+    "2": 0.6548566914656987,
+    "3": 0.4949233303661569,
+    "4": 0.3973772245895984,
+    "5": 0.3318079328745516,
+    "10": 0.18156861715307004,
+    "50": 0.0392131738254164,
+    "100": 0.01980165668144848,
+    "1000": 0.001998001665666809
+  },
+  "comparisons": {
+    "S_diff / S_min": -0.2611628254091954,
+    "S_diff / pi^2": -0.06562242124944338,
+    "S_diff / pi^4": -0.006648941394469702,
+    "S_diff / G": -0.7070869710509422,
+    "S_diff / beta(4)": -0.6549076350472665,
+    "S_diff / G^2": -0.7719580031672418,
+    "S_diff / zeta(3)": -0.5387992331072342,
+    "S_diff / D(4)^2": -0.21095726416120114,
+    "S_diff / (D_even(4) - D_odd(4))": -1.1093391835014113,
+    "S_diff / (D_even(4) - D_odd(4))^2": -1.9001011053944685
+  },
+  "pslq_attempts": {
+    "S_min_diff": [
+      {
+        "label": "S_min_diff.minimal_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 6
+        }
+      },
+      {
+        "label": "S_min_diff.extended_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)"
+          ],
+          "basis_size": 9
+        }
+      },
+      {
+        "label": "S_min_diff.beta_with_products",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "pi^2*G",
+          "pi^4*G",
+          "pi^2*beta(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "pi^2*G",
+            "pi^4*G",
+            "pi^2*beta(4)"
+          ],
+          "basis_size": 15
+        }
+      },
+      {
+        "label": "S_min_diff.zeta_beta_mixed",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "zeta(3)^2",
+          "zeta(3)*zeta(5)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "zeta(3)^2",
+            "zeta(3)*zeta(5)"
+          ],
+          "basis_size": 12
+        }
+      },
+      {
+        "label": "S_min_diff.D_basis",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D(4)",
+          "D(5)",
+          "D(6)",
+          "D(4)^2",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D(4)",
+            "D(5)",
+            "D(6)",
+            "D(4)^2",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)"
+          ],
+          "basis_size": 13,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "label": "S_min_diff.ultra_wide",
+        "keys": [
+          "1",
+          "pi",
+          "pi^2",
+          "pi^3",
+          "pi^4",
+          "pi^5",
+          "pi^6",
+          "pi^7",
+          "pi^8",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(5)",
+          "beta(6)",
+          "beta(7)",
+          "beta(8)",
+          "log2",
+          "log3",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "zeta(3)^2"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi",
+            "pi^2",
+            "pi^3",
+            "pi^4",
+            "pi^5",
+            "pi^6",
+            "pi^7",
+            "pi^8",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(5)",
+            "beta(6)",
+            "beta(7)",
+            "beta(8)",
+            "log2",
+            "log3",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "zeta(3)^2"
+          ],
+          "basis_size": 24
+        }
+      },
+      {
+        "label": "S_min_diff.depth2_RH_J1_analog",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D_even(4)",
+          "D_odd(4)",
+          "D_even(4)-D_odd(4)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D_even(4)",
+            "D_odd(4)",
+            "D_even(4)-D_odd(4)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 12,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "S_min_even": [
+      {
+        "label": "S_min_even.minimal_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 6
+        }
+      },
+      {
+        "label": "S_min_even.extended_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)"
+          ],
+          "basis_size": 9
+        }
+      },
+      {
+        "label": "S_min_even.beta_with_products",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "pi^2*G",
+          "pi^4*G",
+          "pi^2*beta(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "pi^2*G",
+            "pi^4*G",
+            "pi^2*beta(4)"
+          ],
+          "basis_size": 15
+        }
+      },
+      {
+        "label": "S_min_even.zeta_beta_mixed",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "zeta(3)^2",
+          "zeta(3)*zeta(5)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "zeta(3)^2",
+            "zeta(3)*zeta(5)"
+          ],
+          "basis_size": 12
+        }
+      },
+      {
+        "label": "S_min_even.D_basis",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D(4)",
+          "D(5)",
+          "D(6)",
+          "D(4)^2",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D(4)",
+            "D(5)",
+            "D(6)",
+            "D(4)^2",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)"
+          ],
+          "basis_size": 13,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "label": "S_min_even.ultra_wide",
+        "keys": [
+          "1",
+          "pi",
+          "pi^2",
+          "pi^3",
+          "pi^4",
+          "pi^5",
+          "pi^6",
+          "pi^7",
+          "pi^8",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(5)",
+          "beta(6)",
+          "beta(7)",
+          "beta(8)",
+          "log2",
+          "log3",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "zeta(3)^2"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi",
+            "pi^2",
+            "pi^3",
+            "pi^4",
+            "pi^5",
+            "pi^6",
+            "pi^7",
+            "pi^8",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(5)",
+            "beta(6)",
+            "beta(7)",
+            "beta(8)",
+            "log2",
+            "log3",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "zeta(3)^2"
+          ],
+          "basis_size": 24
+        }
+      },
+      {
+        "label": "S_min_even.depth2_RH_J1_analog",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D_even(4)",
+          "D_odd(4)",
+          "D_even(4)-D_odd(4)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D_even(4)",
+            "D_odd(4)",
+            "D_even(4)-D_odd(4)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 12,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "S_min_odd": [
+      {
+        "label": "S_min_odd.minimal_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 6
+        }
+      },
+      {
+        "label": "S_min_odd.extended_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)"
+          ],
+          "basis_size": 9
+        }
+      },
+      {
+        "label": "S_min_odd.beta_with_products",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "pi^2*G",
+          "pi^4*G",
+          "pi^2*beta(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "pi^2*G",
+            "pi^4*G",
+            "pi^2*beta(4)"
+          ],
+          "basis_size": 15
+        }
+      },
+      {
+        "label": "S_min_odd.zeta_beta_mixed",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "zeta(3)^2",
+          "zeta(3)*zeta(5)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "zeta(3)^2",
+            "zeta(3)*zeta(5)"
+          ],
+          "basis_size": 12
+        }
+      },
+      {
+        "label": "S_min_odd.D_basis",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D(4)",
+          "D(5)",
+          "D(6)",
+          "D(4)^2",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D(4)",
+            "D(5)",
+            "D(6)",
+            "D(4)^2",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)"
+          ],
+          "basis_size": 13,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "label": "S_min_odd.ultra_wide",
+        "keys": [
+          "1",
+          "pi",
+          "pi^2",
+          "pi^3",
+          "pi^4",
+          "pi^5",
+          "pi^6",
+          "pi^7",
+          "pi^8",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(5)",
+          "beta(6)",
+          "beta(7)",
+          "beta(8)",
+          "log2",
+          "log3",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "zeta(3)^2"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi",
+            "pi^2",
+            "pi^3",
+            "pi^4",
+            "pi^5",
+            "pi^6",
+            "pi^7",
+            "pi^8",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(5)",
+            "beta(6)",
+            "beta(7)",
+            "beta(8)",
+            "log2",
+            "log3",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "zeta(3)^2"
+          ],
+          "basis_size": 24
+        }
+      },
+      {
+        "label": "S_min_odd.depth2_RH_J1_analog",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D_even(4)",
+          "D_odd(4)",
+          "D_even(4)-D_odd(4)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D_even(4)",
+            "D_odd(4)",
+            "D_even(4)-D_odd(4)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 12,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "ratio": [
+      {
+        "label": "ratio.minimal_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 6
+        }
+      },
+      {
+        "label": "ratio.extended_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)"
+          ],
+          "basis_size": 9
+        }
+      },
+      {
+        "label": "ratio.beta_with_products",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "pi^2*G",
+          "pi^4*G",
+          "pi^2*beta(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "pi^2*G",
+            "pi^4*G",
+            "pi^2*beta(4)"
+          ],
+          "basis_size": 15
+        }
+      },
+      {
+        "label": "ratio.zeta_beta_mixed",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "zeta(3)^2",
+          "zeta(3)*zeta(5)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "zeta(3)^2",
+            "zeta(3)*zeta(5)"
+          ],
+          "basis_size": 12
+        }
+      },
+      {
+        "label": "ratio.D_basis",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D(4)",
+          "D(5)",
+          "D(6)",
+          "D(4)^2",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D(4)",
+            "D(5)",
+            "D(6)",
+            "D(4)^2",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)"
+          ],
+          "basis_size": 13,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "label": "ratio.ultra_wide",
+        "keys": [
+          "1",
+          "pi",
+          "pi^2",
+          "pi^3",
+          "pi^4",
+          "pi^5",
+          "pi^6",
+          "pi^7",
+          "pi^8",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(5)",
+          "beta(6)",
+          "beta(7)",
+          "beta(8)",
+          "log2",
+          "log3",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "zeta(3)^2"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi",
+            "pi^2",
+            "pi^3",
+            "pi^4",
+            "pi^5",
+            "pi^6",
+            "pi^7",
+            "pi^8",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(5)",
+            "beta(6)",
+            "beta(7)",
+            "beta(8)",
+            "log2",
+            "log3",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "zeta(3)^2"
+          ],
+          "basis_size": 24
+        }
+      },
+      {
+        "label": "ratio.depth2_RH_J1_analog",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D_even(4)",
+          "D_odd(4)",
+          "D_even(4)-D_odd(4)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D_even(4)",
+            "D_odd(4)",
+            "D_even(4)-D_odd(4)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 12,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "product": [
+      {
+        "label": "product.minimal_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 6
+        }
+      },
+      {
+        "label": "product.extended_beta",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)"
+          ],
+          "basis_size": 9
+        }
+      },
+      {
+        "label": "product.beta_with_products",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "pi^8",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "beta(8)",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "pi^2*G",
+          "pi^4*G",
+          "pi^2*beta(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "pi^8",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "beta(8)",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "pi^2*G",
+            "pi^4*G",
+            "pi^2*beta(4)"
+          ],
+          "basis_size": 15
+        }
+      },
+      {
+        "label": "product.zeta_beta_mixed",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "pi^6",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "zeta(3)^2",
+          "zeta(3)*zeta(5)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "pi^6",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "zeta(3)^2",
+            "zeta(3)*zeta(5)"
+          ],
+          "basis_size": 12
+        }
+      },
+      {
+        "label": "product.D_basis",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D(4)",
+          "D(5)",
+          "D(6)",
+          "D(4)^2",
+          "G",
+          "beta(4)",
+          "beta(6)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D(4)",
+            "D(5)",
+            "D(6)",
+            "D(4)^2",
+            "G",
+            "beta(4)",
+            "beta(6)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)"
+          ],
+          "basis_size": 13,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "label": "product.ultra_wide",
+        "keys": [
+          "1",
+          "pi",
+          "pi^2",
+          "pi^3",
+          "pi^4",
+          "pi^5",
+          "pi^6",
+          "pi^7",
+          "pi^8",
+          "zeta(3)",
+          "zeta(5)",
+          "zeta(7)",
+          "G",
+          "beta(4)",
+          "beta(5)",
+          "beta(6)",
+          "beta(7)",
+          "beta(8)",
+          "log2",
+          "log3",
+          "G^2",
+          "beta(4)^2",
+          "G*beta(4)",
+          "zeta(3)^2"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "PSLQ returned None",
+          "basis_keys": [
+            "1",
+            "pi",
+            "pi^2",
+            "pi^3",
+            "pi^4",
+            "pi^5",
+            "pi^6",
+            "pi^7",
+            "pi^8",
+            "zeta(3)",
+            "zeta(5)",
+            "zeta(7)",
+            "G",
+            "beta(4)",
+            "beta(5)",
+            "beta(6)",
+            "beta(7)",
+            "beta(8)",
+            "log2",
+            "log3",
+            "G^2",
+            "beta(4)^2",
+            "G*beta(4)",
+            "zeta(3)^2"
+          ],
+          "basis_size": 24
+        }
+      },
+      {
+        "label": "product.depth2_RH_J1_analog",
+        "keys": [
+          "1",
+          "pi^2",
+          "pi^4",
+          "D_even(4)",
+          "D_odd(4)",
+          "D_even(4)-D_odd(4)",
+          "D_even(4)^2",
+          "D_odd(4)^2",
+          "D_even(4)*D_odd(4)",
+          "G",
+          "beta(4)",
+          "beta(6)"
+        ],
+        "pslq": {
+          "identified": false,
+          "reason": "zero coefficient on value",
+          "basis_keys": [
+            "1",
+            "pi^2",
+            "pi^4",
+            "D_even(4)",
+            "D_odd(4)",
+            "D_even(4)-D_odd(4)",
+            "D_even(4)^2",
+            "D_odd(4)^2",
+            "D_even(4)*D_odd(4)",
+            "G",
+            "beta(4)",
+            "beta(6)"
+          ],
+          "basis_size": 12,
+          "raw_relation": [
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "summary_counts": {
+    "S_min_diff_found": 0,
+    "S_min_even_found": 0,
+    "S_min_odd_found": 0,
+    "ratio_found": 0,
+    "product_found": 0,
+    "total_attempts": 35
+  }
+}
