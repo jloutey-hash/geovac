@@ -87,6 +87,7 @@ def so_diagonal_matrix_element(
     kappa: int,
     Z=Z_sym,
     alpha: Expr = None,
+    Z_wfn=None,
 ) -> Expr:
     """Closed-form Breit-Pauli spin-orbit matrix element ⟨n, κ, m_j | H_SO | n, κ, m_j⟩.
 
@@ -135,11 +136,15 @@ def so_diagonal_matrix_element(
     # L·S diagonal eigenvalue, from T1:
     ls_val = Rational(-(kappa + 1), 2)  # = −(κ+1)/2
 
-    # ⟨1/r³⟩ diagonal, from T1 (closed Bethe-Salpeter form):
-    r3_inv = inverse_r_cubed_hydrogenic(n, l, Z=Z)
+    # ⟨1/r³⟩ diagonal, from T1 (closed Bethe-Salpeter form).
+    # Z_wfn controls the wavefunction shape (screening); Z controls the
+    # operator prefactor (nuclear potential gradient).  For atoms without
+    # frozen cores these are identical; for frozen-core molecules, the
+    # wavefunction sees Z_eff while the nucleus exerts dV/dr ∝ Z_nuc/r².
+    Z_wfn_val = Z_wfn if Z_wfn is not None else Z
+    r3_inv = inverse_r_cubed_hydrogenic(n, l, Z=Z_wfn_val)
 
-    # Prefactor: Z·α²/2 times L·S and ⟨1/r³⟩.
-    # Note: r3_inv already carries a Z³ factor, so the full result is Z⁴.
+    # Prefactor: Z·α²/2 (nuclear charge in operator) × L·S × ⟨1/r³⟩_{Z_wfn}.
     return sp.simplify((Z * alpha**2 / Integer(2)) * ls_val * r3_inv)
 
 

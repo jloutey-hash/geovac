@@ -62,6 +62,7 @@ class OrbitalBlock:
     l_min: int = 0
     center_nucleus_idx: int = -1
     partner_nucleus_idx: int = -1
+    Z_nuc_center: float = 0.0
     # Track T3 (Dirac-on-S^3 Tier 2): optional spinor labels populated when
     # the parent MolecularSpec has relativistic=True.  Each entry is a
     # DiracLabel (see geovac.dirac_matrix_elements) carrying (n, kappa, 2*m_j).
@@ -492,6 +493,7 @@ def hydride_spec(
             Z_center=float(Z),
             n_electrons=2,
             max_n=max_n,
+            Z_nuc_center=float(Z),
         ))
 
     # Bond blocks
@@ -508,6 +510,7 @@ def hydride_spec(
             max_n_partner=max_n,
             pk_A=pk_A,
             pk_B=pk_B,
+            Z_nuc_center=float(Z),
         ))
 
     # Lone pair blocks
@@ -521,6 +524,7 @@ def hydride_spec(
             max_n=max_n,
             pk_A=pk_A,
             pk_B=pk_B,
+            Z_nuc_center=float(Z),
         ))
 
     # Description

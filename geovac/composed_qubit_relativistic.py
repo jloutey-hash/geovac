@@ -374,9 +374,11 @@ def build_composed_hamiltonian_relativistic(
     for blk in spec.blocks:
         l_min = getattr(blk, 'l_min', 0)
         center_labels = enumerate_dirac_labels(blk.max_n, l_min=l_min)
+        Z_nuc = getattr(blk, 'Z_nuc_center', 0.0) or blk.Z_center
         sub_blocks.append({
             'label': blk.label + '_center',
             'Z': blk.Z_center,
+            'Z_nuc': Z_nuc,
             'dirac_labels': center_labels,
             'offset': q_offset,
             'n_orbitals': len(center_labels),
@@ -391,6 +393,7 @@ def build_composed_hamiltonian_relativistic(
             sub_blocks.append({
                 'label': blk.label + '_partner',
                 'Z': blk.Z_partner,
+                'Z_nuc': blk.Z_partner,
                 'dirac_labels': partner_labels,
                 'offset': q_offset,
                 'n_orbitals': len(partner_labels),
@@ -411,15 +414,18 @@ def build_composed_hamiltonian_relativistic(
 
     for sb in sub_blocks:
         Z_sb = float(sb['Z'])
+        Z_so = float(sb['Z_nuc'])
         off = sb['offset']
         for i, lab in enumerate(sb['dirac_labels']):
-            # Non-rel kinetic-plus-Coulomb: -Z²/(2n²) (same across κ branches)
+            # Non-rel kinetic-plus-Coulomb: -Z_eff²/(2n²)
             h1[off + i, off + i] = -Z_sb ** 2 / (2.0 * lab.n_fock ** 2)
-            # Spin-orbit (T2), pure diagonal.  Evaluate α symbolically then
-            # substitute numerical.
+            # SO coupling: the operator prefactor uses Z_nuc (nuclear
+            # potential gradient dV/dr ~ Z_nuc/r²) while the wavefunction
+            # ⟨1/r³⟩ uses Z_eff (orbital shape set by core screening).
             so_expr = so_diagonal_matrix_element(
-                lab.n_fock, lab.kappa, Z=Integer(int(round(Z_sb))),
-                alpha=sp.Float(alpha_num))
+                lab.n_fock, lab.kappa, Z=Integer(int(round(Z_so))),
+                alpha=sp.Float(alpha_num),
+                Z_wfn=Integer(int(round(Z_sb))))
             so_val = float(so_expr)
             h1[off + i, off + i] += so_val
             h1_so[off + i] = so_val
