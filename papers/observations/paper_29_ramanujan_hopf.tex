@@ -1,6 +1,6 @@
 % Paper 29: The GeoVac Hopf Graphs Are Ramanujan
 % GeoVac Project, April 2026
-% v1.1 (Sprint-2 follow-up sync: RH-D bound-crossing, RH-E Hypothesis-1 validation, RH-G spectral-zeta redirection)
+% v1.2 (Sprint-3 sync: RH-F Galois structure, RH-M spectral GUE signature, RH-K weighted Ihara with alpha^2)
 
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
@@ -422,6 +422,57 @@ Corollary~\ref{cor:pi_free} extends Paper~24's $\pi$-free
 certificate from adjacency data to Ihara-zeta data.  The same
 bit-exact $\pi$-freeness is preserved under Ihara-zeta.
 
+\begin{corollary}[Integer-algebraicity of Ihara zeros]
+\label{cor:int_alg}
+Every non-trivial Ihara zero of a GeoVac Hopf graph is the root of
+a $\mathbb{Z}$-coefficient integer polynomial (i.e., an algebraic
+integer); no rational scaling is required to clear denominators in
+the closed forms reported in Section~\ref{sec:closed_forms}.
+\end{corollary}
+
+This sharpens Corollary~\ref{cor:pi_free} from ``algebraic over~$\mathbb{Q}$''
+to ``algebraic over~$\mathbb{Z}$.'' The strengthening is direct from
+the Ihara--Bass formula (\ref{eq:ihara_bass}): $A$ and $Q$ are integer
+matrices, so $\det(I - sA + s^2 Q)$ is an integer-coefficient polynomial
+in~$s$, and the $(1-s^2)^{r-c}$ prefactor preserves integer coefficients.
+
+\begin{observation}[Galois structure of Ihara zeros]
+\label{obs:galois}
+Sprint~3 Track RH-F performed exact Galois analysis of the integer
+polynomial factors (\ref{eq:s3_closed}),~(\ref{eq:s5_nmax2_closed}),
+and~(\ref{eq:s5_nmax3_closed}), with these three classes of findings:
+\begin{enumerate}
+\item Cyclotomic factors $\Phi_3(s), \Phi_4(s), \Phi_6(s)$ appearing
+  in the closed forms have Galois group $\mathbb{Z}/2$ and fingerprint
+  specific graph cycles --- $\Phi_3, \Phi_6$ track the 3-cycles and
+  6-cycles of the $S^3$ Coulomb $\ell=1$ component (the
+  $C_3 \times P_2$ ladder).
+\item Ramanujan-boundary factors $(4s^2+1)^2$ (scalar $S^5$
+  $N_{\max}=2$) and $(9s^2+1)^4$ (Dirac-$S^3$ Rule B $n_{\max}=3$),
+  whose zeros sit exactly on the critical Ramanujan circle
+  $|s| = 1/\sqrt{q_{\max}}$, all live in $\mathbb{Q}(i)$. This is
+  structurally consistent with the $\mathbb{Z}_2$
+  $m$-reflection sub-action of the Paper~25 Hopf $U(1)$
+  (Observation~\ref{obs:12_22}).
+\item Bulk (non-boundary) factors have non-abelian Galois groups:
+  $S_3$ for the scalar $S^3$ cubics; $S_4$ for the Dirac-A
+  $n_{\max}=3$ quartic; and $S_6$ (non-solvable) for the factor
+  $P_{12}(s^2)$ in the scalar $S^5$ $N_{\max}=3$ zeta. By
+  Abel--Ruffini, the 12 zeros of $P_{12}$ have no radical
+  expression over $\mathbb{Q}$. By Kronecker--Weber, these factors
+  do not lie inside any cyclotomic field $\mathbb{Q}(\zeta_M)$.
+\end{enumerate}
+In particular, the Hopf $U(1)$ structure controls the $\mathbb{Z}_2$
+\emph{block split} (Observation~\ref{obs:12_22}) but does not
+abelianize the Galois group inside each block.
+\end{observation}
+
+Observation~\ref{obs:galois} adds a new taxonomic tier to Paper~18's
+exchange-constant hierarchy: \emph{algebraic-but-non-radical}, sitting
+between radical-algebraic and transcendental. The $S^5$ $N_{\max}=3$
+$P_{12}$ zeros are the first explicit GeoVac objects in this tier.
+Full per-factor Galois table in \texttt{debug/galois\_ihara\_memo.md}.
+
 % ===================================================================
 \section{Functional Equation: the Irregular-Graph Reflection}
 \label{sec:functional_equation}
@@ -653,6 +704,65 @@ classical $\zeta(s)$, if any, must therefore go through the
 \emph{spectral} zeta (Paper~28's machinery), not through the Ihara
 zeta.  Full obstruction analysis at
 \texttt{debug/riemann\_limit\_memo.md}.
+
+\paragraph{Spectral-side GUE signature (Sprint~3, RH-M).}
+Sprint~3 Track RH-M computed the complex zeros of $D(s)$,
+$D_{\mathrm{even}}(s)$, and $D_{\mathrm{odd}}(s)$ numerically in the
+strip $\mathrm{Im}(s) \in [0, 70]$ at 35-digit precision, and tested
+the unfolded imaginary-part spacings against GUE and Poisson
+reference statistics. All three spectral Dirichlet series show
+\emph{GUE-like} coefficient of variation
+$\mathrm{CV} \in \{0.348, 0.343, 0.396\}$, compared to synthetic GUE
+$\mathrm{CV}_{\mathrm{GUE}} = 0.46$ and synthetic Poisson
+$\mathrm{CV}_{\mathrm{Poisson}} = 1.05$. Kolmogorov--Smirnov testing
+against Poisson rejects ($p = 0.004, 0.030$ for $D_{\mathrm{even}},
+D_{\mathrm{odd}}$); against GUE does not reject ($p = 0.61, 0.65, 0.94$).
+This is the \emph{first} GUE signature in the GeoVac framework, and
+it is on exactly the side that the Sprint~2 RH-G redirection pointed
+to --- the spectral Dirichlet side, not the Ihara side (whose
+Hashimoto spacing is Poisson, $\mathrm{CV} \sim 1$, per Sprint~2
+RH-G). Structurally: the two sides of the Weil dictionary give
+opposite verdicts on GeoVac. The spectral side is Hilbert--P\'olya
+compatible; the Ihara side is not. Important honest caveat: the zeros
+are \emph{not} on a single critical line (they are scattered in
+$\mathrm{Re}(s) \in [2.02, 3.42]$), so the GUE signature is spacing-only,
+not an RH-style line constraint. Classical $\zeta$ has RMT spacing
+\emph{and} zeros-on-$\Re s = 1/2$ simultaneously; GeoVac has only the
+first. Full sample-size caveats, KS p-values, and pair-correlation
+data in \texttt{debug/spectral\_zero\_stats\_memo.md}. Cross-sprint
+coherence: combined with Sprint~3 RH-J's closed-form identity
+$D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$
+(Paper~28~\cite{paper28}, recent subsection), the $\chi_{-4}$
+Dirichlet-$L$ content sits inside a GUE-compatible spectral object.
+
+\paragraph{$\alpha^2$-weighted Ihara zeta on the Dirac-$S^3$ graph
+(Sprint~3, RH-K).}
+The unweighted Ihara zeta depends only on $0/1$ connectivity. Sprint~3
+Track RH-K introduced a non-trivial edge weighting
+$w(a,b) = 1 + \alpha^2 \cdot |f_{\mathrm{SO}}(a) + f_{\mathrm{SO}}(b)|/2$
+with $f_{\mathrm{SO}}(n,\kappa) = -(\kappa+1)/[4 n^3 \ell(\ell+\tfrac12)(\ell+1)]$,
+the dimensionless Breit--Pauli spin-orbit diagonal. The weighted Ihara
+zeta $\zeta_G^w(s)$ has well-defined Ihara--Bass and Hashimoto analogs
+(Mizuno--Sato 2004, Setyadi--Storm 2022). Four principal findings:
+(i)~the weighted zeta lives in the ring $\mathbb{Q}(\alpha^2)[s]$, an
+explicit realization of Paper~18's spinor-intrinsic tier without the
+$\gamma$ factor; (ii)~$\alpha^2$ enters the zero set as a
+\emph{graph-invariant}, not just an edge-local perturbation --- Rule A
+$n_{\max}=3$ gives $\zeta^{-1}$ as a polynomial in $\alpha$ up to
+degree 44, with the $\alpha^2$ coefficient carrying a clean rational
+prefactor $-35/648$; (iii)~weighting does not shift Hashimoto spacing
+toward GUE --- in fact CV grows away from GUE under weighting (Rule
+B $n_{\max}=3$: $2.6 \to 5.5$), closing the Ihara-side Hilbert-P\'olya
+route further; (iv)~the boundary-Ramanujan case (Rule B $n_{\max}=2$,
+unweighted deviation exactly zero) crosses the bound under
+$\alpha^2$-weighting for any $\alpha > 0$, but this is a generic
+perturbation-of-boundary effect, not an $\alpha^2$-specific signature.
+The weighted Ihara zeta is therefore a new algebraic object
+(first GeoVac graph observable with genuine $\alpha^2$ content), with
+structural implications for Paper~18's taxonomy and no immediate
+RH-adjacent use. Full analysis in
+\texttt{debug/ihara\_zeta\_weighted\_memo.md}; module
+\texttt{geovac/ihara\_zeta\_weighted.py}.
 
 % ===================================================================
 \section{Conclusion}

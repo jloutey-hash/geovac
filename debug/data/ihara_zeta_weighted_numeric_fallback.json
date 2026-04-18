@@ -1,0 +1,339 @@
+{
+  "meta": {
+    "module": "geovac.ihara_zeta_weighted",
+    "track": "RH-K (numeric fallback)",
+    "alpha_physical": 0.0072973525205055605,
+    "alpha_unitary": 1.0,
+    "weight_convention": "w(a,b) = 1 + alpha^2 * |f_SO(a) + f_SO(b)| / 2, f_SO(n,kappa) = -(kappa+1) / [4 n^3 l (l+1/2)(l+1)]; f_SO = 0 for l=0 (Kramers)."
+  },
+  "results": {
+    "ruleA_nmax2": {
+      "n_max": 2,
+      "adjacency_rule": "A",
+      "V": 10,
+      "E": 8,
+      "c": 3,
+      "r_betti1": 1,
+      "max_degree": 2,
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "deviation": -1.0,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 1e-06,
+          "deviation": -1.0000000000000104,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.0001,
+          "deviation": -1.0000000001041667,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.01,
+          "deviation": -1.0000010416661242,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.0072973525205055605,
+          "deviation": -1.0000005547014483,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.05,
+          "deviation": -1.0000260413275912,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.1,
+          "deviation": -1.0001041612418844,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.3,
+          "deviation": -1.00093706095838,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 0.5,
+          "deviation": -1.0026007846263305,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        },
+        {
+          "alpha": 1.0,
+          "deviation": -1.0103629710818451,
+          "is_ramanujan": true,
+          "cv_spacing": NaN,
+          "n_spacings": 1
+        }
+      ],
+      "elapsed_seconds": 1.6061302000307478
+    },
+    "ruleB_nmax2": {
+      "n_max": 2,
+      "adjacency_rule": "B",
+      "V": 10,
+      "E": 20,
+      "c": 1,
+      "r_betti1": 11,
+      "max_degree": 5,
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "deviation": 4.440892098500626e-16,
+          "is_ramanujan": true,
+          "cv_spacing": 0.881461187557902,
+          "n_spacings": 5
+        },
+        {
+          "alpha": 1e-06,
+          "deviation": -8.43769498715119e-15,
+          "is_ramanujan": true,
+          "cv_spacing": 0.881461187557902,
+          "n_spacings": 5
+        },
+        {
+          "alpha": 0.0001,
+          "deviation": -9.11453135188367e-11,
+          "is_ramanujan": true,
+          "cv_spacing": 0.881461187557902,
+          "n_spacings": 5
+        },
+        {
+          "alpha": 0.01,
+          "deviation": 5.468752202197891e-07,
+          "is_ramanujan": false,
+          "cv_spacing": 1.598107040050354,
+          "n_spacings": 10
+        },
+        {
+          "alpha": 0.0072973525205055605,
+          "deviation": 2.912184027259457e-07,
+          "is_ramanujan": false,
+          "cv_spacing": 1.5981072651310781,
+          "n_spacings": 10
+        },
+        {
+          "alpha": 0.05,
+          "deviation": 1.3672012941334799e-05,
+          "is_ramanujan": false,
+          "cv_spacing": 1.5980954854374467,
+          "n_spacings": 10
+        },
+        {
+          "alpha": 0.1,
+          "deviation": 5.468970699507025e-05,
+          "is_ramanujan": false,
+          "cv_spacing": 1.5980593857165586,
+          "n_spacings": 10
+        },
+        {
+          "alpha": 0.3,
+          "deviation": 0.0004923661967746185,
+          "is_ramanujan": false,
+          "cv_spacing": 1.597675117270549,
+          "n_spacings": 10
+        },
+        {
+          "alpha": 0.5,
+          "deviation": 0.0013685652614032762,
+          "is_ramanujan": false,
+          "cv_spacing": 1.5969109298002457,
+          "n_spacings": 10
+        },
+        {
+          "alpha": 1.0,
+          "deviation": 0.005490714255161677,
+          "is_ramanujan": false,
+          "cv_spacing": 1.5934051852238953,
+          "n_spacings": 10
+        }
+      ],
+      "elapsed_seconds": 13.056661600014195
+    },
+    "ruleA_nmax3": {
+      "n_max": 3,
+      "adjacency_rule": "A",
+      "V": 28,
+      "E": 29,
+      "c": 5,
+      "r_betti1": 6,
+      "max_degree": 3,
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "deviation": -0.06100359817377088,
+          "is_ramanujan": true,
+          "cv_spacing": 1.4564593706394857,
+          "n_spacings": 7
+        },
+        {
+          "alpha": 1e-06,
+          "deviation": -0.06100359817378043,
+          "is_ramanujan": true,
+          "cv_spacing": 1.4564593706394857,
+          "n_spacings": 7
+        },
+        {
+          "alpha": 0.0001,
+          "deviation": -0.061003598271297976,
+          "is_ramanujan": true,
+          "cv_spacing": 1.4564593706394857,
+          "n_spacings": 7
+        },
+        {
+          "alpha": 0.01,
+          "deviation": -0.06100457344609311,
+          "is_ramanujan": true,
+          "cv_spacing": 1.735817377804168,
+          "n_spacings": 9
+        },
+        {
+          "alpha": 0.0072973525205055605,
+          "deviation": -0.061004117519570356,
+          "is_ramanujan": true,
+          "cv_spacing": 1.7358179799451599,
+          "n_spacings": 9
+        },
+        {
+          "alpha": 0.05,
+          "deviation": -0.06102797978017227,
+          "is_ramanujan": true,
+          "cv_spacing": 1.735786468274565,
+          "n_spacings": 9
+        },
+        {
+          "alpha": 0.1,
+          "deviation": -0.061101122077463765,
+          "is_ramanujan": true,
+          "cv_spacing": 1.7356899191874142,
+          "n_spacings": 9
+        },
+        {
+          "alpha": 0.3,
+          "deviation": -0.0618810713488791,
+          "is_ramanujan": true,
+          "cv_spacing": 1.9748320218536333,
+          "n_spacings": 11
+        },
+        {
+          "alpha": 0.5,
+          "deviation": -0.06343968166792435,
+          "is_ramanujan": true,
+          "cv_spacing": 1.9726530060455127,
+          "n_spacings": 11
+        },
+        {
+          "alpha": 1.0,
+          "deviation": -0.07072292626398458,
+          "is_ramanujan": true,
+          "cv_spacing": 1.9628566915933419,
+          "n_spacings": 11
+        }
+      ],
+      "elapsed_seconds": 15.85125639999751
+    },
+    "ruleB_nmax3": {
+      "n_max": 3,
+      "adjacency_rule": "B",
+      "V": 28,
+      "E": 106,
+      "c": 1,
+      "r_betti1": 79,
+      "max_degree": 12,
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "deviation": -0.11875030493712657,
+          "is_ramanujan": true,
+          "cv_spacing": 2.605774572065539,
+          "n_spacings": 17
+        },
+        {
+          "alpha": 1e-06,
+          "deviation": -0.11875030493713545,
+          "is_ramanujan": true,
+          "cv_spacing": 2.605774572065539,
+          "n_spacings": 17
+        },
+        {
+          "alpha": 0.0001,
+          "deviation": -0.11875030502995276,
+          "is_ramanujan": true,
+          "cv_spacing": 2.605774572065539,
+          "n_spacings": 17
+        },
+        {
+          "alpha": 0.01,
+          "deviation": -0.11874991707600602,
+          "is_ramanujan": true,
+          "cv_spacing": 5.102557448600938,
+          "n_spacings": 59
+        },
+        {
+          "alpha": 0.0072973525205055605,
+          "deviation": -0.11875012454031442,
+          "is_ramanujan": true,
+          "cv_spacing": 4.87287380201675,
+          "n_spacings": 54
+        },
+        {
+          "alpha": 0.05,
+          "deviation": -0.11874018981429701,
+          "is_ramanujan": true,
+          "cv_spacing": 5.407746821097005,
+          "n_spacings": 66
+        },
+        {
+          "alpha": 0.1,
+          "deviation": -0.1187098397168187,
+          "is_ramanujan": true,
+          "cv_spacing": 5.407735445587387,
+          "n_spacings": 66
+        },
+        {
+          "alpha": 0.3,
+          "deviation": -0.11838566361750535,
+          "is_ramanujan": true,
+          "cv_spacing": 5.449817422751524,
+          "n_spacings": 67
+        },
+        {
+          "alpha": 0.5,
+          "deviation": -0.11773488277288502,
+          "is_ramanujan": true,
+          "cv_spacing": 5.449575079626795,
+          "n_spacings": 67
+        },
+        {
+          "alpha": 1.0,
+          "deviation": -0.11464078092438523,
+          "is_ramanujan": true,
+          "cv_spacing": 5.490333664075763,
+          "n_spacings": 68
+        }
+      ],
+      "elapsed_seconds": 74.48891830001958
+    }
+  }
+}

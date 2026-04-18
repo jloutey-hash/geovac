@@ -231,6 +231,51 @@ shifts expose $L(s, \chi_{-4})$ in the even/odd difference.
 Equations~\eqref{eq:D_even}--\eqref{eq:D_odd} are verified by PSLQ at
 80-digit precision with basis $\{1, \pi^2, \pi^4, G, \beta(4)\}$.
 
+\subsection{General-$s$ closed form for
+$D_{\mathrm{even}} - D_{\mathrm{odd}}$}
+\label{sec:D_diff_closed}
+
+The $s=4$ identities above generalize to an exact closed form at every
+integer $s \ge 2$. Two elementary Hurwitz identities suffice:
+$\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$ (shift recurrence) and
+$\zeta(s, 3/4) = \zeta(s, 1/4) - 4^s\,\beta(s)$ (the Dirichlet-beta
+definition). Substituting both into the Hurwitz forms of
+$D_{\mathrm{even}}(s)$ and $D_{\mathrm{odd}}(s)$, the
+$\zeta(s, 1/4)$ pieces cancel and the $2^{2s-1}$ prefactors match across
+the $s$ and $s-2$ contributions, leaving
+\begin{equation}
+  D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)
+    \;=\; 2^{s-1}\bigl(\beta(s) - \beta(s-2)\bigr),
+  \qquad s = 2, 3, 4, \ldots
+  \label{eq:D_diff_closed}
+\end{equation}
+verified symbolically (sympy residual zero) at
+$s \in \{2, 3, \ldots, 10, 15\}$ and by PSLQ at 100-digit precision at
+every integer $s$ in the tested range.
+Equation~\eqref{eq:D_diff_closed} upgrades the qualitative statement
+``vertex parity acts as $\chi_{-4}$ on the mode sum'' to a quantitative
+identity at every $s$: the $\chi_{-4}$ structure enters the
+spectral Dirichlet difference $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)$
+as the exact linear combination
+$\beta(s) - \beta(s - 2)$, with integer prefactor $2^{s-1}$.
+The $s=3$ case is the Hurwitz-pole-regularized limit giving
+$D_{\mathrm{diff}}(3) = \pi^3/8 - \pi$ (cf. the residue subtraction in the
+appendix of Ref.~\cite{rh_j_memo}).
+
+At $s=4$, (\ref{eq:D_diff_closed}) reproduces
+$D_{\mathrm{even}}(4) - D_{\mathrm{odd}}(4) = 8(\beta(4) - G)$
+(since $G = \beta(2)$), consistent with
+Eqs.~\eqref{eq:D_even}--\eqref{eq:D_odd}.
+
+Identity~\eqref{eq:D_diff_closed} is a concrete spectral-zeta to
+Dirichlet-$L$ bridge on $S^3$. It does not by itself constrain the
+zeros of $\beta(s)$ or of $D_{\mathrm{even}}, D_{\mathrm{odd}}$
+individually: a zero of $\beta$ at $s = \rho$ propagates to zeros of
+$D_{\mathrm{diff}}$ at both $\rho$ and $\rho + 2$, which is compatible
+with but does not enforce $\Re\rho = 1/2$. The identity is a structural
+realization of the vertex-parity-as-$\chi_{-4}$ mechanism rather than
+an RH-type statement.
+
 \subsection{Three-axis taxonomy}
 
 The transcendental content of any QED spectral sum on $S^3$ is
@@ -431,6 +476,12 @@ detection: techniques and applications,''
 \bibitem{apery1979}
 R.~Ap\'ery, ``Irrationalit\'e de $\zeta(2)$ et $\zeta(3)$,''
 \textit{Ast\'erisque}\ \textbf{61}, 11--13 (1979).
+
+\bibitem{rh_j_memo}
+GeoVac Project.  Spectral $\chi_{-4}$ identification in
+$D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)$: closed-form derivation
+and verification (Sprint~3 Track~RH-J),
+\texttt{debug/spectral\_chi\_neg4\_memo.md}, April 2026.
 
 \end{thebibliography}
 

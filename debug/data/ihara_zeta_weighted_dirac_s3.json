@@ -1,0 +1,287 @@
+{
+  "meta": {
+    "module": "geovac.ihara_zeta_weighted",
+    "track": "RH-K",
+    "sprint": "Sprint 3 of RH-directed series (April 2026)",
+    "alpha_physical": 0.0072973525205055605,
+    "alpha_unitary_formal": 1.0,
+    "weight_convention": "w(a,b) = 1 + alpha^2 * |f_SO(a) + f_SO(b)| / 2,  f_SO(n,kappa) = -(kappa+1) / [4 n^3 l (l+1/2)(l+1)], l=kappa_to_l(kappa); f_SO = 0 for l=0 (Kramers); Z_eff=1 uniformly so alpha is the ONLY small parameter. The symmetric |.| of endpoint-averaged SO diagonals keeps w strictly positive and gives w=1 at alpha=0.",
+    "module_summary": "weighted_ihara_zeta_bass implements the Mizuno-Sato (2004) generalization of the Ihara-Bass determinant formula: zeta^(-1) = (1-s^2)^(r-c) * det(I - s A_w + s^2 Q_w). weighted_hashimoto_matrix implements (T_w)[e,e'] = sqrt(w(e)*w(e')) on non-backtracking oriented edges; zeta^(-1) = det(I - s T_w). is_weighted_ramanujan uses q_max^w = max row-sum(A_w) - 1."
+  },
+  "results": {
+    "ruleA_nmax2": {
+      "n_max": 2,
+      "adjacency_rule": "A",
+      "description": "Dirac-S^3 graph, rule A, n_max=2: V=10, E=8, max deg=2, min deg=1.",
+      "V": 10,
+      "E": 8,
+      "c": 3,
+      "r_betti1": 1,
+      "max_degree": 2,
+      "min_degree": 1,
+      "weighted_zeta_inv_factored": "(s - 1)**2*(s + 1)**2*(s**2 + 1)**2*(alpha**2*s - 48)*(alpha**2*s + 48)*(2*alpha**4*s**3 - alpha**4*s**2 + 96*alpha**2*s**3 + 96*alpha**2*s + 9216)*(2*alpha**4*s**3 + alpha**4*s**2 + 96*alpha**2*s**3 + 96*alpha**2*s - 9216)/195689447424",
+      "weighted_zeta_inv_max_alpha_degree": 12,
+      "alpha_series": {
+        "alpha^0": {
+          "factored": "(s - 1)**2*(s + 1)**2*(s**2 + 1)**2",
+          "expanded_truncated": "s**8 - 2*s**4 + 1"
+        },
+        "alpha^4": {
+          "factored": "-s**2*(s - 1)**2*(s + 1)**2*(s**2 + 1)**2*(s**4 + 2*s**2 + 7)/9216",
+          "expanded_truncated": "-s**14/9216 - s**12/4608 - 5*s**10/9216 + s**8/2304 + 13*s**6/9216 - s**4/4608 - 7*s**2/9216"
+        },
+        "alpha^6": {
+          "factored": "-s**4*(s - 1)**2*(s + 1)**2*(s**2 + 1)**3/221184",
+          "expanded_truncated": "-s**14/221184 - s**12/221184 + s**10/110592 + s**8/110592 - s**6/221184 - s**4/221184"
+        }
+      },
+      "alpha_to_zero_reduces_to_unweighted": true,
+      "alpha_to_zero_residual": "0",
+      "ramanujan_reports": {
+        "unweighted_alpha0": {
+          "alpha": 0.0,
+          "deviation": -1.0,
+          "is_ramanujan": true,
+          "pair_correlation_cv": NaN,
+          "n_spacings": 1,
+          "explanation": "V=10, 2E=16, q_max_w=1.000000, sqrt(q_max_w)=1.000000, rho(T_w)=1.000000, max|mu_nontrivial|=0.000000, deviation=-1.000000 (Ramanujan)"
+        },
+        "physical_alpha": {
+          "alpha": 0.0072973525205055605,
+          "deviation": -1.0000005547014483,
+          "is_ramanujan": true,
+          "pair_correlation_cv": NaN,
+          "n_spacings": 1,
+          "explanation": "V=10, 2E=16, q_max_w=1.000001, sqrt(q_max_w)=1.000001, rho(T_w)=1.000000, max|mu_nontrivial|=0.000000, deviation=-1.000001 (Ramanujan)"
+        },
+        "unitary_alpha": {
+          "alpha": 1.0,
+          "deviation": -1.0103629710818451,
+          "is_ramanujan": true,
+          "pair_correlation_cv": NaN,
+          "n_spacings": 1,
+          "explanation": "V=10, 2E=16, q_max_w=1.020833, sqrt(q_max_w)=1.010363, rho(T_w)=1.000000, max|mu_nontrivial|=0.000000, deviation=-1.010363 (Ramanujan)"
+        }
+      },
+      "elapsed_seconds": 0.9781839000061154
+    },
+    "ruleB_nmax2": {
+      "n_max": 2,
+      "adjacency_rule": "B",
+      "description": "Dirac-S^3 graph, rule B, n_max=2: V=10, E=20, max deg=5, min deg=2.",
+      "V": 10,
+      "E": 20,
+      "c": 1,
+      "r_betti1": 11,
+      "max_degree": 5,
+      "min_degree": 2,
+      "weighted_zeta_inv_factored": "(s - 1)**11*(s + 1)**11*(alpha**2*s**2 + 72*s**2 + 24)*(alpha**2*s**2 + 144*s**2 + 48)*(7*alpha**2*s**2 + 768*s**2 + 192)**2*(7*alpha**4*s**4 - alpha**4*s**2 + 1440*alpha**2*s**4 + 480*alpha**2*s**2 + 73728*s**4 + 55296*s**2 + 18432)*(7*alpha**8*s**6 + 2952*alpha**6*s**6 + 888*alpha**6*s**4 + 457344*alpha**4*s**6 + 264960*alpha**4*s**4 + 24192*alpha**4*s**2 + 30855168*alpha**2*s**6 + 25878528*alpha**2*s**4 + 3428352*alpha**2*s**2 + 764411904*s**6 + 828112896*s**4 + 127401984*s**2 - 21233664)/16620815899787526144",
+      "weighted_zeta_inv_max_alpha_degree": 20,
+      "alpha_series": {
+        "alpha^0": {
+          "factored": "(s - 1)**11*(s + 1)**11*(3*s**2 + 1)**3*(4*s**2 + 1)**2*(2*s**2 - s + 1)*(2*s**2 + s + 1)*(12*s**4 + 9*s**2 - 1)",
+          "expanded_truncated": "20736*s**40 - 165888*s**38 + 536544*s**36 - 825216*s**34 + 378801*s**32 + 636512*s**30 - 962520*s**28 + 197824*s**26 + 431244*s**24 - 208352*s**22 - 139656*s**20 + 91904*s**18 + 35670*s**16 - 25440*s*..."
+        },
+        "alpha^2": {
+          "factored": "s**4*(s - 1)**11*(s + 1)**11*(3*s**2 + 1)**2*(4*s**2 + 1)*(684*s**8 + 1221*s**6 + 820*s**4 + 263*s**2 + 32)/12",
+          "expanded_truncated": "2052*s**40 - 17028*s**38 + 233055*s**36/4 - 399227*s**34/4 + 840325*s**32/12 + 441151*s**30/12 - 1208911*s**28/12 + 190153*s**26/4 + 110275*s**24/4 - 341605*s**22/12 - 16643*s**20/4 + 38575*s**18/4 + ..."
+        },
+        "alpha^4": {
+          "factored": "s**2*(s - 1)**11*(s + 1)**11*(3*s**2 + 1)*(558096*s**14 + 1153504*s**12 + 968853*s**10 + 431018*s**8 + 106038*s**6 + 13656*s**4 + 813*s**2 + 22)/18432",
+          "expanded_truncated": "11627*s**40/128 - 49995*s**38/64 + 51941215*s**36/18432 - 48816433*s**34/9216 + 2461565*s**32/512 - 244843*s**30/4608 - 1201069*s**28/288 + 1640679*s**26/512 + 1174525*s**24/4608 - 6007463*s**22/4608 ..."
+        },
+        "alpha^6": {
+          "factored": "s**4*(s - 1)**11*(s + 1)**11*(4191804*s**14 + 8782512*s**12 + 7603485*s**10 + 3548457*s**8 + 955942*s**6 + 146490*s**4 + 11745*s**2 + 397)/1769472",
+          "expanded_truncated": "38813*s**40/16384 - 3110611*s**38/147456 + 47181691*s**36/589824 - 48116563*s**34/294912 + 157147715*s**32/884736 - 54081625*s**30/884736 - 73137643*s**28/884736 + 91301843*s**26/884736 - 20613373*s**..."
+        }
+      },
+      "alpha_to_zero_reduces_to_unweighted": true,
+      "alpha_to_zero_residual": "0",
+      "ramanujan_reports": {
+        "unweighted_alpha0": {
+          "alpha": 0.0,
+          "deviation": 4.440892098500626e-16,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 0.881461187557902,
+          "n_spacings": 5,
+          "explanation": "V=10, 2E=40, q_max_w=4.000000, sqrt(q_max_w)=2.000000, rho(T_w)=3.190440, max|mu_nontrivial|=2.000000, deviation=+0.000000 (Ramanujan)"
+        },
+        "physical_alpha": {
+          "alpha": 0.0072973525205055605,
+          "deviation": 2.912184027259457e-07,
+          "is_ramanujan": false,
+          "pair_correlation_cv": 1.5981072651310781,
+          "n_spacings": 10,
+          "explanation": "V=10, 2E=40, q_max_w=4.000002, sqrt(q_max_w)=2.000000, rho(T_w)=3.190441, max|mu_nontrivial|=2.000001, deviation=+0.000000 (NOT Ramanujan)"
+        },
+        "unitary_alpha": {
+          "alpha": 1.0,
+          "deviation": 0.005490714255161677,
+          "is_ramanujan": false,
+          "pair_correlation_cv": 1.5934051852238953,
+          "n_spacings": 10,
+          "explanation": "V=10, 2E=40, q_max_w=4.036458, sqrt(q_max_w)=2.009094, rho(T_w)=3.214505, max|mu_nontrivial|=2.014585, deviation=+0.005491 (NOT Ramanujan)"
+        }
+      },
+      "elapsed_seconds": 196.57393139996566
+    },
+    "ruleA_nmax3": {
+      "n_max": 3,
+      "adjacency_rule": "A",
+      "description": "Dirac-S^3 graph, rule A, n_max=3: V=28, E=29, max deg=3, min deg=1.",
+      "V": 28,
+      "E": 29,
+      "c": 5,
+      "r_betti1": 6,
+      "max_degree": 3,
+      "min_degree": 1,
+      "weighted_zeta_inv_factored": "-(s - 1)**6*(s + 1)**6*(s**2 - s + 1)*(s**2 + s + 1)*(2*s**3 - s**2 + s - 1)*(2*s**3 + s**2 + s + 1)*(2*alpha**4*s**3 - alpha**4*s**2 + 540*alpha**2*s**3 + 540*alpha**2*s + 291600)*(2*alpha**4*s**3 + alpha**4*s**2 + 540*alpha**2*s**3 + 540*alpha**2*s - 291600)*(4539*alpha**4*s**3 - 361*alpha**4*s**2 + 362880*alpha**2*s**3 + 181440*alpha**2*s**2 + 181440*alpha**2*s + 6718464*s**3 + 6718464*s**2 + 6718464*s + 6718464)*(4539*alpha**4*s**3 + 361*alpha**4*s**2 + 362880*alpha**2*s**3 - 181440*alpha**2*s**2 + 181440*alpha**2*s + 6718464*s**3 - 6718464*s**2 + 6718464*s - 6718464)*(4*alpha**6*s**5 - 2*alpha**6*s**4 - alpha**6*s**3 + 3240*alpha**4*s**5 - 810*alpha**4*s**4 + 1620*alpha**4*s**3 - 1620*alpha**4*s**2 + 656100*alpha**2*s**5 + 656100*alpha**2*s**3 + 656100*alpha**2*s + 531441000)*(4*alpha**6*s**5 + 2*alpha**6*s**4 - alpha**6*s**3 + 3240*alpha**4*s**5 + 810*alpha**4*s**4 + 1620*alpha**4*s**3 + 1620*alpha**4*s**2 + 656100*alpha**2*s**5 + 656100*alpha**2*s**3 + 656100*alpha**2*s - 531441000)*(43488159*alpha**8*s**7 - 16680825*alpha**8*s**6 - 9916563*alpha**8*s**5 - 928079*alpha**8*s**4 + 16836180480*alpha**6*s**7 - 4314280320*alpha**6*s**6 + 2798167680*alpha**6*s**5 - 3687223680*alpha**6*s**4 - 758056320*alpha**6*s**3 + 2325582876672*alpha**4*s**7 - 362125209600*alpha**4*s**6 + 1175435587584*alpha**4*s**5 - 536429039616*alpha**4*s**4 + 174303830016*alpha**4*s**3 - 127865806848*alpha**4*s**2 + 136527788113920*alpha**2*s**7 - 9751984865280*alpha**2*s**6 + 107271833518080*alpha**2*s**5 - 19503969730560*alpha**2*s**4 + 39007939461120*alpha**2*s**3 + 9751984865280*alpha**2*s**2 + 9751984865280*alpha**2*s + 2888816545234944*s**7 + 2888816545234944*s**5 + 1444408272617472*s**3 + 1444408272617472*s**2 + 722204136308736*s + 722204136308736)*(43488159*alpha**8*s**7 + 16680825*alpha**8*s**6 - 9916563*alpha**8*s**5 + 928079*alpha**8*s**4 + 16836180480*alpha**6*s**7 + 4314280320*alpha**6*s**6 + 2798167680*alpha**6*s**5 + 3687223680*alpha**6*s**4 - 758056320*alpha**6*s**3 + 2325582876672*alpha**4*s**7 + 362125209600*alpha**4*s**6 + 1175435587584*alpha**4*s**5 + 536429039616*alpha**4*s**4 + 174303830016*alpha**4*s**3 + 127865806848*alpha**4*s**2 + 136527788113920*alpha**2*s**7 + 9751984865280*alpha**2*s**6 + 107271833518080*alpha**2*s**5 + 19503969730560*alpha**2*s**4 + 39007939461120*alpha**2*s**3 - 9751984865280*alpha**2*s**2 + 9751984865280*alpha**2*s + 2888816545234944*s**7 + 2888816545234944*s**5 + 1444408272617472*s**3 - 1444408272617472*s**2 + 722204136308736*s - 722204136308736)/565386044137788336603360572673611783456685453637880515406069760000000000",
+      "weighted_zeta_inv_max_alpha_degree": 44,
+      "alpha_series": {
+        "alpha^0": {
+          "factored": "-(s - 1)**7*(s + 1)**7*(s**2 + 1)**2*(s**2 - s + 1)*(s**2 + s + 1)*(2*s**3 - 2*s**2 + 2*s - 1)*(2*s**3 - s**2 + s - 1)*(2*s**3 + s**2 + s + 1)*(2*s**3 + 2*s**2 + 2*s + 1)*(2*s**4 - 2*s**3 + 2*s**2 - s + 1)*(2*s**4 + 2*s**3 + 2*s**2 + s + 1)",
+          "expanded_truncated": "-64*s**42 + 80*s**40 + 240*s**38 - 208*s**36 - 456*s**34 + 100*s**32 + 560*s**30 + 225*s**28 - 376*s**26 - 344*s**24 + 10*s**22 + 126*s**20 + 192*s**18 + 105*s**16 - 148*s**14 - 131*s**12 + 48*s**10 +..."
+        },
+        "alpha^2": {
+          "factored": "-35*s**4*(s - 1)**6*(s + 1)**6*(s**2 + 1)*(s**2 - s + 1)*(s**2 + s + 1)*(2*s**3 - s**2 + s - 1)*(2*s**3 + s**2 + s + 1)*(60*s**14 + 114*s**12 + 80*s**10 + 27*s**8 - 6*s**6 - 26*s**4 - 20*s**2 - 5)/648",
+          "expanded_truncated": "-350*s**42/27 + 35*s**40/2 + 12985*s**38/324 - 12355*s**36/324 - 45535*s**34/648 + 10115*s**32/648 + 7000*s**30/81 + 805*s**28/27 - 19915*s**26/324 - 1435*s**24/36 + 2905*s**22/216 + 2905*s**20/216 + ..."
+        },
+        "alpha^4": {
+          "factored": "s**2*(s - 1)**6*(s + 1)**6*(s**2 - s + 1)*(s**2 + s + 1)*(2*s**3 - s**2 + s - 1)*(2*s**3 + s**2 + s + 1)*(8192*s**28 + 40960*s**26 + 116736*s**24 + 251904*s**22 + 428032*s**20 - 98013132*s**18 - 270671554*s**16 - 308610778*s**14 - 209709703*s**12 - 103128819*s**10 - 25682872*s**8 + 11445124*s**6 + 11613853*s**4 + 3604741*s**2 + 467316)/335923200",
+          "expanded_truncated": "16*s**52/164025 + 4*s**50/54675 - 16*s**48/164025 - 37*s**46/164025 - 79*s**44/164025 - 24654707*s**42/20995200 + 147764321*s**40/83980800 + 6731879*s**38/2239488 - 184926287*s**36/55987200 - 58203693..."
+        },
+        "alpha^6": {
+          "factored": "s**4*(s - 1)**6*(s + 1)**6*(s**2 - s + 1)*(s**2 + s + 1)*(2*s**3 - s**2 + s - 1)*(2*s**3 + s**2 + s + 1)*(11276288*s**26 + 55044096*s**24 + 159177728*s**22 + 352839168*s**20 + 624716288*s**18 - 33344733217*s**16 - 86653035822*s**14 - 95517635195*s**12 - 66247721784*s**10 - 35565746563*s**8 - 13497067352*s**6 - 2262272303*s**4 + 280472454*s**2 + 128091814)/2176782336000",
+          "expanded_truncated": "2753*s**52/132860250 + 6953*s**50/531441000 - 13871*s**48/1062882000 - 5623*s**46/141717600 - 44927*s**44/472392000 - 11429937547*s**42/181398528000 + 46281222629*s**40/435356467200 + 141855533957*s**..."
+        }
+      },
+      "alpha_to_zero_reduces_to_unweighted": true,
+      "alpha_to_zero_residual": "0",
+      "ramanujan_reports": {
+        "unweighted_alpha0": {
+          "alpha": 0.0,
+          "deviation": -0.06100359817377088,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 1.4564593706394857,
+          "n_spacings": 7,
+          "explanation": "V=28, 2E=58, q_max_w=2.000000, sqrt(q_max_w)=1.414214, rho(T_w)=1.543689, max|mu_nontrivial|=1.353210, deviation=-0.061004 (Ramanujan)"
+        },
+        "physical_alpha": {
+          "alpha": 0.0072973525205055605,
+          "deviation": -0.061004117519570356,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 1.7358179799451599,
+          "n_spacings": 9,
+          "explanation": "V=28, 2E=58, q_max_w=2.000001, sqrt(q_max_w)=1.414214, rho(T_w)=1.543690, max|mu_nontrivial|=1.353210, deviation=-0.061004 (Ramanujan)"
+        },
+        "unitary_alpha": {
+          "alpha": 1.0,
+          "deviation": -0.07072292626398458,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 1.9628566915933419,
+          "n_spacings": 11,
+          "explanation": "V=28, 2E=58, q_max_w=2.027585, sqrt(q_max_w)=1.423933, rho(T_w)=1.554106, max|mu_nontrivial|=1.353210, deviation=-0.070723 (Ramanujan)"
+        }
+      },
+      "elapsed_seconds": 151.56675200001337
+    },
+    "ruleB_nmax3": {
+      "n_max": 3,
+      "adjacency_rule": "B",
+      "description": "Dirac-S^3 graph, rule B, n_max=3: V=28, E=106, max deg=12, min deg=2.",
+      "V": 28,
+      "E": 106,
+      "c": 1,
+      "r_betti1": 79,
+      "max_degree": 12,
+      "min_degree": 2,
+      "symbolic_zeta_computed": false,
+      "note": "Symbolic determinant of I - s A_w + s^2 Q_w for V=28, E=106 with 106 alpha^2-parameterized weights requires >10 minutes in sympy; numeric Ramanujan + CV diagnostics only.",
+      "alpha_sweep": [
+        {
+          "alpha": 0.0,
+          "deviation": -0.11875030493712657,
+          "is_ramanujan": true,
+          "cv_spacing": 2.605774572065539,
+          "n_spacings": 17
+        },
+        {
+          "alpha": 1e-06,
+          "deviation": -0.11875030493713545,
+          "is_ramanujan": true,
+          "cv_spacing": 2.605774572065539,
+          "n_spacings": 17
+        },
+        {
+          "alpha": 0.0001,
+          "deviation": -0.11875030502995276,
+          "is_ramanujan": true,
+          "cv_spacing": 2.605774572065539,
+          "n_spacings": 17
+        },
+        {
+          "alpha": 0.01,
+          "deviation": -0.11874991707600602,
+          "is_ramanujan": true,
+          "cv_spacing": 5.102557448600938,
+          "n_spacings": 59
+        },
+        {
+          "alpha": 0.0072973525205055605,
+          "deviation": -0.11875012454031442,
+          "is_ramanujan": true,
+          "cv_spacing": 4.87287380201675,
+          "n_spacings": 54
+        },
+        {
+          "alpha": 0.1,
+          "deviation": -0.1187098397168187,
+          "is_ramanujan": true,
+          "cv_spacing": 5.407735445587387,
+          "n_spacings": 66
+        },
+        {
+          "alpha": 0.3,
+          "deviation": -0.11838566361750535,
+          "is_ramanujan": true,
+          "cv_spacing": 5.449817422751524,
+          "n_spacings": 67
+        },
+        {
+          "alpha": 1.0,
+          "deviation": -0.11464078092438523,
+          "is_ramanujan": true,
+          "cv_spacing": 5.490333664075763,
+          "n_spacings": 68
+        }
+      ],
+      "ramanujan_reports": {
+        "unweighted_alpha0": {
+          "alpha": 0.0,
+          "deviation": -0.11875030493712657,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 2.605774572065539,
+          "n_spacings": 17,
+          "explanation": "V=28, 2E=212, q_max_w=11.000000, sqrt(q_max_w)=3.316625, rho(T_w)=7.467028, max|mu_nontrivial|=3.197874, deviation=-0.118750 (Ramanujan)"
+        },
+        "physical_alpha": {
+          "alpha": 0.0072973525205055605,
+          "deviation": -0.11875012454031442,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 4.87287380201675,
+          "n_spacings": 54,
+          "explanation": "V=28, 2E=212, q_max_w=11.000003, sqrt(q_max_w)=3.316625, rho(T_w)=7.467030, max|mu_nontrivial|=3.197875, deviation=-0.118750 (Ramanujan)"
+        },
+        "unitary_alpha": {
+          "alpha": 1.0,
+          "deviation": -0.11464078092438523,
+          "is_ramanujan": true,
+          "pair_correlation_cv": 5.490333664075763,
+          "n_spacings": 68,
+          "explanation": "V=28, 2E=212, q_max_w=11.061574, sqrt(q_max_w)=3.325894, rho(T_w)=7.503219, max|mu_nontrivial|=3.211254, deviation=-0.114641 (Ramanujan)"
+        }
+      },
+      "elapsed_seconds": 64.3019996000221
+    }
+  }
+}

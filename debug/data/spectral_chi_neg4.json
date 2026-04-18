@@ -1,0 +1,400 @@
+{
+  "2": {
+    "s": 2,
+    "D_even_float": -0.8177349559589508,
+    "D_odd_float": -1.6496661443133889,
+    "D_diff_float": 0.831931188354438,
+    "D_full_float": -2.4674011002723395,
+    "sum_consistency_rel_err": 0.0,
+    "closed_form_target_float": 0.831931188354438,
+    "closed_form_description": "2^(s-1) * (beta(2) - beta(0))",
+    "identity_error_float": 0.0,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "1": "-1",
+        "beta(2)": "2"
+      },
+      "residual_float": 0.0,
+      "reconstructed_float": 0.831931188354438,
+      "value_float": 0.831931188354438,
+      "raw_relation": [
+        1,
+        1,
+        0,
+        -2
+      ]
+    },
+    "pslq_wide": {
+      "identified": true,
+      "components": {
+        "1": "-1",
+        "beta(2)": "2"
+      },
+      "residual_float": 0.0,
+      "reconstructed_float": 0.831931188354438,
+      "value_float": 0.831931188354438,
+      "raw_relation": [
+        1,
+        1,
+        0,
+        -2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "expr_Deven_minus_Dodd_symbolic": "-zeta(2, 3/4)/8 + zeta(2, 5/4)/8 + 1",
+    "individual": {
+      "D_even": {
+        "identified": true,
+        "components": {
+          "1": "-1/2",
+          "pi^2": "-1/8",
+          "G": "1"
+        },
+        "residual_float": 0.0,
+        "reconstructed_float": -0.8177349559589508,
+        "value_float": -0.8177349559589508,
+        "raw_relation": [
+          -8,
+          -4,
+          -1,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0
+        ],
+        "tol_used": 1e-80,
+        "maxcoeff_used": 1000000
+      },
+      "D_odd": {
+        "identified": true,
+        "components": {
+          "1": "1/2",
+          "pi^2": "-1/8",
+          "G": "-1"
+        },
+        "residual_float": 0.0,
+        "reconstructed_float": -1.6496661443133889,
+        "value_float": -1.6496661443133889,
+        "raw_relation": [
+          -8,
+          4,
+          -1,
+          0,
+          0,
+          0,
+          -8,
+          0,
+          0,
+          0
+        ],
+        "tol_used": 1e-80,
+        "maxcoeff_used": 1000000
+      }
+    }
+  },
+  "3": {
+    "s": 3,
+    "D_even_float": Infinity,
+    "D_odd_float": Infinity,
+    "D_diff_float": 0.7341919314476842,
+    "D_full_float": Infinity,
+    "sum_consistency_rel_err": null,
+    "closed_form_target_float": 0.7341919314476842,
+    "closed_form_description": "2^(s-1) * (beta(3) - beta(1))",
+    "identity_error_float": 0.0,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "pi": "-1",
+        "pi^3": "1/8"
+      },
+      "residual_float": 2.8574684782056875e-101,
+      "reconstructed_float": 0.7341919314476842,
+      "value_float": 0.7341919314476842,
+      "raw_relation": [
+        -8,
+        0,
+        -8,
+        1,
+        0,
+        0
+      ]
+    },
+    "pslq_wide": {
+      "identified": true,
+      "components": {
+        "pi": "-1",
+        "beta(3)": "4"
+      },
+      "residual_float": 0.0,
+      "reconstructed_float": 0.7341919314476842,
+      "value_float": 0.7341919314476842,
+      "raw_relation": [
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "expr_Deven_minus_Dodd_symbolic": "nan",
+    "individual": {
+      "D_even": {
+        "identified": false,
+        "reason": "divergent individually at s=3"
+      },
+      "D_odd": {
+        "identified": false,
+        "reason": "divergent individually at s=3"
+      }
+    }
+  },
+  "4": {
+    "s": 4,
+    "D_even_float": 1.1680059043834563,
+    "D_odd_float": 0.5841742438723658,
+    "D_diff_float": 0.5838316605110906,
+    "D_full_float": 1.7521801482558221,
+    "sum_consistency_rel_err": 8.154037360399573e-102,
+    "closed_form_target_float": 0.5838316605110906,
+    "closed_form_description": "2^(s-1) * (beta(4) - beta(2))",
+    "identity_error_float": 4.286202717308531e-101,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "beta(2)": "-8",
+        "beta(4)": "8"
+      },
+      "residual_float": 4.286202717308531e-101,
+      "reconstructed_float": 0.5838316605110906,
+      "value_float": 0.5838316605110906,
+      "raw_relation": [
+        1,
+        0,
+        8,
+        -8
+      ]
+    },
+    "pslq_wide": {
+      "identified": true,
+      "components": {
+        "beta(2)": "-8",
+        "beta(4)": "8"
+      },
+      "residual_float": 4.286202717308531e-101,
+      "reconstructed_float": 0.5838316605110906,
+      "value_float": 0.5838316605110906,
+      "raw_relation": [
+        -1,
+        0,
+        -8,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "expr_Deven_minus_Dodd_symbolic": "-zeta(2, 5/4)/2 - zeta(4, 3/4)/32 + zeta(4, 5/4)/32 + zeta(2, 3/4)/2",
+    "individual": {
+      "D_even": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      },
+      "D_odd": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      }
+    }
+  },
+  "5": {
+    "s": 5,
+    "D_even_float": 0.5959016742977925,
+    "D_odd_float": 0.16051476521429361,
+    "D_diff_float": 0.4353869090834989,
+    "D_full_float": 0.7564164395120861,
+    "sum_consistency_rel_err": 0.0,
+    "closed_form_target_float": 0.4353869090834989,
+    "closed_form_description": "2^(s-1) * (beta(5) - beta(3))",
+    "identity_error_float": 2.0002279347439812e-100,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "beta(3)": "-16",
+        "beta(5)": "16"
+      },
+      "residual_float": 2.0002279347439812e-100,
+      "reconstructed_float": 0.4353869090834989,
+      "value_float": 0.4353869090834989,
+      "raw_relation": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        16,
+        -16
+      ]
+    },
+    "pslq_wide": {
+      "identified": false,
+      "reason": "PSLQ returned None"
+    },
+    "expr_Deven_minus_Dodd_symbolic": "-zeta(3, 5/4)/4 - zeta(5, 3/4)/64 + zeta(5, 5/4)/64 + zeta(3, 3/4)/4",
+    "individual": {
+      "D_even": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      },
+      "D_odd": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      }
+    }
+  },
+  "6": {
+    "s": 6,
+    "D_even_float": 0.3675460070493237,
+    "D_odd_float": 0.05584455177467413,
+    "D_diff_float": 0.3117014552746496,
+    "D_full_float": 0.42339055882399784,
+    "sum_consistency_rel_err": 8.43626652346282e-102,
+    "closed_form_target_float": 0.3117014552746496,
+    "closed_form_description": "2^(s-1) * (beta(6) - beta(4))",
+    "identity_error_float": 7.50085475528993e-101,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "beta(4)": "-32",
+        "beta(6)": "32"
+      },
+      "residual_float": 7.50085475528993e-101,
+      "reconstructed_float": 0.3117014552746496,
+      "value_float": 0.3117014552746496,
+      "raw_relation": [
+        1,
+        0,
+        32,
+        -32
+      ]
+    },
+    "pslq_wide": {
+      "identified": false,
+      "reason": "PSLQ returned None"
+    },
+    "expr_Deven_minus_Dodd_symbolic": "-zeta(4, 5/4)/8 - zeta(6, 3/4)/128 + zeta(6, 5/4)/128 + zeta(4, 3/4)/8",
+    "individual": {
+      "D_even": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      },
+      "D_odd": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      }
+    }
+  },
+  "7": {
+    "s": 7,
+    "D_even_float": 0.238364606598877,
+    "D_odd_float": 0.02097709853795891,
+    "D_diff_float": 0.2173875080609181,
+    "D_full_float": 0.2593417051368359,
+    "sum_consistency_rel_err": 0.0,
+    "closed_form_target_float": 0.2173875080609181,
+    "closed_form_description": "2^(s-1) * (beta(7) - beta(5))",
+    "identity_error_float": 1.7144810869234125e-100,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "beta(5)": "-64",
+        "beta(7)": "64"
+      },
+      "residual_float": 1.7144810869234125e-100,
+      "reconstructed_float": 0.2173875080609181,
+      "value_float": 0.2173875080609181,
+      "raw_relation": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        64,
+        -64
+      ]
+    },
+    "pslq_wide": {
+      "identified": false,
+      "reason": "PSLQ returned None"
+    },
+    "expr_Deven_minus_Dodd_symbolic": "-zeta(7, 3/4)/256 - zeta(5, 5/4)/16 + zeta(7, 5/4)/256 + zeta(5, 3/4)/16",
+    "individual": {
+      "D_even": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      },
+      "D_odd": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      }
+    }
+  },
+  "8": {
+    "s": 8,
+    "D_even_float": 0.1572266012184015,
+    "D_odd_float": 0.00813629358428683,
+    "D_diff_float": 0.14909030763411468,
+    "D_full_float": 0.16536289480268834,
+    "sum_consistency_rel_err": 0.0,
+    "closed_form_target_float": 0.14909030763411468,
+    "closed_form_description": "2^(s-1) * (beta(8) - beta(6))",
+    "identity_error_float": 1.0519055835394687e-99,
+    "pslq_targeted": {
+      "identified": true,
+      "components": {
+        "beta(6)": "-128",
+        "beta(8)": "128"
+      },
+      "residual_float": 1.0519055835394687e-99,
+      "reconstructed_float": 0.14909030763411468,
+      "value_float": 0.14909030763411468,
+      "raw_relation": [
+        1,
+        0,
+        128,
+        -128
+      ]
+    },
+    "pslq_wide": {
+      "identified": false,
+      "reason": "PSLQ returned None"
+    },
+    "expr_Deven_minus_Dodd_symbolic": "-zeta(8, 3/4)/512 - zeta(6, 5/4)/32 + zeta(8, 5/4)/512 + zeta(6, 3/4)/32",
+    "individual": {
+      "D_even": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      },
+      "D_odd": {
+        "identified": false,
+        "reason": "no relation at any tol/maxcoeff"
+      }
+    }
+  }
+}
