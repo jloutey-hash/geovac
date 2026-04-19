@@ -174,7 +174,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **20** | Resource Benchmarks | 38 molecules, Gaussian comparison, `pip install` |
 | **23** | **Nuclear Shell Hamiltonians** | **Deuteron/He-4 qubit encoding, Fock rigidity theorem** |
 | 21 | Synthesis | S³ proof chain, exchange constants, research program |
-| 2 | Fine Structure Constant | α from Hopf bundle, 8.8×10⁻⁸ (conjectural) |
+| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸; three-sector spectral coincidence K = π(B + F − Δ); Marcolli-vS gauge-network lineage; combination rule remains conjectural** |
 | 8-9 | Bond Sphere + Sturmian | Structural theorem (guardrail), SO(4) selection rules |
 
 ---

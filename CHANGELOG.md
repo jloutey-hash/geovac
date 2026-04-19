@@ -5,6 +5,31 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+> **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
+
+## [2.26.1] - 2026-04-18
+
+### Changed — Paper 2 promoted from Conjectures to Core
+
+- **File move:** `papers/conjectures/paper_2_alpha.tex` → `papers/core/paper_2_alpha.tex` (via `git mv`; history preserved).
+- **Rationale:** Sprint A (2026-04-18) applied the structural reframe (see v2.26.0 notes + `debug/paper_2_reframe_skeleton.md` + `debug/alpha_sprint_a/`). Three structural verifications landed with partial positive / partial negative verdicts (α-PI, α-MI, α-SP, α-EB v2, α-X, α-LS); Marcolli-van Suijlekom 2014 gauge-network framework identified as published lineage (WH1 upgraded to MODERATE); Paper 2 body extended by 7 substantive edits (+168 lines) naming the triple m=3 selection, Hopf-measure π, APS-shape on Δ minus sign, π³α³ residual footnote (as hint, not derivation), and spectral-triple setting with Marcolli-vS citation.
+- **Conjectural-label prohibition narrowed** in `CLAUDE.md` §13.5 and §13.8: "Removal of the 'conjectural' label from Paper 2" → "Removal of the 'conjectural' label from the combination rule K = π(B + F − Δ) in Paper 2." The paper's surrounding theorems (three-homes, three obstructions, Sprint A verifications) are not conjectural; the combination rule observation remains conjectural until a first-principles derivation lands.
+- **Papers 25 and 30 updated** (same date) with Marcolli-van Suijlekom 2014 + Perez-Sanchez 2024/2025 citations establishing published gauge-network lineage.
+- **CLAUDE.md §6 Paper Inventory** updated: Paper 2 added to Core tier, removed from Conjectures tier. Context Loading Guide entry added (On-topic).
+- **README.md Paper Series** table updated: Paper 2 bolded and description reflects reframe.
+
+### Notes
+
+- Sprint B (g−2 from QED-on-S³) plan drafted as `debug/sprint_b_g_minus_2_plan.md`; NOT auto-dispatched; awaits PI go/no-go. Sprint B will test whether the framework predicts the anomalous magnetic moment at one loop — the Layer 2 out-of-sample prediction test per the promotion criterion.
+
+## [2.26.0] - 2026-04-18
+
+### Added — CLAUDE.md §1.7 Working Hypotheses (Internal Register)
+
+- **New section:** CLAUDE.md §1.7 "Working Hypotheses (Internal Register)" — bold-claim register distinct from paper rhetoric. Six WHs (almost-commutative spectral triple, Paper 18 as Seeley-DeWitt + ζ-invariant decomposition, lattice a priori from packing origin, four-way S³ coincidence as one structure, α as projection constant, D(s) not classical Riemann ζ), each with falsifier and status fields. Governance specifies PM may update Status only; add/retire/promote requires PI direction.
+- **Purpose:** papers remain cautious under §1.5 rhetoric rule; internal thinking gets Ramanujan-register license. Papers are Hardy-letters; the WH register is the notebook.
+- **Memory note:** `memory/wh_register_april2026.md` records the register's addition and conversational context.
+
 ## [2.9.2] - 2026-04-15
 
 ### Added — Paper 27 (entropy as projection artifact)
