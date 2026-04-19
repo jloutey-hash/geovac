@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v2.25.0 (April 17, 2026)
+**Version:** v2.26.1 (April 18, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/core/`, `papers/supporting/`, and `papers/observations/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it.
@@ -44,6 +44,62 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 
 ---
 
+## 1.7. Working Hypotheses (Internal Register)
+
+This section is a **bold-claim register**, distinct from the rhetoric of the papers. Papers remain cautious under §1.5 (dual-description framing, no ontological priority, lead with computational results). This section is the register sub-agents and the PM are permitted to *reason from* when doing synthesis work. Nothing here appears in papers unless promoted after its falsifier clears.
+
+The purpose is operational. When reasoning about what the framework *is* — what the transcendental taxonomy means, what α really is, where the RH thread actually points — the careful-paper register is under-tooled. Ramanujan worked this way: maximal-claim working notebooks, cautious proof letters sent to Hardy, both required. The working hypotheses below are the GeoVac notebook; Papers 0–30 are the letters.
+
+**Governance:**
+- PM may update a WH's "Status" field based on sprint evidence.
+- Adding, retiring, or promoting a WH to paper-level claim requires explicit PI direction.
+- Retired WHs are moved to an archive subsection with retirement rationale; never silently deleted.
+- No WH is a license to bypass the rhetoric rule in papers or to skip the verification gates in §13.4.
+
+---
+
+**WH1 — GeoVac is an almost-commutative spectral triple.**
+The framework is the data of a spectral triple (A, H, D): A = functions on the Fock-projected S³ graph, H = scalar/spinor state space (T1–T9), D = Camporesi-Higuchi Dirac operator (|λ_n| = n+3/2). Non-abelian gauge structure enters as inner derivations of an almost-commutative extension A × M_n(ℂ) — Paper 25 (n=1 / U(1)) and Paper 30 (n=2 / SU(2)) are the maximal-torus and full non-abelian slices of this structure. The K = π(B + F − Δ) formula has the *shape* of a finite-cutoff spectral-action coefficient: finite mode trace + regularized ζ sum + boundary mode count.
+*Falsifier:* a GeoVac observable demonstrably inconsistent with any spectral-action expansion; or a structural feature of almost-commutative spectral triples (e.g., order-one condition, reality condition) that GeoVac demonstrably violates.
+*Status:* **MODERATE** (upgraded from partial shape-match after Sprint A α-LS, 2026-04-18). Sprint A returned four substantive verdicts: α-PI POSITIVE PARTIAL identifies the external π in K = π(B+F−Δ) as the Hopf-bundle measure factor Vol(S²)/4 = Vol(S³)/Vol(S¹) = π, equivalently a₀² = π (squared Seeley-DeWitt zeroth coefficient); α-SP NO-MATCH-WITH-WEAK-APS-PARTIAL on direct CC-sign-rule derivation (standard CC bulk expansion gives (+,+,+) on S³, not the (+,+,−) of K; APS eta-invariant boundary subtraction is the only heat-kernel rule producing (−) next to bulk (+), and K's Δ is shape-compatible with APS but NOT literally an APS invariant since Δ⁻¹ = g_3^Dirac is a Dirac mode count); α-X PARTIAL-NEGATIVE on Paper 24 cross-check (π³ shape-match survives — every S⁵ SD coefficient factorizes as π³ × rational — but no S⁵ spectral-action coefficient produces a contribution at order α³ against 1/α, so the α-EB v2 π³α³ residual stays structural hint not derivation); α-LS MODERATE literature grounding established: Marcolli-van Suijlekom 2014 (J. Geom. Phys. 75, arXiv:1301.3480) "Gauge networks in noncommutative geometry" is a published framework of finite spectral triples on graph vertices with connection on edges whose spectral action is Wilson lattice gauge theory — structurally matches Papers 25/30 almost verbatim, with the Perez-Sanchez 2024 correction (arXiv:2401.03705, arXiv:2508.17338) clarifying that the continuum limit is Yang-Mills without Higgs. Each structural ingredient of WH1 has published precedent: finite ACG classification (Krajewski 1998, Paschke-Sitarz 2000, Ćaćić 2009), graph spectral triples (Marcolli-vS 2014, de Jong 2009), spectral truncations / operator systems (Connes-vS CMP 2021, Hekkelman 2022+2024), SM spectral action (Chamseddine-Connes 1997/2010). **However, no published framework predicts α from a discrete spectral action** — this remains GeoVac's original Paper 2 claim, not duplicated in the literature. Concrete follow-ups flagged: (a) Kluth-Litim 2020 (EPJ C 80:269, arXiv:1910.00543) gives explicit Seeley-DeWitt on spheres including odd dimensions — good independent check for α-X's S⁵ SD values; (b) Papers 25 and 30 should cite Marcolli-van Suijlekom + Perez-Sanchez correction; (c) Connes-van Suijlekom spectral truncations (CMP 2021) remains the concrete next-test target for Link 3.
+
+---
+
+**WH2 — Paper 18 is the Seeley-DeWitt + ζ-invariant decomposition of this spectral triple.**
+The transcendental taxonomy is the structured output of spectral-action geometry, organized by operator order (2nd-order Laplacian → even-ζ via Jacobi-θ inversion; 1st-order Dirac → odd-ζ via half-integer Hurwitz; vertex-coupled → Dirichlet-L via parity characters) and bundle type (scalar, spinor, gauge). Every transcendental we have found so far sits in this three-axis grid.
+*Falsifier:* a transcendental appearing in a GeoVac observable that cannot be placed in the grid.
+*Status:* three of four axis-quadrants filled (Phases 4B-4I, Tiers 2-3, Sprint 4 QG/RH-J, Sprint 2 RH-M). Paper 18 v2.0 restructure should promote this from observation to theorem-with-evidence — that restructure is the operational consequence of this WH.
+
+---
+
+**WH3 — The lattice exists a priori; match to physics is evidence, not derivation.**
+The framework originates in a geometric packing construction (pack Planck's constant → node counts give l, m in 2D → 3D lift via periodic-table row-length inductive proof gives n, s). This construction is independent of known physics. Its persistent match to physics — Fock S³ equivalence (Paper 7), nuclear magic numbers (Paper 23), Dirac fine structure (T8), Pauli sparsity scaling (Paper 14) — is therefore evidence that physics is hosted by a discrete spectral triple, not that the lattice was reverse-engineered from physics.
+*Falsifier:* showing the packing construction, followed rigorously, does not force the (n, l, m, s) structure or does not produce a graph Laplacian whose spectrum is n² − 1; or, a match that turns out to depend on a hidden physics-informed parameter.
+*Status:* origin-story framing permits strong ontological claim internally. Papers continue under §1.5 dual-description framing. This WH is what makes the Ramanujan-register appropriate.
+
+---
+
+**WH4 — The four-way S³ coincidence is one structure expressing itself four times.**
+S³ appears as (a) the Fock projection image of the hydrogenic spectrum (Paper 7), (b) the base of the Hopf bundle carrying Paper 2's α construction, (c) the spin-carrier for the Dirac sector (T1, Camporesi-Higuchi), (d) the manifold of SU(2) gauge (Paper 30). Under WH1 these are not four coincidences — they are the single spectral-triple structure viewed in four projections. S³ = SU(2) is the unique rank-1 non-abelian compact Lie group where all four roles coincide.
+*Falsifier:* a GeoVac construction that forces one of the four S³ roles to live on a different manifold without the framework breaking.
+*Status:* strongest coincidence in the whole project; currently unnamed in papers. Motivates the spectral-triple framing more than any single computation.
+
+---
+
+**WH5 — α is a projection constant, not a derivable number.**
+K = π(B + F − Δ) composes three structurally distinct spectral objects: finite Casimir trace (B), infinite Fock-degeneracy Dirichlet at the packing exponent (F = ζ(2)), Dirac boundary degeneracy (Δ⁻¹ = g_3^Dirac = 40). Nine mechanisms eliminated (Phases 4B–4I) confirm they do not share a common generator. α is therefore best read as the *conversion factor between three projection regimes that do not share a generator*, not as a quantity derivable from a single principle. "Why does the sum equal α⁻¹" is the correct open question, not "how do we derive each piece."
+*Falsifier:* a spectral-triple construction (Connes-Chamseddine-style or otherwise) that derives K as a single coefficient of a well-defined functional.
+*Status:* α-derivation program paused at this framing. Promotes Paper 2 from "conjectural derivation attempt" to "structural coincidence with three identified spectral homes." Sprint A (2026-04-18) strengthens WH5 along two axes: (i) α-MI confirmed K(m) is a single-point coincidence at m=3 — grows as Θ(m⁵), no series/asymptote, no convergent partial sum interpretation — AND found that m=3 is a TRIPLE coincidence, simultaneously satisfying (a) the B(m)/N(m) = dim(S³) = 3 selection principle, (b) the unique (+,+,−) sign pattern hit (3.5 orders of magnitude over next-best), and (c) agreement of two independent canonical Δ forms (boundary product |λ_m|·N(m−1) vs Dirac degeneracy g_m^Dirac/2) which agree only at m=3; (ii) α-SP decisively eliminated direct Connes-Chamseddine spectral-action derivation as a common generator. Both findings consistent with the projection-constant reading: no single principle generates K, but three independent selection mechanisms converge at one finite cutoff. (iii) α-EB v2 verified at 80 dps that the post-cubic residual R_predict = K − 1/α − α² = 1.2079×10⁻⁵ matches π³α³ = 1.2049×10⁻⁵ to within 0.25% (with π³ uniquely picked out among {π², π³, π⁴}); the structural reading is π³ = Vol(S⁵), which would connect Paper 2's residual to Paper 24's Bargmann-Segal S⁵ lattice as a new cross-paper hint. Next-order coefficient C ≈ 0.344 (closest to π/9 at 1.4%, then to 1/3 = 1/dim(S³) at 3.2%). Single CODATA data point cannot uniquely fix C. (iv) α-X cross-check against Paper 24 (2026-04-18) verdict: PARTIAL (negative-leaning). π³ shape-match holds at the Seeley-DeWitt coefficient level — every SD coefficient on round S⁵ factorizes as π³ × rational (a₀_scalar = π³, a₂_scalar = 10π³/3, a₄_scalar = 16π³/3; Dirac variants 4π³, −20π³/3, 14π³/3). Paper 24's π-free certificate is reconciled: it applies to the discrete graph and exact rational spectrum, while Vol(S⁵) = π³ lives in the continuum integration measure — no conflict. However, no S⁵ spectral-action coefficient produces a contribution at order α³ against 1/α structurally (CC expansion on d=5 is in odd powers of Λ with no log term, and standard CC uses a₀/a₄ ratios to fix α once, not α³). α-EB v2 finding therefore stays "structural hint, not derivation"; it should NOT be integrated into Paper 2 §IV.G as a substantive section. Recommended treatment: narrowly scoped footnote in Paper 2 Open Questions. Consistent with WH5's core thesis (α is projection constant, not derivable from a single principle). Paper 2 stays conjectural; Paper 24 unchanged.
+
+---
+
+**WH6 — GeoVac's RH-adjacent object is the Dirac spectral zeta D(s), not classical Riemann ζ.**
+The empirical GUE-like zero statistics of D(s), D_even, D_odd (Sprint 3 RH-M, CV ≈ 0.35–0.40) are the framework's internal RMT phenomenon. The classical-RH bridge is closed by three independent walls: (i) zeros not on a single critical line (RH-M), (ii) no spectral-triple-natural functional equation (Sprint 4 RH-O, 48 orders of magnitude off), (iii) wrong Weyl law (Sprint 4 RH-N, γ_n ~ √n HO-class vs Riemann's log-density). The Weil dictionary is broken in GeoVac by design: Ihara side is Poisson (RH-G), spectral side is GUE. The right research object is D(s) itself, not a classical-RH identification.
+*Falsifier:* D(s) zeros shown to lie on a single critical line at larger sample sizes; or a spectral-triple-natural functional equation discovered that closes the RH-O gap.
+*Status:* three independent negatives against classical-RH, one independent positive for internal GUE. RH frontier paused (2026-04-18); if resumed, the target is D(s) and its spectral-action interpretation, not ζ_R.
+
+---
+
 ## 2. Current Development Frontier
 
 **Best results by system type:**
@@ -60,7 +116,8 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 - H₂ bond-pair qubit encoding: 112 Pauli terms at Q=10 (n_max=2), Q^3.13 scaling, R-independent sparsity, 1-norm=8.17 Ha (Paper 14, v2.0.27)
 - Composed qubit encoding: consistent ~Q^2.2 within-molecule Pauli scaling across 6 composed molecules (LiH/BeH₂/H₂O/HF/NH₃/CH₄), 51x-1,712x advantage over published Gaussian baselines (Paper 14, v2.0.0-v2.0.30)
 - Full N-electron molecules: LiH R_eq ~1.1 bohr at l_max=2 (63.5% error, 2D variational solver; unbound D_e confirms adiabatic overcounting was artifact) (full 4-electron mol-frame hyperspherical, PK-free, Level 4N)
-- Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9, universal algebraic identity B_formal/N = d, Hopf generalization negative result, circulant Hermiticity, second selection principle (Paper 2, conjectural; Phase 4 sharpening via Fock rigidity theorem in the $S^3$ specificity section); Phase 4B-4G structural decomposition (April 2026): B = 42 = finite Casimir truncation (κ↔B Fock-weight link, α-C), F = π²/6 = D_{n²}(d_max) = ζ_R(2) infinite Fock-degeneracy Dirichlet series at the packing exponent (α-J), Δ = 1/40 = |λ_{n_max}|·N(n_max−1) irreducible finite-N boundary product (α-K), three-tier composition without common generator — combination rule K = π(B + F − Δ) is now structurally decomposed but remains conjectural at the level of why the sum hits α⁻¹
+- κ = -1/16 derivation (v2.26.1, April 2026): κ is derivable from the Fock projection, not merely fitted. The squared coupling between adjacent n-shells in the Gegenbauer eigenbasis is c²(n,l) = (1/16)[1 - l(l+1)/(n(n+1))]; for l=0 (s-wave), c²(n,0) = 1/16 universally for all n. Three equivalent readings: (1) squared Chebyshev transition amplitude (1/4)², (2) inverse Fock Jacobian 1/Ω⁴(0) where Ω(0) = 2 is the stereographic conformal factor at p=0, (3) l=0 base rate of the Casimir decomposition. Paper 18 reclassified κ from "calibration" to "conformal." Notable: c²(4,3) = 1/40 = Δ (Paper 2 boundary term). Four negative probes confirmed κ doesn't live in graph topology (Ollivier curvature identically zero, Ramanujan κ-independent, spectral action no extremum, S⁵ has no κ — Coulomb-specific via Fock rigidity). Key files: `debug/probe_k{1..5}_*.py`, `debug/data/probe_k{1..5}_*.json`, `debug/probe_kappa_sprint_memo.md`.
+- Fine structure constant: alpha from Hopf bundle at 8.8x10^-8, zero free parameters, p-value 5.2x10^-9, universal algebraic identity B_formal/N = d, Hopf generalization negative result, circulant Hermiticity, second selection principle (Paper 2, conjectural; Phase 4 sharpening via Fock rigidity theorem in the $S^3$ specificity section); Phase 4B-4G structural decomposition (April 2026): B = 42 = finite Casimir truncation (κ↔B Fock-weight link, α-C), F = π²/6 = D_{n²}(d_max) = ζ_R(2) infinite Fock-degeneracy Dirichlet series at the packing exponent (α-J), Δ = 1/40 = |λ_{n_max}|·N(n_max−1) = c²(4,3) Fock coupling at the angular-momentum edge of the cutoff (α-K + κ sprint), three-tier composition without common generator — combination rule K = π(B + F − Δ) is now structurally decomposed but remains conjectural at the level of why the sum hits α⁻¹
 - Nuclear systems (Phase 4, Paper 23): deuteron 16 qubits / 592 Pauli terms / 227 MeV 1-norm (Track NE, Minnesota NN potential, two-species JW); He-4 16 qubits / 712 Pauli terms (Track NF, Pauli count grows only 1.20x for 12.25x larger Hilbert space); Mayer-Jensen magic numbers 2, 8, 20, 28, 50, 82, 126 from HO + spin-orbit + Nilsson l(l+1) at v_ls/hw = 0.171, d_ll/hw = 0.021 (Track NB)
 - Composed nuclear-electronic deuterium (Track NI, 26 qubits): 614 Pauli terms (592 nuclear + 10 electronic + 12 hyperfine cross-register), coefficient ratio ~2e13 across nuclear/electronic/hyperfine scales, hyperfine singlet-triplet gap validated at 3*A_hf/4 = 1.62e-7 Ha (21cm line). Practical single-pass quantum simulation requires block-partitioned solving due to the 10^13 dynamic range.
 - Angular sparsity theorem (Paper 22, promoted to core): ERI density depends only on l_max, not on V(r). Verified values: l_max=0: 100%, l_max=1: 7.81%, l_max=2: 2.76%, l_max=3: 1.44%, l_max=4: 0.90%, l_max=5: 0.62%. Universal across Coulomb, harmonic oscillator, Woods-Saxon, square well, Yukawa.
@@ -284,6 +341,7 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 | Paper 14 | **Always** | Qubit encoding, Pauli scaling, composed sparsity — the headline result |
 | Paper 22 | **Always** | Angular sparsity theorem, potential-independent ERI density, universal/Coulomb partition |
 | Paper 24 | **Always** | Bargmann-Segal lattice for the 3D HO, π-free graph, HO rigidity theorem, Coulomb/HO asymmetry |
+| Paper 2 | On-topic | α conjecture: K = π(B + F − Δ) three-sector spectral coincidence on the Fock-projected S³; Marcolli-vS gauge-network lineage (WH1); Sprint A (2026-04-18) structural verifications. Promoted to core 2026-04-18; combination rule itself remains conjectural per §13.5. |
 | Paper 18 | On-topic | Exchange constants, transcendental taxonomy, observable classification, Weyl-Selberg |
 | Paper 15 | On-topic | Level 4 solver, H₂ accuracy, channel convergence, cusp correction |
 | Paper 17 | On-topic | Composed geometry, molecules, polyatomics, PK |
@@ -319,6 +377,7 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 | Paper 16 | `paper_16_periodicity.tex` | Chemical periodicity from S_N representation theory; atomic classifier for composed geometry |
 | Paper 22 | `paper_22_angular_sparsity.tex` | Potential-independent angular sparsity theorem; ERI density 1.44% at l_max=3; universal/Coulomb-specific partition |
 | Paper 24 | `paper_24_bargmann_segal.tex` | Bargmann-Segal lattice: π-free discretization of 3D HO on S^5 Hardy space; Coulomb/HO structural asymmetry; HO rigidity theorem |
+| Paper 2 | `paper_2_alpha.tex` | Fine structure constant from Hopf bundle (8.8×10⁻⁸, p = 5.2×10⁻⁹, zero free parameters): K = π(B + F − Δ) as three-sector spectral coincidence on the Fock-projected S³ with three canonical spectral homes (B = finite Casimir truncation at m=3; F = D_{n²}(d_max) = ζ_R(2); Δ⁻¹ = g_3^Dirac = 40). Sprint A (2026-04-18, v2.26.1) structural verifications: triple m=3 selection, Hopf-measure π identification (Vol(S²)/4 = Vol(S³)/Vol(S¹)), APS-shape on Δ minus sign, post-cubic residual ≈ π³α³ to 0.25% (structural hint, not derivation). Marcolli-vS gauge-network lineage (WH1). Promoted from Conjectures to Core 2026-04-18; **combination rule K itself remains conjectural** per §13.5. |
 
 #### Supporting (`papers/supporting/`) — Load on-topic
 
@@ -373,7 +432,6 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 
 | Paper | File | Key Topic |
 |:------|:-----|:----------|
-| Paper 2 | `paper_2_alpha.tex` | Fine structure constant from Hopf bundle (8.8x10^-8, p = 5.2x10^-9, circulant Hermiticity, second selection, universal B_formal/N = d identity, Hopf generalization negative result, zero params), three-tier structural decomposition Phases 4B-4G: B = finite Casimir + F = D_{n²}(d_max) = ζ_R(2) + Δ = irreducible boundary product |
 | Paper 3 | `paper_3_holography.tex` | Holographic entropy, spectral dimension, central charge |
 | Paper 4 | `Paper_4_Universality.tex` | Mass-independence, universality, muonic hydrogen |
 | Paper 5 | `Paper_5_Geometric_Vacuum.tex` | Comprehensive geometric vacuum framework (synthesis) |
@@ -1252,7 +1310,7 @@ The following changes must NEVER be made by sub-agents or the PM agent:
 - Any change to the natural geometry hierarchy (new levels, changed coordinate systems)
 - Introduction of any fitted or empirical parameter
 - Deletion or suppression of negative results from Section 3 or CHANGELOG.md
-- Removal of the "conjectural" label from Paper 2
+- Removal of the "conjectural" label from the **combination rule K = π(B + F − Δ) in Paper 2**. (Paper 2 itself was promoted from Conjectures to Core on 2026-04-18; the paper's surrounding theorems — three homes, three obstructions, Sprint A structural verifications — are not conjectural, but the combination rule observation remains conjectural until a first-principles derivation is demonstrated. The conjectural label must stay attached to the observation itself, not the paper's tier.)
 
 **CLAUDE.md access control:** The PM may edit CLAUDE.md for mechanical updates that keep documentation in sync with code and paper changes. The PM may NOT edit sections that define strategy, framing, or the PM's own operating rules.
 
@@ -1308,7 +1366,7 @@ PMs may edit papers in `papers/core/`, `papers/supporting/`, `papers/observation
 - Introduce fitted or empirical parameters without PI direction
 - Change the natural geometry hierarchy (new levels, changed coordinates)
 - Delete or suppress negative results from Section 3
-- Remove the "conjectural" label from Paper 2
+- Remove the "conjectural" label from the **combination rule K = π(B + F − Δ) in Paper 2** (even though Paper 2 is now Core tier; the prohibition narrowed on 2026-04-18 from paper-level to combination-rule-level)
 
 **Splinter file prohibition:** PMs must edit papers in-place. Do NOT create separate .tex diff files, proposal files, or draft directories. Proposed changes go directly into the paper. If the change is wrong, `git revert` is cheaper than context-loading splinter files in plan-mode review.
 

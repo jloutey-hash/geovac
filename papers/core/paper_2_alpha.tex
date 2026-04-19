@@ -32,7 +32,20 @@ polynomial of a traceless $\mathbb{Z}_3$-symmetric circulant matrix,
 suggesting democratic coupling among the three bundle components.
 However, the combination rule $K = \pi(B + F - \Delta)$ remains
 conjectural: this is an empirical formula with structural support, not
-a first-principles derivation.
+a first-principles derivation. An internal Sprint-A structural check
+(2026-04-18; see \S\ref{sec:spectral_triple}, \S\ref{sec:triple_selection},
+and the residual discussion in the Open Questions) sharpens three
+features: the external $\pi$ prefactor is the Hopf-bundle measure
+$\mathrm{Vol}(S^2)/4 = \mathrm{Vol}(S^3)/\mathrm{Vol}(S^1)$; the cutoff
+$n_{\max} = 3$ is triply selected (the $B/N = \dim(S^3)$ principle, the
+unique $(+,+,-)$ sign pattern, and the agreement of two independent
+canonical $\Delta$ forms at the same integer); and the $(+,+,-)$ pattern
+is shape-compatible with Atiyah--Patodi--Singer eta-invariant boundary
+subtraction but is not derivable from any specific
+spectral-action functional~\cite{alpha_sprint_a_memo}. The working
+hypothesis that emerges is that $\alpha$ is a \emph{projection constant}
+between three structurally distinct spectral regimes, rather than a
+quantity derivable from a single principle.
 \end{abstract}
 
 \maketitle
@@ -125,6 +138,36 @@ This identification is natural: the Hopf fibration is the geometric
 expression of $U(1)$ gauge symmetry acting on the electron's state
 space. Electromagnetic coupling is the ``cost'' of projecting $S^3$
 onto~$S^2$---the information lost in the fiber.
+
+
+\subsection{Spectral-triple setting and published lineage}\label{sec:spectral_triple}
+
+The graph-spectral construction used below places naturally in the
+framework of \emph{finite spectral triples on graphs} developed by
+Marcolli and van Suijlekom~\cite{marcolli_vs_2014}. In their framework
+a \emph{gauge network} is a finite spectral triple whose algebra is a
+direct sum of matrix algebras indexed by the vertices of a graph, with
+a connection variable assigned to each edge; the spectral action
+$\mathrm{Tr}\,f(D/\Lambda)$ on such a spectral triple reproduces Wilson
+lattice gauge theory on the underlying graph. The discrete $S^3$ Hopf
+graph of Paper~7, with the $U(1)$ and $SU(2)$ gauge extensions
+developed elsewhere in the GeoVac corpus, is a specific instance of
+this general construction. The Perez-S\'anchez
+correction~\cite{perez_sanchez_2024, perez_sanchez_2024_comment}
+clarifies that the continuum limit of such gauge networks is
+Yang--Mills without Higgs.
+
+The present paper is not a stand-alone conjecture about $\alpha$
+derived from an isolated mathematical observation: it is a specific
+claim within the published graph-spectral-triple lineage. What remains
+novel and GeoVac-specific is the \emph{prediction}---no published
+framework of this kind predicts a physical coupling constant. The
+\emph{machinery} is established; the \emph{prediction} is this
+paper's contribution. This distinction frames the open questions of
+\S\ref{sec:statistical}--\S VII: the missing derivation of
+$K = \pi(B + F - \Delta)$ is a conjecture \emph{within} a well-developed
+spectral-triple framework, not a conjecture about whether such a
+framework exists.
 
 
 %======================================================================
@@ -230,6 +273,43 @@ The base manifold invariant is
 \end{equation}
 
 
+\subsection{Triple selection at $n_{\max}=3$}\label{sec:triple_selection}
+
+The Sprint-A internal verification~\cite{alpha_sprint_a_memo} makes an
+observation that sharpens the selection principle above. The cutoff
+$n_{\max} = 3$ is selected not by one independent condition but by
+three mutually independent ones, all converging at the same integer:
+\begin{enumerate}
+  \item The Casimir selection principle
+    $B(m)/N(m) = \dim(S^3) = 3$, proven above
+    (Eq.~\ref{eq:ratioclosed} and Table~\ref{tab:selection}).
+  \item The sign pattern of the combination rule. The eight sign
+    assignments $\pi(\pm B \pm F \pm \Delta)$ at $m = 3$ give
+    relative errors from $\alpha^{-1}$ spanning seven orders of
+    magnitude; the $(+,+,-)$ pattern uniquely hits $\alpha^{-1}$
+    within $4.8 \times 10^{-7}$ relative, with the next-best
+    $(+,+,+)$ pattern at $1.1 \times 10^{-3}$---a separation of
+    $3.5$ orders of magnitude at $m = 3$, and no analogous
+    sign-pattern hit at any other integer $m$.
+  \item The agreement of two canonical $\Delta$ forms. The boundary
+    product $\Delta(m) = 1/(|\lambda_m| \cdot N(m-1))$ used below
+    and the Dirac single-level degeneracy form
+    $\Delta(m) = 1/g_m^{\mathrm{Dirac}} = 1/[2(m+1)(m+2)]$ identified
+    in Phase~4H (see \S\ref{sec:formula}) are in general distinct
+    rational functions of $m$; they agree at $m = 3$ (both giving
+    $1/40$) and at no other integer cutoff.
+\end{enumerate}
+
+These three mechanisms are independent: the first is
+representation-theoretic; the second is numerical and uses all three
+$K$-ingredients; the third tests agreement of two independently derived
+invariants. Their convergence at a single finite integer is stronger
+support for the selection of $n_{\max} = 3$ than any one alone. It
+does not, however, derive the combination rule
+$K = \pi(B + F - \Delta)$ itself, which remains conjectural per
+Theorem~\ref{thm:three_homes}.
+
+
 \subsection{Fiber $S^1$: Spectral zeta function}
 
 The eigenvalues of the Laplacian on $S^1$ (a circle of circumference
@@ -269,6 +349,34 @@ The physical significance of this boundary term is not established.
 It may be suggestive of UV/IR mixing on the compact manifold, but
 this interpretation is speculative.
 
+\emph{Fock coupling connection.}  The Fock projection weight between
+adjacent $n$-shells (Paper~7) gives a squared coupling
+$c^2(n,l) = \tfrac{1}{16}[1 - l(l+1)/(n(n+1))]$.  At the highest
+angular momentum of the $n_{\max} = 3$ cutoff ($n = 4$, $l = 3$):
+$c^2(4,3) = \tfrac{1}{16}[1 - 12/20] = 1/40 = \Delta$.  The boundary
+term is the Fock coupling at the angular-momentum edge of the
+Paper~2 truncation.
+
+\emph{APS-shape observation.} The minus sign on $\Delta$ in
+$K = \pi(B + F - \Delta)$ is the only sign-flipped boundary-type
+correction appearing in any standard heat-kernel or index-theory
+decomposition on $S^3$~\cite{alpha_sprint_a_memo}. The standard
+Connes--Chamseddine bulk expansion
+$\mathrm{Tr}\,f(D/\Lambda) \sim \sum_k f_k\,\Lambda^{d-k}\,a_k$
+produces an all-positive Seeley--DeWitt sequence on round $S^3$
+(positive cutoff moments $f_k$, positive bulk curvature invariants
+$a_k$); the only rule in the heat-kernel / index-theory literature
+surveyed (Vassilevich, Connes--Chamseddine, van Suijlekom,
+Connes--van Suijlekom spectral truncations) that puts a $(-)$ next
+to bulk $(+)$ contributions is the Atiyah--Patodi--Singer
+eta-invariant boundary subtraction. Paper~2's
+$\Delta^{-1} = g_3^{\mathrm{Dirac}} = 40$ is
+\emph{shape-compatible} with APS-style boundary subtraction (a
+finite Dirac mode count at a cutoff) but is not literally an APS
+eta-invariant: the $\eta$-invariant of the Camporesi--Higuchi Dirac
+operator on $S^3$ vanishes by symmetry. The APS match is therefore
+a shape-level structural hint, not a derivation.
+
 
 %======================================================================
 % Paper 2, Section IV — DROP-IN REWRITE (proposed by Track D5)
@@ -295,6 +403,29 @@ Numerically,
     = \pi \times 43.619934
     = 137.036064.
 \end{equation}
+
+\emph{Structural home of the external $\pi$.} The external $\pi$
+prefactor in Eq.~(\ref{eq:K}) has a Hopf-bundle measure
+identification~\cite{alpha_sprint_a_memo}:
+\begin{equation}\label{eq:pi_hopf_measure}
+  \pi \;=\; \frac{\mathrm{Vol}(S^2)}{4}
+         \;=\; \frac{\mathrm{Vol}(S^3)}{\mathrm{Vol}(S^1)}
+         \;=\; a_0^{2},
+\end{equation}
+where $a_0 = \sqrt{\pi}$ is the zeroth Seeley--DeWitt coefficient on
+unit $S^3$. The three forms are algebraically equivalent via the
+Hopf submersion identity
+$\mathrm{Vol}(S^3) = \tfrac{1}{2}\,\mathrm{Vol}(S^2) \cdot \mathrm{Vol}(S^1)$.
+The reading is ``Hopf-base solid-angle per chiral charge'': the
+integration measure of a finite-cutoff trace restricted to Hopf-base
+data, normalized by the Dirac chirality count. This identification
+categorically separates the external $\pi$ (first-order Hopf-measure
+sector) from the internal $\pi^2$ of $F = \zeta_R(2)$ (second-order
+Riemann-zeta sector) and from the absence of $\pi$ in $B$ and
+$\Delta$ (rational sectors). Paper~18's exchange-constant taxonomy
+may therefore gain a new entry corresponding to the Hopf-bundle
+topological measure, sitting outside the existing operator-order
+$\times$ bundle $\times$ vertex-topology grid.
 
 The physical $\alpha$ satisfies a self-consistency condition
 \begin{equation}\label{eq:selfconsistent}
@@ -1240,6 +1371,33 @@ Hopf fibration geometry is an open question.
   The residual is intrinsic to the formula, not explained by
   renormalization group running.
 
+  An internal structural check~\cite{alpha_sprint_a_memo} finds that the
+  post-cubic residual
+  $R_{\mathrm{predict}} = K - \alpha^{-1} - \alpha^{2}$ (where the
+  $\alpha^{2}$ term is the trivial offset from the cubic) matches
+  $\pi^{3} \alpha^{3}$ to within $0.25\%$ at 80-digit precision:
+  $R_{\mathrm{predict}} = 1.2079 \times 10^{-5}$,
+  $\pi^{3}\alpha^{3} = 1.2049 \times 10^{-5}$,
+  $R_{\mathrm{predict}}/(\pi^{3}\alpha^{3}) = 1.0025$. The $\pi^{3}$
+  prefactor is uniquely picked out among $\{\pi^{2}, \pi^{3}, \pi^{4}\}$
+  (the other candidates are off by factors of $\sim 3$). A natural
+  structural reading is $\pi^{3} = \mathrm{Vol}(S^{5})$, connecting to
+  the Bargmann--Segal $S^{5}$ lattice of Paper~24~\cite{paper24_bargmann}.
+  An internal cross-check computes the Seeley--DeWitt coefficients
+  $a_{0}, a_{2}, a_{4}$ on round $S^{5}$ (each factorizes as
+  $\pi^{3} \times \text{rational}$) and finds that no such coefficient
+  produces a contribution at order $\alpha^{3}$ structurally against
+  the leading $\alpha^{-1}$ of $K$: the Connes--Chamseddine asymptotic
+  expansion on $d = 5$ is in odd powers of $\Lambda$ only, with no log
+  term, and standard spectral-action truncations fix $\alpha$ once via
+  $a_{0}/a_{4}$ ratios, not at order $\alpha^{3}$. The
+  $\pi^{3}\alpha^{3}$ match is therefore a numerical pattern of
+  unexplained structural origin at this precision---a suggestive hint,
+  not a derivation. Paper~24's $\pi$-free certificate on the discrete
+  Bargmann--Segal graph is reconciled: it applies to the discrete
+  spectrum and edge weights, not to continuum integration measures
+  such as $\mathrm{Vol}(S^{5})$.
+
 \item \textit{The other cubic roots.} The two non-physical roots of
   Eq.~(\ref{eq:cubic}) satisfy $\alpha \approx \pm 11.7$,
   corresponding to $1/\alpha \approx \pm 0.085$. A systematic
@@ -1422,6 +1580,24 @@ J.~Loutey, ``Quaternionic Hopf Fibration \& Universal Algebraic
 Identity: Phase~6,'' GeoVac supplementary material (2026). Available
 at \texttt{debug/kappa\_investigation/phase6/} in the project
 repository.
+
+\bibitem{marcolli_vs_2014}
+M.~Marcolli and W.~D.~van Suijlekom, ``Gauge networks in noncommutative
+geometry,'' \textit{J.\ Geom.\ Phys.}\ \textbf{75}, 71 (2014),
+arXiv:1301.3480.
+
+\bibitem{perez_sanchez_2024}
+C.~I.~Perez-S\'anchez, preprint (2024), arXiv:2401.03705. (Revisits
+the continuum limit of Marcolli--van Suijlekom gauge networks;
+establishes that the limit is Yang--Mills without Higgs.)
+
+\bibitem{perez_sanchez_2024_comment}
+C.~I.~Perez-S\'anchez, Comment, preprint (2025), arXiv:2508.17338.
+
+\bibitem{alpha_sprint_a_memo}
+J.~Loutey, ``Paper~2 Sprint~A: Structural consistency verification,''
+GeoVac supplementary material (2026). Available at
+\texttt{debug/alpha\_sprint\_a/} in the project repository.
 
 \end{thebibliography}
 

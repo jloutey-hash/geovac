@@ -1,0 +1,319 @@
+{
+  "coupling_squared_table": {
+    "(1,0)->(2,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(2,0)->(3,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(2,1)->(3,1)": {
+      "coupling_squared": "1/24",
+      "float": 0.041666666666666664,
+      "casimir_ratio": "2/3"
+    },
+    "(3,0)->(4,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(3,1)->(4,1)": {
+      "coupling_squared": "5/96",
+      "float": 0.052083333333333336,
+      "casimir_ratio": "5/6"
+    },
+    "(3,2)->(4,2)": {
+      "coupling_squared": "1/32",
+      "float": 0.03125,
+      "casimir_ratio": "1/2"
+    },
+    "(4,0)->(5,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(4,1)->(5,1)": {
+      "coupling_squared": "9/160",
+      "float": 0.05625,
+      "casimir_ratio": "9/10"
+    },
+    "(4,2)->(5,2)": {
+      "coupling_squared": "7/160",
+      "float": 0.04375,
+      "casimir_ratio": "7/10"
+    },
+    "(4,3)->(5,3)": {
+      "coupling_squared": "1/40",
+      "float": 0.025,
+      "casimir_ratio": "2/5"
+    },
+    "(5,0)->(6,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(5,1)->(6,1)": {
+      "coupling_squared": "7/120",
+      "float": 0.058333333333333334,
+      "casimir_ratio": "14/15"
+    },
+    "(5,2)->(6,2)": {
+      "coupling_squared": "1/20",
+      "float": 0.05,
+      "casimir_ratio": "4/5"
+    },
+    "(5,3)->(6,3)": {
+      "coupling_squared": "3/80",
+      "float": 0.0375,
+      "casimir_ratio": "3/5"
+    },
+    "(5,4)->(6,4)": {
+      "coupling_squared": "1/48",
+      "float": 0.020833333333333332,
+      "casimir_ratio": "1/3"
+    },
+    "(6,0)->(7,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(6,1)->(7,1)": {
+      "coupling_squared": "5/84",
+      "float": 0.05952380952380952,
+      "casimir_ratio": "20/21"
+    },
+    "(6,2)->(7,2)": {
+      "coupling_squared": "3/56",
+      "float": 0.05357142857142857,
+      "casimir_ratio": "6/7"
+    },
+    "(6,3)->(7,3)": {
+      "coupling_squared": "5/112",
+      "float": 0.044642857142857144,
+      "casimir_ratio": "5/7"
+    },
+    "(6,4)->(7,4)": {
+      "coupling_squared": "11/336",
+      "float": 0.03273809523809524,
+      "casimir_ratio": "11/21"
+    },
+    "(6,5)->(7,5)": {
+      "coupling_squared": "1/56",
+      "float": 0.017857142857142856,
+      "casimir_ratio": "2/7"
+    },
+    "(7,0)->(8,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(7,1)->(8,1)": {
+      "coupling_squared": "27/448",
+      "float": 0.060267857142857144,
+      "casimir_ratio": "27/28"
+    },
+    "(7,2)->(8,2)": {
+      "coupling_squared": "25/448",
+      "float": 0.05580357142857143,
+      "casimir_ratio": "25/28"
+    },
+    "(7,3)->(8,3)": {
+      "coupling_squared": "11/224",
+      "float": 0.049107142857142856,
+      "casimir_ratio": "11/14"
+    },
+    "(7,4)->(8,4)": {
+      "coupling_squared": "9/224",
+      "float": 0.04017857142857143,
+      "casimir_ratio": "9/14"
+    },
+    "(7,5)->(8,5)": {
+      "coupling_squared": "13/448",
+      "float": 0.029017857142857144,
+      "casimir_ratio": "13/28"
+    },
+    "(7,6)->(8,6)": {
+      "coupling_squared": "1/64",
+      "float": 0.015625,
+      "casimir_ratio": "1/4"
+    },
+    "(8,0)->(9,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(8,1)->(9,1)": {
+      "coupling_squared": "35/576",
+      "float": 0.06076388888888889,
+      "casimir_ratio": "35/36"
+    },
+    "(8,2)->(9,2)": {
+      "coupling_squared": "11/192",
+      "float": 0.057291666666666664,
+      "casimir_ratio": "11/12"
+    },
+    "(8,3)->(9,3)": {
+      "coupling_squared": "5/96",
+      "float": 0.052083333333333336,
+      "casimir_ratio": "5/6"
+    },
+    "(8,4)->(9,4)": {
+      "coupling_squared": "13/288",
+      "float": 0.04513888888888889,
+      "casimir_ratio": "13/18"
+    },
+    "(8,5)->(9,5)": {
+      "coupling_squared": "7/192",
+      "float": 0.036458333333333336,
+      "casimir_ratio": "7/12"
+    },
+    "(8,6)->(9,6)": {
+      "coupling_squared": "5/192",
+      "float": 0.026041666666666668,
+      "casimir_ratio": "5/12"
+    },
+    "(8,7)->(9,7)": {
+      "coupling_squared": "1/72",
+      "float": 0.013888888888888888,
+      "casimir_ratio": "2/9"
+    },
+    "(9,0)->(10,0)": {
+      "coupling_squared": "1/16",
+      "float": 0.0625,
+      "casimir_ratio": "1"
+    },
+    "(9,1)->(10,1)": {
+      "coupling_squared": "11/180",
+      "float": 0.06111111111111111,
+      "casimir_ratio": "44/45"
+    },
+    "(9,2)->(10,2)": {
+      "coupling_squared": "7/120",
+      "float": 0.058333333333333334,
+      "casimir_ratio": "14/15"
+    },
+    "(9,3)->(10,3)": {
+      "coupling_squared": "13/240",
+      "float": 0.05416666666666667,
+      "casimir_ratio": "13/15"
+    },
+    "(9,4)->(10,4)": {
+      "coupling_squared": "7/144",
+      "float": 0.04861111111111111,
+      "casimir_ratio": "7/9"
+    },
+    "(9,5)->(10,5)": {
+      "coupling_squared": "1/24",
+      "float": 0.041666666666666664,
+      "casimir_ratio": "2/3"
+    },
+    "(9,6)->(10,6)": {
+      "coupling_squared": "1/30",
+      "float": 0.03333333333333333,
+      "casimir_ratio": "8/15"
+    },
+    "(9,7)->(10,7)": {
+      "coupling_squared": "17/720",
+      "float": 0.02361111111111111,
+      "casimir_ratio": "17/45"
+    },
+    "(9,8)->(10,8)": {
+      "coupling_squared": "1/80",
+      "float": 0.0125,
+      "casimir_ratio": "1/5"
+    }
+  },
+  "l0_universality": true,
+  "casimir_decomposition": "c\u00b2(n,l) = (1/16)\u00b7[1 - l(l+1)/(n(n+1))]",
+  "closed_form_S": "n**2*(n + 1)**2/2",
+  "average_formula": "(n + 1)/(32*n)",
+  "limit": "1/32",
+  "per_shell_averages": {
+    "1": {
+      "avg": "1/16",
+      "ratio_to_kappa": "1"
+    },
+    "2": {
+      "avg": "3/64",
+      "ratio_to_kappa": "3/4"
+    },
+    "3": {
+      "avg": "1/24",
+      "ratio_to_kappa": "2/3"
+    },
+    "4": {
+      "avg": "5/128",
+      "ratio_to_kappa": "5/8"
+    },
+    "5": {
+      "avg": "3/80",
+      "ratio_to_kappa": "3/5"
+    },
+    "6": {
+      "avg": "7/192",
+      "ratio_to_kappa": "7/12"
+    },
+    "7": {
+      "avg": "1/28",
+      "ratio_to_kappa": "4/7"
+    },
+    "8": {
+      "avg": "9/256",
+      "ratio_to_kappa": "9/16"
+    },
+    "9": {
+      "avg": "5/144",
+      "ratio_to_kappa": "5/9"
+    },
+    "10": {
+      "avg": "11/320",
+      "ratio_to_kappa": "11/20"
+    },
+    "11": {
+      "avg": "3/88",
+      "ratio_to_kappa": "6/11"
+    },
+    "12": {
+      "avg": "13/384",
+      "ratio_to_kappa": "13/24"
+    },
+    "13": {
+      "avg": "7/208",
+      "ratio_to_kappa": "7/13"
+    },
+    "14": {
+      "avg": "15/448",
+      "ratio_to_kappa": "15/28"
+    },
+    "15": {
+      "avg": "1/30",
+      "ratio_to_kappa": "8/15"
+    }
+  },
+  "notable_values": {
+    "(1,0)": "1/16",
+    "(2,1)": "1/24",
+    "(3,2)": "1/32",
+    "(4,3)": "1/40",
+    "(5,4)": "1/48",
+    "(6,5)": "1/56",
+    "(7,6)": "1/64"
+  },
+  "interpretations": [
+    "1/16 = c^2(n,0) = universal l=0 Fock coupling squared",
+    "1/16 = 1/Omega^4 = inverse Fock Jacobian at south pole",
+    "1/16 = (1/4)^2 = squared Chebyshev transition amplitude"
+  ],
+  "verdict": "POSITIVE PARTIAL",
+  "summary": {
+    "kappa_is_l0_coupling_squared": true,
+    "l0_universality": "c^2(n,0) = 1/16 for all n, proven",
+    "casimir_decomposition": "c^2(n,l) = (1/16)[1 - l(l+1)/(n(n+1))]",
+    "weighted_average": "(n+1)/(32n) -> 1/32 (NOT 1/16)",
+    "factor_of_2": "avg = kappa/2 asymptotically",
+    "delta_connection": "c^2(4,3) = 1/40 = Delta (Paper 2)"
+  }
+}

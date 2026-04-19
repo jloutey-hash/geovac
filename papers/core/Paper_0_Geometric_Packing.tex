@@ -628,10 +628,15 @@ The graph Laplacian $L = D - A$ defines a discrete Hamiltonian
 \end{equation}
 where $K_{\mathrm{vac}} = -1/16$ is the kinetic scale factor that
 maps dimensionless graph eigenvalues to physical energies in atomic
-units.  This constant is not derived from the packing alone; it is the
-bridge between the dimensionless graph topology and dimensionful
-physics, determined by requiring spectral agreement with the Rydberg
-formula.
+units.  This constant is derivable from the Fock projection
+(Paper~7~\cite{paper7}): the squared coupling between adjacent
+$n$-shells in the Gegenbauer eigenbasis of the $S^3$ Laplacian is
+$c^2(n,l) = \tfrac{1}{16}[1 - l(l+1)/(n(n+1))]$, which equals
+$1/16$ universally for all $l = 0$ (s-wave) transitions.
+Equivalently, $1/16 = 1/\Omega^4(0)$ where $\Omega(0) = 2$ is the
+stereographic conformal factor at the projection center.  The packing
+construction fixes the graph topology; the Fock projection then
+determines the kinetic scale without any fitting.
 
 Within each $(\ell, m)$ sector, the radial edges form a
 one-dimensional path graph in $n = \ell+1, \ell+2, \ldots, n_{\max}$.

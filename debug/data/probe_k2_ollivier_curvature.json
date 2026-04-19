@@ -1,0 +1,2964 @@
+{
+  "n_max_3": {
+    "V": 14,
+    "E": 13,
+    "is_tree": true,
+    "ollivier_alpha0": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "ollivier_alpha0p5": {
+      "mean": 0.30769230769230776,
+      "std": 0.1944327036936295,
+      "min": 0.0,
+      "max": 0.5
+    },
+    "forman": {
+      "mean": -0.15384615384615385,
+      "std": 0.9483713850721502,
+      "min": -2.0,
+      "max": 1.0,
+      "unique_values": [
+        -2,
+        -1,
+        0,
+        1
+      ]
+    },
+    "edges": [
+      {
+        "edge": [
+          0,
+          1
+        ],
+        "states": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 1,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          1,
+          5
+        ],
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 1,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          2,
+          3
+        ],
+        "states": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            2,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          2,
+          6
+        ],
+        "states": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            3,
+            1,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          3,
+          4
+        ],
+        "states": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          3,
+          7
+        ],
+        "states": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          4,
+          8
+        ],
+        "states": [
+          [
+            2,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          6,
+          7
+        ],
+        "states": [
+          [
+            3,
+            1,
+            -1
+          ],
+          [
+            3,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          7,
+          8
+        ],
+        "states": [
+          [
+            3,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          9,
+          10
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            3,
+            2,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 1,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          10,
+          11
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -1
+          ],
+          [
+            3,
+            2,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          11,
+          12
+        ],
+        "states": [
+          [
+            3,
+            2,
+            0
+          ],
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          12,
+          13
+        ],
+        "states": [
+          [
+            3,
+            2,
+            1
+          ],
+          [
+            3,
+            2,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 1,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      }
+    ]
+  },
+  "n_max_4": {
+    "V": 30,
+    "E": 34,
+    "is_tree": false,
+    "ollivier_alpha0": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "ollivier_alpha0p5": {
+      "mean": 0.18627450980392157,
+      "std": 0.17275500183045192,
+      "min": 0.0,
+      "max": 0.5
+    },
+    "forman": {
+      "mean": -1.0,
+      "std": 1.1631599960755994,
+      "min": -3.0,
+      "max": 1.0,
+      "unique_values": [
+        -3,
+        -2,
+        -1,
+        0,
+        1
+      ]
+    },
+    "edges": [
+      {
+        "edge": [
+          0,
+          1
+        ],
+        "states": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 1,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          1,
+          5
+        ],
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          2,
+          3
+        ],
+        "states": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            2,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          2,
+          6
+        ],
+        "states": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            3,
+            1,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          3,
+          4
+        ],
+        "states": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          3,
+          7
+        ],
+        "states": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          4,
+          8
+        ],
+        "states": [
+          [
+            2,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          5,
+          14
+        ],
+        "states": [
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 1,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          6,
+          7
+        ],
+        "states": [
+          [
+            3,
+            1,
+            -1
+          ],
+          [
+            3,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          6,
+          15
+        ],
+        "states": [
+          [
+            3,
+            1,
+            -1
+          ],
+          [
+            4,
+            1,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          7,
+          8
+        ],
+        "states": [
+          [
+            3,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          7,
+          16
+        ],
+        "states": [
+          [
+            3,
+            1,
+            0
+          ],
+          [
+            4,
+            1,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          8,
+          17
+        ],
+        "states": [
+          [
+            3,
+            1,
+            1
+          ],
+          [
+            4,
+            1,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          9,
+          10
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            3,
+            2,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          9,
+          18
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            4,
+            2,
+            -2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          10,
+          11
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -1
+          ],
+          [
+            3,
+            2,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          10,
+          19
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -1
+          ],
+          [
+            4,
+            2,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          11,
+          12
+        ],
+        "states": [
+          [
+            3,
+            2,
+            0
+          ],
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          11,
+          20
+        ],
+        "states": [
+          [
+            3,
+            2,
+            0
+          ],
+          [
+            4,
+            2,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          12,
+          13
+        ],
+        "states": [
+          [
+            3,
+            2,
+            1
+          ],
+          [
+            3,
+            2,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          12,
+          21
+        ],
+        "states": [
+          [
+            3,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          13,
+          22
+        ],
+        "states": [
+          [
+            3,
+            2,
+            2
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          15,
+          16
+        ],
+        "states": [
+          [
+            4,
+            1,
+            -1
+          ],
+          [
+            4,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          16,
+          17
+        ],
+        "states": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          18,
+          19
+        ],
+        "states": [
+          [
+            4,
+            2,
+            -2
+          ],
+          [
+            4,
+            2,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          19,
+          20
+        ],
+        "states": [
+          [
+            4,
+            2,
+            -1
+          ],
+          [
+            4,
+            2,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          20,
+          21
+        ],
+        "states": [
+          [
+            4,
+            2,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          21,
+          22
+        ],
+        "states": [
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          23,
+          24
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -3
+          ],
+          [
+            4,
+            3,
+            -2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 1,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          24,
+          25
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -2
+          ],
+          [
+            4,
+            3,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          25,
+          26
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -1
+          ],
+          [
+            4,
+            3,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          26,
+          27
+        ],
+        "states": [
+          [
+            4,
+            3,
+            0
+          ],
+          [
+            4,
+            3,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          27,
+          28
+        ],
+        "states": [
+          [
+            4,
+            3,
+            1
+          ],
+          [
+            4,
+            3,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          28,
+          29
+        ],
+        "states": [
+          [
+            4,
+            3,
+            2
+          ],
+          [
+            4,
+            3,
+            3
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 1,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      }
+    ]
+  },
+  "n_max_5": {
+    "V": 55,
+    "E": 70,
+    "is_tree": false,
+    "ollivier_alpha0": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "ollivier_alpha0p5": {
+      "mean": 0.13095238095238096,
+      "std": 0.14677176197545186,
+      "min": 0.0,
+      "max": 0.5
+    },
+    "forman": {
+      "mean": -1.542857142857143,
+      "std": 1.2384981029538995,
+      "min": -4.0,
+      "max": 1.0,
+      "unique_values": [
+        -4,
+        -3,
+        -2,
+        -1,
+        0,
+        1
+      ]
+    },
+    "edges": [
+      {
+        "edge": [
+          0,
+          1
+        ],
+        "states": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 1,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          1,
+          5
+        ],
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          2,
+          3
+        ],
+        "states": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            2,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          2,
+          6
+        ],
+        "states": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            3,
+            1,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          3,
+          4
+        ],
+        "states": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          3,
+          7
+        ],
+        "states": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          4,
+          8
+        ],
+        "states": [
+          [
+            2,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          5,
+          14
+        ],
+        "states": [
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          6,
+          7
+        ],
+        "states": [
+          [
+            3,
+            1,
+            -1
+          ],
+          [
+            3,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          6,
+          15
+        ],
+        "states": [
+          [
+            3,
+            1,
+            -1
+          ],
+          [
+            4,
+            1,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          7,
+          8
+        ],
+        "states": [
+          [
+            3,
+            1,
+            0
+          ],
+          [
+            3,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          7,
+          16
+        ],
+        "states": [
+          [
+            3,
+            1,
+            0
+          ],
+          [
+            4,
+            1,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 4,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          8,
+          17
+        ],
+        "states": [
+          [
+            3,
+            1,
+            1
+          ],
+          [
+            4,
+            1,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          9,
+          10
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            3,
+            2,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          9,
+          18
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            4,
+            2,
+            -2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          10,
+          11
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -1
+          ],
+          [
+            3,
+            2,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          10,
+          19
+        ],
+        "states": [
+          [
+            3,
+            2,
+            -1
+          ],
+          [
+            4,
+            2,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          11,
+          12
+        ],
+        "states": [
+          [
+            3,
+            2,
+            0
+          ],
+          [
+            3,
+            2,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          11,
+          20
+        ],
+        "states": [
+          [
+            3,
+            2,
+            0
+          ],
+          [
+            4,
+            2,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          12,
+          13
+        ],
+        "states": [
+          [
+            3,
+            2,
+            1
+          ],
+          [
+            3,
+            2,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          12,
+          21
+        ],
+        "states": [
+          [
+            3,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          13,
+          22
+        ],
+        "states": [
+          [
+            3,
+            2,
+            2
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          14,
+          30
+        ],
+        "states": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            5,
+            0,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 1,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          15,
+          16
+        ],
+        "states": [
+          [
+            4,
+            1,
+            -1
+          ],
+          [
+            4,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          15,
+          31
+        ],
+        "states": [
+          [
+            4,
+            1,
+            -1
+          ],
+          [
+            5,
+            1,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          16,
+          17
+        ],
+        "states": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            4,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          16,
+          32
+        ],
+        "states": [
+          [
+            4,
+            1,
+            0
+          ],
+          [
+            5,
+            1,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          17,
+          33
+        ],
+        "states": [
+          [
+            4,
+            1,
+            1
+          ],
+          [
+            5,
+            1,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          18,
+          19
+        ],
+        "states": [
+          [
+            4,
+            2,
+            -2
+          ],
+          [
+            4,
+            2,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          18,
+          34
+        ],
+        "states": [
+          [
+            4,
+            2,
+            -2
+          ],
+          [
+            5,
+            2,
+            -2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          19,
+          20
+        ],
+        "states": [
+          [
+            4,
+            2,
+            -1
+          ],
+          [
+            4,
+            2,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 4,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          19,
+          35
+        ],
+        "states": [
+          [
+            4,
+            2,
+            -1
+          ],
+          [
+            5,
+            2,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          20,
+          21
+        ],
+        "states": [
+          [
+            4,
+            2,
+            0
+          ],
+          [
+            4,
+            2,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 4,
+        "deg_j": 4,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          20,
+          36
+        ],
+        "states": [
+          [
+            4,
+            2,
+            0
+          ],
+          [
+            5,
+            2,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          21,
+          22
+        ],
+        "states": [
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            4,
+            2,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          21,
+          37
+        ],
+        "states": [
+          [
+            4,
+            2,
+            1
+          ],
+          [
+            5,
+            2,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 4,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          22,
+          38
+        ],
+        "states": [
+          [
+            4,
+            2,
+            2
+          ],
+          [
+            5,
+            2,
+            2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          23,
+          24
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -3
+          ],
+          [
+            4,
+            3,
+            -2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          23,
+          39
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -3
+          ],
+          [
+            5,
+            3,
+            -3
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          24,
+          25
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -2
+          ],
+          [
+            4,
+            3,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          24,
+          40
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -2
+          ],
+          [
+            5,
+            3,
+            -2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          25,
+          26
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -1
+          ],
+          [
+            4,
+            3,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          25,
+          41
+        ],
+        "states": [
+          [
+            4,
+            3,
+            -1
+          ],
+          [
+            5,
+            3,
+            -1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          26,
+          27
+        ],
+        "states": [
+          [
+            4,
+            3,
+            0
+          ],
+          [
+            4,
+            3,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          26,
+          42
+        ],
+        "states": [
+          [
+            4,
+            3,
+            0
+          ],
+          [
+            5,
+            3,
+            0
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          27,
+          28
+        ],
+        "states": [
+          [
+            4,
+            3,
+            1
+          ],
+          [
+            4,
+            3,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          27,
+          43
+        ],
+        "states": [
+          [
+            4,
+            3,
+            1
+          ],
+          [
+            5,
+            3,
+            1
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          28,
+          29
+        ],
+        "states": [
+          [
+            4,
+            3,
+            2
+          ],
+          [
+            4,
+            3,
+            3
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          28,
+          44
+        ],
+        "states": [
+          [
+            4,
+            3,
+            2
+          ],
+          [
+            5,
+            3,
+            2
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          29,
+          45
+        ],
+        "states": [
+          [
+            4,
+            3,
+            3
+          ],
+          [
+            5,
+            3,
+            3
+          ]
+        ],
+        "type": "radial",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          31,
+          32
+        ],
+        "states": [
+          [
+            5,
+            1,
+            -1
+          ],
+          [
+            5,
+            1,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          32,
+          33
+        ],
+        "states": [
+          [
+            5,
+            1,
+            0
+          ],
+          [
+            5,
+            1,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          34,
+          35
+        ],
+        "states": [
+          [
+            5,
+            2,
+            -2
+          ],
+          [
+            5,
+            2,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          35,
+          36
+        ],
+        "states": [
+          [
+            5,
+            2,
+            -1
+          ],
+          [
+            5,
+            2,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          36,
+          37
+        ],
+        "states": [
+          [
+            5,
+            2,
+            0
+          ],
+          [
+            5,
+            2,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          37,
+          38
+        ],
+        "states": [
+          [
+            5,
+            2,
+            1
+          ],
+          [
+            5,
+            2,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          39,
+          40
+        ],
+        "states": [
+          [
+            5,
+            3,
+            -3
+          ],
+          [
+            5,
+            3,
+            -2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          40,
+          41
+        ],
+        "states": [
+          [
+            5,
+            3,
+            -2
+          ],
+          [
+            5,
+            3,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          41,
+          42
+        ],
+        "states": [
+          [
+            5,
+            3,
+            -1
+          ],
+          [
+            5,
+            3,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          42,
+          43
+        ],
+        "states": [
+          [
+            5,
+            3,
+            0
+          ],
+          [
+            5,
+            3,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          43,
+          44
+        ],
+        "states": [
+          [
+            5,
+            3,
+            1
+          ],
+          [
+            5,
+            3,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 3,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          44,
+          45
+        ],
+        "states": [
+          [
+            5,
+            3,
+            2
+          ],
+          [
+            5,
+            3,
+            3
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 3,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          46,
+          47
+        ],
+        "states": [
+          [
+            5,
+            4,
+            -4
+          ],
+          [
+            5,
+            4,
+            -3
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 1,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          47,
+          48
+        ],
+        "states": [
+          [
+            5,
+            4,
+            -3
+          ],
+          [
+            5,
+            4,
+            -2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          48,
+          49
+        ],
+        "states": [
+          [
+            5,
+            4,
+            -2
+          ],
+          [
+            5,
+            4,
+            -1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          49,
+          50
+        ],
+        "states": [
+          [
+            5,
+            4,
+            -1
+          ],
+          [
+            5,
+            4,
+            0
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          50,
+          51
+        ],
+        "states": [
+          [
+            5,
+            4,
+            0
+          ],
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          51,
+          52
+        ],
+        "states": [
+          [
+            5,
+            4,
+            1
+          ],
+          [
+            5,
+            4,
+            2
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          52,
+          53
+        ],
+        "states": [
+          [
+            5,
+            4,
+            2
+          ],
+          [
+            5,
+            4,
+            3
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 2,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      },
+      {
+        "edge": [
+          53,
+          54
+        ],
+        "states": [
+          [
+            5,
+            4,
+            3
+          ],
+          [
+            5,
+            4,
+            4
+          ]
+        ],
+        "type": "angular",
+        "deg_i": 2,
+        "deg_j": 1,
+        "ollivier_curvature": 0.0,
+        "graph_distance": 1.0
+      }
+    ]
+  },
+  "kappa_scan": {
+    "-0.250000": {
+      "kappa": -0.25,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    },
+    "-0.125000": {
+      "kappa": -0.125,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    },
+    "-0.083333": {
+      "kappa": -0.08333333333333333,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    },
+    "-0.062500": {
+      "kappa": -0.0625,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    },
+    "-0.050000": {
+      "kappa": -0.05,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    },
+    "-0.041667": {
+      "kappa": -0.041666666666666664,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    },
+    "-0.031250": {
+      "kappa": -0.03125,
+      "or_mean": 0.0,
+      "or_std": 0.0,
+      "or_min": 0.0,
+      "or_max": 0.0
+    }
+  },
+  "coupling_ratios": {
+    "finite_mean": 0.9610544217687077,
+    "finite_std": 0.44430821368215806,
+    "finite_min": 0.08333333333333333,
+    "finite_max": 1.2857142857142858,
+    "n_infinite": 20,
+    "n_finite": 14
+  },
+  "bakry_emery_n3": {
+    "-0.250000": {
+      "kappa": -0.25,
+      "E_0": -0.8126876154397779,
+      "E_0_error": 0.31268761543977786,
+      "spectral_gap": 0.6226662030471475,
+      "cheeger_lb": 0.41511080203143164
+    },
+    "-0.125000": {
+      "kappa": -0.125,
+      "E_0": -0.8928446522652914,
+      "E_0_error": 0.3928446522652914,
+      "spectral_gap": 0.694294233640472,
+      "cheeger_lb": 0.9257256448539627
+    },
+    "-0.083333": {
+      "kappa": -0.08333333333333333,
+      "E_0": -0.9249941293985117,
+      "E_0_error": 0.42499412939851167,
+      "spectral_gap": 0.7192962172331416,
+      "cheeger_lb": 1.4385924344662833
+    },
+    "-0.062500": {
+      "kappa": -0.0625,
+      "E_0": -0.9423051243241782,
+      "E_0_error": 0.44230512432417823,
+      "spectral_gap": 0.7308216239972775,
+      "cheeger_lb": 1.94885766399274
+    },
+    "-0.050000": {
+      "kappa": -0.05,
+      "E_0": -0.9531237462245512,
+      "E_0_error": 0.4531237462245512,
+      "spectral_gap": 0.7369964028870548,
+      "cheeger_lb": 2.4566546762901824
+    },
+    "-0.041667": {
+      "kappa": -0.041666666666666664,
+      "E_0": -0.9605256401333605,
+      "E_0_error": 0.4605256401333605,
+      "spectral_gap": 0.7406513082605092,
+      "cheeger_lb": 2.9626052330420367
+    },
+    "-0.031250": {
+      "kappa": -0.03125,
+      "E_0": -0.9699997557829991,
+      "E_0_error": 0.46999975578299913,
+      "spectral_gap": 0.744542421757092,
+      "cheeger_lb": 3.970892916037824
+    }
+  },
+  "bakry_emery_n4": {
+    "-0.250000": {
+      "kappa": -0.25,
+      "E_0": -0.8120559779093305,
+      "E_0_error": 0.3120559779093305,
+      "spectral_gap": 0.6464744266916445,
+      "cheeger_lb": 0.3232372133458222
+    },
+    "-0.125000": {
+      "kappa": -0.125,
+      "E_0": -0.8928079118074389,
+      "E_0_error": 0.3928079118074389,
+      "spectral_gap": 0.7078687903349067,
+      "cheeger_lb": 0.7078687903349067
+    },
+    "-0.083333": {
+      "kappa": -0.08333333333333333,
+      "E_0": -0.9249881586289614,
+      "E_0_error": 0.42498815862896144,
+      "spectral_gap": 0.7270113123980166,
+      "cheeger_lb": 1.090516968597025
+    },
+    "-0.062500": {
+      "kappa": -0.0625,
+      "E_0": -0.9423035506156738,
+      "E_0_error": 0.44230355061567384,
+      "spectral_gap": 0.7354519057984992,
+      "cheeger_lb": 1.4709038115969983
+    },
+    "-0.050000": {
+      "kappa": -0.05,
+      "E_0": -0.9531231971560845,
+      "E_0_error": 0.4531231971560845,
+      "spectral_gap": 0.7399386601817401,
+      "cheeger_lb": 1.8498466504543503
+    },
+    "-0.041667": {
+      "kappa": -0.041666666666666664,
+      "E_0": -0.9605254100816134,
+      "E_0_error": 0.4605254100816134,
+      "spectral_gap": 0.7426172807010749,
+      "cheeger_lb": 2.2278518421032247
+    },
+    "-0.031250": {
+      "kappa": -0.03125,
+      "E_0": -0.9699996982824072,
+      "E_0_error": 0.4699996982824072,
+      "spectral_gap": 0.7455321922694494,
+      "cheeger_lb": 2.982128769077798
+    }
+  },
+  "continuum_comparison": {
+    "S3_ricci": 2.0,
+    "S3_sectional": 1.0,
+    "S3_scalar": 6.0,
+    "note": "Continuum S3 has constant positive curvature; discrete graph curvature approaches this only at large n_max when cycles form."
+  },
+  "verdict": "NEGATIVE",
+  "reasons": [
+    "1. Ollivier-Ricci curvature is scale-invariant under uniform edge weight rescaling. The topology alone determines curvature, NOT kappa.",
+    "2. At n_max=3 (tree): all OR curvatures are non-positive (mean=0.0000). Trees cannot have positive discrete Ricci curvature.",
+    "3. At n_max=4 (5 independent cycles): OR curvature range [0.0000, 0.0000], std=0.0000. NOT constant, NOT all positive.",
+    "4. kappa = -1/16 enters the Hamiltonian H = kappa*(D-A) + W as a uniform scaling of the kinetic (off-diagonal) terms. It sets the ENERGY SCALE, not the graph geometry.",
+    "5. The S\u00b3 constant curvature (Ric=2, K=1) is a continuum property. The GeoVac graph at any finite n_max is too coarse to have constant positive discrete Ricci curvature."
+  ]
+}

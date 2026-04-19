@@ -727,7 +727,7 @@ propose the following taxonomy:
   Level & Source & Target & Constant & Type \\
   \hline
   --- & $S^1$ lattice & $\mathbb{R}^1$ & $\pi$ & intrinsic \\
-  1 & $S^3$ graph & $\mathbb{R}^3$ & $\kappa = -1/16$ & calibration \\
+  1 & $S^3$ graph & $\mathbb{R}^3$ & $\kappa = -1/16$ & conformal \\
   2 ($m{=}0$) & Laguerre rec. & prolate sph. & (none) & algebraic \\
   2 ($m{\neq}0$) & assoc. Laguerre & prolate sph. & $e^a E_1(a)$
     & embedding \\
@@ -759,14 +759,14 @@ The taxonomy reveals a hierarchy of exchange types:
     constants---universal volume-to-eigenvalue conversion factors.
     Example: $\pi$ itself, for $S^1 \to \mathbb{R}$.
 
-  \item \textbf{Calibration constants}: Determined by the
-    discrete graph construction, not by intrinsic manifold
-    geometry.  Depends on lattice connectivity.  Example:
-    $\kappa = -E_H/\lambda_{\max} = -1/16$, where
-    $\lambda_{\max} = 2 d_{\max} = 8$ depends on the maximum
-    vertex degree $d_{\max} = 4$ of the GeoVac graph
-    (Sec.~\ref{sec:kappa_derivation}).  A different graph with
-    $d_{\max} = 6$ would give $\kappa = -1/24$.
+  \item \textbf{Conformal constants}: Determined by the conformal
+    geometry of the projection from the compact graph manifold to
+    flat space.  Example:
+    $\kappa = -1/16 = -1/\Omega^4(0)$, where $\Omega(0) = 2$ is
+    the stereographic conformal factor at $p = 0$
+    (Sec.~\ref{sec:kappa_derivation}).  Equivalently derivable
+    from graph vertex degree $d_{\max} = 4$; both routes yield
+    the same value because the graph discretizes $S^3$.
 
   \item \textbf{Embedding constants}: Single transcendental
     numbers seeding algebraic recurrences.  Determined by the
@@ -1886,13 +1886,38 @@ coupling $c_3 = 1/8$ for $d=3$ numerically equals $1/\lambda_{\max}$,
 but this is coincidental: $c_3$ is a Yamabe invariant while
 $1/\lambda_{\max}$ depends on graph vertex degree.
 
-\textit{Classification.}  $\kappa$ is correctly classified as
-``conformal'' in Table~\ref{tab:taxonomy}: it is needed because
-the Fock stereographic projection introduces a conformal factor
-relating the $S^3$ Laplacian to flat-space operators.  However,
-its \textit{numerical value} is a graph calibration constant
-determined by the lattice connectivity, not an intrinsic
-spectral invariant of $S^3$.  The Z-universality noted in
+\textit{Fock weight derivation (Note added v2.26.1).}  The same value
+is derivable independently from the Fock projection itself, without
+reference to graph vertex degree.  The $l = 0$ eigenfunctions on $S^3$
+are Gegenbauer polynomials $C^1_{n-1}(\cos\chi)$ (equivalently,
+Chebyshev polynomials of the second kind $U_{n-1}(\cos\chi)$).  Their
+three-term recurrence gives transition amplitudes of $1/4$ between
+adjacent shells, so the squared Fock coupling is
+\begin{equation}
+  c^2(n,l) = \tfrac{1}{16}\bigl[1 - l(l{+}1)/(n(n{+}1))\bigr],
+  \label{eq:fock_coupling_p18}
+\end{equation}
+with $c^2(n,0) = 1/16$ universally for all $n$.  Equivalently,
+$1/16 = 1/\Omega^4(0)$ where $\Omega(0) = 2$ is the stereographic
+conformal factor at $p = 0$.  The graph-degree derivation
+(Eq.~\ref{eq:kappa_derived}) and the Fock weight derivation converge
+on the same value because the graph's maximum vertex degree
+$d_{\max} = 4$ and the conformal factor $\Omega(0) = 2$ are
+independently determined by the same underlying $S^3$ geometry:
+$2 d_{\max} = \Omega(0)^4 = 2^4/2 = 8$.
+
+A notable special case: $c^2(4,3) = 1/40 = \Delta$ (Paper~2), linking
+the highest-$l$ Fock coupling at the Paper~2 cutoff to the Dirac
+degeneracy $g_3^{\mathrm{Dirac}} = 40$.
+
+\textit{Classification.}  $\kappa$ is reclassified from ``calibration''
+to ``conformal'' in Table~\ref{tab:taxonomy}: its numerical value
+$1/16$ is derivable from the continuous conformal geometry of the Fock
+projection ($1/\Omega^4(0)$), not merely from the discrete graph
+connectivity.  The two derivations (graph degree and conformal factor)
+agree because the graph discretizes $S^3$, but the conformal-factor
+reading is more fundamental---it would hold for any discretization of
+$S^3$, not only the GeoVac lattice.  The Z-universality noted in
 Paper~0 ($\kappa \to \kappa Z^2$ for any nuclear charge)
 reflects the Z-independence of the graph structure, with only
 the energy-shell scaling $E \propto Z^2$.

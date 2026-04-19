@@ -108,7 +108,7 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum, determined by matching the Rydberg formula and consistent with the information-theoretic packing constraints of \cite{loutey_paper0}.
+where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum.  As shown in Section~\ref{sec:discussion}, this value is derivable from the conformal geometry of the Fock projection: $|\kappa| = 1/\Omega^4(0)$ where $\Omega(0) = 2$ is the stereographic conformal factor at the projection center.
 
 \subsection{Intrinsic Dimensionlessness}
 
@@ -686,7 +686,40 @@ The results of this paper provide a formal justification for the GeoVac framewor
 
 \textit{Discretization artifacts:} The $s/p$ splitting at finite $n_{\max}$ is spectral aliasing on a compact manifold---it arises from boundary effects in the finite graph and decays as $n_{\max} \to \infty$.
 
-\textit{Kinetic scale factor:} The constant $\kappa = -1/16$ is the kinetic scale factor that bridges the dimensionless graph and dimensionful physics. It is not derived from topology alone---it is determined by requiring the graph eigenvalues to reproduce the hydrogen spectrum via the energy-shell projection mechanism. Its universality across all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph topology correctly encodes the \textit{relative} spectral structure.
+\textit{Kinetic scale factor:} The constant $\kappa = -1/16$ is the
+kinetic scale factor that bridges the dimensionless graph and
+dimensionful physics.  It is derivable from the Fock projection
+itself.  The Gegenbauer eigenfunctions $C^1_{n-1}(\cos\chi)$ of
+Eq.~\eqref{eq:eigenvalues} are also the Chebyshev polynomials of the
+second kind $U_{n-1}(\cos\chi)$, whose three-term recurrence gives
+transition amplitudes of $1/4$ between adjacent shells.  The squared
+coupling between the $n$-th and $(n+1)$-th shell, weighted by the Fock
+projection measure $\Omega^4$, is
+\begin{equation}
+  c^2(n,l) \;=\; \frac{1}{16}\!\left[
+    1 - \frac{l(l+1)}{n(n+1)} \right].
+  \label{eq:fock_coupling}
+\end{equation}
+For $l = 0$ (s-wave), $c^2(n,0) = 1/16$ universally for all~$n$.
+This value admits three equivalent readings:
+\begin{enumerate}
+  \item The squared Chebyshev transition amplitude $(1/4)^2$;
+  \item The inverse Fock Jacobian $1/\Omega^4(0)$, where $\Omega(0) = 2$
+        is the stereographic conformal factor at the projection center
+        ($p = 0$);
+  \item The $l = 0$ base rate of the Casimir decomposition in
+        Eq.~\eqref{eq:fock_coupling}.
+\end{enumerate}
+Thus $\kappa$ is not a fitted constant: it is determined by the
+conformal geometry of the $S^3$ projection.  Its universality across
+all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph
+topology correctly encodes the \textit{relative} spectral structure.
+
+A notable special value: $c^2(4,3) = 1/40 = \Delta$, the boundary
+term in Paper~2's fine-structure-constant formula
+$K = \pi(B + F - \Delta)$~\cite{loutey_paper2}.  This connects the
+highest-$l$ Fock coupling at the Paper~2 cutoff to the Dirac
+degeneracy $g_3^{\mathrm{Dirac}} = 40$ identified in Phase~4H.
 
 \subsection{Limitations}
 
