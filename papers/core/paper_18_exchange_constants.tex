@@ -58,6 +58,28 @@ We note that the combination rule $K = \pi(B + F - \Delta)$ in the
 conjectural fine structure constant formula (Paper~2) has the same
 structural character: $\pi$ multiplying a sum of discrete
 representation-theoretic data and continuous spectral invariants.
+Phase-4G analysis further establishes that $B$, $F$, $\Delta$ have
+categorically different origins (finite Casimir trace at $m=3$;
+infinite Dirichlet series at $d_{\max}=4$; single-level Dirac-mode
+count at $n=3$), so $K$ is a cross-sector sum of structurally
+independent objects with no common generator. Finally, the RH-directed
+sprint series (2026) produces three further concrete realizations of
+the exchange-constant taxonomy: (a)~the closed-form identity
+$D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
+\beta(s-2))$ for the Dirac Dirichlet difference, providing an exact
+$\chi_{-4}$-content projection; (b)~the first GUE-like zero spacing
+signature in the framework, on the spectral Dirichlet side only
+(Ihara side is Berry-Tabor / Poisson), creating an "RMT-spacing
+without critical-line confinement" tier; and (c)~a new
+\emph{algebraic-but-non-radical} taxonomic tier realized by the
+$S_6$-Galois factor $P_{12}$ of the scalar $S^5$ Ihara zeta at
+$N_{\max}=3$ (12 zeros with no radical expression over~$\mathbb{Q}$).
+Taken together, these instances exhibit a meta-pattern of
+\emph{structural incommensurability within single framework
+observables}: what appears to be one object in GeoVac repeatedly
+resolves into several with categorically different origins. This
+meta-pattern is consistent across three independently-derived
+three-axis classifications and is discussed in Sec.~\ref{sec:meta_observation}.
 \end{abstract}
 
 \maketitle
@@ -414,6 +436,121 @@ represent at any practical basis size.
 %% ========================================================================
 %% III. THE PATTERN
 %% ========================================================================
+
+\subsection{Level 5: RH-sprint exchange constants (2026)}
+\label{sec:level5_rh_sprint}
+
+The 2026 RH-directed sprint series added four distinct concrete
+realizations of the exchange-constant taxonomy to the catalog.
+All four live on the same S^3 substrate as Levels 1--4 but classify
+different projections of the spectral data.
+
+\paragraph{Closed-form $\chi_{-4}$ content in the Dirac Dirichlet
+difference (RH-J).}  On $S^3$ with the Camporesi--Higuchi Dirac
+spectrum $|\lambda_n| = n + 3/2$ and degeneracy $g_n = 2(n+1)(n+2)$,
+define the Dirac Dirichlet series $D(s) = \sum_n g_n / |\lambda_n|^s$
+and its vertex-parity split $D_{\mathrm{even}}(s)$, $D_{\mathrm{odd}}(s)$
+(Paper~28~\cite{loutey_paper28}, eqs.~(3)--(5)). The difference has
+the exact closed form
+\begin{equation}
+  D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) \;=\; 2^{s-1}\,\bigl(
+    \beta(s) - \beta(s-2)\bigr), \quad s \in \mathbb{Z}_{\ge 2},
+  \label{eq:rh_j_identity}
+\end{equation}
+where $\beta(s) = L(s, \chi_{-4})$ is the Dirichlet $L$-function of
+the mod-4 character. Two elementary Hurwitz identities drive the
+collapse:
+$\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$ and
+$\zeta(s, 3/4) = \zeta(s, 1/4) - 4^s \beta(s)$.
+Verified by sympy symbolic identity at $s \in \{2, \ldots, 10, 15\}$
+and by PSLQ at 100-digit precision
+(\texttt{debug/spectral\_chi\_neg4\_memo.md}).
+Eq.~(\ref{eq:rh_j_identity}) is the concrete realization of
+Paper~28's qualitative "vertex parity acts as $\chi_{-4}$" statement:
+the Dirichlet $L$-content enters the spectral-Dirichlet difference
+as a closed-form linear combination of $\beta(s)$ and $\beta(s-2)$
+with integer prefactor $2^{s-1}$.
+
+\paragraph{RMT-spacing without critical-line confinement: the
+spectral-Ihara dichotomy (RH-M, RH-G).}  The zeros of $D(s)$,
+$D_{\mathrm{even}}(s)$, $D_{\mathrm{odd}}(s)$ in the strip
+$\mathrm{Im}(s) \in [0, 70]$ have unfolded imaginary-part spacing
+coefficient of variation $\mathrm{CV} \in \{0.348, 0.343, 0.396\}$
+---consistent with GUE ($\mathrm{CV} \approx 0.46$) and inconsistent
+with Poisson ($\mathrm{CV} \approx 1.05$). Kolmogorov--Smirnov testing
+rejects Poisson at $p = 0.004, 0.030$ respectively and cannot reject
+GUE. This is the first GUE signature in the GeoVac framework, and
+it is confined to the \emph{spectral} Dirichlet side only: the
+combinatorial / Ihara-zeta side (graph non-backtracking walks) has
+Poisson / Berry-Tabor spacing at $\mathrm{CV} \approx 1$, a categorical
+dichotomy. Equally important, the $D(s)$ zeros are \emph{not} on a
+single critical line (they are scattered in
+$\mathrm{Re}(s) \in [2.02, 3.42]$), so the GUE signature is a
+spacing-only statement, not an RH-style line constraint: classical
+$\zeta$ has \emph{both} RMT spacing and critical-line confinement;
+GeoVac's spectral zeta has only the first. This creates a new
+taxonomic tier, \emph{RMT-spacing without critical-line confinement}.
+
+\paragraph{Algebraic-but-non-radical transcendental content (RH-F).}
+The integer-coefficient Ihara-zeta factorizations produced in
+Paper~29~\cite{loutey_paper29} factor over specific number fields as
+follows. Cyclotomic factors $\Phi_3$, $\Phi_4$, $\Phi_6$ have Galois
+group $\mathbb{Z}/2$ (abelian); they fingerprint specific graph cycles
+(e.g.~$\Phi_3, \Phi_6 \leftrightarrow$ 3-prism cycles of the $\ell=1$
+Coulomb $S^3$ component). Ramanujan-boundary factors
+$(4s^2+1)^2$ and $(9s^2+1)^4$ live in $\mathbb{Q}(i)$, consistent
+with the Hopf $\mathbb{Z}_2$ $m$-reflection sub-action of the Paper~25
+Hopf $U(1)$ (see Observation~2 of~\cite{loutey_paper29}).
+\emph{Bulk} factors have non-abelian Galois groups: $S_3$ for scalar
+$S^3$ cubics; $S_4$ for the Dirac-$S^3$ Rule-A $n_{\max}=3$ quartic;
+and crucially $S_6$ (non-solvable) for the factor $P_{12}(s^2)$ in
+the scalar $S^5$ $N_{\max}=3$ Ihara zeta. By Abel--Ruffini, the 12
+zeros of $P_{12}$ have \emph{no radical expression} over
+$\mathbb{Q}$; by Kronecker--Weber, they do not lie in any cyclotomic
+extension $\mathbb{Q}(\zeta_M)$. This places a new tier in
+Sec.~\ref{sec:taxonomy}'s output-class axis: \emph{algebraic but
+not radical} --- intermediate between closed-form radical algebraic
+and classical periods.
+
+\paragraph{$\alpha^2$-weighted Ihara zeta in the ring
+$\mathbb{Q}(\alpha^2)[s]$ (RH-K).}  The unweighted Ihara zeta
+depends only on $0/1$ graph connectivity. Introducing the edge
+weighting $w(a, b) = 1 + \alpha^2 \cdot |f_{\mathrm{SO}}(a) +
+f_{\mathrm{SO}}(b)|/2$, where
+$f_{\mathrm{SO}}(n, \kappa) = -(\kappa+1)/[4 n^3 \ell(\ell+1/2)(\ell+1)]$
+is the dimensionless Breit--Pauli spin-orbit diagonal, gives a
+weighted Ihara zeta $\zeta_G^w(s)$ living in the ring
+$\mathbb{Q}(\alpha^2)[s]$ --- an explicit realization of the
+spinor-intrinsic tier without the $\gamma = \sqrt{1 - (Z\alpha)^2}$
+radical (\texttt{geovac/ihara\_zeta\_weighted.py}, 14/14 tests).
+For Rule-A at $n_{\max}=3$, the inverse zeta expands as a polynomial
+in $\alpha$ of degree 44, with $\alpha^2$ coefficient carrying
+the clean rational prefactor $-35/648$. The coefficient is a
+graph-invariant, not an edge-local perturbation --- a concrete
+$\alpha^2$-content projection.
+
+\subsection*{Taxonomic placement of the Level-5 realizations}
+
+The four Level-5 constants slot into the existing taxonomy as
+follows. The $\chi_{-4}$ identity (\ref{eq:rh_j_identity}) is a
+\emph{flow} exchange constant (infinite spectral sum), with the
+novelty that its value is an integer-coefficient linear combination
+of classical Dirichlet $L$-values, so Paper~18's transcendental
+taxonomy gains a "Dirichlet-$L$-closed" cell at the intersection of
+flow and Dirac-spectrum projection. The GUE-vs-Poisson dichotomy is
+a \emph{meta-level} discriminant, not itself a transcendental, but
+classifies spectral objects by zero statistics --- a new axis in
+Sec.~\ref{sec:taxonomy}. The algebraic-but-non-radical tier from
+$P_{12}$ is a new \emph{intrinsic} exchange-constant sub-class
+between Level~0 (rational/integer) and classical periods; it is the
+first time a non-solvable Galois group has been exhibited as a
+framework-native transcendental class. The $\alpha^2$-weighted
+zeta is a \emph{spinor-intrinsic} exchange constant in the ring
+$\mathbb{Q}(\alpha^2)[s]$, a subring of the full spinor-intrinsic
+tier $\mathbb{Q}(\alpha^2)[\gamma]/(\gamma^2 + (Z\alpha)^2 - 1)$
+introduced in Sec.~\ref{sec:taxonomy}.
+
+% ------------------------------------------------------------------
 
 \section{The Pattern: Weyl--Selberg Exchange}
 \label{sec:pattern}
@@ -1765,6 +1902,93 @@ the energy-shell scaling $E \propto Z^2$.
 %% VIII. CONCLUSION
 %% ========================================================================
 
+\subsection{Structural incommensurability within GeoVac observables:
+a meta-pattern}
+\label{sec:meta_observation}
+
+The exchange-constant taxonomy developed in the preceding sections
+has repeatedly encountered a distinctive pattern: single framework
+observables in GeoVac, when unpacked, resolve into sums or
+products of categorically distinct transcendental or spectral
+objects with \emph{no common generator}. The pattern has now been
+observed in three independently-derived three-axis classifications,
+and we note it here as a meta-observation that may eventually
+rise to theorem status.
+
+\paragraph{Instance~1 (Paper~28 QED on $S^3$):}  Perturbative QED
+sums on $S^3$ produce three transcendental classes simultaneously:
+even-zeta content ($\pi^{\mathrm{even}}$, from second-order
+Riemannian operators), odd-zeta content ($\zeta(3), \zeta(5)$,
+from first-order Dirac), and Dirichlet-$L$ content ($G = \beta(2),
+\beta(4)$, from vertex topology). These three classes appear
+together in the two-loop sunset sum but are discriminated by a
+three-axis classification (operator order $\times$ bundle type
+$\times$ vertex parity), and no single mechanism generates all
+three. \cite{loutey_paper28}
+
+\paragraph{Instance~2 (Phase-4G $\alpha$ decomposition):}  The
+conjectural combination rule $K = \pi(B + F - \Delta)$ has three
+ingredients with categorically distinct origins: $B = 42$ is a
+finite Casimir trace on the scalar Laplacian at $m = 3$, $F = \pi^2/6$
+is the infinite Dirichlet series of Fock degeneracies at the
+packing exponent $d_{\max} = 4$, and $\Delta^{-1} = 40$ is the
+degeneracy of the third Dirac mode $g_3^{\mathrm{Dirac}} =
+2 \cdot 4 \cdot 5$ on the \emph{spinor} bundle. Sprint 4 analysis
+confirmed that no common generator produces all three: $K$ is an
+additive combination across three structurally-independent
+spectral objects. (Phase~4G memo,
+\texttt{debug/data/track\_alpha\_phase4g/track\_k\_analysis.md}.)
+
+\paragraph{Instance~3 (RH-sprint Weil dictionary):}  The Ihara
+zeta side (combinatorial, closed non-backtracking walks) and the
+spectral Dirichlet side (Dirac-eigenvalue Dirichlet series) give
+\emph{opposite} verdicts on GeoVac. Zero spacing: Ihara Poisson
+($\mathrm{CV} \approx 1$), spectral GUE ($\mathrm{CV} \approx
+0.35$). Dirichlet-$L$ content: Ihara absent (bipartiteness makes
+the $\chi_{-4}$ support disjoint from walk-length support); spectral
+present (the closed-form Eq.~(\ref{eq:rh_j_identity})). Hilbert--P\'olya
+compatibility: Ihara categorically excluded; spectral compatible
+at current sample precision. The two sides are not two views of
+the same object; they are two distinct framework observables
+computed from the same Dirac-$S^3$ data, with structural support
+that is disjoint in the bipartite-$\chi_{-4}$ sense.
+
+\paragraph{The meta-pattern.}  Across these three instances, the
+framework keeps finding that a single-observable statement
+("$\zeta$-zero structure on GeoVac", "$K = \pi(B + F - \Delta)$",
+"two-loop QED spectral sum on $S^3$") resolves under structural
+analysis into a sum or superposition of objects that do not share
+a common structural generator. The appropriate taxonomy is the
+three-axis-classification style developed here; the objects at
+each cell are what they are, not derivations of each other.
+
+This is consistent with --- and arguably a consequence of --- the
+Coulomb/HO asymmetry established in Paper~24~\cite{loutey_paper24}:
+the graph is rational/integer on both bundles, but the projection
+structures (second-order Riemannian for the scalar, first-order
+complex-analytic for the HO holomorphic sector, Dirac for the
+spinor) are categorically different, and their transcendental
+projections onto physical coordinates do not interpolate.
+We name the pattern for future reference --- \emph{structural
+incommensurability within GeoVac observables} --- and note that
+this is an \emph{empirical} observation at the level of the three
+documented instances, not a theorem. Its status may sharpen if
+further framework observables decompose the same way or if a
+bridge is found that fails cleanly.
+
+\paragraph{Operational consequence.}  For taxonomy construction
+(Sec.~\ref{sec:taxonomy}), the consequence is that multi-component
+observables should be decomposed and each component classified
+separately, rather than the whole observable forced into a single
+tier. This changes nothing about Sec.~\ref{sec:observable_classification}'s
+S/P/C classification of atomic observables (which are fine as
+they stand at the observable level) but it does mean that
+composite structural results, such as Paper~2's $K$ or Paper~28's
+two-loop sunset, should be broken into their components before
+taxonomic assignment.
+
+% ------------------------------------------------------------------
+
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -1888,6 +2112,23 @@ J.~Loutey,
 ``The Fine Structure Constant from Spectral Geometry of the Hopf
 Fibration,''
 GeoVac Paper~2 (2026).
+
+\bibitem{loutey_paper24}
+J.~Loutey,
+``The Bargmann--Segal Lattice: A $\pi$-Free Discretization of the
+3D Harmonic Oscillator on $S^5$,''
+GeoVac Paper~24 (2026).
+
+\bibitem{loutey_paper28}
+J.~Loutey,
+``QED on $S^3$: Spectral Geometry of Perturbative Transcendentals,''
+GeoVac Paper~28 (2026).
+
+\bibitem{loutey_paper29}
+J.~Loutey,
+``The GeoVac Hopf Graphs Are Ramanujan: Ihara Zeta, Graph-RH, and
+a Scope Boundary on Selberg-on-Hydrogen,''
+GeoVac Paper~29 (2026).
 
 \bibitem{loutey_track_j}
 J.~Loutey,
