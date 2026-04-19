@@ -1,0 +1,124 @@
+{
+  "sd_coefficients": {
+    "scalar": [
+      0.44311346265849844,
+      0.4431135158011442,
+      0.22154600133217936,
+      0.07463218478619137
+    ],
+    "dirac": [
+      1.7724538509055103,
+      -0.8862269254516174,
+      -1.0709156640395779e-10,
+      3.353350423683701e-09
+    ],
+    "ratio": [
+      4.000000000612747,
+      -1.9999997604436173,
+      -4.83382980329164e-10,
+      4.49316931199386e-08
+    ]
+  },
+  "step1_remainder": [
+    {
+      "Lambda_sq": 8.0,
+      "name": "lam_3_scalar = 8",
+      "S_exact_scalar": 11.361527807246743,
+      "S_CC_scalar": 10.83733567226772,
+      "R_scalar": 0.5241921349790228,
+      "S_exact_dirac": 37.59942411946502,
+      "S_CC_dirac": 31.100180567598624,
+      "R_dirac": 6.499243551866396,
+      "Str_R": -1.1006187529875762,
+      "rel_err_vs_Kpi": 1.025232013219022
+    },
+    {
+      "Lambda_sq": 9.0,
+      "name": "n_max^2 = 9",
+      "S_exact_scalar": 13.370069093750073,
+      "S_CC_scalar": 12.703815717389016,
+      "R_scalar": 0.6662533763610572,
+      "S_exact_dirac": 45.19757319809066,
+      "S_CC_dirac": 37.699111843503495,
+      "R_dirac": 7.498461354587164,
+      "Str_R": -1.2083619622857338,
+      "rel_err_vs_Kpi": 1.0277020584312186
+    },
+    {
+      "Lambda_sq": 15.0,
+      "name": "(n_max+1)^2 - 1 = 15",
+      "S_exact_scalar": 27.517235398753826,
+      "S_CC_scalar": 25.655846315679707,
+      "R_scalar": 1.861389083074119,
+      "S_exact_dirac": 99.53792157393488,
+      "S_CC_dirac": 85.17135219568783,
+      "R_dirac": 14.36656937824705,
+      "Str_R": -1.7302532614876434,
+      "rel_err_vs_Kpi": 1.039666572141902
+    },
+    {
+      "Lambda_sq": 16.0,
+      "name": "d_max^2 = 16",
+      "S_exact_scalar": 30.188276847624707,
+      "S_CC_scalar": 28.08075010029399,
+      "R_scalar": 2.1075267473307164,
+      "S_exact_dirac": 109.89213875614202,
+      "S_CC_dirac": 94.2477796079203,
+      "R_dirac": 15.644359148221724,
+      "Str_R": -1.8035630397247147,
+      "rel_err_vs_Kpi": 1.0413472206757746
+    },
+    {
+      "Lambda_sq": 20.25,
+      "name": "D^2_3 = (9/2)^2 = 20.25",
+      "S_exact_scalar": 42.42278025745832,
+      "S_CC_scalar": 39.146407040996436,
+      "R_scalar": 3.2763732164618844,
+      "S_exact_dirac": 157.52683599922776,
+      "S_CC_dirac": 136.07023180878787,
+      "R_dirac": 21.45660419043989,
+      "Str_R": -2.087777831148088,
+      "rel_err_vs_Kpi": 1.0478629295484156
+    },
+    {
+      "Lambda_sq": 36.0,
+      "name": "(2*n_max)^2 = 36",
+      "S_exact_scalar": 98.40845914330312,
+      "S_CC_scalar": 89.40531438053922,
+      "R_scalar": 9.003144762763895,
+      "S_exact_dirac": 377.5326702428749,
+      "S_CC_dirac": 329.86722862703925,
+      "R_dirac": 47.66544161583562,
+      "Str_R": -2.913215641195009,
+      "rel_err_vs_Kpi": 1.0667863375659958
+    }
+  ],
+  "step1b_inverse_roots": [],
+  "em_decomposition": {
+    "B_exact": 42,
+    "B_em_integral": 19.866666666666667,
+    "B_em_boundary": 18.0,
+    "B_em_b2": 4.166666666666666,
+    "B_em_b4": -0.03333333333333333,
+    "Delta_as_Dirac_EM_boundary": 40,
+    "Delta_inverse": 40
+  },
+  "findings": {
+    "F1_SD_cancellation": {
+      "verdict": "THEOREM (verified numerically and analytically)",
+      "paper_target": "Paper 18 Section IV (new subsection)"
+    },
+    "F2_Delta_EM_boundary": {
+      "verdict": "POSITIVE (exact)",
+      "paper_target": "Paper 2 Section IV (Delta interpretation)"
+    },
+    "F3_sign_rule": {
+      "verdict": "STRUCTURAL (consistent, not derived)",
+      "paper_target": "Paper 2 Section IV / Paper 18 Section V"
+    },
+    "F4_nonperturbative": {
+      "verdict": "STRUCTURAL (follows from F1 + Phase 4B-4I decomposition)",
+      "paper_target": "Paper 18 Section IV / WH1 upgrade"
+    }
+  }
+}

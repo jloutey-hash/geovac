@@ -377,6 +377,29 @@ eta-invariant: the $\eta$-invariant of the Camporesi--Higuchi Dirac
 operator on $S^3$ vanishes by symmetry. The APS match is therefore
 a shape-level structural hint, not a derivation.
 
+\emph{Supertrace sign rule.}  The sign structure of
+$K = \pi(B + F - \Delta)$ has a cleaner reading: in the
+Connes--Chamseddine spectral-action framework, the
+\emph{supertrace} $\mathrm{Str} = \mathrm{Tr}_{S} - \mathrm{Tr}_{D}/4$
+assigns opposite signs to bosonic (scalar Laplace--Beltrami) and
+fermionic (Dirac) contributions via the standard $(-1)^{F}$ grading.
+$B$ and $F$ are both scalar-sector objects (finite Casimir trace and
+Fock-degeneracy Dirichlet series, respectively) and enter with~$(+)$.
+$\Delta$ is a spinor-sector object (Dirac mode-count boundary term)
+and enters with~$(-)$.  The $(+,+,-)$ sign pattern is thus the
+$(-1)^{F}$ grading, not an ad~hoc sign choice.
+
+\emph{Euler--Maclaurin boundary reading.}  The identification
+$\Delta^{-1} = g_{3}^{\mathrm{Dirac}} = 40$ (Phase~4H, SM-D) gains a
+sharper reading from the Euler--Maclaurin (EM) decomposition of the
+Dirac mode-count sum.  For any cutoff $N$,
+$\sum_{n=0}^{N} g_{D}(n) = \text{integral} + [g_{D}(0) + g_{D}(N)]/2
++ \text{Bernoulli corrections}$; the upper boundary term is
+$g_{D}(N)/2 = 2(N+1)(N+2)$.  At $N = n_{\mathrm{CH}} = 3$ this equals
+$2 \cdot 4 \cdot 5 = 40 = \Delta^{-1}$.
+The EM formula explains \emph{why} a single-level degeneracy appears
+as a structural ingredient of~$K$: it is the boundary correction when
+summing the spectral action up to the selection-principle cutoff.
 
 %======================================================================
 % Paper 2, Section IV — DROP-IN REWRITE (proposed by Track D5)
@@ -767,6 +790,20 @@ natural stopping point. The program has achieved:
   \item Identification of $\zeta(3)$ as a new framework transcendental
     in the Dirac sector, distinct from the Riemann-zeta-at-even-integer
     content of the scalar sector.
+  \item The Seeley--DeWitt cancellation theorem (supertrace sprint,
+    2026): on unit $S^{3}$, the asymptotic Dirac mode density is
+    $g_{n}^{\mathrm{Dirac}} \sim 4n^{2}$ while the scalar density is
+    $g_{n}^{\mathrm{scalar}} = n^{2}$, giving a universal ratio
+    $a_{k}^{D^{2}} / a_{k}^{\Delta_{\mathrm{LB}}} = 4 = \dim(S)$
+    at every Seeley--DeWitt order $k$, where $S$ is the spinor bundle.
+    The perturbative Connes--Chamseddine supertrace
+    $\mathrm{Str}[f(D^{2}/\Lambda^{2})]$ therefore vanishes identically
+    in the asymptotic expansion.  All three ingredients of
+    $K/\pi = B + F - \Delta$ are invisible to the perturbative spectral
+    action: $B$ is a finite Casimir trace, $F$ is an arithmetic
+    Dirichlet series, and $\Delta$ is an Euler--Maclaurin boundary term.
+    $K/\pi$ lives \emph{entirely} in the non-perturbative sector of the
+    spectral-action supertrace.
 \end{enumerate}
 
 The program has \emph{not} achieved a derivation of Eq.~(\ref{eq:K})

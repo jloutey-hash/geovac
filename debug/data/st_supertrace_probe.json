@@ -1,0 +1,204 @@
+{
+  "targets": {
+    "B": 42,
+    "F": 1.6449340668482264,
+    "Delta": 0.025,
+    "K_over_pi": 43.61993406684823,
+    "K": 137.03606441448156
+  },
+  "test1_em": {
+    "g_N_total": 80,
+    "boundary_half": 40,
+    "delta_inverse": 40,
+    "match": true
+  },
+  "best_supertrace_hits": [
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.383838383838384,
+      "c": "1/8",
+      "S_scalar": 84.84692215734557,
+      "S_dirac": 327.9822591202897,
+      "supertrace": 43.84913976730936,
+      "target": "B+F",
+      "target_val": 43.64493406684823,
+      "rel_err": 0.004678795026895027
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 21.7979797979798,
+      "c": "1/8",
+      "S_scalar": 81.5923421141876,
+      "S_dirac": 315.1070244351245,
+      "supertrace": 42.20396405979704,
+      "target": "B",
+      "target_val": 42.0,
+      "rel_err": 0.0048562871380247044
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.383838383838384,
+      "c": "1/8",
+      "S_scalar": 84.84692215734557,
+      "S_dirac": 327.9822591202897,
+      "supertrace": 43.84913976730936,
+      "target": "K/\u03c0",
+      "target_val": 43.61993406684823,
+      "rel_err": 0.00525460905350907
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.09090909090909,
+      "c": "1/8",
+      "S_scalar": 83.21433355007024,
+      "S_dirac": 321.5232238479298,
+      "supertrace": 43.02393056907901,
+      "target": "K/\u03c0",
+      "target_val": 43.61993406684823,
+      "rel_err": 0.013663557969983009
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.09090909090909,
+      "c": "1/8",
+      "S_scalar": 83.21433355007024,
+      "S_dirac": 321.5232238479298,
+      "supertrace": 43.02393056907901,
+      "target": "B+F",
+      "target_val": 43.64493406684823,
+      "rel_err": 0.014228535591738176
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 21.505050505050505,
+      "c": "1/8",
+      "S_scalar": 79.98101859434558,
+      "S_dirac": 308.7339522480428,
+      "supertrace": 41.38927456334024,
+      "target": "B",
+      "target_val": 42.0,
+      "rel_err": 0.014541081825232453
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.67676767676768,
+      "c": "1/8",
+      "S_scalar": 86.49003857412433,
+      "S_dirac": 334.4838446672317,
+      "supertrace": 44.67955799072036,
+      "target": "B+F",
+      "target_val": 43.64493406684823,
+      "rel_err": 0.02370547569822109
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.67676767676768,
+      "c": "1/8",
+      "S_scalar": 86.49003857412433,
+      "S_dirac": 334.4838446672317,
+      "supertrace": 44.67955799072036,
+      "target": "K/\u03c0",
+      "target_val": 43.61993406684823,
+      "rel_err": 0.024292194533082987
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.09090909090909,
+      "c": "1/8",
+      "S_scalar": 83.21433355007024,
+      "S_dirac": 321.5232238479298,
+      "supertrace": 43.02393056907901,
+      "target": "B",
+      "target_val": 42.0,
+      "rel_err": 0.02437929926378603
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 21.7979797979798,
+      "c": "1/8",
+      "S_scalar": 81.5923421141876,
+      "S_dirac": 315.1070244351245,
+      "supertrace": 42.20396405979704,
+      "target": "K/\u03c0",
+      "target_val": 43.61993406684823,
+      "rel_err": 0.032461534785476684
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 21.7979797979798,
+      "c": "1/8",
+      "S_scalar": 81.5923421141876,
+      "S_dirac": 315.1070244351245,
+      "supertrace": 42.20396405979704,
+      "target": "B+F",
+      "target_val": 43.64493406684823,
+      "rel_err": 0.033015744847824664
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 21.21212121212121,
+      "c": "1/8",
+      "S_scalar": 78.38043516472275,
+      "S_dirac": 302.40430463177114,
+      "supertrace": 40.57989708575136,
+      "target": "B",
+      "target_val": 42.0,
+      "rel_err": 0.03381197414877709
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.96969696969697,
+      "c": "1/8",
+      "S_scalar": 88.14361477663053,
+      "S_dirac": 341.0277004963047,
+      "supertrace": 45.51515221459244,
+      "target": "B+F",
+      "target_val": 43.64493406684823,
+      "rel_err": 0.04285074975436357
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.96969696969697,
+      "c": "1/8",
+      "S_scalar": 88.14361477663053,
+      "S_dirac": 341.0277004963047,
+      "supertrace": 45.51515221459244,
+      "target": "K/\u03c0",
+      "target_val": 43.61993406684823,
+      "rel_err": 0.04344844136719139
+    },
+    {
+      "f": "1/(1+x)\u00b2",
+      "\u039b\u00b2": 22.383838383838384,
+      "c": "1/8",
+      "S_scalar": 84.84692215734557,
+      "S_dirac": 327.9822591202897,
+      "supertrace": 43.84913976730936,
+      "target": "B",
+      "target_val": 42.0,
+      "rel_err": 0.04402713731688953
+    }
+  ],
+  "results": {
+    "test1_em_boundary": {
+      "verdict": "POSITIVE",
+      "finding": "EM boundary correction at n=3 for D\u00b2 mode count = g_3^Dirac/2 per chirality; total (both chiralities) g(3)/2 = 40 = \u0394\u207b\u00b9 exactly"
+    },
+    "test2_supertrace_scan": {
+      "verdict": "PENDING",
+      "finding": "Best hits from scan (see table above), 15 within 5%"
+    },
+    "test5_em_on_zeta2": {
+      "verdict": "NEGATIVE",
+      "finding": "EM boundary correction 1/(2N\u00b2) = 1/18 \u2260 \u0394 = 1/40"
+    },
+    "test7_selection": {
+      "verdict": "CONFIRMED",
+      "finding": "B(3)/N(3) = 3 = dim(S\u00b3); unique integer hit"
+    },
+    "test8_decomposition": {
+      "verdict": "NEGATIVE",
+      "finding": "No single spectral quantity decomposes as B (truncated) + F (tail) \u2014 B_n ~ n\u2075 and 1/n\u00b2 have incompatible asymptotics"
+    }
+  }
+}
