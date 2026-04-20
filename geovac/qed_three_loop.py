@@ -53,6 +53,7 @@ References
 
 from __future__ import annotations
 
+import time
 from typing import Dict, List, Optional, Tuple
 
 import mpmath
@@ -68,6 +69,10 @@ __all__ = [
     "three_loop_convergence_table",
     "decompose_three_loop",
     "classify_three_loop_transcendentals",
+    "three_loop_factorized",
+    "three_loop_factorized_convergence",
+    "decompose_three_loop_mzv",
+    "three_loop_euler_maclaurin_tail",
 ]
 
 
@@ -668,4 +673,390 @@ def classify_three_loop_transcendentals() -> Dict[str, str]:
             "with Hurwitz sums, potentially producing Hurwitz analogs of "
             "flat-space MZVs."
         ),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Factorized O(N^3) three-loop sum (Track Q-2)
+# ---------------------------------------------------------------------------
+
+def three_loop_factorized(
+    n_max: int,
+    a: int = 4,
+    p: int = 1,
+    use_cg_weights: bool = True,
+) -> Dict[str, object]:
+    """Factorized O(N^3) three-loop chain sum on S^3.
+
+    The five-fold sum over (n1, n2, n3, q1, q2) factors as:
+
+        S = sum_{n2=0}^{n_max} g(n2) / lambda(n2)^a * L(n2) * R(n2)
+
+    where L(n2) = sum_{n1,q1} W(n1,n2,q1) * g(n1) * d_T(q1) / (lambda(n1)^a * mu(q1)^p)
+      and R(n2) = sum_{n3,q2} W(n2,n3,q2) * g(n3) * d_T(q2) / (lambda(n3)^a * mu(q2)^p)
+
+    Because the vertex weights and spectrum are the same at both vertices,
+    L(n2) and R(n2) have the same functional form but with n2 in the "other"
+    slot. However, the vertex coupling W(n1, n2, q) is NOT symmetric in
+    n1 and n2 in general (the SU(2)_L x SU(2)_R reps differ for the two
+    electron lines). So we compute L(n2) and R(n2) separately.
+
+    For the LEFT partial sum, n2 is in position 2 of W(n1, n2, q1):
+        L(n2) = sum_{n1} sum_{q1} W(n1, n2, q1) * g(n1) * d_T(q1) / (lam(n1)^a * mu(q1)^p)
+
+    For the RIGHT partial sum, n2 is in position 1 of W(n2, n3, q2):
+        R(n2) = sum_{n3} sum_{q2} W(n2, n3, q2) * g(n3) * d_T(q2) / (lam(n3)^a * mu(q2)^p)
+
+    Complexity: O(N^3) instead of O(N^5).
+
+    Parameters
+    ----------
+    n_max : int
+        Truncation for electron modes (0..n_max) and photon modes (1..2*n_max).
+    a : int
+        Exponent on each electron propagator |lambda_n|^a. Default 4.
+    p : int
+        Exponent on each photon propagator mu_q^p. Default 1.
+    use_cg_weights : bool
+        If True, use SO(4) CG channel count W(n1,n2,q). If False, W=1.
+
+    Returns
+    -------
+    Dict with the factorized sum value and timing.
+    """
+    t0 = time.perf_counter()
+
+    q_max = 2 * n_max
+
+    # Precompute electron data
+    g_arr = [_g_n_dirac(n) for n in range(n_max + 1)]
+    lam_pow_arr = [_lambda_n(n) ** a for n in range(n_max + 1)]
+
+    # Precompute photon data
+    d_q_cache = {}
+    mu_q_pow_cache = {}
+    for q in range(1, q_max + 1):
+        d_q_cache[q] = _d_q_transverse(q)
+        mu_q_pow_cache[q] = _mu_q(q) ** p
+
+    # Compute LEFT partial sums: L(n2) where n2 is in the second slot of W
+    # L(n2) = sum_{n1, q1} W(n1, n2, q1) * g(n1) * d_T(q1) / (lam(n1)^a * mu(q1)^p)
+    L = [mpmath.mpf(0)] * (n_max + 1)
+    for n2 in range(n_max + 1):
+        total = mpmath.mpf(0)
+        for n1 in range(n_max + 1):
+            g1 = g_arr[n1]
+            l1_pow = lam_pow_arr[n1]
+            q_lo = max(1, abs(n1 - n2))
+            q_hi = min(q_max, n1 + n2)
+            for q in range(q_lo, q_hi + 1):
+                if (n1 + n2 + q) % 2 == 0:
+                    continue
+                if use_cg_weights:
+                    w = _so4_channel_count(n1, n2, q)
+                    if w == 0:
+                        continue
+                else:
+                    w = 1
+                dq = d_q_cache[q]
+                mq_pow = mu_q_pow_cache[q]
+                total += mpmath.mpf(w) * g1 * dq / (l1_pow * mq_pow)
+        L[n2] = total
+
+    # Compute RIGHT partial sums: R(n2) where n2 is in the first slot of W
+    # R(n2) = sum_{n3, q2} W(n2, n3, q2) * g(n3) * d_T(q2) / (lam(n3)^a * mu(q2)^p)
+    R = [mpmath.mpf(0)] * (n_max + 1)
+    for n2 in range(n_max + 1):
+        total = mpmath.mpf(0)
+        for n3 in range(n_max + 1):
+            g3 = g_arr[n3]
+            l3_pow = lam_pow_arr[n3]
+            q_lo = max(1, abs(n2 - n3))
+            q_hi = min(q_max, n2 + n3)
+            for q in range(q_lo, q_hi + 1):
+                if (n2 + n3 + q) % 2 == 0:
+                    continue
+                if use_cg_weights:
+                    w = _so4_channel_count(n2, n3, q)
+                    if w == 0:
+                        continue
+                else:
+                    w = 1
+                dq = d_q_cache[q]
+                mq_pow = mu_q_pow_cache[q]
+                total += mpmath.mpf(w) * g3 * dq / (l3_pow * mq_pow)
+        R[n2] = total
+
+    # Combine: S = sum_{n2} g(n2) / lam(n2)^a * L(n2) * R(n2)
+    S = mpmath.mpf(0)
+    for n2 in range(n_max + 1):
+        S += g_arr[n2] / lam_pow_arr[n2] * L[n2] * R[n2]
+
+    elapsed = time.perf_counter() - t0
+
+    return {
+        "value": S,
+        "value_float": float(S),
+        "n_max": n_max,
+        "electron_exponent": a,
+        "photon_exponent": p,
+        "use_cg_weights": use_cg_weights,
+        "time_seconds": elapsed,
+    }
+
+
+def three_loop_factorized_convergence(
+    n_max_values: Optional[List[int]] = None,
+    a: int = 4,
+    p: int = 1,
+) -> List[Dict[str, object]]:
+    """Convergence table for the factorized three-loop CG-weighted sum.
+
+    Computes the factorized sum at increasing n_max values to assess
+    convergence and enable PSLQ identification at high precision.
+
+    Parameters
+    ----------
+    n_max_values : list of int, optional
+        Default: [10, 20, 30, 50, 75, 100].
+    a : int
+        Electron propagator exponent. Default 4.
+    p : int
+        Photon propagator exponent. Default 1.
+
+    Returns
+    -------
+    List of dicts with n_max, value, delta, time_seconds.
+    """
+    if n_max_values is None:
+        n_max_values = [10, 20, 30, 50, 75, 100]
+
+    rows = []
+    prev_value = None
+    for nm in n_max_values:
+        r = three_loop_factorized(n_max=nm, a=a, p=p, use_cg_weights=True)
+        delta = None
+        if prev_value is not None:
+            delta = float(abs(r["value"] - prev_value))
+        prev_value = r["value"]
+        rows.append({
+            "n_max": nm,
+            "value": r["value"],
+            "value_float": r["value_float"],
+            "delta_from_previous": delta,
+            "time_seconds": r["time_seconds"],
+        })
+    return rows
+
+
+def three_loop_euler_maclaurin_tail(
+    n_max: int,
+    n_em_terms: int = 10,
+    a: int = 4,
+    p: int = 1,
+) -> mpmath.mpf:
+    """Euler-Maclaurin tail correction for the factorized three-loop sum.
+
+    The partial sum increments delta(N) = S(N) - S(N-1) decrease as a
+    power law in N. We fit the last few increments to a model
+    delta(N) = c * N^alpha and integrate the tail analytically:
+
+        tail = integral_{N}^{inf} c * x^alpha dx = -c * N^{alpha+1} / (alpha+1)
+
+    This works when alpha < -1 (convergent tail). If the increments don't
+    decrease fast enough, we return a conservative estimate from the last
+    increment alone.
+
+    Parameters
+    ----------
+    n_max : int
+        The base truncation level.
+    n_em_terms : int
+        Number of increments to fit (minimum 3).
+    a : int
+        Electron propagator exponent.
+    p : int
+        Photon propagator exponent.
+
+    Returns
+    -------
+    mpmath.mpf
+        Estimated tail correction S(inf) - S(n_max).
+    """
+    # Compute a sequence of closely-spaced partial sums
+    n_pts = min(n_em_terms, 8)
+    s_vals = []
+
+    for i in range(n_pts + 1):
+        n_eval = n_max - i
+        if n_eval < 3:
+            break
+        r = three_loop_factorized(n_max=n_eval, a=a, p=p, use_cg_weights=True)
+        s_vals.append((n_eval, r["value"]))
+
+    if len(s_vals) < 3:
+        return mpmath.mpf(0)
+
+    # Compute increments delta(N) = S(N) - S(N-1)
+    deltas = []
+    for i in range(len(s_vals) - 1):
+        N_i = s_vals[i][0]
+        d_i = s_vals[i][1] - s_vals[i + 1][1]
+        deltas.append((N_i, d_i))
+
+    if len(deltas) < 2:
+        return mpmath.mpf(0)
+
+    # Fit power law: log(delta) = log(c) + alpha * log(N)
+    # Use the first and last increments for a simple fit
+    N1, d1 = deltas[0]     # delta at n_max
+    N2, d2 = deltas[-1]    # delta at n_max - (n_pts - 1)
+
+    if d1 <= 0 or d2 <= 0:
+        return mpmath.mpf(0)
+
+    log_d1 = mpmath.log(d1)
+    log_d2 = mpmath.log(d2)
+    log_N1 = mpmath.log(mpmath.mpf(N1))
+    log_N2 = mpmath.log(mpmath.mpf(N2))
+
+    denom_log = log_N1 - log_N2
+    if abs(denom_log) < mpmath.mpf(10) ** (-50):
+        return mpmath.mpf(0)
+
+    alpha = (log_d1 - log_d2) / denom_log
+    log_c = log_d1 - alpha * log_N1
+    c = mpmath.exp(log_c)
+
+    # The tail is sum_{k=N+1}^{inf} c * k^alpha ~ integral c * x^alpha dx
+    # = c * N^{alpha+1} / (-(alpha+1)) for alpha < -1
+    if alpha >= -1:
+        # Sum is divergent or very slowly convergent
+        # Return a conservative lower bound: just the next increment
+        return c * mpmath.mpf(n_max + 1) ** alpha
+
+    tail = c * mpmath.mpf(n_max) ** (alpha + 1) / (-(alpha + 1))
+    return tail
+
+
+def decompose_three_loop_mzv(
+    value: mpmath.mpf,
+    n_digits: int = 50,
+) -> Dict[str, object]:
+    """Extended PSLQ decomposition with depth-3 MZV basis.
+
+    The basis includes all expected three-loop transcendentals:
+    - Rational: 1
+    - Weight 2: pi^2
+    - Weight 4: pi^4
+    - Weight 6: pi^6
+    - Odd zeta: zeta(3), zeta(5), zeta(7)
+    - Products: pi^2*zeta(3), pi^2*zeta(5), zeta(3)^2
+    - Depth-3 MZV: zeta(3,1,1) (weight 5, depth 3)
+    - Polylog: Li_4(1/2)
+
+    Parameters
+    ----------
+    value : mpmath.mpf
+        The value to decompose.
+    n_digits : int
+        Number of reliable digits in value. Controls PSLQ tolerance.
+
+    Returns
+    -------
+    Dict with identification status, components, and residual.
+    """
+    tol = mpmath.mpf(10) ** (-(n_digits - 5))
+
+    pi2 = mpmath.pi ** 2
+    pi4 = mpmath.pi ** 4
+    pi6 = mpmath.pi ** 6
+    z3 = mpmath.zeta(3)
+    z5 = mpmath.zeta(5)
+    z7 = mpmath.zeta(7)
+    G = mpmath.catalan
+    beta4 = _dirichlet_beta(4)
+    li4_half = _li4_half()
+    ln2 = mpmath.log(2)
+
+    # Depth-3 MZV: zeta(3,1,1)
+    # Known identity: zeta(3,1,1) = 2*zeta(5) - zeta(2)*zeta(3)
+    # (from Hoffman's identity / stuffle relations for weight 5, depth 3)
+    # Use the identity rather than slow direct summation for better precision.
+    mzv_311 = 2 * z5 - (pi2 / 6) * z3
+
+    pi8 = mpmath.pi ** 8
+    pi10 = mpmath.pi ** 10
+    pi12 = mpmath.pi ** 12
+
+    # --- Tier 0: pi^{even} only (fast, catches pure polynomial in pi^2) ---
+    basis_0 = [value, mpmath.mpf(1), pi2, pi4, pi6, pi8, pi10, pi12]
+    labels_0 = ["val", "1", "pi^2", "pi^4", "pi^6", "pi^8", "pi^10", "pi^12"]
+
+    result = _try_pslq(value, basis_0, labels_0, float(tol), 100000)
+    if result["identified"]:
+        result["basis_tier"] = 0
+        result["note"] = "Identified as polynomial in pi^2 (pi^{even} only)"
+        return result
+
+    # --- Tier 1: standard MZV/Dirichlet basis ---
+    # Keep the basis compact (<=16 elements) for PSLQ reliability
+    basis_1 = [
+        value, mpmath.mpf(1), pi2, pi4, pi6,
+        z3, z5, z7,
+        z3 ** 2, z3 * z5,
+        pi2 * z3, pi2 * z5,
+        G, beta4,
+        pi2 * G, pi2 * beta4,
+    ]
+    labels_1 = [
+        "val", "1", "pi^2", "pi^4", "pi^6",
+        "zeta(3)", "zeta(5)", "zeta(7)",
+        "zeta(3)^2", "zeta(3)*zeta(5)",
+        "pi^2*zeta(3)", "pi^2*zeta(5)",
+        "G", "beta(4)",
+        "pi^2*G", "pi^2*beta(4)",
+    ]
+
+    result = _try_pslq(value, basis_1, labels_1, float(tol), 100000)
+    if result["identified"]:
+        result["basis_tier"] = 1
+        result["note"] = "Identified in standard MZV/Dirichlet basis (no depth-3)"
+        return result
+
+    # --- Tier 2: add depth-3 MZV, Li_4(1/2), ln(2) products ---
+    basis_2 = basis_1 + [
+        mzv_311, li4_half, ln2, pi2 * ln2,
+        z3 * G, z3 * beta4, ln2 ** 2, ln2 ** 4,
+        G ** 2, G * beta4, beta4 ** 2,
+    ]
+    labels_2 = labels_1 + [
+        "zeta(3,1,1)", "Li4(1/2)", "ln(2)", "pi^2*ln(2)",
+        "zeta(3)*G", "zeta(3)*beta(4)", "ln(2)^2", "ln(2)^4",
+        "G^2", "G*beta(4)", "beta(4)^2",
+    ]
+
+    result = _try_pslq(value, basis_2, labels_2, float(tol), 100000)
+    if result["identified"]:
+        result["basis_tier"] = 2
+        result["note"] = "Identified with depth-3 MZV / polylog basis"
+        return result
+
+    # --- Tier 3: relax tolerance for lower-precision values ---
+    result = _try_pslq(value, basis_2, labels_2, 1e-15, 1000000)
+    if result["identified"]:
+        result["basis_tier"] = 3
+        result["note"] = "Identified at relaxed tolerance (lower confidence)"
+        return result
+
+    return {
+        "identified": False,
+        "value_float": float(value),
+        "n_digits_input": n_digits,
+        "note": (
+            "PSLQ failed with both standard and extended MZV bases at "
+            f"{n_digits} digits. Either the value contains a genuinely "
+            "new transcendental outside the basis, or more digits are needed."
+        ),
+        "basis_tier": None,
     }

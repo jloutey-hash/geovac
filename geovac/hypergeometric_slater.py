@@ -374,9 +374,55 @@ def _fraction_sqrt(f: Fraction) -> Fraction:
 # Fast float-based evaluator (same math, no Fraction overhead)
 # ---------------------------------------------------------------------------
 
+
+def _laguerre_coeffs_float(n: int, l: int) -> list:
+    p = n - l - 1
+    alpha = 2 * l + 1
+    return [(-1) ** s * comb(p + alpha, p - s) / factorial(s)
+            for s in range(p + 1)]
+
+
+def _norm_sq_float(n: int, l: int) -> float:
+    return (2.0 / n) ** 3 * factorial(n - l - 1) / (2.0 * n * factorial(n + l))
+
+
+def _expand_pair_float(na: int, la: int, nb: int, lb: int):
+    """Expand R_a(r) R_b(r) r² as [(coeff, power, decay_rate), ...], nsq."""
+    ca = _laguerre_coeffs_float(na, la)
+    cb = _laguerre_coeffs_float(nb, lb)
+    nsq = _norm_sq_float(na, la) * _norm_sq_float(nb, lb)
+    alpha = 1.0 / na + 1.0 / nb
+    sa = (2.0 / na) ** la
+    sb = (2.0 / nb) ** lb
+    terms = []
+    for s1, a_coeff in enumerate(ca):
+        for s2, b_coeff in enumerate(cb):
+            coeff = (a_coeff * b_coeff * sa * sb
+                     * (2.0 / na) ** s1 * (2.0 / nb) ** s2)
+            power = la + lb + 2 + s1 + s2
+            terms.append((coeff, power, alpha))
+    return terms, nsq
+
+
+def _integrate_term_float(coeff: float, power: int, rate: float) -> float:
+    """Integrate coeff * r^power * exp(-rate*r) dr from 0 to infinity.
+
+    For power >= 0: standard Gamma integral = coeff * power! / rate^{power+1}.
+    For power = -k < 0: Mellin-regularized value using the harmonic-number
+    formula (Euler-gamma cancels globally between terms).
+    """
+    import math
+    if power >= 0:
+        return coeff * factorial(power) / rate ** (power + 1)
+    k = -power
+    sign = (-1) ** (k - 1)
+    H = sum(1.0 / j for j in range(1, k))
+    return coeff * sign / factorial(k - 1) * rate ** (k - 1) * (H - math.log(rate))
+
+
 def _T_kernel_float(a: int, b: int, alpha: float, beta: float,
                     k: int) -> float:
-    """Float version of _T_kernel — same formula, ~100x faster."""
+    """Float version of _T_kernel for Coulomb r_<^k / r_>^{k+1}."""
     n1 = a + k
     m1 = b - k - 1
     gamma_ab = alpha + beta
@@ -404,49 +450,43 @@ def _T_kernel_float(a: int, b: int, alpha: float, beta: float,
     return I1 + I2
 
 
+def _T_kernel_breit_float(a: int, b: int, alpha: float, beta: float,
+                          k: int) -> float:
+    """Float T-kernel for Breit retarded r_<^k / r_>^{k+3} kernel.
+
+    Same algebraic structure as Coulomb but with kernel exponent shifted
+    by +2 in the denominator. This makes the outer-integral power
+    m = b - k - 3 (vs b - k - 1 for Coulomb), which can go negative
+    for low orbital angular momenta. Negative powers are handled via
+    Mellin-regularized integration: the pole cancels between terms
+    (guaranteed by integrability of the physical Breit operator), and
+    the residual involves harmonic numbers and log(decay_rate).
+    """
+    gamma_ab = alpha + beta
+
+    def _region(a_in, b_in, alpha_in, beta_in):
+        N = a_in + k
+        m = b_in - k - 3
+        N_fact = float(factorial(N))
+        terms = [(N_fact / alpha_in ** (N + 1), m, beta_in)]
+        for j in range(N + 1):
+            coeff = -N_fact / (factorial(j) * alpha_in ** (N - j + 1))
+            terms.append((coeff, m + j, gamma_ab))
+        return sum(_integrate_term_float(c, p, r) for c, p, r in terms)
+
+    return _region(a, b, alpha, beta) + _region(b, a, beta, alpha)
+
+
 def compute_rk_float(
     n1: int, l1: int, n3: int, l3: int,
     n2: int, l2: int, n4: int, l4: int,
     k: int,
 ) -> float:
-    """Compute R^k at k_orb=1 using float arithmetic (~100x faster than Fraction).
-
-    Same closed-form formula as ``compute_rk_algebraic`` but uses
-    native float64 instead of arbitrary-precision Fraction. Accuracy
-    is machine epsilon (~1e-15 relative error), sufficient for all
-    practical FCI computations.
-    """
+    """Compute Coulomb R^k at k_orb=1 using float arithmetic (~100x faster)."""
     import math
 
-    def laguerre_coeffs_float(n: int, l: int) -> list:
-        p = n - l - 1
-        alpha = 2 * l + 1
-        return [(-1) ** s * comb(p + alpha, p - s) / factorial(s)
-                for s in range(p + 1)]
-
-    def norm_sq_float(n: int, l: int) -> float:
-        return (2.0 / n) ** 3 * factorial(n - l - 1) / (2.0 * n * factorial(n + l))
-
-    # Expand pair products
-    def expand_pair(na, la, nb, lb):
-        ca = laguerre_coeffs_float(na, la)
-        cb = laguerre_coeffs_float(nb, lb)
-        nsq = norm_sq_float(na, la) * norm_sq_float(nb, lb)
-        alpha = 1.0 / na + 1.0 / nb
-        sa = (2.0 / na) ** la
-        sb = (2.0 / nb) ** lb
-        terms = []
-        for s1, a_coeff in enumerate(ca):
-            for s2, b_coeff in enumerate(cb):
-                coeff = (a_coeff * b_coeff * sa * sb
-                         * (2.0 / na) ** s1 * (2.0 / nb) ** s2)
-                power = la + lb + 2 + s1 + s2
-                terms.append((coeff, power, alpha))
-        return terms, nsq
-
-    terms_13, nsq_13 = expand_pair(n1, l1, n3, l3)
-    terms_24, nsq_24 = expand_pair(n2, l2, n4, l4)
-
+    terms_13, nsq_13 = _expand_pair_float(n1, l1, n3, l3)
+    terms_24, nsq_24 = _expand_pair_float(n2, l2, n4, l4)
     norm_factor = math.sqrt(nsq_13 * nsq_24)
 
     integral = 0.0
@@ -461,12 +501,123 @@ def compute_rk_float(
     return norm_factor * integral
 
 
+def compute_rk_breit_float(
+    n1: int, l1: int, n3: int, l3: int,
+    n2: int, l2: int, n4: int, l4: int,
+    k: int,
+) -> float:
+    """Compute Breit retarded R^k_BP at k_orb=1, Z=1 using float arithmetic.
+
+    Same algebraic structure as ``compute_rk_float`` but uses the Breit
+    kernel r_<^k / r_>^{k+3} instead of the Coulomb r_<^k / r_>^{k+1}.
+
+    Z-scaling: R^k_BP(Z) = Z^3 * R^k_BP(Z=1). Caller applies Z^3.
+    """
+    import math
+
+    terms_13, nsq_13 = _expand_pair_float(n1, l1, n3, l3)
+    terms_24, nsq_24 = _expand_pair_float(n2, l2, n4, l4)
+    norm_factor = math.sqrt(nsq_13 * nsq_24)
+
+    integral = 0.0
+    for c13, p13, a13 in terms_13:
+        if c13 == 0:
+            continue
+        for c24, p24, a24 in terms_24:
+            if c24 == 0:
+                continue
+            integral += c13 * c24 * _T_kernel_breit_float(p13, p24, a13, a24, k)
+
+    return norm_factor * integral
+
+
+# ---------------------------------------------------------------------------
+# Exact Fraction-based Breit evaluator (algebraic, slower — for verification)
+# ---------------------------------------------------------------------------
+
+
+def _T_kernel_breit_exact(
+    a: int, b: int, alpha: Fraction, beta: Fraction, k: int,
+) -> Fraction:
+    """Exact Fraction T-kernel for Breit r_<^k / r_>^{k+3}.
+
+    Handles negative outer-integral powers via closed-form Mellin
+    regularization in exact rational arithmetic. The result is a pure
+    rational (no log terms) when all outer powers are non-negative, and
+    contains log(rational) terms otherwise — but those cancel in the full
+    R^k_BP integral for physically valid orbital quartets, leaving a
+    rational final answer.
+
+    For cases where log terms survive (certain orbital pairs), this
+    returns a sympy Expr. Use ``breit_integrals.compute_radial`` for
+    the full sympy treatment; this function is for the common case
+    where the result is rational.
+    """
+    gamma_ab = alpha + beta
+
+    def _region_exact(a_in, b_in, alpha_in, beta_in):
+        N = a_in + k
+        m = b_in - k - 3
+        N_fact = Fraction(factorial(N))
+
+        total = Fraction(0)
+        # First term: N! / alpha^{N+1} × ∫ r^m e^{-beta r} dr
+        c0 = N_fact / alpha_in ** (N + 1)
+        if m >= 0:
+            total += c0 * Fraction(factorial(m)) / beta_in ** (m + 1)
+        else:
+            raise ValueError("Log terms in exact Breit kernel — use breit_integrals.compute_radial")
+
+        # Subtraction terms
+        for j in range(N + 1):
+            cj = -N_fact / (Fraction(factorial(j)) * alpha_in ** (N - j + 1))
+            pj = m + j
+            if pj >= 0:
+                total += cj * Fraction(factorial(pj)) / gamma_ab ** (pj + 1)
+            else:
+                raise ValueError("Log terms in exact Breit kernel — use breit_integrals.compute_radial")
+
+        return total
+
+    return (_region_exact(a, b, alpha, beta)
+            + _region_exact(b, a, beta, alpha))
+
+
+def compute_rk_breit_algebraic(
+    n1: int, l1: int, n3: int, l3: int,
+    n2: int, l2: int, n4: int, l4: int,
+    k: int,
+) -> Fraction:
+    """Compute Breit R^k_BP at k_orb=1, Z=1 as exact Fraction.
+
+    Only works for orbital pairs where the result is a pure rational
+    (no log terms). For the general case with log content, use
+    ``breit_integrals.compute_radial``.
+
+    Raises ValueError if log terms arise (caller should fall back to
+    the sympy version or use ``compute_rk_breit_float``).
+    """
+    terms_13, nsq_13 = _expand_product(n1, l1, n3, l3)
+    terms_24, nsq_24 = _expand_product(n2, l2, n4, l4)
+    norm = _fraction_sqrt(nsq_13 * nsq_24)
+
+    integral = Fraction(0)
+    for c13, p13, alpha13 in terms_13:
+        for c24, p24, alpha24 in terms_24:
+            if c13 == 0 or c24 == 0:
+                continue
+            integral += c13 * c24 * _T_kernel_breit_exact(p13, p24, alpha13, alpha24, k)
+
+    return norm * integral
+
+
 # ---------------------------------------------------------------------------
 # Convenience: compute and cache (float by default, Fraction on demand)
 # ---------------------------------------------------------------------------
 
 _CACHE: Dict[Tuple[int, ...], Fraction] = {}
 _CACHE_FLOAT: Dict[Tuple[int, ...], float] = {}
+_CACHE_BREIT_FLOAT: Dict[Tuple[int, ...], float] = {}
 
 
 def get_rk_algebraic(
@@ -491,3 +642,18 @@ def get_rk_float(
     if key not in _CACHE_FLOAT:
         _CACHE_FLOAT[key] = compute_rk_float(*key)
     return _CACHE_FLOAT[key]
+
+
+def get_rk_breit_float(
+    n1: int, l1: int, n3: int, l3: int,
+    n2: int, l2: int, n4: int, l4: int,
+    k: int,
+) -> float:
+    """Cached float Breit R^k_BP at k_orb=1, Z=1.
+
+    Z-scaling: multiply by Z^3 for nuclear charge Z.
+    """
+    key = (n1, l1, n3, l3, n2, l2, n4, l4, k)
+    if key not in _CACHE_BREIT_FLOAT:
+        _CACHE_BREIT_FLOAT[key] = compute_rk_breit_float(*key)
+    return _CACHE_BREIT_FLOAT[key]

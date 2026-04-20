@@ -3,7 +3,11 @@
 Tests the three-loop iterated sunset diagram: three electron lines connected
 by two photon lines in a chain topology, with SO(4) vertex selection rules
 at each vertex.
+
+Includes tests for the O(N^3) factorized algorithm (Track Q-2).
 """
+
+import time
 
 import pytest
 import mpmath
@@ -16,6 +20,10 @@ from geovac.qed_three_loop import (
     three_loop_convergence_table,
     decompose_three_loop,
     classify_three_loop_transcendentals,
+    three_loop_factorized,
+    three_loop_factorized_convergence,
+    decompose_three_loop_mzv,
+    three_loop_euler_maclaurin_tail,
 )
 
 
@@ -142,3 +150,179 @@ class TestThreeLoopSlow:
         r = three_loop_sunset_s3(n_max=20)
         # Should be approaching D(4)^3 ~ 5.38 from below or above
         assert r["value_float"] > 3.0
+
+
+# ============================================================================
+# Track Q-2: Factorized O(N^3) three-loop sum
+# ============================================================================
+
+class TestFactorizedMatchesDirect:
+    """Verify the factorized O(N^3) algorithm matches the direct O(N^5) sum."""
+
+    def test_factorized_matches_direct_cg_n5(self):
+        """Factorized CG-weighted at n_max=5 matches direct to high precision."""
+        direct = three_loop_sunset_s3(
+            n_max=5, electron_exponent=4, photon_exponent=1,
+            use_cg_weights=True,
+        )
+        factorized = three_loop_factorized(
+            n_max=5, a=4, p=1, use_cg_weights=True,
+        )
+        # Must match to at least 25 significant digits
+        diff = abs(direct["value"] - factorized["value"])
+        assert diff < mpmath.mpf(10) ** (-25), (
+            f"Mismatch: direct={float(direct['value'])}, "
+            f"factorized={float(factorized['value'])}, diff={float(diff)}"
+        )
+
+    def test_factorized_matches_direct_cg_n10(self):
+        """Factorized CG-weighted at n_max=10 matches direct to 1e-25."""
+        direct = three_loop_sunset_s3(
+            n_max=10, electron_exponent=4, photon_exponent=1,
+            use_cg_weights=True,
+        )
+        factorized = three_loop_factorized(
+            n_max=10, a=4, p=1, use_cg_weights=True,
+        )
+        diff = abs(direct["value"] - factorized["value"])
+        assert diff < mpmath.mpf(10) ** (-25), (
+            f"Mismatch at n_max=10: diff={float(diff)}"
+        )
+
+    def test_factorized_matches_direct_vertex_restricted(self):
+        """Factorized with W=1 (vertex-restricted) matches direct."""
+        direct = three_loop_sunset_s3(
+            n_max=7, electron_exponent=4, photon_exponent=1,
+            use_cg_weights=False,
+        )
+        factorized = three_loop_factorized(
+            n_max=7, a=4, p=1, use_cg_weights=False,
+        )
+        diff = abs(direct["value"] - factorized["value"])
+        assert diff < mpmath.mpf(10) ** (-25), (
+            f"Vertex-restricted mismatch at n_max=7: diff={float(diff)}"
+        )
+
+    def test_factorized_matches_direct_higher_exponents(self):
+        """Factorized matches direct with non-default exponents."""
+        direct = three_loop_sunset_s3(
+            n_max=5, electron_exponent=6, photon_exponent=2,
+            use_cg_weights=True,
+        )
+        factorized = three_loop_factorized(
+            n_max=5, a=6, p=2, use_cg_weights=True,
+        )
+        diff = abs(direct["value"] - factorized["value"])
+        assert diff < mpmath.mpf(10) ** (-25), (
+            f"Higher exponents mismatch: diff={float(diff)}"
+        )
+
+
+class TestFactorizedConvergence:
+    """Convergence and performance tests for the factorized sum."""
+
+    def test_factorized_convergence_monotonic(self):
+        """Value changes monotonically with n_max (for the default sum)."""
+        vals = []
+        for n in [5, 10, 15]:
+            r = three_loop_factorized(n_max=n, a=4, p=1, use_cg_weights=True)
+            vals.append(r["value"])
+        # The sum should increase monotonically (more terms, all positive contributions)
+        for i in range(1, len(vals)):
+            assert vals[i] > vals[i - 1], (
+                f"Non-monotone: S({[5,10,15][i-1]})={float(vals[i-1])}, "
+                f"S({[5,10,15][i]})={float(vals[i])}"
+            )
+
+    def test_factorized_speed_n50(self):
+        """n_max=50 completes in < 60 seconds."""
+        t0 = time.perf_counter()
+        r = three_loop_factorized(n_max=50, a=4, p=1, use_cg_weights=True)
+        elapsed = time.perf_counter() - t0
+        assert r["value_float"] > 0
+        assert elapsed < 60, f"n_max=50 took {elapsed:.1f}s (limit: 60s)"
+
+    def test_factorized_convergence_table_structure(self):
+        """Convergence table has expected structure."""
+        table = three_loop_factorized_convergence(
+            n_max_values=[5, 10, 15], a=4, p=1,
+        )
+        assert len(table) == 3
+        assert table[0]["delta_from_previous"] is None
+        assert table[1]["delta_from_previous"] > 0
+        assert table[2]["delta_from_previous"] > 0
+        # Delta should decrease (convergence)
+        assert table[2]["delta_from_previous"] < table[1]["delta_from_previous"]
+        # All entries have timing
+        for row in table:
+            assert "time_seconds" in row
+            assert row["time_seconds"] > 0
+
+
+class TestEulerMaclaurinTail:
+    """Tests for the Euler-Maclaurin tail correction."""
+
+    def test_tail_correction_positive_direction(self):
+        """For this monotonically increasing sum, tail should be positive."""
+        tail = three_loop_euler_maclaurin_tail(n_max=15, n_em_terms=5, a=4, p=1)
+        # The sum is increasing, so the tail estimate should be positive
+        assert float(tail) > 0, f"Tail correction is negative: {float(tail)}"
+
+    def test_tail_correction_finite(self):
+        """Tail correction returns a finite value."""
+        tail = three_loop_euler_maclaurin_tail(n_max=15, n_em_terms=5, a=4, p=1)
+        assert mpmath.isfinite(tail)
+
+    def test_tail_correction_converging_sum(self):
+        """For a well-converging sum (higher exponent), tail improves estimate."""
+        # With a=6, p=2 the sum converges faster
+        r20 = three_loop_factorized(n_max=20, a=6, p=2, use_cg_weights=True)
+        r15 = three_loop_factorized(n_max=15, a=6, p=2, use_cg_weights=True)
+        gap_raw = abs(float(r20["value"] - r15["value"]))
+
+        tail = three_loop_euler_maclaurin_tail(n_max=15, n_em_terms=5, a=6, p=2)
+        corrected = r15["value"] + tail
+        gap_corrected = abs(float(r20["value"] - corrected))
+        # For this faster-converging sum, the tail should help
+        assert gap_corrected < gap_raw, (
+            f"Tail correction did not help for fast-converging sum: "
+            f"raw gap={gap_raw}, corrected gap={gap_corrected}"
+        )
+
+
+class TestDecomposeMZV:
+    """Tests for the extended MZV PSLQ decomposition."""
+
+    def test_decompose_known_pi_even(self):
+        """A known pi^{even} value should be identified."""
+        # D(4) = pi^2 - pi^4/12, a simple weight-4 pi^{even} value
+        from geovac.qed_three_loop import _dirac_D
+        D4 = _dirac_D(4)
+        result = decompose_three_loop_mzv(D4, n_digits=50)
+        assert result["identified"], "Failed to identify D(4)"
+        assert result["basis_tier"] == 0
+
+    def test_decompose_returns_dict(self):
+        """decompose_three_loop_mzv returns a well-formed dict."""
+        val = mpmath.mpf("3.14159265358979")
+        result = decompose_three_loop_mzv(val, n_digits=14)
+        assert isinstance(result, dict)
+        assert "identified" in result
+
+    def test_decompose_rational(self):
+        """A rational number should be identified as such."""
+        val = mpmath.mpf("42") / mpmath.mpf("17")
+        result = decompose_three_loop_mzv(val, n_digits=50)
+        assert result["identified"]
+        assert "1" in result.get("components", {})
+
+
+@pytest.mark.slow
+class TestFactorizedSlow:
+    """Slow factorized tests (n_max=100+)."""
+
+    def test_factorized_n100(self):
+        """n_max=100 completes and gives a positive value."""
+        r = three_loop_factorized(n_max=100, a=4, p=1, use_cg_weights=True)
+        assert r["value_float"] > 0
+        assert r["time_seconds"] < 600  # 10 minute limit
