@@ -1,0 +1,201 @@
+======================================================================
+S_min IDENTIFICATION ATTEMPT
+======================================================================
+Working precision: 150 digits
+
+Step 1: Computing S_min at high precision...
+  Raw sum (5000 terms): 2.47913717796846077336447120887135705722006728987434621025505
+  Tail correction:      1.06538765591926228885375330431e-11
+  Corrected S_min:      2.47913717797911464992366383175989459026317665332115120395754
+  Time: 20.1s
+
+  Convergence check with 10000 terms...
+  Raw sum (10000 terms): 2.4795369980260013320891205172985129356134294027492989600125
+  Corrected S_min:       2.47953699802733386573169120967095568216744156767274059479172
+  Diff(corrected):       0.00039982004821921580803
+  Time: 42.2s
+
+  Using S_min = 2.4795369980273338657316912096709556821674415676727405947917201180197870714006952
+
+======================================================================
+Step 2: Computing basis constants...
+  D(4)    = 1.75218014825582218246446327582
+  D(4)^2  = 3.07013527194179500312997752377
+  S_min   = 2.47953699802733386573169120967
+  ratio   = 0.80763118833493
+
+======================================================================
+Step 3: PSLQ identification attempts
+======================================================================
+
+  Attempt: original_18
+  Basis size: 18 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: with_polylog
+  Basis size: 15 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: with_gamma_cross
+  Basis size: 16 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: with_beta3_mzv
+  Basis size: 17 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: hurwitz_products
+  Basis size: 19 elements
+  PSLQ returned None (no relation found)
+
+  Computing the three component sums A, B, C...
+  A = sum zeta(2,k+3/2)^2            = 0.6320854093186427652241148689737659680962
+  B = sum zeta(2,k+3/2)*zeta(4,k+3/2) = 0.02459812418760551639113660541550718061122
+  C = sum zeta(4,k+3/2)^2            = 0.001566436506565215899737008937853697804227
+  S_min = 4A - 2B + C/4              = 2.479536998026001332089120517298512935613
+  S_min (direct)                      = 2.479536998027333865731691209670955682167
+
+  Attempt: component_sum_hz2sq
+  Basis size: 21 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: component_sum_hz2_hz4
+  Basis size: 21 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: component_sum_hz4sq
+  Basis size: 21 elements
+  PSLQ returned None (no relation found)
+
+  Attempt: with_polygamma
+  Basis size: 16 elements
+  PSLQ returned None (no relation found)
+
+  Attempting ultra-wide PSLQ...
+
+  Attempt: ultra_wide_47
+  Basis size: 47 elements
+  PSLQ returned None (no relation found)
+
+  Trying PSLQ on S_min / D(4)^2...
+
+  Attempt: ratio_Smin_D4sq
+  Basis size: 17 elements
+  PSLQ returned None (no relation found)
+
+  Trying PSLQ on the ratio directly...
+
+  Attempt: ratio_direct
+  Basis size: 17 elements
+  PSLQ returned None (no relation found)
+
+  sum_22 / zeta(2,3/2)^2 = 0.7233297261242452452524455432001981228026
+
+  Attempt: ratio_sum22_hz2sq
+  Basis size: 11 elements
+  PSLQ returned None (no relation found)
+
+  Double Hurwitz zeta values at a=3/2:
+  zeta_2(2,2;3/2) = 0.319503324238050980516031862277
+  zeta_2(2,4;3/2) = 0.0634619974359567544337538013639
+
+  Attempt: double_hurwitz
+  Basis size: 20 elements
+  PSLQ returned None (no relation found)
+
+  D_even(4) = 1.16800590438345637544750811109
+  D_odd(4)  = 0.584174243872365807016955164725
+  D(4)      = 1.75218014825582218246446327582
+  D(4) ref  = 1.75218014825582218246446327582
+
+  Attempt: even_odd_products
+  Basis size: 21 elements
+  PSLQ returned None (no relation found)
+
+======================================================================
+Step 4: Numerical exploration
+======================================================================
+
+  S_min (100 digits) =
+  2.479536998027333865731691209670955682167441567672740594791720118019787071400695160261244367875711826
+
+  Ratios with known constants:
+  S_min / pi^2                 = 0.2512296235250984031374227
+  S_min / pi^4                 = 0.02545488282158187689309112
+  S_min / zeta(3)              = 2.062745109245574154038063
+  S_min / zeta(5)              = 2.391234091023537903333099
+  S_min / G (Catalan)          = 2.707019798330545681324184
+  S_min / beta(4)              = 2.507255835185033733288736
+  S_min / G*zeta(3)            = 2.251989727953120859839989
+  S_min / G^2                  = 2.955372795156318311938047
+  S_min / beta(4)^2            = 2.535284542263604454062035
+  S_min / D(4)^2               = 0.8076311883349295094254916
+  S_min / Li3(1/2)             = 4.615554918475151680888779
+  S_min / D_even(4)^2          = 1.8175255159631308384316
+  S_min / D_odd(4)^2           = 7.265839207558316957237452
+  S_min / D_even(4)*D_odd(4)   = 3.633985161585360096188134
+
+  Testing S_min - known combinations:
+  S_min - D(4)^2                              = -0.590598273914461137398286314094
+  S_min - 2*D_even(4)*D_odd(4)                = 1.11489906596400501927446255375
+  S_min - D_even(4)^2 + D_odd(4)^2            = 0.774039658148867709058942341823
+  S_min - (De+Do)^2/2 + (De-Do)^2/2           = 0.774039658148867709058942341823
+
+======================================================================
+Step 5: Summary
+======================================================================
+
+  Total attempts: 15
+  Identified: 0
+  Failed: 15
+
+  [FAILED] original_18
+    Error: no relation
+
+  [FAILED] with_polylog
+    Error: no relation
+
+  [FAILED] with_gamma_cross
+    Error: no relation
+
+  [FAILED] with_beta3_mzv
+    Error: no relation
+
+  [FAILED] hurwitz_products
+    Error: no relation
+
+  [FAILED] component_sum_hz2sq
+    Error: no relation
+
+  [FAILED] component_sum_hz2_hz4
+    Error: no relation
+
+  [FAILED] component_sum_hz4sq
+    Error: no relation
+
+  [FAILED] with_polygamma
+    Error: no relation
+
+  [FAILED] ultra_wide_47
+    Error: no relation
+
+  [FAILED] ratio_Smin_D4sq
+    Error: no relation
+
+  [FAILED] ratio_direct
+    Error: no relation
+
+  [FAILED] ratio_sum22_hz2sq
+    Error: no relation
+
+  [FAILED] double_hurwitz
+    Error: no relation
+
+  [FAILED] even_odd_products
+    Error: no relation
+
+  Results saved to C:\Users\jlout\Desktop\Project_Geometric\debug\data\smin_identification.json
+
+======================================================================
+DONE
+======================================================================

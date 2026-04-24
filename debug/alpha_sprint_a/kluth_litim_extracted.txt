@@ -1,0 +1,3290 @@
+=== PAGE 1 ===
+arXiv:1910.00543v2  [hep-th]  1 Jul 2020
+Heat kernel coeﬃcients on the sphere in any dimension
+Yannick Kluth 1 and Daniel F. Litim 1
+1Department of Physics and Astronomy University of Sussex, B righton, BN1 9QH, U.K.
+We derive all heat kernel coeﬃcients for Laplacians acting on scalar s, vectors, and tensors
+on fully symmetric spaces, in any dimension. Final expressions are ea sy to evaluate and im-
+plement, and conﬁrmed independently using spectral sums and the Euler-Maclaurin formula.
+We also obtain the Green’s function for Laplacians acting on transve rse traceless tensors in
+any dimension, and new integral representations for heat kernels using known eigenvalue
+spectra of Laplacians. Applications to quantum gravity and the fun ctional renormalisation
+group, and other, are indicated.
+Contents
+I. Introduction 1
+II. Preliminaries 3
+A. Heat Kernel Coeﬃcients 3
+B. Renormalisation Group 5
+III. Heat Kernels from Green’s F unctions 6
+A. Green’s Function Technique 6
+B. Scalars 6
+C. Transverse Vectors 9
+D. Transverse Traceless Tensors 12
+E. Unconstrained Fields 16
+IV. Heat Kernels from Spectral Sums 19
+A. Spectral Sum Technique 19
+B. Results from Euler-Maclaurin 21
+C. Spectral Integrals 23
+D. Analytic Continuation 24
+V. Discussion 25
+A. Expansion Coeﬃcients 25
+B. Heat Kernels in Even Dimensions 27
+C. Heat Kernels from Spectral Integrals 29
+References 31
+I. INTRODUCTION
+Heat kernel techniques are well-established tools in both t heoretical physics and mathematics
+[1–5]. They aim at the computation of traces of diﬀerential op erators, and have a wide range of
+
+=== PAGE 2 ===
+2
+applications covering ﬂuctuations of quantum ﬁelds on curv ed space-times, ultraviolet divergences
+and eﬀective actions, spectral functions, quantum anomalie s, the Casimir eﬀect, quantum gravity,
+and more [6–12]. The central idea is to express a certain Gree n’s function as an integral over the
+so called proper time parameter which satisﬁes the heat equa tion. The integrand of this method,
+the heat kernel, is then a functional of the background metri c. While for some special backgrounds
+it can be calculated exactly, it is not possible to solve it fo r general manifolds. Approximation
+schemes have been introduced including the seminal Schwing er-DeWitt expansion giving rise to
+the heat kernel coeﬃcients. This asymptotic expansion at ea rly proper time works well for small
+space-time separations, which makes it a convenient tool to study short distance divergences in
+quantum ﬁeld theory. On general manifolds, the ﬁrst six heat kernel coeﬃcients are known [13–
+21]. Calculations of heat kernel coeﬃcients are greatly sim pliﬁed on speciﬁc manifolds such as
+maximally symmetric backgrounds where they can be obtained from Green’s function [9].
+Recent applications of heat kernels and spectral sums on dS o r AdS spaces cover a wide range of
+activities such as tests of the AdS/CFT correspondence for c onformal higher spin models [22, 23],
+derivations of eﬀective actions in supergravity on curved ba ckgrounds [24], and studies of trace
+anomalies from quantum mechanical path integrals [25], and more. In the context of quantum
+gravity, heat kernels appear prominently in renormalisati on group studies of Hoava gravity [26],
+and in tests of the asymptotic safety conjecture [27, 28], In the latter, speciﬁcally, heat kernels on
+maximally symmetric or Einstein spaces are used to ﬁnd beta f unctions for gravitational couplings
+[28–43]. Intriguingly, results for ﬁxed points and scaling exponents show that the canonical mass
+dimension of couplings remains a good ordering principle, w ith asymptotically safe quantum gravity
+becoming “as Gaussian as it gets” [40–43]. Further technica l choices [32, 44] are commonly adopted
+to reduce the required heat kernel coeﬃcients on spheres to a ﬁnite set [35]. In general, however,
+the ﬂow of couplings with increasing canonical mass dimensi on necessitates the knowledge of an
+increasing number of heat kernel coeﬃcients, many more than presently available.
+In this paper, we ﬁll this gap in the literature and compute al l heat kernel coeﬃcients for scalars,
+transverse vectors, and transverse traceless symmetric te nsors on fully symmetric backgrounds with
+Euclidean signature and positive curvature. Our primary in put are the known Green’s functions
+for the Laplacian acting on scalars [45] and transverse vect ors [46, 47]. In addition, we derive the
+Green’s function of the Laplacian acting on transverse trac eless tensors to ﬁnd closed expressions
+for all heat kernel coeﬃcients on spheres, in any dimension. Final expressions are easy to evaluate
+and implement, and conﬁrmed using spectral sums. We also ﬁnd new integral representations
+for heat kernels using known eigenvalue spectra of Laplacia ns and the Euler-Maclaurin formula.
+Besides their general interest, our ﬁndings enable new test s of the asymptotic safety conjecture
+without resorting to ﬂat backgrounds or spectral sums and ap proximations thereof.
+The remainder of this paper is organised as follows. In Sect. II we recall the deﬁnition of heat
+kernel coeﬃcients from asymptotic expansions (Sect. II A) and their usage to calculate functional
+traces such as in Wilson’s renormalisation group (Sect. II B). Sect. III contains the main derivation
+of heat kernel coeﬃcients. After an outline of the method (Se ct. III A) we compute the heat kernels
+for scalars (Sects. III B), transverse vectors ( III C), transverse traceless tensors ( III D), and the
+ﬁrst coeﬃcients of the asymptotic heat kernel expansion for unconstrained ﬁelds (Sect. III E). In
+Sect. IV, we derive heat kernels using spectral sums and the Euler-Ma claurin formula. After an
+outline of our methodology (Sect. IV A), we compute heat kernels for selected integer dimensions
+and conﬁrm our previous ﬁndings (Sect. IV B). We also ﬁnd new spectral integral representa-
+tions for heat kernel coeﬃcients (Sect. IV C) including in general dimensions (Sect. IV D). Three
+appendices additionally provide expansion coeﬃcients (Ap p A), heat kernel coeﬃcients in even
+dimensions (App. B), and a derivation of heat kernels from spectral integrals ( App. C). In Sect. V
+we close with a discussion of results and future application s.
+
+=== PAGE 3 ===
+3
+II. PRELIMINARIES
+In this section, we recall basic deﬁnitions for heat kernel c oeﬃcients and their usage in the
+context of Wilson’s renormalisation group. Ultimately, we aim at ﬁnding the heat kernel expansion
+for diﬀerent ﬁelds on the sphere using their corresponding Gr een’s functions. Thus, from now on
+we focus on the speciﬁc case of a fully symmetric background m anifold, even though some of the
+considerations are more general.
+A. Heat Kernel Coeﬃcients
+The heat kernel UE(t,x,y ) is deﬁned as the solution of the heat equation
+∂U E(t,x,y )
+∂t = (∇ 2 +E)UE(t,x,y ), (1)
+subject to the initial condition
+UE(0,x,y ) = δ(x − y)√ g . (2)
+Note that the kernel UE(t,x,y ) may contain Lorentz indices if we consider vector or tensor degrees
+of freedom. Throughout this section these indices are suppr essed. By deﬁnition, UE(t,x,y ) has the
+dimension of an inverse volume. Also, t is the proper time parameter with mass dimension two,
+−∇ 2 is the Laplacian, and E an endomorphism. The formal solution of (1) is given by
+UE(t,x,y ) = et(∇ 2+E). (3)
+Due to the symmetries of the chosen background, UE(t,x,y ) can only depend on the proper time
+t and the distance between the points x and y. Therefore, deﬁning σ to be half the square of the
+geodesic distance between x and y, we may write
+UE(t,x,y ) = UE(t,σ ). (4)
+For early times we expand the heat kernel as an asymptotic ser ies following the DeWitt ansatz
+UE(t,σ ) = ∆1/ 2
+(4πt )d/ 2 exp
+{
+− σ
+2t
+} ∞∑
+n=0
+[
+˜b2n(E,σ )tn + ˜cd+2n(E,σ )td/ 2+n
+]
+, (5)
+where ∆ is the Van Fleck-Morette determinant
+∆ = det
+[
+−∇ x
+µ ∇ y
+νσ (x,y )
+]
+g1/ 2(x)g1/ 2(y) . (6)
+By deﬁnition, the heat kernel coeﬃcients ˜bm and ˜cm have canonical mass dimension m in any
+dimension. Just as UE, these coeﬃcients may carry Lorentz indices which are suppr essed here.
+Note that the ansatz (5) seems slightly diﬀerent from those us ed in the literature [9, 42, 48,
+49] through the appearance of the coeﬃcients ˜ cd+2n. These terms only arise for heat kernels of
+constrained ﬁelds, such as transverse vector and transvers e traceless tensor ﬁelds, and are related
+to the exclusion of lowest modes [11, 50–52]. Excluded modes always produce contributions of
+the form exp(αRt ) which invariably give rise to terms with positive integer p owers of the proper-
+time parameter when expanded for small times. For even dimen sions, the terms ˜cd+2n could be
+
+=== PAGE 4 ===
+4
+combined with the ˜bd+2n coeﬃcients of the same mass dimension. In odd dimensions, ho wever, all
+˜cd+2n coeﬃcients have mass dimensions diﬀerent from all ˜b2n coeﬃcients, and cannot be combined
+into a single coeﬃcient. Hence, for the sake of generality, a nd given their distinctly diﬀerent origins,
+we keep these coeﬃcients separate for now. The coeﬃcients ˜ cd+2n vanish for unconstrained ﬁelds
+as we will show a posteriori (see Sect. III E).
+Since we are ultimately interested in the trace of the heat ke rnel, we only need the coincidence
+limit of UE(t,σ ). Using (5), we deﬁne the coincidence limit of the heat kerne l coeﬃcients, ˜b2n(E)
+and ˜cd+2n(E), for given endomorphism E as
+˜b2n(E) = ˜b2n(E, 0), ˜cd+2n(E) = ˜cd+2n(E, 0). (7)
+Then, the trace of the heat kernel is given by
+TrsUE(t,σ ) = 1
+(4πt )d/ 2
+∞∑
+n=0
+[
+Trs [˜b2n(E)]tn + Trs [˜cd+2n(E)]td/ 2+n
+]
+, (8)
+where the trace acts on the coordinate dependence as well as a ny Lorentz indices carried by ˜b2n
+and ˜cd+2n. Further, the index s denotes the spin of the ﬁeld w.r.t. which the trace is acting o n.
+Since the heat kernel coeﬃcients are coordinate independen t on a fully symmetric background, we
+may deﬁne
+b(s)
+n (E) = 1
+VolTrs[˜bn(E)], c (s)
+n (E) = 1
+VolTrs[˜cn(E)], (9)
+in which the volume of the d-dimensional sphere is
+Vol = 2π (d+1)/ 2
+Γ
+(d+1
+2
+)
+(d(d − 1)
+R
+)d/ 2
+(10)
+and R denotes the Ricci scalar curvature. This allows us to write
+TrsUE(t,σ ) = Vol
+(4πt )d/ 2
+∞∑
+n=0
+[
+b(s)
+2n (E)tn +c(s)
+d+2n(E)td/ 2+n
+]
+. (11)
+Finally, we notice that the heat kernel for a given endomorph ismE is related to that for any other
+endomorphism E by
+UE(t,σ ) = et(E− E)UE(t,σ ), (12)
+assuming that the endomorphism commutes with the covariant derivative on the sphere. This
+relation implies that the corresponding heat kernel coeﬃci ents are related by
+b(s)
+2n (E) =
+n∑
+k=0
+(
+E − E
+)k
+k! b(s)
+2(n− k)(E),
+c(s)
+d+2n(E) =
+n∑
+k=0
+(
+E − E
+)k
+k! c(s)
+d+2(n− k)(E),
+(13)
+which serves as a deﬁnition of heat kernel coeﬃcients for arb itrary endomorphisms.
+
+=== PAGE 5 ===
+5
+B. Renormalisation Group
+An important area for the application of heat kernels is Wils on’s (functional) renormalisation
+group. The technique amounts to the introduction of an infra red momentum cutoﬀ k into the path
+integral deﬁnition of quantum or statistical ﬁeld theory, w hich induces a scale-dependence k∂k in
+the form of an exact functional ﬂow for the eﬀective action Γ k (see [53–55] for reviews),
+k∂kΓk = 1
+2 Tr
+{(
+k∂kRk
+) (
+Γ(2)
+k + Rk
+)− 1}
+. (14)
+Here, Γ (2)
+k denotes the second variation of Γ k. The function Rk denotes the Wilsonian IR regulator,
+chosen such that Γ k interpolates between the microscopic theory (1 /k → 0) and the full quantum
+eﬀective action ( k → 0), see [44]. At weak coupling, iterative solutions generat e perturbation
+theory to all loop orders [56, 57]. At strong coupling, non-p erturbative approximations such as the
+derivative expansion, vertex expansions, or mixtures ther eof are available [53, 58, 59]. The stability
+and convergence of approximations can be controlled as well [60–62].
+Our main point here relates to the operator trace in (14), whi ch for many applications can be
+evaluated on ﬂat Euclidean backgrounds. For quantum ﬁeld th eories on curved backgrounds, or
+for studies of fully-ﬂedged quantum gravity, it is often con venient to evaluate the operator trace on
+suitably chosen non-ﬂat backgrounds [29, 31, 63, 64] also us ing the background ﬁeld method [65]
+and optimised cutoﬀs [32, 44, 66, 67]. In quantum gravity, thi s has enabled advanced tests of the
+asymptotic safety conjecture on spheres [32, 33, 35, 40, 41, 43, 68]. Further applications of heat
+kernels include ﬂow equations on Einstein [69] or hyperboli c spaces [70], critical ﬁelds on curved
+backgrounds [71], low energy eﬀective actions [72], and prop er-time ﬂows [73].
+To see how heat kernel coeﬃcients enter in this methodology w e note that typical contributions
+on the right-hand side of (14) are given by traces of operator s in the form (k∂kRk)(Γ(2)
+k +Rk)− 1. Af-
+ter inserting the second variation matrix and choosing a reg ulator the integrand can be represented
+as a (matrix-valued) function W (−∇ 2) of the Laplacian. Using the Laplace anti-transformation
+W (z) =
+∫ ∞
+0
+dt ˜W (t)e− tz,
+we may then express the desired trace as
+TrW (−∇ 2) =
+∫ ∞
+0
+dt ˜W (t) Tret∇ 2
+. (15)
+Crucially, the trace Tr et∇ 2
+appearing on the right-hand side is the trace of the heat kern el with
+vanishing endomorphism (3). Thus, the early time expansion (5) allows us to evaluate the trace
+(15) in terms of the heat kernel coeﬃcients b2n and cd+2n via
+TrW (−∇ 2) = Vol
+(4π )d/ 2
+∞∑
+n=0
+[
+b2n(0)
+∫ ∞
+0
+dtt n− d/ 2 ˜W (t) +cd+2n(0)
+∫ ∞
+0
+dtt n ˜W (t)
+]
+. (16)
+We conclude that the heat kernel coeﬃcients b2n(0) and cd+2n(0) are key inputs for Wilsonian ﬂows
+on maximally symmetric backgrounds. The calculation of all heat kernel coeﬃcients b2n andcd+2n
+(n ≥ 0) on spheres in arbitrary dimension is the topic of the follo wing sections.
+
+=== PAGE 6 ===
+6
+III. HEA T KERNELS FROM GREEN’S FUNCTIONS
+In this section, we ﬁnd Green’s functions for scalars, trans verse vectors, and transverse traceless
+tensors and use these to extract heat kernel coeﬃcients for L aplacians on spheres in any dimension.
+We also give results for heat kernels of unconstrained vecto rs and tensors.
+A. Green’s F unction T echnique
+Our methodology largely follows Avramidi [9] and starts by n oting that the heat kernel deﬁned
+in (5) can be connected to a Green’s function using the Schwin ger-DeWitt representation
+G(σ ) =
+∫ ∞
+0
+dte − tm2
+UE(t,σ ). (17)
+By deﬁnition, G(σ ) has canonical mass dimension M d− 2. Using (1) with (2) it is straightforward
+to show that G(σ ) in (17) is a Green’s function for the diﬀerential operator ( −∇ 2 +m2 − E). In
+the coincidence limit σ = 0, we can write
+TrsG(σ )
+Vol = 1
+(4π )d/ 2
+∫ ∞
+0
+dte − tm2
+∞∑
+n=0
+[
+b(s)
+2n (E)t− d/ 2+n +c(s)
+d+2n(E)tn
+]
+. (18)
+Note that the trace on the left-hand side eﬀectively only take s the trace of the tensor structure
+of G(σ ), the trace over the coordinate dependence drops out due to t he volume factor in the
+denominator. Recalling the elementary deﬁnition of the Γ-f unction, Γ(n + 1) =
+∫ ∞
+0 dss ne− s, and
+substituting s =tm2, the t-integration in (18) is performed term by term. Doing so, the Green’s
+function takes the form of a large- m expansion
+TrsG(σ )
+Vol = md− 2
+(4π )d/ 2
+∞∑
+n=0
+[
+Γ(n − d
+2 + 1)b(s)
+2n (E)
+m2n + Γ(n + 1)c(s)
+d+2n(E)
+md+2n
+]
+. (19)
+Hence, by calculating the large-m expansion of the Green’s function at its coincidence limit, we may
+read oﬀ the heat kernel coeﬃcients as the corresponding Tayl or coeﬃcients. This fact is exploited
+below to calculate all heat kernel coeﬃcients for scalars, t ransverse vectors, and transverse traceless
+symmetric tensors.
+B. Scalars
+We begin with the Green’s function for scalar ﬁelds GQ(σ ) to explain how the corresponding
+heat kernel coeﬃcients are computed in practice. This follo ws closely the derivation given in [9].
+The Green’s function for scalar ﬁelds is the solution of the d iﬀerential equation
+(−∇ 2 +Q)GQ(σ ) = 1√gδ(x − y). (20)
+In [45, 74, 75] it has been explained why solutions can be expr essed in terms of a hypergeometric
+function,
+GQ(σ ) = Γ(a)Γ(b)
+Γ(d/ 2)
+r2− d
+(4π )d/ 2 2F1(a,b ;c;z) (21)
+
+=== PAGE 7 ===
+7
+with parameters
+a = d − 1
+2 +ξ, b = d − 1
+2 − ξ, c = d
+2, ξ =
+√
+(d − 1)2
+4 − Qr2, (22)
+and
+z = cos 2
+(√ σ
+2r2
+)
+. (23)
+In the latter, r denotes the radius of the sphere which relates to the Ricci sc alar curvature R as
+R
+d(d − 1) =r− 2. (24)
+To ﬁnd the coincidence limit for (21), we follow Avramidi [9] and exploit a useful representation
+for the hypergeometric function [76]
+2F1(a,b ;c; 1) = Γ(c)Γ(c − a − b)
+Γ(c − a)Γ(c − b)
+to arrive at
+GQ(0) = r2− d
+(4π )d/ 2 Γ
+(
+1 − d
+2
+) Γ
+(d− 1
+2 +ξ
+)
+Γ
+(d− 1
+2 − ξ
+)
+Γ
+(1
+2 +ξ
+)
+Γ
+(1
+2 − ξ
+) . (25)
+The large mass expansion requires an expansion of the Gamma f unctions which can be done noting
+that [77]
+ln [Γ(α +ξ)] = (α +ξ − 1
+2 ) ln(ξ) − ξ + 1
+2 ln(2π ) +
+∞∑
+n=2
+(− 1)nBn(α )
+n(n − 1)ξn− 1 ,
+with |ξ| → ∞ , |ph(ξ)|<π , and Bn(x) being the Bernoulli polynomials. Then, using Bn( 1
+2 ) = 0 for
+n = odd, we ﬁnd
+Γ
+(d− 1
+2 +ξ
+)
+Γ
+(d− 1
+2 − ξ
+)
+Γ
+(1
+2 +ξ
+)
+Γ
+(1
+2 − ξ
+) =
+∞∑
+n=0
+κn(d)
+(
+−ξ2)d/ 2− 1− n
+, (26)
+with the generating function for the coeﬃcients κn(d) given by
+exp
+∞∑
+n=1
+(− 1)n+1
+n(2n + 1)B2n+1
+(d − 1
+2
+)
+zn =
+∞∑
+n=0
+κn(d)zn. (27)
+Note that the expression (26) is only valid for ℑ (ξ) ̸= 0. To proceed, we split Q into a mass part
+m2 and an endomorphism part E throughQ =m2 − E. The endomorphism part E can be chosen
+such that ξ becomes proportional to the mass m. Using (22) with (24), this requirement uniquely
+ﬁxes the endomorphism E =
+E and ξ to
+E = 1 − d
+4d R,
+−ξ2 = d(d − 1)m2
+R ,
+(28)
+
+=== PAGE 8 ===
+8
+d = 2 d = 3 d = 4 d = 5 d = 6
+b(0)
+0
+1 1 1 1 1
+b(0)
+2
+1
+6R 1
+6R 1
+6R 1
+6R 1
+6R
+b(0)
+4
+1
+60R2 1
+72R2 29
+2160R2 1
+75R2 1
+75R2
+b(0)
+6
+1
+630R3 1
+1296R3 37
+54432R3 1
+1500R3 1139
+1701000R3
+b(0)
+8
+1
+5040R4 1
+31104R4 149
+6531840R4 1
+45000R4 833
+36450000R4
+b(0)
+10
+1
+27720R5 1
+933120R5 179
+431101440R5 1
+2250000R5 137
+267300000R5
+T able 1. The scalar heat kernel coeﬃcients for diﬀerent integer dimension s and vanishing endomorphism.
+and we get
+GQ(0)
+⏐
+⏐
+⏐
+E
+= 1
+(4π )d/ 2 Γ
+(
+1 − d
+2
+) ∞∑
+n=0
+κn(d)r− 2nmd− 2− 2n. (29)
+For the endomorphism (28) we can now read oﬀ the heat kernel co eﬃcients b(0)
+2n and c(0)
+d+2n by
+comparison with (19). To distinguish them, we note that the c oeﬃcients c(0)
+d+2n enter with d-
+independent integer powers of m in (19) while the coeﬃcients b(0)
+2n haved-dependent powers of m.
+Moreover, the coeﬃcients b(0)
+2n (c(0)
+d+2n) are linear in (independent of) the parameters κi(d). This is
+because the d-dependent powers of m originate from (26) which is linear in the κi(d). Exploiting
+this fact, we get from (29)
+b(0)
+2n
+(
+E
+)
+= Γ
+(
+1 − d
+2
+)
+Γ
+(
+1 +n − d
+2
+)
+( R
+d(d − 1)
+)n
+κn(d),
+c(0)
+d+2n
+(
+E
+)
+= 0,
+(30)
+with κn(d) determined through (27). Moreover, with the help of (13), w e ﬁnd the heat kernel
+coeﬃcients for scalar ﬁelds and arbitrary endomorphism E,
+b(0)
+2n (E) =
+n∑
+k=0
+Γ
+(
+1 − d
+2
+)
+k! Γ
+(
+1 +n − k − d
+2
+)
+((d − 1)R
+4d +E
+)k ( R
+(d − 1)d
+)n− k
+κn− k(d),
+c(0)
+d+2n(E) = 0.
+(31)
+Tab. 1 summarises our results for the ﬁrst few scalar heat kernel co eﬃcients (31) for E = 0 and a
+selection of integer dimensions.
+Finally, we note that the heat kernel expansion with (31) is a symptotic in even dimensions but
+has a ﬁnite radius of convergence in odd ones, owing to the pro pagator (25) being non-ﬁnite only
+in even dimensions [9]. The result generalises to non-integ er dimensions.
+
+=== PAGE 9 ===
+9
+C. T ransverse V ectors
+Next, we determine the heat kernel coeﬃcients for transvers e vector ﬁelds. To that end, we
+review the derivation of the transverse vector Green’s func tion, closely following [46, 75]. We then
+exploit the result to derive all heat kernel coeﬃcients for t ransverse vector ﬁelds on spheres.
+It is important to notice that the Green’s function for trans verse vector ﬁelds GT
+Q,µν ′(σ ) fulﬁls
+a diﬀerential equation of the form
+(−∇ 2 +Q)GT
+Q,µν ′(σ ) = gµν ′
+√gδ(x − y) + longitudinal terms . (32)
+The longitudinal terms ensure the transversality of the rig ht-hand side. They can be derived by
+considering the full vector Green’s function and splitting it into a transverse and a longitudinal
+part. As pointed out in [46], neglecting these longitudinal terms can lead to inconsistent results
+for the Green’s function.
+To solve the diﬀerential equation for the transverse vector G reen’s function, we want to reduce
+it to a scalar function ST (σ ), which is called the structure function. For this, the tran sverse vector
+projector
+P ν
+µ =g ν
+µ ∇ 2 − ∇ ν ∇ µ, (33)
+is introduced. It fulﬁls the properties [46, 75]
+∇ µ P ν
+µ Tν = P µ
+ν (∇ µS(σ )) = 0, [∇ 2, P ν
+µ ]Tν = 0, P ν
+µ P ρ
+ν Tρ = P ρ
+µ
+(
+∇ 2 − R
+d
+)
+Tρ, (34)
+for an arbitrary vector Tµ . From this, it follow that acting with P α
+µ P β ′
+ν ′ on any bi-tensor Tαβ ′
+gives rise to a bi-tensor which is transverse in both indices . Hence, it has the right properties to
+be the Green’s function for transverse vector ﬁelds. With th is in mind, we make an ansatz for the
+transverse vector Green’s function through
+GT
+Q,µν ′(σ ) = P α
+µ P β ′
+ν ′
+(
+Rαβ ′ST (σ )
+)
+. (35)
+The bi-tensor Rαβ ′ is arbitrary and can be chosen to simplify the computations. One choice is
+given by [46, 75]
+Rαβ ′ = − 2r2∇ α ∇ β ′ sin2
+( √
+2σ
+2r
+)
+=gαβ ′ + σασβ ′
+σ sin2
+( √
+2σ
+2r
+)
+, (36)
+with σα = ∇ ασ . The right-hand side of this equation can be derived using th e relations in (43)
+and (44). It fulﬁls the property
+∇ 2 (
+Rαβ ′S(σ )
+)
+= Rαβ ′
+(
+∇ 2 + R
+d(d − 1)
+)
+S(σ ) + longitudinal, (37)
+withS(σ ) being an arbitrary scalar. Since this bi-tensor is always c ontracted with transverse vector
+projectors, the longitudinal terms can be neglected. Using the above structures and identities, and
+contracting (32) with P µ
+ρ P ν ′
+σ ′ we arrive at
+P α
+ρ P β ′
+σ ′
+[
+Rαβ ′
+(
+−∇ 2 +Q − R
+d(d − 1)
+) (
+∇ 2 + 2 − d
+d(d − 1)R
+)2
+ST (σ )
+]
+= P α
+ρ P β ′
+σ ′
+[ Rαβ ′
+√ g δ(x − y)
+]
+.
+
+=== PAGE 10 ===
+10
+We observe that the structure function for the transverse ve ctor Green’s function obeys the diﬀer-
+ential equation
+(
+−∇ 2 +Q − R
+d(d − 1)
+) (
+∇ 2 + 2 − d
+d(d − 1)R
+)2
+ST (σ ) = 1√ gδ(x − y), (38)
+which can be solved with the help of the scalar Green’s functi on [46, 75]. Its solution takes the
+explicit form
+ST (σ ) = Gχ 1,χ 2,χ 2(σ ) ≡ − ∂
+∂χ 2
+Gχ 1,χ 2(σ ), (39)
+where
+Gχ 1,χ 2(σ ) = Gχ 1(σ ) − Gχ 2(σ )
+χ 2 − χ 1
+, (40)
+and Gχ (σ ) given in (21), and all of this evaluated at
+χ 1 =Q − R
+d(d − 1), χ 2 = d − 2
+d(d − 1)R. (41)
+Using the result for the structure function, the transverse vector Green’s function is now given by
+GT
+Q,µν ′(σ ) = P α
+µ P β ′
+ν ′
+(
+Rαβ ′Gχ 1,χ 2,χ 2(σ )
+)
+. (42)
+To extract the heat kernel coeﬃcients we need to contract thi s with gµν ′
+and calculate the coinci-
+dence limit of the resulting expression. Covariant derivat ives acting on σα can be computed using
+[47]
+∇ ν ′σµ =C(σ )
+[
+gµν ′ + 1
+2σσµσν ′
+]
++ 1
+2σσµσν ′,
+∇ νσµ =A(σ )
+[
+gµν − 1
+2σσµσν
+]
++ 1
+2σσµσν,
+∇ µgαβ ′ = − A(σ ) +C(σ )
+2σ
+(
+gµασβ ′ +gµβ ′σα
+)
+,
+(43)
+with
+A(σ ) =
+√
+2σR
+d(d − 1) cot
+(√
+2σR
+d(d − 1)
+)
+, C (σ ) = −
+√
+2σR
+d(d − 1) csc
+(√
+2σR
+d(d − 1)
+)
+. (44)
+Acting with the transverse vector projectors can be simpliﬁ ed by performing a series expansion of
+Rαβ ′Gχ 1χ 2(σ ) in the coincidence limit. Observing that σµσ µ = 2σ and that σµ does not contribute
+in the coincidence limit, we may employ σµ as an expansion parameter. Coming from the transverse
+vector projectors, we have four covariant derivatives acti ng on this expression. Hence, an expansion
+up to order four in σµ is needed. Expanding the structure function as
+ST (σ ) =
+∞∑
+n=0
+ST
+nσ n, (45)
+
+=== PAGE 11 ===
+11
+the expansion of Rαβ ′Gχ 1,χ 2(σ ) gives
+Rαβ ′Gχ 1,χ 2(σ ) =ST
+0
+(
+gαβ ′ + R
+2d(d − 1)σασβ ′ − σR 2
+12d2(d − 1)2σασβ ′
+)
++ST
+1
+(
+σg αβ ′ + σR
+2d(d − 1)σασβ ′
+)
++ST
+2σ 2gαβ ′ + O (σµ )5 .
+(46)
+After acting with the projectors and contracting with gµν ′
+, we ﬁnd
+gµν ′
+GT
+Q,µν ′(0) = 8 − 5d
+3 RS T
+1 + 2d(d2 +d − 2)ST
+2 . (47)
+Explicit expressions for the expansion coeﬃcients ST
+1 and ST
+2 can be found in App. A. Inserting
+the expressions for ST
+1 and ST
+2 and using (26), we ﬁnd
+gµν ′
+GT
+Q,µν ′(0)
+= 1
+(4π )d/ 2
+(d(d − 1)
+R
+)1− d/ 2 [
+R Γ(d − 1)
+Γ
+(d
+2
+)
+(dQ − R) + π
+(
+d2Q − dQ − R
+)
+sin
+(πd
+2
+)
+Γ
+(d
+2
+)
+(dQ − R)
+∞∑
+k=0
+κk(d)
+(
+−ξ
+2)d/ 2− k− 1
+]
+,
+(48)
+with
+ξ = 1
+2
+√
+d
+(
+− 4(d − 1)Q
+R +d − 2
+)
++ 5. (49)
+To expand (48) in the large m limit, we use the same trick as in the scalar case and set Q =m2 − E
+for an endomorphism such that ξ is directly proportional to m. We ﬁnd
+E = − 5 + 2d − d2
+4d(d − 1) R,
+−ξ
+2
+= d(d − 1)m2
+R .
+(50)
+Using (50) and the geometric series to expand denominators c ontainingm in the large m limit, we
+arrive at
+gµν ′
+GT
+Q,µν ′(0)
+⏐
+⏐
+⏐
+E
+= (d − 1)2
+(4π )d/ 2
+π
+sin(dπ/ 2)Γ(d/ 2)
+( 1
+d − 1 + R
+4dm2
+)
+×
+(
+m2)d/ 2− 1
+∞∑
+k=0
+( R
+m2
+)k k∑
+ℓ=0
+(
+− (d − 3)2
+4
+)ℓ κk− ℓ(d)
+(d(d − 1))k
++ R Γ(d − 1)
+dm2(4π )d/ 2
+(
+d(d− 1)
+R
+)1− d/ 2
+Γ(d/ 2)
+∞∑
+k=0
+(
+− (d − 3)2
+4d(d − 1)
+R
+m2
+)k
+,
+(51)
+where we have reorganised sums coming from geometric series and (26) to combine powers of m.
+As before, the transverse vector heat kernels b(1)
+2n andc(1)
+d+2n for the endomorphism (50) can now be
+read oﬀ from (51) by noticing that the coeﬃcients b(1)
+2n (c(1)
+d+2n) are linear in (independent of) the
+
+=== PAGE 12 ===
+12
+d = 2 d = 3 d = 4 d = 5 d = 6
+b(1)
+0
+1 2 3 4 5
+c(1)
+d
+1
+2R 2
+3
+√
+6πR3/ 2 1
+24R2 1
+25
+√
+5πR5/ 2 1
+450R3
+b(1)
+2
+− 1
+3R 0 1
+4R 7
+15R 2
+3R
+c(1)
+d+2
+1
+4R2 2
+9
+√
+6πR5/ 2 1
+96R3 1
+125
+√
+5πR7/ 2 1
+2700R4
+b(1)
+4
+− 11
+40R2 − 1
+9R2 − 67
+1440R2 − 1
+120R2 7
+360R2
+c(1)
+d+4
+1
+16R3 1
+27
+√
+6πR7/ 2 1
+768R4 1
+1250
+√
+5πR9/ 2 1
+32400R5
+b(1)
+6
+− 37
+504R3 − 2
+81R3 − 4321
+362880R3 − 1
+160R3 − 2539
+850500R3
+c(1)
+d+6
+1
+96R4 1
+243
+√
+6πR9/ 2 1
+9216R5 1
+18750
+√
+5πR11/ 2 1
+583200R6
+b(1)
+8
+− 157
+13440R4 − 1
+324R4 − 3397
+2488320R4 − 17
+23040R4 − 176107
+408240000R4
+c(1)
+d+8
+1
+768R5 1
+2916
+√
+6πR11/ 2 1
+147456R6 1
+375000
+√
+5πR13/ 2 1
+13996800R7
+b(1)
+10
+− 109
+88704R5 − 1
+3645R5 − 245461
+2299207680R5 − 1
+18432R5 − 213749
+6735960000R5
+c(1)
+d+10
+1
+7680R6 1
+43740
+√
+6πR13/ 2 1
+2949120R7 1
+9375000
+√
+5πR15/ 2 1
+419904000R8
+T able 2. The vector heat kernel coeﬃcients for diﬀerent integer dimensio ns and vanishing endomorphism.
+parameters κi(d). We ﬁnd
+b(1)
+2n (
+E) = (d − 1)πR n
+Γ(1 +n − d/ 2)
+[ n∑
+ℓ=0
+(
+− (d − 3)2
+4
+)ℓκn− ℓ(d)(d(d − 1))− n
+sin(dπ/ 2)Γ(d/ 2)
++ (d − 1)2
+4
+n− 1∑
+ℓ=0
+(
+− (d − 3)2
+4
+)ℓκn− 1− ℓ(d)(d(d − 1))− n
+sin(dπ/ 2)Γ(d/ 2)
+]
+,
+c(1)
+d+2n(
+E) = Γ(d)
+Γ(d/ 2) Γ(1 +n)
+( R
+d(d − 1)
+)d/ 2 (
+− (d − 3)2
+4d(d − 1)R
+)n
+,
+(52)
+andκn(d) determined through (27). Applying (13), we then ﬁnd the tra nsverse vector heat kernel
+coeﬃcients for general endomorphisms as well. Tab. 2 shows our results for the ﬁrst few vector
+heat kernels (E = 0) and for a selection of dimensions.
+D. T ransverse T raceless T ensors
+Turning to the heat kernel coeﬃcients for transverse tracel ess symmetric tensors, we ﬁrst need
+to derive the Green’s function. Just as in the case of transve rse vectors, it is important to notice
+
+=== PAGE 13 ===
+13
+that the diﬀerential equation for the corresponding Green’s function GT T
+Q,µνρ ′σ ′ takes the form
+(−∇ 2 +Q)GT T
+Q,µνρ ′σ ′ = gµ (ρ′gσ ′)ν
+√ g δ(x − y) + longitudinal and trace terms , (53)
+where longitudinal terms include terms which are longitudi nal with respect to at least one index but
+not necessarily all indices. Following the methods introdu ced previously we write the transverse
+traceless symmetric Green’s function as
+GT T
+Q,µνρ ′σ ′ = P αβ
+µν P γ ′δ′
+ρ′σ ′
+(
+Rαγ ′Rβδ ′ST T )
+. (54)
+The transverse traceless tensor projector is given by [75, 7 8]
+P αβ
+µν = 1
+2
+d − 3
+d − 2
+[
+− gα
+(µgβ
+ν)
+(
+∇ 2 − R
+d − 1
+) (
+∇ 2 − 2R
+d(d − 1)
+)
++ gµνgαβ
+d − 1
+(
+∇ 4 − R
+d ∇ 2 + 2R2
+d2(d − 1)
+)
+− gαβ
+d − 1 ∇ (µ ∇ ν)
+(
+∇ 2 + 2R
+d
+)
++ 2∇ (µ
+(
+∇ 2 + R
+d(d − 1)
+)
+g(α
+ν) ∇ β ) − d − 2
+d − 1 ∇ (µ ∇ ν)∇ (α ∇ β )
+− gµν
+d − 1
+(
+∇ 2 + 2R
+d
+)
+∇ (α ∇ β )
+]
+,
+(55)
+and it satisﬁes
+P αβ
+µν gαβS(σ ) = gµν P αβ
+µν Tαβ = 0, [∇ 2, P αβ
+µν ]Tαβ = 0,
+P αβ
+µν ∇ αTβ = P αβ
+µν ∇ βTα = ∇ µ P αβ
+µν Tαβ = ∇ ν P αβ
+µν Tαβ = 0,
+P ρσ
+µν P αβ
+ρσ Tαβ = − 1
+2
+d − 3
+d − 2 P αβ
+µν
+(
+∇ 2 − 2R
+d(d − 1)
+) (
+∇ 2 − R
+d − 1
+)
+Tαβ
+(56)
+for an arbitrary tensor Tαβ . The Green’s function can now be determined in a very similar fashion
+to the transverse vector Green’s function. Firstly, we cont ract (53) with P µν
+λη P ρ′σ ′
+κ ′χ ′ . Making use
+of the relations for the transverse traceless tensor projec tor, the longitudinal and trace terms on
+the right-hand side vanish and we get
+P µν
+λη P ρ′σ ′
+κ ′χ ′
+(
+− ∇ 2 +Q
+) (
+∇ 2 − 2R
+d(d − 1)
+)2 (
+∇ 2 − R
+d − 1
+)2 (
+Rµρ ′Rνσ ′ST T (σ )
+)
+=4
+(d − 2
+d − 3
+)2
+P µν
+λη P ρ′σ ′
+κ ′χ ′
+(
+Rµρ ′Rνσ ′
+1√gδ(x − y)
+)
+.
+(57)
+Using (37), this can be brought into the form
+P µν
+λη P ρ′σ ′
+κ ′χ ′
+[
+Rµρ ′Rνσ ′
+(
+− ∇ 2 +Q − 2R
+d(d − 1)
+)
+∇ 4
+(
+∇ 2 − (d − 2)R
+d(d − 1)
+)2
+ST T (σ )
+]
+=4
+(d − 2
+d − 3
+)2
+P µν
+λη P ρ′σ ′
+κ ′χ ′
+[
+Rµρ ′Rνσ ′
+1√ gδ(x − y)
+]
+,
+(58)
+
+=== PAGE 14 ===
+14
+from which we deduce that ST T (σ ) obeys the diﬀerential equation
+(
+− ∇ 2 +Q − 2R
+d(d − 1)
+)
+∇ 4
+(
+∇ 2 − (d − 2)R
+d(d − 1)
+)2
+ST T (σ ) = 4√ g
+(d − 2
+d − 3
+)2
+δ(x − y). (59)
+The diﬀerential equation is solved by
+ST T (σ ) = 4
+(d − 2
+d − 3
+)2
+Gχ 1,χ 2,χ 2,χ 3,χ 3(σ ) (60)
+where we have introduced
+Gχ 1,χ 2,χ 2,χ 3,χ 3(σ ) = ∂
+∂χ 2
+∂
+∂χ 3
+Gχ 1,χ 2,χ 3(σ ),
+Gχ 1,χ 2,χ 3(σ ) = Gχ 1,χ 3 (σ )− Gχ 1 ,χ 2 (σ )
+χ 2− χ 3
+,
+(61)
+together with (21) and (40), and evaluated for
+χ 1 =Q − 2R
+d(d − 1), χ 2 = 0, χ 3 = d − 2
+d(d − 1)R. (62)
+To calculate the trace ofGT T
+Q,µνρ ′σ ′ in the coincidence limit, we ﬁrst expand the term Rµρ ′Rνσ ′ST T (σ )
+as before. Since we are now acting with eight covariant deriv atives on this expression, see (60), we
+have to expand it up to order eight in σµ . The relevant expression is lengthy and given in App. A,
+see ( A4), where we also introduce
+ST T (σ ) =
+∞∑
+n=0
+ST T
+n σ n. (63)
+Acting with the transverse tensor projectors and contracti ng the result with gµ (ρ′
+gσ ′)ν , we obtain
+gµ (ρ′
+gσ ′)νGT T
+Q,µνρ ′σ ′(0) = (d − 3)2(d + 1)(d + 2)
+d − 2
+[
+(13d − 32)R3
+140(d − 1)2d2ST T
+1 + (d − 6)(7d − 8)R2
+20(d − 1)2d ST T
+2
++ 3(3 − 2d)(d + 4)R
+2(d − 1) ST T
+3 + 3d(d + 4)(d + 6)ST T
+4
+]
+.
+(64)
+Inserting the expansion coeﬃcients for ST T (σ ) and using (26), we ﬁnally arrive at
+gµ (ρ′
+gσ ′)νGT T
+Q,µνρ ′σ ′(0)
+= 2− d− 1(d − 1)π − d
+2
+Γ
+(d
+2
+)
+((d − 1)Q − R)
+( R
+d(d − 1)
+)d/ 2
+×
+[
+Γ(d + 2)
+(
+(d − 1)d(d + 2)Q −
+(
+d2 + 4
+)
+R
+)
+d((d − 1)dQ − 2R)
++ π (d − 2)(d + 1)((d − 1)dQ + (d − 2)R)
+sin
+(πd
+2
+)
+R
+∞∑
+k=0
+κk(d)
+(
+− ˜ξ2
+)d/ 2− k− 1
+]
+.
+(65)
+
+=== PAGE 15 ===
+15
+where
+˜ξ = 1
+2
+√(
+− 4(d − 1)Q
+R +d − 2
+)
+d + 9 (66)
+Just as before, we now choose the endomorphism in order to sim plify the sum. Taking
+E = − 9 − 2d +d2
+4d(d − 1) R,
+− ˜ξ2 = d(d − 1)m2
+R ,
+(67)
+and using (67) and the geometric series to expand the denomin ators in the large m limit, we ﬁnd
+gµ (ρ′
+gσ ′)νGT T
+Q,µνρ ′σ ′(0)
+⏐
+⏐
+⏐
+⏐
+⏐
+E=
+E
+= 2− d− 2π − d/ 2
+m2RΓ
+(d
+2 − 1
+)
+( R
+d(d − 1)
+)1+d/ 2 ∞∑
+n=0
+(
+− (d − 3)2
+4d(d − 1)
+R
+m2
+)n
+×
+[
+πd
+(
+d2 − 1
+) (
+4(d − 1)dm2 + (d + 1)2R
+)
+sin
+(πd
+2
+)
+R
+∞∑
+k=0
+κk(d)
+(d(d − 1)m2
+R
+)d/ 2− k− 1
++ Γ(d + 2)
+(
+4(d − 1)d(d + 2)m2 + (d((d − 4)d + 5) + 2)R
+)
+(d − 2)dm2
+∞∑
+m=0
+(
+− d − 1
+4d
+R
+m2
+)m ]
+= 1
+(4π )d/ 2
+( R
+d(d − 1)
+)d/ 2 1
+Γ(d/ 2 − 1)
+∞∑
+k=0
+( R
+m2
+)k
+×
+[
+Γ(d + 2)
+(d − 2)
+(d + 2
+dm2 + (2 +d(5 +d(d − 4)))R
+4d2(d − 1)m4
+) k∑
+ℓ=0
+(
+− (d − 3)2
+4d(d − 1)
+)ℓ (
+− d − 1
+4d
+)k− ℓ
++ π (d(d − 1))− k
+sin(dπ/ 2)
+((d + 1)3
+4m2 + d(d2 − 1)
+R
+) ( R
+d(d − 1)m2
+)1− d/ 2 k∑
+ℓ=0
+κℓ(d)
+(
+− (d − 3)2
+4
+)k− ℓ]
+.
+(68)
+
+=== PAGE 16 ===
+16
+Note that in the last step sums have been reorganised in order to combine powers of m. As before,
+using (68) and the speciﬁc endomorphism (67), the heat kerne l coeﬃcients are found to be
+b(2)
+2n (
+E) = 1
+Γ(1 +n − d/ 2)
+( R
+d(d − 1)
+)n π (d + 1)
+Γ(d/ 2 − 1) sin(dπ/ 2) ×
+[ n∑
+ℓ=0
+κℓ(d)
+(
+− (d − 3)2
+4
+)n− ℓ
++ (d + 1)2
+4
+n− 1∑
+ℓ=0
+κℓ(d)
+(
+− (d − 3)2
+4
+)n− 1− ℓ]
+,
+c(2)
+d+2n(
+E) = 2
+Γ(1 +n)
+( R
+d(d − 1)
+)d/ 2 Γ(d + 2)
+Γ(d/ 2) Rn×
+[
+d + 2
+4d
+n∑
+ℓ=0
+(
+− (d − 3)2
+4d(d − 1)
+)ℓ (
+− d − 1
+4d
+)n− ℓ
++ 2 +d(5 +d(d − 4))
+16d2(d − 1)
+n− 1∑
+ℓ=0
+(
+− (d − 3)2
+4d(d − 1)
+)ℓ (
+− d − 1
+4d
+)n− 1− ℓ]
+,
+(69)
+with κn(d) determined through (27). As has been observed for the scala r and transverse vector
+heat kernel coeﬃcients, the coeﬃcients b(2)
+2n are identiﬁed from (68) as the terms linear in κi(d)
+while the coeﬃcients c(2)
+d+2n are found by setting all κi(d) to zero. The heat kernel coeﬃcients for
+arbitrary endomorphisms can be found using (13). Tab. 3 shows our results for the ﬁrst few tensor
+heat kernels (E = 0) and for a selection of dimensions.
+As a ﬁnal remark, we emphasize that the explicit expressions for the heat kernel coeﬃcients of
+scalar (30), transverse vectors (52), and transverse trace less tensors (69), are easy to evaluate and
+implement for arbitrary endomorphism and arbitrary dimens ion, including non-integer ones. For
+example, the ﬁrst 100 heat kernel coeﬃcients (69) at vanishi ng endomorphism in d = 4 are found
+within 20 sec on a 3 GHz thread, also using (13) and the coeﬃcie nts (27).
+E. Unconstrained Fields
+In the literature, heat kernel coeﬃcients are often calcula ted for unconstrained ﬁelds. A re-
+lation between the heat kernels of constrained ﬁelds and unc onstrained ﬁelds can be derived by
+decomposing unconstrained ﬁelds into constrained ﬁelds.
+For vectors, the unconstrained vector ﬁeld vµ can be decomposed into a transverse vector ﬁeld
+vT
+µ and a longitudinal part ∇ µη through
+vµ =vT
+µ + ∇ µη. (70)
+Note that the ﬁrst mode of the scalar ﬁeld η is constant and does not contribute to vµ . Hence, this
+mode must be excluded later. Considering the Laplacian −∇ 2 acting on vµ , we can write
+− ∇ 2vµ = −∇ 2 (
+vT
+µ + ∇ µη
+)
+= −∇ 2vT
+µ + ∇ µ
+(
+−∇ 2 − R
+d
+)
+η (71)
+on the sphere. It follows that the eigenvalue spectrum of −∇ 2 acting on an unconstrained vector
+ﬁeld is the sum of two parts. The ﬁrst part is the eigenvalue sp ectrum of the Laplacian acting on
+a transverse vector ﬁeld. The second part is the eigenvalue s pectrum of the Laplacian acting on a
+
+=== PAGE 17 ===
+17
+d = 2 d = 3 d = 4 d = 5 d = 6
+b(2)
+0
+0 2 5 9 14
+c(2)
+d
+3R 20
+3
+√
+6πR3/ 2 5
+8R2 21
+25
+√
+5πR5/ 2 14
+225R3
+b(2)
+2
+− 3R − 5
+3R − 5
+6R 0 14
+15R
+c(2)
+d+2
+3R2 8
+3
+√
+6πR5/ 2 5
+36R3 3
+25
+√
+5πR7/ 2 7
+1125R4
+b(2)
+4
+− 3R2 − 13
+12R2 − 271
+432R2 − 81
+200R2 − 56
+225R2
+c(2)
+d+4
+3
+2R3 5
+9
+√
+6πR7/ 2 5
+288R4 21
+2000
+√
+5πR9/ 2 7
+16875R5
+b(2)
+6
+− 3
+2R3 − 7
+24R3 − 7249
+54432R3 − 81
+1000R3 − 3347
+60750R3
+c(2)
+d+6
+1
+2R4 13
+162
+√
+6πR9/ 2 25
+15552R5 29
+40000
+√
+5πR11/ 2 7
+303750R6
+b(2)
+8
+− 1
+2R4 − 29
+576R4 − 22571
+1306368R4 − 729
+80000R4 − 106429
+18225000R4
+c(2)
+d+8
+1
+8R5 35
+3888
+√
+6πR11/ 2 5
+41472R6 133
+3200000
+√
+5πR13/ 2 49
+45562500R7
+b(2)
+10
+− 1
+8R5 − 37
+5760R5 − 20117
+12317184R5 − 729
+1000000R5 − 1275757
+3007125000R5
+c(2)
+d+10
+1
+40R6 97
+116640
+√
+6πR13/ 2 17
+2239488R7 641
+320000000
+√
+5πR15/ 2 287
+6834375000R8
+T able 3. The tensor heat kernel coeﬃcients for diﬀerent integer dimensio ns and vanishing endomorphism.
+scalar ﬁeld shifted by −R/d and the ﬁrst mode being excluded. Thus,
+TrVet∇ 2
+= Tr1et∇ 2
++ Tr′
+0et(∇ 2+R/d ), (72)
+where primes at the trace denote the exclusion of lowest mode s and Tr V denotes the trace of an
+unconstrained vector ﬁeld. This allows the computation of h eat kernel coeﬃcients for unconstrained
+
+=== PAGE 18 ===
+18
+ﬁelds using our results. We get
+TrVet∇ 2
+= Vol
+(4πt )d/ 2
+[
+d +d
+6Rt + 5d3 − 7d2 + 6d − 60
+360(d − 1)d R2t2
++ 35d5 − 112d4 + 187d3 − 1370d2 + 852d − 1008
+45360(d − 1)2d2 R3t3
++ R4t4
+5443200(d − 1)3d3
+(
+175d7 − 945d6 + 2389d5 − 15711d4 + 23464d3
+− 35436d2 + 59760d − 62640
+)
++ R5t5
+359251200(d − 1)4d4
+(
+385d9 − 3080d8 + 10714d7 − 68156d6 + 168793d5
+− 308084d4 + 858996d3 − 958944d2 + 857232d − 798336
+)
++ O(Rt)6
+]
+.
+(73)
+As anticipated, we observe from the result that all coeﬃcien ts ˜c(1)
+d+2n and c(1)
+d+2n vanish for uncon-
+strained ﬁelds, see (5) and (9).
+Turning to tensors and using the York decomposition, we deco mpose an unconstrained sym-
+metric tensor ﬁeld Tµν into
+Tµν =T T T
+µν + ∇ µξν + ∇ νξµ +
+(
+∇ µ ∇ ν − 1
+dgµν ∇ 2
+)
+σ + 1
+dgµνη, (74)
+with T T T
+µν being a transverse traceless symmetric tensor, ξµ being a transverse vector, and σ and
+η being scalars. As in the case of vector ﬁelds, not all modes of this decomposition contribute to
+T T T
+µν . These modes which have to be excluded are (i) the d(d + 1)/ 2 Killing vectors of ξµ which
+satisfy ∇ µξν + ∇ νξµ = 0 and originate from the lowest transverse vector modes, (i i) the constant
+(lowest) mode of σ , and (iii) the d + 1 scalars of the second lowest modes of σ (see Tab. 4 for the
+multiplicities of these modes) corresponding to the proper conformal Killing vectors ζµ = ∇ µσ ,
+which satisfy ∇ µζν + ∇ νζµ − 2
+dgµν ∇ τζτ = 0 [79] (see also [80]). Acting with the Laplacian on Tµν ,
+we use
+∇ 2 (∇ µξν + ∇ νξµ ) = 2 ∇ (µ
+(
+−∇ 2 − d + 1
+d(d − 1)R
+)
+ξν)
+−∇ 2
+(
+∇ µ ∇ ν − 1
+dgµν ∇ 2
+)
+σ =
+(
+∇ µ ∇ ν − 1
+dgµν ∇ 2
+) (
+−∇ 2 − 2
+d − 1R
+)
+σ,
+(75)
+to arrive at
+−∇ 2Tµν = − ∇ 2T T T
+µν + 2 ∇ (µ
+(
+−∇ 2 − d + 1
+d(d − 1)R
+)
+ξν)
++
+(
+∇ µ ∇ ν − 1
+dgµν ∇ 2
+) (
+−∇ 2 − 2
+d − 1R
+)
+σ − 1
+dgµν ∇ 2η.
+(76)
+This implies
+TrTet∇ 2
+= Tr2et∇ 2
++ Tr′
+1et
+(
+∇ 2+ d+1
+d(d− 1) R
+)
++ Tr′′
+0et(∇ 2+ 2
+d− 1 R) + Tr0et∇ 2
+, (77)
+where Tr T denotes the trace of the Laplacian w.r.t. an unconstrained s ymmetric tensor ﬁeld and
+
+=== PAGE 19 ===
+19
+Spin s Eigenvalue λs
+ℓ
+Multiplicity Ds
+ℓ
+0 ℓ(ℓ+d− 1)
+d(d− 1) R; ℓ = 0, 1, 2,... (2ℓ+d− 1)(ℓ+d− 2)!
+ℓ!(d− 1)!
+1 ℓ(ℓ+d− 1)− 1
+d(d− 1) R; ℓ = 1, 2, 3,... ℓ(ℓ+d− 1)(2ℓ+d− 1)(ℓ+d− 3)!
+(d− 2)!(ℓ+1)!
+2 ℓ(ℓ+d− 1)− 2
+d(d− 1) R; ℓ = 2, 3, 4,... (d+1)(d− 2)(ℓ+d)(ℓ− 1)(2ℓ+d− 1)(ℓ+d− 3)!
+2(d− 1)!(ℓ+1)!
+T able 4. The eigenvalues λ s
+ℓ and their multiplicities Ds
+ℓ for spin 0 (scalar), spin 1 (transverse vector), and
+spin 2 (transverse traceless tensor) ﬁelds of the operator −∇ 2 on the sphere (taken from [81, 82]).
+two primes denote the exclusion of the two lowest modes. Usin g this and our results for the heat
+kernel coeﬃcients of constrained ﬁelds we ﬁnd
+TrTet∇ 2
+= Vol
+(4πt )d/ 2
+[
+d(d + 1)
+2 + d(d + 1)
+12 Rt + 5d4 − 2d3 − d2 − 114d − 240
+720(d − 1)d R2t2
++ 35d6 − 77d5 + 75d4 − 2443d3 − 3542d2 + 1104d − 4032
+90720(d − 1)2d2 R3t3
++ R4t4
+10886400(d − 1)3d3
+(
+175d8 − 770d7 + 1444d6 − 25922d5 − 9887d4
++ 13588d3 + 188844d2 + 742320d + 172800
+)
++ R5t5
+718502400(d − 1)4d4
+(
+385d10 − 2695d9 + 7634d8 − 103642d7 + 100637d6 − 8875d5
++ 2850880d4 + 8146092d3 + 7406448d2 + 18339840d + 8211456
+)
++ O(Rt)6
+]
+.
+(78)
+Note that all coeﬃcients ˜ c(2)
+d+2n and c(2)
+d+2n vanish for unconstrained ﬁelds. This completes the
+derivation of heat kernel coeﬃcients.
+IV. HEA T KERNELS FROM SPECTRAL SUMS
+In this section, we compute heat kernel coeﬃcients with the h elp of spectral sums and the Euler-
+Maclaurin formula. This serves as an independent consisten cy check for ﬁndings in the previous
+section. We also ﬁnd new expressions for certain heat kernel coeﬃcients in the form of spectral
+integrals.
+A. Spectral Sum T echnique
+The eigenspectrum of the Laplacian −∇ 2 is known on the sphere [81, 82] and can be used
+to calculate the heat kernel coeﬃcients, e.g. [49, 71, 83]. Speciﬁcally, for diﬀerent spins s, the
+eigenfunctions φ s
+ℓ satisfy the eigenvalue equation
+− ∇ 2φ s
+ℓ(x) = λ s
+ℓφ s
+ℓ(x), (79)
+
+=== PAGE 20 ===
+20
+whereλ s
+ℓ are the eigenvalues and all vector and tensor indices have be en suppressed. In Tab. 4 we
+show the eigenvalues and their multiplicities Ds
+ℓ for spin 0, spin 1, and spin 2 ﬁelds on the sphere.
+The eigenfunctions can be chosen to be orthonormal,
+∫
+ddx √
+gφ s ∗
+ℓ,n (x)φ s
+k,m (x) = δℓ,kδn,m , (80)
+where we use the indices n and m to distinguish eigenfunctions with equal eigenvalues. Fur ther,
+they satisfy the completeness relation
+∑
+ℓ,n
+φ s ∗
+ℓ,n (x)φ s
+ℓ,n (y) = δ(x − y)
+√ g . (81)
+With this at hand, and for vanishing endomorphisms, we may ex press the trace of the heat kernel
+as a multiplicity-weighted sum of its eigenvalues,
+TrsU0(t,σ ) =
+∑
+ℓ,n
+∫
+ddx √ gφ s ∗
+ℓ,n (x)et∇ 2
+φ s
+ℓ,n (x) =
+∑
+ℓ
+Ds
+ℓe− tλ s
+ℓ. (82)
+In principle, the spectral sum representation allows the ex traction of heat kernel coeﬃcients by
+projection
+b(s)
+2n = (4π )d/ 2
+Vol
+1
+n!
+dn
+dtn
+(
+td/ 2 ∑
+ℓ
+Ds
+ℓe− tλ s
+ℓ
+)⏐
+⏐
+⏐
+⏐
+⏐
+t=0
+,
+c(s)
+d+2n = (4π )d/ 2
+Vol
+1
+n!
+dn
+dtn
+( ∑
+ℓ
+Ds
+ℓe− tλ s
+ℓ
+)⏐
+⏐
+⏐
+⏐
+⏐
+t=0
+.
+(83)
+Note that in even dimension d = 2m, the coeﬃcients b2(m+n) and cd+2n cannot be distinguished.
+In practice, to ﬁnd explicit expressions, the spectral sum i n (82) and (83) is now approximated
+systematically using the Euler-Maclaurin formula
+b∑
+ℓ=a
+f (ℓ) =
+∫ b
+a
+dℓf (ℓ) + 1
+2 (f (a) +f (b)) +
+n∑
+k=1
+B2k
+(2k)!
+(
+f (2k− 1)(b) − f (2k− 1)(a)
+)
++R2n+1, (84)
+where Bn are the Bernoulli numbers (recall that Bn = 0 for odd n except n = 1) and f (n)(ℓ) ≡
+dn
+dℓnf (ℓ); see e.g. [49] for a derivation of (84). An approximation of the Euler- Maclaurin formula at
+order 2n corresponds to dropping the remainder part
+R2n+1 = 1
+(2n + 1)!
+∫ b
+a
+dℓf (2n+1)(ℓ)P2n+1(ℓ), (85)
+where Pn(ℓ) = Bn(ℓ − ⌊ℓ⌋) are periodized versions of the Bernoulli polynomials Bn(ℓ). An upper
+bound for the remainder is given by
+|R2n+1| ≤ 2
+(2π )2n
+∫ b
+a
+dℓ|f (2n+1)(ℓ)|. (86)
+In the case at hand, we have a =s, 1/b = 0, and f (ℓ) = Ds
+ℓe− tλ s
+ℓ , with eigenvalues and multiplicities
+as in Tab. 4. The eigenvalues are quadratic polynomials in ℓ and imply that the leading small t
+behaviour of the remainder is controlled by the leading larg e ℓ behaviour of the integrand, hence
+
+=== PAGE 21 ===
+21
+ℓ2 ∼ t− 1. In this limit, multiplicities of eigenmodes for scalars, t ransverse vectors, and transverse
+traceless tensors scale according to Ds
+ℓ ∼ ℓd− 1 ∼ t(1− d)/ 2. Together with the elementary integral∫ ∞
+a dℓexp −tℓ2 = √ π
+4t − a + O(ta 3) we ﬁnd a lower bound for the leading power in t contained in
+the remainder,
+R2n+1 = O
+(
+tn+(1− d)/ 2
+)
+. (87)
+Therefore, we may expect that truncating the Euler-Maclaur in formula (84) to a ﬁnite order 2 n
+and leaving out the remainder R2n+1 reproduces the series expansion in the proper time paramete r
+for the heat kernel (82) up to all orders including t(2n− d)/ 2. This corresponds to coeﬃcients up
+to order n in Ricci curvature ∼ Vol
+(4πt )d/ 2 (Rt )n in the heat kernel expansion (11) with coeﬃcients
+(83). Below, we also show that the bound is exhaustive. Final ly, we note that the boundary and
+derivative terms f (a), f (b), and f (2k− 1)(ℓ)|b
+a only generate contributions proportional to integer
+positive powers in t, in any dimension.
+B. Results from Euler-Maclaurin
+The Euler-Maclaurin formula (84) is most eﬃcient in setting s where the spectral integrals∫ b
+a dℓf (ℓ) can be solved in closed form. For our setting, this is the cas e in integer dimensions
+where the multiplicities are simple polynomials. The bound (87) for the remainder ensures that
+approximations improve with increasing order. Here, we exp loit these features to cross-check results
+for heat kernel coeﬃcients, order-by-order.
+Putting our rationale to work for the scalar heat kernel coeﬃ cients in integer dimensions by
+using the expression (82) together with (84), we ﬁnd
+Tr0U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=2
+= Vol
+4πt
+(
+1 + Rt
+6 +R2t2
+60 + R3t3
+630 + R4t4
+5040 + R5t5
+27720 + O(Rt)6
+)
+,
+Tr0U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=3
+= Vol
+(4πt )3/ 2
+(
+1 + Rt
+6 + R2t2
+72 + R3t3
+1296 + R4t4
+31104 + R5t5
+933120 + O(Rt)6
+)
+,
+Tr0U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=4
+= Vol
+(4πt )2
+(
+1 + Rt
+6 + 29R2t2
+2160 + 37R3t3
+54432 + 149R4t4
+6531840 + 179R5t5
+431101440 + O(Rt)6
+)
+,
+Tr0U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=5
+= Vol
+(4πt )5/ 2
+(
+1 + Rt
+6 + R2t2
+75 + R3t3
+1500 + R4t4
+45000 + R5t5
+2250000 + O(Rt)6
+)
+,
+Tr0U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=6
+= Vol
+(4πt )3
+(
+1 + Rt
+6 + R2t2
+75 + 1139R3t3
+1701000 + 833R4t4
+36450000 + 137R5t5
+267300000 + O(Rt)6
+)
+.
+(88)
+To obtain results for heat kernel coeﬃcients up to order n = 5 in the Ricci curvature, we conﬁrm
+that an expansion of (84) up to order 2 n = 10 is required, in agreement with the estimate for the
+remainder term stated in (87). Also, results are in exact agr eement with ﬁndings from the Green’s
+function technique (see Tab. 1) and conﬁrm that the leading contribution starts out as t− d/ 2.
+The same analysis can now be done for transverse vectors and t ransverse traceless tensors.
+However, for these cases it is important to realise that in ev en dimensions we cannot distinguish
+between the contributions coming from the b(s)
+d+2n and the c(s)
+d+2n (n ≥ 0) when we take the sum of
+the eigenvalues, see (83). Thus, in even dimension we can onl y compare their sum with the ﬁndings
+from spectral sums. Again, to ﬁnd all coeﬃcients b(s)
+2m and the c(s)
+2m up to m =n we have to expand
+(84) up to including the order 2 n, see (87). For the transverse vectors in even dimension and f or
+
+=== PAGE 22 ===
+22
+expansion order 2n = 10 we ﬁnd using the spectral sum
+Tr1U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=2
+= Vol
+4πt
+(
+1 + Rt
+6 − R2t2
+40 − 11R3t3
+1008 − 17R4t4
+13440 + 13R5t5
+177408 + O(Rt)6
+)
+,
+Tr1U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=4
+= Vol
+(4πt )2
+(
+3 + Rt
+4 − 7R2t2
+1440 − 541R3t3
+362880 − 157R4t4
+2488320 + 4019R5t5
+2299207680 + O(Rt)6
+)
+,
+Tr1U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=6
+= Vol
+(4πt )3
+(
+5 + 2Rt
+3 + 7R2t2
+360 − 649R3t3
+850500 − 24907R4t4
+408240000 − 5849R5t5
+6735960000 + O(Rt)6
+)
+.
+(89)
+Taking the sum b(1)
+d+2n +c(1)
+d+2n from Tab. 2, the consistency of our results with the Geen’s function
+method is conﬁrmed. In odd dimensions, we can distinguish be tween the contributions of b(1)
+d+2n and
+c(1)
+d+2n from within the spectral sum technique, and the results up to order ﬁve in Ricci curvature
+Tr1U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=3
+= Vol
+(4πt )3/ 2
+(
+2 + 2R3/ 2t3/ 2
+3
+√
+6π
+− R2t2
+9 + 2R5/ 2t5/ 2
+9
+√
+6π
+− 2
+81R3t3 + R7/ 2t7/ 2
+27
+√
+6π
+− 1
+324R4t4 +R9/ 2t9/ 2
+243
+√
+6π
+− R5t5
+3645 + O(Rt)11/ 2
+)
+,
+Tr1U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=5
+= Vol
+(4πt )5/ 2
+(
+4 + 7Rt
+15 − R2t2
+120 + R5/ 2t5/ 2
+25
+√
+5π
+− R3t3
+160 + R7/ 2t7/ 2
+125
+√
+5π
+− 17R4t4
+23040
++ R9/ 2t9/ 2
+1250
+√
+5π
+− R5t5
+18432 + O(Rt)11/ 2
+)
+.
+(90)
+fully agree with the corresponding results from the Green’s function technique (see Tab. 2). Finally,
+for the transverse traceless tensor heat kernels in even dim ensions we get from the spectral sum
+approximation
+Tr2U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=2
+= 0,
+Tr2U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=4
+= Vol
+(4πt )2
+(
+5 − 5Rt
+6 − R2t2
+432 + 311R3t3
+54432 + 109R4t4
+1306368 − 317R5t5
+12317184 + O(Rt)6
+)
+,
+Tr2U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=6
+= Vol
+(4πt )3
+(
+14 + 14Rt
+15 − 56R2t2
+225 + 433R3t3
+60750 + 6971R4t4
+18225000 − 28357R5t5
+3007125000 + O(Rt)6
+)
+.
+(91)
+Similar to the case of transverse vectors, the consistency o f these results with Tab. 3 is conﬁrmed
+
+=== PAGE 23 ===
+23
+by taking the sum b(2)
+d+2n +c(2)
+d+2n. In odd dimensions we ﬁnd
+Tr2U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=3
+= Vol
+(4πt )3/ 2
+(
+2 − 5Rt
+3 + 20
+3
+√
+6πR3/ 2t3/ 2 − 13R2t2
+12 + 8
+3
+√
+6πR5/ 2t5/ 2 − 7
+24R3t3
++ 5R7/ 2t7/ 2
+9
+√
+6π − 29
+576R4t4 + 13R9/ 2t9/ 2
+162
+√
+6π − 37R5t5
+5760 + O(Rt)6
+)
+,
+Tr2U0(t,σ )
+⏐
+⏐
+⏐
+⏐
+d=5
+= Vol
+(4πt )5/ 2
+(
+9 − 81R2t2
+200 + 21R5/ 2t5/ 2
+25
+√
+5π − 81R3t3
+1000 + 3R7/ 2t7/ 2
+25
+√
+5π − 729R4t4
+80000
++ 21R9/ 2t9/ 2
+2000
+√
+5π − 729R5t5
+1000000 + O(Rt)6
+)
+,
+(92)
+which is, again, in agreement with Tab. 3. This completes the derivation and checks of heat kernel
+coeﬃcients on spheres in various integer dimensions.
+C. Spectral Integrals
+We close with a few observations regarding the usage of the Eu ler-Maclaurin formula for spectral
+sums, and spectral integrals for heat kernel coeﬃcients in g eneral dimensions. In integer dimen-
+sions, we ﬁnd that all terms proportional to half-integer po wers in t, if they arise, originate from
+the integral term
+∫ b
+a dℓf (ℓ) in the Euler-Maclaurin formula. This observation implies that the
+remainderR2n+1 do not generate terms proportional to half-integer powers i nt. Moreover, in odd
+dimensions it also implies that all heat kernel coeﬃcients b2n are determined from the expansion
+of the integral term only, oﬀering the new representation
+b(s)
+2n = (4π )d/ 2
+Vol
+1
+n!
+dn
+dtn
+(
+td/ 2
+∫ ∞
+s
+dℓD s
+ℓe− t λ s
+ℓ
+)⏐
+⏐
+⏐
+⏐
+⏐
+t=0
+(93)
+instead of (83). Note that the spectral sum has become a spect ral integral. We rush to add that the
+expressions (93) for b2n do not apply in even dimensions, and that there is no analoguo us formula
+for the coeﬃcients cd+2n, the simple reason being that these coeﬃcients receive cont ributions from
+both the integral term and from the boundary terms in the Eule r-Maclaurin expansion.
+In odd dimensions, it is then straightforward to ﬁnd express ions for heat kernels by evaluating
+the spectral integral in closed form, followed by a projecti on onto those terms which in a small t
+expansion generate half-integer powers in t. Following this strategy for scalar heat kernels (which
+have no contributions from cd+2n terms), exemplarily in d = 3, 5 and 7 dimensions, we ﬁnd
+∞∑
+n=0
+b(0)
+2n (E)tn
+⏐
+⏐
+⏐
+⏐
+d=3
+=e(E+R/ 6)t, (94)
+∞∑
+n=0
+b(0)
+2n (E)tn
+⏐
+⏐
+⏐
+⏐
+d=5
+=e(E+R/ 5)t
+(
+1 − Rt
+30
+)
+, (95)
+∞∑
+n=0
+b(0)
+2n (E)tn
+⏐
+⏐
+⏐
+⏐
+d=7
+=e(E+ 3
+14 R)t
+(
+1 − Rt
+21 + 4R2t2
+6615
+)
+, (96)
+for arbitrary endomorphism E, and in agreement with (31); see also Tab. 1. When multiplied
+with Vol
+(4π t )d/ 2 , (10), it provides closed expressions for the local part of t he scalar heat kernels (11).
+
+=== PAGE 24 ===
+24
+Similar closed expressions for the local heat kernels can be derived in any odd dimension using the
+spectral integral as discussed above. Note that on compact s paces such as Sd, the heat kernels also
+receives non-local ”topological” contributions [12]. The se are not accounted for in the above.
+D. Analytic Continuation
+In non-integer dimension, multiplicities are no longer sim ple polynomials, and closed expressions
+for the ℓ integrals are not available. Still, the coeﬃcients b2n relate to non-integer powers in t (in
+non-integer dimensions), and, once more, can only arise fro m the integral term
+∫ b
+a dℓf (ℓ). This
+suggests that (93) can be extended to even dimensions by anal ytic continuation.
+We will now explain how spectral integrals can be used in gene ral dimensions to ﬁnd the heat
+kernel coeﬃcients b2n. The idea is to evaluate the integral initially in non-integ er dimensions using
+a large ℓ expansion for the multiplicities in Tab. 4, and interchanging sum and integration. The
+resulting ﬁnite expressions can then be dimensionally cont inued to integer (even) dimension. 1 Our
+procedure also eliminates all contributions to the coeﬃcie ntsc2n. In other words, we have
+Vol
+(4πt )d/ 2
+∑
+n
+b(s)
+2ntn =
+∫ ∞
+0
+dℓD s
+ℓe− t λ s
+ℓ
+⏐
+⏐
+⏐
+⏐
+reg.
+, (97)
+where “reg.” indicates the procedure described above. The i ntegration starts at zero for any spin,
+the reason being that any ﬁnite integral
+∫ s
+0 dℓf(ℓ) only generates terms in the form of integer
+powers of t which contribute to the coeﬃcients c2n. We apply the procedure in App. C for scalars
+in general dimensions including all details of the computat ion. The ﬁnal result takes the form
+Vol
+(4πt )d/ 2
+∑
+n
+b(0)
+2n tn = 1
+Γ(d)
+(d(d − 1)
+Rt
+)d/ 2
+×
+{ ∞∑
+n=0
+(d − 2
+2n
+)
+B(d− 1)
+2n (d − 1)
+[
+Id, 2n(Rt ) − 1
+2 (d − 1)2Jd, 2n+1(Rt )
+]
++d − 1
+2
+∞∑
+n=0
+(d − 2
+2n + 1
+)
+B(d− 1)
+2n+1 (d − 1)
+[
+Id, 2n(Rt ) − 2Jd, 2n+1(Rt )
+]}
+(98)
+where B(ℓ)
+n (x) are Bernoulli polynomials ( C3), and the functions Id,n (x) and Jd,n (x) relate to
+the Kummer hypergeometric series, ( C7). This result constitutes a representation of heat kernel
+coeﬃcients which is complementary (yet, equivalent) to the result from the Green’s function method
+(31). A series expansion of (98) in R yields all heat kernel coeﬃcients b2n in general dimension,
+and agrees with all ﬁndings in integer dimensions reported e arlier. In the case where d is an odd
+integer, the sums can be performed in closed form, and we ﬁnd a greement with the expressions
+(94), (95), and (96) in d = 3, 5, 7 dimensions.
+Finally, we emphasize once more that the spectral integrals with or without dimensional con-
+tinuation are in general diﬀerent,
+∫ ∞
+0 dℓD s
+ℓe− t λ s
+ℓ ̸=
+∫ ∞
+0 dℓD s
+ℓe− t λ s
+ℓ
+⏐
+⏐
+reg. . The reason for this is
+that, without dimensional continuation, the integration a dditionally generates contributions to the
+c2n coeﬃcients, all of which are absent in (97). Further, in even dimensions the b2n coeﬃcients
+also receive contributions from boundary terms and derivat ive terms in (84). In contrast to this,
+the analytical continuation from non-integer dimensions, giving rise to the right-hand side of (97),
+contains all and only the coeﬃcients b2n in any dimension.
+1 Since in all but even dimensions the coeﬃcients b2n only arise from the spectral integral, it is not surprising t hat
+the coeﬃcients b2n in even dimensions follow from dimensional continuation.
+
+=== PAGE 25 ===
+25
+V. DISCUSSION
+With the help of Green’s functions we have derived general ex pressions for all heat kernel
+coeﬃcients of scalars (30), transverse vectors (52), and tr ansverse traceless tensors (69) on the
+sphere in any dimension and for any endomorphism, also provi ding the corresponding results for
+unconstrained ﬁelds, see (73), (78). The ﬁnal expressions a re easy to evaluate and straightforward to
+implement on a practical level, with explicit results state d for selected integer dimensions (Tab. 1, 2
+and 3). Several consistency checks have been performed. We compa red the ﬁrst ﬁve heat kernel
+coeﬃcients and their full dimensional dependence to the kno wn results for heat kernel coeﬃcients
+on general manifolds [13–21], and found complete agreement .
+Furthermore, we have derived the local heat kernel coeﬃcien ts on spheres from known eigen-
+spectra of Laplacians. The boundedness of remainder terms ( 87) in the Euler-Maclaurin formula
+has been demonstrated, which is a prerequisite for its appli cability to spectral sums. In integer
+dimensions, full agreement with ﬁndings from Green’s funct ion is established to high order in the
+expansion, (88) – (92). We have also found new spectral integ ral representations (93), (97) for
+some of the local heat kernel coeﬃcients, and explicit resul ts for scalar heat kernels (98), applica-
+ble in general dimension. A virtue of the coeﬃcients from Gre en’s functions (30), (52), and (69) is
+that they can straightforwardly be extended to non-integer dimension, including for the coeﬃcients
+cd+2n, a feat which is much harder to achieve using spectral sums.
+On a diﬀerent tack, Green’s functions of scalars and transver se vectors on maximally symmetric
+spaces are of interest for applications in cosmology on de Si tter backgrounds, e.g. [46, 75, 78]. As
+a new addition, we now have derived the Green’s function for t he Laplacian acting on transverse
+tensor ﬁelds on a fully symmetric background, (59) – (62). We expect that this will be of use in
+cosmological settings which are sensitive to the graviton p ropagator.
+Finally, our results are of practical relevance for a number of farther reaching applications
+including the AdS/CFT correspondence for conformal higher spin models [22, 23], eﬀective actions
+for N = 1 supergravity [24], or trace anomalies [25]. In quantum gr avity, possible applications
+of our results include the perturbative renormalisation of Hoava gravity [26], and tests of the
+asymptotic safety conjecture where intriguing hints for th e near-Gaussianity of gravitational scal-
+ing exponents have been observed in [40, 41, 43, 68]. In the la tter, studies thus far have adopted
+optimised renormalisation group ﬂows [32, 44], which only d epend on a few leading heat kernel
+coeﬃcients [35]. Our ﬁndings enable new investigations whi ch are sensitive to many more coeﬃ-
+cients without resorting to ﬂat backgrounds and spectral su ms or approximations thereof.
+Acknowledgments
+We thank Basem El-Menouﬁ and Christoph Rahmede for discussi ons. This work is supported by
+the Science and Technology Facilities Council (STFC).
+Appendix A: Expansion Coeﬃcients
+In the main body, we encounter expansions of vector and tenso r structure functions of the form
+S(σ ) =
+∞∑
+n=0
+Snσ n. (A1)
+The expansion coeﬃcients Sn for the transverse vector Green’s function (45) where S ≡ ST and
+transverse traceless tensor Green’s function (63) where S ≡ ST T are required for the computation
+
+=== PAGE 26 ===
+26
+of heat kernels, see (47) and (64), respectively.
+The expansion coeﬃcients of the structure function for tran sverse vectors are given by
+ST
+1 =
+(
+R
+d(d− 1)
+)d/ 2− 1
+(4π )d/ 2Γ
+(d
+2
+)
+(R − dQ)2
+[
+((d − 1)dQ − R)
+(d − 1) sin
+(πd
+2
+) cos(πξ)Γ
+(d − 1
+2 +ξ
+)
+Γ
+(d − 1
+2 − ξ
+)
+− Γ(d − 1)(dQ − R)
+(
+π cot
+(πd
+2
+)
++ψ (0)(d − 1) +γ − 1
+)
+d − 3 + RΓ(d − 1)
+d − 1
+]
+,
+ST
+2 =
+2− d− 1π − d/ 2
+(
+R
+d(d− 1)
+)d/ 2− 1
+3(d − 1)2d3(d + 2)Γ
+(d
+2
+) (
+Q − R
+d
+)2
+[
+(5d − 8)R2Γ(d − 1)
++ ((d − 1)dQ − R)(3(d − 1)dQ + 2dR − 5R)
+sin
+(πd
+2
+) cos(πξ)Γ
+(d − 1
+2 − ξ
+)
+Γ
+(d − 1
+2 +ξ
+)
+− RΓ(d)(dQ − R)
+(
+5dγ − 8d +π (5d − 8) cot
+(πd
+2
+)
++ (5d − 8)ψ (0)(d − 1) − 8γ + 17
+)
+d − 3
+]
+,
+(A2)
+where γ denotes the Euler-Mascheroni constant and ψ (0)(x) ≡ Γ′(x)/ Γ(x) the digamma function.
+We also recall that the parameter ξ is given by
+ξ = 1
+2
+√
+d
+(
+− 4(d − 1)Q
+R +d − 2
+)
++ 5. (A3)
+The above expressions are required to obtain the result (48) stated the main text. Note that the
+dependence of the expansion coeﬃcients ( A2) on the Euler-Mascheroni constant and the digamma
+function drops out in the ﬁnal expression (48).
+For the expansion of the Green’s function for transverse tra celess tensors, we need to calculate
+the trace of GT T
+Q,µνρ ′σ ′ in the coincidence limit, see (54). Using the solution (60) f or the Green’s
+function of transverse traceless tensors and the correspon ding expansion ( A1) for the structure
+
+=== PAGE 27 ===
+27
+function, we develop the term Rµρ ′Rνσ ′ST T (σ ) up to order eight in σµ . We ﬁnd
+Rµρ ′Rνσ ′ST T (σ )
+=ST T
+0
+[ ( R
+2(d − 1)d − R2σ
+12(d − 1)2d2 + R3σ 2
+180(d − 1)3d3 − R4σ 3
+5040(d − 1)4d4
+)
+σµσρ′gνσ ′
++
+( R
+2(d − 1)d − R2σ
+12(d − 1)2d2 + R3σ 2
+180(d − 1)3d3 − R4σ 3
+5040(d − 1)4d4
+)
+gµρ ′σνσσ ′
++
+( R2
+4(d − 1)2d2 − R3σ
+12(d − 1)3d3 + R4σ 2
+80(d − 1)4d4
+)
+σµσρ′σνσσ ′ +gµρ ′gνσ ′
+]
++ST T
+1
+[ ( Rσ
+2(d − 1)d − R2σ 2
+12(d − 1)2d2 + R3σ 3
+180(d − 1)3d3
+)
+σµσρ′gνσ ′
++
+( Rσ
+2(d − 1)d − R2σ 2
+12(d − 1)2d2 + R3σ 3
+180(d − 1)3d3
+)
+gµρ ′σνσσ ′
++
+( R2σ
+4(d − 1)2d2 − R3σ 2
+12(d − 1)3d3
+)
+σµσρ′σνσσ ′ +σg µρ ′gνσ ′
+]
++ST T
+2
+[ ( Rσ 2
+2(d − 1)d − R2σ 3
+12(d − 1)2d2
+)
+σµσρ′gνσ ′ +
+( Rσ 2
+2(d − 1)d − R2σ 3
+12(d − 1)2d2
+)
+gµρ ′σνσσ ′
++ R2σ 2
+4(d − 1)2d2σµσρ′σνσσ ′ +σ 2gµρ ′gνσ ′
+]
++ST T
+3
+[
+Rσ 3
+2(d − 1)dσµσρ′gνσ ′ + Rσ 3
+2(d − 1)dgµρ ′σνσσ ′ +σ 3gµρ ′gνσ ′
+]
++ST T
+4 σ 4gµρ ′gνσ ′ + O (σα )9 ,
+(A4)
+Expressions for the expansion coeﬃcients ST T
+n are very long and not given here. Also, acting with
+the projectors on this expanded term gives long expressions , which are not shown. Similarly to the
+coeﬃcients (A2), we observe that the coeﬃcients ST T
+n depend individually on the Euler-Mascheroni
+constant and the digamma function, whereas the ﬁnal result ( 65) is independent thereof. The above
+expressions are used to arrive at the results (64) and (65) in the main text.
+Appendix B: Heat Kernels in Even Dimensions
+In this appendix we supply the ﬁrst ﬁve heat kernel coeﬃcient s for scalars, vectors and tensors
+in even dimensions, where we may combine b(s)
+2n and c(s)
+2n into a single coeﬃcient by writing
+ˆb(i)
+2n =b(i)
+2n +c(i)
+2n (B1)
+
+=== PAGE 28 ===
+28
+(recall that c(i)
+2n = 0 for any n < d
+2 ). Also, since the scalar heat kernel coeﬃcients c(0)
+2n vanish
+identically, we have ˆb(0)
+2n =b(0)
+2n , giving
+ˆb(0)
+0 = 1
+ˆb(0)
+3 = 1
+6R
+ˆb(0)
+4 =
+(
+5d2 − 7d + 6
+)
+R2
+360(d − 1)d
+ˆb(0)
+6 =
+(
+35d4 − 112d3 + 187d2 − 110d + 96
+)
+R3
+45360(d − 1)2d2
+ˆb(0)
+8 =
+(
+175d6 − 945d5 + 2389d4 − 3111d3 + 3304d2 − 516d + 2160
+)
+R4
+5443200(d − 1)3d3 .
+(B2)
+For the transverse vector heat kernels we ﬁnd
+ˆb(1)
+0 =d − 1,
+ˆb(1)
+2 =δ2,d
+2 R + d2 − d − 6
+6d R,
+ˆb(1)
+4 =
+(δ2,d
+4 + δ4,d
+24
+)
+R2 + 5d4 − 12d3 − 47d2 − 186d + 180
+360(d − 1)d2 R2,
+ˆb(1)
+6 =
+(δ2,d
+16 + δ4,d
+96 + δ6,d
+450
+)
+R3
++ 35d6 − 147d5 − 331d4 − 3825d3 − 676d2 + 10992d − 7560
+45360(d − 1)2d3 R3,
+ˆb(1)
+8 =
+(δ2,d
+96 + δ4,d
+768 + δ6,d
+2700 + 15δ8,d
+175616
+)
+R4 + R4
+5443200(d − 1)3d4
+(
+175d8 − 1120d7 − 866d6
+− 38260d5 − 31985d4 + 34700d3 + 405996d2 − 627840d + 226800
+)
+.
+(B3)
+The transverse traceless tensor heat kernels give
+ˆb(2)
+0 = (d − 2)(d + 1)
+2 ,
+ˆb(2)
+2 = 3δ2,dR + d3 − 2d2 − 13d − 10
+12(d − 1) R,
+ˆb(2)
+4 =
+(
+3δ2,d + 5
+8δ4,d
+)
+R2 + 5d5 − 17d4 − 105d3 − 475d2 − 620d − 228
+720(d − 1)2d R2,
+ˆb(2)
+6 =
+(3δ2,d
+2 + 5δ4,d
+36 + 14δ6,d
+225
+)
+R3
++ 35d7 − 182d6 − 884d5 − 8618d4 − 21515d3 − 23648d2 − 38116d − 28032
+90720(d − 1)3d2 R3,
+ˆb(2)
+8 =
+(δ2,d
+2 + 5δ4,d
+288 + 7δ6,d
+1125 + 675δ8,d
+175616R4
+)
++ R4
+10886400(d − 1)4d3
+(
+175d9 − 1295d8 − 4296d7
+− 80514d6 − 263073d5 − 709635d4 − 907534d3 − 940876d2 − 2454072d − 1896480
+)
+.
+(B4)
+
+=== PAGE 29 ===
+29
+Results can now be compared with [42, 48] where expressions h ave been given for the heat kernel
+coeﬃcients ˆb2n in even dimensions. In d = 4, our ﬁndings for ˆb(n)
+2i agree numerically with the
+corresponding expressions b2i|n given in [48] and in appendix B of [42], except for b8|1. For general
+d, deviations appear in the algebraic expressions for b8|1 and b8|2, and some contributions which
+uniquely arise in even integer dimensions (proportional to Kronecker deltas) have been missed. Our
+results are consistent with the heat kernel, spectral sums, and expressions for general backgrounds
+as found in the literature.
+Appendix C: Heat Kernels from Spectral Integrals
+In this appendix we detail the derivation of spectral integr als and heat kernel coeﬃcients from
+spectral sums in general dimension, using dimensional cont inuation as outlined in Sect. IV D. We
+focus on scalars for simplicity. The computational steps fo r transverse vectors and transverse
+traceless tensors are the same and only diﬀer by the speciﬁc fo rm of the multiplicities.
+We start by taking the dimension d to be non-integer. Results for integer dimension then follo w
+from dimensional continuation. Basic input are the eigenva lues and their multiplicities (see Tab. 4),
+which for scalars are given by
+D0
+ℓ = (2ℓ +d − 1)Γ (ℓ +d − 1)
+Γ(d)Γ(ℓ + 1) . (C1)
+A large ℓ expansion is performed using the asymptotic series [84]
+Γ (ℓ +a)
+Γ (ℓ +b) ≃ ℓa− b
+∞∑
+n=0
+1
+ℓn
+(a − b
+n
+)
+B(a− b+1)
+n (a), (C2)
+where the “ ≃ ” indicates the asymptotic nature of the series. The general ised Bernoulli polynomials
+B(ℓ)
+n (x) are deﬁned as the Taylor coeﬃcients of
+( t
+et − 1
+)ℓ
+ext =
+∞∑
+n=0
+B(ℓ)
+n (x)tn
+n!. (C3)
+For the particular case ( C1), this gives us
+D0
+ℓ ≃ 2ℓ +d − 1
+Γ(d)
+∞∑
+n=0
+ℓd− 2− n
+(d − 2
+n
+)
+B(d− 1)
+n (d − 1). (C4)
+We now have to perform the spectral integral
+∫ ∞
+0
+dℓD 0
+ℓe− λ 0
+ℓ t ≃ 1
+Γ(d)
+∞∑
+n=0
+(d − 2
+n
+)
+B(d− 1)
+n (d − 1)
+∫ ∞
+0
+dℓℓd− 2− n(2ℓ +d − 1)e− ℓ(ℓ+d− 1)
+d(d− 1) Rt, (C5)
+which can be done term by term with the help of
+∫ ∞
+0
+dℓℓd− 1− ne− ℓ(ℓ+d− 1)
+d(d− 1) R t = 1
+2
+( Rt
+d(d − 1)
+)− d/ 2 [
+Id,n (Rt ) − (d − 1)Jd,n (Rt )
+]
+, (C6)
+
+=== PAGE 30 ===
+30
+where we have introduced the shorthand notations
+Id,n (x) =
+( x
+d(d − 1)
+)n/ 2
+Γ
+(d − n
+2
+)
+1F1
+(d − n
+2 , 1
+2, d − 1
+4d x
+)
+Jd,n (x) =
+( x
+d(d − 1)
+)(n+1)/ 2
+Γ
+(d − n + 1
+2
+)
+1F1
+(d − n + 1
+2 , 3
+2, d − 1
+4d x
+) (C7)
+involving the Kummer function 1F1(a,b,z ) = ∑∞
+k=0
+a(k)
+b(k)
+zk
+k! , and a(k) the rising factorial. The
+expression ( C6) with ( C7) is valid for general d> 1,Rt> 0, and n<d . By analytic continuation
+in the dimension we extend its domain of validity to all n. The right-hand side of ( C6) contains
+poles from Gamma functions provided d − n is a negative integer or zero. However, these poles will
+be multiplied by zeros from the binomial coeﬃcient in ( C4), giving a ﬁnite result for any d − n if
+analytically continued from non-integer d. Following this strategy, we ﬁnd
+∫ ∞
+0
+dℓD 0
+ℓe− λ 0
+ℓ t
+⏐
+⏐
+⏐
+⏐
+reg.
+= 2
+Γ(d)
+(d(d − 1)
+Rt
+)d/ 2 ∞∑
+n=0
+(d − 2
+n
+)
+B(d− 1)
+n (d − 1)×
+[
+1
+2Id,n (Rt ) − d−1
+2 Jd,n (Rt ) + d−1
+4 Id,n +1(Rt ) − (d−1)2
+4 Jd,n +1(Rt )
+]
+,
+(C8)
+where ”reg.” indicates our procedure of analytic continuat ion and the usage of an asymptotic large ℓ
+expansion. Note that the right-hand side contains terms pro portional to t− d/ 2+m andt− (d+2m+1)/ 2
+for any integer m ≥ 0. The former relate to the heat kernel coeﬃcients bd+2m. The latter cannot
+arise from a heat kernel expansion, and, hence, their coeﬃci ents must vanish identically. With this
+in mind, we write ( C8) as
+∫ ∞
+0
+dℓD 0
+ℓe− λ 0
+ℓ t
+⏐
+⏐
+⏐
+⏐
+reg.
+= 1
+Γ(d)
+(d(d − 1)
+Rt
+)d/ 2
+×
+{ ∞∑
+n=0
+(d − 2
+2n
+)
+B(d− 1)
+2n (d − 1)
+[
+Id, 2n(Rt ) − 1
+2 (d − 1)2Jd, 2n+1(Rt )
+]
++d − 1
+2
+∞∑
+n=0
+(d − 2
+2n + 1
+)
+B(d− 1)
+2n+1 (d − 1)
+[
+Id, 2n(Rt ) − 2Jd, 2n+1(Rt )
+]}
+(C9)
+which manifestly contains only terms of the form ∼ t− d/ 2+m. Together with (97) this gives rise to
+the result (98) in the main text.
+As a ﬁnal check, we conﬁrm that any terms of the form t− (d+2m+1)/ 2 in ( C8) vanish, as they
+must. Their sum can be written as
+0 =d − 1
+2
+∞∑
+n=0
+(d − 2
+2n
+)
+B(d− 1)
+2n (d − 1)
+[
+Id, 2n+1(Rt ) − 2Jd, 2n(Rt )
+]
++
+∞∑
+n=0
+(d − 2
+2n + 1
+)
+B(d− 1)
+2n+1 (d − 1)
+[
+Id, 2n+1(Rt ) − 1
+2 (d − 1)2Jd, 2n(Rt )
+]
+,
+(C10)
+and we have checked the validity of ( C10) for general dimension through a series expansion in
+curvatureR up to O
+(
+R10)
+. We expect this to hold true to any order.
+The same steps which have led to ( C9) can be repeated for transverse vectors and transverse
+traceless tensors leading to corresponding expressions.
+
+=== PAGE 31 ===
+31
+[1] V. Fock, Proper time in classical and quantum mechanics , Phys. Z. Sowjetunion 12 (1937) 404.
+[2] J. S. Schwinger, On gauge invariance and vacuum polarization , Phys. Rev. 82 (1951) 664.
+[3] B. S. DeWitt, Quantum Theory of Gravity. 1. The Canonical Theory , Phys. Rev. 160 (1967) 1113.
+[4] B. S. DeWitt, Quantum Theory of Gravity. 2. The Manifestly Covariant Theo ry,
+Phys. Rev. 162 (1967) 1195.
+[5] B. S. DeWitt, Quantum Theory of Gravity. 3. Applications of the Covariant Theory,
+Phys. Rev. 162 (1967) 1239.
+[6] D. Vassilevich, Heat kernel expansion: User’s manual , Phys.Rept. 388 (2003) 279 [ hep-th/0306138].
+[7] M. Bordag, U. Mohideen and V. M. Mostepanenko, New developments in the Casimir eﬀect ,
+Phys. Rept. 353 (2001) 1 [ quant-ph/0106045].
+[8] A. O. Barvinsky and G. A. Vilkovisky, The Generalized Schwinger-Dewitt Technique in Gauge
+Theories and Quantum Gravity , Phys. Rept. 119 (1985) 1.
+[9] I. G. Avramidi, Heat kernel and quantum gravity , Lect. Notes Phys. Monogr. 64 (2000) 1.
+[10] N. D. Birrell and P. C. W. Davies, Quantum Fields in Curved Space , Cambridge Monographs on
+Mathematical Physics. Cambridge Univ. Press, Cambridge, UK, 198 4, 10.1017/CBO9780511622632.
+[11] E. Fradkin and A. A. Tseytlin, One loop eﬀective potential in gauged O(4) supergravity ,
+Nucl.Phys. B234 (1984) 472.
+[12] R. Camporesi, Harmonic analysis and propagators on homogeneous spaces , Phys. Rept. 196 (1990) 1.
+[13] B. S. DeWitt, Dynamical theory of groups and ﬁelds , Conf. Proc. C630701 (1964) 585.
+[14] P. B. Gilkey, The Spectral geometry of a Riemannian manifold , J. Diﬀ. Geom. 10 (1975) 601.
+[15] S. M. Christensen, Vacuum Expectation Value of the Stress Tensor in an Arbitrar y Curved
+Background: The Covariant Point Separation Method , Phys. Rev. D14 (1976) 2490.
+[16] S. M. Christensen, Regularization, Renormalization, and Covariant Geodesic Point Separation,
+Phys. Rev. D17 (1978) 946.
+[17] P. Amsterdamski, A. L. Berkin and D. J. O’Connor, B(8) ’Hamidew’ Coeﬃcient for a Scalar Field ,
+Class. Quant. Grav. 6 (1989) 1981.
+[18] I. G. Avramidi, Background ﬁeld calculations in quantum ﬁeld theory (vacuu m polarization),
+Theor. Math. Phys. 79 (1989) 494.
+[19] I. G. Avramidi, The Covariant Technique for Calculation of One Loop Eﬀectiv e Action ,
+Nucl. Phys. B355 (1991) 712.
+[20] I. G. Avramidi, The Covariant technique for the calculation of the heat kern el asymptotic expansion ,
+Phys. Lett. B238 (1990) 92.
+[21] A. E. M. van de Ven, Index free heat kernel coeﬃcients , Class. Quant. Grav. 15 (1998) 2311
+[hep-th/9708152].
+[22] S. Giombi and I. R. Klebanov, One Loop Tests of Higher Spin AdS/CFT , JHEP 12 (2013) 068
+[1308.2337].
+[23] S. Giombi, I. R. Klebanov and A. A. Tseytlin, Partition Functions and Casimir Energies in Higher
+Spin AdS d+1/CFTd, Phys. Rev. D90 (2014) 024048 [ 1402.5396].
+[24] J. R. David, M. R. Gaberdiel and R. Gopakumar, The Heat Kernel on AdS(3) and its Applications ,
+JHEP 04 (2010) 125 [ 0911.5085].
+[25] F. Bastianelli, O. Corradini and E. Vassura, Quantum mechanical path integrals in curved spaces and
+the type-A trace anomaly , JHEP 04 (2017) 050 [ 1702.04247].
+[26] A. O. Barvinsky, D. Blas, M. Herrero-Valea, D. V. Nesterov, G . Prez-Nadal and C. F. Steinwachs,
+Heat kernel methods for Lifshitz theories , JHEP 06 (2017) 063 [ 1703.04747].
+[27] S. Weinberg, Ultraviolet divergences in quantum theories of gravitatio n, General Relativity: An
+Einstein centenary survey, Eds. Hawking, S.W., Israel, W; C ambridge University Press (1979) 790.
+[28] D. F. Litim, Fixed Points of Quantum Gravity and the Renormalisation Gro up, 0810.3675.
+[29] M. Reuter, Nonperturbative evolution equation for quantum gravity , Phys. Rev. D57 (1998) 971
+[hep-th/9605030].
+[30] W. Souma, Nontrivial ultraviolet ﬁxed point in quantum gravity , Prog.Theor.Phys. 102 (1999) 181
+[hep-th/9907027].
+[31] O. Lauscher and M. Reuter, Flow equation of quantum Einstein gravity in a higher- deriv ative
+truncation, Phys. Rev. D66 (2002) 025026 [ hep-th/0205062].
+
+=== PAGE 32 ===
+32
+[32] D. F. Litim, Fixed points of quantum gravity , Phys. Rev. Lett. 92 (2004) 201301 [ hep-th/0312114].
+[33] P. Fischer and D. F. Litim, Fixed points of quantum gravity in extra dimensions ,
+Phys. Lett. B638 (2006) 497 [ hep-th/0602203].
+[34] P. F. Machado and F. Saueressig, On the renormalization group ﬂow of f(R)-gravity ,
+Phys. Rev. D77 (2008) 124045 [ 0712.0445].
+[35] A. Codello, R. Percacci and C. Rahmede, Investigating the Ultraviolet Properties of Gravity with a
+Wilsonian Renormalization Group Equation , Annals Phys. 324 (2009) 414 [ 0805.2909].
+[36] D. Benedetti, P. F. Machado and F. Saueressig, Asymptotic safety in higher-derivative gravity ,
+Mod. Phys. Lett. A24 (2009) 2233 [ 0901.2984].
+[37] M. R. Niedermaier, Gravitational Fixed Points from Perturbation Theory ,
+Phys. Rev. Lett. 103 (2009) 101303.
+[38] D. Benedetti and F. Caravelli, The Local potential approximation in quantum gravity ,
+JHEP 06 (2012) 017 [ 1204.3541].
+[39] N. Christiansen, D. F. Litim, J. M. Pawlowski and A. Rodigast, Fixed points and infrared completion
+of quantum gravity , Phys. Lett. B728 (2014) 114 [ 1209.4038].
+[40] K. Falls, D. F. Litim, K. Nikolakopoulos and C. Rahmede, A bootstrap towards asymptotic safety ,
+1301.4191.
+[41] K. Falls, D. F. Litim, K. Nikolakopoulos and C. Rahmede, Further evidence for asymptotic safety of
+quantum gravity , Phys. Rev. D93 (2016) 104022 [ 1410.4815].
+[42] K. Falls, C. R. King, D. F. Litim, K. Nikolakopoulos and C. Rahmede, Asymptotic safety of quantum
+gravity beyond Ricci scalars , Phys. Rev. D97 (2018) 086006 [ 1801.00162].
+[43] K. G. Falls, D. F. Litim and J. Schrder, Aspects of asymptotic safety for quantum gravity ,
+Phys. Rev. D99 (2019) 126015 [ 1810.08550].
+[44] D. F. Litim, Optimized renormalization group ﬂows , Phys. Rev. D64 (2001) 105007
+[hep-th/0103195].
+[45] J. S. Dowker and R. Critchley, Eﬀective Lagrangian and Energy Momentum Tensor in de Sitter
+Space, Phys. Rev. D13 (1976) 3224.
+[46] N. C. Tsamis and R. P. Woodard, A Maximally symmetric vector propagator ,
+J. Math. Phys. 48 (2007) 052306 [ gr-qc/0608069].
+[47] G. Narain, Green’s function of the Vector ﬁelds on DeSitter Background , 1408.6193.
+[48] C. Rahmede, Investigating the ultraviolet properties of gravity with a wilsonian renormalization group
+equation, Ph.D. thesis, SISSA, Trieste, 2008.
+[49] R. Percacci, An Introduction to Covariant Quantum Gravity and Asymptoti c Safety , vol. 3 of 100
+Years of General Relativity . World Scientiﬁc, 2017, 10.1142/10369.
+[50] S. Christensen and M. Duﬀ, Quantizing Gravity with a Cosmological Constant ,
+Nucl.Phys. B170 (1980) 480.
+[51] G. W. Gibbons and M. J. Perry, Quantizing Gravitational Instantons , Nucl. Phys. B146 (1978) 90.
+[52] G. Gibbons, S. Hawking and M. Perry, Path Integrals and the Indeﬁniteness of the Gravitational
+Action, Nucl.Phys. B138 (1978) 141.
+[53] D. F. Litim and J. M. Pawlowski, On gauge invariant Wilsonian ﬂows , in The exact renormalization
+group. Proceedings, Workshop, Faro, Portugal, September 1 0-12, 1998 , pp. 168–185, 1998,
+hep-th/9901063.
+[54] J. Berges, N. Tetradis and C. Wetterich, Non-perturbative renormalization ﬂow in quantum ﬁeld
+theory and statistical physics , Phys. Rept. 363 (2002) 223 [ hep-ph/0005122].
+[55] D. F. Litim, Renormalisation group and the Planck scale ,
+Phil. Trans. Roy. Soc. Lond. A369 (2011) 2759 [ 1102.4624].
+[56] D. F. Litim and J. M. Pawlowski, Perturbation theory and renormalization group equations ,
+Phys. Rev. D65 (2002) 081701 [ hep-th/0111191].
+[57] D. F. Litim and J. M. Pawlowski, Completeness and consistency of renormalisation group ﬂow s,
+Phys. Rev. D66 (2002) 025030 [ hep-th/0202188].
+[58] J. M. Pawlowski, Aspects of the functional renormalisation group , Annals Phys. 322 (2007) 2831
+[hep-th/0512261].
+[59] M. Reuter and F. Saueressig, Quantum Einstein Gravity , New J. Phys. 14 (2012) 055022 [ 1202.2274].
+[60] D. F. Litim, Mind the gap , Int. J. Mod. Phys. A16 (2001) 2081 [ hep-th/0104221].
+[61] D. F. Litim and D. Zappala, Ising exponents from the functional renormalisation group ,
+
+=== PAGE 33 ===
+33
+Phys. Rev. D83 (2011) 085009 [ 1009.1948].
+[62] I. Balog, H. Chat, B. Delamotte, M. Marohnic and N. Wschebor, Convergence of Non-Perturbative
+Approximations to the Renormalization Group , 1907.01829.
+[63] R. Floreanini and R. Percacci, The Heat kernel and the average eﬀective potential ,
+Phys. Lett. B356 (1995) 205 [ hep-th/9505172].
+[64] D. Dou and R. Percacci, The running gravitational couplings , Class. Quant. Grav. 15 (1998) 3449
+[hep-th/9707239].
+[65] F. Freire, D. F. Litim and J. M. Pawlowski, Gauge invariance and background ﬁeld formalism in the
+exact renormalization group , Phys. Lett. B495 (2000) 256 [ hep-th/0009110].
+[66] D. F. Litim, Optimization of the exact renormalization group , Phys. Lett. B486 (2000) 92
+[hep-th/0005245].
+[67] D. F. Litim and J. M. Pawlowski, Non-perturbative thermal ﬂows and resummations ,
+JHEP 11 (2006) 026 [ hep-th/0609122].
+[68] K. Falls, D. F. Litim, K. Nikolakopoulos and C. Rahmede, On de Sitter solutions in asymptotically
+safe f (R) theories, Class. Quant. Grav. 35 (2018) 135006 [ 1607.04962].
+[69] D. Benedetti, P. F. Machado and F. Saueressig, Taming perturbative divergences in asymptotically
+safe gravity , Nucl. Phys. B824 (2010) 168 [ 0902.4630].
+[70] K. Falls and N. Ohta, Renormalization Group Equation for f (R) gravity on hyperbolic spaces ,
+Phys. Rev. D94 (2016) 084005 [ 1607.08460].
+[71] D. Benedetti, Critical behavior in spherical and hyperbolic spaces , J. Stat. Mech. 1501 (2015) P01002
+[1403.6712].
+[72] A. Codello, R. Percacci, L. Rachwa and A. Tonero, Computing the Eﬀective Action with the
+Functional Renormalization Group , Eur. Phys. J. C76 (2016) 226 [ 1505.03119].
+[73] A. Bonanno and M. Reuter, Proper time ﬂow equation for gravity , JHEP 02 (2005) 035
+[hep-th/0410191].
+[74] B. Allen and T. Jacobson, Vector Two Point Functions in Maximally Symmetric Spaces ,
+Commun. Math. Phys. 103 (1986) 669.
+[75] S. P. Miao, N. C. Tsamis and R. P. Woodard, The Graviton Propagator in de Donder Gauge on de
+Sitter Background, J. Math. Phys. 52 (2011) 122301 [ 1106.0925].
+[76] E. W. Weisstein, “Hypergeometric Function.” MathWorld–A Wolfr am Web Resource, [Accessed on
+9-June-2019], http://mathworld.wolfram.com/HypergeometricFunction.html.
+[77] F. W. J. Olver, A. B. Olde Daalhuis, D. W. Lozier, B. I. Schneider, R. F. Boisvert, C. W. Clark et al.,
+“Eq. 5.11.8.” NIST Digital Library of Mathematical Functions, [Acces sed on 9-June-2019],
+https://dlmf.nist.gov/5.11.E8.
+[78] P. J. Mora, N. C. Tsamis and R. P. Woodard, Graviton Propagator in a General Invariant Gauge on
+de Sitter , J. Math. Phys. 53 (2012) 122502 [ 1205.4468].
+[79] E. Mottola, Functional integration over geometries , J. Math. Phys. 36 (1995) 2470 [ hep-th/9502109].
+[80] O. Lauscher and M. Reuter, Ultraviolet ﬁxed point and generalized ﬂow equation of quan tum gravity ,
+Phys. Rev. D65 (2002) 025013 [ hep-th/0108040].
+[81] M. A. Rubin and C. R. Ordonez, Eigenvalues and degeneracies for n-dimensional tensor spherical
+harmonics, J.Math.Phys. 25 (1984) 2888.
+[82] M. A. Rubin and C. R. Ordonez, Symmetric Tensor Eigen Spectrum of the Laplacian on n Spheres,
+J.Math.Phys. 26 (1985) 65.
+[83] M. Demmel, F. Saueressig and O. Zanusso, RG ﬂows of Quantum Einstein Gravity on maximally
+symmetric spaces, JHEP 06 (2014) 026 [ 1401.5495].
+[84] F. W. J. Olver, A. B. Olde Daalhuis, D. W. Lozier, B. I. Schneider, R. F. Boisvert, C. W. Clark et al.,
+“Eq. 5.11.e13.” NIST Digital Library of Mathematical Functions, [Acc essed on 24-Feb-2020],
+http://dlmf.nist.gov/5.11.E13.

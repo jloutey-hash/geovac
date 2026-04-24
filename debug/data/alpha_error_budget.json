@@ -1,0 +1,89 @@
+{
+  "context": {
+    "framing": "Sprint A \u2014 high-precision residual + form prediction",
+    "B": 42,
+    "F_symbolic": "pi^2 / 6",
+    "F_value_30dps": "1.64493406684822643647241516665",
+    "Delta": "1/40",
+    "K_symbolic": "pi * (42 + pi^2/6 - 1/40)",
+    "alpha_inv_CODATA_2022": "137.035999084(21)",
+    "precision_dps": 60
+  },
+  "subtask_1_K_and_residual": {
+    "K_50dps": "137.03606441448154121371550852434069943121373363308",
+    "alpha_inv_codata_50dps": "137.03599908400000000000000000000000000000000000000",
+    "R0_raw_residual_K_minus_alphainv": "0.0000653304815412137155085243406994",
+    "R_cubic_corrected_residual_50dps": "0.000012079136408537244731252994415294198985230897498469",
+    "alpha_inv_formula_cubic_50dps": "137.03601116313640853724473125299441529419898523090",
+    "alpha_formula_cubic": "0.0072973519260534825035974622327640473309230424194061"
+  },
+  "subtask_2_relative_errors": {
+    "rel_err_raw_K_only": "4.7673955732732384206e-7",
+    "rel_err_first_order_K_minus_alphasq": "8.8145648599800329779e-8",
+    "rel_err_cubic_root": "8.8145717105568767331e-8",
+    "Paper2_quoted_value": "8.8e-8",
+    "verified": true
+  },
+  "subtask_3_candidate_corrections": {
+    "candidate_a_seeley_dewitt_a3": {
+      "form": "(1/(48 pi^2)) * (m_gamma / Lambda)^2 with m_gamma=1, Lambda=n_max=3",
+      "magnitude": "0.000234539776950",
+      "rel_to_K": "1.71151862798e-6",
+      "log10": "-3.62978"
+    },
+    "candidate_b_higher_Casimir": {
+      "form_linear": "pi * (B(4)-B(3)) * exp(-|lambda_4|/|lambda_3|)",
+      "magnitude_linear_suppression": "57.8134604678",
+      "log10_linear": "1.76203",
+      "form_gauss": "pi * Delta_B * exp(-(|lambda_4|/|lambda_3|)^2)",
+      "magnitude_gauss": "11.2076505355",
+      "log10_gauss": "1.04951"
+    },
+    "candidate_c_two_loop_QED": {
+      "form": "Schwinger 1/(2 pi) times suppression factor s",
+      "schwinger_factor_inv2pi": "0.159154943092",
+      "required_suppression_for_R_raw": "0.00041048352",
+      "required_suppression_for_R_cubic": "7.5895452e-5",
+      "interpretation_raw": "log10(s_raw) ~= -3.38670",
+      "interpretation_cubic": "log10(s_cubic) ~= -4.11978"
+    },
+    "candidate_d_su2_wilson": {
+      "form": "alpha^2 (next-to-leading non-abelian beyond Cartan torus)",
+      "magnitude_alpha_squared": "5.32513545204e-5",
+      "magnitude_K_times_alphasq": "0.00729735604822",
+      "log10_alphasq": "-4.27367",
+      "log10_K_alphasq": "-2.13683"
+    },
+    "candidate_e_off_shell": {
+      "form": "pi * sum_{n>=4} n^2 exp(-n/n_max)",
+      "magnitude": "150.531195226",
+      "rel_to_K": "1.09847868055",
+      "log10": "2.17763"
+    }
+  },
+  "subtask_4_best_match_table": {
+    "target_DeltaK_raw_log10": "-4.18488",
+    "target_DeltaK_cubic_log10": "-4.91796",
+    "candidate_logs_DeltaK": {
+      "a_seeley_dewitt": "-3.62978",
+      "b_casimir_linear": "1.76203",
+      "b_casimir_gauss": "1.04951",
+      "c_required_suppression_raw": "-3.38670",
+      "c_required_suppression_cubic": "-4.11978",
+      "d_alphasq": "-4.27367",
+      "d_K_alphasq": "-2.13683",
+      "e_off_shell": "2.17763"
+    }
+  },
+  "subtask_5_form_prediction": {
+    "expected_factor_alpha_sq": "yes \u2014 \u03b1\u00b2 \u2248 5.3e-5; matches RAW R0 well",
+    "expected_factor_inv_Lambda_sq": "candidate (a) suggests 1/\u039b\u00b2 with \u039b ~ n_max",
+    "expected_factor_pi4": "F = \u03c0\u00b2/6 is leading; next zeta is \u03b6(4)=\u03c0\u2074/90, suppressed by \u03c0\u00b2/15",
+    "expected_factor_zeta3": "appears in Dirac sector at d_max=4 (Phase 4I D3); could enter K at next order"
+  },
+  "next_zeta_F_correction": {
+    "form": "\u03b6(4) = \u03c0^4/90, would replace F=\u03b6(2) at next packing exponent d_max+2=6",
+    "magnitude_zeta4": "1.08232323371",
+    "rel_to_F": "0.657973626739"
+  }
+}

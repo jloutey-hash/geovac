@@ -1,0 +1,73 @@
+{
+  "context": {
+    "framing": "Sprint A v2 \u2014 verify v1 partial finding R_cubic \u2248 \u03c0\u00b3\u03b1\u00b3",
+    "B": 42,
+    "F_symbolic": "\u03c0\u00b2/6",
+    "Delta_symbolic": "1/40",
+    "K_symbolic": "\u03c0(42 + \u03c0\u00b2/6 - 1/40)",
+    "K_value_50dps": "137.03606441448154121371550852434069943121373363308",
+    "alpha_inv_CODATA_2022": "137.035999084(21)",
+    "precision_dps": 80,
+    "v1_claim": "R_cubic \u2248 \u03c0\u00b3\u03b1\u00b3 to 0.25%; next-order C ~ 1/3"
+  },
+  "subtask_1_residual_clarification": {
+    "definition_R_cubic_codata": "K - 1/\u03b1_codata (\u2248 \u03b1\u00b2 trivially via cubic identity)",
+    "definition_R_predict": "(K - 1/\u03b1_codata) - \u03b1\u00b2 (the post-cubic residual)",
+    "alpha_inv_codata_50dps": "137.03599908400000000000000000000000000000000000000",
+    "alpha_inv_formula_50dps": "137.03601116313640853724473125299441529419898523090",
+    "alpha_formula_50dps": "0.0072973519260534825035974622327640473309230424194061",
+    "K_minus_alphainv_codata": "0.0000653304815412137155085243406994",
+    "alpha_sq_codata": "0.0000532513545204328916343269958947",
+    "R_predict_post_alphasq": "0.0000120791270207808238741973448047",
+    "v1_finding_assessment": "v1 partial finding does NOT mean K - 1/\u03b1 (which is trivially \u2248 \u03b1\u00b2 \u2248 5.33e-5).  The substantive claim is about R_predict = K - 1/\u03b1 - \u03b1\u00b2, the post-\u03b1\u00b2 residual."
+  },
+  "subtask_2_pi3_alpha3_test": {
+    "alpha_cubed_codata": "0.000000388593908727523512279536276181",
+    "pi3_alpha3_codata": "0.0000120488502502847690468483925418",
+    "R_predict_30dps": "0.0000120791270207808238741973448047",
+    "ratio_R_predict_over_pi3_alpha3": "1.0025128348238321951",
+    "ratio_R_predict_over_alpha3_no_pi": "31.084190332099453673",
+    "pi2_alpha3_ratio": "3.14948695701",
+    "pi4_alpha3_ratio": "0.319109746351",
+    "fractional_distance_from_pi3alpha3": "0.00251283482383",
+    "fractional_distance_pct": "0.251283"
+  },
+  "subtask_3_next_order_coefficient_C": {
+    "ansatz": "R_predict = \u03c0\u00b3\u03b1\u00b3 (1 + C\u03b1 + O(\u03b1\u00b2))",
+    "C_estimate": "0.344348830617",
+    "C_estimate_in_dimensionless_units": "0.34434883",
+    "v1_claim_C_one_third": "1/3 (suggested as 1/dim(S\u00b3))",
+    "C_diffs_relative": {
+      "1/3": 0.03198935586290227,
+      "1/dim_S3=1/3": 0.03198935586290227,
+      "pi/9": 0.013698376072609961,
+      "1/2": 0.4520159662056466,
+      "1/4": 0.2739920168971767,
+      "1": 1.904031932411293,
+      "pi/3": 2.04109512821783,
+      "1/(2pi)": 0.5378089630600338,
+      "ln_2": 1.0129215462069376,
+      "1/n_max=1/3": 0.03198935586290227
+    },
+    "interpretation": "C is the leading correction coefficient.  The v1 claim C ~ 1/3 = 1/dim(S\u00b3) is suggestive but the numerical fit cannot fix it to a unique closed form from a single data point."
+  },
+  "subtask_4_pi3_structural_reading": {
+    "primary_candidate": "Vol(S^5) = \u03c0\u00b3",
+    "primary_justification": "S^5 is the natural ambient sphere for the Bargmann-Segal lattice (Paper 24).  Spectral-action a_4 coefficient on an odd-dim sphere of dim d carries Vol(S^d).  The Hopf fibration S^1 \u2192 S^3 \u2192 S^2 sits inside S^5 \u2283 S^3 by the complex Hopf S^1 \u2192 S^3 \u2192 CP^1 = S^2 viewed in C\u00b2.  The next term in the K-expansion is naturally Vol(S^5)\u00b7\u03b1^3 from this enclosing geometry.",
+    "secondary_candidate": "K\u00b3 \u2248 (\u03c0 \u00d7 43.6)\u00b3 \u2248 \u03c0\u00b3 \u00d7 8.3e4",
+    "secondary_justification": "Iterating the cubic \u03b1^3 = K\u03b1 - 1 once more:  \u03b1^3 = K\u03b1 - 1, \u03b1^6 = (K\u03b1-1)\u00b2 \u2248 K\u00b2\u03b1\u00b2 for small \u03b1.  At order \u03b1^3 the iteration carries a factor K which contains exactly one outer \u03c0.  Three iterations of the cubic at next order would give \u03c0\u00b3 from three K factors collapsing \u2014 though the dimensional accounting needs care.",
+    "tertiary_candidate": "Three-loop QED ~ \u03b1^3 with \u03c0 enhancement",
+    "tertiary_justification": "Standard QED 3-loop magnetic moment coefficient is ~1.18 \u00d7 (\u03b1/\u03c0)^3, i.e. \u03b1^3/\u03c0^3.  The OBSERVED \u03c0\u00b3\u03b1\u00b3 enters at the OPPOSITE sign of the loop counting \u2014 it is an ENHANCEMENT, not a suppression \u2014 consistent with a geometric (volume-of-ambient-sphere) origin rather than a loop-integral origin.",
+    "preferred": "Vol(S^5) = \u03c0\u00b3.  Justification: spectral-action expansion on S^3 \u21aa R^4 \u21aa S^4/S^5 enclosing geometry; matches Paper 24 Bargmann-Segal S^5 lattice; sign and magnitude consistent with enhancement from a higher-dim spectral trace, not loop suppression."
+  },
+  "subtask_5_paper2_integration_recommendation": {
+    "where": "Paper 2 \u00a7IV.G (Open questions, item 'Understand the residual 8.8\u00d710\u207b\u2078')",
+    "what_to_add": "(a) The residual K - 1/\u03b1 has a trivial component \u03b1\u00b2 from the cubic; the substantive residual is R_predict = K - 1/\u03b1 - \u03b1\u00b2 \u2248 1.2079127e-5.  (b) Numerical comparison: R_predict / (\u03c0\u00b3\u03b1\u00b3) = 1.0025128, i.e. 0.2513% from unity at 80-dps precision.  (c) Conjectural reading: \u03c0\u00b3 = Vol(S^5) suggests the next K-expansion term originates in the ambient geometry of the Bargmann-Segal S^5 lattice (Paper 24).  (d) The next-order coefficient C in R_predict = \u03c0\u00b3\u03b1\u00b3(1 + C\u03b1 + ...) is C \u2248 0.344349; the tentative reading C ~ 1/3 = 1/dim(S\u00b3) cannot be fixed by a single CODATA data point.  Status: structural hint, NOT a derivation.",
+    "scope_warnings": [
+      "Phases 4B-4I closed nine mechanisms for K (CLAUDE.md \u00a73).",
+      "This is a STRUCTURAL HINT for the residual, not a derivation.",
+      "Paper 2 stays conjectural; do NOT remove that label.",
+      "Single CODATA data point cannot fix C uniquely \u2014 ratio test only."
+    ]
+  }
+}

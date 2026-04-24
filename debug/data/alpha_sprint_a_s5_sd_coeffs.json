@@ -1,0 +1,36 @@
+{
+  "computation": "Seeley-DeWitt coefficients on round S^5 (R=1)",
+  "sprint": "Sprint A alpha-EB v2 cross-check",
+  "d": 5,
+  "Vol_S5": "pi**3",
+  "Vol_S5_eq_pi3": true,
+  "curvature_invariants": {
+    "R_scalar": "20",
+    "Ric_sq": "80",
+    "Riem_sq": "40"
+  },
+  "scalar_Laplacian": {
+    "a_0": "pi**3",
+    "a_2": "10*pi**3/3",
+    "a_4": "16*pi**3/3",
+    "a_0_pi_content": "pi^3 * (1)  [polynomial in pi]",
+    "a_2_pi_content": "pi^3 * (10/3)  [polynomial in pi]",
+    "a_4_pi_content": "pi^3 * (16/3)  [polynomial in pi]"
+  },
+  "squared_Dirac_dim_S_4": {
+    "a_0": "4*pi**3",
+    "a_2": "-20*pi**3/3",
+    "a_4": "14*pi**3/3",
+    "a_0_pi_content": "pi^3 * (4)  [polynomial in pi]",
+    "a_2_pi_content": "pi^3 * (-20/3)  [polynomial in pi]",
+    "a_4_pi_content": "pi^3 * (14/3)  [polynomial in pi]"
+  },
+  "spectral_action_on_5manifold": {
+    "expansion": "Tr f(D/Lambda) ~ Lambda^5 f_5 a_0 + Lambda^3 f_3 a_2 + Lambda^1 f_1 a_4",
+    "all_powers_odd": true,
+    "log_term": "absent (d odd)",
+    "every_coefficient_carries": "pi^3 = Vol(S^5) as a multiplicative factor",
+    "independent_transcendental_injection": "none"
+  },
+  "verdict_summary": "pi^3 = Vol(S^5) is the natural integration measure factor in EVERY SD coefficient on S^5, so any spectral-action observable inherits a multiplicative pi^3. However, no SD coefficient on S^5 produces a contribution at order alpha^3 against the leading 1/alpha of K. The numerical match R_predict ~ pi^3 alpha^3 is therefore consistent with the Vol(S^5) = pi^3 identity but is NOT structurally derived from any specific Paper 24 spectral-action coefficient."
+}
