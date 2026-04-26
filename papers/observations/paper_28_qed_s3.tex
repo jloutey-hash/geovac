@@ -22,7 +22,7 @@
 \begin{abstract}
 We compute perturbative QED spectral sums on the three-sphere $S^3$
 using the Camporesi--Higuchi Dirac spectrum and the Hodge-1 (photon)
-spectrum with SO(4) vertex selection rules.  Six structural results
+spectrum with SO(4) vertex selection rules.  Eight structural results
 emerge.
 (1)~\textbf{T9 theorem:} the spectral zeta function of the squared
 Dirac operator $D^2$ is a two-term polynomial in $\pi^2$ with rational
@@ -55,6 +55,20 @@ transcendental constant appears.  The two-loop $S_{\min}$ is computed
 to 200 digits and confirmed irreducible against a 100-element PSLQ
 basis; the three-loop constant $S^{(3)}$ is independent of $S_{\min}$
 (Proposition~\ref{prop:depth_k}).
+(7)~\textbf{$\zeta(3)$ complementarity:} the degeneracy-weighted
+fine-structure shell sum $\mathcal{S}(n) = n(5n-4)/2$ and the Dirac
+mode degeneracy $g_n^{\mathrm{Dirac}} = 2n(n+1)$ satisfy
+$\mathcal{S}(n) + g_n^{\mathrm{Dirac}} = 9n^2/2$ exactly, so the
+Dirichlet series identity
+$D_{\mathcal{S}}(s) + D_{g}(s) = \tfrac{9}{2}\,\zeta(s{-}2)$ holds
+for all~$s$: the $\zeta(s{-}1)$ terms---all odd-zeta content---cancel
+identically (Theorem~\ref{thm:zeta3_complement}).
+(8)~\textbf{Fine-structure Euler sum cancellation:} the
+degeneracy-weighted Dirichlet sum $D_4$ at order $(Z\alpha)^8$ in the
+exact Dirac hydrogen spectrum breaks the pure-single-zeta pattern that
+holds at $(Z\alpha)^4$ and $(Z\alpha)^6$: $\zeta(2)\zeta(5)$ cancels
+algebraically but $\zeta(3)\zeta(4)$ survives with coefficient~$-9/2$,
+verified at 200~dps (Observation~\ref{obs:euler_cancel}).
 Comprehensive transcendental tables for $D(s)$, $D_{\mathrm{even}}(s)$,
 $D_{\mathrm{odd}}(s)$, and the one-loop self-energy are presented, all
 backed by the test suite.
@@ -1040,6 +1054,214 @@ increasing motivic complexity observed in flat-space multi-loop Feynman
 integrals~\cite{laporta2002,bailey2001}.
 
 % ===================================================================
+\section{Fine-Structure Euler Sum Cancellation}
+\label{sec:euler_cancel}
+% ===================================================================
+
+The Dirac Dirichlet series $D(s)$ studied in the preceding sections
+sums over the \emph{free} Camporesi--Higuchi spectrum with uniform
+degeneracy weights~$g_n$.  A complementary probe arises from the
+\emph{exact} Dirac hydrogen spectrum, where the degeneracy-weighted
+energy expansion in powers of $(Z\alpha)^2$ generates Dirichlet sums
+with state-dependent coefficients that mix harmonic numbers of varying
+depth.
+
+\subsection{Setup}
+
+The exact Dirac energy for quantum numbers $(n,j)$ is
+\begin{equation}
+  E_{nj} = mc^2 \biggl(
+    1 + \frac{(Z\alpha)^2}
+    {\bigl(n_r + \sqrt{\kappa^2 - (Z\alpha)^2}\bigr)^2}
+  \biggr)^{\!-1/2} - mc^2\,,
+\end{equation}
+where $\kappa = j + \frac{1}{2}$ and $n_r = n - \kappa$.
+Expanding in powers of $x = (Z\alpha)^2$,
+\begin{equation}
+  \sum_j d(n,j)\, \frac{E_{nj}}{mc^2}
+  = \sum_{p=1}^{\infty} c_p(n)\, x^p\,,
+\end{equation}
+where $d(n,j) = 2(2j+1)$ for $j < n - \tfrac{1}{2}$ and
+$d(n,j) = 2j+1$ for $j = n - \tfrac{1}{2}$.
+The degeneracy-weighted Dirichlet sums are
+\begin{equation}
+  D_p \;=\; \sum_{n=1}^{\infty} c_p(n)\,.
+\end{equation}
+
+\subsection{Closed forms for $c_p(n)$}
+
+Symbolic expansion of the exact Dirac formula and summation over $j$
+gives closed forms involving generalized harmonic numbers
+$H_{n-1}^{(r)} = \sum_{k=1}^{n-1} k^{-r}$:
+\begin{align}
+  c_2(n) &= -\frac{5n - 4}{4n^5}\,, \\[3pt]
+  c_3(n) &= -\frac{3(9n-8)}{16n^7}
+    + \frac{3}{2}\,\frac{H_{n-1}}{n^6}
+    - \frac{1}{2}\,\frac{H_{n-1}^{(2)}}{n^5}\,.
+\end{align}
+At order $p = 2$ and $p = 3$, the sums $D_2$ and $D_3$ collapse to
+pure single-zeta values:
+\begin{equation}
+  D_2 = -\frac{5}{4}\,\zeta(4) + \zeta(5)\,,
+  \qquad
+  D_3 = -\frac{27}{16}\,\zeta(6) + \frac{3}{2}\,\zeta(7)\,.
+\end{equation}
+
+\subsection{$\zeta(3)$ complementarity}
+
+The $p = 2$ coefficient defines the \emph{fine-structure shell sum}
+\begin{equation}
+  \mathcal{S}(n) \;=\; \sum_j d(n,j)\Bigl(\frac{n}{j+\frac{1}{2}}
+  - \frac{3}{4}\Bigr) \;=\; \frac{n(5n-4)}{2}\,,
+\end{equation}
+so that $c_2(n) = -\mathcal{S}(n)/(2n^6)$.
+This decomposes into a \emph{conformal} piece $-3n^2/2$ (from the
+scalar curvature $R/8 = 3/4$ on unit~$S^3$) and a \emph{quantum defect}
+piece $2n(2n-1)$, the double hexagonal number.
+
+In the Fock convention ($n \ge 1$), the single-chirality Dirac mode
+degeneracy is $g_n^{\mathrm{Dirac}} = 2n(n+1)$.
+
+\begin{theorem}[$\zeta(3)$ complementarity]
+\label{thm:zeta3_complement}
+For all $n \ge 1$,
+\begin{equation}
+\label{eq:shell_complement}
+  \mathcal{S}(n) + g_n^{\mathrm{Dirac}} \;=\; \frac{9n^2}{2}
+  \;=\; |\lambda_0|^2 \times n^2_{\mathrm{Schr}}\,,
+\end{equation}
+where $|\lambda_0| = 3/2$ is the lowest Dirac eigenvalue on~$S^3$
+and $n^2_{\mathrm{Schr}} = 2n^2$ is the Schr\"odinger degeneracy
+(including spin).
+At the Dirichlet series level,
+\begin{equation}
+\label{eq:dirichlet_complement}
+  D_{\mathcal{S}}(s) + D_{g}(s) \;=\; \frac{9}{2}\,\zeta(s{-}2)
+  \qquad \text{for all } s\,,
+\end{equation}
+where $D_{\mathcal{S}}(s) = \sum_{n \ge 1} \mathcal{S}(n)\,n^{-s}$
+and $D_{g}(s) = \sum_{n \ge 1} g_n^{\mathrm{Dirac}}\,n^{-s}$.
+The $\zeta(s{-}1)$ terms cancel identically.
+\end{theorem}
+
+\begin{proof}
+$\mathcal{S}(n) = 5n^2/2 - 2n$ and $g_n^{\mathrm{Dirac}} = 2n^2 + 2n$;
+their sum is $9n^2/2$.  Therefore
+$D_{\mathcal{S}}(s) = \tfrac{5}{2}\,\zeta(s{-}2) - 2\,\zeta(s{-}1)$
+and $D_{g}(s) = 2\,\zeta(s{-}2) + 2\,\zeta(s{-}1)$; summing gives
+$\tfrac{9}{2}\,\zeta(s{-}2)$.
+\end{proof}
+
+The cancellation of $\zeta(s{-}1)$ is the physical content: at odd~$s$,
+$\zeta(s{-}1)$ is even-zeta ($\pi^{\mathrm{even}}$) and harmless, but
+at even~$s$, $\zeta(s{-}1)$ carries odd-zeta content ($\zeta(3)$,
+$\zeta(5)$, \ldots).  At $s = d_{\max} = 4$:
+\begin{equation}
+  D_{\mathcal{S}}(4) = \frac{5}{2}\,\frac{\pi^2}{6} - 2\zeta(3)
+  = \frac{5F}{2} - 2\zeta(3)\,,
+\end{equation}
+confirming that the quantum defect (the $-2n$ piece of $\mathcal{S}$)
+is the physical mechanism injecting $\zeta(3)$ into the fine-structure
+spectrum---with sign opposite to the $+2\zeta(3)$ that appears in
+$D_{g}(4) = 2\zeta(2) + 2\zeta(3)$.  Their sum
+$\tfrac{9}{2}\zeta(2) = 3\pi^2/4$ is purely $\pi^{\mathrm{even}}$,
+returning to the second-order (scalar) sector.
+
+The prefactor $9/2 = |\lambda_0|^2 \times 2 =
+(\text{Dirac mass gap})^2 \times (\text{spinor rank})$
+links through the Lichnerowicz formula $D^2 = \Delta + R/4$
+back to the $S^3$ geometry: the complementarity sum
+recovers the scalar Laplacian sector exactly, closing the chain
+from the packing construction through $S^3$ and the Dirac operator
+to the fine-structure Dirichlet series.
+
+This is Theorem~\ref{thm:T9} expressed in physical terms:
+the $D^2$ spectral zeta is even-zeta only \emph{because} the
+fine-structure energy distribution and the Dirac mode counting
+are transcendentally complementary.
+Paper~18's taxonomy predicted this separation: calibration
+($\pi^{\mathrm{even}}$ from the second-order curvature $R/8$) versus
+spinor-intrinsic (mixed zeta from the first-order quantum defect).
+
+\subsection{$D_4$ at weight 7: product zeta survives}
+
+At order $p = 4$,
+\begin{align}
+  c_4(n) &= -\frac{5(41n - 40)}{64n^9}
+    + \frac{15}{4}\,\frac{H_{n-1}}{n^8}
+    - \frac{1}{4}\,\frac{H_{n-1}^{(2)}}{n^7}
+    \notag \\
+    &\quad - \frac{3}{4}\,\frac{H_{n-1}^{(3)}}{n^6}
+    - \frac{1}{4}\,\frac{H_{n-1}^{(4)}}{n^5}\,.
+\end{align}
+The harmonic-number sums decompose into weight-7 Euler sums
+$S_{r,s} = \sum_{n \ge 1} H_n^{(r)} / n^s$ via the identity
+$H_{n-1}^{(r)} = \zeta(r) - \zeta(r,n)$ and Euler's formula
+$S_{1,6} = 4\zeta(7) - \zeta(2)\zeta(5) - \zeta(3)\zeta(4)$~\cite{flajolet1998}.
+
+\begin{observation}[Euler sum cancellation at weight~7]
+\label{obs:euler_cancel}
+At 200~dps, PSLQ identifies
+\begin{equation}
+\label{eq:D4_decomp}
+  D_4 = -\frac{205}{64}\,\zeta(6)
+  + \frac{71}{8}\,\zeta(7)
+  - \frac{9}{2}\,\zeta(3)\zeta(4)\,,
+\end{equation}
+with residual $< 10^{-195}$.  The product $\zeta(2)\zeta(5)$ cancels
+\emph{algebraically}: its coefficient vanishes exactly (verified in
+exact rational arithmetic from the Euler sum decomposition), while
+$\zeta(3)\zeta(4)$ survives with coefficient $-9/2$.
+\end{observation}
+
+This breaks the pure-single-zeta pattern: $D_2$ and $D_3$ involve
+only $\zeta(s)$ values, whereas $D_4$ introduces the first zeta
+product.  The four weight-7 Euler sums, independently identified by
+PSLQ, are
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Sum & $\zeta(7)$ & $\zeta(2)\zeta(5)$ & $\zeta(3)\zeta(4)$ \\
+\hline
+$S_{1,6}$ & $4$ & $-1$ & $-1$ \\
+$S_{2,5}$ & $-10$ & $5$ & $2$ \\
+$S_{3,4}$ & $18$ & $-10$ & $0$ \\
+$S_{4,3}$ & $-17$ & $10$ & $1$ \\
+$S_{5,2}$ & $11$ & $-4$ & $-2$ \\
+\hline
+\end{tabular}
+\end{center}
+The stuffle relations $S_{r,s} + S_{s,r} = \zeta(r)\zeta(s) + \zeta(r+s)$
+are satisfied to $< 10^{-200}$.
+
+\subsection{Transcendental structure}
+
+Substituting $\zeta(6) = \pi^6/945$ and $\zeta(4) = \pi^4/90$,
+equation~\eqref{eq:D4_decomp} becomes
+\begin{equation}
+\label{eq:D4_three_tier}
+  D_4 = -\frac{41\pi^6}{12096}
+  + \frac{71}{8}\,\zeta(7)
+  - \frac{\pi^4}{20}\,\zeta(3)\,.
+\end{equation}
+This is a three-tier decomposition: $\pi^6$ (weight-6 even-zeta),
+$\zeta(7)$ (weight-7 odd-zeta), and the mixed product
+$\pi^4 \cdot \zeta(3)$ (weight-4 even $\times$ weight-3 odd).
+In Paper~18's operator-order taxonomy, $\pi^{\mathrm{even}}$ comes
+from 2nd-order operators and $\zeta(\mathrm{odd})$ from 1st-order
+operators.  The mixed product $\pi^4 \cdot \zeta(3)$ is the first
+instance in the framework where these two tiers appear multiplicatively
+in a single observable.
+
+The $\zeta(2)\zeta(5)$ cancellation is non-trivial: four of the five
+contributing Euler sums carry nonzero $\zeta(2)\zeta(5)$ coefficients
+($S_{1,6}$, $S_{2,5}$, $S_{4,3}$, $S_{5,2}$), and the cancellation
+emerges only in the specific linear combination that the Dirac
+degeneracy weights and harmonic-number structure select.  In contrast,
+$S_{3,4}$ alone is free of $\zeta(3)\zeta(4)$, but the remaining four
+sums contribute $\zeta(3)\zeta(4)$ terms that do not cancel.
+
+% ===================================================================
 \section{Flat-Space Consistency}
 \label{sec:flat_space}
 % ===================================================================
@@ -1152,9 +1374,10 @@ $n_{\max}$ & $S^{(3)}(n_{\max})$ & $\Delta$ from previous & Time (s) \\
 \label{sec:discussion}
 % ===================================================================
 
-The four theorems and one proposition of this paper, together with the
-anomalous magnetic moment computation (Sec.~\ref{sec:anomalous_moment}),
-complete the first comprehensive treatment of perturbative QED on~$S^3$.
+The five theorems, one proposition, and one observation of this paper,
+together with the anomalous magnetic moment computation
+(Sec.~\ref{sec:anomalous_moment}), complete the first comprehensive
+treatment of perturbative QED on~$S^3$.
 The three-axis taxonomy extends Paper~18's exchange-constant
 classification~\cite{paper18} from free propagators to interaction
 vertices: \emph{diagram topology} is an independent source of
@@ -1215,6 +1438,20 @@ multiple zeta values, and the failure of 100-element PSLQ bases
 suggests that the $S^3$ spectral geometry accesses a sector of the MZV
 algebra that is not reached by flat-space Feynman integrals at the same
 loop order.
+
+The fine-structure Euler sum cancellation
+(Observation~\ref{obs:euler_cancel}) connects the free-propagator
+Dirichlet series studied in Secs.~\ref{sec:T9}--\ref{sec:chi4} to the
+\emph{interacting} Dirac hydrogen spectrum.  The three-tier structure of
+$D_4$ --- $\pi^{\mathrm{even}}$, $\zeta(7)$, and the mixed product
+$\pi^4 \cdot \zeta(3)$ --- is consistent with the operator-order taxonomy
+of Paper~18~\cite{paper18}: the squared Dirac propagator ($D^2$)
+contributes $\pi^{\mathrm{even}}$ via Theorem~\ref{thm:T9}, while the
+first-order ($D$) sector introduces odd zeta.  That these two tiers
+appear multiplicatively in a degeneracy-weighted Dirichlet sum is new.
+The selective cancellation of $\zeta(2)\zeta(5)$ but survival of
+$\zeta(3)\zeta(4)$ suggests hidden structure in the Euler sum algebra
+that reflects the specific combinatorics of Dirac degeneracy weights.
 
 The three-loop factorized algorithm (Sec.~\ref{sec:three_loop})
 reduces the computational complexity from $O(N^5)$ to $O(N^3)$,
@@ -1283,6 +1520,13 @@ confirmed independent of $S_{\min}$ and all lower-loop constants.
       component is a $2/[(n+1)(n+2)]$ fraction of the total degeneracy.
       Can the $j$-dependent form factors be separated cleanly to give
       independent $c_2$ extractions at each $n_{\mathrm{ext}}$?
+\item Does the Euler sum cancellation pattern extend to $D_5$
+      (weight~9)?  At weight~9 the MZV basis includes depth-2 products
+      ($\zeta(2)\zeta(7)$, $\zeta(3)\zeta(6)$, $\zeta(4)\zeta(5)$);
+      the prediction from the $D_4$ pattern is that some but not all
+      products cancel.  Is there a representation-theoretic rule
+      (e.g., from the $S_N$ symmetry of harmonic-number sums) that
+      predicts which products survive at each weight?
 \end{enumerate}
 
 % ===================================================================
@@ -1361,6 +1605,11 @@ Birkh\"auser, 497--512 (1994).
 D.~H.~Bailey and D.~J.~Broadhurst, ``Parallel integer relation
 detection: techniques and applications,''
 \textit{Math.~Comp.}\ \textbf{70}, 1719--1736 (2001).
+
+\bibitem{flajolet1998}
+P.~Flajolet and B.~Salvy, ``Euler sums and contour integral
+representations,''
+\textit{J.~Exp.~Math.}\ \textbf{7}, 15--35 (1998).
 
 \bibitem{apery1979}
 R.~Ap\'ery, ``Irrationalit\'e de $\zeta(2)$ et $\zeta(3)$,''
