@@ -1,0 +1,204 @@
+{
+  "description": "K-Sommerfeld connection analysis at 200 dps",
+  "analysis_1_recurrence": {
+    "even_coeffs": [
+      "-5/4",
+      "19/8",
+      "-205/64",
+      "497/128"
+    ],
+    "odd_coeffs": [
+      "1",
+      "-11/4",
+      "71/8",
+      "-467/16"
+    ],
+    "2_term_recurrence_even": false,
+    "2_term_recurrence_odd": false,
+    "signs_alternate": true,
+    "growth_ratios_even": [
+      1.9,
+      1.3486842105263157,
+      1.2121951219512195
+    ],
+    "growth_ratios_odd": [
+      2.75,
+      3.227272727272727,
+      3.288732394366197
+    ]
+  },
+  "analysis_2_product_rule": {
+    "rule": "At order p, products z(a)*z(b) with a+b=2p-1 survive; z(2)*z(2p-3) always cancels",
+    "product_count_formula": "max(0, floor((2p-5)/2))",
+    "verified_through": "D_5 (p=5)",
+    "verified": true,
+    "surviving_products": {
+      "D2": "none",
+      "D3": "none (z(2)z(3) cancelled)",
+      "D4": "z(3)z(4)",
+      "D5": "z(3)z(6), z(4)z(5)"
+    }
+  },
+  "analysis_3_pslq": {
+    "test1_K_vs_D2": {
+      "basis": [
+        "K/pi",
+        "D2",
+        "z(2)",
+        "z(3)",
+        "1"
+      ],
+      "relation": [
+        0,
+        4,
+        5,
+        -4,
+        0
+      ],
+      "residual": 0.0
+    },
+    "test2_K_vs_D2D3": {
+      "basis": [
+        "K/pi",
+        "D2",
+        "D3",
+        "z(2)",
+        "z(3)",
+        "z(4)",
+        "z(5)",
+        "1"
+      ],
+      "relation": [
+        0,
+        4,
+        0,
+        5,
+        -4,
+        0,
+        0,
+        0
+      ],
+      "residual": 0.0
+    },
+    "test3_B_vs_Dc_at_4": {
+      "basis": [
+        "B",
+        "D_c2(4)",
+        "D_c3(4)",
+        "z(2)",
+        "1"
+      ],
+      "relation": [
+        1,
+        0,
+        0,
+        0,
+        -42
+      ],
+      "residual": 0.0,
+      "D_c2_at_4": "-0.25451994505233320474360463199",
+      "D_c3_at_4": "-0.130839514970792532450886776085"
+    },
+    "test4_Delta_vs_cp3": {
+      "basis": [
+        "Delta",
+        "c_2(3)",
+        "c_3(3)",
+        "1"
+      ],
+      "relation": [
+        -40,
+        0,
+        0,
+        1
+      ],
+      "residual": 0.0
+    },
+    "test5_K_vs_Dp_linear": {
+      "basis": [
+        "K/pi",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "1"
+      ],
+      "relation": null,
+      "residual": null
+    },
+    "test5b_K_vs_Dp_zetas": {
+      "basis": [
+        "K/pi",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "z(2)",
+        "z(3)",
+        "1"
+      ],
+      "relation": [
+        0,
+        -4,
+        0,
+        0,
+        0,
+        -5,
+        4,
+        0
+      ],
+      "residual": 0.0
+    }
+  },
+  "analysis_4_truncation": {
+    "Dp_trunc_3": {
+      "2": "-0.349537037037037037037037037037",
+      "3": "-0.242830504115226337448559670782",
+      "4": "-0.147893067522576588934613625972",
+      "5": "-0.102945493754227156683432403597"
+    },
+    "Dp_tails": {
+      "2": "-0.504573643363651723153743759759",
+      "3": "-0.0382031424650877551121866376897",
+      "4": "-0.0162476065279955572050986469487",
+      "5": "-0.00998546288994845471363533474012"
+    },
+    "cp_at_n1": {
+      "2": "-1/4",
+      "3": "-1/8",
+      "4": "-15/64",
+      "5": "-7/128"
+    },
+    "F_trunc_3": "49/36",
+    "F_tail": "0.28382295573711532536",
+    "truncation_pslq": {
+      "basis": [
+        "B",
+        "D2_tr",
+        "D3_tr",
+        "Delta",
+        "1"
+      ],
+      "relation": [
+        0,
+        0,
+        0,
+        -40,
+        1
+      ],
+      "residual": 0.0
+    }
+  },
+  "analysis_5_cancellation": {
+    "mechanism": "z(2)*z(odd) cancellation driven by n^2 Fock degeneracy in Euler sum coefficients",
+    "D3_verification": "z(2)*z(3) coefficient = 3/2 (from S_{1,4}) + (-3/2) (from S_{2,3}) = 0",
+    "F_connection": "F = sum n^2/n^4 = z(2) \u2014 same n^2 weight drives cancellation"
+  },
+  "assessment": {
+    "K_pi_content": "K = pi*(42 + pi^2/6 - 1/40) has pure pi-polynomial content (no odd-zeta, no products)",
+    "D_p_odd_content": "Each D_p contains z(2p-1) and surviving products \u2014 odd-zeta does NOT vanish in partial sums",
+    "all_orders_limit_hypothesis": "NOT CONFIRMED from D_2..D_5 data alone \u2014 the odd-zeta content does not show convergence to zero in any simple weighting scheme",
+    "structural_connection": "The z(2)*z(odd) cancellation IS structurally linked to F = z(2) through the shared n^2 Fock degeneracy weight, but this does not by itself explain why K has no odd-zeta content",
+    "key_finding": "The product survival rule (max(0, floor((2p-5)/2)) products at order p, all with weight 2p-1, z(2)*z(odd) always cancelled) is verified and tied to the Fock degeneracy structure"
+  }
+}
