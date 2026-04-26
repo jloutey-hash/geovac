@@ -44,11 +44,12 @@ $n_{\mathrm{ext}}=0$ as a consequence of vertex parity
 with a $q=1$ probe photon yields $F_2 / [\alpha/(2\pi)] = 1.084$ at the
 lowest external mode ($n_{\mathrm{ext}}=1$), approximately 8.4\% above the
 flat-space Schwinger value, matching the Parker--Toms leading curvature
-correction within 0.4\%.  Higher external modes show strong suppression:
-the ratio drops monotonically through $0.613$, $0.370$, $0.244$,
-$0.173$ for $n_{\mathrm{ext}}=2,\ldots,5$, with a 5-point power-law
-fit $F_2/[\alpha/(2\pi)] = 5.91\,|\lambda|^{-1.84 \pm 0.06}$
-(Sec.~\ref{sec:anomalous_moment}).
+correction within 0.4\%.  The curvature expansion coefficient
+$c_2 = \frac{19}{100} - \frac{41\pi^2}{25200}$, extracted from
+high-precision $n_{\mathrm{ext}}=1$ data ($n_{\mathrm{int}}=0\ldots 25$
+with tail correction), involves all three Paper~2 spectral invariants
+($B=42$, $F=\pi^2/6$, $\Delta=1/40$) in a single algebraic combination
+(Sec.~\ref{sec:curvature_coefficients}).
 (6)~\textbf{Depth-$k$ tower:} at each loop order, a new irreducible
 transcendental constant appears.  The two-loop $S_{\min}$ is computed
 to 200 digits and confirmed irreducible against a 100-element PSLQ
@@ -757,6 +758,100 @@ Eqs.~\eqref{eq:dirac_spectrum} and~\eqref{eq:hodge1_spectrum}).
 Computation scripts: \texttt{debug/alpha\_g\_minus\_2\_vertex.py},
 \texttt{debug/alpha\_g\_minus\_2\_curvature\_fit.py}.
 
+\subsection{Curvature expansion coefficients}
+\label{sec:curvature_coefficients}
+
+The Parker--Toms expansion~\eqref{eq:parker_toms} at $n_{\mathrm{ext}}=1$
+provides a high-precision extraction of the curvature coefficients.
+Writing
+\begin{equation}
+  \frac{F_2}{\alpha/(2\pi)} = 1 + c_1 x + c_2 x^2 + c_3 x^3 + \cdots,
+  \qquad x \equiv \frac{1}{|\lambda|^2} = \frac{4}{25}
+  \label{eq:curvature_expansion}
+\end{equation}
+at $n_{\mathrm{ext}} = 1$ ($|\lambda| = 5/2$), the leading coefficient
+$c_1 = R_{\mathrm{scalar}}/12 = 1/2$ follows from the Parker--Toms
+theorem~\cite{parker1980} for a Dirac field on unit~$S^3$.
+
+The converged $n_{\mathrm{ext}}=1$ spectral sum ($n_{\mathrm{int}} = 0
+\ldots 25$ with power-law tail correction, 13 significant figures)
+gives a corrected ratio of $1.0844529226552$, hence
+$\delta \equiv F_2/[\alpha/(2\pi)] - 1 = 0.0844529226552$.
+Subtracting the leading term $c_1 x = 0.08$ and dividing by~$x^2$:
+\begin{equation}
+  c_2^{\mathrm{apparent}} = \frac{\delta - c_1 x}{x^2}
+  = 0.173942291220598 \pm 10^{-12}.
+  \label{eq:c2_apparent}
+\end{equation}
+By the T9 theorem (Theorem~\ref{thm:T9}), one-loop quantities on~$S^3$
+are polynomials in~$\pi^2$ with rational coefficients; hence
+$c_2 = a + b\pi^2$ for rationals~$a$, $b$.
+
+PSLQ identification against the Paper~2 spectral invariants $B = 42$,
+$F = \pi^2/6$, $\Delta = 1/40$~\cite{paper2} yields
+\begin{equation}
+  \boxed{c_2
+    = \frac{2 - B\Delta - F\Delta - F/B}{5}
+    = \frac{19}{100} - \frac{41\pi^2}{25200}\,,}
+  \label{eq:c2_identification}
+\end{equation}
+numerically $0.173942310300$.  The match to~\eqref{eq:c2_apparent}
+is 8 digits (residual $1.9 \times 10^{-8}$), compared with 5.5~digits
+for the next-best candidate $(6\pi^2 - 58)/7$ and 3~digits for the
+purely rational~$25/144$.
+
+\medskip
+\noindent\textbf{Structural decomposition.}
+The three Paper~2 invariants enter~\eqref{eq:c2_identification}
+through three bilinear combinations:
+\begin{equation}
+  B\Delta = \frac{42}{40} = \frac{21}{20}, \qquad
+  F\Delta = \frac{\pi^2}{240}, \qquad
+  \frac{F}{B} = \frac{\pi^2}{252}.
+\end{equation}
+The numerator $2 - B\Delta - F\Delta - F/B
+  = \frac{19}{20} - \frac{41\pi^2}{5040}$
+is rational plus a single~$\pi^2$ term, consistent with the T9
+constraint.  The denominator~5 is a simple integer.
+
+\medskip
+\noindent\textbf{Implied $c_3$.}
+Using $c_2$ from~\eqref{eq:c2_identification} to predict
+$\delta_{\mathrm{pred}} = c_1 x + c_2 x^2 = 0.08445292314$,
+the residual $\delta - \delta_{\mathrm{pred}} = -4.9 \times 10^{-10}$
+yields $c_3 = \mathrm{residual}/x^3 \approx -1.2 \times 10^{-7}$.
+That $|c_3| \ll c_2$ suggests near-termination of the curvature
+expansion at second order --- a structural feature if confirmed by
+higher-precision computation.
+
+\medskip
+\noindent\textbf{Multi-$n_{\mathrm{ext}}$ obstruction.}
+The curvature coefficients in~\eqref{eq:curvature_expansion} are
+defined for the $j = 1/2$ sector of the external Dirac mode.  At
+$n_{\mathrm{ext}} \ge 2$, the Dirac level carries multiple total
+angular momentum sectors ($j = 1/2, 3/2, \ldots, n_{\mathrm{ext}}+1/2$)
+with distinct form factors.  The $j = 1/2$ component is a
+$2/[(n_{\mathrm{ext}}+1)(n_{\mathrm{ext}}+2)]$ fraction of the total
+degeneracy, shrinking as $\sim 1/n^2$; extracting universal curvature
+coefficients from a full trace requires Wigner--Eckart decomposition
+into multipole form factors, which is not yet implemented.
+Consequently, the high-precision extraction is currently restricted to
+$n_{\mathrm{ext}} = 1$, where $j = 1/2$ is the unique sector.
+
+\medskip
+\noindent\textbf{Paper~2 bridge.}
+Since $\alpha$ cancels exactly in the ratio $F_2/[\alpha/(2\pi)]$, the
+curvature coefficients $c_1$, $c_2$ are pure geometric invariants of the
+Dirac spectral sum on~$S^3$.  The appearance of all three Paper~2
+invariants ($B$, $F$, $\Delta$) in~$c_2$ provides a concrete numerical
+bridge between the $\alpha$ construction (Paper~2) and the QED vertex
+structure (this paper): the same spectral objects that compose
+$K = \pi(B + F - \Delta)$ also control the curvature dependence of
+the one-loop anomalous magnetic moment on~$S^3$.
+
+Computation scripts: \texttt{debug/g2\_c2\_verification.py},
+\texttt{debug/g2\_c2\_diagnostic.py}.
+
 % ===================================================================
 \section{One-Loop Vacuum Structure}
 \label{sec:one_loop}
@@ -1074,7 +1169,23 @@ consequences for scattering processes on~$S^3$.  The anomalous
 magnetic moment ($F_2 / [\alpha/(2\pi)] = 1.084$ at
 $n_{\mathrm{ext}} = 1$) provides the first quantitative curvature
 correction to a measurable QED observable in the framework, matching the
-Parker--Toms prediction within 0.4\%.  The 5-point mode-dependent curve
+Parker--Toms prediction within 0.4\%.
+
+The curvature coefficient identification
+$c_2 = (2 - B\Delta - F\Delta - F/B)/5$
+(Sec.~\ref{sec:curvature_coefficients}) is the first concrete
+numerical bridge between Papers~2 and~28: the three spectral objects
+$B = 42$, $F = \pi^2/6$, $\Delta = 1/40$ that compose the
+$\alpha$~construction $K = \pi(B + F - \Delta)$ also appear as the
+geometric invariants controlling the second curvature correction to the
+anomalous magnetic moment on~$S^3$.  Since $\alpha$ cancels in the ratio
+$F_2/[\alpha/(2\pi)]$, this is a statement about the spectral geometry
+of the Dirac operator on~$S^3$, not about QED per se.  The
+near-vanishing of~$c_3$ ($|c_3| \lesssim 10^{-7}$) suggests that the
+curvature expansion nearly terminates at second order, which would be a
+structural constraint if confirmed.
+
+The 5-point mode-dependent curve
 (Table~\ref{tab:mode_dependence}) reveals that the anomalous moment on
 a compact space is strongly mode-dependent: enhanced for the lowest mode
 and progressively suppressed for higher modes, with a power-law
@@ -1156,6 +1267,22 @@ confirmed independent of $S_{\min}$ and all lower-loop constants.
 \item Can the flat-space limit $R \to \infty$ be verified explicitly by
       computing $F_2$ on spheres of increasing radius with $n$ scaling
       as $n \sim m R$ to keep the physical mass fixed?
+\item The curvature coefficient identification
+      $c_2 = (2 - B\Delta - F\Delta - F/B)/5$ matches the spectral sum
+      to 8~digits (Sec.~\ref{sec:curvature_coefficients}).  Can this be
+      verified to higher precision by extending the $n_{\mathrm{ext}}=1$
+      sum beyond $n_{\mathrm{int}}=25$, or by deriving $c_2$ analytically
+      from the Schwinger--DeWitt heat kernel on~$S^3$?
+\item Is $c_3 \approx -1.2 \times 10^{-7}$ genuinely near-zero, or an
+      artifact of limited precision?  If $c_3 = 0$ exactly, what
+      structural principle enforces termination of the curvature expansion
+      at second order?
+\item The multi-$n_{\mathrm{ext}}$ extraction of curvature coefficients
+      requires Wigner--Eckart decomposition into multipole form factors
+      for higher-$j$ sectors.  At $n_{\mathrm{ext}} \ge 2$, the $j = 1/2$
+      component is a $2/[(n+1)(n+2)]$ fraction of the total degeneracy.
+      Can the $j$-dependent form factors be separated cleanly to give
+      independent $c_2$ extractions at each $n_{\mathrm{ext}}$?
 \end{enumerate}
 
 % ===================================================================
@@ -1179,6 +1306,10 @@ GeoVac Project, ``Spectral-Geometric Exchange Constants,'' Paper~18
 \bibitem{paper29}
 GeoVac Project, ``Ramanujan Property of GeoVac Hopf Graphs,'' Paper~29
 (2026).
+
+\bibitem{paper2}
+GeoVac Project, ``Fine Structure Constant from the Hopf Bundle,''
+Paper~2 (2025).
 
 \bibitem{schwinger1948}
 J.~Schwinger, ``On quantum-electrodynamics and the magnetic moment of

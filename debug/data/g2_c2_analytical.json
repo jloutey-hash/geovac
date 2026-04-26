@@ -1,0 +1,42 @@
+{
+  "geometry": {
+    "d": 3,
+    "R_scalar": 6,
+    "Ric_sq": 12,
+    "Riem_sq": 12,
+    "Weyl_sq": 0,
+    "E_lich": 1.5
+  },
+  "seeley_dewitt": {
+    "a1_per_comp": 1.0,
+    "a2_density_per_comp": 0.125,
+    "Omega_sq_trace_4comp": -6.0
+  },
+  "known_coefficients": {
+    "c1_exact": "1/2",
+    "c1_float": 0.5,
+    "c1_source": "Parker-Toms: R/12 = 6/12 for Dirac field on unit S^3"
+  },
+  "am_results": {
+    "1": {
+      "error": "'L_up'",
+      "n_ext": 1
+    },
+    "2": {
+      "error": "'L_up'",
+      "n_ext": 2
+    },
+    "3": {
+      "error": "'L_up'",
+      "n_ext": 3
+    },
+    "4": {
+      "error": "'L_up'",
+      "n_ext": 4
+    },
+    "5": {
+      "error": "'L_up'",
+      "n_ext": 5
+    }
+  }
+}
