@@ -1,0 +1,561 @@
+{
+  "sprint": "GN-1",
+  "description": "Hodge decomposition of the S^3 Fock scalar graph: signed incidence B, node Laplacian L0=BB^T, edge Laplacian L1=B^TB. Verifies \u03b2\u2080=n_max (angular sectors), SVD identity, \u03c0-free certificate. Documents the Bochner-Weitzenb\u00f6ck Ricci shift gap=2n+1 between the graph edge spectrum \u03bb\u2099=n\u00b2-1 and the continuum Hodge-1 spectrum \u03bc\u2099=n(n+2).",
+  "key_findings": [
+    "\u03b2\u2080 = n_max: the Fock graph has n_max connected components (one per l-sector)",
+    "T\u00b1 transitions preserve l, L\u00b1 preserve (n,l): no transition changes l",
+    "\u03b2\u2081 = E - V + n_max loops (closed angular orbits at each level)",
+    "SVD identity: nonzero spectra of L\u2080 and L\u2081 are identical",
+    "\u03c0-free: all eigenvalues are algebraic integers, no transcendentals",
+    "NOT all rational: l=2 sector at n_max=3 produces \u221a5-containing eigenvalues",
+    "Hodge-1 gap = 2n+1 (Ricci shift +2 is continuum curvature, absent from graph)"
+  ],
+  "n_max_results": {
+    "1": {
+      "n_max": 1,
+      "n_nodes": 1,
+      "n_edges": 0,
+      "betti_0": 1,
+      "betti_1": 0,
+      "euler_characteristic": 1,
+      "checks": {
+        "L0_equals_D_minus_A": true,
+        "svd_identity": true,
+        "betti_formula": true,
+        "pi_free": true,
+        "algebraic_integer": true
+      },
+      "L0_spectrum": [
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        }
+      ],
+      "L1_spectrum": [],
+      "L0_zero_count": 1,
+      "L0_irrational_count": 0,
+      "L1_zero_count": 0,
+      "L0_spectrum_floats_sorted": [
+        0.0
+      ],
+      "L1_spectrum_floats_sorted": [],
+      "hodge1_comparison": []
+    },
+    "2": {
+      "n_max": 2,
+      "n_nodes": 5,
+      "n_edges": 3,
+      "betti_0": 2,
+      "betti_1": 0,
+      "euler_characteristic": 2,
+      "checks": {
+        "L0_equals_D_minus_A": true,
+        "svd_identity": true,
+        "betti_formula": true,
+        "pi_free": true,
+        "algebraic_integer": true
+      },
+      "L0_spectrum": [
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "1",
+          "float_value": 1.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "2",
+          "float_value": 2.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        }
+      ],
+      "L1_spectrum": [
+        {
+          "sympy_str": "1",
+          "float_value": 1.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "2",
+          "float_value": 2.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        }
+      ],
+      "L0_zero_count": 2,
+      "L0_irrational_count": 0,
+      "L1_zero_count": 0,
+      "L0_spectrum_floats_sorted": [
+        0.0,
+        0.0,
+        1.0,
+        2.0,
+        3.0
+      ],
+      "L1_spectrum_floats_sorted": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "hodge1_comparison": [
+        {
+          "n": 2,
+          "lambda_scalar": 3,
+          "mu_hodge1": 8,
+          "gap_ricci": 5
+        }
+      ]
+    },
+    "3": {
+      "n_max": 3,
+      "n_nodes": 14,
+      "n_edges": 13,
+      "betti_0": 3,
+      "betti_1": 2,
+      "euler_characteristic": 1,
+      "checks": {
+        "L0_equals_D_minus_A": true,
+        "svd_identity": true,
+        "betti_formula": true,
+        "pi_free": true,
+        "algebraic_integer": true
+      },
+      "L0_spectrum": [
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3/2 - sqrt(5)/2",
+          "float_value": 0.38196601125010515,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "1",
+          "float_value": 1.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "1",
+          "float_value": 1.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "5/2 - sqrt(5)/2",
+          "float_value": 1.381966011250105,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "2",
+          "float_value": 2.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "sqrt(5)/2 + 3/2",
+          "float_value": 2.618033988749895,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "sqrt(5)/2 + 5/2",
+          "float_value": 3.618033988749895,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "5",
+          "float_value": 5.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        }
+      ],
+      "L1_spectrum": [
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "0",
+          "float_value": 0.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3/2 - sqrt(5)/2",
+          "float_value": 0.38196601125010515,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "1",
+          "float_value": 1.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "1",
+          "float_value": 1.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "5/2 - sqrt(5)/2",
+          "float_value": 1.381966011250105,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "2",
+          "float_value": 2.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "sqrt(5)/2 + 3/2",
+          "float_value": 2.618033988749895,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "3",
+          "float_value": 3.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "sqrt(5)/2 + 5/2",
+          "float_value": 3.618033988749895,
+          "is_integer": false,
+          "is_rational": false,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        },
+        {
+          "sympy_str": "5",
+          "float_value": 5.0,
+          "is_integer": true,
+          "is_rational": true,
+          "is_algebraic": true,
+          "has_pi": false,
+          "has_sqrt": false
+        }
+      ],
+      "L0_zero_count": 3,
+      "L0_irrational_count": 4,
+      "L1_zero_count": 2,
+      "L0_spectrum_floats_sorted": [
+        0.0,
+        0.0,
+        0.0,
+        0.38196601125010515,
+        1.0,
+        1.0,
+        1.381966011250105,
+        2.0,
+        2.618033988749895,
+        3.0,
+        3.0,
+        3.0,
+        3.618033988749895,
+        5.0
+      ],
+      "L1_spectrum_floats_sorted": [
+        0.0,
+        0.0,
+        0.38196601125010515,
+        1.0,
+        1.0,
+        1.381966011250105,
+        2.0,
+        2.618033988749895,
+        3.0,
+        3.0,
+        3.0,
+        3.618033988749895,
+        5.0
+      ],
+      "hodge1_comparison": [
+        {
+          "n": 2,
+          "lambda_scalar": 3,
+          "mu_hodge1": 8,
+          "gap_ricci": 5
+        }
+      ]
+    },
+    "4": {
+      "n_max": 4,
+      "n_nodes": 30,
+      "n_edges": 34,
+      "betti_0": 4,
+      "betti_1": 8,
+      "euler_characteristic": -4,
+      "checks": {
+        "L0_equals_D_minus_A": true,
+        "svd_identity": true,
+        "betti_formula": true,
+        "pi_free": true,
+        "algebraic_integer": true
+      },
+      "L0_spectrum_floats_sorted": [
+        -7.747708733842065e-16,
+        -2.1965935921949816e-16,
+        5.0450834795003976e-17,
+        1.272161401859515e-16,
+        0.19806226419516176,
+        0.38196601125010454,
+        0.585786437626905,
+        0.7530203962825327,
+        0.9999999999999998,
+        1.0,
+        1.3819660112501055,
+        1.5549581320873704,
+        1.9999999999999987,
+        1.9999999999999991,
+        2.0,
+        2.381966011250104,
+        2.4450418679126287,
+        2.618033988749894,
+        3.0,
+        3.0000000000000013,
+        3.246979603717467,
+        3.3819660112501047,
+        3.414213562373094,
+        3.6180339887498922,
+        3.8019377358048385,
+        4.0,
+        4.000000000000001,
+        4.618033988749892,
+        5.618033988749894,
+        6.000000000000001
+      ],
+      "L1_spectrum_floats_sorted": [
+        -7.212621476181654e-16,
+        -2.5091377054667655e-16,
+        -1.3776774208952094e-16,
+        5.994302847062327e-17,
+        2.993536756056254e-16,
+        7.658535783245272e-16,
+        1.0536711472188324e-15,
+        1.7716147193835406e-15,
+        0.19806226419516193,
+        0.38196601125010315,
+        0.585786437626905,
+        0.7530203962825329,
+        0.9999999999999996,
+        1.0000000000000004,
+        1.3819660112501055,
+        1.5549581320873713,
+        1.9999999999999996,
+        1.9999999999999998,
+        2.0000000000000013,
+        2.3819660112501033,
+        2.445041867912629,
+        2.6180339887498953,
+        3.000000000000001,
+        3.000000000000003,
+        3.2469796037174663,
+        3.3819660112501047,
+        3.414213562373095,
+        3.618033988749895,
+        3.8019377358048385,
+        4.0,
+        4.000000000000001,
+        4.618033988749895,
+        5.618033988749892,
+        6.000000000000001
+      ],
+      "L0_zero_count": 4,
+      "L1_zero_count": 8,
+      "hodge1_comparison": [
+        {
+          "n": 2,
+          "lambda_scalar": 3,
+          "mu_hodge1": 8,
+          "gap_ricci": 5
+        }
+      ]
+    }
+  }
+}

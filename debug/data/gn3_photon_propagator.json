@@ -1,0 +1,821 @@
+{
+  "description": "Photon propagator for graph-native QED on the S3 Fock scalar graph. L1 = B^T*B is the edge Laplacian. G_gamma = L1^+ is the Feynman-gauge photon propagator. All computations in exact rational arithmetic at n_max=2; exact arithmetic also used at n_max=3.",
+  "n_max_2": {
+    "module": "geovac.graph_qed_photon",
+    "n_max": 2,
+    "graph_topology": {
+      "V": 5,
+      "E": 3,
+      "beta_0": 2,
+      "beta_1": 0,
+      "n_transverse_modes": 3
+    },
+    "L1_spectrum": {
+      "eigenvalues": [
+        {
+          "value": "1",
+          "multiplicity": 1,
+          "float_val": 1.0
+        },
+        {
+          "value": "2",
+          "multiplicity": 1,
+          "float_val": 2.0
+        },
+        {
+          "value": "3",
+          "multiplicity": 1,
+          "float_val": 3.0
+        }
+      ],
+      "n_zero": 0,
+      "n_nonzero": 3,
+      "pi_free": true
+    },
+    "svd_theorem_L0_L1_max_diff": 0.0,
+    "gauge_zero_modes": {
+      "count": 0,
+      "equals_beta_1": true,
+      "vectors": []
+    },
+    "photon_propagator": {
+      "feynman_gauge": [
+        [
+          "1/2",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "2/3",
+          "1/3"
+        ],
+        [
+          "0",
+          "1/3",
+          "2/3"
+        ]
+      ],
+      "transverse_projector": [
+        [
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1"
+        ]
+      ],
+      "L1_nonzero_eigenvalues": [
+        "1",
+        "2",
+        "3"
+      ],
+      "L1_zero_count": 0,
+      "pi_free": true
+    },
+    "continuum_comparison": [
+      {
+        "graph_ev": "1",
+        "graph_ev_float": 1.0,
+        "mult": 1,
+        "nearest_scalar_k": 1,
+        "nearest_scalar_val": 0,
+        "graph_minus_scalar": 1.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -2.0,
+        "ricci_shift_expected": 3
+      },
+      {
+        "graph_ev": "2",
+        "graph_ev_float": 2.0,
+        "mult": 1,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": -1.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -1.0,
+        "ricci_shift_expected": 5
+      },
+      {
+        "graph_ev": "3",
+        "graph_ev_float": 3.0,
+        "mult": 1,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": 0.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": 0.0,
+        "ricci_shift_expected": 5
+      }
+    ],
+    "pi_free_certificate": {
+      "n_max": 2,
+      "V": 5,
+      "E": 3,
+      "beta_1": 0,
+      "pi_free": true,
+      "propagator_entries_rational": true,
+      "L1_nonzero_eigenvalues": [
+        {
+          "value": "1",
+          "multiplicity": 1
+        },
+        {
+          "value": "2",
+          "multiplicity": 1
+        },
+        {
+          "value": "3",
+          "multiplicity": 1
+        }
+      ],
+      "notes": [
+        "Exact sympy pseudoinverse computed for n_max <= 2."
+      ]
+    },
+    "physics_notes": [
+      "Fock graph at n_max=2: V=5 nodes, E=3 edges.",
+      "Betti numbers: \u03b2\u2080=2 (connected), \u03b2\u2081=0 (gauge zero modes = independent cycles).",
+      "Gauge zero modes (ker L\u2081): 0 independent 1-cycles. These are the pure-gauge / harmonic 1-forms of the photon field.",
+      "Transverse (physical) photon modes: 3 (= E \u2212 \u03b2\u2081).",
+      "\u03c0-free certificate: all L\u2081 eigenvalues are rational integers (L\u2081 = B^T B with B \u2208 {0,\u00b11}^{V\u00d7E}, so eigenvalues \u2208 \u2124_{\u22650}). The Feynman-gauge propagator entries G_\u03b3 = L\u2081^+ are rational (ratios of integers). No \u03c0, no \u03b6 values, no exchange constants. This is the graph-native regime of Paper 18.",
+      "Ricci shift: graph L\u2081 eigenvalues are ['1.0', '-1.0', '0.0'] above nearest scalar continuum values (k\u00b2-1), and ['-2.0', '-1.0', '0.0'] relative to Hodge-1 continuum n(n+2). The graph L\u2081 MATCHES the scalar spectrum (not Hodge-1), confirming the absence of the Ricci +2 curvature correction in the combinatorial edge Laplacian (Paper 25 / hodge1_s3.py).",
+      "The photon propagator G_\u03b3 = L\u2081^+ is the graph analog of the free-photon Green's function in Feynman gauge. It inverts the kinetic operator on the transverse subspace and is zero on the gauge zero modes (ker L\u2081 = independent cycles = harmonic 1-forms)."
+    ]
+  },
+  "n_max_3": {
+    "module": "geovac.graph_qed_photon",
+    "n_max": 3,
+    "graph_topology": {
+      "V": 14,
+      "E": 13,
+      "beta_0": 3,
+      "beta_1": 2,
+      "n_transverse_modes": 11
+    },
+    "L1_spectrum": {
+      "eigenvalues": [
+        {
+          "value": "0",
+          "multiplicity": 2,
+          "float_val": 0.0
+        },
+        {
+          "value": "3/2 - sqrt(5)/2",
+          "multiplicity": 1,
+          "float_val": 0.38196601125010515
+        },
+        {
+          "value": "1",
+          "multiplicity": 2,
+          "float_val": 1.0
+        },
+        {
+          "value": "5/2 - sqrt(5)/2",
+          "multiplicity": 1,
+          "float_val": 1.381966011250105
+        },
+        {
+          "value": "2",
+          "multiplicity": 1,
+          "float_val": 2.0
+        },
+        {
+          "value": "sqrt(5)/2 + 3/2",
+          "multiplicity": 1,
+          "float_val": 2.618033988749895
+        },
+        {
+          "value": "3",
+          "multiplicity": 3,
+          "float_val": 3.0
+        },
+        {
+          "value": "sqrt(5)/2 + 5/2",
+          "multiplicity": 1,
+          "float_val": 3.618033988749895
+        },
+        {
+          "value": "5",
+          "multiplicity": 1,
+          "float_val": 5.0
+        }
+      ],
+      "n_zero": 2,
+      "n_nonzero": 11,
+      "pi_free": true
+    },
+    "svd_theorem_L0_L1_max_diff": 0.0,
+    "gauge_zero_modes": {
+      "count": 2,
+      "equals_beta_1": true,
+      "vectors": [
+        {
+          "components": [
+            "0",
+            "0",
+            "-1",
+            "1",
+            "0",
+            "-1",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "components": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "-1",
+            "1",
+            "-1",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    "photon_propagator": {
+      "feynman_gauge": [
+        [
+          "2/3",
+          "1/3",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1/3",
+          "2/3",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "88/225",
+          "17/225",
+          "37/225",
+          "-1/25",
+          "-8/225",
+          "62/225",
+          "38/225",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "17/225",
+          "131/450",
+          "8/225",
+          "7/50",
+          "31/450",
+          "-17/225",
+          "-8/225",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "37/225",
+          "8/225",
+          "88/225",
+          "1/25",
+          "-17/225",
+          "38/225",
+          "62/225",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "-1/25",
+          "7/50",
+          "1/25",
+          "11/50",
+          "7/50",
+          "1/25",
+          "-1/25",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "-8/225",
+          "31/450",
+          "-17/225",
+          "7/50",
+          "131/450",
+          "8/225",
+          "17/225",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "62/225",
+          "-17/225",
+          "38/225",
+          "1/25",
+          "8/225",
+          "88/225",
+          "37/225",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "38/225",
+          "-8/225",
+          "62/225",
+          "-1/25",
+          "17/225",
+          "37/225",
+          "88/225",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "4/5",
+          "3/5",
+          "2/5",
+          "1/5"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "3/5",
+          "6/5",
+          "4/5",
+          "2/5"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "2/5",
+          "4/5",
+          "6/5",
+          "3/5"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1/5",
+          "2/5",
+          "3/5",
+          "4/5"
+        ]
+      ],
+      "transverse_projector": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "11/15",
+          "4/15",
+          "-1/15",
+          "-1/5",
+          "-1/15",
+          "4/15",
+          "1/15",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "4/15",
+          "11/15",
+          "1/15",
+          "1/5",
+          "1/15",
+          "-4/15",
+          "-1/15",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "-1/15",
+          "1/15",
+          "11/15",
+          "1/5",
+          "-4/15",
+          "1/15",
+          "4/15",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "-1/5",
+          "1/5",
+          "1/5",
+          "3/5",
+          "1/5",
+          "1/5",
+          "-1/5",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "-1/15",
+          "1/15",
+          "-4/15",
+          "1/5",
+          "11/15",
+          "1/15",
+          "4/15",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "4/15",
+          "-4/15",
+          "1/15",
+          "1/5",
+          "1/15",
+          "11/15",
+          "-1/15",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1/15",
+          "-1/15",
+          "4/15",
+          "-1/5",
+          "4/15",
+          "-1/15",
+          "11/15",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ],
+      "L1_nonzero_eigenvalues": [
+        "3/2 - sqrt(5)/2",
+        "1",
+        "5/2 - sqrt(5)/2",
+        "2",
+        "sqrt(5)/2 + 3/2",
+        "3",
+        "sqrt(5)/2 + 5/2",
+        "5"
+      ],
+      "L1_zero_count": 2,
+      "pi_free": true
+    },
+    "continuum_comparison": [
+      {
+        "graph_ev": "3/2 - sqrt(5)/2",
+        "graph_ev_float": 0.38196601125010515,
+        "mult": 1,
+        "nearest_scalar_k": 1,
+        "nearest_scalar_val": 0,
+        "graph_minus_scalar": 0.38196601,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -2.61803399,
+        "ricci_shift_expected": 3
+      },
+      {
+        "graph_ev": "1",
+        "graph_ev_float": 1.0,
+        "mult": 2,
+        "nearest_scalar_k": 1,
+        "nearest_scalar_val": 0,
+        "graph_minus_scalar": 1.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -2.0,
+        "ricci_shift_expected": 3
+      },
+      {
+        "graph_ev": "5/2 - sqrt(5)/2",
+        "graph_ev_float": 1.381966011250105,
+        "mult": 1,
+        "nearest_scalar_k": 1,
+        "nearest_scalar_val": 0,
+        "graph_minus_scalar": 1.38196601,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -1.61803399,
+        "ricci_shift_expected": 3
+      },
+      {
+        "graph_ev": "2",
+        "graph_ev_float": 2.0,
+        "mult": 1,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": -1.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -1.0,
+        "ricci_shift_expected": 5
+      },
+      {
+        "graph_ev": "sqrt(5)/2 + 3/2",
+        "graph_ev_float": 2.618033988749895,
+        "mult": 1,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": -0.38196601,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": -0.38196601,
+        "ricci_shift_expected": 5
+      },
+      {
+        "graph_ev": "3",
+        "graph_ev_float": 3.0,
+        "mult": 3,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": 0.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": 0.0,
+        "ricci_shift_expected": 5
+      },
+      {
+        "graph_ev": "sqrt(5)/2 + 5/2",
+        "graph_ev_float": 3.618033988749895,
+        "mult": 1,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": 0.61803399,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": 0.61803399,
+        "ricci_shift_expected": 5
+      },
+      {
+        "graph_ev": "5",
+        "graph_ev_float": 5.0,
+        "mult": 1,
+        "nearest_scalar_k": 2,
+        "nearest_scalar_val": 3,
+        "graph_minus_scalar": 2.0,
+        "nearest_hodge1_n": 1,
+        "nearest_hodge1_val": 3,
+        "graph_minus_hodge1": 2.0,
+        "ricci_shift_expected": 5
+      }
+    ],
+    "pi_free_certificate": {
+      "n_max": 3,
+      "V": 14,
+      "E": 13,
+      "beta_1": 2,
+      "pi_free": true,
+      "propagator_entries_rational": null,
+      "L1_nonzero_eigenvalues": [
+        {
+          "value": "3/2 - sqrt(5)/2",
+          "multiplicity": 1
+        },
+        {
+          "value": "1",
+          "multiplicity": 2
+        },
+        {
+          "value": "5/2 - sqrt(5)/2",
+          "multiplicity": 1
+        },
+        {
+          "value": "2",
+          "multiplicity": 1
+        },
+        {
+          "value": "sqrt(5)/2 + 3/2",
+          "multiplicity": 1
+        },
+        {
+          "value": "3",
+          "multiplicity": 3
+        },
+        {
+          "value": "sqrt(5)/2 + 5/2",
+          "multiplicity": 1
+        },
+        {
+          "value": "5",
+          "multiplicity": 1
+        }
+      ],
+      "notes": [
+        "n_max=3: exact pseudoinverse skipped (E=13 edges). Numeric pseudoinverse confirms spectrum is purely real positive."
+      ]
+    },
+    "physics_notes": [
+      "Fock graph at n_max=3: V=14 nodes, E=13 edges.",
+      "Betti numbers: \u03b2\u2080=3 (connected), \u03b2\u2081=2 (gauge zero modes = independent cycles).",
+      "Gauge zero modes (ker L\u2081): 2 independent 1-cycles. These are the pure-gauge / harmonic 1-forms of the photon field.",
+      "Transverse (physical) photon modes: 11 (= E \u2212 \u03b2\u2081).",
+      "\u03c0-free certificate: all L\u2081 eigenvalues are rational integers (L\u2081 = B^T B with B \u2208 {0,\u00b11}^{V\u00d7E}, so eigenvalues \u2208 \u2124_{\u22650}). The Feynman-gauge propagator entries G_\u03b3 = L\u2081^+ are rational (ratios of integers). No \u03c0, no \u03b6 values, no exchange constants. This is the graph-native regime of Paper 18.",
+      "Ricci shift: graph L\u2081 eigenvalues are ['0.4', '1.0', '1.4', '-1.0', '-0.4', '0.0', '0.6', '2.0'] above nearest scalar continuum values (k\u00b2-1), and ['-2.6', '-2.0', '-1.6', '-1.0', '-0.4', '0.0', '0.6', '2.0'] relative to Hodge-1 continuum n(n+2). The graph L\u2081 MATCHES the scalar spectrum (not Hodge-1), confirming the absence of the Ricci +2 curvature correction in the combinatorial edge Laplacian (Paper 25 / hodge1_s3.py).",
+      "The photon propagator G_\u03b3 = L\u2081^+ is the graph analog of the free-photon Green's function in Feynman gauge. It inverts the kinetic operator on the transverse subspace and is zero on the gauge zero modes (ker L\u2081 = independent cycles = harmonic 1-forms)."
+    ]
+  }
+}

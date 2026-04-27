@@ -1,0 +1,195 @@
+{
+  "module": "geovac.graph_qed_vertex",
+  "n_max": 2,
+  "hopping_t": "0",
+  "vertex_structure": {
+    "n_max": 2,
+    "N_dirac": 10,
+    "V_fock": 5,
+    "E_fock": 3,
+    "P_shape": [
+      10,
+      5
+    ],
+    "P_nonzero": 14,
+    "P_total": 50,
+    "P_sparsity": 0.72,
+    "vertex_nonzero": 48,
+    "vertex_total": 300,
+    "vertex_sparsity": 0.84,
+    "edge_analysis": [
+      {
+        "edge_index": 0,
+        "fock_nodes": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "edge_type": "T",
+        "dn_photon": 1,
+        "dm_photon": 0,
+        "n_couplings": 8,
+        "electron_dn_values": [
+          -1,
+          1
+        ],
+        "electron_dl_values": [
+          0
+        ],
+        "electron_dmj_values": [
+          -2,
+          0,
+          2
+        ]
+      },
+      {
+        "edge_index": 1,
+        "fock_nodes": [
+          [
+            2,
+            1,
+            -1
+          ],
+          [
+            2,
+            1,
+            0
+          ]
+        ],
+        "edge_type": "L",
+        "dn_photon": 0,
+        "dm_photon": 1,
+        "n_couplings": 20,
+        "electron_dn_values": [
+          0
+        ],
+        "electron_dl_values": [
+          0
+        ],
+        "electron_dmj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "edge_index": 2,
+        "fock_nodes": [
+          [
+            2,
+            1,
+            0
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ],
+        "edge_type": "L",
+        "dn_photon": 0,
+        "dm_photon": 1,
+        "n_couplings": 20,
+        "electron_dn_values": [
+          0
+        ],
+        "electron_dl_values": [
+          0
+        ],
+        "electron_dmj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ]
+      }
+    ]
+  },
+  "vacuum_polarization": {
+    "Pi_entries": [
+      [
+        "32/15",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "32/75",
+        "64/225"
+      ],
+      [
+        "0",
+        "64/225",
+        "32/75"
+      ]
+    ],
+    "Pi_trace": "224/75",
+    "Pi_eigenvalues": [
+      "32/15",
+      "32/45",
+      "32/225"
+    ],
+    "pi_free": true,
+    "vertex_nonzero_count": 48,
+    "vertex_total_possible": 300,
+    "vertex_sparsity": 0.84,
+    "N_dirac": 10,
+    "V_fock": 5,
+    "E_fock": 3,
+    "n_max": 2,
+    "hopping_t": "0",
+    "Pi_entries_named": {
+      "Pi[0,0]": "32/15",
+      "Pi[0,1]": "0",
+      "Pi[0,2]": "0",
+      "Pi[1,0]": "0",
+      "Pi[1,1]": "32/75",
+      "Pi[1,2]": "64/225",
+      "Pi[2,0]": "0",
+      "Pi[2,1]": "64/225",
+      "Pi[2,2]": "32/75"
+    }
+  },
+  "pi_free_certificate": {
+    "n_max": 2,
+    "P_pi_free": true,
+    "P_entries_algebraic": true,
+    "P_shape": [
+      10,
+      5
+    ],
+    "V_pi_free": true,
+    "V_nonzero_count": 48,
+    "Pi_pi_free": true,
+    "Pi_rational": true,
+    "Pi_trace": "224/75",
+    "all_pass": true
+  },
+  "continuum_comparison": {
+    "graph_vp_trace": "224/75",
+    "graph_vp_trace_float": 2.986666666666667,
+    "graph_vp_eigenvalues": [
+      "32/225",
+      "32/45",
+      "32/15"
+    ],
+    "continuum_vp_coefficient": "1/(48*pi**2)",
+    "continuum_vp_coefficient_float": 0.0021108579925487037,
+    "continuum_beta_qed": "2*alpha**2/(3*pi)",
+    "structural_comparison": {
+      "graph_transcendental_content": "Q (rationals only, pi-free)",
+      "continuum_transcendental_content": "Q[pi] (pi enters from heat kernel)",
+      "paper_18_classification": "Graph VP is in the intrinsic tier (rational). Continuum VP is in the calibration tier (pi from Jacobi inversion). The graph-to-continuum limit introduces pi through the Seeley-DeWitt heat kernel expansion, not through the vertex coupling or loop integral."
+    }
+  }
+}

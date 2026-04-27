@@ -54,6 +54,12 @@ emerges: (1)~operator order (1st~vs 2nd) determines motivic weight
 coefficients; (3)~diagram topology introduces Dirichlet $L$-function
 characters.  This classification is verified to be $R$-independent,
 persisting in the flat-space limit via Weyl's law.
+The taxonomy is identified as a classification of Mellin transforms
+of heat kernels at successively higher perturbative orders: the free
+heat kernel produces $\pi^{\mathrm{even}}$ (calibration tier), the
+interaction-deformed kernel produces the full MZV algebra (embedding
+tier), and operator order determines whether the Mellin integrand
+samples squared or raw eigenvalues.
 We note that the combination rule $K = \pi(B + F - \Delta)$ in the
 conjectural fine structure constant formula (Paper~2) has the same
 structural character: $\pi$ multiplying a sum of discrete
@@ -686,6 +692,147 @@ involves Eisenstein series~\cite{selberg1956}.  This parallels the
 GeoVac hierarchy: Level~1 (compact $S^3$) requires only a constant
 ($\kappa$); Level~3 involves an algebraic function $\mu(R)$ with
 transcendental coefficients (Sec.~\ref{sec:algebraic_curve}).
+
+\subsection{The Mellin transform as the taxonomic engine}
+\label{sec:mellin}
+
+The preceding subsections identify the \emph{what}---compact-to-non-compact
+projection introduces transcendental content---and the \emph{where}---Weyl's
+law and the Selberg trace formula are the structural bridges.  Here we
+identify the \emph{how}: the Mellin transform of the heat kernel trace is
+the single mathematical operation that converts the discrete spectral data
+of a compact manifold into the transcendental content classified in
+Sec.~\ref{sec:taxonomy}.
+
+For a non-negative self-adjoint operator $A$ on a compact Riemannian
+manifold, the spectral zeta function is related to the heat kernel trace
+by~\cite{seeley1967,minakshisundaram1949}
+\begin{equation}\label{eq:mellin_bridge}
+  \zeta_A(s) \;=\; \frac{1}{\Gamma(s)} \int_0^\infty t^{s-1}\,
+  \operatorname{Tr}\bigl(e^{-tA}\bigr)\,dt\,,
+\end{equation}
+where $\operatorname{Tr}(e^{-tA}) = \sum_n g_n\,e^{-t\lambda_n}$ is a
+purely spectral object: the sum runs over the discrete eigenvalues
+$\lambda_n$ with their integer degeneracies~$g_n$.  Both sides of
+Eq.~\eqref{eq:mellin_bridge} encode the same information---the spectrum
+of~$A$---but on the left in a form that produces transcendental numbers
+($\pi^{d/2}$ from the Seeley--DeWitt asymptotic expansion of the heat
+trace, odd-zeta values from the analytic continuation), and on the right
+in a form that is manifestly a function of integer-labeled eigenvalues
+and degeneracies.  The Mellin transform is the bridge; the $\Gamma(s)$
+prefactor is the conversion toll.
+
+\paragraph{Operator order determines the Mellin output class.}
+The three-axis classification of QED transcendentals on~$S^3$
+(Sec.~\ref{sec:taxonomy}) has its foundation in the distinction between
+applying the Mellin transform to the squared eigenvalues $\lambda_n^2$
+versus the raw eigenvalues $|\lambda_n|$.
+
+For the \emph{squared} Dirac operator $D^2$ on unit~$S^3$, the
+eigenvalues are $(n + 3/2)^2$, which are perfect squares of half-integers.
+The heat trace $\operatorname{Tr}(e^{-tD^2})$ is a theta-function-like
+object whose Mellin transform samples only even powers: the variable
+substitution $m = 2n+3$ converts the spectral sum to a sum over odd
+integers, and the Euler--Bernoulli formula for $\zeta_R(2k)$ maps every
+term to $\text{rational} \times \pi^{2k}$.  This is the content of the
+T9 theorem (Paper~28, Theorem~1~\cite{loutey_paper28}):
+$\zeta_{D^2}(s)$ is a two-term polynomial in $\pi^2$ at every
+integer~$s$.  No odd-zeta value can appear because the squaring
+operation has removed the odd-power structure from the Mellin integrand.
+
+For the \emph{first-order} Dirac operator $|D|$ with eigenvalues
+$n + 3/2$, the Mellin transform accesses the raw half-integer spectrum.
+The Dirac Dirichlet series $D(s) = \sum g_n |\lambda_n|^{-s}$ involves
+both even and odd powers of the spectral parameter, and the parity
+discriminant (Paper~28, Theorem~2~\cite{loutey_paper28}) follows
+directly: at even~$s$, both constituent Hurwitz zeta terms are
+Bernoulli-type ($\pi^{\text{even}}$); at odd~$s$, both involve
+genuinely independent odd-zeta values.  The operator order---first
+versus second---determines whether the Mellin transform samples the
+raw spectrum or its square, and this single distinction generates the
+first axis of the three-axis classification.
+
+\paragraph{Interaction deforms the heat kernel.}
+The Coulomb potential $V = -Z/r$ perturbs the free Laplacian on~$S^3$.
+In the heat kernel framework, the perturbed trace
+$\operatorname{Tr}(e^{-t(A + V)})$ has an asymptotic expansion whose
+Seeley--DeWitt coefficients $a_k(A + V)$ differ from the free
+coefficients $a_k(A)$ by terms involving the potential and its
+derivatives~\cite{gilkey1975}.  The Mellin transform of this perturbed
+heat trace produces spectral zeta values that access transcendental
+content beyond the $\pi$-polynomial ring of the free operator.
+
+The Sommerfeld fine-structure sums $D_p = \sum_{n=1}^\infty c_p(n)$
+(Paper~28, Sec.~7~\cite{loutey_paper28}) are precisely the
+perturbative expansion of this effect.  At each order $p$ in
+$(Z\alpha)^{2p}$, the coefficients $c_p(n)$ involve generalized
+harmonic numbers $H_{n-1}^{(r)}$, which are partial Euler sums that
+access the full Euler--Zagier multiple zeta value (MZV) algebra.  The
+free heat kernel produces only $\pi^{\text{even}}$ (Bernoulli); the
+Coulomb interaction opens the door to odd-zeta values ($\zeta_R(3)$
+at $p = 2$, $\zeta_R(5)$ and $\zeta_R(7)$ at $p = 3$, and so on)
+and to products of zeta values at higher orders.
+
+This maps directly onto the exchange constant taxonomy:
+\begin{itemize}
+  \item \textbf{Intrinsic tier} (angular/Gaunt structure): no Mellin
+    transform is needed; the result is purely rational.
+  \item \textbf{Calibration tier} ($\kappa$, $\pi$, $\zeta_R(2)$):
+    Mellin transform of the \emph{free} heat kernel on the compact
+    manifold $\to$ $\pi^{\text{even}}$ exclusively.
+  \item \textbf{Embedding tier} (cusp, $1/r_{12}$, Sommerfeld $D_p$):
+    Mellin transform of the \emph{interaction-deformed} heat kernel
+    $\to$ the full MZV algebra.
+\end{itemize}
+
+\paragraph{The product survival rule as a Mellin selection rule.}
+The product survival rule (Paper~28~\cite{loutey_paper28})---the systematic cancellation
+of $\zeta(2) \times \zeta(\text{odd})$ products at every Sommerfeld
+order---has a natural interpretation in this framework.  The
+$n^2$ Fock degeneracy that weights the Sommerfeld sums is the same
+$n^2$ that produces $F = \zeta_R(2) = D_{n^2}(4)$ in the free-geometry
+Mellin output (Paper~2~\cite{loutey_paper2}, Phase~4F identification).
+When the interaction-deformed Mellin transform generates product
+terms $\zeta(a) \times \zeta(b)$, the Fock-degeneracy weighting
+acts as a selection rule: products involving $\zeta(2)$ are
+systematically expelled because $\zeta(2)$ is already ``used'' as
+the Fock Dirichlet evaluation $F$, and the $n^2$ weighting enforces
+orthogonality between the free and interacting Mellin outputs.
+
+\paragraph{K--Sommerfeld separation as a Mellin consequence.}
+The K--Sommerfeld structural separation
+(Paper~28~\cite{loutey_paper28})---the PSLQ-verified fact that
+$K/\pi$ is not in the $\mathbb{Q}$-span of $\{D_2, \ldots, D_6, 1\}$%
+---is a direct consequence of the Mellin framework.
+The ingredients of $K = \pi(B + F - \Delta)$ are all
+\emph{free-geometry} Mellin invariants: $B$ is a truncated
+trace of the free Casimir, $F = \zeta_R(2)$ is the spectral zeta
+of the free Fock-degeneracy Dirichlet series at $s = d_{\max}$,
+and $\Delta^{-1} = g_3^{\text{Dirac}}$ is a single-level mode
+count of the free Dirac operator.  All three live in the
+$\pi$-polynomial ring guaranteed by Eq.~\eqref{eq:zeta_d2}.
+The Sommerfeld $D_p$, by contrast, are Mellin transforms of the
+\emph{Coulomb-perturbed} heat kernel, dressed with harmonic
+numbers that access the full MZV algebra.  The two sets of
+quantities inhabit different rings because they are Mellin
+transforms at different perturbative orders: $K$ at zeroth
+order (free geometry), $D_p$ at $p$-th order (interacting geometry).
+
+\paragraph{Summary.}
+The Mellin transform \eqref{eq:mellin_bridge} is the silent engine
+of the entire exchange constant taxonomy.  It converts discrete
+spectral data (integer eigenvalues, integer degeneracies) into
+transcendental content ($\pi$, $\zeta(s)$, Dirichlet $L$-values),
+and the \emph{class} of transcendental that emerges is determined by
+three properties of the operator whose heat kernel is being
+transformed: (1)~whether it is first- or second-order (controlling
+the motivic weight of the Mellin output); (2)~whether it acts on
+scalars or spinors (modulating rational coefficients); and
+(3)~whether the potential is free or interaction-deformed (controlling
+whether the output stays in the $\pi$-polynomial ring or accesses the
+full MZV algebra).  These are precisely the three axes of the QED
+transcendental classification formalized in
+Sec.~\ref{sec:taxonomy}.
 
 
 %% ========================================================================
@@ -2283,6 +2430,22 @@ C.~M.~Sommerfield,
 V.~S.~Adamchik,
 ``A certain series associated with Catalan's constant,''
 \textit{Z.\ Anal.\ Anwend.}\ \textbf{22}, 817--826 (2003).
+
+\bibitem{seeley1967}
+R.~T.~Seeley,
+``Complex powers of an elliptic operator,''
+\textit{Proc.\ Sympos.\ Pure Math.}\ \textbf{10}, 288--307 (1967).
+
+\bibitem{minakshisundaram1949}
+S.~Minakshisundaram and {\AA}.~Pleijel,
+``Some properties of the eigenfunctions of the Laplace-operator
+on Riemannian manifolds,''
+\textit{Canad.\ J.\ Math.}\ \textbf{1}, 242--256 (1949).
+
+\bibitem{gilkey1975}
+P.~B.~Gilkey,
+``The spectral geometry of a Riemannian manifold,''
+\textit{J.\ Differential Geom.}\ \textbf{10}, 601--618 (1975).
 
 \end{thebibliography}
 

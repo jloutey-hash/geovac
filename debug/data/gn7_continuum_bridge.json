@@ -1,0 +1,221 @@
+{
+  "module": "geovac.graph_qed_continuum_bridge",
+  "n_max_fock": 2,
+  "part_a": {
+    "n_max_ch": 1,
+    "continuum_vp_truncated": "0",
+    "continuum_vp_truncated_float": 0.0
+  },
+  "part_b_at_requested": {
+    "n_max_fock": 2,
+    "n_max_ch": 1,
+    "graph_trace": "224/75",
+    "graph_trace_float": 2.986666666666667,
+    "continuum_truncated": "0",
+    "continuum_truncated_float": 0.0,
+    "projection_constant": "0",
+    "projection_constant_float": 0.0,
+    "is_rational": true,
+    "continuum_is_zero": true,
+    "graph_is_zero": false
+  },
+  "part_b_classification": {
+    "status": "CONTINUUM VP IS ZERO at this truncation. The only allowed triples have SO(4) channel count W=0. The graph VP is nonzero because the CG projection opens additional channels.",
+    "paper_18_tier": "N/A (zero continuum)",
+    "projection_constant_value": "0",
+    "graph_trace": "224/75",
+    "continuum_truncated": "0"
+  },
+  "part_b_at_nmax3": {
+    "n_max_fock": 3,
+    "n_max_ch": 2,
+    "graph_trace": "3872/735",
+    "graph_trace_float": 5.2680272108843536,
+    "continuum_truncated": "538361856/3603000625",
+    "continuum_truncated_float": 0.14942041704475142,
+    "projection_constant": "50471424/1779441125",
+    "projection_constant_float": 0.028363638049558958,
+    "is_rational": true,
+    "continuum_is_zero": false,
+    "graph_is_zero": false
+  },
+  "part_b_classification_nmax3": {
+    "status": "RATIONAL: at finite truncation, both graph and continuum VPs are rational. The projection constant is rational with no pi content.",
+    "pi_entry_point": "Pi enters ONLY when: (1) the continuum sum is extended to infinity and regularized via Hurwitz zeta (producing pi^{even} from Bernoulli numbers), or (2) the VP is normalized by Vol(S^3) = 2*pi^2 for dimensionful physical quantities.",
+    "paper_18_tier": "CALIBRATION",
+    "mechanism": "The pi is from the Riemannian volume form of S^3. The graph is pi-free at every finite truncation. Transcendental content is injected exclusively by the continuum limit (n_max -> infinity) and/or manifold measure.",
+    "projection_constant_value": "50471424/1779441125",
+    "graph_trace": "3872/735",
+    "continuum_truncated": "538361856/3603000625"
+  },
+  "part_c_graph_edges": {
+    "n_max_fock": 2,
+    "N_dirac": 10,
+    "E_fock": 3,
+    "edges": [
+      {
+        "edge_idx": 0,
+        "fock_node_1": [
+          1,
+          0,
+          0
+        ],
+        "fock_node_2": [
+          2,
+          0,
+          0
+        ],
+        "edge_type": "inter-shell",
+        "n_fock_1": 1,
+        "n_fock_2": 2,
+        "Pi_ee": "32/15",
+        "Pi_ee_float": 2.1333333333333333,
+        "numerator": 32,
+        "denominator": 15
+      },
+      {
+        "edge_idx": 1,
+        "fock_node_1": [
+          2,
+          1,
+          -1
+        ],
+        "fock_node_2": [
+          2,
+          1,
+          0
+        ],
+        "edge_type": "intra-shell",
+        "n_fock_1": 2,
+        "n_fock_2": 2,
+        "Pi_ee": "32/75",
+        "Pi_ee_float": 0.4266666666666667,
+        "numerator": 32,
+        "denominator": 75
+      },
+      {
+        "edge_idx": 2,
+        "fock_node_1": [
+          2,
+          1,
+          0
+        ],
+        "fock_node_2": [
+          2,
+          1,
+          1
+        ],
+        "edge_type": "intra-shell",
+        "n_fock_1": 2,
+        "n_fock_2": 2,
+        "Pi_ee": "32/75",
+        "Pi_ee_float": 0.4266666666666667,
+        "numerator": 32,
+        "denominator": 75
+      }
+    ],
+    "total_trace": "224/75",
+    "total_trace_float": 2.986666666666667
+  },
+  "part_c_continuum_modes": {
+    "n_max_ch": 1,
+    "n_allowed_triples": 1,
+    "n_nonzero_W": 0,
+    "n_zero_W_but_allowed": 1,
+    "contributions": [
+      {
+        "n1_ch": 1,
+        "n2_ch": 1,
+        "q": 1,
+        "W": 0,
+        "allowed": true,
+        "contribution": "0",
+        "contribution_float": 0.0
+      }
+    ],
+    "total": "0",
+    "total_float": 0.0
+  },
+  "part_c_ratio": {
+    "n_max_fock": 3,
+    "n_max_ch": 2,
+    "graph_trace": "3872/735",
+    "graph_trace_float": 5.2680272108843536,
+    "continuum_total": "538361856/3603000625",
+    "continuum_total_float": 0.14942041704475142,
+    "ratio_cont_over_graph": "50471424/1779441125",
+    "ratio_float": 0.028363638049558958,
+    "ratio_is_rational": true,
+    "graph_excess": "55327030432/10809001875",
+    "graph_excess_float": 5.118606793839603,
+    "n_continuum_triples_with_nonzero_W": 3,
+    "n_continuum_triples_allowed_but_W0": 2,
+    "n_graph_edges": 13
+  },
+  "part_d": {
+    "full_continuum_estimate_n50": 2.8866473821537046,
+    "rows": [
+      {
+        "n_max_fock": 1,
+        "n_max_ch": 0,
+        "graph_trace": 0.0,
+        "graph_trace_exact": "0",
+        "continuum_truncated": 0.0,
+        "continuum_truncated_exact": "0",
+        "projection_constant": null,
+        "fraction_of_full_continuum": 0.0
+      },
+      {
+        "n_max_fock": 2,
+        "n_max_ch": 1,
+        "graph_trace": 2.986666666666667,
+        "graph_trace_exact": "224/75",
+        "continuum_truncated": 0.0,
+        "continuum_truncated_exact": "0",
+        "projection_constant": 0.0,
+        "fraction_of_full_continuum": 0.0
+      },
+      {
+        "n_max_fock": 3,
+        "n_max_ch": 2,
+        "graph_trace": 5.2680272108843536,
+        "graph_trace_exact": "3872/735",
+        "continuum_truncated": 0.14942041704475142,
+        "continuum_truncated_exact": "538361856/3603000625",
+        "projection_constant": 0.02836363804955896,
+        "fraction_of_full_continuum": 0.051762614986687445
+      }
+    ]
+  },
+  "part_e_couplings": {
+    "n_max_fock": 2,
+    "n_ground_states": 2,
+    "ground_state_labels": [
+      "(n=1, k=-1, 2mj=-1)",
+      "(n=1, k=-1, 2mj=1)"
+    ],
+    "n_ground_vertex_couplings": 4,
+    "has_ground_couplings": true,
+    "continuum_structural_zero": true,
+    "continuum_mechanism": "At n_CH=0: n_int + q must be odd AND q = n_int (triangle). => 2*n_int = odd => impossible. Zero allowed triples."
+  },
+  "part_e_self_energy": {
+    "n_max_fock": 2,
+    "ground_state_self_energies": {
+      "(n=1, k=-1, 2mj=-1)": {
+        "value": "2/5",
+        "value_float": 0.4,
+        "is_zero": false
+      },
+      "(n=1, k=-1, 2mj=1)": {
+        "value": "2/5",
+        "value_float": 0.4,
+        "is_zero": false
+      }
+    },
+    "all_ground_state_zero": false,
+    "continuum_structural_zero": true,
+    "structural_zero_preserved": false,
+    "interpretation": "BROKEN: graph self-energy is NONZERO at ground state. The CG projection from Dirac to Fock basis opens couplings that the continuum vertex parity selection rule forbids. The structural zero is a continuum selection rule, not preserved by the finite graph."
+  }
+}

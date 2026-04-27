@@ -1,0 +1,154 @@
+{
+  "description": "Graph-native one-loop self-energy and vertex correction at n_max=2",
+  "module": "geovac/graph_qed_self_energy.py",
+  "sprint": "GN-5",
+
+  "self_energy_t0": {
+    "n_max": 2,
+    "t": "0",
+    "N_dirac": 10,
+    "E_fock": 3,
+    "formula": "Sigma[a,b] = sum_{e,e'} G_gamma[e,e'] * V_e * V_{e'}^T",
+    "trace": "44/3",
+    "trace_float": 14.6667,
+    "is_rational": false,
+    "is_pi_free": true,
+    "is_hermitian": true,
+    "ground_state_zero": false,
+    "ground_state_block": [[1, 1], [1, 1]],
+    "ground_state_note": "Continuum Theorem 4 (Paper 28) predicts Sigma(n_ext=0)=0 by vertex parity impossibility. Graph breaks this: CG projection opens couplings the continuum selection rule forbids.",
+    "diagonal": {
+      "0 (n=1,k=-1,mj=+1/2)": "1",
+      "1 (n=1,k=-1,mj=-1/2)": "1",
+      "2 (n=2,k=-1,mj=+1/2)": "1",
+      "3 (n=2,k=-1,mj=-1/2)": "1",
+      "4 (n=2,k=+1,mj=+1/2)": "4/3",
+      "5 (n=2,k=+1,mj=+3/2)": "20/9",
+      "6 (n=2,k=+1,mj=-3/2)": "20/9",
+      "7 (n=2,k=+1,mj=-1/2)": "4/3",
+      "8 (n=2,k=-2,mj=+3/2)": "16/9",
+      "9 (n=2,k=-2,mj=-3/2)": "16/9"
+    },
+    "eigenvalues": ["0", "0", "0", "0", "0", "4/3", "2", "2", "4", "16/3"],
+    "positive_semidefinite": true,
+    "algebraic_content": "Diagonal entries are rational; off-diagonals contain sqrt(2), sqrt(3), sqrt(6) from CG coefficients. ALL entries are algebraic (no pi, no zeta, no log).",
+    "five_zero_eigenvalues": "Kernel of dimension 5 reflects the photon propagator rank: L_1^+ has rank dim(ker(L_1)) = beta_1 = E - V + 1"
+  },
+
+  "vertex_correction_t0": {
+    "n_max": 2,
+    "t": "0",
+    "formula": "Lambda[a,b] = sum_{e',e''} G_gamma[e',e''] * V_{e'} * G_e * V_{e''}^T",
+    "trace": "32/9",
+    "trace_float": 3.5556,
+    "is_rational": false,
+    "is_pi_free": true,
+    "diagonal": {
+      "0 (n=1,k=-1,mj=+1/2)": "2/5",
+      "1 (n=1,k=-1,mj=-1/2)": "2/5",
+      "2 (n=2,k=-1,mj=+1/2)": "2/3",
+      "3 (n=2,k=-1,mj=-1/2)": "2/3",
+      "4 (n=2,k=+1,mj=+1/2)": "8/45",
+      "5 (n=2,k=+1,mj=+3/2)": "88/135",
+      "6 (n=2,k=+1,mj=-3/2)": "88/135",
+      "7 (n=2,k=+1,mj=-1/2)": "8/45",
+      "8 (n=2,k=-2,mj=+3/2)": "-16/135",
+      "9 (n=2,k=-2,mj=-3/2)": "-16/135"
+    },
+    "eigenvalues": ["0", "0", "0", "0", "0", "8/45", "28/45 - 4*sqrt(145)/45", "4/5", "4/3", "28/45 + 4*sqrt(145)/45"],
+    "algebraic_content": "Diagonal entries rational. Off-diagonals contain sqrt(2), sqrt(3), sqrt(6). Two eigenvalues involve sqrt(145). All algebraic, no transcendentals."
+  },
+
+  "anomalous_moment_t0": {
+    "F2": "5*sqrt(2)/3",
+    "F2_float": 2.357,
+    "F2_rational": false,
+    "Tr_Lambda": "32/9",
+    "Tr_V_bare_G_e": "16*sqrt(2)/15",
+    "V_bare_nonzero_count": 36,
+    "extraction_formula": "F2 = Tr(Lambda_total) / Tr(V_bare * G_e)",
+    "note": "F2 is irrational (sqrt(2) from CG projection) but pi-free. The continuum Schwinger result alpha/(2*pi) does not appear -- this is a finite graph with no continuum limit."
+  },
+
+  "structural_zero_check_t0": {
+    "ground_state_zero": false,
+    "ground_state_block_entries": {
+      "(0,0)": "1",
+      "(0,1)": "1",
+      "(1,0)": "1",
+      "(1,1)": "1"
+    },
+    "mechanism": "The graph self-energy does NOT have a structural zero at the ground state. The CG projection maps Dirac (n,kappa,m_j) states onto Fock (n,l,m) nodes, opening couplings invisible to the SO(4) channel count used in the continuum selection rule.",
+    "continuum_comparison": "Paper 28 Theorem 4: Sigma(n_ext=0)=0 exactly by vertex parity impossibility at n_CH=0. The graph CG projection opens vertex couplings that the continuum selection rule forbids."
+  },
+
+  "pi_free_certificate_t0": {
+    "Sigma_rational": false,
+    "Sigma_pi_free": true,
+    "Sigma_hermitian": true,
+    "Lambda_rational": false,
+    "Lambda_pi_free": true,
+    "all_rational": false,
+    "all_pi_free": true,
+    "certificate_note": "All graph-native QED quantities are algebraic (live in Q[sqrt(2), sqrt(3), sqrt(6), ...]) but NOT rational. No transcendentals (pi, zeta, log) appear. Paper 18 classification: INTRINSIC tier."
+  },
+
+  "per_edge_structure": {
+    "note": "At t=0, every Fock edge contributes Pi_ee = 32/D to the VP where D depends on the Dirac eigenvalue product. The universal numerator 32 = 2^5 arises from the CG projection matrix squared times the diagonal propagator.",
+    "self_energy_per_edge": "Sigma decomposes as sum over 3 Fock edges; each edge contribution is V_e * V_e^T weighted by G_gamma diagonal. At t=0, G_gamma = diag(1/eigenvalues_L1)."
+  },
+
+  "vertex_correction_t_kappa": {
+    "n_max": 2,
+    "t": "-1/16",
+    "trace": "16*sqrt(3)/8985 + 19255/5391",
+    "trace_float": 3.574777905,
+    "is_pi_free": true,
+    "is_hermitian": true,
+    "positive_semidefinite": false,
+    "n_zero_eigenvalues": 5,
+    "n_negative_eigenvalues": 1,
+    "eigenvalues_float": [-0.447, 0.0, 0.0, 0.0, 0.0, 0.0, 0.180, 0.800, 1.335, 1.707],
+    "diagonal": {
+      "0 (n=1,k=-1,mj=-1/2)": "959/2396",
+      "1 (n=1,k=-1,mj=+1/2)": "959/2396",
+      "2 (n=2,k=-1,mj=-1/2)": "1599/2396",
+      "3 (n=2,k=-1,mj=+1/2)": "1599/2396",
+      "4 (n=2,k=-2,mj=-3/2)": "4856/26955",
+      "5 (n=2,k=-2,mj=-1/2)": "32*sqrt(2)/80865 + 32*sqrt(3)/26955 + 10600/16173",
+      "6 (n=2,k=-2,mj=+1/2)": "-32*sqrt(2)/80865 + 32*sqrt(3)/26955 + 10600/16173",
+      "7 (n=2,k=-2,mj=+3/2)": "4856/26955",
+      "8 (n=2,k=+1,mj=-1/2)": "-9488/80865 - 32*sqrt(2)/80865 - 8*sqrt(3)/26955",
+      "9 (n=2,k=+1,mj=+1/2)": "-9488/80865 - 8*sqrt(3)/26955 + 32*sqrt(2)/80865"
+    },
+    "algebraic_content": "Diagonal entries: kappa=-1 states are rational; |m_j|-maximal states of kappa=-2 are rational; mixed m_j states contain sqrt(2) and sqrt(3). CG ring Q(sqrt(2), sqrt(3), sqrt(6)). kappa=+1 diagonal entries are NEGATIVE, creating one negative eigenvalue."
+  },
+
+  "anomalous_moment_t_kappa": {
+    "F2": "(48*sqrt(3) + 96275)/(3*(15 + 16*sqrt(6) + 9616*sqrt(2)))",
+    "F2_float": 2.352504621,
+    "F2_rational": false,
+    "Tr_Lambda": "16*sqrt(3)/8985 + 19255/5391",
+    "Tr_V_bare_G_e": "1/599 + 16*sqrt(6)/8985 + 9616*sqrt(2)/8985",
+    "extraction_formula": "F2 = Tr(Lambda_total) / Tr(V_bare * G_e)",
+    "note": "F2 at the physical coupling t=-1/16 is algebraic irrational in Q(sqrt(2), sqrt(3), sqrt(6)), shifted only 0.2% from the t=0 value 5*sqrt(2)/3. The CG projection introduces sqrt content that does not cancel in the trace ratio even at physical coupling."
+  },
+
+  "self_energy_t_kappa": {
+    "note": "Self-energy Sigma is IDENTICAL at t=0 and t=-1/16 because the formula Sigma = sum G_gamma[e1,e2] * V[e1] * V[e2]^T does not involve the electron propagator G_e. Only V (CG vertex) and G_gamma (photon propagator = L_1 pseudoinverse) appear, and both are t-independent."
+  },
+
+  "t0_vs_t_kappa_comparison": {
+    "F2_t0": "5*sqrt(2)/3",
+    "F2_t0_float": 2.357023,
+    "F2_t_kappa": "(48*sqrt(3) + 96275)/(3*(15 + 16*sqrt(6) + 9616*sqrt(2)))",
+    "F2_t_kappa_float": 2.352505,
+    "ratio": 0.998083,
+    "Sigma_identical": true,
+    "Lambda_differs": true,
+    "Lambda_negative_eigenvalue_at_kappa": true,
+    "both_pi_free": true,
+    "both_algebraic_irrational": true,
+    "algebraic_ring": "Q(sqrt(2), sqrt(3), sqrt(6))"
+  }
+}

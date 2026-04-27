@@ -1,0 +1,371 @@
+{
+  "n_max_1_t0": {
+    "N": 2,
+    "n_edges": 0,
+    "eigenvalues": [
+      "3/2",
+      "3/2"
+    ],
+    "propagator_diagonal": [
+      "2/3",
+      "2/3"
+    ],
+    "pi_free": true,
+    "det": "9/4",
+    "identity_residual": 0.0,
+    "spectral_gap": 1.5,
+    "condition_number": 1.0,
+    "n_positive_chi": 2,
+    "n_negative_chi": 0,
+    "note": "n=1 only l=0 states; all chi=+1 (kappa<0 only); no E1 edges"
+  },
+  "n_max_2_t0": {
+    "N": 10,
+    "n_edges": 20,
+    "t": "0",
+    "eigenvalues": [
+      "3/2",
+      "3/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "-5/2",
+      "-5/2"
+    ],
+    "propagator_diagonal": [
+      "2/3",
+      "2/3",
+      "2/5",
+      "2/5",
+      "2/5",
+      "2/5",
+      "2/5",
+      "2/5",
+      "-2/5",
+      "-2/5"
+    ],
+    "pi_free": true,
+    "propagator_rational": true,
+    "det": "3515625/1024",
+    "identity_residual": 0.0,
+    "spectral_gap": 1.5,
+    "condition_number": 1.6666666666666667,
+    "n_positive_chi": 8,
+    "n_negative_chi": 2,
+    "offdiag_propagator_samples": []
+  },
+  "n_max_2_t1": {
+    "N": 10,
+    "n_edges": 20,
+    "t": "1",
+    "eigenvalues": [
+      "3/2",
+      "3/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "-5/2",
+      "-5/2"
+    ],
+    "propagator_diagonal": [
+      "42/43",
+      "42/43",
+      "22/43",
+      "22/43",
+      "30/43",
+      "214/215",
+      "214/215",
+      "30/43",
+      "42/215",
+      "42/215"
+    ],
+    "pi_free": true,
+    "propagator_rational": true,
+    "det": "1155625/1024",
+    "identity_residual": 1.3877787807814457e-16,
+    "spectral_gap": 0.2674061753024658,
+    "condition_number": 22.172330530220837,
+    "n_positive_chi": 8,
+    "n_negative_chi": 2,
+    "offdiag_propagator_samples": [
+      {
+        "i": 0,
+        "j": 2,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-1 2mj=-1",
+        "G_ij": "8/43"
+      },
+      {
+        "i": 0,
+        "j": 4,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-2 2mj=-3",
+        "G_ij": "-20/43"
+      },
+      {
+        "i": 0,
+        "j": 5,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-2 2mj=-1",
+        "G_ij": "-20/43"
+      },
+      {
+        "i": 0,
+        "j": 6,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-2 2mj=1",
+        "G_ij": "-20/43"
+      },
+      {
+        "i": 0,
+        "j": 8,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=1 2mj=-1",
+        "G_ij": "20/43"
+      },
+      {
+        "i": 0,
+        "j": 9,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=1 2mj=1",
+        "G_ij": "20/43"
+      },
+      {
+        "i": 1,
+        "j": 3,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-1 2mj=1",
+        "G_ij": "8/43"
+      },
+      {
+        "i": 1,
+        "j": 5,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-2 2mj=-1",
+        "G_ij": "-20/43"
+      },
+      {
+        "i": 1,
+        "j": 6,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-2 2mj=1",
+        "G_ij": "-20/43"
+      },
+      {
+        "i": 1,
+        "j": 7,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-2 2mj=3",
+        "G_ij": "-20/43"
+      }
+    ]
+  },
+  "n_max_2_tkappa": {
+    "N": 10,
+    "n_edges": 20,
+    "t": "-1/16",
+    "eigenvalues": [
+      "3/2",
+      "3/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "5/2",
+      "-5/2",
+      "-5/2"
+    ],
+    "propagator_diagonal": [
+      "1599/2396",
+      "1599/2396",
+      "959/2396",
+      "959/2396",
+      "240/599",
+      "1202/2995",
+      "1202/2995",
+      "240/599",
+      "-1194/2995",
+      "-1194/2995"
+    ],
+    "pi_free": true,
+    "propagator_rational": true,
+    "det": "224250625/65536",
+    "identity_residual": 1.1102230246251565e-16,
+    "spectral_gap": 1.48445484346752,
+    "condition_number": 1.7853900063511479,
+    "n_positive_chi": 8,
+    "n_negative_chi": 2,
+    "offdiag_propagator_samples": [
+      {
+        "i": 0,
+        "j": 2,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-1 2mj=-1",
+        "G_ij": "1/2396"
+      },
+      {
+        "i": 0,
+        "j": 4,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-2 2mj=-3",
+        "G_ij": "10/599"
+      },
+      {
+        "i": 0,
+        "j": 5,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-2 2mj=-1",
+        "G_ij": "10/599"
+      },
+      {
+        "i": 0,
+        "j": 6,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=-2 2mj=1",
+        "G_ij": "10/599"
+      },
+      {
+        "i": 0,
+        "j": 8,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=1 2mj=-1",
+        "G_ij": "-10/599"
+      },
+      {
+        "i": 0,
+        "j": 9,
+        "label_i": "n=1 k=-1 2mj=-1",
+        "label_j": "n=2 k=1 2mj=1",
+        "G_ij": "-10/599"
+      },
+      {
+        "i": 1,
+        "j": 3,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-1 2mj=1",
+        "G_ij": "1/2396"
+      },
+      {
+        "i": 1,
+        "j": 5,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-2 2mj=-1",
+        "G_ij": "10/599"
+      },
+      {
+        "i": 1,
+        "j": 6,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-2 2mj=1",
+        "G_ij": "10/599"
+      },
+      {
+        "i": 1,
+        "j": 7,
+        "label_i": "n=1 k=-1 2mj=1",
+        "label_j": "n=2 k=-2 2mj=3",
+        "G_ij": "10/599"
+      }
+    ]
+  },
+  "massive_n2_t0_m0": {
+    "mass": "0",
+    "pi_free": true,
+    "propagator_diagonal": [
+      "2/3",
+      "2/3",
+      "2/5",
+      "2/5",
+      "2/5",
+      "2/5",
+      "2/5",
+      "2/5",
+      "-2/5",
+      "-2/5"
+    ],
+    "note": "G(m)[i,i] = 1/(lambda_i - m)"
+  },
+  "massive_n2_t0_m_half": {
+    "mass": "1/2",
+    "pi_free": true,
+    "propagator_diagonal": [
+      "1",
+      "1",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "-1/3",
+      "-1/3"
+    ],
+    "note": "G(m)[i,i] = 1/(lambda_i - m)"
+  },
+  "massive_n2_t0_m1": {
+    "mass": "1",
+    "pi_free": true,
+    "propagator_diagonal": [
+      "2",
+      "2",
+      "2/3",
+      "2/3",
+      "2/3",
+      "2/3",
+      "2/3",
+      "2/3",
+      "-2/7",
+      "-2/7"
+    ],
+    "note": "G(m)[i,i] = 1/(lambda_i - m)"
+  },
+  "n_max_3_t0_numpy": {
+    "N": 28,
+    "n_edges": 106,
+    "eigenvalues_distinct": [
+      "-5/2",
+      "-7/2",
+      "3/2",
+      "5/2",
+      "7/2"
+    ],
+    "spectral_gap": 1.5,
+    "condition_number": 2.3333333333333335,
+    "n_positive_chi": 20,
+    "n_negative_chi": 8,
+    "identity_residual_numpy": 0.0,
+    "note": "numpy path; propagator_diagonal = 1/lambda (diagonal, same as t=0 by construction)"
+  },
+  "n_max_3_t1_numpy": {
+    "N": 28,
+    "n_edges": 106,
+    "t": "1",
+    "spectral_gap": 0.19718849993061524,
+    "condition_number": 52.40106407766425,
+    "identity_residual_numpy": 1.1934897514720433e-15,
+    "eigenvalues_min": -8.871856695792422,
+    "eigenvalues_max": 10.332887220242732,
+    "note": "Full E1-adjacency perturbed; off-diagonal entries are rational"
+  },
+  "structural_summary": {
+    "coupling_options": {
+      "t=0": "Free diagonal propagator G[i,i]=1/lambda_i; purely rational; spectral gap=min|lambda|",
+      "t=1": "Unit adjacency hopping; rational matrix inverse; mixes chirality sectors via E1 dipole",
+      "t=kappa=-1/16": "Scalar-graph coupling (Paper 0); rational; NOT the natural Dirac coupling (different graph structure)"
+    },
+    "pi_free_verdict": "ALL PASS for t in {0, 1, -1/16} at n_max=2; all entries in Q",
+    "key_observation_1": "The atomic-mode Dirac graph at n_max=2 has 8:2 positive:negative chirality (NOT 50:50)",
+    "key_observation_2": "n_max=1 has only s-states (l=0, kappa=-1), all positive chirality, no E1 edges",
+    "key_observation_3": "Scalar kappa=-1/16 is NOT the natural Dirac hopping: it arises from the Fock chordal-distance weighting on S3 for the scalar graph, not from E1 dipole selection rules",
+    "key_observation_4": "For t=0, G_e is diagonal with entries 2/(2n+1) in Fock convention \u2014 the free Dirac propagator is the cleanest graph-QED baseline",
+    "key_observation_5": "det(D_graph) = product of all eigenvalues (rational) for all t values tested; D_graph is always invertible for t in {0, 1, -1/16} at n_max=2,3",
+    "kappa_scalar": "-1/16"
+  }
+}
