@@ -1,0 +1,18 @@
+{
+  "D6_decomposition": {
+    "z10": "-2289/512",
+    "z11": "1589/16",
+    "z2z9": "0",
+    "z3z8": "-1617/64",
+    "z4z7": "-1785/64",
+    "z5z6": "-2065/64"
+  },
+  "D6_value_200dps": "-0.08420102765654912920293685898880703062501967433561437590179791564569932798101718679220176211542722732",
+  "verification_digits": 62,
+  "product_survival": {
+    "z2z9_absent": true,
+    "surviving_products": 3,
+    "predicted": 3
+  },
+  "k_sommerfeld_separation": "CONFIRMED through D6"
+}

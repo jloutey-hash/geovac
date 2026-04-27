@@ -66,14 +66,14 @@ identically (Theorem~\ref{thm:zeta3_complement}).
 (8)~\textbf{Fine-structure Euler sum cancellation and product survival
 rule:} the degeneracy-weighted Dirichlet sums $D_p$ at order
 $(Z\alpha)^{2p}$ in the exact Dirac hydrogen spectrum, computed through
-$D_5$ ($(Z\alpha)^{10}$, weight~9), satisfy a product survival rule:
+$D_6$ ($(Z\alpha)^{12}$, weight~11), satisfy a product survival rule:
 $\zeta(2) \times \zeta(\mathrm{odd})$ cancels algebraically at every
 order, while exactly $\max(0, \lfloor(2p{-}5)/2\rfloor)$ products
 survive (Observations~\ref{obs:euler_cancel},~\ref{obs:product_rule}).
 The cancellation mechanism is the $n^2$ Fock degeneracy --- the same
 weighting that produces $F = \zeta(2) = D_{n^2}(4)$ in Paper~2.
 However, PSLQ confirms that Paper~2's $K = \pi(B + F - \Delta)$ is NOT
-a $\mathbb{Q}$-linear combination of $D_2, \ldots, D_5$: the
+a $\mathbb{Q}$-linear combination of $D_2, \ldots, D_6$: the
 spectral-action ingredients of $K$ inhabit the $\pi$-polynomial ring of
 Theorem~\ref{thm:T9}, while the Sommerfeld sums carry irreducible
 odd-zeta from the Euler--Zagier MZV algebra.
@@ -1288,6 +1288,50 @@ $\zeta(3)\zeta(6)$ and $\zeta(4)\zeta(5)$ survive.  This extends the
 pattern from $D_4$: product terms grow from 0 (at $D_2$, $D_3$) to 1
 (at $D_4$) to 2 (at $D_5$).
 
+\subsection{$D_6$ at weight 11: product survival rule extended}
+
+At order $p = 6$ the weight-11 Euler sums $S_{r,s}$ for $r + s = 11$
+are computed via Hurwitz zeta to 400~dps, with stuffle relations
+verified to $< 10^{-300}$.  Seven nontrivial sums ($r = 1, \ldots, 8$,
+$r \ne 3$) contribute through the $\beta_r$ coefficients of the
+$c_6(n)$ expansion.  Individual decompositions are found by PSLQ
+against the weight-11 depth-1 MZV basis
+$\{\zeta(11), \zeta(2)\zeta(9), \zeta(3)\zeta(8), \zeta(4)\zeta(7),
+\zeta(5)\zeta(6)\}$:
+\begin{center}
+\begin{tabular}{lccccc}
+\hline
+Sum & $\zeta(11)$ & $\zeta(2)\zeta(9)$ & $\zeta(3)\zeta(8)$ & $\zeta(4)\zeta(7)$ & $\zeta(5)\zeta(6)$ \\
+\hline
+$S_{1,10}$ & $6$ & $-1$ & $-1$ & $-1$ & $-1$ \\
+$S_{2,9}$ & $-27$ & $9$ & $2$ & $6$ & $4$ \\
+$S_{4,7}$ & $-329/2$ & $84$ & $0$ & $21$ & $4$ \\
+$S_{5,6}$ & $463/2$ & $-126$ & $0$ & $-21$ & $0$ \\
+$S_{6,5}$ & $-461/2$ & $126$ & $0$ & $21$ & $1$ \\
+$S_{7,4}$ & $331/2$ & $-84$ & $0$ & $-20$ & $-4$ \\
+$S_{8,3}$ & $-82$ & $36$ & $1$ & $15$ & $6$ \\
+\hline
+\end{tabular}
+\end{center}
+The $\zeta(3)\zeta(8)$ column has a sparse support pattern: nonzero
+only for $S_{1,10}$, $S_{2,9}$, and $S_{8,3}$.
+
+Collecting through the $\beta_r$ coefficients and the rational
+$\zeta(10)$, $\zeta(11)$ parts:
+\begin{equation}
+\label{eq:D6_decomp}
+  D_6 = -\frac{2289}{512}\,\zeta(10)
+  + \frac{1589}{16}\,\zeta(11)
+  - \frac{1617}{64}\,\zeta(3)\zeta(8)
+  - \frac{1785}{64}\,\zeta(4)\zeta(7)
+  - \frac{2065}{64}\,\zeta(5)\zeta(6)\,,
+\end{equation}
+verified to 62~digits against direct Euler-sum evaluation at
+400~dps.  The product $\zeta(2)\zeta(9)$ cancels algebraically,
+and all three surviving products $\zeta(3)\zeta(8)$,
+$\zeta(4)\zeta(7)$, $\zeta(5)\zeta(6)$ are present, matching the
+prediction $\max(0, \lfloor(2 \cdot 6 - 5)/2\rfloor) = 3$.
+
 \begin{observation}[Product survival rule]
 \label{obs:product_rule}
 At each Sommerfeld order $p \ge 2$, the Dirichlet sum $D_p$ decomposes
@@ -1298,9 +1342,9 @@ form $\zeta(a)\zeta(b)$ with $a + b = 2p{-}1$, $a$ odd $\ge 3$,
 $b$ even $\ge 4$.
 \end{observation}
 
-Verified through $D_5$ ($p = 5$).  The systematic expulsion of
-$\zeta(2)$ products is driven by the $n^2$ Fock degeneracy that weights
-the Sommerfeld sums.  This is the same $n^2$ that produces
+Verified through $D_6$ ($p = 6$, weight~11).  The systematic expulsion
+of $\zeta(2)$ products is driven by the $n^2$ Fock degeneracy that
+weights the Sommerfeld sums.  This is the same $n^2$ that produces
 $F = \zeta(2) = D_{n^2}(4)$ in the Phase~4F identification
 (Paper~2~\cite{paper2}): the Fock degeneracy protects its own Dirichlet
 evaluation from cross-contamination with odd-zeta products.
@@ -1340,8 +1384,8 @@ all-orders Sommerfeld cancellation pattern explain why Paper~2's
 $K = \pi(B + F - \Delta)$ has pure $\pi$-content?
 
 PSLQ at 200~dps tests whether $K/\pi$ is a rational linear combination
-of $\{D_2, D_3, D_4, D_5, 1\}$.  The result is \emph{null}: $K/\pi$ is
-not in the $\mathbb{Q}$-span of the Sommerfeld sums through fifth order.
+of $\{D_2, D_3, D_4, D_5, D_6, 1\}$.  The result is \emph{null}: $K/\pi$ is
+not in the $\mathbb{Q}$-span of the Sommerfeld sums through sixth order.
 $K$ inhabits a different algebraic space from the $D_p$.
 
 The structural reason: $K$ is composed of spectral-action ingredients ---
@@ -1546,10 +1590,10 @@ Secs.~\ref{sec:T9}--\ref{sec:chi4} to the \emph{interacting} Dirac
 hydrogen spectrum.  The product survival rule --- $\zeta(2) \times
 \zeta(\text{odd})$ cancelled at every order, with exactly
 $\max(0, \lfloor(2p{-}5)/2\rfloor)$ products surviving --- is verified
-through $D_5$ and driven by the same $n^2$ Fock degeneracy that produces
+through $D_6$ and driven by the same $n^2$ Fock degeneracy that produces
 $F = \zeta(2)$ in Paper~2~\cite{paper2}.
 Despite this structural link, PSLQ confirms that $K/\pi$ does not lie in
-the $\mathbb{Q}$-span of $\{D_2, \ldots, D_5\}$: the spectral-action
+the $\mathbb{Q}$-span of $\{D_2, \ldots, D_6\}$: the spectral-action
 ingredients of $K$ inhabit a $\pi$-polynomial ring
 (Theorem~\ref{thm:T9}), while the Sommerfeld sums carry irreducible
 odd-zeta content from the Euler--Zagier MZV algebra at every order.
