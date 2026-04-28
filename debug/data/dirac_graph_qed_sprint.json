@@ -1,0 +1,786 @@
+{
+  "task_1_hodge": {
+    "rule_A_nmax_2": {
+      "V": 10,
+      "E": 8,
+      "beta_0": 3,
+      "beta_1": 1,
+      "L0_DA_match": true,
+      "svd_identity_verified": true,
+      "pi_free_certificate": true,
+      "degree_sequence": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "pendant_vertex_count": 4,
+      "gs_is_pendant": false,
+      "gs_degrees": [
+        2,
+        2
+      ],
+      "L0_spectrum": [
+        -0.0,
+        0.0,
+        0.0,
+        0.5857864376,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        3.4142135624,
+        4.0
+      ],
+      "L1_spectrum": [
+        -0.0,
+        0.5857864376,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        3.4142135624,
+        4.0
+      ]
+    },
+    "rule_A_nmax_3": {
+      "V": 28,
+      "E": 29,
+      "beta_0": 5,
+      "beta_1": 6,
+      "L0_DA_match": true,
+      "svd_identity_verified": true,
+      "pi_free_certificate": true,
+      "degree_sequence": [
+        2,
+        2,
+        3,
+        3,
+        2,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        1
+      ],
+      "pendant_vertex_count": 4,
+      "gs_is_pendant": false,
+      "gs_degrees": [
+        2,
+        2
+      ],
+      "L0_spectrum": [
+        -0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2679491924,
+        0.5857864376,
+        0.5857864376,
+        1.0,
+        1.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.5857864376,
+        3.0,
+        3.0,
+        3.0,
+        3.4142135624,
+        3.4142135624,
+        3.7320508076,
+        4.0,
+        4.0,
+        5.0,
+        5.4142135624
+      ],
+      "L1_spectrum": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.2679491924,
+        0.5857864376,
+        0.5857864376,
+        1.0,
+        1.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.0,
+        2.5857864376,
+        3.0,
+        3.0,
+        3.0,
+        3.4142135624,
+        3.4142135624,
+        3.7320508076,
+        4.0,
+        4.0,
+        5.0,
+        5.4142135624
+      ]
+    },
+    "rule_B_nmax_2": {
+      "V": 10,
+      "E": 20,
+      "beta_0": 1,
+      "beta_1": 11,
+      "L0_DA_match": true,
+      "svd_identity_verified": true,
+      "pi_free_certificate": true,
+      "degree_sequence": [
+        5,
+        5,
+        5,
+        5,
+        2,
+        4,
+        4,
+        2,
+        4,
+        4
+      ],
+      "pendant_vertex_count": 0,
+      "gs_is_pendant": false,
+      "gs_degrees": [
+        5,
+        5
+      ],
+      "L0_spectrum": [
+        -0.0,
+        1.4384471872,
+        2.2984378813,
+        4.0,
+        4.0,
+        4.0,
+        5.0,
+        5.0,
+        5.5615528128,
+        8.7015621187
+      ],
+      "L1_spectrum": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4384471872,
+        2.2984378813,
+        4.0,
+        4.0,
+        4.0,
+        5.0,
+        5.0,
+        5.5615528128,
+        8.7015621187
+      ]
+    },
+    "rule_B_nmax_3": {
+      "V": 28,
+      "E": 106,
+      "beta_0": 1,
+      "beta_1": 79,
+      "L0_DA_match": true,
+      "svd_identity_verified": true,
+      "pi_free_certificate": true,
+      "degree_sequence": [
+        5,
+        5,
+        10,
+        10,
+        8,
+        12,
+        12,
+        8,
+        9,
+        9,
+        10,
+        10,
+        7,
+        10,
+        10,
+        7,
+        7,
+        7,
+        2,
+        4,
+        6,
+        6,
+        4,
+        2,
+        6,
+        10,
+        10,
+        6
+      ],
+      "pendant_vertex_count": 0,
+      "gs_is_pendant": false,
+      "gs_degrees": [
+        5,
+        5
+      ],
+      "L0_spectrum": [
+        -0.0,
+        1.4071895101,
+        1.8467907036,
+        3.0444924722,
+        3.6830031803,
+        4.3514616252,
+        4.6089361099,
+        4.8806103507,
+        5.2271371516,
+        5.5176186061,
+        6.2286658067,
+        7.1380910977,
+        7.402134121,
+        7.4884123106,
+        8.0372211591,
+        8.4291454856,
+        8.7255976256,
+        9.2527631664,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.3443028666,
+        10.4531977234,
+        11.5801534936,
+        11.7993693759,
+        12.4809929748,
+        18.0727130835
+      ],
+      "L1_spectrum": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4071895101,
+        1.8467907036,
+        3.0444924722,
+        3.6830031803,
+        4.3514616252,
+        4.6089361099,
+        4.8806103507,
+        5.2271371516,
+        5.5176186061,
+        6.2286658067,
+        7.1380910977,
+        7.402134121,
+        7.4884123106,
+        8.0372211591,
+        8.4291454856,
+        8.7255976256,
+        9.2527631664,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.3443028666,
+        10.4531977234,
+        11.5801534936,
+        11.7993693759,
+        12.4809929748,
+        18.0727130835
+      ]
+    }
+  },
+  "task_2_photon_rule_A": {
+    "G_gamma_shape": [
+      8,
+      8
+    ],
+    "G_gamma_max": 1.0000000000000009,
+    "G_gamma_rank": 7,
+    "gs_is_pendant": false,
+    "gs_degrees": [
+      2,
+      2
+    ]
+  },
+  "task_3_electron_rule_A": {
+    "D_dirac_shape": [
+      10,
+      10
+    ],
+    "D_dirac_condition": 1.6666666666666667,
+    "G_e_is_diagonal_t0": true
+  },
+  "task_4_self_energy_rule_A": {
+    "Sigma_trace": 8.500000000000002,
+    "is_hermitian": true,
+    "is_psd": true,
+    "eigenvalues": [
+      0.4999999999999999,
+      0.5,
+      0.5,
+      0.5000000000000002,
+      0.5428932188134524,
+      0.5428932188134524,
+      0.7499999999999998,
+      0.7500000000000001,
+      1.9571067811865483,
+      1.9571067811865483
+    ],
+    "gs_indices": [
+      0,
+      1
+    ],
+    "gs_block": [
+      [
+        0.625,
+        0.0
+      ],
+      [
+        0.0,
+        0.625
+      ]
+    ],
+    "gs_block_zero": false,
+    "N_dirac": 10,
+    "E_edges": 8
+  },
+  "task_4b_vertex_rule_A": {
+    "Lambda_trace": 2.9333333333333336,
+    "eigenvalues": [
+      -0.2,
+      -0.2,
+      0.21715728752538097,
+      0.21715728752538105,
+      0.2666666666666666,
+      0.2666666666666667,
+      0.3999999999999999,
+      0.4000000000000001,
+      0.782842712474619,
+      0.7828427124746193
+    ],
+    "F2": null,
+    "bare_vertex_trace": 0.0
+  },
+  "task_5_census_rule_A": {
+    "rule_1_delta_mj": {
+      "verdict": "SURVIVES",
+      "total_edges": 8,
+      "conserved": 8,
+      "violations": 0,
+      "tier": "INTRINSIC"
+    },
+    "rule_2_spatial_parity": {
+      "verdict": "BROKEN",
+      "total_edges": 8,
+      "parity_correct": 0,
+      "parity_violations": 8,
+      "tier": "INTRINSIC"
+    },
+    "rule_3_gaunt_sparsity": {
+      "verdict": "SURVIVES",
+      "total_possible": 45,
+      "nnz": 8,
+      "density": 0.17777777777777778,
+      "sparsity": 0.8222222222222222,
+      "tier": "INTRINSIC"
+    },
+    "rule_4_vertex_parity": {
+      "verdict": "BROKEN",
+      "total_couplings": 8,
+      "parity_allowed": 6,
+      "parity_forbidden": 2,
+      "fraction_allowed": 0.75,
+      "tier": "STRUCTURAL",
+      "note": "n1+n2 parity check with implicit q=1 dipole"
+    },
+    "rule_5_so4_channel": {
+      "verdict": "STRUCTURAL (not applicable)",
+      "note": "SO(4) channel count requires vector harmonic structure; Dirac graph has spinor structure but no explicit W channel decomposition",
+      "tier": "STRUCTURAL"
+    },
+    "rule_6_charge_conjugation": {
+      "verdict": "BROKEN",
+      "c_pairs_checked": 2,
+      "c_violations": 2,
+      "tier": "INTRINSIC"
+    },
+    "rule_7_furry": {
+      "verdict": "SURVIVES",
+      "tadpole": 0.0,
+      "tadpole_zero": true,
+      "bubble": 3.5555555555555562,
+      "triangle": 0.0,
+      "triangle_zero": true,
+      "tier": "INTRINSIC"
+    },
+    "rule_8_ward_identity": {
+      "verdict": "BROKEN",
+      "max_ward_diff": 0.19166666666666698,
+      "Sigma_trace": 8.500000000000002,
+      "Lambda_trace": 2.9333333333333336,
+      "tier": "STRUCTURAL"
+    }
+  },
+  "task_2_photon_rule_B": {
+    "G_gamma_shape": [
+      20,
+      20
+    ],
+    "G_gamma_max": 0.24500000000000027,
+    "G_gamma_rank": 9,
+    "gs_is_pendant": false,
+    "gs_degrees": [
+      5,
+      5
+    ]
+  },
+  "task_3_electron_rule_B": {
+    "D_dirac_shape": [
+      10,
+      10
+    ],
+    "D_dirac_condition": 1.6666666666666667,
+    "G_e_is_diagonal_t0": true
+  },
+  "task_4_self_energy_rule_B": {
+    "Sigma_trace": 5.15,
+    "is_hermitian": true,
+    "is_psd": true,
+    "eigenvalues": [
+      0.2,
+      0.2000000000000005,
+      0.24999999999999992,
+      0.25,
+      0.25000000000000033,
+      0.4448876688051627,
+      0.49000000000000005,
+      0.8250000000000003,
+      0.8901123311948373,
+      1.3500000000000008
+    ],
+    "gs_indices": [
+      0,
+      1
+    ],
+    "gs_block": [
+      [
+        0.6437500000000005,
+        0.13124999999999984
+      ],
+      [
+        0.13125000000000003,
+        0.6437500000000002
+      ]
+    ],
+    "gs_block_zero": false,
+    "N_dirac": 10,
+    "E_edges": 20
+  },
+  "task_4b_vertex_rule_B": {
+    "Lambda_trace": 1.765333333333334,
+    "eigenvalues": [
+      0.015999999999999938,
+      0.01600000000000012,
+      0.13333333333333325,
+      0.13333333333333336,
+      0.1333333333333335,
+      0.17999999999999997,
+      0.18000000000000022,
+      0.23727342336275342,
+      0.2613333333333334,
+      0.4747265766372468
+    ],
+    "F2": null,
+    "bare_vertex_trace": 0.0
+  },
+  "task_5_census_rule_B": {
+    "rule_1_delta_mj": {
+      "verdict": "SURVIVES",
+      "total_edges": 20,
+      "conserved": 20,
+      "violations": 0,
+      "tier": "INTRINSIC"
+    },
+    "rule_2_spatial_parity": {
+      "verdict": "SURVIVES",
+      "total_edges": 20,
+      "parity_correct": 20,
+      "parity_violations": 0,
+      "tier": "INTRINSIC"
+    },
+    "rule_3_gaunt_sparsity": {
+      "verdict": "SURVIVES",
+      "total_possible": 45,
+      "nnz": 20,
+      "density": 0.4444444444444444,
+      "sparsity": 0.5555555555555556,
+      "tier": "INTRINSIC"
+    },
+    "rule_4_vertex_parity": {
+      "verdict": "BROKEN",
+      "total_couplings": 20,
+      "parity_allowed": 10,
+      "parity_forbidden": 10,
+      "fraction_allowed": 0.5,
+      "tier": "STRUCTURAL",
+      "note": "n1+n2 parity check with implicit q=1 dipole"
+    },
+    "rule_5_so4_channel": {
+      "verdict": "STRUCTURAL (not applicable)",
+      "note": "SO(4) channel count requires vector harmonic structure; Dirac graph has spinor structure but no explicit W channel decomposition",
+      "tier": "STRUCTURAL"
+    },
+    "rule_6_charge_conjugation": {
+      "verdict": "BROKEN",
+      "c_pairs_checked": 2,
+      "c_violations": 4,
+      "tier": "INTRINSIC"
+    },
+    "rule_7_furry": {
+      "verdict": "SURVIVES",
+      "tadpole": 0.0,
+      "tadpole_zero": true,
+      "bubble": 1.7066666666666672,
+      "triangle": 0.0,
+      "triangle_zero": true,
+      "tier": "INTRINSIC"
+    },
+    "rule_8_ward_identity": {
+      "verdict": "BROKEN",
+      "max_ward_diff": 1.1404166666666704,
+      "Sigma_trace": 5.15,
+      "Lambda_trace": 1.765333333333334,
+      "tier": "STRUCTURAL"
+    }
+  },
+  "task_4_self_energy_rule_B_nmax3": {
+    "Sigma_trace": 9.62044634794643,
+    "is_hermitian": true,
+    "is_psd": true,
+    "eigenvalues": [
+      0.09999999999999988,
+      0.10000000000000003,
+      0.10139855302744526,
+      0.12013926769347073,
+      0.1311836366473763,
+      0.145706864519306,
+      0.1656747486583951,
+      0.17112143492618798,
+      0.18556331696135242,
+      0.18831624133346012,
+      0.2024165385911011,
+      0.21083871720992578,
+      0.21249300270647029,
+      0.22490077117914606,
+      0.2403800484427579,
+      0.24744155317691768,
+      0.26291014122646383,
+      0.2972809988430653,
+      0.3017967749727878,
+      0.38142045380526635,
+      0.3995275956049072,
+      0.40457102015003643,
+      0.4729198595913939,
+      0.6026163258348697,
+      0.6660475381700288,
+      0.8118967318789972,
+      0.9953588599581894,
+      1.2765253528371137
+    ],
+    "gs_indices": [
+      0,
+      1
+    ],
+    "gs_block": [
+      [
+        0.2585870839525982,
+        0.01765327486014867
+      ],
+      [
+        0.017653274860148643,
+        0.2585870839525981
+      ]
+    ],
+    "gs_block_zero": false,
+    "N_dirac": 28,
+    "E_edges": 106
+  },
+  "task_5_census_rule_B_nmax3": {
+    "rule_1_delta_mj": {
+      "verdict": "SURVIVES",
+      "total_edges": 106,
+      "conserved": 106,
+      "violations": 0,
+      "tier": "INTRINSIC"
+    },
+    "rule_2_spatial_parity": {
+      "verdict": "SURVIVES",
+      "total_edges": 106,
+      "parity_correct": 106,
+      "parity_violations": 0,
+      "tier": "INTRINSIC"
+    },
+    "rule_3_gaunt_sparsity": {
+      "verdict": "SURVIVES",
+      "total_possible": 378,
+      "nnz": 106,
+      "density": 0.2804232804232804,
+      "sparsity": 0.7195767195767195,
+      "tier": "INTRINSIC"
+    },
+    "rule_4_vertex_parity": {
+      "verdict": "BROKEN",
+      "total_couplings": 106,
+      "parity_allowed": 48,
+      "parity_forbidden": 58,
+      "fraction_allowed": 0.4528301886792453,
+      "tier": "STRUCTURAL",
+      "note": "n1+n2 parity check with implicit q=1 dipole"
+    },
+    "rule_5_so4_channel": {
+      "verdict": "STRUCTURAL (not applicable)",
+      "note": "SO(4) channel count requires vector harmonic structure; Dirac graph has spinor structure but no explicit W channel decomposition",
+      "tier": "STRUCTURAL"
+    },
+    "rule_6_charge_conjugation": {
+      "verdict": "BROKEN",
+      "c_pairs_checked": 8,
+      "c_violations": 62,
+      "tier": "INTRINSIC"
+    },
+    "rule_7_furry": {
+      "verdict": "SURVIVES",
+      "tadpole": 0.0,
+      "tadpole_zero": true,
+      "bubble": 6.082176870748302,
+      "triangle": "not computed",
+      "triangle_zero": null,
+      "tier": "INTRINSIC"
+    },
+    "rule_8_ward_identity": {
+      "verdict": "BROKEN",
+      "max_ward_diff": 1.125456963805153,
+      "Sigma_trace": 9.62044634794643,
+      "Lambda_trace": 1.9657256579853817,
+      "tier": "STRUCTURAL"
+    }
+  },
+  "scalar_reference": {
+    "Sigma_trace_nmax2": "44/3",
+    "gs_block_zero": false,
+    "gs_block": "[[1,1],[1,1]]",
+    "F2_t0": "5*sqrt(2)/3",
+    "selection_rules_surviving": "1/8 (Gaunt/CG sparsity only)"
+  }
+}
