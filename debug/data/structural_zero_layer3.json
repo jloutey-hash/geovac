@@ -1,0 +1,126 @@
+{
+  "description": "Layer 3: Selection rule gap characterization",
+  "headline": "The graph lacks BOTH vertex parity AND SO(4) channel count. The gap is permanent by design.",
+  "continuum_protection": {
+    "mechanism_1": "Vertex parity: n1+n2+q odd. At n_ext=0, forced to 2*n_int = even. ALWAYS fails.",
+    "mechanism_2": "SO(4) channel count: W(0, n_int, q) = 0. j_R(psi_pos at n=0) = 0 => degenerate triangle.",
+    "mechanisms_independent": true,
+    "either_sufficient": true
+  },
+  "graph_absence": {
+    "no_vertex_parity": "Graph photon on edges has no spin-1 parity constraint",
+    "no_so4_doubling": "Graph CG is scalar SU(2), not SU(2)_L x SU(2)_R",
+    "irrecoverable": "Cannot be restored without replacing scalar CG with vector coupling"
+  },
+  "part_c_triangle_details": {
+    "n_int=1_q=1": {
+      "n_ext_CH": 0,
+      "n_int_CH": 1,
+      "q": 1,
+      "parity_ok": false,
+      "parity_sum": 2,
+      "A_L": true,
+      "A_R": false,
+      "B_L": true,
+      "B_R": true,
+      "W_no_parity": 1,
+      "W_with_parity": 0,
+      "reps": {
+        "psi_pos": "((0+1)/2, 0/2) = (1/2, 0)",
+        "psi_neg": "(1/2, (1+1)/2) = (1/2, 1)",
+        "V_A": "((1+1)/2, (1-1)/2) = (1, 0)",
+        "V_B": "((1-1)/2, (1+1)/2) = (0, 1)"
+      }
+    },
+    "n_int=2_q=2": {
+      "n_ext_CH": 0,
+      "n_int_CH": 2,
+      "q": 2,
+      "parity_ok": false,
+      "parity_sum": 4,
+      "A_L": true,
+      "A_R": false,
+      "B_L": true,
+      "B_R": true,
+      "W_no_parity": 1,
+      "W_with_parity": 0,
+      "reps": {
+        "psi_pos": "((0+1)/2, 0/2) = (1/2, 0)",
+        "psi_neg": "(2/2, (2+1)/2) = (1, 3/2)",
+        "V_A": "((2+1)/2, (2-1)/2) = (3/2, 1/2)",
+        "V_B": "((2-1)/2, (2+1)/2) = (1/2, 3/2)"
+      }
+    },
+    "n_int=3_q=3": {
+      "n_ext_CH": 0,
+      "n_int_CH": 3,
+      "q": 3,
+      "parity_ok": false,
+      "parity_sum": 6,
+      "A_L": true,
+      "A_R": false,
+      "B_L": true,
+      "B_R": true,
+      "W_no_parity": 1,
+      "W_with_parity": 0,
+      "reps": {
+        "psi_pos": "((0+1)/2, 0/2) = (1/2, 0)",
+        "psi_neg": "(3/2, (3+1)/2) = (3/2, 2)",
+        "V_A": "((3+1)/2, (3-1)/2) = (2, 1)",
+        "V_B": "((3-1)/2, (3+1)/2) = (1, 2)"
+      }
+    },
+    "n_int=4_q=4": {
+      "n_ext_CH": 0,
+      "n_int_CH": 4,
+      "q": 4,
+      "parity_ok": false,
+      "parity_sum": 8,
+      "A_L": true,
+      "A_R": false,
+      "B_L": true,
+      "B_R": true,
+      "W_no_parity": 1,
+      "W_with_parity": 0,
+      "reps": {
+        "psi_pos": "((0+1)/2, 0/2) = (1/2, 0)",
+        "psi_neg": "(4/2, (4+1)/2) = (2, 5/2)",
+        "V_A": "((4+1)/2, (4-1)/2) = (5/2, 3/2)",
+        "V_B": "((4-1)/2, (4+1)/2) = (3/2, 5/2)"
+      }
+    },
+    "n_int=5_q=5": {
+      "n_ext_CH": 0,
+      "n_int_CH": 5,
+      "q": 5,
+      "parity_ok": false,
+      "parity_sum": 10,
+      "A_L": true,
+      "A_R": false,
+      "B_L": true,
+      "B_R": true,
+      "W_no_parity": 1,
+      "W_with_parity": 0,
+      "reps": {
+        "psi_pos": "((0+1)/2, 0/2) = (1/2, 0)",
+        "psi_neg": "(5/2, (5+1)/2) = (5/2, 3)",
+        "V_A": "((5+1)/2, (5-1)/2) = (3, 2)",
+        "V_B": "((5-1)/2, (5+1)/2) = (2, 3)"
+      }
+    }
+  },
+  "part_e_relative_size": {
+    "2": {
+      "error": "compute_self_energy() got an unexpected keyword argument 'photon_data'"
+    },
+    "3": {
+      "error": "compute_self_energy() got an unexpected keyword argument 'photon_data'"
+    },
+    "4": {
+      "error": "Cannot convert complex to float"
+    },
+    "5": {
+      "error": "Cannot convert complex to float"
+    }
+  }
+}

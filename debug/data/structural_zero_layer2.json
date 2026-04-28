@@ -1,0 +1,118 @@
+{
+  "description": "Layer 2: n_max evolution of the broken structural zero",
+  "headline": "G_gamma[e0,e0] = (n_max - 1)/n_max EXACTLY. Sigma(GS) = 2*(n_max-1)/n_max -> 2 as n_max -> infinity.",
+  "key_finding": "The structural zero does NOT heal in the continuum limit. It GROWS monotonically toward 2.",
+  "mechanism": "v0 = |1,0,0> has exactly 1 edge (e0, the radial edge to |2,0,0>) at ALL n_max. The vertex elements V_e0[gs,c] = 1 for the two intermediate s-wave Dirac states (d2,d3). So Sigma(GS) = 2 * G_gamma[e0,e0]. Only the photon propagator entry changes.",
+  "formula": "G_gamma[e0,e0] = (n_max - 1) / n_max",
+  "sigma_gs_formula": "Sigma[gs_i, gs_j] = 2*(n_max-1)/n_max for all i,j in {0,1}",
+  "limit": "Sigma(GS) -> 2 as n_max -> infinity",
+  "verified_exact_sympy": [
+    3,
+    4
+  ],
+  "verified_numpy": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    12,
+    15
+  ],
+  "data": [
+    {
+      "n_max": 2,
+      "G_gamma_e0e0": "1/2",
+      "G_gamma_float": 0.5,
+      "Sigma_GS": "2/2",
+      "Sigma_GS_float": 1.0
+    },
+    {
+      "n_max": 3,
+      "G_gamma_e0e0": "2/3",
+      "G_gamma_float": 0.6666666666666666,
+      "Sigma_GS": "4/3",
+      "Sigma_GS_float": 1.3333333333333333
+    },
+    {
+      "n_max": 4,
+      "G_gamma_e0e0": "3/4",
+      "G_gamma_float": 0.75,
+      "Sigma_GS": "6/4",
+      "Sigma_GS_float": 1.5
+    },
+    {
+      "n_max": 5,
+      "G_gamma_e0e0": "4/5",
+      "G_gamma_float": 0.8,
+      "Sigma_GS": "8/5",
+      "Sigma_GS_float": 1.6
+    },
+    {
+      "n_max": 6,
+      "G_gamma_e0e0": "5/6",
+      "G_gamma_float": 0.8333333333333334,
+      "Sigma_GS": "10/6",
+      "Sigma_GS_float": 1.6666666666666667
+    },
+    {
+      "n_max": 7,
+      "G_gamma_e0e0": "6/7",
+      "G_gamma_float": 0.8571428571428571,
+      "Sigma_GS": "12/7",
+      "Sigma_GS_float": 1.7142857142857142
+    },
+    {
+      "n_max": 8,
+      "G_gamma_e0e0": "7/8",
+      "G_gamma_float": 0.875,
+      "Sigma_GS": "14/8",
+      "Sigma_GS_float": 1.75
+    },
+    {
+      "n_max": 10,
+      "G_gamma_e0e0": "9/10",
+      "G_gamma_float": 0.9,
+      "Sigma_GS": "18/10",
+      "Sigma_GS_float": 1.8
+    },
+    {
+      "n_max": 12,
+      "G_gamma_e0e0": "11/12",
+      "G_gamma_float": 0.9166666666666666,
+      "Sigma_GS": "22/12",
+      "Sigma_GS_float": 1.8333333333333333
+    },
+    {
+      "n_max": 15,
+      "G_gamma_e0e0": "14/15",
+      "G_gamma_float": 0.9333333333333333,
+      "Sigma_GS": "28/15",
+      "Sigma_GS_float": 1.8666666666666667
+    },
+    {
+      "n_max": 20,
+      "G_gamma_e0e0": "19/20",
+      "G_gamma_float": 0.95,
+      "Sigma_GS": "38/20",
+      "Sigma_GS_float": 1.9
+    },
+    {
+      "n_max": 50,
+      "G_gamma_e0e0": "49/50",
+      "G_gamma_float": 0.98,
+      "Sigma_GS": "98/50",
+      "Sigma_GS_float": 1.96
+    },
+    {
+      "n_max": 100,
+      "G_gamma_e0e0": "99/100",
+      "G_gamma_float": 0.99,
+      "Sigma_GS": "198/100",
+      "Sigma_GS_float": 1.98
+    }
+  ]
+}

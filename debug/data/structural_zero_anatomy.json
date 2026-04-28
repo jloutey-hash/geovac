@@ -1,0 +1,604 @@
+{
+  "n_max": 2,
+  "t": "0",
+  "fock_nodes": [
+    "(1,0,0)",
+    "(2,0,0)",
+    "(2,1,-1)",
+    "(2,1,0)",
+    "(2,1,1)"
+  ],
+  "fock_edges": [
+    "v0((1, 0, 0))-v1((2, 0, 0))",
+    "v2((2, 1, -1))-v3((2, 1, 0))",
+    "v3((2, 1, 0))-v4((2, 1, 1))"
+  ],
+  "dirac_labels": [
+    {
+      "n_fock": 1,
+      "kappa": -1,
+      "two_m_j": -1,
+      "l": 0,
+      "j": "1/2"
+    },
+    {
+      "n_fock": 1,
+      "kappa": -1,
+      "two_m_j": 1,
+      "l": 0,
+      "j": "1/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": -1,
+      "two_m_j": -1,
+      "l": 0,
+      "j": "1/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": -1,
+      "two_m_j": 1,
+      "l": 0,
+      "j": "1/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": -3,
+      "l": 1,
+      "j": "3/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": -1,
+      "l": 1,
+      "j": "3/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": 1,
+      "l": 1,
+      "j": "3/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": 3,
+      "l": 1,
+      "j": "3/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": 1,
+      "two_m_j": -1,
+      "l": 1,
+      "j": "1/2"
+    },
+    {
+      "n_fock": 2,
+      "kappa": 1,
+      "two_m_j": 1,
+      "l": 1,
+      "j": "1/2"
+    }
+  ],
+  "ground_state_indices": [
+    0,
+    1
+  ],
+  "V_fock": 5,
+  "E_fock": 3,
+  "N_dirac": 10,
+  "projection_detail": [
+    {
+      "dirac_idx": 0,
+      "dirac_label": "|n=1, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+      "projections": [
+        {
+          "fock_idx": 0,
+          "fock_state": "(1,0,0)",
+          "cg_coeff": "1",
+          "cg_float": 1.0
+        }
+      ]
+    },
+    {
+      "dirac_idx": 1,
+      "dirac_label": "|n=1, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+      "projections": [
+        {
+          "fock_idx": 0,
+          "fock_state": "(1,0,0)",
+          "cg_coeff": "1",
+          "cg_float": 1.0
+        }
+      ]
+    },
+    {
+      "dirac_idx": 2,
+      "dirac_label": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+      "projections": [
+        {
+          "fock_idx": 1,
+          "fock_state": "(2,0,0)",
+          "cg_coeff": "1",
+          "cg_float": 1.0
+        }
+      ]
+    },
+    {
+      "dirac_idx": 3,
+      "dirac_label": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+      "projections": [
+        {
+          "fock_idx": 1,
+          "fock_state": "(2,0,0)",
+          "cg_coeff": "1",
+          "cg_float": 1.0
+        }
+      ]
+    },
+    {
+      "dirac_idx": 4,
+      "dirac_label": "|n=2, kappa=-2, m_j=-3/2> (l=1, j=3/2)",
+      "projections": [
+        {
+          "fock_idx": 2,
+          "fock_state": "(2,1,-1)",
+          "cg_coeff": "1",
+          "cg_float": 1.0
+        }
+      ]
+    },
+    {
+      "dirac_idx": 5,
+      "dirac_label": "|n=2, kappa=-2, m_j=-1/2> (l=1, j=3/2)",
+      "projections": [
+        {
+          "fock_idx": 2,
+          "fock_state": "(2,1,-1)",
+          "cg_coeff": "sqrt(3)/3",
+          "cg_float": 0.5773502691896257
+        },
+        {
+          "fock_idx": 3,
+          "fock_state": "(2,1,0)",
+          "cg_coeff": "sqrt(6)/3",
+          "cg_float": 0.816496580927726
+        }
+      ]
+    },
+    {
+      "dirac_idx": 6,
+      "dirac_label": "|n=2, kappa=-2, m_j=1/2> (l=1, j=3/2)",
+      "projections": [
+        {
+          "fock_idx": 3,
+          "fock_state": "(2,1,0)",
+          "cg_coeff": "sqrt(6)/3",
+          "cg_float": 0.816496580927726
+        },
+        {
+          "fock_idx": 4,
+          "fock_state": "(2,1,1)",
+          "cg_coeff": "sqrt(3)/3",
+          "cg_float": 0.5773502691896257
+        }
+      ]
+    },
+    {
+      "dirac_idx": 7,
+      "dirac_label": "|n=2, kappa=-2, m_j=3/2> (l=1, j=3/2)",
+      "projections": [
+        {
+          "fock_idx": 4,
+          "fock_state": "(2,1,1)",
+          "cg_coeff": "1",
+          "cg_float": 1.0
+        }
+      ]
+    },
+    {
+      "dirac_idx": 8,
+      "dirac_label": "|n=2, kappa=1, m_j=-1/2> (l=1, j=1/2)",
+      "projections": [
+        {
+          "fock_idx": 2,
+          "fock_state": "(2,1,-1)",
+          "cg_coeff": "-sqrt(6)/3",
+          "cg_float": -0.816496580927726
+        },
+        {
+          "fock_idx": 3,
+          "fock_state": "(2,1,0)",
+          "cg_coeff": "sqrt(3)/3",
+          "cg_float": 0.5773502691896257
+        }
+      ]
+    },
+    {
+      "dirac_idx": 9,
+      "dirac_label": "|n=2, kappa=1, m_j=1/2> (l=1, j=1/2)",
+      "projections": [
+        {
+          "fock_idx": 3,
+          "fock_state": "(2,1,0)",
+          "cg_coeff": "-sqrt(3)/3",
+          "cg_float": -0.5773502691896257
+        },
+        {
+          "fock_idx": 4,
+          "fock_state": "(2,1,1)",
+          "cg_coeff": "sqrt(6)/3",
+          "cg_float": 0.816496580927726
+        }
+      ]
+    }
+  ],
+  "sigma_trace": "44/3",
+  "sigma_rational": false,
+  "sigma_pi_free": true,
+  "sigma_hermitian": true,
+  "gs_block_zero": false,
+  "gs_block": [
+    [
+      "1",
+      "1"
+    ],
+    [
+      "1",
+      "1"
+    ]
+  ],
+  "G_gamma": [
+    [
+      "1/2",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "2/3",
+      "1/3"
+    ],
+    [
+      "0",
+      "1/3",
+      "2/3"
+    ]
+  ],
+  "edge_pair_contributions": [
+    {
+      "e1": 0,
+      "e2": 0,
+      "e1_label": "e0: |n=1, l=0, m=0> -- |n=2, l=0, m=0>  [T+ (radial)]",
+      "e2_label": "e0: |n=1, l=0, m=0> -- |n=2, l=0, m=0>  [T+ (radial)]",
+      "G_gamma_e1_e2": "1/2",
+      "V_e1_V_e2T_gs_block": [
+        [
+          "2",
+          "2"
+        ],
+        [
+          "2",
+          "2"
+        ]
+      ],
+      "contribution": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ]
+    }
+  ],
+  "total_gs_block_from_decomposition": [
+    [
+      "1",
+      "1"
+    ],
+    [
+      "1",
+      "1"
+    ]
+  ],
+  "decomposition_matches_direct": true,
+  "cg_coupling_chains": [
+    {
+      "e1": 0,
+      "e2": 0,
+      "chains": [
+        {
+          "gs_row": 0,
+          "gs_col": 0,
+          "dirac_a": 0,
+          "dirac_b": 0,
+          "inner_product": "2",
+          "intermediates": [
+            {
+              "intermediate_c": 2,
+              "dirac_c": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            },
+            {
+              "intermediate_c": 3,
+              "dirac_c": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            }
+          ]
+        },
+        {
+          "gs_row": 0,
+          "gs_col": 1,
+          "dirac_a": 0,
+          "dirac_b": 1,
+          "inner_product": "2",
+          "intermediates": [
+            {
+              "intermediate_c": 2,
+              "dirac_c": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            },
+            {
+              "intermediate_c": 3,
+              "dirac_c": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            }
+          ]
+        },
+        {
+          "gs_row": 1,
+          "gs_col": 0,
+          "dirac_a": 1,
+          "dirac_b": 0,
+          "inner_product": "2",
+          "intermediates": [
+            {
+              "intermediate_c": 2,
+              "dirac_c": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            },
+            {
+              "intermediate_c": 3,
+              "dirac_c": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            }
+          ]
+        },
+        {
+          "gs_row": 1,
+          "gs_col": 1,
+          "dirac_a": 1,
+          "dirac_b": 1,
+          "inner_product": "2",
+          "intermediates": [
+            {
+              "intermediate_c": 2,
+              "dirac_c": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            },
+            {
+              "intermediate_c": 3,
+              "dirac_c": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+              "V_e1_ac": "1",
+              "V_e2_bc": "1",
+              "product": "1",
+              "cg_chain_e1": {
+                "P_a_v1": "1",
+                "P_c_v2": "1",
+                "P_a_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              },
+              "cg_chain_e2": {
+                "P_b_v1": "1",
+                "P_c_v2": "1",
+                "P_b_v2": "0",
+                "P_c_v1": "0",
+                "term1": "1",
+                "term2": "0"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "continuum_selection_rules": {
+    "n_ext_ch": 0,
+    "table": [
+      {
+        "n_int": 1,
+        "q_gamma": 1,
+        "triangle_ok": true,
+        "parity_ok": false,
+        "allowed": false,
+        "W": 0
+      },
+      {
+        "n_int": 2,
+        "q_gamma": 2,
+        "triangle_ok": true,
+        "parity_ok": false,
+        "allowed": false,
+        "W": 0
+      }
+    ],
+    "all_forbidden": true
+  },
+  "graph_gs_couplings": [
+    {
+      "edge": 0,
+      "gs_dirac": 0,
+      "intermediate_dirac": 2,
+      "intermediate_label": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+      "V_value": "1",
+      "n_int_ch": 1
+    },
+    {
+      "edge": 0,
+      "gs_dirac": 0,
+      "intermediate_dirac": 3,
+      "intermediate_label": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+      "V_value": "1",
+      "n_int_ch": 1
+    },
+    {
+      "edge": 0,
+      "gs_dirac": 1,
+      "intermediate_dirac": 2,
+      "intermediate_label": "|n=2, kappa=-1, m_j=-1/2> (l=0, j=1/2)",
+      "V_value": "1",
+      "n_int_ch": 1
+    },
+    {
+      "edge": 0,
+      "gs_dirac": 1,
+      "intermediate_dirac": 3,
+      "intermediate_label": "|n=2, kappa=-1, m_j=1/2> (l=0, j=1/2)",
+      "V_value": "1",
+      "n_int_ch": 1
+    }
+  ],
+  "narrative": {
+    "continuum_mechanism": "Vertex parity (n1+n2+q odd) forces 2*n_int odd at n_ext=0, which is impossible. W(0, n_int, q) = 0 for all (n_int, q).",
+    "graph_mechanism": "CG projection is scalar: decomposes Dirac spinors into orbital content via <l,m_l,1/2,m_s|j,m_j>, but does not enforce the SO(4) SU(2)_L x SU(2)_R double-triangle condition on the vector harmonic components of gamma^mu. The coupling V_e[GS, c] is nonzero whenever c has orbital content at an adjacent Fock node, regardless of W.",
+    "key_difference": "The continuum zero is enforced by the vector harmonic channel count W(0, n_int, q) = 0, which requires the SU(2)_L x SU(2)_R double-triangle condition. The graph vertex uses a scalar CG projection that bypasses this structure entirely.",
+    "gs_block": "[[1, 1], [1, 1]]",
+    "gs_eigenvalues": "[0, 2]"
+  }
+}

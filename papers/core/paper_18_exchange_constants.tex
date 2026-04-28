@@ -1274,6 +1274,36 @@ constant'' tier that lives beyond both calibration~$\pi$ and
 Riemann odd-zeta.  Verified by PSLQ at 80-digit precision;
 35/35 tests pass in \texttt{tests/test\_qed\_vertex.py}.
 
+\paragraph{Photon vector structure as a calibration exchange constant.}
+The graph-native QED construction (Paper~28, GN-1 through GN-7)
+computes one-loop QED entirely on the finite Fock graph using exact
+algebraic arithmetic.  On the graph, the photon lives on edges
+(1-cochains) as a \emph{scalar} object---the edge Laplacian
+$L_1 = B^T\!B$ propagates it without reference to any vector
+structure.  In the continuum, the physical photon is a transverse
+vector field on~$S^3$ carrying $\mathrm{SO}(4) = \mathrm{SU}(2)_L
+\times \mathrm{SU}(2)_R$ quantum numbers, and this vector structure
+enforces selection rules (vertex parity, SO(4) channel counting~$W$)
+that are absent on the graph.  The concrete evidence is the broken
+structural zero: the graph self-energy at the ground state is
+$\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}
+\neq 0$, while the continuum self-energy vanishes exactly
+($\Sigma(n_{\mathrm{ext}}=0) = 0$, Paper~28 Theorem~4) because
+vertex parity forces $n_1 + n_2 + q$ odd with $n_2 = 0$, requiring
+$2n_1$ odd---impossible.  On the graph, the Clebsch--Gordan
+projection opens couplings that the SO(4) vector selection rule
+forbids.  In the taxonomy, the photon's spin-1 nature therefore
+sits in the \textbf{calibration} tier, alongside the volume
+normalization $\mathrm{Vol}(S^3) = 2\pi^2$ and the Hurwitz-zeta
+regularization of infinite spectral sums: it is a property of the
+\emph{manifold embedding}, not of the graph.  This sharpens the
+graph/continuum partition for QED: the graph captures the
+algebraic/combinatorial content (rational propagators, algebraic CG
+vertices, $\pi$-free observables), while the continuum projection
+adds three calibration-tier ingredients: (1)~volume normalization,
+(2)~infinite-sum regularization, and (3)~photon vector structure.
+The first two were identified in earlier sections; the third is new.
+
 \paragraph{Flat-space consistency of the transcendental classification.}
 The three-axis taxonomy is derived from $S^3$ spectral sums at finite
 radius.  A natural concern is whether the classification is a

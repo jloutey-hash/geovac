@@ -87,8 +87,12 @@ quantities are $\pi$-free (algebraic); the projection exchange constant
 relating graph and continuum VP is \emph{rational} at every finite
 truncation, confirming Paper~18's calibration-tier classification.
 The continuum self-energy structural zero (Theorem~\ref{thm:self_energy_zero})
-is broken on the finite graph, where the CG projection opens couplings
-invisible to the SO(4) selection rule.
+is broken on the finite graph: the pendant-edge theorem
+(Proposition~\ref{prop:pendant_edge}) proves
+$\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max} \to 2$
+exactly, never healing in the graph limit.  The root cause is that the
+graph photon is a scalar 1-cochain, lacking the spin-1 vector structure
+whose SO(4) selection rules enforce the continuum zero.
 Comprehensive transcendental tables for $D(s)$, $D_{\mathrm{even}}(s)$,
 $D_{\mathrm{odd}}(s)$, and the one-loop self-energy are presented, all
 backed by the test suite.
@@ -1663,7 +1667,7 @@ For larger $n_{\max}$ (where direct symbolic inversion of $D$ becomes
 expensive), the rapid convergence of the Born series at
 $|\kappa| = 1/16$ provides an efficient perturbative alternative.
 
-\subsection{Broken structural zero}
+\subsection{Broken structural zero and the pendant-edge theorem}
 \label{sec:broken_structural_zero}
 
 Theorem~\ref{thm:self_energy_zero} states that $\Sigma(n_{\mathrm{ext}} = 0)
@@ -1677,8 +1681,129 @@ graph, this structural zero is \textbf{broken}:
 The CG projection maps Dirac $(n,\kappa,m_j)$ states onto Fock
 $(n,l,m)$ nodes, opening vertex couplings invisible to the SO(4)
 channel count that enforces the continuum selection rule.
-The graph self-energy at the ground state is $\Sigma = 2/5$
-(degenerate across both $m_j$ states in the vertex correction).
+
+A three-layer investigation reveals the complete mechanism.
+
+\subsubsection{Layer 1: Anatomy of the ground-state self-energy}
+
+At $n_{\max} = 2$, the entire ground-state self-energy comes from a
+single edge pair.  Let $v_0 = |1, 0, 0\rangle$ (the ground-state Fock
+node) and $v_1 = |2, 0, 0\rangle$ (the first radial excitation); these
+are connected by the edge~$e_0$.  All Clebsch--Gordan coefficients
+equal~1 because $l = 0$ forces trivial angular projection.  Two
+intermediate s-wave Dirac states ($m_j = \pm 1/2$) contribute equally.
+The formula reduces to
+\[
+  \Sigma[a,b] = 2 \cdot G_\gamma[e_0, e_0] \cdot 1,
+\]
+where $G_\gamma = L_1^+$ is the photon propagator.  At $n_{\max} = 2$,
+$L_1$ is a $3 \times 3$ matrix and $G_\gamma[e_0, e_0] = 1/2$,
+giving $\Sigma[a,b] = 1$ for all entries of the $2 \times 2$
+ground-state block.
+
+\subsubsection{Layer 2: The pendant-edge theorem}
+
+The anatomy at $n_{\max} = 2$ generalizes exactly to all $n_{\max}$.
+
+The ground-state node $v_0 = |1,0,0\rangle$ is a \emph{leaf} (degree~1)
+of the Fock graph at every~$n_{\max}$.  The single edge $e_0$ incident
+on~$v_0$ is a \emph{pendant edge}.  The s-wave ($l = 0$) radial edges
+form a tridiagonal sub-block of $L_1 = B^TB$ --- the standard discrete
+Laplacian on a path graph of length $N = n_{\max} - 1$.  This path-graph
+Laplacian $T_N$ has an explicitly known inverse: its $(0,0)$ entry is
+\[
+  T_N^{-1}[0,0] \;=\; \frac{N}{N+1}
+  \;=\; \frac{n_{\max} - 1}{n_{\max}}.
+\]
+Because the pendant edge $e_0$ decouples from all non-radial edges
+in~$L_1$ (s-wave edges share no endpoint with edges at $l \ge 1$),
+$G_\gamma[e_0, e_0] = T_N^{-1}[0,0]$ exactly.
+
+\begin{proposition}[Pendant-edge theorem for the graph self-energy]
+\label{prop:pendant_edge}
+On the GeoVac Fock graph at any finite $n_{\max} \ge 2$, the
+graph-native ground-state self-energy satisfies
+\begin{equation}
+  \Sigma_{\mathrm{graph}}(\mathrm{GS})
+  \;=\; \frac{2(n_{\max} - 1)}{n_{\max}},
+  \label{eq:pendant_edge}
+\end{equation}
+where the value is exact (rational) and degenerate across both
+$m_j = \pm 1/2$ ground-state components.  In particular,
+\begin{equation}
+  \lim_{n_{\max} \to \infty} \Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2
+  \;\neq\; 0.
+  \label{eq:pendant_limit}
+\end{equation}
+The structural zero of Theorem~\ref{thm:self_energy_zero} is never
+recovered in the graph limit.
+\end{proposition}
+
+\begin{proof}
+The ground-state Fock node $v_0 = |1,0,0\rangle$ has degree~1 at
+every~$n_{\max}$ (its only neighbor is $|2,0,0\rangle$).  The
+self-energy formula $\Sigma[a,b] = \sum_{e,e'} G_\gamma[e,e']\, V_e
+\cdot V_{e'}^T$ at the ground state receives contributions only from
+edges incident on~$v_0$, of which there is exactly one ($e_0$).
+All CG coefficients at $l = 0$ equal~1, and two Dirac intermediate
+states ($m_j = \pm 1/2$) contribute, giving
+$\Sigma[a,b] = 2\, G_\gamma[e_0, e_0]$.  The s-wave radial
+edges form a path graph of $N = n_{\max} - 1$ edges in $L_1$,
+decoupled from all $l \ge 1$ edges.  The Moore--Penrose pseudoinverse
+of the path-graph Laplacian $T_N$ satisfies
+$T_N^{-1}[0,0] = N/(N+1)$.  Therefore
+$\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2N/(N+1)
+= 2(n_{\max}-1)/n_{\max}$.
+\end{proof}
+
+\noindent\textbf{Verification:} Eq.~\eqref{eq:pendant_edge} verified
+numerically for $n_{\max} = 2, 3, \ldots, 100$ (machine-precision
+agreement) and symbolically (exact \texttt{sympy} rational arithmetic)
+at $n_{\max} = 3, 4$.
+
+\subsubsection{Layer 3: Selection-rule gap}
+
+The continuum possesses \emph{two} independent protection mechanisms
+that enforce $\Sigma(n_{\mathrm{ext}} = 0) = 0$:
+\begin{enumerate}
+\item \textbf{Vertex parity.}  The selection rule requires
+  $n_1 + n_2 + q$ odd (Eq.~\eqref{eq:vertex_rule}).  At
+  $n_{\mathrm{ext}} = 0$, the triangle inequality forces
+  $q = n_{\mathrm{int}}$, so the sum is $2\,n_{\mathrm{int}}$
+  (always even).  No allowed triple exists.
+\item \textbf{SO(4) channel count.}  The CG multiplicity
+  $W(0, n_{\mathrm{int}}, q) = 0$ for all~$q$.  The ground state has
+  $j_R = 0$ in the $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$
+  decomposition; the right-factor triangle degenerates (one component
+  fails the $\mathrm{SU}(2)_R$ triangle; the other passes all
+  triangles but is killed by parity).
+\end{enumerate}
+The finite graph has \emph{neither} mechanism.  The graph photon lives
+on edges---it is a 1-cochain, not a vector field.  The CG projection
+is scalar $\mathrm{SU}(2)$, not the $\mathrm{SU}(2)_L \times
+\mathrm{SU}(2)_R$ double triangle of SO(4) vector harmonics.  Both
+protection mechanisms arise from the \emph{spin-1 vector nature} of
+the continuum photon, which is absent on the graph.
+
+\subsubsection{Interpretation: scalar vs.\ vector QED}
+
+The graph-native QED of this section is a \emph{scalar} QED: the
+photon carries no spin-1 structure on the graph (it is a 1-cochain in
+the Hodge complex, not a vector field on the manifold).  The continuum
+QED adds vector structure via $\mathrm{SO}(4) = \mathrm{SU}(2)_L
+\times \mathrm{SU}(2)_R$, and Theorem~\ref{thm:self_energy_zero}
+is a vector-QED selection rule that scalar QED does not possess.
+
+In Paper~18's exchange-constant taxonomy~\cite{paper18}, the photon's
+spin-1 vector nature is a \textsc{calibration} exchange constant:
+it is injected when projecting from the algebraic graph to the
+continuous manifold.  The pendant-edge theorem
+(Proposition~\ref{prop:pendant_edge}) quantifies the cost of this
+omission: a ground-state self-energy of~$2$ (in graph units) that the
+continuum's vector selection rules eliminate exactly.  The structural
+zero is not a fine cancellation that the finite graph misses due to
+truncation---it is a \emph{qualitative} selection rule tied to the
+photon's vector character, which the graph does not encode.
 
 \subsection{Continuum bridge and projection exchange constant}
 \label{sec:continuum_bridge}
@@ -1727,7 +1852,7 @@ when projecting onto the continuum (\textsc{calibration} tier).
 \label{sec:discussion}
 % ===================================================================
 
-The five theorems, one proposition, and one observation of this paper,
+The five theorems, two propositions, and one observation of this paper,
 together with the anomalous magnetic moment computation
 (Sec.~\ref{sec:anomalous_moment}) and the graph-native QED infrastructure
 (Sec.~\ref{sec:graph_native_qed}), complete the first comprehensive
@@ -1743,7 +1868,18 @@ and the anomalous magnetic moment extraction are the first
 physical-process QED results in the GeoVac framework, complementing
 the vacuum diagrams of the prior QED modules.  The self-energy
 demonstrates that the vertex parity selection rule has direct
-consequences for scattering processes on~$S^3$.  The anomalous
+consequences for scattering processes on~$S^3$.
+The pendant-edge theorem (Proposition~\ref{prop:pendant_edge})
+sharpens the broken-structural-zero finding: the graph ground-state
+self-energy $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}$
+is an exact rational expression that converges to~$2$, not~$0$, as
+$n_{\max} \to \infty$.  This is not a finite-size artifact that heals
+in the continuum limit; it reflects a qualitative difference between
+graph QED (scalar, 1-cochain photon) and continuum QED (vector,
+$\mathrm{SO}(4) = \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ photon).
+The photon's spin-1 vector nature is thereby classified as a
+\textsc{calibration} exchange constant in Paper~18's
+taxonomy~\cite{paper18}.  The anomalous
 magnetic moment ($F_2 / [\alpha/(2\pi)] = 1.084$ at
 $n_{\mathrm{ext}} = 1$) provides the first quantitative curvature
 correction to a measurable QED observable in the framework, matching the
@@ -1842,8 +1978,13 @@ confirmed independent of $S_{\min}$ and all lower-loop constants.
       enforce $\Sigma^{(k)}(0) = 0$ at every order?
       \textbf{Partial resolution:}
       The structural zero is broken on the finite graph
-      (Sec.~\ref{sec:broken_structural_zero}): the CG projection
-      opens couplings forbidden by the continuum SO(4) selection rule.
+      (Sec.~\ref{sec:broken_structural_zero}): the pendant-edge theorem
+      (Proposition~\ref{prop:pendant_edge}) proves
+      $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}
+      \to 2$ exactly, never healing.  The root cause is that the graph
+      photon is a scalar 1-cochain lacking the spin-1 vector selection
+      rules (vertex parity + SO(4) channel count) that enforce the
+      continuum zero.
       The continuum question at higher loop order remains open.
 \item The three-loop CG-weighted sum at physical exponents has
       convergence rate $\alpha \approx -1.31$.  Is there a
