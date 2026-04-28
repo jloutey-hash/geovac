@@ -93,6 +93,17 @@ $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max} \to 2$
 exactly, never healing in the graph limit.  The root cause is that the
 graph photon is a scalar 1-cochain, lacking the spin-1 vector structure
 whose SO(4) selection rules enforce the continuum zero.
+The graph-native anomalous moment $F_2(t)$ is an even rational function
+of the hopping coupling~$t$ over $\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{6})$,
+with $F_2(\kappa)$ decreasing monotonically ($2.353, 1.873, 1.589$ at
+$n_{\max} = 2, 3, 4$).  A systematic selection rule census shows that
+only 1~of~8 continuum QED selection rules survives on the graph
+(Gaunt/CG sparsity), with the 7~broken rules partitioning cleanly into
+3~structural (requiring vector photon) and 4~intrinsic (graph kinematics).
+The VP projection constant $C$ does \emph{not} serve as a universal
+graph-to-continuum projector: $C \times F_2$ diverges from
+$\alpha/(2\pi)$, confirming that different diagram topologies require
+independent projection factors.
 Comprehensive transcendental tables for $D(s)$, $D_{\mathrm{even}}(s)$,
 $D_{\mathrm{odd}}(s)$, and the one-loop self-energy are presented, all
 backed by the test suite.
@@ -1667,6 +1678,56 @@ For larger $n_{\max}$ (where direct symbolic inversion of $D$ becomes
 expensive), the rapid convergence of the Born series at
 $|\kappa| = 1/16$ provides an efficient perturbative alternative.
 
+\subsubsection{$F_2(t)$ is an even rational function}
+\label{sec:f2_even}
+
+The Neumann expansion reveals that $F_2(t)$ is an \emph{even} function
+of~$t$: all odd Taylor coefficients vanish identically.  The mechanism
+is the decomposition $D(t) = \Lambda + tA$, where $\Lambda$ (diagonal
+eigenvalues $\pm|\lambda_n|$) is even in $t$ and $A$ (the $T_{\pm}$
+ladder operators connecting adjacent shells) is odd.  The vertex
+correction involves the bilinear $V \cdot G_e \cdot V^T$, which is
+invariant under $t \to -t$ because the adjacency contribution enters
+quadratically via $G_e(t) = G_e(-t)$ in the trace.
+
+At $n_{\max} = 2$, the Taylor expansion is
+\begin{align}
+  F_2(t) &= \frac{5\sqrt{2}}{3} + c_2\, t^2 + c_4\, t^4 + O(t^6),
+  \label{eq:f2_taylor}
+\end{align}
+with $c_0 = 5\sqrt{2}/3 \approx 2.357$ (algebraic), $c_1 = c_3 = c_5
+= 0$ (exact), $c_2 \approx -1.163$ (algebraic in $\mathbb{Q}(\sqrt{2},
+\sqrt{3}, \sqrt{6})$), $c_4 \approx 1.685$ (algebraic).  The
+even-ness means the anomalous moment depends only on $t^2 = \kappa^2$,
+not on the sign of the hopping coupling.
+
+\subsubsection{$F_2(\kappa)$ convergence}
+\label{sec:f2_convergence}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrrr}
+\hline
+$n_{\max}$ & $N_{\mathrm{Dirac}}$ & $E_{\mathrm{Fock}}$ & $F_2(\kappa)$ & $F_2(0)$ & $F_2 \cdot n_{\max}$ \\
+\hline
+2 & 10 & 3 & 2.3525 & 2.3570 & 4.705 \\
+3 & 28 & 13 & 1.8731 & 1.8756 & 5.619 \\
+4 & 60 & 34 & 1.5892 & --- & 6.357 \\
+\hline
+\end{tabular}
+\caption{Graph-native anomalous moment $F_2$ at the physical coupling
+$\kappa = -1/16$.  $F_2$ decreases monotonically as $n_{\max}^{-0.57}$
+(effective power-law exponent from log-log fit).}
+\label{tab:f2_convergence}
+\end{table}
+
+The graph-native $F_2(\kappa)$ decreases monotonically with $n_{\max}$
+but remains $O(1)$, orders of magnitude above the Schwinger value
+$\alpha/(2\pi) \approx 1.16 \times 10^{-3}$.  The suppression from
+graph to continuum requires both the coupling constant~$\alpha$ (one
+power per loop) and the vector photon structure (SO(4) selection rules
+that eliminate most graph-allowed channels).
+
 \subsection{Broken structural zero and the pendant-edge theorem}
 \label{sec:broken_structural_zero}
 
@@ -1805,6 +1866,52 @@ zero is not a fine cancellation that the finite graph misses due to
 truncation---it is a \emph{qualitative} selection rule tied to the
 photon's vector character, which the graph does not encode.
 
+\subsection{Selection rule survival census}
+\label{sec:selection_rule_census}
+
+A systematic test of 8~continuum QED selection rules on the finite
+Fock graph at $n_{\max} = 2$ reveals that only \emph{one} survives:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{llll}
+\hline
+Rule & Verdict & Tier & Key metric \\
+\hline
+Gaunt/CG sparsity & \textbf{survives} & intrinsic & density 16\%$\to$2.6\%$\to$0.6\% \\
+Angular momentum $\Delta m_j$ & broken & intrinsic & 20 violations \\
+Spatial parity (E1) & broken & intrinsic & 100\% parity violations \\
+Charge conjugation (C) & broken & intrinsic & 8 C-violations in $\Sigma$ \\
+Furry's theorem & broken & intrinsic & tadpole $= 16\sqrt{2}/15 \neq 0$ \\
+Vertex parity ($n_1{+}n_2{+}q$ odd) & broken & structural & 0\% forbidden \\
+SO(4) channel count ($W > 0$) & broken & structural & 100\% have $W = 0$ \\
+Ward identity & broken & structural & residual $= 5.08$ \\
+\hline
+\end{tabular}
+\caption{Selection rule survival census at $n_{\max} = 2$.
+\textsc{Structural} rules require vector photon structure absent from the
+graph; \textsc{intrinsic} rules are broken by graph kinematics.}
+\label{tab:selection_rules}
+\end{table}
+
+The 7~broken rules partition cleanly into two classes:
+\begin{itemize}
+\item \textbf{3~structural} (vertex parity, SO(4) channel count, Ward
+  identity): require the photon to be a vector harmonic on~$S^3$.  The
+  graph's scalar 1-cochain photon has no mechanism to carry parity-flip,
+  angular momentum transfer, or gauge derivative structure.  These enter
+  at the \textsc{calibration} tier when projecting to vector QED.
+\item \textbf{4~intrinsic} ($\Delta m_j$, spatial parity, charge
+  conjugation, Furry): broken by graph kinematics.  The CG projection
+  allows couplings forbidden in vector QED because the scalar photon
+  carries different angular momentum content.
+\end{itemize}
+
+Notable graph-native invariants: $\mathrm{Tr}(\Sigma)/\mathrm{Tr}(\Lambda) = 33/8$;
+tadpole $= 16\sqrt{2}/15$; bubble $= 32/9$;
+triangle $= 3584\sqrt{2}/3375$.
+
 \subsection{Continuum bridge and projection exchange constant}
 \label{sec:continuum_bridge}
 
@@ -1828,6 +1935,40 @@ converting to dimensionful quantities.  Both are Paper~18's
 The graph is strictly richer than the continuum at finite truncation:
 at $n_{\max} = 3$, the graph captures ${\sim}35\times$ more VP content
 than the $W$-weighted continuum formula.
+
+\subsubsection{Topology-dependent projection}
+\label{sec:topology_dependent_projection}
+
+The VP projection constant~$C$ is specific to the vacuum polarization
+diagram.  A natural hypothesis is that $C \times F_2 \to \alpha/(2\pi)$
+as $n_{\max} \to \infty$, providing a single-constant projection from
+graph-native scalar QED to physical vector QED.  This hypothesis is
+\textbf{falsified}:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrrr}
+\hline
+$n_{\max}$ & $C$ & $F_2(\kappa)$ & $C \times F_2$ & $\alpha/(2\pi)$ & ratio \\
+\hline
+2 & 0 & 2.3525 & --- & $1.16 \times 10^{-3}$ & --- \\
+3 & $2.84 \times 10^{-2}$ & 1.8731 & $5.31 \times 10^{-2}$ & $1.16 \times 10^{-3}$ & 45.7 \\
+4 & $4.74 \times 10^{-2}$ & 1.5892 & $7.54 \times 10^{-2}$ & $1.16 \times 10^{-3}$ & 64.9 \\
+\hline
+\end{tabular}
+\caption{$C \times F_2$ grows with $n_{\max}$, diverging from $\alpha/(2\pi)$.
+The VP projection constant is not the vertex correction projection.}
+\label{tab:c_times_f2}
+\end{table}
+
+\noindent The product $C \times F_2$ \emph{grows} with $n_{\max}$ because $C$
+increases faster than $F_2$ decreases.  The correct graph-to-continuum
+projection for different diagram topologies involves different
+spectral-density factors: the VP projection (sensitive to photon
+self-energy) and the vertex projection (sensitive to electron
+self-energy and vertex structure) are structurally distinct.  In
+Paper~18's taxonomy, these are independent \textsc{calibration}
+exchange constants.
 
 \subsection{Transcendental certificate}
 
@@ -1879,7 +2020,27 @@ graph QED (scalar, 1-cochain photon) and continuum QED (vector,
 $\mathrm{SO}(4) = \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ photon).
 The photon's spin-1 vector nature is thereby classified as a
 \textsc{calibration} exchange constant in Paper~18's
-taxonomy~\cite{paper18}.  The anomalous
+taxonomy~\cite{paper18}.  The selection rule survival census
+(Table~\ref{tab:selection_rules}) makes this classification precise:
+of 8~continuum QED selection rules, only Gaunt/CG sparsity survives on the
+graph; the 7~broken rules partition cleanly into 3~\textsc{structural}
+(requiring vector photon structure) and 4~\textsc{intrinsic} (graph
+kinematics).  The even-ness of $F_2(t)$
+(Sec.~\ref{sec:f2_even}) --- all odd Taylor coefficients vanish --- reflects
+the $t \to -t$ symmetry of the vertex bilinear and confirms that the
+anomalous moment depends only on~$\kappa^2$, not on the sign of the
+hopping coupling.
+
+The topology-dependent projection result
+(Table~\ref{tab:c_times_f2}) falsifies the hypothesis that a single
+projection constant~$C$ converts graph-native QED to physical QED:
+$C \times F_2$ grows with~$n_{\max}$ (45.7$\times$ and 64.9$\times$
+above $\alpha/(2\pi)$ at $n_{\max} = 3, 4$), not converges.  The VP
+projection and the vertex projection are structurally distinct ---
+different diagram topologies require different spectral-density
+matching factors.
+
+The anomalous
 magnetic moment ($F_2 / [\alpha/(2\pi)] = 1.084$ at
 $n_{\mathrm{ext}} = 1$) provides the first quantitative curvature
 correction to a measurable QED observable in the framework, matching the

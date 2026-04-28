@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "n_max_primary": 2,
+    "n_max_sparsity": [
+      2,
+      3,
+      4
+    ],
+    "description": "Systematic census of QED on S\u00b3 selection rules: SURVIVES vs BROKEN on the finite Fock graph.",
+    "paper18_tiers": {
+      "INTRINSIC": "rational/algebraic, lives on the graph natively",
+      "CALIBRATION": "transcendental (\u03c0,\u03b6), enters on projecting graph->continuum",
+      "STRUCTURAL": "the continuum rule involves vector-harmonic/SO(4) structure absent from the scalar-photon graph; no transcendental content, but no graph analog exists either"
+    }
+  },
+  "angular_momentum": {
+    "rule": "Angular momentum conservation (\u0394m_j)",
+    "survives": false,
+    "n_max": 2,
+    "total_nonzero_entries": 48,
+    "conserved_entries": 28,
+    "violations": [
+      {
+        "a": "(n=1,k=-1,2mj=-1)",
+        "b": "(n=2,k=-1,2mj=1)",
+        "edge": "(0, 1)",
+        "s1": [
+          1,
+          0,
+          0
+        ],
+        "s2": [
+          2,
+          0,
+          0
+        ],
+        "delta_m_photon": 0,
+        "delta_2mj_electron": 2,
+        "expected_2mj": 0
+      },
+      {
+        "a": "(n=1,k=-1,2mj=1)",
+        "b": "(n=2,k=-1,2mj=-1)",
+        "edge": "(0, 1)",
+        "s1": [
+          1,
+          0,
+          0
+        ],
+        "s2": [
+          2,
+          0,
+          0
+        ],
+        "delta_m_photon": 0,
+        "delta_2mj_electron": -2,
+        "expected_2mj": 0
+      },
+      {
+        "a": "(n=2,k=-1,2mj=-1)",
+        "b": "(n=1,k=-1,2mj=1)",
+        "edge": "(0, 1)",
+        "s1": [
+          1,
+          0,
+          0
+        ],
+        "s2": [
+          2,
+          0,
+          0
+        ],
+        "delta_m_photon": 0,
+        "delta_2mj_electron": 2,
+        "expected_2mj": 0
+      },
+      {
+        "a": "(n=2,k=-1,2mj=1)",
+        "b": "(n=1,k=-1,2mj=-1)",
+        "edge": "(0, 1)",
+        "s1": [
+          1,
+          0,
+          0
+        ],
+        "s2": [
+          2,
+          0,
+          0
+        ],
+        "delta_m_photon": 0,
+        "delta_2mj_electron": -2,
+        "expected_2mj": 0
+      },
+      {
+        "a": "(n=2,k=-2,2mj=-3)",
+        "b": "(n=2,k=-2,2mj=1)",
+        "edge": "(2, 3)",
+        "s1": [
+          2,
+          1,
+          -1
+        ],
+        "s2": [
+          2,
+          1,
+          0
+        ],
+        "delta_m_photon": 1,
+        "delta_2mj_electron": 4,
+        "expected_2mj": 2
+      }
+    ],
+    "n_violations": 20,
+    "verdict": "BROKEN",
+    "paper18_tier": "INTRINSIC",
+    "notes": "20 violations of \u0394m conservation found."
+  },
+  "parity": {
+    "rule": "Parity conservation (l_a + l_b odd = E1 transition)",
+    "survives": false,
+    "n_max": 2,
+    "total_nonzero_entries": 48,
+    "parity_conserved": 0,
+    "parity_violated": 48,
+    "fraction_violated": 1.0,
+    "violation_sample": [
+      {
+        "a": "(n=1,l=0,k=-1,2mj=-1)",
+        "b": "(n=2,l=0,k=-1,2mj=-1)",
+        "edge": "(0, 1)",
+        "l_a+l_b": 0
+      },
+      {
+        "a": "(n=1,l=0,k=-1,2mj=-1)",
+        "b": "(n=2,l=0,k=-1,2mj=1)",
+        "edge": "(0, 1)",
+        "l_a+l_b": 0
+      },
+      {
+        "a": "(n=1,l=0,k=-1,2mj=1)",
+        "b": "(n=2,l=0,k=-1,2mj=-1)",
+        "edge": "(0, 1)",
+        "l_a+l_b": 0
+      },
+      {
+        "a": "(n=1,l=0,k=-1,2mj=1)",
+        "b": "(n=2,l=0,k=-1,2mj=1)",
+        "edge": "(0, 1)",
+        "l_a+l_b": 0
+      },
+      {
+        "a": "(n=2,l=0,k=-1,2mj=-1)",
+        "b": "(n=1,l=0,k=-1,2mj=-1)",
+        "edge": "(0, 1)",
+        "l_a+l_b": 0
+      }
+    ],
+    "verdict": "BROKEN",
+    "paper18_tier": "INTRINSIC",
+    "notes": "48 entries (100.0%) violate E1 parity (l_a + l_b even, same-parity transition)."
+  },
+  "gaunt_sparsity": {
+    "rule": "Gaunt/CG sparsity of vertex tensor",
+    "survives": true,
+    "table": [
+      {
+        "n_max": 2,
+        "N_dirac": 10,
+        "E_fock": 3,
+        "total_possible": 300,
+        "nonzero_entries": 48,
+        "density": 0.16,
+        "sparsity": 0.84
+      },
+      {
+        "n_max": 3,
+        "N_dirac": 28,
+        "E_fock": 13,
+        "total_possible": 10192,
+        "nonzero_entries": 260,
+        "density": 0.02551,
+        "sparsity": 0.97449
+      },
+      {
+        "n_max": 4,
+        "N_dirac": 60,
+        "E_fock": 34,
+        "total_possible": 122400,
+        "nonzero_entries": 756,
+        "density": 0.006176,
+        "sparsity": 0.993824
+      }
+    ],
+    "verdict": "SURVIVES",
+    "paper18_tier": "INTRINSIC",
+    "notes": "The CG projection naturally suppresses most couplings. Sparsity grows with n_max because N_dirac^2 \u00d7 E grows faster than the nonzero entries (angular selection rules)."
+  },
+  "vertex_parity": {
+    "rule": "Vertex parity (n1+n2+q_gamma odd)",
+    "survives": false,
+    "n_max": 2,
+    "total_nonzero_entries": 48,
+    "allowed_by_parity": 48,
+    "forbidden_by_parity": 0,
+    "fraction_forbidden": 0.0,
+    "forbidden_sample": [],
+    "verdict": "BROKEN",
+    "paper18_tier": "STRUCTURAL",
+    "notes": "0 of 48 nonzero graph couplings (0.0%) are forbidden by the continuum vertex parity rule (n1+n2+q even). The graph has no mechanism to enforce this parity because the photon is a scalar 1-cochain - it carries no vector harmonic parity. This is a STRUCTURAL gap: the rule emerges from the continuum SO(4) vector harmonic structure (\u03b3^\u03bc coupling), which is absent in scalar QED. Paper 18 tier: STRUCTURAL (not calibration: no \u03c0 or \u03b6 needed, but the vector structure is absent from the graph)."
+  },
+  "so4_channel": {
+    "rule": "SO(4) channel count (W=0 -> continuum forbids)",
+    "survives": false,
+    "n_max": 2,
+    "total_nonzero_entries": 48,
+    "W_0_count": 48,
+    "W_1_count": 0,
+    "W_2_count": 0,
+    "fraction_W0": 1.0,
+    "W0_sample": [
+      {
+        "a": "(n_CH=0,k=-1,2mj=-1)",
+        "b": "(n_CH=1,k=-1,2mj=-1)",
+        "q_CH": 0,
+        "W": 0,
+        "val": "1"
+      },
+      {
+        "a": "(n_CH=0,k=-1,2mj=-1)",
+        "b": "(n_CH=1,k=-1,2mj=1)",
+        "q_CH": 0,
+        "W": 0,
+        "val": "1"
+      },
+      {
+        "a": "(n_CH=0,k=-1,2mj=1)",
+        "b": "(n_CH=1,k=-1,2mj=-1)",
+        "q_CH": 0,
+        "W": 0,
+        "val": "1"
+      },
+      {
+        "a": "(n_CH=0,k=-1,2mj=1)",
+        "b": "(n_CH=1,k=-1,2mj=1)",
+        "q_CH": 0,
+        "W": 0,
+        "val": "1"
+      },
+      {
+        "a": "(n_CH=1,k=-1,2mj=-1)",
+        "b": "(n_CH=0,k=-1,2mj=-1)",
+        "q_CH": 0,
+        "W": 0,
+        "val": "1"
+      }
+    ],
+    "verdict": "BROKEN",
+    "paper18_tier": "STRUCTURAL",
+    "notes": "48 of 48 nonzero graph couplings (100.0%) have W=0 (forbidden by the continuum SO(4) double-triangle rule). The graph uses scalar SU(2) CG projection, not the SU(2)_L \u00d7 SU(2)_R double-triangle of the continuum vector harmonic. This is a STRUCTURAL gap arising from the graph photon being a scalar 1-cochain, not a vector harmonic. Paper 18 tier: STRUCTURAL."
+  },
+  "charge_conjugation": {
+    "rule": "Charge conjugation symmetry (C)",
+    "survives": false,
+    "n_max": 2,
+    "n_dirac_states": 10,
+    "n_c_conjugate_pairs": 4,
+    "n_sigma_elements_checked": 16,
+    "sigma_c_violations": 8,
+    "c_map_size": 4,
+    "verdict": "BROKEN",
+    "paper18_tier": "INTRINSIC",
+    "notes": "C-conjugate pairs found: 4. 8 violations of C-symmetry in Sigma found."
+  },
+  "furry": {
+    "rule": "Furry's theorem (odd-loop closed fermion loops vanish)",
+    "survives": false,
+    "n_max": 2,
+    "tadpole_sum": "16*sqrt(2)/15",
+    "tadpole_zero": false,
+    "triangle_sum": "3584*sqrt(2)/3375",
+    "triangle_zero": false,
+    "bubble_sum": "32/9",
+    "bubble_nonzero": true,
+    "verdict": "BROKEN",
+    "paper18_tier": "INTRINSIC",
+    "notes": "Tadpole = 16*sqrt(2)/15 != 0, triangle = 3584*sqrt(2)/3375 != 0. At least one odd-loop diagram is nonzero - Furry's theorem is broken."
+  },
+  "ward": {
+    "rule": "Ward identity (graph analog: [D,Lambda] = [Sigma,D])",
+    "survives": false,
+    "n_max": 2,
+    "Tr_Sigma": "44/3",
+    "Tr_Lambda": "32/9",
+    "Tr_Lambda_over_Tr_Sigma": "8/33",
+    "commutator_ward_max_diff": 5.080423170216962,
+    "ward_commutator_holds": false,
+    "verdict": "BROKEN",
+    "paper18_tier": "STRUCTURAL",
+    "notes": "Commutator Ward identity fails: max |[D,Lambda]-[Sigma,D]| = 5.080e+00. Tr(Sigma) = 44/3, Tr(Lambda) = 32/9."
+  },
+  "summary_table": [
+    {
+      "rule": "Angular momentum \u0394m_j",
+      "verdict": "BROKEN",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "20 violations"
+    },
+    {
+      "rule": "Spatial parity (E1 l_a+l_b odd)",
+      "verdict": "BROKEN",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "48 parity violations"
+    },
+    {
+      "rule": "Vertex parity (n1+n2+q odd)",
+      "verdict": "BROKEN",
+      "paper18_tier": "STRUCTURAL",
+      "key_metric": "0.0% forbidden by continuum rule"
+    },
+    {
+      "rule": "SO(4) channel count (W>0)",
+      "verdict": "BROKEN",
+      "paper18_tier": "STRUCTURAL",
+      "key_metric": "100.0% have W=0 (continuum forbids)"
+    },
+    {
+      "rule": "Charge conjugation (C)",
+      "verdict": "BROKEN",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "8 C-violations in Sigma"
+    },
+    {
+      "rule": "Furry's theorem (odd loops = 0)",
+      "verdict": "BROKEN",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "tadpole=!=0, triangle=!=0"
+    },
+    {
+      "rule": "Ward identity ([D,Lambda]=[Sigma,D])",
+      "verdict": "BROKEN",
+      "paper18_tier": "STRUCTURAL",
+      "key_metric": "[D,Lambda]-[Sigma,D] max = 5.08e+00"
+    },
+    {
+      "rule": "Gaunt/CG sparsity (n_max=2)",
+      "verdict": "SURVIVES",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "density=0.1600, nnz=48/300"
+    },
+    {
+      "rule": "Gaunt/CG sparsity (n_max=3)",
+      "verdict": "SURVIVES",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "density=0.0255, nnz=260/10192"
+    },
+    {
+      "rule": "Gaunt/CG sparsity (n_max=4)",
+      "verdict": "SURVIVES",
+      "paper18_tier": "INTRINSIC",
+      "key_metric": "density=0.0062, nnz=756/122400"
+    }
+  ]
+}
