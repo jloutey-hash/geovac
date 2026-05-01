@@ -1,0 +1,341 @@
+{
+  "n_max": 2,
+  "N_dirac": 10,
+  "E_fock": 3,
+  "sigma_algebra": {
+    "sigma_squared_3I": true,
+    "commutation_ok": true,
+    "sigma_x_hermitian": true,
+    "sigma_y_hermitian": true,
+    "sigma_z_hermitian": true,
+    "sigma_x_real": true,
+    "sigma_y_purely_imaginary": true,
+    "sigma_z_real": true
+  },
+  "sigma_weighted_vertex": {
+    "scalar_nonzero_entries": 48,
+    "sigma_nonzero_entries": 136,
+    "delta_n_l_kappa_values": [
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -3
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        3
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  },
+  "self_energy": {
+    "is_real": true,
+    "is_hermitian": true,
+    "trace": 43.999999999999986,
+    "eigenvalues": [
+      1.3333333333333333,
+      2.0,
+      2.0,
+      2.6666666666666665,
+      3.999999999999997,
+      4.0,
+      4.0,
+      5.3333333333333295,
+      7.999999999999995,
+      10.666666666666663
+    ],
+    "n_zero_eigenvalues": 0,
+    "positive_semidefinite": true,
+    "gs_block_zero": false,
+    "gs_block_max_abs": 3.0,
+    "gs_block_values": [
+      [
+        3.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        3.0
+      ]
+    ]
+  },
+  "vertex_correction": {
+    "Lambda_is_real": true,
+    "trace_Lambda": 10.666666666666666,
+    "F2": 7.0710678118654755,
+    "F2_numerator": 10.666666666666666,
+    "F2_denominator": 1.5084944665313014,
+    "scalar_F2": 2.3570226039551585,
+    "F2_ratio_to_scalar": 3.0
+  },
+  "selection_rules": {
+    "delta_mj_conservation": {
+      "delta_2mj_values": [
+        -4,
+        -2,
+        0,
+        2,
+        4
+      ],
+      "verdict": "BROKEN: values [-4, -2, 0, 2, 4]",
+      "survives": false
+    },
+    "spatial_parity_E1": {
+      "l_sum_parity": {
+        "odd": 0,
+        "even": 136
+      },
+      "verdict": "ALL even (no E1 transitions)",
+      "survives": false,
+      "note": "Fock graph has Dl=0; sigma preserves l; combined has Dl=0 on both vertex legs => l_a+l_b always even"
+    },
+    "gaunt_cg_sparsity": {
+      "total_possible": 900,
+      "nonzero": 136,
+      "density_percent": 15.11111111111111,
+      "survives": true
+    },
+    "vertex_parity": {
+      "n_sum_parity": {
+        "even": 112,
+        "odd": 24
+      },
+      "delta_n_values": {
+        "1": 24,
+        "0": 112
+      },
+      "verdict": "MIXED (both even and odd n-sums present)",
+      "survives": false
+    },
+    "so4_channel_count": {
+      "verdict": "N/A -- photon is still a scalar 1-cochain; SO(4) channel count requires vector photon harmonics",
+      "survives": false
+    },
+    "charge_conjugation": {
+      "C_symmetric": false,
+      "verdict": "C broken",
+      "survives": false
+    },
+    "furry_theorem": {
+      "per_polarization": {
+        "x": {
+          "trace": 1.1102230246251565e-16,
+          "max_abs": 1.0,
+          "is_zero": false
+        },
+        "y": {
+          "trace": 0.0,
+          "max_abs": 1.0,
+          "is_zero": false
+        },
+        "z": {
+          "trace": 0.0,
+          "max_abs": 1.0,
+          "is_zero": false
+        }
+      },
+      "all_tadpoles_zero": false,
+      "verdict": "Furry VIOLATED",
+      "survives": false
+    },
+    "ward_identity": {
+      "commutator_D_Sigma_norm": 9.428090415820634,
+      "commutes": false,
+      "verdict": "[D, Sigma] != 0",
+      "survives": false,
+      "note": "Ward identity is a vertex-propagator relation, not just [D,Sigma]"
+    },
+    "summary": {
+      "total_rules": 8,
+      "survived": 1,
+      "fraction": "1/8"
+    }
+  },
+  "number_field": {
+    "Sigma_is_real": true,
+    "Sigma_appears_rational": false,
+    "sqrt_rational_candidates": [],
+    "nonzero_entries_sample": [
+      {
+        "i": 0,
+        "j": 0,
+        "value": 3.0,
+        "fraction": "3/1",
+        "residual": 0.0
+      },
+      {
+        "i": 0,
+        "j": 1,
+        "value": -1.0,
+        "fraction": "-1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 1,
+        "j": 0,
+        "value": -1.0,
+        "fraction": "-1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 1,
+        "j": 1,
+        "value": 3.0,
+        "fraction": "3/1",
+        "residual": 0.0
+      },
+      {
+        "i": 2,
+        "j": 2,
+        "value": 3.0,
+        "fraction": "3/1",
+        "residual": 0.0
+      },
+      {
+        "i": 2,
+        "j": 3,
+        "value": -1.0,
+        "fraction": "-1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 3,
+        "j": 2,
+        "value": -1.0,
+        "fraction": "-1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 3,
+        "j": 3,
+        "value": 3.0,
+        "fraction": "3/1",
+        "residual": 0.0
+      },
+      {
+        "i": 4,
+        "j": 4,
+        "value": 3.9999999999999973,
+        "fraction": "4/1",
+        "residual": 2.6645352591003757e-15
+      },
+      {
+        "i": 4,
+        "j": 5,
+        "value": -0.7698003589195005,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 4,
+        "j": 6,
+        "value": 1.154700538379251,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 4,
+        "j": 7,
+        "value": -0.6666666666666663,
+        "fraction": "-2/3",
+        "residual": 3.3306690738754696e-16
+      },
+      {
+        "i": 4,
+        "j": 8,
+        "value": 1.088662107903634,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 4,
+        "j": 9,
+        "value": 1.6329931618554514,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 5,
+        "j": 4,
+        "value": -0.7698003589195005,
+        "fraction": null,
+        "residual": null
+      }
+    ],
+    "Lambda_is_real": true,
+    "F2_value": 7.0710678118654755,
+    "F2_fraction": null,
+    "F2_fraction_residual": null,
+    "F2_squared_fraction": "50/1",
+    "F2_squared_residual": 7.105427357601002e-15,
+    "comparison": {
+      "scalar_fock_QED_F2": "5*sqrt(2)/3 in Q[sqrt(2),sqrt(3),sqrt(6)]",
+      "dirac_graph_QED": "Q[sqrt(2),sqrt(17),sqrt(41),sqrt(881)]",
+      "sigma_weighted_QED": "algebraic -- see sqrt candidates"
+    }
+  },
+  "comparison_to_scalar": {
+    "scalar_trace": 14.66666666666666,
+    "sigma_weighted_trace": 43.999999999999986,
+    "trace_ratio": 3.0000000000000004,
+    "scalar_eigenvalues": [
+      -2.7081297008388433e-16,
+      -1.461916381270136e-16,
+      0.0,
+      0.0,
+      1.6548220447628617e-16,
+      1.333333333333334,
+      2.0,
+      2.0,
+      3.9999999999999973,
+      5.333333333333331
+    ],
+    "sigma_eigenvalues": [
+      1.3333333333333333,
+      2.0,
+      2.0,
+      2.6666666666666665,
+      3.999999999999997,
+      4.0,
+      4.0,
+      5.3333333333333295,
+      7.999999999999995,
+      10.666666666666663
+    ],
+    "gs_block_scalar": [
+      [
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0
+      ]
+    ],
+    "gs_block_sigma": [
+      [
+        3.0,
+        -1.0
+      ],
+      [
+        -1.0,
+        3.0
+      ]
+    ]
+  }
+}

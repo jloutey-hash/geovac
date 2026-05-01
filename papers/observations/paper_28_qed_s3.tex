@@ -103,6 +103,10 @@ Building QED on the native Dirac graph with $(n, \kappa, m_j)$ node
 labels recovers 4~of~8 rules, establishing a three-tier partition:
 1~always survives, 3~are spinor-recoverable (intrinsic to spinor quantum
 numbers), and 4~require vector photon structure (calibration tier).
+A five-track vector QED sprint (VQ-1--5) confirms this partition from a
+complementary direction: neither Pauli spin matrices at the vertex, nor
+direction-resolved edge Hodge decomposition, nor their combination
+recovers any of the 4~vector-required rules.
 The VP projection constant $C$ does \emph{not} serve as a universal
 graph-to-continuum projector: $C \times F_2$ diverges from
 $\alpha/(2\pi)$, confirming that different diagram topologies require
@@ -2069,6 +2073,73 @@ the photon's spin-1 structure (calibration tier, continuum embedding).
 The three-tier partition of Table~\ref{tab:dirac_selection_rules}
 makes this classification precise.
 
+\subsection{Vector QED sprint: five negative results}
+\label{sec:vq_sprint}
+
+A systematic five-track investigation (VQ-1 through VQ-5) tested whether
+the 4~vector-photon-required selection rules can be recovered from the
+graph's intrinsic geometry without explicitly promoting the photon to a
+vector harmonic.  All five tracks are negative for selection rule
+recovery.
+
+\subsubsection{Approaches tested}
+
+\begin{enumerate}
+\item \textbf{VQ-1 ($\sigma \cdot L$ decomposition):} the spin-orbit
+  coupling operator $\sigma \cdot L$ is zero on all graph edges because
+  it is purely intra-shell ($L|l{=}0\rangle = 0$), producing no
+  inter-shell coupling.
+\item \textbf{VQ-2 (pure $\sigma_\mu$ vertex):} Pauli matrices as the
+  vertex coupling.  The graph is disconnected (no inter-shell edges);
+  2/8~rules survive but this is \emph{worse} than the Dirac Rule~B
+  baseline (4/8).
+\item \textbf{VQ-3 ($\sigma_\mu \otimes V_{\mathrm{scalar}}$ vertex):}
+  inserting $\sigma_\mu$ at the CG vertex while keeping the same photon
+  propagator.  The Pauli trace identity
+  $\sum_\mu \sigma_\mu^2 = 3I$ forces
+  $\mathrm{Tr}(\Sigma_{\mathrm{vec}}) = 3 \times
+  \mathrm{Tr}(\Sigma_{\mathrm{scalar}})$ and
+  $F_{2,\mathrm{vec}} = 3 \times F_{2,\mathrm{scalar}}$---a trivial
+  rescaling.  Selection rules: 1/8 (same as scalar; $\Delta m_j$
+  conservation and Furry's theorem are \emph{broken} by the sigma
+  dressing).
+\item \textbf{VQ-4 (direction-resolved Hodge decomposition):} classifying
+  Fock graph edges into T-channel (radial, $\Delta n = \pm 1$) and
+  L-channel (angular, $\Delta m = \pm 1$), with per-channel sub-Laplacians
+  and photon propagators.  At $n_{\max} = 2$ the channels are spectrally
+  anisotropic (T eigenvalues $\{2\}$ vs L eigenvalues $\{1, 3\}$) and the
+  full propagator is block-diagonal in T/L.  At $n_{\max} = 3$,
+  cross-channel coupling emerges ($\|G_{TL}\|/\|G_{\mathrm{full}}\| = 5.8\%$),
+  mixing radial and angular photon modes.  This gives the scalar graph
+  photon effective ``polarization'' from pure topology---a positive
+  \emph{structural} finding, though insufficient for selection rule recovery.
+\item \textbf{VQ-5 (full vector QED):} combining direction-labeled photon
+  channels (VQ-4) with channel-specific $\sigma_\mu$ vertex coupling (VQ-3).
+  All 15~$\sigma$-to-channel configurations tested (5~named mappings +
+  exhaustive $3 \times 3$ scan).  Three distinct $F_2$ values found
+  ($1.0\times$, $1.4\times$, $1.6\times$ scalar), but all configurations
+  produce 1/8~surviving selection rules.
+\end{enumerate}
+
+\subsubsection{Structural conclusion}
+
+The VQ sprint confirms the three-tier partition of
+Table~\ref{tab:dirac_selection_rules} from a complementary direction:
+even when the graph's T/L edge anisotropy provides effective polarization
+structure and the $\sigma_\mu$ matrices provide spin coupling, the
+4~vector-required rules (vertex parity, SO(4) channel count, Ward
+identity, charge conjugation) remain broken across all tested
+configurations.  These rules require the \emph{photon} to carry angular
+momentum quantum numbers $(L, M_L)$---promoting it from a scalar
+1-cochain to a vector harmonic---which is calibration exchange constant
+content in Paper~18's taxonomy~\cite{paper18}.
+
+The positive structural finding from VQ-4 (spectral anisotropy of T/L
+channels, cross-channel coupling at $n_{\max} = 3$) shows that the Fock
+graph topology does encode directional information, but this information
+is insufficient to generate selection rules that depend on the photon's
+\emph{spin-1} quantum numbers rather than its \emph{propagation direction}.
+
 \subsection{Continuum bridge and projection exchange constant}
 \label{sec:continuum_bridge}
 
@@ -2290,6 +2361,16 @@ parity, SO(4), Ward, charge conjugation).  The path from graph to
 continuum QED has two distinct barriers: the spinor barrier (crossed by
 adopting Dirac labels, zero cost) and the vector barrier (requiring
 spin-1 photon structure, calibration tier).
+The vector QED sprint (Sec.~\ref{sec:vq_sprint}) provides five
+independent negative results confirming the three-tier selection rule
+partition from a complementary direction: neither Pauli spin matrices at
+the vertex (VQ-1--3), nor direction-resolved edge decomposition (VQ-4),
+nor their combination (VQ-5) recovers any of the 4~vector-required
+rules.  The positive structural finding---spectral anisotropy of the T/L
+edge channels and cross-channel coupling at $n_{\max} = 3$---shows that
+the graph topology encodes directional information, but directional
+propagation is not equivalent to spin-1 quantum numbers.
+
 The even-ness of $F_2(t)$
 (Sec.~\ref{sec:f2_even}) --- all odd Taylor coefficients vanish --- reflects
 the $t \to -t$ symmetry of the vertex bilinear and confirms that the

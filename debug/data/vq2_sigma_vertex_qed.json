@@ -1,0 +1,541 @@
+{
+  "n_max": 2,
+  "N_dirac": 10,
+  "basis": [
+    {
+      "n_fock": 1,
+      "kappa": -1,
+      "two_m_j": -1,
+      "l": 0,
+      "j": 0.5
+    },
+    {
+      "n_fock": 1,
+      "kappa": -1,
+      "two_m_j": 1,
+      "l": 0,
+      "j": 0.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": -1,
+      "two_m_j": -1,
+      "l": 0,
+      "j": 0.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": -1,
+      "two_m_j": 1,
+      "l": 0,
+      "j": 0.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": -3,
+      "l": 1,
+      "j": 1.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": -1,
+      "l": 1,
+      "j": 1.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": 1,
+      "l": 1,
+      "j": 1.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_j": 3,
+      "l": 1,
+      "j": 1.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": 1,
+      "two_m_j": -1,
+      "l": 1,
+      "j": 0.5
+    },
+    {
+      "n_fock": 2,
+      "kappa": 1,
+      "two_m_j": 1,
+      "l": 1,
+      "j": 0.5
+    }
+  ],
+  "algebra_verification": {
+    "sigma_squared_3I": {
+      "(1, 0)": {
+        "passes": true,
+        "max_error": 0.0
+      },
+      "(2, 0)": {
+        "passes": true,
+        "max_error": 0.0
+      },
+      "(2, 1)": {
+        "passes": true,
+        "max_error": 4.440892098500626e-16
+      }
+    },
+    "commutation_all_pass": true,
+    "all_hermitian": true,
+    "sigma_x_real": true,
+    "sigma_y_purely_imaginary": true,
+    "sigma_z_real": true,
+    "all_traceless": true
+  },
+  "sigma_edge_graph": {
+    "V": 10,
+    "E": 12,
+    "beta_0": 3,
+    "beta_1": 5,
+    "connected": false,
+    "gs_indices": [
+      0,
+      1
+    ],
+    "gs_degrees": [
+      1,
+      1
+    ],
+    "gs_pendant": true,
+    "degrees": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      4,
+      4,
+      2,
+      4,
+      4
+    ],
+    "max_degree": 4,
+    "min_degree": 1
+  },
+  "edge_data": [
+    {
+      "i": 0,
+      "j": 1,
+      "sigma_x": 1.0,
+      "sigma_y_imag": 1.0,
+      "sigma_z": 0.0,
+      "norm": 1.4142135623730951,
+      "label_i": "(1,-1,-1)",
+      "label_j": "(1,-1,1)"
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "sigma_x": 1.0,
+      "sigma_y_imag": 1.0,
+      "sigma_z": 0.0,
+      "norm": 1.4142135623730951,
+      "label_i": "(2,-1,-1)",
+      "label_j": "(2,-1,1)"
+    },
+    {
+      "i": 4,
+      "j": 5,
+      "sigma_x": 0.5773502691896257,
+      "sigma_y_imag": 0.5773502691896257,
+      "sigma_z": 0.0,
+      "norm": 0.816496580927726,
+      "label_i": "(2,-2,-3)",
+      "label_j": "(2,-2,-1)"
+    },
+    {
+      "i": 4,
+      "j": 8,
+      "sigma_x": -0.816496580927726,
+      "sigma_y_imag": -0.816496580927726,
+      "sigma_z": 0.0,
+      "norm": 1.1547005383792515,
+      "label_i": "(2,-2,-3)",
+      "label_j": "(2,1,-1)"
+    },
+    {
+      "i": 5,
+      "j": 6,
+      "sigma_x": 0.6666666666666666,
+      "sigma_y_imag": 0.6666666666666666,
+      "sigma_z": 0.0,
+      "norm": 0.9428090415820634,
+      "label_i": "(2,-2,-1)",
+      "label_j": "(2,-2,1)"
+    },
+    {
+      "i": 5,
+      "j": 8,
+      "sigma_x": 0.0,
+      "sigma_y_imag": -0.0,
+      "sigma_z": -0.9428090415820634,
+      "norm": 0.9428090415820634,
+      "label_i": "(2,-2,-1)",
+      "label_j": "(2,1,-1)"
+    },
+    {
+      "i": 5,
+      "j": 9,
+      "sigma_x": -0.4714045207910317,
+      "sigma_y_imag": -0.4714045207910317,
+      "sigma_z": 0.0,
+      "norm": 0.6666666666666666,
+      "label_i": "(2,-2,-1)",
+      "label_j": "(2,1,1)"
+    },
+    {
+      "i": 6,
+      "j": 7,
+      "sigma_x": 0.5773502691896257,
+      "sigma_y_imag": 0.5773502691896257,
+      "sigma_z": 0.0,
+      "norm": 0.816496580927726,
+      "label_i": "(2,-2,1)",
+      "label_j": "(2,-2,3)"
+    },
+    {
+      "i": 6,
+      "j": 8,
+      "sigma_x": 0.4714045207910317,
+      "sigma_y_imag": -0.4714045207910317,
+      "sigma_z": 0.0,
+      "norm": 0.6666666666666666,
+      "label_i": "(2,-2,1)",
+      "label_j": "(2,1,-1)"
+    },
+    {
+      "i": 6,
+      "j": 9,
+      "sigma_x": 0.0,
+      "sigma_y_imag": -0.0,
+      "sigma_z": -0.9428090415820634,
+      "norm": 0.9428090415820634,
+      "label_i": "(2,-2,1)",
+      "label_j": "(2,1,1)"
+    },
+    {
+      "i": 7,
+      "j": 9,
+      "sigma_x": 0.816496580927726,
+      "sigma_y_imag": -0.816496580927726,
+      "sigma_z": 0.0,
+      "norm": 1.1547005383792515,
+      "label_i": "(2,-2,3)",
+      "label_j": "(2,1,1)"
+    },
+    {
+      "i": 8,
+      "j": 9,
+      "sigma_x": -0.3333333333333333,
+      "sigma_y_imag": -0.3333333333333333,
+      "sigma_z": 0.0,
+      "norm": 0.4714045207910317,
+      "label_i": "(2,1,-1)",
+      "label_j": "(2,1,1)"
+    }
+  ],
+  "L1_eigenvalues": [
+    -1.06311196444742e-15,
+    -8.107012694906454e-16,
+    -4.117377465134571e-16,
+    4.435012509751905e-16,
+    8.664962144874695e-16,
+    1.43844718719117,
+    2.0,
+    2.0,
+    3.0,
+    4.999999999999997,
+    5.0,
+    5.56155281280883
+  ],
+  "self_energy_hermitian": {
+    "is_hermitian": true,
+    "is_symmetric": true,
+    "is_real": true,
+    "trace": {
+      "real": 6.64611111111111,
+      "imag": 0.0
+    },
+    "eigenvalues": [
+      0.2237823761392681,
+      0.2237823761392683,
+      0.4566666666666664,
+      0.45666666666666655,
+      0.6426065127496206,
+      0.6426065127496206,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "n_zero_eigenvalues": 0,
+    "positive_semidefinite": true,
+    "gs_block": {
+      "values": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "max_abs": 1.0,
+      "is_zero": false
+    }
+  },
+  "self_energy_transpose": {
+    "is_hermitian": true,
+    "is_symmetric": true,
+    "is_real": true,
+    "trace": {
+      "real": 0.2844444444444445,
+      "imag": 0.0
+    },
+    "eigenvalues": [
+      -0.03891376035607123,
+      -0.038913760356071206,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.07111111111111104,
+      0.07111111111111112,
+      0.11002487146718233,
+      0.11002487146718239
+    ],
+    "n_zero_eigenvalues": 4,
+    "positive_semidefinite": false,
+    "gs_block": {
+      "values": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "max_abs": 0.0,
+      "is_zero": true
+    }
+  },
+  "selection_rules": {
+    "delta_mj_conservation": true,
+    "spatial_parity_E1": false,
+    "gaunt_cg_sparsity": true,
+    "vertex_parity": false,
+    "so4_channel_count": false,
+    "charge_conjugation": false,
+    "furry_theorem": false,
+    "ward_identity": false,
+    "total_survived": 2,
+    "fraction": "2/8",
+    "details": {
+      "delta_mj_conservation": {
+        "delta_mj_values_on_edges": [
+          -2,
+          0,
+          2
+        ],
+        "description": "Delta(2*m_j) values on sigma-graph edges",
+        "verdict": "Delta(m_j) = 0, +/-1 only"
+      },
+      "spatial_parity_E1": {
+        "l_sum_parity": {
+          "odd": 0,
+          "even": 12
+        },
+        "verdict": "ALL l_a + l_b even (sigma preserves l)",
+        "description": "Sigma preserves l, so l_a = l_b always, making l_a + l_b even",
+        "note": "sigma vertex preserves l (intra-l coupling), NOT an E1 vertex"
+      },
+      "gaunt_cg_sparsity": {
+        "total_possible": 3600,
+        "nonzero": "44",
+        "sparsity_fraction": 0.9877777777777778,
+        "density_percent": 1.2222222222222223
+      },
+      "vertex_parity": {
+        "n_sum_parity": {
+          "n1+n2_even": 12,
+          "n1+n2_odd": 0
+        },
+        "kappa_transitions": {
+          "(-1,-1)": 2,
+          "(-2,-2)": 3,
+          "(-2,1)": 6,
+          "(1,1)": 1
+        },
+        "verdict": "sigma preserves n, so n1+n2 always even -- NO vertex parity rule"
+      },
+      "so4_channel_count": {
+        "verdict": "N/A -- sigma vertex is intra-shell (preserves n and l), no SO(4) channel structure"
+      },
+      "charge_conjugation": {
+        "C_symmetric": false,
+        "verdict": "C broken"
+      },
+      "furry_theorem": {
+        "per_polarization": {
+          "x": {
+            "trace": 0.0,
+            "max_abs": 1.0,
+            "is_zero": false
+          },
+          "y": {
+            "trace": 0.0,
+            "max_abs": 1.0,
+            "is_zero": false
+          },
+          "z": {
+            "trace": 0.0,
+            "max_abs": 0.9428090415820634,
+            "is_zero": false
+          }
+        },
+        "all_tadpoles_zero": false,
+        "verdict": "Furry VIOLATED"
+      },
+      "ward_identity": {
+        "commutator_D_Sigma_norm": 1.0351257602369732,
+        "commutes": false,
+        "verdict": "[D, Sigma] != 0",
+        "note": "Full Ward identity requires vertex correction comparison, not just [D,Sigma]"
+      }
+    }
+  },
+  "algebraic_analysis": {
+    "sigma_self_energy_real": true,
+    "nonzero_entries": [
+      {
+        "i": 0,
+        "j": 0,
+        "value": 1.0,
+        "fraction": "1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 1,
+        "j": 1,
+        "value": 1.0,
+        "fraction": "1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 2,
+        "j": 2,
+        "value": 1.0,
+        "fraction": "1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 3,
+        "j": 3,
+        "value": 1.0,
+        "fraction": "1/1",
+        "residual": 0.0
+      },
+      {
+        "i": 4,
+        "j": 4,
+        "value": 0.45666666666666655,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 5,
+        "j": 5,
+        "value": 0.4016666666666665,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 5,
+        "j": 8,
+        "value": -0.20702515204739466,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 6,
+        "j": 6,
+        "value": 0.40166666666666656,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 6,
+        "j": 9,
+        "value": -0.20702515204739458,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 7,
+        "j": 7,
+        "value": 0.45666666666666633,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 8,
+        "j": 5,
+        "value": -0.20702515204739447,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 8,
+        "j": 8,
+        "value": 0.46472222222222226,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 9,
+        "j": 6,
+        "value": -0.20702515204739463,
+        "fraction": null,
+        "residual": null
+      },
+      {
+        "i": 9,
+        "j": 9,
+        "value": 0.464722222222222,
+        "fraction": null,
+        "residual": null
+      }
+    ],
+    "appears_rational": false,
+    "appears_pi_free": true,
+    "expected_number_field": "Q (rationals) -- sigma_x, sigma_z are real rational, sigma_y is purely imaginary rational, bilinear products cancel sqrt",
+    "comparison": {
+      "scalar_fock_graph": "Q[sqrt(2), sqrt(3), sqrt(6)]",
+      "dirac_E1_graph": "Q[sqrt(2), sqrt(17), sqrt(41), sqrt(881)]",
+      "sigma_vertex_graph": "Q (rationals) -- simpler than both, if confirmed"
+    }
+  },
+  "headline": {
+    "sigma_vertex_is_intra_shell": true,
+    "graph_connected": false,
+    "gs_sigma_zero": false,
+    "selection_rules_survived": "2/8",
+    "verdict": "NEGATIVE -- sigma vertex is intra-shell, cannot couple energy shells, wrong operator for QED vertex"
+  }
+}

@@ -1,0 +1,1540 @@
+{
+  "n_max": 2,
+  "N_dirac": 10,
+  "E_fock": 3,
+  "T_indices": [
+    0
+  ],
+  "L_indices": [
+    1,
+    2
+  ],
+  "edge_classification": [
+    {
+      "edge_idx": 0,
+      "s1": [
+        1,
+        0,
+        0
+      ],
+      "s2": [
+        2,
+        0,
+        0
+      ],
+      "dn": 1,
+      "dm": 0,
+      "channel": "T"
+    },
+    {
+      "edge_idx": 1,
+      "s1": [
+        2,
+        1,
+        -1
+      ],
+      "s2": [
+        2,
+        1,
+        0
+      ],
+      "dn": 0,
+      "dm": 1,
+      "channel": "L"
+    },
+    {
+      "edge_idx": 2,
+      "s1": [
+        2,
+        1,
+        0
+      ],
+      "s2": [
+        2,
+        1,
+        1
+      ],
+      "dn": 0,
+      "dm": 1,
+      "channel": "L"
+    }
+  ],
+  "scalar_reference": {
+    "trace": 14.66666666666666,
+    "eigenvalues": [
+      -2.7081297008388433e-16,
+      -1.461916381270136e-16,
+      0.0,
+      0.0,
+      1.6548220447628617e-16,
+      1.333333333333334,
+      2.0,
+      2.0,
+      3.9999999999999973,
+      5.333333333333331
+    ],
+    "F2": 2.3570226039551585,
+    "gs_block_max": 1.0
+  },
+  "vq3_reference": {
+    "mapping_name": "VQ-3 (sum sigma_mu, all edges)",
+    "self_energy": {
+      "is_real": true,
+      "is_hermitian": true,
+      "trace_T": 43.999999999999986,
+      "trace_L": 0.0,
+      "trace_total": 43.999999999999986,
+      "eigenvalues": [
+        1.3333333333333333,
+        2.0,
+        2.0,
+        2.6666666666666665,
+        3.999999999999997,
+        4.0,
+        4.0,
+        5.3333333333333295,
+        7.999999999999995,
+        10.666666666666663
+      ],
+      "n_zero_eigenvalues": 0,
+      "positive_semidefinite": true,
+      "gs_block_zero": false,
+      "gs_block_max_abs": 3.0
+    },
+    "isotropy": {
+      "trace_ratio_T_over_L": null,
+      "proportional": false,
+      "proportionality_residual": 0.0
+    },
+    "vertex_correction": {
+      "trace_Lambda": 10.666666666666666,
+      "F2": 7.0710678118654755,
+      "F2_numerator": 10.666666666666666,
+      "F2_denominator": 1.5084944665313014
+    },
+    "selection_rules": {
+      "delta_mj_conservation": {
+        "delta_2mj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ],
+        "survives": false
+      },
+      "spatial_parity_E1": {
+        "l_sum_parity": {
+          "odd": 0,
+          "even": 136
+        },
+        "survives": false
+      },
+      "gaunt_cg_sparsity": {
+        "total_possible": 900,
+        "nonzero": 136,
+        "density_percent": 15.11111111111111,
+        "survives": true
+      },
+      "vertex_parity": {
+        "n_sum_parity": {
+          "even": 112,
+          "odd": 24
+        },
+        "survives": false
+      },
+      "so4_channel_count": {
+        "verdict": "N/A -- photon is still a scalar 1-cochain",
+        "survives": false
+      },
+      "charge_conjugation": {
+        "C_symmetric": false,
+        "survives": false
+      },
+      "furry_theorem": {
+        "tadpole_max_abs": 2.23606797749979,
+        "tadpole_zero": false,
+        "triangle_max_abs": 14.60593486680443,
+        "triangle_zero": false,
+        "survives": false
+      },
+      "ward_identity": {
+        "commutator_norm": 9.428090415820634,
+        "commutes": false,
+        "survives": false,
+        "note": "Ward identity needs full vertex-propagator relation"
+      },
+      "summary": {
+        "total_rules": 8,
+        "survived": 1,
+        "fraction": "1/8"
+      }
+    },
+    "number_field": {
+      "is_real": true,
+      "appears_rational": false,
+      "sqrt_rational_fraction": "20/20",
+      "F2_value": 7.0710678118654755,
+      "F2_fraction": null,
+      "F2_fraction_residual": 1e-06,
+      "F2_squared_fraction": "50/1",
+      "F2_squared_residual": 7.105427357601002e-15,
+      "pi_free": true
+    }
+  },
+  "mapping_A": {
+    "mapping_name": "A (T->sigma_z, L->sigma_x+sigma_y)",
+    "self_energy": {
+      "is_real": true,
+      "is_hermitian": true,
+      "trace_T": 4.0,
+      "trace_L": 21.333333333333325,
+      "trace_total": 25.33333333333332,
+      "eigenvalues": [
+        0.0,
+        0.0,
+        1.3333333333333313,
+        1.333333333333334,
+        2.0,
+        2.0,
+        3.9999999999999973,
+        3.9999999999999987,
+        5.333333333333332,
+        5.333333333333334
+      ],
+      "n_zero_eigenvalues": 2,
+      "positive_semidefinite": true,
+      "gs_block_zero": false,
+      "gs_block_max_abs": 1.0
+    },
+    "isotropy": {
+      "trace_ratio_T_over_L": 0.18750000000000008,
+      "proportional": false,
+      "proportionality_residual": 3.3541019662496847
+    },
+    "vertex_correction": {
+      "trace_Lambda": 4.977777777777777,
+      "F2": 3.299831645537221,
+      "F2_numerator": 4.977777777777777,
+      "F2_denominator": 1.5084944665313014
+    },
+    "selection_rules": {
+      "delta_mj_conservation": {
+        "delta_2mj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ],
+        "survives": false
+      },
+      "spatial_parity_E1": {
+        "l_sum_parity": {
+          "odd": 0,
+          "even": 84
+        },
+        "survives": false
+      },
+      "gaunt_cg_sparsity": {
+        "total_possible": 500,
+        "nonzero": 84,
+        "density_percent": 16.8,
+        "survives": true
+      },
+      "vertex_parity": {
+        "n_sum_parity": {
+          "even": 76,
+          "odd": 8
+        },
+        "survives": false
+      },
+      "so4_channel_count": {
+        "verdict": "N/A -- photon is still a scalar 1-cochain",
+        "survives": false
+      },
+      "charge_conjugation": {
+        "C_symmetric": false,
+        "survives": false
+      },
+      "furry_theorem": {
+        "tadpole_max_abs": 1.1547005383792517,
+        "tadpole_zero": false,
+        "triangle_max_abs": 9.237604307034013,
+        "triangle_zero": false,
+        "survives": false
+      },
+      "ward_identity": {
+        "commutator_norm": 6.2853936105470884,
+        "commutes": false,
+        "survives": false,
+        "note": "Ward identity needs full vertex-propagator relation"
+      },
+      "summary": {
+        "total_rules": 8,
+        "survived": 1,
+        "fraction": "1/8"
+      }
+    },
+    "number_field": {
+      "is_real": true,
+      "appears_rational": false,
+      "sqrt_rational_fraction": "20/20",
+      "F2_value": 3.299831645537221,
+      "F2_fraction": null,
+      "F2_fraction_residual": 1e-06,
+      "F2_squared_fraction": "98/9",
+      "F2_squared_residual": 3.552713678800501e-15,
+      "pi_free": true
+    }
+  },
+  "mapping_B": {
+    "mapping_name": "B (T->sigma_z, L->sigma_x)",
+    "self_energy": {
+      "is_real": true,
+      "is_hermitian": true,
+      "trace_T": 4.0,
+      "trace_L": 10.666666666666663,
+      "trace_total": 14.66666666666666,
+      "eigenvalues": [
+        -1.3573133592508126e-15,
+        -1.5885871540671584e-16,
+        0.0,
+        0.0,
+        1.0185003778026727e-15,
+        1.3333333333333344,
+        2.0,
+        2.0,
+        3.999999999999998,
+        5.3333333333333295
+      ],
+      "n_zero_eigenvalues": 5,
+      "positive_semidefinite": true,
+      "gs_block_zero": false,
+      "gs_block_max_abs": 1.0
+    },
+    "isotropy": {
+      "trace_ratio_T_over_L": 0.37500000000000017,
+      "proportional": false,
+      "proportionality_residual": 3.8078865529319543
+    },
+    "vertex_correction": {
+      "trace_Lambda": 3.555555555555556,
+      "F2": 2.3570226039551585,
+      "F2_numerator": 3.555555555555556,
+      "F2_denominator": 1.5084944665313014
+    },
+    "selection_rules": {
+      "delta_mj_conservation": {
+        "delta_2mj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ],
+        "survives": false
+      },
+      "spatial_parity_E1": {
+        "l_sum_parity": {
+          "odd": 0,
+          "even": 48
+        },
+        "survives": false
+      },
+      "gaunt_cg_sparsity": {
+        "total_possible": 300,
+        "nonzero": 48,
+        "density_percent": 16.0,
+        "survives": true
+      },
+      "vertex_parity": {
+        "n_sum_parity": {
+          "even": 40,
+          "odd": 8
+        },
+        "survives": false
+      },
+      "so4_channel_count": {
+        "verdict": "N/A -- photon is still a scalar 1-cochain",
+        "survives": false
+      },
+      "charge_conjugation": {
+        "C_symmetric": false,
+        "survives": false
+      },
+      "furry_theorem": {
+        "tadpole_max_abs": 1.0,
+        "tadpole_zero": false,
+        "triangle_max_abs": 7.542472332656507,
+        "triangle_zero": false,
+        "survives": false
+      },
+      "ward_identity": {
+        "commutator_norm": 5.443310539518174,
+        "commutes": false,
+        "survives": false,
+        "note": "Ward identity needs full vertex-propagator relation"
+      },
+      "summary": {
+        "total_rules": 8,
+        "survived": 1,
+        "fraction": "1/8"
+      }
+    },
+    "number_field": {
+      "is_real": true,
+      "appears_rational": false,
+      "sqrt_rational_fraction": "20/20",
+      "F2_value": 2.3570226039551585,
+      "F2_fraction": null,
+      "F2_fraction_residual": 1e-06,
+      "F2_squared_fraction": "50/9",
+      "F2_squared_residual": 8.881784197001252e-16,
+      "pi_free": true
+    }
+  },
+  "mapping_C": {
+    "T=x,L=x": {
+      "mapping_name": "C (T->sigma_x, L->sigma_x)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -1.3573133592508126e-15,
+          -1.5885871540671584e-16,
+          0.0,
+          0.0,
+          1.0185003778026727e-15,
+          1.3333333333333344,
+          2.0,
+          2.0,
+          3.999999999999998,
+          5.3333333333333295
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.555555555555556,
+        "F2": 2.3570226039551585,
+        "F2_numerator": 3.555555555555556,
+        "F2_denominator": 1.5084944665313014
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 48
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 48,
+          "density_percent": 16.0,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 40,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 7.542472332656507,
+          "triangle_zero": false,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "F2_value": 2.3570226039551585,
+        "F2_fraction": null,
+        "F2_fraction_residual": 1e-06,
+        "F2_squared_fraction": "50/9",
+        "F2_squared_residual": 8.881784197001252e-16,
+        "pi_free": true
+      }
+    },
+    "T=x,L=y": {
+      "mapping_name": "C (T->sigma_x, L->sigma_y)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -1.408212278501962e-15,
+          -8.320257361463847e-16,
+          -2.847332751414702e-16,
+          0.0,
+          0.0,
+          1.3333333333333335,
+          2.0,
+          2.0,
+          3.999999999999998,
+          5.33333333333333
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.555555555555555,
+        "F2": null,
+        "F2_numerator": null,
+        "F2_denominator": null
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 44
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 44,
+          "density_percent": 14.666666666666666,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 36,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 4.0,
+          "triangle_zero": false,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "pi_free": true
+      }
+    },
+    "T=x,L=z": {
+      "mapping_name": "C (T->sigma_x, L->sigma_z)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -6.230646551426532e-16,
+          0.0,
+          0.0,
+          9.336504434896309e-17,
+          4.873415871745935e-16,
+          1.3333333333333346,
+          2.0,
+          2.0,
+          3.9999999999999973,
+          5.333333333333334
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.5555555555555554,
+        "F2": null,
+        "F2_numerator": null,
+        "F2_denominator": null
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 44
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 44,
+          "density_percent": 14.666666666666666,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 36,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 4.0,
+          "triangle_zero": false,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "pi_free": true
+      }
+    },
+    "T=y,L=x": {
+      "mapping_name": "C (T->sigma_y, L->sigma_x)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -1.3573133592508126e-15,
+          -1.5885871540671584e-16,
+          0.0,
+          0.0,
+          1.0185003778026727e-15,
+          1.3333333333333344,
+          2.0,
+          2.0,
+          3.999999999999998,
+          5.3333333333333295
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.555555555555556,
+        "F2": 2.3570226039551585,
+        "F2_numerator": 3.555555555555556,
+        "F2_denominator": 1.5084944665313014
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 48
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 48,
+          "density_percent": 16.0,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 40,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 7.542472332656507,
+          "triangle_zero": false,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "F2_value": 2.3570226039551585,
+        "F2_fraction": null,
+        "F2_fraction_residual": 1e-06,
+        "F2_squared_fraction": "50/9",
+        "F2_squared_residual": 8.881784197001252e-16,
+        "pi_free": true
+      }
+    },
+    "T=y,L=y": {
+      "mapping_name": "C (T->sigma_y, L->sigma_y)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -1.408212278501962e-15,
+          -8.320257361463847e-16,
+          -2.847332751414702e-16,
+          0.0,
+          0.0,
+          1.3333333333333335,
+          2.0,
+          2.0,
+          3.999999999999998,
+          5.33333333333333
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.555555555555555,
+        "F2": null,
+        "F2_numerator": null,
+        "F2_denominator": null
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 44
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 44,
+          "density_percent": 14.666666666666666,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 36,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 1.9213362198317735e-16,
+          "triangle_zero": true,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "pi_free": true
+      }
+    },
+    "T=y,L=z": {
+      "mapping_name": "C (T->sigma_y, L->sigma_z)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -6.230646551426532e-16,
+          0.0,
+          0.0,
+          9.336504434896309e-17,
+          4.873415871745935e-16,
+          1.3333333333333346,
+          2.0,
+          2.0,
+          3.9999999999999973,
+          5.333333333333334
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.5555555555555554,
+        "F2": null,
+        "F2_numerator": null,
+        "F2_denominator": null
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 44
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 44,
+          "density_percent": 14.666666666666666,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 36,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 1.3180789612111694e-16,
+          "triangle_zero": true,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "pi_free": true
+      }
+    },
+    "T=z,L=x": {
+      "mapping_name": "C (T->sigma_z, L->sigma_x)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -1.3573133592508126e-15,
+          -1.5885871540671584e-16,
+          0.0,
+          0.0,
+          1.0185003778026727e-15,
+          1.3333333333333344,
+          2.0,
+          2.0,
+          3.999999999999998,
+          5.3333333333333295
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.555555555555556,
+        "F2": 2.3570226039551585,
+        "F2_numerator": 3.555555555555556,
+        "F2_denominator": 1.5084944665313014
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 48
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 48,
+          "density_percent": 16.0,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 40,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 7.542472332656507,
+          "triangle_zero": false,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "F2_value": 2.3570226039551585,
+        "F2_fraction": null,
+        "F2_fraction_residual": 1e-06,
+        "F2_squared_fraction": "50/9",
+        "F2_squared_residual": 8.881784197001252e-16,
+        "pi_free": true
+      }
+    },
+    "T=z,L=y": {
+      "mapping_name": "C (T->sigma_z, L->sigma_y)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -1.408212278501962e-15,
+          -8.320257361463847e-16,
+          -2.847332751414702e-16,
+          0.0,
+          0.0,
+          1.3333333333333335,
+          2.0,
+          2.0,
+          3.999999999999998,
+          5.33333333333333
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.555555555555555,
+        "F2": null,
+        "F2_numerator": null,
+        "F2_denominator": null
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 44
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 44,
+          "density_percent": 14.666666666666666,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 36,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 1.9213362198317735e-16,
+          "triangle_zero": true,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "pi_free": true
+      }
+    },
+    "T=z,L=z": {
+      "mapping_name": "C (T->sigma_z, L->sigma_z)",
+      "self_energy": {
+        "is_real": true,
+        "is_hermitian": true,
+        "trace_T": 4.0,
+        "trace_L": 10.666666666666663,
+        "trace_total": 14.66666666666666,
+        "eigenvalues": [
+          -6.230646551426532e-16,
+          0.0,
+          0.0,
+          9.336504434896309e-17,
+          4.873415871745935e-16,
+          1.3333333333333346,
+          2.0,
+          2.0,
+          3.9999999999999973,
+          5.333333333333334
+        ],
+        "n_zero_eigenvalues": 5,
+        "positive_semidefinite": true,
+        "gs_block_zero": false,
+        "gs_block_max_abs": 1.0
+      },
+      "isotropy": {
+        "trace_ratio_T_over_L": 0.37500000000000017,
+        "proportional": false,
+        "proportionality_residual": 3.8078865529319543
+      },
+      "vertex_correction": {
+        "trace_Lambda": 3.5555555555555554,
+        "F2": null,
+        "F2_numerator": null,
+        "F2_denominator": null
+      },
+      "selection_rules": {
+        "delta_mj_conservation": {
+          "delta_2mj_values": [
+            -4,
+            -2,
+            0,
+            2,
+            4
+          ],
+          "survives": false
+        },
+        "spatial_parity_E1": {
+          "l_sum_parity": {
+            "odd": 0,
+            "even": 44
+          },
+          "survives": false
+        },
+        "gaunt_cg_sparsity": {
+          "total_possible": 300,
+          "nonzero": 44,
+          "density_percent": 14.666666666666666,
+          "survives": true
+        },
+        "vertex_parity": {
+          "n_sum_parity": {
+            "even": 36,
+            "odd": 8
+          },
+          "survives": false
+        },
+        "so4_channel_count": {
+          "verdict": "N/A -- photon is still a scalar 1-cochain",
+          "survives": false
+        },
+        "charge_conjugation": {
+          "C_symmetric": false,
+          "survives": false
+        },
+        "furry_theorem": {
+          "tadpole_max_abs": 1.0,
+          "tadpole_zero": false,
+          "triangle_max_abs": 1.3180789612111694e-16,
+          "triangle_zero": true,
+          "survives": false
+        },
+        "ward_identity": {
+          "commutator_norm": 5.443310539518174,
+          "commutes": false,
+          "survives": false,
+          "note": "Ward identity needs full vertex-propagator relation"
+        },
+        "summary": {
+          "total_rules": 8,
+          "survived": 1,
+          "fraction": "1/8"
+        }
+      },
+      "number_field": {
+        "is_real": true,
+        "appears_rational": false,
+        "sqrt_rational_fraction": "20/20",
+        "pi_free": true
+      }
+    }
+  },
+  "mapping_D": {
+    "mapping_name": "D (T->sigma_z, L->(sigma_x+sigma_y)/2)",
+    "self_energy": {
+      "is_real": false,
+      "is_hermitian": true,
+      "trace_T": 4.0,
+      "trace_L": 5.333333333333331,
+      "trace_total": 9.333333333333332,
+      "eigenvalues": [
+        -8.459555311971831e-17,
+        0.0,
+        0.0,
+        4.9664620406419064e-17,
+        2.2143939472344639e-16,
+        0.6666666666666667,
+        1.999999999999998,
+        1.9999999999999991,
+        1.9999999999999991,
+        2.6666666666666656
+      ],
+      "n_zero_eigenvalues": 5,
+      "positive_semidefinite": true,
+      "gs_block_zero": false,
+      "gs_block_max_abs": 1.0
+    },
+    "isotropy": {
+      "trace_ratio_T_over_L": 0.7500000000000003,
+      "proportional": false,
+      "proportionality_residual": 3.8078865529319543
+    },
+    "vertex_correction": {
+      "trace_Lambda": 2.8444444444444446,
+      "F2": 3.771236166328254,
+      "F2_numerator": 2.8444444444444446,
+      "F2_denominator": 0.7542472332656507
+    },
+    "selection_rules": {
+      "delta_mj_conservation": {
+        "delta_2mj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ],
+        "survives": false
+      },
+      "spatial_parity_E1": {
+        "l_sum_parity": {
+          "odd": 0,
+          "even": 48
+        },
+        "survives": false
+      },
+      "gaunt_cg_sparsity": {
+        "total_possible": 300,
+        "nonzero": 48,
+        "density_percent": 16.0,
+        "survives": true
+      },
+      "vertex_parity": {
+        "n_sum_parity": {
+          "even": 40,
+          "odd": 8
+        },
+        "survives": false
+      },
+      "so4_channel_count": {
+        "verdict": "N/A -- photon is still a scalar 1-cochain",
+        "survives": false
+      },
+      "charge_conjugation": {
+        "C_symmetric": false,
+        "survives": false
+      },
+      "furry_theorem": {
+        "tadpole_max_abs": 1.0,
+        "tadpole_zero": false,
+        "triangle_max_abs": 1.1547005383792517,
+        "triangle_zero": false,
+        "survives": false
+      },
+      "ward_identity": {
+        "commutator_norm": 3.928371006591929,
+        "commutes": false,
+        "survives": false,
+        "note": "Ward identity needs full vertex-propagator relation"
+      },
+      "summary": {
+        "total_rules": 8,
+        "survived": 1,
+        "fraction": "1/8"
+      }
+    },
+    "number_field": {
+      "is_real": false,
+      "appears_rational": false,
+      "sqrt_rational_fraction": "20/20",
+      "F2_value": 3.771236166328254,
+      "F2_fraction": null,
+      "F2_fraction_residual": 1e-06,
+      "F2_squared_fraction": "128/9",
+      "F2_squared_residual": 3.552713678800501e-15,
+      "pi_free": true
+    }
+  },
+  "mapping_E": {
+    "mapping_name": "E (T->sigma_x, L->sigma_z)",
+    "self_energy": {
+      "is_real": true,
+      "is_hermitian": true,
+      "trace_T": 4.0,
+      "trace_L": 10.666666666666663,
+      "trace_total": 14.66666666666666,
+      "eigenvalues": [
+        -6.230646551426532e-16,
+        0.0,
+        0.0,
+        9.336504434896309e-17,
+        4.873415871745935e-16,
+        1.3333333333333346,
+        2.0,
+        2.0,
+        3.9999999999999973,
+        5.333333333333334
+      ],
+      "n_zero_eigenvalues": 5,
+      "positive_semidefinite": true,
+      "gs_block_zero": false,
+      "gs_block_max_abs": 1.0
+    },
+    "isotropy": {
+      "trace_ratio_T_over_L": 0.37500000000000017,
+      "proportional": false,
+      "proportionality_residual": 3.8078865529319543
+    },
+    "vertex_correction": {
+      "trace_Lambda": 3.5555555555555554,
+      "F2": null,
+      "F2_numerator": null,
+      "F2_denominator": null
+    },
+    "selection_rules": {
+      "delta_mj_conservation": {
+        "delta_2mj_values": [
+          -4,
+          -2,
+          0,
+          2,
+          4
+        ],
+        "survives": false
+      },
+      "spatial_parity_E1": {
+        "l_sum_parity": {
+          "odd": 0,
+          "even": 44
+        },
+        "survives": false
+      },
+      "gaunt_cg_sparsity": {
+        "total_possible": 300,
+        "nonzero": 44,
+        "density_percent": 14.666666666666666,
+        "survives": true
+      },
+      "vertex_parity": {
+        "n_sum_parity": {
+          "even": 36,
+          "odd": 8
+        },
+        "survives": false
+      },
+      "so4_channel_count": {
+        "verdict": "N/A -- photon is still a scalar 1-cochain",
+        "survives": false
+      },
+      "charge_conjugation": {
+        "C_symmetric": false,
+        "survives": false
+      },
+      "furry_theorem": {
+        "tadpole_max_abs": 1.0,
+        "tadpole_zero": false,
+        "triangle_max_abs": 4.0,
+        "triangle_zero": false,
+        "survives": false
+      },
+      "ward_identity": {
+        "commutator_norm": 5.443310539518174,
+        "commutes": false,
+        "survives": false,
+        "note": "Ward identity needs full vertex-propagator relation"
+      },
+      "summary": {
+        "total_rules": 8,
+        "survived": 1,
+        "fraction": "1/8"
+      }
+    },
+    "number_field": {
+      "is_real": true,
+      "appears_rational": false,
+      "sqrt_rational_fraction": "20/20",
+      "pi_free": true
+    }
+  },
+  "key_diagnostic": {
+    "n_distinct_f2": 3,
+    "distinct_f2_values": [
+      2.357023,
+      3.299832,
+      3.771236
+    ],
+    "all_3x_scalar": false,
+    "scalar_f2": 2.3570226039551585
+  }
+}

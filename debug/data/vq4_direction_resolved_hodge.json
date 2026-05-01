@@ -1,0 +1,617 @@
+{
+  "description": "VQ-4: Direction-resolved Hodge decomposition of the Fock graph. Edges classified by (Dn, Dm) into T (radial) and L (angular) channels. Per-channel sub-incidence, sub-Laplacians, and photon propagators computed.",
+  "n_max_2": {
+    "n_max": 2,
+    "V": 5,
+    "E": 3,
+    "edge_classification": [
+      {
+        "edge_idx": 0,
+        "s1": [
+          1,
+          0,
+          0
+        ],
+        "s2": [
+          2,
+          0,
+          0
+        ],
+        "dn": 1,
+        "dm": 0,
+        "channel": "T"
+      },
+      {
+        "edge_idx": 1,
+        "s1": [
+          2,
+          1,
+          -1
+        ],
+        "s2": [
+          2,
+          1,
+          0
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 2,
+        "s1": [
+          2,
+          1,
+          0
+        ],
+        "s2": [
+          2,
+          1,
+          1
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      }
+    ],
+    "channel_counts": {
+      "T": 1,
+      "L+": 2,
+      "L-": 0
+    },
+    "full_graph": {
+      "L0_spectrum": [
+        0.0,
+        3.9250536344271737e-17,
+        0.9999999999999998,
+        2.0,
+        3.0
+      ],
+      "L1_spectrum": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "beta_0": 2,
+      "beta_1": 0,
+      "G_gamma_trace": 1.833333333333333,
+      "G_gamma_frobenius": 1.1666666666666663
+    },
+    "channels": {
+      "T": {
+        "E_mu": 1,
+        "sub_graph_V": 2,
+        "sub_graph_beta_0": 1,
+        "is_connected_sub": true,
+        "L0_spectrum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.0
+        ],
+        "L1_spectrum": [
+          2.0
+        ],
+        "L0_nonzero_spectrum": [
+          2.0
+        ],
+        "L1_nonzero_spectrum": [
+          2.0
+        ],
+        "beta_0_full_V": 4,
+        "beta_1_kernel": 0,
+        "G_gamma_trace": 0.5,
+        "G_gamma_frobenius": 0.5,
+        "nodes_touched": [
+          0,
+          1
+        ]
+      },
+      "L+": {
+        "E_mu": 2,
+        "sub_graph_V": 3,
+        "sub_graph_beta_0": 1,
+        "is_connected_sub": true,
+        "L0_spectrum": [
+          0.0,
+          0.0,
+          3.9250536344271737e-17,
+          0.9999999999999998,
+          3.0
+        ],
+        "L1_spectrum": [
+          1.0,
+          3.0
+        ],
+        "L0_nonzero_spectrum": [
+          0.9999999999999998,
+          3.0
+        ],
+        "L1_nonzero_spectrum": [
+          1.0,
+          3.0
+        ],
+        "beta_0_full_V": 3,
+        "beta_1_kernel": 0,
+        "G_gamma_trace": 1.333333333333333,
+        "G_gamma_frobenius": 1.0540925533894594,
+        "nodes_touched": [
+          2,
+          3,
+          4
+        ]
+      },
+      "L-": {
+        "E_mu": 0,
+        "sub_graph_V": 0,
+        "sub_graph_beta_0": 0,
+        "is_connected_sub": false,
+        "L0_spectrum": [],
+        "L1_spectrum": [],
+        "L0_nonzero_spectrum": [],
+        "L1_nonzero_spectrum": [],
+        "beta_0_full_V": 5,
+        "beta_1_kernel": 0,
+        "G_gamma_trace": 0.0,
+        "G_gamma_frobenius": 0.0,
+        "nodes_touched": []
+      }
+    },
+    "isotropy_check": {
+      "T_nonzero_L1": [
+        2.0
+      ],
+      "Lplus_nonzero_L1": [
+        1.0,
+        3.0
+      ],
+      "Lminus_nonzero_L1": [],
+      "verdict": "ANISOTROPIC (T and L+ spectra differ)"
+    },
+    "propagator_sum_check": {
+      "frobenius_diff": 0.0,
+      "relative_diff": 0.0,
+      "matches": true
+    },
+    "cross_channel_coupling": {
+      "G_TT_frobenius": 0.5,
+      "G_LL_frobenius": 1.0540925533894594,
+      "G_TL_frobenius": 0.0,
+      "is_block_diagonal": true
+    }
+  },
+  "n_max_3": {
+    "n_max": 3,
+    "V": 14,
+    "E": 13,
+    "edge_classification": [
+      {
+        "edge_idx": 0,
+        "s1": [
+          1,
+          0,
+          0
+        ],
+        "s2": [
+          2,
+          0,
+          0
+        ],
+        "dn": 1,
+        "dm": 0,
+        "channel": "T"
+      },
+      {
+        "edge_idx": 1,
+        "s1": [
+          2,
+          0,
+          0
+        ],
+        "s2": [
+          3,
+          0,
+          0
+        ],
+        "dn": 1,
+        "dm": 0,
+        "channel": "T"
+      },
+      {
+        "edge_idx": 2,
+        "s1": [
+          2,
+          1,
+          -1
+        ],
+        "s2": [
+          2,
+          1,
+          0
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 3,
+        "s1": [
+          2,
+          1,
+          -1
+        ],
+        "s2": [
+          3,
+          1,
+          -1
+        ],
+        "dn": 1,
+        "dm": 0,
+        "channel": "T"
+      },
+      {
+        "edge_idx": 4,
+        "s1": [
+          2,
+          1,
+          0
+        ],
+        "s2": [
+          2,
+          1,
+          1
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 5,
+        "s1": [
+          2,
+          1,
+          0
+        ],
+        "s2": [
+          3,
+          1,
+          0
+        ],
+        "dn": 1,
+        "dm": 0,
+        "channel": "T"
+      },
+      {
+        "edge_idx": 6,
+        "s1": [
+          2,
+          1,
+          1
+        ],
+        "s2": [
+          3,
+          1,
+          1
+        ],
+        "dn": 1,
+        "dm": 0,
+        "channel": "T"
+      },
+      {
+        "edge_idx": 7,
+        "s1": [
+          3,
+          1,
+          -1
+        ],
+        "s2": [
+          3,
+          1,
+          0
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 8,
+        "s1": [
+          3,
+          1,
+          0
+        ],
+        "s2": [
+          3,
+          1,
+          1
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 9,
+        "s1": [
+          3,
+          2,
+          -2
+        ],
+        "s2": [
+          3,
+          2,
+          -1
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 10,
+        "s1": [
+          3,
+          2,
+          -1
+        ],
+        "s2": [
+          3,
+          2,
+          0
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 11,
+        "s1": [
+          3,
+          2,
+          0
+        ],
+        "s2": [
+          3,
+          2,
+          1
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      },
+      {
+        "edge_idx": 12,
+        "s1": [
+          3,
+          2,
+          1
+        ],
+        "s2": [
+          3,
+          2,
+          2
+        ],
+        "dn": 0,
+        "dm": 1,
+        "channel": "L+"
+      }
+    ],
+    "channel_counts": {
+      "T": 5,
+      "L+": 8,
+      "L-": 0
+    },
+    "full_graph": {
+      "L0_spectrum": [
+        3.9250536344271737e-17,
+        4.99692479230196e-17,
+        7.91033905045424e-16,
+        0.3819660112501052,
+        0.9999999999999998,
+        1.0000000000000007,
+        1.3819660112501049,
+        1.999999999999999,
+        2.6180339887498953,
+        3.0,
+        3.0,
+        3.0000000000000004,
+        3.6180339887498945,
+        4.999999999999999
+      ],
+      "L1_spectrum": [
+        -7.945150263545395e-17,
+        3.3414600446351773e-16,
+        0.3819660112501049,
+        0.9999999999999996,
+        1.0,
+        1.3819660112501053,
+        1.9999999999999993,
+        2.618033988749895,
+        2.999999999999999,
+        3.0,
+        3.0000000000000013,
+        3.6180339887498953,
+        5.0
+      ],
+      "beta_0": 3,
+      "beta_1": 2,
+      "G_gamma_trace": 7.699999999999998,
+      "G_gamma_frobenius": 3.1973947728319896
+    },
+    "channels": {
+      "T": {
+        "E_mu": 5,
+        "sub_graph_V": 9,
+        "sub_graph_beta_0": 4,
+        "is_connected_sub": false,
+        "L0_spectrum": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          3.9250536344271737e-17,
+          0.9999999999999998,
+          2.0,
+          2.0,
+          2.0,
+          3.0
+        ],
+        "L1_spectrum": [
+          1.0,
+          2.0,
+          2.0,
+          2.0,
+          3.0
+        ],
+        "L0_nonzero_spectrum": [
+          0.9999999999999998,
+          2.0,
+          2.0,
+          2.0,
+          3.0
+        ],
+        "L1_nonzero_spectrum": [
+          1.0,
+          2.0,
+          2.0,
+          2.0,
+          3.0
+        ],
+        "beta_0_full_V": 9,
+        "beta_1_kernel": 0,
+        "G_gamma_trace": 2.833333333333333,
+        "G_gamma_frobenius": 1.3642254619787415,
+        "nodes_touched": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "L+": {
+        "E_mu": 8,
+        "sub_graph_V": 11,
+        "sub_graph_beta_0": 3,
+        "is_connected_sub": false,
+        "L0_spectrum": [
+          0.0,
+          0.0,
+          0.0,
+          3.9250536344271737e-17,
+          3.9250536344271737e-17,
+          4.99692479230196e-17,
+          0.3819660112501052,
+          0.9999999999999998,
+          0.9999999999999998,
+          1.3819660112501049,
+          2.6180339887498953,
+          3.0,
+          3.0,
+          3.6180339887498945
+        ],
+        "L1_spectrum": [
+          0.3819660112501049,
+          1.0,
+          1.0,
+          1.3819660112501053,
+          2.618033988749895,
+          3.0,
+          3.0,
+          3.6180339887498953
+        ],
+        "L0_nonzero_spectrum": [
+          0.3819660112501052,
+          0.9999999999999998,
+          0.9999999999999998,
+          1.3819660112501049,
+          2.6180339887498953,
+          3.0,
+          3.0,
+          3.6180339887498945
+        ],
+        "L1_nonzero_spectrum": [
+          0.3819660112501049,
+          1.0,
+          1.0,
+          1.3819660112501053,
+          2.618033988749895,
+          3.0,
+          3.0,
+          3.6180339887498953
+        ],
+        "beta_0_full_V": 6,
+        "beta_1_kernel": 0,
+        "G_gamma_trace": 6.666666666666666,
+        "G_gamma_frobenius": 3.134042472944842,
+        "nodes_touched": [
+          2,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      "L-": {
+        "E_mu": 0,
+        "sub_graph_V": 0,
+        "sub_graph_beta_0": 0,
+        "is_connected_sub": false,
+        "L0_spectrum": [],
+        "L1_spectrum": [],
+        "L0_nonzero_spectrum": [],
+        "L1_nonzero_spectrum": [],
+        "beta_0_full_V": 14,
+        "beta_1_kernel": 0,
+        "G_gamma_trace": 0.0,
+        "G_gamma_frobenius": 0.0,
+        "nodes_touched": []
+      }
+    },
+    "isotropy_check": {
+      "T_nonzero_L1": [
+        1.0,
+        2.0,
+        2.0,
+        2.0,
+        3.0
+      ],
+      "Lplus_nonzero_L1": [
+        0.3819660112501049,
+        1.0,
+        1.0,
+        1.3819660112501053,
+        2.618033988749895,
+        3.0,
+        3.0,
+        3.6180339887498953
+      ],
+      "Lminus_nonzero_L1": [],
+      "verdict": "ANISOTROPIC (T and L+ spectra differ)"
+    },
+    "propagator_sum_check": {
+      "frobenius_diff": 1.076000826104598,
+      "relative_diff": 0.3365242338066265,
+      "matches": false
+    },
+    "cross_channel_coupling": {
+      "G_TT_frobenius": 1.1903334940933543,
+      "G_LL_frobenius": 2.955986601817311,
+      "G_TL_frobenius": 0.18517925916444145,
+      "is_block_diagonal": false
+    }
+  }
+}
