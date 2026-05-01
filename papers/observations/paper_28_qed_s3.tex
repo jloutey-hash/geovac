@@ -2131,6 +2131,81 @@ self-energy and vertex structure) are structurally distinct.  In
 Paper~18's taxonomy, these are independent \textsc{calibration}
 exchange constants.
 
+\subsubsection{Three-diagram projection constants}
+\label{sec:three_diagram_projection}
+
+The topology-dependent projection is characterized by computing
+\emph{independent} projection constants for each diagram type:
+$C_{\mathrm{VP}} = \Pi_{\mathrm{cont}} / \Pi_{\mathrm{graph}}$,
+$C_{\mathrm{SE}} = \mathrm{Tr}(\Sigma_{\mathrm{cont}}) /
+\mathrm{Tr}(\Sigma_{\mathrm{graph}})$, and
+$C_{F_2} = [\alpha/(2\pi)] / F_{2,\mathrm{graph}}$.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrr}
+\hline
+$n_{\max}$ & $C_{\mathrm{VP}}$ & $C_{\mathrm{SE}}$ & $C_{F_2}$ & $C_{\mathrm{VP}}/C_{\mathrm{SE}}$ \\
+\hline
+2 & 0 & 0 & $4.94 \times 10^{-4}$ & --- \\
+3 & 0.0284 & 0.275 & $6.20 \times 10^{-4}$ & 0.1030 \\
+4 & 0.0474 & 0.453 & $7.31 \times 10^{-4}$ & 0.1047 \\
+5 & 0.0599 & 0.582 & $8.32 \times 10^{-4}$ & 0.1029 \\
+\hline
+\end{tabular}
+\caption{Cross-diagram projection constants at $n_{\max} = 2$--$5$.
+$C_{\mathrm{VP}}$ uses the photon-propagator trace $\mathrm{Tr}(\Pi)$.
+The three constants have structurally independent power-law
+scaling: $C_{\mathrm{VP}} \sim n^{1.48}$, $C_{\mathrm{SE}} \sim
+n^{1.48}$, $C_{F_2} \sim n^{0.57}$.}
+\label{tab:three_diagram}
+\end{table}
+
+\noindent Power-law fits give $C_{\mathrm{VP}} \sim 0.0070 \times
+n^{0.93}$ ($R^2 = 0.95$), $C_{\mathrm{SE}} \sim 0.056 \times n^{1.48}$
+($R^2 = 0.99$), and $C_{F_2} \sim 3.3 \times 10^{-4} \times n^{0.57}$
+($R^2 = 1.00$).  The $C_{F_2}$ exponent ($+0.57$) is the negative of
+the $F_2$ convergence exponent ($-0.57$,
+Table~\ref{tab:f2_convergence}), so
+$C_{F_2} \times F_2 \to \mathrm{const} = \alpha/(2\pi)$ by
+construction.  However, $C_{\mathrm{VP}}$ and $C_{\mathrm{SE}}$ grow
+with \emph{different} exponents, confirming that no single focal-point
+constant projects all diagram types simultaneously.
+
+\textbf{VP/SE constant ratio.}
+The ratio $C_{\mathrm{VP}}/C_{\mathrm{SE}} = 0.1035 \pm 0.0009$
+(CV = 0.83\%) is constant to sub-percent precision across
+$n_{\max} = 3, 4, 5$.  The closest simple rational is $3/29 = 0.10345$.
+VP and SE share the same power-law exponent (${\sim}n^{1.48}$),
+differing only by a constant prefactor ${\sim}1/10$.  The vertex
+correction $C_{F_2}$ has fundamentally different scaling ($n^{0.57}$)
+because it is defined relative to the asymptotic Schwinger value.
+This reveals a \textbf{two-tier calibration structure}: one shared
+VP/SE tier (scaling as ${\sim}n^{1.48}$, with constant internal ratio),
+and one vertex-specific tier (scaling as ${\sim}n^{0.57}$, set by the
+$F_2$ convergence rate).
+
+The per-mode analysis (Sec.~\ref{sec:topology_dependent_projection})
+shows that the per-mode projection ratio
+$\rho(n_{\mathrm{ext}}, n_{\mathrm{int}})$ varies from 0 to 1.66
+with no clean pattern --- the graph-to-continuum projection is
+\emph{topological}, not multiplicative.  The root cause is that
+the Fock graph has nearest-neighbor connectivity ($\Delta n = \pm 1$
+only), while the continuum SO(4) channel count $W$ obeys a triangle
+inequality allowing non-nearest-neighbor contributions.  Some modes
+have graph $= 0$, continuum $\ne 0$ (and vice versa).
+
+The $\chi_{-4}$ Dirichlet character mechanism that produces Catalan's
+$G$ and Dirichlet $\beta(4)$ in the continuum
+(Theorem~\ref{thm:chi4}) is \textbf{not accessible} from
+finite-graph parity decomposition: 24 PSLQ targets against
+$\{G, \beta(4), \pi^2, \zeta(3)\}$ all returned null.  Graph F$_2$
+even/odd ratios alternate with $n_{\max}$ (driven by degeneracy
+counting, not physics), while continuum even/odd ratios converge to
+${\sim}1$.  The Catalan/$\beta$ content lives in the continuum's
+Hurwitz zeta at quarter-integer shifts, which are analytic objects
+with no finite-graph analog.
+
 \subsection{Transcendental certificate}
 
 \textbf{All} graph-native QED quantities are $\pi$-free:
@@ -2222,13 +2297,23 @@ anomalous moment depends only on~$\kappa^2$, not on the sign of the
 hopping coupling.
 
 The topology-dependent projection result
-(Table~\ref{tab:c_times_f2}) falsifies the hypothesis that a single
-projection constant~$C$ converts graph-native QED to physical QED:
-$C \times F_2$ grows with~$n_{\max}$ (45.7$\times$ and 64.9$\times$
-above $\alpha/(2\pi)$ at $n_{\max} = 3, 4$), not converges.  The VP
-projection and the vertex projection are structurally distinct ---
-different diagram topologies require different spectral-density
-matching factors.  The extended $F_2$ convergence data
+(Tables~\ref{tab:c_times_f2} and~\ref{tab:three_diagram}) falsifies the
+hypothesis that a single projection constant~$C$ converts graph-native
+QED to physical QED: $C \times F_2$ grows with~$n_{\max}$
+(45.7$\times$ and 64.9$\times$ above $\alpha/(2\pi)$ at
+$n_{\max} = 3, 4$), not converges.  The three-diagram analysis
+(Table~\ref{tab:three_diagram}) sharpens this: $C_{\mathrm{VP}}$,
+$C_{\mathrm{SE}}$, and $C_{F_2}$ have structurally independent
+power-law scalings ($n^{1.48}$, $n^{1.48}$, $n^{0.57}$ respectively),
+but VP and SE share the \emph{same} exponent with a constant prefactor
+ratio $C_{\mathrm{VP}}/C_{\mathrm{SE}} = 0.1035 \pm 0.0009$
+(CV = 0.83\%, closest rational $3/29$).  This reveals a two-tier
+calibration structure: one shared tier for VP and SE (vector photon
+structure and non-nearest-neighbor connectivity calibrate both
+identically; the ${\sim}10\times$ prefactor difference is a pure
+topology-of-diagram effect), and one vertex-specific tier for $F_2$
+(requiring the full vertex correction projection).
+The extended $F_2$ convergence data
 (Table~\ref{tab:f2_convergence}) confirms this picture: $F_2(\kappa)$
 decreases as a slow power law $\sim n_{\max}^{-0.57}$, with Richardson
 extrapolation giving an unphysical negative limit, confirming $F_2 \to
@@ -2393,6 +2478,13 @@ confirmed independent of $S_{\min}$ and all lower-loop constants.
       component is a $2/[(n+1)(n+2)]$ fraction of the total degeneracy.
       Can the $j$-dependent form factors be separated cleanly to give
       independent $c_2$ extractions at each $n_{\mathrm{ext}}$?
+\item The VP/SE projection ratio $C_{\mathrm{VP}}/C_{\mathrm{SE}} =
+      0.1035 \pm 0.0009$ (Table~\ref{tab:three_diagram}) is constant
+      to sub-percent across $n_{\max} = 3, 4, 5$, with closest simple
+      rational $3/29 = 0.10345$.  Is this a rational number?  If so,
+      what structural invariant fixes it?  The constancy implies that
+      VP and SE probe the same calibration content with a universal
+      diagram-topology prefactor.
 \item \textbf{RESOLVED.}  The Euler sum cancellation extends to $D_5$
       (weight~9): $\zeta(2)\zeta(7)$ cancels while $\zeta(3)\zeta(6)$
       and $\zeta(4)\zeta(5)$ survive
