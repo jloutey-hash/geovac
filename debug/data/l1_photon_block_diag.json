@@ -1,0 +1,2947 @@
+{
+  "fock_nmax2": {
+    "graph_type": "fock_scalar",
+    "n_max": 2,
+    "V": 5,
+    "E": 3,
+    "edge_type_counts": {
+      "L": 2,
+      "T": 1
+    },
+    "q_counts": {
+      "0": 1,
+      "1": 2
+    },
+    "m_q_counts": {
+      "0": 1,
+      "1": 2
+    },
+    "by_q_mq": {
+      "sector_name": "(q, m_q)",
+      "is_block_diagonal": true,
+      "n_sectors": 2,
+      "sector_dims": {
+        "(0, 0)": 1,
+        "(1, 1)": 2
+      },
+      "total_frobenius_sq": 14.0,
+      "diagonal_block_frobenius_sq": 14.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 5,
+      "sample_cross_entries": []
+    },
+    "by_q": {
+      "sector_name": "q",
+      "is_block_diagonal": true,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 1,
+        "1": 2
+      },
+      "total_frobenius_sq": 14.0,
+      "diagonal_block_frobenius_sq": 14.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 5,
+      "sample_cross_entries": []
+    },
+    "by_mq": {
+      "sector_name": "m_q",
+      "is_block_diagonal": true,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 1,
+        "1": 2
+      },
+      "total_frobenius_sq": 14.0,
+      "diagonal_block_frobenius_sq": 14.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 5,
+      "sample_cross_entries": []
+    },
+    "by_edge_type": {
+      "sector_name": "edge_type",
+      "is_block_diagonal": true,
+      "n_sectors": 2,
+      "sector_dims": {
+        "L": 2,
+        "T": 1
+      },
+      "total_frobenius_sq": 14.0,
+      "diagonal_block_frobenius_sq": 14.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 5,
+      "sample_cross_entries": []
+    },
+    "by_l_sector": {
+      "sector_name": "l_sector",
+      "is_block_diagonal": true,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 1,
+        "1": 2
+      },
+      "total_frobenius_sq": 14.0,
+      "diagonal_block_frobenius_sq": 14.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 5,
+      "sample_cross_entries": []
+    },
+    "L1_n_zero": 0,
+    "L1_nonzero_evals": [
+      1.0,
+      2.0,
+      3.0
+    ]
+  },
+  "fock_nmax3": {
+    "graph_type": "fock_scalar",
+    "n_max": 3,
+    "V": 14,
+    "E": 13,
+    "edge_type_counts": {
+      "L": 8,
+      "T": 5
+    },
+    "q_counts": {
+      "0": 5,
+      "1": 8
+    },
+    "m_q_counts": {
+      "0": 5,
+      "1": 8
+    },
+    "by_q_mq": {
+      "sector_name": "(q, m_q)",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "(0, 0)": 5,
+        "(1, 1)": 8
+      },
+      "total_frobenius_sq": 80.0,
+      "diagonal_block_frobenius_sq": 64.0,
+      "cross_block_frobenius_sq": 16.0,
+      "cross_fraction": 0.2,
+      "diag_fraction": 0.8,
+      "n_cross_nonzero": 16,
+      "n_diag_nonzero": 25,
+      "sample_cross_entries": [
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 5,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 7,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 5,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 6,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 2,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 4,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 7,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 8,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 4,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 8,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 1)",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 3,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 5,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 5,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 6,
+          "sector_i": "(1, 1)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_q": {
+      "sector_name": "q",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 5,
+        "1": 8
+      },
+      "total_frobenius_sq": 80.0,
+      "diagonal_block_frobenius_sq": 64.0,
+      "cross_block_frobenius_sq": 16.0,
+      "cross_fraction": 0.2,
+      "diag_fraction": 0.8,
+      "n_cross_nonzero": 16,
+      "n_diag_nonzero": 25,
+      "sample_cross_entries": [
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 7,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 6,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 7,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 8,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 8,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 3,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 6,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_mq": {
+      "sector_name": "m_q",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 5,
+        "1": 8
+      },
+      "total_frobenius_sq": 80.0,
+      "diagonal_block_frobenius_sq": 64.0,
+      "cross_block_frobenius_sq": 16.0,
+      "cross_fraction": 0.2,
+      "diag_fraction": 0.8,
+      "n_cross_nonzero": 16,
+      "n_diag_nonzero": 25,
+      "sample_cross_entries": [
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 7,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 6,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 7,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 8,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 8,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 3,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 6,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_edge_type": {
+      "sector_name": "edge_type",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "L": 8,
+        "T": 5
+      },
+      "total_frobenius_sq": 80.0,
+      "diagonal_block_frobenius_sq": 64.0,
+      "cross_block_frobenius_sq": 16.0,
+      "cross_fraction": 0.2,
+      "diag_fraction": 0.8,
+      "n_cross_nonzero": 16,
+      "n_diag_nonzero": 25,
+      "sample_cross_entries": [
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 5,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 7,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 5,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 6,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 2,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 4,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 7,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 8,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 4,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 8,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 3,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 5,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 5,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 6,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_l_sector": {
+      "sector_name": "l_sector",
+      "is_block_diagonal": true,
+      "n_sectors": 3,
+      "sector_dims": {
+        "0": 2,
+        "1": 7,
+        "2": 4
+      },
+      "total_frobenius_sq": 80.0,
+      "diagonal_block_frobenius_sq": 80.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 41,
+      "sample_cross_entries": []
+    },
+    "L1_n_zero": 2,
+    "L1_nonzero_evals": [
+      0.9999999999999996,
+      1.0,
+      1.3819660112501053,
+      1.9999999999999993,
+      2.618033988749895,
+      2.999999999999999,
+      3.0,
+      3.0000000000000013,
+      3.6180339887498953,
+      5.0
+    ]
+  },
+  "dirac_B_nmax2": {
+    "graph_type": "dirac_rule_B",
+    "n_max": 2,
+    "V": 10,
+    "E": 20,
+    "edge_type_counts": {
+      "L": 10,
+      "T": 10
+    },
+    "q_counts": {
+      "1": 20
+    },
+    "two_m_q_counts": {
+      "-2": 6,
+      "0": 8,
+      "2": 6
+    },
+    "by_q_2mq": {
+      "sector_name": "(q, 2*m_q)",
+      "is_block_diagonal": false,
+      "n_sectors": 3,
+      "sector_dims": {
+        "(1, -2)": 6,
+        "(1, 0)": 8,
+        "(1, 2)": 6
+      },
+      "total_frobenius_sq": 212.0,
+      "diagonal_block_frobenius_sq": 116.0,
+      "cross_block_frobenius_sq": 96.0,
+      "cross_fraction": 0.4528301886792453,
+      "diag_fraction": 0.5471698113207547,
+      "n_cross_nonzero": 96,
+      "n_diag_nonzero": 56,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 4,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 2,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 4,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 5,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 15,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 1,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 6,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 16,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 4,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 8,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 18,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 0,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_q": {
+      "sector_name": "q",
+      "is_block_diagonal": true,
+      "n_sectors": 1,
+      "sector_dims": {
+        "1": 20
+      },
+      "total_frobenius_sq": 212.0,
+      "diagonal_block_frobenius_sq": 212.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 152,
+      "sample_cross_entries": []
+    },
+    "by_2mq": {
+      "sector_name": "2*m_q",
+      "is_block_diagonal": false,
+      "n_sectors": 3,
+      "sector_dims": {
+        "-2": 6,
+        "0": 8,
+        "2": 6
+      },
+      "total_frobenius_sq": 212.0,
+      "diagonal_block_frobenius_sq": 116.0,
+      "cross_block_frobenius_sq": 96.0,
+      "cross_fraction": 0.4528301886792453,
+      "diag_fraction": 0.5471698113207547,
+      "n_cross_nonzero": 96,
+      "n_diag_nonzero": 56,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "-2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "sector_i": "-2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 4,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 5,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 15,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "2",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 1,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 6,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 16,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 8,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 18,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 0,
+          "sector_i": "2",
+          "sector_j": "-2",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_edge_type": {
+      "sector_name": "edge_type",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "L": 10,
+        "T": 10
+      },
+      "total_frobenius_sq": 212.0,
+      "diagonal_block_frobenius_sq": 176.0,
+      "cross_block_frobenius_sq": 36.0,
+      "cross_fraction": 0.16981132075471697,
+      "diag_fraction": 0.8301886792452831,
+      "n_cross_nonzero": 36,
+      "n_diag_nonzero": 116,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 10,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 11,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 15,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 12,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 16,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 13,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 18,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 14,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 19,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 11,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 15,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 12,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 16,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 17,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 13,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 18,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 9,
+          "j": 14,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 9,
+          "j": 19,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 10,
+          "j": 0,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 11,
+          "j": 1,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_dl": {
+      "sector_name": "dl",
+      "is_block_diagonal": true,
+      "n_sectors": 1,
+      "sector_dims": {
+        "1": 20
+      },
+      "total_frobenius_sq": 212.0,
+      "diagonal_block_frobenius_sq": 212.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 152,
+      "sample_cross_entries": []
+    },
+    "L1_n_zero": 11,
+    "L1_nonzero_evals": [
+      1.4384471871911684,
+      2.298437881283575,
+      3.9999999999999982,
+      3.9999999999999996,
+      3.9999999999999996,
+      5.0,
+      5.000000000000002,
+      5.56155281280883,
+      8.701562118716424
+    ]
+  },
+  "dirac_B_nmax3": {
+    "graph_type": "dirac_rule_B",
+    "n_max": 3,
+    "V": 28,
+    "E": 106,
+    "edge_type_counts": {
+      "L": 48,
+      "T": 58
+    },
+    "q_counts": {
+      "1": 106
+    },
+    "two_m_q_counts": {
+      "-2": 33,
+      "0": 40,
+      "2": 33
+    },
+    "by_q_2mq": {
+      "sector_name": "(q, 2*m_q)",
+      "is_block_diagonal": false,
+      "n_sectors": 3,
+      "sector_dims": {
+        "(1, -2)": 33,
+        "(1, 0)": 40,
+        "(1, 2)": 33
+      },
+      "total_frobenius_sq": 2020.0,
+      "diagonal_block_frobenius_sq": 876.0,
+      "cross_block_frobenius_sq": 1144.0,
+      "cross_fraction": 0.5663366336633663,
+      "diag_fraction": 0.43366336633663366,
+      "n_cross_nonzero": 1144,
+      "n_diag_nonzero": 558,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 4,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 30,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 32,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 33,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 34,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 35,
+          "sector_i": "(1, -2)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 2,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 4,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 5,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 20,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 37,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 38,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 40,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 41,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, -2)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 43,
+          "sector_i": "(1, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "(1, 2)",
+          "sector_j": "(1, -2)",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_q": {
+      "sector_name": "q",
+      "is_block_diagonal": true,
+      "n_sectors": 1,
+      "sector_dims": {
+        "1": 106
+      },
+      "total_frobenius_sq": 2020.0,
+      "diagonal_block_frobenius_sq": 2020.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 1702,
+      "sample_cross_entries": []
+    },
+    "by_2mq": {
+      "sector_name": "2*m_q",
+      "is_block_diagonal": false,
+      "n_sectors": 3,
+      "sector_dims": {
+        "-2": 33,
+        "0": 40,
+        "2": 33
+      },
+      "total_frobenius_sq": 2020.0,
+      "diagonal_block_frobenius_sq": 876.0,
+      "cross_block_frobenius_sq": 1144.0,
+      "cross_fraction": 0.5663366336633663,
+      "diag_fraction": 0.43366336633663366,
+      "n_cross_nonzero": 1144,
+      "n_diag_nonzero": 558,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "-2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "sector_i": "-2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 4,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 30,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 32,
+          "sector_i": "-2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 33,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 34,
+          "sector_i": "-2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 0,
+          "j": 35,
+          "sector_i": "-2",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 2,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 4,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 5,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 20,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 37,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 38,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 40,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 41,
+          "sector_i": "0",
+          "sector_j": "-2",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 43,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "2",
+          "sector_j": "-2",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_edge_type": {
+      "sector_name": "edge_type",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "L": 48,
+        "T": 58
+      },
+      "total_frobenius_sq": 2020.0,
+      "diagonal_block_frobenius_sq": 1336.0,
+      "cross_block_frobenius_sq": 684.0,
+      "cross_fraction": 0.33861386138613864,
+      "diag_fraction": 0.6613861386138614,
+      "n_cross_nonzero": 684,
+      "n_diag_nonzero": 1018,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 10,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 11,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 20,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 12,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 2,
+          "j": 21,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 13,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 23,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 14,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 24,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 11,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 5,
+          "j": 20,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 12,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 21,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 22,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 13,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 23,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 9,
+          "j": 14,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 9,
+          "j": 24,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 10,
+          "j": 0,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 10,
+          "j": 15,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_dl": {
+      "sector_name": "dl",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "-1": 10,
+        "1": 96
+      },
+      "total_frobenius_sq": 2020.0,
+      "diagonal_block_frobenius_sq": 1756.0,
+      "cross_block_frobenius_sq": 264.0,
+      "cross_fraction": 0.1306930693069307,
+      "diag_fraction": 0.8693069306930693,
+      "n_cross_nonzero": 264,
+      "n_diag_nonzero": 1438,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 30,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 36,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 37,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 44,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 45,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 58,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 59,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 63,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 64,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 36,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 37,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 44,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 6,
+          "j": 45,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 52,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 58,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 59,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 9,
+          "j": 63,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 9,
+          "j": 64,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 10,
+          "j": 30,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        },
+        {
+          "i": 11,
+          "j": 36,
+          "sector_i": "1",
+          "sector_j": "-1",
+          "value": -1.0
+        }
+      ]
+    },
+    "L1_n_zero": 79,
+    "L1_nonzero_evals": [
+      1.4071895101388392,
+      1.8467907036391507,
+      3.044492472158424,
+      3.683003180317113,
+      4.351461625173838,
+      4.608936109889329,
+      4.880610350675809,
+      5.2271371515925065,
+      5.517618606105901,
+      6.228665806681683,
+      7.138091097672798,
+      7.402134120955904,
+      7.488412310621801,
+      8.0372211591035,
+      8.429145485623293,
+      8.72559762555514,
+      9.252763166366686,
+      9.999999999999996,
+      9.999999999999998,
+      9.999999999999998,
+      10.0,
+      10.344302866573738,
+      10.45319772337166,
+      11.580153493631896,
+      11.799369375911562,
+      12.480992974781607,
+      18.07271308345782
+    ]
+  },
+  "dirac_A_nmax2": {
+    "graph_type": "dirac_rule_A",
+    "n_max": 2,
+    "V": 10,
+    "E": 8,
+    "edge_type_counts": {
+      "L": 6,
+      "T": 2
+    },
+    "q_counts": {
+      "0": 2,
+      "1": 6
+    },
+    "two_m_q_counts": {
+      "0": 2,
+      "2": 6
+    },
+    "by_q_2mq": {
+      "sector_name": "(q, 2*m_q)",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "(0, 0)": 2,
+        "(1, 2)": 6
+      },
+      "total_frobenius_sq": 44.0,
+      "diagonal_block_frobenius_sq": 36.0,
+      "cross_block_frobenius_sq": 8.0,
+      "cross_fraction": 0.18181818181818182,
+      "diag_fraction": 0.8181818181818182,
+      "n_cross_nonzero": 8,
+      "n_diag_nonzero": 12,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_q": {
+      "sector_name": "q",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 2,
+        "1": 6
+      },
+      "total_frobenius_sq": 44.0,
+      "diagonal_block_frobenius_sq": 36.0,
+      "cross_block_frobenius_sq": 8.0,
+      "cross_fraction": 0.18181818181818182,
+      "diag_fraction": 0.8181818181818182,
+      "n_cross_nonzero": 8,
+      "n_diag_nonzero": 12,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_2mq": {
+      "sector_name": "2*m_q",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 2,
+        "2": 6
+      },
+      "total_frobenius_sq": 44.0,
+      "diagonal_block_frobenius_sq": 36.0,
+      "cross_block_frobenius_sq": 8.0,
+      "cross_fraction": 0.18181818181818182,
+      "diag_fraction": 0.8181818181818182,
+      "n_cross_nonzero": 8,
+      "n_diag_nonzero": 12,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_edge_type": {
+      "sector_name": "edge_type",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "L": 6,
+        "T": 2
+      },
+      "total_frobenius_sq": 44.0,
+      "diagonal_block_frobenius_sq": 36.0,
+      "cross_block_frobenius_sq": 8.0,
+      "cross_fraction": 0.18181818181818182,
+      "diag_fraction": 0.8181818181818182,
+      "n_cross_nonzero": 8,
+      "n_diag_nonzero": 12,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        }
+      ]
+    },
+    "by_dl": {
+      "sector_name": "dl",
+      "is_block_diagonal": true,
+      "n_sectors": 1,
+      "sector_dims": {
+        "0": 8
+      },
+      "total_frobenius_sq": 44.0,
+      "diagonal_block_frobenius_sq": 44.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 20,
+      "sample_cross_entries": []
+    },
+    "L1_n_zero": 1,
+    "L1_nonzero_evals": [
+      0.585786437626905,
+      1.9999999999999987,
+      1.9999999999999998,
+      2.0,
+      2.0,
+      3.414213562373095,
+      3.999999999999999
+    ]
+  },
+  "dirac_A_nmax3": {
+    "graph_type": "dirac_rule_A",
+    "n_max": 3,
+    "V": 28,
+    "E": 29,
+    "edge_type_counts": {
+      "L": 19,
+      "T": 10
+    },
+    "q_counts": {
+      "0": 10,
+      "1": 19
+    },
+    "two_m_q_counts": {
+      "0": 10,
+      "2": 19
+    },
+    "by_q_2mq": {
+      "sector_name": "(q, 2*m_q)",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "(0, 0)": 10,
+        "(1, 2)": 19
+      },
+      "total_frobenius_sq": 188.0,
+      "diagonal_block_frobenius_sq": 140.0,
+      "cross_block_frobenius_sq": 48.0,
+      "cross_fraction": 0.2553191489361702,
+      "diag_fraction": 0.7446808510638298,
+      "n_cross_nonzero": 48,
+      "n_diag_nonzero": 53,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 4,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 5,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 3,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 16,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 3,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 16,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 7,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 9,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 6,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 17,
+          "sector_i": "(0, 0)",
+          "sector_j": "(1, 2)",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 9,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 11,
+          "sector_i": "(1, 2)",
+          "sector_j": "(0, 0)",
+          "value": -1.0
+        }
+      ]
+    },
+    "by_q": {
+      "sector_name": "q",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 10,
+        "1": 19
+      },
+      "total_frobenius_sq": 188.0,
+      "diagonal_block_frobenius_sq": 140.0,
+      "cross_block_frobenius_sq": 48.0,
+      "cross_fraction": 0.2553191489361702,
+      "diag_fraction": 0.7446808510638298,
+      "n_cross_nonzero": 48,
+      "n_diag_nonzero": 53,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 4,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 5,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 16,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 16,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 7,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 9,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 6,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 17,
+          "sector_i": "0",
+          "sector_j": "1",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 9,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 11,
+          "sector_i": "1",
+          "sector_j": "0",
+          "value": -1.0
+        }
+      ]
+    },
+    "by_2mq": {
+      "sector_name": "2*m_q",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "0": 10,
+        "2": 19
+      },
+      "total_frobenius_sq": 188.0,
+      "diagonal_block_frobenius_sq": 140.0,
+      "cross_block_frobenius_sq": 48.0,
+      "cross_fraction": 0.2553191489361702,
+      "diag_fraction": 0.7446808510638298,
+      "n_cross_nonzero": 48,
+      "n_diag_nonzero": 53,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 4,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 5,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 16,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 3,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 16,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 7,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 9,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 6,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 17,
+          "sector_i": "0",
+          "sector_j": "2",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 9,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 11,
+          "sector_i": "2",
+          "sector_j": "0",
+          "value": -1.0
+        }
+      ]
+    },
+    "by_edge_type": {
+      "sector_name": "edge_type",
+      "is_block_diagonal": false,
+      "n_sectors": 2,
+      "sector_dims": {
+        "L": 19,
+        "T": 10
+      },
+      "total_frobenius_sq": 188.0,
+      "diagonal_block_frobenius_sq": 140.0,
+      "cross_block_frobenius_sq": 48.0,
+      "cross_fraction": 0.2553191489361702,
+      "diag_fraction": 0.7446808510638298,
+      "n_cross_nonzero": 48,
+      "n_diag_nonzero": 53,
+      "sample_cross_entries": [
+        {
+          "i": 0,
+          "j": 1,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 0,
+          "j": 2,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 1,
+          "j": 0,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 0,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 2,
+          "j": 3,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 1,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 3,
+          "j": 2,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 4,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 3,
+          "j": 5,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 4,
+          "j": 3,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 4,
+          "j": 16,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 3,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 5,
+          "j": 16,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 7,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 6,
+          "j": 9,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        },
+        {
+          "i": 7,
+          "j": 6,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": 1.0
+        },
+        {
+          "i": 7,
+          "j": 17,
+          "sector_i": "T",
+          "sector_j": "L",
+          "value": -1.0
+        },
+        {
+          "i": 8,
+          "j": 9,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": 1.0
+        },
+        {
+          "i": 8,
+          "j": 11,
+          "sector_i": "L",
+          "sector_j": "T",
+          "value": -1.0
+        }
+      ]
+    },
+    "by_dl": {
+      "sector_name": "dl",
+      "is_block_diagonal": true,
+      "n_sectors": 1,
+      "sector_dims": {
+        "0": 29
+      },
+      "total_frobenius_sq": 188.0,
+      "diagonal_block_frobenius_sq": 188.0,
+      "cross_block_frobenius_sq": 0.0,
+      "cross_fraction": 0.0,
+      "diag_fraction": 1.0,
+      "n_cross_nonzero": 0,
+      "n_diag_nonzero": 101,
+      "sample_cross_entries": []
+    },
+    "L1_n_zero": 6,
+    "L1_nonzero_evals": [
+      0.585786437626905,
+      0.5857864376269052,
+      0.9999999999999999,
+      1.0,
+      1.9999999999999991,
+      1.9999999999999996,
+      1.9999999999999998,
+      1.9999999999999998,
+      1.9999999999999998,
+      2.0000000000000004,
+      2.0000000000000013,
+      2.5857864376269046,
+      3.0,
+      3.0000000000000004,
+      3.0000000000000018,
+      3.414213562373095,
+      3.414213562373096,
+      3.7320508075688776,
+      3.9999999999999982,
+      3.9999999999999996,
+      4.999999999999999,
+      5.414213562373095
+    ]
+  }
+}

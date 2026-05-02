@@ -1,0 +1,254 @@
+{
+  "n_max_2": {
+    "n_max": 2,
+    "q_max": 1,
+    "dirac": {
+      "N_electron": 10,
+      "N_photon": 3,
+      "vertex_nonzero": 26,
+      "vertex_total": 300,
+      "vertex_sparsity": 0.9133333333333333,
+      "Sigma_trace": 1.1459155902616465,
+      "Sigma_frobenius": 0.4678180807402056,
+      "Sigma_eigenvalues": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.19098593171027436,
+        0.19098593171027436,
+        0.1909859317102744,
+        0.1909859317102744,
+        0.1909859317102744,
+        0.19098593171027442
+      ],
+      "Sigma_zero_eigs": 4,
+      "selection_rules": {
+        "1_gaunt_cg_sparsity": {
+          "pass": true,
+          "nonzero": 26,
+          "total": 300,
+          "sparsity": 0.9133333333333333,
+          "description": "Wigner 3j selection rules enforce angular momentum conservation in (j_a, j_b, q) coupling."
+        },
+        "2_vertex_parity_gs_zero": {
+          "pass": true,
+          "gs_indices": [
+            0,
+            1
+          ],
+          "gs_block_max_abs": 0.0,
+          "gs_row_max_abs": 0.0,
+          "description": "For GS (l=0, kappa=-1): only l_b values with l_a+l_b+q odd contribute. With l_a=0, need l_b+q odd; triangle on j forces q = l_b (since j_a=1/2, need |1/2-j_b| <= q <= 1/2+j_b). For l_b values with kappa giving j_b, l_b+l_b=even => V=0."
+        },
+        "3_so4_channel_count": {
+          "pass": true,
+          "w_counts": {
+            "(1,1)": 0,
+            "(1,2)": 0,
+            "(2,1)": 0,
+            "(2,2)": 4
+          },
+          "description": "Number of (kappa_ext, kappa_int, q) triples with nonzero coupling for each (n_ext, n_int) pair. Uses j-triangle and l-parity."
+        },
+        "4_delta_mj_conservation": {
+          "pass": true,
+          "violations": 0,
+          "offdiag_mj_total": 66,
+          "description": "Sigma(a,c) = 0 when m_j_a != m_j_c, enforced by 3j selection: sum over m_q conserves m_j."
+        },
+        "5_spatial_parity": {
+          "pass": true,
+          "violations": 0,
+          "description": "All nonzero V entries have l_a + l_b + q odd (E-type parity), where l is derived from kappa."
+        },
+        "6_furry_theorem": {
+          "pass": false,
+          "tadpole_max_abs": 0.252313252202016,
+          "tadpole_rms": 0.13298076013381088,
+          "tadpole_nonzero_count": 6,
+          "description": "Tadpole = sum_{q,m_q} V(a,a,q,m_q)*G_gamma(q) = 0 for all a. On Dirac states, diagonal coupling V(a,a) has l_a+l_a+q = 2l_a+q; for q odd this is always odd (parity satisfied). Furry requires the 3j(j,q,j;-m,0,m) to vanish or cancel in sum."
+        },
+        "7_ward_identity": {
+          "pass": true,
+          "commutator_norm": 0.0,
+          "sigma_norm": 0.4678180807402056,
+          "ratio": 0.0,
+          "description": "||[Sigma, H0]|| / ||Sigma|| where H0 = diag(n+1/2) = Dirac eigenvalues. For exact Ward identity this vanishes."
+        },
+        "8_charge_conjugation": {
+          "pass": true,
+          "is_hermitian": true,
+          "max_antisym": 0.0,
+          "kappa_symmetry_max_diff": 0.1909859317102744,
+          "kappa_symmetry_pairs_checked": 4,
+          "description": "Self-energy is Hermitian (symmetric for real). Additionally checks kappa -> -kappa symmetry of diagonal elements."
+        },
+        "_summary": {
+          "pass_count": 7,
+          "total": 8,
+          "all_pass": false
+        }
+      }
+    },
+    "scalar": {
+      "N_electron": 5,
+      "N_photon": 3,
+      "vertex_nonzero": 6,
+      "vertex_total": 75,
+      "vertex_sparsity": 0.92,
+      "Sigma_trace": 0.23873241463784295,
+      "Sigma_eigenvalues": [
+        0.0,
+        0.0,
+        0.07957747154594765,
+        0.07957747154594765,
+        0.07957747154594765
+      ],
+      "selection_rules_pass": 7,
+      "selection_rules_total": 8
+    }
+  },
+  "n_max_3": {
+    "n_max": 3,
+    "q_max": 2,
+    "dirac": {
+      "N_electron": 28,
+      "N_photon": 8,
+      "vertex_nonzero": 346,
+      "vertex_total": 6272,
+      "vertex_sparsity": 0.9448341836734694,
+      "Sigma_trace": 9.954004869375966,
+      "Sigma_frobenius": 2.6751927751539486,
+      "Sigma_eigenvalues": [
+        -1.905878791014611e-16,
+        -9.140172026523273e-17,
+        -5.703641670104513e-17,
+        -5.647765870682579e-17,
+        -3.116939709928266e-17,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.71837329204773e-17,
+        9.335135988369616e-17,
+        0.43199198839228725,
+        0.43199198839228725,
+        0.43199198839228725,
+        0.43199198839228725,
+        0.4319919883922873,
+        0.4319919883922873,
+        0.43199198839228736,
+        0.43199198839228736,
+        0.43199198839228736,
+        0.4319919883922874,
+        0.9390141642421821,
+        0.9390141642421821,
+        0.9390141642421822,
+        0.9390141642421823,
+        0.9390141642421824,
+        0.9390141642421828
+      ],
+      "Sigma_zero_eigs": 12,
+      "selection_rules": {
+        "1_gaunt_cg_sparsity": {
+          "pass": true,
+          "nonzero": 346,
+          "total": 6272,
+          "sparsity": 0.9448341836734694,
+          "description": "Wigner 3j selection rules enforce angular momentum conservation in (j_a, j_b, q) coupling."
+        },
+        "2_vertex_parity_gs_zero": {
+          "pass": true,
+          "gs_indices": [
+            0,
+            1
+          ],
+          "gs_block_max_abs": 0.0,
+          "gs_row_max_abs": 0.0,
+          "description": "For GS (l=0, kappa=-1): only l_b values with l_a+l_b+q odd contribute. With l_a=0, need l_b+q odd; triangle on j forces q = l_b (since j_a=1/2, need |1/2-j_b| <= q <= 1/2+j_b). For l_b values with kappa giving j_b, l_b+l_b=even => V=0."
+        },
+        "3_so4_channel_count": {
+          "pass": true,
+          "w_counts": {
+            "(1,1)": 0,
+            "(1,2)": 0,
+            "(1,3)": 0,
+            "(2,1)": 0,
+            "(2,2)": 4,
+            "(2,3)": 8,
+            "(3,1)": 0,
+            "(3,2)": 8,
+            "(3,3)": 16
+          },
+          "description": "Number of (kappa_ext, kappa_int, q) triples with nonzero coupling for each (n_ext, n_int) pair. Uses j-triangle and l-parity."
+        },
+        "4_delta_mj_conservation": {
+          "pass": true,
+          "violations": 0,
+          "offdiag_mj_total": 588,
+          "description": "Sigma(a,c) = 0 when m_j_a != m_j_c, enforced by 3j selection: sum over m_q conserves m_j."
+        },
+        "5_spatial_parity": {
+          "pass": true,
+          "violations": 0,
+          "description": "All nonzero V entries have l_a + l_b + q odd (E-type parity), where l is derived from kappa."
+        },
+        "6_furry_theorem": {
+          "pass": false,
+          "tadpole_max_abs": 0.3371677656723677,
+          "tadpole_rms": 0.1704467447228483,
+          "tadpole_nonzero_count": 22,
+          "description": "Tadpole = sum_{q,m_q} V(a,a,q,m_q)*G_gamma(q) = 0 for all a. On Dirac states, diagonal coupling V(a,a) has l_a+l_a+q = 2l_a+q; for q odd this is always odd (parity satisfied). Furry requires the 3j(j,q,j;-m,0,m) to vanish or cancel in sum."
+        },
+        "7_ward_identity": {
+          "pass": false,
+          "commutator_norm": 1.626420241494286,
+          "sigma_norm": 2.6751927751539486,
+          "ratio": 0.6079637537151658,
+          "description": "||[Sigma, H0]|| / ||Sigma|| where H0 = diag(n+1/2) = Dirac eigenvalues. For exact Ward identity this vanishes."
+        },
+        "8_charge_conjugation": {
+          "pass": true,
+          "is_hermitian": true,
+          "max_antisym": 0.0,
+          "kappa_symmetry_max_diff": 0.46950708212109116,
+          "kappa_symmetry_pairs_checked": 16,
+          "description": "Self-energy is Hermitian (symmetric for real). Additionally checks kappa -> -kappa symmetry of diagonal elements."
+        },
+        "_summary": {
+          "pass_count": 6,
+          "total": 8,
+          "all_pass": false
+        }
+      }
+    },
+    "scalar": {
+      "N_electron": 14,
+      "N_photon": 8,
+      "vertex_nonzero": 84,
+      "vertex_total": 1568,
+      "vertex_sparsity": 0.9464285714285714,
+      "Sigma_trace": 1.433637885819963,
+      "Sigma_eigenvalues": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.28100794639662763,
+        0.28100794639662763,
+        0.28100794639662763
+      ],
+      "selection_rules_pass": 6,
+      "selection_rules_total": 8
+    }
+  }
+}

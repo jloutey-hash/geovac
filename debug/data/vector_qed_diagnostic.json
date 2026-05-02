@@ -1,0 +1,245 @@
+{
+  "module": "geovac.vector_qed",
+  "description": "Vector-photon QED on the Fock graph: explicit (q, m_q) photon modes coupled to scalar Fock electrons via Wigner 3j symbols.  This is the calibration step in Paper 18's exchange constant taxonomy.",
+  "analyses": {
+    "n_max_2": {
+      "n_max": 2,
+      "q_max": 1,
+      "N_electron": 5,
+      "N_photon": 3,
+      "vertex_nonzero": 6,
+      "vertex_total": 75,
+      "vertex_sparsity": 0.92,
+      "contains_pi": true,
+      "Sigma_shape": [
+        5,
+        5
+      ],
+      "Sigma_trace": 0.23873241463784295,
+      "Sigma_frobenius": 0.13783222385544797,
+      "Sigma_max_entry": 0.07957747154594765,
+      "Sigma_nonzero_count": 3,
+      "Sigma_total_entries": 25,
+      "Sigma_sparsity": 0.88,
+      "Sigma_eigenvalues": [
+        0.0,
+        0.0,
+        0.07957747154594765,
+        0.07957747154594765,
+        0.07957747154594765
+      ],
+      "Sigma_diagonal": {
+        "(1,0,+0)": 0.0,
+        "(2,0,+0)": 0.0,
+        "(2,1,-1)": 0.07957747154594765,
+        "(2,1,+0)": 0.07957747154594765,
+        "(2,1,+1)": 0.07957747154594765
+      },
+      "selection_rules": {
+        "1_gaunt_cg_sparsity": {
+          "pass": true,
+          "nonzero": 6,
+          "total": 75,
+          "sparsity": 0.92,
+          "description": "Wigner 3j selection rules enforce angular momentum conservation"
+        },
+        "2_vertex_parity_gs_zero": {
+          "pass": true,
+          "gs_indices": [
+            0
+          ],
+          "gs_block_max_abs": 0.0,
+          "description": "Parity rule l_a+l_b+q odd => for GS (l=0): q=l_b, so l_b+l_b=2*l_b is even => V(GS,any,any)=0 => Sigma(GS,GS)=0"
+        },
+        "3_so4_channel_count": {
+          "pass": true,
+          "w_counts": {
+            "(1,2)": 0,
+            "(2,2)": 1
+          },
+          "description": "Number of (l_ext, l_int, q) triples with nonzero coupling for each (n_ext, n_int) pair. Structural, always passes."
+        },
+        "4_delta_m_conservation": {
+          "pass": true,
+          "violations": 0,
+          "offdiag_m_total": 14,
+          "description": "Sigma(a,c) = 0 when m_a != m_c, enforced by 3j selection: sum over m_q conserves m."
+        },
+        "5_spatial_parity": {
+          "pass": true,
+          "violations": 0,
+          "description": "All nonzero V entries have l_a + l_b + q odd (E-type parity)."
+        },
+        "6_furry_theorem": {
+          "pass": false,
+          "tadpole_max_abs": 0.19947114020071632,
+          "description": "Tadpole = sum_{q,m_q} V(a,a,q,m_q)*G_gamma(q) = 0 for all a. Enforced by parity: V(a,a,q,m_q) requires l_a+l_a+q odd => q odd, and triangle with l_a=l_a forces q=0..2*l_a, but q must also be nonzero (q>=1). For l_a=0: q must equal 0 (triangle), but q>=1 => V=0. For l_a>0: 3j(l,q,l;-m,0,m) with q odd gives V(a,a,q,0)."
+        },
+        "7_ward_identity": {
+          "pass": "True",
+          "commutator_norm": 0.0,
+          "sigma_norm": 0.13783222385544797,
+          "ratio": 0.0,
+          "description": "||[Sigma, H0]|| / ||Sigma|| measures how well the self-energy commutes with the free Hamiltonian. For exact Ward identity this should vanish. On the truncated basis it will be approximate."
+        },
+        "8_charge_conjugation": {
+          "pass": true,
+          "is_hermitian": true,
+          "max_antisym": 0.0,
+          "description": "Self-energy is Hermitian (symmetric for real matrix), consistent with C-even observable."
+        },
+        "_summary": {
+          "pass_count": 6,
+          "total": 8,
+          "all_pass": false
+        }
+      }
+    },
+    "n_max_3": {
+      "n_max": 3,
+      "q_max": 2,
+      "N_electron": 14,
+      "N_photon": 8,
+      "vertex_nonzero": 84,
+      "vertex_total": 1568,
+      "vertex_sparsity": 0.9464285714285714,
+      "contains_pi": true,
+      "Sigma_shape": [
+        14,
+        14
+      ],
+      "Sigma_trace": 1.433637885819963,
+      "Sigma_frobenius": 0.5537701583053221,
+      "Sigma_max_entry": 0.14050397319831381,
+      "Sigma_nonzero_count": 17,
+      "Sigma_total_entries": 196,
+      "Sigma_sparsity": 0.9132653061224489,
+      "Sigma_eigenvalues": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.11812280932601604,
+        0.28100794639662763,
+        0.28100794639662763,
+        0.28100794639662763
+      ],
+      "Sigma_diagonal": {
+        "(1,0,+0)": 0.0,
+        "(2,0,+0)": 0.0,
+        "(2,1,-1)": 0.14050397319831381,
+        "(2,1,+0)": 0.14050397319831381,
+        "(2,1,+1)": 0.14050397319831381,
+        "(3,0,+0)": 0.0,
+        "(3,1,-1)": 0.14050397319831381,
+        "(3,1,+0)": 0.14050397319831381,
+        "(3,1,+1)": 0.14050397319831381,
+        "(3,2,-2)": 0.11812280932601604,
+        "(3,2,-1)": 0.11812280932601604,
+        "(3,2,+0)": 0.11812280932601604,
+        "(3,2,+1)": 0.11812280932601604,
+        "(3,2,+2)": 0.11812280932601604
+      },
+      "selection_rules": {
+        "1_gaunt_cg_sparsity": {
+          "pass": true,
+          "nonzero": 84,
+          "total": 1568,
+          "sparsity": 0.9464285714285714,
+          "description": "Wigner 3j selection rules enforce angular momentum conservation"
+        },
+        "2_vertex_parity_gs_zero": {
+          "pass": true,
+          "gs_indices": [
+            0
+          ],
+          "gs_block_max_abs": 0.0,
+          "description": "Parity rule l_a+l_b+q odd => for GS (l=0): q=l_b, so l_b+l_b=2*l_b is even => V(GS,any,any)=0 => Sigma(GS,GS)=0"
+        },
+        "3_so4_channel_count": {
+          "pass": true,
+          "w_counts": {
+            "(1,2)": 0,
+            "(1,3)": 0,
+            "(2,2)": 1,
+            "(2,3)": 2,
+            "(3,2)": 2,
+            "(3,3)": 4
+          },
+          "description": "Number of (l_ext, l_int, q) triples with nonzero coupling for each (n_ext, n_int) pair. Structural, always passes."
+        },
+        "4_delta_m_conservation": {
+          "pass": true,
+          "violations": 0,
+          "offdiag_m_total": 140,
+          "description": "Sigma(a,c) = 0 when m_a != m_c, enforced by 3j selection: sum over m_q conserves m."
+        },
+        "5_spatial_parity": {
+          "pass": true,
+          "violations": 0,
+          "description": "All nonzero V entries have l_a + l_b + q odd (E-type parity)."
+        },
+        "6_furry_theorem": {
+          "pass": false,
+          "tadpole_max_abs": 0.29735401935879513,
+          "description": "Tadpole = sum_{q,m_q} V(a,a,q,m_q)*G_gamma(q) = 0 for all a. Enforced by parity: V(a,a,q,m_q) requires l_a+l_a+q odd => q odd, and triangle with l_a=l_a forces q=0..2*l_a, but q must also be nonzero (q>=1). For l_a=0: q must equal 0 (triangle), but q>=1 => V=0. For l_a>0: 3j(l,q,l;-m,0,m) with q odd gives V(a,a,q,0)."
+        },
+        "7_ward_identity": {
+          "pass": "False",
+          "commutator_norm": 1.7208152058477613,
+          "sigma_norm": 0.5537701583053221,
+          "ratio": 3.1074538417055457,
+          "description": "||[Sigma, H0]|| / ||Sigma|| measures how well the self-energy commutes with the free Hamiltonian. For exact Ward identity this should vanish. On the truncated basis it will be approximate."
+        },
+        "8_charge_conjugation": {
+          "pass": true,
+          "is_hermitian": true,
+          "max_antisym": 0.0,
+          "description": "Self-energy is Hermitian (symmetric for real matrix), consistent with C-even observable."
+        },
+        "_summary": {
+          "pass_count": 6,
+          "total": 8,
+          "all_pass": false
+        }
+      }
+    }
+  },
+  "scalar_vs_vector": {
+    "n_max": 2,
+    "vector": {
+      "N_electron": 5,
+      "N_photon": 3,
+      "Sigma_shape": [
+        5,
+        5
+      ],
+      "vertex_sparsity": 0.92,
+      "gs_zero": true,
+      "contains_pi": true,
+      "Sigma_trace": 0.23873241463784295,
+      "Sigma_frobenius": 0.13783222385544797,
+      "Sigma_max": 0.07957747154594765,
+      "selection_rules_pass": 6,
+      "selection_rules_total": 8
+    },
+    "scalar": {
+      "N_dirac": 10,
+      "E_fock": 3,
+      "Sigma_shape": [
+        10,
+        10
+      ],
+      "gs_zero": false,
+      "Sigma_trace": 14.66666666666666,
+      "Sigma_frobenius": 7.363574011458171,
+      "Sigma_max": 2.2222222222222214
+    }
+  }
+}
