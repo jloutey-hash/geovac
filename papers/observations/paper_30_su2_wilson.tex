@@ -863,6 +863,34 @@ the combined spectral-gauge invariants.  We do not claim such a route
 will succeed; we record it as a natural follow-up within a
 conjectural framework.
 
+\subsection{Plaquettes as the transverse photon sector}
+
+The plaquettes enumerated in this paper define a boundary operator
+$d_1\colon C^1 \to C^2$ whose transpose gives the co-exact Laplacian
+$L_1^{\mathrm{co}} = d_1 d_1^\top$ on edges.  This is the
+\emph{transverse} (physical photon) sector of the graph Hodge
+decomposition, complementing the exact (longitudinal) sector
+$L_1^{\mathrm{ex}} = B^\top B$ used in Paper~25 and the graph-native
+QED of Paper~28.
+
+Paper~28's pendant-edge theorem shows that the scalar propagator
+$G = (B^\top B)^+$ breaks the continuum self-energy structural zero:
+$\Sigma_{\mathrm{scalar}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}$.
+Replacing $G$ with the transverse propagator
+$G_T = (d_1 d_1^\top)^+$ recovers the structural zero \emph{exactly}:
+$\Sigma_T(\mathrm{GS}) = 0$ at $n_{\max} = 3, 4$ (verified to machine
+precision).  The mechanism is topological: the ground-state node is a
+pendant vertex whose unique edge cannot participate in any closed walk,
+so $d_1[e_0, :] = 0$ and hence $G_T[e_0, :] = 0$ identically.
+
+This gives the plaquettes of this paper a concrete QED role beyond
+their original gauge-theory motivation: they define the physical photon
+sector that recovers continuum selection rules inaccessible from the
+scalar (longitudinal) propagator alone.  One of the four
+``vector-photon-required'' selection rules identified in Paper~28's
+census is now ``plaquette-recoverable,'' refining the three-tier
+partition to four tiers.
+
 \subsection{Continuum limit}
 
 The continuum limit of lattice gauge theory on refined Alon--Boppana

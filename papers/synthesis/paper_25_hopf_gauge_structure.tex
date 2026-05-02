@@ -255,6 +255,20 @@ gradients.  These are the combinatorial analog of a non-trivial
 holonomy along a loop, i.e., the analog of a Wilson loop in the
 Wilson formulation of lattice gauge theory.
 
+On a manifold, the full Hodge--1 Laplacian is
+$\Delta_1 = d_0 d_0^* + d_1^* d_1$, where the first term is the
+\emph{exact} (longitudinal) part and the second is the
+\emph{co-exact} (transverse) part.  On a bare graph (simplicial
+1-complex without 2-cells), only the exact part
+$L_1 = B^\top B = d_0 d_0^*$ is available.  The co-exact part requires
+faces (2-cells) to define a boundary operator $d_1$;
+Paper~30~\cite{paper30} provides precisely these faces via plaquette
+enumeration, giving the co-exact Laplacian
+$L_1^{\mathrm{co}} = d_1 d_1^\top$.  Paper~28~\cite{paper28} shows
+that the transverse propagator $(d_1 d_1^\top)^+$ recovers the
+continuum self-energy structural zero that $L_1^+$ alone cannot,
+establishing a concrete QED role for the face structure.
+
 \subsection{Node versus edge spectra}
 
 The nonzero eigenvalues of $L_0 = B B^{\top}$ and $L_1 = B^{\top} B$
@@ -1137,6 +1151,14 @@ of the 3D harmonic oscillator on $S^5$,'' GeoVac Paper~24 (2026).
 \bibitem{Q1B}
 GeoVac Track Q1-B, ``Edge Laplacian of the GeoVac $S^3$ graph at
 $n_{\max} = 3$,'' internal memo, April 2026.
+
+\bibitem{paper28}
+GeoVac Project, ``QED on $S^3$: Spectral Mode Sums, Transcendental
+Classification, and Graph-Native Formulation,'' Paper~28 (2026).
+
+\bibitem{paper30}
+GeoVac Project, ``SU(2) Wilson Lattice Gauge on $S^3 = \mathrm{SU}(2)$,''
+Paper~30 (2026).
 
 \end{thebibliography}
 
