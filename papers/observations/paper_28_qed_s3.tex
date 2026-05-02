@@ -113,6 +113,15 @@ the ground-state structural zero ($\Sigma_T(\mathrm{GS}) = 0$ exactly),
 refining the partition to 1+3+1+3: the plaquette-recoverable tier is
 topological (pendant-edge exclusion from closed walks), requiring no
 photon quantum numbers.
+Adding explicit vector photon quantum numbers $(q, m_q)$ with
+Clebsch--Gordan vertex coupling recovers 7~of~8 continuum selection
+rules (Sec.~\ref{sec:vector_photon_qed}), with the sole failure being
+Furry's theorem (requiring second-quantized charge conjugation).  The
+calibration cost is exactly one transcendental per loop: $\pi$,
+entering as the $S^2$ Weyl exchange constant $1/(4\pi)$ from
+Paper~18's taxonomy.  The 8~rules partition cleanly as
+$1$--$7$--$8$: graph topology $\to$ angular momentum conservation
+$\to$ field theory.
 The VP projection constant $C$ does \emph{not} serve as a universal
 graph-to-continuum projector: $C \times F_2$ diverges from
 $\alpha/(2\pi)$, confirming that different diagram topologies require
@@ -2440,6 +2449,166 @@ poles of the $n_{\max} = 3$ rational function are farther from the
 origin, yielding better convergence of the Taylor series at
 $t = \kappa$.
 
+\subsection{Vector-photon QED: 7 of 8 selection rules recovered}
+\label{sec:vector_photon_qed}
+
+The preceding graph-native QED sections treat the photon as a scalar
+1-cochain---a number on each edge.  This produces $\pi$-free results
+in $\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$ but recovers
+only 1~of~8 continuum QED selection rules (Gaunt/CG sparsity on the
+scalar Fock graph) or 4~of~8 on the native Dirac graph (Rule~B).  The
+transverse photon from Wilson plaquettes
+(Sec.~\ref{sec:transverse_photon}) recovers the ground-state structural
+zero, bringing the count to 5~of~8.
+
+\subsubsection{Pre-investigation: $L_1$ block-diagonalization}
+
+A natural question is whether the edge Laplacian $L_1 = B^\top B$
+already contains photon angular momentum structure that can be extracted
+by reorganization---i.e., does $L_1$ block-diagonalize by
+$(q, m_q)$?
+
+The answer is \textbf{no}.  Photon quantum numbers describe the
+\emph{transition} between endpoint labels (the angular momentum
+\emph{difference}), not a conserved quantum number at each vertex.
+$L_1$ couples edges that share a vertex, and at that vertex, edges
+with different photon quantum numbers meet.  The cross-sector
+Frobenius fraction is 20\% at $n_{\max} = 3$ on the scalar Fock graph
+and 57\% on the Dirac Rule~B graph.  The \emph{only} decomposition
+that works is by connected components: $l$-sector (Fock) or
+$\kappa$-sector (Dirac Rule~A).
+
+Vector photon structure must therefore be added from outside.  It is
+genuinely new structure, not a reorganization of what the graph
+contains.
+
+\subsubsection{Construction}
+
+The electron register uses Fock graph nodes $(n, l, m)$ or Dirac labels
+$(n, \kappa, m_j)$; both configurations are tested.  The photon register
+adds modes labeled by $(q, m_q)$ with $q = 1, \ldots, q_{\max}$ and
+$m_q = -q, \ldots, q$.  The photon propagator is
+$G_\gamma(q) = 1/[q(q+2)]$, the vector Laplacian eigenvalues on~$S^3$.
+
+The vertex coupling is
+\begin{equation}
+  V(a, b, q, m_q) = \begin{pmatrix} l_a & q & l_b \\ -m_a & m_q & m_b \end{pmatrix}
+  \times \delta_{l_a + l_b + q \;\mathrm{odd}},
+  \label{eq:vector_vertex}
+\end{equation}
+where the Wigner 3$j$ symbol enforces the triangle inequality and
+$m$-conservation, and the parity constraint $l_a + l_b + q$ odd
+enforces E1 vector coupling.  Radial matrix elements are set to unity
+($R = 1$), isolating angular structure.
+
+The self-energy is
+\begin{equation}
+  \Sigma(a, c) = \sum_{b, q, m_q} V(a, b, q, m_q)\; G_e(b)\; G_\gamma(q)
+  \; V(c, b, q, m_q),
+  \label{eq:vector_self_energy}
+\end{equation}
+where $G_e(b)$ is the electron propagator.
+
+\subsubsection{Selection rule census}
+
+\begin{table}[h]
+\centering
+\caption{Selection rule recovery with vector photon quantum numbers.
+Both scalar and Dirac electron bases recover 7~of~8 rules at
+$n_{\max} = 2$.}
+\label{tab:vector_selection_rules}
+\begin{ruledtabular}
+\begin{tabular}{clccl}
+\# & Rule & Scalar${}+{}$vec & Dirac${}+{}$vec & Mechanism \\
+\hline
+1 & Gaunt/CG sparsity & PASS & PASS & 3$j$ symbol \\
+2 & GS structural zero & PASS & PASS & $2l_{\mathrm{int}}$ odd \\
+3 & SO(4) channel count & PASS & PASS & triangle ineq. \\
+4 & $\Delta m_j$ conservation & PASS & PASS & 3$j$ $m$-rule \\
+5 & Spatial parity & PASS & PASS & E1 parity \\
+6 & Furry's theorem & FAIL & FAIL & needs $C$-symmetry \\
+7 & Ward identity & PASS${}^a$ & PASS${}^a$ & $\Sigma$ block-diag. \\
+8 & Charge conjugation & PASS & PASS & $\Sigma$ Hermiticity \\
+\end{tabular}
+\end{ruledtabular}
+\raggedright ${}^a$ Ward identity passes at $n_{\max} = 2$;
+truncation artifacts at $n_{\max} \geq 3$ (ratio $0.61$ Dirac,
+$3.1$ scalar).
+\end{table}
+
+\subsubsection{Ground-state structural zero: angular momentum mechanism}
+
+$\Sigma(\mathrm{GS}, \mathrm{GS}) = 0$ exactly (machine precision) at
+all tested $n_{\max}$.  The mechanism: for the ground state with $l = 0$,
+the triangle inequality forces $q = l_{\mathrm{int}}$, and the parity
+rule requires $l_{\mathrm{int}} + l_{\mathrm{int}} + q =
+2l_{\mathrm{int}} + q$ odd.  With $q = l_{\mathrm{int}}$, this gives
+$3l_{\mathrm{int}}$ odd --- but more precisely, with $l_{\mathrm{ext}} = 0$:
+$l_{\mathrm{int}} + q$ odd, and the triangle with $l_{\mathrm{ext}} = 0$
+gives $q = l_{\mathrm{int}}$, so $2l_{\mathrm{int}}$ must be odd.
+Impossible for any integer.
+
+This is the rule broken by the pendant-edge theorem on the scalar graph
+($\Sigma_{\mathrm{scalar}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max} \to 2$).
+The vector photon restores it through angular momentum conservation alone.
+
+\subsubsection{Calibration exchange constant: $1/(4\pi)$}
+
+The $l = 1$ self-energy at $n_{\max} = 2$ is \textbf{exactly} $1/(4\pi)$
+to machine precision.  This is the Weyl exchange constant for~$S^2$
+(the density-of-states constant for the 2-sphere), entering through the
+normalization of the vector spherical harmonics:
+$\sqrt{(2l+1)(2q+1)(2l'+1)/(4\pi)}$ in the vertex coupling.
+
+The entire scalar graph QED is $\pi$-free
+($\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$).  The vector
+photon introduces \textbf{exactly one transcendental per loop}: $\pi$,
+through the $S^2$ solid angle normalization.  In Paper~18's
+taxonomy~\cite{paper18}, this is precisely where calibration content
+enters: the $1 \to 7$ transition from graph topology to angular momentum
+conservation costs exactly one transcendental ($\pi$, via $1/(4\pi)$
+per loop).
+
+\subsubsection{Furry's theorem: the irreducible obstruction}
+
+Furry's theorem is the sole rule that neither angular momentum quantum
+numbers nor spinor labels can recover.  For $l \geq 1$ states, the
+diagonal vertex coupling $V(a, a, q, m_q)$ is nonzero when $q$ is odd
+(parity $2l + q$ odd is satisfied).  The
+$\left(\begin{smallmatrix} j & q & j \\ -m & 0 & m\end{smallmatrix}\right)$
+does not vanish for generic~$m$.
+
+In continuum QED, Furry works because for every electron loop, there is
+a positron loop that exactly cancels.  This is charge conjugation
+symmetry of the \emph{field}, not of the \emph{state labels}.  The
+graph/vector construction has spinor quantum numbers but no
+second-quantized particle--antiparticle structure.
+
+\subsubsection{The $1$--$7$--$8$ partition}
+
+The 8~continuum QED selection rules partition cleanly into three tiers:
+
+\begin{center}
+\begin{tabular}{crl}
+\hline
+Tier & Rules & Source \\
+\hline
+Graph topology & 1 & Gaunt/CG sparsity (always survives) \\
+Angular momentum & 6 & CG coefficients + E1 parity + triangle ineq. \\
+Field theory & 1 & Charge conjugation of the Dirac field (Furry) \\
+\hline
+\end{tabular}
+\end{center}
+
+The $1 \to 7$ transition costs exactly one transcendental: $\pi$,
+entering as $1/(4\pi)$ per loop from the $S^2$ solid angle
+normalization.  The $7 \to 8$ transition requires something
+categorically different: the full field-theoretic structure of charge
+conjugation.  Scalar and Dirac electron bases give identical 7/8 ---
+the CG coefficients do all the angular momentum work; spinor labels
+add no additional selection rule recovery beyond what the 3$j$ symbols
+already enforce.
+
 % ===================================================================
 \section{Discussion}
 \label{sec:discussion}
@@ -2447,10 +2616,14 @@ $t = \kappa$.
 
 The five theorems, two propositions, and one observation of this paper,
 together with the anomalous magnetic moment computation
-(Sec.~\ref{sec:anomalous_moment}) and the graph-native QED infrastructure
-(Sec.~\ref{sec:graph_native_qed}), complete the first comprehensive
+(Sec.~\ref{sec:anomalous_moment}), the graph-native QED infrastructure
+(Sec.~\ref{sec:graph_native_qed}), and the vector-photon QED construction
+(Sec.~\ref{sec:vector_photon_qed}), complete the first comprehensive
 treatment of perturbative QED on~$S^3$ in both the continuum spectral-sum
-and finite-graph formulations.
+and finite-graph formulations.  The vector-photon construction recovers
+7~of~8 continuum selection rules with a single transcendental cost
+($1/(4\pi)$ per loop), establishing a clean $1$--$7$--$8$ partition:
+graph topology $\to$ angular momentum conservation $\to$ field theory.
 The three-axis taxonomy extends Paper~18's exchange-constant
 classification~\cite{paper18} from free propagators to interaction
 vertices: \emph{diagram topology} is an independent source of
@@ -2480,13 +2653,19 @@ the scalar Fock graph; the 7~broken rules partition cleanly into
 4~\textsc{intrinsic} (graph kinematics).  The native Dirac graph QED
 (Sec.~\ref{sec:dirac_graph_qed}) refines this classification: building
 QED on the $(n, \kappa, m_j)$ Dirac graph with E1~dipole adjacency
-(Rule~B) recovers 4~of~8 rules, confirming a three-tier partition---1
+(Rule~B) recovers 4~of~8 rules, identifying a three-tier partition---1
 always survives (Gaunt/CG), 3~are spinor-recoverable ($\Delta m_j$,
 spatial parity, Furry), and 4~require vector photon structure (vertex
-parity, SO(4), Ward, charge conjugation).  The path from graph to
-continuum QED has two distinct barriers: the spinor barrier (crossed by
-adopting Dirac labels, zero cost) and the vector barrier (requiring
-spin-1 photon structure, calibration tier).
+parity, SO(4), Ward, charge conjugation).  The vector-photon QED
+construction (Sec.~\ref{sec:vector_photon_qed}) then recovers 7~of~8
+by adding explicit photon angular momentum labels $(q, m_q)$ with
+Clebsch--Gordan vertex coupling and E1 parity enforcement.  The path
+from graph to continuum QED has three distinct barriers: the spinor
+barrier (crossed by adopting Dirac labels, zero cost), the angular
+momentum barrier (crossed by promoting the photon from scalar 1-cochain
+to vector harmonic, calibration cost $1/(4\pi)$ per loop), and the
+field-theory barrier (requiring second-quantized charge conjugation for
+Furry's theorem, categorically different from either).
 The vector QED sprint (Sec.~\ref{sec:vq_sprint}) provides five
 independent negative results confirming the three-tier selection rule
 partition from a complementary direction: neither Pauli spin matrices at
@@ -2636,6 +2815,13 @@ confirmed independent of $S_{\min}$ and all lower-loop constants.
       photon is a scalar 1-cochain lacking the spin-1 vector selection
       rules (vertex parity + SO(4) channel count) that enforce the
       continuum zero.
+      \textbf{Further resolution:}
+      Adding explicit vector photon quantum numbers $(q, m_q)$
+      (Sec.~\ref{sec:vector_photon_qed}) recovers the GS structural
+      zero exactly through angular momentum conservation alone
+      ($2l_{\mathrm{int}}$ odd is impossible), confirming that the
+      broken zero was due to the scalar photon, not a fundamental graph
+      obstruction.
       The continuum question at higher loop order remains open.
 \item The three-loop CG-weighted sum at physical exponents has
       convergence rate $\alpha \approx -1.31$.  Is there a

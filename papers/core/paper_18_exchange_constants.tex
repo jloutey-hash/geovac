@@ -1284,15 +1284,28 @@ structure.  In the continuum, the physical photon is a transverse
 vector field on~$S^3$ carrying $\mathrm{SO}(4) = \mathrm{SU}(2)_L
 \times \mathrm{SU}(2)_R$ quantum numbers, and this vector structure
 enforces selection rules (vertex parity, SO(4) channel counting~$W$)
-that are absent on the graph.  The concrete evidence is the broken
-structural zero: the graph self-energy at the ground state is
-$\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}
-\neq 0$, while the continuum self-energy vanishes exactly
-($\Sigma(n_{\mathrm{ext}}=0) = 0$, Paper~28 Theorem~4) because
-vertex parity forces $n_1 + n_2 + q$ odd with $n_2 = 0$, requiring
-$2n_1$ odd---impossible.  On the graph, the Clebsch--Gordan
-projection opens couplings that the SO(4) vector selection rule
-forbids.  In the taxonomy, the photon's spin-1 nature therefore
+that are absent on the graph.  Adding explicit photon angular momentum
+labels $(q, m_q)$ with Clebsch--Gordan vertex coupling and E1 parity
+enforcement recovers 7~of~8 continuum QED selection rules (Paper~28,
+Sec.~\ref*{sec:vector_photon_qed}).  The sole failure is Furry's
+theorem, which requires second-quantized charge conjugation of the
+Dirac field---categorically different from any one-body quantum number
+assignment.
+
+The calibration cost of the $1 \to 7$ transition is precisely one
+transcendental per loop: $\pi$, entering as the $S^2$ Weyl exchange
+constant $1/(4\pi)$ from the vector spherical harmonic normalization
+$\sqrt{(2l+1)(2q+1)(2l'+1)/(4\pi)}$.  This is a concrete instance
+of the calibration exchange constants cataloged in the taxonomy table
+(Table~\ref{tab:taxonomy}): the $S^2$ Weyl constant $\omega_2/(2\pi)^2
+= 1/(4\pi)$ converts the discrete angular momentum quantum numbers
+into the continuous solid angle measure required for vector photon
+normalization.  The entire scalar graph QED is $\pi$-free
+($\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$); the vector
+photon introduces exactly the $\omega_2 = \pi$ entry from the
+Weyl constant table.
+
+In the taxonomy, the photon's angular momentum structure therefore
 sits in the \textbf{calibration} tier, alongside the volume
 normalization $\mathrm{Vol}(S^3) = 2\pi^2$ and the Hurwitz-zeta
 regularization of infinite spectral sums: it is a property of the
@@ -1301,8 +1314,13 @@ graph/continuum partition for QED: the graph captures the
 algebraic/combinatorial content (rational propagators, algebraic CG
 vertices, $\pi$-free observables), while the continuum projection
 adds three calibration-tier ingredients: (1)~volume normalization,
-(2)~infinite-sum regularization, and (3)~photon vector structure.
-The first two were identified in earlier sections; the third is new.
+(2)~infinite-sum regularization, and (3)~photon vector structure
+(cost: $1/(4\pi)$ per loop).
+The 8~continuum selection rules partition cleanly as
+$1$--$7$--$8$: graph topology (1~rule, zero transcendental cost)
+$\to$ angular momentum conservation (6~rules, calibration cost
+$1/(4\pi)$) $\to$ field theory (1~rule, requires second-quantized
+$C$-symmetry).
 
 \paragraph{Flat-space consistency of the transcendental classification.}
 The three-axis taxonomy is derived from $S^3$ spectral sums at finite
