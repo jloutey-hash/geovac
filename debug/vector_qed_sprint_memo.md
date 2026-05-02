@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-01
 **Sprint:** Vector-photon QED on the Fock graph
-**Status:** Complete — 7/8 selection rules recovered
+**Status:** Complete — 7/8 scalar, 8/8 Dirac selection rules recovered
 
 ## Motivation
 
@@ -70,12 +70,12 @@ V(a, b, q, m_q) = angular × parity × radial, where:
 | 3 | SO(4) channel count | PASS | PASS | Triangle inequality on (l,q,l') |
 | 4 | Δm / Δm_j conservation | PASS | PASS | 3j m-selection rule |
 | 5 | Spatial parity | PASS | PASS | E1 parity enforcement |
-| 6 | Furry's theorem | FAIL | FAIL | Requires second-quantized C-symmetry |
+| 6 | Furry's theorem | FAIL | PASS | Scalar: V(a,a)≠0 for l≥1; Dirac: V(a,a)=0 identically (spinor phase) |
 | 7 | Ward identity (n=2) | PASS | PASS | Σ block-diagonal within n-shells |
 | 7 | Ward identity (n=3) | FAIL | FAIL | Truncation: q=2 couples n-shells |
 | 8 | Charge conjugation | PASS | PASS | Σ Hermiticity verified |
 
-**Score: 7/8 at n_max=2 (both configurations).**
+**Score: 7/8 scalar, 8/8 Dirac at n_max=2.**
 
 ### Ground state structural zero
 
@@ -103,45 +103,78 @@ calibration content would enter.
 
 ### Scalar vs Dirac electron comparison
 
-Scalar and Dirac electrons give the SAME 7/8 selection rules with vector
-photons. The spinor labels (κ, m_j) provide no additional selection rule
-recovery beyond what the CG coefficients already enforce. The Dirac
-configuration gives a 5× better Ward ratio at n_max=3 (0.61 vs 3.1) due
-to the linear Dirac spectrum (n+1/2) providing better commutator structure
-than the quadratic scalar spectrum (n²-1).
+Scalar and Dirac electrons give DIFFERENT selection rule scores with vector
+photons: 7/8 scalar vs 8/8 Dirac. The spinor labels (κ, m_j) provide one
+additional selection rule recovery — Furry's theorem — via the Dirac vertex
+phase constraint that forces V(a, a, q, m_q) = 0 identically. Scalar
+electrons lack this constraint: V(a, a, q, m_q) ≠ 0 for l≥1 when q is odd.
 
-### Furry's theorem: the irreducible obstruction
+The Dirac configuration also gives a 5× better Ward ratio at n_max=3
+(0.61 vs 3.1) due to the linear Dirac spectrum (n+1/2) providing better
+commutator structure than the quadratic scalar spectrum (n²-1).
 
-Furry's theorem is the sole rule that neither angular momentum quantum numbers
-nor spinor labels can recover. The mechanism: for l≥1 states, the diagonal
-vertex coupling V(a, a, q, m_q) is nonzero when q is odd (parity 2l+q odd
-is satisfied). The 3j(j, q, j; -m, 0, m) does not vanish for generic m.
+### Furry's theorem: scalar failure, Dirac recovery
 
-In continuum QED, Furry works because for every electron loop, there's a
-positron loop that exactly cancels. This is charge conjugation symmetry of
-the *field*, not of the *state labels*. Our construction has spinor quantum
-numbers but no second-quantized particle-antiparticle structure.
+Furry's theorem behaves differently for scalar and Dirac electrons with
+vector photons.
 
-Note: the earlier native Dirac graph sprint showed Furry "recovered" by a
-different mechanism — the graph topology prevented self-loops (edges only
-connect Δl=±1, so no edge from a state to itself). This was a topological
-accident, not the actual physical mechanism of Furry's theorem.
+**Scalar electrons (FAIL):** For l≥1 states, the diagonal vertex coupling
+V(a, a, q, m_q) is nonzero when q is odd (parity 2l+q odd is satisfied).
+The 3j(j, q, j; -m, 0, m) does not vanish for generic m. Without
+second-quantized C-symmetry (particle-antiparticle loop cancellation),
+scalar electrons cannot suppress these tadpole contributions.
+
+**Dirac electrons (PASS):** The Dirac spinor phase constraint forces
+V(a, a, q, m_q) = 0 identically. The mechanism: the alpha-matrix vertex
+coupling <psi_a|alpha . epsilon|psi_a> vanishes because alpha is
+off-diagonal in large/small component space, and the i-factor on the small
+component makes V_LS + V_SL = 0 by Hermiticity. This is a kinematic
+single-particle identity — it does not require second-quantized
+particle-antiparticle field structure, only the spinor structure of the
+Dirac wavefunction.
+
+This should be distinguished from the field-theoretic Furry mechanism in
+continuum QED, where charge conjugation symmetry ensures that for every
+electron loop there is a positron loop that exactly cancels. The Dirac
+vertex phase constraint achieves the same selection rule (vanishing
+odd-vertex diagrams) through a different mechanism: the tadpole vertex
+itself is zero, rather than being canceled by an antiparticle loop.
+
+Note: the earlier native Dirac graph sprint showed Furry "recovered" by yet
+another mechanism — the graph topology prevented self-loops (edges only
+connect Δl=±1, so no edge from a state to itself). That was a topological
+accident specific to the adjacency rule, not the physical mechanism.
 
 ## Structural conclusions
 
-### The 1-7-8 partition
+### The 1-7-8 partition (updated)
 
-The 8 continuum QED selection rules partition cleanly into three tiers:
+The 8 continuum QED selection rules partition differently for scalar and
+Dirac electrons:
+
+**Scalar electrons:**
 
 | Tier | Rules | Source |
 |------|:---:|---|
 | Graph topology | 1 | Gaunt/CG sparsity (always survives) |
 | Angular momentum conservation | 6 | CG coefficients + E1 parity + triangle inequality |
-| Second-quantized field theory | 1 | Charge conjugation of the Dirac field (Furry) |
+| Furry (fails) | 0 | V(a,a) ≠ 0 for scalar l≥1; no C-symmetry available |
+| **Total** | **7/8** | |
 
-The 1→7 transition costs exactly one transcendental: π, entering as 1/(4π)
-per loop. The 7→8 transition requires something categorically different:
-the full field-theoretic structure of charge conjugation.
+**Dirac electrons:**
+
+| Tier | Rules | Source |
+|------|:---:|---|
+| Graph topology | 1 | Gaunt/CG sparsity (always survives) |
+| Angular momentum conservation | 6 | CG coefficients + E1 parity + triangle inequality |
+| Spinor phase constraint | 1 | V(a,a) = 0 identically from Dirac vertex structure |
+| **Total** | **8/8** | |
+
+The 1->7 transition costs exactly one transcendental: pi, entering as 1/(4pi)
+per loop. The 7->8 transition does NOT require second-quantized field theory
+as previously believed — it requires only the spinor structure of the Dirac
+wavefunction. The alpha-matrix vertex coupling provides the kinematic identity
+V(a,a) = 0 that scalar wavefunctions lack.
 
 ### Paper 18 taxonomy placement
 
@@ -158,7 +191,8 @@ identified in the transverse photon sprint: topology → geometry → calibratio
 | Scalar graph, scalar photon (GN-1..7) | 1/8 | Pure graph topology |
 | Dirac graph Rule B, scalar photon | 4/8 | Spinor node labels |
 | Any graph + plaquette photon | 2/8 | Wilson gauge 2-cells |
-| Any electrons + vector photon | **7/8** | Photon (q, m_q) + CG vertex |
+| Scalar electrons + vector photon | **7/8** | Photon (q, m_q) + CG vertex |
+| Dirac electrons + vector photon | **8/8** | Photon (q, m_q) + CG vertex + spinor phase |
 | Continuum QED | 8/8 | Second-quantized fermion field |
 
 ## Files
@@ -176,22 +210,22 @@ identified in the transverse photon sprint: topology → geometry → calibratio
 
 ## Open questions
 
-1. **Furry from C-symmetry:** Can we implement charge conjugation on the
-   Dirac graph to recover 8/8? Would require a C-operator acting on (n, κ, m_j)
-   states with proper sign structure, and modifying the self-energy sum to
-   include both particle and antiparticle loops.
-
-2. **Ward identity at larger n_max:** Is the n_max=3 failure purely a truncation
+1. **Ward identity at larger n_max:** Is the n_max=3 failure purely a truncation
    artifact, or does it indicate a deeper issue with the finite-basis Ward relation?
    The 5× improvement from Dirac eigenvalues suggests truncation, but convergence
    should be verified.
 
-3. **Radial matrix elements:** We used R=1 (unit radial coupling). Adding the
+2. **Radial matrix elements:** We used R=1 (unit radial coupling). Adding the
    actual Fock radial matrix elements would affect magnitudes but not selection
    rules. However, it would be needed for quantitative comparison with continuum
    QED results (e.g., recovering α/(2π) for the anomalous moment).
 
-4. **Connection to F₂ convergence:** The graph-native F₂ converges to zero as
+3. **Connection to F₂ convergence:** The graph-native F₂ converges to zero as
    n^{-0.57}. Does the vector-photon F₂ converge to α/(2π)? This would be the
    ultimate validation that vector photon quantum numbers are the correct
    calibration content.
+
+4. **Spinor phase constraint universality:** The Dirac vertex identity V(a,a)=0
+   was verified at n_max=2. Does it hold at all n_max, and can it be proven
+   from the algebraic structure of the Dirac wavefunction components alone
+   (independent of the specific spectrum)?

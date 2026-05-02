@@ -671,24 +671,33 @@ class TestDiracSelfEnergyN2:
         n_zero = sum(1 for ev in eigenvalues if abs(ev) < 1e-12)
         assert n_zero == 4
 
-    def test_six_degenerate_nonzero_eigenvalues(self, result_n2):
-        """At n_max=2, the 6 nonzero eigenvalues are degenerate."""
+    def test_six_nonzero_in_three_pairs(self, result_n2):
+        """At n_max=2, the 6 nonzero eigenvalues form 3 doubly-degenerate pairs.
+
+        The Dirac spinor phase constraint (diagonal V=0) breaks the original
+        6-fold degeneracy into 3 pairs corresponding to distinct kappa channels.
+        """
         eigenvalues = sorted(np.linalg.eigvalsh(result_n2.Sigma))
         nonzero = [ev for ev in eigenvalues if ev > 1e-12]
         assert len(nonzero) == 6
-        # All should be approximately equal
-        assert max(nonzero) - min(nonzero) < 1e-12
+        # Three doubly-degenerate pairs
+        assert abs(nonzero[0] - nonzero[1]) < 1e-12
+        assert abs(nonzero[2] - nonzero[3]) < 1e-12
+        assert abs(nonzero[4] - nonzero[5]) < 1e-12
+        # Pairs are distinct
+        assert nonzero[2] - nonzero[1] > 0.01
 
-    def test_calibration_4pi(self, result_n2):
-        """Nonzero eigenvalues * 4*pi are rational (12/5 = 2.4)."""
-        eigenvalues = sorted(np.linalg.eigvalsh(result_n2.Sigma))
-        nonzero = [ev for ev in eigenvalues if ev > 1e-12]
-        # Each nonzero eigenvalue * 4*pi should give 12/5
-        for ev in nonzero:
-            val = ev * 4 * np.pi
-            assert abs(val - 12.0 / 5) < 1e-10, (
-                f"Expected ev*4*pi = 12/5 = 2.4, got {val}"
-            )
+    def test_calibration_4pi_trace(self, result_n2):
+        """Trace(Sigma) * 4*pi = 176/15 (rational), preserving 1/(4pi) calibration.
+
+        The Dirac spinor phase constraint redistributes eigenvalues but the
+        trace retains the 1/(4pi) calibration from the S^2 solid angle
+        normalization of vector spherical harmonics.
+        """
+        trace_val = np.trace(result_n2.Sigma) * 4 * np.pi
+        assert abs(trace_val - 176.0 / 15) < 1e-10, (
+            f"Expected Tr(Sigma)*4*pi = 176/15 = {176/15:.6f}, got {trace_val}"
+        )
 
     def test_delta_mj_conservation(self, result_n2):
         """Sigma(a,c) = 0 when m_j_a != m_j_c."""
@@ -707,9 +716,9 @@ class TestDiracSelfEnergyN2:
         assert result_n2.contains_pi is True
 
     def test_vertex_sparsity(self, result_n2):
-        """Vertex tensor is >90% sparse."""
+        """Vertex tensor is >90% sparse (20 nonzero after diagonal removal)."""
         assert result_n2.vertex_sparsity > 0.90
-        assert result_n2.vertex_nonzero_count == 26
+        assert result_n2.vertex_nonzero_count == 20
 
 
 # ===========================================================================
@@ -744,25 +753,20 @@ class TestDiracSelfEnergyN3:
         eigenvalues = np.linalg.eigvalsh(result_n3.Sigma)
         assert np.all(eigenvalues >= -1e-12)
 
-    def test_twelve_zero_eigenvalues(self, result_n3):
-        """At n_max=3, Sigma has 12 zero eigenvalues."""
+    def test_six_zero_eigenvalues(self, result_n3):
+        """At n_max=3, Sigma has 6 zero eigenvalues (GS block + kernel)."""
         eigenvalues = np.linalg.eigvalsh(result_n3.Sigma)
         n_zero = sum(1 for ev in eigenvalues if abs(ev) < 1e-12)
-        assert n_zero == 12
+        assert n_zero == 6
 
-    def test_two_nonzero_eigenvalue_tiers(self, result_n3):
-        """At n_max=3, nonzero eigenvalues form two degenerate tiers."""
+    def test_twentytwo_nonzero_eigenvalues(self, result_n3):
+        """At n_max=3, 22 nonzero eigenvalues in 11 doubly-degenerate pairs."""
         eigenvalues = sorted(np.linalg.eigvalsh(result_n3.Sigma))
         nonzero = [ev for ev in eigenvalues if ev > 1e-12]
-        assert len(nonzero) == 16
-        # Split into two tiers
-        tier1 = [ev for ev in nonzero if ev < 0.7]
-        tier2 = [ev for ev in nonzero if ev > 0.7]
-        assert len(tier1) == 10  # ~0.432 each
-        assert len(tier2) == 6   # ~0.939 each
-        # Each tier is internally degenerate
-        assert max(tier1) - min(tier1) < 1e-10
-        assert max(tier2) - min(tier2) < 1e-10
+        assert len(nonzero) == 22
+        # All pairs are doubly degenerate (m_j degeneracy)
+        for i in range(0, len(nonzero), 2):
+            assert abs(nonzero[i] - nonzero[i + 1]) < 1e-10
 
     def test_ward_identity_fails_at_n3(self, result_n3):
         """Ward identity fails at n_max=3 (cross-n couplings)."""
@@ -771,8 +775,8 @@ class TestDiracSelfEnergyN3:
         assert rule['ratio'] > 0.1
 
     def test_vertex_nonzero_count(self, result_n3):
-        """Vertex tensor has 346 nonzero entries at n_max=3."""
-        assert result_n3.vertex_nonzero_count == 346
+        """Vertex tensor has 324 nonzero entries at n_max=3 (346 - 22 diagonal)."""
+        assert result_n3.vertex_nonzero_count == 324
 
 
 # ===========================================================================
@@ -789,13 +793,14 @@ class TestDiracSelectionRules:
         return result.selection_rules
 
     def test_total_pass_count(self, rules_n2):
-        """Dirac + vector gives 7/8 selection rules at n_max=2.
+        """Dirac + vector gives 8/8 selection rules at n_max=2.
 
-        Ward identity passes at n_max=2 because Sigma is block-diagonal
-        within each n-shell. Only Furry's theorem fails.
+        The Dirac spinor phase constraint (diagonal V=0) recovers Furry's
+        theorem via a kinematic identity of the single-particle Dirac vertex.
+        Combined with vector photon angular momentum, all 8 rules pass.
         """
         summary = rules_n2['_summary']
-        assert summary['pass_count'] == 7
+        assert summary['pass_count'] == 8
         assert summary['total'] == 8
 
     def test_gaunt_cg_sparsity_passes(self, rules_n2):
@@ -821,11 +826,10 @@ class TestDiracSelectionRules:
         assert rules_n2['5_spatial_parity']['pass'] is True
         assert rules_n2['5_spatial_parity']['violations'] == 0
 
-    def test_furry_fails(self, rules_n2):
-        """Rule 6: Furry's theorem FAILS (diagonal l>=1 couplings allowed)."""
-        assert rules_n2['6_furry_theorem']['pass'] is False
-        # 6 nonzero tadpole states at n_max=2 (the l>=1 states)
-        assert rules_n2['6_furry_theorem']['tadpole_nonzero_count'] == 6
+    def test_furry_passes(self, rules_n2):
+        """Rule 6: Furry's theorem passes (Dirac spinor phase kills tadpole)."""
+        assert rules_n2['6_furry_theorem']['pass'] is True
+        assert rules_n2['6_furry_theorem']['tadpole_nonzero_count'] == 0
 
     def test_ward_identity_passes_at_n2(self, rules_n2):
         """Rule 7: Ward identity passes at n_max=2.
@@ -853,18 +857,20 @@ class TestDiracSelectionRules:
 class TestScalarDiracComparison:
     """Structural comparison: scalar+vector vs Dirac+vector."""
 
-    def test_same_selection_rule_count(self):
-        """Both scalar+vector and Dirac+vector give 7/8 at n_max=2.
+    def test_dirac_recovers_furry(self):
+        """Dirac+vector gives 8/8 while scalar+vector gives 7/8.
 
-        Ward identity passes at n_max=2 for both (Sigma is n-block-diagonal).
-        Only Furry's theorem fails in both configurations.
-        At n_max=3, both drop to 6/8 (Ward also fails due to cross-n couplings).
+        The Dirac spinor phase constraint (diagonal V=0) is a property of
+        the Dirac alpha-matrix structure that has no scalar analog. Scalar
+        electrons lack the off-diagonal large/small component structure,
+        so their diagonal vertex coupling is nonzero.
         """
         scalar = compute_self_energy(n_max=2, q_max=1)
         dirac = compute_dirac_self_energy(n_max=2, q_max=1)
         s_sum = scalar.selection_rules['_summary']
         d_sum = dirac.selection_rules['_summary']
-        assert s_sum['pass_count'] == d_sum['pass_count'] == 7
+        assert s_sum['pass_count'] == 7
+        assert d_sum['pass_count'] == 8
         assert s_sum['total'] == d_sum['total'] == 8
 
     def test_both_have_gs_zero(self):
@@ -874,12 +880,12 @@ class TestScalarDiracComparison:
         assert scalar.selection_rules['2_vertex_parity_gs_zero']['pass'] is True
         assert dirac.selection_rules['2_vertex_parity_gs_zero']['pass'] is True
 
-    def test_both_fail_furry(self):
-        """Both configurations fail Furry's theorem."""
+    def test_furry_scalar_fails_dirac_passes(self):
+        """Scalar fails Furry, Dirac passes via spinor phase constraint."""
         scalar = compute_self_energy(n_max=2, q_max=1)
         dirac = compute_dirac_self_energy(n_max=2, q_max=1)
         assert scalar.selection_rules['6_furry_theorem']['pass'] is False
-        assert dirac.selection_rules['6_furry_theorem']['pass'] is False
+        assert dirac.selection_rules['6_furry_theorem']['pass'] is True
 
     def test_dirac_has_more_states(self):
         """Dirac basis is larger than scalar (10 vs 5 at n_max=2)."""

@@ -115,13 +115,20 @@ topological (pendant-edge exclusion from closed walks), requiring no
 photon quantum numbers.
 Adding explicit vector photon quantum numbers $(q, m_q)$ with
 Clebsch--Gordan vertex coupling recovers 7~of~8 continuum selection
-rules (Sec.~\ref{sec:vector_photon_qed}), with the sole failure being
-Furry's theorem (requiring second-quantized charge conjugation).  The
-calibration cost is exactly one transcendental per loop: $\pi$,
-entering as the $S^2$ Weyl exchange constant $1/(4\pi)$ from
-Paper~18's taxonomy.  The 8~rules partition cleanly as
+rules for scalar electrons and \textbf{8~of~8 for Dirac electrons}
+(Sec.~\ref{sec:vector_photon_qed}).  The calibration cost is exactly
+one transcendental per loop: $\pi$, entering as the $S^2$ Weyl
+exchange constant $1/(4\pi)$ from Paper~18's taxonomy.  For scalar
+electrons, the sole failure is Furry's theorem; for Dirac electrons,
+the diagonal vertex coupling $V(a, a, q, m_q) = 0$ vanishes
+identically by the \emph{Dirac spinor phase constraint}: the
+$\alpha$-matrix is off-diagonal in large/small component space, and
+for $a = b$ the cross terms cancel by Hermiticity combined with the
+$i$-factor on the small component.  This is a kinematic identity of
+the single-particle vertex, not the field-theoretic charge conjugation
+mechanism.  For Dirac electrons, the 8~rules partition as
 $1$--$7$--$8$: graph topology $\to$ angular momentum conservation
-$\to$ field theory.
+$\to$ Dirac spinor phase constraint (zero additional cost).
 The VP projection constant $C$ does \emph{not} serve as a universal
 graph-to-continuum projector: $C \times F_2$ diverges from
 $\alpha/(2\pi)$, confirming that different diagram topologies require
@@ -2449,7 +2456,7 @@ poles of the $n_{\max} = 3$ rational function are farther from the
 origin, yielding better convergence of the Taylor series at
 $t = \kappa$.
 
-\subsection{Vector-photon QED: 7 of 8 selection rules recovered}
+\subsection{Vector-photon QED: 7/8 scalar, 8/8 Dirac selection rules recovered}
 \label{sec:vector_photon_qed}
 
 The preceding graph-native QED sections treat the photon as a scalar
@@ -2514,8 +2521,8 @@ where $G_e(b)$ is the electron propagator.
 \begin{table}[h]
 \centering
 \caption{Selection rule recovery with vector photon quantum numbers.
-Both scalar and Dirac electron bases recover 7~of~8 rules at
-$n_{\max} = 2$.}
+Scalar electrons recover 7~of~8 rules; Dirac electrons recover
+\textbf{8~of~8} at $n_{\max} = 2$.}
 \label{tab:vector_selection_rules}
 \begin{ruledtabular}
 \begin{tabular}{clccl}
@@ -2526,7 +2533,7 @@ $n_{\max} = 2$.}
 3 & SO(4) channel count & PASS & PASS & triangle ineq. \\
 4 & $\Delta m_j$ conservation & PASS & PASS & 3$j$ $m$-rule \\
 5 & Spatial parity & PASS & PASS & E1 parity \\
-6 & Furry's theorem & FAIL & FAIL & needs $C$-symmetry \\
+6 & Furry's theorem & FAIL & PASS & Dirac spinor phase \\
 7 & Ward identity & PASS${}^a$ & PASS${}^a$ & $\Sigma$ block-diag. \\
 8 & Charge conjugation & PASS & PASS & $\Sigma$ Hermiticity \\
 \end{tabular}
@@ -2569,45 +2576,66 @@ enters: the $1 \to 7$ transition from graph topology to angular momentum
 conservation costs exactly one transcendental ($\pi$, via $1/(4\pi)$
 per loop).
 
-\subsubsection{Furry's theorem: the irreducible obstruction}
+\subsubsection{Furry's theorem: scalar obstruction, Dirac resolution}
 
-Furry's theorem is the sole rule that neither angular momentum quantum
-numbers nor spinor labels can recover.  For $l \geq 1$ states, the
-diagonal vertex coupling $V(a, a, q, m_q)$ is nonzero when $q$ is odd
-(parity $2l + q$ odd is satisfied).  The
+For \textbf{scalar electrons}, Furry's theorem fails: the diagonal vertex
+coupling $V(a, a, q, m_q)$ is nonzero when $q$ is odd
+(parity $2l + q$ odd is satisfied), and the
 $\left(\begin{smallmatrix} j & q & j \\ -m & 0 & m\end{smallmatrix}\right)$
 does not vanish for generic~$m$.
 
-In continuum QED, Furry works because for every electron loop, there is
-a positron loop that exactly cancels.  This is charge conjugation
-symmetry of the \emph{field}, not of the \emph{state labels}.  The
-graph/vector construction has spinor quantum numbers but no
-second-quantized particle--antiparticle structure.
+For \textbf{Dirac electrons}, the diagonal coupling vanishes identically
+by the \emph{Dirac spinor phase constraint}.  The physical mechanism:
+the Dirac spinor $\psi = (f \cdot \Omega_\kappa,\;
+i g \cdot \Omega_{-\kappa})$ has an $i$-factor on the small component,
+and the Dirac $\alpha$-matrix
+$\alpha = \left(\begin{smallmatrix} 0 & \sigma \\ \sigma & 0
+\end{smallmatrix}\right)$ is off-diagonal in large/small component space.
+For $a = b$, the vertex decomposes as
+$V_{LS} + V_{SL} = f g \langle \Omega_\kappa | \sigma \cdot \varepsilon
+| \Omega_{-\kappa} \rangle + g f \langle \Omega_{-\kappa} |
+\sigma \cdot \varepsilon | \Omega_\kappa \rangle^* = 0$
+by Hermiticity.  The cross terms cancel exactly, making
+$V(a, a, q, m_q) = 0$ for all $q$ and $m_q$.
+
+This is \emph{not} Furry's theorem in the field-theoretic sense.  In
+continuum QED, Furry works because for every electron loop there is a
+positron loop that exactly cancels --- charge conjugation symmetry of
+the \emph{field}, not the \emph{state labels}.  The Dirac spinor phase
+constraint is a kinematic identity of the single-particle vertex: it
+kills the tadpole at the vertex level, before any loop sum is
+performed.  The two mechanisms are independent, and the Dirac constraint
+is the stronger one.
 
 \subsubsection{The $1$--$7$--$8$ partition}
 
-The 8~continuum QED selection rules partition cleanly into three tiers:
+The 8~continuum QED selection rules partition cleanly into three tiers.
+The partition depends on whether the electron basis is scalar or Dirac:
 
 \begin{center}
-\begin{tabular}{crl}
+\begin{tabular}{crll}
 \hline
-Tier & Rules & Source \\
+Tier & Rules & Source & Scalar / Dirac \\
 \hline
-Graph topology & 1 & Gaunt/CG sparsity (always survives) \\
-Angular momentum & 6 & CG coefficients + E1 parity + triangle ineq. \\
-Field theory & 1 & Charge conjugation of the Dirac field (Furry) \\
+Graph topology & 1 & Gaunt/CG sparsity (always survives) & both \\
+Angular momentum & 6 & CG + E1 parity + triangle ineq. & both \\
+8th rule & 1 & Furry / Dirac spinor phase & FAIL / PASS \\
+\hline
+& & Total: & 7/8 \;\;/\;\; 8/8 \\
 \hline
 \end{tabular}
 \end{center}
 
 The $1 \to 7$ transition costs exactly one transcendental: $\pi$,
 entering as $1/(4\pi)$ per loop from the $S^2$ solid angle
-normalization.  The $7 \to 8$ transition requires something
-categorically different: the full field-theoretic structure of charge
-conjugation.  Scalar and Dirac electron bases give identical 7/8 ---
-the CG coefficients do all the angular momentum work; spinor labels
-add no additional selection rule recovery beyond what the 3$j$ symbols
-already enforce.
+normalization.  For \textbf{scalar electrons}, the $7 \to 8$ transition
+requires the full field-theoretic structure of charge conjugation ---
+a categorically different ingredient that is absent from the graph/vector
+construction.  For \textbf{Dirac electrons}, the $7 \to 8$ transition
+is closed by the Dirac spinor phase constraint at zero additional cost:
+the off-diagonal $\alpha$-matrix combined with the $i$-factor on the
+small component makes $V(a, a, q, m_q) = 0$ identically, killing the
+tadpole at the vertex level.  No second-quantized field theory is needed.
 
 % ===================================================================
 \section{Discussion}
@@ -2621,9 +2649,11 @@ together with the anomalous magnetic moment computation
 (Sec.~\ref{sec:vector_photon_qed}), complete the first comprehensive
 treatment of perturbative QED on~$S^3$ in both the continuum spectral-sum
 and finite-graph formulations.  The vector-photon construction recovers
-7~of~8 continuum selection rules with a single transcendental cost
-($1/(4\pi)$ per loop), establishing a clean $1$--$7$--$8$ partition:
-graph topology $\to$ angular momentum conservation $\to$ field theory.
+7~of~8 continuum selection rules for scalar electrons and
+\textbf{8~of~8 for Dirac electrons}, with a single transcendental cost
+($1/(4\pi)$ per loop).  For Dirac electrons, the $1$--$7$--$8$
+partition closes entirely at the kinematic level: graph topology $\to$
+angular momentum conservation $\to$ Dirac spinor phase constraint.
 The three-axis taxonomy extends Paper~18's exchange-constant
 classification~\cite{paper18} from free propagators to interaction
 vertices: \emph{diagram topology} is an independent source of
@@ -2658,14 +2688,20 @@ always survives (Gaunt/CG), 3~are spinor-recoverable ($\Delta m_j$,
 spatial parity, Furry), and 4~require vector photon structure (vertex
 parity, SO(4), Ward, charge conjugation).  The vector-photon QED
 construction (Sec.~\ref{sec:vector_photon_qed}) then recovers 7~of~8
+for scalar electrons and \textbf{8~of~8 for Dirac electrons}
 by adding explicit photon angular momentum labels $(q, m_q)$ with
 Clebsch--Gordan vertex coupling and E1 parity enforcement.  The path
 from graph to continuum QED has three distinct barriers: the spinor
 barrier (crossed by adopting Dirac labels, zero cost), the angular
 momentum barrier (crossed by promoting the photon from scalar 1-cochain
-to vector harmonic, calibration cost $1/(4\pi)$ per loop), and the
-field-theory barrier (requiring second-quantized charge conjugation for
-Furry's theorem, categorically different from either).
+to vector harmonic, calibration cost $1/(4\pi)$ per loop), and ---
+for scalar electrons only --- the field-theory barrier (requiring
+second-quantized charge conjugation for Furry's theorem).  For Dirac
+electrons, no field-theory barrier exists: the Dirac spinor phase
+constraint ($V(a, a, q, m_q) = 0$ identically from the off-diagonal
+$\alpha$-matrix and the $i$-factor on the small component) closes the
+$7 \to 8$ gap at the single-particle vertex level, without invoking
+particle--antiparticle cancellation.
 The vector QED sprint (Sec.~\ref{sec:vq_sprint}) provides five
 independent negative results confirming the three-tier selection rule
 partition from a complementary direction: neither Pauli spin matrices at

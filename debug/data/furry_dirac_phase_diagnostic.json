@@ -1,0 +1,191 @@
+{
+  "nmax2": {
+    "original": {
+      "1_gaunt_cg_sparsity": {
+        "pass": true,
+        "sparsity": 0.975,
+        "nonzero": 20,
+        "total": 800
+      },
+      "2_gs_structural_zero": {
+        "pass": true,
+        "gs_sigma_max": 0.0
+      },
+      "3_triangle_inequality": {
+        "pass": true,
+        "violations": 0
+      },
+      "4_delta_mj": {
+        "pass": true,
+        "violations": 0
+      },
+      "5_spatial_parity": {
+        "pass": true,
+        "violations": 0
+      },
+      "6_furry_theorem": {
+        "pass": true,
+        "tadpole_max": 0.0
+      },
+      "7_ward_identity": {
+        "pass": true,
+        "ratio": 0.0
+      },
+      "8_charge_conjugation": {
+        "pass": true,
+        "is_hermitian": true,
+        "kappa_sym_max_diff": 0.16976527263135502
+      },
+      "_summary": {
+        "label": "original_nmax2",
+        "pass_count": 8,
+        "total": 8,
+        "all_pass": true
+      }
+    },
+    "modified": {
+      "1_gaunt_cg_sparsity": {
+        "pass": true,
+        "sparsity": 0.975,
+        "nonzero": 20,
+        "total": 800
+      },
+      "2_gs_structural_zero": {
+        "pass": true,
+        "gs_sigma_max": 0.0
+      },
+      "3_triangle_inequality": {
+        "pass": true,
+        "violations": 0
+      },
+      "4_delta_mj": {
+        "pass": true,
+        "violations": 0
+      },
+      "5_spatial_parity": {
+        "pass": true,
+        "violations": 0
+      },
+      "6_furry_theorem": {
+        "pass": true,
+        "tadpole_max": 0.0
+      },
+      "7_ward_identity": {
+        "pass": true,
+        "ratio": 0.0
+      },
+      "8_charge_conjugation": {
+        "pass": true,
+        "is_hermitian": true,
+        "kappa_sym_max_diff": 0.16976527263135502
+      },
+      "_summary": {
+        "label": "phase_constraint_nmax2",
+        "pass_count": 8,
+        "total": 8,
+        "all_pass": true
+      }
+    },
+    "diag_nonzero_orig": 0,
+    "diag_nonzero_mod": 0,
+    "offdiag_orig": 20,
+    "offdiag_mod": 20,
+    "sigma_max_diff": 0.0
+  },
+  "nmax3": {
+    "original": {
+      "1_gaunt_cg_sparsity": {
+        "pass": true,
+        "sparsity": 0.9656462585034014,
+        "nonzero": 404,
+        "total": 11760
+      },
+      "2_gs_structural_zero": {
+        "pass": true,
+        "gs_sigma_max": 0.0
+      },
+      "3_triangle_inequality": {
+        "pass": true,
+        "violations": 0
+      },
+      "4_delta_mj": {
+        "pass": true,
+        "violations": 0
+      },
+      "5_spatial_parity": {
+        "pass": true,
+        "violations": 0
+      },
+      "6_furry_theorem": {
+        "pass": true,
+        "tadpole_max": 0.0
+      },
+      "7_ward_identity": {
+        "pass": false,
+        "ratio": 0.5480569548717477
+      },
+      "8_charge_conjugation": {
+        "pass": true,
+        "is_hermitian": true,
+        "kappa_sym_max_diff": 0.4543494684932916
+      },
+      "_summary": {
+        "label": "original_nmax3",
+        "pass_count": 7,
+        "total": 8,
+        "all_pass": false
+      }
+    },
+    "modified": {
+      "1_gaunt_cg_sparsity": {
+        "pass": true,
+        "sparsity": 0.9656462585034014,
+        "nonzero": 404,
+        "total": 11760
+      },
+      "2_gs_structural_zero": {
+        "pass": true,
+        "gs_sigma_max": 0.0
+      },
+      "3_triangle_inequality": {
+        "pass": true,
+        "violations": 0
+      },
+      "4_delta_mj": {
+        "pass": true,
+        "violations": 0
+      },
+      "5_spatial_parity": {
+        "pass": true,
+        "violations": 0
+      },
+      "6_furry_theorem": {
+        "pass": true,
+        "tadpole_max": 0.0
+      },
+      "7_ward_identity": {
+        "pass": false,
+        "ratio": 0.5480569548717477
+      },
+      "8_charge_conjugation": {
+        "pass": true,
+        "is_hermitian": true,
+        "kappa_sym_max_diff": 0.4543494684932916
+      },
+      "_summary": {
+        "label": "phase_constraint_nmax3",
+        "pass_count": 7,
+        "total": 8,
+        "all_pass": false
+      }
+    },
+    "diag_nonzero_orig": 0,
+    "diag_nonzero_mod": 0,
+    "offdiag_orig": 404,
+    "offdiag_mod": 404,
+    "sigma_max_diff": 0.0
+  },
+  "scalar_baseline": {
+    "pass_count": 7
+  }
+}

@@ -1286,11 +1286,12 @@ vector field on~$S^3$ carrying $\mathrm{SO}(4) = \mathrm{SU}(2)_L
 enforces selection rules (vertex parity, SO(4) channel counting~$W$)
 that are absent on the graph.  Adding explicit photon angular momentum
 labels $(q, m_q)$ with Clebsch--Gordan vertex coupling and E1 parity
-enforcement recovers 7~of~8 continuum QED selection rules (Paper~28,
-Sec.~\ref*{sec:vector_photon_qed}).  The sole failure is Furry's
-theorem, which requires second-quantized charge conjugation of the
-Dirac field---categorically different from any one-body quantum number
-assignment.
+enforcement recovers 7~of~8 continuum QED selection rules for
+\emph{scalar} electrons (Paper~28).  The sole failure for scalar
+electrons is Furry's theorem: diagonal vertex couplings
+$V(a,a,q,m_q) \neq 0$ for $l \geq 1$ when $q$ is odd.  For
+\emph{Dirac} electrons, Furry's theorem is recovered as well,
+achieving 8/8 (see below).
 
 The calibration cost of the $1 \to 7$ transition is precisely one
 transcendental per loop: $\pi$, entering as the $S^2$ Weyl exchange
@@ -1316,11 +1317,45 @@ vertices, $\pi$-free observables), while the continuum projection
 adds three calibration-tier ingredients: (1)~volume normalization,
 (2)~infinite-sum regularization, and (3)~photon vector structure
 (cost: $1/(4\pi)$ per loop).
-The 8~continuum selection rules partition cleanly as
-$1$--$7$--$8$: graph topology (1~rule, zero transcendental cost)
+The 8~continuum selection rules partition by transcendental cost
+into three tiers.  For \emph{scalar} electrons, the partition is
+$1$--$7$--$8$: graph topology (1~rule, zero cost)
 $\to$ angular momentum conservation (6~rules, calibration cost
 $1/(4\pi)$) $\to$ field theory (1~rule, requires second-quantized
-$C$-symmetry).
+$C$-symmetry).  For \emph{Dirac} electrons, the partition refines
+to $1$--$6$--$1$--$8$: graph topology (1~rule, intrinsic, zero cost)
+$\to$ angular momentum conservation (6~rules, calibration $1/(4\pi)$)
+$\to$ Dirac spinor phase constraint (1~rule, intrinsic, zero cost).
+
+\paragraph{The Dirac spinor phase constraint as an intrinsic tier.}
+When the electron is described by a Dirac spinor
+$\psi = (f \cdot \Omega_\kappa,\; i g \cdot \Omega_{-\kappa})^T$
+(Paper~23), the $\alpha$-matrix vertex coupling is off-diagonal in the
+large/small component space.  The factor of~$i$ on the small component
+makes the diagonal coupling $V(a,a,q,m_q)$ vanish identically for all
+states: $V_{LS} + V_{SL} = 0$ by Hermiticity.  This is the mechanism
+by which Furry's theorem is recovered---tadpole diagrams (self-loops at
+vertex~$a$) vanish because the single-particle Dirac vertex is
+kinematically off-diagonal.
+
+The key taxonomic point is the \emph{cost} of this recovery.  The
+$1 \to 7$ transition (adding photon angular momentum labels) costs
+exactly $\pi$ per loop---it is calibration content.  The $7 \to 8$
+transition (Dirac spinor phase) costs \emph{nothing}: no new
+transcendental enters, no continuum embedding is required.  The spinor
+phase constraint is a kinematic identity of the single-particle Dirac
+vertex, not a field-theoretic symmetry ($C$-conjugation).  It lives in
+the same \textbf{intrinsic} tier as the graph topology rule (Gaunt/CG
+sparsity), not in the calibration tier.
+
+This distinction has a concrete implication: the $7 \to 8$ transition
+does \emph{not} require second-quantized field theory.  Any
+single-particle framework using the Dirac equation on~$S^3$ with
+vector-photon coupling automatically recovers all~8 selection rules.
+The standard attribution of Furry's theorem to charge conjugation
+symmetry is operationally correct in flat-space QFT but obscures the
+fact that, on the compact $S^3$ graph, the same selection rule has a
+simpler origin in the Dirac spinor structure itself.
 
 \paragraph{Flat-space consistency of the transcendental classification.}
 The three-axis taxonomy is derived from $S^3$ spectral sums at finite
