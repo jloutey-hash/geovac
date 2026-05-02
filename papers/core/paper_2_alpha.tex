@@ -1084,6 +1084,27 @@ geometry. If Link~3 can be closed, the mechanism likely involves the
 representation theory of $SO(4)$ rather than the analysis of smooth
 differential operators.
 
+\textit{Connes--Chamseddine spectral action.}
+The Dirac heat kernel on unit~$S^3$ has a Seeley--DeWitt expansion
+that terminates at exactly two terms (by the Jacobi theta modular
+identity): $K(t) = (\sqrt{\pi}/2)\,t^{-3/2}
+- (\sqrt{\pi}/4)\,t^{-1/2} + O(e^{-\pi^2/t})$, all $a_k = 0$ for
+$k \geq 2$.  Setting
+$\operatorname{Tr} e^{-D^2/\Lambda^2} = K/\pi$ gives the depressed
+cubic $2\Lambda^3 - \Lambda = 4(K/\pi)/\sqrt{\pi}$ with Cardano
+closed form
+$\Lambda = \sqrt[3]{A + \sqrt{A^2 - 1/216}}
++ \sqrt[3]{A - \sqrt{A^2 - 1/216}}$,
+$A = 2(B + F - \Delta)/\sqrt{\pi}$, yielding
+$\Lambda_\infty = 3.710245\ldots$ (50~dps).
+A sharp cutoff at this~$\Lambda$ includes exactly
+$40 = \Delta^{-1}$~modes, connecting the spectral action to the
+Euler--Maclaurin boundary reading above.  However, the CC framework
+provides the exact functional form but \emph{not} a mechanism to
+fix~$\Lambda$: any target~$T$ has a unique real root (IVT +
+monotonicity), so the match is tautological.  This confirms
+rather than closes the Link~3 gap.
+
 \textbf{Link~4} (partial): The cubic form arises naturally from
 $\mathbb{Z}_3$-symmetric coupling, and the $SU(2)$ structure constants
 share this symmetry. But no derivation connects the Hopf bundle to the
@@ -1391,7 +1412,10 @@ Hopf fibration geometry is an open question.
 \begin{enumerate}
 \item \textit{Derive the combination rule} from a path integral or
   spectral determinant identity on the Hopf bundle. This is the
-  critical gap (Link~3 in Table~\ref{tab:chain}).
+  critical gap (Link~3 in Table~\ref{tab:chain}).  The
+  Connes--Chamseddine spectral action on continuum~$S^3$ provides an
+  exact depressed cubic with Cardano closed form but does not select
+  the cutoff~$\Lambda$ autonomously (see Sec.~VII).
 
 \item \textit{Connect the $\mathbb{Z}_3$ circulant} to the
   differential geometry of the Hopf connection. The $SU(2)$ structure
