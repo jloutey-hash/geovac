@@ -382,6 +382,8 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 | Paper 28 | On-topic | QED on S³ (v2.1): 5 theorems (T9, parity discriminant, χ_{-4} identity, self-energy structural zero, ζ(3) complementarity) + depth-k tower proposition + 2 observations (Euler sum cancellation, product survival rule); D₅/D₆ Sommerfeld sums; K-Sommerfeld structural separation; S_min at 200 digits irreducible; three-loop O(N³) factorization |
 | Paper 29 | On-topic | Ihara zeta, Ramanujan property, graph-RH for the GeoVac Hopf graphs, per-ℓ-shell decomposition, 12+22 factorization, Wick-rotation scope boundary on Selberg-on-hydrogen |
 | Paper 30 | On-topic | SU(2) Wilson lattice gauge on S^3=SU(2); maximal-torus reduction to Paper 25 U(1); L_1=B^TB as weak-coupling kinetic term; five-action-structure synthesis |
+| Paper 32 | On-topic | Synthesis: GeoVac spectral triple (A_GV, H_GV, D_GV) constructed explicitly; Connes axiom audit (real, odd, KO-dim 3); Marcolli–vS gauge-network lineage; Papers 25/28/30/31 read as projections of one triple; three-sector reading of K = π(B+F−Δ). |
+| Paper 33 | On-topic | Observation: 1+6+1 partition of QED selection rules. 1 graph-topological + 6 angular-momentum (recovered by vector-photon promotion at 1/(4π) per loop) + 1 Dirac-kinematic (Furry from spinor phase constraint, NOT C-symmetry). Independent of α conjecture. |
 
 ### Paper Inventory
 
@@ -442,6 +444,7 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 |:------|:-----|:-----------|
 | Paper 21 | `paper_21_geometric_vacuum_synthesis.tex` | Synthesis: S³ proof chain, N-electron S^(3N-1), exchange constant taxonomy, 6j recoupling sparsity, Hopf α conjecture, atomic spectra research program |
 | Paper 25 | `paper_25_hopf_gauge_structure.tex` | Synthesis observation: GeoVac Hopf graph as a discrete lattice-gauge structure. Node Laplacian = matter propagator; edge Laplacian L₁ = B^T B = discrete Hodge-1 = gauge propagator (Paper 2 reading). Hopf quotient S³→S² yields base graph of Phase 4B α-D. Places Paper 2's (B, F, Δ) as Casimir-weighted S² matter trace / infinite Fock-Dirichlet gauge zeta / Dirac-boundary mode count. No new α claim; Paper 2 unchanged. |
+| Paper 32 | `paper_32_spectral_triple.tex` | Synthesis: explicit construction of the GeoVac spectral triple (A_GV, H_GV, D_GV) on the Fock-projected S³ graph. Connes axiom audit (real, odd, KO-dim 3). Marcolli–vS gauge-network lineage placement. Reads Papers 25/28/30/31 as projections of the same triple. Three-sector reading of K = π(B + F − Δ) as sum across categorically different sectors (finite Casimir trace + infinite scalar Dirichlet + single-level Dirac degeneracy). Does not derive α; locks WH1 framing in. |
 
 #### Observations (`papers/observations/`)
 
@@ -452,6 +455,7 @@ Papers are grouped by how frequently they need to be in a sub-agent's context. *
 | Paper 28 | `paper_28_qed_s3.tex` | QED on S³ (v2.1): 5 theorems + 1 proposition + 2 observations; self-energy structural zero; S_min at 200 digits irreducible; three-loop O(N³) factorization; depth-k tower; D₅/D₆ Sommerfeld sums and product survival rule; K-Sommerfeld structural separation (K not in Q-span of D_p); comprehensive tables. *Note: c₂ = (2-BΔ-FΔ-F/B)/5 listed in §curvature_coefficients is a PSLQ pattern-match flagged in `docs/curve_fit_audit_memo.md` — pending demotion edit per audit EDIT-1.* |
 | Paper 29 | `paper_29_ramanujan_hopf.tex` | GeoVac Hopf graphs are Ramanujan: Ihara zeta, graph-RH, scope boundary on Selberg-on-hydrogen |
 | Paper 30 | `paper_30_su2_wilson.tex` | SU(2) Wilson lattice gauge on the Hopf graph — non-abelian sibling of Paper 25; maximal-torus reduction; L_1 as kinetic term; framework-wide least-action synthesis |
+| Paper 33 | `paper_33_qed_selection_rules.tex` | The 1+6+1 partition of QED selection rules on S³: 1 graph-topological (Gaunt/CG, Tier I, free) + 6 angular-momentum (Tier II, recovered by vector-photon promotion at cost 1/(4π) per loop = S² Weyl exchange constant of Hopf base) + 1 Dirac-kinematic (Furry's theorem from single-particle spinor phase constraint, Tier III, zero cost). Scalar Fock 1/8 → Dirac graph 4/8 → vector photon (scalar) 7/8 → vector photon (Dirac) 8/8. Furry mechanism is single-particle, NOT second-quantized C-symmetry. Independent of Paper 2 conjecture. |
 
 #### Conjectures (`papers/conjectures/`)
 
@@ -1265,6 +1269,20 @@ After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
 | Furry's theorem: scalar obstruction, Dirac resolution | 28 | §vector_photon_qed | Observation |
 | Dirac spinor phase constraint (V(a,a)=0) | 28 | §vector_photon_qed | Observation |
 | Scalar 7/8 vs Dirac 8/8 selection rules (vector QED) | 28 | §vector_photon_qed | Observation |
+| GeoVac spectral triple (A_GV, H_GV, D_GV) construction | 32 | Sec III | Synthesis |
+| Connes axiom audit (real, odd, KO-dim 3) | 32 | Sec IV | Synthesis |
+| Marcolli–vS gauge-network lineage placement (WH1) | 32 | Sec VII | Synthesis |
+| Papers 25/28/30/31 as triple sub-sectors | 32 | Sec V | Synthesis |
+| Three-sector reading of K = π(B+F−Δ) | 32 | Sec VI | Synthesis |
+| Coulomb/HO asymmetry in spectral-triple language | 32 | Sec VI | Synthesis |
+| 1+6+1 QED selection rule partition theorem | 33 | Sec V | Observation |
+| Tier I (graph-topological) selection rules | 33 | Sec II | Observation |
+| Tier II (angular-momentum, vector photon promotion) | 33 | Sec IV | Observation |
+| Tier III (Dirac kinematic, Furry) | 33 | Sec IV.C | Observation |
+| 1/(4π) per-loop calibration as S² Weyl exchange constant | 33 | Sec VI | Observation |
+| Furry from single-particle Dirac spinor phase (not C-symmetry) | 33 | Sec IV.C, Remark 1 | Observation |
+| Pendant-edge theorem (graph-native baseline GS nonzero) | 33 | Sec II.A | Observation |
+| Selection-rule census across four construction tiers | 33 | Table 2 | Observation |
 
 ---
 
