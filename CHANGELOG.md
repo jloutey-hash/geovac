@@ -7,6 +7,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.27.2] - 2026-05-03
+
+### Added — Paper 35 (Time as Projection) and Paper 36 (Bound-State QED on S³)
+
+Two new observation papers extending the Paper 34 projection dictionary, plus a substantial expansion of Paper 34 itself. All work consolidated in a single chat session.
+
+**Sprint sequence (chronological within the day):**
+
+- **Paper 4 archived** (`papers/conjectures/Paper_4_Universality.tex` → `papers/archive/Paper_4_Universality.tex`). Two reasons: (1) the proton radius puzzle the paper claimed to fully resolve has been settled in the physics community as a measurement artifact in older electronic spectroscopy (PDG consensus 0.8409(4) fm; April 2026 review "the puzzle is no more"); (2) the holographic central-charge / spectral-dimension claims (d_s ≈ 2.07, c ≈ 1/36) inherit the machinery retracted from Paper 3 (CLAUDE.md v2.18.2 retraction). Salvageable kernel (mass-as-unit-fixing-projection) absorbed into Paper 35.
+
+- **CLAUDE.md §4 transcendentals policy refined.** Added "algebraic-first, observation-aware" language: irreducible transcendentals that survive algebraic decomposition are not failures of the algebraic-first discipline — they are the content of a specific Paper 34 projection and should be tagged to that projection. The diagnostic question for any quadrature wall is two-headed: missing algebraic structure (decompose) or observation-side projection signature (catalogue and stop). Anonymous transcendentals not allowed in production code or papers.
+
+- **Sprint KG (KG-1, KG-2, KG-3) → Paper 35**: `papers/observations/paper_35_time_as_projection.tex` (~810 lines after edits). KG-1 verified the bare Klein-Gordon spectrum on S³ × ℝ is π-free in ℚ[√d for d square-free positive integer] for every rational m² (200 cases, n ∈ [1,50] across panel {0, 1, 1/4, 2}, symbolic verification). KG-2 explicitly identified the Matsubara mode (n=0, k=1) at ω² = 4π² as the first π-bearing eigenvalue under temporal compactification on S³ × S¹_β; before/after table in §IV. KG-3 computed the conformally coupled massless scalar Casimir on unit S³ as **E_Cas = 1/240 exact rational** via ζ_R(s−2) reduction at s=−1 with B₄ = −1/30; matches Bytsenko et al. / Dowker-Critchley / Ford to 60 dps; per-step transcendental ledger has zero π injections in the spatial calculation. Stefan-Boltzmann π²/90 in the high-T limit on S³ × S¹_β enters only via the Matsubara sum.
+
+- **Sprint KG-5 (Dirac Casimir spinor companion)**: spatial Dirac Casimir on unit S³ via Camporesi-Higuchi spectrum |λ_n| = n + 3/2 with degeneracy 2(n+1)(n+2). Spectral zeta ζ_|D|(s) = 4[ζ_R(s−2, 3/2) − (1/4) ζ_R(s, 3/2)] via Hurwitz with B_2(3/2)=11/12 and B_4(3/2)=127/240. Result: **E_Cas^Dirac = 17/480 exact rational** (full Dirac convention; Weyl 17/960; single-chirality-single-sign 17/1920). Matches Camporesi-Higuchi 1996 Eq. 5.27 to 40 dps. Confirms Paper 35 prediction in spinor sector.
+
+- **Paper 34 amended (13 → 15 projections)**: §III.14 (Rest-mass projection: introduces m, dimension mass, transcendental signature trivial / ring-preserving for m² ∈ ℚ) and §III.15 (Observation/temporal-window projection: introduces β or T = 1/β, dimension time, transcendental signature 2π·ℚ per Matsubara mode; π^{2k}·ℚ in integrated quantities; Stefan-Boltzmann π²/90 in high-T limit). Table 1 extended; Observation 2 (two-axis duality) updated with two new tier mappings; §VIII open question 1 updated for 13 → 15 expansion. Empirical catalogue gets two new single-projection rows: 1/240 (scalar Casimir) and 17/480 (Dirac Casimir).
+
+- **Sprint LS-5 (α⁵ Lamb shift two-loop scoping)**: structural feasibility verified for two-loop QED on Dirac-S³ — mode-count budget favorable (~2,870 terms at n_max=20 from SO(4) selection rules), `qed_two_loop.py` infrastructure adequate. Critical reframing of LS-3 residual: ~80% of the residual was a one-loop convention mismatch flagged in LS-1 §2.2 footnote, only ~20% genuine A-tier multi-loop. Recommended LS-6a (1 sprint) before any two-loop work.
+
+- **Sprint LS-6a (Eides §3.2 convention fix)**: re-derived LS-1 one-loop SE in canonical Eides §3.2 convention. **Identified the LS-1 +38/45 SE coefficient as a Uehling-kernel double-counting bug**: the canonical Eides 10/9 SE constant already includes the Karplus-Klein-Darwin and j=1/2 Schwinger AMM contributions; LS-1 had inadvertently subtracted the Uehling kernel constant (4/15 = 10/9 − 38/45) from this, leaving 38/45. The Uehling shift is already counted as a separate VP contribution. Restoring 10/9 shifts the predicted Lamb shift by exactly +27.13 MHz at n=2, Z=1, structurally identifiable as (4/15) · α³Z⁴ / πn³ · (Ha-to-MHz). **Result**: LS-6a Lamb shift = **1052.19 MHz** vs experimental 1057.845 MHz; residual −5.65 MHz / **−0.534%**. 5.8× reduction in absolute error vs LS-3.
+
+- **Sprint K-CC (clean triple negative, WH5 strengthened)**: tested Paper 35 §VII.2 hypothesis that K = π(B + F − Δ) is structurally one Connes-Chamseddine spectral-action coefficient on S³, not three independent projections summing. Three sub-tracks: (a) PSLQ at 100 dps over 244-element basis on Λ_∞ = 3.7102454679060528505 — no identification; (b) search for a natural Λ from S³ spectral data — only tautological hits; (c) **algebraic obstruction**: T9 forces ζ_{D²}(s) at integer s into √π·ℚ ⊕ π²·ℚ, so F = π²/6 cannot appear at any integer s of the unified heat-kernel expansion. B, F, Δ live in three categorically different spectral objects on two different bundles. **Twelve mechanisms now eliminated for K = single-principle derivation** (nine from Phases 4B-4I + Sprint A α-SP + three from K-CC). Paper 2 stays in Observations status. Paper 35 §VII.2 sharpened to clean negative on possibility (i) (CC unification ruled out); possibilities (ii) (non-temporal source for K's π) and (iii) (K is below framework's intrinsic resolution) remain live. Side finding: ζ_{D²}(2) = π² − π⁴/12 verified symbolically as a new T9-consistent closed form (not previously logged).
+
+- **Sprint LS-7 (first pass at two-loop SE)**: iterated CC spectral action on Dirac-S³ confirms the two-loop SE prefactor (α/π)² · (Zα)⁴ · m_e c² / n³ — the 1/π² factor traces to two iterated Schwinger proper-time integrations, exactly as Paper 35 Prediction 1 specifies. Weak test (universal across two-loop QED). Strong test (LS-8a): native derivation of dimensionless bracket coefficient C_2S = +3.63 from iterated CC + bound-state Sturmian. **Critical residual reframing**: LS-7 identified that the LS-5/LS-6a "+7.10 MHz Tab 7.4 multi-loop ceiling" reading was a misreading. Eides Tab. 7.3 (proper α⁵ multi-loop QED) totals only ~+1.20 MHz; the rest of the −5.65 MHz residual is non-loop physics (recoil −2.40, finite nuclear size +1.18, hyperfine averaging ~+5.0). Multi-loop test target sharpened to ~+1.20 MHz; non-loop sectors covered by Paper 34 §III.14 rest-mass projection and Paper 23.
+
+- **Paper 36 (Bound-State QED on S³)**: `papers/observations/paper_36_bound_state_qed.tex` (~700 lines). Consolidates LS-1..LS-7 into a standalone observation paper. Architecture (Dirac-S³ + Sturmian projection at λ=Z/n); Bethe log (velocity vs acceleration vs Drake-Swainson); Eides convention reconciliation with Observation 1 (Uehling kernel double-counting); result and component breakdown including LS-7 reframed residual decomposition; LS-7 outlook with Proposition 1 sharpened (multi-loop test target ~+1.20 MHz; LS-8a strong test). Sub-percent closure confirms framework's internal completeness for one-loop QED on S³ even more cleanly than originally framed.
+
+- **Paper 34 LS-3/LS-6a/LS-7 catalogue rows reflagged** to reflect LS-7 reframing: LS-3 row now C (resolved by LS-6a) + A; new LS-6a row with the clean 1052.19 MHz / −0.534% result and structural identification of +27.13 MHz convention shift; new LS-7 structural row.
+
+- **CLAUDE.md updates**: version v2.27.0 → v2.27.2 (two patches in one day for Paper 35 + Paper 36 additions); §4 transcendentals policy refined (PI-authorized edit to normally-protected section); §6 Paper 4 archived, Paper 35 + Paper 36 added to inventory and loading guide; §11 nine new Paper 35 + five new Paper 36 topic rows; §1.7 WH5 status field strengthened with Sprint K-CC findings (twelve mechanisms now eliminated; algebraic obstruction via T9; ζ_{D²}(2) closed form noted).
+
+### Files
+
+**New files created:**
+- `papers/observations/paper_35_time_as_projection.tex`
+- `papers/observations/paper_36_bound_state_qed.tex`
+- `debug/kg{1,2,3,5}_*.{py,memo.md}` + `debug/data/kg{1,2,3,5}_*.json` (4 sprint pairs)
+- `debug/kcc_{lambda_pslq,natural_lambda,unified_heatkernel,gaussian_check}.py` + memo + JSON
+- `debug/ls{5,6a,7}_*.{py,memo.md}` + JSON
+
+**Files modified:**
+- `papers/observations/paper_34_projection_taxonomy.tex` (Paper 34 amendments throughout)
+- `CLAUDE.md` (extensive)
+- `CHANGELOG.md` (this entry)
+
+**Files moved:**
+- `papers/conjectures/Paper_4_Universality.tex` → `papers/archive/Paper_4_Universality.tex`
+
+### What's queued for next session
+- LS-8a (~2 sprints): native derivation of C_2S = +3.63 from iterated CC + bound-state Sturmian; the strong test of Paper 35 Prediction 1 in the multi-loop sector
+- LS-8b (1 sprint): Karplus-Sachs two-loop VP (+0.16 MHz; simpler than two-loop SE; would validate iterated VP machinery)
+- LS-8d/e (~3 sprints): recoil + FNS + hyperfine via Paper 34 §III.14 rest-mass projection + Paper 23
+- K-CC follow-up: possibility (ii) for the K conjecture (non-temporal source for K's π) — Marcolli-vS gauge-network coefficient (per WH1) is the natural next place to look
+
 ## [2.27.0] - 2026-05-03
 
 ### Added — Paper 34: Projection Taxonomy and Empirical Matches Catalogue

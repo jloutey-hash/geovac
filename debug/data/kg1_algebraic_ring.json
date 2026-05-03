@@ -1,0 +1,1886 @@
+{
+  "script": "kg1_algebraic_ring.py",
+  "headline": {
+    "union_squarefree_generators_rational_panel": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      10,
+      11,
+      13,
+      14,
+      15,
+      17,
+      23,
+      26,
+      30,
+      33,
+      34,
+      35,
+      37,
+      38,
+      39,
+      41,
+      42,
+      47,
+      51,
+      61,
+      65,
+      73,
+      74,
+      82,
+      87,
+      95,
+      97,
+      101,
+      105,
+      110,
+      122,
+      138,
+      141,
+      143,
+      145,
+      170,
+      182,
+      193,
+      195,
+      197,
+      210,
+      215,
+      226,
+      235,
+      253,
+      255,
+      257,
+      290,
+      321,
+      323,
+      362,
+      397,
+      399,
+      401,
+      442,
+      462,
+      481,
+      483,
+      485,
+      506,
+      530,
+      573,
+      577,
+      626,
+      673,
+      677,
+      730,
+      781,
+      785,
+      842,
+      897,
+      899,
+      901,
+      962,
+      1021,
+      1023,
+      1090,
+      1153,
+      1155,
+      1157,
+      1226,
+      1293,
+      1295,
+      1297,
+      1370,
+      1441,
+      1443,
+      1522,
+      1597,
+      1599,
+      1601,
+      1761,
+      1763,
+      1765,
+      1933,
+      1937,
+      2026,
+      2113,
+      2117,
+      2210,
+      2301,
+      2305,
+      2402,
+      2497,
+      2501,
+      2602,
+      2701,
+      2913,
+      3133,
+      3361,
+      3597,
+      3841,
+      4093,
+      4353,
+      4621,
+      4897,
+      5181,
+      5473,
+      5773,
+      6081,
+      6397,
+      6721,
+      7053,
+      7393,
+      7741,
+      8097,
+      8461,
+      9213,
+      9601,
+      9997,
+      10401
+    ],
+    "any_rational_m2_contains_transcendental": false,
+    "irrational_m2_first_break_n": {
+      "1/pi": 1,
+      "sqrt(2)": 1
+    }
+  },
+  "rational_panel": [
+    {
+      "m2": "0",
+      "n_max": 50,
+      "squarefree_generators": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        10,
+        11,
+        14,
+        15,
+        17,
+        23,
+        26,
+        30,
+        33,
+        34,
+        35,
+        38,
+        39,
+        42,
+        47,
+        51,
+        87,
+        95,
+        105,
+        110,
+        138,
+        143,
+        182,
+        195,
+        210,
+        215,
+        235,
+        255,
+        323,
+        399,
+        462,
+        483,
+        506,
+        899,
+        1023,
+        1155,
+        1295,
+        1443,
+        1599,
+        1763
+      ],
+      "contains_transcendental": false,
+      "rows": [
+        {
+          "n": 1,
+          "omega2_sym": "3",
+          "omega_sym": "sqrt(3)",
+          "rational_coeff": "1",
+          "squarefree_d": 3
+        },
+        {
+          "n": 2,
+          "omega2_sym": "8",
+          "omega_sym": "2*sqrt(2)",
+          "rational_coeff": "2",
+          "squarefree_d": 2
+        },
+        {
+          "n": 3,
+          "omega2_sym": "15",
+          "omega_sym": "sqrt(15)",
+          "rational_coeff": "1",
+          "squarefree_d": 15
+        },
+        {
+          "n": 4,
+          "omega2_sym": "24",
+          "omega_sym": "2*sqrt(6)",
+          "rational_coeff": "2",
+          "squarefree_d": 6
+        },
+        {
+          "n": 5,
+          "omega2_sym": "35",
+          "omega_sym": "sqrt(35)",
+          "rational_coeff": "1",
+          "squarefree_d": 35
+        },
+        {
+          "n": 6,
+          "omega2_sym": "48",
+          "omega_sym": "4*sqrt(3)",
+          "rational_coeff": "4",
+          "squarefree_d": 3
+        },
+        {
+          "n": 7,
+          "omega2_sym": "63",
+          "omega_sym": "3*sqrt(7)",
+          "rational_coeff": "3",
+          "squarefree_d": 7
+        },
+        {
+          "n": 8,
+          "omega2_sym": "80",
+          "omega_sym": "4*sqrt(5)",
+          "rational_coeff": "4",
+          "squarefree_d": 5
+        },
+        {
+          "n": 9,
+          "omega2_sym": "99",
+          "omega_sym": "3*sqrt(11)",
+          "rational_coeff": "3",
+          "squarefree_d": 11
+        },
+        {
+          "n": 10,
+          "omega2_sym": "120",
+          "omega_sym": "2*sqrt(30)",
+          "rational_coeff": "2",
+          "squarefree_d": 30
+        },
+        {
+          "n": 11,
+          "omega2_sym": "143",
+          "omega_sym": "sqrt(143)",
+          "rational_coeff": "1",
+          "squarefree_d": 143
+        },
+        {
+          "n": 12,
+          "omega2_sym": "168",
+          "omega_sym": "2*sqrt(42)",
+          "rational_coeff": "2",
+          "squarefree_d": 42
+        },
+        {
+          "n": 13,
+          "omega2_sym": "195",
+          "omega_sym": "sqrt(195)",
+          "rational_coeff": "1",
+          "squarefree_d": 195
+        },
+        {
+          "n": 14,
+          "omega2_sym": "224",
+          "omega_sym": "4*sqrt(14)",
+          "rational_coeff": "4",
+          "squarefree_d": 14
+        },
+        {
+          "n": 15,
+          "omega2_sym": "255",
+          "omega_sym": "sqrt(255)",
+          "rational_coeff": "1",
+          "squarefree_d": 255
+        },
+        {
+          "n": 16,
+          "omega2_sym": "288",
+          "omega_sym": "12*sqrt(2)",
+          "rational_coeff": "12",
+          "squarefree_d": 2
+        },
+        {
+          "n": 17,
+          "omega2_sym": "323",
+          "omega_sym": "sqrt(323)",
+          "rational_coeff": "1",
+          "squarefree_d": 323
+        },
+        {
+          "n": 18,
+          "omega2_sym": "360",
+          "omega_sym": "6*sqrt(10)",
+          "rational_coeff": "6",
+          "squarefree_d": 10
+        },
+        {
+          "n": 19,
+          "omega2_sym": "399",
+          "omega_sym": "sqrt(399)",
+          "rational_coeff": "1",
+          "squarefree_d": 399
+        },
+        {
+          "n": 20,
+          "omega2_sym": "440",
+          "omega_sym": "2*sqrt(110)",
+          "rational_coeff": "2",
+          "squarefree_d": 110
+        },
+        {
+          "n": 21,
+          "omega2_sym": "483",
+          "omega_sym": "sqrt(483)",
+          "rational_coeff": "1",
+          "squarefree_d": 483
+        },
+        {
+          "n": 22,
+          "omega2_sym": "528",
+          "omega_sym": "4*sqrt(33)",
+          "rational_coeff": "4",
+          "squarefree_d": 33
+        },
+        {
+          "n": 23,
+          "omega2_sym": "575",
+          "omega_sym": "5*sqrt(23)",
+          "rational_coeff": "5",
+          "squarefree_d": 23
+        },
+        {
+          "n": 24,
+          "omega2_sym": "624",
+          "omega_sym": "4*sqrt(39)",
+          "rational_coeff": "4",
+          "squarefree_d": 39
+        },
+        {
+          "n": 25,
+          "omega2_sym": "675",
+          "omega_sym": "15*sqrt(3)",
+          "rational_coeff": "15",
+          "squarefree_d": 3
+        },
+        {
+          "n": 26,
+          "omega2_sym": "728",
+          "omega_sym": "2*sqrt(182)",
+          "rational_coeff": "2",
+          "squarefree_d": 182
+        },
+        {
+          "n": 27,
+          "omega2_sym": "783",
+          "omega_sym": "3*sqrt(87)",
+          "rational_coeff": "3",
+          "squarefree_d": 87
+        },
+        {
+          "n": 28,
+          "omega2_sym": "840",
+          "omega_sym": "2*sqrt(210)",
+          "rational_coeff": "2",
+          "squarefree_d": 210
+        },
+        {
+          "n": 29,
+          "omega2_sym": "899",
+          "omega_sym": "sqrt(899)",
+          "rational_coeff": "1",
+          "squarefree_d": 899
+        },
+        {
+          "n": 30,
+          "omega2_sym": "960",
+          "omega_sym": "8*sqrt(15)",
+          "rational_coeff": "8",
+          "squarefree_d": 15
+        },
+        {
+          "n": 31,
+          "omega2_sym": "1023",
+          "omega_sym": "sqrt(1023)",
+          "rational_coeff": "1",
+          "squarefree_d": 1023
+        },
+        {
+          "n": 32,
+          "omega2_sym": "1088",
+          "omega_sym": "8*sqrt(17)",
+          "rational_coeff": "8",
+          "squarefree_d": 17
+        },
+        {
+          "n": 33,
+          "omega2_sym": "1155",
+          "omega_sym": "sqrt(1155)",
+          "rational_coeff": "1",
+          "squarefree_d": 1155
+        },
+        {
+          "n": 34,
+          "omega2_sym": "1224",
+          "omega_sym": "6*sqrt(34)",
+          "rational_coeff": "6",
+          "squarefree_d": 34
+        },
+        {
+          "n": 35,
+          "omega2_sym": "1295",
+          "omega_sym": "sqrt(1295)",
+          "rational_coeff": "1",
+          "squarefree_d": 1295
+        },
+        {
+          "n": 36,
+          "omega2_sym": "1368",
+          "omega_sym": "6*sqrt(38)",
+          "rational_coeff": "6",
+          "squarefree_d": 38
+        },
+        {
+          "n": 37,
+          "omega2_sym": "1443",
+          "omega_sym": "sqrt(1443)",
+          "rational_coeff": "1",
+          "squarefree_d": 1443
+        },
+        {
+          "n": 38,
+          "omega2_sym": "1520",
+          "omega_sym": "4*sqrt(95)",
+          "rational_coeff": "4",
+          "squarefree_d": 95
+        },
+        {
+          "n": 39,
+          "omega2_sym": "1599",
+          "omega_sym": "sqrt(1599)",
+          "rational_coeff": "1",
+          "squarefree_d": 1599
+        },
+        {
+          "n": 40,
+          "omega2_sym": "1680",
+          "omega_sym": "4*sqrt(105)",
+          "rational_coeff": "4",
+          "squarefree_d": 105
+        },
+        {
+          "n": 41,
+          "omega2_sym": "1763",
+          "omega_sym": "sqrt(1763)",
+          "rational_coeff": "1",
+          "squarefree_d": 1763
+        },
+        {
+          "n": 42,
+          "omega2_sym": "1848",
+          "omega_sym": "2*sqrt(462)",
+          "rational_coeff": "2",
+          "squarefree_d": 462
+        },
+        {
+          "n": 43,
+          "omega2_sym": "1935",
+          "omega_sym": "3*sqrt(215)",
+          "rational_coeff": "3",
+          "squarefree_d": 215
+        },
+        {
+          "n": 44,
+          "omega2_sym": "2024",
+          "omega_sym": "2*sqrt(506)",
+          "rational_coeff": "2",
+          "squarefree_d": 506
+        },
+        {
+          "n": 45,
+          "omega2_sym": "2115",
+          "omega_sym": "3*sqrt(235)",
+          "rational_coeff": "3",
+          "squarefree_d": 235
+        },
+        {
+          "n": 46,
+          "omega2_sym": "2208",
+          "omega_sym": "4*sqrt(138)",
+          "rational_coeff": "4",
+          "squarefree_d": 138
+        },
+        {
+          "n": 47,
+          "omega2_sym": "2303",
+          "omega_sym": "7*sqrt(47)",
+          "rational_coeff": "7",
+          "squarefree_d": 47
+        },
+        {
+          "n": 48,
+          "omega2_sym": "2400",
+          "omega_sym": "20*sqrt(6)",
+          "rational_coeff": "20",
+          "squarefree_d": 6
+        },
+        {
+          "n": 49,
+          "omega2_sym": "2499",
+          "omega_sym": "7*sqrt(51)",
+          "rational_coeff": "7",
+          "squarefree_d": 51
+        },
+        {
+          "n": 50,
+          "omega2_sym": "2600",
+          "omega_sym": "10*sqrt(26)",
+          "rational_coeff": "10",
+          "squarefree_d": 26
+        }
+      ]
+    },
+    {
+      "m2": "1",
+      "n_max": 50,
+      "squarefree_generators": [],
+      "contains_transcendental": false,
+      "rows": [
+        {
+          "n": 1,
+          "omega2_sym": "4",
+          "omega_sym": "2",
+          "rational_coeff": "2",
+          "squarefree_d": 1
+        },
+        {
+          "n": 2,
+          "omega2_sym": "9",
+          "omega_sym": "3",
+          "rational_coeff": "3",
+          "squarefree_d": 1
+        },
+        {
+          "n": 3,
+          "omega2_sym": "16",
+          "omega_sym": "4",
+          "rational_coeff": "4",
+          "squarefree_d": 1
+        },
+        {
+          "n": 4,
+          "omega2_sym": "25",
+          "omega_sym": "5",
+          "rational_coeff": "5",
+          "squarefree_d": 1
+        },
+        {
+          "n": 5,
+          "omega2_sym": "36",
+          "omega_sym": "6",
+          "rational_coeff": "6",
+          "squarefree_d": 1
+        },
+        {
+          "n": 6,
+          "omega2_sym": "49",
+          "omega_sym": "7",
+          "rational_coeff": "7",
+          "squarefree_d": 1
+        },
+        {
+          "n": 7,
+          "omega2_sym": "64",
+          "omega_sym": "8",
+          "rational_coeff": "8",
+          "squarefree_d": 1
+        },
+        {
+          "n": 8,
+          "omega2_sym": "81",
+          "omega_sym": "9",
+          "rational_coeff": "9",
+          "squarefree_d": 1
+        },
+        {
+          "n": 9,
+          "omega2_sym": "100",
+          "omega_sym": "10",
+          "rational_coeff": "10",
+          "squarefree_d": 1
+        },
+        {
+          "n": 10,
+          "omega2_sym": "121",
+          "omega_sym": "11",
+          "rational_coeff": "11",
+          "squarefree_d": 1
+        },
+        {
+          "n": 11,
+          "omega2_sym": "144",
+          "omega_sym": "12",
+          "rational_coeff": "12",
+          "squarefree_d": 1
+        },
+        {
+          "n": 12,
+          "omega2_sym": "169",
+          "omega_sym": "13",
+          "rational_coeff": "13",
+          "squarefree_d": 1
+        },
+        {
+          "n": 13,
+          "omega2_sym": "196",
+          "omega_sym": "14",
+          "rational_coeff": "14",
+          "squarefree_d": 1
+        },
+        {
+          "n": 14,
+          "omega2_sym": "225",
+          "omega_sym": "15",
+          "rational_coeff": "15",
+          "squarefree_d": 1
+        },
+        {
+          "n": 15,
+          "omega2_sym": "256",
+          "omega_sym": "16",
+          "rational_coeff": "16",
+          "squarefree_d": 1
+        },
+        {
+          "n": 16,
+          "omega2_sym": "289",
+          "omega_sym": "17",
+          "rational_coeff": "17",
+          "squarefree_d": 1
+        },
+        {
+          "n": 17,
+          "omega2_sym": "324",
+          "omega_sym": "18",
+          "rational_coeff": "18",
+          "squarefree_d": 1
+        },
+        {
+          "n": 18,
+          "omega2_sym": "361",
+          "omega_sym": "19",
+          "rational_coeff": "19",
+          "squarefree_d": 1
+        },
+        {
+          "n": 19,
+          "omega2_sym": "400",
+          "omega_sym": "20",
+          "rational_coeff": "20",
+          "squarefree_d": 1
+        },
+        {
+          "n": 20,
+          "omega2_sym": "441",
+          "omega_sym": "21",
+          "rational_coeff": "21",
+          "squarefree_d": 1
+        },
+        {
+          "n": 21,
+          "omega2_sym": "484",
+          "omega_sym": "22",
+          "rational_coeff": "22",
+          "squarefree_d": 1
+        },
+        {
+          "n": 22,
+          "omega2_sym": "529",
+          "omega_sym": "23",
+          "rational_coeff": "23",
+          "squarefree_d": 1
+        },
+        {
+          "n": 23,
+          "omega2_sym": "576",
+          "omega_sym": "24",
+          "rational_coeff": "24",
+          "squarefree_d": 1
+        },
+        {
+          "n": 24,
+          "omega2_sym": "625",
+          "omega_sym": "25",
+          "rational_coeff": "25",
+          "squarefree_d": 1
+        },
+        {
+          "n": 25,
+          "omega2_sym": "676",
+          "omega_sym": "26",
+          "rational_coeff": "26",
+          "squarefree_d": 1
+        },
+        {
+          "n": 26,
+          "omega2_sym": "729",
+          "omega_sym": "27",
+          "rational_coeff": "27",
+          "squarefree_d": 1
+        },
+        {
+          "n": 27,
+          "omega2_sym": "784",
+          "omega_sym": "28",
+          "rational_coeff": "28",
+          "squarefree_d": 1
+        },
+        {
+          "n": 28,
+          "omega2_sym": "841",
+          "omega_sym": "29",
+          "rational_coeff": "29",
+          "squarefree_d": 1
+        },
+        {
+          "n": 29,
+          "omega2_sym": "900",
+          "omega_sym": "30",
+          "rational_coeff": "30",
+          "squarefree_d": 1
+        },
+        {
+          "n": 30,
+          "omega2_sym": "961",
+          "omega_sym": "31",
+          "rational_coeff": "31",
+          "squarefree_d": 1
+        },
+        {
+          "n": 31,
+          "omega2_sym": "1024",
+          "omega_sym": "32",
+          "rational_coeff": "32",
+          "squarefree_d": 1
+        },
+        {
+          "n": 32,
+          "omega2_sym": "1089",
+          "omega_sym": "33",
+          "rational_coeff": "33",
+          "squarefree_d": 1
+        },
+        {
+          "n": 33,
+          "omega2_sym": "1156",
+          "omega_sym": "34",
+          "rational_coeff": "34",
+          "squarefree_d": 1
+        },
+        {
+          "n": 34,
+          "omega2_sym": "1225",
+          "omega_sym": "35",
+          "rational_coeff": "35",
+          "squarefree_d": 1
+        },
+        {
+          "n": 35,
+          "omega2_sym": "1296",
+          "omega_sym": "36",
+          "rational_coeff": "36",
+          "squarefree_d": 1
+        },
+        {
+          "n": 36,
+          "omega2_sym": "1369",
+          "omega_sym": "37",
+          "rational_coeff": "37",
+          "squarefree_d": 1
+        },
+        {
+          "n": 37,
+          "omega2_sym": "1444",
+          "omega_sym": "38",
+          "rational_coeff": "38",
+          "squarefree_d": 1
+        },
+        {
+          "n": 38,
+          "omega2_sym": "1521",
+          "omega_sym": "39",
+          "rational_coeff": "39",
+          "squarefree_d": 1
+        },
+        {
+          "n": 39,
+          "omega2_sym": "1600",
+          "omega_sym": "40",
+          "rational_coeff": "40",
+          "squarefree_d": 1
+        },
+        {
+          "n": 40,
+          "omega2_sym": "1681",
+          "omega_sym": "41",
+          "rational_coeff": "41",
+          "squarefree_d": 1
+        },
+        {
+          "n": 41,
+          "omega2_sym": "1764",
+          "omega_sym": "42",
+          "rational_coeff": "42",
+          "squarefree_d": 1
+        },
+        {
+          "n": 42,
+          "omega2_sym": "1849",
+          "omega_sym": "43",
+          "rational_coeff": "43",
+          "squarefree_d": 1
+        },
+        {
+          "n": 43,
+          "omega2_sym": "1936",
+          "omega_sym": "44",
+          "rational_coeff": "44",
+          "squarefree_d": 1
+        },
+        {
+          "n": 44,
+          "omega2_sym": "2025",
+          "omega_sym": "45",
+          "rational_coeff": "45",
+          "squarefree_d": 1
+        },
+        {
+          "n": 45,
+          "omega2_sym": "2116",
+          "omega_sym": "46",
+          "rational_coeff": "46",
+          "squarefree_d": 1
+        },
+        {
+          "n": 46,
+          "omega2_sym": "2209",
+          "omega_sym": "47",
+          "rational_coeff": "47",
+          "squarefree_d": 1
+        },
+        {
+          "n": 47,
+          "omega2_sym": "2304",
+          "omega_sym": "48",
+          "rational_coeff": "48",
+          "squarefree_d": 1
+        },
+        {
+          "n": 48,
+          "omega2_sym": "2401",
+          "omega_sym": "49",
+          "rational_coeff": "49",
+          "squarefree_d": 1
+        },
+        {
+          "n": 49,
+          "omega2_sym": "2500",
+          "omega_sym": "50",
+          "rational_coeff": "50",
+          "squarefree_d": 1
+        },
+        {
+          "n": 50,
+          "omega2_sym": "2601",
+          "omega_sym": "51",
+          "rational_coeff": "51",
+          "squarefree_d": 1
+        }
+      ]
+    },
+    {
+      "m2": "1/4",
+      "n_max": 50,
+      "squarefree_generators": [
+        13,
+        33,
+        61,
+        73,
+        97,
+        141,
+        193,
+        253,
+        321,
+        397,
+        481,
+        573,
+        673,
+        781,
+        897,
+        1021,
+        1153,
+        1293,
+        1441,
+        1597,
+        1761,
+        1933,
+        2113,
+        2301,
+        2497,
+        2701,
+        2913,
+        3133,
+        3361,
+        3597,
+        3841,
+        4093,
+        4353,
+        4621,
+        4897,
+        5181,
+        5473,
+        5773,
+        6081,
+        6397,
+        6721,
+        7053,
+        7393,
+        7741,
+        8097,
+        8461,
+        9213,
+        9601,
+        9997,
+        10401
+      ],
+      "contains_transcendental": false,
+      "rows": [
+        {
+          "n": 1,
+          "omega2_sym": "13/4",
+          "omega_sym": "sqrt(13)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 13
+        },
+        {
+          "n": 2,
+          "omega2_sym": "33/4",
+          "omega_sym": "sqrt(33)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 33
+        },
+        {
+          "n": 3,
+          "omega2_sym": "61/4",
+          "omega_sym": "sqrt(61)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 61
+        },
+        {
+          "n": 4,
+          "omega2_sym": "97/4",
+          "omega_sym": "sqrt(97)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 97
+        },
+        {
+          "n": 5,
+          "omega2_sym": "141/4",
+          "omega_sym": "sqrt(141)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 141
+        },
+        {
+          "n": 6,
+          "omega2_sym": "193/4",
+          "omega_sym": "sqrt(193)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 193
+        },
+        {
+          "n": 7,
+          "omega2_sym": "253/4",
+          "omega_sym": "sqrt(253)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 253
+        },
+        {
+          "n": 8,
+          "omega2_sym": "321/4",
+          "omega_sym": "sqrt(321)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 321
+        },
+        {
+          "n": 9,
+          "omega2_sym": "397/4",
+          "omega_sym": "sqrt(397)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 397
+        },
+        {
+          "n": 10,
+          "omega2_sym": "481/4",
+          "omega_sym": "sqrt(481)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 481
+        },
+        {
+          "n": 11,
+          "omega2_sym": "573/4",
+          "omega_sym": "sqrt(573)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 573
+        },
+        {
+          "n": 12,
+          "omega2_sym": "673/4",
+          "omega_sym": "sqrt(673)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 673
+        },
+        {
+          "n": 13,
+          "omega2_sym": "781/4",
+          "omega_sym": "sqrt(781)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 781
+        },
+        {
+          "n": 14,
+          "omega2_sym": "897/4",
+          "omega_sym": "sqrt(897)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 897
+        },
+        {
+          "n": 15,
+          "omega2_sym": "1021/4",
+          "omega_sym": "sqrt(1021)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1021
+        },
+        {
+          "n": 16,
+          "omega2_sym": "1153/4",
+          "omega_sym": "sqrt(1153)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1153
+        },
+        {
+          "n": 17,
+          "omega2_sym": "1293/4",
+          "omega_sym": "sqrt(1293)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1293
+        },
+        {
+          "n": 18,
+          "omega2_sym": "1441/4",
+          "omega_sym": "sqrt(1441)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1441
+        },
+        {
+          "n": 19,
+          "omega2_sym": "1597/4",
+          "omega_sym": "sqrt(1597)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1597
+        },
+        {
+          "n": 20,
+          "omega2_sym": "1761/4",
+          "omega_sym": "sqrt(1761)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1761
+        },
+        {
+          "n": 21,
+          "omega2_sym": "1933/4",
+          "omega_sym": "sqrt(1933)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 1933
+        },
+        {
+          "n": 22,
+          "omega2_sym": "2113/4",
+          "omega_sym": "sqrt(2113)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 2113
+        },
+        {
+          "n": 23,
+          "omega2_sym": "2301/4",
+          "omega_sym": "sqrt(2301)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 2301
+        },
+        {
+          "n": 24,
+          "omega2_sym": "2497/4",
+          "omega_sym": "sqrt(2497)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 2497
+        },
+        {
+          "n": 25,
+          "omega2_sym": "2701/4",
+          "omega_sym": "sqrt(2701)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 2701
+        },
+        {
+          "n": 26,
+          "omega2_sym": "2913/4",
+          "omega_sym": "sqrt(2913)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 2913
+        },
+        {
+          "n": 27,
+          "omega2_sym": "3133/4",
+          "omega_sym": "sqrt(3133)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 3133
+        },
+        {
+          "n": 28,
+          "omega2_sym": "3361/4",
+          "omega_sym": "sqrt(3361)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 3361
+        },
+        {
+          "n": 29,
+          "omega2_sym": "3597/4",
+          "omega_sym": "sqrt(3597)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 3597
+        },
+        {
+          "n": 30,
+          "omega2_sym": "3841/4",
+          "omega_sym": "sqrt(3841)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 3841
+        },
+        {
+          "n": 31,
+          "omega2_sym": "4093/4",
+          "omega_sym": "sqrt(4093)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 4093
+        },
+        {
+          "n": 32,
+          "omega2_sym": "4353/4",
+          "omega_sym": "sqrt(4353)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 4353
+        },
+        {
+          "n": 33,
+          "omega2_sym": "4621/4",
+          "omega_sym": "sqrt(4621)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 4621
+        },
+        {
+          "n": 34,
+          "omega2_sym": "4897/4",
+          "omega_sym": "sqrt(4897)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 4897
+        },
+        {
+          "n": 35,
+          "omega2_sym": "5181/4",
+          "omega_sym": "sqrt(5181)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 5181
+        },
+        {
+          "n": 36,
+          "omega2_sym": "5473/4",
+          "omega_sym": "sqrt(5473)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 5473
+        },
+        {
+          "n": 37,
+          "omega2_sym": "5773/4",
+          "omega_sym": "sqrt(5773)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 5773
+        },
+        {
+          "n": 38,
+          "omega2_sym": "6081/4",
+          "omega_sym": "sqrt(6081)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 6081
+        },
+        {
+          "n": 39,
+          "omega2_sym": "6397/4",
+          "omega_sym": "sqrt(6397)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 6397
+        },
+        {
+          "n": 40,
+          "omega2_sym": "6721/4",
+          "omega_sym": "sqrt(6721)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 6721
+        },
+        {
+          "n": 41,
+          "omega2_sym": "7053/4",
+          "omega_sym": "sqrt(7053)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 7053
+        },
+        {
+          "n": 42,
+          "omega2_sym": "7393/4",
+          "omega_sym": "sqrt(7393)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 7393
+        },
+        {
+          "n": 43,
+          "omega2_sym": "7741/4",
+          "omega_sym": "sqrt(7741)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 7741
+        },
+        {
+          "n": 44,
+          "omega2_sym": "8097/4",
+          "omega_sym": "sqrt(8097)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 8097
+        },
+        {
+          "n": 45,
+          "omega2_sym": "8461/4",
+          "omega_sym": "sqrt(8461)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 8461
+        },
+        {
+          "n": 46,
+          "omega2_sym": "8833/4",
+          "omega_sym": "11*sqrt(73)/2",
+          "rational_coeff": "11/2",
+          "squarefree_d": 73
+        },
+        {
+          "n": 47,
+          "omega2_sym": "9213/4",
+          "omega_sym": "sqrt(9213)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 9213
+        },
+        {
+          "n": 48,
+          "omega2_sym": "9601/4",
+          "omega_sym": "sqrt(9601)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 9601
+        },
+        {
+          "n": 49,
+          "omega2_sym": "9997/4",
+          "omega_sym": "sqrt(9997)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 9997
+        },
+        {
+          "n": 50,
+          "omega2_sym": "10401/4",
+          "omega_sym": "sqrt(10401)/2",
+          "rational_coeff": "1/2",
+          "squarefree_d": 10401
+        }
+      ]
+    },
+    {
+      "m2": "2",
+      "n_max": 50,
+      "squarefree_generators": [
+        2,
+        5,
+        10,
+        13,
+        17,
+        26,
+        37,
+        41,
+        65,
+        74,
+        82,
+        101,
+        122,
+        145,
+        170,
+        197,
+        226,
+        257,
+        290,
+        362,
+        401,
+        442,
+        485,
+        530,
+        577,
+        626,
+        677,
+        730,
+        785,
+        842,
+        901,
+        962,
+        1090,
+        1157,
+        1226,
+        1297,
+        1370,
+        1522,
+        1601,
+        1765,
+        1937,
+        2026,
+        2117,
+        2210,
+        2305,
+        2402,
+        2501,
+        2602
+      ],
+      "contains_transcendental": false,
+      "rows": [
+        {
+          "n": 1,
+          "omega2_sym": "5",
+          "omega_sym": "sqrt(5)",
+          "rational_coeff": "1",
+          "squarefree_d": 5
+        },
+        {
+          "n": 2,
+          "omega2_sym": "10",
+          "omega_sym": "sqrt(10)",
+          "rational_coeff": "1",
+          "squarefree_d": 10
+        },
+        {
+          "n": 3,
+          "omega2_sym": "17",
+          "omega_sym": "sqrt(17)",
+          "rational_coeff": "1",
+          "squarefree_d": 17
+        },
+        {
+          "n": 4,
+          "omega2_sym": "26",
+          "omega_sym": "sqrt(26)",
+          "rational_coeff": "1",
+          "squarefree_d": 26
+        },
+        {
+          "n": 5,
+          "omega2_sym": "37",
+          "omega_sym": "sqrt(37)",
+          "rational_coeff": "1",
+          "squarefree_d": 37
+        },
+        {
+          "n": 6,
+          "omega2_sym": "50",
+          "omega_sym": "5*sqrt(2)",
+          "rational_coeff": "5",
+          "squarefree_d": 2
+        },
+        {
+          "n": 7,
+          "omega2_sym": "65",
+          "omega_sym": "sqrt(65)",
+          "rational_coeff": "1",
+          "squarefree_d": 65
+        },
+        {
+          "n": 8,
+          "omega2_sym": "82",
+          "omega_sym": "sqrt(82)",
+          "rational_coeff": "1",
+          "squarefree_d": 82
+        },
+        {
+          "n": 9,
+          "omega2_sym": "101",
+          "omega_sym": "sqrt(101)",
+          "rational_coeff": "1",
+          "squarefree_d": 101
+        },
+        {
+          "n": 10,
+          "omega2_sym": "122",
+          "omega_sym": "sqrt(122)",
+          "rational_coeff": "1",
+          "squarefree_d": 122
+        },
+        {
+          "n": 11,
+          "omega2_sym": "145",
+          "omega_sym": "sqrt(145)",
+          "rational_coeff": "1",
+          "squarefree_d": 145
+        },
+        {
+          "n": 12,
+          "omega2_sym": "170",
+          "omega_sym": "sqrt(170)",
+          "rational_coeff": "1",
+          "squarefree_d": 170
+        },
+        {
+          "n": 13,
+          "omega2_sym": "197",
+          "omega_sym": "sqrt(197)",
+          "rational_coeff": "1",
+          "squarefree_d": 197
+        },
+        {
+          "n": 14,
+          "omega2_sym": "226",
+          "omega_sym": "sqrt(226)",
+          "rational_coeff": "1",
+          "squarefree_d": 226
+        },
+        {
+          "n": 15,
+          "omega2_sym": "257",
+          "omega_sym": "sqrt(257)",
+          "rational_coeff": "1",
+          "squarefree_d": 257
+        },
+        {
+          "n": 16,
+          "omega2_sym": "290",
+          "omega_sym": "sqrt(290)",
+          "rational_coeff": "1",
+          "squarefree_d": 290
+        },
+        {
+          "n": 17,
+          "omega2_sym": "325",
+          "omega_sym": "5*sqrt(13)",
+          "rational_coeff": "5",
+          "squarefree_d": 13
+        },
+        {
+          "n": 18,
+          "omega2_sym": "362",
+          "omega_sym": "sqrt(362)",
+          "rational_coeff": "1",
+          "squarefree_d": 362
+        },
+        {
+          "n": 19,
+          "omega2_sym": "401",
+          "omega_sym": "sqrt(401)",
+          "rational_coeff": "1",
+          "squarefree_d": 401
+        },
+        {
+          "n": 20,
+          "omega2_sym": "442",
+          "omega_sym": "sqrt(442)",
+          "rational_coeff": "1",
+          "squarefree_d": 442
+        },
+        {
+          "n": 21,
+          "omega2_sym": "485",
+          "omega_sym": "sqrt(485)",
+          "rational_coeff": "1",
+          "squarefree_d": 485
+        },
+        {
+          "n": 22,
+          "omega2_sym": "530",
+          "omega_sym": "sqrt(530)",
+          "rational_coeff": "1",
+          "squarefree_d": 530
+        },
+        {
+          "n": 23,
+          "omega2_sym": "577",
+          "omega_sym": "sqrt(577)",
+          "rational_coeff": "1",
+          "squarefree_d": 577
+        },
+        {
+          "n": 24,
+          "omega2_sym": "626",
+          "omega_sym": "sqrt(626)",
+          "rational_coeff": "1",
+          "squarefree_d": 626
+        },
+        {
+          "n": 25,
+          "omega2_sym": "677",
+          "omega_sym": "sqrt(677)",
+          "rational_coeff": "1",
+          "squarefree_d": 677
+        },
+        {
+          "n": 26,
+          "omega2_sym": "730",
+          "omega_sym": "sqrt(730)",
+          "rational_coeff": "1",
+          "squarefree_d": 730
+        },
+        {
+          "n": 27,
+          "omega2_sym": "785",
+          "omega_sym": "sqrt(785)",
+          "rational_coeff": "1",
+          "squarefree_d": 785
+        },
+        {
+          "n": 28,
+          "omega2_sym": "842",
+          "omega_sym": "sqrt(842)",
+          "rational_coeff": "1",
+          "squarefree_d": 842
+        },
+        {
+          "n": 29,
+          "omega2_sym": "901",
+          "omega_sym": "sqrt(901)",
+          "rational_coeff": "1",
+          "squarefree_d": 901
+        },
+        {
+          "n": 30,
+          "omega2_sym": "962",
+          "omega_sym": "sqrt(962)",
+          "rational_coeff": "1",
+          "squarefree_d": 962
+        },
+        {
+          "n": 31,
+          "omega2_sym": "1025",
+          "omega_sym": "5*sqrt(41)",
+          "rational_coeff": "5",
+          "squarefree_d": 41
+        },
+        {
+          "n": 32,
+          "omega2_sym": "1090",
+          "omega_sym": "sqrt(1090)",
+          "rational_coeff": "1",
+          "squarefree_d": 1090
+        },
+        {
+          "n": 33,
+          "omega2_sym": "1157",
+          "omega_sym": "sqrt(1157)",
+          "rational_coeff": "1",
+          "squarefree_d": 1157
+        },
+        {
+          "n": 34,
+          "omega2_sym": "1226",
+          "omega_sym": "sqrt(1226)",
+          "rational_coeff": "1",
+          "squarefree_d": 1226
+        },
+        {
+          "n": 35,
+          "omega2_sym": "1297",
+          "omega_sym": "sqrt(1297)",
+          "rational_coeff": "1",
+          "squarefree_d": 1297
+        },
+        {
+          "n": 36,
+          "omega2_sym": "1370",
+          "omega_sym": "sqrt(1370)",
+          "rational_coeff": "1",
+          "squarefree_d": 1370
+        },
+        {
+          "n": 37,
+          "omega2_sym": "1445",
+          "omega_sym": "17*sqrt(5)",
+          "rational_coeff": "17",
+          "squarefree_d": 5
+        },
+        {
+          "n": 38,
+          "omega2_sym": "1522",
+          "omega_sym": "sqrt(1522)",
+          "rational_coeff": "1",
+          "squarefree_d": 1522
+        },
+        {
+          "n": 39,
+          "omega2_sym": "1601",
+          "omega_sym": "sqrt(1601)",
+          "rational_coeff": "1",
+          "squarefree_d": 1601
+        },
+        {
+          "n": 40,
+          "omega2_sym": "1682",
+          "omega_sym": "29*sqrt(2)",
+          "rational_coeff": "29",
+          "squarefree_d": 2
+        },
+        {
+          "n": 41,
+          "omega2_sym": "1765",
+          "omega_sym": "sqrt(1765)",
+          "rational_coeff": "1",
+          "squarefree_d": 1765
+        },
+        {
+          "n": 42,
+          "omega2_sym": "1850",
+          "omega_sym": "5*sqrt(74)",
+          "rational_coeff": "5",
+          "squarefree_d": 74
+        },
+        {
+          "n": 43,
+          "omega2_sym": "1937",
+          "omega_sym": "sqrt(1937)",
+          "rational_coeff": "1",
+          "squarefree_d": 1937
+        },
+        {
+          "n": 44,
+          "omega2_sym": "2026",
+          "omega_sym": "sqrt(2026)",
+          "rational_coeff": "1",
+          "squarefree_d": 2026
+        },
+        {
+          "n": 45,
+          "omega2_sym": "2117",
+          "omega_sym": "sqrt(2117)",
+          "rational_coeff": "1",
+          "squarefree_d": 2117
+        },
+        {
+          "n": 46,
+          "omega2_sym": "2210",
+          "omega_sym": "sqrt(2210)",
+          "rational_coeff": "1",
+          "squarefree_d": 2210
+        },
+        {
+          "n": 47,
+          "omega2_sym": "2305",
+          "omega_sym": "sqrt(2305)",
+          "rational_coeff": "1",
+          "squarefree_d": 2305
+        },
+        {
+          "n": 48,
+          "omega2_sym": "2402",
+          "omega_sym": "sqrt(2402)",
+          "rational_coeff": "1",
+          "squarefree_d": 2402
+        },
+        {
+          "n": 49,
+          "omega2_sym": "2501",
+          "omega_sym": "sqrt(2501)",
+          "rational_coeff": "1",
+          "squarefree_d": 2501
+        },
+        {
+          "n": 50,
+          "omega2_sym": "2602",
+          "omega_sym": "sqrt(2602)",
+          "rational_coeff": "1",
+          "squarefree_d": 2602
+        }
+      ]
+    }
+  ],
+  "irrational_panel": [
+    {
+      "m2_label": "1/pi",
+      "m2_expr": "1/pi",
+      "n_max": 10,
+      "first_irrational_n": 1,
+      "rows": [
+        {
+          "n": 1,
+          "omega2_sym": "1/pi + 3",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 2,
+          "omega2_sym": "1/pi + 8",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 3,
+          "omega2_sym": "1/pi + 15",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 4,
+          "omega2_sym": "1/pi + 24",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 5,
+          "omega2_sym": "1/pi + 35",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 6,
+          "omega2_sym": "1/pi + 48",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 7,
+          "omega2_sym": "1/pi + 63",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 8,
+          "omega2_sym": "1/pi + 80",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 9,
+          "omega2_sym": "1/pi + 99",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        },
+        {
+          "n": 10,
+          "omega2_sym": "1/pi + 120",
+          "is_rational": false,
+          "contains_pi": true,
+          "contains_sqrt": false
+        }
+      ]
+    },
+    {
+      "m2_label": "sqrt(2)",
+      "m2_expr": "sqrt(2)",
+      "n_max": 10,
+      "first_irrational_n": 1,
+      "rows": [
+        {
+          "n": 1,
+          "omega2_sym": "sqrt(2) + 3",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 2,
+          "omega2_sym": "sqrt(2) + 8",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 3,
+          "omega2_sym": "sqrt(2) + 15",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 4,
+          "omega2_sym": "sqrt(2) + 24",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 5,
+          "omega2_sym": "sqrt(2) + 35",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 6,
+          "omega2_sym": "sqrt(2) + 48",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 7,
+          "omega2_sym": "sqrt(2) + 63",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 8,
+          "omega2_sym": "sqrt(2) + 80",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 9,
+          "omega2_sym": "sqrt(2) + 99",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        },
+        {
+          "n": 10,
+          "omega2_sym": "sqrt(2) + 120",
+          "is_rational": false,
+          "contains_pi": false,
+          "contains_sqrt": true
+        }
+      ]
+    }
+  ]
+}

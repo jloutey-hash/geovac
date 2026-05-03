@@ -428,6 +428,62 @@ $\alpha^5$ multi-loop ceiling).  The projection is structurally a
 sibling of the Schwartz~(1961) integral form, simplified to act on
 the discrete Sturmian pseudostate basis directly.
 
+\subsection{Rest-mass projection}
+\label{sec:proj_restmass}
+\textbf{Source:} bare relativistic spectrum on $S^3 \times \mathbb{R}$
+(or any natural-geometry spectrum), in the massless limit.\\
+\textbf{Target:} massive spectrum
+$\omega_n^2 = \omega_n^{(0)\,2} + m^2$, where $\omega_n^{(0)}$ is the
+massless eigenvalue from the ambient natural geometry.\\
+\textbf{Variables introduced:} $m$ (rest mass; equivalently rest-energy
+$mc^2$ at $c=1$).\\
+\textbf{Dimension introduced:} mass $=$ energy at $c=1$.\\
+\textbf{Transcendental signature:} \textit{trivial}.  The bare-graph
+algebraic-extension ring is preserved when $m^2 \in \mathbb{Q}$ (or
+any ring extension of $\mathbb{Q}$ already present in the ambient
+spectrum).  Verified explicitly in sprint KG-1 for the Klein-Gordon
+spectrum on $S^3 \times \mathbb{R}$: $\omega_n = c_n \sqrt{d_n}$ with
+$c_n \in \mathbb{Q}$ and $d_n$ a positive square-free integer for all
+$n \in [1, 50]$ across the rational $m^2$ panel
+$\{0, 1, 1/4, 2\}$ (Paper~35).  The mass projection is parameter-only;
+it does not introduce $\pi$ or any other transcendental.\\
+\textbf{Used in:} muonic / electronic / positronium reduced-mass
+corrections; Paper~23 nuclear-electronic composed Hamiltonian
+($I \cdot S$ hyperfine coupling); any future Klein-Gordon or
+Dirac-on-$S^3$ relativistic mass calculation; Paper~35
+Proposition~1.A.
+
+\subsection{Observation / temporal-window projection}
+\label{sec:proj_observation}
+\textbf{Source:} bare relativistic spectrum on a spatial natural
+geometry crossed with open temporal direction $\mathbb{R}$.\\
+\textbf{Target:} same spectrum on the spatial geometry crossed with
+periodic Euclidean time $S^1_\beta$ of period $\beta$ (equivalently:
+finite-time observation window of duration $\beta$ in real time;
+finite-temperature partition function at temperature $T = 1/\beta$).
+For bosons, temporal Matsubara modes $\omega^t_k = 2\pi k / \beta$,
+$k \in \mathbb{Z}$; for fermions with antiperiodic time,
+$\omega^t_k = (2k+1)\pi / \beta$.\\
+\textbf{Variables introduced:} $\beta$ (or $T = 1/\beta$).\\
+\textbf{Dimension introduced:} time $=$ inverse energy.\\
+\textbf{Transcendental signature:} $2\pi \cdot \mathbb{Q}$ per
+Matsubara mode in the spectrum directly; in spectral integrals over
+the compactified direction, $\pi^{2k} \cdot \mathbb{Q}$ from
+$\zeta_R(2k)$ values, including the Stefan-Boltzmann
+constant $\pi^2/90$ in the high-$T$ limit of $S^3 \times S^1_\beta$.
+The first $\pi$-bearing eigenvalue of the compactified Klein-Gordon
+spectrum is the $(n{=}0, k{=}1)$ Matsubara mode at
+$\omega^2 = 4\pi^2/\beta^2$, with no earlier step injecting $\pi$
+(verified in sprint KG-2; Paper~35).\\
+\textbf{Used in:} all finite-temperature observables (Casimir at
+$T \neq 0$, free-energy density, Stefan-Boltzmann constants); all
+QED loop integrals that involve continuous time integration (Schwinger
+proper-time, Mellin-Barnes, etc.); spectral-action evaluation
+$\mathrm{Tr}\, f(D^2/\Lambda^2)$ when the trace runs over a
+compact-time direction; Paper~35 Proposition~1.B.  This projection is
+structurally what an observer does when integrating an instantaneous
+spectrum over a finite measurement window.
+
 % ===================================================================
 \section{The Three-Axis Dictionary}
 \label{sec:dictionary}
@@ -467,6 +523,11 @@ Vector-photon promotion & none & dimensionless & $1/(4\pi)$ per loop \\
 Molecule-frame hypersph. & $R$ & length & piecewise-smooth in $R$ \\
 Drake--Swainson asymptotic subtraction & $K$ (cancels) & dimensionless &
 flow tier; $D_{\text{drake}} = 2(2\ell+1)Z^4/n^3$ rational \\
+Rest-mass projection & $m$ & mass &
+\textit{trivial} (ring-preserving for $m^2 \in \mathbb{Q}$) \\
+Observation / temporal-window & $\beta$ (or $T = 1/\beta$) & time &
+$2\pi \cdot \mathbb{Q}$ per Matsubara mode; $\pi^{2k}\cdot\mathbb{Q}$ in
+integrated quantities; Stefan-Boltzmann $\pi^2/90$ in high-$T$ limit \\
 \bottomrule
 \end{tabular}
 \caption{The projection dictionary.  Each row is a structural
@@ -475,7 +536,11 @@ graph data.  The fourth column is the transcendental signature in
 the sense of Paper~18; the second and third columns are the new
 axes proposed by this paper.  The thirteenth row (Drake--Swainson
 asymptotic subtraction) was added in sprint LS-4 to close the 2P
-Bethe-log structural floor identified in LS-3.}
+Bethe-log structural floor identified in LS-3; the fourteenth and
+fifteenth rows (rest-mass and observation/temporal-window) were
+added in sprint KG / Paper~35 (May~2026) to resolve the
+mass-vs-observation ambiguity that had been bundled with other
+parameter projections.}
 \label{tab:projection_axes}
 \end{table}
 
@@ -508,6 +573,25 @@ vanish) and produces a $K$-independent regularized value through
 asymptotic subtraction.  The flow content sits in the
 $\alpha$-dependent logarithms of the regulated spectral sum, which
 cancel against the $K$-cutoff terms.
+\item \emph{Trivial / ring-preserving tier} $\leftrightarrow$
+rest-mass projection.  The mass projection introduces a parameter
+without introducing a transcendental: the bare-graph algebraic
+ring is closed under the addition of $m^2$ when $m^2 \in \mathbb{Q}$.
+This is the only projection in the dictionary that introduces a
+physical variable while preserving the transcendental signature of
+the source spectrum.  Paper~35 verifies this explicitly for the
+Klein-Gordon spectrum on $S^3 \times \mathbb{R}$.
+\item \emph{Calibration $2\pi \cdot \mathbb{Q}$ tier (temporal subtype)}
+$\leftrightarrow$ observation / temporal-window projection.  This is
+the categorical home of $\pi$ in the framework: every $\pi$ that
+appears in a GeoVac observable can be traced to either (a)~a Hopf-base
+calibration~$\pi$ (Hopf bundle / vector-photon promotion), (b)~a
+spectral-action $\sqrt{\pi}\cdot\mathbb{Q}$ (heat-kernel coefficient),
+or (c)~a temporal Matsubara $2\pi/\beta$ (this projection).  The
+Casimir constant on $S^3 \times S^1_\beta$ is the cleanest
+illustration: spatial-only Casimir is $1/240$ (rational, no $\pi$);
+adding $S^1_\beta$ injects $\pi$ exactly through the Matsubara
+mechanism.
 \end{itemize}
 \end{observation}
 
@@ -565,6 +649,11 @@ $B = 42$ Casimir trace at $m=3$ & --- & graph data &
 dimensionless & integer & exact \\
 $D_\text{even}(4)$ closed form & spinor + vertex parity & $\alpha$
 & dimensionless & $\pi^2, \pi^4, G, \beta(4)$ & PSLQ 80~dps \\
+$E_\text{Cas}^{S^3} = 1/240$ (conformal scalar) & Fock + conformal
+coupling & none & dimensionless & rational & exact symbolic \\
+$E_\text{Cas}^{S^3, \text{Dirac}} = 17/480$ (full Dirac) & Fock +
+Camporesi--Higuchi spinor lift & none & dimensionless & rational &
+exact symbolic \\
 \midrule
 \textbf{Two-projection chain} & & & & & \\
 Uehling shift $-27.13$ MHz at 2$S$ & spectral action $\circ$ Fock &
@@ -701,11 +790,58 @@ sweet spot $N=40$ & T cancels A & At $N=40$, $T_{2S} = +28.8$~MHz
 truncation cancels $A = -32.78$~MHz one-loop ceiling; converges to
 LS-1 baseline $-3.10\%$ at $N\to\infty$.  Sprint LS-4. \\
 Lamb shift $1057.85$ MHz (LS-3 baseline) & Fock $\circ$ spectral action
-$\circ$ Sturmian (acc.) & $-2.77\%$ (LS-3 prediction $1029$ MHz) & T$+$A &
-Truncation $T = +3.5$~MHz ($0.33\%$, from 2$S$ Bethe log) and
-approximation $A = -32.8$~MHz ($3.10\%$, from missing $\alpha^5$
-multi-loop) sum to LS-3 actual residual within machine precision.
-$T$ reduced $3.3\times$ vs LS-2 $11.7$~MHz. \\
+$\circ$ Sturmian (acc.) & $-2.77\%$ (LS-3 prediction $1029$ MHz) &
+\textbf{C} (resolved by LS-6a) $+$ A & Sprint LS-6a (May 2026)
+re-derived the same one-loop physics in the Eides \S~3.2 canonical
+convention and found the LS-1 implementation had inadvertently
+subtracted the Uehling kernel constant from the canonical $10/9$ SE
+coefficient (Uehling already enters separately as a VP contribution).
+The convention fix supersedes this row: see the LS-6a row below for
+the clean result. The $\sim +24.7$~MHz residual that had been
+classified A is structurally a $\sim +27.13$~MHz one-loop convention
+correction (\textbf{C} resolved), leaving the genuine A-tier
+multi-loop residual of $\sim +5.65$~MHz. \\
+Lamb shift $1057.85$ MHz (LS-6a, Eides \S~3.2 convention) & Fock
+$\circ$ spectral action $\circ$ Sturmian (acc.) $\circ$ (Drake--Swainson,
+$\ell=1$) & $-0.534\%$ (LS-6a prediction $1052.19$~MHz) & A (small) +
+non-loop sectors (reframed by LS-7) & Eides \S~3.2 canonical one-loop
+SE convention.  Convention shift from LS-1: $+27.13$~MHz, exactly
+$(4/15) \cdot \alpha^3 Z^4 / (\pi n^3) \cdot \text{Ha-to-MHz}$ at
+$n=2$, $Z=1$ (the Uehling kernel constant $10/9 - 38/45 = 4/15$).
+Components: SE 2$S_{1/2}$ $+1066.44$~MHz (Bethe $+953.40$~MHz +
+canonical $10/9$ piece $+113.04$~MHz); VP 2$S_{1/2}$ $-27.13$~MHz;
+SE 2$P_{1/2}$ $-12.88$~MHz; VP 2$P_{1/2}$ $0$.  $5.8\times$
+reduction in absolute error vs LS-3.  \textbf{Sprint LS-7 reframed
+the residual decomposition}: the LS-5 / LS-6a attribution to
+``multi-loop QED in Eides Tab.~7.4 band $[+3.5, +10.7]$~MHz'' was a
+misreading of which Eides table is the proper multi-loop reference.
+Eides Tab.~7.3 ($\alpha^5$ multi-loop QED proper) totals only
+$\sim +1.20$~MHz; the remaining $\sim +4.4$~MHz of the $-5.65$~MHz
+residual is non-loop physics (recoil $-2.40$, finite nuclear size
+$+1.18$, hyperfine averaging $\sim +5.0$, sum $\sim +4.98$).  The
+framework's one-loop QED machinery on $S^3$ is therefore even more
+complete than originally framed: the multi-loop test target for
+Paper~35 Prediction~1 is sharpened to $\sim +1.20$~MHz, with the
+non-loop sectors covered by the Paper~34~\S\,III.14 rest-mass
+projection and Paper~23's nuclear-electronic composed Hamiltonian
+(not a test of Paper~35).  Sprint provenance:
+\texttt{debug/ls6a\_eides\_convention\_memo.md},
+\texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
+Two-loop SE prefactor $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ on
+Dirac-$S^3$ (LS-7, structural) & Fock $\circ$ spectral action
+$\circ$ Sturmian (acc.) $\circ$ Camporesi--Higuchi $\circ$ iterated
+proper time & structural prefactor confirmed to symbolic exactness;
+dimensionless bracket $C_{2S} = +3.63$ used from Eides literature
+(LS-8a target for native derivation) & A (sharpened) & Iterated CC
+spectral action on Dirac-$S^3$ produces the standard two-loop SE
+prefactor with the $1/\pi^2$ tracing to two iterated Schwinger
+proper-time integrations, confirming Paper~35
+Prediction~\ref{pred:error_depth} \emph{at the structural level} for
+two-loop content.  Weak test (the same prefactor appears in
+flat-space two-loop QED); the strong test is LS-8a's native
+derivation of $C_{2S}$.  No structural obstruction encountered;
+\texttt{geovac/qed\_two\_loop.py} infrastructure is adequate.
+Sprint provenance: \texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
 He 2$^3$P fine-structure span & Breit--Pauli + spinor &
 $-66\%$ & A & Leading-order Breit--Pauli; multi-electron SS/SOO
 deferred (Sprint 4 DD; Paper~14 \S~V). \\
@@ -835,15 +971,26 @@ matches do not.
 \begin{enumerate}
 \setlength\itemsep{0pt}
 
-\item \textbf{Closure of the projection list.}  Thirteen projections
-are now documented (the thirteenth, Drake--Swainson asymptotic
-subtraction, was added in sprint LS-4 to close the 2P Bethe-log
-structural floor of LS-3).  Are there projections in the framework
-that are not yet in this list?  Two candidates that may need to be
-added on review: (a)~the Mellin / heat-kernel evaluation at
-fractional~$s$ (currently treated as part of spectral-action), and
-(b)~the direction-resolved Hodge decomposition of vector-photon
-edges (Paper~28 \S~vq\_sprint).  Decision pending.
+\item \textbf{Closure of the projection list.}  Fifteen projections
+are now documented.  The thirteenth (Drake--Swainson asymptotic
+subtraction) was added in sprint LS-4 to close the 2P Bethe-log
+structural floor of LS-3.  The fourteenth (rest-mass projection) and
+fifteenth (observation / temporal-window projection) were added in
+sprint KG / Paper~35 (May~2026) after verifying that the bare
+relativistic Klein-Gordon spectrum on $S^3 \times \mathbb{R}$ is
+$\pi$-free in $\mathbb{Q}[\sqrt{d_1}, \sqrt{d_2}, \ldots]$ and that
+$\pi$ enters the spectrum at exactly one step --- temporal
+compactification.  These two projections were previously bundled
+implicitly with other parameter-projection rows; the split was
+forced by the Casimir computation $E_\text{Cas}^{S^3} = 1/240$
+(spatial only, exact rational, no $\pi$) versus the Stefan-Boltzmann
+$\pi^2/90$ (high-$T$ limit on $S^3 \times S^1_\beta$, $\pi$ from
+Matsubara).  Are there projections in the framework that are still
+not yet in this list?  Two candidates that may need to be added on
+review: (a)~the Mellin / heat-kernel evaluation at fractional~$s$
+(currently treated as part of spectral-action), and (b)~the
+direction-resolved Hodge decomposition of vector-photon edges
+(Paper~28 \S~vq\_sprint).  Decision pending.
 
 \item \textbf{Quantitative form of Prediction~\ref{pred:error_depth}.}
 The prediction states that error compounds with projection depth.
@@ -1001,6 +1148,11 @@ Paper~32 (2026).
 \bibitem{paper33}
 GeoVac Project, ``The 1+6+1 Partition of QED Selection Rules
 on $S^3$,'' Paper~33 (2026).
+
+\bibitem{paper35}
+GeoVac Project, ``Time as Projection: The Klein-Gordon Spectrum on
+$S^3 \times \mathbb{R}$ and the Algebraic / Observation Split,''
+Paper~35 (2026).
 
 \bibitem{ls1_memo}
 GeoVac Project, ``LS-1 Sprint: Hydrogen Lamb Shift on the Dirac-S$^3$

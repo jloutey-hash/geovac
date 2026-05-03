@@ -1,0 +1,162 @@
+{
+  "sprint": "LS-5",
+  "type": "scoping",
+  "date": "2026-05-03",
+  "hypothesis_under_test": "Paper 35 Sec. VII.3: the alpha^5 Lamb-shift residual can be derived from the GeoVac framework as an iterated temporal-compactification projection (double Schwinger proper-time integration on the Camporesi-Higuchi spectrum).",
+  "literature_budget_MHz": {
+    "two_loop_self_energy_B60": 0.86,
+    "two_loop_vac_pol_KS": 0.16,
+    "mixed_SE_VP": -0.06,
+    "two_photon_vertex_Yennie": 0.27,
+    "wichmann_kroll": -0.025,
+    "alpha5_multi_loop_total": 7.1,
+    "recoil_total_2S": -2.4,
+    "reduced_mass_correction": -0.13
+  },
+  "two_loop_SE_mode_count_n_max_20": {
+    "n_max": 20,
+    "term_count": 2870
+  },
+  "two_loop_SE_mode_count_n_max_50": {
+    "n_max": 50,
+    "term_count": 42925
+  },
+  "back_of_envelope_TLSE": {
+    "method": "naive (alpha/pi) * one-loop scaling",
+    "alpha_over_pi": 0.002322819465771719,
+    "SE_2S_one_loop_MHz": 1039.31,
+    "SE_2P_one_loop_MHz": -12.88,
+    "O1_coefficient_assumed": 2.94,
+    "O1_coefficient_source": "Reverse-engineered from Eides 2001 Table 7.4 cumulative alpha^5 multi-loop value +7.10 MHz divided by (alpha/pi * 1039.31 MHz) = +2.94. Using this O(1) value, the back-of-envelope reproduces the literature value by construction; this is a CONSISTENCY check, not a derivation. A genuine two-loop spectral-action computation would derive this O(1) coefficient from first principles.",
+    "estimate_2S_MHz": 7.097540726975343,
+    "estimate_2P_MHz": -0.08795866927427085,
+    "estimate_Lamb_MHz": 7.1854993962496145
+  },
+  "two_loop_heat_kernel_structure": {
+    "D4_value": 1.7521801482558221,
+    "D4_squared": 3.070135271941795,
+    "diagonal_subtraction": 0.7640996702466516,
+    "D_double_4_4_connected": 2.306035601695143,
+    "transcendental_class": "pi^{even} from T9 iterated",
+    "bound_state_implication": "The 2-loop self-energy heat kernel on S^3 is pi^{even}; bound-state projection introduces an additional ln(Z alpha) from the B_60 coefficient (which is what the temporal-compactification iteration is meant to reproduce)."
+  },
+  "feasibility_per_group": {
+    "A_two_loop_self_energy_B60": {
+      "lit_value_MHz": 0.86,
+      "GeoVac_module_now": "qed_self_energy.py (one-loop SE)",
+      "missing_infrastructure": [
+        "Two-vertex chain spectral sum sum_{n_int1, n_int2, q1, q2}",
+        "Bound-state projection onto 2S Sturmian (LS-2/3 machinery)",
+        "Asymptotic / Drake-Swainson-style regulator for the inner sum"
+      ],
+      "feasibility": "medium-term",
+      "sprint_count_estimate": 3,
+      "note": "Largest single contribution; if any group is feasible, this is it."
+    },
+    "B_two_loop_VP_KS": {
+      "lit_value_MHz": 0.16,
+      "GeoVac_module_now": "qed_vacuum_polarization.py (one-loop Pi)",
+      "missing_infrastructure": [
+        "Two-loop Pi (electron loop with internal photon)",
+        "Bound-state Uehling integral with Pi_2 instead of Pi"
+      ],
+      "feasibility": "near-term",
+      "sprint_count_estimate": 2,
+      "note": "Karplus-Sachs is structurally the simplest two-loop piece; directly accessible from existing one-loop machinery."
+    },
+    "C_mixed_SE_VP": {
+      "lit_value_MHz": -0.06,
+      "GeoVac_module_now": "qed_self_energy.py + qed_vacuum_polarization.py",
+      "missing_infrastructure": [
+        "Internal-photon-line VP insertion in the SE diagram",
+        "Convolution of one-loop Pi with one-loop Sigma kernel"
+      ],
+      "feasibility": "near-term",
+      "sprint_count_estimate": 2,
+      "note": "Reuses both A and B infrastructure; smaller convolution sprint."
+    },
+    "D_two_photon_vertex_Yennie": {
+      "lit_value_MHz": 0.27,
+      "GeoVac_module_now": "qed_anomalous_moment.py (one-loop F_2)",
+      "missing_infrastructure": [
+        "Two-loop bound-state form factor F_2(p^2) at p^2 ~ -m^2 (Z alpha)^2",
+        "Yennie gauge or equivalent; current GeoVac assumes Feynman gauge"
+      ],
+      "feasibility": "medium-term",
+      "sprint_count_estimate": 3,
+      "note": "Sign flip in literature is convention; magnitude is small."
+    },
+    "X_recoil": {
+      "lit_value_MHz": -2.4,
+      "GeoVac_module_now": "NONE (recoil is two-body, not a multi-loop QED effect)",
+      "missing_infrastructure": [
+        "Two-body Bethe-Salpeter equation with finite m_p",
+        "Reduced-mass treatment beyond Paper 4 leading-order"
+      ],
+      "feasibility": "long-term",
+      "sprint_count_estimate": 5,
+      "note": "NOT what the temporal-compactification iteration would cover; this is a separate program (two-body bound state, not single-particle QED on a fixed Coulomb background)."
+    }
+  },
+  "residual_comparison": {
+    "sign_convention": "POSITIVE = adds to predicted Lamb shift toward experimental",
+    "LS3_converged_residual_MHz": 29.25500000000011,
+    "LS1_one_loop_ceiling_MHz": 32.78500000000008,
+    "alpha5_multi_loop_lit_total_MHz": 7.1,
+    "back_of_envelope_TLSE_only_MHz": 7.1854993962496145,
+    "recoil_lit_MHz": -2.4,
+    "reduced_mass_lit_MHz": -0.13,
+    "all_identified_MHz": 4.569999999999999,
+    "unaccounted_MHz": 24.68500000000011,
+    "interpretation": "Most of the LS-3 residual (+29.26 MHz) is the LS-1 +38/45 SE coefficient convention artifact (per LS-1 \u00a72.2 footnote): ~+25 MHz of the residual is a one-loop convention choice, not missing multi-loop physics. The alpha^5 multi-loop QED contribution is ~+7 MHz (literature), in the ballpark of the back-of-envelope estimate. The Paper 35 \u00a7VII.3 hypothesis (iterated temporal compactification produces alpha^5 piece) should be tested against the +7 MHz target, NOT +29 MHz.",
+    "back_of_envelope_kernel_class_match": "qed_two_loop.even_odd_discriminant_table() shows D(4)^2 from the two-loop heat kernel sits in pi^{even} (T9 squared); this is consistent with the literature B_60 coefficient containing ln(Z alpha) but NO odd-zeta. Structural class match for the Paper 35 \u00a7VII.3 hypothesis at the bare-spectrum level."
+  },
+  "falsification": "The Paper 35 Sec. VII.3 hypothesis ('iterated temporal compactification reproduces the alpha^5 Lamb shift') is FALSIFIED if a properly executed two-loop spectral-action computation on S^3 gives a Lamb-shift contribution of MAGNITUDE OR SIGN incompatible with the literature value +7.10 MHz (Eides 2001 Table 7.4) within a ~50% tolerance band, since the calculation involves several individually-large contributions with cancellations. Specifically: if the iterated computation gives a NEGATIVE sign (contribution that REDUCES the Lamb shift), or a magnitude > 50 MHz, or a magnitude < 0.5 MHz, the hypothesis fails. The hypothesis is NOT falsified by failing to close the full LS-3 residual of +29.26 MHz, since ~80% of that residual is a one-loop convention choice (per LS-1 \u00a72.2 footnote), not missing two-loop physics. The honest target is +7.10 MHz, not +29.26 MHz.",
+  "recommended_next_sprints": [
+    {
+      "sprint": "LS-6a",
+      "title": "Re-derive LS-1 one-loop SE in Eides \u00a73.2 convention",
+      "rationale": "The LS-3 'residual' is dominated by the LS-1 +38/45 SE coefficient choice. A re-derivation using Eides convention (Karplus-Klein + Darwin + magnetic-moment separated explicitly) should bring LS-3 from 1029 MHz to ~1054 MHz, closing the convention gap. After this, the genuine multi-loop residual shrinks to ~-4 MHz.",
+      "deliverable": "LS-6a memo + updated ls1_lamb_shift.py with both conventions.",
+      "infrastructure_needed": "NONE; pure analytic recomputation.",
+      "estimated_sprint_count": 1,
+      "risk": "low; well-documented in literature"
+    },
+    {
+      "sprint": "LS-6b",
+      "title": "Karplus-Sachs two-loop VP on S^3 (Group B)",
+      "rationale": "The simplest two-loop piece. Reuses qed_vacuum_polarization infrastructure with the photon line dressed by a one-loop VP insertion. Expected contribution ~-0.27 MHz; clean first test of the temporal-iteration hypothesis.",
+      "deliverable": "qed_vacuum_polarization_two_loop.py + verification against literature -0.27 MHz.",
+      "infrastructure_needed": "Iterated proper-time integral, two-loop heat-kernel coefficients.",
+      "estimated_sprint_count": 2,
+      "risk": "medium; iterated proper-time on S^3 is genuine new work"
+    },
+    {
+      "sprint": "LS-7",
+      "title": "Two-loop self-energy Sigma_2L on S^3 (Group A, B_60)",
+      "rationale": "Largest multi-loop contribution (-3.84 MHz). Direct test of Paper 35's iterated proper-time hypothesis at non-trivial scale. Builds on LS-6a/b infrastructure.",
+      "deliverable": "qed_self_energy_two_loop.py + comparison to B_60 lit value.",
+      "infrastructure_needed": "Two-vertex chain spectral sum O(N^4); extension of Drake-Swainson regulator to nested spectral sums.",
+      "estimated_sprint_count": 3,
+      "risk": "high; multi-month effort if no shortcuts available"
+    },
+    {
+      "sprint": "LS-8",
+      "title": "Mixed SE x VP and two-photon vertex (Groups C, D)",
+      "rationale": "Smaller contributions; complete the alpha^5 multi-loop budget.",
+      "deliverable": "Cumulative alpha^5 multi-loop on S^3 = -4.74 MHz comparison to literature.",
+      "infrastructure_needed": "Convolution machinery from LS-6b and LS-7.",
+      "estimated_sprint_count": 2,
+      "risk": "medium"
+    }
+  ],
+  "verdict_summary": {
+    "feasibility": "PARTIAL (medium-term, multi-sprint)",
+    "expected_two_loop_total_MHz": 7.1,
+    "expected_sign": "POSITIVE (raises 2S relative to 2P_{1/2}; INCREASES Lamb shift; same sign as one-loop SE)",
+    "matches_LS3_residual_qualitatively": true,
+    "matches_LS3_residual_quantitatively": false,
+    "key_finding": "The two-loop alpha^5 multi-loop contribution is ~+7.10 MHz (Eides 2001 Table 7.4 cumulative), accounting for ~24% of the +29.26 MHz LS-3 residual. The remaining ~+22 MHz is the LS-1 +38/45 SE coefficient convention artifact (per LS-1 \u00a72.2 footnote) -- a one-loop convention choice, NOT missing multi-loop physics. The Paper 35 Sec. VII.3 hypothesis can be tested at the +7 MHz level, but the test target is +7.10 MHz, NOT +29.26 MHz. Recommend LS-6a (convention fix) BEFORE attempting LS-6b/LS-7 (actual two-loop sprints) so that the residual being closed is unambiguously the alpha^5 multi-loop piece.",
+    "structural_class_check": "qed_two_loop infrastructure already shows the two-loop vacuum heat kernel on S^3 lives in pi^{even} (T9 iterated). Bound-state projection introduces ln(Z alpha) at two-loop order (the B_60 coefficient). Both are CONSISTENT with the Paper 35 framing of 'two iterated proper-time integrations introduce additional pi^2 content'. Two-loop self-energy spectral sum at n_max=20 has only 2,870 allowed terms (SO(4) selection rule W=0/1/2 is restrictive), n_max=50 has 42,925 terms -- both are computationally trivial."
+  }
+}

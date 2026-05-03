@@ -1,0 +1,116 @@
+{
+  "script": "kg5_dirac_casimir.py",
+  "headline": {
+    "spatial_E_Cas_Dirac_unit_S3_full_Dirac": "17/480 (rational; no pi)",
+    "convention": "full Dirac operator, both chiralities, both eigenvalue signs (complex spinor bundle of dim 4)",
+    "alternate_conventions": {
+      "Weyl single chirality": "17/960",
+      "Majorana real d.o.f.": "17/960"
+    },
+    "matches_textbook_full_Dirac_value_to_40_dps": true,
+    "spatial_calculation_pi_free": true,
+    "Paper_35_prediction_for_spinor_sector": "CONFIRMED",
+    "comparison_to_scalar_KG3": "Both spatial Casimir energies are pure rationals with no sqrt extensions: scalar 1/240 vs Dirac 17/480.  The Dirac case lives in Q because the Hurwitz shift is rational (3/2) and Bernoulli polynomials are Q-coefficient.",
+    "pi_first_enters_through": "temporal compactification with anti-periodic boundary conditions; lowest non-zero mode is omega_0^t = pi / beta (NB: not 2 pi / beta as in the bosonic case)",
+    "verdict_overall": "Spatial Dirac Casimir on S^3 is pure-rational (one-projection: spatial mode-counting only).  Adding S^1_beta with AP fermion boundary conditions is a second projection that introduces pi at the lowest temporal mode.  Same mechanism as KG-3 scalar; spinor sector is in the same algebraic-extension ring as the scalar sector."
+  },
+  "spatial_T0_Dirac_Casimir": {
+    "convention_computed": "FULL DIRAC: both chiralities, both eigenvalue signs, complex spinor bundle of dim 4 on S^3",
+    "spectrum": "|lambda_n| = n + 3/2 (half-integer rational); g_n^Dirac = 2(n+1)(n+2) per chirality",
+    "spectral_zeta_form": "zeta_|D|(s) = 4 [zeta_R(s-2, 3/2) - (1/4) zeta_R(s, 3/2)]",
+    "intermediate_zeta_values": {
+      "B_2(3/2)": "11/12",
+      "B_4(3/2)": "127/240",
+      "zeta_R(-1, 3/2)": "-11/24",
+      "zeta_R(-3, 3/2)": "-127/960",
+      "zeta_|D|(-1)": "-17/240"
+    },
+    "E_Cas_full_Dirac_symbolic": "17/480",
+    "E_Cas_full_Dirac_decimal": "0.035416666666666666666666666666666666666666666666667",
+    "E_Cas_full_Dirac_numeric_50dps_mpmath": "0.03541666666666666666666666666666666666667",
+    "symbolic_vs_numeric_match": true,
+    "convention_translations": {
+      "full_Dirac (computed here)": "17/480 = 17/480",
+      "single Weyl chirality": "17/960 = 17/960",
+      "single Majorana real d.o.f.": "17/960 = 17/960"
+    },
+    "transcendental_ledger": [
+      {
+        "step": "(1) Camporesi-Higuchi spectrum on unit S^3",
+        "value": "|lambda_n| = n + 3/2; degeneracy g_n = 2(n+1)(n+2) per chirality (n = 0, 1, 2, ...)",
+        "transcendentals": "none -- |lambda_n| in Q (half-integer); g_n in Z+"
+      },
+      {
+        "step": "(2) Sign-summed spectral zeta zeta_|D|(s)",
+        "value": "= 4 [zeta_R(s - 2, 3/2) - (1/4) zeta_R(s, 3/2)] (Hurwitz form via shift m = n + 3/2)",
+        "transcendentals": "none in the symbolic form; Hurwitz zeta has rational values at negative integers when the shift parameter is rational"
+      },
+      {
+        "step": "(3) Bernoulli polynomial values at 3/2",
+        "value": "B_2(3/2) = 11/12, B_4(3/2) = 127/240",
+        "transcendentals": "NONE -- exact rationals"
+      },
+      {
+        "step": "(4) Hurwitz zeta values via zeta_R(-n, a) = -B_{n+1}(a)/(n+1)",
+        "value": "zeta_R(-1, 3/2) = -11/24, zeta_R(-3, 3/2) = -127/960",
+        "transcendentals": "NONE -- exact rationals"
+      },
+      {
+        "step": "(5) Spectral zeta zeta_|D|(-1) = 4 [zeta_R(-3, 3/2) - (1/4) zeta_R(-1, 3/2)]",
+        "value": "= -17/240",
+        "transcendentals": "NONE -- exact rational"
+      },
+      {
+        "step": "(6) Casimir energy E_Cas^Dirac = -(1/2) zeta_|D|(-1) (fermion sign)",
+        "value": "= 17/480 (full Dirac, both chiralities, both signs)",
+        "transcendentals": "NONE -- pure rational"
+      }
+    ]
+  },
+  "textbook_comparison": {
+    "textbook_reference_primary": "Camporesi & Higuchi, J. Geom. Phys. 20 (1996) 1, Eq. 5.27 (Dirac spectrum on S^d, d=3 case).",
+    "textbook_reference_secondary": "Bytsenko, Cognola, Elizalde, Moretti, Zerbini, 'Analytic Aspects of Quantum Fields', World Scientific 2003, sec. 4.6 (spinor Casimir on spheres).",
+    "textbook_reference_tertiary": "Kennedy, Critchley, Dowker, Ann. Phys. (NY) 125 (1980) 346 (early systematic treatment).",
+    "textbook_value_full_Dirac_S3": "17/480 = 17/480",
+    "textbook_value_decimal_40dps": "0.03541666666666666666666666666666666666667",
+    "computed_value_decimal_40dps": "0.03541666666666666666666666666666666666667",
+    "abs_difference": "0.0",
+    "match_to_at_least_12_digits": true
+  },
+  "temperature_correction_sketch": {
+    "AP_temporal_mode_formula": "omega_k^t = (2k + 1) pi / beta, k in Z",
+    "P_bosonic_temporal_mode_formula_for_comparison": "omega_k^t = 2 pi k / beta, k in Z (periodic bosons; KG-2)",
+    "lowest_AP_modes_k_in_-2_to_2": [
+      {
+        "k": -2,
+        "omega_k": "-3*pi/beta",
+        "abs_omega_k": "3*pi/beta"
+      },
+      {
+        "k": -1,
+        "omega_k": "-pi/beta",
+        "abs_omega_k": "pi/beta"
+      },
+      {
+        "k": 0,
+        "omega_k": "pi/beta",
+        "abs_omega_k": "pi/beta"
+      },
+      {
+        "k": 1,
+        "omega_k": "3*pi/beta",
+        "abs_omega_k": "3*pi/beta"
+      },
+      {
+        "k": 2,
+        "omega_k": "5*pi/beta",
+        "abs_omega_k": "5*pi/beta"
+      }
+    ],
+    "smallest_nonzero_AP_mode_at_beta_eq_1": "pi (from k = 0 OR k = -1; AP has NO zero mode)",
+    "smallest_nonzero_P_mode_at_beta_eq_1": "2 pi (k = +-1)",
+    "pi_injection_step": "appears in the temporal eigenvalue equation as the factor (2k+1) pi / beta -- the same circumference-to-radian ratio that injects pi in the bosonic case (KG-2), but shifted by 1/2 in the index due to AP boundary conditions",
+    "key_qualitative_difference_from_bosonic": "Bosons (periodic) have a k = 0 ZERO mode (omega = 0); fermions (AP) have NO zero mode -- the lowest temporal mode is already omega = pi / beta.  This means the fermion thermal sum has no infrared zero-mode divergence to worry about, but the lowest MODE itself carries pi.  The pi-injection happens at the lowest step of the temporal sum, not at any later analytic-continuation step.",
+    "full_thermal_Dirac_Casimir_calculation_note": "The full thermal Dirac Casimir on S^3 x S^1_beta is the Epstein-Hurwitz double sum over (n, k) with the AP shift and the Camporesi-Higuchi spatial spectrum.  This is a standard but technically involved zeta-regularized calculation (see Bytsenko et al. sec. 4.6 for the analytic structure).  We do NOT reproduce it here -- the pi-injection mechanism at the spectrum level is the verification scope of this sprint."
+  }
+}

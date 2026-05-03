@@ -1,0 +1,56 @@
+{
+  "experimental_MHz": 1057.845,
+  "alpha": 0.0072973525692838015,
+  "Z": 1,
+  "n": 2,
+  "ha_to_mhz": 6579683920.502,
+  "ls1": {
+    "convention": "+38/45 lumped form (LS-1 \u00a72.2)",
+    "SE_2S_MHz": 1039.3095582528633,
+    "SE_2P_MHz": -12.883893026326216,
+    "VP_2S_MHz": -27.12875680999901,
+    "VP_2P_MHz": 0.0,
+    "total_2S_MHz": 1012.1808014428643,
+    "total_2P_MHz": -12.883893026326216,
+    "lamb_shift_MHz": 1025.0646944691905,
+    "error_MHz": -32.78030553080953,
+    "error_pct": -3.0987815351785497
+  },
+  "ls6a_eides": {
+    "convention": "Eides 3.32 canonical (10/9 for nS_{1/2}, no separate AMM)",
+    "SE_2S_bethe_log_MHz": 953.401828354533,
+    "SE_2S_constant_MHz": 113.03648670832922,
+    "SE_2S_total_MHz": 1066.4383150628623,
+    "SE_2S_constant_used": "10/9",
+    "SE_2P_bethe_log_MHz": 4.071579979923165,
+    "SE_2P_constant_MHz": -16.95547300624938,
+    "SE_2P_total_MHz": -12.883893026326216,
+    "SE_2P_constant_used": "-1/6",
+    "VP_2S_MHz": -27.12875680999901,
+    "VP_2P_MHz": 0.0,
+    "total_2S_MHz": 1039.3095582528633,
+    "total_2P_MHz": -12.883893026326216,
+    "lamb_shift_MHz": 1052.1934512791895,
+    "error_MHz": -5.651548720810524,
+    "error_pct": -0.5342511162609385
+  },
+  "ab_comparison": {
+    "shift_lamb_eides_minus_ls1_MHz": 27.128756809999004,
+    "shift_se_2s_eides_minus_ls1_MHz": 27.128756809998958,
+    "constant_diff_2S_eides_vs_ls1": "10/9 - 38/45 = 12/45 = 4/15",
+    "constant_diff_2S_value": 0.2666666666666667,
+    "expected_se_2s_shift_MHz_from_const": 27.128756809999018,
+    "shift_matches_pure_const_diff": true,
+    "interpretation": "The +4/15 = 10/9 - 38/45 is exactly the Uehling kernel constant. LS-1 inadvertently subtracted Uehling from the canonical 10/9; Eides convention keeps Uehling separate (as VP) and uses 10/9 for SE."
+  },
+  "ls5_test": {
+    "ls5_predicted_genuine_multi_loop_MHz_central": 7.1,
+    "ls5_predicted_alpha5_band_MHz": "+3.5 to +10.7",
+    "ls5_predicted_se_convention_shift_MHz": 24.7,
+    "ls6a_actual_se_convention_shift_MHz": 27.128756809999004,
+    "ls6a_actual_genuine_residual_MHz": 5.651548720810524,
+    "ls5_reframing_confirmed": true,
+    "ls6a_in_target_lamb_band_1051_1057": true
+  },
+  "verdict": "POSITIVE -- LS-5 reframing CONFIRMED"
+}

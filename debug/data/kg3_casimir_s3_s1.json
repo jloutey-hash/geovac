@@ -1,0 +1,65 @@
+{
+  "script": "kg3_casimir_s3_s1.py",
+  "headline": {
+    "spatial_only_S3_Casimir_E": "1/240 (rational; no pi)",
+    "spatial_only_matches_textbook_to_60_dps": true,
+    "pi_first_enters_through": "temporal compactification (omega_k^t = 2 pi k / beta in Matsubara sum)",
+    "Stefan_Boltzmann_constant_pi^2/90_origin": "zeta_R(4) = pi^4/90 in temporal Matsubara sum",
+    "verdict": "Spatial Casimir on S^3 is pure-rational (one-projection: spatial mode-counting only).  Adding S^1_beta is a SECOND projection that introduces pi via 2 pi k / beta.  Matches Paper 34 dictionary."
+  },
+  "spatial_T0_Casimir": {
+    "case": "T = 0 (S^3 only, no temporal compactification)",
+    "E_Cas_symbolic": "1/240",
+    "E_Cas_numeric_60dps": "0.0041666666666666666666666666666666666666666666666667",
+    "matches_textbook_1_over_240": true,
+    "textbook_reference": "Bytsenko-Cognola-Elizalde-Moretti-Zerbini, 'Analytic Aspects of Quantum Fields', World Scientific 2003, sec. 4.5.  Also Dowker-Critchley PRD 13, 3224 (1976) and Ford PRD 11, 3370 (1975).",
+    "transcendental_ledger": [
+      {
+        "step": "spatial spectrum on unit S^3 (conformal scalar)",
+        "value": "omega_n = n+1, deg = (n+1)^2",
+        "transcendentals": "none (integers)"
+      },
+      {
+        "step": "spectral zeta zeta_X(s) = sum_n (n+1)^2 omega_n^{-s}",
+        "value": "= zeta_R(s - 2)",
+        "transcendentals": "none in form; zeta_R has algebraic values at negative odd integers via Bernoulli numbers"
+      },
+      {
+        "step": "Casimir energy E_Cas = (1/2) zeta_X(-1) = (1/2) zeta_R(-3)",
+        "value": "= (1/2) * (1/120) = 1/240",
+        "transcendentals": "NONE - pure rational (Bernoulli B_4 = -1/30, zeta_R(-3) = -B_4/4 = 1/120)"
+      }
+    ]
+  },
+  "free_energy_high_T_beta_0.1": {
+    "beta": 0.1,
+    "F_thermal_numeric_50dps": "21646.1643555368058133133365323",
+    "F_SB_per_volume_numeric": "-1096.6227112321507141491201104",
+    "F_SB_total_numeric": "-21646.4646742227590238393773194",
+    "ratio_F_thermal_to_F_SB_total": "-0.999986126201647",
+    "note": "At small beta, F_thermal/F_SB_total -> 1 (high-T limit). F_SB carries pi^2 explicitly from zeta_R(4) = pi^4/90 after Matsubara sum collapses into zeta_R(-3) of the spatial modes weighted by zeta_R(4) of the temporal modes."
+  },
+  "free_energy_mid_T_beta_1.0": {
+    "beta": 1.0,
+    "F_thermal_numeric_50dps": "2.13836467703054948168792289682",
+    "F_SB_per_volume_numeric": "-0.109662271123215095764827677776",
+    "F_SB_total_numeric": "-2.16464646742227638303200739308",
+    "ratio_F_thermal_to_F_SB_total": "-0.987858622279774",
+    "note": "At small beta, F_thermal/F_SB_total -> 1 (high-T limit). F_SB carries pi^2 explicitly from zeta_R(4) = pi^4/90 after Matsubara sum collapses into zeta_R(-3) of the spatial modes weighted by zeta_R(4) of the temporal modes."
+  },
+  "free_energy_low_T_beta_10.0": {
+    "beta": 10.0,
+    "F_thermal_numeric_50dps": "0.00000454092058272415061302101401092",
+    "F_SB_per_volume_numeric": "-0.0000109662271123215095764827677776",
+    "F_SB_total_numeric": "-0.000216464646742227638303200739308",
+    "ratio_F_thermal_to_F_SB_total": "-0.0209776545549796",
+    "note": "At small beta, F_thermal/F_SB_total -> 1 (high-T limit). F_SB carries pi^2 explicitly from zeta_R(4) = pi^4/90 after Matsubara sum collapses into zeta_R(-3) of the spatial modes weighted by zeta_R(4) of the temporal modes."
+  },
+  "matsubara_pi_origin": {
+    "omega_k_t": "2*pi*k/beta",
+    "one_loop_temporal_spectral_zeta(s)": "Piecewise((2*(beta**2/(4*pi**2))**s*zeta(2*s), re(s) > 1/2), (2**(1 - 2*s)*(beta**2/pi**2)**s*Sum(k**(-2*s), (k, 1, oo)), True))",
+    "evaluated_s_eq_1": "beta**2/12",
+    "evaluated_s_eq_2": "beta**4/720",
+    "note": "The 2 pi enters at the SPECTRUM level (omega_k^t = 2 pi k/beta). When evaluated at integer s, prefactor (2 pi/beta)^{-2s} times zeta_R(2s) = pi^{2s} * rational gives a beta^{2s} * pi^0 net, BUT the eigenvalues themselves carry 2 pi explicitly.  Casimir expansion in beta picks out terms where the net pi power is non-zero (e.g. pi^2/90 in F_SB)."
+  }
+}

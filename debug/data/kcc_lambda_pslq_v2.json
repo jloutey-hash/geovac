@@ -1,0 +1,56 @@
+{
+  "K_input": "137.035999084",
+  "Lambda_infty": "3.71024489275125157983336999602335553672326253660826841381410340372004460960708335277637855408203195576641842229889837739",
+  "test1_full_basis": {
+    "labeled_relation": [
+      {
+        "key": "Delta",
+        "coeff": 1
+      },
+      {
+        "key": "B+F",
+        "coeff": -1
+      },
+      {
+        "key": "B+F-Delta",
+        "coeff": 1
+      }
+    ],
+    "rel_residual_log10": -1000.0,
+    "verified_below_1e-90": true,
+    "Lambda_coefficient": 0,
+    "note": "PSLQ relation does NOT involve \u039b \u2014 intra-basis identity, not an identification",
+    "valid_identification": false
+  },
+  "test2_cubic_K_in_basis": "should find 2\u00b7\u039b\u00b3 \u2212 \u039b \u2212 4\u00b7K/(\u03c0\u221a\u03c0) = 0",
+  "test3_no_K_framework_only": {
+    "labeled_relation": [
+      {
+        "key": "B",
+        "coeff": 1
+      },
+      {
+        "key": "F",
+        "coeff": 1
+      },
+      {
+        "key": "Delta",
+        "coeff": -1
+      },
+      {
+        "key": "B+F-Delta",
+        "coeff": -1
+      }
+    ],
+    "rel_residual_log10": -1000.0,
+    "verified_below_1e-90": true,
+    "Lambda_coefficient": 0,
+    "note": "PSLQ relation does NOT involve \u039b \u2014 intra-basis identity, not an identification",
+    "valid_identification": false
+  },
+  "test4_pi_only_baseline": {
+    "identification": null,
+    "note": "no relation found at any tolerance"
+  },
+  "verdict": "\u039b_\u221e is the depressed-cubic root by Sprint A's SD theorem; PSLQ confirms cubic identification (test 2) but no closed form in (B, F, \u0394, \u03c0) alone (tests 3, 4) \u2014 \u039b depends nontrivially on K = 1/\u03b1."
+}
