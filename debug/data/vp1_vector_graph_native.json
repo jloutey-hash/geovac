@@ -1,0 +1,146 @@
+{
+  "sprint": "VP-1",
+  "description": "Test whether replacing the scalar (Fock-edge) photon in the graph-native QED vertex correction with a vector photon ((q, m_q), Wigner 3j vertex) closes the C \u00d7 F2 negative result.",
+  "alpha": 0.0072973525692838015,
+  "alpha_over_2pi": 0.0011614097328858596,
+  "projection_constant_nmax3": "50471424/1779441125",
+  "projection_constant_nmax3_float": 0.028363638049558958,
+  "numpy_results": {
+    "n_max_2": {
+      "n_max": 2,
+      "q_max": 1,
+      "N_electron": 10,
+      "N_photon": 3,
+      "Lambda_trace": 0.2546479089470325,
+      "Lambda_frobenius": 0.17442205617568524,
+      "Lambda_max_entry": 0.08488263631567752,
+      "Lambda_GS_block_max": 0.0,
+      "V_bare_diag_sum": 0.0,
+      "V_bare_diag_is_zero": "True",
+      "Tr_G_e": 2.9333333333333336,
+      "F2_vector_vs_TrGe": 0.0868117871410338,
+      "F2_vector_vs_VFrob": 0.03636363636363636,
+      "F2_vector_vs_Ne": 0.02546479089470325,
+      "V_Frobenius_sq": 7.002817496043394,
+      "vertex_nonzero": 20,
+      "vertex_total": 300,
+      "vertex_sparsity": 0.9333333333333333,
+      "exclude_gs_internal": false
+    },
+    "n_max_3": {
+      "n_max": 3,
+      "q_max": 2,
+      "N_electron": 28,
+      "N_photon": 8,
+      "Lambda_trace": 2.417639373634029,
+      "Lambda_frobenius": 0.7408793278985173,
+      "Lambda_max_entry": 0.1739336163789999,
+      "Lambda_GS_block_max": 0.0,
+      "V_bare_diag_sum": 0.0,
+      "V_bare_diag_is_zero": "True",
+      "Tr_G_e": 4.647619047619048,
+      "F2_vector_vs_TrGe": 0.5201887996548628,
+      "F2_vector_vs_VFrob": 0.016511387163561073,
+      "F2_vector_vs_Ne": 0.08634426334407246,
+      "V_Frobenius_sq": 146.42254764454373,
+      "vertex_nonzero": 324,
+      "vertex_total": 6272,
+      "vertex_sparsity": 0.9483418367346939,
+      "exclude_gs_internal": false
+    },
+    "n_max_4": {
+      "n_max": 4,
+      "q_max": 3,
+      "N_electron": 60,
+      "N_photon": 15,
+      "Lambda_trace": 9.994526223140953,
+      "Lambda_frobenius": 2.1353412242985685,
+      "Lambda_max_entry": 0.3301496666063941,
+      "Lambda_GS_block_max": 0.0,
+      "V_bare_diag_sum": 0.0,
+      "V_bare_diag_is_zero": "True",
+      "Tr_G_e": 6.425396825396824,
+      "F2_vector_vs_TrGe": 1.5554722135817198,
+      "F2_vector_vs_VFrob": 0.00766196441159838,
+      "F2_vector_vs_Ne": 0.16657543705234923,
+      "V_Frobenius_sq": 1304.4339135811742,
+      "vertex_nonzero": 2284,
+      "vertex_total": 54000,
+      "vertex_sparsity": 0.9577037037037037,
+      "exclude_gs_internal": false
+    }
+  },
+  "exact_results": {
+    "n_max_2": {
+      "n_max": 2,
+      "q_max": 1,
+      "N_electron": 10,
+      "N_photon": 3,
+      "Lambda_trace_exact": "4/(5*pi)",
+      "Lambda_trace_float": 0.25464790894703254,
+      "Tr_G_e_exact": "44/15",
+      "Tr_G_e_float": 2.933333333333333,
+      "F2_vector_exact": "3/(11*pi)",
+      "F2_vector_float": 0.08681178714103382
+    },
+    "n_max_3": {
+      "n_max": 3,
+      "q_max": 2,
+      "N_electron": 28,
+      "N_photon": 8,
+      "Lambda_trace_exact": "319/(42*pi)",
+      "Lambda_trace_float": 2.417639373634029,
+      "Tr_G_e_exact": "488/105",
+      "Tr_G_e_float": 4.647619047619048,
+      "F2_vector_exact": "1595/(976*pi)",
+      "F2_vector_float": 0.5201887996548629
+    }
+  },
+  "scaling_analysis": {
+    "F2_vector_TrGe": {
+      "A": 0.004925958571628248,
+      "alpha": 4.179888927109177,
+      "R_squared": 0.9983696945169893
+    },
+    "F2_vector_VFrob": {
+      "A": 0.17600736878920076,
+      "alpha": -2.2270515274080607,
+      "R_squared": 0.9919692739816135
+    },
+    "F2_scalar_reference_alpha": -0.573
+  },
+  "verdict": "NEGATIVE",
+  "comparison": [
+    {
+      "n_max": 2,
+      "F2_scalar_reference": 2.3570226039551585,
+      "F2_vector_TrGe": 0.0868117871410338,
+      "F2_vector_VFrob": 0.03636363636363636,
+      "F2_vector_avg_diag": 0.02546479089470325,
+      "projection_constant_C": null,
+      "C_times_F2_vector_TrGe": null,
+      "ratio_to_alpha_over_2pi": null
+    },
+    {
+      "n_max": 3,
+      "F2_scalar_reference": 1.873,
+      "F2_vector_TrGe": 0.5201887996548628,
+      "F2_vector_VFrob": 0.016511387163561073,
+      "F2_vector_avg_diag": 0.08634426334407246,
+      "projection_constant_C": 0.028363638049558958,
+      "C_times_F2_vector_TrGe": 0.014754446830845067,
+      "ratio_to_alpha_over_2pi": 12.703911817738398
+    },
+    {
+      "n_max": 4,
+      "F2_scalar_reference": 1.589,
+      "F2_vector_TrGe": 1.5554722135817198,
+      "F2_vector_VFrob": 0.00766196441159838,
+      "F2_vector_avg_diag": 0.16657543705234923,
+      "projection_constant_C": null,
+      "C_times_F2_vector_TrGe": null,
+      "ratio_to_alpha_over_2pi": null
+    }
+  ],
+  "verdict_text": "C \u00d7 F2_vector at n_max=3 = 1.4754e-02 is far from alpha/(2*pi) = 1.1614e-03 (ratio = 12.7039). Vector promotion does NOT close the C \u00d7 F2 negative result. Structural reason: the vector vertex enforces selection rules (GS structural zero, m_j conservation, etc.) but does NOT self-consistently match the projection constant C, which was derived from the SCALAR graph-VP vs continuum-VP ratio. The continuum F2 = alpha/(2*pi) requires both the vector vertex AND the alpha-dependent coupling at the action level, which is the calibration tier (Paper 18) that lives outside the graph."
+}

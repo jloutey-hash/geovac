@@ -1,0 +1,50 @@
+{
+  "experimental_MHz": 1057.845,
+  "alpha": 0.0072973525692838015,
+  "Z": 1,
+  "ha_to_mhz": 6579683920.502,
+  "SE_2S_Ha": 1.5795736859249748e-07,
+  "SE_2S_MHz": 1039.3095582528633,
+  "VP_2S_Ha": -4.1231094286257465e-09,
+  "VP_2S_MHz": -27.12875680999901,
+  "total_2S_Ha": 1.5383425916387174e-07,
+  "total_2S_MHz": 1012.1808014428643,
+  "SE_2P_Ha": -1.9581325154815695e-09,
+  "SE_2P_MHz": -12.883893026326216,
+  "VP_2P_Ha": 0.0,
+  "VP_2P_MHz": 0.0,
+  "total_2P_Ha": -1.9581325154815695e-09,
+  "total_2P_MHz": -12.883893026326216,
+  "lamb_shift_Ha": 1.557923916793533e-07,
+  "lamb_shift_MHz": 1025.0646944691905,
+  "error_MHz": -32.78030553080953,
+  "error_pct": -3.0987815351785497,
+  "verdict": "HEADLINE",
+  "ln_k0_2S": 2.8117698931,
+  "ln_k0_2P": -0.0300167089,
+  "bethe_log_source": "Drake & Swainson, Phys. Rev. A 41, 1243 (1990)",
+  "route": "A (standard Bethe formula + tabulated Bethe logs)",
+  "geovac_vp_check": {
+    "vacuum_polarization_coefficient_Pi": 0.0021108579925487037,
+    "vacuum_polarization_coefficient_symbolic": "1/(48*pi**2)",
+    "uehling_kernel_prefactor_4_over_15pi": 0.08488263631567752,
+    "ratio_uehling_to_Pi_times_pi3": 1.2969111506219237,
+    "note": "Both arise from the same one-loop electron bubble. \u03a0 = 1/(48\u03c0\u00b2) is the dimensionless F\u00b2 coefficient; 4/(15\u03c0) is the dimensionful short-distance Uehling kernel value at r=0 (\u00d7 m_e^{-2})."
+  },
+  "dirac_degeneracy_check": {
+    "Dirac_2S1/2_2P1/2_binding_Ha": -0.12500208018854483,
+    "non_rel_2n_binding_Ha": -0.125,
+    "fine_structure_correction_Ha": -2.0801885448340496e-06,
+    "fine_structure_correction_MHz": -13686.98312005705,
+    "comment": "In pure Dirac theory, 2S_{1/2} and 2P_{1/2} are EXACTLY degenerate (same (n,j)). The Lamb shift is the QED radiative correction that breaks this degeneracy."
+  },
+  "route_B": {
+    "route_B_status": "sketched, not computed",
+    "reason": "Bethe log cannot be derived from free Dirac-on-S\u00b3 spectrum alone; requires bound-Coulomb propagator. Route A's standard Bethe formula + tabulated k_0 is the right baseline for sprint LS-1.",
+    "future_work": [
+      "Build Coulomb-Dirac propagator on Camporesi-Higuchi basis",
+      "Compute \u27e82S|p|continuum\u27e9, \u27e82P|p|continuum\u27e9 Sturmian-style",
+      "Project onto qed_self_energy.py's spectral machinery"
+    ]
+  }
+}

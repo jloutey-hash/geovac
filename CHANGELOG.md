@@ -7,6 +7,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.27.0] - 2026-05-03
+
+### Added — Paper 34: Projection Taxonomy and Empirical Matches Catalogue
+
+- **New paper** `papers/observations/paper_34_projection_taxonomy.tex` (~1065 lines) names the GeoVac framework's two-layer architecture explicitly:
+  - **Layer 1** = bare combinatorial graph (quantum-number labels, integer eigenvalues, rational matrix elements, π-free, no physics)
+  - **Layer 2** = thirteen named projection mechanisms; each adds (i) specific physical variables, (ii) specific physical dimensions, (iii) specific transcendental signature
+- **Three-axis dictionary** (Table 1, §IV) tags each projection by variable / dimension / transcendental class
+- **Empirical matches catalogue** (§V) groups verified machine-precision matches by projection depth (zero, one, two, three, four)
+- **Off-precision matches with error-source classification** (§V.B) adds T (truncation), B (basis quality), A (approximation order), C (calibration mismatch), S (structural floor) tags
+- **Falsifiable Prediction 1** (§VI): error compounds with projection depth; consistent with Lamb shift 4-projection chain at 3.10% residual
+- **Living document protocol**: PMs may append catalogue rows autonomously per CLAUDE.md §13.8 with the constraint that no structural identification is asserted beyond what the producing sprint verified
+- Companion to Paper 18 (transcendental taxonomy) — duality stated as Observation 2
+
+### Added — Bound-state QED arc (LS-1 → LS-4)
+
+Four-sprint sequence delivering the first bound-state QED observable computed in GeoVac.
+
+- **LS-1** (Lamb shift via standard formula on Dirac-on-S³): ΔE_VP(2S₁/₂) = −27.13 MHz from Π = 1/(48π²) cross-checks textbook Uehling shift to <1%; total Lamb shift 1025.06 MHz at −3.10% (Bethe logs imported from Drake-Swainson 1990). Files: `debug/ls1_lamb_shift.{py,memo.md}`, `debug/data/ls1_lamb_shift.json`.
+- **LS-2** (velocity-form Bethe log via Coulomb Sturmians at λ=Z/n): ln k₀(2S) = 2.726 (−3.1%), ln k₀(1S) = 2.924 (−2.0%); 2P diverges (closure forces I→0 for ℓ>0). Structural identity surfaced: **the Sturmian basis at exponent λ=Z/n IS the Fock graph re-parameterized for bound-state space**. Files: `debug/ls2_bethe_log.{py,memo.md}`, `debug/data/ls2_bethe_log.json`.
+- **LS-3** (acceleration form): s-states improved 3.3× (ln k₀(2S) at −0.92%, ln k₀(1S) at +0.60%); 2P remains divergent (acceleration form mathematically identical to velocity for closure issue); T+A error decomposition demonstrated to machine precision. Files: `debug/ls3_bethe_log_regularized.{py,memo.md}`, `debug/data/ls3_bethe_log_regularized.json`.
+- **LS-4** (Drake-Swainson asymptotic-subtraction regularization, **the 13th projection** in Paper 34's Layer 2): closes 2P structural floor — ln k₀(2P) at +2.40% (N=40), 3D Bethe log at −0.24% (cleanest from-scratch result). K-cancellation between β_low(N,K) and β_high(K) verified to machine precision over 3.6 orders of magnitude in K. Combined Lamb shift 1053.76 MHz (−0.39%) at N=40, **honestly flagged as fortuitous T+A cancellation**; at N→∞ residual returns to LS-1 baseline −3.10% set by α⁵ multi-loop ceiling. Files: `debug/ls4_bethe_log_drake.{py,memo.md}`, `debug/data/ls4_bethe_log_drake.json`.
+
+**Net structural conclusion:** Lamb shift accuracy is **A-bound (one-loop ceiling), not T-bound** — no amount of basis polishing closes the −3.10% gap; only multi-loop QED can.
+
+### Added — Vector-photon graph-native sprints (VP-1, VP-2)
+
+Parallel investigation of whether vector-photon promotion in graph-native QED closes the C × F₂ → α/(2π) negative result.
+
+- **VP-1**: vector promotion (graph-native vertex with Wigner 3j coupling) gets 3.6× closer than scalar baseline but does NOT close projection mismatch. F₂_vec at n_max=2 = 3/(11π) exact symbolic — vector promotion injects π once via spherical-harmonic normalization. Files: `debug/vp1_vector_graph_native.{py,memo.md}`, `debug/data/vp1_vector_graph_native.json`.
+- **VP-2**: family table for {C_VP, C_SE, C_F2_asymp} at n_max ∈ {2,3,4,5}. **β(C) = β(continuum) − β(graph) verified to machine precision** — the projection constant is a quotient of two power laws, not a single calibration. graph_VP_trace ≈ √π · n_max ≈ a₀(S³) · n_max (Seeley-DeWitt Weyl structure). C_VP/C_SE ≈ 3/29 (CV 0.83% across n_max=3,4,5) flagged as near-miss per curve-fit-audit standards (NOT identified as a structural identity). Files: `debug/vp2_topology_projections.{py,memo.md}`, `debug/data/vp2_topology_projections.json`.
+
+### Changed — CLAUDE.md updates
+
+- **Section 2 (Active Frontier):** new bullet for the bound-state QED arc + VP sprints + Paper 34 creation, summarizing all key findings
+- **Section 6 (Paper Series):** Paper 34 added to Observations table with maintenance protocol; loading guide entry marked On-topic
+- **Section 11 (Topic-to-Paper Lookup):** ten new rows pointing at Paper 34 sections (projection taxonomy, matches catalogue, off-precision classification, error compounds prediction, Drake-Swainson, etc.)
+
+### K = π(B + F − Δ) anomaly status
+
+The Paper 2 conjecture remains anomalous under Paper 34's projection-depth prediction. With four LS sprints providing data on what 4-projection chains tolerate (~3% residual at converged basis), Paper 2's K hits 1/α at 8.8×10⁻⁸ on a 3-projection chain — six orders of magnitude below normal projection-depth tolerance. Sharpened, not resolved. Open question §VIII.3 of Paper 34.
+
+### Future sprints flagged
+
+- **LS-5**: derive Drake denominator D = 2(2ℓ+1)Z⁴/n³ from Schwartz integral form (closes empirical/convention question)
+- **LS-6**: two-loop QED on S³ for sub-1% Lamb shift accuracy (binding constraint = α⁵ multi-loop)
+
+### Notes
+
+- No production code modified in this version (all sprint deliverables in `debug/`; only `papers/observations/paper_34_projection_taxonomy.tex` and `CLAUDE.md` updated)
+- Topological integrity tests (18/18 symbolic proofs in `tests/test_fock_projection.py` and `tests/test_fock_laplacian.py`) verified passing before commit
+
 ## [2.26.1] - 2026-04-18
 
 ### Changed — Paper 2 promoted from Conjectures to Core

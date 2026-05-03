@@ -1,0 +1,669 @@
+{
+  "sprint": "VP-2",
+  "description": "Test whether each graph-to-continuum QED diagram has its own calibration constant of the form C = (heat-kernel) \u00d7 (volume) \u00d7 (graph-truncation factor).",
+  "constants": {
+    "alpha": 0.0072973525693,
+    "alpha_over_2pi": 0.0011614097328884378,
+    "Vol_S1": 6.283185307179586,
+    "Vol_S2": 12.566370614359172,
+    "Vol_S3": 19.739208802178716,
+    "Vol_S5": 31.006276680299816,
+    "a0_S3": 1.7724538509055159,
+    "a1_S3": 1.7724538509055159,
+    "a2_S3": 0.22155673136318949,
+    "PI_VP": 0.0021108579925487037,
+    "one_over_4pi": 0.07957747154594767
+  },
+  "family_table": {
+    "rows": [
+      {
+        "n_max": 2,
+        "C_VP": 0.0,
+        "C_SE": 0.0,
+        "C_F2_asymp": 0.0004936907335396032,
+        "graph_f2_scalar": 2.352504621204315,
+        "graph_vp_trace": 2.986666666666667,
+        "graph_se_trace": 14.66666666666666,
+        "continuum_vp": 0.0,
+        "continuum_se_trace": 0.0,
+        "F2_vector_TrGe": 0.0868117871410338
+      },
+      {
+        "n_max": 3,
+        "C_VP": 0.02836363804955896,
+        "C_SE": 0.27546755951254087,
+        "C_F2_asymp": 0.0006200594075461244,
+        "graph_f2_scalar": 1.8730620291593116,
+        "graph_vp_trace": 5.2680272108843536,
+        "graph_se_trace": 61.59999999999999,
+        "continuum_vp": 0.14942041704475142,
+        "continuum_se_trace": 16.968801665972514,
+        "F2_vector_TrGe": 0.5201887996548628
+      },
+      {
+        "n_max": 4,
+        "C_VP": 0.047433770878780146,
+        "C_SE": 0.45284481950736155,
+        "C_F2_asymp": 0.0007308097215428303,
+        "graph_f2_scalar": 1.5892094725365502,
+        "graph_vp_trace": 7.189370958259846,
+        "graph_se_trace": 159.5470494417863,
+        "continuum_vp": 0.3410189747966536,
+        "continuum_se_trace": 72.2500548073978,
+        "F2_vector_TrGe": 1.5554722135817198
+      },
+      {
+        "n_max": 5,
+        "C_VP": 0.059904,
+        "C_SE": 0.5821681579815075,
+        "C_F2_asymp": 0.0008320682670167748,
+        "graph_f2_scalar": 1.3958106301321667,
+        "graph_vp_trace": 8.913906,
+        "graph_se_trace": 328.01607711571006,
+        "continuum_vp": 0.533981,
+        "continuum_se_trace": 190.960515402773,
+        "F2_vector_TrGe": null
+      }
+    ]
+  },
+  "fits": {
+    "C_VP": {
+      "A": 0.005739665853853476,
+      "beta": 1.4788649609320084,
+      "R2": 0.9803237242904473,
+      "n_points": 3,
+      "n_max_fitted": [
+        3,
+        4,
+        5
+      ]
+    },
+    "C_SE": {
+      "A": 0.05555859565539502,
+      "beta": 1.4772728324417657,
+      "R2": 0.9869103251686415,
+      "n_points": 3,
+      "n_max_fitted": [
+        3,
+        4,
+        5
+      ]
+    },
+    "C_F2_asymp": {
+      "A": 0.0003323198473298821,
+      "beta": 0.5692752546566784,
+      "R2": 0.9999460728701607,
+      "n_points": 4,
+      "n_max_fitted": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "F2_vector_TrGe": {
+      "A": 0.004925958571628248,
+      "beta": 4.179888927109177,
+      "R2": 0.9983696945169893,
+      "n_points": 3,
+      "n_max_fitted": [
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "cross_diagram_ratios": {
+    "n_max_2": {},
+    "n_max_3": {
+      "C_VP/C_SE": 0.10296543847032444,
+      "C_F2_asymp/C_SE": 0.0022509344063720714,
+      "C_F2_asymp/C_VP": 0.0218610675563802
+    },
+    "n_max_4": {
+      "C_VP/C_SE": 0.10474619303447513,
+      "C_F2_asymp/C_SE": 0.001613819326315491,
+      "C_F2_asymp/C_VP": 0.015406949690136559
+    },
+    "n_max_5": {
+      "C_VP/C_SE": 0.1028981045746285,
+      "C_F2_asymp/C_SE": 0.0014292576047129075,
+      "C_F2_asymp/C_VP": 0.013890028495872977
+    },
+    "stability": {
+      "C_VP/C_SE": {
+        "values": [
+          0.10296543847032444,
+          0.10474619303447513,
+          0.1028981045746285
+        ],
+        "mean": 0.1035365786931427,
+        "std": 0.0008557681167408358,
+        "CV_pct": 0.8265369858097443,
+        "closest_rational": "3/29"
+      }
+    }
+  },
+  "pslq_identifications": {
+    "n_max_3": {
+      "C_VP": {
+        "target": 0.02836363804955896,
+        "best_single_match": {
+          "name": "1/pi",
+          "ratio": 0.08910699692557436,
+          "rational": 0.0891089108910891,
+          "rel_error": 2.1479407687169433e-05,
+          "as_fraction": [
+            9,
+            101
+          ]
+        }
+      },
+      "C_SE": {
+        "target": 0.27546755951254087,
+        "best_single_match": {
+          "name": "a2*Vol_S3",
+          "ratio": 0.0629877029985693,
+          "rational": 0.06299212598425197,
+          "rel_error": 7.021982819035135e-05,
+          "as_fraction": [
+            8,
+            127
+          ]
+        }
+      },
+      "C_F2_asymp": {
+        "target": 0.0006200594075461244,
+        "best_single_match": {
+          "name": "1/(48pi**2)",
+          "ratio": 0.29374757076739627,
+          "rational": 0.29375,
+          "rel_error": 8.269796401699086e-06,
+          "as_fraction": [
+            47,
+            160
+          ]
+        }
+      }
+    },
+    "n_max_4": {
+      "C_VP": {
+        "target": 0.047433770878780146,
+        "best_single_match": {
+          "name": "1/Vol_S3",
+          "ratio": 0.9363051076509455,
+          "rational": 0.9363057324840764,
+          "rel_error": 6.67339231406994e-07,
+          "as_fraction": [
+            147,
+            157
+          ]
+        }
+      },
+      "C_SE": {
+        "target": 0.45284481950736155,
+        "best_single_match": {
+          "name": "Vol_S2",
+          "ratio": 0.03603624573907687,
+          "rational": 0.036036036036036036,
+          "rel_error": 5.819225519585672e-06,
+          "as_fraction": [
+            4,
+            111
+          ]
+        }
+      },
+      "C_F2_asymp": {
+        "target": 0.0007308097215428303,
+        "best_single_match": {
+          "name": "PI_VP*Vol_S3",
+          "ratio": 0.01753943331702793,
+          "rational": 0.017543859649122806,
+          "rel_error": 0.0002523646012314705,
+          "as_fraction": [
+            1,
+            57
+          ]
+        }
+      }
+    },
+    "n_max_5": {
+      "C_VP": {
+        "target": 0.059904,
+        "best_single_match": {
+          "name": "a2*Vol_S3",
+          "ratio": 0.013697494424037676,
+          "rational": 0.0136986301369863,
+          "rel_error": 8.29139193976788e-05,
+          "as_fraction": [
+            1,
+            73
+          ]
+        }
+      },
+      "C_SE": {
+        "target": 0.5821681579815075,
+        "best_single_match": {
+          "name": "1/pi**2",
+          "ratio": 5.745769414188371,
+          "rational": 5.745762711864407,
+          "rel_error": 1.1664798012462785e-06,
+          "as_fraction": [
+            339,
+            59
+          ]
+        }
+      },
+      "C_F2_asymp": {
+        "target": 0.0008320682670167748,
+        "best_single_match": {
+          "name": "1/pi**3",
+          "ratio": 0.025799338904019704,
+          "rational": 0.025806451612903226,
+          "rel_error": 0.00027569345516885365,
+          "as_fraction": [
+            4,
+            155
+          ]
+        }
+      }
+    }
+  },
+  "X_analysis": {
+    "C_VP": {
+      "X_diagram_value": 0.005739665853853476,
+      "beta": 1.4788649609320084,
+      "X_diagram_PSLQ_match": {
+        "name": "1/pi**3",
+        "ratio": 0.17796566751705017,
+        "rational": 0.17796610169491525,
+        "rel_error": 2.4396720509914183e-06,
+        "as_fraction": [
+          21,
+          118
+        ]
+      }
+    },
+    "C_SE": {
+      "X_diagram_value": 0.05555859565539502,
+      "beta": 1.4772728324417657,
+      "X_diagram_PSLQ_match": {
+        "name": "a2",
+        "ratio": 0.250764647562524,
+        "rational": 0.25076452599388377,
+        "rel_error": 4.84791781424281e-07,
+        "as_fraction": [
+          82,
+          327
+        ]
+      }
+    },
+    "C_F2_asymp": {
+      "X_diagram_value": 0.0003323198473298821,
+      "beta": 0.5692752546566784,
+      "X_diagram_PSLQ_match": {
+        "name": "1/Vol_S2",
+        "ratio": 0.004176054364054557,
+        "rational": 0.0041753653444676405,
+        "rel_error": 0.00016499296389600038,
+        "as_fraction": [
+          2,
+          479
+        ]
+      }
+    },
+    "cross_diagram_ratios": {
+      "C_VP/C_SE": {
+        "ratio": 0.10330833215177075,
+        "rational_approx": "3/29"
+      },
+      "C_VP/C_F2_asymp": {
+        "ratio": 17.271510865121197,
+        "rational_approx": "1209/70"
+      },
+      "C_SE/C_F2_asymp": {
+        "ratio": 167.18410321199977,
+        "rational_approx": "6353/38"
+      }
+    }
+  },
+  "beta_constraint_analysis": {
+    "beta_VP": {
+      "value": 1.4788649609320084,
+      "closest_three": [
+        {
+          "name": "3/2",
+          "value": 1.5,
+          "rel_error_pct": 1.4291392132701513
+        },
+        {
+          "name": "5/4",
+          "value": 1.25,
+          "rel_error_pct": 15.475717322274873
+        },
+        {
+          "name": "7/4",
+          "value": 1.75,
+          "rel_error_pct": 18.333995748815177
+        }
+      ]
+    },
+    "beta_SE": {
+      "value": 1.4772728324417657,
+      "closest_three": [
+        {
+          "name": "3/2",
+          "value": 1.5,
+          "rel_error_pct": 1.5384543098019945
+        },
+        {
+          "name": "5/4",
+          "value": 1.25,
+          "rel_error_pct": 15.384621408498338
+        },
+        {
+          "name": "7/4",
+          "value": 1.75,
+          "rel_error_pct": 18.461530028102327
+        }
+      ]
+    },
+    "beta_F2_asymp": {
+      "value": 0.5692752546566784,
+      "closest_three": [
+        {
+          "name": "4/7",
+          "value": 0.5714285714285714,
+          "rel_error_pct": 0.37825581812644293
+        },
+        {
+          "name": "3/5",
+          "value": 0.6,
+          "rel_error_pct": 5.397168609032767
+        },
+        {
+          "name": "5/8",
+          "value": 0.625,
+          "rel_error_pct": 9.788717301075803
+        }
+      ]
+    },
+    "VP_SE_difference": 0.0015921284902427058,
+    "VP_SE_ratio": 1.0010777484397457
+  },
+  "finite_size_factorization": {
+    "beta_target_VP_SE": 1.5,
+    "X_VP_under_beta_3_2": {
+      "values": [
+        [
+          3,
+          0.0054585846877033255
+        ],
+        [
+          4,
+          0.005929221359847518
+        ],
+        [
+          5,
+          0.005357976644965895
+        ]
+      ],
+      "mean": 0.005581927564172247,
+      "std": 0.00024898491246360993,
+      "CV_pct": 4.46055434437606
+    },
+    "X_SE_under_beta_3_2": {
+      "values": [
+        [
+          3,
+          0.05301375654585824
+        ],
+        [
+          4,
+          0.056605602438420194
+        ],
+        [
+          5,
+          0.0520707030232995
+        ]
+      ],
+      "mean": 0.05389668733585931,
+      "std": 0.001953800273188032,
+      "CV_pct": 3.6250841559386555
+    },
+    "beta_F2_scalar_used": -0.5693,
+    "F2_scalar_under_n_pow_beta": {
+      "values": [
+        [
+          2,
+          3.4906544731222695
+        ],
+        [
+          3,
+          3.500880528395146
+        ],
+        [
+          4,
+          3.4989190757479656
+        ],
+        [
+          5,
+          3.4893949238197264
+        ]
+      ],
+      "mean": 3.4949622502712767,
+      "std": 0.005005860355325613,
+      "CV_pct": 0.14323074176086054
+    }
+  },
+  "schwinger_calibration_check": {
+    "alpha_over_2pi": 0.0011614097328884378,
+    "rows": [
+      {
+        "n_max": 2,
+        "C_F2_asymp": 0.0004936907335396032,
+        "F2_graph": 2.352504621204315,
+        "C_times_F2": 0.0011614097320976644,
+        "matches_alpha_over_2pi": true
+      },
+      {
+        "n_max": 3,
+        "C_F2_asymp": 0.0006200594075461244,
+        "F2_graph": 1.8730620291593116,
+        "C_times_F2": 0.0011614097320976644,
+        "matches_alpha_over_2pi": true
+      },
+      {
+        "n_max": 4,
+        "C_F2_asymp": 0.0007308097215428303,
+        "F2_graph": 1.5892094725365502,
+        "C_times_F2": 0.0011614097320976644,
+        "matches_alpha_over_2pi": true
+      },
+      {
+        "n_max": 5,
+        "C_F2_asymp": 0.0008320682670167748,
+        "F2_graph": 1.3958106301321667,
+        "C_times_F2": 0.0011614097320976644,
+        "matches_alpha_over_2pi": true
+      }
+    ]
+  },
+  "graph_trace_heat_kernel_test": {
+    "graph_VP_vs_a0_times_n": {
+      "hypothesis": "graph_VP_trace ~ \u221a\u03c0 * n_max",
+      "data": [
+        {
+          "n_max": 2,
+          "graph_vp_trace": 2.986666666666667,
+          "a0_times_n": 3.5449077018110318,
+          "ratio_to_a0n": 0.8425231114313162
+        },
+        {
+          "n_max": 3,
+          "graph_vp_trace": 5.2680272108843536,
+          "a0_times_n": 5.317361552716548,
+          "ratio_to_a0n": 0.9907220260756971
+        },
+        {
+          "n_max": 4,
+          "graph_vp_trace": 7.189370958259846,
+          "a0_times_n": 7.0898154036220635,
+          "ratio_to_a0n": 1.014042051727739
+        },
+        {
+          "n_max": 5,
+          "graph_vp_trace": 8.913906,
+          "a0_times_n": 8.862269254527579,
+          "ratio_to_a0n": 1.0058265827847694
+        }
+      ],
+      "asymptotic_ratio_n5": 1.0058265827847694
+    },
+    "graph_SE_local_exponents": [
+      {
+        "n_pair": [
+          2,
+          3
+        ],
+        "p_local": 3.539353933523893
+      },
+      {
+        "n_pair": [
+          3,
+          4
+        ],
+        "p_local": 3.308085835529065
+      },
+      {
+        "n_pair": [
+          4,
+          5
+        ],
+        "p_local": 3.2298659718464586
+      }
+    ],
+    "graph_VP_local_exponents": [
+      {
+        "n_pair": [
+          2,
+          3
+        ],
+        "p_local": 1.399622309087844
+      },
+      {
+        "n_pair": [
+          3,
+          4
+        ],
+        "p_local": 1.0808728109189318
+      },
+      {
+        "n_pair": [
+          4,
+          5
+        ],
+        "p_local": 0.963544984863374
+      }
+    ],
+    "graph_F2_scalar_local_exponents": [
+      {
+        "n_pair": [
+          2,
+          3
+        ],
+        "p_local": -0.5620853973397101
+      },
+      {
+        "n_pair": [
+          3,
+          4
+        ],
+        "p_local": -0.5712480918499838
+      },
+      {
+        "n_pair": [
+          4,
+          5
+        ],
+        "p_local": -0.5815151787924727
+      }
+    ]
+  },
+  "continuum_trace_growth_test": {
+    "continuum_VP_local_exponents": [
+      {
+        "n_pair": [
+          3,
+          4
+        ],
+        "p_local": 2.868354602820695
+      },
+      {
+        "n_pair": [
+          4,
+          5
+        ],
+        "p_local": 2.009567988236598
+      }
+    ],
+    "continuum_SE_local_exponents": [
+      {
+        "n_pair": [
+          3,
+          4
+        ],
+        "p_local": 5.035964220236733
+      },
+      {
+        "n_pair": [
+          4,
+          5
+        ],
+        "p_local": 4.355642767804067
+      }
+    ]
+  },
+  "projection_decomposition": {
+    "VP_step_3_to_4": {
+      "p_continuum": 2.868354602820695,
+      "p_graph": 1.0808728109189318,
+      "beta_C_predicted": 1.7874817919017634,
+      "beta_C_observed": 1.7874817919017643
+    },
+    "VP_step_4_to_5": {
+      "p_continuum": 2.009567988236598,
+      "p_graph": 0.963544984863374,
+      "beta_C_predicted": 1.0460230033732238,
+      "beta_C_observed": 1.046003071411423
+    }
+  },
+  "heat_kernel_test": {
+    "C_VP": {
+      "fit_A": 0.005739665853853476,
+      "fit_beta": 1.4788649609320084,
+      "geom_hint_name": "PI_VP*Vol_S3",
+      "geom_hint_value": 0.041666666666666664,
+      "A_over_geom_hint": 0.13775198049248344,
+      "A_over_geom_hint_simple_rational": "27/196"
+    },
+    "C_SE": {
+      "fit_A": 0.05555859565539502,
+      "fit_beta": 1.4772728324417657,
+      "geom_hint_name": "a0",
+      "geom_hint_value": 1.7724538509055159,
+      "A_over_geom_hint": 0.0313455809453155,
+      "A_over_geom_hint_simple_rational": "6/191"
+    },
+    "C_F2_asymp": {
+      "fit_A": 0.0003323198473298821,
+      "fit_beta": 0.5692752546566784,
+      "geom_hint_name": "1/(4pi)",
+      "geom_hint_value": 0.07957747154594767,
+      "A_over_geom_hint": 0.004176054364054557,
+      "A_over_geom_hint_simple_rational": "1/200"
+    }
+  },
+  "verdict": "POSITIVE PARTIAL \u2014 strong",
+  "verdict_text": "Multiple structural findings, but no single closed-form C = HK \u00d7 Vol \u00d7 n^p fits the family universally. Best reading: C is a QUOTIENT of two power laws with separately-converging Weyl/heat-kernel scaling, and each diagram topology has its own quotient. The dictionary is below.\n\nKey structural findings:\n  \u2605 graph_VP_trace ~ \u221a\u03c0 * n_max asymptotically (ratio \u2192 1.00 at n=3,4,5)\n  \u2605 \u03b2(C_VP) = \u03b2(continuum_VP) \u2212 \u03b2(graph_VP) verified to machine precision\n  \u2605 C_VP/C_SE \u2248 3/29 stable to CV 0.83%\n  \u2605 F2_graph_scalar(n) ~ 3.4950 * n^(-0.5693), CV 0.143% (extremely tight power law)\n\nNumerical summary:\n  - \u03b2_VP = +1.4789, \u03b2_SE = +1.4773, \u03b2_F2_asymp = +0.5693\n  - C_VP/C_SE mean = 0.10354 \u2248 3/29 (CV 0.83%)\n"
+}
