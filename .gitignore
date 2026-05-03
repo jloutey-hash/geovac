@@ -90,3 +90,7 @@ geometric-solver/
 *.tmp
 *.bak
 *_temp.txt
+
+# Local scratch / runtime
+temp/
+.claude/scheduled_tasks.lock

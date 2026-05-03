@@ -1,0 +1,361 @@
+{
+  "n_max_2": {
+    "n_max": 2,
+    "V": 5,
+    "E": 3,
+    "n_angular_edges": 2,
+    "n_radial_edges": 1,
+    "commutator_abs_delta_m": {
+      "name": "|delta_m|",
+      "frobenius_norm_commutator": 0.0,
+      "frobenius_norm_L1": 3.7416573867739413,
+      "frobenius_norm_M": 1.4142135623730951,
+      "relative_norm": 0.0,
+      "n_off_diag_nonzero_L1": 2,
+      "n_block_diagonal": 2,
+      "n_off_block": 0,
+      "block_diagonal_fraction": 1.0,
+      "commutes_exactly": true
+    },
+    "block_structure_abs_delta_m": {
+      "name": "|delta_m|",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 1,
+        "1": 2
+      },
+      "total_frobenius_sq": 14.0,
+      "within_block_frobenius_sq": 14.000000000000002,
+      "cross_block_frobenius_sq": 0.0,
+      "fraction_within_block": 1.0000000000000002,
+      "fraction_cross_block": 0.0,
+      "is_block_diagonal": true,
+      "nonzero_cross_blocks": []
+    },
+    "commutator_delta_n": {
+      "name": "delta_n",
+      "frobenius_norm_commutator": 0.0,
+      "frobenius_norm_L1": 3.7416573867739413,
+      "frobenius_norm_M": 1.0,
+      "relative_norm": 0.0,
+      "n_off_diag_nonzero_L1": 2,
+      "n_block_diagonal": 2,
+      "n_off_block": 0,
+      "block_diagonal_fraction": 1.0,
+      "commutes_exactly": true
+    },
+    "block_structure_delta_n": {
+      "name": "delta_n",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 2,
+        "1": 1
+      },
+      "total_frobenius_sq": 14.0,
+      "within_block_frobenius_sq": 14.000000000000002,
+      "cross_block_frobenius_sq": 0.0,
+      "fraction_within_block": 1.0000000000000002,
+      "fraction_cross_block": 0.0,
+      "is_block_diagonal": true,
+      "nonzero_cross_blocks": []
+    },
+    "commutator_delta_m_signed": {
+      "name": "delta_m_signed",
+      "frobenius_norm_commutator": 0.0,
+      "frobenius_norm_L1": 3.7416573867739413,
+      "frobenius_norm_M": 1.4142135623730951,
+      "relative_norm": 0.0,
+      "n_off_diag_nonzero_L1": 2,
+      "n_block_diagonal": 2,
+      "n_off_block": 0,
+      "block_diagonal_fraction": 1.0,
+      "commutes_exactly": true
+    },
+    "block_structure_l_sector": {
+      "name": "l_sector",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 1,
+        "1": 2
+      },
+      "total_frobenius_sq": 14.0,
+      "within_block_frobenius_sq": 14.000000000000002,
+      "cross_block_frobenius_sq": 0.0,
+      "fraction_within_block": 1.0000000000000002,
+      "fraction_cross_block": 0.0,
+      "is_block_diagonal": true,
+      "nonzero_cross_blocks": []
+    },
+    "eigenvector_localization_abs_dm": {
+      "n_eigenvectors": 3,
+      "n_pure": 3,
+      "fraction_pure": 1.0
+    },
+    "eigenvector_localization_l_sector": {
+      "n_eigenvectors": 3,
+      "n_pure": 3,
+      "fraction_pure": 1.0
+    }
+  },
+  "n_max_3": {
+    "n_max": 3,
+    "V": 14,
+    "E": 13,
+    "n_angular_edges": 8,
+    "n_radial_edges": 5,
+    "commutator_abs_delta_m": {
+      "name": "|delta_m|",
+      "frobenius_norm_commutator": 4.0,
+      "frobenius_norm_L1": 8.94427190999916,
+      "frobenius_norm_M": 2.8284271247461903,
+      "relative_norm": 0.15811388300841897,
+      "n_off_diag_nonzero_L1": 28,
+      "n_block_diagonal": 12,
+      "n_off_block": 16,
+      "block_diagonal_fraction": 0.42857142857142855,
+      "commutes_exactly": false
+    },
+    "block_structure_abs_delta_m": {
+      "name": "|delta_m|",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 5,
+        "1": 8
+      },
+      "total_frobenius_sq": 80.00000000000001,
+      "within_block_frobenius_sq": 64.0,
+      "cross_block_frobenius_sq": 16.000000000000004,
+      "fraction_within_block": 0.7999999999999998,
+      "fraction_cross_block": 0.2,
+      "is_block_diagonal": false,
+      "nonzero_cross_blocks": [
+        {
+          "block1_value": 0,
+          "block2_value": 1,
+          "cross_block_frobenius": 2.8284271247461903,
+          "n_edges_block1": 5,
+          "n_edges_block2": 8
+        }
+      ]
+    },
+    "commutator_delta_n": {
+      "name": "delta_n",
+      "frobenius_norm_commutator": 4.0,
+      "frobenius_norm_L1": 8.94427190999916,
+      "frobenius_norm_M": 2.23606797749979,
+      "relative_norm": 0.19999999999999996,
+      "n_off_diag_nonzero_L1": 28,
+      "n_block_diagonal": 12,
+      "n_off_block": 16,
+      "block_diagonal_fraction": 0.42857142857142855,
+      "commutes_exactly": false
+    },
+    "block_structure_delta_n": {
+      "name": "delta_n",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 8,
+        "1": 5
+      },
+      "total_frobenius_sq": 80.00000000000001,
+      "within_block_frobenius_sq": 64.0,
+      "cross_block_frobenius_sq": 16.000000000000004,
+      "fraction_within_block": 0.7999999999999998,
+      "fraction_cross_block": 0.2,
+      "is_block_diagonal": false,
+      "nonzero_cross_blocks": [
+        {
+          "block1_value": 0,
+          "block2_value": 1,
+          "cross_block_frobenius": 2.8284271247461903,
+          "n_edges_block1": 8,
+          "n_edges_block2": 5
+        }
+      ]
+    },
+    "commutator_delta_m_signed": {
+      "name": "delta_m_signed",
+      "frobenius_norm_commutator": 4.0,
+      "frobenius_norm_L1": 8.94427190999916,
+      "frobenius_norm_M": 2.8284271247461903,
+      "relative_norm": 0.15811388300841897,
+      "n_off_diag_nonzero_L1": 28,
+      "n_block_diagonal": 12,
+      "n_off_block": 16,
+      "block_diagonal_fraction": 0.42857142857142855,
+      "commutes_exactly": false
+    },
+    "block_structure_l_sector": {
+      "name": "l_sector",
+      "unique_values": [
+        0,
+        1,
+        2
+      ],
+      "block_sizes": {
+        "0": 2,
+        "1": 7,
+        "2": 4
+      },
+      "total_frobenius_sq": 80.00000000000001,
+      "within_block_frobenius_sq": 80.0,
+      "cross_block_frobenius_sq": 0.0,
+      "fraction_within_block": 0.9999999999999998,
+      "fraction_cross_block": 0.0,
+      "is_block_diagonal": true,
+      "nonzero_cross_blocks": []
+    },
+    "eigenvector_localization_abs_dm": {
+      "n_eigenvectors": 13,
+      "n_pure": 8,
+      "fraction_pure": 0.6153846153846154
+    },
+    "eigenvector_localization_l_sector": {
+      "n_eigenvectors": 13,
+      "n_pure": 13,
+      "fraction_pure": 1.0
+    }
+  },
+  "n_max_4": {
+    "n_max": 4,
+    "V": 30,
+    "E": 34,
+    "n_angular_edges": 20,
+    "n_radial_edges": 14,
+    "commutator_abs_delta_m": {
+      "name": "|delta_m|",
+      "frobenius_norm_commutator": 8.0,
+      "frobenius_norm_L1": 15.427248620541512,
+      "frobenius_norm_M": 4.47213595499958,
+      "relative_norm": 0.11595420713048969,
+      "n_off_diag_nonzero_L1": 102,
+      "n_block_diagonal": 38,
+      "n_off_block": 64,
+      "block_diagonal_fraction": 0.37254901960784315,
+      "commutes_exactly": false
+    },
+    "block_structure_abs_delta_m": {
+      "name": "|delta_m|",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 14,
+        "1": 20
+      },
+      "total_frobenius_sq": 237.99999999999997,
+      "within_block_frobenius_sq": 174.0,
+      "cross_block_frobenius_sq": 64.00000000000001,
+      "fraction_within_block": 0.73109243697479,
+      "fraction_cross_block": 0.2689075630252102,
+      "is_block_diagonal": false,
+      "nonzero_cross_blocks": [
+        {
+          "block1_value": 0,
+          "block2_value": 1,
+          "cross_block_frobenius": 5.656854249492381,
+          "n_edges_block1": 14,
+          "n_edges_block2": 20
+        }
+      ]
+    },
+    "commutator_delta_n": {
+      "name": "delta_n",
+      "frobenius_norm_commutator": 8.0,
+      "frobenius_norm_L1": 15.427248620541512,
+      "frobenius_norm_M": 3.7416573867739413,
+      "relative_norm": 0.1385917857350474,
+      "n_off_diag_nonzero_L1": 102,
+      "n_block_diagonal": 38,
+      "n_off_block": 64,
+      "block_diagonal_fraction": 0.37254901960784315,
+      "commutes_exactly": false
+    },
+    "block_structure_delta_n": {
+      "name": "delta_n",
+      "unique_values": [
+        0,
+        1
+      ],
+      "block_sizes": {
+        "0": 20,
+        "1": 14
+      },
+      "total_frobenius_sq": 237.99999999999997,
+      "within_block_frobenius_sq": 174.0,
+      "cross_block_frobenius_sq": 64.00000000000001,
+      "fraction_within_block": 0.73109243697479,
+      "fraction_cross_block": 0.2689075630252102,
+      "is_block_diagonal": false,
+      "nonzero_cross_blocks": [
+        {
+          "block1_value": 0,
+          "block2_value": 1,
+          "cross_block_frobenius": 5.656854249492381,
+          "n_edges_block1": 20,
+          "n_edges_block2": 14
+        }
+      ]
+    },
+    "commutator_delta_m_signed": {
+      "name": "delta_m_signed",
+      "frobenius_norm_commutator": 8.0,
+      "frobenius_norm_L1": 15.427248620541512,
+      "frobenius_norm_M": 4.47213595499958,
+      "relative_norm": 0.11595420713048969,
+      "n_off_diag_nonzero_L1": 102,
+      "n_block_diagonal": 38,
+      "n_off_block": 64,
+      "block_diagonal_fraction": 0.37254901960784315,
+      "commutes_exactly": false
+    },
+    "block_structure_l_sector": {
+      "name": "l_sector",
+      "unique_values": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "block_sizes": {
+        "0": 3,
+        "1": 12,
+        "2": 13,
+        "3": 6
+      },
+      "total_frobenius_sq": 237.99999999999997,
+      "within_block_frobenius_sq": 237.99999999999997,
+      "cross_block_frobenius_sq": 0.0,
+      "fraction_within_block": 1.0,
+      "fraction_cross_block": 0.0,
+      "is_block_diagonal": true,
+      "nonzero_cross_blocks": []
+    },
+    "eigenvector_localization_abs_dm": {
+      "n_eigenvectors": 34,
+      "n_pure": 14,
+      "fraction_pure": 0.4117647058823529
+    },
+    "eigenvector_localization_l_sector": {
+      "n_eigenvectors": 34,
+      "n_pure": 29,
+      "fraction_pure": 0.8529411764705882
+    }
+  }
+}

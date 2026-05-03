@@ -1,0 +1,40 @@
+{
+  "node_count_comparison": {
+    "finding": "Scalar spin-orbital count = Dirac spinor count at every n_max",
+    "reason": "Representation-theoretic identity: sum over l of [(2l+2)+(2l)] = 2*sum(2l+1)"
+  },
+  "h1_structure": {
+    "scalar": "Graph Laplacian with off-diagonal \u03ba=-1/16 couplings (THE framework identity)",
+    "dirac": "Exactly diagonal E_Dirac(n,\u03ba) (NO graph structure)",
+    "current_rel": "Graph Laplacian + perturbative SO (best of both)"
+  },
+  "eri_comparison": {
+    "scalar_eri_count": 65,
+    "dirac_eri_count": 892,
+    "finding": "Same radial integrals, jj-coupled angular coefficients have comparable density"
+  },
+  "pauli_counts": {
+    "scalar_Q": 10,
+    "dirac_Q": 10,
+    "scalar_N_pauli": 111,
+    "dirac_nr_N_pauli": 471,
+    "dirac_exact_N_pauli": 471
+  },
+  "verdict": {
+    "recommendation": "DO NOT BUILD native Dirac graph Hamiltonian",
+    "reasons": [
+      "1. Same qubit count \u2014 no savings",
+      "2. Dirac h1 is exactly diagonal \u2014 loses the graph topology that defines GeoVac",
+      "3. Same ERIs (radial identical, angular comparable density)",
+      "4. Current scalar+perturbative SO already uses (\u03ba,m_j) labels for ERIs",
+      "5. Fine structure gain is O(\u03b1\u00b2) \u2248 5e-5, negligible for quantum simulation",
+      "6. The graph off-diagonal \u03ba couplings are essential for graph-native CI"
+    ],
+    "what_to_do_instead": [
+      "A. Keep scalar graph + perturbative SO (current approach)",
+      "B. If exact fine structure needed: just swap h1 diagonal to E_Dirac (1 line change)",
+      "C. The real Dirac graph direction is the Ihara zeta Rule B adjacency \u2014 but that is",
+      "   a research investigation (finding the Dirac \u03ba-analog), not an engineering task"
+    ]
+  }
+}

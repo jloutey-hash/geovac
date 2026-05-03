@@ -1,0 +1,141 @@
+{
+  "section_1_structure": {
+    "sq_forward_n_ext_0": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sq_backward_n_ext_0": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "products_n_ext_0": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "section_2_sq_closed_form": {
+    "products_n_ext_1": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "symmetric": true
+  },
+  "section_4_hurwitz": {
+    "1": {
+      "n_ext": 1,
+      "P_tail": 1,
+      "Lambda_exact": 0.6548566914656987,
+      "Lambda_direct": 0.6508726303555953,
+      "pi2_coefficient": 1,
+      "pi4_coefficient": -0.08333333333333333,
+      "rational_part": -1.0973234567901236,
+      "rational_part_exact": "-55552/50625",
+      "D4": 1.7521801482558221
+    },
+    "2": {
+      "n_ext": 2,
+      "P_tail": 9,
+      "Lambda_exact": 5.401243417693579,
+      "Lambda_direct": 5.365386867702648,
+      "pi2_coefficient": 9,
+      "pi4_coefficient": -0.75,
+      "rational_part": -10.36837791660882,
+      "rational_part_exact": "-140031424/13505625",
+      "D4": 1.7521801482558221
+    },
+    "3": {
+      "n_ext": 3,
+      "P_tail": 25,
+      "Lambda_exact": 13.241768557060773,
+      "Lambda_direct": 13.142167029308187,
+      "pi2_coefficient": 25,
+      "pi4_coefficient": -2.0833333333333335,
+      "rational_part": -30.56273514933478,
+      "rational_part_exact": "-33434276032/1093955625",
+      "D4": 1.7521801482558221
+    }
+  },
+  "section_5_algebraic": {
+    "1": {
+      "rational_part": "-55552/50625",
+      "rational_part_float": -1.0973234567901236,
+      "P_tail": 1,
+      "Lambda_algebraic": 0.6548566914656987,
+      "Lambda_direct": 0.6449557418075238,
+      "head_rational": "0",
+      "diag_rational": "0",
+      "D_head_rational": "55552/50625"
+    },
+    "2": {
+      "rational_part": "-140031424/13505625",
+      "rational_part_float": -10.36837791660882,
+      "P_tail": 9,
+      "Lambda_algebraic": 5.401243417693579,
+      "Lambda_direct": 5.312134870770005,
+      "head_rational": "192/625",
+      "diag_rational": "1536/2401",
+      "D_head_rational": "152820352/121550625"
+    },
+    "3": {
+      "rational_part": "-33434276032/1093955625",
+      "rational_part_float": -30.56273514933478,
+      "P_tail": 25,
+      "Lambda_algebraic": 13.241768557060773,
+      "Lambda_direct": 12.994244815606399,
+      "head_rational": "2620992/1500625",
+      "diag_rational": "10240/6561",
+      "D_head_rational": "13338848512/9845600625"
+    }
+  },
+  "section_7_cg_cancellation": {
+    "conclusion": "CG irrationals grow with n_int; no cancellation possible",
+    "mechanism": "Fixed m_j breaks CG orthogonality; number field Q(sqrt(primes)) grows"
+  },
+  "elapsed_seconds": 0.19091272354125977
+}

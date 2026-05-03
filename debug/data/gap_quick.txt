@@ -1,0 +1,3 @@
+n_max=2: N=10, E=3, Tr=14.666667, GS_formula=1.000000, t=0.46s
+  n_fock=1: Sigma_graph=1.00000000, Sigma_cont=0.00000000, Delta=1.00000000
+  n_fock=2: Sigma_graph=1.58333333, Sigma_cont=0.15993336, Delta=1.42339997

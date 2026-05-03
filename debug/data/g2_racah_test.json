@@ -1,0 +1,42 @@
+{
+  "B_values": [
+    {
+      "n_int": 1,
+      "B_float": 0.0006957799814057577,
+      "is_rational": null,
+      "B_exact": "-128*sqrt(3)/91125 + 112*sqrt(2)/50625",
+      "time": 0.16009283065795898,
+      "clean_form": "16*(63*sqrt(2) - 40*sqrt(3)) / 455625",
+      "field": "Q(sqrt(2), sqrt(3))"
+    },
+    {
+      "n_int": 2,
+      "B_float": 3.764933515152875e-06,
+      "is_rational": null,
+      "B_exact": "-68/496125 + 52*sqrt(30)/52093125 + 1252*sqrt(3)/72930375 + 116*sqrt(10)/3472875",
+      "time": 0.5995287895202637
+    },
+    {
+      "n_int": 3,
+      "B_float": 2.8467998647619535e-06,
+      "is_rational": null,
+      "B_exact": "-1216*sqrt(3)/200930625 - 12736*sqrt(30)/27125634375 - 23488*sqrt(2)/27125634375 + 69248*sqrt(5)/9041878125",
+      "time": 1.4932100772857666
+    }
+  ],
+  "structural_obstruction": true,
+  "obstruction_type": "algebraic_irrationals_from_external_CG_coupling",
+  "field_extensions": {
+    "n_int_1": "Q(sqrt(2), sqrt(3))",
+    "n_int_2": "Q(sqrt(2), sqrt(3), sqrt(5))",
+    "general": "Q(sqrt(2), sqrt(3), sqrt(5), sqrt(7), ...) grows with n_int"
+  },
+  "root_cause": "Positive chirality spinors on S^3 have (j_L, j_R) = ((n+1)/2, n/2) with j_L - j_R = 1/2 always. The CG coefficients CG(j_L, j_R, j; mL, mR, mj) for this half-integer step contain sqrt(2j+1) type irrationals. The g-2 extraction requires fixed mj_ext = +1/2 and -1/2, so these CGs are NOT summed over and the irrationals survive in c_up - c_dn.",
+  "racah_reduction_status": "The 9j symbols for vertex recoupling are RATIONAL (ratios of factorials). The Racah reduction works correctly. But the irrationals come from the REMAINING CG coefficients in the external coupling, not from the recoupling coefficients.",
+  "paper_18_consistency": "Consistent. The irrationals are ALGEBRAIC (square roots), not transcendental. Paper 18 T9 theorem (one-loop = pi^{even} only) applies to the summed series, not to individual terms.",
+  "wigner_eckart": {
+    "factor": "sqrt(6)/3",
+    "reduced_ME_rational": false,
+    "explanation": "Wigner-Eckart extracts sqrt(6)/3 from the mj-dependence, but the reduced matrix element is itself irrational because internal vertex couplings involve CGs between unequal (j_L, j_R) pairs."
+  }
+}
