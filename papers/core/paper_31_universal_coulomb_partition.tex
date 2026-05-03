@@ -1,0 +1,1154 @@
+\documentclass[twocolumn,pra,amsmath,amssymb,superscriptaddress]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+
+\title{The Universal/Coulomb Partition of the GeoVac Spectral Triple\\
+{\large What belongs to angular momentum, what belongs to $-Z/r$,\\
+and why the difference matters}}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{May 2, 2026}
+
+\begin{abstract}
+The GeoVac framework~\cite{paper7,paper14} is a discrete spectral
+triple in the sense of Connes~\cite{connes_book1994} and the
+graph-spectral-triple lineage of Marcolli and van
+Suijlekom~\cite{marcolli_vs2014}: an algebra $\mathcal{A}$ of
+functions on the Fock-projected discrete graph, a Hilbert space
+$\mathcal{H}$ of scalar and spinor states, and a Dirac operator $D$
+inherited from the Camporesi--Higuchi spectrum on $S^3$.  This paper
+identifies a clean structural decomposition of the framework's
+results into two disjoint sectors:
+\begin{itemize}
+\item A \emph{universal sector}, depending only on $\mathcal{A}$ and
+  the angular structure of the basis.  The angular sparsity theorem
+  of Paper~22~\cite{paper22} --- ERI density $1.44\%$ at $l_{\max}=3$,
+  bit-identical across Coulomb, harmonic oscillator, Woods--Saxon,
+  square well, and Yukawa potentials --- is the canonical example.
+\item A \emph{potential-specific sector}, depending on the choice
+  of $D$.  The Fock projection rigidity theorem of
+  Paper~23~\cite{paper23} ($S^3$ projection unique to $-Z/r$ by
+  $\mathrm{SO}(4)$ symmetry) and the Bargmann--Segal rigidity
+  theorem of Paper~24~\cite{paper24} (the 3D isotropic harmonic
+  oscillator is the unique central potential whose spectrum arises
+  from the Euler operator on $H^2(S^5)$ restricted to symmetric
+  $\mathrm{SU}(3)$ irreps) jointly establish the partition's
+  sharpness.
+\end{itemize}
+The two rigidity theorems sit on opposite sides of an operator-order
+divide: Coulomb requires a second-order Riemannian Laplacian and a
+nonlinear stereographic projection that introduces calibration $\pi$;
+the HO uses a first-order complex Euler operator and a linear-affine
+Bargmann projection that is bit-exactly $\pi$-free.  This asymmetry is
+not an accident of two examples; it is a structural feature of
+sphere-quotient discretizations.  The Sprint 5 result on $S^5$ gauge
+structure~\cite{paper25} sharpens the Coulomb/HO asymmetry from two
+layers to three (spectrum-computing role of $L_0$, calibration $\pi$,
+and Wilson physical content), all three stratifying along the same
+operator-order divide.  We frame the partition in spectral-triple
+language and identify which features of GeoVac transfer to non-Coulomb
+systems for free, which require system-specific rederivation, and what
+this implies for nuclear, oscillator, and gauge-theoretic
+extensions of the framework.
+\end{abstract}
+
+\maketitle
+
+%=================================================================
+\section{Introduction}
+\label{sec:intro}
+%=================================================================
+
+The GeoVac framework~\cite{paper0,paper1,paper7} discretizes
+quantum-mechanical Hamiltonians on natural geometries by replacing
+the continuous Laplace--Beltrami operator with the graph Laplacian
+on a packed lattice of quantum-number labels.  For the hydrogen atom,
+the result is exact: the discrete spectrum $\lambda_n = -(n^2 - 1)$
+recovers the hydrogenic Rydberg series under Fock's stereographic
+projection $p_0 = \sqrt{-2E}$ from $S^3$ to momentum
+space~\cite{fock1935,bander_itzykson1966}.  The framework has been
+extended to multi-electron atoms~\cite{paper13},
+diatomics~\cite{paper11,paper15}, polyatomics~\cite{paper17},
+nuclear shell model Hamiltonians~\cite{paper23}, and the
+three-dimensional isotropic harmonic oscillator~\cite{paper24}.  In
+each case the same combinatorial machinery --- Wigner $3j$ symbols,
+Gaunt selection rules, $jj$-coupled angular reduction --- produces a
+sparse one- and two-body Hamiltonian with the same structural
+features.  Paper~22's central observation~\cite{paper22} is that this
+sparsity is not particular to any of these systems: it is a property
+of the angular momentum algebra and persists across all spherical
+fermion bases, regardless of the radial potential.
+
+The same machinery, however, does \emph{not} produce identical
+transcendental content.  The Coulomb framework on $S^3$ is honestly
+$\pi$-laden at every level above the bare graph: the kinetic
+calibration $\kappa = -1/16$ ratio is set by the Fock projection
+Jacobian, the $\alpha$-conjecture combination $K = \pi(B + F -
+\Delta)$~\cite{paper2_alpha} carries an explicit factor of $\pi$ as
+the Hopf-bundle measure $\mathrm{Vol}(S^2)/4 = \pi$, and the spectral
+zeta values appear at even integer arguments via the Jacobi-theta
+inversion formula~\cite{paper18,paper28}.  The 3D harmonic oscillator
+discretized via Bargmann--Segal on $S^5$ is by contrast bit-exactly
+$\pi$-free in exact rational arithmetic at every finite
+$N_{\max}$~\cite{paper24}: every adjacency, every dipole transition
+amplitude, every spectral eigenvalue is a rational number or finite
+algebraic extension.  This is not a numerical accident; Paper~24
+establishes that no $\pi$ enters the discrete graph because no
+calibration step has been performed.  The harmonic oscillator's
+Bargmann transform is unitary by construction, requires no
+stereographic distortion, and produces a linear spectrum
+$\hbar\omega(N + 3/2)$ with no transcendental coefficient anywhere.
+
+These two observations --- universal angular sparsity and
+potential-specific transcendental content --- point at a structural
+decomposition of the GeoVac framework that, once stated explicitly,
+clarifies what the framework does and does not transfer across
+physical systems.  The decomposition is the standard separation of a
+spectral triple $(\mathcal{A}, \mathcal{H}, D)$ into its algebra
+$\mathcal{A}$ and its Dirac operator $D$, in the sense of
+Connes~\cite{connes_book1994} and the graph-spectral-triple framework
+of Marcolli and van Suijlekom~\cite{marcolli_vs2014}.  In this
+language, angular sparsity belongs to $\mathcal{A}$ (it is a
+selection rule on which products of basis functions are nonzero,
+independent of any operator); rigidity, calibration $\pi$, and the
+particular spectrum belong to $D$ (they encode the choice of
+potential and projection).
+
+The contribution of this paper is to state the partition explicitly,
+give it a name, and trace its consequences.  Its scientific content
+is small: every theorem cited is established in a previous paper of
+this series.  Its organizational content is large: the partition
+explains \emph{which} GeoVac results are universal across spherical
+fermion problems and \emph{which} are particular to the Coulomb
+potential, and it provides a checklist for extending the framework
+to new potentials without re-deriving universal results.
+
+The paper is structured as follows.
+Section~\ref{sec:setup} introduces the GeoVac framework as a discrete
+spectral triple in the Marcolli--van Suijlekom sense.
+Section~\ref{sec:universal} restates Paper~22's angular sparsity
+theorem as the canonical content of the universal sector.
+Section~\ref{sec:specific} reviews the two known potential-specific
+rigidity theorems (Fock and Bargmann--Segal) and shows that they sit
+on opposite sides of an operator-order divide.
+Section~\ref{sec:transcendental} traces the calibration-$\pi$
+asymmetry to the operator-order distinction and the projection type
+(nonlinear vs.\ linear-affine).
+Section~\ref{sec:three-layers} reports the Sprint~5 result that the
+Coulomb/HO asymmetry has three layers, not two, and gives the
+predictive checklist that follows.
+Section~\ref{sec:implications} states what features of GeoVac
+transfer to non-Coulomb systems for free and what does not.
+Section~\ref{sec:open} closes with open questions about the
+extension to non-central potentials and gauge sectors.
+
+\medskip\noindent\textbf{Scope of contribution.}  This paper is not a
+new theorem.  It is a structural framing of existing
+results~\cite{paper22,paper23,paper24,paper25} in spectral-triple
+language.  No new computations are performed.  The framing is
+intended to clarify which existing results extend without
+modification to non-Coulomb systems and which require explicit
+recomputation, and to place the GeoVac framework in the
+graph-spectral-triple lineage of Connes, Marcolli, and van
+Suijlekom~\cite{connes_book1994,marcolli_vs2014,perez_sanchez2024}.
+The dual-description rule of the framework --- in particular that the
+identification of the discrete graph with the continuum
+Laplace--Beltrami operator is a proven mathematical equivalence and
+not an ontological claim about which description is more
+fundamental --- is preserved throughout.
+
+%=================================================================
+\section{Setup: GeoVac as a Discrete Spectral Triple}
+\label{sec:setup}
+%=================================================================
+
+A spectral triple in the sense of Connes~\cite{connes_book1994} is a
+data triple
+\[
+  (\mathcal{A}, \mathcal{H}, D)
+\]
+where $\mathcal{A}$ is a $*$-algebra represented as bounded
+operators on a Hilbert space $\mathcal{H}$, and $D$ is a self-adjoint
+operator on $\mathcal{H}$ with compact resolvent and bounded
+commutators $[D, a]$ for all $a \in \mathcal{A}$.  In the commutative
+case $\mathcal{A} = C^\infty(M)$ for a closed Riemannian spin manifold
+$M$ and $D$ is the Dirac operator on $M$, the triple recovers the
+geometry of $M$ via Connes' reconstruction theorem.  In the
+noncommutative case, the triple is treated as defining the geometry,
+and the spectral action principle of Chamseddine and
+Connes~\cite{chamseddine_connes1997} extracts physics by computing
+$\mathrm{Tr}\, f(D^2/\Lambda^2)$ for suitable test functions~$f$ and
+cutoffs~$\Lambda$.
+
+Marcolli and van Suijlekom~\cite{marcolli_vs2014} introduced
+\emph{gauge networks}: a discrete variant of the spectral triple
+where $\mathcal{A}$ is supported on the vertices of a graph,
+$\mathcal{H}$ is a finite-dimensional vector space (one fiber per
+vertex), and the gauge connection lives on the edges.  Their main
+result is that the Chamseddine--Connes spectral action on a gauge
+network coincides with the Wilson lattice gauge action of the
+underlying graph; the Perez-Sanchez correction~\cite{perez_sanchez2024}
+clarifies that the continuum limit recovers Yang--Mills without
+Higgs.
+
+The GeoVac framework fits this lineage almost verbatim.  Specifically:
+
+\begin{description}
+\item[$\mathcal{A}$:]  the $*$-algebra of functions on the discrete
+  Fock-projected graph, with vertices labeled by quantum numbers
+  $(n, l, m)$ for the scalar sector and $(n, \kappa, m_j)$ for the
+  spinor sector~\cite{paper7}.  Multiplication is pointwise; the
+  involution is complex conjugation.  $\mathcal{A}$ acts on
+  $\mathcal{H}$ by diagonal multiplication operators
+  $a_v \cdot \psi_v = (a \cdot \psi)_v$.
+\item[$\mathcal{H}$:]  the finite-dimensional Hilbert space of
+  scalar (or spinor) wavefunctions on the graph.  Decomposes as
+  $\mathcal{H} = \mathcal{H}^{\mathrm{scalar}} \oplus
+  \mathcal{H}^{\mathrm{spinor}}$ with the spinor sector supplied by
+  the Camporesi--Higuchi construction~\cite{paper28}.
+\item[$D$:]  the Dirac operator on $\mathcal{H}^{\mathrm{spinor}}$
+  with eigenvalues $|\lambda_n^{\mathrm{D}}| = n + 3/2$ and
+  degeneracies $g_n^{\mathrm{D}} = 2(n+1)(n+2)$, restricted to a
+  finite cutoff $n \le n_{\max}$~\cite{paper28}.  The squared Dirac
+  operator $D^2$ acts on the scalar sector with the
+  Lichnerowicz formula~\cite{lichnerowicz1963}
+  \[
+    D^2 = \Delta_{\mathrm{LB}} + \tfrac{R_{\mathrm{scalar}}}{4}
+    = \Delta_{\mathrm{LB}} + \tfrac{3}{2}
+  \]
+  on the unit $S^3$, recovering the eigenvalues
+  $|\lambda_n|^2 = (n + 3/2)^2 = n(n+2) + 9/4$.
+\end{description}
+
+The non-abelian gauge structure of Papers~25 and 30 enters as inner
+derivations of an almost-commutative extension
+$\mathcal{A} \otimes M_n(\mathbb{C})$, with
+Paper~25~\cite{paper25} corresponding to the $n = 1$ (U(1)) maximal
+torus and Paper~30~\cite{paper30} to the $n = 2$ (SU(2)) full
+non-abelian slice.  The five action principles documented in
+Paper~30~\S6 (entropy maximization on 0-cochains, Rayleigh--Ritz on
+the graph Laplacian, Wilson action on the gauge sector, Ihara zeta
+path integral, spectral action) each organize a distinct sector of the
+spectral triple data.
+
+\medskip\noindent\textbf{The decomposition.} Once the data
+$(\mathcal{A}, \mathcal{H}, D)$ are fixed, every observable in the
+framework is a function of these three pieces and a finite list of
+auxiliary structures (the cutoff $n_{\max}$, the gauge group, the
+test function $f$ for the spectral action).  The partition we develop
+in this paper observes that the GeoVac results split cleanly along
+the $\mathcal{A}$ versus $D$ line:
+\begin{itemize}
+\item Results that depend only on $\mathcal{A}$ (and the angular
+  decomposition of its basis) are \emph{universal across central
+  potentials}: they hold for any spectral triple sharing the same
+  algebra and basis, regardless of which Dirac operator is chosen.
+\item Results that depend on the specific form of $D$ (or
+  equivalently, on the radial potential $V(r)$) are
+  \emph{potential-specific}: they hold for the Coulomb problem (or
+  the harmonic oscillator, or a Woods--Saxon nucleus) but not for
+  arbitrary central potentials.
+\end{itemize}
+The decomposition is not novel as a piece of spectral triple
+formalism --- it is the standard $\mathcal{A}$/$D$ split.  The
+content of this paper is to identify which GeoVac theorems live on
+each side and what this implies for the framework's extension to new
+systems.
+
+%=================================================================
+\section{The Universal Sector: Angular Sparsity}
+\label{sec:universal}
+%=================================================================
+
+The canonical content of the universal sector is the angular sparsity
+theorem of Paper~22~\cite{paper22}.  We restate it in spectral-triple
+language to make the partition framework explicit.
+
+\subsection{Restatement of the angular sparsity theorem}
+
+Let $(\mathcal{A}, \mathcal{H}, D)$ be a GeoVac spectral triple in
+which $\mathcal{H}$ is decomposed in the spherical-harmonic basis
+$|n, l, m\rangle$ and the rotationally invariant two-body operator
+$\hat{V}_{12} = V(|\mathbf{r}_1 - \mathbf{r}_2|)$ admits the Legendre
+expansion
+\[
+  V(|\mathbf{r}_1 - \mathbf{r}_2|)
+  = \sum_{k \ge 0} v_k(r_1, r_2)\, P_k(\cos\theta_{12}).
+\]
+Then the two-body matrix elements factorize~\cite{paper22} as
+\begin{widetext}
+\[
+  \langle n_1 l_1 m_1, n_2 l_2 m_2\,|\,\hat{V}_{12}\,|
+  \,n_3 l_3 m_3, n_4 l_4 m_4 \rangle
+  = \sum_k c^k(l_1 m_1; l_3 m_3)\, c^k(l_2 m_2; l_4 m_4)\,
+  R^k(n_1 l_1, n_2 l_2; n_3 l_3, n_4 l_4),
+\]
+\end{widetext}
+where the Gaunt coefficients $c^k$ are pure functions of $(l, m)$
+quantum numbers and the radial integrals $R^k$ depend on $V$.  The
+zero structure of the matrix-element tensor is determined by the
+Gaunt selection rules alone:
+\begin{itemize}
+\item parity: $l_1 + l_3 + k$ and $l_2 + l_4 + k$ both even,
+\item triangle inequalities $|l_1 - l_3| \le k \le l_1 + l_3$ and
+  $|l_2 - l_4| \le k \le l_2 + l_4$,
+\item magnetic conservation $m_1 + m_2 = m_3 + m_4$.
+\end{itemize}
+None of these conditions reference $V$, $R^k$, or any radial quantum
+number.  Theorem~2 of Paper~22 then states that the ERI density
+$D(l_{\max})$ is a function only of the angular momentum cutoff:
+\begin{equation}
+  D(l_{\max}) =
+  \begin{cases}
+    7.81\% & l_{\max} = 1 \\
+    2.76\% & l_{\max} = 2 \\
+    1.44\% & l_{\max} = 3 \\
+    0.90\% & l_{\max} = 4 \\
+    0.62\% & l_{\max} = 5
+  \end{cases}
+  \label{eq:eri_density}
+\end{equation}
+Paper~22 verified this numerically across five potentials (Coulomb,
+harmonic oscillator, Woods--Saxon, square well, Yukawa) at
+$l_{\max} = 2$, finding bit-identical zero patterns and
+$D = 2.76\%$ in every case.
+
+\subsection{Spectral-triple reading}
+
+In the partition framework, the angular sparsity theorem is a
+statement about the algebra $\mathcal{A}$ and the $\mathrm{SO}(3)$
+representation structure of its basis decomposition.  The set of
+nonzero matrix elements
+\[
+  \mathcal{N}(\mathcal{A}, l_{\max})
+  = \{(a, b, c, d) \in \mathcal{A}^{\otimes 4} :
+     \langle a b | \hat{V}_{12} | c d \rangle \ne 0\}
+\]
+is determined by the Gaunt triangle and parity conditions, which
+depend only on the basis labels $(l, m)$ and not on $D$.  Equivalently,
+$\mathcal{N}$ is a function of $\mathcal{A}$ alone, in the precise
+sense that any change of $D$ (i.e., any change of radial potential)
+that preserves the spherical-harmonic basis decomposition of
+$\mathcal{H}$ leaves $\mathcal{N}$ unchanged.
+
+This is the formal sense in which angular sparsity is universal.  The
+spinor extension developed in Paper~22's spinor-block angular sparsity
+section~\cite{paper22} carries the same property: the $jj$-coupled angular reduction~\cite{Dyall} preserves
+the radial-angular factorization and the spinor ERI density
+$d_{\mathrm{spinor}}(l_{\max})$ depends only on $l_{\max}$, not on the
+choice of $D$.  Thus the universal sector includes both scalar and
+spinor sparsity bounds.
+
+\subsection{What the universal sector contains}
+
+The universal sector encompasses every result of the GeoVac framework
+that can be derived from the algebra $\mathcal{A}$, the angular
+decomposition of $\mathcal{H}$, and the Wigner $3j$ algebra,
+without invoking the specific spectrum of $D$.  This includes:
+
+\begin{itemize}
+\item Angular sparsity bounds: Eq.~\eqref{eq:eri_density} above.
+\item The composed-block $O(Q^{2.5})$ Pauli scaling of
+  Paper~14~\cite{paper14}, which depends on the block-diagonal
+  structure of two-body matrix elements in a composed orbital basis
+  and the Gaunt selection rules.  Verified across all 28 molecules
+  in the GeoVac library.
+\item Selection rules for transitions, oscillator strengths, and
+  multipole moments (the Wigner--Eckart content of any operator
+  expanded in spherical tensor components).
+\item Block-diagonal structure of two-body interaction tensors in
+  the composed architecture~\cite{paper17}.
+\item The $jj$-coupled qubit encoding sparsity for relativistic
+  composed Hamiltonians~\cite{paper14}~\S V (Tier~2 spinor
+  extension).
+\end{itemize}
+
+Each of these results was originally derived in the Coulomb context,
+but the derivation never used a Coulomb-specific feature of $D$
+beyond the spherical-harmonic basis decomposition.  They transfer to
+any new central potential without re-derivation, contingent only on
+the new system having the same basis.
+
+\medskip\noindent\textbf{Practical consequence.}  When extending the
+GeoVac framework to a new physical system (nuclear shell model,
+quantum dot, oscillator basis, screened Coulomb, etc.), the universal
+sector results may be \emph{quoted} from Paper~22 and Paper~14
+without recomputation.  Verifying the new system gives the same
+sparsity is then a single sanity check, not a research program.
+
+%=================================================================
+\section{The Potential-Specific Sector: Two Rigidity Theorems}
+\label{sec:specific}
+%=================================================================
+
+The potential-specific sector contains results that depend on the
+explicit form of $D$.  The two most consequential examples in the
+GeoVac framework to date are the Fock projection rigidity theorem
+(Paper~23) and the Bargmann--Segal rigidity theorem (Paper~24).
+Both are uniqueness theorems: each identifies a single central
+potential as the unique system whose spectrum arises from a specific
+sphere-quotient construction.  The two theorems sit on opposite
+sides of an operator-order divide that we make explicit in
+Section~\ref{sec:transcendental}.
+
+\subsection{Fock projection rigidity}
+\label{sec:fock_rigidity}
+
+Paper~23~\cite{paper23} states the following:
+
+\begin{theorem}[Fock projection rigidity, Paper~23]
+\label{thm:fock_rigidity}
+The $S^3$ Fock projection $p_0 = \sqrt{-2 E_n}$ maps a one-particle
+central-field Hamiltonian onto the free Laplacian on $S^3$ if and
+only if the spectrum $E_{n\ell}$ is independent of $\ell$ within
+each $n$.  The Coulomb potential $-Z/r$ is the unique central
+potential exhibiting this accidental degeneracy, as a consequence of
+its hidden $\mathrm{SO}(4)$ symmetry (the Runge--Lenz vector).  Any
+deformation $V(r) = -Z/r + \delta V(r)$ with $\delta V \not\equiv 0$
+lifts the $\ell$-degeneracy, breaking the conformal equivalence
+between the radial Schr\"odinger problem and the $S^3$ graph
+Laplacian.
+\end{theorem}
+
+The proof~\cite{paper23} amounts to observing that Fock's
+stereographic construction in momentum space requires the hydrogenic
+relation $E_n \propto -1/n^2$ with no $\ell$-dependence, which fails
+for any potential without the $\mathrm{SO}(4)$ symmetry of the pure
+Coulomb problem~\cite{bander_itzykson1966}.
+
+\medskip\noindent\textbf{What rigidity rules out.}  The theorem
+forbids the following extensions of GeoVac to non-Coulomb central
+potentials:
+\begin{itemize}
+\item Fock projection $p_0 = \sqrt{-2E}$ does not map the radial
+  Schr\"odinger equation onto the free Laplacian on $S^3$.
+\item The integer eigenvalue spectrum $\lambda_n = -(n^2 - 1)$ of
+  the graph Laplacian does not coincide with the rescaled energy
+  spectrum.
+\item The $\kappa = -1/16$ kinetic constant has no analog in the
+  new system.
+\end{itemize}
+What rigidity does \emph{not} rule out is the angular machinery: the
+Wigner $3j$ algebra, the Gaunt integrals, the block structure of the
+two-body interaction tensor.  This is the universal-sector content
+of Paper~22, and it transfers to any central potential.
+
+\subsection{Bargmann--Segal rigidity}
+\label{sec:bs_rigidity}
+
+Paper~24~\cite{paper24} establishes the structural dual of
+Theorem~\ref{thm:fock_rigidity}.
+
+\begin{theorem}[Bargmann--Segal rigidity for the 3D HO, Paper~24]
+\label{thm:bs_rigidity}
+The three-dimensional isotropic harmonic oscillator
+$V(r) = \tfrac{1}{2} m\omega^2 r^2$ is the unique central-field
+potential whose bound-state spectrum arises from the Euler operator
+on the Hardy space $H^2(S^5)$ restricted to the symmetric
+irreducible representations $(N, 0)$ of $\mathrm{SU}(3)$.
+\end{theorem}
+
+The proof has three classical inputs~\cite{paper24}:
+Jauch--Hill~\cite{jauchhill1940} (the 3D isotropic HO is the unique
+central potential with $\mathrm{SU}(3)$ dynamical symmetry);
+Borel--Weil~\cite{borelweil} (the symmetric $(N, 0)$ irreps coincide
+with the homogeneous degree-$N$ subspaces of $H^2(S^5)$); and
+Bargmann--Segal--Hall~\cite{bargmann1961,hall1994} (the unique
+unitary equivalence between $L^2(\mathbb{R}^3)$ and the
+Bargmann--Fock space, mapping the HO Hamiltonian to
+$\hbar\omega(\hat{N} + 3/2)$).
+
+\medskip\noindent\textbf{The structural dual.}  The two rigidity
+theorems describe analogous but distinct constructions.  We tabulate
+the parallels in Table~\ref{tab:rigidity_dual}.
+
+\begin{table}[h]
+\caption{The two known central-potential rigidity theorems in the
+GeoVac framework.  Each identifies a unique central potential
+matching a specific sphere-quotient construction.}
+\label{tab:rigidity_dual}
+\begin{ruledtabular}
+\begin{tabular}{lll}
+Feature & Coulomb (Paper~23) & 3D HO (Paper~24) \\
+\hline
+Sphere & $S^3$ & $S^5$ \\
+Geometry & Riemannian & Complex (Hardy) \\
+Symmetry & $\mathrm{SO}(4)$ & $\mathrm{SU}(3)$ \\
+Operator & 2nd-order Laplacian & 1st-order Euler \\
+Spectrum & $-1/n^2$ (quadratic) & $N + 3/2$ (linear) \\
+Projection & $p_0 = \sqrt{-2E}$ (nonlinear) & linear-affine \\
+Calibration & $\kappa = -1/16$, $\pi$-laden & $\pi$-free \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The two theorems are not connected by any direct mathematical bridge
+(there is no central potential that satisfies both simultaneously).
+What they share is a structural form: each pairs a unique potential
+with a unique projection construction, and each forbids any
+modification of the potential without breaking the construction.
+
+\subsection{The shared structure: rigidity as $D$-dependence}
+
+Both rigidity theorems are statements about $D$.  They say nothing
+about $\mathcal{A}$: the algebra of functions on the graph, the
+spherical-harmonic basis decomposition, the Gaunt selection rules
+remain valid in either case.  What they say is that the specific form
+of $D$ (the spectrum, the projection used to extract physical
+energies, the calibration constants) is uniquely determined by the
+choice of central potential.  Two different central potentials
+produce two different spectral triples that share an algebra but
+differ in $D$.
+
+This is the formal sense in which rigidity belongs to the
+potential-specific sector.  Any framework result that depends on
+the explicit form of $D$ --- the integer spectrum, the calibration
+$\kappa = -1/16$, the $\alpha$-conjecture combination
+$K = \pi(B + F - \Delta)$~\cite{paper2_alpha} --- is bound to one
+specific central potential and does not transfer.
+
+%=================================================================
+\section{The Transcendental Asymmetry}
+\label{sec:transcendental}
+%=================================================================
+
+The two rigidity theorems differ in more than the choice of sphere.
+Coulomb is honestly $\pi$-laden at every level above the bare graph;
+the harmonic oscillator is bit-exactly $\pi$-free at every level.
+This asymmetry is not an accident of two examples; it traces directly
+to the operator-order divide in Table~\ref{tab:rigidity_dual}.
+
+\subsection{Operator order and projection type}
+
+The Coulomb construction uses the second-order Laplace--Beltrami
+operator $\Delta_{S^3}$ on the unit three-sphere, with eigenvalues
+$\lambda_n = n(n+2)$ (quadratic in $n$).  The Fock projection
+$p_0 = \sqrt{-2 E_n}$ extracts the physical energy $E_n = -1/(2n^2)$
+by matching $p_0$ to the radial scale of momentum-space wavefunctions
+on $S^3$.  This projection is \emph{nonlinear} in the eigenvalue:
+\[
+  E_n = -\tfrac{1}{2 n^2}
+  \;\;\Longrightarrow\;\;
+  E_n^{-1/2} = \sqrt{-2 E_n} \cdot n
+  = p_0(n) \cdot n,
+\]
+and the inverse relation $n \mapsto E_n$ involves an inverse square
+root.  The calibration step from graph eigenvalue to physical energy
+introduces a factor that traces to the Riemannian volume of $S^3$
+(via the Lichnerowicz constant on $S^3$ and the Hopf-bundle measure
+$\mathrm{Vol}(S^2)/4 = \pi$); this is the source of the $\pi$ that
+appears in $\kappa = -1/16$ as $1/(16\pi^0)$ (specifically, the
+ratio $\sqrt{\pi}/\sqrt{\pi}$ cancels but the factor of $4$ is set
+by the projection Jacobian)~\cite{paper7,paper24}.
+
+The harmonic oscillator construction uses the first-order Euler
+operator $\hat{N}$ on the Hardy space $H^2(S^5)$, with eigenvalues
+$N$ (linear in the holomorphic degree).  The
+Bargmann--Segal--Hall projection is unitary and \emph{linear-affine}
+in the eigenvalue:
+\[
+  E_N = \hbar\omega(N + 3/2),
+\]
+and the inverse relation $N \mapsto E_N$ involves no square roots,
+no rescalings, and no Riemannian volume factors.  The calibration
+step requires no $\pi$ because no Riemannian volume is integrated
+to extract the physical scale.  The single $\pi$ in the
+Bargmann--Segal ecosystem is the Gaussian normalization $\pi^{-3}$
+of the continuous Bargmann measure, which the discrete graph never
+invokes.
+
+\subsection{The general structural rule}
+
+The asymmetry generalizes.  The presence or absence of calibration
+$\pi$ in a sphere-quotient discretization correlates with the
+operator order and projection type as follows:
+
+\begin{description}
+\item[Second-order Riemannian, nonlinear projection.]  Calibration
+  $\pi$ \emph{is} structurally forced.  The projection step
+  integrates against a Riemannian volume form
+  $d\mathrm{Vol}_M = \sqrt{|g|}\, d^n x$, which contributes
+  $\mathrm{Vol}(M)$ to overlap normalizations and $\pi$ to spectral
+  determinants via the Jacobi-theta inversion formula~\cite{paper28}.
+  Even-power $\pi^{2k}$ enters via spectral zeta values
+  $\zeta_R(2k)$, which are rational multiples of $\pi^{2k}$.
+\item[First-order complex, linear-affine projection.]  Calibration
+  $\pi$ is \emph{not} forced.  The projection is unitary and the
+  spectrum is exact-linear in the holomorphic degree; no Riemannian
+  volume is integrated and no square roots are taken.  Discrete
+  graph quantities are expressible as exact rationals or finite
+  algebraic extensions of $\mathbb{Q}$~\cite{paper24}.
+\end{description}
+
+This is the operator-order axis of the Paper~18 transcendental
+taxonomy~\cite{paper18}.  The QED-on-$S^3$ work
+(Paper~28~\cite{paper28}) confirmed it via the T9 theorem: the
+spectral zeta function of the squared Dirac operator $D^2$ is a
+two-term polynomial in $\pi^2$ with rational coefficients at every
+integer $s$ (operator order 2 $\to$ $\pi^{\mathrm{even}}$).  The
+parity discriminant theorem of Paper~28 confirms the dual: odd-order
+operators produce odd-zeta content $\zeta_R(3), \zeta_R(5), \ldots$
+via half-integer Hurwitz reduction.
+
+\subsection{Where calibration $\pi$ does and does not appear}
+
+The structural rule predicts which framework results carry $\pi$ and
+which do not.  We tabulate examples in
+Table~\ref{tab:pi_distribution}.
+
+\begin{table}[h]
+\caption{Where calibration $\pi$ appears in GeoVac results.  Items
+above the divide depend on second-order Riemannian operators with
+nonlinear projections; items below depend on first-order complex
+operators with linear projections.  Universal-sector results (angular
+sparsity, $jj$-coupled selection rules) are $\pi$-free regardless,
+because they involve no projection.}
+\label{tab:pi_distribution}
+\begin{ruledtabular}
+\begin{tabular}{ll}
+Result & $\pi$? \\
+\hline
+\multicolumn{2}{l}{\emph{Universal sector (algebra only):}} \\
+Angular sparsity~\cite{paper22} & no \\
+Composed Pauli scaling~\cite{paper14} & no \\
+Wigner $3j$ algebra & no \\
+\hline
+\multicolumn{2}{l}{\emph{Coulomb-specific (2nd-order, nonlinear proj.):}} \\
+$\kappa = -1/16$~\cite{paper7} & yes \\
+Spectral zeta $\zeta_{D^2}(s)$~\cite{paper28} & yes ($\pi^{2k}$) \\
+Hopf-bundle measure $\mathrm{Vol}(S^2)/4$~\cite{paper2_alpha} & yes \\
+$\alpha$-conjecture combination $K$~\cite{paper2_alpha} & yes \\
+\hline
+\multicolumn{2}{l}{\emph{HO-specific (1st-order, linear proj.):}} \\
+Bargmann--Segal graph adjacency~\cite{paper24} & no \\
+HO spectrum $\hbar\omega(N + 3/2)$ & no \\
+Bargmann transition amplitudes & no \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\medskip\noindent\textbf{Implication for nuclear extensions.}
+Paper~23's nuclear shell model qubit Hamiltonians use the harmonic
+oscillator basis with the Minnesota nucleon--nucleon
+potential~\cite{paper23}.  By the structural rule, these Hamiltonians
+should be $\pi$-free in the angular and basis structure (HO is the
+1st-order side); calibration $\pi$ enters only if the projection step
+to physical energies invokes a Riemannian volume.  Paper~23's
+construction works directly in the HO basis without a stereographic
+projection, so the prediction is that the nuclear qubit Hamiltonians
+are $\pi$-free.  Inspection of Paper~23 confirms this: every
+coefficient is a rational combination of Minnesota Gaussians,
+Moshinsky--Talmi brackets, and HO matrix elements; no transcendental
+coefficient appears.
+
+%=================================================================
+\section{The Three-Layer Sharpening (Sprint~5)}
+\label{sec:three-layers}
+%=================================================================
+
+The Sprint~5 investigation~\cite{paper25} of $S^5$ gauge structure
+sharpened the Coulomb/HO asymmetry from two layers
+(spectrum-computing and calibration $\pi$) to three layers, with the
+third being the Wilson physical content of the gauge sector.  We
+summarize the three-layer partition here as the predictive
+checklist for extending the framework to any new central potential.
+
+\subsection{The three layers}
+
+\begin{description}
+\item[Layer 1: Spectrum-computing role of the node Laplacian $L_0$.]
+  In the Coulomb $S^3$ construction, the node Laplacian $L_0 = D - A$
+  on the Fock graph computes the physical energy spectrum directly:
+  the eigenvalues of $L_0$ are $\lambda_n = -(n^2 - 1)$, which map
+  to $E_n = -1/(2n^2)$ via the Fock projection.  The graph
+  Laplacian \emph{is} the kinetic operator (under the $\kappa$
+  calibration).  In the HO $S^5$ Bargmann--Segal construction, $L_0$
+  encodes \emph{dipole transition amplitudes}, not the spectrum: the
+  spectrum is read off from the holomorphic degree $N$ of each
+  node, not from any eigenvalue of $L_0$.  This is the first layer
+  of the asymmetry.
+\item[Layer 2: Calibration $\pi$.]  Coulomb requires it (yes,
+  Section~\ref{sec:transcendental}); HO does not (no, by Paper~24
+  $\pi$-free certificate).  This is the transcendental layer.
+\item[Layer 3: Wilson physical content of the gauge sector.]  The
+  Sprint~5 result~\cite{paper25} on $S^5$ gauge structure showed
+  that the abelian U(1) Wilson--Hodge structure transfers verbatim
+  to the Bargmann--Segal graph (signed incidence, edge Laplacian
+  $L_1 = B^T B$, Hodge decomposition, all hold), but the
+  non-abelian SU(3) extension is not natural: transitions between
+  $(N, 0)$ and $(N+1, 0)$ irreps are Clebsch--Gordan intertwiners,
+  not group elements, so the Wilson lattice gauge requirement of a
+  fixed group on every link fails.  By contrast, the Coulomb $S^3$
+  construction supports the full SU(2) Wilson lattice gauge of
+  Paper~30.  The combinatorial vocabulary of Wilson--Hodge transfers
+  to both spheres, but only Coulomb $S^3$ supports a non-trivial
+  matter-propagator role for the node Laplacian.
+\end{description}
+
+\subsection{The three-layer table}
+
+\begin{table}[h]
+\caption{Three-layer Coulomb/HO partition (Sprint~5
+sharpening~\cite{paper25}).  $\checkmark$~means the feature is
+present; ``--'' means it is absent or not natural.}
+\label{tab:three_layers}
+\begin{ruledtabular}
+\begin{tabular}{lcc}
+Feature & Coulomb $S^3$ & HO $S^5$ \\
+\hline
+$L_0$ computes spectrum & $\checkmark$ & -- \\
+Calibration $\pi$ & $\checkmark$ & -- \\
+Non-abelian Wilson gauge & $\checkmark$ (SU(2)) & -- \\
+\hline
+Abelian U(1) Wilson--Hodge & $\checkmark$ & $\checkmark$ \\
+Angular sparsity & $\checkmark$ & $\checkmark$ \\
+Block-diagonal ERI & $\checkmark$ & $\checkmark$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The features above the divide in Table~\ref{tab:three_layers} are
+the three potential-specific layers; the features below are the
+universal-sector features that hold on either sphere.
+
+\subsection{Why three and not two}
+
+The third layer is structurally distinct from the first two.  Layer~1
+(spectrum-computing) is a question about \emph{what $L_0$ does}; it
+is determined by the projection rule (Fock vs.\ Bargmann--Segal).
+Layer~2 (calibration $\pi$) is a question about \emph{which scalars
+appear}; it is determined by the operator order and projection type
+(Section~\ref{sec:transcendental}).  Layer~3 (Wilson physical content)
+is a question about \emph{whether the gauge connection on edges is
+group-valued}; it is determined by the representation theory of the
+ambient symmetry group (whether transitions between irreps are
+$\mathrm{SO}(4)$-equivariant or $\mathrm{SU}(3)$-CG-intertwined).
+Three independent structural questions, three independent
+discriminators.  None reduces to either of the others.
+
+\medskip\noindent\textbf{Predictive consequence.}  For any candidate
+new central potential, the three-layer table provides a checklist
+for what features of the GeoVac framework can be expected to
+transfer.  A new potential matching the Coulomb pattern (e.g., a
+hidden $\mathrm{SO}(4)$-like symmetry, a stereographic-style
+projection, integer spectrum) inherits all three Coulomb-specific
+layers.  A potential matching the HO pattern (e.g., a hidden
+SU($n$)-like symmetry, a complex-analytic projection, linear
+spectrum) inherits all three HO-specific layers.  Any other potential
+inherits the universal sector but neither set of specific layers,
+and must be analyzed system by system.
+
+%=================================================================
+\section{Implications}
+\label{sec:implications}
+%=================================================================
+
+The partition framework simplifies the question of how to extend
+GeoVac to a new system.  We list the practical implications.
+
+\subsection{What transfers for free}
+
+Any new central-potential extension of GeoVac inherits the universal
+sector without re-derivation:
+
+\begin{itemize}
+\item Angular sparsity bounds at every $l_{\max}$
+  (Eq.~\eqref{eq:eri_density})~\cite{paper22}.  At $l_{\max} = 3$,
+  the new system's two-body Hamiltonian is at least $98.56\%$
+  sparse before any potential-specific feature is invoked.
+\item Composed-block $O(Q^{2.5})$ Pauli scaling~\cite{paper14}.  The
+  composed architecture's structural sparsity advantage over
+  Gaussian baselines (51$\times$ to 1712$\times$ across the GeoVac
+  molecule library) carries over to any spherical-fermion system.
+\item Selection rules for transitions, oscillator strengths,
+  multipole moments, and the Wigner--Eckart content of any
+  spherical tensor operator.
+\item Block-diagonal structure of two-body interaction tensors in
+  the composed architecture~\cite{paper17}.
+\item $jj$-coupled spinor angular sparsity for relativistic
+  extensions~\cite{paper14}~\S V.
+\end{itemize}
+
+These features hold by virtue of the algebra $\mathcal{A}$ and the
+spherical-harmonic basis decomposition; they are independent of the
+choice of $D$ and therefore independent of the radial potential.
+
+\subsection{What requires per-system rederivation}
+
+Every result that depends on the explicit form of $D$ must be
+re-derived for the new system:
+
+\begin{itemize}
+\item The spectrum $\lambda_n$ of the graph Laplacian (no analog of
+  $\lambda_n = -(n^2 - 1)$ unless the system has $\mathrm{SO}(4)$
+  symmetry).
+\item The kinetic calibration $\kappa$ (no analog of $-1/16$
+  unless the projection is Fock-style).
+\item The transcendental content of spectral
+  invariants~\cite{paper18,paper28}.  The Coulomb spectral zeta
+  function lives in the $\pi$-polynomial ring (Paper~28 T9
+  theorem); other systems may live in different rings (e.g., the HO
+  Bargmann--Segal lattice lives in $\mathbb{Q}$).
+\item The fine-structure-constant conjecture
+  $K = \pi(B + F - \Delta)$~\cite{paper2_alpha}.  This is a
+  Coulomb-specific observation tied to the Hopf-bundle measure
+  factor $\pi$ on $S^3$ and has no analog on $S^5$ or other
+  sphere-quotients.  Specifically, the Sprint~5 investigation of
+  $S^5$ analogs found that no $S^5$ candidate combination matches
+  $\alpha^{-1}$ at comparable precision, and the structural mechanism
+  is absent (the F-analog candidate
+  $(1/2)[\zeta_R(4) + 3\zeta_R(5) + 2\zeta_R(6)]$ is mixed even/odd
+  zeta with no $\pi^2/6$ factor).
+\item Specific selection rules requiring the explicit form of
+  the Dirac operator (e.g., the seven of eight QED selection rules
+  recovered by promoting the photon to vector $(q, m_q)$ quantum
+  numbers, Paper~28's vector-photon QED
+  section~\cite{paper28}, is a Coulomb-$S^3$ result; the $S^5$
+  analog would have to be worked out separately).
+\end{itemize}
+
+\subsection{What is currently unknown}
+
+Several extensions are not yet placed in the partition framework:
+
+\begin{itemize}
+\item Non-central potentials (multiparticle interactions with
+  explicit angular dependence).  The angular sparsity theorem
+  assumes the two-body interaction is rotationally invariant; for
+  non-central interactions the universal sector may shrink.
+\item Rank-2 tensor interactions (e.g., Breit retarded interactions,
+  spin-orbit, dipole--dipole).  These respect the Gaunt selection
+  rules for their angular content but require additional reduced
+  matrix elements; whether the universal sector remains the same
+  is established in Paper~22~\S V (spinor extension) for the
+  $jj$-coupled relativistic case but not for general rank-2 tensor
+  interactions.
+\item Yang--Mills sectors with matter content (Paper~30~\cite{paper30}
+  is purely gauge; matter-coupled extensions have not been
+  classified).  The non-abelian Wilson construction is a
+  Coulomb-specific Layer-3 feature; whether it admits a HO-side
+  analog (perhaps via the $\mathrm{SU}(3)$ symmetry of the
+  isotropic oscillator) is an open question.
+\end{itemize}
+
+%=================================================================
+\section{Open Questions}
+\label{sec:open}
+%=================================================================
+
+The partition framework as stated is descriptive: it sorts existing
+results into universal and potential-specific buckets and predicts
+which results carry over to new systems.  It is not yet predictive
+in the deeper sense of establishing the partition as a theorem.
+Three open questions follow.
+
+\subsection{Is the partition exhaustive?}
+
+The framework as stated identifies two known potential-specific
+projections (Fock for Coulomb, Bargmann--Segal for HO) and asserts
+that they sit on opposite sides of an operator-order divide.  Are
+there other rigidity theorems we have missed?  Specifically:
+
+\begin{itemize}
+\item The Morse oscillator $V(r) = D_e(1 - e^{-a(r - r_e)})^2$ has
+  an exact analytic spectrum with $\mathrm{SU}(2)$ dynamical
+  symmetry but is one-dimensional; whether a 3D radial Morse-like
+  potential admits a sphere-quotient discretization with a rigidity
+  theorem analogous to Theorems~\ref{thm:fock_rigidity}
+  and~\ref{thm:bs_rigidity} is unknown.
+\item The P\"oschl--Teller potential and other shape-invariant
+  potentials~\cite{infeld_hull1951,cooper_khare1995} have algebraic
+  ladder structure analogous to the HO; whether any of them admit
+  a Bargmann-style discretization on a non-$S^5$ Hardy space is
+  unknown.
+\item The Coulomb-Sturmian basis~\cite{paper8_9} is closer to the
+  $S^3$ Coulomb construction but uses a different boundary
+  condition; it has its own selection rules and transcendental
+  structure that have not been placed in the partition framework.
+\end{itemize}
+
+A complete classification of central potentials by sphere-quotient
+projection type would put the partition framework on firm
+mathematical footing.
+
+\subsection{What is the universal/specific partition for non-central
+interactions?}
+
+The universal sector as stated assumes rotationally invariant
+two-body interactions.  For non-central interactions (gauge
+couplings, spin--orbit, multipole moments coupled to external
+fields), the angular structure of the interaction itself enters the
+selection rules.  In some cases (e.g., scalar QED on $S^3$,
+Paper~28~\cite{paper28}) the non-central content is captured by a
+modified vertex coupling tensor that respects a residual
+$\mathrm{SO}(4)$ structure.  In other cases (Breit retarded
+interactions in Paper~14~\S V~\cite{paper14}) it requires an
+explicit reduced matrix element that goes beyond the Gaunt algebra.
+Whether there is a general universal/specific partition for
+non-central interactions, analogous to the rotationally invariant
+case, is not yet established.
+
+\subsection{Does the partition predict $\alpha$?}
+
+The fine-structure constant conjecture
+$K = \pi(B + F - \Delta) = \alpha^{-1}$~\cite{paper2_alpha} sits in
+the potential-specific Coulomb sector by the partition framework.
+The headline observation matches CODATA at
+$8.8 \times 10^{-8}$~\cite{paper2_alpha}, but the combination rule
+itself remains a numerical observation without first-principles
+derivation~\cite{curve_fit_audit}.  The Sprint~5 investigation of
+$S^5$ analogs~\cite{paper25} confirmed that no analogous combination
+exists on the harmonic-oscillator side, consistent with the
+partition placing $K$ in the Coulomb-specific sector.  Whether the
+partition framework can be sharpened to \emph{predict} the
+combination rule, or whether $K$ is genuinely a structural
+coincidence among three independent Coulomb-side
+ingredients~\cite{paper2_alpha}, is the most consequential open
+question in the framework.
+
+%=================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%=================================================================
+
+The GeoVac framework is a discrete spectral triple in the
+graph-spectral-triple lineage of Marcolli and van
+Suijlekom~\cite{marcolli_vs2014}, and its results decompose cleanly
+along the standard $\mathcal{A}$ versus $D$ split.  The universal
+sector --- containing angular sparsity bounds, composed-block Pauli
+scaling, selection rules, and the $jj$-coupled spinor extension ---
+depends only on the algebra $\mathcal{A}$ and the angular structure
+of its basis.  These results transfer to any spherical-fermion system
+without re-derivation.  The potential-specific sector --- containing
+the spectrum, the calibration $\kappa$, the transcendental content,
+the rigidity theorems, and the $\alpha$-conjecture --- depends on
+the explicit form of $D$.  These results must be re-derived for each
+new system.
+
+The two known potential-specific rigidity theorems (Fock for
+Coulomb, Bargmann--Segal for HO) sit on opposite sides of an
+operator-order divide.  Coulomb is a second-order Riemannian
+construction with a nonlinear projection that introduces calibration
+$\pi$; HO is a first-order complex construction with a linear-affine
+projection that is bit-exactly $\pi$-free.  The Sprint~5 sharpening
+shows the asymmetry has three layers, not two: spectrum-computing
+role of $L_0$, calibration $\pi$, and Wilson physical content of the
+non-abelian gauge sector.  All three layers stratify along the same
+operator-order divide.
+
+The framing offered by this paper has no new theoretical content; it
+is a structural reorganization of existing results in
+spectral-triple language.  Its value is operational: it tells future
+extensions of the framework which results may be quoted from prior
+papers and which require system-specific computation, and it places
+the framework in a lineage where the relevant tools (graph spectral
+triples, gauge networks, spectral truncations) already exist in the
+mathematical literature.
+
+\medskip\noindent\textbf{Acknowledgement of source material.}  Every
+theorem cited in this paper is established in
+Papers~22~\cite{paper22}, 23~\cite{paper23}, 24~\cite{paper24},
+or 25~\cite{paper25}.  The contribution here is the explicit
+$\mathcal{A}$/$D$ partition framing and the predictive checklist
+following from the three-layer table
+(Table~\ref{tab:three_layers}).  Numerical verifications of the
+universal sector are in Paper~22~\cite{paper22} (five potentials at
+$l_{\max} = 2$); numerical verifications of the $\pi$-free
+HO-specific sector are in Paper~24~\cite{paper24}
+(Bargmann--Segal lattice at $N_{\max} = 5$, 56 nodes, 165 edges,
+zero irrationals); numerical verification of the $S^5$ gauge
+structure non-naturalness is in the Sprint~5 record~\cite{paper25}.
+
+%=================================================================
+\begin{thebibliography}{99}
+%=================================================================
+
+\bibitem{connes_book1994}
+A.~Connes,
+\textit{Noncommutative Geometry}
+(Academic Press, San Diego, 1994).
+
+\bibitem{chamseddine_connes1997}
+A.~H.~Chamseddine and A.~Connes,
+``The Spectral Action Principle,''
+Commun.\ Math.\ Phys.\ \textbf{186}, 731 (1997).
+
+\bibitem{marcolli_vs2014}
+M.~Marcolli and W.~D.~van Suijlekom,
+``Gauge networks in noncommutative geometry,''
+J.\ Geom.\ Phys.\ \textbf{75}, 71 (2014); arXiv:1301.3480.
+
+\bibitem{perez_sanchez2024}
+C.~I.~P\'erez-S\'anchez,
+``On the gauge networks of Marcolli--van Suijlekom: Yang--Mills
+without Higgs,'' arXiv:2401.03705 (2024); see also arXiv:2508.17338
+for the corrected continuum limit analysis.
+
+\bibitem{lichnerowicz1963}
+A.~Lichnerowicz,
+``Spineurs harmoniques,''
+C.~R.\ Acad.\ Sci.\ Paris \textbf{257}, 7 (1963).
+
+\bibitem{bander_itzykson1966}
+M.~Bander and C.~Itzykson,
+``Group Theory and the Hydrogen Atom,''
+Rev.\ Mod.\ Phys.\ \textbf{38}, 330 and 346 (1966).
+
+\bibitem{fock1935}
+V.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+Z.\ Phys.\ \textbf{98}, 145 (1935).
+
+\bibitem{bargmann1961}
+V.~Bargmann,
+``On a Hilbert space of analytic functions and an associated
+integral transform, Part I,''
+Commun.\ Pure Appl.\ Math.\ \textbf{14}, 187 (1961).
+
+\bibitem{hall1994}
+B.~C.~Hall,
+``The Segal--Bargmann coherent state transform for compact Lie
+groups,''
+J.\ Funct.\ Anal.\ \textbf{122}, 103 (1994).
+
+\bibitem{jauchhill1940}
+J.~M.~Jauch and E.~L.~Hill,
+``On the Problem of Degeneracy in Quantum Mechanics,''
+Phys.\ Rev.\ \textbf{57}, 641 (1940).
+
+\bibitem{borelweil}
+A.~Borel and A.~Weil,
+``Repr\'esentations lin\'eaires et espaces homog\`enes
+k\"ahleriens des groupes de Lie compacts,''
+S\'eminaire Bourbaki, expos\'e 100 (1954).
+
+\bibitem{Dyall}
+K.~G.~Dyall and K.~F\ae gri,
+\textit{Introduction to Relativistic Quantum Chemistry}
+(Oxford University Press, Oxford, 2007).
+
+\bibitem{infeld_hull1951}
+L.~Infeld and T.~E.~Hull,
+``The Factorization Method,''
+Rev.\ Mod.\ Phys.\ \textbf{23}, 21 (1951).
+
+\bibitem{cooper_khare1995}
+F.~Cooper, A.~Khare, and U.~Sukhatme,
+``Supersymmetry and Quantum Mechanics,''
+Phys.\ Rep.\ \textbf{251}, 267 (1995).
+
+\bibitem{paper0}
+J.~Loutey,
+``Geometric Packing and the Universal Constant $K = -1/16$,''
+GeoVac Paper~0 (2026).
+
+\bibitem{paper1}
+J.~Loutey,
+``Spectral Graph Theory and the GeoVac Lattice,''
+GeoVac Paper~1 (2026).
+
+\bibitem{paper2_alpha}
+J.~Loutey,
+``The Fine Structure Constant from Spectral Geometry of the Hopf
+Fibration,''
+GeoVac Paper~2 (2026). [Observation; combination rule conjectural.]
+
+\bibitem{paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Spectral Graph Theory and Conformal
+Equivalence on $S^3$,''
+GeoVac Paper~7 (2026).
+
+\bibitem{paper8_9}
+J.~Loutey,
+``Bond Sphere Geometry and the Sturmian Structural Theorem,''
+GeoVac Papers~8--9 (2026).
+
+\bibitem{paper13}
+J.~Loutey,
+``Hyperspherical Lattice for Multi-Electron Atoms,''
+GeoVac Paper~13 (2026).
+
+\bibitem{paper11}
+J.~Loutey,
+``Prolate Spheroidal Lattice for Diatomic Molecules,''
+GeoVac Paper~11 (2026).
+
+\bibitem{paper14}
+J.~Loutey,
+``Structurally Sparse Qubit Hamiltonians from Spectral Graph
+Theory,''
+GeoVac Paper~14 (2026).
+
+\bibitem{paper15}
+J.~Loutey,
+``Level 4 Mol-Frame Hyperspherical Geometry for Diatomic
+Molecules,''
+GeoVac Paper~15 (2026).
+
+\bibitem{paper17}
+J.~Loutey,
+``Composed Natural Geometries for Core-Valence Molecular
+Electronic Structure,''
+GeoVac Paper~17 (2026).
+
+\bibitem{paper18}
+J.~Loutey,
+``Exchange Constants and the Transcendental Taxonomy of
+Observables,''
+GeoVac Paper~18 (2026).
+
+\bibitem{paper22}
+J.~Loutey,
+``Potential-Independent Angular Sparsity for Qubit Hamiltonians in
+Spherical Fermion Systems,''
+GeoVac Paper~22 (2026).
+
+\bibitem{paper23}
+J.~Loutey,
+``Nuclear Shell Model Qubit Hamiltonians and the Fock Projection
+Rigidity Theorem,''
+GeoVac Paper~23 (2026).
+
+\bibitem{paper24}
+J.~Loutey,
+``The Bargmann--Segal Lattice: $\pi$-Free Discretization of the
+Harmonic Oscillator on $S^5$,''
+GeoVac Paper~24 (2026).
+
+\bibitem{paper25}
+J.~Loutey,
+``The Hopf Graph as a Lattice Gauge Structure: A Framework
+Observation,''
+GeoVac Paper~25 (2026).
+
+\bibitem{paper28}
+J.~Loutey,
+``QED on $S^3$: T9 Theorem, Selection Rules, and the Graph-Native
+Formulation,''
+GeoVac Paper~28 (2026).
+
+\bibitem{paper30}
+J.~Loutey,
+``SU(2) Wilson Lattice Gauge on the GeoVac Hopf Graph,''
+GeoVac Paper~30 (2026).
+
+\bibitem{curve_fit_audit}
+J.~Loutey,
+\textit{Curve-fit / pattern-match audit memo},
+GeoVac internal document, \texttt{docs/curve\_fit\_audit\_memo.md}
+(2026-05-02).
+
+\end{thebibliography}
+
+\end{document}

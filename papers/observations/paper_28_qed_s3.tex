@@ -42,16 +42,12 @@ $n_{\mathrm{ext}}=0$ as a consequence of vertex parity
 (Theorem~\ref{thm:self_energy_zero}).
 (5)~\textbf{Anomalous magnetic moment:} the one-loop vertex correction
 with a $q=1$ probe photon yields $F_2 / [\alpha/(2\pi)] = 1.084$ at the
-lowest external mode ($n_{\mathrm{ext}}=1$), approximately 8.4\% above the
-flat-space Schwinger value, matching the Parker--Toms leading curvature
-correction within 0.4\%.  The curvature expansion coefficient
-$c_2 = \frac{19}{100} - \frac{41\pi^2}{25200}$, extracted from
-high-precision $n_{\mathrm{ext}}=1$ data ($n_{\mathrm{int}}=0\ldots 50$
-with tail correction), involves all three Paper~2 spectral invariants
-($B=42$, $F=\pi^2/6$, $\Delta=1/40$) in a single algebraic combination
-(Sec.~\ref{sec:curvature_coefficients}).  The next coefficient
-$c_3 = -5.946(3) \times 10^{-7}$ is nonzero at $200.9\,\sigma$;
-the expansion does not terminate at second order.
+lowest external mode ($n_{\mathrm{ext}}=1$), approximately 8.4\% above
+the flat-space Schwinger value, matching the Parker--Toms leading
+curvature correction within 0.4\%.  The next-order coefficient
+$c_3 = -5.946(3) \times 10^{-7}$ is nonzero at $200.9\,\sigma$, so the
+curvature expansion does not terminate at second order
+(Sec.~\ref{sec:curvature_coefficients}).
 (6)~\textbf{Depth-$k$ tower:} at each loop order, a new irreducible
 transcendental constant appears.  The two-loop $S_{\min}$ is computed
 to 200 digits and confirmed irreducible against a 100-element PSLQ
@@ -934,15 +930,43 @@ Consequently, the high-precision extraction is currently restricted to
 $n_{\mathrm{ext}} = 1$, where $j = 1/2$ is the unique sector.
 
 \medskip
-\noindent\textbf{Paper~2 bridge.}
-Since $\alpha$ cancels exactly in the ratio $F_2/[\alpha/(2\pi)]$, the
-curvature coefficients $c_1$, $c_2$ are pure geometric invariants of the
-Dirac spectral sum on~$S^3$.  The appearance of all three Paper~2
-invariants ($B$, $F$, $\Delta$) in~$c_2$ provides a concrete numerical
-bridge between the $\alpha$ construction (Paper~2) and the QED vertex
-structure (this paper): the same spectral objects that compose
-$K = \pi(B + F - \Delta)$ also control the curvature dependence of
-the one-loop anomalous magnetic moment on~$S^3$.
+\noindent\textbf{Paper~2 invariants in $c_2$: a numerical coincidence,
+not a derivation.}
+Since $\alpha$ cancels in the ratio $F_2/[\alpha/(2\pi)]$, $c_2$ is a
+pure geometric invariant of the Dirac spectral sum on~$S^3$, and the
+T9 theorem (Theorem~\ref{thm:T9}) constrains it to the form
+$a + b\pi^2$ with rationals~$a, b$.  The PSLQ identification
+(Eq.~\ref{eq:c2_identification}) writes $a$ and $b$ as a small-integer
+combination of $B$, $F$, $\Delta$, but this should be read with
+caution.
+
+First, the form
+$(c_0 - c_1 B\Delta - c_2 F\Delta - c_3 F/B)/c_4$ has more free
+small-integer coefficients than the two real numbers ($a, b$) it
+explains.  Finding \emph{some} small-integer combination matching
+$a + b\pi^2$ to high precision is expected by chance at this search
+size; the cross-invariant beats the next-best PSLQ candidate
+$(6\pi^2 - 58)/7$ by roughly 2.4~digits, which is suggestive but not
+conclusive.
+
+Second, and decisively: the \emph{same} form does not predict $c_3$.
+Eq.~\eqref{eq:c3_numerical} measures $c_3 = -5.946(3)\times 10^{-7}$ at
+$200\sigma$, and the extended T9 basis
+$\{1, \pi^2, \pi^4, B\Delta, F\Delta, F/B, c_2, c_2^2, c_1 c_2,
+\Delta, \Delta^2, B\Delta^2, F\Delta^2, F^2/B\}$ admits no
+PSLQ relation at integer coefficients bounded by $10^4$.  A genuine
+structural identity should extend.  This single-term failure is
+consistent with $c_2$'s identification being a numerical coincidence
+between two natural Tier-A spectral invariants of the same manifold,
+both built from $|\lambda_n|$ and $g_n$, rather than evidence of
+shared structural origin.
+
+A genuine bridge between the Paper~2 invariants and the curvature
+expansion would require deriving $c_2$ (and ideally $c_3$) from the
+Schwinger--DeWitt heat-kernel expansion of the spinor on~$S^3$, with
+$B$, $F$, $\Delta$ appearing as identifiable terms in the expansion
+rather than via post-hoc PSLQ matching.  This derivation is not done
+in this work and is flagged as an open question.
 
 Computation scripts: \texttt{debug/g2\_c2\_verification.py},
 \texttt{debug/g2\_c2\_diagnostic.py}.
@@ -1805,7 +1829,8 @@ graph to continuum requires both the coupling constant~$\alpha$ (one
 power per loop) and the vector photon structure (SO(4) selection rules
 that eliminate most graph-allowed channels).
 
-\textbf{Power-law convergence.}
+\textbf{Power-law convergence (caveat: 5-point fit, asymptote
+inferred not derived).}
 A least-squares fit across $n_{\max} = 2, \ldots, 6$ gives
 $F_2(\kappa) \sim 3.507\, n_{\max}^{-0.573}$ with $R^2 = 0.99990$.
 Local log-log exponents increase monotonically in magnitude:
@@ -1814,10 +1839,22 @@ $-0.591$ ($5{-}6$), consistent with a slowly steepening power law.
 Successive ratios $F_2(n{+}1)/F_2(n) = 0.796, 0.849, 0.878, 0.898$
 approach~1 from below, confirming slow (sub-$1/n$) decay.
 Richardson extrapolation with adaptive exponent estimation
-($p \approx 0.51$) gives $F_{\infty} \approx -0.22$, which is
-unphysical (negative anomalous moment); the negative value confirms the
-zero-offset power-law interpretation: $F_2 \to 0$ as
-$n_{\max} \to \infty$.
+($p \approx 0.51$) gives the unphysical $F_{\infty} \approx -0.22$,
+which we interpret as consistent with $F_2 \to 0$ within the
+zero-offset power-law family.
+
+This conclusion is fit-based, not derived: a 5-point power-law fit
+with high $R^2$ does not by itself rule out a small constant offset
+$F_\infty^{\mathrm{true}} \ne 0$ that the truncated data cannot
+distinguish from the leading power law.  Larger $n_{\max}$ data, or a
+derivation of the leading large-$n$ behavior of $F_2$ from the spinor
+heat-kernel curvature expansion, would be needed to fix the asymptote
+on structural rather than fit grounds.  The interpretation
+``$F_2 \to 0$ on a fixed-radius sphere'' (consistent with form-factor
+suppression at $|\lambda| \to \infty$ on $R = 1$, see
+§\ref{sec:f2_convergence} discussion above) is the most natural
+reading of the data, but should be treated as suggestive rather than
+proven.
 
 The sign of $F_2(\kappa) - F_2(0)$ flips at $n_{\max} = 5$:
 $\delta = -0.0045, -0.0025, -0.0006, +0.0004, +0.0009$ for
