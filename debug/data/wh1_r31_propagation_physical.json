@@ -1,0 +1,41 @@
+{
+  "avery_is_default": true,
+  "n_max": {
+    "2": {
+      "dim_H": 5,
+      "envelope_dim": 25,
+      "op_sys_dim": 14,
+      "n_multipliers": 14,
+      "prop": 2,
+      "dim_sequence": [
+        14,
+        25
+      ],
+      "elapsed_s": 0.06
+    },
+    "3": {
+      "dim_H": 14,
+      "envelope_dim": 196,
+      "op_sys_dim": 55,
+      "n_multipliers": 55,
+      "prop": 2,
+      "dim_sequence": [
+        55,
+        196
+      ],
+      "elapsed_s": 0.46
+    },
+    "4": {
+      "dim_H": 30,
+      "envelope_dim": 900,
+      "op_sys_dim": 140,
+      "n_multipliers": 140,
+      "prop": 2,
+      "dim_sequence": [
+        140,
+        900
+      ],
+      "elapsed_s": 4.65
+    }
+  }
+}

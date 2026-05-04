@@ -286,29 +286,26 @@ def _so4_radial_overlap_placeholder(
 ) -> sp.Expr:
     """Convention-independent nonzero placeholder for I_{n N n'}^{l L l'}.
 
-    The SO(4) selection rule for the radial Gegenbauer 3-overlap on chi in
-    [0, pi] (Avery 1989 Eq. 2.5) is
+    LEGACY/round-2 placeholder. Kept for the regression test
+    `test_propagation_number_robust_to_placeholder` and for fallback when
+    a fast (non-Avery) value is wanted. The DEFAULT for matrix construction
+    is now the genuine Avery-Wen-Avery Gegenbauer 3-integral (sprint
+    WH1-R3.1, see _so4_radial_overlap_avery below).
+
+    The SO(4) "naive" selection rule we used for the placeholder
 
         |n - n'| + 1 <= N <= n + n' - 1     (SO(4) triangle)
         L <= N - 1                          (subhood)
 
-    plus the implicit condition that l, L, l' are individually bounded by
-    their respective principal quantum numbers (already enforced by the
-    HyperLabel dataclass).
-
-    For the round-2 propagation-number computation the *value* of I cancels
-    out of most dim(O^k) computations: the dimension depends primarily on
-    the support pattern of M_{N L M} as a matrix in M_N(C). Two structural
-    constraints we DO need to respect to avoid spurious behavior:
-
-      (i) The trivial-irrep multiplier f = constant 1 is proportional to
-          Y^{(3)}_{1, 0, 0}, and its multiplier matrix is the identity (up
-          to overall scale). So we need I_{n, 1, n}^{0, 0, 0} = constant in
-          n (the placeholder must NOT depend on n at the trivial irrep).
-
-      (ii) For non-trivial irreps the placeholder must give generic nonzero
-          values on the supported entries so that distinct multiplier
-          labels produce distinct multiplier matrices.
+    is too restrictive on the (n, l) labels: the genuine Gegenbauer
+    triple integral (Avery 1989 Eq. 2.5 + Wen-Avery JMP 26, 396 1985) is
+    nonzero on more (n, l, N, L, n', l') configurations than this triangle
+    permits, because the sin^l(chi) prefactors in the radial functions
+    R_{n,l}(chi) interact with the Gegenbauer polynomials to produce
+    additional nonzero couplings. The placeholder was intentionally
+    over-restrictive: it captured the support pattern that suffices for
+    the propagation-number computation (verified to give prop = 2 robust
+    to placeholder choice, round 2).
 
     We choose:
 
@@ -316,9 +313,7 @@ def _so4_radial_overlap_placeholder(
             1                          if N == 1 (identity-multiplier branch)
             1 + 1/(N+1) * (n + n')     otherwise (generic distinctness)
 
-    when the SO(4) selection rules fire, else 0. The choice for the
-    non-trivial branch is rational, positive, and distinct on most relevant
-    index-tuples to break accidental linear dependence.
+    when the (over-restrictive) SO(4) selection rules fire, else 0.
     """
     if not (abs(n - np_) + 1 <= N <= n + np_ - 1):
         return sp.Integer(0)
@@ -330,6 +325,35 @@ def _so4_radial_overlap_placeholder(
     # Generic positive-rational placeholder, distinct on most index-tuples.
     # Symmetric in (n, n') to keep the operator system *-closed.
     return sp.Integer(1) + sp.Rational(n + np_, N + 1)
+
+
+def _so4_radial_overlap_avery(
+    n: int, N: int, np_: int, l: int, L: int, lp: int
+) -> sp.Expr:
+    """Genuine Avery-Wen-Avery Gegenbauer 3-integral (sprint WH1-R3.1).
+
+    Drop-in replacement for `_so4_radial_overlap_placeholder` returning the
+    closed-form physical value
+
+        I_{n N n'}^{l L l'} = int_0^pi R_{n l}(chi) R_{N L}(chi)
+                                       R_{n' l'}(chi) sin^2(chi) dchi
+
+    with R_{n l}(chi) = N_{n l} sin^l(chi) C^{l+1}_{n-l-1}(cos chi) and
+    Avery 1989 Eq. 1.6.3 normalization. See `geovac.so4_three_y_integral`
+    for the closed-form derivation and orthonormality verification.
+
+    Returns sympy expression in exact arithmetic (rational + sqrt(rational)
+    times powers of pi).
+    """
+    # Imported lazily to keep operator_system standalone-loadable.
+    from geovac.so4_three_y_integral import gegenbauer_triple_integral
+    return gegenbauer_triple_integral(n, l, N, L, np_, lp)
+
+
+# Active radial-overlap function used by `three_y_integral`. Switch to
+# the placeholder by setting this to `_so4_radial_overlap_placeholder`
+# (e.g. to reproduce round-2 placeholder-convention numerical values).
+_so4_radial_overlap = _so4_radial_overlap_avery
 
 
 def three_y_integral(
@@ -349,11 +373,13 @@ def three_y_integral(
     Gaunt coefficient by the standard formula (which has the (-1)^m
     prefactor).
     """
-    radial = _so4_radial_overlap_placeholder(n, N, np_, l, L, lp)
-    if radial == 0:
-        return sp.Integer(0)
+    # Compute angular factor first (typically faster + more often zero by
+    # the strict m_a = m_b + m_c rule). Saves cost when angular is zero.
     angular = _s2_gaunt_symbolic(l, L, lp, m, M, mp)
     if angular == 0:
+        return sp.Integer(0)
+    radial = _so4_radial_overlap(n, N, np_, l, L, lp)
+    if radial == 0:
         return sp.Integer(0)
     return radial * angular
 

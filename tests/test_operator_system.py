@@ -221,9 +221,16 @@ def test_propagation_number_robust_to_placeholder():
     """prop is the same under a different (rational) radial-overlap
     placeholder, confirming that the result depends on support pattern only,
     not on the specific values of the radial overlap.
+
+    Note: this test is round-2's invariance check. Sprint WH1-R3.1 swapped
+    the default radial-overlap function from the round-2 placeholder to the
+    genuine Avery-Wen-Avery integral, so the regression now temporarily
+    switches the dispatch point (`_so4_radial_overlap`) to two distinct
+    rational placeholders, verifies prop = 2 each time, and restores the
+    Avery default.
     """
     from geovac import operator_system as ops
-    original = ops._so4_radial_overlap_placeholder
+    original = ops._so4_radial_overlap
 
     def alternate(n, N, np_, l, L, lp):
         if not (abs(n - np_) + 1 <= N <= n + np_ - 1):
@@ -235,7 +242,8 @@ def test_propagation_number_robust_to_placeholder():
         # Different rational placeholder
         return sp.Rational(2 * n + 3 * np_ + 5 * N + 7 * l + 11 * L + 13 * lp, 17)
 
-    ops._so4_radial_overlap_placeholder = alternate
+    # Test 1: round-2 over-restrictive placeholder
+    ops._so4_radial_overlap = ops._so4_radial_overlap_placeholder
     try:
         for n_max in (2, 3):
             O = ops.TruncatedOperatorSystem(n_max)
@@ -244,7 +252,19 @@ def test_propagation_number_robust_to_placeholder():
             prop, dims = ops.propagation_number(O, max_k=4)
             assert prop == 2
     finally:
-        ops._so4_radial_overlap_placeholder = original
+        ops._so4_radial_overlap = original
+
+    # Test 2: alternate over-restrictive rational placeholder
+    ops._so4_radial_overlap = alternate
+    try:
+        for n_max in (2, 3):
+            O = ops.TruncatedOperatorSystem(n_max)
+            in_I, _ = O.identity_in_O()
+            assert in_I
+            prop, dims = ops.propagation_number(O, max_k=4)
+            assert prop == 2
+    finally:
+        ops._so4_radial_overlap = original
 
 
 # ---------------------------------------------------------------------------

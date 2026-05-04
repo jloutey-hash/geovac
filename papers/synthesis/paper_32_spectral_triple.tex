@@ -546,7 +546,100 @@ The structural findings (SO(3) $m$-reflection forced zeros; the $1 : 2
 placeholder choice; the absolute distance values and the
 non-monotonicity diagnostic are not.  See
 \texttt{debug/wh1\_round3\_connes\_distance\_memo.md} for the full
-record.
+record.  Caveats (1) and (2) above are subsequently closed in
+Remark~\ref{rem:r31_r32_update}; one of the three structural
+findings is retracted there as a placeholder artifact.
+\end{remark}
+
+\begin{remark}[R3.1+R3.2 closure of round-3 caveats]
+\label{rem:r31_r32_update}
+Two of the three caveats above have been closed in subsequent
+sub-sprints (continuation of the same dispatch on 2026-05-03), and
+one of the three structural findings has been retracted as a
+placeholder artifact.
+
+\paragraph{R3.1 (Avery--Wen--Avery integral, placeholder $\to$
+physical).}  The placeholder for $I_{n N n'}^{l L l'}$ is replaced
+with the closed-form Avery--Wen--Avery $3$-$Y$ integral on $S^3$,
+factorized as $I_{\mathrm{rad}} \cdot G_{\mathrm{Gaunt}}$ with
+$I_{\mathrm{rad}}$ the Gegenbauer triple integral on $\chi$ and
+$G_{\mathrm{Gaunt}}$ the standard $S^2$ Gaunt integral.
+Implemented in \texttt{geovac/so4\_three\_y\_integral.py}
+(sympy-exact, \texttt{lru\_cache}), verified by hyperspherical
+orthonormality at $n_{\max} \le 3$ in exact arithmetic.
+$\mathrm{prop}(\mathcal{O}_{n_{\max}}) = 2$ holds at $n_{\max} =
+2, 3, 4$ under the physical default with dim sequences $14 \to
+25,\ 55 \to 196,\ 140 \to 900$ \emph{bit-identical} to the
+placeholder values---confirming the round-2 invariance claim by
+replacement, not by sampling.
+
+The Connes distance recomputed under physical values retains
+the $m$-reflection forced zeros and the $50\sqrt{3}$ fingerprint,
+but \emph{retracts} the $1 : 2 : 3$ rational structure as a
+placeholder artifact: under Avery the distinct nonzero values at
+$n_{\max} = 2$ are $\{1.27, 86.60, 87.18, 174.93, 175.53,
+262.11\}$ with no clean integer grouping.  The $M_{2,0,0}$
+multiplier rescales by $\sim 3\times$ between placeholder and
+physical values, propagating as $\sim 9\times$ on pairs that use
+it twice.  More importantly, the non-monotonicity \emph{flips
+sign} at $n_{\max} = 3$: Pearson goes from $+0.14$ (placeholder)
+to $-0.36$ (physical), Spearman from $+0.18$ to $-0.33$.  The
+optimistic ``slow trend toward correlation'' reading is
+retracted; under physical values the metric is
+\emph{anti-correlated} with the Fock-graph distance.  Memo:
+\texttt{debug/wh1\_r31\_avery\_wen\_avery\_memo.md}.
+
+\paragraph{R3.2 (spinor lift, scalar Fock $\to$ Weyl spinor on
+$S^3$).}  The construction extends to the Weyl sector of the
+Camporesi--Higuchi spinor bundle on $S^3$ via Clebsch--Gordan
+decomposition $|\psi_{l, j = l + 1/2, m_j}\rangle = \alpha_+
+|Y_{l, m_j - 1/2}\rangle \otimes |\!\!\uparrow\rangle + \alpha_-
+|Y_{l, m_j + 1/2}\rangle \otimes |\!\!\downarrow\rangle$ with
+$\alpha_\pm = \sqrt{(l \pm m_j + 1/2)/(2l + 1)}$.  Each scalar
+Avery multiplier $M_{NLM}$ lifts to a CG-weighted sum of two
+scalar matrix elements; the resulting
+$\widetilde{\mathcal{O}}_{n_{\max}}$ is API-compatible with the
+existing SDP machinery.  Implemented in
+\texttt{geovac/spinor\_operator\_system.py}.  $\dim
+\widetilde{\mathcal{O}} = \dim \mathcal{O}$ at every $n_{\max}$
+(the CG decomposition introduces no new linear independencies);
+identity, $\ast$-closure, and $m_j$-reflection forced zeros all
+generalize naturally.
+
+Two clean R3.2 findings.  \textbf{(i)} \emph{The truthful
+Camporesi--Higuchi Dirac on the spinor bundle is too
+$n$-degenerate} for the Connes distance to be well-defined on
+cross-shell pure-state pairs: at $n_{\max} = 2$, $24$ of $28$
+cross-pairs give $+\infty$ because the $n$-shell-diagonal
+multipliers $M_{N, L = \mathrm{even}, M = 0}$ commute with $D =
+\mathrm{diag}(n_{\mathrm{Fock}} + 1/2)$, making the SDP
+unbounded.  This is the spinor analog of the round-3
+\texttt{shell\_scalar} diagnostic and confirms the
+$n$-degeneracy obstruction is structural, not scalar-only.
+\textbf{(ii)} \emph{Under a CH+offdiag perturbation that lifts
+the $n$-degeneracy, the metric remains anti-correlated} with the
+Fock-graph distance: Pearson nz $-0.36$ at $n_{\max} = 2$,
+$-0.26$ at $n_{\max} = 3$.  The non-monotonicity is therefore
+robust under both the placeholder $\to$ Avery upgrade (R3.1)
+\emph{and} the scalar $\to$ spinor lift (R3.2).  Memo:
+\texttt{debug/wh1\_r32\_spinor\_lift\_memo.md}.
+
+\paragraph{Disambiguation settled.}  The round-3 \S 5.4
+two-reading question (``placeholder artifact'' vs
+``pure-state-distance pathology'') lands on the latter.  R3.1
+rules out the placeholder reading (anti-correlation
+\emph{strengthens} under physical values).  R3.2 rules out the
+scalar-Dirac-proxy reading (anti-correlation persists under the
+spinor lift).  The Connes distance on $\mathcal{O}_{n_{\max}}$ or
+its spinor lift, with pure node-evaluation states, is structurally
+not a discretization of the round-$S^3$ geodesic distance at any
+cutoff we can reach.  The third caveat above (no GH comparison
+on the full state space) remains the natural next move; whether
+the metric becomes monotone in the GH limit via a Kantorovich--
+Wasserstein lift to mixed states requires Peter--Weyl on
+$\mathrm{SU}(2)$ (genuinely new NCG mathematics; deferred by
+Connes \& van~Suijlekom 2021 three times, no published treatment
+on $S^3$).
 \end{remark}
 
 \begin{remark}[Two-sided structural alignment]
