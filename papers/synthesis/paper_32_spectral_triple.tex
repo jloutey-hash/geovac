@@ -261,6 +261,325 @@ of Paper~7 rather than a generic graph.  It is finite-dimensional
 ($\dim_{\mathbb{C}} \mathcal{A}_{\mathrm{GV}} = N_{\mathrm{Fock}}$),
 unital ($1$~is the constant function~$1$), and abelian.
 
+\begin{remark}[$\mathcal{A}_{\mathrm{GV}}$ as $C^*$-envelope of an operator system]
+\label{rem:operator_system}
+In the parallel reading of GeoVac through the spectral-truncation
+framework of Connes and van~Suijlekom~\cite{connes_vs2021},
+Definition~\ref{def:A_GV} describes
+$\mathcal{A}_{\mathrm{GV}}^{(n_{\max})} = \mathbb{C}^{V_{\mathrm{Fock}}}$
+as the $C^*$-envelope $C^*(\mathcal{O}_{n_{\max}})$ of the operator
+system
+\[
+   \mathcal{O}_{n_{\max}} := P_{n_{\max}} \, C^\infty(S^3) \, P_{n_{\max}},
+\]
+where $P_{n_{\max}}$ is the index-truncation projecting onto the
+span of the first $n_{\max}$ Fock shells (in the spinor-harmonic
+basis of $L^2(S^3)$ adapted to the SO(4) decomposition).  This is
+structurally identical to the Connes--van~Suijlekom worked example
+on $S^1$ (their $P_n$ onto $\mathrm{span}_{\mathbb{C}}\{e_1, e_2,
+\ldots, e_n\}$, \cite[\S 3.1]{connes_vs2021}): a basis-index cutoff,
+not a Borel functional-calculus projection
+$\chi_{[-\Lambda, \Lambda]}(D)$.  The genuine truncated algebra-image
+$\mathcal{O}_{n_{\max}}$ is $*$-closed but \emph{not} multiplicatively
+closed; it carries nontrivial off-diagonal matrix elements
+\[
+   \langle (n,l,m_l) | \, f \, | (n', l', m_l') \rangle
+   = \int_{S^3} \overline{Y_{n l m_l}}\, f \, Y_{n' l' m_l'}\, dV
+\]
+between distinct $n$-shells.  These overlap integrals are exactly
+the Gaunt~/~Wigner-3j angular machinery and the hypergeometric
+Slater radial integrals already implemented throughout the GeoVac
+pipeline (Paper~22 angular sparsity; Paper~14 ERI structure).  The
+off-diagonal data therefore already exists in the framework;
+$\mathcal{A}_{\mathrm{GV}}$ as written in Definition~\ref{def:A_GV}
+is its diagonal restriction.
+
+The two readings agree on diagonal elements and on the spectral
+data of $D_{\mathrm{GV}}$; they differ in what is taken as the
+algebraic content surviving the truncation.  Connes and
+van~Suijlekom note that taking the $C^*$-envelope of $\mathcal{O}_\Lambda$
+typically collapses to a ``non-informative full matrix algebra'' --
+the algebraic-structure information lives in the operator-system
+data thrown away by the envelope construction.  Constructing
+$\mathcal{O}_{n_{\max}}$ explicitly in $\mathcal{B}(\mathcal{H}_{\mathrm{GV}})$
+and computing its propagation number and Connes distance on
+node-evaluation states is the deliverable of the WH1 round-2 sprint
+(see \texttt{debug/wh1\_connes\_vs\_mapping\_memo.md}, 2026-05-03).
+The present subsection retains the
+$\mathcal{A}_{\mathrm{GV}} = \mathbb{C}^{V_{\mathrm{Fock}}}$ definition
+because (a) it matches the Marcolli--van~Suijlekom gauge-network
+convention used throughout Papers~25 and~30, and (b) the spectral
+triple's structural verifications (Theorem~\ref{thm:GV_triple}
+below; KO-dimension audit; Hodge structure) are unaffected by
+which representative of the equivalence class is taken.
+\end{remark}
+
+\begin{proposition}[Propagation number of $\mathcal{O}_{n_{\max}}$]
+\label{prop:propagation_number}
+Let $\mathcal{O}_{n_{\max}} = P_{n_{\max}} C^\infty(S^3) P_{n_{\max}}$
+be the truncated operator system of
+Remark~\ref{rem:operator_system}, viewed as a $*$-closed subspace of
+$M_N(\mathbb{C})$ with $N = N_{\mathrm{Fock}}(n_{\max})$.  The
+propagation number in the sense of Connes \& van~Suijlekom
+(\cite{connes_vs2021}, Definition~2.39) satisfies
+\begin{equation}
+   \mathrm{prop}(\mathcal{O}_{n_{\max}}) = 2
+   \qquad \text{for every } n_{\max} \in \{2, 3, 4\},
+   \label{eq:prop_two}
+\end{equation}
+matching the Toeplitz operator system $C(S^1)^{(n)}$
+(\cite{connes_vs2021}, Proposition~4.2: $\mathrm{prop}(C(S^1)^{(n)}) =
+2$ independently of $n$) verbatim.  Equivalently,
+$\dim_{\mathbb{C}}(\mathcal{O}_{n_{\max}}^2) = N^2$ while
+$\dim_{\mathbb{C}}(\mathcal{O}_{n_{\max}}) < N^2$ strictly:
+\[
+\renewcommand{\arraystretch}{1.15}
+\begin{array}{c|c|c|c|c}
+n_{\max} & N & N^2 & \dim(\mathcal{O}_{n_{\max}}) &
+   \dim(\mathcal{O}_{n_{\max}}^2) \\ \hline
+2 & 5  & 25  & 14  & 25  \\
+3 & 14 & 196 & 55  & 196 \\
+4 & 30 & 900 & 140 & 900 \\
+\end{array}
+\]
+The dimension fraction $\dim(\mathcal{O}_{n_{\max}}) / N^2$ falls
+$0.560 \to 0.281 \to 0.156$ across the three truncations: the
+operator system is a vanishing fraction of its $C^*$-envelope as
+$n_{\max}$ grows, but its second power fills the envelope
+completely.
+\end{proposition}
+
+\begin{proof}[Computational verification]
+The full construction and verification is documented in
+\texttt{geovac/operator\_system.py} (the \texttt{TruncatedOperatorSystem}
+class) and \texttt{tests/test\_operator\_system.py} (24 tests, all
+passing; CPU time ${\sim}20$~s).  In summary: a basis of
+$\mathcal{O}_{n_{\max}}$ is built from the multiplier matrices
+$M_{NLM}$ corresponding to the hyperspherical harmonics
+$Y^{(3)}_{NLM}$, with selection rules $|n - n'| + 1 \le N \le n + n' -
+1$ (SO(4) triangle), $|l - l'| \le L \le l + l'$ with $l + l' + L$
+even (S$^2$ Gaunt parity), $M = m - m'$, and the angular S$^2$ part
+evaluated symbolically via \texttt{sympy.physics.wigner.wigner\_3j}.
+Linear independence of $\{M_{NLM}\}$ is verified at machine precision;
+the propagation number is read off as the smallest $k$ with
+$\dim(\mathcal{O}_{n_{\max}}^k) = N^2$.  The result
+$\mathrm{prop} = 2$ is robust: it is invariant under the choice of
+SO(4) radial-overlap placeholder (verified across three placeholders
+including a pure indicator that retains only the support pattern), so
+\eqref{eq:prop_two} is a structural invariant of the SO(4) selection
+rules at finite cutoff and does not depend on the radial value
+convention.  See \texttt{debug/wh1\_round2\_propagation\_memo.md}
+(2026-05-03) for the full computational record, including the explicit
+witness pair $a = M_{2,1,0}$ at $n_{\max} = 2$ for which $a^2 \notin
+\mathcal{O}_{n_{\max}}$ (Frobenius residual $\approx 14.9\%$), with
+the deficit concentrated on the top-shell diagonal entries.
+\end{proof}
+
+\begin{remark}[Significance of $\mathrm{prop} = 2$]
+Connes \& van~Suijlekom prove $\mathrm{prop}(C(S^1)^{(n)}) = 2$ for
+the Toeplitz operator system on the circle by showing that products
+of two Toeplitz shift generators reach every matrix unit
+$e_{ij}$~\cite{connes_vs2021}.  The companion dual operator system
+$C(\mathbb{Z})^{(n)}$ has $\mathrm{prop} = \infty$ (their
+Proposition~4.3) — so the value $\mathrm{prop} = 2$ is non-trivial
+even at this level: it is specific to the Toeplitz construction, not
+to operator systems in general.  Eq.~\eqref{eq:prop_two} therefore
+states that the Fock-projected $S^3$ truncation is in the same
+propagation class as the Toeplitz $S^1$ — one of the simplest worked
+examples in the spectral-truncation literature — at the level of a
+quantitative Connes--van~Suijlekom invariant, not merely at the
+level of the underlying construction.  Together with the
+$\mathrm{SO}(4)$ isometry preservation discussed in
+Sec.~\ref{sec:axiom_audit} below, this is the strongest
+quantitative alignment between GeoVac and the published Connes-vS
+framework currently known.
+
+The mechanism producing
+$\mathcal{O}_{n_{\max}} \subsetneq M_N(\mathbb{C})$ is the
+``raise-then-lower at the top shell escapes the truncation'' boundary
+correction: a multiplier $M_{N \ge 2, L, M}$ acting at the top shell
+$n = n_{\max}$ would, in the continuum, be balanced by intermediate
+sums over $n' > n_{\max}$, but the truncation $P_{n_{\max}}$ kills
+these contributions.  This is structurally the same boundary effect
+as the pendant-edge theorem of Paper~28~\cite{paper28},
+$\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max} - 1)/n_{\max}$ for
+the graph-native ground-state self-energy, viewed from the
+operator-system side rather than the QED side.
+\end{remark}
+
+\begin{corollary}[Structural specificity of $\mathrm{prop} = 2$ on $S^3$]
+\label{cor:structural_specificity}
+The propagation value
+$\mathrm{prop}(\mathcal{O}_{n_{\max}}) = 2$ in
+Proposition~\ref{prop:propagation_number} is structurally specific to
+the Connes--van~Suijlekom spectral truncation of $S^3$ and \emph{not}
+a generic feature of arbitrary finite-dimensional truncations of $S^3$.
+The natural circulant-style comparator on $S^3$ at $N$ points
+\[
+   A_{\mathrm{circ}, N} := \mathrm{span}\{E_{i, i} : i = 0, \ldots, N - 1\}
+   \subset M_N(\mathbb{C}),
+\]
+i.e., the commutative $C^*$-subalgebra of diagonal matrices in the
+``point-evaluation'' basis of $\mathbb{C}^N$, satisfies
+\begin{equation}
+   \mathrm{prop}(A_{\mathrm{circ}, N}) = \begin{cases}
+      1 & \text{(intrinsic envelope:\ $A_{\mathrm{circ}, N}$ is its own
+                  $C^*$-algebra)}, \\
+      \infty & \text{(ambient envelope:\ $M_N(\mathbb{C})$ is non-abelian;
+                       no power of an abelian subalgebra reaches it)}.
+   \end{cases}
+   \label{eq:prop_circulant}
+\end{equation}
+Verified at $N \in \{2, 5, 14, 30, 55, 140\}$, matching both
+dimension-matching conventions (envelope-match $N(\mathrm{circ}) =
+N(\mathrm{GV})$ and operator-system-match $N(\mathrm{circ}) =
+\dim(\mathcal{O}_{n_{\max}})$).  Either reading of
+\eqref{eq:prop_circulant} is categorically different from the
+spectral-truncation value~$2$.
+\end{corollary}
+
+\begin{proof}[Computational verification]
+The construction lives in \texttt{geovac/circulant\_s3.py} (the
+\texttt{CirculantS3Truncation} class) with verification in
+\texttt{tests/test\_circulant\_s3.py} (35 tests, all pass; runtime
+${\sim}1.4$~s).  Algorithmically, $\mathrm{prop}(A_{\mathrm{circ}, N})$
+is computed via the same vec-stack rank algorithm used in the
+proof of Proposition~\ref{prop:propagation_number}, applied to the
+diagonal-matrix basis of $A_{\mathrm{circ}, N}$.  The intrinsic-envelope
+reading exits at $k = 1$ since $\dim(A_{\mathrm{circ}, N}^1) = N =
+\dim_{\mathbb{C}}(A_{\mathrm{circ}, N})$ already saturates the
+intrinsic $C^*$-envelope.  In the ambient-envelope reading, the
+$M_N(\mathbb{C})$ envelope has dimension $N^2$ for $N \ge 2$ but
+$\dim(A_{\mathrm{circ}, N}^k) = N$ for every $k$ (commutativity is
+preserved under self-products), so no finite $k$ achieves
+saturation; $\mathrm{prop} = \infty$ by Connes--van~Suijlekom
+Definition~2.39.  See
+\texttt{debug/wh1\_round3\_falsification\_memo.md} (2026-05-03) for
+the full record, including the verbatim Connes--van~Suijlekom Outlook~\S6
+contrast (lines 2611--2618 of arXiv:2004.14115v2) between
+spectral and circulant truncations on~$S^1$, of which
+Eq.~\eqref{eq:prop_circulant} is the verbatim $S^3$ analog.
+\end{proof}
+
+\begin{remark}[Connes distance on $\mathcal{O}_{n_{\max}}$: SDP framework
+and structural findings]
+\label{rem:connes_distance}
+The Connes distance on operator systems
+(\cite{connes_vs2021}, Eq.~(2))
+\[
+   d_D(\phi, \psi) = \sup_{x \in \mathcal{O}} \big\{ |\phi(x) - \psi(x)|
+      : \|[D, x]\|_{\mathrm{op}} \le 1 \big\}
+\]
+restricted to pure node-evaluation states $\phi_v(x) := \langle v | x | v
+\rangle$ on the truncated operator system has been computed by
+semidefinite programming on $\mathcal{O}_{n_{\max}}$ at $n_{\max} = 2, 3$.
+The implementation lives in \texttt{geovac/connes\_distance.py} (a
+\texttt{cvxpy} SDP with the operator-norm constraint lifted to the LMI
+$\bigl[\begin{smallmatrix} I & [D, x] \\ [D, x]^* & I \end{smallmatrix}\bigr]
+\succeq 0$, and a gauge-fixing constraint orthogonalizing $x$ to
+$\ker([D, \cdot]) \cap \mathcal{O}_h$); 17 tests in
+\texttt{tests/test\_connes\_distance.py} (all pass; runtime ${\sim}9$~s).
+Three structural findings emerged at the placeholder convention:
+
+\begin{enumerate}
+\item \textbf{SO(3) $m$-reflection forces zero distance.}  For every
+   $|n, l, -m\rangle$ and $|n, l, +m\rangle$ pair, $d_D(\phi_{|n,l,-m\rangle},
+   \phi_{|n,l,+m\rangle}) = 0$ exactly (one such pair at $n_{\max} = 2$,
+   four at $n_{\max} = 3$).  This is the SO(3) $m$-reflection symmetry
+   of the operator system showing through, not a pathology: the symmetry
+   identifies the two states as members of the same orbit, and any
+   point-discriminating function must be constant on the orbit.
+
+\item \textbf{Clean rational structure at $n_{\max} = 2$.}  The five
+   non-zero entries of the $5 \times 5$ distance matrix at $n_{\max} = 2$
+   group into ratios $1 : 2 : 3$ (specifically $28.87 : 57.73 : 86.60$),
+   with $86.6020 = 50\sqrt{3}$ to five decimals.  This rational/algebraic
+   structure is lost at $n_{\max} = 3$ as the SDP gains degrees of
+   freedom.  We log this as an algebraic fingerprint of the truncated
+   metric at small cutoff; whether it persists in any natural
+   generalization is open.
+
+\item \textbf{Non-monotonicity in the Fock-graph distance.}  Pearson
+   correlation between $d_D(\phi_v, \phi_w)$ and the combinatorial
+   Fock-graph distance $d_{\mathrm{graph}}(v, w)$ (counting $\Delta n =
+   \pm 1$ and $\Delta l = \pm 1$ ladder steps) is $\rho \approx -0.04$
+   at $n_{\max} = 2$, growing to $+0.14$ at $n_{\max} = 3$ (Spearman
+   $0.09 \to 0.18$).  The trend is weakly toward correlation but the
+   absolute level is far from a discretized-geodesic metric at our
+   reachable cutoffs.
+\end{enumerate}
+
+These findings should be read with three explicit caveats, none of
+which are addressed in the present paper.
+
+\begin{itemize}
+\item The SO(4) radial overlap integral $I_{n N n'}^{l L l'}$ in the
+   construction of $\mathcal{O}_{n_{\max}}$
+   (Remark~\ref{rem:operator_system}) is currently a placeholder rather
+   than the genuine Avery--Wen--Avery $3$-$Y$ integral on $S^3$.
+   Round~2's propagation-number result
+   (Proposition~\ref{prop:propagation_number}) is invariant under this
+   choice; the Connes distance is not.  The absolute distance values
+   reported above are convention-dependent until the placeholder is
+   replaced.
+
+\item The construction is on the scalar Fock basis $\mathcal{H}_{\mathrm{GV}}$
+   only; the spinor lift to $\mathcal{H}_{\mathrm{GV}} \otimes
+   \mathbb{C}^4$ with the native Camporesi--Higuchi Dirac in the
+   $(n_{\mathrm{D}}, \kappa, m_j)$ basis is not yet incorporated.  The
+   diagonal scalar Dirac on $\mathcal{H}_{\mathrm{GV}}$ has a large
+   $\ker([D, \cdot]) \cap \mathcal{O}$ that makes the SDP unbounded on
+   most state pairs; the metric values reported here use an
+   off-diagonal Dirac proxy as a finite-distance regulator, which is a
+   second convention choice.
+
+\item No comparison to the round-$S^3$ continuum geodesic distance is
+   attempted.  Such a comparison is the actual content of Connes--vS
+   Gromov--Hausdorff convergence
+   (Sec.~\ref{sec:axiom_audit} discussion of Row~9 of the round-1
+   mapping), which has not been proved on $S^3$ in the published
+   literature.
+\end{itemize}
+
+The structural findings (SO(3) $m$-reflection forced zeros; the $1 : 2
+: 3$ rational ratios at $n_{\max} = 2$) are robust across the
+placeholder choice; the absolute distance values and the
+non-monotonicity diagnostic are not.  See
+\texttt{debug/wh1\_round3\_connes\_distance\_memo.md} for the full
+record.
+\end{remark}
+
+\begin{remark}[Two-sided structural alignment]
+\label{rem:two_sided_alignment}
+Connes \& van~Suijlekom's worked $S^1$ example exhibits the
+spectral-vs-circulant distinction along two axes simultaneously:
+the Toeplitz operator system $C(S^1)^{(n)}$ has $\mathrm{prop} = 2$
+(their Proposition~4.2), while the circulant matrix algebra
+$C(C_m)$ has $\mathrm{prop} = 1$ trivially (it is its own
+$C^*$-algebra).  Eqs.~\eqref{eq:prop_two}
+(Proposition~\ref{prop:propagation_number}) and~\eqref{eq:prop_circulant}
+(Corollary~\ref{cor:structural_specificity}) reproduce both axes
+verbatim on $S^3$:
+\[
+\renewcommand{\arraystretch}{1.15}
+\begin{array}{c|c|c}
+ & \text{spectral truncation} & \text{circulant analog} \\ \hline
+S^1 \text{ (Connes--vS)} & C(S^1)^{(n)},\ \mathrm{prop} = 2 &
+   C(C_m),\ \mathrm{prop} = 1 \\
+S^3 \text{ (this work)}  & \mathcal{O}_{n_{\max}},\ \mathrm{prop} = 2 &
+   A_{\mathrm{circ}, N},\ \mathrm{prop} = 1 \text{ or } \infty \\
+\end{array}
+\]
+The two-sided match foreclosing the natural objection that
+$\mathrm{prop} = 2$ might be a generic feature of any finite
+truncation of $S^3$.  Together with the SO(4)-isometry-preservation
+property of Sec.~\ref{sec:axiom_audit} below (the property Connes
+\& van~Suijlekom themselves identify as distinguishing spectral
+truncation from circulant discretization), this is the strongest
+quantitative alignment between GeoVac and the published
+spectral-truncation framework currently known.
+\end{remark}
+
 \subsection{The Hilbert space $\mathcal{H}_{\mathrm{GV}}$}
 
 Let $V_{\mathrm{Dirac}}$ denote the set of Dirac-graph nodes at the

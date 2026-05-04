@@ -1,0 +1,2787 @@
+arXiv:2004.14115v2 [math.QA] 27 May 2020  SPECTRAL TRUNCATIONS IN NONCOMMUTATIVE
+                                                   GEOMETRY AND OPERATOR SYSTEMS
+
+                                                         ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+                                           Abstract. In this paper we extend the traditional framework of noncommu-
+                                           tative geometry in order to deal with spectral truncations of geometric spaces
+                                           (i.e. imposing an ultraviolet cutoff in momentum space) and with tolerance
+                                           relations which provide a coarse grain approximation of geometric spaces at
+                                           a finite resolution. In our new approach the traditional role played by C-
+                                           algebras is taken over by operator systems. As part of the techniques we treat
+                                           C-envelopes, dual operator systems and stable equivalence. We define a prop-
+                                           agation number for operator systems, which we show to be an invariant under
+                                           stable equivalence and use to compare approximations of the same space.
+
+                                               We illustrate our methods for concrete examples obtained by spectral trun-
+                                           cations of the circle. These are operator systems of finite-dimensional Toeplitz
+                                           matrices and their dual operator systems which are given by functions in the
+                                           group algebra on the integers with support in a fixed interval. It turns out
+                                           that the cones of positive elements and the pure state spaces for these oper-
+                                           ator systems possess a very rich structure which we analyze including for the
+                                           algebraic geometry of the boundary of the positive cone and the metric aspect
+                                           i.e. the distance on the state space associated to the Dirac operator. The
+                                           main property of the spectral truncation is that it keeps the isometry group
+                                           intact. In contrast, if one considers the other finite approximation provided by
+                                           circulant matrices the isometry group becomes discrete, even though in this
+                                           case the operator system is a C-algebra. We analyze this in the context of
+                                           the finite Fourier transform on the cyclic group.
+
+                                               The extension of noncommutative geometry to operator systems allows one
+                                           to deal with metric spaces up to finite resolution by considering the relation
+                                           d(x, y) <  between two points, or more generally a tolerance relation which
+                                           naturally gives rise to an operator system.
+
+                                                                          Contents
+
+                                          1. Introduction                                                                    2
+
+                                          2. Preliminaries on operator systems                                               5
+
+                                          2.1. Operator spaces and operator systems                                          5
+
+                                          2.2. Non-unital operator systems                                                   8
+
+                                          2.3. Duals of operator systems                                                     10
+
+                                          2.4. C-envelopes of operator systems                                               11
+
+                                          2.5. Silov boundary ideals                                                         13
+
+                                          2.6. Stable equivalence for operator systems                                       15
+
+                                          2.7. Propagation number as an invariant of operator systems                        17
+
+                                          3. Spectral truncations                                                            18
+
+                                          3.1. Spectral truncation of the circle                                             19
+
+                                          3.2. State space of the truncated circle (n = 3)                                   20
+
+                                          Date: May 28, 2020.
+                                                                                                                 1
+2              ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+   4. Toeplitz operator systems: general structure        28
+
+   4.1. Toeplitz matrices                                 28
+
+   4.2. The Fej´er­Riesz operator system                  29
+
+   4.3. Duality with the Toeplitz operator system         30
+
+   4.4. Pure states of the Toeplitz operator system       31
+
+   4.5. The cone of positive Toeplitz matrices            32
+
+   4.6. Distance on spectral truncations of the circle    35
+
+   5. Toeplitz and circulant matrices                     39
+
+   5.1. Fourier transform on the cyclic group of order m  39
+
+   5.2. Relation between circulant and Toeplitz matrices  41
+
+   6. Outlook                                             43
+
+   References                                             44
+
+                                          1. Introduction
+
+   Noncommutative geometry [19] has shown that it is possible to give a fully
+spectral description of Riemannian spin manifolds. In fact, the mere knowledge
+of the spectrum of the Dirac operator D relative to that of a function algebra A
+allows one to reconstruct the full Riemannian spin manifold M [20]. In physical
+terms this can be phrased by saying that we can probe the structure of curved
+spacetime around us by means of eigenfrequencies and eigenfunctions for a fermion
+that moves through that spacetime.
+
+   For the mathematical reconstruction of M it is crucial to know the full spectrum
+of D and A. In practice, however, it is clear that we will only have access to part of
+that spectrum. Indeed, we are limited by the power and resolution of our detectors
+and typically study physical phenomena up to a certain energy scale. Motivated
+by this we pose the following question:
+
+          can the framework of noncommutative geometry be extended to the
+          case where only part of the spectrum of D is available together with,
+          say, a certain truncation of the algebra A?
+
+This question has been present all along in the development of the relation between
+noncommutative geometry and physics with the long term goal of finding testable
+models of quantum gravity from truncated versions of the model given by quanta
+of geometry in [16, 17]. It has been clear from the start that spectral truncation,
+which means introducing a cutoff in momentum space truncating the Hilbert space
+of fermions, respects all continuous symmetries and is superior to an artificial dis-
+cretization. The spectral truncation in relation with the metric aspect has been
+studied and formalized in the work [23] and the present paper is directly in line
+with this development. Our new input is to put forward the role of operator sys-
+tems in the general theory and to analyze in great details, including the algebraic
+geometry of the boundary of the positive cone, the example of the truncated circle
+with its wealth of structure coming from the theory of Toeplitz matrices.
+
+   The way operator systems naturally arise in the process of spectral truncation is
+as follows. Since the self-adjoint Dirac operator D acts in a Hilbert space H, a natu-
+ral spectral truncation is given simply by a spectral projection P onto eigenspaces of
+D; this is an operator that commutes with D. The natural truncation of the action
+of the -algebra A to the Hilbert space P H is given by the space P AP . Since P does
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  3
+
+not commute with A, this is not an algebra anymore. Moreover in many interesting
+examples if one takes the C-algebra generated by P AP one gets a non-informative
+full matrix algebra. However, not all is lost: the space P AP is a -closed subspace
+in B(H), i.e. it is a so-called operator system [18] (cf. [27, 40, 42, 8]). Such spaces
+have an extremely rich structure: they are matrix ordered, they possess cones of
+positive elements, (pure) state spaces, et cetera. Moreover, for truncations it turns
+out that symmetries of the pair (A, D) induce symmetries of (P AP, P DP ). This
+follows quite easily from the fact that P is a spectral projection of D.
+
+   Another viewpoint is obtained when we change our perspective from momentum
+to position space. The energy cutoff translates to a consideration of metric spaces
+with a certain finite resolution , where we say that two points x, y are equivalent
+if d(x, y) < . This is not an equivalence relation, but it is a so-called tolerance
+relation. We may imitate the construction of the C-algebra of a foliation or more
+generally of a groupoid C-algebra with the crucial difference that the convolu-
+tion product cannot be defined due to the lack of transitivity. However, given
+the symmetry and reflexivity, a tolerance relation does define an operator system.
+This creates a generalization of the basic construction of noncommutative geome-
+try which started from analysing the geometric examples of intractable spaces of
+leaves of foliations using noncommutative algebras. Here the issue of the lack of
+transitivity of the relation is already present in the simplest case where the gen-
+erated equivalence relation has a single class i.e. corresponds to the C-algebra of
+compact operators. Besides the class of examples of operator systems associated to
+spectral truncations a whole new class thus appears from tolerance relations. Such
+relations appear naturally in the homotopy theory of simplicial complexes which
+do not fulfill the Kan-extension property as was shown in [21, 22].
+
+   In this paper we develop the formalism needed for doing noncommutative geom-
+etry with operator systems. We will focus mainly on the `topological properties'
+described by the operator systems and corresponding state spaces. The metric as-
+pect as provided by spectral triples extends in a straightforward manner to the new
+framework and in §4.6 we analyse the distance function on the truncated circle. For
+some preliminary results on the metric aspect, we refer to [23, 7]. Computer sim-
+ulations involving a spectral truncation adopting also the Heisenberg quantization
+relation of [16, 17] have been reported in [32, 31].
+
+   The key concepts that we will discuss and introduce here are:
+
+        · operator systems: both concrete and abstract (in the sense of [18]);
+        · duality between operator systems (in the sense of [4, 18]);
+        · enveloping C-algebras of operator systems (in the sense of [35]);
+        · stable equivalence of operator systems;
+        · propagation number as a new invariant under stable equivalence;
+        · extreme rays in the cone of positive elements of an operator system;
+        · pure state spaces of operator systems.
+
+   We will give many examples of the theory, based on spectral truncations of the
+circle and spaces at finite resolution. This allows to test the above concepts for
+some concrete operator systems. We will consider:
+
+        · the Toeplitz operator system C(S1)(n) arising from spectral truncations of
+          the circle;
+
+        · elements in the group algebra of Z of finite support: C(Z)(n);
+4  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+        · the circulant matrices, or, equivalently the group algebra C(Cm) of the
+          cyclic group of order m;
+
+        · operator systems E(R) associated to tolerance relations R; in particular
+          describing metric spaces with finite resolution.
+
+   The paper is organized as follows. In Section 2 we review and develop some con-
+cepts and techniques for operator spaces and operator systems, including the ap-
+propriate maps between them. This also includes a discussion on the C-envelope,
+first introduced by Arveson [4] but realized by Hamana in [35]. We introduce a
+so-called propagation number which measures how far an operator system is from
+the C-envelope. We show that this is an invariant under stable equivalence of
+operator systems.
+
+   In Section 3 we come to our main motivation: spectral truncations. For the
+circle we present a fully detailed analysis of the structure of the state space for
+the smallest non-trivial truncation (of rank 3) but which already turns out to be
+extremely rich.
+
+   We continue our analysis in Section 4 where the underlying mathematical struc-
+ture of Toeplitz operator systems is unveiled and analyzed in full detail. We identify
+the C-envelope and compute the propagation number. The dual operator system
+is realized in terms of functions in the group algebra of Z with support in a fixed
+interval. Because of the close relation with old factorization results of positive
+functions on the circle by Fej´er and Riesz we will call this system the Fej´er­Riesz
+operator system. Using the duality we reach a full understanding of the pure state
+spaces and extreme rays, both for the Toeplitz operator system, as well as for
+the Fej´er­Riesz operator system. Moreover, the duality allows for a new proof
+of another old result by Carath´eodory on Vandermonde factorizations of positive
+Toeplitz matrices. One interesting feature which arises in the algebraic geometry
+of the boundary hypersurface of the cone of positive Toeplitz matrices is the link
+between the rank of the matrix and the singularity of the hypersurface (see The-
+orem 4.15). In §4.6 we analyse the distance function on the truncated circle and
+prove in Theorem 4.20 that it is larger than the Kantorovich distance of the cor-
+responding probability measures on the circle. Other results in this direction have
+been reported in [23, 32, 31] while further Gromov­Hausdorff convergence results
+will be reported elsewhere by the second author.
+
+   The relation between Toeplitz and circulant matrices is analyzed in Section 5. We
+realize the finite Fourier transform in terms of a duality between operator systems.
+
+   In the final Section 6 we explain how the framework proposed in this paper i.e.
+using operator systems rather than C-algebras, allows one to apply the fundamen-
+tal idea of noncommutative geometry of associating a noncommutative C-algebra
+to a quotient space which is intractable by standard topological methods, to situa-
+tions where the equivalence relation defining the quotient is no longer assumed to
+be transitive. The detailed development of this idea will be done in a forthcoming
+paper.
+
+Acknowledgements. We are grateful to Gilles Pisier for his useful remarks on an
+early version of this paper. We thank Fabien Besnard for very useful comments.
+WvS would like to thank IHE´S for their hospitality and support during a visit in
+February 2020. WvS thanks Bram Mesland for numerous fruitful discussions on
+operator spaces. We thank Hugo Woerdeman for fruitful interaction.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  5
+
+                         2. Preliminaries on operator systems
+
+   In this section we review and develop some of the general concepts and techniques
+on operator systems that are needed in the later sections.
+
+2.1. Operator spaces and operator systems. We start by briefly recalling the
+theory of operator spaces and operator systems, referring to [27, 40, 42, 8] for more
+details.
+
+2.1.1. Operator spaces. Operator space theory can be considered as a "quantum"
+or noncommutative version of Banach space theory in the sense that one extends
+the usual norms on a vector space E to so-called matrix-norms, i.e. norms on
+Mn(E) for every n  N. Let us make this more precise (cf. [27, Section 2.1] for
+more details).
+
+Definition 2.1. Let E be a vector space. A matrix norm · on E is an assignment
+of a norm · n on the matrix space Mn(E) for each n  N.
+
+   An (abstract) operator space is a linear space E together with a matrix norm ·
+for which
+
+    (1) E is complete as a normed vector space.
+    (2) x  y m+n = max{ x m, y n}
+    (3) x n   x m 
+
+for all x  Mm(E), y  Mn(E) and   Mnm(C),   Mmn(C).
+
+   From the first condition it actually follows that all Mn(E) are complete with
+respect to the norm · n (cf. [27, Section 2.1]).
+
+   Given two operator spaces E and F and a linear mapping  : E  F , for each
+n  N there is a corresponding linear map n : Mn(E)  Mn(F ) from matrices
+with coefficients in E to matrices with coefficients in F , given by
+
+                          n(x) = ((xij)) ; x = (xij)  Mn(E).
+
+To each n we may associate its operator norm and the completely bounded norm
+is defined to be
+
+                                      cb := sup{ n : n  N}.
+
+There are the following notions of morphisms between operator spaces and operator
+systems.
+
+Definition 2.2. Let  : E  F be a linear map between operator spaces.
+
+    (1) We say that  is completely bounded (respectively, completely contractive)
+          if  cb <  (respectively,  cb  1).
+
+    (2) We say that  is completely isometric if each n is isometric.
+
+   The prototypical example of an operator space is given by a closed subspace of
+B(H) for some Hilbert space H. Indeed, there is a natural inclusion Mn(E) 
+Mn(B(H)) = B(Hn) which determines a norm · n on Mn(E). We call such an
+E a concrete operator space. It follows from Ruan's representation theorem [49]
+(cf. [27, Section 2.3] that any abstract operator space is completely isometrically
+isomorphic to a concrete operator space.
+6  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+2.1.2. Operator systems. We now focus our attention on operator systems, with
+
+the crucial property that they possess cones of positive elements. Again there is
+
+a notion of abstract operator system and concrete operator system, in fact both
+
+originating from the seminal work by Choi and Effros [18]. Let us briefly sketch
+
+these notions, referring to the original [18] and e.g. [40, Chapter 13] for more
+
+details.
+   Let E be a vector space equipped with a conjugate linear involution x  x.
+
+We call such a space a -vector space and we set Eh = {x  E : x = x}. For
+(xij)  Mn(E) we set (xij) = (xji) so that Mn(E) is also a -vector space. In
+order to talk about positive elements we need a notion of ordering.
+
+Definition 2.3. We say that a -vector space is matrix ordered if
+
+    (1) for each n we are given a cone of positive elements Mn(E)+ in Mn(E)h,
+    (2) Mn(E)+  (-Mn(E)+) = {0} for all n,
+    (3) for every m, n and A  Mmn(C) we have that AMn(E)+A  Mm(E)+.
+
+   We will write x  0 and call x positive whenever x  Mn(E)+. A map from
+Mn(E) to Mn(F ) is then called positive if it maps Mn(E)+ to Mn(F )+.
+
+Definition 2.4. Let  : E  F be a linear map between matrix-ordered -vector
+spaces.
+
+    (1) We call  completely positive if each n is positive.
+    (2) We call  a complete order isomorphism if  is invertible with both  and
+
+          -1 completely positive.
+
+   We also say that  : E  F is a complete order injection if it is a complete order
+isomorphism onto its image.
+
+   Finally, let us address the role that 1 plays in an operator system. Let E be an
+ordered -vector space. We call e  Eh an order unit for E if for each x  Eh there
+is a t > 0 such that -te  x  te. It is called an Archimedean order unit if -te  x
+for all t > 0 implies that x  0.
+
+Definition 2.5. An (abstract) operator system is given by a matrix-ordered -
+vector space E with an order unit e such that for all n
+
+          e 0 · · · 0
+
+   In  =  0            ...                    ...  ...  
+                       ...                    ...       
+
+              ...                                       
+          
+                                                    
+                                                   0
+
+              0 ··· 0 e
+
+is an Archimedean order unit for Mn(E).
+
+   There is a relation between operator systems and operator spaces and, in fact,
+a matrix order induces a matrix norm (cf. [40, Proposition 13.3]):
+
+   x n = inf       t:                    tIn   x        0
+                                         x    tIn
+
+for any x  Mn(E). This relationship respects the morphisms between operator
+systems and operator spaces, as the following result shows.
+
+Proposition 2.6. Let  : E  F be a linear map between operator systems.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  7
+
+    (1) If  is completely positive, then it is completely bounded with
+
+                                         cb =  = (1) .
+    (2) A unital map  is completely positive if and only it is completely contractive.
+    (3) A unital map  is a complete order injection if and only if it is completely
+
+          isometric.
+
+Proof. The first two statements can be found in [27] as Lemma 5.1.1 and Lemma
+5.1.2, respectively, the third follows then directly from the second (cf. [9, §1.3.3]).
+
+   We may summarize this by saying that there is a functor from abstract operator
+systems to abstract operator spaces. The obtained abstract operator spaces have
+naturally a unit and involution, and as discussed below in the concrete case, this
+additional structure is the only nuance between the two notions. In fact the role
+of the unit in passing from operator spaces to operator systems was fully clarified
+by the work of D. Blecher and M. Neal [10] who found the norm identities that
+qualify an element of an operator space as a unit of an operator system with the
+given underlying operator space.
+
+Definition 2.7. We say that a subspace E  B(H) is a (concrete) operator system
+if it is self-adjoint in the sense that E = E where E = {x : x  E} and contains
+the identity 1 in B(H).
+
+   The cone of positive elements in E is defined to be
+
+                                          E+ := E  B(H)+,
+
+and, more generally, we write for any n  N:
+                                  Mn(E)+ := Mn(E)  B(Hn)+.
+
+This turns a concrete operator system in an abstract operator system. In the other
+direction, the celebrated Choi­Effros Theorem shows that any abstract operator
+system is completely order isomorphic to a concrete operator system [18].
+
+   We also note that a unital complete order isomorphism  : A  B between two
+unital C-algebras is a -isomorphism (see [27, Corollary 5.2.3] for a proof).
+
+   We also have the following result.
+
+Proposition 2.8. Let  : E  F be a completely isometric, completely positive
+isomorphism between unital operator systems. Then  is unital.
+
+Proof. This follows since the unit of a unital operator system is characterized
+uniquely as the largest element among positive elements of norm  1.
+
+2.1.3. States on operator systems. One of the advantages of working with operator
+systems is that there is a notion of states, defined as positive linear functionals of
+norm 1. Since for linear functionals  : E  C we have  cb =  (cf. [27,
+Corollary 2.2.3] or [40, Proposition 3.8]), Proposition 2.6 above implies that a state
+on E can equivalently be defined to be a linear functional  : E  C such that
+
+                                              = (1) = 1.
+
+This is completely analogous to the case of C-algebras (see for instance [8, Propo-
+sition II.6.2.5]) and, in fact, for states we automatically have complete positivity
+([40, Proposition 3.8]).
+8  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+   In any case, we may talk about the state space S(E) of the operator system E; it
+is a convex space which is compact for the weak -topology, so that Choquet theory
+applies [41]. The pure states are then given by the extreme points in S(E). We call
+the weak -closure of the set of extreme points in S(E) the pure state space; it will
+be denoted by P(E).
+
+   We also record from [8, Section II.6.3] that if E  A with A a C-algebra, and
+ is a state on E, then by the Hahn­Banach Theorem  extends to a functional 
+on A of norm one. Since (1) = 1,  is a state on A. For pure states on E there is
+the following well-known result (cf. [11, Proposition 2.3.24]):.
+
+Fact 2.9. Let  : E  C be a pure state. The set V of extensions of  to states
+on A is a compact convex subset of S(A) (in the weak--topology) and any extreme
+point of this set is a pure state on A. In particular,  allows for an extension to a
+pure state on A.
+
+2.2. Non-unital operator systems. For non-unital operator systems we shall
+use the results of Werner [52] together with the following correction needed since
+it is wrongly stated in that paper that the state space Sn(E) of any operator space
+equipped with a matrix order is compact. This fails even for C-algebras such as
+the algebra of sequences tending to 0 at . However the problem is fixed using the
+following fact:
+
+Lemma 2.10. Let Sn(E) be the state space consisting of positive linear functionals
+on Mn(E) of norm 1. The rescaled state space Sn(E) := { |   Sn,   [0, 1]}
+is weakly compact. Any continuous functional homogeneous of degree 1 on Sn(E)
+reaches its maximum on Sn(E)  Sn(E).
+
+   Werner considers matrix-ordered operator spaces. These are defined to be opera-
+tor spaces E with a matrix order as in Definition 2.3 with the additional properties
+that
+
+     (1) the cones Mn(E)+ are all closed, and,
+     (2) the involution is an isometry on Mn(E).
+
+He then constructs "partial unitizations" for arbitrary matrix-ordered operator
+spaces after proving their uniqueness (op.cit. Lemma 4.3). His construction pro-
+ceeds as follows:
+
+Definition 2.11. Let E be a matrix-ordered operator space and define A = A+In
+for every matrix A  Mn(C). On the space E  C we define
+
+    (1) (x, A) = (x, A) for all (x, A)  Mn(E)  Mn(C),
+    (2) for any (x, A)  Mn(E  C)h we set
+
+                  (x, A)  0 iff A  0 and (A-1/2xA- 1/2)  -1
+
+          for all  > 0 and   Sn(E).
+
+We denote by E the space E  C equipped with this order structure.
+
+   When E is the matrix-ordered operator space associated to a possibly non-unital
+C-algebra B this construction agrees with the traditional adjunction of a unit
+B  B (see op.cit. Corollary 4.17). As shown in op.cit. Lemmas 4.8 and 4.9, one
+has
+        SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                9
+
+Proposition 2.12. (i) Let E be a matrix-ordered operator space. The space E
+defined above is a (unital) operator system.
+(ii) Let T : E  F be a completely contractive and completely positive map between
+matrix-ordered operator spaces E, F . Then the natural unital extension T : E 
+F is completely positive.
+
+   For x  E one lets E0 (x) := sup{|(x)| :   S(E)}. The number E0 (x) is
+the so-called numerical radius of x  E; it also makes sense more generally for
+
+x  Mn(E). Moreover, it allows to introduce a norm on Mn(E) as follows ([52,
+Lemma 3.1]).
+
+Lemma 2.13. Let E0 be the numerical radius.
+(i) The map E : x  E0   0x
+                       x 0  defines a norm on Mn(E) and we have E(·)    ·.
+
+(ii) The inclusion map iE : E  E is completely contractive and completely posi-
+
+tive.
+
+(iii) The inclusion iE is a complete isometry when considered as a map from (E, E)
+
+to E .
+
+   In fact, in [52, Lemma 4.5] it is shown that if the embedding E  E is com-
+pletely positive, then it is completely contractive if and only if it is a complete
+isometry between (E, E) and E . It is here that Lemma 2.10 should be used
+to conclude (in line 7 of the proof of [52, Lemma 4.5]) that the supremum E0 is
+actually attained by a   Sn(E).
+
+Corollary 2.14. Let T : E  F be a completely isometric, complete order iso-
+morphism. Then T : E  F is a (unital) complete order isomorphism.
+
+In line with the result in [52] we will make the following definition.
+
+Definition 2.15. A non-unital operator system is given by a matrix-ordered oper-
+ator space for which the norm E(·) coincides with the norm · .
+
+   For a non-unital operator system the inclusion iE : E  E is a complete
+isometry, and E will be called a unitization of E.
+
+   The main result of [52] is then an analogue of the Choi­Effros Theorem for non-
+unital operator systems. Indeed, since E is an (abstract) unital operator system
+it can be realized as a concrete operator system in B(H) for some Hilbert space H.
+It then follows that if E(·) and · coincide on Mn(E), then we can also realize
+E via the (completely isometric) inclusion map E  E as a (concrete) non-unital
+operator system in B(H) (see [52, Corollary 4.11]).
+
+   Note that in the definition of a matrix-ordered operator space there is no re-
+quirement of non-triviality of the positive cone. In particular starting with an
+operator space E (with isometric involution) one can consider the trivial matrix
+order Mn(E)+ = {0} for all n. The norm E is then the same as the original
+norm on E since positivity of functionals is automatic. But then the Choi­Effros
+Theorem applied to the partial unitization E implies Ruan's result for operator
+spaces.
+
+   In all the examples of matrix-ordered operator spaces considered in this paper,
+the following non-triviality condition holds: the cones Mn(E)+ span Mn(E), or
+more precisely (and for all n)
+
+(1)     Mn(E)+ - Mn(E)+ = {x  Mn(E) | x = x}.
+10  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+To understand the meaning of this condition in terms of the partial unitization E
+note the following
+
+Fact 2.16. Let A be a unital C-algebra and  a pure state on A. Then, with the
+notations Ker()+ := Ker()  A+ and Ker()sa := Ker()  Asa one has
+
+        (xy) = (x)(y) , x, y  A  Ker()+ - Ker()+ = Ker()sa.
+
+Proof.If  is a morphism  : A  C and x = x  A fulfills (x) = 0 then with
+|x| = xx one has (|x|) = 0 and x = |x| - y where also y  Ker()+. Conversely
+if the irreducible GNS representation (H, , ) is of dimension > 1 one finds a
+self-adjoint element a  A such that (a) = 0 but (a)  . Then one
+has (a) = 0 but a / Ker()+ - Ker()+ since elements b  Ker()+ all fulfill
+(b) = 0 since (b1/2) 2 = (b) = 0  (b) = 0.
+
+   Thus one can define in general a character of a unital operator system as a pure
+state  such that Ker()+ - Ker()+ = Ker()sa. Then condition (1) on a matrix-
+ordered operator space means that the canonical state on the partial unitization
+E is a character.
+
+2.3. Duals of operator systems. Already in [18] Choi and Effros analyzed the
+notion of duality for operator systems, which we now briefly discuss here. See also
+[29] for a more recent perspective. In general, duals of operator systems are only
+matrix-order vector spaces, but in the finite-dimensional case also an Archimedean
+order unit can be constructed. Since our main interest in this type of duality is for
+finite-dimensional Toeplitz matrices (cf. Section 4.3 below) we will here restrict to
+this case.
+
+   So let E be a finite-dimensional (abstract) operator system E. We let Ed be the
+dual vector space of E and let Mn(Ed) be paired component-wise with Mn(E):
+
+                                 (x) = (ij )(xij ) = ij (xij )
+
+                                                                                       ij
+
+where  = (ij)  Mn(Ed) and x = (xij)  Mn(E). We define a matrix order on
+Ed by
+
+               Mn(Ed)+ =   Mn(Ed) : (x)  0 for all x  Mn(E)+ .
+
+One quickly checks that this is a matrix-order, since for any A  Mmn(C) we have
+
+                                     (AA)(x) = (Atx(At))
+
+so that AA  Mn(Ed)+ if  is, because Mm(E)+ is closed under conjugation by
+a scalar-valued matrix.
+
+   Let us now consider the existence of an Archimedean order unit. The notion of
+faithful state makes sense for any operator system: a state  is faithful if (x) > 0
+for x > 0.
+
+Proposition 2.17 (Choi­Effros). let E be a finite-dimensional (abstract) operator
+system E. Let Ed be the dual vector space of E, equipped with the above matrix-
+ordering. A state  on E defines an order unit on Ed if and only if it is faithful.
+Then diag(, . . . , ) is an Archimedean order unit on Mn(Ed). Faithful states exist
+and endow Ed with the structure of an operator system.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                       11
+
+Proof. The result follows from the existence of a compact base K for E+. For
+any x  K there exists   E+d with (x) > 0 thus, by compactness there exists
+a faithful state  : E  C. It is an order unit for Ed since the compact set
+(K)  (0, ) is bounded away from 0 while (K) is bounded for any   Ehd. It
+is also Archimedean since if  + t  E+d for all t > 0 one, has for any x  E+,
+that (x) + t(x)  0 for all t > 0 and thus (x)  0. The extension to Mn(Ed) is
+
+straightforward.
+
+Lemma 2.18. Let E be a finite-dimensional (abstract) operator system E. There
+is a complete order isomorphism of operator systems (Ed)d = E.
+
+Proof. This is a straightforward application of the bipolar theorem, stating in the
+finite-dimensional case that ((Ed)d)+ = E+.
+
+   Let us now consider maps between operator systems and their duals. Clearly, if
+ : E  F there is the induced map d : F d  Ed given by
+
+                           d(f )(x) = f ((x)); (f  F d, x  E).
+
+Proposition 2.19. If E and F are operator systems. A linear map  : E  F is
+completely positive if and only if d : F d  Ed is completely positive.
+
+Proof. In view of Lemma 2.18 it is sufficient to prove one implication. So suppose
+that  is completely positive, i.e. (n)  0 for all n  0. Then (n) : Mn(F d) 
+Mn(Ed) satisfies
+
+d(n)()(x) = (dn)(ij )(xij ) = d(fij )(xij ) = fij ((xij )) = ((n)(x))
+
+ij  ij
+
+for  = (ij)  Mn(F d), x = (xij)  Mn(E). Hence if   0 it follows that
+d(n)()  0.
+
+Corollary 2.20. Extreme rays in the cone E+ are in one-to-one correspondence
+to the pure states of Ed and, vice versa, pure states of E are in one-to-one corre-
+spondence to extreme rays in the cone (Ed)+.
+
+2.4. C-envelopes of operator systems. In [4] Arveson introduced the notion
+of a C-envelope of an operator system. Their existence and uniqueness was estab-
+lished in full generality by Hamana in [35] based on the theory of injective envelopes
+(see also [40, Ch. 15] and [9, Section 4.3]). More recently, in [2, 3] Arveson revisited
+his original approach (using so-called boundary representations) to the problem of
+C-envelopes, basing himself on the work of Dritschel and McCullough [26]. In
+this context, we also mention the paper by Arveson's student and grand-student
+[25]. We here briefly recall some of these notions and the main result. We allow for
+non-unital operator systems.
+
+Definition 2.21. Let E be an operator system. A C -extension  : E  A of
+E is given by a completely isometric and completely positive map such that A =
+C((E)) and  : E  A is a complete order isomorphism onto its range.
+
+   The above definition contains the usual one of a C-extension in the case of
+unital operator systems (i.e. a unital order isomorphism onto its range, cf. [35,
+Definition 2.1] as we show now:
+12  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+Lemma 2.22. Let E be a unital operator system. Then any C-extension of E is
+a C -extension.
+
+Proof. The proof is based on the fact that states on unital operator systems, in
+the sense of positive linear functionals of norm 1, are automatically unital. Thus
+given a C-extension  : E  A states on E are restrictions of states on A and one
+obtains that  : E  A is a complete order isomorphism onto its range.
+
+   In fact in the special case of unital operator systems the notion of C -extension
+is more general than the usual notion, as shown by the following:
+
+Example 2.23. Let E be the smallest unital operator system consisting of scalar
+multiples of the unit 1E. Let A := C0([0, )) be the C-algebra of continuous
+functions vanishing at  on [0, ). Let  : E  A be given by (1E) = h with
+h(x) := exp(-x). By construction  is a completely isometric and completely
+positive map and its range generates A as a C-algebra. Moreover the map  :
+E  A is a complete order isomorphism onto its range since evaluation at 0 
+[0, ) gives a completely positive retraction  : A  E of the map .
+
+   Let  : E  F be a completely isometric, complete order isomorphism of oper-
+ator systems. We will say that two C -extensions  : E  A and  : F  B are
+equivalent if there is a -isomorphism  : A  B such that    =   .
+
+Definition 2.24. Let E be an operator system. A C -envelope is a C -extension
+ : E  A with the following universal property: for every C -extension (B, )
+there exists a unique surjective -homomorphism  : B  A such that    = .
+
+   Existence of the C-envelope for unital operator systems was shown by Hamana
+in [35] and we refer to that paper and [40, Ch. 15] and [9, Section 4.3] for the proof.
+We now deal with the non-unital case.
+
+Theorem 2.25. (i) The C -envelope of a non necessarily unital operator system
+E exists and is unique (up to equivalence).
+(ii) If the system is unital the C -envelope is equal to the C-envelope.
+
+Proof. (i) Let us show existence of a C -envelope in the case that E  B(H) is
+non-unital. Let E = E  C be the unitization of E as defined in Definition 2.11;
+it is a unital operator system and so it has a C-envelope; let us denote this by
+ : E  B. We claim that A = C((E))  B is a C -envelope of E. First by
+Corollary 4.17 of [52] the unitization C((E)) is the usual C-algebra unitization.
+The map iE : E  E is completely isometric and completely positive and so is
+ =   iE : E  A. To show that  is a C -extension one needs to prove that
+ : E  A is a complete order isomorphism on its range. Since B is a unital
+C-algebra and A  B a C-subalgebra one has a canonical morphism  : A  B.
+It extends the inclusion by sending the adjoined unit of A to 1B. Moreover
+
+                                                =
+
+If an element x   (E ), is positive in A then (x)  B is positive and since
+ : E  B is an order isomorphism on its range there exists uniquely a positive
+element y  E with (y) = (x). Let z  E with  (z) = x, one has
+
+                                 (z) =    (z) = (x) = (y)
+
+and hence z = y since  is an injection, so that z is positive. The same argument
+applies to matrices and shows that  is a C -extension. Now suppose that  :
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  13
+
+E  C is some other C -extension. Then C is the C-algebra unitization of
+C and  : E  C is a (unital) C-extension by Definition 2.21. Hence there
+exists a surjective -homomorphism  : C  B, with B as defined above, such
+that    = . The -homomorphism given by the restriction |C : C  B
+lands in A = C((E)) since C = C((E)) by Definition 2.21. Thus we find that
+ = |C : C  A is a surjection, and that    =   iE =  as desired.
+
+   For uniqueness, assume that  : E  A and  : E  B are two C -envelopes of
+E. The universal property of both give two surjective -homomorphisms  : A  B
+and  : B  A such that    =  and    = . As a consequence      = ,
+that is to say,    is the identity when restricted to (E)  A. But since  and
+ are -homomorphisms and A is generated by (E) it follows that    = idA.
+Similarly, we find    = idB so that A = B, compatibly with the extension maps
+ and .
+(ii) Let E be a unital operator system, and iE : E  Cenv(E) its C-envelope. Let
+ : E  A be the C -envelope of E. Then by Lemma 2.22, iE is a C -extension.
+Thus by the universal property of the C -envelope, there exists a unique surjective
+-homomorphism  : Cenv(E)  A such that   iE = . Since the C-algebra
+Cenv(E) is unital it follows that A is unital, with unit 1A equal to (1). Let 1E be
+the unit of the operator system E. It follows that
+
+                                 (1E) =   iE(1E) = (1) = 1A.
+
+This shows that  : E  A is a C-envelope. Thus by the universal property of
+C-envelopes there exists uniquely a surjective -homomorphism  : A  Cenv(E)
+such that    = iE. One then concludes that  is the inverse of  since both
+Cenv(E) and A are generated by the image of the operator system E.
+
+Corollary 2.26. Let E be a unital operator system. Then Cenv(E) is the C-
+algebra generated by E in Cenv(E ).
+
+Proof. By construction the C-algebra generated by E in Cenv(E ) is the C -
+envelope of E and by (ii) of Theorem 2.25 it coincides with the C-envelope:
+iE : E  Cenv(E).
+
+Remark 2.27. It is important in definition 2.21 to assume that the associated map
+ is an order isomorphism with its range. The following example shows that if one
+drops this hypothesis the C -envelope no longer exists. Consider the non-unital
+system S formed of a single self-adjoint H with H = 1, and where the positive
+cone is {0}. Then if one weakens definition 2.21 by dropping the requirement on
+ , a C-extension  : E  A is simply a self-adjoint generating element h  A of
+norm h = 1. In particular one can have h > 0 and one sees that this rules out
+the existence of a C-envelope since h does not contain -1 in its spectrum. But the
+system S does have a C-envelope which is the C-algebra C({±1}) and where H
+is the function H(±1) := ±1.
+
+   Part (ii) of Theorem 2.25 shows that we can drop the distinction between C-
+envelope and C -envelope. In the following, we will use the terminology C-envelope
+of E and denote it as iE : E  Cenv(E).
+
+2.5. Silov boundary ideals. There is a useful description of the C-envelope in
+terms of Silov boundary ideals that we now recall [4, 35]. We shall only use it in
+the unital case and restrict to this case in this subsection.
+14  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+Definition 2.28. Let E be a unital operator system and  : E  A a C-extension.
+A boundary ideal for the extension is a closed two-sided ideal I  A such that the
+quotient map q : A  A/I is completely isometric on (E)  A.
+
+   A boundary ideal is called the Silov ideal if it contains every other boundary ideal.
+
+   Before we analyze the relation between the Silov boundary ideal and the C-
+envelope of operator systems, let us spend a few words on the topological origin
+of these boundary ideals [4, Sect. 2.1] (cf. [41, Chapter 6]). Namely, let X be
+a compact Hausdorff topological space and consider a linear subspace E  C(X)
+that contains the constants and separates points of X. Then there is a smallest
+closed subset K  X such that every function in E achieves its maximal absolute
+value on K. This is called the Silov boundary of X relative to E. In terms of the
+corresponding ideals we then find that
+
+    J = {f  C(X) : f (K) = 0}
+
+and that the quotient norm in C(X)/J is
+
+                                          f |K = sup |f (x)|.
+
+                                                                            xK
+
+But then, to say that f attains its maximum on K  X amounts to saying that
+ f |K = f . Thus, given the one-to-one correspondence between closed subsets
+in X and closed ideals in C(X) we find that J is a Silov ideal for an E  C(X) if
+and only if K is Silov boundary for E.
+
+Example 2.29. The traditional example of the Silov boundary is given by the
+continuous harmonic functions Charm(D) on the closed disc. Then by the maximum
+modulus principle any harmonic function attains its maximum at the boundary of
+D. The Silov boundary for this operator system is thus given by the circle and the
+Silov boundary ideal is C0(D).
+
+   We now return to the description of the C-envelopes using Silov boundary
+ideals. Note that the following result is nothing but a reformulation of the results
+in [35], very much in line with [4].
+
+Proposition 2.30. Let E be a unital operator system and let  : E  A be
+a C-extension. Then there exists a (necessarily unique) Silov boundary ideal J.
+
+Moreover, the C-envelope Cenv(E) is -isomorphic to A/J.
+
+Proof. From the universal property of the C-envelope iE : E  Cenv(E) it follows
+that there is a surjective -homomorphism  : A  Cenv(E) such that    = iE.
+Hence there is a -isomorphism  : A/Ker   Cenv(E) such that
+
+    E  iE / CenvO (E)
+
+                                         
+
+    E  q / A/Ker 
+
+is a commutative diagram, where q : A  A/Ker  denotes the quotient map. We
+claim that J = Ker  is the Silov boundary ideal.
+
+   Indeed, J is a boundary ideal since the restriction of q : A  A/Ker  to (E)
+is q   = -1  iE which is surely a complete order isomorphism onto its range.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  15
+
+   Next, let I  A be any boundary ideal with q : A  A/I the corresponding
+quotient map. Then q   : E  A/I is a C-extension of E and thus, by the
+universal property of Cenv(E) = A/J there is a surjective -homomorphism
+
+                                             : A/I  A/J
+
+such that   q   = q  . This means that (x + I) = x + J for all x  (E)  A.
+Since  is a -homomorphism and A is generated by (E) it follows that (x + I) =
+x + J for all x  A. In particular, for each x  I we have
+
+                              0 + J = (0 + I) = (x + I) = x + J
+
+so that I  J.
+
+Corollary 2.31. Let E be a unital operator system and let  : E  A be a C-
+extension. If A is a simple C-algebra then Cenv(E) is isomorphic to A.
+Proof. Since A is simple there are no two-sided ideals and in particular the Silov
+boundary ideal is trivial. In other words, the C-envelope of E is given by A.
+
+Example 2.32. Returning to the harmonic functions on the closed disc of Example
+2.29 we see that Cenv(Charm(D)) = C(D)/C0(D) = C(S1).
+
+Example 2.33. Let  be an irrational real number and let U and V be two unitary
+operators in a Hilbert space such that
+
+                                            V U = e2iV U.
+
+The linear span E of the operators U and V together with their adjoints and the
+identity is a operator system. It is a subspace of the C-algebra generated by U and
+V , which is of course nothing but the noncommutative torus A. Since the latter is
+simple Corollary 2.31 applies and we conclude that the C-envelope of E is given
+by the noncommutative torus A.
+
+Remark 2.34. We urge the reader to transpose the above results to the non-unital
+case by replacing C-extensions by C -extensions.
+
+2.6. Stable equivalence for operator systems. Before we can introduce the
+notion of stable equivalence, we will need to briefly digress on tensor products of
+operator systems. We will base our approach on [36] which is focusing completely
+on operator systems. In fact, the authors develop tensor products from the point
+of view of abstract operator systems (that is to say, for matrix-ordered order unit
+spaces). However, the link to concrete operator systems such as E  B(H) is
+also worked out (cf. [36, Theorem 4.4]), and allows us to here make the following
+`hands-on' definition. For the development of tensor products in the case of non-
+unital (abstract) operator systems, we refer to [39]
+
+Definition 2.35. Let E  B(H) and F  B(K) be operator systems. We define
+the minimal tensor product E min F of E and F as the following norm closure
+
+                                E min F = E  F  B(H  K),
+
+where the algebraic tensor product E  F is naturally embedded in B(H  K).
+
+   The construction of the minimal tensor product only depends on the abstract
+operator system structure, and it defines a bi-functor from operator systems to op-
+erator systems [36, Theorem 4.6]. In fact, this can also be seen from the concrete
+viewpoint that we have adopted in the above definition. Indeed, if  : E  E
+16  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+and  : F  F are complete order isomorphisms (i.e. completely isometric iso-
+morphisms) then [27, Proposition 8.1.5] shows that    induces a complete order
+isomorphism from E min F to E min F .
+
+   We now come to the main topic of this section, which is stable equivalence of
+operator systems. Let K denote the C-algebra of compact operators.
+
+Definition 2.36. We say that two operator systems E and F are stably equivalent
+if E min K and F min K are complete order isomorphic operator systems.
+
+   It is immediate that this is an equivalence relation. The advantage of working
+with the minimal tensor product should now become clear. In fact, if E  B(H)
+and K  K(K) for Hilbert spaces H and K we find that E min K(K) is the closure
+of E  K0(K) in B(H  K) where K0(K) denote finite-rank operators.
+
+   We expect that the above notion of stable equivalence is related to a notion of
+Morita equivalence for operator systems, similar to what happens in the case of
+C-algebras [13], operator algebras [9] and operator spaces [28]. It is an interesting
+open problem to develop such a notion and see how it reduces to the familiar notion
+of Morita equivalence. In any case, we record the following result.
+
+Proposition 2.37. (i) Let E be a unital operator system. The C-envelope of the
+stabilization E min K is isomorphic to the stabilization Cenv(E)  K of the C-
+envelope.
+(ii) Let E and F be stably equivalent unital operator systems. Then Cenv(E) and
+Cenv(F ) are stably equivalent C-algebras.
+
+Proof. (i) Let  : E  Cenv(E) be the C-envelope of the operator system E; and
+consider the map  :=  min id : E min K  Cenv(E) min K. It makes sense
+since one can realize  as an inclusion of concrete operator systems. Let us show
+that  is a C -extension in the sense of Definition 2.21. It is by construction a
+complete isometry and is completely positive. We need to show that  : (E min
+K)  (Cenv(E) min K) is a complete order isomorphism with its range R 
+(Cenv(E) min K) . Let then x = y + 1  R where y = (z) for some z  E min K
+and   R. Assume that x  0. This means that   0 and that y  -1
+as concrete operators, i.e. in B(H  K). Let then Kn  K be an increasing
+sequence of n-dimensional subspaces whose union is dense in K. Let en  B(H K)
+be the orthogonal projection on H  Kn. One has enyen  -en. Let then
+zn  Mn(E)  E min K with enyen = (zn). Since  is an inclusion of concrete
+operator systems one has zn + en  0. The element zn + 1  (Mn(E)) is positive
+in the sense of Definition 2.11. Indeed Mn(E) is a unital operator system so its state
+space in the sense of positive linear functionals on Mn(E) of norm 1 is the same as
+the ordinary state space of positive functionals equal to 1 on the unit en. Thus since
+zn + en  0 the positivity condition of Definition 2.11 holds. We thus obtain a
+sequence of positive elements vn = zn + 1  (E min K) which is norm convergent
+and whose norm limit v is positive and fulfills  (v) = x. The similar argument
+also applies when passing to matrices. Thus we conclude that Cenv(E)  K is a C -
+extension of E min K. Let then C(E min K) = C (E min K) be the C-envelope
+of E min K which exists uniquely by Theorem 2.25. From the universal property
+of Definition 2.24 it then follows that there is an ideal J in Cenv(E)  K such that
+(Cenv(E)  K)/J = C(E min K). A closed two-sided ideal in the tensor product
+A  K of a C-algebra A by K is necessarily of the form J0  K, where J0 is the
+closed ideal of A defined by J0 = {a  A | a  k  J, k  K}. Thus we have here
+          SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                      17
+
+J = J0  K. By definition of J the quotient map
+                              q : Cenv(E)  K  (Cenv(E)  K)/J
+
+restricts to a complete isometry on (E min K)  Cenv(E)  K. In particular, with
+e  K a minimal projection, the restriction of q to iE(E)  e is a complete isometry,
+and it agrees with the quotient morphism q0 : Cenv(E)  Cenv(E)/J0. Hence J0
+is a boundary ideal for the C-envelope iE : E  Cenv(E), so J0 is contained in
+the Silov boundary for the C-envelope which is 0. Thus J0 = 0 and the proof is
+complete.
+(ii) Follows from (i).
+
+Corollary 2.38. Suppose E and F are unital C-algebras. If E and F are stably
+equivalent as operator systems, they are also stably equivalent as C-algebras.
+
+Proof. This follows from Proposition 2.37 (ii) since E = Cenv(E) and F = Cenv(F ).
+
+2.7. Propagation number as an invariant of operator systems. Let E be
+an operator system. For an integer n > 0 one lets En be the norm closure of the
+
+linear span of products of  n elements of E. It is an operator system.
+
+Definition 2.39. The propagation number prop(E) of the operator system E is
+defined as the smallest integer n such that iE(E)n  Cenv(E) is a C-algebra.
+
+   When no such n exists one lets prop(E) = .
+
+Example 2.40. Returning to the example 2.29 of harmonic functions in the disk
+one has by 2.32 that Cenv(Charm(D)) = C(D)/C0(D) = C(S1). The Poisson kernel
+
+          P (z, eit)         :=  1 - |z|2
+                                 |eit - z|2
+
+gives the canonical linear section P : C(S1)  Charm(D) by the Poisson integral
+
+                          1  
+          P (f )(z) :=
+                               P (z, eit)f (t)dt
+             2 -
+
+and (see [50] Theorem 11.8) this map is an isomorphism of operator systems. In
+
+particular the propagation number of Charm(D) is equal to 1. Note that this example
+shows that morphisms of operator systems between C-algebras are not in general
+morphisms of C-algebras.
+
+Proposition 2.41. The propagation number is invariant under completely isomet-
+ric, complete order isomorphisms of operator systems.
+
+Proof. This follows from the uniqueness property of the C-envelopes: given a com-
+
+plete order isomorphism  : E  F of two operator systems there is a commuting
+
+diagram:
+
+          E                      /F
+
+            iE                         iF
+
+                                       
+          Cenv (E )           / Cenv(F )
+
+where  is a -isomorphism. Hence if prop(E) = n then we obtain that
+       (iF (F ))n = (iF ((E)))n = ((iE(E)))n =  ((iE(E))n) = Cenv(F ),
+18  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+and prop(F )  n = prop(E). Similarly we find prop(E)  prop(F ) which com-
+pletes the proof.
+
+Proposition 2.42. The propagation number is invariant under stable equivalence,
+i.e., for any unital operator system E we have
+
+                                    prop(E) = prop(E min K)
+
+where K is the C-algebra of compact operators.
+
+Proof. Suppose that prop(E) = n. Then
+
+   iEminK(E min K)n = iEminK(E alg K)n = iE (E)n  K = Cenv(E)  K.
+
+We conclude that prop(E min K)  n = prop(E).
+   In the other direction, let us now assume that prop(E min K) = n. Then by
+
+Proposition 2.37, one has Cenv(E  K) = Cenv(E)  K and thus the latter is the
+norm closure of the linear span of the products of at most n elements of E alg K.
+Let x  Cenv(E) and e  K a minimal projection. One can thus approximate x  e
+by a finite sum of elements of the form
+
+                      m = (a1  k1) · · · (an  kn), aj  E, kj  K.
+
+One thus obtains a good approximation of x by the sum of the
+
+                                  a1 · · · an, ek1 · · · kne = e
+
+from which it follows that prop(E)  n = prop(E min K).
+
+                                   3. Spectral truncations
+
+   The basic paradigm in noncommutative geometry is given by a so-called spectral
+triple (A, H, D), combining a -algebra of bounded operators on Hilbert space H
+with a self-adjoint operator D with compact resolvent and bounded commutators
+[D, a] for all a  A. The typical example is given by a compact Riemannian spin
+manifold M where A = C(M ) and D is the Dirac operator acting on L2-spinors.
+In fact, it is possible [20] to reconstruct a Riemannian spin manifold from any
+spectral triple (A, H, D) satisfying certain conditions, including commutativity of
+A.
+
+   As we explained in the introduction, our goal is to extend this approach of
+geometry to cases where (possibly) only part of the spectrum of D is available.
+Most naturally, we may consider a spectral triple (A, H, D) where we take a cutoff
+of the operator D, described by means of a spectral projection P , projecting onto
+a finite number of the eigenvectors of D. Clearly, such an operator commutes with
+D and, in fact, any operator that commutes with D also commutes with P so that
+the truncation respects the group of isometries of the geometry. The operator D
+is thus replaced by P D = P DP = DP acting as an operator on the Hilbert space
+P H.
+
+   Clearly, the -algebra A does not act on P H any more. However, we may form
+the space P AP of operators which is invariant under the involution. In other
+words, P AP is an operator system in B(P H). We thus come to consider the triple
+(P AP, P H, P DP ).
+
+   The advantage of this spectral description is that we now have the possibility to
+work with a possibly finite-dimensional truncation of the spectral geometry, while
+keeping all the isometries of the original spectral triple intact. Indeed, the isometries
+     SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  19
+
+of the latter are given by unitaries U such that U DU  = D and U AU  = A. Now,
+since P commutes with such U , it follows that U also acts unitarily on P H while
+it maps P AP and D to itself.
+
+   We thus arrive at the following generalization of spectral triples with -algebras
+of bounded operators replaced by operator systems.
+
+Definition 3.1. An operator system spectral triple is a triple (E, H, D) where E is
+a dense subspace of a (concrete) operator system E in B(H), H is a Hilbert space
+and D is a self-adjoint operator in H with compact resolvent and such that [D, T ]
+is a bounded operator for all T  E.
+
+   Since states are perfectly defined on operator systems, the above triple induces
+a (generalized) distance function on S(E) by setting
+
+(2)  d(, ) = sup {|(x) - (x)| : [D, x]  1} .
+
+                    xE
+
+If E = A is a -algebra then this reduces to the usual distance function [19] on the
+state space of the C-algebra A = A . It also agrees with the definition of quantum
+metric spaces based on order-unit spaces given in [46, 37, 38]. It has been studied for
+truncations in [23, 32, 31]. The properties of this metric distance function and the
+notions of Gromov­Hausdorff convergence it gives rise to will be studied elsewhere.
+We will here focus on a detailed analysis on the topological structure. We start
+with the simplest case given by spectral truncations of the circle. As we will find
+the theory is extremely rich, in fact, already in a spectral truncation of the circle
+of rank 3.
+
+3.1. Spectral truncation of the circle. We consider C(S1)  C(S1) acting
+as bounded multiplication operators on L2(S1). An orthonormal basis of L2(S1)
+is given in terms of Fourier theory: ek(x) = eikx for k  Z. These are of course
+
+eigenvectors for the Dirac operator -id/dx on the circle. We consider a spectral
+
+truncation defined by the orthogonal projection Pn onto spanC{e1, e2, . . . , en} for
+some fixed n > 0. We will also write simply P = Pn. The space P C(S1)P is an
+operator system and an arbitrary element T = P f P in C(S1)(n) = P C(S1)P can be
+written as the following matrix with respect to the orthonormal basis spanC{ek}nk=1:
+
+           a0 a-1 a-2 a-3 . . . a-n+1
+
+           a1           a0 a-1 a-2 . . . a-n+2
+
+               a2       a1   a0   a-1  ...   a-n+3  
+                                                    
+
+(3)  PfP       a3       a2   a1   a0   ...   a-n+4  
+                                                    
+
+               ...      ...  ...  ... . . .  ...    
+                                                    
+                                                    
+
+          an-1 an-2 an-3 an-4 · · · a0
+
+in terms of the Fourier coefficients {an}nZ of f  C(S1). Such matrices with
+constants along all diagonals are called Toeplitz matrices. Hence the spectral trun-
+cation PnC(S1)Pn is given by the Toeplitz operator system of all n × n Toeplitz
+matrices. A fully general analysis of the Toeplitz system will be postponed to the
+next section, including the C-envelope, the propagation number, the extreme rays
+
+in the cone of positive elements, the pure state spaces, et cetera.
+
+   In the next subsection we anticipate this discussion and lift the curtain on the
+
+rich structure that is found already in the simplest non-trivial case, namely when
+
+n = 3.
+20  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+3.2. State space of the truncated circle (n = 3). We shall proceed by dis-
+cussing in details the simplest non-trivial case which is n = 3, but before entering
+in the details we list some properties which ought to be shared with the general
+case:
+
+        · The extreme rays of the positive cone O+ of the operator space form a circle.
+          More precisely they are proportional to rank one self-adjoint idempotents
+          which belong to O. They remain extreme rays in the cone of positive
+          matrices.
+
+        · The boundary O+ of the base of the positive cone O+ is the closure of
+          a component of the complement of singular points in a rational algebraic
+          hypersurface H.
+
+        · The extreme points of the base of the positive cone O+ are singular points
+          of the above hypersurface H.
+
+        · The boundary S of the state space is a component of the complement of
+          singular points in a rational algebraic hypersurface K.
+
+        · The extreme points E of the state space coincide with the singular points of
+          the above hypersurface K and form the quotient of a torus by the symmetric
+          group.
+
+        · Both hypersurfaces H and K are the union of a pencil of lines obtained
+          from pairs of points of the singular set.
+
+In the case of the base of the cone O+ the pencil of lines is of dimension 2 (for
+n = 3) and its elements are parametrized by arbitrary pairs of points of the curve
+ of extreme points. In the case of the state space the singular set of K is two
+dimensional and the pencil of lines is formed of lines joining an arbitrary point of
+the singular set with a precisely defined corresponding point. The pencil of lines is
+also two dimensional.
+
+3.2.1. The positive cone O+ and its extreme rays. The self-adjoint elements of the
+truncated operator space P3C(S1)P3 are matrices of the form
+
+                       u a - ib c - id 
+                       a + bi u a - ib  , (a, b, c, d, u)  R5.
+
+                          c + di a + bi u
+
+They form a 5-dimensional real vector space O and what matters is to understand
+the positive cone O+ for the operator norm. The state space is then obtained using
+the dual cone and intersecting with the hyperplane (1) = 1. The coefficients of
+the characteristic polynomial of the above matrix are the following
+
+    - 2a2(c - u) - 4abd + 2b2(c + u) + u c2 + d2 - u2 ,
+
+    - 2a2 - 2b2 - c2 - d2 + 3u2, -3u, 1
+
+and they give a map  : O  R3.
+
+Lemma 3.2. The cone O+ of positive elements is the closure of the open component
+of (0, 0, 0, 0, 1) in the complement of the hypersurface
+
+   H := {(a, b, c, d, u) | 2a2c - 2a2u + 4abd - 2b2c - 2b2u - c2u - d2u + u3 = 0}
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  21
+
+Proof. The elements of the cone O+ are the elements of O whose eigenvalues are
+positive. Since all elements of O are self-adjoint matrices, their eigenvalues are real.
+The cone O+ is convex and is the closure of its interior which consists of matrices A
+whose eigenvalues are strictly positive. For A  O+ is strictly positive, the segment
+joining A to the identity matrix 1 stays inside O+ and thus A belongs to the open
+component of (0, 0, 0, 0, 1) in the complement of the hypersurface H. Conversely
+on a path in the complement of the hypersurface H joining 1 to A the eigenvalues
+remain positive since they vary continuously and cannot vanish as their product is
+given by the determinant of the matrix which is
+
+                    2a2c - 2a2u + 4abd - 2b2c - 2b2u - c2u - d2u + u3
+
+equal to the cubic polynomial which defines H.
+
+   Since the trace of a matrix is the sum of its eigenvalues one knows that it is > 0
+on the cone O+ and hence the natural basis of the cone O+ is its intersection O+,1
+with the hyperplane u = 1. The hypersurface H is then determined by the three
+dimensional zero set Z of the polynomial
+
+                (a, b, c, d) = 2a2(c - 1) + 4abd - 2b2(c + 1) - c2 - d2 + 1
+
+and O+,1 is the closure of the open component B of (0, 0, 0, 0) in the complement of
+Z. The singularities of the hypersurface Z correspond to the points of Z at which
+the gradient of  vanishes. This gradient is given by
+
+            = 4a(c - 1) + 4bd, 4ad - 4b(c + 1), 2 a2 - b2 - c , 4ab - 2d
+
+and the points of Z on which  vanishes form the rational curve
+
+                   := {(a, b, c, d) | a2 + b2 = 1, c = -1 + 2a2, d = 2ab}.
+
+It is parametrized in the form
+
+                 (a, b, c, d) = (cos(x), sin(x), cos(2x), sin(2x)) = (x)  .
+
+Lemma 3.3. The boundary B of B is the range of  : T2 × [0, 1]  Z  R4
+
+                                 (x, y, s) := s(x) + (1 - s)(y).
+
+Proof. One first checks that (x, y, s)  Z. One has
+               ((x, y, s)) = (s sin(2x) + (1 - s) sin(2y))2 - 2(s cos(2x)+
+
+  +(1 - s) cos(2y) - 1)(s cos(x) + (1 - s) cos(y))2 + (s cos(2x) + (1 - s) cos(2y))2
+ -4(s sin(x) + (1 - s) sin(y))(s sin(2x) + (1 - s) sin(2y))(s cos(x) + (1 - s) cos(y))
+
+           +2(s sin(x) + (1 - s) sin(y))2(s cos(2x) + (1 - s) cos(2y) + 1) - 1.
+After expanding in powers of s one finds that all coefficients vanish identically.
+
+   Thus the range of  is contained in the hypersurface Z and we now verify that
+it is contained in the boundary of the component B of the complement of Z. Let
+us show that any element (x)   belongs to the boundary of B. One considers
+the path given (with parameter t  [0, 1]) by
+
+         t  p(t, x) := (1 - t)/3 ((x) + (x + 2/3) + (x + 4/3)) + t(x).
+One finds that independently of x  [0, 2] one has (p(t, x)) = (t - 1)2(2t + 1),
+while one has p(0, x) = 0 and p(1, x) = (x). This shows that (x)   belongs to
+22  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+    Figure 1. The hypersurface Z intersected with the hyperplane
+    d = -4/10. One can see 6 components of the complement, the
+    central one is convex
+
+the boundary of B. It follows by convexity of B that the range of  is contained in
+the boundary of B.
+
+   The minors of the Jacobian of the map  are
+
+      -8(s - 1)s sin4                       x-y  sin(x + y)     
+                                              2
+                                            y) sin4  x-y
+      8(s - 1)s cos(x +                     (sin(x)
+                                            cos(y))  2            .
+      16(s - 1)s sin4  x-y                                      
+                         2                           + sin(y))
+                                                                
+
+      -16(s - 1)s(cos(x) +                           sin4  x-y
+                                                             2
+
+They all vanish if and only if (s-1)s sin4  x-y  = 0. This holds only if s  {0, 1} or
+                                              2
+if the pair (x, y) belongs to the diagonal   T2. In both cases the critical value is
+
+on the curve . The complement of  in B is connected since B is the boundary of
+
+the convex body B (the boundedness of B follows from the boundedness of positive
+
+matrices of fixed trace) and is thus homeomorphic to a three dimensional sphere
+
+which the curve  cannot disconnect. Thus the intersection of the range of  with
+
+the complement of  in B is both open and closed (since the domain T2 × [0, 1] is
+
+compact and critical values lie in ) and is thus equal to the complement of  in
+
+B. Since  lies in the range of  one gets the required surjectivity.
+
+Proposition 3.4. The extreme points of the convex set O+,1 form the curve .
+
+Proof. The extreme points of O+,1 belong to the boundary B and hence to the
+range of the map  of Lemma 3.3. The formula defining  shows that provided
+(x) = (y) all the non-trivial convex combinations are not extreme points and thus
+the extreme points of B are contained in . To see that any element (x)   is
+            SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                                    23
+
+an extreme point we note that the Toeplitz matrix associated to (x) is of the form
+
+      1 e-ix e-2ix 1 0 0  1 1 1 1 0                                                      0
+
+      eix 1 e-ix  = 0 eix 0  1 1 1 0 e-ix 0 
+
+     e2ix eix           1          0 0 e2ix 1 1 1 0 0 e-2ix
+
+which is three times a rank one idempotent and is already an extreme point among
+positive matrices with fixed trace.
+
+3.2.2. The state space and the pure states. The tangent hyperplane to B at any of
+
+the points (x, y, s) for s  (0, 1) is governed by the equation obtained by differ-
+
+entiating  at such points which gives, up to the overall factor 8(s - 1)s sin2                  x-y
+                                                                                                  2
+
+the vector
+
+     {2(cos(x) + cos(y)), 2(sin(x) + sin(y)), - cos(x + y), - sin(x + y)}.
+
+The associated linear form evaluated at any of the points (x, y, s) takes the value
+cos(x - y) + 2. Replacing x  x +  and y  y +  this provides us with a two-
+parameter family of supporting hyperplanes for the cone O+ given by the equation
+L(a, b, c, d, u) = 0 where
+
+            L(a, b, c, d, u) = 2a(cos(x) + cos(y)) + 2b(sin(x) + sin(y))+
+
+               +c cos(x + y) + d sin(x + y) + u(cos(x - y) + 2).
+
+In order to obtain a state one normalizes L. This gives us the following map
+
+ : T2  O from the two torus T2 to the state space S of O
+
+               (x, y)(a, b, c, d, u) :=            1          L(a, b, c, d, u).
+
+                                              cos(x - y) + 2
+
+Since the circle x2 + y2 = 1 is a rational curve with rational parametrization given
+
+by
+
+                                x  =      2t             1 - t2
+                                               ,  y = t2 + 1
+                                      t2  +   1
+
+one obtains a rational parametrization of the range of the map  in the form
+
+     W      =  4 t2v + tv2 + t + v             ,X     =             4 - 4t2v2             ,
+                                              3                                          3
+               t2 (3v2  + 1) +  4tv  + v2  +             3t2v2   +  t2  +  4tv  + v2  +
+
+     Y=     t2 - v2 - 1 + 4tv + v2 - 1            ,Z  =  2 t2(-v) - tv2 + t + v
+                                                                                             .
+               t2 (3v2 + 1) + 4tv + v2 + 3               t2  (3v2  +    1) + 4tv  + v2   +3
+
+By elimination of the variables (t, v) one obtains that the range is contained in the
+following two quartic hypersurfaces
+
+               W 2X2 + 2W 2Z2 - 4W XZ + 2X2Z2 = 0
+
+and
+                    W 2 X2 + 4Z2 + 4Z2 X2 + 4 Y 2 + Z2 - 1 = 0.
+
+These equations allow one to express W as follows
+
+     W=     -X4Z - 8X2Y 2Z - 8X2Z3 + 8X2Z - 16Y 2Z3 - 16Z5 + 16Z3
+
+                                          2X (X2 + 4Z2)
+
+and one just needs to understand the surface  in R3 given by the parametrization
+by (X, Y, Z)(t, v) or by the equation
+
+(4)  X4 + 8X2Y 2 + 8X2Y + 8X2Z2 + 16Y 2Z2 + 16Z4 - 16Z2 = 0.
+
+It is represented in Figure 2.
+24  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+                                Figure 2. The surface  in R3.
+
+   The boundary S of the state space S is contained in an algebraic hypersurface
+which is determined as follows. The linear form
+
+                           L(a, b, c, d, u) = aW + bX + cY + dZ + u
+
+belongs to the state space if and only if it takes positive values on the extreme
+points of the base of the cone O+. This means using Proposition 3.4 and the
+rational parametrization of the curve  that the product
+(-t4X - t4Y + t4 + 2t3W - 4t3Z + 6t2Y + 2t2 + 2tW + 4tZ + X - Y + 1)(1 + t2)-2
+
+only takes positive values. This thus means that the polynomial first factor P (t) is
+positive for all t  R. If X + Y = 1, P (t) is of degree 3 and hence cannot be positive
+for all t  R unless the coefficient 2W - 4Z of t3 vanishes. Since the boundary S
+is topologically a sphere we can ignore this codimension 2 situation. One then has
+X + Y < 1 i.e. the coefficient of t4 is positive. Then P (t) is positive for all t  R if
+and only if it takes positive values where its derivative vanishes:
+
+                                       P (t) = 0  P (t)  0.
+
+This shows that in the boundary S one has a common root for P and P . Thus S
+is contained in the zero set of the discriminant which is the following polynomial
+d(W, X, Y, Z) = W 6 + 3W 4X2 + 15W 4Y 2 - 18W 4Y - 12W 4Z2 - W 4 + 108W 3XY Z
+-36W 3XZ + 3W 2X4 - 78W 2X2Y 2 + 84W 2X2Z2 - 2W 2X2 + 48W 2Y 4 - 144W 2Y 3
++96W 2Y 2Z2+80W 2Y 2-144W 2Y Z2+16W 2Y +48W 2Z4+80W 2Z2-108W X3Y Z
+-36W X3Z-288W XY 2Z-288W XZ3+32W XZ+X6+15X4Y 2+18X4Y -12X4Z2
+-X4 +48X2Y 4 +144X2Y 3 +96X2Y 2Z2 +80X2Y 2 +144X2Y Z2 -16X2Y +48X2Z4
++80X2Z2-64Y 6-192Y 4Z2+128Y 4-192Y 2Z4+256Y 2Z2-64Y 2-64Z6+128Z4-64Z2.
+
+   We thus get the following
+
+Lemma 3.5. The boundary S of the state space S is contained in the hypersurface
+K := {(W, X, Y, Z) | d(W, X, Y, Z) = 0}.
+
+   We are now ready to determine the extreme points of the state space of the
+operator system O.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  25
+
+     Figure 3. Intersection of the hypersurface d(W, X, Y, Z) = 0 with Z = 0
+
+                       Figure 4. State space intersected with Z = 0
+Theorem 3.6. The map  : T2  O from the two torus T2 to the state space S
+of O defines a surjective double cover of the set E of extreme points, and E is a
+M¨obius strip with boundary the image () of the diagonal.
+The M¨obius strip E lies in the singular set of the hypersurface d(W, X, Y, Z) = 0.
+The following map  : T2 × [0, 1]  O is a surjection on the boundary S of the
+state space S
+
+                           (x, y, s) := s(x, y) + (1 - s)(x, y + ).
+26                ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+                100
+                 80
+                 60
+                 40
+                 20
+
+                         1       2     3          4          5     6
+
+    Figure 5. The graph of the numerator of the size2 of Jacobian
+
+Proof. The sum of squares of the numerators of the minors of the Jacobian of the
+map  simplifies to
+
+    2 3 sin  x-y              3(x - y) 2
+               2     + sin
+
+                                   2
+                              × (8 cos(x - y) + 4 cos(2(x - y)) + cos(3(x - y)) + 7)
+
+which only depends upon x-y and whose graph, as a function of the single variable
+x - y, is shown in Figure 5. This shows that the map  : T2  O is an immersion
+
+except on the diagonal . One has (x, y) = (y, x) so that  passes to the quotient
+of T2 by the flip s(x, y) := (y, x). Let us show that one thus obtains an injection
+of T2/s in the state space S. One rewrites the components of (x, y) as a pair of
+complex numbers in terms of u = eix and v = eiy using
+
+             2 cos(x - y) = u/v + v/u, uv = cos(x + y) + i sin(x + y),
+
+so that (x, y) determines the two complex numbers
+
+             A = (u + v)/(4 + u/v + v/u), B = uv/(4 + u/v + v/u).
+
+One has A/B = 1/u + 1/v and moreover
+
+             B  - A2  =  (u2    2u3v3         B2  =     (u2  +  u4v4
+                              + 4uv + v2)2 ,                    4uv + v2)2
+
+which determines the product uv as uv = 2B2/(B -A2). Now both u, v are complex
+
+numbers of modulus one and one knows
+
+                     1/u + 1/v = A/B,  1/(uv)  =     1    - A2)/B2
+                                                      (B
+                                                     2
+
+so that u, v are determined up to the flip. On the diagonal   T2 the map 
+simplifies to
+
+                            4 cos(x) 4 sin(x) 1                 1
+             (x, x) =               ,         , cos(2x), sin(2x)
+                              3        33                       3
+
+which is a smooth embedding of S1 in O. This curve () is the boundary of the
+surface  = (T2) which by the above discussion is the quotient of the two torus
+T2 by the flip, or equivalently the space of un-ordered pairs of complex numbers
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                            27
+
+u, v of modulus one. Such pairs form a M¨obius strip since setting uv = 2 the pair
+
+is determined by the element
+
+                              u+v
+                                       [-1, 1]
+
+                               2
+
+which depends up to sign on the choice of the square root . Thus the monodromy
+
+along the circle is the map x  -x on the interval and the total space is a Mo¨bius
+
+strip. One checks by direct computation that the gradient of d vanishes on  so
+
+that the latter is contained in the singular set of the hypersurface K. It remains
+
+to show that  = (T2) is the set E of extreme points of the state space S. Let
+
+us first show that all other points of the boundary S are not extreme. This will
+
+follow if we show, as stated in the theorem, that the map  is a surjection to the
+
+boundary S. One first checks by direct computation that d((x, y, s)) = 0 for all
+
+x, y  T and s  R. Moreover the computation of the gradient of d on (x, y, s)
+
+gives the expression
+
+32(s - 1)s(12s cos(x - y) - 6 cos(x - y) - cos(2(x - y)) - 5)3
+
+                              (cos2(x - y) - 4)4
+
+multiplied by the non-zero vector (cos(x), sin(x), - cos(2x), - sin(2x)). One can
+thus check that (x, y, s) is a non-singular point of the hypersurface K when s 
+(0, 1) while, as seen above, it is a singular point for s = 0 and s = 1.
+
+   The numerator of the sum of squares of minors of the Jacobian of  simplifies to
+
+8 (96s2 - 96s + 35) cos(x - y) - 2(2s - 1)(5 cos(2(x - y)) + 13) + cos(3(x - y)) 2
+
+which only depends upon u := x - y and s. Solving in s gives two solutions
+
+1                             1
+s  (cos(u) + 2), s  (6 cos(u) + cos(2u) + 5) sec(u).
+4                             12
+
+The second solution lies outside the interval [0, 1]. The first solution singles out the
+critical set of  as the two dimensional graph
+
+                                     1
+                      G = {(x, y, 4 (cos(x - y) + 2)) | x, y  T}.
+
+The critical values form a circle C as obtained using the equality
+
+         1
+(x, y, (cos(x - y) + 2)) = (cos(x), sin(x), 0, 0).
+
+         4
+
+Let U be the range of the restriction of  to T2 × (0, 1). It is contained in the
+complement of the singular set in the hypersurface K, and it is connected (as the
+image of a connected set by a continuous map). It follows that U is contained in
+a single component V of the complement of the singular set in the hypersurface
+K. The intersection of U with the complement V \ C of C in V is both open and
+closed: it is open because the map  is open at any element of the pre-image, it is
+closed since it agrees with the intersection of (T2 × [0, 1]) with V \ C. Now since
+C is a one dimensional circle and V is three dimensional the complement V \ C of
+C in V is connected. It follows that U = V since the circle C is by construction
+in U . It remains to show that V is equal to the boundary S. We know that S
+is homeomorphic to a sphere S3 and that it is contained in the hypersurface K.
+The above proof shows that V  S and hence that the same holds for the closure
+of V , one has V  S. Now the boundary S is necessarily a union of closures
+of components of the complement of the singular set in the hypersurface K. This
+follows from the invariance of domain [12]. Indeed since the boundary S is a
+28  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+topological sphere contained in K, whenever a point x  S is a non-singular point
+of K, one can consider the injective continuous map from a small neighborhood of
+x in S to K given by inclusion and, since a neighborhood of x in K is a standard
+ball one knows by the result of Brouwer that the image of the map is open. This
+suffices to show that the intersection of S with the complement of the singular
+set in K is both closed and open and is thus a union of components. Now if S
+contained another component than V it would become disconnected after removing
+the boundary of V . But the boundary of V is the Mo¨bius strip  = (T2) and the
+complement of a M¨obius strip in the sphere S3 is always connected. This shows
+that V is equal to the boundary S and completes the proof of the theorem.
+
+               4. Toeplitz operator systems: general structure
+
+   This section contains a detailed analysis of the Toeplitz matrices, viewed as
+operator systems inside the matrices with complex coefficients. We will apply the
+techniques and concepts developed in Section 2 and find that the rich structure
+found by direct computations in the previous section exists for general n.
+
+4.1. Toeplitz matrices. Let us start by giving the general definition of the Toeplitz
+operator system.
+
+Definition 4.1. The operator system C(S1)(n)  Mn(C) of n × n complex-valued
+Toeplitz matrices is defined by the vector space of matrices with constant diagonals,
+i.e. of the form
+
+                        t0 t-1 · · · t-n+2 t-n+1
+
+                        t1                 t0 t-1                  t-n+2
+
+                         ...                              ...      ...  
+                                                          ...           
+    T :=  tk-l  kl  =                      t1   t0                      
+                                                ...
+                                                                        
+
+                                                                         
+                       tn-2                                        t-1 
+
+                         tn-1 tn-2 · · · t1                        t0
+
+with tk  C for k = -n + 1, . . . , n - 1.
+
+Proposition 4.2. We have the following isomorphism of C-algebras:
+                                     Cenv(C(S1)(n)) = Mn(C).
+
+Moreover, independently of n one has prop(C(S1)(n)) = 2.
+
+Proof. Note that the Toeplitz matrices generate all complex matrices so that Mn(C)
+is a C-extension of C(S1)(n). Since Mn(C) is simple, it follows from Corollary 2.31
+that this extension is the C-envelope.
+
+   In order to compute the propagation number we use a basis {j}j=-n+1,...,n-1
+for the Toeplitz matrices given by 1's on the j'th diagonal and zeroes elsewhere,
+
+i.e. for positive k we have
+
+                    n-k                              n-k
+
+          k = ei,i+k;                          -k =       ei+k,i.
+
+                    i=1                              i=1
+
+It then follows that for any k, p  0 we have
+
+                                           n-p-k
+
+                    k-p-k =                       ej+p,j
+
+                                           j=1
+             SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                                   29
+
+which is a matrix that only has non-zero entries on the (-p)'th diagonal: there it
+is equal to 1 except for the last k entries of that diagonal (where it vanishes). Since
+k and p are arbitrary we get all matrix units eij for i  j. Taking adjoints we also
+get the lower-diagonal matrix units and the proof is complete.
+
+4.2. The Fej´er­Riesz operator system. We consider functions on S1 with only
+
+a finite number of non-zero Fourier coefficients. More precisely we define as follows
+the so-called Fej´er­Riesz operator system C(Z)(n):
+
+(5)          C(Z)(n) = {a = (ak)kZ : supp(a)  (-n, n)} .
+
+The elements in C(Z)(n) are thus given by sequences with finite support
+
+     a = (. . . , 0, a-n+1, a-n+2, . . . , a-1, a0, a1, . . . , an-2, an-1, 0, . . .)
+
+and this allows to view C(Z)(n) as an operator subsystem of the convolution C-
+algebra C(Z) = C(S1). The adjoint a  a is given by ak = a-k. Note that
+self-adjoint elements in C(Z)(n) are thus given by so-called palindromic sequences
+
+for which ak = a-k for |k|  n - 1. Also, an element a is positive, a  0, if and
+only if it is positive in C(Z) = C(S1), i.e. k akk for || = 1 defines a positive
+function on S1.
+
+Proposition 4.3. (1) The following defines an action of S1 by complete order
+          automorphisms of C(Z)(n):
+
+                                   (ak)  (kak); (  S1).
+
+    (2) The Silov boundary of the operator system C(Z)(n) is S1.
+    (3) The C-envelope of C(Z)(n) is given by C(Z).
+    (4) The propagation number is infinite.
+
+Proof. For (1) observe that for a positive a we have that k akk is a positive
+function on S1. But then the same applies to k ak()k as this amounts to a
+translation in S1.
+
+   For (2) note that the natural C-extension is given by C(S1) which contains
+C(Z)(n) as a subsystem. For n > 1 one has 1, cos(), sin()  C(Z)(n) so that the
+system separates points. In particular, there exists a function in C(Z)(n) attaining
+a unique maximum at some point in S1. By translating this function over S1 one
+remains in the operator system, while showing that for each point in S1 there exists
+a function in C(Z)(n) that attains its unique maximum there. In other words, the
+Silov boundary is all of S1. But then also (3) follows by Proposition 2.30.
+
+   The final statement follows from the fact that sums of products of k elements of
+C(Z)(n) all belong to C(Z)(nk) which is strictly smaller than C(Z).
+
+   The following old factorization result by Fej´er [30] and Riesz [47], plays a key
+role (and this is why we named the above operator system C(Z)(n) after them).
+
+Lemma 4.4. Let m  0 and let I  [-m, m] be an interval of length m+1. Suppose
+
+that p(z) =  m     pk  zk  is  a  Laurent  polynomial  such  that  p( )    0  for      all      C
+             k=-m
+
+for which || = 1. Then there exists a Laurent polynomial q(z) = kI qkzk so
+that p() = |q()|2 for all   S1  C.
+
+A proof can be found in [33, Theorem 1.12].
+
+Proposition 4.5. Let C(Z)(n) be the operator system defined in Equation (5).
+30              ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+    (1) The extreme rays in (C(Z)(n))+ are given by the elements a  (C(Z)(n))+,
+         a = (ak) for which the Laurent series k akzk has all its zeroes on the circle
+         S1.
+
+    (2) The pure states of C(Z)(n) are given by the functionals a  k akk for
+         any   S1.
+
+Proof. (1) Let a  (C(Z)(n))+. Suppose that the Laurent series P (z) = k akzk
+has a zero z0 such that |z0| < 1. Since a = a this Laurent series also has a zero at
+1/z0. We may thus factorize
+
+                                  P (z) = (z - z0)(1/z - z0)Q(z)
+
+for a Laurent series Q(z) = k bkzk where bk = 0 for |k| > n - 2. Since (z -
+z0)(z - z0) is (strictly) positive when restricted to |z| = 1, we also have that Q(z)
+is positive when restricted to the circle. Moreover, there exists  > 0 such that
+
+(z - z0)(z - z0) -   0 for |z| = 1. Thus (z - z0)(1/z - z0) =  + c is the sum of
+two elements of (C(Z)(2))+, and a = b + cb is not extremal. We conclude that if
+P (z) has a zero outside the circle, then a is not extremal.
+
+   Suppose now that P (z) = k akzk has all its 2n - 1 zeroes on the circle. If
+b  (C(Z)(n))+ fulfills b  a, then k bkzk = Q(z)  P (z) for |z| = 1. Then, at
+a zero of P (z) of multiplicity k, Q(z) has a zero of multiplicity at least equal to k.
+
+This shows that Q(z) is a scalar multiple of P (z) and the proof of (1) is complete.
+   For (2) we use that we can extend a pure state on C(Z)(n) to a pure state of
+
+C(S1), thus given by evaluation in a point of S1. In view of the symmetry given
+by the action of S1 on C(Z)(n) we conclude that all pure states of C(S1) restrict
+to pure states of C(Z)(n).
+
+4.3. Duality with the Toeplitz operator system. In this section we analyze a
+duality between the operator systems C(S1)(n) and C(Z)(n) for any n  0. The
+advantage of this duality will become clear soon, when we analyze the pure state
+space and extremal positive elements in C(S1)(n).
+
+Proposition 4.6. There is a complete order isomorphism between the operator
+system C(S1)(n) and the dual of C(Z)(n). For any Toeplitz matrix T = (tk-l)k,l
+the functional T  (C(Z)(n))d is given by T (a) = k akt-k where a = (ak) 
+C  (Z)(n) .
+
+Proof. Since the vector space pairing given by the formula k akt-k is clearly non-
+degenerate, we simply have to check that T  T respects the matrix-order and
+the order unit. Let I = {0, . . . , n - 1}  (-n, n). In view of Lemma 4.4, an element
+a  C(Z)(n) is positive if and only if it can be written as a convolution product
+b  b for some b  C(Z)(I). One has, with bk = 0 k / I,
+
+                               (b  b)(j) = bkbj+k , j, |j| < n
+
+where the summation takes place for k  I  (I - j). This intersection is non empty
+for j  (-n, n). One has using j + k = l  j = l - k
+
+    T (b  b) =  (b  b)(j)t-j = bkbj+kt-j = bkbltk-l = b|T b
+
+                j(-n,n)  k,j  k,l
+
+since (T )k = l tk-ll for any   2(I). Positivity of this expression is equivalent
+to the positivity of the Toeplitz form, i.e. T  0 if and only if T  0.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  31
+
+   We show that for the order unit 1  C(S1)(n) the functional 1 is a faithful state
+on C(Z)(n). Since for a = b  b one has 1(a) = k |bk|2 the result follows.
+
+   This duality allows us to move smoothly between the following three structures:
+     (1) a positive Toeplitz matrix T  C(S1)(+n);
+     (2) a positive linear functional  on C(Z)(n);
+     (3) a positive quadratic form Q on C(Z)I of elements of sequences with sup-
+
+          port in an interval I  Z of length n.
+
+In fact, these three structures are equivalent and related via the formulas:
+
+    12:           (a) = tka-k;
+    23:           (  ) = Q(, );
+
+    13:           , T  = Q(, ).
+
+With respect to these structures, we will be interested in Ker T ,  and both the
+radical and kernel of Q where we recall that
+
+                                 = a  C(Z)(n) : (a) = 0 ,
+                          rad(Q) =   C(Z)(I) : Q(, ) = 0  ,
+                          Ker(Q) =   C(Z)(I) : Q(, ) = 0  .
+
+Lemma 4.7. (1) For positive quadratic forms Q the radical and kernel coin-
+
+          cide.
+    (2) We have ()+ = {   :   Ker Q}.
+
+Proof. (1) is a straightforward application of the Cauchy­Schwartz inequality. For
+
+(2) note that if a  ()+ then since a  0 by Lemma 4.4 it follows that a =   .
+But then Q(, ) = (  ) = (a) = 0. The other inclusion is obvious.
+
+   If no confusion can arise, we will also write + = ()+ for the positive elements
+in the kernel of the linear functional .
+
+4.4. Pure states of the Toeplitz operator system. We will determine the
+pure states of C(S1)(n), as well as the extreme rays in the cone C(S1)+(n) of positive
+Toeplitz matrices. Here the duality with C(Z)(n) will turn out to be very useful, as
+it permits a simpler analysis and conceptual understanding of these extreme sets.
+
+We introduce the following notation:
+
+       1          z2       zn-1 t  Cn
+fz  =       1  z      ···
+         n
+
+for any z  C. It is a column of a Vandermonde matrix (cf. Equation (16) below).
+
+Proposition 4.8. Let C(S1)(n) be the Toeplitz operator system.
+
+    (1) The extreme rays in C(S1)+(n) are given by (multiples of ) () = |f f|
+          for any   S1. In other words, the extreme rays T = (tk-l)k,l are of the
+          form tk = k (up to a positive real number) for some || = 1.
+
+    (2) The pure states of C(S1)(n+1) are given by functionals T  , T  where
+          the vector  = (0, . . . , n)  Cn+1 is such that the polynomial z  k kzn-k
+          has all its zeroes on S1.
+
+    (3) The pure state space P(C(S1)(n+1)) = Tn/Sn is the quotient of the n-torus
+
+          by the symmetric group on n objects.
+32   ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+Proof. For the first two statements we use duality in the form of Corollary 2.20
+
+and Proposition 4.6. Proposition 4.5 determines pure states and extreme rays in
+the dual system (C(Z)(n))+. The extreme rays in C(S1)(+n) are given by pure
+states on (C(Z)(n))+ i.e. by evaluation at points of S1. Up to   -1 = , they
+correspond to the (). A pure state of C(S1)(n+1) corresponds to an extreme ray
+in (C(Z)(n+1))+ and hence to an element a  (C(Z)(n+1))+, a = (ak) for which
+the Laurent series k akzk has all its zeroes on the circle S1. Since a  0 by
+Lemma 4.4 it follows that a =   . Then the vector   Cn+1 is such that the
+polynomial z  k kzn-k has all its zeroes on S1. For the third statement, let
+the zeroes of k kzn-k be labelled 1, . . . , n (taken with multiplicities). Then,
+up to normalization, we can write  in terms of elementary symmetric polynomials
+
+in the k's:
+
+        1
+
+         k k 
+                          
+(6)     =      k<l  k  l    ,
+
+               ...        
+                          
+                          
+
+               1 · · · n
+
+which gives, using (2) the required identification P(C(S1)(n+1)) = Tn/Sn.
+
+   Note that this type of duality between cones of positive elements is central in the
+theory of matrix completion and moments, and appears for instance in [6, Section
+1.1].
+
+   As an example let us consider the case C(S1)(3). The description of extreme rays
+in Proposition 4.8 agrees with Proposition 3.4. The pure state space of C(S1)(3) is
+given in Proposition 4.8 by vector states | | with  of the form
+
+(7)  =  1              1
+                       eix + eiy ,
+        4 + 2 cos(x - y) ei(x+y)
+
+where x, y  [0, 2). This confirms the result from the previous section where we
+found in Theorem 3.6 that this Mo¨bius strip is the pure state space of C(S1)(3) (cf.
+Figure 2).
+
+4.5. The cone of positive Toeplitz matrices. We now apply the above operator
+system duality to arrive at a description of the cone C(S1)+(n). This generalizes the
+analysis done in Section 3 to arbitrary dimension.
+
+   As a first powerful application of the duality we derive a classical result of
+Carath´eodory from 1911 [15] stating that positive semi-definite Toeplitz matrices
+allow for a so-called Vandermonde factorization (see also [1] and [33, Chapter 4]).
+More recently, the value of these kind of factorizations has been rediscovered in the
+context of signal analysis (cf. [43, 5, 53] and [6] for a mathematical treatment). But
+our main finding is the extension to the general case of the peculiar properties of
+the hypersurface which determines the boundary of the cone C(S1)+(n). As shown
+below in Theorem 4.15 this hypersurface admits a remarkable stratification by the
+degree of singularity of its points and this stratification corresponds to the rank of
+positive Toeplitz matrices, thus extending the results of the special case n = 3 to
+the general case. We start with some preparation.
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  33
+
+Lemma 4.9. The cone C(S1)+(n) of positive elements is the closure of the open
+component of the identity matrix in the complement of the hypersurface defined
+by H := {T  C(S1)(n) : det(T ) = 0}. In particular, the boundary of C(S1)(+n)
+coincides with the boundary in the complement of H of the component of 1.
+
+Proof. The proof is completely analogous to Lemma 3.2 above but let us for conve-
+nience include it here for the general case. The cone is convex and is the closure of
+its interior which consists of matrices whose eigenvalues are strictly positive. The
+segment joining T to the identity matrix 1 stays inside C(S1)+(n) and thus T belongs
+to the open component of 1 in the complement of the hypersurface H. Conversely
+on a path in the complement of this hypersurface joining 1 to T the eigenvalues
+remain positive since they vary continuously and cannot vanish as their product is
+given by the determinant.
+
+   A face F of a convex cone C  E, in a real linear space, is a sub-cone F  C
+which is hereditary i.e.
+
+                               x  F and 0 C y C x  y  F.
+
+The intersection of C with the real linear span L(F ) of F is equal to F , since one
+has L(F ) = F - F . Moreover if C is proper, i.e. C  -C = {0} the projection
+p(C)  E/L(F ) of C in the quotient is still proper.
+
+Lemma 4.10. Let  be a positive linear functional on C(Z)(n).
+a) + is a face of (C(Z)(n))+.
+b) (+)+ is a face of C(S1)(+n); it is the face generated by .
+
+Proof. For (a) we suppose a  + and b  a in (C(Z)(n))+. Then (b)  (a) = 0
+so b  +. Let us prove the second claim. Let F be the face of  and L(F ) = F -F
+its linear span. Then
+
+                            a  +  a  (C(Z)(n))+  L(F )
+
+which is the dual of the projection of the cone in the quotient by L(F ). This
+projection is a proper cone, thus its dual is spanning and we get
+
+                            (+)+    C(S1)+(n)  L(F ) = F
+
+since the projection of  is 0 in the quotient by L(F ).
+
+Proposition 4.11. The extreme rays of a face F in a cone K are extreme rays in
+K.
+
+Proof. Let x be extreme in F but suppose it is not extreme in K. Then there is an
+y in K such that y  x. Since x is a point of a face, it follows that y  F , and by
+extremality of x in F we find that y = x.
+
+Theorem 4.12. Let T be a rank r  n - 1 positive Toeplitz matrix. Then the
+face generated by T is a cone based on a simplex of dimension r whose extreme
+points are the (i) where the 1, . . . , r are the common roots of () = 0 for all
+  Ker T .
+
+Proof. Since (+)+ is a face, it is generated by extreme rays () where the 
+are exactly the common zeroes of all   Ker Q. Let us denote these zeroes by
+1, . . . , m for m  n - 1. By linear independence of the vectors f1 , . . . fm it
+34                ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+follows that the (1), . . . , (m) are linearly independent. This implies that the
+face generated by T is a cone based on an r-dimensional simplex with extreme
+points (1), . . . , (m). But then dually we must have dim() = n - m so that
+it follows that the rank of T is equal to m. This completes the proof.
+
+   We can reformulate this as the following Vandermonde factorization of positive
+Toeplitz matrices.
+
+Corollary 4.13. Let T be a positive n × n Toeplitz matrix of rank r  n - 1. Then
+T can be written in the following form:
+
+                                              T = V V ,
+
+where  is some positive diagonal matrix and V is an n × r Vandermonde matrix,
+
+    d1                                                1              1 ··· 1 
+
+            d2                                    1  1               2 · · · n 
+    =             ...     ;                  V =                                     ,
+                                                      n    ...                  ...  
+                                                                                     
+                        dr
+
+                                                        n1 -1 n2 -1 · · · rn-1
+
+for unique values d1, . . . , dr > 0 and 1, . . . , r  S1  C.
+
+Theorem 4.14. Let T be an n × n Toeplitz matrix of arbitrary rank. Then T  0
+if and only if T is of the following form:
+
+                                    T = V V ,
+
+where  is some positive diagonal matrix and V is a Vandermonde matrix,
+
+    d1                                                1              1 ··· 1 
+
+            d2                                    1  1               2 · · · n 
+    =             ...      ;                 V =                                     ,
+                                                      n    ...                  ...  
+                                                                                     
+                        dn
+
+                                                           n1 -1 2n-1 · · · nn-1
+
+for some d1, . . . , dn  0 and 1, . . . , n  S1  C.
+
+Proof. We take a base for the cone C(S1)(+n) by fixing the trace of the Toeplitz
+matrices to be n. Note that this is a compact set.
+
+    Let T be a matrix of rank n with trace 1 and take an arbitrary extreme point ().
+
+We consider a line segment from () to T and prolong this segment until it reaches
+
+a point T on the boundary of the (compact) base of the cone. Since elements in
+
+the boundary of the cone of positive elements have vanishing determinant (Lemma
+
+4.9), the rank of T is n - 1. Hence the above Theorem applies and we may write
+
+T=  n-1  dk  (k )  for  some  dk ,  k .  Since T  = tT     + (1 - t)() for some t  (0, 1)
+    k=1
+                   n-1
+we may write T =   k=1  tdk  (k )   +    (1  -  t)()  and       the  proof  is  complete.
+
+   Given the above concrete realization of the extreme elements, we may wonder
+how they are related to the singular points of the hypersurface H defined by det T =
+0. In particular, we would like to generalize to arbitrary n the results of the previous
+section where we found the extreme points of C(S1)(+3) (with fixed trace) to coincide
+with the singular points on H.
+
+   Since H is defined to be the zero-set of det T we may analyze the singular points
+by looking at the partial derivatives of det T . The determinant of a matrix is
+a multilinear function of the entries of the matrix and the partial derivatives of
+any order with respect to the entries are given by the minors. When det T is
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                                            35
+
+evaluated on Toeplitz matrices it is no longer multilinear but we shall show that
+
+the singularities of det T are still related to the rank of T . Let us denote the
+Fr´echet derivative of a functional f on the real vector space C(S1)(hn) by D(k)(f );
+when evaluated at an element T  C(S1)h(n) it is a linear functional on (C(S1)h(n))k
+defined by
+
+D(k)(f )(T, T1    ···    Tk )  =      ···      det(T  +  t1T1  +  · · · tkTk)|t1=···=tk=0,
+                                  t1       tk
+
+where T1, · · · , Tk  C(S1)(hn).
+   In the case at hand, there is a natural stratification of the determinant hyper-
+
+surface given by the degree of vanishing of det T
+
+                             · · ·  Sk  Sk-1  · · ·  S1  S0 = H
+where at level k one imposes the many conditions
+
+Sk = T  H : D(k) det(T ) = 0, D(k-1) det(T ) = 0, . . . , det(T ) = 0 .
+
+We will say that T has multiplicity k + 1 in the hypersurface H if T  Sk.
+
+Theorem 4.15. In the boundary of the cone C(S1)+(n) the stratification of the
+singular set of H coincides with the stratification by the rank. More precisely, T
+has multiplicity m if and only if T has rank n - m for any m = 0, . . . n - 1.
+
+Proof. Assume that T has rank  r. Then with q  n - 1 - r we have
+
+                             det (T + s1(1) + . . . + sq(q)) = 0
+
+for arbitrary s1, . . . , sq  0 and 1, . . . , q  S1. This implies that
+
+                              D(q)(det)(T, (1)  · · ·  (q)) = 0
+
+for all 1, . . . , q  S1. Since by Theorem 4.14 the Toeplitz matrices are in the linear
+span of ()'s this implies that D(q)(det) vanishes at T . Thus, T has multiplicity
+m with m = n - r.
+
+   In the other direction, for any k let us suppose that T has rank r > n - 1 - k
+for some k. Then there are s1, . . . , sk and 1, . . . , k such that
+
+                              det (T + s1(1) + . . . + sq(q) = 0.
+
+Since the (j) have rank one, this determinant is a polynomial of order k in the
+s1, . . . , sk so that we find that D(k)(det)(T ) = 0 for this k. Hence T / Sk and the
+proof is complete.
+
+4.6. Distance on spectral truncations of the circle. We now compute the
+distance on the state space of C(S1)(n), using the formula
+
+                        d(, ) := sup{|(A) - (A)| | [D, A]  1}.
+
+where D is the Dirac operator on the circle (cf. Section 3.1 above). We use only
+self-adjoint elements A = A  C(S1)s(na) in this formula. The distance is in fact
+determined by the following norm A D on the quotient C(S1)(sna)/R1 of the real
+vector space C(S1)s(na) of Toeplitz selfadjoint matrices by the scalar ones:
+
+                                           A D := [D, A] .
+36        ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+More precisely one takes as the dual of C(S1)s(na)/R1 the subspace C(Z)0(n) of
+(C(Z)(n))sa given by linear forms which vanish on scalars. In the above formula
+
+one has  -   C(Z)0(n), and the distance is determined by
+
+(8)       d(, ) = sup{|( - )(A)| | A D  1},
+
+so that, using the dual norm · D of · D, one gets
+
+(9) d(, ) =  -  D,  D := sup |(A)| | A D  1 ,   C(Z)0(n).
+
+The commutator [D, A] is a Toeplitz matrix of trace 0 and one has a linear map 
+from selfadjoint Toeplitz matrices to themselves given by
+
+(10)      A := i[D, A].
+
+Thus the unit ball for the norm A D is obtained by pulling back, by the map 
+the unit ball of the Toeplitz norm in the subspace of elements of trace 0. Now the
+latter is the intersection of two convex sets C± where
+
+                       C± := {A  C(S1)(sna) | Tr(A) = 0, 1 ± A  0}.
+
+The polar of a convex subset C  E of a real vector space E is defined as
+
+                              Co := {L  E | L()  1 ,   C}.
+
+We have:
+
+Proposition 4.16. (i) The map  gives an isomorphism  : C(S1)s(na)/R1 
+C(S1)(sna,)0 (with Toeplitz matrices of trace 0).
+(ii) The transpose t of  is an isomorphism (C(Z)(n))sa/R1  C(Z)(0n).
+(iii) The unit ball of C(Z)0(n) for the norm · D is the projection by the map t
+of the unit ball of the dual ·  of the Toeplitz operator norm.
+
+(iv) The unit ball of C(Z)(0n) for the norm · D is the convex hull of the polars
+
+of -1C±  C(S1)s(na )/R1.
+
+Proof. (i) It is an isomorphism from the quotient by the kernel R1 to the range.
+(ii) The transpose t is similarly an isomorphism from the quotient by its kernel
+R1 with its range.
+(iii) The unit ball for the norm · D is described as the subset of C(Z)0(n)
+
+                           D  1  |(A)|  1 , A | A  1.
+
+If  = t() with    1 one gets, using (A) = t()(A) = ((A))
+
+          A, A  1  |(A)| = |((A))|  1.
+
+This shows that the projection by the map t of the unit ball of the dual · 
+is contained in the unit ball of C(Z)0(n) for the norm · D. Conversely one
+can identify the dual of C(S1)s(na,)0 with (C(Z)(n))sa/R1 since 1  C(Z)(n) pairs
+trivially with Toeplitz matrices with trace 0. Then let   C(Z)(0n),  D  1.
+Let 0 be the linear functional on C(S1)(sna,)0 uniquely defined by
+
+                                          0((A)) := (A).
+
+Since  D  1 the norm of 0, as a functional on a subspace of the normed space
+C(S1)s(na), is  1. Thus by Hahn­Banach it extends to an element  with    1.
+Moreover one has (A) = 0((A)) = (A), A.
+            SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS       37
+
+(iv) The unit ball of the Toeplitz norm in the subspace of elements of trace 0 is
+
+the intersection of the two convex sets C± and thus its image by the inverse of the
+isomorphism  is the intersection of the -1C±  C(S1)(sna)/R1. We then use the
+general fact that for closed convex sets the polar of an intersection is the convex
+
+hull of the polars, as follows from the bipolar theorem.
+
+   We now determine the polar of -1C±  C(S1)(sna)/R1.
+
+Lemma 4.17. (i) An element   C(Z)(0n) belongs to the polar of C- if and only
+if the linear form  =  + 1 belongs to the state space S of C(S1)(n).
+(ii) The polar of -1C-  C(S1)s(na)/R1 is tS.
+
+Proof. (i) One has (1) = 1 by construction and (A) = (A) for any A 
+C(S1)(sna,)0. Moreover for such an A one has A  C-  1 - A  0 and thus
+
+         ((A)  1 , A  C-)  ((1 - A)  0 , A  C-)    S
+
+since the elements of the form 1 - A, A  C- are the positive Toeplitz matrices of
+fixed trace = n and form a base of the positive cone C(S1)(+n).
+(ii) Given an isomorphism T : E  F of finite dimensional real vector spaces and
+a subset X  E, the polar of T (X)  F is the image by the inverse of T t of the
+polar of X. Applying this to the isomorphism -1 : C(S1)s(na,)0  C(S1)(sna)/R1 one
+gets that the polar of -1C-  C(S1)s(na)/R1 is the image by t of the polar of C-
+and by (i) one obtains tS.
+
+   One passes from C- to C+ by multiplication by -1 and the same holds for the
+polars. Thus Lemma 4.17 also determines the polar of -1C+ as -tS.
+
+Proposition 4.18. The unit ball of C(Z)0(n) for the norm · D is the convex hull
+of tS and -tS.
+
+Proof. This follows from (iv) of Proposition 4.16 and Lemma 4.17.
+
+Coming back to Proposition 4.16 (iii), note that it is not true that the dual
+
+  ·  of the Toeplitz operator norm is the operator norm in C(Z)(n). In fact in
+the limit n   the Toeplitz operator norm becomes the L norm and its dual is
+
+the L1 norm. This suggests to compare the norm · D with the image by t of the
+
+quotient norm of the L1 norm in (C(Z)(n))sa/R1. We show that the norm · 
+
+on C(Z)(n) dual to the Toeplitz operator norm is larger than the L1 norm for the
+
+normalized  Haar  measure  |dz|  on  S1.
+                           2
+
+Proposition 4.19. (i) Let a = (ak)  (C(Z)(n))sa with Laurent series a(z) :=
+   k akzk, then one has
+
+(11)                       a  1              |a(z)| |dz| =  a 1.
+                                   2
+                                          S1
+
+(ii) The norm · D fulfills the inequality
+
+(12)                             a D  inf b 1.
+
+                                               t (b)=a
+
+Proof. (i) The unit ball for the Toeplitz operator norm in C(S1)s(na) is the interval
+[-1, 1] i.e. intersection of 1-C(S1)(+n) and -1+C(S1)(+n), thus its polar is the convex
+38    ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+hull in (C(Z)(n))sa of the polars and it suffices to show that each is contained in
+the unit ball of the norm a 1. One has
+
+                         (1 - C(S1)+(n))  1    0 and (1)  1
+
+and since the positive elements of (C(Z)(n))sa are positive functions on S1 (i.e. the
+associated Laurent polynomial is positive) the L1 norm is simply the integral and
+the latter is (1)  1. By symmetry the polar of -1 + C(S1)(+n) is also contained
+in the unit ball of the L1 norm.
+(ii) The norm · D is, by Proposition 4.16 (iii) the image of the norm ·  by
+the projection associated to the map  thus the statement follows from (i).
+
+   Note the infimum which appears in formula (12). It is directly related to the
+fact that the geodesic distance is computed using the shortest path between two
+points. More precisely we take n =  and consider the distance between two
+points x, y of the circle incarnated as the associated Dirac masses x, y viewed as
+states. Then the choice of an element a such that a = x - y is unique up to
+the addition of a constant. It contains ± times the characteristic function of the
+two intervals joining x and y as well as affine combinations of these two solutions.
+One finds that the infimum taken in formula (12), where we use the L1 norm in
+the limit n = , corresponds to the choice of the shortest interval. Moreover the
+L1 norm of the characteristic function of the interval is the distance between x and
+y. To go further in the exploration of the distance function on the truncated circle
+involves understanding how the state space converges to the space of probability
+measures on S1 and the distance to the Kantorovich metric. By Theorem 3.7 of
+[14], the Kantorovich distance dT (µ, ) between two probability measures µ,  on
+S1 is computed by the formula
+
+(13)  dT (µ, ) = |(x) - a|dx, (x) = µ([0, x]) - ([0, x])
+
+      S1
+
+and where the constant a is such that the integral is minimal. The derivatives of
+
+the functions µ([0, x]) and ([0, x]) give µ and  and we see that Proposition 4.16
+
+(iii) is the version of the above formula for dT for the truncated circle. Thus we
+obtain
+
+Theorem 4.20. (i) The distance function on the state space S of the operator
+system C(S1)(n) is given for ,   S and primitives , t = , , t =  by
+
+                                    d(, ) = inf  -  - c .
+
+                                                                      cR
+
+(ii) The distance function on the state space S is larger than the Kantorovich dis-
+tance dT (, ) of the associated probability measures on the circle.
+
+Proof. (i) Follows from (9) combined with Proposition 4.16 (iii).
+(ii) The inequality (11) gives
+
+      --c   --c 1
+
+combining with (i) one gets
+
+      d(, ) = inf  -  - c   inf  -  - c 1.
+      cR                     cR
+
+Thus the result follows from (13) which shows that the last term is dT (, ).
+      SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  39
+
+   These results relate Connes' distance formula for the truncated system to the
+explicit integral formula for the Kantorovich distance. More general results relating
+the distance on a spectral truncation of a given geometry to the Kantorovich dis-
+tance on probability measures can be obtained from [23, Proposition 3.6]. Indeed,
+from its very definition it is clear that Connes' distance formula for a Riemannian
+spin geometry coincides with Kantorovich's formulation of the distance formula on
+the state space of probability measures. Note that this formed the basis for the de-
+velopment of compact quantum metric spaces [45] (see also [24] for a nice overview
+of the relation between the relevant distance functions).
+
+                           5. Toeplitz and circulant matrices
+
+   There is an interesting relation between the Toeplitz operator system C(S1)(n)
+discussed in the previous section and the group algebra of the cyclic group Cm of
+order m = 2n - 1. We first recall the structure of this group algebra and the finite
+Fourier transform and formulate it in terms of operator systems.
+
+5.1. Fourier transform on the cyclic group of order m. Let m > 0 and
+
+consider the finite abelian group Cm := Z/mZ. The point-wise action of l(Cm)
+on l2(Cm) is given by:
+
+(14)  g · (k) = g(k)(k); (g  l(Cm),   l2(Cm), k  Cm).
+
+In terms of the standard basis of l2(Cm) this becomes matrix-multiplication by a
+diagonal matrix diag(g(0), . . . , g(m - 1)).
+
+   The finite Fourier transform is a map F : l2(Cm)  l2(Cm) defined by
+
+                                       m-1
+
+                  F ()(k) = (l)kl
+
+                      l=0
+
+with  a primitive m'th root of unity. The inverse finite Fourier transform F is
+given by the same formula with  replaced by . It is well-known that m-1/2F is
+unitary (Plancherel) so that FF = FF = m and that both F and F replace the
+convolution product
+
+                                                                         m-1
+
+                                    f g(k) := f (k - l)g(l)
+
+                                                                          l=0
+
+by the point-wise product since the Haar measures used to define them and  are the
+same. Thus the Fourier transform is an isomorphism of the group algebra C(Cm)
+with l(Cm), F (f  g) = F f · F g. The unitary U = m-1/2F conjugates the above
+representation (14) of l(Cm) with the action of the group algebra C(Cm) on
+l2(Cm) by convolution product
+
+                    f   = U (F (f ) · U ) , f  C(Cm),   l2(Cm).
+
+The action by convolution of an element c = (cl)  C(Cm) in terms of the standard
+basis of l2(Cm) is the following matrix acting on column vectors
+
+            c0 cm-1 · · · c2 c1 
+
+            c1    c0 cm-1                   c2 
+
+             ...      c0 . . .              ...  
+
+(15)  c           c1                                .
+                                                 
+
+                      ...  ...                    
+                                                  
+           cm-2                             cm-1
+
+           cm-1 cm-2 · · · c1 c0
+40                 ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+Such a matrix is called a circulant matrix, it is a special case of a Toeplitz matrix.
+
+    If we write as before
+
+                                        1
+
+                                   1z
+(16)                       fz   =            ...   ;     z  C,
+                                     m             
+                                                   
+                                        
+
+                                             zm-1
+
+then the Fourier transform can be written in terms of the canonical basis of l2(Cm)
+as a Vandermonde matrix which is F = m1/2U with U unitary
+
+            1 1 · · ·              1
+
+            1  · · ·               m-1 
+
+      F  =    ...  ...     ...          ...       ,      U = f1 f · · · fm-1
+                                                  
+                                                  
+
+              1 m-1 · · · (m-1)(m-1)
+
+with  =  a primitive m'th root of unity. Consequently, U = m-1/2F is the
+transformation matrix that diagonalizes the above circulant matrix (15).
+
+   The finite Fourier transform can be understood nicely in terms of a duality of
+finite-dimensional operator systems, very similar to Proposition 4.6 above.
+
+Proposition 5.1. (i) The operator system C(Cm) is its dual under the pairing
+
+           C(Cm) × C(Cm)  C, f, g C(Cm) := (f g)(0) = fl g-l.
+
+                                                                                                                           l
+
+(ii) The following pairing gives a duality between C(Cm) and l(Cm)
+                   C(Cm) × l(Cm)  C
+
+                                     (c, g)  c, F g C(Cm) = cl g(k)kl.
+
+                                                                                                      l,k
+
+Proof. (i) The Fourier transform F is an isomorphism of the operator system
+
+C(Cm) with l(Cm) and the latter system is its own dual under the pairing
+ h, g l := l h(l)g(l). Moreover one has for f, g  C(Cm), by Fourier inversion
+
+      f, g C(Cm) = (f              1                     1
+                           g)(0) = F(F(f             g))(0) = F(F(f ) · F(g))(0) =
+                                      m                          m
+
+                        1                             1
+                   =            F (f )(l)F (g)(l) = m F (f ), F (g) l .
+                      m    l
+
+Thus the isomorphism F : C(Cm)  l(Cm) is compatible (up to normalization)
+
+with the pairing, so (i) follows.
+
+(ii) Follows from (i). Note that both F and F are isomorphisms C(Cm)  l(Cm)
+so that there is no issue on the choice of F in the formula for the pairing.
+
+   The operator norm of elements of C(Cm) is given by the sup norm (l norm)
+of the Fourier transform. The dual of the operator norm is given exactly by the l1
+
+norm and both norms are easier to compute than for the Toeplitz operator system
+
+and its dual.
+
+   This duality implies that there is a one-to-one correspondence between pure
+states of l(Cm) and extreme rays in the positive cone C(Cm)+, as well as the
+converse. Of course, in all cases, these spaces are just given by the m'th roots of
+unity. Note that viewing C(Cm) as a subsystem of C(S1)(m) as shown in (15)
+        SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS                 41
+
+the extreme rays of C(Cm)+ are those extreme rays of C(S1)+(m) which belong to
+C  (Cm ).
+
+   It is interesting to compare the finite nature of this structure to the much richer
+structure encountered for the Toeplitz operator system, where a whole S1-worth of
+extreme rays has been found, not to mention the rich structure of the pure state
+space. The underlying reason is that of symmetry: for C(S1)(n) the symmetry
+group is S1 while for the circulant matrices this is reduced to the cyclic group
+of order m. Moreover, a comparison between the frameworks of the cyclic group
+and the Toeplitz operator system suggests that Theorem 4.14 is a generalization of
+the (finite) Fourier transform. In the next subsection we will further explore the
+relation between circulant and Toeplitz matrices.
+
+5.2. Relation between circulant and Toeplitz matrices. Given a Toeplitz
+matrix of size n, it is possible to `complete' it to a circulant matrix of size 2n - 1.
+More precisely, we have the following classical result.
+
+Proposition 5.2. Let m  2n - 1. Then any Toeplitz matrix T  C(S1)(n) can be
+obtained as the compression of an m × m circulant matrix C to the upper-left n × n
+corner:
+
+                                              T = PnCPn
+
+where Pn projects onto the linear span of the first n canonical basis vectors. In other
+words, conjugation by P induces a completely positive map C(Cm)  C(S1)(n).
+
+Proof. For any Toeplitz matrix T = (tk-l), the sought-for circulant matrix is given
+as follows:
+
+       t0      t-1 · · · t-n+2 t-n+1 tn-1 · · · t2           t1 
+
+       t1      t0 t-1              t-n+2 t-n+1       · · · t2 
+
+        ...    t1       t0    ...  ...          ...          ...    
+                                                                    
+                                                                    
+
+                        ...   ...               ...  ...            
+
+        tn-2                       t-1                       tn-1   
+                                                                    
+
+C  =    tn-1   tn-2     ···   t1   t0   t-1 · · ·            t-n+1    .
+                                                                    
+
+        t-n+1  tn-1  tn-2     ···  t1   t0      t-1  ···     t-n+2  
+                                                                    
+
+        ...             ... ...         ... ...              ...    
+                                                                    
+                                                                    
+
+                              ...  ...          ... ...             
+
+                                                                    
+       t-2                                                   t-1 
+
+        t-1 t-2 · · · t-n+1 tn-1 tn-2 · · · t1               t0
+
+   Another intriguing property of the inclusion of the Toeplitz operator system
+inside M2n-1(C) by the map T  T  0n-1 is the following construction of a map
+
+                             : l(C2n-1)  C(S1)(n)  M2n-1(C),
+
+where both C(S1)(n) and M2n-1(C) are equipped with the operator norm.
+   We let S denote the (cyclic) shift matrix in M2n-1(C) defined by S(ek) = ek+1
+
+for k = 1, . . . , 2n - 2 and S(e2n-1) = e1. We then define in terms of f  l(C2n+1)
+and a Toeplitz matrix T  C(S1)(n):
+
+                        2n-1
+
+             (f  T ) =        fkSk (T  0n-1) S-k  M2n-1(C).
+
+                        k=1
+42  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+Since all operator spaces are finite-dimensional,  is completely bounded but bijec-
+tivity of it is harder to establish and, in fact, not always true.
+
+Proposition 5.3. If 2n - 1 is a prime number, then the map  is a completely
+positive bijection on the minimal tensor product
+
+                            l(C2n-1) min C(S1)(n) = M2n-1(C).
+
+Proof. To prove the proposition it is enough to show that the map  is completely
+
+positive and that it is surjective, since the dimensions of both sides are the same.
+
+   Note that the minimal tensor product is realized as an operator system inside
+B(l2(C2n-1)  Cn). In other words, if we write f = fkk  l(C2n-1) then
+a general element k fkk  Tk  l(C2n-1) min C(S1)(n) is realized as the
+Kronecker product diag(f1T1, . . . , f2n-1T2n-1). If this is a positive matrix then
+the image under  is clearly positive.
+
+   For surjectivity of  one first identifies the matrix algebra with the crossed
+product of (C2n-1) represented as diagonal matrices by the action of C2n-1.
+More precisely, any element x  M2n-1(C) is uniquely of the form
+
+            2n-1
+
+      x=          fkSk, fk  (C2n-1).
+
+            k=1
+
+Note that the sub-spaces of the crossed product of (C2n-1) by the action of
+
+C2n-1 involving a fixed power j of S are pairwise linearly independent and span
+the whole crossed product so that it suffices to show the surjectivity of  on each
+
+such subspace. The Toeplitz operators are uniquely obtained as compressions on
+
+the n dimensional space with projection P = 1n  0n-1  (C2n-1) of linear
+combinations of powers of S. Let j = P SjP be the Toeplitz operator obtained by
+compression of Sj on P . These operators fulfill, for fixed j,
+
+    (k  j ) = Sk (j  0n-1) S-k = SkP Sj P S-k = SkSj QS-k = Sj SkQS-k
+
+where Q = S-jP SjP is a fixed self-adjoint idempotent. It is non-zero since it is
+given by the intersection of two sub-spaces of dimension n and the sum of dimensions
+exceeds p = 2n - 1. Thus, fixing j and taking linear combinations of the form
+
+      2n-1              2n-1
+
+            k  kj = Sj        k SkQS-k,
+
+      k=1               k=1
+
+the next lemma applies and gives the required surjectivity of the linear map .
+
+Lemma 5.4. Let C2n-1 be a cyclic group of prime order p = 2n - 1.
+(i) Let X  C2n-1 be a non-empty subset X = C2n-1 and   C^2n-1 a character
+of C2n-1. Then gX (g) = 0.
+(ii) Let 0 < Q < 1 be a self-adjoint idempotent in (C2n-1). Then the linear
+space generated by the conjugates SkQS-k (under the action of C2n-1 on itself ) is
+ (C2n-1).
+
+Proof. (i) We can assume that  is non-trivial. Since p is prime the subgroup
+
+(C2n-1)  µp (roots of unity of order p) is equal to µp. Thus it is enough to show
+that for any subset Y  µp, Y =  such that uY u = 0 one has Y = µp. Let
+ be a primitive root of 1 of order p and Z  {0, . . . , p - 1} such that Y = Z.
+Then the polynomial A(x) := Z xj fulfills A() = 0 and is hence a multiple of the
+cyclotomic polynomial. But the latter is of degree p - 1 since p is prime, and thus
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  43
+
+one gets that A is equal to the cyclotomic polynomial and thus Z = {0, . . . , p - 1}.
+(ii) Let X  C2n-1 be the non-empty subset X = C2n-1 corresponding to the
+self-adjoint idempotent 0 < Q < 1. Let E be the linear space generated by the
+conjugates SkQS-k. The invariance of E under the action of C2n-1 means that its
+image E^ under Fourier transform is an ideal. Thus if it is non-trivial there exists a
+point of the dual group C^2n-1 on which all elements of E^ vanish. Equivalently this
+means that there exists a character  of C2n-1 such that , E = 0 or equivalently
+that , Q = 0. One has
+
+                                           , Q = (g).
+
+                                                                             gX
+
+Thus by (i) one gets that , Q = 0 and this shows that E = (C2n-1).
+
+   Note that the map  is not a complete order isomorphism. This can be seen as
+follows. Note that up to a scaling factor it is a unital map, so by Proposition 2.6 it
+is a complete order injection if and only if it is a complete isometry. But a simple
+calculation for 2 × 2 Toeplitz matrices already shows that  is not isometric.
+
+                                             6. Outlook
+
+   In this paper we have introduced a new approach to noncommutative geometry
+where the prominent role traditionally played by C-algebras is taken over by op-
+erator systems. The matrix ordering makes it possible that most of the theory still
+goes through, including state spaces, cones of positive elements, distance functions,
+etc.
+
+   The examples we have considered show that spectral truncations allows one
+to work with finite-dimensional operator systems, while keeping in tact the full
+symmetry of the original space. For instance, the Toeplitz operator systems possess
+an S1 symmetry, and as a consequence have a very rich extremal and pure state
+space structure. This is in contrast with the circulant matrices, where the symmetry
+is reduced to a discrete group. So, even though both spaces converge in Gromov­
+Hausdorff distance to the circle, for the second one loses a lot of structure in the
+finite-dimensional reduction.
+
+   The duality between the Toeplitz operator system C(S1)(n) and the (truncated)
+group algebra C(Z)(n) also uncovers the following intriguing relation between the
+fermionic and bosonic content of a spectral triple. As explained at the beginning
+of Section 3 the truncation on the Fourier modes of the (fermionic) vectors in the
+Hilbert space gives rise to the Toeplitz operator system C(S1)(n) = PnC(S1)Pn,
+but the dual system C(Z)(n) describes truncations of the Fourier modes of the
+(bosonic) elements in the function algebra C(S1).
+
+   In a forthcoming paper we shall show how, using as proposed in this paper
+operator systems rather than C-algebras, the fundamental idea of noncommutative
+geometry of associating a noncommutative C-algebra to a quotient space which
+is intractable by standard topological methods, extends to situations where the
+equivalence relation defining the quotient is no longer assumed to be transitive.
+Such relations are called tolerance relations and can be traced back to Poincar´e in
+his Science and Hypothesis (though the name was coined in [54]). Poincar´e argued
+that in the physical continuum (in contrast with the mathematical continuum)
+it can hold that for measured quantities one has A = B, B = C while A < C
+due to potentially added measurement errors (see [51] for a development of the
+44  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+mathematical theory). This will allow us to extend the scope of noncommutative
+geometry and, in particular, to introduce another operator system that appears
+naturally when one studies spaces up to some energy scale. In terms of position
+space this amounts to introducing a finite resolution  and the tolerance relation
+between points x, y which is given by d(x, y) < . It allows one to define an
+operator system which, in the case that the relation is transitive, becomes the
+usual equivalence groupoid C-algebra [44]. We shall analyze the C-envelope and
+express the propagation number in terms of the diameter of the metric space. We
+will also characterize the pure state space of the operator system by means of a
+support condition on vector states.
+
+                                            References
+
+ [1] N. I. Aheizer and M. Krein. Some questions in the theory of moments. translated by W.
+      Fleming and D. Prill. Translations of Mathematical Monographs, Vol. 2. American Mathe-
+      matical Society, Providence, R.I., 1962.
+
+ [2] W. Arveson. Notes on the unique extension property. Preprint (2003).
+ [3] W. Arveson. The noncommutative Choquet boundary. J. Amer. Math. Soc. 21 (2008) 1065­
+
+      1084.
+ [4] W. B. Arveson. Subalgebras of C-algebras. Acta Math. 123 (1969) 141­224.
+ [5] T. B¨ackstr¨om. Vandermonde factorization of Toeplitz matrices and applications in filtering
+
+      and warping. IEEE Trans. Signal Process. 61 (2013) 6257­6263.
+ [6] M. Bakonyi and H.J. Woerdeman. Matrix Completions, Moments, and Sums of Hermitian
+
+      Squares. Princeton Series in Applied Mathematics (37), Princeton University Press, 2011.
+ [7] T. Berendschot. Truncated geometry. Master's thesis, Radboud University Nijmegen, 2019.
+ [8] B. Blackadar. Operator algebras, volume 122 of Encyclopaedia of Mathematical Sciences.
+
+      Springer-Verlag, Berlin, 2006. Theory of C-algebras and von Neumann algebras, Operator
+      Algebras and Non-commutative Geometry, III.
+ [9] D. P. Blecher and C. Le Merdy. Operator algebras and their modules--an operator space ap-
+      proach, volume 30 of London Mathematical Society Monographs. New Series. The Clarendon
+      Press, Oxford University Press, Oxford, 2004. Oxford Science Publications.
+[10] D. P. Blecher and M. Neal, Metric Characterizations of Isometries and of unital operator
+      spaces and systems, Proc.AMS Volume 139, Number 3, (2011), 985­998.
+[11] O. Bratteli and D. W. Robinson. Operator algebras and quantum statistical mechanics (Sec-
+      ond Edition). Springer-Verlag, 1987.
+[12] L. E. G. Brouwer. Beweis der Invarianz des n-dimensionalen Gebiets. Math. Ann. 82 (1921)
+      286.
+[13] L. G. Brown, P. Green, and M. A. Rieffel. Stable isomorphism and strong Morita equivalence
+      of C-algebras. Pacific J. Math. 71 (1977) 349­363.
+[14] C. Cabrelli and U. Molter. The Kantorovich metric for probability measures on the circle.
+      J. Comput. Appl. Math. 57 (1995), no. 3, 345­361
+[15] C. Carath´eodory. U¨ ber den Variabilita¨tsbereich der Fourierschen Konstanten von positiven
+      harmonischen Funktionen. Rend. Circ. Mat. Palermo 32 (1911) 193­217.
+[16] A. H. Chamseddine, A. Connes, and V. Mukhanov. Geometry and the quantum: Basics.
+      JHEP 1412 (2014) 098.
+[17] A. H. Chamseddine, A. Connes, and V. Mukhanov. Quanta of geometry: Noncommutative
+      aspects. Phys. Rev. Lett. 114 (2015) 091302.
+[18] M. D. Choi and E. G. Effros. Injectivity and operator spaces. J. Funct. Anal. 24 (1977)
+      156­209.
+[19] A. Connes. Noncommutative Geometry. Academic Press, San Diego, 1994.
+[20] A. Connes. On the spectral characterization of manifolds. J. Noncommut. Geom. 7 (2013)
+      1­82.
+[21] A. Connes and C. Consani. Spec Z and the Gromov norm, Theory and Applications of
+      Categories 35 (2020) 155­178.
+[22] A. Connes and C. Consani. Segal's Gamma rings and universal arithmetic. arXiv:2004.08879
+SPECTRAL TRUNCATIONS IN NCG AND OPERATOR SYSTEMS  45
+
+[23] F. D'Andrea, F. Lizzi, and P. Martinetti. Spectral geometry with a cut-off: topological and
+      metric aspects. J. Geom. Phys. 82 (2014) 18­45.
+
+[24] F. D'Andrea and P. Martinetti. A view on optimal transport from noncommutative geome-
+      try. SIGMA Symmetry Integrability Geom. Methods Appl. 6 (2010) Paper 057, 24.
+
+[25] K. R. Davidson and M. Kennedy. The Choquet boundary of an operator system. Duke Math.
+      J. 164 (2015) 2989­3004.
+
+[26] M. A. Dritschel and S. A. McCullough. Boundary representations for families of represen-
+      tations of operator algebras and spaces. J. Operator Theory 53 (2005) 159­167.
+
+[27] E. G. Effros and Z.-J. Ruan. Operator spaces, volume 23 of London Mathematical Society
+      Monographs. New Series. The Clarendon Press, Oxford University Press, New York, 2000.
+
+[28] G. K. Eleftherakis and E. T. A. Kakariadis. Strong Morita equivalence of operator spaces.
+      J. Math. Anal. Appl. 446 (2017) 1632­1653.
+
+[29] D. Farenick and V. I. Paulsen. Operator system quotients of matrix algebras and their tensor
+      products. Math. Scand. 111 (2012) 210­243.
+
+[30] L. Fej´er. U¨ ber trigonometrische Polynome. J. Reine Angew. Math. 146 (1916) 53­82.
+[31] L. Glaser and A. Stern. Reconstructing manifolds from truncated spectral triples.
+
+      arXiv:1912.09227.
+[32] L. Glaser and A. Stern. Understanding truncated non-commutative geometries through com-
+
+      puter simulations. arXiv:1909.08054.
+[33] U. Grenander and G. Szeg¨o. Toeplitz forms and their applications. California Monographs
+
+      in Mathematical Sciences. University of California Press, Berkeley-Los Angeles, 1958.
+[34] M. Gromov. Metric structures for Riemannian and non-Riemannian spaces. Modern
+
+      Birkh¨auser Classics. Birkha¨user Boston, Inc., Boston, MA, english edition, 2007. Based on
+      the 1981 French original, With appendices by M. Katz, P. Pansu and S. Semmes, Translated
+      from the French by Sean Michael Bates.
+[35] M. Hamana. Injective envelopes of operator systems. Publ. Res. Inst. Math. Sci. 15 (1979)
+      773­785.
+[36] A. Kavruk, V. I. Paulsen, I. G. Todorov, and M. Tomforde. Tensor products of operator
+      systems. J. Funct. Anal. 261 (2011) 267­299.
+[37] D. Kerr. Matricial quantum Gromov-Hausdorff distance. J. Funct. Anal. 205 (2003) 132­167.
+[38] F. Latr´emoli`ere. The quantum Gromov-Hausdorff propinquity. Trans. Amer. Math. Soc. 368
+      (2016) 365­411.
+[39] J.-Z. Li and C.-K. Ng. Tensor products for non-unital operator systems. J.Math. Anal. Appl.
+      396 (2012) 601­605.
+[40] V. Paulsen. Completely bounded maps and operator algebras, volume 78 of Cambridge Stud-
+      ies in Advanced Mathematics. Cambridge University Press, Cambridge, 2002.
+[41] R. R. Phelps. Lectures on Choquet's theorem, volume 1757 of Lecture Notes in Mathematics.
+      Springer-Verlag, Berlin, second edition, 2001.
+[42] G. Pisier. Introduction to operator space theory, volume 294 of London Mathematical Society
+      Lecture Note Series. Cambridge University Press, Cambridge, 2003.
+[43] S. S. Reddi. Eigenvector properties of Toeplitz matrices and their application to spectral
+      analysis of time series. Signal Process. 7 (1984) 45­56.
+[44] J. Renault. A groupoid approach to C-algebras, volume 793 of Lecture Notes in Mathemat-
+      ics. Springer, Berlin, 1980.
+[45] M. A. Rieffel. Metrics on state spaces. Doc. Math. 4 (1999) 559­600.
+[46] M. A. Rieffel. Gromov-Hausdorff distance for quantum metric spaces. Mem. Amer. Math.
+      Soc. 168 (2004) 1­65.
+[47] F. Riesz. U¨ ber ein Problem des Herrn Carath´eodory. J. Reine Angew. Math. 146 (1916)
+      83­87.
+[48] J. Roe. Lectures on coarse geometry, volume 31 of University Lecture Series. American
+      Mathematical Society, Providence, RI, 2003.
+[49] Z.-J. Ruan. Subspaces of C-algebras. J. Funct. Anal. 76 (1988) 217­230.
+[50] W. Rudin. Real and complex analysis. McGraw-Hill, Third Edition, 1986.
+[51] A. B. Sossinsky. Tolerance space theory and some applications. Acta Appl. Math. 5 (1986)
+      137­167.
+[52] W. Werner. Subspaces of L(H) that are -invariant. J. Funct. Anal. 193 (2002) 207­223.
+[53] Z. Yang and L. Xie. Frequency-selective vandermonde decomposition of toeplitz matrices
+      with applications. Signal Processing 142 (2018) 157­167.
+46  ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+ [54] E. C. Zeeman. The topology of the brain and visual perception. In Topology of 3-manifolds
+        and related topics (Proc. The Univ. of Georgia Institute, 1961), pages 240­256. Prentice-
+        Hall, Englewood Cliffs, N.J., 1962.
+
+    College de France, 3 rue Ulm, F75005, Paris, France, I.H.E.S. F-91440 Bures-sur-
+Yvette, France, Department of Mathematics, Ohio State University, Columbus OH
+43210 USA,
+
+    E-mail address: alain@connes.org
+
+    Institute for Mathematics, Astrophysics and Particle Physics, Radboud University
+Nijmegen, Heyendaalseweg 135, 6525 AJ Nijmegen, The Netherlands.
+
+    E-mail address: waltervs@math.ru.nl
+

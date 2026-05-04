@@ -2000,6 +2000,43 @@ zero is not a fine cancellation that the finite graph misses due to
 truncation---it is a \emph{qualitative} selection rule tied to the
 photon's vector character, which the graph does not encode.
 
+\paragraph{Independent reading: Connes--van~Suijlekom operator-system gap.}
+The same broken structural zero admits a parallel structural
+interpretation through the spectral-truncation framework of Connes
+and van~Suijlekom~\cite{connes_vs2021}: the truncated algebra-image
+$\mathcal{O}_{n_{\max}} = P_{n_{\max}} C^\infty(S^3) P_{n_{\max}}$
+is $*$-closed but \emph{not} multiplicatively closed---taking its
+$C^*$-envelope $C^*(\mathcal{O}_{n_{\max}})$ collapses to a
+``non-informative full matrix algebra'' that loses precisely the
+operator-system data carrying the off-diagonal Gaunt structure.
+The CG projection that ``opens vertex couplings invisible to the
+SO(4) channel count'' (Sec.~\ref{sec:broken_structural_zero}) is
+exactly the failure-of-closure that distinguishes
+$\mathcal{O}_{n_{\max}}$ from its envelope.  Read this way, the
+pendant-edge value $\Sigma_{\mathrm{graph}}(\mathrm{GS}) =
+2(n_{\max}-1)/n_{\max}$ is not an artifact of finite truncation but
+the operator-system content the envelope would discard.
+
+This reading is sharpened by an independent quantitative match: the
+GeoVac operator system $\mathcal{O}_{n_{\max}}$ has propagation
+number $\mathrm{prop}(\mathcal{O}_{n_{\max}}) = 2$ at $n_{\max} \in
+\{2, 3, 4\}$, matching the value Connes \& van~Suijlekom prove for
+the Toeplitz operator system $C(S^1)^{(n)}$ on the circle (their
+Proposition~4.2: $\mathrm{prop} = 2$ independently of $n$); see
+Paper~32~\cite{paper32}, Proposition~\ref{prop:propagation_number}.
+The witness pair underlying the propagation-number computation is
+the same boundary mechanism as the pendant-edge theorem here: a
+``raise-then-lower at the top shell escapes the truncation''
+deficit, viewed once from the QED self-energy side and once from
+the operator-system side.  The fact that two structurally distinct
+constructions on the same Fock-projected $S^3$ graph both
+quantitatively realize the same boundary correction is internal
+evidence that the operator-system reading of GeoVac is not a
+formal relabelling but the structural source of both phenomena.
+See \texttt{debug/wh1\_connes\_vs\_mapping\_memo.md} (round-1
+mapping) and \texttt{debug/wh1\_round2\_propagation\_memo.md}
+(round-2 propagation computation) for the full record.
+
 \subsection{Selection rule survival census}
 \label{sec:selection_rule_census}
 
