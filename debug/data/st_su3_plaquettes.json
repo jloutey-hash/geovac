@@ -1,0 +1,53 @@
+{
+  "sprint": "ST-SU3",
+  "table": {
+    "1": {
+      "V": 4,
+      "E": 3,
+      "c": 1,
+      "beta_1": 0,
+      "plaquette_counts": {},
+      "total_plaquettes_up_to_L_8": 0,
+      "elapsed_sec": 0.0
+    },
+    "2": {
+      "V": 10,
+      "E": 15,
+      "c": 1,
+      "beta_1": 6,
+      "plaquette_counts": {
+        "L=4": 15,
+        "L=6": 21,
+        "L=8": 146
+      },
+      "total_plaquettes_up_to_L_8": 182,
+      "elapsed_sec": 0.04
+    },
+    "3": {
+      "V": 20,
+      "E": 42,
+      "c": 1,
+      "beta_1": 23,
+      "plaquette_counts": {
+        "L=4": 88,
+        "L=6": 526,
+        "L=8": 7151
+      },
+      "total_plaquettes_up_to_L_8": 7765,
+      "elapsed_sec": 2.14
+    },
+    "4": {
+      "V": 35,
+      "E": 90,
+      "c": 1,
+      "beta_1": 56,
+      "plaquette_counts": {
+        "L=4": 272,
+        "L=6": 2934,
+        "L=8": 64021
+      },
+      "total_plaquettes_up_to_L_8": 67227,
+      "elapsed_sec": 22.19
+    }
+  }
+}

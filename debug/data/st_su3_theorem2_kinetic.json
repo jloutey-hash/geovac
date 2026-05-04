@@ -1,0 +1,67 @@
+{
+  "sprint": "ST-SU3",
+  "theorem": "Theorem 2: weak-coupling kinetic term coefficient = 1/12",
+  "general_formula": "1/(4 N_c) for SU(N_c); 1/8 for SU(2), 1/12 for SU(3)",
+  "symbolic": {
+    "symbolic_kinetic_coefficient": "1/12",
+    "tr_Ta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tr_Ta_max_imag": 0.0,
+    "tr_TaTb_diagonal": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5000000000000001
+    ],
+    "tr_TaTb_off_diag_max": 0.0,
+    "kinetic_decoupling_at_quadratic": "TRUE: kinetic form is sum_a (A_P^a)^2 with NO cross-coupling between different su(3) components (a != b)"
+  },
+  "numerical": {
+    "N_max=2_eps=0.05": {
+      "N_max": 2,
+      "n_plaquettes": 15,
+      "epsilon": 0.05,
+      "S_predicted_quadratic": 0.0694681239250318,
+      "S_actual_full": 0.06939680107068558,
+      "abs_error": 7.132285434621743e-05,
+      "rel_error": 0.0010277542083470107,
+      "expected_order_eps3": 0.00012500000000000003,
+      "verdict": "Quadratic prediction matches at O(eps^3)"
+    },
+    "N_max=2_eps=0.01": {
+      "N_max": 2,
+      "n_plaquettes": 15,
+      "epsilon": 0.01,
+      "S_predicted_quadratic": 0.002778724957001272,
+      "S_actual_full": 0.0027789355633173196,
+      "abs_error": 2.106063160477699e-07,
+      "rel_error": 7.578668567484207e-05,
+      "expected_order_eps3": 1.0000000000000002e-06,
+      "verdict": "Quadratic prediction matches at O(eps^3)"
+    },
+    "N_max=2_eps=0.001": {
+      "N_max": 2,
+      "n_plaquettes": 15,
+      "epsilon": 0.001,
+      "S_predicted_quadratic": 2.7787249570012714e-05,
+      "S_actual_full": 2.7787635814680023e-05,
+      "abs_error": 3.862446673091782e-10,
+      "rel_error": 1.3899875105788154e-05,
+      "expected_order_eps3": 1e-09,
+      "verdict": "Quadratic prediction matches at O(eps^3)"
+    }
+  },
+  "verdict": "Theorem 2 VERIFIED: The kinetic coefficient is 1/12 = 1/(4 N_c) per plaquette per su(3) component, generalizing SU(2)'s 1/8. The eight su(3) components decouple at quadratic order; non-abelian self-interactions enter at O(A^3) (commutator corrections)."
+}

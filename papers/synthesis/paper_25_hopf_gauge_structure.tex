@@ -918,6 +918,52 @@ Data backing the Sprint~5 verdict: \texttt{debug/s5\_bargmann\_segal\_graph.py},
 \texttt{debug/data/s5\_graph\_spectrum.json},
 \texttt{debug/s5\_gauge\_structure\_memo.md}.
 
+\paragraph*{Sprint~ST-SU3 update: pure-gauge SU(3) Wilson on
+Bargmann is well-defined; matter coupling rediscovers the CG
+obstruction.}  Sprint~ST-SU3 (May~2026,
+\texttt{debug/st\_su3\_wilson\_memo.md}, with module
+\texttt{geovac/su3\_wilson\_s5.py} and tests
+\texttt{tests/test\_su3\_wilson\_s5.py} 39/39 pass)
+revisits the non-abelian question with a structurally different
+construction: link variables $U_e \in \mathrm{SU}(3)$ as external
+$3\times 3$ matrices in the \emph{fundamental} representation,
+independent of the shell index~$N$.  This is categorically distinct
+from Sprint~5's adjacency-preserving SU(3) action on the $(N, 0)$
+tower (which the negative above ruled out): Wilson links do not
+require an action on shell labels.  The construction is well-defined
+on the Bargmann graph as a Wilson lattice gauge theory: link
+variables in SU(3), plaquette holonomies in SU(3), action
+gauge-invariant under node-local SU(3) (verified to machine
+precision at $N_\text{max} = 2, 3$), Haar-normalizable partition
+function.  The maximal-torus reduction yields a coupled
+$U(1)\times U(1)$ Wilson action --- the rank-2 sibling of the present
+paper's $U(1)$ on $S^3$ --- with character
+$(1/3)\bigl(\cos a_P + \cos b_P + \cos(a_P + b_P)\bigr)$ verified at
+machine precision.  The weak-coupling kinetic coefficient is
+$1/12 = 1/(4 N_c)$ per plaquette per generator component, the
+$N_c = 3$ specialization of Paper~30's universal SU($N$) formula.
+\emph{However}, coupling Wilson SU(3) to matter on the Bargmann
+shells (in the natural $(N, 0)$ irreps) requires a CG intertwiner
+$\textbf{3} \otimes (N, 0) \to (N+1, 0)$ --- exactly the Sprint~5
+Track~S5 obstruction reappearing on the matter-coupling side.
+Wilson SU(3) on Bargmann is therefore a self-consistent
+\emph{pure-gauge} theory; coupling it to natural matter requires the
+same CG structure that the strict Wilson formalism does not
+accommodate.
+
+The structural reading that emerges from combining Sprint~5,
+Paper~30, and Sprint~ST-SU3 is that Paper~24's Coulomb/HO asymmetry
+sharpens from three layers to \emph{four}: the Wilson--Hodge
+combinatorial vocabulary is universal (transfers to $S^5$); the
+spectrum-computing role of $L_0$, the calibration~$\pi$, and Wilson
+gauge \emph{with natural matter coupling} are all Coulomb-specific.
+The previous version of \S~\ref{sec:s5_bargmann_open} (Paper~24
+Corollary~4 \& the three-layer reading) has Wilson gauge and matter
+coupling bundled together; the present update splits them: Wilson
+gauge alone is universal; only Wilson gauge with natural matter
+coupling on the shell tower is Coulomb-specific.  The corresponding
+update to Paper~24 \S~V is documented at the same memo (\S~5.4).
+
 \subsection{Rank-2 Breit tensor: a 2-form gauge structure?}
 
 Paper~22's Sprint 2 extension treats the rank-2 Breit interaction as

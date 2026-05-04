@@ -1,0 +1,87 @@
+{
+  "observable_id": 3,
+  "observable_name": "Hydrogen Bohr spectrum E_n = -Z^2/(2n^2) [atomic units]",
+  "predicted_class": "pure rational",
+  "pi_predicted": false,
+  "computed_class": "pure rational",
+  "pi_observed": false,
+  "match_with_prediction": true,
+  "result": {
+    "spectrum_formula": "-Z**2/(2*n**2)",
+    "formula_contains_pi": false,
+    "test_panel_size": 60,
+    "all_panel_entries_rational": true,
+    "any_panel_entry_contains_pi": false,
+    "matches_NIST_ground_state_E1_eq_minus_1_over_2": true,
+    "panel_first_3_entries": [
+      {
+        "Z": 1,
+        "n": 1,
+        "E_n_atomic_units": "-1/2",
+        "is_rational": true,
+        "contains_pi": false
+      },
+      {
+        "Z": 1,
+        "n": 2,
+        "E_n_atomic_units": "-1/8",
+        "is_rational": true,
+        "contains_pi": false
+      },
+      {
+        "Z": 1,
+        "n": 3,
+        "E_n_atomic_units": "-1/18",
+        "is_rational": true,
+        "contains_pi": false
+      }
+    ],
+    "panel_last_3_entries": [
+      {
+        "Z": 6,
+        "n": 8,
+        "E_n_atomic_units": "-9/32",
+        "is_rational": true,
+        "contains_pi": false
+      },
+      {
+        "Z": 6,
+        "n": 9,
+        "E_n_atomic_units": "-2/9",
+        "is_rational": true,
+        "contains_pi": false
+      },
+      {
+        "Z": 6,
+        "n": 10,
+        "E_n_atomic_units": "-9/50",
+        "is_rational": true,
+        "contains_pi": false
+      }
+    ],
+    "transcendental_ledger": [
+      {
+        "step": "(1) Paper 7 Fock-projected Coulomb operator on unit S^3",
+        "value": "Laplace-Beltrami eigenvalues lambda_n = -(n^2 - 1)",
+        "transcendentals": "NONE -- integers"
+      },
+      {
+        "step": "(2) Energy-shell rescaling p_0^2 = -2 E",
+        "value": "p_0 = Z/n, E_n = -p_0^2/2 = -Z^2/(2 n^2)",
+        "transcendentals": "NONE -- algebraic"
+      },
+      {
+        "step": "(3) Atomic-unit Bohr spectrum E_n = -Z^2 / (2 n^2)",
+        "value": "Pure rational for integer (Z, n)",
+        "transcendentals": "NONE"
+      }
+    ]
+  },
+  "verdict": "CONFIRMS Paper 35 Prediction 1 (negative control)",
+  "paper_34_projections": [
+    "Fock conformal projection (Paper 7 S^3 Coulomb)",
+    "Energy-shell rescaling (algebraic)"
+  ],
+  "temporal_integration_present": false,
+  "specific_integration": "None -- pure algebraic eigenvalue formula"
+}

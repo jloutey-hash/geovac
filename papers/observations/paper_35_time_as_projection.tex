@@ -566,6 +566,104 @@ observation/temporal-window projection of
 Proposition~\ref{prop:two_rows}.  The framework so far has no exception
 to the prediction.
 
+\subsection{Sprint TX-B verification panel (May 2026)}
+\label{sec:tx_b}
+
+Sprint TX-B (May~2026) tested Prediction~\ref{pred:pi_iff_temporal} on
+five new observables, with predictions logged a priori in
+\texttt{debug/data/tx\_b\_predictions.json} \emph{before any
+computation script was run}.  This discipline guards against
+retroactive reframing, the standard failure mode for falsifiable
+predictions (cf.\ \texttt{docs/curve\_fit\_audit\_memo.md},
+2026-05-02).  The panel was designed to probe four corners of the
+prediction:
+
+\begin{enumerate}
+\setlength\itemsep{0pt}
+\item \textbf{Stefan-Boltzmann coefficient on $S^3 \times S^1_\beta$}
+(positive control, $\pi$ predicted): re-derives $\pi^2/90$ from the
+Matsubara sum.  Confirmed.
+\item \textbf{Spatial Casimir on Bargmann--Segal $S^5$ for the 3D HO}
+(positive prediction, no $\pi$): the Bargmann construction is a
+different geometry from the $S^3$ Coulomb / $S^3$ Dirac sectors of
+KG-3 / KG-5.  If the half-integer Hurwitz mechanism is structural, the
+$S^5$ HO Casimir should produce another exact rational.  Computed via
+the spectral zeta
+\[
+\zeta_X(s) = \tfrac{1}{2}\bigl[\zeta_R(s{-}2,\, 3/2) -
+\tfrac{1}{4}\zeta_R(s,\, 3/2)\bigr]
+\]
+at $s = -1$.  Bernoulli-at-half-integer values $B_2(3/2) = 11/12$,
+$B_4(3/2) = 127/240$ give Hurwitz at negative integers
+$\zeta_R(-1, 3/2) = -11/24$, $\zeta_R(-3, 3/2) = -127/960$, and the
+bracket $[\zeta_R(-3, 3/2) - \tfrac{1}{4}\zeta_R(-1, 3/2)] = -17/960$.
+Hence
+\[
+  E_\text{Cas}^{\text{HO}, S^5}
+  \;=\; \tfrac{1}{2}\,\zeta_X(-1)
+  \;=\; -\tfrac{17}{3840}
+  \quad \text{(exact rational, no $\pi$).}
+\]
+This is a clean new closed form, structurally a sibling of KG-3
+(scalar $S^3$ Casimir $= 1/240$) and KG-5 (Dirac $S^3$ Casimir
+$= 17/480$).  The shared mechanism across all three sectors ---
+half-integer Hurwitz at shift $a = 3/2$, Bernoulli polynomials at
+$3/2$ rational --- is the universal structural driver: any spectrum
+of the form $E_n = n + a$ with $a \in \mathbb{Q}$ and degeneracy
+polynomial in $n$ produces a rational Casimir through
+$\zeta$-regularization, regardless of whether the underlying manifold
+is $S^3$ scalar, $S^3$ Dirac, or $S^5$ HO.  The Coulomb/HO/Dirac
+asymmetry that Paper~24 highlights at the level of the Laplacian role
+\emph{does not} extend to the Casimir transcendental class.
+Confirmed.
+\item \textbf{Hydrogen Bohr spectrum} (negative control): pure
+algebraic formula, no integration, no $\pi$.  Trivial but essential.
+Confirmed.
+\item \textbf{Heisenberg-Euler 1-loop coefficient} (positive
+prediction): the textbook leading coefficient $\alpha^2/(45\pi m_e^4)$
+contains $\pi$ in the denominator, sourced by the Schwinger
+proper-time integration $\int_0^\infty ds/s^3 \, e^{-m^2 s} f(eF, s)$
+--- the canonical example of an observation/temporal-window
+projection.  We did not derive the absolute coefficient natively from
+the GeoVac framework (that would require LS-7-style two-loop SE
+machinery), so this entry is flagged as structural identification
+(error code S in Paper~34's classification): the transcendental class
+matches, the absolute value is from the textbook.  Confirmed at
+structural level.
+\item \textbf{Static Coulomb-like potential on the Hopf $S^3$ graph}
+(positive prediction, no $\pi$): the regularized discrete Green's
+function $(L + I)^{-1}$ at finite $n_\text{max}$ is built by exact
+matrix inversion on a finite integer-valued graph.  No continuous
+integration appears.  Computed in exact sympy rational arithmetic at
+$n_\text{max} = 2, 3$: every entry is a sympy \texttt{Rational}, no
+$\pi$ anywhere.  The continuum limit ($n_\text{max} \to \infty$) would
+inject $\pi$ via spherical-harmonic normalization on $S^3$, exactly
+where Prediction~\ref{pred:pi_iff_temporal} predicts.  Confirmed at
+finite truncation.
+\end{enumerate}
+
+\textbf{Tally: 5 of 5 confirmed.}  Combined with the prior KG sprint
+(200 KG spectrum cases, KG-2 temporal injection, KG-3 scalar Casimir,
+KG-5 Dirac Casimir), Prediction~\ref{pred:pi_iff_temporal} has now
+been tested on a cumulative \textbf{208 individual checks across the
+KG and TX-B sprints, with 100\% match rate}.
+
+\begin{remark}[graduation to load-bearing principle]
+\label{rem:graduation}
+With the TX-B verification panel in hand,
+Prediction~\ref{pred:pi_iff_temporal} graduates from a falsifiable
+\emph{conjecture} of the framework to a \emph{load-bearing principle}
+of it.  The graduation is two-fold: (i)~the prediction has survived
+208 independent checks across two sprints, with no exceptions; (ii)~it
+now plays an operational role alongside Paper~18's transcendental
+cataloguing as a discipline for evaluating new derivations.  If a step
+in a derivation is supposed to produce $\pi$, the discipline is to
+identify the continuous integration over a temporal or spectral
+parameter that produces it; if no such integration is identifiable,
+the $\pi$ is either an error or an unidentified projection (in the
+latter case requiring an addition to Paper~34's projection list).
+\end{remark}
+
 \subsection{Falsification criterion}
 
 A counter-example to Prediction~\ref{pred:pi_iff_temporal} would be a
@@ -785,6 +883,23 @@ Bargmann--Segal lattice, and graph-native QED matrix elements are all
 $\pi$-free; vacuum polarization, $\beta$-function, and Stefan-Boltzmann
 all contain $\pi$ exactly because their evaluation includes a
 continuous Schwinger-proper-time or Matsubara integration.
+
+With the addition of Sprint TX-B's five-observable falsification
+panel (\S~\ref{sec:tx_b}), the prediction has been tested on a
+cumulative $208/208$ individual checks across the KG and TX-B
+sprints with no exceptions, and graduates from falsifiable conjecture
+to load-bearing principle of the framework
+(Remark~\ref{rem:graduation}).  TX-B also produced a new clean
+closed form: the spatial Casimir of the 3D HO on the Bargmann--Segal
+$S^5$ lattice is $E_\text{Cas}^{\text{HO}, S^5} = -17/3840$ (exact
+rational), structurally a sibling of the scalar $S^3$ Casimir
+($1/240$, KG-3) and the Dirac $S^3$ Casimir ($17/480$, KG-5).
+The shared mechanism is half-integer Hurwitz at shift $a = 3/2$, with
+Bernoulli polynomials at $3/2$ rational --- the universal driver of
+rationality across all three Casimir sectors.  The Coulomb/HO/Dirac
+asymmetry of Paper~24 (operator-order, calibration $\pi$, Wilson
+gauge with matter) does not extend to the Casimir transcendental
+class.
 
 The sharpest open question this paper does not resolve is the Paper~2
 $K = \pi(B + F - \Delta) \approx 1/\alpha$ coincidence: the explicit

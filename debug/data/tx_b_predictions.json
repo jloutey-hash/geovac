@@ -1,0 +1,84 @@
+{
+  "sprint": "TX-B",
+  "purpose": "Test Paper 35 Prediction 1 (pi enters iff continuous integration over a temporal/spectral parameter promoted from the discrete graph spectrum) on 5 new observables.",
+  "predictions_logged_before_compute": true,
+  "discipline": "All 5 predictions written BEFORE any computation; do not retroactively reframe.",
+  "predictions": [
+    {
+      "id": 1,
+      "name": "Stefan-Boltzmann coefficient on S^3 x S^1_beta (free massless scalar, high-T limit)",
+      "predicted_transcendental_class": "pi^2 / Q (specifically pi^2/90 prefactor)",
+      "pi_predicted": true,
+      "role": "POSITIVE CONTROL",
+      "paper_34_projections_used": [
+        "Fock conformal projection (sets the spatial spectrum on unit S^3, integer-rational)",
+        "Observation/temporal-window projection (NEW row, KG sprint): compactifies time to S^1_beta, introduces Matsubara modes 2*pi*k/beta",
+        "Casimir/zeta-regularized integration over the Matsubara sum"
+      ],
+      "temporal_or_spectral_integration_present": true,
+      "integration_identification": "Matsubara sum over k in Z of (2*pi*k/beta)^{-2s}, evaluated at s=2 via zeta_R(4) = pi^4/90.",
+      "reasoning": "Direct application of KG-3 + Paper 35 Sec 4.1: temporal compactification injects 2*pi at the spectrum level; the high-T expansion of the free energy density picks up zeta_R(4) = pi^4/90 from the Matsubara sum. The canonical prefactor is pi^2/90 per polarization. Strong positive control: pi MUST appear under Paper 35's mechanism."
+    },
+    {
+      "id": 2,
+      "name": "Spatial Casimir energy on Bargmann-Segal S^5 for the free 3D HO field (massless conformally coupled scalar in (N,0) tower)",
+      "predicted_transcendental_class": "exact rational, no pi",
+      "pi_predicted": false,
+      "role": "POSITIVE PREDICTION (KG-3 ANALOG ON S^5)",
+      "paper_34_projections_used": [
+        "Bargmann transform / S^5 Hardy space projection (projects 3D HO onto (N,0) SU(3) tower)",
+        "Casimir/zeta-regularized integration over the spatial spectrum only (no temporal compactification)"
+      ],
+      "temporal_or_spectral_integration_present": false,
+      "integration_identification": "Zeta-regularized sum over discrete (N,0) graph eigenvalues E_N = N + 3/2 with degeneracy (N+1)(N+2)/2. NO temporal compactification, NO observation window, NO Matsubara sum. Pure spatial mode-counting on the bare Bargmann-Segal graph.",
+      "reasoning": "Paper 24 establishes that the Bargmann-Segal graph is bit-exactly pi-free in exact rational arithmetic. The spectrum E_N = N + 3/2 is half-integer rational; the degeneracy (N+1)(N+2)/2 is rational. Zeta-regularization via Hurwitz zeta at half-integer shift gives Bernoulli polynomial values at 3/2, which are exact rationals (B_2(3/2) = 11/12, B_4(3/2) = 127/240, etc.). Same mechanism as KG-5 (Dirac on S^3 gave 17/480 exactly). Should produce exact rational. Predicting NO pi."
+    },
+    {
+      "id": 3,
+      "name": "Hydrogen Bohr spectrum E_n = -Z^2 / (2 n^2) (in atomic units, pure algebraic)",
+      "predicted_transcendental_class": "pure rational (negative integer / integer)",
+      "pi_predicted": false,
+      "role": "NEGATIVE CONTROL",
+      "paper_34_projections_used": [
+        "Fock conformal projection (Camporesi-Higuchi-style; Paper 7 conformal equivalence S^3 -> hydrogen)",
+        "energy-shell rescaling p_0^2 = -2E (pure algebraic, dimensionless)"
+      ],
+      "temporal_or_spectral_integration_present": false,
+      "integration_identification": "None. The hydrogen Bohr spectrum is the eigenvalue formula obtained directly from the discrete graph Laplacian eigenvalues lambda_n = -(n^2 - 1) of Paper 7. No integration over any continuous parameter; the formula E_n = -Z^2/(2n^2) (in atomic units) is purely algebraic in n.",
+      "reasoning": "This is a pure algebraic-rationality check. The Bohr spectrum is rational in atomic units for integer Z and integer n. No transcendentals enter at any step. Trivial but essential negative control: confirms that purely algebraic formulae remain in Q without pi injection."
+    },
+    {
+      "id": 4,
+      "name": "Euler-Heisenberg one-loop effective Lagrangian leading coefficient (Schwinger pair-production analog)",
+      "predicted_transcendental_class": "alpha^2 / (m^4) * (rational / pi)",
+      "pi_predicted": true,
+      "role": "POSITIVE PREDICTION",
+      "paper_34_projections_used": [
+        "Connes-Chamseddine spectral action / proper-time integration projection (Paper 28)",
+        "Vector-photon promotion projection (Paper 33), brings 1/(4*pi) per loop S^2 Weyl exchange constant",
+        "Continuous proper-time integration over s in (0, infinity)"
+      ],
+      "temporal_or_spectral_integration_present": true,
+      "integration_identification": "Schwinger proper-time integral: int_0^infty ds/s * exp(-i m^2 s) * [contribution from external field]. The proper-time s is the canonical example of 'continuous integration over a spectral parameter promoted from the discrete spectrum' (the spectral parameter is the eigenvalue of the heat kernel / propagator). The resulting Euler-Heisenberg leading term is alpha^2 / (45 * pi * m^4) (Heisenberg-Euler 1936; Schwinger 1951).",
+      "reasoning": "Schwinger pair production rate / Euler-Heisenberg Lagrangian is the textbook example of a quantity arising from proper-time integration. Paper 35 explicitly cites Schwinger proper-time as a temporal-window projection. The 1/pi in the denominator is the Hopf-base measure factor (cf. Paper 33). Strong positive prediction: pi MUST appear (in denominator, from Hopf-base measure)."
+    },
+    {
+      "id": 5,
+      "name": "Static Coulomb-like potential V(theta) on Hopf S^3 graph from Green's function sum at fixed angular separation theta",
+      "predicted_transcendental_class": "exact rational + algebraic-extension (sqrt of integers); no pi",
+      "pi_predicted": false,
+      "role": "POSITIVE PREDICTION",
+      "paper_34_projections_used": [
+        "Fock conformal projection (S^3 graph)",
+        "Discrete Green's function evaluation at two fixed nodes (no continuous integration)"
+      ],
+      "temporal_or_spectral_integration_present": false,
+      "integration_identification": "None at the level of the graph. The Green's function G(node_a, node_b) = sum_n psi_n(node_a) psi_n*(node_b) / lambda_n is a finite (truncated) or infinite sum over discrete graph eigenvalues. At fixed nodes, this is a numerical sum, not an integration. NO temporal compactification, NO Schwinger proper time, NO Matsubara, NO Mellin transform.",
+      "reasoning": "On the discrete Fock graph, the Coulomb potential between two fixed angular positions is just a sum over graph eigenvalues weighted by eigenvector overlaps. Both eigenvalues (lambda_n = -(n^2 - 1)) and eigenvector entries (in the natural basis, related to Wigner D-matrix coefficients via 4-Y integrals) are algebraic. Sum should land in Q + algebraic-extension. NO continuous integration -> NO pi. Caveat: if we sum to infinity, the spectral zeta evaluated at s=1 may diverge (logarithmic divergence in 1/r); we'll truncate at finite n_max and check whether finite truncation contains pi. Continuum Coulomb potential 1/r contains no pi at fixed positions; pi appears in continuum Green's function only when integrated over angular volume, which we are NOT doing here.",
+      "fallback_strategy": "If the infinite sum diverges (which it does at fixed nodes for Laplacian Green's function in 3D, log divergence on S^3 from constant mode), use the regularized Green's function (subtract constant mode) and check finite n_max truncation. Alternative: use the finite Hopf graph at n_max=2,3 and compute the discrete Green's function explicitly as a finite sum."
+    }
+  ],
+  "tally_prediction": "If Paper 35 Prediction 1 holds: predictions 1 (positive control) and 4 should contain pi; predictions 2, 3, 5 should NOT. Expected match: 5/5.",
+  "graduation_criterion": "If 5/5 confirmed, recommend Paper 35 Prediction 1 graduates from 'observation' to 'load-bearing principle' (i.e., promoted from falsifiable conjecture to working axiom of the framework).",
+  "failure_response": "If <5/5, identify which projection axis (variable / dimension / transcendental / depth) the failure indicates and propose a refined prediction."
+}

@@ -1,0 +1,60 @@
+{
+  "observable_id": 4,
+  "observable_name": "Heisenberg-Euler weak-field coefficient",
+  "predicted_class": "alpha^2 * (rational/pi) * (1/m^4)",
+  "pi_predicted": true,
+  "computed_class": "alpha^2 / (45 pi m^4) [(E^2-B^2)^2 + 7(E.B)^2 etc.]",
+  "pi_observed": true,
+  "match_with_prediction": true,
+  "result": {
+    "observable_definition": "Heisenberg-Euler weak-field 1-loop effective Lagrangian leading coefficient",
+    "textbook_reference_primary": "Heisenberg & Euler, Z. Physik 98, 714 (1936)",
+    "textbook_reference_secondary": "Schwinger, Phys. Rev. 82, 664 (1951)",
+    "textbook_reference_modern": "Dunne, Eur. Phys. J. C 72, 2156 (2012) Eq. 2.3",
+    "leading_F2_squared_coefficient_symbolic": "2*alpha**2/(45*pi*m_e**4)",
+    "leading_FFtilde2_coefficient_symbolic": "7*alpha**2/(90*pi*m_e**4)",
+    "alternate_form_E2_minus_B2_squared_coefficient": "alpha^2 / (45 pi m_e^4)",
+    "contains_pi": true,
+    "pi_in_numerator_or_denominator": "denominator (1/pi)",
+    "alpha_2_over_45_pi_decimal_at_alpha_1_137": 3.7687426215069845e-07,
+    "transcendental_ledger": [
+      {
+        "step": "(1) Heisenberg-Euler 1-loop effective Lagrangian setup",
+        "value": "L_HE = -(1/(8 pi^2)) int_0^infty (ds/s^3) e^{-m^2 s} f(eF, s)",
+        "transcendentals": "PI APPEARS via 1/(8 pi^2) heat-kernel prefactor (spinor heat kernel on R^4), and via the proper-time integration measure"
+      },
+      {
+        "step": "(2) Schwinger proper-time integration over s in (0, infty)",
+        "value": "Continuous integration over the spectral parameter s = Schwinger proper time, identified with the temporal/observation projection of Paper 35",
+        "transcendentals": "Continuous integration is the mechanism (Paper 35 Prediction 1)"
+      },
+      {
+        "step": "(3) Weak-field expansion (Bernoulli structure)",
+        "value": "Bernoulli polynomials B_2k(z) appear in the cosh/sinh expansion; rational coefficients only",
+        "transcendentals": "NONE at this step (rational structure)"
+      },
+      {
+        "step": "(4) Leading coefficient: 4 alpha^2 / (90 pi) for (F_munu F^munu)^2",
+        "value": "2*alpha**2/(45*pi*m_e**4)",
+        "transcendentals": "PI in denominator (from step 1, surviving the integral)"
+      },
+      {
+        "step": "(5) Equivalent: alpha^2 / (45 pi) for (E^2 - B^2)^2 / m_e^4 part",
+        "value": "alpha^2 / (45 pi m_e^4)",
+        "transcendentals": "PI in denominator"
+      }
+    ],
+    "two_distinct_sources_of_pi": {
+      "source_1": "Heat-kernel prefactor 1/(8 pi^2) -- one-loop spinor vacuum polarization on R^4; same structural pi as the Paper 28 vacuum polarization 1/(48 pi^2)",
+      "source_2": "Schwinger proper-time integration measure -- the explicit continuous integration that Paper 35 Prediction 1 cites"
+    }
+  },
+  "verdict": "CONFIRMS Paper 35 Prediction 1: pi appears via the Schwinger proper-time integration -- the canonical 'continuous integration over a spectral parameter promoted from the discrete spectrum'",
+  "paper_34_projections": [
+    "Connes-Chamseddine spectral action / proper-time integration projection (Paper 28)",
+    "Vector-photon promotion projection (Paper 33), 1/(4*pi) per loop",
+    "Schwinger proper-time integration over s in (0, infty)"
+  ],
+  "temporal_integration_present": true,
+  "specific_integration": "Schwinger proper-time s in (0, infinity) with measure ds/s^3 e^{-m^2 s}"
+}

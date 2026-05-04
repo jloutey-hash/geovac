@@ -66,6 +66,17 @@ with a synthesis observation that the GeoVac framework now carries
 on node-wavefunctions, Wilson action on gauge edges, Ihara path-integral
 on walks, and spectral action on Dirac spectrum---organizing a
 framework-wide principle of least action.
+An $\mathrm{SU}(3)$ sibling on the Bargmann--Segal $S^5$ graph
+(Paper~24) has been constructed in Sprint~ST-SU3
+(\texttt{debug/st\_su3\_wilson\_memo.md}, May~2026), confirming
+Theorem~1's analog (Cartan reduction to $U(1)\times U(1)$) and
+Theorem~2's analog (kinetic coefficient $1/12 = 1/(4 N_c)$) at machine
+precision; matter coupling on $S^5$ encounters the Sprint~5 Track~S5
+Clebsch--Gordan-intertwiner obstruction, sharpening Paper~24's
+Coulomb/HO asymmetry to four layers (spectrum-computing $L_0$,
+calibration $\pi$, Wilson gauge with natural matter coupling, and the
+universal Wilson--Hodge vocabulary; the first three Coulomb-specific,
+the fourth universal).
 \end{abstract}
 
 % ===================================================================
@@ -465,6 +476,22 @@ Paper~25's $U(1)$ construction from a freestanding abelian model to
 the commutative-reduction sector of a natural non-abelian one.
 \end{observation}
 
+\begin{remark}[higher-rank generalization]
+\label{rem:higher_rank}
+On a rank-$r$ gauge group with maximal torus $\mathrm{T} = U(1)^r$,
+the analog of Proposition~\ref{prop:u1_reduction} produces $r$
+independent (but coupled, via a $\det = 1$ constraint when present)
+$U(1)$ sectors.  The $\mathrm{SU}(3)$ case ($r = 2$) is computed in
+Sprint~ST-SU3 (May~2026,
+\texttt{debug/st\_su3\_wilson\_memo.md}~\S~3): restricting Wilson
+$\mathrm{SU}(3)$ links on the Bargmann--Segal $S^5$ graph to the
+maximal torus $T \cong U(1) \times U(1)$ produces a coupled
+$U(1) \times U(1)$ Wilson action with character
+$(1/3)\bigl(\cos a_P + \cos b_P + \cos(a_P + b_P)\bigr)$, verified
+at machine precision over random Cartan trials at $N_\text{max} = 2,
+3$ (max $|\Delta S| < 1.5 \times 10^{-11}$ at $7\,765$ plaquettes).
+\end{remark}
+
 The character expansion of Section~\ref{sec:characters} reflects the
 reduction explicitly: the restriction of the $\mathrm{SU}(2)$
 character $\chi_j$ to the maximal torus
@@ -585,6 +612,29 @@ exactly the free piece: the propagator of a massless non-abelian
 gauge field in the weak-coupling limit, with self-interactions
 parametrically suppressed.
 \end{observation}
+
+\begin{remark}[universal $\mathrm{SU}(N)$ kinetic coefficient]
+\label{rem:sun_coefficient}
+With generators $T^a = \lambda^a/2$ normalized to
+$\mathrm{tr}(T^a T^b) = \tfrac{1}{2} \delta^{ab}$, the second-order
+expansion of the Wilson action
+$S_W[U] = \beta \sum_P (1 - (1/N_c)\,\mathrm{Re}\,\mathrm{tr}\,U_P)$
+on a general gauge group $\mathrm{SU}(N_c)$ produces a per-plaquette
+per-component coefficient of $1/(4 N_c)$.  The $\mathrm{SU}(2)$ value
+$1/8$ derived above is the $N_c = 2$ specialization.  The
+$\mathrm{SU}(3)$ value $1/12$ is verified independently in
+Sprint~ST-SU3 (\texttt{debug/st\_su3\_wilson\_memo.md}~\S~4)
+symbolically and numerically on the Bargmann--Segal $S^5$ graph
+($120$ degrees of freedom at $N_\text{max} = 2$, relative error
+$\sim O(\epsilon^2)$ consistent with $O(A^4)$ leading correction).
+The mechanism: more colors $\Rightarrow$ smaller per-component
+coefficient because the $(1/N_c)\,\mathrm{Re}\,\mathrm{tr}$
+normalization in the Wilson action divides by $N_c$ while the
+trace-of-pair normalization holds $\mathrm{tr}(T^a T^a) = 1/2$ fixed.
+The decoupling of components at quadratic order is a universal
+$\mathrm{SU}(N_c)$ feature; non-abelian self-interactions enter at
+$O(A^4)$ via the structure constants $f^{abc}$ in every case.
+\end{remark}
 
 \subsection{Result 3: Plaquette counts and Wilson-loop data}
 \label{sec:results_MC}
@@ -902,6 +952,83 @@ graphs admits a well-posed continuum limit, and whether that limit is
 SU(2) Yang--Mills on the unit $S^3$ in the Hodge--de Rham sense, is
 open.  The relevant spectral data is available in
 \texttt{geovac/hopf\_bundle.py}; a careful analysis has not been done.
+
+\subsection{SU(3) Wilson sibling on $S^5$}
+\label{sec:su3_sibling}
+
+Paper~25~\S~VII.A also flagged as open whether a non-abelian extension
+of the GeoVac Hopf $U(1)$ Wilson--Hodge structure transfers to the
+Bargmann--Segal $S^5$ graph (Paper~24).  Sprint~5 Track~S5
+(\texttt{debug/s5\_gauge\_structure\_memo.md}) returned a clean
+negative for the \emph{adjacency-preserving} SU(3) action on the
+$(N, 0)$ representation tower: shell-shifting transitions are
+Clebsch--Gordan intertwiners between distinct SU(3) irreps, not group
+elements, so an SU(3) action on the $(N, 0)$ tower fails the Wilson
+``fixed group on every link'' requirement.
+
+Sprint~ST-SU3 (May~2026,
+\texttt{debug/st\_su3\_wilson\_memo.md}, with module
+\texttt{geovac/su3\_wilson\_s5.py} and tests
+\texttt{tests/test\_su3\_wilson\_s5.py} 39/39 pass) tested a
+structurally different question: \emph{Wilson lattice gauge theory}
+with link variables $U_e \in \mathrm{SU}(3)$ as external 3$\times$3
+matrices in the fundamental representation, independent of the shell
+index $N$.  The construction parallels the present paper's
+$\mathrm{SU}(2)$ on $S^3$.  Three structural theorems mirror the
+present results:
+
+\begin{itemize}
+\setlength\itemsep{0pt}
+\item \textbf{Cartan reduction.}  Restricting Wilson SU(3) links to
+the maximal torus $T \cong U(1)\times U(1)$ produces a coupled
+$U(1)\times U(1)$ Wilson action with character
+$(1/3)\bigl(\cos a_P + \cos b_P + \cos(a_P+b_P)\bigr)$ (the third
+phase forced by $\det = 1$).  Verified at machine precision over
+random Cartan trials at $N_\text{max} = 2, 3$
+(max $|\Delta S| < 1.5\times 10^{-11}$ at $7\,765$ plaquettes).
+The rank-2 generalization of Proposition~\ref{prop:u1_reduction} per
+Remark~\ref{rem:higher_rank}.
+\item \textbf{Kinetic coefficient.}  The weak-coupling expansion gives
+$1/12 = 1/(4 \cdot 3)$ per plaquette per generator component, the
+$N_c = 3$ specialization of Remark~\ref{rem:sun_coefficient}'s
+universal $1/(4 N_c)$ formula.  Eight $\mathfrak{su}(3)$ components
+are kinetic-decoupled at quadratic order; non-abelian self-couplings
+enter at $O(A^4)$ via the structure constants $f^{abc}$.
+\item \textbf{Plaquette tabulation.}  $V, E, \beta_1$ at
+$N_\text{max} = 2, 3, 4$ are $(10, 15, 6)$, $(20, 42, 23)$,
+$(35, 90, 56)$, with primitive 4-cycle counts $N_4 = 15, 88, 272$
+--- roughly an order of magnitude denser than the $S^3$ graph at
+matched cutoff.  Wilson loops at $N_\text{max} = 2$ with local SU(3)
+updates give $\langle W \rangle = 0.05, 0.10, 0.26, 0.65, 0.89$ at
+$\beta = 0.5, 1, 2, 5, 10$, systematically lower than the present
+paper's SU(2) values at small $\beta$ (consistent with the standard
+$N_c$-color randomization of the trace).
+\end{itemize}
+
+The Sprint~5 Track~S5 Clebsch--Gordan obstruction is \emph{bypassed}
+at the gauge level (Wilson links live in the fundamental SU(3) rep,
+not in the $(N, 0)$ shell rep) but \emph{rediscovered} at the
+matter-coupling level: coupling Wilson SU(3) to natural shell matter
+(in the $(N, 0)$ irreps of growing dimension) requires a CG
+intertwiner from $\textbf{3}\otimes (N, 0)$ to $(N+1, 0)$ that is
+exactly the Sprint~5 obstruction.  Wilson SU(3) on Bargmann is
+therefore a self-consistent \emph{pure-gauge} theory; the natural
+matter sector cannot be coupled in the strict Wilson sense.
+
+The structural reading: $S^3 = \mathrm{SU}(2)$ makes the
+present paper's case special in a way that does not transfer to the
+$\mathrm{SU}(3)$ on $S^5$ analogue.  On $S^3$, matter (spin-$1/2$
+fermions, Paper~14 Tier~2) lives in the same representation as the
+link variables, so the gauge--matter coupling is natural; on $S^5$,
+the matter representations $(N, 0)$ have dimensions that grow with
+$N$, so a uniform-link-rep coupling is impossible.  This sharpens
+Paper~24's Coulomb/HO asymmetry from three layers
+(spectrum-computing $L_0$, calibration $\pi$, Wilson gauge with
+matter coupling) plus the universal Wilson--Hodge vocabulary, to
+\emph{four layers}: Wilson gauge alone is universal; only Wilson
+gauge \emph{with natural matter coupling} is Coulomb-specific.
+Sprint~ST-SU3 contributes the third layer on the gauge-with-matter
+side.  The reading of Paper~24 \S~V is updated accordingly.
 
 % ===================================================================
 \section{Conclusion}

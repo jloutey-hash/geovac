@@ -1,0 +1,953 @@
+{
+  "projections": [
+    {
+      "id": "fock_conformal",
+      "name": "Fock conformal",
+      "section": "III.1",
+      "variables_added": [
+        "Z",
+        "E"
+      ],
+      "dimensions_added": [
+        "energy"
+      ],
+      "transcendental_class": [
+        "rational_kappa"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 0,
+      "output_layer": 1
+    },
+    {
+      "id": "hopf_bundle",
+      "name": "Hopf bundle",
+      "section": "III.2",
+      "variables_added": [
+        "alpha"
+      ],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "pi_hopf_base"
+      ],
+      "signature_pi_intrinsic": true,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "bargmann_segal",
+      "name": "Bargmann-Segal",
+      "section": "III.3",
+      "variables_added": [
+        "hbar_omega"
+      ],
+      "dimensions_added": [
+        "energy"
+      ],
+      "transcendental_class": [
+        "rational"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 0,
+      "output_layer": 1
+    },
+    {
+      "id": "stereographic",
+      "name": "Stereographic / conformal coordinate change",
+      "section": "III.4",
+      "variables_added": [
+        "r"
+      ],
+      "dimensions_added": [
+        "length"
+      ],
+      "transcendental_class": [
+        "conformal_factor"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": true,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "sturmian",
+      "name": "Sturmian reparameterization at lambda=Z/n",
+      "section": "III.5",
+      "variables_added": [],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "rational"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": true,
+      "has_inverse": true,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "spectral_action",
+      "name": "Connes-Chamseddine spectral action",
+      "section": "III.6",
+      "variables_added": [
+        "Lambda",
+        "alpha"
+      ],
+      "dimensions_added": [
+        "energy"
+      ],
+      "transcendental_class": [
+        "sqrt_pi",
+        "pi2k_rational"
+      ],
+      "signature_pi_intrinsic": true,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 1,
+      "output_layer": 2
+    },
+    {
+      "id": "spinor_lift",
+      "name": "Camporesi-Higuchi spinor lift",
+      "section": "III.7",
+      "variables_added": [
+        "alpha"
+      ],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "half_int_hurwitz",
+        "odd_zeta",
+        "catalan_G",
+        "dirichlet_beta"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "wigner_3j",
+      "name": "Wigner 3j angular coupling",
+      "section": "III.8",
+      "variables_added": [],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "sqrt_int_rationals"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": true,
+      "has_inverse": true,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "wigner_D",
+      "name": "Wigner D rotation between molecular centers",
+      "section": "III.9",
+      "variables_added": [
+        "R_AB"
+      ],
+      "dimensions_added": [
+        "length"
+      ],
+      "transcendental_class": [
+        "sqrt_int_rationals"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": true,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "wilson_plaquette",
+      "name": "Wilson plaquette",
+      "section": "III.10",
+      "variables_added": [
+        "beta_gauge"
+      ],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "su2_haar"
+      ],
+      "signature_pi_intrinsic": true,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 1,
+      "output_layer": 2
+    },
+    {
+      "id": "vector_photon",
+      "name": "Vector-photon promotion",
+      "section": "III.11",
+      "variables_added": [],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "one_over_4pi"
+      ],
+      "signature_pi_intrinsic": true,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "molframe_hypersph",
+      "name": "Molecule-frame hyperspherical",
+      "section": "III.12",
+      "variables_added": [
+        "R"
+      ],
+      "dimensions_added": [
+        "length"
+      ],
+      "transcendental_class": [
+        "piecewise_smooth_R"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": false,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "drake_swainson",
+      "name": "Drake-Swainson asymptotic subtraction",
+      "section": "III.13",
+      "variables_added": [
+        "K_subtract"
+      ],
+      "dimensions_added": [],
+      "transcendental_class": [
+        "flow"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": true,
+      "has_inverse": false,
+      "input_layer": 2,
+      "output_layer": 2
+    },
+    {
+      "id": "rest_mass",
+      "name": "Rest-mass projection",
+      "section": "III.14",
+      "variables_added": [
+        "m"
+      ],
+      "dimensions_added": [
+        "mass"
+      ],
+      "transcendental_class": [
+        "trivial_ring_preserving"
+      ],
+      "signature_pi_intrinsic": false,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": true,
+      "input_layer": 1,
+      "output_layer": 1
+    },
+    {
+      "id": "observation_window",
+      "name": "Observation / temporal-window",
+      "section": "III.15",
+      "variables_added": [
+        "beta_temp"
+      ],
+      "dimensions_added": [
+        "time"
+      ],
+      "transcendental_class": [
+        "two_pi_rational",
+        "pi2k_via_matsubara"
+      ],
+      "signature_pi_intrinsic": true,
+      "graded": true,
+      "idempotent": false,
+      "has_inverse": true,
+      "input_layer": 1,
+      "output_layer": 2
+    }
+  ],
+  "examples_with_signatures": {
+    "hydrogen_lamb_shift_LS6a": {
+      "chain": [
+        "fock_conformal",
+        "spectral_action",
+        "sturmian",
+        "drake_swainson"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "K_subtract",
+          "Lambda",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy",
+          "energy"
+        ],
+        "transcendentals": [
+          "flow",
+          "pi2k_rational",
+          "rational",
+          "rational_kappa",
+          "sqrt_pi"
+        ],
+        "pi_intrinsic": true
+      },
+      "target_observable": "Lamb shift, energy units, contains pi^2",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "K_alpha_three_sector": {
+      "chain": [
+        "fock_conformal",
+        "hopf_bundle",
+        "spinor_lift"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "catalan_G",
+          "dirichlet_beta",
+          "half_int_hurwitz",
+          "odd_zeta",
+          "pi_hopf_base",
+          "rational_kappa"
+        ],
+        "pi_intrinsic": true
+      },
+      "target_observable": "K = pi(B+F-Delta) ~= 1/alpha (dimensionless)",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "stefan_boltzmann": {
+      "chain": [
+        "fock_conformal",
+        "observation_window"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z",
+          "beta_temp"
+        ],
+        "dimensions": [
+          "energy",
+          "time"
+        ],
+        "transcendentals": [
+          "pi2k_via_matsubara",
+          "rational_kappa",
+          "two_pi_rational"
+        ],
+        "pi_intrinsic": true
+      },
+      "target_observable": "Stefan-Boltzmann pi^2/90, free-energy density",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "he_ground_state_casimir_CI": {
+      "chain": [
+        "fock_conformal",
+        "wigner_3j"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "rational_kappa",
+          "sqrt_int_rationals"
+        ],
+        "pi_intrinsic": false
+      },
+      "target_observable": "He ground-state energy via Casimir CI",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "hydrogen_E_n_bohr": {
+      "chain": [
+        "fock_conformal"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "rational_kappa"
+        ],
+        "pi_intrinsic": false
+      },
+      "target_observable": "E_n = -Z^2/(2 n^2) Ha",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "spatial_casimir_S3_scalar": {
+      "chain": [
+        "fock_conformal"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "rational_kappa"
+        ],
+        "pi_intrinsic": false
+      },
+      "target_observable": "E_Cas = 1/240 (rational, no pi)",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "spatial_casimir_S3_dirac": {
+      "chain": [
+        "fock_conformal",
+        "spinor_lift"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "catalan_G",
+          "dirichlet_beta",
+          "half_int_hurwitz",
+          "odd_zeta",
+          "rational_kappa"
+        ],
+        "pi_intrinsic": false
+      },
+      "target_observable": "E_Cas^Dirac = 17/480 (rational, no pi)",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "uehling_VP": {
+      "chain": [
+        "fock_conformal",
+        "spectral_action"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Lambda",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy",
+          "energy"
+        ],
+        "transcendentals": [
+          "pi2k_rational",
+          "rational_kappa",
+          "sqrt_pi"
+        ],
+        "pi_intrinsic": true
+      },
+      "target_observable": "VP coefficient Pi = 1/(48 pi^2)",
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    }
+  },
+  "axis_independence": [
+    {
+      "id": "fock_conformal",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "hopf_bundle",
+      "axes_active": {
+        "variable": true,
+        "dimension": false,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": true
+      }
+    },
+    {
+      "id": "bargmann_segal",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": false,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "stereographic",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "sturmian",
+      "axes_active": {
+        "variable": false,
+        "dimension": false,
+        "transcendental_nontrivial": false,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "spectral_action",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": true
+      }
+    },
+    {
+      "id": "spinor_lift",
+      "axes_active": {
+        "variable": true,
+        "dimension": false,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "wigner_3j",
+      "axes_active": {
+        "variable": false,
+        "dimension": false,
+        "transcendental_nontrivial": false,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "wigner_D",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": false,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "wilson_plaquette",
+      "axes_active": {
+        "variable": true,
+        "dimension": false,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": true
+      }
+    },
+    {
+      "id": "vector_photon",
+      "axes_active": {
+        "variable": false,
+        "dimension": false,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": true
+      }
+    },
+    {
+      "id": "molframe_hypersph",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "drake_swainson",
+      "axes_active": {
+        "variable": true,
+        "dimension": false,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "rest_mass",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": false,
+        "transcendental_injects_pi": false
+      }
+    },
+    {
+      "id": "observation_window",
+      "axes_active": {
+        "variable": true,
+        "dimension": true,
+        "transcendental_nontrivial": true,
+        "transcendental_injects_pi": true
+      }
+    }
+  ],
+  "theorem_1_results": {
+    "hydrogen_lamb_shift_LS6a": {
+      "chain": [
+        "fock_conformal",
+        "spectral_action",
+        "sturmian",
+        "drake_swainson"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "K_subtract",
+          "Lambda",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy",
+          "energy"
+        ],
+        "transcendentals": [
+          "flow",
+          "pi2k_rational",
+          "rational",
+          "rational_kappa",
+          "sqrt_pi"
+        ],
+        "pi_intrinsic": true
+      },
+      "expected_dims": [
+        "energy"
+      ],
+      "expected_pi": true,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "K_alpha_three_sector": {
+      "chain": [
+        "fock_conformal",
+        "hopf_bundle",
+        "spinor_lift"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "catalan_G",
+          "dirichlet_beta",
+          "half_int_hurwitz",
+          "odd_zeta",
+          "pi_hopf_base",
+          "rational_kappa"
+        ],
+        "pi_intrinsic": true
+      },
+      "expected_dims": [],
+      "expected_pi": true,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "stefan_boltzmann": {
+      "chain": [
+        "fock_conformal",
+        "observation_window"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z",
+          "beta_temp"
+        ],
+        "dimensions": [
+          "energy",
+          "time"
+        ],
+        "transcendentals": [
+          "pi2k_via_matsubara",
+          "rational_kappa",
+          "two_pi_rational"
+        ],
+        "pi_intrinsic": true
+      },
+      "expected_dims": [
+        "energy",
+        "time"
+      ],
+      "expected_pi": true,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "he_ground_state_casimir_CI": {
+      "chain": [
+        "fock_conformal",
+        "wigner_3j"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "rational_kappa",
+          "sqrt_int_rationals"
+        ],
+        "pi_intrinsic": false
+      },
+      "expected_dims": [
+        "energy"
+      ],
+      "expected_pi": false,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "hydrogen_E_n_bohr": {
+      "chain": [
+        "fock_conformal"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "rational_kappa"
+        ],
+        "pi_intrinsic": false
+      },
+      "expected_dims": [
+        "energy"
+      ],
+      "expected_pi": false,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "spatial_casimir_S3_scalar": {
+      "chain": [
+        "fock_conformal"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "rational_kappa"
+        ],
+        "pi_intrinsic": false
+      },
+      "expected_dims": [
+        "energy"
+      ],
+      "expected_pi": false,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "spatial_casimir_S3_dirac": {
+      "chain": [
+        "fock_conformal",
+        "spinor_lift"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy"
+        ],
+        "transcendentals": [
+          "catalan_G",
+          "dirichlet_beta",
+          "half_int_hurwitz",
+          "odd_zeta",
+          "rational_kappa"
+        ],
+        "pi_intrinsic": false
+      },
+      "expected_dims": [
+        "energy"
+      ],
+      "expected_pi": false,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    },
+    "uehling_VP": {
+      "chain": [
+        "fock_conformal",
+        "spectral_action"
+      ],
+      "signature": {
+        "variables": [
+          "E",
+          "Lambda",
+          "Z",
+          "alpha"
+        ],
+        "dimensions": [
+          "energy",
+          "energy"
+        ],
+        "transcendentals": [
+          "pi2k_rational",
+          "rational_kappa",
+          "sqrt_pi"
+        ],
+        "pi_intrinsic": true
+      },
+      "expected_dims": [
+        "energy"
+      ],
+      "expected_pi": true,
+      "consistent_dims": true,
+      "consistent_pi": true,
+      "verdict": "PASS"
+    }
+  },
+  "theorem_2_results": {
+    "hydrogen_lamb_shift_LS6a": {
+      "chain": [
+        "fock_conformal",
+        "spectral_action",
+        "sturmian",
+        "drake_swainson"
+      ],
+      "all_perms_same_signature": true,
+      "non_commuting_pairs": [],
+      "n_permutations": 24,
+      "verdict": "PASS"
+    },
+    "K_alpha_three_sector": {
+      "chain": [
+        "fock_conformal",
+        "hopf_bundle",
+        "spinor_lift"
+      ],
+      "all_perms_same_signature": true,
+      "non_commuting_pairs": [
+        [
+          "hopf_bundle",
+          "spinor_lift"
+        ]
+      ],
+      "n_permutations": 6,
+      "verdict": "PASS"
+    },
+    "stefan_boltzmann": {
+      "chain": [
+        "fock_conformal",
+        "observation_window"
+      ],
+      "all_perms_same_signature": true,
+      "non_commuting_pairs": [],
+      "n_permutations": 2,
+      "verdict": "PASS"
+    },
+    "he_ground_state_casimir_CI": {
+      "chain": [
+        "fock_conformal",
+        "wigner_3j"
+      ],
+      "all_perms_same_signature": true,
+      "non_commuting_pairs": [],
+      "n_permutations": 2,
+      "verdict": "PASS"
+    },
+    "spatial_casimir_S3_dirac": {
+      "chain": [
+        "fock_conformal",
+        "spinor_lift"
+      ],
+      "all_perms_same_signature": true,
+      "non_commuting_pairs": [],
+      "n_permutations": 2,
+      "verdict": "PASS"
+    },
+    "uehling_VP": {
+      "chain": [
+        "fock_conformal",
+        "spectral_action"
+      ],
+      "all_perms_same_signature": true,
+      "non_commuting_pairs": [],
+      "n_permutations": 2,
+      "verdict": "PASS"
+    }
+  }
+}

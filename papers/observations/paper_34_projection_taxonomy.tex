@@ -595,6 +595,23 @@ mechanism.
 \end{itemize}
 \end{observation}
 
+\begin{remark}[variable--dimension correlation]
+\label{rem:vd_correlation}
+The variable axis and dimension axis are not independent: every
+projection in Section~\ref{sec:layer2} that introduces a physical
+dimension also introduces a physical variable that carries that
+dimension.  Of the fifteen projections, eight add a dimension and
+all eight also add the variable that carries it (perfect correlation
+on the V/D side); zero projections add a dimension without a
+variable.  The transcendental axis is the only one that admits an
+independence witness --- vector-photon promotion (\S~\ref{sec:layer2},
+projection~11) introduces $1/(4\pi)$ without introducing any new
+variable or dimension.  This is the structural content of
+Section~\ref{sec:axiomatization} (Theorem~3 composition table):
+of the three axes, only the transcendental axis is genuinely
+independent of the other two.
+\end{remark}
+
 % ===================================================================
 \section{The Empirical Matches Catalogue}
 \label{sec:catalog}
@@ -654,8 +671,20 @@ coupling & none & dimensionless & rational & exact symbolic \\
 $E_\text{Cas}^{S^3, \text{Dirac}} = 17/480$ (full Dirac) & Fock +
 Camporesi--Higuchi spinor lift & none & dimensionless & rational &
 exact symbolic \\
+$E_\text{Cas}^{\text{HO}, S^5} = -17/3840$ (3D HO, Bargmann--Segal) &
+Bargmann--Segal $+$ Casimir/$\zeta$-reg & none & dimensionless &
+rational & exact symbolic \\
+Hydrogen Bohr levels $E_n = -Z^2/(2n^2)$ Ha & Fock $+$ energy-shell
+rescaling & $Z, n$ & energy & rational & exact symbolic \\
+Static Coulomb-like Green's fn $(L+I)^{-1}$ on Hopf $S^3$ at
+$n_\text{max} = 2, 3$ & Fock $+$ discrete Green's (no continuous
+integration) & none & dimensionless & rational & exact symbolic at
+finite $n_\text{max}$ \\
 \midrule
 \textbf{Two-projection chain} & & & & & \\
+Stefan-Boltzmann $\pi^2/90$ on $S^3 \times S^1_\beta$ (high-$T$) &
+Fock $+$ observation/temporal-window $+$ Casimir/$\zeta$-reg & $T$ or
+$\beta$ & energy density & $\pi^2 \cdot \mathbb{Q}$ & exact symbolic \\
 Uehling shift $-27.13$ MHz at 2$S$ & spectral action $\circ$ Fock &
 $Z, \alpha$ & energy & $\pi^2{\cdot}\mathbb{Q}$ & $<1\%$ \\
 21~cm hyperfine splitting & spinor $\circ$ Fermi contact & $\alpha,
@@ -677,6 +706,10 @@ $\circ$ Sturmian $\circ$ Drake--Swainson & $Z, \alpha$ & energy & calibration
 $+$ flow & $-0.39\%$ (T$+$A cancellation) \\
 Lamb shift $1029$ MHz (LS-3) & Fock $\circ$ spectral action $\circ$
 Sturmian (acc.) & $Z, \alpha$ & energy & calibration & $-2.77\%$ (T$+$A)\\
+Heisenberg--Euler 1-loop $\alpha^2/(45\pi m_e^4)$ &
+Spectral action $+$ proper-time integration $+$ vector-photon (one loop)
+& $\alpha, m_e$ & length${}^4 \cdot$ energy${}^{-1}$ &
+$\alpha^2 \cdot \mathbb{Q} / \pi$ & structural (S) \\
 \midrule
 \textbf{Conjectural / Observation status} & & & & & \\
 $K = \pi(B + F - \Delta) \approx 1/\alpha$ & Fock $\circ$ Hopf
@@ -694,6 +727,20 @@ numerical observation without first-principles derivation
 (Paper~18 \S~III.5; Paper~2 status v2.26.1).}
 \label{tab:catalog}
 \end{longtable}
+
+\begin{remark}[signature $\ne$ value]
+\label{rem:signature_value}
+Theorem~\ref{thm:dimensional_consistency}'s signature consistency is
+a type-level statement: chains that produce the same signature can
+produce wildly different numerical values.  For example, the
+hydrogen Bohr level $E_n = -Z^2/(2n^2)$ (Fock alone, signature
+$\{$energy, no~$\pi\}$) and the hydrogen Lamb shift (Fock $+$
+spectral action $+$ Sturmian $+$ Drake--Swainson, signature
+$\{$energy, $\pi\}$) both have dimension $\{$energy$\}$, yet differ
+by 13 orders of magnitude.  The depth-prediction of
+\S~\ref{sec:prediction} addresses the value-level question;
+signature arithmetic addresses only the type-level question.
+\end{remark}
 
 % -------------------------------------------------------------------
 \subsection{Off-precision matches and error-source classification}
@@ -876,6 +923,119 @@ or perturbation order should be added next.
 \end{remark}
 
 % ===================================================================
+\section{Dimensional Axiomatization}
+\label{sec:axiomatization}
+% ===================================================================
+
+The projection dictionary of \S~\ref{sec:dictionary} treats each
+projection as a graded map along three axes: variables added,
+dimensions added, and transcendental class introduced.  Sprint TX-A
+(May~2026) treated this graded structure as an axiomatic system and
+tested three theorems analytically.  This section consolidates the
+verdicts; full data are in
+\texttt{debug/data/tx\_a\_projection\_table.json} and
+\texttt{debug/data/tx\_a\_composition\_table.json}, with verification
+driver \texttt{debug/tx\_a\_signature\_arithmetic.py}.
+
+\begin{theorem}[Dimensional Consistency]
+\label{thm:dimensional_consistency}
+For any projection chain $S = P_n \circ \cdots \circ P_1$ applied to
+the bare graph (Layer~1, dimensionless), the variable, dimension, and
+transcendental signatures of $S$ equal the union of the signatures of
+the constituent $P_i$:
+\[
+  \mathrm{sig}(P_n \circ \cdots \circ P_1)
+   = \bigcup_{i=1}^{n} \mathrm{sig}(P_i).
+\]
+The catalogue rows of \S~\ref{sec:catalog} satisfy this consistency
+check across all eight fully-tagged entries with non-trivial chains
+(Lamb shift, $K = \pi(B + F - \Delta)$, Stefan-Boltzmann, He CI,
+hydrogen $E_n$, scalar/Dirac spatial Casimir, Uehling VP).
+\end{theorem}
+
+The theorem is true by construction at the level of the dictionary
+metadata: each projection's signature is fixed in
+\S~\ref{sec:layer2}, so set/list union is a tautology.  Its
+non-trivial content is the empirical check that the catalogue's
+expected target signature matches the chain signature; this passes
+for all eight tested rows.
+
+\begin{theorem}[Weak Minimality]
+\label{thm:minimality}
+Two chains containing the same multiset of projections produce the
+same signature, hence are observationally indistinguishable at the
+level of dimensional types and transcendental classes.  They may
+differ at the operator-system level when bundle-non-trivial
+projections (Hopf, spectral action, Wilson) are composed with the
+spinor lift; these inequivalences are not visible to signature
+arithmetic and require explicit operator-system analysis (cf.\ the
+WH1 spectral truncation rounds 1--3 documented in
+\texttt{CLAUDE.md} \S~2).
+\end{theorem}
+
+The strong form of minimality (uniqueness up to commutation as
+operators on the Hilbert space) fails for the Paper~2 $K$-chain:
+\texttt{hopf} composed with \texttt{spinor\_lift} acts differently in
+the two orderings (Hopf-then-spinor produces Hopf-$S^2$ with Dirac
+fiber; spinor-then-Hopf gives a $\mathbb{Z}_2$-quotient of Dirac
+$S^3$ with half-integer charges).  The metadata-level test correctly
+flags this as the unique non-commuting pair in the worked examples.
+
+\begin{theorem}[Composition Algebra]
+\label{thm:composition_algebra}
+The 15$\times$15 composition table classifies each ordered pair
+$(P_1, P_2)$ as one of: \emph{commute} (admissible in both orders,
+disjoint variables); \emph{one-way} (admissible in only one order,
+constrained by Layer transitions); \emph{not composable};
+\emph{idempotent} (Layer-1 self-composition); \emph{self-compose}
+(non-trivial diagonal); \emph{variable conflict} (same variable name
+added by both); \emph{inverse pair} (one is the inverse of the
+other).  Of $15^2 = 225$ cells:
+\begin{itemize}
+\setlength\itemsep{0pt}
+\item $182$ commute (80.9\%);
+\item $22$ one-way pairs (constrained by Layer transitions);
+\item $6$ variable conflicts (energy-scale-conflating compositions
+of Fock, Bargmann--Segal, and spectral action);
+\item $3$ idempotent projections on the diagonal (Sturmian,
+Wigner~$3j$, Drake--Swainson);
+\item $3$ inverse pairs (stereographic, Wigner~$3j$, Wigner~$D$).
+\end{itemize}
+The most informative entry is the mutual one-way relation between
+\texttt{spectral\_action} and \texttt{observation\_window}: each is
+a Layer~1~$\to$~Layer~2 projection that consumes the bare graph
+independently, so neither feeds the other.  The metadata correctly
+encodes the field-theoretic UV/IR ordering anomaly --- the thermal
+limit $\beta \to \infty$ does not commute with the UV limit
+$\Lambda \to \infty$ in continuum QFT, and signature arithmetic
+captures the structural content of this asymmetry.
+\end{theorem}
+
+\begin{observation}[axes are not independent]
+\label{obs:axes_correlated}
+Of the three axes (variable, dimension, transcendental), only the
+transcendental axis is genuinely independent.  Cross-tabulating the
+fifteen projections by axis-flag pattern, no projection adds a
+dimension without also adding the variable that carries it (perfect
+V/D correlation, 8/8); zero projections fall into the
+$(\text{D-only})$ bucket.  The transcendental axis admits an
+independence witness: vector-photon promotion (\S~\ref{sec:layer2},
+projection~11) introduces $1/(4\pi)$ without adding any variable
+or dimension.  Two projections (\texttt{spectral\_action},
+\texttt{observation\_window}) move all three axes; these are the
+``heavy'' projections, carrying the most physical content per step.
+\end{observation}
+
+This observation has structural force.  The variable axis and
+dimension axis collapse to a single \emph{physical-content} axis
+without information loss; the transcendental axis remains
+independent.  The three-axis dictionary is therefore mildly
+overcomplete on the V/D side but irreducible on the
+transcendental side.  See Remark~\ref{rem:vd_correlation} in
+\S~\ref{sec:dictionary} for the parallel statement at the
+projection-row level.
+
+% ===================================================================
 \section{Falsifiable Prediction: Error Compounds with Projection Depth}
 \label{sec:prediction}
 % ===================================================================
@@ -1039,6 +1199,18 @@ rigidity theorems (Paper~24, Paper~31) at the operator-order level
 projection-dictionary axis can independently predict the asymmetry
 without invoking operator order is open.
 
+\item \textbf{Pure-axis projections.}  The current dictionary contains
+no projection that moves only the dimension axis (e.g., a
+unit-rescaling that introduces a length scale without a coordinate
+variable).  Whether such projections are structurally absent from the
+GeoVac framework, or merely absent from the current implementation,
+is open.  Two candidate additions surfaced by the TX-A axiomatization
+sprint: (a)~a gauge-choice projection (Coulomb vs Lorenz) that would
+sit in the pure-transcendental bucket alongside vector-photon, (b)~a
+spin-statistics projection that splits boson/fermion Matsubara
+content out of observation/temporal-window.  Neither is forced by
+current data.
+
 \end{enumerate}
 
 % ===================================================================
@@ -1055,13 +1227,25 @@ quantity in any GeoVac calculation enters through exactly one
 projection in Layer~2 and is fully traceable to it.
 
 The dictionary in this paper makes that statement operational.
-Thirteen projections are listed, each tagged by variables, dimension,
+Fifteen projections are listed, each tagged by variables, dimension,
 and transcendental signature.  An empirical matches catalogue uses
 these tags to organise the framework's known machine-precision
-agreements with standard physics values.  A falsifiable structural
-prediction emerges from the catalogue: error compounds with
-projection depth.  The prediction is consistent with current data
-and refinable by future calculations.
+agreements with standard physics values.  Sprint TX-A's
+dimensional axiomatization (\S~\ref{sec:axiomatization}) verified
+three structural theorems on this dictionary: dimensional consistency
+holds across all worked examples, weak minimality holds at the
+signature level (with the strong form failing on bundle-non-trivial
+spinor-lift compositions), and the 15$\times$15 composition table
+encodes the field-theoretic UV/IR ordering anomaly through the
+mutual one-way relation between spectral action and
+observation/temporal-window.  Of the three axes, only the
+transcendental axis is genuinely independent --- variable and
+dimension are perfectly correlated.  A falsifiable structural
+prediction (\S~\ref{sec:prediction}) emerges from the depth-grouped
+catalogue: error compounds with projection depth.  The prediction is
+consistent with current data, including the
+208/208-confirmation panel of Paper~35 Prediction~1
+(Sprint TX-B, May~2026), and refinable by future calculations.
 
 This paper introduces no new computational result.  Its contribution
 is a vocabulary that the framework has been needing.  With the

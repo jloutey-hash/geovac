@@ -1,0 +1,60 @@
+{
+  "observable_id": 1,
+  "observable_name": "Stefan-Boltzmann coefficient on S^3 x S^1_beta",
+  "predicted_class": "pi^2 / Q (specifically pi^2/90)",
+  "pi_predicted": true,
+  "computed_class": "pi^2/90 (exact symbolic; matches textbook)",
+  "pi_observed": true,
+  "match_with_prediction": true,
+  "symbolic_result": {
+    "zeta_R(4)_symbolic": "pi**4/90",
+    "stefan_boltzmann_pi2_over_90": "pi**2/90",
+    "stefan_boltzmann_decimal_50dps": "0.10966227112321509576482767777640167928126332674712",
+    "contains_pi": true
+  },
+  "high_T_numeric_check": [
+    {
+      "beta": 1.0,
+      "F_thermal_30dps": "2.13836467703054948168792289682",
+      "F_SB_total_30dps": "-2.16464646742227638303200739308",
+      "ratio_thermal_over_SB": "-0.987858622279774",
+      "n_max_truncation": 500
+    },
+    {
+      "beta": 0.3,
+      "F_thermal_30dps": "267.142976429839516681797891635",
+      "F_SB_total_30dps": "-267.240304620034160921488127635",
+      "ratio_thermal_over_SB": "-0.999635802726939",
+      "n_max_truncation": 500
+    },
+    {
+      "beta": 0.1,
+      "F_thermal_30dps": "21646.164356318841757814861969",
+      "F_SB_total_30dps": "-21646.4646742227590238393773194",
+      "ratio_thermal_over_SB": "-0.999986126237774",
+      "n_max_truncation": 600
+    },
+    {
+      "beta": 0.05,
+      "F_thermal_30dps": "346342.829985089643182108186539",
+      "F_SB_total_30dps": "-346343.43478756414438143003711",
+      "ratio_thermal_over_SB": "-0.999998253749274",
+      "n_max_truncation": 1100
+    },
+    {
+      "beta": 0.02,
+      "F_thermal_30dps": "13529038.9031330400139889139503",
+      "F_SB_total_30dps": "-13529040.4213892262674311329385",
+      "ratio_thermal_over_SB": "-0.999999887777984",
+      "n_max_truncation": 2600
+    }
+  ],
+  "verdict": "CONFIRMS Paper 35 Prediction 1: pi DOES appear because the Matsubara temporal sum (continuous-direction zeta) is the integration that produces it.",
+  "paper_34_projections": [
+    "Fock conformal projection (sets spatial spectrum)",
+    "Observation/temporal-window projection (compactifies time, injects 2*pi/beta)",
+    "Casimir/zeta-regularized integration (collapses Matsubara sum to zeta_R(4) = pi^4/90)"
+  ],
+  "temporal_integration_present": true,
+  "specific_integration": "Matsubara sum sum_{k != 0} (2*pi*k/beta)^{-2s} at s=2"
+}

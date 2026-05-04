@@ -1,0 +1,107 @@
+{
+  "sprint": "ST-SU3",
+  "theorem": "Theorem 3: CG obstruction status",
+  "question": "Does the Wilson SU(3) construction bypass Sprint 5 Track S5's (N,0)-tower CG obstruction?",
+  "gauge_level": {
+    "N_max=2": {
+      "N_max": 2,
+      "n_plaquettes": 15,
+      "n_forward_edges": 15,
+      "links_in_SU3": true,
+      "plaquette_holonomies_in_SU3": true,
+      "gauge_invariance": true,
+      "S_before_gauge": 30.308843551152297,
+      "S_after_gauge": 30.3088435511523,
+      "S_diff": 3.552713678800501e-15,
+      "verdict": "Wilson construction WORKS at gauge level"
+    },
+    "N_max=3": {
+      "N_max": 3,
+      "n_plaquettes": 88,
+      "n_forward_edges": 42,
+      "links_in_SU3": true,
+      "plaquette_holonomies_in_SU3": true,
+      "gauge_invariance": true,
+      "S_before_gauge": 167.28021452384795,
+      "S_after_gauge": 167.28021452384795,
+      "S_diff": 0.0,
+      "verdict": "Wilson construction WORKS at gauge level"
+    }
+  },
+  "matter_coupling": {
+    "N_max=2": {
+      "N_max": 2,
+      "shell_dimensions_actual": {
+        "0": 1,
+        "1": 3,
+        "2": 6
+      },
+      "shell_dimensions_expected_(N,0)_rep": {
+        "0": 1,
+        "1": 3,
+        "2": 6
+      },
+      "matches": {
+        "0": true,
+        "1": true,
+        "2": true
+      },
+      "wilson_link_rep_dimension": 3,
+      "matter_rep_dimensions": [
+        1,
+        3,
+        6
+      ],
+      "matter_coupling_obstruction": "Matter (N,0) reps have different dimensions on different shells. Wilson links (3-dim fundamental) cannot directly couple matter across shells without invoking CG intertwiners (Sprint 5 obstruction)."
+    },
+    "N_max=3": {
+      "N_max": 3,
+      "shell_dimensions_actual": {
+        "0": 1,
+        "1": 3,
+        "2": 6,
+        "3": 10
+      },
+      "shell_dimensions_expected_(N,0)_rep": {
+        "0": 1,
+        "1": 3,
+        "2": 6,
+        "3": 10
+      },
+      "matches": {
+        "0": true,
+        "1": true,
+        "2": true,
+        "3": true
+      },
+      "wilson_link_rep_dimension": 3,
+      "matter_rep_dimensions": [
+        1,
+        10,
+        3,
+        6
+      ],
+      "matter_coupling_obstruction": "Matter (N,0) reps have different dimensions on different shells. Wilson links (3-dim fundamental) cannot directly couple matter across shells without invoking CG intertwiners (Sprint 5 obstruction)."
+    }
+  },
+  "comparison": {
+    "SU(2)_on_S3": {
+      "manifold_equals_group": "S^3 = SU(2) (3-sphere is simply connected SU(2))",
+      "matter_rep": "spin-1/2 fundamental of SU(2), dim=2 -- SAME as link rep",
+      "natural_matter_coupling": "YES (psi_v -> g_v psi_v with same rep)",
+      "matter_sector": "Paper 14 Tier 2 Dirac fermions in (kappa, m_j) basis",
+      "rank": 1,
+      "cartan_torus": "U(1) -- single phase"
+    },
+    "SU(3)_on_S5_Bargmann": {
+      "manifold_equals_group": "S^5 != SU(3) (S^5 is the unit sphere in C^3, SU(3) is 8-dim)",
+      "matter_rep": "(N,0) symmetric reps of SU(3), dim=(N+1)(N+2)/2 -- DIFFERENT per shell",
+      "natural_matter_coupling": "NO -- matter rep changes per shell; coupling requires CG intertwiners (Sprint 5 negative)",
+      "matter_sector": "the (N,0) shells themselves; no natural Dirac matter",
+      "rank": 2,
+      "cartan_torus": "U(1) x U(1) -- two phases"
+    },
+    "structural_punchline": "On S^3 the manifold IS the gauge group, so matter and gauge live in the same Hilbert space. On S^5 the gauge group is external and 8-dimensional while the manifold is 5-dimensional; matter lives in a representation tower whose dimension grows with shell index. Wilson gauge is well-defined as a pure-gauge theory on either; matter coupling is natural on S^3 but encounters Sprint 5's CG obstruction on S^5."
+  },
+  "overall_verdict": "BYPASSES at the gauge level (Wilson construction works), rediscovers the CG obstruction at the matter-coupling level. Both verdicts coexist: SU(3) Wilson is a self-consistent gauge-only theory on the Bargmann S^5 graph; matter coupling to the (N,0) shells encounters the same CG-intertwiner structure that Sprint 5 identified."
+}

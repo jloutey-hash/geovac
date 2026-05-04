@@ -1,0 +1,115 @@
+{
+  "observable_id": 2,
+  "observable_name": "Spatial Casimir on Bargmann-Segal S^5 for 3D HO",
+  "predicted_class": "exact rational, no pi",
+  "pi_predicted": false,
+  "computed_class": "exact rational (E_Cas = -17/3840)",
+  "pi_observed": false,
+  "match_with_prediction": true,
+  "result": {
+    "spectrum_source": "Paper 24 Eq (12), HO on (N,0) Bargmann-Segal tower",
+    "spectrum": "E_N = N + 3/2, deg d_N = (N+1)(N+2)/2",
+    "spectral_zeta_form": "zeta_X(s) = (1/2)[zeta_R(s-2, 3/2) - (1/4) zeta_R(s, 3/2)]",
+    "intermediate_zeta_values": {
+      "B_2(3/2)": "11/12",
+      "B_4(3/2)": "127/240",
+      "zeta_R(-1, 3/2)": "-11/24",
+      "zeta_R(-3, 3/2)": "-127/960",
+      "bracket": "-17/960",
+      "zeta_X(-1)": "-17/1920"
+    },
+    "E_Cas_symbolic": "-17/3840",
+    "E_Cas_numeric_50dps_mpmath": "-0.00442708333333333333333333333333",
+    "is_rational": true,
+    "contains_pi": false,
+    "matches_KG5_Dirac_S3_relation": "zeta_X^HO_S5(-1) = (1/8) zeta_|D|^Dirac_S3(-1) structurally; both arise from the same Hurwitz shift a=3/2 mechanism",
+    "direct_partial_sum_first_6_terms": [
+      {
+        "N": 0,
+        "E_N": "3/2",
+        "d_N": "1",
+        "contribution_to_E_Cas_no_reg": "3/4",
+        "contribution_in_Q": true
+      },
+      {
+        "N": 1,
+        "E_N": "5/2",
+        "d_N": "3",
+        "contribution_to_E_Cas_no_reg": "15/4",
+        "contribution_in_Q": true
+      },
+      {
+        "N": 2,
+        "E_N": "7/2",
+        "d_N": "6",
+        "contribution_to_E_Cas_no_reg": "21/2",
+        "contribution_in_Q": true
+      },
+      {
+        "N": 3,
+        "E_N": "9/2",
+        "d_N": "10",
+        "contribution_to_E_Cas_no_reg": "45/2",
+        "contribution_in_Q": true
+      },
+      {
+        "N": 4,
+        "E_N": "11/2",
+        "d_N": "15",
+        "contribution_to_E_Cas_no_reg": "165/4",
+        "contribution_in_Q": true
+      },
+      {
+        "N": 5,
+        "E_N": "13/2",
+        "d_N": "21",
+        "contribution_to_E_Cas_no_reg": "273/4",
+        "contribution_in_Q": true
+      }
+    ],
+    "transcendental_ledger": [
+      {
+        "step": "(1) Bargmann-Segal HO spectrum E_N = N + 3/2 (Paper 24, Eq 12)",
+        "value": "E_N rational (half-integer); d_N = (N+1)(N+2)/2 rational",
+        "transcendentals": "NONE"
+      },
+      {
+        "step": "(2) Spectral zeta zeta_X(s) = (1/2) sum_N (N+1)(N+2) (N+3/2)^{-s}",
+        "value": "= (1/2) [zeta_R(s-2, 3/2) - (1/4) zeta_R(s, 3/2)] (Hurwitz form)",
+        "transcendentals": "NONE in symbolic form"
+      },
+      {
+        "step": "(3) Bernoulli polynomial values at 3/2",
+        "value": "B_2(3/2) = 11/12, B_4(3/2) = 127/240",
+        "transcendentals": "NONE -- exact rationals"
+      },
+      {
+        "step": "(4) Hurwitz zeta values via -B_{n+1}(a)/(n+1)",
+        "value": "zeta_R(-1, 3/2) = -11/24, zeta_R(-3, 3/2) = -127/960",
+        "transcendentals": "NONE -- exact rationals"
+      },
+      {
+        "step": "(5) Bracket [zeta_R(-3, 3/2) - (1/4) zeta_R(-1, 3/2)]",
+        "value": "= -17/960",
+        "transcendentals": "NONE"
+      },
+      {
+        "step": "(6) Spectral zeta at -1: zeta_X(-1) = (1/2) bracket",
+        "value": "= -17/1920",
+        "transcendentals": "NONE"
+      },
+      {
+        "step": "(7) Casimir energy E_Cas = (1/2) zeta_X(-1)",
+        "value": "= -17/3840",
+        "transcendentals": "NONE -- pure rational"
+      }
+    ]
+  },
+  "verdict": "CONFIRMS Paper 35 Prediction 1",
+  "paper_34_projections": [
+    "Bargmann-Segal projection (Paper 24)",
+    "Casimir/zeta-regularized integration over discrete spatial spectrum"
+  ],
+  "temporal_integration_present": false,
+  "specific_integration": "None -- pure spatial mode-counting; no Matsubara, no proper-time, no Mellin"
+}

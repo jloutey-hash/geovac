@@ -1,0 +1,98 @@
+{
+  "sprint": "ST-SU3",
+  "theorem": "Theorem 1: Cartan torus reduction SU(3) -> U(1) x U(1)",
+  "Bargmann_S5_graph": true,
+  "results": {
+    "N_max=2": {
+      "N_max": 2,
+      "n_plaquettes": 182,
+      "n_forward_edges": 15,
+      "n_trials": 5,
+      "max_diff": 5.684341886080802e-14,
+      "trials": [
+        {
+          "trial": 0,
+          "beta": 2.534679833428171,
+          "S_SU3": 470.57442431289655,
+          "S_U1xU1": 470.57442431289655,
+          "diff": 0.0
+        },
+        {
+          "trial": 1,
+          "beta": 3.226183245862828,
+          "S_SU3": 598.9711724996884,
+          "S_U1xU1": 598.9711724996884,
+          "diff": 0.0
+        },
+        {
+          "trial": 2,
+          "beta": 2.391878062389071,
+          "S_SU3": 447.76424489014687,
+          "S_U1xU1": 447.7642448901468,
+          "diff": 5.684341886080802e-14
+        },
+        {
+          "trial": 3,
+          "beta": 2.613717555828822,
+          "S_SU3": 479.62661170304295,
+          "S_U1xU1": 479.62661170304295,
+          "diff": 0.0
+        },
+        {
+          "trial": 4,
+          "beta": 3.1851486959169977,
+          "S_SU3": 556.8650389241419,
+          "S_U1xU1": 556.8650389241419,
+          "diff": 0.0
+        }
+      ],
+      "verdict": "Cartan reduction holds at machine precision"
+    },
+    "N_max=3": {
+      "N_max": 3,
+      "n_plaquettes": 7765,
+      "n_forward_edges": 42,
+      "n_trials": 5,
+      "max_diff": 1.4551915228366852e-11,
+      "trials": [
+        {
+          "trial": 0,
+          "beta": 4.431878781562703,
+          "S_SU3": 34376.71531265604,
+          "S_U1xU1": 34376.71531265605,
+          "diff": 1.4551915228366852e-11
+        },
+        {
+          "trial": 1,
+          "beta": 4.810619139208639,
+          "S_SU3": 37564.8904726061,
+          "S_U1xU1": 37564.8904726061,
+          "diff": 0.0
+        },
+        {
+          "trial": 2,
+          "beta": 1.7162761880838293,
+          "S_SU3": 13323.740483122912,
+          "S_U1xU1": 13323.740483122912,
+          "diff": 0.0
+        },
+        {
+          "trial": 3,
+          "beta": 0.25953580056144565,
+          "S_SU3": 2010.6210050539125,
+          "S_U1xU1": 2010.6210050539128,
+          "diff": 2.2737367544323206e-13
+        },
+        {
+          "trial": 4,
+          "beta": 0.17561913705746626,
+          "S_SU3": 1370.0090314070815,
+          "S_U1xU1": 1370.0090314070815,
+          "diff": 0.0
+        }
+      ],
+      "verdict": "Cartan reduction holds at machine precision"
+    }
+  },
+  "overall_verdict": "POSITIVE: Cartan torus reduction is exact at machine precision"
+}
