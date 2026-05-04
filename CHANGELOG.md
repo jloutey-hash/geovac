@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.27.3] - 2026-05-04
+
+### Added — Sprint TS (Triple-Taxonomy Bridge) and WH1-R3.5 closure
+
+Eight-track sprint testing whether the Paper 34 projection taxonomy and the Paper 32 spectral-triple framing are two views of the same structure, plus completion of the WH1 R3.5 thread on the full Dirac operator system.
+
+**Sprint TS — Triple-Taxonomy Bridge:**
+
+- **Track A (GH convergence sketch):** Leimbach–vS 2024 torus proof transports cleanly to S³ via Peter–Weyl on SU(2). Fock-graph index (n, l, m_l) IS the Peter–Weyl basis under n = 2j+1; the central spectral Fejér kernel is the abelianizing assumption that makes Schur–Fourier transference go through. Verdict (b): reachable in 4–8 weeks, with R3.5 (full Dirac, both chiralities) as 2-week prerequisite. Five-lemma roadmap. Memo: `debug/track_ts_a_gh_convergence_memo.md`.
+- **Track B (15-row triple↔taxonomy dictionary):** Mechanical mapping of each Paper 34 projection to its sector of (A, H, D), Connes-axiom impact, universal/Coulomb status, transcendental class. 9 candidate asymmetries flagged. Memo: `debug/track_ts_b_dictionary_memo.md`.
+- **Track C (asymmetry investigation):** Three sub-tasks. (i) **C-1 ERRATUM:** TX-A memo's "spectral_action ↔ observation_window mutually one-way (UV/IR ordering anomaly)" claim was a confabulation — JSON has them commuting. CLAUDE.md §2 TX-A bullet, Paper 34 §VII (T3 theorem) and §IX (Conclusion), and memory file all corrected. The QFT UV/IR anomaly is real physics that TX-A's coarse layer-grading cannot see; finer output_layer index is the natural refinement. (ii) **C-7:** shared-Hopf hypothesis on K = π(B+F−Δ) NOT confirmed; F = D_{n²}(d_max) and Δ⁻¹ = g_3^Dirac are derived without invoking Hopf; outer π already counted in depth-3 chain. **Twelve mechanisms now eliminated** for K = single-principle derivation. Paper 34 §VIII.3 sharpened with Track TS-C update. (iii) **#14 rest-mass:** confirmed as central deformation D² → D² + m²·𝟙. Drake-Swainson passes the same test. **New tier in Paper 31 §VII.2.5: parametric / central sector**, with rest-mass and Drake-Swainson as charter members. Memo: `debug/track_ts_c_asymmetry_investigation_memo.md`.
+- **Track D (Paper 35 × triple cross-check):** Outcome 1 — all 15 projections agree under both lenses. Every π-source reduces to one of three triple-framing mechanisms (M1 Hopf-base measure Vol(S²)/4; M2 Seeley–DeWitt √π on S³; M3 vertex-topology Hurwitz Dirichlet L). Paper 35 Prediction 1 promotes from "208/208 empirical" to candidate spectral-triple THEOREM. Memo: `debug/track_ts_d_paper35_triple_test_memo.md`.
+- **Track E1 (theorem promotion):** Theorem reachable as stated, no fourth mechanism. **Paper 32 §VIII added** (~140 lines LaTeX): π-source case-exhaustion theorem, proof skeleton, three remarks (joint engagement, K status, falsification target). Inserted between §VII (Coulomb/HO asymmetry) and §IX (Marcolli–vS Lineage). Memo: `debug/track_ts_e1_theorem_promotion_memo.md`.
+- **Track E3 (sixteenth projection falsification):** All three candidates REDUCE to combinations of M1/M2/M3 (continuum gravity → M1+M2; anomaly classes → M1+M2+M3; principal bundles → M1 normalisations against integer integrands). **Headline structural finding:** M1, M2, M3 are not three independent mechanisms but **three sub-cases of a single master Mellin-engine mechanism** π-source = M[Tr(D^k · e^{−tD²})] with k ∈ {0, 1, 2} selecting the sub-mechanism (k=0 → Hopf-base, k=1 → vertex parity, k=2 → spectral action). **Paper 18 §III.7 sharpened** with the master-mechanism reading. Falsification target flagged: discrete c_1 on Hopf S³ graph at n_max=3 (predicted integer-valued). Memo: `debug/track_ts_e3_sixteenth_projection_memo.md`.
+
+**WH1-R3.5 — full Dirac (both chiralities) operator system, COMPLETE 2026-05-04:**
+
+- New module `geovac/full_dirac_operator_system.py` (~580 lines, 29 tests) with `FullDiracLabel`, `FullDiracTruncatedOperatorSystem`, truthful and offdiag CH builders.
+- All five computational legs done: truthful n_max=2,3; Weyl-only truthful n_max=3 reference; offdiag n_max=2,3.
+- **Headline numbers (offdiag CH n_max=3, full Dirac):** dim_H = 40, total pairs 780, **+∞ count: 0** (down from 624 in truthful), forced zeros 60 (m-reflection), finite count 720, Pearson nz **−0.2501**, Spearman nz −0.2300.
+- **Refactor of `geovac/connes_distance.py`:** kernel of [D, ·] in O is structural data of (op_sys, D); was being recomputed inside every per-pair SDP call. Cached once in `compute_distance_matrix` and passed through. Also removed redundant 2nd SDP solve (feasible set is symmetric in x, so max diff = max −diff). All 17 tests pass; regression vs n_max=2 baseline at 5×10⁻⁹ max diff. **Speedup: ~15–25× per-pair**, n_max=2 offdiag dropped from ~10–15 min to **39 seconds**; n_max=3 offdiag completed in **66 minutes** vs projected 1–3 hours.
+- **Track A's L1 lemma reformulation:** original L1 ("truthful CH, every cross-pair finite") is FALSE at every tested n_max. **L1' (offdiag CH, every cross-pair finite) is VERIFIED** at n_max=2 and n_max=3. The offdiag CH operator system is the natural setting for Track A's GH proof: it includes shell-coupling multipliers M_{N,L,M} that break ker([D, ·]) ∩ O_h down to ℂ·𝟙 structurally. Track A's 4–8 week timeline is preserved with this reformulation. Memo: `debug/wh1_r35_full_dirac_memo.md`. New memory: `wh1_r35_full_dirac_complete.md`.
+
+**Cross-paper amendments applied this version:**
+
+- Paper 32 §VIII (case-exhaustion theorem, ~140 LaTeX lines)
+- Paper 18 §III.7 (master-mechanism reading paragraph)
+- Paper 31 §VII.2.5 (parametric / central sector)
+- Paper 34 §VII T3 theorem and §IX conclusion (TS-C erratum)
+- Paper 34 §VIII.3 (Track TS-C update on K's depth-prediction anomaly)
+- Paper 35 §VII new subsection on TS-D promotion to spectral-triple theorem
+- CLAUDE.md §2 Sprint TS bullet, §6 Paper 32 inventory entries
+
+**New code/tests:** `geovac/full_dirac_operator_system.py`, `tests/test_full_dirac_operator_system.py` (29 tests), refactored `geovac/connes_distance.py` (kernel cache + redundant solve removal).
+
+**Standing open items:** R2.5 keystone (Peter–Weyl GH on full state space, 4–8 weeks) and Lemma 5.3 Lipschitz bound on offdiag CH multipliers (1–2 weeks; infrastructure ready) for Track A's GH proof.
+
 ## [2.27.2] - 2026-05-03
 
 ### Added — Paper 35 (Time as Projection) and Paper 36 (Bound-State QED on S³)

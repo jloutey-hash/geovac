@@ -310,6 +310,7 @@ def compute_connes_distance(
     solver: str = "SCS",
     solver_kwargs: Optional[dict] = None,
     verbose: bool = False,
+    kernel_basis: Optional[List[np.ndarray]] = None,
 ) -> float:
     """Compute d_D(phi_v, phi_w) on the truncated operator system.
 
@@ -329,6 +330,11 @@ def compute_connes_distance(
         Extra keyword arguments to pass to ``problem.solve``.
     verbose : bool
         Print solver progress.
+    kernel_basis : list of ndarray, optional
+        Pre-computed orthonormal HS-basis of ker([D, .]) cap O_h. If None,
+        computed via ``_kernel_of_commutator_in_O(op_sys, D)``. Pre-computing
+        and passing is the recommended path when computing many pair distances
+        at fixed (op_sys, D); see ``compute_distance_matrix``.
 
     Returns
     -------
@@ -400,7 +406,8 @@ def compute_connes_distance(
     #       cost), so d_D(phi_v, phi_w) = +infinity. Detect and return.
     #   (b) E_v - E_w is HS-orthogonal to ker([D, .]) cap O_h: the SDP is
     #       well-posed once we pin x orthogonally to the kernel.
-    kernel_basis = _kernel_of_commutator_in_O(op_sys, D, tol=1e-8)
+    if kernel_basis is None:
+        kernel_basis = _kernel_of_commutator_in_O(op_sys, D, tol=1e-8)
     E_diff = np.zeros((N, N), dtype=np.complex128)
     E_diff[v_idx, v_idx] = 1.0
     E_diff[w_idx, w_idx] = -1.0
@@ -419,27 +426,25 @@ def compute_connes_distance(
     # Objective: maximize |<E_v - E_w, x>_HS| = |x[v,v] - x[w,w]|.
     # x[v_idx, v_idx] is the diagonal, real for Hermitian x.
     diff = cp.real(x_expr[v_idx, v_idx]) - cp.real(x_expr[w_idx, w_idx])
-    # cvxpy doesn't directly maximize an absolute value (non-DCP).
-    # Standard trick: solve two LPs (max diff, max -diff), take the larger.
-    best = -np.inf
-    for sense in (+1, -1):
-        prob = cp.Problem(cp.Maximize(sense * diff), constraints)
-        kwargs = dict(solver=solver, verbose=verbose)
-        if solver_kwargs:
-            kwargs.update(solver_kwargs)
-        try:
-            prob.solve(**kwargs)
-        except cp.SolverError as e:  # pragma: no cover
-            raise RuntimeError(f"SDP solver {solver} failed: {e}")
-        if prob.status not in ("optimal", "optimal_inaccurate"):
-            raise RuntimeError(
-                f"SDP did not converge: status={prob.status}, sense={sense}, "
-                f"v={v_idx}, w={w_idx}"
-            )
-        val = float(prob.value)
-        if val > best:
-            best = val
-    return max(best, 0.0)
+    # The feasible set is symmetric in x (Hermitian, norm ball, and linear
+    # gauge-fix are all symmetric: x feasible <=> -x feasible). Therefore
+    # max(diff) = max(-diff) = max(|diff|), and a single solve suffices.
+    # The original implementation solved both senses and took the max; we
+    # retain a defensive max(., 0.0) clip in case of numerical roundoff.
+    prob = cp.Problem(cp.Maximize(diff), constraints)
+    kwargs = dict(solver=solver, verbose=verbose)
+    if solver_kwargs:
+        kwargs.update(solver_kwargs)
+    try:
+        prob.solve(**kwargs)
+    except cp.SolverError as e:  # pragma: no cover
+        raise RuntimeError(f"SDP solver {solver} failed: {e}")
+    if prob.status not in ("optimal", "optimal_inaccurate"):
+        raise RuntimeError(
+            f"SDP did not converge: status={prob.status}, "
+            f"v={v_idx}, w={w_idx}"
+        )
+    return max(float(prob.value), 0.0)
 
 
 def compute_distance_matrix(
@@ -468,15 +473,20 @@ def compute_distance_matrix(
     -----
     For an N x N matrix only the strict upper triangle (N(N-1)/2 pairs) is
     computed; the diagonal is zero by definition and the lower triangle is
-    filled by symmetry. Each pair requires two SDPs (max(diff), max(-diff)),
-    so the total cost is N(N-1) SDPs.
+    filled by symmetry. Each pair requires one SDP under the feasible-set
+    symmetry, so the total cost is N(N-1)/2 SDPs.
 
-    At n_max=2 this is 5*4 = 20 SDPs (~5 s with SCS). At n_max=3 this is
-    14*13 = 182 SDPs (~minutes).
+    The kernel of [D, .] in O is structural data of (op_sys, D) and depends
+    on neither v nor w. We compute it once here and pass it into every
+    per-pair call to avoid redundant SVDs (one per pair previously).
     """
     N = op_sys.dim_H
     if D is None:
         D = default_dirac(op_sys)
+
+    # Compute kernel once: this is structural data of (op_sys, D), reused
+    # across all (v, w) pairs.
+    kernel_basis = _kernel_of_commutator_in_O(op_sys, D, tol=1e-8)
 
     dist = np.zeros((N, N), dtype=float)
     for v_idx in range(N):
@@ -484,6 +494,7 @@ def compute_distance_matrix(
             d = compute_connes_distance(
                 op_sys, v_idx, w_idx, D=D,
                 solver=solver, solver_kwargs=solver_kwargs, verbose=verbose,
+                kernel_basis=kernel_basis,
             )
             dist[v_idx, w_idx] = d
             dist[w_idx, v_idx] = d

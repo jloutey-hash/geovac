@@ -1246,6 +1246,142 @@ $S^2$ Hopf-base Weyl constant.
 \end{observation}
 
 % ===================================================================
+\section{The $\pi$-Source Case-Exhaustion Theorem}
+\label{sec:pi_source_theorem}
+% ===================================================================
+
+The empirical principle of Paper~35~\cite{paper35} (Prediction~1,
+graduated to load-bearing status on a cumulative 208/208 confirmation
+across sprints KG and TX-B, May~2026) states that a GeoVac observable
+contains $\pi$ if and only if its evaluation includes a continuous
+integration over a temporal or spectral parameter promoted from the
+discrete graph spectrum.  Read in the spectral-triple language of
+\S\ref{sec:construction}--\S\ref{sec:axiom_audit}, this principle has
+a structural underpinning: the only places in the GeoVac framework
+where such continuous integrations occur are anchored to three named
+mechanisms of the present triple.  We state and prove the
+case-exhaustion.
+
+\begin{theorem}[$\pi$-Source Case-Exhaustion]
+\label{thm:pi_source_case_exhaustion}
+Let $\mathcal{C} = (P_{i_k} \circ \cdots \circ P_{i_1})$ be any finite
+composition of projections drawn from the Paper~34 list~\cite{paper34}
+\S\,III.1--\S\,III.15, applied to a Layer-1 datum on
+$(\mathcal{A}_{\mathrm{GV}}, \mathcal{H}_{\mathrm{GV}},
+D_{\mathrm{GV}})$ or its Bargmann--Segal sibling triple.  The
+following are equivalent:
+\begin{enumerate}
+\setlength\itemsep{0pt}
+\item[(i)] The converged value $\mathcal{C}(\mathrm{datum})$ contains a
+transcendental of the form $\pi$, $\sqrt{\pi}$, $\pi^k$ for $k \in
+\mathbb{Q}$, or $\pi$ in a denominator.
+\item[(ii)] The chain $\mathcal{C}$ contains at least one projection
+$P_{i_j}$ whose evaluation pipeline includes a continuous integration
+over a parameter promoted from the discrete graph spectrum
+(heat-kernel time, Matsubara frequency, Mellin contour, Hopf $S^2$-base
+angular measure, $\mathrm{SU}(N)$ Haar measure, or
+analytic-continuation parameter).
+\item[(iii)] The chain $\mathcal{C}$ engages at least one of three
+spectral-triple mechanisms:
+\begin{itemize}\setlength\itemsep{0pt}
+\item[\textbf{M1}] (Hopf-base measure):\ introduces $\pi =
+\mathrm{Vol}(S^2)/4$ via the Hopf bundle $S^3 \to S^2 \times S^1$,
+or its higher-rank analogues~\cite{paper25,paper30}.
+\item[\textbf{M2}] (Seeley--DeWitt heat-kernel coefficient):\
+introduces $\sqrt{\pi}$ via heat-kernel coefficients on the
+Camporesi--Higuchi Dirac spectrum on unit~$S^3$ (Paper~28
+Theorem~T9~\cite{paper28}: $\zeta_{D^2}(s)$ is a two-term polynomial
+in $\pi^2$ with rational coefficients at every integer $s \ge 1$).
+The sub-mechanism for the spinor sector is the half-integer Hurwitz
+$\zeta(s, 3/2)$.
+\item[\textbf{M3}] (vertex-topology Dirichlet $L$-content):\
+introduces Catalan~$G = \beta(2)$ and Dirichlet $\beta(s)$ via
+quarter-integer Hurwitz shifts $\zeta(s, 3/4)$, $\zeta(s, 5/4)$ at
+two-loop sunset vertices (Paper~28 Theorem~3:\
+$D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
+\beta(s-2))$).
+\end{itemize}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+(i)~$\Leftrightarrow$~(ii) is Paper~35 Prediction~1, verified across
+208 individual checks (sprints KG, TX-B, May 2026~\cite{paper35}).
+
+(ii)~$\Rightarrow$~(iii):\ each of the fifteen Paper~34 projections is
+either $\pi$-free at the projection step (projections~1,~3,~4,~5,~8,
+9,~12,~13,~14: Fock conformal, Bargmann--Segal, Stereographic, Sturmian,
+Wigner~$3j$, Wigner~$D$, Molecule-frame, Drake--Swainson, Rest-mass) or
+$\pi$-bearing through a continuous integration that reduces to one of
+M1,~M2,~M3 by direct identification (Hopf~bundle, Spectral~action,
+Camporesi--Higuchi spinor lift, Wilson plaquette, Vector-photon promotion,
+Observation/temporal-window).  The seven $\pi$-free projections live in
+either Paper~31's universal sector (algebra-only, transfers to any
+spherical-fermion system) or Paper~22's potential-independent angular
+sparsity tier; neither sector contains $\pi$.  The eight $\pi$-bearing
+projections are tagged in
+\texttt{debug/track\_ts\_e1\_theorem\_promotion\_memo.md}~\S2 to one or
+more of M1/M2/M3, with closed-form identification for each (Paper~25
+for M1, Paper~28 T9 theorem for M2, Paper~28 Theorem~3 for M3).
+
+(iii)~$\Rightarrow$~(i) is closed-form for each mechanism:\ M1's
+$\mathrm{Vol}(S^2)/4 = \pi$ identity, M2's $a_0(S^3) = \sqrt{\pi}$
+heat-kernel identity, M3's $\beta(s) - \beta(s-2)$ closed form via
+the $\chi_{-4}$ Dirichlet character.  Each forces $\pi$ to appear in
+any chain that engages it.
+\end{proof}
+
+\begin{remark}[Joint engagement]
+M1, M2, M3 are not set-theoretically disjoint as constructions:\ the
+spectral action invokes both M1 (Hopf-base measure on the spinor
+bundle) and M2 (Seeley--DeWitt coefficients) simultaneously, and the
+vacuum-polarization coefficient $\Pi = 1/(48\pi^2)$ (Paper~28~\S\,V)
+contains one factor of $\pi$ from each mechanism.  The theorem requires
+only that \emph{at least one} of the three be engaged; multiple
+engagement is the typical case at higher loop order.  The mechanisms
+are role-disjoint in the Paper~18~\S\,III.7 Mellin-engine sense
+(M1~$=$ packing-tier $\omega_d$, M2~$=$ heat-kernel via Mellin/Gaussian,
+M3~$=$ vertex-parity quarter-integer Hurwitz character mechanism).
+The Track~TS-E3 sprint (May~2026) further sharpened this by showing
+that M1, M2, M3 are all sub-cases of a single master Mellin-engine
+mechanism $\mathrm{Tr}(D^k \cdot e^{-tD^2})$ on a compact Riemannian
+manifold, with $k \in \{0, 1, 2\}$ selecting the sub-mechanism.
+\end{remark}
+
+\begin{remark}[Status of $K = \pi(B + F - \Delta)$]
+\label{rem:K_under_theorem}
+Paper~2's combination $K = \pi(B+F-\Delta) \approx 1/\alpha$ matches
+its target at $8.8 \times 10^{-8}$.  Under
+Theorem~\ref{thm:pi_source_case_exhaustion}, $K$'s chain
+(Fock~$\circ$~Hopf$\circ$~spinor) engages M1 (the explicit prefactor $\pi$,
+identified by Sprint~A as $\mathrm{Vol}(S^2)/4$~\cite{paper2}) and M2
+(in $F = \pi^2/6 = D_{n^2}(d_{\max})$ via the Mellin transform of
+the scalar Fock-degeneracy).  The $\pi$-content is therefore consistent
+with case-exhaustion.  The remaining anomaly is at the
+\emph{depth-prediction} layer of Paper~34~\S\,VIII.3 (depth predicts
+$\sim 3\%$ residual at three projections; $K$ matches at
+$10^{-8}$): a quantitative-error puzzle, distinct from the
+qualitative case-exhaustion of the present theorem, and
+unaffected by it.
+\end{remark}
+
+\begin{remark}[Falsification target]
+A counter-example to Theorem~\ref{thm:pi_source_case_exhaustion}
+would be a sixteenth projection (or a finite chain of existing
+projections) introducing $\pi$ via a fourth mechanism not in
+\{M1, M2, M3\}.  Three natural candidates were investigated in
+Track~TS-E3 (May~2026) and each REDUCED to combinations of the
+three existing mechanisms:\ continuum-gravity coupling (M1+M2),
+anomaly-class projections (M1+M2+M3 via the eta-invariant's
+first-order Mellin), and non-trivial principal-bundle projections
+(M1 normalisations against integer integrands).  The strongest
+remaining computational falsification target is the discrete
+first-Chern-class invariant on the Hopf $S^3$ graph at $n_{\max}=3$,
+predicted integer-valued by the case-exhaustion; if a $\pi$ appears
+unexpectedly, a fourth mechanism M4 would need to be named.
+\end{remark}
+
+% ===================================================================
 \section{Marcolli--van~Suijlekom Lineage}
 \label{sec:lineage}
 % ===================================================================

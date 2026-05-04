@@ -817,6 +817,68 @@ re-derived for the new system:
   analog would have to be worked out separately).
 \end{itemize}
 
+\subsection{The parametric / central sector (Track TS-C, 2026-05-04)}
+\label{sec:parametric_central_sector}
+
+The binary $\mathcal{A}$-versus-$D$ split is, on closer inspection,
+slightly too coarse.  There exists a class of $D$-deformations
+that are not Coulomb-specific because they live in the
+\emph{centre} of the operator algebra acting on $\mathcal{H}$.
+Concretely, deformations of the form
+\[
+D \mapsto D + c \cdot \mathbb{1}_{\mathcal{H}},
+\quad c \in \mathbb{C},
+\]
+or, equivalently, additive shifts of the squared spectrum
+$D^2 \mapsto D^2 + c \cdot \mathbb{1}$, leave every Connes axiom
+unchanged: bounded commutators $[D + c\mathbb{1}, a] = [D, a]$,
+the order-one condition, the real structure $J$, the
+$\gamma$-grading, and the $\mathrm{KO}$-dimension are all
+preserved.  Such deformations are
+\emph{formally $D$-touching but functionally universal}: they
+support the introduction of a physical scalar parameter without
+engaging any potential-specific structure.
+
+The two charter members of this central tier are:
+\begin{itemize}
+\item \textbf{Rest-mass} (Paper~34 projection~14, Paper~35).
+  The Klein--Gordon and squared-Dirac dispersion relations shift
+  as $\omega^2 \to \omega^2 + m^2$, equivalently
+  $D^2 \to D^2 + m^2 \cdot \mathbb{1}$.  The deformation is
+  central by construction, and rest-mass is therefore
+  \emph{universal across central potentials} in the same sense
+  as the angular sparsity theorem.
+\item \textbf{Drake--Swainson asymptotic subtraction}
+  (Paper~34 projection~13).  The intermediate
+  cutoff $K$ in the Bethe-log split-and-cancel scheme is a
+  transient additive shift of the spectral integration measure
+  along $\mathbb{R} \cdot \mathbb{1}$ in the spectral-density
+  domain; the shift cancels in the converged result.
+\end{itemize}
+
+The natural reading of the framework's $\mathcal{A}/D$ split is
+therefore three-tier rather than two-tier:
+\begin{enumerate}
+\item \textbf{Universal sector} ($\mathcal{A}$-only): angular
+  sparsity, composed scaling laws, selection rules independent of
+  $D$.
+\item \textbf{Parametric / central sector}
+  ($\mathcal{A}$ + $Z(\mathcal{B}(\mathcal{H}))$): rest-mass
+  shifts, flow-tier subtractions.  Universal across central
+  potentials, but parametric in a scalar.
+\item \textbf{Potential-specific sector} (substantive $D$):
+  rigidity theorems, calibration $\pi$, transcendental content,
+  the $\alpha$-conjecture.  Per-system rederivation required.
+\end{enumerate}
+
+This refinement is descriptive, not predictive: it sorts existing
+results into three bins and does not change any of the theorems of
+Sections~\ref{sec:universal_sector} or
+\ref{sec:potential_specific_sector}.  Its value is clarifying:
+it explains why rest-mass and Drake--Swainson behave as
+universal-sector projections at the Paper~34 V/D/T level despite
+formally touching $D$.
+
 \subsection{What is currently unknown}
 
 Several extensions are not yet placed in the partition framework:

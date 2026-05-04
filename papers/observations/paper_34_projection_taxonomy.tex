@@ -1001,14 +1001,21 @@ of Fock, Bargmann--Segal, and spectral action);
 Wigner~$3j$, Drake--Swainson);
 \item $3$ inverse pairs (stereographic, Wigner~$3j$, Wigner~$D$).
 \end{itemize}
-The most informative entry is the mutual one-way relation between
-\texttt{spectral\_action} and \texttt{observation\_window}: each is
-a Layer~1~$\to$~Layer~2 projection that consumes the bare graph
-independently, so neither feeds the other.  The metadata correctly
-encodes the field-theoretic UV/IR ordering anomaly --- the thermal
-limit $\beta \to \infty$ does not commute with the UV limit
-$\Lambda \to \infty$ in continuum QFT, and signature arithmetic
-captures the structural content of this asymmetry.
+The most informative entry is that \texttt{drake\_swainson} is the
+unique projection with input\_layer = output\_layer = 2; all $22$
+one-way cells in the table are drake\_swainson's row and column.
+\textit{Erratum (Track TS-C, 2026-05-04):} an earlier draft of this
+section claimed that \texttt{spectral\_action} and
+\texttt{observation\_window} were mutually one-way, encoding the
+field-theoretic UV/IR ordering anomaly.  That claim was retracted
+on direct inspection of the composition data: both projections
+target output\_layer=2 from input\_layer=1 with disjoint variable
+sets, and signature arithmetic correctly returns \texttt{commute}
+in both directions.  The UV/IR anomaly ($\beta \to \infty$ does not
+commute with $\Lambda \to \infty$) is real physics that the current
+coarse layer-grading cannot see; refining the output\_layer index
+to distinguish UV-cutoff, thermal, and flow Layer-2 outputs is the
+natural next step.
 \end{theorem}
 
 \begin{observation}[axes are not independent]
@@ -1189,6 +1196,23 @@ intrinsic resolution.  Working hypothesis WH5 (Paper~2 in
 Observations status as of 2026-05-02) reads it as a coincidence;
 this paper records the structural anomaly without resolving it.
 
+\textit{Track TS-C update (2026-05-04).} The ``depth model
+under-counts'' reading was tested by examining whether the three
+chains share a fourth implicit projection.  They do not: $F$ is
+derived from a Dirichlet zeta on the $(n,l)$ lattice with no Hopf
+invocation (Phase~4F $\alpha$-J); $\Delta^{-1}$ is a
+Camporesi--Higuchi Dirac mode degeneracy with no Hopf invocation
+(Phase~4H SM-D); and the Hopf-quotient graph at $n_{\max} = 3$ does
+not encode $K$ through any independent spectral invariant beyond
+a Casimir relabeling (Phase~4B $\alpha$-D).  The outer $\pi$
+prefactor of $K$ \emph{is} identified with the Hopf-base measure
+(Sprint~A $\alpha$-PI), but this is already counted as the Hopf
+projection in the depth-3 chain.  Under-counting is therefore not
+the mechanism.  Combined with the K-CC clean negative on a unified
+Connes--Chamseddine spectral-action source, twelve mechanisms total
+have been eliminated.  The remaining live readings are (ii) and
+(iii) above; the standing interpretation is (iii), per WH5.
+
 \item \textbf{Unit-introduction asymmetry between Fock and Bargmann.}
 Both Fock and Bargmann--Segal projections introduce energy as the
 dimension; the former adds $Z$ and produces $\pi$ via
@@ -1236,9 +1260,13 @@ three structural theorems on this dictionary: dimensional consistency
 holds across all worked examples, weak minimality holds at the
 signature level (with the strong form failing on bundle-non-trivial
 spinor-lift compositions), and the 15$\times$15 composition table
-encodes the field-theoretic UV/IR ordering anomaly through the
-mutual one-way relation between spectral action and
-observation/temporal-window.  Of the three axes, only the
+flags Drake--Swainson as the unique projection with asymmetric
+composition relations, accounting for all 22 one-way cells.  The
+field-theoretic UV/IR ordering anomaly between \texttt{spectral\_action}
+and \texttt{observation\_window} is real physics but is \emph{not}
+encoded by the current coarse layer-grading (Track TS-C, 2026-05-04);
+refining the output\_layer index to distinguish UV-cutoff, thermal,
+and flow Layer-2 outputs is the natural next step.  Of the three axes, only the
 transcendental axis is genuinely independent --- variable and
 dimension are perfectly correlated.  A falsifiable structural
 prediction (\S~\ref{sec:prediction}) emerges from the depth-grouped
