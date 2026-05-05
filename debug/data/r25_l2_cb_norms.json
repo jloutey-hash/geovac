@@ -1,0 +1,128 @@
+{
+  "description": "Bozejko-Fendler central multiplier cb-norms",
+  "natural": [
+    {
+      "n_max": 1,
+      "cb_norm_closed_form": "1",
+      "cb_norm_float": 1.0,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 2,
+      "cb_norm_closed_form": "2/3",
+      "cb_norm_float": 0.6666666666666666,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 3,
+      "cb_norm_closed_form": "1/2",
+      "cb_norm_float": 0.5,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 4,
+      "cb_norm_closed_form": "2/5",
+      "cb_norm_float": 0.4,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 5,
+      "cb_norm_closed_form": "1/3",
+      "cb_norm_float": 0.3333333333333333,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 6,
+      "cb_norm_closed_form": "2/7",
+      "cb_norm_float": 0.2857142857142857,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 7,
+      "cb_norm_closed_form": "1/4",
+      "cb_norm_float": 0.25,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 8,
+      "cb_norm_closed_form": "2/9",
+      "cb_norm_float": 0.2222222222222222,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 10,
+      "cb_norm_closed_form": "2/11",
+      "cb_norm_float": 0.18181818181818182,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 20,
+      "cb_norm_closed_form": "2/21",
+      "cb_norm_float": 0.09523809523809523,
+      "cb_norm_times_n_plus_1": 2.0
+    },
+    {
+      "n_max": 50,
+      "cb_norm_closed_form": "2/51",
+      "cb_norm_float": 0.0392156862745098,
+      "cb_norm_times_n_plus_1": 2.0
+    }
+  ],
+  "cesaro": [
+    {
+      "n_max": 1,
+      "cb_norm_closed_form": "1",
+      "cb_norm_float": 1.0
+    },
+    {
+      "n_max": 2,
+      "cb_norm_closed_form": "9/17",
+      "cb_norm_float": 0.5294117647058824
+    },
+    {
+      "n_max": 3,
+      "cb_norm_closed_form": "9/23",
+      "cb_norm_float": 0.391304347826087
+    },
+    {
+      "n_max": 4,
+      "cb_norm_closed_form": "8/25",
+      "cb_norm_float": 0.32
+    },
+    {
+      "n_max": 5,
+      "cb_norm_closed_form": "5/19",
+      "cb_norm_float": 0.2631578947368421
+    },
+    {
+      "n_max": 6,
+      "cb_norm_closed_form": "75/329",
+      "cb_norm_float": 0.22796352583586627
+    },
+    {
+      "n_max": 7,
+      "cb_norm_closed_form": "27/133",
+      "cb_norm_float": 0.20300751879699247
+    },
+    {
+      "n_max": 8,
+      "cb_norm_closed_form": "49/272",
+      "cb_norm_float": 0.1801470588235294
+    },
+    {
+      "n_max": 10,
+      "cb_norm_closed_form": "256/1705",
+      "cb_norm_float": 0.1501466275659824
+    },
+    {
+      "n_max": 20,
+      "cb_norm_closed_form": "45/556",
+      "cb_norm_float": 0.08093525179856115
+    },
+    {
+      "n_max": 50,
+      "cb_norm_closed_form": "49/1433",
+      "cb_norm_float": 0.034193998604326585
+    }
+  ]
+}

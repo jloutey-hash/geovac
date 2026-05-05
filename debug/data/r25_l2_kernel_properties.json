@@ -1,0 +1,163 @@
+{
+  "n_max_1": {
+    "positivity_natural": true,
+    "centrality": true,
+    "normalization_natural": true,
+    "plancherel_natural": true,
+    "plancherel_natural_outside_support": true,
+    "positivity_cesaro": true,
+    "normalization_cesaro": true,
+    "plancherel_cesaro": true,
+    "all_pass": true
+  },
+  "n_max_2": {
+    "positivity_natural": true,
+    "centrality": true,
+    "normalization_natural": true,
+    "plancherel_natural": true,
+    "plancherel_natural_outside_support": true,
+    "positivity_cesaro": true,
+    "normalization_cesaro": true,
+    "plancherel_cesaro": true,
+    "all_pass": true
+  },
+  "n_max_3": {
+    "positivity_natural": true,
+    "centrality": true,
+    "normalization_natural": true,
+    "plancherel_natural": true,
+    "plancherel_natural_outside_support": true,
+    "positivity_cesaro": true,
+    "normalization_cesaro": true,
+    "plancherel_cesaro": true,
+    "all_pass": true
+  },
+  "n_max_4": {
+    "positivity_natural": true,
+    "centrality": true,
+    "normalization_natural": null,
+    "plancherel_natural": true,
+    "plancherel_natural_outside_support": true,
+    "positivity_cesaro": true,
+    "normalization_cesaro": null,
+    "plancherel_cesaro": true,
+    "all_pass": true
+  },
+  "n_max_5": {
+    "positivity_natural": true,
+    "centrality": true,
+    "normalization_natural": null,
+    "plancherel_natural": true,
+    "plancherel_natural_outside_support": true,
+    "positivity_cesaro": true,
+    "normalization_cesaro": null,
+    "plancherel_cesaro": true,
+    "all_pass": true
+  },
+  "peter_weyl_bijection": {
+    "n_max_2": {
+      "1": {
+        "j": "0",
+        "n_recovered": 1,
+        "block_dim": 1,
+        "matches": true
+      },
+      "2": {
+        "j": "1/2",
+        "n_recovered": 2,
+        "block_dim": 4,
+        "matches": true
+      },
+      "cumulative_N_nmax": 5,
+      "expected_N_nmax": 5,
+      "bijection_consistent": true
+    },
+    "n_max_3": {
+      "1": {
+        "j": "0",
+        "n_recovered": 1,
+        "block_dim": 1,
+        "matches": true
+      },
+      "2": {
+        "j": "1/2",
+        "n_recovered": 2,
+        "block_dim": 4,
+        "matches": true
+      },
+      "3": {
+        "j": "1",
+        "n_recovered": 3,
+        "block_dim": 9,
+        "matches": true
+      },
+      "cumulative_N_nmax": 14,
+      "expected_N_nmax": 14,
+      "bijection_consistent": true
+    },
+    "n_max_4": {
+      "1": {
+        "j": "0",
+        "n_recovered": 1,
+        "block_dim": 1,
+        "matches": true
+      },
+      "2": {
+        "j": "1/2",
+        "n_recovered": 2,
+        "block_dim": 4,
+        "matches": true
+      },
+      "3": {
+        "j": "1",
+        "n_recovered": 3,
+        "block_dim": 9,
+        "matches": true
+      },
+      "4": {
+        "j": "3/2",
+        "n_recovered": 4,
+        "block_dim": 16,
+        "matches": true
+      },
+      "cumulative_N_nmax": 30,
+      "expected_N_nmax": 30,
+      "bijection_consistent": true
+    },
+    "n_max_5": {
+      "1": {
+        "j": "0",
+        "n_recovered": 1,
+        "block_dim": 1,
+        "matches": true
+      },
+      "2": {
+        "j": "1/2",
+        "n_recovered": 2,
+        "block_dim": 4,
+        "matches": true
+      },
+      "3": {
+        "j": "1",
+        "n_recovered": 3,
+        "block_dim": 9,
+        "matches": true
+      },
+      "4": {
+        "j": "3/2",
+        "n_recovered": 4,
+        "block_dim": 16,
+        "matches": true
+      },
+      "5": {
+        "j": "2",
+        "n_recovered": 5,
+        "block_dim": 25,
+        "matches": true
+      },
+      "cumulative_N_nmax": 55,
+      "expected_N_nmax": 55,
+      "bijection_consistent": true
+    }
+  }
+}

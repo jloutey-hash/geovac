@@ -1,0 +1,20 @@
+{
+  "description": "Closed-form symbolic gamma_{n_max} (sympy exact)",
+  "data": [
+    {
+      "n_max": 2,
+      "closed_form": "-64*sqrt(2)/(27*pi) + pi",
+      "numerical": 2.0745510936998897
+    },
+    {
+      "n_max": 3,
+      "closed_form": "(-864*sqrt(6) - 800*sqrt(2) + 675*pi**2)/(675*pi)",
+      "numerical": 1.6100599680657361
+    },
+    {
+      "n_max": 4,
+      "closed_form": "(-86400*sqrt(3) - 42336*sqrt(6) - 39200*sqrt(2) - 6272 + 55125*pi**2)/(55125*pi)",
+      "numerical": 1.3223327942828407
+    }
+  ]
+}

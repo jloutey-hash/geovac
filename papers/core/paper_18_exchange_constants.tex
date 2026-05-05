@@ -868,6 +868,29 @@ selecting the sub-mechanism.  The first-vs.\ second-order axis named
 above (motivic weight) is exactly the $k = 1$ vs.\ $k = 2$ split; the
 $k = 0$ free-Mellin case is the Hopf-base measure singled out by Paper~25.
 
+\paragraph{Discrete $c_1$ verification (Sprint TS-E3 falsification target).}
+The strongest concrete computational falsification target flagged by Track
+TS-E3 is the discrete first Chern number of the Hopf U(1) bundle on the
+finite Fock-projected $S^3$ graph: under the master Mellin engine reading,
+the discrete $c_1$ should be \emph{integer-valued} on any finite cutoff,
+because the construction engages no continuous integration step (no
+Hopf-base measure, no heat-kernel trace, no Mellin transform), and
+therefore none of M1, M2, M3.  Both physically natural $U(1)$
+phase conventions (Condon--Shortley canonical, all phases zero; and Z$_2$
+alternating, $\phi = \pi$ on $L_\pm$ edges) yield exactly $c_1 = 0$ at
+$n_{\max} = 2$ and $n_{\max} = 3$, confirmed in exact rational arithmetic
+(Fraction-typed phases, no floating-point ambiguity).  A sanity-check
+convention (prescribed flux $1/4$ per plaquette via non-tree-edge phases)
+recovers $|c_1| = (\#\text{cycles}) / 4 = 1/2$ at $n_{\max} = 3$ exactly,
+and a stress-test convention ($1/3$ flux) recovers $|c_1| = 2/3$,
+confirming the algorithm tracks rational non-integer fluxes faithfully
+and would surface a non-integer result if one existed under the natural
+conventions.  The continuum first Chern integer reappears via the M1
+$\mathrm{Vol}(S^2)/4 = \pi$ normalisation in the continuum limit; on the
+finite graph the topological invariant is integer in $\mathbb{Q}$.  Source:
+\verb|debug/discrete_c1_hopf_s3.py|, data \verb|debug/data/discrete_c1_hopf_s3.json|,
+memo \verb|debug/discrete_c1_falsification_memo.md| (Sprint TS-E3, 2026-05-04).
+
 
 %% ========================================================================
 %% IV. TAXONOMY

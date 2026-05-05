@@ -1,0 +1,212 @@
+{
+  "description": "Plancherel symbols hat{K}(j) for natural and Cesaro-2",
+  "natural": {
+    "n_max_1": {
+      "Z": 1,
+      "L2_norm_squared": "1",
+      "symbols": [
+        {
+          "j": "0",
+          "value_natural": "1",
+          "value_natural_float": 1.0
+        }
+      ]
+    },
+    "n_max_2": {
+      "Z": 3,
+      "L2_norm_squared": "5/9",
+      "symbols": [
+        {
+          "j": "0",
+          "value_natural": "1/3",
+          "value_natural_float": 0.3333333333333333
+        },
+        {
+          "j": "1/2",
+          "value_natural": "2/3",
+          "value_natural_float": 0.6666666666666666
+        }
+      ]
+    },
+    "n_max_3": {
+      "Z": 6,
+      "L2_norm_squared": "7/18",
+      "symbols": [
+        {
+          "j": "0",
+          "value_natural": "1/6",
+          "value_natural_float": 0.16666666666666666
+        },
+        {
+          "j": "1/2",
+          "value_natural": "1/3",
+          "value_natural_float": 0.3333333333333333
+        },
+        {
+          "j": "1",
+          "value_natural": "1/2",
+          "value_natural_float": 0.5
+        }
+      ]
+    },
+    "n_max_4": {
+      "Z": 10,
+      "L2_norm_squared": "3/10",
+      "symbols": [
+        {
+          "j": "0",
+          "value_natural": "1/10",
+          "value_natural_float": 0.1
+        },
+        {
+          "j": "1/2",
+          "value_natural": "1/5",
+          "value_natural_float": 0.2
+        },
+        {
+          "j": "1",
+          "value_natural": "3/10",
+          "value_natural_float": 0.3
+        },
+        {
+          "j": "3/2",
+          "value_natural": "2/5",
+          "value_natural_float": 0.4
+        }
+      ]
+    },
+    "n_max_5": {
+      "Z": 15,
+      "L2_norm_squared": "11/45",
+      "symbols": [
+        {
+          "j": "0",
+          "value_natural": "1/15",
+          "value_natural_float": 0.06666666666666667
+        },
+        {
+          "j": "1/2",
+          "value_natural": "2/15",
+          "value_natural_float": 0.13333333333333333
+        },
+        {
+          "j": "1",
+          "value_natural": "1/5",
+          "value_natural_float": 0.2
+        },
+        {
+          "j": "3/2",
+          "value_natural": "4/15",
+          "value_natural_float": 0.26666666666666666
+        },
+        {
+          "j": "2",
+          "value_natural": "1/3",
+          "value_natural_float": 0.3333333333333333
+        }
+      ]
+    }
+  },
+  "cesaro": {
+    "n_max_1": {
+      "Z2": "1",
+      "symbols": [
+        {
+          "j": "0",
+          "value_cesaro": "1",
+          "value_cesaro_float": 1.0
+        }
+      ]
+    },
+    "n_max_2": {
+      "Z2": "17/9",
+      "symbols": [
+        {
+          "j": "0",
+          "value_cesaro": "9/17",
+          "value_cesaro_float": 0.5294117647058824
+        },
+        {
+          "j": "1/2",
+          "value_cesaro": "8/17",
+          "value_cesaro_float": 0.47058823529411764
+        }
+      ]
+    },
+    "n_max_3": {
+      "Z2": "23/8",
+      "symbols": [
+        {
+          "j": "0",
+          "value_cesaro": "8/23",
+          "value_cesaro_float": 0.34782608695652173
+        },
+        {
+          "j": "1/2",
+          "value_cesaro": "9/23",
+          "value_cesaro_float": 0.391304347826087
+        },
+        {
+          "j": "1",
+          "value_cesaro": "6/23",
+          "value_cesaro_float": 0.2608695652173913
+        }
+      ]
+    },
+    "n_max_4": {
+      "Z2": "4",
+      "symbols": [
+        {
+          "j": "0",
+          "value_cesaro": "1/4",
+          "value_cesaro_float": 0.25
+        },
+        {
+          "j": "1/2",
+          "value_cesaro": "8/25",
+          "value_cesaro_float": 0.32
+        },
+        {
+          "j": "1",
+          "value_cesaro": "27/100",
+          "value_cesaro_float": 0.27
+        },
+        {
+          "j": "3/2",
+          "value_cesaro": "4/25",
+          "value_cesaro_float": 0.16
+        }
+      ]
+    },
+    "n_max_5": {
+      "Z2": "95/18",
+      "symbols": [
+        {
+          "j": "0",
+          "value_cesaro": "18/95",
+          "value_cesaro_float": 0.18947368421052632
+        },
+        {
+          "j": "1/2",
+          "value_cesaro": "5/19",
+          "value_cesaro_float": 0.2631578947368421
+        },
+        {
+          "j": "1",
+          "value_cesaro": "24/95",
+          "value_cesaro_float": 0.25263157894736843
+        },
+        {
+          "j": "3/2",
+          "value_cesaro": "18/95",
+          "value_cesaro_float": 0.18947368421052632
+        },
+        {
+          "j": "2",
+          "value_cesaro": "2/19",
+          "value_cesaro_float": 0.10526315789473684
+        }
+      ]
+    }
+  }
+}
