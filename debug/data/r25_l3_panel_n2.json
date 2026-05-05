@@ -1,0 +1,204 @@
+{
+  "n_max": 2,
+  "dim_H": 16,
+  "num_multipliers": 14,
+  "C_3": 0.5000000199946686,
+  "results": [
+    {
+      "f_name": "Y3_(2,0,0)",
+      "n_max": 2,
+      "op_norm_commutator": 0.22507907903927654,
+      "lipschitz_inf": 0.45015815807855303,
+      "ratio": 0.5000000000000001,
+      "op_norm_M": 0.22507907903927651
+    },
+    {
+      "f_name": "Y3_(2,1,-1)",
+      "n_max": 2,
+      "op_norm_commutator": 0.22507907903927654,
+      "lipschitz_inf": 0.4501581400770275,
+      "ratio": 0.5000000199946686,
+      "op_norm_M": 0.22507907903927651
+    },
+    {
+      "f_name": "Y3_(2,1,0)",
+      "n_max": 2,
+      "op_norm_commutator": 0.18377629847393062,
+      "lipschitz_inf": 0.45015815807855303,
+      "ratio": 0.4082482904638629,
+      "op_norm_M": 0.18377629847393068
+    },
+    {
+      "f_name": "Y3_(2,1,1)",
+      "n_max": 2,
+      "op_norm_commutator": 0.22507907903927654,
+      "lipschitz_inf": 0.4501581400770275,
+      "ratio": 0.5000000199946686,
+      "op_norm_M": 0.22507907903927651
+    },
+    {
+      "f_name": "Y3_(2,0,0)+Y3_(2,1,0)",
+      "n_max": 2,
+      "op_norm_commutator": 0.2905758415662736,
+      "lipschitz_inf": 0.6366197723675814,
+      "ratio": 0.45643546458763834,
+      "op_norm_M": 0.29057584156627364
+    }
+  ],
+  "per_multiplier_decomposition": [
+    {
+      "op_norm_M": 0.22507907903927651,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "op_norm_M": 0.22507907903927651,
+      "op_norm_comm": 0.22507907903927654,
+      "ratio": 1.0000000000000002,
+      "shell_diff_max": 1,
+      "label": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "op_norm_M": 0.22507907903927651,
+      "op_norm_comm": 0.22507907903927654,
+      "ratio": 1.0000000000000002,
+      "shell_diff_max": 1,
+      "label": [
+        2,
+        1,
+        -1
+      ]
+    },
+    {
+      "op_norm_M": 0.18377629847393068,
+      "op_norm_comm": 0.18377629847393062,
+      "ratio": 0.9999999999999997,
+      "shell_diff_max": 1,
+      "label": [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "op_norm_M": 0.22507907903927651,
+      "op_norm_comm": 0.22507907903927654,
+      "ratio": 1.0000000000000002,
+      "shell_diff_max": 1,
+      "label": [
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      "op_norm_M": 0.22507907903927651,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "op_norm_M": 0.18377629847393068,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        1,
+        -1
+      ]
+    },
+    {
+      "op_norm_M": 0.15005271935951767,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "op_norm_M": 0.18377629847393068,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        1,
+        1
+      ]
+    },
+    {
+      "op_norm_M": 0.15005271935951767,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        2,
+        -2
+      ]
+    },
+    {
+      "op_norm_M": 0.15005271935951767,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        2,
+        -1
+      ]
+    },
+    {
+      "op_norm_M": 0.1061032953945969,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "op_norm_M": 0.15005271935951767,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "op_norm_M": 0.15005271935951767,
+      "op_norm_comm": 0.0,
+      "ratio": 0.0,
+      "shell_diff_max": 0,
+      "label": [
+        3,
+        2,
+        2
+      ]
+    }
+  ]
+}

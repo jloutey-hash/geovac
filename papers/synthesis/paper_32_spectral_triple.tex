@@ -1392,15 +1392,28 @@ established for $\mathbb{T}^d$ by Leimbach--van~Suijlekom 2024 (Adv.
 Math.\ 439, 109496).  Track~A of the WH1 sprint
 (\texttt{debug/track\_ts\_a\_gh\_convergence\_memo.md}) lays out a
 five-lemma proof shape for the SU(2)~$=S^3$ case via Peter--Weyl
-analysis.  Two of the five lemmas are now closed: L1' (offdiag
+analysis.  Three of the five lemmas are now closed: L1' (offdiag
 Camporesi--Higuchi operator system substrate, every cross-pair
 finite, sprint~R3.5, 2026-05-04;
-\texttt{debug/wh1\_r35\_full\_dirac\_memo.md}); and L2 (existence of
+\texttt{debug/wh1\_r35\_full\_dirac\_memo.md}); L2 (existence of
 a positive central spectral Fej{\'e}r kernel
 $K_{n_{\max}} = Z_{n_{\max}}^{-1} |\sum_{j \le j_{\max}} \sqrt{2j+1}\,
 \chi_j|^2$ on SU(2) with $\gamma_{n_{\max}} \to 0$, sprint~R2.5/L2,
-2026-05-04; \texttt{debug/r25\_l2\_proof\_memo.md}).  The remaining
-three lemmas (L3 Lipschitz bound, L4 Berezin reconstruction, L5
+2026-05-04; \texttt{debug/r25\_l2\_proof\_memo.md}); and L3
+(Lipschitz comparison $\|[D_{\mathrm{CH}}, M_f]\|_{\mathrm{op}} \le
+C_3 \|\nabla f\|_{L^\infty}$ with $C_3 = 1$ on the natural Avery
+test panel at $n_{\max} \in \{2,3,4\}$, sprint~R2.5/L3,
+2026-05-04; \texttt{debug/r25\_l3\_proof\_memo.md}).  The
+``torsion-and-curvature correction'' anticipated in the Track-A
+master memo is identified concretely as the spectral-gap
+quantization $|n - n'|$ of the truthful Camporesi--Higuchi Dirac:
+the per-multiplier ratio for $M_{NLM}$ is bounded by $N - 1$ from
+the SO(4) selection rule, and the corresponding Lipschitz scaling
+$\|\nabla Y^{(3)}_{NLM}\|_{L^\infty} \sim \sqrt{N^2 - 1}$ gives the
+asymptotic ratio $(N-1)/\sqrt{N^2-1} \nearrow 1$. The
+$N=3$ theoretical bound $1/\sqrt 2 \approx 0.7071$ matches the
+observed $C_3$ at $n_{\max} = 3$ to 4 decimals.  The remaining two
+lemmas (L4 Berezin reconstruction, L5
 Latr{\'e}moli{\`e}re-propinquity assembly) are open at the date of
 writing.  No paper edit beyond this remark; the GH-convergence
 proof, when complete, is intended for a future companion paper

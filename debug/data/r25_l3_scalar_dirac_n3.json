@@ -1,0 +1,135 @@
+{
+  "n_max": 3,
+  "dim_H": 40,
+  "C_3_scalar_dirac": 1.02494402638233,
+  "results": [
+    {
+      "f_name": "Y3_(2,0,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.4613869150498855,
+      "lipschitz_inf": 0.45015815807855303,
+      "ratio": 1.02494402638233,
+      "op_norm_M": 0.3183098861837907
+    },
+    {
+      "f_name": "Y3_(2,1,-1)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.4084941752591932,
+      "lipschitz_inf": 0.4501581400770275,
+      "ratio": 0.9074459370862313,
+      "op_norm_M": 0.25989893374455864
+    },
+    {
+      "f_name": "Y3_(2,1,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.3931270717359139,
+      "lipschitz_inf": 0.45015815807855303,
+      "ratio": 0.873308779771826,
+      "op_norm_M": 0.27938295898088
+    },
+    {
+      "f_name": "Y3_(2,1,1)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.4084941752591931,
+      "lipschitz_inf": 0.4501581400770275,
+      "ratio": 0.9074459370862312,
+      "op_norm_M": 0.2598989337445588
+    },
+    {
+      "f_name": "Y3_(3,0,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.6366197723675814,
+      "lipschitz_inf": 0.9001362588959034,
+      "ratio": 0.7072482261168456,
+      "op_norm_M": 0.36418560004207345
+    },
+    {
+      "f_name": "Y3_(3,1,-1)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.6366197723675814,
+      "lipschitz_inf": 1.1024371343968022,
+      "ratio": 0.577465827759791,
+      "op_norm_M": 0.2590854765575422
+    },
+    {
+      "f_name": "Y3_(3,1,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.5197978674891174,
+      "lipschitz_inf": 1.1024372666363693,
+      "ratio": 0.47149881741123034,
+      "op_norm_M": 0.2549792661580546
+    },
+    {
+      "f_name": "Y3_(3,1,1)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.6366197723675814,
+      "lipschitz_inf": 1.1024371343968022,
+      "ratio": 0.577465827759791,
+      "op_norm_M": 0.25908547655754227
+    },
+    {
+      "f_name": "Y3_(3,2,-2)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.6366197723675814,
+      "lipschitz_inf": 0.7796968012336761,
+      "ratio": 0.816496580927726,
+      "op_norm_M": 0.2802211935646763
+    },
+    {
+      "f_name": "Y3_(3,2,-1)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.5694100347337417,
+      "lipschitz_inf": 1.1021065740567915,
+      "ratio": 0.5166560549927361,
+      "op_norm_M": 0.2506374550186971
+    },
+    {
+      "f_name": "Y3_(3,2,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.4931235552491999,
+      "lipschitz_inf": 0.9547386789857748,
+      "ratio": 0.5165010762662808,
+      "op_norm_M": 0.26871877720098797
+    },
+    {
+      "f_name": "Y3_(3,2,1)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.5694100347337417,
+      "lipschitz_inf": 1.1021065740567915,
+      "ratio": 0.5166560549927361,
+      "op_norm_M": 0.2506374550186971
+    },
+    {
+      "f_name": "Y3_(3,2,2)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.6366197723675814,
+      "lipschitz_inf": 0.7796968012336761,
+      "ratio": 0.816496580927726,
+      "op_norm_M": 0.2802211935646763
+    },
+    {
+      "f_name": "Y3_(2,0,0)+Y3_(2,1,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.5999858792569956,
+      "lipschitz_inf": 0.6366197723675814,
+      "ratio": 0.9424556152656951,
+      "op_norm_M": 0.4163062768956009
+    },
+    {
+      "f_name": "Y3_(2,1,0)+Y3_(3,0,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.7225027404120946,
+      "lipschitz_inf": 1.2314629284416632,
+      "ratio": 0.586702793665397,
+      "op_norm_M": 0.3785274487279145
+    },
+    {
+      "f_name": "Y3_(3,1,0)+Y3_(3,2,0)_scalarDirac",
+      "n_max": 3,
+      "op_norm_commutator": 0.7164919146702527,
+      "lipschitz_inf": 1.2732166442326611,
+      "ratio": 0.562741555347846,
+      "op_norm_M": 0.411236040114116
+    }
+  ]
+}

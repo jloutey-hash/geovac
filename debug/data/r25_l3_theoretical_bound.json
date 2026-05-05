@@ -1,0 +1,40 @@
+{
+  "bounds": [
+    {
+      "N": 2,
+      "theoretical_ratio": 0.5773502691896258
+    },
+    {
+      "N": 3,
+      "theoretical_ratio": 0.7071067811865475
+    },
+    {
+      "N": 4,
+      "theoretical_ratio": 0.7745966692414834
+    },
+    {
+      "N": 5,
+      "theoretical_ratio": 0.8164965809277261
+    },
+    {
+      "N": 6,
+      "theoretical_ratio": 0.8451542547285166
+    },
+    {
+      "N": 7,
+      "theoretical_ratio": 0.8660254037844387
+    },
+    {
+      "N": 8,
+      "theoretical_ratio": 0.8819171036881969
+    },
+    {
+      "N": 9,
+      "theoretical_ratio": 0.8944271909999159
+    },
+    {
+      "N": 10,
+      "theoretical_ratio": 0.9045340337332909
+    }
+  ]
+}
