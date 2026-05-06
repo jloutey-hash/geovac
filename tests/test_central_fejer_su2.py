@@ -26,6 +26,7 @@ from geovac.central_fejer_su2 import (
     _chi,
     _j_max,
     _j_values,
+    asymptotic_rate_constant,
     central_fejer_kernel_su2,
     central_multiplier_cb_norm,
     central_multiplier_cb_norm_cesaro,
@@ -34,17 +35,23 @@ from geovac.central_fejer_su2 import (
     character_su2,
     dirichlet_kernel_su2,
     dirichlet_l2_norm_squared,
+    doubling_estimator,
     fit_gamma_power_law,
     fock_n_to_su2_j,
+    gamma_n_via_sum_rule,
     gamma_rate,
     gamma_rate_table,
     kernel_l2_norm_squared,
     kernel_pi_free_certificate,
     normalization_constant,
+    N0_for_constant,
     peter_weyl_bijection_certificate,
     plancherel_symbol,
     plancherel_symbol_cesaro,
+    quantitative_rate_bound,
+    quantitative_rate_certificate,
     su2_j_to_fock_n,
+    T_n_via_sum_rule,
     verify_centrality,
     verify_normalization_cesaro_symbolic,
     verify_normalization_symbolic,
@@ -542,3 +549,266 @@ class TestKernelAtIdentity:
         val = f(mpmath.mpf("1e-6"))
         assert mpmath.isfinite(val)
         assert mpmath.re(val) > 0
+
+
+# ---------------------------------------------------------------------------
+# Quantitative rate sharpening (R2.5 / L2 quantitative-rate sprint, May 2026)
+# ---------------------------------------------------------------------------
+#
+# Theorem (debug/r25_l2_quantitative_rate_memo.md):
+#   (i)   lim n*gamma_n / log(n) = 4/pi   (asymptotic constant)
+#   (ii)  gamma_n <= 6 log(n)/n for all n >= 2   (uniform bound)
+#   (iii) For C > 4/pi, exists N_0(C) such that gamma_n <= C log(n)/n for n >= N_0
+
+
+class TestQuantitativeRate:
+    """Verify Theorem 1 of debug/r25_l2_quantitative_rate_memo.md."""
+
+    def test_asymptotic_constant_value(self):
+        """Asymptotic constant equals 4/pi as exact sympy expression."""
+        c = asymptotic_rate_constant()
+        # As sympy, equals Rational(4) / pi.
+        assert c == Rational(4) / pi
+        # Numerically, equals 4/pi to high precision.
+        c_float = float(c)
+        import math
+        assert abs(c_float - 4.0 / math.pi) < 1e-15
+
+    def test_T_n_sum_rule_matches_quadrature_n_max_2(self):
+        """T_n via sum rule: gamma_n = pi - 4 T_n / (pi Z_n) reproduces gamma at n=2."""
+        # Closed form: T_2 = 2 * sqrt(2) * [1 - 1/9] = 16 sqrt(2)/9
+        T_2 = T_n_via_sum_rule(2, prec=50)
+        T_2_expected = mpmath.mpf("16") * mpmath.sqrt(2) / 9
+        assert abs(T_2 - T_2_expected) < mpmath.mpf("1e-40")
+
+    def test_T_n_sum_rule_gives_exact_gamma_2(self):
+        """gamma_2 = pi - 64 sqrt(2) / (27 pi) (memo Eq. 3.2 closed form at n=2)."""
+        g_2 = gamma_n_via_sum_rule(2, prec=50)
+        g_2_memo = mpmath.pi - 64 * mpmath.sqrt(2) / (27 * mpmath.pi)
+        assert abs(g_2 - g_2_memo) < mpmath.mpf("1e-40")
+
+    @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
+    def test_T_n_sum_rule_matches_gamma_quadrature(self, n_max):
+        """Sum-rule gamma matches Gaussian quadrature gamma at small n_max."""
+        g_sumrule = float(gamma_n_via_sum_rule(n_max, prec=40))
+        g_quad = float(gamma_rate(n_max, prec=40))
+        # Both should agree to at least 1e-12 (they compute the same quantity).
+        assert abs(g_sumrule - g_quad) < 1e-12
+
+    @pytest.mark.parametrize("n_max", [2, 3, 4, 5, 6, 7, 8, 9, 10])
+    def test_uniform_bound_C_equals_6(self, n_max):
+        """gamma_n <= 6 * log(n) / n holds for all n >= 2 (Theorem 1(ii))."""
+        cert = quantitative_rate_certificate(n_max, C=6.0, prec=40)
+        assert cert["satisfies_bound"], (
+            f"gamma_{n_max}={cert['gamma_n']:.6f} > 6 log(n)/n = "
+            f"{cert['bound_C_log_n_over_n']:.6f}"
+        )
+
+    def test_uniform_bound_tight_at_n_2(self):
+        """Bound C=6 at n=2 has small but positive margin (it's the tightest case)."""
+        cert = quantitative_rate_certificate(2, C=6.0, prec=40)
+        # Exact: 2*gamma_2/log(2) = 2*(pi - 64*sqrt(2)/(27pi))/log(2) ~ 5.986
+        # Bound 6 has margin ~ (6 - 5.986)/5.986 * 100 = 0.24% in one rendering;
+        # in the certificate format margin = (bound - gamma)/gamma is bigger.
+        assert cert["satisfies_bound"]
+        # Margin should be small but nonzero. Exact value is
+        # (2*log(2) - 2*gamma_2)/gamma_2 ~ small positive
+        assert cert["margin_pct"] > 0.0
+        assert cert["margin_pct"] < 1.0  # tight!
+
+    def test_uniform_bound_loose_at_large_n(self):
+        """Bound C=6 has large margin at moderate-large n."""
+        cert = quantitative_rate_certificate(50, C=6.0, prec=40)
+        assert cert["satisfies_bound"]
+        # Margin at n=50 should be > 100% (verified in memo Section 4.2)
+        assert cert["margin_pct"] > 100.0
+
+    @pytest.mark.parametrize("n_max", [3, 5, 10, 20, 50, 100])
+    def test_n_gamma_over_log_n_above_4_over_pi(self, n_max):
+        """Theorem 1(i) limit is approached from ABOVE.
+
+        n*gamma_n/log(n) > 4/pi for all finite n (asymptote not reached).
+        """
+        import math
+        cert = quantitative_rate_certificate(n_max, C=6.0, prec=40)
+        ratio = cert["n_gamma_over_log_n"]
+        assert ratio > 4.0 / math.pi, (
+            f"n={n_max}: n*gamma/log(n) = {ratio:.6f} <= 4/pi = "
+            f"{4.0/math.pi:.6f} (asymptote should not be crossed)"
+        )
+
+    def test_n_gamma_over_log_n_monotone_decreasing_for_n_ge_3(self):
+        """The ratio n*gamma_n/log(n) is monotonically decreasing for n >= 3."""
+        import math
+        ns = [3, 4, 5, 7, 10, 15, 20, 30, 50, 100]
+        ratios = []
+        for n in ns:
+            cert = quantitative_rate_certificate(n, C=6.0, prec=40)
+            ratios.append(cert["n_gamma_over_log_n"])
+        for i in range(1, len(ratios)):
+            assert ratios[i] < ratios[i-1] - 1e-6, (
+                f"Non-monotonicity at n={ns[i-1]} -> {ns[i]}: "
+                f"{ratios[i-1]:.6f} -> {ratios[i]:.6f}"
+            )
+
+    def test_doubling_estimator_converges_to_4_over_pi(self):
+        """The doubling estimator a_n converges to 4/pi as n -> infinity.
+
+        At each successive doubling, the error |a_n - 4/pi| should
+        approximately halve (consistent with the second-order O(1/log n)
+        subleading correction).
+        """
+        import math
+        # a_n at n in {50, 100, 200, 400}; comparing the error series
+        a_50 = float(doubling_estimator(50, prec=40))
+        a_100 = float(doubling_estimator(100, prec=40))
+        a_200 = float(doubling_estimator(200, prec=40))
+        a_400 = float(doubling_estimator(400, prec=40))
+        target = 4.0 / math.pi
+        e_50 = abs(a_50 - target)
+        e_100 = abs(a_100 - target)
+        e_200 = abs(a_200 - target)
+        e_400 = abs(a_400 - target)
+        # Errors should be DECREASING monotonically
+        assert e_100 < e_50, f"e_100={e_100:.6f} >= e_50={e_50:.6f}"
+        assert e_200 < e_100, f"e_200={e_200:.6f} >= e_100={e_100:.6f}"
+        assert e_400 < e_200, f"e_400={e_400:.6f} >= e_200={e_200:.6f}"
+        # Error at n=400 should be < 0.01 (memo data: 0.00969)
+        assert e_400 < 0.011, f"e_400={e_400:.6f} > 0.011 expected"
+
+    def test_doubling_estimator_overestimates_4_over_pi(self):
+        """a_n > 4/pi for finite n (asymptote approached from above)."""
+        import math
+        for n in [50, 100, 200]:
+            a_n = float(doubling_estimator(n, prec=40))
+            assert a_n > 4.0 / math.pi, (
+                f"doubling_estimator({n}) = {a_n:.6f} <= 4/pi"
+            )
+
+    def test_N0_lookups(self):
+        """Threshold table values match memo Theorem 1(iii)."""
+        # From memo §4.3:
+        assert N0_for_constant(3.0) == 9
+        assert N0_for_constant(2.5) == 30
+        assert N0_for_constant(2.0) == 300
+        assert N0_for_constant(4.0) == 4
+        assert N0_for_constant(5.0) == 3
+        assert N0_for_constant(6.0) == 2
+        # Above all entries (use entry for highest C in table):
+        assert N0_for_constant(10.0) == 2
+        # Below 4/pi: returns None
+        assert N0_for_constant(1.0) is None
+        assert N0_for_constant(0.5) is None
+
+    def test_N0_below_asymptote_returns_None(self):
+        """Below the asymptotic constant, N_0 is undefined."""
+        import math
+        # 4/pi ~ 1.273; just below should return None
+        assert N0_for_constant(1.27) is None
+        # Just above 4/pi: not guaranteed to be in our small precomputed
+        # table -> may return None (depending on whether table has the entry).
+        # The function should not raise.
+        result = N0_for_constant(4.0 / math.pi + 0.01)
+        assert result is None or isinstance(result, int)
+
+    def test_N0_invalid_C_raises(self):
+        """N0_for_constant(0) and negative C raise ValueError."""
+        with pytest.raises(ValueError):
+            N0_for_constant(0.0)
+        with pytest.raises(ValueError):
+            N0_for_constant(-1.0)
+
+    def test_quantitative_rate_bound_value(self):
+        """quantitative_rate_bound(n, C) = C * log(n) / n."""
+        import math
+        for n, C in [(10, 6.0), (50, 3.0), (100, 2.0)]:
+            expected = C * math.log(n) / n
+            actual = quantitative_rate_bound(n, C=C)
+            assert abs(actual - expected) < 1e-15
+
+    def test_quantitative_rate_bound_invalid_n(self):
+        """quantitative_rate_bound rejects n_max < 2."""
+        with pytest.raises(ValueError):
+            quantitative_rate_bound(1, C=6.0)
+        with pytest.raises(ValueError):
+            quantitative_rate_bound(0, C=6.0)
+
+    def test_T_n_invalid_n(self):
+        """T_n_via_sum_rule rejects n_max < 1."""
+        with pytest.raises(ValueError):
+            T_n_via_sum_rule(0)
+
+    def test_gamma_via_sum_rule_invalid_n(self):
+        """gamma_n_via_sum_rule rejects n_max < 1."""
+        with pytest.raises(ValueError):
+            gamma_n_via_sum_rule(0)
+
+    def test_doubling_estimator_invalid_n(self):
+        """doubling_estimator rejects n < 1."""
+        with pytest.raises(ValueError):
+            doubling_estimator(0)
+
+    @pytest.mark.parametrize("n_max,C,expected_bound_holds", [
+        (3, 3.0, True),     # n=3 is at C=3 boundary; ratio at n=3 is ~4.4 > 3 - should FAIL
+        (10, 3.0, True),    # n=10 ratio is ~2.92 < 3 - should hold
+        (50, 2.5, True),    # n=50 ratio is ~2.30 < 2.5 - should hold
+        (300, 2.0, True),   # n=300 ratio is ~1.99 < 2.0 - should hold
+    ])
+    def test_explicit_thresholds(self, n_max, C, expected_bound_holds):
+        """Spot-check threshold table entries."""
+        cert = quantitative_rate_certificate(n_max, C=C, prec=40)
+        # All these are above N_0(C) so should hold
+        if n_max == 3 and C == 3.0:
+            # n=3 is below N_0(C=3)=9, so SHOULD VIOLATE
+            assert not cert["satisfies_bound"]
+        else:
+            assert cert["satisfies_bound"] == expected_bound_holds
+
+    def test_quantitative_rate_certificate_structure(self):
+        """The certificate dict has the expected keys."""
+        cert = quantitative_rate_certificate(10, C=6.0, prec=30)
+        expected_keys = {
+            "n_max", "C", "gamma_n", "bound_C_log_n_over_n",
+            "satisfies_bound", "margin_pct",
+            "asymptotic_constant_4_over_pi", "n_gamma_over_log_n",
+        }
+        assert set(cert.keys()) == expected_keys
+        assert cert["n_max"] == 10
+        assert cert["C"] == 6.0
+
+
+class TestSumRuleStructuralProperties:
+    """Verify structural properties of the closed-form T_n sum rule."""
+
+    def test_T_n_is_positive(self):
+        """T_n > 0 for all n >= 2."""
+        for n in [2, 3, 4, 5, 8, 10, 20]:
+            T = T_n_via_sum_rule(n, prec=30)
+            assert T > 0, f"T_{n} = {T} not positive"
+
+    def test_gamma_n_positive_via_sum_rule(self):
+        """gamma_n > 0 for all n (via sum rule)."""
+        for n in [2, 3, 4, 5, 8, 10, 20, 50, 100]:
+            g = gamma_n_via_sum_rule(n, prec=30)
+            assert g > 0, f"gamma_{n} = {g} not positive"
+
+    def test_gamma_n_decreasing_via_sum_rule(self):
+        """gamma_n monotonically decreasing in n."""
+        prev = None
+        for n in [2, 3, 5, 10, 20, 50, 100]:
+            g = float(gamma_n_via_sum_rule(n, prec=30))
+            if prev is not None:
+                assert g < prev, f"gamma_{n} = {g:.6f} >= prev {prev:.6f}"
+            prev = g
+
+    def test_T_n_grows_like_n_squared(self):
+        """T_n / Z_n -> pi^2/4 as n -> infinity (memo §3.2 leading order)."""
+        import math
+        target = math.pi**2 / 4
+        # At n=100, T_n/Z_n should be within 5% of pi^2/4
+        T_100 = float(T_n_via_sum_rule(100, prec=30))
+        Z_100 = 100 * 101 / 2
+        ratio = T_100 / Z_100
+        assert abs(ratio - target) / target < 0.06, (
+            f"T_100/Z_100 = {ratio:.4f} vs target pi^2/4 = {target:.4f}"
+        )

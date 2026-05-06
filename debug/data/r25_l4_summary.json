@@ -1,0 +1,38 @@
+{
+  "description": "L4 Berezin reconstruction map: cross-cutoff summary.",
+  "lemma_status": "L4 verified at n_max in {2, 3} for properties (a) positivity, (b) contractivity, (c) approximate identity well-defined and factor-of-2/(n+1) bounded, (d) L3 compatibility. n_max=4 panel restricted by runtime.",
+  "n_max_tested": [
+    2,
+    3,
+    4
+  ],
+  "summary": {
+    "2": {
+      "panel_size": 7,
+      "psd_pass": 2,
+      "psd_total_applicable": 2,
+      "l3_compat_pass_count": 7,
+      "max_residual": 0.15080298295631528,
+      "max_L3_ratio": 1.0,
+      "linfty_K": "2/3"
+    },
+    "3": {
+      "panel_size": 18,
+      "psd_pass": 2,
+      "psd_total_applicable": 2,
+      "l3_compat_pass_count": 18,
+      "max_residual": 0.3001054387190354,
+      "max_L3_ratio": 1.7056057308448838,
+      "linfty_K": "1/2"
+    },
+    "4": {
+      "panel_size": 34,
+      "psd_pass": 2,
+      "psd_total_applicable": 2,
+      "l3_compat_pass_count": 34,
+      "max_residual": 0.4456338406573069,
+      "max_L3_ratio": 2.8284271247461903,
+      "linfty_K": "2/5"
+    }
+  }
+}

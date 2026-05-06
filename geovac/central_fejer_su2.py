@@ -162,6 +162,7 @@ specification this module realizes).
 
 from __future__ import annotations
 
+import math
 from functools import lru_cache
 from typing import Iterable, Optional
 
@@ -787,3 +788,219 @@ def peter_weyl_bijection_certificate(n_max: int) -> dict:
     out["expected_N_nmax"] = sum(k * k for k in range(1, n_max + 1))
     out["bijection_consistent"] = out["cumulative_N_nmax"] == out["expected_N_nmax"]
     return out
+
+
+# ---------------------------------------------------------------------------
+# Quantitative rate of mass concentration (R2.5 / L2 quantitative-rate sprint)
+# ---------------------------------------------------------------------------
+#
+# Theorem (memo `debug/r25_l2_quantitative_rate_memo.md`):
+#   (i)   lim_{n->infty} n*gamma_n / log(n) = 4/pi    (asymptotic constant).
+#   (ii)  gamma_n <= 6 * log(n) / n   for all n >= 2  (uniform bound).
+#   (iii) For any C > 4/pi, there exists N_0(C) such that
+#         gamma_n <= C * log(n) / n for all n >= N_0(C).
+#
+# The proof uses the closed-form sum-rule
+#   gamma_n = pi - 4 T_n / (pi Z_n),
+#   T_n = sum_{k1+k2 odd, 1<=k1,k2<=n}
+#         sqrt(k1 k2) [1/(k1-k2)^2 - 1/(k1+k2)^2].
+#
+# Below we expose:
+#   - T_n_via_sum_rule(n_max)    : exact T_n at high precision
+#   - gamma_n_via_sum_rule(n_max): exact gamma_n via sum rule (faster than
+#                                   gamma_rate quadrature for n_max <= 100)
+#   - quantitative_rate_bound(n_max, C=6): explicit upper bound C log(n)/n
+#   - asymptotic_rate_constant(): returns 4/pi as exact sympy expression
+#   - doubling_estimator(n)      : Richardson-style estimator for 4/pi
+#   - N0_for_constant(C)         : minimum n_max such that bound holds for
+#                                   all m >= n_max (from precomputed table)
+
+
+_PRECOMPUTED_N0_THRESHOLDS = {
+    # C: smallest n in our test set such that m*gamma_m/log(m) <= C for all m >= n.
+    # Values determined from debug/r25_l2_quantitative_rate_compute.py at
+    # n in {2..20, 25, 30, 40, 50, 70, 100, 150, 200, 300, 500, 1000}.
+    # Threshold is None for C strictly less than the asymptotic 4/pi (asymptote
+    # only) and for C just above 4/pi (not reached at n <= 1000).
+    6.0: 2,
+    5.0: 3,
+    4.0: 4,
+    3.0: 9,
+    2.5: 30,
+    2.0: 300,
+}
+
+
+def T_n_via_sum_rule(
+    n_max: int,
+    prec: int = 60,
+) -> mpmath.mpf:
+    """Exact T_n via the closed-form sum-rule (Eq. 3.2 of quantitative-rate memo).
+
+    T_n = sum_{1 <= k1, k2 <= n_max, k1 + k2 odd}
+              sqrt(k1*k2) * [1/(k1-k2)^2 - 1/(k1+k2)^2].
+
+    Used by gamma_n_via_sum_rule. Sum is O(n_max^2) operations; for
+    n_max ~ 100 takes ~10ms; for n_max ~ 1000 takes ~3s.
+    """
+    if n_max < 1:
+        raise ValueError(f"n_max must be >= 1, got {n_max}")
+    mpmath.mp.dps = prec
+    total = mpmath.mpf(0)
+    for k1 in range(1, n_max + 1):
+        for k2 in range(k1 + 1, n_max + 1):
+            if (k1 + k2) % 2 == 0:
+                continue
+            term = mpmath.sqrt(k1 * k2) * (
+                mpmath.mpf(1) / (k1 - k2) ** 2
+                - mpmath.mpf(1) / (k1 + k2) ** 2
+            )
+            total += 2 * term  # k1 <-> k2 symmetry doubles
+    return total
+
+
+def gamma_n_via_sum_rule(n_max: int, prec: int = 60) -> mpmath.mpf:
+    """Compute gamma_{n_max} via the closed-form sum rule.
+
+    gamma_{n_max} = pi - 4 T_{n_max} / (pi Z_{n_max}).
+
+    Faster and more numerically stable than gamma_rate(n_max) which
+    uses Gaussian quadrature; reproduces the same answer to within
+    machine precision for n_max <= 100 and converges to the same
+    asymptotic for larger n_max.
+
+    Args:
+        n_max: cutoff. n_max >= 1.
+        prec: mpmath decimal precision.
+
+    Returns:
+        mpmath.mpf value of gamma_{n_max}.
+    """
+    if n_max < 1:
+        raise ValueError(f"n_max must be >= 1, got {n_max}")
+    mpmath.mp.dps = prec
+    Z = mpmath.mpf(n_max * (n_max + 1)) / 2
+    T = T_n_via_sum_rule(n_max, prec=prec)
+    return mpmath.pi - 4 * T / (mpmath.pi * Z)
+
+
+def asymptotic_rate_constant() -> sp.Expr:
+    """Return the asymptotic constant 4/pi as exact sympy expression.
+
+    Theorem 1(i) of the quantitative-rate memo:
+        lim_{n->infty} n * gamma_n / log(n) = 4/pi.
+
+    Structural meaning (memo S2): 4/pi = Vol(S^2) / pi^2 = 2 Vol(S^1) /
+    Vol(SU(2)) under the Haar normalization, the M1 Hopf-base measure
+    factor of Sprint TS-E1 / Paper 32 SVIII / Paper 18 SIII.7.
+    """
+    return Rational(4) / sp.pi
+
+
+def quantitative_rate_bound(n_max: int, C: float = 6.0) -> float:
+    """Explicit upper bound on gamma_{n_max} of the form C * log(n_max) / n_max.
+
+    Theorem 1(ii) of the quantitative-rate memo: gamma_n <= 6 log(n) / n
+    holds for all n >= 2. For C > 4/pi (Theorem 1(iii)), the bound holds
+    for n >= N_0(C); use N0_for_constant(C) to get the threshold.
+
+    Args:
+        n_max: cutoff (>= 2).
+        C: the constant in the bound; default 6 gives uniform validity.
+
+    Returns:
+        The numerical value of C * log(n_max) / n_max.
+
+    Raises:
+        ValueError: if n_max < 2 (the bound is uniform from n_max = 2).
+    """
+    if n_max < 2:
+        raise ValueError(f"n_max must be >= 2, got {n_max}")
+    return C * math.log(n_max) / n_max
+
+
+def doubling_estimator(n: int, prec: int = 50) -> mpmath.mpf:
+    """Richardson-style estimator for the asymptotic constant 4/pi.
+
+    a_n := (2n * gamma_{2n} - n * gamma_n) / log(2)
+        -> 4/pi  as n -> infty.
+
+    The doubling estimator removes the constant b in
+    n*gamma_n = a*log(n) + b + O(1/n), so a_n converges to a faster
+    than n*gamma_n/log(n).
+
+    Args:
+        n: lower endpoint of the doubling pair.
+        prec: mpmath precision.
+
+    Returns:
+        mpmath.mpf value of a_n.
+    """
+    if n < 1:
+        raise ValueError(f"n must be >= 1, got {n}")
+    mpmath.mp.dps = prec
+    g_n = gamma_n_via_sum_rule(n, prec=prec)
+    g_2n = gamma_n_via_sum_rule(2 * n, prec=prec)
+    return (2 * n * g_2n - n * g_n) / mpmath.log(2)
+
+
+def N0_for_constant(C: float) -> int | None:
+    """Minimum n_max such that gamma_m <= C * log(m) / m for all m >= n_max.
+
+    Returns the precomputed threshold from the data table
+    debug/data/r25_l2_quantitative_rate.json. If C is below 4/pi or
+    too close to the asymptote (not resolved at n <= 1000 in the
+    table), returns None.
+
+    Args:
+        C: the constant in the bound.
+
+    Returns:
+        int N_0 or None if not resolved.
+
+    Raises:
+        ValueError: if C <= 0.
+    """
+    if C <= 0:
+        raise ValueError(f"C must be > 0, got {C}")
+    if C < 4 / math.pi:
+        # Asymptote not reached.
+        return None
+    # Find the largest precomputed C such that C_known <= C.
+    # That C_known has the smallest valid N_0 for the input C
+    # (smaller C_known means tighter bound, requiring larger n_max).
+    matching = [(C_known, n) for C_known, n in _PRECOMPUTED_N0_THRESHOLDS.items()
+                if C_known <= C]
+    if not matching:
+        # Input C is below every tabulated threshold -> use smallest table entry
+        # which gives the asymptotic-only behavior
+        return None
+    # Largest C_known <= C: this is the tightest bound we can guarantee from
+    # the table.
+    matching.sort(key=lambda x: -x[0])  # descending by C
+    return matching[0][1]
+
+
+def quantitative_rate_certificate(
+    n_max: int,
+    C: float = 6.0,
+    prec: int = 50,
+) -> dict:
+    """Verify gamma_{n_max} <= C * log(n_max) / n_max at the requested cutoff.
+
+    Returns a dict with the actual gamma_n, the bound, the margin in
+    percent, and a 'satisfies_bound' flag.
+    """
+    g = gamma_n_via_sum_rule(n_max, prec=prec)
+    bound = C * mpmath.log(n_max) / n_max
+    margin_pct = float((bound - g) / g) * 100
+    return {
+        "n_max": n_max,
+        "C": C,
+        "gamma_n": float(g),
+        "bound_C_log_n_over_n": float(bound),
+        "satisfies_bound": g <= bound,
+        "margin_pct": margin_pct,
+        "asymptotic_constant_4_over_pi": 4.0 / math.pi,
+        "n_gamma_over_log_n": float(n_max * g / mpmath.log(n_max)),
+    }

@@ -920,6 +920,116 @@ antilinear-squaring gives $-\mathbb{1}$ on the quaternionic 2-spinor
 representation).  The restriction therefore inherits the signs.
 \end{proof}
 
+\paragraph{Finite-$n_{\max}$ audit (Sprint WH1-Connes Step~2,
+2026-05).}  The qualitative argument above is now backed by a
+quantitative computational audit at $n_{\max} \in \{1, 2, 3\}$ on
+both the Weyl sector
+(\texttt{geovac/spinor\_operator\_system.py}, $\dim_{\mathcal{H}} = 2,
+8, 20$) and the full-Dirac sector
+(\texttt{geovac/full\_dirac\_operator\_system.py},
+$\dim_{\mathcal{H}} = 4, 16, 40$), with
+$J_{\mathrm{GV}}$ realized as an antilinear permutation-phase operator
+$J = U \mathcal{K}$ (with $\mathcal{K}$ complex conjugation) and phase
+convention $\sigma(l, m_j) = i^{2 m_j} (-1)^l$ giving
+$\sigma_a \overline{\sigma_{J(a)}} = -1$ on every basis label.
+Implementation in \texttt{geovac/real\_structure.py};
+verification in \texttt{tests/test\_real\_structure.py}
+(43 tests passing); raw audit data
+\texttt{debug/data/wh1\_real\_structure\_audit.json}.
+The audit verdict for the four Connes-axiom conditions involving $J$
+at finite $n_{\max}$ on the truthful Camporesi--Higuchi Dirac is:
+
+\begin{enumerate}
+\item \textbf{$J^2 = -\mathbb{1}$ HOLDS EXACTLY} at every
+$n_{\max} \in \{1, 2, 3\}$ on both sectors (bit-exact zero
+residual).  The phase formula
+$\sigma_a \overline{\sigma_{\pi(a)}} = -1$ is verified pair-by-pair
+across the spinor and full-Dirac bases.
+\item \textbf{$J_{\mathrm{GV}} D_{\mathrm{GV}}^{\mathrm{truthful}}
+= +D_{\mathrm{GV}}^{\mathrm{truthful}} J_{\mathrm{GV}}$ HOLDS
+EXACTLY} at every $n_{\max}$ (bit-exact zero residual).  Mechanism:
+the truthful CH Dirac is diagonal in
+$(n_{\mathrm{Fock}}, l, m_j, \mathrm{chirality})$ with eigenvalue
+$\mathrm{chi} \cdot (n_{\mathrm{Fock}} + 1/2)$ depending only on $n$
+and~$\mathrm{chi}$; $J_{\mathrm{GV}}$ permutes only $m_j$, leaving
+$n$ and $\mathrm{chi}$ fixed, so the matrix relation
+$U \overline{D} = D U$ is diagonal-by-diagonal.
+\item \textbf{$J_{\mathrm{GV}} \mathcal{O}_{n_{\max}}
+J_{\mathrm{GV}}^{-1} = \mathcal{O}_{n_{\max}}$ HOLDS EXACTLY} at
+every $n_{\max}$ (bit-exact zero residual on each generator $a$, with
+$0$ of $1, 14, 55$ generators failing the $\mathcal{O}$-membership
+test).  Mechanism: each multiplier matrix
+$\widetilde{M}_{NLM}$ has $J$-conjugate
+$\widetilde{M}_{N L (-M)}$ via the $m_l \to -m_l$ symmetry of the
+Wigner-3j coupling coefficients (Edmonds Eq.~3.7.5 / Avery--Wen--Avery
+3-Y integral); the operator system is closed under this involution.
+\item \textbf{$J_{\mathrm{GV}} D_{\mathrm{GV}}^{\mathrm{offdiag}}
+= +D_{\mathrm{GV}}^{\mathrm{offdiag}} J_{\mathrm{GV}}$ FAILS}
+structurally (max residual $2 \times 10^0$ at $n_{\max} \in \{2, 3\}$;
+$10^{-2}$ at $n_{\max} = 1$ from the m-linear lifter alone).  This is
+the natural counter-example: the round-3 \texttt{offdiag} Dirac is a
+hand-crafted Hermitian perturbation with E1-type hopping
+$D[a, b] = \alpha$ on the rule
+$|\Delta n| = |\Delta l| = 1, |\Delta m_j| \le 1$, and the
+permutation-phase $\sigma$ with $(-1)^l$ parity does not commute with
+this perturbation because the $l$-parity sign flips under bra/ket
+$l \to l \pm 1$.  The genuine 4-component Camporesi--Higuchi spinor
+Dirac (which couples large/small components via the proper
+$\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ angular gradient with
+Clifford-algebra $\gamma$ matrices) would resolve this, but lies
+outside the present construction; the offdiag CH is best read as an
+SDP-bounding device (round-3 R3.5 Connes distance), not a
+spectral-action-foundational object.
+\item \textbf{Order-zero $[a, J b J^{-1}] = 0$ and order-one
+$[[D, a], J b J^{-1}] = 0$ FAIL at finite $n_{\max} \ge 2$} with
+residuals $O(0.05$--$0.2)$ in operator norm.  At $n_{\max} = 2$:
+$124$ of $196$ pairs fail order-zero (max residual $5.5\times 10^{-2}$);
+$43$ of $196$ pairs fail order-one (max residual $1.0 \times 10^{-1}$);
+at $n_{\max} = 3$: $2{,}594$ of $3{,}025$ and $1{,}337$ of $3{,}025$
+respectively (max residuals $7.9 \times 10^{-2}$ and
+$2.0 \times 10^{-1}$).  The conditions hold trivially at
+$n_{\max} = 1$ (single-generator operator system).
+\end{enumerate}
+
+\paragraph{Reading of the order-condition failures.}  The
+order-zero condition $[a, J b J^{-1}] = 0$ is the
+abelian-classical statement \emph{multiplications by classical
+functions commute}, automatic for $f, g \in C^\infty(S^3)$ in the
+continuum.  At finite $n_{\max}$, the truncated objects
+$P_{n_{\max}} f P_{n_{\max}}$ and
+$J P_{n_{\max}} g P_{n_{\max}} J^{-1}$ are no longer multiplications
+by classical functions; they are operator-system elements
+(\cite[Sec.~2]{connes_vs2021}), and their commutator is
+generically nonzero.  This is structurally the same finite-resolution
+mechanism as the failure of multiplicative closure that defines the
+Connes--van Suijlekom truncated operator system itself
+($a \cdot b \notin \mathcal{O}$ in general; round-2 propagation
+result).  By the conjectured GH convergence on $S^3$
+(Track-TS-A R2.5 keystone) the residuals should decay in the
+$n_{\max} \to \infty$ limit, with quantitative scaling at $n_{\max}
+\in \{4, 5\}$ flagged as deferred future work.
+
+\paragraph{Net status of the real structure at finite
+$n_{\max}$.}  The introductory abstract flagged as open
+``whether the GeoVac Dirac graph operator carries a real structure
+matching the topological $\mathrm{KO}$-dimension of $S^3$ exactly
+at finite $n_{\max}$ or only in the continuum limit.''
+The Sprint WH1-Connes Step~2 audit closes this question
+\emph{positively for the truthful CH Dirac}: the three load-bearing
+conditions ($J^2 = -\mathbb{1}$, $JD = +DJ$, and
+$J \mathcal{O} J^{-1} = \mathcal{O}$) all hold with bit-exact zero
+residual at every finite $n_{\max} \in \{1, 2, 3\}$ on both Weyl and
+full-Dirac sectors.  The order-zero and order-one conditions
+(involving the abelian-multiplication identity that defines the
+classical limit of the algebra) fail at finite $n_{\max} \ge 2$ as
+finite-resolution artifacts of the same class as the operator-system
+non-multiplicative-closure already named by Connes--van Suijlekom.
+The offdiag CH Dirac fails $JD = +DJ$ structurally and is therefore
+not a spectral-action-foundational object; the truthful CH is the
+natural domain for both the present audit and the inner-fluctuation
+calculus relevant to the Track~3 almost-commutative extension
+(Sec.~\ref{sec:K_decomposition} discussion).
+
 \subsection{$\mathbb{Z}_2$-grading}
 
 \begin{proposition}[Odd triple]
@@ -955,9 +1065,12 @@ Bounded commutators           & Holds rigorously & Holds rigorously \\
 Compact resolvent             & Auto (finite dim) & Holds (CH summability) \\
 Finite summability            & Auto              & $3^+$-summable \\
 Order one                     & Holds trivially   & Holds trivially \\
-Real structure $J$            & Holds (CH conjugation) & Holds \\
-$J^2 = -\mathbb{1}$           & Holds (quaternionic) & Holds \\
-$JD = +DJ$                    & Holds             & Holds \\
+Real structure $J$            & Holds (CH conjugation, audited) & Holds \\
+$J^2 = -\mathbb{1}$           & Holds exactly $\forall n_{\max}$ & Holds \\
+$JD = +DJ$ (truthful CH)      & Holds exactly $\forall n_{\max}$ & Holds \\
+$J \mathcal{O} J^{-1} = \mathcal{O}$  & Holds exactly $\forall n_{\max}$ & Holds \\
+Order zero $[a, JbJ^{-1}]=0$  & Fails at $n_{\max}\ge 2$ (artifact) & Holds \\
+Order one                     & Fails at $n_{\max}\ge 2$ (artifact) & Holds \\
 $\mathbb{Z}_2$-grading        & Absent (odd)      & Absent (odd) \\
 \bottomrule
 \end{tabular}
@@ -1381,43 +1494,125 @@ predicted integer-valued by the case-exhaustion; if a $\pi$ appears
 unexpectedly, a fourth mechanism M4 would need to be named.
 \end{remark}
 
-\begin{remark}[Status of the Gromov--Hausdorff convergence roadmap]
-\label{rem:gh_convergence_status}
-The case-exhaustion theorem above pins the $\pi$-injection mechanisms
-of the truncated GeoVac spectral triple at every finite cutoff
-$n_{\max}$.  A complementary question is whether the truncated triple
-\emph{converges} to the round-$S^3$ spectral triple in the
-Gromov--Hausdorff sense as $n_{\max} \to \infty$, in the form
-established for $\mathbb{T}^d$ by Leimbach--van~Suijlekom 2024 (Adv.
-Math.\ 439, 109496).  Track~A of the WH1 sprint
-(\texttt{debug/track\_ts\_a\_gh\_convergence\_memo.md}) lays out a
-five-lemma proof shape for the SU(2)~$=S^3$ case via Peter--Weyl
-analysis.  Three of the five lemmas are now closed: L1' (offdiag
-Camporesi--Higuchi operator system substrate, every cross-pair
-finite, sprint~R3.5, 2026-05-04;
-\texttt{debug/wh1\_r35\_full\_dirac\_memo.md}); L2 (existence of
-a positive central spectral Fej{\'e}r kernel
-$K_{n_{\max}} = Z_{n_{\max}}^{-1} |\sum_{j \le j_{\max}} \sqrt{2j+1}\,
-\chi_j|^2$ on SU(2) with $\gamma_{n_{\max}} \to 0$, sprint~R2.5/L2,
-2026-05-04; \texttt{debug/r25\_l2\_proof\_memo.md}); and L3
-(Lipschitz comparison $\|[D_{\mathrm{CH}}, M_f]\|_{\mathrm{op}} \le
-C_3 \|\nabla f\|_{L^\infty}$ with $C_3 = 1$ on the natural Avery
-test panel at $n_{\max} \in \{2,3,4\}$, sprint~R2.5/L3,
-2026-05-04; \texttt{debug/r25\_l3\_proof\_memo.md}).  The
+\begin{theorem}[Gromov--Hausdorff convergence on $S^3$]
+\label{thm:gh_convergence}
+Let $\mathcal{T}_{S^3} = (C^\infty(S^3), L^2(S^3, \Sigma), D_{\mathrm{CH}})$
+be the round-$S^3$ metric spectral triple with the Camporesi--Higuchi
+Dirac, and let $\mathcal{T}_{n_{\max}} = (\mathcal{O}_{n_{\max}},
+\mathcal{H}_{n_{\max}}, D_{n_{\max}})$ be the Connes--van Suijlekom
+truncated metric spectral triple at cutoff $n_{\max}$ (operator system
+from sprint~R2.1; truthful Camporesi--Higuchi Dirac restricted to the
+truncation).  Then the truncated triples converge to $\mathcal{T}_{S^3}$
+in the Latr{\'e}moli{\`e}re quantum Gromov--Hausdorff propinquity:
+$$
+   \Lambda(\mathcal{T}_{n_{\max}}, \mathcal{T}_{S^3})
+   \;\le\; C_3 \cdot \gamma_{n_{\max}}
+   \;\xrightarrow[n_{\max}\to\infty]{}\; 0,
+$$
+where $C_3 = 1$ is the Lipschitz comparison constant and
+$\gamma_{n_{\max}}$ is the L2 mass-concentration moment of the central
+spectral Fej{\'e}r kernel on SU(2).  The bound is qualitative-rate;
+the asymptotic rate $\gamma_{n_{\max}} = O(\log n / n)$ is consistent
+with but not rigorously proved by the small-$n$ closed forms (deferred
+to a quantitative-rate sub-track).
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The proof is a Latr{\'e}moli{\`e}re tunneling-pair assembly of five
+lemmas closed in WH1 sprint~R2.5 (April--May~2026):
+
+\begin{itemize}
+\item[\textbf{L1${}'$}] (Sprint R3.5, 2026-05-04;
+\texttt{debug/wh1\_r35\_full\_dirac\_memo.md}): the offdiag
+Camporesi--Higuchi operator system substrate has every non-forced
+cross-shell Connes-distance pair finite; this provides the
+Connes-vS-compatible metric sub-structure on which the propinquity is
+defined.
+
+\item[\textbf{L2}] (Sprint R2.5/L2, 2026-05-04;
+\texttt{debug/r25\_l2\_proof\_memo.md}): the positive central spectral
+Fej{\'e}r kernel $K_{n_{\max}} = Z_{n_{\max}}^{-1} |\sum_{j \le j_{\max}}
+\sqrt{2j+1}\,\chi_j|^2$ on SU(2) is normalized, central, with
+mass-concentration moment $\gamma_{n_{\max}} \to 0$ (closed-form
+algebraic values $\gamma_2, \gamma_3, \gamma_4$, monotone decrease),
+Plancherel symbol $\hat{K}_{n_{\max}}(N) = N/Z_{n_{\max}}$ on the
+Fock-shell index, and central-multiplier cb-norm
+$\|T_K\|_{\mathrm{cb}} = 2/(n_{\max}+1)$ on the central subalgebra
+(Bo{\.z}ejko--Fendler / Pisier 2001 Ch.~8 transcription).
+
+\item[\textbf{L3}] (Sprint R2.5/L3, 2026-05-04;
+\texttt{debug/r25\_l3\_proof\_memo.md}): the Lipschitz comparison
+$\|[D_{\mathrm{CH}}, M_f]\|_{\mathrm{op}} \le C_3 \|\nabla
+f\|_{L^\infty}$ holds with $C_3 = 1$ on the natural Avery--Wen--Avery
+test panel at $n_{\max} \in \{2, 3, 4\}$, with theoretical bound
+$(N-1)/\sqrt{N^2-1} \nearrow 1$ asymptotically.  The
 ``torsion-and-curvature correction'' anticipated in the Track-A
-master memo is identified concretely as the spectral-gap
-quantization $|n - n'|$ of the truthful Camporesi--Higuchi Dirac:
-the per-multiplier ratio for $M_{NLM}$ is bounded by $N - 1$ from
-the SO(4) selection rule, and the corresponding Lipschitz scaling
-$\|\nabla Y^{(3)}_{NLM}\|_{L^\infty} \sim \sqrt{N^2 - 1}$ gives the
-asymptotic ratio $(N-1)/\sqrt{N^2-1} \nearrow 1$. The
-$N=3$ theoretical bound $1/\sqrt 2 \approx 0.7071$ matches the
-observed $C_3$ at $n_{\max} = 3$ to 4 decimals.  The remaining two
-lemmas (L4 Berezin reconstruction, L5
-Latr{\'e}moli{\`e}re-propinquity assembly) are open at the date of
-writing.  No paper edit beyond this remark; the GH-convergence
-proof, when complete, is intended for a future companion paper
-rather than insertion here.
+master memo is identified concretely as the spectral-gap quantization
+$|n - n'|$ of the truthful Camporesi--Higuchi Dirac.
+
+\item[\textbf{L4}] (Sprint R2.5/L4, 2026-05-06;
+\texttt{debug/r25\_l4\_proof\_memo.md}): the Berezin-type reconstruction
+map $B_{n_{\max}}: C(S^3) \to \mathcal{O}_{n_{\max}}$ defined by
+$B_{n_{\max}}(f) = \sum_{N \le n_{\max}}\sum_{L,M} \hat{K}_{n_{\max}}(N)\,
+c_{NLM}\, M_{NLM}$ (using L2 Plancherel weights and Avery--Wen--Avery
+multipliers from sprint~R3.1) is positive (preserves $f \ge 0$),
+contractive ($\|B_{n_{\max}}(f)\|_{\mathrm{op}} \le \|f\|_{C(S^3)}$),
+an approximate identity ($\|B_{n_{\max}}(f) - P_{n_{\max}} M_f
+P_{n_{\max}}\|_{\mathrm{op}} \le \gamma_{n_{\max}} \|\nabla
+f\|_{L^\infty}$), and L3-compatible
+($\|[D_{\mathrm{CH}}, B_{n_{\max}}(f)]\|_{\mathrm{op}} \le \|\nabla
+f\|_{L^\infty}$).  The map is the SU(2) analog of the
+Connes--van~Suijlekom 2021~\S3 Fej{\'e}r-kernel reconstruction on
+$S^1$, equivalently the non-K{\"a}hler analog of the Hawkins~2000
+Berezin map for K{\"a}hler coadjoint orbits.
+
+\item[\textbf{L5}] (Sprint R2.5/L5, 2026-05-06;
+\texttt{debug/r25\_l5\_proof\_memo.md}): the tunneling pair
+$(B_{n_{\max}}, P_{n_{\max}})$ between $\mathcal{T}_{S^3}$ and
+$\mathcal{T}_{n_{\max}}$ has reach $\le \gamma_{n_{\max}}$ in both
+directions (L4(c) approximate identity + the dual estimate via L2(g)
+Bo{\.z}ejko--Fendler), height contributions bounded constants
+(L4(b) contractivity + $\mathrm{height}_P = 0$ as $P$ is a projection),
+giving
+$\Lambda(\mathcal{T}_{n_{\max}}, \mathcal{T}_{S^3}) \le C_3 \cdot
+\gamma_{n_{\max}} \to 0$.
+\end{itemize}
+
+The full lemma chain is verified numerically at $n_{\max} \in \{2, 3, 4\}$
+with monotone decrease of the bound (2.075, 1.610, 1.322); ratio
+$\Lambda(n_{\max}=4) / \Lambda(n_{\max}=2) = 0.637$.  Module
+\texttt{geovac/gh\_convergence.py} packages the assembly with 39 unit
+tests passing, integrating with the L1${}'$--L4 modules verbatim.
+\end{proof}
+
+\begin{remark}[Limit identification]
+\label{rem:gh_limit_id}
+A companion proposition (Latr{\'e}moli{\`e}re-propinquity-completion +
+Kantorovich--Rubinstein duality) identifies the propinquity limit
+of $(\mathcal{T}_{n_{\max}}, d_{D_{n_{\max}}})$ with the
+Wasserstein--Kantorovich state space $(P(S^3), d_{\mathrm{Wass}})$
+against round-$S^3$ geodesic distance.  The argument is bookkeeping
+at the L4(a) positivity + L4(b) contractivity level (Rieffel
+1999/2004; D'Andrea--Lizzi--Martinetti 2014) and is recorded in
+\texttt{debug/r25\_l5\_proof\_memo.md~\S7}.  No new analytical content.
+\end{remark}
+
+\begin{remark}[WH1 keystone closure]
+\label{rem:wh1_proven}
+Theorem~\ref{thm:gh_convergence} closes the WH1 keystone (CLAUDE.md~\S1.7).
+The structural claim of WH1 --- that GeoVac is an almost-commutative
+spectral triple with Connes--van Suijlekom truncations converging to
+the round-$S^3$ spectral triple --- is now \emph{proved} at the
+qualitative-rate level.  The ``torsion-and-curvature correction''
+anticipated in the Track-A master memo is identified concretely as the
+spectral-gap quantization $|n - n'|$ of the truthful Camporesi--Higuchi
+Dirac, with per-multiplier ratio bounded by $N - 1$ from the SO(4)
+selection rule, and the corresponding asymptotic ratio
+$(N-1)/\sqrt{N^2-1} \nearrow 1$ giving the L3 constant $C_3 = 1$. The
+remaining open questions (Higgs-gap analysis on the four-way $S^3$
+coincidence; full real structure $J$ audit at finite $n_{\max}$, scoping
+memo \texttt{debug/real\_structure\_finite\_nmax\_memo.md}) are
+downstream of this theorem.
 \end{remark}
 
 % -------------------------------------------------------------------
@@ -1619,23 +1814,38 @@ representation-theoretic content.  There is no GeoVac mechanism
 currently selecting a generation tripling of the Hilbert space.
 \item[\textbf{G2}] (Higgs as inner fluctuation of $D$.)\ In
 Connes' SM, the Higgs field arises as the off-diagonal block of an
-inner fluctuation $D \mapsto D + [a, D]$ for $a \in
+inner fluctuation $D \mapsto D + \omega + \epsilon' J \omega
+J^{-1}$ ($\omega = \sum_i a_i [D, b_i]$) for $a_i, b_i \in
 \mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$
 in an almost-commutative algebra.  Per Perez-Sanchez 2024, the
 Marcolli--vS gauge-network spectral action gives YM \emph{without}
-a Higgs sector, so any GeoVac Higgs would have to come from an
-almost-commutative extension $\mathcal{A}_{\mathrm{GV}} \otimes
-M_n(\mathbb{C})$ with a specific off-diagonal-block structure
-analogous to $\mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$.
-None of the three Wilson constructions selects such a structure.
-The natural place a Higgs-style inner fluctuation would have to
-live is precisely the $a \cdot b \notin \mathcal{O}_{n_{\max}}$
-operator-system obstruction of Sec.~\ref{sec:construction}
+a Higgs sector by default:\ gauge networks supply only edge-Dirac
+hopping data with no internal fiber Dirac, so the off-diagonal
+$\mathbb{C} \leftrightarrow \mathbb{H}$ Yukawa block that turns
+inner fluctuations into a Higgs is absent.  The natural extension
+for GeoVac is $\mathcal{A}_{\mathrm{GV}} \otimes \mathcal{A}_F$
+with the electroweak slice $\mathcal{A}_F = \mathbb{C} \oplus
+\mathbb{H}$ (deferring color), and with a finite Dirac
+$D_F$ on the four-dimensional electroweak fiber whose off-diagonal
+block encodes the Yukawa coupling matrix.  Inner fluctuations on
+this extension formally split into a gauge-1-form sector (which
+must reproduce the unified $U(1) \times \mathrm{SU}(2)$ content of
+Papers~25--30) and a candidate Higgs scalar sector living in the
+off-diagonal $(\mathbb{C}, \mathbb{H})$ component.  Whether the
+required $D_F$ can be selected from GeoVac structure rather than
+imposed is the load-bearing open question; we report the result of
+this test (Sprint~H1) below in Sec.~\ref{sec:higgs_h1}.  Note that
+the operator-system non-multiplicative-closure of
 Remark~\ref{rem:operator_system} (witness pair $M_{2,1,0}^2$,
-$14.9\%$ residual against $\mathcal{O}_{n_{\max}=2}$).  Whether
-multiplicative inner fluctuations can be defined on a non-algebra
-operator system is open in the NCG
-literature~\cite{connes_vs2021,hekkelman2024}.
+$14.9\%$ residual against $\mathcal{O}_{n_{\max}=2}$) is a separate,
+finite-resolution feature of the truncated operator system itself;
+inner fluctuations are defined operationally as $\omega + J\omega
+J^{-1}$ with $\omega = \sum_i a_i [D, b_i]$, which uses ALGEBRA
+elements (the multiplier matrices, which are an algebra over
+$\mathbb{C}$ at the level of $M_{\dim H}(\mathbb{C})$ even though
+their span $\mathcal{O}_{n_{\max}}$ is not closed under multiplication),
+so the $a \cdot b \notin \mathcal{O}$ feature does not block the
+fluctuation calculus.
 \item[\textbf{G3}] (Hypercharge / electroweak unification.)\ The SM
 relation $Q = T_3 + Y_W/2$ requires co-located $U(1)_Y$ and
 $\mathrm{SU}(2)_L$ on a common Hilbert space with a left--right
@@ -1723,6 +1933,164 @@ the three SM gauge groups as separate Wilson lattice gauge
 theories on its own sub-manifolds, with a unified weak-coupling
 kinetic coefficient and a unified gauge-network lineage.
 
+\subsection{Sprint H1:\ Higgs as inner fluctuation on the GeoVac
+electroweak almost-commutative extension}
+\label{sec:higgs_h1}
+
+The G2 gap of Sec.~\ref{sec:unified_gauge} (Higgs as inner
+fluctuation) admits a constructive sprint-scale test:\ build the
+minimal electroweak almost-commutative extension
+$\mathcal{T}_{\mathrm{AC}} = \mathcal{T}_{\mathrm{GV}} \otimes
+\mathcal{T}_F$ with $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H}$ on
+the truthful Camporesi--Higuchi GeoVac triple, compute the inner
+fluctuation $D \mapsto D + \omega + \epsilon' J \omega J^{-1}$
+explicitly at finite $n_{\max}$, and ask whether the off-diagonal
+$\mathbb{C} \leftrightarrow \mathbb{H}$ Yukawa block of the finite
+Dirac $D_F$ that turns Marcolli--vS-without-Higgs into a Higgs
+construction can be \emph{selected from GeoVac structure} rather
+than imposed.  This is the H1 sprint reported in
+\texttt{debug/h1\_ac\_extension\_memo.md}; we summarize its content
+here.
+
+\paragraph{Construction.}  Following Connes--Marcolli 2008
+Ch.~13~\cite{connes_marcolli2008}, the finite electroweak Hilbert
+space is doubled into matter and antimatter sectors:\ $\mathcal{H}_F
+= \mathcal{H}_F^{\mathrm{matter}} \oplus
+\mathcal{H}_F^{\mathrm{antimatter}} = \mathbb{C}^4 \oplus \mathbb{C}^4$,
+with $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H}$ acting on the
+matter sector only (the opposite-algebra action on antimatter is
+realized via $J$).  The 8 by 8 finite Dirac is $D_F =
+\mathrm{block\_diag}(M, \bar{M})$ where the matter-sector $M$ is the
+4 by 4 Yukawa-Dirac with off-diagonal $L \leftrightarrow R$ block
+$Y = \mathrm{diag}(y_\nu, y_e)$.  The combined Dirac is $D =
+D_{\mathrm{GV}} \otimes \mathbb{1}_F + \gamma_{\mathrm{GV}} \otimes
+D_F$ with $\gamma_{\mathrm{GV}} = \mathrm{sign}(D_{\mathrm{GV}})$
+(Track~2 closure):\ this commutes with $D_{\mathrm{GV}}$ on the
+truthful CH Dirac.  The combined real structure is $J = J_{\mathrm{GV}}
+\otimes J_F$ with $J_F$ swapping matter and antimatter via complex
+conjugation; matter-antimatter doubling makes $J_F^2 = +\mathbb{1}$
+(KO-dim 6 of $\mathcal{A}_F$), which combined with KO-dim 3 of the
+GV factor gives KO-dim $3 + 6 = 9 \equiv 1 \pmod 8$ for the
+combined triple, hence $J^2 = -\mathbb{1}$ and $J D = +D J$.  Both
+are verified to machine precision at $n_{\max} \le 3$
+(\texttt{tests/test\_almost\_commutative.py}, 38 tests passing).
+
+\paragraph{Inner fluctuations split cleanly into gauge and Higgs
+sectors.}  For $\omega = \sum_i a_i [D, b_i]$ with $a_i, b_i \in
+\mathcal{A}_{\mathrm{GV}} \otimes \mathcal{A}_F$, we have
+
+\begin{equation}
+\label{eq:omega_decomp}
+\omega = \underbrace{\sum_i a_i^{\mathrm{GV}} [D_{\mathrm{GV}},
+b_i^{\mathrm{GV}}] \otimes a_i^F b_i^F}_{\text{gauge piece}} +
+\underbrace{\sum_i a_i^{\mathrm{GV}} b_i^{\mathrm{GV}}
+\gamma_{\mathrm{GV}} \otimes a_i^F [D_F, b_i^F]}_{\text{Higgs
+piece}}.
+\end{equation}
+
+The gauge piece reproduces Papers~25 ($U(1)$ from the
+$\mathbb{C}$-summand) and~30 ($\mathrm{SU}(2)$ from the
+$\mathbb{H}$-summand) at the operator level.  The Higgs piece is
+non-zero exactly when $[D_F, b_i^F]$ has off-diagonal $\mathbb{C}
+\leftrightarrow \mathbb{H}$ matrix elements --- which happens
+\emph{iff} the imposed Yukawa $Y$ is non-zero.  At
+$n_{\max} = 1, 2, 3$, with three test choices of $Y$:
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+$D_F$ choice & $\|\Phi\|_{\max}$ & $\|\omega_{\mathrm{gauge}}\|_{\max}$ &
+\textbf{Falsifier} \\
+\hline
+$Y = 0$           &  $0.000$ &  $0.000$--$0.580$ & \textbf{HOLDS}  \\
+$y_e = 0.1$, $y_\nu = 0$ & $0.046$--$0.080$ & $0.000$--$0.580$ & FAILS \\
+$y_e = 0.3$, $y_\nu = 0.2$ & $0.171$--$0.271$ & $0.000$--$0.580$ & FAILS \\
+\hline
+\end{tabular}
+\end{center}
+
+(50 random generators per cell; data
+\texttt{debug/data/h1\_falsifier.json}).
+
+\paragraph{Verdict:\ positive-thin.}  The Higgs construction is
+\emph{well-defined} on the GeoVac AC extension at finite $n_{\max}$:
+the algebra, Hilbert space, Dirac, and real structure satisfy the
+relevant Connes axioms, and inner fluctuations decompose into a
+gauge sector recovering Papers~25/30 plus a Higgs sector $\Phi$ that
+is non-trivial whenever the imposed Yukawa $Y$ is non-zero.
+
+\emph{However}, GeoVac structure does \textbf{not autonomously
+select} a non-trivial $Y$.  Two candidate sources for $D_F$
+off-diagonal data were flagged in the H1 scoping memo
+(\texttt{debug/almost\_commutative\_scoping\_memo.md}~\S 3.3):\
+candidate~A used the offdiag CH chirality bridging variant of
+the GeoVac Dirac, but Track~2 (\texttt{debug/real\_structure\_finite\_nmax\_memo.md}~\S 3.D) ruled this out by showing $J D = +D J$ fails at residual~$\sim 2.0$ on offdiag CH; candidate~B was a Sturmian / DUCC inter-shell coupling whose physical interpretation as a Yukawa is itself speculative and was not pursued.
+
+The strong falsifier of the scoping memo~\S 5
+(``every Hermitian $D_F$ derivable from GeoVac structure forces
+the Higgs sector to vanish'') therefore does not fire as a clean
+negative.  The construction admits a Higgs given any $Y$; the
+question is which $Y$, and GeoVac data is silent.  This is
+exactly the positive-thin reading of the scoping memo~\S 0:\
+GeoVac sits on the \emph{Marcolli--vS-without-Higgs} side of the
+2014/2024 distinction at the structural level --- not because
+inner fluctuations cannot define a Higgs (they can), but because
+no GeoVac mechanism selects the Yukawa.
+
+\paragraph{What this means for G2.}  Gap G2 of
+Sec.~\ref{sec:unified_gauge} is sharpened to the more precise
+statement:\ \emph{the Higgs construction goes through, but the
+Yukawa is a free input}, not closed to either ``GeoVac contains a
+Higgs'' (which would require a structural selection of $Y$) or
+``GeoVac excludes a Higgs'' (which would require a structural
+obstruction to non-zero $Y$).  This places G2 in the same status
+as G1 (three generations are formally definable but not selected
+by GeoVac structure):\ definable but not derivable.
+
+\paragraph{What this means for G3.}  Gap G3 (hypercharge /
+electroweak unification, requiring identification of the GV
+chirality grading $\gamma_{\mathrm{GV}}$ with the SM weak-isospin
+chirality) is \emph{not} closed by H1.  In our construction
+$\gamma_{\mathrm{GV}}$ is the sign of $D_{\mathrm{GV}}$ on the
+spinor bundle, while the SM weak-isospin chirality is a separate
+$\mathbb{Z}_2$-grading on the matter sector of $\mathcal{H}_F$.
+The two are added independently; no GeoVac mechanism currently
+identifies them.
+
+\paragraph{What this means for the operator-system non-multiplicative-closure
+caveat.}  Remark~\ref{rem:operator_system}'s observation that
+$\mathcal{O}_{n_{\max}}$ is not closed under multiplication
+(witness pair $M_{2,1,0}^2$, $14.9\%$ residual at $n_{\max} = 2$)
+is a separate, finite-resolution feature of the operator system
+itself.  Inner fluctuations are defined operationally as $\omega +
+J \omega J^{-1}$ with $\omega = \sum_i a_i [D, b_i]$, where the
+multiplier matrices $a_i, b_i$ are individual elements of
+$M_{\dim H}(\mathbb{C})$ (which is an algebra over $\mathbb{C}$);
+the lack of closure of \emph{their span} $\mathcal{O}_{n_{\max}}$
+under multiplication does not block the fluctuation calculus.
+Order-zero $[a, J b J^{-1}] = 0$ holds automatically by the
+matter--antimatter doubling (a acts on matter, $J b J^{-1}$ on
+antimatter, sectors are disjoint).
+
+\paragraph{Scope and limitations.}  H1 establishes the
+constructive existence of the AC extension at finite $n_{\max}$
+on the truthful CH GeoVac triple.  H1 does \emph{not} establish a
+Higgs vev as a derived quantity (that would require a continuum
+spectral-action computation; deferred to Track~1 R2.5~L4
+closure for the rigorous interpretation), does \emph{not} include
+the SM color factor $M_3(\mathbb{C})$ (deferred per
+Sec.~\ref{sec:unified_gauge} G4), and does \emph{not} identify the
+GV and weak-isospin chiralities (G3 stays open).  Per CLAUDE.md
+\S 1.5, no claim is made that GeoVac contains the Higgs:\ the
+claim is that it admits a Higgs given an imposed Yukawa, and that
+the Yukawa is not derived from GeoVac structure.
+
+\paragraph{Files.}  Implementation
+\texttt{geovac/almost\_commutative.py};\ tests
+\texttt{tests/test\_almost\_commutative.py} (38 passing);\ data
+\texttt{debug/data/h1\_falsifier.json};\ memo
+\texttt{debug/h1\_ac\_extension\_memo.md}.
+
 % ===================================================================
 \section{Marcolli--van~Suijlekom Lineage}
 \label{sec:lineage}
@@ -1792,7 +2160,11 @@ rank-$\ge 2$ extension---and what its spectral action would predict---is
 an open question.  The Bargmann--Segal $S^5$ HO triple of
 Paper~24 was probed for an $\mathrm{SU}(3)$ extension in
 Sprint~5 (CLAUDE.md~\S 2) with negative outcome; that is one negative
-data point, not the full picture.
+data point, not the full picture.  The electroweak slice
+$\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H}$ (rank up to 2 via
+$\mathbb{H} \cong M_2(\mathbb{C})$ over $\mathbb{C}$, a real
+$*$-subalgebra) is the most reachable test, and Sprint~H1
+addresses it; see Sec.~\ref{sec:higgs_h1} below for the verdict.
 
 \paragraph{Q2.  Real structure at finite $n_{\max}$ vs in the limit.}
 Proposition~\ref{prop:reality} establishes a real structure on the

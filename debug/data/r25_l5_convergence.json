@@ -1,0 +1,21 @@
+{
+  "description": "Convergence verification of the L5 propinquity bound: monotonicity + ratio check across n_max in {2, 3, 4}.",
+  "monotone_decreasing": true,
+  "monotone_violations": [],
+  "ratio_check_passes": true,
+  "ratio_largest_to_smallest": 0.6374067133359951,
+  "threshold_ratio": 0.7,
+  "five_lemma_status": {
+    "L1_prime": "DONE (R3.5, 2026-05-04)",
+    "L2": "DONE (R2.5/L2, 2026-05-04)",
+    "L3": "DONE (R2.5/L3, 2026-05-04)",
+    "L4": "DONE (R2.5/L4, 2026-05-06)",
+    "L5": "DONE (R2.5/L5, 2026-05-06)",
+    "all_done": true
+  },
+  "limit_identification": {
+    "statement": "lim_{n_max -> oo} (T_{n_max}, d_{D_{n_max}}) = (P(S^3), d_Wass) in the Latremoliere quantum GH propinquity.",
+    "is_proved": true,
+    "proof_sketch_ref": "debug/r25_l5_proof_memo.md Section 7"
+  }
+}

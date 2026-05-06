@@ -1,0 +1,317 @@
+{
+  "weyl_n1": {
+    "n_max": 1,
+    "sector": "weyl",
+    "D_mode": "truthful",
+    "dim_H": 2,
+    "dim_O": 1,
+    "n_generators": 1,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      true,
+      0.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      true,
+      0,
+      0.0
+    ],
+    "order_one": [
+      true,
+      0,
+      0.0
+    ]
+  },
+  "weyl_n2": {
+    "n_max": 2,
+    "sector": "weyl",
+    "D_mode": "truthful",
+    "dim_H": 8,
+    "dim_O": 14,
+    "n_generators": 14,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      true,
+      0.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      false,
+      124,
+      0.05515226667967935
+    ],
+    "order_one": [
+      false,
+      43,
+      0.10132118364233778
+    ]
+  },
+  "weyl_n3": {
+    "n_max": 3,
+    "sector": "weyl",
+    "D_mode": "truthful",
+    "dim_H": 20,
+    "dim_O": 55,
+    "n_generators": 55,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      true,
+      0.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      false,
+      2594,
+      0.07852391732281176
+    ],
+    "order_one": [
+      false,
+      1337,
+      0.20264236728467552
+    ]
+  },
+  "full_truthful_n1": {
+    "n_max": 1,
+    "sector": "full_dirac",
+    "D_mode": "truthful",
+    "dim_H": 4,
+    "dim_O": 1,
+    "n_generators": 1,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      true,
+      0.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      true,
+      0,
+      0.0
+    ],
+    "order_one": [
+      true,
+      0,
+      0.0
+    ]
+  },
+  "full_truthful_n2": {
+    "n_max": 2,
+    "sector": "full_dirac",
+    "D_mode": "truthful",
+    "dim_H": 16,
+    "dim_O": 14,
+    "n_generators": 14,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      true,
+      0.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      false,
+      124,
+      0.05515226667967935
+    ],
+    "order_one": [
+      false,
+      43,
+      0.10132118364233778
+    ]
+  },
+  "full_truthful_n3": {
+    "n_max": 3,
+    "sector": "full_dirac",
+    "D_mode": "truthful",
+    "dim_H": 40,
+    "dim_O": 55,
+    "n_generators": 55,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      true,
+      0.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      false,
+      2594,
+      0.07852391732281176
+    ],
+    "order_one": [
+      false,
+      1337,
+      0.20264236728467552
+    ]
+  },
+  "full_offdiag_n1": {
+    "n_max": 1,
+    "sector": "full_dirac",
+    "D_mode": "offdiag",
+    "dim_H": 4,
+    "dim_O": 1,
+    "n_generators": 1,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      false,
+      0.009999999999999787
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      true,
+      0,
+      0.0
+    ],
+    "order_one": [
+      true,
+      0,
+      0.0
+    ]
+  },
+  "full_offdiag_n2": {
+    "n_max": 2,
+    "sector": "full_dirac",
+    "D_mode": "offdiag",
+    "dim_H": 16,
+    "dim_O": 14,
+    "n_generators": 14,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      false,
+      2.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      false,
+      124,
+      0.05515226667967935
+    ],
+    "order_one": [
+      false,
+      161,
+      0.13057008996759537
+    ]
+  },
+  "full_offdiag_n3": {
+    "n_max": 3,
+    "sector": "full_dirac",
+    "D_mode": "offdiag",
+    "dim_H": 40,
+    "dim_O": 55,
+    "n_generators": 55,
+    "U_unitary": [
+      true,
+      0.0
+    ],
+    "J_squared_minus_I": [
+      true,
+      0.0
+    ],
+    "J_commutes_D": [
+      false,
+      2.0
+    ],
+    "J_preserves_O": [
+      true,
+      0,
+      0.0
+    ],
+    "order_zero": [
+      false,
+      2594,
+      0.07852391732281176
+    ],
+    "order_one": [
+      false,
+      2836,
+      0.2251581858718617
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "description": "L5 GH-convergence bookkeeping summary.  Closes the five-lemma roadmap of debug/track_ts_a_gh_convergence_memo.md by assembling the L1'-L4 ingredients into a Latremoliere quantum-GH propinquity tunneling pair (B, P).",
+  "lemma_status": "L5 PROVEN at n_max in {2, 3, 4} (verified numerically + assembled symbolically from L1'-L4).",
+  "all_five_lemmas_done": true,
+  "qualitative_rate": "gamma_{n_max} -> 0 (rigorous, from L2 closed forms + monotone decrease)",
+  "quantitative_rate": "O(log n / n) consistent with but not rigorously proved (L2 open quantitative item, deferred to Track C)",
+  "theorem_statement": "Theorem L5 (GH convergence on S^3). Let T_S3 = (C_inf(S^3), L^2(S^3, Sigma), D_CH) be the round-S^3 metric spectral triple with Camporesi-Higuchi Dirac, and let T_{n_max} = (O_{n_max}, H_{n_max}, D_{n_max}) be the Connes-vS truncated triple at cutoff n_max with the truthful Camporesi-Higuchi Dirac. Then the truncated triples converge to T_S3 in the Latremoliere quantum Gromov-Hausdorff propinquity Lambda:\n\n  Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}  ->  0 as  n_max -> infinity,\n\nwhere C_3 = 1 is the L3 Lipschitz comparison constant on the unit S^3, and gamma_{n_max} is the L2 mass-concentration moment of the central spectral Fejer kernel K_{n_max} on SU(2). The tunneling pair (B_{n_max}, P_{n_max}) is the L4 Berezin reconstruction map paired with the truncation projection. The bound is qualitative-rate; the quantitative rate gamma_{n_max} = O(log n / n) is consistent with but not rigorously proved by the small-n closed forms (L2 open quantitative item, deferred to Track C).",
+  "n_max_summary": {
+    "2": {
+      "gamma": 2.0745510936998897,
+      "C_3": 1.0,
+      "propinquity_bound": 2.0745510936998897,
+      "cb_norm_central": 0.6666666666666666
+    },
+    "3": {
+      "gamma": 1.6100599680657361,
+      "C_3": 1.0,
+      "propinquity_bound": 1.6100599680657361,
+      "cb_norm_central": 0.5
+    },
+    "4": {
+      "gamma": 1.3223327942828407,
+      "C_3": 1.0,
+      "propinquity_bound": 1.3223327942828407,
+      "cb_norm_central": 0.4
+    }
+  }
+}

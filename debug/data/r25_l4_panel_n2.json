@@ -1,0 +1,201 @@
+{
+  "n_max": 2,
+  "Z_n_max": 3,
+  "panel_size": 7,
+  "psd_pass": 2,
+  "psd_total": 2,
+  "l3_compat_pass_count": 7,
+  "rows": [
+    {
+      "name": "constant_Y3_(1,0,0)",
+      "coeffs": {
+        "(1, 0, 0)": 1.0
+      },
+      "supported_labels": [
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "B_op_norm": 0.07502635967975883,
+      "unweighted_op_norm": 0.22507907903927651,
+      "approximate_identity_residual": 0.1500527193595177,
+      "min_eigenvalue_B(f)": 0.07502635967975883,
+      "is_PSD": true,
+      "f_known_nonneg_on_S3": true,
+      "PSD_test_applicable": true,
+      "commutator_with_D_op_norm": 0.0,
+      "L3_compatibility_ratio": 0.0,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.0003333091735839844
+    },
+    {
+      "name": "axisymmetric_positive",
+      "coeffs": {
+        "(1, 0, 0)": 1.0,
+        "(2, 0, 0)": 0.01
+      },
+      "supported_labels": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "B_op_norm": 0.076526886873354,
+      "unweighted_op_norm": 0.22732986982966927,
+      "approximate_identity_residual": 0.15080298295631528,
+      "min_eigenvalue_B(f)": 0.07352583248616366,
+      "is_PSD": true,
+      "f_known_nonneg_on_S3": true,
+      "PSD_test_applicable": true,
+      "commutator_with_D_op_norm": 0.0015005271935951768,
+      "L3_compatibility_ratio": 0.019607843137254905,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.00031495094299316406
+    },
+    {
+      "name": "Y3_(2,0,0)",
+      "coeffs": {
+        "(2, 0, 0)": 1.0
+      },
+      "supported_labels": [
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "B_op_norm": 0.15005271935951767,
+      "unweighted_op_norm": 0.22507907903927651,
+      "approximate_identity_residual": 0.07502635967975885,
+      "min_eigenvalue_B(f)": -0.15005271935951767,
+      "is_PSD": false,
+      "f_known_nonneg_on_S3": false,
+      "PSD_test_applicable": false,
+      "commutator_with_D_op_norm": 0.15005271935951767,
+      "L3_compatibility_ratio": 1.0,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.00019431114196777344
+    },
+    {
+      "name": "Y3_(2,1,-1)",
+      "coeffs": {
+        "(2, 1, -1)": 1.0
+      },
+      "supported_labels": [
+        [
+          2,
+          1,
+          -1
+        ]
+      ],
+      "B_op_norm": 0.15005271935951767,
+      "unweighted_op_norm": 0.22507907903927651,
+      "approximate_identity_residual": 0.07502635967975883,
+      "min_eigenvalue_B(f)": -0.10610329539459688,
+      "is_PSD": false,
+      "f_known_nonneg_on_S3": false,
+      "PSD_test_applicable": false,
+      "commutator_with_D_op_norm": 0.15005271935951767,
+      "L3_compatibility_ratio": 1.0,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.00022077560424804688
+    },
+    {
+      "name": "Y3_(2,1,0)",
+      "coeffs": {
+        "(2, 1, 0)": 1.0
+      },
+      "supported_labels": [
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "B_op_norm": 0.15005271935951767,
+      "unweighted_op_norm": 0.22507907903927651,
+      "approximate_identity_residual": 0.07502635967975885,
+      "min_eigenvalue_B(f)": -0.15005271935951767,
+      "is_PSD": false,
+      "f_known_nonneg_on_S3": false,
+      "PSD_test_applicable": false,
+      "commutator_with_D_op_norm": 0.15005271935951767,
+      "L3_compatibility_ratio": 1.0,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.0002028942108154297
+    },
+    {
+      "name": "Y3_(2,1,1)",
+      "coeffs": {
+        "(2, 1, 1)": 1.0
+      },
+      "supported_labels": [
+        [
+          2,
+          1,
+          1
+        ]
+      ],
+      "B_op_norm": 0.15005271935951767,
+      "unweighted_op_norm": 0.22507907903927651,
+      "approximate_identity_residual": 0.07502635967975885,
+      "min_eigenvalue_B(f)": -0.10610329539459688,
+      "is_PSD": false,
+      "f_known_nonneg_on_S3": false,
+      "PSD_test_applicable": false,
+      "commutator_with_D_op_norm": 0.15005271935951767,
+      "L3_compatibility_ratio": 1.0,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.0002048015594482422
+    },
+    {
+      "name": "Y3_(2,0,0)+Y3_(2,1,0)",
+      "coeffs": {
+        "(2, 0, 0)": 1.0,
+        "(2, 1, 0)": 1.0
+      },
+      "supported_labels": [
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "B_op_norm": 0.21220659078919377,
+      "unweighted_op_norm": 0.3183098861837907,
+      "approximate_identity_residual": 0.10610329539459692,
+      "min_eigenvalue_B(f)": -0.21220659078919377,
+      "is_PSD": false,
+      "f_known_nonneg_on_S3": false,
+      "PSD_test_applicable": false,
+      "commutator_with_D_op_norm": 0.21220659078919377,
+      "L3_compatibility_ratio": 1.0,
+      "L3_bound_(n_max-1)": 1,
+      "L3_bound_satisfied": true,
+      "elapsed_sec": 0.00022912025451660156
+    }
+  ],
+  "shell_weights": {
+    "1": "1/3",
+    "2": "2/3"
+  }
+}

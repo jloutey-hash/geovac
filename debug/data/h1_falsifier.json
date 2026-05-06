@@ -1,0 +1,172 @@
+{
+  "falsifier_n_max_1": {
+    "n_max": 1,
+    "tests": {
+      "D_F_zero": {
+        "negative_holds": true,
+        "reason": "Higgs sector identically zero across all sampled generators (higgs_max = 0.000e+00, gauge_max = 0.000e+00); D_F off-diagonal does not produce a Higgs scalar.",
+        "higgs_max": 0.0,
+        "higgs_mean": 0.0,
+        "gauge_max": 0.0,
+        "gauge_mean": 0.0
+      },
+      "D_F_yukawa_e_only": {
+        "negative_holds": false,
+        "reason": "Higgs sector non-trivial (higgs_max = 4.574e-02, gauge_max = 0.000e+00, higgs/gauge = inf)",
+        "higgs_max": 0.04574317485898418,
+        "higgs_mean": 0.020834173282089977,
+        "gauge_max": 0.0,
+        "gauge_mean": 0.0
+      },
+      "D_F_full_yukawa": {
+        "negative_holds": false,
+        "reason": "Higgs sector non-trivial (higgs_max = 1.811e-01, gauge_max = 0.000e+00, higgs/gauge = inf)",
+        "higgs_max": 0.18112357355498512,
+        "higgs_mean": 0.0807157341457026,
+        "gauge_max": 0.0,
+        "gauge_mean": 0.0
+      }
+    }
+  },
+  "falsifier_n_max_2": {
+    "n_max": 2,
+    "tests": {
+      "D_F_zero": {
+        "negative_holds": true,
+        "reason": "Higgs sector identically zero across all sampled generators (higgs_max = 0.000e+00, gauge_max = 3.889e-01); D_F off-diagonal does not produce a Higgs scalar.",
+        "higgs_max": 0.0,
+        "higgs_mean": 0.0,
+        "gauge_max": 0.3888603710102013,
+        "gauge_mean": 0.06749965769567275
+      },
+      "D_F_yukawa_e_only": {
+        "negative_holds": false,
+        "reason": "Higgs sector non-trivial (higgs_max = 5.103e-02, gauge_max = 3.889e-01, higgs/gauge = 0.131)",
+        "higgs_max": 0.0510250211289721,
+        "higgs_mean": 0.012378119444622715,
+        "gauge_max": 0.3888603710102013,
+        "gauge_mean": 0.06749965769567275
+      },
+      "D_F_full_yukawa": {
+        "negative_holds": false,
+        "reason": "Higgs sector non-trivial (higgs_max = 1.708e-01, gauge_max = 3.889e-01, higgs/gauge = 0.439)",
+        "higgs_max": 0.17082721693769784,
+        "higgs_mean": 0.04625025930595947,
+        "gauge_max": 0.3888603710102013,
+        "gauge_mean": 0.06749965769567275
+      }
+    }
+  },
+  "falsifier_n_max_3": {
+    "n_max": 3,
+    "tests": {
+      "D_F_zero": {
+        "negative_holds": true,
+        "reason": "Higgs sector identically zero across all sampled generators (higgs_max = 0.000e+00, gauge_max = 5.797e-01); D_F off-diagonal does not produce a Higgs scalar.",
+        "higgs_max": 0.0,
+        "higgs_mean": 0.0,
+        "gauge_max": 0.5796788155563991,
+        "gauge_mean": 0.10595613549809242
+      },
+      "D_F_yukawa_e_only": {
+        "negative_holds": false,
+        "reason": "Higgs sector non-trivial (higgs_max = 7.995e-02, gauge_max = 5.797e-01, higgs/gauge = 0.138)",
+        "higgs_max": 0.0799533382583753,
+        "higgs_mean": 0.011741867410755344,
+        "gauge_max": 0.5796788155563991,
+        "gauge_mean": 0.10595613549809242
+      },
+      "D_F_full_yukawa": {
+        "negative_holds": false,
+        "reason": "Higgs sector non-trivial (higgs_max = 2.711e-01, gauge_max = 5.797e-01, higgs/gauge = 0.468)",
+        "higgs_max": 0.2711000763128293,
+        "higgs_mean": 0.04397050519334233,
+        "gauge_max": 0.5796788155563991,
+        "gauge_mean": 0.10595613549809242
+      }
+    }
+  },
+  "higgs_potential_n_max_2": {
+    "n_max": 2,
+    "yukawas": [
+      0.0,
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      1.0
+    ],
+    "Tr_D_squared": [
+      672.0,
+      672.16,
+      672.6400000000001,
+      674.5600000000001,
+      677.7600000000001,
+      688.0,
+      736.0
+    ],
+    "Tr_D_fourth": [
+      3912.0,
+      3917.0404000000003,
+      3932.166399999999,
+      3992.7424,
+      4093.9584000000004,
+      4420.0,
+      5992.0
+    ],
+    "spec_min": [
+      -2.5,
+      -2.55,
+      -2.6,
+      -2.7,
+      -2.8,
+      -3.0,
+      -3.5
+    ],
+    "spec_max": [
+      2.5,
+      2.55,
+      2.6,
+      2.7,
+      2.8,
+      3.0,
+      3.5
+    ]
+  },
+  "decomposition_n_max_2": {
+    "n_max": 2,
+    "scenarios": {
+      "higgs_only_a_b_id_GV": {
+        "higgs_norm": 1.4422205101855958,
+        "gauge_norm": 0.0,
+        "matter_antimatter_off_norm": 0.0,
+        "higgs_matter_LR_norm": 1.4422205101855958,
+        "higgs_matter_RL_norm": 0.0,
+        "gauge_matter_L_norm": 0.0,
+        "gauge_matter_R_norm": 0.0,
+        "omega_total_norm": 1.4422205101855954
+      },
+      "gauge_only_b_F_id": {
+        "higgs_norm": 0.0,
+        "gauge_norm": 1.2732395447351628,
+        "matter_antimatter_off_norm": 0.0,
+        "higgs_matter_LR_norm": 0.0,
+        "higgs_matter_RL_norm": 0.0,
+        "gauge_matter_L_norm": 0.9003163161571062,
+        "gauge_matter_R_norm": 0.9003163161571062,
+        "omega_total_norm": 1.2732395447351628
+      },
+      "combined": {
+        "higgs_norm": 0.31430582885348995,
+        "gauge_norm": 1.2120879352645573,
+        "matter_antimatter_off_norm": 0.0,
+        "higgs_matter_LR_norm": 0.2869206540306909,
+        "higgs_matter_RL_norm": 0.1283148173122648,
+        "gauge_matter_L_norm": 1.1253953951963827,
+        "gauge_matter_R_norm": 0.4501581580785531,
+        "omega_total_norm": 1.2521762323511725
+      }
+    }
+  }
+}
