@@ -1,0 +1,209 @@
+{
+  "leg_1_engine_on_triples": [
+    {
+      "name": "SM_lepton_sector",
+      "params": [
+        "y_nu",
+        "y_e"
+      ],
+      "dim_H_F": 8,
+      "spectrum": [
+        [
+          "y_nu",
+          2
+        ],
+        [
+          "-y_nu",
+          2
+        ],
+        [
+          "y_e",
+          2
+        ],
+        [
+          "-y_e",
+          2
+        ]
+      ],
+      "k=0": {
+        "trace_expr": "4*exp(-t*y_nu**2) + 4*exp(-t*y_e**2)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "2/y_nu**(2*s) + 2/y_e**(2*s) + 2/((-1)**(2*s)*y_nu**(2*s)) + 2/((-1)**(2*s)*y_e**(2*s))"
+      },
+      "k=1": {
+        "trace_expr": "0",
+        "is_zero": true,
+        "mellin_dirichlet_structure": "2*y_e/y_e**(2*s) + 2*y_nu/y_nu**(2*s) - 2*y_e/((-1)**(2*s)*y_e**(2*s)) - 2*y_nu/((-1)**(2*s)*y_nu**(2*s))"
+      },
+      "k=2": {
+        "trace_expr": "4*y_e**2*exp(-t*y_e**2) + 4*y_nu**2*exp(-t*y_nu**2)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "2*(1/(y_e*y_nu))**(4*s)*(y_e**(4*s)*y_nu**(2*s + 2) + y_e**(4*s)*(-y_nu)**(2*s + 2) + y_e**(2*s + 2)*y_nu**(4*s) + y_nu**(4*s)*(-y_e)**(2*s + 2))/(-1)**(2*s)"
+      }
+    },
+    {
+      "name": "SM_full_one_generation",
+      "params": [
+        "y_nu",
+        "y_e",
+        "y_u",
+        "y_d"
+      ],
+      "dim_H_F": 32,
+      "spectrum": [
+        [
+          "y_nu",
+          2
+        ],
+        [
+          "-y_nu",
+          2
+        ],
+        [
+          "y_e",
+          2
+        ],
+        [
+          "-y_e",
+          2
+        ],
+        [
+          "y_u",
+          6
+        ],
+        [
+          "-y_u",
+          6
+        ],
+        [
+          "y_d",
+          6
+        ],
+        [
+          "-y_d",
+          6
+        ]
+      ],
+      "k=0": {
+        "trace_expr": "12*exp(-t*y_u**2) + 4*exp(-t*y_nu**2) + 4*exp(-t*y_e**2) + 12*exp(-t*y_d**2)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "6/(-y_u)**(2*s) + 2/(-y_nu)**(2*s) + 2/(-y_e)**(2*s) + 6/(-y_d)**(2*s) + 6/y_u**(2*s) + 2/y_nu**(2*s) + 2/y_e**(2*s) + 6/y_d**(2*s)"
+      },
+      "k=1": {
+        "trace_expr": "0",
+        "is_zero": true,
+        "mellin_dirichlet_structure": "-6*y_d/(-y_d)**(2*s) + 6*y_d/y_d**(2*s) - 2*y_e/(-y_e)**(2*s) + 2*y_e/y_e**(2*s) - 2*y_nu/(-y_nu)**(2*s) + 2*y_nu/y_nu**(2*s) - 6*y_u/(-y_u)**(2*s) + 6*y_u/y_u**(2*s)"
+      },
+      "k=2": {
+        "trace_expr": "12*y_d**2*exp(-t*y_d**2) + 4*y_e**2*exp(-t*y_e**2) + 4*y_nu**2*exp(-t*y_nu**2) + 12*y_u**2*exp(-t*y_u**2)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "6*y_d**2/(-y_d)**(2*s) + 6*y_d**2/y_d**(2*s) + 2*y_e**2/(-y_e)**(2*s) + 2*y_e**2/y_e**(2*s) + 2*y_nu**2/(-y_nu)**(2*s) + 2*y_nu**2/y_nu**(2*s) + 6*y_u**2/(-y_u)**(2*s) + 6*y_u**2/y_u**(2*s)"
+      }
+    },
+    {
+      "name": "comparator_C_plus_C",
+      "params": [
+        "m"
+      ],
+      "dim_H_F": 2,
+      "spectrum": [
+        [
+          "m",
+          1
+        ],
+        [
+          "-m",
+          1
+        ]
+      ],
+      "k=0": {
+        "trace_expr": "2*exp(-m**2*t)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "((-1)**(2*s) + 1)/((-1)**(2*s)*m**(2*s))"
+      },
+      "k=1": {
+        "trace_expr": "0",
+        "is_zero": true,
+        "mellin_dirichlet_structure": "m/m**(2*s) - m/((-1)**(2*s)*m**(2*s))"
+      },
+      "k=2": {
+        "trace_expr": "2*m**2*exp(-m**2*t)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "m**(2 - 2*s)*((-1)**(2*s) + 1)/(-1)**(2*s)"
+      }
+    },
+    {
+      "name": "comparator_M2_plus_M3",
+      "params": [
+        "sigma_1",
+        "sigma_2"
+      ],
+      "dim_H_F": 5,
+      "spectrum": [
+        [
+          "sigma_1",
+          1
+        ],
+        [
+          "-sigma_1",
+          1
+        ],
+        [
+          "sigma_2",
+          1
+        ],
+        [
+          "-sigma_2",
+          1
+        ],
+        [
+          "0",
+          1
+        ]
+      ],
+      "k=0": {
+        "trace_expr": "1 + 2*exp(-sigma_2**2*t) + 2*exp(-sigma_1**2*t)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "sigma_2**(-2*s) + sigma_1**(-2*s) + 1/((-1)**(2*s)*sigma_2**(2*s)) + 1/((-1)**(2*s)*sigma_1**(2*s))"
+      },
+      "k=1": {
+        "trace_expr": "0",
+        "is_zero": true,
+        "mellin_dirichlet_structure": "sigma_1/sigma_1**(2*s) + sigma_2/sigma_2**(2*s) - sigma_1/((-1)**(2*s)*sigma_1**(2*s)) - sigma_2/((-1)**(2*s)*sigma_2**(2*s))"
+      },
+      "k=2": {
+        "trace_expr": "2*sigma_1**2*exp(-sigma_1**2*t) + 2*sigma_2**2*exp(-sigma_2**2*t)",
+        "is_zero": false,
+        "mellin_dirichlet_structure": "sigma_1**2/sigma_1**(2*s) + sigma_2**2/sigma_2**(2*s) + sigma_1**2/((-1)**(2*s)*sigma_1**(2*s)) + sigma_2**2/((-1)**(2*s)*sigma_2**(2*s))"
+      }
+    }
+  ],
+  "leg_2_eta_vanishing": [
+    {
+      "name": "SM_lepton_sector",
+      "sum_lambda_m": "0",
+      "eta_zero": true
+    },
+    {
+      "name": "SM_full_one_generation",
+      "sum_lambda_m": "0",
+      "eta_zero": true
+    },
+    {
+      "name": "comparator_C_plus_C",
+      "sum_lambda_m": "0",
+      "eta_zero": true
+    },
+    {
+      "name": "comparator_M2_plus_M3",
+      "sum_lambda_m": "0",
+      "eta_zero": true
+    }
+  ],
+  "leg_3_combined_factorization": {
+    "D_total_sq": "[[a**2 + c**2, 0, 0, 0], [0, a**2 + c**2, 0, 0], [0, 0, a**2 + c**2, 0], [0, 0, 0, a**2 + c**2]]",
+    "expected_factorized": "[[a**2 + c**2, 0, 0, 0], [0, a**2 + c**2, 0, 0], [0, 0, a**2 + c**2, 0], [0, 0, 0, a**2 + c**2]]",
+    "difference": "[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]",
+    "factorizes": true
+  }
+}

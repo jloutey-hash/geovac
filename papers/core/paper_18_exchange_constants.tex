@@ -870,11 +870,14 @@ $k = 0$ free-Mellin case is the Hopf-base measure singled out by Paper~25.
 
 \paragraph{Mechanism-as-domain sharpening (Sprint MR-A/B/C, May~2026).}
 The master Mellin engine reading admits a further refinement when read
-in the \emph{predictive} direction. A three-track sprint sequence
-(MR-A: Dirac propinquity rate; MR-B: spectral-action modular residual;
-MR-C: L2 next-order constant) tested whether the engine predicts the
-transcendental ring of a convergence rate from the operator order $k$
-of the underlying mechanism.
+in the \emph{predictive} direction. The formal statement of the
+sharpening appears as a remark accompanying the case-exhaustion theorem
+in Paper~32~\S~VIII~\cite{loutey_paper32}; what follows is the
+operational summary that closes Paper~18's taxonomic engine. A
+three-track sprint sequence (MR-A: Dirac propinquity rate;
+MR-B: spectral-action modular residual; MR-C: L2 next-order constant)
+tested whether the engine predicts the transcendental ring of a
+convergence rate from the operator order $k$ of the underlying mechanism.
 
 Sprint MR-B closed the M2 prediction in closed form. The
 Camporesi--Higuchi heat kernel on the half-integer Dirac spectrum
@@ -892,15 +895,22 @@ $2\pi^{5/2}$, the subleading $-\sqrt{\pi}\,t$, and the $\tfrac{1}{2}\sqrt{\pi}\,
 correction at the next order are all in M2.
 
 Sprint MR-A computed the natural Dirac analog of the SU(2) scalar
-central Fej{\'e}r propinquity rate (whose asymptote is
-$4/\pi = \mathrm{Vol}(S^2)/\pi^2$, the M1 signature) and obtained the
+central Fej{\'e}r propinquity rate. The scalar baseline (L2 sprint,
+2026-05-06) had pinned the asymptote rigorously to
+$\lim_{n \to \infty} n \gamma_n / \log n = 4/\pi$ with explicit uniform
+bound $\gamma_n \le 6\,(\log n)/n$ for $n \ge 2$; the constant
+$4/\pi = \mathrm{Vol}(S^2)/\pi^2 = 2\,\mathrm{Vol}(S^1)/\mathrm{Vol}(\mathrm{SU}(2))$
+is the Hopf-base measure factor in the natural Haar normalization, the
+M1 signature in closed form. The Dirac analog instead obtained the
 structural identity $\gamma_n^{\rm Dirac} = \pi$ for every $n_{\max} \ge 1$:
 the half-integer-only Peter--Weyl truncation cannot span the constant
 function $\chi_0$, so the kernel does not localize at the identity, and
 no asymptotic decay exists to PSLQ. The L2 scalar rate decay is in
 fact an integer$\times$half-integer interference effect; removing the
 integer-spin sector kills it. This is exactly what the M1 mechanism
-predicts when the relevant sub-bundle lacks $\chi_0$.
+predicts when the relevant sub-bundle lacks $\chi_0$, and its presence
+in the scalar case is precisely what the rigorous $4/\pi$ asymptote
+records.
 
 Sprint MR-C extracted the L2 next-order constant $c$ in
 $n \cdot \gamma_n^{\rm scalar} \sim (4/\pi)\log(n) + c + O(\log(n)/n)$
@@ -915,12 +925,22 @@ The combined verdict reads:
 \textit{Mechanism-as-domain partition.}
 The index $k \in \{0, 1, 2\}$ classifies both the M-mechanism and
 the natural domain of observable from which its signature can be
-extracted: $k = 0$ for state-space propinquity rates (M1, $4/\pi$),
-$k = 2$ for heat-kernel and spectral-action convergence (M2,
-$\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$), $k = 1$ for
-vertex-restricted parity-character spectral sums (M3, Catalan $G$ /
-Dirichlet $\beta(s)$, witnessed in Paper~28~\S\,QED-vertex but not
-in propinquity rates).
+extracted:
+\begin{itemize}
+  \item $k = 0$ (M1, Hopf-base measure): state-space propinquity rates;
+    signature $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the SU(2) Fej{\'e}r
+    asymptote (L2 sprint quantitative-rate theorem).
+  \item $k = 2$ (M2, Seeley--DeWitt): heat-kernel and spectral-action
+    convergence; signature $\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$
+    throughout the modular residual~\eqref{eq:dirac_modular_residual}.
+  \item $k = 1$ (M3, vertex-topology Hurwitz): vertex-restricted
+    parity-character spectral sums; signature Dirichlet $\beta(s)$
+    content via the closed-form identity
+    $D_{\rm even}(s) - D_{\rm odd}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$
+    (Paper~28 Theorem~3~\cite{loutey_paper28}); witnessed in
+    Paper~28~\S\,QED-vertex (Catalan $G$, $\beta(4)$) but \emph{not} in
+    propinquity rates.
+\end{itemize}
 \end{quote}
 
 Mixing the index of the question (e.g.\ ``propinquity'') with the
@@ -1709,6 +1729,132 @@ that PK approximates---rather than creates---the physics of Pauli
 exclusion.  The composition exchange constant is the cost of
 replacing exact inter-group antisymmetry with a pseudopotential
 in the factorized coordinate system.
+
+\paragraph{Inner-factor input data: a fourth tier disjoint from
+the outer-factor taxonomy.}
+The exchange constants cataloged above all live on the GeoVac
+\emph{outer} factor: the Fock-projected $S^3$ graph, its spinor
+lift, and their continuum limits.  When the outer triple is
+combined with a Connes--Chamseddine \emph{inner} finite spectral
+triple $T_F = (A_F, H_F, D_F, J_F, \gamma_F)$ to form an
+almost-commutative product $T = T_{\mathrm{GV}} \otimes T_F$
+(Paper~32 \S~VIII.C; Sprint~H1), the master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ extends multiplicatively
+to the combined triple but with two structural reductions on the
+inner side.
+
+\begin{theorem}[$\eta$-trivialization on Krajewski-class finite
+triples]
+\label{thm:eta_trivialization}
+Let $(A_F, H_F, D_F, J_F, \gamma_F)$ be a finite even spectral triple
+in the Krajewski--Paschke--Sitarz lineage~\cite{krajewski1998,
+paschke_sitarz2000}.  The chirality grading axiom
+$\{\gamma_F, D_F\} = 0$ implies, for every odd $k \in \mathbb{N}$,
+\begin{equation}\label{eq:eta_trivial}
+  \mathrm{Tr}\bigl(D_F^k \cdot e^{-t D_F^2}\bigr) \;\equiv\; 0,
+  \qquad t > 0.
+\end{equation}
+In particular, the M3 sub-mechanism (vertex-parity Hurwitz, $k=1$)
+of the master Mellin engine vanishes identically on any
+Connes--Chamseddine-compatible inner factor.
+\end{theorem}
+
+\begin{proof}
+$\{\gamma_F, D_F\} = 0$ and $\gamma_F^2 = 1$ make $\gamma_F$ a unitary
+involution conjugating $D_F$ to $-D_F$.  Conjugation preserves
+traces, so $\mathrm{Tr}(D_F^k\,e^{-tD_F^2}) = \mathrm{Tr}((-D_F)^k
+e^{-tD_F^2}) = (-1)^k \mathrm{Tr}(D_F^k\,e^{-tD_F^2})$.  Odd $k$
+forces zero. $\square$
+\end{proof}
+
+\begin{theorem}[Multiplicative factorization of the combined
+spectral action]
+\label{thm:ac_factorization}
+For the combined Dirac $D = D_{\mathrm{GV}} \otimes 1_F + \gamma_{\mathrm{GV}}
+\otimes D_F$ with $\gamma_{\mathrm{GV}}$ the outer chirality
+grading,
+\begin{equation}\label{eq:d_squared_factorize}
+  D^2 \;=\; D_{\mathrm{GV}}^2 \otimes 1_F + 1_{\mathrm{GV}}
+            \otimes D_F^2,
+\end{equation}
+the cross term $\{D_{\mathrm{GV}} \otimes 1, \gamma_{\mathrm{GV}}
+\otimes D_F\} = (D_{\mathrm{GV}}\gamma_{\mathrm{GV}} +
+\gamma_{\mathrm{GV}}D_{\mathrm{GV}}) \otimes D_F$ vanishing by
+outer chirality anticommutation.  Consequently
+\begin{equation}\label{eq:trace_factorize}
+  \mathrm{Tr}\bigl(e^{-tD^2}\bigr)
+  \;=\; \mathrm{Tr}\bigl(e^{-tD_{\mathrm{GV}}^2}\bigr)
+        \cdot \mathrm{Tr}\bigl(e^{-tD_F^2}\bigr),
+\end{equation}
+and the master Mellin engine on the combined triple factorizes as
+(outer M$_i$ ring)~$\times$~(inner Yukawa Dirichlet ring).
+\end{theorem}
+
+The Mellin output of the inner factor is a generalized Dirichlet
+series in the eigenvalues $\{y_i\}$ of $D_F$ (the Yukawa parameters,
+in the SM realization $A_F = \mathbb{C} \oplus \mathbb{H} \oplus
+M_3(\mathbb{C})$):
+\begin{equation}\label{eq:inner_dirichlet}
+  \mathcal{M}\bigl[\mathrm{Tr}(D_F^k \cdot e^{-t D_F^2})\bigr](s)
+  \;=\; \Gamma(s) \cdot \sum_i m_i \cdot y_i^{\,k - 2s},
+  \qquad k \in \{0, 2\},
+\end{equation}
+with rational multiplicities $m_i$ (including the SU(3) color
+factor~3 for the quark sectors).  This output lies in the ring
+$\mathbb{Q}\bigl[y_1^{-2s}, y_2^{-2s}, \ldots, y_n^{-2s}\bigr]$
+---a \emph{parameter-tied Dirichlet ring} whose generators are
+free inputs to the framework, not transcendentals derived from any
+outer-factor mechanism.
+
+We propose a sixth named tier in the taxonomy:
+
+\begin{quote}
+\textbf{Inner-factor input data}: parameter-tied Dirichlet rings
+generated by the eigenvalues of a finite Dirac operator $D_F$ on
+a Connes--Chamseddine-compatible inner factor.  Source: the choice
+of finite spectral triple $T_F$ and its Yukawa data.  Type:
+empirical input from outside the framework, categorically disjoint
+from intrinsic / calibration / embedding / flow / composition tiers
+of the outer factor.
+\end{quote}
+
+This tier sharpens the ``no autonomous SM-distinguishing data''
+verdict of Sprints H1, G3, and G4a (Paper~32 \S~VIII.C): the
+Yukawa parameters, hypercharges, and mixing angles of the SM
+inhabit a ring with no overlap with any outer-factor ring, and
+GeoVac's taxonomy provides no derivation principle for them.
+The framework controls the outer factor's transcendental content
+via M1/M2/M3; the inner factor controls the SM-distinguishing
+parameters via Eq.~(\ref{eq:inner_dirichlet}); the two tensor
+cleanly by Theorem~\ref{thm:ac_factorization}, and neither
+determines the other.
+
+The structural separation is consistent with the
+universal/Coulomb partition of Paper~31~\cite{loutey_paper31} read
+at the spectral-triple level: the universal sector (algebra $A$,
+selection rules) transfers freely; the potential-specific sector
+(Dirac operator $D_{\mathrm{GV}}$, calibration $\kappa$, $\alpha$
+content) requires per-system rederivation; and now the inner
+sector (algebra $A_F$, finite Dirac $D_F$) requires empirical
+specification of its eigenvalue spectrum.  Three structural
+sources of input data, three categorically disjoint tiers.
+
+Computational evidence: the four-leg investigation (driver
+\texttt{debug/finite\_spectral\_triple\_engine.py}, memo
+\texttt{debug/inner\_factor\_mellin\_engine\_memo.md}) verified
+Theorems~\ref{thm:eta_trivialization}--\ref{thm:ac_factorization}
+symbolically on the SM lepton sector, the full SM
+$A_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$, and
+two comparators ($\mathbb{C} \oplus \mathbb{C}$ and
+$M_2(\mathbb{C}) \oplus M_3(\mathbb{C})$).  The KO-dim~6 cut
+on Krajewski candidates (required to complete the outer KO-dim~3
+to the SM-compatible total~9~$\equiv$~1~$\pmod 8$) and
+$\eta$-trivialization together leave a large candidate
+sub-class; the engine does \emph{not} reverse-engineer $A_F$.
+This is a clean negative on the ``second packing axiom''
+question: GeoVac's machinery says where $A_F$'s Dirichlet ring
+sits in the taxonomy but does not pick out which finite spectral
+triple realizes it.
 
 
 %% ========================================================================
@@ -2736,6 +2882,30 @@ J.~Loutey,
 ``SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph:
 The Non-Abelian Sibling of Paper~25,''
 GeoVac Paper~30 (2026).
+
+\bibitem{loutey_paper32}
+J.~Loutey,
+``The GeoVac Spectral Triple: Construction, Connes Axiom Audit,
+and the $\pi$-Source Case-Exhaustion Theorem,''
+GeoVac Paper~32 (2026).
+
+\bibitem{loutey_paper31}
+J.~Loutey,
+``The Universal/Coulomb Partition of the GeoVac Spectral Triple:
+$A$/$D$ Decomposition and the Three-Layer Asymmetry,''
+GeoVac Paper~31 (2026).
+
+\bibitem{krajewski1998}
+T.~Krajewski,
+``Classification of Finite Spectral Triples,''
+J. Geom. Phys. \textbf{28}, 1--30 (1998),
+\href{https://arxiv.org/abs/hep-th/9701081}{arXiv:hep-th/9701081}.
+
+\bibitem{paschke_sitarz2000}
+M.~Paschke and A.~Sitarz,
+``Discrete Spectral Triples and their Symmetries,''
+J. Math. Phys. \textbf{39}, 6191--6205 (1998),
+\href{https://arxiv.org/abs/q-alg/9612029}{arXiv:q-alg/9612029}.
 
 \bibitem{loutey_track_j}
 J.~Loutey,

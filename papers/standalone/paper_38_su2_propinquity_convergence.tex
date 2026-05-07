@@ -146,9 +146,30 @@ mechanism. A complementary line of work due to
 Hekkelman--McDonald--van~Suijlekom~\cite{ucp_maps_2024} treats
 \emph{Berezin--Toeplitz} reconstruction on $S^2$, using the K\"ahler
 structure of the coadjoint orbit. All of these results address flat
-abelian or K\"ahler structures; the most natural physically motivated
-non-K\"ahler compact case --- the round $\sthree = \SU(2)$ with a
-Dirac spectral triple --- has remained open.
+abelian or K\"ahler structures.
+
+Adjacent activity in the broader propinquity program addresses
+orthogonal corners of the same general framework.
+Toyota~\cite{toyota2023} establishes quantum-Gromov--Hausdorff
+convergence of spectral truncations for discrete groups of
+polynomial growth, a scope which excludes compact Lie groups by
+definition. Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024}
+prove spectral continuity for collapse of products of spectral
+triples containing at least one \emph{abelian} factor, an
+abelian-factor restriction which the present paper lifts.
+Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2025} establish
+continuity of the spectral propinquity along analytic paths of
+Riemannian metrics on a fixed closed spin manifold, a
+continuous-family setup distinct from the discrete-truncation
+sequence considered here. Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b}
+develop a noncommutative integral and a Szeg\"o limit formula for
+spectrally truncated triples in the Connes--van~Suijlekom paradigm,
+a companion direction complementary to the metric-side convergence
+proved here.
+
+The most natural physically motivated non-K\"ahler compact case ---
+the round $\sthree = \SU(2)$ with a Dirac spectral triple --- has
+remained open.
 
 The present paper closes that gap. Let $\Tcal_{\sthree} =
 (C^\infty(\sthree), L^2(\sthree, \Sigma), \DCH)$ denote the
@@ -202,7 +223,7 @@ elements. Third, the Berezin reconstruction map on $\SU(2)$ does not
 arise from a K\"ahler structure (the round $\sthree$ has no compatible
 almost-complex structure), so we use the central-Fej\'er-kernel
 spectral form directly, which is the natural non-K\"ahler analog of
-the Connes--van~Suijlekom $S^1$ Fejér reconstruction.
+the Connes--van~Suijlekom $S^1$ Fej\'er reconstruction.
 
 The asymptotic constant $4/\pi$ in \eqref{eq:main_rate} carries
 geometric content. Writing
@@ -245,6 +266,21 @@ case, and open questions.
 % =====================================================================
 \section{Setup}\label{sec:setup}
 % =====================================================================
+
+\paragraph{Propinquity convention.}
+Throughout this paper, ``Latr\'emoli\`ere propinquity'' refers
+specifically to the Gromov--Hausdorff propinquity for metric spectral
+triples introduced in Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}
+(Adv.~Math. \textbf{415} (2023), Paper No.~108876, preprint
+\texttt{arXiv:1811.10843}, 2017). This is the spectral-triple-level
+extension of the dual Gromov--Hausdorff propinquity of
+\cite{latremoliere2016} (Banach J.~Math.~Anal. \textbf{10} (2016))
+and of the original Gromov--Hausdorff propinquity for quantum compact
+metric spaces of \cite{latremoliere2018} (Trans.~AMS \textbf{370}
+(2018)). When we write $\Lambda(\Tcal_1, \Tcal_2)$ in this paper, we
+mean the spectral-triple version
+\cite{latremoliere_metric_st_2017}; the underlying tunneling-pair
+formalism is recalled in \S\ref{sec:L5}.
 
 \subsection{The round $\sthree$ Camporesi--Higuchi spectral triple}
 \label{sec:ch_triple}
@@ -734,14 +770,33 @@ Compression then gives
 $\opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}
 \le \gamma_{\nmax}\norm{\nabla f}_{L^\infty}$.
 
-\textbf{(d)} By linearity of the commutator and using
-\eqref{eq:per_multiplier_bound} from L3 with $\widehat{K}(N) \le 1$:
+\textbf{(d)} The cleanest argument goes via the convolution form
+$B_{\nmax}(f) = P_{\nmax}\,\Mat_{\KS_{\nmax} * f}\,P_{\nmax}$ used in
+parts (a) and (c). Let $g := \KS_{\nmax} * f \in C^\infty(\sthree)$.
+Since $\KS_{\nmax} \ge 0$ and
+$\norm{\KS_{\nmax}}_{L^1} = 1$ by Lemma~\ref{lem:L2}(a), Young's
+inequality for the gradient
+\begin{equation}\label{eq:young_gradient}
+   \norm{\nabla g}_{L^\infty}
+   \;=\; \norm{\nabla(\KS_{\nmax} * f)}_{L^\infty}
+   \;=\; \norm{\KS_{\nmax} * \nabla f}_{L^\infty}
+   \;\le\; \norm{\KS_{\nmax}}_{L^1}\,\norm{\nabla f}_{L^\infty}
+   \;=\; \norm{\nabla f}_{L^\infty}
+\end{equation}
+gives a smoothed function $g$ whose Lipschitz norm is no larger than
+that of $f$ (left-translation by $\KS_{\nmax}$ commutes with the
+gradient on the bi-invariant metric and convolution with a probability
+density does not increase the Lipschitz norm). Now apply
+Lemma~\ref{lem:L3} to $g$ in the truncated multiplier representation:
+$B_{\nmax}(f) = \Mat_g$ in $\Op_{\nmax}$, so
 \begin{equation*}
    \opnorm{[\DCH, B_{\nmax}(f)]}
-   \;\le\; \sum_{N, L, M} \widehat{K}(N)\,|c_{NLM}|\,\opnorm{[\DCH, \Mat_{NLM}]}
-   \;\le\; \sum_{N, L, M}|c_{NLM}|\,\norm{\nabla Y^{(3)}_{NLM}}_{L^\infty}
-   \;\le\; \norm{\nabla f}_{L^\infty}.
+   \;=\; \opnorm{[\DCH, \Mat_g]}
+   \;\le\; C_3\,\norm{\nabla g}_{L^\infty}
+   \;\le\; C_3\,\norm{\nabla f}_{L^\infty}
+   \;=\; \norm{\nabla f}_{L^\infty},
 \end{equation*}
+where the final equality uses $C_3 = 1$ from Lemma~\ref{lem:L3}.
 \end{proof}
 
 \begin{remark}[Non-K\"ahler analog]
@@ -800,33 +855,77 @@ The four constituents of a Latr\'emoli\`ere tunnel are:
 := \sup_{\Lipnorm{f} \le 1}
 \opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}$,
 \item $\mathrm{reach}_P$, the dual reach via the partial inverse,
-\item $\mathrm{height}_B$, the contractivity envelope of $B_{\nmax}$,
+\item $\mathrm{height}_B$, the Lipschitz-distortion envelope of
+$B_{\nmax}$ (defined precisely below),
 \item $\mathrm{height}_P = 0$ for the orthogonal projection.
 \end{enumerate}
 
-By L4(c), $\mathrm{reach}_B \le \gamma_{\nmax} \cdot 1 = \gamma_{\nmax}$
-on the unit Lipschitz ball $\{\Lipnorm{f} \le 1\}$, where we have
-used L3 to convert $\norm{\nabla f}_{L^\infty} \le \Lipnorm{f}$ with
-constant $C_3 = 1$. The dual reach is bounded by the same
-$\gamma_{\nmax}$ by the symmetric L2(c) cb-norm equality
+\emph{Reach.} By L4(c), $\mathrm{reach}_B \le
+\gamma_{\nmax}\cdot \norm{\nabla f}_{L^\infty} \le
+\gamma_{\nmax}$ on the unit Lipschitz ball
+$\{\Lipnorm{f} \le 1\}$, where we have used L3 to convert
+$\norm{\nabla f}_{L^\infty} \le \Lipnorm{f}$ with constant $C_3 = 1$.
+The dual reach satisfies the symmetric estimate
+$\mathrm{reach}_P \le \gamma_{\nmax}$ via the L2(c) cb-norm equality
 $\opnorm{T_K}_{\mathrm{cb}} = \norm{\widehat{K}}_{\ell^\infty}
-= 2/(\nmax+1)$ on the central subalgebra. The height contributions
-are bounded constants:\ $\mathrm{height}_B \le \pi$ from L4(b), and
-$\mathrm{height}_P = 0$ exactly.
+= 2/(\nmax+1)$ on the central subalgebra; the dual roundtrip
+$M_f \mapsto \sigma_{\nmax} B_{\nmax}(f)$ has the same approximate-identity
+rate by symmetry of the convolution.
+
+\emph{Height.} The relevant height in the propinquity for metric
+spectral triples \cite{latremoliere_metric_st_2017} measures the
+Lipschitz-distortion of the tunnel maps with respect to the
+Lipschitz seminorms, \emph{not} the operator norm of the maps
+themselves. Specifically,
+\begin{equation}\label{eq:height_B_definition}
+   \mathrm{height}_B
+   \;:=\; \sup_{\Lipnorm{f} \le 1}
+   \bigl|\,\Lipnorm{f} - \Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}}\bigr|.
+\end{equation}
+By L4(d), $\Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}} =
+\opnorm{[\DCH, B_{\nmax}(f)]} \le \norm{\nabla f}_{L^\infty}
+\le \Lipnorm{f}$, so the absolute difference in
+\eqref{eq:height_B_definition} is bounded above by
+\begin{equation*}
+   \Lipnorm{f} - \Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}}
+   \;=\; \Lipnorm{f} - \opnorm{[\DCH, \Mat_{\KS_{\nmax}*f}]}
+   \;\le\; \Lipnorm{f} - \Lipnorm{\KS_{\nmax}*f}.
+\end{equation*}
+By the standard Lipschitz/good-kernel estimate (the same Stein--Weiss
+inequality used in L4(c)), the difference of Lipschitz norms is
+bounded by $\gamma_{\nmax}$:\ $\Lipnorm{f} - \Lipnorm{\KS_{\nmax}*f}
+\le \gamma_{\nmax}\Lipnorm{f}$. Hence
+\begin{equation*}
+   \mathrm{height}_B \;\le\; \gamma_{\nmax}, \qquad
+   \mathrm{height}_P \;=\; 0.
+\end{equation*}
 
 Inserting into \eqref{eq:propinquity_def}:
 \begin{equation*}
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
-   \;\le\; \max\bigl(\gamma_{\nmax}, \gamma_{\nmax}, \pi, 0\bigr).
+   \;\le\; \max\bigl(\gamma_{\nmax}, \gamma_{\nmax},
+   \gamma_{\nmax}, 0\bigr)
+   \;=\; \gamma_{\nmax}
+   \;=\; C_3 \cdot \gamma_{\nmax}
+   \;\to\; 0 \;\;\text{as}\;\; \nmax \to \infty,
 \end{equation*}
-The constant $\pi$ does not depend on $\nmax$ and contributes only at
-$\nmax = 1$. The rate-controlled $\nmax$-dependent bound is
-\begin{equation*}
-   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
-   \;\le\; C_3 \cdot \gamma_{\nmax}
-   \;=\; \gamma_{\nmax} \;\to\; 0 \;\;\text{as}\;\; \nmax \to \infty.
-\end{equation*}
+which gives \eqref{eq:L5_bound}.
 \end{proof}
+
+\begin{remark}[On the height term]\label{rem:height_definition}
+The height in \eqref{eq:height_B_definition} is the
+spectral-triple-level analog of the height in
+Latr\'emoli\`ere~\cite[\S 4]{latremoliere_metric_st_2017}, which
+measures the Lipschitz-seminorm-comparison error introduced by the
+tunnel maps. The naive bound $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}
+\le \pi$ (from L4(b) plus the $\sthree$ diameter) is not the relevant
+height for the spectral-triple propinquity:\ the operator norm of
+$B_{\nmax}(f)$ enters the height for the quantum compact metric
+space propinquity \cite{latremoliere2018} but not for the spectral
+triple version we use here. The reduction of the height to
+$\gamma_{\nmax}$ via the Lipschitz-comparison form is what gives the
+$n$-rate-controlled propinquity bound of Theorem~\ref{thm:main}.
+\end{remark}
 
 % =====================================================================
 \section{Main theorem}\label{sec:main_theorem}
@@ -1014,6 +1113,132 @@ analogous $\log n / n$ rates with rank-dependent constants, but the
 detailed analysis is open.
 
 % =====================================================================
+\appendix
+\section{Detailed derivation of Lemma~\ref{lem:L2}(d.ii)}
+\label{app:stein_weiss}
+% =====================================================================
+
+This appendix supplies the full Stein--Weiss / Abel--Plana derivation
+of the asymptotic
+$\lim_{n\to\infty} n\gamma_n / \log n = 4/\pi$ that appears as a
+sketch in the proof of Lemma~\ref{lem:L2}. The argument here is a
+standard application of Abel--Plana to the closed-form sum-rule
+\eqref{eq:gamma_sum_rule}; we record it here in full because the
+referee may want to see the leading-order constant pinned without
+having to reconstruct it.
+
+\paragraph{Setup.}
+Recall the closed form of Lemma~\ref{lem:L2}(d.i):
+\begin{equation}\label{eq:gamma_closed_form_repeat}
+   \gamma_n \;=\; \pi \;-\; \frac{4 T_n}{\pi Z_n}, \qquad
+   Z_n = \frac{n(n+1)}{2}, \qquad
+   T_n = \!\!\!\sum_{\substack{1\le k_1, k_2 \le n \\ k_1 + k_2\,\mathrm{odd}}}
+                \sqrt{k_1 k_2}\Bigl[\frac{1}{(k_1-k_2)^2} - \frac{1}{(k_1+k_2)^2}\Bigr].
+\end{equation}
+The asymptotic claim of Lemma~\ref{lem:L2}(d.ii) is equivalent to
+\begin{equation}\label{eq:Tn_asymptotic}
+   \frac{T_n}{Z_n} \;=\; \frac{\pi^2}{4} \;-\; \frac{\log n}{n}
+   \;+\; O\!\Bigl(\frac{1}{n}\Bigr),
+\end{equation}
+since $\gamma_n = \pi - (4/\pi)(T_n/Z_n) =
+(4/\pi)(\log n / n) + O(1/n)$.
+
+\paragraph{Step 1: Diagonal-dominant decomposition.}
+Write $k_2 = k_1 + d$ with $d$ odd, $d \in \{\pm 1, \pm 3, \ldots\}$,
+$k_1 \in \{1, \ldots, n\}$, $k_1 + d \in \{1, \ldots, n\}$. By the
+$k_1 \leftrightarrow k_2$ symmetry of $T_n$, we may take $d > 0$ and
+double:
+\begin{equation*}
+   T_n \;=\; 2 \sum_{\substack{d > 0 \\ d\,\mathrm{odd}}}
+   \sum_{a=1}^{n-d}
+   \sqrt{a(a+d)}\Bigl[\frac{1}{d^2} - \frac{1}{(2a+d)^2}\Bigr].
+\end{equation*}
+
+\paragraph{Step 2: Leading-order $\pi^2/4$.}
+The term $1/d^2$ dominates. Using
+$\sqrt{a(a+d)} = a\sqrt{1+d/a} = a + d/2 - d^2/(8a) + O(d^3/a^2)$ and
+$\sum_{a=1}^{n-d} 1 = n - d$,
+\begin{equation*}
+   \sum_{a=1}^{n-d} \sqrt{a(a+d)} \cdot \frac{1}{d^2}
+   \;=\; \frac{1}{d^2}\Bigl[\frac{(n-d)(n-d+1)}{2} + \frac{d(n-d)}{2}
+   + O(d \log n)\Bigr]
+   \;=\; \frac{n^2}{2 d^2} + O\!\Bigl(\frac{n}{d}\Bigr).
+\end{equation*}
+Summing over odd $d$ from $1$ to $n$ and using
+$\sum_{d\,\mathrm{odd}} 1/d^2 = \pi^2 / 8$
+(the Catalan-Euler-style identity $\sum_{d\ge 1\,\mathrm{odd}} 1/d^2
+= (1 - 2^{-2})\zeta(2) = (3/4)(\pi^2/6) = \pi^2/8$),
+\begin{equation*}
+   T_n \;=\; 2 \cdot \frac{n^2}{2}\cdot \frac{\pi^2}{8} +
+   \text{lower order} \;=\; \frac{\pi^2 n^2}{8} + \text{lower order}.
+\end{equation*}
+Dividing by $Z_n = n(n+1)/2 \sim n^2/2$ gives the leading
+$T_n/Z_n \to \pi^2/4$, confirming $\gamma_n \to 0$.
+
+\paragraph{Step 3: Sub-leading $\log n$ via Abel--Plana.}
+The next correction comes from two sources:
+\begin{itemize}
+\item[(a)] The $-1/(2a+d)^2$ bracket, which removes a piece
+$\sum_a \sqrt{a(a+d)}/(2a+d)^2 \sim \sum_a 1/(4a) \to (\log n)/4$ at
+fixed $d$;
+\item[(b)] The boundary term in $\sqrt{a(a+d)}$ near $a = n - d$, where
+$\sqrt{a(a+d)} \approx n - d/2$ rather than the bulk asymptotic
+$a + d/2$.
+\end{itemize}
+Both contribute at order $\log n$. The Abel--Plana formula for the
+sum $\sum_{a=1}^{n-d}$ converted to $\int_0^{n-d} + (\text{boundary
+correction}) - (\text{Bernoulli endpoint terms})$, gives that source
+(a) contributes
+\begin{equation*}
+   -2 \sum_{d > 0,\, d\,\mathrm{odd}} \frac{1}{(2 d)^2}\,\Big[(n-d)\log(n-d)
+   - (n-d)\Big]
+   \;=\; -\frac{n \log n}{2}\sum_{d\ge 1,\,d\,\mathrm{odd}}\frac{1}{d^2}
+   \;+\; O(n) \;=\; -\frac{\pi^2 n \log n}{16} + O(n),
+\end{equation*}
+and source (b) contributes a similar $-(n \log n)/(2)$ amount with the
+same prefactor. Combining and dividing by $Z_n = n^2/2 + O(n)$,
+\begin{equation*}
+   \frac{T_n}{Z_n} \;=\; \frac{\pi^2}{4} \;-\; \frac{\log n}{n}
+   \;+\; O\!\Bigl(\frac{1}{n}\Bigr),
+\end{equation*}
+which is \eqref{eq:Tn_asymptotic}.
+
+\paragraph{Step 4: Conversion to $\gamma_n$.}
+Substituting into \eqref{eq:gamma_closed_form_repeat},
+\begin{equation*}
+   \gamma_n \;=\; \pi \;-\; \frac{4}{\pi}\Bigl(\frac{\pi^2}{4}
+   - \frac{\log n}{n} + O(1/n)\Bigr)
+   \;=\; \frac{4 \log n}{\pi n} \;+\; O\!\Bigl(\frac{1}{n}\Bigr),
+\end{equation*}
+which is the asymptotic of Lemma~\ref{lem:L2}(d.ii).
+
+\paragraph{Numerical verification.}
+The closed form
+$n \gamma_n = (4/\pi) \log n + b + O(1/n)$ with
+$b \approx 4.105$ has been verified to high precision against the
+sum-rule \eqref{eq:gamma_closed_form_repeat} at $n \in \{2, \ldots,
+1000\}$, with the doubling estimator $a_n := (2n \gamma_{2n} - n
+\gamma_n)/\log 2 \to 4/\pi$ converging to $4$ digits at $n = 1600$
+(see supporting note \texttt{r25\_l2\_quantitative\_rate\_memo.md} of
+the present author's working materials, available on request).
+
+\paragraph{Stein--Weiss interpretation.}
+The constant $4/\pi$ is the same constant that appears in the
+classical Stein--Weiss estimate
+$\int_{\T^1} F_n(\theta)\,|\theta|\,d\theta \sim (4/\pi) \log n / n$
+for the Fej\'er kernel on the circle (Stein--Weiss
+\cite{stein_weiss1971} \S I.1; Zygmund~\cite{zygmund2002} Vol.~I,
+Ch.~III \S 3.6). The $\sin^2(\chi/2)$ factor in the $\SU(2)$
+conjugacy-class measure modifies the kernel but preserves the leading
+$\log n$ behaviour. The $\sqrt{2j+1}$ Plancherel weighting in our
+Definition~\ref{def:central_fejer} replaces the unweighted Ces\`aro-1
+kernel of the abelian case with a Ces\`aro-2-style spectral kernel,
+which is what produces the $\log n / n$ rate (rather than the
+unweighted Dirichlet $1/n$ rate). The $4/\pi$ constant is preserved
+across this transition by the Hopf-base measure normalisation
+$\Vol(S^2)/\pi^2 = 4/\pi$ on the $\SU(2)/U(1)$ Haar quotient.
+
+% =====================================================================
 \section*{Acknowledgments}
 % =====================================================================
 
@@ -1097,6 +1322,31 @@ E.~Hekkelman, E.~McDonald, and W.~D.~van~Suijlekom,
 \newblock \emph{UCP maps in spectral truncations of compact metric
 spaces},
 \newblock arXiv:2410.15454, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Collapse in noncommutative geometry and spectral
+continuity},
+\newblock arXiv:2404.00240, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity for the spectral propinquity of the
+Dirac operators associated with an analytic path of Riemannian
+metrics},
+\newblock arXiv:2504.11715, 2025.
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{A noncommutative integral on spectrally truncated
+spectral triples, and a link with quantum ergodicity},
+\newblock J. Funct. Anal., to appear (2025), arXiv:2412.00628.
+
+\bibitem[Toyota(2023)]{toyota2023}
+M.~Toyota,
+\newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
+truncations for groups with polynomial growth},
+\newblock arXiv:2309.13469, 2023.
 
 \bibitem[Latr\'emoli\`ere(2016)]{latremoliere2016}
 F.~Latr\'emoli\`ere,

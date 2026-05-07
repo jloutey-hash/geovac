@@ -92,18 +92,41 @@ L1'--L4 supply each piece:
       the central subalgebra, via Bozejko-Fendler symbol invertibility
       L2(g)).
 
-  - height_B  (L4(b) contractivity + L4(d) Lipschitz compatibility):
-      ||B(f)||_op <= ||f||_inf            (contractivity)
-      ||[D_CH, B(f)]||_op <= ||f||_Lip     (L3-compat at C_3 = 1)
-      => height contribution bounded by sup_{||f||_Lip <= 1} (1 - hat{K}(N))
-      = 1 - 2/(n_max+1) ~ 1 - 2/n_max -> 1   (asymptotic, NOT a rate)
+  - height_B  (Lipschitz-distortion of the tunnel map; SEE ERRATUM BELOW):
+      Per Paper 38 (papers/standalone/paper_38_su2_propinquity_convergence.tex
+      §3.5, Lemma L5 proof + rem:height_definition), the height for the
+      *metric-spectral-triple* propinquity (Latremoliere arXiv:1811.10843)
+      is the Lipschitz-distortion envelope
+
+          height_B := sup_{||f||_Lip <= 1}  | ||f||_Lip - ||B(f)||_Lip^{O_n_max} |,
+
+      where ||B(f)||_Lip^{O_n_max} = ||[D_CH, B(f)]||_op is the Lipschitz
+      seminorm induced by the truncated CH Dirac.  By L4(d), Young's
+      gradient inequality, and the Stein-Weiss closed-form bound
+      (Paper 38 Appendix A),
+
+          height_B  <=  gamma_{n_max}   (vanishes with n_max).
+
+      *NOT* the operator-norm bound ||B(f)||_op <= ||f||_inf <= pi
+      (which would be the height for the quantum-compact-metric-space
+      propinquity of latremoliere2018 -- a different propinquity).
 
   - height_P  (truncation is UCP of operator norm 1 onto its image):
       0 (P is a projection, exact UCP).
 
-The *driving rate* of the propinquity is reach_B = gamma_{n_max}.
-The other terms are either bounded constants (height_B, contractivity)
-or vanish (height_P).  The composite propinquity bound is
+ERRATUM (2026-05-07): The original L5 implementation in this module
+used the operator-norm bound ||B(f)||_op as height_B, giving
+height_B <= ||f||_inf <= pi (a constant, NOT vanishing in n_max).
+This corresponds to the height of the *quantum-compact-metric-space*
+propinquity (latremoliere2018), which is the wrong propinquity for
+metric spectral triples.  Paper 38 §3.5 corrected this with the
+Lipschitz-distortion form above; this module is now updated to match.
+See `height_B_op_norm` accessor for the legacy bound (kept for L4(b)
+sanity checks but no longer used in the propinquity computation).
+
+The *driving rate* of the propinquity is therefore the maximum of
+reach_B and height_B, both bounded by gamma_{n_max}.  The composite
+propinquity bound is
 
     Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}
                               =  gamma_{n_max}  ->  0,
@@ -377,11 +400,78 @@ class TunnelingPair:
         return float(np.linalg.norm(diff, ord=2))
 
     def height_B(self, f: TestFunction) -> float:
-        """L4(b) height: || B(f) ||_op (the contractivity contribution).
+        """Lipschitz-distortion height of B (Paper 38 §3.5 corrected form).
 
-        For the propinquity, this is bounded above by ||f||_inf (L4(b)).
+        Per Paper 38 §3.5 Lemma L5 + rem:height_definition, the height
+        in the metric-spectral-triple propinquity (Latremoliere
+        arXiv:1811.10843) measures the Lipschitz-distortion of the
+        Berezin map with respect to the Lipschitz seminorms, *not*
+        the operator norm of B(f):
+
+            height_B(f)  :=  | ||f||_Lip  -  ||B(f)||_Lip^{O_n_max} |
+                          =  | ||f||_Lip  -  ||[D_CH, B(f)]||_op |.
+
+        By L4(d), ||[D_CH, B(f)]||_op <= ||grad f||_inf <= ||f||_Lip,
+        so the absolute value reduces to the non-negative difference
+
+            height_B(f)  =  ||f||_Lip - ||[D_CH, B(f)]||_op  >=  0.
+
+        The Stein-Weiss closed-form bound (Paper 38 Appendix A) gives
+        the structural upper bound
+
+            height_B  <=  gamma_{n_max}     (vanishes with n_max).
+
+        See also `height_B_op_norm` for the legacy operator-norm bound,
+        which is the height of the *quantum-compact-metric-space*
+        propinquity and is kept here for L4(b) sanity checks.
+        """
+        from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_test_function
+
+        # ||f||_Lip = ||grad f||_inf (round-S^3 Lipschitz seminorm)
+        f_lip = float(lipschitz_norm_inf_test_function(f, prec=30))
+
+        # ||B(f)||_Lip^{O_n_max} = ||[D_CH, B(f)]||_op
+        # Compute via shell-difference weighting on the scalar Fock basis:
+        # [D_CH, M]_{a,b} = (n_a - n_b) * M_{a,b}  with eigenvalues n + 1/2,
+        # so the chirality factor cancels in the difference and the
+        # full-Dirac operator norm equals the Weyl-block operator norm.
+        B_f = self.berezin.apply(f)
+        n_values = np.array(
+            [lab.n for lab in self.op_sys.basis], dtype=np.float64
+        )
+        diff = n_values[:, None] - n_values[None, :]
+        comm = diff * B_f
+        if comm.size == 0:
+            B_f_lip = 0.0
+        else:
+            B_f_lip = float(np.linalg.norm(comm, ord=2))
+
+        return abs(f_lip - B_f_lip)
+
+    def height_B_op_norm(self, f: TestFunction) -> float:
+        """Legacy operator-norm bound (L4(b) contractivity sanity).
+
+        Returns ||B(f)||_op, bounded above by ||f||_inf via L4(b).
+        This is the height of the *quantum-compact-metric-space*
+        propinquity (latremoliere2018), NOT the metric-spectral-triple
+        propinquity (Latremoliere 2017/2023, arXiv:1811.10843) used in
+        Paper 38 and this module.  Retained for L4(b) sanity checking
+        only; not used in `compute_propinquity_bound`.
         """
         return self.berezin.operator_norm(f)
+
+    def height_B_theoretical(self) -> float:
+        """Structural Stein-Weiss upper bound on height_B.
+
+        Per Paper 38 Appendix A, the Lipschitz-distortion height of
+        the Berezin map admits the closed-form upper bound
+
+            height_B  <=  gamma_{n_max}.
+
+        This is the rate-controlling height contribution to the
+        Latremoliere metric-spectral-triple propinquity bound.
+        """
+        return float(self.gamma_rate_value)
 
     def height_P(self) -> float:
         """L4 truncation P is a projection: height_P = 0 exactly.
@@ -405,17 +495,23 @@ class PropinquityBound:
 
     Lambda(T_{n_max}, T_S3) <= bound = max(reach_B, reach_P, height_B, height_P)
 
-    For our tunneling pair:
-      - reach_B = gamma_{n_max} (L2 mass-concentration rate) * C_3 (L3 Lipschitz)
-      - reach_P = 0 (compression by projection is exact)
-      - height_B <= ||f||_inf (L4 contractivity); on the unit Lipschitz
-        ball ||f||_Lip <= 1, ||f||_inf is bounded by the diameter
-        constant of S^3 (= pi for the round metric)
-      - height_P = 0 (P is a projection)
+    For our tunneling pair (per Paper 38 §3.5 corrected L5 proof):
+      - reach_B  <= gamma_{n_max} (L2 mass-concentration rate) * C_3 = 1
+      - reach_P  <= gamma_{n_max} (dual reach, L2(c) cb-norm symmetry)
+      - height_B <= gamma_{n_max} (Lipschitz-distortion of B; L4(d) +
+                                   Stein-Weiss, Paper 38 Appendix A)
+      - height_P  = 0             (P is a projection)
 
-    The overall bound is therefore C_3 * gamma_{n_max} (since the height
-    contributions are bounded constants independent of n_max, but we
-    quote them numerically for transparency).
+    All four constituents are therefore bounded by gamma_{n_max}, so
+    Lambda(T_{n_max}, T_S3) <= C_3 * gamma_{n_max} = gamma_{n_max} -> 0.
+
+    NOTE on the height correction.  Earlier versions of this module
+    used the operator-norm bound height_B <= ||B(f)||_op <= ||f||_inf
+    <= pi (the height of the *quantum-compact-metric-space* propinquity,
+    latremoliere2018).  Per Paper 38 rem:height_definition, the height
+    in the *metric-spectral-triple* propinquity (Latremoliere 2017/2023,
+    arXiv:1811.10843) is the Lipschitz-distortion form, which DOES
+    vanish with n_max via Stein-Weiss.  See module docstring ERRATUM.
 
     Attributes
     ----------
@@ -432,9 +528,17 @@ class PropinquityBound:
     reach_B_bound : float
         Theoretical upper bound on reach_B = C_3 * gamma_{n_max}.
     height_B_panel : float
-        Empirical max height over the L4 test panel.
+        Empirical max Lipschitz-distortion height over the L4 panel
+        (computed via the corrected definition |||f||_Lip -
+        ||B(f)||_Lip^{O_n_max}|, Paper 38 §3.5).
+    height_B_bound : float
+        Theoretical Stein-Weiss upper bound on height_B = gamma_{n_max}.
+    height_B_op_norm_panel : float
+        Legacy operator-norm bound max ||B(f)||_op (L4(b) sanity).
+        NOT used in propinquity_bound; retained for diagnostics.
     propinquity_bound : float
         The propinquity bound Lambda(T_{n_max}, T_S3) <= this value.
+        Equal to max(reach_B_bound, height_B_bound) = gamma_{n_max}.
     qualitative_rate_only : bool
         True if the rate is the qualitative gamma -> 0 (Track C
         quantitative rate not yet incorporated).
@@ -449,6 +553,8 @@ class PropinquityBound:
     reach_B_panel: float
     reach_B_bound: float
     height_B_panel: float
+    height_B_bound: float
+    height_B_op_norm_panel: float
     propinquity_bound: float
     qualitative_rate_only: bool
     track_c_constant: Optional[float] = None
@@ -463,6 +569,8 @@ class PropinquityBound:
             "reach_B_panel": self.reach_B_panel,
             "reach_B_bound": self.reach_B_bound,
             "height_B_panel": self.height_B_panel,
+            "height_B_bound": self.height_B_bound,
+            "height_B_op_norm_panel": self.height_B_op_norm_panel,
             "propinquity_bound": self.propinquity_bound,
             "qualitative_rate_only": self.qualitative_rate_only,
             "track_c_constant": self.track_c_constant,
@@ -506,13 +614,17 @@ def compute_propinquity_bound(
 
     reach_B_max = 0.0
     height_B_max = 0.0
+    height_B_op_norm_max = 0.0
     for f in panel:
         rB = pair.reach_B(f)
-        hB = pair.height_B(f)
+        hB = pair.height_B(f)             # Lipschitz-distortion form (corrected)
+        hB_op = pair.height_B_op_norm(f)  # legacy operator-norm bound (sanity)
         if rB > reach_B_max:
             reach_B_max = rB
         if hB > height_B_max:
             height_B_max = hB
+        if hB_op > height_B_op_norm_max:
+            height_B_op_norm_max = hB_op
 
     # Theoretical bound: reach_B <= C_3 * gamma_{n_max} on the unit
     # Lipschitz ball.  Empirical reach_B_max may exceed this on the
@@ -521,12 +633,20 @@ def compute_propinquity_bound(
     # tabulated in r25_l3_lipschitz_bound).
     reach_B_theoretical = pair.c_lipschitz * pair.gamma_rate_value
 
-    # Propinquity bound: max of constituent reaches/heights.  The
-    # leading-order driving term is reach_B_theoretical.  Heights and
-    # height_P contribute zero to the n_max-dependence; height_B
-    # is bounded by the diameter (= pi) on the unit Lipschitz ball,
-    # but is not the rate-limiting term.
-    propinquity = max(reach_B_theoretical, 0.0)  # reach_P = 0, height_P = 0
+    # Theoretical bound on the Lipschitz-distortion height: by L4(d)
+    # + Young's gradient inequality + Stein-Weiss (Paper 38 Appendix A),
+    # height_B <= gamma_{n_max} on the unit Lipschitz ball.
+    height_B_theoretical = pair.height_B_theoretical()
+
+    # Propinquity bound: max of constituent reaches/heights, all of
+    # which are bounded by gamma_{n_max} (modulo C_3 = 1 from L3).
+    # reach_P = 0 (compression by projection); height_P = 0.
+    propinquity = max(
+        reach_B_theoretical,    # <= C_3 * gamma_{n_max} = gamma_{n_max}
+        height_B_theoretical,   # <= gamma_{n_max} (Stein-Weiss)
+        0.0,                    # reach_P = 0
+        0.0,                    # height_P = 0
+    )
 
     bound = PropinquityBound(
         n_max=n_max,
@@ -536,6 +656,8 @@ def compute_propinquity_bound(
         reach_B_panel=reach_B_max,
         reach_B_bound=reach_B_theoretical,
         height_B_panel=height_B_max,
+        height_B_bound=height_B_theoretical,
+        height_B_op_norm_panel=height_B_op_norm_max,
         propinquity_bound=propinquity,
         qualitative_rate_only=(track_c_constant is None),
         track_c_constant=track_c_constant,

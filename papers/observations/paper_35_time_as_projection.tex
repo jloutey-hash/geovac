@@ -870,10 +870,43 @@ used as a check rather than as input.  The remaining $\sim +4.4$~MHz
 of non-loop physics is within scope for the rest-mass projection
 (Paper~34~\S\,III.14) and Paper~23's nuclear-electronic composed
 Hamiltonian, but is not itself a test of
-Prediction~\ref{pred:pi_iff_temporal}.  Sprint provenance:
+Prediction~\ref{pred:pi_iff_temporal}.
+
+Sprint LS-8a (May 2026) closed the strong-test attempt at $C_{2S}$
+extraction with a clean structural verdict.  The bare iterated
+Connes--Chamseddine spectral action on Dirac-$S^3$ (rainbow plus
+crossed topologies, full $\mathrm{SO}(4)$ vertex selection at four
+vertices, bound-state Sturmian projection at $n_\text{ext} = 1$ for
+hydrogen $2S$) faithfully reproduces the UV-divergent
+\emph{integrand} of two-loop QED: the $(\alpha/\pi)^2 (Z\alpha)^4 /
+n^3$ prefactor emerges as predicted, the sign is correct at every
+$n_\text{max}$, and the sum diverges as
+$\text{raw} \sim 6.6 \cdot N^{3.43}$---power-law UV divergence
+inherited from flat-space QED.  Two natural regularizations
+within the GeoVac toolkit fail: subtracting the disconnected
+$[\Sigma^{1L}]^2$ piece removes ${<}0.1\%$ of the total at every
+$n_\text{max}$ (the divergence sits in the genuine connected
+diagram), and Drake--Swainson asymptotic subtraction
+(Paper~34's 13th projection) does not apply to power-law
+divergences.  Finite extraction of $C_{2S}$ requires $Z_2$ and
+$\delta m$ renormalization counterterms which are
+\emph{not generated} by the bare CC spectral action.  This places
+a clean scope boundary between one-loop closure (achieved at
+sub-percent in Paper~36 via Drake--Swainson plus the Eides~\S\,3.2
+canonical convention) and two-loop closure (requires renormalization
+machinery the framework does not natively produce).
+\textbf{Refined Prediction~1:} the GeoVac framework controls the
+$\pi$ content of the \emph{finite parts} of any QED observable; UV
+divergences of multi-loop contributions are inherited from the
+underlying field theory and renormalized by counterterms that the
+framework does not autonomously generate.  This is consistent with
+and strengthens the original Prediction~\ref{pred:pi_iff_temporal}:
+$\pi$ enters via temporal integration; renormalization is a separate
+projection not yet in the Paper~34 catalogue.  Sprint provenance:
 \texttt{debug/ls5\_two\_loop\_scoping\_memo.md},
-\texttt{debug/ls6a\_eides\_convention\_memo.md}, and
-\texttt{debug/ls7\_two\_loop\_se\_memo.md}.
+\texttt{debug/ls6a\_eides\_convention\_memo.md},
+\texttt{debug/ls7\_two\_loop\_se\_memo.md}, and
+\texttt{debug/ls8a\_two\_loop\_self\_energy\_memo.md}.
 
 \item \textbf{Compactification beyond $S^1_\beta$.}  We tested only the
 $S^3 \times S^1_\beta$ compactification.  More general temporal

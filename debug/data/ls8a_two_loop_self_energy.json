@@ -1,0 +1,70 @@
+{
+  "sprint": "LS-8a",
+  "date": "2026-05-07",
+  "verdict": "WEAK",
+  "verdict_summary": "Bare iterated CC spectral action faithfully reproduces UV-divergent structure of two-loop QED but cannot autonomously extract finite C_2S=+3.63 without renormalization counterterms (Z_2, delta_m).",
+  "paper35_prediction1_test": "Consistent at structural level; strong test (native bracket extraction) requires renormalization machinery.",
+  "literature": {
+    "C_2S_target": "3.626642",
+    "two_loop_SE_2S_MHz": "0.857",
+    "prefactor_MHz_per_dim": "0.23630701650169789186459957157690996448072580839471"
+  },
+  "asymptotic_growth": {
+    "fit_form": "raw_total ~ A * N^alpha",
+    "alpha": 3.43,
+    "A": 6.6,
+    "interpretation": "power-law UV divergence; Drake-Swainson does not apply"
+  },
+  "native_results": [
+    {
+      "n_max": 2,
+      "rainbow": "37.45025695076031245484449506583141378167260240206",
+      "crossed": "7.3697292794668887963348604748021657642648896293211",
+      "raw_total": "44.819986230227201251179355540633579545937492031381",
+      "C_2S_native": "0.28382587847999377880112982204663697221649414711122",
+      "C_2S_native_float": 0.2838258784799938,
+      "ratio_native_over_lit": 0.07826134437311259,
+      "predicted_MHz": 0.06707004654958079
+    },
+    {
+      "n_max": 3,
+      "rainbow": "182.73284851647168867888137593626461341401983203804",
+      "crossed": "83.600786758552257157037976762387091763687482210918",
+      "raw_total": "266.33363527502394583591935269865170517770731424896",
+      "C_2S_native": "1.6865774481145068930330723192789883061638551442983",
+      "C_2S_native_float": 1.6865774481145068,
+      "ratio_native_over_lit": 0.4650520917461682,
+      "predicted_MHz": 0.3985500848629863
+    },
+    {
+      "n_max": 4,
+      "rainbow": "500.12468579267482108262532905377036899794913698915",
+      "crossed": "261.16865359292118447433923417312180205834196490876",
+      "raw_total": "761.29333938559600555696456322689217105629110189791",
+      "C_2S_native": "4.8209463903485342174449343739256626699086523578811",
+      "C_2S_native_float": 4.820946390348534,
+      "ratio_native_over_lit": 1.3293141121589984,
+      "predicted_MHz": 1.139223458217892
+    },
+    {
+      "n_max": 5,
+      "rainbow": "1054.0295258161067941745176418211686045374570292818",
+      "crossed": "603.79785814155681930385870655932488344068682694952",
+      "raw_total": "1657.8273839576636134783763483804934879781438562313",
+      "C_2S_native": "10.498314551079427905230385604509519817339958716493",
+      "C_2S_native_float": 10.498314551079428,
+      "ratio_native_over_lit": 2.8947755392121493,
+      "predicted_MHz": 2.4808253898619417
+    },
+    {
+      "n_max": 6,
+      "rainbow": "1908.8219628936731943319341401715340300723228121767",
+      "crossed": "1143.9829142593355491865340265134154496351984587399",
+      "raw_total": "3052.8048771530087435184681666849494797075212709166",
+      "C_2S_native": "19.332112723890274959131539337889991120647587750476",
+      "C_2S_native_float": 19.332112723890276,
+      "ratio_native_over_lit": 5.33058204363438,
+      "predicted_MHz": 4.568313880457023
+    }
+  ]
+}

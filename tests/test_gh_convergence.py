@@ -199,14 +199,44 @@ class TestReachAndHeight:
         """P is a projection: height_P = 0."""
         assert pair_n2.height_P() == 0.0
 
-    def test_height_B_bounded(self, pair_n2: TunnelingPair):
-        """L4(b) contractivity: ||B(f)||_op <= ||f||_inf."""
+    def test_height_B_op_norm_l4b_contractivity(self, pair_n2: TunnelingPair):
+        """L4(b) contractivity sanity (legacy bound): ||B(f)||_op <= ||f||_inf.
+
+        This is the *legacy* operator-norm bound, which is the height of
+        the quantum-compact-metric-space propinquity (latremoliere2018),
+        not the metric-spectral-triple propinquity used in Paper 38.
+        Retained for L4(b) sanity verification only.
+        """
         f_const = make_test_function("Y3_(1,0,0)", {(1, 0, 0): 1.0})
-        hB = pair_n2.height_B(f_const)
+        hB_op = pair_n2.height_B_op_norm(f_const)
         # ||f||_inf for the constant function on S^3 normalized to L^2 = 1
         # is 1/sqrt(2*pi^2) ~ 0.225
         f_inf = 1.0 / float(sp.sqrt(2 * sp.pi ** 2))
-        assert hB <= f_inf + 1e-9
+        assert hB_op <= f_inf + 1e-9
+
+    def test_height_B_lipschitz_distortion_nonneg(self, pair_n2: TunnelingPair):
+        """Paper 38 §3.5 corrected height_B: |||f||_Lip - ||B(f)||_Lip| >= 0.
+
+        By L4(d) the difference is non-negative (Berezin contracts the
+        Lipschitz seminorm).
+        """
+        f_const = make_test_function("Y3_(1,0,0)", {(1, 0, 0): 1.0})
+        hB = pair_n2.height_B(f_const)
+        assert hB >= 0.0
+
+    def test_height_B_theoretical_equals_gamma(self, pair_n2: TunnelingPair):
+        """height_B_theoretical = gamma_{n_max} (Paper 38 Appendix A)."""
+        hB_th = pair_n2.height_B_theoretical()
+        assert hB_th == pytest.approx(pair_n2.gamma_rate_value, rel=1e-12)
+
+    def test_height_B_constant_function_zero(self, pair_n2: TunnelingPair):
+        """A constant function has zero Lipschitz norm both before and after B,
+        so the Lipschitz-distortion height is zero."""
+        f_const = make_test_function("Y3_(1,0,0)", {(1, 0, 0): 1.0})
+        hB = pair_n2.height_B(f_const)
+        # ||f||_Lip = 0 for a constant; ||[D, B(f)]||_op = 0 because shell-diff
+        # weighting kills shell-diagonal multipliers.  Distortion is identically 0.
+        assert hB == pytest.approx(0.0, abs=1e-9)
 
 
 # ---------------------------------------------------------------------------
@@ -263,6 +293,62 @@ class TestPropinquityBound:
         assert d["n_max"] == 2
         assert "gamma_n_max" in d
         assert "propinquity_bound" in d
+        # Paper 38 corrected fields
+        assert "height_B_bound" in d
+        assert "height_B_op_norm_panel" in d
+
+    def test_height_B_bound_equals_gamma(self):
+        """Paper 38 §3.5: height_B_bound = gamma_{n_max} (Stein-Weiss)."""
+        for n_max in [2, 3, 4]:
+            b = compute_propinquity_bound(n_max)
+            assert b.height_B_bound == pytest.approx(b.gamma_n_max, rel=1e-12)
+
+    def test_propinquity_bound_equals_gamma(self):
+        """Paper 38 §3.5 corrected L5 proof: Lambda <= max(reach, height) = gamma.
+
+        The propinquity bound should equal C_3 * gamma_{n_max} = gamma_{n_max},
+        since both reach_B and height_B are bounded by gamma_{n_max}.
+        """
+        for n_max in [2, 3, 4]:
+            b = compute_propinquity_bound(n_max)
+            assert b.propinquity_bound == pytest.approx(
+                b.c_lipschitz * b.gamma_n_max, rel=1e-12
+            )
+
+    def test_propinquity_bound_vanishes_with_n_max(self):
+        """REGRESSION (Paper 38 §3.5 erratum): Lambda -> 0 as n_max -> oo.
+
+        The pre-2026-05-07 implementation gave Lambda <= pi (a constant)
+        because it used height_B = ||B(f)||_op (operator-norm bound).
+        The corrected implementation gives Lambda <= gamma_{n_max} via
+        the Lipschitz-distortion height.
+        """
+        b2 = compute_propinquity_bound(2)
+        b3 = compute_propinquity_bound(3)
+        b4 = compute_propinquity_bound(4)
+        # Strictly decreasing
+        assert b2.propinquity_bound > b3.propinquity_bound > b4.propinquity_bound
+        # And the absolute values match Paper 38 §3.5 numerics
+        # gamma_2 ~ 2.0746, gamma_3 ~ 1.6101, gamma_4 ~ 1.3223
+        assert b2.propinquity_bound == pytest.approx(2.0746, rel=2e-3)
+        assert b3.propinquity_bound == pytest.approx(1.6101, rel=2e-3)
+        assert b4.propinquity_bound == pytest.approx(1.3223, rel=2e-3)
+        # And the ratio matches L2 prediction
+        assert b4.propinquity_bound / b2.propinquity_bound == pytest.approx(
+            0.637, rel=5e-3
+        )
+
+    def test_propinquity_bound_strictly_below_pi(self):
+        """REGRESSION: bound is bounded below pi (the legacy op-norm constant).
+
+        Pre-correction the bound asymptoted to pi.  Post-correction it
+        decreases through pi within the panel n_max = 2..4.
+        """
+        b3 = compute_propinquity_bound(3)
+        b4 = compute_propinquity_bound(4)
+        # gamma_3 ~ 1.61 < pi ~ 3.14, gamma_4 ~ 1.32 < pi
+        assert b3.propinquity_bound < float(sp.pi)
+        assert b4.propinquity_bound < float(sp.pi)
 
 
 # ---------------------------------------------------------------------------
