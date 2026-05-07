@@ -1,0 +1,186 @@
+{
+  "c": "4.1093214674877940927579607260741005838057691088362615503253972964276017819113301",
+  "dps": 120,
+  "results_by_basis": {
+    "M2_strict_min": [
+      {
+        "max_coeff": 50,
+        "found": false
+      },
+      {
+        "max_coeff": 200,
+        "found": false
+      },
+      {
+        "max_coeff": 1000,
+        "found": false
+      },
+      {
+        "max_coeff": 10000,
+        "found": false
+      },
+      {
+        "max_coeff": 100000,
+        "found": false
+      }
+    ],
+    "M2_plus_log2": [
+      {
+        "max_coeff": 50,
+        "found": false
+      },
+      {
+        "max_coeff": 200,
+        "found": false
+      },
+      {
+        "max_coeff": 1000,
+        "found": false
+      },
+      {
+        "max_coeff": 10000,
+        "found": false
+      },
+      {
+        "max_coeff": 100000,
+        "found": false
+      }
+    ],
+    "M2_plus_log2_euler": [
+      {
+        "max_coeff": 50,
+        "found": false
+      },
+      {
+        "max_coeff": 200,
+        "found": false
+      },
+      {
+        "max_coeff": 1000,
+        "found": false
+      },
+      {
+        "max_coeff": 10000,
+        "found": false
+      },
+      {
+        "max_coeff": 100000,
+        "found": false
+      }
+    ],
+    "M2_M3_extended": [
+      {
+        "max_coeff": 50,
+        "found": false
+      },
+      {
+        "max_coeff": 200,
+        "found": false
+      },
+      {
+        "max_coeff": 1000,
+        "found": false
+      },
+      {
+        "max_coeff": 10000,
+        "found": false
+      },
+      {
+        "max_coeff": 100000,
+        "found": false
+      }
+    ],
+    "stirling_glaisher": [
+      {
+        "max_coeff": 50,
+        "found": false,
+        "skipped_rel": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "note": "a_0=0 (basis-internal relation); ignored"
+      },
+      {
+        "max_coeff": 200,
+        "found": false,
+        "skipped_rel": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "note": "a_0=0 (basis-internal relation); ignored"
+      },
+      {
+        "max_coeff": 1000,
+        "found": false,
+        "skipped_rel": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "note": "a_0=0 (basis-internal relation); ignored"
+      },
+      {
+        "max_coeff": 10000,
+        "found": false,
+        "skipped_rel": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "note": "a_0=0 (basis-internal relation); ignored"
+      },
+      {
+        "max_coeff": 100000,
+        "found": false,
+        "skipped_rel": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "note": "a_0=0 (basis-internal relation); ignored"
+      }
+    ]
+  }
+}

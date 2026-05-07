@@ -868,6 +868,73 @@ selecting the sub-mechanism.  The first-vs.\ second-order axis named
 above (motivic weight) is exactly the $k = 1$ vs.\ $k = 2$ split; the
 $k = 0$ free-Mellin case is the Hopf-base measure singled out by Paper~25.
 
+\paragraph{Mechanism-as-domain sharpening (Sprint MR-A/B/C, May~2026).}
+The master Mellin engine reading admits a further refinement when read
+in the \emph{predictive} direction. A three-track sprint sequence
+(MR-A: Dirac propinquity rate; MR-B: spectral-action modular residual;
+MR-C: L2 next-order constant) tested whether the engine predicts the
+transcendental ring of a convergence rate from the operator order $k$
+of the underlying mechanism.
+
+Sprint MR-B closed the M2 prediction in closed form. The
+Camporesi--Higuchi heat kernel on the half-integer Dirac spectrum
+admits a Jacobi $\vartheta_2$ modular decomposition
+\begin{equation}
+\label{eq:dirac_modular_residual}
+   \varepsilon(t) \;=\;
+   \sum_{m \ge 1} (-1)^m \sqrt{\pi}\, e^{-m^2 \pi^2 / t}
+     \left[ t^{-3/2} - 2 m^2 \pi^2 t^{-5/2} - \tfrac{1}{2} t^{-1/2}\right]
+\end{equation}
+verified to $> 100$ digits at every tested $t$. Every coefficient sits
+in the M2 ring $\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$;
+the modular exponent is exactly $\pi^2$. The leading prefactor
+$2\pi^{5/2}$, the subleading $-\sqrt{\pi}\,t$, and the $\tfrac{1}{2}\sqrt{\pi}\,t^2$
+correction at the next order are all in M2.
+
+Sprint MR-A computed the natural Dirac analog of the SU(2) scalar
+central Fej{\'e}r propinquity rate (whose asymptote is
+$4/\pi = \mathrm{Vol}(S^2)/\pi^2$, the M1 signature) and obtained the
+structural identity $\gamma_n^{\rm Dirac} = \pi$ for every $n_{\max} \ge 1$:
+the half-integer-only Peter--Weyl truncation cannot span the constant
+function $\chi_0$, so the kernel does not localize at the identity, and
+no asymptotic decay exists to PSLQ. The L2 scalar rate decay is in
+fact an integer$\times$half-integer interference effect; removing the
+integer-spin sector kills it. This is exactly what the M1 mechanism
+predicts when the relevant sub-bundle lacks $\chi_0$.
+
+Sprint MR-C extracted the L2 next-order constant $c$ in
+$n \cdot \gamma_n^{\rm scalar} \sim (4/\pi)\log(n) + c + O(\log(n)/n)$
+to $\geq 80$ digits ($c = 4.1093214674877940927\ldots$), and ran PSLQ
+at coefficient ceiling $10^4$ against M1, M2, M3 and the extended
+ring $\{\gamma_E, \log 2, G, \zeta(3)\}$. No identification was
+returned.
+
+The combined verdict reads:
+
+\begin{quote}
+\textit{Mechanism-as-domain partition.}
+The index $k \in \{0, 1, 2\}$ classifies both the M-mechanism and
+the natural domain of observable from which its signature can be
+extracted: $k = 0$ for state-space propinquity rates (M1, $4/\pi$),
+$k = 2$ for heat-kernel and spectral-action convergence (M2,
+$\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$), $k = 1$ for
+vertex-restricted parity-character spectral sums (M3, Catalan $G$ /
+Dirichlet $\beta(s)$, witnessed in Paper~28~\S\,QED-vertex but not
+in propinquity rates).
+\end{quote}
+
+Mixing the index of the question (e.g.\ ``propinquity'') with the
+index of the mechanism (``vertex parity'') produces structural
+degeneracy: this is exactly what MR-A measured. MR-C's negative is
+consistent with the same reading: the L2 subleading constant is
+downstream of an M1 Stein--Weiss IBP, not a direct
+$\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$, and the predictive
+engine does not commit to the rings of derivative quantities along
+subsequent analytical pipelines. The engine is predictive
+\emph{within} each domain, where the domain is determined by $k$.
+Source memos: \texttt{debug/mr\_\{a,b,c\}\_*\_memo.md}, data
+\texttt{debug/data/mr\_\{a,b,c\}\_*.json}.
+
 \paragraph{Discrete $c_1$ verification (Sprint TS-E3 falsification target).}
 The strongest concrete computational falsification target flagged by Track
 TS-E3 is the discrete first Chern number of the Hopf U(1) bundle on the

@@ -1,0 +1,227 @@
+{
+  "sprint": "MR-A",
+  "title": "Dirac analog of L2 central Fejer propinquity rate",
+  "verdict": "scenario_d_structural_negative",
+  "structural_finding": "gamma_n^Dirac = pi exactly for every n_max, because the half-integer-only Peter-Weyl truncation does not contain the constant function and all cross-character integrals against chi vanish for integer frequency.",
+  "symbolic_proof": {
+    "1": {
+      "gamma_symbolic": "pi",
+      "equals_pi": true,
+      "compute_seconds": 0.13498163223266602
+    },
+    "2": {
+      "gamma_symbolic": "pi",
+      "equals_pi": true,
+      "compute_seconds": 34.10563039779663
+    },
+    "3": {
+      "gamma_symbolic": "pi",
+      "equals_pi": true,
+      "compute_seconds": 302.5081031322479
+    }
+  },
+  "diagonal_proof": {
+    "1": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "2": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "3": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "4": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "5": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "6": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "7": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "8": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "9": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "10": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "11": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "12": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "13": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "14": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "15": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "16": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "17": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "18": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "19": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    },
+    "20": {
+      "gamma_via_structure": "pi",
+      "equals_pi": true
+    }
+  },
+  "numerical_panel": [
+    {
+      "n_max": 2,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.05324864387512207
+    },
+    {
+      "n_max": 3,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.04400229454040527
+    },
+    {
+      "n_max": 4,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.05016636848449707
+    },
+    {
+      "n_max": 5,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.05655694007873535
+    },
+    {
+      "n_max": 8,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.07824492454528809
+    },
+    {
+      "n_max": 10,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.1935572624206543
+    },
+    {
+      "n_max": 16,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.2709810733795166
+    },
+    {
+      "n_max": 20,
+      "gamma_numerical": "3.1415926535897932384626433832795028841971693993751",
+      "rel_error_vs_pi": "0.0",
+      "compute_seconds": 0.32611894607543945
+    }
+  ],
+  "asymptotic_rate_panel": [
+    {
+      "n_max": 2,
+      "gamma": "3.1415926535897932384626433832795028841971693993751",
+      "n_gamma_over_log_n": "9.0647202836543876192553658914333336203437229354476"
+    },
+    {
+      "n_max": 4,
+      "gamma": "3.1415926535897932384626433832795028841971693993751",
+      "n_gamma_over_log_n": "9.0647202836543876192553658914333336203437229354476"
+    },
+    {
+      "n_max": 8,
+      "gamma": "3.1415926535897932384626433832795028841971693993751",
+      "n_gamma_over_log_n": "12.08629371153918349234048785524444482712496391393"
+    },
+    {
+      "n_max": 16,
+      "gamma": "3.1415926535897932384626433832795028841971693993751",
+      "n_gamma_over_log_n": "18.129440567308775238510731782866667240687445870895"
+    },
+    {
+      "n_max": 32,
+      "gamma": "3.1415926535897932384626433832795028841971693993751",
+      "n_gamma_over_log_n": "29.007104907694040381617170852586667585099913393432"
+    }
+  ],
+  "pslq_results": [
+    {
+      "label": "M1",
+      "relation": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "found": true
+    },
+    {
+      "label": "M2",
+      "relation": [
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "found": true
+    },
+    {
+      "label": "M3",
+      "relation": [
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "found": true
+    }
+  ]
+}

@@ -1494,6 +1494,64 @@ predicted integer-valued by the case-exhaustion; if a $\pi$ appears
 unexpectedly, a fourth mechanism M4 would need to be named.
 \end{remark}
 
+\begin{remark}[Mechanism-as-domain sharpening (Sprint MR-A/B/C, May~2026)]
+\label{rem:master_mellin_domain}
+A three-track follow-up sprint (MR-A: Dirac propinquity rate;
+MR-B: spectral-action modular residual; MR-C: L2 next-order
+constant) tested whether the master Mellin engine of
+Paper~18~\S~III.7 is also \emph{predictive} for convergence rates,
+not only classifying for $\pi$-sources. The combined verdict
+sharpens the case-exhaustion theorem into a mechanism-as-domain
+partition.
+\begin{itemize}
+\item M1 ($k = 0$) is the natural domain of state-space
+propinquity rates. The L2 sprint (2026-05-06) measured the
+asymptotic constant of the SU(2) scalar central Fej{\'e}r kernel as
+$4/\pi = \mathrm{Vol}(S^2)/\pi^2$.
+\item M2 ($k = 2$) is the natural domain of heat-kernel and
+spectral-action convergence. Sprint MR-B derived a closed form for
+the Camporesi--Higuchi modular residual:
+$$
+\varepsilon(t) \;=\; \sum_{m \ge 1} (-1)^m \sqrt{\pi}\,
+e^{-m^2 \pi^2 / t}\left[t^{-3/2} - 2m^2 \pi^2\, t^{-5/2}
+   - \tfrac{1}{2}\, t^{-1/2}\right].
+$$
+Verified at $> 100$ digits at every tested $t$; every coefficient in
+$\sqrt{\pi}\,\mathbb{Q} \oplus \pi^2\,\mathbb{Q}$; modular exponent
+exactly $\pi^2$ via Jacobi $\vartheta_2$.
+\item M3 ($k = 1$) is the natural domain of vertex-restricted
+parity-character observables (Paper~28~\S\,QED-vertex:
+Catalan~$G$, $\beta(4)$). Sprint MR-A demonstrated that asking
+for M3 from a half-integer-only Peter--Weyl propinquity is a
+\emph{category error}: the half-integer-spin truncation cannot span
+the constant function $\chi_0$ on $\mathrm{SU}(2)$, so the kernel
+does not localize and the moment is identically $\gamma_n^{\rm Dirac}
+= \pi$ for every $n_{\max} \ge 1$. The L2 scalar rate's
+$(4/\pi)\log(n)/n$ decay is an integer$\times$half-integer
+interference effect; removing the integer sector kills it. This is
+exactly what the M1 mechanism predicts when the sub-bundle lacks
+the constant function.
+\end{itemize}
+The reading is therefore: the index $k \in \{0, 1, 2\}$ classifies
+\emph{both} the sub-mechanism and the natural domain of observable
+from which its transcendental signature can be extracted. The
+case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion}
+classifies \emph{which} transcendentals appear; the domain partition
+refines to \emph{which observables} can produce them. Sprint MR-C
+extracted the L2 next-order constant $c = 4.1093214674877940927\ldots$
+to $\geq 80$ dps via Richardson extrapolation but found no PSLQ
+identification in $M_1 \cup M_2 \cup M_3 \cup \{\gamma_E, \log 2,
+G, \zeta(3)\}$ at coefficient ceiling $10^4$. This is consistent
+with $c$ being a downstream Stein--Weiss IBP derivative of the M1
+mechanism rather than a direct Mellin output, and is a partial
+negative against extending the predictive engine to all
+asymptotic-expansion coefficients along subsequent analytical
+pipelines. The engine is predictive \emph{within} each domain.
+Source: \texttt{debug/mr\_a\_dirac\_propinquity\_*},
+\texttt{debug/mr\_b\_spectral\_action\_rate\_*},
+\texttt{debug/mr\_c\_l2\_subleading\_*}.
+\end{remark}
+
 \begin{theorem}[Gromov--Hausdorff convergence on $S^3$]
 \label{thm:gh_convergence}
 Let $\mathcal{T}_{S^3} = (C^\infty(S^3), L^2(S^3, \Sigma), D_{\mathrm{CH}})$
