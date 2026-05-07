@@ -1846,6 +1846,12 @@ $\mathbb{C}$ at the level of $M_{\dim H}(\mathbb{C})$ even though
 their span $\mathcal{O}_{n_{\max}}$ is not closed under multiplication),
 so the $a \cdot b \notin \mathcal{O}$ feature does not block the
 fluctuation calculus.
+Sprint~H1 (Sec.~\ref{sec:higgs_h1}) closes this gap up to the
+Yukawa-undetermined verdict; Sprint~G3 (Sec.~\ref{sec:g3}) supplies
+the structural reason that $Y$ is undetermined --- $\gamma_{\mathrm{GV}}$
+and $\gamma_F$ are independent commuting $\mathbb{Z}_2$ gradings, the
+Yukawa lives on the $\gamma_F$ flip, and no GeoVac-side data couples
+to that flip.  G2 and G3 are therefore one structural fact, not two.
 \item[\textbf{G3}] (Hypercharge / electroweak unification.)\ The SM
 relation $Q = T_3 + Y_W/2$ requires co-located $U(1)_Y$ and
 $\mathrm{SU}(2)_L$ on a common Hilbert space with a left--right
@@ -1859,6 +1865,13 @@ Dirac with both chiralities) is a $\mathbb{Z}_2$-grading of the
 spinor bundle, not the SM weak-isospin chirality, and it does not
 distinguish left- and right-handed sectors of a charged matter
 field.
+Sprint~G3 (Sec.~\ref{sec:g3}) closed this in the negative on $S^3$
+alone:\ $\gamma_{\mathrm{GV}}$ and $\gamma_F$ are independent commuting
+$\mathbb{Z}_2$ gradings on $\mathcal{H}_{\mathrm{GV}} \otimes
+\mathcal{H}_F$, with operator-norm residual exactly~$2$ at every
+$n_{\max} \in \{1, 2, 3\}$.  Identification is structurally
+impossible by tensor-product factorisation, and the electroweak
+co-location route is therefore pushed to G4.
 \item[\textbf{G4}] (Cross-manifold obstruction, the dominant gap.)\
 Connes' SM uses a \emph{single} spectral triple
 $(\mathcal{A}_{\mathrm{SM}}, \mathcal{H}_{\mathrm{SM}},
@@ -1879,6 +1892,14 @@ Sec.~\ref{sec:coulomb_ho}:\ the absence of cross-manifold
 unification is a structural symptom of the same asymmetry that
 forbids a calibration-$\pi$ analog and a spectrum-computing $L_0$
 on $S^5$.
+Sprint~G4 scoping (Sec.~\ref{sec:g4}) sharpens this gap into G4a
+(Connes SM on $\mathcal{T}_{S^3}$ alone with
+$\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$,
+1--2 month sprint, predicted positive-thin) and G4b (genuine
+cross-manifold $\mathcal{T}_{S^3} \otimes \mathcal{T}_{S^5}$, blocked
+at the NCG-framework level by the Riemannian-vs-Hardy-sector
+asymmetry).  After G3 NEGATIVE, G4a is the only sprint-scale
+electroweak-unification path remaining.
 \end{enumerate}
 
 A footnote on the GUT-embedding direction:\ Sprint~4H Track~SM-C
@@ -2090,6 +2111,322 @@ the Yukawa is not derived from GeoVac structure.
 \texttt{tests/test\_almost\_commutative.py} (38 passing);\ data
 \texttt{debug/data/h1\_falsifier.json};\ memo
 \texttt{debug/h1\_ac\_extension\_memo.md}.
+
+% -------------------------------------------------------------------
+\subsection{Sprint G3:\ Electroweak chirality co-location on $S^3$}
+\label{sec:g3}
+% -------------------------------------------------------------------
+
+Sprint~H1 (Sec.~\ref{sec:higgs_h1}) closed G2 up to the
+Yukawa-undetermined verdict and left G3 (electroweak unification,
+requiring identification of $\gamma_{\mathrm{GV}}$ with the SM
+weak-isospin chirality on $\mathcal{H}_F$) as the next physics
+question.  The G3 sprint (May~2026) is a constructive test:\ build
+$\gamma_{\mathrm{GV}}$ on the GeoVac side and $\gamma_F$ on the AC
+side as separate $\mathbb{Z}_2$ gradings each satisfying the
+standard NCG axioms, lift both to the tensor-product Hilbert space
+$\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$, and ask whether
+the residual
+
+\begin{equation}
+\Delta := \gamma_{\mathrm{GV}} \otimes \mathbb{1}_F -
+          \mathbb{1}_{\mathrm{GV}} \otimes \gamma_F
+\end{equation}
+
+vanishes (or vanishes on the physical sector under standard
+left/right convention swap).  $\Delta = 0$ would close G3 in the
+positive; $\Delta \neq 0$ robustly would close G3 in the negative
+on $S^3$ alone and push electroweak unification onto G4
+cross-manifold territory.
+
+\paragraph{Constructions.}  The sprint executed three parallel
+tracks (memos
+\texttt{debug/g3a\_chirality\_memo.md},
+\texttt{debug/g3b\_chirality\_F\_audit\_memo.md},
+\texttt{debug/g3c\_tensor\_chirality\_memo.md}).  Track~G3-A
+constructed
+$\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}_w$ on the
+R3.5 full Dirac operator system at $n_{\max} \in \{1, 2, 3\}$, with
+$w = \mathrm{spinor\_dim}(n_{\max})$ and the basis ordering
+$[\chi = +1, \chi = -1]$ from \texttt{full\_dirac\_basis}.  All three
+$\mathbb{Z}_2$-grading axioms are bit-exact at every tested
+$n_{\max}$:\ $\gamma_{\mathrm{GV}}^2 = \mathbb{1}$,
+$\{\gamma_{\mathrm{GV}}, D_{\mathrm{truthful}}\} = 0$, and
+$\gamma_{\mathrm{GV}} M \gamma_{\mathrm{GV}} = M$ as a matrix
+equality for every scalar multiplier $M \in \mathcal{O}_{n_{\max}}$.
+The natural $\sigma_z$ candidate (the $D$-eigenvalue sign) commutes
+with $D_{\mathrm{truthful}}$ rather than anticommuting and is exposed
+only as a diagnostic.  Module
+\texttt{geovac/chirality\_grading.py} (50/50 tests passing).
+
+Track~G3-B added \texttt{ElectroweakFiniteTriple.chirality\_F()} to
+\texttt{geovac/almost\_commutative.py} with the standard
+Connes--Marcolli SM convention at KO-dim~6 of $\mathcal{T}_F$:
+
+\begin{equation}
+\gamma_F^{\mathrm{matter}} = \mathrm{diag}(+1, +1, -1, -1), \qquad
+\gamma_F^{\mathrm{anti}} = -\gamma_F^{\mathrm{matter}}.
+\end{equation}
+
+The antimatter sign-flip is forced by $\{J_F, \gamma_F\} = 0$:\ the
+naive ``identical on both copies'' convention would put
+$\mathcal{T}_F$ at KO-dim~0 and silently break the H1 module's
+$\{J_F, D_F\}$ axiom suite.  All grading axioms
+($\gamma_F^2 = \mathbb{1}$, $\{\gamma_F, D_F\} = 0$ at any imposed
+Yukawa, $\gamma_F \pi_F(a) \gamma_F = \pi_F(a)$,
+$\gamma_F = \gamma_F^*$, $\{J_F, \gamma_F\} = 0$) hold to bit-exact
+zero residual; 15 new tests in \texttt{TestChiralityF}, all passing.
+The combined KO-dimension of
+$\mathcal{T}_{\mathrm{AC}} = \mathcal{T}_{\mathrm{GV}} \otimes
+\mathcal{T}_F$ is therefore $3 + 6 = 9 \equiv 1 \pmod 8$, consistent
+with H1's combined-Dirac construction.
+
+\paragraph{Tensor-product diagnostic.}  Track~G3-C computed $\Delta$
+at $n_{\max} \in \{1, 2, 3\}$ using the production
+$\gamma_{\mathrm{GV}}$ and $\gamma_F$ from G3-A and G3-B.  Sanity
+invariants are bit-exact:\ $\gamma_{\mathrm{GV}}^2 = \mathbb{1}$,
+$\gamma_F^2 = \mathbb{1}$, and
+$[\gamma_{\mathrm{GV}} \otimes \mathbb{1}_F,
+\mathbb{1}_{\mathrm{GV}} \otimes \gamma_F] = 0$ (the two operators
+commute because they act on disjoint tensor factors).  The residual
+itself is the structurally cleanest possible non-zero object:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$n_{\max}$ & $\dim \mathcal{H}_{\mathrm{GV}}$ &
+$\dim \mathcal{H}_{\mathrm{total}}$ &
+$\|\Delta\|_{\mathrm{op}}$ & $\|\Delta\|_F$ &
+$\mathrm{spec}(\Delta)$ \\
+\hline
+$1$ & $4$  & $32$  & $2.000$ & $8.000$  &
+$\{-2{:}8,\ 0{:}16,\ +2{:}8\}$    \\
+$2$ & $16$ & $128$ & $2.000$ & $16.000$ &
+$\{-2{:}32,\ 0{:}64,\ +2{:}32\}$  \\
+$3$ & $40$ & $320$ & $2.000$ & $25.298$ &
+$\{-2{:}80,\ 0{:}160,\ +2{:}80\}$ \\
+\hline
+\end{tabular}
+\caption{Tensor-product chirality residual $\Delta =
+\gamma_{\mathrm{GV}} \otimes \mathbb{1}_F -
+\mathbb{1}_{\mathrm{GV}} \otimes \gamma_F$ at
+$n_{\max} \in \{1, 2, 3\}$, computed in
+\texttt{debug/g3c\_tensor\_chirality.py} from the production
+$\gamma_{\mathrm{GV}}$ (G3-A, $\sigma_x \otimes \mathbb{1}_w$) and
+$\gamma_F$ (G3-B, KO-dim~6).  Operator norm is exactly~$2$ at every
+$n_{\max}$; eigenvalue spectrum is $\{-2, 0, +2\}$ with
+multiplicities in ratio $1{:}2{:}1$, $n_{\max}$-independent.
+Frobenius norm scales as
+$\sqrt{2 \cdot \dim \mathcal{H}_{\mathrm{total}}}$ exactly.  Data
+\texttt{debug/data/g3c\_tensor\_chirality.json}.}
+\label{tab:g3c_residual}
+\end{table}
+
+\paragraph{Convention swaps do not absorb the residual.}  Three
+standard convention swaps were tested at every $n_{\max}$:\
+(a)~global sign-flip $\gamma_F \to -\gamma_F$ (left/right
+convention), (b)~restriction to the matter sector of
+$\mathcal{H}_F$, and (c)~restriction to the Weyl chirality of
+$\mathcal{H}_{\mathrm{GV}}$.  Swap~(a) leaves the baseline invariant.
+Swaps~(b) and~(c) reduce $\|\Delta\|_F$ by dropping basis vectors,
+but $\|\Delta\|_{\mathrm{op}}$ remains~$2$ (or~$1$ under swap~(c)
+with $\sigma_x$-$\gamma_{\mathrm{GV}}$, where the Weyl restriction
+collapses $\gamma_{\mathrm{GV}}|_w$ to $0_w$ and $\Delta_c =
+-\mathbb{1}_w \otimes \gamma_F$, still non-zero).  Combined swaps
+yield the same conclusion.  No standard NCG sign convention absorbs
+$\Delta$.
+
+\paragraph{Robustness.}  A $\sigma_x$-vs-$\sigma_z$ cross-check at
+$n_{\max} = 2$ confirms that the spectrum of $\Delta$ is identical
+under both $\gamma_{\mathrm{GV}}$ conventions (both produce
+$\{-2{:}32,\ 0{:}64,\ +2{:}32\}$, since $\sigma_x$ and $\sigma_z$
+share eigenvalues $\pm 1$ with identical multiplicities and both
+commute with $\gamma_F$).  The structural verdict is therefore
+convention-independent.
+
+\paragraph{Sanity check on $\gamma_5 := \gamma_{\mathrm{GV}} \otimes
+\gamma_F$.}  The product operator
+$\gamma_5 := \gamma_{\mathrm{GV}} \otimes \gamma_F$ is the canonical
+Connes--Chamseddine combined chirality on $\mathcal{T}_{\mathrm{AC}}$
+and satisfies $\gamma_5^2 = \mathbb{1}$ to bit-exact precision at
+every $n_{\max}$, with spectrum $\{-1, +1\}$ in equal multiplicities.
+The product works; the \emph{difference} does not.  $\gamma_5$ exists
+and is well-defined as the combined grading; $\gamma_{\mathrm{GV}}$
+and $\gamma_F$ do not identify across the tensor product.
+
+\paragraph{Verdict:\ NEGATIVE on $S^3$ alone.}  The two chirality
+gradings $\gamma_{\mathrm{GV}}$ (Camporesi--Higuchi Dirac sign on
+$S^3$) and $\gamma_F$ (weak-isospin grading on the AC factor) are
+\emph{independent commuting} $\mathbb{Z}_2$ gradings on
+$\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$.  They cannot be
+identified by any standard NCG sign convention because, by
+construction, $\gamma_{\mathrm{GV}}$ acts as identity on
+$\mathcal{H}_F$ and $\gamma_F$ acts as identity on
+$\mathcal{H}_{\mathrm{GV}}$;\ no basis change on the tensor product
+turns one into the other.  Electroweak chirality co-location does
+not close on $S^3$ alone.
+
+\paragraph{The G2--G3 corollary.}  Sprint~H1 left G2 (Higgs as inner
+fluctuation) at the verdict ``construction admits a Higgs given an
+imposed Yukawa $Y$, but no GeoVac mechanism selects $Y$.''  G3's
+NEGATIVE supplies the structural reason.  The Yukawa sits in the
+off-diagonal $\mathbb{C} \leftrightarrow \mathbb{H}$ block of $D_F$
+that anticommutes with $\gamma_F$;\ the candidate GeoVac sources for
+that block (offdiag CH chirality bridging, Sturmian inter-shell
+coupling) have no kinematic relation to $\gamma_F$, because
+$\gamma_{\mathrm{GV}}$ is structurally independent of $\gamma_F$.
+Equivalently:\ no GeoVac-side data fixes $Y$ because the GeoVac
+chirality lives on a different $\mathbb{Z}_2$ grading from the one
+the Yukawa flips.  G2 and G3 are therefore one structural fact, not
+two.  This is a \emph{sharpening} of H1's G2 verdict (the
+Yukawa-undetermined gap is named structurally), not a new gap.
+
+\paragraph{Files.}  Modules
+\texttt{geovac/chirality\_grading.py} (G3-A, 50/50 tests) and the
+\texttt{chirality\_F} additions to
+\texttt{geovac/almost\_commutative.py} (G3-B);\ tests
+\texttt{tests/test\_chirality\_grading.py} and
+\texttt{tests/test\_almost\_commutative.py} (53 passing,
+\texttt{TestChiralityF} block);\ diagnostic
+\texttt{debug/g3c\_tensor\_chirality.py};\ data
+\texttt{debug/data/g3a\_chirality.json},
+\texttt{debug/data/g3c\_tensor\_chirality.json};\ memos
+\texttt{debug/g3a\_chirality\_memo.md},
+\texttt{debug/g3b\_chirality\_F\_audit\_memo.md},
+\texttt{debug/g3c\_tensor\_chirality\_memo.md}.
+
+% -------------------------------------------------------------------
+\subsection{Sprint G4:\ Cross-manifold scoping (G4a reachable, G4b
+NCG-framework-blocked)}
+\label{sec:g4}
+% -------------------------------------------------------------------
+
+With G2 and G3 collapsed into one structural fact and electroweak
+unification on $S^3$ alone closed in the negative, G4
+(cross-manifold) becomes \emph{the} remaining route to a
+GeoVac-internal SM construction rather than the dominant gap among
+several.  A scoping pass (May~2026, memo
+\texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}) sharpens G4
+into two sub-gaps with sharply different reachability.
+
+\paragraph{G4a (reachable):\ Connes SM on $\mathcal{T}_{S^3}$ alone
+with $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus
+M_3(\mathbb{C})$.}  The minimal extension of Sprint~H1's electroweak
+slice $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H}$ to the full
+Connes SM finite algebra is reachable as a 1--2~month sprint
+extending \texttt{geovac/almost\_commutative.py}.  The
+$M_3(\mathbb{C})$ summand supplies $\mathrm{SU}(3)$ at the
+inner-fluctuation level on the existing GeoVac $S^3$ triple, without
+recourse to the $S^5$ Bargmann construction.  Predicted
+outcome:\ \emph{positive-thin}, in the exact sense of Sprints~H1
+and~G3.  Inner fluctuations decompose into a gauge-1-form sector
+(recovering $U(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$ at the
+operator level, with the abelian and $\mathrm{SU}(2)$ parts already
+verified by H1) plus a Higgs sector that is non-trivial whenever the
+Yukawa-Dirac off-diagonal blocks are imposed.  The G2--G3 corollary
+applies verbatim:\ G4a defines the construction, but no GeoVac
+mechanism selects the Yukawa, hypercharge assignments, or
+generations.  G4a therefore does not close the SM-derivation
+question;\ it relocates the open data-selection items
+$(Y, \text{hypercharge}, \text{generation count})$ from
+``electroweak slice'' (H1, G3) to ``full Connes finite algebra,''
+without changing their status.  G4a remains worth pursuing because
+it makes Sprint~ST-SU3's Bargmann SU(3) construction structurally
+redundant for SM-derivation purposes (one $S^3$ construction with
+$M_3(\mathbb{C})$ delivers the same gauge content) and because it
+is the most published-precedent-compatible target available.
+
+\paragraph{G4b (NCG-framework-blocked):\ genuine cross-manifold
+$\mathcal{T}_{S^3} \otimes \mathcal{T}_{S^5}$.}  The structurally
+deeper version of G4 asks whether the GeoVac $S^3$ Coulomb triple
+and the Paper~24 $S^5$ Bargmann lattice can be combined into a
+single spectral triple with both as commuting factors, so that the
+SU(3) of Sprint~ST-SU3 is honestly cross-manifold-located rather
+than recapitulated on $S^3$.  This sub-gap is blocked at the
+\emph{NCG-framework level}, not at the GeoVac level.  Connes' tensor
+product of spectral triples~\cite{connes_marcolli2008} requires
+both factors to be Riemannian spectral triples in the same sense.
+$\mathcal{T}_{S^3}$ carries the Camporesi--Higuchi Riemannian spinor
+Dirac (KO-dim~3).  Paper~24's $S^5$ Bargmann construction is built
+from the holomorphic Hardy sector $H^2(S^5)$ restricted to symmetric
+SU(3) irreps $(N, 0)$;\ its natural diagonal operator is the
+first-order complex Euler operator
+$\hat{N} = \sum_i z_i \partial_i$, not a Riemannian Dirac.  Two
+candidate $\mathcal{T}_{S^5}$ exist, and neither preserves both
+standard NCG axioms and the GeoVac-specific content of Sprints
+25--30 / ST-SU3:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \emph{Option~A (Riemannian round-$S^5$).}  Take $D_{S^5}$ to
+be the standard Riemannian spinor Dirac on round $S^5$ (KO-dim~5).
+The tensor product is a textbook Connes object with combined
+KO-dim $3 + 5 = 8 \equiv 0 \pmod 8$, but it discards the
+$(N, 0)$-tower structure that made Paper~24's $S^5$ ``natural,''
+and the bit-exact $\pi$-free certificate of Paper~24~\S III is
+irrelevant to round-$S^5$ (calibration $\pi$ reappears via standard
+Weyl asymptotics).
+\item \emph{Option~B (Bargmann--Euler-based).}  Promote the Euler
+operator $\hat{N}$ on the Bargmann graph to a Dirac-like object via
+chiral doubling.  This preserves Sprint~ST-SU3 SU(3) Wilson content
+and the $\pi$-free certificate, but the resulting object is
+\emph{not} a Riemannian spectral triple in the published sense:\
+KO-dimension is not classically defined for a Hardy-sector
+first-order complex operator, and there is no published prescription
+in the NCG literature for tensoring a Riemannian spectral triple
+with a Hardy-sector / Berezin--Toeplitz first-order complex object.
+The closest analogs (Hawkins~2000 on the unit disk;
+Hekkelman~2022, 2024; Hekkelman--McDonald~2024 on flat structures)
+stay within Berezin--Toeplitz on a single manifold or within
+Riemannian on a single manifold, never crossing.
+\end{itemize}
+
+The structural reading is that G4b is the four-layer Coulomb/HO
+asymmetry of Paper~24~\S V resurfacing at the spectral-triple level.
+The first three layers (spectrum-computing role of $L_0$;\
+calibration~$\pi$;\ gauge-with-natural-matter,
+Sec.~\ref{sec:unified_gauge}) are surface manifestations.  G4b is
+the fourth layer:\ the Coulomb $S^3$ side carries a Riemannian
+spectral triple in the standard NCG sense, the Bargmann $S^5$ side
+does not, and the Connes tensor-product framework cannot bridge them
+as currently published.  Closing G4b is therefore not a sprint-scale
+GeoVac task;\ it requires either an extension of NCG to handle
+Riemannian--Hardy mixed tensor products, or the identification of a
+unifying ambient manifold whose GeoVac sub-structure contains both
+$S^3$ Coulomb and $S^5$ Bargmann as natural sub-objects.  Both
+directions are recorded as honest open structural questions, not
+as sprint targets.
+
+\paragraph{Net.}  After Sprints H1 + G3 + G4 scoping, the
+four-gap analysis of Sec.~\ref{sec:unified_gauge} compresses to:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item G2 and G3 are one structural fact:\ the Yukawa is
+undetermined because $\gamma_{\mathrm{GV}}$ and $\gamma_F$ are
+independent commuting $\mathbb{Z}_2$ gradings on the tensor product
+(G3 NEGATIVE).
+\item G4 splits cleanly:\ G4a (Connes SM on $\mathcal{T}_{S^3}$
+alone with $M_3(\mathbb{C})$) is a 1--2~month sprint with predicted
+positive-thin outcome;\ G4b (genuine cross-manifold) is blocked at
+the NCG-framework level by the Coulomb/HO structural asymmetry.
+\item G1 (three generations) is unchanged from H1:\ formally
+definable, not selected by GeoVac structure.
+\end{itemize}
+
+GeoVac does not autonomously generate the Standard Model;\ the
+construction admits SM gauge content given imposed Yukawa,
+hypercharge, and generation choices, and the GeoVac data is silent
+on each of those choices.  This is a clean structural verdict, in
+the sense of CLAUDE.md~\S 1.5:\ the framework is consistent with a
+GeoVac SM construction, but the framework does not select one.
+
+\paragraph{Files.}  Memo
+\texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
+($\sim 5\,100$ words);\ no production module created (consistent
+with the FAR verdict and the §1.5 rhetoric rule).  G4a sprint is
+queued as the follow-up;\ G4b is recorded as an open structural
+question.
 
 % ===================================================================
 \section{Marcolli--van~Suijlekom Lineage}

@@ -1,0 +1,518 @@
+{
+  "metadata": {
+    "convention_correction_note": "Re-run with imported production gamma_GV (sigma_x convention from chirality_grading.py, G3-A) and gamma_F (KO-dim 6 from almost_commutative.py, G3-B). The original local gamma_F was already in KO-6 convention; the original local gamma_GV used sigma_z (D-eigenvalue sign). Spectrum of Delta is unchanged because sigma_x and sigma_z have identical eigenvalues with identical multiplicities and both commute with gamma_F. Verdict NEGATIVE is robust."
+  },
+  "n_max=1": {
+    "n_max": 1,
+    "gamma_GV_convention": "sigma_x",
+    "dim_GV": 4,
+    "dim_F": 8,
+    "dim_total": 32,
+    "sanity": {
+      "gamma_GV_squared_minus_I_max": 0.0,
+      "gamma_F_squared_minus_I_max": 0.0,
+      "AB_commute_max": 0.0
+    },
+    "baseline": {
+      "op_norm": 2.0,
+      "frob_norm": 8.0,
+      "spectrum": [
+        [
+          -2.0,
+          8
+        ],
+        [
+          0.0,
+          16
+        ],
+        [
+          2.0,
+          8
+        ]
+      ]
+    },
+    "swap_a_global_signflip": {
+      "op_norm": 2.0000000000000004,
+      "frob_norm": 8.0,
+      "spectrum": [
+        [
+          -2.0,
+          8
+        ],
+        [
+          0.0,
+          16
+        ],
+        [
+          2.0,
+          8
+        ]
+      ]
+    },
+    "swap_b_matter_only": {
+      "dim_F_matter": 4,
+      "op_norm": 2.0,
+      "frob_norm": 5.656854249492381,
+      "spectrum": [
+        [
+          -2.0,
+          4
+        ],
+        [
+          0.0,
+          8
+        ],
+        [
+          2.0,
+          4
+        ]
+      ]
+    },
+    "swap_c_weyl_only": {
+      "dim_GV_weyl": 2,
+      "op_norm": 1.0,
+      "frob_norm": 4.0,
+      "spectrum": [
+        [
+          -1.0,
+          8
+        ],
+        [
+          1.0,
+          8
+        ]
+      ]
+    },
+    "swap_ab_signflip_matter": {
+      "op_norm": 2.0,
+      "frob_norm": 5.656854249492381,
+      "spectrum": [
+        [
+          -2.0,
+          4
+        ],
+        [
+          0.0,
+          8
+        ],
+        [
+          2.0,
+          4
+        ]
+      ]
+    },
+    "swap_abc_weyl_matter_signflip": {
+      "op_norm": 1.0,
+      "frob_norm": 2.8284271247461903,
+      "spectrum": [
+        [
+          -1.0,
+          4
+        ],
+        [
+          1.0,
+          4
+        ]
+      ]
+    },
+    "product_gamma5": {
+      "is_idempotent_squared_to_I": true,
+      "trace": 0.0,
+      "spectrum": [
+        [
+          -1.0,
+          16
+        ],
+        [
+          1.0,
+          16
+        ]
+      ]
+    }
+  },
+  "n_max=2": {
+    "n_max": 2,
+    "gamma_GV_convention": "sigma_x",
+    "dim_GV": 16,
+    "dim_F": 8,
+    "dim_total": 128,
+    "sanity": {
+      "gamma_GV_squared_minus_I_max": 0.0,
+      "gamma_F_squared_minus_I_max": 0.0,
+      "AB_commute_max": 0.0
+    },
+    "baseline": {
+      "op_norm": 2.0000000000000004,
+      "frob_norm": 16.0,
+      "spectrum": [
+        [
+          -2.0,
+          32
+        ],
+        [
+          0.0,
+          64
+        ],
+        [
+          2.0,
+          32
+        ]
+      ]
+    },
+    "swap_a_global_signflip": {
+      "op_norm": 2.000000000000001,
+      "frob_norm": 16.0,
+      "spectrum": [
+        [
+          -2.0,
+          32
+        ],
+        [
+          0.0,
+          64
+        ],
+        [
+          2.0,
+          32
+        ]
+      ]
+    },
+    "swap_b_matter_only": {
+      "dim_F_matter": 4,
+      "op_norm": 2.0000000000000004,
+      "frob_norm": 11.313708498984761,
+      "spectrum": [
+        [
+          -2.0,
+          16
+        ],
+        [
+          0.0,
+          32
+        ],
+        [
+          2.0,
+          16
+        ]
+      ]
+    },
+    "swap_c_weyl_only": {
+      "dim_GV_weyl": 8,
+      "op_norm": 1.0,
+      "frob_norm": 8.0,
+      "spectrum": [
+        [
+          -1.0,
+          32
+        ],
+        [
+          1.0,
+          32
+        ]
+      ]
+    },
+    "swap_ab_signflip_matter": {
+      "op_norm": 2.0000000000000004,
+      "frob_norm": 11.313708498984761,
+      "spectrum": [
+        [
+          -2.0,
+          16
+        ],
+        [
+          0.0,
+          32
+        ],
+        [
+          2.0,
+          16
+        ]
+      ]
+    },
+    "swap_abc_weyl_matter_signflip": {
+      "op_norm": 1.0,
+      "frob_norm": 5.656854249492381,
+      "spectrum": [
+        [
+          -1.0,
+          16
+        ],
+        [
+          1.0,
+          16
+        ]
+      ]
+    },
+    "product_gamma5": {
+      "is_idempotent_squared_to_I": true,
+      "trace": 0.0,
+      "spectrum": [
+        [
+          -1.0,
+          64
+        ],
+        [
+          1.0,
+          64
+        ]
+      ]
+    }
+  },
+  "n_max=3": {
+    "n_max": 3,
+    "gamma_GV_convention": "sigma_x",
+    "dim_GV": 40,
+    "dim_F": 8,
+    "dim_total": 320,
+    "sanity": {
+      "gamma_GV_squared_minus_I_max": 0.0,
+      "gamma_F_squared_minus_I_max": 0.0,
+      "AB_commute_max": 0.0
+    },
+    "baseline": {
+      "op_norm": 2.0000000000000018,
+      "frob_norm": 25.298221281347036,
+      "spectrum": [
+        [
+          -2.0,
+          80
+        ],
+        [
+          0.0,
+          160
+        ],
+        [
+          2.0,
+          80
+        ]
+      ]
+    },
+    "swap_a_global_signflip": {
+      "op_norm": 2.000000000000002,
+      "frob_norm": 25.298221281347036,
+      "spectrum": [
+        [
+          -2.0,
+          80
+        ],
+        [
+          0.0,
+          160
+        ],
+        [
+          2.0,
+          80
+        ]
+      ]
+    },
+    "swap_b_matter_only": {
+      "dim_F_matter": 4,
+      "op_norm": 2.0000000000000013,
+      "frob_norm": 17.88854381999832,
+      "spectrum": [
+        [
+          -2.0,
+          40
+        ],
+        [
+          0.0,
+          80
+        ],
+        [
+          2.0,
+          40
+        ]
+      ]
+    },
+    "swap_c_weyl_only": {
+      "dim_GV_weyl": 20,
+      "op_norm": 1.0,
+      "frob_norm": 12.649110640673518,
+      "spectrum": [
+        [
+          -1.0,
+          80
+        ],
+        [
+          1.0,
+          80
+        ]
+      ]
+    },
+    "swap_ab_signflip_matter": {
+      "op_norm": 2.000000000000001,
+      "frob_norm": 17.88854381999832,
+      "spectrum": [
+        [
+          -2.0,
+          40
+        ],
+        [
+          0.0,
+          80
+        ],
+        [
+          2.0,
+          40
+        ]
+      ]
+    },
+    "swap_abc_weyl_matter_signflip": {
+      "op_norm": 1.0,
+      "frob_norm": 8.94427190999916,
+      "spectrum": [
+        [
+          -1.0,
+          40
+        ],
+        [
+          1.0,
+          40
+        ]
+      ]
+    },
+    "product_gamma5": {
+      "is_idempotent_squared_to_I": true,
+      "trace": 0.0,
+      "spectrum": [
+        [
+          -1.0,
+          160
+        ],
+        [
+          1.0,
+          160
+        ]
+      ]
+    }
+  },
+  "cross_check_sigma_z_nmax2": {
+    "n_max": 2,
+    "gamma_GV_convention": "sigma_z",
+    "dim_GV": 16,
+    "dim_F": 8,
+    "dim_total": 128,
+    "sanity": {
+      "gamma_GV_squared_minus_I_max": 0.0,
+      "gamma_F_squared_minus_I_max": 0.0,
+      "AB_commute_max": 0.0
+    },
+    "baseline": {
+      "op_norm": 2.0,
+      "frob_norm": 16.0,
+      "spectrum": [
+        [
+          -2.0,
+          32
+        ],
+        [
+          0.0,
+          64
+        ],
+        [
+          2.0,
+          32
+        ]
+      ]
+    },
+    "swap_a_global_signflip": {
+      "op_norm": 2.0,
+      "frob_norm": 16.0,
+      "spectrum": [
+        [
+          -2.0,
+          32
+        ],
+        [
+          0.0,
+          64
+        ],
+        [
+          2.0,
+          32
+        ]
+      ]
+    },
+    "swap_b_matter_only": {
+      "dim_F_matter": 4,
+      "op_norm": 2.0,
+      "frob_norm": 11.313708498984761,
+      "spectrum": [
+        [
+          -2.0,
+          16
+        ],
+        [
+          0.0,
+          32
+        ],
+        [
+          2.0,
+          16
+        ]
+      ]
+    },
+    "swap_c_weyl_only": {
+      "dim_GV_weyl": 8,
+      "op_norm": 2.0,
+      "frob_norm": 11.313708498984761,
+      "spectrum": [
+        [
+          0.0,
+          32
+        ],
+        [
+          2.0,
+          32
+        ]
+      ]
+    },
+    "swap_ab_signflip_matter": {
+      "op_norm": 2.0,
+      "frob_norm": 11.313708498984761,
+      "spectrum": [
+        [
+          -2.0,
+          16
+        ],
+        [
+          0.0,
+          32
+        ],
+        [
+          2.0,
+          16
+        ]
+      ]
+    },
+    "swap_abc_weyl_matter_signflip": {
+      "op_norm": 2.0,
+      "frob_norm": 8.0,
+      "spectrum": [
+        [
+          0.0,
+          16
+        ],
+        [
+          2.0,
+          16
+        ]
+      ]
+    },
+    "product_gamma5": {
+      "is_idempotent_squared_to_I": true,
+      "trace": 0.0,
+      "spectrum": [
+        [
+          -1.0,
+          64
+        ],
+        [
+          1.0,
+          64
+        ]
+      ]
+    }
+  },
+  "VERDICT": "NEGATIVE"
+}

@@ -383,6 +383,43 @@ class ElectroweakFiniteTriple:
         U_F[4:8, 0:4] = I_4
         return U_F
 
+    def chirality_F(self) -> np.ndarray:
+        """Finite chirality operator γ_F on H_F (Sprint G3-B, 2026-05-06).
+
+        Connes-Marcolli SM convention (Connes-Marcolli 2008 Ch. 13;
+        Chamseddine-Connes-Marcolli 2007), KO-dim 6 of T_F:
+
+            γ_F^matter     = diag(+1, +1, −1, −1)   on (νL, eL, νR, eR)
+            γ_F^antimatter = − γ_F^matter
+                           = diag(−1, −1, +1, +1)
+
+        Per the directive (G3-B prompt):
+            ℂ summand → right-handed singlet, γ_F = −1 sub-block
+            ℍ summand → left-handed doublet,  γ_F = +1 sub-block
+
+        Convention deviation: the directive said "γ_F identical on both
+        copies"; that yields KO-dim 0 rather than KO-dim 6. The H1 module
+        is documented and tested at KO-dim 6 (J_F²=+I, J_F D_F=+D_F J_F,
+        per Connes-Marcolli Table 13.1), so γ_F^antimatter is sign-flipped
+        to maintain {J_F, γ_F} = 0 — the standard CCM SM convention.
+
+        Verified properties (see TestChiralityF in test_almost_commutative.py):
+            γ_F² = I
+            γ_F^* = γ_F  (Hermitian)
+            {γ_F, D_F} = 0  for any Yukawa
+            γ_F π_F(a) γ_F = π_F(a)  (algebra elements are even)
+            {J_F, γ_F} = 0  (KO-dim 6, anticommuting)
+
+        Returns
+        -------
+        ndarray of shape (8, 8), real diagonal, complex128 dtype.
+        """
+        g_matter = np.diag([1.0, 1.0, -1.0, -1.0]).astype(np.complex128)
+        G = np.zeros((8, 8), dtype=np.complex128)
+        G[0:4, 0:4] = g_matter
+        G[4:8, 4:8] = -g_matter
+        return G
+
 
 # ===========================================================================
 # Combined almost-commutative spectral triple (A_GV ⊗ A_F, H_GV ⊗ H_F, D)
@@ -482,6 +519,12 @@ class AlmostCommutativeTriple:
 
     def gamma_GV(self) -> np.ndarray:
         return self._gamma_GV.copy()
+
+    def gamma_F(self) -> np.ndarray:
+        """Finite chirality γ_F on H_F (8x8). Convenience pass-through to
+        ElectroweakFiniteTriple.chirality_F(); see that method's docstring
+        for convention details (KO-dim 6 of T_F, Connes-Marcolli SM)."""
+        return self.finite.chirality_F()
 
     def real_structure_combined(self) -> np.ndarray:
         """J = J_GV ⊗ J_F as a unitary U so that J(psi) = U @ conj(psi).

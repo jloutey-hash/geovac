@@ -1,0 +1,113 @@
+{
+  "sprint": "G3-A",
+  "description": "Z_2 chirality grading gamma_GV on the GeoVac full-Dirac truncated operator system",
+  "conventions": {
+    "sigma_x": {
+      "n_max_1": {
+        "n_max": 1,
+        "convention": "sigma_x",
+        "dim_H": 4,
+        "dim_O": 1,
+        "n_generators": 1,
+        "gamma_squared_minus_I": 0.0,
+        "hermitian_residual": 0.0,
+        "unitary_residual": 0.0,
+        "anticommutator_truthful": 0.0,
+        "anticommutator_offdiag": 0.009999999999999787,
+        "preserves_O": true,
+        "preserves_O_worst_residual": 2.466295466828842e-16,
+        "preserves_O_failures": 0,
+        "max_commutator_with_M": 0.0
+      },
+      "n_max_2": {
+        "n_max": 2,
+        "convention": "sigma_x",
+        "dim_H": 16,
+        "dim_O": 14,
+        "n_generators": 14,
+        "gamma_squared_minus_I": 0.0,
+        "hermitian_residual": 0.0,
+        "unitary_residual": 0.0,
+        "anticommutator_truthful": 0.0,
+        "anticommutator_offdiag": 2.0,
+        "preserves_O": true,
+        "preserves_O_worst_residual": 4.932590933657684e-16,
+        "preserves_O_failures": 0,
+        "max_commutator_with_M": 0.0
+      },
+      "n_max_3": {
+        "n_max": 3,
+        "convention": "sigma_x",
+        "dim_H": 40,
+        "dim_O": 55,
+        "n_generators": 55,
+        "gamma_squared_minus_I": 0.0,
+        "hermitian_residual": 0.0,
+        "unitary_residual": 0.0,
+        "anticommutator_truthful": 0.0,
+        "anticommutator_offdiag": 2.0,
+        "preserves_O": true,
+        "preserves_O_worst_residual": 1.3407566852680478e-14,
+        "preserves_O_failures": 0,
+        "max_commutator_with_M": 0.0
+      }
+    },
+    "sigma_z": {
+      "n_max_1": {
+        "n_max": 1,
+        "convention": "sigma_z",
+        "dim_H": 4,
+        "dim_O": 1,
+        "n_generators": 1,
+        "gamma_squared_minus_I": 0.0,
+        "hermitian_residual": 0.0,
+        "unitary_residual": 0.0,
+        "anticommutator_truthful": 3.0,
+        "anticommutator_offdiag": 3.01,
+        "preserves_O": true,
+        "preserves_O_worst_residual": 2.466295466828842e-16,
+        "preserves_O_failures": 0,
+        "max_commutator_with_M": 0.0
+      },
+      "n_max_2": {
+        "n_max": 2,
+        "convention": "sigma_z",
+        "dim_H": 16,
+        "dim_O": 14,
+        "n_generators": 14,
+        "gamma_squared_minus_I": 0.0,
+        "hermitian_residual": 0.0,
+        "unitary_residual": 0.0,
+        "anticommutator_truthful": 5.0,
+        "anticommutator_offdiag": 5.23,
+        "preserves_O": true,
+        "preserves_O_worst_residual": 4.932590933657684e-16,
+        "preserves_O_failures": 0,
+        "max_commutator_with_M": 0.0
+      },
+      "n_max_3": {
+        "n_max": 3,
+        "convention": "sigma_z",
+        "dim_H": 40,
+        "dim_O": 55,
+        "n_generators": 55,
+        "gamma_squared_minus_I": 0.0,
+        "hermitian_residual": 0.0,
+        "unitary_residual": 0.0,
+        "anticommutator_truthful": 7.0,
+        "anticommutator_offdiag": 7.45,
+        "preserves_O": true,
+        "preserves_O_worst_residual": 1.3407566852680478e-14,
+        "preserves_O_failures": 0,
+        "max_commutator_with_M": 0.0
+      }
+    }
+  },
+  "headline": {
+    "recommended_convention_for_g3c": "sigma_x",
+    "sigma_x_anticommutator_truthful_max_residual": 0.0,
+    "sigma_x_preserves_O_worst_residual_max": 1.3407566852680478e-14,
+    "sigma_x_max_commutator_with_M_max": 0.0,
+    "sigma_x_anticommutator_offdiag_max_n3": 2.0
+  }
+}

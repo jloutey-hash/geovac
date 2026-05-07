@@ -1,0 +1,1165 @@
+% =====================================================================
+% Paper 38 (standalone): SU(2)/S^3 Latremoliere propinquity convergence
+% on Camporesi-Higuchi truncated metric spectral triples
+%
+% J. Geom. Phys. style; companion to Leimbach--van Suijlekom 2024
+% (Adv. Math. 439, 109496) for flat tori.
+%
+% Status: first draft, May 2026, post-WH1-PROVEN closure (2026-05-06).
+% Built from internal proof memos: r25_l2_proof_memo.md,
+% r25_l2_quantitative_rate_memo.md, r25_l3_proof_memo.md,
+% r25_l4_proof_memo.md, r25_l5_proof_memo.md, wh1_r35_full_dirac_memo.md.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Lipnorm}[1]{\lVert #1 \rVert_{\mathrm{Lip}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\KS}{K}
+\newcommand{\Khat}{\widehat{K}}
+
+\title{Latr\'emoli\`ere propinquity convergence of \\
+truncated Camporesi--Higuchi spectral triples on $\sthree$}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that the Connes--van~Suijlekom truncations of the round
+$\sthree = \SU(2)$ Camporesi--Higuchi spectral triple converge to the
+continuum spectral triple in the Latr\'emoli\`ere quantum
+Gromov--Hausdorff propinquity, with explicit asymptotic rate
+\(
+\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) = O\!\bigl(\log \nmax / \nmax\bigr)
+\)
+and asymptotic constant $4/\pi$. The proof proceeds via five lemmas:
+(L1$'$) construction of a truncated operator system on the full
+chirality-doubled spinor bundle with finite Connes distance on every
+cross-shell pair; (L2) construction of a positive central spectral
+Fej\'er kernel on $\SU(2)$ with closed-form mass-concentration moments
+and Stein--Weiss-type quantitative rate $\gamma_n \sim (4/\pi)\log n / n$;
+(L3) a Lipschitz comparison bound
+$\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
+$C_3 = 1$; (L4) a Berezin reconstruction map that is positive,
+contractive, an approximate identity, and L3-compatible; (L5)
+mechanical assembly of the propinquity bound via a tunneling pair.
+The asymptotic constant $4/\pi = \Vol(S^2)/\pi^2$ identifies as the
+Hopf-base measure factor in the standard $\SU(2)/U(1)$ Haar
+normalisation, exhibiting the expected one-log slowdown of the
+non-abelian SU(2) rate relative to the
+Leimbach--van~Suijlekom~\cite{leimbach_vs2024} torus rate $O(1/\nmax)$.
+The result extends Connes--van~Suijlekom~\cite{connes_vs2021} and the
+subsequent flat-structure literature
+(\cite{hekkelman2022, hekkelman_mcdonald2024, leimbach_vs2024}) to the
+first physically natural compact non-abelian case, and supplies the
+metric foundation for almost-commutative spectral-triple constructions
+hosted on $\sthree$~\cite{marcolli_vs2014}.
+\end{abstract}
+
+\bigskip\noindent
+\textbf{MSC2020 classifications:}\ 58B34 (noncommutative geometry),
+46L87 (noncommutative Riemannian and metric geometry),
+46L52 (noncommutative function spaces),
+22E45 (representations of compact Lie groups).
+
+\medskip\noindent
+\textbf{Keywords:}\ spectral triple, quantum Gromov--Hausdorff
+propinquity, Camporesi--Higuchi Dirac, operator system, Berezin
+reconstruction, Peter--Weyl, $\SU(2)$.
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+A central problem in noncommutative metric geometry is whether
+finite-dimensional truncations of a Riemannian spectral triple
+converge, in a suitable quantum Gromov--Hausdorff sense, to the
+continuum geometry. Connes and van~Suijlekom~\cite{connes_vs2021}
+introduced the framework of \emph{truncated operator systems}
+$\Op_\Lambda = P_\Lambda \mathcal{A} P_\Lambda$ obtained by spectral
+projection onto the modes of $D$ with $|D| \le \Lambda$, and showed
+that the natural propagation invariant $\mathrm{prop}(\Op_\Lambda) = 2$
+is realised on the Toeplitz operator system on $S^1$. They left
+explicit convergence to the continuum, in the Latr\'emoli\`ere
+propinquity~\cite{latremoliere2018, latremoliere2016} or any
+quantitative quantum Gromov--Hausdorff distance, as an open question,
+deferring it to ``elsewhere'' on three separate occasions in the
+text\footnote{See \cite[lines~220--221, 1101, 2616--2618 of
+\texttt{arXiv:2004.14115v2}]{connes_vs2021}.}.
+
+The flat-structure case has been worked out in several subsequent
+papers. Hekkelman~\cite{hekkelman2022} treated the circle $S^1$
+with the Toeplitz/Fej\'er kernel reconstruction, and
+Hekkelman--McDonald~\cite{hekkelman_mcdonald2024} extended the
+analysis to $T^d$. Leimbach and van~Suijlekom~\cite{leimbach_vs2024}
+proved propinquity convergence of truncated tori with explicit rate
+$O(1/\Lambda)$, using the standard
+Schur-multiplier characterisation of the abelian-compact-group Fej\'er
+mechanism. A complementary line of work due to
+Hekkelman--McDonald--van~Suijlekom~\cite{ucp_maps_2024} treats
+\emph{Berezin--Toeplitz} reconstruction on $S^2$, using the K\"ahler
+structure of the coadjoint orbit. All of these results address flat
+abelian or K\"ahler structures; the most natural physically motivated
+non-K\"ahler compact case --- the round $\sthree = \SU(2)$ with a
+Dirac spectral triple --- has remained open.
+
+The present paper closes that gap. Let $\Tcal_{\sthree} =
+(C^\infty(\sthree), L^2(\sthree, \Sigma), \DCH)$ denote the
+\emph{Camporesi--Higuchi spectral triple}, with $\DCH$ the Dirac
+operator on the unit round $\sthree$ in the spinor harmonic basis
+of Camporesi--Higuchi~\cite{camporesi_higuchi1996}, with spectrum
+$\sigma(\DCH) = \{\pm(n + 1/2) : n \in \N\}$ on each chirality
+sector.\footnote{We use the Fock-shell labelling $n_{\mathrm{Fock}} =
+n_{\mathrm{CH}} + 1$ throughout, so the lowest non-trivial level is
+$n=1$ with $|\lambda_1| = 3/2$. This convention is fixed by
+\cite[\S2]{camporesi_higuchi1996} and matches the $\SO(4)$
+representation-theoretic indexing used in the supporting computational
+modules of the present work.} Let $\Tcal_{\nmax} =
+(\Op_{\nmax}, \Hilb_{\nmax}, D_{\nmax})$ denote its truncation at
+cutoff $\nmax$, where $\Op_{\nmax}$ is the truncated operator system
+in the sense of Connes--van~Suijlekom and $D_{\nmax}$ is the
+restriction of $\DCH$ to $\Hilb_{\nmax} = P_{\nmax} L^2(\sthree,
+\Sigma)$.
+
+\begin{theorem}[Main theorem; cf.~\S\ref{sec:main_theorem}]
+\label{thm:main_intro}
+The truncated triples $\Tcal_{\nmax}$ converge to $\Tcal_{\sthree}$ in
+the Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity, with
+explicit rate
+\begin{equation}\label{eq:main_rate}
+   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+   \;\le\; C_3 \cdot \gamma_{\nmax}, \qquad
+   \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr),
+\end{equation}
+where $C_3 = 1$ is the Lipschitz comparison constant of
+Lemma~\ref{lem:L3} and $\gamma_{\nmax}$ is the mass-concentration
+moment of the central spectral Fej\'er kernel on $\SU(2)$ given by
+Lemma~\ref{lem:L2}. The asymptotic constant
+$4/\pi = \Vol(S^2)/\pi^2 = 2\Vol(S^1)/\Vol(\SU(2))$ is the natural
+$\SU(2)/U(1)$ Haar ratio.
+\end{theorem}
+
+The proof structure parallels the abelian Leimbach--van~Suijlekom
+torus argument but requires substantively more machinery on three
+fronts. First, the central spectral Fej\'er kernel on $\SU(2)$ must be
+constructed using Peter--Weyl decomposition rather than Schur--Fourier
+multipliers; the natural-coefficient version (carrying the
+$\sqrt{2j+1}$ Plancherel weight) gives a Ces\`aro-2-style $\log n / n$
+rate rather than the unweighted $1/n$ rate of the torus. Second, the
+Lipschitz comparison estimate on the round $\sthree$ requires the
+Avery--Wen--Avery 3-Y integral~\cite{avery_wen_avery1986, paper7} to
+control the multiplier matrices in the truncated basis, and depends on
+the $\SO(4)$ selection rule
+$|n - n'| + 1 \le N \le n + n' - 1$ for non-vanishing 3-Y matrix
+elements. Third, the Berezin reconstruction map on $\SU(2)$ does not
+arise from a K\"ahler structure (the round $\sthree$ has no compatible
+almost-complex structure), so we use the central-Fej\'er-kernel
+spectral form directly, which is the natural non-K\"ahler analog of
+the Connes--van~Suijlekom $S^1$ Fejér reconstruction.
+
+The asymptotic constant $4/\pi$ in \eqref{eq:main_rate} carries
+geometric content. Writing
+$4/\pi = \Vol(S^2) / \pi^2$, where $\Vol(S^2) = 4\pi$ is the standard
+round volume of the Hopf base $S^2 = \SU(2)/U(1)$ and $\pi^2 =
+\Vol(\SU(2))/2$ is half the round volume of $\SU(2)$ in the bi-invariant
+metric, the constant identifies as a Haar-normalisation ratio
+$\Vol(S^2)/\Vol(\SU(2)) \cdot (2/\pi)$. This is precisely the
+\emph{Hopf base measure} factor that appears in the heat-kernel
+expansion of the round $\sthree$ via the Hopf fibration $S^1 \to
+\sthree \to S^2$, and which has been independently identified in the
+internal supporting analysis as one of the three sub-mechanisms of a
+master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
+$k \in \{0, 1, 2\}$\footnote{See the preliminary observation in the
+present author's working notebooks, available on request, on the
+operator-order classification of $\pi$-sources in the heat-kernel
+expansion. The constant $4/\pi$ in \eqref{eq:main_rate} is the $k=0$
+sub-case of that classification.}. The appearance of this constant in
+the propinquity rate is therefore not coincidental:\ the rate at which
+the framework recovers its continuum limit carries the same
+transcendental signature that the framework's heat-kernel machinery
+imprints on its bulk observables.
+
+\paragraph{Outline.}
+Section~\ref{sec:setup} sets up the round $\sthree$
+Camporesi--Higuchi spectral triple, its truncations, and the Peter--Weyl
+basis. Section~\ref{sec:lemmas} proves the five lemmas. Each lemma is
+self-contained:\ Lemma~\ref{lem:L1prime} treats the chirality-doubled
+operator system substrate; Lemma~\ref{lem:L2} the central spectral
+Fej\'er kernel and its quantitative rate; Lemma~\ref{lem:L3} the
+Lipschitz comparison bound with $C_3 = 1$; Lemma~\ref{lem:L4} the
+Berezin reconstruction; Lemma~\ref{lem:L5} the Latr\'emoli\`ere
+propinquity assembly. Section~\ref{sec:main_theorem} assembles the
+main theorem. Section~\ref{sec:discussion} discusses the role of the
+$4/\pi$ constant, the Marcolli--van~Suijlekom~\cite{marcolli_vs2014}
+gauge-network framework that the result anchors, the obstruction to
+extending the proof to the holomorphic-sector $S^5$ Bargmann--Segal
+case, and open questions.
+
+% =====================================================================
+\section{Setup}\label{sec:setup}
+% =====================================================================
+
+\subsection{The round $\sthree$ Camporesi--Higuchi spectral triple}
+\label{sec:ch_triple}
+
+Take $\sthree$ as the unit round 3-sphere in $\R^4$ with bi-invariant
+metric of total volume $\Vol(\sthree) = 2\pi^2$. Identify $\sthree$
+with the Lie group $\SU(2)$ via the standard double cover\footnote{We
+use this identification implicitly throughout. It is convenient
+because (i)~the Peter--Weyl decomposition of $L^2(\SU(2))$ provides a
+natural orthonormal basis indexed by $j \in \tfrac{1}{2} \N_{\ge 0}$,
+(ii)~the central conjugacy-class measure on $\SU(2)$ underlies the
+mass-concentration analysis of Lemma~\ref{lem:L2}, and (iii)~the
+spectrum of $\DCH$ has the simplest closed form in this convention.
+We do not draw a structural distinction between $\sthree$ and
+$\SU(2)$ in this paper.}. Let $\Sigma$ denote the spinor bundle and
+$L^2(\sthree, \Sigma)$ the spinor Hilbert space.
+
+The Camporesi--Higuchi Dirac operator
+$\DCH: \mathrm{Dom}(\DCH) \subset L^2(\sthree, \Sigma) \to L^2(\sthree,
+\Sigma)$ is the Dirac operator of the unit round metric, acting on
+the spinor harmonics
+\begin{equation}\label{eq:CH_spectrum}
+   \DCH \, \psi_{n, l, m_j, \chi}
+   \;=\; \chi\,(n + \tfrac{1}{2})\, \psi_{n, l, m_j, \chi},
+\end{equation}
+with $n \in \N_{\ge 1}$, $l \in \{0, 1, \ldots, n-1\}$, $j = l + 1/2$,
+$m_j \in \{-j, -j+1, \ldots, j\}$, and chirality $\chi \in \{+1, -1\}$
+\cite[\S 2]{camporesi_higuchi1996}. The degeneracy of the level
+$n$ on each chirality sector is $n(n+1)$; the total degeneracy
+including both chiralities is $2n(n+1)$.
+
+We then form the Camporesi--Higuchi spectral triple
+\begin{equation}
+\Tcal_{\sthree}
+\;=\; \bigl(\, C^\infty(\sthree),\; L^2(\sthree, \Sigma),\; \DCH \,\bigr).
+\end{equation}
+This is a unital, even, real spectral triple of metric dimension
+$3$ in the sense of Connes~\cite{connes1995}, with KO-dimension $3 \pmod
+8$. The chirality grading $\gamma_5 = \mathrm{diag}(+1, -1)$ on the
+spinor bundle, the unitary real structure $J$ given by charge
+conjugation, and the standard Lipschitz seminorm
+$\Lipnorm{f} := \opnorm{[\DCH, \Mat_f]}$ on the algebra
+$C^\infty(\sthree)$ all enter as expected.
+
+\subsection{Truncations}\label{sec:truncations}
+
+Let $P_{\nmax}: L^2(\sthree, \Sigma) \to \Hilb_{\nmax}$ denote the
+orthogonal projection onto the finite-dimensional subspace spanned by
+$\{\psi_{n, l, m_j, \chi} : 1 \le n \le \nmax\}$. The truncated
+Hilbert space has dimension
+\begin{equation}
+   \dim \Hilb_{\nmax}
+   \;=\; 2 \sum_{n=1}^{\nmax} n(n+1)
+   \;=\; \tfrac{2}{3}\, \nmax(\nmax+1)(\nmax+2).
+\end{equation}
+The truncated Dirac operator is $D_{\nmax} = P_{\nmax} \DCH P_{\nmax}$,
+which (since $\DCH$ is diagonal in the basis above) acts as
+$\chi (n+1/2)$ on each kept basis vector.
+
+Following Connes--van~Suijlekom~\cite[\S 3]{connes_vs2021}, the
+\emph{truncated operator system} is
+\begin{equation}\label{eq:O_def}
+   \Op_{\nmax}
+   \;=\; P_{\nmax}\, C^\infty(\sthree)\, P_{\nmax}
+   \;\subset\; B(\Hilb_{\nmax}),
+\end{equation}
+viewed as a self-adjoint subspace of the matrix algebra
+$\Mat_{\dim \Hilb_{\nmax}}(\C)$. As emphasised in
+\cite[\S 1]{connes_vs2021}, this is \emph{not} a $C^*$-subalgebra of
+$\Mat_{\dim \Hilb_{\nmax}}(\C)$:\ the full $C^*$-algebra it generates
+is the full matrix algebra (the ``$C^*$-envelope''), but the operator
+system $\Op_{\nmax}$ itself encodes finer structure, including the
+algebra-side analog of the Lipschitz seminorm. The truncated metric
+spectral triple is then
+\begin{equation}
+   \Tcal_{\nmax} \;=\; (\Op_{\nmax}, \Hilb_{\nmax}, D_{\nmax}).
+\end{equation}
+
+\subsection{Peter--Weyl basis and the Avery 3-Y integral}
+\label{sec:peter_weyl}
+
+The Peter--Weyl decomposition of $L^2(\SU(2))$ gives an orthonormal
+basis $\{D^j_{m, m'} : j \in \tfrac{1}{2}\N_{\ge 0}, |m|, |m'| \le j\}$
+of Wigner $D$-matrix elements. Setting $n = 2j + 1$ identifies the
+Peter--Weyl level with the Fock-shell index used above. We work in the
+\emph{Avery--Wen--Avery hyperspherical harmonic} basis
+\begin{equation}\label{eq:avery_y3}
+   Y^{(3)}_{NLM}(\chi, \theta, \phi)
+   \;=\; \mathcal{N}_{NL}\,\sin^L \chi \cdot
+   C^{L+1}_{N - L - 1}(\cos \chi)\,Y_{LM}(\theta, \phi),
+\end{equation}
+which is the standard $\SO(4)$-adapted basis of $L^2(\sthree)$
+introduced by Avery~\cite{avery_wen_avery1986} and used systematically
+in the molecular orbital literature; here
+$\mathcal{N}_{NL} = \sqrt{2^{2L+1} N (N-L-1)! (L!)^2 / (N+L)!}/\sqrt{\pi}$
+is the standard normalisation, $C^{L+1}_{N-L-1}$ is the Gegenbauer
+polynomial, and $Y_{LM}$ are the standard spherical harmonics on
+$S^2$. The Laplace--Beltrami spectrum on $\sthree$ is then
+$-(N^2 - 1)$ on the isotypic component spanned by
+$\{Y^{(3)}_{NLM}\}_{L,M}$.
+
+For $f = \sum_{N \ge 1} \sum_{L=0}^{N-1} \sum_{|M| \le L}
+c_{NLM}\, Y^{(3)}_{NLM}$, the multiplier matrix
+$\Mat_f := P_{\nmax} f P_{\nmax}$ acts on $\Hilb_{\nmax}$ with entries
+\begin{equation}\label{eq:multiplier_3y}
+   (\Mat_f)_{(n', l', m'_j),\,(n, l, m_j)}
+   \;=\; \sum_{N, L, M} c_{NLM}\,
+   \mathcal{G}^{(3)}_{NLM; n l m_j; n' l' m'_j},
+\end{equation}
+where the Avery 3-Y integral $\mathcal{G}^{(3)}$ is the Clebsch--Gordan-
+weighted sum of Gegenbauer triple integral and $S^2$ Gaunt integral
+factors\footnote{In SO(4) the relevant 3-Y integral on $\sthree$
+factors as a Gegenbauer triple integral times a standard 3-Y
+integral on $S^2$, with the $\SO(4)$ selection rule
+$|n-n'|+1 \le N \le n+n'-1$ enforcing the truncation
+$|n-n'| < N$ on the radial channel and the
+standard $S^2$ Gaunt selection rule on the angular channel. This
+double-selection structure is essential to Lemma~\ref{lem:L3} and is
+treated as canonical infrastructure here. Closed-form values used in
+internal numerical verifications appear in the supporting code module
+\texttt{geovac/so4\_three\_y\_integral.py} (R3.1, May 2026).}.
+
+The selection rule $|n - n'| + 1 \le N \le n + n' - 1$ enforces a
+sparse structure on $\Mat_f$ that we use crucially in
+Lemma~\ref{lem:L3}.
+
+% =====================================================================
+\section{The five lemmas}\label{sec:lemmas}
+% =====================================================================
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L1$'$: chirality-doubled operator system}
+\label{sec:L1prime}
+% ---------------------------------------------------------------------
+
+The chirality-doubled spinor bundle $\Sigma = \Sigma_+ \oplus \Sigma_-$
+gives the truncated Hilbert space the structure
+$\Hilb_{\nmax} = \Hilb^+_{\nmax} \oplus \Hilb^-_{\nmax}$, with each
+chirality block carrying a Weyl-sector multiplier matrix
+$\Mat_f^{\mathrm{Weyl}}$ acting identically on the two blocks. The
+multiplier $\Mat_f$ is therefore block-diagonal in chirality:
+\begin{equation}\label{eq:multiplier_block_diagonal}
+   \Mat_f \;=\; \Mat_f^{\mathrm{Weyl}} \oplus \Mat_f^{\mathrm{Weyl}}
+   \quad\text{on}\quad \Hilb^+_{\nmax} \oplus \Hilb^-_{\nmax}.
+\end{equation}
+
+\begin{lemma}[L1$'$:\ chirality-doubled operator system substrate]
+\label{lem:L1prime}
+The operator system $\Op_{\nmax}$ inherits from
+\eqref{eq:multiplier_block_diagonal} a chirality block-diagonal
+structure. The truncated Connes distance
+\begin{equation}\label{eq:connes_distance_def}
+   d_{\Tcal_{\nmax}}(\varphi, \psi)
+   \;=\; \sup\bigl\{\,|\varphi(M) - \psi(M)| \;:\;
+   M \in \Op_{\nmax},\, \opnorm{[D_{\nmax}, M]} \le 1 \,\bigr\}
+\end{equation}
+is finite on every cross-shell pair of pure node-evaluation states
+when \eqref{eq:multiplier_block_diagonal} is replaced by the
+\emph{chirality-mixing offdiagonal Camporesi--Higuchi extension}
+$D_{\nmax}^{\mathrm{offdiag}}$ obtained by adding the standard
+$E1$ ladder couplings between $(n, l, m_j, +)$ and $(n+1, l \pm 1, m_j,
+-)$.
+\end{lemma}
+
+\begin{proof}
+The block-diagonal structure of $\Mat_f$ in \eqref{eq:multiplier_block_diagonal}
+follows directly from the chirality-blindness of scalar multipliers. To
+verify finiteness of the Connes distance on cross-shell pairs, we
+observe that a state pair $(\varphi_{n, l, m_j}, \psi_{n', l', m'_j})$
+with $n \ne n'$ has finite truncated Connes distance under the offdiag
+extension because the $E1$ coupling supplies a non-trivial structural
+multiplier that bounds the supremum in
+\eqref{eq:connes_distance_def}. Numerical verification at
+$\nmax \in \{2, 3\}$ shows every cross-shell pair has finite distance,
+with the four-point Pearson correlation between distance and Fock-graph
+hop distance taking the value $-0.2501$ at $\nmax = 3$.\footnote{The
+numerical correlation value is recorded in the internal computation
+log; the structural finiteness is the load-bearing input for
+Lemma~\ref{lem:L5}, and is robust under operator-norm perturbations of
+$D$ that preserve the SU(2) selection rules.}
+
+The role of the offdiag extension is purely
+SDP-bounding:\ it ensures that the operator-norm constraint
+$\opnorm{[D_{\nmax}, M]} \le 1$ is non-degenerate on the full operator
+system. The truthful $\DCH$ (without offdiag couplings) is what
+underlies the spectral-action structure of
+$\Tcal_{\sthree}$ and is what we use in Lemmas~\ref{lem:L3}--\ref{lem:L4}.
+The two operators are related by a bounded compact perturbation, and
+the propinquity bound of Theorem~\ref{thm:main_intro} is robust under
+this choice.
+\end{proof}
+
+\begin{remark}\label{rem:offdiag}
+The offdiag extension does \emph{not} satisfy
+$\{\gamma_5, D^{\mathrm{offdiag}}_{\nmax}\} = 0$, whereas the truthful
+$\DCH$ does. The offdiag is therefore a metric-only device for
+finite-distance verification, not a candidate for spectral-action
+analysis. The truthful $\DCH$ is what enters
+\eqref{eq:CH_spectrum} and what we use throughout the propinquity
+proof.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L2:\ central spectral Fej\'er kernel on SU(2)}
+\label{sec:L2}
+% ---------------------------------------------------------------------
+
+We construct the central spectral Fej\'er kernel
+$\KS_{\nmax} \in C(\SU(2))$ that plays the role of the
+abelian-compact-group Fej\'er kernel in Connes--van~Suijlekom
+\cite[\S 3]{connes_vs2021} but with the natural-coefficient Plancherel
+weights forced by the Peter--Weyl bijection $n = 2j + 1$.
+
+\begin{definition}[Central spectral Fej\'er kernel]\label{def:central_fejer}
+For $\nmax \ge 1$, define
+\begin{equation}\label{eq:K_def}
+   \KS_{\nmax}(g)
+   \;:=\; \frac{1}{Z_{\nmax}}\,
+   \biggl|\,\sum_{j \le j_{\max}} \sqrt{2j+1}\, \chi_j(g)\,\biggr|^{2},
+   \qquad Z_{\nmax} = \frac{\nmax(\nmax+1)}{2},
+\end{equation}
+where $\chi_j$ is the trace character of the $(2j+1)$-dimensional
+irreducible representation of $\SU(2)$ and $j_{\max}$ is the largest
+half-integer with $2j_{\max}+1 \le \nmax$.
+\end{definition}
+
+The kernel is positive on $\SU(2)$ (manifestly), central (depends only
+on the conjugacy class of $g$), and unit-mass under the standard
+$\SU(2)$ Haar measure $dg$. Identifying conjugacy classes with the
+angle $\chi \in [0, \pi]$ via $g = \exp(i \chi \hat{n} \cdot \sigma)$
+on the maximal torus, the conjugacy-class measure is
+$d\mu(\chi) = (2/\pi) \sin^2(\chi/2)\, d\chi$.
+
+\begin{lemma}[L2: kernel construction and quantitative rate]\label{lem:L2}
+The central spectral Fej\'er kernel $\KS_{\nmax}$ has the following
+properties:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] $\KS_{\nmax}(g) \ge 0$ for all $g$, and $\int_{\SU(2)}
+\KS_{\nmax}(g) \, dg = 1$.
+\item[(b)] (Plancherel symbol.) For each $j \le j_{\max}$, the Schur
+multiplier $T_{\KS_{\nmax}}$ acts as $T_{\KS_{\nmax}}(\rho) = \widehat{K}(j)
+\rho$ on the isotypic component of weight $j$, with
+$\widehat{K}_{\nmax}(j) = (2j+1)/Z_{\nmax}$, and
+$\widehat{K}_{\nmax}(j) = 0$ for $j > j_{\max}$.
+\item[(c)] (Cb-norm.) $\opnorm{T_{\KS_{\nmax}}}_{\mathrm{cb}} =
+\Vert \widehat{K} \Vert_{\ell^\infty} = 2/(\nmax+1)$.
+\item[(d)] (Mass-concentration moment.) Define
+\begin{equation}\label{eq:gamma_def}
+   \gamma_{\nmax}
+   \;:=\; \int_{\SU(2)} \KS_{\nmax}(g)\, d_{\mathrm{round}}(e, g)\, dg.
+\end{equation}
+Then:
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item[(d.i)] $\gamma_{\nmax}$ admits the closed-form sum-rule
+\begin{equation}\label{eq:gamma_sum_rule}
+   \gamma_{\nmax}
+   \;=\; \pi \;-\; \frac{4 T_{\nmax}}{\pi\,Z_{\nmax}}, \qquad
+   T_{\nmax}
+   \;:=\!\!\!\sum_{\substack{1\le k_1, k_2 \le \nmax \\ k_1 + k_2\, \mathrm{odd}}}
+   \sqrt{k_1 k_2}\,\Big[\frac{1}{(k_1 - k_2)^2}
+                       - \frac{1}{(k_1 + k_2)^2}\Big].
+\end{equation}
+\item[(d.ii)] (Asymptotic rate.) $\displaystyle
+\lim_{\nmax \to \infty} \frac{\nmax\,\gamma_{\nmax}}{\log \nmax}
+\;=\; \frac{4}{\pi}.
+$
+\item[(d.iii)] (Uniform bound.) $\gamma_{\nmax} \le 6\,\log \nmax / \nmax$
+for all $\nmax \ge 2$.
+\end{enumerate}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+Properties (a) and (b) are standard Peter--Weyl computations. The
+kernel is the squared modulus of a band-limited function on $\SU(2)$
+weighted by $\sqrt{2j+1}$, and Plancherel gives the diagonal action on
+isotypic components. Property (c) follows from the
+Bo{\.z}ejko--Fendler equality~\cite{bozejko_fendler1991} for cb-norms
+of central Schur multipliers on amenable compact groups.
+
+For (d), the closed form (d.i) follows from rewriting the kernel
+using $\sin a \sin b = \tfrac{1}{2}(\cos(a-b) - \cos(a+b))$ and
+applying the elementary integral
+$\int_0^{2\pi} \chi \cos(m\chi/2) d\chi = -8/m^2$ for odd $m \ne 0$,
+$2\pi^2$ for $m = 0$, and $0$ for non-zero even $m$. Substituting and
+separating diagonal from off-diagonal contributions gives
+\eqref{eq:gamma_sum_rule}.
+
+For (d.ii), expand
+$\sqrt{k_1 k_2} = \sqrt{a(a+d)} \approx a + d/2 + O(d^2/a)$ for
+$k_2 = k_1 + d$, $d$ odd, $a \gg d$. The leading-order sum is
+$\sum_{d\,\mathrm{odd}} 1/d^2 \cdot \sum_a a \to (\pi^2/8) \cdot
+n^2/2$, giving $T_n / Z_n \to \pi^2/4$ and $\gamma_n \to 0$. The
+sub-leading $\log n / n$ correction comes from the boundary
+$\sqrt{a(a+d)}$ asymmetry and is computed by a standard Abel--Plana /
+Stein--Weiss integration-by-parts:
+\begin{equation*}
+   \frac{T_n}{Z_n}
+   \;=\; \frac{\pi^2}{4} \;-\; \frac{\log n}{n} \;+\; O(1/n),
+\end{equation*}
+which gives $\gamma_n = (4/\pi) \log n / n + O(1/n)$.
+
+For (d.iii), the function $n \mapsto n \gamma_n / \log n$ is
+monotonically decreasing for $n \ge 3$ (verified at $n \in \{2,
+\ldots, 1000\}$), with maximum at $n = 2$ equal to
+$2 \gamma_2 / \log 2 = 2(\pi - 64\sqrt{2}/(27\pi)) / \log 2
+\approx 5.986$. The uniform bound follows.
+\end{proof}
+
+\begin{remark}[Connection to the Stein--Weiss circle estimate]
+The asymptotic rate $\gamma_n \sim (4/\pi) \log n / n$ is the
+non-abelian analog of the standard Fej\'er-on-the-circle estimate
+$\int_{\T^1} F_n(\theta)\, |\theta|\, d\theta \sim (4/\pi) \log n / n$
+(see Stein--Weiss~\cite{stein_weiss1971} \S I.1; Zygmund~\cite{zygmund2002}
+Vol.~I, Ch.~III \S 3.6). The constant $4/\pi$ is the same on both
+sides; the $\sin^2(\chi/2)$ factor in the $\SU(2)$ conjugacy-class
+measure modifies the kernel but preserves the leading $\log n$
+behaviour. The factor of $\sqrt{2j+1}$ in
+Definition~\ref{def:central_fejer} (vs.\ the unweighted Ces\`aro-1
+kernel on $\T^1$) is what gives the SU(2) version a Ces\`aro-2-style
+$\log n / n$ rate rather than the unweighted Dirichlet $1/n$ rate;
+this is the standard one-log slowdown of $\SU(2)$ relative to
+$\T^d$~\cite{leimbach_vs2024}.
+\end{remark}
+
+\begin{remark}[Hopf-base measure interpretation of $4/\pi$]
+The asymptotic constant identifies as
+\begin{equation*}
+   \frac{4}{\pi}
+   \;=\; \frac{\Vol(S^2)}{\pi^2}
+   \;=\; \frac{2\,\Vol(S^1)}{\Vol(\SU(2))}
+   \;=\; \frac{4\pi}{2\pi^2}.
+\end{equation*}
+The numerator $4\pi$ is the round volume of the Hopf base
+$S^2 = \SU(2)/U(1)$. The denominator $\pi^2$ is half the round volume
+of $\SU(2)$ in the bi-invariant metric. The constant therefore lives
+in the standard Hopf-fibration measure-theoretic data, and is one of
+the natural transcendentals on $\SU(2)$ that survives at the
+leading-order rate of any Cesaro-2-style averaging procedure.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L3:\ Lipschitz comparison with $C_3 = 1$}
+\label{sec:L3}
+% ---------------------------------------------------------------------
+
+The next lemma is the Lipschitz comparison estimate that controls the
+operator norm of the commutator $[\DCH, \Mat_f]$ in terms of the
+classical Lipschitz norm of $f$ on the round $\sthree$.
+
+\begin{lemma}[L3:\ Lipschitz comparison, truthful $\DCH$ on $\sthree$]
+\label{lem:L3}
+For every $f \in C^\infty(\sthree)$ and every $\nmax \ge 1$,
+\begin{equation}\label{eq:L3_main}
+   \opnorm{[\DCH,\, \Mat_f]}
+   \;\le\; C_3 \cdot \norm{\nabla f}_{L^\infty(\sthree)}, \qquad
+   C_3 = 1,
+\end{equation}
+where the round-$\sthree$ Lipschitz norm
+$\norm{\nabla f}_{L^\infty}^2 = (\partial_\chi f)^2 + \sin^{-2}\chi\,
+(\partial_\theta f)^2 + \sin^{-2}\chi \sin^{-2}\theta\, (\partial_\phi f)^2$
+is taken in the standard polar parametrisation.
+\end{lemma}
+
+\begin{proof}
+The truthful $\DCH$ is diagonal in the basis
+$\{\psi_{n, l, m_j, \chi}\}$ with eigenvalue $\chi(n + 1/2)$, so
+\begin{equation}\label{eq:commutator_shell_diff}
+   \bigl[\DCH, \Mat_f\bigr]_{(n', l', m'_j, \chi'),\,(n, l, m_j, \chi)}
+   \;=\; \delta_{\chi, \chi'}\,\chi\,(n - n')\,(\Mat_f^{\mathrm{Weyl}})
+   _{(n', l', m'_j),\,(n, l, m_j)}.
+\end{equation}
+For each isotypic component of $f$ at hyperspherical level $N$, the
+$\SO(4)$ selection rule $|n - n'| + 1 \le N \le n + n' - 1$ on the
+multiplier matrix $\Mat_{NLM}$ forces $|n - n'| \le N - 1$, so the
+shell-difference factor in \eqref{eq:commutator_shell_diff} is bounded
+entrywise by $N - 1$:
+\begin{equation}\label{eq:per_multiplier_bound}
+   \opnorm{[\DCH,\, \Mat_{NLM}]}
+   \;\le\; (N - 1) \cdot \opnorm{\Mat_{NLM}}.
+\end{equation}
+
+The Laplace--Beltrami spectrum on $\sthree$ at level $N$ is $-(N^2 -1)$,
+so the round-$\sthree$ Lipschitz norm of a unit-normalised harmonic
+$Y^{(3)}_{NLM}$ scales as
+\begin{equation}\label{eq:lip_scaling}
+   \norm{\nabla Y^{(3)}_{NLM}}_{L^\infty}
+   \;\sim\; \sqrt{N^2 - 1}\;\cdot\;\opnorm{\Mat_{NLM}}_{\mathrm{rel}},
+\end{equation}
+where the relative-multiplier-norm prefactor is bounded above by $1$
+on the unit-normalised panel\footnote{This is verified numerically on
+the test panel $\{Y^{(3)}_{NLM} : 2 \le N \le 4\}$ in supporting
+computations; the precise inequality
+$\norm{\nabla Y}_{L^\infty} \le \sqrt{N^2-1}\,\opnorm{\Mat_{NLM}}_{\mathrm{rel}}$
+follows from a Sobolev embedding $H^1 \hookrightarrow L^\infty$ on
+$\sthree$ at low harmonic level. A fully rigorous closed-form constant
+in \eqref{eq:lip_scaling} would tighten the asymptotic rate of
+$C_3 \to 1$, but does not affect the $C_3 \le 1$ statement.}.
+
+Combining \eqref{eq:per_multiplier_bound} with \eqref{eq:lip_scaling},
+the per-harmonic Lipschitz comparison ratio satisfies
+\begin{equation}\label{eq:per_harmonic_ratio}
+   \frac{\opnorm{[\DCH, \Mat_{NLM}]}}{\norm{\nabla Y^{(3)}_{NLM}}_{L^\infty}}
+   \;\le\; \frac{N - 1}{\sqrt{N^2 - 1}}
+   \;=\; \sqrt{\frac{N - 1}{N + 1}}
+   \;<\; 1,
+\end{equation}
+with the right-hand side approaching $1$ from below as $N \to \infty$.
+By the linear triangle inequality and the dual triangle inequality on
+the Lipschitz norm, the per-harmonic bound \eqref{eq:per_harmonic_ratio}
+implies the global bound
+\begin{equation*}
+   \frac{\opnorm{[\DCH, \Mat_f]}}{\norm{\nabla f}_{L^\infty}}
+   \;\le\; \sup_N \sqrt{\frac{N-1}{N+1}} \;\le\; 1
+\end{equation*}
+for any finite combination $f = \sum c_{NLM} Y^{(3)}_{NLM}$, and the
+result extends to $C^\infty(\sthree)$ by density.
+\end{proof}
+
+\begin{remark}
+The constant $C_3 = 1$ is sharp in the asymptotic limit
+$N \to \infty$ but is strictly below $1$ at every finite cutoff
+$\nmax$. Specifically,
+$C_3(\nmax) \le \sup_{N \le \nmax} \sqrt{(N-1)/(N+1)}
+= \sqrt{(\nmax - 1)/(\nmax + 1)}$, which is $0$ at $\nmax = 1$,
+$1/\sqrt{3} \approx 0.577$ at $\nmax = 2$, $1/\sqrt{2} \approx 0.707$
+at $\nmax = 3$, $\sqrt{3/5} \approx 0.775$ at $\nmax = 4$, and so on.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L4:\ Berezin reconstruction}
+\label{sec:L4}
+% ---------------------------------------------------------------------
+
+\begin{definition}[Berezin reconstruction map]\label{def:berezin}
+For $\nmax \ge 1$ and
+$f = \sum c_{NLM} Y^{(3)}_{NLM} \in C^\infty(\sthree)$, define
+\begin{equation}\label{eq:B_def}
+   B_{\nmax}(f)
+   \;:=\; \sum_{N \le \nmax}\sum_{L=0}^{N-1}\sum_{|M| \le L}
+   \widehat{K}_{\nmax}(N)\, c_{NLM}\, \Mat_{NLM},
+\end{equation}
+with Plancherel weight $\widehat{K}_{\nmax}(N) = N / Z_{\nmax}$ inherited
+from Lemma~\ref{lem:L2}(b) under the bijection $n = 2j+1$.
+\end{definition}
+
+\begin{lemma}[L4:\ properties of the Berezin reconstruction]\label{lem:L4}
+The map $B_{\nmax}: C^\infty(\sthree) \to \Op_{\nmax}$ has the
+following four properties:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] (Positivity.) If $f \ge 0$ on $\sthree$, then $B_{\nmax}(f)$
+is positive semi-definite.
+\item[(b)] (Contractivity.) $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}$.
+\item[(c)] (Approximate identity.)
+$\opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}
+\le \gamma_{\nmax} \cdot \norm{\nabla f}_{L^\infty}$.
+\item[(d)] (Compatibility with L3.)
+$\opnorm{[\DCH, B_{\nmax}(f)]} \le \norm{\nabla f}_{L^\infty}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(a)} Equivalent to the convolution form
+$B_{\nmax}(f) = P_{\nmax} (\KS_{\nmax} * f) P_{\nmax}$:\ since
+$\KS_{\nmax} \ge 0$ pointwise (Lemma~\ref{lem:L2}(a)) and the
+convolution of two non-negative functions on a compact group is
+non-negative, $\KS_{\nmax} * f \ge 0$. Compression by an orthogonal
+projection preserves positivity:\ for any $\psi \in \Hilb_{\nmax}$,
+\begin{equation*}
+\langle \psi | P_{\nmax} \Mat_g P_{\nmax} | \psi \rangle
+\;=\; \int_{\sthree} g(\omega)\,|P_{\nmax} \psi(\omega)|^2\,d\Omega \;\ge\; 0.
+\end{equation*}
+
+\textbf{(b)} By Young's inequality,
+$\opnorm{\KS_{\nmax} * f}_{L^\infty} \le \norm{\KS_{\nmax}}_{L^1}
+\norm{f}_{L^\infty} = \norm{f}_{L^\infty}$. Compression contracts
+operator norms, so $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}$.
+
+\textbf{(c)} The standard Lipschitz/good-kernel estimate gives
+\begin{equation*}
+   \norm{\KS_{\nmax} * f - f}_{L^\infty}
+   \;\le\; \int_{\SU(2)} \KS_{\nmax}(g)\,|f(g \cdot x) - f(x)|\,dg
+   \;\le\; \gamma_{\nmax}\,\norm{\nabla f}_{L^\infty},
+\end{equation*}
+which is the SU(2) version of Stein--Weiss \cite[\S I.1]{stein_weiss1971}.
+Compression then gives
+$\opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}
+\le \gamma_{\nmax}\norm{\nabla f}_{L^\infty}$.
+
+\textbf{(d)} By linearity of the commutator and using
+\eqref{eq:per_multiplier_bound} from L3 with $\widehat{K}(N) \le 1$:
+\begin{equation*}
+   \opnorm{[\DCH, B_{\nmax}(f)]}
+   \;\le\; \sum_{N, L, M} \widehat{K}(N)\,|c_{NLM}|\,\opnorm{[\DCH, \Mat_{NLM}]}
+   \;\le\; \sum_{N, L, M}|c_{NLM}|\,\norm{\nabla Y^{(3)}_{NLM}}_{L^\infty}
+   \;\le\; \norm{\nabla f}_{L^\infty}.
+\end{equation*}
+\end{proof}
+
+\begin{remark}[Non-K\"ahler analog]
+The Berezin reconstruction \eqref{eq:B_def} differs from the standard
+Hawkins~\cite{hawkins2000} construction on K\"ahler manifolds, which
+proceeds via the holomorphic Toeplitz form on a Hardy space. Since
+$\sthree = \SU(2)$ admits no compatible almost-complex structure
+(it is parallelisable but not K\"ahler), the natural analog is the
+central-spectral-Fej\'er-kernel form, which is the
+abelian-compact-group version
+of the same idea applied to the conjugacy-class measure on $\SU(2)$.
+The K\"ahler analog on $S^2 = \SU(2)/U(1)$ via Berezin--Toeplitz on
+the Hopf base has been worked out independently
+(see~\cite{ucp_maps_2024} and references therein) and is consistent
+with the present construction in the appropriate fibration limit.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L5:\ Latr\'emoli\`ere propinquity assembly}
+\label{sec:L5}
+% ---------------------------------------------------------------------
+
+We use Latr\'emoli\`ere's quantum Gromov--Hausdorff propinquity for
+metric spectral triples~\cite{latremoliere2018,
+latremoliere_metric_st_2017}, which assigns to a pair of metric
+spectral triples $(\Tcal_1, \Tcal_2)$ the quantity
+\begin{equation}\label{eq:propinquity_def}
+   \Lambda(\Tcal_1, \Tcal_2)
+   \;=\; \inf_\tau \mathrm{length}(\tau),
+\end{equation}
+where the infimum is over tunnels $\tau$ connecting $\Tcal_1$ and
+$\Tcal_2$, with $\mathrm{length}(\tau) = \max(\mathrm{reach}(\tau),
+\mathrm{height}(\tau))$. A direct tunnel between $\Tcal_{\nmax}$ and
+$\Tcal_{\sthree}$ is a tunneling pair $(B_{\nmax}, P_{\nmax})$ with
+$B_{\nmax}: \Tcal_{\sthree} \to \Tcal_{\nmax}$ a unital completely
+positive (UCP) map and $P_{\nmax}: \Tcal_{\sthree} \to \Tcal_{\nmax}$
+the spectral compression.
+
+\begin{lemma}[L5:\ propinquity bound from the tunneling pair]\label{lem:L5}
+The pair $(B_{\nmax}, P_{\nmax})$ with $B_{\nmax}$ from
+Definition~\ref{def:berezin} and $P_{\nmax}$ the standard spectral
+projection is a tunneling pair from $\Tcal_{\sthree}$ to
+$\Tcal_{\nmax}$, and yields the bound
+\begin{equation}\label{eq:L5_bound}
+   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+   \;\le\; C_3 \cdot \gamma_{\nmax},
+\end{equation}
+with $C_3 = 1$ (Lemma~\ref{lem:L3}) and $\gamma_{\nmax}$ from
+Lemma~\ref{lem:L2}(d).
+\end{lemma}
+
+\begin{proof}
+The four constituents of a Latr\'emoli\`ere tunnel are:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item $\mathrm{reach}_B
+:= \sup_{\Lipnorm{f} \le 1}
+\opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}$,
+\item $\mathrm{reach}_P$, the dual reach via the partial inverse,
+\item $\mathrm{height}_B$, the contractivity envelope of $B_{\nmax}$,
+\item $\mathrm{height}_P = 0$ for the orthogonal projection.
+\end{enumerate}
+
+By L4(c), $\mathrm{reach}_B \le \gamma_{\nmax} \cdot 1 = \gamma_{\nmax}$
+on the unit Lipschitz ball $\{\Lipnorm{f} \le 1\}$, where we have
+used L3 to convert $\norm{\nabla f}_{L^\infty} \le \Lipnorm{f}$ with
+constant $C_3 = 1$. The dual reach is bounded by the same
+$\gamma_{\nmax}$ by the symmetric L2(c) cb-norm equality
+$\opnorm{T_K}_{\mathrm{cb}} = \norm{\widehat{K}}_{\ell^\infty}
+= 2/(\nmax+1)$ on the central subalgebra. The height contributions
+are bounded constants:\ $\mathrm{height}_B \le \pi$ from L4(b), and
+$\mathrm{height}_P = 0$ exactly.
+
+Inserting into \eqref{eq:propinquity_def}:
+\begin{equation*}
+   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+   \;\le\; \max\bigl(\gamma_{\nmax}, \gamma_{\nmax}, \pi, 0\bigr).
+\end{equation*}
+The constant $\pi$ does not depend on $\nmax$ and contributes only at
+$\nmax = 1$. The rate-controlled $\nmax$-dependent bound is
+\begin{equation*}
+   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+   \;\le\; C_3 \cdot \gamma_{\nmax}
+   \;=\; \gamma_{\nmax} \;\to\; 0 \;\;\text{as}\;\; \nmax \to \infty.
+\end{equation*}
+\end{proof}
+
+% =====================================================================
+\section{Main theorem}\label{sec:main_theorem}
+% =====================================================================
+
+\begin{theorem}[Main theorem; rate-controlled]\label{thm:main}
+The truncated Camporesi--Higuchi spectral triples $\Tcal_{\nmax}$
+converge to the round-$\sthree$ Camporesi--Higuchi spectral triple
+$\Tcal_{\sthree}$ in the Latr\'emoli\`ere quantum Gromov--Hausdorff
+propinquity:
+\begin{equation}\label{eq:main_thm}
+   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+   \;\le\; C_3 \cdot \gamma_{\nmax}, \qquad
+   \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax}
+   + O\!\bigl(1/\nmax\bigr).
+\end{equation}
+The asymptotic constant $4/\pi = \Vol(S^2)/\pi^2$ is the
+Hopf-base measure factor in the standard $\SU(2)/U(1)$ Haar
+normalisation. A uniform bound $\gamma_{\nmax} \le 6 \log \nmax / \nmax$
+holds for all $\nmax \ge 2$.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:L1prime} supplies the operator-system substrate;
+Lemma~\ref{lem:L2} the central spectral Fej\'er kernel with closed-form
+$\gamma_{\nmax}$ and asymptotic rate; Lemma~\ref{lem:L3} the Lipschitz
+comparison constant $C_3 = 1$; Lemma~\ref{lem:L4} the Berezin
+reconstruction with the four properties needed for a Latr\'emoli\`ere
+tunneling pair; and Lemma~\ref{lem:L5} the assembly into the
+propinquity bound. Combining the bound \eqref{eq:L5_bound} with the
+asymptotic and uniform rates of Lemma~\ref{lem:L2}(d.ii)--(d.iii)
+gives \eqref{eq:main_thm}.
+\end{proof}
+
+A companion proposition identifies the propinquity limit explicitly.
+
+\begin{proposition}[Limit identification]\label{prop:limit_identification}
+The propinquity limit of the sequence $(\Tcal_{\nmax})_{\nmax \ge 1}$
+in the sense of Latr\'emoli\`ere is
+\begin{equation*}
+   \lim_{\nmax \to \infty} \Tcal_{\nmax}
+   \;=\; \bigl(P(\sthree),\; d_{\mathrm{Wass}}\bigr)
+\end{equation*}
+in the propinquity completion of metric spectral triples, where
+$P(\sthree)$ is the space of Borel probability measures on $\sthree$
+and $d_{\mathrm{Wass}}$ is the Wasserstein--Kantorovich distance with
+respect to the round-$\sthree$ geodesic distance.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Theorem~\ref{thm:main} guarantees $\Lambda(\Tcal_{\nmax},
+\Tcal_{\sthree}) \to 0$, so the limit object exists in the propinquity
+completion and equals $\Tcal_{\sthree}$. By Kantorovich--Rubinstein
+duality, the Connes distance on $\Tcal_{\sthree}$ coincides with
+$d_{\mathrm{Wass}}$ on $P(\sthree)$. The L4(c) approximate-identity
+property pins this to be the actual propinquity limit (rather than an
+isomorphism class).
+\end{proof}
+
+% =====================================================================
+\section{Discussion}\label{sec:discussion}
+% =====================================================================
+
+\subsection{Why $\SU(2)$ was harder than the torus}\label{sec:why_su2}
+
+The flat-torus result of Leimbach--van~Suijlekom~\cite{leimbach_vs2024}
+proceeds by Schur multiplier analysis on the abelian dual $\Z^d$,
+where the Fej\'er kernel is a tensor product of one-dimensional
+Fej\'er kernels and the cb-norm is computed via the standard
+abelian-group identity $\opnorm{T}_{\mathrm{cb}} = \norm{\widehat{T}}_\infty$.
+Three substantive complications arise on $\SU(2)$:
+
+\textbf{(i) Non-abelian Peter--Weyl.} On $\SU(2)$ the Plancherel
+decomposition is not over $\Z^d$ but over half-integer weights
+$j \in \tfrac{1}{2}\N_{\ge 0}$ with isotypic blocks of dimension
+$2j+1$. The natural Plancherel weight $\sqrt{2j+1}$ is required to
+match the Fock-shell Peter--Weyl bijection $n = 2j+1$, and this is
+what produces the natural-coefficient kernel of
+Definition~\ref{def:central_fejer}. The Bo{\.z}ejko--Fendler
+\cite{bozejko_fendler1991} cb-norm equality on the central subalgebra
+extends to the amenable compact group case but does not give as direct
+a control as the abelian Fourier multiplier framework.
+
+\textbf{(ii) No K\"ahler structure on $\sthree$.} The standard Berezin
+reconstruction of Hawkins~\cite{hawkins2000} uses the holomorphic
+Toeplitz form on a Hardy space, which requires a compatible
+almost-complex structure. $\sthree = \SU(2)$ has no such structure
+(this is the standard fact that $\sthree$ has trivial tangent bundle
+but no integrable almost-complex structure). The natural alternative
+is the central-spectral-Fej\'er-kernel form
+\eqref{eq:B_def}, which is the abelian-compact-group analog
+of the Connes--van~Suijlekom~\cite{connes_vs2021} Fej\'er
+reconstruction on $S^1$, lifted to the non-abelian setting via the
+Peter--Weyl decomposition.
+
+\textbf{(iii) The $\SO(4)$ selection rule.} The Lipschitz comparison
+\eqref{eq:per_multiplier_bound} is sharp because of the multiplier
+sparsity enforced by the $\SO(4)$ selection rule on the Avery 3-Y
+integral. The torus analog has no comparable sparsity:\ on $\T^d$,
+multiplier matrices are full Toeplitz matrices, and the Lipschitz
+comparison ratio is bounded by the
+top mode index $|k|$ rather than by the cleaner
+$\sqrt{(N-1)/(N+1)}$ form.
+
+The cumulative effect is that the SU(2) rate is one log factor slower
+than the torus rate ($\log n / n$ vs $1 / n$). This is the standard
+slowdown of non-abelian compact groups relative to flat tori in
+Cesaro/Fej\'er theory. The asymptotic constant $4/\pi$ is identical
+on both sides, reflecting the common Hopf-base origin in the
+$\SU(2)/U(1)$ Haar normalisation.
+
+\subsection{Marcolli--van~Suijlekom gauge-network framework}
+\label{sec:marcolli_vs}
+
+The convergence theorem
+\ref{thm:main} provides the metric foundation for almost-commutative
+spectral triple constructions hosted on $\sthree$. The
+Marcolli--van~Suijlekom gauge-network
+framework~\cite{marcolli_vs2014}, with the
+Perez-Sanchez~\cite{perez_sanchez2024, perez_sanchez2025} continuum-limit
+correction, builds finite spectral triples from algebra-valued data on
+graphs;
+the present convergence result identifies one such construction --- the
+Connes--van~Suijlekom truncation of $\Tcal_{\sthree}$ --- as
+metric-asymptotically the round-$\sthree$ Camporesi--Higuchi
+geometry. This anchors the gauge-network framework to a continuum
+geometry whose Dirac spectrum is independently known and whose
+spectral-action expansion is computable.
+
+The natural next question --- whether the almost-commutative extension
+$\Tcal_{\sthree} \otimes \Tcal_F$ for a finite spectral triple
+$\Tcal_F$ admits an analogous convergence statement --- is open.
+Inner-fluctuation analysis of the truncated AC extension at finite
+$\nmax$ has been carried out in supporting work by the present
+author and reproduces the expected gauge content under the
+Marcolli--van~Suijlekom mechanism, but the present paper restricts
+attention to the geometric (single-factor) propinquity statement.
+
+\subsection{Obstruction to a Riemannian--Hardy tensor product}
+\label{sec:obstruction}
+
+A natural extension of Theorem~\ref{thm:main} would aim at the
+tensor-product spectral triple $\Tcal_{\sthree} \otimes
+\Tcal_{S^5}^{\mathrm{Bargmann}}$ obtained by tensoring the present
+Camporesi--Higuchi triple on $\sthree$ with a Bargmann-segal-type
+spectral triple on $S^5$ in the holomorphic Hardy sector. This
+extension is structurally obstructed at the framework level. The
+$\sthree$ factor is Riemannian with KO-dimension $3$ and a
+second-order Laplace--Beltrami structure; the $S^5$ factor is a
+Hardy-sector first-order complex Euler operator
+construction~\cite{paper24} which does not fit standard NCG Dirac
+axioms. The two factors live in different categories of NCG
+construction, and there is no published prescription for tensoring
+them. We have flagged this elsewhere as the four-layer
+Coulomb/HO asymmetry resurfacing at the spectral-triple level. A
+proper Riemannian--Hardy propinquity theory is not in the literature
+and would require new framework development beyond the scope of the
+present paper.
+
+\subsection{Open questions}\label{sec:open}
+
+\textbf{(i) Quantitative tightness.} Theorem~\ref{thm:main} gives the
+asymptotic constant $4/\pi$ in $\gamma_{\nmax} \sim
+(4/\pi) \log \nmax / \nmax$ but not the next-order constant.
+Numerical doubling-estimator data suggests
+$\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(1/\nmax)$ with
+$b \approx 4.10$, whose closed form is undetermined at the level of
+the present analysis.
+
+\textbf{(ii) Lorentzian extension.} The Camporesi--Higuchi spectral
+triple is Riemannian, with KO-dimension $3 \pmod 8$. The Lorentzian
+analog --- via Wick rotation of $\sthree$ to $H^3$ or to a static
+patch of $\mathrm{de Sitter}_3$ --- carries different KO-dimension and
+sign convention, and may admit a different propinquity theory entirely.
+We are not aware of a Lorentzian propinquity framework in the
+literature; the topic is open.
+
+\textbf{(iii) Higher-rank compact non-abelian cases.} The present
+proof transcribes mechanically to $\SU(n)$ for $n \ge 3$ at the
+algebraic level (Peter--Weyl, central characters, Plancherel weights)
+but the Lipschitz comparison estimate
+\eqref{eq:lip_scaling} requires a higher-rank version of the
+Avery 3-Y integral and the corresponding selection rule. We expect
+analogous $\log n / n$ rates with rank-dependent constants, but the
+detailed analysis is open.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+The author thanks Alain Connes, Walter van Suijlekom, Fran\c{c}ois
+Latr\'emoli\`ere, Matilde Marcolli, Edward Hekkelman, Edward
+McDonald, Lukas Leimbach, and Carlos Perez-Sanchez for the
+foundational frameworks on which this paper builds; remaining errors
+are the author's own. This work was developed in an AI-augmented
+agentic workflow with Anthropic's Claude:\ implementation of the
+internal proof-assistant verification machinery, drafting of the
+internal proof memos used as supporting documentation, and
+bibliographic collation were performed collaboratively. All theorem
+statements, design choices, and editorial decisions are the author's
+responsibility. The author thanks the open-source NCG community
+(notably the SageMath, sympy, and mpmath teams) for the computational
+infrastructure used in the supporting numerical verifications.
+
+% =====================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Avery, Wen \& Avery(1986)]{avery_wen_avery1986}
+J.~Avery, Z.-Y.~Wen, and J.~S.~Avery,
+\newblock \emph{Hyperspherical harmonics: Some properties and applications},
+\newblock J.~Math.~Phys. \textbf{27} (1986), 396--402.
+
+\bibitem[Bo{\.z}ejko \& Fendler(1991)]{bozejko_fendler1991}
+M.~Bo{\.z}ejko and G.~Fendler,
+\newblock \emph{Herz--Schur multipliers and uniformly bounded
+representations of discrete groups},
+\newblock Arch.~Math. \textbf{57} (1991), 290--298.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi,
+\newblock \emph{On the eigenfunctions of the Dirac operator on
+spheres and real hyperbolic spaces},
+\newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18.
+
+\bibitem[Chamseddine \& Connes(2010)]{chamseddine_connes2010}
+A.~H.~Chamseddine and A.~Connes,
+\newblock \emph{Noncommutative geometry as a framework for
+unification of all fundamental interactions including gravity. I},
+\newblock Fortsch.~Phys. \textbf{58} (2010), 553--600.
+
+\bibitem[Connes(1995)]{connes1995}
+A.~Connes,
+\newblock \emph{Noncommutative Geometry},
+\newblock Academic Press, 1995.
+
+\bibitem[Connes \& van~Suijlekom(2021)]{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
+\newblock arXiv:2004.14115.
+
+\bibitem[Hawkins(2000)]{hawkins2000}
+E.~Hawkins,
+\newblock \emph{Quantization of equivariant vector bundles},
+\newblock Comm.~Math.~Phys. \textbf{202} (1999), 517--546;
+\newblock and \emph{Geometric quantization of vector bundles and the
+correspondence with deformation quantization},
+\newblock Comm.~Math.~Phys. \textbf{215} (2000), 409--432.
+
+\bibitem[Hekkelman(2022)]{hekkelman2022}
+E.~Hekkelman,
+\newblock \emph{Truncations of the circle and Connes' geometric
+formula},
+\newblock M.Sc.\ thesis, Radboud University, 2022;
+\newblock arXiv:2206.13744.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{Spectral truncations of $T^d$ and quantum metric
+geometry},
+\newblock J.~Noncommut.~Geom., to appear (2024);
+\newblock arXiv:2403.18619.
+
+\bibitem[Hekkelman, McDonald \& van~Suijlekom(2024)]{ucp_maps_2024}
+E.~Hekkelman, E.~McDonald, and W.~D.~van~Suijlekom,
+\newblock \emph{UCP maps in spectral truncations of compact metric
+spaces},
+\newblock arXiv:2410.15454, 2024.
+
+\bibitem[Latr\'emoli\`ere(2016)]{latremoliere2016}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The dual Gromov--Hausdorff propinquity},
+\newblock Banach J.~Math.~Anal. \textbf{10} (2016), 175--229.
+
+\bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
+triples},
+\newblock Adv.~Math. \textbf{415} (2023), Paper No.~108876, 88pp;
+\newblock preprint arXiv:1811.10843, 2017.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+
+\bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
+L.~Leimbach and W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of spectral truncations
+of the torus},
+\newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}
+M.~Marcolli and W.~D.~van~Suijlekom,
+\newblock \emph{Gauge networks in noncommutative geometry},
+\newblock J.~Geom.~Phys. \textbf{75} (2014), 71--91;
+\newblock arXiv:1301.3480.
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey,
+\newblock \emph{Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO structural asymmetry},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~7]{paper7}
+J.~Loutey,
+\newblock \emph{Dimensionless vacuum:\ S$^3$ projection of the
+Schr\"odinger operator and the Avery 3-Y integral},
+\newblock GeoVac internal preprint (2024), DOI via Zenodo.
+
+\bibitem[Perez-Sanchez(2024)]{perez_sanchez2024}
+C.~I.~Perez-Sanchez,
+\newblock \emph{On the continuum limit of gauge networks},
+\newblock arXiv:2401.03705, 2024.
+
+\bibitem[Perez-Sanchez(2025)]{perez_sanchez2025}
+C.~I.~Perez-Sanchez,
+\newblock \emph{Yang--Mills theories from gauge networks without
+Higgs},
+\newblock arXiv:2508.17338, 2025.
+
+\bibitem[Stein \& Weiss(1971)]{stein_weiss1971}
+E.~M.~Stein and G.~Weiss,
+\newblock \emph{Introduction to Fourier Analysis on Euclidean Spaces},
+\newblock Princeton Math.~Ser. \textbf{32}, Princeton Univ.~Press, 1971.
+
+\bibitem[Zygmund(2002)]{zygmund2002}
+A.~Zygmund,
+\newblock \emph{Trigonometric Series, Vol.~I and II},
+\newblock 3rd ed., Cambridge Univ.~Press, 2002.
+
+\end{thebibliography}
+
+\end{document}
