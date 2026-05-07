@@ -1,0 +1,120 @@
+{
+  "constants": {
+    "alpha": 0.0072973525693,
+    "a0_fm": 52917.72108,
+    "R_proton_fm": 0.8414,
+    "R_proton_bohr": 1.5900155615696063e-05,
+    "R_zemach_fm": 1.045,
+    "R_zemach_bohr": 1.974763800618301e-05,
+    "Z": 1,
+    "A_hf_HF2_baseline_MHz": 1420.4879,
+    "A_hf_experimental_MHz": 1420.4058,
+    "ratio_R_charge_to_R_zemach": 0.8051674641148326
+  },
+  "step1_diagnostic": {
+    "zemach_keyword_counts_in_geovac_nuclear": {
+      "Zemach": 0,
+      "magnetization": 0,
+      "r_Z": 0,
+      "R_M": 0,
+      "magnetic moment distribution": 0
+    },
+    "charge_radius_keyword_counts_in_geovac_nuclear": {
+      "R_PROTON": 10,
+      "R_nuc": 58,
+      "charge_radius": 0,
+      "charge radius": 1
+    },
+    "hyperfine_coupling_pauli_signature": "(Q_nuc: 'int', Q_elec: 'int', nuclear_block: 'Dict[str, Any]', electronic_block: 'Dict[str, Any]', A_hf: 'float' = 2.1587750549670735e-07) -> 'Dict[str, float]'",
+    "hyperfine_takes_R_nuc": false,
+    "hyperfine_takes_r_Z": false,
+    "hyperfine_source_has_size_dependence": false,
+    "finite_size_coupling_pauli_signature": "(Q_nuc: 'int', Q_elec: 'int', nuclear_block: 'Dict[str, Any]', electronic_block: 'Dict[str, Any]', R_nuc: 'float' = 1.5900155615696063e-05, Z: 'int' = 1) -> 'Dict[str, float]'",
+    "finite_size_takes_R_nuc": true,
+    "finite_size_targets_hyperfine_energy": false,
+    "finite_size_correction_signature": "(Z: float, R_nuc: float, n: int, l: int) -> float",
+    "finite_size_correction_targets_binding_energy": true,
+    "finite_size_correction_returns_scalar": true,
+    "summary_no_magnetization_operator": true
+  },
+  "step2_scenarios": {
+    "baseline": {
+      "name": "HF-2 closing: BF + recoil + Schwinger",
+      "A_hf_MHz": 1420.4879,
+      "residual_ppm": 57.80038352425921
+    },
+    "scenario_A_charge_radius_substitution": {
+      "description": "Use R_PROTON_BOHR (charge radius 0.8414 fm) as a stand-in for the Zemach radius. This is what the framework would natively produce IF its R_PROTON_BOHR parameter were re-purposed as a magnetization radius \u2014 but the framework has no quantum operator for magnetization, so this remains a hand-substitution.",
+      "r_substitute_fm": 0.8414,
+      "r_substitute_bohr": 1.5900155615696063e-05,
+      "delta_nu_over_nu_ppm": -39.49527601236602,
+      "delta_nu_using_R_PROTON_ppm": -31.800311231392126,
+      "A_hf_predicted_MHz": 1420.4427280426796,
+      "residual_ppm": 25.998234222656276
+    },
+    "scenario_B_r_Z_external": {
+      "description": "Inject the experimentally extracted Zemach radius r_Z \u2248 1.045 fm as an external Layer-2 calibration focal length. Framework has no magnetization quantum operator, so this is calibrated supply, structurally identical to the recoil correction in HF-1.",
+      "r_Z_fm": 1.045,
+      "r_Z_bohr": 1.974763800618301e-05,
+      "delta_nu_over_nu_ppm": -39.49527601236602,
+      "A_hf_predicted_MHz": 1420.4317974383175,
+      "residual_ppm": 18.302824669906066
+    },
+    "scenario_C_native_zemach_zero": {
+      "description": "Framework has no Zemach machinery. Without external supply, the prediction is unchanged from the HF-2 baseline (+58 ppm).",
+      "A_hf_predicted_MHz": 1420.4879,
+      "residual_ppm": 57.80038352425921
+    },
+    "canonical_eides_zemach_correction_ppm": -39.49527601236602,
+    "ratio_charge_to_zemach_radius": 0.8051674641148326,
+    "ratio_zemach_to_charge_radius": 1.2419776562871403
+  },
+  "step3_verdict": {
+    "verdict": "NEGATIVE",
+    "verdict_long": "Track NI has no Zemach-relevant machinery. The hyperfine coupling is point-like in the proton spatial coordinate; there is no magnetization distribution operator, no separate r_Z input, and no size dependence in hyperfine_coupling_pauli. R_PROTON_BOHR is the framework's single proton-structure parameter and is wired into a one-body electronic operator (Foldy binding-energy correction), not the hyperfine coupling. Zemach is structurally external \u2014 like recoil \u2014 and must be supplied as a calibration focal length with r_Z as input.",
+    "headline_native_A_hf_MHz": 1420.4879,
+    "headline_native_residual_ppm": 57.80038352425921,
+    "with_r_Z_external_A_hf_MHz": 1420.4317974383175,
+    "with_r_Z_external_residual_ppm": 18.302824669906066
+  },
+  "step4_paper_34_vocabulary": {
+    "charge_radius_R_p": {
+      "physical_meaning": "RMS charge radius of the proton",
+      "value_fm": 0.8414,
+      "what_it_modulates_in_GeoVac": "Foldy finite-size correction to the 1s binding energy: \u03b4E_1s = (2/5) Z^4 R_p^2 / n^3 (Ha)",
+      "paper_34_axes_added": "(variable: length scale; dimension: [L]; transcendental: none)",
+      "paper_34_projection_class": "rest-mass / size / Layer-2 calibration",
+      "category_per_HF_taxonomy": "C \u2014 external CODATA",
+      "wired_into_GeoVac": true,
+      "wiring": "form_factor.finite_size_correction \u2192 finite_size_coupling_pauli"
+    },
+    "zemach_radius_r_Z": {
+      "physical_meaning": "First moment of the convolution of the proton charge density \u03c1(r) with its magnetization density m(r): r_Z = \u222b d^3r d^3r' \u03c1(r) m(r') |r \u2212 r'|",
+      "value_fm": 1.045,
+      "what_it_modulates_in_GeoVac": "NOTHING (native): hyperfine_coupling_pauli is point-like in proton spatial coordinate. With external substitution, would modulate A_hf via \u0394\u03bd/\u03bd = \u22122 Z \u03b1 (r_Z / a_0).",
+      "paper_34_axes_added": "(variable: length scale (DIFFERENT from R_p; magnetization-weighted, not charge-weighted); dimension: [L]; transcendental: none)",
+      "paper_34_projection_class": "QCD-internal hadronic Layer-2 input. Categorically the same axis as r_charge but a STRUCTURALLY DIFFERENT focal length: charge distribution is \u03c1(r), magnetization distribution is m(r), and the framework distinguishes neither because both live downstream of an SU(3) gauge structure that GeoVac admits as a Wilson construction (Paper 30 + Sprint ST-SU3) but cannot autonomously compute matter elements within.",
+      "category_per_HF_taxonomy": "C \u2014 external (Eides \u00a77, Karshenboim 2005)",
+      "wired_into_GeoVac": false,
+      "could_be_wired": "Yes, as a Layer-2 multiplicative calibration on A_hf. Doing so would NOT be a derivation; it would be a calibration input structurally identical to the recoil prescription in HF-1."
+    },
+    "recoil_factor": {
+      "physical_meaning": "Reduced-mass replacement m_e \u2192 \u03bc in |\u03c8(0)|\u00b2",
+      "value": "(1 + m_e/m_p)^{-3} = 0.998368",
+      "what_it_modulates_in_GeoVac": "|\u03c8_{1s}(0)|\u00b2 in the Bohr-Fermi formula. Applied externally; Track NI cannot produce two-body coordinate coupling natively (HF-3 verdict).",
+      "paper_34_axes_added": "(variable: mass ratio; dimension: dimensionless; transcendental: none)",
+      "paper_34_projection_class": "two-body / center-of-mass / Layer-2 calibration",
+      "category_per_HF_taxonomy": "C \u2014 external (textbook NRQM)",
+      "wired_into_GeoVac": false
+    },
+    "Schwinger_a_e": {
+      "physical_meaning": "Electron anomalous magnetic moment \u03b1/(2\u03c0)",
+      "value": 0.0011614097328884378,
+      "what_it_modulates_in_GeoVac": "g_e \u2192 2(1 + a_e) in the Bohr-Fermi formula. GeoVac DOES produce this autonomously (Paper 28 \u00a7curvature_coefficients, Track HF-2).",
+      "paper_34_projection_class": "graph-native + Hopf-base measure 1/(2\u03c0)",
+      "category_per_HF_taxonomy": "A \u2014 derivable from existing GeoVac machinery",
+      "wired_into_GeoVac": true
+    },
+    "synthesis": "The proton structure radii r_charge and r_Zemach are TWO DIFFERENT Layer-2 focal lengths, both QCD-internal. Track NI implements r_charge (one-body electronic operator on E_1s) but not r_Zemach. Both are out of the structural-skeleton scope of GeoVac (the framework has Wilson SU(3) at the gauge level \u2014 Paper 30, ST-SU3 \u2014 but cannot autonomously compute matter-distribution elements within the (N,0) representations because of the CG obstruction found in Sprint 5 Track S5). Both require external supply. The fact that R_PROTON_BOHR is wired into the binding-energy correction does not transfer to the hyperfine coupling, because the two corrections live on different focal lengths (charge distribution vs magnetization distribution) and the framework carries no operator that distinguishes them."
+  }
+}

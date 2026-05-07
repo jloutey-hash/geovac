@@ -1,0 +1,120 @@
+{
+  "sprint": "HF-1",
+  "date_utc": "2026-05-07T17:20:47.866536Z",
+  "system": "hydrogen 1s, 21 cm hyperfine",
+  "level": "Bohr-Fermi (g_e = 2 exactly, no anomalous moment, no recoil, no nuclear structure, no multi-loop QED)",
+  "psi_derivation_from_geovac": {
+    "R_10_at_0_symbolic": "2*Z**(3/2)",
+    "Y_00_squared": "1/(4*pi)",
+    "psi_1s_squared_at_origin": "Z**3/pi",
+    "Z_equals_1_value": "1/pi"
+  },
+  "symbolic_A_hf_BF_Z1_ge2_canonical": "4*alpha**2*g_p*m_e_over_m_p/3",
+  "numeric": {
+    "inputs": {
+      "alpha_CODATA": 0.0072973525693,
+      "g_p_CODATA": 5.585694689,
+      "m_e_over_m_p_CODATA": 0.0005446170214876324,
+      "g_e_BF": 2.0,
+      "Z": 1,
+      "n": 1,
+      "Hz_per_Hartree_CODATA": 6579683920502000.0,
+      "nu_hf_experimental_Hz": 1420405751.768,
+      "reduced_mass_factor": 0.9983679269676805,
+      "a_e_CODATA": 0.00115965218091,
+      "a_e_Schwinger_alpha_over_2pi": 0.0011614097328884378
+    },
+    "per_factor_decomposition": {
+      "alpha_squared": 5.3251354520669314e-05,
+      "g_e": 2.0,
+      "g_p_half_eq_mu_p_over_mu_N": 2.7928473445,
+      "g_p": 5.585694689,
+      "m_e_over_m_p": 0.0005446170214876324,
+      "psi_1s_squared_at_origin_au": 0.3183098861837907,
+      "psi_1s_squared_origin_symbolic": "Z^3 / pi (Z=1 -> 1/pi)",
+      "fermi_contact_prefactor": "(8 pi / 3)",
+      "two_magneton_factor": "(alpha/2)*(alpha/2) = alpha^2 / 4",
+      "assembled_prefactor_for_Z1_ge2": "(4/3)"
+    },
+    "outputs_strict_no_recoil": {
+      "A_hf_Ha": 2.159920667689861e-07,
+      "A_hf_Hz": 1421159528.6758924,
+      "A_hf_MHz": 1421.1595286758923,
+      "residual_Hz_vs_experiment": 753776.9078924656,
+      "residual_MHz_vs_experiment": 0.7537769078924655,
+      "residual_ppm_vs_experiment": 530.6771723180003,
+      "residual_factor_dimensionless": 0.0005306771723180003
+    },
+    "outputs_with_reduced_mass_for_context": {
+      "A_hf_Ha": 2.156395519416175e-07,
+      "A_hf_Hz": 1418840092.5345166,
+      "A_hf_MHz": 1418.8400925345165,
+      "residual_Hz_vs_experiment": -1565659.2334833145,
+      "residual_MHz_vs_experiment": -1.5656592334833146,
+      "residual_ppm_vs_experiment": -1102.261963903283,
+      "residual_factor_dimensionless": -0.001102261963903283,
+      "note": "Reduced-mass factor (1 + m_e/m_p)^{-3} is a recoil correction and is NOT part of strict Bohr-Fermi at g_e=2. Reported here for context: it explains roughly half of the strict residual."
+    }
+  },
+  "per_factor_attribution": {
+    "fermi_contact_prefactor_(8 pi / 3)": {
+      "value": "(8 pi / 3)",
+      "source": "Standard Pauli (Dirac NR limit) Fermi contact term. Comes from <delta(r)> matrix element of the spin-spin magnetic interaction. Not GeoVac-specific.",
+      "category": "Standard physics (Dirac NR limit)"
+    },
+    "g_e_equals_2": {
+      "value": "2 (exact)",
+      "source": "Tree-level Dirac equation. The Camporesi-Higuchi Dirac operator on S^3 (geovac.dirac_s3) gives the same g_e = 2 at tree level via |lambda_n| = n + 3/2, but this is the Dirac equation acting (g_e = 2 is forced by the gamma matrix algebra), not a GeoVac-specific result.",
+      "category": "Standard physics (Dirac equation)"
+    },
+    "mu_B_equals_alpha_over_2": {
+      "value": "alpha/2 (atomic units)",
+      "source": "Bohr magneton in atomic units: e h_bar / (2 m_e c) = alpha/2 with c = 1/alpha. Standard atomic-unit identity, uses CODATA alpha as input.",
+      "category": "Standard physics + external calibration (alpha)"
+    },
+    "mu_N_equals_(m_e/m_p)_alpha_over_2": {
+      "value": "(m_e/m_p) * alpha/2 (atomic units)",
+      "source": "Nuclear magneton in atomic units: scales mu_B by m_e/m_p. Uses CODATA m_e/m_p as external input.",
+      "category": "Standard physics + external calibration (m_e/m_p)"
+    },
+    "g_p_factor": {
+      "value": "5.5856946893 (= 2 * mu_p/mu_N = 2 * 2.79285)",
+      "source": "Proton g-factor \u2014 a measured property of the proton's internal QCD structure. NOT computable from GeoVac at this stage (would require lattice QCD or the full SM with strong-coupling content). External CODATA input. The Fermi-contact Hamiltonian carries the full g_p, not g_p/2 \u2014 the latter equals mu_p/mu_N and only appears if one writes mu_p = (g_p/2) mu_N as an expectation value rather than the operator g_p mu_N S.",
+      "category": "External calibration"
+    },
+    "psi_1s_squared_at_origin": {
+      "value": "Z^3 / pi (= 1/pi for Z=1)",
+      "source": "Symbolic evaluation of geovac.dirac_matrix_elements._hydrogenic_radial_wavefunction(n=1, l=0, r, Z) at r=0, multiplied by |Y_{0,0}|^2 = 1/(4 pi). GeoVac uses the *continuum* hydrogenic radial wavefunction as the spatial profile of the Fock-projected n-shell. The graph spectrum n^2 - 1 is exact; the spatial profile psi_1s(r) is the framework's continuum embedding (Section 12, algebraic registry; Section 4, dimensionless vacuum principle). Honest flag: |psi(0)|^2 is a continuum quantity, not a graph quantity. The framework does not yet have a *graph-native* (non-continuum) notion of |psi(0)|^2.",
+      "category": "GeoVac-continuum-embedding (algebraic from hydrogen 1s)"
+    },
+    "alpha_squared_overall_factor": {
+      "value": "alpha^2",
+      "source": "Two factors of alpha/2 from the magneton pair, giving alpha^2/4. The other factors absorb into the (4/3) in the canonical form. External calibration via alpha.",
+      "category": "External calibration (alpha twice)"
+    },
+    "reduced_mass_factor_(NOT_INCLUDED_IN_STRICT_BF)": {
+      "value": "(1 + m_e/m_p)^{-3} ~ 0.998366",
+      "source": "Recoil correction; corresponds to the proton not being infinitely heavy. Briefing says 'no recoil', so this factor is excluded from the headline number but reported for context. Standard physics (reduced-mass coordinate transformation in two-body bound state).",
+      "category": "Standard physics (recoil; deliberately excluded here)"
+    }
+  },
+  "honest_assessment": {
+    "psi_1s_squared_at_origin_(Z3/pi)": "A. From GeoVac: geovac/dirac_matrix_elements.py::_hydrogenic_radial_wavefunction evaluated symbolically at r=0. Spherical Y_{0,0} normalization (1/(4 pi)) is standard. Note: this is a continuum quantity (the wavefunction profile in the framework's continuum embedding), NOT a graph-native quantity \u2014 see CLAUDE.md Section 4.",
+    "g_e = 2": "B. Standard physics: tree-level Dirac equation. GeoVac's Camporesi-Higuchi Dirac operator on S^3 has eigenvalues |lambda_n| = n + 3/2 and g_e = 2 falls out of the same gamma-matrix algebra. Not GeoVac-specific.",
+    "Fermi contact prefactor (8 pi / 3)": "B. Standard physics: comes from the delta-function spin-spin Hamiltonian of QED in the non-relativistic limit (Bethe-Salpeter Eq. 22.18). Could in principle be re-derived from a graph-native Fermi contact integral on S^3 (an open question for future GeoVac work), but at present we use the standard prefactor.",
+    "mu_B = alpha/2 in atomic units": "B. Standard physics: atomic unit identity using c = 1/alpha. External calibration enters via alpha (CODATA).",
+    "mu_N = (m_e/m_p) alpha/2": "C + B. Standard physics; m_e/m_p is external CODATA input.",
+    "g_p (proton g-factor)": "C. External calibration (CODATA). NOT computable in current GeoVac \u2014 requires QCD/lattice physics. Treat as input.",
+    "alpha (fine-structure constant)": "C. External calibration (CODATA). Paper 2 in Observations is the framework's open conjecture about deriving alpha from the Fock-projected S^3 spectral data; we do NOT use that here. alpha is supplied as CODATA input.",
+    "1 Hartree = 6.580e15 Hz": "C. Unit conversion only, used to render the result in MHz.",
+    "Reduced-mass factor (1 + m_e/m_p)^{-3}": "Excluded from headline result per briefing. Standard physics two-body recoil; would require a recoil-aware Fock projection to be derivable from GeoVac (currently not available)."
+  },
+  "interpretation": {
+    "headline_result_strict_BF_MHz": 1421.1595286758923,
+    "experimental_MHz": 1420.4057517679998,
+    "residual_MHz_strict": 0.7537769078924655,
+    "residual_ppm_strict": 530.6771723180003,
+    "expected_dominant_correction": "a_e ~ alpha / (2 pi) ~ 1161 ppm (electron anomalous moment, Schwinger 1948). Track HF-2 will derive this from the GeoVac vertex correction machinery.",
+    "secondary_correction": "(1 + m_e/m_p)^{-3} ~ -1635 ppm (reduced-mass / recoil). The strict Bohr-Fermi over-shoots experiment because no recoil and no electron anomalous moment cancel each other partially; including recoil but not a_e undershoots, including a_e but not recoil overshoots."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "sprint": "HF-3",
+  "date": "2026-05-07",
+  "goal": "Diagnose whether GeoVac's cross-register architecture (Track NI) natively produces reduced-mass / recoil corrections to the hyperfine Bohr-Fermi prediction, or whether recoil is an external prescription.",
+  "check_1_v_fs_electronic_only": {
+    "Q_nuc": 16,
+    "Q_elec": 10,
+    "Q_total": 26,
+    "n_pauli_terms": 3,
+    "n_nuclear_active": 0,
+    "n_electronic_active": 2,
+    "nuclear_active_examples": [],
+    "electronic_examples": [
+      [
+        "IIIIIIIIIIIIIIIIZIIIIIIIII",
+        -5.056298972067021e-11
+      ],
+      [
+        "IIIIIIIIIIIIIIIIIZIIIIIIII",
+        -5.056298972067021e-11
+      ]
+    ],
+    "finite_size_correction_value_Ha": 1.0112597944134042e-10,
+    "finite_size_correction_is_scalar": true,
+    "r_nuc_is_classical_parameter": true,
+    "verdict": "V_fs is a one-body electronic operator parameterized by the classical scalar R_PROTON_BOHR. No Pauli string in V_fs has any nontrivial Pauli on the nuclear register."
+  },
+  "check_2_hyperfine_spin_only": {
+    "n_pauli_terms": 12,
+    "pauli_weights": [
+      2,
+      4
+    ],
+    "n_active_qubits": 4,
+    "active_qubits_indices": [
+      0,
+      1,
+      16,
+      17
+    ],
+    "all_terms_weight_2_or_4": true,
+    "r_nuc_appears_in_hyperfine": false,
+    "verdict": "Hyperfine couples spin DOF only. R_nuc is not an argument to hyperfine_coupling_pauli. Spatial coordinates of proton and electron are not coupled as quantum operators."
+  },
+  "check_3_full_factorization": {
+    "Q_total": 26,
+    "Q_nuc": 16,
+    "Q_elec": 10,
+    "n_pauli_terms_total": 615,
+    "n_identity": 1,
+    "n_nuclear_only": 592,
+    "n_electronic_only": 10,
+    "n_spinspin_cross_register": 12,
+    "n_spatial_cross_register": 0,
+    "verdict": "Cross-register Pauli strings exist only in the spin-spin sector (proton 0s spin x electron 1s spin, hyperfine I.S). Zero terms couple spatial proton/neutron qubits to spatial electron qubits. The framework has NO V_ne(r_e, R_n) two-body coordinate operator."
+  },
+  "check_4_reduced_mass_status": {
+    "factor_symbolic": "m_p**3/(m_e + m_p)**3",
+    "factor_series_in_me_over_mp": "1 - 3*m_e/m_p + 6*m_e**2/m_p**2 + O(m_e**3)",
+    "factor_numerical": 0.9983679269676804,
+    "one_minus_factor_ppm": 1632.073032319603,
+    "A_strict_BF_MHz": 1421.16,
+    "A_recoil_corrected_MHz": 1418.8405630893888,
+    "A_experimental_MHz": 1420.405751768,
+    "strict_residual_ppm": 531.008995888101,
+    "recoil_residual_ppm": -1101.930681893612,
+    "derivation_status": "NOT derived. The reduced-mass replacement m_e -> mu_red in the Bohr radius is a hand-applied prescription, not produced by Fock projection of the Track NI cross-register architecture. The Fock projection p_0 = sqrt(-2E) is a stereographic scaling of a single-particle Hamiltonian; making it two-body would require a center-of-mass / relative coordinate split that the framework does not currently host. The factor is consistent with the framework but external to it."
+  },
+  "verdict": "NEGATIVE",
+  "verdict_summary": "Track NI's V_ne is a classical scalar parameter R_PROTON_BOHR fed into a one-body electronic operator. The proton's spatial coordinate is not a dynamical variable on the nuclear register. The hyperfine coupling does cross registers, but only on spin indices. No V_ne(r_e, R_n) two-body coordinate-coupling operator exists in the framework. Reduced-mass / recoil corrections at every order remain external focal-length inputs. The +0.754 MHz / +531 ppm residual at strict Bohr-Fermi (g_e = 2, no recoil) is the recoil contribution; the recoil-corrected number 1418.84 MHz is the right baseline for HF-2 to attack with a_e from graph-native vertex correction."
+}

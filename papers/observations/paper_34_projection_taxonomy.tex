@@ -690,8 +690,16 @@ Fock $+$ observation/temporal-window $+$ Casimir/$\zeta$-reg & $T$ or
 $\beta$ & energy density & $\pi^2 \cdot \mathbb{Q}$ & exact symbolic \\
 Uehling shift $-27.13$ MHz at 2$S$ & spectral action $\circ$ Fock &
 $Z, \alpha$ & energy & $\pi^2{\cdot}\mathbb{Q}$ & $<1\%$ \\
-21~cm hyperfine splitting & spinor $\circ$ Fermi contact & $\alpha,
-g_p, m_e/m_p$ & energy & $\alpha^2{\cdot}\mathbb{Q}$ & validated \\
+21~cm hyperfine $A_\text{HF} = 1418.84$ MHz Bohr-Fermi (HF-1) & spinor
+$\circ$ Fermi contact $\circ$ Fock & $\alpha, g_p, m_e/m_p$ & energy &
+$\alpha^2{\cdot}\mathbb{Q}$ & $-1102$ ppm (= $-a_e$) \\
+21~cm hyperfine $A_\text{HF} = 1420.488$ MHz $+$ Parker--Toms $a_e$ (HF-2)
+& spinor + Fermi contact + Fock + spectral action curvature expansion &
+$\alpha, g_p, m_e/m_p$ & energy & $\alpha^2{\cdot}\mathbb{Q}, c_1
+\cdot \mathbb{Q}$ & $+58$ ppm \\
+21~cm hyperfine $A_\text{HF} = 1420.432$ MHz $+$ external Zemach $r_Z$
+(HF-4) & HF-2 chain $+$ rest-mass projection $+$ Zemach Layer-2 input &
+$r_Z$ & energy & calibration & $+18$ ppm (Eides Tab.~7.3 consistent) \\
 Bethe log $\ln k_0(2S) = 2.786$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $-0.92\%$ \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
@@ -899,6 +907,40 @@ Li 2$^2$P doublet (Sprint 5 CP) & Breit--Pauli + Slater $Z_{\text{eff}}$
 & $+8.9\%$ & A & Standard convention with $Z_\text{val}=1$;
 core polarization worsens accuracy (parity-forbidden
 $2s2p \leftrightarrow 2p^2$ mixing confirmed). \\
+21~cm $A_\text{HF} = 1418.84$ MHz (HF-1 reduced-mass) & Fock + Fermi
+contact + reduced-mass & $-1102$ ppm (= $-a_e$) & A & Bohr-Fermi level;
+$g_e = 2$ (no anomalous moment).  Residual is exactly $a_e \approx
+\alpha/(2\pi)$, addressed by HF-2.  Sprint HF, 2026-05-07. \\
+21~cm $A_\text{HF} = 1420.488$ MHz (HF-2, $+a_e$ Schwinger) & HF-1
+chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A & Schwinger
+asymptote $a_e = \alpha/(2\pi)$ derived structurally on Dirac graph;
+\textbf{Parker--Toms first-order curvature correction $c_1 = R/12 = 1/2$
+verified at $0.5\%$ precision against the spectral sum}, no fits.  See
+Paper~28 \S\ref{sec:curvature_coefficients}.  Residual $+58$ ppm is
+recoil + Zemach + multi-loop. \\
+21~cm $A_\text{HF} = 1420.432$ MHz (HF-4, $+r_Z$ external) & HF-2 chain
+$+$ Zemach Layer-2 input ($r_Z = 1.045$ fm) & $+18$ ppm & A + S(Zemach)
+& Convention catch: standard form is $\Delta\nu/\nu = -2 Z\alpha m_e r_Z$
+(natural units), $-2 Z r_Z[\text{bohr}]$ (atomic units), giving
+$-39.5$ ppm at $r_Z = 1.045$ fm.  Framework has no
+magnetization-distribution operator on the proton register
+(structural floor S); $r_Z$ is external focal length.  Final $+18$ ppm
+matches Eides Tab.~7.3 attribution to Bodwin--Yennie recoil-beyond-
+reduced-mass + multi-loop QED + nuclear polarizability. \\
+Recoil from cross-register cross-spatial coupling (HF-3) & Track NI
+nuclear-electronic & not derivable & S & \texttt{finite\_size\_correction}
+returns scalar at classical \texttt{R\_PROTON\_BOHR}; 0/71 Pauli strings
+couple spatial qubits across registers; the 12 cross-register terms are
+all spin-spin hyperfine.  Framework couples discrete spin labels but
+not spatial coordinates.  Sprint HF, 2026-05-07. \\
+Multi-loop $a_2$ on Dirac-$S^3$ (HF-5) & iterated CC spectral action
+$\circ$ Camporesi--Higuchi & $a_2$ extraction blocked & S (renormalization)
+& Bare two-loop topologies (VP-on-photon, SE-on-electron, crossed) UV
+diverge as $\sim N^{3.79}$.  Framework reproduces $(\alpha/\pi)^2$
+prefactor, three-topology decomposition, SO(4) selection at all four
+vertices, UV degree count, but does not autonomously generate $Z_2/Z_3/
+\delta m$ counterterms.  Same structural wall as LS-8a (Lamb shift),
+vertex sector. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.

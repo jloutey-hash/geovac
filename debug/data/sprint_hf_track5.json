@@ -1,0 +1,78 @@
+{
+  "sprint": "HF Track 5",
+  "date": "2026-05-07",
+  "outcome": "structural-positive-blocked-extraction",
+  "alpha_codata": 0.007297352569283801,
+  "a2_literature": -0.32847896557919376,
+  "a2_literature_components": {
+    "197/144": 1.3680555555555556,
+    "pi^2/12": 0.8224670334241132,
+    "(3/4) zeta(3)": 0.9015426773696957,
+    "-(pi^2/2) ln 2": -3.420544231928558
+  },
+  "schwinger_a1": 0.0011614097328858596,
+  "schwinger_a2_relative": -1.772305062868786e-06,
+  "one_loop_anchor": {
+    "F2_over_schwinger_n_ext_1_n_max_4": 1.0842099629043849
+  },
+  "uv_degree_analysis": {
+    "one_loop_F2_uv_degree": 2,
+    "two_loop_VP_uv_degree": 4,
+    "two_loop_SE_uv_degree": 4,
+    "two_loop_crossed_uv_degree": 5,
+    "flat_space_a_2_uv_degree": 0,
+    "bare_spectral_a_2_uv_degree": 4,
+    "verdict": "Each two-loop topology is individually UV-divergent on the bare graph (power growth N^4 to N^5 with cutoff n_max). In flat space the divergences cancel between SE+VP topologies via Z_2, Z_3, and delta_m counterterms. The bare iterated CC spectral action does NOT autonomously generate these counterterms (LS-8a result), so the bare two-loop a_e diverges by the same mechanism as LS-8a's two-loop SE bracket C_2S."
+  },
+  "two_loop_topology_convergence": [
+    {
+      "n_max": 2,
+      "VP_on_photon_raw": 14.739458558933778,
+      "SE_on_electron_raw": 0.10028888851497215,
+      "crossed_raw": 7.369729279466889,
+      "total_raw": 22.20947672691564,
+      "VP_pieces": 1,
+      "SE_pieces": 1,
+      "X_pieces": 1,
+      "elapsed_s": 0.0008969306945800781
+    },
+    {
+      "n_max": 3,
+      "VP_on_photon_raw": 106.04408296934082,
+      "SE_on_electron_raw": 0.2619212825723156,
+      "crossed_raw": 83.60078675855226,
+      "total_raw": 189.90679101046538,
+      "VP_pieces": 2,
+      "SE_pieces": 2,
+      "X_pieces": 6,
+      "elapsed_s": 0.0019915103912353516
+    },
+    {
+      "n_max": 4,
+      "VP_on_photon_raw": 306.51756834054004,
+      "SE_on_electron_raw": 0.4347407549899778,
+      "crossed_raw": NaN,
+      "total_raw": 306.95230909553004,
+      "VP_pieces": 3,
+      "SE_pieces": 3,
+      "X_pieces": 0,
+      "elapsed_s": 0.0017254352569580078
+    }
+  ],
+  "a_hf_update_counterfactual": {
+    "extracted_a2": -0.32847896557919376,
+    "delta_A_hf_kHz": -2.5175378969138493,
+    "delta_A_hf_ppm": -1.7724075629675091,
+    "A_hf_MHz": 1420.4853853826041,
+    "residual_kHz": 79.6336159042041,
+    "residual_ppm": 56.06399143706357,
+    "note": "Counterfactual: shows what HF-5 *would* have closed if it could autonomously extract literature a_2. The actual HF-5 result is 'cannot extract finite a_2 without renormalization counterterms', same wall as LS-8a."
+  },
+  "verdict": {
+    "label": "STRUCTURAL-POSITIVE-WITH-RENORMALIZATION-GAP",
+    "summary": "All three two-loop vertex-correction topologies (VP-on-photon, SE-on-electron, crossed) are well-defined as iterated CC spectral sums on Dirac-S^3 with proper SO(4) selection rules. The (alpha/pi)^2 structural prefactor is reproduced (two iterated proper-time integrations, exactly as Paper 35 Prediction 1 predicts for two-loop QED). However each individual topology is UV-divergent on the bare graph (power-law growth N^4 to N^5), and the between-topology cancellation that makes a_2 finite in flat space requires Z_2/Z_3/delta_m counterterms which the bare iterated CC spectral action does NOT autonomously generate (LS-8a result, now confirmed for the vertex sector). HF-5 therefore cannot natively extract a_2 = 0.328 to add to the A_hf budget. The +58 ppm residual from HF-2 stays at the HF-2 level pending HF-3 (Zemach), HF-4 (recoil), and any future LS-8a-renorm extension.",
+    "comparison_to_LS8a": "SAME WALL. LS-8a found bare two-loop SE diverges as ~N^3.43 and extracting C_2S = 3.63 requires Z_2 + delta_m counterterms. HF-5 finds the same: bare two-loop vertex topologies diverge as N^4-N^5 and extracting a_2 = 0.328 requires Z_2 + Z_3 + delta_m counterterms. The vertex sector inherits the same renormalization wall as the self-energy sector, and for the same structural reason: the bare Connes-Chamseddine spectral action does NOT autonomously generate renormalization counterterms.",
+    "paper_34_taxonomy": "Multi-loop a_e renormalization counterterms are *inner-factor input data* in the Paper 18/Paper 34 taxonomy (CLAUDE.md memory inner_factor_mellin_engine.md). They live in the same calibration tier as Yukawa couplings on the AC inner factor: parameter-tied Dirichlet-ring data that the framework's structural/algebraic skeleton determines the form of, but does not autonomously select. GeoVac pins the form (alpha/pi)^2 * a_2 with a_2 a dimensionless Petermann coefficient, but supplies a_2 as external input.",
+    "structural_skeleton_pattern": "Confirms the structural-skeleton scope identified in CLAUDE.md memory geovac_structural_skeleton_scope_pattern.md (May 2026). The framework: (a) determines selection rules (SO(4) parity + triangle), (b) determines transcendental class ((alpha/pi)^2 from iterated proper-time integration, Paper 35 Prediction 1), (c) determines structural prefactor ((alpha/pi)^2 (Z alpha)^4 / n^3 for SE; (alpha/pi)^2 alone for a_e since a_e is dimensionless), (d) determines UV degree (power-law in n_max). It does NOT: (e) autonomously generate renormalization counterterms, (f) autonomously select dimensionless Petermann/Sommerfeld coefficients."
+  }
+}
