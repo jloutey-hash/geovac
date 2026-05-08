@@ -1,0 +1,66 @@
+{
+  "molecule": "HCl",
+  "R_grid_bohr": [
+    2.0,
+    2.5,
+    3.5,
+    6.0
+  ],
+  "rows": [
+    {
+      "R_bohr": 2.0,
+      "E_bare_Ha": NaN,
+      "E_screened_Ha": NaN,
+      "vne_trace_bare": -33.62580937083454,
+      "vne_trace_screened": -19.780591078822955,
+      "one_norm_bare": 1168.3995862338236,
+      "one_norm_screened": 1166.5740067081804,
+      "N_pauli_bare": 2936,
+      "N_pauli_screened": 2936,
+      "wall_time_s": 15.109205799999472
+    },
+    {
+      "R_bohr": 2.5,
+      "E_bare_Ha": NaN,
+      "E_screened_Ha": NaN,
+      "vne_trace_bare": -29.75152634818635,
+      "vne_trace_screened": -16.99161451119235,
+      "one_norm_bare": 1168.7603035113148,
+      "one_norm_screened": 1166.501676651086,
+      "N_pauli_bare": 2936,
+      "N_pauli_screened": 2936,
+      "wall_time_s": 14.74207540000134
+    },
+    {
+      "R_bohr": 3.5,
+      "E_bare_Ha": NaN,
+      "E_screened_Ha": NaN,
+      "vne_trace_bare": -24.484414588298332,
+      "vne_trace_screened": -13.464849491495572,
+      "one_norm_bare": 1168.475021033166,
+      "one_norm_screened": 1166.3232165310344,
+      "N_pauli_bare": 2936,
+      "N_pauli_screened": 2936,
+      "wall_time_s": 15.192062699999951
+    },
+    {
+      "R_bohr": 6.0,
+      "E_bare_Ha": NaN,
+      "E_screened_Ha": NaN,
+      "vne_trace_bare": -16.713287449059525,
+      "vne_trace_screened": -8.848102211056988,
+      "one_norm_bare": 1167.2462016162413,
+      "one_norm_screened": 1165.6587144456687,
+      "N_pauli_bare": 2936,
+      "N_pauli_screened": 2936,
+      "wall_time_s": 14.5548775999996
+    }
+  ],
+  "verdict_screened": "all_nan_screened",
+  "idx_min_screened": -1,
+  "R_min_screened_bohr": null,
+  "E_min_screened_Ha": null,
+  "E_at_R_max_screened_Ha": null,
+  "D_e_proxy_screened": null,
+  "vne_ratio_mean_bare_over_scr": 1.789550028780731
+}

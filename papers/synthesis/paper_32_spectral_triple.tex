@@ -51,7 +51,7 @@ Marcolli--van~Suijlekom gauge-network framework~\cite{marcolli_vs2014}
 (with the Perez-Sanchez correction~\cite{perez_sanchez2024,%
 perez_sanchez2025} that the continuum limit is Yang--Mills without
 Higgs), and inside the Connes--van~Suijlekom spectral-truncation
-program~\cite{connes_vs2021,hekkelman2022,hekkelman2024}.  Every
+program~\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024}.  Every
 structural ingredient of the GeoVac construction has published
 precedent; what is not duplicated is the $\alpha$ prediction at
 $8.8 \times 10^{-8}$ (Paper~2~\cite{paper2}) from a discrete spectral
@@ -825,7 +825,7 @@ $S^3$ with the Camporesi--Higuchi Dirac operator.
 \end{theorem}
 
 The continuum-limit clause is the spectral-truncation statement of
-Connes--van~Suijlekom~\cite{connes_vs2021,hekkelman2022,hekkelman2024}:
+Connes--van~Suijlekom~\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024}:
 the GeoVac triples form a Cauchy sequence in the truncation order whose
 limit is the standard $S^3$ spectral triple.
 
@@ -1215,6 +1215,54 @@ Paper~31 & $\mathcal{A}/D$ split & Structural partition \\
 projections of the GeoVac spectral triple.}
 \label{tab:subsectors}
 \end{table}
+
+\paragraph{Track NI as an explicit composed real-space spectral triple.}
+The ``Different $D$, same $\mathcal{A}$'' row of
+Table~\ref{tab:subsectors} (Paper~23~\cite{paper23}, nuclear shell
+model) covers a second class of construction in Paper~23~\S VI: the
+composed nuclear--electronic deuterium Hamiltonian, a 26-qubit
+Hilbert-space tensor product of a 16-qubit deuteron register
+(harmonic-oscillator basis) with a 10-qubit hydrogenic electronic
+register (Fock-projected $S^3$ lattice), coupled through a
+cross-register hyperfine $\mathbf{I}\cdot\mathbf{S}$ operator.  This
+is structurally distinct from both the SM almost-commutative geometry
+(which couples a Riemannian factor with a finite \emph{internal}
+factor) and from the standard spectral-truncation convergence
+machinery (which handles single triples or one-infinite-plus-one-finite
+products);\ it is an explicit Connes-style real-space multi-particle
+spectral triple, validated against the analytic $21\,$cm
+singlet--triplet hyperfine gap at $1.62 \times 10^{-7}$ Ha.  The
+positioning observation (that the canonical NCG / spectral-triple
+literature does not contain a directly comparable construction) is
+formalized in the standalone Track NI Zenodo memo
+(\texttt{papers/observations/track\_ni\_spectral\_triple\_zenodo.md}).
+The W2b cross-manifold structural blocker of
+Sec.~\ref{sec:frontier_framing} is exactly the convergence-theorem
+gap that surrounds this construction.
+
+\paragraph{Paper 39 closes the same-manifold tensor-product case.}
+The same-manifold sub-case of W2b --- the tensor product
+$\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ of
+two truncated Camporesi--Higuchi spectral triples on $\sthree$ at
+distinct focal lengths $\lambda_a \neq \lambda_b$ --- is closed in a
+companion standalone paper (Paper~39~\cite{paper39}). The result
+extends Paper~38's five-lemma machinery factor-by-factor to the
+KO-dim-$6$ tensor product, with the joint Lipschitz comparison
+constant and the joint Lipschitz-distortion height term both
+controlled by the Connes--Marcolli graded anticommutation
+$\{D_a \otimes I, \gamma_a \otimes D_b\} = 0$ via a Pythagorean
+refinement of the triangle inequality on the graded module. This is
+the mathematical foundation for the GeoVac multi-focal-composition
+program, where two electrons in distinct hydrogenic shells live on
+$\sthree$ at distinct focal lengths $\lambda = n/Z$;\ the convergence
+theorem of Paper~39 says that the cross-register joint
+operator system on $\Op_{\nmaxa} \otimes \Op_{\nmaxb}$ converges
+qualitatively to the continuum tensor algebra $C^\infty(\sthree
+\times \sthree)$ in the Latr\'emoli\`ere propinquity. The two
+remaining cross-manifold variants
+($\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Bargmann}}$ and
+$\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Riem}}$) remain the W2b
+content of Sec.~\ref{sec:frontier_framing}.
 
 % ===================================================================
 \section{The $K = \pi(B + F - \Delta)$ Formula in Spectral-Action
@@ -2486,6 +2534,133 @@ with the FAR verdict and the §1.5 rhetoric rule).  G4a sprint is
 queued as the follow-up;\ G4b is recorded as an open structural
 question.
 
+% -------------------------------------------------------------------
+\subsection{Frontier-of-field framing: GeoVac-internal walls vs.
+  spectral-action open problems}
+\label{sec:frontier_framing}
+% -------------------------------------------------------------------
+
+The five walls catalogued in the multi-focal-composition audit
+(\texttt{debug/multifocal\_phase\_a\_synthesis\_memo.md}, May~2026)
+are not all GeoVac-specific.  Reading them through the spectral-triple
+construction of Sec.~\ref{sec:construction} and the Marcolli--van~Suijlekom
+lineage of Sec.~\ref{sec:lineage}, three are GeoVac-internal architectural
+gaps that are tooling-addressable, and two sit at the broader frontier
+of the spectral-action / NCG programs.  We name them here for honesty
+and to fix the scope of the open questions of Sec.~\ref{sec:open}.
+
+\paragraph{GeoVac-internal walls (W1a, W1b, W1c).}
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{W1a (cross-register coordinate operator):}\ no two-body
+spatial operator $V(\hat{\mathbf{r}}_e, \hat{\mathbf{R}}_n)$ has been
+implemented across the nuclear and electronic registers of the
+composed nuclear--electronic Hamiltonian (Paper~23~\cite{paper23}~\S
+VI; \texttt{geovac/nuclear/nuclear\_electronic.py}).  The framework
+couples the registers through spin-spin hyperfine and a classical
+finite-size shift but evaluates spatial operators at the classical
+proton position.  This is an architectural gap, not a no-go theorem;
+the calibrated atomic-physics target is the
+Pachucki--Patko\v{s}--Yerokhin recoil Hamiltonian (PRL 130, 023004,
+2023), which is exact in the mass ratio at $(Z\alpha)^6$.
+\item \textbf{W1b (magnetization-distribution operator):}\ no
+operator on the proton register represents the Zemach radius
+$r_Z$ as a Layer-2 magnetization focal length distinct from the
+charge radius $r_p$ (Paper~34~\cite{paper34}~\S\,III; Sprint HF-4,
+May~2026).  Calibrated against Eides~et~al.\ \emph{Phys.\ Lett.\ B}
+(2024).  Architectural gap; QCD-internal magnetization density is
+input data, not GeoVac-internal.
+\item \textbf{W1c (cross-center frozen-core screening):}\ the
+\texttt{FrozenCore} $Z_{\mathrm{eff}}(r)$ provides same-center
+screening only; cross-center screening of bare $V_{ne}$ from the
+opposite nucleus is not implemented (Sprint~7 NaH/MgH$_2$ balanced
+FCI; CLAUDE.md~\S2).  Sprint~7b made partial progress for the
+spin-orbit splitting; the PES extension is mechanical once cross-center
+screening is wired through the multipole expansion.  Architectural
+gap.
+\end{itemize}
+
+These three walls are tooling-addressable inside the present
+framework: the missing operators exist in principle, are calibrated
+against published atomic-physics targets, and require no new
+mathematics in the broader NCG literature.  Each can be closed by a
+sprint at the 2--10 week scale.  Their existence does not undermine
+the spectral-triple framing of Sec.~\ref{sec:construction}; they
+catalogue what has not yet been built rather than what cannot be.
+
+\paragraph{Frontier-of-field walls (W2a, W2b).}
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{W2a (multi-loop UV/IR composition):}\ the bare
+iterated Connes--Chamseddine spectral action on the
+Camporesi--Higuchi spectrum reproduces UV-divergent integrands of
+multi-loop QED (Sprint LS-8a, May~2026; Paper~36~\cite{paper36}~\S
+VII) but cannot autonomously generate $Z_2$, $\delta m$, $Z_3$
+counterterms for finite extraction at two loops.  This is not
+GeoVac-specific.  The Marcolli--van~Suijlekom 2014 rationality theorem
+for Robertson--Walker spectral actions~\cite{marcolli_vs2014}
+partially addresses spectral-action coefficient structure on
+homogeneous compact backgrounds, and the subsequent Hekkelman--McDonald
+2024 noncommutative integral approximation~\cite{hekkelman_mcdonald2024}
+provides a single-cutoff Szeg\H{o}-style asymptotic theory in the
+Connes--van~Suijlekom paradigm; neither closes the multi-cutoff
+matching question that renormalization counterterm generation
+requires.  The published QFT archetype is the matched effective-field-theory
+chain (e.g.\ HQET~$\to$~NRQED~$\to$~pNRQED~$\to$~SCET, JHEP 05 (2025)
+171), where each matching step is at a single physical scale and
+imports $\overline{MS}$ counterterms by hand.  No published spectral-action
+framework reproduces this autonomously.  W2a is therefore an open
+question of the spectral-action program, of which GeoVac is one
+specific instance; it is not a defect of the present construction
+relative to the lineage.
+
+\item \textbf{W2b (cross-manifold spectral-triple composition):}\ the
+tensor product of two infinite metric spectral triples
+$(\mathcal{T}_{S^3}, d_{D_{S^3}}) \otimes (\mathcal{T}_{S^5}, d_{D_{S^5}})$,
+needed to compose the GeoVac Coulomb sector (Sec.~\ref{sec:construction})
+with the Bargmann--Segal HO sector of Paper~24~\cite{paper24}, has no
+published Latr\'emoli\`ere-propinquity convergence theorem.  The
+almost-commutative case (one infinite Riemannian factor + one finite
+factor) is closed by Latr\'emoli\`ere 2026~\cite{latremoliere2026}
+(\emph{Spectral continuity of almost commutative manifolds for the
+$C^1$ topology on Riemannian metrics}); the two-infinite case is
+explicitly not handled in that paper, nor in the closely related
+Farsi--Latr\'emoli\`ere 2024 inductive-sequence work (Adv.\ Math.\ 437,
+109442).  This is the structural content of the G4b cross-manifold
+blocker (Sec.~\ref{sec:g4}):\ not a GeoVac-specific limitation but a
+genuinely open NCG question.  Closing it would itself be a substantial
+mathematical contribution, parallel to but separate from Paper~38's
+SU(2) propinquity theorem.
+\end{itemize}
+
+\paragraph{Forecast (without claiming closure).}
+
+We do not claim W1a/W1c can be closed without surprises;\ the
+multi-$\lambda$ Shibuya--Wulfman algebraic check that gates the W1a
+attack (multipole termination across mismatched exponents)
+is not in the published Avery-school literature and could fail to
+preserve Gaunt-style closure (Track~3 literature memo, May~2026,
+\S 1).  W1b is bounded by external QCD input.  W2a and W2b are open
+in the broader literature, not just in the GeoVac record.  The honest
+forecast is that closing W1a/b/c is internal-effort plausible at the
+multi-month scale per wall;\ closing W2a or W2b would be a
+contribution to the spectral-action / NCG programs rather than to
+GeoVac alone, and we do not commit to it as a deliverable here.
+
+\paragraph{Implication for the Marcolli--vS lineage placement.}
+
+Sec.~\ref{sec:lineage} read the present construction as a graph
+spectral triple in the lineage of \cite{marcolli_vs2014, perez_sanchez2024,
+perez_sanchez2025}.  The frontier-of-field framing above sharpens this:\
+the lineage placement is correct, and the W2a/W2b walls are the lineage's
+own open problems, not GeoVac's separate concerns.  This is consistent
+with Observation~\ref{obs:lineage} (each structural ingredient has
+published precedent;\ what is not duplicated is the $\alpha$
+prediction at $8.8 \times 10^{-8}$).  The W1 walls remain GeoVac-side
+because they are about the architectural extension of the present
+triple to multi-particle real-space coupling, which the SM-style almost-commutative
+construction does not address.
+
 % ===================================================================
 \section{Marcolli--van~Suijlekom Lineage}
 \label{sec:lineage}
@@ -2521,7 +2696,7 @@ Each structural ingredient of the GeoVac spectral triple has published
 precedent: finite almost-commutative spectral triples
 (\cite{krajewski1998,paschke_sitarz2000,cacic2009}), graph spectral
 triples (\cite{marcolli_vs2014,perez_sanchez2024}), spectral
-truncations (\cite{connes_vs2021,hekkelman2022,hekkelman2024}), and
+truncations (\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024}), and
 the Standard Model spectral action (\cite{chamseddine_connes2010}).
 What is not duplicated in the literature is the $\alpha$ prediction at
 $8.8 \times 10^{-8}$ from a discrete spectral construction; that
@@ -2690,11 +2865,18 @@ E.~Hekkelman,
 ``Truncated geometries from spectral triples,''
 PhD thesis, Radboud University (2022).
 
-\bibitem{hekkelman2024}
-E.~Hekkelman,
-``Spectral truncations of the sphere and the Connes--Marcolli
-spectral triple,''
-arXiv:2403.xxxxx (2024).
+\bibitem{hekkelman_mcdonald2024}
+E.-M.~Hekkelman and E.~A.~McDonald,
+``A noncommutative integral on spectrally truncated spectral triples,
+and a link with quantum ergodicity,''
+\textit{J.~Funct.~Anal.}\ \textbf{289} (2025), accepted for
+publication; arXiv:2412.00628.
+
+\bibitem{latremoliere2026}
+F.~Latr\'emoli\`ere,
+``Spectral continuity of almost commutative manifolds for the
+$C^1$ topology on Riemannian metrics,''
+arXiv:2603.19128 (2026).
 
 \bibitem{krajewski1998}
 T.~Krajewski,
@@ -2774,6 +2956,15 @@ Catalogue,'' Paper~34 (2026).
 GeoVac Project, ``Time as Projection:\ Klein--Gordon Spectrum on
 $S^3 \times \mathbb{R}$ and the Temporal-Window Mechanism for $\pi$,''
 Paper~35 (2026).
+
+\bibitem{paper36}
+GeoVac Project, ``Bound-State QED on the GeoVac Spectral Triple:\
+Hydrogen Lamb Shift at One Loop,'' Paper~36 (2026; observation status).
+
+\bibitem{paper39}
+J.~Loutey, ``Latr\'emoli\`ere propinquity convergence of truncated
+tensor-product Camporesi--Higuchi spectral triples on $S^3 \times S^3$,''
+Paper~39 (2026; companion to Paper~38), DOI via Zenodo.
 
 \end{thebibliography}
 

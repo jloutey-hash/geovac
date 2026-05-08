@@ -1,0 +1,53 @@
+{
+  "molecule": "NaH",
+  "R_grid_bohr": [
+    1.5,
+    2.5,
+    3.5,
+    5.0,
+    10.0
+  ],
+  "rows": [
+    {
+      "R_bohr": 1.5,
+      "E_bare_Ha": -189.68578565869393,
+      "E_screened_Ha": -165.3773534386159,
+      "vne_trace_bare": -18.308936278875855,
+      "vne_trace_screened": -3.401113003018515
+    },
+    {
+      "R_bohr": 2.5,
+      "E_bare_Ha": -183.93800697785542,
+      "E_screened_Ha": -164.24408821128992,
+      "vne_trace_bare": -15.354066883461087,
+      "vne_trace_screened": -2.6787513035194177
+    },
+    {
+      "R_bohr": 3.5,
+      "E_bare_Ha": -179.90897084915844,
+      "E_screened_Ha": -163.83625465489527,
+      "vne_trace_bare": -13.249502815028602,
+      "vne_trace_screened": -2.2815506179428575
+    },
+    {
+      "R_bohr": 5.0,
+      "E_bare_Ha": -175.36865371459683,
+      "E_screened_Ha": -163.46406309625365,
+      "vne_trace_bare": -10.782473012976583,
+      "vne_trace_screened": -1.8332282029961848
+    },
+    {
+      "R_bohr": 10.0,
+      "E_bare_Ha": -167.7040654655701,
+      "E_screened_Ha": -163.01377458740097,
+      "vne_trace_bare": -5.979079685158217,
+      "vne_trace_screened": -0.9976286591793299
+    }
+  ],
+  "verdict_screened": "monotonic_descending_to_small_R",
+  "idx_min_screened": 0,
+  "R_min_screened_bohr": 1.5,
+  "E_min_screened_Ha": -165.3773534386159,
+  "E_at_R_max_screened_Ha": -163.01377458740097,
+  "D_e_proxy_screened": 2.3635788512149247
+}

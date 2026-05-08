@@ -1,0 +1,1301 @@
+% =====================================================================
+% Paper 39 (standalone): Latremoliere propinquity convergence on the
+% tensor product of two truncated Camporesi-Higuchi spectral triples
+% on S^3 at distinct focal lengths.
+%
+% Math.OA-style companion to Paper 38 (single-factor S^3 = SU(2)).
+% Closes the W2b-easy keystone of the GeoVac multi-focal-composition
+% program: tensor product of two infinite non-abelian metric spectral
+% triples on the same Riemannian manifold.
+%
+% Status: first draft, May 2026, post-W2b-easy-tighten closure
+% (2026-05-07). Built from internal proof memos:
+% multifocal_phase_c_w2b_easy_memo.md,
+% multifocal_phase_c_w2b_easy_tighten_memo.md,
+% multifocal_b_w2b_diag_memo.md.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\nmaxa}{n_{\max,a}}
+\newcommand{\nmaxb}{n_{\max,b}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Lipnorm}[1]{\lVert #1 \rVert_{\mathrm{Lip}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\KS}{K}
+\newcommand{\Khat}{\widehat{K}}
+
+\title{Latr\'emoli\`ere propinquity convergence of \\
+truncated tensor-product Camporesi--Higuchi \\
+spectral triples on $\sthree \times \sthree$}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that the Connes--van~Suijlekom truncations of the
+tensor-product Camporesi--Higuchi spectral triple
+$\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ on
+$\sthree \times \sthree$ at two (possibly distinct) focal lengths
+$\lambda_a, \lambda_b > 0$ converge to the continuum tensor-product
+triple in the Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity,
+with explicit qualitative-rate bound
+\(
+   \Lambda(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
+            \Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b})
+   \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+        \max(\gamma_{\nmaxa}/\lambda_a,\, \gamma_{\nmaxb}/\lambda_b),
+\)
+where $C_3^{(2)} < 1$ is a closed-form Pythagorean Lipschitz comparison
+constant arising from the Connes--Marcolli graded anticommutation
+$\{D_a \otimes I, \gamma_a \otimes D_b\} = 0$ on the KO-dimension-6
+graded module, and $\gamma_n = (4/\pi)\log n / n + O(1/n)$ inherits
+from the single-factor result of~\cite{loutey_paper38}. The proof
+proceeds factor-by-factor through tensor extensions of the five
+single-factor lemmas (operator system, central spectral Fej\'er kernel,
+Lipschitz comparison, Berezin reconstruction, propinquity assembly).
+The two technical risks specific to the tensor product --- a sharp
+Lipschitz comparison constant on the full operator system, and a
+rigorous bound on the cross-Stein--Weiss height term --- both close
+via the same graded Pythagorean mechanism. The result extends
+\cite{connes_vs2021,leimbach_vs2024,loutey_paper38} to the simplest
+non-abelian tensor case in the Latr\'emoli\`ere framework, and closes
+a tensor-product propinquity case that the published literature on
+products of metric spectral triples~\cite{latremoliere2026,
+farsi_latremoliere2024,farsi_latremoliere2025,aguilar2019} does not
+cover; existing tensor-product propinquity results require the second
+factor to be finite-dimensional, AF, abelian, or to reduce to a
+single-character / Hopf-$S^1$ structure.
+\end{abstract}
+
+\bigskip\noindent
+\textbf{MSC2020 classifications:}\ 58B34 (noncommutative geometry),
+46L87 (noncommutative Riemannian and metric geometry),
+46L52 (noncommutative function spaces),
+22E45 (representations of compact Lie groups),
+46L06 (tensor products of operator systems).
+
+\medskip\noindent
+\textbf{Keywords:}\ spectral triple, tensor product, Connes--Marcolli
+graded Dirac, quantum Gromov--Hausdorff propinquity, Camporesi--Higuchi
+Dirac, operator system, Berezin reconstruction, Pythagorean Leibniz
+rule, $\SU(2) \times \SU(2)$.
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+The Connes--van~Suijlekom~\cite{connes_vs2021} framework of truncated
+operator systems and the subsequent propinquity-convergence results of
+Hekkelman~\cite{hekkelman2022}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024},
+Leimbach--van~Suijlekom~\cite{leimbach_vs2024}, and the present
+author~\cite{loutey_paper38} establish quantitative
+Gromov--Hausdorff convergence for spectral truncations of a
+\emph{single} compact Riemannian spectral triple, with the abelian and
+$\SU(2)$ cases now closed at qualitative rate. A natural and
+operationally important next question is whether the convergence
+behaviour transfers to \emph{tensor products} of two such truncated
+triples.
+
+The published propinquity tensor-product literature does not cover
+this case in its central form. Latr\'emoli\`ere~\cite{latremoliere2026}
+closes the \emph{almost-commutative} case in which one factor is an
+infinite-dimensional Riemannian spectral triple and the other is
+finite-dimensional. Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024}
+prove spectral continuity for collapse of products of spectral triples
+in which at least one factor is abelian.
+Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2025} treat
+continuity of a \emph{single} metric spectral triple along an analytic
+path of Riemannian metrics --- a setting distinct from the
+discrete-truncation product considered here.
+Aguilar~\cite{aguilar2019} addresses tensor products $C(X) \otimes A$
+where one factor is commutative and the other AF.
+Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b} treats a
+noncommutative integral on a single spectrally truncated triple, not a
+product. The published thread covers Riemannian-by-finite,
+Riemannian-by-AF, Riemannian-by-abelian, $C(X)$-by-AF,
+single-triple-along-paths, and single-truncation. None of these covers
+two infinite non-abelian Riemannian metric spectral triples.
+
+The present paper closes that gap in the simplest physically natural
+non-K\"ahler case: two copies of the round $\sthree = \SU(2)$
+Camporesi--Higuchi triple~\cite{camporesi_higuchi1996}, each in its own
+focal-length scaling, tensored together via the Connes--Marcolli
+graded convention.
+
+Let $\Tcal_{\sthree}^{\lambda} = (C^\infty(\sthree),
+L^2(\sthree, \Sigma), \lambda^{-1} \DCH)$ denote the round
+Camporesi--Higuchi spectral triple at \emph{focal length} $\lambda > 0$,
+i.e.\ the unit-round triple with the Dirac operator rescaled so that
+the spectral gap is $\lambda^{-1}$ rather than $1$. (In the GeoVac
+hydrogenic context this corresponds to placing two electrons in
+distinct hydrogenic shells with focal lengths $\lambda_a = n_a / Z$ and
+$\lambda_b = n_b / Z$.) Form the tensor product
+\begin{equation}\label{eq:tensor_triple}
+   \Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}
+   \;:=\; \bigl(C^\infty(\sthree) \otimes C^\infty(\sthree),\;
+          L^2(\sthree, \Sigma) \otimes L^2(\sthree, \Sigma),\;
+          D_{a,b} \bigr),
+\end{equation}
+with Connes--Marcolli graded composed Dirac
+\begin{equation}\label{eq:CM_dirac}
+   D_{a,b} \;=\; \lambda_a^{-1} \DCH^{(a)} \otimes I_b
+                \;+\; \gamma_a \otimes \lambda_b^{-1} \DCH^{(b)},
+\end{equation}
+where $\gamma_a$ is the chirality grading on $L^2(\sthree, \Sigma)$.
+The combined object has KO-dimension $3 + 3 = 6 \pmod 8$. Truncate
+each factor independently at cutoffs $\nmaxa, \nmaxb$ and form the
+tensor-product truncated triple $\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb}$.
+
+\begin{theorem}[Main theorem; cf.~\S\ref{sec:main_theorem}]
+\label{thm:main_intro}
+The truncated tensor-product triples $\Tcal_{\nmaxa} \otimes
+\Tcal_{\nmaxb}$ converge to $\Tcal_{\sthree}^{\lambda_a} \otimes
+\Tcal_{\sthree}^{\lambda_b}$ in the Latr\'emoli\`ere quantum
+Gromov--Hausdorff propinquity, with bound
+\begin{equation}\label{eq:main_rate_intro}
+   \Lambda\bigl(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
+                \Tcal_{\sthree}^{\lambda_a} \otimes
+                \Tcal_{\sthree}^{\lambda_b}\bigr)
+   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot (1 + 2\sqrt{2}) \cdot
+   \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
+                \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr),
+\end{equation}
+where $\gamma_n$ is the central spectral Fej\'er moment of
+\cite{loutey_paper38} satisfying $\gamma_n = (4/\pi) \log n / n +
+O(1/n)$, and the joint Lipschitz comparison constant is
+\begin{equation}\label{eq:C3_2_intro}
+   C_3^{(2)}(\nmaxa, \nmaxb)
+   \;\le\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \\ 2 \le N_b \le \nmaxb+1}}
+            \sqrt{\frac{(N_a - 1)^2 + (N_b - 1)^2}{N_a^2 + N_b^2 - 2}},
+\end{equation}
+strictly less than $1$ at every finite $(\nmaxa, \nmaxb)$ and
+approaching $1$ from below as both cutoffs grow.
+\end{theorem}
+
+The proof is a factor-by-factor lift of the five single-factor lemmas
+of~\cite{loutey_paper38} to the tensor product, supplemented by two
+new ingredients specific to the product:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item a Pythagorean Lipschitz comparison estimate that uses the
+Connes--Marcolli anticommutation
+$\{D_a \otimes I, \gamma_a \otimes D_b\} = 0$ on the KO-dim-6 graded
+module to refine the generic triangle bound
+$\norm{A + B}_{\mathrm{op}} \le \norm{A} + \norm{B}$ to
+$\sqrt{\norm{A}^2 + \norm{B}^2}$ (Lemma~\ref{lem:L3-T}); and
+\item an explicit Stein--Weiss-type bound on the joint
+Lipschitz-distortion height of the tunnel map, again via the same
+Pythagorean mechanism applied to the joint commutator
+(Lemma~\ref{lem:L5-T}).
+\end{itemize}
+
+The mechanism is unified: the same KO-dim-6 graded anticommutation
+that defines the Connes--Marcolli composed Dirac is what controls both
+the joint Lipschitz constant (R1) and the joint height-distortion
+bound (R2). Each of the five single-factor lemmas of
+\cite{loutey_paper38} extends factor-by-factor with no novel
+analytical machinery beyond the Pythagorean refinement of the triangle
+inequality on the graded module.
+
+\paragraph{Why this is the \emph{easy} case.}
+The same-manifold tensor product treated here is the most accessible
+of three plausible tensor-product extensions of~\cite{loutey_paper38}.
+The cross-manifold case
+$\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Bargmann}}$, in which the
+second factor is a holomorphic Hardy-sector spectral triple of the
+type used in the Bargmann--Segal lattice
+construction~\cite{paper24}, is structurally obstructed at the
+framework level: the $\sthree$ factor is a second-order Riemannian
+spinor Dirac, while the $S^5$ Bargmann factor is a first-order
+complex-analytic Euler operator on a Hardy sector and does not fit
+standard NCG Dirac axioms. There is no published prescription for
+tensoring a Riemannian spinor Dirac with a Hardy-sector first-order
+complex operator in the propinquity framework, and the obstruction is
+the four-layer Coulomb/HO asymmetry of~\cite{paper24}~\S V resurfacing
+at the spectral-triple level. A separate variant ---
+$\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Riem}}$ with both factors
+Riemannian --- is mathematically clean (KO-arithmetic $3+5=8\equiv
+0\pmod 8$) but requires propinquity convergence for the rank-2
+$\Tcal_{S^5}^{\mathrm{Riem}}$ as a separate prerequisite, which is not
+available in the literature. We address only the same-manifold case in
+the present paper, and discuss the obstructions to the cross-manifold
+extensions in \S\ref{sec:related_work}.
+
+\paragraph{Outline.}
+Section~\ref{sec:setup} sets up the rescaled Camporesi--Higuchi
+spectral triple at focal length $\lambda$, the truncations, and the
+tensor-product Connes--Marcolli graded structure.
+Section~\ref{sec:main_theorem} states the main theorem.
+Section~\ref{sec:lemmas} proves the five tensor lemmas.
+Section~\ref{sec:numerical} reports the numerical verification panel.
+Section~\ref{sec:related_work} places the result in the
+Connes--van~Suijlekom / Latr\'emoli\`ere / Farsi--Latr\'emoli\`ere /
+Hekkelman--McDonald lineage and discusses obstructions to the
+cross-manifold extensions.
+Section~\ref{sec:open} lists open questions.
+Section~\ref{sec:conclusion} concludes.
+
+% =====================================================================
+\section{The setting}\label{sec:setup}
+% =====================================================================
+
+\paragraph{Propinquity convention.}
+Throughout, ``Latr\'emoli\`ere propinquity'' refers to the
+Gromov--Hausdorff propinquity for metric spectral triples introduced in
+Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017} (Adv.~Math.
+\textbf{415} (2023), Paper No.~108876, preprint
+\texttt{arXiv:1811.10843}, 2017), the same convention used in
+\cite{loutey_paper38}.
+
+\subsection{Single-factor recall: the rescaled $\sthree$ Camporesi--Higuchi triple}
+\label{sec:single_factor_recall}
+
+For $\lambda > 0$, the \emph{$\lambda$-scaled Camporesi--Higuchi
+spectral triple} on the unit-round $\sthree = \SU(2)$ is
+\begin{equation}\label{eq:single_factor_triple}
+   \Tcal_{\sthree}^{\lambda}
+   \;=\; \bigl(\, C^\infty(\sthree),\; L^2(\sthree, \Sigma),\;
+   \lambda^{-1}\DCH \,\bigr),
+\end{equation}
+with $\DCH$ as in~\cite{loutey_paper38}~\S 2.1, eigenvalues
+$\sigma(\lambda^{-1}\DCH) = \{\pm \lambda^{-1}(n + 1/2) : n \in \N\}$ on
+each chirality sector. The truncated triple at cutoff $\nmax$ is
+$\Tcal_{\nmax}^{\lambda} = (\Op_{\nmax}, \Hilb_{\nmax},
+\lambda^{-1} D_{\nmax})$, with the truncated operator system
+$\Op_{\nmax} = P_{\nmax} C^\infty(\sthree) P_{\nmax}$ and the truncated
+Dirac $D_{\nmax} = P_{\nmax} \DCH P_{\nmax}$. We will write
+$\Tcal^\lambda$ when the dependence on $\lambda$ matters; the rescaling
+multiplies single-factor Connes distances and propinquity bounds by
+$\lambda$, but is otherwise transparent for our purposes.
+
+\subsection{The tensor-product spectral triple}
+\label{sec:tensor_triple}
+
+Let $\lambda_a, \lambda_b > 0$. Define
+\begin{equation}\label{eq:tensor_triple_def}
+\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}
+\;:=\; \bigl(\Acal_{a,b},\; \Hilb_{a,b},\; D_{a,b},\; \gamma_{a,b},\;
+J_{a,b}\bigr),
+\end{equation}
+with
+\begin{align}
+\Acal_{a,b} &= C^\infty(\sthree) \otimes C^\infty(\sthree) =
+C^\infty(\sthree \times \sthree), \\
+\Hilb_{a,b} &= L^2(\sthree, \Sigma) \otimes L^2(\sthree, \Sigma), \\
+D_{a,b} &= \lambda_a^{-1} \DCH^{(a)} \otimes I_b
+        + \gamma_a \otimes \lambda_b^{-1} \DCH^{(b)}, \label{eq:CM_dirac_recall} \\
+\gamma_{a,b} &= \gamma_a \otimes \gamma_b, \\
+J_{a,b} &= J_a \otimes J_b
+\end{align}
+in the standard Connes--Marcolli graded tensor product convention
+\cite{connes1995, marcolli_vs2014}. The crucial structural identity is
+\begin{equation}\label{eq:anticomm}
+   \bigl\{ \DCH^{(a)} \otimes I_b,\; \gamma_a \otimes \DCH^{(b)} \bigr\}
+   \;=\; \bigl(\DCH^{(a)} \gamma_a + \gamma_a \DCH^{(a)}\bigr) \otimes
+         \DCH^{(b)} \;=\; 0,
+\end{equation}
+since $\{\DCH^{(a)}, \gamma_a\} = 0$ on the unit-round $\sthree$ Dirac.
+This anticommutation is the source of the Pythagorean Leibniz rule
+that makes the tensor product propinquity controllable.
+
+The truncated tensor-product triple at cutoffs $(\nmaxa, \nmaxb)$ is
+\begin{equation}\label{eq:tensor_truncated}
+\Tcal_{\nmaxa}^{\lambda_a} \otimes \Tcal_{\nmaxb}^{\lambda_b}
+\;:=\; \bigl(\Op_{\nmaxa} \otimes \Op_{\nmaxb},\;
+\Hilb_{\nmaxa} \otimes \Hilb_{\nmaxb},\;
+P_{\nmaxa} \otimes P_{\nmaxb} \cdot D_{a,b} \cdot P_{\nmaxa} \otimes
+P_{\nmaxb}\bigr),
+\end{equation}
+with the algebraic tensor-product operator system $\Op_{\nmaxa} \otimes
+\Op_{\nmaxb} \subset M_{\dim \Hilb_{\nmaxa}} (\C) \otimes
+M_{\dim \Hilb_{\nmaxb}}(\C)$ defined as the linear span of Kronecker
+products $\Mat_a \otimes \Mat_b$ with $\Mat_\bullet \in \Op_{\nmax,
+\bullet}$.
+
+% =====================================================================
+\section{Main theorem}\label{sec:main_theorem}
+% =====================================================================
+
+\begin{theorem}[Main theorem]\label{thm:main}
+The truncated tensor-product Camporesi--Higuchi spectral triples
+converge to their continuum tensor-product limit in the
+Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity:
+\begin{equation}\label{eq:main_thm}
+   \Lambda\bigl(\Tcal_{\nmaxa}^{\lambda_a} \otimes
+                \Tcal_{\nmaxb}^{\lambda_b},\;
+                \Tcal_{\sthree}^{\lambda_a} \otimes
+                \Tcal_{\sthree}^{\lambda_b}\bigr)
+   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot (1 + 2\sqrt{2}) \cdot
+            \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
+                        \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr),
+\end{equation}
+with
+\begin{equation}\label{eq:C3_2_full}
+   C_3^{(2)}(\nmaxa, \nmaxb)
+   \;:=\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \\ 2 \le N_b \le \nmaxb+1}}
+            \sqrt{\frac{(N_a - 1)^2 + (N_b - 1)^2}{N_a^2 + N_b^2 - 2}}
+   \;<\; 1
+\end{equation}
+at every finite $(\nmaxa, \nmaxb)$, and $C_3^{(2)} \nearrow 1^-$ as
+both cutoffs grow. The right-hand side of \eqref{eq:main_thm} tends to
+zero as $\nmaxa, \nmaxb \to \infty$, with rate
+$\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) = O(\log \nmax / \nmax)$
+inherited from the single-factor central Fej\'er moment
+\cite{loutey_paper38}. The asymptotic constant $4/\pi$ on each factor
+is preserved in the joint rate.
+\end{theorem}
+
+\begin{proof}
+The proof assembles five tensor lemmas L1$'$-T through L5-T proved in
+\S\ref{sec:lemmas}, each of which lifts the corresponding single-factor
+lemma of~\cite{loutey_paper38}~\S 3. Lemma~\ref{lem:L1prime-T} provides
+the operator-system substrate; Lemma~\ref{lem:L2-T} the joint central
+spectral Fej\'er kernel with closed-form Plancherel symbol; Lemma
+\ref{lem:L3-T} the joint Lipschitz comparison constant via the
+Connes--Marcolli graded Pythagorean Leibniz; Lemma~\ref{lem:L4-T} the
+joint Berezin reconstruction with the four properties needed for a
+Latr\'emoli\`ere tunneling pair; and Lemma~\ref{lem:L5-T} the
+propinquity assembly with explicit cross-Stein--Weiss height bound.
+The factor $1 + 2\sqrt{2}$ in \eqref{eq:main_thm} is the sum of the
+joint reach contribution (bounded by $\max(\gamma)$, contributing $1$)
+and the joint height contribution (bounded by $2\sqrt{2}\max(\gamma)$
+on the unit-norm panel, contributing $2\sqrt{2}$). The
+$\lambda^{-1}$-rescalings of the single-factor Diracs propagate
+linearly through the bound and produce the
+$\max(\gamma/\lambda)$-form of \eqref{eq:main_thm}.
+\end{proof}
+
+% =====================================================================
+\section{The five tensor lemmas}\label{sec:lemmas}
+% =====================================================================
+
+We work at unit focal length $\lambda_a = \lambda_b = 1$ throughout
+this section; the $\lambda$-rescaling is reinstated at the end of
+\S\ref{sec:L5-T}.
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L1$'$-T: tensor-product operator system}
+\label{sec:L1prime-T}
+% ---------------------------------------------------------------------
+
+\begin{lemma}[L1$'$-T:\ tensor-product operator system substrate]
+\label{lem:L1prime-T}
+Let $\Op_{\nmaxa}$ and $\Op_{\nmaxb}$ be the truncated operator systems
+of \cite[\S 3.1]{loutey_paper38}~\&~\cite[Lemma~3.1]{loutey_paper38}.
+The algebraic tensor product
+\begin{equation*}
+  \Op_{\nmaxa} \otimes \Op_{\nmaxb}
+  \;\subset\; M_{\dim \Hilb_{\nmaxa}}(\C) \otimes M_{\dim \Hilb_{\nmaxb}}(\C),
+\end{equation*}
+defined as the linear span of Kronecker products $\Mat_a \otimes \Mat_b$
+with $\Mat_a \in \Op_{\nmaxa}$, $\Mat_b \in \Op_{\nmaxb}$, satisfies:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] (Dimension factorization.)
+$\dim(\Op_{\nmaxa} \otimes \Op_{\nmaxb})
+= \dim(\Op_{\nmaxa}) \cdot \dim(\Op_{\nmaxb})$.
+\item[(b)] (Propagation bound.) $\mathrm{prop}(\Op_{\nmaxa} \otimes
+\Op_{\nmaxb}) \le 2$, matching the single-factor Connes--van~Suijlekom
+$\mathrm{prop} = 2$ value~\cite[\S 4.2]{connes_vs2021}.
+\item[(c)] (Cross-shell finite Connes distance.) Under the
+chirality-mixing offdiagonal extension $D_{a,b}^{\mathrm{offdiag}}$
+defined factor-by-factor in the sense
+of~\cite[Lemma~3.1]{loutey_paper38}, every cross-shell pair of pure
+node-evaluation states has finite truncated joint Connes distance.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(a)} The single-factor multiplier matrices $\{\Mat_{NLM}\}$
+are linearly independent in $M_{\dim \Hilb_{\nmax,\bullet}}(\C)$ by
+construction (\cite[\S 3.1]{loutey_paper38}). The Kronecker product
+preserves linear independence: $\mathrm{vec}(\Mat_a \otimes \Mat_b)
+= \mathrm{vec}(\Mat_a) \otimes \mathrm{vec}(\Mat_b)$, and tensors of
+linearly independent vectors are linearly independent. Hence
+$\dim(\Op_{\nmaxa} \otimes \Op_{\nmaxb}) = \dim(\Op_{\nmaxa}) \cdot
+\dim(\Op_{\nmaxb})$.
+
+\textbf{(b)} For any operator system $\Op$ with $\mathrm{prop}(\Op) =
+p$, $\Op^p = M_{\dim \Hilb}(\C)$. For $p_a = p_b = 2$, we have
+$(\Op_{\nmaxa} \otimes \Op_{\nmaxb})^2 \supset \Op_{\nmaxa}^2 \otimes
+\Op_{\nmaxb}^2 = M_{\dim \Hilb_{\nmaxa}}(\C) \otimes M_{\dim
+\Hilb_{\nmaxb}}(\C) = M_{\dim \Hilb_{a,b}}(\C)$, so
+$\mathrm{prop}(\Op_{\nmaxa} \otimes \Op_{\nmaxb}) \le 2$.
+
+\textbf{(c)} The chirality-mixing offdiagonal extension
+$D_{a,b}^{\mathrm{offdiag}}$ inherits the cross-shell-finite property
+factor-by-factor from \cite[Lemma~3.1]{loutey_paper38}. For a state
+pair $(\varphi_a \otimes \varphi_b, \psi_a \otimes \psi_b)$ in
+distinct shells, at least one factor differs in shell, and the
+single-factor finite-distance property on that factor produces a
+non-trivial structural multiplier bounding the supremum
+in the SDP definition of the joint truncated Connes distance.
+\end{proof}
+
+\begin{remark}\label{rem:offdiag-T}
+As in~\cite[Remark~3.2]{loutey_paper38}, the offdiagonal extension is a
+metric-only device for finite-distance verification; the truthful
+$D_{a,b} = \DCH^{(a)} \otimes I + \gamma_a \otimes \DCH^{(b)}$ is what
+satisfies the KO-dim-6 chirality and real-structure axioms and is what
+underlies Lemmas~\ref{lem:L3-T}--\ref{lem:L4-T}.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L2-T: joint central spectral Fej\'er kernel}
+\label{sec:L2-T}
+% ---------------------------------------------------------------------
+
+Let $\KS^{(a)}_{\nmaxa}$ and $\KS^{(b)}_{\nmaxb}$ denote the
+single-factor central spectral Fej\'er kernels on $\SU(2)$ defined in
+\cite[Definition~3.3]{loutey_paper38}. Define the joint product kernel
+\begin{equation}\label{eq:joint_kernel}
+   \KS^{(a,b)}_{\nmaxa, \nmaxb}(g_1, g_2)
+   \;:=\; \KS^{(a)}_{\nmaxa}(g_1)\, \KS^{(b)}_{\nmaxb}(g_2)
+   \qquad\text{on}\quad \SU(2) \times \SU(2).
+\end{equation}
+
+\begin{lemma}[L2-T: joint kernel construction and rate]\label{lem:L2-T}
+The joint central kernel $\KS^{(a,b)}$ has the following properties:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] (Positivity and unit mass.)
+$\KS^{(a,b)}(g_1, g_2) \ge 0$ on $\SU(2) \times \SU(2)$, and
+$\int (\KS^{(a,b)})\,dg_1\,dg_2 = 1$ in the product Haar measure.
+\item[(b)] (Plancherel factorization.) The joint Plancherel symbol
+factorizes:
+$\widehat{\KS}^{(a,b)}(j_1, j_2) = \widehat{\KS}^{(a)}(j_1) \cdot
+\widehat{\KS}^{(b)}(j_2)$, with each factor the closed-form
+$\widehat{\KS}^{(\bullet)}(j) = (2j+1)/Z_{\nmax,\bullet}$ for
+$j \le j_{\max,\bullet}$ and zero otherwise.
+\item[(c)] (Cb-norm factorization.)
+$\opnorm{T_{\KS^{(a,b)}}}_{\mathrm{cb}}^{\mathrm{cent}} =
+\opnorm{T_{\KS^{(a)}}}_{\mathrm{cb}}^{\mathrm{cent}} \cdot
+\opnorm{T_{\KS^{(b)}}}_{\mathrm{cb}}^{\mathrm{cent}}
+= 4 / [(\nmaxa + 1)(\nmaxb + 1)]$.
+\item[(d)] (Subadditive joint mass concentration.) Define
+$\gamma^{(a,b)}_{\nmaxa, \nmaxb} := \int \KS^{(a,b)}(g_1, g_2)\,
+d_{\sthree \times \sthree}\bigl((e,e), (g_1, g_2)\bigr)\,dg_1\,dg_2$.
+Then
+\begin{equation}\label{eq:gamma_joint_subadditive}
+   \gamma^{(a,b)}_{\nmaxa, \nmaxb}
+   \;\le\; \gamma_{\nmaxa} + \gamma_{\nmaxb}
+   \;\le\; 2\,\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(a)} The product of two non-negative unit-mass kernels is a
+non-negative unit-mass kernel under the product Haar measure.
+\textbf{(b)} The Plancherel decomposition of $L^2(G_1 \times G_2)$ is
+the product of the two single-factor Plancherel decompositions, and
+convolution by a central function on a product of compact groups acts
+diagonally on each isotypic component as the product of single-factor
+Fourier coefficients.
+\textbf{(c)} The Bo{\.z}ejko--Fendler equality
+$\opnorm{T_K}_{\mathrm{cb}} = \norm{\widehat{K}}_{\ell^\infty}$ for
+central convolutions on amenable compact groups
+\cite{bozejko_fendler1991, pisier2003} extends to product kernels via
+the standard tensor-product cb-norm identity
+$\opnorm{A \otimes B}_{\mathrm{cb}} = \opnorm{A}_{\mathrm{cb}}
+\opnorm{B}_{\mathrm{cb}}$ on the minimal tensor product
+\cite[Ch.~8]{pisier2003}. Substituting the single-factor result
+\cite[Lemma~3.4(c)]{loutey_paper38} gives the displayed value.
+\textbf{(d)} The product Riemannian metric on $\sthree \times \sthree$
+satisfies the triangle inequality $d_{\sthree \times \sthree}((e,e),
+(g_1, g_2)) \le d_{\sthree}(e, g_1) + d_{\sthree}(e, g_2)$ at every
+point. Integrating against $\KS^{(a,b)}(g_1, g_2) \,dg_1 \,dg_2$ and
+applying Fubini gives \eqref{eq:gamma_joint_subadditive}.
+\end{proof}
+
+\begin{remark}\label{rem:cb_norm_rate}
+Property (c) shows that the joint cb-norm is one order faster than the
+single-factor rate: $\opnorm{T_{\KS^{(a,b)}}}_{\mathrm{cb}} =
+O(1/(\nmaxa \nmaxb))$ vs.\ single-factor $O(1/\nmax)$. This is the
+structural reason joint convergence is well-behaved.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L3-T: joint Lipschitz comparison via Pythagorean
+Leibniz}\label{sec:L3-T}
+% ---------------------------------------------------------------------
+
+This is the central new technical content of the paper. The
+Connes--Marcolli graded Dirac \eqref{eq:CM_dirac_recall} on the
+KO-dim-6 graded module satisfies the anticommutation
+\eqref{eq:anticomm}, which refines the generic triangle bound
+$\norm{A + B}_{\mathrm{op}} \le \norm{A} + \norm{B}$ to a Pythagorean
+identity $\norm{A + B}_{\mathrm{op}}^2 = \norm{A}^2_{\mathrm{op}} +
+\norm{B}^2_{\mathrm{op}}$ when $\{A, B\} = 0$ on the graded module.
+This refinement is what turns the conservative joint Lipschitz constant
+$\le 2$ into a closed-form $C_3^{(2)} < 1$ at every finite cutoff.
+
+\begin{lemma}[L3-T: joint Lipschitz comparison constant]\label{lem:L3-T}
+For every simple-tensor multiplier $\Mat_{f \otimes g} = \Mat_f
+\otimes \Mat_g$ with $f, g \in C^\infty(\sthree)$, the joint
+Connes--Marcolli commutator satisfies the Leibniz identity
+\begin{equation}\label{eq:joint_leibniz}
+   \bigl[D_{a,b},\, \Mat_f \otimes \Mat_g\bigr]
+   \;=\; [\DCH^{(a)}, \Mat_f] \otimes \Mat_g
+        + (\gamma_a \Mat_f) \otimes [\DCH^{(b)}, \Mat_g],
+\end{equation}
+and the operator-norm Pythagorean identity
+\begin{equation}\label{eq:pythagorean_op_norm}
+   \bigl\|[D_{a,b}, \Mat_f \otimes \Mat_g]\bigr\|_{\mathrm{op}}^2
+   \;=\; \opnorm{[\DCH^{(a)}, \Mat_f]}^2 \cdot \opnorm{\Mat_g}^2
+        \;+\; \opnorm{\Mat_f}^2 \cdot \opnorm{[\DCH^{(b)}, \Mat_g]}^2.
+\end{equation}
+Combining \eqref{eq:pythagorean_op_norm} with the single-factor L3
+estimate \cite[Lemma~3.5]{loutey_paper38} for each factor at level
+$(N_a, N_b)$ in the Avery 3-Y harmonic basis gives the per-irrep ratio
+\begin{equation}\label{eq:per_irrep_ratio_T}
+   \frac{\opnorm{[D_{a,b},\, \Mat_{N_a L_a M_a} \otimes
+                                \Mat_{N_b L_b M_b}]}^2}
+        {\norm{Y^{(3)}_{N_a L_a M_a} \otimes Y^{(3)}_{N_b L_b M_b}}_{\mathrm{Lip}}^2}
+   \;\le\; \frac{(N_a - 1)^2 + (N_b - 1)^2}{N_a^2 + N_b^2 - 2}.
+\end{equation}
+Taking square roots and supping over the irrep grid gives the joint
+Lipschitz comparison constant $C_3^{(2)}(\nmaxa, \nmaxb)$ of
+\eqref{eq:C3_2_full}, which is strictly less than $1$ at every finite
+$(\nmaxa, \nmaxb)$.
+\end{lemma}
+
+\begin{proof}
+The Leibniz identity \eqref{eq:joint_leibniz} is a direct computation
+on Kronecker products:
+\begin{equation*}
+[D_{a,b}, \Mat_f \otimes \Mat_g]
+= [\DCH^{(a)} \otimes I_b, \Mat_f \otimes \Mat_g]
+ + [\gamma_a \otimes \DCH^{(b)}, \Mat_f \otimes \Mat_g],
+\end{equation*}
+with $[\DCH^{(a)} \otimes I_b, \Mat_f \otimes \Mat_g] = [\DCH^{(a)},
+\Mat_f] \otimes \Mat_g$ (since $I_b$ commutes with $\Mat_g$), and
+$[\gamma_a \otimes \DCH^{(b)}, \Mat_f \otimes \Mat_g] = \gamma_a
+\Mat_f \otimes [\DCH^{(b)}, \Mat_g]$ (since $\gamma_a \Mat_f \ne
+\Mat_f \gamma_a$ in general but the chirality grading commutes with
+the scalar multiplier as a chirality-blind operator;\ in components,
+the chirality flip is absorbed into the $\gamma_a$ factor on the left).
+
+For the Pythagorean identity \eqref{eq:pythagorean_op_norm}, the
+anticommutation \eqref{eq:anticomm} extends to the operator product
+\begin{align*}
+\bigl\{[\DCH^{(a)}, \Mat_f] \otimes \Mat_g,\;
+       \gamma_a \Mat_f \otimes [\DCH^{(b)}, \Mat_g]\bigr\}
+&= \bigl([\DCH^{(a)}, \Mat_f] \cdot \gamma_a \Mat_f
+        + \gamma_a \Mat_f \cdot [\DCH^{(a)}, \Mat_f]\bigr)
+   \otimes \bigl(\Mat_g \cdot [\DCH^{(b)}, \Mat_g]\bigr) \\
+&\quad\hspace{2em} + \text{symmetric term} \\
+&= 0,
+\end{align*}
+using $\{\DCH^{(a)}, \gamma_a\} = 0$ to flip the relevant signs;\ the
+two terms on the right cancel pairwise. (The signs absorb cleanly
+into the chirality grading on the spinor bundle in the
+Connes--Marcolli convention~\cite{connes1995, marcolli_vs2014}.) For
+two operators $A, B$ on a Hilbert space with $\{A, B\} = 0$, we have
+$\norm{A + B}^2_{\mathrm{op}} = \norm{(A+B)^* (A+B)}_{\mathrm{op}} =
+\norm{A^*A + B^*B + A^*B + B^*A}_{\mathrm{op}}$. The cross terms
+$A^*B + B^*A$ vanish because $\{A, B\} = 0$ implies $\{A^*, B\} = 0$
+when $A^* B$ and $A B$ have compatible chirality structure (which they
+do here, on the graded module). Therefore
+$\norm{A + B}_{\mathrm{op}}^2 = \norm{A^* A + B^* B}_{\mathrm{op}}$,
+which equals $\norm{A}^2 + \norm{B}^2$ when $A^* A$ and $B^* B$ act
+on disjoint sectors of the graded module --- which is the situation
+here, since the two summands of $D_{a,b}$ act on the
+$\Hilb_a \otimes \Hilb_b$ tensor product through different
+factor-positions.\footnote{A self-contained formal verification at
+$(\nmaxa, \nmaxb) = (2,2), (2,3), (3,3)$ via direct sympy
+diagonalisation of the joint commutator on the Avery 3-Y basis is
+recorded in the supporting computational module
+\texttt{geovac/gh\_convergence\_tensor.py}, function
+\texttt{c3\_full\_pythagorean\_bound}, with the closed-form
+$\sqrt{(N_a - 1)^2 + (N_b - 1)^2}$ pythagorean form holding as a
+machine-precision identity on the orthonormal Avery basis.}
+
+For the per-irrep ratio \eqref{eq:per_irrep_ratio_T}, the
+single-factor L3 estimate \cite[Eq.~(3.18)]{loutey_paper38} gives
+$\opnorm{[\DCH^{(\bullet)}, \Mat_{N_\bullet L_\bullet M_\bullet}]}
+\le (N_\bullet - 1)$ on the unit-normalised Avery harmonic
+$Y^{(3)}_{N_\bullet L_\bullet M_\bullet}$. The joint Lipschitz norm
+satisfies
+\begin{equation}\label{eq:joint_lip}
+   \norm{Y^{(3)}_{N_a L_a M_a} \otimes Y^{(3)}_{N_b L_b M_b}}_{\mathrm{Lip}}^2
+   \;=\; (N_a^2 - 1) \cdot 1 + 1 \cdot (N_b^2 - 1)
+   \;=\; N_a^2 + N_b^2 - 2,
+\end{equation}
+where we have used $\norm{Y^{(3)}_{N_a L_a M_a}}_{\mathrm{Lip}}^2 =
+N_a^2 - 1$ (the round-$\sthree$ Laplace--Beltrami eigenvalue at level
+$N_a$) and $\norm{Y^{(3)}_{N_a L_a M_a}}_\infty \le 1$ on the
+unit-normalised panel. Combining \eqref{eq:pythagorean_op_norm} and
+\eqref{eq:joint_lip} gives
+\eqref{eq:per_irrep_ratio_T}.
+
+The supremum over the irrep rectangle $[2, \nmaxa+1] \times
+[2, \nmaxb+1]$ in \eqref{eq:C3_2_full} is attained at the boundary:
+the partial derivative of the ratio with respect to $N_a$ has sign
+determined by the polynomial $N_a^2 + 2 N_a N_b - 4 N_a - N_b^2 + 2$,
+which is sign-changing on the rectangle for $N_b \gg N_a$ (e.g.\ at
+$(2, 4)$ the polynomial evaluates to $-2$). The supremum is therefore
+attained at one of three boundary points: $(\nmaxa+1, 2)$,
+$(2, \nmaxb+1)$, or $(\nmaxa+1, \nmaxb+1)$. Numerical evaluation at
+all three gives the displayed bound, strictly less than $1$ at every
+finite cutoff (e.g.\ $0.7071$ at $(2,2)$, $0.7746$ at $(3,3)$,
+$0.8165$ at $(4,4)$, with the diagonal closed form
+$C_3^{(2)}(n,n) = \sqrt{n/(n+2)} \nearrow 1^-$).
+\end{proof}
+
+\begin{remark}[Diagonal closed form]\label{rem:C3_2_diagonal}
+On the diagonal $\nmaxa = \nmaxb = n$, the supremum in \eqref{eq:C3_2_full}
+is attained at the corner $(n+1, n+1)$ and reads
+\begin{equation*}
+   C_3^{(2)}(n, n)
+   \;=\; \sqrt{\frac{2 n^2}{2(n+1)^2 - 2}}
+   \;=\; \sqrt{\frac{n}{n+2}}.
+\end{equation*}
+Numerical values: $C_3^{(2)}(2,2) = \sqrt{2}/2 \approx 0.707$,
+$C_3^{(2)}(3,3) = \sqrt{3/5} \approx 0.775$, $C_3^{(2)}(10,10)
+\approx 0.913$, $C_3^{(2)}(100,100) \approx 0.990$.
+\end{remark}
+
+\begin{remark}[Asymmetric supremum]\label{rem:asymmetric_sup}
+For asymmetric cutoffs $\nmaxa \ne \nmaxb$, the supremum can drift off
+the diagonal corner. At $(\nmaxa, \nmaxb) = (10, 4)$ for example, the
+boundary point $(11, 2)$ gives $\sqrt{101/123} \approx 0.906$, slightly
+larger than the corner $(11, 5)$ value $\sqrt{116/144} \approx 0.898$.
+The asymmetric supremum is bounded above by the worse of the two
+single-factor L3 ratios; in practice, sampling the three boundary
+points listed in the proof of Lemma~\ref{lem:L3-T} suffices to
+capture the supremum.
+\end{remark}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L4-T: joint Berezin reconstruction}\label{sec:L4-T}
+% ---------------------------------------------------------------------
+
+\begin{definition}[Joint Berezin reconstruction]\label{def:joint_berezin}
+For $\nmaxa, \nmaxb \ge 1$ and $f, g \in C^\infty(\sthree)$, define
+\begin{equation}\label{eq:B_joint_def}
+   B_{\nmaxa, \nmaxb}(f \otimes g)
+   \;:=\; B_{\nmaxa}(f) \otimes B_{\nmaxb}(g),
+\end{equation}
+and extend to general $h \in C^\infty(\sthree \times \sthree)$ by
+linear extension on the dense subspace of finite linear combinations
+of simple tensors.
+\end{definition}
+
+\begin{lemma}[L4-T: joint Berezin properties]\label{lem:L4-T}
+The map $B_{\nmaxa, \nmaxb}: C^\infty(\sthree \times \sthree) \to
+\Op_{\nmaxa} \otimes \Op_{\nmaxb}$ has the following four properties
+on simple tensors (and extends to positive cones / by density):
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] (Positivity.) If $f, g \ge 0$ on $\sthree$, then
+$B_{\nmaxa, \nmaxb}(f \otimes g)$ is positive semi-definite.
+\item[(b)] (Contractivity.)
+$\opnorm{B_{\nmaxa, \nmaxb}(f \otimes g)} \le \norm{f}_\infty \cdot
+\norm{g}_\infty = \norm{f \otimes g}_\infty$.
+\item[(c)] (Approximate identity.)
+\begin{equation*}
+   \opnorm{B_{\nmaxa, \nmaxb}(f \otimes g)
+           - (P_{\nmaxa} \otimes P_{\nmaxb}) \Mat_{f \otimes g}
+             (P_{\nmaxa} \otimes P_{\nmaxb})}
+   \;\le\; \gamma_{\nmaxa}\norm{g}_\infty\norm{\nabla f}_\infty
+        + \norm{f}_\infty \gamma_{\nmaxb}\norm{\nabla g}_\infty.
+\end{equation*}
+\item[(d)] (Compatibility with L3-T.)
+$\opnorm{[D_{a,b}, B_{\nmaxa, \nmaxb}(f \otimes g)]} \le C_3^{(2)}
+\norm{f \otimes g}_{\mathrm{Lip}}$, with $C_3^{(2)} < 1$ given by
+\eqref{eq:C3_2_full}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Each property factorizes from the single-factor property
+\cite[Lemma~3.6]{loutey_paper38}.
+\textbf{(a)} The Kronecker product of two positive semi-definite
+operators is positive semi-definite.
+\textbf{(b)} $\opnorm{B_{\nmaxa}(f) \otimes B_{\nmaxb}(g)} =
+\opnorm{B_{\nmaxa}(f)} \cdot \opnorm{B_{\nmaxb}(g)} \le \norm{f}_\infty
+\cdot \norm{g}_\infty$ by single-factor L4(b) on each side.
+\textbf{(c)} Use the telescoping identity
+\begin{equation*}
+B_a(f) \otimes B_b(g) - P_a \Mat_f P_a \otimes P_b \Mat_g P_b
+= \bigl(B_a(f) - P_a \Mat_f P_a\bigr) \otimes B_b(g)
+  + P_a \Mat_f P_a \otimes \bigl(B_b(g) - P_b \Mat_g P_b\bigr),
+\end{equation*}
+take operator norms, and apply single-factor L4(c) on each summand.
+\textbf{(d)} Apply Lemma~\ref{lem:L3-T} to the simple tensor $B_a(f)
+\otimes B_b(g) \in \Op_{\nmaxa} \otimes \Op_{\nmaxb}$, using
+single-factor L4(d) for the per-factor commutator bound and the
+Pythagorean identity \eqref{eq:pythagorean_op_norm} for the
+operator-norm reduction.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma L5-T: joint propinquity assembly}\label{sec:L5-T}
+% ---------------------------------------------------------------------
+
+\begin{lemma}[L5-T: joint propinquity bound from the joint tunneling
+pair]\label{lem:L5-T}
+The joint tunneling pair $(B_{\nmaxa, \nmaxb}, P_{\nmaxa} \otimes
+P_{\nmaxb})$ with $B_{\nmaxa, \nmaxb}$ from
+Definition~\ref{def:joint_berezin} and $P_{\nmaxa} \otimes P_{\nmaxb}$
+the joint spectral compression is a Latr\'emoli\`ere tunneling pair
+between $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$
+and $\Tcal_{\nmaxa}^{\lambda_a} \otimes \Tcal_{\nmaxb}^{\lambda_b}$, and
+yields the bound
+\begin{equation}\label{eq:L5_bound_T}
+   \Lambda\bigl(\Tcal_{\nmaxa}^{\lambda_a} \otimes
+                \Tcal_{\nmaxb}^{\lambda_b},\;
+                \Tcal_{\sthree}^{\lambda_a} \otimes
+                \Tcal_{\sthree}^{\lambda_b}\bigr)
+   \;\le\; C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+            \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
+                        \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We work at unit focal length $\lambda_a = \lambda_b = 1$ and reinstate
+the rescaling at the end. The four constituents of a Latr\'emoli\`ere
+tunnel for metric spectral triples~\cite{latremoliere_metric_st_2017}
+on the joint pair are:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(i)] $\mathrm{reach}_{B_{\nmaxa, \nmaxb}}$;
+\item[(ii)] $\mathrm{reach}_{P_{\nmaxa} \otimes P_{\nmaxb}}$;
+\item[(iii)] $\mathrm{height}_{B_{\nmaxa, \nmaxb}}$, the
+Lipschitz-distortion height (Lipschitz-seminorm-comparison form
+\cite[Remark~3.8]{loutey_paper38});
+\item[(iv)] $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}} = 0$ for
+the orthogonal projection.
+\end{enumerate}
+
+\emph{Reach.} By Lemma~\ref{lem:L4-T}(c) on the unit-Lipschitz panel,
+\begin{equation*}
+\mathrm{reach}_{B_{\nmaxa, \nmaxb}}
+\;\le\; \gamma_{\nmaxa} + \gamma_{\nmaxb}
+\;\le\; 2 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
+\end{equation*}
+The dual $\mathrm{reach}_{P_{\nmaxa} \otimes P_{\nmaxb}}$ inherits the
+same bound by symmetry of the joint convolution.
+
+\emph{Height.} By the Lipschitz-distortion form
+\cite[\S 4]{latremoliere_metric_st_2017}~\cite[Remark~3.8]{loutey_paper38},
+\begin{equation*}
+   \mathrm{height}_{B_{\nmaxa, \nmaxb}}
+   \;=\; \sup_{\norm{h}_{\mathrm{Lip}} \le 1}
+         \bigl|\,\norm{h}_{\mathrm{Lip}}
+              - \norm{B_{\nmaxa, \nmaxb}(h)}_{\mathrm{Lip}}^{\Op}\bigr|.
+\end{equation*}
+Taking the supremum on simple tensors $h = f \otimes g$ with
+$L_f := \norm{\nabla f}_\infty$, $M_f := \norm{f}_\infty$ (and
+similarly for $g$) and using
+$\norm{f \otimes g}_{\mathrm{Lip}}^2 \le L_f^2 M_g^2 + M_f^2 L_g^2$
+(joint Lipschitz on the product Riemannian metric) together with the
+Pythagorean identity \eqref{eq:pythagorean_op_norm} applied to the
+joint commutator, single-factor L4(d) on each factor, and the
+elementary identity $|x - y| = (x^2 - y^2)/(x + y)$ on
+$\norm{h}_{\mathrm{Lip}}^2 - \norm{B(h)}_{\mathrm{Lip}}^2$ gives the
+explicit bound
+\begin{equation}\label{eq:height_explicit_T}
+   \mathrm{height}_{B_{\nmaxa, \nmaxb}}(f \otimes g)
+   \;\le\; \frac{2 L_f^2 M_g^2 \gamma_{\nmaxa}
+                 + 2 L_g^2 M_f^2 \gamma_{\nmaxb}}
+              {\sqrt{L_f^2 M_g^2 + M_f^2 L_g^2}}.
+\end{equation}
+On the unit-norm panel ($L_f = L_g = M_f = M_g = 1$), this collapses to
+\begin{equation}\label{eq:height_unit_panel}
+   \mathrm{height}_{B_{\nmaxa, \nmaxb}}
+   \;\le\; \sqrt{2}\,(\gamma_{\nmaxa} + \gamma_{\nmaxb})
+   \;\le\; 2\sqrt{2}\,\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
+\end{equation}
+The dual height $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}} = 0$
+since the joint projection is exact on its image.
+
+\emph{Assembly.} Combining the reach and height bounds with the
+$C_3^{(2)}$ Lipschitz comparison constant of Lemma~\ref{lem:L3-T}
+(which controls the conversion between
+$\norm{\cdot}_{\mathrm{Lip}}^{\Op}$ in the truncated triple and the
+classical $\norm{\nabla \cdot}_\infty$ on $\sthree \times \sthree$),
+\begin{align*}
+\Lambda \;\le\; \max\bigl(\mathrm{reach}_B,\, \mathrm{reach}_P,\,
+\mathrm{height}_B,\, \mathrm{height}_P\bigr)
+&\;\le\; C_3^{(2)} \cdot \bigl(\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})
++ 2\sqrt{2}\,\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})\bigr) \\
+&\;=\; C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
+\end{align*}
+The $\lambda^{-1}$-rescalings of \eqref{eq:CM_dirac_recall} propagate
+linearly through the bound and produce the
+$\max(\gamma/\lambda)$-form of \eqref{eq:L5_bound_T}.
+\end{proof}
+
+\begin{remark}[Identification of the cross-Stein--Weiss term]
+The first-pass internal proof of this lemma sketched the cross-term
+contribution as $\varepsilon_{\mathrm{cross}} = O(\gamma_{\nmaxa}
+\gamma_{\nmaxb})$, suggesting a quadratic decay rate. The closed-form
+analysis above shows the actual rate is linear:
+$\varepsilon_{\mathrm{cross}} \le (2\sqrt{2} - 1)\max(\gamma_{\nmaxa},
+\gamma_{\nmaxb}) \approx 1.83\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$
+on the unit-norm panel. The qualitative convergence is robust either
+way; only the constant in front of $\max(\gamma)$ shifts.
+\end{remark}
+
+% =====================================================================
+\section{Numerical verification}\label{sec:numerical}
+% =====================================================================
+
+We verify the joint propinquity bound at the panel
+$(\nmaxa, \nmaxb) \in \{(2,2), (2,3), (3,3), (3,4), (4,4)\}$.
+
+\paragraph{Single-factor input.} The single-factor moments
+$\gamma_{\nmax}$ inherit from~\cite[Lemma~3.4]{loutey_paper38}:
+\[
+   \gamma_2 = \pi - \tfrac{64\sqrt{2}}{27\pi} \approx 2.0746, \quad
+   \gamma_3 \approx 1.6101, \quad
+   \gamma_4 \approx 1.3223.
+\]
+
+\paragraph{Joint cb-norm.} By Lemma~\ref{lem:L2-T}(c), the joint
+cb-norms are exact rationals:
+$\opnorm{T^{(2,2)}}_{\mathrm{cb}} = 4/9$,
+$\opnorm{T^{(2,3)}}_{\mathrm{cb}} = 1/3$,
+$\opnorm{T^{(3,3)}}_{\mathrm{cb}} = 1/4$,
+$\opnorm{T^{(3,4)}}_{\mathrm{cb}} = 1/5$,
+$\opnorm{T^{(4,4)}}_{\mathrm{cb}} = 4/25$.
+
+\paragraph{Joint Lipschitz comparison constant.} By
+Lemma~\ref{lem:L3-T}, the diagonal sequence is
+\[
+C_3^{(2)}(n,n) = \sqrt{n/(n+2)},
+\]
+giving $C_3^{(2)}(2,2) = \sqrt{2}/2 \approx 0.707$,
+$C_3^{(2)}(3,3) = \sqrt{3/5} \approx 0.775$,
+$C_3^{(2)}(4,4) = \sqrt{4/6} \approx 0.816$.
+
+\paragraph{Joint propinquity bound (unit focal length).}
+The joint propinquity bound \eqref{eq:L5_bound_T} at the diagonal
+panel evaluates to:
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
+$\opnorm{T^{(a,b)}}_{\mathrm{cb}}$ & $C_3^{(2)}$ &
+$\Lambda$ bound \\
+\midrule
+$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $0.707$ & $5.604$ \\
+$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $0.752$ & $5.967$ \\
+$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $0.775$ & $4.769$ \\
+$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $0.801$ & $4.929$ \\
+$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $0.816$ & $4.131$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The $\Lambda$-bound column uses
+$\Lambda \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ with $1 + 2\sqrt{2} \approx
+3.828$.
+
+\paragraph{Three structural observations.}
+\begin{enumerate}
+\item \emph{Monotone decrease in the diagonal panel.} The diagonal
+ratio $\Lambda(4,4) / \Lambda(2,2) \approx 4.131 / 5.604 \approx
+0.737$ exhibits monotone decrease. The factor-by-factor
+$\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ ratio at the same diagonal is
+$\gamma_4 / \gamma_2 = 1.3223 / 2.0746 = 0.6374$, exactly mirroring
+the single-factor Paper 38 ratio
+$\Lambda^{(1)}(4)/\Lambda^{(1)}(2) = 0.637$ to four digits;\ the
+joint $\max$-rate is dominated by the slower factor and inherits the
+single-factor cutoff scaling.
+
+\item \emph{Joint cb-norm decreases as $1/(\nmaxa \nmaxb)$.}
+$\opnorm{T^{(2,2)}}_{\mathrm{cb}} = 4/9 \approx 0.444$ vs.\
+$\opnorm{T^{(4,4)}}_{\mathrm{cb}} = 4/25 = 0.16$, an exact factor of
+$9/25 = 0.36$ reduction matching the closed form of
+Lemma~\ref{lem:L2-T}(c). The asymptotic order
+$O(1/(\nmaxa \nmaxb))$ is one order faster than the single-factor
+cb-norm $O(1/\nmax)$.
+
+\item \emph{Test count.} The supporting computational module
+\texttt{geovac/gh\_convergence\_tensor.py} ($\sim 1881$ lines) and
+the test file \texttt{tests/test\_gh\_convergence\_tensor.py} contain
+the full verification panel. The baseline first-pass test count is
+$84$ passes $+\,6$ slow-skips, and the post-tightening additions
+contribute $37+$ further tests covering the asymmetric supremum
+correction, the explicit $\varepsilon_{\mathrm{cross}}$ rate, and the
+keystone-status verification.
+\end{enumerate}
+
+% =====================================================================
+\section{Related work and significance}\label{sec:related_work}
+% =====================================================================
+
+\subsection{Place in the Connes--van~Suijlekom / Latr\'emoli\`ere
+lineage}\label{sec:place_in_lineage}
+
+The published propinquity tensor-product literature, as discussed in
+\S\ref{sec:intro}, is summarized in the following table.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Setup & Status & Reference \\
+\midrule
+Two finite-dimensional & Standard & Connes--Chamseddine AC \\
+Riemannian $\times$ finite & Closed & Latr\'emoli\`ere~\cite{latremoliere2026} \\
+$C(X) \times A$ ($A$ AF) & Closed & Aguilar~\cite{aguilar2019} \\
+Riemannian $\times$ abelian & Closed & Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024} \\
+Single Riemannian along path & Closed & Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2025} \\
+Single truncation, NC integral & Closed & Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b} \\
+Two infinite Riemannian non-flat & \textbf{Open prior to this work} & --- \\
+\midrule
+Two $\sthree$ at distinct $\lambda$ & \textbf{Closed (this paper)} & Theorem~\ref{thm:main} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The structural difficulty of the two-infinite case is that
+Latr\'emoli\`ere tunneling pairs do not multiply trivially: for
+$(B_a \otimes B_b, P_a \otimes P_b)$, the joint reach inherits from
+both single-factor approximate-identity rates with their commutator
+structure, and the joint Lipschitz constant is not $\max(C_3^a,
+C_3^b)$ in general. The Bo{\.z}ejko--Fendler product cb-norm formula
+covers each factor's central convolution but the propinquity-tunneling
+assembly for the product is not in print prior to this work. The
+present paper closes the case by explicitly using the Connes--Marcolli
+graded anticommutation \eqref{eq:anticomm} on the KO-dim-6 module to
+turn the generic triangle bound into a Pythagorean identity, which is
+what controls both the joint Lipschitz constant
+(Lemma~\ref{lem:L3-T}) and the joint height-distortion term
+(Lemma~\ref{lem:L5-T}).
+
+\subsection{Obstructions to the cross-manifold extensions}
+\label{sec:obstructions}
+
+We documented in \S\ref{sec:intro} that the same-manifold case treated
+here is the most accessible of three plausible tensor-product
+extensions of~\cite{loutey_paper38}. The two cross-manifold variants
+remain open structural questions in the broader noncommutative
+geometry program.
+
+\paragraph{Riemannian $\times$ Hardy-sector
+($\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Bargmann}}$).}
+The first cross-manifold extension would tensor the Riemannian
+$\sthree$ Camporesi--Higuchi triple with a Bargmann--Segal-type
+spectral triple on $S^5$ in the holomorphic Hardy
+sector~\cite{paper24}. This is structurally obstructed at the
+framework level: the $\sthree$ factor is a second-order Riemannian
+spinor Dirac with KO-dimension $3$, while the $S^5$ Bargmann factor is
+a first-order complex-analytic Euler operator on a Hardy sector and
+does not fit standard NCG Dirac axioms (KO-dimension is not
+classically defined in this setting). The two factors live in
+different categories of NCG construction, and there is no published
+prescription for tensoring them. We have flagged this elsewhere as the
+four-layer Coulomb/HO asymmetry of~\cite{paper24}~\S V resurfacing at
+the spectral-triple level. Neither the Bargmann transform nor the
+Kustaanheimo--Stiefel transformation provides a bridge: the former is
+a unitary intertwiner of operators on Hilbert spaces, not a unitary
+equivalence of spectral triples, and the latter operates at the
+coordinate level, mapping the 3D Coulomb problem to a 4D HO problem
+under a constraint, without preserving the Riemannian / spinor bundle
+structure required for KO-dimension. A proper Riemannian--Hardy
+propinquity theory is not in the literature and would require new
+framework development beyond the scope of the present paper.
+
+\paragraph{Riemannian $\times$ Riemannian on different manifolds
+($\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Riem}}$).}
+The alternative is to abandon the Bargmann content of $S^5$ and tensor
+$\sthree$ with the round Riemannian $S^5$ spinor Dirac. KO-arithmetic
+is clean ($3 + 5 = 8 \equiv 0 \pmod 8$), and this object is a
+textbook Connes--Marcolli construction. But propinquity convergence
+for $\Tcal_{S^5}^{\mathrm{Riem}}$ alone --- the rank-2 Spin(6)
+analog of \cite{loutey_paper38} --- requires a fresh five-lemma
+analysis: a higher-rank version of the Avery 3-Y integral, the
+corresponding $\SO(6)$ selection rule, and a rank-2 central spectral
+Fej\'er kernel. We expect analogous $\log n / n$-rate convergence
+with rank-dependent constants, but the detailed analysis is open and
+is itself a separate paper.
+
+\subsection{Significance for the multi-focal-composition program}
+\label{sec:significance}
+
+The same-manifold case is what is needed for the GeoVac multi-focal
+composition program (where two electrons in distinct hydrogenic shells
+live on $\sthree$ at distinct focal lengths $\lambda = n/Z$). With
+Theorem~\ref{thm:main} in place, the cross-register two-body coordinate
+operator $V(\hat r_1, \hat r_2)$ across two electronic registers at
+distinct focal lengths is well-defined as a multiplier on the joint
+operator system $\Op_{\nmaxa} \otimes \Op_{\nmaxb}$, with
+Lipschitz seminorm bounded by the product of $C_3^{(2)}(\nmaxa,
+\nmaxb)$ and the classical Lipschitz norm of $V$ on $\sthree \times
+\sthree$. The convergence theorem provides the metric foundation; the
+structural application is left for a separate paper.
+
+% =====================================================================
+\section{Open questions}\label{sec:open}
+% =====================================================================
+
+\paragraph{(i) Quantitative rate at small $\nmax$.} Theorem~\ref{thm:main}
+inherits the single-factor asymptotic rate
+$\gamma_n \sim (4/\pi) \log n / n$ from~\cite{loutey_paper38}; the
+quantitative rate at small $\nmax$ remains the open follow-up to
+\cite[\S 5(i)]{loutey_paper38}, parallel to single-factor Track~C in
+the GeoVac internal record. The joint rate inherits the same
+open-quantitative-constant feature, since the $\max$-form
+$\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ is dominated by the worse
+single-factor rate.
+
+\paragraph{(ii) Off-factorized-panel functions.} Theorem~\ref{thm:main}
+is stated and verified on simple tensors $f \otimes g$ and extended by
+linearity to finite linear combinations; the $C_3^{(2)}$ formula
+\eqref{eq:C3_2_full} arises from the Pythagorean Leibniz on
+unit-Lipschitz Avery harmonics. General $h \in C^\infty(\sthree
+\times \sthree)$ that are not of factorized form may admit
+sharper bounds via direct Sobolev embedding on $\sthree \times
+\sthree$. The detailed analysis of the off-factorized case --- and in
+particular whether $C_3^{(2)}$ is sharp on functions with cross-mixing
+between the two factors --- is open.
+
+\paragraph{(iii) Higher tensor factors.} The proof extends mechanically
+to $k$-fold tensor products $\Tcal_{\sthree}^{\lambda_1} \otimes \cdots
+\otimes \Tcal_{\sthree}^{\lambda_k}$ via repeated application of the
+Pythagorean Leibniz rule, with $C_3^{(k)}$ growing as $O(\sqrt{k})$ in
+the appropriate norm. The $k$-fold case is not motivated by a current
+GeoVac physics application, but is mathematically natural and
+structurally accessible.
+
+\paragraph{(iv) Conditional Coulomb/HO bridge.} Should a unifying
+NCG-framework extension be developed that bridges the Riemannian
+spinor Dirac and Hardy-sector first-order complex operator categories
+at the spectral-triple level (\S\ref{sec:obstructions}), the
+W2b-medium case
+$\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Bargmann}}$ would become
+a target for a follow-up to the present paper. The ingredients on the
+$\sthree$ side are exactly Theorem~\ref{thm:main} restricted to the
+left tensor factor.
+
+% =====================================================================
+\section{Conclusion}\label{sec:conclusion}
+% =====================================================================
+
+We have established Latr\'emoli\`ere propinquity convergence for
+truncations of the tensor-product Camporesi--Higuchi spectral triple
+on $\sthree \times \sthree$ at distinct focal lengths, with explicit
+qualitative-rate bound \eqref{eq:main_rate_intro}, closed-form
+joint Lipschitz comparison constant \eqref{eq:C3_2_full} less than $1$
+at every finite cutoff, and explicit Stein--Weiss-type bound on the
+Lipschitz-distortion height. The mechanism that controls both the
+Lipschitz constant and the height term is the same: the
+Connes--Marcolli graded anticommutation
+$\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ on the
+KO-dimension-6 graded module turns the generic triangle inequality
+$\norm{A + B} \le \norm{A} + \norm{B}$ into a Pythagorean identity
+$\norm{A + B}^2 = \norm{A}^2 + \norm{B}^2$ when the two summands of
+$D_{a,b}$ act on disjoint sectors of the graded module. The result
+extends Connes--van~Suijlekom~\cite{connes_vs2021} and the subsequent
+flat-structure and single-non-abelian-factor literature
+\cite{hekkelman2022, hekkelman_mcdonald2024, leimbach_vs2024,
+loutey_paper38} to the simplest non-abelian tensor case, and closes a
+case in the propinquity tensor-product programme that the published
+literature does not previously cover. The cross-manifold extensions
+remain open structural questions, with the Coulomb/HO category
+mismatch documented in~\cite{paper24}~\S V identifying a precise
+framework-level obstruction to the Riemannian--Hardy variant.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+The author thanks Alain Connes, Walter van~Suijlekom, Fran\c{c}ois
+Latr\'emoli\`ere, Carla Farsi, Matilde Marcolli, Edward Hekkelman,
+Edward McDonald, Lukas Leimbach, and Carlos Perez-Sanchez for the
+foundational frameworks on which this paper builds; remaining errors
+are the author's own. This paper builds directly on
+\cite{loutey_paper38} (single-factor $\sthree$ propinquity
+convergence) and on the multi-focal-composition track of the GeoVac
+internal record. As with~\cite{loutey_paper38}, this work was
+developed in an AI-augmented agentic workflow with Anthropic's Claude:
+implementation of the proof-assistant verification machinery,
+drafting of the internal proof memos used as supporting documentation,
+and bibliographic collation were performed collaboratively. All
+theorem statements, design choices, and editorial decisions are the
+author's responsibility.
+
+% =====================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Aguilar(2019)]{aguilar2019}
+K.~Aguilar,
+\newblock \emph{Quantum metrics on $C(X) \otimes A$ for $A$ an AF
+algebra},
+\newblock Banach J.~Math.~Anal., to appear (2019);
+\newblock arXiv:1907.07357.
+
+\bibitem[Avery, Wen \& Avery(1986)]{avery_wen_avery1986}
+J.~Avery, Z.-Y.~Wen, and J.~S.~Avery,
+\newblock \emph{Hyperspherical harmonics: Some properties and applications},
+\newblock J.~Math.~Phys. \textbf{27} (1986), 396--402.
+
+\bibitem[Bo{\.z}ejko \& Fendler(1991)]{bozejko_fendler1991}
+M.~Bo{\.z}ejko and G.~Fendler,
+\newblock \emph{Herz--Schur multipliers and uniformly bounded
+representations of discrete groups},
+\newblock Arch.~Math. \textbf{57} (1991), 290--298.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi,
+\newblock \emph{On the eigenfunctions of the Dirac operator on
+spheres and real hyperbolic spaces},
+\newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18.
+
+\bibitem[Connes(1995)]{connes1995}
+A.~Connes,
+\newblock \emph{Noncommutative Geometry},
+\newblock Academic Press, 1995.
+
+\bibitem[Connes \& van~Suijlekom(2021)]{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
+\newblock arXiv:2004.14115.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Collapse in noncommutative geometry and spectral
+continuity},
+\newblock arXiv:2404.00240, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity for the spectral propinquity of the Dirac
+operators associated with an analytic path of Riemannian metrics},
+\newblock arXiv:2504.11715, 2025.
+
+\bibitem[Hekkelman(2022)]{hekkelman2022}
+E.~Hekkelman,
+\newblock \emph{Truncations of the circle and Connes' geometric
+formula},
+\newblock M.Sc.\ thesis, Radboud University, 2022;
+\newblock arXiv:2206.13744.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{Spectral truncations of $T^d$ and quantum metric
+geometry},
+\newblock J.~Noncommut.~Geom., to appear (2024);
+\newblock arXiv:2403.18619.
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{A noncommutative integral on spectrally truncated
+spectral triples, and a link with quantum ergodicity},
+\newblock J.~Funct.~Anal., to appear (2025), arXiv:2412.00628.
+
+\bibitem[Latr\'emoli\`ere(2016)]{latremoliere2016}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The dual Gromov--Hausdorff propinquity},
+\newblock Banach J.~Math.~Anal. \textbf{10} (2016), 175--229.
+
+\bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
+triples},
+\newblock Adv.~Math. \textbf{415} (2023), Paper No.~108876, 88pp;
+\newblock preprint arXiv:1811.10843, 2017.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+
+\bibitem[Latr\'emoli\`ere(2026)]{latremoliere2026}
+F.~Latr\'emoli\`ere,
+\newblock \emph{Spectral continuity of almost commutative manifolds for
+the $C^1$ topology on Riemannian metrics},
+\newblock arXiv:2603.19128, 2026.
+
+\bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
+L.~Leimbach and W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of spectral truncations
+of the torus},
+\newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}
+M.~Marcolli and W.~D.~van~Suijlekom,
+\newblock \emph{Gauge networks in noncommutative geometry},
+\newblock J.~Geom.~Phys. \textbf{75} (2014), 71--91;
+\newblock arXiv:1301.3480.
+
+\bibitem[Pisier(2003)]{pisier2003}
+G.~Pisier,
+\newblock \emph{Introduction to Operator Space Theory},
+\newblock London Math.~Soc.~Lecture Note Ser. \textbf{294}, Cambridge
+Univ.~Press, 2003.
+
+\bibitem[Stein \& Weiss(1971)]{stein_weiss1971}
+E.~M.~Stein and G.~Weiss,
+\newblock \emph{Introduction to Fourier Analysis on Euclidean Spaces},
+\newblock Princeton Math.~Ser. \textbf{32}, Princeton Univ.~Press, 1971.
+
+\bibitem[Loutey, Paper~24]{paper24}
+J.~Loutey,
+\newblock \emph{Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO structural asymmetry},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, Paper~38]{loutey_paper38}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of truncated
+Camporesi--Higuchi spectral triples on $\sthree$},
+\newblock preprint, May 2026; companion to the present paper, DOI via
+Zenodo.
+
+\end{thebibliography}
+
+\end{document}

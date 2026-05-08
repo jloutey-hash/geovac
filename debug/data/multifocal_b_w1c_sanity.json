@@ -1,0 +1,19 @@
+{
+  "molecule": "NaH",
+  "R_bohr": 3.5,
+  "Z_Na": 11.0,
+  "Z_eff_at_R": 1.0000000000000124,
+  "Z_eff_asymptotic": 1.0000000000000018,
+  "screening_ratio_at_R": 0.09090909090909204,
+  "screening_ratio_asymptotic": 0.09090909090909106,
+  "trace_bare": -12.145377580442887,
+  "trace_screened_naive": -1.1041252345857306,
+  "trace_asymptotic": -1.1041252345857189,
+  "trace_shift_bare_to_screened": -11.041252345857156,
+  "trace_shift_bare_to_asymptotic": -11.041252345857167,
+  "max_bare": 3.1299605264871575,
+  "max_screened_naive": 0.28454186604429055,
+  "L_max": 4,
+  "n_max_H": 2,
+  "note": "Naive screening rescales bare V_ne by Z_eff(R)/Z_Na. Proper W1c extension would multipole-expand a screened V(r,R_B) with Z_eff^Na(|r-R_B|)."
+}

@@ -34,6 +34,10 @@ from geovac.cross_block_mp2 import compute_cross_block_eri
 from geovac.molecular_spec import MolecularSpec
 from geovac.qubit_encoding import build_fermion_op_from_integrals
 from geovac.shibuya_wulfman import compute_cross_center_vne
+from geovac.cross_center_screened_vne import (
+    compute_screened_cross_center_vne,
+    _detect_core_type,
+)
 
 
 def _get_block_geometry(spec: MolecularSpec) -> List[Dict[str, Any]]:
@@ -402,6 +406,7 @@ def build_balanced_hamiltonian(
     n_grid_vne: int = 8000,
     L_max: int = 2,
     verbose: bool = False,
+    screened_cross_center: bool = False,
 ) -> Dict[str, Any]:
     """
     Build a balanced coupled Hamiltonian: all four interaction types, no PK.
@@ -428,6 +433,19 @@ def build_balanced_hamiltonian(
         Maximum multipole order for V_ne expansion.
     verbose : bool
         Print progress.
+    screened_cross_center : bool, optional
+        If True, route cross-center V_ne through the FrozenCore-screened
+        multipole expansion (``cross_center_screened_vne``). The off-center
+        nucleus's frozen core (if any: [Ne], [Ar], etc.) is taken into
+        account, so a valence orbital sees the screened tail rather than
+        the bare nuclear charge. For first-row off-center nuclei (Z<=10)
+        the screened path auto-detects no core and reverts bit-exactly to
+        the bare path. Default False to preserve existing behavior.
+
+        See ``debug/multifocal_b_w1c_diag_memo.md`` for the diagnostic that
+        motivated this option (Phase B-W1c-diag, May 2026): production
+        cross-center V_ne uses bare Z_nuc regardless of frozen core, leading
+        to ~10x overattraction for second-row hydrides (NaH, MgH2, HCl, ...).
 
     Returns
     -------
@@ -560,16 +578,32 @@ def build_balanced_hamiltonian(
             off = sb['offset']
             states = sb['states']
 
+            # Decide bare vs screened path:
+            # screened_cross_center=False (default) -> existing bare path
+            # screened_cross_center=True            -> screened path (auto-
+            #   detects frozen core via Z; reverts to bare if no core).
+            use_screened = screened_cross_center and (
+                _detect_core_type(Z_nuc) is not None
+            )
+
             if verbose:
-                print(f"[balanced] V_ne: {sb['label']} (Z_orb={Z_orb}) "
+                tag = 'screened' if use_screened else 'bare'
+                print(f"[balanced] V_ne ({tag}): {sb['label']} (Z_orb={Z_orb}) "
                       f"<-- nucleus Z={Z_nuc} at R_AB={R_AB:.3f} "
                       f"dir=({direction[0]:.3f},{direction[1]:.3f},{direction[2]:.3f})")
 
-            vne_matrix = compute_cross_center_vne(
-                Z_orb, states, Z_nuc, R_AB,
-                L_max=L_max, n_grid=n_grid_vne,
-                direction=direction,
-            )
+            if use_screened:
+                vne_matrix = compute_screened_cross_center_vne(
+                    Z_orb, states, Z_nuc, R_AB,
+                    L_max=L_max, n_grid=n_grid_vne,
+                    direction=direction,
+                )
+            else:
+                vne_matrix = compute_cross_center_vne(
+                    Z_orb, states, Z_nuc, R_AB,
+                    L_max=L_max, n_grid=n_grid_vne,
+                    direction=direction,
+                )
 
             # Add to h1
             n_states = len(states)

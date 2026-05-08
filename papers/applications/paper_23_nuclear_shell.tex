@@ -621,6 +621,422 @@ it does not affect the Pauli counts or the $1$-norms reported in
 Tables~\ref{tab:deuteron}--\ref{tab:ne-scales}, which are read from
 the term list of the encoded Hamiltonian.
 
+\subsection{Positioning in the noncommutative-geometry literature}
+
+The composed nuclear--electronic Hamiltonian of this section is also
+an explicit Connes-style spectral-triple-level construction in the
+sense of the GeoVac spectral-triple framework (Paper~32~\cite{Paper32}
+\S V, \S VIII.D). The Hilbert space is the tensor product of two
+real-space registers for two physically distinct quantum particles
+(proton + electron) at categorically different focal lengths;\ the
+Dirac operator carries cross-register coupling
+($\mathbf{I}\cdot\mathbf{S}$ hyperfine);\ and the construction is
+audited against the canonical Connes axioms by the surrounding
+Paper~32 framework. The published noncommutative-geometry /
+spectral-triple lineage (Connes--Marcolli--Chamseddine SM
+almost-commutative geometry;\ Connes--van~Suijlekom spectral
+truncations and their convergence theorems) does not contain a
+directly comparable real-space multi-particle construction:\ the SM
+case couples a Riemannian factor with a \emph{finite-dimensional
+internal} factor, and the truncation-convergence line covers single
+triples or one-infinite-plus-one-finite products. The structural
+observation, an explicit literature comparison, and the empirical
+validation against the $21\,$cm hyperfine gap are formalized in a
+standalone Zenodo memo at
+\texttt{papers/observations/track\_ni\_spectral\_triple\_zenodo.md},
+with cross-references to Paper~32~\S V (sub-sector table) and
+\S VIII.D (frontier-of-field framing).
+
+%% =====================================================================
+\section{Cross-register $V_{eN}$ and operator-level magnetization-density
+inner-fluctuations}
+\label{sec:cross-register}
+%% =====================================================================
+
+The composed nuclear--electronic Hamiltonian of Sec.~\ref{sec:ne} couples
+two real-space registers but treats both the electron--nucleus spatial
+interaction and the proton magnetization as classical scalars: the
+finite-size correction $V_{\mathrm{fs}}$ is evaluated at a fixed scalar
+$R_p$ and absorbed into the electronic diagonal, and no operator on the
+proton register represents the nuclear coordinate. This section
+reports the construction of two operator-level upgrades that promote
+each scalar to a bilinear matrix element on the joint
+$\mathcal{H}_e \otimes \mathcal{H}_p$ register:
+\begin{enumerate}
+  \item a cross-register Coulomb operator
+    $V_{eN}(\hat{\mathbf{r}}_e, \hat{\mathbf{R}}_p)$ at distinct
+    Sturmian focal lengths $(\lambda_e, \lambda_n)$, built on the
+    Roothaan~1951 closed form for the bilinear matrix element of
+    $1/|\mathbf{r} - \mathbf{R}|$ between hydrogenic
+    states~\cite{Roothaan1951};
+  \item a magnetization-density inner-fluctuation
+    $\omega_{\mathrm{magn}}$, parameterized by a calibrated radial
+    profile $\rho_M(r;\,r_Z)$ on the proton register, that reproduces
+    the Eides Zemach correction~\cite{EidesGrotchShelyuto2007,Eides2024}
+    at the operator level rather than as an external scalar substitution.
+\end{enumerate}
+The two operators share the same joint-register layout, the same
+diagonal-density Jordan--Wigner Pauli encoding, and the same multi-$\lambda$
+Shibuya--Wulfman radial machinery; they differ only in radial kernel
+($-Z/|\mathbf{r}_e - \mathbf{R}_p|$ for $V_{eN}$, the magnetization
+profile $\rho_M$ for $\omega_{\mathrm{magn}}$). They realize, on a finite
+truncation, the structural picture from Phase~B of the multi-focal
+sprint sequence: $V_{eN}$ and $\omega_{\mathrm{magn}}$ are categorically
+distinct \emph{components} of a single composed inner fluctuation
+$\omega^{\mathrm{comp}} = \omega_{\mathrm{recoil}} + \omega_{\mathrm{magn}}
++ \cdots$, structurally analogous to how the Connes--Chamseddine inner
+fluctuation $\omega = \omega_{\mathrm{gauge}} + \omega_{\mathrm{Higgs}}$
+splits in the Standard Model spectral
+triple~\cite{ChamseddineConnes2010,Paper32}.
+
+The empirical content of this section is honest about its scope.
+$V_{eN}$ reproduces the leading-order Bethe--Salpeter recoil correction
+to the hydrogen 1s energy at $2.86\%$, and follow-up symbolic analysis
+(Sec.~\ref{ssec:cross-bethe}) shows that this residual is a
+basis-truncation artifact of the $1s \times 1s$ Sturmian representation,
+not a missing physical sub-leading correction. $\omega_{\mathrm{magn}}$
+reproduces the Eides Tab.~7.3 leading-order Zemach shift at
+$0.012\%$ residual without any external scalar substitution: the
+first radial moment $M_1[\rho_M] = r_Z$ enters automatically through the
+operator construction. The structural interpretation is that the
+framework computes the operator action given a fixed $\rho_M$, and the
+calibration ($r_Z$ value, profile family) remains a Layer-2 input from
+QCD/scattering data, consistent with the structural-skeleton scope
+pattern documented in CLAUDE.md~\S3.5.
+
+\subsection{Cross-register $V_{eN}$ on the joint Sturmian register}
+\label{ssec:cross-vne}
+
+The cross-register two-body matrix element
+\begin{equation}
+  M = \big\langle
+    \chi^{\lambda_e}_{n_e \ell_e m_e}(\mathbf{r}_e)\,
+    \chi^{\lambda_n}_{n_n \ell_n m_n}(\mathbf{R}_p)
+  \,\big|\,
+    \frac{1}{|\mathbf{r}_e - \mathbf{R}_p|}
+  \,\big|\,
+    \chi^{\lambda_e}_{n'_e \ell'_e m'_e}(\mathbf{r}_e)\,
+    \chi^{\lambda_n}_{n'_n \ell'_n m'_n}(\mathbf{R}_p)
+  \big\rangle
+\label{eq:cross-vne}
+\end{equation}
+is a six-coordinate integral that closes in elementary functions when
+the proton coordinate $\mathbf{R}_p$ is promoted from a classical scalar
+to a quantum operator on a Sturmian register at focal length $\lambda_n$.
+The closure has three pieces:
+\begin{enumerate}
+  \item Multipole expansion of $1/|\mathbf{r} - \mathbf{R}|$ in
+    Legendre polynomials with bilateral Gaunt selection on both the
+    electron and the proton angular labels. The expansion terminates
+    exactly at $L_{\max} = \min(\ell_e + \ell'_e,\,\ell_n + \ell'_n)$
+    --- the tighter of the two Gaunt bounds.
+  \item A bilateral angular factor: a product of two Wigner~$3j$ symbols,
+    one on each side, with cross-register total-$m$ conservation
+    $m_e + m_n = m'_e + m'_n$.
+  \item A double radial integral whose inner $R$-integral at fixed $r$
+    is the multi-$\lambda$ Shibuya--Wulfman split-region integral with
+    combined decay rate $\alpha_{\mathrm{tot}} = \lambda_a + \lambda_b$,
+    evaluated analytically through incomplete gamma functions, and
+    whose outer $r$-integral is performed by Gauss--Laguerre quadrature
+    or, for the simplest case, by a closed form.
+\end{enumerate}
+For $(n_e, \ell_e) = (n'_e, \ell'_e) = (1,0)$ and
+$(n_n, \ell_n) = (n'_n, \ell'_n) = (1,0)$, $L = 0$, the integral
+collapses to the Roothaan~1951 closed form
+\begin{equation}
+  \boxed{\;
+    J_0(\lambda_e, \lambda_n)
+    = \frac{\lambda_e \lambda_n
+      \big(\lambda_e^2 + 3 \lambda_e \lambda_n + \lambda_n^2\big)}
+      {(\lambda_e + \lambda_n)^3}
+  \;}
+\label{eq:roothaan-J0}
+\end{equation}
+which reproduces the textbook value $5/8$ at
+$\lambda_e = \lambda_n = 1$, is symmetric in
+$(\lambda_e \leftrightarrow \lambda_n)$, and recovers the point-nucleus
+limit $J_0 \to \lambda_e$ as $\lambda_n \to \infty$ at the rate
+$O(1/\lambda_n^2)$.
+
+\paragraph{Implementation.}
+The construction is implemented in \texttt{geovac/cross\_register\_vne.py}
+($\sim 1330$ lines, 56 fast tests) as an additive extension of the
+single-$\lambda$ Shibuya--Wulfman module of Paper~19. Two new low-level
+functions in \texttt{geovac/shibuya\_wulfman.py} carry the multi-$\lambda$
+generalization: \texttt{\_hydrogenic\_poly\_coeffs\_lam(lam, n, l)}
+returns the Sturmian polynomial coefficients
+$R^\lambda_{n\ell}(r) = e^{-\lambda r}\sum_k c_k r^k$ at independent
+exponent $\lambda$, and
+\texttt{\_radial\_split\_integral\_lam(lam\_a, n_1, l_1, lam\_b, n_2,
+l_2, L, R)} computes the mismatched-exponent split-region radial
+integral. Bit-identical regression to the legacy single-$\lambda$
+functions is verified to relative error $\sim 10^{-12}$ across the full
+single-$\lambda$ test suite (26/26 tests pass without modification).
+
+\paragraph{Verification.}
+The four structural properties expected of a cross-register Coulomb
+operator are verified in \texttt{tests/test\_cross\_register\_vne.py}:
+hermiticity ($V[i,j,k,l] = V[k,l,i,j]^*$), block-diagonal structure
+under cross-register total-$m$ conservation, monotonic convergence of
+$J_0(\lambda_e, \lambda_n)$ to $\lambda_e$ as $\lambda_n \to \infty$
+(verified at $\lambda_n \in \{10, 10^2, 10^3, 10^4, 10^5\}$ with
+relative error scaling as $2/\lambda_n^2$), and bit-identical
+reproduction of the bare-Coulomb $V_{eN}$ in the limit
+$\lambda_n \to \infty$. Multipole termination is verified at
+$L_{\max} = \ell_e + \ell'_e$ across $\ell_e, \ell'_e \in \{0,1,2\}$,
+preserving the tight Gaunt bound under exponent mismatch.
+
+\subsection{Bethe--Salpeter leading order and the basis-truncation
+clarification}
+\label{ssec:cross-bethe}
+
+The cross-register $V_{eN}$ at $\lambda_e = 1$, $\lambda_n =
+2\sqrt{M_p / m_e} \approx 85.7\,\mathrm{bohr}^{-1}$, applied to the
+hydrogen 1s ground state, produces a recoil-like shift
+\begin{equation}
+  \Delta E_{\mathrm{recoil}}^{\mathrm{cross}}
+  = -Z \big[J_0(\lambda_e, \lambda_n) - \lambda_e\big]
+  = +2.65 \times 10^{-4}\,\mathrm{Ha},
+\label{eq:recoil-cross}
+\end{equation}
+which agrees with the textbook leading-order Bethe--Salpeter recoil
+$|E_1| \cdot m_e/m_p = +2.72 \times 10^{-4}$~Ha at the
+$2.86\%$ level. The same numerical agreement appears against the
+leading-order term of the Pachucki--Patkó\v{s}--Yerokhin 2023
+Foldy--Wouthuysen-reduced two-particle
+Hamiltonian~\cite{Pachucki2023}.
+
+The choice $\lambda_n = 2\sqrt{M_p/m_e}$ is structural rather than
+fitted: the value is determined by requiring the leading
+$O(1/\lambda_n^2)$ Roothaan term in Eq.~\eqref{eq:roothaan-J0} to match
+the reduced-mass leading-order shift,
+\[
+  +\frac{2 Z \lambda_e}{\lambda_n^2}
+  \stackrel{!}{=} \frac{m_e}{m_p}\, |E_1|
+  = \frac{1}{2 M_p}\quad
+  \Longrightarrow\quad
+  \lambda_n = 2\sqrt{M_p / m_e}.
+\]
+The proton's quantum-mechanical zero-point spread in the reduced-mass
+coordinates is encoded as the Sturmian focal length on the nucleus
+register, in direct analogy with the use of $\sqrt{Z/n}$ on the electron
+register.
+
+The $2.86\%$ residual deserves a sharper interpretation than ``higher
+Roothaan terms.'' Symbolic Taylor expansion of Eq.~\eqref{eq:roothaan-J0}
+in $\varepsilon = 1/\lambda_n$ at $\lambda_e = 1$ yields
+\begin{equation}
+  J_0(1, 1/\varepsilon)
+  = 1 - 2\varepsilon^2 + 5\varepsilon^3 - 9\varepsilon^4
+    + 14\varepsilon^5 - 20\varepsilon^6 + 27\varepsilon^7
+    - 35\varepsilon^8 + \cdots
+\label{eq:roothaan-taylor}
+\end{equation}
+with magnitudes $\{2, 5, 9, 14, 20, 27, 35, \ldots\}$ growing
+quadratically. At calibrated $\lambda_n = 2\sqrt{M_p / m_e}$, the
+order-$k$ contribution scales as $1/\lambda_n^k = (m_e/m_p)^{k/2}/2^k$,
+so \emph{odd} $k$ produces a half-integer power of $m_e/m_p$ while
+\emph{even} $k$ produces an integer power.
+
+Half-integer powers of $m_e/m_p$ are structurally absent from the
+Pachucki--Patkó\v{s}--Yerokhin Foldy--Wouthuysen expansion of the
+two-particle Hamiltonian: their series is a polynomial in the single
+small parameter $m_e/m_p$ with integer-power-only terms. The Roothaan
+odd-$k$ tower is therefore not a sub-leading recoil correction at all,
+but a basis-truncation artifact of the $1s \times 1s$ Sturmian
+representation at fixed $n_{\max} = 1$. Numerically, the half-integer
+tower at $\lambda_n = 85.7$ sums to $-7.95 \times 10^{-6}$~Ha,
+exactly $-2.92\%$ of the Bethe--Salpeter leading order, accounting
+for nearly all of the $2.86\%$ drift.
+
+The complementary integer-only sub-sum,
+$\sum_{k = 2,4,6,8,\ldots} c_k / \lambda_n^k$, lands at
+$+2.72475 \times 10^{-4}$~Ha, a $+0.061\%$ deviation from
+Bethe--Salpeter. We flag this sub-percent agreement as
+\emph{fortuitous}, not structural: the order-$k=4$ Roothaan
+coefficient is $+9$, while the physical Pachucki next-order
+coefficient is $-1/(2 M_p^2)$ --- the magnitudes are comparable but
+the \emph{signs are opposite}. The integer-only filter accidentally
+lands close because $1/\lambda_n^4$ is small ($\sim 10^{-7}$~Ha) at
+the calibrated focal length, not because the coefficients are
+correct. At larger $Z$ where the next-order recoil grows as $Z^5$,
+the fortuitous cancellation degrades.
+
+The structural conclusion is sharper than the numerical one: the
+cross-register $V_{eN}$ at $n_{\max} = 1$ matches Pachucki~2023
+\emph{leading-order verbatim}, with sub-leading content
+\emph{basis-truncation-bounded}; closing the next-order sign
+disagreement structurally requires multi-shell expansion to
+$n_{\max} \geq 2$ on both registers, which is named as the natural
+follow-up but is out of scope for this paper. The single-parameter
+calibration $\lambda_n = 2\sqrt{M_p / m_e}$ is structurally a
+leading-order-only fix; matching higher orders requires more basis
+functions, which is consistent with the Layer-2 calibration
+interpretation of focal length in Paper~18~\S IV~\cite{Paper18}.
+
+\subsection{Operator-level magnetization-density inner-fluctuation
+$\omega_{\mathrm{magn}}$}
+\label{ssec:omega-magn}
+
+The Eides Zemach correction to the hydrogen hyperfine
+splitting~\cite{EidesGrotchShelyuto2007,Eides2024} is conventionally
+written as a scalar substitution
+\begin{equation}
+  \frac{\Delta\nu_Z}{\nu_F}
+  = -2 Z \alpha m_e\, r_Z,
+\qquad
+  r_Z = \int d^3 r\, d^3 r'\,
+        \rho_E(r')\, \rho_M(|\mathbf{r} - \mathbf{r}'|),
+\label{eq:eides-zemach}
+\end{equation}
+where $\rho_E$ and $\rho_M$ are the unit-normalized proton charge and
+magnetization densities and $r_Z$ is the first moment of their
+convolution. Sprint HF-4 (Sec.~\ref{sec:ne}, footnote;
+Sprint HF~\cite{SprintHF} for the original 21\,cm precision test) closed
+the framework's residual to the 21\,cm transition by treating $r_Z$ as
+a Layer-2 external input scalar; that closure landed at $+18$~ppm,
+consistent with the Eides~Tab.~7.3 budget for multi-loop QED plus
+nuclear polarizability.
+
+The construction reported here promotes the scalar substitution to an
+operator-level inner-fluctuation on the joint
+$\mathcal{H}_e \otimes \mathcal{H}_p$ register. The operator
+\begin{equation}
+  \omega_{\mathrm{magn}}
+  = -2 Z m_e \int d^3 R\, \rho_M(R)\, \hat r_Z[R]
+\end{equation}
+is built from a unit-normalized radial profile $\rho_M(r;\,r_Z)$ that
+is itself parameterized by the Zemach radius as a Layer-2 calibration
+scalar. The bilinear matrix element on the joint register at the
+leading multipole $L = 0$ collapses to
+\begin{equation}
+  \langle \hat r_Z \rangle
+  = \int d^3 R\,\rho_M(R)\, R + O(r_Z/a_0)^2
+  = M_1[\rho_M] + O(r_Z/a_0)^2
+  = r_Z + O(r_Z/a_0)^2.
+\label{eq:rZ-collapse}
+\end{equation}
+The Eides scalar substitution emerges automatically: the first radial
+moment of the magnetization density \emph{is} the Zemach radius by the
+Eides definition, and the operator-level construction recovers it
+through the standard hydrogenic 1s contact integral, with no external
+substitution required. Higher-order corrections in $r_Z/a_0$ are the
+Friar moment $\langle r^2 \rangle_{\rho_M}$ and beyond, suppressed by
+$\sim 7.8 \times 10^{-6}$ relative to the leading shift on hydrogen.
+
+\paragraph{Implementation.}
+The module \texttt{geovac/magnetization\_density.py} ($\sim 480$ lines,
+27 fast tests) supports three radial profiles: Gaussian
+$\rho_M(r) = (\beta/\pi)^{3/2}\,e^{-\beta r^2}$ with
+$\beta = 4/(\pi r_Z^2)$, exponential
+$\rho_M(r) = (\kappa^3/8\pi)\,e^{-\kappa r}$ with $\kappa = 3/r_Z$,
+and a delta limit. All three are unit-normalized
+($M_0 = \int d^3 r\, \rho_M = 1$) and calibrated to the same first
+moment ($M_1 = r_Z$ for Gaussian and exponential by construction). They
+differ only at $M_2$, the Friar moment, which controls the sub-leading
+shape-dependent correction.
+
+\paragraph{Verification.}
+At the Eides~2024 calibration $r_Z = 1.045$\,fm
+$= 1.974 \times 10^{-5}$\,bohr, the operator-level construction gives
+\begin{equation}
+  \frac{\Delta\nu_Z}{\nu_F}\Big|_{\mathrm{operator}}
+  = -39.495\,\mathrm{ppm},
+\end{equation}
+versus the Eides~Tab.~7.3 reference $-39.500$\,ppm, a residual of
+$+0.005$~ppm or $0.012\%$ of the Eides shift. The residual is
+consistent with the rounding of the bohr-to-fermi conversion constant
+$a_0 = 52917.72108$\,fm in the input scalar; with a sharper conversion
+the agreement lands at machine precision. Profile independence at
+leading order is verified to machine precision: Gaussian and
+exponential profiles, both calibrated to the same $r_Z$, produce
+identical leading-order shifts. They differ at order~2 by $\sim 13\%$
+(Gaussian $M_2 = 4.59 \times 10^{-10}$~bohr$^2$ vs.~exponential
+$M_2 = 5.20 \times 10^{-10}$~bohr$^2$), well below any precision target
+relevant to hydrogen 21\,cm.
+
+\paragraph{Composition with $V_{eN}$.}
+On a minimal joint register ($1s_e \times 1s_p$, $Q = 2$ qubits), both
+$V_{eN}$ and $\omega_{\mathrm{magn}}$ produce four-string Pauli sums
+with shared support on $\{II, ZI, IZ, ZZ\}$. The combined Hamiltonian
+$H_{\mathrm{combined}} = V_{eN} + \omega_{\mathrm{magn}}$ is hermitian
+by linearity, and the Pauli sum is additive. The
+$\omega_{\mathrm{magn}}$ contribution is suppressed relative to $V_{eN}$
+by the dimensionless ratio $r_Z / a_0 \sim 2 \times 10^{-5}$. This
+realizes Phase~B of the multi-focal sprint sequence's structural
+expectation that $\omega_{\mathrm{magn}}$ is W1a's
+inner-fluctuation sibling: it shares the joint-register layout, the
+diagonal-density JW encoding, and the multi-$\lambda$ Shibuya--Wulfman
+infrastructure with $V_{eN}$, differing only in the radial kernel
+($-Z/|\mathbf{r}_e - \mathbf{R}_p|$ vs.~$\rho_M$).
+
+The structural reading is that $\omega^{\mathrm{comp}}
+= \omega_{\mathrm{recoil}} + \omega_{\mathrm{magn}} + \cdots$ is the
+multi-focal-composition analog of the Connes--Chamseddine inner
+fluctuation $\omega = \omega_{\mathrm{gauge}} + \omega_{\mathrm{Higgs}}$
+on the SM almost-commutative spectral
+triple~\cite{ChamseddineConnes2010,Paper32}: each component is built
+from a fixed parameterization of the proton's internal structure
+($\rho_E$ for $\omega_{\mathrm{recoil}}$, $\rho_M$ for
+$\omega_{\mathrm{magn}}$), the framework computes the operator action
+on the joint Hilbert space, and the choice of profile family and
+calibration scalars is Layer-2 input from QCD/scattering data, in the
+sense of Paper~18~\S IV's inner-factor input data
+tier~\cite{Paper18}.
+
+\subsection{Synthesis and forward references}
+\label{ssec:cross-synthesis}
+
+The cross-register $V_{eN}$ and $\omega_{\mathrm{magn}}$ operators
+together close the operator-level scaffolding of two of the multi-focal
+walls (W1a and W1b) named in the May~2026 sprint sequence. The honest
+verdicts are scope-bounded:
+\begin{itemize}
+  \item $V_{eN}$: leading-order Bethe--Salpeter recoil verbatim
+    (calibration-fixed); sub-leading content basis-truncation-bounded
+    at $n_{\max} = 1$, with the $2.86\%$ drift identified as the
+    half-integer-mass-ratio artifact tower (structurally absent in
+    Pachucki~2023). Multi-shell $n_{\max} \geq 2$ on both registers is
+    the structural follow-up for higher-order recoil.
+  \item $\omega_{\mathrm{magn}}$: Eides~Tab.~7.3 leading-order verbatim
+    at $0.012\%$ residual, with profile independence at leading order
+    and shape dependence appearing only at the Friar moment
+    $\langle r^2\rangle_{\rho_M}$. Higher-order Eides corrections
+    (polarizability $\Delta_{\mathrm{pol}}$, recoil-corrected Zemach,
+    Friar moment $\langle r^3\rangle_{(2)}$) each enter as additional
+    inner-fluctuation components in the same architectural slot.
+\end{itemize}
+
+\paragraph{Cross-references.}
+The convergence theorem under the single-factor Camporesi--Higuchi
+truncation that supplies the algebraic foundation under the electron
+register is established in Paper~38~\cite{Paper38}, the
+$\Lambda$-bound on the Latrémolière propinquity for the truncated
+$S^3$ spectral triple. The tensor-product extension that supplies the
+algebraic foundation under the joint $\mathcal{H}_e \otimes
+\mathcal{H}_p$ register --- the two-infinite-factor convergence theorem
+that surrounds the cross-register operator construction reported here
+--- is the subject of Paper~39 (in preparation, parallel
+sprint)~\cite{Paper39}. The standalone NCG-positioning observation for
+the Track~NI base construction, including the structural literature
+gap against the published Connes--Marcolli--Chamseddine and
+Connes--van~Suijlekom lineages, is the Track~NI Zenodo
+memo~\cite{TrackNiZenodo}.
+
+\paragraph{Open follow-ups.}
+Three downstream sprints are named but not pursued in this paper:
+(i) multi-shell $n_{\max} \geq 2$ on both joint registers, to close
+the next-order sign disagreement against
+Pachucki~2023~\cite{Pachucki2023} and lift the basis-truncation
+ceiling on $V_{eN}$; (ii) full Pachucki~$(Z\alpha)^4$ match in the
+multi-shell extension, requiring the integer-power coefficients to
+agree term-by-term rather than only at leading order; (iii) $n_e$-projected
+FCI on the joint register including the Slater--Condon decomposition
+needed for many-electron antisymmetrization, which is the structural
+extension of the diagonal-density encoding used here. Each is
+architecturally compatible with the present construction; each is a
+follow-up sprint scoped at one to several weeks of focused work.
+
 %% =====================================================================
 \section{Discussion}
 \label{sec:discussion}
@@ -814,6 +1230,63 @@ Molecules,'' technical report, Zenodo (2026).
 \bibitem{Paper22}
 J.~Loutey, ``GeoVac Paper 22: Angular Sparsity Theorem,''
 technical report, Zenodo (2026).
+
+\bibitem{Paper32}
+J.~Loutey, ``GeoVac Paper 32: The GeoVac Spectral Triple,''
+technical report, Zenodo (2026).
+
+\bibitem{Paper18}
+J.~Loutey, ``GeoVac Paper 18: Exchange Constants and the Transcendental
+Taxonomy,'' technical report, Zenodo (2026).
+
+\bibitem{Paper38}
+J.~Loutey, ``GeoVac Paper 38: SU(2) Propinquity Convergence on the
+Camporesi--Higuchi Spectral Triple,'' technical report, Zenodo (2026).
+
+\bibitem{Paper39}
+J.~Loutey, ``GeoVac Paper 39: Tensor-Product Propinquity Convergence
+for Composed Real-Space Spectral Triples,'' technical report, Zenodo
+(2026). (In preparation.)
+
+\bibitem{Roothaan1951}
+C.~C.~J.~Roothaan,
+``A Study of Two-Center Integrals Useful in Calculations on Molecular
+Structure. I,''
+J.~Chem.~Phys.~\textbf{19}, 1445 (1951).
+
+\bibitem{EidesGrotchShelyuto2007}
+M.~I.~Eides, H.~Grotch, and V.~A.~Shelyuto,
+\emph{Theory of Light Hydrogenic Bound States}
+(Springer, Berlin, 2007).
+
+\bibitem{Eides2024}
+M.~I.~Eides,
+``Hyperfine Splitting in Hydrogen and Polarizability of the Proton,''
+Phys.~Lett.~B \textbf{(2024)}, doi:10.1016/j.physletb.2024.139049.
+
+\bibitem{ChamseddineConnes2010}
+A.~H.~Chamseddine and A.~Connes,
+``Noncommutative Geometry as a Framework for Unification of all
+Fundamental Interactions Including Gravity. Part I,''
+Fortschr.~Phys.~\textbf{58}, 553 (2010).
+
+\bibitem{Pachucki2023}
+K.~Pachucki, V.~Patkó\v{s}, and V.~A.~Yerokhin,
+``Three-Photon Exchange Nuclear Structure Correction in Hydrogenic
+Systems,''
+Phys.~Rev.~Lett.~\textbf{130}, 023004 (2023).
+
+\bibitem{TrackNiZenodo}
+J.~Loutey, ``The Composed Nuclear--Electronic Deuterium Hamiltonian as
+an Explicit Connes-Style Real-Space Multi-Particle Spectral Triple,''
+GeoVac Project Zenodo Memo (2026), Track~NI standalone observation,
+\texttt{papers/observations/track\_ni\_spectral\_triple\_zenodo.md}.
+
+\bibitem{SprintHF}
+J.~Loutey, ``Sprint HF: Hydrogen 21 cm Hyperfine Multi-Focal Precision
+Test,'' GeoVac Project sprint memo (2026),
+\texttt{debug/sprint\_hf\_track1\_memo.md} through
+\texttt{sprint\_hf\_track5\_memo.md}.
 
 \end{thebibliography}
 

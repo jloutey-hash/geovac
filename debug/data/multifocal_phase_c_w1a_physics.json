@@ -1,0 +1,303 @@
+{
+  "roothaan_J0": {
+    "formula": "lam_e * lam_n * (lam_e^2 + 3 lam_e lam_n + lam_n^2) / (lam_e + lam_n)^3",
+    "reference": "Roothaan, J. Chem. Phys. 19, 1445 (1951)",
+    "test_values": {
+      "lam_e=1.0, lam_n=1.0": 0.625,
+      "lam_e=1.0, lam_n=2.0": 0.8148148148148148,
+      "lam_e=2.0, lam_n=3.0": 1.488,
+      "lam_e=1.0, lam_n=100.0": 0.9998049113802665,
+      "lam_e=1.0, lam_n=85.70070416116778": 0.9997354712163147,
+      "lam_e=1.0, lam_n=62893.08176100629": 0.9999999994944001
+    },
+    "textbook_lam_e_eq_lam_n_eq_1": {
+      "computed": 0.625,
+      "expected": 0.625,
+      "match_textbook": true
+    }
+  },
+  "numerical_engine": {
+    "comparisons": [
+      {
+        "lam_e": 1.0,
+        "lam_n": 1.0,
+        "closed_form": 0.625,
+        "numerical": 0.6250000000000112,
+        "relative_error": 1.794120407794253e-14
+      },
+      {
+        "lam_e": 1.0,
+        "lam_n": 2.0,
+        "closed_form": 0.8148148148148148,
+        "numerical": 0.8148148148148286,
+        "relative_error": 1.703183049140865e-14
+      },
+      {
+        "lam_e": 2.0,
+        "lam_n": 3.0,
+        "closed_form": 1.488,
+        "numerical": 1.4880000000000257,
+        "relative_error": 1.7309928878564268e-14
+      },
+      {
+        "lam_e": 1.0,
+        "lam_n": 10.0,
+        "closed_form": 0.9842223891810669,
+        "numerical": 0.9842223891810833,
+        "relative_error": 1.6694703295790867e-14
+      },
+      {
+        "lam_e": 1.0,
+        "lam_n": 100.0,
+        "closed_form": 0.9998049113802665,
+        "numerical": 0.9998072086483556,
+        "relative_error": 2.2977163474016738e-06
+      }
+    ]
+  },
+  "bare_coulomb_regression": {
+    "lam_n_values": [
+      10.0,
+      100.0,
+      1000.0,
+      10000.0,
+      100000.0
+    ],
+    "J0_values": [
+      0.9842223891810669,
+      0.9998049113802665,
+      0.999998004991014,
+      0.9999999800049991,
+      0.999999999800005
+    ],
+    "classical_J0": 1.0,
+    "errors_at_each_lam_n": [
+      0.01577761081893314,
+      0.00019508861973349667,
+      1.9950089860110154e-06,
+      1.99950008772376e-08,
+      1.9999502054446339e-10
+    ],
+    "converges_to_classical": true
+  },
+  "hydrogen_recoil": {
+    "bethe_salpeter_leading_order_Ha": 0.0002723085107438162,
+    "cross_register_J0": 0.9997354712163147,
+    "classical_J0": 1.0,
+    "cross_register_recoil_estimate_Ha": 0.00026452878368532495,
+    "expected_leading_order_Ha": 0.0002723085107438162,
+    "relative_error": 0.02856953327400878,
+    "mass_ratio_m_e_over_m_p": 0.0005446170214876324,
+    "lam_nucleus_quantum_motional": 85.70070416116778
+  },
+  "pachucki_2023_validation": {
+    "pachucki_leading_order_Ha": 0.0002723085107438162,
+    "cross_register_estimate_Ha": 0.00026452878368532495,
+    "relative_error": 0.02856953327400878,
+    "cross_register_J0": 0.9997354712163147,
+    "classical_J0": 1.0,
+    "higher_order_path": "Higher-order recoil at (Z alpha)^4 and (Z alpha)^6 requires multi-shell expansion of both registers and full operator-valued R_n (n_max_n >= 2). This module implements the leading-order closure; (Z alpha)^4 is reachable with an n_max_e = n_max_n = 2 sprint extension, (Z alpha)^6 requires the LS-8a-renorm machinery flagged in CLAUDE.md."
+  },
+  "zemach_w1b_sketch": {
+    "r_Z_fm": 1.045,
+    "r_Z_bohr": 1.974763800618301e-05,
+    "delta_nu_over_nu_F": -3.949527601236602e-05,
+    "delta_ppm": -39.49527601236602,
+    "status": "SKETCH - operator-level construction is shared with W1a",
+    "expected_residual_ppm": "+12 to +18 (multi-loop QED + nuclear pol)"
+  },
+  "multipole_termination": {
+    "n_max_e=1, n_max_n=1": {
+      "V_shape": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "nonzero_elements": 1,
+      "total_elements": 1,
+      "sparsity": 0.0,
+      "states_e": [
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "states_n": [
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    "n_max_e=1, n_max_n=2": {
+      "V_shape": [
+        1,
+        5,
+        1,
+        5
+      ],
+      "nonzero_elements": 7,
+      "total_elements": 25,
+      "sparsity": 0.72,
+      "states_e": [
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "states_n": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          -1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ]
+    },
+    "n_max_e=2, n_max_n=1": {
+      "V_shape": [
+        5,
+        1,
+        5,
+        1
+      ],
+      "nonzero_elements": 7,
+      "total_elements": 25,
+      "sparsity": 0.72,
+      "states_e": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          -1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ],
+      "states_n": [
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    "n_max_e=2, n_max_n=2": {
+      "V_shape": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "nonzero_elements": 65,
+      "total_elements": 625,
+      "sparsity": 0.896,
+      "states_e": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          -1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ],
+      "states_n": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          -1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "pauli_encoding_hydrogen_1s_x_proton_1s": {
+    "Q_total": 2,
+    "Q_e": 1,
+    "Q_n": 1,
+    "n_pauli_terms": 4,
+    "pauli_terms": {
+      "II": -0.24993431549221792,
+      "ZI": 0.24993431549221792,
+      "IZ": 0.24993431549221792,
+      "ZZ": -0.24993431549221792
+    }
+  }
+}

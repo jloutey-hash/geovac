@@ -1,0 +1,11 @@
+{
+  "norms": {
+    "n=1,l=0": "1",
+    "n=2,l=0": "1",
+    "n=2,l=1": "1"
+  },
+  "q_a": {
+    "I_00_mismatched_1s1s": "4*lam_a**(3/2)*lam_b**(3/2)*(R*(R*(lam_a + lam_b) + 1)*(lam_a**3 + 3*lam_a**2*lam_b + 3*lam_a*lam_b**2 + lam_b**3) + (lam_a + lam_b)**2*(-R**2*lam_a**2 - 2*R**2*lam_a*lam_b - R**2*lam_b**2 - 2*R*lam_a - 2*R*lam_b + 2*exp(R*(lam_a + lam_b)) - 2))*exp(-R*(lam_a + lam_b))/(R*(lam_a + lam_b)**2*(lam_a**3 + 3*lam_a**2*lam_b + 3*lam_a*lam_b**2 + lam_b**3))",
+    "I_00_matched_limit": "(-R*lam_a + exp(2*R*lam_a) - 1)*exp(-2*R*lam_a)/R"
+  }
+}

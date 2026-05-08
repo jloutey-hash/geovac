@@ -1,0 +1,84 @@
+{
+  "rho_M_moments": {
+    "gaussian": {
+      "profile_width": 3264974573.523872,
+      "M_0": 1.0,
+      "M_1": 1.974763800618301e-05,
+      "M_2": 4.5942164823080296e-10,
+      "M_3": 1.2096656535287794e-14,
+      "M_1_div_rZ": 1.0
+    },
+    "exponential": {
+      "profile_width": 151916.9026220096,
+      "M_0": 1.0,
+      "M_1": 1.974763800618301e-05,
+      "M_2": 5.199589424309916e-10,
+      "M_3": 1.7113268288674953e-14,
+      "M_1_div_rZ": 1.0
+    },
+    "delta": {
+      "profile_width": null,
+      "M_0": 1.0,
+      "M_1": 0.0,
+      "M_2": 0.0,
+      "M_3": 0.0,
+      "M_1_div_rZ": 0.0
+    }
+  },
+  "eides_leading_order_regression": {
+    "r_Z_fm": 1.045,
+    "r_Z_bohr": 1.974763800618301e-05,
+    "operator_level_delta_ppm": -39.49527601236602,
+    "eides_reference_ppm": -39.5,
+    "residual_ppm": 0.004723987633980187,
+    "pauli_terms_count": 4,
+    "rho_M_moments": {
+      "M_0": 1.0,
+      "M_1": 1.974763800618301e-05,
+      "M_2": 4.5942164823080296e-10
+    }
+  },
+  "taylor_expansion": {
+    "order_1_shift_atomic": -3.949527601236602e-05,
+    "order_1_ppm": -39.49527601236602,
+    "order_2_shift_atomic": 3.062810988205353e-10,
+    "order_2_ppm": 0.0003062810988205353,
+    "ratio_order_2_to_order_1": 7.754879310746893e-06
+  },
+  "cross_register_integration": {
+    "Q_total": 2,
+    "vne_pauli_count": 4,
+    "magn_pauli_count": 4,
+    "combined_pauli_count": 4,
+    "vne_pauli_terms": {
+      "II": -0.25000000000000394,
+      "ZI": 0.25000000000000394,
+      "IZ": 0.25000000000000394,
+      "ZZ": -0.25000000000000394
+    },
+    "magn_pauli_terms": {
+      "II": -9.873819003091505e-06,
+      "ZI": 9.873819003091505e-06,
+      "IZ": 9.873819003091505e-06,
+      "ZZ": -9.873819003091505e-06
+    },
+    "combined_pauli_terms": {
+      "II": -0.250009873819007,
+      "ZI": 0.250009873819007,
+      "IZ": 0.250009873819007,
+      "ZZ": -0.250009873819007
+    }
+  },
+  "profile_sensitivity": {
+    "gaussian": {
+      "delta_ppm": -39.49527601236602,
+      "M_1_bohr": 1.974763800618301e-05,
+      "M_2_bohr2": 4.5942164823080296e-10
+    },
+    "exponential": {
+      "delta_ppm": -39.49527601236602,
+      "M_1_bohr": 1.974763800618301e-05,
+      "M_2_bohr2": 5.199589424309916e-10
+    }
+  }
+}

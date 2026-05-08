@@ -1,0 +1,28 @@
+{
+  "J_0_1s_1s": "-lam_e**4/(lam_e + lam_n)**3 - 2*lam_e**3*lam_n/(lam_e + lam_n)**3 + lam_e",
+  "J_0_symmetric": true,
+  "J_0_point_nucleus_limit": "lam_e",
+  "J_0_numerical_lam1_lam1000": 0.999998004991014,
+  "J_1_2p_2p": "5*lam_e**2*(-9*lam_e**3*lam_n**4 - 9*lam_e**3*lam_n**3*(lam_e + lam_n) - 6*lam_e**3*lam_n**2*(lam_e + lam_n)**2 - 3*lam_e**3*lam_n*(lam_e + lam_n)**3 - lam_e**3*(lam_e + lam_n)**4 + (lam_e + lam_n)**7)/(6*lam_n*(lam_e + lam_n)**7)",
+  "q_d_scoping": {
+    "verdict": "Cross-register bilinear V_eN HAS a closed-form symbolic representation.",
+    "key_ingredients": [
+      "Multipole expansion of 1/|r - R|.",
+      "Standard angular Gaunt termination on BOTH electron and nucleus sides.",
+      "Effective L truncation: L_max = min(l_e + l_e', l_n + l_n').",
+      "Double radial integral: outer (poly x exp(-2 lam_e r)) x inner Gamma(s, c r)."
+    ],
+    "sparsity_implication": "The cross-register angular factor is bilinear in (3j_e * 3j_n) and inherits Gaunt sparsity from BOTH sides. Pauli scaling estimate: at fixed Q_e, Q_n, the cross-register Pauli count is bounded by the product of single-register ERI counts, but the angular sparsity (Gaunt squared) reduces it from O(Q_e^2 Q_n^2) to O(Q_e^{1.5} Q_n^{1.5}) -- conjectural without full ERI count.",
+    "what_to_build": [
+      "geovac/cross_register_vne.py: build_cross_register_vne(spec_e, spec_n) returning a Pauli dictionary on the joint register.",
+      "Generalize Shibuya-Wulfman _split_integral_analytical from single-radial to double-radial via a 4D incomplete-gamma representation. The integrand is bivariate polynomial-times-exp; the integral is a sum of double-incomplete-gamma terms.",
+      "Replace Track NI's R_PROTON_BOHR classical scalar with operator-valued R on the nuclear register."
+    ],
+    "guardrail_compatibility": "GUARDRAIL Papers 8-9: Sturmian theorem says shared-p_0 makes eigenvalues R-independent (proven negative). W1a does NOT use shared p_0 -- electron and nucleus are at different focal lengths by design (lam_e != lam_n). The theorem boundary is honored: the W1a closure is OUTSIDE the theorem's scope, not in conflict with it.",
+    "what_new_math_is_needed": [
+      "Double-radial integral with mismatched exponents and r_<^L/r_>^{L+1} kernel in closed form. Q-A and Q-B above show this is mechanical -- the integrand factorizes through standard incomplete-gamma functions on bounded subintervals and gamma functions on infinite tails. NO new mathematics is required at the integral level; this is engineering using existing machinery.",
+      "Operator-valued R on the proton register, built from HO matrix elements via Moshinsky-Talmi brackets for the proton in HO basis (Paper 23 \u00a7III). Already exists in geovac/nuclear/moshinsky.py for relative coordinates; needs explicit lab-frame R operator construction.",
+      "A spectral-triple lift IF one wants to phrase the closure in NCG language. The W1a closure as a Pauli encoding does NOT require this; the spectral-triple framing is for Paper 32 \u00a7VIII (a Connes-Marcolli A8'-class bridge for spatial registers). The Pauli encoding closes W1a; the spectral-triple framing is Phase C polish."
+    ]
+  }
+}

@@ -332,6 +332,77 @@ def _hydrogenic_poly_coeffs(Z: float, n: int, l: int) -> Tuple[np.ndarray, float
     return raw_coeffs * N, alpha
 
 
+def _hydrogenic_poly_coeffs_lam(
+    lam: float, n: int, l: int,
+) -> Tuple[np.ndarray, float]:
+    """
+    Multi-lambda decomposition R_nl(r; lam) = exp(-lam*r) * sum_k c_k * r^k.
+
+    The "Coulomb-Sturmian" / hydrogenic radial function at independent
+    exponent ``lam`` (rather than the constrained ``Z/n``):
+
+        R_{nl}^{lam}(r) = N_{nl}^{lam} * (2 lam r)^l * exp(-lam r) *
+                          L_{n-l-1}^{2l+1}(2 lam r),
+
+    with N_{nl}^{lam} chosen such that
+        ∫_0^∞ |R_{nl}^{lam}|² r² dr = 1.
+
+    For the matched case ``lam = Z/n`` this reduces to the standard hydrogenic
+    radial function and the result is bit-identical to
+    ``_hydrogenic_poly_coeffs(Z=lam*n, n, l)``.
+
+    This is the multi-lambda Shibuya-Wulfman extension (Phase B-W1a-diag Q-A):
+    bra and ket can sit at distinct ``lam_a`` and ``lam_b``, and the radial
+    product is polynomial-times-single-exponential at decay rate
+    ``alpha_total = lam_a + lam_b``. The split-region incomplete-gamma
+    machinery extends directly via ``_split_integral_analytical``.
+
+    Parameters
+    ----------
+    lam : float
+        Sturmian exponent (positive).
+    n : int
+        Principal quantum number (n >= 1).
+    l : int
+        Angular momentum (0 <= l < n).
+
+    Returns
+    -------
+    coeffs : np.ndarray
+        Polynomial coefficients of r in R_nl(r) - i.e. R = e^{-lam*r} * sum_k coeffs[k] r^k.
+    alpha : float
+        Equal to ``lam`` (the exponential decay rate).
+    """
+    alpha = float(lam)
+    rho_scale = 2.0 * alpha  # rho = 2 lam r
+
+    # Laguerre polynomial coefficients L_{n-l-1}^{2l+1}(x)
+    lag = genlaguerre(n - l - 1, 2 * l + 1)
+    lag_coeffs = lag.coef[::-1]  # lag_coeffs[k] is coeff of x^k
+
+    degree = n - l - 1
+    max_power = l + degree
+    raw_coeffs = np.zeros(max_power + 1)
+    for k in range(degree + 1):
+        power = l + k
+        raw_coeffs[power] += rho_scale ** (l + k) * lag_coeffs[k]
+
+    # Compute exact normalization: ∫_0^∞ |R|² r² dr = 1
+    beta = 2.0 * alpha
+    norm_sq = 0.0
+    for i in range(len(raw_coeffs)):
+        if abs(raw_coeffs[i]) < 1e-30:
+            continue
+        for j in range(len(raw_coeffs)):
+            if abs(raw_coeffs[j]) < 1e-30:
+                continue
+            p = i + j + 2
+            norm_sq += raw_coeffs[i] * raw_coeffs[j] * factorial(p) / beta ** (p + 1)
+
+    N = 1.0 / np.sqrt(norm_sq)
+    return raw_coeffs * N, alpha
+
+
 def _poly_product(c1: np.ndarray, c2: np.ndarray) -> np.ndarray:
     """Multiply two polynomial coefficient arrays (convolution)."""
     return np.convolve(c1, c2)
@@ -411,6 +482,76 @@ def _radial_split_integral(
     return _split_integral_analytical(
         prod_coeffs, alpha_total, L + 2, 1 - L, L, R_AB,
     )
+
+
+def _radial_split_integral_lam(
+    lam_a: float, n1: int, l1: int,
+    lam_b: float, n2: int, l2: int,
+    L: int,
+    R_AB: float,
+) -> float:
+    """
+    Mismatched-exponent split-region radial integral (Phase B-W1a-diag Q-A).
+
+    R_L = (1/R^{L+1}) ∫_0^R R_a(r) R_b(r) r^{L+2} dr
+        + R^L ∫_R^∞ R_a(r) R_b(r) r^{1-L} dr,
+
+    where R_a is the radial Sturmian at exponent ``lam_a`` and R_b at
+    ``lam_b`` (potentially distinct). The product is polynomial-times-single-
+    exponential at decay rate ``lam_a + lam_b``, so the standard incomplete-
+    gamma machinery extends directly.
+
+    For the matched case ``lam_a = lam_b = Z/n`` this returns bit-identical
+    output to ``_radial_split_integral`` (modulo float roundoff).
+    """
+    c1, alpha1 = _hydrogenic_poly_coeffs_lam(lam_a, n1, l1)
+    c2, alpha2 = _hydrogenic_poly_coeffs_lam(lam_b, n2, l2)
+
+    prod_coeffs = _poly_product(c1, c2)
+    alpha_total = alpha1 + alpha2  # = lam_a + lam_b
+
+    return _split_integral_analytical(
+        prod_coeffs, alpha_total, L + 2, 1 - L, L, R_AB,
+    )
+
+
+def compute_cross_center_vne_element_lam(
+    lam_orb_bra: float,
+    lam_orb_ket: float,
+    n1: int, l1: int, m1: int,
+    n2: int, l2: int, m2: int,
+    Z_nuc: float,
+    R_AB: float,
+    L_max: int,
+    nuc_parity: int = 1,
+) -> float:
+    """
+    Mismatched-exponent single matrix element of cross-center nuclear
+    attraction (Phase B-W1a-diag Q-A + Q-B):
+
+    <psi_{n1,l1,m1}^{lam_orb_bra} | (-Z_B / |r - R_B|) | psi_{n2,l2,m2}^{lam_orb_ket}>
+
+    The orbital wavefunctions on the bra and ket sides may sit at distinct
+    Sturmian exponents (lam_orb_bra != lam_orb_ket). Multipole termination
+    at L_max = l1 + l2 is preserved (Q-B verified).
+
+    For ``lam_orb_bra = lam_orb_ket = Z_orb / n``, this is bit-identical to
+    ``compute_cross_center_vne_element`` (modulo float roundoff).
+    """
+    if m1 != m2:
+        return 0.0
+
+    total = 0.0
+    for L in range(0, L_max + 1):
+        ang = _angular_coefficient(l1, m1, l2, m2, L)
+        if abs(ang) < 1e-15:
+            continue
+        rad = _radial_split_integral_lam(
+            lam_orb_bra, n1, l1, lam_orb_ket, n2, l2, L, R_AB,
+        )
+        total += nuc_parity ** L * ang * rad
+
+    return -Z_nuc * total
 
 
 def _radial_split_integral_grid(

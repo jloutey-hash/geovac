@@ -1,0 +1,192 @@
+{
+  "ss": [
+    {
+      "L": 0,
+      "angular_zero": false,
+      "angular_value": "1",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 1,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 2,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 3,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 4,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    }
+  ],
+  "sp": [
+    {
+      "L": 0,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 1,
+      "angular_zero": false,
+      "angular_value": "sqrt(3)/3",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 2,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 3,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 4,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    }
+  ],
+  "pp": [
+    {
+      "L": 0,
+      "angular_zero": false,
+      "angular_value": "1",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 1,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 2,
+      "angular_zero": false,
+      "angular_value": "2/5",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 3,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 4,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 5,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    }
+  ],
+  "dd": [
+    {
+      "L": 0,
+      "angular_zero": false,
+      "angular_value": "1",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 1,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 2,
+      "angular_zero": false,
+      "angular_value": "2/7",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 3,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 4,
+      "angular_zero": false,
+      "angular_value": "2/7",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 5,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 6,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    }
+  ],
+  "pd": [
+    {
+      "L": 0,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 1,
+      "angular_zero": false,
+      "angular_value": "2*sqrt(15)/15",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 2,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 3,
+      "angular_zero": false,
+      "angular_value": "3*sqrt(15)/35",
+      "radial": "nonzero (closed form)"
+    },
+    {
+      "L": 4,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    },
+    {
+      "L": 5,
+      "angular_zero": true,
+      "angular_value": "0",
+      "radial": "(not computed, angular = 0)"
+    }
+  ],
+  "summary": {
+    "termination_rule_matched_case": "L_max = l_a + l_b (or 2 max(l_a, l_b) as briefing's bound)",
+    "termination_rule_mismatched_case": "Identical -- angular factor depends ONLY on (l_a, l_b, m_a, m_b)",
+    "mechanism": "Gaunt 3j(l_a, L, l_b; 0, 0, 0) parity + triangle inequality. Independent of radial exponents.",
+    "verdict_q_b": "Multipole termination IS preserved under exponent mismatch. The mismatch only changes the radial integrand's combined decay rate; it cannot affect the angular factor."
+  }
+}
