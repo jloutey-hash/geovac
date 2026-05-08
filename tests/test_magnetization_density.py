@@ -35,6 +35,7 @@ from geovac.magnetization_density import (
     compose_with_cross_register_vne,
     compute_magnetization_density_operator,
     hydrogen_zemach_eides_leading_order,
+    muonic_hydrogen_zemach_eides_leading_order,
     taylor_zemach_around_zero,
 )
 
@@ -390,3 +391,152 @@ class TestSpecValidation:
         spec = MagnetizationDensitySpec()
         assert spec.proton_spec is not None
         assert spec.proton_spec.lam_e == 1.0
+
+    def test_zero_lepton_mass_rejected(self) -> None:
+        with pytest.raises(ValueError, match="lepton_mass must be positive"):
+            MagnetizationDensitySpec(lepton_mass=0.0)
+
+    def test_negative_lepton_mass_rejected(self) -> None:
+        with pytest.raises(ValueError, match="lepton_mass must be positive"):
+            MagnetizationDensitySpec(lepton_mass=-1.0)
+
+    def test_default_lepton_mass_is_one(self) -> None:
+        """Backward-compat: default lepton_mass = 1.0 (electronic infinite-proton)."""
+        spec = MagnetizationDensitySpec()
+        assert spec.lepton_mass == 1.0
+
+
+# ---------------------------------------------------------------------------
+# Muonic regime: lepton-mass parameterization (Sprint MH Track C)
+# ---------------------------------------------------------------------------
+
+
+class TestMuonicLeptonMass:
+    """Sprint MH Track C: lepton_mass parameter propagates through the
+    operator-level Zemach matrix element and Pauli-string assembly,
+    eliminating the manual mass-scaling step Track B used in test
+    scripts.
+
+    Default lepton_mass=1.0 preserves bit-identical electronic regression.
+    """
+
+    M_MUON_OVER_M_E: float = 206.7682830  # CODATA 2018
+    M_PROTON_OVER_M_E: float = 1836.15267343
+    M_RED_MUP: float = (
+        (M_MUON_OVER_M_E * M_PROTON_OVER_M_E)
+        / (M_MUON_OVER_M_E + M_PROTON_OVER_M_E)
+    )
+
+    def test_default_electronic_bit_identical_baseline(self) -> None:
+        """Default lepton_mass=1.0 reproduces existing electronic
+        regression to bit-identical precision."""
+        # Pre-Track-C historical value: -39.495276 ppm at the
+        # framework's R_Z_EIDES_2024_BOHR with profile='gaussian'.
+        result = hydrogen_zemach_eides_leading_order()
+        # The match against -39.5 ppm reference at default lepton_mass=1.0
+        # is the existing regression target.
+        assert result['operator_level_delta_ppm'] == pytest.approx(
+            -39.495276, rel=1e-5
+        )
+        assert abs(result['residual_ppm']) < 1.0
+
+    def test_lepton_mass_scales_linearly(self) -> None:
+        """Operator output scales linearly with lepton_mass at leading order."""
+        result_e = hydrogen_zemach_eides_leading_order(lepton_mass=1.0)
+        scale = 5.0  # arbitrary nonphysical scale to verify linearity
+        result_x = hydrogen_zemach_eides_leading_order(lepton_mass=scale)
+        ratio = (
+            result_x['operator_level_delta_ppm']
+            / result_e['operator_level_delta_ppm']
+        )
+        assert ratio == pytest.approx(scale, rel=1e-12)
+
+    def test_muonic_zemach_matches_eides_leading_order(self) -> None:
+        """Muonic operator gives -2 Z m_red(mup) r_Z at leading order,
+        matching Track B's manual scaling bit-identical."""
+        result = muonic_hydrogen_zemach_eides_leading_order()
+        # Predicted leading-order shift: -2 * 1 * 185.84 * R_Z_EIDES_2024_BOHR * 1e6
+        expected_ppm = -2.0 * self.M_RED_MUP * R_Z_EIDES_2024_BOHR * 1.0e6
+        assert result['operator_level_delta_ppm'] == pytest.approx(
+            expected_ppm, rel=1e-12
+        )
+        # The Eides muonic target (rescaled from electronic -39.5)
+        assert result['eides_reference_ppm'] == pytest.approx(
+            -39.5 * self.M_RED_MUP, rel=1e-12
+        )
+
+    def test_muonic_residual_matches_track_b_manual_scaling(self) -> None:
+        """The operator-level muonic match is the same 0.55%-level as
+        Track B's manual scaling against the rounded Eides muonic target
+        (~ -7300 ppm).  The gap is intrinsic to the leading-order Eides
+        formula, not the operator's mass propagation."""
+        result = muonic_hydrogen_zemach_eides_leading_order()
+        # Track B reported framework leading-order at -7339.8 ppm with
+        # eides muonic target ~ -7300 ppm, agreement 0.55%.
+        delta_ppm = result['operator_level_delta_ppm']
+        eides_muonic_rounded = -7300.0
+        agreement_pct = abs(
+            (delta_ppm - eides_muonic_rounded) / eides_muonic_rounded
+        ) * 100.0
+        # 0.55% match (Track B's value); accept up to 1% to allow for
+        # rounding in the literature reference.
+        assert agreement_pct < 1.0
+        # Track B manual-scale value: -7339.8 ppm
+        assert delta_ppm == pytest.approx(-7339.8, abs=2.0)
+
+    def test_muonic_operator_pauli_assembly(self) -> None:
+        """Muonic Pauli sum has same string structure as electronic, with
+        coefficients scaled by m_red(mup)/m_red(ep)."""
+        result_e = hydrogen_zemach_eides_leading_order(lepton_mass=1.0)
+        result_mu = hydrogen_zemach_eides_leading_order(
+            lepton_mass=self.M_RED_MUP,
+        )
+        assert (
+            result_e['pauli_terms_count'] == result_mu['pauli_terms_count']
+        )
+        # Build both Pauli sums and verify coefficient ratio
+        spec_e = MagnetizationDensitySpec(
+            profile="gaussian",
+            r_Z_bohr=R_Z_EIDES_2024_BOHR,
+            lepton_mass=1.0,
+        )
+        spec_mu = MagnetizationDensitySpec(
+            profile="gaussian",
+            r_Z_bohr=R_Z_EIDES_2024_BOHR,
+            lepton_mass=self.M_RED_MUP,
+        )
+        op_e = compute_magnetization_density_operator(spec_e)
+        op_mu = compute_magnetization_density_operator(spec_mu)
+        # Same string set
+        assert set(op_e['pauli_terms'].keys()) == set(
+            op_mu['pauli_terms'].keys()
+        )
+        # Coefficient ratio = lepton_mass scaling factor
+        for pstr, c_e in op_e['pauli_terms'].items():
+            c_mu = op_mu['pauli_terms'][pstr]
+            assert c_mu == pytest.approx(c_e * self.M_RED_MUP, rel=1e-12)
+
+    def test_taylor_expansion_lepton_mass_aware(self) -> None:
+        """Taylor order_1 = -2 Z lepton_mass r_Z scales correctly."""
+        rZ = R_Z_EIDES_2024_BOHR
+        spec_mu = MagnetizationDensitySpec(
+            profile="gaussian",
+            r_Z_bohr=rZ,
+            lepton_mass=self.M_RED_MUP,
+        )
+        result = taylor_zemach_around_zero(spec_mu, order=1)
+        expected_order_1 = -2.0 * self.M_RED_MUP * rZ
+        assert result['order_1_shift'] == pytest.approx(
+            expected_order_1, rel=1e-12
+        )
+
+    def test_muonic_mass_enhancement_factor(self) -> None:
+        """Mass-enhancement factor m_red(mup)/m_red(ep) = 185.94."""
+        m_red_ep = (
+            self.M_PROTON_OVER_M_E
+            / (1.0 + self.M_PROTON_OVER_M_E)
+        )
+        enhancement = self.M_RED_MUP / m_red_ep
+        # Track B reported 185.94x; CODATA 2018 reduces to 185.94 when
+        # using m_p/m_e = 1836.153 and m_mu/m_e = 206.768.
+        assert enhancement == pytest.approx(185.94, rel=1e-3)

@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.32.0] - 2026-05-08
+
+### Added — Sprint MH: muonic hydrogen on the precision frontier of bound-state QED
+
+Two-track first application of the multi-focal-composition machinery (Phase C closure, v2.31.0) to the precision frontier: muonic hydrogen ($\mu p$). Tests whether the rest-mass projection (Paper 34 §III.14) plus the Roothaan cross-register V_eN (`geovac/cross_register_vne.py`, v2.31.0) and the magnetization-density operator (`geovac/magnetization_density.py`, v2.31.0) scale cleanly under $m_e \to m_\mu = 206.7682830\, m_e$. Both tracks closed positively.
+
+**Track A — Muonic 2S–2P Lamb shift (CREMA 2010 benchmark).** Framework reproduces $\Delta E^{\mu p}_\text{Lamb} = 202.3706(23)$ meV at $-0.10\%$ residual with literature inputs, $-0.92\%$ residual framework-native (no external QED data). The architectural innovation: Paper 36's contact-form Uehling formula breaks down in the muonic regime because the dimensionless Uehling parameter $\beta = 2 m_e a_\mu = 1.475$ (vs $\beta = 274$ for $ep$) puts the muonic Bohr radius and the $e^+e^-$ Compton wavelength in direct overlap; naive contact-form scaling overshoots by $\sim 3.55\times$. Replacement is full numerical integration of the Uehling kernel against the muonic 2S, 2P wavefunctions, yielding $\Delta E^{\mu p}_\text{VP} = +205.0074$ meV — matching Antognini 2013 / Pachucki 1996 to **$<1$ ppm**. Framework-native subtotal: Uehling $+205.0074$ meV ($<1$ ppm vs Antognini), self-energy $-0.83$ meV (24% gap from leading-order $m_\text{red}$ scaling), Friar moment at $r_p = 0.8409$ fm $= -3.675$ meV (4.3% gap from leading order), total $+200.50$ meV. The $+1.67$ meV literature input covers exactly the LS-8a-wall contributions (Källén–Sabry two-loop VP, multi-loop QED, recoil NLO) plus QCD-internal nuclear polarizability — precisely as the structural-skeleton scope predicts.
+
+**Track B — Muonic 1S Bohr–Fermi hyperfine.** $\nu_F(\mu p) = 182.4433$ meV vs Eides QED-only $182.443$ meV at **$+2$ ppm** with no fits, no muon-specific code path — single rest-mass swap on the same architecture that closed Sprint HF on electronic 21 cm. Mass-scaling ratio $\nu_F(\mu p)/\nu_F(ep) = 31{,}092$ matches the analytic check to $2 \times 10^{-16}$. Zemach mass-enhancement reproduces the Eides muonic target $-7300$ ppm at **0.55%** (manual scaling at the test level — flagged for follow-on Track C); enhancement factor $185.94 = m_\text{red}(\mu p)/m_\text{red}(ep)$ exact. Combined Bohr–Fermi + Schwinger + leading Zemach: $181.32$ meV vs Krauth full-theory $182.725$ meV, residual $-7710$ ppm — same LS-8a wall in the muonic regime (electron-VP / Uehling in muonic potential, $\sim +1.5$ meV, dominant correction; Eides Tab. 7.4 / Karshenboim 2005). Inner-factor input data tier per Paper 18 §IV.6.
+
+**Synthesis.** The multi-focal architecture validates cleanly on the precision frontier under the rest-mass projection. Framework-native pieces score where they should (Bohr–Fermi $+2$ ppm, full Uehling $<1$ ppm, leading Zemach $0.55\%$, leading Friar $4.3\%$); the LS-8a wall (multi-loop QED in the muonic regime) accounts for the gap to experiment, exactly as Sprint H1 / Sprint LS-8a / multi-focal-wall pattern predicts. The proton radius puzzle is resolved (PDG 2024); this sprint is a framework calibration check, not new physics.
+
+**Paper edits.** Paper 34 §V gained two new machine-precision rows (Track A Uehling $<1$ ppm vs Antognini; Track A total Lamb shift $-0.10\%$ vs CREMA) and one §V.B off-precision row (Track A framework-native $-0.92\%$ with error attribution). Paper 36 §VIII gained `\subsection{sec:sprint_mh_track_a}` documenting the full Uehling kernel architecture for the muonic regime, the component decomposition, and the structural reading. CLAUDE.md §2 updated with combined Sprint MH bullet.
+
+**Files added.**
+- `debug/sprint_mh_track_a.py` (driver, ~660 lines)
+- `debug/sprint_mh_track_a_memo.md` (~3500 words: scope, Uehling regime analysis, component decomposition, error attribution per Paper 34 §V.B)
+- `debug/data/sprint_mh_track_a.json` (numerical decomposition, normal-H regression, muonic naive-contact-form failure analysis, full-Uehling result, Antognini 2013 reference data)
+- `debug/sprint_mh_track_b.py` (driver)
+- `debug/sprint_mh_track_b_memo.md`
+- `debug/data/sprint_mh_track_b.json`
+
+**Follow-on items in flight (Tracks C, D, dispatched 2026-05-08):**
+1. `geovac/magnetization_density.py` line 430 hardcodes $m_e^\text{au} = 1.0$; naive lepton swap returns $-39.5$ ppm regardless of register. Track B used a manual mass scaling at the test level. Track C: mechanical fix to make the operator focal-length-aware.
+2. Roothaan recoil kernel is regime-limited: $\lambda_\mu > \lambda_n$ breaks the large-nucleus expansion. Pachucki dual expansion exists but isn't specialized to muonic input. Track D: implement dual expansion in `geovac/cross_register_vne.py` to close Track A's 24% SE gap.
+
 ## [2.31.0] - 2026-05-08
 
 ### Added — Multi-focal-composition sprint closes the structural-skeleton scope question

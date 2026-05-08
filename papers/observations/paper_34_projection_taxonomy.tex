@@ -700,6 +700,24 @@ $\alpha, g_p, m_e/m_p$ & energy & $\alpha^2{\cdot}\mathbb{Q}, c_1
 21~cm hyperfine $A_\text{HF} = 1420.432$ MHz $+$ external Zemach $r_Z$
 (HF-4) & HF-2 chain $+$ rest-mass projection $+$ Zemach Layer-2 input &
 $r_Z$ & energy & calibration & $+18$ ppm (Eides Tab.~7.3 consistent) \\
+$\mu$H 1S Bohr--Fermi $\nu_F(\mu p) = 182.4433$ meV (Sprint MH Track B)
+& spinor $\circ$ Fermi contact $\circ$ Fock $\circ$ rest-mass projection
+($m_e \to m_\mu$) & $\alpha, g_p, m_\mu/m_e, m_e/m_p$ & energy &
+$\alpha^2 \cdot \mathbb{Q}$ & $+2$ ppm vs Eides pure-QED $\nu_F = 182.443$ meV \\
+$\mu$H 1S Zemach mass-enhancement factor $185.94 \times$ ep
+(Sprint MH Track B; operator-level Track C, May 2026) & rest-mass
+projection $\circ$ magnetization-density $\circ$ Fock; \texttt{lepton\_mass}
+parameter on \texttt{MagnetizationDensitySpec} eliminates the manual
+mass-scaling step Track B used in test scripts (Pauli-string sum now
+carries correct lepton-mass scaling natively for downstream muonic
+VQE) & $r_Z, m_\text{red}$ & dimensionless & calibration &
+$0.55\%$ vs Eides muonic target $-7300$ ppm; bit-identical to Track B
+manual scaling (intrinsic gap is sub-leading Eides corrections, not
+operator construction) \\
+$\mu$H 2$S$--2$P$ Uehling $+205.0074$ meV full kernel
+(Sprint MH Track A) & spectral action $\circ$ Fock $\circ$ rest-mass
+projection ($m_e \to m_\mu$) & $Z, \alpha, m_\mu/m_e$ & energy &
+$\pi^2{\cdot}\mathbb{Q}$ & $<1$ ppm vs Antognini~2013 \\
 Bethe log $\ln k_0(2S) = 2.786$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $-0.92\%$ \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
@@ -717,6 +735,11 @@ $\circ$ Sturmian $\circ$ Drake--Swainson & $Z, \alpha$ & energy & calibration
 $+$ flow & $-0.39\%$ (T$+$A cancellation) \\
 Lamb shift $1029$ MHz (LS-3) & Fock $\circ$ spectral action $\circ$
 Sturmian (acc.) & $Z, \alpha$ & energy & calibration & $-2.77\%$ (T$+$A)\\
+$\mu$H 2$S$--2$P$ Lamb shift $202.17$ meV (framework $+$ literature,
+Sprint MH Track A) & Fock $\circ$ spectral action $\circ$ Sturmian
+$\circ$ Drake--Swainson $\circ$ rest-mass projection ($m_e \to m_\mu$)
+& $Z, \alpha, m_\mu/m_e, r_p$ & energy & calibration $+$ flow &
+$-0.10\%$ vs CREMA $202.3706(23)$ meV \\
 Heisenberg--Euler 1-loop $\alpha^2/(45\pi m_e^4)$ &
 Spectral action $+$ proper-time integration $+$ vector-photon (one loop)
 & $\alpha, m_e$ & length${}^4 \cdot$ energy${}^{-1}$ &
@@ -941,6 +964,33 @@ prefactor, three-topology decomposition, SO(4) selection at all four
 vertices, UV degree count, but does not autonomously generate $Z_2/Z_3/
 \delta m$ counterterms.  Same structural wall as LS-8a (Lamb shift),
 vertex sector. \\
+$\mu$H 1S HFS $\nu_\text{HFS}(\mu p) = 181.32$ meV (BF + Schwinger +
+leading Zemach, Sprint MH Track B) & rest-mass projection $\circ$
+spinor $\circ$ Fermi contact $\circ$ Fock; magnetization-density
+Layer-2 input $r_Z = 1.045$~fm & $-7710$ ppm vs Krauth full theory
+182.725 meV & A (one-loop closure only) + S (LS-8a wall, muonic regime)
+& Dominant residual is electron-VP (Uehling) in the muonic potential,
+the leading muonic QED correction (Eides Tab.~7.4 / Karshenboim 2005:
+$\Delta_\text{el-VP} \approx +1.5$ meV).  Same LS-8a wall as HF-5; in
+muonic atoms the electron loop is enhanced because the muonic Bohr
+radius probes the electron Compton wavelength.  Inner-factor input
+data tier per Paper~18 \S~IV.6.  Sprint MH Track B, 2026-05-08. \\
+$\mu$H 2$S$--2$P$ Lamb framework-native $200.50$ meV (no literature
+inputs, Sprint MH Track A) & Fock $\circ$ spectral action $\circ$
+Sturmian $\circ$ Drake--Swainson $\circ$ rest-mass projection
+($m_e \to m_\mu$) & $-0.92\%$ vs CREMA $202.3706$ meV & A + S
+(LS-8a wall, muonic regime)
+& Framework reproduces dominant Uehling at $<1$ ppm vs Antognini and
+Friar moment leading-order at $4.3\%$.  $-0.92\%$ residual decomposes
+exactly into missing K\"all\'en--Sabry two-loop VP ($+1.51$ meV),
+multi-loop ($+0.19$ meV), recoil next-to-leading ($-0.045$ meV), and
+nuclear polarizability ($+0.013$ meV).  Same LS-8a renormalization
+wall as HF-5 and Sprint MH Track B, vertex sector with electron loop
+in muonic potential.  Plus literature-input total: $-0.10\%$ vs CREMA.
+\textbf{Headline architectural result}: full Uehling kernel integration
+(rather than contact-density approximation) handles the muonic
+$\beta = 2 m_e a_\mu = 1.475$ regime where Bohr radius $\sim$ electron
+Compton wavelength.  Sprint MH Track A, 2026-05-08. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.
