@@ -38,6 +38,9 @@ from geovac.cross_center_screened_vne import (
     compute_screened_cross_center_vne,
     _detect_core_type,
 )
+from geovac.phillips_kleinman_cross_center import (
+    compute_pk_cross_center_barrier,
+)
 
 
 def _get_block_geometry(spec: MolecularSpec) -> List[Dict[str, Any]]:
@@ -407,6 +410,8 @@ def build_balanced_hamiltonian(
     L_max: int = 2,
     verbose: bool = False,
     screened_cross_center: bool = False,
+    pk_cross_center: bool = False,
+    pk_E_valence_ref: float = 0.0,
 ) -> Dict[str, Any]:
     """
     Build a balanced coupled Hamiltonian: all four interaction types, no PK.
@@ -446,6 +451,23 @@ def build_balanced_hamiltonian(
         motivated this option (Phase B-W1c-diag, May 2026): production
         cross-center V_ne uses bare Z_nuc regardless of frozen core, leading
         to ~10x overattraction for second-row hydrides (NaH, MgH2, HCl, ...).
+    pk_cross_center : bool, optional
+        If True, add Phillips-Kleinman-class barrier on the partner-side
+        valence orbitals against the off-center frozen core. This is the
+        W1b-residual closure named in the Phase C-W1c memo (May 2026):
+        the screened V_ne reduces the cross-V_ne magnitude but leaves a
+        residual overattraction because the partner valence orbital is
+        not orthogonal to the off-center frozen-core orbitals (Pauli
+        exclusion / kinetic-energy repulsion). The PK barrier is the
+        operator approximation of strict Schmidt orthogonalization,
+        adding `sum_c (E_v - E_c) S_pc S_cq` to h1 in the partner block.
+        Auto-detects the frozen core from the off-center nuclear charge.
+        For first-row off-center nuclei (Z<=10) auto-detects no core and
+        reverts bit-exactly to no PK (zeros). Default False.
+    pk_E_valence_ref : float, optional
+        Valence reference energy E_v in (E_v - E_c). Default 0.0
+        ("absolute PK", purely repulsive since E_c < 0). Only used if
+        pk_cross_center is True.
 
     Returns
     -------
@@ -636,6 +658,66 @@ def build_balanced_hamiltonian(
                   f"trace={d['trace']:.4f}")
 
     # ------------------------------------------------------------------
+    # 3b. Add Phillips-Kleinman cross-center barrier (W1b-residual closure)
+    # ------------------------------------------------------------------
+    h1_pk_cross = np.zeros((M, M))
+    pk_count = 0
+    pk_details: List[Dict[str, Any]] = []
+    if pk_cross_center:
+        for sb in sub_blocks:
+            orb_pos = np.array(sb_positions.get(sb['label'], (0.0, 0.0, 0.0)))
+
+            for nuc in nuclei_list:
+                nuc_pos_3d = np.array(nuc['position'])
+                displacement = nuc_pos_3d - orb_pos
+                R_AB = float(np.linalg.norm(displacement))
+
+                # Skip same-center
+                if R_AB < 1e-10:
+                    continue
+                # Only frozen-core off-center nuclei contribute
+                if _detect_core_type(nuc['Z']) is None:
+                    continue
+
+                direction = tuple(displacement / R_AB)
+                Z_orb = sb['Z_orb']
+                Z_nuc = nuc['Z']
+                off = sb['offset']
+                states = sb['states']
+
+                pk_matrix = compute_pk_cross_center_barrier(
+                    Z_orb, states, Z_nuc, R_AB,
+                    E_valence_ref=pk_E_valence_ref,
+                    direction=direction,
+                )
+                n_states = len(states)
+                nz = 0
+                for i in range(n_states):
+                    for j in range(n_states):
+                        if abs(pk_matrix[i, j]) > 1e-15:
+                            h1_pk_cross[off + i, off + j] += pk_matrix[i, j]
+                            nz += 1
+                pk_count += nz
+                pk_details.append({
+                    'sub_block': sb['label'],
+                    'Z_orb': Z_orb,
+                    'Z_nuc': Z_nuc,
+                    'R_AB': R_AB,
+                    'n_nonzero': nz,
+                    'max_magnitude': float(np.max(np.abs(pk_matrix))),
+                    'trace': float(np.trace(pk_matrix)),
+                })
+
+        h1_balanced = h1_balanced + h1_pk_cross
+        if verbose:
+            print(f"[balanced] PK cross-center barrier terms: {pk_count}")
+            print(f"[balanced] PK trace (total): {np.trace(h1_pk_cross):.4e} Ha")
+            for d in pk_details:
+                print(f"  PK {d['sub_block']} <-- Z_nuc={d['Z_nuc']}: "
+                      f"{d['n_nonzero']} terms, max={d['max_magnitude']:.4e}, "
+                      f"trace={d['trace']:.4e}")
+
+    # ------------------------------------------------------------------
     # 4. Build fermion operator and JW transform
     # ------------------------------------------------------------------
     fermion_op = build_fermion_op_from_integrals(
@@ -696,10 +778,13 @@ def build_balanced_hamiltonian(
         'cross_block_eri_count': cross_block_eri_count,
         'cross_vne_count': cross_vne_count,
         'cross_vne_details': cross_vne_details,
+        'pk_cross_center_count': pk_count,
+        'pk_cross_center_details': pk_details,
         'h1': h1_balanced,
         'h1_balanced': h1_balanced,
         'h1_no_pk': h1_no_pk,
         'h1_cross_vne': h1_cross_vne,
+        'h1_pk_cross': h1_pk_cross,
         'h1_pk': h1_pk,
         'eri': eri_balanced,
         'qubit_op': qubit_op,

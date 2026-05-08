@@ -1,0 +1,54 @@
+{
+  "step_1_bohr_fermi_dirac": {
+    "A_hf_Ha": 6.769077428691499e-07,
+    "A_hf_MHz": 4453.838991586364,
+    "m_red": 0.9951869458342687,
+    "experimental_MHz": 4463.302764999999,
+    "residual_MHz": -9.463773413635863,
+    "residual_ppm": -2120.352105137968,
+    "karshenboim_fermi_formula_MHz": 4458.6,
+    "rel_diff_vs_karshenboim_pct": -0.1067825867679714,
+    "note": "BF strict Dirac (g=2 both) reproduces the bare Fermi formula. Misses experiment by ~-1100 ppm because Schwinger a_e and a_mu have not been applied."
+  },
+  "step_2_bohr_fermi_full_g": {
+    "A_hf_MHz": 4464.2027415231905,
+    "g_e_full": 2.00231930436256,
+    "g_mu_full": 2.0023318418,
+    "a_e_implicit": 0.001159652181280002,
+    "a_mu_implicit": 0.001165920899999895,
+    "experimental_MHz": 4463.302764999999,
+    "residual_MHz": 0.8999765231910715,
+    "residual_ppm": 201.63913822930442,
+    "note": "Full g-factors incorporate a_e and a_mu to all orders. This is BF + a_lepton + a_nucleus simultaneously (multiplicative in g_lepton/2 and g_nucleus/2 factors)."
+  },
+  "step_3_bohr_fermi_plus_schwinger": {
+    "a_e_one_loop": 0.0011614097328884378,
+    "a_mu_one_loop": 0.0011614097328884378,
+    "a_e_codata": 0.00115965218128,
+    "a_mu_codata": 0.00116592089,
+    "rel_diff_a_e_schwinger_vs_codata_pct": 0.15155851356204186,
+    "multiplicative_factor": 1.0023241683383446,
+    "A_hf_MHz_BF_dirac_x_(1+a_e)(1+a_mu)": 4464.190463154693,
+    "experimental_MHz": 4463.302764999999,
+    "residual_MHz": 0.8876981546936804,
+    "residual_ppm": 198.8881779777,
+    "note": "Schwinger one-loop asymptote for both leptons. This is the frameworks native QED contribution at leading order."
+  },
+  "step_4_mass_rescaling_sanity": {
+    "h_21cm_BF_strict_residual_ppm": 531.0,
+    "mu_hfs_BF_dirac_residual_ppm": -2120.352105137968,
+    "difference_ppm": -2651.352105137968,
+    "note": "Hydrogen 21cm BF strict (g_e=2, g_p=5.585) is +531 ppm. Mu HFS BF strict (g_e=2, g_mu=2) is at residual_dirac_ppm. The difference is structurally g-factor convention; the multi-focal architecture itself is consistent across the swap."
+  },
+  "step_5_final": {
+    "framework_native_MHz": 4464.190463154693,
+    "framework_native_residual_MHz": 0.8876981546936804,
+    "framework_native_residual_ppm": 198.8881779777,
+    "experimental_Liu_1999_MHz": 4463.302764999999,
+    "experimental_uncertainty_Hz": 53.0,
+    "karshenboim_2005_theory_total_MHz": 4463.302867,
+    "karshenboim_total_corrections_MHz": 4.702866999999969,
+    "framework_native_minus_karshenboim_corr_MHz": 5.59046315469277,
+    "note_residual_decomposition": "Framework-native = BF Dirac x (1+a_e)(1+a_mu). Residual vs experiment is the Layer-2 input: alpha^2(Zalpha) multi-loop QED (~+0.36 MHz), alpha(Zalpha)^2 (~-0.05 MHz), NLO recoil m_e/m_mu (~+0.78 MHz), hadronic VP (~+0.0007 MHz). These are LS-8a + cross-register-recoil, both OUTSIDE the framework's autonomous generation: the wall sits below leading-order precision."
+  }
+}

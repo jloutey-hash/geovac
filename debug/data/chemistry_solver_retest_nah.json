@@ -1,0 +1,67 @@
+{
+  "summary": "NaH balanced coupled FCI with W1c on/off (Phase C-W1c residual orthogonality wall test, May 2026)",
+  "verdict": "W1c-residual wall CONFIRMED: NaH PES still monotonically descending under screened=True; cross-V_ne reduction 17.5x but binding NOT recovered",
+  "system": {
+    "molecule": "NaH",
+    "max_n": 2,
+    "n_electrons": 2,
+    "Q": 20,
+    "frozen_core": "[Ne]",
+    "R_eq_exp": 3.566
+  },
+  "screened_off_bare": {
+    "label": "bare cross-V_ne (Sprint 7 baseline)",
+    "R_grid": [2.5, 3.0, 3.5, 4.0, 5.0, 7.0, 10.0],
+    "E_total": [-171.096687, -169.973401, -169.198682, -168.631447,
+                -167.751838, -166.298770, -164.852546],
+    "V_NN_plus_E_core": [-161.4590, -161.5257, -161.5733, -161.6090,
+                         -161.6590, -161.7161, -161.7590],
+    "E_electronic": [-9.6377, -8.4477, -7.6254, -7.0224,
+                     -6.0928, -4.5827, -3.0935],
+    "diagnosis": "monotonically descending PES, R_min at edge (R=2.5)",
+    "edge_to_dissoc_gap_Ha": -6.244,
+    "edge_to_dissoc_gap_kcalmol": -3917
+  },
+  "screened_on_w1c": {
+    "label": "W1c FrozenCore-aware screening",
+    "R_grid": [2.5, 3.0, 3.5, 4.0, 5.0, 7.0, 10.0],
+    "E_total": [-163.316039, -163.226469, -163.165566, -163.121988,
+                -163.064443, -163.003205, -162.959307],
+    "V_NN_plus_E_core": [-161.4590, -161.5257, -161.5733, -161.6090,
+                         -161.6590, -161.7161, -161.7590],
+    "E_electronic": [-1.8570, -1.7008, -1.5923, -1.5130,
+                     -1.4054, -1.2871, -1.2003],
+    "diagnosis": "still monotonically descending PES, R_min at edge (R=2.5); BINDING NOT RECOVERED",
+    "edge_to_dissoc_gap_Ha": -0.357,
+    "edge_to_dissoc_gap_kcalmol": -224
+  },
+  "w1c_reduction_factor": 17.5,
+  "phase_c_diagnostic_quote": "5.4-6.0x cross-V_ne reduction at NaH equilibrium",
+  "actual_attraction_reduction": "17.5x in PES descent magnitude (FCI-resolved, broader test than diagnostic single-R)",
+  "structural_finding": [
+    "The W1c closure REDUCES overattraction by ~17.5x but does NOT eliminate it.",
+    "The PES still descends monotonically toward small R under both bare and screened cross-V_ne.",
+    "This empirically confirms the W1c-residual orthogonality wall named in Phase C diagnostic memo.",
+    "The mechanism (H valence orbital ↔ [Ne] core orthogonality, Phillips-Kleinman-class) is operative",
+    "The wall sits BEYOND the Hartree screening of Z_eff(rho) that W1c implements."
+  ],
+  "comparison_to_lih_first_row": {
+    "lih_balanced_finds_internal_min": true,
+    "lih_R_eq_at_max_n_2": 3.227,
+    "nah_balanced_finds_internal_min": false,
+    "interpretation": "First-row LiH binds (Track CD ships at 7% R_eq error). Second-row NaH does not bind under either bare or screened W1c. The architectural distinction is: first-row uses an explicit core block in the FCI sector (electrons resolve their own orthogonality), while second-row uses a frozen-core potential (orthogonality must be enforced externally and W1c does not yet do so)."
+  },
+  "implications": [
+    "The next chemistry-direction sprint should attack the W1c-residual orthogonality wall directly.",
+    "Phillips-Kleinman-class projection on the H valence orbital against the [Ne] core (in cross-center geometry) is the mechanical fix.",
+    "This is independent of the rest of the multi-focal closures: W1a/W1b are nuclear-electronic, W2b is theoretical NCG, W1c is a no-op for first-row.",
+    "The W1c-residual orthogonality wall is the SINGLE remaining engineering closure for second-row chemistry."
+  ],
+  "compute_budget": {
+    "per_r_screened_off_seconds": 0.2,
+    "per_r_screened_on_seconds": 0.3,
+    "total_seconds": 7.0,
+    "Q": 20,
+    "fci_dimension": 100
+  }
+}

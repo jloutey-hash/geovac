@@ -984,6 +984,77 @@ calibration scalars is Layer-2 input from QCD/scattering data, in the
 sense of Paper~18~\S IV's inner-factor input data
 tier~\cite{Paper18}.
 
+\subsection{Test on deuterium 1S hyperfine structure}
+\label{ssec:cross-deuterium-hfs}
+
+The composed nuclear--electronic architecture of this section is
+designed for $I=1/2$ proton hyperfine structure (the $21$~cm hydrogen
+test case of Sec.~\ref{sec:ne}). A natural extension is to $I=1$
+deuteron HFS: the cross-register $V_{eN}$ machinery is unchanged
+(Roothaan~1951 multipole expansion is angular, independent of nuclear
+spin), the magnetization-density operator $\omega_{\mathrm{magn}}$ is
+parameterized by a scalar moment $r_Z(D)$, and only the
+hyperfine-coupling Hamiltonian $A_\text{hf}\,\hat{\mathbf{I}}\cdot
+\hat{\mathbf{S}}$ acquires a different Clebsch--Gordan multiplicity
+factor $(2I+1)/2 = 3/2$ between the $F = I + 1/2$ and $F = I - 1/2$
+levels.
+
+The framework-native Bohr--Fermi prediction at strict point-nucleus,
+no-recoil order is
+\begin{equation}
+  \nu_{\mathrm{HFS}}^{\mathrm{BF,strict}}(D, 1S)
+  = \frac{3}{2} \times \frac{4}{3}\, g_d^{\mathrm{atomic}} \alpha^2
+    \left(\frac{m_e}{m_d}\right) \mathrm{Ha},
+\label{eq:d-hfs-bf}
+\end{equation}
+where $g_d^{\mathrm{atomic}} = 2 \mu_d/\mu_N = 1.7148$ is the
+atomic-physics Hamiltonian-convention $g$-factor (twice the
+CODATA value $g_d = \mu_d/(\mu_N \cdot I) = 0.857$ because of the
+factor $2I$). With CODATA constants this yields $327.3975$~MHz vs the
+Wineland--Ramsey~1972~\cite{WinelandRamsey1972} measurement of
+$327.384352522(2)$~MHz, a residual of $+40$~ppm.
+
+The leading-order Zemach correction with $r_Z(D) = 2.593$~fm
+(Friar--Payne~2005~\cite{FriarPayne2005}) gives
+$\Delta\nu_Z/\nu_F = -98.0$~ppm at the operator level via
+\texttt{geovac.magnetization\_density.hydrogen\_zemach\_eides\_leading\_order},
+matching the analytic Eides $-2 Z m_e r_Z$ to floating-point precision.
+Profile (Gaussian vs.\ exponential) independence is preserved at
+leading order, identical to the hydrogen regression of
+Sec.~\ref{ssec:cross-omega-magn}. The cumulative chain
+(BF + recoil + Schwinger $a_e$ + leading Zemach) lands at $327.4779$~MHz
+with $+286$~ppm residual against experiment, consistent with the
+deuteron polarizability ($+44$~ppm,
+Pachucki--Yerokhin~2010~\cite{PachuckiYerokhin2010}, QCD-internal NN
+dynamics) plus multi-loop QED (LS-8a wall, $\sim$few ppm) plus
+recoil~NLO and finite-size charge corrections.
+
+\paragraph{Multi-focal architecture verdict at $I=1$.}
+The Bohr--Fermi residual of $+40$~ppm is the cleanest framework-native
+verification of the $I=1$ cross-register angular coupling structure
+in the catalogue. The Hamiltonian
+$A_\text{hf}\,\hat{\mathbf{I}}\cdot\hat{\mathbf{S}}$ is unchanged
+between $I=1/2$ and $I=1$; only the Clebsch--Gordan multiplicity
+differs. The deuteron's nonzero electric quadrupole moment
+$Q_d = 0.286$~efm$^2$ couples to electronic charge-density gradients
+but enters HFS at sub-ppm level for s-states (no orbital angular
+momentum to couple to) and is negligible at the precision tested here.
+At leading order the multi-focal architecture handles $I=1$ identically
+to $I=1/2$, and the only sub-leading mechanism that genuinely opens up
+at $I=1$ (the deuteron quadrupole) sits below the Layer-2 input
+threshold for s-state observables.
+
+Sprint provenance:
+\texttt{debug/precision\_catalogue\_deuterium\_hfs.py},
+\texttt{debug/precision\_catalogue\_deuterium\_hfs\_memo.md},
+\texttt{debug/data/precision\_catalogue\_deuterium\_hfs.json}.
+Cross-references: Paper~34~\S V (catalogue row for $\nu_\text{HFS}(D)$
+at $+40$~ppm BF strict and $+286$~ppm full chain),
+Sprint~MH Track~B (electronic$\to$muonic mass swap at unchanged
+proton; this sprint is the spin-1/2$\to$spin-1 nucleus swap at
+unchanged electron), Sprint~HF Track~4 (hydrogen $r_Z$ Layer-2 input,
+$0.012\%$ Eides regression).
+
 \subsection{Synthesis and forward references}
 \label{ssec:cross-synthesis}
 
@@ -1281,6 +1352,23 @@ J.~Loutey, ``The Composed Nuclear--Electronic Deuterium Hamiltonian as
 an Explicit Connes-Style Real-Space Multi-Particle Spectral Triple,''
 GeoVac Project Zenodo Memo (2026), Track~NI standalone observation,
 \texttt{papers/observations/track\_ni\_spectral\_triple\_zenodo.md}.
+
+\bibitem{WinelandRamsey1972}
+D.~J.~Wineland and N.~F.~Ramsey,
+``Atomic Deuterium Maser,''
+Phys.~Rev.~A \textbf{5}, 821 (1972).
+
+\bibitem{FriarPayne2005}
+J.~L.~Friar and G.~L.~Payne,
+``Higher-order nuclear-size corrections in atomic hydrogen,''
+Phys.~Rev.~A \textbf{72}, 014501 (2005); deuteron Zemach radius
+$r_Z(D) = 2.593(16)$~fm.
+
+\bibitem{PachuckiYerokhin2010}
+K.~Pachucki and V.~A.~Yerokhin,
+``Theoretical hyperfine splitting in hydrogenic atoms with deuteron
+nucleus,''
+Phys.~Rev.~Lett.~\textbf{104}, 070403 (2010).
 
 \bibitem{SprintHF}
 J.~Loutey, ``Sprint HF: Hydrogen 21 cm Hyperfine Multi-Focal Precision

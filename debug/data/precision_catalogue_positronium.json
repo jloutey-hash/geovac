@@ -1,0 +1,83 @@
+{
+  "system": "Ps = e- e+",
+  "experiment_Hz": 203389100000.0,
+  "experiment_uncertainty_Hz": 740000.0,
+  "experiment_GHz": 203.3891,
+  "step_1_fermi_contact_Dirac": {
+    "g_l": 2.0,
+    "g_p": 2.0,
+    "m_red": 0.5,
+    "nu_Fermi_contact_Hz": 116792360361.0146,
+    "nu_Fermi_contact_GHz": 116.79236036101462,
+    "nu_canonical_(1/3)_m_c2_alpha4_Hz": 116792360361.01462,
+    "nu_canonical_(1/3)_m_c2_alpha4_GHz": 116.79236036101463,
+    "framework_minus_canonical_Hz": -1.52587890625e-05,
+    "agreement_pct": 1.3064886277949903e-14
+  },
+  "step_1_fermi_contact_full_g": {
+    "g_l": 2.00231930436256,
+    "g_p": 2.00231930436256,
+    "m_red": 0.5,
+    "nu_Fermi_contact_Hz": 117063394453.48346,
+    "nu_Fermi_contact_GHz": 117.06339445348347,
+    "nu_canonical_(1/3)_m_c2_alpha4_Hz": 116792360361.01462,
+    "nu_canonical_(1/3)_m_c2_alpha4_GHz": 116.79236036101463,
+    "framework_minus_canonical_Hz": 271034092.46884155,
+    "agreement_pct": 0.23206491557414652
+  },
+  "step_2_annihilation": {
+    "nu_annih_Hz": 87594270270.76097,
+    "nu_annih_GHz": 87.59427027076097,
+    "fraction_of_LO": 0.42857142857142855,
+    "mechanism": "virtual e+e- annihilation, second-quantized loop, NOT framework-native",
+    "layer": "Layer-2 input (LS-8a-class)"
+  },
+  "step_3_LO_total": {
+    "value_Hz": 204386630631.77563,
+    "value_GHz": 204.38663063177566,
+    "experiment_GHz": 203.3891,
+    "residual_Hz": 997530631.7756348,
+    "residual_MHz": 997.5306317756347,
+    "residual_ppm": 4904.543221714609,
+    "residual_pct": 0.4904543221714609
+  },
+  "step_4_higher_order_qed": {
+    "one_loop_alpha5_correction_Hz": -2272733415.8751187,
+    "one_loop_alpha5_correction_GHz": -2.272733415875119,
+    "net_correction_observed_Hz": -997530631.7756348,
+    "net_correction_observed_GHz": -0.9975306317756348,
+    "diff_one_loop_vs_observed_Hz": -1275202784.099484,
+    "comment": "One-loop alpha^5 correction (-8/9 m_e c^2 alpha^5) overestimates the net downward shift; higher-order alpha^6, alpha^7 terms partly cancel. Czarnecki et al. 2000 PRA 61, 052103 closes the gap to ppm-level vs Ps-HFS experiment."
+  },
+  "step_5_multifocal_check": {
+    "system": "Ps = e- e+",
+    "lam_lepton": 0.5,
+    "lam_nucleus": 0.5,
+    "ratio_lam_lepton_over_lam_nucleus": 1.0,
+    "Roothaan_multipole_L_max_termination": "L_max = 2*l_max (Gaunt selection, preserved)",
+    "asymptotic_acceleration_available": false,
+    "structural_note": "Roothaan kernel converges symmetrically; no asymptotic expansion advantage. Reduces to standard symmetric two-body Coulomb integral (Roothaan 1951 original case)."
+  },
+  "for_paper_34_catalogue": {
+    "framework_native_only": {
+      "value_GHz": 116.79236036101462,
+      "residual_GHz": -86.5967396389854,
+      "residual_pct": -42.57688324447347,
+      "error_code": "A",
+      "interpretation": "approximation order: missing annihilation channel (3/7 of LO)"
+    },
+    "framework_plus_layer2_LO": {
+      "value_GHz": 204.38663063177566,
+      "residual_GHz": 0.9975306317756463,
+      "residual_pct": 0.4904543221714665,
+      "error_code": "A",
+      "interpretation": "approximation order: missing multi-loop QED (LS-8a wall)"
+    }
+  },
+  "constants": {
+    "M_RED_PS": 0.5,
+    "M_E_C2_HZ": 1.235589963815349e+20,
+    "(7/12)_m_c2_alpha4_GHz": 204.38663063177566
+  },
+  "verdict": "POSITIVE_STRUCTURAL"
+}

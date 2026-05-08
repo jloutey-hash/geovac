@@ -707,6 +707,46 @@ For BeH$_2$, PK overcorrects: 27.4\% error in 4-electron FCI vs
 BeH$_2$ (304.7 vs 354.9~Ha).  See Paper~19 for the full resource
 census and convergence analysis.
 
+\subsection{Architectural note: two solvers, two drift signatures}
+\label{sec:two_solvers}
+
+The composed-geometry framework comprises two distinct PES solvers with
+different operating regimes and drift signatures, both of which appear
+under the umbrella name ``composed Hamiltonian'':
+
+\begin{enumerate}
+  \item \textbf{Level-4 PK-composed solver} (in
+    \texttt{geovac/composed\_diatomic.py}): the level-4
+    hyperspherical PES solver of Sec.~\ref{sec:results} that produces
+    the headline LiH 5.3\% $R_{\rm eq}$ error at $l_{\max} = 2$.
+    Its $R_{\rm eq}$ drift slope is
+    $+0.15$--$0.22$~bohr per unit $l_{\max}$, structural to PK
+    overcounting at higher angular channels.
+  \item \textbf{Balanced-coupled solver} (in
+    \texttt{geovac/balanced\_coupled.py}, with $n_e$-projected FCI
+    diagonalization in \texttt{geovac/coupled\_composition.py}):
+    the qubit-encoded Hamiltonian builder used for resource
+    benchmarking (Paper~14, Paper~20). The balanced architecture
+    replaces PK entirely with cross-block ERIs plus cross-center V$_{ne}$
+    via Shibuya--Wulfman multipole expansion (Paper~19). Its
+    $R_{\rm eq}$ drift slope is $+0.054$~bohr per unit $n_{\max}$,
+    a 3$\times$ improvement over the PK-composed solver.
+\end{enumerate}
+
+These are different solvers in different code paths with different
+working bases ($l_{\max}$-truncated hyperspherical channels vs.\
+$n_{\max}$-truncated single-center hydrogenic orbitals on each block).
+Phase~C ``W1c-aware'' multi-focal-composition closures (Paper~19,
+Sec.~\ref{sec:w1c_residual}) for $Z \geq 11$ frozen-core hydrides apply
+to the balanced-coupled path only; the PK-composed path is unaffected
+by them. Empirically, for first-row LiH at $n_{\max} = 2$, the W1c
+screening machinery is bit-exactly equivalent to the bare path
+(verified to $5 \times 10^{-14}$~Ha across a 5-point PES grid) because
+no [Ne]-style frozen core is present. The chemistry-solver upgrade
+already shipped at v2.0.39 (the balanced-coupled architecture itself);
+subsequent multi-focal-composition closures address second-row and
+heavier systems.
+
 \subsection{Outlook: the composition pattern for larger molecules}
 \label{sec:outlook}
 

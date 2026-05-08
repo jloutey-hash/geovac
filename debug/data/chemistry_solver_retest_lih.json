@@ -1,0 +1,64 @@
+{
+  "summary": "Chemistry-solver re-test, multi-focal Phase C architecture (May 2026)",
+  "verdict": "PERSISTS at Track CD level (+0.054 bohr/n_max); first-row no-op of Phase C closures",
+  "reference": {
+    "R_eq_exp": 3.015,
+    "E_min_lit": -8.071,
+    "D_e_lit": 0.092
+  },
+  "baseline_track_cd_v2_0_39": {
+    "n_max=2": {"R_eq": 3.226, "E_min": -7.924, "R_err_pct": 7.0, "E_err_pct": 1.8},
+    "n_max=3": {"R_eq": 3.280, "E_min": -8.055, "R_err_pct": 8.8, "E_err_pct": 0.20},
+    "drift_R_per_nmax": 0.053
+  },
+  "baseline_pk_composed_v2_0_32": {
+    "note": "Level-4 PK-composed solver (composed_diatomic.py), DIFFERENT solver from balanced coupled",
+    "l_max=2": {"R_eq_err_pct": 5.3, "drift_per_lmax": 0.18}
+  },
+  "v2_32_reproduction": {
+    "n_max=2_screened_off": {
+      "R_grid": [2.4, 2.7, 3.0, 3.3, 3.6],
+      "E_total": [-15.162678, -15.192712, -15.209117, -15.212221, -15.203243],
+      "E_core_offset_li": -7.2799,
+      "parabolic_fit_3pt": {
+        "R_eq": 3.227,
+        "E_min": -15.2127,
+        "E_min_track_cd_conv": -7.933,
+        "R_err_pct": 7.03,
+        "E_err_pct": 1.71
+      }
+    },
+    "n_max=2_screened_on": {
+      "R_grid": [2.4, 2.7, 3.0, 3.3, 3.6],
+      "E_total": [-15.162678, -15.192712, -15.209117, -15.212221, -15.203243],
+      "max_abs_diff_vs_off_Ha": 5e-14,
+      "bit_identical": true
+    },
+    "n_max=3_screened_on": {
+      "status": "in flight at memo time; expected: bit-identical to Track CD baseline (W1c is no-op for first-row LiH)",
+      "predicted_R_eq": 3.280,
+      "predicted_E_min": -8.055
+    }
+  },
+  "w1c_bit_identical_lih": {
+    "verified": true,
+    "max_abs_diff_Ha": 5e-14,
+    "n_grid_points": 5,
+    "interpretation": "Phase C-W1c diagnostic claim verified: cross_center_screened_vne._detect_core_type returns None for Z<11, screened path collapses to bare path bit-precisely"
+  },
+  "architectural_finding": [
+    "Multi-focal Phase C closures (W1a, W1b, W1c, W2b-easy) do NOT change the chemistry-solver output for first-row LiH/BeH2/H2O.",
+    "W1a, W1b live on the qubit nuclear-electronic two-register architecture (Track NI, Sprint MH).",
+    "W1c is structurally relevant only for second-row (Z>=11) systems with [Ne]+ frozen cores.",
+    "W2b-easy (Paper 39 tensor-product propinquity) is a theoretical-mathematical theorem, not a code change.",
+    "The chemistry-solver upgrade the framework received is the balanced-coupled construction itself (Track CD, v2.0.39, April 2026), which shipped BEFORE Phase C.",
+    "Track CD reduced the PK-composed wall (+0.18 bohr/l_max) to +0.054 bohr/n_max (3x improvement)."
+  ],
+  "implications": [
+    "The remaining R_eq drift is intrinsic to balanced coupled in the qubit basis at small n_max.",
+    "Single-center hydrogenic basis flexibility per block cannot resolve nuclear geometry to better than 7-9% at equilibrium.",
+    "Phase C closures are a no-op for first-row chemistry; the architectural upgrade for chemistry shipped in v2.0.39.",
+    "Recommended next test: NaH PES with screened=True + coupled_fci_energy (cheap, <5 min compute). Phase C D-PES regression confirmed 5.4-6.0x cross-V_ne reduction but couldn't compute binding.",
+    "Recommended speculative direction: multi-focal V_ee operator (e-e analog of W1a's e-N closure)."
+  ]
+}

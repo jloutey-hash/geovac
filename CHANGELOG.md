@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.33.0] - 2026-05-08
+
+### Added — Three-round precision catalogue extension (post-Sprint MH)
+
+Three rounds of multi-focal precision catalogue rows added to Paper 34, plus a chemistry-solver re-test arc and a CP² packing scoping investigation. Six precision tracks and two structural-scope tracks; all paper updates applied directly.
+
+**Round 1 (post-MH parallel triple):**
+- Track 1 — Muonium 1S-2S + Positronium 1S HFS: Mu at −0.11 ppm rest-mass rescaling (cleanest verification of Paper 34 §III.14 rest-mass projection); Ps with Layer-2 annihilation at +0.49% (verifies Roothaan multipole termination at λ_a = λ_b in equal-mass regime). Multi-focal architecture validated across the full mass hierarchy.
+- Track 2 — Chemistry solver re-test (LiH/NaH balanced coupled): no upgrade for first-row LiH (the v2.0.32 drift lives in `composed_diatomic.py`, not `balanced_coupled.py` — different solver); W1c-residual orthogonality wall empirically confirmed at NaH (17.5× cross-V_ne reduction under W1c, no binding recovery).
+- Track 3 — CP² packing scoping: clean negative; Paper 0 axioms ("binary distinguishability + 2D isotropy") are rank-1 specific, do not lift to rank-2 without becoming representation theory. W3 second-packing-axiom question structurally distinct from "packing on different geometry."
+
+**Round 2 (chemistry follow-up + 2 catalogue extensions):**
+- Phillips-Kleinman cross-center chemistry sprint: HONEST NEGATIVE. PK reduces NaH descent depth 14.6%, monotonic descent persists. Agent-named next target: replace Z_orb=1 hydrogenic basis on Na valence with FrozenCore Z_eff(r) Schrödinger eigenstates. New module `geovac/phillips_kleinman_cross_center.py` (~310 lines, 21/21 tests pass); `balanced_coupled.py` extended with `pk_cross_center` kwarg, bit-exact backward compat.
+- Mu 2S-2P Lamb shift: framework-native at +0.013% vs Karshenboim 2005 (cleanest Lamb-class result in catalogue); LS-8a wall sits *below* framework precision in m_red ≈ m_e regime (first such regime).
+- Deuterium 1S HFS: Bohr-Fermi at +40 ppm; multi-focal architecture leading-order I-independent (Roothaan multipole is angular content, not nuclear-spin content). Opens nuclear-spin axis with I=1 entry.
+
+**Round 3 (catalogue close-out, 2 tracks):**
+- Muonium 1S HFS: +199 ppm — cleanest LS-8a multi-loop isolation in catalogue (leptonic point-nucleus, no QCD budget); doubled Schwinger overshoot pattern (1+a_e)(1+a_μ) unique to muonium. Empirical LS-8a wall scale at α²(Zα) for HFS observables: ~200 ppm in clean isolation (Paper 35 Refined Prediction 1 quantitative anchor). Closes muonium triple (1S-2S, 2S-2P Lamb, 1S HFS).
+- Helium 2³P fine structure: 2 of 3 intervals sub-percent (P₀-P₁ −0.014%, P₀-P₂ −0.201%); P₁-P₂ at −2.62% is partial-cancellation amplification of same ~64 MHz absolute residual. **First multi-electron internal multi-focal entry.** Structural finding: Breit bipolar decomposition (k_1=0, k_2=2) direct + (k_1=1, k_2=1) exchange is angular-content-only — same mechanism as cross-register Roothaan termination, applied at internal layer.
+
+**Coverage matrix at v2.33.0 close: 7 systems sub-percent on framework-native parts.**
+- Mass hierarchy: H, μH, Mu, Ps (4 mass-ratio regimes)
+- Nuclear spin: I=1/2, I=1
+- Multi-focal kind: external cross-register, internal multi-electron
+- QED channel: Lamb shift, HFS, fine structure, transition
+
+**Paper updates (all applied directly):**
+- Paper 34 §V: +6 machine-precision rows; §V.B: +3 off-precision rows with error-source codes
+- Paper 36 §VIII: new subsections for Mu Lamb (`sec:sprint_mu_lamb`, ~80 lines) and Mu triple closure (`sec:muonium_triple_closure`, ~80 lines)
+- Paper 23 §VII: new subsection for D HFS test (~80 lines) + 3 bibliography entries (Wineland-Ramsey 1972, Friar-Payne 2005, Pachucki-Yerokhin 2010)
+- Paper 14 §V: He 2³P internal-multi-focal cross-reference paragraph
+- Paper 17 §6.10 (NEW): "Architectural note: two solvers, two drift signatures" — clarifies v2.0.32 PK-composed drift vs balanced-coupled drift signature (Track 2 retrospective fix)
+- Paper 19 (NEW subsection): "The W1c-residual orthogonality wall (second-row hydrides)" — full documentation of W1c, PK cross-center attempt, honest-negative, next-target diagnosis
+- CLAUDE.md §2: 8 sprint outcome paragraphs added
+- CLAUDE.md §3: 1 new failed-approaches row (PK cross-center honest negative)
+
+**Strategic decisions (PI):**
+- Chemistry arc paused at PI's instinct that "missing something" — diagnostic arc to be designed before next implementation sprint
+- CP² and higher-rank packing deprioritized with clean structural reason (rank-1 specificity)
+- Precision catalogue arc has consistent momentum; multi-focal architecture verified across all natural axes
+
+**Files added (no production geovac/ modifications beyond `phillips_kleinman_cross_center.py` and `balanced_coupled.py` kwarg extension):**
+- `geovac/phillips_kleinman_cross_center.py` (new, ~310 lines)
+- `tests/test_phillips_kleinman_cross_center.py` (21/21 pass)
+- 8 debug/precision_catalogue_*.{py,memo.md,json} sets
+- debug/cp2_packing_scoping_*, debug/chemistry_solver_retest_*, debug/pk_cross_center_*
+
+Tests: existing baseline preserved (NaH/LiH bit-exact regression on backward-compat kwargs); no production code regression.
+
 ## [2.32.1] - 2026-05-08
 
 ### Added — Sprint MH Track D: Pachucki dual expansion diagnostic + SE gap localization

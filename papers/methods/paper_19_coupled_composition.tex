@@ -803,6 +803,102 @@ step that PK partitioning demands.
 
 
 %% ========================================================================
+\subsection{The W1c-residual orthogonality wall (second-row hydrides)}
+\label{sec:w1c_residual}
+%% ========================================================================
+
+For $Z \geq 11$ second-row hydrides (NaH, MgH$_2$, HCl, ...), the
+composed-coupled framework treats the heavy atom's [Ne] core as
+``frozen'': the 10 core electrons are encoded only via the Hartree
+screening profile $Z_{\rm eff}^B(\rho)$ on the cross-center
+$V_{ne}$ multipole expansion, not as an explicit FCI block. This
+choice makes the qubit Hamiltonian tractable (NaH at $n_{\max} = 2$
+fits in $Q = 20$ qubits with 2 valence electrons), but it
+introduces two structurally separable walls:
+
+\paragraph{W1c (Hartree screening of cross-$V_{ne}$).}
+Without screening, the bare cross-$V_{ne}$ uses $Z_B = 11$ as if the
+[Ne] core were not there, leading to ${\sim}10\times$ over-attraction
+of the H valence orbital. Phase~C--W1c
+(\texttt{geovac/cross\_center\_screened\_vne.py}, May~2026) replaces
+the bare Coulomb $-Z_B/\rho$ with the screened tail
+$-Z_{\rm eff}^B(\rho)/\rho - \tilde\Phi^B(\rho)$ (Newton's
+shell-theorem decomposition), driven by the
+\texttt{neon\_core.FrozenCore} machinery. NaH PES at $n_{\max} = 2$:
+the cross-$V_{ne}$ magnitude is reduced by 5.4--6.0$\times$ across
+$R \in [1.5, 10]$~bohr, exactly matching the diagnostic prediction.
+
+\paragraph{W1c-residual (W1b-class orthogonality).}
+After W1c, NaH FCI energy descent is reduced from
+$-6.24$~Ha (bare) to $-0.36$~Ha (screened). The residual
+$0.36$~Ha overattraction at $R = 2.5$ bohr (still $4.8\times$
+deeper than the experimental NaH $D_e \approx 0.075$~Ha, with no
+internal PES minimum) is the named ``W1c-residual orthogonality
+wall'': the H valence orbital is non-orthogonal to the [Ne]-core
+orbitals on the heavy atom, and the framework does not enforce
+Pauli exclusion of the H valence basis against the frozen core
+beyond what Hartree screening captures.
+
+\paragraph{The Phillips--Kleinman cross-center engineering closure
+(negative result).}
+The named engineering closure for the W1c-residual is the
+cross-center analog of the same-center Phillips--Kleinman
+projection (Sec.~\ref{sec:relationship}; Paper~17,
+Eq.~(\ref{eq:Vpk}) for the same-center case). The implementation
+(\texttt{geovac/phillips\_kleinman\_cross\_center.py}, May~2026)
+adds the standard PK barrier
+$\Delta H_{pq}^{\rm PK} = \sum_c (E_v - E_c) S_{pc} S_{cq}$ to the
+H-block one-body Hamiltonian, with cross-center overlaps $S_{pc}$
+computed by 2D Gauss--Legendre $\times$ radial-grid quadrature
+in the H-orbital frame, real-SH azimuthal selection
+($m_p^{\rm signed} = m_c^{\rm signed}$) enforced exactly,
+and Clementi--Roetti HF eigenvalues $E_c$ for the [Ne]-core
+orbitals (Na: $E_{1s} = -40.479$~Ha, $E_{2s} = -2.797$~Ha,
+$E_{2p} = -1.518$~Ha).
+
+The result is HONEST NEGATIVE: PK cross-center reduces the
+W1c-residual descent from $0.357$~Ha to $0.305$~Ha
+(14.6\% improvement) at standard absolute-PK parameters
+($E_v = 0$, purely repulsive) but does NOT close the wall:
+NaH PES is still monotonically descending with no internal
+equilibrium minimum.
+
+\begin{center}
+\begin{tabular}{lcccc}
+\hline
+Configuration & $E_{\min}$~(Ha) & $R_{\min}$~(bohr) & Descent (Ha) & Bound? \\
+\hline
+bare ($V_{ne}$ unscreened, no PK)        & $-171.097$ & 2.5 & 6.244 & no \\
+W1c (screened, no PK)                    & $-163.316$ & 2.5 & 0.357 & no \\
+PK only (bare $V_{ne}$, with PK)         & $-170.949$ & 2.5 & 6.097 & no \\
+\textbf{W1c+PK (screened+PK)}            & \textbf{-163.264} & \textbf{2.5} & \textbf{0.305} & \textbf{no} \\
+\hline
+\end{tabular}
+\end{center}
+
+The decomposition shows W1c and PK are necessary engineering
+closures but not jointly sufficient: the residual ${\sim}290$~mHa
+overattraction lives in mechanisms beyond W1c+W1b, with candidate
+sources including (i) inner-core penetration physics that the
+screened multipole expansion handles correctly in form but may
+overestimate in magnitude near the unscreened nucleus,
+(ii) the hydrogenic $Z_{\rm orb} = 1$ basis on the heavy-atom
+valence side being qualitatively wrong (it is not the actual
+Na 3s orbital but a generic $Z_{\rm eff} = 1$ hydrogenic function),
+(iii) the cross-block ERI treatment between Na valence and H
+valence at mismatched effective charges. A proper basis on the
+heavy-atom valence side---e.g.\ radial Schr\"odinger eigenstates
+of the FrozenCore $Z_{\rm eff}(r)$ potential, available in
+\texttt{neon\_core.\_solve\_screened\_radial}---is the most
+likely next engineering target.
+
+The framework currently treats second-row chemistry-solver
+binding as an open architectural problem. The walls have been
+named and named-individually-closed-or-not at the engineering
+level (W1c yes, W1c-residual / W1b PK no, basis still open),
+but the joint closure does not yet produce a bound NaH PES.
+
+%% ========================================================================
 \section{Discussion}
 \label{sec:discussion}
 %% ========================================================================

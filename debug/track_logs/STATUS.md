@@ -1,6 +1,6 @@
 # GeoVac Track Status
 
-Last updated: 2026-03-28
+Last updated: 2026-05-08
 
 ---
 
@@ -209,3 +209,76 @@ None yet — all Tier 2 proposals are drop-in files awaiting PI approval.
 - Paper 18 2x2 grid: 4th cell (2nd-order x spinor-bundle) is degenerate with calibration (pi^{even}). Grid effectively 3-tier: operator order is the primary discriminant.
 - Fine-structure accuracy for multi-electron atoms requires Direction 3 (SS/SOO) — deferred.
 - Full gamma radial corrections for n_r>=1 states require Kramers-Pasternak recursion — deferred.
+
+---
+
+## Session Summary 2026-05-08 — Three-Round Precision Catalogue Extension (post-Sprint MH)
+
+### Tracks
+- Round 1 Track 1 (Mu 1S-2S + Ps HFS): completed POSITIVE
+- Round 1 Track 2 (chemistry re-test, LiH/NaH balanced coupled): completed; first-row no-op, second-row W1c-residual confirmed
+- Round 1 Track 3 (CP² packing scoping): completed CLEAN NEGATIVE; rank-1 specificity
+- Round 2 PK cross-center (NaH binding test): completed HONEST NEGATIVE
+- Round 2 Mu 2S-2P Lamb: completed POSITIVE +0.013%
+- Round 2 D 1S HFS: completed POSITIVE +40 ppm
+- Round 3 Mu 1S HFS: completed POSITIVE-WITH-NUANCE +199 ppm (cleanest LS-8a isolation)
+- Round 3 He 2³P fine structure: completed POSITIVE-PARTIAL (2 of 3 sub-percent)
+
+### Results
+
+**7 systems sub-percent on framework-native parts; 3+ axes covered:**
+
+| System | Channel | Framework | Reference | Residual |
+|:---|:---|:---|:---|:---|
+| Mu 1S-2S | transition | rest-mass rescale H | Mu-MASS Crivelli 2018 | −0.11 ppm |
+| Mu 2S-2P | Lamb shift | full Uehling + Drake-SW | Karshenboim 2005 | +0.013% |
+| Mu 1S HFS | hyperfine | BF × (1+a_e)(1+a_μ) | Liu 1999 | +199 ppm |
+| Ps 1S HFS | hyperfine | BF + Layer-2 annihilation | Ishida 2014 | +0.49% |
+| D 1S HFS | hyperfine | BF strict | Wineland-Ramsey 1972 | +40 ppm |
+| He 2³P₀-P₁ | fine struct | Breit-Pauli SO+SS+SOO | Pachucki/NIST | −0.014% |
+| He 2³P₀-P₂ | fine struct | Breit-Pauli SO+SS+SOO | Pachucki/NIST | −0.201% |
+
+**Coverage axes:** mass-hierarchy (H, μH, Mu, Ps); nuclear-spin (I=1/2, I=1); multi-focal-kind (external cross-register, internal multi-electron); QED-channel (Lamb shift, HFS, fine structure, transition).
+
+**Key structural products:**
+1. Internal multi-focal architecture (He 2³P) is angular-content-only — same mechanism as cross-register Roothaan termination
+2. Empirical LS-8a wall calibration: ~200 ppm at α²(Zα) for HFS observables in clean isolation (Mu HFS)
+3. CP² scoping: Paper 0 axioms rank-1 specific; W3 second-axiom question structurally distinct from "packing on different geometry"
+4. Chemistry arc: PK cross-center 14.6% incremental on top of W1c's 17.5×; binding not recovered; named target = FrozenCore Z_eff(r) Schrödinger basis on Na valence
+
+**Paper 34 row diff:** +6 §V machine-precision rows, +3 §V.B off-precision rows.
+
+### Files Modified
+
+- `papers/observations/paper_34_projection_taxonomy.tex` — 9 row additions across §V and §V.B
+- `papers/observations/paper_36_bound_state_qed.tex` — Mu Lamb subsection + Mu triple closure subsection (~160 lines new)
+- `papers/applications/paper_23_nuclear_shell.tex` — D HFS subsection (~80 lines) + 3 bibliography entries
+- `papers/core/paper_14_qubit_encoding.tex` — He 2³P internal-multi-focal cross-reference
+- `papers/core/paper_17_composed_geometries.tex` — §6.10 NEW "Architectural note: two solvers, two drift signatures"
+- `papers/methods/paper_19_coupled_composition.tex` — NEW subsection "W1c-residual orthogonality wall"
+- `geovac/balanced_coupled.py` — pk_cross_center kwarg added (bit-exact backward compat)
+- `CLAUDE.md` §1 (version v2.32.1 → v2.33.0), §2 (8 sprint paragraphs), §3 (1 failed-approach row)
+- `CHANGELOG.md` — v2.33.0 entry
+- `debug/track_logs/STATUS.md` — this session summary
+
+### Files Created
+
+- `geovac/phillips_kleinman_cross_center.py` (PK cross-center module, ~310 lines)
+- `tests/test_phillips_kleinman_cross_center.py` (21 tests, all pass)
+- `debug/precision_catalogue_muonium.{py,memo.md,json}`
+- `debug/precision_catalogue_positronium.{py,memo.md,json}`
+- `debug/precision_catalogue_muonium_lamb.{py,memo.md,json}`
+- `debug/precision_catalogue_deuterium_hfs.{py,memo.md,json}`
+- `debug/precision_catalogue_muonium_hfs.{py,memo.md,json}`
+- `debug/precision_catalogue_he_2_3p.{py,memo.md,json}`
+- `debug/cp2_packing_scoping_memo.md` + `debug/data/cp2_packing_scoping_results.json`
+- `debug/chemistry_solver_retest_lih*.{py,memo.md}` + `debug/chemistry_solver_retest_nah.{py,json}` + synthesis memo
+- `debug/pk_cross_center_nah.{py,json}` + `debug/pk_cross_center_synthesis_memo.md`
+- 6 new memory files (precision_catalogue_3rounds, internal_multifocal_angular_only, mu_hfs_ls8a_calibration, cp2_packing_rank1_specific, chemistry_arc_paused_w1c_residual, feedback_diagnostic_before_engineering)
+
+### Decisions
+
+- Multi-focal architecture verified across the full empirical-coverage matrix; precision catalogue arc has consistent momentum and is the durable evidence-producing direction.
+- Chemistry arc paused per PI: a "more focused diagnostic arc may be needed; still feels like there's a missing something." Diagnostic-only sprint to be designed before another implementation sprint. Pattern: 3+ accumulated negatives in one direction → diagnostic before engineering (see new feedback memory).
+- CP² and higher-rank packing closed cleanly as not packing-axiom directions; W3 second-packing-axiom question reframed as structurally distinct from "packing on different geometry" — about how parameters get values, not how a manifold gets cellular structure.
+- Mu HFS sets the empirical LS-8a wall scale (~200 ppm at α²(Zα) for HFS observables in clean isolation) — Paper 35 Refined Prediction 1 quantitative anchor.

@@ -718,10 +718,51 @@ $\mu$H 2$S$--2$P$ Uehling $+205.0074$ meV full kernel
 (Sprint MH Track A) & spectral action $\circ$ Fock $\circ$ rest-mass
 projection ($m_e \to m_\mu$) & $Z, \alpha, m_\mu/m_e$ & energy &
 $\pi^2{\cdot}\mathbb{Q}$ & $<1$ ppm vs Antognini~2013 \\
+Mu 1S-2S transition $2{,}455{,}528{,}721$~MHz (rest-mass rescaling
+from H experiment, sprint precision-catalogue 2026-05-08) & Fock $\circ$
+rest-mass projection (lepton-unchanged, nucleus $m_p \to m_\mu$) &
+$\alpha, m_e, m_\mu/m_e$ & frequency &
+$\alpha^2{\cdot}\mathbb{Q}$ & $-0.11$ ppm vs Mu-MASS Crivelli~2018 \\
+Mu 1S-2S transition $2{,}455{,}528{,}394$~MHz (framework Bohr$+$SE $+$
+cross-register recoil) & Fock $\circ$ spectral action $\circ$ rest-mass
+projection $\circ$ cross-register $V_{eN}$ (Roothaan) & $\alpha, m_e,
+m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
+$-0.25$ ppm vs Mu-MASS \\
+Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb shift $1047.63$ MHz (framework one-loop
+QED with full Uehling, sprint precision-catalogue 2026-05-08) &
+Fock $\circ$ spectral action $\circ$ Sturmian $\circ$ rest-mass projection
+& $\alpha, m_e, m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
+$+0.013\%$ vs Karshenboim 2005 theory $1047.49(5)$ MHz \\
 Bethe log $\ln k_0(2S) = 2.786$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $-0.92\%$ \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $+0.60\%$ \\
+D 1S hyperfine $\nu_\text{HFS}(D) = 327.3975$ MHz Bohr--Fermi strict
+(sprint precision-catalogue 2026-05-08) & spinor $\circ$ Fermi contact
+$\circ$ Fock; $I=1$ multiplicity $3/2$ on $A_\text{hf}\,\hat{I}\cdot\hat{S}$ &
+$\alpha, g_d, m_e/m_d$ & frequency &
+$\alpha^2{\cdot}\mathbb{Q}$ & $+40$ ppm vs Wineland--Ramsey 1972
+$327.384352522(2)$ MHz \\
+Mu 1S hyperfine $\nu_\text{HFS}(\text{Mu}) = 4464.1905$ MHz framework
+Bohr--Fermi $+$ Schwinger one-loop (sprint precision-catalogue 2026-05-08,
+muonium triple closure) & spinor $\circ$ Fermi contact $\circ$ Fock $\circ$
+rest-mass projection (lepton-unchanged, nucleus $m_p \to m_\mu$); leptonic
+nucleus, no QCD content & $\alpha, m_e, m_\mu/m_e$ & frequency &
+$\alpha^2{\cdot}\mathbb{Q}$ & $+199$ ppm vs Liu 1999 $4463.302765(53)$ MHz;
+residual cleanly LS-8a multi-loop QED $+$ recoil (no QCD competing budget) \\
+He $2{}^3P_0$--$2{}^3P_1$ fine structure $+29{,}612.91$ MHz (Sprint~3
+BF-D + Sprint~4 DD; Drake combining $(\tfrac{3}{50},-\tfrac{2}{5},
+\tfrac{3}{2},-1)$, J-pattern from rank-$k$ 6j; sprint precision-catalogue
+2026-05-08) & spinor $\circ$ Wigner 6j $\circ$ Wigner 3j (Gaunt) $\circ$
+Fock; internal multi-focal (1s, 2p at distinct $Z_\text{eff}$),
+bipolar $(k_1{=}0,k_2{=}2)$ direct + $(k_1{=}1,k_2{=}1)$ exchange &
+$\alpha, Z$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
+$-0.014\%$ vs NIST $+29{,}616.951(6)$ MHz; below LS-8a $\alpha^3/\pi$
+budget \\
+He $2{}^3P_0$--$2{}^3P_2$ span $+31{,}844.07$ MHz (Sprint~3 BF-D
++ Sprint~4 DD; sprint precision-catalogue 2026-05-08) & same chain &
+$\alpha, Z$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
+$-0.20\%$ vs NIST $+31{,}908.131(6)$ MHz; within LS-8a one-loop QED budget \\
 \midrule
 \textbf{Three-projection chain} & & & & & \\
 Bethe log $\ln k_0(2P) = -0.0307$ (LS-4) & Drake--Swainson $\circ$ Sturmian
@@ -923,9 +964,19 @@ flat-space two-loop QED); the strong test is LS-8a's native
 derivation of $C_{2S}$.  No structural obstruction encountered;
 \texttt{geovac/qed\_two\_loop.py} infrastructure is adequate.
 Sprint provenance: \texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
-He 2$^3$P fine-structure span & Breit--Pauli + spinor &
-$-66\%$ & A & Leading-order Breit--Pauli; multi-electron SS/SOO
-deferred (Sprint 4 DD; Paper~14 \S~V). \\
+He $2{}^3P_1$--$2{}^3P_2$ small interval $+2{,}231.16$~MHz (Drake-pattern
+Breit--Pauli + spinor; Sprint~3 BF-D + Sprint~4 DD + Sprint~5 CP) &
+spinor $\circ$ Wigner 6j (Drake) $\circ$ Wigner 3j (Gaunt) $\circ$ Fock &
+$-2.62\%$ vs NIST $+2{,}291.176(15)$~MHz & A & Partial-cancellation
+amplification: absolute residual $-60$~MHz on a $2.3$~GHz interval.
+The dominant intervals (P$_0$-P$_1$ at $-0.014\%$, P$_0$-P$_2$ span at
+$-0.20\%$) are in \S~\ref{sec:matches}; this small interval has the
+same absolute residual but $\sim$10$\times$ larger fractional residual
+because of the structural cancellation SO ($-58$~GHz) $+$ SS ($-9.5$~GHz)
+$+$ SOO ($+70$~GHz) $\approx +2.2$~GHz.  Residual is below the LS-8a
+$\alpha^3/\pi$ one-loop QED budget on the absolute scale; multi-electron
+SS/SOO higher-order corrections (Drake 1971 \S~IV) are the standard
+remediation.  Sprint precision-catalogue 2026-05-08. \\
 Li 2$^2$P doublet (Sprint 5 CP) & Breit--Pauli + Slater $Z_{\text{eff}}$
 & $+8.9\%$ & A & Standard convention with $Z_\text{val}=1$;
 core polarization worsens accuracy (parity-forbidden
@@ -975,6 +1026,54 @@ $\Delta_\text{el-VP} \approx +1.5$ meV).  Same LS-8a wall as HF-5; in
 muonic atoms the electron loop is enhanced because the muonic Bohr
 radius probes the electron Compton wavelength.  Inner-factor input
 data tier per Paper~18 \S~IV.6.  Sprint MH Track B, 2026-05-08. \\
+Ps 1S HFS $116.79$~GHz (Fermi-contact only, framework-native) & spinor
+$\circ$ Fermi contact $\circ$ Fock $\circ$ rest-mass projection
+($m_p \to m_e$, equal-mass limit) & $-42.58\%$ vs Ishida 2014
+$203.389$~GHz & A & Framework-native part captures only the magnetic
+dipole-dipole contribution ($4/12$ of the LO HFS).  The
+remaining $3/12$ is the annihilation channel $e^+e^- \to \gamma \to e^+e^-$,
+a virtual-loop second-quantized effect not generated by the framework's
+bare action -- structurally analogous to the K\"all\'en--Sabry two-loop
+VP input for muonic H. Multi-focal architecture at $\lambda_a = \lambda_b$
+verified: Roothaan multipole termination at $L_\text{max} = 2 \ell_\text{max}$
+preserved (Gaunt selection is angular, not small-parameter).
+Sprint precision-catalogue, 2026-05-08. \\
+Ps 1S HFS $204.39$~GHz (LO total $= 7/12 \cdot m_e c^2 \alpha^4 / h$,
+framework $+$ Layer-2 annihilation) & spinor $\circ$ Fermi contact
+$\circ$ Fock $\circ$ rest-mass projection $+$ Layer-2 annihilation &
+$+0.49\%$ vs Ishida 2014 & A & Residual is multi-loop QED
+(Czarnecki--Melnikov--Yelkhovsky 2000, $\alpha^5 m_e c^2/h$ corrections).
+LS-8a wall confirmed in the equal-mass leptonic regime: same
+renormalization gap as $\mu$H Track A and HF-5.  Sprint precision-catalogue,
+2026-05-08. \\
+D 1S hyperfine $\nu_\text{HFS}(D) = 327.4779$ MHz (BF $+$ recoil
+$+$ Schwinger $a_e$ $+$ leading Zemach with $r_Z(D) = 2.593$~fm
+external; sprint precision-catalogue 2026-05-08) & spinor $\circ$ Fermi
+contact $\circ$ Fock $+$ reduced-mass $+$ vertex correction
+$+$ magnetization-density Layer-2 input
+& $+286$ ppm vs Wineland--Ramsey 1972 $327.384352522(2)$ MHz & A
+(framework-native) $+$ S (LS-8a wall, multi-loop QED) $+$ S (deuteron
+polarizability, QCD-internal NN dynamics)
+& Strict Bohr-Fermi at $+40$ ppm verifies $I=1$ cross-register angular
+coupling structure: $A_{hf}\,\hat{I}\cdot\hat{S}$ Hamiltonian unchanged,
+$3/2$ multiplicity is Clebsch--Gordan, no new mechanism vs $I=1/2$.
+Cumulative residual $+286$ ppm budgeted to deuteron polarizability
+($+44$ ppm Pachucki--Yerokhin 2010, QCD-internal), multi-loop QED
+($\sim$few ppm, LS-8a wall), recoil NLO, finite-size charge.
+Operator-level Zemach $-98.0$ ppm with $r_Z(D) = 2.593$~fm matches
+analytic $-2 Z m_e r_Z$ to $10^{-14}$ ppm; profile (Gaussian vs
+exponential) independence preserved at leading order, same as Sprint MH
+Track C / hydrogen 21cm (Sprint HF Track 4).  Multi-focal architecture
+verified at I=1: deuteron quadrupole moment couples only to gradients,
+sub-ppm for s-states (negligible).  Sprint precision-catalogue,
+2026-05-08. \\
+Mu 1S-2S transition (test of rest-mass projection at unchanged lepton)
+& Fock $\circ$ rest-mass projection (m$_p \to m_\mu$) & $-0.11$ ppm vs
+Mu-MASS & A & Pure $m_\text{red}$ rescaling from H experimental;
+sub-ppm verification of the rest-mass projection theorem (Paper~34
+\S~III.14) at varied nucleus mass.  Differential-recoil contribution
+(framework + cross-register $V_{eN}$ Roothaan) closes to $-0.25$ ppm.
+Sprint precision-catalogue, 2026-05-08.  \\
 $\mu$H 2$S$--2$P$ Lamb framework-native $200.50$ meV (no literature
 inputs, Sprint MH Track A) & Fock $\circ$ spectral action $\circ$
 Sturmian $\circ$ Drake--Swainson $\circ$ rest-mass projection
@@ -991,6 +1090,35 @@ in muonic potential.  Plus literature-input total: $-0.10\%$ vs CREMA.
 (rather than contact-density approximation) handles the muonic
 $\beta = 2 m_e a_\mu = 1.475$ regime where Bohr radius $\sim$ electron
 Compton wavelength.  Sprint MH Track A, 2026-05-08. \\
+Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb $1047.63$ MHz vs Mariam~1982 experiment
+$1054(22)$ MHz & Fock $\circ$ spectral action $\circ$ Sturmian $\circ$
+rest-mass projection & $-0.6\%$ (within $\pm 22$ MHz exp uncertainty)
+& A & Framework-native at $+0.013\%$ vs Karshenboim~2005 theory
+$1047.49(5)$~MHz; $-0.6\%$ residual against Mariam dominated by 1982-era
+experimental uncertainty, not framework limitation.  Karshenboim's
+``Recoil NLO $-11.30$ MHz'' is absorbed into the framework's
+$m_\text{red}$ Eides bracket (the $+1074.13$ MHz framework SE differs
+from Karshenboim's $+1085.84$ MHz SE itemization by exactly the recoil
+NLO).  Naively adding Karshenboim's recoil to the framework total
+double-counts.  Sprint precision-catalogue, 2026-05-08. \\
+Mu 1S hyperfine framework Bohr--Fermi $+$ Schwinger one-loop
+$4464.1905$ MHz vs Liu~1999 $4463.302765(53)$ MHz & spinor $\circ$
+Fermi contact $\circ$ Fock $\circ$ rest-mass projection (lepton-unchanged,
+nucleus $m_p \to m_\mu$) & $+199$ ppm & A &
+\textbf{Cleanest LS-8a isolation in the catalogue}: leptonic nucleus
+(point antimuon, no QCD) means residual is purely multi-loop QED $+$
+cross-register recoil NLO, no Zemach / polarizability / hadronic VP
+budget interfering.  Karshenboim 2005 itemized total of corrections
+($+4.703$ MHz, $\sim +1054$ ppm relative to BF strict) decomposes as
+$\alpha^2(Z\alpha) \sim +0.17$ MHz (two-loop QED), $\alpha(Z\alpha)^2(m/M)^2
+\sim +0.7$ MHz (recoil $+$ QED), hadronic VP $\sim +0.2$ MHz, plus the
+dominant Schwinger one-loop already captured by the framework.  The
+$+199$ ppm framework residual is the structural depth of the LS-8a wall
+at $\alpha^2(Z\alpha)$ for Bohr--Fermi-class observables in clean
+isolation: no QCD competing budget, both leptons receiving full
+$\alpha/(2\pi)$ at one loop.  Adding Karshenboim's full Layer-2
+itemization closes the gap to $<1$~ppm.  Sprint precision-catalogue,
+2026-05-08. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.

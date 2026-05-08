@@ -1,0 +1,76 @@
+{
+  "system": "Mu (e- on mu+) 2S_{1/2} - 2P_{1/2} Lamb shift",
+  "step_1_normal_h_regression": {
+    "label": "normal H (ep)",
+    "m_red_in_me": 0.9994556794247628,
+    "SE_2S_MHz": 1065.8578307457524,
+    "SE_2P_MHz": -12.876880058262833,
+    "Lamb_SE_MHz": 1078.7347108040153,
+    "uehling_beta": 274.2212624433154,
+    "VP_full_2S_MHz": -26.84367735370878,
+    "VP_full_2P_MHz": -8.575685248629256e-08,
+    "Lamb_VP_full_MHz": -26.84367726795193,
+    "VP_contact_2S_MHz": -27.08448069779467,
+    "Lamb_VP_contact_MHz": -27.08448069779467,
+    "VP_full_minus_contact_MHz": 0.2408034298427424,
+    "Lamb_framework_MHz": 1051.8910335360633
+  },
+  "step_2_muonium_framework": {
+    "label": "muonium (eMu)",
+    "m_red_in_me": 0.9951869458342687,
+    "SE_2S_MHz": 1061.3054896880537,
+    "SE_2P_MHz": -12.821882151325022,
+    "Lamb_SE_MHz": 1074.1273718393788,
+    "uehling_beta": 275.397501258665,
+    "VP_full_2S_MHz": -26.50220019785757,
+    "VP_full_2P_MHz": -7.965657878794717e-08,
+    "Lamb_VP_full_MHz": -26.50220011820099,
+    "VP_contact_2S_MHz": -26.738922610353868,
+    "Lamb_VP_contact_MHz": -26.738922610353868,
+    "VP_full_minus_contact_MHz": 0.23672249215287877,
+    "Lamb_framework_MHz": 1047.6251717211778
+  },
+  "step_3_karshenboim_2005_reference": {
+    "SE_one_loop": 1085.84,
+    "VP_one_loop_uehling": -27.2,
+    "alpha2_Za_4": 0.27,
+    "alpha_Za_5": -0.07,
+    "recoil_NLO": -11.3,
+    "recoil_radiative": -0.05,
+    "FNS": 0.0,
+    "polarizability": 0.0,
+    "total_theory": 1047.49,
+    "total_uncertainty": 0.05
+  },
+  "step_4_rest_mass_rescaling": {
+    "Lamb_H_framework_MHz": 1052.19,
+    "m_red_ratio_Mu_over_H": 0.9957289415845324,
+    "Lamb_Mu_rescaled_MHz": 1047.6960350458291,
+    "Lamb_Mu_native_MHz": 1047.6251717211778,
+    "diff_native_minus_rescaled_MHz": -0.07086332465132728
+  },
+  "step_5_results": {
+    "framework_native_MHz": 1047.6251717211778,
+    "literature_multi_loop_MHz": 0.2,
+    "literature_recoil_MHz": -11.350000000000001,
+    "framework_plus_literature_MHz": 1036.475171721178,
+    "theory_reference_MHz": 1047.49,
+    "experimental_MHz": 1054.0,
+    "experimental_uncertainty_MHz": 22.0,
+    "residual_native_vs_theory_MHz": 0.1351717211778123,
+    "residual_native_vs_theory_pct": 0.012904344783989564,
+    "residual_full_vs_theory_MHz": -11.014828278822051,
+    "residual_full_vs_theory_pct": -1.051544957834638,
+    "residual_vs_experiment_MHz": -17.524828278822042,
+    "within_experimental_uncertainty": true,
+    "verdict": "POSITIVE"
+  },
+  "constants": {
+    "ALPHA": 0.0072973525692838015,
+    "M_RED_EP": 0.9994556794247628,
+    "M_RED_E_MU": 0.9951869458342687,
+    "ratio_eMu_over_ep": 0.9957289415845324,
+    "M_MUON_OVER_M_E": 206.768283,
+    "M_PROTON_OVER_M_E": 1836.15267343
+  }
+}

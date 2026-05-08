@@ -1,0 +1,77 @@
+{
+  "system": "Mu (e- mu+)",
+  "experiment_MHz": 2455529002.5,
+  "experiment_uncertainty_MHz": 9.9,
+  "step_1_bohr": {
+    "H": {
+      "m_red_in_me": 0.9994556794247628,
+      "Z": 1,
+      "nu_Hz": 2466038423687067.5,
+      "nu_MHz": 2466038423.6870675
+    },
+    "Mu": {
+      "m_red_in_me": 0.9951869458342687,
+      "Z": 1,
+      "nu_Hz": 2455505829524712.5,
+      "nu_MHz": 2455505829.5247126
+    },
+    "Bohr_only_Mu_residual_MHz": -23172.97528743744,
+    "Bohr_only_Mu_residual_ppm": -9.43706030914104
+  },
+  "step_2_self_energy": {
+    "H": {
+      "m_red_in_me": 0.9994556794247628,
+      "delta_E_1S_MHz": 8339.929403212507,
+      "delta_E_2S_MHz": 1065.8578307457524,
+      "delta_nu_SE_1S_2S_MHz": -7274.071572466755,
+      "convention": "raises 1S more than 2S; net (2S-1S) shift is negative"
+    },
+    "Mu": {
+      "m_red_in_me": 0.9951869458342687,
+      "delta_E_1S_MHz": 8304.30907755051,
+      "delta_E_2S_MHz": 1061.3054896880537,
+      "delta_nu_SE_1S_2S_MHz": -7243.003587862456,
+      "convention": "raises 1S more than 2S; net (2S-1S) shift is negative"
+    },
+    "Bohr_plus_SE_Mu_MHz": 2455498586.521125,
+    "Bohr_plus_SE_residual_ppm": -12.386731675412259
+  },
+  "step_3_rescale_from_H": {
+    "ratio_m_red_eMu_over_ep": 0.9957289415845324,
+    "nu_H_1S2S_input_MHz": 2466061413.187035,
+    "nu_Mu_1S2S_predicted_MHz": 2455528720.8351827,
+    "nu_Mu_1S2S_experiment_MHz": 2455529002.5,
+    "diff_predicted_minus_experiment_MHz": -281.66481733322144,
+    "diff_ppm": -0.11470636960363959,
+    "interpretation": "Pure m_red rescaling residual quantifies non-linear-in-m_red contributions to nu(1S-2S). Dominant non-linear piece is recoil at NLO (factor m_p/m_mu ~ 8.88 between H and Mu since m_nucleus differs)."
+  },
+  "step_4_recoil": {
+    "H": {
+      "m_red_in_me": 0.9994556794247628,
+      "m_nucleus_in_me": 1836.15267343,
+      "scaling_factor_relative_to_H": 1.0,
+      "estimated_recoil_1s_2s_MHz": -42.0,
+      "method": "structural_scaling_from_H_canonical"
+    },
+    "Mu": {
+      "m_red_in_me": 0.9951869458342687,
+      "m_nucleus_in_me": 206.768283,
+      "scaling_factor_relative_to_H": 8.766944538335116,
+      "estimated_recoil_1s_2s_MHz": -368.21167061007486,
+      "method": "structural_scaling_from_H_canonical"
+    },
+    "differential_recoil_MHz": -326.3910550635245
+  },
+  "step_5_framework_total": {
+    "framework_plus_layer2_MHz": 2455528394.4441276,
+    "experiment_MHz": 2455529002.5,
+    "residual_MHz": -608.0558724403381,
+    "residual_ppm": -0.24762724114488976
+  },
+  "constants": {
+    "M_RED_EP": 0.9994556794247628,
+    "M_RED_E_MU": 0.9951869458342687,
+    "ratio_eMu_over_ep": 0.9957289415845324
+  },
+  "verdict": "POSITIVE"
+}
