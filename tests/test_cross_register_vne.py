@@ -776,5 +776,121 @@ class TestIntegerOrderOnlyEstimate:
         assert abs(io['discrepancy_pct']) < 0.2 * abs(ph['cumulative_drift_vs_pachucki_leading_pct'])
 
 
+class TestSprintMHTrackDDualExpansion:
+    """Sprint MH Track D: dual expansion for the muonic regime.
+
+    Verifies that ``roothaan_J0_taylor_expansion_dual`` is the (lam_e <-> lam_n)
+    swap of ``roothaan_J0_taylor_expansion``, and that
+    ``roothaan_recoil_shift_regime_aware`` dispatches correctly.
+    """
+
+    def test_J0_closed_form_is_symmetric_both_regimes(self) -> None:
+        """``_roothaan_J0`` is symmetric to machine precision in both
+        electronic and muonic regimes -- the production-path finding."""
+        from geovac.cross_register_vne import _roothaan_J0
+
+        # Electronic regime
+        J_e = _roothaan_J0(1.0, 85.7)
+        J_e_swap = _roothaan_J0(85.7, 1.0)
+        assert abs(J_e - J_e_swap) < 1e-15
+
+        # Muonic regime: lam_lepton > lam_nucleus
+        J_mu = _roothaan_J0(185.85, 85.7)
+        J_mu_swap = _roothaan_J0(85.7, 185.85)
+        assert abs(J_mu - J_mu_swap) < 1e-15
+
+    def test_dual_expansion_symbolic_structure(self) -> None:
+        """Dual expansion: recoil shift (lam_n - J_0) has c_2 = +2 lam_n^3,
+        c_3 = -5 lam_n^4, etc. Mirror of the electronic series."""
+        from geovac.cross_register_vne import roothaan_J0_taylor_expansion_dual
+        result = roothaan_J0_taylor_expansion_dual(n_terms=6, lam_n_value=None)
+        assert result['verified_against_closed_form']
+        coeffs = dict(result['coefficients'])
+        # k=0 of recoil shift = 0 (the leading lam_n cancels)
+        # k=2: +2 lam_n^3 (mirror of original's +2 lam_e^3)
+        import sympy as sp
+        lam_n = sp.symbols('lam_n', positive=True)
+        c2_expected = 2 * lam_n ** 3
+        assert sp.simplify(coeffs[2] - c2_expected) == 0
+        # k=3: -5 lam_n^4 (mirror of original's -5 lam_e^4)
+        c3_expected = -5 * lam_n ** 4
+        assert sp.simplify(coeffs[3] - c3_expected) == 0
+
+    def test_dual_expansion_evaluated_at_lam_n_one_matches_original(self) -> None:
+        """At lam_n = 1 the dual expansion coefficients match the original
+        at lam_e = 1 (by exchange symmetry of J_0)."""
+        from geovac.cross_register_vne import (
+            roothaan_J0_taylor_expansion,
+            roothaan_J0_taylor_expansion_dual,
+        )
+        orig = roothaan_J0_taylor_expansion(n_terms=6, lam_e_value=1.0)
+        dual = roothaan_J0_taylor_expansion_dual(n_terms=6, lam_n_value=1.0)
+        for (k_o, c_o), (k_d, c_d) in zip(orig['coefficients'], dual['coefficients']):
+            assert k_o == k_d
+            assert abs(float(c_o) - float(c_d)) < 1e-12
+
+    def test_regime_aware_electronic_matches_existing(self) -> None:
+        """Electronic-regime dispatch reproduces existing
+        ``roothaan_recoil_shift_through_order`` output bit-identically."""
+        from geovac.cross_register_vne import (
+            roothaan_recoil_shift_regime_aware,
+            roothaan_recoil_shift_through_order,
+        )
+        ra = roothaan_recoil_shift_regime_aware(
+            lam_lepton=1.0, lam_nucleus=85.7, Z=1.0, max_order=5,
+        )
+        existing = roothaan_recoil_shift_through_order(
+            lam_n=85.7, lam_e=1.0, Z=1.0, max_order=5,
+        )
+        assert ra['regime'] == 'electronic'
+        assert abs(ra['roothaan_numerical'] - existing['roothaan_numerical']) < 1e-15
+        assert ra['series_converges_to_roothaan']
+
+    def test_regime_aware_muonic_dispatches_correctly(self) -> None:
+        """Muonic-regime dispatch identifies lam_lepton > lam_nucleus and
+        labels the regime accordingly."""
+        from geovac.cross_register_vne import (
+            roothaan_recoil_shift_regime_aware,
+            _roothaan_J0,
+        )
+        ra = roothaan_recoil_shift_regime_aware(
+            lam_lepton=185.85, lam_nucleus=85.7, Z=1.0, max_order=5,
+        )
+        assert ra['regime'] == 'muonic'
+        # Closed-form J_0 cross-check (the production-path value)
+        J0_expected = _roothaan_J0(185.85, 85.7)
+        assert abs(ra['closed_form_J0'] - J0_expected) < 1e-15
+        # The natural muonic recoil estimator: +Z * (lam_lepton - J_0)
+        natural_recoil_expected = -1.0 * (J0_expected - 185.85)
+        assert abs(ra['roothaan_numerical'] - natural_recoil_expected) < 1e-12
+
+    def test_regime_aware_at_boundary_lam_lepton_equals_lam_nucleus(self) -> None:
+        """At the regime boundary lam_lepton == lam_nucleus, dispatcher
+        chooses electronic-side (<=) and produces a finite, consistent
+        result. J_0(lam, lam) = 5 lam / 8."""
+        from geovac.cross_register_vne import roothaan_recoil_shift_regime_aware
+        ra = roothaan_recoil_shift_regime_aware(
+            lam_lepton=10.0, lam_nucleus=10.0, Z=1.0, max_order=5,
+        )
+        assert ra['regime'] == 'electronic'
+        assert abs(ra['closed_form_J0'] - 6.25) < 1e-15
+
+    def test_dual_expansion_evaluated_at_specific_lam_n(self) -> None:
+        """Dual expansion evaluated at lam_n = 85.7. The coefficients are
+        of the recoil shift (lam_n - J_0): k=0 vanishes (leading cancels),
+        k=2 = +2 * 85.7^3."""
+        from geovac.cross_register_vne import roothaan_J0_taylor_expansion_dual
+        result = roothaan_J0_taylor_expansion_dual(n_terms=6, lam_n_value=85.7)
+        coeffs_eval = result['coefficients']
+        # k=0 vanishes (recoil shift has no constant term)
+        assert abs(float(coeffs_eval[0][1])) < 1e-10
+        # k=2 should be +2 * 85.7^3
+        expected_c2 = 2.0 * (85.7 ** 3)
+        assert abs(float(coeffs_eval[2][1]) - expected_c2) < 1e-6
+        # k=3 should be -5 * 85.7^4
+        expected_c3 = -5.0 * (85.7 ** 4)
+        assert abs(float(coeffs_eval[3][1]) - expected_c3) < 1e-3
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v', '--tb=short'])
