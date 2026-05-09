@@ -477,13 +477,257 @@ def _T_kernel_breit_float(a: int, b: int, alpha: float, beta: float,
     return _region(a, b, alpha, beta) + _region(b, a, beta, alpha)
 
 
+# ---------------------------------------------------------------------------
+# Threshold above which the float path's catastrophic cancellation makes the
+# result untrustworthy.  Below this threshold the fast float path is used
+# bit-identically; at or above it, the exact Fraction path is used (cast to
+# float at the end).
+#
+# Empirically (Coulomb T_kernel, same-shell s,s,s,s, k=0 vs the exact
+# Fraction path):
+#     n=4  rel err 0.0      (bit-exact)
+#     n=5  rel err ~2e-10   (float marginal — at the intrinsic limit)
+#     n=6  rel err ~1e-7    (degraded)
+#     n=8  rel err ~1e-4    (clearly broken)
+#     n=10 rel err ~0.2     (useless)
+#     n=12 wrong sign + ~5 OoM
+# At n=12 the individual cancelling terms reach |T| ~ 1e+25 while the true
+# sum is ~1e+11 — a 14-order-cancellation that swamps float64's 15-digit
+# mantissa.  See ``debug/precision_catalogue_he_2s_singlet_triplet_memo.md``.
+#
+# Threshold is set at n=4 (float bit-exact) so that the entire ``n >= 5``
+# regime dispatches to the exact Fraction path and the regression test
+# panel can demand ``< 1e-10`` relative error throughout.
+#
+# Performance characterization (single uncached call):
+#     n  | float path | exact-Fraction path
+#     -- | ---------- | -------------------
+#     4  | 0.2 ms     |  ~3 ms
+#     5  | 0.4 ms     |  ~5 ms
+#     8  | 4 ms       |  580 ms
+#     12 | 580 ms     |  6 s
+#     20 | (broken)   |  ~1 min
+# The exact path is ~12-17x slower than the float path at small n, but
+# guaranteed correct at any n.  Both paths are wrapped in ``_CACHE_FLOAT``
+# at the ``get_rk_float`` level, so each unique quartet is evaluated at
+# most once across the whole CI build.
+_FLOAT_PATH_MAX_N = 4
+
+
+def _max_n(n1: int, n3: int, n2: int, n4: int) -> int:
+    return max(n1, n3, n2, n4)
+
+
+def _compute_rk_mpmath(
+    n1: int, l1: int, n3: int, l3: int,
+    n2: int, l2: int, n4: int, l4: int,
+    k: int,
+    dps: int = 50,
+) -> float:
+    """Compute Coulomb R^k via mpmath at high precision, return float.
+
+    Uses the same Laguerre × T-kernel decomposition as ``compute_rk_float``
+    but evaluates every intermediate quantity in mpmath.mpf so the
+    catastrophic cancellation in the float path (up to 14 orders at n=12)
+    is preserved at well above float64's 15-digit mantissa.  Casts the
+    final answer to a Python float.
+
+    Performance is bound by the (s1+1)*(s2+1)*(s1'+1)*(s2'+1) ~ n^4 nested
+    sum over Laguerre-product terms, with each inner T-kernel call doing
+    O(p13 + p24) mpmath operations.  To keep this practical for n ~ 20,
+    powers of alpha, beta, and gamma_ab = alpha+beta are precomputed once
+    per call up to the maximum needed exponent.
+
+    Raises ``ValueError`` (deferred to inner loop) if the outer-integral
+    powers m1 = p24 - k - 1 or m2 = p13 - k - 1 are ever negative.  Such
+    quartets are Gaunt-forbidden in the full Slater integral (k > l_a + l_b
+    kills the angular factor) and are not produced by physically valid CI
+    matrices.
+    """
+    import mpmath as _mp
+
+    saved_dps = _mp.mp.dps
+    _mp.mp.dps = dps
+    try:
+        # ----- Laguerre and norm coefficients in mpmath -----
+        def _lag_mpf(n: int, l: int):
+            p = n - l - 1
+            a_lag = 2 * l + 1
+            return [(_mp.mpf((-1) ** s) * _mp.mpf(comb(p + a_lag, p - s))
+                     / _mp.mpf(factorial(s)))
+                    for s in range(p + 1)]
+
+        def _nsq_mpf(n: int, l: int):
+            return ((_mp.mpf(2) / _mp.mpf(n)) ** 3
+                    * _mp.mpf(factorial(n - l - 1))
+                    / (_mp.mpf(2 * n) * _mp.mpf(factorial(n + l))))
+
+        def _expand_mpf(na: int, la: int, nb: int, lb: int):
+            ca = _lag_mpf(na, la)
+            cb = _lag_mpf(nb, lb)
+            nsq = _nsq_mpf(na, la) * _nsq_mpf(nb, lb)
+            alpha_pair = _mp.mpf(1) / na + _mp.mpf(1) / nb
+            sa = (_mp.mpf(2) / na) ** la
+            sb = (_mp.mpf(2) / nb) ** lb
+            terms = []
+            for s1, ac in enumerate(ca):
+                for s2, bc in enumerate(cb):
+                    coeff = (ac * bc * sa * sb
+                             * (_mp.mpf(2) / na) ** s1
+                             * (_mp.mpf(2) / nb) ** s2)
+                    power = la + lb + 2 + s1 + s2
+                    terms.append((coeff, power, alpha_pair))
+            return terms, nsq
+
+        terms_13, nsq_13 = _expand_mpf(n1, l1, n3, l3)
+        terms_24, nsq_24 = _expand_mpf(n2, l2, n4, l4)
+        norm_mp = _mp.sqrt(nsq_13 * nsq_24)
+
+        # All terms_13 share the same decay rate alpha13; same for terms_24.
+        alpha13 = terms_13[0][2]
+        alpha24 = terms_24[0][2]
+        gamma_mp = alpha13 + alpha24
+
+        # Highest powers we will need (region I uses alpha**(n1+1) up to
+        # j-n1-1 in [-(n1+1), 0] and gamma**(m1+1+j) up to m1+1+n1; region
+        # II is symmetric).  Take the global max from terms.
+        max_p13 = max(p for _, p, _ in terms_13)
+        max_p24 = max(p for _, p, _ in terms_24)
+        max_a_pow = max_p13 + k + 1
+        max_b_pow = max_p24 + k + 1
+        max_g_pow = max_p13 + max_p24 + 2 * k + 2  # upper bound
+
+        # Precompute powers (positive exponents in lookup tables).
+        pow_alpha = [_mp.mpf(1)] * (max_a_pow + 1)
+        for i in range(1, max_a_pow + 1):
+            pow_alpha[i] = pow_alpha[i - 1] * alpha13
+        pow_beta = [_mp.mpf(1)] * (max_b_pow + 1)
+        for i in range(1, max_b_pow + 1):
+            pow_beta[i] = pow_beta[i - 1] * alpha24
+        pow_gamma = [_mp.mpf(1)] * (max_g_pow + 2)
+        for i in range(1, max_g_pow + 2):
+            pow_gamma[i] = pow_gamma[i - 1] * gamma_mp
+
+        # Inverse-power lookup (alpha**(j - n1 - 1) for j in [0, n1] needs
+        # negative exponents up to -(n1+1); easiest: divide by pow_alpha).
+        # Precompute factorials as plain Python ints (cheap, exact).
+        # In _T_inner we need fact[m1+j] up to m1 + n1k = a + b - 1, so the
+        # safe upper bound is max_p13 + max_p24 + 2*k - 1 (well-covered by
+        # max_p13 + max_p24 + 2*k + 2).
+        max_fact = max_p13 + max_p24 + 2 * k + 2
+        fact = [1] * (max_fact + 1)
+        for i in range(1, max_fact + 1):
+            fact[i] = fact[i - 1] * i
+
+        # ----- Inner T-kernel using precomputed tables -----
+        def _T_inner(a: int, b: int) -> "_mp.mpf":
+            n1k = a + k
+            m1 = b - k - 1
+            n2k = b + k
+            m2 = a - k - 1
+            if m1 < 0 or m2 < 0:
+                raise ValueError(
+                    "Coulomb R^k evaluator: outer-integral power negative "
+                    f"(a={a}, b={b}, k={k}, m1={m1}, m2={m2}).  "
+                    "This corresponds to k > l_a + l_b, which violates "
+                    "the Gaunt selection rule for a nonzero Slater "
+                    "integral.  Filter such quartets out before "
+                    "evaluating R^k."
+                )
+
+            n1k_fact = _mp.mpf(fact[n1k])
+            n2k_fact = _mp.mpf(fact[n2k])
+
+            # Region I: I1 = n1k! * m1! / (alpha^{n1k+1} * beta^{m1+1})
+            #              - sum_j n1k! * alpha^{j-n1k-1} * (m1+j)! /
+            #                       (j! * gamma^{m1+1+j})
+            I1 = n1k_fact * _mp.mpf(fact[m1]) / (pow_alpha[n1k + 1]
+                                                 * pow_beta[m1 + 1])
+            for j in range(n1k + 1):
+                # alpha^{j - n1k - 1} = 1 / alpha^{n1k + 1 - j}
+                I1 -= (n1k_fact
+                       * _mp.mpf(fact[m1 + j])
+                       / (_mp.mpf(fact[j])
+                          * pow_alpha[n1k + 1 - j]
+                          * pow_gamma[m1 + 1 + j]))
+
+            # Region II
+            I2 = n2k_fact * _mp.mpf(fact[m2]) / (pow_beta[n2k + 1]
+                                                 * pow_alpha[m2 + 1])
+            for j in range(n2k + 1):
+                I2 -= (n2k_fact
+                       * _mp.mpf(fact[m2 + j])
+                       / (_mp.mpf(fact[j])
+                          * pow_beta[n2k + 1 - j]
+                          * pow_gamma[m2 + 1 + j]))
+
+            return I1 + I2
+
+        integral = _mp.mpf(0)
+        for c13, p13, _ in terms_13:
+            if c13 == 0:
+                continue
+            for c24, p24, _ in terms_24:
+                if c24 == 0:
+                    continue
+                integral += c13 * c24 * _T_inner(p13, p24)
+
+        return float(norm_mp * integral)
+    finally:
+        _mp.mp.dps = saved_dps
+
+
 def compute_rk_float(
     n1: int, l1: int, n3: int, l3: int,
     n2: int, l2: int, n4: int, l4: int,
     k: int,
 ) -> float:
-    """Compute Coulomb R^k at k_orb=1 using float arithmetic (~100x faster)."""
+    """Compute Coulomb R^k at k_orb=1, returning a Python float.
+
+    For ``max(n) <= _FLOAT_PATH_MAX_N`` (currently 4) the fast pure-float
+    path is used (bit-identical to the previous implementation, ~0.2 ms
+    per call typical).  For larger principal quantum numbers the function
+    dispatches to ``compute_rk_algebraic`` (exact Python ``Fraction``) and
+    casts the result to a Python float — the only way to survive the
+    catastrophic cancellation between region-I and region-II contributions
+    of the T-kernel without arbitrarily-high-precision arithmetic.
+
+    See ``_FLOAT_PATH_MAX_N`` for the threshold rationale and the perf
+    table in the comment block above.  The dispatch is wrapped in the
+    module-level cache (``_CACHE_FLOAT``) so each unique quartet is paid
+    for only once across a CI build.
+
+    Raises
+    ------
+    ValueError
+        If the quartet is Gaunt-forbidden (k > l_a + l_b inside the
+        T-kernel decomposition), with a clear message.  Pre-fix, this case
+        crashed with ``factorial() not defined for negative values``.
+    """
     import math
+
+    if _max_n(n1, n3, n2, n4) > _FLOAT_PATH_MAX_N:
+        # Exact rational evaluation, then cast to float.  The Fraction
+        # path supports any n; the only failure mode is when m1 = b - k - 1
+        # or m2 = a - k - 1 goes negative inside ``_T_kernel`` — which
+        # corresponds to a Gaunt-violating (k > l_a + l_b) request that
+        # would be zeroed by the angular factor in any physical context.
+        # Re-raise any such error with a clearer message.
+        try:
+            exact = compute_rk_algebraic(n1, l1, n3, l3,
+                                         n2, l2, n4, l4, k)
+        except ValueError as exc:
+            if "negative" in str(exc).lower():
+                raise ValueError(
+                    "Coulomb R^k evaluator: outer-integral power negative "
+                    f"(quartet {(n1,l1,n3,l3,n2,l2,n4,l4)}, k={k}).  "
+                    "This corresponds to k > l_a + l_b, which violates "
+                    "the Gaunt selection rule for a nonzero Slater "
+                    "integral.  Filter such quartets out before "
+                    "evaluating R^k."
+                ) from exc
+            raise
+        return float(exact)
 
     terms_13, nsq_13 = _expand_pair_float(n1, l1, n3, l3)
     terms_24, nsq_24 = _expand_pair_float(n2, l2, n4, l4)

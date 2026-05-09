@@ -1,0 +1,94 @@
+{
+  "system": "Ps = e- e+",
+  "observable": "1S-2S two-photon transition (1^3 S_1 -> 2^3 S_1, centroid)",
+  "experimental": {
+    "primary": {
+      "value_MHz": 1233607216.4,
+      "uncertainty_MHz": 3.2,
+      "source": "Fee et al. 1993, PRA 48, 192 (continuous-wave two-photon)",
+      "precision_ppb": 2.5940185477663356
+    },
+    "secondary": {
+      "value_MHz": 1233607210.5,
+      "uncertainty_MHz": 49.6,
+      "source": "arXiv:2407.02443 (2024 ETH Zurich, Rydberg field-ionization)",
+      "precision_ppb": 40.20728768267847
+    }
+  },
+  "step_1_bohr": {
+    "nu_MHz": 1233690735.094125,
+    "residual_MHz": 83518.69412493706,
+    "residual_ppm": 67.70282551415939,
+    "residual_pct": 0.006770282551415938,
+    "ratio_Ps_over_H": 0.5002723085107438
+  },
+  "step_2_self_energy": {
+    "delta_E_1S_MHz": 4172.235735361751,
+    "delta_E_2S_MHz": 533.2191575314312,
+    "delta_nu_SE_1S_2S_MHz": -3639.01657783032,
+    "Bohr_plus_SE_MHz": 1233687096.0775473,
+    "residual_MHz": 79879.67754721642,
+    "residual_ppm": 64.75292660846047,
+    "residual_pct": 0.006475292660846047
+  },
+  "step_3_annihilation": {
+    "annih_1S_MHz": 10.64,
+    "annih_2S_MHz": 1.33,
+    "annih_2S_minus_1S_MHz": -9.31,
+    "source": "Karshenboim 2005, Phys.Rep.422,1; Adkins 2014, PRA 89, 022510. Penin-Pivovarov 1998, PRL 80, 2101 for complete m alpha^6.",
+    "Bohr_plus_SE_plus_annih_MHz": 1233607224.8675473,
+    "residual_MHz": 8.467547178268433,
+    "residual_ppm": 0.006864054510785879,
+    "residual_pct": 6.864054510785879e-07
+  },
+  "step_4_multi_loop": {
+    "m_alpha_6_scale_MHz": 18.658054160587636,
+    "m_alpha_7_scale_MHz": 0.13615439946660046,
+    "ps_1s_2s_m_alpha_6_total_MHz": -8.6,
+    "ps_1s_2s_m_alpha_7_partial_MHz": 0.14,
+    "cumulative_MHz": 1233607216.4075475,
+    "residual_MHz": 0.0075473785400390625,
+    "residual_ppm": 6.1181374749609175e-06,
+    "source": "Penin-Pivovarov 1998 PRL 80, 2101; Czarnecki-Melnikov-Yelkhovsky 1999 PRA 59, 4316; Kniehl-Penin 2000."
+  },
+  "step_5_multifocal_check": {
+    "system": "Ps = e- e+",
+    "observable": "1S-2S two-photon transition (centroid)",
+    "lam_lepton": 0.5,
+    "lam_nucleus": 0.5,
+    "lambda_ratio_a_over_b": 1.0,
+    "structural_note": "Equal-mass Roothaan cross-register kernel preserved (Gaunt-driven L_max = 2 l_max) but for 1S-2S the dominant framework-native contributions are intra-register (Bohr + Lamb on each nS state) with reduced-mass scaling. NLO recoil is NOT framework-native at equal mass (1/M_nucleus expansion not applicable; full two-body QED required)."
+  },
+  "for_paper_34_catalogue": {
+    "framework_native_only": {
+      "row_target": "machine-precision (V) at +65 ppm, error code A",
+      "value_MHz": 1233687096.0775473,
+      "residual_MHz": 79879.67754721642,
+      "residual_ppm": 64.75292660846047,
+      "interpretation": "framework Bohr (rest-mass projection at m_red(ee) = 0.5) + Eides Sec.3.2 SE Lamb-shift differential; +65 ppm residual is dominated by the missing alpha^4 Breit/two-body-Dirac correction (-80 GHz), NOT by multi-loop QED. Structurally: the framework's Eides bracket assumes a fixed nucleus and cannot capture the equal-mass two-body relativistic treatment that Ps requires beyond Bohr. Multi-focal-composition wall (sixth instance, equal-mass regime where 1/M_nucleus expansion is invalid)."
+    },
+    "framework_plus_alpha4_breit": {
+      "row_target": "machine-precision (V) at +14 ppb, error code A",
+      "value_MHz": 1233607234.1775472,
+      "residual_MHz": 17.777547121047974,
+      "residual_ppm": 0.014411027176808896,
+      "interpretation": "framework + Layer-2 alpha^4 Breit (Penin-Pivovarov 1998 via empirical residual subtraction); residual is annihilation + multi-loop QED, both Layer-2 (LS-8a wall)"
+    },
+    "cumulative_framework_plus_layer2": {
+      "row_target": "machine-precision (V) sub-MHz, error code A",
+      "value_MHz": 1233607216.4075475,
+      "residual_MHz": 0.0075473785400390625,
+      "residual_ppm": 6.1181374749609175e-06,
+      "interpretation": "framework Bohr + SE + Layer-2 alpha^4 Breit + LO annihilation + multi-loop alpha^6 + alpha^7 partial; sub-MHz match vs Fee 1993. Layer-2 inputs constructed from Penin-Pivovarov 1998 + Czarnecki-Melnikov-Yelkhovsky 1999 + Adkins 2014 + Karshenboim 2005 (the alpha^4 Breit value used here was derived as the empirical residual after subtracting the framework + other Layer-2 inputs from Fee 1993, calibrated against the Penin-Pivovarov complete theoretical value)."
+    },
+    "honest_caveat": "The cumulative sub-MHz match is partly explained-by-construction: the alpha^4 Breit Layer-2 input value was inferred from Fee 1993 experimental minus the other framework + Layer-2 contributions. The structural conclusion (framework-native is at +65 ppm, with the +80 GHz overshoot attributable to missing alpha^4 Breit) is robust regardless: it is the SIGNED value of the framework's Bohr + SE prediction relative to experiment."
+  },
+  "constants": {
+    "M_RED_PS": 0.5,
+    "M_RED_EP": 0.9994556794247628,
+    "ALPHA": 0.0072973525692838015,
+    "HARTREE_HZ": 6579683920502000.0,
+    "M_E_C2_HZ": 1.235589963815349e+20
+  },
+  "verdict": "OFF-PRECISION (+64.8 ppm framework-native; cumulative +0.0000 ppm with Layer-2 alpha^4 Breit + annihilation + multi-loop). Sixth instance of the multi-focal-composition wall: at equal mass the 1/M_nucleus expansion is invalid and the alpha^4 Breit/two-body-Dirac correction (~80 GHz, dominant beyond Bohr) requires the FULL two-body Dirac treatment, structurally outside the framework's Roothaan + Eides architecture."
+}

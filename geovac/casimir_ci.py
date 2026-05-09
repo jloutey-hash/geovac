@@ -1041,6 +1041,7 @@ def build_graph_native_fci(
     n_max: int,
     m_total: int = 0,
     spin: str = 'singlet',
+    subblock: Optional[Tuple[int, int]] = None,
 ) -> np.ndarray:
     """Build the graph-native two-electron FCI matrix.
 
@@ -1058,6 +1059,24 @@ def build_graph_native_fci(
     spin : str
         'singlet' (S=0, symmetric spatial) or 'triplet' (S=1, antisymmetric
         spatial). For triplet, both electrons must be in different orbitals.
+    subblock : tuple of (int, int), optional
+        Restrict configuration enumeration to spatial pairs whose orbital
+        angular momenta multiset equals ``{l_a, l_b}``. For example,
+        ``subblock=(0, 0)`` selects the pure ss sub-block (both electrons
+        in s-orbitals); ``subblock=(0, 1)`` selects sp pairs (one s, one p).
+        Default ``None`` enumerates all configurations consistent with
+        ``m_total`` (original behavior, bit-identical when this kwarg is
+        omitted).
+
+        Why this matters: at fixed ``m_total`` the M_L sector mixes states
+        of different total L (e.g. M_L=0 contains ¹S, ¹P at M_L=0, and
+        ¹D at M_L=0 starting at n_max >= 3), and naive sort-by-energy
+        labeling of the eigenvalues conflates these. Restricting to a
+        single (l_a, l_b) sub-block isolates a clean angular-character
+        sector whose lowest eigenvalues correspond to the n=1, 2, 3, …
+        states in that sector. For S-state spectra (e.g. the 2¹S − 2³S
+        exchange splitting) use ``subblock=(0, 0)``; for P-state spectra
+        use ``subblock=(0, 1)``; etc.
 
     Returns
     -------
@@ -1070,6 +1089,23 @@ def build_graph_native_fci(
     h1_mat, orbitals = _build_graph_h1(Z, n_max)
     n_spatial = len(orbitals)
 
+    # Optional sub-block restriction: only pairs whose l-multiset matches.
+    if subblock is not None:
+        l_a, l_b = subblock
+        if l_a < 0 or l_b < 0:
+            raise ValueError(
+                f"subblock l values must be non-negative, got {subblock}"
+            )
+        target_l_pair = tuple(sorted((l_a, l_b)))
+
+        def _allowed(idx_i: int, idx_j: int) -> bool:
+            li = orbitals[idx_i][1]
+            lj = orbitals[idx_j][1]
+            return tuple(sorted((li, lj))) == target_l_pair
+    else:
+        def _allowed(idx_i: int, idx_j: int) -> bool:  # noqa: ARG001
+            return True
+
     # Build configurations: pairs (i, j) with M_L = m_total
     # Singlet: i <= j (same orbital allowed), spatial symmetric
     # Triplet: i < j (different orbitals only), spatial antisymmetric
@@ -1077,12 +1113,12 @@ def build_graph_native_fci(
     if spin == 'singlet':
         for i in range(n_spatial):
             for j in range(i, n_spatial):
-                if orbitals[i][2] + orbitals[j][2] == m_total:
+                if orbitals[i][2] + orbitals[j][2] == m_total and _allowed(i, j):
                     configs.append((i, j))
     else:  # triplet
         for i in range(n_spatial):
             for j in range(i + 1, n_spatial):
-                if orbitals[i][2] + orbitals[j][2] == m_total:
+                if orbitals[i][2] + orbitals[j][2] == m_total and _allowed(i, j):
                     configs.append((i, j))
 
     n_configs = len(configs)
@@ -1303,14 +1339,42 @@ def compute_he_spectrum(
     Z: int = 2,
     n_states: int = 3,
     max_L: int = 2,
+    subblock: Optional[Tuple[int, int]] = None,
 ) -> Dict:
     """Compute the He atomic spectrum from graph-native CI.
 
     Builds the FCI matrix in each (spin, M_L) sector and extracts
-    eigenvalues. Uses M_L = L to select states dominated by total
-    angular momentum L. Note: the graph Laplacian's off-diagonal
-    elements break SO(3) symmetry, so L is approximate — M_L is
-    the exact quantum number.
+    eigenvalues.
+
+    .. warning::
+
+       At ``n_max >= 3`` the fixed-M_L sector mixes states of different
+       total orbital angular momentum L: the M_L=0 sector contains
+       ¹S states, ¹P at M_L=0, ¹D at M_L=0, etc. Sort-by-energy
+       labeling of the eigenvalues conflates these. For example, at
+       ``n_max=3`` the second M_L=0 singlet eigenvalue is dominantly
+       (1s, 3p) ¹P, NOT (1s, 2s) ¹S — naively labeling it "2¹S" is
+       wrong. For excited-state spectra you should pass the ``subblock``
+       kwarg to isolate a clean angular sector.
+
+       Specifically:
+
+       - ``subblock=(0, 0)`` for clean ¹S/³S spectra (e.g. the 2¹S − 2³S
+         exchange splitting). The lowest singlet ss-eigenvalues are
+         1¹S, 2¹S, 3¹S, … and the lowest triplet ss-eigenvalues are
+         2³S, 3³S, … in order. This is the construction used by the
+         He 2¹S−2³S precision-catalogue sprint and is the recommended
+         path for excited S-state work.
+       - ``subblock=(0, 1)`` for ¹P/³P spectra (lowest 2¹P, 2³P, 3¹P, …).
+       - ``subblock=(1, 1)`` for pp pairs (e.g. the (2p)² configurations
+         contributing to ¹S, ¹D, ³P).
+       - ``subblock=None`` (default) preserves the original full-M_L
+         behavior unchanged for backward compatibility.
+
+       The ground state 1¹S is correctly labeled by sort-by-energy at
+       any setting because it is the lowest M_L=0 singlet eigenvalue
+       and the (1s)² character dominates by a large margin. Excited
+       state labels are unreliable without ``subblock``.
 
     Parameters
     ----------
@@ -1322,6 +1386,16 @@ def compute_he_spectrum(
         Number of eigenvalues to extract per sector.
     max_L : int
         Maximum total orbital angular momentum to compute (0=S, 1=P, 2=D).
+        Ignored when ``subblock`` is provided.
+    subblock : tuple of (int, int), optional
+        Restrict each (spin, M_L) sector to the (l_a, l_b) sub-block.
+        See ``build_graph_native_fci`` for the precise semantics. When
+        provided, only the sector labeled by L = (l_a + l_b) [for the
+        ll diagonal case] or by the dominant character is meaningful;
+        the function still iterates spin and ``L = m_total`` over the
+        same range as the default path so the returned ``sector_dims``
+        keys remain interpretable. Default ``None`` preserves the
+        original M_L-only behavior.
 
     Returns
     -------
@@ -1331,6 +1405,7 @@ def compute_he_spectrum(
         'reference': dict of Drake NR reference values used
         'n_max': int
         'sector_dims': dict mapping sector label to matrix dimension
+        'subblock': tuple or None — value of the subblock kwarg used
     """
     states = {}
     sector_dims = {}
@@ -1338,7 +1413,7 @@ def compute_he_spectrum(
     for L in range(min(max_L + 1, n_max)):
         for spin in ['singlet', 'triplet']:
             H = build_graph_native_fci(Z=Z, n_max=n_max, m_total=L,
-                                       spin=spin)
+                                       spin=spin, subblock=subblock)
             dim = H.shape[0]
             if dim == 0:
                 continue
@@ -1407,4 +1482,5 @@ def compute_he_spectrum(
         'reference': HE_NR_REFERENCE,
         'n_max': n_max,
         'sector_dims': sector_dims,
+        'subblock': subblock,
     }

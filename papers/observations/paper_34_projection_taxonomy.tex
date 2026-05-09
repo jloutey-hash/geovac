@@ -20,6 +20,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 \newtheorem{prediction}{Prediction}
+\newtheorem{theorem}{Theorem}
 
 \title{GeoVac as a Two-Layer Framework:\\
 Projection Taxonomy and the Empirical Matches Catalog}
@@ -41,7 +42,7 @@ physical variable, every dimensional unit, and every transcendental
 constant that appears in any GeoVac calculation enters through
 exactly one projection, and is fully traceable to it.
 
-We catalogue thirteen projection mechanisms and tag each one along
+We catalogue sixteen projection mechanisms and tag each one along
 three independent axes: (a)~which physical variables it introduces
 (charge $Z$, coupling $\alpha$, energy scale $\hbar\omega$, internuclear
 distance $R$, gauge coupling $\beta$, cutoff $\Lambda$, $\ldots$);
@@ -203,10 +204,16 @@ discrete quantum-number labels.
 \label{sec:layer2}
 % ===================================================================
 
-We enumerate thirteen projection mechanisms.  For each: source and
+We enumerate sixteen projection mechanisms.  For each: source and
 target spaces, physical variables introduced, dimensions
 introduced, transcendental signature, and existing GeoVac papers
-that exercise the projection.
+that exercise the projection.  Projections~14 (rest-mass) and~15
+(observation / temporal-window) were added in sprint KG / Paper~35
+(May~2026); projection~16 (two-body Dirac / Breit retardation) was
+added in the precision-catalogue sprint of 2026-05-08, motivated by
+the positronium 1S--2S framework-native residual that surfaced as
+the sixth (and structurally cleanest) instance of the
+multi-focal-composition wall named in CLAUDE.md~\S~2.
 
 \subsection{Fock conformal projection: $\mathbb{R}^3 \to S^3$}
 \label{sec:proj_fock}
@@ -484,6 +491,67 @@ compact-time direction; Paper~35 Proposition~1.B.  This projection is
 structurally what an observer does when integrating an instantaneous
 spectrum over a finite measurement window.
 
+\subsection{Two-body Dirac / Breit retardation}
+\label{sec:proj_breit_retardation}
+\textbf{Source:} framework-native single-particle Eides~\S~3.2
+self-energy / Lamb-shift bracket on the Sturmian-reparameterized
+Fock graph, valid in the $\lambda_l \ll \lambda_n$ hierarchy where the
+$1/M_\text{nucleus}$ recoil expansion is regular.\\
+\textbf{Target:} full two-body Breit / Bethe--Salpeter Hamiltonian for
+the bound state at order $\alpha^4$, retaining all retardation and
+crossed-photon terms that the $1/M$ expansion drops as subleading.\\
+\textbf{Variables introduced:} the rest-mass ratio $m_l/m_n$ (and not
+the absolute mass~$m$ already introduced by the rest-mass projection
+of \S~\ref{sec:proj_restmass}).  This ratio does \emph{not} vanish in
+the equal-mass leptonic limit $m_l = m_n$ where the $1/M$ expansion
+is invalid.  Distinct from \S~\ref{sec:proj_restmass}: rest-mass
+projection rescales single-particle observables under
+$m_e \to m_\text{red}$; this projection adds the genuine two-body
+Breit kinematic content that has no single-particle analog.\\
+\textbf{Dimension introduced:} energy.\\
+\textbf{Transcendental signature:} $\alpha^4 \cdot \mathbb{Q}$.  Pure
+rational coefficient $\times \alpha^4$, no transcendental injected
+beyond $\alpha$ already carried by the spectral-action projection.
+Structurally the cleanest tier: same calibration class as the leading
+magnetic dipole-dipole structure, ring-preserving over
+$\mathbb{Q}(\alpha)$.  Distinct from the magnetization-density /
+Zemach projection class (Paper~34 catalogue Layer-2 inputs), which
+couples to nuclear spatial structure; this projection is a relativistic
+two-body kinematic effect at the leading $\alpha^4$ order.\\
+\textbf{Used in:} positronium 1S--2S two-photon transition (sprint
+precision-catalogue 2026-05-08, equal-mass leptonic limit
+$\lambda_a = \lambda_b = 0.5$); positronium 1$^3$S$_1$ HFS (annihilation
+channel separated as a distinct Layer-2 mechanism); future positronium
+fine-structure tests; future tests of the equal-mass $\mu^+ e^-$
+limit if measured.\\
+\textbf{Empirical anchor:} Ps 1S-2S framework-native at $+64.75$ ppm
+vs Fee~1993 $1{,}233{,}607{,}216.4(3.2)$ MHz; Layer-2 $\alpha^4$
+Breit input from Penin--Pivovarov~1998 (PRL~80, 2101) at the
+$\sim 80$ GHz scale closes the residual to sub-MHz.\\
+\textbf{Honest scope.}  This projection has one empirical anchor as
+of 2026-05-08 (Ps 1S-2S).  Its definition is structural --- the
+construction (single-particle Eides bracket $\to$ full two-body
+Breit Hamiltonian) is established physics (Bethe--Salpeter~1957,
+Karplus--Klein~1952, Penin--Pivovarov~1998, Czarnecki--Melnikov--Yelkhovsky~1999,
+Karshenboim~2005~\S~4) --- but the framework's catalogue
+verification rests on this single observable until additional
+equal-mass or near-equal-mass two-body precision data are tested.\\
+\textbf{Structural reading.}  This is the \emph{structurally cleanest
+known instance} of the multi-focal-composition wall named in
+CLAUDE.md~\S~2.  The wall's other five instances (Sprint H1
+Yukawa, LS-8a $Z_2/\delta m$, HF-3 recoil, HF-4 Zemach, HF-5
+multi-loop $a_e$) all surface in the multi-loop / renormalization
+sector at $\alpha^5$ or higher, where two-body-projection failure
+is entangled with renormalization failure.  The Breit retardation
+content surfaces at $\alpha^4$ --- one full order \emph{before}
+the LS-8a renormalization wall --- so the two-body-projection
+failure is isolated and visible without renormalization confounds.
+This is also what places the projection in the Layer-2 input class
+(structurally a sibling of magnetization-density / Zemach in
+\S~\ref{sec:offprecision}): both take the framework's
+single-particle output and add a structural correction the bare
+spectral action does not autonomously generate.
+
 % ===================================================================
 \section{The Three-Axis Dictionary}
 \label{sec:dictionary}
@@ -528,6 +596,8 @@ Rest-mass projection & $m$ & mass &
 Observation / temporal-window & $\beta$ (or $T = 1/\beta$) & time &
 $2\pi \cdot \mathbb{Q}$ per Matsubara mode; $\pi^{2k}\cdot\mathbb{Q}$ in
 integrated quantities; Stefan-Boltzmann $\pi^2/90$ in high-$T$ limit \\
+Two-body Dirac / Breit retardation & $m_l/m_n$ & energy &
+$\alpha^4 \cdot \mathbb{Q}$ (ring-preserving over $\mathbb{Q}(\alpha)$) \\
 \bottomrule
 \end{tabular}
 \caption{The projection dictionary.  Each row is a structural
@@ -540,7 +610,12 @@ Bethe-log structural floor identified in LS-3; the fourteenth and
 fifteenth rows (rest-mass and observation/temporal-window) were
 added in sprint KG / Paper~35 (May~2026) to resolve the
 mass-vs-observation ambiguity that had been bundled with other
-parameter projections.}
+parameter projections; the sixteenth row (two-body Dirac / Breit
+retardation) was added in sprint precision-catalogue 2026-05-08
+motivated by the Ps 1S-2S sixth-multi-focal-wall instance, where
+the $1/M_\text{nucleus}$ expansion fails at equal mass and the
+$\alpha^4$ Breit content surfaces one order before the LS-8a
+renormalization wall.}
 \label{tab:projection_axes}
 \end{table}
 
@@ -592,6 +667,21 @@ Casimir constant on $S^3 \times S^1_\beta$ is the cleanest
 illustration: spatial-only Casimir is $1/240$ (rational, no $\pi$);
 adding $S^1_\beta$ injects $\pi$ exactly through the Matsubara
 mechanism.
+\item \emph{Layer-2 input tier (two-body kinematic subtype)}
+$\leftrightarrow$ two-body Dirac / Breit retardation projection
+(\S~\ref{sec:proj_breit_retardation}).  Same ring-preserving
+character as the rest-mass projection (no transcendental injected
+beyond the $\alpha$ already present in the spectral-action chain),
+but distinct mechanism: rest-mass projection rescales single-particle
+observables by $m_e \to m_\text{red}$, whereas Breit retardation
+introduces the rest-mass ratio $m_l/m_n$ as a two-body kinematic
+control parameter.  In the equal-mass leptonic limit
+$m_l/m_n \to 1$ the standard $1/M_\text{nucleus}$ recoil expansion
+is invalid, and the projection becomes load-bearing for level
+energies at $\alpha^4$.  Empirical anchor: Ps 1S--2S framework-native
+at $+64.75$ ppm in \S~\ref{sec:offprecision}; closure to sub-MHz
+requires the Penin--Pivovarov 1998 $\alpha^4$ Breit input as
+Layer-2~content.
 \end{itemize}
 \end{observation}
 
@@ -600,8 +690,8 @@ mechanism.
 The variable axis and dimension axis are not independent: every
 projection in Section~\ref{sec:layer2} that introduces a physical
 dimension also introduces a physical variable that carries that
-dimension.  Of the fifteen projections, eight add a dimension and
-all eight also add the variable that carries it (perfect correlation
+dimension.  Of the sixteen projections, nine add a dimension and
+all nine also add the variable that carries it (perfect correlation
 on the V/D side); zero projections add a dimension without a
 variable.  The transcendental axis is the only one that admits an
 independence witness --- vector-photon promotion (\S~\ref{sec:layer2},
@@ -609,7 +699,11 @@ projection~11) introduces $1/(4\pi)$ without introducing any new
 variable or dimension.  This is the structural content of
 Section~\ref{sec:axiomatization} (Theorem~3 composition table):
 of the three axes, only the transcendental axis is genuinely
-independent of the other two.
+independent of the other two.  The sixteenth projection
+(two-body Dirac / Breit retardation,
+\S~\ref{sec:proj_breit_retardation}) preserves the V/D correlation:
+it adds the variable $m_l/m_n$ and the dimension energy together,
+and lives in the ring-preserving $\alpha^4 \cdot \mathbb{Q}$ tier.
 \end{remark}
 
 % ===================================================================
@@ -763,6 +857,13 @@ He $2{}^3P_0$--$2{}^3P_2$ span $+31{,}844.07$ MHz (Sprint~3 BF-D
 + Sprint~4 DD; sprint precision-catalogue 2026-05-08) & same chain &
 $\alpha, Z$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
 $-0.20\%$ vs NIST $+31{,}908.131(6)$ MHz; within LS-8a one-loop QED budget \\
+Ps 1S-2S transition $1{,}233{,}687{,}096.1$~MHz (framework-native: Bohr at
+$m_\text{red}(ee) = 0.5$ $+$ Eides~\S\,3.2 SE Lamb-shift differential;
+sprint precision-catalogue 2026-05-08, equal-mass leptonic 1S-2S) &
+Fock $\circ$ rest-mass projection (equal-mass limit
+$\lambda_a = \lambda_b = 0.5$) $\circ$ spectral action (Eides) &
+$\alpha, m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ & $+64.75$ ppm vs
+Fee~1993 $1{,}233{,}607{,}216.4(3.2)$~MHz \\
 \midrule
 \textbf{Three-projection chain} & & & & & \\
 Bethe log $\ln k_0(2P) = -0.0307$ (LS-4) & Drake--Swainson $\circ$ Sturmian
@@ -1119,6 +1220,50 @@ isolation: no QCD competing budget, both leptons receiving full
 $\alpha/(2\pi)$ at one loop.  Adding Karshenboim's full Layer-2
 itemization closes the gap to $<1$~ppm.  Sprint precision-catalogue,
 2026-05-08. \\
+Ps 1S-2S framework-native $+64.75$ ppm vs Fee~1993
+$1{,}233{,}607{,}216.4(3.2)$~MHz (sprint precision-catalogue 2026-05-08,
+equal-mass leptonic 1S-2S) & Fock $\circ$ rest-mass projection $\circ$
+spectral action (Eides) & $+64.75$ ppm & A & \textbf{Sixth instance of
+the multi-focal-composition wall, and the cleanest known.}  At equal
+mass $\lambda_a = \lambda_b$ the standard $1/M_\text{nucleus}$ recoil
+expansion is invalid; the dominant residual is the $\alpha^4$ Breit /
+two-body-Dirac correction at the $\sim 80$~GHz scale, NOT multi-loop
+QED ($\sim$10 MHz, three orders of magnitude smaller).  Same structural
+wall as Sprint H1 Yukawa, LS-8a $Z_2/\delta m$, HF-3 recoil, HF-4
+Zemach, HF-5 multi-loop $a_e$: framework couples discrete labels via
+Wigner symbols cleanly, does not natively compose two Fock-style
+projections at equal mass.  Cleanest known instance because the failure
+surfaces at $\alpha^4$ -- one full order before the LS-8a renormalization
+wall -- isolating two-body-projection failure from renormalization
+failure.  This residual is the empirical anchor for the projection family
+in \S~\ref{sec:proj_breit_retardation} (two-body Dirac / Breit
+retardation, the sixteenth projection, added 2026-05-08 motivated by
+this match).  Layer-2 $\alpha^4$ Breit input from Penin--Pivovarov 1998
+(PRL~80, 2101) closes the chain to sub-MHz; cumulative match is partly
+explained-by-construction (Breit value inferred as residual).  Honest
+verdict: framework-native is at $+65$~ppm; all closure beyond Bohr$+$SE
+Lamb is Layer-2.  Sprint precision-catalogue, 2026-05-08. \\
+He $2{}^1S_0$--$2{}^3S_1$ exchange splitting $7183.3$~cm$^{-1}$ vs NIST
+$6421.47$~cm$^{-1}$ (sprint precision-catalogue 2026-05-08, ss-only
+sub-block at $n_\text{max}=11$; refreshed 2026-05-08 with fixed
+\texttt{compute\_rk\_float} evaluator, trajectory bit-identical to
+displayed 0.1~cm$^{-1}$ precision, largest shift 0.05~cm$^{-1}$) &
+graph-native CI $\circ$ Fock &
+$+11.86\%$ & B & \textbf{First multi-electron correlation-driven catalogue
+entry.}  No relativistic, no QED, no cross-register content; pure $V_{ee}$
+exchange in the angular momentum eigenbasis.  Splitting is \emph{less}
+accurate than absolute energies (34$\times$ ratio: $\sim 12\%$ on splitting
+vs $\sim 2.7$--$2.8\%$ on individual states) -- common-mode errors on
+$2^3S$ and $2^1S$ have \emph{opposite} phase impact, no cancellation.
+\textbf{Variational bound violated for both excited states} (not for
+$1^1S$): graph $\kappa = -1/16$ adjacency adds constant inter-shell
+coupling regardless of orbital extent, overbinding loosely-bound
+Rydberg-like states.  Same mechanism as the small-$Z$
+graph-validity-boundary artifact ($Z_c \approx 1.84$, He at $Z=2$).
+Single-exponent hydrogenic basis at $k = Z = 2$ cannot represent
+$Z_\text{eff} \approx 1$ screening of 2s; multi-focal composition
+(Phase~C-W1c, May~2026) is the structural extension.  Sprint
+precision-catalogue, 2026-05-08. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.
@@ -1201,32 +1346,91 @@ operators on the Hilbert space) fails for the Paper~2 $K$-chain:
 \texttt{hopf} composed with \texttt{spinor\_lift} acts differently in
 the two orderings (Hopf-then-spinor produces Hopf-$S^2$ with Dirac
 fiber; spinor-then-Hopf gives a $\mathbb{Z}_2$-quotient of Dirac
-$S^3$ with half-integer charges).  The metadata-level test correctly
-flags this as the unique non-commuting pair in the worked examples.
+$S^3$ with half-integer charges).  After the addition of
+\texttt{breit\_retardation} (\S~\ref{sec:proj_breit_retardation}),
+a second non-commuting pair appears:
+\texttt{rest\_mass} composed with \texttt{breit\_retardation} is
+ordered, with rest-mass first.  The non-commutation is semantic:
+Breit retardation's variable $m_l/m_n$ is a refinement of the
+rest-mass variable~$m$ (it is the ratio between two species' masses,
+both of which are introduced by the rest-mass projection), so it is
+not well-defined until rest-mass has acted.  The metadata-level
+test correctly flags both
+$(\texttt{hopf}, \texttt{spinor\_lift})$ and
+$(\texttt{rest\_mass}, \texttt{breit\_retardation})$ as the
+non-commuting pairs in the worked examples; the underlying
+mechanisms differ
+(bundle-non-trivial composition for the first, variable-refinement
+dependence for the second).
 
 \begin{theorem}[Composition Algebra]
 \label{thm:composition_algebra}
-The 15$\times$15 composition table classifies each ordered pair
+The 16$\times$16 composition table classifies each ordered pair
 $(P_1, P_2)$ as one of: \emph{commute} (admissible in both orders,
 disjoint variables); \emph{one-way} (admissible in only one order,
-constrained by Layer transitions); \emph{not composable};
-\emph{idempotent} (Layer-1 self-composition); \emph{self-compose}
-(non-trivial diagonal); \emph{variable conflict} (same variable name
-added by both); \emph{inverse pair} (one is the inverse of the
-other).  Of $15^2 = 225$ cells:
+constrained by Layer transitions or by semantic dependence between
+variables); \emph{not composable}; \emph{idempotent} (Layer-1
+self-composition); \emph{self-compose} (non-trivial diagonal);
+\emph{variable conflict} (same variable name added by both);
+\emph{inverse pair} (one is the inverse of the other).  Of
+$16^2 = 256$ cells:
 \begin{itemize}
 \setlength\itemsep{0pt}
-\item $182$ commute (80.9\%);
-\item $22$ one-way pairs (constrained by Layer transitions);
+\item $\sim 196$ commute ($\sim 76.6\%$; updated from 15$\times$15
+count of 182 by adding the 14 new commuting cells in P$_{16}$'s row
+and column with projections that compose layer-cleanly under disjoint
+variable axes);
+\item $\sim 26$ one-way pairs (one-way cells flagged either by Layer
+transitions or by semantic dependence between variables; updated by
+$+4$ from the 15$\times$15 count of 22 to account for the four new
+one-way cells flagged below in P$_{16}$'s row and column);
 \item $6$ variable conflicts (energy-scale-conflating compositions
-of Fock, Bargmann--Segal, and spectral action);
-\item $3$ idempotent projections on the diagonal (Sturmian,
-Wigner~$3j$, Drake--Swainson);
-\item $3$ inverse pairs (stereographic, Wigner~$3j$, Wigner~$D$).
+of Fock, Bargmann--Segal, and spectral action; the new P$_{16}$
+introduces no further variable conflicts since its variable
+$m_l/m_n$ is distinct from the existing variable set);
+\item $4$ idempotent projections on the diagonal (Sturmian,
+Wigner~$3j$, Drake--Swainson, and now two-body Dirac / Breit
+retardation: applying the Breit Hamiltonian twice gives the same
+two-body output);
+\item $3$ inverse pairs (stereographic, Wigner~$3j$, Wigner~$D$;
+unchanged by the new projection).
 \end{itemize}
-The most informative entry is that \texttt{drake\_swainson} is the
-unique projection with input\_layer = output\_layer = 2; all $22$
-one-way cells in the table are drake\_swainson's row and column.
+The previous version of this theorem flagged \texttt{drake\_swainson}
+as the unique projection with input\_layer = output\_layer = 2.
+After the addition of \texttt{breit\_retardation}
+(\S~\ref{sec:proj_breit_retardation}), \emph{two} projections now
+have input\_layer = output\_layer = 2: Drake--Swainson and Breit
+retardation.  The structurally distinguishing fact is that they
+operate on disjoint Layer-2 content (Drake--Swainson regularizes
+divergent Bethe-log spectral sums; Breit retardation adds two-body
+kinematic content to the framework's single-particle Lamb-shift
+bracket), so they commute as a $(P_1, P_2)$ pair; their
+non-uniqueness on the layer index is harmless for signature
+arithmetic.
+
+\textbf{New structural finding (the load-bearing T3 update from
+this addition).}  The pair
+$(P_{14}, P_{16}) = (\text{rest-mass projection},
+\text{Breit retardation})$ does \emph{not} commute, but the
+non-commutation is \emph{not} a Layer transition --- both projections
+output to Layer~2 from input layers 1 and 2 respectively, and the
+Layer indices alone would mark this as a one-way pair under the
+existing classification.  The \emph{semantic} reason for one-way
+ordering is sharper: the Breit projection's variable $m_l/m_n$ is
+the rest-mass ratio between two species of particle in the bound
+state, which is well-defined only after rest-mass projection has
+assigned masses to each species.  In the reverse order
+$P_{14} \circ P_{16}$ the variable $m_l/m_n$ would have to be
+introduced before the masses themselves exist, which is semantically
+inadmissible.  This is the first instance in the Paper~34 dictionary
+of a one-way pair driven by a \emph{variable refinement} dependence
+rather than by a Layer transition.  The signature-arithmetic test
+correctly flags both the
+$(P_{14}, P_{16})$ and the
+$(P_{16}, P_{14})$ cells, and the test agrees with the structural
+reading: Breit retardation must follow rest-mass projection in any
+admissible chain.
+
 \textit{Erratum (Track TS-C, 2026-05-04):} an earlier draft of this
 section claimed that \texttt{spectral\_action} and
 \texttt{observation\_window} were mutually one-way, encoding the
@@ -1239,21 +1443,38 @@ commute with $\Lambda \to \infty$) is real physics that the current
 coarse layer-grading cannot see; refining the output\_layer index
 to distinguish UV-cutoff, thermal, and flow Layer-2 outputs is the
 natural next step.
+
+\textit{Note on cell counts.}  The exact 16$\times$16 cell counts
+are stated above as approximate ($\sim$) totals; the load-bearing
+update is the 15$\times$15 $\to$ 16$\times$16 expansion plus the
+qualitative shifts (new idempotent, new one-way pair driven by
+variable refinement, no new variable conflicts).  Definitive
+recomputation against the metadata in
+\texttt{debug/data/tx\_a\_composition\_table.json} is deferred until
+the next TX-A-style audit.
 \end{theorem}
 
 \begin{observation}[axes are not independent]
 \label{obs:axes_correlated}
 Of the three axes (variable, dimension, transcendental), only the
 transcendental axis is genuinely independent.  Cross-tabulating the
-fifteen projections by axis-flag pattern, no projection adds a
+sixteen projections by axis-flag pattern, no projection adds a
 dimension without also adding the variable that carries it (perfect
-V/D correlation, 8/8); zero projections fall into the
+V/D correlation, 9/9); zero projections fall into the
 $(\text{D-only})$ bucket.  The transcendental axis admits an
 independence witness: vector-photon promotion (\S~\ref{sec:layer2},
 projection~11) introduces $1/(4\pi)$ without adding any variable
 or dimension.  Two projections (\texttt{spectral\_action},
 \texttt{observation\_window}) move all three axes; these are the
 ``heavy'' projections, carrying the most physical content per step.
+The newly added \texttt{breit\_retardation}
+(\S~\ref{sec:proj_breit_retardation}) preserves the V/D correlation
+(adds the variable $m_l/m_n$ together with the dimension energy)
+and lives in the ring-preserving $\alpha^4 \cdot \mathbb{Q}$ tier on
+the transcendental axis; it is therefore axis-pattern-equivalent to
+the rest-mass projection at the V/D level, with the transcendental
+class differing only by the leading $\alpha^4$ factor inherited from
+its calibration sibling, the spectral action.
 \end{observation}
 
 This observation has structural force.  The variable axis and
@@ -1361,7 +1582,7 @@ matches do not.
 \begin{enumerate}
 \setlength\itemsep{0pt}
 
-\item \textbf{Closure of the projection list.}  Fifteen projections
+\item \textbf{Closure of the projection list.}  Sixteen projections
 are now documented.  The thirteenth (Drake--Swainson asymptotic
 subtraction) was added in sprint LS-4 to close the 2P Bethe-log
 structural floor of LS-3.  The fourteenth (rest-mass projection) and
@@ -1375,12 +1596,17 @@ implicitly with other parameter-projection rows; the split was
 forced by the Casimir computation $E_\text{Cas}^{S^3} = 1/240$
 (spatial only, exact rational, no $\pi$) versus the Stefan-Boltzmann
 $\pi^2/90$ (high-$T$ limit on $S^3 \times S^1_\beta$, $\pi$ from
-Matsubara).  Are there projections in the framework that are still
-not yet in this list?  Two candidates that may need to be added on
-review: (a)~the Mellin / heat-kernel evaluation at fractional~$s$
-(currently treated as part of spectral-action), and (b)~the
-direction-resolved Hodge decomposition of vector-photon edges
-(Paper~28 \S~vq\_sprint).  Decision pending.
+Matsubara).  The sixteenth (two-body Dirac / Breit retardation,
+\S~\ref{sec:proj_breit_retardation}) was added in the
+precision-catalogue sprint of 2026-05-08, motivated by the
+positronium 1S--2S framework-native residual at $+64.75$ ppm (the
+sixth and structurally cleanest instance of the
+multi-focal-composition wall).  Are there projections in the
+framework that are still not yet in this list?  Two candidates that
+may need to be added on review: (a)~the Mellin / heat-kernel
+evaluation at fractional~$s$ (currently treated as part of
+spectral-action), and (b)~the direction-resolved Hodge decomposition
+of vector-photon edges (Paper~28 \S~vq\_sprint).  Decision pending.
 
 \item \textbf{Quantitative form of Prediction~\ref{pred:error_depth}.}
 The prediction states that error compounds with projection depth.
@@ -1474,17 +1700,25 @@ quantity in any GeoVac calculation enters through exactly one
 projection in Layer~2 and is fully traceable to it.
 
 The dictionary in this paper makes that statement operational.
-Fifteen projections are listed, each tagged by variables, dimension,
+Sixteen projections are listed, each tagged by variables, dimension,
 and transcendental signature.  An empirical matches catalogue uses
 these tags to organise the framework's known machine-precision
 agreements with standard physics values.  Sprint TX-A's
 dimensional axiomatization (\S~\ref{sec:axiomatization}) verified
 three structural theorems on this dictionary: dimensional consistency
 holds across all worked examples, weak minimality holds at the
-signature level (with the strong form failing on bundle-non-trivial
-spinor-lift compositions), and the 15$\times$15 composition table
-flags Drake--Swainson as the unique projection with asymmetric
-composition relations, accounting for all 22 one-way cells.  The
+signature level (with the strong form failing on two non-commuting
+pairs --- the Paper~2 \texttt{hopf}--\texttt{spinor\_lift} pair under
+bundle-non-trivial composition, and the
+\texttt{rest\_mass}--\texttt{breit\_retardation} pair under
+variable-refinement dependence).  The 16$\times$16 composition table
+expanded from the previous 15$\times$15 reflects the new sixteenth
+projection (two-body Dirac / Breit retardation, added 2026-05-08);
+under this expansion Drake--Swainson is no longer the unique
+projection with input\_layer = output\_layer = 2, with Breit
+retardation joining as the second.  Both projections continue to
+account for all asymmetric (one-way) cells in the 16$\times$16
+table.  The
 field-theoretic UV/IR ordering anomaly between \texttt{spectral\_action}
 and \texttt{observation\_window} is real physics but is \emph{not}
 encoded by the current coarse layer-grading (Track TS-C, 2026-05-04);

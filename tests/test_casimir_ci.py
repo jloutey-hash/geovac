@@ -29,6 +29,7 @@ from geovac.casimir_ci import (
     build_graph_native_fci,
     build_graph_consistent_fci,
     _build_graph_h1,
+    compute_he_spectrum,
 )
 from geovac.hypergeometric_slater import compute_rk_float, get_rk_float
 
@@ -586,3 +587,342 @@ class TestGraphConsistentCI:
         H_native = build_graph_native_fci(Z=2, n_max=3)
         H_consistent = build_graph_consistent_fci(Z=2, n_max=3)
         assert H_native.shape == H_consistent.shape
+
+
+# ========================================================================
+# Sub-block restriction (subblock kwarg)
+# ========================================================================
+#
+# At n_max >= 3 the M_L=0 sector mixes ¹S, ¹P at M_L=0, ¹D at M_L=0, etc.
+# Sort-by-energy labeling of the eigenvalues conflates these states. The
+# `subblock` kwarg restricts configuration enumeration to a fixed (l_a, l_b)
+# multiset, isolating a clean angular-character sub-block.
+#
+# Sprint reference: debug/precision_catalogue_he_2s_singlet_triplet.py
+# (the He 2¹S − 2³S exchange splitting sprint, May 2026) constructed
+# the ss-only sub-block inline; this test class verifies the production
+# `subblock=(0, 0)` API reproduces those sprint results.
+
+HA_TO_CM_INVERSE = 219474.6313632
+
+
+class TestSubblockBackwardCompat:
+    """Verify subblock=None preserves the original behavior bit-identically."""
+
+    def test_default_singlet_nmax2_bit_identical(self):
+        """subblock=None matches the no-kwarg path bit-identically (singlet, n_max=2)."""
+        H_old = build_graph_native_fci(Z=2, n_max=2, m_total=0, spin='singlet')
+        H_new = build_graph_native_fci(Z=2, n_max=2, m_total=0, spin='singlet',
+                                       subblock=None)
+        assert H_old.shape == H_new.shape
+        assert np.max(np.abs(H_old - H_new)) == 0.0
+
+    def test_default_triplet_nmax3_bit_identical(self):
+        """subblock=None matches no-kwarg (triplet, n_max=3, multiple m_total)."""
+        for m_total in [-1, 0, 1]:
+            H_old = build_graph_native_fci(Z=2, n_max=3, m_total=m_total,
+                                           spin='triplet')
+            H_new = build_graph_native_fci(Z=2, n_max=3, m_total=m_total,
+                                           spin='triplet', subblock=None)
+            assert H_old.shape == H_new.shape, (
+                f"shape mismatch at m_total={m_total}: "
+                f"{H_old.shape} vs {H_new.shape}"
+            )
+            assert np.max(np.abs(H_old - H_new)) == 0.0, (
+                f"non-zero diff at m_total={m_total}"
+            )
+
+    def test_default_nmax4_bit_identical(self):
+        """subblock=None matches no-kwarg at n_max=4 (larger basis)."""
+        H_old = build_graph_native_fci(Z=2, n_max=4, m_total=0, spin='singlet')
+        H_new = build_graph_native_fci(Z=2, n_max=4, m_total=0, spin='singlet',
+                                       subblock=None)
+        assert H_old.shape == H_new.shape
+        assert np.max(np.abs(H_old - H_new)) == 0.0
+
+    def test_compute_he_spectrum_default_unchanged(self):
+        """compute_he_spectrum default behavior unchanged when subblock omitted."""
+        result_old = compute_he_spectrum(n_max=2)
+        result_new = compute_he_spectrum(n_max=2, subblock=None)
+        # Same sectors, same dims, same energies bit-identical
+        assert result_old['sector_dims'] == result_new['sector_dims']
+        for label, info in result_old['states'].items():
+            assert label in result_new['states']
+            assert info['energy'] == result_new['states'][label]['energy']
+        assert result_new['subblock'] is None
+
+
+class TestSubblockSSOnly:
+    """Verify subblock=(0, 0) reproduces the He 2¹S − 2³S sprint result.
+
+    Sprint driver: debug/precision_catalogue_he_2s_singlet_triplet.py
+    Reference data: debug/data/precision_catalogue_he_2s_singlet_triplet.json
+    """
+
+    def test_ss_singlet_dim_nmax3(self):
+        """ss-only singlet at n_max=3: exactly 6 configs (3 s-orbitals, pairs i<=j)."""
+        H = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                   subblock=(0, 0))
+        # n_s = 3 (1s, 2s, 3s) → pairs (i, j) with i <= j: 3*4/2 = 6
+        assert H.shape == (6, 6)
+
+    def test_ss_triplet_dim_nmax3(self):
+        """ss-only triplet at n_max=3: exactly 3 configs (i < j only, no diagonal)."""
+        H = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='triplet',
+                                   subblock=(0, 0))
+        # n_s = 3 → pairs (i, j) with i < j: 3*2/2 = 3
+        assert H.shape == (3, 3)
+
+    def test_ss_singlet_dim_nmax5(self):
+        """ss-only singlet at n_max=5: 15 configs."""
+        H = build_graph_native_fci(Z=2, n_max=5, m_total=0, spin='singlet',
+                                   subblock=(0, 0))
+        # n_s = 5 → 5*6/2 = 15
+        assert H.shape == (15, 15)
+
+    def test_ss_triplet_dim_nmax5(self):
+        """ss-only triplet at n_max=5: 10 configs."""
+        H = build_graph_native_fci(Z=2, n_max=5, m_total=0, spin='triplet',
+                                   subblock=(0, 0))
+        # n_s = 5 → 5*4/2 = 10
+        assert H.shape == (10, 10)
+
+    def test_ss_only_excludes_p_orbitals(self):
+        """ss-only at n_max=3 must not contain any p-orbital configuration.
+
+        Compared to the full M_L=0 sector (31 singlet configs), the ss-only
+        sub-block has 6 — far fewer because ss eliminates all (..,p_+1)(..,p_-1),
+        (p_0, p_0), (s, d_0), (p_+1, d_-1), (p_-1, d_+1), (d_0, d_0) etc.
+        configurations.
+        """
+        H_full = build_graph_native_fci(Z=2, n_max=3, m_total=0,
+                                        spin='singlet')
+        H_ss = build_graph_native_fci(Z=2, n_max=3, m_total=0,
+                                      spin='singlet', subblock=(0, 0))
+        assert H_full.shape[0] == 31
+        assert H_ss.shape[0] == 6
+        assert H_ss.shape[0] < H_full.shape[0]
+
+    def test_ss_singlet_triplet_splitting_nmax5(self):
+        """ss-only n_max=5 reproduces the sprint 2¹S − 2³S splitting at 7308.8 cm⁻¹.
+
+        Sprint reference (debug/data/...): at n_max=5 ss-only,
+            E(1¹S) = -2.89235952, E(2³S) = -2.23643922, E(2¹S) = -2.20313800,
+            splitting = 7308.7713 cm⁻¹.
+        Memo §3 convergence table records this as the n_max=5 entry. The
+        agreement here verifies the production API reproduces the sprint
+        construction to machine precision.
+        """
+        H_s = build_graph_native_fci(Z=2, n_max=5, m_total=0, spin='singlet',
+                                     subblock=(0, 0))
+        H_t = build_graph_native_fci(Z=2, n_max=5, m_total=0, spin='triplet',
+                                     subblock=(0, 0))
+        evals_s = np.sort(np.linalg.eigvalsh(H_s))
+        evals_t = np.sort(np.linalg.eigvalsh(H_t))
+        E_1_1S = float(evals_s[0])
+        E_2_1S = float(evals_s[1])
+        E_2_3S = float(evals_t[0])
+
+        # Per-state energies match sprint reference (saved at 8 dp).
+        assert abs(E_1_1S - (-2.89235952)) < 1e-7, (
+            f"E(1¹S) = {E_1_1S:.10f}, sprint = -2.89235952"
+        )
+        assert abs(E_2_3S - (-2.23643922)) < 1e-7, (
+            f"E(2³S) = {E_2_3S:.10f}, sprint = -2.23643922"
+        )
+        assert abs(E_2_1S - (-2.20313800)) < 1e-7, (
+            f"E(2¹S) = {E_2_1S:.10f}, sprint = -2.20313800"
+        )
+
+        # Splitting matches sprint memo §3: 7308.77 cm⁻¹
+        dE_cm = (E_2_1S - E_2_3S) * HA_TO_CM_INVERSE
+        assert abs(dE_cm - 7308.7713) < 0.01, (
+            f"splitting = {dE_cm:.4f} cm⁻¹, sprint = 7308.7713"
+        )
+
+    def test_ss_singlet_triplet_splitting_nmax3(self):
+        """ss-only n_max=3: matches sprint reference (9737.6 cm⁻¹)."""
+        H_s = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                     subblock=(0, 0))
+        H_t = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='triplet',
+                                     subblock=(0, 0))
+        evals_s = np.sort(np.linalg.eigvalsh(H_s))
+        evals_t = np.sort(np.linalg.eigvalsh(H_t))
+        E_2_1S = float(evals_s[1])
+        E_2_3S = float(evals_t[0])
+        dE_cm = (E_2_1S - E_2_3S) * HA_TO_CM_INVERSE
+        # Sprint n_max=3 row: 9737.5977 cm⁻¹
+        assert abs(dE_cm - 9737.5977) < 0.01, (
+            f"n_max=3 splitting = {dE_cm:.4f} cm⁻¹, sprint = 9737.5977"
+        )
+
+    def test_ss_singlet_triplet_splitting_nmax4(self):
+        """ss-only n_max=4: matches sprint reference (8125.7 cm⁻¹)."""
+        H_s = build_graph_native_fci(Z=2, n_max=4, m_total=0, spin='singlet',
+                                     subblock=(0, 0))
+        H_t = build_graph_native_fci(Z=2, n_max=4, m_total=0, spin='triplet',
+                                     subblock=(0, 0))
+        evals_s = np.sort(np.linalg.eigvalsh(H_s))
+        evals_t = np.sort(np.linalg.eigvalsh(H_t))
+        dE_cm = (float(evals_s[1]) - float(evals_t[0])) * HA_TO_CM_INVERSE
+        # Sprint n_max=4 row: 8125.6557 cm⁻¹
+        assert abs(dE_cm - 8125.6557) < 0.01, (
+            f"n_max=4 splitting = {dE_cm:.4f} cm⁻¹, sprint = 8125.6557"
+        )
+
+    def test_ss_subblock_hund_ordering(self):
+        """ss-only triplet 2³S < singlet 2¹S (Hund's first rule)."""
+        H_s = build_graph_native_fci(Z=2, n_max=4, m_total=0, spin='singlet',
+                                     subblock=(0, 0))
+        H_t = build_graph_native_fci(Z=2, n_max=4, m_total=0, spin='triplet',
+                                     subblock=(0, 0))
+        evals_s = np.sort(np.linalg.eigvalsh(H_s))
+        evals_t = np.sort(np.linalg.eigvalsh(H_t))
+        E_2_1S = float(evals_s[1])
+        E_2_3S = float(evals_t[0])
+        assert E_2_3S < E_2_1S, (
+            f"E(2³S) = {E_2_3S:.6f} should be < E(2¹S) = {E_2_1S:.6f}"
+        )
+
+
+class TestSubblockSP:
+    """Verify subblock=(0, 1) gives a sensible ¹P/³P spectrum."""
+
+    def test_sp_dim_nmax3_m0(self):
+        """sp at n_max=3, m_total=0: 6 pairs (1s,2p_0)..(3s,3p_0).
+
+        Spatial pairs (n_s, m_s=0) with (n_p, m_p=0) for n_s, n_p ∈ {1,..,n_max}
+        (under m_total=0 ⇒ m_p must equal 0). Singlet allows n_s == n_p,
+        but s-orbital (l=0) and p-orbital (l=1) live at different orbital
+        indices so the i <= j vs i < j distinction depends on indexing —
+        we just check the count is sensible.
+        """
+        H_s = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                     subblock=(0, 1))
+        H_t = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='triplet',
+                                     subblock=(0, 1))
+        # Singlet: n_s × n_p = 3 × 3 = 9 ordered pairs;
+        # i < j ordering by orbital index in basis:
+        # orbital basis at n_max=3: 1s, 2s, 2p_-1, 2p_0, 2p_+1, 3s, 3p_-1, 3p_0, 3p_+1, 3d_-2, ...
+        # All s indices: {0(1s), 1(2s), 5(3s)}; p_0 indices: {3(2p_0), 7(3p_0)}
+        # Pairs (s, p_0) at m_total=0: 3 × 2 = 6 ordered, all with i<j or i>j
+        # Singlet uses i<=j constraint: (i, j) sorted, so 6 pairs total
+        # Triplet i<j: also 6 pairs (l_a=0 != l_b=1 means no diagonal)
+        assert H_s.shape == (6, 6), f"singlet sp dim = {H_s.shape}"
+        assert H_t.shape == (6, 6), f"triplet sp dim = {H_t.shape}"
+
+    def test_sp_hund_ordering_nmax3(self):
+        """sp at n_max=3: lowest 2³P below lowest 2¹P (Hund's first rule)."""
+        H_s = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                     subblock=(0, 1))
+        H_t = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='triplet',
+                                     subblock=(0, 1))
+        E_p1 = float(np.linalg.eigvalsh(H_s)[0])
+        E_p3 = float(np.linalg.eigvalsh(H_t)[0])
+        assert E_p3 < E_p1, (
+            f"lowest triplet sp ({E_p3:.6f}) must be < lowest singlet sp ({E_p1:.6f})"
+        )
+
+    def test_sp_excludes_ss_and_pp(self):
+        """sp sub-block is a proper subset: smaller than the full M_L=0 sector."""
+        H_full = build_graph_native_fci(Z=2, n_max=3, m_total=0,
+                                        spin='singlet')
+        H_sp = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                      subblock=(0, 1))
+        # Full M_L=0 has 31 configs (ss + sp + pp + sd + pd + dd at M_L=0);
+        # sp is just the (l_a, l_b) = {0, 1} subset.
+        assert H_full.shape[0] == 31
+        assert H_sp.shape[0] == 6
+        assert H_sp.shape[0] < H_full.shape[0]
+
+    def test_sp_hermitian(self):
+        """sp sub-block FCI matrix is Hermitian."""
+        H_s = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                     subblock=(0, 1))
+        H_t = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='triplet',
+                                     subblock=(0, 1))
+        assert np.allclose(H_s, H_s.T, atol=1e-12)
+        assert np.allclose(H_t, H_t.T, atol=1e-12)
+
+
+class TestSubblockMisc:
+    """Additional sub-block validation."""
+
+    def test_subblock_pp_nmax3(self):
+        """pp sub-block (l_a = l_b = 1): only (..p,..p) configs at M_L=0."""
+        H_s = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                     subblock=(1, 1))
+        # At n_max=3 there are 2 p-shells (2p, 3p) × 3 m-values each = 6 p-orbitals.
+        # Pairs (i, j) with i <= j and m_a + m_b = 0:
+        #   (m_a, m_b) ∈ {(-1, 1), (0, 0), (1, -1)} ; (1,-1) is symmetric to (-1,1)
+        #   Considering p-orbitals at indices 2,3,4 (2p_-1, 2p_0, 2p_+1) and
+        #   6,7,8 (3p_-1, 3p_0, 3p_+1).
+        # Pairs with i<=j and m_a+m_b=0:
+        #   (2p_-1, 2p_+1), (2p_0, 2p_0), (2p_+1, 2p_-1 conjugated to symmetric),
+        #   (2p_-1, 3p_+1), (2p_0, 3p_0), (2p_+1, 3p_-1),
+        #   (3p_-1, 3p_+1), (3p_0, 3p_0), (3p_+1, 3p_-1)
+        # With i<=j and m=0 constraint, count the valid set.
+        assert H_s.shape[0] > 0, "pp singlet should have at least 1 config"
+        # Hermiticity sanity
+        assert np.allclose(H_s, H_s.T, atol=1e-12)
+
+    def test_subblock_negative_l_raises(self):
+        """Negative l in subblock raises ValueError."""
+        with pytest.raises(ValueError):
+            build_graph_native_fci(Z=2, n_max=2, m_total=0, spin='singlet',
+                                   subblock=(-1, 0))
+
+    def test_subblock_high_l_empty(self):
+        """subblock=(2, 2) at n_max=2 is empty (no d-orbitals exist)."""
+        H = build_graph_native_fci(Z=2, n_max=2, m_total=0, spin='singlet',
+                                   subblock=(2, 2))
+        assert H.shape == (0, 0)
+
+    def test_subblock_order_invariant(self):
+        """subblock=(0, 1) and subblock=(1, 0) give identical matrices."""
+        H_01 = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                      subblock=(0, 1))
+        H_10 = build_graph_native_fci(Z=2, n_max=3, m_total=0, spin='singlet',
+                                      subblock=(1, 0))
+        assert H_01.shape == H_10.shape
+        assert np.max(np.abs(H_01 - H_10)) == 0.0
+
+    def test_subblock_ss_hermitian(self):
+        """ss sub-block FCI matrix is Hermitian at all tested n_max."""
+        for n_max in [2, 3, 4, 5]:
+            for spin in ['singlet', 'triplet']:
+                H = build_graph_native_fci(Z=2, n_max=n_max, m_total=0,
+                                           spin=spin, subblock=(0, 0))
+                if H.shape[0] > 0:
+                    assert np.allclose(H, H.T, atol=1e-12), (
+                        f"{spin} n_max={n_max} not Hermitian"
+                    )
+
+    def test_compute_he_spectrum_subblock_ss(self):
+        """compute_he_spectrum with subblock=(0,0) produces only S sectors."""
+        result = compute_he_spectrum(n_max=3, subblock=(0, 0))
+        # subblock kwarg recorded
+        assert result['subblock'] == (0, 0)
+        # Only S sectors should have non-zero dim; P, D dims should be 0 / absent
+        for sector in result['sector_dims']:
+            assert sector.endswith('S'), (
+                f"sector {sector} has dim > 0 with subblock=(0,0); "
+                f"expected only S sectors"
+            )
+
+    def test_compute_he_spectrum_subblock_ss_ground_state(self):
+        """compute_he_spectrum with subblock=(0,0) gives sensible 1¹S ground state.
+
+        The ss-block at n_max=3 reproduces the sprint's E(1¹S) = -2.88958 Ha.
+        """
+        result = compute_he_spectrum(n_max=3, subblock=(0, 0))
+        assert '1_1S' in result['states']
+        E_1S = result['states']['1_1S']['energy']
+        # Sprint reference at n_max=3: -2.88957801 Ha
+        assert abs(E_1S - (-2.88957801)) < 1e-7, (
+            f"E(1¹S) = {E_1S:.10f}, sprint reference = -2.88957801"
+        )
+        # Variational bound
+        assert E_1S > -2.903724377, (
+            f"E(1¹S) = {E_1S:.10f} violates variational bound"
+        )

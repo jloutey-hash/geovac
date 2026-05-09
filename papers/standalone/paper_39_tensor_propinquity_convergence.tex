@@ -916,41 +916,59 @@ $C_3^{(2)}(3,3) = \sqrt{3/5} \approx 0.775$,
 $C_3^{(2)}(4,4) = \sqrt{4/6} \approx 0.816$.
 
 \paragraph{Joint propinquity bound (unit focal length).}
-The joint propinquity bound \eqref{eq:L5_bound_T} at the diagonal
-panel evaluates to:
+We report two presentations of the bound at the panel: the
+\emph{factorised-panel} bound $\Lambda^{\mathrm{fact}} =
+C_3^{(2),\mathrm{fact}} \cdot \max(\gamma_a, \gamma_b)$ with
+$C_3^{(2),\mathrm{fact}} = 1$ on the unit-Lipschitz simple-tensor panel
+(this is the variant computed by
+\texttt{compute\_tensor\_propinquity\_bound} as
+\texttt{propinquity\_bound}), and the \emph{full-operator-system} bound
+\eqref{eq:L5_bound_T} obtained by inserting the Pythagorean
+$C_3^{(2)}$ of Lemma~\ref{lem:L3-T} together with the
+$1 + 2\sqrt{2}$ reach-plus-height factor of Lemma~\ref{lem:L5-T}.
 
 \begin{center}
-\begin{tabular}{cccccc}
+\begin{tabular}{ccccccc}
 \toprule
 $(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
-$\opnorm{T^{(a,b)}}_{\mathrm{cb}}$ & $C_3^{(2)}$ &
-$\Lambda$ bound \\
+$\opnorm{T^{(a,b)}}_{\mathrm{cb}}$ & $\Lambda^{\mathrm{fact}}$ &
+$C_3^{(2)}$ & $\Lambda^{\mathrm{full}}$ \\
 \midrule
-$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $0.707$ & $5.604$ \\
-$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $0.752$ & $5.967$ \\
-$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $0.775$ & $4.769$ \\
-$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $0.801$ & $4.929$ \\
-$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $0.816$ & $4.131$ \\
+$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $0.707$ & $5.604$ \\
+$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $0.752$ & $5.967$ \\
+$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $0.775$ & $4.769$ \\
+$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $0.801$ & $4.929$ \\
+$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $0.816$ & $4.131$ \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The $\Lambda$-bound column uses
+The factorised-panel column $\Lambda^{\mathrm{fact}}$ uses
+$\Lambda^{\mathrm{fact}} \le \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$,
+the value tracked in the supporting computational module as the
+factorised-panel propinquity bound. The full-operator-system column
+$\Lambda^{\mathrm{full}}$ uses
 $\Lambda \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ with $1 + 2\sqrt{2} \approx
-3.828$.
+3.828$. Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
+exhibit monotone decrease across the diagonal panel.
 
 \paragraph{Three structural observations.}
 \begin{enumerate}
-\item \emph{Monotone decrease in the diagonal panel.} The diagonal
-ratio $\Lambda(4,4) / \Lambda(2,2) \approx 4.131 / 5.604 \approx
-0.737$ exhibits monotone decrease. The factor-by-factor
-$\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ ratio at the same diagonal is
-$\gamma_4 / \gamma_2 = 1.3223 / 2.0746 = 0.6374$, exactly mirroring
-the single-factor Paper 38 ratio
-$\Lambda^{(1)}(4)/\Lambda^{(1)}(2) = 0.637$ to four digits;\ the
-joint $\max$-rate is dominated by the slower factor and inherits the
-single-factor cutoff scaling.
+\item \emph{Monotone decrease and bit-identical match to single
+factor.} On the factorised panel,
+$\Lambda^{\mathrm{fact}}(2,2) = 2.0746$,
+$\Lambda^{\mathrm{fact}}(3,3) = 1.6101$,
+$\Lambda^{\mathrm{fact}}(4,4) = 1.3223$. The diagonal ratio
+$\Lambda^{\mathrm{fact}}(4,4) / \Lambda^{\mathrm{fact}}(2,2) =
+1.3223/2.0746 = 0.6374$ matches the single-factor Paper~38 ratio
+$\Lambda^{(1)}(4)/\Lambda^{(1)}(2) \approx 0.637$
+\emph{bit-identically} to four digits;\ the joint $\max$-rate is
+dominated by the slower factor and inherits the single-factor cutoff
+scaling. On the full-operator-system column the analogous ratio is
+$\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) \approx
+4.131/5.604 \approx 0.737$, with the $C_3^{(2)}$ factor partially
+offsetting the $\max(\gamma)$ decrease.
 
 \item \emph{Joint cb-norm decreases as $1/(\nmaxa \nmaxb)$.}
 $\opnorm{T^{(2,2)}}_{\mathrm{cb}} = 4/9 \approx 0.444$ vs.\
