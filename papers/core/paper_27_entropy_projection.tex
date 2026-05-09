@@ -830,6 +830,83 @@ and
 \texttt{::test\_paper27\_ep2i\_gamma\_asymptote}.
 
 
+\subsection{Operational temperature decoding (Sprint TD Track~2)}
+\label{sec:operational_temp_decoding}
+
+The information-theoretic entropy of \S\ref{sec:operator},
+$S_{\mathrm{full}} = S_{\mathrm{vN}}(\rho_1)$ of the bare-graph
+ground state, is the $T \to 0$ limit of the von Neumann entropy of
+the Gibbs spatial 1-RDM in standard quantum statistical mechanics.
+Sprint TD Track~2 (May 2026,
+\verb|debug/sprint_td_track2_memo.md|) verifies this operationally on
+H, He, and Li$^+$ across 30 log-spaced temperatures spanning
+$0.005\times\mathrm{gap} \leq k_B T \leq 20\times\mathrm{gap}$, using
+the textbook Boltzmann-weighted ensemble over graph-native CI
+eigenstates.
+
+The thermodynamic entropy decomposes cleanly as
+\begin{equation}
+\label{eq:apparatus_identity}
+S_{\mathrm{thermo}}(\beta) \;=\; k_B \cdot S_{\mathrm{microstate\,info}}(\beta),
+\end{equation}
+where the right-hand side is the Shannon entropy of the
+microstate-resolved Boltzmann distribution.  The identity holds at
+machine precision (max residual $4.8\times 10^{-14}$ across all
+$3\times 30 = 90$ test points).  This is standard quantum statistical
+mechanics; the sprint's content is the explicit verification on
+graph-native CI states.
+
+The von Neumann entropy of the Gibbs \emph{spatial 1-RDM},
+$S_{\mathrm{vN}}(\rho_1(\beta))$ with
+$\rho_1(\beta) = \sum_n p_n(\beta)\,\rho_1^{(n)}$, is the
+``decoded-temperature spatial residual'' --- what remains of the
+information content after the apparatus parameter $\beta$ is
+factored out.  At $T\to 0$ this residual equals
+$S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator} bit-identically:
+\begin{table}[h]
+\caption{Sprint TD Track~2: $T\to 0$ residual matches
+$S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator}.  Data
+\texttt{debug/data/sprint\_td\_track2.json}.}
+\label{tab:track2_residual}
+\begin{ruledtabular}
+\begin{tabular}{cdd}
+System & \multicolumn{1}{c}{$S_{\mathrm{vN}}(\rho_1(\beta\to\infty))$}
+       & \multicolumn{1}{c}{$|\Delta|$ vs.\ $S_{\mathrm{full}}(\mathrm{GS})$} \\
+\hline
+H ($Z=1$, $n_{\max}=6$)    & 0.000000 & 0\;(\text{single det.\ rigidity}) \\
+He ($Z=2$, $n_{\max}=3$)   & 0.040811 & 3.1\times 10^{-10} \\
+Li$^+$ ($Z=3$, $n_{\max}=3$) & 0.011212 & 3.2\times 10^{-10} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+In the $T\to\infty$ limit the residual approaches
+$\log(n_{\mathrm{orbitals}}) = \log 14 \approx 2.639$ for both
+$N_e=2$ systems, the standard Boltzmann thermal-mixing limit over
+the graph basis.  Lindblad concavity bounds hold at every $\beta$
+($\max_n S_n \leq S_{\mathrm{vN}}(\rho_1(\beta))
+   \leq S_{\mathrm{apparatus}} + \sum_n p_n S_n$).
+
+Operationally, this positions the Paper~27 information entropy as
+the dimensionless content of the GeoVac graph that remains after a
+finite-temperature observation projection (Paper~34 §III.15) is
+undone.  Sprint TD Track~5 separately PSLQ-tested whether
+$S_{\mathrm{full}}(\mathrm{GS})$ values for He, Li$^+$, and He at
+$n_{\max}=4$ sit in the master Mellin engine ring (Paper~32~§VIII
+case-exhaustion theorem and Paper~18~§III.7); the test returned a
+clean negative against a 12{,}312-form mechanical basis at 150~dps
+across all three systems, with control-class baseline matching to
+$z = 0$.  Six orders of magnitude in coefficient relaxation
+(\(10^3 \to 10^6\)) does not change the verdict.  GeoVac
+correlation entropy is genuinely von~Neumann-only; it is not a
+master Mellin output.  This is structurally distinct from
+spectral-action entropies (e.g., the Connes--Chamseddine area term
+on Euclidean Schwarzschild, which lives in $M_2$).  $S_{\mathrm{full}}$
+joins $K = \pi(B+F-\Delta)$, the Sprint MR-C $L_2$ next-order
+constant $c \approx 4.10932\ldots$, and the Wolfenstein parameters of
+Sprint W3 on the list of natural framework constants outside the
+master Mellin ring.
+
 \medskip
 We do not speculate about gravitational, holographic, or
 black-hole entropy in this paper.  Whether the pair-counting

@@ -1,0 +1,262 @@
+{
+  "step_2_natural_form_matches": {
+    "sin2_theta_12": {
+      "is_primary": true,
+      "value": "0.307",
+      "sigma": "0.013",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "sin2_theta_23": {
+      "is_primary": true,
+      "value": "0.546",
+      "sigma": "0.021",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "sin2_theta_13": {
+      "is_primary": true,
+      "value": "0.022",
+      "sigma": "0.0007",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "delta_CP_deg": {
+      "is_primary": true,
+      "value": "230.0",
+      "sigma": "25.0",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "sin_theta_12": {
+      "is_primary": false,
+      "value": "0.55407580708780274265998648663375424109217413747934080655679283012909492225962588",
+      "sigma": "0.011731246729872045040032287176284698915632351445002329780518414970159990210708691",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "sin_theta_23": {
+      "is_primary": false,
+      "value": "0.73891812807644663983271223199594284113031948446343117492781283776985321334503189",
+      "sigma": "0.014209964001470127689090619846075823867890759316604445671688708418651023333558306",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "sin_theta_13": {
+      "is_primary": false,
+      "value": "0.148323969741913258974227948816014261219598086381950031974652465286876603686277",
+      "sigma": "0.0023596995186213473018627173675274996103117877378946595995967437659275823313725887",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "theta_12_deg": {
+      "is_primary": false,
+      "value": "33.647082238110008982180330877382504008029708183879888248123663789067364924791936",
+      "sigma": "0.80742126648325430049222746157964719583481600257505183442886789318803393993441274",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "theta_23_deg": {
+      "is_primary": false,
+      "value": "47.639338051660548461119749399507236265282166747485986141525593947418640193833319",
+      "sigma": "1.2083359139405205019431028253286978552006940158222393118191915549146648781532663",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "theta_13_deg": {
+      "is_primary": false,
+      "value": "8.5298106284257856490201172229505592787577207388982637197193479855600194263319903",
+      "sigma": "0.13671303005813338934242225959818555382852236046873624227875242210726682244279173",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    },
+    "J_PMNS": {
+      "is_primary": false,
+      "value": "-0.025519033062371269299078558825404037180013146739633360881515494969571637422362972",
+      "sigma": "0.0038278549593556903948617838238106055770019720109450041322273242454357456133544458",
+      "matches": [],
+      "n_tested": 30,
+      "n_1pct": 0,
+      "n_05pct": 0,
+      "n_1sigma": 0
+    }
+  },
+  "best_per_primary": {
+    "sin2_theta_12": null,
+    "sin2_theta_23": null,
+    "sin2_theta_13": null,
+    "delta_CP_deg": null
+  },
+  "tbm_comparison": {
+    "sin2_theta_12": {
+      "pdg_central": "0.307",
+      "pdg_sigma": "0.013",
+      "tbm_value": "0.33333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      "tbm_sigma_distance": 2.0256410256410255,
+      "best_m1m2_form": null,
+      "best_m1m2_family": null,
+      "best_m1m2_sigma": null
+    },
+    "sin2_theta_23": {
+      "pdg_central": "0.546",
+      "pdg_sigma": "0.021",
+      "tbm_value": "0.5",
+      "tbm_sigma_distance": 2.1904761904761907,
+      "best_m1m2_form": null,
+      "best_m1m2_family": null,
+      "best_m1m2_sigma": null
+    },
+    "sin2_theta_13": {
+      "pdg_central": "0.022",
+      "pdg_sigma": "0.0007",
+      "tbm_value": "0.0",
+      "tbm_sigma_distance": 31.428571428571427,
+      "best_m1m2_form": null,
+      "best_m1m2_family": null,
+      "best_m1m2_sigma": null
+    }
+  },
+  "step_5_false_positive_assessment": {
+    "n_natural_forms": 30,
+    "n_primary_pmns_params": 4,
+    "log_range_ckm": [
+      -2.3025850929940455,
+      0.0
+    ],
+    "log_range_pmns_specific": [
+      -3.912023005428146,
+      0.0
+    ],
+    "expected_per_param_1pct_ckm_range": 0.1788,
+    "expected_per_param_05pct_ckm_range": 0.0894,
+    "expected_per_param_1pct_pmns_range": 0.1256,
+    "expected_total_4params_1pct_ckm_range": 0.7152,
+    "expected_total_4params_1pct_sigma": 1.0557093539416993,
+    "observed_total_hits_1pct": 0,
+    "observed_total_hits_05pct": 0,
+    "observed_within_1sigma": 0,
+    "observed_M1_family_hits": 0,
+    "observed_M2_family_hits": 0,
+    "deviation_above_chance_sigma": -0.6774591864035869
+  },
+  "ckm_pmns_comparison": {
+    "ckm_observed_1pct": 7,
+    "ckm_observed_05pct": 5,
+    "ckm_observed_1sigma": 6,
+    "pmns_observed_1pct": 0,
+    "pmns_observed_05pct": 0,
+    "pmns_observed_1sigma": 0
+  },
+  "derived_relations": [],
+  "tan_delta_cp_probe": {
+    "delta_cp_deg": "230.0",
+    "delta_cp_sigma_deg": "25.0",
+    "tan_delta_cp": "1.1917535925942099587053080718604193369307004077085438536548300069034121458905518",
+    "matches": [
+      {
+        "operation": "M2/M1",
+        "M1_form": "1/sqrt(Vol(S^2)) = 1/sqrt(4 pi)",
+        "M2_form": "ln(2)/2",
+        "value": "1.2285713894277761007395815923555596331691176562520468427102325120640864054210822",
+        "rel_dev_pct": 3.0893799743805377
+      },
+      {
+        "operation": "M1/M2",
+        "M1_form": "1/sqrt(Vol(S^1)) = 1/sqrt(2 pi)",
+        "M2_form": "ln(2)/2",
+        "value": "1.1511040990721624445669473852183134002437555348760633489812638182311177877955003",
+        "rel_dev_pct": -3.41089750218933
+      },
+      {
+        "operation": "M2/M1",
+        "M1_form": "1/(pi sqrt(pi))",
+        "M2_form": "log(2)/pi",
+        "value": "1.2285713894277761007395815923555596331691176562520468427102325120640864054210822",
+        "rel_dev_pct": 3.0893799743805377
+      },
+      {
+        "operation": "M2/M1",
+        "M1_form": "1/sqrt(Vol(S^5)) = 1/sqrt(pi^3)",
+        "M2_form": "log(2)/pi",
+        "value": "1.2285713894277761007395815923555596331691176562520468427102325120640864054210822",
+        "rel_dev_pct": 3.0893799743805377
+      },
+      {
+        "operation": "M1/M2",
+        "M1_form": "pi/(2 phi)",
+        "M2_form": "sqrt(ln 2)",
+        "value": "1.1660562638801466347028375191795099448146302779647305749109126774039238575900175",
+        "rel_dev_pct": -2.156261904621186
+      },
+      {
+        "operation": "M1/M2",
+        "M1_form": "pi/16",
+        "M2_form": "ln(2)/4",
+        "value": "1.1330900354567984524069207364291667025429653669309488960465041369851502384303263",
+        "rel_dev_pct": -4.922456915754929
+      }
+    ]
+  },
+  "simple_rationals_in_deg": {
+    "theta_12_deg": {
+      "pdg": "33.647082238110008982180330877382504008029708183879888248123663789067364924791936",
+      "sigma": "0.80742126648325430049222746157964719583481600257505183442886789318803393993441274",
+      "best_simple_target": "asin(1/sqrt 3) (TBM theta_12)",
+      "best_simple_value": "33.56000000000000227373675443232059478759765625",
+      "best_simple_sigma": 0.10785229684288081
+    },
+    "theta_23_deg": {
+      "pdg": "47.639338051660548461119749399507236265282166747485986141525593947418640193833319",
+      "sigma": "1.2083359139405205019431028253286978552006940158222393118191915549146648781532663",
+      "best_simple_target": "45 deg = pi/4",
+      "best_simple_value": "45.0",
+      "best_simple_sigma": 2.184275101989949
+    },
+    "theta_13_deg": {
+      "pdg": "8.5298106284257856490201172229505592787577207388982637197193479855600194263319903",
+      "sigma": "0.13671303005813338934242225959818555382852236046873624227875242210726682244279173",
+      "best_simple_target": "pi/12 = 15 deg",
+      "best_simple_value": "15.0",
+      "best_simple_sigma": 47.326793713978454
+    }
+  },
+  "verdict": {
+    "n_primary_within_sigma_m1m2": 0,
+    "tbm_wins": 3,
+    "m1m2_wins": 0,
+    "ties": 0,
+    "total_hits_1pct": 0,
+    "sigma_above_chance": -0.6774591864035869,
+    "verdict_string": "TBM-INSTEAD: PMNS sits closer to TBM rationals than M1/M2 forms; leptonic mixing follows a different mechanism (group-theoretic discrete-symmetry breaking) rather than spectral-zeta. W3 is sector-restricted to CKM."
+  }
+}

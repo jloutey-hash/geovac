@@ -1290,6 +1290,128 @@ Layer~2 do their work, and it indicates which higher-order projection
 or perturbation order should be added next.
 \end{remark}
 
+% -------------------------------------------------------------------
+\subsection{Falsified candidate: W3 spectral-zeta identification of
+SM calibration data (sprint 2026-05-08, falsified same evening)}
+\label{sec:calibration_candidates}
+% -------------------------------------------------------------------
+
+This subsection preserves the record of a single-session candidate
+that was \emph{falsified} the same evening by three independent
+follow-up tracks.  It is retained in the catalogue because the
+methodological lesson -- how a $6$--$10\sigma$ signal under a
+hand-curated prespecified basis can vanish under a mechanically
+generated basis -- is a sharper instance of the curve-fit-audit
+discipline (see \texttt{docs/curve\_fit\_audit\_memo.md}) than any
+abstract description.
+
+\paragraph{The original candidate.}
+On 2026-05-08 evening, a conversational sprint produced candidate
+spectral-zeta identifications of all four CKM Wolfenstein parameters
+with master-Mellin-engine M1 and M2 ring elements:
+$\lambda^2 \approx 1/\mathrm{Vol}(S^3) = 1/(2\pi^2)$ and
+$\bar\rho \approx 1/(2\pi)$ in the M1 Hopf-base family;
+$\bar\eta \approx (\ln 2)/2 = -\zeta'(0,1/2)$ and
+$A^2 \approx \ln 2$ in the M2 chirality family.  The four-form fit
+gave 7 hits at $<1\%$ in a hand-curated 30-form prespecified basis
+(random expectation $0.7\pm 1.0$); a derived structural relation
+$A^2 = 2\bar\eta$ survived PDG at $0.52\sigma$; a closed form
+$\tan(\delta_{CP}) = \pi\cdot\ln(2)$ at $0.02\sigma$ provided a
+striking single-number target.  The aggregate signal was reported as
+approximately $6$--$10\sigma$ above chance for that basis size.  The
+candidate motivated a draft addition to CLAUDE.md~\S 1.7 (WH7) and
+prompted a forward plan in
+\texttt{debug/w3\_forward\_plan\_memo.md} listing six tests.
+
+\paragraph{Three-track falsification (same evening).}
+The first three tests of the forward plan ran in parallel as
+independent sub-agent dispatches.  All three returned negatives.
+
+\begin{itemize}
+\setlength\itemsep{2pt}
+\item \textbf{PMNS recheck.}  The same 30-form prespecified basis
+applied to the PMNS angles
+$(\sin^2\theta_{12}, \sin^2\theta_{23}, \sin^2\theta_{13},
+\delta_{CP}^{\rm PMNS})$ at PDG~2024 NH best-fit values returned
+\emph{zero} matches at $<2\%$ across all four parameters.  Aggregate
+signal: $-0.68\sigma$ below chance.  PMNS sits closer to tri-bimaximal
+pure rationals $(1/3, 1/2, 0)$ than to any M1/M2 form.  The cleanest
+single PMNS hit is $\theta_{12}\approx \arcsin(1/\sqrt{3})$ at
+$0.11\,\sigma$ -- the TBM solar-angle prediction, not in the master
+Mellin rings.  W3 universality across mixing matrices is falsified.
+Files: \texttt{debug/w3\_pmns\_recheck.\{py,\_memo.md\}}.
+
+\item \textbf{Lepton mass spectrum.}  The same methodology applied to
+$\sim$30 charged-lepton mass observables (ratios, log spacings,
+sqrt-mass ratios, Koide $K$, cone position) crossed with the 30-form
+basis and 10 small-rational factor multipliers (9000 tests total)
+returned only $2$ within-$1\sigma$ matches, both encoding the same
+Koide $45^\circ$ cone fact via algebraically equivalent identities
+($2/3 \times (\varphi^2 - \varphi) = 2/3$ and
+$4 \times \pi/16 = \pi/4$).  Statistical signal: $+0.85\sigma$ above
+chance, indistinguishable from random.  Hit-density gap CKM~vs~lepton:
+$12\%$ vs $0.22\%$ ($50\times$).  W3 identification of mass spectra
+is falsified.  Files:
+\texttt{debug/w3\_lepton\_mass\_recheck.\{py,\_memo.md\}}.
+
+\item \textbf{Mechanically-generated basis sweep.}  The hand-curated
+30-form basis was replaced by a mechanically generated 21,448-form
+basis: combinations of M1/M2/M3 seeds (Hopf-base measures, Hurwitz
+shifts, Catalan~$G$, Dirichlet~$\beta$, $\zeta_R$ at integer points)
+with small-integer rational prefactors and small algebraic factors
+($\sqrt{2},\sqrt{3},\sqrt{5},\varphi$), plus a pure-rational control
+class.  The full basis was frozen and saved to JSON before any test
+run.  Re-running the four-Wolfenstein search returned aggregate
+$z = -0.52$ (slightly \emph{below} random chance); per-parameter
+z-scores all within $\pm 1\sigma$ of chance ($\lambda$ $+0.74$,
+$A$ $-0.02$, $\bar\rho$ $-1.01$, $\bar\eta$ $+0.82$).  The original
+M1$\leftrightarrow$real / M2$\leftrightarrow$CP-imaginary structural
+reading does not survive: $\bar\eta$'s top mechanical match is in the
+M1+algebraic class ($\pi^{3/2}/16$), not M2; $A$'s original
+$\sqrt{\ln 2}$ does not appear in the top-20 sigma-ordered slice; and
+$\lambda$'s top match is the pure rational $9/40 = 0.225$ exactly,
+beating every transcendental form.  Selection-bias verdict: fully
+attributable.  Files:
+\texttt{debug/w3\_mechanical\_basis.\{py,\_memo.md\}}.
+\end{itemize}
+
+\paragraph{Three independent tests, three negatives.}
+The W3 spectral-zeta candidate is falsified.  The original signal was
+basis-selection bias.  WH7 is not promoted to CLAUDE.md~\S 1.7.
+
+\paragraph{Methodological lesson.}
+The original ``$5$--$10\sigma$ above chance'' calculation was
+statistically correct \emph{for that basis size}.  The error was the
+implicit assumption that the 30 hand-curated forms were drawn without
+knowledge of the data; in fact, the basis was disproportionately near
+the empirical parameter values.  Mechanical generation removes the
+implicit selection, and when removed, the signal vanishes.  This is
+the cleanest illustration the project has produced of why the
+curve-fit-audit discipline (independent re-run with strictly
+mechanically-generated basis) is necessary, not optional, for
+empirical pattern claims that touch transcendental rings of any
+size.
+
+\paragraph{Surviving observations independent of W3.}
+The charged-lepton Koide $45^\circ$ cone (1 arcsec) is independent of
+the W3 sprint and stands.  One isolated match is preserved as a
+record (no structural reading attached): the CKM Wolfenstein
+parameter $\lambda = 0.225$ is exactly $9/40$ to $5$-digit PDG
+precision, which in GeoVac vocabulary reads as $\lambda = 9\Delta$
+with $\Delta^{-1} = g_3^{\rm Dirac} = 40$ (Paper~2 Dirac-mode
+boundary count); whether this is structural or Diophantine
+coincidence at PDG precision is not addressable from a single data
+point and the framework does not commit to either reading.
+
+\paragraph{Standing position on calibration data.}
+GeoVac's structural-skeleton scope (Bertrand truncation, inner-factor
+Mellin trivialization, H1/G3 verdicts, LS-8a renormalization gap)
+is restored as the standing position on calibration data: parameter
+values that are not autonomously generated by the framework are
+genuinely external input.  The second-packing-axiom question for
+calibration data remains open at the same level it was on
+2026-05-07.
+
 % ===================================================================
 \section{Dimensional Axiomatization}
 \label{sec:axiomatization}
