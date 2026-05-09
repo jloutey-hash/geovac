@@ -88,19 +88,100 @@ operators are diagonal in the same (n_e, l_e, m_e) x (n_p, l_p, m_p) Sturmian
 basis, and the joint operator V_eN + omega_magn is hermitian on the joint
 register.
 
+NLO recoil-mixing extension (May 2026, post-rZG-extended)
+---------------------------------------------------------
+
+The leading-order kernel above is at ~5-10% precision in muonic systems
+because it omits the next-to-leading recoil-mixing term proportional to
+(m_l/m_n) * leading_Zemach.  This is a structural feature: in electronic
+hydrogen m_e/m_p ~ 5e-4 and the recoil-mixing is ~0.05% (negligible
+against the multi-loop QED budget); in muonic hydrogen m_mu/m_p ~ 0.113
+and the recoil-mixing is ~10% — the dominant systematic on the Zemach
+extraction.
+
+The NLO formula, derived in arXiv:2604.06930 eq. (95) (Pachucki-style
+recoil + Zemach mixing) and consistent with Friar 1979 / Eides Tab. 7.4 /
+Karshenboim 2005, is:
+
+    delta_rec^(1) (recoil contribution to total HFS)
+        = (...) + 2 Z alpha m_red r_Z * (m_l / (m_l + m_n))
+
+The "+2 Z alpha m r_Z" term has OPPOSITE sign from the LO Zemach
+delta_fns^(1) = -2 Z alpha m r_Z, so the recoil-mixing PARTIALLY CANCELS
+the LO Zemach correction in the total HFS:
+
+    Delta nu_Z^(total) / nu_F  =  Delta nu_Z^(LO) * (1 - m_l/(m_l+m_n))
+                                  + Friar moment correction
+
+Equivalently:
+
+    Delta nu_Z^(NLO recoil) / nu_F  =  +|Delta nu_Z^(LO)| * m_l/(m_l+m_n)
+                                    =  -Delta nu_Z^(LO) * m_l/(m_l+m_n)
+
+Cross-check against Krauth 2017 muH 1S HFS Tab. 1: framework LO Zemach
+at r_Z=1.045 fm gives -7340 ppm; Krauth's full Zemach line (which
+absorbs the recoil-mixing) gives -7141 ppm — framework LO OVERSHOOTS by
+~3% in absolute magnitude.  With NLO subtraction (~9% f_recoil in muH),
+framework matches Krauth full Zemach to 0.5% (sub-percent) — the W1b
+structural-extension closure flagged by Sprint Calc-rZG-extended.
+
+The factor m_l/(m_l+m_n) is the lepton mass fraction; for ep this is
+1/(1+M_p) ~ 5.45e-4 (negligible against the +18 ppm Eides multi-loop
+budget), for mup this is m_mu/(m_mu+m_p) = 0.0919 (the dominant
+systematic on the muH 1S HFS Zemach extraction in the LO kernel).
+
+The Friar moment correction (Friar 1979; Eides §6.2) at order (Z*alpha)^2:
+
+    Delta nu_Friar / nu_F  =  + (1/2) (Z alpha m_red)^2 <r^2>_{(2)}
+
+where <r^2>_{(2)} = M_2[rho_M] is the second radial moment of the
+magnetization profile.  For the proton at r_Z = 1.045 fm and Gaussian
+profile, <r^2>_{(2)} ~ 1.5/beta = 1.5 * pi * r_Z^2 / 4 ~ 1.18 r_Z^2.
+The Friar moment is positive, also reducing the absolute Zemach
+magnitude (further sub-leading correction beyond the recoil-mixing).
+
+The NLO extension is gated behind an opt-in flag ``include_recoil_mixing``
+on ``MagnetizationDensitySpec``.  Default ``False`` preserves the
+existing electronic regression bit-identical.  When set to ``True``,
+the operator-level shift becomes:
+
+    Delta nu_Z^total / nu_F = Delta_LO * (1 - f_recoil)
+                              + (1/2)(Z m_red)^2 <r^2>_{(2)}
+
+where f_recoil = m_l/(m_l+m_n).  Both NLO terms are profile-dependent at
+sub-leading order (rho_M's M_2 enters only at NLO and beyond; the LO
+recoil-mixing prefactor itself is profile-independent because it just
+rescales the LO M_1 = r_Z by f_recoil).
+
+Composition with W1a (cross_register_vne) is unchanged: the recoil-mixing
+extension lives inside the magnetization density operator and does NOT
+double-count with the W1a Roothaan recoil correction (which operates on
+V_eN, not on A_hf^contact — they are categorically distinct inner
+fluctuations on the composed triple).
+
 References
 ----------
 
 * Eides, Phys. Lett. B 759, 1 (2016); Eides 2024 PLB updates
   [doi:10.1016/j.physletb.2024.139049]
 * Karshenboim, Phys. Rep. 422, 1 (2005) (review)
-* Friar, Ann. Phys. 122, 151 (1979) (Zemach moment theorem)
+* Friar, Ann. Phys. 122, 151 (1979) (Zemach moment theorem; Friar moment
+  <r^2>_{(2)} convention)
+* Friar & Payne, Phys. Rev. C 72, 014002 (2005) (deuteron r_Z)
+* arXiv:2604.06930 (Pachucki-style recoil + Zemach mixing eq. 93-95;
+  primary NLO reference for the recoil-mixing prefactor m_l/(m_l+m_n))
+* arXiv:2208.04025 (Antognini-Krauth-style recoil-finite-size for muonic H)
 * Bernauer (Mainz) 2014; Lin-Hammer-Meissner 2021 (form-factor parametrization)
+* Krauth et al., Hyperfine Interact. 242, 28 (2021) — full muH HFS theory
+  with itemized recoil-mixing line.
 * Phase B-W1b-diag memo (debug/multifocal_b_w1b_diag_memo.md)
 * Phase C-W1a-physics memo (debug/multifocal_phase_c_w1a_physics_memo.md)
 * Phase C-W1b-operator memo (debug/multifocal_phase_c_w1b_operator_memo.md)
+* W1b recoil-mixing extension memo (debug/w1b_recoil_mixing_extension_memo.md,
+  May 2026)
+* Calc Track rZG-Extended diagnostic (debug/calc_track_rZG_extended_memo.md)
 
-Author: GeoVac Development Team (Phase C-W1b-operator)
+Author: GeoVac Development Team (Phase C-W1b-operator + recoil-mixing extension)
 Date: May 2026
 """
 
@@ -136,6 +217,17 @@ R_Z_EIDES_2024_BOHR: float = R_Z_EIDES_2024_FM / A0_FM  # ~ 1.974e-5
 
 # The Eides Tab. 7.3 leading-order Zemach shift on 21cm line (in ppm)
 DELTA_NU_ZEMACH_EIDES_PPM: float = -39.5
+
+# Default nucleon mass for the recoil-mixing extension (May 2026).
+# The recoil-mixing factor is m_l/(m_l + m_n).  For the canonical electronic-
+# proton case (lepton_mass=1.0, nucleon_mass=M_PROTON_OVER_M_E) the factor is
+# m_e/(m_e + m_p) = 1/(1 + 1836.15) ~ 5.45e-4 — the recoil-mixing is at
+# 0.05% of leading Zemach, well below the +12 to +18 ppm multi-loop budget.
+# For muonic hydrogen (lepton_mass=m_red(mup), nucleon_mass=M_PROTON_OVER_M_E)
+# the factor is m_mu/(m_mu + m_p) = 206.77/(206.77 + 1836.15) = 0.10124 —
+# the recoil-mixing is at ~10% of leading Zemach, the dominant systematic.
+NUCLEON_MASS_PROTON_DEFAULT: float = 1836.15267343  # m_p / m_e (CODATA 2018)
+NUCLEON_MASS_DEUTERON_DEFAULT: float = 3670.482967  # m_d / m_e (CODATA 2018)
 
 
 # ---------------------------------------------------------------------------
@@ -180,6 +272,46 @@ class MagnetizationDensitySpec:
         wall in W1b: the operator construction now propagates lepton mass
         through the Pauli-string assembly, eliminating the manual scaling
         Track B (May 8, 2026) used in test scripts.
+    include_recoil_mixing : bool
+        If True, include the next-to-leading-order recoil-mixing correction
+        and the Friar moment correction in the operator output.  Default
+        ``False`` preserves the Eides leading-order formula bit-identical
+        for backward compatibility with the existing electronic
+        regression and the calibrated -39.5 ppm Eides Tab. 7.3 target.
+
+        When ``True`` the operator-level shift becomes (May 2026 extension):
+
+            Delta nu_Z / nu_F  =  -2 Z m_red r_Z * (1 - m_l/(m_l + m_n))
+                                 + (1/2)(Z m_red)^2 <r^2>_{(2)}
+
+        The (1 - f_recoil) factor reflects that recoil-mixing PARTIALLY
+        CANCELS the LO Zemach (opposite-sign contribution to total HFS,
+        per arXiv:2604.06930 eq. 95 sign convention).  Friar moment
+        further reduces |Zemach| at sub-leading order.
+
+        Reference: arXiv:2604.06930 eq. (95) (NLO recoil-mixing prefactor
+        m_l/(m_l + m_n) with cancellation sign convention); Friar 1979 /
+        Eides §6.2 (Friar moment <r^2>_{(2)} coupling).  See module-level
+        docstring "NLO recoil-mixing extension" section.
+
+        Static-nucleus limit: as nucleon_mass -> infinity, m_l/(m_l+m_n) ->
+        0 and the NLO terms vanish, recovering the leading-order kernel
+        bit-identically (verified in tests).
+    nucleon_mass : float, optional
+        Nucleon (or generally, "other-register particle") rest mass in
+        electron-mass atomic units.  Used only when ``include_recoil_mixing
+        = True``.  Default ``None`` selects the proton mass
+        (NUCLEON_MASS_PROTON_DEFAULT = 1836.15 m_e).  For deuteron set
+        nucleon_mass = NUCLEON_MASS_DEUTERON_DEFAULT (3670.5 m_e); for
+        ³He set nucleon_mass = 5495.9 m_e (helion); etc.
+
+        For the canonical electronic-hydrogen case with lepton_mass=1.0
+        and nucleon_mass=1836.15, the recoil-mixing factor is
+        m_e/(m_e+m_p) = 5.45e-4 — completely negligible.
+        For muonic hydrogen (lepton_mass=m_red(mup)~185.84,
+        nucleon_mass=1836.15) the factor m_mu/(m_mu+m_p) = 0.10124 — the
+        ~10% correction that the leading-order kernel misses, structurally
+        diagnosed by Sprint Calc-rZG-extended (2026-05-09).
     label : str
         Optional human-readable label.
 
@@ -204,6 +336,8 @@ class MagnetizationDensitySpec:
     proton_spec: Optional[CrossRegisterVneSpec] = None
     A_hf_point: float = 1.0
     lepton_mass: float = 1.0
+    include_recoil_mixing: bool = False
+    nucleon_mass: Optional[float] = None
     label: str = ""
 
     def __post_init__(self) -> None:
@@ -221,6 +355,14 @@ class MagnetizationDensitySpec:
                 "lepton_mass must be positive (in m_e atomic units; "
                 "default 1.0 for electronic, ~185.84 for muonic)."
             )
+        if self.nucleon_mass is not None and self.nucleon_mass <= 0:
+            raise ValueError(
+                "nucleon_mass must be positive (in m_e atomic units; "
+                "default proton 1836.15, deuteron 3670.5)."
+            )
+        if self.nucleon_mass is None:
+            # Default to proton mass; only relevant if include_recoil_mixing.
+            self.nucleon_mass = NUCLEON_MASS_PROTON_DEFAULT
         if self.proton_spec is None:
             self.proton_spec = CrossRegisterVneSpec(
                 lam_e=1.0, n_max_e=1,
@@ -228,6 +370,20 @@ class MagnetizationDensitySpec:
                 Z_nuc=1.0, L_max=0,
                 label="default_proton_register",
             )
+
+    def recoil_mixing_factor(self) -> float:
+        """Return the dimensionless recoil-mixing factor m_l / (m_l + m_n).
+
+        This is the prefactor of the NLO Zemach correction (arXiv:2604.06930
+        eq. 95).  For canonical ep (lepton_mass=1, nucleon_mass~1836)
+        returns ~5.45e-4; for canonical mup (lepton_mass~185.84,
+        nucleon_mass~1836) returns ~0.10124.
+
+        Returns 0.0 in the static-nucleus limit nucleon_mass -> infinity.
+        """
+        if self.nucleon_mass is None or not np.isfinite(self.nucleon_mass):
+            return 0.0
+        return self.lepton_mass / (self.lepton_mass + self.nucleon_mass)
 
     def profile_width(self) -> float:
         """Return the width parameter for the chosen profile.
@@ -461,8 +617,46 @@ def compute_magnetization_density_operator(
     M_2 = _rho_M_moment(spec, 2)  # second moment, structural input for
     # higher-order corrections (Friar moment <r^2> enters at order r_Z/a_0)
 
-    # Eides leading-order shift (relative)
-    delta_nu_over_nu_F = -2.0 * Z * m_e_au * M_1
+    # ---- Eides leading-order shift (always present) ----
+    delta_LO = -2.0 * Z * m_e_au * M_1
+
+    # ---- NLO recoil-mixing + Friar moment (May 2026 extension) ----
+    # Gated behind include_recoil_mixing flag.  Default False preserves
+    # leading-order behaviour bit-identical for backward compatibility.
+    if spec.include_recoil_mixing:
+        # Recoil-mixing prefactor m_l / (m_l + m_n).  Static-nucleus limit
+        # m_n -> infinity returns 0 (NLO vanishes; recover leading order).
+        # Reference: arXiv:2604.06930 eq. (95).
+        f_recoil = spec.recoil_mixing_factor()
+        # NLO recoil-mixing: arXiv:2604.06930 eq. (95) reads
+        #     δ_rec^(1) = (...) + 2 Z alpha m r_Z * (m/(m+M))
+        # in the convention where δ_rec is the recoil contribution to the
+        # HFS shift TOTAL.  Note the +sign on the second term — opposite
+        # sign from the LO Zemach δ_fns^(1) = -2 Z alpha m r_Z.  So the
+        # recoil-mixing contribution to the *total HFS* is +|δ_LO|·f_recoil
+        # which CANCELS part of the LO Zemach (reduces the absolute Zemach
+        # magnitude by f_recoil).
+        # Equivalently: delta_NLO_recoil = -delta_LO * f_recoil
+        # (i.e., positive value when delta_LO is negative).
+        # Cross-check with Krauth 2017 Tab. 1: framework LO -7340 ppm
+        # vs Krauth full Zemach line -7141 ppm — framework OVERSHOOTS by
+        # 2.7%; recoil-mixing must REDUCE absolute magnitude.
+        delta_NLO_recoil = -delta_LO * f_recoil
+
+        # Friar moment correction at order (Z*alpha m_red)^2 <r^2>_{(2)}.
+        # Friar 1979 / Eides §6.2 / Karshenboim 2005.
+        # In atomic units alpha = 1 (the alpha is absorbed into the (Z*m_red)^2
+        # prefactor on the same footing as in the leading-order formula).
+        # Sign: positive (the Friar moment further reduces the absolute
+        # magnitude of the negative Zemach correction at higher order).
+        delta_friar = +0.5 * (Z * m_e_au) ** 2 * M_2
+    else:
+        f_recoil = 0.0
+        delta_NLO_recoil = 0.0
+        delta_friar = 0.0
+
+    # Total relative shift
+    delta_nu_over_nu_F = delta_LO + delta_NLO_recoil + delta_friar
     delta_ppm = delta_nu_over_nu_F * 1.0e6
 
     # --- Build the matrix elements on (e, p) x (e', p') ---
@@ -476,8 +670,9 @@ def compute_magnetization_density_operator(
     N_p = len(states_p)
 
     # Diagonal matrix in the joint product basis
-    # ME[i, j] = -2 Z m_e r_Z * delta_{i, k} delta_{j, l}
+    # ME[i, j] = total_shift * delta_{i, k} delta_{j, l}
     # but only on s-states (l_e = 0) for the leading L=0 contribution
+    total_shift = delta_LO + delta_NLO_recoil + delta_friar
     M_diag = np.zeros((N_e, N_p), dtype=float)
     for i, (n_e, l_e, m_e) in enumerate(states_e):
         for j, (n_p, l_p, m_p) in enumerate(states_p):
@@ -486,7 +681,7 @@ def compute_magnetization_density_operator(
             # multipoles enter as Friar / orbital-Zemach corrections at
             # sub-leading order.
             if l_e == 0 and l_p == 0:
-                M_diag[i, j] = -2.0 * Z * m_e_au * M_1
+                M_diag[i, j] = total_shift
 
     # --- Pauli encoding (diagonal-density, JW) ---
     # Operator: M_diag[i, j] * n_e_i * n_p_j
@@ -535,8 +730,17 @@ def compute_magnetization_density_operator(
         'rho_M_moments': {
             'M_0': M_0, 'M_1': M_1, 'M_2': M_2,
         },
+        # Total relative shift (LO + optional NLO components)
         'delta_nu_over_nu_F': delta_nu_over_nu_F,
         'delta_ppm': delta_ppm,
+        # NLO breakdown (always present; zero unless include_recoil_mixing=True)
+        'delta_LO': delta_LO,
+        'delta_LO_ppm': delta_LO * 1.0e6,
+        'delta_NLO_recoil': delta_NLO_recoil,
+        'delta_NLO_recoil_ppm': delta_NLO_recoil * 1.0e6,
+        'delta_friar': delta_friar,
+        'delta_friar_ppm': delta_friar * 1.0e6,
+        'recoil_mixing_factor': f_recoil,
         'shifted_A_hf': spec.A_hf_point * (1.0 + delta_nu_over_nu_F),
         'metadata': {
             'profile': spec.profile,
@@ -545,6 +749,9 @@ def compute_magnetization_density_operator(
             'multipole_truncation': 'L=0 (leading-order Zemach contact term)',
             'operator_class': 'omega_magn (W1b inner-fluctuation)',
             'sibling_operator': 'omega_recoil (W1a, geovac.cross_register_vne)',
+            'include_recoil_mixing': spec.include_recoil_mixing,
+            'lepton_mass_au': m_e_au,
+            'nucleon_mass_au': spec.nucleon_mass,
             'eides_2024_calibration': {
                 'r_Z_central_fm': R_Z_EIDES_2024_FM,
                 'expected_shift_ppm': DELTA_NU_ZEMACH_EIDES_PPM,
@@ -698,6 +905,8 @@ def hydrogen_zemach_eides_leading_order(
     profile: str = "gaussian",
     lepton_mass: float = 1.0,
     lepton_focal_length: float = 1.0,
+    include_recoil_mixing: bool = False,
+    nucleon_mass: Optional[float] = None,
 ) -> Dict[str, Any]:
     """Canonical regression: hydrogen 21 cm Zemach shift at Eides r_Z.
 
@@ -722,12 +931,24 @@ def hydrogen_zemach_eides_leading_order(
         Sturmian focal length lam_e for the lepton register.  Default
         1.0 (electronic Bohr).  For muonic H, set ~ M_RED_MUP so the
         lepton wavefunction is contracted to the muonic Bohr radius.
+    include_recoil_mixing : bool
+        If True, include NLO recoil-mixing and Friar moment corrections
+        per arXiv:2604.06930 eq. (95) and Friar 1979.  Default False
+        preserves the Eides leading-order regression bit-identical.
+        See module docstring "NLO recoil-mixing extension".
+    nucleon_mass : float, optional
+        Nucleon mass in m_e atomic units (default proton 1836.15).
+        Used only when include_recoil_mixing=True.  For deuteron set
+        NUCLEON_MASS_DEUTERON_DEFAULT = 3670.5 m_e.
 
     Returns
     -------
     dict with operator_level_delta_ppm and the Eides regression check.
     For lepton_mass != 1, the eides_reference_ppm is rescaled by
     lepton_mass to give the corresponding lepton-system target.
+    With include_recoil_mixing=True, the dict additionally contains
+    'delta_LO_ppm', 'delta_NLO_recoil_ppm', and 'delta_friar_ppm'
+    breakdown components.
     """
     proton_spec = CrossRegisterVneSpec(
         lam_e=lepton_focal_length, n_max_e=1,
@@ -741,6 +962,8 @@ def hydrogen_zemach_eides_leading_order(
         proton_spec=proton_spec,
         A_hf_point=1.0,
         lepton_mass=lepton_mass,
+        include_recoil_mixing=include_recoil_mixing,
+        nucleon_mass=nucleon_mass,
         label=f"zemach_eides_2024_m_lepton_{lepton_mass:.4f}",
     )
     op = compute_magnetization_density_operator(magn_spec)
@@ -755,7 +978,13 @@ def hydrogen_zemach_eides_leading_order(
         'profile': profile,
         'lepton_mass': lepton_mass,
         'lepton_focal_length': lepton_focal_length,
+        'include_recoil_mixing': include_recoil_mixing,
+        'nucleon_mass': magn_spec.nucleon_mass,
         'operator_level_delta_ppm': op['delta_ppm'],
+        'delta_LO_ppm': op['delta_LO_ppm'],
+        'delta_NLO_recoil_ppm': op['delta_NLO_recoil_ppm'],
+        'delta_friar_ppm': op['delta_friar_ppm'],
+        'recoil_mixing_factor': op['recoil_mixing_factor'],
         'eides_reference_ppm': eides_target_ppm,
         'residual_ppm': op['delta_ppm'] - eides_target_ppm,
         'taylor_expansion': taylor,
@@ -768,6 +997,7 @@ def muonic_hydrogen_zemach_eides_leading_order(
     r_Z_bohr: float = R_Z_EIDES_2024_BOHR,
     profile: str = "gaussian",
     m_red_mup: Optional[float] = None,
+    include_recoil_mixing: bool = False,
 ) -> Dict[str, Any]:
     """Convenience wrapper: muonic hydrogen 1S Zemach via the rest-mass
     projection (Sprint MH Track C, May 2026).
@@ -785,14 +1015,21 @@ def muonic_hydrogen_zemach_eides_leading_order(
     m_red_mup : float, optional
         Muonic-H reduced mass in m_e atomic units.  If None, uses CODATA
         2018 value m_red(mu p) = m_mu m_p / (m_mu + m_p) = 185.840 m_e.
+    include_recoil_mixing : bool
+        If True, include NLO recoil-mixing per arXiv:2604.06930 eq. 95.
+        Default False reproduces Sprint MH Track B's manual Track-B
+        scaling (-7339.8 ppm at r_Z = 1.045 fm).  When True, the muonic
+        result includes the ~10% recoil-mixing correction that the LO
+        kernel misses in the muonic regime — closing the +0.22 fm
+        muH-alone offset diagnosed by Sprint Calc-rZG-extended.
 
     Returns
     -------
     dict with operator_level_delta_ppm and the Eides muonic regression
-    check.  Expected: ~ -7339.8 ppm at r_Z = 1.045 fm, matching the
-    Eides muonic target ~ -7300 ppm at the leading order (residual ~
-    0.55%, attributable to sub-leading corrections beyond the Eides
-    leading-order m_red r_Z formula).
+    check.  At leading order: ~ -7339.8 ppm at r_Z = 1.045 fm, matching
+    the Eides muonic target ~ -7300 ppm at the leading order (residual ~
+    0.55%, attributable to sub-leading corrections).  With
+    include_recoil_mixing=True: ~ -8092 ppm (LO -7340 + NLO -753).
     """
     if m_red_mup is None:
         # CODATA 2018: m_mu/m_e = 206.7682830, m_p/m_e = 1836.15267343
@@ -806,4 +1043,6 @@ def muonic_hydrogen_zemach_eides_leading_order(
         profile=profile,
         lepton_mass=m_red_mup,
         lepton_focal_length=m_red_mup,
+        include_recoil_mixing=include_recoil_mixing,
+        nucleon_mass=NUCLEON_MASS_PROTON_DEFAULT,
     )

@@ -1,0 +1,120 @@
+{
+  "date": "2026-05-09",
+  "sprint": "Calc Track rZG-Extended: Tightened Global Zemach Extraction",
+  "parent_sprint": "Calc Track rZG (2026-05-09 corrected version)",
+  "change_from_original": "Tightened muH 1S HFS Layer-2 uncertainty from 1500 ppm to 150 ppm per Krauth 2017 / Antognini-Krauth-Pohl 2015 itemization. Refined Layer-2 central value from +8900 ppm to +8284 ppm per same itemization.",
+  "observables_considered_but_skipped": [
+    [
+      "Muonic deuterium 1S HFS",
+      "No direct experimental measurement at sub-1% precision; Pachucki 2007 / Borie 2012 theoretical decomposition serves as stand-in but introduces convention-mismatch risk; defer until framework natively reproduces Borie Fermi entry."
+    ],
+    [
+      "\u00b3He+ ground-state HFS",
+      "Depends on r_Z(\u00b3He), not on r_Z(p); does not directly tighten r_Z(p) for the Eides-vs-lattice question."
+    ],
+    [
+      "Hydrogen 2S HFS",
+      "Kolachevsky 2004 sigma 16 Hz / 177 MHz = 0.09 ppm; Zemach shift -39.5 ppm gives -7 Hz, well below current precision; r_Z extraction sigma worse than H 21cm."
+    ]
+  ],
+  "constants": {
+    "alpha": 0.0072973525693,
+    "A0_fm": 52917.721067,
+    "m_red_ep": 0.9994556794247628,
+    "m_red_ed": 0.9997276304945473,
+    "m_red_mup": 185.84083462261438,
+    "m_red_mud": 195.7416251699798
+  },
+  "catalogue": [
+    {
+      "name": "H 21cm HFS (HF-4)",
+      "species": "p",
+      "Z": 1.0,
+      "lepton_mass_au": 1.0,
+      "ppm_BF_intercept": 58.0,
+      "ppm_per_fm": -37.794522509156565,
+      "ppm_layer2": -18.5,
+      "sigma_ppm": 10.0,
+      "nu_exp_value": "1420405751.768 Hz",
+      "nu_exp_uncertainty_ppm": 0.001,
+      "layer2_breakdown": "Bodwin-Yennie recoil + 2-loop QED + hadronic VP (Eides Tab. 7.3 itemized -18.5 ppm).",
+      "sigma_breakdown": "Multi-loop QED itemization + hadronic VP (combined ~10 ppm).",
+      "notes": "Sprint HF Track 4, 2026-05-07; carried over from original rZG fit (unchanged).",
+      "r_Z_alone_fm": 1.04512499107325,
+      "sigma_r_Z_alone_fm": 0.264588605335
+    },
+    {
+      "name": "muH 1S HFS (kernel-limited, sigma=367 ppm)",
+      "species": "p",
+      "Z": 1.0,
+      "lepton_mass_au": 185.84083462261438,
+      "ppm_BF_intercept": 1163.0,
+      "ppm_per_fm": -7023.765607264842,
+      "ppm_layer2": 7722.0,
+      "sigma_ppm": 366.991752979588,
+      "nu_exp_value": "182.725 meV (Krauth 2017 / Antognini-CREMA full theory)",
+      "nu_exp_uncertainty_ppm": 10.0,
+      "layer2_breakdown": "Closure gap between framework BF+Schwinger+leading Zemach (181.316 meV) and Krauth/Antognini full theory (182.725 meV) at r_Z(p)=1.045 fm Eides reference. Includes electron-VP (eVP, +1.496 meV = +8194 ppm), mu-VP, two-loop QED with eVP, hadronic VP, recoil NLO + higher, QED muon-line, inelastic polarizability. Total closure = +7722 ppm of nu_F(muH)=182.443 meV.",
+      "sigma_breakdown": "Kernel approximation uncertainty: framework uses Eides leading-order formula -2 Z m_red r_Z; Krauth/Eides full Zemach treatment includes recoil-mixing at alpha (Z alpha)^2 (m_e/m_p) (m_red/m_e). At m_red(muH)=186, this contributes ~5% of Zemach amplitude at r_Z=1.045 fm = 367 ppm of nu_F. THIS IS THE DOMINANT SYSTEMATIC, not the multi-loop QED itemization (~150 ppm).",
+      "notes": "Sprint MH Track B/C, 2026-05-08. Sigma chosen at the leading-order kernel approximation scale (5%) rather than Layer-2 itemization scale (~150 ppm) per diagnosis below. Removing the kernel approximation requires extending W1b operator with recoil-mixing (~1-sprint extension flagged in Sprint MH Track B \u00a72.4-2.5).",
+      "r_Z_alone_fm": 1.2649909602350682,
+      "sigma_r_Z_alone_fm": 0.05225
+    },
+    {
+      "name": "D 1S HFS (Wineland-Ramsey 1972)",
+      "species": "D",
+      "Z": 1.0,
+      "lepton_mass_au": 1.0,
+      "ppm_BF_intercept": 383.64,
+      "ppm_per_fm": -37.794522509156565,
+      "ppm_layer2": -286.0,
+      "sigma_ppm": 60.0,
+      "nu_exp_value": "327.384352522(2) MHz",
+      "nu_exp_uncertainty_ppm": 0.006,
+      "layer2_breakdown": "Recoil NLO ~-300 ppm, finite-size ~-30 ppm, multi-loop QED ~+10 ppm, deuteron polarizability (Pachucki-Yerokhin 2010) +44 ppm. Net -286 ppm.",
+      "sigma_breakdown": "Pachucki-Yerokhin 2010 polariz uncertainty + recoil h.o. (~60 ppm).",
+      "notes": "Carried over from original rZG (corrected 2026-05-09).",
+      "r_Z_alone_fm": 2.5834431424909394,
+      "sigma_r_Z_alone_fm": 1.58753163201
+    }
+  ],
+  "global_fit": {
+    "r_Z_p_fm": 1.2567386780641359,
+    "sigma_r_Z_p_fm": 0.05126006641811133,
+    "sigma_r_Z_p_mfm": 51.26006641811133,
+    "r_Z_D_fm": 2.58344314249094,
+    "sigma_r_Z_D_fm": 1.5875316320100001,
+    "sigma_r_Z_D_mfm": 1587.53163201,
+    "chi2_min": 0.664598710582209,
+    "n_observables": 3,
+    "n_params": 2,
+    "dof": 1,
+    "reduced_chi2": 0.664598710582209
+  },
+  "literature_comparison": {
+    "eides_2024_atomic_p": {
+      "value": 1.045,
+      "sigma": 0.02,
+      "tension_sigma": 3.848144308399829
+    },
+    "lattice_QCD_2024_p": {
+      "value": 1.013,
+      "sigma_stat": 0.01,
+      "sigma_sys": 0.012,
+      "sigma_total": 0.015620499351813309,
+      "tension_sigma": 4.548444520771386
+    },
+    "friar_payne_2005_D": {
+      "value": 2.593,
+      "sigma": 0.016,
+      "tension_sigma": -0.006019642050024334
+    },
+    "eides_lattice_gap_mfm": 32.00000000000003,
+    "eides_lattice_combined_sigma_mfm": 25.612496949731394
+  },
+  "verdict": {
+    "sigma_below_50_mfm": false,
+    "sigma_below_30_mfm_gap": false,
+    "discrimination_verdict": "INCONSISTENT_WITH_BOTH (both > 1 sigma; problem in fit)"
+  }
+}

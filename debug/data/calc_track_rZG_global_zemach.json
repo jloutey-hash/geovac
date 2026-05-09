@@ -1,0 +1,87 @@
+{
+  "date": "2026-05-09",
+  "sprint": "Calc Track rZG: Global Self-Consistent Zemach Extraction",
+  "constants": {
+    "alpha": 0.0072973525693,
+    "A0_fm": 52917.721067,
+    "m_red_ep": 0.9994556794247628,
+    "m_red_ed": 0.9997276304945473,
+    "m_red_mup": 185.84083462261438,
+    "m_red_mud": 195.7416251699798
+  },
+  "catalogue": [
+    {
+      "name": "H 21cm HFS (HF-4)",
+      "species": "p",
+      "Z": 1.0,
+      "lepton_mass_au": 1.0,
+      "ppm_BF_intercept": 58.0,
+      "ppm_per_fm": -37.794522509156565,
+      "ppm_layer2": -18.5,
+      "sigma_ppm": 10.0,
+      "nu_exp_value": "1420405751.768 Hz (~ exact)",
+      "nu_exp_uncertainty_ppm": 0.001,
+      "layer2_breakdown": "Bodwin-Yennie recoil + 2-loop QED + hadronic VP (Eides Tab. 7.3 itemized -18.5 ppm).",
+      "notes": "Sprint HF Track 4, 2026-05-07; Layer-2 itemized per Eides 2024 Tab. 7.3 (2026-05-09).",
+      "r_Z_alone_fm": 1.04512499107325,
+      "sigma_r_Z_alone_fm": 0.264588605335
+    },
+    {
+      "name": "muH 1S HFS (Sprint MH Track B/C)",
+      "species": "p",
+      "Z": 1.0,
+      "lepton_mass_au": 185.84083462261438,
+      "ppm_BF_intercept": 2.0,
+      "ppm_per_fm": -7023.765607264842,
+      "ppm_layer2": 8900.0,
+      "sigma_ppm": 1500.0,
+      "nu_exp_value": "182.725 meV (Antognini-CREMA / Krauth)",
+      "nu_exp_uncertainty_ppm": 2.0,
+      "layer2_breakdown": "electron VP (LS-8a wall, +8240 ppm), muonic recoil NLO (+710 ppm), multi-loop QED",
+      "notes": "Sprint MH Track B/C, 2026-05-08.  Generous sigma reflects LS-8a renormalization wall uncertainty.",
+      "r_Z_alone_fm": 1.2674113143514436,
+      "sigma_r_Z_alone_fm": 0.21356065732724844
+    },
+    {
+      "name": "D 1S HFS (Wineland-Ramsey 1972)",
+      "species": "D",
+      "Z": 1.0,
+      "lepton_mass_au": 1.0,
+      "ppm_BF_intercept": 383.64,
+      "ppm_per_fm": -37.794522509156565,
+      "ppm_layer2": -286.0,
+      "sigma_ppm": 60.0,
+      "nu_exp_value": "327.384352522(2) MHz",
+      "nu_exp_uncertainty_ppm": 0.006,
+      "layer2_breakdown": "Recoil NLO beyond leading (1+m_e/m_d)^-3: ~-300 ppm (closure of Pachucki-Yerokhin 2010 baseline 327.339 MHz to our 327.510 MHz framework-native, minus Zemach piece). Finite-size charge radius (Foldy) ~-30 ppm. Multi-loop QED (Kallen-Sabry, two-loop SE) ~+10 ppm. Deuteron polarizability (Pachucki-Yerokhin 2010) +44 ppm. Net Layer-2 = -286 ppm (corrected, 2026-05-09).",
+      "notes": "Sprint precision-catalogue, 2026-05-08; Layer-2 corrected per debug/rzg_bug_diagnosis_memo.md (2026-05-09).",
+      "r_Z_alone_fm": 2.5834431424909394,
+      "sigma_r_Z_alone_fm": 1.58753163201
+    }
+  ],
+  "global_fit": {
+    "r_Z_p_fm": 1.1797233499647772,
+    "sigma_r_Z_p_fm": 0.1661822979505876,
+    "r_Z_D_fm": 2.58344314249094,
+    "sigma_r_Z_D_fm": 1.5875316320100001,
+    "chi2_min": 0.4273761013489118,
+    "n_observables": 3,
+    "n_params": 2,
+    "dof": 1
+  },
+  "literature_comparison": {
+    "eides_2024_atomic_p": {
+      "value": 1.045,
+      "sigma": 0.02
+    },
+    "lattice_QCD_2024_p": {
+      "value": 1.013,
+      "sigma_stat": 0.01,
+      "sigma_sys": 0.012
+    },
+    "friar_payne_2005_D": {
+      "value": 2.593,
+      "sigma": 0.016
+    }
+  }
+}

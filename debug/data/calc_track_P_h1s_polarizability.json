@@ -1,0 +1,71 @@
+{
+  "observable": "Hydrogen 1S static dipole polarizability",
+  "reference_value": {
+    "analytic": "9/2",
+    "numerical": 4.5,
+    "units": "atomic units (a_0^3)",
+    "Z_scaling": "9/2 * Z^-4",
+    "source": "Dalgarno-Lewis 1955; standard textbook"
+  },
+  "Z": 1,
+  "method_1_bound_state_sum": {
+    "description": "alpha_p = (2/3) sum_{n>=2} |<R_10|r|R_n1>|^2 / (E_n - E_1S)",
+    "exact_radial_integrals": "computed symbolically via geovac.dirac_matrix_elements.radial_matrix_element",
+    "convergence": [
+      {"n_max": 2, "value": 2.9596211056, "fraction_of_9_over_2": 0.6577, "exact_rational": "524288/177147"},
+      {"n_max": 3, "value": 3.3600727658, "fraction_of_9_over_2": 0.7467},
+      {"n_max": 4, "value": 3.4920141611, "fraction_of_9_over_2": 0.7760},
+      {"n_max": 5, "value": 3.5525104453, "fraction_of_9_over_2": 0.7894},
+      {"n_max": 6, "value": 3.5855166251, "fraction_of_9_over_2": 0.7968},
+      {"n_max": 7, "value": 3.6055831111, "fraction_of_9_over_2": 0.8012},
+      {"n_max": 8, "value": 3.6187242733, "fraction_of_9_over_2": 0.8042},
+      {"n_max": 10, "value": 3.6343635555, "fraction_of_9_over_2": 0.8076},
+      {"n_max": 15, "value": 3.6501335850, "fraction_of_9_over_2": 0.8111}
+    ],
+    "predicted_bound_state_limit": 3.6562,
+    "predicted_continuum_fraction": 0.1875,
+    "verdict": "Monotonic, asymptotes to ~81.25% of analytic value; continuum gap ~18.75% structural"
+  },
+  "method_2_sturmian_basis": {
+    "description": "Dalgarno-Lewis equation (H - E_1S) F|1s> = z|1s>, solved on l=1 Coulomb Sturmian basis at k=Z",
+    "convergence": [
+      {"n_max": 2, "N_basis": 1, "value": 4.0, "fraction_of_9_over_2": 0.8889},
+      {"n_max": 3, "N_basis": 2, "value": 4.5, "fraction_of_9_over_2": 1.0000},
+      {"n_max": 4, "N_basis": 3, "value": 4.5, "fraction_of_9_over_2": 1.0000},
+      {"n_max": 5, "N_basis": 4, "value": 4.5, "fraction_of_9_over_2": 1.0000},
+      {"n_max": 10, "N_basis": 9, "value": 4.5, "fraction_of_9_over_2": 1.0000}
+    ],
+    "verdict": "EXACT at n_max=3 (N_basis=2). All higher Sturmians have c_n = 0 to numerical precision.",
+    "structural_explanation": "F|1s> = -(1/2)*z*(r+2)|1s>, p-wave radial part (r^2 + 2r) e^{-r}, lies exactly in span{S_2^p, S_3^p}"
+  },
+  "Z_scaling_verification": [
+    {"Z": 1, "alpha_p_sturmian": 4.5, "expected_9_over_2Z4": 4.5, "ratio": 1.0},
+    {"Z": 2, "alpha_p_sturmian": 0.28125, "expected_9_over_2Z4": 0.28125, "ratio": 1.0},
+    {"Z": 3, "alpha_p_sturmian": 0.055555556, "expected_9_over_2Z4": 0.055555556, "ratio": 1.0},
+    {"Z": 4, "alpha_p_sturmian": 0.017578125, "expected_9_over_2Z4": 0.017578125, "ratio": 1.0}
+  ],
+  "focal_length_formula": {
+    "decomposition": "alpha_p = 9/2 * Z^-4 * a_0^3",
+    "projection_chain": [
+      {"step": "Fock conformal", "introduces": "Z, a_0, Hartree", "transcendental": "rational"},
+      {"step": "Wigner 3j", "introduces": "angular factor 1/sqrt(3) for z = r cos theta = sqrt(4pi/3) r Y_1^0", "transcendental": "rational"},
+      {"step": "Sturmian reparameterization at lambda=Z=Z/n_1S", "introduces": "no new variables (relabeling)", "transcendental": "rational; closes bound+continuum sum exactly at finite N"}
+    ],
+    "depth": 3,
+    "transcendental_class": "rational (no pi, no zeta, no calibration content)"
+  },
+  "verdict": {
+    "graph_native_n_max_truncated": "Bound-state-only sum reaches ~81% of analytic at n_max=15; convergence to 81.25% structural floor; continuum is structurally inaccessible without Sturmian projection.",
+    "sturmian_projection": "Reaches 9/2 EXACTLY at finite N_basis=2 (n_max=3). The p-wave Sturmian basis at k=Z spans the Dalgarno-Lewis solution F|1s> in 2-dim subspace.",
+    "class_D_gap": "NO -- the bound-state-only finite-truncation gap is closed structurally by the Sturmian projection (Paper 34 sec III.5). This is a single-projection two-projection match, not a Class D structural floor.",
+    "match_precision": "machine-precision exact at N_basis=2 in Sturmian basis"
+  },
+  "catalog_row_draft": {
+    "match": "H 1S static dipole polarizability alpha_p = 9/2 a_0^3 (Z=1)",
+    "projections": "Fock o Wigner 3j o Sturmian reparameterization",
+    "vars": "Z",
+    "dim": "length^3",
+    "transcendental_class": "rational",
+    "match_quality": "exact symbolic at N_basis = 2"
+  }
+}

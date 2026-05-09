@@ -1,0 +1,137 @@
+{
+  "date": "2026-05-09",
+  "sprint": "Calc Track rZG-Extended v2: NLO-Extended Global Zemach Extraction",
+  "parent_sprint": "Calc Track rZG-Extended v1 (2026-05-09)",
+  "change_from_v1": "Re-ran global Zemach extraction with the W1b operator-level kernel extended to include NLO recoil-mixing prefactor m_l/(m_l+m_n) (arXiv:2604.06930 eq. 95) and Friar moment correction (1/2)(Z m_red)^2 <r^2>_(2) (Friar 1979). muH 1S HFS sigma reduced from 367 ppm (v1, LO kernel-limited) to 100 ppm (v2, NLO kernel residual + multi-loop QED).",
+  "kernel_extension_notes": "Sign convention: Krauth literature itemizes Zemach line as purely LO -2 Z m_red r_Z and the recoil NLO line separately with negative sign (~ -103 ppm of nu_F at r_Z=1.045 in muH). Per arXiv:2604.06930 eq. 95, recoil-mixing prefactor m_l/(m_l+m_n) is absorbed into the Zemach line itself with MAGNITUDE-REDUCING sign (Delta_NLO = -|Delta_LO|*f_recoil). Numerically: Krauth Zemach -7141 ppm (full theory) vs framework LO -7340 ppm \u2014 framework OVERSHOOTS by 2.7%, consistent with NLO subtraction of ~9% being canceled by Friar moment of opposite sign at ~5%.",
+  "constants": {
+    "alpha": 0.0072973525693,
+    "A0_fm": 52917.721067,
+    "m_red_ep": 0.9994556794247628,
+    "m_red_ed": 0.9997276304945473,
+    "m_red_mup": 185.84083462261438,
+    "m_red_mud": 195.7416251699798,
+    "f_recoil_ep": 0.0005443205752372123,
+    "f_recoil_mup": 0.09190970885044929,
+    "f_recoil_eD": 0.00027236950545275404
+  },
+  "operator_level_check": {
+    "ep": {
+      "delta_LO_ppm": -39.49527601236602,
+      "delta_NLO_recoil_ppm": 0.021498091358203544,
+      "delta_friar_ppm": 0.00022971082411540149,
+      "delta_total_ppm": -39.4735482101837,
+      "recoil_mixing_factor": 0.0005443205752372123
+    },
+    "mup": {
+      "delta_LO_ppm": -7339.835057788622,
+      "delta_NLO_recoil_ppm": 674.6021031716729,
+      "delta_friar_ppm": 7.933480422778872,
+      "delta_total_ppm": -6657.299474194171,
+      "recoil_mixing_factor": 0.09190970885044929
+    }
+  },
+  "catalogue": [
+    {
+      "name": "H 21cm HFS (HF-4, NLO kernel)",
+      "species": "p",
+      "Z": 1.0,
+      "lepton_mass_au": 1.0,
+      "nucleon_mass_au": 1836.15267343,
+      "f_recoil": 0.0005443205752372123,
+      "ppm_BF_intercept": 58.0,
+      "ppm_per_fm_NLO": -37.77395017292356,
+      "ppm_layer2": -18.5,
+      "sigma_ppm": 10.0,
+      "nu_exp_value": "1420405751.768 Hz",
+      "layer2_breakdown": "Bodwin-Yennie recoil + 2-loop QED + hadronic VP (Eides Tab. 7.3 itemized -18.5 ppm). NLO recoil factor 5.45e-4, Friar moment ~4e-4 ppm \u2014 both structurally negligible.",
+      "sigma_breakdown": "Multi-loop QED itemization + hadronic VP (combined ~10 ppm).",
+      "notes": "NLO-extended kernel; for ep recoil-mixing is negligible.",
+      "r_Z_alone_fm": 1.0456941839329705,
+      "sigma_r_Z_alone_fm": 0.26473270479315714
+    },
+    {
+      "name": "muH 1S HFS (NLO kernel, sigma=100 ppm)",
+      "species": "p",
+      "Z": 1.0,
+      "lepton_mass_au": 185.84083462261438,
+      "nucleon_mass_au": 1836.15267343,
+      "f_recoil": 0.09190970885044929,
+      "ppm_BF_intercept": 1163.0,
+      "ppm_per_fm_NLO": -6378.213355267332,
+      "ppm_layer2": 7047.397896662602,
+      "sigma_ppm": 100.0,
+      "nu_exp_value": "182.725 meV (Krauth 2017 / Antognini-CREMA full theory)",
+      "layer2_breakdown": "Closure gap with NLO recoil-mixing kernel (b_NLO = b_LO*(1 - 0.0919) = -6378.2 ppm/fm). Layer-2 re-anchored: L2_v2 = L2_v1 + (b_LO - b_NLO)*1.045 = 7722 + (-675)(1.045) = 7047 ppm. This preserves the framework prediction at r_Z=1.045 fm (Eides reference) consistent with the Krauth observable at +1545 ppm of nu_F.",
+      "sigma_breakdown": "Residual kernel approximation after NLO: alpha^2*(Z*alpha)^2 relativistic FNS + relativistic recoil ~30 ppm of Zemach + multi-loop QED itemization ~70 ppm. Combined: ~100 ppm.",
+      "notes": "v2 NLO-extended kernel; recoil-mixing factor = 0.0919 (~9.2%). Sigma drops from 367 ppm (v1, kernel-limited LO) to 100 ppm (kernel-limited NLO).",
+      "r_Z_alone_fm": 1.2872567033026878,
+      "sigma_r_Z_alone_fm": 0.01567837173672104
+    },
+    {
+      "name": "D 1S HFS (Wineland-Ramsey 1972, NLO kernel)",
+      "species": "D",
+      "Z": 1.0,
+      "lepton_mass_au": 1.0,
+      "nucleon_mass_au": 3670.482967,
+      "f_recoil": 0.00027236950545275404,
+      "ppm_BF_intercept": 383.64,
+      "ppm_per_fm_NLO": -37.78422843375192,
+      "ppm_layer2": -286.0,
+      "sigma_ppm": 60.0,
+      "nu_exp_value": "327.384352522(2) MHz",
+      "layer2_breakdown": "Recoil NLO ~-300 ppm, finite-size ~-30 ppm, multi-loop QED ~+10 ppm, deuteron polarizability (Pachucki-Yerokhin 2010) +44 ppm. Net -286 ppm. NLO recoil factor 2.72e-4 \u2014 negligible.",
+      "sigma_breakdown": "Pachucki-Yerokhin 2010 polariz uncertainty + recoil h.o. (~60 ppm).",
+      "notes": "NLO-extended kernel; for eD recoil-mixing is negligible.",
+      "r_Z_alone_fm": 2.5841469853273504,
+      "sigma_r_Z_alone_fm": 1.5879641450188555
+    }
+  ],
+  "global_fit": {
+    "r_Z_p_fm": 1.2864124054453128,
+    "sigma_r_Z_p_fm": 0.015650948603201195,
+    "sigma_r_Z_p_mfm": 15.650948603201195,
+    "r_Z_D_fm": 2.584146985327351,
+    "sigma_r_Z_D_fm": 1.5879641450188557,
+    "sigma_r_Z_D_mfm": 1587.9641450188558,
+    "chi2_min": 0.8297042653310226,
+    "n_observables": 3,
+    "n_params": 2,
+    "dof": 1,
+    "reduced_chi2": 0.8297042653310226
+  },
+  "literature_comparison": {
+    "eides_2024_atomic_p": {
+      "value": 1.045,
+      "sigma": 0.02,
+      "tension_sigma": 9.505956481967296
+    },
+    "lattice_QCD_2024_p": {
+      "value": 1.013,
+      "sigma_stat": 0.01,
+      "sigma_sys": 0.012,
+      "sigma_total": 0.015620499351813309,
+      "tension_sigma": 12.364740806342475
+    },
+    "friar_payne_2005_D": {
+      "value": 2.593,
+      "sigma": 0.016,
+      "tension_sigma": -0.005574789171652881
+    },
+    "eides_lattice_gap_mfm": 32.00000000000003,
+    "eides_lattice_combined_sigma_mfm": 25.612496949731394
+  },
+  "verdict": {
+    "sigma_below_50_mfm": true,
+    "sigma_below_30_mfm_gap": true,
+    "discrimination_verdict": "INCONSISTENT_WITH_BOTH (>1 sigma from both; kernel residual or fit issue)"
+  },
+  "v1_to_v2_closure": {
+    "muH_alone_r_Z_v1_fm": 1.265,
+    "muH_alone_r_Z_v2_fm": 1.2872567033026878,
+    "eides_target_fm": 1.045,
+    "offset_v1_mfm": 219.99999999999997,
+    "offset_v2_mfm": 242.2567033026879,
+    "offset_closure_pct": -10.1166833194036
+  }
+}

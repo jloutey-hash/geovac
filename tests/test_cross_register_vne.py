@@ -892,5 +892,183 @@ class TestSprintMHTrackDDualExpansion:
         assert abs(float(coeffs_eval[3][1]) - expected_c3) < 1e-3
 
 
+# ---------------------------------------------------------------------------
+# Species-agnostic recoil verification (Sprint rZG follow-up, 2026-05-09)
+# ---------------------------------------------------------------------------
+#
+# These tests confirm cross_register_recoil_correction reproduces leading-
+# order Bethe-Salpeter recoil for arbitrary nuclear masses (proton, deuteron,
+# antimuon) without any species-specific code path. The lam_n = 2*sqrt(M_n)
+# parameterization is the universal calibration: J_0(lam_e=1, lam_n) - 1 =
+# +2/lam_n^2 + O(1/lam_n^3) at leading order, which equals m_e/m_n at
+# lam_n = 2*sqrt(M_n) by construction (1/lam_n^2 = 1/(4 M_n)).
+#
+# Sprint rZG bug diagnosis (2026-05-09): the +5 fm artifact in r_Z(D)
+# extraction was traced to the rZG global fit's Layer-2 budget for D HFS
+# (-150 ppm specified vs ~-286 ppm correct), NOT to a bug in this module.
+# The production cross_register_vne kernel is species-agnostic and
+# correct; these tests document and protect that property going forward.
+
+
+class TestSpeciesAgnosticRecoil:
+    """Verify cross-register recoil works for arbitrary nuclear masses.
+
+    The proton-, deuteron-, and muon-(antimuon)-bound systems all use the
+    same kernel _roothaan_J0 with lam_n = 2*sqrt(M_n) and recover the
+    Bethe-Salpeter leading-order recoil to within the 1s x 1s Sturmian
+    basis-truncation precision (~3% for proton, ~2% for deuteron, ~8%
+    for muonium where m_red/m_n is largest).
+    """
+
+    @staticmethod
+    def _build_spec(M_n_over_m_e: float) -> CrossRegisterVneSpec:
+        """Standard 1s x 1s spec at lam_n = 2*sqrt(M_n)."""
+        import math
+        return CrossRegisterVneSpec(
+            lam_e=1.0, n_max_e=1,
+            lam_n=2.0 * math.sqrt(M_n_over_m_e),
+            n_max_n=1,
+            Z_nuc=1.0, L_max=0,
+            label=f"H_1s_x_M_{M_n_over_m_e:.4f}",
+        )
+
+    def test_hydrogen_recoil_matches_bethe_salpeter(self) -> None:
+        """H 1s x proton 1s: leading-order recoil at 2.86% (basis-truncation).
+
+        This is the regression target preserved by all cross_register_vne
+        modifications. Sprint Phase C-W1a-physics was calibrated to land
+        at this value; any change that shifts it is a regression.
+        """
+        spec = self._build_spec(M_PROTON_OVER_M_E)
+        recoil = cross_register_recoil_correction(
+            spec, m_e_over_m_n=1.0 / M_PROTON_OVER_M_E,
+        )
+        # Expected ~2.86% (basis-truncation artifact of 1s x 1s Sturmian)
+        assert recoil['relative_error'] == pytest.approx(0.0286, abs=0.001)
+        # Sign and order of magnitude
+        assert recoil['cross_register_recoil_estimate'] > 0  # less bound
+        assert recoil['cross_register_recoil_estimate'] == pytest.approx(
+            2.645e-4, rel=0.005,
+        )
+
+    def test_deuterium_recoil_matches_bethe_salpeter(self) -> None:
+        """D 1s x deuteron 1s: leading-order recoil at ~2% precision.
+
+        Verifies the production cross-register V_eN kernel is species-
+        agnostic for I=1 nuclei. The 2.03% relative error is *better* than
+        H (2.86%) because m_e/m_d < m_e/m_p (the leading 1/lam_n^2 term
+        captures more of the Bethe-Salpeter shift relative to the
+        sub-leading 1/lam_n^3 corrections).
+        """
+        M_D_OVER_M_E = M_PROTON_OVER_M_E * 1.99900750139
+        spec = self._build_spec(M_D_OVER_M_E)
+        recoil = cross_register_recoil_correction(
+            spec, m_e_over_m_n=1.0 / M_D_OVER_M_E,
+        )
+        # Expected ~2.03% (smaller than H because m_red/m_d is smaller)
+        assert recoil['relative_error'] == pytest.approx(0.0203, abs=0.001)
+        # Sign and order of magnitude
+        assert recoil['cross_register_recoil_estimate'] > 0  # less bound
+        # Bethe-Salpeter for D: |E_1| / m_d = 0.5 / 3670.48 ~ 1.36e-4
+        bs_expected = 0.5 / M_D_OVER_M_E
+        assert recoil['expected_leading_order'] == pytest.approx(
+            bs_expected, rel=1e-12,
+        )
+        # GeoVac estimate within 5% of Bethe-Salpeter
+        assert recoil['cross_register_recoil_estimate'] == pytest.approx(
+            bs_expected, rel=0.05,
+        )
+
+    def test_muonium_recoil_matches_bethe_salpeter(self) -> None:
+        """Muonium (e^- on antimuon mu^+): leading-order recoil at ~8%.
+
+        The 8.18% relative error is larger than H/D because m_red/m_n is
+        bigger for muonium (the muon is much lighter than the proton),
+        so sub-leading 1/lam_n^3 corrections matter more relative to the
+        leading 1/lam_n^2 term. Still captures sign and OoM correctly.
+        """
+        M_MU_OVER_M_E = 206.7682830
+        spec = self._build_spec(M_MU_OVER_M_E)
+        recoil = cross_register_recoil_correction(
+            spec, m_e_over_m_n=1.0 / M_MU_OVER_M_E,
+        )
+        # Expected ~8.18% (larger than H/D because m_red/m_mu is bigger)
+        assert recoil['relative_error'] == pytest.approx(0.0818, abs=0.005)
+        # Sign and order of magnitude
+        assert recoil['cross_register_recoil_estimate'] > 0  # less bound
+        # Bethe-Salpeter for muonium: |E_1| / m_mu = 0.5 / 206.77 ~ 2.42e-3
+        bs_expected = 0.5 / M_MU_OVER_M_E
+        assert recoil['expected_leading_order'] == pytest.approx(
+            bs_expected, rel=1e-12,
+        )
+
+    def test_static_nucleus_limit_recoil_vanishes(self) -> None:
+        """In the m_n -> infinity limit, framework recoil estimate -> 0
+        (the nucleus becomes a classical point charge and recoil is
+        suppressed)."""
+        # M_n = 1e8 m_e (well past any physical nucleus, approaches static)
+        M_n_large = 1.0e8
+        spec = self._build_spec(M_n_large)
+        recoil = cross_register_recoil_correction(
+            spec, m_e_over_m_n=1.0 / M_n_large,
+        )
+        # Both quantum and Bethe-Salpeter should be tiny
+        assert abs(recoil['cross_register_recoil_estimate']) < 1.0e-7
+        assert abs(recoil['expected_leading_order']) < 1.0e-7
+        # And J_0 quantum -> J_0 classical = lam_e = 1 in the limit
+        assert recoil['cross_register_J0'] == pytest.approx(1.0, abs=1.0e-6)
+
+    def test_mass_ratio_scaling_proton_to_deuteron(self) -> None:
+        """Recoil scales linearly with m_e/m_n at leading order.
+
+        Because Bethe-Salpeter recoil = +Z^2 m_e / (2 n^2 m_n) at leading
+        order, the ratio (recoil_H / recoil_D) should equal m_d/m_p =
+        ~1.999 at leading order. Higher-order corrections in 1/lam_n
+        introduce sub-percent deviation.
+        """
+        spec_H = self._build_spec(M_PROTON_OVER_M_E)
+        M_D_OVER_M_E = M_PROTON_OVER_M_E * 1.99900750139
+        spec_D = self._build_spec(M_D_OVER_M_E)
+        recoil_H = cross_register_recoil_correction(
+            spec_H, m_e_over_m_n=1.0 / M_PROTON_OVER_M_E,
+        )
+        recoil_D = cross_register_recoil_correction(
+            spec_D, m_e_over_m_n=1.0 / M_D_OVER_M_E,
+        )
+        # Both Bethe-Salpeter expectations should scale as (m_e/m_n)
+        bs_ratio = recoil_H['expected_leading_order'] / recoil_D['expected_leading_order']
+        # Should equal m_d/m_p = 1.999...
+        assert bs_ratio == pytest.approx(1.99900750, rel=1e-6)
+        # Framework estimates should also approximately scale this way,
+        # with deviations from the basis-truncation residuals
+        framework_ratio = (
+            recoil_H['cross_register_recoil_estimate']
+            / recoil_D['cross_register_recoil_estimate']
+        )
+        assert framework_ratio == pytest.approx(bs_ratio, rel=0.01)
+
+    def test_kernel_symmetry_preserved_for_arbitrary_lam_n(self) -> None:
+        """Production kernel _roothaan_J0(lam_e, lam_n) is symmetric in
+        (lam_e, lam_n) for any positive values.
+
+        The symmetry is the algebraic backbone of species-agnosticity:
+        once the lam_n parameterization fixes the focal length, the
+        kernel handles any (lam_e, lam_n) pair without species-specific
+        branching.
+        """
+        import math
+        for M_n in [M_PROTON_OVER_M_E,
+                    M_PROTON_OVER_M_E * 1.99900750139,  # deuteron
+                    206.7682830,                         # muon
+                    1.0]:                                # equal-mass
+            lam_n = 2.0 * math.sqrt(M_n)
+            J_forward = _roothaan_J0(1.0, lam_n)
+            J_reverse = _roothaan_J0(lam_n, 1.0)
+            assert J_forward == pytest.approx(J_reverse, rel=1e-15), (
+                f"Symmetry failure at M_n = {M_n}: "
+                f"J(1, {lam_n}) = {J_forward}, J({lam_n}, 1) = {J_reverse}"
+            )
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v', '--tb=short'])

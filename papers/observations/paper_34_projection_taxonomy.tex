@@ -42,7 +42,7 @@ physical variable, every dimensional unit, and every transcendental
 constant that appears in any GeoVac calculation enters through
 exactly one projection, and is fully traceable to it.
 
-We catalogue sixteen projection mechanisms and tag each one along
+We catalogue nineteen projection mechanisms and tag each one along
 three independent axes: (a)~which physical variables it introduces
 (charge $Z$, coupling $\alpha$, energy scale $\hbar\omega$, internuclear
 distance $R$, gauge coupling $\beta$, cutoff $\Lambda$, $\ldots$);
@@ -204,7 +204,7 @@ discrete quantum-number labels.
 \label{sec:layer2}
 % ===================================================================
 
-We enumerate sixteen projection mechanisms.  For each: source and
+We enumerate nineteen projection mechanisms.  For each: source and
 target spaces, physical variables introduced, dimensions
 introduced, transcendental signature, and existing GeoVac papers
 that exercise the projection.  Projections~14 (rest-mass) and~15
@@ -214,6 +214,21 @@ added in the precision-catalogue sprint of 2026-05-08, motivated by
 the positronium 1S--2S framework-native residual that surfaced as
 the sixth (and structurally cleanest) instance of the
 multi-focal-composition wall named in CLAUDE.md~\S~2.
+Projections~17--19 (nuclear charge-density / Foldy--Friar,
+magnetization-density / Zemach, and tensor multipole) were added in
+the intra-particle hunting sprint of 2026-05-09, after the audit
+memo \texttt{debug/paper34\_v\_base\_unit\_audit\_memo.md} flagged
+magnetization-density as a single 17th-projection candidate and the
+follow-up hunt established that the three mechanisms are
+categorically distinct (different Hamiltonian operators, different
+selection rules; documented in
+\texttt{debug/intra\_particle\_L\_hunting\_memo.md}).  A boundary
+subsection (\S~\ref{sec:layer2_boundary}) names the
+internal-graph-derived vs.\ Layer-2-input distinction, with the
+external-field hunting memo
+(\texttt{debug/external\_field\_hunting\_memo.md}, same date)
+verifying that uniform external classical fields (Zeeman, Stark) are
+Layer-2 inputs rather than \S~\ref{sec:layer2} projections.
 
 \subsection{Fock conformal projection: $\mathbb{R}^3 \to S^3$}
 \label{sec:proj_fock}
@@ -548,9 +563,219 @@ the LS-8a renormalization wall --- so the two-body-projection
 failure is isolated and visible without renormalization confounds.
 This is also what places the projection in the Layer-2 input class
 (structurally a sibling of magnetization-density / Zemach in
-\S~\ref{sec:offprecision}): both take the framework's
+\S~\ref{sec:proj_magnetization_density}): both take the framework's
 single-particle output and add a structural correction the bare
 spectral action does not autonomously generate.
+
+\subsection{Nuclear charge-density correction (Foldy/Friar)}
+\label{sec:proj_charge_density}
+\textbf{Source:} bare Coulomb $V_\text{ne}(\vec{r}) = -Z e^2 / |\vec{r}|$
+on the Fock-projected $S^3$ graph (point-source nucleus).\\
+\textbf{Target:} convolved Coulomb $V_\text{ne}(\vec{r}) \to \int
+d^3r' \, \rho_E^\text{nuc}(\vec{r}')\,(-Ze^2/|\vec{r}-\vec{r}'|)$,
+with $\rho_E^\text{nuc}$ the nuclear electric charge distribution; at
+leading order in the small-$r$ expansion the correction reduces to
+the Foldy / Friar contact term
+$\Delta V = +\tfrac{2\pi}{3} Z\alpha\,\langle r^2\rangle_E\,\delta^3(\vec{r})$.\\
+\textbf{Variables introduced:} $\langle r^2\rangle_E$ (or
+equivalently the charge radius $r_E$ for a given species).\\
+\textbf{Dimension introduced:} length (one new $[L]$ scale per
+nuclear species: proton $r_p$, deuteron $r_d$, etc.; structurally
+distinct from atomic / internuclear length scales).\\
+\textbf{Transcendental signature:} ring-preserving over
+$\mathbb{Q}(\alpha)$.  The Foldy / Friar correction is rational in
+the charge form-factor moments at every order of the small-$r$
+expansion; the only transcendental content is the foundational
+$\alpha$ already present in the spectral-action chain.\\
+\textbf{Used in:} hydrogen Lamb shift $r_p$ contribution (currently
+consumed externally via Eides Tab.~7.3 / Friar 1979); $\mu$H Lamb
+shift Friar moment leading-order (Sprint MH Track A; $4.3\%$ at
+leading); future framework-native operator-level Foldy module
+(sibling of \texttt{geovac/magnetization\_density.py}, not yet
+implemented).\\
+\textbf{Empirical anchor:} proton charge radius
+$r_p = 0.84075(64)$ fm (CODATA 2022); deuteron charge radius
+$r_d = 2.1415(45)$ fm (Pohl et al.~2017).  Hydrogen 2$S$ Lamb shift
+contribution from $r_p$ at the $\sim +1.18$ MHz level (Sprint LS-7
+reframing; Eides Tab.~7.3).\\
+\textbf{Honest scope.}  The framework currently consumes $r_p, r_d$
+as external scalars (\texttt{R\_PROTON\_BOHR} and analogs) at the
+point-source level.  Operator-level construction of $V_\text{ne}
+\to V_\text{ne} \star \rho_E$ is the natural next step but has not
+been implemented; the catalogue rows that depend on this projection
+treat $r_p$ as a Layer-2 input.\\
+\textbf{Structural reading.}  Categorically distinct from
+\S~\ref{sec:proj_magnetization_density}: the Hamiltonian operator
+modified is $V_\text{ne}$ (Coulomb), not $A_\text{hf}^\text{contact}$
+(Fermi contact).  Empirical separation: hydrogen Lamb shift depends
+on $r_p$ but only trivially on $r_Z$, while 21~cm hyperfine depends
+on $r_Z$ but only trivially on $r_p$.
+
+\subsection{Nuclear magnetization-density correction (Zemach)}
+\label{sec:proj_magnetization_density}
+\textbf{Source:} bare Fermi-contact hyperfine operator
+$A_\text{hf}^\text{contact} = (8\pi/3)\,\mu_e \cdot \mu_N\,\delta^3(\vec{r})$
+on the Fock-projected $S^3$ graph (point-source nuclear magnetic
+moment).\\
+\textbf{Target:} extended-magnetization Fermi-contact operator
+$A_\text{hf}^\text{contact}(1 - 2 Z\alpha m_e r_Z + O(r_Z^2))$,
+where $r_Z = \int d^3r\, d^3r'\,\rho_E^\text{nuc}(\vec{r}')\,
+\rho_M^\text{nuc}(|\vec{r}-\vec{r}'|)\,|\vec{r}|$ is the Zemach
+radius defined as the convolution moment of the nuclear charge and
+magnetization profiles.\\
+\textbf{Variables introduced:} $r_Z$ per nuclear species
+(sub-features: nuclear magnetic radius $r_M$ and Friar moment
+$\langle r^3\rangle_{(2)}$ enter as profile-shape parameters).\\
+\textbf{Dimension introduced:} length (a new $[L]$ scale,
+structurally distinct from \S~\ref{sec:proj_charge_density}).\\
+\textbf{Transcendental signature:} ring-preserving over
+$\mathbb{Q}(\alpha)$ at leading order; profile-dependence at
+sub-leading order admits Gaussian, exponential, and dipole forms
+with structurally identical leading $-2 Z\alpha m_e r_Z$ behaviour
+(profile independence at leading order verified in Sprint HF
+Track 4 / Sprint MH Track C).\\
+\textbf{Used in:} hydrogen 21~cm hyperfine HF-4 row (Sprint HF;
+$r_Z = 1.045$ fm yields $-39.5$ ppm framework-native shift); $\mu$H
+1S Zemach mass-enhancement (Sprint MH Track B/C; factor $185.94
+\times$ ep enhancement at leading order); deuteron 1S hyperfine
+(Sprint precision-catalogue; $r_Z(D) = 2.593$ fm yields $-98.0$ ppm
+framework-native shift).\\
+\textbf{Empirical anchors:} proton Zemach radius
+$r_Z = 1.045(20)$ fm (Eides 2024 atomic compilation) or $r_Z =
+1.013(10)(12)$ fm (lattice QCD 2024); deuteron Zemach radius
+$r_Z(D) = 2.593(16)$ fm (Friar--Payne 2005).\\
+\textbf{Honest scope.}  Operator-level construction is mature:
+\texttt{geovac/magnetization\_density.py} ($\sim 600$ lines, 57
+tests; Sprint MH Track C + W1b recoil-mixing extension, May 2026)
+implements the convolved Fermi-contact operator with the
+\texttt{lepton\_mass} parameter eliminating manual mass-scaling for
+muonic systems and an opt-in \texttt{include\_recoil\_mixing} flag
+extending the kernel to next-to-leading order with the recoil-mixing
+prefactor $m_l/(m_l + m_n)$ (per arXiv:2604.06930 eq.~95) and the
+Friar moment correction $(1/2)(Z\alpha m_\text{red})^2 \langle r^2
+\rangle_{(2)}$ (per Friar~1979 / Eides~\S6.2).  At leading order the
+kernel matches Eides analytical to floating-point precision; with
+recoil-mixing on, the framework muH 1S HFS prediction matches
+Krauth~2017's full-theory Zemach line to $\sim 1\%$ (vs $\sim 3\%$
+overshoot at LO-only).  $r_Z$ values themselves are Layer-2 inputs
+(cannot be predicted from framework structure; consumed from QCD
+lattice or atomic spectroscopy).  The W1b recoil-mixing extension
+sprint (May 2026, see \texttt{debug/w1b\_recoil\_mixing\_extension\_memo.md})
+showed that this kernel improvement does NOT close the $\sim 0.22$~fm
+muH-alone vs Eides offset diagnosed by Sprint Calc-rZG-extended;
+that offset is now attributable to Layer-2 itemization-convention
+mismatch between Krauth~2017, Eides~2024, and Antognini-Krauth-Pohl~2015,
+not to kernel approximation.\\
+\textbf{Structural reading.}  Sibling of
+\S~\ref{sec:proj_charge_density} (different Hamiltonian operator)
+and of \S~\ref{sec:proj_breit_retardation} (Breit retardation:
+both take the framework's single-particle output and add a
+structural correction the bare spectral action does not
+autonomously generate).  Categorical distinction from
+charge-density is empirical: 21~cm hyperfine depends on $r_Z$ but
+trivially on $r_p$, electronic Lamb shift depends on $r_p$ but
+trivially on $r_Z$.
+
+\subsection{Nuclear tensor multipole coupling}
+\label{sec:proj_tensor_multipole}
+\textbf{Source:} multipole expansion of the nuclear charge potential
+$V_\text{ne}(\vec{r}) = -Ze^2/|\vec{r}|$, truncated at the
+monopole on the bare Fock-projected $S^3$ graph (spherical-symmetric
+nucleus).\\
+\textbf{Target:} same potential with $L \geq 2$ multipole
+corrections retained.  At leading rank-2: quadrupole coupling
+$H_Q = -e\,Q_N\,T^{(2)}_{ij}\,(\partial_i E_j)/6$, with $Q_N$ the
+nuclear electric quadrupole moment and $T^{(2)}_{ij}$ a rank-2
+spin tensor on the nuclear-spin Hilbert space.  Higher ranks
+(octupole, hexadecapole) follow the same pattern at higher angular
+momentum.\\
+\textbf{Variables introduced:} $Q_N$ per nuclear species (rank-2
+leading); higher-rank moments enter at higher $L$.\\
+\textbf{Dimension introduced:} length-squared (the rank-2
+quadrupole has dimension $[L]^2$; rank-$L$ multipoles have dimension
+$[L]^L$).  This is the only projection in \S~\ref{sec:layer2} whose
+dimensional injection is not strictly $[L]^1$ or $[E]$; the
+squared-length structure reflects the tensor character of the
+operator.\\
+\textbf{Transcendental signature:} ring-preserving over $\mathbb{Q}$
+at the angular level (multipole expansion uses Wigner $3j$ at every
+step).  Sub-leading corrections involve the same algebraic ring as
+\S~\ref{sec:proj_charge_density}.\\
+\textbf{Used in:} deuteron 1S hyperfine s-state contribution
+(sub-ppm; \emph{not} load-bearing in current catalogue); future
+molecular HD / D$_2$ rotational hyperfine where electronic
+gradients at the nucleus are nonzero and $Q_d$ couples at the
+percent level (Komasa--Pachucki 2020 sub-percent precision regime);
+future heavy-nucleus hyperfine spectra where $L \geq 1$ valence
+orbitals couple to $Q_N$ at leading order.\\
+\textbf{Empirical anchors:} deuteron quadrupole moment
+$Q_d = 0.285699(15)(18)$ fm$^2$ (Komasa--Pachucki 2020); $^{17}$O
+and $^{14}$N quadrupole moments for molecular spectroscopy
+benchmarks; sub-percent precision spectroscopy in HD / D$_2$
+rotational HFS as the load-bearing test.\\
+\textbf{Honest scope.}  Forward-looking projection slot.  No
+catalogue row currently uses this projection at leading order
+(deuteron 1S HFS s-state sees only sub-ppm contribution; the
+load-bearing tests are in molecular rather than atomic
+spectroscopy).  Operator-level construction has not been
+implemented; this projection occupies a structural slot, with the
+empirical anchor in molecular HD / D$_2$ HFS not currently
+catalogued.\\
+\textbf{Structural reading.}  Categorically distinct from
+\S~\ref{sec:proj_charge_density} and
+\S~\ref{sec:proj_magnetization_density}: tensor coupling to a
+gradient is structurally different from scalar coupling to a contact
+density.  Different selection rules: $Q_N$ requires $l\geq 1$ on the
+electronic side (does not contribute to s-states at leading order),
+while charge-density and magnetization-density Foldy / Friar / Zemach
+contributions are pure $l=0$ contact corrections.  The
+Wigner--Eckart theorem ensures the tensor and scalar projections
+are mutually orthogonal: they cannot be unified by a single
+profile-broadening prescription.
+
+\subsection{Boundary of \S\ref{sec:layer2}: internal graph-derived variables}
+\label{sec:layer2_boundary}
+
+The nineteen projections enumerated above share a structural
+property worth naming explicitly: each introduces a variable that
+is \emph{internal to the framework's graph and projection structure}
+--- a graph-derived integer or rational invariant (such as $Z$, $n$,
+the foundational $\alpha$, or a Wigner $3j$ coefficient), a
+continuous parameter that controls a coordinate or focal-length
+choice (such as $\rho$, $R$, $\Lambda$, $\beta$, $m$, $r_E$, $r_Z$,
+$Q_N$), or a function of prior projection variables (compositional
+projections per Observation~\ref{obs:composition}).
+
+This is structurally distinct from \emph{Layer-2 calibration inputs}
+that the framework consumes from external sources but does not
+autonomously generate.  Examples: nuclear g-factors $g_p, g_d$
+(extracted from precision spectroscopy or QCD lattice), multi-loop
+QED coefficients (Eides Tab.~7.3, Karshenboim 2005, Penin--Pivovarov
+1998 $\alpha^4$ Breit input), Yukawa couplings (per CLAUDE.md
+\S~1.7 WH5; Sprint H1 verdict), and external classical-field
+strengths (Zeeman $B$, Stark $\vec{\mathcal{E}}$ --- verified by the
+2026-05-09 external-field hunting sprint to be Layer-2 inputs, not
+\S~\ref{sec:layer2} projections; the bare Landau spectrum is HO-class
+and $\pi$-free, structurally a Bargmann--Segal sibling on the
+cyclotron plane, with $\pi$ entering only through the 2D phase-space
+measure as a calibration~$\pi$ in the M1 Mellin sub-mechanism, not
+through Matsubara compactification).
+
+The structural test that distinguishes \S~\ref{sec:layer2}
+projection from Layer-2 input is whether the variable's content is
+internal graph-derived or external classical-field /
+QCD-lattice-derived.  Zemach and charge radii are intrinsic
+focal-lengths once the framework's spectral content (not external
+calibration) determines the convolved-potential structure given the
+radius; nuclear g-factors and Yukawas are external because no
+spectral structure of the framework determines their value.  This
+boundary is not absolute: promotion of a Layer-2 input to a
+projection slot is the structural commitment that the variable
+acquires a focal-length role beyond bare scalar consumption, as
+Zemach did when \texttt{magnetization\_density.py} was implemented
+at the operator level (\S~\ref{sec:proj_magnetization_density}).
+Future Layer-2 inputs may follow if the framework develops
+operator-level constructions that give them focal-length status.
 
 % ===================================================================
 \section{The Three-Axis Dictionary}
@@ -598,6 +823,13 @@ $2\pi \cdot \mathbb{Q}$ per Matsubara mode; $\pi^{2k}\cdot\mathbb{Q}$ in
 integrated quantities; Stefan-Boltzmann $\pi^2/90$ in high-$T$ limit \\
 Two-body Dirac / Breit retardation & $m_l/m_n$ & energy &
 $\alpha^4 \cdot \mathbb{Q}$ (ring-preserving over $\mathbb{Q}(\alpha)$) \\
+Charge-density (Foldy/Friar) & $r_E$ per nucleus & length &
+$\mathbb{Q}(\alpha)$ ring-preserving \\
+Magnetization-density (Zemach) & $r_Z$ per nucleus & length &
+$\mathbb{Q}(\alpha)$ ring-preserving (leading); profile-shape
+sub-features at sub-leading \\
+Tensor multipole (quadrupole, etc.) & $Q_N$ per nucleus &
+length-squared & $\mathbb{Q}$ via Wigner $3j$ at angular level \\
 \bottomrule
 \end{tabular}
 \caption{The projection dictionary.  Each row is a structural
@@ -690,10 +922,14 @@ Layer-2~content.
 The variable axis and dimension axis are not independent: every
 projection in Section~\ref{sec:layer2} that introduces a physical
 dimension also introduces a physical variable that carries that
-dimension.  Of the sixteen projections, nine add a dimension and
-all nine also add the variable that carries it (perfect correlation
+dimension.  Of the nineteen projections, twelve add a dimension and
+all twelve also add the variable that carries it (perfect correlation
 on the V/D side); zero projections add a dimension without a
-variable.  The transcendental axis is the only one that admits an
+variable.  The three intra-nuclear projections of
+\S~\ref{sec:proj_charge_density}, \S~\ref{sec:proj_magnetization_density},
+and \S~\ref{sec:proj_tensor_multipole} preserve this V/D
+correlation: each adds an intra-nuclear focal length together with
+its associated dimension ($[L]$, $[L]$, $[L]^2$ respectively).  The transcendental axis is the only one that admits an
 independence witness --- vector-photon promotion (\S~\ref{sec:layer2},
 projection~11) introduces $1/(4\pi)$ without introducing any new
 variable or dimension.  This is the structural content of
@@ -705,6 +941,262 @@ independent of the other two.  The sixteenth projection
 it adds the variable $m_l/m_n$ and the dimension energy together,
 and lives in the ring-preserving $\alpha^4 \cdot \mathbb{Q}$ tier.
 \end{remark}
+
+% ===================================================================
+\subsection{Base-unit decomposition of the projection family}
+\label{sec:base_units}
+% ===================================================================
+
+Remark~\ref{rem:vd_correlation} establishes that every dimensioned
+projection is paired with the variable carrying that dimension, at
+the level of compound dimensions (energy, length, time, mass).  This
+subsection decomposes the compound dimensions into base-unit
+constituents and asks: how often is each base unit injected across
+the nineteen projections, and which projections inject which units?
+
+We work in atomic units throughout: $\hbar = m_e = e = 1$, so the
+mechanical base units are $[L]$, $[M]$, $[T]$, with charge $[Q]$
+carried by the integer label $Z$.  Energy is the compound
+$[E] = [M][L]^2[T]^{-2}$, but in atomic units acts as an effective
+base for the framework's primary observables; we track $[E]$
+alongside the strictly-base units below.  We follow the
+\S~\ref{sec:layer2} order of projections for cross-reference with
+Table~\ref{tab:projection_axes}.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{3cm} p{2.2cm} p{0.9cm} p{4.5cm} p{1.6cm}}
+\toprule
+Projection & Variable & Dim & Base-unit injection & Role \\
+\midrule
+Fock conformal & $Z$, $E$ & $[E]$ &
+foundational anchor for atomic units; sets $a_0$ ($[L]$) and Ry
+($[E]$) jointly via $p_0 = Z/n$; $[Q]$ as integer label $Z$ &
+foundational \\
+Hopf bundle & $\alpha$ (Paper~2) & dim'less & none & pure \\
+Bargmann--Segal & $\hbar\omega$ & $[E]$ &
+foundational anchor (HO sibling of Fock); sets oscillator length
+($[L]$) and $\hbar\omega$ ($[E]$) jointly &
+foundational (sibling) \\
+Stereographic & $r$ & $[L]$ & $[L]$ as continuous coordinate; no new
+scale (coordinatizes the foundational $[L]$) &
+coordinate-explicit \\
+Sturmian reparam & $Z, n$ (re-use) & --- & none & reparam \\
+Spectral action & $\Lambda$, $\alpha$ & $[E]$ & new $[E]$ scale (UV
+cutoff $\Lambda$); $\alpha$ dimensionless & scale-extension \\
+Camporesi--Higuchi spinor & $\alpha$ via $(Z\alpha)^2$ & dim'less &
+none & pure \\
+Wigner $3j$ & none & dim'less & none & pure \\
+Wigner $D$ rotation & $\vec{R}_{AB}$ & $[L]$ & new $[L]$ scale
+(internuclear position vector) & scale-extension \\
+Wilson plaquette & $\beta = 1/g^2$ & dim'less & none & pure \\
+Vector-photon promotion & none & dim'less & none & pure \\
+Mol-frame hyperspherical & $R$ & $[L]$ & new $[L]$ scale
+(internuclear distance; same physical length as $|\vec{R}_{AB}|$) &
+scale-extension \\
+Drake--Swainson & $K$ (cancels) & $[E]$ & transient $[E]$ scale
+(cancels in $\beta_\text{low}(K) + \beta_\text{high}(K)$) &
+scale-extension (transient) \\
+Rest-mass & $m$ & $[M]$ & first $[M]$ scale beyond foundational
+$m_e = 1$; one projection per particle species &
+scale-extension (new base) \\
+Observation / temporal-window & $\beta$ (or $T$) & $[T]$ & first
+$[T]$ scale beyond foundational $\tau_0 = \hbar/\mathrm{Ry}$; one
+projection per measurement window &
+scale-extension (new base) \\
+Two-body Dirac / Breit & $m_l / m_n$ & dim'less &
+ratio of two prior $[M]$ scales (lepton, nucleon); no new base
+content & composition \\
+Charge-density (Foldy/Friar) & $r_E$ per nucleus & $[L]$ &
+new $[L]$ scale (intra-nuclear, charge distribution); modifies
+$V_\text{ne}$ via convolution & scale-extension \\
+Magnetization-density (Zemach) & $r_Z$ per nucleus & $[L]$ &
+new $[L]$ scale (intra-nuclear, magnetization distribution);
+modifies $A_\text{hf}^\text{contact}$ & scale-extension \\
+Tensor multipole (rank-$\geq 2$) & $Q_N$ per nucleus & $[L]^2$ &
+rank-$L$ multipole moment, dim $[L]^L$; couples to electronic
+gradients ($l \geq 1$ on electronic side) &
+scale-extension (rank-2) \\
+\bottomrule
+\end{tabular}
+\caption{Base-unit decomposition of the nineteen projections.
+``Variable'' is the new physical content; ``Dim'' repeats the
+compound dimension from Table~\ref{tab:projection_axes};
+``Base-unit injection'' shows what enters in $[L]$, $[M]$, $[T]$,
+$[Q]$, with $[E]$ tracked as the framework's effective base
+observable; ``Role'' classifies the projection by its action on the
+dimensional content of a projection chain.  Six roles emerge:
+\emph{foundational} (sets the atomic-units anchor),
+\emph{coordinate-explicit} (re-expresses an anchored unit as a
+continuous coordinate), \emph{reparam} (relabels without adding
+content), \emph{scale-extension} (adds a new variable in a base
+unit, possibly a new base), \emph{pure} (adds transcendental and/or
+combinatorial content with no dimensional injection), and
+\emph{composition} (variable is a function of prior projection
+variables).}
+\label{tab:base_units}
+\end{table}
+
+The inverse view --- which projections inject each base unit ---
+makes the structure visible:
+
+\begin{itemize}\setlength\itemsep{0pt}
+\item $[L]$ (scalar): \emph{six} projections.  Fock or
+Bargmann--Segal anchors the foundational length ($a_0$ or oscillator
+length); stereographic re-expresses it as a continuous coordinate
+$r$; Wigner~$D$ rotation introduces nuclear position
+$\vec{R}_{AB}$; molecule-frame hyperspherical separation introduces
+internuclear distance $R$ (Wigner~$D$ and mol-frame inject the same
+physical length scale through different projections);
+charge-density (\S~\ref{sec:proj_charge_density}) introduces the
+intra-nuclear charge radius $r_E$; magnetization-density
+(\S~\ref{sec:proj_magnetization_density}) introduces the
+intra-nuclear Zemach radius $r_Z$.  These last three intra-nuclear
+length scales are each \emph{categorically distinct} from the
+atomic / internuclear scales: they modify different Hamiltonian
+operators (Coulomb $V_\text{ne}$, Fermi-contact
+$A_\text{hf}^\text{contact}$) with different selection rules, with
+empirical separation across hydrogen Lamb shift / 21~cm hyperfine /
+deuteron molecular HFS.
+
+\item $[L]^2$ (rank-2 tensor): \emph{one} projection.  Tensor
+multipole (\S~\ref{sec:proj_tensor_multipole}) introduces the
+nuclear quadrupole moment $Q_N$ at rank-2 leading; higher-rank
+multipoles ($L \geq 3$) follow at higher $[L]^L$.  Categorically
+distinct from scalar $[L]$ injections: the operator is tensorial
+and requires $l \geq 1$ on the electronic side.
+\item $[E]$: \emph{four} projections.  Fock or Bargmann--Segal
+anchors the foundational energy (Ry or $\hbar\omega$); spectral
+action introduces UV cutoff $\Lambda$; Drake--Swainson introduces a
+transient subtraction scale $K$ (which cancels in the regularized
+result); two-body Breit retardation introduces $\alpha^4 \cdot
+\mathrm{Ry}$ as a correction-energy scale, where $\alpha^4$ is
+dimensionless and Ry is foundationally anchored.
+\item $[M]$: \emph{one} projection (rest-mass).  Each particle
+species in the system requires a separate rest-mass projection;
+two-particle systems compose two such projections.
+\item $[T]$: \emph{one} projection (observation /
+temporal-window).  Each measurement window or temperature requires
+a separate observation projection.
+\item $[Q]$: integer-counter label $Z$ at the Fock projection only.
+$[Q]$ does not appear as a continuous scale anywhere in the
+projection family --- charge is always counted, never
+measured-against-a-scale.
+\end{itemize}
+
+\begin{observation}[$L$--$E$ asymmetry]
+\label{obs:LE_asymmetry}
+Of the mechanical base units (and the charge unit), only $[L]$ and
+$[E]$ are injected by multiple projections; $[M]$, $[T]$, and $[Q]$
+are each instantiated by exactly one projection beyond the
+foundational atomic-units anchor.  After the addition of the three
+intra-nuclear projections (charge-density, magnetization-density,
+tensor multipole), the asymmetry is no longer symmetric: $[L]$
+admits \emph{six} scalar instances plus one rank-2 tensor instance,
+while $[E]$ admits four.  The framework records more length scales
+(atomic, internuclear, polyatomic, and three intra-nuclear
+distribution scales) than energy scales (Rydberg, UV cutoff,
+multi-loop subtraction, two-body Breit correction).  The structural
+reason: every distinct spatial structure introduces an independent
+focal length because different intra-nuclear and intra-molecular
+geometries enter different Hamiltonian operators with different
+selection rules; spectral content has fewer distinct roles
+(foundational, regulator, subtraction, correction).  The conjugate
+pair $[L] \leftrightarrow [E]$ remains the only multi-instance
+axis, but $[L]$ now dominates: physics has more places to put
+length scales than to put energy scales.
+\end{observation}
+
+\begin{observation}[Compositional projections]
+\label{obs:composition}
+The two-body Dirac / Breit retardation projection
+(\S~\ref{sec:proj_breit_retardation}) is the first identified
+instance of a structural family of \emph{compositional projections}:
+projections whose variable is a function (typically a ratio or
+product) of variables introduced by prior projections.  All other
+projections in Table~\ref{tab:base_units} introduce variables
+independent of prior content; compositional projections are
+structurally distinct because they are \emph{gated} by the prior
+instantiation of two or more distinct values of a foundational
+variable in the same projection chain.
+
+We catalogue two confirmed instances of compositional projections:
+
+\begin{enumerate}\setlength\itemsep{0pt}
+\item \emph{Kinematic composition.}  Variable: rest-mass ratio
+$m_l / m_n$.  Gating: prior instantiation of two distinct $[M]$
+scales by separate rest-mass projections (\S~\ref{sec:proj_restmass}).
+Manifests at $\alpha^4$ in two-body bound-state energies, one full
+order before the $\alpha^5$ multi-loop renormalization wall.
+Empirical anchor: positronium 1S--2S framework-native at
+$+64.75$~ppm (\S~\ref{sec:catalog}; sixth and structurally cleanest
+instance of the multi-focal-composition wall named in
+CLAUDE.md~\S~2).
+
+\item \emph{Angular composition.}  Variable: ratio of effective
+charges $Z_a / Z_b$ within a single atom (e.g., He 1s
+$Z_\text{eff} = 2$ vs.\ 2p $Z_\text{eff} = 1$).  Gating: prior
+instantiation of two distinct foundational Fock anchors at different
+effective charges within the same electronic Hilbert space (the
+``internal multi-focal'' pattern of \S~\ref{sec:catalog}).
+Manifests at $\alpha^2$ in fine-structure splittings, where the
+bipolar harmonic decomposition $(k_1{=}0, k_2{=}2)$ direct $+$
+$(k_1{=}1, k_2{=}1)$ exchange and the Drake combining coefficients
+$(\tfrac{3}{50}, -\tfrac{2}{5}, \tfrac{3}{2}, -1)$ are the
+structural carrier.  Empirical anchor: He $2{}^3P_0$--$2{}^3P_1$
+at $-0.014\%$ and $2{}^3P_0$--$2{}^3P_2$ span at $-0.20\%$
+(\S~\ref{sec:catalog}).
+\end{enumerate}
+
+The two instances differ in their gating mechanism (kinematic at
+the two-body level vs.\ angular at the two-orbital level) but share
+the compositional character: each requires the prior projection
+chain to have instantiated two distinct values of a foundational
+variable, so that the compositional projection's variable (ratio,
+product, or function) is well-defined.
+
+The structural prediction the generalization makes: any future
+GeoVac observable whose computation requires a function of two or
+more foundationally-anchored variables in the same projection chain
+belongs to this family, and the order at which it manifests in
+$\alpha$-perturbation theory follows the projection at which the
+function is gated.  Candidate compositional projections not yet
+observed:
+
+\begin{itemize}\setlength\itemsep{0pt}
+\item Ratio of two length scales within a single nucleus (e.g.,
+$r_\text{charge} / r_Z$, the Friar/Foldy-versus-Zemach distinction
+inside one proton; would gate sub-Zemach corrections to hyperfine).
+\item Product of three rest-mass scales (three-body kinematic
+content beyond Breit retardation; would gate three-body bound-state
+corrections at $\alpha^4$ or higher).
+\item Ratio of two temperature scales $\beta_a / \beta_b$ in
+multi-window observation (e.g., simultaneous interrogation at two
+distinct $T$).
+\end{itemize}
+
+The compositional-projection family is open-ended: confirmed
+instances locate the gating-order pattern (Breit at $\alpha^4$,
+internal multi-focal at $\alpha^2$), and additional empirically
+anchored instances would refine the structural prediction.
+\end{observation}
+
+This decomposition sharpens
+Remark~\ref{rem:vd_correlation}: V--D correlation holds at the
+compound dimension level, but at the base-unit level $[L]$ and
+$[E]$ each admit four instances while $[M]$, $[T]$ admit one each
+and $[Q]$ enters only as an integer label.  The base-unit
+decomposition is a finer falsifiable test than the compound
+dimension alone: an observable that depends on multiple length
+scales must engage the foundational projection plus the relevant
+length-injecting projections; an observable that depends on
+temperature must engage the observation projection; an observable
+depending on a species mass ratio must engage two rest-mass
+projections plus Breit retardation.  The empirical matches
+catalogue (\S~\ref{sec:catalog}) provides a forward test:
+each row's projection chain should be traceable to a base-unit
+signature consistent with the dimensions of the matched
+observable.
 
 % ===================================================================
 \section{The Empirical Matches Catalogue}
@@ -743,9 +1235,9 @@ none & dimensionless & integer & exact (Fraction) \\
 \textbf{Single-projection} & & & & & \\
 Hydrogen $E_n = -Z^2/(2n^2)$ Ha & Fock + $\kappa$ & $Z, E$ &
 energy & rational & exact symbolic \\
-2$p$ doublet $\alpha^2/32$ Ha (Z=1) & spinor lift & $Z, \alpha$ &
-energy & $(Z\alpha)^2{\cdot}\mathbb{Q}$ & exact symbolic \\
-Dirac fine-structure formula ($n\le 4$) & spinor lift &
+2$p$ doublet $\alpha^2/32$ Ha (Z=1) & spinor lift $\circ$ Fock &
+$Z, \alpha$ & energy & $(Z\alpha)^2{\cdot}\mathbb{Q}$ & exact symbolic \\
+Dirac fine-structure formula ($n\le 4$) & spinor lift $\circ$ Fock &
 $Z, \alpha$ & energy & $(Z\alpha)^2{\cdot}\mathbb{Q}$ & exact \\
 $\Pi = 1/(48\pi^2)$ VP coefficient & spectral action &
 $\Lambda, \alpha$ & dimensionless & $\pi^2{\cdot}\mathbb{Q}$ &
@@ -761,46 +1253,54 @@ $\Delta^{-1} = g_3^\text{Dirac} = 40$ & spinor lift & graph data &
 dimensionless & integer & exact \\
 $B = 42$ Casimir trace at $m=3$ & --- & graph data &
 dimensionless & integer & exact \\
-$D_\text{even}(4)$ closed form & spinor + vertex parity & $\alpha$
-& dimensionless & $\pi^2, \pi^4, G, \beta(4)$ & PSLQ 80~dps \\
-$E_\text{Cas}^{S^3} = 1/240$ (conformal scalar) & Fock + conformal
-coupling & none & dimensionless & rational & exact symbolic \\
+$D_\text{even}(4)$ closed form & spinor lift (vertex selection) &
+$\alpha$ & dimensionless & $\pi^2, \pi^4, G, \beta(4)$ & PSLQ 80~dps \\
+$E_\text{Cas}^{S^3} = 1/240$ (conformal scalar) & Fock + rest-mass
+projection (conformal value $m^2 = 1$) & none & dimensionless &
+rational & exact symbolic \\
 $E_\text{Cas}^{S^3, \text{Dirac}} = 17/480$ (full Dirac) & Fock +
 Camporesi--Higuchi spinor lift & none & dimensionless & rational &
 exact symbolic \\
 $E_\text{Cas}^{\text{HO}, S^5} = -17/3840$ (3D HO, Bargmann--Segal) &
-Bargmann--Segal $+$ Casimir/$\zeta$-reg & none & dimensionless &
-rational & exact symbolic \\
+Bargmann--Segal $+$ spectral action ($\zeta$-regularization) & none &
+dimensionless & rational & exact symbolic \\
 Hydrogen Bohr levels $E_n = -Z^2/(2n^2)$ Ha & Fock $+$ energy-shell
 rescaling & $Z, n$ & energy & rational & exact symbolic \\
 Static Coulomb-like Green's fn $(L+I)^{-1}$ on Hopf $S^3$ at
-$n_\text{max} = 2, 3$ & Fock $+$ discrete Green's (no continuous
+$n_\text{max} = 2, 3$ & Fock (Layer-1 matrix inverse, no continuous
 integration) & none & dimensionless & rational & exact symbolic at
 finite $n_\text{max}$ \\
 \midrule
 \textbf{Two-projection chain} & & & & & \\
 Stefan-Boltzmann $\pi^2/90$ on $S^3 \times S^1_\beta$ (high-$T$) &
-Fock $+$ observation/temporal-window $+$ Casimir/$\zeta$-reg & $T$ or
-$\beta$ & energy density & $\pi^2 \cdot \mathbb{Q}$ & exact symbolic \\
+Fock $+$ observation/temporal-window $+$ spectral action
+($\zeta$-regularization) & $T$ or $\beta$ & energy density &
+$\pi^2 \cdot \mathbb{Q}$ & exact symbolic \\
 Uehling shift $-27.13$ MHz at 2$S$ & spectral action $\circ$ Fock &
 $Z, \alpha$ & energy & $\pi^2{\cdot}\mathbb{Q}$ & $<1\%$ \\
-21~cm hyperfine $A_\text{HF} = 1418.84$ MHz Bohr-Fermi (HF-1) & spinor
-$\circ$ Fermi contact $\circ$ Fock & $\alpha, g_p, m_e/m_p$ & energy &
+21~cm hyperfine $A_\text{HF} = 1418.84$ MHz Bohr-Fermi (HF-1, $+$ external
+$g_p$) & spinor lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass
+projection ($m_p$, proton) & $\alpha, g_p, m_e/m_p$ & energy &
 $\alpha^2{\cdot}\mathbb{Q}$ & $-1102$ ppm (= $-a_e$) \\
-21~cm hyperfine $A_\text{HF} = 1420.488$ MHz $+$ Parker--Toms $a_e$ (HF-2)
-& spinor + Fermi contact + Fock + spectral action curvature expansion &
-$\alpha, g_p, m_e/m_p$ & energy & $\alpha^2{\cdot}\mathbb{Q}, c_1
-\cdot \mathbb{Q}$ & $+58$ ppm \\
+21~cm hyperfine $A_\text{HF} = 1420.488$ MHz $+$ Parker--Toms $a_e$
+(HF-2, $+$ external $g_p$) & spinor lift (Fermi-contact vertex) $\circ$
+Fock $\circ$ rest-mass projection ($m_p$, proton) $\circ$ spectral
+action (curvature expansion) & $\alpha, g_p, m_e/m_p$ & energy &
+$\alpha^2{\cdot}\mathbb{Q}, c_1 \cdot \mathbb{Q}$ & $+58$ ppm \\
 21~cm hyperfine $A_\text{HF} = 1420.432$ MHz $+$ external Zemach $r_Z$
-(HF-4) & HF-2 chain $+$ rest-mass projection $+$ Zemach Layer-2 input &
+(HF-4) & HF-2 chain $\circ$ rest-mass projection $\circ$
+magnetization-density (\S~\ref{sec:proj_magnetization_density}) &
 $r_Z$ & energy & calibration & $+18$ ppm (Eides Tab.~7.3 consistent) \\
-$\mu$H 1S Bohr--Fermi $\nu_F(\mu p) = 182.4433$ meV (Sprint MH Track B)
-& spinor $\circ$ Fermi contact $\circ$ Fock $\circ$ rest-mass projection
-($m_e \to m_\mu$) & $\alpha, g_p, m_\mu/m_e, m_e/m_p$ & energy &
-$\alpha^2 \cdot \mathbb{Q}$ & $+2$ ppm vs Eides pure-QED $\nu_F = 182.443$ meV \\
+$\mu$H 1S Bohr--Fermi $\nu_F(\mu p) = 182.4433$ meV (Sprint MH Track B,
+$+$ external $g_p$) & spinor lift (Fermi-contact vertex) $\circ$ Fock
+$\circ$ rest-mass projection ($m_\mu$, muon, lepton swap) $\circ$
+rest-mass projection ($m_p$, proton) & $\alpha, g_p, m_\mu/m_e, m_e/m_p$
+& energy & $\alpha^2 \cdot \mathbb{Q}$ &
+$+2$ ppm vs Eides pure-QED $\nu_F = 182.443$ meV \\
 $\mu$H 1S Zemach mass-enhancement factor $185.94 \times$ ep
 (Sprint MH Track B; operator-level Track C, May 2026) & rest-mass
-projection $\circ$ magnetization-density $\circ$ Fock; \texttt{lepton\_mass}
+projection $\circ$ magnetization-density
+(\S~\ref{sec:proj_magnetization_density}) $\circ$ Fock; \texttt{lepton\_mass}
 parameter on \texttt{MagnetizationDensitySpec} eliminates the manual
 mass-scaling step Track B used in test scripts (Pauli-string sum now
 carries correct lepton-mass scaling natively for downstream muonic
@@ -832,38 +1332,40 @@ dimensionless & calibration & $-0.92\%$ \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $+0.60\%$ \\
 D 1S hyperfine $\nu_\text{HFS}(D) = 327.3975$ MHz Bohr--Fermi strict
-(sprint precision-catalogue 2026-05-08) & spinor $\circ$ Fermi contact
-$\circ$ Fock; $I=1$ multiplicity $3/2$ on $A_\text{hf}\,\hat{I}\cdot\hat{S}$ &
-$\alpha, g_d, m_e/m_d$ & frequency &
+(sprint precision-catalogue 2026-05-08, $+$ external $g_d$) & spinor
+lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
+($m_d$, deuteron); $I=1$ multiplicity $3/2$ on
+$A_\text{hf}\,\hat{I}\cdot\hat{S}$ & $\alpha, g_d, m_e/m_d$ & frequency &
 $\alpha^2{\cdot}\mathbb{Q}$ & $+40$ ppm vs Wineland--Ramsey 1972
 $327.384352522(2)$ MHz \\
 Mu 1S hyperfine $\nu_\text{HFS}(\text{Mu}) = 4464.1905$ MHz framework
 Bohr--Fermi $+$ Schwinger one-loop (sprint precision-catalogue 2026-05-08,
-muonium triple closure) & spinor $\circ$ Fermi contact $\circ$ Fock $\circ$
-rest-mass projection (lepton-unchanged, nucleus $m_p \to m_\mu$); leptonic
-nucleus, no QCD content & $\alpha, m_e, m_\mu/m_e$ & frequency &
+muonium triple closure) & spinor lift (Fermi-contact vertex) $\circ$ Fock
+$\circ$ rest-mass projection (lepton-unchanged, nucleus $m_p \to m_\mu$);
+leptonic nucleus, no QCD content & $\alpha, m_e, m_\mu/m_e$ & frequency &
 $\alpha^2{\cdot}\mathbb{Q}$ & $+199$ ppm vs Liu 1999 $4463.302765(53)$ MHz;
 residual cleanly LS-8a multi-loop QED $+$ recoil (no QCD competing budget) \\
 He $2{}^3P_0$--$2{}^3P_1$ fine structure $+29{,}612.91$ MHz (Sprint~3
 BF-D + Sprint~4 DD; Drake combining $(\tfrac{3}{50},-\tfrac{2}{5},
 \tfrac{3}{2},-1)$, J-pattern from rank-$k$ 6j; sprint precision-catalogue
-2026-05-08) & spinor $\circ$ Wigner 6j $\circ$ Wigner 3j (Gaunt) $\circ$
-Fock; internal multi-focal (1s, 2p at distinct $Z_\text{eff}$),
-bipolar $(k_1{=}0,k_2{=}2)$ direct + $(k_1{=}1,k_2{=}1)$ exchange &
-$\alpha, Z$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
-$-0.014\%$ vs NIST $+29{,}616.951(6)$ MHz; below LS-8a $\alpha^3/\pi$
-budget \\
+2026-05-08) & spinor lift $\circ$ Wigner $3j$ ($6j$-coupled) $\circ$
+Wigner $3j$ (Gaunt) $\circ$ Fock; internal multi-focal (1s, 2p at
+distinct $Z_\text{eff}$), bipolar $(k_1{=}0,k_2{=}2)$ direct +
+$(k_1{=}1,k_2{=}1)$ exchange & $\alpha, Z$ & frequency &
+$\alpha^2{\cdot}\mathbb{Q}$ & $-0.014\%$ vs NIST $+29{,}616.951(6)$ MHz;
+below LS-8a $\alpha^3/\pi$ budget \\
 He $2{}^3P_0$--$2{}^3P_2$ span $+31{,}844.07$ MHz (Sprint~3 BF-D
 + Sprint~4 DD; sprint precision-catalogue 2026-05-08) & same chain &
 $\alpha, Z$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
 $-0.20\%$ vs NIST $+31{,}908.131(6)$ MHz; within LS-8a one-loop QED budget \\
 Ps 1S-2S transition $1{,}233{,}687{,}096.1$~MHz (framework-native: Bohr at
 $m_\text{red}(ee) = 0.5$ $+$ Eides~\S\,3.2 SE Lamb-shift differential;
-sprint precision-catalogue 2026-05-08, equal-mass leptonic 1S-2S) &
-Fock $\circ$ rest-mass projection (equal-mass limit
-$\lambda_a = \lambda_b = 0.5$) $\circ$ spectral action (Eides) &
-$\alpha, m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ & $+64.75$ ppm vs
-Fee~1993 $1{,}233{,}607{,}216.4(3.2)$~MHz \\
+sprint precision-catalogue 2026-05-08, equal-mass leptonic 1S-2S; $+$
+external Penin--Pivovarov $\alpha^4$ Breit) & Fock $\circ$ rest-mass
+projection (equal-mass limit $\lambda_a = \lambda_b = 0.5$) $\circ$
+spectral action (Eides) & $\alpha, m_e$ & frequency &
+$\alpha^2{\cdot}\mathbb{Q}$ & $+64.75$ ppm vs Fee~1993
+$1{,}233{,}607{,}216.4(3.2)$~MHz \\
 \midrule
 \textbf{Three-projection chain} & & & & & \\
 Bethe log $\ln k_0(2P) = -0.0307$ (LS-4) & Drake--Swainson $\circ$ Sturmian
@@ -883,9 +1385,32 @@ $\circ$ Drake--Swainson $\circ$ rest-mass projection ($m_e \to m_\mu$)
 & $Z, \alpha, m_\mu/m_e, r_p$ & energy & calibration $+$ flow &
 $-0.10\%$ vs CREMA $202.3706(23)$ meV \\
 Heisenberg--Euler 1-loop $\alpha^2/(45\pi m_e^4)$ &
-Spectral action $+$ proper-time integration $+$ vector-photon (one loop)
+spectral action (Schwinger Mellin) $+$ vector-photon (one loop)
 & $\alpha, m_e$ & length${}^4 \cdot$ energy${}^{-1}$ &
 $\alpha^2 \cdot \mathbb{Q} / \pi$ & structural (S) \\
+Lyman $\alpha$ emission $A_{21}(2P{\to}1S) = 6.2683 \times 10^8$~s$^{-1}$
+(Sprint Calc-L, 2026-05-09) & Fock $\circ$ Wigner $3j$ $\circ$
+vector-photon promotion & $Z, \alpha, \omega$ & 1/time &
+$\alpha^3 \cdot \mathbb{Q}[\sqrt{6}]$ & $+0.055\%$ vs NIST
+$6.2649 \times 10^8$~s$^{-1}$; residual is non-relativistic
+(Schr\"odinger vs Dirac at $(Z\alpha)^2 \sim 5\times 10^{-5}$),
+closes by adding Camporesi--Higuchi spinor lift to the chain
+(depth-prediction consistent) \\
+H 1S static dipole polarizability
+$\alpha_p(\text{H}, 1S) = \tfrac{9}{2}\, a_0^3$
+(Sprint Calc-P, 2026-05-09) & Fock $\circ$ Wigner $3j$ $\circ$
+Sturmian reparam.\ at $\lambda = Z$ & $Z$ & length${}^3$ &
+rational & exact (Dalgarno--Lewis solution
+$F|1s\rangle = -\tfrac{1}{2} z(r{+}2)|1s\rangle$ has $p$-wave radial
+part lying exactly in span$\{S_2, S_3\}$ at $N_\text{basis} = 2$);
+$Z^{-4}$ scaling exact at $Z = 1, 2, 3, 4$.  Bound-states-only sum
+on bare Fock graph plateaus at $\sim 81.25\%$ of $\tfrac{9}{2}$
+(Bethe--Salpeter 1957 partition); the missing 18.75\% continuum
+content is recovered \emph{exactly} by the Sturmian projection.
+\textbf{Counter-example to a strong reading of
+Prediction~\ref{pred:error_depth}}: depth-3 chain at exact match
+because the analytic answer is rational with finite-Sturmian-basis
+representation. \\
 \midrule
 \textbf{Conjectural / Observation status} & & & & & \\
 $K = \pi(B + F - \Delta) \approx 1/\alpha$ & Fock $\circ$ Hopf
@@ -1067,7 +1592,8 @@ derivation of $C_{2S}$.  No structural obstruction encountered;
 Sprint provenance: \texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
 He $2{}^3P_1$--$2{}^3P_2$ small interval $+2{,}231.16$~MHz (Drake-pattern
 Breit--Pauli + spinor; Sprint~3 BF-D + Sprint~4 DD + Sprint~5 CP) &
-spinor $\circ$ Wigner 6j (Drake) $\circ$ Wigner 3j (Gaunt) $\circ$ Fock &
+spinor lift $\circ$ Wigner $3j$ ($6j$-coupled, Drake) $\circ$ Wigner $3j$
+(Gaunt) $\circ$ Fock &
 $-2.62\%$ vs NIST $+2{,}291.176(15)$~MHz & A & Partial-cancellation
 amplification: absolute residual $-60$~MHz on a $2.3$~GHz interval.
 The dominant intervals (P$_0$-P$_1$ at $-0.014\%$, P$_0$-P$_2$ span at
@@ -1082,12 +1608,14 @@ Li 2$^2$P doublet (Sprint 5 CP) & Breit--Pauli + Slater $Z_{\text{eff}}$
 & $+8.9\%$ & A & Standard convention with $Z_\text{val}=1$;
 core polarization worsens accuracy (parity-forbidden
 $2s2p \leftrightarrow 2p^2$ mixing confirmed). \\
-21~cm $A_\text{HF} = 1418.84$ MHz (HF-1 reduced-mass) & Fock + Fermi
-contact + reduced-mass & $-1102$ ppm (= $-a_e$) & A & Bohr-Fermi level;
+21~cm $A_\text{HF} = 1418.84$ MHz (HF-1 reduced-mass, $+$ external $g_p$)
+& spinor lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass
+projection ($m_p$, proton) & $-1102$ ppm (= $-a_e$) & A & Bohr-Fermi level;
 $g_e = 2$ (no anomalous moment).  Residual is exactly $a_e \approx
 \alpha/(2\pi)$, addressed by HF-2.  Sprint HF, 2026-05-07. \\
-21~cm $A_\text{HF} = 1420.488$ MHz (HF-2, $+a_e$ Schwinger) & HF-1
-chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A & Schwinger
+21~cm $A_\text{HF} = 1420.488$ MHz (HF-2, $+a_e$ Schwinger, $+$ external
+$g_p$) & HF-1 chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A
+& Schwinger
 asymptote $a_e = \alpha/(2\pi)$ derived structurally on Dirac graph;
 \textbf{Parker--Toms first-order curvature correction $c_1 = R/12 = 1/2$
 verified at $0.5\%$ precision against the spectral sum}, no fits.  See
@@ -1128,7 +1656,7 @@ muonic atoms the electron loop is enhanced because the muonic Bohr
 radius probes the electron Compton wavelength.  Inner-factor input
 data tier per Paper~18 \S~IV.6.  Sprint MH Track B, 2026-05-08. \\
 Ps 1S HFS $116.79$~GHz (Fermi-contact only, framework-native) & spinor
-$\circ$ Fermi contact $\circ$ Fock $\circ$ rest-mass projection
+lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
 ($m_p \to m_e$, equal-mass limit) & $-42.58\%$ vs Ishida 2014
 $203.389$~GHz & A & Framework-native part captures only the magnetic
 dipole-dipole contribution ($4/12$ of the LO HFS).  The
@@ -1140,7 +1668,7 @@ verified: Roothaan multipole termination at $L_\text{max} = 2 \ell_\text{max}$
 preserved (Gaunt selection is angular, not small-parameter).
 Sprint precision-catalogue, 2026-05-08. \\
 Ps 1S HFS $204.39$~GHz (LO total $= 7/12 \cdot m_e c^2 \alpha^4 / h$,
-framework $+$ Layer-2 annihilation) & spinor $\circ$ Fermi contact
+framework $+$ Layer-2 annihilation) & spinor lift (Fermi-contact vertex)
 $\circ$ Fock $\circ$ rest-mass projection $+$ Layer-2 annihilation &
 $+0.49\%$ vs Ishida 2014 & A & Residual is multi-loop QED
 (Czarnecki--Melnikov--Yelkhovsky 2000, $\alpha^5 m_e c^2/h$ corrections).
@@ -1203,9 +1731,9 @@ from Karshenboim's $+1085.84$ MHz SE itemization by exactly the recoil
 NLO).  Naively adding Karshenboim's recoil to the framework total
 double-counts.  Sprint precision-catalogue, 2026-05-08. \\
 Mu 1S hyperfine framework Bohr--Fermi $+$ Schwinger one-loop
-$4464.1905$ MHz vs Liu~1999 $4463.302765(53)$ MHz & spinor $\circ$
-Fermi contact $\circ$ Fock $\circ$ rest-mass projection (lepton-unchanged,
-nucleus $m_p \to m_\mu$) & $+199$ ppm & A &
+$4464.1905$ MHz vs Liu~1999 $4463.302765(53)$ MHz & spinor lift
+(Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
+(lepton-unchanged, nucleus $m_p \to m_\mu$) & $+199$ ppm & A &
 \textbf{Cleanest LS-8a isolation in the catalogue}: leptonic nucleus
 (point antimuon, no QCD) means residual is purely multi-loop QED $+$
 cross-register recoil NLO, no Zemach / polarizability / hadronic VP
@@ -1264,6 +1792,90 @@ Single-exponent hydrogenic basis at $k = Z = 2$ cannot represent
 $Z_\text{eff} \approx 1$ screening of 2s; multi-focal composition
 (Phase~C-W1c, May~2026) is the structural extension.  Sprint
 precision-catalogue, 2026-05-08. \\
+Self-consistent $r_Z$ global extraction (Sprint Calc-rZG, 2026-05-09;
+Layer-2 corrected 2026-05-09; extended-fit diagnostic 2026-05-09)
+& §III.18 magnetization-density global fit across H 21cm $+$
+$\mu$H 1S HFS $+$ D 1S HFS & \emph{Original 3-obs fit} (Layer-2 corrected,
+$\sigma_{\mu H}$=1500 ppm, ``LS-8a wall scale''): $r_Z(p) = 1.180(166)$ fm
+[$+0.80\sigma$ above Eides $1.045(20)$, $+1.00\sigma$ above lattice
+$1.013(10)(12)$], $r_Z(D) = 2.583(1588)$ fm [$-0.01\sigma$ from
+Friar--Payne $2.593(16)$], $\chi^2/\text{dof} = 0.43/1$.
+\emph{Extended-fit diagnostic} (sprint Calc-rZG-extended, $\sigma_{\mu H}$
+hardened to literature kernel scale ${\sim}367$ ppm): $r_Z(p) =
+1.257(51)$~fm, $\sigma$ closes to $51$~mfm but extracted central
+value sits $+3.85\sigma$ above Eides and $+4.55\sigma$ above lattice.
+& C & \textbf{Framework $r_Z(p)$ extraction is currently kernel-limited,
+not Layer-2-itemization-limited}.  Original 3-obs fit at $\sigma=166$~mfm
+(driven by $\sigma_{\mu H}=1500$~ppm conservative) lands within $1\sigma$
+of all three literature determinations after Layer-2 budget correction
+(2026-05-09 bug fix; original rZG memo specified Layer-2$_D$ = $-150$ ppm
+based on a mis-itemization, corrected to $-286$ ppm per Pachucki--Yerokhin
+2010 + Friar--Payne 2005 closure analysis; Layer-2$_H$ tightened from
+$0$ to $-18.5$ ppm per Eides Tab.~7.3); $\chi^2/\text{dof} = 0.43/1$
+confirms internal fit consistency.  \textbf{The original $r_Z(D) = 6.18$
+fm artifact was traced to a Layer-2 budget misspecification, NOT to a
+recoil double-counting in the production cross-register $V_{eN}$
+kernel.}  Diagnostic verification
+(\texttt{debug/rzg\_bug\_diagnosis\_compute.py}): the production
+\texttt{geovac.cross\_register\_vne.cross\_register\_recoil\_correction}
+reproduces leading-order Bethe--Salpeter recoil at $2.86\%$ for
+hydrogen, $2.03\%$ for deuterium, and $8.18\%$ for muonium without
+any species-specific code path; it is species-agnostic and
+correct.  Six new D and muonium tests added to
+\texttt{tests/test\_cross\_register\_vne.py} document and protect
+this property going forward.  \textbf{Extended-fit diagnostic
+finding (2026-05-09 follow-on)}: tightening $\sigma_{\mu H}$ from
+1500~ppm to either 150~ppm (Krauth 2017 multi-loop QED itemization) or
+to 367~ppm (5\% kernel approximation in muonic systems) drives
+$\sigma(r_Z(p))$ below 50 mfm but extracts a central value
+$r_Z(p)\sim 1.18$--$1.26$~fm, INCONSISTENT with both Eides
+$1.045(20)$ and lattice $1.013(16)$ at $>3.85\sigma$.  The +0.22~fm
+offset between the muH-alone extraction ($r_Z=1.265$~fm) and Eides
+($1.045$~fm) is the structural fingerprint of recoil-mixing in the
+literature Zemach formula that the framework's leading-order Eides
+kernel $-2Zm_\text{red}r_Z$ does not yet capture
+(Sprint MH Track B \S2.4--2.5 W1b operator-level extension point).
+\textbf{Verdict: framework currently \emph{cannot} resolve the
+Eides-vs-lattice 30~mfm tension at the operator-level precision of
+the leading-order Eides Zemach kernel.}  Path to sub-30~mfm: extend
+\texttt{magnetization\_density.py} to include recoil-mixing
+(Friar--Payne 2005 \S III treatment), expected to close the +0.22~fm
+muH-alone offset and bring $\sigma(r_Z(p))$ to ${\sim}30$~mfm.
+\textbf{Genuine prospective contribution}: §III.18-based global fit
+operator-level-localizes the ``Layer-2 itemization is the load-bearing
+systematic for atomic $r_Z$ extraction'' finding --- a unified
+analytical lens not currently produced by standard atomic-physics
+compilations.  Note that the diagnostic exposes a SECOND load-bearing
+systematic: the kernel approximation order of the framework's W1b
+operator dominates over Layer-2 itemization in muonic regime
+extraction.  §III.18 itself reproduces Eides analytical
+$-2 Z\alpha m_e r_Z$ to floating-point precision.  Source memos:
+\texttt{debug/calc\_track\_rZG\_global\_zemach\_memo.md},
+\texttt{debug/rzg\_bug\_diagnosis\_memo.md} (bug fix),
+\texttt{debug/calc\_track\_rZG\_extended\_memo.md} (extended-fit
+diagnostic).  \textbf{Sprint W1b recoil-mixing extension
+(2026-05-09 follow-on)}: \S III.18 operator extended with the
+NLO recoil-mixing prefactor $m_l/(m_l + m_n)$ (per arXiv:2604.06930
+eq.~95) and the Friar moment correction $(1/2)(Z\alpha m_\text{red})^2
+\langle r^2\rangle_{(2)}$ (per Friar 1979 / Eides \S6.2), gated behind
+opt-in \texttt{include\_recoil\_mixing} flag with backward-compatibility
+preserved bit-identical (37 baseline tests, 20 new tests, 57/57 pass).
+With NLO kernel enabled, the muH 1S HFS Zemach line at $r_Z=1.045$
+fm reproduces Krauth~2017's full-theory line to $\sim 1\%$ (vs $\sim
+3\%$ overshoot at LO).  \textbf{rZG-extended-v2 fit result}: with
+NLO kernel and Layer-2 re-anchored at the Eides reference,
+$\sigma(r_Z(p))$ tightens from 51~mfm to \textbf{16~mfm} (below the
+30~mfm Eides-vs-lattice gap), but the central value \emph{remains}
+at $r_Z(p) \approx 1.286$~fm --- only $\sim 10\%$ of the v1
+$+0.22$~fm offset closes.  \textbf{Diagnostic verdict revised}: the
+$+0.22$~fm offset is NOT kernel-approximation; it is a Layer-2
+itemization-convention mismatch between Krauth~2017 (used for muH
+Layer-2) and Eides~2024 Tab.~7.3 (used for H~21cm Layer-2), with
+the convention difference at $\sim 0.01\%$ of $\nu_F$ propagating
+to $\sim 25$~mfm in extracted $r_Z(p)$.  Next-step recommendation:
+Layer-2 convention reconciliation sprint, NOT further kernel
+extensions.  Source memo:
+\texttt{debug/w1b\_recoil\_mixing\_extension\_memo.md}. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.
@@ -1289,6 +1901,151 @@ absent from Layer~2 entirely.  Approximation order (A) is the
 Layer~2 do their work, and it indicates which higher-order projection
 or perturbation order should be added next.
 \end{remark}
+
+% -------------------------------------------------------------------
+\subsection{Roothaan autopsies: multi-component decompositions}
+\label{sec:autopsies}
+% -------------------------------------------------------------------
+
+The matches catalogue rows in \S\ref{sec:catalog} and
+\S\ref{sec:offprecision} each capture a single observable as a
+single row.  For observables that admit a multi-component literature
+decomposition --- e.g.\ Eides Tab.~7.3 for the hydrogen Lamb shift,
+where the standard $1057.85$ MHz value decomposes into one-loop SE,
+one-loop VP, multi-loop QED, finite nuclear size, recoil NLO, and
+hyperfine averaging --- the single-row treatment hides the structure
+that the projection-chain dictionary makes visible.  This subsection
+hosts \emph{Roothaan autopsies}: decomposition tables that show each
+measured observable as a sum of focal-length-tagged components, with
+each component's projection chain made explicit.
+
+The Roothaan autopsy is structurally the same kind of object Roothaan
+(1951) made for two-electron molecular integrals: a multi-component
+decomposition where each piece has its own focal length and its own
+closed-form structure.  Applying the same discipline to multi-component
+\emph{observables} makes the projection-chain dictionary's reach
+visible at the observable level, not just at the catalogue-row level.
+The autopsy partitions each component into framework-native (FN ---
+computable from \S~\ref{sec:layer2} projections without external
+numerical constants beyond $\alpha$) versus Layer-2 (L2 --- parameter
+at operator level, projection chain framework-native), giving an
+explicit operator-level reading of the structural-skeleton scope
+statement (CLAUDE.md \S~1.7).
+
+\subsubsection{Hydrogen 1S Lamb shift autopsy}
+\label{sec:autopsy_lamb}
+
+\textbf{Reference.} $\nu(2S_{1/2} - 2P_{1/2}) = 1057.845(9)$ MHz
+(Lundeen--Pipkin 1981; NIST ASD).
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{4cm} r p{6cm} c}
+\toprule
+Component & MHz & Projection chain & Status \\
+\midrule
+SE 2$S_{1/2}$ (Bethe + Eides 10/9) & $+1066.44$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
+\S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_drake_swainson}
+& FN \\
+VP 2$S_{1/2}$ (Uehling) & $-27.13$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action} & FN \\
+SE 2$P_{1/2}$ & $-12.88$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
+\S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_spinor}
+$\circ$ \S\ref{sec:proj_drake_swainson} & FN \\
+VP 2$P_{1/2}$ & $0$ &
+\S\ref{sec:proj_fock} (parity zero) & FN \\
+$\alpha^5$ multi-loop QED & $+1.20$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
+$(\S\ref{sec:proj_spectral_action})^2$ $\circ$ \S\ref{sec:proj_spinor}
+$+$ Layer-2 $C_{2S}$ & L2 \\
+FNS $r_p$ contribution & $+1.18$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\textbf{\S\ref{sec:proj_charge_density}} $+$ Layer-2 $r_p$ & L2 \\
+Recoil NLO (beyond reduced-mass) & $-2.40$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_restmass} $\circ$
+\S\ref{sec:proj_breit_retardation} $+$ Layer-2 $R_{nl}$ & L2 \\
+Hyperfine averaging (F-state mixing) & $\sim +5.00$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_3j} $\circ$ \S\ref{sec:proj_restmass} & FN \\
+\midrule
+\textbf{Sum} & $+1057.41$ & & \\
+Experimental & $+1057.845(9)$ & & \\
+\textbf{Residual} & $+0.43$ & within Eides Tab.~7.3 quoting precision & \\
+\bottomrule
+\end{tabular}
+\caption{Hydrogen 1S Lamb shift Roothaan autopsy.  Each component is
+tagged to its \S\ref{sec:layer2} projection chain.  Status: FN
+$=$ framework-native; L2 $=$ Layer-2 input.  Source memo:
+\texttt{debug/calc\_track\_LAR\_lamb\_autopsy\_memo.md}.}
+\label{tab:autopsy_lamb}
+\end{table}
+
+\textbf{Framework-native subtotal:} $+1031.43$ MHz ($97.5\%$ of
+measurement).  \textbf{Layer-2 net:} $+1.20 + 1.18 - 2.40 \approx
+-0.02$ MHz --- empirical near-cancellation specific to the H 1S
+Lamb shift, \emph{not} a generic property.  The framework-native
+components alone reproduce the measurement at $\approx 4 \times
+10^{-4}$ precision; the Layer-2 inputs cancel in this observable.
+
+\textbf{Multi-focal-composition wall visible.}  The two non-cancelling
+Layer-2 components correspond to:
+\begin{itemize}\setlength\itemsep{0pt}
+\item Component 5 (multi-loop QED) is the LS-8a renormalization-gap
+wall (CLAUDE.md \S~1.7 LS-8a entry).  The framework reproduces the
+two-loop SE structural prefactor $(\alpha/\pi)^2 (Z\alpha)^4/n^3$
+but cannot autonomously generate the $Z_2/\delta m$ counterterms.
+\item Component 7 (recoil NLO) is the
+\S\ref{sec:proj_breit_retardation} two-body kinematic wall.  The
+framework's Breit retardation projection produces the $\alpha^4$
+kinematic structure but the $R_{nl}$ coefficients enter as
+Layer-2 input.
+\item Component 6 (FNS) is now \emph{framework-native at the
+operator level} (today's \S\ref{sec:proj_charge_density} promotion);
+the remaining Layer-2 input is the scalar $r_p$ value, not the
+operator structure consuming it.  This is the cleanest beneficiary
+of the 2026-05-09 promotion.
+\end{itemize}
+
+\textbf{Structural reading.}  The autopsy demonstrates Paper~34
+\S\ref{sec:layer2}'s reach at finer grain than single-row catalogue
+entries: eight components, eight different projection chains, every
+Eides Tab.~7.3 row reproduced.  The structural-skeleton scope
+statement is made concrete --- framework-native pieces reproduce the
+observable to $\approx 4 \times 10^{-4}$, with the remaining $0.4\%$
+split between renormalization (Component 5) and two-body kinematics
+(Component 7), and FNS (Component 6) now in projection-chain language
+rather than as a black-box external constant.
+
+\subsubsection{Hydrogen 21 cm hyperfine autopsy (placeholder)}
+\label{sec:autopsy_21cm}
+
+The 21 cm hyperfine $A_\text{HF} = 1420$ MHz decomposes into
+Bohr--Fermi (HF-1) $+$ Schwinger $a_e$ via Parker--Toms (HF-2)
+$+$ Zemach ($r_Z$ Layer-2 input via
+\S\ref{sec:proj_magnetization_density}, HF-4), with the multi-loop
+QED $+$ recoil NLO budget at Eides Tab.~7.3 levels.  Sprint HF
+(2026-05-07) decomposed into a four-component analysis producing the
+$+18$ ppm Eides-consistent residual.  The autopsy table is
+structurally parallel to \S\ref{sec:autopsy_lamb} but at hyperfine
+focal lengths and with \S\ref{sec:proj_magnetization_density}
+playing the role \S\ref{sec:proj_charge_density} plays in the
+Lamb-shift autopsy.  Full table deferred to a follow-on autopsy
+memo; source: \texttt{debug/sprint\_hf\_track\{1..5\}.\{py,\_memo.md\}}.
+
+\subsubsection{Muonic hydrogen 2$S$--2$P$ Lamb shift autopsy (placeholder)}
+\label{sec:autopsy_muh_lamb}
+
+The $\mu$H 2$S$--2$P$ Lamb shift $202.37$ meV (CREMA 2010) decomposes
+into Uehling (Antognini-style $+205.0074$ meV at $<1$ ppm vs theory
+via full kernel integration), SE Bethe-log gap ($24\%$), Friar moment
+($4.3\%$ leading via \S\ref{sec:proj_charge_density}),
+K\"all\'en--Sabry two-loop VP, and deuteron polarizability.  The
+autopsy is structurally parallel to \S\ref{sec:autopsy_lamb} but in
+the muonic regime ($\beta = 2 m_e a_\mu = 1.475$, full Uehling kernel
+rather than contact form).  Full table deferred to a follow-on
+autopsy memo; source: \texttt{debug/sprint\_mh\_track\_a\_memo.md}.
 
 % -------------------------------------------------------------------
 \subsection{Falsified candidate: W3 spectral-zeta identification of
@@ -1574,15 +2331,35 @@ variable refinement, no new variable conflicts).  Definitive
 recomputation against the metadata in
 \texttt{debug/data/tx\_a\_composition\_table.json} is deferred until
 the next TX-A-style audit.
+
+\textit{Pending T3 expansion (2026-05-09).}  With the addition of
+the three intra-nuclear projections
+(\S~\ref{sec:proj_charge_density},
+\S~\ref{sec:proj_magnetization_density},
+\S~\ref{sec:proj_tensor_multipole}), the T3 composition table needs
+expansion from 16$\times$16 to 19$\times$19.  The qualitative
+expectation: the three new projections all introduce intra-nuclear
+$[L]$ (or $[L]^2$) variables disjoint from the existing length
+axes, so they should commute layer-cleanly with most existing
+projections; expected new entries are $\sim 50$ commute cells in
+each new row and column, with possible variable-refinement one-way
+pairs against rest-mass (the intra-nuclear distribution radii are
+defined per nuclear species, so they require rest-mass projection
+to assign mass to each species first --- structurally analogous to
+the $(P_{14}, P_{16})$ one-way pair documented above).  No new
+variable conflicts are expected since intra-nuclear $[L]$ scales
+are categorically disjoint from atomic / internuclear $[L]$ scales.
+Definitive cell-by-cell verification deferred to the next TX-A
+audit.
 \end{theorem}
 
 \begin{observation}[axes are not independent]
 \label{obs:axes_correlated}
 Of the three axes (variable, dimension, transcendental), only the
 transcendental axis is genuinely independent.  Cross-tabulating the
-sixteen projections by axis-flag pattern, no projection adds a
+nineteen projections by axis-flag pattern, no projection adds a
 dimension without also adding the variable that carries it (perfect
-V/D correlation, 9/9); zero projections fall into the
+V/D correlation, 12/12); zero projections fall into the
 $(\text{D-only})$ bucket.  The transcendental axis admits an
 independence witness: vector-photon promotion (\S~\ref{sec:layer2},
 projection~11) introduces $1/(4\pi)$ without adding any variable
@@ -1651,6 +2428,48 @@ A failure of the prediction (a multi-projection match found exact,
 or a single-projection match found with residual error) would
 indicate either an incorrect projection count for that observable
 or a structural cancellation we have missed.
+
+\begin{remark}[Refinement from Sprint Calc-P, 2026-05-09]
+\label{rem:depth_refinement}
+The H~1S static dipole polarizability calculation (Sprint Calc-P,
+\S~\ref{sec:catalog} three-projection chain row) returned
+$\alpha_p(1S) = \tfrac{9}{2}\,a_0^3$ \emph{exactly} via a depth-3
+chain (Fock $\circ$ Wigner $3j$ $\circ$ Sturmian), residual~$=~0$.
+This is structurally a counter-example to a strong reading of
+Prediction~\ref{pred:error_depth}: depth alone does not bound
+residual from below.
+
+The mechanism is sharp.  The Dalgarno--Lewis solution
+$F|1s\rangle = -\tfrac{1}{2}\, z(r{+}2)|1s\rangle$ has $p$-wave
+radial part $(r^2 + 2r) e^{-r}$ that lies \emph{exactly} in the
+span of the first two Sturmian basis functions $\{S_2, S_3\}$ at
+$\lambda = Z$.  Combined with the framework's symbolic-exact
+matrix-element machinery (rational arithmetic via
+\texttt{geovac/hypergeometric\_slater.py} and
+\texttt{geovac/dirac\_matrix\_elements.py}), the projection chain
+produces the analytic answer with no truncation residual.
+
+The conditional refinement: the depth-prediction holds for
+observables whose analytic answer requires \emph{irrational
+content} (continuous integration over a temporal/spectral parameter
+per Paper~35 Prediction~1, transcendental ring per Paper~18, or
+limits inaccessible at finite $n_\text{max}$).  For observables
+whose analytic answer is a pure rational with a closed-form
+representation that lies exactly within the framework's truncated
+basis, the residual is zero at any depth.  Polarizability is the
+first identified example of the latter class; static linear-response
+observables that admit Dalgarno--Lewis-type closed forms are
+candidates for the same exact-at-finite-$n_\text{max}$ behaviour.
+
+The refined prediction: $\epsilon_k \sim k \cdot \epsilon_1$ for
+observables in the irrational-analytic-answer class; $\epsilon_k =
+0$ at sufficient $n_\text{max}$ for observables in the
+rational-analytic-answer class with finite-basis representation.
+The dividing line is empirically diagnosable from the
+transcendental signature: rational-class observables have pure
+$\mathbb{Q}$ transcendental signature, irrational-class observables
+have at least one transcendental factor.
+\end{remark}
 
 % ===================================================================
 \section{Connection to Paper 18 (Transcendentals) and Paper 32 (Spectral Triple)}
@@ -1822,7 +2641,7 @@ quantity in any GeoVac calculation enters through exactly one
 projection in Layer~2 and is fully traceable to it.
 
 The dictionary in this paper makes that statement operational.
-Sixteen projections are listed, each tagged by variables, dimension,
+Nineteen projections are listed, each tagged by variables, dimension,
 and transcendental signature.  An empirical matches catalogue uses
 these tags to organise the framework's known machine-precision
 agreements with standard physics values.  Sprint TX-A's
@@ -1840,7 +2659,19 @@ under this expansion Drake--Swainson is no longer the unique
 projection with input\_layer = output\_layer = 2, with Breit
 retardation joining as the second.  Both projections continue to
 account for all asymmetric (one-way) cells in the 16$\times$16
-table.  The
+table.  The 2026-05-09 addition of three intra-nuclear projections
+(charge-density / Foldy--Friar, magnetization-density / Zemach,
+tensor multipole) extends the dictionary further to nineteen, and
+sharpens the $L$--$E$ asymmetry of \S~\ref{sec:base_units}: $[L]$
+admits six scalar instances plus one rank-2 tensor instance, while
+$[E]$ admits four.  A boundary subsection
+(\S~\ref{sec:layer2_boundary}) names the structural distinction
+between intrinsic graph-derived variables (which the framework
+projects natively) and Layer-2 inputs (external classical fields,
+multi-loop QED coefficients, lattice-QCD-derived radii); the same
+day's external-field hunting verified that uniform Zeeman / Stark
+fields are Layer-2, not new projections.  T3 expansion to
+19$\times$19 is flagged for the next TX-A audit.  The
 field-theoretic UV/IR ordering anomaly between \texttt{spectral\_action}
 and \texttt{observation\_window} is real physics but is \emph{not}
 encoded by the current coarse layer-grading (Track TS-C, 2026-05-04);
