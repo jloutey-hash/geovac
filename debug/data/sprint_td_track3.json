@@ -1,0 +1,199 @@
+{
+  "sprint": "TD Track 3",
+  "date": "2026-05-09",
+  "status": "closed_positive",
+  "verdict": "catalogue_only_no_T_F_selected",
+  "scope": "Yukawa-sensitive thermal observables; outer baseline via Track 1; inner residual structure characterized via inner-factor Mellin engine theorems",
+  "backbone_theorems": [
+    {
+      "name": "eta_trivialization",
+      "statement": "Tr(D_F^k * exp(-t*D_F^2)) = 0 for all odd k on any Krajewski-class even finite spectral triple",
+      "source": "debug/inner_factor_mellin_engine_memo.md sec 3",
+      "mechanism": "gamma_F D_F gamma_F^{-1} = -D_F (chirality grading axiom)"
+    },
+    {
+      "name": "AC_factorization",
+      "statement": "D^2 = D_GV^2 (x) 1 + 1 (x) D_F^2; Tr(exp(-t*D^2)) = Tr(exp(-t*D_GV^2)) * Tr(exp(-t*D_F^2))",
+      "source": "debug/inner_factor_mellin_engine_memo.md sec 4",
+      "mechanism": "cross-term {D_GV (x) 1, gamma_GV (x) D_F} = 0 by outer chirality"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "2.1",
+      "name": "lepton_thermal_free_energy",
+      "k_order": 2,
+      "outer_baseline": {
+        "value": "-(7/720) * pi^2 * T^4 per Weyl spinor",
+        "source": "Track 1 stefan_boltzmann_dirac_factorization",
+        "Mellin_factorization": "M1 [1/(2*pi^2)] * geometric [1/3] * M2 [(7/8)*6*zeta(4)]"
+      },
+      "inner_residual": {
+        "leading_correction": "(1/24) * Tr(D_F^2) / T^2",
+        "next_order": "(1/16) * Tr(D_F^4) / T^4",
+        "structure": "linear in sum of Yukawa squares; pure k=2 Mellin trace at integer s"
+      },
+      "T_F_constraint": {
+        "what_must_match": "Tr(D_F^2) reproduces SM sum m_e^2 + m_mu^2 + m_tau^2 + 3*(quark masses) at v=246 GeV",
+        "uniqueness": "completely fixed by SM Yukawas; no generation-multiplicity ambiguity"
+      },
+      "falsifier": "any T_F whose Tr(D_F^2) does not reproduce the known SM mass-squared sum",
+      "eta_trivialization_filter": "PASS",
+      "diagnostic_value_out_of_10": 9
+    },
+    {
+      "id": "2.2",
+      "name": "QCD_thermal_pressure_g_QCD",
+      "k_order": 0,
+      "outer_baseline": {
+        "value": "p/T^4 = (pi^2/45) * g_QCD; per-mode coefficient -(7/720)*pi^2*T^4 (fermions) or -(pi^2/90)*T^4 (bosons), each from Track 1",
+        "source": "Track 1 stefan_boltzmann_factorization x species_count"
+      },
+      "inner_residual": {
+        "structure": "purely k=0 multiplicity",
+        "key_invariant": "color factor 3 = ratio of color-triplet to color-singlet sectors in T_F",
+        "Connes_value": "dim H_F = 32 (one generation); 6:2 = 3:1 multiplicity ratio (Leg 4 of inner-factor Mellin memo)"
+      },
+      "T_F_constraint": {
+        "what_must_match": "g_QCD = 47.5 at N_f=3 from g_QCD = 16 + 21*N_f/2",
+        "uniqueness": "requires M_3(C) summand in A_F; M_2 . M_3 with wrong multiplicity assignment ruled out"
+      },
+      "falsifier": "T_F without M_3(C) summand, or with wrong color multiplicity, fails to reproduce g_QCD = 47.5",
+      "eta_trivialization_filter": "PASS",
+      "diagnostic_value_out_of_10": 8,
+      "note": "tests algebra structure of T_F (color factor) rather than parameter values"
+    },
+    {
+      "id": "2.3",
+      "name": "Higgs_effective_potential_finite_T",
+      "k_order": 2,
+      "outer_baseline": {
+        "value": "Stefan-Boltzmann backbone from Track 1; phi-dependent fermion mass operator NOT in framework",
+        "source": "Track 1 partial; off-diagonal D_F block lives entirely inside T_F",
+        "Sprint_H1_constraint": "framework admits Higgs structurally iff Y>0; does not select Y"
+      },
+      "inner_residual": {
+        "thermal_mass_squared": "m_T^2(T) = (T^2/12) * [Tr_inner(Y_diag^2) + (gauge contrib)]",
+        "structure": "trace of off-diagonal D_F block squared; pure k=2",
+        "higher_order": "two-loop m_T^2 * log(m_T^2) corrections probe Yukawa product structure"
+      },
+      "T_F_constraint": {
+        "what_must_match": "off-diagonal D_F block whose squared diagonal entries are SM Yukawa squared values",
+        "uniqueness": "CC standard A_F = C + H + M_3(C) is canonical but not unique"
+      },
+      "falsifier": "T_F with zero off-diagonal block (Marcolli-vS-without-Higgs limit) predicts NO high-T symmetry restoration; empirically falsified by sphaleron transition at T_C ~ 160 GeV",
+      "eta_trivialization_filter": "PASS",
+      "diagnostic_value_out_of_10": 10,
+      "note": "structurally Higgs-sector specific; cleanest probe of off-diagonal CC block"
+    },
+    {
+      "id": "2.4",
+      "name": "EW_thermal_Debye_masses",
+      "k_order": 2,
+      "outer_baseline": {
+        "value": "1-loop vacuum polarization graph from Track 1 + gauge couplings external",
+        "source": "Papers 25/30 Wilson construction + Track 1; coupling magnitudes are external",
+        "formula": "m_D^2(W) = (T^2/6) * [(2 + N_gen)*g_W^2 + ...]"
+      },
+      "inner_residual": {
+        "structure": "(2 + N_gen) * g^2; bilinear in gauge coupling, linear in N_gen",
+        "key_invariant": "generation multiplicity N_gen = 3 from inner factor copies",
+        "factor_origin": "doublet contributions (gauge bosons themselves) plus matter contributions per generation"
+      },
+      "T_F_constraint": {
+        "what_must_match": "N_gen = 3 generation copies, each containing SU(2)_L doublet structure",
+        "uniqueness": "CC's A_F with standard SU(2) embedding in H passes; N_gen=1 or N_gen=4 would be measurably different"
+      },
+      "falsifier": "T_F with wrong N_gen would predict different m_D^2; lattice or early-universe constraints sample (2+N_gen) factor",
+      "eta_trivialization_filter": "PASS",
+      "diagnostic_value_out_of_10": 7,
+      "note": "less clean than 2.3 because gauge couplings external; residual factors through both Yukawas and gauge couplings"
+    },
+    {
+      "id": "2.5",
+      "name": "thermal_alpha_running",
+      "k_order": "2_plus_log",
+      "outer_baseline": {
+        "value": "1-loop QED VP on S^3 from Paper 28 Sprint Q-1: Pi = 1/(48*pi^2), beta(alpha) = 2*alpha^2/(3*pi)",
+        "source": "Paper 28 + Track 1 thermal extension",
+        "thermal_form": "Delta_alpha(T)/alpha = (alpha/pi) * sum_f Q_f^2 * N_c(f) * (1/3) * log(T/m_f) + ..."
+      },
+      "inner_residual": {
+        "structure": "Tr_inner(Q_F^2 * log(T/M_F)); NOT pure power Mellin trace because of logarithm",
+        "coefficient": "sum_f Q_f^2 * N_c(f) = 8/3 per generation (Phase 4H Track SM-B)",
+        "cutoff_structure": "m_f = y_f * v Yukawa-tied"
+      },
+      "T_F_constraint": {
+        "what_must_match": "charge assignment Q_F encoded in A_F representation theory; color factor N_c from M_3(C); generation multiplicity from copies",
+        "uniqueness": "charge assignment forced by gauge anomaly cancellation in SM"
+      },
+      "falsifier": "T_F violating per-generation sum 8/3 fails precision Delta_alpha(T)/alpha datasets",
+      "eta_trivialization_filter": "PASS_at_thermal_correction; bare logarithmic running involves k=1 piece (eta invariant) which trivializes",
+      "diagnostic_value_out_of_10": 6,
+      "note": "logarithmic dependence makes residual non-Mellin; precision hard to extract; structurally outside the master Mellin engine for finite parts"
+    }
+  ],
+  "filtered_out_by_eta_trivialization": [
+    {
+      "name": "axial_chemical_potential_thermodynamics",
+      "reason": "depends on Tr(gamma_F * D_F * exp(-t*D_F^2)) k=1 trace, identically zero on any Krajewski triple",
+      "structural_prediction": "no axial chemical potential thermodynamics from inner factor in CC-compatible SM extension"
+    },
+    {
+      "name": "parity_odd_transport_chiral_magnetic",
+      "reason": "k=1 trivializes at single-fermion level; CME and similar arise from anomaly inflow not factoring through inner Mellin",
+      "structural_prediction": "consistent with SM observation"
+    },
+    {
+      "name": "electric_dipole_moments_finite_T",
+      "reason": "parity-odd time-reversal-odd; k=1 at inner factor",
+      "structural_prediction": "matches small-EDM SM stance"
+    }
+  ],
+  "summary_table": [
+    ["id", "observable", "k_order", "residual_character", "cleanest_probe_of"],
+    ["2.1", "lepton_thermal_F", "2", "linear sum y_i^2", "Yukawa values"],
+    ["2.2", "QCD_pressure_g_QCD", "0", "multiplicity ratio", "M_3(C) algebra"],
+    ["2.3", "Higgs_V_eff_T", "2", "off-diag D_F trace", "Higgs sector / off-diag CC"],
+    ["2.4", "EW_Debye_masses", "2", "(2+N_gen)*g^2", "generation count"],
+    ["2.5", "alpha_T_running", "2+log", "rational charges + Yukawa cutoffs", "charge + N_c"]
+  ],
+  "filter_pass_count": 5,
+  "filter_total_candidates": 8,
+  "filter_filtered_out": 3,
+  "honest_scope": [
+    "no T_F is selected; catalogue entries are consistency checks on candidates",
+    "outer baselines are textbook QFT; framework does not derive them; new content is factor placement",
+    "logarithmic running (2.5) does not factor cleanly into Mellin engine; LS-8a wall",
+    "generation count is not predicted; appears as empirical multiplicity factor in T_F",
+    "outer baseline of 2.3 is weakest; framework does not produce phi-dependent fermion mass operator"
+  ],
+  "paper_updates_drafted_not_applied": [
+    {
+      "paper": 18,
+      "section": "IV.6",
+      "change": "append paragraph on thermal probes of Yukawa Dirichlet ring (~30 lines)",
+      "status": "drafted_in_memo_section_7.1"
+    },
+    {
+      "paper": 32,
+      "section": "VIII.C",
+      "change": "append thermal extension of H1 verdict; Marcolli-vS-without-Higgs falsified by sphaleron transition data",
+      "status": "drafted_in_memo_section_7.2"
+    }
+  ],
+  "files_produced": [
+    "debug/sprint_td_track3_memo.md",
+    "debug/data/sprint_td_track3.json"
+  ],
+  "no_geovac_modifications": true,
+  "no_paper_edits_applied": true,
+  "no_new_tests": true,
+  "discipline_check": {
+    "no_fitted_parameters": true,
+    "no_ontological_claims": true,
+    "no_T_F_uniqueness_claims": true,
+    "all_residual_structures_traceable_to_eta_trivialization_or_AC_factorization": true,
+    "selection_bias_controls": "framework provides catalogue, not predictions; W3 falsification discipline preserved"
+  }
+}
