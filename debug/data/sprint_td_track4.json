@@ -1,0 +1,97 @@
+{
+  "1_cigar_beta_symbolic": {
+    "phi_period": "2*pi",
+    "phi_period_meaning": "M1: 2 pi from imaginary-time circle circumference (S^1_beta factor)",
+    "beta_cigar_sym": "8*pi*M",
+    "T_H_sym": "1/(8*pi*M)",
+    "kappa_g_sym": "1/(4*M)",
+    "T_H_via_kappa_sym": "1/(8*pi*M)",
+    "factorization_residual": "0",
+    "structural_reading": "T_H = phi_period * (4M)^{-1} / (2 pi)^{-1} reduces to 1/(8 pi M). The single 2 pi is the S^1_phi circumference. Identical M1 mechanism as Track 1's Stefan-Boltzmann 2 pi k / beta Matsubara spectrum, just with beta = 8 pi M instead of beta = 1/(k_B T)."
+  },
+  "2_matsubara_via_track1": {
+    "beta_cigar_used": "8*pi*M",
+    "bosonic_lowest_nonzero": "1/(4*M)",
+    "kappa_g_match": "0",
+    "kappa_g_meaning": "Lowest bosonic Matsubara frequency on the cigar tau-circle EXACTLY equals the Schwarzschild surface gravity kappa_g = 1/(4M). This is structurally analogous to Track 1's lowest bosonic Matsubara mode on S^1_beta being 2 pi T.",
+    "fermionic_lowest": "1/(8*M)",
+    "pi_T_H_match": "0",
+    "fermionic_meaning": "Anti-periodic boundary condition on tau-circle for fermions shifts the lowest mode to omega = pi T_H (matter Dirac field on cigar in standard Hartle-Hawking state).",
+    "spectrum_bosonic_first_5": [
+      [
+        -4,
+        "-1/M"
+      ],
+      [
+        -3,
+        "-3/(4*M)"
+      ],
+      [
+        -2,
+        "-1/(2*M)"
+      ],
+      [
+        -1,
+        "-1/(4*M)"
+      ],
+      [
+        0,
+        "0"
+      ]
+    ],
+    "spectrum_fermionic_first_5": [
+      [
+        -4,
+        "-7/(8*M)"
+      ],
+      [
+        -3,
+        "-5/(8*M)"
+      ],
+      [
+        -2,
+        "-3/(8*M)"
+      ],
+      [
+        -1,
+        "-1/(8*M)"
+      ],
+      [
+        0,
+        "1/(8*M)"
+      ]
+    ],
+    "structural_reading": "Track 1's matsubara_spectrum(beta_cigar, ...) reproduces the standard Hawking Matsubara spectrum verbatim. The M1 (Hopf-base measure) signature 2 pi from the tau-circle circumference is identical between flat S^1_beta and the cigar. No new mechanism is required; only the value of beta changes (8 pi M for the cigar vs 1/(k_B T) for flat thermal field theory)."
+  },
+  "3_heat_kernel_factorization": {
+    "track1_K_temporal_leading": "beta/(2*sqrt(pi)*sqrt(s))",
+    "track1_factorization": "Tr e^{-s D_total^2} = K_spatial(s) * K_temporal(s); the modular content factorises by tensor factor.",
+    "cigar_local_factorization": "Near r = 2M (Rindler): D_cigar^2 ~ D_rho^2 + (1/(4M))^2 phi^2 + D_S^2/r^2; the (rho, phi) part is locally R^2 with phi = tau/(4M) of period 2 pi, identical to flat polar coordinates. The phi-circle supports a Matsubara sum identical to Track 1's S^1_beta sum.",
+    "cigar_non_compact_caveat": "Globally, the r-direction is non-compact (r in [2M, infinity)). The full cigar heat kernel needs IR regularization at r = infinity (standard practice: integrate over a finite spacelike box, take the limit). Track 1's K_spatial * K_temporal factorization assumes BOTH factors compact; for the cigar it holds only in the near-horizon approximation. The M1 mechanism on the tau-circle is unaffected, because tau-compactness is ENFORCED by smoothness at the tip.",
+    "structural_reading": "M1 mechanism (Matsubara sum on tau-circle) extends cleanly. M2 mechanism (Seeley-DeWitt on r-direction) does NOT extend cleanly because of non-compact r; this is where Connes-Chamseddine black-hole spectral-action computations require boundary regularization, and is OUT OF SCOPE for this track."
+  },
+  "4_master_mellin_verdict": {
+    "V1_M1_mechanism": {
+      "status": "POSITIVE",
+      "claim": "The 2 pi in T_H = 1/(8 pi M) is the Hopf-base measure / M1 mechanism signature of S^1_tau circumference. Identical to Track 1's S^1_beta Matsubara mechanism, only beta changes (beta_cigar = 8 pi M).",
+      "evidence": "(i) Track 1's matsubara_spectrum() called with beta = 8 pi M reproduces standard Hawking Matsubara spectrum bit-identically; (ii) the lowest bosonic mode equals surface gravity kappa_g; (iii) T_H = kappa_g / (2 pi) factorization makes the 2 pi explicitly the M1 signature."
+    },
+    "V2_M2_mechanism": {
+      "status": "OUT_OF_SCOPE_DEFERRED",
+      "claim": "Recovering Bekenstein-Hawking entropy S_BH = A/(4 ell_p^2) from the horizon S^2 spectral action would test M2 (Seeley-DeWitt) extensibility on the horizon submanifold. This is a separate multi-week NCG computation (Chamseddine-Connes 2010 program), explicitly OUT OF SCOPE per directive."
+    },
+    "V3_Bertrand_forcing": {
+      "status": "NEGATIVE",
+      "claim": "The cigar is forced by Einstein equations + Schwarzschild horizon at r = 2M. GeoVac's packing axiom does NOT produce the cigar. Bertrand's theorem (closed-orbit selection of Coulomb potential) is what selects S^3 in GeoVac; no analog selects the cigar. M (BH mass) is external input.",
+      "interpretation": "This is what we expect: the framework is a structural-skeleton framework that operates on geometries it is given. The cigar comes from gravity, not from packing. The fact that one of its structural mechanisms (M1 Matsubara temperature) extends without modification is the modest but real result of this track."
+    },
+    "net_verdict": "POSITIVE for the limited M1 extensibility claim, NEGATIVE for any claim that GeoVac derives black hole physics. The Matsubara temperature mechanism is universal across S^1 compactifications; GeoVac does NOT autonomously generate the cigar geometry.",
+    "Paper_35_Prediction_1_check": "Paper 35 Prediction 1 (pi enters iff continuous integration over a temporal/spectral parameter) holds verbatim for the cigar: the single pi in T_H = 1/(8 pi M) comes from the S^1_tau circle circumference, identified at the same continuous-integration step (Matsubara sum on tau-circle) as Stefan-Boltzmann's pi^2/90.",
+    "Paper_32_Section_VIII_check": "The case-exhaustion theorem (M1 / M2 / M3 sub-cases of master Mellin engine Tr(D^k e^{-t D^2})) extends formally to the cigar for k = 0 (M1, Matsubara temperature). Extension to k = 2 (M2, spectral action / S_BH on horizon S^2) is the natural follow-up but requires non-compact regularization not covered here."
+  },
+  "metadata": {
+    "track": "Sprint TD Track 4",
+    "framing": "M1 extensibility test from S^3 x S^1_beta (Track 1, commit 697666f) to Euclidean Schwarzschild cigar x S^2_horizon. POSITIVE for M1; OUT_OF_SCOPE for M2 (S_BH); NEGATIVE for Bertrand-class forcing of cigar from packing.",
+    "honest_scope": "This is a TEMPERATURE-MECHANISM test, not an entropy-shape test or a black-hole-derivation claim. Per directive."
+  }
+}
