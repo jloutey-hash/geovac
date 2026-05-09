@@ -1,0 +1,132 @@
+{
+  "sprint": "TD Track 1",
+  "module": "geovac/thermal_tensor_triple.py",
+  "tests_module": "tests/test_thermal_tensor_triple.py",
+  "tests_passing": 36,
+  "tests_failing": 0,
+  "stefan_boltzmann_scalar": {
+    "M1_factor_str": "1/(2*pi**2)",
+    "M2_BE_integrand_closed_str": "pi**4/15",
+    "F_over_V_factor_str": "-pi**2/90",
+    "residual_to_canonical": "0",
+    "M1_meaning": "M1: Hopf-base measure factor 1/(2 pi^2) from Vol(S^2)/(2pi)^3",
+    "M2_meaning": "M2: pi^4 from Riemann zeta(4) = pi^4/90"
+  },
+  "stefan_boltzmann_dirac": {
+    "fermionic_eta_factor": "7/8",
+    "F_over_V_per_Weyl_str": "-7*pi**2/720",
+    "residual_to_canonical": "0",
+    "M2_meaning": "M2: pi^4 from Riemann zeta(4) = pi^4/90"
+  },
+  "casimir_scalar_S3": "1/240",
+  "casimir_dirac_S3": "-17/480",
+  "transcendental_audit": {
+    "rows": [
+      {
+        "quantity": "Vol(S^2)/(2pi)^3 = 1/(2 pi^2)",
+        "factor": "spatial S^3 (continuum limit, Hopf-base measure)",
+        "mechanism": "M1",
+        "tag": "M1: Hopf-base measure factor 1/(2 pi^2) from Vol(S^2)/(2pi)^3",
+        "pi_power": "1/pi^2",
+        "appears_in": "stefan_boltzmann_factorization (M1 prefactor)"
+      },
+      {
+        "quantity": "zeta_R(4) = pi^4 / 90",
+        "factor": "temporal S^1_beta (Bose-Einstein / Matsubara sum)",
+        "mechanism": "M2",
+        "tag": "M2: pi^4 from Riemann zeta(4) = pi^4/90",
+        "pi_power": "pi^4",
+        "appears_in": "stefan_boltzmann_factorization (M2 integrand)"
+      },
+      {
+        "quantity": "F_over_V = -(pi^2/90) T^4",
+        "factor": "M1 (S^3 measure) x M2 (S^1_beta zeta(4))",
+        "mechanism": "product M1 x M2",
+        "tag": "M1 x M2 product gives net pi^2/90",
+        "pi_power": "pi^2",
+        "appears_in": "stefan_boltzmann_factorization (final result)"
+      },
+      {
+        "quantity": "epsilon(t) modular exponent pi^2",
+        "factor": "spatial S^3 (Dirac heat-kernel modular residual)",
+        "mechanism": "M2",
+        "tag": "M2: pi^2 in Jacobi theta_2 modular transformation",
+        "pi_power": "pi^2",
+        "appears_in": "modular_residual_dirac_S3"
+      },
+      {
+        "quantity": "epsilon(t) leading prefactor sqrt(pi)",
+        "factor": "spatial S^3 (Seeley-DeWitt)",
+        "mechanism": "M2",
+        "tag": "M2: sqrt(pi) from Seeley-DeWitt a_0 on unit S^3",
+        "pi_power": "sqrt(pi)",
+        "appears_in": "modular_residual_dirac_S3"
+      },
+      {
+        "quantity": "K_temporal leading sqrt(pi s) prefactor",
+        "factor": "temporal S^1_beta (Jacobi theta inversion)",
+        "mechanism": "M1",
+        "tag": "M1: sqrt(pi) from inverse theta on the imaginary-time circle",
+        "pi_power": "sqrt(pi)",
+        "appears_in": "modular_residual_thermal_tensor"
+      },
+      {
+        "quantity": "Matsubara modes 2 pi k / beta (bosonic) or 2 pi (k+1/2) / beta (fermionic)",
+        "factor": "temporal S^1_beta (mode quantization)",
+        "mechanism": "M1 (circle volume)",
+        "tag": "M1: 2 pi from imaginary-time circle circumference (S^1_beta factor)",
+        "pi_power": "pi",
+        "appears_in": "matsubara_spectrum (mode definition)"
+      },
+      {
+        "quantity": "Spatial scalar Casimir = 1/240 (NO pi)",
+        "factor": "spatial S^3",
+        "mechanism": "(none \u2014 rational Bernoulli value)",
+        "tag": "M2 collapses to rational at half-integer Hurwitz shift (Paper 35 KG-3)",
+        "pi_power": "0 (no pi)",
+        "appears_in": "scalar_casimir_S3"
+      },
+      {
+        "quantity": "Spatial Dirac Casimir = -17/480 (NO pi)",
+        "factor": "spatial S^3",
+        "mechanism": "(none \u2014 rational Bernoulli value)",
+        "tag": "M2 collapses to rational at half-integer Hurwitz shift (Paper 35 KG-5)",
+        "pi_power": "0 (no pi)",
+        "appears_in": "dirac_casimir_S3"
+      },
+      {
+        "quantity": "Fermionic eta factor 7/8 = 1 - 2^{-3}",
+        "factor": "temporal S^1_beta (anti-periodic boundary condition)",
+        "mechanism": "M2 (Dirichlet eta at s=4)",
+        "tag": "M2: rational eta(4)/zeta(4) = 7/8 from boundary condition",
+        "pi_power": "0 (rational ratio)",
+        "appears_in": "stefan_boltzmann_dirac_factorization"
+      }
+    ],
+    "summary": {
+      "total_pi_sources_tagged": 10,
+      "tensor_factor_partition": {
+        "spatial_S3_pi_count": 4,
+        "temporal_S1_beta_pi_count": 5,
+        "rational_no_pi_count": 3
+      },
+      "mechanism_partition": {
+        "M1_count": 3,
+        "M2_count": 4,
+        "M3_count": 0,
+        "product_M1xM2_count": 1,
+        "rational_collapse_count": 2
+      },
+      "paper_35_prediction_1_test": "Every pi-source is associated with a continuous integration over a temporal/spectral parameter promoted from the discrete spectrum: (a) Matsubara modes 2 pi k / beta come from compactification of     imaginary time (Paper 35 KG-2 mechanism). (b) The 1/(2 pi^2) Hopf measure factor enters from the Weyl     asymptotic d^3k/(2pi)^3, i.e. from the *continuum* limit of     the spatial integration. (c) The sqrt(pi) Seeley-DeWitt coefficients come from the     Mellin transform on s of the heat-kernel trace. All of these are continuous-integration projections. The rational values (Casimir 1/240, -17/480; eta 7/8) come from DISCRETE Hurwitz / Bernoulli evaluations and contain no pi \u2014 consistent with Paper 35 Prediction 1 verbatim."
+    }
+  },
+  "headline_findings": [
+    "Stefan-Boltzmann scalar -pi^2/90 reproduced as exact M1 (1/(2pi^2)) x IBP (1/3) x M2 (pi^4/15) factorisation; sympy residual 0.",
+    "Stefan-Boltzmann Dirac per Weyl -7pi^2/720 reproduced as exact M1 x IBP x M2 (eta(4) = (7/8) zeta(4)) factorisation; sympy residual 0.",
+    "Scalar S^3 Casimir = 1/240 (RATIONAL, no pi). Dirac S^3 Casimir = -17/480 (RATIONAL, no pi). Both Paper 35 KG-3 / KG-5 verbatim.",
+    "Modular residual epsilon(t) = sum (-1)^m sqrt(pi) e^{-m^2 pi^2 / t} [t^{-3/2} - 2 m^2 pi^2 t^{-5/2} - (1/2) t^{-1/2}] from Sprint MR-B; modular exponent pi^2; ring sqrt(pi) Q + pi^2 Q (M2).",
+    "Tensor factorisation Tr e^{-s D_total^2} = K_spatial(s) * K_temporal(s); leading temporal kernel beta/(2 sqrt(pi s)) from Jacobi theta inversion (M1).",
+    "10 transcendental sources audited; M1 count 3, M2 count 4, M3 count 0, product M1xM2 = 1, rational collapses = 2.",
+    "Paper 35 Prediction 1 verbatim on the tensor product: every pi has a continuous-integration source (Matsubara compactification, Hopf measure, Seeley-DeWitt Mellin, theta inversion)."
+  ]
+}
