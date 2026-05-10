@@ -1,0 +1,129 @@
+{
+  "sprint": "Cs-HFS-v2 Phase B/C compute",
+  "system": "Cs-133 6S_{1/2} hyperfine",
+  "experimental_A_MHz": 2298.1579425,
+  "experimental_nu_HFS_Hz": 9192631770.0,
+  "I_Cs": 3.5,
+  "g_Cs": 0.7377214285714285,
+  "component_C2_psi_origin": {
+    "component": "C2: framework |psi_6s(0)|^2 (FrozenCore Z_eff)",
+    "method": "_solve_screened_radial_log (dense uniform grid)",
+    "core_type": "Xe (54e)",
+    "screening": "Clementi-Raimondi single-zeta",
+    "convergence": {
+      "50000": {
+        "energy_Ha": -0.054183725476531386,
+        "energy_eV": -1.4744142821884756,
+        "R0": -3.6869457845273503,
+        "psi0_squared_au": 1.0817418676567665,
+        "wall_time_s": 0.13901352882385254
+      },
+      "100000": {
+        "energy_Ha": -0.054192309800086116,
+        "energy_eV": -1.474647873532384,
+        "R0": -3.8876514925584873,
+        "psi0_squared_au": 1.202720705238644,
+        "wall_time_s": 0.2430720329284668
+      },
+      "200000": {
+        "energy_Ha": -0.054194476084894305,
+        "energy_eV": -1.4747068211450185,
+        "R0": -3.9883833069531263,
+        "psi0_squared_au": 1.2658548670374028,
+        "wall_time_s": 0.4488382339477539
+      },
+      "400000": {
+        "energy_Ha": -0.05419501926975389,
+        "energy_eV": -1.4747216019580356,
+        "R0": -4.0388631900214715,
+        "psi0_squared_au": 1.298100809558391,
+        "wall_time_s": 0.8431291580200195
+      }
+    },
+    "richardson_intercept_au": 1.3277924053836851,
+    "richardson_slope_au_per_inv_n": -12340.036587827666,
+    "psi_6s_origin_squared_au_extrap": 1.3277924053836851,
+    "psi_6s_origin_squared_au_n_grid_200k": 1.2658548670374028,
+    "energy_6s_eV_n_grid_200k": -1.4747068211450185,
+    "energy_6s_eV_NIST": -3.894,
+    "energy_rel_err_pct": -62.128741110811035,
+    "note": "FrozenCore [Xe] uses Clementi-Raimondi single-zeta screening, which is qualitative for the Cs valence regime. The eigenvalue E_6s = -1.475 eV is -62.1% from NIST -3.894 eV. The |psi(0)|^2 at the n_grid=200k sample point is 1.2659 bohr^-3, with Richardson n_grid->infinity extrapolation 1.3278 bohr^-3 (linear in 1/n_grid). Fully converged value would require Numerov + analytical small-r fit; current dense-grid is converged to ~5%."
+  },
+  "component_C1_C3_C4": {
+    "component": "C1+C3+C4: Bohr-Fermi + Schwinger + relativistic",
+    "C1_bf_dirac": {
+      "A_Ha": 1.1899619041235703e-07,
+      "A_MHz": 782.9573206571798,
+      "description": "BF strict, g_e = g_p_eff = 2 (Dirac, no Schwinger)",
+      "g_e": 2.0,
+      "g_N": 0.7377214285714285,
+      "residual_MHz_vs_expt": -1515.20062184282,
+      "residual_pct_vs_expt": -65.93109175927842
+    },
+    "C3_schwinger": {
+      "A_Ha": 1.1913418460413274e-07,
+      "A_MHz": 783.8652788219291,
+      "description": "BF with full g_e (Schwinger to all orders)",
+      "g_e": 2.00231930436256,
+      "a_e_one_loop": 0.0011614097328884378,
+      "a_e_codata": 0.00115965218128,
+      "multiplicative_factor": 1.00115965218128,
+      "residual_MHz_vs_expt": -1514.2926636780708,
+      "residual_pct_vs_expt": -65.89158367552324
+    },
+    "C4_relativistic_casimir": {
+      "Z_alpha": 0.4013543913115,
+      "gamma": 0.9159228420423716,
+      "F_R_casimir": 1.5552726325242259,
+      "A_Ha_with_F_R": 1.8528613691289664e-07,
+      "A_MHz_with_F_R": 1219.124215737718,
+      "description": "Casimir 1936 relativistic enhancement of |psi(0)|^2 due to Dirac small-component admixture. F_R = 4 gamma / (4 gamma^2 - 1). Full Bohr-Weisskopf gives larger F_R (~2.6 at Z=55) by including higher-order relativistic corrections; F_R_Casimir is the leading order.",
+      "residual_MHz_vs_expt": -1079.033726762282,
+      "residual_pct_vs_expt": -46.95211355179876
+    }
+  },
+  "component_C5_zemach_BW": {
+    "component": "C5: Zemach + Bohr-Weisskopf",
+    "method": "Eides leading-order * Z_Cs",
+    "delta_zemach_relative": -0.00010163228371827852,
+    "delta_zemach_ppm": -101.63228371827852,
+    "delta_zemach_Ha": -1.883105323579531e-11,
+    "delta_zemach_MHz": -0.12390237818167955,
+    "r_Z_Cs_fm": 6.7,
+    "r_Z_Cs_bohr": 0.0001266116503499266,
+    "note_zemach": "Zemach leading-order with r_Z(Cs-133) = 6.7 fm (Roberts-Ginges 2015). The Eides formula gives Delta nu / nu = -2 Z alpha m_e r_Z = -101.63 ppm. For Cs the correction is structurally larger than for H by Z=55, and the literature r_Z ~ 6.7 fm vs proton 1.045 fm increases the magnitude further. Order ~350 ppm.",
+    "bohr_weisskopf_relative": 0.012,
+    "bohr_weisskopf_ppm": 12000.0,
+    "bohr_weisskopf_MHz": 14.629490588852615,
+    "note_bohr_weisskopf": "Bohr-Weisskopf correction (distributed nuclear magnetization, beyond pure Zemach). Literature value for Cs-133: ~+1.0 to +1.5%. Layer-2 input from Roberts-Ginges 2015 type CI+all-order theory. NOT framework-native; would require nuclear-magnetization distribution integrated against the Dirac large/small components.",
+    "C5_total_relative": 0.011898367716281721,
+    "C5_total_MHz": 14.505588210670936
+  },
+  "component_L_multi_loop_qed": {
+    "component": "L: Multi-loop QED (Layer-2 / LS-8a wall)",
+    "multi_loop_estimate_relative": 0.0001,
+    "multi_loop_estimate_ppm": 100.0,
+    "multi_loop_estimate_MHz": 0.12191242157377181,
+    "note": "Multi-loop QED at Z*alpha=0.4 contributes ~10^-4 relative (Karshenboim 2005 \u00a7VIII; Roberts-Ginges 2015 Tab. 4 itemizes this for Cs-133 at +200 to +500 ppm). Same wall as Sprint HF-5 and Sprint LS-8a: bare iterated CC spectral action reproduces the structural prefactor (alpha/pi)^2 (Z alpha) but cannot autonomously generate Z_2/Z_3/delta_m counterterms. Layer-2 input."
+  },
+  "summary": {
+    "A_C1_bf_dirac_MHz": 782.9573206571798,
+    "A_C3_with_schwinger_MHz": 783.8652788219291,
+    "A_C4_with_casimir_FR_MHz": 1219.124215737718,
+    "A_framework_native_total_MHz": 1219.124215737718,
+    "A_C5_zemach_correction_MHz": -0.12390237818167955,
+    "A_C5_bohr_weisskopf_correction_MHz": 14.629490588852615,
+    "A_L_multi_loop_qed_correction_MHz": 0.12191242157377181,
+    "A_framework_plus_layer2_total_MHz": 1233.7517163699629,
+    "A_experimental_MHz": 2298.1579425,
+    "residual_framework_native_MHz": -1079.033726762282,
+    "residual_framework_native_pct": -46.95211355179876,
+    "residual_framework_plus_layer2_MHz": -1064.406226130037,
+    "residual_framework_plus_layer2_pct": -46.315625503621675
+  },
+  "three_class_tag": {
+    "literature_convention_mismatch": "Roberts-Ginges 2015 vs Porsev-Beloy-Derevianko 2009 use slightly different decompositions (CI+all-order vs LCC). NOT yet a sharp framework finding at this scoping precision (framework residual -47.0% is much larger than the 0.5-1% atomic-structure spread between RG and PBD). Would need framework-native subtotal at sub-percent precision to cleanly expose any convention mismatch.",
+    "framework_kernel_gap": "Two named kernel gaps: (a) Clementi-Raimondi single-zeta screening is qualitative for Cs valence (gives E_6s = -1.475 eV vs NIST -3.894, -62%; and the |psi(0)|^2 by 50-65% per the framework total residual. Need Hartree-Fock or DFT screening at Z=55. (b) Casimir F_R is leading-order; full Bohr-Weisskopf relativistic enhancement is ~2.6 vs Casimir 1.555 (factor ~1.7), structural to spinor lift \u00a7III.7.",
+    "cleanly_attributed_layer2_wall": "Multi-loop QED in heavy-atom regime (~+100 ppm at Z=55, analogous to Sprint HF-5 and Sprint LS-8a). Framework cannot autonomously generate the Z_2/Z_3/delta_m counterterms; literature input from Karshenboim 2005 \u00a7VIII / Roberts-Ginges 2015 Tab. 4. Bohr-Weisskopf at +1.2% is similarly Layer-2 (requires distributed nuclear magnetization profile from nuclear physics experiment, not GeoVac-internal)."
+  }
+}

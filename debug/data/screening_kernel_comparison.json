@@ -1,0 +1,24 @@
+{
+  "sprint": "Cs-HFS screening kernel comparison (v2 single vs v3 multi)",
+  "date": "2026-05-09",
+  "experimental_A_MHz": 2298.1579425,
+  "kernels_compared": [
+    "single_zeta",
+    "multi_zeta"
+  ],
+  "single_zeta_result": {
+    "E_6s_eV": -1.4747068211450185,
+    "E_6s_NIST_relerr_pct": -62.128741110811035,
+    "psi_origin_sq_au": 1.3277924053836851,
+    "A_framework_native_MHz": 1219.124215737718,
+    "residual_pct": -46.95211355179876
+  },
+  "multi_zeta_result": {
+    "E_6s_eV": -1.1703147291303133,
+    "E_6s_NIST_relerr_pct": -69.94569262634019,
+    "psi_origin_sq_au": 0.2508539989526744,
+    "A_framework_native_MHz": 230.32379421501335,
+    "residual_pct": -89.97789534149855
+  },
+  "verdict": "Two-zeta upgrade with BBB93-Kr-derived inner/outer ratios does NOT close the framework-native residual; it shifts the eigenvalue in the wrong direction (E_6s less bound than single-zeta). Diagnostic verdict: the screening kernel limitation at Z=55 is NOT just a matter of single vs two-zeta count. The Clementi-Raimondi 1967 single-zeta exponents themselves are non-faithful for Z=55 outer shells (e.g. Z_eff(5p) = 5*12.31 = 61.56, vs real Cs 5p having physical Z_eff ~3-5). A heuristic two-zeta split inherits the same problem. Closing the gap requires either (a) full BBB93/Koga-Tatewaki-Thakkar published RHF tabulation with proper coefficient signs (including negative orthogonalization terms), or (b) a self-consistent HF iteration in geovac/neon_core.py (multi-week scope). The multi-zeta machinery added in this sprint is the foundation for either path."
+}

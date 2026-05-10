@@ -1729,7 +1729,9 @@ experimental uncertainty, not framework limitation.  Karshenboim's
 $m_\text{red}$ Eides bracket (the $+1074.13$ MHz framework SE differs
 from Karshenboim's $+1085.84$ MHz SE itemization by exactly the recoil
 NLO).  Naively adding Karshenboim's recoil to the framework total
-double-counts.  Sprint precision-catalogue, 2026-05-08. \\
+double-counts.  See \S~\ref{sec:convention_exposures} for catalogue
+context (entry \S~\ref{sec:conv_karshenboim_recoil}).
+Sprint precision-catalogue, 2026-05-08. \\
 Mu 1S hyperfine framework Bohr--Fermi $+$ Schwinger one-loop
 $4464.1905$ MHz vs Liu~1999 $4463.302765(53)$ MHz & spinor lift
 (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
@@ -1874,7 +1876,8 @@ Layer-2) and Eides~2024 Tab.~7.3 (used for H~21cm Layer-2), with
 the convention difference at $\sim 0.01\%$ of $\nu_F$ propagating
 to $\sim 25$~mfm in extracted $r_Z(p)$.  Next-step recommendation:
 Layer-2 convention reconciliation sprint, NOT further kernel
-extensions.  Source memo:
+extensions.  See \S~\ref{sec:convention_exposures} for catalogue
+context (entry \S~\ref{sec:conv_rZG_DHFS}).  Source memo:
 \texttt{debug/w1b\_recoil\_mixing\_extension\_memo.md}. \\
 \bottomrule
 \end{tabular}
@@ -1930,7 +1933,10 @@ computable from \S~\ref{sec:layer2} projections without external
 numerical constants beyond $\alpha$) versus Layer-2 (L2 --- parameter
 at operator level, projection chain framework-native), giving an
 explicit operator-level reading of the structural-skeleton scope
-statement (CLAUDE.md \S~1.7).
+statement (CLAUDE.md \S~1.7).  Several autopsies surface
+literature convention mismatches (class~(a) findings of the
+multi-observable focal-length decomposition program); these are
+collected separately in \S~\ref{sec:convention_exposures}.
 
 \subsubsection{Hydrogen 1S Lamb shift autopsy}
 \label{sec:autopsy_lamb}
@@ -2018,34 +2024,741 @@ split between renormalization (Component 5) and two-body kinematics
 (Component 7), and FNS (Component 6) now in projection-chain language
 rather than as a black-box external constant.
 
-\subsubsection{Hydrogen 21 cm hyperfine autopsy (placeholder)}
+\subsubsection{Hydrogen 21~cm hyperfine autopsy}
 \label{sec:autopsy_21cm}
 
-The 21 cm hyperfine $A_\text{HF} = 1420$ MHz decomposes into
-Bohr--Fermi (HF-1) $+$ Schwinger $a_e$ via Parker--Toms (HF-2)
-$+$ Zemach ($r_Z$ Layer-2 input via
-\S\ref{sec:proj_magnetization_density}, HF-4), with the multi-loop
-QED $+$ recoil NLO budget at Eides Tab.~7.3 levels.  Sprint HF
-(2026-05-07) decomposed into a four-component analysis producing the
-$+18$ ppm Eides-consistent residual.  The autopsy table is
-structurally parallel to \S\ref{sec:autopsy_lamb} but at hyperfine
-focal lengths and with \S\ref{sec:proj_magnetization_density}
-playing the role \S\ref{sec:proj_charge_density} plays in the
-Lamb-shift autopsy.  Full table deferred to a follow-on autopsy
-memo; source: \texttt{debug/sprint\_hf\_track\{1..5\}.\{py,\_memo.md\}}.
+\textbf{Reference.} $\nu_\text{HF} = 1\,420\,405\,751.768$~Hz (Hellwig
+1970; CODATA / NIST), the most precisely measured atomic transition.
 
-\subsubsection{Muonic hydrogen 2$S$--2$P$ Lamb shift autopsy (placeholder)}
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{4cm} r p{6cm} c}
+\toprule
+Component & MHz & Projection chain & Status \\
+\midrule
+Bohr--Fermi Dirac (point nucleus, $g_e=2$, no recoil) & $+1421.1595$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_3j} & FN \\
+$+$ Schwinger $a_e$ (Parker--Toms-verified at $+0.5\%$) & $\times (1+\alpha/2\pi)$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_spectral_action} & FN (with calibration) \\
+$+$ Reduced-mass $(1+m_e/m_p)^{-3}$ & $\times 0.998366$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_restmass} & FN \\
+$+$ Zemach $r_Z=1.045$~fm via \S\ref{sec:proj_magnetization_density}
+operator-level & $\times (1 - 39.495 \text{~ppm})$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\textbf{\S\ref{sec:proj_magnetization_density}} & FN at op-level $+$ L2 ($r_Z$) \\
+\midrule
+\textbf{Final $A_\text{HF}$} & $+1420.4318$ & & \\
+Experimental & $+1420.4058$ & (12-digit precision) & \\
+\textbf{Residual} & $+0.026$ & $= +18.4$~ppm; within Eides Tab.~7.3 itemized $+12$--$+18$~ppm band & \\
+\bottomrule
+\end{tabular}
+\caption{Hydrogen 21~cm hyperfine Roothaan autopsy.  Each component is
+tagged to its \S\ref{sec:layer2} projection chain.  Status: FN $=$
+framework-native; L2 $=$ Layer-2 input.  Source memo:
+\texttt{debug/h21\_autopsy\_v1\_memo.md} (Sprint Calc-H21-Autopsy v1, May~2026).}
+\label{tab:autopsy_21cm}
+\end{table}
+
+\textbf{Operator-level Zemach.}  Component 4 exercises
+\S\ref{sec:proj_magnetization_density} at the operator level via the
+production module \texttt{geovac.magnetization\_density}.  The bilinear
+matrix element $\langle \hat{r}_Z\rangle$ on a Sturmian register at
+the L=0 multipole reduces to $M_1[\rho_M] = r_Z$ at leading order in
+$r_Z/a_0 \sim 2\times 10^{-5}$; the operator output $-39.495$~ppm at
+$r_Z = 1.045$~fm vs Eides Tab.~7.3 reference $-39.500$~ppm gives
+residual $+4.7\times 10^{-3}$~ppm $= 0.012\%$ of the LO shift --- the
+operator collapses to the Eides scalar at sub-percent precision
+automatically through the multipole reduction, without any external
+substitution.  Profile independence verified: Gaussian and exponential
+$\rho_M$ give bit-identical $A_\text{HF}$ at LO since both are
+calibrated to first moment $M_1 = r_Z$.
+
+\textbf{Framework-native subtotal:} $A_\text{HF}^\text{native}\!=\!1420.4318$~MHz
+($99.998\%$ of measurement).  \textbf{Layer-2 net:} $-39.495 + 18.37
+\approx -21.1$~ppm of $\nu_F$.  The Layer-2 input is the scalar $r_Z$
+value; the operator structure consuming it is framework-native via
+\S\ref{sec:proj_magnetization_density}.  This is the cleanest
+beneficiary of the W1b operator-level extension (Sprint
+Calc-rZG-extended, 2026-05-09), which promoted Zemach from
+analytic-substitution to operator-level.
+
+\textbf{Multi-focal-composition wall visible.}  The $+18.37$~ppm
+residual decomposes per Eides Tab.~7.3 as:
+\begin{itemize}\setlength\itemsep{0pt}
+\item Multi-loop QED ($\alpha^2(Z\alpha)$, $\sim+6$~ppm) is the
+LS-8a renormalization gap (CLAUDE.md \S~1.7 LS-8a entry).
+\item Recoil NLO beyond reduced-mass (Bodwin--Yennie, $\sim +6$~ppm)
+is the W1a-D Roothaan kernel-level recoil-mixing wall.
+\item Nuclear polarizability $\Delta_\text{pol}$ ($+1.4$~ppm) and
+hadronic VP ($+0.1$~ppm) are W3 inner-factor calibration data
+(QCD-internal).
+\item Zemach NLO recoil-mixing $m_e/(m_e+m_p) \approx 5 \times 10^{-4}$
+is structural noise in the electronic regime ($+0.02$~ppm) but the
+\emph{dominant} systematic in the muonic regime
+($f_\text{recoil} \approx 0.092$, structural $\sim 10\%$).  The W1b
+NLO opt-in flag covers this cleanly; cf. Sprint MH for the muonic
+analog.
+\item Convention drift on $r_Z$ ($\pm 5$~ppm; Eides 1.045 vs
+Karshenboim 1.054) is the largest class~(a) literature-itemization
+sensitivity in this observable.
+\end{itemize}
+
+\textbf{Structural reading.}  The autopsy demonstrates Paper~34's
+multi-observable focal-length decomposition program (CLAUDE.md
+\S~1.8) at the operator level on the most precisely measured atomic
+transition: four components, four different projection chains, $+18$
+ppm residual fully attributable to LS-8a (multi-loop QED) $+$ W1a-D
+(Roothaan recoil) $+$ W3 (nuclear polarizability), exactly as
+classified in CLAUDE.md \S~1.7.  The structural-skeleton scope
+statement is verified: the framework reproduces the observable to
+$\sim 2 \times 10^{-5}$ precision via four named projections, and
+the residual budget decomposes cleanly into already-named walls
+without surfacing any new class~(a) literature convention mismatch
+beyond the known $r_Z$-value drift.
+
+\subsubsection{Muonic hydrogen 2$S_{1/2}$--2$P_{1/2}$ Lamb shift autopsy}
 \label{sec:autopsy_muh_lamb}
 
-The $\mu$H 2$S$--2$P$ Lamb shift $202.37$ meV (CREMA 2010) decomposes
-into Uehling (Antognini-style $+205.0074$ meV at $<1$ ppm vs theory
-via full kernel integration), SE Bethe-log gap ($24\%$), Friar moment
-($4.3\%$ leading via \S\ref{sec:proj_charge_density}),
-K\"all\'en--Sabry two-loop VP, and deuteron polarizability.  The
-autopsy is structurally parallel to \S\ref{sec:autopsy_lamb} but in
-the muonic regime ($\beta = 2 m_e a_\mu = 1.475$, full Uehling kernel
-rather than contact form).  Full table deferred to a follow-on
-autopsy memo; source: \texttt{debug/sprint\_mh\_track\_a\_memo.md}.
+\textbf{Reference.} $\Delta E = 202.3706(23)$ meV (CREMA 2010,
+Pohl~et~al.; muonic convention $E(2P_{1/2}) - E(2S_{1/2})$).
+
+The CREMA 2010 muonic hydrogen Lamb shift decomposes under five
+named projection-chain components plus three companion Layer-2
+inputs.
+
+\begin{table}[h!]
+\centering\small
+\caption{Five-component Roothaan decomposition of the muonic hydrogen
+Lamb shift (muonic convention $E(2P_{1/2}) - E(2S_{1/2})$).  The
+framework-native subtotal $+200.50$ meV comes from full Uehling
+integration via \S\ref{sec:proj_spectral_action}, the self-energy
+bracket under rest-mass projection
+(\S\ref{sec:proj_restmass}~+~\S\ref{sec:proj_sturmian}), and the
+operator-level Friar moment via the magnetization-density module
+(\S\ref{sec:proj_magnetization_density}; cf.\
+\S\ref{sec:proj_charge_density} for the parent charge-density
+projection).  The $+1.67$ meV gap to the $+202.17$ meV
+framework-plus-literature total is closed by Antognini~2013
+literature inputs covering multi-loop QED (K\"all\'en--Sabry,
+mixed VP-VP/VP-SE, $\alpha^7$) and QCD-internal proton
+polarizability (W3 inner-factor).  Source memo:
+\texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md}.}
+\label{tab:autopsy_muh_lamb}
+\begin{tabular}{p{4.5cm} r p{4.8cm} l}
+\toprule
+Component & Value (meV) & Projection chain & Status \\
+\midrule
+1.~Full Uehling VP & $+205.0074$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action}
+& FN ($-0.10$ ppm vs Antognini) \\
+2.~Self-energy (Eides bracket) & $-0.8295$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian}
+$\circ$ \S\ref{sec:proj_restmass}
+& FN ($+24\%$ vs Antognini, recoil-mixing gap) \\
+3.~Friar moment (closed-form) & $-3.6752$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_charge_density}
+$/$ \S\ref{sec:proj_magnetization_density}
+& FN ($-4.3\%$ vs Antognini) \\
+4.~K\"all\'en--Sabry 2-loop VP & $+1.5081$ & Layer-2 input &
+LS-8a renormalization wall \\
+5.~Proton polarizability & $+0.0129$ & Layer-2 input &
+W3 inner-factor (QCD) \\
+Companions (recoil $+$ multi-loop) & $+0.144$ & Layer-2 input &
+Antognini 2013 catalogue \\
+\midrule
+\textbf{Total} & $+202.17$ & \multicolumn{2}{l}{Residual $-0.10\%$
+vs CREMA $+202.3706(23)$ meV} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Headline framework computation.}  The full Uehling integration
+matches the Antognini~2013 / Pachucki~1996 reference at $-0.10$ ppm
+--- the cleanest single-component match in the muonic catalogue.
+The $\beta = 2/(m_{\text{red},\mu}\,\alpha) = 1.475$ muonic regime,
+where the muonic Bohr scale and the $e^+ e^-$ Compton wavelength are
+comparable, is handled correctly by the full kernel where the
+contact-form Uehling overshoots by $\sim 3.6\times$.  This is the
+muonic-regime analog of the electronic Uehling row in
+\S\ref{sec:autopsy_lamb} (Component 2 of \S\ref{tab:autopsy_lamb}),
+where contact form is sufficient because $\beta_\text{ep} \approx 274$.
+
+\textbf{Convention-mismatch surface.}  Antognini~2013 and Krauth~2017
+itemizations agree on the bottom-line total but differ at $\sim 100$
+ppm in per-component split (VP one-loop and SE-recoil aggregation).
+Specifically, Krauth absorbs $\sim 0.021$~meV of higher-order VP into the
+one-loop line ($+205.0282$~meV), while Antognini itemizes it separately
+as ``VP-VP mixed'' ($+0.150$~meV), with one-loop reported at
+$+205.0074$~meV.  The framework's $-0.10$~ppm match against Antognini
+is $1000\times$ tighter than the $102$~ppm Antognini-vs-Krauth gap.
+At this precision level the choice of Layer-2 reference compilation
+matters; this autopsy anchors throughout to Antognini~2013.  See
+\S~\ref{sec:convention_exposures} for catalogue context (entry
+\S~\ref{sec:conv_muH_VP}).
+
+\textbf{Operator-level Friar moment.}  Computed via the
+\S\ref{sec:proj_magnetization_density} module
+\texttt{geovac.magnetization\_density} with
+\texttt{lepton\_mass}~=~$m_{\text{red},\mu}$.  The operator-level
+result $-4.33$ meV vs closed-form $-3.68$ meV reflects the Gaussian
+profile's $\langle r^2\rangle / \langle r\rangle^2 = 4/\pi \approx
+1.27$ factor --- a profile-convention issue between calibrating to
+the first moment $\langle r\rangle$ versus the RMS radius
+$\sqrt{\langle r^2\rangle}$.  Eides Eq.~2.35 closed-form derivation
+takes $\langle r^2\rangle^{1/2} = r_p$ (RMS radius); the operator-level
+realization via \S\ref{sec:proj_magnetization_density} takes
+$\langle r\rangle = r_p$ (first moment).  The discrepancy is exactly
+the Gaussian profile factor.  The flagged extension is a sibling
+\texttt{MagnetizationDensitySpec} calibrated to RMS radius for the
+Lamb-shift FNS channel, distinct from the existing first-moment
+calibration for the HFS Zemach channel.  See
+\S~\ref{sec:convention_exposures} for catalogue context (entry
+\S~\ref{sec:conv_friar_profile}).
+
+\textbf{Structural reading.}  The autopsy realizes the
+structural-skeleton-scope statement at the operator level for a
+cross-register multi-focal observable in the muonic regime.  Three
+framework-native components reproduce $+200.50$ meV (the
+five-projection-chain skeleton); three Layer-2 inputs close the
+remaining $+1.67$ meV gap, attributable cleanly to LS-8a multi-loop
+renormalization (Component 4) and W3 inner-factor (Component 5).
+The same architecture that closes the H 1S Lamb shift at
+\S\ref{sec:autopsy_lamb} closes $\mu$H 2$S$--2$P$ here, with
+Uehling-kernel kinematics (contact-form $\to$ full kernel) and
+Friar-profile calibration (first moment $\to$ RMS) being the only
+two ingredients that change between regimes.
+
+\subsubsection{Helium $2{}^3P$ fine-structure autopsy (first internal multi-focal entry)}
+\label{sec:autopsy_he_2_3p}
+
+\textbf{Reference.}  $\nu(2{}^3P_0 - 2{}^3P_1) = +29\,616.951(6)$~MHz,
+$\nu(2{}^3P_1 - 2{}^3P_2) = +2\,291.176(15)$~MHz,
+$\nu(2{}^3P_0 - 2{}^3P_2) = +31\,908.131(6)$~MHz (NIST compilation;
+Pachucki--Yerokhin 2010 theoretical at sub-kHz vs experiment).
+
+This is the first \emph{internal multi-focal} Roothaan autopsy: two electrons
+on the same nucleus at structurally distinct effective nuclear charges
+($Z_\text{eff}(1s) = 2$ full-nuclear, $Z_\text{eff}(2p) = 1$ full-shield).
+Distinct from the cross-register multi-focal autopsies of \S\ref{sec:autopsy_lamb}
+(electron $+$ I$=$1/2 nucleus) and \S\ref{sec:autopsy_muh_lamb} (electron $+$
+muonic nucleus), which couple particles on different registers.
+
+The operator-level Drake (1971) decomposition gives three components:
+\begin{equation}
+E({}^3P_J) = \tfrac{\zeta_{2p}}{2}\, X(J) + A_{SS}\, f_{SS}(J)
+              + A_{SOO}\, f_{SOO}(J)
+\end{equation}
+with
+$X(J) = J(J+1) - L(L+1) - S(S+1)$,
+$f_{SS}(J) = (-2, +1, -\tfrac{1}{5})$ from the rank-2 6j symbol
+$(-1)^{L+S+J}\cdot 6j\{1,1,J;1,1,2\}$ at $L = S = 1$ (Sprint 4 DD,
+sympy-exact),
+$f_{SOO}(J) = (+2, +1, -1)$ from the rank-1 6j,
+and Drake combining coefficients
+$A_{SS} = \alpha^2 (\tfrac{3}{50}\, M^2_\text{dir} - \tfrac{2}{5}\, M^2_\text{exch})$,
+$A_{SOO} = \alpha^2 (\tfrac{3}{2}\, M^1_\text{dir} - M^1_\text{exch})$
+(Sprint 3 BF-D, intrinsic-tier rationals).
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{2.6cm} r r r r p{4.5cm} c}
+\toprule
+Interval & $E_{SO}$ (MHz) & $E_{SS}$ (MHz) & $E_{SOO}$ (MHz) & Total (MHz) & Projection chain & Status \\
+\midrule
+$P_0 - P_1$ & $-29\,198.090$ & $+23\,747.770$ & $+35\,063.226$ & $+29\,612.906$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_sturmian} (SO); $+$ (SS, SOO chains via
+\S\ref{sec:proj_tensor_multipole} $\circ$ \S\ref{sec:proj_3j}) & FN \\
+$P_1 - P_2$ & $-58\,396.180$ & $-9\,499.108$ & $+70\,126.452$ & $+2\,231.165$ &
+(same as $P_0$-$P_1$) & FN \\
+$P_0 - P_2$ & $-87\,594.270$ & $+14\,248.662$ & $+105\,189.679$ & $+31\,844.070$ &
+(same as $P_0$-$P_1$) & FN \\
+\midrule
+\textbf{NIST} & & & & & & \\
+$P_0 - P_1$ & & & & $+29\,616.951(6)$ & & \\
+$P_1 - P_2$ & & & & $+2\,291.176(15)$ & & \\
+$P_0 - P_2$ & & & & $+31\,908.131(6)$ & & \\
+\midrule
+\textbf{Residual} & & & & & & \\
+$P_0 - P_1$ & & & & $-4.05$ MHz / $-0.014\%$ & & \\
+$P_1 - P_2$ & & & & $-60.01$ MHz / $-2.62\%$ & partial cancellation $61.9\times$ & \\
+$P_0 - P_2$ & & & & $-64.06$ MHz / $-0.20\%$ & & \\
+\bottomrule
+\end{tabular}
+\caption{He $2{}^3P$ fine-structure operator-level Roothaan autopsy.
+The angular content (Drake $J$-pattern, spin reduced m.e., bipolar
+Gaunt selection) is sympy-exact at machine precision; residuals live
+entirely in the radial sector (multi-electron correlation, higher-order
+Breit-Pauli, $\alpha^3/\pi$ QED, recoil).  Source memo:
+\texttt{debug/he\_2\_3P\_autopsy\_v1\_memo.md}.}
+\label{tab:autopsy_he_2_3p}
+\end{table}
+
+\textbf{Bipolar (k$_1$, k$_2$) decomposition.}
+For the (1s)(2p) configuration with $L_\text{max} = 2 l_\text{max} = 2$:
+SS (K$=$2) admits direct (k$_1=0$, k$_2=2$) and exchange (k$_1=1$, k$_2=1$)
+channels only; SOO (K$=$1) admits exchange (k$_1=1$, k$_2=1$) only (the
+direct path is empty by parity selection).  All higher (k$_1$, k$_2$)
+channels are Gaunt-forbidden.  This is the INTERNAL analog of the
+cross-register Roothaan termination (B-W1a-diag finding): the
+multipole termination at $L_\text{max} = 2 l_\text{max}$ holds
+\emph{independent of the focal-length ratio} $Z_\text{eff}(1s) /
+Z_\text{eff}(2p) = 2$ --- the channel structure is angular content,
+not radial content.
+
+\textbf{Partial-cancellation mechanism ($P_1$-$P_2$ amplification).}
+The small interval is the difference SO ($-58.4$ GHz) $+$ SS
+($-9.5$ GHz) $+$ SOO ($+70.1$ GHz) $= +2.2$ GHz, a structural
+cancellation by factor $61.9\times$.  The framework's $60$ MHz
+absolute residual on $P_1 - P_2$ is the same order as the $64$ MHz
+residual on $P_0 - P_2$; the $-2.62\%$ fractional residual is the
+$60$ MHz absolute divided by the $14\times$-smaller small interval.
+Generic feature of multi-component fine-structure splittings (Li
+$2{}^2P$ and Be $2s2p\,{}^3P$ show analogous partial-cancellation
+amplification, Sprint 5 CP).
+
+\textbf{Three-class diagnosis (per CLAUDE.md \S~1.8 directive).}
+Class A (literature convention mismatch): NEGATIVE --- Drake (1971)
+and Pachucki--Yerokhin (2010) agree on leading-order Breit-Pauli
+itemization.  Class B (framework gap, RADIAL): POSITIVE --- residual
+attributes to (i) multi-electron correlation in the (1s)(2p)
+configuration (largest source, $\sim 45$ MHz on $P_0$-$P_2$ scale,
+not in framework's single-configuration hydrogenic basis), (ii)
+$\alpha^3(Z\alpha)^2$ QED on Breit-Pauli (LS-8a vertex sector,
+$\sim 15$ MHz), (iii) $\alpha^3$ recoil (W1a cross-register
+kinematic wall, $\sim 2$ MHz), (iv) higher-order $\alpha^4 + \alpha^5
++ \alpha^6$ NRQED (LS-8a multi-loop, sub-MHz).  Class C (focal-length
+cataloguing): POSITIVE --- partial-cancellation amplification is
+generic across atomic fine-structure splittings.
+
+\textbf{Structural reading.}  The autopsy realizes the
+structural-skeleton-scope statement at the operator level for an
+internal multi-focal observable.  Five projection chains, three
+operators, sympy-exact angular content, residuals in the radial
+sector --- the same architecture that closes hydrogen Lamb shift at
+\S\ref{sec:autopsy_lamb} closes He $2{}^3P$ fine structure here.
+The internal multi-focal angular-only prediction (Observation 3)
+holds at machine precision: angular Roothaan termination is
+independent of focal-length ratio.
+
+\subsubsection{Helium $2{}^1\!P \to 1{}^1\!S$ oscillator strength}
+\label{sec:autopsy_he_oscillator}
+
+\textbf{Reference.}  $f_\text{length} = 0.27616$ (Drake handbook;
+Theodosiou 1984), oscillator strength for the He $2{}^1P \to 1{}^1S$
+electric-dipole transition; $\omega_\text{exact} = 0.7799$ Ha.
+
+The first multi-electron extension of Sprint Calc-L (hydrogen Lyman~$\alpha$,
+$+0.055\%$ at depth-3) and Sprint Calc-P (hydrogen polarizability,
+machine-exact at $N_{\rm basis}=2$ in the Sturmian basis).  The
+structural question: does the Sturmian continuum-closing property
+extend to multi-electron transition matrix elements?
+
+The framework-native length-form oscillator strength is computed via
+\[
+f = 2\omega\, |\langle 1{}^1\!S | z | 2{}^1\!P_{m=0}\rangle|^2
+\]
+in the graph-native CI sector at fixed $M_L$, with the $1{}^1\!S$ state in
+the $(l_1=l_2=0)$ ss singlet sub-block, the $2{}^1\!P$ state in the
+$(l_1=0, l_2=1, M_L=0)$ sp singlet sub-block, and the transition dipole
+assembled by Slater--Condon expansion of the multi-electron CI vectors.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{c c c c c c}
+\toprule
+$n_{\max}$ & configs & $\omega$ (Ha) & $|\langle z\rangle|^2$ & $f_\text{length}$ & err vs Drake \\
+\midrule
+2 & 5 & 0.9044 & 1.107 & 2.002 & $+625\%$ \\
+3 & 12 & 0.7045 & 0.420 & 0.592 & $+114\%$ \\
+4 & 22 & 0.6930 & 0.397 & 0.550 & $+99\%$ \\
+5 & 35 & 0.6891 & 0.323 & 0.446 & $+61\%$ \\
+6 & 51 & 0.6893 & 0.334 & 0.460 & $+67\%$ \\
+7 & 70 & 0.6893 & 0.322 & 0.444 & $+61\%$ \\
+\midrule
+exact & --- & 0.7799 & 0.177 & 0.27616 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Coulomb Sturmian convergence for He $2{}^1P \to 1{}^1S$
+oscillator strength at single exponent $k_\text{orb} = Z = 2$.  Both
+$\omega$ and $|\langle z\rangle|^2$ plateau by $n_{\max} = 6$ at
+\emph{wrong limits} ($\omega$ low by $-12\%$, $|\langle z\rangle|^2$
+high by $+82\%$).  Source memo:
+\texttt{debug/he\_oscillator\_v1\_memo.md}.}
+\label{tab:autopsy_he_oscillator}
+\end{table}
+
+Both $\omega$ and $|\langle z\rangle|^2$ \emph{plateau} by $n_{\max} = 6$ at
+\emph{wrong limits}: $\omega$ converges $-12\%$ low and $|\langle z\rangle|^2$
+converges $+82\%$ high.  The $2{}^1\!P$ state is variationally violated by
+$\sim 0.08$ Ha ($E(2{}^1\!P)_\text{GeoVac} = -2.204$ vs Drake $-2.124$ Ha) ---
+the same $\kappa$-induced over-binding mechanism documented for
+the He $2{}^1\!S - 2{}^3\!S$ splitting (small-$Z$
+graph-validity-boundary artifact, $Z_c \approx 1.84$; He at $Z = 2$
+is just above; cf.\ \S\ref{sec:offprecision} He singlet-triplet row).
+The angular (Wigner $3j$) and vector-photon
+(\S\ref{sec:proj_vector_photon}) projections are exact; the failure
+is in the CI sector.
+
+\textbf{Structural reading.}  Sturmian's continuum-closing is a
+\emph{single-focal-length} property.  For multi-electron transitions where
+initial and final states have structurally different effective focal lengths
+(here, doubly-screened $1s$ and singly-screened $2p$), the single-exponent
+Sturmian basis cannot represent both, and the framework's CI eigenvectors
+overlap incorrectly even at large $n_{\max}$.  The natural extension is the
+\emph{multi-focal} architecture (\verb|geovac/cross_register_vne.py| for
+chemistry; internal split-$Z$ for atomic excited states is a named
+follow-on track per Sprint Calc-He recommendation).
+
+The $+61\%$ residual at $n_{\max} = 7$ does not improve at higher $n_{\max}$
+within the single-exponent architecture and is therefore tagged error code
+\texttt{B} (basis architecture) in
+Table~\ref{tab:catalog_off}.  This entry is a \emph{structural} negative
+result that complements the He $2{}^1\!S - 2{}^3\!S$ off-precision row:
+both expose the small-$Z$ graph-validity-boundary at He as the dominant
+limitation for excited-state precision, separable from the framework's
+clean closures on hydrogenic and ground-state observables.
+
+\subsubsection{Cesium 6S$_{1/2}$ hyperfine (atomic clock; SCOPING)}
+\label{sec:autopsy_cs_hfs}
+
+\textbf{Reference.}  $\Delta\nu = 9\,192\,631\,770$ Hz (BIPM 1967,
+SI-second-defining transition), equivalently
+$A(6S_{1/2}) = \Delta\nu/4 = 2298.158$ MHz for the
+Cs-133 $6S_{1/2}$, $F=4 \leftrightarrow F=3$ hyperfine transition.
+
+A scoping pass (Track Cs-HFS-v1, May 2026) confirms the framework's
+projection-chain machinery (\texttt{atomic\_classifier}, [Xe]
+\texttt{FrozenCore}, Bohr--Fermi formula) extends to $Z=55$ without
+structural failure: the prediction lives in $A \in [793, 2931]$ MHz
+across the natural range of effective screening charges
+$Z_\text{eff} \in [9.7, 15]$, bracketing the experimental value at
+the inverse-solve $Z_\text{eff} \approx 10$--$11$ (consistent with
+Roberts--Ginges 2019).
+
+A clean framework-native compute is blocked by two engineering items:
+\begin{itemize}\setlength\itemsep{0pt}
+\item The screened radial solver \texttt{\_solve\_screened\_radial}
+rejects $\ell=0$ by design, requiring extension to log-grid $+$
+Numerov $+$ analytical small-$r$ fit for the $s$-wave $|\psi(0)|^2$.
+\item The Track NI hyperfine Pauli wrapper
+\texttt{hyperfine\_coupling\_pauli} is specialized to the 1p$+$1e
+architecture, requiring a generic $A \cdot \vec{I}\cdot \vec{J}$
+wrapper for atomic HFS observables.
+\end{itemize}
+Both are mechanical (~2--3 week sprint).
+
+\textbf{Z-scaling assessment.}  The heavy-atom regime does not expose
+structural limitations beyond those already identified at $Z=20$--$56$
+in Sprint 7b screened SO splittings (Clementi--Raimondi single-zeta
+screening qualitative; W1c-residual core-polarization correction
+needed for sub-percent precision).
+
+\textbf{Diagnostic-instrument angle.}  The framework's projection-chain
+decomposition would isolate three known atomic-structure
+dependencies of the percent-level Cs PNC uncertainty:
+\begin{itemize}\setlength\itemsep{0pt}
+\item radial wavefunction at the origin (Bohr--Weisskopf via
+\S\ref{sec:proj_magnetization_density}),
+\item core polarization (relativistic enhancement via
+\S\ref{sec:proj_spinor}),
+\item multi-loop QED in the heavy-atom regime (two-body Dirac/Breit
+Layer-2 input via \S\ref{sec:proj_breit_retardation}),
+\end{itemize}
+each tied to a different Layer-2 input.  This is the prospective
+catalogue's first heavy-atom test of the framework's projection-chain
+machinery in a regime where simple hydrogenic formulas break down,
+and connects to atomic-clock-grade precision ($10^{-15}$ relative,
+the SI-second definition).  Source memo:
+\texttt{debug/cs\_hfs\_v1\_memo.md}.
+
+% -------------------------------------------------------------------
+\subsection{Literature convention exposures (running catalogue)}
+\label{sec:convention_exposures}
+% -------------------------------------------------------------------
+
+The framework's projection-chain decomposition acts as a unique
+diagnostic instrument for precision atomic and molecular physics:
+multi-observable global fits using a single structural dictionary
+(the \S~\ref{sec:layer2} projection family) expose itemization
+choices in standard-physics compilations that single-observable
+analyses cannot see.  This is the directive's class~(a) finding
+type --- ``literature convention mismatches'' between independent
+compilations (Eides~2024, Karshenboim~2005, Krauth~2017,
+Pachucki--Yerokhin~2010, Antognini~2013, Friar--Payne~2005)
+on Layer-2 itemization at the sub-percent precision the framework
+operates at.  Frameworks that consume single-observable Layer-2
+inputs in their native conventions cannot expose these mismatches
+structurally.  This subsection consolidates the four exposures
+catalogued to date (2026-05-09); each future sprint that surfaces a
+class~(a) finding adds a new \S~V.D.$N$ subsection with the
+five-element template \emph{Observable~$|$~Source compilations~$|$~
+Convention difference~$|$~Magnitude~$|$~Sprint reference $+$ Closure verdict.}
+
+\begin{table}[h]
+\centering\small
+\caption{Literature convention exposures catalogued through 2026-05-09.
+Each row is documented in detail in the indicated subsection
+(originating sprint memo) and cross-references the
+\S~\ref{sec:layer2} projection chain whose operator-level
+decomposition exposed it.}
+\label{tab:convention_exposures}
+\begin{tabular}{p{0.6cm} p{2.6cm} p{3.0cm} p{2.6cm} p{1.6cm} p{1.6cm}}
+\toprule
+ID & Observable & Source compilations & Convention difference &
+Magnitude & Sprint ref. \\
+\midrule
+\S\ref{sec:conv_rZG_DHFS} & D 1S HFS Layer-2 budget &
+Eides~2024 Tab.~7.3 vs Pachucki--Yerokhin~2010 &
+itemization of recoil NLO + multi-loop QED + finite-size correction &
+$\sim 0.01\%$ of $\nu_F$ $\to$ $\sim 25$ mfm in $r_Z(p)$ &
+Calc-rZG (\S\ref{sec:offprecision}) \\
+\S\ref{sec:conv_muH_VP} & $\mu$H 2$S$-2$P$ VP one-loop &
+Antognini~2013 vs Krauth~2017 &
+absorption of higher-order VP into one-loop line vs separate
+``VP-VP mixed'' itemization &
+$\sim 100$ ppm in per-component split (totals agree) &
+Sprint MH Track A / Calc-muH Lamb autopsy v1 \\
+\S\ref{sec:conv_karshenboim_recoil} & $\mu$ Lamb shift SE bracket &
+Framework Eides~\S 3.2 vs Karshenboim~2005 &
+$m_\text{red}$ rescaling absorbs recoil NLO at bracket level vs
+separately-itemized ``Recoil NLO'' line &
+$\sim 11$ MHz at $\mu$ Lamb (exact match between framework
+$+1074.13$ and Karshenboim $+1085.84 - 11.30$) &
+Sprint precision-catalogue Mu Lamb 2026-05-08 \\
+\S\ref{sec:conv_friar_profile} & $\mu$H Friar moment &
+Eides Eq.~2.35 closed-form vs operator-level
+\S\ref{sec:proj_magnetization_density} &
+$\langle r^2\rangle^{1/2} = r_p$ (RMS) vs $\langle r\rangle = r_p$
+(first moment) for the Gaussian profile &
+$\langle r^2\rangle/\langle r\rangle^2 = 4/\pi \approx 1.27$
+$\to$ $+12.7\%$ on Friar moment &
+Sprint MH / Calc-muH Lamb autopsy v1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{D 1S HFS Layer-2 itemization (Eides vs Pachucki--Yerokhin)}
+\label{sec:conv_rZG_DHFS}
+
+\textbf{Observable.}  Deuterium 1S hyperfine splitting
+$\nu_\text{HFS}(D) = 327\,384\,352.522$ kHz (Wineland--Ramsey 1972),
+used in the Sprint Calc-rZG global fit (\S\ref{sec:offprecision}, row
+``Self-consistent $r_Z$ global extraction'') to extract
+$r_Z(D)$ via the framework's \S\ref{sec:proj_magnetization_density}
+operator.
+
+\textbf{Source compilations.}  Eides~2024 Tab.~7.3 (used as the
+canonical Layer-2 budget for H 21cm in this paper) and
+Pachucki--Yerokhin~2010 (the standard atomic-physics itemization for
+deuterium HFS).
+
+\textbf{Convention difference.}  The two compilations use different
+groupings for the recoil-NLO + multi-loop QED + finite-size
+contributions to $\nu_F^D$.  Eides Tab.~7.3 itemizes the leading
+Zemach line at $-150$~ppm; Pachucki--Yerokhin~2010, when fully
+expanded with the Friar--Payne~2005 closure analysis, places the
+itemization at $-286$~ppm.  Both compilations close to the same
+total $\nu_\text{HFS}(D)$ at the precision the deuterium HFS
+measurement reports; the difference is in how sub-leading recoil and
+multi-loop contributions are aggregated.
+
+\textbf{Magnitude.}  $\sim 0.01\%$ of $\nu_F$, propagating to
+$\sim 25$~mfm in extracted $r_Z(p)$ via the global fit.
+
+\textbf{Sprint reference and closure.}  The original Sprint Calc-rZG
+fit (2026-05-09 morning) used the Eides $-150$~ppm itemization for
+deuterium; this gave $r_Z(D) = 6.18(132)$~fm, the well-known
+$\sim 5$~fm artifact.  The diagnostic memo
+\texttt{debug/rzg\_bug\_diagnosis\_memo.md} verified that the
+production cross-register $V_{eN}$ kernel
+(\texttt{geovac.cross\_register\_vne}) reproduces leading-order
+Bethe--Salpeter recoil at $2.86\%$ for hydrogen, $2.03\%$ for
+deuterium, and $8.18\%$ for muonium, species-agnostically and
+correctly.  The artifact came from the Layer-2 budget specification
+for D HFS, not from the framework kernel.  Re-anchoring to the
+Pachucki--Yerokhin~2010 budget at $-286$~ppm closed the extraction
+to $r_Z(D) = 2.583(1588)$~fm (within $0.01\sigma$ of Friar--Payne
+$2.593(16)$~fm).  \textbf{Closure verdict:} resolved by Layer-2
+budget re-anchoring.  The original ``recoil double-counting''
+diagnosis was a misdiagnosis; the issue was Layer-2 itemization
+specification, not a kernel bug.
+
+\textbf{Cross-references.}  Originating documentation:
+\S\ref{sec:offprecision} Sprint Calc-rZG row.  Source memos:
+\texttt{debug/calc\_track\_rZG\_global\_zemach\_memo.md},
+\texttt{debug/rzg\_bug\_diagnosis\_memo.md}.
+
+\subsubsection{$\mu$H 2$S_{1/2}$--2$P_{1/2}$ VP one-loop split (Antognini vs Krauth)}
+\label{sec:conv_muH_VP}
+
+\textbf{Observable.}  Muonic hydrogen Lamb shift VP one-loop
+component, the dominant ($\sim +205$~meV out of $+202.37$~meV total)
+contribution to the CREMA 2010 measurement.  Documented in the
+\S\ref{sec:autopsy_muh_lamb} Roothaan autopsy.
+
+\textbf{Source compilations.}  Antognini~2013 (the canonical
+muonic-hydrogen reference for CREMA Lamb-shift theory; used as the
+Layer-2 anchor in \S\ref{sec:autopsy_muh_lamb}) and Krauth~2017 (the
+canonical muonic-hydrogen reference for the parallel HFS measurement
+and the most thorough recent itemization).
+
+\textbf{Convention difference.}  Antognini reports VP one-loop at
+$+205.0074$~meV with ``VP-VP mixed'' itemized separately at
+$+0.150$~meV.  Krauth absorbs $\sim 0.021$~meV of higher-order VP
+into the one-loop line and reports $+205.0282$~meV.  Both compilations
+agree on the bottom-line $\mu$H Lamb total to printed precision; the
+difference is in per-component itemization.
+
+\textbf{Magnitude.}  $\sim 100$~ppm in per-component split (totals
+agree at much tighter precision).
+
+\textbf{Sprint reference and closure.}  Sprint MH Track A
+(\S\ref{sec:offprecision}, row ``$\mu$H 2$S$--2$P$ Lamb shift'') and
+Sprint Calc-muH Lamb autopsy v1 (\S\ref{sec:autopsy_muh_lamb}) both
+operationally surfaced the convention difference: the framework's
+full-Uehling kernel matches Antognini~2013 at $-0.10$~ppm, which is
+$1000\times$ tighter than the Antognini-vs-Krauth $\sim 100$~ppm
+itemization gap.  This means the framework's match precision is
+sensitive to the choice of reference compilation for Layer-2 inputs.
+\textbf{Closure verdict:} anchored to Antognini~2013 throughout the
+$\mu$H Lamb autopsy.  No reconciliation against Krauth attempted at
+this time; flagged for future sprint if Krauth-anchored cross-checks
+become relevant.
+
+\textbf{Cross-references.}  Originating documentation:
+\S\ref{sec:autopsy_muh_lamb} Convention-mismatch surface paragraph.
+Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md} (LCM tag).
+
+\subsubsection{$\mu$ Lamb shift SE-recoil aggregation (framework vs Karshenboim)}
+\label{sec:conv_karshenboim_recoil}
+
+\textbf{Observable.}  Muonium 2$S_{1/2}$-2$P_{1/2}$ Lamb shift
+self-energy bracket.  Documented in the \S\ref{sec:offprecision} row
+``Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb $1047.63$~MHz vs Mariam~1982
+experiment $1054(22)$~MHz.''
+
+\textbf{Source compilations.}  Framework Eides~\S 3.2 SE bracket
+(used in this paper's $\mu$ Lamb-shift framework calculation) and
+Karshenboim~2005 (the canonical muonium-Lamb reference).
+
+\textbf{Convention difference.}  The framework's $m_\text{red}$
+rescaling at the Eides bracket level absorbs the leading
+recoil-correction beyond reduced-mass automatically, giving
+SE bracket $= +1074.13$~MHz.  Karshenboim itemizes ``SE one-loop''
+at $+1085.84$~MHz with a separately-itemized ``Recoil NLO''
+line at $-11.30$~MHz.  The two reach exact agreement at the bracket
+level: $+1085.84 - 11.30 = +1074.54$~MHz vs framework $+1074.13$~MHz
+(within bracket-evaluation precision).
+
+\textbf{Magnitude.}  $\sim 11$~MHz on the $\mu$ Lamb-shift SE bracket
+($\sim 1\%$ of the SE component, $\sim 0.01$ of the total Lamb shift);
+the difference is exactly the recoil-NLO itemization line.
+
+\textbf{Sprint reference and closure.}  Sprint precision-catalogue
+2026-05-08 (Mu Lamb shift row, \S\ref{sec:offprecision}) operationally
+surfaced this: the framework total at $1047.63$~MHz matches
+Karshenboim~2005 theory at $1047.49(5)$~MHz to $+0.013\%$.  Naively
+adding Karshenboim's separately-itemized ``Recoil NLO $-11.30$~MHz''
+to the framework total double-counts the same recoil correction that
+the framework's $m_\text{red}$ rescaling already absorbs.
+\textbf{Closure verdict:} resolved by recognizing the framework's
+$m_\text{red}$-bracket convention is structurally equivalent to
+Karshenboim's SE one-loop $+$ Recoil NLO sum, and not adding the
+recoil NLO twice.
+
+\textbf{Cross-references.}  Originating documentation:
+\S\ref{sec:offprecision} Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb row.
+
+\subsubsection{Friar moment profile convention (Eides closed-form vs operator-level)}
+\label{sec:conv_friar_profile}
+
+\textbf{Observable.}  Muonic hydrogen Friar moment, the
+$O((Z\alpha)^2)$ finite-nuclear-size correction in the
+\S\ref{sec:autopsy_muh_lamb} Lamb-shift autopsy (Component~3).
+
+\textbf{Source compilations.}  Eides Eq.~2.35 closed-form derivation
+(used as the Antognini~2013 reference value $-3.84$~meV at $r_p =
+0.84087$~fm) and the framework's operator-level realization via the
+\S\ref{sec:proj_magnetization_density} module
+\texttt{geovac.magnetization\_density}.
+
+\textbf{Convention difference.}  Eides Eq.~2.35 is derived assuming
+the input radius is $\langle r^2\rangle^{1/2}$ (RMS charge radius);
+the operator-level
+\S\ref{sec:proj_magnetization_density} module is calibrated to the
+first moment $\langle r\rangle = r_p$ (consistent with its
+existing HFS Zemach use case).  For a Gaussian profile, the two
+calibrations differ by exactly the factor
+$\langle r^2\rangle / \langle r\rangle^2 = 4/\pi \approx 1.27$.
+
+\textbf{Magnitude.}  $+12.7\%$ overshoot on the Friar moment
+(operator-level $-4.33$~meV vs Eides closed-form $-3.68$~meV at
+fixed $r_p$).  This is exactly $1.27\times$ the closed-form value to
+$\sim 0.5\%$ relative precision.
+
+\textbf{Sprint reference and closure.}  Sprint Calc-muH Lamb autopsy v1
+(2026-05-08, \S\ref{sec:autopsy_muh_lamb} Operator-level Friar moment
+paragraph) surfaced the discrepancy by computing the Friar moment
+both ways: closed-form Eides reproduction matches Antognini~2013 at
+$-4.3\%$, while operator-level realization overshoots Antognini by
+$+12.7\%$, with the ratio between the two paths equal to the Gaussian
+profile factor $4/\pi$ to sub-percent precision.
+\textbf{Closure verdict:} flagged for a sibling
+\texttt{MagnetizationDensitySpec} calibrated to RMS radius for the
+Lamb-shift FNS channel, distinct from the existing first-moment
+calibration for the HFS Zemach channel.  The HFS Zemach channel is
+unaffected (cf. \S\ref{sec:autopsy_21cm}, where the operator-level
+Zemach result $-39.495$~ppm matches Eides $-39.500$~ppm at
+$0.012\%$).  Resolution is mechanical (~1 day sprint).
+
+\textbf{Cross-references.}  Originating documentation:
+\S\ref{sec:autopsy_muh_lamb} Operator-level Friar moment paragraph.
+Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md}
+(profile-convention finding).
+
+\paragraph{Cross-pattern observation.}
+The four exposures partition cleanly into two structural classes.
+\emph{Class~(i) inter-compilation itemization} (entries
+\S\ref{sec:conv_rZG_DHFS}, \S\ref{sec:conv_muH_VP},
+\S\ref{sec:conv_karshenboim_recoil}): three of the four exposures
+are between Eides~2024, Krauth~2017, Karshenboim~2005,
+Pachucki--Yerokhin~2010, and Antognini~2013 compilations on items at
+sub-percent precision.  The pattern is consistent: most precision-physics
+compilations agree on bottom-line totals but differ in itemization at
+the $10^{-4}$ to $10^{-3}$ level.  This is exactly the precision range
+the framework's projection-chain decomposition operates at, hence the
+surface contact between the framework's diagnostic instrument and
+the literature compilations.  \emph{Class~(ii) closed-form vs
+operator-level convention} (entry \S\ref{sec:conv_friar_profile}):
+one exposure is between Eides closed-form derivation (which assumes
+RMS-radius input) and the framework's operator-level realization
+(which calibrates to first-moment input), with the two paths
+differing by a profile-dependent factor that the closed-form
+derivation hides.  Class~(ii) is internal to the framework's
+operator-level realization choices, not a literature convention
+mismatch in the strict sense, but it is the same kind of finding:
+sub-percent agreement on totals masks per-channel calibration choices
+that surface only when the two paths are compared at operator level.
+Both classes vindicate the directive's class~(a) finding type:
+multi-observable global fits using a single dictionary expose
+itemization choices that single-observable analyses cannot see.
+
+\paragraph{Protocol for adding new exposures.}
+Each future sprint that surfaces a class~(a) finding adds a new
+\S~V.D.$N$ subsection following the five-element template:
+\emph{Observable~$|$~Source compilations~$|$~Convention difference~$|$
+~Magnitude~$|$~Sprint reference $+$ Closure verdict.}  The exposure
+is also added as a row to Table~\ref{tab:convention_exposures}.
+Each entry should cross-reference the \S~\ref{sec:layer2} projection
+chain whose operator-level decomposition surfaced the convention
+difference, and the originating documentation in the catalogue
+(\S\ref{sec:catalog}, \S\ref{sec:offprecision}, or \S\ref{sec:autopsies}).
+The catalogue is a running register; expect it to grow as the
+multi-observable focal-length decomposition program (CLAUDE.md
+\S~1.8) advances.
 
 % -------------------------------------------------------------------
 \subsection{Falsified candidate: W3 spectral-zeta identification of

@@ -19,6 +19,7 @@ from geovac.neon_core import (
     FrozenCore, _NIST_CORE_ENERGIES,
     _solve_screened_radial, screened_r3_inverse, screened_so_splitting,
     screened_xi_so,
+    _solve_screened_radial_log, screened_psi_origin_squared,
 )
 
 
@@ -388,4 +389,183 @@ class TestScreenedSOSplitting:
         assert 100 < result['splitting_cm1'] < 5000, (
             f"Ba 6p splitting {result['splitting_cm1']:.1f} cm^-1 "
             f"outside expected range"
+        )
+
+
+# ---------------------------------------------------------------------------
+# A1: l=0 extension of _solve_screened_radial (Sprint Cs-HFS-v2)
+# ---------------------------------------------------------------------------
+
+class TestL0ExtensionOfScreenedRadial:
+    """Sprint Cs-HFS-v2 A1: l=0 must be supported via allow_l0=True."""
+
+    def test_l0_default_still_raises(self):
+        """Backward compat: default behavior rejects l=0."""
+        with pytest.raises(ValueError, match="l must be >= 1"):
+            _solve_screened_radial(11, 0, 3)
+        with pytest.raises(ValueError, match="l must be >= 1"):
+            _solve_screened_radial(55, 0, 6)
+
+    def test_l0_allowed_with_flag(self):
+        """allow_l0=True bypasses the Kramers exclusion."""
+        # Should not raise
+        energy, u, r = _solve_screened_radial(
+            55, 0, 6, allow_l0=True, n_grid=8000
+        )
+        assert energy < 0, f"Cs 6s should be bound, got E={energy}"
+        # Cs 6s ionization potential ~ 3.89 eV; FrozenCore is qualitative,
+        # expect E in the range -0.05 to -0.20 Ha = -1.4 to -5.4 eV
+        E_eV = energy * 27.211
+        assert -10.0 < E_eV < 0.0, (
+            f"Cs 6s eigenvalue {E_eV:.4f} eV outside reasonable range"
+        )
+
+    def test_negative_l_raises(self):
+        """l < 0 always raises (regardless of allow_l0)."""
+        with pytest.raises(ValueError, match="non-negative"):
+            _solve_screened_radial(11, -1, 3, allow_l0=True)
+
+    def test_l0_normalization(self):
+        """l=0 wavefunction is normalized."""
+        _, u, r = _solve_screened_radial(
+            55, 0, 6, allow_l0=True, n_grid=8000
+        )
+        norm = np.trapezoid(u**2, r)
+        assert abs(norm - 1.0) < 1e-3, f"norm = {norm}"
+
+    def test_l1_unchanged_with_allow_l0(self):
+        """allow_l0=True does not change l>=1 behavior (backward compat)."""
+        e1, u1, r1 = _solve_screened_radial(11, 1, 3, n_grid=8000)
+        e2, u2, r2 = _solve_screened_radial(
+            11, 1, 3, n_grid=8000, allow_l0=True,
+        )
+        assert e1 == pytest.approx(e2, rel=1e-12), (
+            "allow_l0 changes l=1 result"
+        )
+        # Wavefunctions equal up to global sign
+        max_diff = min(np.max(np.abs(u1 - u2)), np.max(np.abs(u1 + u2)))
+        assert max_diff < 1e-10, (
+            f"allow_l0 changes l=1 wavefunction (max diff {max_diff})"
+        )
+
+
+# ---------------------------------------------------------------------------
+# A2: log-grid (dense uniform) solver for s-wave |psi(0)|^2
+# ---------------------------------------------------------------------------
+
+class TestScreenedRadialLogSolver:
+    """Sprint Cs-HFS-v2 A2: dense-grid solver for s-wave |R(0)|^2."""
+
+    def test_hydrogen_1s_psi_origin_converges(self):
+        """Hydrogen 1s |psi(0)|^2 = 1/pi to within 1% at n_grid=100k."""
+        z_const = lambda r: np.full_like(np.atleast_1d(r), 1.0)
+        _, _, _, R0 = _solve_screened_radial_log(
+            Z=1, l=0, n_target=1, n_grid=100000,
+            r_max=40.0,
+            z_eff_callable=z_const, Z_origin=1.0,
+        )
+        psi0_sq = R0**2 / (4.0 * np.pi)
+        expected = 1.0 / np.pi
+        rel_err = abs(psi0_sq - expected) / expected
+        assert rel_err < 0.01, (
+            f"H 1s |psi(0)|^2 = {psi0_sq:.5f} vs exact {expected:.5f}, "
+            f"rel err {rel_err:.5f}"
+        )
+
+    def test_hydrogen_1s_eigenvalue(self):
+        """Hydrogen 1s eigenvalue = -0.5 Ha to 0.01% at n_grid=100k."""
+        z_const = lambda r: np.full_like(np.atleast_1d(r), 1.0)
+        energy, _, _, _ = _solve_screened_radial_log(
+            Z=1, l=0, n_target=1, n_grid=100000,
+            r_max=40.0,
+            z_eff_callable=z_const, Z_origin=1.0,
+        )
+        assert abs(energy + 0.5) < 1e-4, (
+            f"H 1s eigenvalue {energy:.6f} != -0.5 Ha"
+        )
+
+    def test_hydrogen_6s_psi_origin_converges(self):
+        """Hydrogen 6s |psi(0)|^2 = 1/(216*pi) to within 1%."""
+        z_const = lambda r: np.full_like(np.atleast_1d(r), 1.0)
+        _, _, _, R0 = _solve_screened_radial_log(
+            Z=1, l=0, n_target=6, n_grid=100000,
+            r_max=200.0,
+            z_eff_callable=z_const, Z_origin=1.0,
+        )
+        psi0_sq = R0**2 / (4.0 * np.pi)
+        expected = 1.0 / (216.0 * np.pi)
+        rel_err = abs(psi0_sq - expected) / expected
+        assert rel_err < 0.02, (
+            f"H 6s |psi(0)|^2 = {psi0_sq:.6f} vs exact {expected:.6f}, "
+            f"rel err {rel_err:.5f}"
+        )
+
+    def test_psi_origin_zero_for_l_geq_1(self):
+        """R(0) = 0 identically for l>=1."""
+        z_const = lambda r: np.full_like(np.atleast_1d(r), 1.0)
+        _, _, _, R0 = _solve_screened_radial_log(
+            Z=1, l=1, n_target=2, n_grid=20000,
+            r_max=40.0,
+            z_eff_callable=z_const, Z_origin=1.0,
+        )
+        assert R0 == 0.0, f"l=1 should give R(0)=0, got {R0}"
+
+    def test_cs_6s_with_frozencore_works(self):
+        """Cs 6s via FrozenCore is computable and gives finite |psi(0)|^2."""
+        _, _, _, R0 = _solve_screened_radial_log(
+            Z=55, l=0, n_target=6, n_grid=100000,
+            r_max=80.0,
+        )
+        psi0_sq = R0**2 / (4.0 * np.pi)
+        # Roberts-Ginges Z_eff=9.7 gives |psi(0)|^2 ~ 1.34 bohr^-3
+        # FrozenCore at Clementi-Raimondi screening is in this ballpark
+        assert 0.5 < psi0_sq < 5.0, (
+            f"Cs 6s |psi(0)|^2 = {psi0_sq:.4f} outside reasonable range "
+            f"[0.5, 5.0]"
+        )
+
+    def test_screened_psi_origin_squared_wrapper(self):
+        """screened_psi_origin_squared wrapper matches the underlying solver."""
+        psi_sq = screened_psi_origin_squared(
+            Z=55, n=6, l=0, n_grid=50000,
+        )
+        _, _, _, R0 = _solve_screened_radial_log(
+            Z=55, l=0, n_target=6, n_grid=50000,
+        )
+        psi_sq_direct = R0**2 / (4.0 * np.pi)
+        assert psi_sq == pytest.approx(psi_sq_direct, rel=1e-12)
+
+    def test_screened_psi_origin_zero_for_l_geq_1(self):
+        """screened_psi_origin_squared gives 0 for l>=1."""
+        psi_sq = screened_psi_origin_squared(
+            Z=55, n=6, l=1, n_grid=20000,
+        )
+        assert psi_sq == 0.0
+
+    def test_invalid_n(self):
+        """n < l+1 raises ValueError."""
+        with pytest.raises(ValueError, match="no such state"):
+            _solve_screened_radial_log(55, 1, 1, n_grid=8000)
+
+    def test_negative_l_raises(self):
+        """l<0 raises."""
+        with pytest.raises(ValueError, match="non-negative"):
+            _solve_screened_radial_log(55, -1, 1, n_grid=8000)
+
+    @pytest.mark.slow
+    def test_grid_convergence(self):
+        """Cs 6s |psi(0)|^2 monotonically converges with grid refinement."""
+        psi_seq = []
+        for n_grid in [50000, 100000, 200000]:
+            _, _, _, R0 = _solve_screened_radial_log(
+                Z=55, l=0, n_target=6, n_grid=n_grid, r_max=60.0,
+            )
+            psi_seq.append(R0**2 / (4.0 * np.pi))
+        # Should be monotonically increasing (approaching infinite-grid limit
+        # from below as Frobenius extrapolation tightens)
+        assert psi_seq[1] > psi_seq[0], (
+            f"Not monotone: {psi_seq}"
+        )
+        assert psi_seq[2] > psi_seq[1], (
+            f"Not monotone: {psi_seq}"
         )

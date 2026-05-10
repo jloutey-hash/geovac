@@ -1,0 +1,196 @@
+{
+  "sprint": "Cs-HFS-v3 screening kernel upgrade",
+  "date": "2026-05-09",
+  "single_zeta": {
+    "sprint": "Cs-HFS-v3 (single_zeta kernel)",
+    "system": "Cs-133 6S_{1/2} hyperfine",
+    "experimental_A_MHz": 2298.1579425,
+    "I_Cs": 3.5,
+    "g_Cs": 0.7377214285714285,
+    "screening": "single_zeta",
+    "component_C2_psi_origin": {
+      "component": "C2: framework |psi_6s(0)|^2 (FrozenCore Z_eff)",
+      "method": "_solve_screened_radial_log (dense uniform grid)",
+      "core_type": "Xe (54e)",
+      "screening": "single_zeta",
+      "convergence": {
+        "50000": {
+          "energy_Ha": -0.054183725476531386,
+          "energy_eV": -1.4744142821884756,
+          "R0": -3.6869457845273503,
+          "psi0_squared_au": 1.0817418676567665,
+          "wall_time_s": 0.1405622959136963
+        },
+        "100000": {
+          "energy_Ha": -0.054192309800086116,
+          "energy_eV": -1.474647873532384,
+          "R0": -3.8876514925584873,
+          "psi0_squared_au": 1.202720705238644,
+          "wall_time_s": 0.24568533897399902
+        },
+        "200000": {
+          "energy_Ha": -0.054194476084894305,
+          "energy_eV": -1.4747068211450185,
+          "R0": -3.9883833069531263,
+          "psi0_squared_au": 1.2658548670374028,
+          "wall_time_s": 0.45627927780151367
+        },
+        "400000": {
+          "energy_Ha": -0.05419501926975389,
+          "energy_eV": -1.4747216019580356,
+          "R0": -4.0388631900214715,
+          "psi0_squared_au": 1.298100809558391,
+          "wall_time_s": 0.8785092830657959
+        }
+      },
+      "richardson_intercept_au": 1.3277924053836851,
+      "richardson_slope_au_per_inv_n": -12340.036587827666,
+      "psi_6s_origin_squared_au_extrap": 1.3277924053836851,
+      "psi_6s_origin_squared_au_n_grid_200k": 1.2658548670374028,
+      "energy_6s_eV_n_grid_200k": -1.4747068211450185,
+      "energy_6s_eV_NIST": -3.894,
+      "energy_rel_err_pct": -62.128741110811035
+    },
+    "component_C1_C3_C4": {
+      "component": "C1+C3+C4: Bohr-Fermi + Schwinger + relativistic",
+      "C1_bf_dirac": {
+        "A_Ha": 1.1899619041235703e-07,
+        "A_MHz": 782.9573206571798
+      },
+      "C3_schwinger": {
+        "A_Ha": 1.1913418460413274e-07,
+        "A_MHz": 783.8652788219291
+      },
+      "C4_relativistic_casimir": {
+        "F_R_casimir": 1.5552726325242259,
+        "A_Ha_with_F_R": 1.8528613691289664e-07,
+        "A_MHz_with_F_R": 1219.124215737718
+      }
+    },
+    "component_C5_zemach_BW": {
+      "delta_zemach_relative": -0.00010163228371827852,
+      "delta_zemach_MHz": -0.12390237818167955,
+      "bohr_weisskopf_relative": 0.012,
+      "bohr_weisskopf_MHz": 14.629490588852615,
+      "C5_total_MHz": 14.505588210670936
+    },
+    "component_L_multi_loop_qed": {
+      "multi_loop_estimate_relative": 0.0001,
+      "multi_loop_estimate_MHz": 0.12191242157377181
+    },
+    "summary": {
+      "A_C1_bf_dirac_MHz": 782.9573206571798,
+      "A_C3_with_schwinger_MHz": 783.8652788219291,
+      "A_C4_with_casimir_FR_MHz": 1219.124215737718,
+      "A_framework_native_total_MHz": 1219.124215737718,
+      "A_C5_zemach_correction_MHz": -0.12390237818167955,
+      "A_C5_bohr_weisskopf_correction_MHz": 14.629490588852615,
+      "A_L_multi_loop_qed_correction_MHz": 0.12191242157377181,
+      "A_framework_plus_layer2_total_MHz": 1233.7517163699629,
+      "A_experimental_MHz": 2298.1579425,
+      "residual_framework_native_MHz": -1079.033726762282,
+      "residual_framework_native_pct": -46.95211355179876,
+      "residual_framework_plus_layer2_MHz": -1064.406226130037,
+      "residual_framework_plus_layer2_pct": -46.315625503621675,
+      "energy_6s_eV": -1.4747068211450185,
+      "energy_6s_NIST_relerr_pct": -62.128741110811035,
+      "psi_6s_origin_squared_extrap": 1.3277924053836851
+    }
+  },
+  "multi_zeta": {
+    "sprint": "Cs-HFS-v3 (multi_zeta kernel)",
+    "system": "Cs-133 6S_{1/2} hyperfine",
+    "experimental_A_MHz": 2298.1579425,
+    "I_Cs": 3.5,
+    "g_Cs": 0.7377214285714285,
+    "screening": "multi_zeta",
+    "component_C2_psi_origin": {
+      "component": "C2: framework |psi_6s(0)|^2 (FrozenCore Z_eff)",
+      "method": "_solve_screened_radial_log (dense uniform grid)",
+      "core_type": "Xe (54e)",
+      "screening": "multi_zeta",
+      "convergence": {
+        "50000": {
+          "energy_Ha": -0.043006168238198764,
+          "energy_eV": -1.1702574548895677,
+          "R0": -1.6025105918827312,
+          "psi0_squared_au": 0.20435814571328395,
+          "wall_time_s": 0.1479952335357666
+        },
+        "100000": {
+          "energy_Ha": -0.043007849528018435,
+          "energy_eV": -1.1703032051162423,
+          "R0": -1.689774630147392,
+          "psi0_squared_au": 0.22722060237719355,
+          "wall_time_s": 0.2565426826477051
+        },
+        "200000": {
+          "energy_Ha": -0.04300827302772429,
+          "energy_eV": -1.1703147291303133,
+          "R0": -1.73356507161296,
+          "psi0_squared_au": 0.23915002587003528,
+          "wall_time_s": 0.4809424877166748
+        },
+        "400000": {
+          "energy_Ha": -0.04300837340136019,
+          "energy_eV": -1.1703174604360889,
+          "R0": -1.7555081239388106,
+          "psi0_squared_au": 0.2452425499605815,
+          "wall_time_s": 0.8859198093414307
+        }
+      },
+      "richardson_intercept_au": 0.2508539989526744,
+      "richardson_slope_au_per_inv_n": -2331.857917056086,
+      "psi_6s_origin_squared_au_extrap": 0.2508539989526744,
+      "psi_6s_origin_squared_au_n_grid_200k": 0.23915002587003528,
+      "energy_6s_eV_n_grid_200k": -1.1703147291303133,
+      "energy_6s_eV_NIST": -3.894,
+      "energy_rel_err_pct": -69.94569262634019
+    },
+    "component_C1_C3_C4": {
+      "component": "C1+C3+C4: Bohr-Fermi + Schwinger + relativistic",
+      "C1_bf_dirac": {
+        "A_Ha": 2.2481428651075814e-08,
+        "A_MHz": 147.9206946053965
+      },
+      "C3_schwinger": {
+        "A_Ha": 2.250749928884933e-08,
+        "A_MHz": 148.09223116155212
+      },
+      "C4_relativistic_casimir": {
+        "F_R_casimir": 1.5552726325242259,
+        "A_Ha_with_F_R": 3.500529767050584e-08,
+        "A_MHz_with_F_R": 230.32379421501335
+      }
+    },
+    "component_C5_zemach_BW": {
+      "delta_zemach_relative": -0.00010163228371827852,
+      "delta_zemach_MHz": -0.023408333200730637,
+      "bohr_weisskopf_relative": 0.012,
+      "bohr_weisskopf_MHz": 2.763885530580161,
+      "C5_total_MHz": 2.7404771973794304
+    },
+    "component_L_multi_loop_qed": {
+      "multi_loop_estimate_relative": 0.0001,
+      "multi_loop_estimate_MHz": 0.02303237942150134
+    },
+    "summary": {
+      "A_C1_bf_dirac_MHz": 147.9206946053965,
+      "A_C3_with_schwinger_MHz": 148.09223116155212,
+      "A_C4_with_casimir_FR_MHz": 230.32379421501335,
+      "A_framework_native_total_MHz": 230.32379421501335,
+      "A_C5_zemach_correction_MHz": -0.023408333200730637,
+      "A_C5_bohr_weisskopf_correction_MHz": 2.763885530580161,
+      "A_L_multi_loop_qed_correction_MHz": 0.02303237942150134,
+      "A_framework_plus_layer2_total_MHz": 233.08730379181426,
+      "A_experimental_MHz": 2298.1579425,
+      "residual_framework_native_MHz": -2067.8341482849864,
+      "residual_framework_native_pct": -89.97789534149855,
+      "residual_framework_plus_layer2_MHz": -2065.070638708186,
+      "residual_framework_plus_layer2_pct": -89.85764644451481,
+      "energy_6s_eV": -1.1703147291303133,
+      "energy_6s_NIST_relerr_pct": -69.94569262634019,
+      "psi_6s_origin_squared_extrap": 0.2508539989526744
+    }
+  }
+}

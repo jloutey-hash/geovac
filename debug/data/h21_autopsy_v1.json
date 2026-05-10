@@ -1,0 +1,292 @@
+{
+  "sprint": "Calc Track H21-Autopsy v1",
+  "date_utc": "2026-05-09T22:34:54.339482Z",
+  "system": "hydrogen 1s, 21 cm hyperfine",
+  "reference": {
+    "experimental_value": "1 420 405 751.768 Hz",
+    "precision_digits": 12,
+    "source": "CODATA / NIST / Hellwig 1970"
+  },
+  "four_component_chain_LO": {
+    "experimental_MHz": 1420.4057517679998,
+    "experimental_Hz": 1420405751.768,
+    "profile_used": "gaussian",
+    "include_recoil_mixing": false,
+    "chain": [
+      {
+        "index": 1,
+        "name": "Bohr-Fermi Dirac (point nucleus, g_e=2, no recoil)",
+        "description": "A_hf = (4/3) g_p alpha^2 (m_e/m_p) Ha. |psi_1s(0)|^2 = Z^3/pi (framework-native, geovac.dirac_matrix_elements). Spinor + Fermi contact (Paper 34 \u00a7III.7 + standard NR limit).",
+        "multiplicative_factor": "NaN",
+        "absolute_A_hf_Ha": 2.1599206676898613e-07,
+        "cumulative_A_hf_Ha": 2.1599206676898613e-07,
+        "cumulative_A_hf_MHz": 1421.1595286758923,
+        "cumulative_residual_MHz": 0.7537769078924157,
+        "cumulative_residual_ppm": 530.6771723179652,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_spinor",
+          "sec:proj_3j"
+        ],
+        "status": "FN",
+        "notes": "|psi_1s(0)|^2 evaluated symbolically from continuum embedding (Layer-2 metric). g_p, alpha, m_e/m_p CODATA inputs."
+      },
+      {
+        "index": 2,
+        "name": "Schwinger a_e (Parker-Toms-verified at +0.5%)",
+        "description": "g_e -> 2(1 + a_e), a_e = alpha/(2 pi) Schwinger asymptote. Sprint HF-2 verified F_2/Schwinger = 1.0844 at n_ext=1, n_max=7, decomposing as 1 + 0.080 (Parker-Toms c_1 = R/12 = 1/2 on S^3) + 0.004 (higher curvature). Flat-space limit applied to hydrogen 1s (calibration step).",
+        "multiplicative_factor": 1.0011614097328885,
+        "cumulative_A_hf_Ha": 2.1624292205755834e-07,
+        "cumulative_A_hf_MHz": 1422.810077184484,
+        "cumulative_residual_MHz": 2.4043254164841983,
+        "cumulative_residual_ppm": 1692.7032388396763,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_spinor",
+          "sec:proj_spectral_action"
+        ],
+        "status": "FN (with calibration: hydrogen 1s flat-space limit)",
+        "notes": "a_e = alpha/(2 pi) = 1.161410e-03. Parker-Toms verification: F_2/Schwinger = 1.0844 = 1.0800 (c_1) + 0.0044 (c_2 + ...)."
+      },
+      {
+        "index": 3,
+        "name": "Reduced-mass / recoil (1+m_e/m_p)^{-3}",
+        "description": "Multiplicative factor on |psi_1s(0)|^2 from reduced-mass coordinate (Paper 34 \u00a7III.14 rest-mass projection). The Bohr-Fermi formula absorbs one m_e/m_p via mu_N; the ADDITIONAL m_e/m_p enters via |psi_red(0)|^2 = (lam_red/pi) at lam_red = Z m_red/m_e.",
+        "multiplicative_factor": 0.9983679269676805,
+        "cumulative_A_hf_Ha": 2.1588999781603824e-07,
+        "cumulative_A_hf_MHz": 1420.4879472273985,
+        "cumulative_residual_MHz": 0.08219545939869022,
+        "cumulative_residual_ppm": 57.86759121214507,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_restmass"
+        ],
+        "status": "FN (ring-preserving rest-mass projection)",
+        "notes": "Factor = (1 + m_e/m_p)^{-3} = 0.9983679270. Sub-leading recoil-NLO via \u00a7III.16 Breit retardation is the LS-8a-class W1a-D wall and is reported as Layer-2 in the residual attribution."
+      },
+      {
+        "index": 4,
+        "name": "Zemach r_Z=1.045 fm (Eides 2024) via \u00a7III.18 operator-level magnetization density",
+        "description": "OPERATOR-LEVEL Zemach via geovac.magnetization_density. Builds bilinear matrix element on Sturmian register at L=0 multipole, collapses to Eides leading-order -2 Z m_e r_Z(bohr) at sub-percent precision. r_Z = 1.045 fm is Layer-2 calibration; the operator and kernel are framework-native.",
+        "multiplicative_factor": 0.9999605047239877,
+        "cumulative_A_hf_Ha": 2.158814711809862e-07,
+        "cumulative_A_hf_MHz": 1420.4318446638508,
+        "cumulative_residual_MHz": 0.026092895850979403,
+        "cumulative_residual_ppm": 18.370029703485216,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_spinor",
+          "sec:proj_magnetization_density"
+        ],
+        "status": "FN at operator level + L2 (r_Z scalar)",
+        "notes": "Operator-level delta_LO_ppm = -39.4953, Eides reference -39.5 ppm, residual 0.004724 ppm. Operator collapse to Eides scalar verified at 0.012% precision (Gaussian/exponential profile). Profile = gaussian.",
+        "operator_level_diagnostics": {
+          "delta_LO_ppm": -39.49527601236602,
+          "delta_NLO_recoil_ppm": 0.0,
+          "delta_friar_ppm": 0.0,
+          "recoil_mixing_factor": 0.0,
+          "eides_reference_ppm": -39.5,
+          "operator_collapse_residual_ppm": 0.004723987633980187,
+          "rho_M_moments": {
+            "M_0": 1.0,
+            "M_1": 1.974763800618301e-05,
+            "M_2": 4.5942164823080296e-10
+          },
+          "pauli_terms_count": 4,
+          "profile": "gaussian"
+        }
+      }
+    ],
+    "final_residual_ppm": 18.370029703485216,
+    "final_residual_MHz": 0.026092895850979403,
+    "inputs": {
+      "alpha_CODATA": 0.0072973525693,
+      "g_p_CODATA": 5.585694689,
+      "m_e_over_m_p_CODATA": 0.0005446170214876324,
+      "r_Z_fm": 1.045,
+      "r_Z_bohr": 1.974763800618301e-05,
+      "a_e_Schwinger": 0.0011614097328884378
+    }
+  },
+  "four_component_chain_NLO": {
+    "experimental_MHz": 1420.4057517679998,
+    "experimental_Hz": 1420405751.768,
+    "profile_used": "gaussian",
+    "include_recoil_mixing": true,
+    "chain": [
+      {
+        "index": 1,
+        "name": "Bohr-Fermi Dirac (point nucleus, g_e=2, no recoil)",
+        "description": "A_hf = (4/3) g_p alpha^2 (m_e/m_p) Ha. |psi_1s(0)|^2 = Z^3/pi (framework-native, geovac.dirac_matrix_elements). Spinor + Fermi contact (Paper 34 \u00a7III.7 + standard NR limit).",
+        "multiplicative_factor": "NaN",
+        "absolute_A_hf_Ha": 2.1599206676898613e-07,
+        "cumulative_A_hf_Ha": 2.1599206676898613e-07,
+        "cumulative_A_hf_MHz": 1421.1595286758923,
+        "cumulative_residual_MHz": 0.7537769078924157,
+        "cumulative_residual_ppm": 530.6771723179652,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_spinor",
+          "sec:proj_3j"
+        ],
+        "status": "FN",
+        "notes": "|psi_1s(0)|^2 evaluated symbolically from continuum embedding (Layer-2 metric). g_p, alpha, m_e/m_p CODATA inputs."
+      },
+      {
+        "index": 2,
+        "name": "Schwinger a_e (Parker-Toms-verified at +0.5%)",
+        "description": "g_e -> 2(1 + a_e), a_e = alpha/(2 pi) Schwinger asymptote. Sprint HF-2 verified F_2/Schwinger = 1.0844 at n_ext=1, n_max=7, decomposing as 1 + 0.080 (Parker-Toms c_1 = R/12 = 1/2 on S^3) + 0.004 (higher curvature). Flat-space limit applied to hydrogen 1s (calibration step).",
+        "multiplicative_factor": 1.0011614097328885,
+        "cumulative_A_hf_Ha": 2.1624292205755834e-07,
+        "cumulative_A_hf_MHz": 1422.810077184484,
+        "cumulative_residual_MHz": 2.4043254164841983,
+        "cumulative_residual_ppm": 1692.7032388396763,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_spinor",
+          "sec:proj_spectral_action"
+        ],
+        "status": "FN (with calibration: hydrogen 1s flat-space limit)",
+        "notes": "a_e = alpha/(2 pi) = 1.161410e-03. Parker-Toms verification: F_2/Schwinger = 1.0844 = 1.0800 (c_1) + 0.0044 (c_2 + ...)."
+      },
+      {
+        "index": 3,
+        "name": "Reduced-mass / recoil (1+m_e/m_p)^{-3}",
+        "description": "Multiplicative factor on |psi_1s(0)|^2 from reduced-mass coordinate (Paper 34 \u00a7III.14 rest-mass projection). The Bohr-Fermi formula absorbs one m_e/m_p via mu_N; the ADDITIONAL m_e/m_p enters via |psi_red(0)|^2 = (lam_red/pi) at lam_red = Z m_red/m_e.",
+        "multiplicative_factor": 0.9983679269676805,
+        "cumulative_A_hf_Ha": 2.1588999781603824e-07,
+        "cumulative_A_hf_MHz": 1420.4879472273985,
+        "cumulative_residual_MHz": 0.08219545939869022,
+        "cumulative_residual_ppm": 57.86759121214507,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_restmass"
+        ],
+        "status": "FN (ring-preserving rest-mass projection)",
+        "notes": "Factor = (1 + m_e/m_p)^{-3} = 0.9983679270. Sub-leading recoil-NLO via \u00a7III.16 Breit retardation is the LS-8a-class W1a-D wall and is reported as Layer-2 in the residual attribution."
+      },
+      {
+        "index": 4,
+        "name": "Zemach r_Z=1.045 fm (Eides 2024) via \u00a7III.18 operator-level magnetization density",
+        "description": "OPERATOR-LEVEL Zemach via geovac.magnetization_density. Builds bilinear matrix element on Sturmian register at L=0 multipole, collapses to Eides leading-order -2 Z m_e r_Z(bohr) at sub-percent precision. r_Z = 1.045 fm is Layer-2 calibration; the operator and kernel are framework-native.",
+        "multiplicative_factor": 0.9999605264517898,
+        "cumulative_A_hf_Ha": 2.1588147587180133e-07,
+        "cumulative_A_hf_MHz": 1420.4318755279317,
+        "cumulative_residual_MHz": 0.02612375993180649,
+        "cumulative_residual_ppm": 18.39175876279708,
+        "projection_chain": [
+          "sec:proj_fock",
+          "sec:proj_spinor",
+          "sec:proj_magnetization_density"
+        ],
+        "status": "FN at operator level + L2 (r_Z scalar)",
+        "notes": "Operator-level delta_LO_ppm = -39.4953, Eides reference -39.5 ppm, residual 0.004724 ppm. Operator collapse to Eides scalar verified at 0.012% precision (Gaussian/exponential profile). Profile = gaussian.",
+        "operator_level_diagnostics": {
+          "delta_LO_ppm": -39.49527601236602,
+          "delta_NLO_recoil_ppm": 0.021498091358203544,
+          "delta_friar_ppm": 0.00022971082411540149,
+          "recoil_mixing_factor": 0.0005443205752372123,
+          "eides_reference_ppm": -39.5,
+          "operator_collapse_residual_ppm": 0.004723987633980187,
+          "rho_M_moments": {
+            "M_0": 1.0,
+            "M_1": 1.974763800618301e-05,
+            "M_2": 4.5942164823080296e-10
+          },
+          "pauli_terms_count": 4,
+          "profile": "gaussian"
+        }
+      }
+    ],
+    "final_residual_ppm": 18.39175876279708,
+    "final_residual_MHz": 0.02612375993180649,
+    "inputs": {
+      "alpha_CODATA": 0.0072973525693,
+      "g_p_CODATA": 5.585694689,
+      "m_e_over_m_p_CODATA": 0.0005446170214876324,
+      "r_Z_fm": 1.045,
+      "r_Z_bohr": 1.974763800618301e-05,
+      "a_e_Schwinger": 0.0011614097328884378
+    }
+  },
+  "sprint_hf_cross_validation": {
+    "reproduces_HF1_strict": "1421.1595 (expected ~ 1421.16)",
+    "reproduces_HF2_with_recoil_after_aE": "1420.4879 (expected ~ 1420.488 if order BF -> a_e -> recoil; commutative since multiplicative)",
+    "reproduces_HF4_full_chain": "1420.4318 (expected ~ 1420.432)",
+    "note": "All four components are multiplicative on A_hf, so the ordering of components 2-4 does not affect the final result. Component 1 (BF strict) is the absolute baseline."
+  },
+  "layer2_attribution": {
+    "reference_compilation": "Eides 2024 Tab. 7.3 (with Karshenboim 2005 cross-check)",
+    "budget_ppm": 18.5,
+    "budget_uncertainty_ppm": 5.0,
+    "itemization": [
+      {
+        "source": "Multi-loop QED (alpha^2 (Z alpha))",
+        "ppm": 6.0,
+        "sign": "+",
+        "wall": "LS-8a renormalization gap",
+        "class": "b (framework kernel approximation gap)"
+      },
+      {
+        "source": "Recoil NLO (Bodwin-Yennie, beyond reduced-mass)",
+        "ppm": 5.85,
+        "sign": "+",
+        "wall": "W1a-D Roothaan recoil-mixing",
+        "class": "b (framework kernel approximation gap)"
+      },
+      {
+        "source": "Hadronic VP",
+        "ppm": 0.1,
+        "sign": "+",
+        "wall": "W3 inner-factor (QCD)",
+        "class": "b (kernel gap, QCD-internal)"
+      },
+      {
+        "source": "Nuclear polarizability Delta_pol",
+        "ppm": 1.4,
+        "sign": "+",
+        "wall": "W3 inner-factor (QCD)",
+        "class": "b (kernel gap, QCD-internal)"
+      },
+      {
+        "source": "Zemach NLO recoil-mixing (m_e/m_p)",
+        "ppm": 0.022,
+        "sign": "+",
+        "wall": "covered by \u00a7III.18 NLO opt-in",
+        "class": "b (electronic regime negligible)"
+      },
+      {
+        "source": "Friar moment <r^2>_(2)",
+        "ppm": 0.00023,
+        "sign": "+",
+        "wall": "covered by \u00a7III.18 NLO opt-in",
+        "class": "b (electronic regime negligible)"
+      },
+      {
+        "source": "Convention drift on r_Z (1.045 vs 1.054)",
+        "ppm": 5.0,
+        "sign": "+/-",
+        "wall": "literature itemization convention",
+        "class": "a (literature convention mismatch)"
+      }
+    ],
+    "projected_total_central_ppm": 13.5,
+    "projected_total_band_ppm": "12 to 18",
+    "note": "The framework-native +18 ppm sits at the upper edge of the projected band, consistent with the Eides 2024 itemization at <5 ppm uncertainty. The W1a-D rZG-bug-fix sprint (2026-05-09) corrected an analogous Layer-2 budget mismatch on D HFS, where the original rZG memo specified -150 ppm vs the correct Pachucki-Yerokhin 2010 value of -286 ppm \u2014 a class (a) literature convention mismatch propagating to ~25 mfm in extracted r_Z(p). The same diagnostic discipline applies here: when the autopsy residual sits outside the projected Eides Tab. 7.3 band, the first hypothesis is convention mismatch, not framework kernel gap."
+  },
+  "profile_dependence": {
+    "gaussian": {
+      "A_hf_MHz": 1420.4318446638508,
+      "residual_ppm": 18.370029703485216
+    },
+    "exponential": {
+      "A_hf_MHz": 1420.4318446638508,
+      "residual_ppm": 18.370029703485216
+    }
+  },
+  "pattern_findings": {
+    "class_a_literature_convention": "Layer-2 budget Eides 2024 Tab. 7.3 itemization (~+18.5 ppm) reproduces the framework-native +18 ppm residual to <5 ppm. Consistent with the W1a-D rZG-bug-fix lesson: when the residual sits inside the projected literature band, no convention mismatch is flagged. If a future precision improvement narrowed this band, the next test would be the Karshenboim 2005 vs Pachucki-Yerokhin 2010 itemization split.",
+    "class_b_framework_kernel_gap": "Three identified gaps, all expected: (i) multi-loop QED (LS-8a wall, ~+6 ppm); (ii) recoil NLO beyond reduced-mass (W1a-D Bodwin-Yennie, ~+6 ppm); (iii) nuclear polarizability + hadronic VP (W3 inner-factor, ~+1.5 ppm). Sum ~+13.5 ppm consistent with the framework-native +18 ppm. NLO Zemach recoil-mixing on the W1b extension is negligible in the electronic regime (m_e/(m_e+m_p) ~ 5e-4) but DOMINANT in the muonic regime (m_red(mup)/(m_red(mup)+m_p) ~ 0.092) \u2014 see Sprint MH for the muonic analog. The W1b operator-level extension closes electronic Zemach cleanly and exposes the ~10% muonic kernel gap.",
+    "class_c_focal_length_decomposition": "Four components \u00d7 four projection chains. Component 1 = \u00a7III.7 spinor + Fermi contact; Component 2 = \u00a7III.6 spectral action with Parker-Toms curvature correction (verified at +0.5%); Component 3 = \u00a7III.14 rest-mass projection; Component 4 = \u00a7III.18 magnetization-density operator. Each chain is named in Paper 34 \u00a7III; the autopsy demonstrates the dictionary scales to multi-component observables at hyperfine focal lengths, structurally parallel to the \u00a7V.C.1 Lamb shift autopsy."
+  }
+}

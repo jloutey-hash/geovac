@@ -1,0 +1,149 @@
+{
+  "Q1_atomic_classifier": {
+    "question": "Q1: Z=55 atomic_classifier",
+    "ok": true,
+    "structure_type": "C",
+    "n_core_electrons": 54,
+    "n_valence_electrons": 1,
+    "core_config": "1s2 2s2 2p6 3s2 3p6 3d10 4s2 4p6 4d10 5s2 5p6",
+    "valence_config": "6s1",
+    "period": 6,
+    "group_type": "alkali_metal",
+    "supported": true,
+    "support_note": "",
+    "pk_source": "frozen_core",
+    "verdict": "Cs (Z=55) classified as type C (single valence over closed core), [Xe] 6s^1, supported via frozen_core PK source."
+  },
+  "Q2_frozencore": {
+    "question": "Q2: FrozenCore [Xe] for Z=55",
+    "core_type_detected": "Xe",
+    "n_core_electrons": 54,
+    "Z_eff_at_origin_1e-6": 55.0,
+    "Z_eff_at_infinity_100bohr": 1.0,
+    "expected_at_origin": 55.0,
+    "expected_at_infinity": 1.0,
+    "Z_eff_profile": {
+      "r=0.001": 55.0,
+      "r=0.01": 54.75212500603172,
+      "r=0.1": 35.56376637964966,
+      "r=0.5": 7.173211749552607,
+      "r=1": 1.0835558810571158,
+      "r=2": 1.0000000028404372,
+      "r=5": 1.0,
+      "r=10": 1.0,
+      "r=30": 1.0
+    },
+    "ok": true,
+    "verdict": "Z_eff(0)=55.00 (expected ~55); Z_eff(inf)=1.00 (expected ~1.0). Profile valid."
+  },
+  "Q3_screened_radial": {
+    "question": "Q3: Screened radial solver for Cs 6s (l=0)",
+    "l0_works": false,
+    "l0_rejection_message": "l must be >= 1 for screened radial solver (l=0 has divergent 1/r^3)",
+    "l1_works": true,
+    "energy_6p_au": -0.03319923401167979,
+    "r_at_6p_peak_bohr": 22.0,
+    "ok": false,
+    "verdict": "Screened solver REJECTS l=0 (Kramers exclusion): cannot compute |psi_6s(0)|^2 with current code. Extension needed to extend the solver to l=0 (set the centrifugal term to zero and use small-r boundary u(0)=0, u(h) = h * R_ns(h) which is finite)."
+  },
+  "Q3b_manual_l0_extension": {
+    "sub_probe": "Manual l=0 extension for Cs 6s",
+    "convergence_grid_study": {
+      "12000": {
+        "energy_6s_Ha": -0.05384004781269955,
+        "energy_6s_eV": -1.4650623365338287,
+        "psi_squared_naive": 0.6374699520562206,
+        "psi_squared_lin_extrap": 0.4783672540905791
+      },
+      "24000": {
+        "energy_6s_Ha": -0.05410580676341498,
+        "energy_6s_eV": -1.4722940059900749,
+        "psi_squared_naive": 0.9217854930272138,
+        "psi_squared_lin_extrap": 0.43042185759374113
+      },
+      "48000": {
+        "energy_6s_Ha": -0.054173344028664444,
+        "energy_6s_eV": -1.4741317886007756,
+        "psi_squared_naive": 1.1077765110403357,
+        "psi_squared_lin_extrap": 0.3877985105269915
+      },
+      "96000": {
+        "energy_6s_Ha": -0.0541897342384068,
+        "energy_6s_eV": -1.4745777889287277,
+        "psi_squared_naive": 1.2142112719081795,
+        "psi_squared_lin_extrap": 0.3617548049313604
+      }
+    },
+    "energy_6s_eV_converged": -1.4745777889287277,
+    "energy_6s_eV_NIST": -3.894,
+    "energy_rel_err_pct": -62.1320547270486,
+    "psi_squared_NAIVE_diverges_with_grid": true,
+    "note_on_psi_origin": "Eigenvalue E_6s ~ -1.475 eV (vs NIST -3.894 eV; off by 2.6x). This is the signature of Clementi-Raimondi screening being qualitative for Cs valence -- the [Xe] frozen core is an analytical hydrogenic approximation, not a Hartree-Fock core. |psi(0)|^2 grows monotonically with grid refinement (0.64 at n=12k -> 1.21 at n=96k, ~2x per grid doubling). Linear extrapolation also fails to converge (0.48 -> 0.36 -> 0.39). This is the structural divergence: s-wave wavefunction at a singular -Z_eff(r)/r potential origin requires Numerov + log-grid + analytical small-r fit (Z_eff(0) = 55, R(r) ~ exp(-Z*r) near origin) -- standard FD on uniform grid is fundamentally unsuited for this evaluation. The compute is NOT predictive at the level of the experimental A constant until this is addressed.",
+    "ok": true,
+    "verdict": "l=0 extension WORKS at the eigenvalue level (E_6s converges to -1.475 eV at 26x error vs NIST). |psi(0)|^2 does NOT converge in uniform FD. Structural extension to logarithmic grid + Numerov + small-r series fit needed; estimated 1-2 weeks of sub-agent work."
+  },
+  "Q4_hyperfine_pauli": {
+    "question": "Q4: hyperfine_coupling_pauli applicable to Cs?",
+    "signature": "(Q_nuc: 'int', Q_elec: 'int', nuclear_block: 'Dict[str, Any]', electronic_block: 'Dict[str, Any]', A_hf: 'float' = 2.1587750549670735e-07) -> 'Dict[str, float]'",
+    "default_A_hf": 2.1587750549670735e-07,
+    "default_A_hf_MHz": 1420.4057517147673,
+    "hardcodes_proton_0s_qubits": true,
+    "hardcodes_1s_up_down": true,
+    "takes_arbitrary_A_hf": true,
+    "ok_for_cs_unmodified": false,
+    "verdict": "hyperfine_coupling_pauli has the H_hf = A I.S form generic in A_hf but is wired to nuclear_block / electronic_block objects from Track NI (deuterium architecture: 1 proton spin qubit + 1 electron 1s spin qubit = 4-qubit cross-register I.S coupling). For Cs HFS, the natural single-electron analog (no nuclear register, single 6s spin qubit coupled to a fixed I=7/2 nucleus) is NOT in the framework. Either (a) build a nuclear register for Cs-133 (I=7/2 -> 8 mag sub-states -> 8 qubits via UCC or 3 qubits via binary), or (b) add an external classical I.S Hamiltonian wrapper."
+  },
+  "skeleton_bf": {
+    "sub_probe": "BF skeleton at hydrogenic Z_eff levels",
+    "bf_at_zeff_levels": {
+      "naive_Z_eff_1": {
+        "z_eff_used": 1.0,
+        "psi_6s_origin_squared_au": 0.0014736568804805126,
+        "A_HFS_predicted_MHz": 0.868508101851576,
+        "A_HFS_target_MHz": 2298.1579425,
+        "rel_diff_pct": -99.96220851118237
+      },
+      "effective_Z_RG_9p7": {
+        "z_eff_used": 9.7,
+        "psi_6s_origin_squared_au": 1.3449668460787905,
+        "A_HFS_predicted_MHz": 792.6638948411832,
+        "A_HFS_target_MHz": 2298.1579425,
+        "rel_diff_pct": -65.50872852633873
+      },
+      "high_penetration_Z_15": {
+        "z_eff_used": 15.0,
+        "psi_6s_origin_squared_au": 4.97359197162173,
+        "A_HFS_predicted_MHz": 2931.2148437490687,
+        "A_HFS_target_MHz": 2298.1579425,
+        "rel_diff_pct": 27.54627475953249
+      },
+      "inverse_solve_for_Z_eff": {
+        "note": "What Z_eff (in the hydrogenic 6s ansatz) reproduces A(Cs6s) exactly?",
+        "cube_factor_(Z_eff/n)^3": 12.250455789052534,
+        "z_eff_required": 13.831480415793916,
+        "comparison_RG_2019": "Roberts-Ginges 2022 effective Z ~ 9.7-10.0 (consistent)"
+      }
+    }
+  },
+  "relativistic_enhancement": {
+    "sub_probe": "Relativistic enhancement Z=55",
+    "Z": 55,
+    "Z_alpha": 0.4013543913115,
+    "gamma": 0.9159228420423716,
+    "F_R_casimir": 1.5552726325242259,
+    "note": "Casimir 1936 relativistic enhancement: F_R ~ 2.59 at Z=55. Multiplies the nonrelativistic A_HF by this factor. At Z=1, F_R = 1.0007 (negligible); at Z=55 it is structural."
+  },
+  "synthesis": {
+    "feasible_layer": [
+      "atomic classifier",
+      "FrozenCore Z_eff(r)"
+    ],
+    "blocking_for_clean_compute": [
+      "Q3: screened radial solver does NOT support l=0 (Cs 6s is l=0). This is the load-bearing bottleneck for a clean framework-native compute of |psi_6s(0)|^2.",
+      "Q4: hyperfine_coupling_pauli is wired for Track-NI hydrogen (1p+1e+21cm 4-qubit). For Cs, need (a) [recommended] classical A_HF I.S wrapper given |psi(0)|^2, OR (b) extend Track-NI architecture to general I (Cs has I=7/2 -> 8 nuclear sub-states)."
+    ],
+    "recommendation": "SCOPING MODE verdict: this is a 2-3-week sprint. Two specific engineering items needed: (i) extend _solve_screened_radial to l=0 (smallest-incident change: drop the l>=1 check, set the centrifugal term to zero, use the existing tridiagonal FD machinery -- u(r) ~ r near origin for s-states is already compatible with the boundary condition u(h)=evec[0]); (ii) wrap a classical A_HF * I.J Hamiltonian (no need for a Cs nuclear register for the HFS observable -- the I=7/2 nucleus enters only as a multiplicative coefficient g_Cs * mu_N * I_z, unlike the deuterium PoC which needs the nuclear register for electroweak validation). Phase 2 (next sprint after enabling): add Bohr-Weisskopf via the magnetization_density module (structural sibling of Zemach for s-states). Phase 3: framework comparison vs Roberts-Ginges 2019.",
+    "compute_now_via_skeleton": true,
+    "wall_clock_seconds": 1.2339000701904297
+  }
+}

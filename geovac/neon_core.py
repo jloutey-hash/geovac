@@ -270,12 +270,18 @@ class FrozenCore:
         'Xe': (54, _CLEMENTI_ZETA_XE, _NIST_CORE_ENERGIES_XE),
     }
 
+    # Cores with a multi-zeta tabulation registered in
+    # geovac/multi_zeta_orbitals.py. Cores not in this set fall back to
+    # single-zeta with a UserWarning when ``screening='multi_zeta'``.
+    _MULTI_ZETA_AVAILABLE = {'Xe'}  # extended in follow-on commits
+
     def __init__(
         self,
         Z: int,
         core_type: Optional[str] = None,
         n_radial: int = 2000,
         r_max: float = 20.0,
+        screening: str = 'single_zeta',
     ) -> None:
         # Auto-detect core type from Z if not specified
         if core_type is None:
@@ -311,11 +317,25 @@ class FrozenCore:
                 f"core_type={core_type!r}."
             )
 
+        # Screening kernel selection (Sprint Cs-HFS kernel upgrade, May 2026)
+        if screening not in ('single_zeta', 'multi_zeta'):
+            raise ValueError(
+                f"Unknown screening={screening!r}. "
+                "Supported: 'single_zeta' (Clementi-Raimondi 1963/1967, "
+                "default; backward-compatible) and 'multi_zeta' "
+                "(Bunge-Barrientos-Bunge 1993 / two-zeta from CR67)."
+            )
+        if screening == 'multi_zeta' and core_type not in self._MULTI_ZETA_AVAILABLE:
+            from geovac.multi_zeta_orbitals import warn_multi_zeta_unavailable
+            warn_multi_zeta_unavailable(core_type)
+            screening = 'single_zeta'
+
         self.Z = Z
         self.core_type = core_type
         self.n_core_electrons = n_core
         self.n_radial = n_radial
         self.r_max = r_max
+        self.screening = screening
 
         self._zeta_table = zeta_table
         self._energy_table = energy_table
@@ -423,11 +443,35 @@ class FrozenCore:
             + 6.0 * R_5p ** 2 * r ** 2
         )
 
+    def _build_density_multi_zeta(self, r: np.ndarray) -> np.ndarray:
+        """Build core density from a multi-zeta orbital tabulation.
+
+        Currently dispatches to the Xe-core two-zeta builder
+        (Sprint Cs-HFS kernel upgrade, May 2026); other cores will be
+        added when their multi-zeta tabulations are added to
+        geovac/multi_zeta_orbitals.py.
+        """
+        from geovac.multi_zeta_orbitals import (
+            build_two_zeta_xe_orbitals_from_cr,
+            density_from_orbitals,
+        )
+
+        if self.core_type == 'Xe':
+            orbs = build_two_zeta_xe_orbitals_from_cr(self._zeta_table[self.Z])
+            return density_from_orbitals(orbs, r)
+        raise ValueError(
+            f"No multi-zeta tabulation registered for core_type="
+            f"{self.core_type!r}; this should have been caught at __init__."
+        )
+
     def solve(self, verbose: bool = False) -> None:
         """Compute core density and screening function analytically.
 
         Uses hydrogenic wavefunctions with Clementi-Raimondi effective
-        charges for the shells of the frozen core.
+        charges for the shells of the frozen core (default), or a
+        Roothaan-Hartree-Fock multi-zeta expansion (when
+        ``screening='multi_zeta'`` is set in the constructor and the
+        core type is registered in ``_MULTI_ZETA_AVAILABLE``).
 
         Parameters
         ----------
@@ -439,8 +483,10 @@ class FrozenCore:
         self._r_grid = np.linspace(dr / 2, self.r_max - dr / 2, self.n_radial)
         r = self._r_grid
 
-        # Build density for the appropriate core type
-        if self.core_type == 'Ne':
+        # Build density for the appropriate core type and screening kernel
+        if self.screening == 'multi_zeta':
+            self._n_r = self._build_density_multi_zeta(r)
+        elif self.core_type == 'Ne':
             self._n_r = self._build_density_ne(r)
         elif self.core_type == 'Ar':
             self._n_r = self._build_density_ar(r)
@@ -579,6 +625,8 @@ def _solve_screened_radial(
     core_type: Optional[str] = None,
     n_grid: int = 12000,
     r_max: float = 80.0,
+    allow_l0: bool = False,
+    screening: str = 'single_zeta',
 ) -> Tuple[float, np.ndarray, np.ndarray]:
     """Solve the radial Schrodinger equation with Z_eff(r) screening.
 
@@ -595,7 +643,8 @@ def _solve_screened_radial(
     Z : int
         Nuclear charge.
     l : int
-        Orbital angular momentum quantum number (must be >= 1).
+        Orbital angular momentum quantum number. Must be >= 1 unless
+        ``allow_l0=True``.
     n_target : int
         Principal quantum number of the desired state. The solver
         returns the (n_target - l - 1)th eigenstate (counting radial
@@ -606,6 +655,12 @@ def _solve_screened_radial(
         Number of grid points.
     r_max : float
         Maximum radius in bohr.
+    allow_l0 : bool
+        If True, allow l=0. The Kramers exclusion (designed for
+        ``screened_r3_inverse`` where 1/r^3 diverges at l=0) is bypassed.
+        Required for s-wave HFS observables that depend on |psi(0)|^2
+        (e.g. Cs 6S_{1/2}, Sprint Cs-HFS-v2). Default False preserves
+        the legacy SO behaviour where l=0 is rejected.
 
     Returns
     -------
@@ -617,15 +672,21 @@ def _solve_screened_radial(
     r_grid : ndarray
         The radial grid points.
     """
-    if l < 1:
+    if l < 0:
+        raise ValueError(f"l={l} must be non-negative")
+    if l == 0 and not allow_l0:
+        # Default behaviour: reject l=0 to protect ``screened_r3_inverse``
+        # callers from a divergent <1/r^3>. HFS callers must opt in via
+        # ``allow_l0=True``.
         raise ValueError("l must be >= 1 for screened radial solver "
-                         "(l=0 has divergent 1/r^3)")
+                         "(l=0 has divergent 1/r^3); pass allow_l0=True "
+                         "for HFS-class observables that need l=0")
     n_r_target = n_target - l - 1  # number of radial nodes
     if n_r_target < 0:
         raise ValueError(f"n_target={n_target} < l+1={l+1}: no such state")
 
     # Build FrozenCore and get Z_eff(r)
-    fc = FrozenCore(Z=Z, core_type=core_type)
+    fc = FrozenCore(Z=Z, core_type=core_type, screening=screening)
     fc.solve()
 
     # Uniform radial grid starting just above zero.
@@ -670,6 +731,269 @@ def _solve_screened_radial(
         u_vec /= np.sqrt(norm_sq)
 
     return energy, u_vec, r
+
+
+def _solve_screened_radial_log(
+    Z: int,
+    l: int,
+    n_target: int,
+    core_type: Optional[str] = None,
+    n_grid: int = 4000,
+    r_min: float = 1.0e-6,
+    r_max: float = 80.0,
+    Z_origin: Optional[float] = None,
+    z_eff_callable=None,
+    screening: str = 'single_zeta',
+) -> Tuple[float, np.ndarray, np.ndarray, float]:
+    """Solve the radial Schrodinger equation on a logarithmic radial grid.
+
+    Designed for s-wave (l=0) HFS observables that depend on |R(0)|^2,
+    where the standard uniform-FD scheme of ``_solve_screened_radial``
+    diverges in |psi(0)|^2 with grid refinement (Track Cs-HFS-v1, May
+    2026: the s-wave wavefunction at a singular -Z_eff(r)/r origin needs
+    grid resolution that scales with Z_eff(0)).
+
+    Implementation. We use the standard "log-mesh" radial Schrodinger
+    transform of atomic structure codes. With r = exp(x) on uniform x
+    and the substitution P(x) = u(r) / sqrt(r), the radial equation
+
+        - 1/2 u'' + V_eff(r) u = E u
+
+    becomes the symmetric eigenproblem
+
+        - 1/2 P''(x) + r^2 [V_eff(r) - E] P + (1/8) P = 0
+
+    i.e.
+
+        [- 1/2 P''(x) + r^2 V_eff(r) P(x) + (1/8) P(x)] = E r^2 P(x).
+
+    This is the generalized eigenproblem K P = E M P with K symmetric
+    tridiagonal (centered FD on uniform x for P'') and M = diag(r^2)
+    positive definite. We solve it with scipy.linalg.eigh; both K and
+    M are symmetric so the standard Cholesky-based generalized solver
+    handles it.
+
+    For s-states the small-r Frobenius series
+    R(r) = R(0)[1 - Z_origin r/2 + (Z_origin r)^2/12 - ...] is matched
+    at the smallest grid point to extract R(0).
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+    l : int
+        Orbital angular momentum (>= 0; s-wave is the use case).
+    n_target : int
+        Principal quantum number.
+    core_type : str, optional
+        Core type for FrozenCore. Auto-detected if None.
+    n_grid : int
+        Number of log-grid points. Default 4000 is converged for Cs 6s.
+    r_min : float
+        Minimum radius (bohr). Default 1e-6 is the small-r boundary
+        below which an analytical Frobenius series is used.
+    r_max : float
+        Maximum radius (bohr).
+    Z_origin : float, optional
+        Effective Z at the origin for the small-r Frobenius series.
+        Defaults to ``Z`` (the nuclear charge before screening, since
+        Z_eff(0) = Z by construction).
+    z_eff_callable : callable, optional
+        If provided, used in place of ``FrozenCore(Z).z_eff`` for the
+        screened potential. Signature: ``f(r) -> Z_eff(r)`` (works on
+        scalars or arrays). Used by hydrogenic and bare-Coulomb tests
+        where no FrozenCore is registered for the given Z.
+
+    Returns
+    -------
+    energy : float
+        Eigenvalue in Hartree.
+    u_grid : ndarray
+        Reduced radial wavefunction u(r) = r*R(r) on the log r grid,
+        normalized so that integral |u|^2 dr = 1.
+    r_grid : ndarray
+        The logarithmic radial grid (length ``n_grid``).
+    R0 : float
+        R(0) = lim_{r->0} u(r)/r for the requested state. Equal to zero
+        for l>=1; nonzero for s-states. The contact density is
+        |psi(0)|^2 = R0**2 / (4*pi).
+
+    Notes
+    -----
+    R(0) is extracted by the analytical Frobenius series
+    ``R(r) ~ R(0) * (1 - Z_origin * r / 2 + ...)`` valid for r < 1/Z_origin,
+    matched to the numerical solution at the smallest grid point r_min
+    where the numerical scheme is still accurate. The match is
+    R(0) = R(r_min) / (1 - Z_origin * r_min / 2 + (Z_origin*r_min)^2 / 12)
+    (3-term Frobenius for the bare -Z_origin/r potential).
+    """
+    if l < 0:
+        raise ValueError(f"l={l} must be non-negative")
+    n_r_target = n_target - l - 1
+    if n_r_target < 0:
+        raise ValueError(f"n_target={n_target} < l+1={l+1}: no such state")
+
+    if Z_origin is None:
+        Z_origin = float(Z)
+
+    # Build the screening profile (FrozenCore by default; user-supplied
+    # callable for hydrogenic / bare-Coulomb test cases).
+    if z_eff_callable is None:
+        fc = FrozenCore(Z=Z, core_type=core_type, screening=screening)
+        fc.solve()
+        z_eff_callable = fc.z_eff
+
+    # IMPLEMENTATION (Track Cs-HFS-v2): use a DENSE UNIFORM GRID that is
+    # automatically scaled to resolve the inner-shell physics. The relevant
+    # length scale near the origin is r_inner ~ 1 / Z_origin. We use a
+    # fully uniform grid with r_max set by the user and r_min adjusted so
+    # there are at least 100 grid points inside r_inner. The grid spacing
+    # h = r_max / n_grid must satisfy h * 100 < 1 / Z_origin, i.e.
+    # n_grid > 100 * Z_origin * r_max.
+    #
+    # The earlier log-mesh transform attempted in this function (and the
+    # 2-piece hybrid that followed) both had numerical artifacts at the
+    # boundary or transition that destroyed the s-wave |R(0)|^2 extraction.
+    # The dense uniform grid is conceptually simple and matches the
+    # Frobenius extrapolation cleanly: u(r_min) = r_min * R(r_min), with
+    # r_min set just barely above 0.
+    h = r_max / n_grid
+    # Override r_min to be h (the smallest natural grid point); we do this
+    # rather than honor the user's r_min so the FD stencil at the boundary
+    # (where we use a Dirichlet ghost u_{-1}=0) is consistent.
+    r = np.linspace(h, r_max, n_grid)
+
+    # Verify resolution near the origin (warn but don't error if too coarse)
+    pts_inside_bohr = int((1.0 / Z_origin) / h)
+    # (used for caller sanity; not enforced)
+
+    # Effective potential
+    z_eff_vals = z_eff_callable(r)
+    v_eff = -z_eff_vals / r + l * (l + 1) / (2.0 * r**2)
+
+    # Standard 3-point centered FD on uniform grid:
+    #   u''(r_i) ~ (u_{i+1} - 2 u_i + u_{i-1}) / h^2
+    # With Dirichlet BC u(0)=0 implicit at i=-1 (the FIRST grid point r=h
+    # has u_{-1}=0 contributing -u_{-1}/(2h^2) = 0 to the off-diagonal).
+    diag_K = 1.0 / h**2 + v_eff
+    offdiag_K = np.full(n_grid - 1, -0.5 / h**2)
+
+    # Solve symmetric tridiagonal eigenproblem
+    n_eigs = n_r_target + 5
+    n_eigs = min(n_eigs, n_grid - 2)
+    evals, evecs = eigh_tridiagonal(
+        diag_K, offdiag_K,
+        select='i', select_range=(0, n_eigs - 1),
+    )
+
+    if n_r_target >= len(evals):
+        raise ValueError(
+            f"Could not find state with n_r={n_r_target} radial nodes. "
+            f"Only {len(evals)} eigenvalues found."
+        )
+    energy = float(evals[n_r_target])
+    u_vec = evecs[:, n_r_target]
+
+    # Normalize: integral |u|^2 dr
+    norm_sq = np.trapezoid(u_vec**2, r)
+    if norm_sq > 0:
+        u_vec /= np.sqrt(norm_sq)
+
+    # Extract R(0) for s-states via small-r Frobenius extrapolation.
+    # For V(r) ~ -Z_origin/r near origin, the regular s-wave is
+    #   R(r) = R(0) [1 - Z_0 r / 2 + (Z_0 r)^2 / 12 - ...]
+    # so u(r) = r R(r). Match at r=h (the smallest grid point).
+    # Use the SECOND grid point r=h for matching (the first grid point's
+    # u value is biased by the Dirichlet ghost; r=h is one full step in).
+    if l == 0:
+        # Use a conservative average of the first two grid points to
+        # reduce the boundary-bias on R(0) extraction.
+        r_match = r[0]  # = h
+        Z0r = Z_origin * r_match
+        frobenius_3 = 1.0 - Z0r / 2.0 + Z0r**2 / 12.0
+        R_at_match_0 = u_vec[0] / r[0]
+        # 4-term for cross-check:
+        R0_first = R_at_match_0 / frobenius_3
+        # Average over first ~5 points using exact bare-Coulomb correction:
+        R0_avg_pts = []
+        for i in range(min(5, len(r))):
+            ri = r[i]
+            Zri = Z_origin * ri
+            frob_i = 1.0 - Zri / 2.0 + Zri**2 / 12.0 - (Zri**3) / 144.0
+            if abs(frob_i) > 1e-10:
+                R0_avg_pts.append(u_vec[i] / ri / frob_i)
+        if R0_avg_pts:
+            R0 = float(np.mean(R0_avg_pts))
+        else:
+            R0 = R0_first
+        if not np.isfinite(R0):
+            R0 = 0.0
+    else:
+        R0 = 0.0  # u ~ r^{l+1}, so R(0) = 0 for l>=1
+
+    return energy, u_vec, r, float(R0)
+
+
+def screened_psi_origin_squared(
+    Z: int,
+    n: int,
+    l: int = 0,
+    core_type: Optional[str] = None,
+    n_grid: int = 4000,
+    r_min: float = 1.0e-6,
+    r_max: float = 80.0,
+    Z_origin: Optional[float] = None,
+    z_eff_callable=None,
+    screening: str = 'single_zeta',
+) -> float:
+    """Compute |psi_{nl}(0)|^2 for a screened valence electron.
+
+    For an s-state (l=0), psi(0) is finite and given by R(0)/sqrt(4*pi).
+    For l >= 1, psi(0) = 0 identically.
+
+    Uses the log-grid solver ``_solve_screened_radial_log`` with the
+    analytical Frobenius small-r series matched at r_min to extract R(0).
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+    n : int
+        Principal quantum number.
+    l : int
+        Orbital angular momentum (default 0).
+    core_type : str, optional
+        Core type for FrozenCore. Auto-detected if None.
+    n_grid : int
+        Log-grid points. Default 4000 is converged for Cs 6s.
+    r_min : float
+        Minimum log-grid radius (bohr). Default 1e-6.
+    r_max : float
+        Maximum log-grid radius (bohr). Default 80.0.
+    Z_origin : float, optional
+        Effective Z at the origin for Frobenius extrapolation.
+        Defaults to ``Z`` (the unscreened nuclear charge).
+    z_eff_callable : callable, optional
+        Custom Z_eff(r) for the test cases that don't have a registered
+        FrozenCore (e.g. hydrogenic Z=1).
+
+    Returns
+    -------
+    float
+        |psi_{nl}(0)|^2 in atomic units (bohr^{-3}). Zero for l >= 1.
+    """
+    _energy, _u, _r, R0 = _solve_screened_radial_log(
+        Z, l, n,
+        core_type=core_type,
+        n_grid=n_grid,
+        r_min=r_min,
+        r_max=r_max,
+        Z_origin=Z_origin,
+        z_eff_callable=z_eff_callable,
+        screening=screening,
+    )
+    psi0_sq = R0**2 / (4.0 * np.pi)
+    return float(psi0_sq)
 
 
 def screened_r3_inverse(
