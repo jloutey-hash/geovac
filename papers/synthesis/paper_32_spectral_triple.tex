@@ -1648,6 +1648,37 @@ The corollary on Rindler wedges (Unruh temperature
 $T_U = a/(2\pi)$ from the same M1 mechanism with
 $\beta_{\mathrm{Rindler}} = 2\pi/a$) is a 1--2 day pendant follow-up
 flagged in Track~D \S 5.4; not pursued in the 1-week sprint window.
+
+\textbf{Unruh pendant (May 2026).}\ The Track~D~\S 5.4 follow-up was
+executed as a 1-day pendant
+sprint~(\texttt{debug/unruh\_pendant\_memo.md}, May 2026).  Wick-rotating
+Rindler coordinates $(\eta, \rho)$ for an observer at proper acceleration
+$a$ produces Euclidean polar $(\eta_E, \rho)$ with conical regularity at
+$\rho = 0$ forcing $\eta_E$-period $2\pi$, hence proper-time period
+$\beta_U = 2\pi / a$ and Unruh $T_U = a/(2\pi)$
+(Unruh~\cite{unruh1976}).  Sprint~TD Track~1's
+\verb|matsubara_spectrum()| applied verbatim with $\beta = 2\pi/a$
+reproduces the Unruh-thermal Matsubara spectrum bit-identically (sympy
+residual zero on $T_U = 1/\beta_U$, lowest bosonic mode $= a$, lowest
+fermionic mode $= a/2 = \pi T_U$).  The single $2\pi$ in $\beta_U$ is
+the same M1 Hopf-base measure / $\mathrm{Vol}(S^1)$ signature that drove
+the cigar identification, instantiated on the Rindler $\eta_E$-circle
+instead of the cigar $\tau$-circle.  The reading is identical:\
+under the Wick-rotation chain, the framework's M1 $2\pi$ on
+$S^1_{\eta_E}$ IS the period of the modular-flow / boost-orbit of the
+accelerated observer.  Hawking, Bisognano--Wichmann, and Unruh are
+therefore three faces of one Wick-rotation theorem with one M1
+sub-mechanism, all of which the master Mellin engine tracks at $k = 0$;
+the published Wick-rotation prescription supplies the bridge to the
+Lorentzian-side modular-flow vocabulary in each case.  The
+\emph{operator-level falsifier} (modular Hamiltonian on
+$\mathcal{T}_{n_{\max}}$ for a wedge-restricted state has analytic
+period $2\pi$) named in Track~D~\S 3.1 covers all three faces
+simultaneously, since the bridge runs through the same KMS-Tomita-Takesaki
+algebra in every case; lifting the period-closure check on any one face
+lifts the structural correspondence on Hawking, Bisognano--Wichmann, and
+Unruh together.  Same scope (structural correspondence, not literal
+identification); same falsifier; same MEDIUM-HIGH 4--8 week priority.
 \end{remark}
 
 \begin{theorem}[Gromov--Hausdorff convergence on $S^3$]
@@ -3079,6 +3110,11 @@ states,''
 J.~B.~Hartle and S.~W.~Hawking,
 ``Path-integral derivation of black-hole radiance,''
 \textit{Phys.~Rev.~D}\ \textbf{13}, 2188--2203 (1976).
+
+\bibitem{unruh1976}
+W.~G.~Unruh,
+``Notes on black-hole evaporation,''
+\textit{Phys.~Rev.~D}\ \textbf{14}, 870--892 (1976).
 
 \bibitem{witten2018_rmp}
 E.~Witten,

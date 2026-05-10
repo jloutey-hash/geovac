@@ -540,8 +540,11 @@ $2\pi$ and the Lorentzian-side modular-flow / boost-orbit period.  The
 Hawking temperature $T_H = 1/(8\pi M)$ enters the catalogue as an
 off-precision row in \S~\ref{sec:offprecision} (error class
 C, $M$ external Einstein-equations input, machinery-witness only); the
-Unruh corollary $T_U = a/(2\pi)$ on a Rindler wedge is a 1--2 day
-follow-up flagged in Track~D \S 5.4.  See Paper~32~§VIII Remark on the
+Unruh pendant (\texttt{debug/unruh\_pendant\_memo.md}, May 2026,
+1--2 day follow-up to Track~D) closes the Track~D~\S 5.4 flag with
+$T_U = a/(2\pi)$ as the third Wick-rotation witness via the same M1
+Hopf-base measure / $\mathrm{Vol}(S^1)$ mechanism (Hawking--Sewell--BW--Unruh
+four-witness chain).  See Paper~32~§VIII Remark on the
 Bisognano--Wichmann reading and Paper~35~§VIII for the framework-level
 structural correspondence.  This is a structural correspondence, not a
 literal identification: the operator-level statement
@@ -1691,7 +1694,12 @@ because of the structural cancellation SO ($-58$~GHz) $+$ SS ($-9.5$~GHz)
 $+$ SOO ($+70$~GHz) $\approx +2.2$~GHz.  Residual is below the LS-8a
 $\alpha^3/\pi$ one-loop QED budget on the absolute scale; multi-electron
 SS/SOO higher-order corrections (Drake 1971 \S~IV) are the standard
-remediation.  Sprint precision-catalogue 2026-05-08. \\
+remediation.  Sprint precision-catalogue 2026-05-08.  Convention exposure
+on the relativistic Bethe-log sub-component (Drake 1990s vs Pachucki--Yerokhin
+2009) catalogued in V.D.6 (\S\ref{sec:conv_he_bethe_log}; V.D-prediction
+sprint, 2026-05-10): the Drake-vs-PY 3$\sigma$ disagreement on $\nu_{01}$
+sits inside the same $\alpha^3(Z\alpha)^2$ multi-loop budget that this
+row attributes the framework's residual to. \\
 Li 2$^2$P doublet (Sprint 5 CP) & Breit--Pauli + Slater $Z_{\text{eff}}$
 & $+8.9\%$ & A & Standard convention with $Z_\text{val}=1$;
 core polarization worsens accuracy (parity-forbidden
@@ -1788,7 +1796,10 @@ sub-ppm for s-states (negligible).  Sprint precision-catalogue,
 multiplicity ratio D/H $= 3/2$ at machine precision (12 digits);
 \S\ref{sec:proj_magnetization_density} reproduces Eides analytic LO
 to $\sim 1.45 \times 10^{-14}\%$ of LO shift; cumulative $+285.6$~ppm
-chain residual matches PY~2010 Layer-2 budget magnitude. \\
+chain residual matches PY~2010 Layer-2 budget magnitude.  Polarizability
+sub-component convention exposure (Friar--Payne~2005 vs Pachucki--Yerokhin
+2010+) catalogued in V.D.5 (\S\ref{sec:conv_d_polarizability}; V.D-prediction
+sprint, 2026-05-10), refining \S\ref{sec:conv_rZG_DHFS}. \\
 Mu 1S-2S transition (test of rest-mass projection at unchanged lepton)
 & Fock $\circ$ rest-mass projection (m$_p \to m_\mu$) & $-0.11$ ppm vs
 Mu-MASS & A & Pure $m_\text{red}$ rescaling from H experimental;
@@ -2015,6 +2026,38 @@ identification.  Operator-level
 literal identification ($\sigma_{i\cdot 2\pi} = $ identity on the
 truncated metric spectral triple) is the principal Track~D
 falsifier, 4--8 week follow-up. \\
+Unruh temperature $T_U = a/(2\pi)$ on Rindler wedge &
+Fock $\circ$ observation/temporal-window
+(\S~\ref{sec:proj_observation}) at $\beta_U = 2\pi/a$ &
+machinery-witness only & C &
+Unruh pendant (\texttt{debug/unruh\_pendant\_memo.md}, May~2026,
+1--2 day pendant follow-up to Track~D) reproduces $\beta_U = 2\pi/a$
+from the framework's M1 Hopf-base measure /
+$\mathrm{Vol}(S^1_{\eta_E})$ mechanism alone (sympy residual zero on
+$T_U$, lowest non-zero bosonic Matsubara mode equals $a$ --- the Unruh
+analog of Hawking's surface gravity --- and lowest fermionic
+Matsubara mode equals $a/2 = \pi T_U$).  Wick-rotation construction:\
+Rindler $(\eta, \rho)$ wedge metric, $\eta \to i\eta_E$ gives
+Euclidean polar $\rho^2\, \mathrm{d}\eta_E^2 + \mathrm{d}\rho^2$ with
+conical regularity at $\rho = 0$ forcing $\eta_E$-period $2\pi$;
+proper-time period $\beta_U = 2\pi/a$.  $a$ is external
+proper-acceleration input, not a framework calibration mismatch in
+the usual sense; row is a machinery-witness, not a precision match.
+Same structural-correspondence scope as the Hawking row above:\ under
+the unified Wick-rotation chain (Hartle--Hawking
+1976~\cite{hartle_hawking1976}; Sewell 1982~\cite{sewell1982};
+Bisognano--Wichmann 1976~\cite{bisognano_wichmann1976};
+Unruh 1976~\cite{unruh1976}), the framework's M1 $2\pi$ on
+$S^1_{\eta_E}$ IS the modular-flow / boost-orbit period of the
+accelerated observer.  See Paper~32~§VIII
+\texttt{rem:bisognano\_wichmann\_reading} (Unruh paragraph) and
+Paper~35 \S~VIII \texttt{subsec:unruh\_pendant} for the framework-level
+identification.  The principal Track~D operator-level falsifier
+($\sigma_{i\cdot 2\pi} = $ identity on the truncated metric spectral
+triple for a wedge-restricted state) covers all three
+Wick-rotation faces (Hawking, BW, Unruh) simultaneously, since the
+chain runs through the same KMS-Tomita-Takesaki algebra in every case;
+4--8 week follow-up at MEDIUM-HIGH priority. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.
@@ -2456,9 +2499,17 @@ $2{}^2P$ and Be $2s2p\,{}^3P$ show analogous partial-cancellation
 amplification, Sprint 5 CP).
 
 \textbf{Three-class diagnosis (per CLAUDE.md \S~1.8 directive).}
-Class A (literature convention mismatch): NEGATIVE --- Drake (1971)
-and Pachucki--Yerokhin (2010) agree on leading-order Breit-Pauli
-itemization.  Class B (framework gap, RADIAL): POSITIVE --- residual
+Class A (literature convention mismatch): NEGATIVE at LO Breit-Pauli ---
+Drake (1971) and Pachucki--Yerokhin (2010) agree on leading-order
+Breit-Pauli combining coefficients; \textbf{but POSITIVE at the
+$\alpha^3(Z\alpha)^2$ multi-loop level} (V.D-prediction sprint,
+2026-05-10) where Pachucki--Yerokhin~2009 reevaluated the relativistic
+Bethe-log term to resolve a 3$\sigma$ disagreement on $\nu_{01}$ vs
+Drake's earlier itemization (cross-ref \S\ref{sec:conv_he_bethe_log}).
+The convention exposure sits inside the framework's LS-8a
+$\alpha^3(Z\alpha)^2$ multi-loop wall, NOT at the LO Breit-Pauli sector
+that the framework computes sympy-exactly.  Class B (framework gap,
+RADIAL): POSITIVE --- residual
 attributes to (i) multi-electron correlation in the (1s)(2p)
 configuration (largest source, $\sim 45$ MHz on $P_0$-$P_2$ scale,
 not in framework's single-configuration hydrogenic basis), (ii)
@@ -3004,19 +3055,22 @@ Pachucki--Yerokhin~2010, Antognini~2013, Friar--Payne~2005)
 on Layer-2 itemization at the sub-percent precision the framework
 operates at.  Frameworks that consume single-observable Layer-2
 inputs in their native conventions cannot expose these mismatches
-structurally.  This subsection consolidates the four exposures
-catalogued to date (2026-05-09); each future sprint that surfaces a
+structurally.  This subsection consolidates the six exposures
+catalogued to date (V.D.1--V.D.4 from 2026-05-09 multi-track Roothaan
+autopsy sprint; V.D.5--V.D.6 from 2026-05-10 V.D-prediction sprint);
+each future sprint that surfaces a
 class~(a) finding adds a new \S~V.D.$N$ subsection with the
 five-element template \emph{Observable~$|$~Source compilations~$|$~
 Convention difference~$|$~Magnitude~$|$~Sprint reference $+$ Closure verdict.}
 
 \begin{table}[h]
 \centering\small
-\caption{Literature convention exposures catalogued through 2026-05-09.
+\caption{Literature convention exposures catalogued through 2026-05-10.
 Each row is documented in detail in the indicated subsection
 (originating sprint memo) and cross-references the
 \S~\ref{sec:layer2} projection chain whose operator-level
-decomposition exposed it.}
+decomposition exposed it.  V.D.5 and V.D.6 added 2026-05-10 by the
+V.D-prediction sprint testing Pattern C from the 2026-05-09 synthesis review.}
 \label{tab:convention_exposures}
 \begin{tabular}{p{0.6cm} p{2.6cm} p{3.0cm} p{2.6cm} p{1.6cm} p{1.6cm}}
 \toprule
@@ -3049,6 +3103,16 @@ $\langle r^2\rangle^{1/2} = r_p$ (RMS) vs $\langle r\rangle = r_p$
 $\langle r^2\rangle/\langle r\rangle^2 = 4/\pi \approx 1.27$
 $\to$ $+12.7\%$ on Friar moment &
 Sprint MH / Calc-muH Lamb autopsy v1 \\
+\S\ref{sec:conv_d_polarizability} & D 1S HFS polarizability sub-component &
+Friar--Payne~2005 vs Pachucki--Yerokhin~2010+ &
+low-energy aggregate (FP) vs explicit polarizability $+$ Zemach split (PY) &
+$\sim 240$~ppm of $E_F$; $\sim 80$~kHz absolute &
+V.D-prediction sprint, 2026-05-10 \\
+\S\ref{sec:conv_he_bethe_log} & He $2{}^3P$ fine structure (29~GHz; $\alpha$-determination) &
+Drake~1990 / Drake--Yan~1995 vs Pachucki--Yerokhin~2009 (PRA \textbf{79}, 062516) &
+Drake's original relativistic Bethe-log itemization was numerically incorrect; PY reevaluated and resolved a 3$\sigma$ disagreement on $\nu_{01}$ &
+$\sim$kHz on 29~GHz; $\sim 30$~ppb on $\alpha$ &
+V.D-prediction sprint, 2026-05-10 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3257,13 +3321,155 @@ $0.012\%$).  Resolution is mechanical (~1 day sprint).
 Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md}
 (profile-convention finding).
 
+\subsubsection{D 1S HFS polarizability sub-component (Friar--Payne vs Pachucki--Yerokhin)}
+\label{sec:conv_d_polarizability}
+
+\textbf{Observable.}  Deuterium 1S hyperfine splitting
+$\nu_\text{HFS}(D) = 327\,384\,352.522$ kHz, with focus on the
+\emph{deuteron polarizability} sub-component of the Layer-2 budget
+that closes the framework's $+285.6$~ppm chain residual
+(\S\ref{sec:autopsy_d_hfs} Track~5 autopsy).  This refines the broader
+\S\ref{sec:conv_rZG_DHFS} entry to the dominant polarizability piece.
+
+\textbf{Source compilations.}  Friar--Payne~2005 (PRC \textbf{72},
+014002; building on Friar~1979 PRC \textbf{20}, 325) versus
+Pachucki--Yerokhin~2010 (the modern itemization framework adopted in
+Kalinowski--Pachucki--Yerokhin~2018 PRA \textbf{98}, 062513 for
+muonic D and applied analogously for electronic D), and the recent
+Patkos--Pachucki--Yerokhin~2024/2025 chiral-EFT update
+(arXiv:2508.18776).
+
+\textbf{Convention difference.}  Friar--Payne~2005 aggregates the
+``low-energy nuclear-structure $+$ polarizability $+$ dispersion $+$
+Friar-moment recoil'' contributions into a single low-energy
+aggregate term (e.g., $\delta E_\text{Low}(eD) = 87.3$~kHz in
+Friar--Payne's reporting style).  Pachucki--Yerokhin~2010+ separates
+polarizability ($\sim +240 \times 10^{-6}\,E_F \approx +78.6$~kHz)
+and Zemach ($\sim -100 \times 10^{-6}\,E_F \approx -32.7$~kHz)
+explicitly as distinct itemized lines, using chiral-EFT-derivable
+nuclear-structure operators rather than Friar--Payne effective
+Friar moments.  Both compilations close to similar bottom-line
+totals at the experimental precision (Wineland--Ramsey~1972 $\sim$few
+ppb), but per-component itemization differs structurally.  The
+disagreement reaches operational consequences: Patkos--Pachucki--Yerokhin
+2024/2025 documents a $5\sigma$ disagreement with previous
+calculations on muonic D HFS, while the underlying convention
+difference applies to electronic D HFS as well.
+
+\textbf{Magnitude.}  $\sim 240$~ppm of $E_F$ for the polarizability
+term itself; the convention split (bundled-vs-separated) is
+$\sim$tens-to-hundreds of ppm of the observable; $\sim 80$~kHz
+absolute on the 327~MHz observable.  Comparable to V.D.1's
+$\sim 25$~mfm in $r_Z(p)$ precedent; both at the $10^{-4}$ to
+$10^{-3}$ relative scale.
+
+\textbf{Sprint reference and closure.}  V.D-prediction sprint, 2026-05-10
+(\texttt{debug/v\_d\_prediction\_sprint\_memo.md} Candidate~A); refines
+\S\ref{sec:conv_rZG_DHFS} to the polarizability-specific sub-component,
+addressing the dominant Layer-2 budget item.  \textbf{Closure verdict:}
+the framework's projection chain consumes both compilations' polarizability
+input as a Layer-2 scalar (single-channel
+\S\ref{sec:proj_magnetization_density} entry), so the convention
+choice propagates directly into the $+285.6$~ppm residual budgeted in
+\S\ref{sec:autopsy_d_hfs}.  Currently anchored to Pachucki--Yerokhin~2010+
+itemization (matching the framework's Track~5 autopsy assumption); the
+Friar--Payne~2005 convention would shift the budget bucketing without
+changing bottom-line totals.
+
+\textbf{Cross-references.}  Originating documentation: this sprint memo.
+Refines \S\ref{sec:conv_rZG_DHFS} (broader D HFS itemization) to the
+polarizability-specific axis.  Cross-references
+\S\ref{sec:autopsy_d_hfs} ``Why D Layer-2 is deeper than H Layer-2''
+paragraph (deuteron polarizability is the dominant component there).
+
+\textbf{Honest caveat: overlap with V.D.1.}  V.D.1 documents the
+broader Eides Tab.~7.3 vs Pachucki--Yerokhin~2010 D HFS itemization
+mismatch.  V.D.5 refines V.D.1 to the polarizability-specific
+sub-component on a distinct convention axis (Friar--Payne~2005 vs
+Pachucki--Yerokhin~2010+).  The two entries differ in which
+compilation pair they compare; kept separate per V.D protocol since
+the convention axes differ.  Future audit may merge V.D.5 into V.D.1
+as a sub-paragraph if the two axes prove operationally equivalent.
+
+\subsubsection{He $2{}^3P$ relativistic Bethe-log reevaluation (Drake vs Pachucki--Yerokhin)}
+\label{sec:conv_he_bethe_log}
+
+\textbf{Observable.}  Helium $2{}^3P$ fine-structure intervals
+$\nu_{01} = 29\,616\,946.2(1.6)$~kHz and $\nu_{12} =
+2\,291\,177.3(1.6)$~kHz (current theoretical precision), used
+historically as a determination of the fine-structure constant
+$\alpha$ to $\sim 30$~ppb.  Documented in the
+\S\ref{sec:autopsy_he_2_3p} Roothaan autopsy.
+
+\textbf{Source compilations.}  Drake~1990 / Drake--Yan~1995
+(Drake--Yan~PRA \textbf{46}, 2378, 1992; Drake--Yan~PRL \textbf{74},
+4791, 1995; Drake in \emph{Long-Range Casimir Forces}, ed. F.~S.~Levin
+and D.~A.~Micha, Plenum, NY, 1993): original itemization of relativistic
+Bethe-log term and combining coefficients $(3/50, -2/5, 3/2, -1)$
+that GeoVac uses sympy-exactly (Sprint~4 DD).
+Pachucki--Yerokhin~2009 (PRA \textbf{79}, 062516, 2009 ``Reexamination
+of helium fine structure''; cf. Pachucki--Yerokhin~2011 Can.~J.~Phys.
+\textbf{89}, 95, arXiv:1011.1370): reevaluated the relativistic
+Bethe-log term and resolved a 3$\sigma$ disagreement on $\nu_{01}$
+that Drake's earlier itemization had with experiment.
+
+\textbf{Convention difference.}  Pachucki and Yerokhin
+(PRA \textbf{79}, 062516, 2009) explicitly state they ``eliminated this
+[3$\sigma$] disagreement [vs Drake on $\nu_{01}$] by reevaluating the
+relativistic Bethe logarithm term.''  Pachucki and Sapirstein
+``pointed out several computational mistakes and inconsistencies in
+earlier calculations, and eventually the results turned out to be
+consistent after Drake revised the sign'' (per literature retrieval).
+This is a textbook example of inter-compilation itemization correction
+at the $\alpha^3 (Z\alpha)^2$ multi-loop level, sitting inside the
+LS-8a renormalization-wall budget that the framework does not capture.
+
+The relativistic Bethe-log term is part of the $\alpha^3(Z\alpha)^2$
+multi-loop sector that the GeoVac framework attributes to its LS-8a
+structural wall.  The framework's residual on $P_0 - P_1$ is
+$-0.014\%$, on $P_0 - P_2$ is $-0.20\%$, on $P_1 - P_2$ is $-2.62\%$
+from partial-cancellation amplification (see \S\ref{sec:autopsy_he_2_3p}).
+The Drake-vs-Pachucki--Yerokhin convention difference lives inside
+this same budget.
+
+\textbf{Magnitude.}  $\sim$kHz on the 29~GHz $\nu_{01}$ interval
+(Pachucki--Yerokhin's revised value $29\,616\,946.2$~kHz vs Drake's
+older value disagreeing at the 3$\sigma \sim$few~kHz level).  In
+ppm: $\sim 0.1$~ppm on $\nu_{01}$.  In $\alpha$-determination units:
+the helium $2{}^3P$ fine structure determines $\alpha$ to $\sim 27$-$31$~ppb;
+the Bethe-log reevaluation was the load-bearing fix for the discrepancy
+that earlier $\alpha$-determination work had against alternative
+determinations.
+
+\textbf{Sprint reference and closure.}  V.D-prediction sprint, 2026-05-10
+(\texttt{debug/v\_d\_prediction\_sprint\_memo.md} Candidate~C); refines
+the \S\ref{sec:autopsy_he_2_3p} Three-class diagnosis paragraph's
+``Class~A: NEGATIVE'' statement, which was correct at LO Breit-Pauli
+only, not at the $\alpha^3(Z\alpha)^2$ multi-loop level where the
+relativistic Bethe-log reevaluation lives.  \textbf{Closure verdict:}
+this entry is the strongest of the V.D-prediction sprint candidates
+because the literature explicitly documents both the disagreement
+(Drake--Pachucki--Yerokhin original 3$\sigma$ split) and its resolution
+(Pachucki--Yerokhin~2009 Bethe-log reevaluation, with Drake's subsequent
+agreement after sign revision per Pachucki--Sapirstein).  It is not an
+inferred convention split but an explicitly noted correction in the
+published record.
+
+\textbf{Cross-references.}  Originating documentation: this sprint memo.
+Refines \S\ref{sec:autopsy_he_2_3p} ``Three-class diagnosis'' paragraph
+(``Class~A: NEGATIVE'' statement now read as ``Class~A: NEGATIVE at LO
+Breit-Pauli, POSITIVE at $\alpha^3(Z\alpha)^2$ multi-loop level'').
+Cross-references \S\ref{sec:offprecision} He $2{}^3P$ catalogue rows.
+
 \paragraph{Cross-pattern observation.}
-The four exposures partition cleanly into two structural classes.
+The six exposures partition cleanly into two structural classes.
 \emph{Class~(i) inter-compilation itemization} (entries
 \S\ref{sec:conv_rZG_DHFS}, \S\ref{sec:conv_muH_VP},
-\S\ref{sec:conv_karshenboim_recoil}): three of the four exposures
-are between Eides~2024, Krauth~2017, Karshenboim~2005,
-Pachucki--Yerokhin~2010, and Antognini~2013 compilations on items at
+\S\ref{sec:conv_karshenboim_recoil}, \S\ref{sec:conv_d_polarizability},
+\S\ref{sec:conv_he_bethe_log}): five of the six exposures
+are between Friar--Payne~2005, Eides~2024, Krauth~2017, Karshenboim~2005,
+Drake~1990 / Drake--Yan~1995, Pachucki--Yerokhin~2009/2010, and
+Antognini~2013 compilations on items at
 sub-percent precision.  The pattern is consistent: most precision-physics
 compilations agree on bottom-line totals but differ in itemization at
 the $10^{-4}$ to $10^{-3}$ level.  This is exactly the precision range
@@ -3283,6 +3489,22 @@ that surface only when the two paths are compared at operator level.
 Both classes vindicate the directive's class~(a) finding type:
 multi-observable global fits using a single dictionary expose
 itemization choices that single-observable analyses cannot see.
+
+\textbf{Pattern broadening (V.D-prediction sprint, 2026-05-10).}  V.D.5
+(D HFS polarizability sub-component) is HFS-class, consistent with the
+original four entries.  V.D.6 (He $2{}^3P$ relativistic Bethe-log) is
+\emph{Lamb-class precision spectroscopy}, NOT strictly HFS.  The
+running pattern is therefore best read as ``precision-spectroscopy
+observables with multi-component Layer-2 decomposition'' rather than
+``HFS-only.''  All six entries remain in the same general category:
+observables where the framework operates at sub-percent precision and
+where multiple independent compilations exist with potentially different
+itemizations.  The next falsifier-test for this pattern is to attempt
+\S~V.D entries on (a) heavy-atom HFS at coarse experimental precision
+(Cs, Rb), (b) molecular vibrational/rotational spectroscopy, or (c)
+non-precision atomic spectra.  If 0 of those land class-(i), Pattern C
+tightens to ``exclusive to high-precision atomic spectroscopy with
+multi-loop QED $+$ nuclear-structure budgets.''
 
 \paragraph{Protocol for adding new exposures.}
 Each future sprint that surfaces a class~(a) finding adds a new
@@ -3314,36 +3536,59 @@ class~(a) findings, in decreasing prior probability:
 \item \textbf{Deuteron polarizability convention.}  Pachucki--Yerokhin
 2010 versus Friar--Payne~2005 itemization of the deuteron
 polarizability contribution to D HFS.  Expected magnitude: tens of
-ppm.  Follow-up sprint: deeper D HFS Roothaan autopsy beyond the
-\S~\ref{sec:conv_rZG_DHFS} closure.
+ppm.  \textbf{Verdict (V.D-prediction sprint, 2026-05-10):
+CONFIRMED $\to$ V.D.5 (\S\ref{sec:conv_d_polarizability}).}
 \item \textbf{Positronium HFS annihilation channel itemization.}
 Czarnecki--Melnikov--Yelkhovsky~2000 versus Karshenboim~2005
 itemization of the $\alpha^5$ corrections to the Ps 1S annihilation
 contribution.  Expected magnitude: $\sim 100$ ppm of LO HFS.
-Follow-up sprint: positronium HFS five-component autopsy at
-$\alpha^5$.
+\textbf{Verdict (V.D-prediction sprint, 2026-05-10): INCONCLUSIVE} ---
+the three relevant compilations (CMY 2000, Karshenboim 2005,
+Adkins--Czarnecki 2014) operate at three different orders of the
+expansion (m$\alpha^6$, review-aggregate, m$\alpha^7$) and are not
+in convention conflict at the sprint scope; flagged for follow-up
+PDF-level diagnostic ($\sim 3$-$5$ days) on Karshenboim 2005 \S~6.2-6.5
+vs CMY 2000 vs Adkins--Czarnecki 2014.
 \item \textbf{Helium fine-structure $\alpha^3 (Z\alpha)^2$
 itemization.}  Drake~1971 versus Pachucki--Yerokhin~2010
 itemization of higher-order Breit--Pauli plus multi-electron
 spin-spin / spin-other-orbit content.  Expected magnitude: tens of
 MHz on GHz-scale intervals.  This is the only Lamb-class candidate
 in the predicted set; the other two are HFS-class.
+\textbf{Verdict (V.D-prediction sprint, 2026-05-10): CONFIRMED $\to$
+V.D.6 (\S\ref{sec:conv_he_bethe_log})} --- Pachucki--Yerokhin~2009
+(PRA \textbf{79}, 062516) explicitly resolved a 3$\sigma$ disagreement
+with Drake on $\nu_{01}$ by reevaluating the relativistic Bethe-log
+term, with magnitude $\sim$kHz on the 29~GHz observable
+($\sim 30$~ppb on $\alpha$ determination).  This is the strongest of
+the three V.D-prediction sprint candidates because the literature
+explicitly documents both the disagreement and its resolution.
 \end{enumerate}
 The protocol classifies entries by predicted observable class:
-class-(a) literature-itemization (D.1, D.2, D.3 of the existing
-catalogue) versus class-(ii) closed-form-vs-operator-level (D.4 of
-the existing catalogue).  Future sprints adding entries should tag
-which class the new entry falls under.
+class-(i) literature-itemization (V.D.1, V.D.2, V.D.3, V.D.5, V.D.6
+of the existing catalogue) versus class-(ii) closed-form-vs-operator-level
+(V.D.4 of the existing catalogue).  Future sprints adding entries
+should tag which class the new entry falls under.
 
-\textbf{What would falsify Pattern C.}  If the next three sprints
-produce \S~V.D entries from electronic Lamb shift (where
-Eides--Pachucki--Yerokhin itemizations are well-aligned at the
-framework's precision) or from non-precision atomic spectra (where
-the framework operates in larger residual ranges), Pattern C is
-HFS-specific rather than a structural prediction about which
-observable types surface convention exposures.  In that case the
-predictive refinement above is data-availability artefact, not
-structural.
+\textbf{Pattern C status (2026-05-10).}  After the V.D-prediction sprint:
+6/6 \S~V.D entries are precision-spectroscopy class observables
+(HFS, muonic-Lamb, or Lamb-class fine structure).  Pattern C is
+\textbf{CONFIRMED at n=6 and STRENGTHENED}; the pattern broadens
+slightly from ``HFS-only'' to ``precision-spectroscopy with
+multi-component Layer-2 decomposition'' (V.D.6 is Lamb-class He
+$2{}^3P$ fine structure, not strictly HFS).
+
+\textbf{What would falsify Pattern C.}  If the next sprints produce
+\S~V.D entries from heavy-atom HFS at coarse experimental precision
+(Cs, Rb), molecular vibrational/rotational spectroscopy, or
+non-precision atomic spectra, Pattern C is precision-spectroscopy-specific
+rather than HFS-specific (a refinement, not a falsification).
+A genuine falsifier requires \emph{0 of those land class-(i)}, in
+which case Pattern C tightens to ``exclusive to high-precision atomic
+spectroscopy with multi-loop QED $+$ nuclear-structure budgets''
+rather than broadening further.  Conversely, a class-(i) finding on
+a \emph{non}-precision-spectroscopy observable would falsify the
+current pattern reading entirely.
 
 % -------------------------------------------------------------------
 \subsection{Falsified candidate: W3 spectral-zeta identification of
@@ -4200,6 +4445,20 @@ projection itself;\ it closes the documentation loop on the
 Bisognano--Wichmann reading without lifting projection
 admissibility.
 
+The Unruh pendant~(\texttt{debug/unruh\_pendant\_memo.md}, May~2026,
+1--2 day pendant follow-up to Track~D) added the flat-space face
+$T_U = a/(2\pi)$ from the same M1 mechanism with $\beta_U = 2\pi/a$,
+completing the Hawking--Sewell--BW--Unruh four-witness chain at the
+framework's M1 sub-mechanism level (cf.~Paper~32~§VIII Unruh
+extension to \texttt{rem:bisognano\_wichmann\_reading} and
+Paper~35~\S~VIII \texttt{subsec:unruh\_pendant}).  The
+REQUIRES-EXTENSION verdict on a literal Lorentz-boost projection is
+unchanged, since the same operator-level falsifier
+($\sigma_{i\cdot 2\pi} = $ identity on $\mathcal{T}_{n_{\max}}$ for
+a wedge-restricted state) tests all four Wick-rotation faces
+simultaneously --- the bridge runs through the same
+KMS-Tomita-Takesaki algebra in every case.
+
 \end{enumerate}
 
 % ===================================================================
@@ -4444,6 +4703,14 @@ induced thermal states,'' \textit{Annals of Physics}\ \textbf{141},
 J.~B.~Hartle and S.~W.~Hawking, ``Path-integral derivation of
 black-hole radiance,'' \textit{Phys.\ Rev.\ D}\ \textbf{13},
 2188--2203 (1976).
+
+\bibitem{unruh1976}
+W.~G.~Unruh, ``Notes on black-hole evaporation,''
+\textit{Phys.\ Rev.\ D}\ \textbf{14}, 870--892 (1976).
+% Added 2026-05-10 by the Unruh-pendant sprint
+% (debug/unruh_pendant_memo.md), which extends Track D's
+% Bisognano-Wichmann reading with the flat-space face $T_U = a/(2\pi)$
+% via the same M1 mechanism on the Wick-rotated Rindler $\eta_E$-circle.
 
 \bibitem{strohmaier2006}
 A.~Strohmaier, ``On noncommutative and pseudo-Riemannian

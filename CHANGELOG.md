@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.39.0] - 2026-05-10
+
+### Added — Sprint Unruh-pendant + §V.D-prediction (post-2026-05-09 evening synthesis)
+
+Two-track follow-on cycle to the 2026-05-09 evening synthesis-and-Lorentz sprint. Both tracks landed clean. No production code modified.
+
+**Track 1 — Unruh T_U pendant (POSITIVE structural-correspondence).**
+Bolts the Unruh effect onto Track D's Bisognano-Wichmann landing as the third face of the Hartle-Hawking → Sewell → Bisognano-Wichmann Wick-rotation chain.
+
+- Wick-rotation of Rindler $(\eta, \rho) \to (\eta_E, \rho)$ + conical regularity at $\rho=0$ forces $\eta_E$-period $2\pi$, hence $\beta_U = 2\pi/a$ and $T_U = \hbar a/(2\pi c k_B)$.
+- The $2\pi$ identifies as the M1 Hopf-base measure $\text{Vol}(S^1)$ — same factor that appears in Sprint TD Track 1's M1 column for the Matsubara circle (Stefan-Boltzmann), Track 4 (Hawking on cigar), and Track D (BW landing).
+- Apparatus check: `thermal_tensor_triple.matsubara_spectrum(β=2π/a)` reproduces Unruh-thermal spectrum bit-identically (sympy residual zero on $T_U$, lowest bosonic Matsubara $= a$, lowest fermionic $= a/2 = \pi T_U$).
+- **Unified four-witness Wick-rotation theorem stated** (Paper 35 §VIII): Hartle-Hawking + Sewell + Bisognano-Wichmann + Unruh are four faces of one theorem with $\beta = 2\pi/(\text{surface gravity})$ and $2\pi = \text{Vol}(S^1)$ in every face.
+- Scoped verdict matches Track D verbatim: structural correspondence, not literal identification. **Single shared modular-flow falsifier on $\mathcal{T}_{n_{\max}}$** covers Hawking + BW + Unruh simultaneously (one R2.5-class lift, not three) — bridge runs through the same KMS–Tomita–Takesaki algebra.
+
+**Track 2 — §V.D-prediction sprint (Pattern C 4/4 → 6/6 + class refinement).**
+Diagnostic-only sprint testing the three pre-named candidates from yesterday's synthesis Pattern C identification (D polarizability, Ps HFS annihilation, He fine structure α³(Zα)²).
+
+- **§V.D.5 D HFS deuteron polarizability (CONFIRMED, class-(i)):** Friar–Payne 2005 aggregates polarizability into low-energy term; PY-2010+ itemizes polarizability ($\sim+240\times10^{-6}\,E_F$) and Zemach ($\sim-100\times10^{-6}\,E_F$) explicitly. Magnitude $\sim80$ kHz / $\sim240$ ppm. Refines V.D.1.
+- **Ps 1S HFS annihilation (INCONCLUSIVE):** CMY-2000, Karshenboim-2005, Adkins-2014 are at three different orders of $\alpha$, not in convention conflict — honest negative on the original framing. PDF-level diagnostic flagged for follow-up (~3-5 days).
+- **§V.D.6 He 2³P relativistic Bethe-log (CONFIRMED — strongest entry):** Pachucki–Yerokhin 2009 explicitly resolved a 3σ disagreement with Drake 1990 on the $\nu_{01}$ interval by reevaluating the relativistic Bethe-log; ~kHz on 29 GHz / ~30 ppb on $\alpha$ determination. Refines §V.C.4 Class-A "NEGATIVE" → NEGATIVE-at-LO-Breit-Pauli + POSITIVE-at-$\alpha^3(Z\alpha)^2$ multi-loop.
+
+**Pattern C status:** 4/4 → **6/6 CONFIRMED**. Class boundary refines: HFS-only → "**precision-spectroscopy with multi-component Layer-2 decomposition**" (V.D.6 is Lamb-class, broadens the cluster). **Falsifier sharpened**: next §V.D test should be heavy-atom HFS / molecular spectroscopy / non-precision atomic spectra.
+
+**Paper updates (all applied directly):**
+- Paper 35 §VIII: new `subsec:unruh_pendant` (~85 lines) + `unruh1976` bibitem
+- Paper 32 §VIII: Unruh paragraph appended to `rem:bisognano_wichmann_reading` (~25 lines) + `unruh1976` bibitem
+- Paper 34 §V.B: new Unruh row (machinery-witness, error class C); §III.15 footnote extension; §VIII Lorentz-boost open-question append + `unruh1976` bibitem
+- Paper 34 §V.D.5 + §V.D.6 new subsubsections (~150 lines); §V.D table +2 rows; cross-pattern paragraph extension (4→6 entries, classes 3→5); Pattern C status paragraph + falsifier-sharpening paragraph; §V.C.4 Class-A refinement; §V.B D HFS / He P₁-P₂ cross-references
+- CLAUDE.md §2: 1 new sprint outcome bullet
+- Memory: 2 new entries (`unruh_four_witness_theorem.md`, `pattern_c_strengthens_6_of_6.md`)
+
+**Files added (no production geovac/ modifications):**
+- `debug/unruh_pendant_memo.md` (~3500 words, 10 sections), `debug/data/unruh_pendant.json`
+- `debug/v_d_prediction_sprint_memo.md` (~5500 words), `debug/data/v_d_prediction_sprint.json`
+
+LaTeX clean across all three modified papers (only 3 pre-existing undefined-reference warnings on Paper 34 unrelated to this sprint).
+
 ## [2.33.0] - 2026-05-08
 
 ### Added — Three-round precision catalogue extension (post-Sprint MH)

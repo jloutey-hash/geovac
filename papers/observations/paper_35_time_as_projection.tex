@@ -917,6 +917,103 @@ footnote for the temporal-window projection's Bisognano--Wichmann
 reading; Paper~34~§V.B for the Hawking-$T$ off-precision catalogue row
 (error class C, $M$ external Einstein-equations input).
 
+\subsection{Unruh pendant: the third Wick-rotation face}
+\label{subsec:unruh_pendant}
+
+The same M1 mechanism applied to a Rindler wedge gives the Unruh
+effect, the flat-space analog of Hawking radiation and the third face
+of the Wick-rotation chain that
+\S~\ref{subsec:bisognano_wichmann_reading} traversed in the
+Schwarzschild geometry.  Sprint Unruh-Pendant
+(\texttt{debug/unruh\_pendant\_memo.md}, May~2026, 1--2 day pendant
+follow-up to Track~D) documents the construction.
+
+\textbf{Wick rotation of Rindler.}\ A uniformly accelerated observer
+at proper acceleration $a$ traces a hyperbolic worldline in the right
+Rindler wedge $x > |t|$ of Minkowski space; in Rindler coordinates
+$(\eta, \rho)$ defined by $t = \rho \sinh(a\eta)$, $x = \rho
+\cosh(a\eta)$, the wedge metric is
+$\mathrm{d}s^2 = -\rho^2\, \mathrm{d}\eta^2 + \mathrm{d}\rho^2 +
+\mathrm{d}y^2 + \mathrm{d}z^2$.  Wick-rotating the rapidity $\eta \to
+i \eta_E$ produces the Euclidean polar metric
+$\mathrm{d}s^2_E = \rho^2\, \mathrm{d}\eta_E^2 + \mathrm{d}\rho^2 +
+(\text{transverse})$.  Smoothness at $\rho = 0$ (the standard
+absence-of-conical-defect argument, identical in form to the
+Hawking--Gibbons argument for the Schwarzschild cigar tip) forces
+$\eta_E$ to have period $2\pi$.  The accelerated observer's proper
+time $\tau_p = \eta_E / a$ at fixed $\rho = 1/a$ therefore has period
+\[
+  \beta_U \;=\; \frac{2\pi}{a},
+  \qquad
+  T_U \;=\; \frac{a}{2\pi},
+  \qquad
+  \text{equivalently}
+  \quad
+  T_U \;=\; \frac{\hbar a}{2\pi c k_B}\ \text{(SI units)}.
+\]
+
+\textbf{M1 identification.}\ The single $2\pi$ in $\beta_U$ is exactly
+the Hopf-base measure $\mathrm{Vol}(S^1) = 2\pi$ on the angular
+$\eta_E$-circle, identical in structural role to the $2\pi$ in
+Sprint~TD Track~4's cigar $\tau$-period and in Track~1's Matsubara
+$S^1_\beta$-circumference.  Sprint~TD Track~1's
+\texttt{matsubara\_spectrum()} called with $\beta = 2\pi/a$ reproduces
+the Unruh-thermal Matsubara spectrum bit-identically (manual sympy
+check, residual zero):\ lowest non-zero bosonic mode equals $a$ (the
+Unruh analog of Hawking's $\kappa_g$ surface gravity); lowest
+fermionic mode equals $a/2 = \pi T_U$; $T_U$ from $1/\beta_U$
+identifies bit-exactly with $a/(2\pi)$.
+
+\textbf{The unified Wick-rotation theorem.}\ The four-witness chain
+\begin{quote}\itshape
+  Hartle--Hawking 1976 path-integral $\to$ Sewell 1982 generalization
+  to bifurcate Killing horizons $\to$ Bisognano--Wichmann 1976
+  Rindler-wedge modular flow $\to$ Unruh 1976 flat-space limit
+\end{quote}
+is one Wick-rotation theorem with four physical instantiations:\ the
+thermal state of an observer with restricted causal access is
+determined by the regularity period of the Euclidean rotation of
+their causal-domain coordinates, which equals $2\pi$ times
+$1/(\text{surface gravity})$.  Surface gravity values in the four
+witnesses:\ $\kappa_g = 1/(4M)$ (Schwarzschild horizon), $a$
+(Rindler / Unruh), the boost-rapidity rate (Bisognano--Wichmann), and
+the Killing surface gravity in the Sewell-generalized statement.  In
+each case, the $2\pi$ is the $\mathrm{Vol}(S^1)$ Hopf-base measure of
+the master Mellin engine at $k = 0$ (M1).
+
+\textbf{Honest scope.}\ Same as
+\S~\ref{subsec:bisognano_wichmann_reading}.\ The framework's M1
+mechanism on $S^1_{\eta_E}$ IS the Wick-rotated image of the modular
+flow on the Rindler wedge, via the published Wick-rotation prescription
+(Unruh~\cite{unruh1976}; Bisognano--Wichmann~\cite{bisognano_wichmann1976};
+Sewell~\cite{sewell1982}; Hartle--Hawking~\cite{hartle_hawking1976}).
+This is a \emph{structural correspondence}, not a literal identification:\
+the Hopf-bundle measure factor on the Riemannian side and the
+modular-automorphism period on the Lorentzian side are equated by the
+published Wick-rotation chain, not by an operator-level proof inside
+the spectral triple.  The natural Unruh-side falsifier is structurally
+the same as Track~D's falsifier~\#1, instantiated at the Rindler wedge
+instead of the Schwarzschild static exterior:\ compute the modular
+Hamiltonian on the truncated metric spectral triple
+$\mathcal{T}_{n_{\max}}$ for a Rindler-wedge-restricted
+Camporesi--Higuchi state and verify $\sigma_{i\cdot 2\pi} = $ identity
+at finite $n_{\max}$.  \emph{One falsifier covers both faces}\ (and
+also Hawking):\ the chain that ties the framework $2\pi$ to the
+modular-flow $2\pi$ runs through the same KMS-Tomita-Takesaki algebra
+in every case, so lifting the period-closure check on any one face
+lifts the structural correspondence on all three.  Estimated cost
+4--8 weeks; priority MEDIUM-HIGH.
+
+\textbf{Cross-references.}\ Paper~32~§VIII Remark
+\texttt{rem:bisognano\_wichmann\_reading} (Unruh paragraph appended)
+for the spectral-triple-side statement;
+Paper~34~§III.15 footnote (extended with Unruh closure of the
+Track~D~§5.4 follow-up flag); Paper~34~§V.B Unruh-$T$ off-precision
+catalogue row (machinery-witness, error class C, $a$ external
+proper-acceleration input);
+Paper~34~§VIII Lorentz-boost open question (Track~D documentation
+closure paragraph extended with Unruh four-witness completion).
+
 % ===================================================================
 \section{Open questions}
 \label{sec:open}
@@ -1275,6 +1372,11 @@ states,''
 J.~B.~Hartle and S.~W.~Hawking,
 ``Path-integral derivation of black-hole radiance,''
 \textit{Phys.\ Rev.\ D}\ \textbf{13}, 2188--2203 (1976).
+
+\bibitem{unruh1976}
+W.~G.~Unruh,
+``Notes on black-hole evaporation,''
+\textit{Phys.\ Rev.\ D}\ \textbf{14}, 870--892 (1976).
 
 \end{thebibliography}
 
