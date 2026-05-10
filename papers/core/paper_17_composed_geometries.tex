@@ -747,6 +747,29 @@ already shipped at v2.0.39 (the balanced-coupled architecture itself);
 subsequent multi-focal-composition closures address second-row and
 heavier systems.
 
+The post-Phase-C engineering closures for the balanced-coupled
+second-row chemistry-solver wall (W1c-residual orthogonality) have
+landed two clean architectural modules without recovering binding
+yet: \texttt{geovac/phillips\_kleinman\_cross\_center.py} (W1b PK
+barrier, Sprint 2026-05-08) and
+\texttt{geovac/screened\_valence\_basis.py} (Track 3, Sprint
+2026-05-09; replaces hydrogenic Z\_orb=1 valence h$_1$ diagonal with
+the actual screened Schr\"odinger eigenvalue, e.g.\ Na 3s = $-0.170$~Ha).
+Both modules are bit-exact backward-compatible with the existing path
+(LiH 878-Pauli regression preserved at machine precision) and are
+correct as architectural infrastructure. The negative result is on
+the binding outcome: NaH PES remains monotonically descending under
+all 8 combinations of \{bare, W1c, PK, SV\}. See Paper~19
+Sec.~\ref{sec:w1c_residual} for the per-track diagnostics. The
+Track-3 diagnostic localizes the genuine residual to wavefunction
+shape (not eigenvalue), with the actual Na 3s screened wavefunction
+having mean radius $\langle r \rangle = 4.47$~bohr versus the
+hydrogenic Z=1 1s mean radius of $1.50$~bohr. Wavefunction-shape
+substitution in cross-$V_{ne}$ and within-block ERIs is the next
+named engineering closure (1-week sprint via physical-$n$ hydrogenic
+relabeling, or multi-week sprint via strict-Schmidt
+orthogonalization).
+
 \subsection{Outlook: the composition pattern for larger molecules}
 \label{sec:outlook}
 

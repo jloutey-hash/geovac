@@ -61,16 +61,29 @@ machine precision (or stated uncertainty).  Each row is annotated
 by projection(s), variable(s), dimension, transcendental class, and
 match precision.  Reading the catalogue surfaces a falsifiable
 structural prediction:
-\begin{prediction}[Error compounds with projection depth.]
-GeoVac matches that involve a single projection are exact at
-machine precision (e.g.\ Pauli counts, hydrogen Bohr energies,
-Dirac fine-structure formula, $D^2$ heat-kernel coefficients).
-Matches that chain multiple projections accumulate residual
-error roughly proportional to the number of projections involved.
+\begin{prediction}[Layer-2-presence bound.]
+The residual error of a catalogue row is bounded above by the
+larger of (i)~the framework's basis-quality residual at zero
+Layer-2 inputs, and (ii)~the largest single Layer-2 input
+consumed by the chain.  Equivalently:
+$|\epsilon(\text{observable})|
+\leq \max\bigl(\epsilon_\text{basis}(\text{framework}),
+\max_i |L_2^{(i)}|\bigr)$.
+The genuine axis ordering catalogue precision is observable-class
+(zero-, one-, multi-Layer-2-input) crossed with the framework's
+basis-quality limit; chained projection depth is a downstream
+proxy that fails in both directions.
 \end{prediction}
-The Lamb shift example (three chained projections, 2--3\% residual
-error) is consistent with the prediction; the catalogue identifies
-several other multi-projection chains for future test.
+This replaces an earlier naive form that scaled residual linearly
+with chain depth; the May~2026 synthesis pass falsified the depth
+form on the catalogue itself (depth-3 chains exist at residual~$0$
+and at $+286$~ppm; depth-4 chains exist at $+2$~ppm and at
+$+0.534\%$).  The Lamb shift example (depth-4 chain, $-0.534\%$
+residual at converged basis) is consistent with the framework's
+one-loop QED basis-quality limit; the H~1S polarizability example
+(depth-3 chain, residual $0$) is consistent with the
+zero-Layer-2-input class for rational-analytic-answer
+observables.
 
 This paper introduces no new computation.  It is a structural
 consolidation of the framework's self-presentation: language for
@@ -504,7 +517,38 @@ proper-time, Mellin-Barnes, etc.); spectral-action evaluation
 $\mathrm{Tr}\, f(D^2/\Lambda^2)$ when the trace runs over a
 compact-time direction; Paper~35 Proposition~1.B.  This projection is
 structurally what an observer does when integrating an instantaneous
-spectrum over a finite measurement window.
+spectrum over a finite measurement window.\footnote{%
+Bisognano--Wichmann reading.\ Under the standard Wick-rotation chain
+(Hartle--Hawking 1976~\cite{hartle_hawking1976};
+ Sewell 1982~\cite{sewell1982};
+ Bisognano--Wichmann 1976~\cite{bisognano_wichmann1976}),
+the temporal-window projection's $\beta$ IS the period of the
+modular-flow / Lorentz-boost orbit on a wedge or static-exterior
+algebra:\ Bisognano--Wichmann establishes that the modular automorphism
+of the algebra of observables localized in a Rindler wedge, with
+respect to the vacuum state, IS the unitary representation of the
+Lorentz boost subgroup that maps the wedge to itself; Sewell 1982
+generalizes this to globally hyperbolic Lorentzian manifolds with
+bifurcate Killing horizons, including Schwarzschild at
+$\beta_{\mathrm{cigar}} = 8\pi M$.  Sprint TD Track~4
+(\texttt{debug/sprint\_td\_track4\_memo.md}, May 2026) reproduces this
+$\beta = 8\pi M$ from the framework's M1 Hopf-base measure /
+$\mathrm{Vol}(S^1_\tau)$ mechanism alone.  Track~D
+(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May 2026)
+documents the structural correspondence between the framework-side
+$2\pi$ and the Lorentzian-side modular-flow / boost-orbit period.  The
+Hawking temperature $T_H = 1/(8\pi M)$ enters the catalogue as an
+off-precision row in \S~\ref{sec:offprecision} (error class
+C, $M$ external Einstein-equations input, machinery-witness only); the
+Unruh corollary $T_U = a/(2\pi)$ on a Rindler wedge is a 1--2 day
+follow-up flagged in Track~D \S 5.4.  See Paper~32~§VIII Remark on the
+Bisognano--Wichmann reading and Paper~35~§VIII for the framework-level
+structural correspondence.  This is a structural correspondence, not a
+literal identification: the operator-level statement
+($\sigma_{i\cdot 2\pi} = $ identity on the truncated metric spectral
+triple) is the principal falsifier flagged in Track~D \S 3.1, with
+estimated cost 4--8 weeks.
+}
 
 \subsection{Two-body Dirac / Breit retardation}
 \label{sec:proj_breit_retardation}
@@ -551,6 +595,31 @@ Karplus--Klein~1952, Penin--Pivovarov~1998, Czarnecki--Melnikov--Yelkhovsky~1999
 Karshenboim~2005~\S~4) --- but the framework's catalogue
 verification rests on this single observable until additional
 equal-mass or near-equal-mass two-body precision data are tested.\\
+\textbf{Operator-level verification (2026-05-09, Sprint Calc-Ps-1S2S
+Track 4 autopsy, \S\ref{sec:autopsy_ps_1s2s}):} PARTIALLY VERIFIED.
+The retardation kernel $r_<^k/r_>^{k+3}$ is implemented as production
+module \texttt{geovac.breit\_integrals} (26 tests; exact
+Fraction/sympy arithmetic).  Closed-form matrix elements at $Z=1$,
+$k=0$ for the $(1s,1s)$, $(1s,2s)$, $(2s,2s)$ orbital pairs that
+participate in the Ps 1S--2S level structure live in
+$\mathbb{Q}[\log 2, \log 3]$ (Paper~18 embedding-log content;
+\emph{e.g.\,} $R^0_\text{BP}(1s,1s;1s,1s) = -5 + 8\log 2$,
+$R^0_\text{BP}(1s,2s;1s,2s) = -4\log 2 - 19/9 + 9\log(3)/2$).
+Roothaan multipole termination at $L_\text{max} = 2 l_\text{max}$ is
+preserved at the equal-mass limit $\lambda_a = \lambda_b = 0.5$
+because it is angular content (Wigner-3j triangle inequality,
+\S~\ref{sec:proj_3j}), not a small-parameter expansion.
+\emph{Named structural extension:} state-specific bound-state matrix
+element evaluation $\langle\text{Ps}, 1S | H_B | \text{Ps}, 1S\rangle
+- \langle\text{Ps}, 2S | H_B | \text{Ps}, 2S\rangle$ in equal-mass
+two-body Dirac normalization requires the Bethe--Salpeter quasi-energy
+expansion machinery, structurally outside the framework's
+single-particle Eides~\S~3.2 SE bracket; this is the W2a-class
+infrastructure target.  The $\sim 0.55\%$ match between the
+calibration-by-construction Layer-2 input ($-79{,}861.9$ MHz $=$
+$-0.2279 \times m_e c^2 \alpha^4/h$) and the canonical
+Karshenboim~2005~\S~4 closed-form $-(11/48) = -0.2292$ is consistency
+evidence at the magnitude level.\\
 \textbf{Structural reading.}  This is the \emph{structurally cleanest
 known instance} of the multi-focal-composition wall named in
 CLAUDE.md~\S~2.  The wall's other five instances (Sprint H1
@@ -665,7 +734,15 @@ showed that this kernel improvement does NOT close the $\sim 0.22$~fm
 muH-alone vs Eides offset diagnosed by Sprint Calc-rZG-extended;
 that offset is now attributable to Layer-2 itemization-convention
 mismatch between Krauth~2017, Eides~2024, and Antognini-Krauth-Pohl~2015,
-not to kernel approximation.\\
+not to kernel approximation.  Operator-level verified at I=1 in
+\S\ref{sec:autopsy_d_hfs} (D 1S HFS autopsy, May 9 2026):
+substituting $r_Z(D) = 2.593$~fm reproduces the Eides analytic LO
+scalar at $\sim 1.45 \times 10^{-14}\%$ of the LO shift (machine
+precision); profile (Gaussian vs exponential) independence preserved
+at I=1; the operator does not depend on nuclear spin (it operates
+on the spatial register only, with $r_Z$ as a scalar moment).  Pauli
+encoding remains 4 terms ($II, Z_e, Z_p, Z_e Z_p$) at I=1, identical
+minimal sparse encoding as I=1/2.\\
 \textbf{Structural reading.}  Sibling of
 \S~\ref{sec:proj_charge_density} (different Hamiltonian operator)
 and of \S~\ref{sec:proj_breit_retardation} (Breit retardation:
@@ -1407,10 +1484,10 @@ $Z^{-4}$ scaling exact at $Z = 1, 2, 3, 4$.  Bound-states-only sum
 on bare Fock graph plateaus at $\sim 81.25\%$ of $\tfrac{9}{2}$
 (Bethe--Salpeter 1957 partition); the missing 18.75\% continuum
 content is recovered \emph{exactly} by the Sturmian projection.
-\textbf{Counter-example to a strong reading of
-Prediction~\ref{pred:error_depth}}: depth-3 chain at exact match
+\textbf{Cleanest L2-count $= 0$ exact example for
+Prediction~\ref{pred:l2_presence}}: depth-3 chain at exact match
 because the analytic answer is rational with finite-Sturmian-basis
-representation. \\
+representation; no Layer-2 input is consumed in the chain. \\
 \midrule
 \textbf{Conjectural / Observation status} & & & & & \\
 $K = \pi(B + F - \Delta) \approx 1/\alpha$ & Fock $\circ$ Hopf
@@ -1491,6 +1568,17 @@ artifact (Sec.~2 of CLAUDE.md, v2.9.2 CUSP-2). \\
 He ground state (2D variational + cusp) & Fock + spectral cusp &
 $0.019\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1; cusp-corrected
 $0.004\%$ at $\ell_\text{max}=4$. \\
+He ground state (Hylleraas r$_{12}$, $\omega_{\max}=4$) & Fock $\circ$
+explicit r$_{12}$ correlation
+& $-0.016$~mHa = $0.0006\%$ vs Drake NR at 22 basis functions & T &
+Track 1 sprint 2026-05-09 (\texttt{geovac/hylleraas\_r12.py}); cusp ratio
+$0.49$ vs Kato $0.5$ at $u=0$ (variationally captured); 3p reproduces
+Hylleraas 1929 $-2.90324$~Ha to $+0.79$~mHa.  Ground-state architecture
+\emph{categorically distinct} from graph-native CI (no $\kappa = -1/16$
+inter-shell coupling artifact, no small-$Z$ graph-validity-boundary
+limitation).  Excited states (2$^1$S, 2$^3$S, 2$^1$P) deferred --- single-$\alpha$
+trial inadequate, named structural extension is Hylleraas-Eckart
+double-zeta. \\
 LiH $R_{\text{eq}}$ (composed, PK) & Fock $\circ$ molecule-frame
 & $5.3\%$ at $\ell_\text{max}=2$ & B & PK $\ell_\text{max}=2$ optimal
 operating point; higher $\ell$ degrades structurally
@@ -1583,9 +1671,9 @@ dimensionless bracket $C_{2S} = +3.63$ used from Eides literature
 (LS-8a target for native derivation) & A (sharpened) & Iterated CC
 spectral action on Dirac-$S^3$ produces the standard two-loop SE
 prefactor with the $1/\pi^2$ tracing to two iterated Schwinger
-proper-time integrations, confirming Paper~35
-Prediction~\ref{pred:error_depth} \emph{at the structural level} for
-two-loop content.  Weak test (the same prefactor appears in
+proper-time integrations, confirming Paper~35 Prediction~1 (the
+$\pi$-as-temporal-projection prediction) \emph{at the structural
+level} for two-loop content.  Weak test (the same prefactor appears in
 flat-space two-loop QED); the strong test is LS-8a's native
 derivation of $C_{2S}$.  No structural obstruction encountered;
 \texttt{geovac/qed\_two\_loop.py} infrastructure is adequate.
@@ -1695,7 +1783,12 @@ exponential) independence preserved at leading order, same as Sprint MH
 Track C / hydrogen 21cm (Sprint HF Track 4).  Multi-focal architecture
 verified at I=1: deuteron quadrupole moment couples only to gradients,
 sub-ppm for s-states (negligible).  Sprint precision-catalogue,
-2026-05-08. \\
+2026-05-08.  Operator-level four-component Roothaan autopsy in
+\S\ref{sec:autopsy_d_hfs} (May~9 2026): $\hat{I}\cdot\hat{S}$
+multiplicity ratio D/H $= 3/2$ at machine precision (12 digits);
+\S\ref{sec:proj_magnetization_density} reproduces Eides analytic LO
+to $\sim 1.45 \times 10^{-14}\%$ of LO shift; cumulative $+285.6$~ppm
+chain residual matches PY~2010 Layer-2 budget magnitude. \\
 Mu 1S-2S transition (test of rest-mass projection at unchanged lepton)
 & Fock $\circ$ rest-mass projection (m$_p \to m_\mu$) & $-0.11$ ppm vs
 Mu-MASS & A & Pure $m_\text{red}$ rescaling from H experimental;
@@ -1772,7 +1865,13 @@ this match).  Layer-2 $\alpha^4$ Breit input from Penin--Pivovarov 1998
 (PRL~80, 2101) closes the chain to sub-MHz; cumulative match is partly
 explained-by-construction (Breit value inferred as residual).  Honest
 verdict: framework-native is at $+65$~ppm; all closure beyond Bohr$+$SE
-Lamb is Layer-2.  Sprint precision-catalogue, 2026-05-08. \\
+Lamb is Layer-2.  Sprint precision-catalogue, 2026-05-08; operator-level
+five-component autopsy (\S\ref{sec:autopsy_ps_1s2s}, 2026-05-09)
+locates the wall at the kernel-vs-bound-state boundary
+of \S~\ref{sec:proj_breit_retardation}, not at the kernel level itself
+(closed-form $\mathbb{Q}[\log p]$ matrix elements verified;
+state-specific Bethe--Salpeter evaluation is the named structural
+extension). \\
 He $2{}^1S_0$--$2{}^3S_1$ exchange splitting $7183.3$~cm$^{-1}$ vs NIST
 $6421.47$~cm$^{-1}$ (sprint precision-catalogue 2026-05-08, ss-only
 sub-block at $n_\text{max}=11$; refreshed 2026-05-08 with fixed
@@ -1793,7 +1892,20 @@ graph-validity-boundary artifact ($Z_c \approx 1.84$, He at $Z=2$).
 Single-exponent hydrogenic basis at $k = Z = 2$ cannot represent
 $Z_\text{eff} \approx 1$ screening of 2s; multi-focal composition
 (Phase~C-W1c, May~2026) is the structural extension.  Sprint
-precision-catalogue, 2026-05-08. \\
+precision-catalogue, 2026-05-08.
+\textbf{Hylleraas r$_{12}$ Track 1 attempt (2026-05-09):} single-$\alpha$
+Hylleraas explicit-correlation trial in
+\texttt{geovac/hylleraas\_r12.py} does NOT close this residual --- the
+trial gives splitting $\sim 19{,}900$~cm$^{-1}$ at $\omega_{\max}=5$
+($+209\%$ vs NIST), worse than the graph-native CI baseline.  The
+2$^3$S excited state goes BELOW Drake by $\sim 50$~mHa due to incomplete
+representation of the asymmetric Z$_\text{eff}$ structure
+($1s$ at $Z_a\!\approx\!2$, $2s$ at $Z_b\!\approx\!1$); a single-$\alpha$
+trial $e^{-\alpha s}$ cannot represent two distinct exponential decay
+scales without a $\beta t$-dependent factor.  The structural fix is
+the standard \textbf{Hylleraas--Eckart double-zeta} extension (1933);
+catalogue residual stays at $+11.86\%$ pending that extension.
+Source: \texttt{debug/hylleraas\_r12\_track1\_memo.md} \S3. \\
 Self-consistent $r_Z$ global extraction (Sprint Calc-rZG, 2026-05-09;
 Layer-2 corrected 2026-05-09; extended-fit diagnostic 2026-05-09)
 & §III.18 magnetization-density global fit across H 21cm $+$
@@ -1879,6 +1991,30 @@ Layer-2 convention reconciliation sprint, NOT further kernel
 extensions.  See \S~\ref{sec:convention_exposures} for catalogue
 context (entry \S~\ref{sec:conv_rZG_DHFS}).  Source memo:
 \texttt{debug/w1b\_recoil\_mixing\_extension\_memo.md}. \\
+Hawking temperature $T_H = 1/(8\pi M)$ on Schwarzschild cigar &
+Fock $\circ$ observation/temporal-window
+(\S~\ref{sec:proj_observation}) at $\beta = 8\pi M$ &
+machinery-witness only & C &
+Sprint TD Track~4 (\texttt{debug/sprint\_td\_track4\_memo.md},
+May~2026) reproduces $\beta = 8\pi M$ from the framework's M1
+Hopf-base measure / $\mathrm{Vol}(S^1_\tau)$ mechanism alone (sympy
+residual zero on $\beta = 4M\cdot 2\pi$ cigar regularity, $T_H =
+\kappa_g/(2\pi)$, lowest bosonic Matsubara mode $1/(4M) = \kappa_g$
+surface gravity).  $M$ is external Einstein-equations input, not a
+framework calibration mismatch in the usual sense; the row is a
+machinery-witness, not a precision match.  Track~D
+(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May~2026)
+documents the structural correspondence between the framework's M1
+$2\pi$ and the Bisognano--Wichmann modular-flow / Lorentz-boost
+orbit period via the standard Wick-rotation chain (Hartle--Hawking
+1976~\cite{hartle_hawking1976}; Sewell 1982~\cite{sewell1982};
+Bisognano--Wichmann 1976~\cite{bisognano_wichmann1976}).  See
+Paper~32~§VIII Remark on the Bisognano--Wichmann reading; Paper~35
+\S~VIII Bisognano--Wichmann subsection for the framework-level
+identification.  Operator-level
+literal identification ($\sigma_{i\cdot 2\pi} = $ identity on the
+truncated metric spectral triple) is the principal Track~D
+falsifier, 4--8 week follow-up. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.
@@ -2343,6 +2479,137 @@ The internal multi-focal angular-only prediction (Observation 3)
 holds at machine precision: angular Roothaan termination is
 independent of focal-length ratio.
 
+\subsubsection{Deuterium 1S hyperfine autopsy}
+\label{sec:autopsy_d_hfs}
+
+\textbf{Reference.} $\nu_\text{HFS}(D) = 327\,384\,352.522$~Hz
+(Wineland--Ramsey 1972), the most precisely measured I=1 atomic HFS
+transition.  Distinguished from \S\ref{sec:autopsy_21cm} by the
+nuclear-spin axis: I=1 (deuteron) vs I=1/2 (proton).  Distinguished
+from \S\ref{sec:autopsy_he_2_3p} by being a cross-register
+(electron $+$ I=1 nucleus) rather than internal (two electrons on
+the same I=1/2 nucleus) multi-focal observable.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{4.5cm} r p{6cm} c}
+\toprule
+Component & MHz & Projection chain & Status \\
+\midrule
+Bohr--Fermi Dirac (point nucleus, $g_e=2$, no recoil), I=1
+multiplicity 3/2 & $+327.397464$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_3j} ($\hat{I}\cdot\hat{S}$, 3/2 from CG) & FN \\
+$+$ Schwinger $a_e$ (Parker--Toms-verified at $+0.5\%$) &
+$\times (1+\alpha/2\pi)$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_spectral_action} & FN (with calibration) \\
+$+$ Reduced-mass $(1+m_e/m_d)^{-3}$ & $\times 0.999183$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_restmass} (variable
+$m_n$: $m_p \to m_d$) & FN \\
+$+$ Zemach $r_Z(D)=2.593$~fm via \S\ref{sec:proj_magnetization_density}
+operator-level & $\times (1 - 98.001 \text{~ppm})$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\textbf{\S\ref{sec:proj_magnetization_density}} (at I=1) & FN at op-level
+$+$ L2 ($r_Z$ scalar) \\
+\midrule
+\textbf{Final $\nu_\text{HFS}(D)$} & $+327.477853$ & & \\
+Experimental & $+327.384353$ & (Wineland--Ramsey 12-digit precision) & \\
+\textbf{Residual} & $+0.094$ & $= +285.6$~ppm; matches PY 2010 Layer-2
+budget magnitude & \\
+\bottomrule
+\end{tabular}
+\caption{Deuterium 1S hyperfine Roothaan autopsy.  Each component
+tagged to its \S\ref{sec:layer2} projection chain. Status: FN $=$
+framework-native; L2 $=$ Layer-2 input.  Source memo:
+\texttt{debug/d\_hfs\_autopsy\_track5\_memo.md} (multi-track sprint
+Track 5, May 9 2026).}
+\label{tab:autopsy_d_hfs}
+\end{table}
+
+\textbf{Operator-level Zemach at I=1.}  Component~4 exercises
+\S\ref{sec:proj_magnetization_density} at the operator level via
+\texttt{geovac.magnetization\_density.hydrogen\_zemach\_eides\_leading\_order}
+with $r_Z(D) = 2.593$~fm (Friar--Payne~2005).  The bilinear matrix
+element $\langle\hat{r}_Z\rangle$ on the Sturmian register at L=0
+multipole reduces to $M_1[\rho_M] = r_Z$ to machine precision; the
+operator output $-98.001197$~ppm vs Eides analytic $-2 Z m_e r_Z =
+-98.001197$~ppm gives reproduction residual
+$+1.42 \times 10^{-14}$~ppm $= 1.45 \times 10^{-14}\%$ of the LO shift
+--- \emph{machine precision}.  No architecture change vs the H 21cm
+operator-level Zemach in \S\ref{sec:autopsy_21cm}; only the scalar
+parameter $r_Z(D) = 2.593$~fm replaces $r_Z(p) = 1.045$~fm.  Profile
+(Gaussian vs exponential) independence at machine precision.  The
+Pauli encoding is 4 non-identity terms ($II, Z_e, Z_p, Z_e Z_p$),
+the same minimal sparse encoding as for H 21cm --- confirming the
+\S\ref{sec:proj_magnetization_density} operator does not depend on
+nuclear spin (it operates on the spatial register only).
+
+\textbf{Operator-level $\hat{I}\cdot\hat{S}$ Hamiltonian at I=1.}
+The $\hat{I}\cdot\hat{S}$ operator at $I=1$, $J=1/2$ has eigenvalues
+$\{+1/2, -1\}$ on a 6-dim joint nuclear-electronic Hilbert space
+$(2I+1)(2J+1) = 3 \cdot 2 = 6$.  The F=3/2 to F=1/2 splitting is
+$\frac{1}{2} - (-1) = 3/2$, exactly the Clebsch--Gordan output.  At
+$I=1/2$ the eigenvalues are $\{+1/4, -3/4\}$ with splitting $1$.
+Multiplicity ratio D/H = $3/2 = 1.500000000000$ at machine precision.
+The Pauli encoding extends from $Q_\text{tot}=2$ qubits, 3 terms
+(I=1/2) to $Q_\text{tot}=3$ qubits, 10 terms (I=1) --- one extra
+qubit for the larger nuclear-spin space, no new structural mechanism.
+\textbf{Operator-level verdict: leading\_order\_I\_independent}, the
+elevation of the May 8 precision-catalogue verdict from energy level
+to operator level.
+
+\textbf{Framework-native subtotal:} $\nu_\text{HFS}^\text{native}(D) =
+327.4779$~MHz ($99.971\%$ of measurement).  \textbf{Layer-2 net:}
+$+285.6$~ppm of $\nu_F$ (the framework chain overshoots; PY 2010
+Layer-2 corrections close it).  The Layer-2 inputs are the scalar
+$r_Z(D)$ value and the PY 2010 Layer-2 budget itemization
+($-286$~ppm convention; alternate Eides Tab 7.3 gives $-150$~ppm,
+the source of the well-known $\sim 5$~fm extraction artifact in the
+global rZG fit, see \S\ref{sec:conv_rZG_DHFS}).  The operator
+structure consuming the inputs is framework-native via
+\S\ref{sec:proj_magnetization_density}, identical to the H 21cm
+autopsy.
+
+\textbf{Why D Layer-2 is deeper than H Layer-2.}  The cumulative
+residual decomposes per Pachucki--Yerokhin~2010:
+\begin{itemize}\setlength\itemsep{0pt}
+\item Deuteron polarizability ($\sim +200$~ppm) is the dominant
+component, $\sim 30\times$ the proton's contribution.  This is
+QCD-internal NN dynamics (W3 inner-factor wall, Paper~18~\S~IV.6),
+fundamentally because the deuteron is a weakly bound n+p system
+with much larger spatial extent ($r_Z(D) = 2.5\,r_Z(p)$).
+\item Multi-loop QED ($\alpha^2(Z\alpha)$, $\sim +40$~ppm) is the
+LS-8a renormalization gap, $\sim 7\times$ H scaling because of the
+larger nuclear extent's $\langle r\rangle$ couplings.
+\item Recoil NLO beyond reduced-mass ($\sim +30$~ppm) is the W1a-D
+Roothaan kernel-level recoil-mixing wall.
+\item Finite-size charge ($\sim +10$~ppm) and higher Friar moments
+($\sim +5$~ppm) are Layer-2 inputs via \S\ref{sec:proj_charge_density}
+and \S\ref{sec:proj_magnetization_density} NLO opt-in.
+\item Zemach NLO recoil-mixing $m_e/(m_e+m_d) \approx 2.7 \times 10^{-4}$
+is structural noise in the electronic regime ($+0.028$~ppm).
+\item Convention drift ($\pm 25$~ppm; Eides Tab~7.3 vs Pachucki--Yerokhin
+2010) is the largest pre-existing literature-itemization
+sensitivity, documented in \S\ref{sec:conv_rZG_DHFS}.
+\end{itemize}
+
+\textbf{Structural reading.}  The framework-native architecture is
+identical for H 21cm and D 1S HFS --- same operators, same projection
+chains, same scope-boundary statements.  What changes at I=1 is:
+(a) the Clebsch--Gordan multiplicity (3/2 vs 1, structural angular
+content), (b) the nuclear-spin Hilbert space dimension (3 vs 2,
+adding one qubit and 7 Pauli terms to the I·S encoding), (c) the
+Layer-2 budget magnitude ($-286$ ppm vs $-18$ ppm, scaling with the
+nuclear extent and complexity).  The operator-level autopsy verifies
+that all three changes are structural consequences of nuclear physics,
+not framework modifications.  This is the I=1 verification of the
+multi-focal architecture: the same framework that reproduces H 21cm
+at $+18$~ppm reproduces D 1S HFS at the depth of the deuteron Layer-2
+budget, with framework-native components (BF, $a_e$, recoil, Zemach)
+at the same operator-level precision.  No new convention mismatch
+surfaced beyond the pre-existing \S\ref{sec:conv_rZG_DHFS} exposure.
+
 \subsubsection{Helium $2{}^1\!P \to 1{}^1\!S$ oscillator strength}
 \label{sec:autopsy_he_oscillator}
 
@@ -2421,6 +2688,40 @@ both expose the small-$Z$ graph-validity-boundary at He as the dominant
 limitation for excited-state precision, separable from the framework's
 clean closures on hydrogenic and ground-state observables.
 
+\textbf{Internal multi-focal Phase D production result (May 9 follow-on).}
+The extended-angular-CI architecture in
+\texttt{geovac/internal\_multifocal.py} (~1521 lines, 28 fast tests $+$ 2
+slow, 191/191 zero regression) lands at $f = 0.286$ ($+3.4\%$ vs Drake
+$0.276$) on physically-motivated multi-exponent panels at well-conditioned
+$\mathrm{cond}(S) = 400$.  The $E(2{}^1\!P)$ state is variationally
+violated by $\sim 0.08$~Ha (3.8\%) due to $\kappa$-induced inter-shell
+over-binding, and the variational floor sits at $+14\%$.  An exponent
+sweet spot ($E1$ panel) gives $-0.88\%$ but is NOT robust ($f$ varies
+$0.06$--$0.44$ across plausible exponent panels).  Sub-1\% accuracy
+requires explicit $r_{12}$ correlation (Hylleraas) on a P-state basis.
+
+\textbf{Hylleraas r$_{12}$ closure status (Track 1 follow-on, May 9).}
+The Hylleraas r$_{12}$ explicit-correlation production module
+\texttt{geovac/hylleraas\_r12.py} (Track 1 sprint, May 2026) reproduces
+the He 1$^1$S ground state to $-0.016$~mHa vs Drake exact NR at
+$\omega_{\max} = 4$ (22 basis functions) and the Hylleraas 1929 published
+3p value to $+0.79$~mHa.  Cusp condition variationally captured (cusp
+ratio at $u=0$ converges $0.29 \to 0.49$ toward Kato $0.5$).  However,
+the $2{}^1\!P \to 1{}^1\!S$ oscillator strength is \emph{deferred} to a
+follow-on sprint: it requires extending the Hylleraas basis to L=1 P-state
+trial functions (Schwartz 1961 form $(z_1 \pm z_2)\,\chi_\pm(s, t, u)$),
+a $\sim$2-3 week structural extension out of scope for the Track 1
+S-state implementation.  The single-exponent Hylleraas trial does not
+close the asymmetric-Z$_{\text{eff}}$ excited-state issue at modest
+basis size; the named structural closure is
+\textbf{Hylleraas--Eckart double-zeta} (Hylleraas--Eckart 1933;
+implemented in Drake's HYLA), which adds a second exponent $\beta$
+to the trial $\Psi = \sum_{lmn}(a_{lmn} e^{-\alpha s - \beta t} +
+b_{lmn} e^{-\alpha s + \beta t}) s^l t^{2m+1} u^n$ to represent the
+inner $1s$ at $Z_a \approx 2$ and outer $2p$ at $Z_b \approx 1$.
+Source: \texttt{debug/hylleraas\_r12\_track1\_memo.md}; data:
+\texttt{debug/data/hylleraas\_r12\_track1\_results.json}.
+
 \subsubsection{Cesium 6S$_{1/2}$ hyperfine (atomic clock; SCOPING)}
 \label{sec:autopsy_cs_hfs}
 
@@ -2456,6 +2757,55 @@ in Sprint 7b screened SO splittings (Clementi--Raimondi single-zeta
 screening qualitative; W1c-residual core-polarization correction
 needed for sub-percent precision).
 
+\textbf{Z-cliff diagnostic refinement (Track 2, 2026-05-09 follow-on).}
+A diagnostic-only sprint (post-multi-track Roothaan autopsy + screening
+kernel upgrade closeout) ran five hypothesis probes to localize the
+dominant cause of the $-47\%$ Cs HFS framework-native residual.  All
+four candidate alternative causes were RULED OUT cleanly: (b) the FD
+solver \texttt{\_solve\_screened\_radial\_log} is faithful to $<1.2\%$
+in $|\psi(0)|^2$ across hydrogenic Z=1..80 with monotone n\_grid
+convergence (probe~b); (c) no factor-of-X convention bug in the
+$Z_\text{eff}(r) \to \psi \to A_\text{HF}$ chain (probe~c); (d) the
+multi-zeta machinery in \texttt{geovac/multi\_zeta\_orbitals.py}
+itself is bug-free (STO normalization, MultiZetaOrbital reduction,
+density integration to $N_\text{core}$ all correct, probe~d).  The
+\textbf{dominant cause is (a) sharpened by a structural mechanism (d):
+the missing radial nodes in the CR67 single-zeta hydrogenic basis.}
+Probe~(a) extended on Cs Z=55 across all 11 shells of the [Xe] core
+shows the cliff is shell-resolved: inner shells (1s, 2s, 2p) overshoot
+by mean $1.01\times$ (well-fit), outer shells (4d, 5s, 5p) overshoot
+by mean $2.68\times$ (4d alone overshoots $4.14\times$).  Probe~(d)
+reveals the structural mechanism: the all-positive-coefficient
+single-zeta hydrogenic basis (and the heuristic two-zeta extension)
+produces s-orbitals that violate radial orthogonality at the level of
+$|\langle R_{2s}|R_{3s}\rangle| = 0.86$ --- without negative
+coefficients, no radial nodes can form, and the orbital amplitude
+piles up near the inner-zeta peak.  Real RHF outer-shell orbitals
+have $n - \ell - 1$ radial nodes whose physical role is to push
+amplitude OUT to the correct radial extent by orthogonalizing against
+inner shells.  The two-zeta heuristic FAILED in the wrong direction
+($-47\% \to -90\%$) because it inherited the no-nodes problem and
+made the screening transition steeper without fixing the position.
+Probe~(e) v2 localizes the cliff onset cleanly at K (Z=19): H Z=1
+ratio $|\psi_\text{FW}(0)|^2 / |\psi_\text{HF lit}(0)|^2 = 0.999$
+(perfect), Na Z=11 = 1.243 (mild over), K Z=19 = 0.309 (3.2$\times$
+under, cliff onset), Rb Z=37 = 0.193 (deepest), Cs Z=55 = 0.625
+(partial recovery).  Source memo:
+\texttt{debug/z\_cliff\_diagnostic\_track2\_memo.md}; probe scripts in
+\texttt{debug/z\_cliff\_probe\_\{a,a\_extended,b,c,d,e,e\_v2\}.py}.
+
+\textbf{BBB93/KTT GO with eyes open}: The Track~2 diagnostic confirms
+the BBB93/Koga-Tatewaki-Thakkar full multi-zeta tabulation IS the
+correct address for the dominant cause (negative coefficients in
+BBB93 produce the radial nodes that all-positive heuristic two-zeta
+cannot).  Expected outcome: BBB93 closes $\sim 20\%$ of the residual
+($-47\% \to \sim -25$ to $-30\%$ for Cs), the full sub-percent closure
+requiring \emph{both} the screening kernel upgrade AND the full
+Bohr--Weisskopf relativistic enhancement via spinor lift
+(\S\ref{sec:proj_spinor}).  Self-consistent Hartree--Fock iteration
+in \texttt{geovac/neon\_core.py} is the principled long-term
+alternative that closes the cliff for ALL Z (not just [Xe] core).
+
 \textbf{Diagnostic-instrument angle.}  The framework's projection-chain
 decomposition would isolate three known atomic-structure
 dependencies of the percent-level Cs PNC uncertainty:
@@ -2473,6 +2823,169 @@ machinery in a regime where simple hydrogenic formulas break down,
 and connects to atomic-clock-grade precision ($10^{-15}$ relative,
 the SI-second definition).  Source memo:
 \texttt{debug/cs\_hfs\_v1\_memo.md}.
+
+\subsubsection{Positronium 1S--2S two-photon transition (first equal-mass two-body autopsy)}
+\label{sec:autopsy_ps_1s2s}
+
+\textbf{Reference.}  $\nu(1^3 S_1 \to 2^3 S_1) = 1{,}233{,}607{,}216.4(3.2)$
+MHz (Fee, Chu, Mills, Mader, Mills, Chichester, \emph{Phys.\ Rev.\ A}
+\textbf{48}, 192, 1993; $2.6$~ppb).
+
+The first \S~V.C autopsy of an \emph{equal-mass two-body} system, and the
+first operator-level test of the just-added 16th projection
+(\S~\ref{sec:proj_breit_retardation} Breit retardation, added 2026-05-08)
+since its introduction.  Continues the multi-observable focal-length
+decomposition program (\S~1.8 directive) at the cleanest known instance of
+the multi-focal-composition wall.
+
+\begin{table}[h!]
+\centering\small
+\caption{Five-component Roothaan decomposition of the positronium 1S--2S
+two-photon transition.  Framework-native subtotal ($1 + 3$) $=$
+$1{,}233{,}687{,}096.0775$ MHz reproduces the May-8 Ps 1S-2S sprint
+baseline at $+64.75$~ppm vs Fee 1993; the $+80$~GHz overshoot is the
+missing $\alpha^4$ Breit retardation content (Component 2 = first
+operator-level test of \S~\ref{sec:proj_breit_retardation}).
+Cumulative ($1+2+3+4+5$) closes to $+0.0075$~MHz, within Fee 1993
+$\pm 3.2$~MHz uncertainty.  Source memo:
+\texttt{debug/ps\_1s2s\_autopsy\_track4\_memo.md}.}
+\label{tab:autopsy_ps_1s2s}
+\begin{tabular}{p{4.6cm} r p{4.5cm} l}
+\toprule
+Component & Value (MHz) & Projection chain & Status \\
+\midrule
+1.~Bohr at $m_\text{red}(ee) = 0.5$ & $+1{,}233{,}690{,}735.0941$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
+\S\ref{sec:proj_restmass} & FN \\
+2.~$\alpha^4$ Breit / two-body Dirac & $-79{,}861.9$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
+\S\ref{sec:proj_restmass} $\circ$
+\textbf{\S\ref{sec:proj_breit_retardation}} $+$ Layer-2 BS expansion
+& L2 (op-level kernel: FN) \\
+3.~Eides~\S~3.2 SE Lamb-shift differential & $-3{,}639.0166$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
+\S\ref{sec:proj_restmass} $\circ$ \S\ref{sec:proj_spectral_action}
+$\circ$ \S\ref{sec:proj_drake_swainson} & FN \\
+4.~Annihilation channel ($e^+e^- \to \gamma$) & $-9.3100$ &
+Layer-2 input (LS-8a vertex sector) & L2 \\
+5.~Multi-loop $\alpha^6 + \alpha^7$ & $-8.4600$ &
+Layer-2 input (LS-8a renormalization) & L2 \\
+\midrule
+\textbf{Framework-native subtotal} (1+3) & $+1{,}233{,}687{,}096.08$ &
+\multicolumn{2}{l}{$+64.75$~ppm vs Fee 1993} \\
+\textbf{Cumulative} (1+2+3+4+5) & $+1{,}233{,}607{,}216.41$ &
+\multicolumn{2}{l}{$+5\times 10^{-6}$ ppm; within Fee~1993 $\pm 3.2$ MHz} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Operator-level rest-mass projection (Component 1, FN).}  The
+ratio $\nu_\text{Ps}/\nu_\text{H} = 0.5002723085$ matches
+$m_\text{red}(ee)/m_\text{red}(ep) = 0.5002723085$ to relative residual
+$0.00 \times 10^{0}$ (bit-identical).  This is the operator-level
+verification of \S~\ref{sec:proj_restmass} ring-preservation in the
+equal-mass limit at the same observable type as Mu 1S-2S (May-8 Track 1
+sprint, $-0.11$ ppm).  Together the two cover the rest-mass projection
+across the lepton-mass-ratio axis (Mu, $\lambda_l/\lambda_n \sim 1/207$;
+Ps, $\lambda_l/\lambda_n = 1/1$).
+
+\textbf{Operator-level Breit retardation (Component 2, partial FN).}  The
+\S~\ref{sec:proj_breit_retardation} kernel is implemented as production
+module \texttt{geovac.breit\_integrals} (26 tests, exact
+Fraction/sympy arithmetic).  Closed-form matrix elements at $Z=1$, $k=0$:
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{l c}
+\toprule
+Orbital pair & $R^0_\text{BP}(Z=1)$ \\
+\midrule
+$(1s,1s; 1s,1s)$ & $-5 + 8\log 2 \approx 0.5452$ \\
+$(1s,1s; 2s,2s)$ & $4/81 \approx 0.0494$ \\
+$(1s,2s; 1s,2s)$ & $-4\log 2 - 19/9 + 9\log(3)/2 \approx 0.0601$ \\
+$(2s,2s; 2s,2s)$ & $-175/256 + \log 2 \approx 0.0096$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+The kernel lives in $\mathbb{Q}[\log 2, \log 3]$ (Paper~18 embedding-log
+content; the Mellin-regularized inner integral produces $\log p$ for
+small primes $p$ from the negative-power singularity treatment).
+
+Three operator-level subtests:
+\begin{itemize}\setlength\itemsep{0pt}
+\item \textbf{Test 1 (kernel implementation): PASS.}  Closed-form
+expressions for all four tested orbital pairs; production-grade module.
+\item \textbf{Test 2 (Roothaan multipole termination at equal mass):
+PASS.}  For $(1s,1s)$ and $(2s,2s)$ products $l_a = l_b = 0$, only $k=0$
+contributes by Wigner-3j triangle inequality (\S~\ref{sec:proj_3j}).
+The termination is angular content, \emph{not} a small-parameter
+expansion --- it holds independent of mass ratio, re-confirming the
+Ps HFS sprint finding for the 1S-2S observable.
+\item \textbf{Test 3 (state-specific bound-state energy at $\alpha^4$):
+PARTIAL.}  The framework implements (a) the radial kernel, (b) the
+angular projection via \S~\ref{sec:proj_3j}, (c) the spinor sector
+via \S~\ref{sec:proj_spinor}.  The full bound-state matrix element
+$\langle \text{Ps}, 1S | H_B | \text{Ps}, 1S\rangle - \langle
+\text{Ps}, 2S | H_B | \text{Ps}, 2S\rangle$ in the equal-mass two-body
+Dirac normalization requires the Bethe--Salpeter quasi-energy expansion
+machinery, which is structurally outside the framework's single-particle
+Eides~\S~3.2 SE bracket.  This is the named structural extension of
+\S~\ref{sec:proj_breit_retardation}.
+\end{itemize}
+
+\noindent
+\textbf{\S~\ref{sec:proj_breit_retardation} verdict: OPERATOR-LEVEL
+PARTIALLY VERIFIED.}  Kernel-level + Roothaan termination at equal mass
+$=$ OK at operator level; full bound-state energy evaluation at $\alpha^4$
+requires Bethe--Salpeter machinery as the named extension target.
+
+\textbf{Layer-2 magnitude consistency check.}  The framework-extracted
+$\alpha^4$ Breit residual (calibrated against Penin--Pivovarov 1998
+complete theoretical value) gives fraction
+$-79{,}861.9 / (m_e c^2 \alpha^4 / h) = -0.2279$, vs canonical
+Karshenboim 2005 \S~4 closed-form $-(11/48) = -0.2292$; agreement
+$0.55\%$.  Match consistent with the calibration-by-construction
+caveat documented in \texttt{debug/precision\_catalogue\_positronium\_1s2s\_memo.md}.
+
+\textbf{Crystallization of the multi-focal-composition wall at $\alpha^4$.}
+This autopsy identifies the operator-level signature of the wall.  The
+framework handles the $\alpha^2$ Bohr level (Component 1) and the
+$\alpha^3$ self-energy (Component 3) as native, with full operator-level
+realization.  At $\alpha^4$ (Component 2), the wall surfaces: the Breit
+retardation kernel is implemented and tested at operator level; the
+\emph{bound-state matrix-element evaluation} in two-body Dirac
+normalization is the named structural extension.
+
+This is the cleanest known instance of the multi-focal-composition wall
+because: (i) the wall surfaces at $\alpha^4$ --- one full order before
+the LS-8a renormalization wall at $\alpha^5$ or higher; (ii) the wall
+is \emph{isolated} from the renormalization wall (Components 4, 5 at
+the $-9$ to $-17$ MHz scale, while Component 2 is at the $-80{,}000$ MHz
+scale --- three orders of magnitude separation); (iii) the wall is at
+the operator level without being at the renormalization level (kernel
+implemented in closed form, angular structure preserved, multipole
+termination at equal mass preserved --- only the bound-state evaluation
+machinery is the named extension).
+
+The multi-focal-composition wall (CLAUDE.md \S~1.7, Sprint HF May 2026)
+is therefore made visible at \emph{the operator level} on the cleanest
+possible observable, transitioning from a structural-skeleton-scope
+\emph{statement} to an operator-level \emph{structural identification}
+with a named extension target.
+
+\textbf{Structural reading.}  Same architecture that closes the
+H 1S Lamb shift at \S~\ref{sec:autopsy_lamb} and $\mu$H $2S$--$2P$ at
+\S~\ref{sec:autopsy_muh_lamb} closes Ps 1S-2S here, with the equal-mass
+two-body Dirac kinematic content (Component 2) being the structural
+extension specific to $\lambda_a = \lambda_b$ that has no analog in
+the unequal-mass cases.  Together with the existing Ps 1S HFS sprint
+(framework-native Fermi-contact at 4/7 of LO, annihilation channel as
+3/7 of LO Layer-2), the equal-mass leptonic axis is now spanned at
+both observable types (HFS spin-coupling + 1S-2S level energy) and the
+dominant Layer-2 mechanism shifts cleanly between observable types
+(annihilation for HFS, $\alpha^4$ Breit for 1S-2S).
 
 % -------------------------------------------------------------------
 \subsection{Literature convention exposures (running catalogue)}
@@ -2586,10 +3099,35 @@ budget re-anchoring.  The original ``recoil double-counting''
 diagnosis was a misdiagnosis; the issue was Layer-2 itemization
 specification, not a kernel bug.
 
+\textbf{Operator-level autopsy refinement (May 9 2026).}  The Track 5
+operator-level autopsy of D 1S HFS (\S\ref{sec:autopsy_d_hfs})
+operates exclusively at the Pachucki--Yerokhin~2010 / Friar--Payne~2005
+$-286$~ppm Layer-2 budget convention.  Component-by-component the
+framework reproduces (a) the $\hat{I}\cdot\hat{S}$ Hamiltonian at I=1
+on the 6-dim joint nuclear-electronic Hilbert space at machine
+precision (multiplicity ratio D/H $= 3/2$ to 12 digits); (b) the
+\S\ref{sec:proj_magnetization_density} operator-level Zemach at
+$r_Z(D) = 2.593$~fm to $\sim 1.45 \times 10^{-14}\%$ of the LO shift;
+and (c) the cumulative $+285.6$~ppm chain residual matches the
+$-286$~ppm PY 2010 Layer-2 budget magnitude to within the $\pm 25$~ppm
+itemization drift documented above.  No new convention mismatch
+surfaced at the operator level.  This sharpens the $\sim 0.01\%$ /
+$\sim 25$~mfm magnitude estimate to: framework-side architecture is
+identical for H and D (same operators, same chains, same scope
+boundaries); the Layer-2 budget magnitudes differ by $\sim 16\times$
+because the deuteron's nuclear-structure complexity (NN binding
+dynamics inside a weakly bound n+p system) makes its polarizability,
+multi-loop QED, and recoil NLO contributions much larger than the
+proton's at the same precision.  The convention exposure is
+intrinsically a Layer-2 itemization split, NOT a framework
+architecture issue.
+
 \textbf{Cross-references.}  Originating documentation:
-\S\ref{sec:offprecision} Sprint Calc-rZG row.  Source memos:
+\S\ref{sec:offprecision} Sprint Calc-rZG row.  Operator-level
+elaboration: \S\ref{sec:autopsy_d_hfs}.  Source memos:
 \texttt{debug/calc\_track\_rZG\_global\_zemach\_memo.md},
-\texttt{debug/rzg\_bug\_diagnosis\_memo.md}.
+\texttt{debug/rzg\_bug\_diagnosis\_memo.md},
+\texttt{debug/d\_hfs\_autopsy\_track5\_memo.md}.
 
 \subsubsection{$\mu$H 2$S_{1/2}$--2$P_{1/2}$ VP one-loop split (Antognini vs Krauth)}
 \label{sec:conv_muH_VP}
@@ -2759,6 +3297,53 @@ difference, and the originating documentation in the catalogue
 The catalogue is a running register; expect it to grow as the
 multi-observable focal-length decomposition program (CLAUDE.md
 \S~1.8) advances.
+
+\paragraph{Predictive refinement: where to look for the next
+exposures.} % Source: synthesis pass §3.4 Pattern C predictions.
+The four entries above all involve hyperfine-class or muonic-Lamb
+observables.  The mechanism is structural: HFS observables decompose
+into many sub-leading Layer-2 corrections at sub-percent precision
+(leading Zemach, NLO recoil-mixing, finite-size, multi-loop QED,
+polarizability, hadronic VP), each compiled differently across
+Eides~2024, Karshenboim~2005, Krauth~2017, Pachucki--Yerokhin~2010,
+and Friar--Payne~2005.  Sub-percent itemization differences
+compound at exactly the precision the framework operates at.  This
+suggests three pre-named candidate observables for the next
+class~(a) findings, in decreasing prior probability:
+\begin{enumerate}\setlength\itemsep{0pt}
+\item \textbf{Deuteron polarizability convention.}  Pachucki--Yerokhin
+2010 versus Friar--Payne~2005 itemization of the deuteron
+polarizability contribution to D HFS.  Expected magnitude: tens of
+ppm.  Follow-up sprint: deeper D HFS Roothaan autopsy beyond the
+\S~\ref{sec:conv_rZG_DHFS} closure.
+\item \textbf{Positronium HFS annihilation channel itemization.}
+Czarnecki--Melnikov--Yelkhovsky~2000 versus Karshenboim~2005
+itemization of the $\alpha^5$ corrections to the Ps 1S annihilation
+contribution.  Expected magnitude: $\sim 100$ ppm of LO HFS.
+Follow-up sprint: positronium HFS five-component autopsy at
+$\alpha^5$.
+\item \textbf{Helium fine-structure $\alpha^3 (Z\alpha)^2$
+itemization.}  Drake~1971 versus Pachucki--Yerokhin~2010
+itemization of higher-order Breit--Pauli plus multi-electron
+spin-spin / spin-other-orbit content.  Expected magnitude: tens of
+MHz on GHz-scale intervals.  This is the only Lamb-class candidate
+in the predicted set; the other two are HFS-class.
+\end{enumerate}
+The protocol classifies entries by predicted observable class:
+class-(a) literature-itemization (D.1, D.2, D.3 of the existing
+catalogue) versus class-(ii) closed-form-vs-operator-level (D.4 of
+the existing catalogue).  Future sprints adding entries should tag
+which class the new entry falls under.
+
+\textbf{What would falsify Pattern C.}  If the next three sprints
+produce \S~V.D entries from electronic Lamb shift (where
+Eides--Pachucki--Yerokhin itemizations are well-aligned at the
+framework's precision) or from non-precision atomic spectra (where
+the framework operates in larger residual ranges), Pattern C is
+HFS-specific rather than a structural prediction about which
+observable types surface convention exposures.  In that case the
+predictive refinement above is data-availability artefact, not
+structural.
 
 % -------------------------------------------------------------------
 \subsection{Falsified candidate: W3 spectral-zeta identification of
@@ -3099,58 +3684,127 @@ transcendental side.  See Remark~\ref{rem:vd_correlation} in
 projection-row level.
 
 % ===================================================================
-\section{Falsifiable Prediction: Error Compounds with Projection Depth}
+\section{Falsifiable Prediction: Layer-2-Presence Bound on
+Catalogue Residuals}
 \label{sec:prediction}
+% Source: May 2026 synthesis pass (debug/synthesis_pattern_review_memo.md
+% §2 Pattern B falsification, §2.4 Layer-2-content axis, §2.5 replacement
+% prediction).  The naive depth-vs-residual form was falsified on the
+% catalogue itself; this section now states the replacement
+% (Prediction 1') with the Sprint Calc-P refinement repositioned as
+% the cleanest L2-count = 0 exact example.
 % ===================================================================
 
-The catalogue groups matches by projection depth: zero, one, two,
-three.  Reading down the column of match precision gives:
+The catalogue (\S~\ref{sec:catalog}, \S~\ref{sec:offprecision}) does
+\emph{not} arrange itself by projection depth.  Re-tagging each
+catalogue row by the number of Layer-2 inputs consumed in its chain
+(Layer-2 inputs in the sense of \S~\ref{sec:layer2_boundary}:
+external scalars such as $r_Z$, $g_p$, deuteron polarizability,
+multi-loop QED coefficients) reveals a much sharper structural
+ordering:
 \begin{itemize}\setlength\itemsep{0pt}
-\item Zero-projection (Layer~1 only): all exact.
-\item Single-projection: all exact at the symbolic level (modulo
-truncation at finite $n_\text{max}$).
-\item Two-projection: residual error $1$--$3\%$.
-\item Three-projection: residual error $\approx 2$--$3\%$.
+\item \textbf{L2-count $= 0$ (framework-native chains).}  Residuals
+run from machine-exact (Stefan--Boltzmann $\pi^2/90$ at depth~3,
+hydrogen $1S$ static polarizability $\tfrac{9}{2}a_0^3$ at depth~3,
+spatial $S^3$ Casimir $1/240$ at depth~2) to converged-basis
+ceilings ($-0.534\%$ for the H Lamb shift one-loop closure,
+$\approx 0.024\%$ for He NR variational).  The residual is bounded
+by basis quality alone --- error code~B in the
+\S~\ref{sec:offprecision} system --- when the chain consumes no
+external Layer-2 input.
+\item \textbf{L2-count $= 1$ (one external scalar).}  Residuals
+tighten to tens of ppm or sub-ppm (H 21cm HF-4 with Zemach $r_Z$ at
+$+18$~ppm; muonium 1S--2S under rest-mass projection at $-0.11$~ppm;
+$\mu$H 1S Bohr--Fermi at $+2$~ppm).  The single Layer-2 input is
+always a scalar parameter and its uncertainty propagates linearly.
+\item \textbf{L2-count $= 2$+ (multi-focal-wall regime).}  Residuals
+are dominated by the largest single Layer-2 contribution.  Mu HFS
+at $+199$~ppm is the cleanest LS-8a-class isolation (no QCD nuclear
+budget); positronium 1S--2S at $+64.75$~ppm framework-native is
+closed by the $\alpha^4$ Breit Layer-2 input as the
+\S~\ref{sec:proj_breit_retardation} sixteenth projection;
+$\mu$H Lamb at $-0.10\%$ closes by Antognini~2013 multi-loop QED
+plus deuteron polarizability plus recoil~NLO with the K\"all\'en--
+Sabry two-loop VP dominating.
 \end{itemize}
 
-\begin{prediction}[Error compounds with projection depth]
-\label{pred:error_depth}
-For matches involving $k$ chained projections, the residual error
-$\epsilon_k$ scales roughly as $\epsilon_k \sim k \cdot \epsilon_1$,
-where $\epsilon_1 \sim 1\%$ is the per-projection truncation error
-at finite~$n_\text{max}$.  Equivalently: every additional projection
-introduces an independent $O(n_\text{max}^{-p})$ residual that does
-not cancel against earlier projections.
+\begin{prediction}[Layer-2-presence bound on catalogue residuals]
+\label{pred:l2_presence}
+The residual error of a catalogue row is bounded above by the
+larger of (i)~the framework's basis-quality residual at zero
+Layer-2 inputs in the chain, and (ii)~the largest single Layer-2
+input consumed by the chain:
+\begin{equation*}
+|\epsilon(\text{observable})| \;\leq\;
+\max\!\bigl(\epsilon_\text{basis}(\text{framework}),
+\;\max_i |L_2^{(i)}|\bigr).
+\end{equation*}
+The genuine ordering axis is observable-class (zero-, one-,
+multi-Layer-2-input) crossed with the framework's basis-quality
+limit at zero Layer-2 inputs.  Chained projection depth is a
+downstream proxy: it correlates with opportunity for compounding
+when the chain consumes Layer-2 inputs, but it fails in both
+directions when the chain does not (deep zero-L2 chains can be
+exact, shallow multi-L2 chains can have large residuals).
 \end{prediction}
 
 This is a falsifiable structural claim about the framework, not a
-phenomenological fit.  Existing data are consistent (LS-2 Lamb shift
-at three projections, $-2.0\%$).  Tests for the prediction:
+phenomenological fit.  The catalogue rows above are consistent
+with it.  Tests for the prediction:
 \begin{itemize}\setlength\itemsep{0pt}
-\item Compute Schwinger anomalous moment $\alpha/(2\pi)$ via
-two chained projections (vector photon $\circ$ spectral action).
-The prediction sets a $1$--$2\%$ ceiling on the achievable accuracy
-at fixed $n_\text{max}$.
-\item Compute the H$^+_2$ ground-state energy (single projection,
-Fock + spectral); the prediction sets the accuracy at the
-single-projection symbolic limit.
-\item Compute Casimir energy on $S^3 \times \mathbb{R}$ (zero
-chained projections beyond Fock); should be exact symbolic.
+\item Any new framework-native chain (L2-count $= 0$) producing a
+rational-analytic answer should land at residual~$0$ at converged
+basis (Sprint Calc-P generalization).
+\item Any new chain with a single Layer-2 input should land at
+residual bounded by the uncertainty on that input.
+\item Any new chain with two or more Layer-2 inputs should have
+its residual dominated by the largest single Layer-2 input,
+not by the sum or quadrature.
 \end{itemize}
-A failure of the prediction (a multi-projection match found exact,
-or a single-projection match found with residual error) would
-indicate either an incorrect projection count for that observable
-or a structural cancellation we have missed.
+A failure of the prediction would take one of three forms:
+(a)~a catalogue row with L2-count $= 0$ and residual greatly
+exceeding the framework's basis-quality limit (would indicate a
+structural artefact not yet identified); (b)~a catalogue row with
+L2-count $= 2+$ whose residual is smaller than the largest
+single Layer-2 input by more than an order of magnitude (would
+indicate an unexplained cancellation between Layer-2 inputs);
+(c)~a statistical fit of the catalogue showing that depth alone
+provides a tighter bound than Layer-2-presence.
 
-\begin{remark}[Refinement from Sprint Calc-P, 2026-05-09]
+\begin{remark}[Naive depth-vs-residual prediction, falsified]
+\label{rem:depth_falsification}
+A naive earlier form of this prediction asserted that residual
+scales roughly linearly with chain depth, $\epsilon_k \sim k \cdot
+\epsilon_1$ with $\epsilon_1 \sim 1\%$.  The May~2026 synthesis
+pass falsified this on the catalogue itself.  At depth~3 alone the
+catalogue contains the H~1S polarizability ($\tfrac{9}{2}\,a_0^3$
+exact, residual $0$, Sprint Calc-P), the Stefan--Boltzmann
+$\pi^2/90$ (Sprint TD Track~1, residual $0$), positronium 1S--2S
+framework-native ($+64.75$~ppm), D HFS Bohr--Fermi strict
+($+40$~ppm), and the He oscillator strength ($+3.4\%$).  At depth~4
+the catalogue contains $\mu$H Bohr--Fermi ($+2$~ppm) and the H
+Lamb shift one-loop closure ($-0.534\%$).  Residuals at every
+depth $\geq 2$ are scattered across more than four orders of
+magnitude.  Depth correlates with \emph{opportunity} for
+compounding when Layer-2 inputs are consumed, but the residual is
+controlled by the Layer-2-presence count and the framework's
+basis-quality limit, not by depth itself.
+\end{remark}
+
+\begin{remark}[Sprint Calc-P, the cleanest L2-count $= 0$ exact
+example]
 \label{rem:depth_refinement}
 The H~1S static dipole polarizability calculation (Sprint Calc-P,
 \S~\ref{sec:catalog} three-projection chain row) returned
 $\alpha_p(1S) = \tfrac{9}{2}\,a_0^3$ \emph{exactly} via a depth-3
 chain (Fock $\circ$ Wigner $3j$ $\circ$ Sturmian), residual~$=~0$.
-This is structurally a counter-example to a strong reading of
-Prediction~\ref{pred:error_depth}: depth alone does not bound
-residual from below.
+Under the Layer-2-presence bound of
+Prediction~\ref{pred:l2_presence} this is the structurally clean
+``L2-count $= 0$, rational analytic answer in finite-basis span''
+class: there are no external Layer-2 inputs in the chain, the
+analytic answer lies exactly within the framework's truncated
+basis, so the residual sits at the basis-quality limit which is
+$0$ for this observable.
 
 The mechanism is sharp.  The Dalgarno--Lewis solution
 $F|1s\rangle = -\tfrac{1}{2}\, z(r{+}2)|1s\rangle$ has $p$-wave
@@ -3162,26 +3816,23 @@ matrix-element machinery (rational arithmetic via
 \texttt{geovac/dirac\_matrix\_elements.py}), the projection chain
 produces the analytic answer with no truncation residual.
 
-The conditional refinement: the depth-prediction holds for
-observables whose analytic answer requires \emph{irrational
-content} (continuous integration over a temporal/spectral parameter
-per Paper~35 Prediction~1, transcendental ring per Paper~18, or
-limits inaccessible at finite $n_\text{max}$).  For observables
-whose analytic answer is a pure rational with a closed-form
-representation that lies exactly within the framework's truncated
-basis, the residual is zero at any depth.  Polarizability is the
-first identified example of the latter class; static linear-response
-observables that admit Dalgarno--Lewis-type closed forms are
-candidates for the same exact-at-finite-$n_\text{max}$ behaviour.
-
-The refined prediction: $\epsilon_k \sim k \cdot \epsilon_1$ for
-observables in the irrational-analytic-answer class; $\epsilon_k =
-0$ at sufficient $n_\text{max}$ for observables in the
-rational-analytic-answer class with finite-basis representation.
-The dividing line is empirically diagnosable from the
-transcendental signature: rational-class observables have pure
-$\mathbb{Q}$ transcendental signature, irrational-class observables
-have at least one transcendental factor.
+This refines the L2-count $= 0$ class of
+Prediction~\ref{pred:l2_presence} along the transcendental axis:
+zero-Layer-2-input observables whose analytic answer is a pure
+rational with a closed-form representation in the framework's
+truncated basis land at residual $0$ at finite $n_\text{max}$;
+zero-Layer-2-input observables whose analytic answer requires
+irrational content (continuous integration over a
+temporal/spectral parameter per Paper~35 Prediction~1, or limits
+inaccessible at finite $n_\text{max}$) land at the framework's
+basis-quality residual.  Polarizability is the first identified
+example of the rational class; static linear-response observables
+that admit Dalgarno--Lewis-type closed forms are candidates for
+the same exact-at-finite-$n_\text{max}$ behaviour.  The dividing
+line is empirically diagnosable from the transcendental
+signature: rational-class observables have pure $\mathbb{Q}$
+transcendental signature, irrational-class observables have at
+least one transcendental factor.
 \end{remark}
 
 % ===================================================================
@@ -3236,7 +3887,7 @@ matches do not.
 \begin{enumerate}
 \setlength\itemsep{0pt}
 
-\item \textbf{Closure of the projection list.}  Sixteen projections
+\item \textbf{Closure of the projection list.}  Nineteen projections
 are now documented.  The thirteenth (Drake--Swainson asymptotic
 subtraction) was added in sprint LS-4 to close the 2P Bethe-log
 structural floor of LS-3.  The fourteenth (rest-mass projection) and
@@ -3255,33 +3906,55 @@ Matsubara).  The sixteenth (two-body Dirac / Breit retardation,
 precision-catalogue sprint of 2026-05-08, motivated by the
 positronium 1S--2S framework-native residual at $+64.75$ ppm (the
 sixth and structurally cleanest instance of the
-multi-focal-composition wall).  Are there projections in the
-framework that are still not yet in this list?  Two candidates that
-may need to be added on review: (a)~the Mellin / heat-kernel
-evaluation at fractional~$s$ (currently treated as part of
-spectral-action), and (b)~the direction-resolved Hodge decomposition
-of vector-photon edges (Paper~28 \S~vq\_sprint).  Decision pending.
+multi-focal-composition wall).  The seventeenth, eighteenth, and
+nineteenth (Foldy/Friar charge density, Zemach magnetization-density,
+tensor multipole; \S\S~\ref{sec:proj_charge_density},
+\ref{sec:proj_magnetization_density},
+\ref{sec:proj_tensor_multipole}) were added in the multi-track
+Roothaan autopsy sprint of 2026-05-09, formalizing the intra-nuclear
+Layer-2 input mechanisms that surfaced as operator-level
+constructions during the H 21cm and D 1S HFS autopsies.
 
-\item \textbf{Quantitative form of Prediction~\ref{pred:error_depth}.}
-The prediction states that error compounds with projection depth.
-The current data are consistent with linear compounding
-($\epsilon_k \sim k \cdot \epsilon_1$), but quadratic
-($\sqrt{k} \cdot \epsilon_1$) or geometric
-($\epsilon_1^k$) compounding are not yet ruled out.  A six-row
-benchmark across $k = 0, 1, 2, 3, 4, 5$ would distinguish.
+Are there projections in the framework that are still not yet in
+this list?  Two candidates that may need to be added on review:
+(a)~the Mellin / heat-kernel evaluation at fractional~$s$
+(currently treated as part of spectral-action), and (b)~the
+direction-resolved Hodge decomposition of vector-photon edges
+(Paper~28 \S~vq\_sprint).  Decision pending.  See also the
+Lorentz-boost candidate twentieth projection at the bottom of this
+section (verdict: REQUIRES-EXTENSION at the framework level; not
+adding now).
 
-The LS-4 Lamb shift datapoint adds new information: the LS-4
+\item \textbf{Quantitative form of Prediction~\ref{pred:l2_presence}.}
+The Layer-2-presence bound replaces the falsified naive
+depth-vs-residual prediction (see
+Remark~\ref{rem:depth_falsification}).  Outstanding work:
+(i)~quantify the framework's basis-quality residual
+$\epsilon_\text{basis}(\text{framework})$ for each major chain
+class (one-loop QED Lamb-shift class, NR variational class,
+graph-native CI class) so that the L2-count $= 0$ side of the
+prediction has a per-class quantitative bound; (ii)~test whether
+multi-Layer-2 chains are dominated by the largest single
+Layer-2 input (the prediction's claim) versus quadrature-sum or
+worst-case sum; (iii)~classify whether ``rational analytic answer
+with finite-basis representation'' (Sprint Calc-P,
+Remark~\ref{rem:depth_refinement}) is a sub-class of L2-count $=
+0$ that always lands at residual $0$, distinct from
+``irrational analytic content'' that lands at the
+basis-quality limit.
+
+The LS-4 Lamb shift datapoint adds historical context.  The LS-4
 chained projection (Fock + spectral action + Sturmian +
-Drake--Swainson, $k=4$ projections) achieves $-0.39\%$ residual at
-the sweet-spot $N=40$.  This is BELOW the linear prediction
-$\epsilon_4 \sim 4\%$, but it arises from accidental
-truncation/approximation cancellation rather than genuine reduction
-of per-projection error.  At converged $N$, the LS-4 result
-reverts to the LS-1 ceiling $-3.10\%$, consistent with the linear
-compounding prediction taken over distinct uncorrelated
-projections.  The structural reading: prediction~\ref{pred:error_depth}
-applies to converged-basis residuals, not to transient
-finite-basis cancellations.
+Drake--Swainson) achieves $-0.39\%$ residual at the sweet-spot
+$N=40$.  At converged $N$, the LS-4 result reverts to the LS-1
+ceiling $-3.10\%$.  Under
+Prediction~\ref{pred:l2_presence} this is the
+$\epsilon_\text{basis}(\text{H one-loop QED Lamb})$ value and is
+the framework's converged-basis quality limit at zero Layer-2
+inputs; the $-0.39\%$ at $N=40$ is a transient finite-basis
+cancellation, not a genuine reduction of the basis-quality
+limit.  Prediction~\ref{pred:l2_presence} applies to
+converged-basis residuals.
 
 \item \textbf{$K = \pi(B + F - \Delta) \approx 1/\alpha$.}
 The Paper~2 conjecture is the most extreme multi-projection
@@ -3290,14 +3963,21 @@ projections (finite Casimir trace at $m=3$, infinite scalar
 Dirichlet at $s = d_\text{max}$, Dirac mode degeneracy at the
 spinor cutoff), all evaluated on the same $S^3$, summing to
 $1/\alpha$ at $8.8 \times 10^{-8}$ relative residual.  Under
-Prediction~\ref{pred:error_depth} a three-projection match
-should carry $\sim 3\%$ error, not $10^{-7}$.  Either the
-projection-depth model under-counts what's chained here, or
-something structural we have not identified is forcing the
-combination, or the match is a coincidence below the framework's
-intrinsic resolution.  Working hypothesis WH5 (Paper~2 in
-Observations status as of 2026-05-02) reads it as a coincidence;
-this paper records the structural anomaly without resolving it.
+the (now falsified) naive depth-vs-residual prediction this was
+the central anomaly: a three-projection match carrying
+$10^{-7}$ residual versus $\sim 3\%$ expected.  Under the
+Layer-2-presence bound of Prediction~\ref{pred:l2_presence} the
+chain has L2-count $= 0$ (no external Layer-2 inputs are consumed),
+so the residual should sit at the framework's basis-quality limit
+for the chain class.  The framework's basis-quality limit for a
+zero-Layer-2-input chain involving the K combination is not
+characterized: $K$ is a single number, not a converging sequence
+in $n_\text{max}$.  Either something structural we have not
+identified is forcing the combination, or the match is a
+coincidence below the framework's intrinsic resolution.  Working
+hypothesis WH5 (Paper~2 in Observations status as of 2026-05-02)
+reads it as a coincidence; this paper records the structural
+anomaly without resolving it.
 
 \textit{Track TS-C update (2026-05-04).} The ``depth model
 under-counts'' reading was tested by examining whether the three
@@ -3337,6 +4017,188 @@ sit in the pure-transcendental bucket alongside vector-photon, (b)~a
 spin-statistics projection that splits boson/fermion Matsubara
 content out of observation/temporal-window.  Neither is forced by
 current data.
+
+\item \textbf{Lorentz boost as a candidate twentieth projection.}
+% Source: Sprint Lorentz-Boost-Scoping (May 2026, Track B);
+% refines synthesis pass §7 Hunt 4 REQUIRES-EXTENSION verdict with
+% Bisognano-Wichmann reading.  See debug/lorentz_boost_scoping_memo.md.
+A natural candidate projection is a Lorentz boost relating two
+observers at relative rapidity $v/c$ on the
+$T_{S^3} \otimes T_{S^1_\beta}$ tensor-product spectral triple of
+Sprint~TD Track~1: under the boost, $\lambda_x \to \lambda_x / \gamma$
+and $\beta \to \beta\gamma$ with $\gamma = 1/\sqrt{1 - v^2/c^2}$.
+The tagged signature would be: \emph{variable} $v/c$, \emph{dimension}
+dimensionless, \emph{transcendental} algebraic over $\mathbb{Q}(v/c)$
+via the relation $\gamma^2 (1 - (v/c)^2) = 1$.
+
+\textbf{Verdict: REQUIRES-EXTENSION at the framework level, but
+the M1 mechanism already does Lorentz-boost-class physics
+(Bisognano--Wichmann reading).}  The GeoVac spectral triple is
+Wick-rotated --- the Camporesi--Higuchi Dirac spectrum is on
+Euclidean $S^3$, not on Minkowski space.  Lorentz boosts are
+Minkowski-signature transformations and have no natural action on a
+Riemannian spectral triple at the metric / curvature level: under
+Wick rotation $t \to i\tau$ a Lorentz boost in the $(t, x)$ plane
+becomes a rotation in the Euclidean $(\tau, x)$ plane that mixes
+the spatial $S^3$ factor with the temporal $S^1_\beta$ factor; in
+Track~1's tensor-product construction the two factors are
+independent with disjoint operators, and a connection between them
+would be a structural extension, not a projection refinement.
+
+\textbf{However, the temperature mechanism IS already
+Lorentz-boost physics.}  The Bisognano--Wichmann theorem~\cite{bisognano_wichmann1976}
+identifies the modular flow of a vacuum state restricted to a
+Rindler wedge with the unitary representation of Lorentz boosts
+preserving the wedge.  Sewell~1980~\cite{sewell1980} extends this
+to Schwarzschild geometry: the KMS state at $\beta = 8\pi M$ on the
+Euclidean cigar IS the modular flow of the Lorentz boost (more
+precisely, the Killing flow generated by the timelike Killing
+vector outside the horizon).  Sprint~TD Track~4 reproduced
+$T_H = 1/(8\pi M)$ on the Euclidean Schwarzschild cigar via the
+master Mellin engine $M_1$ Hopf-base measure mechanism, with
+$\beta = 8\pi M$ forced by regularity at $r = 2M$.  Under the
+Bisognano--Wichmann reading, \textbf{the $2\pi$ in $\beta = 2\pi/\kappa_g$
+(or in the Unruh formula $\beta = 2\pi/a$ for a Rindler observer at
+acceleration $a$) IS the period of the boost orbit, and the
+framework's $M_1$ Hopf-base measure signature is the same $2\pi$.}
+Sprint~TD Track~4's reproduction of the Hawking temperature is
+therefore not just a Wick-rotation observation; it is the
+framework's instantiation of Lorentz-boost / modular-flow physics
+at the level the master Mellin engine controls.
+
+\textbf{What the framework does NOT do} is the metric / curvature
+side at finite $v$: length contraction, Wigner rotation of angular
+momentum under boost, the spinor-content side of how the
+Camporesi--Higuchi spinors transform under boost, and the
+continuous-spectrum side (Lorentzian Dirac has continuous spectrum,
+breaking compact resolvent without temporal compactification).  A
+clean Lorentz-boost projection acting on \emph{all} particles
+simultaneously and relating two $T_{S^3} \otimes T_{S^1_\beta}$
+constructions at different rapidities requires a Lorentzian
+spectral triple at signature $(m, n) \in (\mathbb{Z}/8)^2 = (3, 1)$
+in the Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+framework (currently $(3, 0)$), with Hilbert space replaced by Krein
+space carrying fundamental symmetry $\mathcal{J}^2 = I$, and the
+real structure $J$ extended via the
+$(\mathbb{Z}/8) \times (\mathbb{Z}/8)$-valued sign table.
+
+\textbf{The Lorentzian-NCG literature provides several published
+prescriptions} (Strohmaier~2006~\cite{strohmaier2006};
+Franco--Eckstein~2014~\cite{franco_eckstein2014} temporal Lorentzian
+spectral triples; Bizi--Brouder--Besnard 2018 $(m,n)$
+classification; van~den~Dungen~2016~\cite{van_den_dungen2016} Krein
+fermionic action; Devastato--Lizzi--Martinetti~2018~\cite{devastato_lizzi_martinetti2018}
+twisted-emergence) for what a Lorentzian extension would look like
+at the spectral-triple level.  \emph{None} provides a Lorentzian
+analog of the Latr\'emoli\`ere propinquity used in
+Paper~38~\cite{paper38} for the WH1 PROVEN result; the propinquity
+literature is purely Riemannian as of May~2026 (Latr\'emoli\`ere,
+Toyota, Hekkelman--McDonald, Leimbach--van~Suijlekom).
+Constructing a Lorentzian propinquity is original NCG-mathematics
+work at the 6--12 month scale.
+
+\textbf{Distinct from existing $\gamma$-extensions in the
+catalogue.}  The Dirac-sector $\gamma = \sqrt{1 - (Z\alpha)^2}$ in
+\S~\ref{sec:proj_spinor} is a \emph{bound-state radial Lorentz
+factor} for a single-particle hydrogenic wavefunction in a central
+potential; it is not a frame transformation between two observers.
+Similarly, the rest-mass projection
+(\S~\ref{sec:proj_restmass}) rescales a single particle's mass under
+$m_e \to m_\text{red}$, and the Breit retardation projection
+(\S~\ref{sec:proj_breit_retardation}) introduces the rest-mass
+ratio $m_l/m_n$ as a two-body kinematic control parameter.  None of
+these is a frame-level boost.  A Lorentz-boost projection would act
+on \emph{all} particles in the system simultaneously and would
+relate two $T_{S^3} \otimes T_{S^1_\beta}$ constructions at
+different observer rapidities.
+
+\textbf{Non-Lorentzian uniform-rescaling alternative.}  A
+non-Lorentzian ``rapidity-like'' projection that uniformly rescales
+all spatial focal lengths $\lambda_x$ by $1/\gamma$ and the
+temporal compactification scale $\beta$ by $\gamma$ is admissible
+in the current Riemannian framework: the rescaling preserves the
+master Mellin engine ring assignments
+(M1~Hopf-base measure, M2~Seeley--DeWitt heat-kernel coefficients,
+M3~vertex-restricted Hurwitz Dirichlet content) and the Roothaan
+multipole termination $L_\text{max} = 2\,l_\text{max}$ which is
+pure-angular.  However, this uniform-rescaling alternative does
+not surface a new structural feature beyond what the existing
+\S~\ref{sec:proj_restmass} and \S~\ref{sec:proj_breit_retardation}
+variable-refinement projections already encode.  In the V/D/P
+tagging it would be V---, with no new dimension or transcendental
+witness, structurally similar to the existing variable-refinement
+projections.
+
+\textbf{Recommendation: not adding now.}  The framework cannot host
+a clean Lorentz-boost projection at the metric / curvature level
+without a Minkowski-signature spectral triple (multi-month NCG
+work, dominated by 6--12 months of original Lorentzian-propinquity
+construction).  The non-Lorentzian uniform-rescaling alternative is
+admissible but reducible to existing variable-refinement
+projections.  Sprint~TD Track~4's $T_H = 1/(8\pi M)$ result already
+captures the Lorentz-boost / Bisognano--Wichmann content of the
+$M_1$ mechanism, so the framework loses nothing strategically
+important by deferring the full Lorentzian extension.  This open
+question is flagged for future PI decision: \emph{if a Minkowski
+spectral triple is built (multi-month structural extension),
+Lorentz boosts become a candidate twentieth projection at the
+metric level; pre-Minkowski, only the Bisognano--Wichmann reading
+of $\beta$-circle physics is available.}  No near-term track.
+
+\textbf{Falsifier.}  This open-question entry can be retired in
+either direction.  (a)~If a Lorentzian propinquity is published
+(monitor Latr\'emoli\`ere / Toyota / Hekkelman--McDonald arXiv
+listings for ``Lorentzian / Krein-space propinquity''), or the
+twisted-spectral-triple emergence approach
+(Nieuviarts~2024--2025~\cite{nieuviarts2025a,nieuviarts2025b})
+stabilizes as a standard prescription, the dominant cost shrinks
+dramatically and the multi-month extension becomes feasible.
+(b)~If a Sprint~TD-class GeoVac construction reproduces a
+quantitative Lorentz-boost observable that is NOT already an $M_1$
+$2\pi$-circle output (e.g., a Wigner-rotation matrix element on the
+Camporesi--Higuchi spinor sector, or a length-contraction
+matrix element relating two truncations at different $\beta$), the
+framework already does more boost-class physics than this entry
+recognizes and the entry needs sharpening.  Neither falsifier is
+currently engaged.
+
+\textbf{Track~D documentation closure (May~2026).}\ The Track~B
+scoping pass~(\texttt{debug/lorentz\_boost\_scoping\_memo.md},
+May~2026) recommended a 1-week documentation deliverable
+(Candidate~A) on the Bisognano--Wichmann reading of Sprint~TD
+Track~4.  Track~D~(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md},
+May~2026) delivered Candidate~A:\ five-section structural analysis
+documenting that the framework's M1 mechanism on the cigar's
+$S^1_\tau$ factor reproduces $\beta = 8\pi M$, and that under the
+verified Wick-rotation chain
+(Hartle--Hawking~1976~\cite{hartle_hawking1976};
+ Sewell~1982~\cite{sewell1982};
+ Bisognano--Wichmann~1976~\cite{bisognano_wichmann1976}) this $2\pi$
+IS the modular-flow / Lorentz-boost orbit period of a stationary
+observer outside the Schwarzschild horizon.  Verdict:\ \emph{structural
+correspondence}, not literal identification (the operator-level
+statement $\sigma_{i\cdot 2\pi} = $ identity on the truncated metric
+spectral triple $\mathcal{T}_{n_{\max}}$ is the principal Track~D
+falsifier, 4--8 week follow-up at MEDIUM-HIGH priority).  Paper~32
+\S~VIII gained a Bisognano--Wichmann-reading remark
+(\texttt{rem:bisognano\_wichmann\_reading}); Paper~35 \S~VIII gained
+a Bisognano--Wichmann subsection
+(\texttt{subsec:bisognano\_wichmann\_reading});
+\S~\ref{sec:proj_observation} (temporal-window projection) gained a
+footnote naming the Bisognano--Wichmann reading; the
+Hawking-temperature off-precision row in
+\S~\ref{sec:offprecision} catalogues the Wick-rotated thermal
+mechanism as a machinery-witness (error class C, $M$ external
+input).  Two literature corrections inherited from Track~D's
+verification pass:\ Sewell's publication year is 1982 (not 1980
+as the Track~B scoping data had), and the Bisognano--Wichmann 1976
+paper title is ``On the duality condition for quantum fields''
+(``On the duality condition for a Hermitian scalar field'' is the
+1975 paper title).  Track~D \emph{does not} change the
+REQUIRES-EXTENSION verdict on the Lorentz-boost candidate twentieth
+projection itself;\ it closes the documentation loop on the
+Bisognano--Wichmann reading without lifting projection
+admissibility.
 
 \end{enumerate}
 
@@ -3546,6 +4408,80 @@ atoms,'' \textit{Phys.\ Rev.\ A}\ \textbf{41}, 1243 (1990).
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac
 operator on spheres and real hyperbolic spaces,''
 \textit{J.\ Geom.\ Phys.}\ \textbf{20}, 1 (1996).
+
+% --- Lorentzian-NCG references (Sprint Lorentz-Boost-Scoping, May 2026; §VIII open question) ---
+
+\bibitem{bisognano_wichmann1975}
+J.~J.~Bisognano and E.~H.~Wichmann, ``On the duality condition for a
+Hermitian scalar field,'' \textit{J.\ Math.\ Phys.}\ \textbf{16},
+985--1007 (1975).
+
+\bibitem{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann, ``On the duality condition for
+quantum fields,'' \textit{J.\ Math.\ Phys.}\ \textbf{17},
+303--321 (1976).
+% Title and pagination corrected by Track D verification pass (May 2026):
+% earlier version of this entry mistakenly used the 1975 paper's title
+% (``On the duality condition for a Hermitian scalar field'') for the
+% 1976 paper.  See debug/bisognano_wichmann_track_d_memo.md.
+
+\bibitem{sewell1982}
+G.~L.~Sewell, ``Quantum fields on manifolds: PCT and gravitationally
+induced thermal states,'' \textit{Annals of Physics}\ \textbf{141},
+201--224 (1982).
+% Year corrected by Track D verification pass (May 2026): earlier
+% version of this entry had 1980 (carried over from Track B scoping
+% memo); the actual publication year is 1982.
+
+\bibitem{sewell1980}
+% Backward-compatibility alias for the same Sewell 1982 reference.
+% Kept so that pre-Track-D citations \cite{sewell1980} still resolve.
+G.~L.~Sewell, ``Quantum fields on manifolds: PCT and gravitationally
+induced thermal states,'' \textit{Annals of Physics}\ \textbf{141},
+201--224 (1982).
+
+\bibitem{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking, ``Path-integral derivation of
+black-hole radiance,'' \textit{Phys.\ Rev.\ D}\ \textbf{13},
+2188--2203 (1976).
+
+\bibitem{strohmaier2006}
+A.~Strohmaier, ``On noncommutative and pseudo-Riemannian
+geometry,'' \textit{J.\ Geom.\ Phys.}\ \textbf{56}, 175--195
+(2006).  arXiv:math-ph/0110001.
+
+\bibitem{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard, ``Space and time dimensions of
+algebras with applications to Lorentzian noncommutative geometry
+and quantum electrodynamics,'' \textit{J.\ Math.\ Phys.}\ \textbf{59},
+062303 (2018).  arXiv:1611.07062.
+
+\bibitem{franco_eckstein2014}
+N.~Franco and M.~Eckstein, ``Temporal Lorentzian spectral triples,''
+\textit{Reviews in Mathematical Physics}\ \textbf{26}, 1430007
+(2014).  arXiv:1210.6575.
+
+\bibitem{van_den_dungen2016}
+K.~van~den~Dungen, ``Krein spectral triples and the fermionic
+action,'' \textit{Math.\ Phys.\ Anal.\ Geom.}\ \textbf{19}, 4 (2016).
+
+\bibitem{devastato_lizzi_martinetti2018}
+A.~Devastato, F.~Lizzi, and P.~Martinetti, ``Lorentz signature and
+twisted spectral triples,'' \textit{JHEP}\ \textbf{03}, 089 (2018).
+arXiv:1710.04965.
+
+\bibitem{nieuviarts2025a}
+B.~Nieuviarts, ``Emergence of Lorentz symmetry from an
+almost-commutative twisted spectral triple,'' arXiv:2502.18105
+(2025).
+
+\bibitem{nieuviarts2025b}
+B.~Nieuviarts, ``Emergence of Time from a Twisted Spectral Triple
+in Almost-Commutative Geometry,'' arXiv:2512.15450 (2025).
+
+\bibitem{paper38}
+J.~Loutey, ``SU(2) Propinquity Convergence on the Camporesi--Higuchi
+Spectral Triple,'' GeoVac project, May 2026.
 
 \end{thebibliography}
 

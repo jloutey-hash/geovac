@@ -1,0 +1,406 @@
+{
+  "sprint_id": "lorentz_boost_scoping",
+  "date": "2026-05-09",
+  "track": "Track B of post-multifocal-catalogue parallel sprint",
+  "status": "complete",
+  "headline_verdict": {
+    "multi_month_full_extension": "NO-GO at this time",
+    "sprint_scale_first_deliverable": "GO on Candidate A (Wick-rotation-map memo for Sprint TD Track 4 with Bisognano-Wichmann reading)",
+    "rationale_one_sentence": "Lorentzian propinquity has no published prescription as of May 2026, making the dominant cost (6-12 months original NCG-math work) HIGH-risk; the sprint-scale alternative captures the strategically valuable Bisognano-Wichmann interpretation of existing thermal results at 1-week cost."
+  },
+  "literature_survey": {
+    "verified_citations": [
+      {
+        "id": "strohmaier2006",
+        "ref": "Strohmaier, A. 'On noncommutative and pseudo-Riemannian geometry.' J. Geom. Phys. 56, 175-195 (2006). arXiv:math-ph/0110001.",
+        "verified_via": "ScienceDirect listing + WebSearch",
+        "structural_ingredient": "Foundational pseudo-Riemannian spectral triple definition. Hilbert -> Krein space, fundamental symmetry J^2 = I, Krein-self-adjoint Dirac.",
+        "geovac_usability": "in_principle_yes_but_heavy",
+        "geovac_notes": "Camporesi-Higuchi Dirac on S^3 is currently Krein-self-adjoint trivially with J = I. Lorentzian extension would need non-trivial J picking out temporal direction."
+      },
+      {
+        "id": "paschke_verch2004",
+        "ref": "Paschke, M. and Verch, R. 'Local covariant quantum field theory over spectral geometries.' Class. Quantum Grav. 21, 5299-5316 (2004). arXiv:gr-qc/0405057.",
+        "verified_via": "WebSearch + arXiv listing",
+        "structural_ingredient": "Categorical functor from globally hyperbolic Lorentz manifolds to involutive algebras.",
+        "geovac_usability": "indirect_categorical",
+        "geovac_notes": "Categorical scaffolding for gluing GeoVac S^3 slices at different times into globally hyperbolic spectral triple. Not a concrete sprint deliverable."
+      },
+      {
+        "id": "bizi_brouder_besnard2018",
+        "ref": "Bizi, N., Brouder, C., and Besnard, F. 'Space and time dimensions of algebras with applications to Lorentzian noncommutative geometry and quantum electrodynamics.' J. Math. Phys. 59, 062303 (2018). arXiv:1611.07062.",
+        "verified_via": "Direct WebFetch of arXiv:1611.07062 abstract",
+        "structural_ingredient": "(m,n) classification: pair of space/time dimensions mod 8. Tensor product additivity. Indefinite spectral triple over Krein space.",
+        "geovac_usability": "highest_concrete_prescription",
+        "geovac_notes": "Current GeoVac at (m,n) = (3,0). Lorentzian extension at (3,1). Tensor T_{S^3} (x) T_{S^1_t} = (3,0) + (0,1) = (3,1). What's missing: propinquity at (m,n) != (k,0)."
+      },
+      {
+        "id": "bizi2018thesis",
+        "ref": "Bizi, N. 'Semi-Riemannian Noncommutative Geometry, Gauge Theory, and the Standard Model of Particle Physics.' Thesis (2018). arXiv:1812.00038.",
+        "verified_via": "arXiv listing",
+        "structural_ingredient": "Extended (m,n) framework. Constructs Lorentzian SM spectral triple.",
+        "geovac_usability": "yes_for_sm_extension"
+      },
+      {
+        "id": "van_den_dungen2016",
+        "ref": "van den Dungen, K. 'Krein spectral triples and the fermionic action.' Math. Phys. Anal. Geom. 19, 4 (2016). doi:10.1007/s11040-016-9207-z.",
+        "verified_via": "Springer listing",
+        "structural_ingredient": "Krein-space fermionic action <psi, J D psi>.",
+        "geovac_usability": "reusable_for_action_computation"
+      },
+      {
+        "id": "franco_eckstein2014",
+        "ref": "Franco, N. and Eckstein, M. 'Temporal Lorentzian Spectral Triples.' Reviews in Mathematical Physics 26, 1430007 (2014). arXiv:1210.6575.",
+        "verified_via": "Direct WebFetch of arXiv:1210.6575 abstract",
+        "structural_ingredient": "Temporal Lorentzian triple = pseudo-Riemannian + 3+1 decomposition + global-time element T in A. Lorentzian distance formula d(p,q) = sup (a(q) - a(p)).",
+        "geovac_usability": "yes_with_substantial_bespoke_work",
+        "geovac_notes": "Promoting Sprint TD Track 1's S^3 (x) S^1_beta to a Franco-Eckstein temporal Lorentzian triple is at least 4-6 weeks of careful work."
+      },
+      {
+        "id": "connes_moscovici2008",
+        "ref": "Connes, A. and Moscovici, H. 'Type III and spectral triples.' In Traces in Number Theory, Geometry and Quantum Fields, Vieweg, pp. 57-71 (2008). arXiv:math/0609703.",
+        "verified_via": "WebSearch + Connes publications page",
+        "structural_ingredient": "Twisted spectral triple (A, H, D, sigma) with automorphism sigma.",
+        "geovac_usability": "foundation_for_devastato_lizzi_martinetti"
+      },
+      {
+        "id": "devastato_lizzi_martinetti2018",
+        "ref": "Devastato, A., Lizzi, F., and Martinetti, P. 'Lorentz signature and twisted spectral triples.' JHEP 03, 089 (2018). arXiv:1710.04965.",
+        "verified_via": "Springer JHEP listing",
+        "structural_ingredient": "Twisting SM spectral triple yields Krein space with Lorentzian signature. Twist as alternative to Wick rotation.",
+        "geovac_usability": "speculative_research_direction",
+        "geovac_notes": "GeoVac outer factor is rank-1; twist would have to act on Camporesi-Higuchi directly, not on inner factor. Not a sprint deliverable."
+      },
+      {
+        "id": "nieuviarts2024",
+        "ref": "Nieuviarts, G. 'Torsion and Lorentz symmetry from Twisted Spectral Triples.' arXiv:2401.07848 (2024).",
+        "verified_via": "arXiv listing",
+        "structural_ingredient": "Generates orthogonal geodesic-preserving torsion from torsionless Dirac via twist."
+      },
+      {
+        "id": "nieuviarts2025a",
+        "ref": "Nieuviarts, G. 'Emergence of Lorentz symmetry from an almost-commutative twisted spectral triple.' arXiv:2502.18105 (May 2025).",
+        "verified_via": "Direct WebFetch of abstract",
+        "structural_ingredient": "Riemannian twisted -> pseudo-Riemannian spectral triple within almost-commutative structure, no explicit Wick rotation, no complex numbers.",
+        "geovac_usability": "monitor_could_transform_route"
+      },
+      {
+        "id": "nieuviarts2025b",
+        "ref": "Author(s). 'Emergence of Time from a Twisted Spectral Triple in Almost-Commutative Geometry.' arXiv:2512.15450 (Dec 2025).",
+        "verified_via": "arXiv listing",
+        "structural_ingredient": "Time emerges from twisted spectral data within almost-commutative SM framework. Pathway from Euclidean NCG to Lorentzian physics."
+      },
+      {
+        "id": "connes_consani_moscovici2025",
+        "ref": "Connes, A., Consani, C., and Moscovici, H. 'Zeta Spectral Triples.' arXiv:2511.22755 (Nov 2025).",
+        "verified_via": "arXiv listing",
+        "structural_ingredient": "Twisted spectral triples with spectra matching Riemann zeta zeros at high frequency.",
+        "geovac_usability": "tangential_relevant_to_paper29_RH_thread"
+      },
+      {
+        "id": "latremoliere2017_2018",
+        "ref": "Latremoliere, F. 'The dual Gromov-Hausdorff propinquity.' J. Math. Pures Appl. 103, 303-351 (2017). 'The Gromov-Hausdorff propinquity for metric Spectral Triples.' arXiv:1811.10843 (2018).",
+        "verified_via": "WebSearch + arXiv",
+        "structural_ingredient": "Riemannian propinquity theory used in Paper 38 WH1 PROVEN.",
+        "lorentzian_counterpart": "NONE_in_published_form_as_of_may_2026"
+      },
+      {
+        "id": "hekkelman_mcdonald2024",
+        "ref": "Hekkelman, J. and McDonald, E. 'Spectral truncations of compact quantum metric spaces.' arXiv:2412.00628.",
+        "verified_via": "arXiv listing",
+        "structural_ingredient": "Riemannian spectral truncations on flat-tower / S^1 / S^2 / T^d.",
+        "lorentzian_sequel": "none_located"
+      },
+      {
+        "id": "leimbach_vansuijlekom2024",
+        "ref": "Leimbach, F. and van Suijlekom, W. 'Convergence of spectral truncations of the torus.' Adv. Math. 439, 109496 (2024).",
+        "verified_via": "Adv. Math. listing",
+        "structural_ingredient": "Riemannian on torus T^d; reference for Paper 38 L2 lemma.",
+        "lorentzian_sequel": "none_located"
+      },
+      {
+        "id": "bisognano_wichmann1976",
+        "ref": "Bisognano, J.J. and Wichmann, E.H. 'On the duality condition for a Hermitian scalar field.' J. Math. Phys. 17, 303 (1976).",
+        "verified_via": "standard_reference",
+        "structural_ingredient": "Modular flow of vacuum state on wedge IS unitary representation of Lorentz boosts. Bridge between Wick-rotated thermal and Lorentz-boost physics."
+      },
+      {
+        "id": "sewell1980",
+        "ref": "Sewell, G.L. 'Quantum fields on manifolds: PCT and gravitationally induced thermal states.' Ann. Phys. 141, 201 (1980).",
+        "verified_via": "standard_reference",
+        "structural_ingredient": "Schwarzschild -> KMS at beta = 8 pi M via modular flow."
+      }
+    ],
+    "phantom_or_unverified": [
+      {
+        "id": "hawkins_skoda",
+        "directive_listed_as": "Hawkins-Skoda 2018 / 2020 Krein-space spectral triples",
+        "verification_status": "could_not_locate",
+        "note": "Closest match in literature is Brouder-Besnard-Bizi 2017 'Krein Spectral Triples and the Fermionic Action' (Math. Phys. Anal. Geom. 19) or van den Dungen 2016 (same title). Recommend removing Hawkins-Skoda from candidate list; possible phantom citation."
+      }
+    ],
+    "literature_picture_summary": {
+      "frameworks_published": 4,
+      "frameworks_with_propinquity": 0,
+      "frameworks_with_distance_formula": 2,
+      "implication": "Multiple Lorentzian-NCG frameworks exist (pseudo-Riemannian, temporal, twisted-emergence) but NONE provides Lorentzian propinquity. WH1 PROVEN's GH-convergence theorem has no Lorentzian analog in the literature."
+    }
+  },
+  "obstruction_map": {
+    "axioms_assessed": 13,
+    "verdict_a_trivial_count": 6,
+    "verdict_b_extends_count": 4,
+    "verdict_c_blocks_count": 3,
+    "blocking_axioms": [
+      {
+        "axiom": "Latremoliere propinquity / GH-convergence",
+        "reason": "Quantum compact metric space framework requires Lipschitz seminorm L(a) = ||[D,a]||; Krein-norm ||[D,a]||_J is not positive-definite; no published Lorentzian propinquity",
+        "estimated_cost_to_resolve": "6-12 months original NCG-math work",
+        "risk": "HIGH"
+      },
+      {
+        "axiom": "Master Mellin engine M2 (Seeley-DeWitt)",
+        "reason": "Heat kernel Tr e^(-tD^2) requires elliptic D; Minkowski D^2 hyperbolic; Mellin transform changes character (Schwinger proper-time)",
+        "estimated_cost_to_resolve": "4-8 weeks bespoke",
+        "risk": "MEDIUM-HIGH"
+      },
+      {
+        "axiom": "Roothaan multipole termination L_max = 2 l_max",
+        "reason": "Boost mixes spatial L with linear momentum (Wigner rotations); spatial L not conserved; expansion does not terminate",
+        "estimated_cost_to_resolve": "unknown_open_in_literature",
+        "risk": "HIGH"
+      }
+    ],
+    "extending_axioms": [
+      {"axiom": "Hilbert -> Krein space", "citation": "strohmaier2006", "cost": "medium"},
+      {"axiom": "Dirac operator on S^3 x R_t", "citation": "bizi_brouder_besnard2018", "cost": "medium-heavy"},
+      {"axiom": "Real structure J at (m,n) = (3,1)", "citation": "bizi_brouder_besnard2018", "cost": "medium"},
+      {"axiom": "Compact resolvent via temporal compactification", "citation": "sprint_td_track1", "cost": "low"},
+      {"axiom": "M3 master Mellin (Krein-aware vertex parity)", "citation": "internal", "cost": "medium"}
+    ],
+    "trivial_axioms": [
+      "Algebra A_GV",
+      "Bounded commutators / regularity",
+      "Order one / order zero",
+      "M1 master Mellin (Bisognano-Wichmann gives same 2 pi)",
+      "Hopf base measure Vol(S^2)/4",
+      "Roothaan termination at v=0 (bare Riemannian remains)"
+    ]
+  },
+  "lorentz_physics_already_in_geovac": [
+    {
+      "category": "Bound-state radial Lorentz factor",
+      "where": "Tier 2 spinor lift; geovac/dirac_matrix_elements.py; gamma = sqrt(1 - (Z*alpha)^2)",
+      "type": "single-particle, no frame change",
+      "status": "exhausted_in_catalogue"
+    },
+    {
+      "category": "Wick-rotated thermal physics",
+      "where": "Sprint TD Track 1 (T_{S^3} (x) T_{S^1_beta}); Sprint TD Track 4 (Schwarzschild cigar)",
+      "type": "M1 mechanism (2 pi from Hopf-base measure on S^1) IS Bisognano-Wichmann boost orbit period under standard relativistic-QFT reading",
+      "status": "documentation_pass_recommended_candidate_A"
+    },
+    {
+      "category": "SO(4,1) conformal Killing on S^3",
+      "where": "conformal isometries of S^3 = conf(R^3) = so(4,1)",
+      "type": "non-isometric maps S^3 -> S^3 staying in Riemannian signature; under-exploited",
+      "status": "high_value_sprint_reachable_candidate_B"
+    },
+    {
+      "category": "Boost as 17th projection",
+      "where": "REQUIRES-EXTENSION verdict from Hunt 4",
+      "type": "would need Minkowski-signature spectral triple",
+      "status": "Paper 34 VIII open question, multi-month gated"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "candidate_A",
+      "name": "Wick-rotation-map memo for Sprint TD Track 4 with Bisognano-Wichmann reading",
+      "sprint_window_weeks": 1,
+      "what_it_lands": [
+        "Memo documenting Sprint TD Track 4's T_H = 1/(8 pi M) IS Wick-rotation image of Lorentz-boost / Unruh / Bisognano-Wichmann mechanism",
+        "Two paper-update paragraphs: Paper 32 VIII.D and Paper 35 VIII.A",
+        "Cross-references to Sewell 1980 (Schwarzschild -> KMS) and Bisognano-Wichmann 1976 (modular flow -> boost)"
+      ],
+      "what_it_does_not_close": [
+        "Doesn't extend Riemannian framework to Lorentzian",
+        "Doesn't construct Lorentzian propinquity",
+        "Doesn't address spinor content under boost"
+      ],
+      "falsifier": "None; Bisognano-Wichmann reading is standard physics",
+      "priority": "HIGH",
+      "recommendation": "DISPATCH IMMEDIATELY"
+    },
+    {
+      "id": "candidate_B",
+      "name": "SO(4,1) conformal-isometry algebra on Fock-projected S^3",
+      "sprint_window_weeks": "1-2",
+      "what_it_lands": [
+        "New module debug/so41_conformal_action.py (~400 lines)",
+        "10 generators of so(4,1) = conf(S^3) on (n,l,m) basis at finite n_max",
+        "Action of 3 boost-like generators: Delta n, Delta l, Delta m transitions",
+        "Whether boost generators preserve Roothaan termination",
+        "Whether Connes axioms preserved under conformal action"
+      ],
+      "what_it_does_not_close": [
+        "No Lorentzian extension",
+        "No propinquity statement",
+        "No physical observable computation"
+      ],
+      "falsifier": "SO(4,1) preserved by truncation in non-trivial way (would be positive surprise; expected outcome is broken at finite n_max because boosts raise n)",
+      "expected_outcome": "SO(4,1) broken; spatial SO(4) preserved; conformal-boost intertwiner between truncation levels n_max and n_max + 1 is the new mathematical object",
+      "priority": "MEDIUM",
+      "recommendation": "OPTIONAL_AFTER_CANDIDATE_A"
+    },
+    {
+      "id": "candidate_C",
+      "name": "Krein-lift Connes-axiom audit at (m,n) = (3,1)",
+      "sprint_window_weeks": "1.5",
+      "what_it_lands": [
+        "New module debug/krein_lift_audit.py extending Paper 32 IV finite-n_max audit",
+        "Krein-side stress test of Bizi-Brouder-Besnard sign table at (3,1)",
+        "Verify J^2 sign in temporal extension; JD = +/- DJ"
+      ],
+      "what_it_does_not_close": "No propinquity, no convergence, no M2 reformulation",
+      "falsifier": "Discrepancy with Bizi-Brouder-Besnard prescription would indicate GeoVac J does not fit standard Lorentzian framework",
+      "priority": "LOW",
+      "recommendation": "DEFER_UNTIL_MULTI_MONTH_DECISION"
+    }
+  ],
+  "multi_month_extension_cost_estimate": {
+    "components": [
+      {"component": "Krein-space lift of H_GV at (3,1)", "weeks": "2-4", "risk": "low"},
+      {"component": "Lorentzian Camporesi-Higuchi Dirac on static dS_3", "weeks": "4-6", "risk": "medium"},
+      {"component": "Lorentzian heat-kernel theory for M2 reformulation", "weeks": "4-8", "risk": "medium-high"},
+      {"component": "Lorentzian propinquity construction", "weeks": "26-52", "risk": "HIGH", "note": "DOMINANT COST; original NCG-math; no published prescription"},
+      {"component": "Lorentzian L1'/L2/L3/L4/L5 lemmas", "weeks": "8-16", "risk": "high", "note": "depends on propinquity"},
+      {"component": "Roothaan termination handling under boost", "weeks": "2-4", "risk": "medium"},
+      {"component": "Krein-aware vertex parity (M3)", "weeks": "1-2", "risk": "low"},
+      {"component": "Lorentzian Sprint MH redo at static dS_3", "weeks": "2-4", "risk": "low"},
+      {"component": "Paper 38 Lorentzian sequel writeup", "weeks": "4-6", "risk": "low"}
+    ],
+    "total_bottom_up_weeks": "53-102",
+    "total_bottom_up_months": "12-24",
+    "realistic_minimum_months": "12-18",
+    "dominant_cost_component": "Lorentzian propinquity construction (6-12 months)",
+    "stalling_probability": "HIGH"
+  },
+  "strategic_value_assessment": {
+    "items": [
+      {"capability": "Relativistic atomic structure beyond Tier 2", "value": "medium", "note": "Tier 2/3 already covers alpha^4 well; gain is small"},
+      {"capability": "Bisognano-Wichmann inside GeoVac", "value": "high", "note": "Would make Sprint TD Track 4 a theorem"},
+      {"capability": "Unruh effect", "value": "medium", "note": "Interesting but not on roadmap"},
+      {"capability": "AdS/CFT applications", "value": "low", "note": "Would require AdS lift, separate program"},
+      {"capability": "Bisognano-Wichmann + entanglement Hamiltonians", "value": "medium-high", "note": "Connects to Paper 27 entropy thread"},
+      {"capability": "Closing W2b-medium cross-manifold", "value": "high", "note": "Paper 32 VIII.D frontier-of-field"}
+    ],
+    "overall": "medium"
+  },
+  "go_no_go_scoring": {
+    "multi_month_full_extension": {
+      "verdict": "NO-GO",
+      "cost_score_out_of_10": 9,
+      "value_score_out_of_10": 5,
+      "risk_score_out_of_10": 8,
+      "opportunity_cost_score_out_of_10": 8,
+      "weighted_decision": "Cost*Risk + OppCost = 9*8 + 8 = 80; Value = 5; net unfavorable",
+      "revisit_triggers": [
+        "Lorentzian propinquity published in literature",
+        "Twisted-spectral-triple emergence (Devastato-Lizzi-Martinetti / Nieuviarts) stabilizes as standard prescription",
+        "Specific Lorentzian application becomes load-bearing (Bisognano-Wichmann, AdS lift, new precision-catalogue observable)"
+      ]
+    },
+    "candidate_A_sprint": {
+      "verdict": "GO-IMMEDIATE",
+      "cost_score_out_of_10": 1,
+      "value_score_out_of_10": 6,
+      "risk_score_out_of_10": 1,
+      "weighted_decision": "Cost*Risk = 1; Value = 6; clearly favorable"
+    }
+  },
+  "honest_negatives_for_scoping_assumptions": [
+    {
+      "assumption": "Lorentzian propinquity does not exist as of May 2026",
+      "falsifier": "Published Lorentzian propinquity discovered in literature search re-check",
+      "mitigation": "1-day re-check before committing to multi-month work"
+    },
+    {
+      "assumption": "Twisted-emergence approach too fresh to bet on",
+      "falsifier": "Nieuviarts 2025 papers stabilize as standard prescription",
+      "mitigation": "Monitor arXiv listings over next 6 months"
+    },
+    {
+      "assumption": "Bisognano-Wichmann is right reading of Sprint TD Track 4",
+      "qualifier": "Reading is at 2-pi-identity level, not derivation of Schwarzschild metric from GeoVac inputs",
+      "robustness": "Synthesis Hunt 4 verdict that 'GeoVac doesn't autonomously produce cigar geometry' remains"
+    },
+    {
+      "assumption": "SO(4,1) conformal action breaks at finite n_max",
+      "falsifier": "Candidate B finds non-trivial preservation",
+      "robustness": "Falsifiable by Candidate B itself"
+    },
+    {
+      "assumption": "Relativistic atomic structure at alpha^4 already in Tier 2 / Tier 3",
+      "qualifier": "Sprint MH 2S-2P Lamb residual at -0.10% has ~0.1% multi-loop QED gap",
+      "robustness": "Lorentzian-framework-native multi-loop QED might close this structurally"
+    }
+  ],
+  "next_track_candidates": [
+    {
+      "id": "track_bisognano_wichmann_pass",
+      "name": "Bisognano-Wichmann documentation pass",
+      "window_weeks": 1,
+      "deliverable": "Two paper paragraphs + memo",
+      "priority": "RECOMMENDED"
+    },
+    {
+      "id": "track_so41_diagnostic",
+      "name": "SO(4,1) conformal action diagnostic",
+      "window_weeks": "1-2",
+      "deliverable": "Module + memo + structural finding",
+      "priority": "OPTIONAL_AFTER_BW_PASS"
+    },
+    {
+      "id": "track_lorentzian_lit_monitoring",
+      "name": "Lorentzian-propinquity literature monitoring",
+      "window_weeks": "ongoing",
+      "deliverable": "6-month arXiv check for Lorentzian propinquity / twisted-emergence stabilization",
+      "priority": "PASSIVE"
+    }
+  ],
+  "paper_34_section_VIII_recommended_language_provided": true,
+  "paper_34_recommended_language_path": "see lorentz_boost_scoping_memo.md section 9.4 for full LaTeX draft",
+  "paper_updates_proposed": [
+    {
+      "paper": "Paper 34",
+      "section": "VIII (Open Questions)",
+      "addition": "Open: Lorentz-boost projection requires multi-month structural extension",
+      "applied": false,
+      "scope": "draft language only; not applied"
+    },
+    {
+      "paper": "Paper 32",
+      "section": "VIII.D (cross-manifold frontier)",
+      "addition": "Bisognano-Wichmann reading paragraph: Sprint TD Track 4's M1 mechanism = boost orbit period under standard QFT",
+      "applied": false,
+      "scope": "candidate A deliverable; recommended for sprint dispatch"
+    },
+    {
+      "paper": "Paper 35",
+      "section": "VIII (after Stefan-Boltzmann subsection)",
+      "addition": "Parallel paragraph: Wick-rotated thermal mechanism IS Lorentz-boost / modular-flow physics",
+      "applied": false,
+      "scope": "candidate A deliverable; recommended for sprint dispatch"
+    }
+  ],
+  "result_30_second_read": {
+    "top_3_reachable_now_deliverables": [
+      "Wick-rotation-map memo for Sprint TD Track 4 (1 week, HIGH leverage) - documents T_H = 1/(8 pi M) IS Lorentz-boost / Bisognano-Wichmann modular flow",
+      "SO(4,1) conformal-action diagnostic (1-2 weeks, MEDIUM leverage) - SO(4,1) on Fock S^3 (n,l,m) basis at finite n_max",
+      "Paper 34 VIII open-question paragraph (immediate, ZERO cost) - documents REQUIRES-EXTENSION verdict with revisit triggers"
+    ],
+    "multi_month_go_no_go": "NO-GO at this time; cost 9-18 months dominated by 6-12 months original Lorentzian-propinquity NCG-math; strategic value medium; risk of stalling high; opportunity cost vs multi-focal precision arc unfavorable; revisit if Lorentzian propinquity lands in literature or twisted-emergence stabilizes",
+    "single_highest_leverage_sprint_to_dispatch_first": "Candidate A (Wick-rotation-map memo + Bisognano-Wichmann reading); 1 week, no code, captures most strategically valuable piece (naming Lorentz-boost interpretation of existing thermal results) at minimal cost"
+  }
+}

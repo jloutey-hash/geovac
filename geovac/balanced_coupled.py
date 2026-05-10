@@ -41,6 +41,9 @@ from geovac.cross_center_screened_vne import (
 from geovac.phillips_kleinman_cross_center import (
     compute_pk_cross_center_barrier,
 )
+from geovac.screened_valence_basis import (
+    apply_screened_valence_correction,
+)
 
 
 def _get_block_geometry(spec: MolecularSpec) -> List[Dict[str, Any]]:
@@ -412,6 +415,8 @@ def build_balanced_hamiltonian(
     screened_cross_center: bool = False,
     pk_cross_center: bool = False,
     pk_E_valence_ref: float = 0.0,
+    screened_valence_basis: bool = False,
+    screened_valence_n_grid: int = 4000,
 ) -> Dict[str, Any]:
     """
     Build a balanced coupled Hamiltonian: all four interaction types, no PK.
@@ -468,6 +473,21 @@ def build_balanced_hamiltonian(
         Valence reference energy E_v in (E_v - E_c). Default 0.0
         ("absolute PK", purely repulsive since E_c < 0). Only used if
         pk_cross_center is True.
+    screened_valence_basis : bool, optional
+        If True, replace the heavy-atom-side h1 diagonal entries on
+        frozen-core valence sub-blocks with the actual screened
+        Schrödinger eigenvalues of the FrozenCore Z_eff(r) potential.
+        This is the W1c-residual closure named in the post-PK
+        synthesis memo (Track 3, May 2026): the framework's
+        ``-Z_orb^2 / (2 * block_n^2)`` hydrogenic baseline gives e.g.
+        Na 3s = -0.5 Ha when the actual screened eigenvalue is
+        -0.170 Ha (a +0.33 Ha overbinding bias on the Na valence).
+        Auto-detects frozen-core blocks via ``Z_nuc_center >= 11`` and
+        ``n_val_offset > 0``. First-row blocks (Z<=10) are unaffected.
+        Default False to preserve existing behavior.
+    screened_valence_n_grid : int, optional
+        Radial grid resolution for the screened-eigenvalue solver.
+        Default 4000.
 
     Returns
     -------
@@ -718,6 +738,35 @@ def build_balanced_hamiltonian(
                       f"trace={d['trace']:.4e}")
 
     # ------------------------------------------------------------------
+    # 3c. Screened-Schrödinger valence basis correction
+    #     (W1c-residual closure, Track 3 / May 2026)
+    # ------------------------------------------------------------------
+    h1_screened_correction = np.zeros((M, M))
+    screened_valence_info: Dict[str, Any] = {
+        'block_corrections': [],
+        'total_trace_shift': 0.0,
+        'n_orbitals_corrected': 0,
+    }
+    if screened_valence_basis:
+        h1_after_screened, screened_valence_info = (
+            apply_screened_valence_correction(
+                spec, h1_balanced, sub_blocks,
+                n_grid=screened_valence_n_grid,
+                verbose=verbose,
+            )
+        )
+        # Track the correction matrix separately for diagnostics
+        h1_screened_correction = h1_after_screened - h1_balanced
+        h1_balanced = h1_after_screened
+        if verbose:
+            print(
+                f"[balanced] Screened-valence h1 correction: "
+                f"{screened_valence_info['n_orbitals_corrected']} orbitals "
+                f"(trace shift = "
+                f"{screened_valence_info['total_trace_shift']:+.4f} Ha)"
+            )
+
+    # ------------------------------------------------------------------
     # 4. Build fermion operator and JW transform
     # ------------------------------------------------------------------
     fermion_op = build_fermion_op_from_integrals(
@@ -780,11 +829,13 @@ def build_balanced_hamiltonian(
         'cross_vne_details': cross_vne_details,
         'pk_cross_center_count': pk_count,
         'pk_cross_center_details': pk_details,
+        'screened_valence_info': screened_valence_info,
         'h1': h1_balanced,
         'h1_balanced': h1_balanced,
         'h1_no_pk': h1_no_pk,
         'h1_cross_vne': h1_cross_vne,
         'h1_pk_cross': h1_pk_cross,
+        'h1_screened_correction': h1_screened_correction,
         'h1_pk': h1_pk,
         'eri': eri_balanced,
         'qubit_op': qubit_op,

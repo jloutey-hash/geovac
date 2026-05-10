@@ -1,0 +1,37 @@
+{
+  "probe": "c",
+  "hypothesis": "Convention mismatch (factor-of-X bug) in Z_eff -> psi -> A_HF chain",
+  "findings": [
+    {
+      "check": "BF formula H 21cm",
+      "rel_err": 0.16910005266312877,
+      "verdict": "ACCEPTABLE \u2014 BF formula correct to ~percent (off-prefactor conventions or g_N rounding)"
+    },
+    {
+      "check": "g_N convention",
+      "rel_err": null,
+      "verdict": "PASS \u2014 g_N convention is mu/I (atomic-physics), not 2 mu / I"
+    },
+    {
+      "check": "n*zeta convention",
+      "rel_err": null,
+      "verdict": "PASS \u2014 _hydrogenic_radial normalizes correctly; FAIL \u2014 peak off by +55.5%"
+    },
+    {
+      "check": "Z_eff(r) BCs",
+      "rel_err": null,
+      "verdict": "PASS \u2014 Z_eff(r) profile boundary conditions correct"
+    },
+    {
+      "check": "|psi(0)|^2 reproducibility",
+      "rel_err": -6.279363228573038,
+      "verdict": "FAIL \u2014 production code disagrees by -6.28%"
+    },
+    {
+      "check": "End-to-end A_Cs",
+      "rel_err": -68.02837798402786,
+      "verdict": "Without Casimir F_R: residual -68.0%; Casimir F_R=1.555 takes residual to ~-47% per closeout"
+    }
+  ],
+  "verdict": "2 CONVENTION ISSUES IDENTIFIED. See findings list for specific factor-of-X to fix."
+}

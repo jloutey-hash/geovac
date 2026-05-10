@@ -1,0 +1,139 @@
+{
+  "probe": "d",
+  "hypothesis": "multi-zeta machinery itself has a coding bug",
+  "findings": [
+    {
+      "check": "STO normalization",
+      "metric": 6.581060585375553e-07,
+      "verdict": "PASS \u2014 all STO primitives correctly normalized to <1% precision"
+    },
+    {
+      "check": "MultiZetaOrbital reduces to single-zeta",
+      "metric": 3.290528916011226e-07,
+      "verdict": "PASS \u2014 MultiZetaOrbital reduces correctly to single zeta"
+    },
+    {
+      "check": "_build_two_zeta_orbital normalization",
+      "metric": 1.13650277588917e-06,
+      "verdict": "PASS \u2014 _build_two_zeta_orbital correctly renormalizes to <1%"
+    },
+    {
+      "check": "Two-zeta <r> centering",
+      "metric": 0.1656750312764127,
+      "verdict": "PARTIAL \u2014 two-zeta <r> ratio is 0.834; inner/outer split is biased."
+    },
+    {
+      "check": "density integrates to N_core",
+      "metric": 1.1267902099771416e-06,
+      "verdict": "PASS \u2014 density_from_orbitals integrates to N_core within 5%"
+    },
+    {
+      "check": "Two-zeta s-orbital orthogonality",
+      "metric": 0.857873751963592,
+      "verdict": "STRUCTURAL OBSERVATION \u2014 two-zeta orbitals have LARGE non-orthogonality (max |<ns|ms>|=0.858). This is the missing radial-nodes mechanism. The two-zeta heuristic is structurally incomplete."
+    }
+  ],
+  "pdf_data_per_orbital": [
+    {
+      "orbital": "1s",
+      "n": 1,
+      "l": 0,
+      "zeta_cr": 54.2678,
+      "r_mean_single": 0.027640700384376927,
+      "r_mean_2z": 0.026486855224285753,
+      "ratio_2z_over_single": 0.9582555744230219
+    },
+    {
+      "orbital": "2s",
+      "n": 2,
+      "l": 0,
+      "zeta_cr": 42.0318,
+      "r_mean_single": 0.07137453071951762,
+      "r_mean_2z": 0.05802613311895927,
+      "ratio_2z_over_single": 0.8129809405961084
+    },
+    {
+      "orbital": "2p",
+      "n": 2,
+      "l": 1,
+      "zeta_cr": 46.4901,
+      "r_mean_single": 0.05377488970770122,
+      "r_mean_2z": 0.05343526959158217,
+      "ratio_2z_over_single": 0.9936844107358455
+    },
+    {
+      "orbital": "3s",
+      "n": 3,
+      "l": 0,
+      "zeta_cr": 36.9232,
+      "r_mean_single": 0.12187459375952,
+      "r_mean_2z": 0.09246181300020022,
+      "ratio_2z_over_single": 0.7586635585644997
+    },
+    {
+      "orbital": "3p",
+      "n": 3,
+      "l": 1,
+      "zeta_cr": 38.4598,
+      "r_mean_single": 0.10833823022133934,
+      "r_mean_2z": 0.09044178948025333,
+      "ratio_2z_over_single": 0.8348095524126352
+    },
+    {
+      "orbital": "3d",
+      "n": 3,
+      "l": 2,
+      "zeta_cr": 33.2295,
+      "r_mean_single": 0.10532809702222423,
+      "r_mean_2z": 0.10467726372809243,
+      "ratio_2z_over_single": 0.9938208957293277
+    },
+    {
+      "orbital": "4s",
+      "n": 4,
+      "l": 0,
+      "zeta_cr": 25.2794,
+      "r_mean_single": 0.23734740540238453,
+      "r_mean_2z": 0.17360878568202726,
+      "ratio_2z_over_single": 0.7314543227793089
+    },
+    {
+      "orbital": "4p",
+      "n": 4,
+      "l": 1,
+      "zeta_cr": 25.5744,
+      "r_mean_single": 0.2248342092092092,
+      "r_mean_2z": 0.17489391510221416,
+      "ratio_2z_over_single": 0.7778794682417506
+    },
+    {
+      "orbital": "4d",
+      "n": 4,
+      "l": 2,
+      "zeta_cr": 20.7221,
+      "r_mean_single": 0.25335270073978994,
+      "r_mean_2z": 0.21584718452232488,
+      "ratio_2z_over_single": 0.8519632271219176
+    },
+    {
+      "orbital": "5s",
+      "n": 5,
+      "l": 0,
+      "zeta_cr": 13.1181,
+      "r_mean_single": 0.5717291376054878,
+      "r_mean_2z": 0.4088369720386676,
+      "ratio_2z_over_single": 0.7150885710512427
+    },
+    {
+      "orbital": "5p",
+      "n": 5,
+      "l": 1,
+      "zeta_cr": 12.3118,
+      "r_mean_single": 0.592927110576845,
+      "r_mean_2z": 0.4440870693495469,
+      "ratio_2z_over_single": 0.7489741343038016
+    }
+  ],
+  "max_s_orbital_overlap": 0.857873751963592,
+  "verdict": "NO CODING BUGS in the multi-zeta machinery itself. STRUCTURAL ISSUE flagged: STRUCTURAL OBSERVATION \u2014 two-zeta orbitals have LARGE non-orthogonality (max |<ns|ms>|=0.858). This is the missing radial-nodes mechanism. The two-zeta heuristic is structurally incomplete. The heuristic two-zeta with all-positive coefficients cannot represent the radial nodes that orthogonalize valence to inner shells. This is consistent with the closeout-sprint diagnosis but adds a sharper sub-mechanism: the FAILURE OF S-ORBITAL ORTHOGONALITY in the two-zeta heuristic is the structural reason a heuristic two-zeta cannot fix what proper RHF would."
+}

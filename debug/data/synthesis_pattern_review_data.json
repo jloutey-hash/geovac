@@ -1,0 +1,291 @@
+{
+  "memo": "debug/synthesis_pattern_review_memo.md",
+  "date": "2026-05-09",
+  "sprint_type": "Leader/Decomposer-hybrid synthesis pass",
+  "production_code_modified": false,
+  "paper_edits_applied": false,
+
+  "patterns_verified": {
+    "pattern_A_alpha_order_hierarchy": {
+      "verdict": "CONFIRMED_AND_SHARPENED",
+      "structure": "two-tier (alpha^4 Breit, alpha^5 renormalization) + possible alpha^2 bracket-level third tier",
+      "instances": [
+        {"id": "H1_Yukawa", "alpha_order": "0", "tier": "Layer-2 input/W3", "mechanism": "inner-factor data, no III projection"},
+        {"id": "Mu_HFS_+199ppm", "alpha_order": "2", "tier": "one-loop bracket", "mechanism": "III.6 spectral action sub-leading"},
+        {"id": "Ps_1S2S_+65ppm", "alpha_order": "4", "tier": "two-body kinematic", "mechanism": "III.16 Breit retardation (operator-level partial)"},
+        {"id": "HF-3_recoil", "alpha_order": "4", "tier": "two-body kinematic", "mechanism": "III.16 + cross-register"},
+        {"id": "HF-4_Zemach", "alpha_order": "4", "tier": "intra-nuclear", "mechanism": "III.18 magnetization-density (CLOSED 2026-05-09)"},
+        {"id": "LS-8a_Z2_dm", "alpha_order": "5", "tier": "renormalization", "mechanism": "no III projection, structural-skeleton scope"},
+        {"id": "HF-5_multiloop_a_e", "alpha_order": "5", "tier": "renormalization", "mechanism": "no III projection, vertex sector"}
+      ],
+      "instance_count": 7,
+      "confidence": "HIGH for two-tier; MODERATE for alpha^2 third tier (n=1 datapoint)",
+      "falsifiers": [
+        "new wall instance at alpha^3 or alpha^6 outside named tiers",
+        "wall instance where alpha-order of residual does NOT match alpha-order of missing physics",
+        "Mu HFS tightens to <50 ppm with framework-internal work alone (would falsify alpha^2 isolated tier)"
+      ]
+    },
+
+    "pattern_C_HFS_VD_clustering": {
+      "verdict": "CONFIRMED",
+      "current_VD_entries": [
+        {"id": "V.D.1", "observable": "D 1S HFS", "magnitude": "~0.01% of nu_F propagating to ~25 mfm in r_Z(p)"},
+        {"id": "V.D.2", "observable": "muH 2S-2P Lamb VP", "magnitude": "~100 ppm per-component"},
+        {"id": "V.D.3", "observable": "Mu Lamb SE-recoil", "magnitude": "~11 MHz at SE bracket"},
+        {"id": "V.D.4", "observable": "Friar profile RMS-vs-first-moment", "magnitude": "12.7% Gaussian profile factor 4/pi"}
+      ],
+      "predictions": [
+        {"prediction": "C1 D polarizability convention (Pachucki-Yerokhin vs Friar-Payne)", "confidence_pct": 80, "expected_class": "HFS"},
+        {"prediction": "C2 Ps HFS annihilation channel itemization (CMY vs Karshenboim)", "confidence_pct": 60, "expected_class": "HFS"},
+        {"prediction": "C3 He fine-structure alpha^3(Zalpha)^2 itemization (Drake vs PY)", "confidence_pct": 50, "expected_class": "Lamb-class"},
+        {"prediction": "C4 Mu HFS Karshenboim-vs-framework m_red rescaling", "confidence_pct": 40, "expected_class": "HFS"}
+      ],
+      "confidence": "MODERATE (n=4 small) but mechanism-grounded (HFS observables decompose into more sub-leading channels)",
+      "falsifier": "next 3 sprints: 2 of 3 §V.D entries are non-HFS, non-muonic-Lamb"
+    },
+
+    "hunt_3_master_mellin_engine_residual_audit": {
+      "verdict": "CONFIRMED at Layer-2 output level",
+      "M1_residuals": ["Hawking T_H 2pi", "Vector-photon 1/(4pi)", "Heisenberg-Euler pi-denominator"],
+      "M2_residuals": ["Pi VP coefficient 1/(48pi^2)", "beta(alpha) 2alpha^2/(3pi)", "F = zeta_R(2)", "Stefan-Boltzmann pi^2/90 (M2 x M1 cross)"],
+      "M3_residuals": ["D_even(4) Catalan G + beta(4)", "D_diff(s) 2-power Dirichlet"],
+      "Layer1_no_pi": ["E_Cas^S3 = 1/240", "E_Cas^S3_Dirac = 17/480", "E_Cas^HO,S5 = -17/3840", "B = 42 Casimir at m=3", "Delta = 1/40 = 1/g_3^Dirac"],
+      "cross_bucket": ["K = pi(B+F-Delta) - outer M1 multiplies (Layer-1 + M2 + Layer-1) sum, three categorically different objects"],
+      "rogue_intermediate_transcendentals": [
+        {"transcendental": "log 2, log 3", "appearance": "Breit retardation R^0_BP at Z=1", "tier": "embedding (Paper 18) - intermediate not converged", "verdict": "case-exhaustion holds at Layer-2 output level only"},
+        {"transcendental": "S_min ~ 2.4799369...", "appearance": "two-loop sunset CG-weighted", "tier": "depth-2 multiple Hurwitz at half-integer shift, intrinsic", "verdict": "PSLQ-irreducible; outside M1/M2/M3"},
+        {"transcendental": "L2 next-order constant c ~ 4.1093...", "appearance": "Stein-Weiss IBP downstream of M1", "tier": "downstream of M1, not direct Mellin output", "verdict": "consistent with case-exhaustion at observable level"}
+      ],
+      "rows_examined": 14,
+      "rows_in_M1_or_M2": 9,
+      "rows_in_M3": 1,
+      "cross_bucket_rows": 1,
+      "Layer1_only_rows": 5,
+      "confidence": "HIGH for case-exhaustion at Layer-2 output level; MODERATE-HIGH for case-exhaustion at intermediate-matrix-element level"
+    }
+  },
+
+  "patterns_falsified": {
+    "naive_pattern_B_depth_vs_residual": {
+      "verdict": "FALSIFIED",
+      "replacement": "Pattern B' (Layer-2-presence-bound): |epsilon(observable)| <= max(epsilon_basis(framework), max_i |L2_i|)",
+      "evidence": [
+        "depth-3 chain at residual 0 (polarizability, Sprint Calc-P)",
+        "depth-3 chain at residual 0 (Stefan-Boltzmann, Sprint TD Track 1)",
+        "depth-3 chain at +64 ppm (Ps 1S-2S framework-only)",
+        "depth-3 chain at +40 ppm (D HFS BF strict)",
+        "depth-4 chain at +18 ppm (H 21cm HF-4)",
+        "depth-2 chain at +11.86% (He 2^1S-2^3S CI, B-error)"
+      ],
+      "no_monotone_trend": true,
+      "table_summary": {
+        "depth_2": "0.92% to 11.86% range",
+        "depth_3": "0% to 42.58% range, no monotone trend",
+        "depth_4": "0.014% to 199 ppm range, wide spread",
+        "depth_5": "0.10% (single datapoint)"
+      },
+      "falsifiers_for_replacement": [
+        "row with L2-count = 0 and residual > 10% (would falsify B' as well)",
+        "row with L2-count = 2+ and residual smaller than max single L2 by >10x",
+        "naive Pattern B fits data tighter than B'"
+      ]
+    },
+
+    "pure_axis_projection_candidates": {
+      "verdict": "UNVERIFIED 5 sprints since TX-A",
+      "candidates_flagged_in_TX_A": ["gauge-choice (Coulomb vs Lorenz) → pure-transcendental", "spin-statistics → splits boson/fermion Matsubara"],
+      "result_after_5_sprints": "neither has surfaced; vector-photon stays unique transcendental-axis witness",
+      "V_D_correlation_status": "12/12 (was 8/8 at TX-A) — strengthens"
+    }
+  },
+
+  "hunt_4_lorentz_boost_verdict": {
+    "primary_verdict": "REQUIRES-EXTENSION at framework level",
+    "reasoning": "Wick-rotated spectral triple is Riemannian; Lorentz boost requires Minkowski signature; multi-month NCG work, not a sprint",
+    "non_Lorentzian_alternative": {
+      "name": "uniform-rescaling rapidity projection",
+      "axis_pattern": "V---",
+      "transcendental_ring": "Q[v/c] / (gamma^2 (1-(v/c)^2) - 1)",
+      "compatibility": {
+        "M1": "PRESERVED (2pi in Matsubara survives under beta -> beta gamma)",
+        "M2": "PRESERVED (Trace integrals invariant under D -> D/gamma)",
+        "M3": "PRESERVED (parity unchanged under uniform rescaling)",
+        "Roothaan_termination": "PRESERVED (angular content)",
+        "Connes_axioms": "NOT PRESERVED as stated (KO-dim varies by signature)"
+      },
+      "redundancy_with_existing": "structurally close to III.14 / III.16 variable-refinement projections",
+      "recommendation": "do NOT add now; flag stays open for if Minkowski spectral triple is built"
+    },
+    "comparison_to_existing_gamma_factors": {
+      "III.7_Dirac_gamma_sqrt(1-(Zalpha)^2)": "intrinsic, single-particle, bound-state radial Lorentz factor",
+      "III.14_rest_mass": "single-particle mass rescaling",
+      "III.16_Breit_retardation": "two-body m_l/m_n ratio",
+      "proposed_boost_gamma": "ambient, all-particle, frame-level - structurally distinct in scope"
+    }
+  },
+
+  "operator_level_verification_matrix": {
+    "fully_verified": [
+      "III.1 Fock conformal", "III.3 Bargmann-Segal", "III.4 Stereographic",
+      "III.5 Sturmian", "III.7 spinor lift", "III.8 Wigner 3j",
+      "III.9 Wigner D", "III.10 Wilson plaquette", "III.11 Vector-photon",
+      "III.12 molframe hyperspherical", "III.13 Drake-Swainson", "III.14 rest-mass",
+      "III.18 Zemach magnetization-density (May 9 D HFS at I=1 + H 21cm at I=1/2)"
+    ],
+    "partially_verified": [
+      {"projection": "III.2 Hopf bundle", "status": "WH1 spectral truncation R2.5 PROVEN; not at observable level beyond α conjecture"},
+      {"projection": "III.6 spectral action", "status": "energy-level only", "gap": "operator-level construction at one-loop is the LOAD-BEARING gap"},
+      {"projection": "III.15 observation/temporal-window", "status": "Stefan-Boltzmann + cigar M1 verified; not at general observable"},
+      {"projection": "III.16 Breit retardation", "status": "kernel + Roothaan termination YES; bound-state matrix elements NO", "named_extension": "Bethe-Salpeter quasi-energy expansion"},
+      {"projection": "III.17 Foldy/Friar charge density", "status": "muH Lamb autopsy uses operator at 4.3% LO", "named_extension": "sibling MagnetizationDensitySpec for FNS channel"}
+    ],
+    "not_verified": [
+      {"projection": "III.19 tensor multipole", "status": "no catalogue row uses leading-order", "named_extension": "operator-level construction not implemented"}
+    ],
+    "load_bearing_gap": "III.6 Connes-Chamseddine spectral action operator-level promotion"
+  },
+
+  "axis_correlations_at_19_projections": {
+    "V_D_correlation": "12/12 (perfect)",
+    "transcendental_independence": "vector-photon (III.11) is sole witness, no new (--, --, P) projection added",
+    "VDP_pattern_count": {
+      "VD-": 9,
+      "V-P": 2,
+      "VDP": 2,
+      "V--": 2,
+      "--P": 1,
+      "---": 2,
+      "-D-": 0,
+      "-DP": 0
+    },
+    "redundancy_audit": {
+      "III.17_vs_III.18": "different Hamiltonian operators (V_ne vs A_hf); not redundant",
+      "III.14_vs_III.16": "single-particle vs two-body kinematic; not redundant",
+      "III.7_vs_III.11": "matter (electron) vs gauge (photon); not redundant"
+    },
+    "no_redundancies_found": true
+  },
+
+  "projection_depth_residual_table": [
+    {"observable": "Hydrogen E_n", "depth": 1, "L2_count": 0, "residual_pct": 0.0, "tag": "exact"},
+    {"observable": "F = zeta_R(2)", "depth": 1, "L2_count": 0, "residual_pct": 0.0, "tag": "exact symbolic"},
+    {"observable": "E_Cas^S3 = 1/240", "depth": 2, "L2_count": 0, "residual_pct": 0.0, "tag": "exact rational"},
+    {"observable": "E_Cas^S3 Dirac = 17/480", "depth": 2, "L2_count": 0, "residual_pct": 0.0, "tag": "exact rational"},
+    {"observable": "Stefan-Boltzmann pi^2/90", "depth": 3, "L2_count": 0, "residual_pct": 0.0, "tag": "exact symbolic"},
+    {"observable": "H 1S polarizability 9/2 a_0^3", "depth": 3, "L2_count": 0, "residual_pct": 0.0, "tag": "exact (Sprint Calc-P)"},
+    {"observable": "Lyman alpha A_21", "depth": 3, "L2_count": 0, "residual_pct": 0.055, "tag": "NR vs Dirac"},
+    {"observable": "Bethe log ln k_0(2S) acc", "depth": 2, "L2_count": 0, "residual_pct": -0.92},
+    {"observable": "Mu 1S-2S rest-mass-only", "depth": 2, "L2_count": 1, "residual_ppm": -0.11},
+    {"observable": "H 21cm HF-1 BF only", "depth": 3, "L2_count": 0, "residual_ppm": -1102, "tag": "= -a_e"},
+    {"observable": "H 21cm HF-2 +Schwinger", "depth": 4, "L2_count": 0, "residual_ppm": 58},
+    {"observable": "H 21cm HF-4 +Zemach", "depth": 4, "L2_count": 1, "residual_ppm": 18, "tag": "Eides Tab 7.3 consistent"},
+    {"observable": "H Lamb shift LS-6a", "depth": 4, "L2_count": 0, "residual_pct": -0.534},
+    {"observable": "muH Lamb (Sprint MH)", "depth": 5, "L2_count": 3, "residual_pct": -0.10},
+    {"observable": "muH 1S BF (Track B)", "depth": 4, "L2_count": 0, "residual_ppm": 2},
+    {"observable": "Mu Lamb shift", "depth": 4, "L2_count": 0, "residual_pct": 0.013},
+    {"observable": "D HFS BF strict", "depth": 3, "L2_count": 0, "residual_ppm": 40},
+    {"observable": "Mu HFS BF + Schwinger", "depth": 4, "L2_count": 0, "residual_ppm": 199},
+    {"observable": "Ps 1S HFS BF only", "depth": 3, "L2_count": 0, "residual_pct": -42.58, "tag": "annihilation L2 missing"},
+    {"observable": "Ps 1S-2S framework-only", "depth": 3, "L2_count": 0, "residual_ppm": 64.75, "tag": "Breit L2 missing"},
+    {"observable": "He 2^3P P_0-P_1", "depth": 4, "L2_count": 0, "residual_pct": -0.014},
+    {"observable": "He 2^3P P_0-P_2", "depth": 4, "L2_count": 0, "residual_pct": -0.20},
+    {"observable": "He 2^1S-2^3S graph CI", "depth": 2, "L2_count": 0, "residual_pct": 11.86, "error_code": "B"},
+    {"observable": "He 2^1P->1^1S osc strength", "depth": 3, "L2_count": 0, "residual_pct": 3.4, "tag": "multi-focal extension"},
+    {"observable": "LiH R_eq", "depth": 2, "L2_count": 0, "residual_pct": 5.3, "error_code": "B"}
+  ],
+
+  "next_track_candidates_ranked": [
+    {
+      "rank": 1,
+      "track": "V.D-prediction sprint",
+      "duration_weeks": 1,
+      "structural_value": "HIGH",
+      "verification_clarity": "HIGH",
+      "score": 9,
+      "purpose": "test Pattern C with 3 pre-named candidates (D polarizability, He fine structure alpha^3(Zalpha)^2, Ps HFS annihilation)",
+      "diagnostic_protocol": "3-day reading + memo, single literature comparison per candidate",
+      "falsifier": "0 of 3 land class-(a)"
+    },
+    {
+      "rank": 1,
+      "track": "Layer-2-presence-bound test",
+      "duration_weeks": 1,
+      "structural_value": "HIGH",
+      "verification_clarity": "HIGH",
+      "score": 9,
+      "purpose": "verify Pattern B' replaces naive Pattern B",
+      "diagnostic_protocol": "1-day re-tag of catalogue rows + statistical fit",
+      "falsifier": "either (a) row with L2-count=0 and residual > 10%, or (b) Pattern B fits tighter"
+    },
+    {
+      "rank": 2,
+      "track": "III.6 spectral action operator-level promotion",
+      "duration_weeks": 2,
+      "structural_value": "HIGH",
+      "verification_clarity": "MEDIUM",
+      "score": 7,
+      "purpose": "close load-bearing operator-level gap on most-tested projection",
+      "diagnostic_protocol": "verify Schwinger asymptote IS the operator-level limit before committing",
+      "falsifier": "operator-level returns same scalar Eides closed-form gives; no new structure"
+    },
+    {
+      "rank": 2,
+      "track": "Light-nucleus polarizability extension (He-3 HFS)",
+      "duration_weeks": 2,
+      "structural_value": "MED-HIGH",
+      "verification_clarity": "HIGH",
+      "score": 7,
+      "purpose": "extend catalogue at I=1/2 He-3, surfacing convention exposures",
+      "diagnostic_protocol": "verify III.18 module accepts arbitrary g_N and r_Z without architecture changes",
+      "falsifier": "framework-native He-3 BF strict residual exceeds 10x H/D analog"
+    },
+    {
+      "rank": 3,
+      "track": "III.16 Breit bound-state matrix elements",
+      "duration_weeks": 3,
+      "structural_value": "MEDIUM",
+      "verification_clarity": "MEDIUM",
+      "score": 5,
+      "purpose": "promote III.16 from kernel-level to bound-state matrix-element level (named extension at V.C.7)",
+      "diagnostic_protocol": "verify Karshenboim closed-form -(11/48) is reachable from finite Sturmian basis",
+      "falsifier": "Bethe-Salpeter quasi-energy machinery diverges or doesn't close at supportable n_basis"
+    }
+  ],
+
+  "recommended_paper_34_edits_NOT_applied": [
+    {
+      "edit_id": "EDIT-1",
+      "section": "VI Prediction 1",
+      "change": "replace naive depth-vs-residual prediction with Layer-2-presence-bound prediction",
+      "tied_to_track": "Track 3 (Layer-2-presence-bound test)"
+    },
+    {
+      "edit_id": "EDIT-2",
+      "section": "V.D protocol",
+      "change": "add prediction-tier classification separating class-(a) lit-itemization from class-(ii) closed-form-vs-operator",
+      "tied_to_track": "Track 1 (V.D-prediction sprint)"
+    },
+    {
+      "edit_id": "EDIT-3",
+      "section": "VIII Open Questions",
+      "change": "add Lorentz-boost structural verdict (REQUIRES-EXTENSION)",
+      "tied_to_track": "Hunt 4 result (no near-term sprint needed)"
+    }
+  ],
+
+  "honest_negatives": [
+    {"item": "Naive Pattern B (depth-vs-residual)", "verdict": "FALSIFIED, replaced by Pattern B'"},
+    {"item": "Pure-axis projection candidates (gauge-choice, spin-statistics)", "verdict": "UNVERIFIED 5 sprints later"},
+    {"item": "Lorentz boost as 17th projection", "verdict": "REQUIRES-EXTENSION at framework level"},
+    {"item": "Hidden new transcendental-axis witness", "verdict": "UNVERIFIED, vector-photon stays unique"}
+  ],
+
+  "result_30_second": {
+    "patterns_confirmed": ["Pattern A (alpha-order tiers)", "Pattern C (HFS clustering V.D)", "Hunt 3 (master Mellin engine)"],
+    "patterns_falsified": ["naive Pattern B (depth-vs-residual)", "pure-axis projection candidates"],
+    "top_3_next_tracks": ["V.D-prediction 1-week diagnostic", "Layer-2-presence-bound 1-week diagnostic", "III.6 operator-level promotion 2-week sprint"],
+    "hunt_4_verdict": "Lorentz boost requires Minkowski-signature spectral triple (multi-month, not near-term)",
+    "hunt_5_next_extension": "Light-nucleus polarizability (He-3 HFS)"
+  }
+}

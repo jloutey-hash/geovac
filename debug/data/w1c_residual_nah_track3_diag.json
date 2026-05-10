@@ -1,0 +1,55 @@
+{
+  "description": "Cross-V_ne diagnostic: compare framework block_n labels vs physical n labels for the Na valence orbitals",
+  "rows": [
+    {
+      "R": 2.5,
+      "framework_trace": -1.279505573621757,
+      "physical_4p_trace": -0.3296267395905755,
+      "physical_3p_trace": -0.4660380561469215,
+      "framework_minus_physical_3p": -0.8134675174748356
+    },
+    {
+      "R": 3.0,
+      "framework_trace": -1.1862355919057483,
+      "physical_4p_trace": -0.32434183595388844,
+      "physical_3p_trace": -0.4558482614487305,
+      "framework_minus_physical_3p": -0.7303873304570179
+    },
+    {
+      "R": 3.5,
+      "framework_trace": -1.1041252345857167,
+      "physical_4p_trace": -0.3187974351401101,
+      "physical_3p_trace": -0.44505680549202076,
+      "framework_minus_physical_3p": -0.6590684290936959
+    },
+    {
+      "R": 4.0,
+      "framework_trace": -1.029793005050312,
+      "physical_4p_trace": -0.3131437753355646,
+      "physical_3p_trace": -0.43419778420341415,
+      "framework_minus_physical_3p": -0.5955952208468978
+    },
+    {
+      "R": 5.0,
+      "framework_trace": -0.8985394177480486,
+      "physical_4p_trace": -0.30251459749192716,
+      "physical_3p_trace": -0.41431716281873043,
+      "framework_minus_physical_3p": -0.48422225492931814
+    },
+    {
+      "R": 7.0,
+      "framework_trace": -0.6934743148247017,
+      "physical_4p_trace": -0.28723496037004065,
+      "physical_3p_trace": -0.38701166647410024,
+      "framework_minus_physical_3p": -0.30646264835060144
+    },
+    {
+      "R": 10.0,
+      "framework_trace": -0.4982566404298514,
+      "physical_4p_trace": -0.27074018536032385,
+      "physical_3p_trace": -0.35931131500088187,
+      "framework_minus_physical_3p": -0.13894532542896953
+    }
+  ],
+  "descent_correction_estimate": -0.674522192045866
+}

@@ -1,0 +1,69 @@
+{
+  "probe": "a",
+  "hypothesis": "CR67 single-zeta exponents themselves are non-faithful for outer shells at high Z",
+  "results_per_orbital": [
+    {
+      "Z": 55,
+      "n": 5,
+      "l": 1,
+      "label": "Cs 5p",
+      "zeta_CR": 12.3118,
+      "Z_eff_CR_n_times_zeta": 61.559,
+      "r_peak_CR_numerical": 0.6320116599556658,
+      "r_mean_CR_numerical": 0.5929271105768484,
+      "r_peak_CR_analytical": 0.4061144592992089,
+      "r_mean_CR_analytical": 0.592927110576845,
+      "r_phys_reference_bohr": 1.95,
+      "phys_ref_uncertainty_pct": 20.0,
+      "rel_err_<r>_pct": -69.59348150887958,
+      "Z_eff_implied_by_phys_<r>": 18.71794871794872,
+      "Z_eff_overshoot_factor": 3.2887684931506844,
+      "source_note": "Sobelman/RHF: r_max(5p)~1.8-2.2"
+    },
+    {
+      "Z": 55,
+      "n": 5,
+      "l": 0,
+      "label": "Cs 5s",
+      "zeta_CR": 13.1181,
+      "Z_eff_CR_n_times_zeta": 65.5905,
+      "r_peak_CR_numerical": 0.6084473835373363,
+      "r_mean_CR_numerical": 0.5717291393075347,
+      "r_peak_CR_analytical": 0.3811527584025125,
+      "r_mean_CR_analytical": 0.5717291376037688,
+      "r_phys_reference_bohr": 1.27,
+      "phys_ref_uncertainty_pct": 20.0,
+      "rel_err_<r>_pct": -54.981957534839786,
+      "Z_eff_implied_by_phys_<r>": 29.52755905511811,
+      "Z_eff_overshoot_factor": 2.2213316,
+      "source_note": "Sobelman/RHF: r_max(5s)~1.2-1.4"
+    },
+    {
+      "Z": 55,
+      "n": 4,
+      "l": 2,
+      "label": "Cs 4d",
+      "zeta_CR": 20.7221,
+      "Z_eff_CR_n_times_zeta": 82.8884,
+      "r_peak_CR_numerical": 0.2561097152357873,
+      "r_mean_CR_numerical": 0.2533527007397899,
+      "r_peak_CR_analytical": 0.19303062913507799,
+      "r_mean_CR_analytical": 0.2533527007397899,
+      "r_phys_reference_bohr": 1.05,
+      "phys_ref_uncertainty_pct": 25.0,
+      "rel_err_<r>_pct": -75.87117135811525,
+      "Z_eff_implied_by_phys_<r>": 20.0,
+      "Z_eff_overshoot_factor": 4.14442,
+      "source_note": "RHF: 4d compact, r_max~1.0-1.1"
+    }
+  ],
+  "summary": {
+    "mean_overshoot": 3.2181733643835617,
+    "max_overshoot": 4.14442,
+    "min_overshoot": 2.2213316,
+    "low_Z_mean_overshoot": NaN,
+    "mid_Z_mean_overshoot": NaN,
+    "high_Z_mean_overshoot": 3.2181733643835617
+  },
+  "verdict": "PARTIAL: CR67 fits are moderately compact across Z range; high-Z is somewhat worse but the effect is gradual, not cliff-shaped."
+}

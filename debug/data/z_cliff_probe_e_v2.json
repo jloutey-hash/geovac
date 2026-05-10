@@ -1,0 +1,88 @@
+{
+  "probe": "e_v2",
+  "hypothesis": "Z-scan to localize cliff onset (kernel isolated, no Casimir F_R)",
+  "rows": [
+    {
+      "Z": 1,
+      "n_val": 1,
+      "label": "H 1s",
+      "A_exp_MHz": 1420.4058,
+      "g_N": 5.585695,
+      "F_R": 1.3333925052337043,
+      "psi_FW": 0.317928190046584,
+      "psi_HF_lit": 0.3183098861837907,
+      "ratio_FW_over_lit": 0.9988008662194479,
+      "A_FW_no_FR_MHz": 1421.1015219155638,
+      "A_target_no_FR_MHz": 1065.2570750358648,
+      "rel_err_pct": 33.40456075991972
+    },
+    {
+      "Z": 3,
+      "n_val": 2,
+      "label": "Li 2s",
+      "psi_FW": null,
+      "note": "Li 2-electron core, screened solver N/A",
+      "psi_HF_lit": 0.227
+    },
+    {
+      "Z": 11,
+      "n_val": 3,
+      "label": "Na 3s",
+      "A_exp_MHz": 885.813,
+      "g_N": 1.478418,
+      "F_R": 1.3405477205043144,
+      "psi_FW": 0.9472287422432747,
+      "psi_HF_lit": 0.762,
+      "ratio_FW_over_lit": 1.2430823389019352,
+      "A_FW_no_FR_MHz": 1120.652484083672,
+      "A_target_no_FR_MHz": 660.7843842118182,
+      "rel_err_pct": 69.59427475278238
+    },
+    {
+      "Z": 19,
+      "n_val": 4,
+      "label": "K 4s",
+      "A_exp_MHz": 230.86,
+      "g_N": 0.260977,
+      "F_R": 1.3551911028053956,
+      "psi_FW": 0.27202481923807337,
+      "psi_HF_lit": 0.879,
+      "ratio_FW_over_lit": 0.30947078411612444,
+      "A_FW_no_FR_MHz": 56.81063111111822,
+      "A_target_no_FR_MHz": 170.35235807119327,
+      "rel_err_pct": -66.65110377434513
+    },
+    {
+      "Z": 37,
+      "n_val": 5,
+      "label": "Rb 5s",
+      "A_exp_MHz": 3417.341,
+      "g_N": 1.834212,
+      "F_R": 1.4220370980769765,
+      "psi_FW": 0.37380965566801533,
+      "psi_HF_lit": 1.94,
+      "ratio_FW_over_lit": 0.19268538951959555,
+      "A_FW_no_FR_MHz": 548.6797026960992,
+      "A_target_no_FR_MHz": 2403.1306951283314,
+      "rel_err_pct": -77.1681288991734
+    },
+    {
+      "Z": 55,
+      "n_val": 6,
+      "label": "Cs 6s",
+      "A_exp_MHz": 2298.158,
+      "g_N": 0.737739,
+      "F_R": 1.5552726325242259,
+      "psi_FW": 1.2446100563245501,
+      "psi_HF_lit": 1.99,
+      "ratio_FW_over_lit": 0.6254321891078142,
+      "A_FW_no_FR_MHz": 734.7758899431975,
+      "A_target_no_FR_MHz": 1477.6560404525746,
+      "rel_err_pct": -50.27422689530973
+    }
+  ],
+  "cliff_first_Z": 1,
+  "light_z_mean_err_pct": 56.549979762349075,
+  "heavy_z_mean_err_pct": 64.69781985627608,
+  "verdict": "CLIFF IS ALREADY PRESENT AT LIGHT-ATOM Z (Z=1). This means the FrozenCore CR67 single-zeta is non-faithful already at Na, K. The 'Z>20' framing is mostly correct (K 4s shows the cliff cleanly), but the CR67 fit limitation already manifests at Z=11. The Cs HFS -47% residual is the ACCUMULATED effect of: (a) CR67 fit non-faithfulness for the [Xe] valence-shell screening, (b) the full Bohr-Weisskopf factor not captured by the leading-order Casimir F_R. The Casimir F_R alone removes the heavy-atom relativistic gap; after that, the screening cliff is the dominant residual."
+}

@@ -1,0 +1,80 @@
+{
+  "probe": "e",
+  "hypothesis": "Z-scan to localize cliff onset",
+  "rows_per_atom": [
+    {
+      "Z": 1,
+      "n_val": 1,
+      "label": "H 1s",
+      "A_exp_MHz": 1420.4058,
+      "g_N": 5.585695,
+      "F_R_casimir": 1.3333925052337043,
+      "psi0_sq_framework": 0.317928190046584,
+      "psi0_anchored_over_Z3": 0.317928190046584,
+      "A_predicted_MHz": 1894.8861184984237,
+      "rel_err_pct": 33.40456075991971
+    },
+    {
+      "Z": 3,
+      "n_val": 2,
+      "label": "Li 2s",
+      "psi0_sq_framework": null,
+      "note": "Li uses CoreScreening 2-electron, not FrozenCore",
+      "psi0_sq_used": 0.227,
+      "A_predicted_MHz": 526.0242650854607,
+      "rel_err_pct": 30.932581564114347,
+      "F_R_casimir": 1.3338661490652357
+    },
+    {
+      "Z": 11,
+      "n_val": 3,
+      "label": "Na 3s",
+      "A_exp_MHz": 885.813,
+      "g_N": 1.478418,
+      "F_R_casimir": 1.3405477205043144,
+      "psi0_sq_framework": 0.9472287422432747,
+      "psi0_anchored_over_Z3": 0.0007116669738867578,
+      "A_predicted_MHz": 1502.288133015864,
+      "rel_err_pct": 69.59427475278237
+    },
+    {
+      "Z": 19,
+      "n_val": 4,
+      "label": "K 4s",
+      "A_exp_MHz": 230.86,
+      "g_N": 0.260977,
+      "F_R_casimir": 1.3551911028053956,
+      "psi0_sq_framework": 0.27202481923807337,
+      "psi0_anchored_over_Z3": 3.965954501211159e-05,
+      "A_predicted_MHz": 76.9892618265468,
+      "rel_err_pct": -66.65110377434515
+    },
+    {
+      "Z": 37,
+      "n_val": 5,
+      "label": "Rb 5s",
+      "A_exp_MHz": 3417.341,
+      "g_N": 1.834212,
+      "F_R_casimir": 1.4220370980769765,
+      "psi0_sq_framework": 0.37380965566801533,
+      "psi0_anchored_over_Z3": 7.379812758731276e-06,
+      "A_predicted_MHz": 780.2428921956989,
+      "rel_err_pct": -77.1681288991734
+    },
+    {
+      "Z": 55,
+      "n_val": 6,
+      "label": "Cs 6s",
+      "A_exp_MHz": 2298.158,
+      "g_N": 0.737739,
+      "F_R_casimir": 1.5552726325242259,
+      "psi0_sq_framework": 1.2446100563245501,
+      "psi0_anchored_over_Z3": 7.480751653340647e-06,
+      "A_predicted_MHz": 1142.7768326672876,
+      "rel_err_pct": -50.27422689530973
+    }
+  ],
+  "cliff_threshold_pct": 10.0,
+  "cliff_first_Z": 1,
+  "verdict": "Cliff observed already at Z=1. Framework's screening kernel shows error > 10.0% for all atoms tested at and above this Z."
+}

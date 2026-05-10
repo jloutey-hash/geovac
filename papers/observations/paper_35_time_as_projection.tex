@@ -833,6 +833,90 @@ on the cross-manifold open question.  Sprint TD Track~1's
 \verb|geovac/thermal_tensor_triple.py| (\textsc{sympy} symbolic, 36
 tests) is the computational anchor.
 
+\subsection{Bisognano--Wichmann reading of the temporal-window projection}
+\label{subsec:bisognano_wichmann_reading}
+
+Sprint TD Track~4 (\texttt{debug/sprint\_td\_track4\_memo.md}, May~2026)
+extends the spectrum-level construction of
+\S~\ref{sec:tensor_product_verification} to the Euclidean Schwarzschild
+cigar.  Smoothness at the horizon $r = 2M$ (the standard Hawking--Gibbons
+absence-of-conical-defect argument) forces the imaginary-time circle to
+have period $\beta_{\mathrm{cigar}} = 8\pi M$, reproducing the Hawking
+temperature $T_H = 1/(8\pi M)$ from the M1 Hopf-base measure /
+$\mathrm{Vol}(S^1_\tau)$ mechanism alone.  Sprint TD Track~4's
+\texttt{matsubara\_spectrum()} called with $\beta = 8\pi M$ reproduces the
+standard Hawking spectrum bit-identically (lowest bosonic mode $1/(4M) =
+\kappa_g$ surface gravity; lowest fermionic $\pi T_H$); sympy residual
+zero on all three identities ($\beta = 8\pi M$,
+$T_H = \kappa_g/(2\pi)$, $\beta = 4M \cdot 2\pi$).
+
+Track~D (\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md},
+May~2026) makes explicit the Bisognano--Wichmann reading of this
+result.  The Bisognano--Wichmann theorem~\cite{bisognano_wichmann1976}
+states that the modular automorphism of the algebra of observables
+localized in a Rindler wedge, with respect to the vacuum state, IS the
+unitary representation of the Lorentz boost subgroup that maps the
+wedge to itself; the modular Hamiltonian $K$ generates the boost, and
+the Tomita--Takesaki KMS condition forces the analytic period
+$\sigma_{i\cdot 2\pi} = $ identity.  Sewell~1982~\cite{sewell1982}
+generalized this to globally hyperbolic Lorentzian manifolds with
+bifurcate Killing horizons:\ the natural Hartle--Hawking
+vacuum~\cite{hartle_hawking1976} restricted to the Schwarzschild
+exterior is a KMS state at inverse temperature $\beta = 8\pi M$, and
+the Tomita modular automorphism is the surface-gravity-rescaled Killing
+flow.  Hartle--Hawking~\cite{hartle_hawking1976} provided the
+path-integral derivation of the same imaginary-time period $8\pi M$.
+
+\textbf{The structural identification.}\ Under the Wick-rotation chain
+[Hartle--Hawking 1976]~$\to$~[Sewell 1982]~$\to$~[Bisognano--Wichmann
+1976], the framework's M1 $2\pi$ on $S^1_\tau$ IS the period of the
+modular-flow / Lorentz-boost orbit of a stationary observer outside the
+Schwarzschild horizon.  Equivalently, the temporal-window projection
+of \S~\ref{sec:projection_inventory} (Paper~34~§III.15), instantiated at
+$\beta = 8\pi M$, has dual physical interpretations: a Hopf-bundle
+measure factor on the temporal $S^1_\tau$ (Riemannian) and a
+modular-flow / Lorentz-boost orbit period (Lorentzian, via the standard
+Wick rotation).  This is a \emph{structural correspondence}, not a
+literal identification:\ two mathematical objects (the framework-side
+Hopf-base measure factor; the Lorentzian-side modular-automorphism
+period) are equated by the published Wick-rotation prescription, not
+by an operator-level proof inside the spectral triple.  The
+identification stands on the published QFT machinery, which is mature
+and verified independently of GeoVac.
+
+\textbf{Unruh corollary.}\ The same M1 mechanism applied to a Rindler
+wedge gives the Unruh effect:\ a uniformly accelerated observer at
+proper acceleration $a$ has Wick-rotated $\beta_{\mathrm{Rindler}} =
+2\pi/a$, reproducing $T_U = a/(2\pi)$ from M1.  Sprint TD Track~4's
+\texttt{matsubara\_spectrum()} machinery applies verbatim with
+$\beta_{\mathrm{Rindler}}$ in place of $\beta_{\mathrm{cigar}}$;
+explicit verification is a 1--2 day pendant follow-up flagged in
+Track~D \S 5.4.
+
+\textbf{Honest scope.}\ Track~D commits to four claims:\ (1) the
+framework's M1 mechanism produces $\beta = 8\pi M$ on the cigar (sympy
+residual zero, Sprint TD Track~4); (2) this $\beta$ is the
+imaginary-time period of the Hartle--Hawking thermal state; (3) Sewell
+1982 proves this thermal state IS a Bisognano--Wichmann modular flow;
+(4) the framework-side $2\pi$ and the Lorentzian-side modular-flow
+$2\pi$ are the same number, by the published Wick-rotation chain.  It
+does \emph{not} claim:\ an operator-level proof that the modular
+Hamiltonian on the truncated metric spectral triple closes at period
+$2\pi$ (this is the principal falsifier, 4--8 week follow-up); a
+Lorentzian-signature spectral triple (multi-month NCG work, Track~B
+verdict NO-GO; \texttt{debug/lorentz\_boost\_scoping\_memo.md}); a
+derivation of the cigar geometry from the GeoVac packing axiom (Sprint
+TD Track~4 V3 NEGATIVE; the cigar is forced by Einstein equations +
+Schwarzschild horizon, not by GeoVac); Bekenstein--Hawking entropy
+from the horizon $S^2$ (out of scope, Sprint TD Track~4 V2 deferred).
+
+\textbf{Cross-references.}\ Paper~32~§VIII Remark
+\texttt{rem:bisognano\_wichmann\_reading} for the spectral-triple-side
+statement and case-exhaustion-theorem context; Paper~34~§III.15
+footnote for the temporal-window projection's Bisognano--Wichmann
+reading; Paper~34~§V.B for the Hawking-$T$ off-precision catalogue row
+(error class C, $M$ external Einstein-equations input).
+
 % ===================================================================
 \section{Open questions}
 \label{sec:open}
@@ -1175,6 +1259,22 @@ L.~H.~Ford, ``Quantum Vacuum Energy in General Relativity,''
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac
 operator on spheres and real hyperbolic spaces,''
 \textit{J.\ Geom.\ Phys.}\ \textbf{20}, 1 (1996).
+
+\bibitem{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+``On the duality condition for quantum fields,''
+\textit{J.\ Math.\ Phys.}\ \textbf{17}, 303--321 (1976).
+
+\bibitem{sewell1982}
+G.~L.~Sewell,
+``Quantum fields on manifolds: PCT and gravitationally induced thermal
+states,''
+\textit{Annals of Physics}\ \textbf{141}, 201--224 (1982).
+
+\bibitem{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+``Path-integral derivation of black-hole radiance,''
+\textit{Phys.\ Rev.\ D}\ \textbf{13}, 2188--2203 (1976).
 
 \end{thebibliography}
 

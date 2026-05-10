@@ -1,0 +1,55 @@
+{
+  "NIST_reference_cm1": 6421.46,
+  "Drake_2S_singlet_Ha": -2.145974,
+  "Drake_2S_triplet_Ha": -2.175229,
+  "Drake_1S_Ha": -2.903724,
+  "previous_geovac_graph_native_cm1": 7183.3,
+  "previous_geovac_err_pct": 11.86,
+  "results": [
+    {
+      "omega": 3,
+      "n_singlet": 13,
+      "n_triplet": 7,
+      "E_1S_Ha": -2.9037005244619642,
+      "E_2S_singlet_Ha": -2.0732546858939367,
+      "E_2S_triplet_Ha": -2.2028634138493315,
+      "splitting_Ha": 0.1296087279553948,
+      "splitting_cm1": 28445.827789463547,
+      "err_cm1": 22024.367789463548,
+      "err_pct": 342.9806895856012,
+      "alpha_singlet": 1.3029137481143496,
+      "alpha_triplet": 1.0281429133139635,
+      "time_s": 76.11282444000244
+    },
+    {
+      "omega": 4,
+      "n_singlet": 22,
+      "n_triplet": 13,
+      "E_1S_Ha": -2.9037724854804927,
+      "E_2S_singlet_Ha": -2.1361922240492053,
+      "E_2S_triplet_Ha": -2.21737515187681,
+      "splitting_Ha": 0.08118292782760461,
+      "splitting_cm1": 17817.59315794879,
+      "err_cm1": 11396.133157948792,
+      "err_pct": 177.46950316514923,
+      "alpha_singlet": 1.0689249383863717,
+      "alpha_triplet": 0.756908934128788,
+      "time_s": 211.6839644908905
+    },
+    {
+      "omega": 5,
+      "n_singlet": 34,
+      "n_triplet": 22,
+      "E_1S_Ha": -2.9037973293740946,
+      "E_2S_singlet_Ha": -2.138976290027573,
+      "E_2S_triplet_Ha": -2.2294928055528267,
+      "splitting_Ha": 0.09051651552525364,
+      "splitting_cm1": 19866.07887718641,
+      "err_cm1": 13444.61887718641,
+      "err_pct": 209.37012575312175,
+      "alpha_singlet": 1.1218940810196505,
+      "alpha_triplet": 0.6528301540503229,
+      "time_s": 664.8422267436981
+    }
+  ]
+}

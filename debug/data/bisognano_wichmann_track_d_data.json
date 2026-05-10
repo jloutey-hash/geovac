@@ -1,0 +1,298 @@
+{
+  "track_id": "bisognano_wichmann_track_d",
+  "date": "2026-05-09",
+  "track": "Track D (Candidate A) of post-multifocal-catalogue parallel sprint",
+  "follows_on_from": "Track B Lorentz-boost scoping (debug/lorentz_boost_scoping_memo.md)",
+  "scope_window_weeks": 1,
+  "status": "complete",
+  "no_production_code_modified": true,
+  "papers_modified": [
+    {"paper": "Paper 32", "section": "VIII.D + new Remark in §VIII", "edit": "applied"},
+    {"paper": "Paper 35", "section": "VIII.A new subsection (Bisognano-Wichmann reading)", "edit": "applied"},
+    {"paper": "Paper 34", "section": "VIII open question (Lorentz-boost paragraph extension; addition to existing entry)", "edit": "applied"}
+  ],
+
+  "headline_claim": {
+    "structural_identification_kind": "structural_correspondence_NOT_literal_identification",
+    "what_is_identified": "The 2pi factor entering Sprint TD Track 4's Hawking temperature T_H = 1/(8 pi M) on the Euclidean Schwarzschild cigar is the same numerical 2pi that appears as the modular-flow / Lorentz-boost orbit period in the Bisognano-Wichmann theorem.",
+    "honest_qualifier": "Two 2pi's appear in two different mathematical objects (Hopf-bundle Vol(S^2) measure factor on the framework side; modular-automorphism period of the wedge vacuum on the Bisognano-Wichmann side) which standard Wick-rotation arguments (Sewell 1982; Hartle-Hawking 1976) identify at the level of correlation-function periodicity. The framework's M1 mechanism IS the Wick-rotated image of the Lorentz-boost orbit period mechanism. It is NOT proven inside the framework that the modular Hamiltonian on the truncated metric spectral triple T_n_max generates a one-parameter group whose period closes at exactly 2pi - that would be the literal-identification claim and would require a Lorentzian-signature spectral triple (multi-month NCG work, Track B verdict NO-GO).",
+    "claim_strength": "structurally clean documentation pass; renames existing thermal physics in the relativistic-QFT vocabulary; lands the verifiable Bisognano-Wichmann reading without overselling"
+  },
+
+  "literature_citations": [
+    {
+      "id": "bisognano_wichmann1975",
+      "ref": "Bisognano, J.J. and Wichmann, E.H. 'On the duality condition for a Hermitian scalar field.' J. Math. Phys. 16, 985-1007 (1975).",
+      "verified_via": "WebSearch + ADS UI 1975JMP....16..985B + osti.gov record",
+      "structural_ingredient": "Founding paper; relates complex Lorentz transformations to TCP on Hermitian scalar fields. Establishes the duality condition under physically reasonable Wightman-axiomatic assumptions.",
+      "use_in_track_D": "Cited as the earlier of the Bisognano-Wichmann pair; establishes the duality structure that the 1976 paper extends to general fields."
+    },
+    {
+      "id": "bisognano_wichmann1976",
+      "ref": "Bisognano, J.J. and Wichmann, E.H. 'On the duality condition for quantum fields.' J. Math. Phys. 17, 303-321 (1976).",
+      "verified_via": "WebSearch + AIP listing pubs.aip.org/aip/jmp/article-abstract/17/3/303",
+      "actual_title_correction": "Track B scoping memo had this paper's title as 'On the duality condition for a Hermitian scalar field' (which is actually the 1975 paper). The 1976 paper is 'On the duality condition for quantum fields' (general fields, including bosons and fermions).",
+      "structural_ingredient": "Founding theorem: the modular automorphism of the algebra of fields localized in a Rindler wedge, with respect to the vacuum state, is the unitary representation of the Lorentz boost subgroup that maps the wedge to itself. Establishes that Tomita-Takesaki modular flow has explicit geometric content for wedge algebras.",
+      "use_in_track_D": "Primary citation for the modular-flow-IS-Lorentz-boost identification. Period of the modular automorphism along the imaginary axis is 2pi (Tomita-Takesaki KMS condition + identification with surface-gravity-rescaled boost parameter)."
+    },
+    {
+      "id": "sewell1982",
+      "ref": "Sewell, G.L. 'Quantum fields on manifolds: PCT and gravitationally induced thermal states.' Annals of Physics 141, 201-224 (1982).",
+      "verified_via": "WebSearch + ScienceDirect + reprints.gravitywaves.com PDF",
+      "scoping_memo_correction": "Track B scoping memo cited this as 1980 in the data file and as 1980 in the memo body; the actual publication year is 1982.",
+      "structural_ingredient": "Generalizes Bisognano-Wichmann to globally hyperbolic Lorentzian manifolds with bifurcate Killing horizons. Shows that the restriction of the natural vacuum on Kruskal-extended Schwarzschild to the exterior region is a KMS state at inverse temperature beta = 8 pi M with respect to the Killing time evolution; the Tomita modular automorphism IS the boost-like Killing flow. Direct generalization that closes the Wick-rotation chain Schwarzschild cigar -> Lorentzian Kruskal -> KMS at 8 pi M -> modular flow IS Killing-time boost.",
+      "use_in_track_D": "The pivotal citation for Sprint TD Track 4: Sewell proves model-independently that the Schwarzschild thermal state at beta = 8 pi M is a modular-flow image of a Lorentz-boost-class isometry. Sprint TD Track 4 reproduces beta = 8 pi M from the M1 mechanism; Sewell 1982 says that beta IS the modular-flow period, hence Sprint TD Track 4's M1 mechanism IS modular-flow physics."
+    },
+    {
+      "id": "hartle_hawking1976",
+      "ref": "Hartle, J.B. and Hawking, S.W. 'Path-integral derivation of black-hole radiance.' Phys. Rev. D 13, 2188-2203 (1976).",
+      "verified_via": "WebSearch + APS Phys Rev D listing + ADS 1976PhRvD..13.2188H",
+      "structural_ingredient": "Path-integral derivation that the Schwarzschild geometry has imaginary-time period 8 pi M, and that the corresponding propagator is thermal at temperature T_H = 1/(8 pi M). This is the canonical Wick-rotation argument that Sprint TD Track 4 reproduces in the GeoVac framework.",
+      "use_in_track_D": "Establishes the standard Wick-rotation-to-thermal mapping that Sprint TD Track 4 pulls onto the M1 mechanism. Provides the textbook proof that the Euclidean cigar's S^1_tau circle period = 8 pi M IS the inverse temperature of the corresponding Lorentzian thermal state."
+    },
+    {
+      "id": "witten2018",
+      "ref": "Witten, E. 'APS Medal for Exceptional Achievement in Research: Invited article on entanglement properties of quantum field theory.' Rev. Mod. Phys. 90, 045003 (2018). arXiv:1803.04993.",
+      "verified_via": "WebSearch + APS RMP 90.045003 link + arXiv 1803.04993",
+      "structural_ingredient": "Modern review of modular flow and Tomita-Takesaki theory in QFT. Unpacks Bisognano-Wichmann, Reeh-Schlieder, half-sided modular inclusions, and entanglement in continuum-QFT language; explicit treatment of the modular Hamiltonian for wedge algebras as the Lorentz boost generator and the unique role this plays in QFT entanglement entropy.",
+      "use_in_track_D": "Modern reference for the Bisognano-Wichmann reading at a level accessible to non-AQFT readers. Connects to Paper 27's entropy thread (one open avenue: Paper 27 spatial entanglement on S^3 vs the Bisognano-Wichmann modular Hamiltonian for a half-S^3 algebra)."
+    },
+    {
+      "id": "jacobson_parentani2003",
+      "ref": "Jacobson, T. and Parentani, R. 'Horizon entropy.' Foundations of Physics 33, 323-348 (2003). arXiv:gr-qc/0302099.",
+      "verified_via": "WebSearch + Springer Nature link + arXiv gr-qc/0302099",
+      "structural_ingredient": "Reviews the laws of black hole thermodynamics on causal horizons (including Rindler / asymptotic dS / Schwarzschild). Identifies horizon entropy density as a local notion controlling the thermodynamic structure across horizon types. Explicitly identifies the modular Hamiltonian for a causal horizon as the boost generator (in flat-Rindler limit) or surface-gravity-rescaled Killing field (in curved cases).",
+      "use_in_track_D": "Cited as the modern reference for the local-horizon-entropy reading; useful for the Section 5 forward-implications discussion on whether Hawking T as a catalogue row is an admissible match (verdict: NO at this time, see falsifier list)."
+    },
+    {
+      "id": "connes_book1994",
+      "ref": "Connes, A. Noncommutative Geometry. Academic Press, 1994.",
+      "verified_via": "WebSearch + alainconnes.org book PDF + Connes-Marcolli AMS 2008 references",
+      "structural_ingredient": "Systematic treatment of Tomita-Takesaki modular automorphism on type-II/type-III von Neumann algebras. Connes' cocycle derivative shows that while the modular automorphism depends on the choice of state, its image in the outer automorphism group is canonical. This is the abstract version of the geometric Bisognano-Wichmann statement.",
+      "use_in_track_D": "Cited as the systematic NCG-side reference. The Bisognano-Wichmann theorem is the geometric specialization of Connes' canonical-modular-automorphism observation to wedge algebras of QFT vacuum states."
+    },
+    {
+      "id": "wald1994",
+      "ref": "Wald, R.M. Quantum Field Theory in Curved Spacetime and Black Hole Thermodynamics. University of Chicago Press, 1994.",
+      "verified_via": "standard graduate text; widely cited",
+      "structural_ingredient": "Definitive textbook treatment of Bisognano-Wichmann + Sewell + Hartle-Hawking in the curved-spacetime QFT context. Modular Hamiltonian on Schwarzschild explicitly identified with surface-gravity-rescaled Killing flow.",
+      "use_in_track_D": "Textbook reference for the Bisognano-Wichmann + Hartle-Hawking + Sewell synthesis."
+    }
+  ],
+
+  "phantom_or_unverified_in_scoping_memo": [
+    {
+      "id": "hawkins_skoda",
+      "directive_listed_as": "Hawkins-Skoda 2018 / 2020 Krein-space spectral triples",
+      "verification_status": "could_not_locate (already flagged in Track B scoping memo)",
+      "track_d_action": "do not cite"
+    },
+    {
+      "id": "sewell_year_correction",
+      "directive_listed_as": "Sewell 1980, Ann. Phys. 141, 201",
+      "actual": "Sewell 1982, Annals of Physics 141, 201-224",
+      "track_d_action": "Use 1982 as the verified publication year; the article was published in volume 141 of Annals of Physics in 1982. The scoping memo's 1980 was wrong; corrected in Track D bibliography"
+    },
+    {
+      "id": "bisognano_wichmann_1976_title_correction",
+      "directive_listed_as": "Bisognano-Wichmann 1976 'On the duality condition for a Hermitian scalar field.' J. Math. Phys. 17, 303",
+      "actual": "Bisognano-Wichmann 1976 'On the duality condition for quantum fields.' J. Math. Phys. 17, 303-321 (the 1975 paper has the 'Hermitian scalar field' title)",
+      "track_d_action": "Use 'On the duality condition for quantum fields' for the 1976 paper"
+    }
+  ],
+
+  "section_1_structural_identification": {
+    "the_two_2pis": [
+      {
+        "framework_side": "M1 Hopf-base measure / S^1_tau circumference",
+        "value": "2 pi",
+        "appears_in": "Sprint TD Track 4 driver: phi_period = 2 pi (regularity at cigar tip), beta_cigar = 4M * 2 pi = 8 pi M, T_H = 1/(8 pi M)",
+        "underlying_mechanism": "Master Mellin engine M1: pi-source = M[Tr(D^0 e^{-tD^2})] at k=0 produces Vol/Mellin-measure factor; on the tau-circle this is Vol(S^1_tau) / 1 = beta = 8 pi M, with the 2pi from the trivial Hopf-base measure of S^1",
+        "established_in": "Paper 32 §VIII pi-source case-exhaustion theorem; Paper 18 §III.7 master Mellin engine; Sprint MR-A (2026-05-06) verified the L2 4/pi = Vol(S^2)/pi^2 propinquity rate as the M1 signature"
+      },
+      {
+        "lorentzian_side": "Bisognano-Wichmann modular-flow orbit period",
+        "value": "2 pi",
+        "appears_in": "The modular automorphism sigma_t = e^{itK} of the wedge vacuum state has period sigma_{i*2pi} = identity (Tomita-Takesaki KMS at inverse temperature 2pi); generator K is the boost generator; the boost orbit (after surface-gravity rescaling) has period 2pi",
+        "underlying_mechanism": "Bisognano-Wichmann theorem: modular Hamiltonian for wedge algebra = 2pi/kappa * (surface-gravity-rescaled boost generator), period closes at 2pi by KMS",
+        "established_in": "Bisognano-Wichmann 1976; Sewell 1982 (Schwarzschild generalization); Hartle-Hawking 1976 (path-integral version with imaginary-time period 8 pi M)"
+      }
+    ],
+    "kind_of_identification": {
+      "literal_identification_meaning": "The 2pi's are the SAME analytic object - i.e., one mathematical structure with two presentations (Riemannian Hopf measure and Lorentzian modular-flow period are identified by an equality of operators on the spectral triple's Hilbert space, not just by a numerical coincidence between two computations).",
+      "structural_correspondence_meaning": "The 2pi's appear in two different mechanisms (one Riemannian-side, one Lorentzian-side) which standard Wick-rotation arguments identify at the level of correlation-function periodicity (KMS condition; Sewell 1982; Hartle-Hawking 1976), but proving that the framework-internal modular automorphism has period 2pi is not done.",
+      "verdict": "STRUCTURAL CORRESPONDENCE",
+      "what_would_make_it_literal": "A finite-n_max construction of the modular Hamiltonian K on the truncated metric spectral triple T_{n_max} (cf. Paper 38 GH-convergence theorem on T_{S^3}) for a state realized as a wedge-restricted analog (e.g. half-S^3 algebra), verifying directly that K's period is 2pi. This is Track B Candidate B / Candidate C territory and is multi-week-to-multi-month NCG work, not 1-week-sprint scope.",
+      "why_correspondence_is_strong_enough_for_the_documentation_pass": "Bisognano-Wichmann + Sewell 1982 + Hartle-Hawking 1976 IS the proof at the QFT level that 2pi-periodic Wick-rotated thermal correlators have boost-orbit interpretation. The framework reproduces beta = 8 pi M from M1; the rest of the chain is published QFT. We do not need a framework-internal proof that modular flow IS the boost - we just need to name that what the framework's M1 produces, the published machinery interprets as the boost orbit period."
+    }
+  },
+
+  "section_2_operator_level_construction": {
+    "kms_state_on_tensor_product": {
+      "construction": "On the spectrum-level tensor-product T_{S^3} (x) T_{S^1_beta} (Sprint TD Track 1), with Dirac D_total = D_{S^3} (x) 1 + gamma_{S^3} (x) D_tau, the KMS state at inverse temperature beta = 8 pi M is the standard Gibbs state Z^{-1} e^{-beta H} where H is the spectral Hamiltonian summed over Matsubara modes. Track 1 already constructed this; Track D's contribution is the Bisognano-Wichmann identification.",
+      "modular_automorphism": "sigma_t(O) = e^{i K t} O e^{-i K t} where K is the modular Hamiltonian. On the wedge algebra of a Rindler observer at acceleration a (or on the static-exterior algebra outside Schwarzschild horizon), Bisognano-Wichmann gives K = 2pi/kappa * boost generator (a in Rindler; surface gravity in Schwarzschild). The KMS condition gives sigma_{i*2pi} = identity.",
+      "framework_status": "Tensor-product spectral-spectrum construction is in Sprint TD Track 1. Modular automorphism at the operator-system level (a la Connes-vS spectral truncation) is NOT constructed; this is the principal scope limit of Track D."
+    },
+    "m1_factor_in_T_H": {
+      "explicit_2pi": "T_H = 1/(8 pi M) = (4M)^{-1} / (2 pi); the 2pi sits in the denominator. Equivalently T_H = kappa_g / (2 pi) with kappa_g = 1/(4M).",
+      "where_2pi_comes_from_in_the_framework": "Cigar regularity at r = 2M requires phi-period = 2 pi for absence of conical singularity (Hawking-Gibbons argument). beta_cigar = 4M * (phi-period) = 4M * 2 pi = 8 pi M. The phi-period 2 pi is the Hopf-base measure / circumference of the (rho, phi) tip disk's S^1.",
+      "M1_mechanism_explicit": "M1 is the k=0 case of the master Mellin engine M[Tr(D^k e^{-tD^2})]. At k=0, Tr e^{-tD^2} reduces to a heat-kernel trace whose leading t->0 behavior gives the Hopf-base measure on the spatial slice. On a tau-circle alone, M[Tr e^{-tD_tau^2}] gives Vol(S^1_tau) = beta directly.",
+      "where_the_2pi_comes_from_in_Bisognano_Wichmann": "Modular-flow KMS condition: vacuum state restricted to wedge algebra is KMS at inverse temperature 2pi/kappa with respect to the boost. The 2pi is the period of the elliptic boost orbit in the (Euclidean) tau-x plane after Wick rotation.",
+      "the_identification": "Both 2pi's are NUMERICALLY THE SAME and live in correlation-function periodicities that Sewell 1982 / Hartle-Hawking 1976 identify by the standard Wick-rotation prescription. The framework's M1 mechanism produces the Riemannian-side phi-period; Bisognano-Wichmann produces the Lorentzian-side boost-orbit period; they agree by Wick rotation."
+    },
+    "what_a_full_operator_level_proof_would_require": [
+      "Construct the modular Hamiltonian K on the truncated metric spectral triple T_{n_max} of Paper 38 for a wedge-like restricted state (e.g. restriction to one hemisphere of S^3 -> half-S^3 modular flow)",
+      "Verify directly that K = 2pi * (boost-class generator on the truncation) at finite n_max",
+      "Take the GH limit using Paper 38's L1'-L5 lemmas; verify that the modular-flow period stays at 2pi in the limit",
+      "Identify the limiting period 2pi with the M1 Hopf-base-measure 2pi via the case-exhaustion theorem",
+      "Estimated cost: 4-8 weeks (Connes-vS modular-flow extension on truncated operator system); Latremoliere-style propinquity for modular flow is published only in flat / abelian cases as of May 2026"
+    ],
+    "track_D_scope_limit": "Track D does NOT construct the modular Hamiltonian. It documents the published interpretation that beta = 8 pi M IS the boost-orbit period (Sewell 1982; Hartle-Hawking 1976; Bisognano-Wichmann 1976) and notes that Sprint TD Track 4's M1 mechanism produces the same beta. The two-2pi alignment is at the level of correlation-function periodicity, not operator-norm closure of a one-parameter group."
+  },
+
+  "section_3_falsifiers": [
+    {
+      "id": "falsifier_1_modular_flow_period_failure",
+      "name": "Modular automorphism on the framework's algebra fails to close at sigma_{i*8piM} = identity",
+      "operationalization": "Compute the modular Hamiltonian K on T_{n_max} for the wedge-restricted Camporesi-Higuchi state at finite n_max (operator-system level, Connes-vS truncation framework). Verify whether sigma_{i*2pi/kappa} = identity at finite n_max with kappa derived from M1 mechanism.",
+      "computational_test": "1-week SDP-class computation extending Paper 32 §III rem:connes_distance Connes distance SDP framework to modular automorphism. Existing infrastructure: geovac/connes_distance.py, geovac/operator_system.py.",
+      "if_it_fails": "Bisognano-Wichmann reading of Sprint TD Track 4 is wrong; the M1 mechanism's 2pi and Bisognano-Wichmann's 2pi are coincidentally equal, not structurally related. Would imply the framework's KMS structure is incompatible with Schwarzschild's.",
+      "expected_outcome": "Pass at finite n_max (modular flow closes at 2pi). The Bisognano-Wichmann reading is published QFT; the framework's M1 reproduces beta = 8 pi M; failure here would be surprising.",
+      "priority_if_pursued": "Highest-leverage 4-8 week follow-up; lifts structural correspondence to literal identification on the truncated spectral triple."
+    },
+    {
+      "id": "falsifier_2_M1_2pi_alternative_origin",
+      "name": "The 2pi factor in M1 turns out to come from a different mechanism (e.g., the Vol(S^2) = 4pi spatial integral specifically, not from a temporal-circle orbit period)",
+      "operationalization": "Trace the 2pi inside Sprint TD Track 4's M1 mechanism (S^1_tau circumference) versus the 2pi in the L2 propinquity rate 4/pi = Vol(S^2)/pi^2 (spatial Hopf base). Are these the same 2pi (related by Hopf-bundle structure) or are they separate 2pi factors that happen to coincide numerically?",
+      "current_evidence": "Sprint MR-B's structural finding: M1 lives in the spectrum-of-Vol/Mellin-measure factor; appears as Vol(S^2)/pi^2 = 4/pi on S^3 (spatial Hopf-base); appears as Vol(S^1_tau) = 8 pi M on the cigar. These are DIFFERENT instances of the M1 mechanism on different sub-manifolds; both share the M1 transcendental ring (rational multiples of pi).",
+      "verdict": "M1 is a single mechanism with multiple instances; the 2pi factors on (spatial) Hopf base and (temporal) S^1_tau circle are DIFFERENT instantiations of the same mechanism. They do not need to be the same 2pi for the structural correspondence to hold.",
+      "if_it_were_to_fail": "Would mean the M1 = boost-orbit-period reading is wrong because the framework-side 2pi is not on the temporal circle but on some other measure factor; the standard Wick-rotation chain to Sewell 1982 / Hartle-Hawking would not pass through this particular 2pi.",
+      "current_robustness": "Strong: the framework's M1 on the cigar IS the temporal-circle measure, the cigar IS the Wick rotation of the Lorentzian Schwarzschild horizon, and Sewell 1982 / Hartle-Hawking 1976 identify the temporal circle with the modular-flow / boost orbit. All three ingredients are independently established."
+    },
+    {
+      "id": "falsifier_3_lorentzian_NCG_decoherence_distinct_2pi",
+      "name": "A Krein-space / Lorentzian-NCG calculation (Bizi-Brouder-Besnard 2018-style) shows the (3,0) -> (3,1) signature lift produces a DIFFERENT 2pi, structurally distinct from the Hopf-bundle 2pi.",
+      "operationalization": "Build the (m,n) = (3,1) Krein-space lift of T_{S^3} and check whether the modular automorphism, computed in the Krein-space framework, has period 2pi or some other value. The Bizi-Brouder-Besnard sign table at (3,1) is published; a finite-n_max Krein-axiom audit (Track B Candidate C, scoping recommended LOW priority) would either confirm or reject.",
+      "if_it_finds_different_2pi": "Would indicate the framework's KMS structure under Lorentzian extension produces a DIFFERENT modular flow than what the standard Bisognano-Wichmann theorem predicts. Would refute the structural correspondence.",
+      "expected_outcome": "Track B Candidate C is LOW priority; expected outcome is that Bizi-Brouder-Besnard signs match GeoVac's Camporesi-Higuchi J at (3,1) (the literature is well-developed for (3,1) Krein triples); modular flow period 2pi follows from the standard KMS-Tomita-Takesaki algebra. This is the Krein-side calibration check, not an independent test.",
+      "priority": "LOW; can defer to a multi-month Lorentzian extension if one is undertaken."
+    }
+  ],
+
+  "section_4_position_vs_literature": {
+    "what_is_already_published": [
+      "Sewell 1982: Schwarzschild thermal state at beta = 8 pi M is a modular-flow image of a Killing-time isometry. Direct generalization of Bisognano-Wichmann to globally hyperbolic Lorentzian manifolds with bifurcate Killing horizons.",
+      "Bisognano-Wichmann 1976: vacuum modular flow on wedge algebra of Wightman-axiomatic QFT IS the unitary representation of the Lorentz boost subgroup that maps the wedge to itself.",
+      "Hartle-Hawking 1976: path-integral derivation that Schwarzschild Euclidean continuation has tau-period 8 pi M, giving thermal propagator at T_H = 1/(8 pi M).",
+      "Witten 2018 RMP: modern review of modular flow, Tomita-Takesaki, Reeh-Schlieder, half-sided modular inclusions in QFT entanglement context.",
+      "Connes-Marcolli 2008: NCG-side systematic treatment of Tomita-Takesaki on type-II/III von Neumann algebras; modular automorphism as canonical element of outer automorphism group.",
+      "Bizi-Brouder-Besnard 2018: pseudo-Riemannian (m,n) spectral triples; framework for (3,1) Krein-space extension."
+    ],
+    "what_geovac_contributes_that_is_NOT_in_the_published_literature": [
+      "Identification of the MASTER MELLIN ENGINE M1 sub-mechanism as the framework-internal source of the beta = 8 pi M factor on the cigar. The published literature uses the Wick-rotation argument directly; GeoVac's case-exhaustion theorem (Paper 32 §VIII Theorem) classifies this within a finite list of mechanisms (M1 / M2 / M3) and ties it to the abstract Hopf-bundle measure mechanism that also drives the L2 propinquity rate (4/pi).",
+      "The CLAIM that Sprint TD Track 4's M1 reproduction of beta = 8 pi M is a special case of the L2 4/pi = Vol(S^2)/pi^2 mechanism instantiated on a different sub-manifold (S^1_tau instead of S^2_Hopf-base). This is the structural unification of the GH-convergence rate (Paper 38 / Track A's keystone theorem) with the Hawking temperature mechanism, with both controlled by the same M1 sub-mechanism.",
+      "The Bisognano-Wichmann reading itself is published; what is new is the framework-internal identification of M1 with the boost-orbit period, which embeds Sprint TD Track 4 inside the already-PROVEN GH-convergence theorem (Paper 38) and the case-exhaustion theorem (Paper 32 §VIII)."
+    ],
+    "what_we_do_NOT_claim": [
+      "We do NOT claim a Lorentzian NCG-side proof of Bisognano-Wichmann inside the framework; that would require the multi-month Lorentzian propinquity work that Track B declared NO-GO.",
+      "We do NOT claim the framework derives Hawking radiation from the packing axiom; M is external Einstein-equations input (Sprint TD Track 4 V3 NEGATIVE).",
+      "We do NOT claim Hawking T = 1/(8 pi M) as a Paper 34 §V machine-precision match because the cigar geometry itself is not autonomously derived; we add Hawking T to §V.B (off-precision) only as a machinery-witness row, not a derived value.",
+      "We do NOT claim the modular Hamiltonian on T_{n_max} closes at 2pi; that is the falsifier #1 above and would lift the correspondence to literal identification."
+    ]
+  },
+
+  "section_5_forward_implications": {
+    "1_does_it_open_a_20th_projection": {
+      "answer": "NO",
+      "reason": "Bisognano-Wichmann does not introduce a new Layer-2 projection in the Paper 34 sense. It is a STRUCTURAL READING of the existing Observation/temporal-window projection (15th, Paper 34 §III.15). The reading says: when the temporal-window projection is applied at the cigar's tau-period 8 pi M, the resulting beta IS the modular-flow period of the boost generator (Sewell 1982). This is an interpretation of an existing projection, not a new projection.",
+      "consequence_for_paper_34": "Paper 34 §III.15 (Observation/temporal-window) gains a footnote naming the Bisognano-Wichmann reading. Paper 34 §VIII Lorentz-boost open question gains a paragraph noting that the documentation pass closes (the Bisognano-Wichmann reading is recorded; the projection itself remains REQUIRES-EXTENSION because its dual lives in a Minkowski-signature spectral triple)."
+    },
+    "2_does_it_strengthen_paper_32_section_viii_case_exhaustion": {
+      "answer": "STRENGTHENS BY ENRICHMENT",
+      "reason": "M1 now has TWO independent physical interpretations: (a) Hopf-bundle measure factor on a sub-manifold (the original reading: Vol(S^2)/pi^2 = 4/pi on the Hopf base; Vol(S^1)/(2 pi) on S^1_tau), and (b) modular-flow / boost-orbit period via Bisognano-Wichmann + Sewell 1982 (when the sub-manifold is a temporal compactification).",
+      "is_this_an_independence_constraint": "NO - it does not add a constraint to the master Mellin engine because it does not force a specific functional form. Both readings are already accommodated by M[Tr(D^0 e^{-tD^2})]. What it does is provide a PHYSICAL INTERPRETATION of the abstract M1 factor in two different vocabularies (Riemannian Hopf measure / Lorentzian modular flow), which Wick rotation identifies.",
+      "consequence_for_paper_32": "Paper 32 §VIII Remark on the master Mellin engine domain partition (rem:master_mellin_domain) gains a paragraph noting the dual reading of M1: at temporal compactifications, M1's 2pi IS the boost orbit period; at spatial Hopf base, M1's 2pi (as 4/pi normalization) IS the Riemannian Hopf measure. The case-exhaustion theorem itself is unchanged."
+    },
+    "3_new_entries_in_section_v_or_v_b_catalogues": {
+      "machine_precision_row_for_T_H": "NO. T_H = 1/(8 pi M) is not a derived value of the framework; M is external input. Adding this to §V would overclaim.",
+      "off_precision_row_for_T_H_machinery": "POSSIBLE. A §V.B row could read: 'Hawking temperature T_H = 1/(8 pi M) reproduced via M1 mechanism on Schwarzschild Euclidean cigar (Sprint TD Track 4); structural correspondence to Bisognano-Wichmann modular-flow / boost-orbit period (Sewell 1982) via Wick rotation.' Error class: C (calibration; M is external input, not a framework calibration mismatch). This is a machinery-witness row, not a precision-match row.",
+      "decision": "ADD an off-precision row to §V.B labeled 'Hawking temperature on Schwarzschild cigar' with error class C and the explicit M1-as-boost-orbit-period reading. Cross-references: Sprint TD Track 4 + Track D memo. Honest scope: 'Reproduces beta = 8 pi M from the Hopf-base / S^1_tau circumference; the structural correspondence to Bisognano-Wichmann modular flow is published QFT (Sewell 1982; Hartle-Hawking 1976), made explicit here at the framework level via the M1 master Mellin engine sub-mechanism.'"
+    },
+    "4_unruh_temperature_pendant": {
+      "answer": "Direct corollary of Bisognano-Wichmann + Sprint TD Track 1 / Track 4",
+      "structural_claim": "The same M1 mechanism that gives T_H = 1/(8 pi M) on Schwarzschild gives Unruh T_U = a/(2 pi) for a Rindler observer at proper acceleration a. The Wick-rotated Rindler wedge has imaginary-time period 2 pi/a; M1 reproduces this as the circumference of the Rindler tau-circle.",
+      "consequence": "An Unruh-T row could ALSO be added to §V.B if the framework explicitly applies Sprint TD Track 4's machinery to Rindler-wedge geometry. This is a sprint-scale 1-2 day extension of Track D; not pursued in this 1-week Track D itself.",
+      "recommendation": "Document the corollary in the memo and Paper 32 §VIII remark; do NOT add an Unruh row to §V.B in this sprint without explicit framework-side computation of the Rindler beta = 2 pi/a from M1. Sprint follow-up flag."
+    },
+    "5_specific_2_3_week_followup_tracks": [
+      {
+        "name": "Track D-extension: Operator-level modular Hamiltonian on T_{n_max}",
+        "window_weeks": "4-8",
+        "deliverable": "Construct K (modular Hamiltonian) on truncated operator system T_{n_max} for a wedge-like state; verify period 2pi at finite n_max; lift to GH limit using Paper 38 lemmas. Lifts structural correspondence to literal identification.",
+        "priority": "MEDIUM; would close falsifier #1 of Track D and yield an in-framework Bisognano-Wichmann theorem at the finite-n_max level"
+      },
+      {
+        "name": "Track D-companion: Unruh T_U documentation pass",
+        "window_weeks": "1-2 days",
+        "deliverable": "Apply Sprint TD Track 4's matsubara_spectrum() to Rindler wedge with beta_Rindler = 2pi/a; verify M1 reproduces Unruh T_U = a/(2pi); add §V.B row.",
+        "priority": "LOW-MEDIUM; clean closure of the Rindler corollary; Sprint TD Track 4 already has the machinery"
+      },
+      {
+        "name": "Track D-deferred: Bisognano-Wichmann + entanglement entropy connection",
+        "window_weeks": "2-4",
+        "deliverable": "Following Witten 2018 RMP, connect Bisognano-Wichmann modular Hamiltonian for half-S^3 algebra to Paper 27 entropy thread. Tests whether GeoVac's spatial entanglement on S^3 has a modular-flow / boost-rapidity interpretation.",
+        "priority": "LOW; cross-thread connection to entropy program, useful but not load-bearing"
+      },
+      {
+        "name": "Track B Candidate B (deferred): SO(4,1) conformal-action diagnostic",
+        "window_weeks": "1-2",
+        "deliverable": "Compute SO(4,1) conformal Killing algebra on S^3 at finite n_max; identify boost-like generators; check whether they preserve Roothaan termination and Connes axioms. Track B already scoped; not Track D's responsibility.",
+        "priority": "MEDIUM; complementary to Track D; lands a real new structural object (conformal-boost intertwiner between truncation levels)"
+      }
+    ]
+  },
+
+  "honest_scope_summary": {
+    "what_track_D_lands": [
+      "Memo documenting that Sprint TD Track 4's T_H = 1/(8 pi M) M1 reproduction IS the Wick-rotated image of the Bisognano-Wichmann modular-flow / boost-orbit period",
+      "Three paper updates (Paper 32 §VIII, Paper 35 §VIII, Paper 34 §VIII) naming the Bisognano-Wichmann reading at the framework level",
+      "One off-precision row in Paper 34 §V.B for the Hawking temperature (machinery-witness row, error class C)",
+      "Verified literature citations for Bisognano-Wichmann 1975/1976, Sewell 1982 (year corrected), Hartle-Hawking 1976, Witten 2018, Connes 1994 NCG book",
+      "Two corrections to Track B scoping memo data: Sewell publication year 1982 (not 1980); Bisognano-Wichmann 1976 paper title 'On the duality condition for quantum fields' (not 'for a Hermitian scalar field' which is the 1975 paper title)",
+      "Three named falsifiers with operationalizations and expected priorities",
+      "Five-section structured analysis"
+    ],
+    "what_track_D_does_NOT_land": [
+      "An operator-level proof inside the framework that the modular Hamiltonian on the truncated metric spectral triple closes at period 2pi (multi-week follow-up; falsifier #1 territory)",
+      "A Lorentzian-signature spectral triple (multi-month NCG work; Track B verdict NO-GO)",
+      "A Lorentzian propinquity theory (no published prescription; 6-12 month original NCG-math work; Track B verdict)",
+      "A derivation of the cigar geometry from GeoVac axioms (Sprint TD Track 4 V3 NEGATIVE)",
+      "Bekenstein-Hawking entropy from the horizon S^2 (M2 / Seeley-DeWitt computation; Sprint TD Track 4 OUT-OF-SCOPE)",
+      "Black-hole-vs-GeoVac entropy comparison (Sprint TD Track 5 territory; different category)"
+    ],
+    "is_this_oversold": "No. The headline claim is structural correspondence (not literal identification), the underlying physics is published QFT (Bisognano-Wichmann, Sewell 1982, Hartle-Hawking 1976), the framework-internal contribution is the M1 master Mellin engine identification (which embeds Sprint TD Track 4 in Paper 32 §VIII case-exhaustion theorem), and three specific falsifiers are named with priorities. CLAUDE.md §1.5 rhetoric rule applied: dual-description framing, no ontological priority, lead with computational results."
+  },
+
+  "result_30_second_read": {
+    "structural_identification": "STRUCTURAL CORRESPONDENCE (not literal identification). The 2pi factor in Sprint TD Track 4's T_H = 1/(8 pi M) is the M1 Hopf-base measure / S^1_tau circumference; under the standard Wick-rotation chain (Sewell 1982 -> Bisognano-Wichmann 1976 -> Hartle-Hawking 1976), this 2pi IS the period of the modular-flow / Lorentz-boost orbit of a stationary observer outside the Schwarzschild horizon.",
+    "top_falsifier": "Compute the modular Hamiltonian K on the truncated metric spectral triple T_{n_max} (Paper 38 framework) for a wedge-like restricted Camporesi-Higuchi state; verify period 2pi at finite n_max. 4-8 week follow-up; would lift correspondence to literal identification.",
+    "top_2_forward_implications": [
+      "Paper 32 §VIII case-exhaustion theorem strengthens by enrichment: M1 has TWO physical interpretations (Hopf-bundle measure / boost-orbit period via Bisognano-Wichmann), with Wick rotation identifying them. The case-exhaustion theorem itself is unchanged.",
+      "Paper 34 §V.B gains a Hawking-temperature off-precision row (machinery-witness, error class C). Unruh T_U is a 1-2 day pendant follow-up; not pursued in this sprint."
+    ],
+    "what_does_this_enable_in_the_catalogue": "(a) Bisognano-Wichmann reading of Sprint TD Track 4 documented in 3 papers without leaving Riemannian signature; (b) cross-thread connection between thermal physics (Sprint TD), GH-convergence (Paper 38), and the case-exhaustion theorem (Paper 32 §VIII) made explicit via M1's dual reading; (c) Hawking T enters the catalogue as an off-precision row; (d) framework-internal Bisognano-Wichmann (literal identification at finite n_max) is named as a falsifier with operationalization, priority MEDIUM."
+  },
+
+  "files": {
+    "memo": "debug/bisognano_wichmann_track_d_memo.md",
+    "data": "debug/data/bisognano_wichmann_track_d_data.json",
+    "paper_32_edit": "papers/synthesis/paper_32_spectral_triple.tex (§VIII master Mellin engine domain remark; §VIII.D frontier remark; bibliography +3 entries)",
+    "paper_35_edit": "papers/observations/paper_35_time_as_projection.tex (§VIII new Bisognano-Wichmann subsection; bibliography +3 entries)",
+    "paper_34_edit": "papers/observations/paper_34_projection_taxonomy.tex (§V.B Hawking row; §VIII Lorentz-boost open question paragraph extension; §III.15 footnote)"
+  },
+
+  "no_production_code_modified": true,
+  "completed": "2026-05-09",
+  "duration_weeks": 1,
+  "track_b_predictions_validated": ["candidate_A delivered as planned", "no falsifier triggered", "1-week scope held"]
+}

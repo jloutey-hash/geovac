@@ -1,0 +1,41 @@
+{
+  "diagnostic_summary": "Z>20 cliff dominated by CR67 single-zeta fit non-faithfulness for outer shells, structurally caused by missing radial nodes",
+  "dominant_causes_ranked": [
+    {
+      "rank": 1,
+      "name": "(a) CR67 single-zeta non-faithful for OUTER SHELLS at high Z",
+      "detail": "Cs CR67 inner-shell overshoot 1.01x; outer-shell overshoot 2.68x; ratio 2.7x. Outer shells (4d, 5s, 5p) of [Xe] core are 2-4x too compact in the Slater fit."
+    },
+    {
+      "rank": 2,
+      "name": "(d) MISSING RADIAL NODES (heuristic two-zeta has all-positive coefficients)",
+      "detail": "Two-zeta heuristic gives max |<ns|ms>|=0.86 between different Cs s-orbitals (should be 0). The CR67 single-zeta fit has no nodes either (it's a bare hydrogenic), so the effective Z at intermediate r is set by integrating shells that are all 'clones' of each other rather than orthogonal shells with proper radial structure."
+    },
+    {
+      "rank": 3,
+      "name": "(e) Cliff onset at Z=19 (K 4s); Z=11 (Na) shows mild signature",
+      "detail": "|psi_FW(0)|^2 / |psi_HF_lit(0)|^2 ratios: Na 3s ratio=1.243; K 4s ratio=0.309; Rb 5s ratio=0.193; Cs 6s ratio=0.625. H Z=1 ratio is 0.999 (perfect). Cliff onset clearly bracketed between Z=11 (24% over) and Z=19 (3.2x under). Cs Z=55 ratio 0.625 (1.6x under). The Cs is MILDER than Rb \u2014 relativistic effects partially compensate."
+    },
+    {
+      "rank": 99,
+      "name": "(b) FD SOLVER IS FAITHFUL \u2014 NOT the cliff cause",
+      "detail": "Hydrogenic test at Z=1..80 with 400k grid: |psi(0)|^2 error <1.2% in all cases, monotone convergence. The closeout sprint's dense uniform FD path is correct; numerical refinement at higher n_grid will not close the cliff."
+    },
+    {
+      "rank": 99,
+      "name": "(c) NO CONVENTION BUG \u2014 chain Z_eff -> psi -> A_HF is internally consistent",
+      "detail": "H 21cm reproduces at +0.17% (the expected reduced-mass Sprint HF level). g_N convention is correct. n*zeta convention matches Slater. Z_eff(r) boundary conditions correct. 3 PASS, 2 FAIL (numerical, not structural)."
+    },
+    {
+      "rank": 99,
+      "name": "(d) NO CODING BUG in multi-zeta machinery",
+      "detail": "STO normalization, MultiZetaOrbital reduces correctly to single-zeta, _build_two_zeta_orbital renormalizes within 1%, density integrates to N_core within 0.0%. Multi-zeta machinery installed correctly."
+    }
+  ],
+  "ruled_out": [
+    "FD solver faithfulness (probe b)",
+    "Convention bugs (probe c)",
+    "multi-zeta machinery coding bugs (probe d)"
+  ],
+  "bbb93_recommendation": "GO with eyes open: closes screening kernel cliff (~20% closure) but does NOT close full Bohr-Weisskopf relativistic gap (~30-40% remaining). Sub-percent Cs HFS requires both. Self-consistent HF (multi-week) is the principled alternative."
+}

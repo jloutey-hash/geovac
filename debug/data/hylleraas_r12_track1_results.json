@@ -1,0 +1,124 @@
+{
+  "module": "geovac/hylleraas_r12.py",
+  "sprint": "Track 1 Hylleraas r12 (CLAUDE.md §1.8 Roothaan program)",
+  "date": "2026-05-09",
+  "kinetic_quadrature": {
+    "n_r": 36,
+    "n_theta": 18,
+    "n_r_default_module": 32,
+    "n_theta_default_module": 16
+  },
+  "reference_values": {
+    "He_1S_NR_exact_Drake_1996": -2.903724377034119,
+    "Hylleraas_3p_1929_published": -2.90324,
+    "Hylleraas_6p_published": -2.903637,
+    "Drake_2S_singlet_exact_Ha": -2.145974,
+    "Drake_2S_triplet_exact_Ha": -2.175229,
+    "NIST_2S_singlet_triplet_splitting_cm1": 6421.46,
+    "Drake_oscillator_strength_2P_to_1S": 0.27616
+  },
+  "ground_state_results": [
+    {
+      "basis": "3p",
+      "n_basis": 3,
+      "alpha": 1.8161154652782454,
+      "energy_Ha": -2.902452916569276,
+      "err_mHa_vs_NR": 1.271460464843166,
+      "err_mHa_vs_3p_pub": 0.7870834307239782,
+      "cusp_at_s1_t0": 0.2919007102526244,
+      "verdict": "PASS (target err vs published 3p <= 1 mHa)"
+    },
+    {
+      "basis": "6p",
+      "n_basis": 6,
+      "alpha": 1.754846830713294,
+      "energy_Ha": -2.903357397132515,
+      "err_mHa_vs_NR": 0.36697990160394767,
+      "err_mHa_vs_6p_pub": 0.2796028674847406,
+      "cusp_at_s1_t0": 0.3847706016294006
+    },
+    {
+      "basis": "omega_2",
+      "n_basis": 7,
+      "alpha": 1.813869467562531,
+      "energy_Ha": -2.9034532641881894,
+      "err_mHa_vs_NR": 0.2711128459296219,
+      "cusp_at_s1_t0": 0.40431933885970694
+    },
+    {
+      "basis": "omega_3",
+      "n_basis": 13,
+      "alpha": 1.89435929880065,
+      "energy_Ha": -2.903668575172398,
+      "err_mHa_vs_NR": 0.05580186172116086,
+      "cusp_at_s1_t0": 0.4635707899740974
+    },
+    {
+      "basis": "omega_4",
+      "n_basis": 22,
+      "alpha": 1.990550444963637,
+      "energy_Ha": -2.903740378335418,
+      "err_mHa_vs_NR": -0.016001301299084503,
+      "cusp_at_s1_t0": 0.4866876009799793,
+      "verdict": "essentially saturated within kinetic-quadrature precision"
+    }
+  ],
+  "two_s_singlet_triplet_splitting_NEGATIVE": {
+    "comment": "Single-alpha Hylleraas trial does NOT close excited-state residual; well-known limitation. Closure path: Hylleraas-Eckart double-zeta (1933).",
+    "previous_geovac_graph_native_cm1": 7183.3,
+    "previous_geovac_err_pct": 11.86,
+    "results": [
+      {
+        "omega": 3,
+        "n_singlet": 13,
+        "n_triplet": 7,
+        "splitting_cm1": 28445.83,
+        "err_pct": 342.98
+      },
+      {
+        "omega": 4,
+        "n_singlet": 22,
+        "n_triplet": 13,
+        "splitting_cm1": 17817.59,
+        "err_pct": 177.47
+      },
+      {
+        "omega": 5,
+        "n_singlet": 34,
+        "n_triplet": 22,
+        "splitting_cm1": 19866.08,
+        "err_pct": 209.37
+      }
+    ],
+    "diagnosis": "Triplet 2^3S goes BELOW Drake exact by ~50 mHa at omega=5 (variational bound violation). Single-alpha trial cannot represent asymmetric Z_eff (1s at Z_a~2, ns at Z_b~1) without a t-dependent exponential factor exp(-beta t). Polynomial expansion in t inadequate at modest basis size. Documented in Hylleraas 1929 / Hylleraas-Eckart 1933 / Drake HYLA. Catalogue residual stays at +11.86% pending double-zeta extension."
+  },
+  "oscillator_strength_DEFERRED": {
+    "comment": "P-state Hylleraas extension (Schwartz 1961: (z_1 +/- z_2) chi_pm) is required and out of scope for the S-state Track 1 implementation. Multi-week structural sprint. Catalogue residual stays at +3.4% (multi-focal Phase D production result f=0.286)."
+  },
+  "hermiticity": {
+    "max_H_skew_at_omega3": 0.0,
+    "max_S_skew_at_omega3": 0.0,
+    "construction": "Matrix elements computed for I<=J then mirrored"
+  },
+  "validation_status": {
+    "ground_state_3p_vs_published_mHa": 0.7870834307239782,
+    "ground_state_6p_vs_published_mHa": 0.2796028674847406,
+    "ground_state_best_vs_NR_mHa": -0.016001301299084503,
+    "test_count_fast": 21,
+    "test_count_slow": 2,
+    "regression_test_count": 150,
+    "regression_failures": 0
+  },
+  "files": {
+    "module": "geovac/hylleraas_r12.py",
+    "tests": "tests/test_hylleraas_r12.py",
+    "memo": "debug/hylleraas_r12_track1_memo.md",
+    "validation_driver": "debug/hyl_full_validation.py",
+    "two_s_driver": "debug/hyl_2s_singlet_triplet.py",
+    "symbolic_verification": [
+      "debug/verify_master_int.py",
+      "debug/verify_vne_vee.py",
+      "debug/hyl_triplet_T_redo.py"
+    ]
+  }
+}

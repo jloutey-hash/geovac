@@ -898,6 +898,93 @@ named and named-individually-closed-or-not at the engineering
 level (W1c yes, W1c-residual / W1b PK no, basis still open),
 but the joint closure does not yet produce a bound NaH PES.
 
+\paragraph{The screened-Schr\"odinger valence basis (h1 diagonal only,
+Track 3, May 2026 --- HONEST NEGATIVE on binding, DIAGNOSTIC POSITIVE
+on the next target).}
+The named follow-on after the PK negative was to ``replace the
+$Z_{\rm orb} = 1$ basis on the Na center with radial Schr\"odinger
+eigenstates of the FrozenCore $Z_{\rm eff}(r)$ potential.'' Track~3
+(\texttt{geovac/screened\_valence\_basis.py}, 25~tests passing) implements
+the diagonal-only version of this substitution: the framework's
+$h_1[i,i] = -Z_{\rm orb}^2 / (2 \cdot \text{block}\_n^2)$ for the
+heavy-atom-side valence orbitals is replaced by the actual eigenvalue
+of \texttt{\_solve\_screened\_radial\_log} (s-states with
+\texttt{allow\_l0=True}) or \texttt{\_solve\_screened\_radial}
+($l \geq 1$). Wired into \texttt{build\_balanced\_hamiltonian} via
+\texttt{screened\_valence\_basis: bool = False}; bit-exact backward
+compat preserved (LiH 878-Pauli regression bit-identical at machine
+precision; first-row blocks have \texttt{n\_val\_offset = 0} and are
+auto-skipped).
+
+The eigenvalue substitutions are physically meaningful:
+Na 3s = $-0.170$~Ha (vs hydrogenic $-0.500$~Ha; +0.330 Ha correction),
+Na 4s = $-0.067$~Ha (vs $-0.125$~Ha; +0.058 Ha),
+Na 4p = $-0.051$~Ha (vs $-0.125$~Ha; +0.074 Ha each, three $m_l$ states).
+The total trace shift on the NaH valence is $+0.611$~Ha --- comparable
+to the W1c-residual descent depth (0.357 Ha).
+
+Despite the large physical correction, the 8-configuration NaH PES
+test (bare/W1c/PK/SV combinations at max\_n=2, Q=20, 2e FCI)
+shows \emph{all 8 configurations remain monotonically descending with
+no internal equilibrium minimum}. The descent ladder updates to:
+bare $6.244$~Ha $\to$ +W1c $0.357$~Ha (17.5$\times$ reduction) $\to$
++W1c+PK $0.305$~Ha (1.17$\times$ further) $\to$ +W1c+PK+SV $0.313$~Ha
+(0.97$\times$ --- slight worsening, within numerical noise).
+
+\textbf{The critical structural finding} (the substantive result of
+Track 3, even though binding is not recovered): the screened-valence
+correction is \emph{R-independent at the diagonal $h_1$ level}.
+Eigenvalues of the FrozenCore Z_{\rm eff}(r) potential are properties
+of the on-center potential, not of the bond. The correction matrix
+is bit-identical at $R = 2.5$ and $R = 10$~bohr (max abs diff
+$5.55 \times 10^{-17}$, machine precision). A constant diagonal
+$h_1$ shift cannot affect the descent depth, which is by definition
+an $R$-dependent energy difference. \emph{The W1c-residual wall
+is structurally not a diagonal-h1 problem.}
+
+\textbf{Diagnostic positive identification of the genuine target}
+(\texttt{debug/w1c\_residual\_nah\_track3\_diag.py}): testing the
+cross-$V_{ne}$ integral with hydrogenic-shape labels at the
+\emph{physical} $n$ (block\_n=1, $l=0$ $\to$ $n_{\rm phys}=3$ hydrogenic 3s
+instead of 1s) shows the framework over-attracts by $0.81$~Ha at
+$R = 2.5$ vs the physical-$n$ shape, and by only $0.14$~Ha at
+$R = 10$. The differential, $-0.674$~Ha, is approximately
+$1.9\times$ the W1c-residual descent (0.357 Ha) --- a
+wavefunction-shape substitution would over-correct from the
+current attraction profile and likely produce a binding minimum.
+
+The actual Na 3s screened wavefunction has mean radius
+$\langle r \rangle = 4.47$~bohr, while the hydrogenic Z=1 1s has
+$\langle r \rangle = 1.50$~bohr. The two have \emph{opposite} shape
+biases: framework basis is too tight (1.50 bohr); the actual
+chemistry has a much more diffuse 3s. Cross-center $V_{ne}$ scales
+strongly with this orbital extent; the diagonal eigenvalue
+substitution does not move the wavefunction shape.
+
+\textbf{Verdict on the named engineering closure}: the SV diagonal
+correction is necessary architectural infrastructure (the eigenvalue
+machinery is correct and physically meaningful) but not sufficient
+for binding recovery. The genuine engineering closure is
+\emph{wavefunction-shape substitution in cross-$V_{ne}$ and
+within-block ERIs} --- not eigenvalue substitution. Two architectural
+options remain:
+\begin{enumerate}
+  \item \textbf{Physical-$n$ hydrogenic relabeling (1-week sprint)}:
+    rewrite the orbital-state lists so that block\_n=1 with $l=0$ on
+    Na uses physical $n=3$ hydrogenic shape (Slater integrals,
+    $V_{ne}$ integrals, all evaluated at the physical principal
+    quantum number) at $Z_{\rm orb}$ chosen to match the asymptotic
+    Na valence Z. Cheap, uses existing hydrogenic Slater
+    infrastructure, but introduces a minor convention break.
+  \item \textbf{Strict-Schmidt orthogonalization (multi-week sprint)}:
+    explicitly Schmidt-subtract the heavy-atom core orbitals from the
+    valence basis before computing all matrix elements; mathematically
+    definitive but requires re-implementing $h_1$, ERI, and cross-$V_{ne}$
+    in the orthogonalized basis with renormalization.
+\end{enumerate}
+The diagnostic-shape test suggests Option~1 alone closes most of the
+descent and is the natural next named track.
+
 %% ========================================================================
 \section{Discussion}
 \label{sec:discussion}

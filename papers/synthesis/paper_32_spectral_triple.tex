@@ -1600,6 +1600,56 @@ Source: \texttt{debug/mr\_a\_dirac\_propinquity\_*},
 \texttt{debug/mr\_c\_l2\_subleading\_*}.
 \end{remark}
 
+\begin{remark}[Bisognano--Wichmann reading of the M1 sub-mechanism on
+temporal compactifications (Track D, May 2026)]
+\label{rem:bisognano_wichmann_reading}
+The M1 sub-mechanism of the master Mellin engine,
+$\mathcal{M}[\mathrm{Tr}(D^0\, e^{-tD^2})]$, produces a
+$\mathrm{Vol}/\mathrm{Mellin\text{-}measure}$ factor on the spatial
+$S^3$ Hopf base ($\mathrm{Vol}(S^2)/\pi^2 = 4/\pi$, the L2 propinquity
+rate constant; Sprint MR-A/B in Remark~\ref{rem:master_mellin_domain})
+and on a temporal $S^1_\beta$ factor (the bare circumference $\beta$
+itself; Sprint TD Track 1, $T_{S^3}\otimes T_{S^1_\beta}$).  Sprint TD
+Track 4 (\texttt{debug/sprint\_td\_track4\_memo.md}, May~2026) extends
+the temporal-side instantiation to the Euclidean Schwarzschild cigar,
+where smoothness at $r=2M$ forces the $\tau$-circle period
+$\beta_{\mathrm{cigar}} = 8\pi M$, reproducing the Hawking temperature
+$T_H = 1/(8\pi M)$ from M1 alone (sympy residual zero).  Track~D
+(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May~2026) makes
+explicit the dual physical reading of M1 on temporal compactifications:
+under the standard Wick-rotation chain
+(Hartle--Hawking~\cite{hartle_hawking1976};
+ Sewell~\cite{sewell1982};
+ Bisognano--Wichmann~\cite{bisognano_wichmann1976}),
+the framework's M1 $2\pi$ on $S^1_\tau$ IS the period of the
+modular-flow / Lorentz-boost orbit of a stationary observer outside
+the Schwarzschild horizon.  Equivalently, the M1 sub-mechanism on
+temporal compactifications is the Wick-rotated image of the
+Bisognano--Wichmann modular-flow mechanism.  This is a
+\emph{structural correspondence}, not a literal identification: two
+mathematical objects (a Hopf-bundle measure factor on the Riemannian
+side; a modular-automorphism period on the Lorentzian side) are
+equated by the published Wick-rotation prescription
+(Bisognano--Wichmann~1976; Sewell~1982; Hartle--Hawking~1976), not by
+an operator-level proof inside the truncated spectral triple
+$\mathcal{T}_{n_{\max}}$.  The natural follow-up that would lift the
+correspondence to literal identification --- compute the modular
+Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$ for a wedge-restricted
+Camporesi--Higuchi state and verify $\sigma_{i\cdot 2\pi} = $ identity
+at finite $n_{\max}$, then take the GH limit using the lemmas of
+Theorem~\ref{thm:gh_convergence} --- is named as the principal falsifier
+in Track~D \S 3.1; estimated cost 4--8 weeks; priority MEDIUM-HIGH.
+The case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion} itself
+is unchanged: M1 now has \emph{two physical interpretations}
+(Hopf-bundle measure / boost-orbit period via Bisognano--Wichmann),
+unified by Wick rotation, not two independent constraints on the
+master Mellin engine partition.
+The corollary on Rindler wedges (Unruh temperature
+$T_U = a/(2\pi)$ from the same M1 mechanism with
+$\beta_{\mathrm{Rindler}} = 2\pi/a$) is a 1--2 day pendant follow-up
+flagged in Track~D \S 5.4; not pursued in the 1-week sprint window.
+\end{remark}
+
 \begin{theorem}[Gromov--Hausdorff convergence on $S^3$]
 \label{thm:gh_convergence}
 Let $\mathcal{T}_{S^3} = (C^\infty(S^3), L^2(S^3, \Sigma), D_{\mathrm{CH}})$
@@ -3008,6 +3058,33 @@ Hydrogen Lamb Shift at One Loop,'' Paper~36 (2026; observation status).
 J.~Loutey, ``Latr\'emoli\`ere propinquity convergence of truncated
 tensor-product Camporesi--Higuchi spectral triples on $S^3 \times S^3$,''
 Paper~39 (2026; companion to Paper~38), DOI via Zenodo.
+
+\bibitem{bisognano_wichmann1975}
+J.~J.~Bisognano and E.~H.~Wichmann,
+``On the duality condition for a Hermitian scalar field,''
+\textit{J.~Math.~Phys.}\ \textbf{16}, 985--1007 (1975).
+
+\bibitem{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+``On the duality condition for quantum fields,''
+\textit{J.~Math.~Phys.}\ \textbf{17}, 303--321 (1976).
+
+\bibitem{sewell1982}
+G.~L.~Sewell,
+``Quantum fields on manifolds: PCT and gravitationally induced thermal
+states,''
+\textit{Annals of Physics}\ \textbf{141}, 201--224 (1982).
+
+\bibitem{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+``Path-integral derivation of black-hole radiance,''
+\textit{Phys.~Rev.~D}\ \textbf{13}, 2188--2203 (1976).
+
+\bibitem{witten2018_rmp}
+E.~Witten,
+``APS Medal for Exceptional Achievement in Research: Invited article on
+entanglement properties of quantum field theory,''
+\textit{Rev.~Mod.~Phys.}\ \textbf{90}, 045003 (2018), arXiv:1803.04993.
 
 \end{thebibliography}
 
