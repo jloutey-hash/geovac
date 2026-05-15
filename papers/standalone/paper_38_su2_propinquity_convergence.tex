@@ -1095,6 +1095,21 @@ $\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(1/\nmax)$ with
 $b \approx 4.10$, whose closed form is undetermined at the level of
 the present analysis.
 
+\emph{Update (2026-05-16):} the value $b$ has been refined to $22$
+verified decimal digits as
+$b = 4.10932146748987562042296336492664449322584125001993222558605\ldots$
+(the original $80$-digit string circulated in working memos prior to
+this paper was contaminated from digit $12$ onward by float-precision
+panel points; corrected via re-extraction at $\ge 400$~dps in a
+follow-on sprint, see~\cite{paper40_unified} for details). PSLQ
+identification has been attempted at coefficient ceiling $10^8$
+against an extended L-derivative basis ($\zeta'(s), \beta'(s),
+\eta'(s), L'(2, \chi_q)$, Stieltjes constants, Glaisher--Kinkelin
+$\log A$) with NULL result. The closed form of $b$ remains open, and
+the constant joins a small documented list of irreducible-but-natural
+GeoVac framework constants alongside $K = \pi(B+F-\Delta)$
+of~\cite{paper2}.
+
 \textbf{(ii) Lorentzian extension.} The Camporesi--Higuchi spectral
 triple is Riemannian, with KO-dimension $3 \pmod 8$. The Lorentzian
 analog --- via Wick rotation of $\sthree$ to $H^3$ or to a static
@@ -1108,9 +1123,24 @@ proof transcribes mechanically to $\SU(n)$ for $n \ge 3$ at the
 algebraic level (Peter--Weyl, central characters, Plancherel weights)
 but the Lipschitz comparison estimate
 \eqref{eq:lip_scaling} requires a higher-rank version of the
-Avery 3-Y integral and the corresponding selection rule. We expect
-analogous $\log n / n$ rates with rank-dependent constants, but the
-detailed analysis is open.
+Avery 3-Y integral and the corresponding selection rule.
+
+\emph{Update (2026-05-16):} this open question has been resolved by
+Paper~40~\cite{paper40_unified}, which generalises
+Theorem~\ref{thm:main} to all compact connected Lie groups with
+bi-invariant metric. The higher-rank analog of the Avery 3-Y selection
+rule is the \emph{Dirac-triangle inequality}
+$|D(\pi) - D(\pi')| \le \sqrt{C(\sigma)}$ for every
+$\sigma \subset \pi \otimes \pi'^*$, which generalises Paper~38's
+$|n - n'| \le N - 1$ shell-difference rule (the literal "Casimir
+triangle inequality" $|C(\pi) - C(\pi')| \le C(\sigma)$ is false in
+general; the Dirac eigenvalue, not the Casimir, is the right
+ingredient). The rate is \emph{not} rank-dependent as anticipated
+above:\ the rate constant $4/\pi$ is \emph{universal} across the
+class, by a Plancherel-weight $\times$ Vandermonde-Jacobian
+cancellation theorem (Paper~40 \S 3.2). Asymptotic-tight
+$C_3(G) = 1$ at all ranks follows from the PRV-summand bound of
+Kumar (1988) and Vinberg (1990), as proved in Paper~40 \S 3.3.
 
 % =====================================================================
 \appendix
@@ -1382,6 +1412,24 @@ J.~Loutey,
 \newblock \emph{Bargmann--Segal lattice for the 3D harmonic oscillator
 and the Coulomb/HO structural asymmetry},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of spectral
+truncations of compact Lie groups with bi-invariant metric},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+\newblock Generalizes the present paper from $\SU(2)$ to all compact
+connected Lie groups; rate constant $4/\pi$ universal across the class
+via a Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
+theorem; asymptotic-tight $C_3 = 1$ at all ranks via the PRV-summand
+bound of Kumar (1988) and Vinberg (1990).
+
+\bibitem[Loutey, internal Paper~2]{paper2}
+J.~Loutey,
+\newblock \emph{Fine structure constant from the Hopf bundle on $S^3$:
+$K = \pi(B + F - \Delta)$ as a three-sector spectral coincidence},
+\newblock GeoVac internal preprint, papers/observations (2026),
+DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~7]{paper7}
 J.~Loutey,
