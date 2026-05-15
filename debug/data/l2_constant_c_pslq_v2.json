@@ -1,0 +1,153 @@
+{
+  "c_50dps": "4.1093214674877940927579607260741005838057691088363",
+  "best_K": 6,
+  "best_n_points": 15,
+  "dps_PSLQ": 250,
+  "coefficient_ceilings": [
+    10000,
+    100000,
+    1000000
+  ],
+  "results_by_basis": {
+    "MR-C_baseline": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 11,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 11,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 11,
+        "found": false,
+        "error": null
+      }
+    ],
+    "DirichletL_addon": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 27,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 27,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 27,
+        "found": false,
+        "error": null
+      }
+    ],
+    "MultiHurwitz_addon": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 25,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 25,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 25,
+        "found": false,
+        "error": null
+      }
+    ],
+    "SteinWeissIBP_addon": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 41,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 41,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 41,
+        "found": false,
+        "error": null
+      }
+    ],
+    "Wildcard_addon": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 23,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 23,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 23,
+        "found": false,
+        "error": null
+      }
+    ],
+    "DirichletL_StrictMin": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 19,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 19,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 19,
+        "found": false,
+        "error": null
+      }
+    ],
+    "Union_All": [
+      {
+        "max_coeff": 10000,
+        "basis_size": 82,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 100000,
+        "basis_size": 82,
+        "found": false,
+        "error": null
+      },
+      {
+        "max_coeff": 1000000,
+        "basis_size": 82,
+        "found": false,
+        "error": null
+      }
+    ]
+  }
+}

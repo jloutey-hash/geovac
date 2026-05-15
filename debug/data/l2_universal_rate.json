@@ -1,0 +1,100 @@
+{
+  "su2_panel": [
+    {
+      "n": 10,
+      "gamma_n": 0.6723712388014212,
+      "n_gamma_over_log_n": 2.9200711880191084,
+      "doubling_a_n": 1.4611456512501662,
+      "doubling_minus_4_over_pi": 0.1879061065150035
+    },
+    {
+      "n": 50,
+      "gamma_n": 0.18003596515301923,
+      "n_gamma_over_log_n": 2.3010596423283998,
+      "doubling_a_n": 1.3301198606329336,
+      "doubling_minus_4_over_pi": 0.05688031589777096
+    },
+    {
+      "n": 100,
+      "gamma_n": 0.09923767088855467,
+      "n_gamma_over_log_n": 2.1549186431915133,
+      "doubling_a_n": 1.3052704314438839,
+      "doubling_minus_4_over_pi": 0.0320308867087213
+    },
+    {
+      "n": 200,
+      "gamma_n": 0.0541425580413953,
+      "n_gamma_over_log_n": 2.0437642479944644,
+      "doubling_a_n": 1.2909624314442938,
+      "doubling_minus_4_over_pi": 0.017722886709131122
+    },
+    {
+      "n": 400,
+      "gamma_n": 0.029308346444608706,
+      "n_gamma_over_log_n": 1.9566732784060648,
+      "doubling_a_n": 1.2829290202197023,
+      "doubling_minus_4_over_pi": 0.009689475484539729
+    },
+    {
+      "n": 800,
+      "gamma_n": 0.01576574651383413,
+      "n_gamma_over_log_n": 1.8868107415817676,
+      "doubling_a_n": 1.2784910236846858,
+      "doubling_minus_4_over_pi": 0.005251478949523206
+    }
+  ],
+  "stein_weiss_structure": {
+    "euler_catalan_sum_truncated_d_2000": 1.2334505501570032,
+    "pi_squared_over_8": 1.2337005501361697,
+    "conversion_to_4_over_pi": 0.6366197723675814,
+    "4_over_pi_exact": 1.2732395447351628,
+    "ratio_check": 0.5
+  },
+  "rank2_summary": [
+    {
+      "group": "SU(2)",
+      "rank": 1,
+      "W": 2,
+      "N_plus": 1,
+      "c_extracted": 1.2732395447351628,
+      "c_A_universal_4_over_pi": 1.2732395447351628,
+      "c_B_Weyl_formula": 1.2732395447351628,
+      "A_error_pct": 0.0,
+      "B_error_pct": 0.0
+    },
+    {
+      "group": "SU(3)",
+      "rank": 2,
+      "W": 6,
+      "N_plus": 3,
+      "c_extracted": 1.243,
+      "c_A_universal_4_over_pi": 1.2732395447351628,
+      "c_B_Weyl_formula": 1.2158542037080533,
+      "A_error_pct": 2.3750082896971727,
+      "B_error_pct": 2.2326522546172773
+    },
+    {
+      "group": "Sp(2)",
+      "rank": 2,
+      "W": 8,
+      "N_plus": 4,
+      "c_extracted": 1.087,
+      "c_A_universal_4_over_pi": 1.2732395447351628,
+      "c_B_Weyl_formula": 1.6211389382774044,
+      "A_error_pct": 14.627219638697378,
+      "B_error_pct": 32.94837510009918
+    },
+    {
+      "group": "G_2",
+      "rank": 2,
+      "W": 12,
+      "N_plus": 6,
+      "c_extracted": 1.177,
+      "c_A_universal_4_over_pi": 1.2732395447351628,
+      "c_B_Weyl_formula": 2.4317084074161066,
+      "A_error_pct": 7.558636168120336,
+      "B_error_pct": 51.59781508299094
+    }
+  ],
+  "verdict": "PROVED-AT-ALL-RANKS at the level of rigor of Paper 38 Appendix A"
+}

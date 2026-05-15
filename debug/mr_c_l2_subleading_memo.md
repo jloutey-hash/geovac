@@ -2,9 +2,40 @@
 
 **Verdict: PARTIAL NEGATIVE.** The L2 next-order constant $c$ in
 $n \cdot \gamma_n = (4/\pi) \log(n) + c + O(\log(n)/n)$ is extracted
-cleanly to $\geq 80$ digits, but PSLQ at coefficient ceiling $10^4$
+to $\sim 12$ robust digits (NOT $\geq 80$ as originally claimed; see
+ERRATUM below), and PSLQ at coefficient ceiling $10^4$
 returns no closed-form identification in
 $M_1 \cup M_2 \cup M_3 \cup \{\gamma_E, \log 2, G, \zeta(3)\}$.
+
+## ERRATUM 2026-05-15 (precision claim was incorrect)
+
+The 80-digit string
+
+  $c = 4.10932146748\textbf{7794092}75796072607410\ldots$ ❌
+
+published below was wrong from digit 12 onward. Cause: the Richardson
+extrapolation panel contained 9 doubling-sequence points evaluated at
+float precision ($\sim 10^{-16}$) rather than mpmath. The corrected
+value at $\sim 22$ verified digits (from `debug/l2_constant_c_precision_v3.py`,
+re-run with all panel points at $\geq 400$ dps) is
+
+  $c = 4.10932146748\textbf{9875620}42296336492664\ldots$ ✓
+
+The first 12 digits match between the original and corrected runs; digits 13+
+in the original publication are contaminated. The PSLQ negative result of
+this sprint at coefficient ceiling $10^4$ is unaffected (the underlying
+$\sim 12$-digit precision was sufficient for that ceiling). The
+Sprint c-precision sprint (2026-05-15) confirms the negative result at
+ceilings $10^5, 10^6, 10^7, 10^8$ against an extended L-derivative basis
+($\zeta'(s)$, $\beta'(s)$, $\eta'(s)$, $L'(2, \chi_q)$, Stieltjes constants,
+Glaisher–Kinkelin $\log A$, $\zeta'(0), \zeta'(-1)$). See
+`debug/l2_constant_c_precision_v3_memo.md` for the v3 campaign details and
+`debug/data/l2_constant_c_v3.json` for the corrected high-precision value.
+
+Going forward, all references to $c$'s high-precision value should use the
+v3 string. The CLAUDE.md §2 Sprint MR-A/B/C bullet originally quoted the
+incorrect 80-digit string; correction applied 2026-05-15 (PM-allowed edit
+to §2 per CLAUDE.md §13.5).
 
 This sprint memo is concise — the original sprint agent stalled before
 writing a long memo; the data files preserve the substantive

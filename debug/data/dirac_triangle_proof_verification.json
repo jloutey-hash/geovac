@@ -1,0 +1,44 @@
+{
+  "description": "Final verification of (INT), (SI), Lemma 1, and Lemma 1 norm bound.",
+  "summary": [
+    {
+      "label": "SU(3) p+q<=5",
+      "total_sigmas": 2737,
+      "int_pass": 2737,
+      "si_pass": 2737,
+      "lemma1_pass": 2737,
+      "lemma1_norm_pass": 2737
+    },
+    {
+      "label": "SU(4) a+b+c<=3",
+      "total_sigmas": 2212,
+      "int_pass": 2212,
+      "si_pass": 2212,
+      "lemma1_pass": 2212,
+      "lemma1_norm_pass": 2212
+    },
+    {
+      "label": "Sp(2)=C_2 a+b<=3",
+      "total_sigmas": 501,
+      "int_pass": 501,
+      "si_pass": 501,
+      "lemma1_pass": 501,
+      "lemma1_norm_pass": 501
+    },
+    {
+      "label": "G_2 a+b<=2",
+      "total_sigmas": 191,
+      "int_pass": 191,
+      "si_pass": 191,
+      "lemma1_pass": 191,
+      "lemma1_norm_pass": 191
+    }
+  ],
+  "overall": {
+    "total": 5641,
+    "int_pass": 5641,
+    "si_pass": 5641,
+    "lemma1_pass": 5641,
+    "lemma1_norm_pass": 5641
+  }
+}
