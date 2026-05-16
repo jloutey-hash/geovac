@@ -1,0 +1,288 @@
+% =====================================================================
+% Paper 34 §III.28: Apparatus identity / state-side reduction
+% =====================================================================
+%
+% Sprint 2, Track 9 (axis-completeness sub-sprint).  This subsection
+% opens the state-side complement of Paper 34's projection dictionary.
+% All twenty-seven prior §III entries (§III.1 Fock through §III.27 Wick
+% rotation) operate on the spectral side --- the Dirac operator D, the
+% Hilbert space H, the algebra A, the spectrum {lambda_n}.  None operate
+% on the state side --- the density matrix rho on H, von Neumann entropy
+% S(rho), reduced density matrices, mutual information, fidelity.
+% §III.28 names that complement.
+%
+% Three-axis dictionary row (for §IV table integration):
+%   Apparatus identity / state-side reduction
+%     Variables added:  rho (density matrix) or beta = 1/T (Gibbs index)
+%     Dimension:        preserves (S(rho) is dimensionless; T = energy/k_B
+%                       when natural-unit conversion is consumed externally)
+%     Transcendental:   von Neumann class (logarithm of operator);
+%                       structurally distinct from master Mellin engine
+%                       M1 / M2 / M3 (Sprint TD Track 5 PSLQ negative at
+%                       100 dps against 12,312-form mechanical basis,
+%                       coefficient ceiling up to 10^6)
+%
+% Cross-references in this subsection:
+%   - Paper 27 (entropy-as-projection-artifact framing; S_full(GS) as
+%     the T -> 0 anchor of the apparatus identity)
+%   - §III.6 sec:proj_spectral_action (sibling on the OTHER side of the
+%     spectral/state divide: spectral_action is the canonical D-side
+%     Mellin-engine projection; apparatus_identity is its rho-side
+%     complement)
+%   - §III.24 sec:proj_adiabatic_BO (one of the rare projections that
+%     creates the parameterized family rho_beta = e^{-beta H}/Z on which
+%     state-side projections then act --- the slow/fast parameterization
+%     of BO produces the family that the apparatus identity then samples)
+%   - Paper 38 (Wasserstein-Kantorovich state space as the natural
+%     domain for state-side metrics; sibling future-direction)
+%
+% Open-question flag to §VIII: the state-side complement of the
+% dictionary is named but only this one entry currently populates it.
+% Future Layer-2 state-side projections (mutual information,
+% conditional entropy, fidelity, trace distance, Wasserstein-Kantorovich
+% metric, relative entropy, quantum mutual information across bipartite
+% splits) are candidate future entries.  This is a CANDIDATE STATE-SIDE
+% ENUMERATION open question, distinct from existing spectral-side open
+% questions on §VIII (calibration data, second packing axiom, etc.).
+%
+% =====================================================================
+
+\subsection{Apparatus identity / state-side reduction}
+\label{sec:proj_apparatus_identity}
+\textbf{Source:} the framework's spectral-side output --- a Hamiltonian
+$H$ on the Hilbert space $\mathcal{H}$ of a Fock-projected $S^3$ graph
+(or its Bargmann--Segal / molecule-frame analogue), with eigenvalues
+$\{\lambda_n\}$ and eigenstates $\{|\psi_n\rangle\}$ supplied by the
+upstream projection chain.  All twenty-seven preceding entries of
+\S~\ref{sec:layer2} (\S~\ref{sec:proj_fock} through the Wick-rotation
+entry of Sprint~2) operate on this spectral side: they introduce
+variables, dimensions, and transcendentals at the operator level of
+$H$, $D$, or $\mathcal{H}$ itself.\\
+\textbf{Target:} the state-side observables associated with a density
+matrix $\rho$ on $\mathcal{H}$ --- specifically, the von Neumann entropy
+$S(\rho) = -\mathrm{Tr}\,\rho \log\rho$, the reduced density matrices
+$\rho_A = \mathrm{Tr}_B \rho_{AB}$ for any bipartite split
+$\mathcal{H} = \mathcal{H}_A \otimes \mathcal{H}_B$, the mutual
+information $I(A{:}B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})$, and the
+classical--quantum apparatus identity
+\begin{equation*}
+   S_\mathrm{thermo}(T) \;=\; k_B \cdot S_\mathrm{microstate}(\rho_\beta),
+   \qquad \rho_\beta = e^{-\beta H} / Z, \; \beta = 1/T,
+\end{equation*}
+which says that the macroscopic thermodynamic entropy of a system in
+contact with a heat bath at temperature $T$ equals (in units of
+$k_B$) the von Neumann entropy of the corresponding Gibbs density
+matrix.  This projection is the rule that converts spectral-side
+data into state-side observables.\\
+\textbf{Variables introduced:} the density matrix $\rho$ on
+$\mathcal{H}$, or, equivalently for thermal applications, the
+inverse-temperature $\beta = 1/T$ that indexes the Gibbs family
+$\rho_\beta = e^{-\beta H}/Z$.  The framework's spectral-side
+machinery never references $\rho$; the apparatus identity is what
+introduces it.  (When this projection follows
+\S~\ref{sec:proj_observation}, $\beta$ is already present as the
+Matsubara compactification radius; the apparatus identity then names
+the state-side use of that $\beta$.  When it stands alone on a
+non-thermal density matrix --- e.g.\ the ground-state reduced density
+matrix $\rho_A = \mathrm{Tr}_B |\psi_0\rangle\langle\psi_0|$ of
+Paper~27 --- $\rho$ is the new variable.)\\
+\textbf{Dimension introduced:} preserves.  Von Neumann entropy
+$S(\rho) = -\mathrm{Tr}\,\rho\log\rho$ is dimensionless by
+construction (the eigenvalues of $\rho$ are pure probabilities and the
+logarithm has no unit).  Temperature carries energy dimension via
+$k_B T$, but the dimensional content of $T$ is consumed externally
+through Boltzmann's constant rather than generated by the projection
+itself; the projection's structural role is the dimensionless
+operator-to-number map $\rho \mapsto S(\rho)$.\\
+\textbf{Transcendental signature: von~Neumann class.}  The functional
+$S(\rho) = -\mathrm{Tr}\,\rho\log\rho$ involves the logarithm of an
+operator and is generically transcendental at the value level for any
+non-trivial $\rho$.  Structurally, however, this transcendental class
+is \emph{categorically distinct from the master Mellin engine}
+$M_1 \cup M_2 \cup M_3$ that organises every spectral-side
+transcendental documented in Paper~34 \S\S\ref{sec:proj_fock}--%
+\ref{sec:proj_wick_rotation} and Paper~32 \S~VIII.  This is not a
+framing claim --- it is a verified PSLQ negative.  Sprint~TD Track~5
+(CLAUDE.md \S2, 2026-05-08) computed the framework's atomic
+correlation entropies $S_\mathrm{full}(\mathrm{He}) =
+0.040811051\ldots$, $S_\mathrm{full}(\mathrm{Li}^+) =
+0.011211717\ldots$, and $S_\mathrm{full}(\mathrm{He},\, n_{\max}{=}4)
+= 0.041879430\ldots$ to 150 dps, then ran PSLQ at 100 dps against a
+$12{,}312$-form mechanical basis spanning the M1 (Hopf-base measure),
+M2 (Seeley--DeWitt $\sqrt{\pi}$), and M3 (vertex-parity Hurwitz)
+sub-rings plus algebraic and rational control classes.  Result: zero
+hits across all three systems.  Stress tests at coefficient ceiling
+$10^6$ against the ten simplest ring elements ($1, \pi, \pi^2, 1/\pi,
+\zeta(2), \zeta(3), G, \log 2, \sqrt{2}, \varphi$) returned zero hits
+at $10^{-50}$ tolerance.  Cross-system ratios
+$S(\mathrm{He})/S(\mathrm{Li}^+) = 3.6400\ldots$ and the
+$n_{\max}$-ratio $0.9744\ldots$ also null.  Six orders of magnitude in
+coefficient ceiling do not change the verdict.  GeoVac correlation
+entropy is genuinely a state-side von~Neumann quantity, structurally
+disjoint from the spectral-side Mellin ring.\\
+\textbf{Used in:} every place the framework computes an entropy or a
+reduced density matrix.  Paper~27 (entropy as projection artifact;
+$S_\mathrm{kin}/S_\mathrm{full} \sim 10^{-14}$ for He at
+$n_{\max}=2,3$; $V_{ee}$-only generation of correlation entropy; the
+universal $S_B = A(\tilde{w}_B/\delta_B)^\gamma$ scaling with
+$\gamma_\infty \approx 1.96$ in the $Z, n_{\max} \to \infty$ limit)
+exercises this projection throughout; the apparatus identity is the
+structural mechanism that makes ``entropy'' a well-defined Layer-2
+observable in the first place.  Sprint~TD Track~2 (apparatus identity
+operational verification: $S_\mathrm{thermo} = k_B \cdot
+S_\mathrm{microstate}$ to machine precision, $\max$ residual
+$4.8\times 10^{-14}$, across H/He/Li$^+$ at $30$ log-spaced
+temperatures each).  Future bipartite-entropy / mutual-information
+analyses of atomic correlation (Paper~26 \S~VI Z-scaling
+extrapolation).  Any future quantum-information-theoretic comparison
+between the framework's qubit Hamiltonians (Paper~14) and competing
+encodings, where fidelity and trace distance between candidate ground
+states sit on the same state-side as $S(\rho)$.\\
+\textbf{Empirical anchors.}  Two independent verifications, both at
+machine precision.
+\smallskip
+
+\textit{Operational identity (Sprint~TD Track~2, 2026-05-08).}  The
+classical-quantum apparatus identity $S_\mathrm{thermo}(T) = k_B \cdot
+S_\mathrm{microstate}(\rho_\beta)$ is verified to floating-point
+machine precision across the framework's hydrogenic-class systems.
+Maximum residual across H/He/Li$^+$ at $30$ log-spaced temperatures
+each: $4.8 \times 10^{-14}$.  The $T \to 0$ limit reproduces
+Paper~27's ground-state correlation entropy $S_\mathrm{full}(\mathrm{GS})$
+bit-identically: He $0.040811$ (residual $3.1\times 10^{-10}$),
+Li$^+$ $0.011212$ (residual $3.2\times 10^{-10}$), H residual
+identically zero by single-determinant ground-state rigidity.  The
+$T \to \infty$ limit approaches $\log(\dim \mathcal{H})$ (e.g.\ $\log
+14 \approx 2.639$ for hydrogen at $n_{\max}=3$), the Boltzmann maximum
+mixing.  The Lindblad concavity bound holds at every $\beta$.  These
+verifications confirm that the apparatus identity is operative as a
+state-side reduction rule on the framework's hydrogenic systems
+without anomaly.
+\smallskip
+
+\textit{Master-Mellin-engine disjointness (Sprint~TD Track~5,
+2026-05-08).}  PSLQ at 100~dps against a $12{,}312$-form mechanical
+basis (frozen before testing, W3-protocol style) returned zero hits
+for $S_\mathrm{full}(\mathrm{He})$, $S_\mathrm{full}(\mathrm{Li}^+)$,
+and $S_\mathrm{full}(\mathrm{He},\, n_{\max}{=}4)$.  Twenty random
+comparable targets at coefficient ceiling $100$ also returned zero
+hits (control null distribution genuinely zero).  Stress tests at
+coefficient ceiling up to $10^6$ against the simplest ring elements,
+and against cross-system ratios, also null.  The verdict is clean and
+sharp: the framework's correlation entropies are not algebraic
+combinations of the spectral-side master-Mellin transcendentals.\\
+\textbf{Honest scope.}  State-side enumeration is currently
+\emph{incomplete} in Paper~34's dictionary.  This entry is the first
+state-side projection; the natural continuations
+(mutual information, conditional entropy, fidelity, trace distance,
+relative entropy $S(\rho \| \sigma)$, Wasserstein--Kantorovich
+distance on the state space $P(\mathcal{H})$ of Paper~38's propinquity
+machinery) are not enumerated here.  The structural status of those
+candidate projections is named in the open-question section
+(\S~\ref{sec:open}, candidate state-side enumeration); operationally,
+they have appeared in the framework only as scaffolding inside
+specific calculations (Paper~26 bipartite entanglement, Paper~38
+Wasserstein--Kantorovich identification of the propinquity limit) and
+have not yet been promoted to dictionary entries with their own
+focal-length variable / dimension / transcendental tagging.  The
+state-side dictionary should be read as deliberately opened in this
+sprint, not as fully populated.
+
+A second honest scope note: the apparatus identity is operationally
+verified on the framework's hydrogen-class systems
+(H, He, Li$^+$), where the spectral data is dense and the Gibbs
+ensemble is small enough to enumerate.  Extension to molecular
+spectral triples (Papers 15, 17, 19) and to the nuclear--electronic
+composed triple (Paper~23 \S~VI) is mechanical but has not been
+exercised; in those settings the relevant $\rho$ is potentially
+high-dimensional and the von Neumann entropy may require sampling
+or low-rank approximation methods rather than direct
+diagonalisation.  This is an engineering scope rather than a
+structural one: the projection is well-defined on every spectral
+triple the framework produces; the operational cost of computing
+$S(\rho)$ scales with the dimension of $\mathcal{H}$.
+
+A third scope note concerns the relationship between this projection
+and the foundational fact that pure-state von Neumann entropy of an
+ungrouped system is zero.  Apparatus identity / state-side reduction
+is non-trivial only when $\rho$ is mixed (Gibbs ensemble) or when a
+bipartite trace $\rho_A = \mathrm{Tr}_B \rho_{AB}$ is taken on a pure
+state.  This is consistent with Paper~27's framing: entropy is a
+projection artifact in the precise sense that it requires choosing
+either a thermal-bath partition (apparatus identity in the Gibbs
+form) or a Hilbert-space partition (reduced density matrix).  The
+state-side reduction is the structural operation that names that
+choice and supplies the resulting dimensionless number.\\
+\textbf{Structural reading.}  Categorically distinct from
+\emph{every} prior entry of \S~\ref{sec:layer2}, in the precise
+sense that those entries operate on the spectral data $(\mathcal{A},
+\mathcal{H}, D)$ of the spectral triple, while this entry operates
+on density matrices $\rho$ on $\mathcal{H}$.  The spectral / state
+divide is the deepest taxonomic split in the dictionary so far: it
+is sharper than the variable / dimension / transcendental axes
+(Theorem~T3 in \S~\ref{sec:axiomatization}), sharper than
+the master-Mellin sub-mechanism partition (M1 / M2 / M3), and sharper
+than the Layer~1 / Layer~2 partition itself (which lives entirely on
+the spectral side: Layer~1 is the bare graph $D$-data, Layer~2 is the
+projected $D$-data).  The apparatus identity is structurally
+\emph{the} sibling of \S~\ref{sec:proj_spectral_action} (Connes--%
+Chamseddine spectral action): both project the framework's
+finite-rank spectral data into a single dimensionless number, but
+one does so via $\mathrm{Tr}\,f(D/\Lambda)$ on the spectral side
+while the other does so via $\mathrm{Tr}\,\rho\log\rho$ on the
+state side.  Sprint~TD Track~5's PSLQ negative is the quantitative
+statement that these two procedures generate disjoint transcendental
+classes: spectral-side traces of operator functions of $D$ live in
+the master Mellin engine $M_1 \cup M_2 \cup M_3$ (Paper~32
+\S~VIII case-exhaustion theorem; Sprint~TS-E3, May~2026), while
+state-side traces of $\rho \log \rho$ do not.
+
+The structural complement to \S~\ref{sec:proj_adiabatic_BO} is also
+worth naming explicitly.  The Born--Oppenheimer projection creates a
+parameterised family of Hamiltonians $H(\vec{R})$, and a thermal
+ensemble of nuclear configurations weighted by Boltzmann factors
+$e^{-\beta E(\vec{R})}$ is precisely the density matrix
+$\rho_\beta(\vec{R}) = e^{-\beta H(\vec{R})}/Z$ on which the present
+projection acts.  In the language of the multi-focal-composition arc
+(May~2026, CLAUDE.md \S~2), adiabatic / BO supplies the Layer-1.5
+parameter family; the apparatus identity is the Layer-2 reduction
+that converts that family into a single thermodynamic number.  The
+two projections compose naturally and the composition is exercised
+operationally in Sprint~TD Track~2.
+
+Paper~38's Wasserstein--Kantorovich state space $P(S^3)$
+(Proposition~``Limit identification'') is the natural metric
+container for the state-side complement of the dictionary.  In the
+$n_{\max} \to \infty$ propinquity limit, the truncated spectral
+triple $\mathcal{T}_{n_{\max}}$ converges to $\mathcal{T}_{S^3}$ with
+the round-$S^3$ Wasserstein--Kantorovich distance as the metric on
+its state space.  This identifies a clean future-direction target:
+state-side projections beyond apparatus identity should sit naturally
+in the Wasserstein--Kantorovich complex --- mutual information,
+fidelity, and trace distance all have known metric structures on
+state spaces of finite-rank operator algebras, and Paper~38's
+machinery suggests these are reachable in the GH-convergent limit
+without requiring additional NCG framework extension.  The state-side
+dictionary is therefore named here as deliberately incomplete but
+\emph{not} blocked: extension is structurally available and is the
+natural next direction for the dictionary's axis-completeness.
+
+A final structural reading: the apparatus identity / state-side
+reduction is the projection that names ``how an observer extracts a
+number from the system,'' as a structural complement to the
+spectral-side projections that name ``how the framework constructs
+the system in the first place.''  In the master-Mellin-engine
+partition of Paper~32 \S~VIII and Paper~18 \S~III.7, the spectral
+side has three sub-mechanisms (M1, M2, M3); the state-side --- as
+documented by Sprint~TD Track~5's PSLQ negative --- is a fourth
+mechanism class structurally outside the engine.  Whether the
+state-side admits its own internal sub-mechanism partition
+(analogous to the M1 / M2 / M3 split on the spectral side) is the
+open structural question this entry leaves for future work.  Current
+evidence (one verified entropy class, machine-precision apparatus
+identity, PSLQ-disjoint from spectral side) is consistent with
+either: a single state-side sub-mechanism that produces all
+state-side observables uniformly, or multiple sub-mechanisms whose
+distinctions are not yet operationally visible.  Either outcome would
+sharpen the structural-skeleton-scope statement of CLAUDE.md \S~2
+beyond its current spectral-side-only form.

@@ -1,0 +1,199 @@
+% =====================================================================
+% Track 4 (Sprint 1) — §III.23 Symmetry projection / Young tableau
+% Draft for inclusion in Paper 34 §III, after §III.22.
+%
+% Three-axis dictionary row (for §IV Table~\ref{tab:projection_axes}):
+%
+%   Projection            : Symmetry / Young tableau
+%   Variables added       : irrep tableau $\lambda$
+%                           (e.g.\ $[1^N]$ antisymmetric, $[2,2]$ singlet,
+%                           $[3,1]$ mixed)
+%   Dimension             : preserved (orthogonal projection on the
+%                           $N$-particle Hilbert space)
+%   Transcendental signature : \textit{none} — character coefficients
+%                           are integers, projector matrix entries are
+%                           rationals
+%   Layer transition      : Layer 1 $\to$ Layer 1 (purely combinatorial
+%                           projection on the $N$-particle Hilbert
+%                           space; no transcendental injection)
+%
+% Cross-references: \S~\ref{sec:proj_spinor} (Camporesi--Higuchi spinor
+% bundle: the single-particle spin structure that the multi-particle
+% $S_N$ projection composes with), Paper~16 ($S_N$ representation
+% theory framework underlying the atomic classifier), Paper~17 §VIII
+% (Level~4N $S_4$ $[2,2]$ projection for 4-electron LiH), Paper~27
+% (entanglement structure of antisymmetrized states).
+% =====================================================================
+
+\subsection{Symmetry projection / Young tableau}
+\label{sec:proj_symmetry_tableau}
+\textbf{Source:} the unrestricted $N$-particle tensor product
+$\mathcal{H}^{\otimes N}$ on the single-particle Fock-projected $S^3$
+graph (or on any single-particle natural-geometry sector;
+\S~\ref{sec:proj_fock}, \S~\ref{sec:proj_bargmann},
+\S~\ref{sec:proj_molframe}).  At this stage indistinguishability of
+identical fermions has not yet been enforced; the Hilbert space
+contains symmetric, antisymmetric, and mixed-symmetry components
+without distinction.\\
+\textbf{Target:} the $\lambda$-irrep subspace
+$\mathcal{H}_\lambda \subset \mathcal{H}^{\otimes N}$, obtained via
+the character-based orthogonal projector
+\[
+  P_\lambda \;=\; \frac{d_\lambda}{|S_N|}\,\sum_{g \in S_N}
+                  \chi_\lambda(g)\,\rho(g),
+\]
+where $\lambda$ is a Young tableau (partition of $N$), $d_\lambda$ is
+the dimension of the corresponding irreducible representation of
+$S_N$, $\chi_\lambda(g)$ is its character at the permutation $g$, and
+$\rho(g)$ is the natural action of $g$ on $\mathcal{H}^{\otimes N}$
+by index permutation.  For fully indistinguishable spin-$\tfrac{1}{2}$
+fermions in the unrestricted formulation, $\lambda = [1^N]$
+(antisymmetric); in the Slater-determinant / spatial-spin coupled
+formulation, $\lambda$ is the conjugate of the spin Young diagram
+(Paper~16 §\ref{sec:sn_irreps} convention), so that $S_N$
+antisymmetry is implemented \emph{jointly} on spatial and spin
+indices.\\
+\textbf{Variables introduced:} the irrep tableau $\lambda$ itself
+(a discrete combinatorial label; equivalently a partition of $N$).
+For $N=2$: $\lambda \in \{[2],\,[1,1]\}$ (triplet vs singlet under
+spatial-spin coupling).  For $N=4$ closed shell: $\lambda = [2,2]$
+is the spin-singlet sector (Paper~17 §VIII, Track AJ).  For general
+$N$ with total spin $S$: $\lambda_1 = N/2 + S$ and
+$\lambda_2 = N/2 - S$ (Paper~16 §\ref{sec:sn_irreps}).\\
+\textbf{Dimension introduced:} \emph{none}.  $P_\lambda$ is an
+orthogonal projection on the $N$-particle Hilbert space; it does not
+introduce a new physical scale, focal length, or coordinate.  The
+projector reduces the linear dimension of the working space from
+$(\dim\mathcal{H})^N$ to a $\lambda$-irrep-counted subspace, but no
+new $[L]$, $[E]$, or $[T]$ enters the framework.\\
+\textbf{Transcendental signature:} \textit{none}.  The character
+table of $S_N$ is integer-valued (Frobenius character formula); the
+projector $P_\lambda$ has rational matrix entries (denominators
+dividing $|S_N| = N!$, numerators integer); the dimension $d_\lambda$
+is integer (hook-length formula).  No $\pi$, no $\zeta$, no Hurwitz
+content enters at this step.  The projection is the unique
+\S~\ref{sec:layer2} entry whose entire algebraic content lives in
+$\mathbb{Z}/N!$, making it the cleanest example of a
+\emph{combinatorial} Layer~1 $\to$ Layer~1 projection.\\
+\textbf{Used in:} all $N \geq 2$ computations in the framework, at
+multiple levels of explicitness:
+\begin{itemize}
+\item \textbf{Level 3 (He, $N=2$).}  Singlet $[1,1]$ vs triplet $[2]$
+spatial-spin coupling is the projection that splits the He $1^1 S$
+ground state from the $2^3 S$ first excited state.  Spatial-spin
+coupling for two electrons with total spin $S \in \{0, 1\}$ yields
+$\lambda_\text{spatial} = [1,1]$ for $S=0$ (antisymmetric spatial,
+symmetric spin: singlet) and $\lambda_\text{spatial} = [2]$ for
+$S=1$ (symmetric spatial, antisymmetric spin: triplet).
+\item \textbf{Level 4N (LiH, $N=4$).}  The $S_4$ $[2,2]$ Young
+diagram projection is the character-based projector onto the
+closed-shell singlet sector of the 4-electron mol-frame
+hyperspherical Hilbert space on $S^{11}$ (Paper~17 §VIII; Track AJ,
+\texttt{geovac/n\_electron\_solver.py}).  The projection reduces the
+raw SO(12) angular channel count by a tableau-dependent factor and
+makes the 4-electron PES computationally tractable; it is empty at
+$l_{\max} = 0$ (no antisymmetric 4-electron state can be built from
+$s$-waves), gives 2 channels at $l_{\max} = 1$, 12 channels at
+$l_{\max} = 2$, and 40 channels at $l_{\max} = 3$.
+\item \textbf{Graph-native CI (all $N$).}  The Slater-determinant
+basis used in \texttt{geovac/casimir\_ci.py} is itself the
+\emph{Slater-determinant realization} of the $[1^N]$ antisymmetric
+projector: each determinant
+$\det[\phi_{i_1}(\vec{r}_1)\cdots\phi_{i_N}(\vec{r}_N)]$ is the
+image under $P_{[1^N]}$ of the single Hartree product
+$\phi_{i_1}(\vec{r}_1)\otimes\cdots\otimes\phi_{i_N}(\vec{r}_N)$,
+up to a normalization factor.
+\item \textbf{Composed atomic classifier (Paper~16).}  The atomic
+structure-type assignment (A/B/C/D/E) for $Z = 1$--$30$ is itself
+read off the $S_N$ irrep shape: structure-type letters correspond to
+specific tableau patterns under the periodic-table indexing of
+Paper~16 §\ref{sec:sn_irreps}.  The classifier is the boundary at
+which the $S_N$ projection becomes computationally explicit in the
+production composed-Hamiltonian pipeline.
+\item \textbf{Hyperfine and cross-register couplings (Track NI,
+Paper~23 §VI).}  In the composed nuclear--electronic deuterium
+Hamiltonian, the Clebsch--Gordan multiplicity $(2I+1)/2$ relating
+$F = I+J$ to $F = I-J$ hyperfine levels (D HFS autopsy,
+\S\ref{sec:autopsy_d_hfs}) is itself a small-$N$ tableau projection
+applied to a coupled spin Hilbert space.  See \S~\ref{sec:proj_3j}
+for the angular-momentum coupling content; the present projection
+is its $S_N$ analog on the indistinguishable-particle side.
+\end{itemize}
+\textbf{Empirical anchor:} He $2^1 S$--$2^3 S$ exchange splitting at
+$6421.46$~cm$^{-1}$ (NIST experimental) is the cleanest finite-energy
+witness of the singlet-vs-triplet ($[1,1]$ vs $[2]$ spatial)
+projection in the catalogue.  The splitting is not a small Layer-2
+correction; it is the energy difference between two distinct
+$\lambda$-irrep sectors of the same single-particle basis, generated
+entirely by the exchange-integral content of the two-electron $V_{ee}$
+matrix elements under spatial antisymmetrization vs symmetrization.
+Sprint Calc-He-2S-2S-splitting and Sprint Hylleraas-$r_{12}$
+(2026-05-09) returned this entry at $+11.86\%$ (graph-native CI,
+$n_{\max} \leq 11$) and $+209\%$ (single-$\alpha$ Hylleraas-3p,
+$\omega = 5$) respectively, with the diagnosis that the residuals
+trace to single-exponent basis limitations for the excited
+$\lambda$-irrep state rather than to the projection itself
+(\S~\ref{sec:offprecision} He singlet-triplet row).  At the
+projection level, the splitting is structurally clean: the projector
+$P_{[1,1]}$ vs $P_{[2]}$ acts identically on either side; only the
+$V_{ee}$ matrix elements respond differently to the two sectors.\\
+\textbf{Honest scope.}  At modest $N$ ($N \leq 4$) the framework
+implements the character-based projector $P_\lambda$ directly:
+explicit construction of the projector matrix in the Slater /
+configuration-state-function basis, or via the equivalent Young
+symmetrizer in the unrestricted tensor product.  This is exact and
+combinatorial.  At large $N$ (heavy atoms, $N \gg 10$), the framework
+falls back on \emph{compositional approximations} to the tableau
+projection: (i) single-Slater-determinant Hartree--Fock reductions
+project onto a single representative of the $[1^N]$ irrep rather
+than spanning it, (ii) frozen-core constructions
+(\texttt{geovac/neon\_core.py} for [Ne]-core, [Kr]-core, [Xe]-core
+species) project the antisymmetric structure onto a product of a
+fixed core determinant with a smaller-$N$ valence tableau projection,
+(iii) the composed-block architecture for multi-center systems
+(\S~\ref{sec:proj_molframe}) treats each block's antisymmetric
+subspace independently, neglecting inter-block antisymmetry except
+through cross-block ERI / cross-center $V_\text{ne}$ corrections.
+Each of these is itself a structured projection onto a coarser
+tableau pattern.  The boundary between exact character-projection
+and compositional approximation is empirical, set by the largest $N$
+at which $|S_N| = N!$ direct construction remains tractable.  As of
+v2.40.0 this boundary sits at $N \approx 6$ for the atomic
+classifier's explicit construction (extended via lookup tables to
+higher $N$ where the periodic-table structure-type pattern repeats),
+and at $N = 4$ for the Level~4N solver
+(\texttt{geovac/n\_electron\_solver.py}).\\
+\textbf{Structural reading.}  This is the projection at which
+\textbf{Pauli antisymmetry enters the framework explicitly} rather
+than implicitly.  In many quantum-chemistry frameworks
+antisymmetrization is folded into the coordinate or operator choice
+(e.g.\ second-quantized anticommutators built into the Hamiltonian's
+algebraic structure); in GeoVac the dimensionless graph
+(\S~\ref{sec:bare_graph}) is symmetry-agnostic by construction, and
+Pauli antisymmetry is recovered as a separate, named, character-based
+projection at the multi-particle level.  This is the structural
+sibling of \S~\ref{sec:proj_spinor} (which introduces the
+spin-$\tfrac{1}{2}$ Hilbert space at the single-particle level): the
+spinor projection commits to particle statistics (fermionic
+half-integer spin), while the present projection commits to the
+many-body consequence of those statistics ($N$-particle
+antisymmetry).  Composition $P_\lambda \circ
+\text{spinor\_lift}$ realizes the standard spatial-spin coupling
+scheme; composition $P_\lambda \circ \text{Fock}$ realizes the
+$N$-fermion graph Hilbert space on which graph-native CI operates.
+Categorically distinct from \S~\ref{sec:proj_3j} (angular-momentum
+coupling, $SU(2)$ Clebsch--Gordan, continuous-symmetry character
+content) and \S~\ref{sec:proj_wignerD} (rotation between rotated
+coordinate frames, $SO(3)$ representation theory).  The shared
+abstraction across these three is that all three are character-based
+projections onto irreducible representations of finite or compact
+groups acting on the Hilbert space; the structural distinction is
+the group: $S_N$ for the present projection, $SU(2)$ for
+\S~\ref{sec:proj_3j}, $SO(3)$ for \S~\ref{sec:proj_wignerD}.  The
+$S_N$ character table has integer entries while the $SU(2)$ and
+$SO(3)$ projector matrix elements introduce algebraic-extension and
+trigonometric content respectively (\S~\ref{sec:dictionary}
+Table~\ref{tab:projection_axes}); the absence of transcendental
+content in the symmetry projection is therefore not coincidental
+but reflects the discrete finite-group structure underlying Pauli
+exclusion.

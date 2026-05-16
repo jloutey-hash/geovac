@@ -1,0 +1,275 @@
+% =====================================================================
+% Sprint 2, Track 7: Gauge-choice projection (§III.26)
+%
+% Placement: §III.26, immediately after §III.25 coupled-channel /
+% adiabatic curve (label sec:proj_coupled_channel), immediately before
+% the §III boundary subsection (label sec:layer2_boundary).
+%
+% §IV three-axis row (for tab:projection_axes, insert after the
+% coupled-channel row, last row before \bottomrule):
+% ---------------------------------------------------------------------
+%   Gauge choice (Coulomb / Lorenz / Feynman) &
+%     none (gauge choice, not parameter) &
+%     preserves &
+%     gauge-dependent at intermediate-propagator level
+%       (Coulomb: $1/(4\pi)$ per loop via Hopf base;
+%        Lorenz: retarded; Feynman: $1/k^2$);
+%       gauge-invariant on physical observables (Ward identity) \\
+% ---------------------------------------------------------------------
+% One-sentence summary for §IV / count update:
+%   "The twenty-sixth row (gauge choice) was added in Sprint 2
+%    (2026-05-15) as the second witness, alongside vector-photon
+%    promotion, in the (no-variable, no-dimension, transcendental-only)
+%    corner of the V/D/transcendental axis grid."
+%
+% Cross-references inside this draft:
+%   - sec:proj_vector_photon (§III.11): first independence witness
+%   - sec:proj_3j (§III.8): Wigner-3j angular coupling
+%   - sec:proj_wilson (§III.10): Wilson plaquette (implicit Coulomb-class
+%     gauge fixing on the GeoVac SU(2)/U(1) Wilson construction)
+%   - sec:proj_spectral_action (§III.6): heat-kernel / spectral action
+%   - sec:proj_multipole_gaunt (§III.21): Coulomb kernel multipole
+%     expansion (angular-content-only, same V/D-preserving family)
+%   - sec:layer2 (the projection-family section)
+%   - sec:layer2_boundary (the boundary subsection that follows)
+%
+% Cross-references to other papers (use existing citation keys):
+%   - Paper~28 (one-loop QED machinery, Coulomb-gauge construction)
+%   - Paper~33 (1/(4\pi) per loop = S^2 Weyl exchange of Hopf base)
+%   - Paper~30 (SU(2) Wilson lattice; gauge fixing implicit in
+%     weak-coupling kinetic identification L_1 = B^\top B)
+%   - Paper~18 (calibration tier, in which the per-loop 1/(4\pi)
+%     lives)
+%
+% Observation update needed in §IV (rem:vd_correlation /
+% obs:axes_correlated): the transcendental-only corner now has
+% two witnesses (vector-photon promotion + gauge choice), not one.
+% Suggested wording: "The transcendental axis admits two
+% independence witnesses --- vector-photon promotion and gauge
+% choice (\S~\ref{sec:proj_gauge_choice}), both of which preserve
+% variable and dimension but inject transcendental content (or
+% structurally select which transcendental content appears) at
+% intermediate steps.  Both witnesses are gauge-related: the
+% structural-content of the transcendental-only corner is the
+% gauge sector of the framework."
+% =====================================================================
+
+\subsection{Gauge choice (Coulomb / Lorenz / Feynman)}
+\label{sec:proj_gauge_choice}
+\textbf{Source:} the framework's $U(1)$ connection on the Fock-projected
+$S^3$ Hopf graph (with $\mathrm{SU}(2)$ and $\mathrm{SU}(3)$ siblings
+on the same graph and on $S^5$ respectively, per Paper~30 and
+Sprint~ST-SU3); equivalently, the photon $1$-cochain in the Hodge
+decomposition of edge data, prior to any specific gauge representative
+being selected for propagator computations.\\
+\textbf{Target:} the same connection with a specific gauge
+representative fixed.  Three canonical choices are in play:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \emph{Coulomb gauge} ($\vec{\nabla} \cdot \vec{A} = 0$,
+equivalently $d^\dagger A = 0$ on the graph): the photon decomposes
+into an instantaneous longitudinal Coulomb part and a transverse
+radiative part; the framework's vector-photon construction
+(Paper~28~\S vector\_photon\_qed, Paper~33~\S~VI) operates in this
+gauge by treating the Hopf-base $1$-form sector as the propagating
+photon and computing $G_\gamma = L_1^+$ as the transverse propagator
+(see also \S~\ref{sec:proj_wilson}, where the weak-coupling expansion
+$L_1 = B^\top B$ is a Coulomb-class gauge fixing of the SU(2) Wilson
+construction).
+\item \emph{Lorenz gauge} ($\partial_\mu A^\mu = 0$, equivalently the
+covariant retarded condition on the spacetime $4$-potential): the
+photon propagator carries explicit retardation in time and the
+transverse and longitudinal pieces remain coupled.
+\item \emph{Feynman gauge} (the propagator $-i g_{\mu\nu}/k^2$): the
+simplest covariant choice, used in Paper~28~\S~6 for the one-loop
+electron self-energy (``the one-loop electron self-energy on $S^3$
+(Feynman gauge) is \ldots'').
+\end{itemize}
+The projection step is the act of fixing one of these representatives
+\emph{before} intermediate Green's-function, propagator, or matrix-element
+computations begin.\\
+\textbf{Variables introduced:} \emph{none}.  A gauge choice is a
+selection among equivalent classes of representatives, not the
+introduction of a continuous parameter.  No physical scale,
+focal-length, mass, or coordinate is injected by the gauge fixing
+itself.  This places gauge choice alongside \S~\ref{sec:proj_vector_photon}
+in the (no-variable) row of Table~\ref{tab:projection_axes}.\\
+\textbf{Dimension introduced:} dimension-preserving.  The gauge choice
+operates on the existing connection without injecting a new $[L]$,
+$[E]$, $[M]$, or $[T]$ scale.  All three gauges produce the same
+physical observable with the same physical dimension; what differs is
+the intermediate-step organisation of the propagator content.\\
+\textbf{Transcendental signature:} \emph{gauge-dependent at
+intermediate steps; gauge-invariant on physical observables.}  This is
+the distinguishing structural property of the gauge-choice projection.
+At the intermediate-propagator level, the three gauges produce
+categorically different transcendental content:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item In Coulomb gauge --- the framework's implicit choice throughout
+Papers~28, 30, and 33 --- the vector-photon construction's per-loop
+factor is $1/(4\pi) = \mathrm{Vol}(S^2)/(4 \cdot 4\pi^2)$, identified
+in Paper~33~\S~VI as the $S^2$ Weyl exchange constant of the Hopf
+base (the same Hopf-base measure $\pi = \mathrm{Vol}(S^2)/4$ that
+appears in the M1 master-Mellin sub-mechanism, per Paper~32~\S~VIII
+and Paper~18~\S~III.7).  The intermediate transcendental content sits
+cleanly in the calibration $\pi$-tier of Paper~18.
+\item In Lorenz gauge, the retarded propagator structure would produce
+different intermediate angular content, with $\pi$ entering through
+the retardation kernel rather than through the static Hopf-base solid
+angle.  This route has not been implemented in the framework.
+\item In Feynman gauge, the explicit $-i g_{\mu\nu}/k^2$ propagator
+gives the textbook covariant intermediate transcendental content, with
+$\pi$ appearing through the standard Feynman-parameter denominators
+rather than through a Hopf-base normalisation.  Paper~28~\S~6 names
+this gauge for the one-loop self-energy formula but the production
+machinery operates in Coulomb gauge throughout.
+\end{itemize}
+On physical observables (cross-sections, transition rates, energy
+shifts), all three gauges produce identical results --- this is the
+content of the Ward identity (Rule~6 of Paper~33's eight QED selection
+rules; see Paper~33~\S~II for the framework's status), and it is
+gauge-invariance in its standard QED sense.\\
+\textbf{Used in:} the framework's one-loop QED machinery (Paper~28)
+implicitly assumes Coulomb gauge throughout the $1$-cochain Hodge
+construction; Paper~33's $1{+}6{+}1$ selection-rule partition is
+stated in Coulomb gauge; Paper~30's SU(2) Wilson lattice gauge theory
+identifies $L_1 = B^\top B$ as the weak-coupling kinetic term via a
+Coulomb-class gauge fixing of the link variables.  Feynman gauge is
+named at one point in Paper~28~\S~6 (the textbook formula for the
+one-loop electron self-energy) but is not used in production
+calculations.  No production computation has been performed in Lorenz
+gauge.\\
+\textbf{Empirical anchor:} the Ward identity itself, i.e.\
+gauge-invariance of physical observables.  Standard QED requires
+$k_\mu \mathcal{M}^\mu = 0$ for the photon-emission amplitude
+$\mathcal{M}^\mu$, and equivalently the equality of physical
+predictions across gauge choices.  This is item~R6 in Paper~33's
+selection-rule census, where the framework's status is recorded
+honestly: ``gauge invariance under the $U(1)$ phase of the photon,
+which the $1$-cochain photon has only in temporal gauge and only
+approximately'' (Paper~33~\S~II, R6).  The Ward identity is therefore
+the standard external anchor for the gauge-choice projection;
+gauge-invariance of physical observables is the precise condition
+under which the projection itself is structurally well-posed.\\
+\textbf{Honest scope.}  This is the single most under-tested entry in
+the projection dictionary, and the entry must be tagged as such.
+
+The framework has \emph{not} been tested across gauges.  Every
+production calculation in Papers~28, 30, 33, and the Sprint~HF /
+Sprint~LS-1..LS-7 / Lamb-shift sub-percent closure of Paper~36 runs
+implicitly in Coulomb gauge: the photon is represented as a Hodge
+$1$-cochain on the GeoVac edge complex, the propagator is
+$G_\gamma = L_1^+$ (the transverse pseudoinverse of the edge
+Laplacian), and the per-loop calibration constant $1/(4\pi)$ is
+identified through the Hopf-base $S^2$ solid-angle normalisation.
+This is a clean, structurally well-motivated choice ---  Coulomb gauge
+respects the framework's natural angular-momentum decomposition on
+the Fock-projected $S^3$ graph, and the transverse photon sector
+sits naturally in the co-exact subspace of the Hodge decomposition
+of \S~\ref{sec:proj_wilson} (compare Paper~28~\S~transverse\_photon).
+But it \emph{is} a choice.
+
+A genuine validation of the gauge-choice projection at framework level
+would require computing a sample one-loop observable in Lorenz gauge
+(or Feynman gauge as implemented at full operator level rather than
+named for one formula), verifying that the physical result agrees
+with the Coulomb-gauge calculation to the precision of the framework,
+and confirming that the per-loop calibration constant changes
+structurally between the two gauges while the physical observable is
+gauge-invariant.  This has not been done.  The Ward identity (R6 in
+Paper~33's census) holds only approximately on the $1$-cochain photon
+even in temporal gauge, and the framework has not closed the
+gauge-invariance test against a competing gauge.
+
+Sub-leading observation: the choice of Coulomb gauge is not arbitrary
+on the GeoVac graph.  The Hodge decomposition of the edge complex
+distinguishes exact ($d_0$-image), co-exact ($d_1^\top$-image), and
+harmonic sectors, and Coulomb gauge is precisely the projection onto
+the co-exact (transverse) sector.  The framework's natural data
+structure --- $L_0$ on nodes, $L_1 = B^\top B$ on edges,
+plaquette Hodge structure from Paper~25 / Paper~30 --- comes equipped
+with this decomposition.  Lorenz gauge, by contrast, would require
+introducing the time direction explicitly (compactified per
+\S~\ref{sec:proj_observation} or extended per the Klein-Gordon
+construction of Paper~35), and the framework has not been wired for
+covariant time-dependent gauge fixing.  This is a real structural
+constraint, not a choice that could be flipped without modifying the
+upstream construction.\\
+\textbf{Structural reading.}  Layer~$2 \to$ Layer~$2$.  The gauge-choice
+projection operates on the projected vector-photon Hilbert space
+(\S~\ref{sec:proj_vector_photon}); it does not act on Layer~1 graph
+data and does not move the chain across the
+\S~\ref{sec:layer2_boundary} boundary.
+
+This is the \emph{second independence witness} in the
+(no-variable, no-dimension, transcendental-only) corner of the
+variable/dimension/transcendental axis grid.  Until Sprint~2 the only
+witness in that corner was \S~\ref{sec:proj_vector_photon} (vector-photon
+promotion, which introduces $1/(4\pi)$ without any new variable or
+dimension); the gauge-choice projection is its structural sibling.
+Both witnesses operate on the same object (the framework's $U(1)$
+connection) at successive structural steps: vector-photon promotion
+transforms the scalar $1$-cochain into a vector harmonic with
+$(q, m_q)$ labels, and the present projection fixes a specific gauge
+representative of the resulting connection before propagators are
+computed.  The fact that the two witnesses are \emph{both
+gauge-related} sharpens the V/D-correlation observation of
+\S~\ref{sec:dictionary} and \S~\ref{sec:axiomatization}: the
+transcendental-only corner of the axis grid is the gauge sector of the
+framework.  It is not an accident that the only two projections
+preserving both V and D while moving the transcendental axis are
+gauge-construction steps; the structural content of that corner is
+``add transcendental content to the gauge sector without adding any
+physical variable or dimension.''
+
+Categorically distinct from \S~\ref{sec:proj_vector_photon} despite
+the shared axis pattern: vector-photon promotion is the structural
+\emph{construction} of the gauge sector (it builds the vector-harmonic
+photon from a scalar $1$-cochain), while the gauge-choice projection
+is the \emph{selection} of a representative within the already-built
+sector.  The two compose: the chain $\textsf{Layer~1 graph} \to
+\S~\ref{sec:proj_vector_photon} \to \S~\ref{sec:proj_gauge_choice}$ is
+how the framework reaches a computable QED propagator from bare graph
+data.  Categorically distinct also from
+\S~\ref{sec:proj_multipole_gaunt}, which similarly preserves V and D
+(the multipole index $L$ is an internal integer summation label, not
+a physical variable; the kernel reorganisation is dimension-preserving)
+but lives in the kernel-side angular sector rather than the gauge
+sector and is ring-preserving over $\mathbb{Q}[\sqrt{2k{+}1}]_k$ rather
+than gauge-dependent in transcendental content.  The multipole / Gaunt
+projection is an angular-content-only structural projection on the
+Coulomb kernel; the present projection is a gauge-content-only
+structural projection on the connection that the Coulomb kernel
+contracts against.  Both are necessary to reach a computable
+amplitude; both preserve the V/D axes; neither introduces a Layer-2
+input.
+
+Sibling in the calibration tier of Paper~18: the per-loop $1/(4\pi)$
+that appears in Coulomb gauge is the same calibration $\pi$-content
+identified by Paper~33~\S~VI as the $S^2$ Weyl exchange constant.
+Under the master-Mellin reading of Paper~32~\S~VIII and
+Paper~18~\S~III.7, this calibration $\pi$ is the M1 sub-mechanism
+signature ($\mathrm{Vol}(S^2)/4$, the Hopf-base measure).  A
+Lorenz-gauge calculation, if performed, would produce different
+intermediate $\pi$-content (retardation kernels rather than static
+Hopf-base normalisations) but would necessarily land on the same
+physical observable.  The gauge-choice projection therefore sits at
+the interface of the framework's gauge construction
+(\S~\ref{sec:proj_vector_photon} +
+\S~\ref{sec:proj_wilson}) and the framework's transcendental taxonomy
+(Paper~18), and it is the structural step at which a Layer-2 chain
+commits to a specific way of accumulating $\pi$ at each loop.
+
+Open question (flagged for a future sprint): a serious test of the
+gauge-choice projection would compute a sample observable (e.g.\ the
+one-loop Lamb-shift Bethe-log component of Paper~36, or the
+hydrogen $21$\,cm contact term of \S~\ref{sec:autopsy_21cm}) in
+Feynman gauge as well as the existing Coulomb-gauge implementation,
+and verify gauge invariance to the precision of the framework
+($\sim10^{-3}$ on Lamb-shift-class observables, $\sim10^{-4}$ on
+hyperfine contact terms).  If gauge invariance fails at framework
+precision, the failure localises a specific Layer-2 calibration
+content that the Coulomb-gauge construction is silently encoding;
+if it succeeds, the gauge-choice projection is verified as a
+genuine independence witness in the sense of
+Observation~\ref{obs:axes_correlated} rather than a tautological
+relabelling.

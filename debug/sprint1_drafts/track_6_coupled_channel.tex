@@ -1,0 +1,327 @@
+%% =====================================================================
+%% Paper 34, §III.25 — Coupled-channel / adiabatic curve projection
+%% Sprint 1 dictionary-completion draft, Track 6
+%%
+%% Three-axis row (for §IV Table~\ref{tab:projection_axes}):
+%%   Projection:               Coupled-channel / adiabatic curve
+%%   Variables added:          hyperradius $\rho$ (Level~3) or
+%%                             internuclear distance $R$ (Level~4); same
+%%                             continuous radial coordinate at different
+%%                             geometric levels.  Adiabatic curve index
+%%                             $\nu$ labels the discrete channel set.
+%%   Dimension:                length (energy is preserved: $\mu_\nu(R)$
+%%                             carries the same $[E]$ dimension as the
+%%                             parent angular eigenvalue; the new
+%%                             physical content is the radial coordinate
+%%                             itself, $[L]$)
+%%   Transcendental signature: algebraic-implicit at Level~3 — $\mu(R)$
+%%                             satisfies $P(R,\mu) = 0$ with $P \in
+%%                             \mathbb{Q}(\pi,\sqrt{2})[R,\mu]$
+%%                             (Paper~13 §XII, Paper~18 §IV.4);
+%%                             piecewise-smooth at Level~4 — $\mu(\rho)$
+%%                             is $C^0$ but not $C^1$ at split-region
+%%                             boundaries $\alpha = \arccos\rho,
+%%                             \arcsin\rho$ (Track~S, Paper~15 §VI.7).
+%%                             These two regimes are structurally
+%%                             distinct transcendental classes — the
+%%                             algebraic-implicit class admits a global
+%%                             polynomial $P=0$ describing every branch
+%%                             of $\mu(R)$ at once, while the piecewise
+%%                             class does not.
+%%   Layer transition:         Layer~1 $\to$ Layer~2.  Introduces the
+%%                             radial parameter explicitly as the solver
+%%                             coordinate that the adiabatic curve
+%%                             family is indexed by; the parent
+%%                             projection (Born-Oppenheimer / adiabatic,
+%%                             §III.24) gave the parameterized
+%%                             Hamiltonian $H_\text{el}(R)$ but did not
+%%                             commit to solving the eigenvalue problem
+%%                             at each $R$.  This projection makes that
+%%                             commitment.
+%%
+%% Cross-references (live in body):
+%%   - §III.24 (sec:proj_adiabatic_BO) — parent projection that
+%%     produces the parameterized electronic problem this entry solves
+%%   - §III.13 (sec:proj_molframe) — Level~4 mol-frame hyperspherical
+%%     separation, sibling Layer-1 projection that supplies the
+%%     parameterized angular problem at Level~4
+%%   - Paper~13 §XII, §XIII — algebraic angular solver, $\mu(R)$
+%%     algebraic curve, coupled-channel convergence (Track P1, P2)
+%%   - Paper~15 §V, §VI.7 — split-region Legendre expansion,
+%%     irreducibility of per-$\rho$ diagonalization (Track S)
+%%   - Paper~18 §IV.4 — algebraic-implicit tier where this entry
+%%     lives at the operator level
+%%   - §III.6 (sec:proj_spectral_action) — alternative non-adiabatic
+%%     2D variational route that bypasses this projection
+%%
+%% Structural notes:
+%%   - The algebraic-implicit vs piecewise-smooth distinction is the
+%%     substantive transcendental content of this entry.  Level~3
+%%     admits a global $P(R,\mu) \in \mathbb{Q}(\pi,\sqrt{2})[R,\mu]$
+%%     because the angular Hamiltonian is a LINEAR matrix pencil
+%%     $H_0 + R \cdot V_C$ (Paper~13 Eq.~3, §XII).  Level~4 has the
+%%     same operator type at the matrix-pencil level but the entries
+%%     of $V_C$ themselves depend on $\rho$ piecewise via
+%%     $\min(s,\rho)/\max(s,\rho)$ from the split-region Legendre
+%%     expansion (Paper~15 §V, §VI.7).  The pencil is therefore
+%%     piecewise-linear in $\rho$, not linear, and no global $P=0$
+%%     exists across the region boundary.
+%%   - Non-adiabatic correction territory: Hellmann-Feynman P-matrix
+%%     $P_{\mu\nu}(R) = \langle \Phi_\mu | V_C | \Phi_\nu \rangle /
+%%     (\mu_\mu - \mu_\nu)$ is exact in the algebraic basis (Paper~13
+%%     §XIII.A), Q-matrix from closure $Q \approx PP$.  These are the
+%%     coupling terms that the bare adiabatic curve set does not
+%%     include; resolving them is the coupled-channel calculation
+%%     proper.
+%%   - 2D variational solver (Paper~15 §VI.4) bypasses this projection
+%%     entirely by treating $R$ and the angular coordinate
+%%     simultaneously — at the cost of giving up the adiabatic
+%%     factorization that makes the projection useful in the first
+%%     place.  Both are legitimate; the choice is a Layer-2 control.
+%%   - Algebraic registry status (CLAUDE.md §12): hyperradial S, K
+%%     matrices fully algebraic via three-term Laguerre recurrence;
+%%     V_eff(R) potential matrix elements algebraic at $l_\text{max}=0$
+%%     (single Stieltjes seed $e^a \cdot E_1(a)$, Track P2 v2.0.13)
+%%     and numerical-required at $l_\text{max} \ge 1$ (radical
+%%     obstruction: $\sqrt{\Delta(R)}$ at $l_\text{max}=1$, Cardano at
+%%     $l_\text{max}=2$).  Pointwise diagonalization to extract
+%%     $\mu_\nu(R)$ at each $R$ is the residual numerical step.
+%%   - This projection sits at the TRANSCENDENTAL BOUNDARY of the
+%%     framework's algebraic structure: the natural geometry hierarchy
+%%     is fully algebraic at Level~1 and at the discrete-graph level
+%%     of Level~2 ($\sigma$ states); the moment a radial parameter
+%%     appears as the family index of an eigenvalue problem, the
+%%     framework crosses from purely algebraic into algebraic-implicit
+%%     (Level~3) or piecewise-smooth (Level~4).  Naming this
+%%     projection isolates that crossing.
+%% =====================================================================
+
+\subsection{Coupled-channel / adiabatic curve}
+\label{sec:proj_coupled_channel}
+\textbf{Source:} parameterized electronic Hamiltonian $H_\text{el}(R)$
+inherited from the Born-Oppenheimer / adiabatic projection
+(\S~\ref{sec:proj_adiabatic_BO}): a family of angular operators on
+the Fock-projected $S^3$ graph, indexed by a continuous radial
+coordinate ($\rho$ at Level~3 for the He hyperspherical lattice,
+internuclear distance $R$ at Level~4 for the molecule-frame
+hyperspherical lattice; same continuous coordinate at different
+geometric levels per \S~\ref{sec:proj_molframe}).\\
+\textbf{Target:} the discrete set of adiabatic potential curves
+$\{\mu_\nu(R)\}_{\nu = 1, 2, \ldots}$ obtained by solving the angular
+eigenvalue problem at each $R$, together with the non-adiabatic
+coupling matrix $P_{\mu\nu}(R) = \langle \Phi_\mu(R) | \partial_R |
+\Phi_\nu(R) \rangle$ that couples adjacent channels when the
+parameterized angular wavefunctions $\Phi_\nu(R; \hat{\Omega})$ vary
+with $R$.  At the matrix-pencil level
+\[
+  H_\text{ang}(R) \;=\; H_0 + R \cdot V^\text{coupling},
+\]
+with $H_0$ carrying the free-SO(6) (or SO(3N) at higher~$N$) Casimir
+eigenvalues and $V^\text{coupling}$ encoding the nuclear and
+electron--electron angular couplings (Paper~13 Eqs.~31--32, §XII).
+The eigenvalues $\mu_\nu(R)$ are the adiabatic potential curves; the
+coupled-channel radial solver then propagates each radial amplitude
+$F_\nu(R)$ in the matrix-valued effective potential built from
+$\{\mu_\nu(R), P_{\mu\nu}(R), Q_{\mu\nu}(R)\}$.\\
+\textbf{Variables introduced:} the radial coordinate $R$ (or $\rho$)
+itself, as the continuous-parameter axis of the channel family.  The
+adiabatic curve index $\nu$ is a discrete combinatorial label inherited
+from the SO(6) (or SO(3N)) representation theory of the parent angular
+problem and is not a new physical variable.\\
+\textbf{Dimension introduced:} length (one new $[L]$ scale per
+geometric level; Level~3 introduces the hyperradius $\rho$, Level~4
+the internuclear distance $R$).  Energy dimension is preserved:
+$\mu_\nu(R)$ carries the same $[E]$ scaling as the parent angular
+eigenvalues from which it is built, and the curve family is therefore
+a one-parameter $[E]$-valued function family on the new $[L]$ axis.
+This is the same $[L]$ injection logged at \S~\ref{sec:proj_molframe}
+for the Level~4 case; at Level~3 the radial coordinate is the
+hyperradius $\rho$ of the SO(6) hyperspherical lattice (Paper~13
+§II), structurally analogous but distinct from internuclear $R$.\\
+\textbf{Transcendental signature: algebraic-implicit at Level~3,
+piecewise-smooth at Level~4 --- and the distinction is structural,
+not numerical.}  At Level~3 (He hyperspherical, single-center,
+two-electron) the angular Hamiltonian $H_\text{ang}(R)$ is a
+\emph{linear matrix pencil} $H_0 + R \cdot V^\text{coupling}$, so its
+eigenvalues satisfy the global characteristic polynomial
+\[
+  P(R, \mu) \;=\; \det\!\bigl(H_0 + R \cdot V^\text{coupling} - \mu I\bigr)
+  \;=\; 0
+\]
+with coefficients in $\mathbb{Q}(\pi, \sqrt{2})[R, \mu]$ (Paper~13
+§XII, Track~P1).  The $\pi$ content is inherited from the upstream
+calibration of \S~\ref{sec:proj_fock} (normalisation on $[0, \pi/2]$);
+the $\sqrt{2}$ content is inherited from the $V_{ee}$ Gaunt integrals
+(\S~\ref{sec:proj_3j}); the radial parameter $R$ contributes no new
+transcendental content of its own.  The function $\mu_\nu(R)$ is
+therefore \emph{algebraic over $\mathbb{Q}(\pi, \sqrt{2})$} (an
+algebraic-implicit function in the Paper~18 §IV.4 sense), of degree
+$l_\text{max} + 1$ in both variables at angular truncation
+$l_\text{max}$.  Branch points of $P(R, \mu) = 0$ occur at zeros of
+the discriminant $\Delta(R) = \mathrm{disc}_\mu(P)$, where eigenvalue
+sheets meet with square-root singularities — pointwise numerical
+diagonalisation at each $R$ is computational convenience, not
+mathematical necessity (Paper~13 §XII.B, Track~P1, v2.0.12).
+\smallskip
+
+At Level~4 (mol-frame hyperspherical, two-center, two-electron) the
+matrix-pencil form survives but the entries of $V^\text{coupling}$
+themselves depend on $\rho$ piecewise via split-region Legendre
+factors $\min(s, \rho) / \max(s, \rho)^{k+1}$ from the nuclear charge
+function expansion (Paper~15 §V).  These factors are $C^0$ but not
+$C^1$ at the region boundaries $s = \rho$, equivalently $\alpha =
+\arccos\rho$ and $\alpha = \arcsin\rho$.  The pencil is therefore
+\emph{piecewise-linear in $\rho$} rather than linear, and Track~S
+(Paper~15 §VI.7, v2.0.13) established the irreducibility result: no
+global $P(\rho, \mu) = 0$ exists across the region boundary, and no
+algebraic-blow-up, Lie-algebra elevation, or $S^3 \times S^3$ hybrid
+restores one.  The function $\mu_\nu(\rho)$ is \emph{piecewise-algebraic
+within each region} (sub-eigenvalues on each side of $\rho = 1/2$
+satisfy local $P_\text{left}(\rho, \mu) = 0$ and $P_\text{right}(\rho,
+\mu) = 0$) but is not algebraic globally.  This is the
+\emph{piecewise} tier of Paper~18 Table~II (Paper~18 \S~IV.4),
+structurally distinct from the algebraic-implicit tier of Level~3.
+\smallskip
+
+The two transcendental regimes share the same operator-level shape
+(linear matrix pencil) but differ in how the $R$-dependence enters
+the pencil coefficients.  Level~3 admits a single global polynomial
+because $V^\text{coupling}$ is $R$-independent; Level~4 does not
+because $V^\text{coupling}(\rho)$ carries piecewise $\rho$-dependence
+inherited from the two-center nuclear charge function.\\
+\textbf{Used in:} Paper~13 (He hyperspherical, $l_\text{max}=2$--$7$
+coupled-channel convergence to $0.022\%$ raw at $l_\text{max}=7$,
+$0.004\%$ with Schwartz cusp correction at $l_\text{max}=4$ via the 2D
+variational solver, Track~DI v2.6.0); Paper~15 (H$_2$ Level~4,
+$96.0\%$ $D_e$ at $l_\text{max}=6$ $\sigma+\pi$ with 61 coupled
+channels); Paper~17 (composed-geometry diatomics and polyatomics,
+where the Level~3 and Level~4 coupled-channel solvers run on each
+electron group's natural geometry block); Paper~18 \S~IV.4 (this
+projection is where the algebraic-implicit and piecewise tiers live
+at operator level); production solver modules
+\texttt{geovac/hyperspherical.py} (Level~3) and
+\texttt{geovac/level4\_multichannel.py} (Level~4).\\
+\textbf{Empirical anchor:} He hyperspherical at Level~3 reaches
+$0.019\%$ error (Track~DI v2.6.0, Sprint~1; 2D variational solver on
+$S^5$ with $l_\text{max}=7$, $n_R=35$, self-consistent cusp
+correction; the underlying coupled-channel pipeline supplies the
+adiabatic curves $\mu_\nu(R)$ that the variational ansatz interpolates
+across).  H$_2$ at Level~4 reaches $96.0\%$ $D_e$ at $l_\text{max}=6$
+$\sigma+\pi$ with $61$ coupled channels and Schwartz cusp correction
+(Paper~15, Track~X v2.0.14).  Graph-native CI on the He pair-state
+lattice at $n_\text{max}=9$ ($3{,}927$ configurations, exact algebraic
+float integrals) reaches $0.20\%$ (Paper~13, Track~DI Sprint~3C) ---
+this is the SAME observable computed by a different projection chain
+(direct full-CI on the discrete graph, bypassing
+\S~\ref{sec:proj_coupled_channel} entirely) and serves as an
+independent transcendental-content cross-check: the residual matches
+the small-$Z$ graph-validity-boundary artifact, not the Schwartz
+cusp tail, demonstrating that the algebraic-implicit transcendental
+content of $\mu_\nu(R)$ is captured cleanly by both the coupled-channel
+and the graph-CI projection chains.\\
+\textbf{Honest scope.}  This is non-adiabatic correction territory.
+The bare adiabatic curve set $\{\mu_\nu(R)\}$ ignores the
+$\partial_R$ acting on the parameterized angular wavefunctions
+$\Phi_\nu(R; \hat{\Omega})$; capturing that derivative requires the
+Hellmann--Feynman P-matrix $P_{\mu\nu}(R) = \langle \Phi_\mu(R) |
+V^\text{coupling} | \Phi_\nu(R) \rangle / (\mu_\mu(R) - \mu_\nu(R))$
+and the closure-approximated $Q_{\mu\nu}(R) \approx \sum_\kappa
+P_{\mu\kappa} P_{\kappa\nu}$ in the coupled radial equations (Paper~13
+§XIII.A, Eqs.~70--71).  Both quantities are exact at every $R$ in the
+algebraic spectral basis (no finite-difference noise) but the closure
+sum runs over an in-principle-infinite set of intermediate channels
+$\kappa$; in practice it is truncated together with the included
+channel set.
+
+The framework's 2D variational solver
+(\texttt{geovac/level3\_variational.py} for He, the
+\texttt{level4\_method=\textquotesingle variational\_2d\textquotesingle}
+path for Level~4; Paper~15 §VI.4) bypasses adiabatic factorisation
+entirely by treating $R$ and the angular coordinate simultaneously in
+a single tensor-product basis.  This is structurally a different
+projection altogether: it removes the Born-Oppenheimer
+\S~\ref{sec:proj_adiabatic_BO} step, so the adiabatic curve
+family of the present projection never appears.  It comes at the cost
+of giving up the channel-by-channel decomposition that makes the
+adiabatic picture chemically interpretable.  Both routes are
+legitimate; the choice between them is a Layer-2 control of which
+projections the chain commits to.
+
+Algebraic registry status (CLAUDE.md §12): hyperradial overlap and
+kinetic matrices $S, K$ are fully algebraic at Levels~3 and~4 via the
+three-term Laguerre recurrence (Track~H, v2.0.10; pentadiagonal $M_2$
+moment matrix for $S$, tridiagonal derivative kernel for $K$,
+machine-precision agreement with quadrature).  The effective radial
+potential matrix elements $V^\text{eff}(R)$ are algebraic at
+$l_\text{max} = 0$ (single Stieltjes moment seed $e^a \cdot E_1(a)$;
+Track~P2, v2.0.13) and numerical-required at $l_\text{max} \geq 1$
+because of a radical obstruction --- the discriminant $\sqrt{\Delta(R)}$
+enters at $l_\text{max}=1$ and Cardano-type irrationals at
+$l_\text{max}=2$.  Pointwise diagonalisation at each $R$ to extract
+$\{\mu_\nu(R)\}$ is the residual numerical step that survives all the
+upstream algebraic optimisation, and it is irreducible in the sense
+that the algebraic curve $P(R, \mu) = 0$ describes the eigenvalues
+implicitly without admitting a closed-form root extraction.  Spectral
+Laguerre at Level~2 is fully algebraic (one transcendental seed
+$e^a \cdot E_1(a)$, Track~J v2.0.10) and provides the cleanest
+reference case --- the moment the radial coordinate becomes the
+\emph{family index} of an eigenvalue problem rather than the argument
+of a single function, the framework crosses from purely algebraic
+into algebraic-implicit or piecewise-smooth content.\\
+\textbf{Structural reading.}  Categorically distinct from its parent
+\S~\ref{sec:proj_adiabatic_BO}: the Born-Oppenheimer projection
+produces the parameterised Hamiltonian $H_\text{el}(R)$ and commits to
+the slow/fast separation as a structural assumption, but it does not
+itself solve the eigenvalue problem at each $R$.  The present
+projection makes that commitment: it converts a family of operators
+into a family of channel functions plus a non-adiabatic coupling
+matrix.
+
+This is the projection that names the \emph{transcendental boundary}
+of the framework's algebraic structure.  Levels~1 and~2 (the latter
+in $\sigma$ states, where the algebraic Laguerre matrix elements give
+a single transcendental seed and no others) are fully algebraic in
+the strong sense.  Higher levels are not, and the failure mode is
+this projection: the moment one indexes an eigenvalue problem by a
+continuous radial coordinate, the eigenvalue itself becomes an
+algebraic-implicit function (Level~3) or a piecewise-smooth function
+(Level~4) of that coordinate.  The Level~3 case is mild --- the
+implicit function admits a global polynomial description and shares
+its transcendental content ring $\mathbb{Q}(\pi, \sqrt{2})$ with the
+upstream calibration and embedding constants, introducing no new
+transcendentals at the $R$-dependence step.  The Level~4 case is
+stronger: the piecewise structure is irreducible (Track~S) and the
+function does not admit a global polynomial description, although it
+remains piecewise-algebraic within each region.
+
+The distinction matters for the broader projection taxonomy because
+it splits what Paper~34 \S~\ref{sec:proj_molframe} calls
+``piecewise-smooth in $R$ at the adiabatic potential level'' into two
+different transcendental classes.  Level~3 is algebraic-implicit and
+satisfies $P(R, \mu) = 0$ globally; Level~4 is piecewise-smooth and
+does not.  Paper~18 §IV.4 already separates these tiers in its
+exchange-constant taxonomy (the ``alg.\ (implicit)'' row for Level~3
+hyperspherical, the ``piecewise'' row for Level~4 mol-frame); the
+present projection is where that taxonomic split lives at the
+projection-chain level, and the two tiers should arguably warrant
+distinct three-axis-dictionary rows in
+Table~\ref{tab:projection_axes} (algebraic-implicit at Level~3,
+piecewise-smooth at Level~4) rather than the single ``piecewise''
+entry currently logged for \S~\ref{sec:proj_molframe}.  Whether to
+split or keep them merged is a documentation-discipline question; the
+operator-level distinction is unambiguous regardless of how the table
+is presented.
+
+Sibling to \S~\ref{sec:proj_spectral_action} in the structural sense
+that both rely on a continuous parameter ($\Lambda$ for the spectral
+action, $R$ for the adiabatic curve) to label a one-parameter family
+of finite-rank spectral problems; categorically distinct from
+\S~\ref{sec:proj_restmass} (which introduces $m^2 \in \mathbb{Q}$ as a
+ring-preserving scalar shift on $D^2$, not as a family index of an
+eigenvalue problem) and from \S~\ref{sec:proj_observation} (which
+introduces $\beta = 1/T$ as a compactification radius rather than as
+a Hamiltonian parameter).  The genuine peer projection is
+\S~\ref{sec:proj_molframe}, which provides the radial coordinate that
+the present projection then converts into the family index of the
+adiabatic curve set.
+

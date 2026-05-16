@@ -7,6 +7,68 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.41.0] - 2026-05-15
+
+### Added — Paper 34 dictionary-completion arc (Sprints 1+2+3): 19→28 projections, structural completeness confirmed
+
+Three-sprint arc closing the textbook-completeness, axis-completeness, and scoping-completeness gaps in Paper 34's projection dictionary. The dictionary grew 19 → 25 → 28 → 28 over a single day, with Sprint 3 confirming structural completeness via three ABSORBED-verdict scoping memos. No production code modified.
+
+**Sprint 1 — textbook-completeness (six already-used-but-unnamed projections promoted to §III entries).**
+
+Six entries added (§III.20–§III.25) as transcription of pre-existing framework structures the framework had been using implicitly:
+
+- §III.20 **Phillips–Kleinman / core–valence orthogonality** (`sec:proj_phillips_kleinman`) — Layer-2→Layer-2 input class, sibling of §III.17/18/19 with external data = frozen-core orbitals. Variables: {φ_c, E_c} core orbitals. Honest scope explicit: PK is essential (Track CB rules out cross-block-ERI substitution at 29% error); same-center PK closes orthogonality cleanly at l_max=2; cross-center PK (Paper 19 §6) reduces W1c-residual NaH overattraction by 14.6% but does NOT close the wall — wrong-valence-basis remains the structural gap.
+- §III.21 **Multipole expansion / Gaunt termination** (`sec:proj_multipole_gaunt`) — Layer-1→Layer-1 workhorse. Variables: L (integer ≤ 2 l_max). Exact termination via Wigner-3j triangle inequality, not asymptotic. Underwrites Paper 22 angular sparsity theorem and Paper 14 O(Q^2.5) Pauli scaling.
+- §III.22 **Bipolar harmonic / Drake combining** (`sec:proj_bipolar_drake`) — multi-electron sibling of Wigner 3j with rank-K bipolar tensor coupling. Pure rational over ℚ[√(2k+1)]_k. Empirical anchor He 2³P fine structure dominant intervals at NIST precision (P0-P1 −0.014%, P0-P2 −0.20%) with sympy-exact angular content via Drake combining (3/50, -2/5, 3/2, -1). Internal-multi-focal angular-only mechanism: Roothaan termination at L_max = 2 l_max holds independent of focal-length ratio Z_eff(1s)/Z_eff(2p)=2.
+- §III.23 **Symmetry projection / Young tableau** (`sec:proj_symmetry_tableau`) — character-based S_N projector. Variables: irrep tableau λ. Zero transcendental content (integer characters, projector entries in ℤ/N!). Where Pauli antisymmetry enters the framework explicitly rather than implicitly.
+- §III.24 **Adiabatic / Born–Oppenheimer** (`sec:proj_adiabatic_BO`) — scale-separation between slow nuclear and fast electronic degrees of freedom. Variables: R (slow coordinate), m_e/M_n (small parameter). Distinct from §III.14 rest-mass (single-particle rescaling) and from §III.25 coupled-channel (which solves the parameterized problem this projection creates).
+- §III.25 **Coupled-channel / adiabatic curve** (`sec:proj_coupled_channel`) — where the transcendental boundary lives: algebraic-implicit μ(R) at Level 3 (over ℚ(π,√2)), piecewise-smooth at Level 4 (split-region Legendre factors break global polynomial). The matrix-pencil shape survives both levels; what differs is the R-dependence of V^coupling.
+
+**Sprint 2 — axis-completeness (three structurally-distinct projections filling the V/D/transcendental grid).**
+
+Three entries added (§III.26–§III.28) closing the axis-grid completeness identified by the TX-A audit:
+
+- §III.26 **Gauge choice (Coulomb / Lorenz / Feynman)** (`sec:proj_gauge_choice`) — second independence witness alongside §III.11 vector-photon promotion in the (no-variable, no-dimension, transcendental-only) corner of the V/D/transcendental axis grid. The transcendental-only corner is the gauge sector of the framework. Honest scope: gauge-invariance has not been tested across competing gauges; framework runs implicitly in Coulomb gauge throughout Papers 28, 30, 33.
+- §III.27 **Wick rotation / signature change** (`sec:proj_wick_rotation`) — promotes the Bisognano-Wichmann reading from §VIII open-question candidate to a named §III slot. Same M1 generator as §III.15 observation/temporal-window (both inject 2π via Vol(S¹)), structurally distinct mechanism (analytic continuation vs Euclidean compactification). Empirical anchor: four-witness Wick-rotation theorem (Hawking + Sewell + BW + Unruh). Honest scope: structural correspondence at metric-functional level, NOT literal identification; operator-system-level extension is the named open question.
+- §III.28 **Apparatus identity / state-side reduction** (`sec:proj_apparatus_identity`) — first state-side entry in the dictionary; all prior 27 operate on spectral data (D, H, A). Opens the state-side complement via von Neumann entropy / density matrix / Gibbs ensembles. Empirical anchors: Sprint TD Track 2 (S_thermo = k_B · S_microstate to machine precision across H/He/Li⁺); Sprint TD Track 5 PSLQ negative (state-side categorically distinct from master Mellin engine M1∪M2∪M3 at coefficient ceiling up to 10⁶). The spectral/state divide is the deepest taxonomic split in the dictionary.
+
+**Sprint 3 — scoping completeness (three ABSORBED verdicts, dictionary stays at 28).**
+
+Three diagnostic-only scoping memos returned ABSORBED for all three candidates, confirming structural completeness at 28:
+
+- **T10 Tomita-Takesaki modular flow** → absorbed into §III.15 BW-reading footnote + §III.27. Framework-internal realization (modular Hamiltonian K on T_{n_max}) named as the operator-system-level Lorentzian extension open question in §VIII (4-8 weeks of NCG work / Paper 38 lemmas lift).
+- **T11 Loop expansion / α-power-sorting** → absorbed into §III.6 + §III.11 + §III.16 + §III.26. The α-power index n in iterations of §III.6 counts loop order; per-iteration transcendental content is already named at existing entries. The renormalization-counterterm gap (Z_2/δm from GeoVac-internal structure) is the natural future-direction *separate* projection candidate — not "loop expansion" itself.
+- **T12 Heat-kernel regularization / Schwinger proper-time** → absorbed into §III.6 with master Mellin engine framing now explicit in §III.6 Structural reading paragraph. §III.6 is the k=2 sub-case of the master Mellin engine of Paper 32 §VIII / Paper 18 §III.7; M1 (k=0) and M3 (k=1) recovered from the same Mellin technology at other §III entries. The Mellin transform itself is the meta-mechanism evaluator, not a §III peer.
+
+**Structural findings collected across the arc:**
+
+- Transcendental-only corner of V/D/transcendental axis grid: from 1 → 3 independent witnesses (vector-photon, gauge choice, Wick rotation). The §IV V/D-correlation Observation now identifies this corner as "the gauge-and-signature sector of the framework."
+- Spectral/state divide is the deepest taxonomic split in the dictionary — sharper than V/D/transcendental, sharper than Layer-1/Layer-2, sharper than M1/M2/M3 sub-mechanism partition.
+- Master Mellin engine framing now explicit at §III level. §III.6 Structural reading names §III.6 as the k=2 sub-case of the engine with M1/M3 recovered at k=0/k=1 at other §III entries.
+- Renormalization-counterterm gap (Z_2/δm) flagged as natural future-direction projection target (separate from "loop expansion").
+- §VIII open-question entries restructured: (i) operator-system-level Lorentzian extension (deepens §III.27, replaces former candidate-Lorentz-boost-projection entry); (ii) candidate state-side dictionary enumeration (six future state-side candidates named).
+
+**Files modified:**
+
+- `papers/observations/paper_34_projection_taxonomy.tex` — 9 new §III subsections (§III.20–§III.28), 9 new §IV table rows, abstract count 19→28, §III boundary preamble extended, §IV V/D-correlation Observation extended (three witnesses in transcendental-only corner), §IV table caption + base-units caption extended, §X open-questions list reorganized with (a)/(b)/(c)/(d) plus Sprint 3 (s1)/(s2)/(s3) closure paragraph, §VIII Lorentz-boost candidate rewritten as "Operator-system-level Lorentzian extension", new §VIII "Candidate state-side dictionary enumeration" entry, §III.6 Structural reading paragraph added with master Mellin engine framing, §III.15 BW-reading footnote extended with Tomita-Takesaki naming, §III.27 honest scope + structural reading complete, §III.28 first state-side entry complete, §XI Conclusion with three Sprint paragraphs. Three small inline fixes during integration: T1 `sec:dead_ends_inherit` → CLAUDE.md §3 text reference; T5 `\bm{R}/\bm{r}` → `\vec{R}/\vec{r}` (no bm package loaded); T5 `sec:proj_adiabatic_BO` self-references → `sec:proj_coupled_channel`; T9 four label/macro fixes; two unicode α → `$\alpha$`. Total: 4,755 → 6,754 lines (+1,999 / +42%). Compiles to 86-page PDF.
+- `CLAUDE.md` — §6 Paper 34 inventory entry (both occurrences) extended with all three sprint contributions; §11 lookup table gained 9 new rows for §III.20–§III.28 + 2 open-question rows + 3 Sprint 3 absorption rows; Lorentz-boost candidate references updated 20th→26th and then absorbed into operator-system-level Lorentzian extension.
+
+**Files created (institutional record):**
+
+- `debug/sprint1_drafts/track_{1..6}_*.tex` — six §III subsection drafts
+- `debug/sprint2_drafts/track_{7..9}_*.tex` — three §III subsection drafts
+- `debug/sprint3_drafts/track_{10..12}_*_scoping_memo.md` — three scoping memos (~2,300-2,400 words each)
+
+**Open follow-ups (flagged in §VIII):**
+
+- (a) Mellin / heat-kernel at fractional s (pre-Sprint-1, still pending; Sprint 3 T12 confirmed structurally separate from heat-kernel absorption)
+- (b) Direction-resolved Hodge decomposition of vector-photon edges (pre-Sprint-1, may be partially absorbed by §III.26 gauge-choice in Coulomb gauge)
+- (c) Operator-system-level Lorentzian extension (6-12 months NCG work)
+- (d) State-side dictionary enumeration (mutual information, conditional entropy, fidelity, trace distance, relative entropy, Wasserstein-Kantorovich — natural Sprint 4 candidate)
+- T3 28×28 composition table audit flagged for next TX-A audit
+- §III.26 gauge-invariance empirical test (compute LS-1 in Feynman gauge, verify framework-precision agreement) — 2-4 weeks if pursued
+- Renormalization-counterterm projection (construct Z_2/δm from GeoVac-internal structure) — future-direction projection candidate distinct from loop-expansion
+
 ## [2.39.0] - 2026-05-10
 
 ### Added — Sprint Unruh-pendant + §V.D-prediction (post-2026-05-09 evening synthesis)

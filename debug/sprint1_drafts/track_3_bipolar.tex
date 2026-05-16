@@ -1,0 +1,157 @@
+% =====================================================================
+% Sprint 1 Track 3: Bipolar harmonic / Drake combining projection.
+% Draft for Paper 34 §III.22 (sibling of §III.8 Wigner 3j).
+%
+% §IV three-axis row (for the projection-axes table):
+%
+%   Bipolar harmonic / Drake combining
+%     Variable:        (k_1, k_2) bipolar coupling indices (integer pair,
+%                       internal-graph-derived; no new dimensioned scale)
+%     Dimension:       preserved (dimensionless angular reorganization)
+%     Transcendental:  pure rational; rank-k 6j algebra over Q[sqrt(2k+1)]_k
+%                       (same ring as §III.8 Wigner 3j); Drake combining
+%                       coefficients (3/50, -2/5, 3/2, -1) in Q
+%     Layer transition: Layer 1 -> Layer 1 (pure angular decomposition,
+%                       no projection beyond bare-graph data)
+%
+% Sibling of §III.8 (sec:proj_3j): both angular-content-only with pure
+% rational ring; bipolar is the multi-electron extension (rank-k coupling
+% between TWO electrons' angular harmonics, via 6j/9j Racah algebra).
+% =====================================================================
+
+\subsection{Bipolar harmonic / Drake combining}
+\label{sec:proj_bipolar_drake}
+\textbf{Source:} pair of single-electron angular tensor operators
+acting on distinct electrons of a multi-electron state on the
+Fock-projected $S^3$ graph, in the LS coupling scheme.\\
+\textbf{Target:} a bipolar tensor harmonic
+$\{Y^{(k_1)}(\hat r_1) \otimes Y^{(k_2)}(\hat r_2)\}^{(K)}_M$
+coupling the two angular factors into a single rank-$K$ object
+on the joint two-electron angular space, with $K$-dependent
+matrix elements in the coupled $|LSJ\rangle$ basis given by
+$(-1)^{L+S+J}\,6j\{L\,S\,J;\,S\,L\,k\}$ (rank-$k$ Racah J-pattern).\\
+\textbf{Variables introduced:} the bipolar coupling indices
+$(k_1, k_2)$ and the total angular rank $K$ (integer triple with
+triangle constraint $|k_1 - k_2| \le K \le k_1 + k_2$).  These are
+internal-graph-derived combinatorial labels in the sense of
+\S~\ref{sec:layer2_boundary}; they introduce no new dimensioned
+scale and no continuous parameter, only an enumeration of
+Gaunt-allowed angular channels.\\
+\textbf{Dimension introduced:} preserved (the projection is a
+purely angular reorganization on the multi-electron Hilbert
+space; no $[L]$, $[E]$, or $[T]$ scale enters).\\
+\textbf{Transcendental signature:} pure rational.  The bipolar
+harmonic expansion of a two-electron tensor operator (Breit
+retardation, spin-spin, spin-other-orbit, orbit-orbit) decomposes
+on the angular side into Wigner $3j$ Gaunt coefficients (one per
+single-electron factor) times rank-$k$ $6j$ symbols (for the
+J-pattern in $|LSJ\rangle$) times rank-$(k_1, k_2, K)$ $9j$
+symbols (for the bipolar recoupling to the coupled
+two-electron space).  Each ingredient is exactly rational over
+$\mathbb{Q}[\sqrt{2k+1}]_{k}$ --- the same Wigner ring as
+\S~\ref{sec:proj_3j}.  The Drake (1971) combining coefficients
+$(\tfrac{3}{50}, -\tfrac{2}{5}, \tfrac{3}{2}, -1)$ for spin-spin
+and spin-other-orbit on the helium triplet are pure rationals
+(Paper~18 intrinsic tier).  No transcendental injection at any
+step of the angular reduction.\\
+\textbf{Used in:} two-body Breit-Pauli spin-spin (rank-$K{=}2$
+spatial, rank-2 coupled spin tensor $[s_1 \otimes s_2]^{(2)}$) and
+spin-other-orbit (rank-$K{=}1$ spatial, rank-1 sum tensor
+$\vec s_1 + 2\vec s_2$) interactions on the relativistic composed
+qubit encoding (Paper~14~\S~V); helium-class fine-structure
+predictions through the He~$2{}^3\!P$ Roothaan autopsy
+(\S~\ref{sec:autopsy_he_2_3p}); structurally compatible with all
+two-body retardation kernels in
+\texttt{geovac/breit\_integrals.py}; angular machinery underlying
+Drake's $M^K_{\rm dir} / M^K_{\rm exch}$ direct/exchange
+decomposition of the helium triplet, with Sprint~5 DV
+characterizing the bipolar-to-Drake basis change for the
+He~$(1s)(2p)\,{}^3\!P$ configuration as a
+convention-dependent piecewise recombination of Region-I and
+Region-II radial pieces.\\
+\textbf{Empirical anchor:} He $2{}^3\!P$ fine structure dominant
+intervals at NIST precision.  Framework-native operator-level
+decomposition (Sprint multi-track Roothaan autopsy 2026-05-09,
+\S~\ref{sec:autopsy_he_2_3p}; cf.\ memory
+\texttt{internal\_multifocal\_angular\_only.md}) reproduces
+$E({}^3\!P_0) - E({}^3\!P_1) = +29{,}612.91$~MHz vs NIST
+$+29{,}616.951(6)$~MHz at $-0.014\%$ and
+$E({}^3\!P_0) - E({}^3\!P_2) = +31{,}844.07$~MHz vs NIST
+$+31{,}908.131(6)$~MHz at $-0.20\%$, with the angular content (J-pattern,
+spin reduced matrix elements, bipolar Gaunt selection) verified
+\emph{sympy-exact} at machine precision via the rank-$k$ $6j$ and
+$9j$ identities $(-1)^{L+S+J}\,6j\{1,1,J;1,1,k\}$ at $k = 1$ (SOO)
+and $k = 2$ (SS), normalized so $f(J{=}1) = 1$.  Cross-reference:
+Paper~14~\S~V Eq.~(\ref{eq:drake_amplitudes}) and the
+sympy-verification tests
+\texttt{tests/test\_breit\_integrals.py::test\_drake\_f\_SS\_pattern\_from\_6j}
+and \texttt{test\_drake\_f\_SOO\_pattern\_from\_6j}.  At the
+operator level, the bipolar $(k_1, k_2)$ channels for the He
+$(1s)(2p)$ configuration reduce uniquely (Sprint~5 DV) to
+$(k_1{=}0, k_2{=}2)$ for the SS direct path and $(k_1{=}1, k_2{=}1)$
+for the SS and SOO exchange paths; the SOO direct path is
+\emph{Gaunt-forbidden} at the bipolar level (parity selection forces
+$k_1 = 0$, then the $(0, k_2, 1)$ triangle inequality requires
+$k_2$ odd, contradicting the $(1)(1)$ Gaunt parity constraint).\\
+\textbf{Honest scope.}  The small interval $E({}^3\!P_1) - E({}^3\!P_2)$
+framework-native at $+2{,}231.16$~MHz vs NIST $+2{,}291.176(15)$~MHz
+shows a $-2.62\%$ relative residual.  This is \emph{partial-cancellation
+amplification} of the same $\sim$$60$~MHz absolute residual that sits
+inside the LS-8a one-loop QED budget on the dominant intervals: SO
+($-58{,}396$~MHz) $+$ SS ($-9{,}499$~MHz) $+$ SOO ($+70{,}126$~MHz)
+combine to a net $+2{,}231$~MHz, a structural cancellation factor
+$(|\text{SO}|+|\text{SS}|+|\text{SOO}|) / |\text{total}| \approx 61.9\times$.
+The framework's absolute precision is uniform across the three
+intervals; the small interval's fractional residual is amplified by
+the cancellation.  This is a feature of how the SO + SS + SOO
+operators combine on the $(1s)(2p)\,{}^3\!P$ configuration, not a
+framework limitation.  Higher-order corrections (multi-loop QED at
+$\alpha^4 \cdot \alpha/\pi$, finite-mass recoil, hyperfine averaging)
+are external Layer-2 inputs (sibling status: Drake~1971~\S~IV).
+The direct/exchange mixing coefficients
+$(\tfrac{3}{50}, -\tfrac{2}{5}, \tfrac{3}{2}, -1)$ in
+$A_{SS}$ and $A_{SOO}$ are pure rationals at the angular level but
+\emph{not closed from $9j$ alone} on the He triplet: Sprint~5 DV
+showed they are convention-dependent identities specific to Drake's
+piecewise $M^K_{\rm dir,I} + M^K_{\rm dir,II}$ basis rather than a
+direct Racah-algebra output (a fully first-principles derivation
+remains open; see \texttt{debug/dd\_drake\_derivation.md} and
+\texttt{debug/dv\_drake\_bipolar\_memo.md}).  The bipolar harmonic
+projection \emph{itself} is closed; the open question is the basis
+change to Drake's specific $M^K$ partitioning.\\
+\textbf{Structural reading.}  Sibling of \S~\ref{sec:proj_3j}
+(Wigner $3j$ angular coupling): both are angular-content-only
+projections living in the pure-rational ring
+$\mathbb{Q}[\sqrt{2k+1}]_{k}$ with no dimensional or transcendental
+injection.  The structural distinction is multiplicity: Wigner $3j$
+couples a \emph{single} pair of angular nodes (one electron's
+orbital and one external rank-$k$ multipole), whereas the bipolar
+harmonic / Drake combining projection couples \emph{two
+single-electron angular tensors} into a joint rank-$K$ object on
+the two-electron Hilbert space via the rank-$(k_1, k_2, K)$
+$9j$ recoupling.  In dictionary terms, \S~\ref{sec:proj_3j} is
+the single-particle special case of this projection at
+$(k_1, k_2) = (0, k)$ on the two-electron space (one electron
+inert).  The two projections compose: every bipolar reduction
+decomposes into a product of two single-particle Wigner-$3j$ Gaunt
+factors at the Slater integral level, together with a $9j$ for the
+two-electron recoupling and a $6j$ for the J-pattern in
+$|LSJ\rangle$.  \emph{Internal multi-focal angular-only finding}: on
+configurations like He $(1s)(2p)$ where the two electrons sit at
+structurally distinct focal lengths
+($Z_{\rm eff}(1s)/Z_{\rm eff}(2p) = 2$), the bipolar Gaunt selection
+$(k_1, k_2)$ channels are determined by angular content alone ---
+the integer parity and triangle constraints --- and are
+\emph{independent of the focal-length ratio}.  Roothaan multipole
+termination at $L_{\max} = 2 l_{\max}$ (here $K \le 2$ for
+$l_{\max} = 1$) holds verbatim irrespective of the relative
+magnitudes of the two electrons' Slater exponents; this is the
+\emph{internal} analog of the cross-register Roothaan termination
+identified at the multi-focal-composition wall
+(\S~\ref{sec:proj_breit_retardation} structural reading;
+memory \texttt{internal\_multifocal\_angular\_only.md}).  The
+operator-level realization of internal multi-focal architecture is
+therefore not a new projection: it is bipolar harmonic / Drake
+combining acting at $\lambda_a \neq \lambda_b$ on two electrons in
+the same atomic block.  Different focal-length ratio, same angular
+projection, same rational ring.

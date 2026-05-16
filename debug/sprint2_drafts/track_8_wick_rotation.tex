@@ -1,0 +1,298 @@
+% ============================================================================
+% Paper 34 Sprint 2 Track 8 draft: Wick rotation / signature change
+%
+% Target slot: §III.27 (between gauge-choice §III.26 and apparatus identity
+%               §III.28 in Sprint 2's planned numbering)
+% Label: sec:proj_wick_rotation
+%
+% §IV three-axis dictionary row (for PM integration into the §IV table):
+%   Projection   : Wick rotation / signature change
+%   Variables    : signature (binary: Riemannian Euclidean / Lorentzian
+%                  Minkowskian); rapidity parameter not introduced here
+%                  (full Lorentz-boost projection at the operator-system
+%                  level is the open extension)
+%   Dimension    : preserves (analytic continuation; the physical observable
+%                  carries the same dimension on both sides, only the
+%                  interpretation changes)
+%   Transcendental: $2\pi \cdot \mathbb{Q}$ via $\mathrm{Vol}(S^1)$ on the
+%                  Euclidean time circle (M1 Hopf-base measure mechanism;
+%                  same generator as §III.15 observation/temporal-window,
+%                  structurally distinct projection: analytic continuation
+%                  vs Euclidean compactification)
+%   Layer        : Layer 2 → Layer 2 (operates on the already-projected
+%                  Euclidean spectral triple, not on the bare graph)
+%
+% Cross-references used:
+%   - sec:proj_observation (sibling: same M1 generator, different mechanism)
+%   - sec:proj_restmass (Dirac single-particle γ factor distinct from
+%                        signature-change content)
+%   - sec:proj_spectral_action (M1 mechanism on heat-kernel trace)
+%   - sec:layer2_boundary (Layer-2 projection class)
+%   - Paper 32 §VIII Remark rem:bisognano_wichmann_reading (text reference)
+%   - Paper 35 §VIII subsec:bisognano_wichmann_reading (text reference)
+%   - Paper 35 §VIII subsec:unruh_pendant (text reference)
+%
+% §VIII open-question REWORDING RECOMMENDED for PM integration:
+% The current §VIII open-question entry "Lorentz boost as a candidate
+% twenty-sixth projection" (~lines 5335-5510 of paper_34_projection_taxonomy.tex)
+% should be reworded to reflect that the metric-functional-level Wick rotation
+% has been promoted to §III.27, and that the open question is now the full
+% operator-system-level Lorentzian extension (Lorentzian propinquity,
+% modular Hamiltonian computation at finite n_max, full Lorentz-boost
+% projection between rapidities). The numbering "twenty-sixth" becomes
+% structurally awkward post-promotion; the entry should be renamed something
+% like "Operator-system-level Lorentzian extension" and recast as the open
+% deepening of §III.27 rather than as an entirely separate candidate. The
+% Bisognano-Wichmann reading content from that §VIII entry is now subsumed
+% by §III.27's "Empirical anchor" and "Honest scope" paragraphs.
+% ============================================================================
+
+\subsection{Wick rotation / signature change}
+\label{sec:proj_wick_rotation}
+\textbf{Source:} the framework's bare spectral-triple machinery on
+the Fock-projected $S^3$ graph (or any natural-geometry Euclidean
+spectral triple, including the $T_{S^3} \otimes T_{S^1_\beta}$
+tensor-product construction of Sprint TD Track~1).  By construction
+every operator in the GeoVac inventory ---
+Camporesi--Higuchi Dirac on round $S^3$, Bargmann--Segal heat
+kernel on $S^5$, Wilson plaquette functionals on Hopf graphs, all
+$\zeta_R(2k)$ values entering through $\zeta_{D^2}$ on closed
+Riemannian manifolds --- is computed in Euclidean (Riemannian)
+signature.\\
+\textbf{Target:} the Lorentzian (Minkowski-signature) physical
+observable obtained by analytic continuation
+$\tau \to i t$, $\beta \to i \beta$ on the imaginary-time circle
+(or proper-time circle in the Rindler case).  Concrete instances
+under the Wick-rotation chain
+[Hartle--Hawking 1976]~$\to$~[Sewell 1982]~$\to$~[Bisognano--Wichmann
+1976]~$\to$~[Unruh 1976]:
+the Hartle--Hawking KMS state at
+$\beta_{\mathrm{cigar}} = 8\pi M$ on the Euclidean Schwarzschild
+cigar continues to the Hawking thermal state on the Lorentzian
+Schwarzschild exterior at $T_H = 1/(8\pi M)$; the periodic
+Euclidean Rindler coordinate $\eta_E$ with period $2\pi$ continues
+to the Lorentzian Rindler boost at acceleration $a$, with the
+accelerated-observer Unruh temperature $T_U = a/(2\pi)$; the modular
+automorphism of the algebra of observables localized in a Lorentzian
+Rindler wedge, with respect to the Minkowski vacuum, is identified
+by Bisognano--Wichmann with the unitary representation of the Lorentz
+boost subgroup preserving the wedge, and the analytic period of the
+modular flow is the same $2\pi = \mathrm{Vol}(S^1)$ that appears on
+the Euclidean side.\\
+\textbf{Variables introduced:} the signature index --- a discrete
+binary choice between Riemannian Euclidean and Lorentzian
+Minkowskian.  Structurally analogous to the gauge-choice projection
+(Sprint~2 companion track): a discrete bookkeeping selection that
+fixes how the framework's spectral content is read as a physical
+observable.  Continuous rapidity parameters relating two Lorentzian
+frames at relative velocity $v/c$ are \emph{not} introduced by this
+projection; a full Lorentz-boost projection at the operator-system
+level (acting on all particles simultaneously, relating two truncated
+spectral triples at different observer rapidities) is a separate
+structural extension named in \S~\ref{sec:open}.\\
+\textbf{Dimension introduced:} dimension-preserving.  Analytic
+continuation does not introduce a new $[L]$, $[E]$, $[M]$, or $[T]$
+scale; it changes the interpretation of an already-dimensioned
+quantity from a Euclidean (imaginary-time-periodic) to a Lorentzian
+(real-time-thermal or wedge-modular) reading.  In the V/D/P tagging
+of \S~\ref{sec:dictionary}, the projection sits in the same
+dimension-preserving class as Sturmian reparameterization
+(\S~\ref{sec:proj_sturmian}) and the gauge-choice projection
+(Sprint~2 companion track).\\
+\textbf{Transcendental signature:} $2\pi \cdot \mathbb{Q}$ via
+$\mathrm{Vol}(S^1)$ on the Euclidean time circle (Hopf-base measure /
+M1 sub-mechanism of the master Mellin engine; see Paper~32~§VIII
+Remark on the Bisognano--Wichmann reading and Paper~35~§VIII for the
+framework-level structural correspondence).  Critically:\ this is
+the \emph{same generator} as the observation / temporal-window
+projection (\S~\ref{sec:proj_observation}), which injects
+$2\pi \cdot \mathbb{Q}$ per Matsubara mode via compactification of
+Euclidean time at finite $\beta = 1/T$.  The two projections share
+the M1 transcendental signature but are \emph{structurally distinct}
+as mechanisms: observation / temporal-window compactifies a single
+Euclidean time direction at finite period $\beta$ and reads out
+finite-temperature observables (Casimir at $T \neq 0$,
+Stefan--Boltzmann free energy, Matsubara loops), whereas Wick
+rotation analytically continues between two signatures and reads out
+Lorentzian observables (Hawking radiation, Unruh thermal bath,
+Bisognano--Wichmann modular flow) from the same Euclidean data.
+Both surface the M1 $2\pi$ on the same $S^1$ factor;
+the structural reading of what that $2\pi$ \emph{means} differs:\
+a Hopf-bundle measure factor on the Riemannian side; a
+modular-flow / Lorentz-boost orbit period on the Lorentzian side
+via the published Wick-rotation prescription.\\
+\textbf{Used in:} the Hawking-temperature off-precision catalogue
+row in \S~\ref{sec:offprecision} (error class C, $M$ external
+Einstein-equations input, machinery-witness only); Sprint TD Track~4's
+reproduction of $T_H = 1/(8\pi M)$ on the Euclidean Schwarzschild
+cigar from M1 alone; Sprint Unruh-pendant's reproduction of
+$T_U = a/(2\pi)$ on the Euclidean Rindler wedge from the same M1
+mechanism; the structural-correspondence reading of
+$\beta = 2\pi / (\text{surface gravity})$ that unifies Hawking,
+Sewell, Bisognano--Wichmann, and Unruh as four faces of a single
+Wick-rotation theorem.  Any future framework-side observable whose
+physical interpretation requires Lorentzian signature (Wightman-class
+expectation value of a real-time-ordered operator product, KMS state
+on a Lorentzian wedge algebra, real-time Schwinger--Keldysh closed
+time contour) consumes this projection.\\
+\textbf{Empirical anchor:} the four-witness Wick-rotation theorem,
+each face reproducing a shared $2\pi = \mathrm{Vol}(S^1)$ from the
+M1 mechanism:\
+(i)~Hawking temperature $T_H = 1/(8\pi M) = \kappa_g / (2\pi)$ on the
+Euclidean Schwarzschild cigar, with surface gravity
+$\kappa_g = 1/(4M)$ (Hartle--Hawking~1976~\cite{hartle_hawking1976};
+Sprint~TD Track~4 reproduces this from M1 with sympy residual zero
+on all three identities $\beta = 8\pi M$, $T_H = \kappa_g/(2\pi)$,
+$\beta = 4M \cdot 2\pi$);
+(ii)~Sewell's identification of the Hartle--Hawking thermal state
+restricted to the Schwarzschild exterior as a KMS state at
+$\beta = 8\pi M$ on a globally hyperbolic Lorentzian manifold with
+a bifurcate Killing horizon~\cite{sewell1982};
+(iii)~Bisognano--Wichmann identification of the modular automorphism
+of the algebra of observables localized in a Rindler wedge, with
+respect to the vacuum state, with the unitary representation of the
+Lorentz boost subgroup preserving the
+wedge~\cite{bisognano_wichmann1976}, with analytic period
+$\sigma_{i \cdot 2\pi} = $ identity forced by Tomita--Takesaki KMS;
+(iv)~Unruh temperature $T_U = a / (2\pi)$ for a uniformly accelerated
+observer at proper acceleration $a$, derived in the same Wick-rotation
+construction with $\beta_{\mathrm{Rindler}} = 2\pi / a$ on the
+Euclidean Rindler $\eta_E$-circle~\cite{unruh1976} (Sprint
+Unruh-pendant reproduces this verbatim with the same M1 mechanism,
+sympy residual zero, lowest bosonic Matsubara mode $= a$, lowest
+fermionic mode $= a/2 = \pi T_U$).
+All four faces reproduce the shared $2\pi$ from the framework's
+M1 Hopf-base measure on the same $S^1$ factor; the published
+Wick-rotation prescription supplies the bridge to the Lorentzian-side
+modular-flow / boost-orbit vocabulary in each case.\\
+\textbf{Honest scope.}  This projection commits to a
+\emph{structural correspondence}, not a literal identification.
+The framework demonstrably reproduces $\beta = 2\pi / \kappa_g$ on
+all four Wick-rotation faces from M1 alone, and the published
+Hartle--Hawking / Sewell / Bisognano--Wichmann / Unruh chain
+identifies that $2\pi$ with the Lorentzian-side modular-flow /
+Lorentz-boost orbit period.  The identification stands on the
+published QFT machinery, which is mature and independently verified.
+The framework does \emph{not} provide an operator-level proof
+internal to the truncated spectral triple
+$\mathcal{T}_{n_{\max}}$:\ the corresponding statement
+(compute the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$
+for a Rindler-wedge-restricted Camporesi--Higuchi state, verify
+$\sigma_{i\cdot 2\pi} = $ identity at finite $n_{\max}$, and take
+the Gromov--Hausdorff limit using the lemmas of Paper~38) is the
+principal falsifier of the structural correspondence, named with
+estimated cost 4--8 weeks and MEDIUM-HIGH priority in Paper~32~§VIII
+Remark on the Bisognano--Wichmann reading.
+
+Two further scope distinctions are required.
+First, \emph{Wick rotation is not the full Lorentzian extension.}
+This projection lifts the framework's metric-functional Riemannian
+output (a Mellin trace, a heat-kernel coefficient, a Wilson
+expectation value) to its Lorentzian analytic continuation in
+cases where the bridge is a single Wick rotation of a temporal
+circle.  It does \emph{not} construct a Lorentzian (Minkowski-signature)
+spectral triple with Krein-space Hilbert space and fundamental
+symmetry $\mathcal{J}^2 = I$; that extension would carry the
+framework's signature index from $(m,n) = (3, 0)$ in the
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+classification to $(3, 1)$.  A clean Lorentz-boost projection at
+the metric / curvature level, acting on \emph{all} particles in the
+system simultaneously and relating two truncated metric spectral
+triples at different observer rapidities, requires that full
+Lorentzian-signature spectral triple plus a Lorentzian analog of
+the Latr\'emoli\`ere propinquity used in Paper~38~\cite{paper38}
+for the WH1 PROVEN result.  The propinquity literature is purely
+Riemannian as of May~2026 (Latr\'emoli\`ere, Toyota,
+Hekkelman--McDonald, Leimbach--van~Suijlekom); constructing a
+Lorentzian propinquity is original NCG-mathematics work at the
+6--12 month scale.  That open extension is flagged in
+\S~\ref{sec:open} and is the structural deepening of this
+\S~\ref{sec:proj_wick_rotation} entry, not a separate candidate.
+
+Second, \emph{distinct from existing $\gamma$-extensions in the
+catalogue.}  The Dirac-sector $\gamma = \sqrt{1 - (Z\alpha)^2}$ in
+the Camporesi--Higuchi spinor lift (\S~\ref{sec:proj_spinor}) is a
+bound-state radial Lorentz factor for a single-particle hydrogenic
+wavefunction in a central potential; it is not a frame
+transformation between two observers, and the Wick rotation
+discussed here does not introduce or modify it.  The rest-mass
+projection (\S~\ref{sec:proj_restmass}) rescales a single particle's
+mass under $m_e \to m_\text{red}$ within Euclidean signature; the
+Breit retardation projection
+(\S~\ref{sec:proj_breit_retardation}) introduces the rest-mass
+ratio $m_l/m_n$ as a two-body kinematic control parameter.  None of
+these is a signature change.  Wick rotation sits structurally above
+all three:\ those projections operate within a fixed Euclidean
+spectral triple; this projection toggles between the Euclidean and
+Lorentzian readings of the \emph{same} computed quantity, with the
+toggle bridged by the published Wick-rotation chain.\\
+\textbf{Structural reading.}  Wick rotation sits in the
+Layer-2~$\to$~Layer-2 class (cf.\
+\S~\ref{sec:layer2_boundary}):\ it operates on already-projected
+Euclidean spectral content, not on the bare graph or its initial
+projection chain.  Structurally it is a
+\emph{metric-functional-level} projection:\ the framework computes a
+Mellin trace, heat-kernel coefficient, or other Euclidean
+spectral-action functional (Paper~32~§VIII case-exhaustion theorem
+ensures the transcendental content is M1, M2, or M3); Wick rotation
+then reads that functional as a Lorentzian physical observable via
+the published Hartle--Hawking / Sewell / Bisognano--Wichmann / Unruh
+chain.
+
+The structural-correspondence-not-literal-identification verdict
+crystallizes the framework's position on Lorentzian physics in
+general:\ at the metric functional level (specifically the M1
+$2\pi = \mathrm{Vol}(S^1)$ signature on a Wick-rotated time circle),
+the framework's Euclidean output IS the Lorentzian modular-flow /
+boost-orbit period, with no extension required.  At the
+operator-system level (Tomita--Takesaki modular automorphism acting
+on the truncated algebra at finite $n_{\max}$, Krein-space
+representation, frame-level Lorentz-boost between truncated metric
+spectral triples at different rapidities), the framework currently
+sees the same $2\pi$ but cannot internally close the period
+identity; that closure is the named open extension.
+
+Three observations distinguish this projection from
+\S~\ref{sec:proj_observation} despite shared M1 generator and
+shared $2\pi$ transcendental content.
+First, mechanism:\ observation / temporal-window compactifies a
+single Euclidean time direction at finite period $\beta = 1/T$ and
+sums Matsubara modes $\omega_k^t = 2\pi k / \beta$; Wick rotation
+analytically continues a Euclidean computation to Lorentzian
+signature without changing the periodicity of the underlying time
+circle.
+Second, target physics:\ observation / temporal-window targets
+finite-temperature observables (Casimir at $T \neq 0$, partition
+functions, Stefan--Boltzmann); Wick rotation targets
+Lorentzian-signature observables read from Euclidean computations
+(Hawking radiation, Unruh thermal bath, BW modular flow).
+Third, falsifier sharing:\ the operator-level falsifier for
+\S~\ref{sec:proj_observation}'s Bisognano--Wichmann footnote
+(closing $\sigma_{i\cdot 2\pi}$ on $\mathcal{T}_{n_{\max}}$) is
+identical to the falsifier for the four faces of this projection,
+because the bridge in every case runs through the same
+KMS--Tomita--Takesaki algebra; one operator-system-level proof
+lifts all four faces simultaneously.  Same structural correspondence,
+same M1 generator, same falsifier, but distinct mechanisms and
+distinct target classes of physical observable.  These are not the
+same projection.
+
+Cross-references:\ Paper~32~§VIII Remark on the Bisognano--Wichmann
+reading documents the spectral-triple-side statement and the
+case-exhaustion-theorem context; Paper~35~§VIII subsection on the
+Bisognano--Wichmann reading of the temporal-window projection
+develops the cigar identification at Hartle--Hawking
+$\beta = 8\pi M$; Paper~35~§VIII subsection on the Unruh pendant
+develops the Rindler-wedge identification at $\beta = 2\pi / a$;
+\S~\ref{sec:proj_observation} carries the original
+Bisognano--Wichmann reading footnote on the temporal-window
+projection.  The structural ground for the present \S~\ref{sec:proj_wick_rotation}
+entry is the Sprint TD Track~4 + Sprint Unruh-pendant + Track~D
+documentation chain (May~2026), which promotes the metric-functional-level
+content of the Wick-rotation reading from a footnote (\S~\ref{sec:proj_observation})
+and an open-question candidate (\S~\ref{sec:open} entry
+on the Lorentz boost; see \S~\ref{sec:open}) to a named projection
+slot in \S~\ref{sec:layer2}.  The full operator-system-level
+Lorentzian extension remains open at the multi-month NCG-mathematics
+scale and is documented as a deepening of this entry, not as a
+separate candidate.

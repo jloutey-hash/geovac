@@ -1,0 +1,154 @@
+%% =====================================================================
+%% Paper 34, §III.21 — Multipole expansion / Gaunt termination
+%% Sprint 1 dictionary-completion draft, Track 2
+%%
+%% Three-axis row (for §IV Table~\ref{tab:projection_axes}):
+%%   Projection:               Multipole expansion / Gaunt termination
+%%   Variables added:          $L$ (multipole order, integer; ranges
+%%                             $0,1,\dots,L_\text{max} = 2 l_\text{max}$)
+%%   Dimension:                preserves (Coulomb kernel re-expressed,
+%%                             each multipole term carries the same
+%%                             $[E]$ dimension as the parent Coulomb
+%%                             matrix element)
+%%   Transcendental signature: none beyond Layer~1; Gaunt $3j$
+%%                             coefficients are exact rationals (live
+%%                             in $\mathbb{Q}[\sqrt{2k{+}1}]_k$ via
+%%                             \S~\ref{sec:proj_3j}); $R^L$ radial
+%%                             integrals are algebraic in the
+%%                             $Z_\text{eff}$-rational basis
+%%   Layer transition:         Layer~1 $\to$ Layer~1 (angular
+%%                             reorganization of the Coulomb kernel,
+%%                             prior to any focal-length projection)
+%%
+%% Cross-references (live in body):
+%%   - §III.8 Wigner $3j$ (sec:proj_3j) — the angular content this
+%%     projection ultimately calls at every vertex
+%%   - Paper~15 §V — split-region Legendre expansion for V_ne at
+%%     Level~4 (where the termination was first stated for the
+%%     molecule-frame hyperspherical solver)
+%%   - Paper~19 §III.C — analytical evaluation via incomplete-gamma
+%%     for cross-center V_ne in the balanced coupled architecture
+%%     (Sprint CD, April 2026; termination verified explicitly at
+%%     $L_\text{max} = 2 l_\text{max}$, 33 terms at $n_\text{max}=2$,
+%%     168 at $n_\text{max}=3$, machine precision)
+%%   - §III.18 (sec:proj_magnetization_density) — sibling angular-only
+%%     projection in the Zemach radial-integrand sense
+%%
+%% Structural notes:
+%%   - The termination is EXACT, not asymptotic — by Wigner-$3j$
+%%     triangle inequality, $G(l_1, L, l_2) = 0$ for $L > l_1 + l_2$.
+%%     No truncation parameter, no UV cutoff, no convergence series.
+%%   - Workhorse projection: used in every multi-electron matrix
+%%     element of $V_{ee}$ and every cross-center $V_{ne}$ matrix
+%%     element across the codebase.
+%%   - Sibling to §III.8 (Wigner $3j$): the multipole expansion is
+%%     the coordinate-side projection that decomposes $1/|r_1 - r_2|$
+%%     into angular content (Gaunt integrals at each vertex, which
+%%     are the §III.8 calls) and radial content ($R^L = \int
+%%     r_<^L / r_>^{L+1}$ radial matrix elements). The two projections
+%%     compose: multipole expansion calls Wigner~$3j$ at every L.
+%% =====================================================================
+
+\subsection{Multipole expansion / Gaunt termination}
+\label{sec:proj_multipole_gaunt}
+\textbf{Source:} bare two-body Coulomb kernel $1/|\vec{r}_1 - \vec{r}_2|$
+(for $V_{ee}$) or $1/|\vec{r} - \vec{R}_B|$ (for cross-center $V_{ne}$)
+acting on a product of angular-momentum eigenstates on the Fock-projected
+$S^3$ graph.\\
+\textbf{Target:} the same kernel re-expressed as a finite sum over
+multipoles
+\begin{equation*}
+  \frac{1}{|\vec{r}_1 - \vec{r}_2|}
+  \;=\; \sum_{L=0}^{L_\text{max}}
+        \frac{r_<^L}{r_>^{L+1}}\, P_L(\cos\theta_{12}),
+\end{equation*}
+with the angular content $P_L(\cos\theta_{12})$ contracted against
+spherical-harmonic vertices via Gaunt integrals
+$G(l_1, L, l_2) = 2 \begin{pmatrix} l_1 & L & l_2 \\ 0 & 0 & 0
+\end{pmatrix}^{\!2}$, i.e.\ Wigner-$3j$ angular coupling
+(\S~\ref{sec:proj_3j}) at each vertex.\\
+\textbf{Variables introduced:} the multipole order $L$ (integer, runs
+$0, 1, \dots, L_\text{max} = 2 l_\text{max}$).  No physical parameter
+is introduced; $L$ is an internal summation index whose upper bound is
+fixed by the angular content of the basis.\\
+\textbf{Dimension introduced:} dimension-preserving.  Each multipole
+term $r_<^L / r_>^{L+1}$ carries the same $[E]$ scaling as the parent
+Coulomb matrix element; the decomposition reorganizes the angular
+content of an existing operator without injecting a new $[L]$, $[E]$,
+$[M]$, or $[T]$ scale.\\
+\textbf{Transcendental signature:} ring-preserving over the Layer~1
+algebraic ring.  The Gaunt $3j$ coefficients live in
+$\mathbb{Q}[\sqrt{2k{+}1}]_k$ (the Wigner-$3j$ ring of
+\S~\ref{sec:proj_3j}); the radial $R^L$ matrix elements are algebraic
+in the hydrogenic / $Z_\text{eff}$-rational basis (Slater-type
+integrals evaluate to rationals at integer screening and to
+incomplete-gamma combinations at fractional screening, per
+\S~\ref{sec:proj_3j} sibling derivations and Paper~19 \S~III.C).  No
+transcendental is introduced at any step.\\
+\textbf{Used in:} essentially every multi-electron matrix element in
+the codebase.  Specific instances: Level~4 mol-frame hyperspherical
+$V_{ee}$ and $V_{ne}$ coupling (Paper~15 \S~V, split-region Legendre
+expansion); cross-center $V_{ne}$ in the balanced coupled architecture
+(Paper~19 \S~III.C; \texttt{geovac/shibuya\_wulfman.py}); single-center
+Slater $F^k$ and $G^k$ integrals at every level (Paper~7 \S~VI.B,
+Paper~12); the Roothaan cross-register $V_{eN}$ kernel at multi-focal
+$\lambda_a \ne \lambda_b$ (\texttt{geovac/cross\_register\_vne.py});
+the multipole structure underlying \S~\ref{sec:proj_tensor_multipole}
+(nuclear rank-$L$ couplings).\\
+\textbf{Empirical anchor:} the multipole expansion underwrites the
+angular sparsity of the Pauli-string Hamiltonian across the catalogue
+(Paper~22 angular sparsity theorem; ERI density $1.44\%$ at
+$l_\text{max} = 3$ depends on the exact $L \leq l_1 + l_2$
+truncation).  Direct numerical verification in Sprint CD (April 2026,
+Paper~19 \S~III.C, Track CD v2.0.39): cross-center $V_{ne}$ for LiH at
+$n_\text{max} = 2$ contributes exactly 33 nonzero one-body matrix
+elements (multipole sum runs $L = 0, 1, 2$, terminates at $L_\text{max}
+= 2$); at $n_\text{max} = 3$, 168 nonzero elements ($L_\text{max} =
+4$).  Machine-precision evaluation via the regularized incomplete
+gamma function (\texttt{scipy.special.gammainc} / \texttt{gammaincc})
+replaces grid-based trapezoid quadrature with zero truncation error at
+the angular level.\\
+\textbf{Honest scope.}  The termination $L \leq L_\text{max} =
+2 l_\text{max}$ is \emph{exact}, not asymptotic.  It is forced by the
+Wigner-$3j$ triangle inequality $|l_1 - l_2| \leq L \leq l_1 + l_2$
+applied to the angular Gaunt integral at each vertex
+(\S~\ref{sec:proj_3j}): for $L > l_1 + l_2$ the $3j$ symbol vanishes
+identically, so the multipole sum has no nonzero contribution past
+$L_\text{max}$.  There is no truncation parameter to tune, no UV
+cutoff to remove, no convergence series to evaluate.  This is
+categorically different from the slowly convergent Shibuya--Wulfman
+\emph{basis} expansion (Paper~19 \S~III.B), which expands a complete
+orbital basis on one center in the Sturmian basis of another center
+and does \emph{not} terminate; the multipole expansion of the
+$1/|\vec{r}_1 - \vec{r}_2|$ \emph{kernel} terminates trivially while
+the Shibuya--Wulfman expansion of the \emph{basis} does not.
+Computational note: where the radial integrand at fractional screening
+is non-polynomial (the smooth $[Z_A - Z_\text{eff}(r)]/r$ correction
+in composed geometries), the algebraic expansion does not apply and
+Gauss--Legendre quadrature is used for the radial integral only; the
+angular content remains exactly truncated regardless
+(Paper~15 \S~V, closing paragraph).\\
+\textbf{Structural reading.}  Layer~1 $\to$ Layer~1.  This projection
+reorganizes the angular content of the Coulomb kernel \emph{prior to}
+any focal-length, mass, or observation projection; it does not move
+the chain across the Layer-1/Layer-2 boundary of
+\S~\ref{sec:layer2_boundary}.  Categorically, it is the coordinate-side
+counterpart of \S~\ref{sec:proj_3j}: the multipole expansion of
+$1/|\vec{r}_1 - \vec{r}_2|$ produces the angular vertices at which
+Wigner-$3j$ coupling is then applied, so the two projections are
+inverse images of each other across the kernel-versus-vertex divide
+($P_L(\cos\theta_{12}) \leftrightarrow G(l_1, L, l_2)$).  Operationally
+they almost always compose: in the framework's matrix-element pipeline
+the multipole expansion is the kernel-side step that produces the
+$3j$-symbol calls at each vertex.  Structurally distinct from
+\S~\ref{sec:proj_tensor_multipole} (nuclear tensor multipole coupling),
+which uses the same Wigner-$3j$ angular machinery but applies it to
+nuclear-structure tensor moments (one new $[L]^L$ length scale per
+rank); the present projection introduces no physical scale at all and
+sits cleanly inside Layer~1.  This is the workhorse projection that
+underwrites the entire angular-sparsity story of Paper~22 and the
+$O(Q^{2.5})$ Pauli scaling of Paper~14: every claim about ERI density,
+selection-rule survival, or composed-architecture sparsity ultimately
+rests on the exact $L \leq 2 l_\text{max}$ termination of this
+projection.
+

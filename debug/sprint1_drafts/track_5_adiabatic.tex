@@ -1,0 +1,241 @@
+% ============================================================================
+% Sprint 1, Track 5: Adiabatic / Born--Oppenheimer projection (§III.24)
+%
+% Three-axis row data for §IV Table~\ref{tab:projection_axes}:
+%
+%   Projection : Adiabatic / Born--Oppenheimer
+%   Variables  : nuclear coordinate R (or, more generally, a slow
+%                continuous parameter R indexing a parameter family of
+%                Hamiltonians H_el(R)); mass ratio m_e / M_n as the
+%                small parameter controlling the projection's validity
+%   Dimension  : preserved at the projection step (V_eff(R) has the
+%                same energy dimension as H_el(R)); the new variable
+%                R itself carries length [L]
+%   Transc.    : none AT THE PROJECTION STEP (the projection is the
+%                scale-separation operation, parameter-only); the
+%                resulting V_eff(R) inherits transcendentals from
+%                downstream computations (Level 3 mu(R) algebraic over
+%                Q(pi, sqrt(2)); Level 4 mu(rho) piecewise-smooth;
+%                Level 5 composed-geometry V_eff(R) carries the
+%                exchange-constant content of every prior projection
+%                in the chain)
+%   Layer      : Layer 1 -> Layer 2 (introduces R as a continuous
+%                parameter into the previously discrete graph
+%                computation; the parameterization itself is a Layer-1
+%                -> Layer-2 transition, sibling of mol-frame
+%                hyperspherical separation §III.12 but structurally
+%                upstream of it)
+%   Sibling    : §III.25 coupled-channel / adiabatic-curve solver
+%                (next step in the chain: the parameterized
+%                electronic problem H_el(R) gets diagonalized, and
+%                the resulting U_nu(R) becomes the effective
+%                potential for the slow-variable Schroedinger
+%                equation; coupled-channel adds the
+%                non-adiabatic P_{nu mu} = <Phi_nu | d/dR | Phi_mu>
+%                coupling that the strict-adiabatic single-channel
+%                approximation drops)
+%
+% Sprint 1 / Track 5 / 2026-05-15
+% ============================================================================
+
+\subsection{Adiabatic / Born--Oppenheimer projection}
+\label{sec:proj_adiabatic_BO}
+\textbf{Source:} a single combined Hamiltonian $H$ acting on two
+coupled degrees of freedom whose dynamical time-scales differ by a
+parametrically large ratio (the small parameter $m_e / M_n \ll 1$ for
+electron--nucleus systems, $m_e / M_\text{cluster}$ for inner electrons
+versus an outer cluster, etc.).  In the foundational setting this is
+the molecular Hamiltonian $H = T_n(\bm{R}) + T_e(\bm{r}) +
+V_{nn}(\bm{R}) + V_{ne}(\bm{r}, \bm{R}) + V_{ee}(\bm{r})$ on a tensor
+product of nuclear and electronic Hilbert spaces; in the Level~3
+hyperspherical setting it is the combined kinetic and potential
+operator on the joint $(R, \Omega)$ space of hyperradius and
+hyperangle.\\
+\textbf{Target:} a \emph{two-stage} decomposition in which the fast
+degree of freedom (electronic coordinates $\bm{r}$, hyperangle
+$\Omega$, valence electrons) is solved at every fixed value of the
+slow degree of freedom (nuclear coordinate $\bm{R}$, hyperradius $R$,
+core configuration), producing a parameter family of fast-sector
+eigenproblems
+\begin{equation*}
+  H_\text{fast}(\bm{R}) \, \Phi_\nu(\bm{r}; \bm{R})
+  = E_\nu(\bm{R}) \, \Phi_\nu(\bm{r}; \bm{R}),
+\end{equation*}
+parameterized by the slow variable.  The slow degree of freedom then
+sees the fast-sector eigenvalues $E_\nu(\bm{R})$ as an effective
+potential, producing the slow-sector Schr\"odinger equation
+$[T_n + E_\nu(\bm{R})] \chi(\bm{R}) = E\, \chi(\bm{R})$ on the
+slow-only Hilbert space.  The full wavefunction is reconstructed as
+$\Psi(\bm{r}, \bm{R}) \approx \Phi_\nu(\bm{r}; \bm{R}) \chi(\bm{R})$
+(single-channel adiabatic) or as a sum
+$\sum_\nu \Phi_\nu(\bm{r}; \bm{R}) \chi_\nu(\bm{R})$
+(coupled-channel; see \S~\ref{sec:proj_coupled_channel}, the
+sibling projection that solves the parameterized fast-sector problem
+and supplies the coupling between channels).
+\\
+\textbf{Variables introduced:} the slow continuous parameter $\bm{R}$
+itself, which enters the previously fast-sector-only graph
+computation as a \emph{continuous} index over a family of
+Hamiltonians.  The small parameter controlling the projection's
+validity is the mass ratio $m_e / M_n$ (and, more generally, the
+ratio of fast and slow time-scales).  Both quantities are content
+the bare graph does not carry: the bare graph computation is
+formulated at fixed nuclear configuration with no notion of a
+parametric ``slow'' variable, and the mass ratio enters only when
+the slow-sector kinetic operator $T_n = -\nabla_R^2 / (2 M_n)$ is
+restored.\footnote{In mass-independent (Bohr-natural) atomic units
+the projection still operates: it is the structural operation of
+treating the nuclear configuration as a parameter rather than as a
+dynamical variable, even when the mass ratio is not numerically
+manifest in the units chosen.  See Paper~4 (archived) reduced-mass
+convention discussion --- the adiabatic / Born--Oppenheimer
+projection is what makes the electronic problem mass-independent
+(at leading order) by separating the slow nuclear sector from the
+fast electronic sector; the residual mass-dependence enters at the
+diagonal Born--Oppenheimer correction (DBOC) and at non-adiabatic
+couplings $P_{\nu\mu}$, both subleading in $m_e / M_n$.}\\
+\textbf{Dimension introduced:} preserved at the projection step.  The
+fast-sector effective potential $V_\text{eff}(\bm{R}) \equiv
+E_\nu(\bm{R})$ has the same energy dimension $[E]$ as the original
+Hamiltonian, and the new slow-sector variable $\bm{R}$ carries length
+$[L]$ (already present in the projection chain via the stereographic
+or molecule-frame hyperspherical projections at \S~\ref{sec:proj_stereo}
+or \S~\ref{sec:proj_molframe}).  This projection does
+not add a new dimension to the Layer-2 dictionary; it
+\emph{reorganizes} the existing dimensional content into a slow~$\bm{R}$
+$+$ fast~$\bm{r}$ split.\\
+\textbf{Transcendental signature:} \textit{none at the projection step
+itself}.  The Born--Oppenheimer scale-separation is parameter-only:
+it indexes a family of Hamiltonians by a continuous variable without
+injecting $\pi$ or any other transcendental.  Transcendentals appear
+\emph{downstream} of this projection, in the solution of the
+parameterized fast-sector eigenproblem
+(\S~\ref{sec:proj_coupled_channel}): Level~3 hyperspherical $\mu(R)$
+is
+algebraic over $\mathbb{Q}(\pi, \sqrt{2})$ (CLAUDE.md~\S~12, Track~P1,
+v2.0.12); Level~4 molecule-frame hyperspherical $\mu(\rho)$ is
+piecewise-smooth in $\rho$, not algebraic over any closed ring
+(Track~S, v2.0.13); Level~5 composed-geometry effective potentials
+inherit the full transcendental content of every prior projection in
+the chain.  The clean separation is: the BO projection introduces the
+continuous parameter $\bm{R}$ with no transcendental cost; solving
+the parameterized fast-sector eigenproblem then introduces
+transcendentals according to the natural geometry of the fast sector
+and the operator-order content of $H_\text{fast}(\bm{R})$.\\
+\textbf{Used in:} every Level~4 molecular calculation (Paper~15;
+H$_2$, HeH$^+$, every two-electron diatomic); every Level~3
+hyperspherical calculation that uses the adiabatic effective potential
+(Paper~13; He, Li, Be, all atomic species with one slow
+hyperradius); every composed-geometry molecular calculation
+(Paper~17; LiH, BeH$_2$, H$_2$O, all polyatomics, second-row
+diatomics); the \emph{double}-adiabatic separation of Paper~15~\S~VII.C
+where the core--valence fiber bundle introduces a third time-scale
+(slowest nuclear / slow valence-hyperradius / fast valence-angular,
+plus a separate slow core-hyperradius / fast core-angular on the
+core fiber); all the ab initio molecular spectroscopy results of
+Paper~13~\S~IX (rovibrational H$_2$); all $D_e$ benchmarks reported
+across Papers~13, 15, 17; every cross-register / cross-block
+calculation in the multi-focal-composition arc (May~2026) that
+treats nuclear coordinates as classical parameters in
+\texttt{cross\_register\_vne.py}.  This is the most heavily-used
+projection in the framework's molecular pipeline; very few molecular
+results do not pass through it.\\
+\textbf{Empirical anchor:} H$_2$ at 96.0\% $D_e$ (Level~4
+mol-frame hyperspherical + Schwartz cusp correction, Paper~15);
+LiH $R_\text{eq}$ at 5.3\% error (Level~5 composed, Paper~17);
+HeH$^+$ at 93.1\% $D_e$ (Paper~15~\S~VI.E); diagonal Born--Oppenheimer
+correction $\Delta E_\text{DBOC} \approx +0.0015$~Ha for He (Paper~13
+~\S~VI; explains the apparent variational violation $E = -2.9052$~Ha
+vs.\ exact $-2.9037$~Ha at the single-channel adiabatic level by
+exactly the magnitude expected from the kinetic energy cost of
+angular wavefunction variation with $R$); BeH$^+$ as a transferability
+test of the ab initio Phillips--Kleinman + adiabatic composition
+(Paper~17).  Each of these is a quantitative test of the BO projection
+in combination with the natural-geometry sector that follows it.\\
+\textbf{Honest scope.}  The strict-adiabatic single-channel
+approximation is the leading order in the small parameter $m_e / M_n$;
+it breaks down where two electronic surfaces become near-degenerate
+(conical intersections, autoionization channels, non-adiabatic
+transitions) and where the kinetic energy of the slow variable is
+comparable to electronic-level spacings.  The framework's response to
+this breakdown is structural, not perturbative: the 2D variational
+solver (Paper~13~\S~XIII, Paper~15~\S~VI.D) treats the slow and fast
+variables on equal footing, eliminating the adiabatic approximation
+entirely.  Track~AR (CLAUDE.md~\S~2, v2.0.23) showed that the 4-electron
+LiH adiabatic solver's apparent $D_e$ violation was an artifact of
+the single-channel approximation, not of the natural geometry: the 2D
+variational solver gives $E_\text{min} = -7.79$~Ha (variational bound
+respected, $D_e$ unbound) versus the adiabatic solver's $D_e = +0.49$~Ha
+($5.3\times$ exact).  Track~BQ (CLAUDE.md~\S~2, v2.0.32) further
+established that the $R_\text{eq}$ drift $+0.15$--$0.22$~bohr/$l_\text{max}$
+in LiH composed geometry is \emph{not} from the adiabatic
+approximation: both the adiabatic and 2D variational solvers produce
+identical drift, isolating the residual to the composed-geometry PK
+architecture rather than the BO projection itself.  The named extension
+when adiabatic breaks down is therefore the coupled-channel /
+2D-variational sibling at \S~\ref{sec:proj_coupled_channel}.\\
+\textbf{Structural reading.}  Categorically distinct from
+\S~\ref{sec:proj_restmass}.  The rest-mass projection is a
+ring-preserving Bohr-like rescaling of a \emph{single} particle's
+spectrum under $m_e \to m_\text{red}$; it modifies the foundational
+energy scale (Ry) without introducing a new continuous parameter,
+and the spectrum on the projected manifold is the same up to a
+rational rescaling factor.  The Born--Oppenheimer projection is a
+\emph{scale-separation between two coupled degrees of freedom}: it
+takes a single Hilbert space $\mathcal{H}_n \otimes \mathcal{H}_e$ and
+produces a parameter family $\{ \mathcal{H}_e \mid \bm{R} \in
+\mathcal{M}_\text{nuc} \}$ together with a slow-sector Schr\"odinger
+equation on the parameter manifold $\mathcal{M}_\text{nuc}$.  The
+small parameter $m_e / M_n$ controls the projection's accuracy but is
+not itself the new variable; the new variable is the slow coordinate
+$\bm{R}$, which becomes a continuous index on a previously discrete
+graph computation.  The two projections answer different structural
+questions: rest-mass asks ``what happens to the spectrum when the
+single-particle mass changes,'' while Born--Oppenheimer asks ``how
+do two coupled degrees of freedom decouple at parametrically separated
+time-scales.''
+The two are independent and commute (rest-mass rescaling of the
+foundational $m_e$ and BO-separation of slow nuclear from fast
+electronic degrees of freedom can be applied in either order); they
+co-appear in every reduced-mass molecular calculation, where
+rest-mass rescales the electronic-sector $m_e$ to $m_\text{red}$ on
+the fast side, and Born--Oppenheimer separates the slow nuclear from
+the fast electronic sector across the full molecular Hamiltonian.
+
+Structurally, this projection is the \emph{parent} of the
+coupled-channel / adiabatic-curve projection at
+\S~\ref{sec:proj_coupled_channel} (sibling, immediately downstream):
+BO produces the parameterized electronic problem $H_\text{el}(\bm{R})$
+with its parameter family of eigenproblems, and the coupled-channel
+projection is the next step that solves the parameterized problem
+and assembles the adiabatic potential curves
+$U_\nu(\bm{R}) = E_\nu(\bm{R})$ as effective potentials for the
+slow-sector dynamics, optionally including the non-adiabatic
+couplings $P_{\nu\mu}(\bm{R}) = \langle \Phi_\nu | \partial / \partial
+\bm{R} | \Phi_\mu \rangle$ that the strict-adiabatic single-channel
+approximation drops.  The two projections are conceptually
+inseparable in the molecular pipeline --- one does not invoke
+Born--Oppenheimer in practice without then solving the parameterized
+problem --- but they are taxonomically distinct: BO is the
+\emph{scale-separation operation} (parameter-only, no transcendental
+content, Layer-1 $\to$ Layer-2 transition), while coupled-channel /
+adiabatic-curve is the \emph{solution operation} (introduces the
+transcendental content specific to the fast-sector geometry, and
+introduces the Berry-connection-like non-adiabatic coupling content
+if the single-channel approximation is relaxed).
+
+The double-adiabatic structure of Paper~15~\S~VII.C is a structural
+\emph{composition} of this projection with itself at two distinct
+time-scale ratios.  In LiH composed geometry the outer BO separates
+nuclear (slow) from electronic (fast); within the electronic sector,
+an inner BO separates core (slow on the electronic time-scale,
+\emph{very} slow on the molecular time-scale) from valence (fast),
+producing the core--valence fiber bundle of Paper~17~\S~II.  Iterated
+composition of the BO projection is the structural mechanism by
+which the framework reaches polyatomic molecules with multiple
+distinct dynamical time-scales (Paper~17 LiH/BeH$_2$/H$_2$O composed
+geometries; second- and third-row frozen-core diatomics, Sprint~7
+v2.19.4).  The projection's own structural content does not change
+under iteration; only the count of independent parameter manifolds
+$\{\mathcal{M}_\text{nuc}, \mathcal{M}_\text{core}, \mathcal{M}_\text{val},
+\ldots\}$ grows.
