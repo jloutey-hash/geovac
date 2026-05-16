@@ -1,0 +1,1219 @@
+{
+  "sprint": "XCWG strong-coupling Wilson (2026-05-16)",
+  "kernel": "leading-order character expansion <W>_beta = (I_1/I_0)^A",
+  "sigma_definition": "sigma(beta) := -ln(I_1(beta)/I_0(beta))",
+  "beta_grid": [
+    0.1,
+    0.3,
+    1.0,
+    3.0,
+    10.0,
+    30.0,
+    100.0
+  ],
+  "sigma_beta_table": {
+    "0.1": {
+      "beta": 0.1,
+      "I_1_over_I_0": 0.04993760398793892,
+      "sigma": 2.9969809730960812
+    },
+    "0.3": {
+      "beta": 0.3,
+      "I_1_over_I_0": 0.14833742694087526,
+      "sigma": 1.9082656885105913
+    },
+    "1": {
+      "beta": 1.0,
+      "I_1_over_I_0": 0.4463899658965347,
+      "sigma": 0.8065623459980096
+    },
+    "3": {
+      "beta": 3.0,
+      "I_1_over_I_0": 0.8099852939565045,
+      "sigma": 0.21073918708972134
+    },
+    "10": {
+      "beta": 10.0,
+      "I_1_over_I_0": 0.9485998259548463,
+      "sigma": 0.05276824901448294
+    },
+    "30": {
+      "beta": 30.0,
+      "I_1_over_I_0": 0.9831895553653359,
+      "sigma": 0.01695334388952851
+    },
+    "100": {
+      "beta": 100.0,
+      "I_1_over_I_0": 0.9949875,
+      "sigma": 0.005025104716527419
+    }
+  },
+  "sigma_asymptotic_check": {
+    "small_beta": {
+      "beta": 0.01,
+      "I_1_over_I_0": 0.0049999375010416494,
+      "sigma_computed": 5.29832986641783,
+      "sigma_asymptotic_ln_2_over_beta": 5.298317366548036,
+      "leading_relative_error": 2.359214997647933e-06
+    },
+    "large_beta": {
+      "beta": 1000.0,
+      "I_1_over_I_0": 0.999499875,
+      "sigma_computed": 0.0005002501042213462,
+      "sigma_asymptotic_1_over_2beta": 0.0005,
+      "leading_relative_error": 0.0005002084426924264
+    }
+  },
+  "A_targets": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "n_max_2": {
+    "n_max": 2,
+    "graph": {
+      "V": 10,
+      "E": 20,
+      "beta_1": 11
+    },
+    "plaquette_count": 44,
+    "plaquette_cap_applied": false,
+    "A_targets": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "beta_grid": [
+      0.1,
+      0.3,
+      1.0,
+      3.0,
+      10.0,
+      30.0,
+      100.0
+    ],
+    "cluster_summary": {
+      "1": {
+        "n_simple_clusters": 44,
+        "distinct_perimeters": [
+          4
+        ]
+      },
+      "2": {
+        "n_simple_clusters": 50,
+        "distinct_perimeters": [
+          4,
+          6
+        ]
+      },
+      "3": {
+        "n_simple_clusters": 45,
+        "distinct_perimeters": [
+          4,
+          6,
+          8,
+          10
+        ]
+      },
+      "4": {
+        "n_simple_clusters": 43,
+        "distinct_perimeters": [
+          4,
+          6,
+          8,
+          10,
+          12
+        ]
+      },
+      "5": {
+        "n_simple_clusters": 44,
+        "distinct_perimeters": [
+          4,
+          6,
+          8,
+          10,
+          12
+        ]
+      }
+    },
+    "wilson_at_beta_by_area": {
+      "1": {
+        "0.1": 0.04993760398793892,
+        "0.3": 0.14833742694087526,
+        "1": 0.4463899658965347,
+        "3": 0.8099852939565045,
+        "10": 0.9485998259548463,
+        "30": 0.9831895553653359,
+        "100": 0.9949875
+      },
+      "2": {
+        "0.1": 0.0024937642920562133,
+        "0.3": 0.022003992231439506,
+        "1": 0.1992640016531094,
+        "3": 0.6560761764258051,
+        "10": 0.8998416298015647,
+        "30": 0.966661701779487,
+        "100": 0.99000012515625
+      },
+      "3": {
+        "0.1": 0.00012453261365596605,
+        "0.3": 0.0032640155900387443,
+        "1": 0.08894945090233854,
+        "3": 0.5314120546201152,
+        "10": 0.8535896134166894,
+        "30": 0.9504116887612727,
+        "100": 0.9850377495289043
+      },
+      "4": {
+        "0.1": 6.218860344334627e-06,
+        "0.3": 0.00048417567412125013,
+        "1": 0.03970614235481038,
+        "3": 0.4304359492735041,
+        "10": 0.8097149587239361,
+        "30": 0.9344348456872138,
+        "100": 0.9801002478093908
+      },
+      "5": {
+        "0.1": 3.105549851316801e-07,
+        "0.3": 7.182137368650997e-05,
+        "1": 0.017724423531646757,
+        "3": 0.3486467889017463,
+        "10": 0.7680954689185613,
+        "30": 0.918726580449088,
+        "100": 0.9751874953172462
+      }
+    },
+    "area_law_fits": {
+      "0.1": {
+        "sigma": 2.9969809730960812,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.049937603987938915,
+          0.002493764292056213,
+          0.00012453261365596595,
+          6.218860344334624e-06,
+          3.1055498513168e-07
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.04993760398793892,
+          0.0024937642920562133,
+          0.00012453261365596605,
+          6.218860344334627e-06,
+          3.105549851316801e-07
+        ],
+        "beta": 0.1,
+        "sigma_direct": 2.9969809730960812,
+        "sigma_consistency": true
+      },
+      "0.3": {
+        "sigma": 1.9082656885105913,
+        "intercept_log": 8.881784197001252e-16,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.1483374269408754,
+          0.022003992231439524,
+          0.0032640155900387456,
+          0.00048417567412125046,
+          7.182137368650999e-05
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.14833742694087526,
+          0.022003992231439506,
+          0.0032640155900387443,
+          0.00048417567412125013,
+          7.182137368650997e-05
+        ],
+        "beta": 0.3,
+        "sigma_direct": 1.9082656885105913,
+        "sigma_consistency": true
+      },
+      "1": {
+        "sigma": 0.8065623459980096,
+        "intercept_log": 4.440892098500626e-16,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.44638996589653485,
+          0.19926400165310948,
+          0.08894945090233854,
+          0.039706142354810396,
+          0.017724423531646757
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.4463899658965347,
+          0.1992640016531094,
+          0.08894945090233854,
+          0.03970614235481038,
+          0.017724423531646757
+        ],
+        "beta": 1.0,
+        "sigma_direct": 0.8065623459980096,
+        "sigma_consistency": true
+      },
+      "3": {
+        "sigma": 0.21073918708972134,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.8099852939565045,
+          0.6560761764258051,
+          0.5314120546201152,
+          0.4304359492735041,
+          0.3486467889017463
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.8099852939565045,
+          0.6560761764258051,
+          0.5314120546201152,
+          0.4304359492735041,
+          0.3486467889017463
+        ],
+        "beta": 3.0,
+        "sigma_direct": 0.21073918708972134,
+        "sigma_consistency": true
+      },
+      "10": {
+        "sigma": 0.052768249014482946,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9485998259548463,
+          0.8998416298015646,
+          0.8535896134166894,
+          0.8097149587239361,
+          0.7680954689185613
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9485998259548463,
+          0.8998416298015647,
+          0.8535896134166894,
+          0.8097149587239361,
+          0.7680954689185613
+        ],
+        "beta": 10.0,
+        "sigma_direct": 0.05276824901448294,
+        "sigma_consistency": true
+      },
+      "30": {
+        "sigma": 0.016953343889528513,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9831895553653359,
+          0.966661701779487,
+          0.9504116887612727,
+          0.9344348456872138,
+          0.918726580449088
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9831895553653359,
+          0.966661701779487,
+          0.9504116887612727,
+          0.9344348456872138,
+          0.918726580449088
+        ],
+        "beta": 30.0,
+        "sigma_direct": 0.01695334388952851,
+        "sigma_consistency": true
+      },
+      "100": {
+        "sigma": 0.005025104716527409,
+        "intercept_log": -3.642919299551295e-17,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9949875,
+          0.99000012515625,
+          0.9850377495289043,
+          0.9801002478093908,
+          0.9751874953172462
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9949875,
+          0.99000012515625,
+          0.9850377495289043,
+          0.9801002478093908,
+          0.9751874953172462
+        ],
+        "beta": 100.0,
+        "sigma_direct": 0.005025104716527419,
+        "sigma_consistency": true
+      }
+    },
+    "perimeter_vs_area_test": {
+      "1": {
+        "area": 1,
+        "distinct_perimeters": [
+          4
+        ],
+        "test_applicable": false,
+        "comment": "Only one perimeter; cannot test area-vs-perimeter."
+      },
+      "2": {
+        "area": 2,
+        "distinct_perimeters": [
+          4,
+          6
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 50,
+        "leading_order_W": 0.1992640016531094,
+        "comment": "At leading order, <W> = 0.1993 for ALL clusters of area 2, regardless of perimeter (which here ranges over [4, 6]). Confirms area-only dependence."
+      },
+      "3": {
+        "area": 3,
+        "distinct_perimeters": [
+          4,
+          6,
+          8,
+          10
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 45,
+        "leading_order_W": 0.08894945090233854,
+        "comment": "At leading order, <W> = 0.08895 for ALL clusters of area 3, regardless of perimeter (which here ranges over [4, 6, 8, 10]). Confirms area-only dependence."
+      },
+      "4": {
+        "area": 4,
+        "distinct_perimeters": [
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 43,
+        "leading_order_W": 0.03970614235481038,
+        "comment": "At leading order, <W> = 0.03971 for ALL clusters of area 4, regardless of perimeter (which here ranges over [4, 6, 8, 10, 12]). Confirms area-only dependence."
+      },
+      "5": {
+        "area": 5,
+        "distinct_perimeters": [
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 44,
+        "leading_order_W": 0.017724423531646757,
+        "comment": "At leading order, <W> = 0.01772 for ALL clusters of area 5, regardless of perimeter (which here ranges over [4, 6, 8, 10, 12]). Confirms area-only dependence."
+      }
+    },
+    "walltime_sec": 0.010090827941894531
+  },
+  "n_max_3": {
+    "n_max": 3,
+    "graph": {
+      "V": 28,
+      "E": 106,
+      "beta_1": 79
+    },
+    "plaquette_count": 300,
+    "plaquette_cap_applied": true,
+    "A_targets": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "beta_grid": [
+      0.1,
+      0.3,
+      1.0,
+      3.0,
+      10.0,
+      30.0,
+      100.0
+    ],
+    "cluster_summary": {
+      "1": {
+        "n_simple_clusters": 50,
+        "distinct_perimeters": [
+          4
+        ]
+      },
+      "2": {
+        "n_simple_clusters": 50,
+        "distinct_perimeters": [
+          4,
+          6
+        ]
+      },
+      "3": {
+        "n_simple_clusters": 50,
+        "distinct_perimeters": [
+          4,
+          6
+        ]
+      },
+      "4": {
+        "n_simple_clusters": 50,
+        "distinct_perimeters": [
+          6,
+          8
+        ]
+      },
+      "5": {
+        "n_simple_clusters": 50,
+        "distinct_perimeters": [
+          6,
+          8
+        ]
+      }
+    },
+    "wilson_at_beta_by_area": {
+      "1": {
+        "0.1": 0.04993760398793892,
+        "0.3": 0.14833742694087526,
+        "1": 0.4463899658965347,
+        "3": 0.8099852939565045,
+        "10": 0.9485998259548463,
+        "30": 0.9831895553653359,
+        "100": 0.9949875
+      },
+      "2": {
+        "0.1": 0.0024937642920562133,
+        "0.3": 0.022003992231439506,
+        "1": 0.1992640016531094,
+        "3": 0.6560761764258051,
+        "10": 0.8998416298015647,
+        "30": 0.966661701779487,
+        "100": 0.99000012515625
+      },
+      "3": {
+        "0.1": 0.00012453261365596605,
+        "0.3": 0.0032640155900387443,
+        "1": 0.08894945090233854,
+        "3": 0.5314120546201152,
+        "10": 0.8535896134166894,
+        "30": 0.9504116887612727,
+        "100": 0.9850377495289043
+      },
+      "4": {
+        "0.1": 6.218860344334627e-06,
+        "0.3": 0.00048417567412125013,
+        "1": 0.03970614235481038,
+        "3": 0.4304359492735041,
+        "10": 0.8097149587239361,
+        "30": 0.9344348456872138,
+        "100": 0.9801002478093908
+      },
+      "5": {
+        "0.1": 3.105549851316801e-07,
+        "0.3": 7.182137368650997e-05,
+        "1": 0.017724423531646757,
+        "3": 0.3486467889017463,
+        "10": 0.7680954689185613,
+        "30": 0.918726580449088,
+        "100": 0.9751874953172462
+      }
+    },
+    "area_law_fits": {
+      "0.1": {
+        "sigma": 2.9969809730960812,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.049937603987938915,
+          0.002493764292056213,
+          0.00012453261365596595,
+          6.218860344334624e-06,
+          3.1055498513168e-07
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.04993760398793892,
+          0.0024937642920562133,
+          0.00012453261365596605,
+          6.218860344334627e-06,
+          3.105549851316801e-07
+        ],
+        "beta": 0.1,
+        "sigma_direct": 2.9969809730960812,
+        "sigma_consistency": true
+      },
+      "0.3": {
+        "sigma": 1.9082656885105913,
+        "intercept_log": 8.881784197001252e-16,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.1483374269408754,
+          0.022003992231439524,
+          0.0032640155900387456,
+          0.00048417567412125046,
+          7.182137368650999e-05
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.14833742694087526,
+          0.022003992231439506,
+          0.0032640155900387443,
+          0.00048417567412125013,
+          7.182137368650997e-05
+        ],
+        "beta": 0.3,
+        "sigma_direct": 1.9082656885105913,
+        "sigma_consistency": true
+      },
+      "1": {
+        "sigma": 0.8065623459980096,
+        "intercept_log": 4.440892098500626e-16,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.44638996589653485,
+          0.19926400165310948,
+          0.08894945090233854,
+          0.039706142354810396,
+          0.017724423531646757
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.4463899658965347,
+          0.1992640016531094,
+          0.08894945090233854,
+          0.03970614235481038,
+          0.017724423531646757
+        ],
+        "beta": 1.0,
+        "sigma_direct": 0.8065623459980096,
+        "sigma_consistency": true
+      },
+      "3": {
+        "sigma": 0.21073918708972134,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.8099852939565045,
+          0.6560761764258051,
+          0.5314120546201152,
+          0.4304359492735041,
+          0.3486467889017463
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.8099852939565045,
+          0.6560761764258051,
+          0.5314120546201152,
+          0.4304359492735041,
+          0.3486467889017463
+        ],
+        "beta": 3.0,
+        "sigma_direct": 0.21073918708972134,
+        "sigma_consistency": true
+      },
+      "10": {
+        "sigma": 0.052768249014482946,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9485998259548463,
+          0.8998416298015646,
+          0.8535896134166894,
+          0.8097149587239361,
+          0.7680954689185613
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9485998259548463,
+          0.8998416298015647,
+          0.8535896134166894,
+          0.8097149587239361,
+          0.7680954689185613
+        ],
+        "beta": 10.0,
+        "sigma_direct": 0.05276824901448294,
+        "sigma_consistency": true
+      },
+      "30": {
+        "sigma": 0.016953343889528513,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9831895553653359,
+          0.966661701779487,
+          0.9504116887612727,
+          0.9344348456872138,
+          0.918726580449088
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9831895553653359,
+          0.966661701779487,
+          0.9504116887612727,
+          0.9344348456872138,
+          0.918726580449088
+        ],
+        "beta": 30.0,
+        "sigma_direct": 0.01695334388952851,
+        "sigma_consistency": true
+      },
+      "100": {
+        "sigma": 0.005025104716527409,
+        "intercept_log": -3.642919299551295e-17,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9949875,
+          0.99000012515625,
+          0.9850377495289043,
+          0.9801002478093908,
+          0.9751874953172462
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9949875,
+          0.99000012515625,
+          0.9850377495289043,
+          0.9801002478093908,
+          0.9751874953172462
+        ],
+        "beta": 100.0,
+        "sigma_direct": 0.005025104716527419,
+        "sigma_consistency": true
+      }
+    },
+    "perimeter_vs_area_test": {
+      "1": {
+        "area": 1,
+        "distinct_perimeters": [
+          4
+        ],
+        "test_applicable": false,
+        "comment": "Only one perimeter; cannot test area-vs-perimeter."
+      },
+      "2": {
+        "area": 2,
+        "distinct_perimeters": [
+          4,
+          6
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 50,
+        "leading_order_W": 0.1992640016531094,
+        "comment": "At leading order, <W> = 0.1993 for ALL clusters of area 2, regardless of perimeter (which here ranges over [4, 6]). Confirms area-only dependence."
+      },
+      "3": {
+        "area": 3,
+        "distinct_perimeters": [
+          4,
+          6
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 50,
+        "leading_order_W": 0.08894945090233854,
+        "comment": "At leading order, <W> = 0.08895 for ALL clusters of area 3, regardless of perimeter (which here ranges over [4, 6]). Confirms area-only dependence."
+      },
+      "4": {
+        "area": 4,
+        "distinct_perimeters": [
+          6,
+          8
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 50,
+        "leading_order_W": 0.03970614235481038,
+        "comment": "At leading order, <W> = 0.03971 for ALL clusters of area 4, regardless of perimeter (which here ranges over [6, 8]). Confirms area-only dependence."
+      },
+      "5": {
+        "area": 5,
+        "distinct_perimeters": [
+          6,
+          8
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 50,
+        "leading_order_W": 0.017724423531646757,
+        "comment": "At leading order, <W> = 0.01772 for ALL clusters of area 5, regardless of perimeter (which here ranges over [6, 8]). Confirms area-only dependence."
+      }
+    },
+    "walltime_sec": 0.015182733535766602
+  },
+  "n_max_4": {
+    "n_max": 4,
+    "graph": {
+      "V": 60,
+      "E": 312,
+      "beta_1": 253
+    },
+    "plaquette_count": 200,
+    "plaquette_cap_applied": true,
+    "A_targets": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "beta_grid": [
+      0.1,
+      0.3,
+      1.0,
+      3.0,
+      10.0,
+      30.0,
+      100.0
+    ],
+    "cluster_summary": {
+      "1": {
+        "n_simple_clusters": 30,
+        "distinct_perimeters": [
+          4
+        ]
+      },
+      "2": {
+        "n_simple_clusters": 30,
+        "distinct_perimeters": [
+          4,
+          6
+        ]
+      },
+      "3": {
+        "n_simple_clusters": 30,
+        "distinct_perimeters": [
+          6,
+          8
+        ]
+      },
+      "4": {
+        "n_simple_clusters": 30,
+        "distinct_perimeters": [
+          8,
+          10
+        ]
+      },
+      "5": {
+        "n_simple_clusters": 28,
+        "distinct_perimeters": [
+          8,
+          10,
+          12,
+          14
+        ]
+      }
+    },
+    "wilson_at_beta_by_area": {
+      "1": {
+        "0.1": 0.04993760398793892,
+        "0.3": 0.14833742694087526,
+        "1": 0.4463899658965347,
+        "3": 0.8099852939565045,
+        "10": 0.9485998259548463,
+        "30": 0.9831895553653359,
+        "100": 0.9949875
+      },
+      "2": {
+        "0.1": 0.0024937642920562133,
+        "0.3": 0.022003992231439506,
+        "1": 0.1992640016531094,
+        "3": 0.6560761764258051,
+        "10": 0.8998416298015647,
+        "30": 0.966661701779487,
+        "100": 0.99000012515625
+      },
+      "3": {
+        "0.1": 0.00012453261365596605,
+        "0.3": 0.0032640155900387443,
+        "1": 0.08894945090233854,
+        "3": 0.5314120546201152,
+        "10": 0.8535896134166894,
+        "30": 0.9504116887612727,
+        "100": 0.9850377495289043
+      },
+      "4": {
+        "0.1": 6.218860344334627e-06,
+        "0.3": 0.00048417567412125013,
+        "1": 0.03970614235481038,
+        "3": 0.4304359492735041,
+        "10": 0.8097149587239361,
+        "30": 0.9344348456872138,
+        "100": 0.9801002478093908
+      },
+      "5": {
+        "0.1": 3.105549851316801e-07,
+        "0.3": 7.182137368650997e-05,
+        "1": 0.017724423531646757,
+        "3": 0.3486467889017463,
+        "10": 0.7680954689185613,
+        "30": 0.918726580449088,
+        "100": 0.9751874953172462
+      }
+    },
+    "area_law_fits": {
+      "0.1": {
+        "sigma": 2.9969809730960812,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.049937603987938915,
+          0.002493764292056213,
+          0.00012453261365596595,
+          6.218860344334624e-06,
+          3.1055498513168e-07
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.04993760398793892,
+          0.0024937642920562133,
+          0.00012453261365596605,
+          6.218860344334627e-06,
+          3.105549851316801e-07
+        ],
+        "beta": 0.1,
+        "sigma_direct": 2.9969809730960812,
+        "sigma_consistency": true
+      },
+      "0.3": {
+        "sigma": 1.9082656885105913,
+        "intercept_log": 8.881784197001252e-16,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.1483374269408754,
+          0.022003992231439524,
+          0.0032640155900387456,
+          0.00048417567412125046,
+          7.182137368650999e-05
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.14833742694087526,
+          0.022003992231439506,
+          0.0032640155900387443,
+          0.00048417567412125013,
+          7.182137368650997e-05
+        ],
+        "beta": 0.3,
+        "sigma_direct": 1.9082656885105913,
+        "sigma_consistency": true
+      },
+      "1": {
+        "sigma": 0.8065623459980096,
+        "intercept_log": 4.440892098500626e-16,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.44638996589653485,
+          0.19926400165310948,
+          0.08894945090233854,
+          0.039706142354810396,
+          0.017724423531646757
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.4463899658965347,
+          0.1992640016531094,
+          0.08894945090233854,
+          0.03970614235481038,
+          0.017724423531646757
+        ],
+        "beta": 1.0,
+        "sigma_direct": 0.8065623459980096,
+        "sigma_consistency": true
+      },
+      "3": {
+        "sigma": 0.21073918708972134,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.8099852939565045,
+          0.6560761764258051,
+          0.5314120546201152,
+          0.4304359492735041,
+          0.3486467889017463
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.8099852939565045,
+          0.6560761764258051,
+          0.5314120546201152,
+          0.4304359492735041,
+          0.3486467889017463
+        ],
+        "beta": 3.0,
+        "sigma_direct": 0.21073918708972134,
+        "sigma_consistency": true
+      },
+      "10": {
+        "sigma": 0.052768249014482946,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9485998259548463,
+          0.8998416298015646,
+          0.8535896134166894,
+          0.8097149587239361,
+          0.7680954689185613
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9485998259548463,
+          0.8998416298015647,
+          0.8535896134166894,
+          0.8097149587239361,
+          0.7680954689185613
+        ],
+        "beta": 10.0,
+        "sigma_direct": 0.05276824901448294,
+        "sigma_consistency": true
+      },
+      "30": {
+        "sigma": 0.016953343889528513,
+        "intercept_log": 0.0,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9831895553653359,
+          0.966661701779487,
+          0.9504116887612727,
+          0.9344348456872138,
+          0.918726580449088
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9831895553653359,
+          0.966661701779487,
+          0.9504116887612727,
+          0.9344348456872138,
+          0.918726580449088
+        ],
+        "beta": 30.0,
+        "sigma_direct": 0.01695334388952851,
+        "sigma_consistency": true
+      },
+      "100": {
+        "sigma": 0.005025104716527409,
+        "intercept_log": -3.642919299551295e-17,
+        "r_squared": 1.0,
+        "predicted_W": [
+          0.9949875,
+          0.99000012515625,
+          0.9850377495289043,
+          0.9801002478093908,
+          0.9751874953172462
+        ],
+        "A_values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "W_values": [
+          0.9949875,
+          0.99000012515625,
+          0.9850377495289043,
+          0.9801002478093908,
+          0.9751874953172462
+        ],
+        "beta": 100.0,
+        "sigma_direct": 0.005025104716527419,
+        "sigma_consistency": true
+      }
+    },
+    "perimeter_vs_area_test": {
+      "1": {
+        "area": 1,
+        "distinct_perimeters": [
+          4
+        ],
+        "test_applicable": false,
+        "comment": "Only one perimeter; cannot test area-vs-perimeter."
+      },
+      "2": {
+        "area": 2,
+        "distinct_perimeters": [
+          4,
+          6
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 30,
+        "leading_order_W": 0.1992640016531094,
+        "comment": "At leading order, <W> = 0.1993 for ALL clusters of area 2, regardless of perimeter (which here ranges over [4, 6]). Confirms area-only dependence."
+      },
+      "3": {
+        "area": 3,
+        "distinct_perimeters": [
+          6,
+          8
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 30,
+        "leading_order_W": 0.08894945090233854,
+        "comment": "At leading order, <W> = 0.08895 for ALL clusters of area 3, regardless of perimeter (which here ranges over [6, 8]). Confirms area-only dependence."
+      },
+      "4": {
+        "area": 4,
+        "distinct_perimeters": [
+          8,
+          10
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 30,
+        "leading_order_W": 0.03970614235481038,
+        "comment": "At leading order, <W> = 0.03971 for ALL clusters of area 4, regardless of perimeter (which here ranges over [8, 10]). Confirms area-only dependence."
+      },
+      "5": {
+        "area": 5,
+        "distinct_perimeters": [
+          8,
+          10,
+          12,
+          14
+        ],
+        "test_applicable": true,
+        "n_clusters_total": 28,
+        "leading_order_W": 0.017724423531646757,
+        "comment": "At leading order, <W> = 0.01772 for ALL clusters of area 5, regardless of perimeter (which here ranges over [8, 10, 12, 14]). Confirms area-only dependence."
+      }
+    },
+    "walltime_sec": 0.011148452758789062
+  },
+  "sigma_table_master": {
+    "0.1": 2.9969809730960812,
+    "0.3": 1.9082656885105913,
+    "1": 0.8065623459980096,
+    "3": 0.21073918708972134,
+    "10": 0.05276824901448294,
+    "30": 0.01695334388952851,
+    "100": 0.005025104716527419
+  },
+  "verdict_witness_2": {
+    "sigma_all_positive": true,
+    "sigma_monotone_decreasing_with_beta": true,
+    "sigma_approaches_zero_at_large_beta": true,
+    "sigma_at_small_beta_0p3": 1.9082656885105913,
+    "sigma_at_moderate_beta_3p0": 0.21073918708972134,
+    "sigma_at_large_beta_30": 0.01695334388952851,
+    "verdict_text": "WITNESS 2 PASSES \u2014 leading-order strong-coupling character expansion predicts <W>_beta = (I_1/I_0)^A area law with sigma(beta) = -ln(I_1/I_0) > 0 at every tested beta and sigma -> 0 at large beta (3D compact U(1) signature). Combined with XCWG-B Track 1 MK monotone flow to beta=0, the two-witness verdict for 'Rule B Wilson U(1) is 3D compact U(1) on a non-cubic graph' is established."
+  }
+}

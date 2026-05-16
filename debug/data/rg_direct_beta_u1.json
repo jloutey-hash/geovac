@@ -1,0 +1,155 @@
+{
+  "sanity_check": {
+    "Pi_symbolic": "1/(48*pi**2)",
+    "Pi_numeric": 0.0021108579925487037,
+    "Pi_expected_1_over_48pi2": 0.0021108579925487037,
+    "Pi_rel_diff": 0.0,
+    "beta_symbolic": "2*alpha**2/(3*pi)",
+    "beta_matches_SM_2alpha2_3pi": true,
+    "t9_zeta_D2_s2_rel_err": 0.00565064594986503,
+    "t9_zeta_D2_s3_rel_err": 1.9103218183318555e-07,
+    "sanity_check_passed": false
+  },
+  "slope_extraction": {
+    "Pi_a2_coefficient": 0.0021108579925487037,
+    "slope_per_ln_Lambda_geovac": 0.2122065907891938,
+    "slope_per_ln_Lambda_sq_geovac": 0.1061032953945969,
+    "slope_sign_convention": "1/\u03b1(\u039b) = 1/\u03b1_0 - slope \u00b7 ln(\u039b/\u039b_0); GeoVac one-loop predicts positive slope (asymptotic non-freedom)"
+  },
+  "alpha_running_fit": {
+    "table": [
+      {
+        "n_max": 1,
+        "Lambda": 2.5,
+        "log_Lambda_over_Lambda0": 0.5108256237659907,
+        "alpha_inv_geovac": 136.92759843589286,
+        "alpha_geovac": 0.007303129620491977
+      },
+      {
+        "n_max": 4,
+        "Lambda": 5.5,
+        "log_Lambda_over_Lambda0": 1.2992829841302609,
+        "alpha_inv_geovac": 136.76028258746732,
+        "alpha_geovac": 0.0073120644464918635
+      },
+      {
+        "n_max": 16,
+        "Lambda": 17.5,
+        "log_Lambda_over_Lambda0": 2.456735772821304,
+        "alpha_inv_geovac": 136.51466347717974,
+        "alpha_geovac": 0.007325220416099575
+      },
+      {
+        "n_max": 64,
+        "Lambda": 65.5,
+        "log_Lambda_over_Lambda0": 3.7765850345330416,
+        "alpha_inv_geovac": 136.23458276499625,
+        "alpha_geovac": 0.007340280123476382
+      },
+      {
+        "n_max": 256,
+        "Lambda": 257.5,
+        "log_Lambda_over_Lambda0": 5.145554611995626,
+        "alpha_inv_geovac": 135.9440783980688,
+        "alpha_geovac": 0.007355965863197215
+      },
+      {
+        "n_max": 1024,
+        "Lambda": 1025.5,
+        "log_Lambda_over_Lambda0": 6.527470469404271,
+        "alpha_inv_geovac": 135.6508267452106,
+        "alpha_geovac": 0.0073718680821479535
+      },
+      {
+        "n_max": 4096,
+        "Lambda": 4097.5,
+        "log_Lambda_over_Lambda0": 7.91266720250982,
+        "alpha_inv_geovac": 135.35687886890594,
+        "alpha_geovac": 0.00738787720547625
+      }
+    ],
+    "fitted_slope_per_ln_Lambda": -0.21220659078919898,
+    "fitted_intercept": 137.035999,
+    "sm_slope_per_ln_Lambda": -0.2122065907891938,
+    "sm_slope_per_ln_Lambda_sq": -0.1061032953945969,
+    "rel_err_vs_sm_ln_Lambda": 2.445867784228553e-14,
+    "rel_err_vs_sm_ln_Lambda_sq": 1.0000000000000488,
+    "best_match_convention": "ln(Lambda)"
+  },
+  "discrete_spectral_check": {
+    "table": [
+      {
+        "n_max": 1,
+        "Lambda": 2.5,
+        "log_Lambda_over_Lambda0": 0.5108256237659907,
+        "cumulative_vp_spectral": 3.6977777777777776
+      },
+      {
+        "n_max": 2,
+        "Lambda": 3.5,
+        "log_Lambda_over_Lambda0": 0.8472978603872037,
+        "cumulative_vp_spectral": 5.656961451247166
+      },
+      {
+        "n_max": 4,
+        "Lambda": 5.5,
+        "log_Lambda_over_Lambda0": 1.2992829841302609,
+        "cumulative_vp_spectral": 9.61574116760264
+      },
+      {
+        "n_max": 8,
+        "Lambda": 9.5,
+        "log_Lambda_over_Lambda0": 1.8458266904983307,
+        "cumulative_vp_spectral": 17.582557377757222
+      },
+      {
+        "n_max": 16,
+        "Lambda": 17.5,
+        "log_Lambda_over_Lambda0": 2.456735772821304,
+        "cumulative_vp_spectral": 33.560369540714326
+      },
+      {
+        "n_max": 32,
+        "Lambda": 33.5,
+        "log_Lambda_over_Lambda0": 3.106080330722856,
+        "cumulative_vp_spectral": 65.54730372228872
+      },
+      {
+        "n_max": 64,
+        "Lambda": 65.5,
+        "log_Lambda_over_Lambda0": 3.7765850345330416,
+        "cumulative_vp_spectral": 129.5401745123855
+      },
+      {
+        "n_max": 128,
+        "Lambda": 129.5,
+        "log_Lambda_over_Lambda0": 4.458215773031428,
+        "cumulative_vp_spectral": 257.53644503460896
+      },
+      {
+        "n_max": 256,
+        "Lambda": 257.5,
+        "log_Lambda_over_Lambda0": 5.145554611995626,
+        "cumulative_vp_spectral": 513.5345368817976
+      },
+      {
+        "n_max": 512,
+        "Lambda": 513.5,
+        "log_Lambda_over_Lambda0": 5.835784921260449,
+        "cumulative_vp_spectral": 1025.5335716620668
+      }
+    ],
+    "fitted_spectral_slope": 225.1666019065984,
+    "fitted_intercept": -564.5967123208,
+    "fit_used_indices": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "interpretation": "Discrete spectral cumulative sum grows linearly with n_max (Weyl law: ~n_max), NOT logarithmically. The log running of 1/\u03b1 emerges from the F\u00b2-coefficient renormalization, not from the bare spectral sum. See memo \u00a73 for the full chain."
+  }
+}

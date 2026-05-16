@@ -1,0 +1,99 @@
+{
+  "sprint": "XCWG",
+  "task": "alternative U(1) Wilson observables on Rule B",
+  "n_max_2": {
+    "graph": {
+      "V": 10,
+      "E": 20,
+      "beta_1": 11
+    },
+    "wilson_loops": {
+      "by_length": {
+        "4": {
+          "count": 44,
+          "sample_size_analyzed": 30,
+          "weak_coupling_S_mean": 0.24768518518518515,
+          "weak_coupling_S_std": 0.0388033671625931,
+          "weak_coupling_S_min": 0.2222222222222221,
+          "weak_coupling_S_max": 0.33333333333333337,
+          "strong_coupling_leading_power_of_beta": 1
+        },
+        "6": {
+          "count": 144,
+          "sample_size_analyzed": 30,
+          "weak_coupling_S_mean": 0.436111111111111,
+          "weak_coupling_S_std": 0.04444444444444452,
+          "weak_coupling_S_min": 0.347222222222222,
+          "weak_coupling_S_max": 0.4583333333333336,
+          "strong_coupling_leading_power_of_beta": 2
+        }
+      }
+    },
+    "polyakov_analog": {
+      "n_fock_layers": {
+        "1": 2,
+        "2": 8
+      },
+      "loops_visiting_all_n_layers_L4": 38,
+      "loops_visiting_all_n_layers_L6": 144,
+      "honest_verdict": "Rule B is a static spatial graph. The n_fock direction is RADIAL (principal quantum number), NOT temporal. No clean Polyakov-loop analog exists without a separate Euclidean-time compactification."
+    },
+    "monopole_content": {
+      "n_4_plaquettes": 44,
+      "n_triangular_2_cells": 500,
+      "structural_note": "A 'monopole' is detected by integer flux through a closed 2-surface. The smallest 2-surface on Rule B is a triangular cell of 3 mutually-adjacent plaquettes. With sympy-exact link phases at canonical Wilson configurations one could compute flux quantization; this pilot only enumerates candidate cells."
+    },
+    "plaquette_correlators": {
+      "pair_distance_distribution": {
+        "0": 892,
+        "1": 54
+      },
+      "mean_correlator_by_distance": {
+        "0": {
+          "n_pairs": 892,
+          "mean": 0.011086198305929247,
+          "std": 0.06680276499448476,
+          "abs_mean": 0.04988789237668163
+        },
+        "1": {
+          "n_pairs": 54,
+          "mean": 1.4627512441245265e-17,
+          "std": 7.192074389386357e-17,
+          "abs_mean": 4.1732353540290835e-17
+        }
+      }
+    },
+    "wilson_l_shell_extent": {
+      "L4_n_l_shells_distribution": {
+        "2": 44
+      },
+      "L6_n_l_shells_distribution": {
+        "2": 144
+      },
+      "L4_mean_l_extent": 2.0,
+      "L6_mean_l_extent": 2.0,
+      "structural_note": "A length-4 loop on Rule B touches at most 2 distinct l-shells (due to bipartite l-parity + min 4-cycle, alternating l-parity). A length-6 loop CAN touch 3 distinct l-shells. Maximum l-extent = n_max for a primitive loop visiting one node per l-shell."
+    }
+  },
+  "n_max_3_cheap": {
+    "graph": {
+      "V": 28,
+      "E": 106,
+      "beta_1": 79
+    },
+    "L4_count": 994,
+    "K_rank": 79,
+    "d_1_rank": 79,
+    "L4_weak_coupling_S": {
+      "sample_size": 50,
+      "mean": 0.09552193837902428,
+      "std": 0.017511656087127396,
+      "min": 0.07518488260239461,
+      "max": 0.14685583404341992
+    },
+    "L4_l_shell_extent": {
+      "3": 542,
+      "2": 452
+    }
+  }
+}
