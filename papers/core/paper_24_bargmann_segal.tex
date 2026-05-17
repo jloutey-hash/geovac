@@ -1,9 +1,13 @@
 \documentclass[twocolumn,pra,amsmath,amssymb,superscriptaddress]{revtex4-2}
 
 \usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
 
 \begin{document}
 
@@ -590,6 +594,117 @@ symmetry group naturally acts on a Riemannian manifold rather
 than a complex one).
 
 %================================================================
+\subsection{Fourth layer: modular-Hamiltonian Pythagorean
+orthogonality}
+\label{sec:asymmetry_layer4}
+%================================================================
+
+The footnote at the head of Section~\ref{sec:asymmetry} records
+three layers of the Coulomb/HO asymmetry: the spectrum-computing
+role of $L_0$ (Coulomb-specific), the calibration~$\pi$
+(Coulomb-specific), and Wilson gauge with natural matter coupling
+(Coulomb-specific).  Sprints L2-E + L2-F.1 (May~2026) identified a
+fourth layer at the modular-Hamiltonian / wedge level:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Layer~1: spectrum-computing role of $L_0$
+  (Coulomb-specific).
+\item Layer~2: calibration~$\pi$ (Coulomb-specific).
+\item Layer~3: Wilson lattice gauge with natural matter coupling
+  (Coulomb-specific, via Papers~25, 30; $S^5$ is gauge-only per
+  Sprint~ST-SU3).
+\item Layer~4 \emph{(new)}: modular-Hamiltonian Pythagorean
+  orthogonality on the hemispheric wedge (Coulomb-specific; $S^5$
+  Hardy sector has no clean analog).
+\end{itemize}
+
+The fourth-layer statement is structural rather than numerical.
+On the truncated Camporesi--Higuchi spectral triple at signature
+$(3, 1)$ (the Lorentzian Krein-space lift of the $S^3$ Coulomb
+discretisation; Paper~43~\cite{paper43}), the
+Bisognano--Wichmann-aligned local Hamiltonian $H_{\mathrm{local}} :=
+K^{\alpha, W}_L / \beta$ and the wedge-restricted Lorentzian Dirac
+$D_W^L$ live in mutually-orthogonal Hilbert--Schmidt subspaces of
+the wedge operator algebra:
+\[
+   \langle H_{\mathrm{local}}, D_W^L \rangle_{\mathrm{HS}} \;=\; 0
+\]
+bit-exactly at every tested $n_{\max}$ and $N_t$, across all six
+modular witnesses (Bisognano--Wichmann + Hartle--Hawking $\times$
+2 + Sewell + Unruh $\times$ 2).  This holds because
+$H_{\mathrm{local}}$ is diagonal in the unfolded wedge spinor basis
+(eigenvalues $\mathrm{two\_m}_j > 0$, the rotation generator around
+the Hopf axis) and $D_W^L$ is off-diagonal in the same basis (it
+intertwines $\pm m_j$ chirality partners via the wedge basis
+change).  The closed-form residual lives entirely in the master
+Mellin engine M1 ring (Paper~32~\S~VIII):
+\[
+   \|H_{\mathrm{local}} - D_W^L\|_F^2
+   \;=\; \kappa_g^2 \cdot \frac{S(n_{\max})}{4\pi^2}
+       \;+\; D(n_{\max}),
+\]
+with $S$ and $D$ pure rationals in $n_{\max}$ (cumulative wedge
+Casimir traces).
+
+\paragraph{Why the fourth layer fails on the $S^5$ Hardy sector.}
+The Pythagorean structure requires the $S^3$ confluence of
+first-order $D_{\mathrm{GV}}$ \emph{and} second-order
+$\Delta_{\mathrm{LB}}$ coexisting on a parallelizable spinor
+bundle with half-integer Hopf-axis wedge.  On the Bargmann--Segal
+Hardy sector $H^2(S^5)$ this confluence is structurally absent.
+Four named obstructions:
+
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item \emph{No spinor sector on the $(N, 0)$ tower.}  The
+  symmetric irreducible representations of $\mathrm{SU}(3)$ are
+  bosonic (integer $m_l$); the Hardy sector has no half-integer
+  weight content, hence no spinor lift compatible with the
+  Bargmann transform.
+\item \emph{No second-order vs.\ first-order distinction with a
+  separate Dirac.}  The HO's spectrum-computing role is played by
+  the first-order Euler operator $\hat{N} + 3/2$ on the Hardy
+  sector, which \emph{is} the Hamiltonian.  There is no
+  ``$D_W^L$'' sitting beside a Laplacian the way $D_{\mathrm{GV}}$
+  sits beside $\Delta_{\mathrm{LB}}$ on $S^3$; the operands of the
+  Pythagorean comparison collapse to two diagonal operators in
+  the same subspace, and the inner product is generically
+  nonzero.
+\item \emph{No half-integer wedge.}  The natural BW-analog
+  generator $K^{\alpha, W} = \mathrm{diag}(2 m_l > 0)$ has
+  \emph{even}-integer spectrum, so the modular period closes at
+  $\beta = \pi$ rather than $\beta = 2\pi$.  The four-witness
+  Wick-rotation theorem at $\beta = 2\pi$ is half-integer-spectrum
+  specific.
+\item \emph{Coulomb/HO category mismatch resurfaces.}  The
+  layer-1/2/3 asymmetry already documented above propagates to
+  the modular-Hamiltonian level: every structural ingredient
+  Pythagorean orthogonality requires (spinor bundle + half-integer
+  wedge + second-order $\Delta$ alongside first-order $D$) is the
+  Coulomb-side outcome of layers~1--3.
+\end{enumerate}
+
+These four obstructions are the same blocker that prevents the
+cross-manifold tensor product $\mathcal{T}_{S^3} \otimes
+\mathcal{T}_{\mathrm{Hardy}(S^5)}$ at the AC-extension level
+(Paper~32~\S~VIII.C G4b), now showing up at the modular-Hamiltonian
+level as a sibling obstruction rather than a new one.  The
+four-layer Coulomb/HO asymmetry is consistent across spectrum
+computation, calibration, gauge-matter coupling, and modular
+structure.
+
+\paragraph{Honest scope.}  The HS-orthogonality is empirically
+demonstrated and structurally explained via the diagonal /
+off-diagonal subspace decomposition.  A formal proof of the
+subspace decomposition at general $(n_{\max}, N_t)$ is a named
+follow-on; the bit-exact numerical evidence at $n_{\max} \in
+\{1, \ldots, 5\}$ and across the 18-cell six-witness panel is
+strong evidence the orthogonality is structural, not coincidental.
+Supporting memos:
+\texttt{debug/h\_local\_residual\_pslq\_memo.md},
+\texttt{debug/six\_witness\_hs\_orthogonality\_memo.md},
+\texttt{debug/pythagorean\_extension\_scoping\_memo.md}.
+
+%================================================================
 \section{The harmonic oscillator rigidity theorem}
 \label{sec:rigidity}
 %================================================================
@@ -704,7 +819,7 @@ dynamical symmetries respectively.
 \label{sec:entanglement-rigidity}
 
 The HO rigidity theorem of
-Section~\ref{sec:ho-rigidity-theorem} has a direct
+Section~\ref{sec:rigidity} has a direct
 quantum-information corollary established empirically in
 Paper~27~\cite{paper27_entropy}: \emph{the spatial 1-RDM
 von Neumann entropy of the closed-shell two-fermion ground
@@ -748,8 +863,8 @@ Bargmann measure, and now also in two-fermion entanglement.
 \subsection{Spinor-Lichnerowicz corollary: the operator-order discriminant}
 \label{sec:spinor-lichnerowicz}
 
-The HO rigidity theorem of Section~\ref{sec:ho-rigidity-theorem}
-and the Coulomb/HO asymmetry of Section~\ref{sec:coulomb-ho-asymmetry}
+The HO rigidity theorem of Section~\ref{sec:rigidity}
+and the Coulomb/HO asymmetry of Section~\ref{sec:asymmetry}
 established that calibration~$\pi$ (even-zeta content) enters from
 second-order Riemannian operators on scalar bundles: the HO via
 the Bargmann--Segal Euler operator on $H^2(S^5)$, and the Coulomb
@@ -1220,6 +1335,17 @@ J.~Loutey,
 \textit{The Hopf Graph as a Lattice Gauge Structure: A Framework
 Observation}, Paper~25 of the Geometric Vacuum series
 (synthesis, 2026).
+
+\bibitem{paper32}
+J.~Loutey,
+\textit{The GeoVac spectral triple}, Paper~32 of the Geometric
+Vacuum series (synthesis, 2026).
+
+\bibitem{paper43}
+J.~Loutey,
+\textit{Lorentzian extension of the four-witness Wick-rotation
+theorem at finite cutoff}, Paper~43 of the Geometric Vacuum
+series (standalone, 2026).
 
 \bibitem{berger_gauduchon_mazet}
 M.~Berger, P.~Gauduchon, and E.~Mazet,

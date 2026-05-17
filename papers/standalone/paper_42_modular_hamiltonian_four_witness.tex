@@ -1410,6 +1410,68 @@ the $2\pi$ in the modular period is now a framework-internal output
 of the spectral truncation, not an externally imposed Wick-rotation
 matching.
 
+\begin{remark}[Pythagorean orthogonality underlies the six-witness
+collapse]\label{rem:pythagorean_underlies_collapse}
+A post-construction PSLQ probe on the Lorentzian extension
+(\cite[\S~10.2,
+Cor.~cor:pythagorean\_orthogonality]{paper43};\
+\texttt{debug/h\_local\_residual\_pslq\_memo.md},
+\texttt{debug/six\_witness\_hs\_orthogonality\_memo.md})
+identified a structural inner-product identity that underlies the
+six-witness collapse of
+Corollary~\ref{cor:single_construction}. For every witness
+$w \in \{\BW, \HH_{M=1}, \HH_{M=2}, \Sew_{M=1}, \Unruh_{a=1},
+\Unruh_{a=2}\}$, the BW-aligned local Hamiltonian
+$H_{\mathrm{local}}^{(w)} := K_\alpha^W / \beta^{(w)}$ and the
+wedge-restricted Camporesi--Higuchi Dirac $D_W^{\mathrm{GV}}$ are
+Hilbert--Schmidt orthogonal:
+$$
+   \big\langle H_{\mathrm{local}}^{(w)},\, D_W^{\mathrm{GV}} \big\rangle_{\mathrm{HS}}
+   \;:=\; \Tr\!\big( (H_{\mathrm{local}}^{(w)})^\dagger\, D_W^{\mathrm{GV}} \big)
+   \;=\; 0,
+$$
+verified bit-exactly at every cell of the 18-cell panel (six
+witnesses $\times$ $\nmax \in \{2, 3\}$;\ extended to $\nmax \in
+\{1, \ldots, 5\}$ on the BW canonical row;\ max $|\langle H, D
+\rangle_{\mathrm{HS}}| = 8.9\times 10^{-16}$, machine precision).
+The witness-independence of the inner product is a
+$\kappa_g$-linearity corollary:\ $H_{\mathrm{local}}^{(w)}$ scales
+linearly with $\kappa_g^{(w)}$, while $D_W^{\mathrm{GV}}$ is
+witness-independent.
+
+The mechanism is structural rather than computational:\ in the
+unfolded wedge spinor basis, $H_{\mathrm{local}}^{(w)}$ is real and
+diagonal (eigenvalues $\mathrm{two\_m}_j > 0$, the rotation
+generator around the Hopf axis), while $D_W^{\mathrm{GV}}$ is
+off-diagonal (it intertwines $\pm m_j$ chirality partners via the
+wedge basis change). The two operators occupy mutually-orthogonal
+subspaces of $\mathcal{B}(\Hilb_W)$, so the inner product vanishes;\
+the diagonal/off-diagonal subspace decomposition is sketched at
+the basis level and supports a Pythagorean form for the residual
+$$
+   \big\|H_{\mathrm{local}}^{(w)} - D_W^{\mathrm{GV}}\big\|_F^2
+   \;=\; \frac{(\kappa_g^{(w)})^2 \cdot S(\nmax)}{4\pi^2}
+       \;+\; D(\nmax),
+$$
+with $S, D$ pure rationals in $\nmax$ (Paper~43~\S~10.2). A formal
+proof of the subspace decomposition at general $\nmax$ on the
+truncated spectral triple is a named follow-on; the empirical
+verification across the 18-cell panel is strong evidence the
+orthogonality is structural rather than coincidental.
+
+\emph{Reading.}\ Corollary~\ref{cor:single_construction} states
+that the six witnesses share a single modular operator and a
+single modular Hamiltonian via $\beta$-independence of $\rho_W$.
+The present remark sharpens that reading at the inner-product
+level:\ the period closure $\sigma_{2\pi}(O) = O$ for every $O$
+in the operator system is underlaid by a structural Pythagorean
+identity that controls how $H_{\mathrm{local}}^{(w)}$ and
+$D_W^{\mathrm{GV}}$ decompose orthogonally in HS norm, with the
+witness-specific physical content carried by the
+$\kappa_g$-dependence of the M1 piece and not by any rotation
+between the two subspaces.
+\end{remark}
+
 % =====================================================================
 \section{Related work and scope}\label{sec:related_work}
 % =====================================================================
@@ -1654,6 +1716,33 @@ capture; the gap between the spectral-action and modular-Hamiltonian
 generators widens with temporal cutoff.  The \emph{deeper} question
 (why is the spectral-action Dirac not the modular generator on the
 BW vacuum, structurally?) remains open and is the residual O3.
+
+\emph{Further refinement (Pythagorean orthogonality,
+2026-05-17; Remark~\ref{rem:pythagorean_underlies_collapse} above,
+Paper~43~\S 10.2~\cite{paper43}).}\ \ %
+A post-L2-E PSLQ probe has identified the structural mechanism
+behind the signature-independent residual:\ $H_{\mathrm{local}}$
+and $D_W^L$ are Hilbert--Schmidt orthogonal,
+$\langle H_{\mathrm{local}}, D_W^L \rangle_{\mathrm{HS}} = 0$
+bit-exact across the entire 18-cell six-witness panel, and the
+squared residual decomposes as a Pythagorean sum
+$\|H_{\mathrm{local}} - D_W^L\|_F^2 = \kappa_g^2 S(n_{\max}) /
+(4\pi^2) + D(n_{\max})$ with $S, D$ pure rationals in $n_{\max}$.
+The sole transcendental ($1/\pi^2$) places the residual entirely
+in the Paper~32~\S~VIII master Mellin engine M1 sector. The
+mechanism is the diagonal/off-diagonal subspace decomposition of
+$\mathcal{B}(\Hilb_W)$:\ $H_{\mathrm{local}}$ is diagonal in the
+unfolded wedge spinor basis, $D_W^L$ is off-diagonal. The
+$S^3$-specificity of this construction --- and its failure on the
+Bargmann--Segal $S^5$ Hardy sector, which lacks a spinor sector
+and a half-integer wedge --- is the fourth layer of the Paper~24
+\S~5.3~\cite{paper24} Coulomb/HO asymmetry (alongside
+spectrum-computing $L_0$, calibration $\pi$, and Wilson matter
+coupling). The structural-explanation question (\emph{why} is
+$D_W$ the wrong modular generator?) is now sharpened to a
+subspace-orthogonality statement;\ a formal proof of the
+diagonal/off-diagonal decomposition at general $n_{\max}$ is a
+named follow-on.
 
 \textbf{(O4) Higher-rank compact non-abelian extensions.}
 Paper~40~\cite{paper40_unified} extends the Paper~38 propinquity
@@ -2454,6 +2543,13 @@ DOI via Zenodo.
 J.~Loutey,
 \newblock \emph{Latr\'emoli\`ere propinquity convergence of spectral
 truncations of compact Lie groups with bi-invariant metric},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey,
+\newblock \emph{Lorentzian extension of the four-witness
+Wick-rotation theorem at finite cutoff},
 \newblock GeoVac internal preprint, papers/standalone (2026),
 DOI via Zenodo.
 

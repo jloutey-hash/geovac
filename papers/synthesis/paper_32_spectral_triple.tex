@@ -2013,6 +2013,81 @@ memo \texttt{debug/real\_structure\_finite\_nmax\_memo.md}) are
 downstream of this theorem.
 \end{remark}
 
+\begin{remark}[Pythagorean M1 closure of the L2-E residual]
+\label{rem:pythagorean_m1_closure}
+The case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion}
+classifies the transcendental ring in which the $\pi$-content of a
+finite chain of Paper~34 projections must sit.  A
+post-Sprint-L2-E PSLQ probe (\texttt{debug/h\_local\_residual\_pslq\_memo.md},
+2026-05-17) provides a concrete operator-level instantiation of the
+theorem at $k = 0$ (the M1 sub-mechanism / Hopf-base measure sector).
+On the truncated Lorentzian Krein spectral triple
+(Paper~43~\cite{paper43}~\S 10.2), the
+Bisognano--Wichmann-aligned local Hamiltonian
+$H_{\mathrm{local}} = K^{\alpha, W}_L / \beta$ and the
+wedge-restricted Lorentzian Dirac $D_W^L$ are Hilbert--Schmidt
+orthogonal,
+\[
+   \langle H_{\mathrm{local}}, D_W^L \rangle_{\mathrm{HS}}
+   \;=\; 0
+   \qquad \text{(bit-exact at every tested $(n_{\max}, N_t)$),}
+\]
+and the squared residual decomposes as a Pythagorean sum in the M1
+ring:
+\[
+   \big\| H_{\mathrm{local}} - D_W^L \big\|_F^2
+   \;=\; \frac{\kappa_g^2 \cdot S(n_{\max})}{4\pi^2}
+       \;+\; D(n_{\max}),
+\]
+with $S, D \in \mathbb{Q}[n_{\max}]$ given by cumulative wedge
+Casimir traces (Paper~43~\S 10.2,
+Cor.~cor:pythagorean\_orthogonality therein).  The sole
+transcendental in the residual is $1/\pi^2 = 1/\mathrm{Vol}(S^1)^2$,
+the squared Hopf-base-measure signature, exactly the M1 output the
+case-exhaustion theorem predicts for a $k = 0$ chain that engages no
+M2 heat-kernel content and no M3 vertex-parity Hurwitz content.
+
+This sharpens the engine's predictive content along a complementary
+axis to Remark~\ref{rem:master_mellin_domain}.  Sprint MR-A/B/C
+established the mechanism-as-domain partition (M1 owns
+propinquity-rate observables, M2 owns heat-kernel residuals, M3 owns
+vertex-restricted parity observables).  The L2-E result adds a
+fourth empirical instantiation:\ M1 owns the modular-Hamiltonian /
+spectral-action generator-orthogonality residual on the
+hemispheric-wedge KMS state, with the specific ring decomposition
+$\mathbb{Q}[n_{\max}] \oplus \pi^{-2}\,\mathbb{Q}[n_{\max}]$ that
+the case-exhaustion theorem allows at $k = 0$.  The engine does not
+just classify which $\pi$-powers can appear; it now correctly
+predicts the exact M1 ring for the modular-Hamiltonian generator
+distinction observed in Paper~42~\S 7.2 and Paper~43~\S 10.1.
+
+The orthogonality is universal across all six modular witnesses
+(Paper~42~\cite{paper42}~Cor.~cor:single\_construction;\
+Paper~43~\S 10.2), via $\kappa_g$-linearity of $H_{\mathrm{local}}$
+and $\kappa_g$-independence of $D_W^L$.  The structural mechanism
+is the diagonal/off-diagonal subspace decomposition of
+$\mathcal{B}(\mathcal{H}_W)$:\ $H_{\mathrm{local}}$ is real and
+diagonal in the unfolded wedge spinor basis (eigenvalues
+$\mathrm{two\_m}_j$), $D_W^L$ is off-diagonal in the same basis
+(intertwines $\pm m_j$ chirality partners).  A formal proof of the
+subspace decomposition at general $(n_{\max}, N_t)$ is a named
+follow-on;\ the empirical verification across the 18-cell
+six-witness panel is strong evidence the decomposition is
+structural rather than coincidental.
+
+\emph{Cross-references.}\ Paper~43~\S 10.2
+Cor.~cor:pythagorean\_orthogonality (closed form and
+witness-universality);\ Paper~42~\S 8
+Rem.~rem:pythagorean\_underlies\_collapse (the
+six-witness-collapse statement at the inner-product level);\
+Paper~24~\S 5.3 four-layer Coulomb/HO asymmetry (the structural
+finding that the Pythagorean orthogonality is $S^3$-specific to
+the construction --- the $S^5$ Hardy sector has no clean analog,
+joining the modular-Hamiltonian level as a fourth Coulomb/HO
+asymmetry layer alongside spectrum-computing $L_0$, calibration
+$\pi$, and Wilson matter coupling).
+\end{remark}
+
 % -------------------------------------------------------------------
 \subsection{The unified $U(1) \times SU(2) \times SU(3)$ gauge
 content and its limits}
@@ -2823,21 +2898,31 @@ stay within Berezin--Toeplitz on a single manifold or within
 Riemannian on a single manifold, never crossing.
 \end{itemize}
 
-The structural reading is that G4b is the four-layer Coulomb/HO
+The structural reading is that G4b is the Coulomb/HO
 asymmetry of Paper~24~\S V resurfacing at the spectral-triple level.
-The first three layers (spectrum-computing role of $L_0$;\
-calibration~$\pi$;\ gauge-with-natural-matter,
-Sec.~\ref{sec:unified_gauge}) are surface manifestations.  G4b is
-the fourth layer:\ the Coulomb $S^3$ side carries a Riemannian
-spectral triple in the standard NCG sense, the Bargmann $S^5$ side
-does not, and the Connes tensor-product framework cannot bridge them
-as currently published.  Closing G4b is therefore not a sprint-scale
-GeoVac task;\ it requires either an extension of NCG to handle
-Riemannian--Hardy mixed tensor products, or the identification of a
-unifying ambient manifold whose GeoVac sub-structure contains both
-$S^3$ Coulomb and $S^5$ Bargmann as natural sub-objects.  Both
-directions are recorded as honest open structural questions, not
-as sprint targets.
+Paper~24~\S 5.3 now records four layers of this asymmetry, all
+Coulomb-specific:\ (i)~spectrum-computing role of $L_0$;\
+(ii)~calibration~$\pi$;\ (iii)~Wilson gauge with natural matter
+coupling, Sec.~\ref{sec:unified_gauge};\ and (iv)~modular-Hamiltonian
+Pythagorean orthogonality on the hemispheric wedge, the structural
+mechanism behind the L2-E signature-independence finding
+(Paper~43~\S 10.2~\cite{paper43};
+Remark~\ref{rem:pythagorean_m1_closure} above).  G4b is a
+\emph{sibling} of these four layers, not the lone fourth layer:\ the
+Coulomb $S^3$ side carries a Riemannian spectral triple in the
+standard NCG sense and supports the BW-aligned wedge-modular
+construction at signatures $(3, 0)$ and $(3, 1)$, while the Bargmann
+$S^5$ side has none of the four ingredients (no spinor bundle on
+the $(N, 0)$ Hardy tower;\ no second-order-vs-first-order distinction
+with a separate Dirac;\ no half-integer wedge;\ no calibration $\pi$
+or natural Wilson matter coupling). The Connes tensor-product
+framework cannot bridge them as currently published.  Closing G4b is
+therefore not a sprint-scale GeoVac task;\ it requires either an
+extension of NCG to handle Riemannian--Hardy mixed tensor products,
+or the identification of a unifying ambient manifold whose GeoVac
+sub-structure contains both $S^3$ Coulomb and $S^5$ Bargmann as
+natural sub-objects.  Both directions are recorded as honest open
+structural questions, not as sprint targets.
 
 \paragraph{Net.}  After Sprints H1 + G3 + G4 scoping, the
 four-gap analysis of Sec.~\ref{sec:unified_gauge} compresses to:
@@ -4233,6 +4318,11 @@ arXiv:2502.18105 (2025).
 J.~Loutey, \emph{Tomita--Takesaki modular structure on truncated SU(2)
 spectral triples: a four-witness Wick-rotation theorem at finite
 cutoff} (Paper~42 of the GeoVac series, Zenodo, 2026).
+
+\bibitem{paper43}
+J.~Loutey, \emph{Lorentzian extension of the four-witness
+Wick-rotation theorem at finite cutoff} (Paper~43 of the GeoVac
+series, Zenodo, 2026).
 
 \end{thebibliography}
 

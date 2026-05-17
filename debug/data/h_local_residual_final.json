@@ -1,0 +1,236 @@
+{
+  "sprint": "H_local residual PSLQ probe",
+  "date": "2026-05-17",
+  "verdict": "POSITIVE - exact closed form identified",
+  "discovery": {
+    "pythagorean_decomposition": "r^2 = ||H_local||_F^2 + ||D_W^L||_F^2 because <H_local, D_W^L>_HS = 0 bit-exact",
+    "closed_form_r_squared": "r^2(n_max) = S(n_max)/(4 pi^2) + D(n_max)",
+    "S_formula": "S(n_max) = n(n+1)(n+2)(2n^2 + 4n - 1) / 15",
+    "D_formula": "D(n_max) = n(n+1)(n+2)(2n+1)(2n+3) / 20",
+    "transcendental_content": "1/pi^2 in M1 Hopf-base measure sector; no new tier needed",
+    "irreducible_list_status": "does NOT join {K, c_L2, S_full(GS), Wolfenstein}; fully closed in M1 ring"
+  },
+  "N_t_1_panel": [
+    {
+      "n_max": 1,
+      "S_integer": 2,
+      "D_times_20": 90,
+      "D_rational_str": "90/20",
+      "r_sq_50dps": "4.5506605918211688857219397316048638194521793873361",
+      "r_50dps": "2.133227740261496057062702443515365988762451809521",
+      "pslq_relation_[r2,1,1/pi^2]": [
+        2,
+        -9,
+        -1
+      ],
+      "extracted_rational_part": 4.5,
+      "extracted_1_over_pi2_coef": 0.5
+    },
+    {
+      "n_max": 2,
+      "S_integer": 24,
+      "D_times_20": 840,
+      "D_rational_str": "840/20",
+      "r_sq_50dps": "42.607927101854026628663276779258365833426152648033",
+      "r_50dps": "6.5274747875310883217189531193965614915973167058556",
+      "pslq_relation_[r2,1,1/pi^2]": [
+        1,
+        -42,
+        -6
+      ],
+      "extracted_rational_part": 42.0,
+      "extracted_1_over_pi2_coef": 6.0
+    },
+    {
+      "n_max": 3,
+      "S_integer": 116,
+      "D_times_20": 3780,
+      "D_rational_str": "3780/20",
+      "r_sq_50dps": "191.9383143256277953718725044330821015282264044655",
+      "r_50dps": "13.854180391695056724643935689844207171826198068392",
+      "pslq_relation_[r2,1,1/pi^2]": [
+        1,
+        -189,
+        -29
+      ],
+      "extracted_rational_part": 189.0,
+      "extracted_1_over_pi2_coef": 29.0
+    },
+    {
+      "n_max": 4,
+      "S_integer": 376,
+      "D_times_20": 11880,
+      "D_rational_str": "11880/20",
+      "r_sq_50dps": "603.52419126237975051572466954171439805700972481919",
+      "r_50dps": "24.566729356232582359948529059448705617161697750636",
+      "pslq_relation_[r2,1,1/pi^2]": [
+        1,
+        -594,
+        -94
+      ],
+      "extracted_rational_part": 594.0,
+      "extracted_1_over_pi2_coef": 94.0
+    },
+    {
+      "n_max": 5,
+      "S_integer": 966,
+      "D_times_20": 30030,
+      "D_rational_str": "30030/20",
+      "r_sq_50dps": "1525.9690658496245718036968903651492247954026440833",
+      "r_50dps": "39.063654025828466675654397301770073933278462148713",
+      "pslq_relation_[r2,1,1/pi^2]": [
+        -2,
+        3003,
+        483
+      ],
+      "extracted_rational_part": 1501.5,
+      "extracted_1_over_pi2_coef": 241.5
+    },
+    {
+      "n_max": 6,
+      "S_integer": 2128,
+      "D_times_20": 65520,
+      "D_rational_str": "65520/20",
+      "r_sq_50dps": "3329.9028696977236944081438744275751038971188681256",
+      "r_50dps": "57.705310584882252190664038948963675230001955195747",
+      "pslq_relation_[r2,1,1/pi^2]": [
+        1,
+        -3276,
+        -532
+      ],
+      "extracted_rational_part": 3276.0,
+      "extracted_1_over_pi2_coef": 532.0
+    }
+  ],
+  "N_t_gt_1_panel_decomposition": [
+    {
+      "n_max": 1,
+      "N_t": 11,
+      "dim_W_L": 12,
+      "r_sq": 152.303964,
+      "H_local_sq": 0.303964,
+      "D_W_sq": 152.0,
+      "spatial_sq": 27.0,
+      "temporal_sq": 125.0
+    },
+    {
+      "n_max": 1,
+      "N_t": 21,
+      "dim_W_L": 22,
+      "r_sq": 1050.057267,
+      "H_local_sq": 0.557267,
+      "D_W_sq": 1049.5,
+      "spatial_sq": 49.5,
+      "temporal_sq": 1000.0
+    },
+    {
+      "n_max": 2,
+      "N_t": 11,
+      "dim_W_L": 48,
+      "r_sq": 755.647563,
+      "H_local_sq": 3.647563,
+      "D_W_sq": 752.0,
+      "spatial_sq": null,
+      "temporal_sq": null
+    },
+    {
+      "n_max": 3,
+      "N_t": 11,
+      "dim_W_L": 120,
+      "r_sq": 2401.629886,
+      "H_local_sq": 17.629886,
+      "D_W_sq": 2384.0,
+      "spatial_sq": 1134.0,
+      "temporal_sq": 1250.0
+    },
+    {
+      "n_max": 3,
+      "N_t": 21,
+      "dim_W_L": 220,
+      "r_sq": 12111.321458,
+      "H_local_sq": 32.321458,
+      "D_W_sq": 12079.0,
+      "spatial_sq": 2079.0,
+      "temporal_sq": 10000.0
+    },
+    {
+      "n_max": 4,
+      "N_t": 11,
+      "dim_W_L": 240,
+      "r_sq": 6121.145148,
+      "H_local_sq": 57.145148,
+      "D_W_sq": 6064.0,
+      "spatial_sq": 3564.0,
+      "temporal_sq": 2500.0
+    }
+  ],
+  "pslq_verification_per_nmax": [
+    {
+      "n_max": 1,
+      "relation": [
+        2,
+        -9,
+        -1
+      ],
+      "predicted_pure_rational_part": "D(n) = 90/20 = 4.5",
+      "predicted_pi2_coefficient": "S(n)/4 = 2/4 = 0.5"
+    },
+    {
+      "n_max": 2,
+      "relation": [
+        1,
+        -42,
+        -6
+      ],
+      "predicted_pure_rational_part": "D(n) = 840/20 = 42.0",
+      "predicted_pi2_coefficient": "S(n)/4 = 24/4 = 6.0"
+    },
+    {
+      "n_max": 3,
+      "relation": [
+        1,
+        -189,
+        -29
+      ],
+      "predicted_pure_rational_part": "D(n) = 3780/20 = 189.0",
+      "predicted_pi2_coefficient": "S(n)/4 = 116/4 = 29.0"
+    },
+    {
+      "n_max": 4,
+      "relation": [
+        1,
+        -594,
+        -94
+      ],
+      "predicted_pure_rational_part": "D(n) = 11880/20 = 594.0",
+      "predicted_pi2_coefficient": "S(n)/4 = 376/4 = 94.0"
+    },
+    {
+      "n_max": 5,
+      "relation": [
+        -2,
+        3003,
+        483
+      ],
+      "predicted_pure_rational_part": "D(n) = 30030/20 = 1501.5",
+      "predicted_pi2_coefficient": "S(n)/4 = 966/4 = 241.5"
+    },
+    {
+      "n_max": 6,
+      "relation": [
+        1,
+        -3276,
+        -532
+      ],
+      "predicted_pure_rational_part": "D(n) = 65520/20 = 3276.0",
+      "predicted_pi2_coefficient": "S(n)/4 = 2128/4 = 532.0"
+    }
+  ],
+  "N_t_gt_1_summary": {
+    "pythagorean_persists": true,
+    "no_new_transcendentals": true,
+    "H_local_squared_scales_as": "||H_local||^2(n,N_t) = N_t_pos * S(n) / (4 pi^2)",
+    "D_W_L_squared_scales_as": "pure rational, splits orthogonally into spatial extension + temporal FD piece",
+    "temporal_piece": "pure rational, scales with FD grid spacing h = 2/(N_t-1)"
+  }
+}

@@ -1375,6 +1375,119 @@ residual open question is the structural \emph{explanation}:\ why is
 $D_W$ the wrong generator for the BW vacuum, signature-independently?
 We leave this as open question O4 in Section~\ref{sec:open_questions}.
 
+\subsection{Pythagorean orthogonality and closed-form residual}
+\label{sec:pythagorean_orthogonality}
+
+Theorem~\ref{thm:H_local_signature_independence} records the
+bit-exact signature-independence of the residual at $\Nt = 1$. A
+post-L2-E PSLQ probe (\texttt{debug/h\_local\_residual\_pslq\_memo.md},
+2026-05-17) identified the structural mechanism behind that
+signature-independence: the residual decomposes as a Pythagorean
+sum, with one summand in the master Mellin engine M1 ring
+(Paper~32~\S~VIII; Vol$(S^1)^2 = (2\pi)^2$ Hopf-base measure
+signature) and one summand purely rational.
+
+\begin{corollary}[Pythagorean orthogonality of $H_{\mathrm{local}}$
+and $\DL^W$]\label{cor:pythagorean_orthogonality}
+At the Riemannian limit $\Nt = 1$, the BW-aligned local Hamiltonian
+$H_{\mathrm{local}} = \KL^{\alpha, W} / \beta$ and the wedge-restricted
+Lorentzian Dirac $\DL^W$ are Hilbert--Schmidt orthogonal,
+$$
+   \big\langle H_{\mathrm{local}}, \DL^W \big\rangle_{\mathrm{HS}}
+   \;:=\; \Tr\!\big(H_{\mathrm{local}}^\dagger\, \DL^W\big) \;=\; 0,
+$$
+and the residual of Theorem~\ref{thm:H_local_signature_independence}
+admits the closed form
+\begin{equation}\label{eq:pythagorean_residual}
+   \Frob{H_{\mathrm{local}} - \DL^W}^2
+   \;=\; \frac{\kappa_g^2 \cdot S(\nmax)}{4\pi^2}
+       \;+\; D(\nmax),
+\end{equation}
+where $\kappa_g$ is the witness surface-gravity normalisation, and
+$$
+   S(\nmax) = \frac{\nmax (\nmax + 1)(\nmax + 2)(2\nmax^2 + 4\nmax - 1)}{15},
+$$
+$$
+   D(\nmax) = \frac{\nmax (\nmax + 1)(\nmax + 2)(2\nmax + 1)(2\nmax + 3)}{20}
+$$
+are pure rationals in $\nmax$.
+\end{corollary}
+
+The closed form is verified at $\nmax \in \{1, \ldots, 6\}$ by PSLQ
+at 100~dps with coefficient ceiling $10^6$ on the basis $\{r^2, 1,
+1/\pi^2\}$;\ every panel cell returns a clean integer relation.
+The rational coefficients $S, D$ are recognisable as cumulative
+wedge-Casimir traces:\ $S(\nmax)/4 = \sum_{\mathrm{wedge}} m_j^2$ is
+the squared angular-momentum trace around the Hopf axis, and
+$D(\nmax) = \sum_{\mathrm{wedge}} (n + \tfrac{1}{2})^2$ is the
+squared-Dirac-spectrum trace on the wedge.
+
+\paragraph{Structural mechanism.}
+$H_{\mathrm{local}} = (\kappa_g / 2\pi) \cdot
+\mathrm{diag}(\mathrm{two\_m}_j > 0)$ is real and diagonal in the
+unfolded wedge spinor basis. The wedge-restricted Camporesi--Higuchi
+Dirac $D_W^{\mathrm{GV}}$ acts off-diagonally in the same basis:\
+it intertwines the $\pm m_j$ chirality partners under the wedge
+basis change. The two operators live in orthogonal HS subspaces of
+$\mathcal{B}(K_W)$, hence the inner product vanishes. The
+diagonal/off-diagonal subspace decomposition is sketched at the
+basis level here and verified bit-exactly across the panel; a
+formal proof at general $(\nmax, N_t)$ is a named follow-on
+(see Section~\ref{sec:open_questions} O4).
+
+\paragraph{Universality across six witnesses.}
+The factorisation~\eqref{eq:pythagorean_residual} is linear in
+$\kappa_g^2$:\ the diagonal piece $\|H_{\mathrm{local}}\|_F^2$
+scales as $\kappa_g^2$ via the global prefactor, and the
+off-diagonal piece $\|\DL^W\|_F^2$ is $\kappa_g$-independent (the
+Lorentzian Dirac construction of
+Section~\ref{sec:lorentzian_dirac} contains no $\kappa_g$ or
+$\beta$). The HS-orthogonality is therefore universal across the
+six modular witnesses of Section~\ref{sec:six_witness}: all six
+share the BW-aligned $H_{\mathrm{local}} = \KL^{\alpha, W} / \beta$
+convention, differ only in $\kappa_g^{(w)}$, and produce bit-exact
+$\langle H_{\mathrm{local}}^{(w)}, \DL^W \rangle_{\mathrm{HS}} = 0$
+at every cell of the 18-cell panel (six witnesses $\times$
+$\nmax \in \{1, 2, 3\}$;\ max
+$|\langle H, D \rangle_{\mathrm{HS}}|
+= 8.9\times 10^{-16}$, machine precision). Source data:\
+\texttt{debug/data/six\_witness\_hs\_orthogonality.json}.
+
+\paragraph{The $\Nt > 1$ extension.}
+The Pythagorean decomposition persists at $\Nt > 1$ (verified
+bit-exactly across the panel $(\nmax, N_t) \in
+\{(1, 11), (1, 21), (2, 11), (3, 11), (3, 21), (4, 11)\}$). The
+temporal-derivative content $i\gamma^0 \otimes \partial_t$ in
+$\DL$ enters the off-diagonal subspace, not the diagonal one, so
+the orthogonality is preserved. The $\Nt > 1$ residual increment
+is a pure-rational shift driven by the finite-difference grid
+spacing;\ no new transcendentals are introduced. The master
+Mellin engine M1 ring is closed under the $\Nt > 1$ extension.
+
+\paragraph{Master Mellin engine reading.}
+The residual sits entirely in the M1 sector of
+Paper~32~\S~VIII / Paper~18~\S~III.7's master Mellin engine:\ the
+sole transcendental is $1/\pi^2 = 1/\Vol(S^1)^2$, the squared
+Hopf-base-measure signature. This is structurally a $k = 0$
+instantiation of the case-exhaustion theorem, where the orthogonal
+pair of cumulative Casimir traces ($S$ in the $K_\alpha$ sector,
+$D$ in the $D_W$ sector) decompose into two non-overlapping
+subspaces of the wedge operator algebra. The residual does
+\emph{not} join the framework's irreducible-but-natural list
+($K = \pi(B + F - \Delta)$, Sprint~MR-C $L_2$ next-order
+constant $c \approx 4.10932\ldots$, $S_{\mathrm{full}}(\mathrm{GS})$,
+Wolfenstein parameters);\ it is fully decomposable in M1, with
+explicit polynomial-in-$\nmax$ coefficients.
+
+\paragraph{Honest scope.}
+The closed form is structurally explained via the
+diagonal/off-diagonal subspace decomposition and verified
+bit-exactly at every tested cutoff. A formal proof of the
+subspace decomposition at general $(\nmax, N_t)$ on the
+truncated Krein triple is a natural follow-on;\ the empirical
+verification across 18+ cells is strong evidence that the
+orthogonality is structural rather than coincidental.
+
 \subsection{The BBB universal-axiom finding on truthful $\DGV$}
 \label{sec:bbb_axiom_finding}
 
@@ -1697,14 +1810,32 @@ $H_{\mathrm{local}} \ne D_W$ signature-independent?}
 Section~\ref{sec:H_local_signature_independence} sharpens Paper~42's
 open question O3 from ``open about signature-dependence'' to
 ``signature-independent at the Riemannian limit, refined at $\Nt > 1$
-by temporal-derivative content''. The residual open question is the
-\emph{structural explanation}:\ why is the spectral-action Dirac not
-the modular generator on the Bisognano--Wichmann vacuum at either
-signature? The Connes--Rovelli~\cite{connes_rovelli1994} thermal-time
+by temporal-derivative content''.
+Section~\ref{sec:pythagorean_orthogonality}
+(Corollary~\ref{cor:pythagorean_orthogonality}) further sharpens
+the residual to a structural Pythagorean identity:\
+$H_{\mathrm{local}}$ and $\DL^W$ live in mutually-orthogonal
+Hilbert--Schmidt subspaces of $\mathcal{B}(\Hilb_W)$, with the
+squared residual decomposing in the master Mellin engine M1 ring.
+The diagonal/off-diagonal subspace decomposition is sketched at
+the basis level and verified bit-exactly across the panel;\ a
+\emph{formal proof} of the subspace decomposition at general
+$(\nmax, \Nt)$ on the truncated Krein triple is a named follow-on.
+The deeper structural-explanation question --- why is the
+spectral-action Dirac not the modular generator on the
+Bisognano--Wichmann vacuum at either signature, and why does it
+fail by sitting in a literally-orthogonal HS subspace? --- remains
+open. The Connes--Rovelli~\cite{connes_rovelli1994} thermal-time
 hypothesis and the Chamseddine--Connes~\cite{chamseddine_connes2010}
 spectral-action paradigm point to two distinct natural generators on
-the wedge KMS state;\ characterizing the structural reading of this
-distinction in the framework's modular content is open.
+the wedge KMS state;\ the Pythagorean orthogonality observed here
+suggests the distinction is structural and basis-canonical, not a
+small perturbative effect. The $S^3$-specificity of this
+construction (Paper~24~\S~5.3~\cite{paper24} fourth-layer
+Coulomb/HO asymmetry) places it in the same family as the
+spectrum-computing $L_0$, the calibration $\pi$, and the Wilson
+matter coupling --- each of which has no clean Bargmann--Segal
+$S^5$ analog at the present state of the framework.
 
 \paragraph{O5.\ Non-tracial wedge states (Paper~42 O2 lifted).}
 The wedge KMS state $\rho_W^L$ of the present paper is a tracial-Gibbs

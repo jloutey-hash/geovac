@@ -282,3 +282,61 @@ None yet — all Tier 2 proposals are drop-in files awaiting PI approval.
 - Chemistry arc paused per PI: a "more focused diagnostic arc may be needed; still feels like there's a missing something." Diagnostic-only sprint to be designed before another implementation sprint. Pattern: 3+ accumulated negatives in one direction → diagnostic before engineering (see new feedback memory).
 - CP² and higher-rank packing closed cleanly as not packing-axiom directions; W3 second-packing-axiom question reframed as structurally distinct from "packing on different geometry" — about how parameters get values, not how a manifold gets cellular structure.
 - Mu HFS sets the empirical LS-8a wall scale (~200 ppm at α²(Zα) for HFS observables in clean isolation) — Paper 35 Refined Prediction 1 quantitative anchor.
+
+---
+
+## Session Summary 2026-05-17 — Sprint L2-F.1 + Pythagorean Extension
+
+### Tracks
+- L2-F.1: completed POSITIVE — Probe Theorem 7.1 residual structure on Lorentzian wedge; bit-exact closed form r² = κ_g²·S(n)/(4π²) + D(n) via Pythagorean orthogonality
+- Track 1 (parallel): completed UNIVERSAL — Six-witness HS-orthogonality probe; 18/18 cells bit-exact zero
+- Track 2 (parallel): completed; SU(2) Wilson on S³ GO-WITH-PREREQS, SU(3) Bargmann on S⁵ NO-GO with four named obstructions
+- Synthesis: completed — 5 paper edits across Papers 43/42/32/24
+- Paper 24 cleanup: completed — preamble `\newtheorem` + `amsthm` + 2 cross-ref fixes (clean three-pass)
+- Docs sync: completed — CLAUDE.md v2.45.0, MEMORY.md, CHANGELOG.md updated; 2 new memory files
+
+### Results
+
+**Pythagorean orthogonality (load-bearing structural finding).** On the hemispheric wedge of the Lorentzian Krein space at finite n_max, ⟨H_local, D_W^L⟩_HS = 0 bit-exact at every panel cell (max 8.9×10⁻¹⁶ across 18-cell six-witness panel; PSLQ-verified at 100 dps, ceiling 10⁶, n_max ∈ {1..6}). Closed form:
+
+  r²(n; κ_g) = κ_g²·S(n)/(4π²) + D(n)
+  S(n) = n(n+1)(n+2)(2n²+4n−1)/15  [cumulative ⟨m_j²⟩ wedge trace]
+  D(n) = n(n+1)(n+2)(2n+1)(2n+3)/20  [cumulative ⟨|λ|²⟩ wedge trace]
+
+The 1/π² is the master Mellin engine M1 Hopf-base-measure signature. Mechanism: H_local lives in the diagonal subspace of B(K_W) (function of m_j only), D_W^L lives in the off-diagonal subspace (Δn=±1, intertwines ±m_j chirality partners) — mutually orthogonal subspaces of operator space. Six-witness universality is a κ_g-linearity corollary of the BW result.
+
+**Scoping verdicts.** SU(2) Wilson on S³ reachable with matter-coupling prereq (1-2 weeks of separate `geovac/su2_wilson_gauge.py` extension). SU(3) Wilson on S⁵ Bargmann NO-GO with four named structural obstructions (no spinor sector on (N,0) Hardy tower; no second-order/first-order distinction with separate Dirac; no half-integer wedge — m_l integer ⇒ period π not 2π; Coulomb/HO category mismatch resurfaces at modular-Hamiltonian level). Establishes **fourth layer** of Paper 24 §V Coulomb/HO asymmetry.
+
+**Bit-exactness rule of thumb (PI-adopted heuristic).** New working principle: bit-exact closure = green light (skeleton operation); residuals = caution light (Layer 2 work); neither = drift detector needed. Used productively across all four tracks today; all stayed green-light.
+
+### Files Modified
+- `papers/standalone/paper_43_lorentzian_extension.tex` — §10.2 new subsec:pythagorean_orthogonality + Corollary; §11 O4 extended (~137 lines)
+- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` — §8 new rem:pythagorean_underlies_collapse + §10 O3 extended (~96 lines)
+- `papers/synthesis/paper_32_spectral_triple.tex` — §VIII new rem:pythagorean_m1_closure (~104 lines); §VIII.C G4b paragraph revised
+- `papers/core/paper_24_bargmann_segal.tex` — §V new subsec:asymmetry_layer4 (~122 lines); preamble: `+amsthm`, `+\newtheorem{theorem}`, `+\newtheorem{corollary}`; cross-ref fixes (sec:ho-rigidity-theorem → sec:rigidity ×3; sec:coulomb-ho-asymmetry → sec:asymmetry)
+- `CLAUDE.md` — §1 v2.44.0 → v2.45.0; §1.7 WH1 sharpened (PROVEN maintained); §2 full sprint bullet; §6 4 paper entries × 2 tables = 8 edits; §11 3 new lookup rows
+- `CHANGELOG.md` — v2.45.0 entry
+- `MEMORY.md` — 2 one-line entries pointing at new memory files
+
+### Files Created
+- `memory/pythagorean_orthogonality.md` — project-type memory
+- `memory/feedback_bit_exactness_rule.md` — feedback-type memory
+- `debug/h_local_residual_pslq_compute.py`, `_closed_form_verify.py`, `_pslq_memo.md`
+- `debug/data/h_local_residual_pslq_data.json`, `_closed_form.json`, `_final.json`
+- `debug/six_witness_hs_orthogonality_compute.py`, `_memo.md`
+- `debug/data/six_witness_hs_orthogonality.json`
+- `debug/pythagorean_extension_scoping_memo.md`
+
+### Decisions
+- **Bit-exactness rule of thumb adopted** as ongoing PM heuristic. Documented in `memory/feedback_bit_exactness_rule.md`.
+- **WH1 PROVEN status maintained**, not re-opened. L2-F.1 sharpens Theorem 7.1 with exact closed form; does not modify five-lemma GH-convergence proof.
+- **SU(2) Wilson matter-coupling sprint named as next major direction** (3-5 weeks, gated on PI authorization). SU(3) NO-GO recorded as dictionary content.
+- **Paper 32 §VIII.C G4b paragraph reframed** from "fourth layer" to "sibling of the four layers" since Paper 24 §V now formally records four layers explicitly.
+- **Pre-existing Paper 24 bugs cleaned up** (same `\newtheorem` pattern as Paper 34 fix 2026-05-08; +amsthm for `\begin{proof}` envs; 2 underscore/hyphen cross-ref typos). Now compiles clean three-pass.
+- **Pre-existing revtex4-2 `Note1` natbib quirk left as-is.** Benign warning, no PDF impact.
+- **Strategic options on the table** for next session: (Option 2) formal proof of diagonal/off-diagonal subspace decomposition; (Option 3) SU(2) Wilson matter-coupling sprint, 3-5 weeks; (MEMORY.md compaction) separate sprint when PI has appetite.
+
+### Honest Scope Flags
+- Pythagorean orthogonality empirically PSLQ-verified at 100 dps + 18-cell panel; structural mechanism sketched in `debug/h_local_residual_pslq_memo.md`; formal proof at general (n_max, N_t) is named follow-on.
+- MEMORY.md at 30.9 KB > 24.4 KB limit; pre-existed today.
+- Paper 24 §V four-layer claim is structural, not numerical — no S⁵-side computation run; statement rests on the four named obstructions from the scoping memo.

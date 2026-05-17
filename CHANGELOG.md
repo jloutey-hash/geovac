@@ -7,6 +7,195 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.45.0] - 2026-05-17
+
+### Added — Sprint L2-F.1 + Pythagorean extension scoping (post-L2-closure refinement)
+
+Two-track same-day post-L2-closure sprint refining the Paper 42 §7.2 H_local ≠ D_W
+structural finding with closed-form algebraic content, plus a structural-scope scoping
+pass testing Pythagorean extensions to other Wilson sectors. No production `geovac/`
+code modified.
+
+**Headline structural result.** On the hemispheric wedge $W_L$ of the Lorentzian Krein
+space, the inner product $\langle H_{\mathrm{local}}, D_W^L \rangle_{\mathrm{HS}} = 0$
+**bit-exact at every panel cell** (n_max ∈ {1, 2, 3, 4, 5, 6}, all six modular witnesses,
+N_t ∈ {1, 11}). Closed-form Hilbert-Schmidt squared distance:
+$$r^2(n; \kappa_g) = \frac{\kappa_g^2 \cdot S(n)}{4\pi^2} + D(n)$$
+with $S(n) = n(n+1)(n+2)(2n^2 + 4n - 1)/15$ and $D(n) = n(n+1)(n+2)(2n+1)(2n+3)/20$.
+PSLQ-verified at 100 dps, coefficient ceiling $10^6$.
+
+**M1 signature.** The $1/\pi^2$ prefactor on $\|H_{\mathrm{local}}\|^2$ is the master
+Mellin engine M1 Hopf-base-measure signature — same content as the Paper 38 L2
+quantitative rate $4/\pi$ and as the Stefan-Boltzmann Matsubara prefactor. Extends the
+case-exhaustion theorem of Paper 32 §VIII from "transcendentals in transition amplitudes"
+to "residual norms of operator-space distinctions."
+
+**Mechanism (subspace decomposition, structural sketch).** Under the BW choice
+$H_{\mathrm{local}} := K_\alpha^W/\beta$, $H_{\mathrm{local}} = J_{\mathrm{polar}}/(2\pi)$
+lives in the diagonal subspace of $B(\mathcal{K}_W)$ in the full-Dirac wedge basis
+(J_polar has integer eigenvalues two_m_j on this basis); $D_W^L$ lives in the off-diagonal
+subspace (couples Δn = ±1 and intertwines ±m_j chirality partners). Diagonal and
+off-diagonal operator subspaces are orthogonal under Hilbert-Schmidt; Pythagoras
+$r^2 = \|H\|^2 + \|D\|^2$ is then forced. **Formal operator-theoretic proof of the
+subspace decomposition** (as opposed to PSLQ-verified empirical observation across the
+panel) is the named follow-on (Option 2 from PI's earlier triage; Paper 43 §11 O4).
+
+**Track 1 — six-witness HS-orthogonality universality (POSITIVE).**
+
+- HS-orthogonality verified universal across all six modular witnesses (BW + HH×2 +
+  Sewell + Unruh×2). 18 panel cells bit-exact zero, max $|\langle H, D\rangle| = 8.9 \times 10^{-16}$.
+- Universality is a $\kappa_g$-linearity corollary of the BW result; closed-form $r^2$
+  above generalises by $\kappa_g$-substitution.
+- Pythagoras $r^2 = \|H\|^2 + \|D\|^2$ verified at every cell.
+- N_t > 1 spot check at (n_max, N_t) = (3, 11) confirms orthogonality persists in the
+  temporal-derivative regime where $D_L = i(\gamma^0 \otimes \partial_t + D_{\mathrm{GV}} \otimes I)$
+  adds content beyond $D_{\mathrm{GV}}$.
+
+Files: `debug/six_witness_hs_orthogonality_compute.py`,
+`debug/six_witness_hs_orthogonality_memo.md`, `debug/data/six_witness_hs_orthogonality.json`.
+
+**Track 2 — Pythagorean extension scoping.**
+
+Two candidate extensions beyond Paper 42/43 spectral triples scoped diagnostically:
+
+- **SU(2) Wilson lattice gauge on $S^3$** (Paper 30): **GO-WITH-PREREQS.**
+  Trivial-vacuum orthogonality is automatic (the L_1 = B^T B kinetic term lives in
+  a structurally distinct sector from any candidate "local Hamiltonian" on the lattice
+  gauge sector). Needs matter-coupling wired into `geovac/su2_wilson_gauge.py`
+  (~1–2 weeks scope). Substantive question is survival under Haar averaging at
+  non-trivial $\beta_{\mathrm{Wilson}}$.
+- **SU(3) Wilson on $S^5$ Bargmann** (Sprint ST-SU3): **NO-GO**, four structural
+  obstructions:
+  1. No spinor sector on the (N, 0) Hardy tower (Paper 24 §III).
+  2. No second-order/first-order distinction with separate Dirac (Paper 24 HO rigidity
+     theorem).
+  3. No half-integer wedge — $m_l$ integer on Bargmann ⇒ modular period $\pi$ not $2\pi$
+     ⇒ K spectrum cannot have integer eigenvalues two_m_j.
+  4. Coulomb/HO category mismatch resurfaces at the modular-Hamiltonian level (same
+     blocker as G4b cross-manifold and as Sprint L2 §7.2-class generator distinctions).
+
+**Fourth Coulomb/HO asymmetry layer (substantive new content).** Track 2's NO-GO
+verdict on SU(3)-Bargmann establishes the **fourth layer** of the Paper 24 §V
+Coulomb/HO asymmetry:
+
+1. Spectrum-computing role of $L_0$ (Coulomb yes, HO no);
+2. Calibration $\pi$ (Coulomb yes, HO no);
+3. Non-abelian Wilson gauge with natural matter (Coulomb via Papers 25/30, HO no via
+   Sprint ST-SU3 matter-coupling CG obstruction);
+4. **Modular-Hamiltonian structure of the wedge KMS state** (Coulomb side admits the
+   HS-orthogonality construction with closed-form M1 prefactor as established by L2-F.1
+   Track 1; HO side does not admit the construction at all — no spinor sector, integer
+   $m_l$, no half-integer wedge).
+
+Layer (4) is genuinely new structural content from this sprint. Paper 31 §sec:coulomb_ho
+formal three-layer count is now extended to four with explicit citation back to L2-F.1.
+
+Files: `debug/pythagorean_extension_scoping_memo.md`.
+
+**Paper edits applied (5 edits across 4 papers, all three-pass clean).**
+
+- **Paper 43 §10.2** — new `subsec:pythagorean_orthogonality` with
+  Corollary `cor:pythagorean_orthogonality`. Closed form + structural reading +
+  scope statement on formal-proof follow-on. **§11 (Open questions)** O4 extended
+  with formal subspace-decomposition proof as named follow-on.
+- **Paper 42 §8** — new `rem:pythagorean_underlies_collapse` placing the six-witness
+  collapse inside the HS-orthogonality structure (cross-references Paper 43
+  `cor:pythagorean_orthogonality`). **§10 O3** extended with Pythagorean refinement:
+  the residual norms $\|H_{\mathrm{local}} - D_W\|_F$ now have closed-form components
+  with $1/\pi^2$ master Mellin engine M1 prefactor, sharpening the open question
+  with additional algebraic content.
+- **Paper 32 §VIII** — new `rem:pythagorean_m1_closure` connecting the orthogonality
+  $1/\pi^2$ prefactor to the master Mellin engine M1 closure (same M1 signature as
+  Paper 38 L2 rate $4/\pi$ and Stefan-Boltzmann Matsubara prefactor).
+- **Paper 24 §V** — new `subsec:asymmetry_layer4` extending the Coulomb/HO asymmetry
+  from three layers to four. Paper 31 §sec:coulomb_ho cross-reference added.
+- **Paper 32 §VIII.C** — G4b paragraph revised. No longer "fourth layer" framing
+  since Paper 24 §V now records four layers explicitly; G4b reframed as cross-manifold
+  sibling of the asymmetry-layer-4 obstruction.
+
+**Paper 24 LaTeX preamble fix (session housekeeping, no content change).** Paper 24
+had a pre-existing `\newtheorem{theorem}{Theorem}` and `\newtheorem{corollary}{Corollary}`
+missing-declaration LaTeX bug that surfaced when §V `subsec:asymmetry_layer4` was added.
+Fixed in this session with a single-line preamble addition between `\usepackage{xcolor}`
+and `\begin{document}`. No other Paper 24 content changed by this fix.
+
+Compilation status:
+- Papers 42/43/32: three-pass clean LaTeX, zero substantive warnings.
+- Paper 24: three-pass clean LaTeX after preamble fix.
+
+**Bit-exactness rule of thumb (PI-adopted heuristic, recorded as feedback memory).**
+
+PI explicitly adopted during this sprint:
+> "Bit-exact closure = green light (we're operating on the skeleton),
+>  residuals = caution light (Layer 2 work),
+>  neither = drift detector needed."
+
+The rule organises sprint triage:
+- **Bit-exact closures** (six-witness collapse, σ_{2π}=1, J²=±I, HS-orthogonality,
+  etc.) are skeleton operations and warrant publication-grade follow-through.
+- **Residuals at machine-precision-but-not-zero scale** (e.g. L1 σ_{2π} residual
+  scaling as $O(\sqrt{\dim_H} \cdot \varepsilon)$) live at the Layer-2 boundary and
+  are bounded by framework-precision analysis.
+- **Residuals that are neither bit-exact nor machine-precision-bounded** warrant a
+  drift-detector diagnostic (per `feedback_diagnostic_before_engineering.md`) before
+  further engineering.
+
+Used productively across L2-F.1 main result, the six-witness probe (Track 1), and
+the SU(2)/SU(3) Wilson scoping (Track 2). Now standard sprint-triage vocabulary;
+recorded as `memory/feedback_bit_exactness_rule.md`.
+
+**Honest scope.**
+
+- Orthogonality is **empirically PSLQ-verified at 18 panel cells** with closed-form
+  $r^2$ matching to coefficient ceiling $10^6$.
+- The **subspace-decomposition mechanism is a structural sketch** sufficient to
+  identify the M1 signature and the diagonal/off-diagonal partition. Formal
+  operator-theoretic proof of the subspace decomposition is the named follow-on
+  (Paper 43 §11 O4).
+- **WH1 PROVEN is not re-opened.** L2-F.1 refines L2-E's algebraic content but does
+  not change the keystone proof or the Paper 42 §10 O3 open-question status (O3
+  sharpens within the new structure).
+- The fourth Coulomb/HO asymmetry layer (Paper 24 §V `subsec:asymmetry_layer4`) is
+  genuinely new structural content. Paper 31 §sec:coulomb_ho three-layer count
+  formally extended to four with explicit citation to this sprint.
+
+**Files added (institutional record).**
+
+- `debug/h_local_residual_pslq_compute.py`
+- `debug/h_local_residual_closed_form_verify.py`
+- `debug/h_local_residual_pslq_memo.md`
+- `debug/data/h_local_residual_pslq_data.json`
+- `debug/data/h_local_residual_closed_form.json`
+- `debug/data/h_local_residual_final.json`
+- `debug/six_witness_hs_orthogonality_compute.py`
+- `debug/six_witness_hs_orthogonality_memo.md`
+- `debug/data/six_witness_hs_orthogonality.json`
+- `debug/pythagorean_extension_scoping_memo.md`
+- `memory/pythagorean_orthogonality.md` (project memory)
+- `memory/feedback_bit_exactness_rule.md` (feedback memory)
+
+**CLAUDE.md edits (mechanical, within PM access controls per §13.5):**
+
+- §1 version bump v2.44.0 → v2.45.0 (this entry)
+- §1.7 WH1 entry: status-maintained-at-PROVEN paragraph appended documenting Sprint
+  L2-F.1 refinement and confirming no re-opening of the keystone proof.
+- §2: new sprint bullet "Sprint L2-F.1 + Pythagorean extension scoping (2026-05-17)"
+  with mechanism, six-witness verdict, Track 2 scoping outcomes, paper edits, and
+  bit-exactness rule of thumb.
+- §6: Paper 24 / Paper 32 / Paper 42 / Paper 43 inventory entries (both Context
+  Loading Guide and Standalone/Synthesis/Core tables) extended with brief notes on
+  today's additions (Pythagorean Corollary, M1 closure remark, four-layer asymmetry).
+- §11: 3 new topic-paper lookup rows (Pythagorean HS-orthogonality; diagonal/off-diagonal
+  subspace decomposition; four-layer Coulomb/HO asymmetry).
+
+**MEMORY.md additions (one line each per size constraint).**
+
+- `pythagorean_orthogonality.md` — full structural finding.
+- `feedback_bit_exactness_rule.md` — rule + reason + when to apply.
+
+No production code modifications. No test additions (this is a documentation-focused
+sprint applying analytical/PSLQ findings).
+
 ## [2.41.0] - 2026-05-15
 
 ### Added — Paper 34 dictionary-completion arc (Sprints 1+2+3): 19→28 projections, structural completeness confirmed

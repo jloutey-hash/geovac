@@ -1,0 +1,220 @@
+{
+  "sprint": "H_local PSLQ probe (post-L2-E)",
+  "date": "2026-05-17",
+  "description": "Probe ||H_local - D_L_W||_F for closed-form identification in master Mellin engine ring or natural framework invariants. Sequence at N_t = 1 from L2-E memo: 2.1332, 6.5275, 13.854 at n_max = 1, 2, 3. Extend to n_max = 4, 5 and compute N_t > 1 panel for temporal-derivative content.",
+  "N_t_1_panel": [
+    {
+      "n_max": 1,
+      "N_t": 1,
+      "dim_K": 4,
+      "dim_W_L": 2,
+      "beta": 6.283185307179586,
+      "residual_full": 2.133227740261496,
+      "residual_full_normalized": 1.5084198009541587,
+      "residual_RIE_baseline": 2.133227740261496,
+      "residual_RIE_normalized": 1.5084198009541587,
+      "lorentzian_eq_riemannian_baseline": true,
+      "verdict": "ii",
+      "elapsed_s": 0.00043392181396484375,
+      "memo_value": 2.133227740261496,
+      "matches_memo": true
+    },
+    {
+      "n_max": 2,
+      "N_t": 1,
+      "dim_K": 16,
+      "dim_W_L": 8,
+      "beta": 6.283185307179586,
+      "residual_full": 6.527474787531087,
+      "residual_full_normalized": 2.307810843143725,
+      "residual_RIE_baseline": 6.527474787531087,
+      "residual_RIE_normalized": 2.307810843143725,
+      "lorentzian_eq_riemannian_baseline": true,
+      "verdict": "ii",
+      "elapsed_s": 0.00024271011352539062,
+      "memo_value": 6.527474787531087,
+      "matches_memo": true
+    },
+    {
+      "n_max": 3,
+      "N_t": 1,
+      "dim_K": 40,
+      "dim_W_L": 20,
+      "beta": 6.283185307179586,
+      "residual_full": 13.854180391695055,
+      "residual_full_normalized": 3.0978889128374805,
+      "residual_RIE_baseline": 13.854180391695055,
+      "residual_RIE_normalized": 3.0978889128374805,
+      "lorentzian_eq_riemannian_baseline": true,
+      "verdict": "ii",
+      "elapsed_s": 0.0003733634948730469,
+      "memo_value": 13.854180391695055,
+      "matches_memo": true
+    },
+    {
+      "n_max": 4,
+      "N_t": 1,
+      "dim_K": 80,
+      "dim_W_L": 40,
+      "beta": 6.283185307179586,
+      "residual_full": 24.56672935623258,
+      "residual_full_normalized": 3.88434097133085,
+      "residual_RIE_baseline": 24.566729356232578,
+      "residual_RIE_normalized": 3.8843409713308494,
+      "lorentzian_eq_riemannian_baseline": true,
+      "verdict": "ii",
+      "elapsed_s": 0.0013854503631591797
+    },
+    {
+      "n_max": 5,
+      "N_t": 1,
+      "dim_K": 140,
+      "dim_W_L": 70,
+      "beta": 6.283185307179586,
+      "residual_full": 39.06365402582846,
+      "residual_full_normalized": 4.668999687681084,
+      "residual_RIE_baseline": 39.063654025828455,
+      "residual_RIE_normalized": 4.668999687681083,
+      "lorentzian_eq_riemannian_baseline": true,
+      "verdict": "ii",
+      "elapsed_s": 0.0027420520782470703
+    }
+  ],
+  "N_t_gt_1_panel": [
+    {
+      "n_max": 3,
+      "N_t": 11,
+      "dim_K": 440,
+      "dim_W_L": 120,
+      "beta": 6.283185307179586,
+      "residual_full": 49.006426986200154,
+      "residual_full_normalized": 4.4736542538452895,
+      "residual_RIE_baseline": 13.854180391695055,
+      "residual_RIE_normalized": 3.0978889128374805,
+      "lorentzian_eq_riemannian_baseline": false,
+      "verdict": "iii",
+      "elapsed_s": 0.008780479431152344,
+      "r_Nt1_baseline": 13.854180391695055,
+      "delta_temporal": 35.1522465945051
+    },
+    {
+      "n_max": 3,
+      "N_t": 21,
+      "dim_K": 840,
+      "dim_W_L": 220,
+      "beta": 6.283185307179586,
+      "residual_full": 110.05144913894549,
+      "residual_full_normalized": 7.419667187335753,
+      "residual_RIE_baseline": 13.854180391695055,
+      "residual_RIE_normalized": 3.0978889128374805,
+      "lorentzian_eq_riemannian_baseline": false,
+      "verdict": "iii",
+      "elapsed_s": 0.0370175838470459,
+      "r_Nt1_baseline": 13.854180391695055,
+      "delta_temporal": 96.19726874725043
+    },
+    {
+      "n_max": 4,
+      "N_t": 11,
+      "dim_K": 880,
+      "dim_W_L": 240,
+      "beta": 6.283185307179586,
+      "residual_full": 78.23774758755698,
+      "residual_full_normalized": 5.0502248908564615,
+      "residual_RIE_baseline": 24.566729356232578,
+      "residual_RIE_normalized": 3.8843409713308494,
+      "lorentzian_eq_riemannian_baseline": false,
+      "verdict": "iii",
+      "elapsed_s": 0.04654383659362793,
+      "r_Nt1_baseline": 24.56672935623258,
+      "delta_temporal": 53.671018231324396
+    }
+  ],
+  "framework_invariants": [
+    {
+      "n_max": 1,
+      "dim_H_GV": 4,
+      "norm_F_D_GV": 3.0,
+      "sum_abs_eigs_k0_dim": 4,
+      "sum_abs_eigs_k1": 6.0,
+      "sum_abs_eigs_k2": 9.0,
+      "sum_abs_eigs_k3": 13.5,
+      "sum_abs_eigs_k4": 20.25,
+      "min_abs_eig": 1.5,
+      "max_abs_eig": 1.5,
+      "spectrum_unique": [
+        1.5
+      ]
+    },
+    {
+      "n_max": 2,
+      "dim_H_GV": 16,
+      "norm_F_D_GV": 9.16515138991168,
+      "sum_abs_eigs_k0_dim": 16,
+      "sum_abs_eigs_k1": 36.0,
+      "sum_abs_eigs_k2": 84.0,
+      "sum_abs_eigs_k3": 201.0,
+      "sum_abs_eigs_k4": 489.0,
+      "min_abs_eig": 1.5,
+      "max_abs_eig": 2.5,
+      "spectrum_unique": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "n_max": 3,
+      "dim_H_GV": 40,
+      "norm_F_D_GV": 19.44222209522358,
+      "sum_abs_eigs_k0_dim": 40,
+      "sum_abs_eigs_k1": 120.0,
+      "sum_abs_eigs_k2": 378.0,
+      "sum_abs_eigs_k3": 1230.0,
+      "sum_abs_eigs_k4": 4090.5,
+      "min_abs_eig": 1.5,
+      "max_abs_eig": 3.5,
+      "spectrum_unique": [
+        1.5,
+        2.5,
+        3.5
+      ]
+    },
+    {
+      "n_max": 4,
+      "dim_H_GV": 80,
+      "norm_F_D_GV": 34.46737587922817,
+      "sum_abs_eigs_k0_dim": 80,
+      "sum_abs_eigs_k1": 300.0,
+      "sum_abs_eigs_k2": 1188.0,
+      "sum_abs_eigs_k3": 4875.0,
+      "sum_abs_eigs_k4": 20493.0,
+      "min_abs_eig": 1.5,
+      "max_abs_eig": 4.5,
+      "spectrum_unique": [
+        1.5,
+        2.5,
+        3.5,
+        4.5
+      ]
+    },
+    {
+      "n_max": 5,
+      "dim_H_GV": 140,
+      "norm_F_D_GV": 54.79963503528103,
+      "sum_abs_eigs_k0_dim": 140,
+      "sum_abs_eigs_k1": 630.0,
+      "sum_abs_eigs_k2": 3003.0,
+      "sum_abs_eigs_k3": 14857.5,
+      "sum_abs_eigs_k4": 75396.75,
+      "min_abs_eig": 1.5,
+      "max_abs_eig": 5.5,
+      "spectrum_unique": [
+        1.5,
+        2.5,
+        3.5,
+        4.5,
+        5.5
+      ]
+    }
+  ]
+}
