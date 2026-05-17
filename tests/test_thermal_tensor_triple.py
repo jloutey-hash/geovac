@@ -386,3 +386,52 @@ class TestSelfCheck:
         assert results["modular_exponent"] == sp.pi**2
         # Audit complete.
         assert results["pi_audit_row_count"] == 10
+
+
+# ---------------------------------------------------------------------------
+# 11. Cross-validation with L1 modular Hamiltonian (added Sprint L1 2026-05-16)
+# ---------------------------------------------------------------------------
+
+class TestL1ModularHamiltonianCrossValidation:
+    """Cross-check that the canonical Matsubara apparatus at beta = 2*pi
+    is consistent with the L1 modular Hamiltonian's period-closure
+    construction.
+
+    The L1 modular Hamiltonian module (geovac.modular_hamiltonian)
+    builds K_boost with integer eigenvalues two_m_j on the full-Dirac
+    basis and verifies sigma_{2*pi}(O) = O bit-exactly. The matsubara
+    spectrum at beta = 2*pi is the corresponding temporal mode quantization
+    omega_k = 2*pi*k/(2*pi) = k (bosonic) or (k+1/2) (fermionic).
+
+    These are consistent: integer-spectrum K_boost gives bit-exact
+    period closure at beta = 2*pi, and the Matsubara spectrum at the
+    same beta has bosonic modes at integer omega_k.
+    """
+
+    def test_matsubara_bosonic_modes_at_beta_2pi_are_integers(self):
+        from geovac.thermal_tensor_triple import matsubara_spectrum
+        beta = sp.Symbol('beta', positive=True)
+        spectrum = matsubara_spectrum(beta, k_max=5, fermionic=False)
+        # Substitute beta = 2*pi
+        for k, omega_k in spectrum:
+            val = omega_k.subs(beta, 2 * sp.pi)
+            # Bosonic at beta=2pi: omega_k = 2*pi*k/(2*pi) = k (integer)
+            assert val == k, (
+                f"Bosonic mode k={k} at beta=2*pi: omega_k={val}, expected {k}"
+            )
+
+    def test_l1_period_closure_consistent_with_matsubara(self):
+        """L1's sigma_{2*pi}(O) = O closure corresponds to bosonic
+        Matsubara mode quantization at integer omega_k at beta=2pi."""
+        from geovac.modular_hamiltonian import for_bisognano_wichmann
+        bw = for_bisognano_wichmann(n_max=2)
+        # beta = 2*pi
+        import numpy as np
+        assert abs(bw.beta - 2.0 * np.pi) < 1e-14
+        # K_boost has integer eigenvalues
+        K_diag = np.diag(bw.K_geometric)
+        for k_val in K_diag:
+            k_real = float(np.real(k_val))
+            assert abs(k_real - round(k_real)) < 1e-14, (
+                f"K_boost eigenvalue {k_real} not integer"
+            )

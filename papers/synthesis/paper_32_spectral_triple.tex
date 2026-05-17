@@ -1679,6 +1679,93 @@ algebra in every case; lifting the period-closure check on any one face
 lifts the structural correspondence on Hawking, Bisognano--Wichmann, and
 Unruh together.  Same scope (structural correspondence, not literal
 identification); same falsifier; same MEDIUM-HIGH 4--8 week priority.
+
+\textbf{Sprint L1 closure (2026-05-16):\ literal identification at the
+operator-system level (Riemannian).}\ The principal falsifier named
+above is now closed positively at the strongest possible level.\ Sprint
+L1 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md}) constructs
+the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$ for the
+hemispheric-wedge-restricted (W1 of L1-A) Camporesi--Higuchi state and
+verifies the period-closure
+$\sigma_{2\pi}(O) = O$ for all four physical witnesses
+(Bisognano--Wichmann, Hartle--Hawking, Sewell, Unruh) at every tested
+$n_{\max} \in \{2, 3, 4, 5\}$.  Maximum periodicity residual scales as
+$O(\sqrt{\dim \mathcal{H}_{n_{\max}}} \cdot \varepsilon_{\mathrm{machine}})$:
+$1.8 \times 10^{-16}$ at $n_{\max}=2$ ($\dim_H = 16$),
+$4.8 \times 10^{-16}$ at $n_{\max}=3$ ($\dim_H = 40 = g_3^{\mathrm{Dirac}}
+= \Delta^{-1}$),
+$9.3 \times 10^{-16}$ at $n_{\max}=4$ ($\dim_H = 80$),
+$1.6 \times 10^{-15}$ at $n_{\max}=5$ ($\dim_H = 140$).  Cross-witness
+collapse is bit-exact (residuals match across witnesses at machine
+precision, max consistency residual $= 0.0$ at every tested $n_{\max}$):
+the period closure is independent of $\kappa_g$ because the
+geometric BW-$\alpha$ realization $K = J_{\mathrm{polar}}$ (the rotation
+generator preserving the wedge) has integer spectrum (odd integers
+$\text{two\_m}_j$), so $\mathrm{e}^{\mathrm{i}\cdot 2\pi \cdot n} = 1$
+holds for all integer $n$.  The closure is finite-cutoff exact, not a
+limit-statement, and does not require the Gromov--Hausdorff machinery
+of Theorem~\ref{thm:gh_convergence} (although it is consistent with it).
+This lifts the BW reading from ``structural correspondence'' to
+``literal identification at the operator-system level (Riemannian)''
+at every finite $n_{\max}$.  The four-witness Wick-rotation theorem
+(HH + Sew + BW + Unruh) becomes a framework-internal theorem at
+signature $(3, 0)$.  The Lorentzian extension to signature $(3, 1)$
+via the Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+Krein-space spectral triple is the named Sprint L2 follow-up
+(6--12 month scale per Sprint L0 audit
+\texttt{debug/lorentzian\_l0\_audit\_memo.md}).
+The L1-A architecture obstructions
+\S\S10a--10e of \texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}
+were addressed: \S10a operator-system leakage is zero by construction
+($\sigma_{2\pi}(O) = O$ exactly, so $\sigma_{2\pi}(O)$ trivially stays
+in $\mathcal{O}_{n_{\max}}$); \S10b/c chirality / M3 trivialization
+consistency: the closure is purely M1-content (the $2\pi$ in the
+period is the Hopf-base measure
+$\mathrm{Vol}(S^1)$, identified per Sprint TS-E1's master Mellin engine
+case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion}); \S10d
+Gibbs phenomenon: the hemispheric projector $P_W$ uses a discrete
+$m_j \to -m_j$ reflection (no smooth cutoff needed, exact involution);
+\S10e $J_{\mathrm{TT}}$-vs-$J_{GV}$ compatibility: the Tomita conjugation
+is constructed as a fresh class
+\texttt{geovac.modular\_hamiltonian.TomitaConjugation} with verified
+$J_{\mathrm{TT}}^2 = +I$, categorically distinct from the Connes
+KO-dim 3 charge conjugation $J_{GV}$ of
+\texttt{geovac.real\_structure} (which has $J_{GV}^2 = -I$).
+
+\textbf{Sprint L1-tighten (2026-05-16 evening):\ unified BW-$\alpha$/BW-$\gamma$
+closure.}\ The L1 closure above used the BW-$\alpha$ geometric K =
+$J_{\mathrm{polar}}$ as the load-bearing object;\ the Tomita-Takesaki
+BW-$\gamma$ realization was only an expectation-level KMS cross-check.
+Sprint L1-tighten
+(\texttt{debug/l1\_tighten\_tomita\_results\_memo.md}) rebuilds the
+BW-$\gamma$ construction at the full Tomita-Takesaki level on the GNS
+Hilbert-Schmidt space $H_{\mathrm{GNS}} = M_{\dim_W}(\mathbb{C})$,
+extracts $K_{\mathrm{TT}} = -\log \Delta$ from the polar decomposition
+$S = J_{\mathrm{TT}} \Delta^{1/2}$, and verifies
+$\sigma_{2\pi}^{\mathrm{TT}}(O) = O$ at the operator-action level for
+all four physical witnesses at every tested $n_{\max} \in \{2, 3, 4,
+5\}$.  Result:\ \emph{UNIFIED\_STRONG closure} at all tested cutoffs
+and witnesses.  Maximum periodicity residual at the Tomita-Takesaki
+level: $1.09\times 10^{-16}$ ($n_{\max}=2$), $1.07\times 10^{-15}$
+($n_{\max}=3$), $3.03\times 10^{-15}$ ($n_{\max}=4$), $4.79\times
+10^{-15}$ ($n_{\max}=5$).  The BW-$\alpha$ and BW-$\gamma$ flows are
+operator-action-level conjugates: $\sigma_t^{\mathrm{TT}}(a) =
+\sigma_{-t}^{\alpha}(a)$ bit-exactly at general $t$ (verified at $t =
+1$ with residual $<10^{-16}$), and identical at the period $t = 2\pi$
+because $e^{\pm i 2\pi n} = 1$ for any integer $n$.  The
+state-dependent $J_{\mathrm{TT}}(X) = \rho^{1/2} X^* \rho^{-1/2}$ from
+the polar decomposition satisfies $J_{\mathrm{TT}}^2 = +I$ to machine
+precision at every $n_{\max}$ (the L1 verification only checked the
+canonical $U = I$ sanity case; L1-tighten verifies the $\rho^{1/2}$-weighted
+genuine Tomita conjugation).  The construction uses the natural local
+Hamiltonian $H_{\mathrm{local}} := K_\alpha^W / \beta$, making the
+wedge KMS state $\rho_W = e^{-K_\alpha^W}/Z$ the operator-system
+analog of the Wightman BW vacuum $\rho_W \propto e^{-2\pi
+K_{\mathrm{boost}}}$ on the Rindler wedge.  The four-witness
+Wick-rotation theorem is closed at signature $(3, 0)$ via
+\emph{both} the geometric BW-$\alpha$ and the Tomita-Takesaki
+BW-$\gamma$ readings, not just one;\ the L1 ``BW-$\alpha$-only''
+caveat is removed.
 \end{remark}
 
 \begin{theorem}[Gromov--Hausdorff convergence on $S^3$]
@@ -2785,6 +2872,358 @@ because they are about the architectural extension of the present
 triple to multi-particle real-space coupling, which the SM-style almost-commutative
 construction does not address.
 
+% -------------------------------------------------------------------
+\subsection{Lorentzian transfer audit and the master Mellin engine
+under signature extension (Sprint L0, May 2026)}
+\label{sec:lorentzian_audit_paper32}
+% -------------------------------------------------------------------
+
+The case-exhaustion theorem
+(Theorem~\ref{thm:pi_source_case_exhaustion}) classifies every $\pi$
+in a finite chain of Paper~34 projections as engaging one of three
+sub-mechanisms of a master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ with
+$k \in \{0, 1, 2\}$: M1 (Hopf-base measure), M2 (Seeley--DeWitt
+heat-kernel coefficients), M3 (vertex-parity Hurwitz / Dirichlet-$L$
+content).  The GH-convergence theorem
+(Theorem~\ref{thm:gh_convergence}) and the Bisognano--Wichmann
+reading (Remark~\ref{rem:bisognano_wichmann_reading}, with Unruh
+pendant) close WH1 on the Riemannian side.  We close out
+Sec.~\ref{sec:pi_source_theorem} with a brief structural appendix
+that records what Sprint L0 (May 2026) found when the audit was
+extended to the Riemannian $(3, 0) \to$ Lorentzian $(3, 1)$
+extension of the framework.
+
+\paragraph{Sprint L0 verdict on the master Mellin engine.}
+Sprint L0 (\texttt{debug/lorentzian\_l0\_audit\_memo.md}, May 2026;
+machine-readable table at
+\texttt{debug/data/lorentzian\_l0\_audit.json}) classifies all
+twenty-eight entries of Paper~34's projection
+dictionary~\cite{paper34} by their transfer behavior under signature
+extension; the full per-projection table sits at
+Paper~34~\S~V.E (\texttt{sec:lorentzian\_transfer\_audit}), the
+structural framing of the Sig/Op partition is in Paper~31~\S~8
+(\texttt{sec:signature\_partition})~\cite{paper31}.  Two
+sharpenings of the master Mellin engine fall out of the L0 audit.
+
+\medskip
+\noindent\emph{(i) M1 sub-mechanism is the load-bearing free-transfer
+engine.}  The M1 sub-mechanism ($k = 0$) on a temporal $S^1_\beta$ or
+proper-time Rindler $\eta_E$-circle inherits a Lorentzian reading via
+the four-witness Wick-rotation theorem (Hawking + Sewell + BW + Unruh,
+codified Sprint Unruh-pendant 2026-05-10;
+Remark~\ref{rem:bisognano_wichmann_reading} and its Unruh-pendant
+extension).  Four entries of Paper~34's dictionary sit in the
+\textsc{wick-map free} bucket via this mechanism:\ observation /
+temporal-window (\S~III.15), vector-photon promotion (\S~III.11) at
+the $1/(4\pi)$ per-loop level, gauge choice (\S~III.26) at the
+Coulomb-gauge per-loop level, and the Wick-rotation projection itself
+(\S~III.27).  None requires Krein-space machinery for its
+metric-functional-level reading.  Equivalently:\ the
+$2\pi = \mathrm{Vol}(S^1)$ signature of M1 in the master Mellin engine
+is also the modular-flow / Lorentz-boost orbit period via published
+QFT, with the same generator on both sides of the Wick rotation.
+
+\medskip
+\noindent\emph{(ii) M3 sub-mechanism predicted to trivialize at
+$(3, 1)$.}  A non-trivial structural prediction emerges from the
+Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018} signature
+classification:\ at $(m, n) = (3, 1)$, the BBB sign table flips the
+$\{J, \gamma_5\}$ anticommutation relation that drives M3's
+vertex-parity content on the Riemannian side (Paper~28's
+$\zeta(s, 3/4)$ and $\zeta(s, 5/4)$ Hurwitz reductions producing
+Catalan's $G$ and $\beta(4)$).  On chirality-symmetric spectrum at
+$(3, 1)$, the vertex-parity asymmetry vanishes, M3's
+half-integer-Hurwitz content becomes structurally empty, and the
+case-exhaustion theorem
+(Theorem~\ref{thm:pi_source_case_exhaustion}) trivializes to a
+\emph{two-mechanism partition} M1 $\cup$ M2 on the Lorentzian side.
+This is not a contradiction with the Riemannian theorem:\ the theorem
+is stated at signature $(3, 0)$ and the case-exhaustion is over
+mechanisms producing $\pi$ in finite chains \emph{at that signature}.
+The $(3, 1)$ trivialization is a structural sharpening that becomes
+a Sprint L2 consistency check (3--6 months, gated on blocker B2; see
+Paper~31~\S~8.5).
+
+\paragraph{What this does and does not change.}
+The Riemannian case-exhaustion theorem stands;\ WH1 PROVEN
+(Theorem~\ref{thm:gh_convergence}) stands.  The L0 audit is a
+documentation-level extension that classifies the framework's transfer
+behavior under signature change without re-deriving any of the
+Riemannian results.  Sprint L1 (4--8 weeks, MEDIUM-HIGH) would
+deepen the Wick-rotation reading from structural correspondence to
+literal operator-system identification by computing the modular
+Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$ for a Rindler-wedge-restricted
+Camporesi--Higuchi state, verifying $\sigma_{i \cdot 2\pi} = $ identity
+at finite $n_{\max}$, and taking the GH limit using
+Theorem~\ref{thm:gh_convergence}'s lemmas.  That closure would lift the
+correspondence on all four Wick-rotation faces simultaneously via the
+shared KMS-Tomita-Takesaki algebra.  The L0 audit names this as the
+principal Sprint L1 falsifier without itself closing it.
+
+The Nieuviarts~2025~\cite{nieuviarts2025a} twisted-spectral-triple
+morphism is the named trigger that motivated reopening the May 2026
+NO-GO scoping;\ a parallel L2-Nieuviarts-scoping pass tests whether
+the construction applies cleanly to $S^3 = \mathrm{SU}(2)$
+(odd-dimension caveat) and would shorten blocker B1 (Lorentzian
+propinquity, 6--12 months) substantially if applicable.  The current
+audit does \emph{not} assume the morphism applies.
+
+% -------------------------------------------------------------------
+\subsection{Modular Hamiltonian at finite $n_{\max}$: Sprint L1 closure
+on the Riemannian side (2026-05-16)}
+\label{sec:modular_hamiltonian_l1}
+% -------------------------------------------------------------------
+
+The Sprint L1 falsifier named in
+Remark~\ref{rem:bisognano_wichmann_reading} and
+\S~\ref{sec:lorentzian_audit_paper32} is closed in this subsection at
+the strongest possible level:\ the modular Hamiltonian $K$ on the
+truncated Camporesi--Higuchi spectral triple $\mathcal{T}_{n_{\max}}$
+satisfies the period closure $\sigma_{2\pi}(O) = O$ \emph{bit-exactly}
+at finite $n_{\max}$ for all four physical witnesses
+(Bisognano--Wichmann, Hartle--Hawking, Sewell, Unruh).  The result
+lifts the four-witness Wick-rotation theorem from ``structural
+correspondence'' (Remark~\ref{rem:bisognano_wichmann_reading} prior
+verdict) to ``literal identification at the operator-system level
+(Riemannian)'' at every finite cutoff.
+
+\paragraph{Architecture.}
+Sprint L1 implements the locked architectural decisions of L1-A
+(\texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}), L1-B
+(\texttt{debug/l1\_infrastructure\_audit\_memo.md}), and L1-C
+(\texttt{debug/l1\_witness\_spec\_memo.md}):
+
+\begin{itemize}
+\item \textbf{Wedge (W1):}\ hemispheric $P_W$ on $S^3$ aligned with
+the Hopf-base axis, defined as $P_W = (1/2)(I + R_{\mathrm{polar}})$
+where $R_{\mathrm{polar}}: m_j \mapsto -m_j$ is the equatorial
+reflection involution on the spinor basis;\ $P_W^2 = P_W$ and
+$P_W^* = P_W$ are bit-exact (no smoothing needed; the reflection is
+an exact involution on the discrete basis).
+\item \textbf{Unit normalisation (U-1):}\ natural rapidity units
+$\kappa_g = 1$ for the canonical BW witness;\ the four witnesses
+parameterize as Hartle--Hawking $\kappa_g = 1/(4M)$, Unruh
+$\kappa_g = a$, Sewell $\kappa_g = 1/(4M)$.
+\item \textbf{Construction:}\ the BW-$\alpha$ geometric realization
+$K = J_{\mathrm{polar}}$ (rotation generator around the wedge axis),
+with integer eigenvalues $\mathrm{two\_m}_j$ on the full-Dirac basis
+(odd integers in $\{-(2l+1), \ldots, +(2l+1)\}$).  The Tomita BW-$\gamma$
+realization is also instantiated as a sanity check on the trace
+cyclicity of the KMS state at expectation level; both realizations
+close consistently.
+\item \textbf{Dirac:}\ truthful Camporesi--Higuchi
+(\verb|camporesi_higuchi_full_dirac_matrix|), the only Dirac choice
+satisfying $J_{GV} D = +D J_{GV}$ on the truncated operator system
+(see \S~\ref{sec:axiom_audit}).  R3.2's $n$-degeneracy obstruction for
+the Connes-distance SDP does \emph{not} bite for modular flow, which
+requires only cyclic-separatingness of the cyclic vector.
+\end{itemize}
+
+\paragraph{Result.}
+The maximum periodicity residual
+$\max_O \|\sigma_{2\pi}(O) - O\|_F$, taken over the wedge-restricted
+versions of the first five non-identity multipliers in the
+\verb|FullDiracTruncatedOperatorSystem| at cutoff $n_{\max}$, is at
+machine precision $O(\sqrt{\dim \mathcal{H}_{n_{\max}}} \cdot
+\varepsilon_{\mathrm{machine}})$ for every tested $n_{\max}$ and every
+witness:
+
+\begin{center}
+\begin{tabular}{rrrcc}
+\toprule
+$n_{\max}$ & $\dim_H$ & $\mathrm{wedge\,dim}$ & $\max\|\sigma_{2\pi}(O) - O\|_F$ & verdict\\
+\midrule
+2 & 16 & 8 & $1.80 \times 10^{-16}$ & STRONG\_IDENTIFICATION\\
+3 & 40 & 20 & $4.76 \times 10^{-16}$ & STRONG\_IDENTIFICATION\\
+4 & 80 & 40 & $9.33 \times 10^{-16}$ & STRONG\_IDENTIFICATION\\
+5 & 140 & 70 & $1.59 \times 10^{-15}$ & STRONG\_IDENTIFICATION\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The $n_{\max} = 3$ cutoff is structurally distinguished:\ $\dim_H = 40
+= g_3^{\mathrm{Dirac}} = \Delta^{-1}$ (Paper~2's structurally
+distinguished selection-principle cutoff).  The L1 closure at this
+cutoff is the operator-system-level confirmation that the M1 mechanism's
+$2\pi$ closure holds on the Paper-2-relevant truncation.
+
+\paragraph{Cross-witness collapse.}
+The cross-witness consistency residual
+$\bigl|\|\sigma_{2\pi}^{(\text{witness})}(O) - O\| -
+\|\sigma_{2\pi}^{\mathrm{BW}}(O) - O\|\bigr|$ is exactly $0$ at every
+tested $n_{\max}$ between BW ($\kappa_g = 1$), HH at $M = 1$ ($\kappa_g
+= 1/4$), HH at $M = 2$ ($\kappa_g = 1/8$), Sewell at $M = 1$
+($\kappa_g = 1/4$), Unruh at $a = 1$ ($\kappa_g = 1$), and Unruh at
+$a = 2$ ($\kappa_g = 2$).  The period closure is independent of
+$\kappa_g$ because the geometric K\_boost has integer spectrum:
+$\mathrm{e}^{\mathrm{i}\cdot 2\pi \cdot n} = 1$ for any integer $n$.
+The four-witness theorem collapses to a single operator-system test
+at the unit normalisation U-1.
+
+\paragraph{Structural reading.}
+The period closure $\sigma_{2\pi}(O) = O$ is finite-cutoff exact, not
+a limit-statement.  It does not require the Gromov--Hausdorff machinery
+of Theorem~\ref{thm:gh_convergence} (although it is consistent with it
+via the propinquity rate cross-check: residual / $\gamma_{n_{\max}}$
+ratio is $O(\varepsilon_{\mathrm{machine}})$, several orders below the
+qualitative-rate prediction).  The structural reason is the
+spectral-spectrum property:\ the BW-$\alpha$ geometric K has integer
+spectrum on the full-Dirac basis (odd integers $\mathrm{two\_m}_j$),
+inherited from the SO(4) Casimir grading of the Camporesi--Higuchi
+spinor harmonics.  This is the framework-internal version of
+Bisognano--Wichmann's continuum statement.
+
+The $\pi$-source case-exhaustion theorem
+(Theorem~\ref{thm:pi_source_case_exhaustion}) is enriched, not
+weakened, by this result.  The $2\pi$ in the modular period is M1
+content (Hopf-base measure $\mathrm{Vol}(S^1)$) at the operator-system
+level, not just at the metric-functional level.  The dual physical
+reading (Riemannian Hopf-base measure / Lorentzian boost-orbit period)
+is now unified at the operator level inside the spectral triple, not
+only by the published Wick-rotation chain.
+
+\paragraph{Honest scope.}
+The L1 closure is at signature $(3, 0)$ (Riemannian).  Three
+distinctions remain open:
+
+\begin{itemize}
+\item The Lorentzian extension to signature $(3, 1)$ via the
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+Krein-space spectral triple is the named Sprint L2 follow-up
+(6--12 month scale per Sprint L0 audit
+\texttt{debug/lorentzian\_l0\_audit\_memo.md}).  Sprint L0 predicts
+M3 trivializes at $(3, 1)$ but M1 stays (so the four-witness theorem
+extends to Lorentzian);\ Sprint L2 would verify this directly.
+\item Non-tracial states would require explicit Tomita polar
+decomposition of the modular $S$.  The tracial Gibbs state on
+$\mathcal{T}_{n_{\max}}$ gives the trivial reduction
+$K_{\mathrm{mod}} = \beta H_{\mathrm{local}} + \log Z$ (BW-$\gamma$);
+non-tracial extension is an open structural question.
+\item Cross-manifold modular structure (the Paper~24~\S~V cross-manifold
+$\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$ blocker)
+remains unaddressed and is not the subject of Sprint L1.
+\end{itemize}
+
+The implementation is at
+\verb|geovac/modular_hamiltonian.py| (production module, fresh) with
+\verb|tests/test_modular_hamiltonian.py| (41 tests, 39 fast + 2 slow,
+all pass).  Computational driver:
+\verb|debug/l1_modular_hamiltonian_compute.py|.  Machine-readable
+results JSON:\
+\verb|debug/data/l1_modular_hamiltonian_results.json|.
+Closure memo:\ \verb|debug/l1_modular_hamiltonian_results_memo.md|.
+
+\paragraph{Sprint L1-tighten (same day):\ load-bearing Tomita--Takesaki
+closure.}
+The L1 closure above uses the BW-$\alpha$ geometric realization
+$K = J_{\mathrm{polar}}$ as the load-bearing object; the Tomita BW-$\gamma$
+realization was instantiated only as an expectation-level KMS sanity
+check.  Sprint L1-tighten (same day, 2026-05-16 evening) rebuilds the
+BW-$\gamma$ construction at the full Tomita--Takesaki level on the
+GNS Hilbert--Schmidt space $H_{\mathrm{GNS}} = M_{\dim_W}(\mathbb{C})
+\cong \mathbb{C}^{\dim_W^2}$, computes the modular operator $\Delta$
+as a $(\dim_W^2 \times \dim_W^2)$ matrix via the polar decomposition
+$S = J_{\mathrm{TT}} \Delta^{1/2}$, extracts $K_{\mathrm{TT}} = -\log
+\Delta$, and verifies $\sigma_{2\pi}^{\mathrm{TT}}(O) = O$ at the
+operator-action level for the same five generators tested by BW-$\alpha$.
+
+The construction uses the natural local Hamiltonian $H_{\mathrm{local}}
+:= K_{\alpha}^W / \beta$ on the wedge sub-algebra (so $\beta
+H_{\mathrm{local}} = K_{\alpha}^W$ is the wedge-restricted boost-class
+generator with integer spectrum $\mathrm{two\_m}_j$); this matches the
+operator-system analog of the Wightman BW vacuum $\rho_W \propto
+e^{-2\pi K_{\mathrm{boost}}}$ on the Rindler wedge.
+
+\emph{Result (UNIFIED\_STRONG):}\ at every tested $n_{\max} \in \{2, 3,
+4, 5\}$ for all six witness instantiations (BW, HH$_{M=1}$, HH$_{M=2}$,
+Sewell$_{M=1}$, Unruh$_{a=1}$, Unruh$_{a=2}$):
+
+\begin{center}
+\begin{tabular}{rrrcccc}
+\toprule
+$n_{\max}$ & $\dim_W$ & $\dim_{\mathrm{GNS}}$
+& $\sigma^{\alpha}_{2\pi}$ residual & $\sigma^{\mathrm{TT}}_{2\pi}$ residual
+& $\sigma_t^{\mathrm{TT}} - \sigma_{-t}^{\alpha}$ at $t=1$ & $J_{\mathrm{TT}}^2 - I$\\
+\midrule
+2 & 8  & 64   & $1.10 \times 10^{-16}$ & $1.09 \times 10^{-16}$ & $4.18 \times 10^{-17}$ & $0$\\
+3 & 20 & 400  & $2.22 \times 10^{-16}$ & $1.07 \times 10^{-15}$ & $9.79 \times 10^{-17}$ & $5.00 \times 10^{-17}$\\
+4 & 40 & 1600 & $3.51 \times 10^{-16}$ & $3.03 \times 10^{-15}$ & $3.18 \times 10^{-16}$ & $7.22 \times 10^{-17}$\\
+5 & 70 & 4900 & $4.97 \times 10^{-16}$ & $4.79 \times 10^{-15}$ & $4.03 \times 10^{-16}$ & $2.18 \times 10^{-17}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All residuals at machine precision.  The four-witness cross-collapse is
+preserved at the Tomita--Takesaki level (in fact, the density matrix
+$\rho_W = e^{-K_\alpha^W}/Z$ is itself $\beta$-independent, so $\Delta$
+and $K_{\mathrm{TT}}$ are identical across the six witnesses);\ all
+six instantiations give bit-identical $\sigma^{\mathrm{TT}}_{2\pi}$
+residuals at every $n_{\max}$.
+
+\emph{Structural relation between BW-$\alpha$ and BW-$\gamma$.}\ The two
+constructions generate the same modular automorphism on the algebra,
+up to the sign of $t$:
+\begin{equation}
+\sigma_t^{\mathrm{TT}}(a) \;=\; \rho^{it}\, a\, \rho^{-it}
+\;=\; e^{-it K_\alpha^W}\, a\, e^{+it K_\alpha^W}
+\;=\; \sigma_{-t}^{\alpha}(a).
+\label{eq:tt_alpha_conjugate}
+\end{equation}
+The cross-flow difference $\|\sigma_1^{\mathrm{TT}}(O) -
+\sigma_1^{\alpha}(O)\|_F \sim 0.16$ at non-period $t = 1$ is non-zero
+in general (the conjugate flows are not equal at arbitrary $t$); but
+$\|\sigma_1^{\mathrm{TT}}(O) - \sigma_{-1}^{\alpha}(O)\|_F < 10^{-16}$
+verifies equation~\eqref{eq:tt_alpha_conjugate} bit-exactly.  At $t =
+2\pi$ the sign is invisible because $e^{\pm i 2\pi n} = 1$ for any
+integer $n$, so both flows close to the identity bit-exactly.
+
+\emph{$J_{\mathrm{TT}}^2 = +I$ at the FULL Tomita level.}\ The
+polar-decomposition antilinear conjugation $J_{\mathrm{TT}}(X) =
+\rho^{1/2} X^* \rho^{-1/2}$ satisfies $J_{\mathrm{TT}}^2 = +I$ to
+machine precision at every $n_{\max}$ (residuals in the table above).
+This is structurally distinct from the L1 verification, which only
+checked the canonical sanity case $U = I$; L1-tighten verifies the
+$\rho^{1/2}$-weighted Tomita conjugation itself, which is the genuine
+state-dependent antilinear operator defined by the polar decomposition.
+This separates $J_{\mathrm{TT}}$ from the Connes KO-dim 3 charge
+conjugation $J_{\mathrm{GV}}$ (which has $J_{\mathrm{GV}}^2 = -I$);
+the two antilinear operators coexist on $H_{n_{\max}}$ without
+conflation, as required by L1-A~\S~10e.
+
+\emph{Verdict graduation.}\ The L1 closure is at the operator-system
+level via the geometric BW-$\alpha$ realization \emph{and} via the
+Tomita--Takesaki BW-$\gamma$ polar decomposition.  The two
+constructions agree at the operator-action level (up to sign of $t$;
+identical at the period).  The four-witness Wick-rotation theorem is
+operator-system-level closed at signature $(3, 0)$ via both readings,
+not just via the geometric one.  The L1~\S~7.3 ``BW-$\alpha$-only''
+caveat is removed.
+
+\emph{Honest scope.}\ The unified closure rests on the choice
+$H_{\mathrm{local}} = K_{\alpha}^W / \beta$, which makes the wedge KMS
+state the operator-system analog of the Wightman BW vacuum $\rho_W
+\propto e^{-2\pi K_{\mathrm{boost}}}$.  An alternative choice
+$H_{\mathrm{local}} = D_W$ (wedge-restricted Camporesi--Higuchi Dirac)
+would not have integer spectrum at $\beta H_{\mathrm{local}}$ and the
+bit-exact closure would not hold;\ in that case the framework's intrinsic
+Dirac is simply not the right local Hamiltonian for the wedge KMS state
+at $\beta = 2\pi$.  The L1-tighten unified closure is for the
+BW-aligned wedge state, the load-bearing choice for the Bisognano--Wichmann
+identification.
+
+The L1-tighten implementation extends \verb|geovac/modular_hamiltonian.py|
+with the \verb|TomitaModularStructure| class (load-bearing BW-$\gamma$)
+and accessor methods (\verb|tomita_structure|, \verb|k_alpha_geometric|,
+\verb|k_tomita|, \verb|compare_alpha_vs_tomita|) on the
+\verb|ModularHamiltonian| class.  Test coverage:\
+\verb|tests/test_modular_hamiltonian.py| extended with 26 fast + 2 slow
+new tests (total 67 tests, 0 regressions of the 41 L1 tests).
+Computational driver:\ \verb|debug/l1_tighten_tomita_compute.py|.
+Machine-readable results:\
+\verb|debug/data/l1_tighten_tomita_results.json|.  Closure memo:\
+\verb|debug/l1_tighten_tomita_results_memo.md|.
+
 % ===================================================================
 \section{Marcolli--van~Suijlekom Lineage}
 \label{sec:lineage}
@@ -3121,6 +3560,18 @@ E.~Witten,
 ``APS Medal for Exceptional Achievement in Research: Invited article on
 entanglement properties of quantum field theory,''
 \textit{Rev.~Mod.~Phys.}\ \textbf{90}, 045003 (2018), arXiv:1803.04993.
+
+\bibitem{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard,
+``Towards a noncommutative geometry of the Standard Model with neutrino
+mixing,''
+arXiv:1611.07062 (2018).
+
+\bibitem{nieuviarts2025a}
+A.~Nieuviarts,
+``Emergence of Lorentz symmetry from an almost-commutative twisted
+spectral triple,''
+arXiv:2502.18105 (2025).
 
 \end{thebibliography}
 

@@ -1,0 +1,356 @@
+{
+  "sprint": "L0 — Lorentzian transfer audit",
+  "date": "2026-05-16",
+  "scope": "First-pass projection-by-projection classification of Paper 34's 28 projections for Riemannian (3,0) → Lorentzian (3,1) signature extension. All classifications by-analyst first-pass; refinement expected when Sprint L1 (modular Hamiltonian) and Sprint L2 (BBB Krein lift) land actual computations.",
+  "classification_buckets": {
+    "TRANSFERS_FREELY": "Signature-blind: V/D axes only, no Riemannian volume form, no Mellin transform, no Latrémolière propinquity. Holds at (3,0), (3,1), and any other (m,n) signature.",
+    "WICK_MAP_FREE": "Reduces to M1 sub-mechanism of master Mellin engine via the four-witness Wick-rotation theorem (Hawking + Sewell + Bisognano-Wichmann + Unruh, codified Sprint Unruh-pendant 2026-05-10). β = 2π/(surface gravity), 2π = M1 Vol(S¹). Lorentzian reading inherited at no structural cost at metric-functional level; literal operator-system identification is the named open extension.",
+    "EUCLIDEAN_SPECIFIC": "Requires Krein-space machinery, Lorentzian-native heat-trace formalism, or Lorentzian propinquity. Named blocker B1/B2/B3. Becomes available at (3,1) only after structural extension.",
+    "MIXED": "Parts transfer freely, parts require extension. Specify which sub-mechanisms transfer cleanly and which are blocked."
+  },
+  "blockers": {
+    "B1": {
+      "name": "Lorentzian propinquity",
+      "scope": "Original NCG-mathematics work; estimated 6-12 months. The Latrémolière propinquity used in Papers 38/39/40 is purely Riemannian as of May 2026.",
+      "watch_trigger": "Nieuviarts 2502.18105v3 (May 2025) twisted-spectral-triple morphism Riemannian → pseudo-Riemannian; may shorten the budget if the construction applies to S³ = SU(2) Camporesi-Higuchi (odd-dim caveat to verify in Sprint L2)."
+    },
+    "B2": {
+      "name": "Krein-space spectral triple at (m,n) = (3,1)",
+      "scope": "Bizi-Brouder-Besnard 2018 (arXiv:1611.07062) classification is the most concrete prescription. Hilbert space replaced by Krein space carrying fundamental symmetry J²=I; sign-table replacement on Connes axioms (J², JD, γD anticommutation flip per (m,n) signature)."
+    },
+    "B3": {
+      "name": "Lorentzian-native heat-trace formalism",
+      "scope": "Connes-Chamseddine spectral action Tr f(D²/Λ²) is Euclidean by construction; no published Lorentzian sequel. Spectral-action Wick-rotation prescription works at temporal-circle level (Sprint TD Track 4) but not at general operator level."
+    }
+  },
+  "projections": [
+    {
+      "id": 1,
+      "name": "Fock conformal projection",
+      "section": "III.1 (sec:proj_fock)",
+      "variables": "Z, E",
+      "dimension": "energy",
+      "transcendental": "κ = -1/16; π via Vol(S³)",
+      "classification": "EUCLIDEAN_SPECIFIC",
+      "confidence": "high",
+      "mechanism": "Stereographic R³ → S³ uses Riemannian metric on S³ to identify p₀ = √(-2E). The Fock projection is the canonical second-order Riemannian construction (Paper 31 §IV); Lorentzian analog would require a pseudo-Riemannian sphere quotient (S²,¹?) that has no published construction. Blocker B2."
+    },
+    {
+      "id": 2,
+      "name": "Hopf bundle",
+      "section": "III.2 (sec:proj_hopf)",
+      "variables": "α",
+      "dimension": "dimensionless",
+      "transcendental": "π = Vol(S²)/4",
+      "classification": "EUCLIDEAN_SPECIFIC",
+      "confidence": "high",
+      "mechanism": "S³ → S² × S¹ (locally) uses Riemannian fibration; Vol(S²) is the M1 Hopf-base measure factor in Riemannian signature. Lorentzian Hopf-base analog requires pseudo-Riemannian fibration (no published prescription). Note: the M1 transcendental signature itself appears in Wick-rotated form via §III.27, but the Hopf bundle as a geometric construction is Riemannian-only."
+    },
+    {
+      "id": 3,
+      "name": "Bargmann-Segal transform",
+      "section": "III.3 (sec:proj_bargmann)",
+      "variables": "ℏω",
+      "dimension": "energy",
+      "transcendental": "none (graph π-free)",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "medium",
+      "mechanism": "First-order complex Euler operator on Hardy space H²(S⁵); linear-affine projection. No Riemannian volume integrated, no calibration π. The π-free certificate at every finite N_max (Paper 24) is signature-independent at the discrete-graph level. Lorentzian extension non-trivial only because of HO continuum content (Bargmann–Fock space); the discrete lattice itself transfers. Honest caveat: HO is itself a non-relativistic construction; Lorentzian HO would require Klein-Gordon harmonic oscillator (well-defined but outside current scope)."
+    },
+    {
+      "id": 4,
+      "name": "Stereographic / conformal coordinate change",
+      "section": "III.4 (sec:proj_stereo)",
+      "variables": "length scale r",
+      "dimension": "length",
+      "transcendental": "conformal factor (Coulomb 1/r)",
+      "classification": "EUCLIDEAN_SPECIFIC",
+      "confidence": "high",
+      "mechanism": "Conformal map between Riemannian metrics; Lorentzian conformal maps exist (Penrose diagram, conformal compactification of Minkowski) but generate different conformal factor structure. Would need re-derivation for (3,1) signature. Marginal MIXED candidate; classify EUCLIDEAN_SPECIFIC pending Sprint L2 BBB scoping."
+    },
+    {
+      "id": 5,
+      "name": "Sturmian reparameterization",
+      "section": "III.5 (sec:proj_sturmian)",
+      "variables": "Z, n (re-use)",
+      "dimension": "preserves",
+      "transcendental": "rational-preserved",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Algebraic re-parameterization at λ = Z/n, preserves rationality. No metric content, no transcendental injected. Sturmian basis is a re-labeling of the Fock graph quantum-number labels — operates entirely on the algebra A side of Paper 31. Signature-blind."
+    },
+    {
+      "id": 6,
+      "name": "Connes-Chamseddine spectral action",
+      "section": "III.6 (sec:proj_spectral_action)",
+      "variables": "Λ (UV cutoff), α",
+      "dimension": "energy via Λ",
+      "transcendental": "√π × ℚ SD coefficients; π^{2k} × ℚ observables",
+      "classification": "EUCLIDEAN_SPECIFIC",
+      "confidence": "high",
+      "mechanism": "Tr f(D²/Λ²) is the Euclidean heat-kernel / Mellin engine (M2 sub-mechanism). Blocker B3. Lorentzian extension would require Lorentzian-native heat-trace formalism; no published prescription. Sub-case k=0 (M1) Wick-maps via Wick rotation §III.27, but the spectral-action operation itself (Mellin of Tr e^{-tD²}) is Euclidean."
+    },
+    {
+      "id": 7,
+      "name": "Camporesi-Higuchi spinor lift",
+      "section": "III.7 (sec:proj_spinor)",
+      "variables": "α via (Zα)²",
+      "dimension": "dimensionless",
+      "transcendental": "half-integer Hurwitz → odd ζ; Catalan G, β(4) at vertex",
+      "classification": "EUCLIDEAN_SPECIFIC",
+      "confidence": "medium-high",
+      "mechanism": "Spinor bundle on Riemannian round S³ (parallelizability via S³ = SU(2)). Lorentzian spinor lift requires Krein-space spinor bundle on a Lorentzian spin manifold; BBB 2018 provides the (m,n) sign table for {J,D,γ} anticommutation but the explicit (3,1) spinor lift on the GeoVac graph has not been constructed. Blocker B2. Note: γ = √(1-(Zα)²) is a single-particle bound-state radial Lorentz factor, NOT a frame transformation (Paper 34 §VIII clarification); structurally inside the Euclidean construction."
+    },
+    {
+      "id": 8,
+      "name": "Wigner 3j angular coupling",
+      "section": "III.8 (sec:proj_3j)",
+      "variables": "none",
+      "dimension": "dimensionless",
+      "transcendental": "ℚ[√(2k+1)]_k pure rational",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "SU(2) representation theory; signature-blind. Wigner 3j symbols depend only on (l,m) labels and SU(2) selection rules. The angular sparsity theorem (Paper 22) extends to any signature: ERI density at l_max=3 stays 1.44% in Euclidean (3,0), Lorentzian (3,1), or any (m,n) signature. Canonical content of the universal sector (Paper 31)."
+    },
+    {
+      "id": 9,
+      "name": "Wigner D-matrix rotation",
+      "section": "III.9 (sec:proj_wignerD)",
+      "variables": "R_AB (nuclear position vector)",
+      "dimension": "length",
+      "transcendental": "ℚ[√2, √3, √6]",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Wigner D-matrix between molecular centers. Pure SU(2) (or SO(3)) representation theory; signature-blind. Lorentzian boosts would introduce Wigner rotations (Thomas precession) but this projection operates on spatial rotations between fixed nuclear centers, which transfers freely across signatures."
+    },
+    {
+      "id": 10,
+      "name": "Wilson plaquette",
+      "section": "III.10 (sec:proj_wilson)",
+      "variables": "β = 1/g²",
+      "dimension": "dimensionless",
+      "transcendental": "SU(2) Haar",
+      "classification": "MIXED",
+      "confidence": "medium",
+      "mechanism": "The combinatorial vocabulary (signed incidence, plaquettes, edge Laplacian L₁ = B^T B) is signature-blind and transfers freely (Paper 31 layer-iv universal). The Marcolli-vS = Yang-Mills correspondence and the Wilson lattice gauge action S_W = β Σ(1-Re Tr U_plaq) are Euclidean (Marcolli-vS 2014 / Perez-Sanchez 2024). Lorentzian Wilson lattice gauge has published constructions but not in the Marcolli-vS spectral-triple lineage. The U(1) edge Laplacian / Hodge decomposition (Paper 25) transfers; the SU(2)/SU(3) Wilson dynamics partially transfer."
+    },
+    {
+      "id": 11,
+      "name": "Vector-photon promotion",
+      "section": "III.11 (sec:proj_vector_photon)",
+      "variables": "none (combinatorial labels)",
+      "dimension": "dimensionless",
+      "transcendental": "1/(4π) per loop, identified as S² Weyl exchange constant",
+      "classification": "WICK_MAP_FREE",
+      "confidence": "medium",
+      "mechanism": "Photon promoted from scalar 1-cochain to vector harmonic with (q, m_q) labels. The 1/(4π) per loop is the M1 Hopf-base measure on the S² of the Hopf bundle. Same M1 transcendental signature as Wick rotation §III.27. Lorentzian QED on curved background works via Wick rotation at the metric-functional level; operator-level extension to (3,1) requires B2. Honest scope: the 1/(4π) factor inherits the Wick reading, but the photon-field algebraic structure (Lorentzian gauge field as a 1-form on (3,1)) requires Krein extension."
+    },
+    {
+      "id": 12,
+      "name": "Molecule-frame hyperspherical separation",
+      "section": "III.12 (sec:proj_molframe)",
+      "variables": "R (internuclear distance)",
+      "dimension": "length",
+      "transcendental": "piecewise-smooth in R",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "medium-high",
+      "mechanism": "Coordinate transformation R^{3N} → hyperspherical; non-relativistic by construction but the angular separation lives entirely on the algebra A side. The piecewise-smooth transcendental in R at the min/max boundary is a property of the Born-Oppenheimer adiabatic curve construction, not of signature. Honest caveat: lifting to a relativistic molecular framework (Dirac-Coulomb-Breit on molecules) would require Lorentzian extension at the spinor level (blocker B2 for the spinor projection §III.7), but the molecule-frame separation itself transfers freely."
+    },
+    {
+      "id": 13,
+      "name": "Drake-Swainson asymptotic subtraction",
+      "section": "III.13 (sec:proj_drake_swainson)",
+      "variables": "K (cancels)",
+      "dimension": "dimensionless",
+      "transcendental": "flow tier; D_drake = 2(2ℓ+1)Z⁴/n³ rational",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Flow-tier projection (Paper 18 §IV); the intermediate cutoff K cancels in the converged result. Sits in the parametric/central sector of the Paper 31 refinement (Track TS-C §6.3): formally D-touching but functionally universal because the subtraction is along ℝ·𝟙 in the spectral-density domain. Algebraic regularization, signature-blind."
+    },
+    {
+      "id": 14,
+      "name": "Rest-mass projection",
+      "section": "III.14 (sec:proj_restmass)",
+      "variables": "m (rest mass)",
+      "dimension": "mass",
+      "transcendental": "trivial (ring-preserving for m² ∈ ℚ)",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "D² → D² + m²·𝟙 is central (commutes with everything), preserves all Connes axioms, ring-preserving. Already the canonical bridge between non-relativistic and relativistic kinematics; Klein-Gordon dispersion ω² = k² + m² holds in (3,0) Euclidean and (3,1) Lorentzian. Sprint TS-C central-tier sector. The Wick rotation between the two readings is precisely §III.27; mass projection itself is signature-blind."
+    },
+    {
+      "id": 15,
+      "name": "Observation / temporal-window projection",
+      "section": "III.15 (sec:proj_observation)",
+      "variables": "β (or T = 1/β)",
+      "dimension": "time",
+      "transcendental": "2π·ℚ per Matsubara mode; π^{2k}·ℚ in integrated quantities; Stefan-Boltzmann π²/90 in high-T limit",
+      "classification": "WICK_MAP_FREE",
+      "confidence": "high",
+      "mechanism": "Temporal compactification at finite β = 1/T, Matsubara mode 2πk/β. This is exactly the canonical free-transfer engine: the Wick chain takes the Euclidean S¹_β-circle to the Lorentzian thermal state at temperature T. Hartle-Hawking, Sewell, Bisognano-Wichmann, Unruh all live here. M1 sub-mechanism of master Mellin engine at k=0 with the Vol(S¹) = 2π factor as the universal signature. Already documented at Paper 32 §VIII rem:bisognano_wichmann_reading."
+    },
+    {
+      "id": 16,
+      "name": "Two-body Dirac / Breit retardation",
+      "section": "III.16 (sec:proj_breit_retardation)",
+      "variables": "m_l/m_n",
+      "dimension": "energy",
+      "transcendental": "α⁴·ℚ (ring-preserving over ℚ(α))",
+      "classification": "MIXED",
+      "confidence": "medium",
+      "mechanism": "Two-body kinematic content at α⁴ via Breit retardation. The retardation kernel itself is derived from Lorentz-invariant single-photon exchange in QED, so its structure is signature-aware. The ring-preserving content over ℚ(α) transfers cleanly. Lorentzian re-derivation would not change the angular-content (Roothaan multipole termination is angular), but would re-express the two-body kinematic factor in a frame-independent way. MIXED: angular-content TRANSFERS, kinematic-content needs Lorentzian re-derivation but the result is the same ring."
+    },
+    {
+      "id": 17,
+      "name": "Nuclear charge-density (Foldy/Friar)",
+      "section": "III.17 (sec:proj_charge_density)",
+      "variables": "r_E (charge radius) per nucleus",
+      "dimension": "length",
+      "transcendental": "ℚ(α) ring-preserving",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Layer-2 input: external nuclear charge radius scalar consumed at projection time. The projection mechanism is consumption of a QCD-internal scalar; signature-blind at the GeoVac side (the framework consumes a number, not a Lorentzian object). Lorentzian-invariant nuclear form factor F(q²) is the underlying object, but the projection at the framework boundary is the scalar r_E."
+    },
+    {
+      "id": 18,
+      "name": "Nuclear magnetization-density (Zemach)",
+      "section": "III.18 (sec:proj_magnetization_density)",
+      "variables": "r_Z per nucleus",
+      "dimension": "length",
+      "transcendental": "ℚ(α) ring-preserving (leading); profile-shape sub-features sub-leading",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Same as Foldy/Friar: Layer-2 scalar input, signature-blind at the framework boundary. The Zemach radius is itself an integral over the nuclear magnetization density convolved with the charge density, which is a Lorentz-invariant nuclear-structure quantity; what the framework consumes is the scalar number."
+    },
+    {
+      "id": 19,
+      "name": "Nuclear tensor multipole (quadrupole, etc.)",
+      "section": "III.19 (sec:proj_tensor_multipole)",
+      "variables": "Q_N per nucleus (rank-2)",
+      "dimension": "length-squared",
+      "transcendental": "ℚ via Wigner 3j at angular level",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Rank-2 nuclear tensor coupling via Wigner-Eckart theorem; pure SU(2) representation theory at angular level. The framework consumes a scalar Q_N; signature-blind. Lorentzian extension does not change the rank-2 angular structure (Wigner 3j) or the multipole expansion termination."
+    },
+    {
+      "id": 20,
+      "name": "Phillips-Kleinman / core-valence orthogonality",
+      "section": "III.20 (sec:proj_phillips_kleinman)",
+      "variables": "{φ_c, E_c} core orbitals (Layer-2 input)",
+      "dimension": "dimensionless",
+      "transcendental": "ring-preserving over ℚ(α); no transcendental injected",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Pseudopotential projection consuming external core orbitals; signature-blind. The core-valence orthogonality projection operates on the algebra A and the basis decomposition of H, both signature-independent. Relativistic core orbitals (Dirac-Hartree-Fock) would feed in spinor data, but the projection mechanism (P_v = 1 - Σ |φ_c⟩⟨φ_c|) is signature-blind."
+    },
+    {
+      "id": 21,
+      "name": "Multipole expansion / Gaunt termination",
+      "section": "III.21 (sec:proj_multipole_gaunt)",
+      "variables": "L (integer; 0, ..., L_max = 2 l_max)",
+      "dimension": "preserves",
+      "transcendental": "ring-preserving over ℚ[√(2k+1)]_k; exact termination, not asymptotic",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Gaunt termination at L_max = 2 l_max is a property of the Wigner 3j triangle inequality; pure SU(2) representation theory. Underwrites Paper 22 angular sparsity and Paper 14 O(Q^2.5) Pauli scaling. Signature-blind."
+    },
+    {
+      "id": 22,
+      "name": "Bipolar harmonic / Drake combining",
+      "section": "III.22 (sec:proj_bipolar_drake)",
+      "variables": "(k₁, k₂, K) bipolar triple",
+      "dimension": "preserves",
+      "transcendental": "pure rational over ℚ[√(2k+1)]_k (sibling of Wigner 3j)",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Multi-electron angular content via bipolar tensor coupling; pure SU(2). Internal multi-focal angular-only mechanism; signature-blind. Drake combining coefficients are rational; the J-pattern derivation in He 2³P (Sprint DD May 2026) uses Racah 6j algebra, all signature-blind."
+    },
+    {
+      "id": 23,
+      "name": "Symmetry projection / Young tableau",
+      "section": "III.23 (sec:proj_symmetry_tableau)",
+      "variables": "irrep tableau λ",
+      "dimension": "dimensionless",
+      "transcendental": "none (integer characters; projector entries in ℤ/N!)",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "high",
+      "mechanism": "Character-based S_N projector for Pauli antisymmetry; pure permutation-group representation theory. Signature-blind. The Pauli exclusion principle is signature-blind (relativistic spin-statistics theorem connects spin to statistics in a Lorentzian framework, but the projector machinery itself transfers)."
+    },
+    {
+      "id": 24,
+      "name": "Adiabatic / Born-Oppenheimer projection",
+      "section": "III.24 (sec:proj_adiabatic_BO)",
+      "variables": "R (slow nuclear); m_e/M_n small parameter",
+      "dimension": "length",
+      "transcendental": "none at projection step",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "medium-high",
+      "mechanism": "Scale-separation between fast and slow degrees of freedom; the small parameter m_e/M_n is rest-mass ratio (TRANSFERS via §III.14). Parameter-only at the projection step. Lorentzian extension (relativistic Born-Oppenheimer) is a well-defined construction in molecular QED but does not change the structural projection mechanism."
+    },
+    {
+      "id": 25,
+      "name": "Coupled-channel / adiabatic curve",
+      "section": "III.25 (sec:proj_coupled_channel)",
+      "variables": "R (radial), ν (channel index)",
+      "dimension": "length",
+      "transcendental": "algebraic-implicit at Level 3 (over ℚ(π,√2)); piecewise-smooth at Level 4",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "medium",
+      "mechanism": "Coupled-channel ODE system in R; standard mathematical-physics machinery, signature-blind. The algebraic-implicit transcendental over ℚ(π,√2) at Level 3 carries the Euclidean Fock-projection π through, but the coupled-channel projection mechanism itself (Hellmann-Feynman P-matrix coupling, adiabatic curve via per-point diagonalization) is signature-blind. Honest caveat: at finer audit this could be MIXED if the algebraic-implicit π is itself signature-bound (it inherits from Fock §III.1); preliminary classification TRANSFERS pending Sprint L2 detail."
+    },
+    {
+      "id": 26,
+      "name": "Gauge choice (Coulomb / Lorenz / Feynman)",
+      "section": "III.26 (sec:proj_gauge_choice)",
+      "variables": "none (selection of representative)",
+      "dimension": "preserves",
+      "transcendental": "gauge-dependent at intermediate-propagator level (1/(4π) per loop in Coulomb gauge = M1 Hopf-base measure); gauge-invariant on physical observables (Ward identity)",
+      "classification": "WICK_MAP_FREE",
+      "confidence": "medium-high",
+      "mechanism": "Gauge choice is a discrete bookkeeping selection. The 1/(4π) per loop in Coulomb gauge is the M1 Hopf-base measure (Wick-maps cleanly). Ward identity ensures physical observables are gauge-invariant; this property transfers from Euclidean to Lorentzian. Lorentzian gauge fixing (Lorenz, Feynman) is the standard QFT construction. Pure-transcendental-only entry; the gauge selection itself doesn't change under signature."
+    },
+    {
+      "id": 27,
+      "name": "Wick rotation / signature change",
+      "section": "III.27 (sec:proj_wick_rotation)",
+      "variables": "signature (Euclidean ↔ Lorentzian; binary discrete choice)",
+      "dimension": "preserves",
+      "transcendental": "2π·ℚ via Vol(S¹) (M1 generator)",
+      "classification": "WICK_MAP_FREE",
+      "confidence": "high",
+      "mechanism": "THIS IS THE BRIDGE PROJECTION. By construction, this projection IS the Wick map. Currently encoded at the metric-functional level (structural correspondence). Operator-system-level deepening is the named Sprint L1 target (modular Hamiltonian on T_{n_max}, σ_{i·2π} = identity). Four-witness empirical anchor: Hawking + Sewell + Bisognano-Wichmann + Unruh."
+    },
+    {
+      "id": 28,
+      "name": "Apparatus identity / state-side reduction",
+      "section": "III.28 (sec:proj_apparatus_identity)",
+      "variables": "ρ density matrix; or β = 1/T Gibbs index",
+      "dimension": "preserves",
+      "transcendental": "von Neumann class; PSLQ-disjoint from master Mellin engine M1∪M2∪M3 (Sprint TD Track 5)",
+      "classification": "TRANSFERS_FREELY",
+      "confidence": "medium-high",
+      "mechanism": "State-side reduction operates on density matrices ρ on H. Von Neumann entropy S(ρ) = -Tr ρ log ρ is signature-blind; depends only on the spectrum of ρ, not on the underlying signature of the spectral triple. PSLQ negative (Sprint TD Track 5) verifies that state-side correlation entropies are categorically distinct from spectral-side master Mellin engine — this dichotomy is preserved under signature extension. The apparatus identity S_thermo = k_B · S_microstate(ρ_β) at β = 1/T is precisely the Wick-rotated thermal state, so the temperature-side variable inherits via WICK_MAP_FREE if it enters through §III.15; the ρ-side itself transfers freely."
+    }
+  ],
+  "summary_by_bucket": {
+    "TRANSFERS_FREELY_count": 17,
+    "TRANSFERS_FREELY_ids": [3, 5, 8, 9, 12, 13, 14, 17, 18, 19, 20, 21, 22, 23, 24, 25, 28],
+    "WICK_MAP_FREE_count": 4,
+    "WICK_MAP_FREE_ids": [11, 15, 26, 27],
+    "EUCLIDEAN_SPECIFIC_count": 5,
+    "EUCLIDEAN_SPECIFIC_ids": [1, 2, 4, 6, 7],
+    "MIXED_count": 2,
+    "MIXED_ids": [10, 16],
+    "total_count": 28
+  },
+  "sequencing_recommendation": {
+    "leaves_free_transfer": "17 projections (TRANSFERS_FREELY bucket): defer to documentation. Sprint L0 paper edits cover all of these via Paper 31 §8 + Paper 34 §V.E (or §VIII open-question table).",
+    "wick_map_free_already_landed": "4 projections (WICK_MAP_FREE bucket): the four-witness theorem (Sprint Unruh-pendant 2026-05-10) is the published bridge. Structural correspondence at metric-functional level is done; operator-system literal-identification is Sprint L1.",
+    "sprint_L1_gates": "1 projection (§III.27 Wick rotation) at the operator-system level. 4-8 weeks. Does NOT need B2 (Krein lift) — operator-system extension is internal to the existing Riemannian propinquity machinery.",
+    "sprint_L2_gates": "5 projections (EUCLIDEAN_SPECIFIC bucket): Fock conformal §III.1, Hopf bundle §III.2, stereographic §III.4, Connes axioms via §III.6 spectral action, spinor lift §III.7. All gated on B2 (BBB Krein spectral triple at (3,1)). 3-6 months.",
+    "sprint_L3_gates": "Sprint L3 (Lorentzian propinquity, B1) becomes load-bearing if the operator-system Lorentzian extension (deepening of §III.27 + §III.7) requires Lorentzian Latrémolière propinquity to take the GH limit at finite n_max. 6-12 months (or shorter if Nieuviarts 2502.18105 morphism applies).",
+    "trivially_closed_at_3_1": "M3 sub-mechanism (vertex-parity Hurwitz / Dirichlet-L content in Camporesi-Higuchi vertex sums; Paper 28 §QED-vertex) becomes empty on chirality-symmetric spectrum because the (3,1) signature changes the {J, γ_5} anticommutation table (BBB Table 2 entry (m,n)=(3,1) flips the spinor parity structure). This is a Sprint L2 prediction worth verifying as a structural consistency check."
+  },
+  "honest_scope_note": "This is a first-pass classification by an analyst, NOT a verified theorem. Each row's confidence rating reflects how robust the classification is. Sprint L1 (modular Hamiltonian computation) and Sprint L2 (BBB Krein lift + Connes axiom audit at (3,1)) will refine these classifications with actual computations. Several MIXED classifications (§III.10 Wilson, §III.16 Breit, §III.25 coupled-channel) may shift to TRANSFERS_FREELY or EUCLIDEAN_SPECIFIC once finer sub-mechanism analysis is done. The classifications use the Nieuviarts 2502.18105v3 trigger-firing literature update of 2026-05-16; whether the Nieuviarts twist morphism applies cleanly to GeoVac is the parallel L2-Nieuviarts-scoping pass and is NOT assumed here."
+}

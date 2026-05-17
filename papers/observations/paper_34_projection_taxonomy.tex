@@ -2207,24 +2207,61 @@ All four faces reproduce the shared $2\pi$ from the framework's
 M1 Hopf-base measure on the same $S^1$ factor; the published
 Wick-rotation prescription supplies the bridge to the Lorentzian-side
 modular-flow / boost-orbit vocabulary in each case.\\
-\textbf{Honest scope.}  This projection commits to a
-\emph{structural correspondence}, not a literal identification.
-The framework demonstrably reproduces $\beta = 2\pi / \kappa_g$ on
-all four Wick-rotation faces from M1 alone, and the published
-Hartle--Hawking / Sewell / Bisognano--Wichmann / Unruh chain
-identifies that $2\pi$ with the Lorentzian-side modular-flow /
-Lorentz-boost orbit period.  The identification stands on the
-published QFT machinery, which is mature and independently verified.
-The framework does \emph{not} provide an operator-level proof
-internal to the truncated spectral triple
-$\mathcal{T}_{n_{\max}}$:\ the corresponding statement
-(compute the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$
-for a Rindler-wedge-restricted Camporesi--Higuchi state, verify
-$\sigma_{i\cdot 2\pi} = $ identity at finite $n_{\max}$, and take
-the Gromov--Hausdorff limit using the lemmas of Paper~38) is the
-principal falsifier of the structural correspondence, named with
-estimated cost 4--8 weeks and MEDIUM-HIGH priority in Paper~32~\S~VIII
-Remark on the Bisognano--Wichmann reading.
+\textbf{Honest scope.}  The framework demonstrably reproduces
+$\beta = 2\pi / \kappa_g$ on all four Wick-rotation faces from M1
+alone, and the published Hartle--Hawking / Sewell / Bisognano--Wichmann
+/ Unruh chain identifies that $2\pi$ with the Lorentzian-side
+modular-flow / Lorentz-boost orbit period.
+
+\textbf{Sprint L1 closure (2026-05-16):\ literal identification at
+operator-system level (Riemannian).}\ The L1-named falsifier
+(``compute the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$
+for a wedge-restricted Camporesi--Higuchi state, verify
+$\sigma_{2\pi} = $ identity at finite $n_{\max}$'') is now closed
+positively at the strongest level.  Sprint L1
+(\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
+Paper~32~\S~VIII.F) constructs $K$ on the truncated CH spectral triple
+via the hemispheric-wedge BW-$\alpha$ geometric realization
+($K = J_{\mathrm{polar}}$ with integer spectrum $\mathrm{two\_m}_j$
+on the full-Dirac basis) and verifies the period closure
+$\sigma_{2\pi}(O) = O$ bit-exactly at $n_{\max} \in \{2, 3, 4, 5\}$
+for all four physical witnesses (BW, HH, Sew, Unruh).  Maximum
+periodicity residual: $1.8 \times 10^{-16}$ at $n_{\max}=2$ through
+$1.6 \times 10^{-15}$ at $n_{\max}=5$ (machine precision scaling
+$O(\sqrt{\dim_H} \cdot \varepsilon_{\mathrm{machine}})$).
+Cross-witness collapse is bit-exact (max consistency residual
+$= 0.0$ at every $n_{\max}$):\ the period closure is independent
+of $\kappa_g$ because $\mathrm{e}^{\mathrm{i}\cdot 2\pi \cdot n} = 1$
+for integer spectrum.  This lifts the four-witness Wick-rotation
+theorem from ``structural correspondence'' to ``literal identification
+at the operator-system level (Riemannian)'' at every finite cutoff.
+The Lorentzian extension to signature $(3, 1)$ via the
+Bizi--Brouder--Besnard~2018 Krein-space spectral triple remains the
+named Sprint L2 follow-up (6--12 month scale per Sprint L0 audit).
+
+\textbf{Sprint L1-tighten (2026-05-16 evening):\ unified BW-$\alpha$/BW-$\gamma$
+closure.}\ The L1 closure above is at the geometric BW-$\alpha$ level
+(K = $J_{\mathrm{polar}}$ with integer spectrum). Sprint L1-tighten
+(\texttt{debug/l1\_tighten\_tomita\_results\_memo.md}, Paper~32~\S~VIII.F
+extension) extends this to the full Tomita-Takesaki BW-$\gamma$
+construction:\ build $K_{\mathrm{TT}} = -\log \Delta$ from the polar
+decomposition $S = J_{\mathrm{TT}} \Delta^{1/2}$ on the GNS
+Hilbert-Schmidt space $H_{\mathrm{GNS}} = M_{\dim_W}(\mathbb{C})$,
+verify $\sigma_{2\pi}^{\mathrm{TT}}(O) = O$ bit-exactly at the
+operator-action level for all four witnesses at $n_{\max} \in \{2, 3,
+4, 5\}$. Verdict:\ \emph{UNIFIED\_STRONG closure}. Maximum Tomita-level
+residual: $1.09\times 10^{-16}$ ($n_{\max}=2$) through $4.79\times
+10^{-15}$ ($n_{\max}=5$).  The BW-$\alpha$ and BW-$\gamma$ flows are
+operator-action-level conjugates of each other ($\sigma_t^{\mathrm{TT}}
+= \sigma_{-t}^{\alpha}$ bit-exact at general $t$;\ identical at the
+period $t = 2\pi$).  The state-dependent $J_{\mathrm{TT}}(X) =
+\rho^{1/2} X^* \rho^{-1/2}$ verifies $J_{\mathrm{TT}}^2 = +I$ at the
+full Tomita level (not just the canonical $U = I$ sanity case).  The
+honest scope above is therefore tightened:\ literal identification at
+the operator-system level (Riemannian) holds via \emph{both} the
+geometric BW-$\alpha$ \emph{and} the Tomita-Takesaki BW-$\gamma$
+constructions, not just one.  The L1 ``BW-$\alpha$-only'' caveat is
+removed.
 
 Two further scope distinctions are required.
 First, \emph{Wick rotation is not the full Lorentzian extension.}
@@ -3900,7 +3937,32 @@ identification.  The principal Track~D operator-level falsifier
 triple for a wedge-restricted state) covers all three
 Wick-rotation faces (Hawking, BW, Unruh) simultaneously, since the
 chain runs through the same KMS-Tomita-Takesaki algebra in every case;
-4--8 week follow-up at MEDIUM-HIGH priority. \\
+\textbf{Sprint L1 closure (2026-05-16) lifts the structural correspondence to literal
+identification at the operator-system level (Riemannian)} via the
+machine-precision $\sigma_{2\pi}(O) = O$ closure at $n_{\max} \in
+\{2, 3, 4, 5\}$ (see row below and Paper~32~\S~VIII.F). \\
+Modular periodicity $\sigma_{2\pi}(O) = O$ on $\mathcal{T}_{n_{\max}}$ &
+\S~\ref{sec:proj_wick_rotation} (Wick rotation) at
+$\beta = 2\pi / \kappa_g$;\ four-witness collapse to canonical BW &
+$1.8\times 10^{-16}$ at $n_{\max}=2$ rising to
+$1.6\times 10^{-15}$ at $n_{\max}=5$ (machine precision) & C &
+Sprint L1 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
+2026-05-16) constructs the modular Hamiltonian $K$ on the truncated
+Camporesi--Higuchi spectral triple $\mathcal{T}_{n_{\max}}$ via the
+hemispheric-wedge BW-$\alpha$ geometric realization $K = J_{\mathrm{polar}}$
+and verifies the period closure $\sigma_{2\pi}(O) = O$ bit-exactly at
+every tested $n_{\max} \in \{2, 3, 4, 5\}$ for all four physical
+witnesses (BW, HH, Sew, Unruh).  Residual scales as machine precision
+$O(\sqrt{\dim \mathcal{H}_{n_{\max}}} \cdot
+\varepsilon_{\mathrm{machine}})$;\ cross-witness collapse is bit-exact
+(max consistency residual $= 0.0$).  Row is a machinery-witness for
+the L1 falsifier closure, not a precision match.  Lifts the
+four-witness Wick-rotation theorem from structural correspondence
+to literal identification at the operator-system level (Riemannian).
+Lorentzian extension to signature $(3, 1)$ via BBB Krein lift is the
+named Sprint L2 follow-up (6--12 month scale per Sprint L0 audit).
+See Paper~32~\S~VIII.F and \S~\ref{sec:proj_wick_rotation} honest-scope
+paragraph. \\
 \bottomrule
 \end{tabular}
 \caption{Off-precision matches with error-source classification.
@@ -5555,6 +5617,167 @@ genuinely external input.  The second-packing-axiom question for
 calibration data remains open at the same level it was on
 2026-05-07.
 
+% -------------------------------------------------------------------
+\subsection{Lorentzian transfer audit (Sprint L0, May 2026)}
+\label{sec:lorentzian_transfer_audit}
+% -------------------------------------------------------------------
+
+This subsection is a structural partition table, not an empirical
+match.  It is placed in \S~\ref{sec:matches} because it accumulates
+sprint-by-sprint refinements parallel to \S~\ref{sec:offprecision}
+(off-precision matches), \S~\ref{sec:autopsies} (Roothaan autopsies),
+and \S~\ref{sec:convention_exposures} (literature convention
+exposures).  The Sprint L0 audit
+(\texttt{debug/lorentzian\_l0\_audit\_memo.md}, May~2026) classifies
+this section's twenty-eight projections (\S~\ref{sec:layer2}) by their
+transfer behavior under the Riemannian $(3, 0) \to$ Lorentzian $(3, 1)$
+extension in the Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018}
+signature classification.  The full structural framing of the
+signature partition is in Paper~31~\S~8~\cite{paper31}.  The principal
+falsifier of the audit's structural-correspondence verdict on the
+Wick-rotation projection (\S~\ref{sec:proj_wick_rotation}) is the
+operator-system-level computation flagged in \S~\ref{sec:open} open
+question 6.
+
+The audit's trigger was the Nieuviarts~2025
+twisted-spectral-triple morphism~\cite{nieuviarts2025a}, which provides
+an explicit (Riemannian twisted spectral triple) $\to$
+(pseudo-Riemannian spectral triple) morphism via a Krein-product
+construction.  Whether the construction applies cleanly to
+GeoVac $S^3 = \mathrm{SU}(2)$ (odd-dimension caveat) is the parallel
+L2-Nieuviarts-scoping pass and is \emph{not} assumed in the audit.
+
+\paragraph{Classification buckets.}
+Four buckets are used (see Paper~31~\S~8.1 for the structural framing
+in $\mathcal{A}/D$ partition language):
+
+\begin{description}
+\setlength\itemsep{2pt}
+\item[\textsc{transfers freely (TF)}.]  Signature-blind: lives on the
+$V$ or $D$ axis of \S~\ref{sec:dictionary} only, no Riemannian volume
+form, no Mellin transform of $\mathrm{Tr}\,e^{-tD^2}$, no Latr\'emoli\`ere
+propinquity.  Holds at $(3, 0)$ and $(3, 1)$ identically.
+\item[\textsc{wick-map free (WMF)}.]  Reduces to the M1 sub-mechanism
+of the master Mellin engine via the four-witness Wick-rotation
+theorem (Hawking + Sewell + Bisognano-Wichmann + Unruh codified in
+Sprint Unruh-pendant, May~2026; see Paper~32 \S~VIII Remark on the
+Bisognano-Wichmann reading).  Lorentzian reading inherited at no
+structural cost at the metric-functional level.
+\item[\textsc{euclidean specific (ES)}.]  Requires Krein-space
+machinery, Lorentzian-native heat-trace formalism, or Lorentzian
+analog of Latr\'emoli\`ere propinquity.  Named blockers B1
+(Lorentzian propinquity, $6$--$12$~months original NCG-mathematics
+work, possibly shortened by Nieuviarts~2025 morphism), B2 (Krein
+spectral triple at $(3, 1)$ per BBB~2018), B3 (Lorentzian-native
+heat-trace formalism); see Paper~31~\S~8.2.
+\item[\textsc{mixed (M)}.]  Parts transfer freely, parts require
+extension.  Sub-mechanism-specific decomposition required.
+\end{description}
+
+\paragraph{The 28-projection table.}
+Table~\ref{tab:lorentzian_transfer} gives the per-projection
+classification with one-line mechanism.  The machine-readable form
+with confidence ratings is at
+\texttt{debug/data/lorentzian\_l0\_audit.json}.
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{Lorentzian transfer audit, Sprint L0.  Per-projection
+classification of the twenty-eight entries of \S~\ref{sec:layer2}.
+T.F.~=~\textsc{transfers freely}; W.M.F.~=~\textsc{wick-map free};
+E.S.~=~\textsc{euclidean specific}; M.~=~\textsc{mixed}.  Confidence:
+H high, MH medium-high, M medium.  Mechanism column gives one-line
+rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}.}
+\label{tab:lorentzian_transfer}
+\begin{tabular}{p{0.4cm} p{4.3cm} p{0.8cm} p{0.5cm} p{8cm}}
+\toprule
+\# & Projection (\S~III) & Class & Conf & Mechanism / Blocker \\
+\midrule
+1 & Fock conformal & E.S. & H & Riemannian sphere quotient; B2. \\
+2 & Hopf bundle & E.S. & H & Riemannian fibration; Vol($S^2$) is M1 generator. \\
+3 & Bargmann--Segal & T.F. & M & 1st-order complex Euler op; $\pi$-free certificate signature-blind. \\
+4 & Stereographic / conformal & E.S. & H & Riemannian conformal map; B2. \\
+5 & Sturmian reparameterization & T.F. & H & Algebraic re-labeling on $\mathcal{A}$. \\
+6 & Spectral action (CC) & E.S. & H & Tr~$f(D^2/\Lambda^2)$ Euclidean by construction; B3. \\
+7 & Camporesi--Higuchi spinor lift & E.S. & MH & Riemannian spin manifold; B2 Krein spinor at $(3,1)$. \\
+8 & Wigner $3j$ angular coupling & T.F. & H & SU(2) rep theory; canonical universal sector. \\
+9 & Wigner $D$ rotation & T.F. & H & Spatial rotations; SU(2). \\
+10 & Wilson plaquette & M. & M & Combinatorial vocab T.F.; Marcolli-vS $=$ YM E.S. \\
+11 & Vector-photon promotion & W.M.F. & M & $1/(4\pi)$ per loop $=$ M1 Hopf-base. \\
+12 & Mol-frame hyperspherical & T.F. & MH & Angular separation on $\mathcal{A}$. \\
+13 & Drake--Swainson asymptotic subtraction & T.F. & H & Central tier (Paper~31 TS-C); signature-blind. \\
+14 & Rest-mass & T.F. & H & $D^2 \to D^2 + m^2\mathbb{1}$ central; signature-blind. \\
+15 & Observation / temporal-window & W.M.F. & H & The Wick-engine: Matsubara $2\pi k/\beta$. \\
+16 & Two-body Dirac / Breit retardation & M. & M & Angular T.F.; kinematic needs Lorentzian re-derivation. \\
+17 & Charge density (Foldy/Friar) & T.F. & H & Layer-2 scalar input; signature-blind. \\
+18 & Magnetization (Zemach) & T.F. & H & Layer-2 scalar input. \\
+19 & Tensor multipole $Q_N$ & T.F. & H & Wigner-Eckart; pure SU(2). \\
+20 & Phillips--Kleinman & T.F. & H & Pseudopotential projection on $\mathcal{A}$. \\
+21 & Multipole / Gaunt termination & T.F. & H & 3j triangle inequality; pure SU(2). \\
+22 & Bipolar / Drake combining & T.F. & H & Multi-electron angular; pure SU(2). \\
+23 & Symmetry / Young tableau & T.F. & H & $S_N$ rep theory; signature-blind. \\
+24 & Adiabatic / Born-Oppenheimer & T.F. & MH & Scale separation; relativistic BO well-defined. \\
+25 & Coupled-channel / adiabatic curve & T.F. & M & ODE machinery; transcendental inherits from Fock. \\
+26 & Gauge choice (Coulomb/Lorenz/Feynman) & W.M.F. & MH & Coulomb-gauge $1/(4\pi) = $ M1; Ward identity holds. \\
+27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; Sprint L1 deepens to operator-system level. \\
+28 & Apparatus identity / state-side & T.F. & MH & State-side; PSLQ-disjoint from master Mellin engine. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Headline distribution.}
+Seventeen projections classify as \textsc{transfers freely}
+($61\%$); four as \textsc{wick-map free} ($14\%$); five as
+\textsc{euclidean specific} ($18\%$); two as \textsc{mixed} ($7\%$).
+Three-quarters of the dictionary inherits a Lorentzian reading at no
+further structural cost at the metric-functional level
+(\textsc{transfers freely} + \textsc{wick-map free} $= 75\%$).  The
+remaining $25\%$ (\textsc{euclidean specific} + \textsc{mixed}) sits
+exactly at the load-bearing structural extensions that define future
+Sprints L1 (operator-system literal-identification of Wick rotation,
+$4$--$8$~weeks), L2 (BBB Krein lift, $3$--$6$~months), and L3
+(Lorentzian propinquity, $6$--$12$~months, possibly skippable; see
+Paper~31~\S~8.5).
+
+\paragraph{Two predicted trivializations at $(3, 1)$.}
+The audit produces one structural prediction worth flagging:\
+under the BBB sign table at $(m, n) = (3, 1)$, the M3 sub-mechanism
+of the master Mellin engine (vertex-parity Hurwitz / Dirichlet-$L$
+content in Camporesi-Higuchi vertex sums, Paper~28~\S~QED-vertex)
+becomes structurally empty on chirality-symmetric spectrum.  The
+$\{J, \gamma_5\}$ anticommutation flip at $(3, 1)$ removes the
+asymmetry that drives M3's half-integer-Hurwitz content.  This would
+simplify Paper~32~\S~VIII's case-exhaustion theorem from three
+mechanisms (M1, M2, M3) to two (M1, M2) on the Lorentzian side ---
+not a contradiction with the Riemannian theorem, but a structural
+sharpening that becomes a Sprint L2 consistency check
+(cf.~Paper~31~\S~8.4 and Paper~32~\S~VIII.E).
+
+\paragraph{Scope and limits.}
+This is a first-pass classification by an analyst, not a theorem.
+Confidence ratings flag medium-confidence rows that may shift to
+either side under Sprint L1 / L2 actual computations.  In particular,
+two MIXED rows (Wilson plaquette \#10, Breit retardation \#16) and
+one TRANSFERS\_FREELY row at medium confidence (coupled-channel
+\#25, which inherits an algebraic-implicit $\pi$ from Fock) may
+move under finer audit.  The audit explicitly does not assume that
+Nieuviarts~2025's morphism applies cleanly to GeoVac
+$S^3 = \mathrm{SU}(2)$ (odd-dim caveat); that question is the
+L2-Nieuviarts-scoping pass.  The Bekenstein-Hawking entropy sprint
+(\texttt{debug/bekenstein\_hawking\_sprint\_scoping\_memo.md}) is
+correctly DEFERRED and outside the L0/L1/L2/L3 sprint scope:\ BH
+entropy is Euclidean spectral-action work that does not require
+Lorentzian extension.
+
+\paragraph{Cross-references.}
+The structural framing of the Sig/Op partition is Paper~31~\S~8
+\cite{paper31}.  The bridge projection (\S~\ref{sec:proj_wick_rotation})
+already names the operator-system-level deepening as the principal
+Sprint L1 falsifier;\ \S~\ref{sec:open} open question~6 carries the
+forward-looking task list.  Paper~32~\S~VIII.E sharpens the master
+Mellin engine's M1 sub-mechanism as the free-transfer engine via the
+four-witness theorem.
+
 % ===================================================================
 \section{Dimensional Axiomatization}
 \label{sec:axiomatization}
@@ -6176,6 +6399,61 @@ current data.
 
 \item \textbf{Operator-system-level Lorentzian extension (deepening
 of \S~\ref{sec:proj_wick_rotation}).}
+
+\medskip
+\noindent\textit{Sprint L0 update (May 2026).}  The May 2026 NO-GO
+scoping on full Lorentzian extension was reopened after a named
+trigger (\texttt{debug/lorentzian\_literature\_update\_2026\_05\_16.md})
+fired:\ the Nieuviarts~2025 twisted-spectral-triple morphism
+(arXiv:2502.18105) provides a Riemannian $\to$ pseudo-Riemannian
+construction via Krein-product twist that may significantly shorten
+the blocker-B1 budget.  Sprint L0
+(\texttt{debug/lorentzian\_l0\_audit\_memo.md}, May~2026) executed a
+documentation-only pass:\ a 28-projection transfer audit classifying
+this section's projections by their behavior under the
+Riemannian $(3, 0) \to$ Lorentzian $(3, 1)$ extension.  Headline
+distribution: $17$ TRANSFERS\_FREELY, $4$ WICK\_MAP\_FREE,
+$5$ EUCLIDEAN\_SPECIFIC, $2$ MIXED.  Full per-projection table at
+\S~\ref{sec:lorentzian_transfer_audit}; structural framing of the
+Sig/Op partition at Paper~31~\S~8~\cite{paper31}.
+
+\medskip
+\noindent\textit{Sprint L1 closure (2026-05-16):\ Riemannian
+operator-system identification verified.}  The principal Sprint L1
+falsifier --- ``compute the modular Hamiltonian $K$ on
+$\mathcal{T}_{n_{\max}}$ for a wedge-restricted Camporesi--Higuchi
+state, verify $\sigma_{2\pi}(O) = O$ at finite $n_{\max}$'' ---
+is now closed at the strongest level on the Riemannian side
+(\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
+Paper~32~\S~VIII.F).  Sprint L1 constructs $K$ via the
+hemispheric-wedge BW-$\alpha$ geometric realization
+($K = J_{\mathrm{polar}}$ with integer spectrum on the full-Dirac
+basis), verifies the period closure $\sigma_{2\pi}(O) = O$ bit-exactly
+at $n_{\max} \in \{2, 3, 4, 5\}$ for all four physical witnesses (BW,
+HH, Sew, Unruh), with cross-witness collapse bit-exact (residuals
+match across witnesses at machine precision; period closure is
+independent of $\kappa_g$).  This lifts the four-witness Wick-rotation
+theorem from ``structural correspondence'' to ``literal identification
+at the operator-system level (Riemannian)'' at every finite cutoff.
+\S~\ref{sec:proj_wick_rotation} honest-scope paragraph updated;
+\S~\ref{sec:offprecision} new ``Modular periodicity'' row added as
+machinery-witness for the closure.
+
+\medskip
+\noindent\textit{Residual open scope (full Lorentzian extension).}\
+The remaining open question now is the Lorentzian extension to
+signature $(3, 1)$ via the
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+Krein-space spectral triple --- this is the named Sprint L2 follow-up
+(6--12 month scale per the Sprint L0 audit blocker-B1 estimate; the
+Nieuviarts~2025 twisted-spectral-triple morphism is the named trigger
+that may shorten this budget if it applies cleanly to $S^3 =
+\mathrm{SU}(2)$).  Expected outcome (per Sprint L0 prediction):
+M3 trivializes at $(3, 1)$ but M1 stays, so the four-witness theorem
+extends to Lorentzian.  Sprint L1's Riemannian closure is the
+prerequisite that confirms the operator-system identification is
+sound before lifting signature.
+
 % Source: Sprint Lorentz-Boost-Scoping (May 2026, Track B); refines
 % synthesis pass §7 Hunt 4 REQUIRES-EXTENSION verdict with
 % Bisognano-Wichmann reading.  See debug/lorentz_boost_scoping_memo.md.

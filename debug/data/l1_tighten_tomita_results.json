@@ -1,0 +1,1401 @@
+{
+  "sprint": "L1-tighten Tomita-Takesaki load-bearing",
+  "date": "2026-05-16",
+  "predecessor": "L1 BW-alpha closure (geometric K = J_polar, bit-exact)",
+  "architecture": {
+    "wedge": "W1 hemispheric P_W on S^3 aligned with Hopf-base axis",
+    "unit_normalization": "U-1 natural rapidity units, kappa_g = 1",
+    "load_bearing_construction": "BW-gamma Tomita-Takesaki: K_TT = -log Delta on H_GNS via polar decomposition of antilinear S; natural choice H_local := K_alpha^W / beta makes K_TT = ad(K_alpha^W) with the same integer spectrum as BW-alpha.",
+    "cross_check_construction": "BW-alpha geometric K = J_polar (was load-bearing in L1).",
+    "outcome_1_prediction": "UNIFIED_STRONG: K_TT and K_alpha generate the same modular automorphism up to sign; sigma_t^TT = sigma_{-t}^alpha; both close bit-exact at t = 2*pi (integer spectrum).",
+    "dirac": "truthful Camporesi-Higuchi (chi*(n+1/2))",
+    "witness_pattern": "BW canonical + HH/Sew/Unruh parameterized"
+  },
+  "per_n_max": {
+    "2": {
+      "BW": {
+        "name": "BW",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "dim_GNS": 64,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 64,
+          "K_TT_min_eig": -2.0,
+          "K_TT_max_eig": 2.0,
+          "K_TT_zero_eigs": 40
+        },
+        "J_TT_squared_residual_at_TT_level": 0.0,
+        "max_residual_alpha_2pi": 1.102569494801936e-16,
+        "max_residual_TT_2pi": 1.0870925337539258e-16,
+        "avg_TT_vs_alpha_t1": 0.1637310619221667,
+        "avg_TT_vs_alpha_neg_t1": 4.1765101609074643e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 9.19673869852174e-35,
+            "residual_TT_2pi": 5.782991646304261e-17,
+            "TT_vs_alpha_t1_diff": 5.701406185798644e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.58546529209053e-17
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.760027349401976e-33,
+            "residual_TT_2pi": 5.608981820161099e-17,
+            "TT_vs_alpha_t1_diff": 5.641786210819196e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.574752860002153e-17
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 3.844052670722912e-33,
+            "residual_TT_2pi": 4.5358986317553404e-17,
+            "TT_vs_alpha_t1_diff": 4.055783492414012e-17,
+            "TT_vs_alpha_neg_t1_diff": 4.170050018820959e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M1": {
+        "name": "HH_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "dim_GNS": 64,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 64,
+          "K_TT_min_eig": -2.0,
+          "K_TT_max_eig": 2.0,
+          "K_TT_zero_eigs": 40
+        },
+        "J_TT_squared_residual_at_TT_level": 0.0,
+        "max_residual_alpha_2pi": 1.102569494801936e-16,
+        "max_residual_TT_2pi": 1.0870925337539258e-16,
+        "avg_TT_vs_alpha_t1": 0.1637310619221667,
+        "avg_TT_vs_alpha_neg_t1": 4.1765101609074643e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 9.19673869852174e-35,
+            "residual_TT_2pi": 5.782991646304261e-17,
+            "TT_vs_alpha_t1_diff": 5.701406185798644e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.58546529209053e-17
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.760027349401976e-33,
+            "residual_TT_2pi": 5.608981820161099e-17,
+            "TT_vs_alpha_t1_diff": 5.641786210819196e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.574752860002153e-17
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 3.844052670722912e-33,
+            "residual_TT_2pi": 4.5358986317553404e-17,
+            "TT_vs_alpha_t1_diff": 4.055783492414012e-17,
+            "TT_vs_alpha_neg_t1_diff": 4.170050018820959e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M2": {
+        "name": "HH_M2",
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "dim_GNS": 64,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 64,
+          "K_TT_min_eig": -2.0,
+          "K_TT_max_eig": 2.0,
+          "K_TT_zero_eigs": 40
+        },
+        "J_TT_squared_residual_at_TT_level": 0.0,
+        "max_residual_alpha_2pi": 1.102569494801936e-16,
+        "max_residual_TT_2pi": 1.0870925337539258e-16,
+        "avg_TT_vs_alpha_t1": 0.1637310619221667,
+        "avg_TT_vs_alpha_neg_t1": 4.1765101609074643e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 9.19673869852174e-35,
+            "residual_TT_2pi": 5.782991646304261e-17,
+            "TT_vs_alpha_t1_diff": 5.701406185798644e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.58546529209053e-17
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.760027349401976e-33,
+            "residual_TT_2pi": 5.608981820161099e-17,
+            "TT_vs_alpha_t1_diff": 5.641786210819196e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.574752860002153e-17
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 3.844052670722912e-33,
+            "residual_TT_2pi": 4.5358986317553404e-17,
+            "TT_vs_alpha_t1_diff": 4.055783492414012e-17,
+            "TT_vs_alpha_neg_t1_diff": 4.170050018820959e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Sew_M1": {
+        "name": "Sew_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "dim_GNS": 64,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 64,
+          "K_TT_min_eig": -2.0,
+          "K_TT_max_eig": 2.0,
+          "K_TT_zero_eigs": 40
+        },
+        "J_TT_squared_residual_at_TT_level": 0.0,
+        "max_residual_alpha_2pi": 1.102569494801936e-16,
+        "max_residual_TT_2pi": 1.0870925337539258e-16,
+        "avg_TT_vs_alpha_t1": 0.1637310619221667,
+        "avg_TT_vs_alpha_neg_t1": 4.1765101609074643e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 9.19673869852174e-35,
+            "residual_TT_2pi": 5.782991646304261e-17,
+            "TT_vs_alpha_t1_diff": 5.701406185798644e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.58546529209053e-17
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.760027349401976e-33,
+            "residual_TT_2pi": 5.608981820161099e-17,
+            "TT_vs_alpha_t1_diff": 5.641786210819196e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.574752860002153e-17
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 3.844052670722912e-33,
+            "residual_TT_2pi": 4.5358986317553404e-17,
+            "TT_vs_alpha_t1_diff": 4.055783492414012e-17,
+            "TT_vs_alpha_neg_t1_diff": 4.170050018820959e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a1": {
+        "name": "Unruh_a1",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "dim_GNS": 64,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 64,
+          "K_TT_min_eig": -2.0,
+          "K_TT_max_eig": 2.0,
+          "K_TT_zero_eigs": 40
+        },
+        "J_TT_squared_residual_at_TT_level": 0.0,
+        "max_residual_alpha_2pi": 1.102569494801936e-16,
+        "max_residual_TT_2pi": 1.0870925337539258e-16,
+        "avg_TT_vs_alpha_t1": 0.1637310619221667,
+        "avg_TT_vs_alpha_neg_t1": 4.1765101609074643e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 9.19673869852174e-35,
+            "residual_TT_2pi": 5.782991646304261e-17,
+            "TT_vs_alpha_t1_diff": 5.701406185798644e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.58546529209053e-17
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.760027349401976e-33,
+            "residual_TT_2pi": 5.608981820161099e-17,
+            "TT_vs_alpha_t1_diff": 5.641786210819196e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.574752860002153e-17
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 3.844052670722912e-33,
+            "residual_TT_2pi": 4.5358986317553404e-17,
+            "TT_vs_alpha_t1_diff": 4.055783492414012e-17,
+            "TT_vs_alpha_neg_t1_diff": 4.170050018820959e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a2": {
+        "name": "Unruh_a2",
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "dim_GNS": 64,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 64,
+          "K_TT_min_eig": -2.0,
+          "K_TT_max_eig": 2.0,
+          "K_TT_zero_eigs": 40
+        },
+        "J_TT_squared_residual_at_TT_level": 0.0,
+        "max_residual_alpha_2pi": 1.102569494801936e-16,
+        "max_residual_TT_2pi": 1.0870925337539258e-16,
+        "avg_TT_vs_alpha_t1": 0.1637310619221667,
+        "avg_TT_vs_alpha_neg_t1": 4.1765101609074643e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 9.19673869852174e-35,
+            "residual_TT_2pi": 5.782991646304261e-17,
+            "TT_vs_alpha_t1_diff": 5.701406185798644e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.58546529209053e-17
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.760027349401976e-33,
+            "residual_TT_2pi": 5.608981820161099e-17,
+            "TT_vs_alpha_t1_diff": 5.641786210819196e-17,
+            "TT_vs_alpha_neg_t1_diff": 5.574752860002153e-17
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 1.102569494801936e-16,
+            "residual_TT_2pi": 1.0870925337539258e-16,
+            "TT_vs_alpha_t1_diff": 0.40932765480541666,
+            "TT_vs_alpha_neg_t1_diff": 2.776141316811839e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 3.844052670722912e-33,
+            "residual_TT_2pi": 4.5358986317553404e-17,
+            "TT_vs_alpha_t1_diff": 4.055783492414012e-17,
+            "TT_vs_alpha_neg_t1_diff": 4.170050018820959e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "_wall_time_seconds": 0.17798900604248047
+    },
+    "3": {
+      "BW": {
+        "name": "BW",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "dim_GNS": 400,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 400,
+          "K_TT_min_eig": -4.0,
+          "K_TT_max_eig": 4.0,
+          "K_TT_zero_eigs": 184
+        },
+        "J_TT_squared_residual_at_TT_level": 4.9960036108132046e-17,
+        "max_residual_alpha_2pi": 2.2173559195980293e-16,
+        "max_residual_TT_2pi": 1.0711490335582161e-15,
+        "avg_TT_vs_alpha_t1": 0.3292763323189941,
+        "avg_TT_vs_alpha_neg_t1": 9.78645793458068e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 1.0931015192118184e-32,
+            "residual_TT_2pi": 9.803001540237888e-17,
+            "TT_vs_alpha_t1_diff": 1.4927454410161796e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.4785818994507924e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.0765514973282153e-32,
+            "residual_TT_2pi": 8.9822442669972e-17,
+            "TT_vs_alpha_t1_diff": 1.6409542573056754e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.6238046856003623e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.4108519651676924e-32,
+            "residual_TT_2pi": 8.546820908677679e-17,
+            "TT_vs_alpha_t1_diff": 8.911877245999459e-17,
+            "TT_vs_alpha_neg_t1_diff": 8.985982298104224e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M1": {
+        "name": "HH_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "dim_GNS": 400,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 400,
+          "K_TT_min_eig": -4.0,
+          "K_TT_max_eig": 4.0,
+          "K_TT_zero_eigs": 184
+        },
+        "J_TT_squared_residual_at_TT_level": 4.9960036108132046e-17,
+        "max_residual_alpha_2pi": 2.2173559195980293e-16,
+        "max_residual_TT_2pi": 1.0711490335582161e-15,
+        "avg_TT_vs_alpha_t1": 0.3292763323189941,
+        "avg_TT_vs_alpha_neg_t1": 9.78645793458068e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 1.0931015192118184e-32,
+            "residual_TT_2pi": 9.803001540237888e-17,
+            "TT_vs_alpha_t1_diff": 1.4927454410161796e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.4785818994507924e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.0765514973282153e-32,
+            "residual_TT_2pi": 8.9822442669972e-17,
+            "TT_vs_alpha_t1_diff": 1.6409542573056754e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.6238046856003623e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.4108519651676924e-32,
+            "residual_TT_2pi": 8.546820908677679e-17,
+            "TT_vs_alpha_t1_diff": 8.911877245999459e-17,
+            "TT_vs_alpha_neg_t1_diff": 8.985982298104224e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M2": {
+        "name": "HH_M2",
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "dim_GNS": 400,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 400,
+          "K_TT_min_eig": -4.0,
+          "K_TT_max_eig": 4.0,
+          "K_TT_zero_eigs": 184
+        },
+        "J_TT_squared_residual_at_TT_level": 4.9960036108132046e-17,
+        "max_residual_alpha_2pi": 2.2173559195980293e-16,
+        "max_residual_TT_2pi": 1.0711490335582161e-15,
+        "avg_TT_vs_alpha_t1": 0.3292763323189941,
+        "avg_TT_vs_alpha_neg_t1": 9.78645793458068e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 1.0931015192118184e-32,
+            "residual_TT_2pi": 9.803001540237888e-17,
+            "TT_vs_alpha_t1_diff": 1.4927454410161796e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.4785818994507924e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.0765514973282153e-32,
+            "residual_TT_2pi": 8.9822442669972e-17,
+            "TT_vs_alpha_t1_diff": 1.6409542573056754e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.6238046856003623e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.4108519651676924e-32,
+            "residual_TT_2pi": 8.546820908677679e-17,
+            "TT_vs_alpha_t1_diff": 8.911877245999459e-17,
+            "TT_vs_alpha_neg_t1_diff": 8.985982298104224e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Sew_M1": {
+        "name": "Sew_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "dim_GNS": 400,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 400,
+          "K_TT_min_eig": -4.0,
+          "K_TT_max_eig": 4.0,
+          "K_TT_zero_eigs": 184
+        },
+        "J_TT_squared_residual_at_TT_level": 4.9960036108132046e-17,
+        "max_residual_alpha_2pi": 2.2173559195980293e-16,
+        "max_residual_TT_2pi": 1.0711490335582161e-15,
+        "avg_TT_vs_alpha_t1": 0.3292763323189941,
+        "avg_TT_vs_alpha_neg_t1": 9.78645793458068e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 1.0931015192118184e-32,
+            "residual_TT_2pi": 9.803001540237888e-17,
+            "TT_vs_alpha_t1_diff": 1.4927454410161796e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.4785818994507924e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.0765514973282153e-32,
+            "residual_TT_2pi": 8.9822442669972e-17,
+            "TT_vs_alpha_t1_diff": 1.6409542573056754e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.6238046856003623e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.4108519651676924e-32,
+            "residual_TT_2pi": 8.546820908677679e-17,
+            "TT_vs_alpha_t1_diff": 8.911877245999459e-17,
+            "TT_vs_alpha_neg_t1_diff": 8.985982298104224e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a1": {
+        "name": "Unruh_a1",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "dim_GNS": 400,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 400,
+          "K_TT_min_eig": -4.0,
+          "K_TT_max_eig": 4.0,
+          "K_TT_zero_eigs": 184
+        },
+        "J_TT_squared_residual_at_TT_level": 4.9960036108132046e-17,
+        "max_residual_alpha_2pi": 2.2173559195980293e-16,
+        "max_residual_TT_2pi": 1.0711490335582161e-15,
+        "avg_TT_vs_alpha_t1": 0.3292763323189941,
+        "avg_TT_vs_alpha_neg_t1": 9.78645793458068e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 1.0931015192118184e-32,
+            "residual_TT_2pi": 9.803001540237888e-17,
+            "TT_vs_alpha_t1_diff": 1.4927454410161796e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.4785818994507924e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.0765514973282153e-32,
+            "residual_TT_2pi": 8.9822442669972e-17,
+            "TT_vs_alpha_t1_diff": 1.6409542573056754e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.6238046856003623e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.4108519651676924e-32,
+            "residual_TT_2pi": 8.546820908677679e-17,
+            "TT_vs_alpha_t1_diff": 8.911877245999459e-17,
+            "TT_vs_alpha_neg_t1_diff": 8.985982298104224e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a2": {
+        "name": "Unruh_a2",
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "dim_GNS": 400,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 400,
+          "K_TT_min_eig": -4.0,
+          "K_TT_max_eig": 4.0,
+          "K_TT_zero_eigs": 184
+        },
+        "J_TT_squared_residual_at_TT_level": 4.9960036108132046e-17,
+        "max_residual_alpha_2pi": 2.2173559195980293e-16,
+        "max_residual_TT_2pi": 1.0711490335582161e-15,
+        "avg_TT_vs_alpha_t1": 0.3292763323189941,
+        "avg_TT_vs_alpha_neg_t1": 9.78645793458068e-17,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 1.0931015192118184e-32,
+            "residual_TT_2pi": 9.803001540237888e-17,
+            "TT_vs_alpha_t1_diff": 1.4927454410161796e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.4785818994507924e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 2.0765514973282153e-32,
+            "residual_TT_2pi": 8.9822442669972e-17,
+            "TT_vs_alpha_t1_diff": 1.6409542573056754e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.6238046856003623e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 2.2173559195980293e-16,
+            "residual_TT_2pi": 1.0711490335582161e-15,
+            "TT_vs_alpha_t1_diff": 0.8231908307974851,
+            "TT_vs_alpha_neg_t1_diff": 4.4612207621438144e-17
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.4108519651676924e-32,
+            "residual_TT_2pi": 8.546820908677679e-17,
+            "TT_vs_alpha_t1_diff": 8.911877245999459e-17,
+            "TT_vs_alpha_neg_t1_diff": 8.985982298104224e-17
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "_wall_time_seconds": 3.664426326751709
+    },
+    "4": {
+      "BW": {
+        "name": "BW",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "dim_GNS": 1600,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 1600,
+          "K_TT_min_eig": -6.000000000000001,
+          "K_TT_max_eig": 6.000000000000001,
+          "K_TT_zero_eigs": 584
+        },
+        "J_TT_squared_residual_at_TT_level": 7.216449660063518e-17,
+        "max_residual_alpha_2pi": 3.5129304702375864e-16,
+        "max_residual_TT_2pi": 3.032887656973923e-15,
+        "avg_TT_vs_alpha_t1": 0.521668556097736,
+        "avg_TT_vs_alpha_neg_t1": 3.1792049050235294e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 2.747475935321925e-32,
+            "residual_TT_2pi": 1.2774174300594463e-16,
+            "TT_vs_alpha_t1_diff": 1.8641266874029594e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.8670765254087651e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 3.6441737353676384e-32,
+            "residual_TT_2pi": 1.000831532254589e-16,
+            "TT_vs_alpha_t1_diff": 1.2569889872936633e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.276300364230992e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.8807091566134074e-32,
+            "residual_TT_2pi": 9.152640428923004e-17,
+            "TT_vs_alpha_t1_diff": 1.7087224507358548e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.7033050489606832e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M1": {
+        "name": "HH_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "dim_GNS": 1600,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 1600,
+          "K_TT_min_eig": -6.000000000000001,
+          "K_TT_max_eig": 6.000000000000001,
+          "K_TT_zero_eigs": 584
+        },
+        "J_TT_squared_residual_at_TT_level": 7.216449660063518e-17,
+        "max_residual_alpha_2pi": 3.5129304702375864e-16,
+        "max_residual_TT_2pi": 3.032887656973923e-15,
+        "avg_TT_vs_alpha_t1": 0.521668556097736,
+        "avg_TT_vs_alpha_neg_t1": 3.1792049050235294e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 2.747475935321925e-32,
+            "residual_TT_2pi": 1.2774174300594463e-16,
+            "TT_vs_alpha_t1_diff": 1.8641266874029594e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.8670765254087651e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 3.6441737353676384e-32,
+            "residual_TT_2pi": 1.000831532254589e-16,
+            "TT_vs_alpha_t1_diff": 1.2569889872936633e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.276300364230992e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.8807091566134074e-32,
+            "residual_TT_2pi": 9.152640428923004e-17,
+            "TT_vs_alpha_t1_diff": 1.7087224507358548e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.7033050489606832e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M2": {
+        "name": "HH_M2",
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "dim_GNS": 1600,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 1600,
+          "K_TT_min_eig": -6.000000000000001,
+          "K_TT_max_eig": 6.000000000000001,
+          "K_TT_zero_eigs": 584
+        },
+        "J_TT_squared_residual_at_TT_level": 7.216449660063518e-17,
+        "max_residual_alpha_2pi": 3.5129304702375864e-16,
+        "max_residual_TT_2pi": 3.032887656973923e-15,
+        "avg_TT_vs_alpha_t1": 0.521668556097736,
+        "avg_TT_vs_alpha_neg_t1": 3.1792049050235294e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 2.747475935321925e-32,
+            "residual_TT_2pi": 1.2774174300594463e-16,
+            "TT_vs_alpha_t1_diff": 1.8641266874029594e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.8670765254087651e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 3.6441737353676384e-32,
+            "residual_TT_2pi": 1.000831532254589e-16,
+            "TT_vs_alpha_t1_diff": 1.2569889872936633e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.276300364230992e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.8807091566134074e-32,
+            "residual_TT_2pi": 9.152640428923004e-17,
+            "TT_vs_alpha_t1_diff": 1.7087224507358548e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.7033050489606832e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Sew_M1": {
+        "name": "Sew_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "dim_GNS": 1600,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 1600,
+          "K_TT_min_eig": -6.000000000000001,
+          "K_TT_max_eig": 6.000000000000001,
+          "K_TT_zero_eigs": 584
+        },
+        "J_TT_squared_residual_at_TT_level": 7.216449660063518e-17,
+        "max_residual_alpha_2pi": 3.5129304702375864e-16,
+        "max_residual_TT_2pi": 3.032887656973923e-15,
+        "avg_TT_vs_alpha_t1": 0.521668556097736,
+        "avg_TT_vs_alpha_neg_t1": 3.1792049050235294e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 2.747475935321925e-32,
+            "residual_TT_2pi": 1.2774174300594463e-16,
+            "TT_vs_alpha_t1_diff": 1.8641266874029594e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.8670765254087651e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 3.6441737353676384e-32,
+            "residual_TT_2pi": 1.000831532254589e-16,
+            "TT_vs_alpha_t1_diff": 1.2569889872936633e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.276300364230992e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.8807091566134074e-32,
+            "residual_TT_2pi": 9.152640428923004e-17,
+            "TT_vs_alpha_t1_diff": 1.7087224507358548e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.7033050489606832e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a1": {
+        "name": "Unruh_a1",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "dim_GNS": 1600,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 1600,
+          "K_TT_min_eig": -6.000000000000001,
+          "K_TT_max_eig": 6.000000000000001,
+          "K_TT_zero_eigs": 584
+        },
+        "J_TT_squared_residual_at_TT_level": 7.216449660063518e-17,
+        "max_residual_alpha_2pi": 3.5129304702375864e-16,
+        "max_residual_TT_2pi": 3.032887656973923e-15,
+        "avg_TT_vs_alpha_t1": 0.521668556097736,
+        "avg_TT_vs_alpha_neg_t1": 3.1792049050235294e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 2.747475935321925e-32,
+            "residual_TT_2pi": 1.2774174300594463e-16,
+            "TT_vs_alpha_t1_diff": 1.8641266874029594e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.8670765254087651e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 3.6441737353676384e-32,
+            "residual_TT_2pi": 1.000831532254589e-16,
+            "TT_vs_alpha_t1_diff": 1.2569889872936633e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.276300364230992e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.8807091566134074e-32,
+            "residual_TT_2pi": 9.152640428923004e-17,
+            "TT_vs_alpha_t1_diff": 1.7087224507358548e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.7033050489606832e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a2": {
+        "name": "Unruh_a2",
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "dim_GNS": 1600,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 1600,
+          "K_TT_min_eig": -6.000000000000001,
+          "K_TT_max_eig": 6.000000000000001,
+          "K_TT_zero_eigs": 584
+        },
+        "J_TT_squared_residual_at_TT_level": 7.216449660063518e-17,
+        "max_residual_alpha_2pi": 3.5129304702375864e-16,
+        "max_residual_TT_2pi": 3.032887656973923e-15,
+        "avg_TT_vs_alpha_t1": 0.521668556097736,
+        "avg_TT_vs_alpha_neg_t1": 3.1792049050235294e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 2.747475935321925e-32,
+            "residual_TT_2pi": 1.2774174300594463e-16,
+            "TT_vs_alpha_t1_diff": 1.8641266874029594e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.8670765254087651e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 3.6441737353676384e-32,
+            "residual_TT_2pi": 1.000831532254589e-16,
+            "TT_vs_alpha_t1_diff": 1.2569889872936633e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.276300364230992e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 3.5129304702375864e-16,
+            "residual_TT_2pi": 3.032887656973923e-15,
+            "TT_vs_alpha_t1_diff": 1.3041713902443397,
+            "TT_vs_alpha_neg_t1_diff": 5.524671293258604e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 1.8807091566134074e-32,
+            "residual_TT_2pi": 9.152640428923004e-17,
+            "TT_vs_alpha_t1_diff": 1.7087224507358548e-16,
+            "TT_vs_alpha_neg_t1_diff": 1.7033050489606832e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "_wall_time_seconds": 44.917481899261475
+    },
+    "5": {
+      "BW": {
+        "name": "BW",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "dim_GNS": 4900,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 4900,
+          "K_TT_min_eig": -8.0,
+          "K_TT_max_eig": 8.0,
+          "K_TT_zero_eigs": 1484
+        },
+        "J_TT_squared_residual_at_TT_level": 2.1751308237554086e-17,
+        "max_residual_alpha_2pi": 4.971537218695778e-16,
+        "max_residual_TT_2pi": 4.792493765993048e-15,
+        "avg_TT_vs_alpha_t1": 0.7382709861285066,
+        "avg_TT_vs_alpha_neg_t1": 4.02819623352115e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 6.621947432598776e-32,
+            "residual_TT_2pi": 1.469221526818118e-16,
+            "TT_vs_alpha_t1_diff": 2.2180944588733017e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.1851537897830376e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 5.535233943697847e-32,
+            "residual_TT_2pi": 1.5889947854285787e-16,
+            "TT_vs_alpha_t1_diff": 2.0076866884156498e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.0695941256980492e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 4.338069683052132e-32,
+            "residual_TT_2pi": 8.892608443153787e-17,
+            "TT_vs_alpha_t1_diff": 2.2374155546717056e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.2573177175114736e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M1": {
+        "name": "HH_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "dim_GNS": 4900,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 4900,
+          "K_TT_min_eig": -8.0,
+          "K_TT_max_eig": 8.0,
+          "K_TT_zero_eigs": 1484
+        },
+        "J_TT_squared_residual_at_TT_level": 2.1751308237554086e-17,
+        "max_residual_alpha_2pi": 4.971537218695778e-16,
+        "max_residual_TT_2pi": 4.792493765993048e-15,
+        "avg_TT_vs_alpha_t1": 0.7382709861285066,
+        "avg_TT_vs_alpha_neg_t1": 4.02819623352115e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 6.621947432598776e-32,
+            "residual_TT_2pi": 1.469221526818118e-16,
+            "TT_vs_alpha_t1_diff": 2.2180944588733017e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.1851537897830376e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 5.535233943697847e-32,
+            "residual_TT_2pi": 1.5889947854285787e-16,
+            "TT_vs_alpha_t1_diff": 2.0076866884156498e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.0695941256980492e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 4.338069683052132e-32,
+            "residual_TT_2pi": 8.892608443153787e-17,
+            "TT_vs_alpha_t1_diff": 2.2374155546717056e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.2573177175114736e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "HH_M2": {
+        "name": "HH_M2",
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "dim_GNS": 4900,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 4900,
+          "K_TT_min_eig": -8.0,
+          "K_TT_max_eig": 8.0,
+          "K_TT_zero_eigs": 1484
+        },
+        "J_TT_squared_residual_at_TT_level": 2.1751308237554086e-17,
+        "max_residual_alpha_2pi": 4.971537218695778e-16,
+        "max_residual_TT_2pi": 4.792493765993048e-15,
+        "avg_TT_vs_alpha_t1": 0.7382709861285066,
+        "avg_TT_vs_alpha_neg_t1": 4.02819623352115e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 6.621947432598776e-32,
+            "residual_TT_2pi": 1.469221526818118e-16,
+            "TT_vs_alpha_t1_diff": 2.2180944588733017e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.1851537897830376e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 5.535233943697847e-32,
+            "residual_TT_2pi": 1.5889947854285787e-16,
+            "TT_vs_alpha_t1_diff": 2.0076866884156498e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.0695941256980492e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 4.338069683052132e-32,
+            "residual_TT_2pi": 8.892608443153787e-17,
+            "TT_vs_alpha_t1_diff": 2.2374155546717056e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.2573177175114736e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Sew_M1": {
+        "name": "Sew_M1",
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "dim_GNS": 4900,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 4900,
+          "K_TT_min_eig": -8.0,
+          "K_TT_max_eig": 8.0,
+          "K_TT_zero_eigs": 1484
+        },
+        "J_TT_squared_residual_at_TT_level": 2.1751308237554086e-17,
+        "max_residual_alpha_2pi": 4.971537218695778e-16,
+        "max_residual_TT_2pi": 4.792493765993048e-15,
+        "avg_TT_vs_alpha_t1": 0.7382709861285066,
+        "avg_TT_vs_alpha_neg_t1": 4.02819623352115e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 6.621947432598776e-32,
+            "residual_TT_2pi": 1.469221526818118e-16,
+            "TT_vs_alpha_t1_diff": 2.2180944588733017e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.1851537897830376e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 5.535233943697847e-32,
+            "residual_TT_2pi": 1.5889947854285787e-16,
+            "TT_vs_alpha_t1_diff": 2.0076866884156498e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.0695941256980492e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 4.338069683052132e-32,
+            "residual_TT_2pi": 8.892608443153787e-17,
+            "TT_vs_alpha_t1_diff": 2.2374155546717056e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.2573177175114736e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a1": {
+        "name": "Unruh_a1",
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "dim_GNS": 4900,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 4900,
+          "K_TT_min_eig": -8.0,
+          "K_TT_max_eig": 8.0,
+          "K_TT_zero_eigs": 1484
+        },
+        "J_TT_squared_residual_at_TT_level": 2.1751308237554086e-17,
+        "max_residual_alpha_2pi": 4.971537218695778e-16,
+        "max_residual_TT_2pi": 4.792493765993048e-15,
+        "avg_TT_vs_alpha_t1": 0.7382709861285066,
+        "avg_TT_vs_alpha_neg_t1": 4.02819623352115e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 6.621947432598776e-32,
+            "residual_TT_2pi": 1.469221526818118e-16,
+            "TT_vs_alpha_t1_diff": 2.2180944588733017e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.1851537897830376e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 5.535233943697847e-32,
+            "residual_TT_2pi": 1.5889947854285787e-16,
+            "TT_vs_alpha_t1_diff": 2.0076866884156498e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.0695941256980492e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 4.338069683052132e-32,
+            "residual_TT_2pi": 8.892608443153787e-17,
+            "TT_vs_alpha_t1_diff": 2.2374155546717056e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.2573177175114736e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "Unruh_a2": {
+        "name": "Unruh_a2",
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "dim_GNS": 4900,
+        "K_TT_spectrum_summary": {
+          "dim_GNS": 4900,
+          "K_TT_min_eig": -8.0,
+          "K_TT_max_eig": 8.0,
+          "K_TT_zero_eigs": 1484
+        },
+        "J_TT_squared_residual_at_TT_level": 2.1751308237554086e-17,
+        "max_residual_alpha_2pi": 4.971537218695778e-16,
+        "max_residual_TT_2pi": 4.792493765993048e-15,
+        "avg_TT_vs_alpha_t1": 0.7382709861285066,
+        "avg_TT_vs_alpha_neg_t1": 4.02819623352115e-16,
+        "per_operator": [
+          {
+            "op_idx": 0,
+            "residual_alpha_2pi": 6.621947432598776e-32,
+            "residual_TT_2pi": 1.469221526818118e-16,
+            "TT_vs_alpha_t1_diff": 2.2180944588733017e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.1851537897830376e-16
+          },
+          {
+            "op_idx": 1,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 2,
+            "residual_alpha_2pi": 5.535233943697847e-32,
+            "residual_TT_2pi": 1.5889947854285787e-16,
+            "TT_vs_alpha_t1_diff": 2.0076866884156498e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.0695941256980492e-16
+          },
+          {
+            "op_idx": 3,
+            "residual_alpha_2pi": 4.971537218695778e-16,
+            "residual_TT_2pi": 4.792493765993048e-15,
+            "TT_vs_alpha_t1_diff": 1.8456774653212662,
+            "TT_vs_alpha_neg_t1_diff": 6.814457767306597e-16
+          },
+          {
+            "op_idx": 4,
+            "residual_alpha_2pi": 4.338069683052132e-32,
+            "residual_TT_2pi": 8.892608443153787e-17,
+            "TT_vs_alpha_t1_diff": 2.2374155546717056e-16,
+            "TT_vs_alpha_neg_t1_diff": 2.2573177175114736e-16
+          }
+        ],
+        "verdict": "UNIFIED_STRONG"
+      },
+      "_wall_time_seconds": 545.1808388233185
+    }
+  },
+  "overall": {
+    "verdict": "OUTCOME_1_UNIFIED_STRONG_ALL_WITNESSES_ALL_NMAX",
+    "all_witnesses_unified_strong": true,
+    "J_TT_squared_clean_at_TT_level": true
+  }
+}

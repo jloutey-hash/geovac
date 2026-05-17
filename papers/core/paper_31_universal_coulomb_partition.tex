@@ -901,7 +901,240 @@ Several extensions are not yet placed in the partition framework:
   Coulomb-specific Layer-3 feature; whether it admits a HO-side
   analog (perhaps via the $\mathrm{SU}(3)$ symmetry of the
   isotropic oscillator) is an open question.
+\item Signature extension to Lorentzian $(3, 1)$ via the
+  Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+  classification of pseudo-Riemannian spectral triples.  This
+  axis is structurally parallel to the central-potential
+  partition and is treated in
+  Section~\ref{sec:signature_partition}, which classifies
+  Paper~34's twenty-eight projections by their transfer behavior
+  under the Riemannian $(3, 0) \to$ Lorentzian $(3, 1)$ extension.
 \end{itemize}
+
+%=================================================================
+\section{The Signature Partition (Sprint L0, May 2026)}
+\label{sec:signature_partition}
+%=================================================================
+
+The $\mathcal{A}/D$ partition organizes GeoVac results across
+\emph{central potentials} at fixed Riemannian signature
+$(m, n) = (3, 0)$ in the Bizi--Brouder--Besnard
+classification~\cite{bizi_brouder_besnard2018}.  A structurally parallel
+partition organizes the same results across \emph{signatures}:\
+which features of the framework transfer cleanly from Euclidean $(3, 0)$
+to Lorentzian $(3, 1)$, and which require Krein-space machinery,
+Lorentzian-native heat-trace formalism, or a Lorentzian analog of the
+Latr\'emoli\`ere propinquity used in Paper~38~\cite{paper38} for the
+WH1 PROVEN result.  The signature partition is the structural sibling
+of the central-potential partition that is the main topic of this
+paper; both partitions arise from the same Connes spectral-triple data
+$(\mathcal{A}, \mathcal{H}, D)$.
+
+The signature partition was first articulated in the Sprint L0 audit
+of May~2026~\cite{lorentzian_l0_memo}, motivated by the firing of a
+named literature trigger:\ the Nieuviarts~2025~\cite{nieuviarts2025a}
+twisted-spectral-triple construction provides a morphism
+(Riemannian twisted spectral triple) $\to$ (pseudo-Riemannian spectral
+triple) via a Krein-product / twist link, presented as an alternative
+to Wick rotation without complex numbers.  Whether the construction
+applies cleanly to GeoVac $S^3 = \mathrm{SU}(2)$ is the parallel
+L2-Nieuviarts-scoping pass and is not assumed here.
+
+\subsection{The four-bucket classification}
+\label{sec:sig_buckets}
+
+Paper~34's twenty-eight projections~\cite{paper34} are classified by
+the L0 audit into four buckets according to how each projection
+transfers under the Riemannian $(3, 0)$ $\to$ Lorentzian $(3, 1)$
+extension:
+
+\begin{description}
+\item[\textsc{transfers freely}.]  Signature-blind:\ the projection
+  lives on the $V$ (variable) or $D$ (dimension) axis of
+  Paper~34~\S~III only, with no Riemannian volume form, no Mellin
+  transform of $\mathrm{Tr}\,e^{-tD^2}$, and no
+  Latr\'emoli\`ere propinquity.  Holds identically at $(3, 0)$ and
+  $(3, 1)$.  Seventeen of the twenty-eight projections sit here:\ the
+  SU(2) angular machinery (Wigner $3j$, Wigner $D$, multipole / Gaunt
+  termination, bipolar harmonic / Drake combining, Young-tableau
+  symmetry projection), the parameter-only mechanisms (rest-mass,
+  Drake-Swainson, Phillips-Kleinman, Sturmian reparameterization), the
+  consumption of external nuclear-structure scalars from QCD (Foldy /
+  Friar charge density, Zemach magnetization, tensor multipole), the
+  algebra-side molecular and coupled-channel projections (molecule-frame
+  hyperspherical, adiabatic / Born-Oppenheimer, coupled-channel /
+  adiabatic curve, Bargmann-Segal), and the state-side complement of
+  the dictionary (apparatus identity / von Neumann entropy, which is
+  PSLQ-disjoint from the master Mellin engine per Sprint TD Track 5).
+  These are signature-blind by virtue of $\mathcal{A}$ and the angular
+  decomposition of $\mathcal{H}$;\ they extend Paper~22's universal
+  sector to the signature axis.
+\item[\textsc{wick-map free}.]  Reduces to the M1 sub-mechanism of the
+  master Mellin engine via the four-witness Wick-rotation
+  theorem~\cite{hartle_hawking1976, sewell1982,
+    bisognano_wichmann1976, unruh1976} codified in
+  Sprint~Unruh-pendant (CLAUDE.md~\S2, 2026-05-10):\ Hawking, Sewell,
+  Bisognano-Wichmann, and Unruh are four faces of one published
+  bridge $\beta = 2\pi / (\text{surface gravity})$ with $2\pi$ the
+  same $\mathrm{Vol}(S^1)$ factor in every case.  Any framework
+  observable whose Lorentzian content reduces to compactifying a
+  single Euclidean time circle inherits a Lorentzian reading at no
+  structural cost at the metric-functional level;\ literal
+  operator-system identification is the named Sprint L1 target
+  (computing the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$,
+  verifying $\sigma_{i \cdot 2\pi} = $ identity at finite $n_{\max}$).
+  Four of the twenty-eight projections sit here:\ the observation /
+  temporal-window projection of Paper~34~\S~III.15, the vector-photon
+  promotion of Paper~34~\S~III.11, the gauge-choice projection of
+  Paper~34~\S~III.26, and the Wick-rotation projection of
+  Paper~34~\S~III.27 itself (which is the bridge projection by
+  construction).
+\item[\textsc{euclidean specific}.]  Requires Krein-space machinery
+  (Hilbert space replaced by Krein space carrying fundamental symmetry
+  $\mathcal{J}^2 = I$), Lorentzian-native heat-trace formalism, or a
+  Lorentzian analog of the Latr\'emoli\`ere propinquity.  Named
+  blockers below.  Five of the twenty-eight sit here:\ Fock conformal
+  projection (Paper~34~\S~III.1, requires pseudo-Riemannian sphere
+  quotient), Hopf bundle (Paper~34~\S~III.2, requires pseudo-Riemannian
+  fibration), stereographic / conformal coordinate change
+  (Paper~34~\S~III.4, Lorentzian conformal compactification differs in
+  factor structure), Connes-Chamseddine spectral action
+  (Paper~34~\S~III.6, $\mathrm{Tr}\,f(D^2/\Lambda^2)$ is Euclidean by
+  construction), and Camporesi-Higuchi spinor lift
+  (Paper~34~\S~III.7, Riemannian spin manifold; Krein spinor at $(3,1)$
+  not yet constructed).
+\item[\textsc{mixed}.]  Parts transfer freely, parts require extension.
+  Two of the twenty-eight:\ Wilson plaquette
+  (Paper~34~\S~III.10, the combinatorial vocabulary --- signed
+  incidence, plaquettes, edge Laplacian $L_1 = B^T B$ --- transfers
+  freely, but the Marcolli--van~Suijlekom = Yang--Mills correspondence
+  is Euclidean), and two-body Dirac / Breit retardation
+  (Paper~34~\S~III.16, the angular content transfers via Wigner~$3j$,
+  but the kinematic content requires Lorentzian re-derivation, though
+  the result remains in $\mathbb{Q}(\alpha)$).
+\end{description}
+
+The full per-projection table with one-line mechanism / blocker
+descriptions is in Paper~34~\S~V.E~\cite{paper34};\ the
+machine-readable classification with confidence ratings is in
+\texttt{debug/data/lorentzian\_l0\_audit.json}.
+
+\subsection{Named blockers}
+\label{sec:sig_blockers}
+
+The signature partition's potential-specific side requires extension
+work on three named blockers, with literature support to varying
+degrees:
+
+\begin{description}
+\item[B1\@.] \emph{Lorentzian propinquity.}  The Latr\'emoli\`ere
+  propinquity used in Papers~38--40~\cite{paper38} for the WH1 PROVEN
+  result is purely Riemannian as of May~2026 (Latr\'emoli\`ere,
+  Toyota, Hekkelman--McDonald, Leimbach--van~Suijlekom).  Constructing
+  a Lorentzian propinquity is original NCG-mathematics work at the
+  6--12 month scale.  The Nieuviarts~2025
+  trigger-firing~\cite{nieuviarts2025a, nieuviarts2025b} may shorten
+  this budget significantly via the twist-morphism mechanism if the
+  construction applies to $S^3 = \mathrm{SU}(2)$ (odd-dimension caveat
+  to verify in Sprint L2).
+\item[B2\@.] \emph{Krein-space spectral triple at $(m, n) = (3, 1)$.}
+  Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018} provides
+  the most concrete prescription:\ Hilbert space replaced by Krein
+  space carrying fundamental symmetry $\mathcal{J}^2 = I$;\
+  sign-table replacement on Connes axioms (signature-dependent
+  $\{J, D, \gamma\}$ anticommutations per $(m, n)$ entry).  This is the
+  primary structural extension required for the
+  \textsc{euclidean specific} bucket.
+\item[B3\@.] \emph{Lorentzian-native heat-trace formalism.}
+  Connes--Chamseddine spectral action
+  $\mathrm{Tr}\,f(D^2/\Lambda^2)$ is Euclidean by construction;\
+  no published Lorentzian sequel exists.  The temporal-circle special
+  case is handled by Wick rotation (clean Sprint TD Track 4 reproduction
+  of Hawking temperature), but general Lorentzian heat-trace evaluation
+  remains an open structural extension.
+\end{description}
+
+\subsection{What transfers freely under signature extension}
+\label{sec:sig_transfers}
+
+The combined leverage of the central-potential partition and the
+signature partition is striking:\ \emph{the universal sector of the
+$\mathcal{A}/D$ partition} (Section~\ref{sec:universal}) and the
+\textsc{transfers freely} bucket of the signature partition
+(Section~\ref{sec:sig_buckets}) have substantial overlap.  Both
+contain the SU(2) angular sparsity theorem, the composed-block
+$O(Q^{2.5})$ Pauli scaling, the Wigner~$3j$ / $D$ algebra, and the
+selection rules.  Adding the signature axis to the partition
+framework reveals that these results transfer not only across central
+potentials at fixed signature but also across signatures themselves.
+The framework's structural-skeleton-scope reading (CLAUDE.md~\S2
+sprint-of-2026-05-07 pattern crystallization) survives the $(3, 1)$
+extension at $75\%$ of the projection dictionary
+(\textsc{transfers freely}~$+$~\textsc{wick-map free}, 21 of 28).
+
+\subsection{The trivial closure at $(3, 1)$}
+\label{sec:sig_trivial_closure}
+
+A non-trivial structural prediction follows from the BBB sign table
+at $(m, n) = (3, 1)$:\ the M3 sub-mechanism of the master Mellin
+engine (vertex-parity Hurwitz / Dirichlet-$L$ content in
+Camporesi-Higuchi vertex sums~\cite{paper28}) becomes structurally
+empty on chirality-symmetric spectrum.  The $(3, 1)$ entry in
+BBB Table~2 flips the $\{J, \gamma_5\}$ anticommutation structure,
+which removes the asymmetry that drives the half-integer-Hurwitz
+content of M3.  This would simplify the master Mellin engine's
+three-mechanism partition (Paper~32~\S~VIII case-exhaustion theorem)
+to a two-mechanism partition on the Lorentzian side, with M1 and M2
+remaining and M3 trivializing.  This is a Sprint L2 prediction worth
+verifying as a structural consistency check.
+
+\subsection{Sequencing recommendation}
+\label{sec:sig_sequencing}
+
+The audit's per-bucket classification suggests a natural four-sprint
+sequence:
+
+\begin{description}
+\item[Sprint L0 (1--2 weeks, this).]  Documentation only.  The
+  seventeen \textsc{transfers freely} projections inherit
+  Section~\ref{sec:universal} cleanly;\ defer to Paper~34~\S~V.E
+  for the full per-projection table.  Status:\ this section + Paper~34
+  \S~V.E + Paper~32 \S~VIII.E = closure for the leaves.
+\item[Sprint L1 (4--8 weeks, MEDIUM-HIGH priority).]
+  Operator-system literal-identification of the Wick-rotation
+  projection (Paper~34~\S~III.27).  Falsifier:\ compute modular
+  Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$ for a Rindler-wedge-restricted
+  Camporesi-Higuchi state, verify $\sigma_{i \cdot 2\pi} = $ identity
+  at finite $n_{\max}$, take the GH limit using Paper~38's
+  lemmas~\cite{paper38}.  \emph{Does not} require B2;\ the
+  operator-system extension is internal to the existing Riemannian
+  propinquity machinery.  One operator-level proof lifts all four
+  Wick-rotation faces simultaneously via the shared KMS-Tomita-Takesaki
+  algebra.
+\item[Sprint L2 (3--6 months).]  BBB Krein lift and Connes axiom audit
+  at $(3, 1)$.  Gates:\ blocker B2.  Refines the five
+  \textsc{euclidean specific} rows and the two \textsc{mixed} rows to
+  definitive classifications.  Predicts M3 trivialization on
+  chirality-symmetric spectrum (consistency check).
+\item[Sprint L3 (6--12 months).]  Lorentzian propinquity construction
+  (blocker B1).  Load-bearing only if Sprint L1 / L2 closure requires
+  Lorentzian Latr\'emoli\`ere propinquity to take the GH limit at
+  finite $n_{\max}$.  May be shortened significantly by the
+  Nieuviarts~2025 morphism if L2-Nieuviarts-scoping verifies
+  applicability.
+\end{description}
+
+This section is descriptive, not predictive:\ the four-bucket
+classification sorts existing projections into transfer categories
+and does not change any of the theorems in
+Sections~\ref{sec:universal} or \ref{sec:specific}.
+Its value, like the rest of this paper, is operational:\ it tells
+future Lorentzian extensions which framework results may be quoted
+from prior papers without modification, and which require
+system-specific computation.  Sprint L1 and Sprint L2 will deepen the
+classification with actual computations;\ at the present stage of
+documentation only, this section records the audit verdict and
+identifies the sequencing.
 
 %=================================================================
 \section{Open Questions}
@@ -1210,6 +1443,63 @@ J.~Loutey,
 \textit{Curve-fit / pattern-match audit memo},
 GeoVac internal document, \texttt{docs/curve\_fit\_audit\_memo.md}
 (2026-05-02).
+
+\bibitem{paper34}
+J.~Loutey,
+``GeoVac as a Two-Layer Framework:\ Projection Taxonomy and the
+Empirical Matches Catalog,''
+GeoVac Paper~34 (2026).
+
+\bibitem{paper38}
+J.~Loutey,
+``SU(2) Propinquity Convergence on the Camporesi--Higuchi Spectral
+Triple,''
+GeoVac Paper~38 (2026), Zenodo.
+
+\bibitem{lorentzian_l0_memo}
+J.~Loutey,
+\textit{Sprint L0 --- 28-Projection Lorentzian Transfer Audit},
+GeoVac internal document, \texttt{debug/lorentzian\_l0\_audit\_memo.md}
+(2026-05-16).
+
+\bibitem{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard,
+``Towards a noncommutative geometry of the Standard Model with
+neutrino mixing,''
+arXiv:1611.07062 (2018).
+
+\bibitem{nieuviarts2025a}
+A.~Nieuviarts,
+``Emergence of Lorentz symmetry from an almost-commutative twisted
+spectral triple,''
+arXiv:2502.18105 (2025).
+
+\bibitem{nieuviarts2025b}
+A.~Nieuviarts,
+``Proceedings synthesis on twisted spectral triples and signature
+change,''
+arXiv:2512.15450 (2026).
+
+\bibitem{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+``Path-integral derivation of black-hole radiance,''
+Phys.\ Rev.\ D \textbf{13}, 2188 (1976).
+
+\bibitem{sewell1982}
+G.~L.~Sewell,
+``Quantum fields on manifolds: PCT and gravitationally induced thermal
+states,''
+Ann.\ Phys.\ \textbf{141}, 201 (1982).
+
+\bibitem{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+``On the duality condition for quantum fields,''
+J.\ Math.\ Phys.\ \textbf{17}, 303 (1976).
+
+\bibitem{unruh1976}
+W.~G.~Unruh,
+``Notes on black-hole evaporation,''
+Phys.\ Rev.\ D \textbf{14}, 870 (1976).
 
 \end{thebibliography}
 

@@ -1118,6 +1118,46 @@ sign convention, and may admit a different propinquity theory entirely.
 We are not aware of a Lorentzian propinquity framework in the
 literature; the topic is open.
 
+\emph{Update (2026-05-16):} a partial Riemannian-side
+operator-system-level result is now in place via the
+\emph{modular Hamiltonian closure} (Sprint~L1, see GeoVac framework
+documentation Paper~32~\S~VIII.F): the modular Hamiltonian $K$ on the
+truncated Camporesi--Higuchi spectral triple $\mathcal{T}_{\nmax}$
+satisfies the period closure $\sigma_{2\pi}(O) = O$ bit-exactly at
+$\nmax \in \{2, 3, 4, 5\}$ for the hemispheric-wedge-restricted state
+and all four physical witnesses (Bisognano--Wichmann, Hartle--Hawking,
+Sewell, Unruh). This lifts the four-witness Wick-rotation theorem from
+``structural correspondence'' to ``literal identification at the
+operator-system level (Riemannian)''. The closure is finite-cutoff
+exact (not a propinquity limit-statement), because the geometric BW
+realization $K = J_{\mathrm{polar}}$ has integer spectrum on the
+full-Dirac basis, so $\mathrm{e}^{\mathrm{i}\cdot 2\pi \cdot n} = 1$
+holds for all integer $n$. The genuine Lorentzian extension to
+signature $(3, 1)$ via the Bizi--Brouder--Besnard~2018 Krein-space
+spectral triple, with corresponding Lorentzian propinquity, remains
+the open question of this subsection; Sprint L1's Riemannian closure
+is the prerequisite that confirms the operator-system identification
+is sound before lifting signature.
+
+\emph{Update (2026-05-16, same day, evening):} Sprint L1-tighten
+extends the Sprint L1 closure from the geometric BW-$\alpha$ realization
+($K = J_{\mathrm{polar}}$) to the load-bearing Tomita--Takesaki
+BW-$\gamma$ construction: $K_{\mathrm{TT}} = -\log \Delta$ extracted
+from the polar decomposition $S = J_{\mathrm{TT}} \Delta^{1/2}$ on the
+GNS Hilbert--Schmidt space $H_{\mathrm{GNS}} = M_{\dim_W}(\mathbb{C})$.
+Verdict at every tested $\nmax \in \{2, 3, 4, 5\}$ and every physical
+witness:\ \emph{UNIFIED\_STRONG} closure. The two constructions are
+operator-action-level conjugates of each other ($\sigma_t^{\mathrm{TT}}
+= \sigma_{-t}^{\alpha}$ bit-exact at general $t$, identical at the
+period $t = 2\pi$), and the state-dependent $J_{\mathrm{TT}}(X) =
+\rho^{1/2} X^* \rho^{-1/2}$ verifies $J_{\mathrm{TT}}^2 = +I$ at the
+full Tomita level. The L1 ``BW-$\alpha$-only'' caveat is removed: the
+four-witness Wick-rotation theorem is closed at signature $(3, 0)$ via
+both the geometric and the Tomita-Takesaki readings. See GeoVac
+framework documentation Paper~32~\S~VIII.F (Sprint L1-tighten extension
+paragraph) and
+\texttt{debug/l1\_tighten\_tomita\_results\_memo.md}.
+
 \textbf{(iii) Higher-rank compact non-abelian cases.} The present
 proof transcribes mechanically to $\SU(n)$ for $n \ge 3$ at the
 algebraic level (Peter--Weyl, central characters, Plancherel weights)

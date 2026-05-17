@@ -1,0 +1,1550 @@
+{
+  "sprint": "L1 modular Hamiltonian closure",
+  "date": "2026-05-16",
+  "architecture": {
+    "wedge": "W1 hemispheric P_W on S^3 aligned with Hopf-base axis",
+    "unit_normalization": "U-1 natural rapidity units, kappa_g = 1",
+    "construction": "BW-alpha geometric K = J_polar (integer spectrum)",
+    "dirac": "truthful Camporesi-Higuchi (chi*(n+1/2))",
+    "witness_pattern": "BW canonical, HH/Sew/Unruh parameterized BW"
+  },
+  "per_n_max": {
+    "2": {
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 8.0
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5592687330077502e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.2731375892483352e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.6019963353574448e-16
+          }
+        ],
+        "max_periodicity_residual": 1.8004884454819823e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 8.0
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5592687330077502e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.2731375892483352e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.6019963353574448e-16
+          }
+        ],
+        "max_periodicity_residual": 1.8004884454819823e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M2": {
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 8.0
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5592687330077502e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.2731375892483352e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.6019963353574448e-16
+          }
+        ],
+        "max_periodicity_residual": 1.8004884454819823e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Sew_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 8.0
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5592687330077502e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.2731375892483352e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.6019963353574448e-16
+          }
+        ],
+        "max_periodicity_residual": 1.8004884454819823e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 8.0
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5592687330077502e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.2731375892483352e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.6019963353574448e-16
+          }
+        ],
+        "max_periodicity_residual": 1.8004884454819823e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 16,
+        "wedge_dim": 8,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 8.0
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5592687330077502e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.2731375892483352e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.8004884454819823e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.6019963353574448e-16
+          }
+        ],
+        "max_periodicity_residual": 1.8004884454819823e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      }
+    },
+    "3": {
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 12.649110640673518
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 4.590362858755484e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 4.061643698717538e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 4.459769052693737e-16
+          }
+        ],
+        "max_periodicity_residual": 4.756077313843685e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 12.649110640673518
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 4.590362858755484e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 4.061643698717538e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 4.459769052693737e-16
+          }
+        ],
+        "max_periodicity_residual": 4.756077313843685e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M2": {
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 12.649110640673518
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 4.590362858755484e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 4.061643698717538e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 4.459769052693737e-16
+          }
+        ],
+        "max_periodicity_residual": 4.756077313843685e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Sew_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 12.649110640673518
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 4.590362858755484e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 4.061643698717538e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 4.459769052693737e-16
+          }
+        ],
+        "max_periodicity_residual": 4.756077313843685e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 12.649110640673518
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 4.590362858755484e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 4.061643698717538e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 4.459769052693737e-16
+          }
+        ],
+        "max_periodicity_residual": 4.756077313843685e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 40,
+        "wedge_dim": 20,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 12.649110640673518
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 4.590362858755484e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 4.061643698717538e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 4.756077313843685e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 4.459769052693737e-16
+          }
+        ],
+        "max_periodicity_residual": 4.756077313843685e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      }
+    },
+    "4": {
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 17.88854381999832
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 9.29041569853651e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 8.504330385752199e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 9.05786172552152e-16
+          }
+        ],
+        "max_periodicity_residual": 9.331325582818199e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 17.88854381999832
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 9.29041569853651e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 8.504330385752199e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 9.05786172552152e-16
+          }
+        ],
+        "max_periodicity_residual": 9.331325582818199e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M2": {
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 17.88854381999832
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 9.29041569853651e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 8.504330385752199e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 9.05786172552152e-16
+          }
+        ],
+        "max_periodicity_residual": 9.331325582818199e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Sew_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 17.88854381999832
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 9.29041569853651e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 8.504330385752199e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 9.05786172552152e-16
+          }
+        ],
+        "max_periodicity_residual": 9.331325582818199e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 17.88854381999832
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 9.29041569853651e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 8.504330385752199e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 9.05786172552152e-16
+          }
+        ],
+        "max_periodicity_residual": 9.331325582818199e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 80,
+        "wedge_dim": 40,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 17.88854381999832
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 9.29041569853651e-16
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 8.504330385752199e-16
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 9.331325582818199e-16
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 9.05786172552152e-16
+          }
+        ],
+        "max_periodicity_residual": 9.331325582818199e-16,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      }
+    },
+    "5": {
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 23.664319132398465
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5870874157015032e-15
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.4811106680752859e-15
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.5554351494259532e-15
+          }
+        ],
+        "max_periodicity_residual": 1.5870874157015032e-15,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 23.664319132398465
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5870874157015032e-15
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.4811106680752859e-15
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.5554351494259532e-15
+          }
+        ],
+        "max_periodicity_residual": 1.5870874157015032e-15,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "HH_M2": {
+        "kappa_g": 0.125,
+        "beta": 50.26548245743669,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 23.664319132398465
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5870874157015032e-15
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.4811106680752859e-15
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.5554351494259532e-15
+          }
+        ],
+        "max_periodicity_residual": 1.5870874157015032e-15,
+        "kms_condition_sample": {
+          "ok": false,
+          "residual": NaN
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Sew_M1": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 23.664319132398465
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5870874157015032e-15
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.4811106680752859e-15
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.5554351494259532e-15
+          }
+        ],
+        "max_periodicity_residual": 1.5870874157015032e-15,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 23.664319132398465
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5870874157015032e-15
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.4811106680752859e-15
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.5554351494259532e-15
+          }
+        ],
+        "max_periodicity_residual": 1.5870874157015032e-15,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "dim_H": 140,
+        "wedge_dim": 70,
+        "wedge_idempotent": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "wedge_hermitian": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_squared_identity": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "J_TT_distinct_from_J_GV": {
+          "ok": true,
+          "distance_to_J_GV_signature": 23.664319132398465
+        },
+        "periodicity_per_generator": [
+          {
+            "gen_idx": 0,
+            "ok": true,
+            "residual": 1.5870874157015032e-15
+          },
+          {
+            "gen_idx": 1,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 2,
+            "ok": true,
+            "residual": 1.4811106680752859e-15
+          },
+          {
+            "gen_idx": 3,
+            "ok": true,
+            "residual": 1.5751194394302122e-15
+          },
+          {
+            "gen_idx": 4,
+            "ok": true,
+            "residual": 1.5554351494259532e-15
+          }
+        ],
+        "max_periodicity_residual": 1.5870874157015032e-15,
+        "kms_condition_sample": {
+          "ok": true,
+          "residual": 0.0
+        },
+        "verdict": "STRONG_IDENTIFICATION"
+      }
+    }
+  },
+  "cross_witness_collapse": {
+    "2": {
+      "n_max": 2,
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 1.5592687330077502e-16
+      },
+      "HH": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 1.5592687330077502e-16
+      },
+      "Sew": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 1.5592687330077502e-16
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 1.5592687330077502e-16
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "ok": true,
+        "residual": 1.5592687330077502e-16
+      },
+      "cross_consistency": {
+        "HH": 0.0,
+        "Sew": 0.0,
+        "Unruh_a1": 0.0,
+        "Unruh_a2": 0.0
+      },
+      "max_consistency_residual": 0.0
+    },
+    "3": {
+      "n_max": 3,
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 4.590362858755484e-16
+      },
+      "HH": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 4.590362858755484e-16
+      },
+      "Sew": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 4.590362858755484e-16
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 4.590362858755484e-16
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "ok": true,
+        "residual": 4.590362858755484e-16
+      },
+      "cross_consistency": {
+        "HH": 0.0,
+        "Sew": 0.0,
+        "Unruh_a1": 0.0,
+        "Unruh_a2": 0.0
+      },
+      "max_consistency_residual": 0.0
+    },
+    "4": {
+      "n_max": 4,
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 9.29041569853651e-16
+      },
+      "HH": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 9.29041569853651e-16
+      },
+      "Sew": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 9.29041569853651e-16
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 9.29041569853651e-16
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "ok": true,
+        "residual": 9.29041569853651e-16
+      },
+      "cross_consistency": {
+        "HH": 0.0,
+        "Sew": 0.0,
+        "Unruh_a1": 0.0,
+        "Unruh_a2": 0.0
+      },
+      "max_consistency_residual": 0.0
+    },
+    "5": {
+      "n_max": 5,
+      "BW": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 1.5870874157015032e-15
+      },
+      "HH": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 1.5870874157015032e-15
+      },
+      "Sew": {
+        "kappa_g": 0.25,
+        "beta": 25.132741228718345,
+        "ok": true,
+        "residual": 1.5870874157015032e-15
+      },
+      "Unruh_a1": {
+        "kappa_g": 1.0,
+        "beta": 6.283185307179586,
+        "ok": true,
+        "residual": 1.5870874157015032e-15
+      },
+      "Unruh_a2": {
+        "kappa_g": 2.0,
+        "beta": 3.141592653589793,
+        "ok": true,
+        "residual": 1.5870874157015032e-15
+      },
+      "cross_consistency": {
+        "HH": 0.0,
+        "Sew": 0.0,
+        "Unruh_a1": 0.0,
+        "Unruh_a2": 0.0
+      },
+      "max_consistency_residual": 0.0
+    }
+  },
+  "propinquity_rate_check": {
+    "2": {
+      "n_max": 2,
+      "max_residual": 1.8004884454819823e-16,
+      "all_residuals": [
+        1.5592687330077502e-16,
+        1.8004884454819823e-16,
+        1.2731375892483352e-16
+      ],
+      "gamma_n_L2": 2.0745510936998897,
+      "residual_over_gamma": 8.678930352449762e-17
+    },
+    "3": {
+      "n_max": 3,
+      "max_residual": 4.756077313843685e-16,
+      "all_residuals": [
+        4.590362858755484e-16,
+        4.756077313843685e-16,
+        4.061643698717538e-16
+      ],
+      "gamma_n_L2": 1.6100599680657361,
+      "residual_over_gamma": 2.9539752606590504e-16
+    },
+    "4": {
+      "n_max": 4,
+      "max_residual": 9.331325582818199e-16,
+      "all_residuals": [
+        9.29041569853651e-16,
+        9.331325582818199e-16,
+        8.504330385752199e-16
+      ],
+      "gamma_n_L2": 1.3223327942828407,
+      "residual_over_gamma": 7.056714938298863e-16
+    },
+    "5": {
+      "n_max": 5,
+      "max_residual": 1.5870874157015032e-15,
+      "all_residuals": [
+        1.5870874157015032e-15,
+        1.5751194394302122e-15,
+        1.4811106680752859e-15
+      ],
+      "gamma_n_L2": 1.1302189548203845,
+      "residual_over_gamma": 1.4042300466936735e-15
+    }
+  },
+  "overall_verdict": "STRONG_IDENTIFICATION_ALL_NMAX_ALL_WITNESSES"
+}

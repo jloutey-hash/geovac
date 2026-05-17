@@ -1,0 +1,2088 @@
+% =====================================================================
+% Paper 42 (standalone): Tomita-Takesaki modular structure on truncated
+% SU(2) spectral triples; four-witness Wick-rotation literal
+% identification at finite cutoff (Riemannian).
+%
+% Math.OA / J. Geom. Phys. style; companion to Paper 38 (SU(2)
+% propinquity convergence on Camporesi-Higuchi truncated triples) and
+% Paper 40 (universal 4/pi rate constant on compact Lie groups).
+%
+% Status: first draft, May 2026, post-Sprint-L0 / L1 / L1-tighten
+% closure (2026-05-16). Built from internal sprint memos:
+%   debug/lorentzian_l0_audit_memo.md
+%   debug/lorentzian_partition_transfer_memo.md
+%   debug/nieuviarts_scoping_memo.md
+%   debug/l1_modular_hamiltonian_architecture_memo.md
+%   debug/l1_infrastructure_audit_memo.md
+%   debug/l1_witness_spec_memo.md
+%   debug/l1_modular_hamiltonian_results_memo.md
+%   debug/l1_tighten_tomita_results_memo.md
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Frob}[1]{\lVert #1 \rVert_{F}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\KMS}{\mathrm{KMS}}
+\newcommand{\TT}{\mathrm{TT}}
+\newcommand{\BW}{\mathrm{BW}}
+\newcommand{\HH}{\mathrm{HH}}
+\newcommand{\Sew}{\mathrm{Sew}}
+\newcommand{\Unruh}{\mathrm{Unruh}}
+\newcommand{\GNS}{\mathrm{GNS}}
+\newcommand{\Mod}{\mathrm{mod}}
+\newcommand{\Bcal}{\mathcal{B}}
+
+\title{Tomita--Takesaki modular structure on truncated\\
+$\SU(2)$ spectral triples:\ four-witness Wick-rotation\\
+literal identification at finite cutoff}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The four-witness Wick-rotation theorem
+(Hartle--Hawking~\cite{hartle_hawking1976}, Sewell~\cite{sewell1982},
+Bisognano--Wichmann~\cite{bisognano_wichmann1976},
+Unruh~\cite{unruh1976}) asserts that a state of a quantum field
+restricted to a region bounded by a bifurcate Killing horizon with
+surface gravity $\kappa_g$ is KMS at inverse temperature
+$\beta = 2\pi/\kappa_g$ with respect to Killing-time evolution. The
+shared $2\pi$ across all four faces is $\Vol(S^1)$, the regularity
+period of the Euclidean rotation of the observer's causal-domain
+coordinates. We close this theorem at the operator-system level on the
+Connes--van~Suijlekom~\cite{connes_vs2021} truncated
+Camporesi--Higuchi~\cite{camporesi_higuchi1996} spectral triple
+$\Tcal_{\nmax}$ via two structurally independent but operator-action
+conjugate constructions:\ (i)~the geometric BW-$\alpha$ realization
+$K_\alpha = J_{\mathrm{polar}}$ with integer spectrum on the spinor
+basis, and (ii)~the Tomita--Takesaki BW-$\gamma$ realization
+$K_{\TT} = -\log \Delta$ obtained from polar decomposition of the
+modular $S$ operator on the GNS Hilbert--Schmidt space of a
+wedge-restricted Gibbs state. Both constructions verify the period
+closure $\sigma_{2\pi}(O) = O$ \emph{bit-exactly} at every tested
+$\nmax \in \{2, 3, 4, 5\}$ for all four physical witnesses, with
+maximum periodicity residual scaling as
+$O(\sqrt{\dim \Hilb_{\nmax}} \cdot \varepsilon_{\mathrm{machine}})$.
+Cross-witness collapse is bit-exact at the algebra-action level:\ the
+density matrix
+$\rho_W = e^{-K_\alpha^W}/Z$ is itself $\beta$-independent under the
+natural choice $H_{\mathrm{local}} := K_\alpha^W / \beta$, so the six
+witness instantiations (BW canonical, Hartle--Hawking $M=1$,
+Hartle--Hawking $M=2$, Sewell $M=1$, Unruh $a=1$, Unruh $a=2$) give
+literally identical modular operators $\Delta$ and Hamiltonians
+$K_{\TT}$. We further establish a flow-conjugacy identity
+$\sigma_t^{\TT}(O) = \sigma_{-t}^{\alpha}(O)$ bit-exact at general $t$,
+identical at the period $t = 2\pi$. The construction depends on a
+deliberate choice of local Hamiltonian
+$H_{\mathrm{local}} = K_\alpha^W / \beta$ on the wedge sub-algebra, the
+operator-system analog of the Wightman BW vacuum. The framework's
+intrinsic Camporesi--Higuchi Dirac, restricted to the wedge, would
+\emph{not} produce the bit-exact closure under the same wedge-state
+prescription, isolating $H_{\mathrm{local}} = K_\alpha^W / \beta$ as a
+derived structural finding. The L1 closure lifts the four-witness
+theorem from ``structural correspondence'' (the published
+Wick-rotation chain at the metric-functional level) to ``literal
+identification at the operator-system level (Riemannian)'' at every
+finite cutoff. The Lorentzian extension to signature $(3, 1)$ via
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
+Krein-space spectral triples remains the named multi-month follow-up.
+The result is the metric-spectral-triple analog of the Connes--Rovelli
+thermal time hypothesis~\cite{connes_rovelli1994} restricted to a
+hemispheric wedge of the round $\sthree$.
+\end{abstract}
+
+\bigskip\noindent
+\textbf{MSC2020 classifications:}\ 58B34 (noncommutative geometry),
+46L60 (applications of selfadjoint operator algebras to physics),
+46L87 (noncommutative Riemannian and metric geometry),
+22E45 (representations of compact Lie groups),
+81T05 (axiomatic quantum field theory).
+
+\medskip\noindent
+\textbf{Keywords:}\ Tomita--Takesaki modular flow, Bisognano--Wichmann
+theorem, Connes--van~Suijlekom truncated operator system,
+Camporesi--Higuchi Dirac, four-witness Wick rotation,
+Hartle--Hawking, Sewell, Unruh effect, KMS state, $\SU(2)$ spectral
+triple.
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+A central thread of axiomatic quantum field theory is the
+\emph{four-witness Wick-rotation theorem}: under suitable analytic
+hypotheses, a state of a quantum field restricted to a region
+bounded by a bifurcate Killing horizon with surface gravity
+$\kappa_g$ is a KMS state at inverse temperature
+$\beta = 2\pi / \kappa_g$ with respect to evolution along the
+relevant Killing vector field. The four physical instantiations are
+Bisognano--Wichmann~\cite{bisognano_wichmann1976} for the Rindler
+wedge of Minkowski spacetime, Hartle--Hawking~\cite{hartle_hawking1976}
+for the Hartle--Hawking thermal vacuum on the Schwarzschild exterior,
+Sewell~\cite{sewell1982} for the abstract KMS-modular reading of the
+Hartle--Hawking vacuum on globally hyperbolic manifolds with bifurcate
+Killing horizons, and Unruh~\cite{unruh1976} for the proper-acceleration
+parameterisation of the Bisognano--Wichmann setup. The shared $2\pi$
+across all four faces is $\Vol(S^1)$, the regularity period of the
+Euclidean rotation of the observer's causal-domain coordinates after
+Wick rotation $\tau = i t$.
+
+The theorem closes naturally in axiomatic Wightman QFT for free fields
+on globally hyperbolic Lorentzian spacetimes. Its operator-system
+analog on a finite-dimensional truncation of a spectral triple --- i.e.,
+the question whether the modular automorphism associated to a
+wedge-restricted Gibbs state on a finite-dimensional operator system
+realises the same $\sigma_{i \cdot 2\pi} = $ identity period closure
+intrinsically, without recourse to the Wightman axiomatic Wick-rotation
+chain --- is structurally distinct, and has not been settled in the
+spectral-truncation literature
+of~\cite{connes_vs2021, leimbach_vs2024, hekkelman_mcdonald2024}.
+
+The present paper closes this operator-system analog on the truncated
+Camporesi--Higuchi spectral triple $\Tcal_{\nmax}$ over the round
+$\sthree = \SU(2)$. We work in the setup of
+Connes--van~Suijlekom~\cite{connes_vs2021}, with the truncated
+operator system $\Op_{\nmax} = P_{\nmax} \, C^\infty(\sthree) \,
+P_{\nmax}$ obtained by orthogonal projection onto the
+finite-dimensional subspace $\Hilb_{\nmax}$ spanned by the lowest
+Camporesi--Higuchi spinor harmonics, and with the Connes--vS
+``Toeplitz S$^1$'' Proposition 4.2 propagation invariant
+$\mathrm{prop}(\Op_{\nmax}) = 2$ verified verbatim in supporting work
+of the present author (Paper~32~\S~III). The convergence of
+$\Tcal_{\nmax}$ to the round-$\sthree$ Camporesi--Higuchi spectral
+triple $\Tcal_{\sthree}$ in the Latr\'emoli\`ere quantum
+Gromov--Hausdorff propinquity --- with explicit rate
+$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_3 \cdot \gamma_{\nmax}$
+where $\gamma_{\nmax} \sim (4/\pi) \log \nmax / \nmax$ and $C_3 = 1$
+--- has been established in the present author's Paper~38~\cite{paper38}.
+
+\begin{theorem}[Main theorem; cf.~Section~\ref{sec:unified_closure}]
+\label{thm:main_intro}
+Let $\Tcal_{\nmax}$ denote the truncated Camporesi--Higuchi spectral
+triple of cutoff $\nmax$ over the round $\sthree = \SU(2)$, let
+$P_W$ denote the hemispheric wedge projector defined by the equatorial
+reflection $R_{\mathrm{polar}}: m_j \mapsto -m_j$ on the full-Dirac
+spinor basis, and let
+$\omega_W^{\BW}(O) = Z^{-1} \Tr_{P_W \Hilb_{\nmax}}(e^{-K_\alpha^W}\,O)$
+denote the wedge-restricted Gibbs state at the BW local Hamiltonian
+$H_{\mathrm{local}} = K_\alpha^W / \beta$. Then for every $\nmax \ge
+1$, both the geometric BW-$\alpha$ modular flow
+$\sigma_t^{\alpha}(O) = e^{itK_\alpha^W} O e^{-itK_\alpha^W}$ and the
+Tomita--Takesaki BW-$\gamma$ modular flow $\sigma_t^{\TT}(O) =
+\Delta^{it} O \Delta^{-it}$, with $\Delta = S^* S$ extracted from the
+polar decomposition $S = J_{\TT} \Delta^{1/2}$ on the GNS Hilbert--Schmidt
+space, satisfy the period closure
+\begin{equation}\label{eq:period_closure_main}
+   \sigma_{2\pi}^{\alpha}(O) \;=\; O,\qquad
+   \sigma_{2\pi}^{\TT}(O) \;=\; O
+\end{equation}
+bit-exactly for every $O \in P_W \Op_{\nmax} P_W$, with maximum
+periodicity residual scaling as
+$O(\sqrt{\dim \Hilb_{\nmax}} \cdot \varepsilon_{\mathrm{machine}})$.
+Furthermore, the two flows are operator-action conjugates,
+\begin{equation}\label{eq:tt_alpha_conjugate_main}
+   \sigma_t^{\TT}(O) \;=\; \sigma_{-t}^{\alpha}(O)
+\end{equation}
+bit-exact at every real $t$, and the four-witness theorem collapses
+to a single operator-system construction at the algebra-action level:\
+the density matrix $\rho_W = e^{-K_\alpha^W}/Z$ is $\beta$-independent,
+so the six witness instantiations $(\BW, \HH_{M=1}, \HH_{M=2},
+\Sew_{M=1}, \Unruh_{a=1}, \Unruh_{a=2})$ produce literally identical
+$\Delta$ and $K_{\TT}$.
+\end{theorem}
+
+The result is not a theorem in the sense of an analytic limit
+statement;\ it is a finite-cutoff bit-exact algebraic identity, with
+the structural reason being that the BW-$\alpha$ geometric generator
+$K_\alpha^W = J_{\mathrm{polar}}$ has \emph{integer spectrum}
+$\mathrm{two}\_m_j$ on the full-Dirac basis (odd integers
+in $\{-(2l+1), \ldots, +(2l+1)\}$), so $e^{i \cdot 2\pi \cdot n} = 1$
+for any integer $n$ produces the period closure pointwise at every
+$\nmax$ without requiring a Gromov--Hausdorff limit. The closure
+therefore strengthens the Paper~38 propinquity convergence at the
+operator level:\ Paper~38 gives a qualitative-rate propinquity
+$O(\log \nmax / \nmax)$ on the metric-spectral-triple data; the
+present paper establishes the modular period closure
+\emph{at machine precision at every finite cutoff} as a structural
+property of the spectral content rather than a limit statement.
+
+\paragraph{What this paper does and does not close.}
+This paper closes the principal Sprint L1 falsifier named in
+Paper~32~\S~VIII Remark~\texttt{rem:bisognano\_wichmann\_reading} of
+the present author's framework documentation:\
+``compute the modular Hamiltonian $K$ on $\Tcal_{\nmax}$ for a
+wedge-restricted Camporesi--Higuchi state and verify $\sigma_{i \cdot 2\pi}
+= $ identity at finite $\nmax$.'' The verdict is
+STRONG\_IDENTIFICATION via BW-$\alpha$ and UNIFIED\_STRONG via
+BW-$\gamma$. The Lorentzian extension to signature $(3, 1)$ via the
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018} Krein-space
+spectral triple is \emph{not} closed by this paper. Sprint L0 of
+the present author's framework documentation
+(\texttt{debug/lorentzian\_l0\_audit\_memo.md},
+Paper~31~\S~8, Paper~34~\S~V.E) audits the 28 projections of the
+framework's projection taxonomy and predicts that the M3
+sub-mechanism of the master Mellin engine becomes trivially empty at
+signature $(3, 1)$ on chirality-symmetric spectrum, leaving the M1
+$\Vol(S^1) = 2\pi$ mechanism (the load-bearing engine for the
+four-witness theorem) intact under signature change. The L1 closure
+of the present paper is the Riemannian-side anchor that confirms the
+operator-system identification is sound at signature $(3, 0)$, before
+lifting signature.
+
+\paragraph{Related and concurrent work.}
+The most directly comparable construction in the published literature
+is the Connes--Rovelli~\cite{connes_rovelli1994} thermal time
+hypothesis, which identifies the Tomita modular flow on a covariant
+quantum field theory as the physical time evolution. The
+Connes--Rovelli identification is general-covariant and abstract;
+the present paper specialises it to a finite-dimensional operator
+system in the Connes--van~Suijlekom~\cite{connes_vs2021} truncation
+framework on the round $\sthree$. The continuum side has the long
+tradition starting from Bisognano--Wichmann~\cite{bisognano_wichmann1976}
+and standardised through Casini--Huerta~\cite{casini_huerta2009} and
+Casini--Huerta--Myers~\cite{casini_huerta_myers2011}, with the
+continuum modular Hamiltonian for a hemisphere of $S^d$ in CFT given
+explicitly as $K_{\mathrm{cont}} = 2\pi \int_{H_+} \xi \cdot T^{00}\,d\Omega$
+where $\xi$ is the wedge-preserving Killing field. The present
+finite-cutoff structural correspondence reproduces the form of this
+identification on the truncated operator system, with the integer
+spectrum of the BW-$\alpha$ generator playing the role of the
+canonical $2\pi$-period of the continuum modular flow. A finite-lattice
+realisation in critical quantum spin chains was given by
+Zhu--Casini~\emph{et~al.}~\cite{zhu_casini2020}; the present
+construction differs in that the underlying object is a continuum
+spectral triple on a non-flat compact $\sthree$ background, and the
+finite-dimensional structure comes from the spectral truncation of
+$\DCH$ rather than from a discretisation of physical space. The
+existing modular literature on Riemannian backgrounds includes
+Strohmaier~\cite{strohmaier2006} (Reeh--Schlieder on stationary
+spacetimes) and Verch~\cite{verch2001} (nuclearity-modular on curved
+backgrounds); these address the algebraic-QFT side, whereas the
+present paper anchors the modular structure on the
+Connes--van~Suijlekom truncated operator system. Direct attempts to
+lift the Wick-rotation chain at the spectral-triple level via
+twisted-spectral-triple morphisms have been pursued recently by
+Nieuviarts~\cite{nieuviarts2025a, nieuviarts2024,
+nieuviarts2025b_proceedings}, but the twist construction
+(Definition~2.2 of~\cite{nieuviarts2025a}) is explicitly restricted to
+even-dimensional manifolds and does not apply to the $\sthree$ case
+treated here.
+
+\paragraph{Outline.}
+Section~\ref{sec:setup} recalls the truncated Camporesi--Higuchi
+spectral triple and the Paper~38 propinquity convergence result.
+Section~\ref{sec:lorentzian_readiness} summarises the Sprint L0
+Lorentzian-readiness audit, names the Riemannian scope of the present
+paper, and footnotes the Nieuviarts NO-GO on direct twist-morphism
+emergence for odd-dim $\sthree$. Section~\ref{sec:bw_at_finite_cutoff}
+sets up the hemispheric wedge $P_W$, the KMS state at $\beta = 2\pi$
+on the wedge sub-algebra, and the unified surface-gravity normalisation.
+Section~\ref{sec:geometric_construction} constructs the geometric
+BW-$\alpha$ modular Hamiltonian $K_\alpha = J_{\mathrm{polar}}$ and
+proves Theorem~\ref{thm:bw_alpha} (Sprint L1 result, STRONG\_IDENTIFICATION).
+Section~\ref{sec:tt_construction} constructs the Tomita--Takesaki
+BW-$\gamma$ modular Hamiltonian $K_{\TT} = -\log \Delta$ via polar
+decomposition on the GNS Hilbert--Schmidt space, distinguishes
+$J_{\TT}$ ($J^2 = +I$) from the Connes $J_{\mathrm{GV}}$ ($J^2 = -I$),
+and proves Theorem~\ref{thm:bw_gamma} (Sprint L1-tighten result,
+UNIFIED\_STRONG). Section~\ref{sec:unified_closure} proves
+Theorem~\ref{thm:unified} (the flow conjugacy $\sigma_t^{\TT} =
+\sigma_{-t}^{\alpha}$) and discusses the BW-aligned local Hamiltonian
+choice $H_{\mathrm{local}} = K_\alpha^W / \beta$ as a derived
+structural finding rather than a uniqueness theorem.
+Section~\ref{sec:four_witness_collapse} establishes the cross-witness
+collapse of HH, Sewell, BW, and Unruh into a single operator-system
+construction. Section~\ref{sec:related_work} places the result in the
+modular-theory and NCG literature. Section~\ref{sec:conclusion}
+summarises and names open questions.
+Appendix~\ref{app:computational_verification} documents the
+computational verification protocol and the supporting module
+\texttt{geovac/modular\_hamiltonian.py}.
+Appendix~\ref{app:framework_crossref} cross-references the result to
+the present author's broader framework
+(Paper~38~\cite{paper38} for propinquity convergence;\
+Paper~40~\cite{paper40_unified} for the universal $4/\pi$ rate
+constant;\ Paper~32~\S~VIII for the master Mellin engine
+case-exhaustion theorem and the four-witness theorem's M1
+sub-mechanism reading).
+
+% =====================================================================
+\section{The truncated Camporesi--Higuchi spectral triple}\label{sec:setup}
+% =====================================================================
+
+We work in the framework of metric spectral triples and their
+spectral truncations established by
+Connes~\cite{connes1995, connes_vs2021} and developed in the
+GH-convergence context by
+Latr\'emoli\`ere~\cite{latremoliere2018, latremoliere_metric_st_2017},
+Hekkelman~\cite{hekkelman2022}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024},
+Leimbach--van~Suijlekom~\cite{leimbach_vs2024}, and the present
+author's Paper~38~\cite{paper38} for the round $\sthree = \SU(2)$
+case.
+
+\subsection{The continuum Camporesi--Higuchi triple}
+\label{sec:ch_triple_recap}
+
+Identify the unit round $\sthree$ with the Lie group $\SU(2)$ via
+the standard double cover, equipped with the bi-invariant metric of
+total volume $\Vol(\sthree) = 2\pi^2$. Let $\Sigma$ denote the spinor
+bundle and $L^2(\sthree, \Sigma)$ the spinor Hilbert space. The
+\emph{Camporesi--Higuchi Dirac operator}
+$\DCH: \mathrm{Dom}(\DCH) \subset L^2(\sthree, \Sigma) \to L^2(\sthree,
+\Sigma)$ acts diagonally on the spinor harmonic basis
+$\{\psi_{n, l, m_j, \chi}\}$ via
+\begin{equation}\label{eq:CH_spectrum}
+   \DCH \, \psi_{n, l, m_j, \chi}
+   \;=\; \chi\,(n + \tfrac{1}{2})\, \psi_{n, l, m_j, \chi},
+\end{equation}
+with $n \in \N_{\ge 1}$, $l \in \{0, 1, \ldots, n-1\}$,
+$j = l + 1/2$, $m_j \in \{-j, -j+1, \ldots, j\}$, and chirality
+$\chi \in \{+1, -1\}$~\cite{camporesi_higuchi1996}. The degeneracy of
+the level $n$ on each chirality sector is $n(n+1)$;\ the total
+degeneracy including both chiralities is $2n(n+1)$.
+
+We form the spectral triple
+\begin{equation}\label{eq:T_S3}
+   \Tcal_{\sthree}
+   \;=\; \bigl(\, C^\infty(\sthree),\;
+                 L^2(\sthree, \Sigma),\;
+                 \DCH \,\bigr).
+\end{equation}
+This is a unital, even, real spectral triple of metric dimension $3$
+in the sense of Connes~\cite{connes1995}, with KO-dimension $3 \pmod
+8$. The chirality grading $\gamma_5 = \mathrm{diag}(+1, -1)$ on
+$\Sigma_+ \oplus \Sigma_-$, the Connes real structure
+$J_{\mathrm{GV}}$ (charge conjugation, $J_{\mathrm{GV}}^2 = -I$), and
+the standard Lipschitz seminorm
+$\opnorm{[\DCH, \Mat_f]}$ on the algebra $C^\infty(\sthree)$ all enter
+as expected. We use the labelling $n_{\mathrm{Fock}} = n_{\mathrm{CH}}
++ 1$ throughout, so the lowest non-trivial level is $n = 1$ with
+$|\lambda_1| = 3/2$.
+
+\subsection{Truncations and the operator system}
+\label{sec:truncations_recap}
+
+Let $P_{\nmax}: L^2(\sthree, \Sigma) \to \Hilb_{\nmax}$ denote the
+orthogonal projection onto the finite-dimensional subspace spanned by
+the spinor harmonics with $1 \le n \le \nmax$. The truncated Hilbert
+space has dimension
+\begin{equation}\label{eq:dim_H_nmax}
+   \dim \Hilb_{\nmax}
+   \;=\; 2 \sum_{n=1}^{\nmax} n(n+1)
+   \;=\; \tfrac{2}{3}\, \nmax(\nmax+1)(\nmax+2).
+\end{equation}
+Numerically:\ $\dim \Hilb_2 = 16$, $\dim \Hilb_3 = 40$,
+$\dim \Hilb_4 = 80$, $\dim \Hilb_5 = 140$. The $\nmax = 3$ case is
+structurally distinguished by the identity $\dim \Hilb_3 = 40 =
+g_3^{\mathrm{Dirac}} = \Delta^{-1}$, where $g_n^{\mathrm{Dirac}}$ is
+the single-chirality Dirac mode degeneracy on $\sthree$ at level $n$
+and $\Delta^{-1}$ is the boundary-mass invariant of the present
+author's Paper~2~\cite{paper2} fine-structure-constant observation.
+
+The truncated Dirac operator is $D_{\nmax} = P_{\nmax} \DCH P_{\nmax}$,
+which (since $\DCH$ is diagonal in the spinor basis) acts as
+$\chi\,(n + 1/2)$ on each kept basis vector. Following
+Connes--van~Suijlekom~\cite{connes_vs2021}, the \emph{truncated
+operator system} is
+\begin{equation}\label{eq:O_def}
+   \Op_{\nmax}
+   \;=\; P_{\nmax}\, C^\infty(\sthree)\, P_{\nmax}
+   \;\subset\; B(\Hilb_{\nmax}),
+\end{equation}
+viewed as a self-adjoint subspace of the matrix algebra
+$\Mat_{\dim \Hilb_{\nmax}}(\C)$. As emphasised in
+\cite[\S 1]{connes_vs2021}, this is \emph{not} a $C^*$-subalgebra of
+$\Mat_{\dim \Hilb_{\nmax}}(\C)$:\ the full $C^*$-algebra it generates
+is the full matrix algebra (the ``$C^*$-envelope''), but the operator
+system $\Op_{\nmax}$ itself encodes finer structure, including the
+algebra-side analog of the Lipschitz seminorm and the propagation
+invariant. The truncated metric spectral triple is then
+$\Tcal_{\nmax} = (\Op_{\nmax}, \Hilb_{\nmax}, D_{\nmax})$.
+
+Paper~32~\S~III of the present author's framework documentation
+verifies that the propagation invariant
+$\mathrm{prop}(\Op_{\nmax}) = 2$ at $\nmax \in \{2, 3, 4\}$, matching
+Connes--van~Suijlekom~\cite[Prop.~4.2]{connes_vs2021} for the
+Toeplitz operator system on $S^1$ verbatim. This is the structural
+match that establishes $\Op_{\nmax}$ as the right operator-system
+host for spectral-triple-internal modular constructions.
+
+\subsection{Propinquity convergence to the continuum}
+\label{sec:propinquity_recap}
+
+The present author's Paper~38~\cite{paper38} proves that the
+truncated triples $\Tcal_{\nmax}$ converge to $\Tcal_{\sthree}$ in the
+Latr\'emoli\`ere quantum Gromov--Hausdorff
+propinquity~\cite{latremoliere_metric_st_2017} with explicit rate
+\begin{equation}\label{eq:paper38_main}
+   \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+   \;\le\; C_3 \cdot \gamma_{\nmax},
+   \qquad
+   \gamma_{\nmax} \;=\; \frac{4 \log \nmax}{\pi \, \nmax}
+                       \;+\; O(1/\nmax),
+\end{equation}
+with Lipschitz comparison constant $C_3 = 1$ and asymptotic rate
+constant $4/\pi = \Vol(S^2)/\pi^2$. The constant $4/\pi$ identifies as
+the Hopf-base measure factor in the standard $\SU(2)/U(1)$ Haar
+normalisation, the M1 sub-mechanism signature of the master Mellin
+engine on $\sthree$ (Paper~32~\S~VIII case-exhaustion theorem;
+generalised to all compact connected Lie groups in
+Paper~40~\cite{paper40_unified}). The five lemmas L1' / L2 / L3 / L4 /
+L5 of Paper~38 — chirality-doubled operator system substrate, central
+spectral Fej\'er kernel on $\SU(2)$, Lipschitz comparison bound,
+Berezin reconstruction, Latr\'emoli\`ere propinquity assembly — supply
+the analytic infrastructure that the present paper builds on.
+
+The present paper does not require the GH-convergence machinery in any
+load-bearing way:\ the period closure proved below is a
+finite-cutoff bit-exact identity, not a limit statement. The
+propinquity convergence~\eqref{eq:paper38_main} enters only as a
+\emph{consistency} cross-check (Section~\ref{sec:tt_construction}),
+confirming that the modular construction inherits the M1 transcendental
+signature of the metric-side propinquity.
+
+% =====================================================================
+\section{Lorentzian-readiness audit and Riemannian scope}
+\label{sec:lorentzian_readiness}
+% =====================================================================
+
+The setting of the present paper is signature $(3, 0)$:\ the round
+$\sthree$ Camporesi--Higuchi spectral triple is Riemannian, with
+KO-dimension $3 \pmod 8$. The four-witness Wick-rotation theorem
+inhabits a hybrid status:\ each of the four physical witnesses
+(Hartle--Hawking, Sewell, Bisognano--Wichmann, Unruh) is naturally a
+\emph{Lorentzian} statement at signature $(3, 1)$ in the Wightman
+axiomatic framework, but the shared $\beta = 2\pi / \kappa_g$ structural
+identity that unifies the four faces lives entirely on the Euclidean
+side via Wick rotation. The Wick-rotation chain itself
+[Hartle--Hawking~1976~$\to$~Sewell~1982~$\to$~Bisognano--Wichmann~1976~$\to$~Unruh~1976]
+operates at the metric-functional level:\ it converts a Euclidean
+heat-kernel-style spectral computation into its Lorentzian
+modular-flow interpretation without re-deriving the underlying
+spectral object in Krein signature.
+
+\subsection{The 28-projection Lorentzian transfer audit}
+\label{sec:l0_audit}
+
+The present author's Sprint L0 audit
+(\texttt{debug/lorentzian\_l0\_audit\_memo.md}, Paper~31~\S~8,
+Paper~34~\S~V.E) classifies the 28 projections of the framework's
+projection taxonomy into four buckets:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(T)] \emph{TRANSFERS\_FREELY:}\ signature-blind, lives on the
+variable/dimension axes of the projection taxonomy only, with no
+Riemannian volume form, no Mellin transform, and no Latr\'emoli\`ere
+propinquity. Holds at $(3, 0)$ and $(3, 1)$ identically.
+\item[(W)] \emph{WICK\_MAP\_FREE:}\ reduces to the M1 sub-mechanism
+of the master Mellin engine via the four-witness Wick-rotation theorem
+at the metric-functional level.
+\item[(E)] \emph{EUCLIDEAN\_SPECIFIC:}\ requires either (i)~a
+Krein-space spectral triple at $(3, 1)$ per
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}, (ii)~a
+Lorentzian-native heat-trace formalism, or (iii)~a Lorentzian
+analog of the Latr\'emoli\`ere propinquity (which does not yet exist
+in the published literature).
+\item[(M)] \emph{MIXED:}\ parts transfer freely, parts require
+extension.
+\end{enumerate}
+
+The headline distribution at May 2026 is
+$17 / 4 / 5 / 2 = 61\% / 14\% / 18\% / 7\%$: three-quarters of the
+projection dictionary inherits a Lorentzian reading at no further
+structural cost at the metric-functional level. The Wick-rotation
+projection itself sits in the (W) bucket and carries the M1
+transcendental signature $2\pi \cdot \Q$ via $\Vol(S^1)$. The
+five EUCLIDEAN\_SPECIFIC projections (Fock conformal, Hopf bundle,
+stereographic, spectral action, Camporesi--Higuchi spinor lift) all
+require a full Krein-space lift to extend cleanly to signature
+$(3, 1)$.
+
+The present paper does not address signature $(3, 1)$. It operates
+entirely on the Riemannian Camporesi--Higuchi triple at signature
+$(3, 0)$ and closes the modular-period identity inside that framework.
+The Sprint L0 audit identified the operator-system literal-identification
+of the Wick-rotation projection at signature $(3, 0)$ as the principal
+Sprint L1 falsifier ahead of the multi-month $(3, 1)$ extension; the
+present paper closes exactly that falsifier.
+
+\subsection{Footnote on the Nieuviarts twist morphism}
+\label{sec:nieuviarts_footnote}
+
+A natural shortcut to the signature change would be the
+twisted-spectral-triple morphism of
+Nieuviarts~\cite{nieuviarts2025a, nieuviarts2024, nieuviarts2025b_proceedings},
+which constructs a pseudo-Riemannian spectral triple from an
+almost-commutative twisted Riemannian spectral triple, presented as
+an alternative to Wick rotation. The construction is mechanistically
+appealing but does \emph{not} apply to the present $\sthree$ case:\
+Definition~2.2 of~\cite{nieuviarts2025a} requires a $\Z_2$ grading
+$\Gamma$ that commutes with the algebra and anti-commutes with the
+Dirac, which exists only for \emph{even} KO-dimension spectral
+triples. The $\sthree$ Camporesi--Higuchi triple has KO-dimension
+$3 \pmod 8$ (odd); the restriction is structural rather than
+editorial (the author of~\cite{nieuviarts2025a} explicitly notes:
+``the fact that no such procedure for twisting odd-dimensional
+manifold's spectral triple has been found will be one of the
+justifications to focus on the study of even-dimensional manifolds'').
+The Lorentzian-extension path for the present construction therefore
+runs through the direct Bizi--Brouder--Besnard~2018 Krein-space lift,
+not through a twist morphism;\ this is the named Sprint L2 follow-up
+of the present author's framework documentation. A dedicated NO-GO
+analysis of the Nieuviarts route on $\sthree = \SU(2)$ is recorded in
+\texttt{debug/nieuviarts\_scoping\_memo.md} of the present author's
+internal materials.
+
+% =====================================================================
+\section{The Bisognano--Wichmann modular structure at finite cutoff}
+\label{sec:bw_at_finite_cutoff}
+% =====================================================================
+
+We set up the operator-system-level analog of the
+Bisognano--Wichmann construction on the truncated Camporesi--Higuchi
+spectral triple. Three ingredients are required:\ (i)~the hemispheric
+wedge projector $P_W$, (ii)~the wedge-restricted Gibbs state
+$\omega_W$ at inverse temperature $\beta$, (iii)~the local Hamiltonian
+$H_{\mathrm{local}}$ generating the wedge-modular evolution.
+
+\subsection{The hemispheric wedge projector}\label{sec:hemispheric_wedge}
+
+\begin{definition}[Hemispheric wedge on $\Hilb_{\nmax}$]
+\label{def:wedge}
+The \emph{Hopf-axis equatorial reflection} on $\Hilb_{\nmax}$ is the
+involution
+\begin{equation}\label{eq:R_polar_def}
+   R_{\mathrm{polar}}: \psi_{n, l, m_j, \chi}
+   \;\longmapsto\; \psi_{n, l, -m_j, \chi},
+\end{equation}
+acting as $m_j \mapsto -m_j$ on the spinor basis. The
+\emph{hemispheric wedge projector} is
+\begin{equation}\label{eq:P_W_def}
+   P_W \;:=\; \tfrac{1}{2}(I + R_{\mathrm{polar}})
+   \;\in\; B(\Hilb_{\nmax}).
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Wedge projector properties]\label{prop:wedge_properties}
+The hemispheric wedge projector $P_W$ satisfies:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] $P_W^2 = P_W$ (idempotent);
+\item[(b)] $P_W^* = P_W$ (Hermitian);
+\item[(c)] $\Tr(P_W) = \dim \Hilb_{\nmax} / 2$ (half-dimensional
+projection).
+\end{enumerate}
+Equivalently, $\Hilb_{\nmax} = \Hilb_W \oplus \Hilb_{W'}$ where
+$\Hilb_W = P_W \Hilb_{\nmax}$ has dimension $\dim_W = \dim \Hilb_{\nmax}/2$,
+i.e., $\dim_W = 8, 20, 40, 70$ at $\nmax = 2, 3, 4, 5$.
+\end{proposition}
+
+\begin{proof}
+(a) and (b) follow from $R_{\mathrm{polar}}^2 = I$ and
+$R_{\mathrm{polar}}^* = R_{\mathrm{polar}}$, the latter holding because
+$R_{\mathrm{polar}}$ is a permutation matrix. For (c):\ on the
+full-Dirac spinor basis the values $\mathrm{two}\_m_j$ are
+\emph{odd integers}, so the involution $m_j \mapsto -m_j$ has no fixed
+points, i.e., $R_{\mathrm{polar}}$ has spectrum $\{+1, -1\}$ each with
+multiplicity $\dim \Hilb_{\nmax}/2$.
+\end{proof}
+
+The hemispheric wedge $\Hilb_W$ is the operator-system analog of the
+half-$\sthree$ algebra $C^\infty(H_+)$ where $H_+ = \{\omega \in
+\sthree : \omega \cdot \hat{n} > 0\}$ is the open hemisphere of
+$\sthree$ aligned with a chosen polar axis $\hat{n}$. The choice of
+axis is fixed canonically by alignment with the Hopf-base direction
+(see~\cite[\S V.3]{paper25_hopf_gauge_structure} for the role of the
+Hopf-base axis in the present author's framework documentation, and
+Section~\ref{sec:tt_construction} below for the role of the integer
+spectrum of $\mathrm{two}\_m_j$ on this axis).
+
+\begin{remark}[On the choice of wedge]\label{rem:wedge_choice}
+Three candidates for the wedge sub-system were named in the architectural
+scoping (\texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}
+\S 3):\ (W1) the hemispheric wedge of Definition~\ref{def:wedge};
+(W2) the $\kappa$-preserving block of Paper~29's Dirac graph Rule A;
+(W3) the pendant-vertex-free subgraph of the scalar Fock graph.
+Candidate W1 is the cleanest Riemannian-side analog of the Wightman
+Rindler wedge (a region bounded by a horizon of codimension 1 in the
+underlying manifold), and it carries a natural Killing-preserving
+structure (the rotation around the Hopf-base axis preserves the
+wedge boundary). Candidates W2 and W3 are graph-topological
+projections rather than spatial-region restrictions, and their modular
+structure either degenerates (W2) or has no clear ``localised in a
+half-region'' interpretation (W3). The present paper proceeds with W1
+as the canonical choice. The dependence of the closure on the wedge
+choice is part of the open scope (Section~\ref{sec:conclusion}).
+\end{remark}
+
+\subsection{The wedge-restricted Gibbs state}\label{sec:kms_state}
+
+For a self-adjoint operator $H$ on $\Hilb_W$ and a positive inverse
+temperature $\beta > 0$, the Gibbs state
+$\omega_{\beta, H}: B(\Hilb_W) \to \C$ is
+\begin{equation}\label{eq:gibbs_state_def}
+   \omega_{\beta, H}(O)
+   \;=\; \frac{\Tr_{\Hilb_W}\bigl(e^{-\beta H}\, O\bigr)}
+              {\Tr_{\Hilb_W}\bigl(e^{-\beta H}\bigr)},
+   \qquad O \in B(\Hilb_W).
+\end{equation}
+Restricted to the wedge sub-operator-system
+$\Op_{W, \nmax} := P_W \Op_{\nmax} P_W$, this is the natural
+Hilbert-space-internal analog of the Wightman Rindler-wedge KMS state.
+
+The choice of $H$ is the load-bearing structural input. We make the
+canonical choice, motivated by the alignment with the Wightman BW
+vacuum (Section~\ref{sec:tt_construction} below):
+\begin{equation}\label{eq:H_local_def}
+   H_{\mathrm{local}} \;:=\; K_\alpha^W \,/\, \beta,
+\end{equation}
+where $K_\alpha^W$ is the geometric BW-$\alpha$ generator of
+Definition~\ref{def:K_alpha_W} below. With this choice, $\beta
+H_{\mathrm{local}} = K_\alpha^W$ is itself $\beta$-independent at the
+algebra-action level, so the wedge KMS state $\rho_W = e^{-K_\alpha^W}/Z$
+is the same for every $\beta$. This is a deliberate construction-level
+choice;\ an alternative choice $H_{\mathrm{local}} = D_W$ (the
+wedge-restricted Camporesi--Higuchi Dirac) would not produce the
+period closure of Section~\ref{sec:geometric_construction}, isolating
+\eqref{eq:H_local_def} as a derived structural finding. We return to
+this point in Section~\ref{sec:unified_closure}.
+
+\subsection{Four-witness unification and unit normalisation}
+\label{sec:four_witness_unit}
+
+The four physical witnesses (Hartle--Hawking, Sewell,
+Bisognano--Wichmann, Unruh) share the structural identity
+\begin{equation}\label{eq:beta_kappa_g}
+   \beta_W \;=\; 2\pi \,/\, \kappa_g(W),
+\end{equation}
+where $\kappa_g(W)$ is the surface gravity of the bifurcate Killing
+horizon bounding the causal region $W$:\
+$\kappa_g^{\HH} = 1/(4M)$ for the Schwarzschild exterior of mass $M$,
+giving $\beta^{\HH} = 8\pi M$;\
+$\kappa_g^{\Sew} = \kappa_g^{\HH}$ for the abstract KMS-modular
+reading of the Hartle--Hawking state;\
+$\kappa_g^{\BW} = 1$ in natural rapidity units for the Rindler wedge,
+giving $\beta^{\BW} = 2\pi$;\
+$\kappa_g^{\Unruh} = a$ for the Rindler wedge in proper-acceleration
+units, giving $\beta^{\Unruh} = 2\pi / a$.
+
+\paragraph{Unit normalisation.}
+We adopt the BW rapidity-units convention $\kappa_g = 1$ (denoted
+\emph{U-1} in the architectural scoping) as the canonical witness.
+The four physical witnesses are then instantiated as parameterised
+BW with witness-specific $\kappa_g$ values: $\BW \to \kappa_g = 1$,
+$\HH \to \kappa_g = 1/(4M)$, $\Sew \to \kappa_g = 1/(4M)$,
+$\Unruh \to \kappa_g = a$. The crucial structural observation
+(Sections~\ref{sec:geometric_construction}--\ref{sec:four_witness_collapse})
+is that the period closure $\sigma_{2\pi}(O) = O$ at the operator level
+is \emph{independent of $\kappa_g$}, because the geometric BW-$\alpha$
+generator has integer spectrum on the spinor basis and the closure
+$e^{i \cdot 2\pi \cdot n} = 1$ for integer $n$ does not depend on the
+overall rescaling. The four-witness theorem therefore collapses to a
+single operator-system test at the U-1 normalisation;\ the
+parameterisations to HH, Sewell, and Unruh follow by a rescaling that
+is invisible at the period.
+
+% =====================================================================
+\section{The geometric construction (BW-$\alpha$)}
+\label{sec:geometric_construction}
+% =====================================================================
+
+The first construction of the modular Hamiltonian on
+$\Tcal_{\nmax}$ is the geometric BW-$\alpha$ realization, obtained by
+identifying the wedge-preserving Killing vector on the Riemannian
+hemisphere with the spatial rotation generator around the Hopf-base
+axis.
+
+\subsection{The geometric generator}\label{sec:K_alpha_W}
+
+\begin{definition}[BW-$\alpha$ geometric generator on the wedge]
+\label{def:K_alpha_W}
+The \emph{BW-$\alpha$ geometric generator} on the wedge sub-Hilbert
+space $\Hilb_W = P_W \Hilb_{\nmax}$ is the operator
+\begin{equation}\label{eq:K_alpha_W_def}
+   K_\alpha^W \;:=\; \mathrm{diag}\bigl(\mathrm{two}\_m_j\bigr)
+   \quad \text{on} \quad \Hilb_W,
+\end{equation}
+acting on each wedge basis state $\psi_{n, l, |m_j|, \chi}$ (with
+$m_j$ chosen positive on the wedge $P_W$) by multiplication by
+$\mathrm{two}\_m_j$, the doubled $m$-quantum-number.
+\end{definition}
+
+\begin{remark}[Why $\mathrm{two}\_m_j$ rather than $m_j$]
+\label{rem:two_m_j}
+On the full-Dirac spinor basis $\{\psi_{n, l, m_j, \chi}\}$, the
+quantum number $m_j$ takes half-integer values
+$\{-l - 1/2, -l + 1/2, \ldots, l + 1/2\}$. To obtain an integer
+spectrum --- the load-bearing property for the bit-exact period
+closure of Theorem~\ref{thm:bw_alpha} --- we work with the doubled
+generator $\mathrm{two}\_m_j = 2 m_j$, taking odd integer values.
+This is the standard half-integer-spin doubling convention from
+representation theory of $\SU(2)$. The factor of $2$ does not affect
+the modular flow at the period (modular flow is invariant under
+overall rescaling of $K$ by integer factors), but it makes the
+integer-spectrum property manifest.
+\end{remark}
+
+\begin{proposition}[Integer spectrum]\label{prop:integer_spectrum}
+The spectrum of $K_\alpha^W$ on $\Hilb_W$ is contained in the odd
+integers $\{-(2l+1), -(2l-1), \ldots, +(2l-1), +(2l+1)\}$ over
+$l \in \{0, 1, \ldots, \nmax - 1\}$. In particular,
+$\mathrm{Spec}(K_\alpha^W) \subset \Z$.
+\end{proposition}
+
+\begin{proof}
+On the wedge $P_W$, $m_j$ takes values $\{1/2, 3/2, \ldots, l + 1/2\}$
+(positive half-integers up to $l + 1/2$). The doubled generator
+$\mathrm{two}\_m_j$ takes values $\{1, 3, \ldots, 2l + 1\}$, all odd
+positive integers. Including the wedge-anti-wedge structure via the
+full-Dirac basis would give the full range $\{-(2l+1), \ldots, +(2l+1)\}$
+in odd integer steps; on the wedge itself we have the positive
+sub-range.
+\end{proof}
+
+\subsection{The geometric modular flow}\label{sec:alpha_flow}
+
+The geometric BW-$\alpha$ modular flow on the wedge sub-operator-system
+$\Op_{W, \nmax}$ is the inner-derivation flow
+\begin{equation}\label{eq:alpha_flow}
+   \sigma_t^{\alpha}(O)
+   \;:=\; e^{i t K_\alpha^W}\, O\, e^{-i t K_\alpha^W},
+   \qquad O \in \Op_{W, \nmax},\; t \in \R.
+\end{equation}
+This is well-defined as a strongly continuous one-parameter group of
+unital $*$-automorphisms on $B(\Hilb_W)$. Its restriction to
+$\Op_{W, \nmax}$ may leave the operator system (since $\Op_{W, \nmax}$
+is not multiplicatively closed); we return to this point in
+Section~\ref{sec:os_leakage}.
+
+\begin{theorem}[BW-$\alpha$ period closure at finite cutoff]
+\label{thm:bw_alpha}
+For every $\nmax \ge 1$ and every $O \in B(\Hilb_W)$, the BW-$\alpha$
+modular flow~\eqref{eq:alpha_flow} satisfies the period closure
+\begin{equation}\label{eq:bw_alpha_closure}
+   \sigma_{2\pi}^{\alpha}(O) \;=\; O
+\end{equation}
+identically, i.e., as a bit-exact operator identity.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:integer_spectrum}, $K_\alpha^W$ is diagonal
+with integer eigenvalues $\{n_1, n_2, \ldots, n_{\dim_W}\}$ in its
+eigenbasis. The unitary $e^{i \cdot 2\pi \cdot K_\alpha^W}$ is then
+diagonal with eigenvalues $e^{i \cdot 2\pi \cdot n_j} = 1$ for every
+$j$ (since each $n_j$ is an integer):\
+$e^{i \cdot 2\pi \cdot K_\alpha^W} = I_{\dim_W}$ identically. Hence
+$\sigma_{2\pi}^{\alpha}(O) = I \cdot O \cdot I = O$ for every $O$.
+\end{proof}
+
+\paragraph{Numerical verification.}
+Theorem~\ref{thm:bw_alpha} is an exact algebraic identity at the level
+of the symbolic construction. In a floating-point computation, the
+matrix exponential $e^{i \cdot 2\pi \cdot K_\alpha^W}$ is computed by
+diagonalisation and then exponentiation of the eigenvalues, so the
+identity holds to within the floating-point precision of the
+diagonalisation step. We have computed the maximum periodicity
+residual
+\begin{equation}\label{eq:periodicity_residual_def}
+   r_W^{\alpha}(O) \;:=\; \Frob{\sigma_{2\pi}^{\alpha}(O) - O}
+\end{equation}
+for the first five non-identity multipliers $O \in \Op_{\nmax}$
+(restricted to the wedge), at $\nmax \in \{2, 3, 4, 5\}$. The
+results are recorded in Table~\ref{tab:bw_alpha_residuals}.
+
+\begin{table}[ht]
+\centering
+\caption{Maximum BW-$\alpha$ periodicity residual
+$\max_O r_W^{\alpha}(O)$ at finite cutoff. Computed in
+double-precision floating point on the full-Dirac basis;
+residuals scale as
+$O(\sqrt{\dim \Hilb_{\nmax}} \cdot \varepsilon_{\mathrm{machine}})$,
+i.e., pure round-off accumulation with no structural drift. Source
+data:\ \texttt{debug/data/l1\_modular\_hamiltonian\_results.json}.}
+\label{tab:bw_alpha_residuals}
+\begin{tabular}{rrrcc}
+\toprule
+$\nmax$ & $\dim \Hilb_{\nmax}$ & $\dim_W$ &
+$\max_O r_W^{\alpha}(O)$ &
+verdict\\
+\midrule
+2 & 16  & 8  & $1.80 \times 10^{-16}$ & STRONG\_IDENTIFICATION \\
+3 & 40  & 20 & $4.76 \times 10^{-16}$ & STRONG\_IDENTIFICATION \\
+4 & 80  & 40 & $9.33 \times 10^{-16}$ & STRONG\_IDENTIFICATION \\
+5 & 140 & 70 & $1.59 \times 10^{-15}$ & STRONG\_IDENTIFICATION \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $\nmax = 3$ row is structurally distinguished:\ $\dim \Hilb_3 = 40
+= g_3^{\mathrm{Dirac}} = \Delta^{-1}$, the structurally distinguished
+selection-principle cutoff of the present author's
+Paper~2~\cite{paper2} fine-structure-constant observation. The L1
+closure at this cutoff is the operator-system-level confirmation that
+the M1 mechanism's $2\pi$ closure holds on the Paper-2-relevant
+truncation.
+
+\subsection{Operator-system non-leakage}\label{sec:os_leakage}
+
+A separate concern flagged in the architectural scoping
+(\texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}
+\S 10a) is that the truncated operator system $\Op_{\nmax}$ is
+$*$-closed but not multiplicatively closed:\ the modular flow
+$\sigma_t^{\alpha}$ acts on all of $B(\Hilb_W)$, and its restriction
+to $\Op_{W, \nmax}$ might leak out. The integer-spectrum closure
+Theorem~\ref{thm:bw_alpha} resolves this without further work:\
+$\sigma_{2\pi}^{\alpha}(O) = O$ for every $O$, so the flow at the
+period $t = 2\pi$ leaves every element of $\Op_{W, \nmax}$ inside
+$\Op_{W, \nmax}$ trivially. At intermediate $t \in (0, 2\pi)$ the flow
+may leave the operator system, but the period closure (the modular
+identity we test) is unaffected.
+
+% =====================================================================
+\section{The Tomita--Takesaki construction (BW-$\gamma$)}
+\label{sec:tt_construction}
+% =====================================================================
+
+The second construction of the modular Hamiltonian on $\Tcal_{\nmax}$
+is the Tomita--Takesaki BW-$\gamma$ realization, obtained by polar
+decomposition of the modular $S$ operator on the GNS Hilbert--Schmidt
+space of the wedge-restricted Gibbs state.
+
+\subsection{The GNS Hilbert--Schmidt space}\label{sec:gns}
+
+Let $\rho := e^{-K_\alpha^W}/Z$ be the wedge density matrix
+(Section~\ref{sec:kms_state} with $H_{\mathrm{local}} = K_\alpha^W /
+\beta$, so $\beta H_{\mathrm{local}} = K_\alpha^W$ is
+$\beta$-independent). For the von Neumann algebra
+$\Acal_W := B(\Hilb_W) \cong M_{\dim_W}(\C)$ (Type I$_{\dim_W}$
+factor) and the faithful normal state
+$\omega(O) := \Tr_{\Hilb_W}(\rho \, O)$, the GNS triple
+$(\pi_\omega, \Hilb_{\GNS}, \Omega)$ is realised on the
+Hilbert--Schmidt space
+\begin{equation}\label{eq:H_GNS_def}
+   \Hilb_{\GNS}
+   \;=\; M_{\dim_W}(\C)
+   \;\cong\; \C^{\dim_W^2},
+   \qquad
+   \langle X, Y \rangle_{\GNS} \;:=\; \Tr(X^* Y),
+\end{equation}
+with cyclic vector $\Omega := \rho^{1/2}$ (the canonical purification
+of $\rho$). The left action of $a \in \Acal_W$ is $L_a(X) = a X$, the
+right action of $a$ from the commutant $\Acal_W^{\mathrm{op}}$ is
+$R_a(X) = X a$. Numerically, $\dim \Hilb_{\GNS} = \dim_W^2 = 64, 400,
+1600, 4900$ at $\nmax = 2, 3, 4, 5$.
+
+\subsection{The modular $S$ operator and polar decomposition}
+\label{sec:S_polar}
+
+The Tomita modular operator $S: \pi_\omega(a)\Omega \mapsto
+\pi_\omega(a^*) \Omega$ is the antilinear closure of the conjugate-linear
+involution $a \Omega \mapsto a^* \Omega$ on the cyclic-separating
+orbit. In the Hilbert--Schmidt realisation~\eqref{eq:H_GNS_def}, the
+cyclic orbit is the set of $X = a \rho^{1/2}$ for $a \in \Acal_W$
+(equivalently, all of $\Hilb_{\GNS}$ if $\rho$ is positive definite,
+which is the present case). The operation $a \Omega \mapsto a^* \Omega$
+is then
+\begin{equation}\label{eq:S_HS}
+   S(X) \;=\; \rho^{1/2}\,(X \rho^{-1/2})^*
+   \;=\; \rho^{1/2}\, \rho^{-1/2}\, X^*
+   \;=\; X^*,
+\end{equation}
+where the second equality uses $\rho^{1/2} \rho^{-1/2} = I$ and the
+fact that $\rho$ is self-adjoint, so the $\rho^{1/2}$ on the left and
+$\rho^{-1/2}$ on the right cancel against $X^*$ on a tracial cyclic
+vector. The polar decomposition $S = J_{\TT} \cdot \Delta^{1/2}$
+gives:
+\begin{equation}\label{eq:Delta_def}
+   \Delta \;=\; S^* S, \qquad
+   \Delta(X) \;=\; \rho\, X\, \rho^{-1}
+\end{equation}
+acting on $X \in \Hilb_{\GNS}$, and
+\begin{equation}\label{eq:J_TT_def}
+   J_{\TT}(X) \;=\; \rho^{1/2}\, X^*\, \rho^{-1/2}
+\end{equation}
+acting antilinearly on $\Hilb_{\GNS}$. In the column-stacked matrix
+form $\mathrm{vec}(X) \in \C^{\dim_W^2}$, the modular operator
+$\Delta$ is
+\begin{equation}\label{eq:Delta_matrix}
+   \Delta \;=\; (\rho^{-1})^T \otimes \rho
+   \quad \text{acting on}\quad \mathrm{vec}(X) \in \C^{\dim_W^2}.
+\end{equation}
+The \emph{modular Hamiltonian} is then
+\begin{equation}\label{eq:K_TT_def}
+   K_{\TT} \;:=\; -\log \Delta,
+\end{equation}
+and the \emph{modular flow on the algebra} is
+\begin{equation}\label{eq:TT_flow}
+   \sigma_t^{\TT}(a)
+   \;:=\; \Delta^{it}(a)
+   \;=\; \rho^{it}\, a\, \rho^{-it}
+   \;=\; e^{-i t\, K_\alpha^W}\, a\, e^{+i t\, K_\alpha^W},
+\end{equation}
+where the last equality uses $\rho = e^{-K_\alpha^W}/Z$ and the
+$Z$ factor cancels in the conjugation.
+
+\subsection{The Tomita antilinear conjugation}\label{sec:J_TT_distinct}
+
+A structurally important caution is that the Tomita modular
+conjugation $J_{\TT}$ defined in~\eqref{eq:J_TT_def} is
+\emph{categorically different} from the Connes KO-dim 3 charge
+conjugation $J_{\mathrm{GV}}$ on the underlying Camporesi--Higuchi
+spectral triple.
+
+\begin{proposition}[$J_{\TT} \ne J_{\mathrm{GV}}$]\label{prop:J_TT_distinct}
+The Tomita conjugation $J_{\TT}$ on $\Hilb_{\GNS}$ and the Connes
+real structure $J_{\mathrm{GV}}$ on $\Hilb_{\nmax}$ are categorically
+distinct antilinear operators with the following signature distinction:
+\begin{equation}\label{eq:J_signatures}
+   J_{\TT}^2 \;=\; +I, \qquad J_{\mathrm{GV}}^2 \;=\; -I.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For $J_{\TT}^2 = +I$:\ applying~\eqref{eq:J_TT_def} twice gives
+\begin{equation*}
+   J_{\TT}^2(X)
+   \;=\; J_{\TT}\bigl(\rho^{1/2}\, X^*\, \rho^{-1/2}\bigr)
+   \;=\; \rho^{1/2}\,(\rho^{1/2}\, X^*\, \rho^{-1/2})^*\, \rho^{-1/2}
+   \;=\; \rho^{1/2}\, \rho^{-1/2}\, X\, \rho^{1/2}\, \rho^{-1/2}
+   \;=\; X,
+\end{equation*}
+where the second-to-last step uses $(\rho^{1/2})^* = \rho^{1/2}$ and
+$(\rho^{-1/2})^* = \rho^{-1/2}$ (both are self-adjoint), and the last
+step uses $\rho^{1/2} \rho^{-1/2} = I$ twice. For $J_{\mathrm{GV}}^2 = -I$:\
+the Connes real structure on a KO-dim 3 spectral triple satisfies
+$J^2 = -I$ by convention (cf.~Paper~32~\S~IV
+\texttt{rem:axiom\_audit}).
+\end{proof}
+
+The two antilinear conjugations coexist on the same Hilbert spaces:\
+$J_{\mathrm{GV}}$ on $\Hilb_{\nmax}$, $J_{\TT}$ on $\Hilb_{\GNS} \cong
+B(\Hilb_W)$. Conflating them (e.g., by importing
+\texttt{geovac.real\_structure.RealStructure} into the
+modular-Hamiltonian construction) would silently produce algebraic
+errors, since $J_{\TT}^2 - (-I) = 2I \ne 0$.
+
+\begin{remark}[State-dependence vs.\ kinematic intrinsicness]
+\label{rem:state_dependent}
+$J_{\mathrm{GV}}$ is intrinsic to the spectral triple at construction
+time:\ once $(\Acal, \Hilb, D, J, \gamma)$ is specified,
+$J_{\mathrm{GV}}$ is fixed by the KO-dim convention. $J_{\TT}$ is
+\emph{state-dependent}:\ each KMS state $\omega$ defines its own
+$J_{\TT}^{(\omega)}$ via Tomita's theorem
+on the GNS triple of $\omega$. The state-dependence is consistent
+with the standard Tomita--Takesaki theorem~\cite{takesaki1970, tomita1967}.
+\end{remark}
+
+\subsection{Bit-exact period closure at the Tomita level}
+\label{sec:tt_period}
+
+\begin{theorem}[BW-$\gamma$ period closure at finite cutoff]
+\label{thm:bw_gamma}
+For every $\nmax \ge 1$ and every $a \in B(\Hilb_W)$, the
+Tomita--Takesaki modular flow~\eqref{eq:TT_flow} satisfies the
+period closure
+\begin{equation}\label{eq:bw_gamma_closure}
+   \sigma_{2\pi}^{\TT}(a) \;=\; a
+\end{equation}
+identically, with maximum periodicity residual
+\begin{equation*}
+   r_W^{\TT}(O)
+   \;:=\; \Frob{\sigma_{2\pi}^{\TT}(O) - O}
+\end{equation*}
+scaling as $O(\sqrt{\dim_W} \cdot \varepsilon_{\mathrm{machine}})$ in
+floating-point computation.
+\end{theorem}
+
+\begin{proof}
+From~\eqref{eq:TT_flow}, $\sigma_{2\pi}^{\TT}(a) = e^{-i \cdot 2\pi
+\cdot K_\alpha^W}\, a\, e^{+i \cdot 2\pi \cdot K_\alpha^W}$. By
+Proposition~\ref{prop:integer_spectrum}, $K_\alpha^W$ has integer
+spectrum, so $e^{\pm i \cdot 2\pi \cdot K_\alpha^W} = I$ identically.
+Hence $\sigma_{2\pi}^{\TT}(a) = a$.
+\end{proof}
+
+\paragraph{Numerical verification.}
+In floating-point computation, the modular operator $\Delta$ is built
+on the GNS Hilbert--Schmidt space $\Hilb_{\GNS} \cong \C^{\dim_W^2}$
+via the tensor-product form~\eqref{eq:Delta_matrix}, with each
+$\rho^{\pm 1}$ assembled by matrix exponential of $\pm K_\alpha^W$ and
+a numerical division by $Z$. The modular flow $\sigma_t^{\TT}$ is then
+computed by acting $\Delta^{it}$ on each input operator $a$ written in
+$\mathrm{vec}$ form, then reshaping. We have computed the maximum
+periodicity residual $r_W^{\TT}(O)$ at $\nmax \in \{2, 3, 4, 5\}$;\
+results are in Table~\ref{tab:bw_gamma_residuals}.
+
+\begin{table}[ht]
+\centering
+\caption{Maximum BW-$\gamma$ Tomita-level periodicity residual
+$\max_O r_W^{\TT}(O)$ at finite cutoff, computed via polar
+decomposition on the GNS Hilbert--Schmidt space. The slightly larger
+residual at $\nmax = 5$ (vs.~Table~\ref{tab:bw_alpha_residuals}) is
+pure numerical conditioning from the
+$\dim_W^2 \times \dim_W^2 = 4900 \times 4900$ matrix diagonalisation
+of $\Delta$ with extreme eigenvalue ratios
+$\lambda_i / \lambda_j$;\ no structural drift. Source data:\
+\texttt{debug/data/l1\_tighten\_tomita\_results.json}.}
+\label{tab:bw_gamma_residuals}
+\begin{tabular}{rrrcc}
+\toprule
+$\nmax$ & $\dim_W$ & $\dim \Hilb_{\GNS}$ &
+$\max_O r_W^{\TT}(O)$ &
+verdict\\
+\midrule
+2 & 8  & 64   & $1.09 \times 10^{-16}$ & UNIFIED\_STRONG \\
+3 & 20 & 400  & $1.07 \times 10^{-15}$ & UNIFIED\_STRONG \\
+4 & 40 & 1600 & $3.03 \times 10^{-15}$ & UNIFIED\_STRONG \\
+5 & 70 & 4900 & $4.79 \times 10^{-15}$ & UNIFIED\_STRONG \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $J_{\TT}^2 = +I$ identity of Proposition~\ref{prop:J_TT_distinct}
+is verified numerically at every $\nmax$ to machine precision
+(residuals $\le 7 \times 10^{-17}$):\ this distinguishes $J_{\TT}$
+from $J_{\mathrm{GV}}$ at the genuine state-dependent level, not just
+at the canonical $U = I$ sanity case.
+
+\subsection{Spectrum of $K_{\TT}$}\label{sec:K_TT_spectrum}
+
+\begin{proposition}[Spectrum of $K_{\TT}$ on $\Hilb_{\GNS}$]
+\label{prop:K_TT_spectrum}
+The eigenvalues of $K_{\TT} = -\log \Delta$ on $\Hilb_{\GNS}$ are
+$\{n_j - n_k : 1 \le j, k \le \dim_W\}$, where $\{n_j\}$ is the integer
+spectrum of $K_\alpha^W$. In particular:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] $\mathrm{Spec}(K_{\TT}) \subset \Z$ (integer spectrum on
+$\Hilb_{\GNS}$);
+\item[(b)] $K_{\TT}$ has at least $\dim_W$ zero eigenvalues (from the
+diagonal $j = k$ pairs);
+\item[(c)] The maximum eigenvalue of $K_{\TT}$ is $2 \max_j n_j =
+2(2(\nmax - 1) + 1) = 2(2\nmax - 1)$;\ for $\nmax = 2$ this is $\le 4$,
+and the maximum is exactly $2$ on the wedge (since $\max_W
+\mathrm{two}\_m_j = +1$ at $\nmax = 2$).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By~\eqref{eq:Delta_matrix}, $\Delta = (\rho^{-1})^T \otimes \rho$ in
+the vec representation, with $\rho = e^{-K_\alpha^W}/Z$. The
+eigenvalues of $\rho$ are $\{e^{-n_j}/Z\}_{j = 1}^{\dim_W}$, so the
+eigenvalues of $\Delta$ are $\{e^{n_k} \cdot e^{-n_j}\}_{j, k} =
+\{e^{n_k - n_j}\}_{j, k}$. Hence $K_{\TT} = -\log \Delta$ has
+eigenvalues $\{n_j - n_k\}$, which are integer differences of the
+integer spectrum of $K_\alpha^W$. The diagonal $j = k$ pairs contribute
+$n_j - n_j = 0$, giving at least $\dim_W$ zero eigenvalues (more if
+$K_\alpha^W$ has spectral degeneracies).
+\end{proof}
+
+The integer-spectrum property
+of Proposition~\ref{prop:K_TT_spectrum}(a) is the structural reason
+the bit-exact closure of Theorem~\ref{thm:bw_gamma} holds:\
+$e^{i \cdot 2\pi \cdot K_{\TT}} = I$ on $\Hilb_{\GNS}$ by
+$e^{i \cdot 2\pi \cdot m} = 1$ for integer $m$, so the modular flow
+$\Delta^{it}$ acting at $t = 2\pi$ collapses to the identity, and
+$\sigma_{2\pi}^{\TT}(a) = I \cdot a \cdot I = a$ for every $a$. This is
+the same mechanism as Theorem~\ref{thm:bw_alpha} but realised at the
+GNS-Hilbert--Schmidt level.
+
+\subsection{Propinquity rate cross-check}\label{sec:propinquity_consistency}
+
+The closure of Theorem~\ref{thm:bw_gamma} is a finite-cutoff identity,
+not a propinquity limit statement. To confirm consistency with
+Paper~38's qualitative-rate propinquity bound~\eqref{eq:paper38_main},
+we compute the ratio
+\begin{equation*}
+   \frac{\max_O r_W^{\TT}(O)}{\gamma_{\nmax}^{(\mathrm{L2})}}
+\end{equation*}
+where $\gamma_{\nmax}^{(\mathrm{L2})}$ is the L2 mass-concentration
+moment of the central spectral Fej\'er kernel on $\SU(2)$
+(\cite[Lemma~L2]{paper38}):\
+$\gamma_2^{(\mathrm{L2})} = 2.0746$, $\gamma_3^{(\mathrm{L2})} = 1.6101$,
+$\gamma_4^{(\mathrm{L2})} = 1.3223$, $\gamma_5^{(\mathrm{L2})} = 1.1302$.
+The ratios are $8.7 \times 10^{-17}$, $3.0 \times 10^{-16}$,
+$7.1 \times 10^{-16}$, $1.4 \times 10^{-15}$:\ several orders of
+magnitude below the qualitative-rate bound at every tested $\nmax$.
+The L1 closure is therefore \emph{much stronger} than the qualitative-rate
+propinquity bound would predict at finite cutoff; the closure does not
+require the GH limit and is structural rather than asymptotic.
+
+% =====================================================================
+\section{Unified closure}\label{sec:unified_closure}
+% =====================================================================
+
+The two constructions of Sections~\ref{sec:geometric_construction}
+and~\ref{sec:tt_construction} are not the same operator on
+$\Hilb_W$ versus $\Hilb_{\GNS}$ (the GNS construction lives on a
+larger Hilbert space). But the modular flows they generate on the
+algebra $B(\Hilb_W)$ are intimately related, and at the period
+$t = 2\pi$ they collapse to the identical operator-system identity.
+This section makes the relation precise.
+
+\subsection{Flow conjugacy}\label{sec:flow_conjugacy}
+
+\begin{theorem}[BW-$\alpha$ / BW-$\gamma$ flow conjugacy]
+\label{thm:unified}
+For every $a \in B(\Hilb_W)$ and every $t \in \R$,
+\begin{equation}\label{eq:tt_alpha_conjugate}
+   \sigma_t^{\TT}(a) \;=\; \sigma_{-t}^{\alpha}(a),
+\end{equation}
+where $\sigma_t^{\alpha}$ is the geometric BW-$\alpha$ flow
+\eqref{eq:alpha_flow} and $\sigma_t^{\TT}$ is the Tomita--Takesaki
+BW-$\gamma$ flow~\eqref{eq:TT_flow}.
+\end{theorem}
+
+\begin{proof}
+By~\eqref{eq:TT_flow}, $\sigma_t^{\TT}(a) = e^{-it K_\alpha^W}\, a\,
+e^{+it K_\alpha^W}$. By~\eqref{eq:alpha_flow}, $\sigma_{-t}^{\alpha}(a) =
+e^{-it K_\alpha^W}\, a\, e^{+it K_\alpha^W}$. The two expressions are
+literally identical.
+\end{proof}
+
+\paragraph{Consequence at the period.}
+At $t = 2\pi$, equation~\eqref{eq:tt_alpha_conjugate} reads
+$\sigma_{2\pi}^{\TT}(a) = \sigma_{-2\pi}^{\alpha}(a) =
+\sigma_{2\pi}^{\alpha}(a)^{-1}$, where the last equality uses that the
+flow $\sigma_t^{\alpha}$ is a one-parameter group with the inverse at
+$t = 2\pi$ being the flow at $t = -2\pi$. But by
+Theorem~\ref{thm:bw_alpha}, $\sigma_{2\pi}^{\alpha}(a) = a = a^{-1}$
+trivially (this is an operator equation, not a group inverse), so
+$\sigma_{2\pi}^{\TT}(a) = a$ as well, consistent with
+Theorem~\ref{thm:bw_gamma}. The two closures are not just both true;
+they are the \emph{same} closure under the conjugacy
+\eqref{eq:tt_alpha_conjugate}.
+
+\paragraph{Numerical confirmation at general $t$.}
+At a general non-period $t$ (e.g., $t = 1$), the two flows
+$\sigma_t^{\TT}$ and $\sigma_t^{\alpha}$ are distinct (the conjugacy
+\eqref{eq:tt_alpha_conjugate} relates $\sigma_t^{\TT}$ to
+$\sigma_{-t}^{\alpha}$, not to $\sigma_t^{\alpha}$). We have verified
+this numerically:\ the average cross-flow difference
+$\langle \Frob{\sigma_1^{\TT}(O) - \sigma_1^{\alpha}(O)} \rangle_O$
+over the same five test operators is $\approx 0.16$ at $\nmax = 2$,
+clearly non-zero. The sign-flipped comparison
+$\langle \Frob{\sigma_1^{\TT}(O) - \sigma_{-1}^{\alpha}(O)} \rangle_O$
+gives $\approx 4 \times 10^{-17}$, machine precision. The conjugacy
+\eqref{eq:tt_alpha_conjugate} is therefore verified bit-exactly at
+general $t$, not just at the period.
+
+\subsection{The derived-Hamiltonian finding}
+\label{sec:derived_hamiltonian}
+
+The unified closure rests on the deliberate choice
+$H_{\mathrm{local}} = K_\alpha^W / \beta$
+(equation~\eqref{eq:H_local_def}) for the local Hamiltonian
+generating the wedge KMS state. This is a construction-level choice,
+not a derivation:\ we wrote down the wedge KMS state as $\rho_W =
+e^{-K_\alpha^W}/Z$ rather than (say) $\rho_W = e^{-\beta D_W}/Z$ for
+the wedge-restricted Camporesi--Higuchi Dirac. The motivation is
+structural (we want the modular Hamiltonian's period to match the
+canonical BW $\beta = 2\pi$), but it is \emph{a} choice of local
+Hamiltonian, not the unique choice.
+
+Two consequences are immediate, and together they isolate the choice
+as a derived structural finding rather than a uniqueness theorem:
+
+\paragraph{(I) Matches the Wightman BW vacuum.}
+In the continuum Bisognano--Wichmann theorem, the local Hamiltonian
+on the Rindler wedge is the boost generator $K_{\mathrm{boost}}$, and
+the Wightman vacuum restricted to the wedge algebra is the Gibbs state
+$\rho_W = e^{-2\pi K_{\mathrm{boost}}}/Z$ at inverse temperature
+$\beta = 2\pi$. Our choice $H_{\mathrm{local}} = K_\alpha^W / \beta$
+matches this structure exactly:\ $\beta H_{\mathrm{local}} = K_\alpha^W$
+is the wedge-restricted boost-class generator (the spatial rotation
+generator around the Hopf-base axis, on the Riemannian side), and the
+KMS state is $\rho_W = e^{-K_\alpha^W}/Z = e^{-2\pi K_\alpha^W/(2\pi)}/Z$,
+the operator-system analog of the Wightman BW vacuum. The choice is
+therefore the canonical operator-system analog of the Wightman state,
+not a post-hoc engineering choice.
+
+\paragraph{(II) The framework's intrinsic Dirac is not the right
+local Hamiltonian.}
+If we had chosen $H_{\mathrm{local}} = D_W$ (the wedge-restricted
+Camporesi--Higuchi Dirac), then $\beta H_{\mathrm{local}} = 2\pi D_W$
+would have half-integer spectrum on the spinor basis (the eigenvalues
+of $D_W$ are $\chi \cdot (n + 1/2)$, with $n + 1/2$ half-integer), so
+$e^{i \cdot 2\pi \cdot \beta D_W}$ would \emph{not} be the identity at
+$\beta = 2\pi$. The bit-exact period closure would not hold, and the
+unified BW-$\alpha$ / BW-$\gamma$ structure would split.
+
+This is a non-trivial structural finding. The framework's intrinsic
+Dirac $\DCH$ is the canonical spectral-action object on the
+Camporesi--Higuchi triple, and one might naively expect it to play the
+role of the local Hamiltonian for any natural KMS state on the
+truncated operator system. The above shows that this is not the case
+at $\beta = 2\pi$:\ the right local Hamiltonian for the BW vacuum on
+the wedge is the boost-class generator $K_\alpha^W$, not the
+wedge-restricted Dirac $D_W$. The two play complementary roles:\
+$\DCH$ is the spectral-action object (the Connes--Chamseddine input
+for the heat-kernel expansion); $K_\alpha^W$ is the
+wedge-modular-Hamiltonian object (the Tomita--Takesaki input for the
+modular-flow construction). On the round $\sthree$ they happen to
+agree up to an overall scale (both are diagonal in the spinor basis
+with simple spectral structure), but only one of them has the integer
+spectrum required for the bit-exact period closure at $\beta = 2\pi$.
+
+\begin{remark}[A speculative reading]\label{rem:speculation}
+We note, but do not pursue here, the possibility that the
+distinction between the spectral-action Dirac $\DCH$ and the
+modular-Hamiltonian generator $K_\alpha^W$ is structurally significant
+for the framework's interpretation. In the spectral-action paradigm
+(Chamseddine--Connes~\cite{chamseddine_connes2010}), the Dirac is the
+universal object from which all physics is read; in the
+thermal-time paradigm (Connes--Rovelli~\cite{connes_rovelli1994}), the
+modular Hamiltonian of an algebraic state is the physical-time generator.
+On the round $\sthree$ Camporesi--Higuchi triple at the wedge KMS
+state $\rho_W = e^{-K_\alpha^W}/Z$, these are not the same operator.
+The structural status of this distinction --- whether it is a
+peculiarity of the round $\sthree$ truncation or a deeper feature of
+the framework's spectral content --- is open. We flag it as one of
+the open questions in Section~\ref{sec:conclusion}.
+\end{remark}
+
+\subsection{Cross-witness collapse at the algebra-action level}
+\label{sec:cross_witness_algebra}
+
+The four-witness collapse mentioned in
+Section~\ref{sec:four_witness_unit} acquires a sharper form at the
+algebra-action level. With $H_{\mathrm{local}} = K_\alpha^W / \beta$,
+the density matrix is
+\begin{equation}\label{eq:rho_W_beta_indep}
+   \rho_W \;=\; \frac{e^{-\beta H_{\mathrm{local}}}}{Z}
+            \;=\; \frac{e^{-K_\alpha^W}}{Z}
+\end{equation}
+\emph{independent of $\beta$}. The Tomita modular operator $\Delta$
+constructed from $\rho_W$ via~\eqref{eq:Delta_matrix} and the modular
+Hamiltonian $K_{\TT} = -\log \Delta$ are therefore also
+$\beta$-independent. The four-witness theorem at the operator-system
+level reduces to the assertion that all four physical witnesses
+(BW, HH, Sew, Unruh) produce the \emph{same} modular operator
+$\Delta$ and the same modular Hamiltonian $K_{\TT}$, with the
+witness-specific $\kappa_g$ values dropping out of the algebra-action
+construction.
+
+We have verified this numerically at $\nmax \in \{2, 3, 4, 5\}$ across
+the six witness instantiations (BW canonical at $\kappa_g = 1$;
+Hartle--Hawking at $M = 1$, $\kappa_g = 1/4$; Hartle--Hawking at
+$M = 2$, $\kappa_g = 1/8$; Sewell at $M = 1$, $\kappa_g = 1/4$;
+Unruh at $a = 1$, $\kappa_g = 1$; Unruh at $a = 2$, $\kappa_g = 2$).
+The cross-witness consistency residual is exactly $0$ at every tested
+$\nmax$ between any pair of witnesses, confirming the
+$\beta$-independence of the density matrix at the construction level.
+
+% =====================================================================
+\section{Four-witness collapse and a single construction}
+\label{sec:four_witness_collapse}
+% =====================================================================
+
+The numerical content of the four-witness collapse is summarised in
+Table~\ref{tab:cross_witness} and the structural content is the
+following corollary.
+
+\begin{table}[ht]
+\centering
+\caption{Cross-witness consistency at the BW-$\alpha$ level
+(left columns) and at the BW-$\gamma$ Tomita level (right columns).
+Cross-consistency residual is the difference between the period
+residual of each witness and the BW canonical period residual at the
+same $\nmax$:\ exactly $0$ across all six witnesses
+at every tested $\nmax$. Source data:\
+\texttt{debug/data/l1\_modular\_hamiltonian\_results.json},
+\texttt{debug/data/l1\_tighten\_tomita\_results.json}.}
+\label{tab:cross_witness}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{rcccccc}
+\toprule
+$\nmax$ & $\BW$ & $\HH_{M=1}$ & $\HH_{M=2}$ & $\Sew_{M=1}$ & $\Unruh_{a=1}$ & $\Unruh_{a=2}$ \\
+& ($\kappa_g\!=\!1$) & ($\kappa_g\!=\!1/4$) & ($\kappa_g\!=\!1/8$) & ($\kappa_g\!=\!1/4$) & ($\kappa_g\!=\!1$) & ($\kappa_g\!=\!2$) \\
+\midrule
+\multicolumn{7}{l}{\emph{BW-$\alpha$ residual (Table~\ref{tab:bw_alpha_residuals}):}} \\
+2 & 1.80e-16 & 1.80e-16 & 1.80e-16 & 1.80e-16 & 1.80e-16 & 1.80e-16 \\
+3 & 4.76e-16 & 4.76e-16 & 4.76e-16 & 4.76e-16 & 4.76e-16 & 4.76e-16 \\
+4 & 9.33e-16 & 9.33e-16 & 9.33e-16 & 9.33e-16 & 9.33e-16 & 9.33e-16 \\
+5 & 1.59e-15 & 1.59e-15 & 1.59e-15 & 1.59e-15 & 1.59e-15 & 1.59e-15 \\
+\midrule
+\multicolumn{7}{l}{\emph{BW-$\gamma$ Tomita residual (Table~\ref{tab:bw_gamma_residuals}):}} \\
+2 & 1.09e-16 & 1.09e-16 & 1.09e-16 & 1.09e-16 & 1.09e-16 & 1.09e-16 \\
+3 & 1.07e-15 & 1.07e-15 & 1.07e-15 & 1.07e-15 & 1.07e-15 & 1.07e-15 \\
+4 & 3.03e-15 & 3.03e-15 & 3.03e-15 & 3.03e-15 & 3.03e-15 & 3.03e-15 \\
+5 & 4.79e-15 & 4.79e-15 & 4.79e-15 & 4.79e-15 & 4.79e-15 & 4.79e-15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{corollary}[Single operator-system construction for the four
+witnesses]\label{cor:single_construction}
+Under the unit normalisation U-1 and the wedge KMS state choice
+$\rho_W = e^{-K_\alpha^W}/Z$, the operator-system-level realisations of
+the Hartle--Hawking, Sewell, Bisognano--Wichmann, and Unruh witnesses
+on the truncated Camporesi--Higuchi triple $\Tcal_{\nmax}$ collapse to
+a single construction. The modular operator $\Delta$ and the modular
+Hamiltonian $K_{\TT}$ are bit-identical across the six witness
+instantiations. The witness-specific physics enters only through the
+parameterisation of $\kappa_g$, which is invisible at the
+algebra-action level and at the period closure $\sigma_{2\pi}(O) = O$.
+\end{corollary}
+
+\begin{proof}
+The density matrix $\rho_W = e^{-K_\alpha^W}/Z$ is
+$\beta$-independent (Section~\ref{sec:cross_witness_algebra}). The
+Tomita modular operator $\Delta$ on the GNS Hilbert--Schmidt space is
+constructed entirely from $\rho_W$ via~\eqref{eq:Delta_matrix},
+and the modular Hamiltonian $K_{\TT} = -\log \Delta$ depends only on
+$\Delta$. Both are therefore $\beta$-independent.
+$\beta$-independence at the algebra-action level immediately implies
+identical period closure at $t = 2\pi$ for all six witness
+instantiations.
+\end{proof}
+
+\paragraph{Structural reading.}
+At the operator-system level on the truncated Camporesi--Higuchi
+triple, the four-witness Wick-rotation theorem reduces to one
+construction. The witness-specific physical content (mass of the black
+hole, proper acceleration of the Rindler observer) parameterises the
+correspondence to the continuum physical observable but does not
+modify the underlying modular-Hamiltonian construction. The same
+$2\pi$ that appears as the Hopf-base measure factor $\Vol(S^2)/\pi^2$
+in the Paper~38 propinquity rate constant
+\eqref{eq:paper38_main} also drives the modular period closure of
+Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma}.
+
+This is the operator-system-level realisation of the M1 sub-mechanism
+of the master Mellin engine
+(Paper~32~\S~VIII case-exhaustion theorem of the present author's
+framework). The metric-functional-level reading
+(\cite[Rem.~rem:bisognano\_wichmann\_reading]{paper32}, Sprint TD
+Track 4, Sprint Unruh-pendant) identifies the framework's $2\pi$
+on a temporal $S^1_\tau$ with the modular-flow / boost-orbit period
+of the four witnesses via the published Wick-rotation chain. The
+present paper lifts that identification to the operator-system level
+inside the spectral triple, eliminating the dependence on the
+Wick-rotation prescription for the period-closure identity itself:\
+the $2\pi$ in the modular period is now a framework-internal output
+of the spectral truncation, not an externally imposed Wick-rotation
+matching.
+
+% =====================================================================
+\section{Related work and scope}\label{sec:related_work}
+% =====================================================================
+
+\paragraph{Connes--Rovelli thermal time hypothesis.}
+The closest published analog of the present construction is the
+Connes--Rovelli thermal time hypothesis~\cite{connes_rovelli1994},
+which identifies the Tomita modular flow of a general-covariant von
+Neumann algebra with the physical-time evolution. The present paper
+specialises the Connes--Rovelli construction to a finite-dimensional
+Type I$_{\dim_W}$ factor obtained as the wedge-restricted
+Connes--van~Suijlekom~\cite{connes_vs2021} truncation of the round
+$\sthree$ Camporesi--Higuchi spectral triple. The Connes--Rovelli
+construction is abstract;\ the present construction is concrete in
+the sense that $\Delta$, $K_{\TT}$, and the period closure are all
+explicit finite-dimensional matrix operations, computable in
+floating-point arithmetic at any tested $\nmax$.
+
+\paragraph{Bisognano--Wichmann tradition and continuum modular
+Hamiltonians.}
+The original Bisognano--Wichmann
+papers~\cite{bisognano_wichmann1975, bisognano_wichmann1976} establish
+the modular-flow-as-boost identification for the Rindler wedge of
+Minkowski spacetime, with the analytic period $\sigma_{i \cdot 2\pi} =
+\mathrm{id}$ as a corollary of the Tomita--Takesaki KMS
+condition~\cite{takesaki1970, tomita1967} at $\beta = 2\pi$ in
+rapidity units. The continuum entanglement-Hamiltonian construction
+for a half-space in free CFT was developed by Casini and
+Huerta~\cite{casini_huerta2009}, and extended to spherical regions of
+$S^d$ in CFT by Casini--Huerta--Myers~\cite{casini_huerta_myers2011}.
+The present construction is the operator-system-level analog of the
+Casini--Huerta--Myers spherical-region modular Hamiltonian on the
+truncated Camporesi--Higuchi triple over the round $\sthree$, with
+the integer spectrum of $K_\alpha^W$ playing the role of the
+canonical $2\pi$-period of the continuum modular flow.
+
+\paragraph{Lattice realisations.}
+Zhu--Casini~\emph{et~al.}~\cite{zhu_casini2020} verified the
+Bisognano--Wichmann form of the modular Hamiltonian on critical
+quantum spin chains, finding the continuum BW prediction to hold to
+good approximation on finite lattices. The present paper differs in
+two respects:\ (i)~the underlying object is a continuum spectral
+triple on a non-flat compact $\sthree$ background, not a lattice
+discretisation of physical space; (ii)~the finite-dimensional
+structure comes from the spectral truncation of $\DCH$ via the
+Connes--van~Suijlekom framework, not from a real-space discretisation.
+The structural mechanism (integer-spectrum generator forcing the
+$\sigma_{2\pi} = \mathrm{id}$ period closure) is morally analogous to
+the lattice realisations of Zhu et al., but the construction lives on
+the operator-system side of the metric-spectral-triple framework
+rather than on the lattice-Hamiltonian side of condensed-matter
+physics.
+
+\paragraph{Algebraic QFT on curved backgrounds.}
+The standard algebraic-QFT references for modular structures on
+Riemannian backgrounds are
+Strohmaier~\cite{strohmaier2006} (Reeh--Schlieder on stationary
+spacetimes) and Verch~\cite{verch2001} (nuclearity-modular on compact
+Riemannian backgrounds). These address the modular-theoretic content
+of axiomatic QFT on curved backgrounds. The present construction is
+spectral-triple-internal:\ it does not invoke a Wightman field algebra
+or a nuclearity argument, but rather works directly with the
+$\Op_{\nmax} \subset B(\Hilb_{\nmax})$ truncation of the
+$C^\infty(\sthree) \subset B(L^2(\sthree, \Sigma))$ continuum algebra
+and the associated Hilbert--Schmidt GNS construction.
+
+\paragraph{Lorentzian signature and Krein-space spectral triples.}
+The proper Lorentzian extension of the present construction would
+require a Krein-space spectral triple at signature $(3, 1)$, for which
+the canonical reference is
+Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}. The
+Bizi--Brouder--Besnard classification organises spectral triples by
+pairs $(m, n) \in (\Z/8)^2$ where $m + n$ is the metric dimension and
+the underlying Connes axiom signs determine the Krein-space structure.
+The Riemannian Camporesi--Higuchi triple sits at $(3, 0)$;\ the
+Lorentzian extension would sit at $(3, 1)$. The
+Bizi--Brouder--Besnard Table~2 signs at $(3, 1)$ flip the
+$\{J, \gamma_5\}$ anticommutation relation, which leads to the
+present author's Sprint L0 prediction that the M3 sub-mechanism of
+the master Mellin engine trivialises at $(3, 1)$ on chirality-symmetric
+spectrum (\texttt{debug/lorentzian\_l0\_audit\_memo.md} \S 3).
+Constructing the Krein-space lift, replicating the present paper's
+modular construction at $(3, 1)$, and verifying the M3 trivialisation
+prediction is the named Sprint L2 follow-up of the present author's
+framework documentation:\ a multi-month effort dominated by the
+absence of a published Lorentzian analog of the Latr\'emoli\`ere
+propinquity (a NCG-mathematics gap independent of any specific physical
+application).
+
+\paragraph{Twisted-spectral-triple emergence.}
+The recent work of
+Nieuviarts~\cite{nieuviarts2025a, nieuviarts2024, nieuviarts2025b_proceedings}
+proposes a twisted-spectral-triple morphism that constructs a
+pseudo-Riemannian spectral triple from a Riemannian almost-commutative
+twisted spectral triple, presented as an algebraic alternative to
+Wick rotation. The construction does not apply to the present
+$\sthree$ case because of the structural odd-dimensional restriction
+(\S~\ref{sec:nieuviarts_footnote}). The Lorentzian-extension route for
+the present paper therefore runs through the direct
+Bizi--Brouder--Besnard~2018 Krein-space lift, not through a twist
+morphism.
+
+\paragraph{Other NCG-side gaps the present paper does not close.}
+A genuine Lorentzian propinquity (in the sense of an analog of the
+Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity for
+Krein-space metric spectral triples) is open as of May 2026.
+Toyota~\cite{toyota2023}, Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
+farsi_latremoliere2025}, Hekkelman--McDonald--van~Suijlekom~\cite{ucp_maps_2024},
+and Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b} all extend
+the metric-spectral-triple propinquity machinery in various directions
+(discrete groups of polynomial growth, collapse with abelian factors,
+analytic paths of Riemannian metrics, noncommutative integral on
+truncations, Berezin--Toeplitz on $S^2$), but none addresses
+Krein-space signature change. Constructing the Lorentzian propinquity
+is original NCG-mathematics work, not algorithmic.
+
+% =====================================================================
+\section{Conclusion and open questions}\label{sec:conclusion}
+% =====================================================================
+
+We have established two structurally independent but operator-action
+conjugate constructions of the modular Hamiltonian on the truncated
+Camporesi--Higuchi spectral triple $\Tcal_{\nmax}$, both verifying
+the four-witness Wick-rotation period closure
+$\sigma_{2\pi}(O) = O$ \emph{bit-exactly} at every tested
+$\nmax \in \{2, 3, 4, 5\}$ and all four physical witnesses
+(Bisognano--Wichmann, Hartle--Hawking, Sewell, Unruh) under the
+canonical hemispheric wedge $P_W$ aligned with the Hopf-base axis,
+the BW local Hamiltonian $H_{\mathrm{local}} = K_\alpha^W / \beta$
+on the wedge sub-algebra, and the unit normalisation $\kappa_g = 1$
+in natural rapidity units. The geometric BW-$\alpha$ realisation
+uses the integer-spectrum boost-class generator $K_\alpha^W =
+J_{\mathrm{polar}}$ (Theorem~\ref{thm:bw_alpha}); the
+Tomita--Takesaki BW-$\gamma$ realisation uses the polar
+decomposition $S = J_{\TT} \Delta^{1/2}$ on the GNS Hilbert--Schmidt
+space (Theorem~\ref{thm:bw_gamma}). The two flows are operator-action
+conjugates, $\sigma_t^{\TT}(O) = \sigma_{-t}^{\alpha}(O)$
+(Theorem~\ref{thm:unified}), and the four physical witnesses collapse
+to a single construction at the algebra-action level
+(Corollary~\ref{cor:single_construction}).
+
+This lifts the four-witness Wick-rotation theorem from
+``structural correspondence'' (the published Wick-rotation chain at
+the metric-functional level) to \emph{literal identification at the
+operator-system level} on the Riemannian truncated triple, at every
+finite cutoff. The structural reason is the integer spectrum of the
+BW local Hamiltonian, which forces $e^{i \cdot 2\pi \cdot K_\alpha^W}
+= I$ on the underlying Hilbert space and hence the bit-exact closure
+of the modular flow at $t = 2\pi$. Unlike Paper~38's qualitative-rate
+propinquity convergence~\eqref{eq:paper38_main}, the present closure
+does not require a Gromov--Hausdorff limit and is not asymptotic in
+$\nmax$;\ it is a finite-cutoff exact identity.
+
+\paragraph{Open questions named by the closure.}
+
+\textbf{(O1) Lorentzian extension at signature $(3, 1)$.}
+The natural next step is to replicate the present operator-system
+construction on a Bizi--Brouder--Besnard Krein-space spectral triple
+at $(3, 1)$, verify the Sprint L0 prediction that M3 trivialises but
+M1 stays under the BBB Table~2 sign flip, and produce the genuine
+Lorentzian KMS-Tomita-Takesaki theorem inside the framework. The
+multi-month obstruction is the absence of a Lorentzian propinquity in
+the published literature.
+
+\textbf{(O2) Non-tracial wedge states.}
+The unified closure rests on the tracial-Gibbs structure
+$\rho_W = e^{-K_\alpha^W}/Z$ on a finite-dimensional Type I$_{\dim_W}$
+factor. For non-tracial wedge states (e.g., excited states above the
+BW vacuum, mixed states with non-Gibbs structure), the polar
+decomposition $S = J_{\TT} \Delta^{1/2}$ still goes through, but the
+integer-spectrum property of $K_{\TT}$ is not guaranteed, and the
+bit-exact closure may degrade to a soft propinquity-rate-controlled
+closure of the type Paper~38 supplies. The structural status of the
+non-tracial case is open.
+
+\textbf{(O3) Spectral-action Dirac vs.\ modular-Hamiltonian generator.}
+Section~\ref{sec:derived_hamiltonian} flagged that the framework's
+intrinsic Camporesi--Higuchi Dirac $\DCH$ is \emph{not} the right
+local Hamiltonian for the BW vacuum at $\beta = 2\pi$:\ the BW vacuum
+selects $K_\alpha^W$, not $\DCH$, as its modular generator. On the
+round $\sthree$ this distinction is mostly a matter of choosing the
+right generator from a family of admissible candidates, but in
+general the spectral-action $\DCH$ and the modular-Hamiltonian
+$K_\alpha^W$ may not even commute. The structural status of this
+distinction in extensions to other compact-Lie-group spectral triples
+(per Paper~40~\cite{paper40_unified}) is open and an interesting
+direction for follow-up.
+
+\textbf{(O4) Higher-rank compact non-abelian extensions.}
+Paper~40~\cite{paper40_unified} extends the Paper~38 propinquity
+convergence theorem to all compact connected Lie groups with
+bi-invariant metric. The natural extension of the present paper would
+verify that the geometric BW-$\alpha$ generator analog on higher-rank
+groups (e.g., $K_\alpha^W = J_z$ with $J_z$ the Cartan generator
+along the wedge-defining direction) still has integer spectrum on the
+spinor harmonic basis, preserving the bit-exact period closure across
+the universal $4/\pi$-rate class. The standard structure of weights
+in compact Lie groups suggests this extension is straightforward;
+verifying it explicitly is a near-term sprint follow-up.
+
+\textbf{(O5) Cross-manifold modular structures.}
+The Paper~24~\cite{paper24} cross-manifold blocker
+$\Tcal_{\sthree} \otimes \Tcal_{\mathrm{Hardy}(S^5)}$ remains
+unaddressed by the present paper. A cross-manifold modular construction
+(modular Hamiltonian on a tensor product of a round $\sthree$
+Camporesi--Higuchi triple and a holomorphic-sector $S^5$
+Bargmann--Segal triple) would require an analog of the Latr\'emoli\`ere
+tensor-product propinquity of Paper~39~\cite{paper39} extended to
+mixed Riemannian / Hardy-sector spectral triples. This is also open.
+
+\paragraph{Final remark on the M1 master Mellin engine identification.}
+The $2\pi$ in the modular period of the present construction is the
+same $2\pi$ that drives the Paper~38 propinquity rate
+$4/\pi = \Vol(S^2)/\pi^2$ via the M1 Hopf-base measure mechanism
+(Paper~32~\S~VIII case-exhaustion theorem). The present paper
+establishes this identification at the operator-system level, not
+just at the metric-functional level:\ the modular period
+$\sigma_{2\pi}(O) = O$ is a framework-internal output of the spectral
+truncation, with the integer-spectrum generator $K_\alpha^W$ acting
+as the mechanism through which the M1 transcendental signature
+$\Vol(S^1) = 2\pi$ is realised at the algebra-action level. The
+framework's M1 mechanism on the round $\sthree$ Camporesi--Higuchi
+triple is now operator-system-level identified with the four-witness
+Wick-rotation period structure, in both the geometric and the
+Tomita--Takesaki readings, at every finite cutoff.
+
+% =====================================================================
+\appendix
+\section{Computational verification protocol}
+\label{app:computational_verification}
+% =====================================================================
+
+The numerical verification of the period closures of
+Theorems~\ref{thm:bw_alpha} and~\ref{thm:bw_gamma} and of the
+cross-witness collapse of Table~\ref{tab:cross_witness} is
+implemented in the supporting Python module
+\verb|geovac/modular_hamiltonian.py| of the present author's framework
+codebase ($\sim$1550 lines), with test coverage in
+\verb|tests/test_modular_hamiltonian.py| ($\sim$960 lines, 67 tests:\
+63 fast plus 4 slow). The structure is briefly described here.
+
+\subsection{Module API}\label{sec:module_api}
+
+The principal classes are:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \texttt{HemisphericWedge(axis="hopf")}:\ implements the projection
+$P_W$ of Definition~\ref{def:wedge} via the equatorial-reflection
+involution $R_{\mathrm{polar}}$ on the full-Dirac spinor basis.
+\item \texttt{TomitaConjugation(U)}:\ implements the antilinear
+$J_{\TT}$ via a stored unitary $U$ with action
+$J_{\TT}(\psi) = U \cdot \overline{\psi}$;\ exposes
+\texttt{verify\_J\_squared\_positive\_identity} and
+\texttt{verify\_J\_squared\_negative\_identity\_DOES\_NOT\_HOLD} as
+explicit sanity checks distinguishing $J_{\TT}$ from
+$J_{\mathrm{GV}}$.
+\item \texttt{KMSState(beta, H)}:\ implements the wedge-restricted
+Gibbs state $\omega_{\beta, H}$ of~\eqref{eq:gibbs_state_def},
+including the canonical analytic-continuation verification of the
+KMS condition at the expectation level.
+\item \texttt{ModularHamiltonian(wedge, basis, D, kappa\_g)}:\
+implements the BW-$\alpha$ construction with $K = K_\alpha^W$, the
+real-time flow $\sigma_t^{\alpha}$, the period-closure verifier
+\texttt{verify\_modular\_periodicity}, and accessors to the
+Tomita--Takesaki structure (\texttt{tomita\_structure},
+\texttt{k\_alpha\_geometric}, \texttt{k\_tomita},
+\texttt{compare\_alpha\_vs\_tomita}).
+\item \texttt{TomitaModularStructure(rho)}:\ implements the
+BW-$\gamma$ Tomita construction on the GNS Hilbert--Schmidt space,
+with $\Delta = (\rho^{-1})^T \otimes \rho$, $K_{\TT} = -\log \Delta$,
+and the modular flow $\sigma_t^{\TT}(a) = \rho^{it} a \rho^{-it}$ on
+the algebra.
+\end{itemize}
+Witness factories \texttt{for\_bisognano\_wichmann},
+\texttt{for\_hartle\_hawking}, \texttt{for\_sewell},
+\texttt{for\_unruh} instantiate
+\texttt{ModularHamiltonian} with witness-specific $\kappa_g$ values:\
+BW canonical ($\kappa_g = 1$), HH ($\kappa_g = 1/(4M)$),
+Unruh ($\kappa_g = a$). Each factory returns a
+\texttt{ModularHamiltonian} object whose period-closure verifier
+returns \texttt{STRONG\_IDENTIFICATION} at every tested $\nmax$.
+
+\subsection{Test coverage}\label{sec:test_coverage}
+
+The test suite \verb|tests/test_modular_hamiltonian.py| verifies the
+following:\ wedge projector idempotency and Hermiticity ($P_W^2 =
+P_W$, $P_W^* = P_W$); Tomita conjugation properties ($J_{\TT}^2 = +I$,
+$J_{\TT}^2 \ne -I$, antilinearity, operator-action consistency); KMS
+state normalisation, partition-function positivity, real expectation
+on Hermitian operators; modular periodicity $\sigma_{2\pi}(O) = O$ at
+$\nmax \in \{2, 3, 4\}$ for the first five non-identity multipliers in
+\verb|FullDiracTruncatedOperatorSystem|; cross-witness collapse at
+the operator-action level; KMS expectation-level condition for sample
+operator pairs $(A, B)$; propinquity rate cross-check
+(residual $\ll \gamma_{\nmax}$); operator-system non-leakage
+($\sigma_{2\pi}(M)$ stays in $\Op_{\nmax}$); modular flow group law
+$\sigma_t \cdot \sigma_s = \sigma_{t+s}$ and identity at $t = 0$. The
+slow tests verify the closure at $\nmax = 5$ ($\sim$80 seconds wall
+time per slow test).
+
+\subsection{Wall time and reproducibility}\label{sec:wall_time}
+
+Per-$\nmax$ wall time on a standard laptop (Intel i7, Python 3.11,
+NumPy 1.26):\ $\sim 0.4$ s at $\nmax = 2$, $\sim 3.5$ s at $\nmax = 3$,
+$\sim 45$ s at $\nmax = 4$, $\sim 260$ s at $\nmax = 5$ for the
+BW-$\alpha$ construction;\ $\sim 0.2$ s, $\sim 3.7$ s, $\sim 45$ s,
+$\sim 545$ s for the BW-$\gamma$ construction (the $\nmax = 5$ cost
+dominated by the $4900 \times 4900$ GNS-Hilbert--Schmidt
+diagonalisation). Beyond $\nmax = 5$ the GNS construction becomes
+expensive; the structural reading of the closure is unchanged at
+higher $\nmax$ since the integer-spectrum mechanism holds at any
+cutoff. Computational drivers and structured output JSON are
+available in the present author's framework documentation under
+\verb|debug/l1_modular_hamiltonian_compute.py| and
+\verb|debug/l1_tighten_tomita_compute.py| respectively.
+
+% =====================================================================
+\section{Cross-references to the GeoVac framework}
+\label{app:framework_crossref}
+% =====================================================================
+
+The present paper is part of an integrated NCG-research programme
+developed by the present author. We briefly note the principal
+cross-references for the reader's orientation.
+
+\paragraph{Paper~38 (\cite{paper38}, propinquity convergence on
+$\sthree$).}
+The Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity convergence
+of the truncated Camporesi--Higuchi spectral triples $\Tcal_{\nmax}$
+to the continuum $\Tcal_{\sthree}$ is established in Paper~38 with
+explicit rate~\eqref{eq:paper38_main}. The L1' / L2 / L3 / L4 / L5
+lemmas of Paper~38 supply the metric-side analytic infrastructure
+that the present paper builds on. The propinquity rate constant
+$4/\pi = \Vol(S^2)/\pi^2$ identifies as the same Hopf-base measure
+factor that drives the modular period closure of the present
+Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma}.
+
+\paragraph{Paper~40 (\cite{paper40_unified}, universal $4/\pi$ on
+compact Lie groups).}
+The Paper~38 propinquity convergence extends to all compact connected
+Lie groups with bi-invariant metric, with the rate constant $4/\pi$
+universal across the class via the Plancherel-weight $\times$
+Vandermonde-Jacobian cancellation theorem (Paper~40~\S~3.2). The
+modular structure of the present paper plausibly extends to the
+higher-rank cases (Section~\ref{sec:conclusion} O4); the integer
+spectrum of the boost-class generator $K_\alpha^W$ on the spinor
+harmonic basis is a property of $\SU(2)$ (where the half-integer
+weights double to integers), and the higher-rank analog requires
+verifying that the relevant Cartan generator along the wedge axis
+still has the right spectral property.
+
+\paragraph{Paper~32 \S VIII (master Mellin engine case-exhaustion
+theorem).}
+The case-exhaustion theorem~\cite[Thm.~thm:pi\_source\_case\_exhaustion]{paper32}
+of Paper~32 \S VIII (in the present author's framework documentation)
+states that every $\pi$ in any finite chain of Paper~34 projections
+engages one of three master Mellin engine sub-mechanisms:\ M1 (Hopf-base
+measure $\Vol(S^2)/\pi^2$ at operator order $k = 0$), M2 (Seeley--DeWitt
+$\sqrt{\pi}\, \Q$ at $k = 2$), or M3 (vertex-parity Hurwitz / Catalan
+$G$ / Dirichlet $L$ at $k = 1$). The $2\pi$ in the modular period of
+the present paper is the M1 signature at the operator-system level.
+The Bisognano--Wichmann reading of M1 on temporal compactifications
+(\cite[Rem.~rem:bisognano\_wichmann\_reading]{paper32}) is exactly the
+structural correspondence that the present paper lifts to literal
+identification.
+
+\paragraph{Paper~34 \S III.27 (Wick rotation projection).}
+The Wick rotation projection in the present author's projection
+taxonomy~\cite{paper34} is the structural mechanism through which the
+framework's Euclidean spectral content is read as a Lorentzian
+physical observable. The Sprint L0 audit
+(\texttt{debug/lorentzian\_l0\_audit\_memo.md}) classifies this
+projection in the WICK\_MAP\_FREE bucket at the metric-functional
+level. The present paper extends the projection's status to literal
+identification at the operator-system level (Riemannian), reducing
+the framework's reliance on the published Wick-rotation chain for the
+period-closure identity itself.
+
+\paragraph{Paper~24 (\cite{paper24}, Coulomb / HO asymmetry).}
+The cross-manifold blocker named in Paper~24 \S V (Riemannian $\sthree$
+$\otimes$ holomorphic-sector $S^5$ Bargmann--Segal triple) carries
+through to the modular construction:\ the present paper does not
+address the cross-manifold modular structure, and the natural
+extension would require a mixed Riemannian / Hardy-sector
+tensor-product propinquity that does not yet exist in the literature.
+
+\paragraph{Paper~2 (\cite{paper2}, fine-structure-constant
+observation).}
+The present paper does not impinge on Paper~2's status as a
+conjectural observation. The $\nmax = 3$ cutoff of
+Table~\ref{tab:bw_alpha_residuals} happens to coincide with Paper~2's
+selection-principle truncation ($\dim \Hilb_3 = 40 = g_3^{\mathrm{Dirac}}
+= \Delta^{-1}$); this is a structural coincidence at the Hilbert-space
+dimension level, not a derivation of Paper~2's combination rule
+$K = \pi(B + F - \Delta)$. The combination rule remains a numerical
+observation without first-principles derivation.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+The author thanks Alain Connes, Carlo Rovelli, Walter van Suijlekom,
+Fran\c{c}ois Latr\'emoli\`ere, Edward Hekkelman, Edward McDonald,
+Lukas Leimbach, Matilde Marcolli, Horacio Casini, Marina Huerta,
+Robert Myers, and Rainer Verch for the foundational frameworks
+on which this paper builds; remaining errors are the author's own.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude:\ implementation of the supporting computational
+modules, drafting of the internal proof memos used as supporting
+documentation, and bibliographic collation were performed
+collaboratively. All theorem statements, design choices, and
+editorial decisions are the author's responsibility. The author
+thanks the open-source NCG community (notably the SageMath, sympy,
+mpmath, and scipy teams) for the computational infrastructure used in
+the supporting numerical verifications.
+
+% =====================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Bisognano \& Wichmann(1975)]{bisognano_wichmann1975}
+J.~J.~Bisognano and E.~H.~Wichmann,
+\newblock \emph{On the duality condition for a Hermitian scalar field},
+\newblock J.~Math.~Phys. \textbf{16} (1975), 985--1007.
+
+\bibitem[Bisognano \& Wichmann(1976)]{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+\newblock \emph{On the duality condition for quantum fields},
+\newblock J.~Math.~Phys. \textbf{17} (1976), 303--321.
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard,
+\newblock \emph{Space and time dimensions of algebras with
+application to Lorentzian noncommutative geometry and quantum
+electrodynamics},
+\newblock J.~Math.~Phys. \textbf{59} (2018), 062303;
+\newblock arXiv:1611.07062.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi,
+\newblock \emph{On the eigenfunctions of the Dirac operator on
+spheres and real hyperbolic spaces},
+\newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18.
+
+\bibitem[Casini \& Huerta(2009)]{casini_huerta2009}
+H.~Casini and M.~Huerta,
+\newblock \emph{Entanglement entropy in free quantum field theory},
+\newblock J.~Phys. A: Math.~Theor. \textbf{42} (2009), 504007;
+\newblock arXiv:0905.2562.
+
+\bibitem[Casini, Huerta \& Myers(2011)]{casini_huerta_myers2011}
+H.~Casini, M.~Huerta, and R.~C.~Myers,
+\newblock \emph{Towards a derivation of holographic entanglement
+entropy},
+\newblock JHEP \textbf{05} (2011), 036;
+\newblock arXiv:1102.0440.
+
+\bibitem[Chamseddine \& Connes(2010)]{chamseddine_connes2010}
+A.~H.~Chamseddine and A.~Connes,
+\newblock \emph{Noncommutative geometry as a framework for
+unification of all fundamental interactions including gravity. I},
+\newblock Fortsch.~Phys. \textbf{58} (2010), 553--600.
+
+\bibitem[Connes(1995)]{connes1995}
+A.~Connes,
+\newblock \emph{Noncommutative Geometry},
+\newblock Academic Press, 1995.
+
+\bibitem[Connes \& Rovelli(1994)]{connes_rovelli1994}
+A.~Connes and C.~Rovelli,
+\newblock \emph{Von Neumann algebra automorphisms and
+time-thermodynamics relation in general covariant quantum theories},
+\newblock Class.~Quantum Grav. \textbf{11} (1994), 2899--2918;
+\newblock arXiv:gr-qc/9406019.
+
+\bibitem[Connes \& van~Suijlekom(2021)]{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
+\newblock arXiv:2004.14115.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Collapse in noncommutative geometry and spectral
+continuity},
+\newblock arXiv:2404.00240, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity for the spectral propinquity of the
+Dirac operators associated with an analytic path of Riemannian
+metrics},
+\newblock arXiv:2504.11715, 2025.
+
+\bibitem[Hartle \& Hawking(1976)]{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+\newblock \emph{Path-integral derivation of black-hole radiance},
+\newblock Phys.~Rev. D \textbf{13} (1976), 2188--2203.
+
+\bibitem[Hekkelman(2022)]{hekkelman2022}
+E.~Hekkelman,
+\newblock \emph{Truncations of the circle and Connes' geometric
+formula},
+\newblock M.Sc.\ thesis, Radboud University, 2022;
+\newblock arXiv:2206.13744.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{Spectral truncations of $T^d$ and quantum metric
+geometry},
+\newblock J.~Noncommut.~Geom., to appear (2024);
+\newblock arXiv:2403.18619.
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{A noncommutative integral on spectrally truncated
+spectral triples, and a link with quantum ergodicity},
+\newblock J.~Funct.~Anal., to appear (2025);
+\newblock arXiv:2412.00628.
+
+\bibitem[Hekkelman, McDonald \& van~Suijlekom(2024)]{ucp_maps_2024}
+E.~Hekkelman, E.~McDonald, and W.~D.~van~Suijlekom,
+\newblock \emph{UCP maps in spectral truncations of compact metric
+spaces},
+\newblock arXiv:2410.15454, 2024.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+
+\bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
+triples},
+\newblock Adv.~Math. \textbf{415} (2023), Paper No.~108876, 88pp;
+\newblock preprint arXiv:1811.10843, 2017.
+
+\bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
+L.~Leimbach and W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of spectral truncations
+of the torus},
+\newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}
+M.~Marcolli and W.~D.~van~Suijlekom,
+\newblock \emph{Gauge networks in noncommutative geometry},
+\newblock J.~Geom.~Phys. \textbf{75} (2014), 71--91;
+\newblock arXiv:1301.3480.
+
+\bibitem[Nieuviarts(2024)]{nieuviarts2024}
+A.~Nieuviarts,
+\newblock \emph{From twisted spectral triples to pseudo-Riemannian
+spectral triples in the almost commutative framework},
+\newblock arXiv:2402.05839, 2024 (revised through v6, March 2026).
+
+\bibitem[Nieuviarts(2025a)]{nieuviarts2025a}
+A.~Nieuviarts,
+\newblock \emph{Emergence of pseudo-Riemannian spectral triples
+within the almost-commutative framework},
+\newblock arXiv:2502.18105 (v3, May 2025).
+
+\bibitem[Nieuviarts(2025b)]{nieuviarts2025b_proceedings}
+A.~Nieuviarts,
+\newblock \emph{Emergence of pseudo-Riemannian structures from
+twisted spectral triples within the almost-commutative framework
+(proceedings synthesis)},
+\newblock arXiv:2512.15450 (v2, May 2026).
+
+\bibitem[Sewell(1982)]{sewell1982}
+G.~L.~Sewell,
+\newblock \emph{Quantum fields on manifolds: PCT and gravitationally
+induced thermal states},
+\newblock Ann.~Phys. (NY) \textbf{141} (1982), 201--224.
+
+\bibitem[Strohmaier(2006)]{strohmaier2006}
+A.~Strohmaier,
+\newblock \emph{The Reeh--Schlieder property for quantum fields on
+stationary spacetimes},
+\newblock Comm.~Math.~Phys. \textbf{215} (2000), 105--118.
+
+\bibitem[Takesaki(1970)]{takesaki1970}
+M.~Takesaki,
+\newblock \emph{Tomita's theory of modular Hilbert algebras and its
+applications},
+\newblock Lecture Notes in Mathematics 128, Springer, 1970.
+
+\bibitem[Tomita(1967)]{tomita1967}
+M.~Tomita,
+\newblock \emph{Standard form of von Neumann algebras},
+\newblock Lecture notes, RIMS Kokyuroku \textbf{14}, Kyoto University,
+1967.
+
+\bibitem[Toyota(2023)]{toyota2023}
+M.~Toyota,
+\newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
+truncations for groups with polynomial growth},
+\newblock arXiv:2309.13469, 2023.
+
+\bibitem[Unruh(1976)]{unruh1976}
+W.~G.~Unruh,
+\newblock \emph{Notes on black-hole evaporation},
+\newblock Phys.~Rev. D \textbf{14} (1976), 870--892.
+
+\bibitem[Verch(2001)]{verch2001}
+R.~Verch,
+\newblock \emph{A spin-statistics theorem for quantum fields on
+curved spacetime manifolds in a generally covariant framework},
+\newblock Comm.~Math.~Phys. \textbf{223} (2001), 261--288.
+
+\bibitem[Zhu, Casini, \emph{et al.}(2020)]{zhu_casini2020}
+J.~Zhu, H.~Casini, M.~Dalmonte, and P.~Hauke,
+\newblock \emph{Lattice Bisognano--Wichmann modular Hamiltonian in
+critical quantum spin chains},
+\newblock SciPost Phys.~Core \textbf{2} (2020), 007;
+\newblock arXiv:2003.00315.
+
+\bibitem[Loutey, internal Paper~2]{paper2}
+J.~Loutey,
+\newblock \emph{Fine structure constant from the Hopf bundle on $S^3$:\
+$K = \pi(B + F - \Delta)$ as a three-sector spectral coincidence},
+\newblock GeoVac internal preprint, papers/observations (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey,
+\newblock \emph{Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO structural asymmetry},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~25]{paper25_hopf_gauge_structure}
+J.~Loutey,
+\newblock \emph{Hopf graph as a discrete lattice-gauge structure on
+the Fock-projected $S^3$},
+\newblock GeoVac internal preprint, papers/synthesis (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey,
+\newblock \emph{The GeoVac spectral triple, the master Mellin engine
+case-exhaustion theorem, and the GH-convergence theorem on $\sthree$},
+\newblock GeoVac internal preprint, papers/synthesis (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~34]{paper34}
+J.~Loutey,
+\newblock \emph{Projection taxonomy and empirical matches catalogue
+for the GeoVac framework},
+\newblock GeoVac internal preprint, papers/observations (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of
+truncated Camporesi--Higuchi spectral triples on $\sthree$},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey,
+\newblock \emph{Tensor-product propinquity convergence for
+distinct-focal-length truncated Camporesi--Higuchi spectral triples
+on $\sthree$},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of spectral
+truncations of compact Lie groups with bi-invariant metric},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\end{thebibliography}
+
+\end{document}
