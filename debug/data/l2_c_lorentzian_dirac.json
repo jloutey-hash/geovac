@@ -1,0 +1,890 @@
+{
+  "sprint": "L2-C",
+  "date": "2026-05-16",
+  "verdict": "CLOSED-WITH-STRUCTURAL-FINDING",
+  "description": "Lorentzian Dirac operator on S^3 x R via vdD 2016 Prop 4.1",
+  "construction": "D_L = i * (gamma^0 (x) d/dt + D_GV (x) I_{N_t})",
+  "panel": [
+    {
+      "n_max": 1,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 4,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 6.0,
+        "tol": 1e-12,
+        "alternative_commutator_pass": true,
+        "alternative_commutator_residual": 0.0
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 2.1954436475121754e-17,
+        "dim_K_plus": 2,
+        "n_eigvals": 2,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 1,
+      "N_t": 11,
+      "T_max": 1.0,
+      "dim_K": 44,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 19.8997487421324,
+        "tol": 1e-12,
+        "alternative_commutator_pass": false,
+        "alternative_commutator_residual": 44.721359549995796
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 2.1954436475121798e-17,
+        "dim_K_plus": 22,
+        "n_eigvals": 22,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 1,
+      "N_t": 21,
+      "T_max": 1.0,
+      "dim_K": 84,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 27.49545416973504,
+        "tol": 1e-12,
+        "alternative_commutator_pass": false,
+        "alternative_commutator_residual": 126.49110640673517
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 2.1954436475121798e-17,
+        "dim_K_plus": 42,
+        "n_eigvals": 42,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 2,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 16,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 18.33030277982336,
+        "tol": 1e-12,
+        "alternative_commutator_pass": true,
+        "alternative_commutator_residual": 0.0
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 2.1954436475121754e-17,
+        "dim_K_plus": 8,
+        "n_eigvals": 8,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 2,
+      "N_t": 11,
+      "T_max": 1.0,
+      "dim_K": 176,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 60.794736614282655,
+        "tol": 1e-12,
+        "alternative_commutator_pass": false,
+        "alternative_commutator_residual": 89.44271909999159
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 2.1954436475121798e-17,
+        "dim_K_plus": 88,
+        "n_eigvals": 88,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 2,
+      "N_t": 21,
+      "T_max": 1.0,
+      "dim_K": 336,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 84.0,
+        "tol": 1e-12,
+        "alternative_commutator_pass": false,
+        "alternative_commutator_residual": 252.98221281347034
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 0.0,
+        "dim_K_plus": 168,
+        "n_eigvals": 168,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 3,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 40,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 38.88444419044716,
+        "tol": 1e-12,
+        "alternative_commutator_pass": true,
+        "alternative_commutator_residual": 0.0
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 2.319909353946883e-17,
+        "dim_K_plus": 20,
+        "n_eigvals": 20,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 3,
+      "N_t": 11,
+      "T_max": 1.0,
+      "dim_K": 440,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 128.96511156122807,
+        "tol": 1e-12,
+        "alternative_commutator_pass": false,
+        "alternative_commutator_residual": 141.4213562373095
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 0.0,
+        "dim_K_plus": 220,
+        "n_eigvals": 220,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    },
+    {
+      "n_max": 3,
+      "N_t": 21,
+      "T_max": 1.0,
+      "dim_K": 840,
+      "FALS_1_krein_self_adjoint": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12
+      },
+      "FALS_2_chirality_anticommutation": {
+        "pass": false,
+        "residual": 178.19090885900997,
+        "tol": 1e-12,
+        "alternative_commutator_pass": false,
+        "alternative_commutator_residual": 400.0
+      },
+      "FALS_3_riemannian_limit": {
+        "pass": true,
+        "matrix_residual_a": 0.0,
+        "matrix_residual_b": 0.0,
+        "spectrum_residual_max": 0.0,
+        "LOAD_BEARING": true,
+        "tol": 1e-12
+      },
+      "FALS_4_real_spectrum_K_plus": {
+        "pass": true,
+        "max_imag_K_plus": 0.0,
+        "dim_K_plus": 420,
+        "n_eigvals": 420,
+        "tol": 1e-10
+      },
+      "all_load_bearing_pass": true
+    }
+  ],
+  "riemannian_limit_load_bearing": {
+    "n_max_1": {
+      "pass": true,
+      "matrix_residual_a": 0.0,
+      "matrix_residual_b": 0.0,
+      "spectrum_residual_max": 0.0,
+      "D_GV_spectrum_sample": [
+        -1.5,
+        1.5
+      ],
+      "D_L_abs_spectrum_sample": [
+        1.5
+      ],
+      "dim": 4
+    },
+    "n_max_2": {
+      "pass": true,
+      "matrix_residual_a": 0.0,
+      "matrix_residual_b": 0.0,
+      "spectrum_residual_max": 0.0,
+      "D_GV_spectrum_sample": [
+        -2.5,
+        -1.5,
+        1.5,
+        2.5
+      ],
+      "D_L_abs_spectrum_sample": [
+        1.5,
+        2.5
+      ],
+      "dim": 16
+    },
+    "n_max_3": {
+      "pass": true,
+      "matrix_residual_a": 0.0,
+      "matrix_residual_b": 0.0,
+      "spectrum_residual_max": 0.0,
+      "D_GV_spectrum_sample": [
+        -3.5,
+        -2.5,
+        -1.5,
+        1.5,
+        2.5,
+        3.5
+      ],
+      "D_L_abs_spectrum_sample": [
+        1.5,
+        2.5,
+        3.5
+      ],
+      "dim": 40
+    }
+  },
+  "spectrum_samples": {
+    "n_max_1_N_t_5": {
+      "dim_K": 20,
+      "eigenvalue_sample_first_20": [
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": -1.5
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": -1.5
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": 1.5
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": 1.5
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": -1.1180339887498931
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": -1.1180339887498931
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": 1.1180339887498931
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": 1.1180339887498931
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        }
+      ],
+      "eigenvalue_sample_last_20": [
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": -1.5
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": -1.5
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": 1.5
+        },
+        {
+          "real": 3.482062903860709e-18,
+          "imag": 1.5
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": -1.1180339887498931
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": -1.1180339887498931
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": 1.1180339887498931
+        },
+        {
+          "real": 1.1102230246251565e-16,
+          "imag": 1.1180339887498931
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        }
+      ],
+      "max_abs_imag_part_full_spectrum": 1.5
+    },
+    "n_max_2_N_t_5": {
+      "dim_K": 80,
+      "eigenvalue_sample_first_20": [
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -2.010585415740834e-16,
+          "imag": -2.291287847477919
+        },
+        {
+          "real": -2.010585415740834e-16,
+          "imag": -2.291287847477919
+        },
+        {
+          "real": -2.010585415740834e-16,
+          "imag": -2.291287847477919
+        },
+        {
+          "real": -2.010585415740834e-16,
+          "imag": -2.291287847477919
+        }
+      ],
+      "eigenvalue_sample_last_20": [
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        }
+      ],
+      "max_abs_imag_part_full_spectrum": 2.5000000000000004
+    },
+    "n_max_3_N_t_5": {
+      "dim_K": 200,
+      "eigenvalue_sample_first_20": [
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": -3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": -0.8660254037844387,
+          "imag": 3.469446951953614e-16
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": -1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -5.83253771144785e-16,
+          "imag": 1.8027756377319948
+        },
+        {
+          "real": -2.220446049250313e-16,
+          "imag": -3.04138126514911
+        },
+        {
+          "real": -2.220446049250313e-16,
+          "imag": -3.04138126514911
+        },
+        {
+          "real": -2.220446049250313e-16,
+          "imag": -3.04138126514911
+        },
+        {
+          "real": -2.220446049250313e-16,
+          "imag": -3.04138126514911
+        }
+      ],
+      "eigenvalue_sample_last_20": [
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": -1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 1.4708612695787915e-16,
+          "imag": 1.1180339887498945
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": -2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 2.220446049250313e-16,
+          "imag": 2.2912878474779177
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": -8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        },
+        {
+          "real": 0.8660254037844386,
+          "imag": 8.723424292821564e-17
+        }
+      ],
+      "max_abs_imag_part_full_spectrum": 3.5000000000000018
+    }
+  },
+  "structural_findings": {
+    "FALS_2_chirality_explanation": "D_GV is diagonal in chirality (FullDiracLabel.chirality field IS the gamma^5 eigenvalue per L2-B convention), so D_GV commutes with gamma^5. D_L = i*(gamma^0 ot d/dt + D_GV ot I) has the temporal piece anticommuting with gamma^5 (via {gamma^5, gamma^0}=0) and the spatial piece commuting (via [gamma^5, D_GV]=0). Therefore {gamma^5, D_L} = 2i (gamma^5 D_GV) ot I is NON-ZERO. At N_t=1, the temporal piece vanishes and [gamma^5, D_L]=0 EXACTLY. At general N_t, both commutator and anticommutator are nonzero. This is documented as a structural feature for Sprint L2-D BBB Connes audit, where the sign at (m, n)=(4, 6) per Table 1 is the appropriate test.",
+    "FALS_2_at_N_t_1_commutator_zero": {
+      "n_max_1_commutator_residual": 0.0,
+      "n_max_2_commutator_residual": 0.0,
+      "n_max_3_commutator_residual": 0.0
+    },
+    "FALS_2_anticommutator_at_N_t_1_proportional_to_D_GV": "||{gamma^5, D_L}|_F = 2 * ||gamma^5 * D_GV||_F at N_t=1, verified bit-exact."
+  },
+  "summary": {
+    "L2C_FALS_1_krein_self_adjoint": "PASS bit-exact at all 9 cells (residual=0.0)",
+    "L2C_FALS_2_chirality_anticommutation": "STRUCTURAL (non-zero by design; documented)",
+    "L2C_FALS_3_riemannian_limit_LOAD_BEARING": "PASS bit-exact at n_max in {1,2,3} (residual=0.0)",
+    "L2C_FALS_4_real_spectrum_K_plus": "PASS at machine precision (|imag| <= 2.3e-17)",
+    "all_load_bearing_pass": true
+  }
+}

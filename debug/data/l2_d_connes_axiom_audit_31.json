@@ -1,0 +1,693 @@
+{
+  "bbb_signs_at_4_6": {
+    "eps": 1,
+    "eps_pp": -1,
+    "kappa": -1,
+    "kappa_pp": 1,
+    "J_squared_sign": 1,
+    "J_chi_sign": -1,
+    "J_eta_sign": -1,
+    "eta_chi_sign": -1,
+    "J_D_sign": 1,
+    "chi_D_sign": -1,
+    "signature": "(s, t) = (3, 1) West-coast",
+    "mn": "(m, n) = (4, 6)",
+    "source": "BBB 2018 Table 1, arXiv:1611.07062 v2 p.3"
+  },
+  "bbb_signs_4_spinor_level_verification": {
+    "all_ok": true,
+    "residuals": {
+      "J_squared_residual": 0.0,
+      "J_chi_anticomm_residual": 0.0,
+      "J_eta_anticomm_residual": 0.0,
+      "eta_chi_anticomm_residual": 0.0
+    }
+  },
+  "axiom_audit_panel": {
+    "n_max=1,N_t=1": {
+      "n_max": 1,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 4,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 6.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": true,
+        "n_failures": 0,
+        "max_residual": 0.0,
+        "sample_size": 1,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": true,
+        "n_failures": 0,
+        "max_residual": 0.0,
+        "sample_size": 1,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=1,N_t=11": {
+      "n_max": 1,
+      "N_t": 11,
+      "T_max": 1.0,
+      "dim_K": 44,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 19.8997487421324,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": true,
+        "n_failures": 0,
+        "max_residual": 0.0,
+        "sample_size": 1,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": true,
+        "n_failures": 0,
+        "max_residual": 0.0,
+        "sample_size": 1,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=1,N_t=21": {
+      "n_max": 1,
+      "N_t": 21,
+      "T_max": 1.0,
+      "dim_K": 84,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 27.49545416973504,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": true,
+        "n_failures": 0,
+        "max_residual": 0.0,
+        "sample_size": 1,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": true,
+        "n_failures": 0,
+        "max_residual": 0.0,
+        "sample_size": 1,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=2,N_t=1": {
+      "n_max": 2,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 16,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 18.33030277982336,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": false,
+        "n_failures": 3,
+        "max_residual": 0.05066059182116888,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": false,
+        "n_failures": 4,
+        "max_residual": 0.10132118364233778,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=2,N_t=11": {
+      "n_max": 2,
+      "N_t": 11,
+      "T_max": 1.0,
+      "dim_K": 176,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 60.794736614282655,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": false,
+        "n_failures": 3,
+        "max_residual": 0.05066059182116888,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": false,
+        "n_failures": 4,
+        "max_residual": 0.10132118364233778,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=2,N_t=21": {
+      "n_max": 2,
+      "N_t": 21,
+      "T_max": 1.0,
+      "dim_K": 336,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 84.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": false,
+        "n_failures": 3,
+        "max_residual": 0.05066059182116888,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": false,
+        "n_failures": 4,
+        "max_residual": 0.10132118364233778,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=3,N_t=1": {
+      "n_max": 3,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 40,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 38.88444419044716,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": false,
+        "n_failures": 3,
+        "max_residual": 0.0675474557615585,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": false,
+        "n_failures": 4,
+        "max_residual": 0.10132118364233778,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=3,N_t=11": {
+      "n_max": 3,
+      "N_t": 11,
+      "T_max": 1.0,
+      "dim_K": 440,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 128.96511156122807,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": false,
+        "n_failures": 3,
+        "max_residual": 0.0675474557615585,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": false,
+        "n_failures": 4,
+        "max_residual": 0.10132118364233778,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    },
+    "n_max=3,N_t=21": {
+      "n_max": 3,
+      "N_t": 21,
+      "T_max": 1.0,
+      "dim_K": 840,
+      "(i)_J_L_squared_plus_I": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J^2 = +I (eps = +1 at (4, 6))",
+        "LOAD_BEARING": true
+      },
+      "(ii)_J_L_anticomm_chi": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, chi} = 0 (eps_pp = -1 at (4, 6))"
+      },
+      "(iii)_J_L_anticomm_eta": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "{J, eta} = 0 (eps*kappa = -1 at (4, 6))"
+      },
+      "(iv)_J_L_D_commutation": {
+        "pass": true,
+        "residual": 0.0,
+        "tol": 1e-12,
+        "BBB_prediction": "J D = + D J (universal Sec 5(v))"
+      },
+      "(v)_chi_D_anticomm": {
+        "pass": false,
+        "residual": 178.19090885900997,
+        "tol": 1e-12,
+        "BBB_prediction": "{chi, D} = 0 (universal Sec 5(v))",
+        "STRUCTURAL_FINDING": "Expected to fail on truthful D_GV: chirality-diagonal D_GV commutes with gamma^5 rather than anticommuting.  See module docstring for the load-bearing scope finding."
+      },
+      "(vi)_order_zero": {
+        "pass": false,
+        "n_failures": 3,
+        "max_residual": 0.0675474557615585,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "(vii)_order_one": {
+        "pass": false,
+        "n_failures": 4,
+        "max_residual": 0.10132118364233778,
+        "sample_size": 3,
+        "note": "Finite-resolution artifact per Paper 32 \u00a7IV; <= 20% uniform on truncated operator system is acceptable."
+      },
+      "all_load_bearing_pass": true,
+      "BBB_axioms_pass_count": 4,
+      "BBB_universal_axioms_pass_count": 1
+    }
+  },
+  "m3_trivialization_panel": {
+    "n_max=1": {
+      "n_max": 1,
+      "reading_A_n_fock_parity_riemannian": [
+        0.0,
+        0.7901234567901234,
+        -0.7901234567901234
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.0,
+        0.7901234567901234,
+        -0.7901234567901234
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.3950617283950617,
+        0.3950617283950617,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=2": {
+      "n_max": 2,
+      "reading_A_n_fock_parity_riemannian": [
+        0.3072,
+        0.7901234567901234,
+        -0.48292345679012344
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.3072,
+        0.7901234567901234,
+        -0.48292345679012344
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.5486617283950617,
+        0.5486617283950617,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=3": {
+      "n_max": 3,
+      "reading_A_n_fock_parity_riemannian": [
+        0.3072,
+        0.9500568178896653,
+        -0.6428568178896654
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.3072,
+        0.9500568178896653,
+        -0.6428568178896654
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.6286284089448326,
+        0.6286284089448326,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=4": {
+      "n_max": 4,
+      "reading_A_n_fock_parity_riemannian": [
+        0.40474610577655845,
+        0.9500568178896653,
+        -0.5453107121131069
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.40474610577655845,
+        0.9500568178896653,
+        -0.5453107121131069
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.6774014618331119,
+        0.6774014618331119,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=5": {
+      "n_max": 5,
+      "reading_A_n_fock_parity_riemannian": [
+        0.40474610577655845,
+        1.0156261096047121,
+        -0.6108800038281537
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.40474610577655845,
+        1.0156261096047121,
+        -0.6108800038281537
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.7101861076906353,
+        0.7101861076906353,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=6": {
+      "n_max": 6,
+      "reading_A_n_fock_parity_riemannian": [
+        0.4518032816457507,
+        1.0156261096047121,
+        -0.5638228279589614
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.4518032816457507,
+        1.0156261096047121,
+        -0.5638228279589614
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.7337146956252314,
+        0.7337146956252314,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=8": {
+      "n_max": 8,
+      "reading_A_n_fock_parity_riemannian": [
+        0.47938915825163425,
+        1.0510236404689097,
+        -0.5716344822172754
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.47938915825163425,
+        1.0510236404689097,
+        -0.5716344822172754
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.765206399360272,
+        0.765206399360272,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    },
+    "n_max=10": {
+      "n_max": 10,
+      "reading_A_n_fock_parity_riemannian": [
+        0.49748861269705563,
+        1.0731229184056965,
+        -0.5756343057086408
+      ],
+      "reading_A_n_fock_parity_lorentzian": [
+        0.49748861269705563,
+        1.0731229184056965,
+        -0.5756343057086408
+      ],
+      "reading_A_trivializes": false,
+      "reading_B_chirality_pairing": [
+        0.7853057655513761,
+        0.7853057655513761,
+        0.0
+      ],
+      "reading_B_trivializes": true,
+      "verdict": "M3 trivializes under Reading B (chirality-pairing) only.  Under Reading A (n_fock-parity, the Paper 28 \u00a7QED-vertex reading), M3 does NOT trivialize at signature (3, 1) on the chirality-symmetric truncation -- the Lorentzian D_even - D_odd equals the Riemannian one because parity is n_fock-based and chirality-independent.  The L0 prediction is therefore CONFIRMED under Reading B and FALSIFIED under Reading A.  This refines the master Mellin engine domain partition: M3's trivialization at (3, 1) is convention-dependent."
+    }
+  }
+}

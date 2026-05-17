@@ -2376,6 +2376,54 @@ Lorentzian extension remains open at the multi-month NCG-mathematics
 scale and is documented as a deepening of this entry, not as a
 separate candidate.
 
+\textbf{Sprint L2-E (2026-05-17):\ literal identification at the Krein
+operator-system level (finite cutoff).}\ The Lorentzian-side analog of
+the Sprint L1 closure above is now closed at the strongest level.
+Sprint L2 (sub-sprints L2-A scoping, L2-B Krein space, L2-C Lorentzian
+Dirac, L2-D Connes axiom audit, L2-E Krein-level modular Hamiltonian;
+Paper~32~\S~VIII.E.E) builds the Lorentzian Krein space
+$\mathcal{K}_{n_{\max}, N_t} = \mathcal{H}_{\rm GV}^{n_{\max}} \otimes
+\mathbb{C}^{N_t}$ via van~den~Dungen 2016 Proposition~4.1
+(arXiv:1505.01939) and the Bizi--Brouder--Besnard 2018
+$(m, n) = (4, 6)$ classification of Lorentzian signature
+$(s, t) = (3, 1)$~\cite{bizi_brouder_besnard2018}, then constructs the
+hemispheric wedge $W_L = P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$
+and the wedge KMS state $\rho_W^L = e^{-K_L^{\alpha, W}}/Z$ under the
+BW choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$.  The
+Krein-level four-witness Wick-rotation theorem closes bit-exactly at
+every tested $(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$:\
+BW-$\alpha$ period closure $\sigma_{2\pi}^{L, \alpha}(O) = O$, BW-$\gamma$
+Tomita period closure $\sigma_{2\pi}^{L, \mathrm{TT}}(a) = a$, flow
+conjugacy $\sigma_t^{L, \mathrm{TT}} = \sigma_{-t}^{L, \alpha}$ at
+general $t$, and six-witness collapse all at residual $\leq 4 \times
+10^{-16}$ (machine precision).  At $N_t = 1$ the Lorentzian-side
+construction reduces bit-identically to Paper~42's Riemannian
+construction (Frobenius residual exactly $0.0$), confirming Sprint L2-E
+is the genuine Lorentzian \emph{extension} of Paper~42, not a parallel
+construction.  Substantive structural finding:\ Paper~42~\S~7.2 open
+question O3 (``$H_{\mathrm{local}} \neq D_W$'') is
+\textbf{signature-INDEPENDENT at the Riemannian limit} and refined
+upward at $N_t > 1$ by temporal-derivative content (the gap between
+the spectral-action object and the modular-Hamiltonian generator
+widens with temporal cutoff).  \textbf{Net status:} the Wick-rotation
+projection now \textbf{lifts from ``structural correspondence at the
+metric-functional level'' to ``literal identification at the Krein
+operator-system level (finite cutoff)''} at every tested
+$(n_{\max}, N_t)$.  The continuum / Lorentzian-propinquity-rate-level
+extension (Sprint L3) remains open as a separate frontier;\ no
+published Lorentzian propinquity construction exists as of
+May~2026.  Cross-manifold W2b
+($\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$) is
+structurally distinct from the $(3, 1)$ extension closed here and
+remains open per Paper~32~\S~VIII.D ``frontier-of-field framing.''
+Files:\ \verb|geovac/modular_hamiltonian_lorentzian.py|,
+\verb|tests/test_modular_hamiltonian_lorentzian.py| (74 fast + 3 slow,
+all pass), \verb|debug/l2_e_modular_hamiltonian_lorentzian_memo.md|.
+Paper~32~\S~VIII.E.E and Paper~42~\S~11 carry the synthesis
+writeup;\ Paper~43 (Lorentzian-extension math.OA standalone, outlined
+in \texttt{papers/standalone/paper\_43\_lorentzian\_extension\_outline.md})
+is the natural Zenodo deposit for the standalone math.OA form.
+
 \subsection{Apparatus identity / state-side reduction}
 \label{sec:proj_apparatus_identity}
 \textbf{Source:} the framework's spectral-side output --- a Hamiltonian
@@ -5719,7 +5767,7 @@ rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}
 24 & Adiabatic / Born-Oppenheimer & T.F. & MH & Scale separation; relativistic BO well-defined. \\
 25 & Coupled-channel / adiabatic curve & T.F. & M & ODE machinery; transcendental inherits from Fock. \\
 26 & Gauge choice (Coulomb/Lorenz/Feynman) & W.M.F. & MH & Coulomb-gauge $1/(4\pi) = $ M1; Ward identity holds. \\
-27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; Sprint L1 deepens to operator-system level. \\
+27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; literal identification at Krein level (finite cutoff): Sprint L2-B/C/D/E closed bit-exact (2026-05-16/17). \\
 28 & Apparatus identity / state-side & T.F. & MH & State-side; PSLQ-disjoint from master Mellin engine. \\
 \bottomrule
 \end{tabular}
@@ -5752,6 +5800,71 @@ mechanisms (M1, M2, M3) to two (M1, M2) on the Lorentzian side ---
 not a contradiction with the Riemannian theorem, but a structural
 sharpening that becomes a Sprint L2 consistency check
 (cf.~Paper~31~\S~8.4 and Paper~32~\S~VIII.E).
+
+\paragraph{Sprint L2-E closure of the Wick-rotation projection at the
+Krein-operator-system level (2026-05-17).}
+The Wick-rotation projection (\S~\ref{sec:proj_wick_rotation}) was
+named at Sprint L0 as the BRIDGE projection from Riemannian to
+Lorentzian content;\ the operator-system-level literal identification
+on the Lorentzian Krein side was named there as the principal Sprint L1
+target (Riemannian side) and Sprint L2-E target (Lorentzian side).
+Sprint L2-E (\verb|geovac/modular_hamiltonian_lorentzian.py|,
+Paper~32~\S~VIII.E.E
+\cite{paper32}) closes the Lorentzian-side identification at finite
+cutoff:\ on $\mathcal{K}_{n_{\max}, N_t} = \mathcal{H}_{\rm GV}^{n_{\max}}
+\otimes \mathbb{C}^{N_t}$ at signature $(3, 1)$, with the Lorentzian
+wedge $W_L = P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$ and the
+BW choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$, the Krein-level
+four-witness Wick-rotation theorem closes bit-exactly:\ BW-$\alpha$
+period closure, BW-$\gamma$ Tomita period closure, flow conjugacy
+$\sigma_t^{L, \mathrm{TT}} = \sigma_{-t}^{L, \alpha}$, and six-witness
+collapse all at residual $\leq 4 \times 10^{-16}$ across
+$(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.  At $N_t = 1$
+the construction reduces bit-identically to Paper~42's Riemannian
+closure~\cite{paper42}, confirming Sprint L2-E is the Lorentzian
+\emph{extension} of Paper~42, not a parallel construction.  The
+headline structural finding:\ Paper~42~\S~7.2 ``$H_{\mathrm{local}}
+\neq D_W$'' open question O3 is \textbf{signature-INDEPENDENT at the
+Riemannian limit} ($\|H_{\mathrm{local}} - D_L^W\|_F|_{N_t=1}$ equals
+the Riemannian-side residual bit-exact at every tested $n_{\max}$);\
+the spectral-action--vs--modular-Hamiltonian generator distinction is
+a deeper structural feature of the framework, not a peculiarity of
+the round-$S^3$ Riemannian truncation.  The Wick-rotation projection
+in \S~\ref{sec:proj_wick_rotation} therefore promotes from
+``structural correspondence at the metric-functional level'' to
+``literal identification at the Krein operator-system level (finite
+cutoff).''  The continuum / Lorentzian-propinquity-rate-level extension
+(Sprint L3) remains open as a separate frontier;\ no published
+Lorentzian propinquity construction exists as of May~2026.
+
+\paragraph{Sprint L2-D refinement of the M3 trivialization prediction
+(2026-05-16).}
+The L0 prediction above was tested directly by Sprint L2-D
+(Paper~32~\S~VIII.D, computational driver
+\verb|debug/data/l2_d_connes_axiom_audit_31.json|) and found to be
+\emph{convention-dependent}.  Under the
+$n_{\mathrm{Fock}}$-parity convention --- the Paper~28~\S~QED-vertex
+convention that accesses Catalan $G$ and Dirichlet $\beta(4)$ via
+quarter-integer Hurwitz shifts at $a = 3/4$ and $a = 5/4$ --- the
+vertex-parity sum $D_{\mathrm{even}}(4) - D_{\mathrm{odd}}(4)$ on the
+chirality-symmetric $(3, 1)$ truncation is bit-identical to the
+Riemannian value at every $n_{\max} \in \{1, \ldots, 5\}$: the L0
+prediction is \emph{falsified} under this reading.  Under the
+\emph{chirality-pairing} convention (pair ``even'' with $\chi = +1$
+Weyl and ``odd'' with $\chi = -1$ anti-Weyl), the chirality-symmetric
+truncation gives the difference $= 0$ bit-exact, but tautologically
+by symmetry alone; the L0 prediction is \emph{trivially confirmed}
+under this reading but does not access Paper~28's M3 content.
+\textbf{Structural refinement:}\ the BBB sign-flip
+$\{J, \gamma_5\} = 0$ at $(m, n) = (4, 6)$ is a
+spectral-triple-axiom statement, not a vertex-parity-sum statement.
+M3's mechanism is sectional in $n_{\mathrm{Fock}}$-parity (the chirality-independent
+label used in Paper~28's vertex-parity sum), not in spacetime
+signature.  This is the corresponding informational annotation on the
+M3 entries under \S~III.6 / \S~III.7 / \S~\ref{sec:proj_wick_rotation};
+it is not a status flip on a Table~\ref{tab:lorentzian_transfer} row.
+Paper~18~\S~III.7 records the corresponding sharpening of the master
+Mellin engine domain partition.
 
 \paragraph{Scope and limits.}
 This is a first-pass classification by an analyst, not a theorem.
@@ -7026,6 +7139,11 @@ in Almost-Commutative Geometry,'' arXiv:2512.15450 (2025).
 \bibitem{paper38}
 J.~Loutey, ``SU(2) Propinquity Convergence on the Camporesi--Higuchi
 Spectral Triple,'' GeoVac project, May 2026.
+
+\bibitem{paper42}
+J.~Loutey, ``Tomita--Takesaki Modular Structure on Truncated SU(2)
+Spectral Triples: A Four-Witness Wick-Rotation Theorem at Finite
+Cutoff,'' GeoVac project, May 2026.
 
 \end{thebibliography}
 

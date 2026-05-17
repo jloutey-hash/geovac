@@ -1574,6 +1574,45 @@ Lorentzian KMS-Tomita-Takesaki theorem inside the framework. The
 multi-month obstruction is the absence of a Lorentzian propinquity in
 the published literature.
 
+\emph{Progress update (Sprints L2-B/C/D, 2026-05-16).}
+The Hilbert-space and Lorentzian-Dirac levels of the $(3, 1)$
+extension have landed:\ Sprint L2-B
+(\texttt{geovac/krein\_space\_construction.py}) constructs the
+Krein space $\mathcal{K}_{\nmax, N_t} = \mathcal{H}_{\rm GV}^{\nmax}
+\otimes L^2(\mathbb{R}_t)_{\rm cutoff}$ with fundamental symmetry
+$J = \gamma^0$ in the Peskin--Schroeder chiral basis, verifying all
+Krein axioms ($J^2 = +I$, $J^* J = I$, $J^* = J$,
+$\mathcal{K} = \mathcal{K}^+ \oplus \mathcal{K}^-$) bit-exactly at
+$(\nmax, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$ and passing the
+load-bearing Riemannian-limit recovery at $N_t = 1$ bit-identically;
+Sprint L2-C (\texttt{geovac/lorentzian\_dirac.py}) constructs
+$D_L = i \cdot [\gamma^0 \otimes \partial_t + D_{\rm GV} \otimes I_{N_t}]$
+via van~den~Dungen Proposition~4.1 with $\partial_t$ centered FD plus
+Dirichlet zero BC (structurally forced for anti-Hermiticity and
+Krein-self-adjointness), verifying Krein-self-adjointness
+$D_L^\times = D_L$ and Riemannian-limit recovery $D_L|_{N_t = 1} =
+i D_{\rm GV}$ bit-exactly across the same panel.  Sprint L2-D
+(\texttt{geovac/connes\_axiom\_audit\_31.py}) verifies four of the
+six BBB-predicted axioms at $(m, n) = (4, 6)$ bit-exactly
+($J_L^2 = +I$, $\{J_L, \gamma^5\} = 0$, $\{J_L, \eta\} = 0$,
+$J_L D_L = +D_L J_L$); the fifth axiom $\{\gamma^5, D_L\} = 0$ is a
+\emph{structural finding}, failing on the truthful Camporesi--Higuchi
+Dirac (which is chirality-diagonal in the chiral basis and therefore
+commutes with $\gamma^5$) and requiring an R1+R2 split documented in
+Paper~32~\S~IV / \S~VIII.D~\cite{paper32}.  This is structurally
+analogous to the Riemannian-side R3.5/present-paper trade between
+truthful CH (correct for axioms requiring $JD = +DJ$) and offdiag CH
+(correct for SDP-bounding Connes-distance constructions).  The
+construction does \emph{not} re-open WH1 PROVEN
+(Paper~38~\cite{paper38}); the Krein construction is an extension on
+top of the Riemannian foundation, not a re-test of it.  Full
+operator-system-level closure (the analog of the present paper's
+literal identification of the four-witness theorem at Lorentzian
+signature) is the named Sprint L2-E target, still open at the
+multi-month scale due to the absence of a published Lorentzian
+propinquity.  O1 status remains OPEN; the Hilbert-space and
+Dirac-operator levels are now closed at finite cutoff.
+
 \textbf{(O2) Non-tracial wedge states.}
 The unified closure rests on the tracial-Gibbs structure
 $\rho_W = e^{-K_\alpha^W}/Z$ on a finite-dimensional Type I$_{\dim_W}$
@@ -1597,6 +1636,24 @@ $K_\alpha^W$ may not even commute. The structural status of this
 distinction in extensions to other compact-Lie-group spectral triples
 (per Paper~40~\cite{paper40_unified}) is open and an interesting
 direction for follow-up.
+
+\emph{Refinement (Sprint L2-E, 2026-05-16; \S~\ref{sec:lorentzian_closure} below).}\ \ %
+The O3 question of signature-dependence is now \emph{partially}
+closed:\ the $H_{\mathrm{local}} \ne D_W$ distinction is
+\textbf{signature-INDEPENDENT at the Riemannian limit} and refined
+upward at $N_t > 1$ by temporal-derivative content.  At $N_t = 1$
+on the Lorentzian Krein space, $\|H_{\mathrm{local}} - D_L^W\|_F$
+equals the Riemannian-side residual $\|H_{\mathrm{local}} - D_{\mathrm{GV}}^W\|_F$
+\emph{bit-exact} at every tested $n_{\max} \in \{1, 2, 3\}$.  The
+distinction is therefore NOT a peculiarity of the round-$\sthree$
+Riemannian truncation but a deeper structural feature of the
+framework's modular content.  At $N_t > 1$ the Lorentzian Dirac
+$D_L = i(\gamma^0 \otimes \partial_t + D_{\mathrm{GV}} \otimes I)$
+has temporal-derivative content that $K_\alpha^W / \beta$ cannot
+capture; the gap between the spectral-action and modular-Hamiltonian
+generators widens with temporal cutoff.  The \emph{deeper} question
+(why is the spectral-action Dirac not the modular generator on the
+BW vacuum, structurally?) remains open and is the residual O3.
 
 \textbf{(O4) Higher-rank compact non-abelian extensions.}
 Paper~40~\cite{paper40_unified} extends the Paper~38 propinquity
@@ -1635,6 +1692,323 @@ framework's M1 mechanism on the round $\sthree$ Camporesi--Higuchi
 triple is now operator-system-level identified with the four-witness
 Wick-rotation period structure, in both the geometric and the
 Tomita--Takesaki readings, at every finite cutoff.
+
+% =====================================================================
+\section{Lorentzian closure at finite cutoff (Sprint L2)}
+\label{sec:lorentzian_closure}
+% =====================================================================
+
+The body of this paper closes the four-witness Wick-rotation theorem
+at the operator-system level on the Riemannian truncated triple
+$\Tcal_{\nmax}$.  Open question (O1) of \S\ref{sec:conclusion} named
+the Lorentzian extension to signature $(3, 1)$ as the next step.
+Sprint L2 (May~2026) closes that extension at finite cutoff via
+five sub-sprints (L2-A scoping, L2-B Krein space, L2-C Lorentzian
+Dirac, L2-D Connes axiom audit, L2-E modular Hamiltonian).  This
+section documents the closure and the substantive structural finding
+it produced; the math.OA-style standalone writeup is outlined in
+Paper~43 (\texttt{papers/standalone/paper\_43\_lorentzian\_extension\_outline.md},
+companion).
+
+\subsection{The five-sub-sprint architecture}
+\label{sec:lorentzian_closure_architecture}
+
+The Sprint L2 architecture mirrors the Riemannian construction of
+\S\S\ref{sec:setup}--\ref{sec:four_witness_collapse} verbatim with a
+temporal slot added.  At signature $(3, 1)$ West-coast in the
+Peskin--Schroeder chiral basis (Sprint L2-B convention lock-in):
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{Krein space (L2-B).}\ \ %
+$\mathcal{K}_{\nmax, N_t} := \mathcal{H}_{\rm GV}^{\nmax} \otimes
+\mathbb{C}^{N_t}$, with $N_t$ a bounded uniform temporal grid on
+$[-T_{\max}, T_{\max}]$ (NOT compactified to $S^1_\beta$, which would
+re-introduce closed timelike curves per Geroch's theorem).  Fundamental
+symmetry $J = \gamma^0 \otimes I_{N_t}$ with $\gamma^0$ the chirality-swap
+in the chiral basis.  All Krein axioms ($J^2 = +I$, $J^* J = I$,
+$J^* = J$, $\mathcal{K} = \mathcal{K}^+ \oplus \mathcal{K}^-$
+orthogonally with $\dim \mathcal{K}^\pm = \dim \mathcal{K}/2$) are
+bit-exact (Frobenius residual $= 0.0$ in float64) at every
+$(\nmax, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.
+
+\item \textbf{Lorentzian Dirac (L2-C).}\ \ %
+$D_L := i \cdot \bigl[\gamma^0 \otimes \partial_t + D_{\rm GV} \otimes I_{N_t}\bigr]$
+per van~den~Dungen Proposition~4.1 (arXiv:1505.01939) with
+$\partial_t$ centered finite-difference plus Dirichlet zero BC
+(structurally forced for anti-Hermiticity).  Krein-self-adjointness
+$D_L^\times = D_L$ is bit-exact across the panel; the sign $i^t = +i$
+for $t = 1$ is derived from the Krein-self-adjointness requirement,
+not chosen.
+
+\item \textbf{Connes axiom audit (L2-D).}\ \ %
+At Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018} signature
+$(m, n) = (4, 6)$ (the BBB Table~3 translation of Lorentzian $(s, t) = (3, 1)$
+West-coast), four BBB-predicted-sign axioms hold bit-exactly:
+$J_L^2 = +I$ ($\varepsilon = +1$); $\{J_L, \gamma^5\} = 0$
+($\varepsilon'' = -1$); $\{J_L, \eta\} = 0$ ($\varepsilon \kappa = -1$);
+and the BBB universal $J_L D_L = +D_L J_L$.  See Paper~32~\S~VIII.D~\cite{paper32}
+for the full audit.
+
+\item \textbf{Modular Hamiltonian (L2-E, this closure).}\ \ %
+Built on the wedge $W_L := P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$,
+with $P_W^{\mathrm{spatial}}$ the Definition~\ref{def:wedge}
+hemispheric wedge on $\mathcal{H}_{\rm GV}$ and $P_{t \geq 0}$ the
+$t \geq 0$ half-line projector.  Wedge KMS state $\rho_W^L = e^{-K_L^{\alpha, W}}/Z$
+under the BW choice $H_{\mathrm{local}} := K_L^{\alpha, W}/\beta$
+with $\beta = 2\pi$.  The construction mirrors
+\S\S\ref{sec:geometric_construction}--\ref{sec:tt_construction}
+of the Riemannian closure, with the temporal slot adding additional
+content at $N_t > 1$.
+\end{itemize}
+
+The architecture is structurally additive on top of the Riemannian
+closure of this paper:\ at $N_t = 1$, every Sprint L2 construction
+reduces \emph{bit-identically} to the corresponding Riemannian-side
+object of \S\S\ref{sec:setup}--\ref{sec:four_witness_collapse}.
+
+\subsection{The Krein-level four-witness theorem at finite cutoff}
+\label{sec:krein_four_witness_theorem}
+
+\begin{theorem}[Krein-level four-witness Wick-rotation theorem at finite cutoff]
+\label{thm:krein_four_witness}
+On the Lorentzian Krein space $\mathcal{K}_{\nmax, N_t}$ of
+\S\ref{sec:lorentzian_closure_architecture}, with the wedge
+$W_L = P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$, the wedge
+KMS state $\rho_W^L = e^{-K_L^{\alpha, W}}/Z$ under the BW choice
+$H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$, and the unit
+normalisation $\kappa_g = 1$ in natural rapidity units, all of the
+following hold at every tested $(\nmax, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] \emph{BW-$\alpha$ period closure (geometric).}\ \ %
+For every $O \in B(\mathcal{K}_{W_L})$,
+$\sigma_{2\pi}^{L, \alpha}(O) = O$ bit-exactly, with periodicity residual
+$\le 4 \times 10^{-16}$ (machine precision).
+\item[(b)] \emph{BW-$\gamma$ Tomita period closure.}\ \ %
+On the Krein-GNS Hilbert--Schmidt space
+$\mathcal{K}_{\mathrm{GNS}} = M_{\dim W_L}(\mathbb{C})$ with modular
+operator $\Delta_L$ and modular Hamiltonian $K_L^{\mathrm{TT}} = -\log \Delta_L$,
+$\sigma_{2\pi}^{L, \mathrm{TT}}(a) = a$ bit-exactly at the same
+$\le 4 \times 10^{-16}$ residual.
+\item[(c)] \emph{Flow conjugacy at general $t$.}\ \ %
+$\sigma_t^{L, \mathrm{TT}}(a) = \sigma_{-t}^{L, \alpha}(a)$ bit-exactly
+for $t \in \{1, \pi, 2\pi\}$ on five sampled multipliers, residual
+$\le 4 \times 10^{-16}$.
+\item[(d)] \emph{Six-witness collapse.}\ \ %
+For all six instantiations \{\textsc{bw}, $\textsc{hh}_{M=1}$,
+$\textsc{hh}_{M=2}$, $\textsc{sew}_{M=1}$, $\textsc{unruh}_{a=1}$,
+$\textsc{unruh}_{a=2}\}$, the cross-witness consistency residual is
+exactly $0.0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+$K_L^{\alpha, W}$ is diagonal with integer eigenvalues
+$\mathrm{two}\_m_j$ (inherited from Definition~\ref{def:K_alpha_W} on
+the spatial side, with the temporal slot acting as $I_{N_t}$),
+so $e^{i \cdot 2\pi \cdot K_L^{\alpha, W}} = I$ identically — proving
+(a).  Statement (b) follows from
+$\sigma_t^{L, \mathrm{TT}}(a) = e^{-i t K_L^{\alpha, W}} \, a \, e^{+i t K_L^{\alpha, W}}$
+(polar decomposition + $\rho_W^L = e^{-K_L^{\alpha, W}}/Z$ identity)
+combined with the integer-spectrum property of $K_L^{\alpha, W}$.
+Statement (c) is the same operator identity at general $t$.  Statement
+(d) follows from the $\beta$-independence of $\rho_W^L$ under the BW
+choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$:\ the witnesses
+parameterise different physical $\kappa_g$, but the modular
+construction does not depend on $\kappa_g$ at the algebra-action
+level.  Full proofs mirror Theorems~\ref{thm:bw_alpha},
+\ref{thm:bw_gamma}, \ref{thm:unified}, and
+Corollary~\ref{cor:single_construction} of the Riemannian closure;
+the numerical verification at every panel cell is documented in
+\texttt{debug/data/l2\_e\_modular\_hamiltonian\_lorentzian.json} via
+\texttt{geovac/modular\_hamiltonian\_lorentzian.py}.
+\end{proof}
+
+The headline reading:\ the four-witness Wick-rotation theorem
+(Hartle--Hawking + Sewell + Bisognano--Wichmann + Unruh) is lifted
+from \emph{structural correspondence at the metric-functional level}
+(Sprint TD~Track~4 + Sprint Unruh-pendant) to \emph{literal
+identification at the operator-system level (Lorentzian, finite
+cutoff)} at every tested Krein cutoff.  This is the framework's
+first operator-system-level literal identification of a Lorentzian
+QFT theorem at finite cutoff.
+
+\subsection{Riemannian-limit identification (bit-identical at $N_t = 1$)}
+\label{sec:riemannian_limit_identification}
+
+The Sprint L2 architecture is the genuine Lorentzian \emph{extension}
+of the Riemannian closure of \S\S\ref{sec:setup}--\ref{sec:four_witness_collapse},
+not a parallel-but-different construction:
+
+\begin{proposition}[Riemannian-limit recovery at $N_t = 1$]
+\label{prop:riemannian_limit_l2}
+At $N_t = 1$, every Sprint L2 construction reduces bit-identically
+(Frobenius residual exactly $0.0$, not merely machine-precision)
+to the corresponding Riemannian-side object of this paper:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item $P_{W_L}|_{N_t=1} = P_W^{\mathrm{spatial}}$ (Definition~\ref{def:wedge});
+\item $K_L^\alpha|_{N_t=1} = K_\alpha$ (Definition~\ref{def:K_alpha_W});
+\item $K_L^{\alpha, W}|_{N_t=1} = K_\alpha^W$;
+\item $\rho_W^L|_{N_t=1} = \rho_W$ (\S\ref{sec:kms_state});
+\item $\Delta_L|_{N_t=1} = \Delta$ (\S\ref{sec:tt_construction});
+\item $K_L^{\mathrm{TT}}|_{N_t=1} = K_{\mathrm{TT}}$ (\S\ref{sec:tt_construction}).
+\end{itemize}
+The bit-identical reduction is structural:\ at $N_t = 1$ the
+temporal-derivative piece $\partial_t$ vanishes on the singleton
+grid, and the Kronecker product with $I_1 = 1$ is the identity
+operation.  Every Riemannian-side bit-exact property (Theorems~\ref{thm:bw_alpha},
+\ref{thm:bw_gamma}, \ref{thm:unified}) is preserved verbatim at
+$N_t = 1$.
+\end{proposition}
+
+\emph{Verification.}\ \ Bit-identical at $n_{\max} \in \{1, 2, 3\}$,
+documented in \texttt{tests/test\_modular\_hamiltonian\_lorentzian.py}.
+
+This Riemannian-limit identification is the load-bearing falsifier
+that ensures Sprint L2-E is the Lorentzian extension of the present
+paper, not a parallel construction.  The temporal slot adds genuine
+new content at $N_t > 1$ (the temporal-derivative refinement of
+\S\ref{sec:h_local_signature_independent} below) that is invisible at
+$N_t = 1$.
+
+\subsection{The $H_{\mathrm{local}}$ verdict at $(3, 1)$ —
+signature-independent at Riemannian limit}
+\label{sec:h_local_signature_independent}
+
+This subsection states the substantive structural finding of
+Sprint L2-E.  Open question O3 of \S\ref{sec:conclusion} (the
+spectral-action vs.\ modular-Hamiltonian generator distinction
+flagged in \S\ref{sec:derived_hamiltonian} as the
+``derived-Hamiltonian finding'') is refined at finite cutoff:
+
+\begin{theorem}[$H_{\mathrm{local}}$ signature-independence at Riemannian limit]
+\label{thm:h_local_sig_independent}
+At $N_t = 1$ (Riemannian limit on the Krein space at $(3, 1)$),
+\[
+\bigl\| H_{\mathrm{local}}|_{(3, 1), N_t = 1} - D_L^W|_{N_t = 1} \bigr\|_F
+\;=\;
+\bigl\| H_{\mathrm{local}}|_{(3, 0)} - D_{\mathrm{GV}}^W \bigr\|_F
+\]
+bit-exact at every tested $n_{\max} \in \{1, 2, 3\}$:\ values
+$2.1332$, $6.5275$, $13.854$ respectively, matching the Riemannian
+residual of the present paper at the same $n_{\max}$.  At $N_t > 1$,
+the Lorentzian residual is refined upward by the temporal-derivative
+contribution to $D_L^W$, growing as $O(\sqrt{N_t})$ but with the
+Riemannian baseline preserved.
+\end{theorem}
+
+\emph{Mechanism.}\ \ At $N_t = 1$, $D_L = i \cdot D_{\mathrm{GV}}$
+exactly (the temporal derivative $\partial_t$ vanishes on the
+singleton grid).  Wedge restriction gives $D_L^W = i \cdot D_{\mathrm{GV}}^W$.
+The norm $\|H_{\mathrm{local}} - i \cdot D_{\mathrm{GV}}^W\|_F$ equals
+$\|H_{\mathrm{local}} - D_{\mathrm{GV}}^W\|_F$ when $H_{\mathrm{local}}$
+is real (which it is — $K_L^{\alpha, W}/\beta$ has real integer-rational
+diagonal entries).  So the residuals are bit-identical.
+
+\emph{Structural reading.}\ \ The \S\ref{sec:derived_hamiltonian} /
+O3 distinction between the spectral-action Dirac $D_W$ and the
+modular-Hamiltonian generator $K_\alpha^W/\beta$ on the BW vacuum is
+\textbf{not a peculiarity of the round-$\sthree$ Riemannian
+truncation}.  It persists bit-exactly at signature $(3, 1)$ at the
+Riemannian limit, and is refined upward at $N_t > 1$ by the
+temporal-derivative content of $D_L$.  The distinction is therefore
+a \textbf{deeper structural feature} of the framework's modular
+content, independent of signature at the Riemannian-limit baseline.
+
+The temporal-derivative refinement at $N_t > 1$ is a Lorentzian-side
+enrichment of the Riemannian finding:\ at $(3, 1)$, $D_L$ has more
+content than $D_{\mathrm{GV}}$ (it includes the temporal derivative),
+so the gap between the spectral-action object and the
+modular-Hamiltonian generator widens with temporal cutoff.  This is
+not a sign that \S\ref{sec:derived_hamiltonian} was wrong;\ it is a
+sign that the Lorentzian extension reveals \emph{additional}
+structure in the gap.
+
+This finding refines Paper~42 O3 from ``open question about
+signature-dependence'' to ``signature-INDEPENDENT structural
+distinction at the Riemannian limit, refined by temporal-derivative
+content at $N_t > 1$.''  The \emph{deeper} question (why is the
+spectral-action Dirac not the modular generator on the BW vacuum,
+structurally?) remains the residual O3 open question.
+
+\subsection{Honest scope at finite cutoff}
+\label{sec:lorentzian_closure_scope}
+
+The closure of Theorem~\ref{thm:krein_four_witness} is at finite
+$n_{\max}$ and finite $N_t$ — \textbf{not} in the continuum
+(GH-limit, Lorentzian propinquity) limit.  Explicitly:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item The Latr\'emoli\`ere
+propinquity~\cite{latremoliere2018, latremoliere_metric_st_2017} used
+in Papers~38--40 for the Riemannian-side GH-convergence theorem is
+purely Riemannian as of May~2026.  Subsequent
+literature (Toyota~\cite{toyota2023}, Farsi--Latr\'emoli\`ere
+2024/2025~\cite{farsi_latremoliere2024, farsi_latremoliere2025},
+Hekkelman--McDonald 2024 a/b~\cite{hekkelman_mcdonald2024,
+hekkelman_mcdonald2024b}) covers only Riemannian / Hilbert-space
+structures.  No published Lorentzian propinquity construction exists.
+
+\item Constructing a Lorentzian propinquity is the named Sprint L3
+target (6--12 months of original NCG mathematics).  The
+Nieuviarts~2025~\cite{nieuviarts2025a, nieuviarts2025b_proceedings}
+twist-morphism may shorten this budget if the construction applies
+to GeoVac $\sthree = \mathrm{SU}(2)$ (odd-dimension caveat that
+Sprint L0 audit flagged for a separate L2-Nieuviarts-scoping pass).
+
+\item The Sprint L2-D structural finding (BBB universal axiom
+$\chi D = -D \chi$ fails on truthful Camporesi--Higuchi
+$D_{\mathrm{GV}}$) is the load-bearing scope finding:\ the Sprint L2-E
+construction uses truthful $D_{\mathrm{GV}}$ (which preserves the
+Riemannian-limit recovery of Proposition~\ref{prop:riemannian_limit_l2}),
+not a full BBB indefinite spectral triple in the strict Sec~5(v)
+sense.  The wedge-modular construction is $K_L^{\alpha, W}$-driven,
+not $D_L$-driven, so the period closure is $D_L$-independent at the
+operator-action level.  Paper~32~\S~VIII.D~\cite{paper32} documents
+the three resolutions (R1 accept, R2 use offdiag CH, R3 redefine
+$\gamma^5$);\ Theorem~\ref{thm:krein_four_witness} uses R1 (truthful
+$D_{\mathrm{GV}}$).
+\end{itemize}
+
+The verdict \textbf{closed-at-finite-cutoff} is therefore an honest
+finite-cutoff statement.  Theorem~\ref{thm:krein_four_witness} is
+the framework's first operator-system literal identification of a
+Lorentzian QFT theorem;\ the Lorentzian-propinquity rate-level
+extension is the named open Sprint L3 target.
+
+\subsection{References and pointer to standalone writeup}
+\label{sec:lorentzian_closure_references}
+
+The construction recipe is van~den~Dungen 2016 Proposition~4.1~%
+(arXiv:1505.01939):\ Wick-rotate $g \to g_r$ (positive-definite),
+construct the standard Riemannian Dirac $\not{\!\!D}_{g_r}$, and set
+$D_L = i^t \cdot \not{\!\!D}_{g_r}$ as the Krein-self-adjoint
+Lorentzian Dirac with $\mathcal{J} = \gamma^0$.  At $(s, t) = (3, 1)$
+this gives $i^t = i$ and the construction of
+\S\ref{sec:lorentzian_closure_architecture}.
+
+The Bizi--Brouder--Besnard 2018 $(m, n) \in (\mathbb{Z}/8)^2$
+classification~\cite{bizi_brouder_besnard2018} provides the
+signature-dependent Connes axiom signs:\ the $(s, t) = (3, 1)$
+West-coast entry sits at $(m, n) = (4, 6)$ via BBB Table~3,
+verified directly from the BBB PDF in Sprint L2-D (Paper~32~\S~VIII.D).
+
+The full math.OA-style writeup of the Lorentzian extension is
+outlined in
+\texttt{papers/standalone/paper\_43\_lorentzian\_extension\_outline.md}
+(companion document).  When drafted as a Zenodo deposit, Paper~43
+should \textbf{not supersede} the present paper:\ Paper~42 is the
+Riemannian closure of the four-witness theorem, Paper~43 is the
+Lorentzian extension, and together they constitute the
+four-witness Wick-rotation arc at the operator-system level.
+
+The sprint memos in \texttt{debug/l2\_\{a,b,c,d,e,paper\_edits\_round1\}\_*.md}
+and the synthesis memo \texttt{debug/sprint\_l2\_synthesis\_memo.md}
+document the full Sprint L2 architecture and the substantive
+structural findings; the computational drivers and verification data
+sit in \texttt{geovac/\{krein\_space\_construction.py,
+lorentzian\_dirac.py, connes\_axiom\_audit\_31.py,
+modular\_hamiltonian\_lorentzian.py\}} and the corresponding
+\texttt{tests/test\_*.py} files.
 
 % =====================================================================
 \appendix

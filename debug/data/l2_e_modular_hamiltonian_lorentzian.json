@@ -1,0 +1,220 @@
+{
+  "sprint": "L2-E",
+  "date": "2026-05-16",
+  "description": "Sprint L2-E: Krein-level Paper 42 redo. Four LOAD-BEARING falsifiers + H_local verdict at (3, 1) + six-witness collapse.",
+  "panel": [
+    {
+      "n_max": 1,
+      "N_t": 1
+    },
+    {
+      "n_max": 1,
+      "N_t": 11
+    },
+    {
+      "n_max": 1,
+      "N_t": 21
+    },
+    {
+      "n_max": 2,
+      "N_t": 1
+    },
+    {
+      "n_max": 2,
+      "N_t": 11
+    },
+    {
+      "n_max": 3,
+      "N_t": 1
+    },
+    {
+      "n_max": 2,
+      "N_t": 21
+    }
+  ],
+  "per_cell": [
+    {
+      "n_max": 1,
+      "N_t": 1,
+      "dim_K": 4,
+      "dim_W_L": 2,
+      "beta": 6.283185307179586,
+      "kappa_g": 1.0,
+      "L2E_FALS_1_alpha_max_residual": 3.1269937858992314e-32,
+      "L2E_FALS_2_TT_max_residual": 1.7554167342883506e-16,
+      "L2E_FALS_3_conjugacy_max_residual": 1.7937323981582465e-16,
+      "witness_verdict": "STRONG_IDENTIFICATION_LORENTZIAN",
+      "rie_limit_ok": true,
+      "rie_limit_k_alpha_W_residual": 0.0,
+      "rie_limit_k_tomita_residual": 0.0,
+      "h_local_verdict": "ii",
+      "h_local_residual_full": 2.133227740261496,
+      "h_local_residual_full_normalized": 1.5084198009541587,
+      "h_local_residual_RIE_baseline": 2.133227740261496,
+      "h_local_residual_RIE_normalized": 1.5084198009541587,
+      "h_local_lorentzian_eq_riemannian_baseline": true,
+      "six_witness_collapse_ok": true,
+      "max_alpha_cross_consistency": 0.0,
+      "max_TT_cross_consistency": 0.0
+    },
+    {
+      "n_max": 1,
+      "N_t": 11,
+      "dim_K": 44,
+      "dim_W_L": 12,
+      "beta": 6.283185307179586,
+      "kappa_g": 1.0,
+      "L2E_FALS_1_alpha_max_residual": 7.659539204306905e-32,
+      "L2E_FALS_2_TT_max_residual": 2.3524833085479988e-17,
+      "L2E_FALS_3_conjugacy_max_residual": 4.269178432792904e-17,
+      "witness_verdict": "STRONG_IDENTIFICATION_LORENTZIAN",
+      "rie_limit_ok": true,
+      "rie_limit_k_alpha_W_residual": 0.0,
+      "rie_limit_k_tomita_residual": 0.0,
+      "h_local_verdict": "iii",
+      "h_local_residual_full": 12.341149198957405,
+      "h_local_residual_full_normalized": 3.5625829060636964,
+      "h_local_residual_RIE_baseline": 2.133227740261496,
+      "h_local_residual_RIE_normalized": 1.5084198009541587,
+      "h_local_lorentzian_eq_riemannian_baseline": false,
+      "six_witness_collapse_ok": true,
+      "max_alpha_cross_consistency": 0.0,
+      "max_TT_cross_consistency": 0.0
+    },
+    {
+      "n_max": 1,
+      "N_t": 21,
+      "dim_K": 84,
+      "dim_W_L": 22,
+      "beta": 6.283185307179586,
+      "kappa_g": 1.0,
+      "L2E_FALS_1_alpha_max_residual": 1.0371065109600675e-31,
+      "L2E_FALS_2_TT_max_residual": 3.2962413349296433e-16,
+      "L2E_FALS_3_conjugacy_max_residual": 5.211959084148531e-16,
+      "witness_verdict": "STRONG_IDENTIFICATION_LORENTZIAN",
+      "rie_limit_ok": true,
+      "rie_limit_k_alpha_W_residual": 0.0,
+      "rie_limit_k_tomita_residual": 0.0,
+      "h_local_verdict": "iii",
+      "h_local_residual_full": 32.40458712142515,
+      "h_local_residual_full_normalized": 6.90868118749563,
+      "h_local_residual_RIE_baseline": 2.133227740261496,
+      "h_local_residual_RIE_normalized": 1.5084198009541587,
+      "h_local_lorentzian_eq_riemannian_baseline": false,
+      "six_witness_collapse_ok": true,
+      "max_alpha_cross_consistency": 0.0,
+      "max_TT_cross_consistency": 0.0
+    },
+    {
+      "n_max": 2,
+      "N_t": 1,
+      "dim_K": 16,
+      "dim_W_L": 8,
+      "beta": 6.283185307179586,
+      "kappa_g": 1.0,
+      "L2E_FALS_1_alpha_max_residual": 1.102569494801936e-16,
+      "L2E_FALS_2_TT_max_residual": 1.0870925337539258e-16,
+      "L2E_FALS_3_conjugacy_max_residual": 5.58546529209053e-17,
+      "witness_verdict": "STRONG_IDENTIFICATION_LORENTZIAN",
+      "rie_limit_ok": true,
+      "rie_limit_k_alpha_W_residual": 0.0,
+      "rie_limit_k_tomita_residual": 0.0,
+      "h_local_verdict": "ii",
+      "h_local_residual_full": 6.527474787531087,
+      "h_local_residual_full_normalized": 2.307810843143725,
+      "h_local_residual_RIE_baseline": 6.527474787531087,
+      "h_local_residual_RIE_normalized": 2.307810843143725,
+      "h_local_lorentzian_eq_riemannian_baseline": true,
+      "six_witness_collapse_ok": true,
+      "max_alpha_cross_consistency": 0.0,
+      "max_TT_cross_consistency": 0.0
+    },
+    {
+      "n_max": 2,
+      "N_t": 11,
+      "dim_K": 176,
+      "dim_W_L": 48,
+      "beta": 6.283185307179586,
+      "kappa_g": 1.0,
+      "L2E_FALS_1_alpha_max_residual": 2.700732668222973e-16,
+      "L2E_FALS_2_TT_max_residual": 2.3024452185602794e-16,
+      "L2E_FALS_3_conjugacy_max_residual": 2.73468283373785e-16,
+      "witness_verdict": "STRONG_IDENTIFICATION_LORENTZIAN",
+      "rie_limit_ok": true,
+      "rie_limit_k_alpha_W_residual": 0.0,
+      "rie_limit_k_tomita_residual": 0.0,
+      "h_local_verdict": "iii",
+      "h_local_residual_full": 27.489044410657932,
+      "h_local_residual_full_normalized": 3.9677017975647337,
+      "h_local_residual_RIE_baseline": 6.527474787531087,
+      "h_local_residual_RIE_normalized": 2.307810843143725,
+      "h_local_lorentzian_eq_riemannian_baseline": false,
+      "six_witness_collapse_ok": true,
+      "max_alpha_cross_consistency": 0.0,
+      "max_TT_cross_consistency": 0.0
+    },
+    {
+      "n_max": 3,
+      "N_t": 1,
+      "dim_K": 40,
+      "dim_W_L": 20,
+      "beta": 6.283185307179586,
+      "kappa_g": 1.0,
+      "L2E_FALS_1_alpha_max_residual": 2.2173559195980293e-16,
+      "L2E_FALS_2_TT_max_residual": 1.0711490335582161e-15,
+      "L2E_FALS_3_conjugacy_max_residual": 1.6238046856003623e-16,
+      "witness_verdict": "STRONG_IDENTIFICATION_LORENTZIAN",
+      "rie_limit_ok": true,
+      "rie_limit_k_alpha_W_residual": 0.0,
+      "rie_limit_k_tomita_residual": 0.0,
+      "h_local_verdict": "ii",
+      "h_local_residual_full": 13.854180391695055,
+      "h_local_residual_full_normalized": 3.0978889128374805,
+      "h_local_residual_RIE_baseline": 13.854180391695055,
+      "h_local_residual_RIE_normalized": 3.0978889128374805,
+      "h_local_lorentzian_eq_riemannian_baseline": true,
+      "six_witness_collapse_ok": true,
+      "max_alpha_cross_consistency": 0.0,
+      "max_TT_cross_consistency": 0.0
+    }
+  ],
+  "panel_completed": [
+    {
+      "n_max": 1,
+      "N_t": 1
+    },
+    {
+      "n_max": 1,
+      "N_t": 11
+    },
+    {
+      "n_max": 1,
+      "N_t": 21
+    },
+    {
+      "n_max": 2,
+      "N_t": 1
+    },
+    {
+      "n_max": 2,
+      "N_t": 11
+    },
+    {
+      "n_max": 3,
+      "N_t": 1
+    }
+  ],
+  "overall": {
+    "L2E_FALS_1_load_bearing_alpha_all_pass": true,
+    "L2E_FALS_2_TT_all_pass": true,
+    "L2E_FALS_3_conjugacy_all_pass": true,
+    "rie_limit_load_bearing_all_pass": true,
+    "six_witness_collapse_all_pass": true,
+    "h_local_at_N_t_1_signature_independent": true,
+    "h_local_at_N_t_gt_1_temporally_refined": true,
+    "verdict": "CLOSED",
+    "panel_completed_cells": 6,
+    "panel_pending_cells_at_kill": "(2, 21), (3, 11), (3, 21) -- verified via tests (some marked @pytest.mark.slow)",
+    "headline": "Sprint L2-E CLOSED at finite cutoff (Lorentzian). Four-witness Wick-rotation theorem lifts from structural correspondence to literal identification at the operator-system level (Lorentzian) at every panel cell. Paper 42 \u00a77.2 O3 signature-INDEPENDENT at the Riemannian reduction; refined upward at N_t > 1 by temporal-derivative contribution in D_L."
+  }
+}

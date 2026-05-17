@@ -955,6 +955,33 @@ subsequent analytical pipelines. The engine is predictive
 Source memos: \texttt{debug/mr\_\{a,b,c\}\_*\_memo.md}, data
 \texttt{debug/data/mr\_\{a,b,c\}\_*.json}.
 
+\paragraph{M3 sectional convention refinement (Sprint L2-D, May 2026).}
+The vertex-parity Hurwitz mechanism of M3 is sectional in the chosen
+index parity convention, NOT in spacetime signature.  Specifically:
+at the Krein extension to $(3, 1)$ (Sprint L2-D, Paper~32
+\S~VIII.D~\cite{loutey_paper32}), M3's L0
+trivialization prediction holds trivially under chirality-pairing
+(chirality symmetry makes $D_{\mathrm{even}} = D_{\mathrm{odd}}$
+identically) but falsifies under Paper~28's
+$n_{\mathrm{Fock}}$-parity reading --- the convention that accesses
+Catalan $G = \beta(2)$ via the closed-form identity
+$D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
+\beta(s-2))$ (Paper~28 Theorem~3~\cite{loutey_paper28}).  The
+Bizi--Brouder--Besnard sign-flip $\{J, \gamma^5\} = 0$ at
+$(m, n) = (4, 6)$ is a spectral-triple-axiom statement, not a
+vertex-parity-sum statement.  M3's transcendental content
+($\beta(2)$, $\beta(4)$, Catalan $G$, Dirichlet $L$-values) is
+therefore tied to the $n_{\mathrm{Fock}}$-parity sector choice of
+the truncation, not to the signature of the underlying spectral
+triple.  This refinement does not change the master Mellin engine
+domain partition above (M1 $\leftrightarrow$ propinquity rates,
+M2 $\leftrightarrow$ heat-kernel and spectral-action convergence,
+M3 $\leftrightarrow$ vertex-restricted parity-character spectral
+sums); it sharpens the parity-convention-dependence of the M3
+sub-mechanism's accessibility.  Source memos:
+\texttt{debug/l2\_d\_connes\_axiom\_audit\_31\_memo.md},
+data \texttt{debug/data/l2\_d\_connes\_axiom\_audit\_31.json}.
+
 \paragraph{Discrete $c_1$ verification (Sprint TS-E3 falsification target).}
 The strongest concrete computational falsification target flagged by Track
 TS-E3 is the discrete first Chern number of the Hopf U(1) bundle on the

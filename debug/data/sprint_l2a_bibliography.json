@@ -1,0 +1,190 @@
+{
+  "sprint": "L2-A — Lorentzian extension literature audit (BBB-path scoping)",
+  "date": "2026-05-16",
+  "audit_purpose": "Identify the load-bearing literature for the Riemannian (3,0) → Lorentzian (3,1) extension of the GeoVac spectral triple, after Sprint L0 audit and Paper 42's Nieuviarts NO-GO. Determine whether BBB 2018 provides a complete prescription or whether original mathematics is needed.",
+  "headline_verdict_summary": "GO-WITH-CAVEATS for the BBB Krein-lift path. BBB provides classification axioms only — concrete (3,1) lift prescription comes from van den Dungen 2016 (Krein spectral triples + Proposition 4.1 Wick-rotation construction). No Lorentzian propinquity exists in the literature as of May 2026 (Sprint L3 is original mathematics). No paper constructs S^3 × R as a (3,1) spectral triple explicitly. Sprint L2 sequence is reachable but contains genuinely new mathematics, not derivative application.",
+  "references": [
+    {
+      "arxiv_id": "1611.07062",
+      "year": 2018,
+      "authors": ["Nadir Bizi", "Christian Brouder", "Fabien Besnard"],
+      "title": "Space and time dimensions of algebras with applications to Lorentzian noncommutative geometry and quantum electrodynamics",
+      "journal": "J. Math. Phys. 59, 062303",
+      "relevance": "primary",
+      "summary": "Classifies pseudo-Riemannian spectral triples by (m,n) ∈ (Z/8)² where m = t+s mod 8, n = t-s mod 8. Provides Connes-axiom sign tables (Table 1: eps, kappa, eps'', kappa''), tensor-product additivity, and Krein-space construction. Even-dimensional case only (acknowledged Section 9 open problem for odd-dim). Constructs explicit Lorentzian QED in (m,n) = (6,0) or (2,4) — note Minkowski M^{1,3} appears as m_M = 4, n_M = 6. THIS IS THE CLASSIFICATION REFERENCE; not a lift prescription on its own."
+    },
+    {
+      "arxiv_id": "1505.01939",
+      "year": 2016,
+      "authors": ["Koen van den Dungen"],
+      "title": "Krein spectral triples and the fermionic action",
+      "journal": "Math. Phys. Anal. Geom. 19, 4",
+      "relevance": "primary",
+      "summary": "Defines Krein spectral triple (Def 2.2). KEY INGREDIENT: Proposition 4.1 gives an explicit Riemannian → pseudo-Riemannian LIFT prescription. Given (M, g) even-dim pseudo-Riemannian spin manifold with spacelike reflection r and Wick-rotated Riemannian metric g_r = g(rv, w), construct (C∞_c(M), L²(S), i^t D, J_M) as an even Krein spectral triple. Lorentz-type iff t (number of time directions) is odd. This is the closest thing to a 'lift recipe' in the literature, but requires the SPACETIME to be even-dimensional (not the spatial slice). For GeoVac: spacetime S³ × R is 4-dim (even), t=1 (odd) → Lorentz-type. Matches what's needed."
+    },
+    {
+      "arxiv_id": "1207.2112",
+      "year": 2013,
+      "authors": ["Koen van den Dungen", "Mario Paschke", "Adam Rennie"],
+      "title": "Pseudo-Riemannian spectral triples and the harmonic oscillator",
+      "journal": "J. Geom. Phys. 73, 37-55",
+      "relevance": "primary",
+      "summary": "Defines pseudo-Riemannian spectral triple as separate concept (predecessor to Krein spectral triple). Main theorem: to each pseudo-Riemannian spectral triple is associated a genuine spectral triple + K-homology class. The HARMONIC OSCILLATOR example is directly relevant to GeoVac's Bargmann-Segal HO sector (Paper 24). Should be reviewed for whether the spatial-only case (no t direction) gives anything for S^3. Caveat: this is a different definition than van den Dungen 2016, which is the more recent and refined version."
+    },
+    {
+      "arxiv_id": "1503.06916",
+      "year": 2016,
+      "authors": ["Koen van den Dungen", "Adam Rennie"],
+      "title": "Indefinite Kasparov modules and pseudo-Riemannian manifolds",
+      "journal": "Ann. Henri Poincaré 17, 3255-3286",
+      "relevance": "primary",
+      "summary": "Most closely related to what GeoVac would need: globally hyperbolic spacetime construction via foliation by spacelike hypersurfaces and Kasparov product of a family of spectral triples. Three examples covered: (1) Dirac on pseudo-Riemannian spin manifold; (2) harmonic oscillator; (3) Kasparov-product construction. Whether the foliation N × R with N = S^3 is treated explicitly needs paper-level verification — abstract suggests this is the natural setting but doesn't confirm the spatial-slice = S^3 case is worked out."
+    },
+    {
+      "arxiv_id": "1210.6575",
+      "year": 2014,
+      "authors": ["Nicolas Franco", "Michał Eckstein"],
+      "title": "Temporal Lorentzian Spectral Triples",
+      "journal": "Rev. Math. Phys. 26, 1430007",
+      "relevance": "primary",
+      "summary": "Temporal Lorentzian spectral triple = pseudo-Riemannian spectral triple + explicit 3+1 decomposition + global-time element T ∈ A. Provides Lorentzian distance formula d(p,q) = sup over causal a ∈ A. Worked example: Moyal-Minkowski spacetime. No (3+1)-decomposition of S^3 × R given explicitly. Useful as the framework for the metric/distance side at (3,1)."
+    },
+    {
+      "arxiv_id": "math-ph/0110001",
+      "year": 2006,
+      "authors": ["Alexander Strohmaier"],
+      "title": "On noncommutative and pseudo-Riemannian geometry",
+      "journal": "J. Geom. Phys. 56, 175-195",
+      "relevance": "secondary",
+      "summary": "Foundational paper for pseudo-Riemannian / Krein-space spectral triples. Replaces Hilbert by Krein, Dirac is Krein-self-adjoint. Shows dimension, signature, integral are recoverable from spectral data for noncommutative tori and pseudo-Riemannian spin manifolds. Construction is abstract; no concrete (3,1) compact-spatial example."
+    },
+    {
+      "arxiv_id": "1710.04965",
+      "year": 2018,
+      "authors": ["Agostino Devastato", "Shane Farnsworth", "Fedele Lizzi", "Pierre Martinetti"],
+      "title": "Lorentz signature and twisted spectral triples",
+      "journal": "JHEP 03, 089",
+      "relevance": "secondary",
+      "summary": "Twist of the SM spectral triple naturally yields Krein space associated with Lorentzian signature. The twist turns the Euclidean spinor inner product into the Krein product. Confirms Nieuviarts-line emergence mechanism. Operates on the SM inner factor (twist on M_n(C)), NOT on the outer manifold M. Hence not directly applicable to GeoVac at the spatial-S^3 level — the twist couples to the inner SU(N) factor."
+    },
+    {
+      "arxiv_id": "2502.18105",
+      "year": 2025,
+      "authors": ["G. Nieuviarts"],
+      "title": "Emergence of Lorentz symmetry from an almost-commutative twisted spectral triple",
+      "journal": "preprint",
+      "relevance": "secondary",
+      "summary": "Twist-morphism (Def 2.2) constructs pseudo-Riemannian spectral triple from Riemannian twisted spectral triple. CONFIRMED EVEN-DIMENSIONAL: §2.2 (around eq 2.12) states explicitly 'the twist by the grading is the only way to minimally twist the spectral triple of even-dimensional manifolds based on C∞(M) ⊗ C². The fact that no such procedure for twisting odd-dimensional manifold's spectral triple have been found will be one of the justifications to focus on the study of even-dimensional manifolds.' Direct NO-GO for GeoVac S^3 = SU(2) (odd-dim). Paper 42 footnote already cites this; verified."
+    },
+    {
+      "arxiv_id": "2402.05839",
+      "year": 2024,
+      "authors": ["G. Nieuviarts"],
+      "title": "Signature change by a morphism of spectral triples",
+      "journal": "preprint",
+      "relevance": "secondary",
+      "summary": "Companion to 2502.18105. Same even-dim caveat applies. Establishes the K-morphism that induces signature change via the twist; signature change is fully determined by the unitary K with K^2 = 1."
+    },
+    {
+      "arxiv_id": "2512.15450",
+      "year": 2026,
+      "authors": ["G. Nieuviarts"],
+      "title": "Emergence of Time from a Twisted Spectral Triple in Almost-Commutative Geometry",
+      "journal": "proceedings preprint",
+      "relevance": "ancillary",
+      "summary": "Proceedings synthesis of 2502.18105 + 2402.05839. Useful as roadmap, no new content. Same even-dim caveat."
+    },
+    {
+      "arxiv_id": "1409.1480",
+      "year": 2014,
+      "authors": ["Michał Eckstein", "Nicolas Franco"],
+      "title": "Noncommutative geometry, Lorentzian structures and causality",
+      "journal": "Contemporary Mathematics; arXiv preprint",
+      "relevance": "secondary",
+      "summary": "Review-style chapter on the Lorentzian-NCG landscape pre-2014. Covers Strohmaier, Franco-Eckstein temporal, Paschke-Verch, van den Dungen-Paschke-Rennie. Useful as orientation; no new construction."
+    },
+    {
+      "arxiv_id": "gr-qc/0405057",
+      "year": 2004,
+      "authors": ["Mario Paschke", "Rainer Verch"],
+      "title": "Local covariant quantum field theory over spectral geometries",
+      "journal": "Class. Quantum Grav. 21, 5299-5316",
+      "relevance": "ancillary",
+      "summary": "Categorical scaffolding for globally hyperbolic spectral geometry as a functor from globally hyperbolic Lorentz manifolds to involutive algebras. Categorical only — provides no concrete Dirac construction. Useful if/when GeoVac wants to assemble a family of n_max truncations into a globally hyperbolic spectral triple."
+    },
+    {
+      "arxiv_id": "1207.5005",
+      "year": 2013,
+      "authors": ["Koen van den Dungen", "Walter D. van Suijlekom"],
+      "title": "Electrodynamics from noncommutative geometry",
+      "journal": "J. Noncommut. Geom. 7, 433-456",
+      "relevance": "ancillary",
+      "summary": "QED from NCG, Riemannian-side. Used as the comparison point in van den Dungen 2016 Krein-spectral-triple construction. Useful if Sprint L2 wants to redo Connes-Lott on S^3 × R at (3,1)."
+    },
+    {
+      "arxiv_id": "1411.3578",
+      "year": 2014,
+      "authors": ["Adam Rennie", "Robin Strung"],
+      "title": "Lorentzian Spectral Geometry for Globally Hyperbolic Surfaces",
+      "journal": "preprint",
+      "relevance": "secondary",
+      "summary": "Globally hyperbolic 2-d surfaces treated as Lorentzian spectral triples. Pedagogical 'minimal case' — relevant only as a worked example for the foliation framework. If a 3+1 generalization existed, it would already cover S^3 × R; the fact that the published work focuses on 1+1 surfaces tells us the higher-dim cases are not yet treated explicitly."
+    },
+    {
+      "arxiv_id": "2601.22171",
+      "year": 2026,
+      "authors": ["[multiple, recent]"],
+      "title": "Pseudo-Riemannian Spectral Triples for SU(1,1)",
+      "journal": "preprint",
+      "relevance": "ancillary",
+      "summary": "Pseudo-Riemannian spectral triple for SU(1,1) using Kostant cubic Dirac. SU(1,1) is non-compact group; not directly applicable to GeoVac's SU(2) outer factor. Useful as evidence that non-compact Lie-group pseudo-Riemannian spectral triples are being actively constructed in 2025-2026 literature."
+    },
+    {
+      "arxiv_id": "1811.10843",
+      "year": 2022,
+      "authors": ["Frédéric Latrémolière"],
+      "title": "The Gromov-Hausdorff propinquity for metric Spectral Triples",
+      "journal": "Adv. Math. 404, 108393",
+      "relevance": "primary",
+      "summary": "FOUNDATIONAL for Paper 38. STRICTLY RIEMANNIAN. Lipschitz seminorm L(a) = ‖[D,a]‖ requires positive-definite inner product; Krein-norm doesn't qualify as a Lipschitz seminorm in the propinquity sense. NO LORENTZIAN ANALOG exists as of May 2026."
+    },
+    {
+      "arxiv_id": "2504.11715",
+      "year": 2025,
+      "authors": ["Yuya Toyota"],
+      "title": "Continuity for the spectral propinquity of the Dirac operators associated with an analytic path of Riemannian metrics",
+      "journal": "preprint",
+      "relevance": "ancillary",
+      "summary": "Latest extension of Latrémolière propinquity. Strictly Riemannian (analytic path of Riemannian metrics). Confirms no Lorentzian sequel in 2025."
+    },
+    {
+      "arxiv_id": "2412.00628",
+      "year": 2024,
+      "authors": ["Bram Mesland", "Edward McDonald"],
+      "title": "[Hekkelman-McDonald 2024 / spectral truncations of compact quantum metric spaces]",
+      "journal": "preprint",
+      "relevance": "ancillary",
+      "summary": "Riemannian propinquity follow-up to Connes-vS 2021 truncations. Cited extensively in Paper 38. No Lorentzian content."
+    }
+  ],
+  "phantoms_caught_and_verified_NO": [
+    {
+      "name": "Hawkins-Skoda",
+      "verdict": "PHANTOM (confirmed). No such paper exists. The correct reference for Krein spectral triples in this lineage is van den Dungen 2016 (arXiv:1505.01939). This phantom was flagged in `debug/lorentz_boost_scoping_memo.md` and is now confirmed resolved."
+    }
+  ],
+  "key_dimensional_observations": {
+    "BBB_2018": "Even-dimensional only. Section 9 acknowledges 'For applications to topological insulators, it would be desirable to extend these results to the case of odd-dimensional algebras' — i.e., the odd-dim extension is acknowledged open problem of BBB itself.",
+    "van_den_Dungen_2016": "Even Krein spectral triple is the primary case (Def 2.2); odd case 'defined similarly by removing the Z_2-grading' (one-sentence remark). Proposition 4.1 LIFT requires M even-dimensional to have grading Γ_M. For GeoVac: spacetime M = S^3 × R is 4-dim (even); spatial slice S^3 is 3-dim (odd) but doesn't need its own grading — the spacetime grading handles it.",
+    "Nieuviarts_2025": "Explicitly even-dim-only by author's own statement (§2.2 around eq 2.12). Twist-morphism cannot construct from odd-dim manifold. NO-GO for direct twist of GeoVac S^3."
+  },
+  "no_published_example_of": {
+    "S3_times_R_as_Lorentzian_spectral_triple": "Not found in the audited literature. The conjugate work — globally hyperbolic spacetime as Kasparov product of a family of spatial spectral triples — exists (van den Dungen-Rennie 2016), but no paper does the explicit S^3 × R construction.",
+    "Lorentzian_propinquity": "Does not exist in published literature as of May 2026. Confirmed via search for 'Lorentzian propinquity', 'Krein propinquity', 'pseudo-Riemannian propinquity', and recent Latrémolière / Toyota / Hekkelman-McDonald listings.",
+    "Riemannian_to_Lorentzian_lift_for_odd_dim_spatial_slices": "Not given by any single paper in clean form. Van den Dungen 2016 Prop 4.1 is the closest, but it requires the SPACETIME (not the spatial slice) to be even-dim. The lift is N × R for N = odd-dim spatial. This is exactly what's needed, but the audit found no worked example of this for N = S^n with n ≥ 3."
+  },
+  "fundamental_obstacle_observation": {
+    "S3_times_S1_beta_NOT_globally_hyperbolic": "Compact Lorentzian manifold without boundary necessarily contains closed timelike curves. So S^3 × S^1_β (the natural Matsubara compactification GeoVac uses on the Riemannian side) is NOT globally hyperbolic. This forces the (3,1) extension to use S^3 × R (non-compact time). Sprint TD Track 1 / Track 4 thermal construction is OK on the Riemannian side but cannot be directly Wick-rotated to a globally hyperbolic Lorentzian spectral triple. The Wick-rotated thermal Lorentzian object is a KMS state on the Lorentzian algebra of S^3 × R, restricted to a wedge — this is the Bisognano-Wichmann reading already documented in Paper 42.",
+    "implication_for_propinquity": "Paper 38's propinquity construction at finite n_max gives a finite-dim Hilbert space H_{n_max} for the spatial S^3. A Lorentzian version would have a finite-dim Krein space K_{n_max} per spatial slice and an unbounded continuous time direction. The compact-resolvent / summability axiom becomes a *temporal* one, not handled by simply tensoring with C^∞(R)."
+  }
+}
