@@ -1,0 +1,330 @@
+{
+  "sub_sprint": "L3b-2 sub-sprint B",
+  "claim": "||S_K_joint||_cb = ||S_K_SU(2)||_cb * ||S_K_U(1)||_cb = 2/(n_max + 1)",
+  "verdict": "PROVED",
+  "panel_cells": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "su2_cb_norm": "2/3",
+      "su2_cb_norm_float": 0.6666666666666666,
+      "u1_cb_norm": "1",
+      "u1_cb_norm_float": 1.0,
+      "joint_cb_norm": "2/3",
+      "joint_cb_norm_float": 0.6666666666666666,
+      "expected_2_over_nmax_plus_1": "2/3",
+      "expected_float": 0.6666666666666666,
+      "product_check": "2/3",
+      "joint_matches_expected": true,
+      "joint_matches_product": true,
+      "product_matches_expected": true,
+      "plancherel_factorization_exact": true,
+      "plancherel_pairs_checked": 6,
+      "plancherel_pairs_match": 6,
+      "joint_symbol_linfty_max": "2/3",
+      "joint_symbol_argmax": [
+        "1/2",
+        0
+      ],
+      "max_attained_at_j0_k0": true
+    },
+    {
+      "n_max": 2,
+      "N_t": 5,
+      "su2_cb_norm": "2/3",
+      "su2_cb_norm_float": 0.6666666666666666,
+      "u1_cb_norm": "1",
+      "u1_cb_norm_float": 1.0,
+      "joint_cb_norm": "2/3",
+      "joint_cb_norm_float": 0.6666666666666666,
+      "expected_2_over_nmax_plus_1": "2/3",
+      "expected_float": 0.6666666666666666,
+      "product_check": "2/3",
+      "joint_matches_expected": true,
+      "joint_matches_product": true,
+      "product_matches_expected": true,
+      "plancherel_factorization_exact": true,
+      "plancherel_pairs_checked": 10,
+      "plancherel_pairs_match": 10,
+      "joint_symbol_linfty_max": "2/3",
+      "joint_symbol_argmax": [
+        "1/2",
+        0
+      ],
+      "max_attained_at_j0_k0": true
+    },
+    {
+      "n_max": 3,
+      "N_t": 3,
+      "su2_cb_norm": "1/2",
+      "su2_cb_norm_float": 0.5,
+      "u1_cb_norm": "1",
+      "u1_cb_norm_float": 1.0,
+      "joint_cb_norm": "1/2",
+      "joint_cb_norm_float": 0.5,
+      "expected_2_over_nmax_plus_1": "1/2",
+      "expected_float": 0.5,
+      "product_check": "1/2",
+      "joint_matches_expected": true,
+      "joint_matches_product": true,
+      "product_matches_expected": true,
+      "plancherel_factorization_exact": true,
+      "plancherel_pairs_checked": 9,
+      "plancherel_pairs_match": 9,
+      "joint_symbol_linfty_max": "1/2",
+      "joint_symbol_argmax": [
+        "1",
+        0
+      ],
+      "max_attained_at_j0_k0": true
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "su2_cb_norm": "1/2",
+      "su2_cb_norm_float": 0.5,
+      "u1_cb_norm": "1",
+      "u1_cb_norm_float": 1.0,
+      "joint_cb_norm": "1/2",
+      "joint_cb_norm_float": 0.5,
+      "expected_2_over_nmax_plus_1": "1/2",
+      "expected_float": 0.5,
+      "product_check": "1/2",
+      "joint_matches_expected": true,
+      "joint_matches_product": true,
+      "product_matches_expected": true,
+      "plancherel_factorization_exact": true,
+      "plancherel_pairs_checked": 15,
+      "plancherel_pairs_match": 15,
+      "joint_symbol_linfty_max": "1/2",
+      "joint_symbol_argmax": [
+        "1",
+        0
+      ],
+      "max_attained_at_j0_k0": true
+    },
+    {
+      "n_max": 4,
+      "N_t": 3,
+      "su2_cb_norm": "2/5",
+      "su2_cb_norm_float": 0.4,
+      "u1_cb_norm": "1",
+      "u1_cb_norm_float": 1.0,
+      "joint_cb_norm": "2/5",
+      "joint_cb_norm_float": 0.4,
+      "expected_2_over_nmax_plus_1": "2/5",
+      "expected_float": 0.4,
+      "product_check": "2/5",
+      "joint_matches_expected": true,
+      "joint_matches_product": true,
+      "product_matches_expected": true,
+      "plancherel_factorization_exact": true,
+      "plancherel_pairs_checked": 12,
+      "plancherel_pairs_match": 12,
+      "joint_symbol_linfty_max": "2/5",
+      "joint_symbol_argmax": [
+        "3/2",
+        0
+      ],
+      "max_attained_at_j0_k0": true
+    },
+    {
+      "n_max": 4,
+      "N_t": 5,
+      "su2_cb_norm": "2/5",
+      "su2_cb_norm_float": 0.4,
+      "u1_cb_norm": "1",
+      "u1_cb_norm_float": 1.0,
+      "joint_cb_norm": "2/5",
+      "joint_cb_norm_float": 0.4,
+      "expected_2_over_nmax_plus_1": "2/5",
+      "expected_float": 0.4,
+      "product_check": "2/5",
+      "joint_matches_expected": true,
+      "joint_matches_product": true,
+      "product_matches_expected": true,
+      "plancherel_factorization_exact": true,
+      "plancherel_pairs_checked": 20,
+      "plancherel_pairs_match": 20,
+      "joint_symbol_linfty_max": "2/5",
+      "joint_symbol_argmax": [
+        "3/2",
+        0
+      ],
+      "max_attained_at_j0_k0": true
+    }
+  ],
+  "asymptotic_rate": {
+    "table": [
+      {
+        "n_max": 1,
+        "cb_norm": 1.0,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 2,
+        "cb_norm": 0.6666666666666666,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 3,
+        "cb_norm": 0.5,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 4,
+        "cb_norm": 0.4,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 5,
+        "cb_norm": 0.3333333333333333,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 10,
+        "cb_norm": 0.18181818181818182,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 20,
+        "cb_norm": 0.09523809523809523,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 50,
+        "cb_norm": 0.0392156862745098,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      },
+      {
+        "n_max": 100,
+        "cb_norm": 0.019801980198019802,
+        "(n_max+1) * cb_norm": 2.0,
+        "product_eq_2": true
+      }
+    ],
+    "monotone_decreasing": true,
+    "product_always_2": true,
+    "asymptote": 0.0,
+    "rate": "O(1/n_max)"
+  },
+  "u1_cross_check": {
+    "table": [
+      {
+        "N_t": 1,
+        "K_max": 0,
+        "n_modes": 1,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 2,
+        "K_max": 1,
+        "n_modes": 3,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 3,
+        "K_max": 1,
+        "n_modes": 3,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 4,
+        "K_max": 2,
+        "n_modes": 5,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 5,
+        "K_max": 2,
+        "n_modes": 5,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 7,
+        "K_max": 3,
+        "n_modes": 7,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 11,
+        "K_max": 5,
+        "n_modes": 11,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      },
+      {
+        "N_t": 21,
+        "K_max": 10,
+        "n_modes": 21,
+        "max_argk": 0,
+        "max_value": "1",
+        "max_value_float": 1.0,
+        "symbol_at_zero": "1",
+        "symbol_at_zero_float": 1.0,
+        "max_attained_at_zero": true,
+        "max_equals_one": true
+      }
+    ],
+    "u1_cb_norm_always_1": true,
+    "max_always_at_k_zero": true
+  },
+  "summary": {
+    "all_factorization_exact": true,
+    "all_joint_eq_product": true,
+    "all_joint_eq_bound": true,
+    "all_pairs_match": true,
+    "asymptotic_monotone": true,
+    "u1_always_1": true
+  },
+  "wall_time_s": 0.0034055709838867188
+}

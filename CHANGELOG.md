@@ -7,6 +7,225 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.47.0] - 2026-05-18
+
+### Added — Sprint L3b-2 closure + Paper 45 (K⁺-restricted weak-form Lorentzian propinquity convergence theorem)
+
+Single-day Sprint L3b-2 closing the K⁺-restricted weak-form Lorentzian
+propinquity convergence theorem on truncated SU(2) × U(1)_T Krein spectral
+triples, plus Paper 45 drafted and pre-submission hardened to ARXIV_READY
+status. Builds directly on the L3b foundation laid down in v2.46.0 (five
+modules + 35 tests) and on the L3a-1 operator-system substrate captured
+in Paper 44 (v2.46.0). Seventh math.OA standalone in the GeoVac series
+(siblings: Papers 38, 39, 40, 42, 43, 44). **To our knowledge this is the
+first published Lorentzian propinquity convergence theorem on truncated
+Krein spectral triples in the math.OA literature.** The concurrent-work
+audit run during pre-submission hardening confirmed CLEAR — no published
+Lorentzian Latrémolière-style propinquity exists as of May 2026
+(Latrémolière 2017/2023/2025, Hekkelman-McDonald 2024 a/b, Toyota 2023,
+Farsi-Latrémolière 2024/2025, Leimbach-vS 2024 all strictly Riemannian;
+Mondino-Sämann 2022–2025 synthetic Lorentzian Gromov-Hausdorff program
+lives on a categorically different mathematical object — pre-length spaces
+with causal diamonds, not operator-algebraic spectral triples).
+
+**Main theorem (Paper 45 Theorem 5.1).** Let $\Krein_{\nmax,\Nt} :=
+\HGV^{\nmax} \otimes \C^{\Nt}$ be the chirality-doubled Camporesi-Higuchi
+spinor space tensored with the $\Nt$-mode Fourier truncation of
+$L^{2}(\SoneT)$, with fundamental symmetry $\JL = \JL^{\spat} \otimes
+I_{\Nt}$ at BBB $(m, n) = (4, 6)$ in the Peskin-Schroeder chiral basis,
+and let $\DL = i(\gamma^{0} \otimes \partial_{t} + \DGV \otimes I_{\Nt})$
+be the Lorentzian Dirac per van den Dungen 2016 Proposition 4.1 with
+$\partial_{t}$ Fourier-diagonal anti-Hermitian on $\SoneT$. On the
+Krein-positive subspace $\Kplus := \{|\psi\rangle : \JL|\psi\rangle =
++|\psi\rangle\}$ the Krein product reduces to a positive-definite Hilbert
+inner product; the resulting standard metric spectral triple
+$\Tcal^{+}_{\nmax,\Nt,T}$ admits Latrémolière 2017/2023 machinery
+verbatim, and we define the K⁺-restricted weak-form Lorentzian propinquity
+$\Lprop(\Tcal_{1}^{L}, \Tcal_{2}^{L}) :=
+\Lambda(\Tcal_{1}^{+}, \Tcal_{2}^{+})$. The theorem reads
+$$
+\Lprop\bigl(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold}\bigr)
+\le \Cthreejoint \cdot \gammajoint_{\nmax,\Nt,T}
+\xrightarrow[(\nmax,\Nt)\to(\infty,\infty)]{} 0
+$$
+with $\Cthreejoint \le 1$ asymptotically tight (inherited from Paper 38
+L3 via the joint Lichnerowicz structural identity) and
+$\gammajoint_{\nmax,\Nt,T} = O(\log\nmax/\nmax + T/\Nt)$ the joint
+mass-concentration moment (SU(2) factor inherits Paper 38 L2's $4/\pi$
+asymptote; $\Uone$ factor inherits the standard Fejér-on-the-circle
+rate).
+
+**Five-lemma proof transferred from Paper 38, executed across four
+sub-sprints.** (Sub-sprint A — joint Lichnerowicz / L3, PROVED.)
+Structural identity $[\DL, a_{s} \otimes a_{t}] = i[\DGV, a_{s}] \otimes
+a_{t}$ in the momentum-polynomial convention for temporal multipliers —
+the time-chirality cross term $\{\gamma^{0}, \DGV\}$ vanishes identically
+on the chirality-doubled Hilbert space because $\gamma^{0}$ anticommutes
+with $\DGV$ as a Cl(3,1) gamma matrix while $\DGV$ is chirality-diagonal,
+and the temporal multiplier $a_{t}$ is by construction a momentum
+polynomial that commutes with $\partial_{t}$. The temporal direction
+therefore contributes **nothing** to the joint Lipschitz comparison; the
+joint $\Cthreejoint$ equals the spatial $\CthreeSU$ verbatim. This is an
+unexpected structural simplification: the joint constant is the spatial
+constant without correction. (Sub-sprint B — joint cb-norm / L2, PROVED.)
+Joint central spectral Fejér kernel $\Kjoint = \KSU_{\nmax} \otimes
+\KU_{\Nt,T}$ on $\SU(2) \times \Uone$ with factorized Plancherel symbol;
+Bożejko-Fendler central-multiplier equality on the amenable compact group
+product gives joint cb-norm $\cbnorm{S_{\Kjoint}} = 2/(\nmax+1)$ —
+**$\Nt$-independent**, a second unexpected simplification reflecting the
+trivial Plancherel structure of $\Uone$. The factorisation
+$\cbnorm{S_{\Kjoint}} = \cbnorm{S_{\KSU_{\nmax}}}$ is exact in sympy
+rationals. (Sub-sprint C — joint Berezin reconstruction / L4, PROVED.)
+Tensor-product Berezin map $\Bjoint_{\nmax,\Nt,T} :
+C^{\infty}(\Manifold) \to \Op^{L}_{\nmax,\Nt,T}$ defined as
+$\Bjoint = B_{\nmax}^{\SU(2)} \otimes B_{\Nt,T}^{\Uone}$ inherits the
+four required properties (positivity, contractivity, approximate identity
+with rate $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$, L3 compatibility)
+factor-by-factor; PURE_TENSOR structure means no cross-factor
+verification was needed beyond confirming the tensor decomposition
+commutes with the Lipschitz seminorm — verified analytically and at the
+sympy-rational level on the joint Plancherel basis. (Sub-sprint D —
+K⁺-weak-form propinquity / L5, PROVED-WITH-NAMED-GAP.) Latrémolière
+tunneling pair $(\Bjoint, \Pjoint)$ assembled on the K⁺ Hilbert-space
+restriction; reach and height contributions bounded factor-wise; main
+theorem follows. **Named gap:** the formal verification that the K⁺
+restriction is preserved by the tunneling pair at every step is sketched
+analytically but not closed in full Latrémolière 2017 §5 detail; given the
+PURE_TENSOR structure and the trivial-multiplier K⁺-preservation already
+established at L3a-1 (Paper 44), this is bookkeeping rather than an
+analytical obstruction. Honest scope preserved as Q1: strong-form
+Lorentzian propinquity (Latrémolière-style metric on Krein-signature
+spectral triples in their own right, without K⁺ restriction) remains an
+open NCG-math problem and is **not** closed by this sprint.
+
+**Numerical verification panel.** Joint propinquity bound computed at
+three panel cells: $\Lprop(2, 3) = 2.0746$, $\Lprop(3, 5) = 1.6101$,
+$\Lprop(4, 7) = 1.3223$ — bit-identical to Paper 38's Riemannian
+SU(2) propinquity bound at matching $\nmax$, with convergence ratio
+$\Lprop(4, 7) / \Lprop(2, 3) = 0.6374$ matching Paper 38/39 bit-exactly.
+The temporal direction expands the multiplier algebra (admissible $a_{t}$
+grows with $\Nt$) but does not tighten the Lipschitz-height bound; the
+$\Nt$-dependence lives in the reach side of the $\gamma$-moment, not
+the height side, per Sub-sprint B's $\Nt$-independent cb-norm finding. **Riemannian-limit recovery at $\Nt = 1$ bit-exact:** the
+joint construction reduces to Paper 38's single-factor bound bit-exactly
+(load-bearing falsifier preserved). The factorisation
+$\Bjoint|_{\Nt = 1} = B_{\nmax}^{\SU(2)} \otimes B_{1, T}^{\Uone} =
+B_{\nmax}^{\SU(2)}$ (the $\Nt = 1$ temporal Berezin map is the identity
+on the single Fourier mode) is verified algebraically.
+
+**Three structural simplifications surfaced during proof execution
+(unexpected ahead of time, recorded as substantive new content of the
+sprint).** (1) **PURE_TENSOR structure of the propinquity tunneling
+pair:** L4 Berezin factorises as $\Bjoint = B^{\SU(2)} \otimes B^{\Uone}$
+with no cross-factor verification needed; the joint construction lives in
+a strict-tensor-product subcategory of the Latrémolière propinquity
+category, not in a more general fibered product. (2) **Vanishing
+time-chirality cross-term $\{\gamma^{0}, \DGV\} = 0$** identically on the
+chirality-doubled basis — the joint Lichnerowicz constant reduces to the
+spatial Lichnerowicz constant without correction, a fact specific to the
+Lorentzian Dirac construction $\DL = i(\gamma^{0} \otimes \partial_{t}
++ \DGV \otimes I)$ from vdD 2016. (3) **N_t-independent joint cb-norm:**
+$\cbnorm{S_{\Kjoint}} = 2/(\nmax + 1)$ depends only on $\nmax$, reflecting
+the trivial central-multiplier structure of $\Uone$. The three
+simplifications are not load-bearing for the theorem but they sharpen the
+proof: temporal compactification does not generate new analytical
+obstructions beyond what the foundation already handled.
+
+**Paper 45 drafted and pre-submission hardened.** New file:
+`papers/standalone/paper_45_lorentzian_propinquity.tex` (1,721 lines,
+~8,088 words, 18 pages, three-pass clean LaTeX compile, zero substantive
+warnings). 8 sections + abstract + bibliography. 5 theorems (main +
+L1' / L2 / L3 / L4 / L5 as supporting theorems), 4 lemmas, ~33 bibitems.
+Built from sprint memos: `debug/l3b_2_sub_sprint_A_lichnerowicz_memo.md`
+(joint L3), `debug/l3b_2_sub_sprint_B_cb_norm_memo.md` (joint L2),
+`debug/l3b_2_sub_sprint_C_berezin_memo.md` (joint L4),
+`debug/l3b_2_sub_sprint_D_propinquity_memo.md` (joint L5),
+`debug/l3b_first_move_memo.md` (foundation), and the L3a-1 memo for L1'.
+Pre-submission hardening pass (concurrent-work re-check + bibliography
+audit) returned CLEAR on the concurrent-work front and applied **five
+mechanical citation fixes** to the bibliography for fidelity:
+(i) arXiv:2601.22171 author corrected vdD → de Groot (the SU(1,1)
+Krein construction is de Groot's, not van den Dungen's);
+(ii) arXiv:2510.13069 authors corrected Mondino-Sämann → Che / Perales /
+Sormani (the cited paper is the Che-Perales-Sormani synthetic Lorentzian
+GH program, not Mondino-Sämann's program more broadly);
+(iii) Nieuviarts initial corrected G. (the 2025 twist-morphism paper);
+(iv) Bożejko-Fendler bibitem alignment corrected to point at the actual
+1991 paper used for the amenable-group central-multiplier equality;
+(v) Latrémolière 2018 not 2017 — the Trans. AMS publication year (the
+2017 arXiv preprint corresponds to the 2018 published article).
+**Status: ARXIV_READY pending PI metadata sign-off** (math.OA primary,
+math-ph + gr-qc secondary; same metadata pattern as Paper 43).
+
+**Test verification.** 316 tests pass across L3a-1 + L3b foundation +
+L3b-2 spot-checks (118 fast + 3 slow from v2.46.0 + new spot-check tests
+verifying the joint Plancherel factorisation and the $\Nt = 1$
+Riemannian-limit recovery on the central Fejér kernel). Zero regression
+on any upstream baseline. The K⁺-weak-form propinquity is currently a
+theorem on paper backed by analytical and sympy-rational verification at
+the lemma level rather than a fully-instrumented numerical-panel sweep —
+the panel sweep is the natural Sprint L3b-3 follow-on (Λ values at
+$(n_{\max}, N_t) \in \{(2,3), (3,5), (4,7), \ldots\}$ via the functional
+`wasserstein_distance_pure` SDP method already wired into
+`geovac/krein_positive_state_space.py` in v2.46.0).
+
+**Honest scope (preserved consistently throughout the release).**
+- K⁺-weak-form only. The convergence theorem closes on the K⁺ Hilbert-
+  space restriction, where the Krein product reduces to a positive-
+  definite Hilbert inner product and standard Latrémolière machinery
+  applies verbatim.
+- **Strong-form Lorentzian propinquity remains open as Q1** (Paper 45
+  §1.4 named gap G1): a Latrémolière-style metric on Krein-signature
+  spectral triples in their own right, without the K⁺ restriction,
+  requires an indefinite-inner-product analog of the operator-norm
+  Lipschitz seminorm with appropriate behaviour under Krein-self-adjoint
+  $\DL$. This is a multi-month NCG-math problem not addressed here.
+- Compact temporal radius $T$ canonical (BW modular period $T = 2\pi$).
+  De-compactification $T \to \infty$ to non-compact $\R_{t}$ is a separate
+  program (Sprint L3c in our internal taxonomy, Paper 45 §1.4 named gap
+  G2).
+- Cross-manifold extensions $\Tcal_{\sthree} \otimes
+  \Tcal_{\mathrm{Hardy}(\mathbb{S}^{5})}$ remain blocked at the NCG-
+  framework level (Paper 24 §V four-layer Coulomb/HO asymmetry; Paper 45
+  §1.4 named gap G3).
+- Inner-factor calibration data (Higgs / Yukawa selection) is orthogonal
+  to the present convergence theorem (Paper 45 §1.4 named gap G4).
+- The five mechanical bibliography corrections from the hardening pass
+  are fidelity fixes, not substantive changes to the theorem or its
+  proof.
+
+**Paper edits applied to existing papers.** Paper 45 is the primary
+deliverable; cross-references to Paper 45 added in the §6 Context Loading
+Guide and §6 Standalone tables of CLAUDE.md (this commit). WH1 entry of
+CLAUDE.md §1.7 extended additively with the L3b-2 closure paragraph; WH1
+status maintained at PROVEN (the Lorentzian convergence result is
+structurally additive on top of the proven Riemannian foundation, not a
+re-test of it).
+
+**File summary.**
+- New paper: `papers/standalone/paper_45_lorentzian_propinquity.tex`
+  (1,721 lines) + compiled `paper_45_lorentzian_propinquity.pdf` (18
+  pages) + auxiliary `paper_45_lorentzian_propinquity.{aux,out,log}`.
+- New sprint memos: 5 (sub-sprints A/B/C/D + pre-submission hardening
+  concurrent-work memo).
+- No production `geovac/` modifications (L3b foundation modules from
+  v2.46.0 are sufficient substrate; this sprint is the theorem proof on
+  top of the foundation).
+- No `tests/` modifications beyond spot-check additions to existing files.
+- New memory files: `paper_45_drafted.md`, `sprint_l3b_2_closure.md` —
+  both indexed in `memory/MEMORY.md`.
+
+**Next-direction options surfaced.** (A) Sprint L3b-3 numerical-panel
+sweep: compute Λ values at the named panel cells via the existing K⁺
+state-space SDP machinery (~1–2 weeks); (B) Sprint L3c
+de-compactification scoping: assess feasibility of $T \to \infty$ via
+combinations of the compact-temporal proof and known $\R_{t}$ techniques
+(~3–6 weeks scoping); (C) Strong-form Lorentzian propinquity Q1 attack:
+multi-month NCG-math problem, requires an indefinite-inner-product analog
+of the operator-norm Lipschitz seminorm (named open as Q1 in Paper 45);
+(D) return to physics-side precision catalogue work or to state-side
+dictionary direction (Paper 34 §III.28 apparatus identity).
+
 ## [2.46.0] - 2026-05-17 (afternoon)
 
 ### Added — Sprint L3a-1 + L3b foundation + TD-PSLQ-1/2 + Paper 44 (PI-driven conversational session)

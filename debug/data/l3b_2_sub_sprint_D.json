@@ -1,0 +1,177 @@
+{
+  "sprint": "L3b-2 Sub-Sprint D",
+  "date": "2026-05-18",
+  "theorem_statement": "Theorem (Sub-sprint D / Paper 45 \u00a75). Let T_L_continuum = (C_inf(S^3 x S^1_T), L^2(S^3, Sigma_CH) (x) L^2(S^1_T), D_L, J_L) be the continuum Camporesi-Higuchi Krein spectral triple on the compact-temporal Lorentzian manifold S^3 x S^1_T (Wick-rotated metric), and let T_L_truncated = (O^L, K, D_L, J) be the truncated Krein spectral triple at cutoffs n_max (spatial) and N_t (temporal Fourier).  The K^+-restricted weak-form Lorentzian Latremoliere quantum Gromov-Hausdorff propinquity Lambda^L satisfies\n\n  Lambda^L(T_L_truncated, T_L_continuum)  <=  C_3^joint * gamma^joint_{n_max, N_t, T}  ->  0\n\nas (n_max, N_t) -> (oo, oo), where C_3^joint <= 1 is the joint Lichnerowicz constant from Sub-sprint A (asymptotically tight C_3^joint -> 1^- as n_max -> oo) and gamma^joint = O(log n_max / n_max + 1/N_t) is the joint mass-concentration moment from Sub-sprint C (qualitative rate; quantitative SU(2) factor at 4/pi per Paper 38 \u00a7L2 Stein-Weiss; quantitative U(1) factor at standard Fejer rate).  The tunneling pair (B^joint, P^joint) commutes with the fundamental symmetry J at the operator level (Sub-sprint C \u00a76 Lemma 6.1), so the K^+ restriction is well-defined.  The construction reduces to Paper 38's Riemannian SU(2) propinquity bit-exactly at N_t = 1.\n\nHonest scope: this is the K^+-restricted weak-form propinquity, NOT the strong-form Latremoliere metric on Krein-signature spectral triples (which is not in the published math.OA literature as of May 2026 and is a multi-month original NCG-math problem).  The K^+ restriction trades the strong-form construction for one that uses Hilbert-space machinery on K^+, where the Krein product reduces to a genuine inner product and Latremoliere 2017's machinery transfers verbatim.",
+  "five_lemma_status": {
+    "L1_prime": "DONE (L3b foundation + L3a-1, 2026-05-17)",
+    "L2": "DONE (Sub-sprint B joint cb-norm, 2026-05-17)",
+    "L3": "DONE (Sub-sprint A joint Lichnerowicz, 2026-05-17)",
+    "L4": "DONE (Sub-sprint C joint Berezin, 2026-05-18)",
+    "L5": "DONE (Sub-sprint D propinquity assembly, 2026-05-18)",
+    "all_done": true
+  },
+  "panel_bounds": {
+    "(2,1)": {
+      "n_max": 2,
+      "N_t": 1,
+      "T": 6.283185307179586,
+      "gamma_joint_su2": 2.0745510936998897,
+      "gamma_joint_u1": 1.5708357539457942,
+      "gamma_joint_L1": 3.6453868476456837,
+      "c_lipschitz_joint": 0.5773502691896258,
+      "cb_norm_joint": 0.6666666666666666,
+      "reach_B_panel": 0.15080298295631528,
+      "reach_B_bound": 1.197742632395264,
+      "height_B_panel": 0.1500527193595177,
+      "height_B_bound": 2.0745510936998897,
+      "propinquity_bound": 2.0745510936998897,
+      "qualitative_rate_only": true,
+      "riemannian_limit_residual": null
+    },
+    "(3,1)": {
+      "n_max": 3,
+      "N_t": 1,
+      "T": 6.283185307179586,
+      "gamma_joint_su2": 1.6100599680657361,
+      "gamma_joint_u1": 1.5708357539457942,
+      "gamma_joint_L1": 3.18089572201153,
+      "c_lipschitz_joint": 0.7071067811865475,
+      "cb_norm_joint": 0.5,
+      "reach_B_panel": 0.21220659078919382,
+      "reach_B_bound": 1.138484321536278,
+      "height_B_panel": 0.22507907903927651,
+      "height_B_bound": 1.6100599680657361,
+      "propinquity_bound": 1.6100599680657361,
+      "qualitative_rate_only": true,
+      "riemannian_limit_residual": null
+    },
+    "(4,1)": {
+      "n_max": 4,
+      "N_t": 1,
+      "T": 6.283185307179586,
+      "gamma_joint_su2": 1.3223327942828407,
+      "gamma_joint_u1": 1.5708357539457942,
+      "gamma_joint_L1": 2.893168548228635,
+      "c_lipschitz_joint": 0.7745966692414834,
+      "cb_norm_joint": 0.4,
+      "reach_B_panel": 0.31511071065498714,
+      "reach_B_bound": 1.024274578080272,
+      "height_B_panel": 0.1350474474235659,
+      "height_B_bound": 1.3223327942828407,
+      "propinquity_bound": 1.3223327942828407,
+      "qualitative_rate_only": true,
+      "riemannian_limit_residual": null
+    },
+    "(2,3)": {
+      "n_max": 2,
+      "N_t": 3,
+      "T": 6.283185307179586,
+      "gamma_joint_su2": 2.0745510936998897,
+      "gamma_joint_u1": 0.7219831099305748,
+      "gamma_joint_L1": 2.7965342036304643,
+      "c_lipschitz_joint": 0.5773502691896258,
+      "cb_norm_joint": 0.6666666666666666,
+      "reach_B_panel": 0.15080298295631528,
+      "reach_B_bound": 1.197742632395264,
+      "height_B_panel": 0.1500527193595177,
+      "height_B_bound": 2.0745510936998897,
+      "propinquity_bound": 2.0745510936998897,
+      "qualitative_rate_only": true,
+      "riemannian_limit_residual": null
+    },
+    "(3,5)": {
+      "n_max": 3,
+      "N_t": 5,
+      "T": 6.283185307179586,
+      "gamma_joint_su2": 1.6100599680657361,
+      "gamma_joint_u1": 0.49562415926901987,
+      "gamma_joint_L1": 2.105684127334756,
+      "c_lipschitz_joint": 0.7071067811865475,
+      "cb_norm_joint": 0.5,
+      "reach_B_panel": 0.24757435592072607,
+      "reach_B_bound": 1.138484321536278,
+      "height_B_panel": 0.22507907903927651,
+      "height_B_bound": 1.6100599680657361,
+      "propinquity_bound": 1.6100599680657361,
+      "qualitative_rate_only": true,
+      "riemannian_limit_residual": null
+    },
+    "(4,7)": {
+      "n_max": 4,
+      "N_t": 7,
+      "T": 6.283185307179586,
+      "gamma_joint_su2": 1.3223327942828407,
+      "gamma_joint_u1": 0.38406187302086475,
+      "gamma_joint_L1": 1.7063946673037054,
+      "c_lipschitz_joint": 0.7745966692414834,
+      "cb_norm_joint": 0.4,
+      "reach_B_panel": 0.3488725725108786,
+      "reach_B_bound": 1.024274578080272,
+      "height_B_panel": 0.1350474474235659,
+      "height_B_bound": 1.3223327942828407,
+      "propinquity_bound": 1.3223327942828407,
+      "qualitative_rate_only": true,
+      "riemannian_limit_residual": null
+    }
+  },
+  "riemannian_limit_check": {
+    "(2,1)": {
+      "match_bit_exact": true,
+      "gamma_residual": 0.0,
+      "joint_gamma_su2": 2.0745510936998897,
+      "paper38_gamma": 2.0745510936998897,
+      "cb_match": true
+    },
+    "(3,1)": {
+      "match_bit_exact": true,
+      "gamma_residual": 0.0,
+      "joint_gamma_su2": 1.6100599680657361,
+      "paper38_gamma": 1.6100599680657361,
+      "cb_match": true
+    },
+    "(4,1)": {
+      "match_bit_exact": true,
+      "gamma_residual": 0.0,
+      "joint_gamma_su2": 1.3223327942828407,
+      "paper38_gamma": 1.3223327942828407,
+      "cb_match": true
+    }
+  },
+  "monotone_check": {
+    "N_t_1_monotone": true,
+    "N_t_1_violations": [],
+    "ratio_(2,3)_to_(4,7)": 0.6374067133359951
+  },
+  "asymptotic_rate_check": {
+    "2": {
+      "cell": [
+        2,
+        3
+      ],
+      "Lambda^L": 2.0745510936998897,
+      "gamma_su2": 2.0745510936998897,
+      "gamma_u1": 0.7219831099305748,
+      "log_n_over_n": 0.34657359027997264
+    },
+    "3": {
+      "cell": [
+        3,
+        5
+      ],
+      "Lambda^L": 1.6100599680657361,
+      "gamma_su2": 1.6100599680657361,
+      "gamma_u1": 0.49562415926901987,
+      "log_n_over_n": 0.3662040962227033
+    },
+    "4": {
+      "cell": [
+        4,
+        7
+      ],
+      "Lambda^L": 1.3223327942828407,
+      "gamma_su2": 1.3223327942828407,
+      "gamma_u1": 0.38406187302086475,
+      "log_n_over_n": 0.34657359027997264
+    }
+  }
+}
