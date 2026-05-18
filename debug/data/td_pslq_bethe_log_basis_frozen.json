@@ -1,0 +1,181 @@
+{
+  "target": "ln_k_0(1S) hydrogen Bethe logarithm",
+  "target_value_string": "2.984128555765498",
+  "target_source": "Drake 1990 PRA 41 1243; Pachucki-Yerokhin 2010 review",
+  "target_precision_digits": 16,
+  "working_dps": 50,
+  "basis_type": "atomic (one form per linearly-independent constant)",
+  "composition": {
+    "M1": {
+      "count": 11,
+      "names": [
+        "1",
+        "pi^1",
+        "pi^2",
+        "pi^3",
+        "pi^4",
+        "pi^5",
+        "pi^6",
+        "1/pi^1",
+        "1/pi^2",
+        "1/pi^3",
+        "1/pi^4"
+      ]
+    },
+    "M2": {
+      "count": 6,
+      "names": [
+        "sqrt(pi)",
+        "sqrt(pi)^3",
+        "sqrt(pi)^5",
+        "sqrt(pi)^7",
+        "1/sqrt(pi)",
+        "1/sqrt(pi)^3"
+      ]
+    },
+    "M3": {
+      "count": 14,
+      "names": [
+        "G",
+        "beta(4)",
+        "beta(6)",
+        "beta(8)",
+        "hurwitz_zeta(2,1/4)",
+        "hurwitz_zeta(2,3/4)",
+        "hurwitz_zeta(3,1/4)",
+        "hurwitz_zeta(3,3/4)",
+        "hurwitz_zeta(4,1/4)",
+        "hurwitz_zeta(4,3/4)",
+        "hurwitz_zeta(5,1/4)",
+        "hurwitz_zeta(5,3/4)",
+        "hurwitz_zeta(6,1/4)",
+        "hurwitz_zeta(6,3/4)"
+      ]
+    },
+    "ALG": {
+      "count": 10,
+      "names": [
+        "sqrt(2)",
+        "sqrt(3)",
+        "sqrt(5)",
+        "sqrt(6)",
+        "sqrt(7)",
+        "phi",
+        "ln(2)",
+        "ln(3)",
+        "ln(5)",
+        "ln(7)"
+      ]
+    },
+    "ODD_ZETA_CONTROL": {
+      "count": 4,
+      "names": [
+        "zeta(3)",
+        "zeta(5)",
+        "zeta(7)",
+        "zeta(9)"
+      ]
+    },
+    "CROSS_PRODUCT": {
+      "count": 19,
+      "names": [
+        "pi*G",
+        "pi*ln(2)",
+        "pi^2*G",
+        "pi*sqrt(2)",
+        "sqrt(pi)*G",
+        "G/pi",
+        "G/pi^2",
+        "G/pi^3",
+        "zeta(3)/pi",
+        "zeta(3)/pi^2",
+        "zeta(3)/pi^3",
+        "zeta(5)/pi^5",
+        "ln(2)^2",
+        "ln(2)*ln(3)",
+        "ln(3)^2",
+        "ln(2)/pi",
+        "ln(2)/pi^2",
+        "ln(2)*G",
+        "ln(2)*pi"
+      ]
+    }
+  },
+  "total_forms": 64,
+  "basis_sha256": "0384c66ff525371d13e5e8e1b3a120ebeada7dcc777bc69130655050599e505e",
+  "sub_runs": [
+    {
+      "name": "M1_only",
+      "classes": [
+        "M1"
+      ]
+    },
+    {
+      "name": "M2_only",
+      "classes": [
+        "M2"
+      ]
+    },
+    {
+      "name": "M3_only",
+      "classes": [
+        "M3"
+      ]
+    },
+    {
+      "name": "M1_M2",
+      "classes": [
+        "M1",
+        "M2"
+      ]
+    },
+    {
+      "name": "M1_M3",
+      "classes": [
+        "M1",
+        "M3"
+      ]
+    },
+    {
+      "name": "M1_M2_M3",
+      "classes": [
+        "M1",
+        "M2",
+        "M3"
+      ]
+    },
+    {
+      "name": "M1_M2_M3_ALG",
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG"
+      ]
+    },
+    {
+      "name": "M1_M2_M3_ALG_CROSS",
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT"
+      ]
+    },
+    {
+      "name": "FULL",
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT",
+        "ODD_ZETA_CONTROL"
+      ]
+    }
+  ],
+  "frozen_before_pslq": true,
+  "protocol": "TD-PSLQ-1 (Bethe log probe against master Mellin engine)",
+  "precision_floor_note": "Target precision is 16 digits. Atomic basis means PSLQ integer coefficients encode rational prefactors of each atomic constant directly. False-positive risk for depth-L relation at ceiling C: ~ (N choose L) * C^L / 10^16."
+}

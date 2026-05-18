@@ -1,0 +1,495 @@
+{
+  "sprint": "TD-PSLQ-2",
+  "target": "A_60(1S)",
+  "target_value": "-30.92415",
+  "target_precision_digits": 7,
+  "target_mechanism": "spacetime/relativistic self-energy alpha(Zalpha)^6",
+  "working_dps": 50,
+  "basis_sha256": "5caf5b45b5607ece54405708c1d5edb5140e2737e0ad4a44ac469f006cb42ec9",
+  "total_forms_all_classes": 90,
+  "forms_by_class_counts": {
+    "M1": 11,
+    "M2": 6,
+    "M3": 14,
+    "ALG": 10,
+    "ODD_ZETA_CONTROL": 4,
+    "CROSS_PRODUCT": 27,
+    "SPACETIME_AUG": 18
+  },
+  "sub_run_results": {
+    "M1_only": {
+      "N": 11,
+      "classes": [
+        "M1"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 9,
+          "basis_relation_length": 5,
+          "residual": "0.0006077404700816618230201725",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 9,
+          "basis_relation_length": 5,
+          "residual": "0.0006077404700816618230201725",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 9,
+          "basis_relation_length": 5,
+          "residual": "0.0006077404700816618230201725",
+          "is_genuine": false
+        }
+      }
+    },
+    "M2_only": {
+      "N": 6,
+      "classes": [
+        "M2"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 3,
+          "max_abs_coef": 11,
+          "relation_length": 7,
+          "residual": "0.00002905900386882605722563914",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 3,
+          "max_abs_coef": 11,
+          "relation_length": 7,
+          "residual": "0.00002905900386882605722563914",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 3,
+          "max_abs_coef": 11,
+          "relation_length": 7,
+          "residual": "0.00002905900386882605722563914",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        }
+      }
+    },
+    "M3_only": {
+      "N": 14,
+      "classes": [
+        "M3"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2": {
+      "N": 17,
+      "classes": [
+        "M1",
+        "M2"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 1,
+          "max_abs_coef": 10,
+          "relation_length": 5,
+          "residual": "0.0002052694889426190054500695",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 1,
+          "max_abs_coef": 10,
+          "relation_length": 5,
+          "residual": "0.0002052694889426190054500695",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 1,
+          "max_abs_coef": 10,
+          "relation_length": 5,
+          "residual": "0.0002052694889426190054500695",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        }
+      }
+    },
+    "M1_M3": {
+      "N": 25,
+      "classes": [
+        "M1",
+        "M3"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3": {
+      "N": 31,
+      "classes": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 23,
+          "basis_relation_length": 6,
+          "residual": "0.003958858975089094207062222",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3_ALG": {
+      "N": 41,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 3,
+          "basis_relation_length": 9,
+          "residual": "0.004074430659411545480031836",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 3,
+          "basis_relation_length": 9,
+          "residual": "0.004074430659411545480031836",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 3,
+          "basis_relation_length": 9,
+          "residual": "0.004074430659411545480031836",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3_ALG_CROSS": {
+      "N": 67,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 1,
+          "basis_relation_length": 1,
+          "residual": "0.003388434818730467376054903",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 1,
+          "basis_relation_length": 1,
+          "residual": "0.003388434818730467376054903",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 1,
+          "basis_relation_length": 1,
+          "residual": "0.003388434818730467376054903",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3_ALG_CROSS_AUG": {
+      "N": 84,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT",
+        "SPACETIME_AUG"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 1,
+          "basis_relation_length": 1,
+          "residual": "0.003388434818730467376054903",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 1,
+          "basis_relation_length": 1,
+          "residual": "0.003388434818730467376054903",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 1,
+          "basis_relation_length": 1,
+          "residual": "0.003388434818730467376054903",
+          "is_genuine": false
+        }
+      }
+    },
+    "FULL": {
+      "N": 88,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT",
+        "SPACETIME_AUG",
+        "ODD_ZETA_CONTROL"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 1,
+          "max_abs_coef": 11,
+          "relation_length": 5,
+          "residual": "0.001889274267020474587181297",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 1,
+          "max_abs_coef": 11,
+          "relation_length": 5,
+          "residual": "0.001889274267020474587181297",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": 1,
+          "max_abs_coef": 11,
+          "relation_length": 5,
+          "residual": "0.001889274267020474587181297",
+          "is_genuine": false,
+          "_note": "PSLQ best-guess but residual >> 1e-6 floor; not a real relation"
+        }
+      }
+    }
+  },
+  "verdict": {
+    "total_sub_runs": 10,
+    "any_trustworthy_hit": false,
+    "any_hit_at_all": false,
+    "trustworthy_hits": [],
+    "all_target_hits": [],
+    "basis_internal_relations": [
+      {
+        "sub_run": "M1_only",
+        "ceiling": "1e4",
+        "length": 5
+      },
+      {
+        "sub_run": "M1_only",
+        "ceiling": "1e6",
+        "length": 5
+      },
+      {
+        "sub_run": "M1_only",
+        "ceiling": "1e8",
+        "length": 5
+      },
+      {
+        "sub_run": "M3_only",
+        "ceiling": "1e4",
+        "length": 6
+      },
+      {
+        "sub_run": "M3_only",
+        "ceiling": "1e6",
+        "length": 6
+      },
+      {
+        "sub_run": "M3_only",
+        "ceiling": "1e8",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M3",
+        "ceiling": "1e4",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M3",
+        "ceiling": "1e6",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M3",
+        "ceiling": "1e8",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M2_M3",
+        "ceiling": "1e4",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M2_M3",
+        "ceiling": "1e6",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M2_M3",
+        "ceiling": "1e8",
+        "length": 6
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG",
+        "ceiling": "1e4",
+        "length": 9
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG",
+        "ceiling": "1e6",
+        "length": 9
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG",
+        "ceiling": "1e8",
+        "length": 9
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS",
+        "ceiling": "1e4",
+        "length": 1
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS",
+        "ceiling": "1e6",
+        "length": 1
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS",
+        "ceiling": "1e8",
+        "length": 1
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS_AUG",
+        "ceiling": "1e4",
+        "length": 1
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS_AUG",
+        "ceiling": "1e6",
+        "length": 1
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS_AUG",
+        "ceiling": "1e8",
+        "length": 1
+      }
+    ]
+  }
+}

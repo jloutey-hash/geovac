@@ -7,6 +7,152 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.46.0] - 2026-05-17 (afternoon)
+
+### Added — Sprint L3a-1 + L3b foundation + TD-PSLQ-1/2 + Paper 44 (PI-driven conversational session)
+
+Five-deliverable PI-driven session opening the L3 arc post-L2 closure. Single afternoon
+of work covering scoping memos, the Lorentzian operator-system substrate at finite cutoff
+(Paper 44), two PSLQ probes testing the PI's gravity-closes-Layer-2 hypothesis at
+different channels, and the compact-temporal propinquity foundation (Sprint L3b first
+move).
+
+**Sprint L3a-1 — Lorentzian operator system at finite cutoff (Paper 44 captured).**
+Built `geovac/operator_system_lorentzian.py` (~1054 lines) extending the Riemannian
+operator-system construction (Paper 32 §III, Connes-vS Toeplitz S¹ analog) to the BBB
+Krein spectral triple at signature (3, 1). 33 tests + 1 slow, all pass, zero regression
+on 390-test Sprint L2 baseline. **Two substantive structural findings:**
+(i) **propagation number is envelope-dependent** — prop = 2 under the Weyl-doubled
+achievable envelope (matches Paper 32 §III `prop:propagation_2` verbatim, Toeplitz S¹
+analog), prop = ∞ under the full dim_K² envelope (chirality-doubling and commutative
+temporal subalgebra block scalar multipliers from reaching chirality-flipping or
+non-diagonal temporal operators); (ii) **Krein-positive restriction at substrate level
+is trivial** — all chirality-doubled scalar multipliers M⊕M commute with J = chirality-
+swap, so O^{L,+} = O^L exactly. Non-trivial K⁺ program shifts to STATE level (Wasserstein-
+Kantorovich on K⁺ states), natural setting for Sprint L3b. Riemannian limit at N_t = 1
+bit-exact (Frobenius residual = 0.0 in float64) across n_max ∈ {1, 2, 3}. Witness pair
+(M^{2,1,0,0}, M^{2,1,0,0*}) at ~38% residual exhibits non-multiplicative closure.
+
+**Paper 44 drafted.** `papers/standalone/paper_44_lorentzian_operator_system.tex` —
+sixth math.OA standalone in the GeoVac series (siblings: 38, 39, 40, 42, 43). 1698 LaTeX
+lines, ~14k words, 18 pages compiled (550 KB PDF), 33 bibitems, three-pass clean compile
+(after defining `\TT` macro for Tomita-Takesaki and adding `\label{sec:krein_space}`).
+Captures Sprint L3a-1. Companion to Paper 43 (43 = modular-Hamiltonian closure on Krein
+wedge; 44 = operator-system substrate of any future Lorentzian propinquity construction).
+arXiv-ready pending PI metadata sign-off (math.OA primary, math-ph + gr-qc secondary).
+Positioned against Connes-vS 2021 (arXiv:2004.14115) "elsewhere" deferral and the open
+Lorentzian propinquity problem (Mondino-Sämann synthetic Lorentzian GH program is
+moderate scoop risk for the propinquity proper, not for Paper 44's substrate result).
+
+**Sprint TD-PSLQ-1 — Bethe log probe (clean NULL).** Hydrogen 1S Bethe logarithm
+ln k_0(1S) = 2.984128555765498 (Drake 1990, 16 digits) PSLQ'd against 64-form mechanical
+M1/M2/M3/ALG/depth-2 basis (frozen-before-PSLQ, SHA256-stamped). 27 PSLQ tests × 3
+coefficient ceilings (10⁴, 10⁶, 10⁸); identical residuals across ceilings (diagnostic
+signature of a true null). Zero trustworthy hits. **Third independent structural-skeleton-
+scope confirmation** on atomic-QED Layer-2 content (LS-8a renormalization gap + W3
+spectral-zeta falsification + Bethe log null). Honest scope: 16 digits is borderline for
+PSLQ; 50+ digit Korobov-class values would permit deeper testing. Files:
+`debug/td_pslq_bethe_log.py`, `debug/td_pslq_bethe_log_memo.md`, basis + results JSONs.
+
+**Sprint TD-PSLQ-2 — A_60(1S) probe on properly-chosen spacetime channel (clean NULL).**
+Re-test after Bethe log was identified as the wrong channel for the gravity hypothesis
+(Bethe log is bound-state QED virtual-state sum, NOT relativistic-kinematic). Agent
+surveyed six spacetime/relativistic-kinematic candidates and selected the canonical
+**A_60(1S) = -30.92415** to 7 digits (Jentschura-Mohr-Soff 1999 PRL 82, 53;
+arXiv:physics/0001068; Yerokhin-Pachucki-Patkóš 2019 arXiv:1809.00462). This is the
+**nonlogarithmic α(Zα)⁶ one-loop hydrogen self-energy coefficient** — unambiguously
+spacetime/relativistic mechanism (Dirac-Coulomb kinematics × radiative correction).
+90-form basis including a SPACETIME_AUG class tailored to Dirac-Coulomb closed-form
+patterns. 30 PSLQ tests × 3 ceilings, zero trustworthy hits at any ceiling.
+**Fourth independent structural-skeleton-scope confirmation, this time on the proper-
+channel spacetime/relativistic Layer-2 content.** The PI's "spacetime corrections close
+Layer-2 residuals to bit-exactness" hypothesis is **NOT SUPPORTED on the α(Zα)⁶
+self-energy channel** at 7-digit precision. Honest scope: 7 digits is borderline;
+doesn't decisively kill the hypothesis but strongly suggests calibration-class. Files:
+`debug/td_pslq_spacetime.py`, `debug/td_pslq_spacetime_memo.md`, basis + results JSONs.
+
+**Sprint L3b first-move foundation — compact-temporal Lorentzian propinquity substrate.**
+Five-module construction across three agent dispatches (pre-rate-limit prior agent
+landed 2 modules; post-reset continuation built remaining 3 + 50-test umbrella file
+before stall-watchdog; final tight-scope continuation added focused 35-test K⁺ file and
+verified imports). Final state on disk:
+  - `geovac/krein_space_compact_temporal.py` (380 lines): `CompactTemporalKreinSpace`
+    class with `J = J_spatial ⊗ I_{N_t}`, Fourier momentum grid on $S^1_T$.
+  - `geovac/lorentzian_dirac_compact.py` (250 lines): function-based API,
+    Lorentzian Dirac with Fourier-diagonal anti-Hermitian periodic ∂_t.
+  - `geovac/operator_system_compact_temporal.py` (598 lines):
+    `CompactTemporalTruncatedOperatorSystem` class, propagation number = 2 matching
+    Paper 32 §III, `compare_to_l3a1_grid` interop method.
+  - `geovac/central_fejer_compact_temporal.py` (532 lines):
+    `joint_fejer_kernel`, `joint_cb_norm`, `joint_gamma_rate` — factorized Plancherel
+    symbol exact in sympy rationals; joint cb-norm = 2/(n_max+1).
+  - `geovac/krein_positive_state_space.py` (477 lines):
+    `KreinPositiveStateSpace` class with J eigendecomposition (chirality doubling
+    `K_plus_dim = K_minus_dim = dim_K / 2` exact), K⁺/K⁻ projectors, pure-state
+    densities, SDP-based Wasserstein distance via cvxpy.
+
+Tests:
+  - `tests/test_lorentzian_propinquity_foundation.py` (467 lines, 50 tests, 48 fast +
+    2 slow, 11.71s, all pass)
+  - `tests/test_krein_positive_state_space.py` (478 lines, 35 tests, 5.26s, all pass)
+  - **Zero regression on 142+ baseline tests across upstream test files.**
+
+**Substantive structural finding (K⁺ at state level):** at operator-multiplier level,
+the Krein-positivity check ω(a*Ja) ≥ 0 passes for BOTH K⁺ and K⁻ pure states because
+every operator-system multiplier commutes with J (confirming the L3a-1 finding that
+operator-multiplier-level K-positivity is trivial). The structural distinguishing
+observable is **Tr(ρJ) = +1 (K⁺) vs −1 (K⁻)** — a state-level invariant, not an
+operator-level inequality. This reaffirms that the non-trivial K⁺ program lives at the
+state-space level, which is what `KreinPositiveStateSpace` provides as substrate.
+
+**Honest scope on Sprint L3b foundation:** this is FOUNDATION work, NOT the full L1'–L5
+propinquity proof. The numerical Λ panel sweeps (per-cell SDP at $(n_{\max}, N_t) \in
+\{(2, 3), (3, 5), \dots\}$) and the full L1'–L5 lemmas adapted to the Krein-positive
+substrate are named Sprint L3b-2 follow-on (4–8 weeks per L3 scoping memo). The
+foundation memo (`debug/l3b_first_move_memo.md`) was honestly corrected during the PM
+session to flag specific SDP distance values in §3 as unverified by the first stalled
+agent — those would need re-running on the now-functional `wasserstein_distance_pure`
+method to be load-bearing.
+
+**L3 scoping memos.** Two parallel scoping memos produced before the L3a-1 / L3b sprints:
+  - `debug/l3_scoping_memo.md` (5240 words, math architecture): weak-form L3 on K⁺-state-
+    space tractable in 4–8 months, strong-form likely unreachable; path-of-least-
+    resistance via temporal compactification ℝ_t → S¹_T (the L3b first move's mechanism).
+  - `debug/l3_literature_audit_memo.md` (~3500 words, literature audit): no published
+    Lorentzian propinquity exists as of May 2026 (Latrémolière 2017/2026, Hekkelman-
+    McDonald 2024 a/b, Toyota 2023, Farsi-Latrémolière 2024/2025 all strictly Riemannian);
+    Nieuviarts shortcut **confirmed-dead** at v6 March 2026 for odd-dim S³ (author has
+    had two years and hasn't fixed it); Mondino-Sämann synthetic Lorentzian GH program
+    (2504.10380 etc., 2022–2025) is moderate scoop risk for the propinquity proper but
+    NCG-disjoint culture; Entry Point A (Connes-vS × BBB Krein truncation at fixed
+    cutoff, 1–3 months, shelf-ready ingredients) is the natural Sprint L3a.
+
+**PI policy locked.** "Capture in papers after each coding session if anything is worth
+writing down; revise as we learn." Memory file at
+`feedback_paper_capture_after_each_session.md`. Reduces scoop risk, locks priority,
+makes the working journal tangible. Established as discipline of the workflow, not an
+optional consolidation pass.
+
+**Strategic synthesis of the two PSLQ nulls.** The gravity hypothesis is reframed but
+NOT killed by today's nulls — structural Lorentzian propinquity (Sprint L3b-2) might
+close residuals at operator-system / propinquity level even if per-residual PSLQ tests
+at modest precision are null. Per-residual PSLQ vs operator-system propinquity are
+different tests of the same hypothesis. The L3b foundation closes the *machinery*
+substrate the propinquity-level test will live on. Per-residual probes at higher
+precision (50+ digit Korobov Bethe log; future spacetime channels) remain the empirical
+complement.
+
+**File summary:**
+- New production modules: 6 (5 L3b foundation + operator_system_lorentzian.py)
+- New test files: 3 (operator_system_lorentzian + L3b foundation umbrella + K⁺ focused)
+- New tests passing: 118 fast + 3 slow (33 L3a-1 + 50 L3b foundation + 35 K⁺)
+- New paper: Paper 44 standalone + PDF
+- New memos: 5 (L3 scoping, L3 lit audit, L3a-1 operator system, L3b first move,
+  TD-PSLQ-1 Bethe log, TD-PSLQ-2 spacetime, plus Paper 44 draft summary)
+- New JSONs: 6 (L3a-1 results, TD-PSLQ-1 basis+results, TD-PSLQ-2 basis+results+stdout)
+- Memory files: 3 (paper_44_drafted.md, l3b_foundation_complete.md,
+  feedback_paper_capture_after_each_session.md), indexed in MEMORY.md
+
 ## [2.45.0] - 2026-05-17
 
 ### Added — Sprint L2-F.1 + Pythagorean extension scoping (post-L2-closure refinement)

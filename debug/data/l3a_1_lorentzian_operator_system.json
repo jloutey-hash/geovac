@@ -1,0 +1,509 @@
+{
+  "sprint": "L3a-1",
+  "date": "2026-05-17",
+  "title": "Lorentzian truncated operator system at finite cutoff",
+  "convention": {
+    "metric_signature": "(3, 1) West-coast eta = diag(+, -, -, -)",
+    "gamma_basis": "Cl(3, 1) chiral (Peskin-Schroeder)",
+    "Krein_J": "gamma^0 (chirality-swap on spatial slot)",
+    "spatial_basis": "FullDirac (chirality-doubled Camporesi-Higuchi)",
+    "temporal_basis": "polynomial t^p, p=0..N_t-1, on uniform [-T_max,T_max] grid",
+    "multiplier_construction": "tensor product M^spat (x) diag(g_p(t_grid)); spatial = chirality-doubled scalar 3-Y on FullDirac; temporal = diagonal polynomial-basis"
+  },
+  "structural_findings_summary": {
+    "load_bearing_riemannian_limit_at_Nt1": "BIT-EXACT (max_residual = 0.0 in float64) at all tested n_max. Confirms scalar-multiplier spinor lift is compatible with the L2-B Krein-space basis at N_t = 1.",
+    "propagation_number_achievable_envelope": "prop = 2 at every tested (n_max, N_t) on the Weyl-block-diagonal achievable envelope, matching Paper 32 prop=2 verbatim.",
+    "propagation_number_full_envelope": "prop = INFINITY at every tested cell on the full B(K) envelope. Structural reason: chirality-doubling (M (+) M) and commutative temporal subalgebra block scalar multipliers from reaching the full envelope. The dim sequence saturates at the Weyl-doubled subspace dimension.",
+    "krein_positive_restriction_trivial": "All scalar multipliers preserve the Krein-positive cone K^+ (commute with J = chirality-swap (x) I_{N_t}). The restriction to K^+-preservers is the full system; structural finding.",
+    "witness_pair": "M^{2,1,0,0} (and its conjugate) lies in O^L, but their product does NOT (residual ~38% at every tested (n_max>=2, N_t) cell). Lorentzian lift of Paper 32 witness pair."
+  },
+  "panel_cells": [
+    {
+      "n_max": 1,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 4,
+      "dim_spatial": 4,
+      "dim_Weyl": 2,
+      "dim_O": 1,
+      "envelope_dim_full": 16,
+      "achievable_envelope_dim": 4,
+      "n_multipliers": 1,
+      "build_time_s": 0.008788585662841797,
+      "identity_in_O": {
+        "pass": true,
+        "residual": 0.0,
+        "time_s": 0.0001380443572998047
+      },
+      "star_closed": {
+        "pass": true,
+        "n_failures": 0,
+        "time_s": 5.3882598876953125e-05
+      },
+      "riemannian_limit": {
+        "pass": true,
+        "details": {
+          "n_max": 1,
+          "N_t": 1,
+          "dim_K": 4,
+          "full_dirac_dim": 4,
+          "n_multipliers_self": 1,
+          "n_multipliers_ref": 1,
+          "n_compared": 1,
+          "n_unmatched": 0,
+          "max_residual": 0.0,
+          "dim_self": 1,
+          "dim_ref": 1,
+          "load_bearing_pass": true,
+          "dim_match": true,
+          "multiplier_count_match": true,
+          "matrix_residual_pass": true,
+          "dim_O_match": true,
+          "compute_time_s": 0.00048232078552246094
+        },
+        "load_bearing": true
+      },
+      "krein_positive_preservers": {
+        "n_preserving": 1,
+        "n_total": 1,
+        "fraction_preserving": 1.0,
+        "all_preserve": true,
+        "time_s": 4.220008850097656e-05
+      },
+      "propagation_number_achievable": {
+        "prop": -1,
+        "dim_sequence": [
+          1,
+          1
+        ],
+        "target_dim": 4,
+        "time_s": 0.00012969970703125
+      },
+      "propagation_number_full": {
+        "prop": -1,
+        "dim_sequence": [
+          1,
+          1
+        ],
+        "target_dim": 16,
+        "time_s": 9.107589721679688e-05
+      }
+    },
+    {
+      "n_max": 2,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 16,
+      "dim_spatial": 16,
+      "dim_Weyl": 8,
+      "dim_O": 14,
+      "envelope_dim_full": 256,
+      "achievable_envelope_dim": 64,
+      "n_multipliers": 14,
+      "build_time_s": 0.07158374786376953,
+      "identity_in_O": {
+        "pass": true,
+        "residual": 4.440892098500626e-16,
+        "time_s": 0.00018739700317382812
+      },
+      "star_closed": {
+        "pass": true,
+        "n_failures": 0,
+        "time_s": 0.0012483596801757812
+      },
+      "riemannian_limit": {
+        "pass": true,
+        "details": {
+          "n_max": 2,
+          "N_t": 1,
+          "dim_K": 16,
+          "full_dirac_dim": 16,
+          "n_multipliers_self": 14,
+          "n_multipliers_ref": 14,
+          "n_compared": 14,
+          "n_unmatched": 0,
+          "max_residual": 0.0,
+          "dim_self": 14,
+          "dim_ref": 14,
+          "load_bearing_pass": true,
+          "dim_match": true,
+          "multiplier_count_match": true,
+          "matrix_residual_pass": true,
+          "dim_O_match": true,
+          "compute_time_s": 0.01644134521484375
+        },
+        "load_bearing": true
+      },
+      "krein_positive_preservers": {
+        "n_preserving": 14,
+        "n_total": 14,
+        "fraction_preserving": 1.0,
+        "all_preserve": true,
+        "time_s": 0.00014472007751464844
+      },
+      "propagation_number_achievable": {
+        "prop": 2,
+        "dim_sequence": [
+          14,
+          64
+        ],
+        "target_dim": 64,
+        "time_s": 0.049402713775634766
+      },
+      "propagation_number_full": {
+        "prop": -1,
+        "dim_sequence": [
+          14,
+          64,
+          64
+        ],
+        "target_dim": 256,
+        "time_s": 0.2090435028076172
+      },
+      "witness_pair": {
+        "label": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "a_exists": true,
+        "ab_in_O_L": false,
+        "residual": 0.38124642583151164,
+        "verdict_witness": true,
+        "time_s": 0.0002455711364746094
+      },
+      "lorentzian_wedge_restriction": {
+        "dim_W_L": 8,
+        "wedge_linear_span_dim": 10,
+        "time_s": 0.005613088607788086
+      }
+    },
+    {
+      "n_max": 3,
+      "N_t": 1,
+      "T_max": 1.0,
+      "dim_K": 40,
+      "dim_spatial": 40,
+      "dim_Weyl": 20,
+      "dim_O": 55,
+      "envelope_dim_full": 1600,
+      "achievable_envelope_dim": 400,
+      "n_multipliers": 55,
+      "build_time_s": 0.5163969993591309,
+      "identity_in_O": {
+        "pass": true,
+        "residual": 4.443810438417325e-16,
+        "time_s": 0.005711555480957031
+      },
+      "star_closed": {
+        "pass": true,
+        "n_failures": 0,
+        "time_s": 0.3082852363586426
+      },
+      "riemannian_limit": {
+        "pass": true,
+        "details": {
+          "n_max": 3,
+          "N_t": 1,
+          "dim_K": 40,
+          "full_dirac_dim": 40,
+          "n_multipliers_self": 55,
+          "n_multipliers_ref": 55,
+          "n_compared": 55,
+          "n_unmatched": 0,
+          "max_residual": 0.0,
+          "dim_self": 55,
+          "dim_ref": 55,
+          "load_bearing_pass": true,
+          "dim_match": true,
+          "multiplier_count_match": true,
+          "matrix_residual_pass": true,
+          "dim_O_match": true,
+          "compute_time_s": 0.2876088619232178
+        },
+        "load_bearing": true
+      },
+      "krein_positive_preservers": {
+        "n_preserving": 55,
+        "n_total": 55,
+        "fraction_preserving": 1.0,
+        "all_preserve": true,
+        "time_s": 0.0018227100372314453
+      },
+      "propagation_number_achievable": {
+        "prop": 2,
+        "dim_sequence": [
+          55,
+          400
+        ],
+        "target_dim": 400,
+        "time_s": 3.513180732727051
+      },
+      "witness_pair": {
+        "label": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "a_exists": true,
+        "ab_in_O_L": false,
+        "residual": 0.3589126350213007,
+        "verdict_witness": true,
+        "time_s": 0.00828695297241211
+      }
+    },
+    {
+      "n_max": 1,
+      "N_t": 3,
+      "T_max": 1.0,
+      "dim_K": 12,
+      "dim_spatial": 4,
+      "dim_Weyl": 2,
+      "dim_O": 3,
+      "envelope_dim_full": 144,
+      "achievable_envelope_dim": 12,
+      "n_multipliers": 3,
+      "build_time_s": 0.001001596450805664,
+      "identity_in_O": {
+        "pass": true,
+        "residual": 4.440892098500626e-16,
+        "time_s": 8.702278137207031e-05
+      },
+      "star_closed": {
+        "pass": true,
+        "n_failures": 0,
+        "time_s": 0.00013971328735351562
+      },
+      "riemannian_limit": {
+        "pass": true,
+        "details": {
+          "n_max": 1,
+          "N_t": 1,
+          "dim_K": 4,
+          "full_dirac_dim": 4,
+          "n_multipliers_self": 1,
+          "n_multipliers_ref": 1,
+          "n_compared": 1,
+          "n_unmatched": 0,
+          "max_residual": 0.0,
+          "dim_self": 1,
+          "dim_ref": 1,
+          "load_bearing_pass": true,
+          "dim_match": true,
+          "multiplier_count_match": true,
+          "matrix_residual_pass": true,
+          "dim_O_match": true,
+          "compute_time_s": 0.0009725093841552734
+        },
+        "load_bearing": true
+      },
+      "krein_positive_preservers": {
+        "n_preserving": 3,
+        "n_total": 3,
+        "fraction_preserving": 1.0,
+        "all_preserve": true,
+        "time_s": 3.361701965332031e-05
+      },
+      "propagation_number_achievable": {
+        "prop": -1,
+        "dim_sequence": [
+          3,
+          3
+        ],
+        "target_dim": 12,
+        "time_s": 0.00022864341735839844
+      },
+      "propagation_number_full": {
+        "prop": -1,
+        "dim_sequence": [
+          3,
+          3
+        ],
+        "target_dim": 144,
+        "time_s": 0.00018453598022460938
+      }
+    },
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "T_max": 1.0,
+      "dim_K": 48,
+      "dim_spatial": 16,
+      "dim_Weyl": 8,
+      "dim_O": 42,
+      "envelope_dim_full": 2304,
+      "achievable_envelope_dim": 192,
+      "n_multipliers": 42,
+      "build_time_s": 0.027095794677734375,
+      "identity_in_O": {
+        "pass": true,
+        "residual": 1.1195253156360338e-15,
+        "time_s": 0.0054819583892822266
+      },
+      "star_closed": {
+        "pass": true,
+        "n_failures": 0,
+        "time_s": 0.23123812675476074
+      },
+      "riemannian_limit": {
+        "pass": true,
+        "details": {
+          "n_max": 2,
+          "N_t": 1,
+          "dim_K": 16,
+          "full_dirac_dim": 16,
+          "n_multipliers_self": 14,
+          "n_multipliers_ref": 14,
+          "n_compared": 14,
+          "n_unmatched": 0,
+          "max_residual": 0.0,
+          "dim_self": 14,
+          "dim_ref": 14,
+          "load_bearing_pass": true,
+          "dim_match": true,
+          "multiplier_count_match": true,
+          "matrix_residual_pass": true,
+          "dim_O_match": true,
+          "compute_time_s": 0.03718400001525879
+        },
+        "load_bearing": true
+      },
+      "krein_positive_preservers": {
+        "n_preserving": 42,
+        "n_total": 42,
+        "fraction_preserving": 1.0,
+        "all_preserve": true,
+        "time_s": 0.005274057388305664
+      },
+      "propagation_number_achievable": {
+        "prop": 2,
+        "dim_sequence": [
+          42,
+          192
+        ],
+        "target_dim": 192,
+        "time_s": 4.9402971267700195
+      },
+      "propagation_number_full": {
+        "prop": -1,
+        "dim_sequence": [
+          42,
+          192,
+          192
+        ],
+        "target_dim": 2304,
+        "time_s": 22.446775913238525
+      },
+      "witness_pair": {
+        "label": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "a_exists": true,
+        "ab_in_O_L": false,
+        "residual": 0.3812464258315117,
+        "verdict_witness": true,
+        "time_s": 0.005949735641479492
+      },
+      "lorentzian_wedge_restriction": {
+        "dim_W_L": 16,
+        "wedge_linear_span_dim": 20,
+        "time_s": 0.007409811019897461
+      }
+    },
+    {
+      "n_max": 2,
+      "N_t": 5,
+      "T_max": 1.0,
+      "dim_K": 80,
+      "dim_spatial": 16,
+      "dim_Weyl": 8,
+      "dim_O": 70,
+      "envelope_dim_full": 6400,
+      "achievable_envelope_dim": 320,
+      "n_multipliers": 70,
+      "build_time_s": 0.043480634689331055,
+      "identity_in_O": {
+        "pass": true,
+        "residual": 1.8418298080293634e-15,
+        "time_s": 0.021427392959594727
+      },
+      "star_closed": {
+        "pass": true,
+        "n_failures": 0,
+        "time_s": 1.635042667388916
+      },
+      "riemannian_limit": {
+        "pass": true,
+        "details": {
+          "n_max": 2,
+          "N_t": 1,
+          "dim_K": 16,
+          "full_dirac_dim": 16,
+          "n_multipliers_self": 14,
+          "n_multipliers_ref": 14,
+          "n_compared": 14,
+          "n_unmatched": 0,
+          "max_residual": 0.0,
+          "dim_self": 14,
+          "dim_ref": 14,
+          "load_bearing_pass": true,
+          "dim_match": true,
+          "multiplier_count_match": true,
+          "matrix_residual_pass": true,
+          "dim_O_match": true,
+          "compute_time_s": 0.03675270080566406
+        },
+        "load_bearing": true
+      },
+      "krein_positive_preservers": {
+        "n_preserving": 70,
+        "n_total": 70,
+        "fraction_preserving": 1.0,
+        "all_preserve": true,
+        "time_s": 0.02252793312072754
+      },
+      "propagation_number_achievable": {
+        "prop": 2,
+        "dim_sequence": [
+          70,
+          320
+        ],
+        "target_dim": 320,
+        "time_s": 88.97551774978638
+      },
+      "propagation_number_full": {
+        "prop": -1,
+        "dim_sequence": [
+          70,
+          320,
+          320
+        ],
+        "target_dim": 6400,
+        "time_s": 391.84819746017456
+      },
+      "witness_pair": {
+        "label": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "a_exists": true,
+        "ab_in_O_L": false,
+        "residual": 0.3812464258315116,
+        "verdict_witness": true,
+        "time_s": 0.026555538177490234
+      },
+      "lorentzian_wedge_restriction": {
+        "dim_W_L": 24,
+        "wedge_linear_span_dim": 30,
+        "time_s": 0.03552603721618652
+      }
+    }
+  ]
+}

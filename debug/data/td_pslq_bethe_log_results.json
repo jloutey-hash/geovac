@@ -1,0 +1,440 @@
+{
+  "sprint": "TD-PSLQ-1",
+  "target": "ln_k_0(1S)",
+  "target_value": "2.984128555765498",
+  "target_precision_digits": 16,
+  "working_dps": 50,
+  "basis_sha256": "0384c66ff525371d13e5e8e1b3a120ebeada7dcc777bc69130655050599e505e",
+  "total_forms_all_classes": 64,
+  "forms_by_class_counts": {
+    "M1": 11,
+    "M2": 6,
+    "M3": 14,
+    "ALG": 10,
+    "ODD_ZETA_CONTROL": 4,
+    "CROSS_PRODUCT": 19
+  },
+  "sub_run_results": {
+    "M1_only": {
+      "N": 11,
+      "classes": [
+        "M1"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -114,
+          "max_abs_coef": 161,
+          "relation_length": 10,
+          "residual": "3.383178966553690070160518e-12",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -114,
+          "max_abs_coef": 161,
+          "relation_length": 10,
+          "residual": "3.383178966553690070160518e-12",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -114,
+          "max_abs_coef": 161,
+          "relation_length": 10,
+          "residual": "3.383178966553690070160518e-12",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        }
+      }
+    },
+    "M2_only": {
+      "N": 6,
+      "classes": [
+        "M2"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -447,
+          "max_abs_coef": 447,
+          "relation_length": 7,
+          "residual": "5.28947564673601138813403e-13",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -447,
+          "max_abs_coef": 447,
+          "relation_length": 7,
+          "residual": "5.28947564673601138813403e-13",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -447,
+          "max_abs_coef": 447,
+          "relation_length": 7,
+          "residual": "5.28947564673601138813403e-13",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        }
+      }
+    },
+    "M3_only": {
+      "N": 14,
+      "classes": [
+        "M3"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -5,
+          "max_abs_coef": 10,
+          "relation_length": 11,
+          "residual": "3.724165543400460085161296e-11",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -5,
+          "max_abs_coef": 10,
+          "relation_length": 11,
+          "residual": "3.724165543400460085161296e-11",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_filled_relation": true,
+          "coef_target": -5,
+          "max_abs_coef": 10,
+          "relation_length": 11,
+          "residual": "3.724165543400460085161296e-11",
+          "is_genuine": false,
+          "_note": "PSLQ returned best-guess relation but residual >> precision floor; not a real integer relation"
+        }
+      }
+    },
+    "M1_M2": {
+      "N": 17,
+      "classes": [
+        "M1",
+        "M2"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 11,
+          "basis_relation_length": 14,
+          "residual": "5.827176520605545545445432e-12",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 11,
+          "basis_relation_length": 14,
+          "residual": "5.827176520605545545445432e-12",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 11,
+          "basis_relation_length": 14,
+          "residual": "5.827176520605545545445432e-12",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M3": {
+      "N": 25,
+      "classes": [
+        "M1",
+        "M3"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 6,
+          "basis_relation_length": 10,
+          "residual": "1.444267691539657091597619e-11",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 6,
+          "basis_relation_length": 10,
+          "residual": "1.444267691539657091597619e-11",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 6,
+          "basis_relation_length": 10,
+          "residual": "1.444267691539657091597619e-11",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3": {
+      "N": 31,
+      "classes": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 3,
+          "basis_relation_length": 12,
+          "residual": "2.207592072803648457005631e-11",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 3,
+          "basis_relation_length": 12,
+          "residual": "2.207592072803648457005631e-11",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 3,
+          "basis_relation_length": 12,
+          "residual": "2.207592072803648457005631e-11",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3_ALG": {
+      "N": 41,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 24,
+          "basis_relation_length": 13,
+          "residual": "2.321852127008861622786006e-11",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 24,
+          "basis_relation_length": 13,
+          "residual": "2.321852127008861622786006e-11",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 24,
+          "basis_relation_length": 13,
+          "residual": "2.321852127008861622786006e-11",
+          "is_genuine": false
+        }
+      }
+    },
+    "M1_M2_M3_ALG_CROSS": {
+      "N": 59,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 34,
+          "basis_relation_length": 22,
+          "residual": "2.029738690195541581979652e-11",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 34,
+          "basis_relation_length": 22,
+          "residual": "2.029738690195541581979652e-11",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 34,
+          "basis_relation_length": 22,
+          "residual": "2.029738690195541581979652e-11",
+          "is_genuine": false
+        }
+      }
+    },
+    "FULL": {
+      "N": 63,
+      "classes": [
+        "M1",
+        "M2",
+        "M3",
+        "ALG",
+        "CROSS_PRODUCT",
+        "ODD_ZETA_CONTROL"
+      ],
+      "ceilings": {
+        "1e4": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 12,
+          "basis_relation_length": 32,
+          "residual": "2.894924191842502933003541e-12",
+          "is_genuine": false
+        },
+        "1e6": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 12,
+          "basis_relation_length": 32,
+          "residual": "2.894924191842502933003541e-12",
+          "is_genuine": false
+        },
+        "1e8": {
+          "hit": false,
+          "spurious_basis_relation": true,
+          "basis_relation_max_coef": 12,
+          "basis_relation_length": 32,
+          "residual": "2.894924191842502933003541e-12",
+          "is_genuine": false
+        }
+      }
+    }
+  },
+  "verdict": {
+    "total_sub_runs": 9,
+    "any_trustworthy_hit": false,
+    "any_hit_at_all": false,
+    "trustworthy_hits": [],
+    "all_target_hits": [],
+    "basis_internal_relations": [
+      {
+        "sub_run": "M1_M2",
+        "ceiling": "1e4",
+        "length": 14
+      },
+      {
+        "sub_run": "M1_M2",
+        "ceiling": "1e6",
+        "length": 14
+      },
+      {
+        "sub_run": "M1_M2",
+        "ceiling": "1e8",
+        "length": 14
+      },
+      {
+        "sub_run": "M1_M3",
+        "ceiling": "1e4",
+        "length": 10
+      },
+      {
+        "sub_run": "M1_M3",
+        "ceiling": "1e6",
+        "length": 10
+      },
+      {
+        "sub_run": "M1_M3",
+        "ceiling": "1e8",
+        "length": 10
+      },
+      {
+        "sub_run": "M1_M2_M3",
+        "ceiling": "1e4",
+        "length": 12
+      },
+      {
+        "sub_run": "M1_M2_M3",
+        "ceiling": "1e6",
+        "length": 12
+      },
+      {
+        "sub_run": "M1_M2_M3",
+        "ceiling": "1e8",
+        "length": 12
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG",
+        "ceiling": "1e4",
+        "length": 13
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG",
+        "ceiling": "1e6",
+        "length": 13
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG",
+        "ceiling": "1e8",
+        "length": 13
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS",
+        "ceiling": "1e4",
+        "length": 22
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS",
+        "ceiling": "1e6",
+        "length": 22
+      },
+      {
+        "sub_run": "M1_M2_M3_ALG_CROSS",
+        "ceiling": "1e8",
+        "length": 22
+      },
+      {
+        "sub_run": "FULL",
+        "ceiling": "1e4",
+        "length": 32
+      },
+      {
+        "sub_run": "FULL",
+        "ceiling": "1e6",
+        "length": 32
+      },
+      {
+        "sub_run": "FULL",
+        "ceiling": "1e8",
+        "length": 32
+      }
+    ]
+  }
+}

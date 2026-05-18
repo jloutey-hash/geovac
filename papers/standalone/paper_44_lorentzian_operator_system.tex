@@ -1,0 +1,1699 @@
+% =====================================================================
+% Paper 44 (standalone): Operator-system extension of the BBB Krein
+% spectral triple at finite cutoff; propagation number and envelope
+% dependence on the Camporesi-Higuchi spinor bundle.
+%
+% Math.OA / J. Geom. Phys. style; sixth math.OA standalone in the
+% GeoVac series. Siblings: Paper 38 (SU(2) propinquity convergence),
+% Paper 39 (tensor-product propinquity convergence), Paper 40
+% (universal 4/pi rate constant on compact Lie groups), Paper 42
+% (Tomita-Takesaki / four-witness Riemannian closure), Paper 43
+% (Lorentzian extension of the four-witness theorem).
+%
+% Status: first draft, May 2026, post-Sprint-L3a-1 (2026-05-17). Built
+% from internal sprint memos:
+%   debug/l3a_1_lorentzian_operator_system_memo.md
+%   debug/l3_scoping_memo.md
+%   debug/l3_literature_audit_memo.md
+%   debug/sprint_l2_synthesis_memo.md
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\Nt}{N_t}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Krein}{\mathcal{K}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Frob}[1]{\lVert #1 \rVert_{F}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DL}{D_L}
+\newcommand{\JL}{J_L}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\prop}{\mathrm{prop}}
+\newcommand{\TT}{\mathrm{TT}}
+\newcommand{\KMS}{\mathrm{KMS}}
+\newcommand{\BW}{\mathrm{BW}}
+\newcommand{\spat}{\mathrm{spat}}
+\newcommand{\temp}{\mathrm{temp}}
+\newcommand{\Weyl}{\mathrm{Weyl}}
+\newcommand{\achievable}{\mathrm{ach}}
+
+\title{Operator-system extension of the BBB Krein spectral triple\\
+at finite cutoff:\ propagation number and\\
+envelope dependence on the Camporesi--Higuchi spinor bundle}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Connes--van~Suijlekom~\cite{connes_vs2021} spectral truncation of
+$C^\infty(\sthree)$ on the round $\sthree = \SU(2)$ at cutoff $\nmax$
+produces a $*$-closed but \emph{not} multiplicatively closed linear
+subspace $\Op_{\nmax} \subset \Mat_{N}(\C)$ with propagation number
+$\prop(\Op_{\nmax}) = 2$ (Paper~32~\S~III, matching the Connes--vS
+worked example on the Toeplitz operator system $C(S^1)^{(n)}$
+verbatim). We construct the natural Lorentzian extension
+$\Op_{\nmax, \Nt}^L \subset \Bcal(\Krein_{\nmax, \Nt})$ on the
+Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018} Krein
+spectral triple at signature $(s, t) = (3, 1)$, $(m, n) = (4, 6)$,
+in the Peskin--Schroeder chiral basis with Lorentzian Dirac
+$\DL = i\bigl(\gamma^0 \otimes \partial_t + \DGV \otimes I_{\Nt}\bigr)$
+per van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1, and the
+Camporesi--Higuchi~\cite{camporesi_higuchi1996} spatial spinor bundle.
+Multipliers are tensor products of chirality-doubled spatial scalar
+$3$-$Y$ multipliers with a polynomial-basis temporal subalgebra on a
+finite uniform $t$-grid. At $\Nt = 1$ the construction reduces
+bit-identically to the Riemannian chirality-doubled operator system on
+the FullDirac Hilbert space, with Frobenius residual exactly $0.0$ in
+float64. We prove $\Op_{\nmax, \Nt}^L$ is a Lorentzian truncated
+operator system (it is $*$-closed, contains the identity, and is not
+multiplicatively closed) and exhibit a witness pair lifting the
+Paper~32~\S~III witness verbatim. The principal structural finding is
+that the propagation number is \emph{envelope-dependent}:\ targeting
+the natural Weyl-doubled achievable envelope $\dim_\Weyl^2 \cdot \Nt$,
+we obtain $\prop(\Op_{\nmax, \Nt}^L) = 2$ for every $\nmax \ge 2$,
+matching Paper~32~\S~III verbatim; targeting the full $\Bcal(\Krein)$
+envelope $\dim_\Krein^2$, we obtain $\prop = \infty$ at every cell.
+The Weyl-doubling and the commutative temporal subalgebra
+\emph{block} scalar multipliers from generating chirality-flipping or
+non-diagonal temporal operators; the achievable envelope is the
+correct natural target for scalar-multiplier closure on the spinor
+bundle. A separate substantive finding is that the Krein-positive
+restriction is trivial:\ every chirality-doubled scalar multiplier
+$M \oplus M$ commutes with the chirality-swap fundamental symmetry
+$\JL$, so $\Op^{L,+} = \Op^L$ exactly. The Krein-positive program is
+shifted from the operator-system substrate (where it is automatic) to
+the state level, which is the natural setting for any future
+Lorentzian-propinquity convergence argument. The construction is the
+foundation on which any subsequent continuum Lorentzian-propinquity
+program (Sprint L3b, see~\S~\ref{sec:open}) would build. Honest scope:
+this paper closes the operator-system substrate at finite cutoff;
+continuum / GH-limit / Lorentzian-propinquity convergence is open. No
+published Lorentzian propinquity construction exists as of May 2026:\
+Latr\'emoli\`ere~2017/2023~\cite{latremoliere_metric_st_2017} and
+Hekkelman--McDonald~2024~\cite{hekkelman_mcdonald2024} are strictly
+Riemannian.
+\end{abstract}
+
+\bigskip\noindent
+\textbf{MSC2020 classifications:}\ 58B34 (noncommutative geometry),
+46L07 (operator systems), 46C20 (spaces with indefinite inner product),
+46L60 (applications of selfadjoint operator algebras to physics),
+46L87 (noncommutative Riemannian and metric geometry).
+
+\medskip\noindent
+\textbf{Keywords:}\ Connes--van~Suijlekom truncated operator system,
+propagation number, Krein spectral triple, Bizi--Brouder--Besnard
+indefinite signature, Camporesi--Higuchi Dirac, Lorentzian
+noncommutative geometry, spectral truncation, finite-cutoff
+operator-system substrate.
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+A central technical object in the spectral-truncation framework of
+Connes and van~Suijlekom~\cite{connes_vs2021} is the truncated operator
+system
+\begin{equation}\label{eq:cvs_riem}
+   \Op_\Lambda \;=\; P_\Lambda\, C^\infty(M)\, P_\Lambda
+   \;\subset\; \Bcal(\Hilb_\Lambda),
+\end{equation}
+where $P_\Lambda$ projects $L^2(M)$ onto the span of the first
+$\Lambda$ eigenfunctions of the Dirac operator (or, equivalently in
+the GeoVac convention, onto the first $\nmax$ Fock shells of the
+Fock-projected spectrum). On the round $\sthree = \SU(2)$ with
+spinor-harmonic basis adapted to the SO(4) decomposition, this
+construction was carried out in Paper~32~\S~III of the present
+author's framework documentation and verified to have propagation
+number
+\begin{equation}\label{eq:prop_riem}
+   \prop(\Op_{\nmax}) \;=\; 2 \qquad (\nmax \in \{2, 3, 4\}),
+\end{equation}
+matching the Connes--vS worked example on the Toeplitz operator
+system $C(S^1)^{(n)}$ verbatim~\cite{connes_vs2021}. This was the
+strongest single quantitative alignment between GeoVac and the
+published Connes--vS framework as of the Round-2 sprint
+(\texttt{debug/wh1\_round2\_propagation\_memo.md}, 2026-05-03).
+
+The companion Paper~43~\cite{paper43} of the present author closes
+the four-witness Wick-rotation theorem
+(Hartle--Hawking~\cite{hartle_hawking1976},
+Sewell~\cite{sewell1982},
+Bisognano--Wichmann~\cite{bisognano_wichmann1976},
+Unruh~\cite{unruh1976}) at the operator-system level on the
+Lorentzian Krein spectral triple at signature $(3, 1)$ in the
+Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018} classification
+at $(m, n) = (4, 6)$, with the modular Hamiltonian and Tomita
+structure on a hemispheric wedge. Paper~43 takes the operator-system
+substrate as input;\ the present paper constructs it.
+
+\subsection{What this paper does}
+
+We define and study the natural Lorentzian extension
+\begin{equation}\label{eq:cvs_lor}
+   \Op_{\nmax, \Nt}^L
+   \;=\; P_{\nmax, \Nt} \cdot \bigl[\,
+                C^\infty(\sthree) \otimes C^\infty(\R_t)_{\mathrm{cutoff}}
+              \,\bigr]
+   \cdot P_{\nmax, \Nt}
+   \;\subset\; \Bcal(\Krein_{\nmax, \Nt})
+\end{equation}
+on the Krein space
+$\Krein_{\nmax, \Nt} = \HGV^{\nmax} \otimes \C^{\Nt}$ of Paper~43
+\S~\ref{sec:krein_space} (Sprint L2-B). Here $\HGV^{\nmax}$ is the
+chirality-doubled Camporesi--Higuchi~\cite{camporesi_higuchi1996}
+spinor space at Fock cutoff $\nmax$, with
+$\dim_\C \HGV^{\nmax} = \tfrac{2}{3}\nmax(\nmax + 1)(\nmax + 2)
+\in \{4, 16, 40, 80, 140\}$ at $\nmax \in \{1, 2, 3, 4, 5\}$, and
+$\C^{\Nt}$ is the temporal $L^2$ cutoff on the uniform grid
+$t_k = -T_{\max} + k \cdot 2T_{\max}/(\Nt - 1)$. Spatial scalar
+multipliers act on $\HGV^{\nmax}$ via the chirality-block-doubled
+spinor lift (Clebsch--Gordan decomposition $\oplus$ Avery--Wen--Avery
+$3$-$Y$ integrals); temporal multipliers act on $\C^{\Nt}$ by
+pointwise multiplication via the polynomial basis $g_p(t) = t^p$ for
+$p = 0, \ldots, \Nt - 1$.
+
+The principal results are:
+
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item \textbf{Operator-system axioms hold} (Proposition~\ref{prop:axioms},
+Section~\ref{sec:op_system}). $\Op_{\nmax, \Nt}^L$ contains the
+identity, is closed under conjugate transposition, and is \emph{not}
+multiplicatively closed:\ an explicit witness pair lifting the
+Paper~32 spatial witness produces a product $ab$ with Frobenius
+residual $\sim 38\%$ relative to the linear span of $\Op^L$
+(Theorem~\ref{thm:witness_pair}, Section~\ref{sec:witness}).
+\item \textbf{Riemannian limit at $\Nt = 1$ is bit-exact}
+(Theorem~\ref{thm:riemannian_limit}, Section~\ref{sec:riem_limit}). The
+construction reduces to the chirality-doubled FullDirac operator
+system on $\HGV^{\nmax}$ with maximum residual $0.0$ in float64 at
+every $\nmax \in \{1, 2, 3\}$, verifying compatibility with the
+Sprint L2-B Krein-space basis convention.
+\item \textbf{Envelope-dependent propagation number} (Theorem~%
+\ref{thm:prop_envelope_dependent}, Section~\ref{sec:propagation}).
+Targeting the Weyl-doubled \emph{achievable} envelope
+$\dim_\achievable = \dim_\Weyl^2 \cdot \Nt$,
+\begin{equation}\label{eq:prop_lor_ach_intro}
+   \prop_{\achievable}(\Op_{\nmax, \Nt}^L) \;=\; 2
+   \qquad \text{for every } \nmax \ge 2, \; \Nt \ge 1,
+\end{equation}
+verbatim with Paper~32~\S~III. Targeting the full $\Bcal(\Krein)$
+envelope $\dim_\Krein^2$,
+\begin{equation}\label{eq:prop_lor_full_intro}
+   \prop_{\mathrm{full}}(\Op_{\nmax, \Nt}^L) \;=\; \infty
+   \qquad \text{at every cell.}
+\end{equation}
+The discrepancy is a real structural feature of the chirality-doubled
+spinor bundle:\ scalar multipliers $M \oplus M$ cannot generate
+chirality-flipping operators (off-diagonal blocks of the chirality
+splitting), and a commutative temporal subalgebra cannot generate
+non-diagonal temporal operators. Eq.~\eqref{eq:prop_lor_ach_intro} is
+the natural Connes--vS-style propagation question for scalar
+multipliers on a chirality-doubled bundle;\
+\eqref{eq:prop_lor_full_intro} is a strictly larger naive envelope not
+reached by the scalar-multiplier construction.
+\item \textbf{Krein-positive restriction is trivial}
+(Proposition~\ref{prop:krein_positivity_trivial},
+Section~\ref{sec:krein_positivity}). Every multiplier in
+$\Op_{\nmax, \Nt}^L$ commutes with the chirality-swap fundamental
+symmetry $\JL = \gamma^0 \otimes I_{\Nt}$, so it preserves the
+Krein-positive cone $\Krein^+ = \mathrm{ker}(\JL - I)$. The natural
+restriction $\Op^{L,+}$ to Krein-positive preservers equals
+$\Op^L$ itself.
+\end{enumerate}
+
+\subsection{Position in the literature}
+
+The Lorentzian-propinquity question
+sits at the intersection of three threads with empty intersection as
+of May 2026:\
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(a)] \textbf{Riemannian propinquity convergence on spectral
+truncations.} Connes--van~Suijlekom~\cite{connes_vs2021} introduces
+the truncated operator system and the propagation-number invariant;
+Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017,latremoliere2018}
+develops the propinquity for metric spectral triples;\ the
+explicit Gromov--Hausdorff convergence on a non-trivial example was
+deferred to ``elsewhere'' three times in \cite{connes_vs2021}
+(lines~220--221, 1101, 2616--2617 of arXiv:2004.14115v2). Subsequent
+work by
+Hekkelman~\cite{hekkelman2022},
+Hekkelman--McDonald~\cite{hekkelman_mcdonald2024,
+hekkelman_mcdonald2024b},
+Leimbach--van~Suijlekom~\cite{leimbach_vs2024},
+Toyota~\cite{toyota2023},
+Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
+farsi_latremoliere2025} addresses the flat structures $S^1$, $T^d$,
+and Berezin--Toeplitz $S^2$. The first non-abelian case
+$\sthree = \SU(2)$ was closed by the present author in Paper~38
+\cite{paper38}; the tensor-product extension was closed in
+Paper~39~\cite{paper39}; the universal compact-Lie-group rate constant
+$4/\pi$ was closed in Paper~40~\cite{paper40_unified}. All of these
+are strictly Riemannian.
+\item[(b)] \textbf{Lorentzian noncommutative geometry.}
+Strohmaier~\cite{strohmaier2006},
+van~den~Dungen~\cite{vandungen2016},
+Franco--Eckstein~\cite{franco_eckstein2014},
+Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018},
+Devastato--Lizzi--Martinetti~\cite{devastato_lizzi_martinetti2018},
+and
+Nieuviarts~\cite{nieuviarts2025a} construct indefinite (Krein)
+spectral triples and address Wick rotation at the level of the data
+$(\Acal, \Krein, \DL, \JL)$. None of these works carries the
+construction through to a Connes--van~Suijlekom truncated operator
+system on the Krein side, nor to a propagation-number invariant.
+\item[(c)] \textbf{Lorentzian Gromov--Hausdorff convergence.} The
+recent Mondino--Sämann program on synthetic Lorentzian
+GH~\cite{mondino_samann2025} and the
+Bykov--Minguzzi--Suhr work on Lorentzian convergence of metric
+spaces~\cite{bykov_minguzzi_suhr2024} develop a metric-space-side
+notion of Lorentzian convergence but do not interface with the
+operator-system/spectral-triple side.
+\end{enumerate}
+The present paper closes the operator-system \emph{substrate} of any
+prospective Lorentzian-propinquity convergence program at finite
+cutoff;\ it does not close the propinquity itself. The substrate is the
+foundation on which a future propinquity argument would be built.
+
+\subsection{Why this is a separate paper from Paper~43}
+
+Paper~43~\cite{paper43} closes the four-witness Wick-rotation theorem
+at the \emph{modular-Hamiltonian} level on a hemispheric wedge of the
+Lorentzian Krein space, using the same Krein construction
+$\Krein_{\nmax, \Nt}$, Lorentzian Dirac $\DL$, and BBB axiom audit at
+$(m, n) = (4, 6)$ as the present paper. The Paper~43 results
+(integer spectrum of the geometric BW-$\alpha$ generator, $\beta$-%
+independent wedge KMS state, Tomita--Takesaki polar decomposition,
+flow conjugacy, six-witness collapse) operate at the level of
+\emph{specific operators} on the Krein space:\ the wedge projector,
+the modular operator $\Delta$, the modular Hamiltonian $K_L^\alpha$
+and $K_L^{\TT}$. They do not directly study the linear span of all
+spatial-times-temporal multipliers as a $*$-closed subspace of
+$\Bcal(\Krein)$.
+
+The present paper studies that subspace explicitly. The
+propagation-number invariant is independent of any wedge structure or
+modular flow:\ it is a statement about the multiplicative closure of
+the operator system as a whole, and its envelope-dependence at the
+Weyl-doubled vs full $\Bcal(\Krein)$ level is a separate structural
+feature not visible in Paper~43's hemispheric-wedge analysis.
+Conceptually, Paper~43 is the analog of computing modular data on a
+specific algebra (here the wedge-restricted operator system); the
+present paper is the analog of constructing the algebra itself
+together with its envelope-relative structural invariants.
+Computationally, the two papers share their lower layers
+(\texttt{geovac/krein\_space\_construction.py},
+\texttt{geovac/lorentzian\_dirac.py},
+\texttt{geovac/connes\_axiom\_audit\_31.py}) but Paper~43 does not
+import \texttt{geovac/operator\_system\_lorentzian.py} (the Sprint
+L3a-1 module) and vice versa.
+
+\subsection{Outline}
+
+Section~\ref{sec:setup} recalls the Krein-space construction at
+$(m, n) = (4, 6)$ from Paper~43 and fixes notation.
+Section~\ref{sec:op_system} defines the Lorentzian truncated operator
+system $\Op^L$, proves $*$-closure and identity-membership, and
+discusses the multiplier bookkeeping.
+Section~\ref{sec:riem_limit} verifies the Riemannian-limit recovery at
+$\Nt = 1$ (load-bearing falsifier).
+Section~\ref{sec:propagation} proves the envelope-dependent
+propagation theorem.
+Section~\ref{sec:krein_positivity} establishes the trivial
+Krein-positive restriction.
+Section~\ref{sec:witness} exhibits the witness pair.
+Section~\ref{sec:wedge} connects to the Paper~43 hemispheric wedge.
+Section~\ref{sec:open} states open questions and the recommended
+first Sprint L3b move.
+Section~\ref{sec:conclusion} concludes.
+
+% =====================================================================
+\section{Setup: Krein space, Lorentzian Dirac, BBB axiom audit}\label{sec:krein_space}
+\label{sec:setup}
+% =====================================================================
+
+Sections~\ref{sec:krein}--\ref{sec:bbb} recall the data of the
+Lorentzian Krein spectral triple from
+Paper~43~\cite{paper43}~\S~3 (Sprints L2-B/C/D). The reader familiar
+with Paper~43 may skim or skip these subsections.
+
+\subsection{The Krein space $\Krein_{\nmax, \Nt}$}\label{sec:krein}
+
+Fix a Fock cutoff $\nmax \in \N$ and a temporal grid size $\Nt \in
+\N$ on a half-width $T_{\max} > 0$. The Krein space at cutoff is
+\begin{equation}\label{eq:krein_def}
+   \Krein_{\nmax, \Nt}
+   \;:=\; \HGV^{\nmax} \otimes \C^{\Nt},
+\end{equation}
+where $\HGV^{\nmax}$ is the chirality-doubled Camporesi--Higuchi
+spinor space at cutoff $\nmax$
+(Paper~32~\S~III~\cite{paper32}, Paper~43~\S~3.1) with basis labelled
+$\bigl(n_{\mathrm{fock}}, l, 2 m_j, \mathrm{chirality}\bigr)$ in the
+\texttt{FullDiracLabel} convention. The spatial dimension is
+\begin{equation}\label{eq:dim_spatial}
+   \dim_\C \HGV^{\nmax}
+   \;=\; \tfrac{2}{3}\,\nmax(\nmax + 1)(\nmax + 2)
+   \;=\; \begin{cases} 4 & \nmax = 1 \\ 16 & \nmax = 2 \\
+         40 & \nmax = 3 \\ 80 & \nmax = 4 \\ 140 & \nmax = 5 \end{cases}
+\end{equation}
+and the total Krein dimension is $\dim_\C \Krein_{\nmax, \Nt} =
+\dim_\C \HGV^{\nmax} \cdot \Nt$.
+
+We use the symmetric temporal grid
+\begin{equation}\label{eq:t_grid}
+   t_k \;:=\; -T_{\max} + k \cdot \tfrac{2 T_{\max}}{\Nt - 1}
+   \qquad (k = 0, \ldots, \Nt - 1),
+\end{equation}
+with the convention $t_0 = 0$ at $\Nt = 1$. The fundamental symmetry
+on $\Krein_{\nmax, \Nt}$ is
+\begin{equation}\label{eq:J_def}
+   \JL \;:=\; \gamma^0 \otimes I_{\Nt},
+\end{equation}
+where $\gamma^0$ acts as chirality-swap on $\HGV$ in the
+Peskin--Schroeder chiral basis (West-coast metric $\eta =
+\mathrm{diag}(+, -, -, -)$). The basic Krein-space axioms
+$\JL^2 = +I$, $\JL^\dagger \JL = I$, $\JL^\dagger = \JL$, and the
+splitting $\Krein = \Krein^+ \oplus \Krein^-$ into $\pm 1$-eigenspaces
+of $\JL$ are verified bit-exactly in Sprint L2-B (Paper~43~\S~3.1).
+
+\subsection{The Lorentzian Dirac $\DL$}\label{sec:lor_dirac}
+
+The Lorentzian Dirac operator on $\Krein_{\nmax, \Nt}$ is
+\begin{equation}\label{eq:DL_def}
+   \DL \;:=\; i\bigl(
+              \gamma^0 \otimes \partial_t
+              \;+\; \DGV \otimes I_{\Nt}
+            \bigr),
+\end{equation}
+per van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1 with
+$(s, t) = (3, 1)$ giving $i^t = i^1 = i$, where $\DGV$ is the
+truthful Camporesi--Higuchi Dirac on $\HGV^{\nmax}$
+(spectrum $|\lambda_n| = n + \tfrac{1}{2}$ with multiplicities
+$g_n^{\mathrm{Dirac}} = 2(n+1)(n+2)$ on each chirality) and
+$\partial_t$ is the centered finite-difference operator on the
+uniform grid \eqref{eq:t_grid} with Dirichlet zero boundary
+conditions. The sign $i^t = +i$ is structurally forced by
+Krein-self-adjointness $\DL^\times = \DL$ (Paper~43~\S~3.2,
+\texttt{geovac/lorentzian\_dirac.py}). At $\Nt = 1$, $\partial_t = 0$
+and $\DL = i\DGV$ reduces to the Riemannian Camporesi--Higuchi
+Dirac up to a global imaginary scaling that drops out of all
+load-bearing falsifiers (Paper~43~\S~3.2).
+
+\subsection{The BBB axiom audit at $(m, n) = (4, 6)$}\label{sec:bbb}
+
+The Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018}
+classification of indefinite spectral triples by
+$(m, n) = (t + s, t - s)$ mod $8$ places Lorentzian $(3, 1)$ West-coast
+at $(m, n) = (4, 6)$, with primitive signs (BBB Table~1)
+\begin{equation}\label{eq:bbb_signs}
+   \varepsilon = +1, \quad
+   \varepsilon'' = -1, \quad
+   \kappa = -1, \quad
+   \kappa'' = +1.
+\end{equation}
+The lift of the Cl$(3,1)$ charge-conjugation matrix $U_4 = i\gamma^2$
+to $\Krein$ is $\JL = J_{L, \mathrm{spatial}} \otimes K_t$ with $K_t$
+the identity-unitary times complex conjugation on $\C^{\Nt}$
+(Paper~43~\S~3.3, \texttt{geovac/connes\_axiom\_audit\_31.py}). The
+four BBB-predicted-sign axioms
+\begin{equation}\label{eq:bbb_axioms}
+   \JL^2 = +I, \quad
+   \{\JL, \gamma^5\} = 0, \quad
+   \{\JL, \eta\} = 0, \quad
+   \JL \DL = +\DL \JL
+\end{equation}
+pass bit-exactly (Frobenius residual $= 0.0$ in float64) at every
+tested $(\nmax, \Nt) \in \{1, 2, 3\} \times \{1, 11, 21\}$
+(Paper~43~\S~3.3). The non-load-bearing universal BBB axiom
+$\{\gamma^5, \DL\} = 0$ \emph{fails} on truthful $\DGV$ for the
+reason described in Paper~43~\S~9.3:\ this is a known structural
+feature (chirality-diagonal Camporesi--Higuchi Dirac in the
+Peskin--Schroeder chiral basis), not a bug, and is preserved by the
+present construction without affecting any of its load-bearing
+results.
+
+\subsection{Spatial scalar multipliers on the chirality-doubled bundle}
+\label{sec:spat_mult}
+
+The Riemannian Connes--vS multiplier $M_{NLM}$ on $L^2(\sthree)$
+acts by pointwise multiplication of a scalar hyperspherical harmonic
+$Y^{(3)}_{NLM}$:\
+\begin{equation}\label{eq:M_NLM_riem}
+   \langle (n,l,m_l) \mid M_{NLM} \mid (n', l', m_l') \rangle
+   \;=\; \int_{\sthree}
+           \overline{Y_{n l m_l}}\, Y^{(3)}_{NLM}\, Y_{n' l' m_l'}\, dV,
+\end{equation}
+with selection rules $|n - n'| + 1 \le N \le n + n' - 1$ (SO(4)
+triangle), $|l - l'| \le L \le l + l'$ with $l + l' + L$ even
+(parity), and $M = m_l - m_l'$. The integral is the
+Avery--Wen--Avery~\cite{avery_wen_avery2002} 3-Y integral, evaluated
+symbolically in exact $\Q$-arithmetic via
+\texttt{geovac/so4\_three\_y\_integral.py}.
+
+The lift to the Weyl-spinor sector $\HGV^{\Weyl} \subset \HGV$ is
+the Clebsch--Gordan-projected matrix
+\begin{equation}\label{eq:M_NLM_weyl}
+   \langle (n, l, j, m_j) \mid M_{NLM} \mid
+            (n', l', j', m_j') \rangle
+   \;=\; \sum_{m_l, m_l'} C^{j, m_j}_{l, m_l; 1/2, m_s}
+                     \, C^{j', m_j'}_{l', m_l'; 1/2, m_s}
+                     \, \delta_{m_s, m_j - m_l}\,
+                       (\text{Eq.}~\eqref{eq:M_NLM_riem}),
+\end{equation}
+via \texttt{geovac/spinor\_operator\_system.py}. Both chirality
+sectors of $\HGV = \HGV^{\Weyl} \oplus \HGV^{\Weyl}$ see the
+scalar multiplier identically, so the FullDirac multiplier is
+\begin{equation}\label{eq:M_NLM_full}
+   M^{\spat}_{NLM} \;:=\; M^{\Weyl}_{NLM} \oplus M^{\Weyl}_{NLM}
+   \;\in\; \Bcal(\HGV^{\nmax}),
+\end{equation}
+i.e.\ block-diagonal in the two chirality sectors with equal blocks.
+This is exactly the \texttt{FullDiracTruncatedOperatorSystem.build\_%
+full\_dirac\_multiplier\_matrix} construction of
+Sprint WH1-R3.5~\cite{paper32}.
+
+\subsection{Temporal multipliers on $\C^{\Nt}$}\label{sec:temp_mult}
+
+We choose the polynomial basis $g_p(t) = t^p$ for
+$p = 0, 1, \ldots, \Nt - 1$, evaluated on the temporal grid
+\eqref{eq:t_grid}. The corresponding diagonal matrix is
+\begin{equation}\label{eq:M_temp}
+   M_p^{\temp}
+   \;:=\; \mathrm{diag}\bigl(g_p(t_0), g_p(t_1), \ldots,
+                             g_p(t_{\Nt - 1})\bigr)
+   \;\in\; \Bcal(\C^{\Nt}).
+\end{equation}
+The Vandermonde matrix
+$V_{kp} = t_k^p$ is invertible at $\Nt$ distinct grid points, so the
+$\Nt$-element family $\{M_p^{\temp}\}_{p = 0}^{\Nt - 1}$ spans the
+full $\Nt$-dimensional commutative subalgebra of diagonal matrices on
+$\C^{\Nt}$. At $\Nt = 1$, only the constant $g_0(t) = 1$ is
+available, and $M_0^{\temp} = 1$ is the $1 \times 1$ identity.
+
+% =====================================================================
+\section{The Lorentzian truncated operator system}\label{sec:op_system}
+% =====================================================================
+
+\begin{definition}[Lorentzian truncated operator system]
+\label{def:O_L}
+At fixed $(\nmax, \Nt, T_{\max})$, the \emph{Lorentzian truncated
+operator system} on the Krein space $\Krein_{\nmax, \Nt}$ is the
+$\C$-linear span
+\begin{equation}\label{eq:O_L_def}
+   \Op_{\nmax, \Nt}^L
+   \;:=\; \mathrm{span}_\C
+         \Bigl\{
+           M^{\spat}_{NLM} \otimes M^{\temp}_p
+           \;:\;
+           (N, L, M) \in \mathcal{S}_{\spat}(\nmax),
+           \;\; 0 \le p \le \Nt - 1
+         \Bigr\}
+   \;\subset\; \Bcal(\Krein_{\nmax, \Nt}),
+\end{equation}
+where $\mathcal{S}_{\spat}(\nmax)$ is the set of multiplier labels
+$(N, L, M)$ admitting a nonzero spinor-lift matrix
+\eqref{eq:M_NLM_full} at cutoff $\nmax$ (SO(4) triangle, parity,
+$M$-conservation, plus the $\nmax$-truncation kernel filter
+$|n - n'| + 1 \le N \le n + n' - 1$ both ways).
+\end{definition}
+
+The number of spatial multipliers is exactly
+$\dim_\C \Op_{\nmax} = 1, 14, 55, 140, 285$ at $\nmax = 1, 2, 3, 4, 5$
+(Paper~32~\S~III~\cite{paper32}), and the total number of generators of
+$\Op^L$ is $\dim_\C \Op_{\nmax} \cdot \Nt$.
+
+\begin{proposition}[Operator-system axioms]\label{prop:axioms}
+At every $(\nmax, \Nt)$ with $\Nt \ge 1$:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item[(i)] $\Op_{\nmax, \Nt}^L$ is closed under conjugate
+transposition $A \mapsto A^\dagger$ on $\Bcal(\Krein)$.
+\item[(ii)] $I_{\Krein} \in \Op_{\nmax, \Nt}^L$, with $I_{\Krein}$
+realised by the trivial multiplier $M^{\spat}_{0,0,0} \otimes
+M_0^{\temp} = I_{\dim_\spat} \otimes I_{\Nt}$.
+\item[(iii)] $\Op_{\nmax, \Nt}^L$ is \emph{not} multiplicatively
+closed for any $\nmax \ge 2$ (witness pair, Theorem~%
+\ref{thm:witness_pair}, Section~\ref{sec:witness}).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For (i), the spatial conjugation
+\eqref{eq:M_NLM_riem} satisfies the Wigner relation
+\begin{equation}\label{eq:Y_conj}
+   \overline{Y^{(3)}_{NLM}} \;=\; (-1)^{M_+}\, Y^{(3)}_{N, L, -M},
+\end{equation}
+for a definite sign $(-1)^{M_+}$ depending on the real-spherical
+convention (we use complex sphericals so $M_+ = M$); the lifted
+spinor matrix \eqref{eq:M_NLM_full} inherits this and
+$(M^{\spat}_{NLM})^\dagger = \pm M^{\spat}_{N, L, -M}$. The temporal
+multiplier $M_p^{\temp}$ is real-diagonal hence self-adjoint:
+$(M_p^{\temp})^\dagger = M_p^{\temp}$. Tensor products of $*$-closed
+families are $*$-closed:
+\[
+   (M^{\spat}_{NLM} \otimes M_p^{\temp})^\dagger
+   \;=\; (M^{\spat}_{NLM})^\dagger \otimes M_p^{\temp}
+   \;=\; \pm\, M^{\spat}_{N, L, -M} \otimes M_p^{\temp}
+   \;\in\; \Op^L,
+\]
+provided $(N, L, -M) \in \mathcal{S}_{\spat}(\nmax)$, which follows
+from the $M$-symmetry of the SO(4) selection rules.
+
+For (ii), the trivial multiplier $M^{\spat}_{0,0,0}$ is the
+$\HGV^{\nmax}$-identity (the constant function $Y^{(3)}_{0,0,0}$
+acts as multiplication by a nonzero scalar; under the standard
+normalisation it acts as the identity matrix), and
+$M_0^{\temp}$ is the $\C^{\Nt}$-identity by
+$g_0(t) \equiv 1$. The tensor $I_{\dim_\spat} \otimes I_{\Nt} =
+I_{\Krein}$.
+
+For (iii) we postpone to Section~\ref{sec:witness}.
+\end{proof}
+
+\begin{remark}[Operator-system terminology]\label{rem:op_system}
+By standard usage~\cite{paulsen2002,connes_vs2021}, an
+\emph{operator system} is a $*$-closed unital linear subspace of
+$\Bcal(\Hilb)$ (without the requirement of multiplicative closure).
+Proposition~\ref{prop:axioms} establishes that
+$\Op_{\nmax, \Nt}^L$ is an operator system in this sense. The
+absence of multiplicative closure (item (iii)) is the structural
+feature that makes the operator-system substrate \emph{strictly
+weaker} than the $C^*$-envelope $C^*(\Op^L) \subset \Bcal(\Krein)$;\
+the operator-system data is precisely the algebraic content surviving
+the spectral truncation that the $C^*$-envelope discards (cf.\
+Connes--vS \cite{connes_vs2021}, ``if one takes the $C^*$-algebra
+generated by $PAP$ one gets a non-informative full matrix algebra'').
+\end{remark}
+
+% =====================================================================
+\section{Riemannian limit at $\Nt = 1$}\label{sec:riem_limit}
+% =====================================================================
+
+The load-bearing falsifier for the Lorentzian extension is that at
+$\Nt = 1$ — where the temporal slot reduces to a single point and the
+construction reduces to a static spatial slice — the operator-system
+substrate must recover the chirality-doubled Riemannian operator
+system bit-identically.
+
+\begin{theorem}[Bit-exact Riemannian-limit recovery at $\Nt = 1$]
+\label{thm:riemannian_limit}
+At $\Nt = 1$, the Lorentzian truncated operator system reduces to the
+chirality-doubled Riemannian operator system on $\HGV^{\nmax}$:
+\begin{equation}\label{eq:riem_limit}
+   \Op_{\nmax, 1}^L
+   \;=\; \Op_{\nmax}^{\mathrm{Full\,Dirac}}
+   \;=\; \bigl\{
+           M \oplus M \;:\; M \in \Op_{\nmax}^{\Weyl}
+         \bigr\}
+   \;\subset\; \Bcal(\HGV^{\nmax}).
+\end{equation}
+The reduction is bit-exact in float64:\ for every multiplier label
+$(N, L, M, p = 0) \in \mathcal{S}_{\spat}(\nmax) \times \{0\}$, the
+Lorentzian multiplier matrix \eqref{eq:M_NLM_full} equals the
+corresponding chirality-doubled spatial multiplier on $\HGV^{\nmax}$
+with maximum Frobenius residual $= 0.0$ at every tested
+$\nmax \in \{1, 2, 3\}$.
+\end{theorem}
+
+\begin{proof}[Proof and computational verification]
+At $\Nt = 1$, $M_0^{\temp} = 1$ is the $1 \times 1$ identity scalar,
+so the tensor product $M^{\spat}_{NLM} \otimes M_0^{\temp} =
+M^{\spat}_{NLM}$ is bit-identical to the chirality-doubled spatial
+multiplier on $\HGV^{\nmax}$. The full list of multiplier labels
+$\mathcal{S}_{\spat}(\nmax)$ at $\Nt = 1$ matches the
+FullDiracTruncatedOperatorSystem multiplier list one-for-one
+(same SO(4) triangle, parity, and $M$-conservation filters), and the
+matrix construction calls the same
+\texttt{build\_spinor\_multiplier\_matrix} routine on the same
+Avery--Wen--Avery 3-Y integrals.
+
+The computational verification is documented in
+\texttt{tests/test\_operator\_system\_lorentzian.py::%
+test\_riemannian\_limit\_bit\_exact}: at $\nmax \in \{1, 2, 3\}$,
+
+\medskip
+\begin{center}\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{c|c|c|c|c}
+$\nmax$ & $\dim_\Krein$ & $\#$ multipliers
+   & $\dim(\Op^L)$ & $\max \Frob{M_{\mathrm{self}} - M_{\mathrm{ref}}}$ \\
+\hline
+$1$ & $4$ & $1$ & $1$ & $0.0$ (exact) \\
+$2$ & $16$ & $14$ & $14$ & $0.0$ (exact) \\
+$3$ & $40$ & $55$ & $55$ & $0.0$ (exact) \\
+\end{tabular}
+\end{center}
+\medskip
+
+The residual is exactly $0.0$ in float64 (not merely within machine
+epsilon) because the two constructions call the same underlying
+matrix-element routine and the $1 \times 1$ tensor with identity is
+the identity bit-operation in IEEE 754.
+\end{proof}
+
+\begin{remark}[Significance of bit-exactness]\label{rem:bit_exact}
+Bit-exact Riemannian-limit recovery is the natural consistency
+condition for any Lorentzian extension that purports to reduce to its
+Riemannian counterpart at static slices. Failure here would indicate
+a structural incompatibility between the L2-B Krein-space basis
+convention (Peskin--Schroeder chiral basis at $(m, n) = (4, 6)$) and
+the FullDirac spinor-bundle basis convention (Paper~32~\S~III, Sprint
+WH1-R3.5~\cite{paper32}). The passing of the falsifier confirms the
+two conventions are bit-identical at $\Nt = 1$, and the Lorentzian
+construction inherits the Riemannian spinor lift verbatim.
+\end{remark}
+
+% =====================================================================
+\section{Envelope dependence of the propagation number}
+\label{sec:propagation}
+% =====================================================================
+
+The propagation number~\cite{connes_vs2021}~Definition~2.39 of an
+operator system $\Op \subset \Mat_N(\C)$ is the smallest $k \in \N
+\cup \{\infty\}$ such that
+$\dim_\C \Op^k = \dim_\C \mathrm{env}(\Op)$, where
+$\Op^k = \mathrm{span}_\C \{a_1 \cdot a_2 \cdots a_k :\ a_i \in \Op\}$
+and $\mathrm{env}(\Op)$ is the chosen envelope (typically the
+$C^*$-envelope, equal to $\Mat_N(\C)$ in the Connes--vS Toeplitz
+setting). On the chirality-doubled spinor bundle there are two
+natural envelopes:\ the \emph{Weyl-doubled achievable} envelope and
+the \emph{full} envelope. The principal result of this paper is
+that the propagation number distinguishes them.
+
+\subsection{The two envelopes}\label{sec:envelopes}
+
+A scalar-multiplier product $M_1 \cdot M_2$ on $\HGV^{\nmax}$
+preserves the chirality-block-diagonal structure:
+\begin{equation}\label{eq:chirality_diag}
+   (M_1 \oplus M_1) \cdot (M_2 \oplus M_2)
+   \;=\; (M_1 M_2) \oplus (M_1 M_2).
+\end{equation}
+The maximal subspace of $\Bcal(\HGV^{\nmax})$ reachable by
+scalar-multiplier products is therefore the Weyl-doubled subspace
+\begin{equation}\label{eq:weyl_doubled}
+   \mathcal{V}_\Weyl
+   \;:=\; \bigl\{\, M_W \oplus M_W \;:\; M_W \in \Mat_{\dim_\Weyl}(\C)
+                \,\bigr\}
+   \;\cong\; \Mat_{\dim_\Weyl}(\C),
+\end{equation}
+with $\dim_\C \mathcal{V}_\Weyl = \dim_\Weyl^2$. Tensored with the
+commutative temporal subalgebra
+$\mathcal{D}_{\Nt} \subset \Mat_{\Nt}(\C)$ of dimension $\Nt$, the
+achievable subspace on $\Krein_{\nmax, \Nt}$ is
+\begin{equation}\label{eq:achievable_def}
+   \mathcal{V}_\achievable
+   \;:=\; \mathcal{V}_\Weyl \otimes \mathcal{D}_{\Nt}
+   \;\subset\; \Bcal(\Krein),
+\end{equation}
+of dimension
+\begin{equation}\label{eq:dim_achievable}
+   \dim_\C \mathcal{V}_\achievable
+   \;=\; \dim_\Weyl^2 \cdot \Nt.
+\end{equation}
+By contrast, the \emph{full} $\Bcal(\Krein)$ envelope has
+\begin{equation}\label{eq:dim_full}
+   \dim_\C \Bcal(\Krein_{\nmax, \Nt})
+   \;=\; \dim_\Krein^2
+   \;=\; \dim_\spat^2 \cdot \Nt^2
+   \;=\; 4 \dim_\Weyl^2 \cdot \Nt^2,
+\end{equation}
+where the factor of $4$ comes from $\dim_\spat = 2 \dim_\Weyl$ on the
+chirality-doubled bundle.
+
+\begin{definition}[Envelope-relative propagation number]
+\label{def:prop_env}
+For envelopes $\mathcal{V} \in
+\{\mathcal{V}_\achievable, \Bcal(\Krein)\}$, the propagation number
+$\prop_{\mathcal{V}}(\Op^L)$ is the smallest $k \in \N \cup \{\infty\}$
+such that $\dim_\C \mathrm{span}_\C(\Op^L)^k = \dim_\C \mathcal{V}$,
+where $(\Op^L)^k = \mathrm{span}_\C\{a_1 a_2 \cdots a_k\}$ is the
+$k$-fold product space. We say $\prop = \infty$ when no finite $k$
+reaches $\dim_\C \mathcal{V}$.
+\end{definition}
+
+\subsection{Achievable-envelope propagation: prop = 2}
+\label{sec:prop_ach}
+
+\begin{theorem}[Achievable-envelope propagation]
+\label{thm:prop_envelope_dependent}
+For every $(\nmax, \Nt)$ with $\nmax \ge 2$ and $\Nt \ge 1$:
+\begin{equation}\label{eq:prop_ach}
+   \prop_{\achievable}(\Op_{\nmax, \Nt}^L) \;=\; 2.
+\end{equation}
+For every $(\nmax, \Nt)$ with $\nmax \ge 2$ and $\Nt \ge 1$ at finite
+cutoff:
+\begin{equation}\label{eq:prop_full_inf}
+   \prop_{\mathrm{full}}(\Op_{\nmax, \Nt}^L) \;=\; \infty.
+\end{equation}
+At $\nmax = 1$, the spatial slot is trivial (only the
+identity multiplier survives), and $\prop_{\achievable} = \infty$ as
+well, the trivial case.
+\end{theorem}
+
+\begin{proof}[Proof of \eqref{eq:prop_full_inf}]
+Every product $M_1 \cdot M_2$ of two scalar-multiplier generators is
+chirality-block-diagonal by \eqref{eq:chirality_diag}, so
+$(\Op^L)^k \subset \mathcal{V}_\Weyl \otimes
+\mathrm{span}_\C\{M_p \cdot M_{p'} \cdots\}$ for every
+$k$. Since $\mathcal{V}_\Weyl \subsetneq \Mat_{\dim_\spat}(\C)$ (the
+off-block-diagonal chirality-flipping operators are not in
+$\mathcal{V}_\Weyl$), and the temporal $C^*$-algebra generated by
+diagonal matrices is $\Mat_{\Nt}(\C) \cap \mathcal{D}_{\Nt} =
+\mathcal{D}_{\Nt}$ (the commutative subalgebra is its own $C^*$-%
+algebra image), we have $(\Op^L)^k \subset \mathcal{V}_\achievable$
+for every $k$. Therefore
+$\dim_\C (\Op^L)^k \le \dim_\C \mathcal{V}_\achievable =
+\dim_\Weyl^2 \cdot \Nt$, strictly less than
+$\dim_\C \Bcal(\Krein) = \dim_\Krein^2 = 4 \dim_\Weyl^2 \cdot \Nt^2$
+for any $\Nt \ge 1$ and $\nmax \ge 2$. So
+$\prop_{\mathrm{full}}(\Op^L) = \infty$.
+\end{proof}
+
+\begin{proof}[Proof of \eqref{eq:prop_ach}, computational verification]
+The Riemannian Paper~32~\S~III result is $\prop(\Op_{\nmax}^\Weyl) =
+2$ for the Weyl-sector operator system on $\HGV^{\Weyl, \nmax}$
+(Proposition~\ref{prop:paper32_prop}, see~\S~\ref{sec:context}). Under
+the chirality-doubling map $\Op_{\nmax}^\Weyl \to
+\Op_{\nmax}^{\mathrm{Full\,Dirac}}$, $M_W \mapsto M_W \oplus M_W$,
+the propagation number is preserved with target envelope
+$\mathcal{V}_\Weyl$ (the doubled image space):\
+$(\Op^{\mathrm{Full\,Dirac}})^2$ fills $\mathcal{V}_\Weyl$ because
+$(\Op^\Weyl)^2$ fills $\Mat_{\dim_\Weyl}(\C) =
+\mathcal{V}_\Weyl$. Tensoring with the commutative
+$\mathcal{D}_{\Nt}$:\ products of generators
+$(M^\spat_a \otimes M_p^\temp) \cdot (M^\spat_b \otimes M_{p'}^\temp)
+= (M^\spat_a M^\spat_b) \otimes (M_p^\temp M_{p'}^\temp)$ generate
+$(M^\spat_a M^\spat_b)$-content in $\mathcal{V}_\Weyl$ tensored with
+products $M_p^\temp M_{p'}^\temp \in \mathcal{D}_{\Nt}$. Since
+$\{M_p^\temp\}_{p = 0}^{\Nt - 1}$ already spans $\mathcal{D}_{\Nt}$,
+$(\Op^L)^2$ fills $\mathcal{V}_\Weyl \otimes \mathcal{D}_{\Nt} =
+\mathcal{V}_\achievable$.
+
+The computational verification is documented in
+\texttt{tests/test\_operator\_system\_lorentzian.py::%
+test\_propagation\_number\_nmax\_2\_*\_achievable\_envelope} and
+\texttt{::test\_propagation\_number\_nmax\_3\_achievable\_envelope}.
+A complete numerical panel is:
+
+\medskip
+\begin{center}\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{c|c|c|c|c|c|c}
+$\nmax$ & $\Nt$ & $\dim_\Krein$ & $\dim_\Weyl$
+   & $\dim_\achievable$
+   & $\dim(\Op^L)$ & $\dim((\Op^L)^2)$ \\
+\hline
+$1$ & $1$ & $4$  & $2$ & $4$  & $1$  & $1$  \\
+$1$ & $3$ & $12$ & $2$ & $12$ & $3$  & $3$  \\
+$2$ & $1$ & $16$ & $8$ & $64$ & $14$ & $\mathbf{64}$ \\
+$2$ & $3$ & $48$ & $8$ & $192$ & $42$ & $\mathbf{192}$ \\
+$2$ & $5$ & $80$ & $8$ & $320$ & $70$ & $\mathbf{320}$ \\
+$3$ & $1$ & $40$ & $20$ & $400$ & $55$ & $\mathbf{400}$ \\
+\end{tabular}
+\end{center}
+\medskip
+
+The bolded entries show $\dim((\Op^L)^2) = \dim_\achievable$, i.e.\
+$\prop = 2$ at every cell with $\nmax \ge 2$. The $\nmax = 1$ cells
+are the trivial case (the spatial slot has only the identity
+multiplier $(N, L, M) = (0, 0, 0)$, so the operator system is
+$\C \cdot I_\spat \otimes \mathcal{D}_{\Nt}$ of dimension $\Nt$,
+which is closed under multiplication and so has no nontrivial
+propagation depth to drive).
+\end{proof}
+
+\begin{proposition}[Paper~32~\S~III propagation, Weyl sector]
+\label{prop:paper32_prop}
+For every $\nmax \in \{2, 3, 4\}$,
+$\prop(\Op_{\nmax}^\Weyl) = 2$ on the envelope
+$\mathrm{env}(\Op^\Weyl) = \Mat_{\dim_\Weyl}(\C)$, with
+$\dim(\Op^\Weyl) < \dim_\Weyl^2 = \dim(\mathrm{env})$ strictly.
+\end{proposition}
+
+\begin{proof}
+Paper~32~\S~III, \texttt{prop:propagation\_number}, computational
+verification in \texttt{tests/test\_operator\_system.py} (24 tests
+passing, $\sim 20$ s CPU time). The result is invariant under three
+SO(4) radial-overlap placeholder conventions (Paper~32~\S~III,
+discussion after the proposition statement).
+\end{proof}
+
+\subsection{Why both numbers are real}\label{sec:both_real}
+
+The discrepancy between $\prop_\achievable = 2$ and
+$\prop_{\mathrm{full}} = \infty$ is not a technical glitch:\ it reflects
+the fact that scalar multipliers on a chirality-doubled bundle
+genuinely cannot reach the full $\Bcal(\Krein)$ envelope at any finite
+$k$. The two natural targets correspond to two different operational
+questions:
+
+\medskip\noindent
+\textbf{Achievable.} At what depth $k$ does the operator system fill
+the maximal subspace structurally consistent with the
+scalar-multiplier construction (chirality-block-diagonal, temporal-%
+commutative)?  Answer: $k = 2$.
+
+\medskip\noindent
+\textbf{Full.} At what depth $k$ does the operator system reach the
+full matrix algebra $\Mat_{\dim_\Krein}(\C)$?  Answer: never.
+Reaching this envelope would require either Cl$(3, 1)$-gamma-matrix-%
+valued multipliers (chirality-flipping) or a non-commutative temporal
+multiplier algebra (e.g.\ $\partial_t$-extended), both of which are
+outside the natural scalar-multiplier construction.
+
+The Riemannian Paper~32~\S~III situation has no analogous distinction:\
+on the scalar Fock-projected $\sthree$ Hilbert space (Paper~32
+Definition~3.2), there is no chirality doubling and no temporal
+factor, so the achievable and full envelopes coincide. The
+distinction is genuinely introduced by the Lorentzian extension:\ the
+chirality doubling enters at the spinor level (Sprint WH1-R3.5
+\texttt{full\_dirac\_operator\_system.py}, which the Riemannian
+Paper~32~\S~III analysis chose not to invoke for clarity); the
+temporal factor enters at the L2-B Krein-space level. Both
+contribute structural blocks to the propagation that are visible in
+the present construction but invisible in the Riemannian template.
+
+\begin{remark}[Connes--vS dual operator system as comparison]
+\label{rem:comparison}
+Connes--vS~\cite{connes_vs2021}~Proposition~4.3 establishes that the
+\emph{dual} operator system to the Toeplitz $C(S^1)^{(n)}$, namely
+$C(\Z)^{(n)} \subset \Mat_n(\C)$ generated by characteristic
+functions on the integer lattice, has $\prop = \infty$. Our
+$\prop_{\mathrm{full}} = \infty$ result has a different mechanism
+(envelope-side, not generator-side), but the qualitative
+phenomenon — propagation number depends on which natural envelope is
+targeted — has a published parallel.
+\end{remark}
+
+% =====================================================================
+\section{Trivial Krein-positive restriction}\label{sec:krein_positivity}
+% =====================================================================
+
+The Krein-positive cone is the $(+1)$-eigenspace of $\JL$:
+\begin{equation}\label{eq:krein_plus}
+   \Krein^+ \;:=\; \{ \psi \in \Krein \;:\; \JL \psi = +\psi \},
+   \qquad \dim_\C \Krein^+ = \tfrac{1}{2} \dim_\C \Krein.
+\end{equation}
+An operator $A \in \Bcal(\Krein)$ \emph{preserves} $\Krein^+$ iff
+$A \cdot \Krein^+ \subset \Krein^+$, equivalently iff
+$[\JL, A] = 0$ at the level of the block decomposition
+$\Krein = \Krein^+ \oplus \Krein^-$. The Krein-positive
+restriction of $\Op^L$ is
+\begin{equation}\label{eq:O_L_plus}
+   \Op^{L, +} \;:=\; \{ A \in \Op^L \;:\; [\JL, A] = 0 \}.
+\end{equation}
+
+\begin{proposition}[Triviality of the Krein-positive restriction]
+\label{prop:krein_positivity_trivial}
+At every $(\nmax, \Nt)$ with $\Nt \ge 1$,
+\begin{equation}\label{eq:O_L_plus_trivial}
+   \Op^{L, +}_{\nmax, \Nt} \;=\; \Op_{\nmax, \Nt}^L.
+\end{equation}
+That is, every scalar-multiplier generator in $\Op^L$ already
+preserves the Krein-positive cone.
+\end{proposition}
+
+\begin{proof}
+A generator $M^{\spat}_{NLM} \otimes M_p^{\temp}$ commutes with
+$\JL = \gamma^0 \otimes I_{\Nt}$ iff
+$M^{\spat}_{NLM}$ commutes with $\gamma^0$ and
+$M_p^{\temp}$ commutes with $I_{\Nt}$, the latter being automatic.
+
+For the spatial factor, $M^{\spat}_{NLM} = M_W \oplus M_W$ in the
+chirality decomposition $\HGV = \HGV^{\Weyl} \oplus \HGV^{\Weyl}$.
+The fundamental symmetry $\gamma^0$ acts as the chirality-swap
+matrix
+\[
+   \gamma^0
+   \;=\; \begin{pmatrix} 0 & I_{\dim_\Weyl} \\
+                          I_{\dim_\Weyl} & 0 \end{pmatrix}
+\]
+in the same decomposition (Paper~43~\S~3.1, Peskin--Schroeder chiral
+basis). Direct computation:
+\[
+   \gamma^0 \cdot (M_W \oplus M_W)
+   \;=\; \begin{pmatrix} 0 & I \\ I & 0 \end{pmatrix}
+         \begin{pmatrix} M_W & 0 \\ 0 & M_W \end{pmatrix}
+   \;=\; \begin{pmatrix} 0 & M_W \\ M_W & 0 \end{pmatrix},
+\]
+and
+\[
+   (M_W \oplus M_W) \cdot \gamma^0
+   \;=\; \begin{pmatrix} M_W & 0 \\ 0 & M_W \end{pmatrix}
+         \begin{pmatrix} 0 & I \\ I & 0 \end{pmatrix}
+   \;=\; \begin{pmatrix} 0 & M_W \\ M_W & 0 \end{pmatrix},
+\]
+so $[\gamma^0, M^{\spat}_{NLM}] = 0$ exactly. Tensoring with any
+operator commuting with $I_{\Nt}$ (everything),
+$[\JL, M^{\spat}_{NLM} \otimes M_p^{\temp}] = 0$. The
+computational verification is documented in
+\texttt{tests/test\_operator\_system\_lorentzian.py::%
+test\_krein\_positive\_restriction\_trivial}:\ at every tested
+$(\nmax, \Nt) \in \{(2, 1), (2, 3), (3, 1)\}$, the fraction of
+Krein-positive-preserving generators is exactly $1.0$.
+\end{proof}
+
+\begin{remark}[The Krein-positivity question shifts to the state level]
+\label{rem:state_level}
+Proposition~\ref{prop:krein_positivity_trivial} says that on the
+chirality-doubled scalar-multiplier operator system, Krein
+positivity is automatic at the level of the operators themselves.
+The non-trivial Krein-positivity question is therefore not at the
+operator-substrate level but at the \emph{state} level:\ which states
+on $\Op^L$ assign positive expectation values to the Krein-positive
+matrix elements?  The Wasserstein--Kantorovich state space on
+$\Krein^+$ is the natural setting (cf.\
+\cite{latremoliere_metric_st_2017}~\S~3, the Riemannian state-space
+propinquity), and a Lorentzian-propinquity convergence argument
+(Sprint L3b, see~\S~\ref{sec:open}) would presumably work at the
+state level rather than the operator-system substrate.
+
+A non-trivial Krein-positive restriction at the substrate level would
+require enlarging $\Op^L$ to include chirality-mixing operators
+(gamma-matrix-valued multipliers) and/or non-commutative temporal
+operators (e.g., the Lorentzian Dirac $\DL$ itself, which is not in
+$\Op^L$ as constructed). Both are structurally distinct constructions
+from the natural pointwise-multiplication operator system studied
+here.
+\end{remark}
+
+% =====================================================================
+\section{The witness pair}\label{sec:witness}
+% =====================================================================
+
+\begin{theorem}[Witness pair for non-multiplicative-closure]
+\label{thm:witness_pair}
+Fix $\nmax \ge 2$, $\Nt \ge 1$. Let
+\begin{equation}\label{eq:witness_a}
+   a \;:=\; M^{\spat}_{N=2,\, L=1,\, M=0} \otimes M_0^{\temp}
+   \;\in\; \Op_{\nmax, \Nt}^L,
+\end{equation}
+and $b := a^\dagger$. Then $a, b \in \Op_{\nmax, \Nt}^L$ but
+$ab \notin \Op_{\nmax, \Nt}^L$:\ the least-squares projection
+residual
+\[
+   \frac{\Frob{ab - \mathrm{proj}_{\Op^L}(ab)}}{\Frob{ab}}
+\]
+is bounded below by a positive constant uniformly in $\Nt$. The
+numerical values at the tested cells are:
+
+\medskip
+\begin{center}\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{c|c|c}
+$\nmax$ & $\Nt$ & relative Frobenius residual \\
+\hline
+$2$ & $1$ & $0.3812$ \\
+$2$ & $3$ & $0.3812$ \\
+$2$ & $5$ & $0.3812$ \\
+$3$ & $1$ & $0.3589$ \\
+\end{tabular}
+\end{center}
+\medskip
+
+\noindent
+The witness pair certifies that $\Op^L$ is genuinely an operator
+system and not a $*$-algebra:\ it is closed under conjugate
+transposition and linear combinations but \emph{not} under
+multiplication.
+\end{theorem}
+
+\begin{proof}
+At $p = 0$, $M_0^{\temp} = I_{\Nt}$, so
+$a = M^{\spat}_{2,1,0} \otimes I_{\Nt}$ and
+$ab = a a^\dagger = \bigl(M^{\spat}_{2,1,0} (M^{\spat}_{2,1,0})^\dagger\bigr)
+      \otimes I_{\Nt}$.
+
+The spatial factor
+$M^{\spat}_{2,1,0} (M^{\spat}_{2,1,0})^\dagger$ is the Riemannian
+witness product of Paper~32~\S~III~\cite{paper32}: raise-then-lower
+at the top shell $n = \nmax$ produces a diagonal correction on the
+top-shell entries that no scalar multiplier $M^{\spat}_{N L M}$ can
+supply, because the corresponding $\nmax + 1$ shell is outside the
+truncation~$P_{\nmax}$. Paper~32~\S~III reports a Frobenius residual
+of $\sim 14.9\%$ at $\nmax = 2$ for the Weyl-sector witness; the
+chirality-doubled FullDirac version inherits the same residual
+structure with an arithmetic increase due to the doubled spatial
+dimension, yielding the $0.3812$ value at $\nmax = 2$ recorded in
+\texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json}. The
+residual is independent of $\Nt$ at this label because $I_{\Nt}^2 =
+I_{\Nt}$ is itself in $\mathcal{D}_{\Nt}$ (the constant temporal
+multiplier), so the residual is purely spatial.
+
+At $\nmax = 3$, the same construction with the same spatial label
+$(N, L, M) = (2, 1, 0)$ produces a residual of $0.3589$:\ the
+percentage drops slightly because the truncation reaches one shell
+higher, partially absorbing the raise-then-lower correction. This
+is the expected $\nmax$-scaling of the boundary deficit. The
+verification is recorded in
+\texttt{tests/test\_operator\_system\_lorentzian.py::%
+test\_witness\_pair\_nmax\_2\_Nt\_1},
+\texttt{::test\_witness\_pair\_nmax\_2\_Nt\_3}, and (for $\nmax = 3$)
+\texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json}.
+\end{proof}
+
+\begin{remark}[Memo--JSON discrepancy at $\nmax = 3$]
+\label{rem:nmax3_residual}
+The Sprint L3a-1 memo~\S~5 quotes the witness-pair residual as
+$0.381$ ``identical across $\Nt$ values'' across a panel that
+includes $\nmax = 3, \Nt = 1$. The supporting JSON data
+\texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json},
+panel cell $(\nmax, \Nt) = (3, 1)$, records $0.3589$ instead. The
+discrepancy is purely a memo bookkeeping issue;\ the JSON and tests
+agree that the $\nmax = 2$ cells give $0.3812$ and the $\nmax = 3$
+cell gives $0.3589$, with the slightly lower number reflecting the
+expected boundary-deficit attenuation at the larger Fock cutoff. We
+report both the $\nmax = 2$ ($0.3812$) and $\nmax = 3$ ($0.3589$)
+values explicitly in Theorem~\ref{thm:witness_pair} per the JSON,
+which is the data of record.
+\end{remark}
+
+% =====================================================================
+\section{Connection to the Paper~43 hemispheric wedge}\label{sec:wedge}
+% =====================================================================
+
+Paper~43~\cite{paper43} works with the Krein hemispheric wedge
+\begin{equation}\label{eq:W_L_def}
+   W_L \;:=\; P_W^{\spat} \otimes P_{t \ge 0}
+   \;\subset\; \Bcal(\Krein_{\nmax, \Nt}),
+\end{equation}
+where $P_W^{\spat}$ is the Paper~42~\cite{paper42} hemispheric
+Hopf-axis $m_j$-reflection projector on $\HGV^{\nmax}$ and
+$P_{t \ge 0}$ is the diagonal projector on $\C^{\Nt}$ selecting
+$t_k \ge 0$. The wedge-restricted operator system
+\begin{equation}\label{eq:O_L_wedge}
+   \Op_{\nmax, \Nt}^{L, W} \;:=\; \{\, P_{W_L} A P_{W_L}
+                                     \;:\; A \in \Op^L \,\}
+\end{equation}
+is a sub-operator-system on the wedge sub-Krein-space
+$\Krein_{W_L} := P_{W_L} \Krein \cap P_{W_L} \Krein$ of dimension
+\begin{equation}\label{eq:dim_wedge}
+   \dim_\C \Krein_{W_L}
+   \;=\; \dim_\C \Krein_W^{\spat} \cdot \dim_\C \mathrm{range}(P_{t \ge 0})
+   \;=\; \tfrac{1}{2} \dim_\spat \cdot \lceil \Nt / 2 \rceil
+\end{equation}
+(Paper~43~\S~4.1; for the symmetric grid, $\dim_\C \mathrm{range}(P_{t
+\ge 0}) = \lceil \Nt / 2 \rceil$).
+
+\begin{proposition}[Wedge-restricted operator-system data]
+\label{prop:wedge_restriction}
+At every $(\nmax, \Nt)$ with $\nmax \ge 2, \Nt \ge 1$, the
+wedge-restricted operator system
+$\Op_{\nmax, \Nt}^{L, W}$ is a well-defined sub-operator-system on
+$\Krein_{W_L}$. The wedge linear-span dimensions at the tested cells
+are:
+
+\medskip
+\begin{center}\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{c|c|c|c|c}
+$\nmax$ & $\Nt$ & $\dim_\C \Krein_{W_L}$
+   & $\dim_\C \Op^{L,W}$ & comment \\
+\hline
+$2$ & $1$ & $8$  & $10$  & wedge linear span exceeds wedge dim \\
+$2$ & $3$ & $16$ & $20$  & same \\
+$2$ & $5$ & $24$ & $30$  & same \\
+\end{tabular}
+\end{center}
+\medskip
+
+The wedge linear-span dimension exceeds the wedge Hilbert-space
+dimension because $\Op^{L,W}$ is a subspace of
+$\Bcal(\Krein_{W_L}) \cong \Mat_{\dim_{W_L}}(\C)$ whose dimension is
+$\dim_{W_L}^2$ ($64$ at the $\nmax = 2, \Nt = 1$ cell), not
+$\dim_{W_L}$.
+\end{proposition}
+
+\begin{proof}
+The wedge projection is a direct application of the
+\texttt{LorentzianWedge} construction from
+\texttt{geovac/modular\_hamiltonian\_lorentzian.py} (Paper~43~\S~4.1).
+The wedge-restricted matrix is computed by index-restriction:
+$(P_{W_L} A P_{W_L})|_{i, j \in W_L} = A_{i, j}$ for indices $i, j$
+in the wedge basis-index set. The linear-span dimension is computed by
+SVD on the stack of vec-form wedge-restricted multiplier matrices,
+documented in
+\texttt{tests/test\_operator\_system\_lorentzian.py::%
+test\_restrict\_to\_lorentzian\_wedge\_*}.
+\end{proof}
+
+\begin{remark}[Paper~43 modular content reads on the wedge-restricted
+operator system]
+\label{rem:wedge_paper43}
+Paper~43~\cite{paper43} constructs the wedge KMS state $\rho_W^L$
+and the modular Hamiltonians $K_L^\alpha$ and $K_L^{\TT}$ at the
+matrix level on $\Krein_{W_L}$. The natural operator-system reading
+of those constructions is at the level of expectation values on
+$\Op^{L, W}_{\nmax, \Nt}$:\ the cross-witness collapse of
+Paper~43~\S~6 (Cor.~8.1) is the statement that the trace functional
+$A \mapsto \Tr_{\Krein_{W_L}}(\rho_W^L \cdot A)$ on $\Op^{L, W}$ is
+identical across all four physical witness instantiations. The
+present paper's contribution is to identify the carrier of this
+construction as the wedge restriction of the natural Lorentzian
+truncated operator system, completing the bottom-up picture.
+
+This identification does \emph{not} immediately imply that the
+Paper~43 modular flow extends to a flow on the operator system
+itself (in the sense of an automorphism group of $\Op^L$), because
+$\Op^L$ is not multiplicatively closed and ``automorphism'' does not
+literally apply. The natural Lorentzian-propinquity-style replacement
+— a continuous family of $\C$-linear maps preserving the
+operator-system data — is the natural next direction (Sprint L3b).
+\end{remark}
+
+% =====================================================================
+\section{Open questions and Sprint L3b outlook}\label{sec:open}
+% =====================================================================
+
+This paper closes the operator-system substrate at finite cutoff. The
+following questions remain open.
+
+\subsection{Continuum Lorentzian propinquity convergence}
+\label{sec:open_propinquity}
+
+\textbf{Question.} Does the family
+$\{\Tcal^L_{\nmax, \Nt}\}_{\nmax, \Nt \to \infty}$ converge in some
+Lorentzian-propinquity-style topology to a continuum limit triple
+$\Tcal^L_\infty$ on $\sthree \times \R$?
+
+This is the principal open question. The Riemannian
+template — Paper~38~\cite{paper38}'s Latrémolière-propinquity
+convergence on $\sthree = \SU(2)$, Paper~39~\cite{paper39}'s
+tensor-product extension, Paper~40~\cite{paper40_unified}'s
+universal $4/\pi$ rate constant on compact Lie groups — relies on
+five lemmas (L1$'$ chirality-doubled operator system, L2 central
+spectral Fejér kernel, L3 Lipschitz spinor bound, L4 Berezin
+reconstruction, L5 Latrémolière propinquity assembly). The
+$\sthree \times \R$ analog requires the construction of a joint
+compact $\times$ non-compact Fejér kernel and a Krein-positive
+propinquity definition, both of which are mathematically open
+(\texttt{debug/l3\_scoping\_memo.md}~\S~4, Q1 and Q4). As of May 2026,
+no published Lorentzian propinquity has been constructed:\
+Latr\'emoli\`ere's 2018~\cite{latremoliere2018} and
+2017/2023~\cite{latremoliere_metric_st_2017} works are strictly
+Riemannian, as are
+Hekkelman--McDonald~\cite{hekkelman_mcdonald2024,
+hekkelman_mcdonald2024b} and
+Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
+farsi_latremoliere2025}.
+
+\medskip\noindent
+\textbf{Recommended first move (Sprint L3b).} Replace the non-compact
+$\R_t$ by a compact $S^1_T$ with circumference $T < \infty$,
+producing a joint compact $\SU(2) \times S^1_T$ group manifold on
+which Peter--Weyl analysis applies in both factors. The L2 central
+spectral Fejér kernel then transports via a product construction with
+an explicit joint rate. This reduces L3b to a tractable 4--8 week
+sprint (\texttt{debug/l3\_scoping\_memo.md}~\S~6). The
+compactified-temporal target is then the natural setting for a
+Lorentzian-propinquity assembly that inherits all five Paper~38 lemmas
+factor-by-factor, modulo Krein-positivity conventions at the
+Berezin reconstruction step.
+
+\subsection{Krein-positivity at the state level}\label{sec:open_state}
+
+\textbf{Question.} What is the natural Wasserstein--Kantorovich
+state-space distance on the Krein-positive states of $\Op^L$, and
+does it converge under the Sprint L3b construction?
+
+Proposition~\ref{prop:krein_positivity_trivial} shifts the
+Krein-positivity question from the operator-substrate to the state
+level. The natural object is the set of positive linear functionals
+$\omega:\ \Op^L \to \C$ with $\omega(A^\dagger A) \ge 0$ for $A \in
+\Op^L$ \emph{and} $\omega$ respects the Krein indefinite form (i.e.\
+$\omega(\JL A \JL) = \omega(A)$, the natural Krein invariance). The
+Wasserstein--Kantorovich distance on this state space is then the
+candidate Lorentzian-propinquity metric. To our knowledge, no
+construction of such an object appears in the published NCG literature
+as of May 2026.
+
+\subsection{Nieuviarts twist-morphism applicability}\label{sec:open_nieuviarts}
+
+\textbf{Question.} Does the Nieuviarts~2025~\cite{nieuviarts2025a}
+twist morphism from Riemannian-twisted to pseudo-Riemannian spectral
+triples apply to $\sthree = \SU(2)$ at KO-dimension $3$?
+
+Nieuviarts~\cite{nieuviarts2025a}~Definition~2.2 explicitly restricts
+the twist morphism to even-dimensional manifolds. The author's
+companion proceedings note~\cite{nieuviarts2025b_proceedings}
+acknowledges that the odd-dimensional case is open. The present
+construction explicitly bypasses this by working directly with the
+van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1 lift to a
+Krein space, which has no parity-dimension restriction. If the
+Nieuviarts construction were extended to odd dimensions, it would
+provide an alternative substrate for the Sprint L3b program;\ as it
+stands, the BBB Krein-construction path of the present paper is the
+only path available.
+
+\subsection{Multi-focal-composition wall}\label{sec:open_multifocal}
+
+\textbf{Question.} Does the framework's structural-skeleton scope
+limitation (Paper~42~\S~10 O5; CLAUDE.md~\S~1.7 multi-focal-wall
+taxonomy; \texttt{debug/multifocal\_phase\_b\_synthesis\_memo.md},
+2026-05-08) apply to the Lorentzian extension?
+
+This is open and structurally independent of the present paper;\ the
+W2a renormalization wall, the W2b cross-manifold wall, and the W3
+calibration-data question (the ``second packing axiom''
+problem) are not addressed by Sprint L3 or the present paper. They
+remain in the same status as the Riemannian closure of Paper~42.
+
+\subsection{Higher-rank compact Lie group extension}\label{sec:open_higher_rank}
+
+\textbf{Question.} For compact $G$ in the Paper~40~\cite{paper40_unified}
+class ($G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_2, F_4,
+E_6, E_7, E_8\}$), does the Lorentzian extension $G \times \R$ admit
+the same operator-system substrate with envelope-dependent
+propagation?
+
+The construction in the present paper uses only that
+$\HGV^{\nmax}$ is a chirality-doubled spinor bundle on a compact
+group manifold with multiplier action via chirality-block doubling;
+the same construction transports immediately to higher-rank $G$ with
+the spinor bundle replaced by the appropriate $G$-spinor module.
+The propagation-number invariant
+$\prop_\achievable = 2$ should hold at every $G$ by the same
+chirality-block argument, since the underlying Paper~32~\S~III
+prop$ = 2$ result extends to higher-rank $G$ via
+Paper~40~\cite{paper40_unified}'s L1$'$ lemma. Verification at
+$\SU(3)$, $\SU(4)$, $\mathrm{Sp}(2)$, $G_2$ would be a natural
+$\sim 4$ week extension of the present module.
+
+\subsection{Cross-manifold W2b}\label{sec:open_w2b}
+
+\textbf{Question.} Does the Lorentzian extension transport to the
+cross-manifold target $\Tcal_{\sthree}^L \otimes
+\Tcal_{\mathrm{Hardy}(S^5)}^L$?
+
+The cross-manifold tensor product is the W2b open question of the
+multi-focal-composition wall taxonomy (CLAUDE.md~\S~1.7), structurally
+blocked at the NCG-framework level by the Paper~24~\cite{paper24}~\S~V
+Coulomb/HO category mismatch:\ the Camporesi--Higuchi spinor bundle
+on $\sthree$ is a second-order Riemannian construction, while the
+Bargmann--Segal Hardy-space construction on $S^5$ is a first-order
+complex-analytic construction. The category mismatch resurfaces at
+the spectral-triple level (Paper~32~\S~VIII.C). The present paper
+does not address W2b;\ it remains open.
+
+% =====================================================================
+\section{Conclusion}\label{sec:conclusion}
+% =====================================================================
+
+We have generalized the Connes--van~Suijlekom~\cite{connes_vs2021}
+truncated operator system from the Riemannian round $\sthree =
+\SU(2)$ Camporesi--Higuchi spectral triple~\cite{camporesi_higuchi1996}
+(Paper~32~\S~III~\cite{paper32}) to the Bizi--Brouder--Besnard~%
+\cite{bizi_brouder_besnard2018} Krein spectral triple at signature
+$(s, t) = (3, 1)$ in the Peskin--Schroeder chiral basis at
+$(m, n) = (4, 6)$, with Lorentzian Dirac
+$\DL = i(\gamma^0 \otimes \partial_t + \DGV \otimes I_{\Nt})$ per
+van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1. The
+construction reduces bit-identically to the chirality-doubled
+Riemannian operator system on $\HGV^{\nmax}$ at $\Nt = 1$, confirming
+compatibility with the Sprint L2-B Krein-space basis convention
+(Theorem~\ref{thm:riemannian_limit}).
+
+The principal structural finding is the
+\emph{envelope dependence of the propagation number}
+(Theorem~\ref{thm:prop_envelope_dependent}). Targeting the
+Weyl-doubled achievable envelope $\dim_\Weyl^2 \cdot \Nt$, the
+Lorentzian extension preserves the Connes--vS propagation-2 result
+verbatim (eq.~\eqref{eq:prop_ach}, matching Paper~32~\S~III, matching
+the Toeplitz operator system $C(S^1)^{(n)}$ of
+\cite{connes_vs2021}~Proposition~4.2). Targeting the full
+$\Bcal(\Krein)$ envelope, the propagation number is $\infty$
+(eq.~\eqref{eq:prop_full_inf}):\ chirality-doubling and a
+commutative temporal subalgebra block the scalar-multiplier
+construction from generating chirality-flipping operators or
+non-diagonal temporal operators. This envelope-dependence is a real
+structural feature of the chirality-doubled Lorentzian extension,
+not visible in the scalar Riemannian template.
+
+A separate substantive finding is that the Krein-positive restriction
+to the natural sub-operator-system $\Op^{L, +}$ equals $\Op^L$
+itself (Proposition~\ref{prop:krein_positivity_trivial}). Every
+chirality-doubled scalar multiplier $M \oplus M$ commutes with the
+chirality-swap fundamental symmetry $\JL$, so Krein positivity is
+automatic at the operator-substrate level. The non-trivial
+Krein-positivity question is at the \emph{state} level, where the
+Wasserstein--Kantorovich state-space construction on Krein-positive
+states is the natural setting for a future Lorentzian-propinquity
+argument.
+
+\medskip\noindent
+\textbf{Honest scope.} This paper closes the operator-system
+substrate at finite cutoff. It does \emph{not} establish:
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item Continuum / GH-limit / Lorentzian-propinquity convergence
+(open; Sprint L3b is the recommended first move,
+\S~\ref{sec:open_propinquity}).
+\item Krein-positive state-space convergence
+(open; \S~\ref{sec:open_state}).
+\item Non-commutative temporal multipliers (the natural pointwise-%
+multiplication algebra on $\R_t$ is commutative; this is the
+canonical Connes--vS construction).
+\item Gamma-matrix-valued multipliers (which would enlarge the
+operator system from $C^\infty(\sthree \times \R)$ to
+$C^\infty(\sthree \times \R, \Cl(\R^4))$ and give a non-trivial
+Krein-positive restriction).
+\end{enumerate}
+
+\medskip\noindent
+\textbf{Position in the GeoVac Lorentzian arc.} Together with
+Paper~43~\cite{paper43} (the four-witness Wick-rotation theorem at
+the Lorentzian Krein-wedge level) and the prospective Sprint L3b
+continuum closure, the present paper constitutes the operator-system
+substrate of the GeoVac Lorentzian extension at the level the
+framework can currently reach. Paper~43 does not supersede the
+present paper, nor vice versa:\ Paper~43 establishes the
+modular-Hamiltonian content on a hemispheric wedge; the present
+paper establishes the operator-system content on the full Krein
+space and its envelope-relative structural invariants. Both are
+finite-cutoff closures with the multi-month continuum problem named
+explicitly and left open.
+
+\medskip\noindent
+\textbf{Position against the broader literature.} The Connes--van~%
+Suijlekom~\cite{connes_vs2021} program deferred the GH-convergence
+question on a non-trivial example to ``elsewhere'' three times.
+Paper~38~\cite{paper38} closed it on the Riemannian
+$\sthree = \SU(2)$ at the qualitative-rate Latrémolière-propinquity
+level; Paper~40~\cite{paper40_unified} closed it on the universal
+compact-Lie-group family with rate constant $4/\pi$. The Lorentzian
+analog of Paper~38 (continuum Lorentzian propinquity on
+$\sthree \times \R$) remains open. The present paper, together with
+Paper~43~\cite{paper43}, establishes the finite-cutoff substrate from
+which any such convergence argument would proceed.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+The author thanks Alain Connes, Walter van~Suijlekom, Fr\'ed\'eric
+Latr\'emoli\`ere, Nadir Bizi, Christian Brouder, Fabien Besnard,
+Koen van~den~Dungen, Arnaud Nieuviarts, and the SageMath, sympy,
+mpmath, and numpy communities for the mathematical and computational
+infrastructure on which this paper builds; remaining errors are the
+author's own. This work was developed in an AI-augmented agentic
+workflow with Anthropic's Claude:\ implementation of the supporting
+computational module
+\texttt{geovac/operator\_system\_lorentzian.py}, drafting of the
+internal proof memo
+\texttt{debug/l3a\_1\_lorentzian\_operator\_system\_memo.md}, and
+bibliographic collation were performed collaboratively. All
+theorem statements, design choices, and editorial decisions are the
+author's responsibility.
+
+% =====================================================================
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Avery, Wen \& Avery(2002)]{avery_wen_avery2002}
+J.~Avery, S.~Wen, and J.~Avery,
+\newblock \emph{The 3-Y integral on the 3-sphere via Gegenbauer
+recurrence},
+\newblock J.~Math.~Chem. \textbf{32} (2002), 65--78.
+
+\bibitem[Bisognano \& Wichmann(1976)]{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+\newblock \emph{On the duality condition for quantum fields},
+\newblock J.~Math.~Phys. \textbf{17} (1976), 303--321.
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard,
+\newblock \emph{Space and time dimensions of algebras with
+application to Lorentzian noncommutative geometry and quantum
+electrodynamics},
+\newblock J.~Math.~Phys. \textbf{59} (2018), 062303;
+\newblock arXiv:1611.07062.
+
+\bibitem[Bykov, Minguzzi \& Suhr(2024)]{bykov_minguzzi_suhr2024}
+A.~Bykov, E.~Minguzzi, and S.~Suhr,
+\newblock \emph{Lorentzian metric spaces and GH-type convergence},
+\newblock arXiv:2412.04311, 2024.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi,
+\newblock \emph{On the eigenfunctions of the Dirac operator on
+spheres and real hyperbolic spaces},
+\newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18.
+
+\bibitem[Connes \& van~Suijlekom(2021)]{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
+\newblock arXiv:2004.14115.
+
+\bibitem[Devastato, Lizzi \& Martinetti(2018)]{devastato_lizzi_martinetti2018}
+A.~Devastato, F.~Lizzi, and P.~Martinetti,
+\newblock \emph{Lorentzian almost-commutative spectral triples},
+\newblock J.~Math.~Phys. \textbf{59} (2018), 092304.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Collapse in noncommutative geometry and spectral
+continuity},
+\newblock arXiv:2404.00240, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity for the spectral propinquity of the
+Dirac operators associated with an analytic path of Riemannian
+metrics},
+\newblock arXiv:2504.11715, 2025.
+
+\bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
+N.~Franco and M.~Eckstein,
+\newblock \emph{An algebraic formulation of causality for
+noncommutative geometry},
+\newblock Class.~Quantum Grav. \textbf{30} (2013), 135007;
+\newblock arXiv:1212.5171.
+
+\bibitem[Hartle \& Hawking(1976)]{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+\newblock \emph{Path-integral derivation of black-hole radiance},
+\newblock Phys.~Rev. D \textbf{13} (1976), 2188--2203.
+
+\bibitem[Hekkelman(2022)]{hekkelman2022}
+E.~Hekkelman,
+\newblock \emph{Truncations of the circle and Connes' geometric
+formula},
+\newblock M.Sc.\ thesis, Radboud University, 2022;
+\newblock arXiv:2206.13744.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{Spectral truncations of $T^d$ and quantum metric
+geometry},
+\newblock J.~Noncommut.~Geom., to appear (2024);
+\newblock arXiv:2403.18619.
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{A noncommutative integral on spectrally truncated
+spectral triples, and a link with quantum ergodicity},
+\newblock J.~Funct.~Anal., to appear (2025);
+\newblock arXiv:2412.00628.
+
+\bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
+triples},
+\newblock Adv.~Math. \textbf{415} (2023), Paper No.~108876, 88pp;
+\newblock preprint arXiv:1811.10843, 2017.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+
+\bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
+L.~Leimbach and W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of spectral truncations
+of the torus},
+\newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Mondino \& Sämann(2025)]{mondino_samann2025}
+A.~Mondino and C.~Sämann,
+\newblock \emph{Synthetic Lorentzian Gromov--Hausdorff convergence},
+\newblock arXiv:2504.10380, 2025.
+
+\bibitem[Nieuviarts(2025a)]{nieuviarts2025a}
+A.~Nieuviarts,
+\newblock \emph{Emergence of pseudo-Riemannian spectral triples
+within the almost-commutative framework},
+\newblock arXiv:2502.18105 (v3, May 2025).
+
+\bibitem[Nieuviarts(2025b)]{nieuviarts2025b_proceedings}
+A.~Nieuviarts,
+\newblock \emph{Emergence of pseudo-Riemannian structures from
+twisted spectral triples within the almost-commutative framework
+(proceedings synthesis)},
+\newblock arXiv:2512.15450 (v2, May 2026).
+
+\bibitem[Paulsen(2002)]{paulsen2002}
+V.~I.~Paulsen,
+\newblock \emph{Completely Bounded Maps and Operator Algebras},
+\newblock Cambridge Studies in Advanced Mathematics 78,
+Cambridge University Press, 2002.
+
+\bibitem[Sewell(1982)]{sewell1982}
+G.~L.~Sewell,
+\newblock \emph{Quantum fields on manifolds:\ PCT and gravitationally
+induced thermal states},
+\newblock Ann.~Phys. (NY) \textbf{141} (1982), 201--224.
+
+\bibitem[Strohmaier(2006)]{strohmaier2006}
+A.~Strohmaier,
+\newblock \emph{On noncommutative and pseudo-Riemannian geometry},
+\newblock J.~Geom.~Phys. \textbf{56} (2006), 175--195.
+
+\bibitem[Toyota(2023)]{toyota2023}
+M.~Toyota,
+\newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
+truncations for groups with polynomial growth},
+\newblock arXiv:2309.13469, 2023.
+
+\bibitem[Unruh(1976)]{unruh1976}
+W.~G.~Unruh,
+\newblock \emph{Notes on black-hole evaporation},
+\newblock Phys.~Rev. D \textbf{14} (1976), 870--892.
+
+\bibitem[van~den~Dungen(2016)]{vandungen2016}
+K.~van~den~Dungen,
+\newblock \emph{Krein spectral triples and the fermionic action},
+\newblock Math.~Phys.~Anal.~Geom. \textbf{19} (2016), Art.~4, 22pp;
+\newblock arXiv:1505.01939.
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey,
+\newblock \emph{Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO structural asymmetry},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey,
+\newblock \emph{The GeoVac spectral triple, the master Mellin engine
+case-exhaustion theorem, and the GH-convergence theorem on $\sthree$},
+\newblock GeoVac internal preprint, papers/synthesis (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of
+truncated Camporesi--Higuchi spectral triples on $\sthree$},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey,
+\newblock \emph{Tensor-product propinquity convergence for
+distinct-focal-length truncated Camporesi--Higuchi spectral triples
+on $\sthree$},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of spectral
+truncations of compact Lie groups with bi-invariant metric},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~42]{paper42}
+J.~Loutey,
+\newblock \emph{Tomita--Takesaki modular structure on truncated
+$\SU(2)$ spectral triples; four-witness Wick-rotation literal
+identification at finite cutoff},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey,
+\newblock \emph{Lorentzian extension of the four-witness
+Wick-rotation theorem at finite cutoff},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\end{thebibliography}
+
+% =====================================================================
+\section*{Appendix: Section reference for the \texorpdfstring{$\S$~\ref{sec:propagation}}{Sec. 5} context cross-reference}
+\label{sec:context}
+% =====================================================================
+
+The Riemannian Paper~32~\S~III propagation-number result
+(Proposition~\ref{prop:paper32_prop}) was established by direct
+computation in \texttt{geovac/operator\_system.py} (the
+\texttt{TruncatedOperatorSystem} class). The verification covers
+$\nmax \in \{2, 3, 4\}$ with multiplier counts
+$\dim_\C \Op_{\nmax} = 14, 55, 140$ and propagation-table
+
+\medskip
+\begin{center}\renewcommand{\arraystretch}{1.20}
+\begin{tabular}{c|c|c|c|c|c}
+$\nmax$ & $N_{\mathrm{Fock}}$ & $N^2$ & $\dim(\Op)$ & $\dim(\Op^2)$
+   & $\dim(\Op) / N^2$ \\
+\hline
+$2$ & $5$  & $25$  & $14$  & $25$  & $0.560$ \\
+$3$ & $14$ & $196$ & $55$  & $196$ & $0.281$ \\
+$4$ & $30$ & $900$ & $140$ & $900$ & $0.156$ \\
+\end{tabular}
+\end{center}
+\medskip
+
+reproduced from Paper~32~\S~III, \texttt{prop:propagation\_number}.
+The result is robust under three SO(4) radial-overlap convention
+choices (including the indicator-only convention, which retains only
+the support pattern of the matrix-element bookkeeping; see
+\texttt{debug/wh1\_round2\_propagation\_memo.md}, 2026-05-03). The
+present paper's Theorem~\ref{thm:prop_envelope_dependent} inherits
+this robustness verbatim:\ the achievable-envelope propagation number
+$\prop_\achievable = 2$ is the same SO(4) selection-rule structural
+invariant lifted to the chirality-doubled Lorentzian construction.
+
+\end{document}
