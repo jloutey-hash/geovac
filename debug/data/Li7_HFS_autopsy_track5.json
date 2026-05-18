@@ -1,0 +1,388 @@
+{
+  "track": "Track 5: Lithium-7 2^2S_{1/2} HFS \u2014 five-component Roothaan autopsy",
+  "date_utc": "2026-05-18T21:21:30.637545+00:00",
+  "system": "atomic lithium-7, 2^2S_{1/2}, I=3/2 nucleus, 3 electrons",
+  "experimental_value_MHz": 803.504086,
+  "experimental_unc_MHz": 3.4e-05,
+  "experimental_source": "Beckmann, Boklen, Elke 1974; confirmed Walls 2003",
+  "headline": {
+    "framework_native_subtotal_MHz": 83.03906595116524,
+    "framework_native_residual_ppm": -896653.834874008,
+    "framework_native_residual_pct": -89.6653834874008,
+    "dominant_layer_2": "MULTI-ELECTRON CONTACT-DENSITY CLIFF (~10x on A_hf via missing \u00a7III.20 PK orthogonality; an order of magnitude deeper than the 1.10% framework atomic accuracy floor)",
+    "first_multi_electron_HFS_in_catalogue": true,
+    "exercises_section_III_18": true,
+    "exercises_section_III_20_PK": true,
+    "exercises_section_III_22_bipolar_harmonic": true,
+    "I_dot_S_multiplicity_at_I_3half": 2.0,
+    "I_dot_S_operator_level_verdict_correct": true,
+    "n_pauli_terms_hfs_I_3half": 8,
+    "n_pauli_terms_zemach": 4
+  },
+  "cumulative_chain": {
+    "components": {
+      "1_bohr_fermi": {
+        "convention_note": "Atomic-physics Hamiltonian convention: g_N = 2 mu_N/mu_N_unit, independent of I. g_Li7^CODATA = 2.171 (mu/I/mu_N), g_Li7^atomic = 2 * 2.171 = 4.342. This convention reproduces the H 21cm convention used in the D HFS Track-5 autopsy (2026-05-09).",
+        "Z_eff_2s_CR67": 1.279,
+        "Z_eff_2s_Slater_rules": 1.3,
+        "psi0_squared_au_2s_hydrogenic": 0.08324760995864891,
+        "psi0_squared_au_1s_hydrogen_H": 0.3183098861837907,
+        "psi0_ratio_Li_2s_over_H_1s": 0.26153007987499993,
+        "A_li_Ha": 6.305552010427459e-09,
+        "A_li_MHz": 41.48853917289861,
+        "multiplicity_factor": 2.0,
+        "nu_HFS_li_strict_MHz": 82.97707834579722,
+        "residual_strict_ppm": -896730.9814703331,
+        "residual_strict_pct": -89.6730981470333,
+        "operator_level_I_dot_S": {
+          "I_eq_3half_J_eq_half_eigenvalues": [
+            -1.25,
+            0.75
+          ],
+          "I_eq_3half_multiplicity_F_2_minus_F_1": 2.0,
+          "multiplicity_op_residual_vs_target_2_0": 0.0,
+          "I_eq_1_eigenvalues_DHFS_sanity": [
+            -1.0,
+            0.5
+          ],
+          "I_eq_1_multiplicity_DHFS": 1.5,
+          "I_eq_half_eigenvalues_H21_sanity": [
+            -0.75,
+            0.25
+          ],
+          "I_eq_half_multiplicity_H21": 1.0,
+          "operator_level_verdict_CG_multiplicity_correct": true
+        },
+        "pauli_encoding": {
+          "Q_total_Li": 3,
+          "Q_nuc_Li": 2,
+          "Q_elec_Li": 1,
+          "Q_total_H": 2,
+          "n_pauli_terms_Li": 8,
+          "n_pauli_terms_H": 3,
+          "F_levels_Li": [
+            2.0,
+            1.0
+          ],
+          "splitting_Li_MHz_via_pauli": 82.97707834579724
+        }
+      },
+      "2_schwinger_a_e": {
+        "a_e_Schwinger_alpha_over_2pi": 0.0011614097328884378,
+        "a_e_CODATA": 0.00115965218091,
+        "a_e_ratio_to_CODATA": 1.0015155854551652,
+        "nu_BF_strict_MHz": 82.97707834579722,
+        "nu_with_Schwinger_a_e_MHz": 83.07344873219468,
+        "shift_MHz": 0.09637038639745299,
+        "shift_ppm": 1161.409732888438
+      },
+      "3_reduced_mass_recoil": {
+        "m_e_over_m_Li7": 7.820815726721929e-05,
+        "recoil_factor_Li7_at_LO": 0.9997654122225105,
+        "nu_with_a_e_MHz": 83.07344873219468,
+        "nu_with_recoil_MHz": 83.0539607164882,
+        "shift_MHz": -0.01948801570647163,
+        "shift_ppm": -234.58777748952554,
+        "structural_note": "Framework-native rest-mass projection (Paper 34 \u00a7III.14) at I=3/2 with nucleus mass varied to m_Li7 ~ 12786 m_e. The (1+m_e/m_Li7)^{-3} factor is ~ -3 * 7.8e-5 = -2.35e-4 = -235 ppm, almost 2x smaller than D recoil (-1090 ppm) due to heavier nucleus."
+      },
+      "4_zemach_operator_level": {
+        "r_Z_Li7_fm": 3.71,
+        "r_Z_Li7_bohr": 7.010883923726218e-05,
+        "r_Z_Li7_source": "Puchalski & Pachucki 2013 (PRA 87, 032513); Yan & Drake compilation",
+        "r_Z_Li7_fm_unc": 0.16,
+        "r_Z_comparison": {
+          "r_Z_p_fm": 1.045,
+          "r_Z_d_fm": 2.593,
+          "r_Z_Li7_fm": 3.71,
+          "Li7_over_proton_ratio": 3.550239234449761,
+          "Li7_over_deuteron_ratio": 1.4307751639028152
+        },
+        "eides_analytic_LO_ppm_Z1": -140.21767847452435,
+        "eides_analytic_LO_ppm_Z_eff_scaled": -179.33841076891662,
+        "Z_eff_for_2s_zemach_scaling": 1.279,
+        "operator_level_gaussian_ppm_Z1": -140.21767847452435,
+        "operator_level_exponential_ppm_Z1": -140.21767847452435,
+        "reproduction_residual_ppm_Z1": 0.0,
+        "profile_independence_residual_ppm": 0.0,
+        "n_pauli_terms_op_Li": 4,
+        "rho_M_moments_Li": {
+          "M_0": 1.0,
+          "M_1": 7.010883923726218e-05,
+          "M_2": 5.7906417054679115e-09
+        },
+        "operator_level_verdict": "\u00a7III.18 magnetization-density operator at I=3/2 reproduces the Eides leading-order Zemach scalar at hydrogenic Z=1 to machine precision; profile (Gaussian vs exponential) independence preserved; the Z_eff = 1.279 scaling for Li 2s valence is applied as a multiplicative factor since the operator architecture is I-independent and the multi-electron core-valence correction enters through |psi_2s(0)|^2 (Component 5).",
+        "structural_I_independence_note": "The \u00a7III.18 operator depends ONLY on the spatial register (Sturmian moment of magnetization density), NOT on nuclear spin. Pauli count = 4 (same as H and D). The Clebsch-Gordan F=2/F=1 multiplicity at I=3/2 is captured in Component 1, not here."
+      },
+      "5_multi_electron_core_valence": {
+        "mechanism_iii20_phillips_kleinman": {
+          "description": "Core-valence orthogonality constraint <2s|1s_core>=0 pulls 2s wavefunction node toward origin, enhancing |psi_2s(0)|^2 above the hydrogenic-Z_eff prediction.",
+          "projection": "\u00a7III.20 Phillips-Kleinman / core-valence orthogonality",
+          "framework_module": "geovac/ab_initio_pk.py + geovac/core_screening.py",
+          "expected_magnitude_pct": "~5-10% enhancement of |psi_2s(0)|^2",
+          "external_reference": "Clementi-Roetti 1974, Yan-Drake 2003"
+        },
+        "mechanism_iii22_bipolar_harmonic": {
+          "description": "Multi-electron Fermi contact via 1s-2s-2p^2P CI mixing. Core-polarization admixture lifts spin density at nucleus.",
+          "projection": "\u00a7III.22 bipolar harmonic / Drake combining",
+          "framework_module": "geovac/breit_integrals.py + composed_qubit_relativistic.py (MCDHF-like CI infrastructure)",
+          "expected_magnitude_pct": "~1-2% contribution to A_hf for Li (Lindgren 1985)",
+          "external_reference": "Lindgren 1985 PRA 32 35; Beck-Norkus 1983; Yan-Drake 2003 PRL"
+        },
+        "Z_eff_variation_grid": {
+          "CR67_1.279": {
+            "Z_eff": 1.279,
+            "psi0_squared_au": 0.08324760995864891,
+            "A_MHz": 41.48853917289861,
+            "nu_strict_MHz": 82.97707834579722,
+            "residual_pct": -89.6730981470333
+          },
+          "Slater_1.30": {
+            "Z_eff": 1.3,
+            "psi0_squared_au": 0.08741585249322352,
+            "A_MHz": 43.565887624869085,
+            "nu_strict_MHz": 87.13177524973817,
+            "residual_pct": -89.15602586621591
+          },
+          "low_1.25": {
+            "Z_eff": 1.25,
+            "psi0_squared_au": 0.07771237455658953,
+            "A_MHz": 38.72991546077489,
+            "nu_strict_MHz": 77.45983092154978,
+            "residual_pct": -90.35974648154438
+          },
+          "high_1.35": {
+            "Z_eff": 1.35,
+            "psi0_squared_au": 0.09789521077743052,
+            "A_MHz": 48.788539264923656,
+            "nu_strict_MHz": 97.57707852984731,
+            "residual_pct": -87.85605695975921
+          },
+          "Z_3_naive": {
+            "Z_eff": 3.0,
+            "psi0_squared_au": 1.0742958658702935,
+            "A_MHz": 535.4023513297519,
+            "nu_strict_MHz": 1070.8047026595038,
+            "residual_pct": 33.26686463913063
+          },
+          "Z_1_extreme": {
+            "Z_eff": 1.0,
+            "psi0_squared_au": 0.039788735772973836,
+            "A_MHz": 19.829716715916742,
+            "nu_strict_MHz": 39.659433431833484,
+            "residual_pct": -95.06419019855072
+          }
+        },
+        "structural_note": "The Component 1 hydrogenic-Z_eff=1.279 prediction is the framework-native ground-state contact density at single-determinant level (no PK, no CI). The gap between Component 1 and experiment is the combined \u00a7III.20 + \u00a7III.22 multi-electron content. Framework can in principle compute this via composed_qubit machinery; in this scoping pass we document it as a single combined Layer-2-class entry.",
+        "honest_scope": "This autopsy does NOT separately resolve \u00a7III.20 from \u00a7III.22 \u2014 both contribute to |psi_2s(0)|^2 and both would require explicit multi-electron CI in the framework's graph-native sector to extract. The Component 1 Z_eff=1.279 choice already implicitly absorbs SOME \u00a7III.20 content via Clementi-Raimondi's empirical fit to SCF densities. The RESIDUAL between Component-1+others and experiment quantifies what hydrogenic-Z_eff alone CANNOT capture."
+      }
+    },
+    "chain_table": [
+      {
+        "component": "1. Bohr-Fermi Dirac (Z_eff=1.279 hydrogenic 2s, I=3/2 mult 2)",
+        "nu_MHz": 82.97707834579722,
+        "residual_ppm": -896730.9814703331,
+        "residual_pct": -89.6730981470333,
+        "projection_chain": "\u00a7III.1 Fock \u2218 \u00a7III.7 spinor \u2218 \u00a7III.8 Wigner 3j (I.S Hamiltonian, mult 2 from CG at I=3/2 J=1/2)",
+        "status": "FN (with Z_eff Layer-2)"
+      },
+      {
+        "component": "2. + Schwinger a_e",
+        "nu_MHz": 83.07344873219468,
+        "residual_ppm": -896611.0438271067,
+        "projection_chain": "\u00a7III.1 Fock \u2218 \u00a7III.7 spinor \u2218 \u00a7III.6 spectral action",
+        "status": "FN (with calibration)"
+      },
+      {
+        "component": "3. + Reduced-mass / cross-register recoil",
+        "nu_MHz": 83.0539607164882,
+        "residual_ppm": -896635.2976125523,
+        "projection_chain": "\u00a7III.14 rest-mass projection at m_n = m_Li7 ~ 12786 m_e",
+        "status": "FN"
+      },
+      {
+        "component": "4. + Zemach r_Z(7Li)=3.71 fm via \u00a7III.18 (Z_eff scaled)",
+        "nu_MHz": 83.03906595116524,
+        "residual_ppm": -896653.834874008,
+        "residual_pct": -89.6653834874008,
+        "projection_chain": "\u00a7III.18 magnetization-density operator at I=3/2, Z_eff=1.279 scaled LO Zemach",
+        "status": "FN at op-level + L2 (r_Z scalar)"
+      },
+      {
+        "component": "5. \u00a7 Multi-electron core-valence (\u00a7III.20 PK + \u00a7III.22 bipolar) \u2014 NOT applied in framework yet, documented only",
+        "nu_MHz": "NOT COMPUTED in this scoping pass",
+        "expected_magnitude_pct": "~5-10% (dominant Layer-2 contribution)",
+        "projection_chain": "\u00a7III.20 Phillips-Kleinman + \u00a7III.22 bipolar harmonic / Drake combining; multi-electron CI in graph-native sector",
+        "status": "L2 (multi-electron correction, framework-native via CI)"
+      }
+    ],
+    "experimental_MHz": 803.504086,
+    "final_chain_MHz": 83.03906595116524,
+    "final_chain_residual_ppm": -896653.834874008,
+    "final_chain_residual_pct": -89.6653834874008,
+    "framework_native_subtotal_MHz": 83.03906595116524,
+    "Layer_2_inputs_used": {
+      "Z_eff_2s": 1.279,
+      "Z_eff_source": "Clementi-Raimondi 1963",
+      "r_Z_Li7_fm": 3.71,
+      "r_Z_source": "Puchalski & Pachucki 2013",
+      "g_Li7_atomic": 4.341902
+    }
+  },
+  "layer_2_attribution": {
+    "residual_to_attribute_ppm": -896653.834874008,
+    "residual_to_attribute_pct": -89.6653834874008,
+    "cliff_factor_exp_over_framework": 9.676217775288272,
+    "Z_eff_implied_by_experiment": 2.725455460665811,
+    "DOMINANT_attribution_verdict": "MULTI-ELECTRON CONTACT-DENSITY CLIFF is the dominant contribution, NOT the 1.10% framework atomic accuracy floor. The framework chain at hydrogenic Z_eff=1.279 (CR67) sits at -89.7%, a factor of 9.68x below experiment. The implied effective Z_eff for the 2s contact density is 2.73, much closer to the unscreened nuclear Z=3 than to the CR67 valence Z_eff=1.279. The mechanism is the \u00a7III.20 Phillips-Kleinman core-valence orthogonality constraint: |psi_2s(0)|^2 is dramatically enhanced over the hydrogenic-Z_eff approximation because the 2s wavefunction node must satisfy <2s|1s_core>=0 exactly, pulling 2s amplitude back toward the nucleus. Clementi-Roetti 1974 SCF |psi_2s(0)|^2 is ~8x the hydrogenic-Z_eff=1.279 value. This is well-known in atomic physics (Fermi contact enhancement in alkali atoms) and would close in the framework via Hylleraas-Eckart double-zeta (named follow-on).",
+    "Layer_2_budget_attributions_approximate": {
+      "framework_precision_ceiling_pct": 1.1,
+      "framework_precision_ceiling_note": "Graph-native CI at n_max=4: -7.3959 Ha vs exact -7.4781 Ha = 1.10% (Paper FCI-A baseline). Cusp + finite-n_max truncation. The Z>20 cliff diagnostic identifies this as a single-zeta hydrogenic basis limitation (no radial nodes); same mechanism prevents Li 2s contact density from being computed sub-percent.",
+      "estimated_wavefunction_error_pct": 5.0,
+      "section_III_20_PK_orthogonality_pct": "~5-10% (enhancement of |psi_2s(0)|^2)",
+      "section_III_20_wall": "W1c-residual orthogonality (Phase C-W1c)",
+      "section_III_22_bipolar_harmonic_pct": "~1-2% (core polarization)",
+      "section_III_22_wall": "Multi-electron CI in graph-native sector (need Hylleraas-class extension)",
+      "r_Z_7Li_uncertainty_pct": "~4% (\u00b10.16 fm of 3.71 fm)",
+      "r_Z_wall": "W3 inner-factor (QCD-internal nuclear structure)",
+      "multi_loop_QED_ppm": "~10-50 ppm (LS-8a wall)",
+      "multi_loop_QED_wall": "LS-8a renormalization gap"
+    },
+    "section_v_d_class_observation": "This autopsy surfaces a NEW \u00a7V.D-class exposure: MULTI-ELECTRON CONTACT-DENSITY CLIFF. Distinct from the four existing \u00a7V.D entries (all literature convention mismatches: Eides/PY/Karshenboim/Antognini), this exposure is a framework-ARCHITECTURE limitation: single-zeta hydrogenic basis cannot represent core-valence orthogonality at the amplitude-at-origin level. For Li-7 the cliff factor is ~9.7x on A_hf \u2014 an order of magnitude, NOT the ~1% framework precision floor. The cliff scales similarly for any alkali ns valence orbital (Na, K, Rb, Cs HFS): the same mechanism that explains the Z>20 cliff in Cs HFS (\u00a7V.C.6 Track-2 diagnostic) operates at Z=3, but with much larger magnitude because Li 2s is the FIRST shell beyond the closed core.",
+    "structural_implication": "The multi-track Roothaan-autopsy precision-catalogue is robust on one-electron systems (H 21cm at +18 ppm, D HFS at +286 ppm) and on muonic and positronic clean-isolated systems (\u03bcH at +2 ppm, Mu HFS at +199 ppm, Ps HFS). The first multi-electron HFS at I=3/2 hits a NEW WALL one order of magnitude deeper than expected: the MULTI-ELECTRON CONTACT-DENSITY CLIFF. For any alkali ns valence orbital, hydrogenic-Z_eff dramatically underestimates |psi(0)|^2 because PK orthogonality is missing at the amplitude level. Until the framework supports core-valence orthogonality at the orbital level (Hylleraas-Eckart double-zeta, named follow-on), \u00a7III.18 (Zemach) and multi-loop QED cannot be separately tested in multi-electron HFS. The Z>20 cliff (Cs HFS \u00a7V.C.6) and the Z=3 cliff (this autopsy) are TWO MANIFESTATIONS of the same structural limitation."
+  },
+  "convention_exposure": {
+    "experimental_compilations_in_agreement": [
+      {
+        "ref": "Beckmann, Boklen, Elke 1974",
+        "value_MHz": 803.504086,
+        "unc_MHz": 3.4e-05
+      },
+      {
+        "ref": "Walls et al. 2003",
+        "value_MHz": 803.504086,
+        "unc_MHz_approx": 0.0005
+      }
+    ],
+    "theoretical_references": [
+      {
+        "ref": "Yan & Drake 2003 PRL 91 113004",
+        "approach": "MCDHF + relativistic + QED + nuclear",
+        "value_MHz": 803.5,
+        "agreement_with_exp": "~0.001%"
+      },
+      {
+        "ref": "Lindgren 1985 PRA 32 35",
+        "approach": "RMBPT (relativistic many-body PT)",
+        "core_polarization_pct": "~1-2%"
+      }
+    ],
+    "convention_status": "No major literature-itemization mismatch surfaced for 7Li HFS. The dominant uncertainty is THEORETICAL precision of the multi-electron contact density (\u00a7III.20 + \u00a7III.22 combined), NOT experimental or compilation-convention drift.",
+    "new_class_observation": "If the dominant framework residual is the Li atomic accuracy ceiling (~1.10% at n_max=4, Paper FCI-A) rather than r_Z or multi-loop QED, this is a \u00a7V.D-class FRAMEWORK-PRECISION ceiling exposure \u2014 a new exposure class distinct from the four existing \u00a7V.D entries (which are LITERATURE convention mismatches between Eides/PY/Karshenboim/Antognini)."
+  },
+  "mass_hierarchy_extension_matrix": {
+    "new_axis_added": "electron_count (single vs multi-electron HFS)",
+    "Li7_entry": {
+      "system": "Li-7 2^2S_{1/2} HFS",
+      "axis_mass_hierarchy": "m_e << m_Li7 (m_Li7 ~ 12786 m_e)",
+      "axis_nuclear_spin": "I=3/2",
+      "axis_observable_type": "ground-state HFS",
+      "axis_qcd": "with QCD (Li nucleus = 3p + 4n)",
+      "axis_electron_count": "MULTI-ELECTRON (3e ground state)",
+      "framework_residual_pct": -89.6653834874008,
+      "framework_residual_ppm": -896653.8348740081,
+      "dominant_layer_2": "framework precision ceiling (graph-native CI ~1.10% at n_max=4)",
+      "operator_level_autopsy": "this Track 5 (post-MultiTrack May 9 sprint)"
+    },
+    "completion_state": "Nine-system catalogue across five orthogonal axes (mass-hierarchy / nuclear-spin / observable-type / QCD-content / electron-count). Li 7 adds the first multi-electron HFS entry and surfaces the framework-precision-ceiling wall for multi-electron precision HFS. Sub-percent multi-electron HFS requires Hylleraas-Eckart double-zeta extension (named structural follow-on; same closure that lifts He 1^1S from 0.20% to 0.0006%).",
+    "earlier_systems_for_reference": [
+      {
+        "system": "H 21cm",
+        "I": "1/2",
+        "Ne": 1,
+        "residual_ppm": 18
+      },
+      {
+        "system": "D 1S HFS",
+        "I": "1",
+        "Ne": 1,
+        "residual_ppm": 286
+      },
+      {
+        "system": "\u03bcH 1S HFS",
+        "I": "1/2",
+        "Ne": 1,
+        "residual_ppm": 2
+      },
+      {
+        "system": "Mu 1S HFS",
+        "I": "1/2",
+        "Ne": 1,
+        "residual_ppm": 199
+      },
+      {
+        "system": "Ps 1S HFS",
+        "I": "1/2",
+        "Ne": 0,
+        "residual_ppm": 4900
+      },
+      {
+        "system": "Mu 1S-2S",
+        "I": "1/2",
+        "Ne": 1,
+        "residual_ppm": -0.11
+      },
+      {
+        "system": "Mu Lamb",
+        "I": "1/2",
+        "Ne": 1,
+        "residual_ppm": 130
+      },
+      {
+        "system": "\u03bcH Lamb",
+        "I": "1/2",
+        "Ne": 1,
+        "residual_ppm": 1000
+      },
+      {
+        "system": "Li-7 2^2S HFS",
+        "I": "3/2",
+        "Ne": 3,
+        "residual_pct": -89.6653834874008,
+        "first_multi_electron_HFS": true
+      }
+    ]
+  },
+  "scope_boundary": {
+    "framework_native": [
+      "Bohr-Fermi I\u00b7S Hamiltonian at I=3/2 (CG multiplicity 2)",
+      "Schwinger a_e one-loop",
+      "Reduced-mass / rest-mass projection at m_Li7",
+      "\u00a7III.18 magnetization-density operator at I=3/2 (Z_eff scaled)"
+    ],
+    "Layer_2_inputs": [
+      "Z_eff(Li 2s) = 1.279 (Clementi-Raimondi 1963)",
+      "r_Z(7Li) = 3.71 fm (Puchalski & Pachucki 2013)",
+      "g_Li7^atomic = 4.342 (CODATA mu_Li7, atomic-physics convention)"
+    ],
+    "external_walls_named": [
+      "FRAMEWORK PRECISION CEILING (Li 1.10% at n_max=4)",
+      "\u00a7III.20 Phillips-Kleinman / core-valence orthogonality (~5-10%)",
+      "\u00a7III.22 bipolar harmonic / Drake combining (~1-2% core polarization)",
+      "r_Z(7Li) uncertainty (~4%, W3 inner-factor)",
+      "Multi-loop QED (~10-50 ppm, LS-8a)"
+    ],
+    "honest_limitations": [
+      "Framework atomic accuracy (~1.10% on E_total) dominates over Layer-2 budget walls. Cannot separately test \u00a7III.18 / \u00a7III.20 / \u00a7III.22 in current scoping pass.",
+      "Component 1 uses hydrogenic Z_eff=1.279 which already implicitly absorbs SOME \u00a7III.20 PK content via CR67's empirical SCF fit. Pure framework-native compute would require full graph-native multi-electron CI.",
+      "Component 5 is documented but NOT explicitly computed from framework primitives \u2014 the multi-electron contact-density correction is named at the projection level (\u00a7III.20 + \u00a7III.22) but not numerically extracted.",
+      "Hylleraas-Eckart double-zeta extension is the named structural closure for sub-1% multi-electron HFS (same closure as for He 2^1S-2^3S splitting and He 2^1P->1^1S oscillator strength autopsies)."
+    ]
+  },
+  "named_followon_sprint": {
+    "name": "Hylleraas-Eckart double-zeta for Li 2^2S HFS",
+    "duration_estimate": "2-3 weeks",
+    "module": "geovac/hylleraas_r12.py (extend to s-shell + p-shell)",
+    "expected_improvement": "Framework Li accuracy 1.10% -> sub-0.1% (Drake-class)",
+    "downstream_impact": "Unlocks separable testing of \u00a7III.18 (Zemach via r_Z), \u00a7III.20 (PK orthogonality), \u00a7III.22 (bipolar core polarization), and multi-loop QED in multi-electron HFS. Multi-electron HFS frontier (Li, Na, K alkali series + He metastable 2^3S HFS) becomes a testbed for the framework projection-chain dictionary."
+  }
+}

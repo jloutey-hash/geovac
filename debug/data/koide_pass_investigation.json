@@ -1,0 +1,441 @@
+{
+  "sprint": "koide_pass_investigation",
+  "date": "2026-05-18",
+  "context": "Focused Koide-specific re-test after Sprint W3 (May 2026) tested general lepton mass spectrum",
+  "framework_state": "Papers 38-45 (Lorentzian propinquity, modular Hamiltonian, inner-factor Mellin engine theorem)",
+  "precision_dps": 100,
+  "part1_numerical": {
+    "PDG_2024": {
+      "m_e_MeV": "0.51099895",
+      "m_mu_MeV": "105.6583755",
+      "m_tau_MeV": "1776.86",
+      "sigma_tau_MeV": "0.12"
+    },
+    "Koide_ratio_K": "0.66666051147738557218795154253",
+    "Koide_target_2over3": "0.666666666666666666666666666667",
+    "K_minus_2over3": "-6.15518928109448e-6",
+    "sigma_K_from_tau": "6.77465010508453e-6",
+    "K_deviation_sigma": "-0.908562",
+    "cos_theta": "0.70711004549121161799811518679",
+    "cos2_theta": "0.500004616434583363855628932949",
+    "cos2_minus_half": "4.61643458336386e-6",
+    "theta_deg": "44.999735497782",
+    "theta_minus_45_arcsec": "-0.95220798",
+    "sigma_cos2": "5.08102976965862e-6"
+  },
+  "part2_pslq": {
+    "basis_size_total_forms": 47,
+    "factor_count": 14,
+    "tests_per_target": 658,
+    "n_targets": 7,
+    "selection_bias_note": "HAND-CURATED basis motivated by Koide-cone structural candidates. Each entry's source documented. Selection bias non-zero but bounded by basis size 47. Hits within target sigma reported honestly with rel_err and context.",
+    "search_results": {
+      "1pct": {
+        "r1_sqrt_me_over_mmu": {
+          "target_value": "0.069543739419285702771",
+          "n_hits": 0,
+          "hits": []
+        },
+        "r2_sqrt_me_over_mtau": {
+          "target_value": "0.016958342351922594006",
+          "n_hits": 1,
+          "hits": [
+            {
+              "basis": "M1_Hopf",
+              "form": "1/(2*pi^2)",
+              "factor": "0.3333333333",
+              "candidate_value": "0.0168868639403896",
+              "relative_error": "0.0042149409",
+              "log10_rel_err": -2.375208505874508
+            }
+          ]
+        },
+        "r3_sqrt_mmu_over_mtau": {
+          "target_value": "0.24385145943445985073",
+          "n_hits": 0,
+          "hits": []
+        },
+        "theta_radians": {
+          "target_value": "0.78539354696286488017",
+          "n_hits": 8,
+          "hits": [
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/16",
+              "factor": "4.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/12",
+              "factor": "3.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/8",
+              "factor": "2.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/6",
+              "factor": "1.5",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/4",
+              "factor": "1.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            }
+          ]
+        },
+        "cos2_theta": {
+          "target_value": "0.50000461643458336386",
+          "n_hits": 7,
+          "hits": [
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/3",
+              "factor": "1.5",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "2/3",
+              "factor": "0.75",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/2",
+              "factor": "1.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/6",
+              "factor": "3.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/8",
+              "factor": "4.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            }
+          ]
+        },
+        "K_minus_2over3": {
+          "target_value": "-6.1551892810944787151e-6",
+          "n_hits": 0,
+          "hits": []
+        },
+        "theta_minus_pi_over_4": {
+          "target_value": "-4.616434583429444295e-6",
+          "n_hits": 0,
+          "hits": []
+        }
+      },
+      "0p1pct": {
+        "r1_sqrt_me_over_mmu": {
+          "target_value": "0.069543739419285702771",
+          "n_hits": 0,
+          "hits": []
+        },
+        "r2_sqrt_me_over_mtau": {
+          "target_value": "0.016958342351922594006",
+          "n_hits": 0,
+          "hits": []
+        },
+        "r3_sqrt_mmu_over_mtau": {
+          "target_value": "0.24385145943445985073",
+          "n_hits": 0,
+          "hits": []
+        },
+        "theta_radians": {
+          "target_value": "0.78539354696286488017",
+          "n_hits": 8,
+          "hits": [
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/16",
+              "factor": "4.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/12",
+              "factor": "3.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/8",
+              "factor": "2.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/6",
+              "factor": "1.5",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/4",
+              "factor": "1.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            }
+          ]
+        },
+        "cos2_theta": {
+          "target_value": "0.50000461643458336386",
+          "n_hits": 7,
+          "hits": [
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/3",
+              "factor": "1.5",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "2/3",
+              "factor": "0.75",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/2",
+              "factor": "1.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/6",
+              "factor": "3.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/8",
+              "factor": "4.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            }
+          ]
+        },
+        "K_minus_2over3": {
+          "target_value": "-6.1551892810944787151e-6",
+          "n_hits": 0,
+          "hits": []
+        },
+        "theta_minus_pi_over_4": {
+          "target_value": "-4.616434583429444295e-6",
+          "n_hits": 0,
+          "hits": []
+        }
+      },
+      "0p01pct": {
+        "r1_sqrt_me_over_mmu": {
+          "target_value": "0.069543739419285702771",
+          "n_hits": 0,
+          "hits": []
+        },
+        "r2_sqrt_me_over_mtau": {
+          "target_value": "0.016958342351922594006",
+          "n_hits": 0,
+          "hits": []
+        },
+        "r3_sqrt_mmu_over_mtau": {
+          "target_value": "0.24385145943445985073",
+          "n_hits": 0,
+          "hits": []
+        },
+        "theta_radians": {
+          "target_value": "0.78539354696286488017",
+          "n_hits": 8,
+          "hits": [
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/16",
+              "factor": "4.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/12",
+              "factor": "3.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/8",
+              "factor": "2.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/6",
+              "factor": "1.5",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            },
+            {
+              "basis": "M1_Hopf",
+              "form": "pi/4",
+              "factor": "1.0",
+              "candidate_value": "0.785398163397448",
+              "relative_error": "5.8778271e-6",
+              "log10_rel_err": -5.230783195537961
+            }
+          ]
+        },
+        "cos2_theta": {
+          "target_value": "0.50000461643458336386",
+          "n_hits": 7,
+          "hits": [
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/3",
+              "factor": "1.5",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "2/3",
+              "factor": "0.75",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/2",
+              "factor": "1.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/6",
+              "factor": "3.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            },
+            {
+              "basis": "SU3_Casimir",
+              "form": "1/8",
+              "factor": "4.0",
+              "candidate_value": "0.5",
+              "relative_error": "9.2327839e-6",
+              "log10_rel_err": -5.034667328279599
+            }
+          ]
+        },
+        "K_minus_2over3": {
+          "target_value": "-6.1551892810944787151e-6",
+          "n_hits": 0,
+          "hits": []
+        },
+        "theta_minus_pi_over_4": {
+          "target_value": "-4.616434583429444295e-6",
+          "n_hits": 0,
+          "hits": []
+        }
+      }
+    }
+  },
+  "part3_structural": {
+    "mellin_k_mapping_test": {
+      "v_dimensionless": [
+        "0.0169583423519226",
+        "0.24385145943446",
+        "1.0"
+      ],
+      "verdict": "NO NATURAL MAPPING. Master Mellin engine produces a continuous family M[Tr(D^k e^{-tD^2})](s) of values. Three discrete values (m_e, m_mu, m_tau) would require 3 specific (k, t, s) selections with no internal mechanism. Inner-factor Mellin engine theorem (CLAUDE.md 2026-05-07) says Yukawas live in inner factor Dirichlet ring, categorically disjoint from outer M1/M2/M3. Koide cone is in inner factor; not addressable by master Mellin engine."
+    },
+    "su3_45deg_check": {
+      "su3_simple_root_angle_deg": "120.0",
+      "expected_60_or_120": "120 deg (Cartan matrix of A_2)",
+      "verdict": "NO NATURAL 45\u00b0 IN SU(3). Simple roots of SU(3) (= A_2 Lie algebra) have 120\u00b0 between them. Fundamental weights have 60\u00b0 to each other. 45\u00b0 is not a natural angle in the SU(3) weight lattice. The Koide cone is not an SU(3) representation-theoretic fact."
+    },
+    "inner_factor_mellin_check": {
+      "inner_sum_s_neg_half_equals_sum_of_masses": "1883.02937445",
+      "inner_sum_s_neg_quarter_equals_sum_sqrt_masses": "53.146685130126197768",
+      "koide_K_via_inner_ratio": "0.66666051147738557218795154253",
+      "matches_direct_K": "0.0",
+      "verdict": "Koide IS expressible as ratio of inner Dirichlet values at half-integer s (s=-1/2 and s=-1/4). This is a TAUTOLOGICAL reformulation, not a derivation. The K = 2/3 constraint becomes a polynomial relation among the three Yukawas y_i that does NOT follow from any axiom of the inner Dirichlet ring. Inner-factor Mellin engine theorem says the inner ring is CONSTRAINED but not DETERMINED by the framework \u2014 Koide's K=2/3 is a 1-parameter constraint the framework cannot autonomously generate.",
+      "half_integer_s_caveat": "Half-integer s sits outside the integer-s regime where the inner Dirichlet ring is rigorously characterized. Continuation to half-integer s opens analytic-continuation freedom that doesn't help: the values are just the sums \u03a3 y_i and \u03a3 \u221ay_i, which are not constrained by any framework axiom."
+    }
+  },
+  "part4_verdict": {
+    "PSLQ_summary": {
+      "total_hits_1pct": 16,
+      "total_hits_0p01pct": 15,
+      "expected_random_1pct": 92.12000000000002,
+      "expected_random_0p01pct": 0.9212
+    },
+    "Koide_precision": {
+      "K_vs_2over3_sigma": "-0.9086",
+      "theta_vs_45deg_arcsec": "-0.952208"
+    },
+    "Structural_findings": {
+      "mellin_k_mapping": "NO MAPPING",
+      "su3_45deg": "NO \u2014 SU(3) gives 60\u00b0/120\u00b0, not 45\u00b0",
+      "inner_factor_check": "Koide expressible as ratio of inner Dirichlet at half-integer s but constraint NOT derivable"
+    }
+  }
+}

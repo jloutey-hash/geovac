@@ -1,0 +1,259 @@
+{
+  "track": "Track 3: Helium-3 2^3S_1 HFS \u2014 operator-level five-component Roothaan autopsy (FIRST multi-electron HFS in catalogue)",
+  "date_utc": "2026-05-18T21:24:32.029328+00:00",
+  "system": "atomic He-3, 2^3S_1 metastable, I=1/2, J=1",
+  "experimental_value_MHz": 6739.701177,
+  "experimental_source": "Schuessler-Fortson-Dehmelt 1969 / Prior-Wang 1977 / Rosner-Pipkin 1970",
+  "headline": {
+    "framework_native_subtotal_MHz_at_slater_screen": 6653.409210951485,
+    "framework_native_residual_ppm_at_slater_screen": -12803.529975927737,
+    "section_III_18_at_He3_reproduction_pct": 0.0,
+    "profile_independence_ppm": 0.0,
+    "operator_level_I_J_swap_symmetry_He3_vs_D": true,
+    "PK_orthogonality_detectable_at_1ppm": true,
+    "PK_spread_ppm_unscreened_vs_full_screen": 105468.29983831102
+  },
+  "cumulative_chain": {
+    "preferred_contact_density_path": "hydrogenic_slater",
+    "components": {
+      "1_bohr_fermi": {
+        "contact_density_path": "hydrogenic_slater",
+        "contact_density_breakdown": {
+          "Z_eff_1s": 2.0,
+          "Z_eff_2s": 1.15,
+          "|phi_1s(0)|^2_au": 2.5464790894703255,
+          "|phi_2s(0)|^2_au": 0.06051369351872157,
+          "total_contact_density_au": 2.606992782989047,
+          "effective_spin_weighted_density_au": 1.3034963914945235,
+          "structural_note": "Multi-electron triplet contact density: |psi_total(0)|^2 = |phi_1s(0)|^2 + |phi_2s(0)|^2 for orthogonal 1s, 2s orbitals (cross-terms vanish by orthogonality). The effective spin-weighted density = total/2 is what goes into the BF formula (single-electron-calibrated) to give A in the I\u00b7J convention with J=1. The factor 1/2 is the structural spin projection: \u27e8\u03a3_i \u03b4\u00b3(r_i) s_{i,z}\u27e9_{M_S=1} = total/2."
+        },
+        "psi0_squared_total_au": 2.606992782989047,
+        "A_He3_Ha_signed": -6.738223201104649e-07,
+        "A_He3_MHz_signed": -4433.537884906177,
+        "A_He3_MHz_magnitude": 4433.537884906177,
+        "multiplicity_factor": 1.5,
+        "nu_HFS_He3_strict_MHz": 6650.306827359265,
+        "residual_strict_ppm": -13263.844685844982,
+        "h_sanity_A_MHz": 1421.1595286758923,
+        "he3_plus_1s_sanity": {
+          "A_MHz_predicted": -8661.252604883417,
+          "A_MHz_experiment": -8665.65,
+          "residual_pct": -0.05074512721587682,
+          "note": "He-3+ (single-electron hydrogen-like ion at Z=2) sanity check: standard convention (g_He3 = mu/I, m_p in mass slot) matches experiment at <0.1%. This anchors the framework's He-3 g-factor and contact density at the single-electron level; the multi-electron 2^3S_1 extension builds on this."
+        },
+        "operator_level_I_dot_J": {
+          "He3_I_eq_half_J_eq_1_eigenvalues": [
+            -1.0,
+            0.5
+          ],
+          "He3_multiplicity_F_3half_minus_F_1half": 1.5,
+          "D_I_eq_1_J_eq_half_eigenvalues": [
+            -1.0,
+            0.5
+          ],
+          "D_multiplicity": 1.5,
+          "H_I_eq_half_J_eq_half_eigenvalues": [
+            -0.75,
+            0.25
+          ],
+          "H_multiplicity_F_1_minus_F_0": 1.0,
+          "multiplicity_ratio_He3_over_D": 1.0,
+          "multiplicity_ratio_He3_over_H": 1.5,
+          "operator_level_verdict_I_J_swap_symmetric": true,
+          "structural_note": "He-3 at (I=1/2, J=1) and D at (I=1, J=1/2) give identical I.J eigenvalue spectra by Wigner 3j I-J swap symmetry (both are F=1/2, F=3/2 multiplet). Splitting multiplicity = 3/2 in both cases."
+        },
+        "convention_note": "He-3 nuclear g-factor is NEGATIVE (g_He3 \u2248 -4.255). The A_hf is therefore negative; the SPLITTING magnitude is |3A/2|. Reference value 6739.701 MHz is the magnitude."
+      },
+      "2_schwinger_a_e": {
+        "a_e_Schwinger_alpha_over_2pi": 0.0011614097328884378,
+        "a_e_CODATA": 0.00115965218091,
+        "a_e_ratio_to_CODATA": 1.0015155854551652,
+        "nu_BF_strict_MHz": 6650.306827359265,
+        "nu_with_Schwinger_a_e_MHz": 6658.030558435255,
+        "shift_MHz": 7.723731075990145,
+        "shift_ppm": 1161.409732888438
+      },
+      "3_reduced_mass_recoil": {
+        "m_e_over_m_He3": 0.0001819494731215733,
+        "recoil_factor_He3_at_LO": 0.9994543501540806,
+        "recoil_factor_H_at_LO_for_comparison": 0.9983679269676805,
+        "nu_with_a_e_MHz": 6658.030558435255,
+        "nu_with_recoil_MHz": 6654.397605086919,
+        "shift_MHz": -3.6329533483367413,
+        "shift_ppm": -545.649845919427,
+        "structural_note": "Framework-native rest-mass projection (Paper 34 \u00a7III.14) at He-3 with nucleus mass m_He3 \u2248 3 m_p. The mass enhancement of recoil over hydrogen is ~1/3 (smaller recoil ppm because m_He3 > m_p). Cross-register V_eN production module should reproduce LO Bethe-Salpeter at ~3% for He-3 (vs 2.86% for H)."
+      },
+      "4_zemach_operator_level": {
+        "r_Z_He3_fm": 1.965,
+        "r_Z_He3_fm_alt": 2.528,
+        "r_Z_He3_bohr": 3.713311835612404e-05,
+        "r_Z_He3_source": "Sick 2014 / muonic-He3 best value 1.965 fm",
+        "eides_analytic_LO_Z1_ppm": -74.26623671224807,
+        "eides_analytic_LO_Z2_ppm_for_He3_nucleus": -148.53247342449615,
+        "operator_level_gaussian_ppm_Z1_basis": -74.26623671224807,
+        "operator_level_exponential_ppm_Z1_basis": -74.26623671224807,
+        "reproduction_residual_ppm": 0.0,
+        "reproduction_residual_pct_of_LO": 0.0,
+        "profile_independence_residual_ppm": 0.0,
+        "n_pauli_terms_op": 4,
+        "rho_M_moments": {
+          "M_0": 1.0,
+          "M_1": 3.713311835612403e-05,
+          "M_2": 1.6244411562830362e-09
+        },
+        "nlo_opt_in_with_He3_nucleon_mass": {
+          "delta_LO_ppm": -74.26623671224807,
+          "delta_NLO_recoil_ppm": 0.013486463210539769,
+          "delta_friar_ppm": 0.0008122205781415182,
+          "recoil_mixing_factor_m_l_over_m_l_plus_m_n": 0.00018159615738702923,
+          "operator_total_with_NLO_ppm": -74.25193802845938,
+          "structural_note": "NLO recoil-mixing factor m_e/(m_e + m_He3) ~ 1.82e-4 for He-3 (vs 5.45e-4 for H, 2.72e-4 for D). Sub-ppm correction to LO Zemach shift in the electronic regime."
+        },
+        "h21_cross_validation": {
+          "r_Z_H_fm": 1.045,
+          "operator_level_gaussian_H_ppm": -39.49527601236602,
+          "eides_analytic_LO_H_ppm": -39.49527601236602,
+          "ratio_He3_over_H_operator": 1.8803827751196174,
+          "ratio_He3_over_H_radii": 1.8803827751196174,
+          "structural_note": "Zemach magnitude scales linearly with r_Z (Eides LO). He-3/H ratio in operator output equals He-3/H ratio of radii to machine precision: framework-native scaling is exactly Eides leading order."
+        },
+        "operator_level_verdict": "\u00a7III.18 magnetization-density operator at He-3 (Z=1 basis scaled by Z=2 for nucleus) reproduces Eides leading-order Zemach scalar to machine precision; profile (Gaussian vs exponential) independence preserved; NLO opt-in negligible in electronic regime."
+      },
+      "5_phillips_kleinman_orthogonality": {
+        "paths_compared": [
+          "hydrogenic_unscreened",
+          "hydrogenic_slater",
+          "full_screen"
+        ],
+        "results_per_path": {
+          "hydrogenic_unscreened": {
+            "Z_eff_1s": 2.0,
+            "Z_eff_2s": 2.0,
+            "psi0_squared_total": 2.864788975654116,
+            "A_He3_MHz_magnitude": 4871.954590246922,
+            "nu_HFS_BF_strict_MHz": 7307.931885370383,
+            "nu_final_chain_MHz": 7311.341052580676,
+            "residual_final_chain_ppm": 84816.79833691473,
+            "residual_strict_ppm": 84310.96475160276
+          },
+          "hydrogenic_slater": {
+            "Z_eff_1s": 2.0,
+            "Z_eff_2s": 1.15,
+            "psi0_squared_total": 2.606992782989047,
+            "A_He3_MHz_magnitude": 4433.537884906177,
+            "nu_HFS_BF_strict_MHz": 6650.306827359265,
+            "nu_final_chain_MHz": 6653.409210951485,
+            "residual_final_chain_ppm": -12803.529975927737,
+            "residual_strict_ppm": -13263.844685844982
+          },
+          "full_screen": {
+            "Z_eff_1s": 2.0,
+            "Z_eff_2s": 1.0,
+            "psi0_squared_total": 2.5862678252432993,
+            "A_He3_MHz_magnitude": 4398.29233841736,
+            "nu_HFS_BF_strict_MHz": 6597.4385076260405,
+            "nu_final_chain_MHz": 6600.516228024222,
+            "residual_final_chain_ppm": -20651.50150139629,
+            "residual_strict_ppm": -21108.156821469624
+          }
+        },
+        "nu_strict_spread_MHz": 710.4933777443421,
+        "nu_strict_spread_ppm": 105419.12157307239,
+        "nu_final_chain_spread_MHz": 710.8248245564537,
+        "nu_final_chain_spread_ppm": 105468.29983831102,
+        "PK_orthogonality_structurally_detectable_at_1ppm": true,
+        "detectability_verdict": "\u00a7III.20 Phillips-Kleinman / core-valence orthogonality IS structurally detectable at He-3 2^3S_1 HFS precision: spread across hydrogenic-vs-Slater-vs-full-screen contact-density prescriptions = 105468.3 ppm (well above the ~ppm experimental precision and well above the H/D HFS framework residuals). This makes He-3 2^3S_1 HFS the first precision-catalogue entry where the framework's multi-electron screening prescription matters at the residual level \u2014 the \u00a7V.D candidate convention exposure is hydrogenic-vs-Slater for the 2s effective charge.",
+        "structural_reading": "The 1s electron sees the full nuclear charge (Z=2); the 2s sees a screened charge ~ 1.0-1.15 depending on prescription. Hydrogenic (Z_eff=2 for both) over-estimates |phi_2s(0)|^2 by factor 8 vs full-screen. The Slater-screening prescription (Z_eff_2s=1.15) sits between the two; the framework's preferred Layer-2 input would be the \u00a7III.20 PK calculation with the actual He 2s screened radial wavefunction. This is the \u00a7III.20 operator-level test point."
+      }
+    },
+    "chain_table": [
+      {
+        "component": "1. Bohr-Fermi 2^3S_1 (multi-electron contact density)",
+        "nu_MHz": 6650.306827359265,
+        "residual_ppm": -13263.844685844982,
+        "projection_chain": "\u00a7III.1 Fock \u2218 \u00a7III.7 spinor \u2218 \u00a7III.8 Wigner 3j (I\u00b7J) \u2218 \u00a7III.22 bipolar harmonic (multi-electron triplet spin coupling) \u2218 \u00a7III.20 PK orthogonality (Slater screen)",
+        "status": "FN at op-level (PK convention-dependent)"
+      },
+      {
+        "component": "2. + Schwinger a_e (one-loop)",
+        "nu_MHz": 6658.030558435255,
+        "residual_ppm": -12117.839711270106,
+        "projection_chain": "\u00a7III.6 spectral action (Parker-Toms c_1 = R/12 = 1/2)",
+        "status": "FN (with calibration)"
+      },
+      {
+        "component": "3. + Reduced-mass / cross-register recoil",
+        "nu_MHz": 6654.397605086919,
+        "residual_ppm": -12656.877459818159,
+        "projection_chain": "\u00a7III.14 rest-mass projection at m_p \u2192 m_He3",
+        "status": "FN"
+      },
+      {
+        "component": "4. + Zemach r_Z(He-3)=1.965 fm via \u00a7III.18 op-level (Z=2 scaling)",
+        "nu_MHz": 6653.409210951485,
+        "residual_ppm": -12803.529975927737,
+        "projection_chain": "\u00a7III.1 Fock \u2218 \u00a7III.7 spinor \u2218 \u00a7III.18 magnetization-density operator at I=1/2, lepton_mass=1, profile=gaussian",
+        "status": "FN at op-level + L2 (r_Z scalar)"
+      },
+      {
+        "component": "5. \u00a7III.20 PK orthogonality (FIRST OPERATOR-LEVEL TEST)",
+        "nu_MHz": "(diagnostic \u2014 see component 5)",
+        "residual_ppm": "(spread across paths)",
+        "projection_chain": "\u00a7III.20 Phillips-Kleinman / core-valence orthogonality for the 2s effective charge",
+        "status": "L2 (Layer-2 input via Slater screen or \u00a7III.20 PK ab initio)"
+      }
+    ],
+    "experimental_MHz": 6739.701177,
+    "final_chain_MHz": 6653.409210951485,
+    "final_chain_residual_ppm": -12803.529975927737,
+    "Layer_2_inputs_used": {
+      "r_Z_He3_fm": 1.965,
+      "r_Z_He3_source": "Sick 2014 (muonic-He3 best 1.965 fm)",
+      "g_He3": -4.25525,
+      "g_He3_source": "CODATA mu(He-3) = -2.127625 mu_N, g_He3 = mu/I",
+      "PK_screening_path": "hydrogenic_slater",
+      "Z_eff_2s_used": 1.15
+    }
+  },
+  "layer_2_attribution": {
+    "residual_to_attribute_ppm": -12803.529975927737,
+    "attributions_approximate": {
+      "PK_orthogonality_2s_screening_ppm": "see component 5",
+      "PK_orthogonality_wall": "\u00a7III.20 multi-electron screening of 2s by 1s; ab initio composed-architecture PK at finite n_max would replace Slater Z_eff with \u00a7III.20 operator-level PK potential",
+      "multi_electron_QED_Pachucki_Drachman_ppm": "few hundred ppm",
+      "multi_electron_QED_wall": "LS-8a renormalization gap + multi-electron Pachucki-style corrections; framework-native scope ends at one-loop on single-particle Dirac-S^3",
+      "He3_polarizability_ppm": "small (~few ppm)",
+      "He3_polarizability_wall": "W3 inner-factor (He-3 nuclear structure smaller than deuteron polarizability because alpha-particle-like binding is stronger than n+p)",
+      "multi_loop_QED_alpha2_Zalpha_ppm": "tens of ppm",
+      "multi_loop_QED_wall": "LS-8a (one-loop closure architecture stops here)"
+    },
+    "verdict": "Cumulative residual -12803.5 ppm dominated by \u00a7III.20 PK orthogonality (multi-electron screening of 2s) and multi-electron Pachucki-Drachman QED corrections. Unlike H/D HFS where the framework-native residual sits ~10-300 ppm with the dominant wall being LS-8a multi-loop QED, He-3 2^3S_1 HFS surfaces the \u00a7III.20 multi-electron screening as the dominant Layer-2 content \u2014 this is the FIRST precision-catalogue entry where the framework's contact-density extraction convention is the load-bearing systematic, not multi-loop QED."
+  },
+  "scope_boundary": {
+    "framework_native": [
+      "Bohr-Fermi I\u00b7J Hamiltonian at I=1/2, J=1 (Clebsch-Gordan F=1/2, 3/2)",
+      "Multi-electron contact density from (1s)(2s) triplet (|phi_1s(0)|^2 + |phi_2s(0)|^2, orthogonal-orbital case)",
+      "Schwinger a_e one-loop",
+      "Reduced-mass / cross-register V_eN recoil at LO (m_p \u2192 m_He3)",
+      "\u00a7III.18 magnetization-density operator at I=1/2, He-3, leading-order Zemach (with Z=2 scaling for He nucleus)"
+    ],
+    "Layer_2_inputs": [
+      "r_Z(He-3) = 1.965 fm (Sick 2014)",
+      "g_He3 = -4.255 (CODATA mu_He3, NEGATIVE)",
+      "Z_eff(2s) via Slater screening or \u00a7III.20 PK ab initio"
+    ],
+    "external_walls_named": [
+      "\u00a7III.20 multi-electron screening of 2s by 1s (dominant; the spread across hydrogenic/Slater/full-screen is the first place a multi-electron screening prescription is load-bearing for a precision catalogue entry)",
+      "Multi-electron QED Pachucki-Drachman corrections (LS-8a wall, multi-particle generalization)",
+      "He-3 nuclear polarizability (W3 inner-factor, smaller than deuteron because alpha-particle binding is stronger)",
+      "Multi-loop QED at alpha^2(Z alpha) (LS-8a)"
+    ],
+    "honest_limitations": [
+      "Multi-electron contact density extracted from naive hydrogenic-Slater orbitals; the framework-native ab initio composed-architecture treatment via \u00a7III.20 PK at finite n_max is a named follow-on.",
+      "He-3 nuclear g-factor is NEGATIVE; this autopsy operates on the magnitude of the splitting (3/2 |A_hf|) following experimental convention.",
+      "The Hylleraas r12 module (geovac/hylleraas_r12.py) provides higher-accuracy multi-electron wavefunctions but the 2^3S_1 case was a NEGATIVE result (+209% at omega=5 per the existing precision-catalogue sprint); the named closure path is Hylleraas-Eckart double-alpha extension. Using the existing Hylleraas single-alpha for this autopsy would not be reliable.",
+      "Zemach Z=2 scaling assumes leading-order linearity in Z; sub-leading corrections (e.g. Friar 1979) are below the ppm level for He-3."
+    ],
+    "framework_native_architecture_used": "Hydrogenic-Slater multi-electron contact density (the most defensible cleanly-specified prescription at this sprint's scope; the \u00a7III.20 PK ab initio extraction is the named operator-level closure target). The \u00a7III.18 Zemach module is used at the operator level for the Zemach component; the Hylleraas r12 module is flagged but NOT used because its single-alpha basis is known non-variational for the 2^3S_1 state."
+  }
+}

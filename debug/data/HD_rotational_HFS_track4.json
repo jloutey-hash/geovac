@@ -1,0 +1,57 @@
+{
+  "constants_used": {
+    "Q_d_fm2": 0.285699,
+    "Q_d_source": "Komasa-Pachucki 2020 (Paper 34 \u00a7III.19 anchor)",
+    "R_eq_bohr": 1.4011
+  },
+  "reference_observable": {
+    "experimental_kHz": 224.54,
+    "experimental_source": "Code-Ramsey 1971; current best Komasa-Pachucki 2020 (224.51(5) kHz)",
+    "name": "HD molecule J=1 deuteron quadrupole coupling \u03c7_d"
+  },
+  "sprint": "Multi-track Roothaan autopsy \u2014 Track 4 (HD J=1 HFS)",
+  "step1_bare_nuclear": {
+    "V_zz_J1_au": -0.2908590543380808,
+    "V_zz_mol_au": 0.7271476358452019,
+    "chi_d_J1_kHz_abs": 195.25136256859412,
+    "chi_d_mol_kHz": 488.1284064214852,
+    "description": "EFG at deuteron from bare proton at R = R_eq = 1.4011 bohr. q_nuc = 2 Z_H / R\u00b3.  Molecular-frame value, before J=1 rotational average."
+  },
+  "step2_hydrogenic_screening": {
+    "V_zz_elec_mol_au": -0.22436290821053567,
+    "chi_d_elec_mol_kHz": -150.61303021029602,
+    "description": "EFG at deuteron from a free H-atom 1s electron centered on the H nucleus (sign = -e \u00d7 1s density).  The 'free atom' approximation \u2014 no bond charge redistribution.  Expected to be a poor LO estimate (real bound-state electron density peaks on both nuclei)."
+  },
+  "step3_total_free_atom": {
+    "V_zz_J1_au": -0.20111389105386648,
+    "V_zz_mol_au": 0.5027847276346662,
+    "chi_d_J1_kHz_abs": 135.00615048447565,
+    "chi_d_mol_kHz": 337.51537621118916,
+    "description": "Sum of bare nuclear + free-1s-electron EFG, then J=1 rotational average.  This is the framework-side order-of-magnitude estimate."
+  },
+  "step4_comparison": {
+    "experimental_kHz": 224.54,
+    "framework_OoM_kHz": 135.00615048447565,
+    "interpretation": "OoM result: free-atom estimate is at 60% of experimental (135 kHz vs 224 kHz) with the right sign, the right angular-factor structure (J=1, m_J=0 rigid-rotor reduction), and the right scalar Layer-2 input (Q_d as external parameter, multiplied by a framework-native angular factor).  The 40% gap is the bond-charge redistribution: the free-atom 1s electron centered on H overestimates the screening at the D nucleus, while in the real bond the electron density also peaks near D. Bare-nuclear-only at 195 kHz (-13%) shows the dominant physics is already captured by the multipole expansion of the partner nucleus's potential at distance R_eq.  Sub- percent reproduction requires an EFG operator integrating against the molecular electronic density (Komasa-Pachucki 2020 reference is 224.51(5) kHz from CCSDT-F12 + non- adiabatic rovibrational averaging).  See scoping memo for the named follow-on.",
+    "residual_kHz": -89.53384951552434,
+    "residual_pct": -39.87434288568823
+  },
+  "step5_section_III19_feasibility": {
+    "after_this_track": "OoM SCOPING with named gaps; one structural confirmation: the deuteron Q_d enters as a scalar Layer-2 input multiplying a framework-native angular factor (J=1, m_J=0 rigid-rotor reduction is Wigner-3j-based, ring-preserving over \u211a, same algebraic ring as \u00a7III.18).  The architecture is consistent with the \u00a7III.19 entry's claims; what is missing is the molecular electronic-density operator.",
+    "current_operator_level_status": "ZERO_TESTS",
+    "named_follow_on_track": "Sprint 'HD-EFG-position-space' (4-8 weeks): expose Level 4 wavefunction in position space at the deuteron location, integrate the EFG operator against \u03c1(r), include ro-vibrational averaging over v=0.  Komasa-Pachucki 2020 is the ab-initio reference.  This is the structural analog of how W1a-D Roothaan recoil and \u00a7III.18 Zemach operator-level extensions were built.",
+    "what_is_already_framework_native": [
+      "Q_d as Layer-2 scalar input (analog of r_E, r_Z, m_n)",
+      "J=1, m_J=0 Wigner-3j rigid-rotor coupling (\u00a7III.8)",
+      "Multipole expansion of e-d Coulomb (\u00a7III.21)",
+      "Born-Oppenheimer separation of electronic and rotational degrees of freedom (\u00a7III.24)",
+      "Sturmian basis / Fock projection (\u00a7III.5)"
+    ],
+    "what_is_missing": [
+      "Molecular electronic density \u03c1(r) at a nuclear position in position space (Level 4 returns hyperspherical channels, not \u03c1(r))",
+      "EFG operator V_zz = \u2202\u00b2V_e/\u2202z\u00b2 at a chosen point",
+      "Ro-vibrational averaging over v=0 J=1 nuclear wavefunction"
+    ]
+  },
+  "verdict_class": "OUTCOME B (scoping + first-pass OoM)"
+}

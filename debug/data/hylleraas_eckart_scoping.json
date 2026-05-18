@@ -1,0 +1,75 @@
+{
+  "b0_check": {
+    "(0, 0, 0)": {
+      "time_s": 1.8692846298217773,
+      "diff": "0",
+      "closed_form_he": "Piecewise((-64/(B**6 - 12*B**4*alpha**2 + 48*B**2*alpha**4 - 64*alpha**6), (B < 2*alpha) & Ne(alpha/B, 1/2)), (8*Integral((B**2*s**2*sinh(B*s) - 3*B*s*cosh(B*s) + 3*sinh(B*s))*exp(-2*alpha*s), (s, 0, oo))/B**5, True))",
+      "closed_form_single": "alpha**(-6)"
+    },
+    "(1, 0, 0)": {
+      "time_s": 1.4236671924591064,
+      "diff": "0",
+      "closed_form_he": "Piecewise((768*alpha/(B**8 - 16*B**6*alpha**2 + 96*B**4*alpha**4 - 256*B**2*alpha**6 + 256*alpha**8), (B < 2*alpha) & Ne(alpha/B, 1/2)), (8*Integral(s*(B**2*s**2*sinh(B*s) - 3*B*s*cosh(B*s) + 3*sinh(B*s))*exp(-2*alpha*s), (s, 0, oo))/B**5, True))",
+      "closed_form_single": "3/alpha**7"
+    },
+    "(0, 1, 0)": {
+      "time_s": 3.6025502681732178,
+      "diff": "0",
+      "closed_form_he": "Piecewise((384*(-7*B**2 - 4*alpha**2)/(B**10 - 20*B**8*alpha**2 + 160*B**6*alpha**4 - 640*B**4*alpha**6 + 1280*B**2*alpha**8 - 1024*alpha**10), (B < 2*alpha) & Ne(alpha/B, 1/2)), (8*Integral((B**4*s**4*sinh(B*s) - 9*B**3*s**3*cosh(B*s) + 39*B**2*s**2*sinh(B*s) - 90*B*s*cosh(B*s) + 90*sinh(B*s))*exp(-2*alpha*s), (s, 0, oo))/B**7, True))",
+      "closed_form_single": "3/(2*alpha**8)"
+    },
+    "(0, 0, 1)": {
+      "time_s": 2.7336771488189697,
+      "diff": "0",
+      "closed_form_he": "Piecewise(((-B**4 + 56*B**2*alpha**2 + 560*alpha**4)/(alpha**3*(B**8 - 16*B**6*alpha**2 + 96*B**4*alpha**4 - 256*B**2*alpha**6 + 256*alpha**8)), (B < 2*alpha) & Ne(alpha/B, 1/2)), (4*Integral((2*B**3*s**3*sinh(B*s) - 9*B**2*s**2*cosh(B*s) - B**2*s**2 + 20*B*s*sinh(B*s) - 20*cosh(B*s) + 20)*exp(-2*alpha*s), (s, 0, oo))/B**6, True))",
+      "closed_form_single": "35/(16*alpha**7)"
+    },
+    "(1, 0, 1)": {
+      "time_s": 2.7601358890533447,
+      "diff": "0",
+      "closed_form_he": "Piecewise(((-3*B**6 + 100*B**4*alpha**2 - 2576*B**2*alpha**4 - 15680*alpha**6)/(2*alpha**4*(B**10 - 20*B**8*alpha**2 + 160*B**6*alpha**4 - 640*B**4*alpha**6 + 1280*B**2*alpha**8 - 1024*alpha**10)), (B < 2*alpha) & Ne(alpha/B, 1/2)), (4*Integral(s*(2*B**3*s**3*sinh(B*s) - 9*B**2*s**2*cosh(B*s) - B**2*s**2 + 20*B*s*sinh(B*s) - 20*cosh(B*s) + 20)*exp(-2*alpha*s), (s, 0, oo))/B**6, True))",
+      "closed_form_single": "245/(32*alpha**8)"
+    }
+  },
+  "beta0_regression": {
+    "basis_size": 3,
+    "alpha": 1.6875,
+    "beta": 0.0,
+    "S_eckart": [
+      [
+        0.4274024982494583,
+        0.5540402755085571,
+        0.2251338262383978
+      ],
+      [
+        0.5540402755085571,
+        0.9005353049535912,
+        0.42803221284831183
+      ],
+      [
+        0.2251338262383978,
+        0.42803221284831183,
+        0.47435604540765297
+      ]
+    ],
+    "S_single": [
+      [
+        0.42740249824945836,
+        0.5540402755085572,
+        0.2251338262383978
+      ],
+      [
+        0.5540402755085572,
+        0.9005353049535912,
+        0.42803221284831194
+      ],
+      [
+        0.2251338262383978,
+        0.42803221284831194,
+        0.4743560454076529
+      ]
+    ],
+    "max_abs_diff": 1.1102230246251565e-16,
+    "machine_precision_match": true
+  }
+}
