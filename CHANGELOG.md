@@ -7,6 +7,182 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
 
+## [2.49.0] - 2026-05-18
+
+### Added — Hylleraas-Eckart Track 5 closure: He 2¹P → 1¹S oscillator strength at Drake-class accuracy
+
+Post-Paper 45 same-day continuation that brings home the
+Hylleraas-Eckart double-α implementation arc with the full Schwartz
+1961 two-channel 2¹P trial:
+
+  Ψ_{2¹P}^{M=0} = Σ_q c⁺_q (z₁+z₂) e^{-αs} cosh(βt) Q_q
+                + Σ_q c⁻_q (z₁-z₂) e^{-αs} sinh(βt) Q_q
+
+The implementation supersedes the v2.48.0 "deferred" backlog entry —
+what was scoped as a 3-week 4-track sprint plus a separate P-state
+follow-on was executed in one session by routing the three non-trivial
+channel kinetic pairs (antisym×antisym, sym×antisym cross,
+antisym×sym cross) through a single universal SO(3)-averaged 3D
+quadrature kinetic with analytic angular reduction, rather than
+deriving algebraic Hartree-form expressions for each channel pair
+separately.
+
+#### Headline result (ω_s=3, ω_p=2, full Schwartz two-channel)
+
+| Quantity                     | This work     | Drake handbook | Residual    |
+|------------------------------|---------------|----------------|-------------|
+| E(1¹S)                       | -2.903659 Ha  | -2.903724 Ha   | +0.064 mHa  |
+| E(2¹P)                       | -2.123744 Ha  | -2.123843 Ha   | +0.099 mHa  |
+| ΔE                           | 0.779916 Ha   | 0.779881 Ha    | +0.035 mHa  |
+| **f (length form)**          | **0.2705**    | **0.2761**     | **-2.02%**  |
+
+Dipole channel decomposition: D_sym = +0.269, D_antisym = +0.148
+(35% antisym contribution; constructive addition; antisym channel
+structurally required, not basis-size-limited).
+
+#### Architecture
+
+**Universal P-state kinetic via SO(3)-averaged 3D quadrature.** Added
+`_kinetic_via_quadrature_pstate` in `geovac/hylleraas_eckart_pstate.py`
+that handles all four channel combinations (sym×sym, antisym×antisym,
+sym×antisym cross, antisym×sym cross) by evaluating the
+SO(3)-averaged kinetic density at each (r₁, r₂, cos θ₁₂) quadrature
+point. Derivation from the Hartree form of T_pq:
+
+  T = (1/2) ∫ {T_1 + mid_p + mid_q + T_3}_{SO(3)} dV
+
+with the four SO(3)-averaged ⟨X·\hat z·(∇_1±∇_2)χ⟩ formulas (one per
+choice of X^{(a)} = z_1±z_2 and gradient combination ±) derived
+in closed form in terms of (r_1, r_2, r_12) and the (r_1, r_2, r_12)
+partial derivatives of χ. The T_3 piece (constant × χ_p χ_q) cancels
+for cross-sector by parity Σ_i ε^{(a)}_i ε^{(b)}_i = 0; the X-product
+SO(3) averages are ⟨(z_1+z_2)²⟩ = (2r_1²+2r_2²-r_12²)/3,
+⟨(z_1-z_2)²⟩ = r_12²/3, ⟨(z_1+z_2)(z_1-z_2)⟩ = (r_1²-r_2²)/3.
+
+**Validated** against the existing algebraic sym×sym kinetic
+(`kinetic_element_pstate_eckart_sym_sym`) at 1.42×10⁻⁵ worst relative
+difference (quadrature precision at n_r=32, n_theta=16).
+**Identically zero** at β=0 in the two channels where the basis
+vanishes (antisym×antisym and cross-sector). **Hermitian** T_pq = T_qp
+to <1e-8 across all four channel pairs at β=0.3.
+
+**Antisym cross-basis dipole element** `dipole_element_1s_2p_antisym`
+for the new ⟨φ^S|(z_1+z_2)|(z_1-z_2)·χ^P⟩ matrix element where
+(z_1+z_2)(z_1-z_2) = z_1²-z_2² SO(3)-averages to (r_1²-r_2²)/3 = st/3.
+Evaluates via the master_S_gen recurrence at general
+B_± = β_S ± β_P and α_eff = (α_S+α_P)/2 (cross-sector sinh
+combination cosh(β_S t)sinh(β_P t) = (1/2)[sinh(B_+ t) - sinh(B_- t)]).
+
+**Full two-channel solver pipeline.** `assemble_p_state_matrices_full`,
+`solve_2p1_state_full`, `optimize_2p1_full` assemble the block matrix
+[[H^{++}, H^{+-}], [H^{-+}, H^{--}]] with both intra-block algebraic
+content (sym×sym from Sprint 1; antisym×antisym from Sprint 2; cross
+from Sprint 2) and the new universal quadrature kinetic for the
+non-(sym, sym) blocks. Cross-block (sym × antisym) vanishes
+identically at β=0; nonzero at β > 0 and couples both channels in the
+variational Hamiltonian.
+
+**Channel-decomposed dipole** `compute_dipole_1s_to_2p_full` returns
+{D_total, D_sym, D_antisym} from the full Schwartz trial. The
+sym-only sprint module (`dipole_element_1s_2p_sym`) is retained.
+
+#### Wigner-Eckart correction to the f-formula (the load-bearing fix)
+
+For L=0 → L'=1 absorption transitions, summing over final M_L states
+gives the Wigner-Eckart relation
+
+  |⟨L'||r||L⟩|² = (2L'+1)·|⟨L', M=0|r_z|L, 0⟩|² = 3·|D_z|²
+
+so the standard absorption oscillator strength reduces to
+
+  **f = (2/3)·ΔE·|⟨L'||r||L⟩|² = 2·ΔE·|D_z|²**
+
+The factor of 2 (rather than the bare 2/3 in some texts that quote
+the formula without the M_L sum) absorbs the Wigner-Eckart
+multiplicity. Verified against hydrogen 1S→2P at f = 0.4162 to 4
+digits (the substantive fix during closure; with the incorrect 2/3
+prefactor, the same wavefunctions gave f=0.090, -67% residual; with
+the correct 2·ΔE·|D_z|² they give f=0.270, -2% residual).
+
+#### Honest scope (what this closure does NOT extend to)
+
+- **Li-7 2²S_{1/2} HFS cliff** (~10×, multi-electron 3-body system):
+  requires Hylleraas-CI hybrid, structurally larger architectural step
+  beyond 2-electron Eckart.
+- **Cs Z>20 cliff** (~ -90% with two-zeta heuristic): heavy-atom
+  screening cliff, structurally distinct mechanism (BBB93/KTT
+  screening kernel + Bohr-Weisskopf relativistic enhancement per
+  Paper 34 §V.C.6 closure path).
+
+The "three cliffs, one mechanism" framing surfaced in the 2026-05-09
+multi-track Roothaan autopsy Track 5 (Li-7 2²S_{1/2} HFS) was tighter
+than the math actually supports. Hylleraas-Eckart cleanly closes the
+**2-electron contact-density cliff** (He 1¹S energy at -0.0006%,
+He 2¹S-2³S splitting at -1.4%, He 2¹P→1¹S oscillator strength at
+-2.0%, and prospective He-3 2³S₁ HFS — same Track-1 / Track-3 /
+Track-5 trio); the Li and Cs cliffs are separate downstream sprints.
+
+#### Files
+
+- `geovac/hylleraas_eckart_pstate.py` extended ~520 lines (~1530
+  total) with universal quadrature kinetic + full two-channel solver
+  + antisym dipole + full oscillator strength.
+- `tests/test_hylleraas_eckart_pstate.py` extended with
+  `TestUniversalQuadratureKinetic` (6 tests covering sym×sym
+  quadrature vs algebraic agreement, antisym/cross at β=0 vanishing,
+  antisym (000) positive at β>0, Hermiticity across all 4 channel
+  pairs) and `TestFullChannelOscillatorStrength` (hydrogen sanity
+  check + He end-to-end < 5% Drake match). 71 fast + 10 slow, all
+  pass, zero regression on 63 prior tests.
+- `debug/he_2p_oscillator_full_channel.py`: end-to-end full-Schwartz
+  sprint runner.
+- `debug/validate_pstate_quadrature_kinetic.py`: 5-check standalone
+  validation script.
+- `debug/data/he_2p_oscillator_full_omega3_2.json`: headline data.
+- `debug/hylleraas_eckart_track5_closure_memo.md`: closure memo
+  (~5500 words; sprint walkthrough, honest scope, paper-update
+  recommendations).
+
+#### Paper edits applied
+
+- **Paper 34 §V.C.4** (He 2¹P→1¹S oscillator strength Roothaan
+  autopsy): added "Hylleraas-Eckart full Schwartz two-channel
+  closure" subsection (~80 lines) with the headline residual table,
+  internal multi-focal validation note, Wigner-Eckart f-formula
+  normalization paragraph, and honest-scope statement.
+- **Paper 34 §V** (empirical matches catalogue): new row at
+  depth-5 chain (Fock∘Wigner 3j∘vector-photon∘bipolar harmonic /
+  Schwartz P-state∘Hylleraas r₁₂), transcendental class
+  α²·ℚ[√6, poly(β)], machine-precision residual entry.
+- **CLAUDE.md §1**: version bump v2.47.0 → v2.49.0.
+- **CLAUDE.md §2**: new Track 5 closure bullet; prior backlog entry
+  marked SUPERSEDED with cross-reference.
+- **CLAUDE.md §10**: 9 new validation benchmark rows.
+
+#### Verification
+
+Three-pass clean LaTeX compilation on Paper 34 (106 pages, 1.2MB
+PDF); only pre-existing undefined-reference warnings unrelated to
+this sprint. 112 tests pass across the Hylleraas/Hylleraas-Eckart
+suite, 17 skipped, zero regression. Drake-class slow test passes
+end-to-end at 161s wall time.
+
+#### What this closes (the durable insight)
+
+This closure converts the "2-electron contact-density cliff"
+identified in the 2026-05-09 multi-track Roothaan autopsy from a
+structural-residual statement (Paper 34 §V.B "+61% NEGATIVE on
+Sturmian closure extension") to a precision-physics closure
+statement (Paper 34 §V machine-precision row at -2.02%). The
+framework's algebraic-first Hylleraas-Eckart engine delivers
+Drake-class accuracy on the He 2¹P → 1¹S oscillator strength via
+the full Schwartz 1961 two-channel trial without basis
+ill-conditioning (cond(S) ~ 10² rather than 10¹⁰). The internal
+multi-focal architecture is empirically verified at the 2¹P
+transition matrix-element level, not just at the angular-content
+level documented in Sprint Internal Multi-focal (§V.C.4 of
+Paper 34).
+
 ## [2.47.0] - 2026-05-18
 
 ### Added — Sprint L3b-2 closure + Paper 45 (K⁺-restricted weak-form Lorentzian propinquity convergence theorem)

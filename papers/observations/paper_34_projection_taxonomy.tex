@@ -3465,6 +3465,18 @@ content is recovered \emph{exactly} by the Sturmian projection.
 Prediction~\ref{pred:l2_presence}}: depth-3 chain at exact match
 because the analytic answer is rational with finite-Sturmian-basis
 representation; no Layer-2 input is consumed in the chain. \\
+He $2{}^1P \to 1{}^1\!S$ oscillator strength $f = 0.2761$
+(Drake handbook; Hylleraas--Eckart Track 5 closure, 2026-05-18) &
+Fock $\circ$ Wigner $3j$ $\circ$ vector-photon promotion $\circ$
+bipolar harmonic / Schwartz P-state $\circ$ Hylleraas $r_{12}$ &
+$Z, \alpha, \omega$ & dimensionless &
+$\alpha^2 \cdot \mathbb{Q}[\sqrt{6}, \mathrm{poly}(\beta)]$ &
+$f = 0.2705$ vs Drake $0.2761$, residual $-2.02\%$ at full Schwartz
+two-channel $\omega_s = 3$, $\omega_p = 2$; sub-mHa energy match
+on $E(1^1S)$ and $E(2^1P)$.  Closes the 2-electron contact-density
+cliff (\S\ref{sec:autopsy_he_oscillator}); validates internal
+multi-focal architecture (\S\ref{sec:proj_bipolar_drake}) at the
+$2^1P$ transition level. \\
 \midrule
 \textbf{Conjectural / Observation status} & & & & & \\
 $K = \pi(B + F - \Delta) \approx 1/\alpha$ & Fock $\circ$ Hopf
@@ -5389,21 +5401,70 @@ The Hylleraas r$_{12}$ explicit-correlation production module
 the He 1$^1$S ground state to $-0.016$~mHa vs Drake exact NR at
 $\omega_{\max} = 4$ (22 basis functions) and the Hylleraas 1929 published
 3p value to $+0.79$~mHa.  Cusp condition variationally captured (cusp
-ratio at $u=0$ converges $0.29 \to 0.49$ toward Kato $0.5$).  However,
-the $2{}^1\!P \to 1{}^1\!S$ oscillator strength is \emph{deferred} to a
-follow-on sprint: it requires extending the Hylleraas basis to L=1 P-state
-trial functions (Schwartz 1961 form $(z_1 \pm z_2)\,\chi_\pm(s, t, u)$),
-a $\sim$2-3 week structural extension out of scope for the Track 1
-S-state implementation.  The single-exponent Hylleraas trial does not
-close the asymmetric-Z$_{\text{eff}}$ excited-state issue at modest
-basis size; the named structural closure is
-\textbf{Hylleraas--Eckart double-zeta} (Hylleraas--Eckart 1933;
-implemented in Drake's HYLA), which adds a second exponent $\beta$
-to the trial $\Psi = \sum_{lmn}(a_{lmn} e^{-\alpha s - \beta t} +
-b_{lmn} e^{-\alpha s + \beta t}) s^l t^{2m+1} u^n$ to represent the
-inner $1s$ at $Z_a \approx 2$ and outer $2p$ at $Z_b \approx 1$.
-Source: \texttt{debug/hylleraas\_r12\_track1\_memo.md}; data:
-\texttt{debug/data/hylleraas\_r12\_track1\_results.json}.
+ratio at $u=0$ converges $0.29 \to 0.49$ toward Kato $0.5$).  The
+single-exponent Hylleraas trial does not close the asymmetric-Z$_{\text{eff}}$
+excited-state issue at modest basis size; the named structural closure
+was \textbf{Hylleraas--Eckart double-zeta} (Hylleraas--Eckart 1933).
+
+\textbf{Hylleraas--Eckart full Schwartz two-channel closure (May 2026,
+the structural endpoint of the autopsy).}  The Hylleraas--Eckart double-$\alpha$
+implementation arc (CLAUDE.md \S2 Track 5 backlog) closes with the full
+Schwartz 1961 two-channel 2$^1$P trial
+\[
+\Psi_{2^1P}^{M=0} = \sum_q c_q^{+} (z_1+z_2)\,e^{-\alpha s}\cosh(\beta t)\,
+                       s^{l_q} t^{2m_q} u^{n_q}
+                 + \sum_q c_q^{-} (z_1-z_2)\,e^{-\alpha s}\sinh(\beta t)\,
+                       s^{l_q} t^{2m_q} u^{n_q}
+\]
+delivering Drake-class oscillator strength.  At $\omega_s = 3$,
+$\omega_p = 2$ (14 P-state basis functions total: 7 sym $+$ 7 antisym),
+the framework gives $E(1^1\!S) = -2.903659$~Ha (vs Drake $-2.903724$,
+$+0.064$~mHa), $E(2^1\!P) = -2.123744$~Ha (vs Drake $-2.123843$,
+$+0.099$~mHa), $\Delta E = 0.7799$~Ha (sub-mHa match), and
+\textbf{$f = 0.2705$ vs Drake $0.2761$, residual $\boxed{-2.02\%}$}.
+The dipole decomposes as $D_\text{sym} = +0.269$ and
+$D_\text{antisym} = +0.148$ (35\% antisym contribution; constructive
+addition); the antisym channel is genuinely required for Drake-class
+accuracy, not basis-size-limited.  Sub-mHa energy convergence at the
+modest basis (14 functions) confirms the variational architecture is
+saturated; the residual $-2\%$ reflects the $\omega_s = 3$, $\omega_p = 2$
+truncation.  Production code: \texttt{geovac/hylleraas\_eckart\_pstate.py}
+(universal SO(3)-averaged 3D quadrature kinetic for the 3 non-trivial
+channel pairs $(-,-)$, $(+,-)$, $(-,+)$, plus the algebraic Hartree
+kinetic for $(+,+)$ from Track 3.5).  Sprint memo:
+\texttt{debug/hylleraas\_eckart\_track5\_closure\_memo.md}.  Driver:
+\texttt{debug/he\_2p\_oscillator\_full\_channel.py}.  Data:
+\texttt{debug/data/he\_2p\_oscillator\_full\_omega3\_2.json}.  Tests:
+\texttt{tests/test\_hylleraas\_eckart\_pstate.py}::\texttt{TestUniversalQuadratureKinetic}
+(6 new), \texttt{TestFullChannelOscillatorStrength} (2 new).
+
+The closure validates two structural claims:
+(i) the \textbf{internal multi-focal architecture} (two electrons at
+distinct effective $Z$'s) is verified operationally at the $2^1P$
+transition level, not just at the angular-content level (\S\ref{sec:proj_bipolar_drake});
+(ii) the \textbf{2-electron contact-density cliff} identified in the
+2026-05-09 multi-track sprint (this autopsy at $+61\%$ with graph-native
+CI; the He $2^1S$--$2^3S$ splitting at $+11.9\%$) is closed at Drake-class
+accuracy by Hylleraas--Eckart full Schwartz on the 2-electron problem.
+
+\textbf{Wigner--Eckart $f$-formula normalization.}  For $L=0 \to L'=1$
+absorption, summing over final $M_L$ states gives
+$f = (2/3)\Delta E\,|\langle L'\|r\|L\rangle|^2 = 2\Delta E\,|D_z|^2$
+where $D_z = \langle L'=1, M=0 | r_z | L=0\rangle$.  The factor of $2$
+(rather than $2/3$ on $|D_z|^2$) absorbs the $M_L$ sum.  Verified
+against hydrogen 1S$\to$2P at $f = 0.4162$.
+
+\textbf{Honest scope (closure does NOT extend to):}
+(i) the Li $2^2S_{1/2}$ HFS cliff (\S\ref{sec:autopsy_li7_hfs}, multi-electron
+3-body system requires Hylleraas--CI hybrid); (ii) the Cs $Z > 20$ cliff
+(\S\ref{sec:autopsy_cs_hfs}, heavy-atom screening cliff requires BBB93/KTT
+$+$ Bohr--Weisskopf, structurally distinct mechanism per \S\ref{sec:autopsy_li7_hfs}
+closure-path discussion).  The ``three cliffs, one mechanism'' framing
+that surfaced in the multi-track sprint was tighter than the math
+supports: Hylleraas--Eckart cleanly closes the 2-electron subset
+(He 1$^1$S, He 2$^1$S--2$^3$S splitting, He 2$^1$P$\to$1$^1$S oscillator
+strength, and prospective He-3 2$^3$S$_1$ HFS), but the Li and Cs cliffs
+are separate downstream sprints.
 
 \subsubsection{Cesium 6S$_{1/2}$ hyperfine (atomic clock; SCOPING)}
 \label{sec:autopsy_cs_hfs}

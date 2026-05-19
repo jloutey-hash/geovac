@@ -497,6 +497,495 @@ def potential_vee_element(
     return hylleraas_volume_element_factor() * integral
 
 
+# ---------------------------------------------------------------------------
+# Eckart double-alpha matrix elements (S, V_ne, V_ee) via closed-form cache
+# ---------------------------------------------------------------------------
+#
+# Conventions
+# -----------
+# Singlet basis:  phi_p^S = exp(-alpha s) cosh(beta t) s^{l_p} t^{2 m_p} u^{n_p}
+# Triplet basis:  phi_p^T = exp(-alpha s) sinh(beta t) s^{l_p} t^{2 m_p} u^{n_p}
+#
+# All basis functions share a single (alpha, beta). The (alpha, beta) pair
+# is the variational nonlinear parameters.
+#
+# Cross-products (for matrix elements):
+#   <phi_p^S | phi_q^S>  = (1/2)[cosh(B_+ t) + cosh(B_- t)] * (polynomial)
+#   <phi_p^T | phi_q^T>  = (1/2)[cosh(B_- t) - cosh(B_+ t)] * (polynomial)
+# where B_+ = 2 beta, B_- = 0 for shared-beta basis.
+#
+# At beta = 0:
+#   singlet -> reduces bit-identically to single-alpha (cosh(0)+cosh(0) = 2,
+#              so cross-product factor = 1, matching exp(-2 alpha s)).
+#   triplet -> phi^T vanishes (sinh(0) = 0); reduction to single-alpha
+#              triplet (t^{2m+1} basis) requires a small-beta rescaling.
+
+def _eckart_cosh_combination(
+    bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn, alpha: float, beta: float,
+    master: str, spin: str,
+) -> float:
+    """Shared kernel for Eckart matrix elements.
+
+    Parameters
+    ----------
+    bf_p, bf_q : HylleraasBasisFn
+    alpha : float
+        Decay parameter.
+    beta : float
+        Eckart asymmetry parameter (shared across basis).
+    master : str
+        Which closed-form master integral to use:
+        'I' (overlap; integrand has u^{N+1} and (s^2 - t^2)),
+        'J' (V_ne; integrand has u^{N+1} and no (s^2 - t^2)),
+        'K' (V_ee; integrand has u^N and (s^2 - t^2)).
+    spin : str
+        'singlet' uses (1/2)[I(B_+) + I(B_-)];
+        'triplet' uses (1/2)[I(B_-) - I(B_+)].
+
+    Returns
+    -------
+    float
+        Master-integral value (without volume factor or species-specific
+        prefactor; caller multiplies as appropriate).
+    """
+    from geovac.hylleraas_eckart_closed_forms import (
+        I_HE_cosh_polynomial,
+        J_HE_cosh_polynomial,
+        K_HE_cosh_polynomial,
+    )
+
+    L = bf_p.l + bf_q.l
+    M = bf_p.m + bf_q.m
+    N = bf_p.n + bf_q.n
+
+    B_plus = 2.0 * beta
+    B_minus = 0.0
+
+    if master == 'I':
+        cf = I_HE_cosh_polynomial(L, M, N)
+    elif master == 'J':
+        cf = J_HE_cosh_polynomial(L + 1, M, N)
+    elif master == 'K':
+        cf = K_HE_cosh_polynomial(L, M, N)
+    else:
+        raise ValueError(f"unknown master {master!r}")
+
+    v_plus = cf.evaluate(alpha, B_plus)
+    v_minus = cf.evaluate(alpha, B_minus)
+
+    if spin == 'singlet':
+        # cosh(beta_p t) cosh(beta_q t) = (1/2)[cosh(B_+ t) + cosh(B_- t)]
+        return 0.5 * (v_plus + v_minus)
+    elif spin == 'triplet':
+        # sinh(beta_p t) sinh(beta_q t) = (1/2)[cosh(B_+ t) - cosh(B_- t)]
+        return 0.5 * (v_plus - v_minus)
+    else:
+        raise ValueError(f"unknown spin {spin!r}")
+
+
+def overlap_element_eckart(
+    bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn,
+    alpha: float, beta: float, spin: str = 'singlet',
+) -> float:
+    """Eckart overlap S_{pq} = <phi_p | phi_q> at (alpha, beta).
+
+    At beta = 0, spin='singlet' reduces bit-identically to overlap_element.
+    """
+    val = _eckart_cosh_combination(bf_p, bf_q, alpha, beta,
+                                    master='I', spin=spin)
+    return hylleraas_volume_element_factor() * val
+
+
+def potential_vne_element_eckart(
+    bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn,
+    alpha: float, beta: float, Z: float, spin: str = 'singlet',
+) -> float:
+    """Eckart nuclear attraction <phi_p | -Z (1/r_1 + 1/r_2) | phi_q>.
+
+    The (s^2 - t^2) volume factor cancels with 1/r_1 + 1/r_2 = 4s/(s^2-t^2),
+    leaving an integrand of u^{N+1} t^{2M} s^{L+1} cosh(B t) — the J master.
+    """
+    val = _eckart_cosh_combination(bf_p, bf_q, alpha, beta,
+                                    master='J', spin=spin)
+    return -4.0 * Z * hylleraas_volume_element_factor() * val
+
+
+def potential_vee_element_eckart(
+    bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn,
+    alpha: float, beta: float, spin: str = 'singlet',
+) -> float:
+    """Eckart electron-electron repulsion <phi_p | 1/r_12 | phi_q>.
+
+    1/r_12 = 1/u kills the Jacobian u, so the integrand has u^N (not u^{N+1})
+    — the K master.
+    """
+    val = _eckart_cosh_combination(bf_p, bf_q, alpha, beta,
+                                    master='K', spin=spin)
+    return hylleraas_volume_element_factor() * val
+
+
+# ---------------------------------------------------------------------------
+# Algebraic kinetic energy for Eckart basis (Track 3.5)
+# ---------------------------------------------------------------------------
+#
+# The Hartree-form kinetic matrix element for the singlet Eckart basis
+# phi = exp(-alpha s) cosh(beta t) s^l t^{2m} u^n decomposes into 5 terms:
+#
+#   <T>_{pq} = (pi^2 / 1) * sum of {
+#     Term1: u (s^2 - t^2) phi_{p,s} phi_{q,s}
+#     Term2: u (s^2 - t^2) phi_{p,t} phi_{q,t}
+#     Term3: u (s^2 - t^2) phi_{p,u} phi_{q,u}
+#     Term4: s (u^2 - t^2) (phi_{p,s} phi_{q,u} + phi_{p,u} phi_{q,s})
+#     Term5: t (s^2 - u^2) (phi_{p,t} phi_{q,u} + phi_{p,u} phi_{q,t})
+#   }   each integrand multiplied by ds dt du (no extra factor).
+#
+# (Derivation: standard Hartree representation of T = -(1/2)(nabla1^2 +
+# nabla2^2) for an S-state wavefunction after IBP, transformed to (s, t, u)
+# coordinates with volume element pi^2 u (s^2 - t^2) ds dt du. The
+# operator on the LHS reduces to grad . grad on the RHS after the IBP;
+# the cross terms with cos_a, cos_b combine into the (u^2-t^2) and
+# (s^2-u^2) prefactors visible in Term 4 and Term 5.)
+#
+# Each derivative expands into 1-2 polynomial-times-hyperbolic terms:
+#   phi_s = e^{-as} F(t) [l s^{l-1} - alpha s^l] t^{2m} u^n      (2 s-terms)
+#   phi_t = e^{-as} [F'(t) t^{2m} + 2m F(t) t^{2m-1}] s^l u^n    (2 t-content terms)
+#   phi_u = e^{-as} F(t) n s^l t^{2m} u^{n-1}                    (1 u-term)
+#
+# where F = cosh(beta t) (singlet) or sinh(beta t) (triplet), and F' is its
+# t-derivative. The bilinear product phi_p_X * phi_q_Y has up to 4 sub-terms
+# from the polynomial expansion, each multiplied by a hyperbolic product:
+#
+#   For singlet (shared beta):
+#     F_p F_q     = (1 + cosh(2 beta t)) / 2
+#     F'_p F'_q   = (beta^2 / 2) * (cosh(2 beta t) - 1)
+#     F'_p F_q    = (beta / 2) * sinh(2 beta t)
+#     F_p F'_q    = (beta / 2) * sinh(2 beta t)
+#
+#   For triplet (shared beta):
+#     F_p F_q     = (cosh(2 beta t) - 1) / 2
+#     F'_p F'_q   = (beta^2 / 2) * (1 + cosh(2 beta t))
+#     F'_p F_q    = (beta / 2) * sinh(2 beta t)
+#     F_p F'_q    = (beta / 2) * sinh(2 beta t)
+#
+# After multiplying each polynomial-in-(s,t,u) factor and the geometric
+# factor (u(s^2-t^2), s(u^2-t^2), t(s^2-u^2)), every contribution reduces to
+# either:
+#   master_C_gen(L', u_pow', M'; alpha, B') * pi^2  for cosh kernels (B'=0 or 2beta)
+#   master_S_gen(L', u_pow', M'; alpha, 2 beta) * pi^2  for sinh kernels (B' = 2 beta)
+#
+# with appropriate L', u_pow', M' shifts from the geometric factors and
+# the basis t/u-powers. The total kinetic is the sum of these contributions.
+
+def _ke_term_contributions(
+    bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn,
+    alpha: float, beta: float, spin: str = 'singlet',
+) -> List[Tuple[float, int, int, int, str, float]]:
+    """Return a list of (coeff, L, u_pow, M, kind, B) tuples whose sum
+    pi^2 * sum_i (coeff_i * master_kind_i(L_i, u_pow_i, M_i; alpha, B_i))
+    equals the kinetic-energy matrix element <phi_p | T | phi_q> for
+    either spin sector.
+
+    For singlet (cosh basis):
+      F_p F_q     = (1 + cosh(2 beta t)) / 2
+      F'_p F'_q   = (beta^2 / 2) * (cosh(2 beta t) - 1)
+      F'_p F_q    = (beta / 2) * sinh(2 beta t)
+
+    For triplet (sinh basis):
+      F_p F_q     = (cosh(2 beta t) - 1) / 2     <- sign-flipped const piece
+      F'_p F'_q   = (beta^2 / 2) * (1 + cosh(2 beta t))  <- sign-flipped const piece
+      F'_p F_q    = (beta / 2) * sinh(2 beta t)  <- same
+
+    kind in {'C', 'S'}: 'C' for master_C_gen (cosh kernel, even t-power),
+    'S' for master_S_gen (sinh kernel, odd t-power, with implicit factor B
+    in the result via b_factor=1).
+    """
+    l_p, m_p, n_p = bf_p.l, bf_p.m, bf_p.n
+    l_q, m_q, n_q = bf_q.l, bf_q.m, bf_q.n
+    L_pq = l_p + l_q
+    M_pq = m_p + m_q
+    N_pq = n_p + n_q
+    two_beta = 2.0 * beta
+    a = alpha
+
+    out: List[Tuple[float, int, int, int, str, float]] = []
+
+    def add(coeff: float, L: int, u_pow: int, M: int,
+            kind: str, B: float):
+        """Append a contribution. Skip if M < 0 (t-power would be negative;
+        such terms come from differentiating a t^{2m} with m=0, giving 0)."""
+        if M < 0:
+            return
+        if coeff == 0.0:
+            return
+        out.append((coeff, L, u_pow, M, kind, B))
+
+    # ============================================================
+    # Geometric factor expansions:
+    #
+    #   u(s^2 - t^2) = u s^2 - u t^2
+    #   s(u^2 - t^2) = s u^2 - s t^2
+    #   t(s^2 - u^2) = t s^2 - t u^2
+    #
+    # An "extra t^2" multiplied into a t-power t^{2K} gives t^{2(K+1)},
+    # shifting M by +1.  An "extra t" multiplied into t^{2K} gives
+    # t^{2K+1}, switching cosh -> 0 (odd integrand) UNLESS already
+    # paired with another odd t-power... see Term 5 handling.
+    # ============================================================
+
+    # Hyperbolic-product pieces. Each list is [(coeff, kind, B_value), ...]
+    # representing the linear combination of master integrals needed to
+    # evaluate the hyperbolic content.
+    bsq_half = 0.5 * beta * beta
+    b_half = 0.5 * beta
+    if spin == 'singlet':
+        # F_p F_q   = (1 + cosh(2bt))/2
+        FF_pieces = [(0.5, 'C', 0.0), (0.5, 'C', two_beta)]
+        # F'_p F'_q = (b^2/2)(cosh(2bt) - 1)
+        FpFp_pieces = [(bsq_half, 'C', two_beta), (-bsq_half, 'C', 0.0)]
+        # F'_p F_q = F_p F'_q = (b/2) sinh(2bt)
+        FpF_pieces = [(b_half, 'S', two_beta)]
+    elif spin == 'triplet':
+        # F_p F_q   = (cosh(2bt) - 1)/2   [sign-flipped const piece]
+        FF_pieces = [(-0.5, 'C', 0.0), (0.5, 'C', two_beta)]
+        # F'_p F'_q = (b^2/2)(1 + cosh(2bt))  [sign-flipped const piece]
+        FpFp_pieces = [(bsq_half, 'C', two_beta), (bsq_half, 'C', 0.0)]
+        # F'_p F_q = F_p F'_q = (b/2) sinh(2bt)  [same]
+        FpF_pieces = [(b_half, 'S', two_beta)]
+    else:
+        raise ValueError(f"unknown spin {spin!r}")
+    # Note: at beta=0, sinh pieces (FpF) -> 0; FpFp pieces -> 0 (singlet)
+    # but stay finite for triplet — consistent with triplet basis vanishing
+    # at beta=0 (sinh(0)=0) but its variational gradient being nonzero.
+
+    # ============================================================
+    # Term 1: u (s^2 - t^2) * phi_{p,s} * phi_{q,s}
+    #
+    # phi_{p,s} phi_{q,s} = exp(-2as) F_p F_q [l_p s^{l_p-1} - alpha s^{l_p}]
+    #                                          [l_q s^{l_q-1} - alpha s^{l_q}]
+    #                                          t^{2M_pq} u^{N_pq}
+    # Polynomial in s after expansion:
+    #   l_p l_q s^{L-2} + (-alpha)(l_p + l_q) s^{L-1} + alpha^2 s^L
+    # ============================================================
+    # Sum of "(geometric_shift, hyperbolic_pieces)" pairs for u(s^2-t^2):
+    #   (s^2 part): L_extra=+2, u_pow_extra=+1, M_extra=+0
+    #   (-t^2 part): L_extra=+0, u_pow_extra=+1, M_extra=+1
+    geom_us2mt2 = [
+        (+2, +1, +0, +1.0),   # u * s^2
+        (+0, +1, +1, -1.0),   # u * (-t^2)
+    ]
+    poly_ss_terms = [
+        (l_p * l_q, L_pq - 2),
+        (-a * (l_p + l_q), L_pq - 1),
+        (a * a, L_pq),
+    ]
+    for (poly_coeff, s_pow) in poly_ss_terms:
+        if poly_coeff == 0 or s_pow < 0:
+            continue
+        for (L_ge, u_ge, M_ge, sgn) in geom_us2mt2:
+            for (h_coeff, h_kind, h_B) in FF_pieces:
+                # B='S' kind can't appear here (FF is cosh-only).
+                add(sgn * poly_coeff * h_coeff,
+                    L=s_pow + L_ge,
+                    u_pow=N_pq + u_ge,
+                    M=M_pq + M_ge,
+                    kind=h_kind, B=h_B)
+
+    # ============================================================
+    # Term 2: u (s^2 - t^2) * phi_{p,t} * phi_{q,t}
+    #
+    # phi_{p,t} = exp(-as) s^{l_p} u^{n_p} [F'(t) t^{2m_p} + 2 m_p F(t) t^{2m_p - 1}]
+    # Product phi_{p,t} phi_{q,t} has 4 sub-pieces, each with its own (t-power, F-content):
+    #   (i)   t^{2 M_pq}     with F'_p F'_q
+    #   (ii)  t^{2 M_pq - 1} with 2 m_q F'_p F_q  -- t-power is ODD
+    #   (iii) t^{2 M_pq - 1} with 2 m_p F_p F'_q  -- t-power is ODD
+    #   (iv)  t^{2 M_pq - 2} with 4 m_p m_q F_p F_q
+    #
+    # Multiplied by u(s^2-t^2) geometric factor.
+    # ============================================================
+    # (i) t^{2 M_pq}, F'F' = cosh-pieces
+    for (L_ge, u_ge, M_ge, sgn) in geom_us2mt2:
+        for (h_coeff, h_kind, h_B) in FpFp_pieces:
+            add(sgn * h_coeff,
+                L=L_pq + L_ge,
+                u_pow=N_pq + u_ge,
+                M=M_pq + M_ge,
+                kind=h_kind, B=h_B)
+    # (ii) + (iii) t^{2 M_pq - 1}, sinh-pieces
+    # Odd t-power means we use sinh master; the t^{2M-1} indexes M-1 in master_S
+    # since master_S has t^{2M+1} in its integrand.
+    # i.e., t^{2K+1} for the master corresponds to K = (M_pq - 1 - 1)/2 ... wait.
+    # master_S_gen takes M parameter; integrand has t^{2M+1}. So t^{2 M_pq - 1}
+    # = t^{2(M_pq - 1) + 1} => M parameter = M_pq - 1.
+    coeff_iii = 2 * (m_p + m_q)  # = 2 m_p + 2 m_q (combined from ii and iii)
+    if coeff_iii > 0:
+        # Note: M = M_pq - 1 may be negative when M_pq = 0 (both m_p, m_q = 0);
+        # but then coeff = 0 (since m_p = m_q = 0), so add() skips it.
+        if M_pq >= 1:
+            for (L_ge, u_ge, M_ge, sgn) in geom_us2mt2:
+                for (h_coeff, h_kind, h_B) in FpF_pieces:
+                    add(sgn * coeff_iii * h_coeff,
+                        L=L_pq + L_ge,
+                        u_pow=N_pq + u_ge,
+                        M=M_pq - 1 + M_ge,
+                        kind=h_kind, B=h_B)
+    # (iv) t^{2 M_pq - 2}, FF cosh-pieces (only when m_p, m_q >= 1)
+    coeff_iv = 4 * m_p * m_q
+    if coeff_iv > 0:
+        for (L_ge, u_ge, M_ge, sgn) in geom_us2mt2:
+            for (h_coeff, h_kind, h_B) in FF_pieces:
+                add(sgn * coeff_iv * h_coeff,
+                    L=L_pq + L_ge,
+                    u_pow=N_pq + u_ge,
+                    M=M_pq - 1 + M_ge,
+                    kind=h_kind, B=h_B)
+
+    # ============================================================
+    # Term 3: u (s^2 - t^2) * phi_{p,u} * phi_{q,u}
+    #
+    # phi_{p,u} phi_{q,u} = exp(-2as) F_p F_q n_p n_q s^L t^{2M_pq} u^{N_pq - 2}
+    # ============================================================
+    coeff_3 = n_p * n_q
+    if coeff_3 > 0:
+        for (L_ge, u_ge, M_ge, sgn) in geom_us2mt2:
+            for (h_coeff, h_kind, h_B) in FF_pieces:
+                add(sgn * coeff_3 * h_coeff,
+                    L=L_pq + L_ge,
+                    u_pow=N_pq - 2 + u_ge,
+                    M=M_pq + M_ge,
+                    kind=h_kind, B=h_B)
+
+    # ============================================================
+    # Term 4: s (u^2 - t^2) * (phi_{p,s} phi_{q,u} + phi_{p,u} phi_{q,s})
+    #
+    # phi_{p,s} phi_{q,u} = exp(-2as) F_p F_q (l_p s^{l_p-1} - alpha s^{l_p})
+    #                                         n_q s^{l_q} t^{2 M_pq} u^{N_pq - 1}
+    # = exp(-2as) F_p F_q n_q [l_p s^{L-1} - alpha s^L] t^{2 M_pq} u^{N_pq - 1}
+    #
+    # Symmetric piece phi_{p,u} phi_{q,s} = exp(-2as) F_p F_q n_p [l_q s^{L-1} - alpha s^L] t^{...} u^{N_pq - 1}
+    #
+    # Sum: exp(-2as) F_p F_q [(l_p n_q + l_q n_p) s^{L-1}
+    #                          - alpha (n_p + n_q) s^L] t^{2 M_pq} u^{N_pq - 1}
+    #
+    # Multiplied by s (u^2 - t^2):
+    #   s * u^2:  L_extra=+1, u_pow_extra=+2, M_extra=+0
+    #   s * (-t^2): L_extra=+1, u_pow_extra=+0, M_extra=+1
+    # ============================================================
+    geom_su2mt2 = [
+        (+1, +2, +0, +1.0),
+        (+1, +0, +1, -1.0),
+    ]
+    poly_su_terms = [
+        (l_p * n_q + l_q * n_p, L_pq - 1),
+        (-a * (n_p + n_q), L_pq),
+    ]
+    for (poly_coeff, s_pow) in poly_su_terms:
+        if poly_coeff == 0 or s_pow < 0:
+            continue
+        for (L_ge, u_ge, M_ge, sgn) in geom_su2mt2:
+            for (h_coeff, h_kind, h_B) in FF_pieces:
+                add(sgn * poly_coeff * h_coeff,
+                    L=s_pow + L_ge,
+                    u_pow=N_pq - 1 + u_ge,
+                    M=M_pq + M_ge,
+                    kind=h_kind, B=h_B)
+
+    # ============================================================
+    # Term 5: t (s^2 - u^2) * (phi_{p,t} phi_{q,u} + phi_{p,u} phi_{q,t})
+    #
+    # phi_{p,t} = exp(-as) s^{l_p} u^{n_p} [F' t^{2m_p} + 2 m_p F t^{2m_p - 1}]
+    # phi_{q,u} = exp(-as) n_q F s^{l_q} t^{2m_q} u^{n_q - 1}
+    #
+    # phi_{p,t} phi_{q,u} = exp(-2as) n_q F_q s^L u^{N_pq - 1}
+    #                      * [F'_p t^{2(m_p+m_q)} + 2 m_p F_p t^{2(m_p+m_q)-1}]
+    #
+    # Hyperbolic content:
+    #   F'_p F_q -> sinh-piece [(beta/2, S, 2beta)]
+    #   F_p F_q -> cosh-pieces FF_pieces
+    #
+    # By symmetric exchange:
+    # phi_{p,u} phi_{q,t} contributes:
+    #   F_p F'_q t^{2 M_pq} n_p s^L u^{N_pq - 1}  (sinh piece)
+    #   2 m_q F_p F_q t^{2 M_pq - 1} n_p s^L u^{N_pq - 1}  (cosh piece)
+    #
+    # Sum:
+    #   (n_q F'_p F_q + n_p F_p F'_q) t^{2 M_pq} s^L u^{N_pq - 1}
+    #     = (n_p + n_q) F'_p F_q t^{2 M_pq} s^L u^{N_pq - 1}  (using F'_p F_q = F_p F'_q for shared beta)
+    #   + 2 (m_p n_q + m_q n_p) F_p F_q t^{2 M_pq - 1} s^L u^{N_pq - 1}
+    #
+    # Multiplied by t (s^2 - u^2):
+    #   t * s^2:  L_extra=+2, u_pow_extra=+0, t-power-shift=+1, M_extra=+0 (effective M shift on master_S/M_pq->M_pq for S kind)
+    #   t * (-u^2): L_extra=+0, u_pow_extra=+2, t-shift=+1, M_extra=+0
+    #
+    # For odd t multiplication: t * t^{2K} = t^{2K+1} -> master_S with M = K
+    # For odd t multiplication: t * t^{2K - 1} = t^{2K} -> master_C with M = K
+    # ============================================================
+    # First piece: F'_p F_q t^{2 M_pq} (sinh), multiplied by explicit t -> t^{2 M_pq + 1} (sinh × odd-t)
+    coeff_5a = n_p + n_q
+    if coeff_5a > 0:
+        for (L_ge, u_ge, _t_shift_unused, sgn) in [
+            (+2, +0, +1, +1.0),  # t * s^2
+            (+0, +2, +1, -1.0),  # t * (-u^2)
+        ]:
+            # t * t^{2 M_pq} = t^{2 M_pq + 1}, M parameter for sinh = M_pq
+            for (h_coeff, h_kind, h_B) in FpF_pieces:  # sinh piece only
+                add(sgn * coeff_5a * h_coeff,
+                    L=L_pq + L_ge,
+                    u_pow=N_pq - 1 + u_ge,
+                    M=M_pq,  # sinh master t^{2M+1} with M = M_pq
+                    kind=h_kind, B=h_B)
+    # Second piece: F_p F_q t^{2 M_pq - 1} (cosh), multiplied by explicit t -> t^{2 M_pq} (cosh × even-t)
+    coeff_5b = 2 * (m_p * n_q + m_q * n_p)
+    if coeff_5b > 0:
+        for (L_ge, u_ge, _t_shift_unused, sgn) in [
+            (+2, +0, +1, +1.0),
+            (+0, +2, +1, -1.0),
+        ]:
+            # t * t^{2 M_pq - 1} = t^{2 M_pq}, M parameter for cosh = M_pq
+            for (h_coeff, h_kind, h_B) in FF_pieces:
+                add(sgn * coeff_5b * h_coeff,
+                    L=L_pq + L_ge,
+                    u_pow=N_pq - 1 + u_ge,
+                    M=M_pq,
+                    kind=h_kind, B=h_B)
+
+    return out
+
+
+def kinetic_element_eckart(
+    bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn,
+    alpha: float, beta: float, spin: str = 'singlet',
+) -> float:
+    """Closed-form kinetic-energy matrix element for the Eckart basis.
+
+    Algebraic implementation of <phi_p | T | phi_q> using master_C_gen
+    and master_S_gen integrals from geovac/hylleraas_eckart_recurrence.py.
+    No quadrature; ~microsecond per call after warm cache.
+
+    At beta = 0, singlet reduces to the single-alpha kinetic via the
+    master_C_gen(L, u_pow, M; alpha, 0) call collapsing the cosh kernel
+    to a constant.
+
+    Supports both 'singlet' and 'triplet' spin sectors; the latter uses
+    sign-flipped const pieces in F_p F_q and F'_p F'_q (see
+    _ke_term_contributions docstring).
+    """
+    from geovac.hylleraas_eckart_recurrence import master_C_gen, master_S_gen
+
+    contributions = _ke_term_contributions(bf_p, bf_q, alpha, beta, spin=spin)
+
+    total = 0.0
+    for (coeff, L, u_pow, M, kind, B) in contributions:
+        if kind == 'C':
+            cf = master_C_gen(L, u_pow, M)
+        elif kind == 'S':
+            cf = master_S_gen(L, u_pow, M)
+        else:
+            raise ValueError(f"unknown kind {kind!r}")
+        total += coeff * cf.evaluate(alpha, B)
+
+    return math.pi ** 2 * total
+
+
 def kinetic_element(
     bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn, alpha: float,
 ) -> float:
@@ -999,9 +1488,28 @@ def _kinetic_element_via_decomposition(
 def _eval_phi_and_derivs(
     bf: HylleraasBasisFn, alpha: float,
     r1: float, r2: float, r12: float,
+    beta: float = 0.0, spin: str = 'singlet',
 ) -> Tuple[float, float, float, float]:
     """Evaluate phi, dphi/dr_1, dphi/dr_2, dphi/dr_12 for a single
-    Hylleraas basis function at a point (r_1, r_2, r_12).
+    Hylleraas (or Hylleraas-Eckart) basis function at a point (r_1, r_2, r_12).
+
+    Parameters
+    ----------
+    bf : HylleraasBasisFn
+    alpha : float
+        Decay parameter.
+    r1, r2, r12 : float
+        Coordinates.
+    beta : float, optional
+        Eckart asymmetry parameter. Default 0.0 (single-alpha basis,
+        bit-identical to the pre-Eckart implementation).
+    spin : str, optional
+        'singlet' (cosh(beta t)) or 'triplet' (sinh(beta t)). Default
+        'singlet'. Only consulted when beta > 0; at beta=0 spin='triplet'
+        returns identically zero (since sinh(0) = 0).
+
+    For singlet:  phi = exp(-alpha s) cosh(beta t) s^l t^{2m} u^n
+    For triplet:  phi = exp(-alpha s) sinh(beta t) s^l t^{2m} u^n
 
     Returns
     -------
@@ -1014,7 +1522,9 @@ def _eval_phi_and_derivs(
     if s == 0.0:
         return 0.0, 0.0, 0.0, 0.0
 
-    # phi = exp(-alpha s) s^l t^(2m) u^n
+    # phi = exp(-alpha s) * factor(t) * s^l t^(2m) u^n
+    # where factor(t) = 1 (single-alpha), cosh(beta t) (Eckart singlet),
+    # or sinh(beta t) (Eckart triplet).
     if u == 0.0 and bf.n > 0:
         return 0.0, 0.0, 0.0, 0.0
 
@@ -1022,7 +1532,27 @@ def _eval_phi_and_derivs(
     t_pow = t ** (2 * bf.m) if bf.m > 0 else 1.0
     u_pow = u ** bf.n if bf.n > 0 else 1.0
     exp_factor = math.exp(-alpha * s)
-    phi = exp_factor * s_pow * t_pow * u_pow
+
+    # Beta-factor and its t-derivative.
+    if beta == 0.0:
+        if spin == 'triplet':
+            # sinh(0) = 0 -> phi vanishes identically.
+            return 0.0, 0.0, 0.0, 0.0
+        # singlet at beta=0: factor=1, d_factor_dt=0 (bit-identical to legacy).
+        bt_factor = 1.0
+        d_bt_factor_dt = 0.0
+    else:
+        bt = beta * t
+        if spin == 'singlet':
+            bt_factor = math.cosh(bt)
+            d_bt_factor_dt = beta * math.sinh(bt)
+        elif spin == 'triplet':
+            bt_factor = math.sinh(bt)
+            d_bt_factor_dt = beta * math.cosh(bt)
+        else:
+            raise ValueError(f"unknown spin {spin!r}")
+
+    phi = exp_factor * bt_factor * s_pow * t_pow * u_pow
 
     # dphi/dr_1: chain rule via s = r_1 + r_2 (ds/dr_1 = 1) and t = r_1 - r_2 (dt/dr_1 = 1)
     # Note: r_12 is treated as INDEPENDENT in the (s, t, u) parameterization,
@@ -1067,10 +1597,19 @@ def _eval_phi_and_derivs(
     else:
         dphi_ds = phi * (-alpha)
 
-    if bf.m > 0 and t != 0.0:
-        dphi_dt = phi * (2 * bf.m / t)
+    # dphi/dt via product rule on bt_factor(t) * t^{2m} (avoid dividing by
+    # bt_factor, which would be 0 for triplet at t=0):
+    #   d/dt (bt_factor * t^{2m}) = d_bt_factor_dt * t^{2m} + bt_factor * 2m t^{2m-1}
+    # Then dphi/dt = exp_factor * s_pow * u_pow * [above].
+    if bf.m > 0:
+        # General m > 0 case.
+        t_pow_minus_1 = t ** (2 * bf.m - 1) if t != 0.0 else 0.0
+        d_tpow_part = bt_factor * 2 * bf.m * t_pow_minus_1
+        d_factor_part = d_bt_factor_dt * t_pow
+        dphi_dt = exp_factor * s_pow * u_pow * (d_factor_part + d_tpow_part)
     else:
-        dphi_dt = 0.0
+        # m = 0: t_pow = 1, d(t_pow)/dt = 0. Only the d_factor_dt term survives.
+        dphi_dt = exp_factor * s_pow * u_pow * d_bt_factor_dt
 
     if bf.n > 0 and u > 0.0:
         dphi_du = phi * (bf.n / u)
@@ -1087,6 +1626,7 @@ def _eval_phi_and_derivs(
 def _kinetic_via_quadrature(
     bf_p: HylleraasBasisFn, bf_q: HylleraasBasisFn, alpha: float,
     n_r: int = 24, n_theta: int = 12,
+    beta: float = 0.0, spin: str = 'singlet',
 ) -> float:
     """Compute the kinetic-energy matrix element via 3D Gauss quadrature.
 
@@ -1202,14 +1742,31 @@ def _kinetic_via_quadrature(
                 # the GL weight factor.
 
                 exp_factor = math.exp(-alpha * s)
-                phi_p = exp_factor * Q_p
-                phi_q = exp_factor * Q_q
+
+                # Eckart cosh/sinh(beta t) factor and its t-derivative.
+                # beta=0 path is bit-identical to the legacy single-alpha
+                # branch (bt_factor=1, d_bt_factor_dt=0).
+                if beta == 0.0:
+                    bt_factor = 1.0
+                    d_bt_factor_dt = 0.0
+                else:
+                    bt = beta * t
+                    if spin == 'singlet':
+                        bt_factor = math.cosh(bt)
+                        d_bt_factor_dt = beta * math.sinh(bt)
+                    elif spin == 'triplet':
+                        bt_factor = math.sinh(bt)
+                        d_bt_factor_dt = beta * math.cosh(bt)
+                    else:
+                        raise ValueError(f"unknown spin {spin!r}")
+
+                phi_p = exp_factor * bt_factor * Q_p
+                phi_q = exp_factor * bt_factor * Q_q
 
                 # Derivatives:
-                # dphi/dr_1 = (dphi/d s) + (dphi/d t)
-                # dphi/d s = phi * (-alpha + l/s)  for l>0 else phi * (-alpha)
-                # dphi/d t = phi * (2m/t)  for m>0 and t != 0
-                # dphi/d r_12 = phi * (n/u)  for n>0
+                # dphi/d s = phi * (-alpha + l/s)  -- unchanged by bt_factor
+                # dphi/d t: product rule on bt_factor(t) * t^{2m}.
+                # dphi/d r_12 = phi * (n/u)  -- unchanged by bt_factor
                 if s > 0:
                     dphi_p_ds = phi_p * (-alpha + (bf_p.l / s if bf_p.l > 0 else 0.0))
                     dphi_q_ds = phi_q * (-alpha + (bf_q.l / s if bf_q.l > 0 else 0.0))
@@ -1217,14 +1774,32 @@ def _kinetic_via_quadrature(
                     dphi_p_ds = -alpha * phi_p
                     dphi_q_ds = -alpha * phi_q
 
+                # dphi/dt: product rule on bt_factor(t) * t^{2m}.
+                #   d/dt(bt_factor * t^{2m}) = d_bt_factor_dt * t^{2m}
+                #                              + bt_factor * 2m t^{2m-1}
+                # dphi/dt = exp_factor * s_pow * u_pow * [above]
+                # We expose this via the polynomial Q_x = s^l * t^{2m} * r12^n
+                # and recompute s^l u^n parts factored out.
+                # Easier: just use phi/bt_factor when nonzero.
                 if bf_p.m > 0 and abs(t) > 1e-15:
-                    dphi_p_dt = phi_p * (2 * bf_p.m / t)
+                    dphi_p_dt_from_tpow = phi_p * (2 * bf_p.m / t)
                 else:
-                    dphi_p_dt = 0.0
+                    dphi_p_dt_from_tpow = 0.0
                 if bf_q.m > 0 and abs(t) > 1e-15:
-                    dphi_q_dt = phi_q * (2 * bf_q.m / t)
+                    dphi_q_dt_from_tpow = phi_q * (2 * bf_q.m / t)
                 else:
-                    dphi_q_dt = 0.0
+                    dphi_q_dt_from_tpow = 0.0
+                # Contribution from d(bt_factor)/dt: exp_factor * Q * d_bt_factor_dt.
+                # We compute this directly (avoiding division by bt_factor, which
+                # can be zero for triplet at t=0).
+                if beta != 0.0:
+                    dphi_p_dt_from_factor = exp_factor * Q_p * d_bt_factor_dt
+                    dphi_q_dt_from_factor = exp_factor * Q_q * d_bt_factor_dt
+                else:
+                    dphi_p_dt_from_factor = 0.0
+                    dphi_q_dt_from_factor = 0.0
+                dphi_p_dt = dphi_p_dt_from_tpow + dphi_p_dt_from_factor
+                dphi_q_dt = dphi_q_dt_from_tpow + dphi_q_dt_from_factor
 
                 if bf_p.n > 0 and r12 > 1e-15:
                     dphi_p_du = phi_p * (bf_p.n / r12)
@@ -1311,6 +1886,9 @@ class HylleraasState:
 
 def assemble_matrices(
     basis: List[HylleraasBasisFn], alpha: float, Z: float,
+    mode: str = 'single_alpha',
+    beta: float = 0.0,
+    spin: str = 'singlet',
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Build (H, S) matrices for the singlet S-state Hylleraas problem.
 
@@ -1321,10 +1899,44 @@ def assemble_matrices(
         Decay parameter.
     Z : float
         Nuclear charge (positive).
+    mode : str, optional
+        'single_alpha' (default): legacy Hylleraas, beta ignored.
+        'eckart_double_alpha': Eckart trial function with cosh(beta t)
+        (singlet) or sinh(beta t) (triplet) factor; requires beta >= 0.
+        At beta=0, eckart_double_alpha reduces bit-identically to
+        single_alpha (for spin='singlet').
+    beta : float, optional
+        Eckart asymmetry parameter. Default 0.0. Ignored when
+        mode='single_alpha'.
+    spin : str, optional
+        'singlet' (default) or 'triplet'. Only consulted when
+        mode='eckart_double_alpha'.
 
     Returns
     -------
     H, S : (n, n) numpy arrays.
+    """
+    if mode == 'single_alpha':
+        return _assemble_matrices_single_alpha(basis, alpha, Z)
+    elif mode == 'eckart_double_alpha':
+        return _assemble_matrices_eckart(basis, alpha, Z, beta=beta, spin=spin)
+    else:
+        raise ValueError(
+            f"unknown mode {mode!r}; expected 'single_alpha' or 'eckart_double_alpha'"
+        )
+
+
+def _assemble_matrices_single_alpha(
+    basis: List[HylleraasBasisFn], alpha: float, Z: float,
+    kinetic_method: str = 'algebraic',
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Single-alpha Hylleraas matrix assembly.
+
+    kinetic_method:
+      'algebraic'  (default, Track 3.5): closed-form kinetic via Eckart
+                   master integrals at beta=0. ~10000x faster than quadrature,
+                   no quadrature precision floor.
+      'quadrature': legacy 3D Gauss quadrature (for cross-validation only).
     """
     n = len(basis)
     S = np.zeros((n, n))
@@ -1335,7 +1947,17 @@ def assemble_matrices(
     for i in range(n):
         for j in range(i, n):
             S[i, j] = overlap_element(basis[i], basis[j], alpha)
-            T[i, j] = kinetic_element(basis[i], basis[j], alpha)
+            if kinetic_method == 'algebraic':
+                T[i, j] = kinetic_element_eckart(
+                    basis[i], basis[j], alpha, beta=0.0, spin='singlet',
+                )
+            elif kinetic_method == 'quadrature':
+                T[i, j] = kinetic_element(basis[i], basis[j], alpha)
+            else:
+                raise ValueError(
+                    f"kinetic_method must be 'algebraic' or 'quadrature', "
+                    f"got {kinetic_method!r}"
+                )
             Vne[i, j] = potential_vne_element(basis[i], basis[j], alpha, Z)
             Vee[i, j] = potential_vee_element(basis[i], basis[j], alpha)
             S[j, i] = S[i, j]
@@ -1350,11 +1972,70 @@ def assemble_matrices(
     return H, S
 
 
+def _assemble_matrices_eckart(
+    basis: List[HylleraasBasisFn], alpha: float, Z: float,
+    beta: float, spin: str,
+    kinetic_method: str = 'algebraic',
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Eckart double-alpha matrix assembly.
+
+    All four blocks (S, V_ne, V_ee, T) via closed-form master integrals
+    by default. kinetic_method='quadrature' falls back to the older
+    3D Gauss quadrature for the kinetic (slow; ~70x slower than algebraic;
+    use only for cross-validation).
+
+    At beta=0, all blocks reduce to the single-alpha path.
+    """
+    n = len(basis)
+    S = np.zeros((n, n))
+    T = np.zeros((n, n))
+    Vne = np.zeros((n, n))
+    Vee = np.zeros((n, n))
+
+    for i in range(n):
+        for j in range(i, n):
+            S[i, j] = overlap_element_eckart(basis[i], basis[j], alpha, beta, spin=spin)
+            if kinetic_method == 'algebraic':
+                T[i, j] = kinetic_element_eckart(
+                    basis[i], basis[j], alpha, beta, spin=spin,
+                )
+            elif kinetic_method == 'quadrature':
+                T[i, j] = _kinetic_via_quadrature(
+                    basis[i], basis[j], alpha,
+                    n_r=_DEFAULT_KINETIC_QUAD_NR,
+                    n_theta=_DEFAULT_KINETIC_QUAD_NTHETA,
+                    beta=beta, spin=spin,
+                )
+            else:
+                raise ValueError(
+                    f"kinetic_method must be 'algebraic' or 'quadrature', "
+                    f"got {kinetic_method!r}"
+                )
+            Vne[i, j] = potential_vne_element_eckart(
+                basis[i], basis[j], alpha, beta, Z, spin=spin,
+            )
+            Vee[i, j] = potential_vee_element_eckart(
+                basis[i], basis[j], alpha, beta, spin=spin,
+            )
+            S[j, i] = S[i, j]
+            T[j, i] = T[i, j]
+            Vne[j, i] = Vne[i, j]
+            Vee[j, i] = Vee[i, j]
+
+    H = T + Vne + Vee
+    H = 0.5 * (H + H.T)
+    S = 0.5 * (S + S.T)
+    return H, S
+
+
 def solve_hylleraas_state(
     basis: List[HylleraasBasisFn], alpha: float, Z: float,
     state_index: int = 0,
+    mode: str = 'single_alpha',
+    beta: float = 0.0,
+    spin: str = 'singlet',
 ) -> HylleraasState:
-    """Solve the generalized eigenproblem H c = E S c at fixed alpha.
+    """Solve the generalized eigenproblem H c = E S c at fixed (alpha[, beta]).
 
     Returns the `state_index`-th state (0 = ground state).
 
@@ -1366,6 +2047,12 @@ def solve_hylleraas_state(
         Nuclear charge.
     state_index : int
         Which state to return (sorted ascending).
+    mode : str
+        'single_alpha' (default, beta ignored) or 'eckart_double_alpha'.
+    beta : float
+        Eckart asymmetry parameter (Ignored when mode='single_alpha').
+    spin : str
+        'singlet' (default) or 'triplet' (for Eckart mode).
 
     Returns
     -------
@@ -1373,7 +2060,7 @@ def solve_hylleraas_state(
     """
     from scipy.linalg import eigh
 
-    H, S = assemble_matrices(basis, alpha, Z)
+    H, S = assemble_matrices(basis, alpha, Z, mode=mode, beta=beta, spin=spin)
     cond_S = np.linalg.cond(S)
     eigvals, eigvecs = eigh(H, b=S)
     energy = float(eigvals[state_index])
@@ -1385,7 +2072,10 @@ def solve_hylleraas_state(
         alpha=alpha,
         basis=list(basis),
         extras={"cond_S": float(cond_S),
-                "all_eigvals": eigvals.tolist()},
+                "all_eigvals": eigvals.tolist(),
+                "mode": mode,
+                "beta": beta,
+                "spin": spin},
     )
 
 
@@ -1424,6 +2114,207 @@ def optimize_alpha_for_state(
         options={'xatol': 1e-5},
     )
     return solve_hylleraas_state(basis, result.x, Z, state_index=state_index)
+
+
+def optimize_alpha_beta_for_state(
+    basis: List[HylleraasBasisFn], Z: float,
+    alpha_init: float = 1.5,
+    beta_init: float = 0.3,
+    state_index: int = 0,
+    spin: str = 'singlet',
+    method: str = 'Nelder-Mead',
+    tol: float = 1e-7,
+    max_iter: int = 200,
+    verbose: bool = False,
+) -> HylleraasState:
+    """2D variational optimization over (alpha, beta) for the Eckart trial.
+
+    The cosh master integral converges when 2*alpha > |B_max| = 2|beta|,
+    i.e., alpha > |beta|. The objective function returns 1e10 outside
+    this constraint, which Nelder-Mead handles gracefully.
+
+    Parameters
+    ----------
+    basis : list of HylleraasBasisFn
+    Z : float
+        Nuclear charge.
+    alpha_init, beta_init : float
+        Initial guesses. For He 1^1S: (1.7, 0). For He 2^1S: (1.0, 0.4).
+        For He 2^3S: (0.7, 0.3) -- triplet is more diffuse.
+    state_index : int
+        Which state in the (sorted-ascending) spectrum to optimize.
+        0 = ground, 1 = first excited, etc.
+    spin : str
+        'singlet' or 'triplet'.
+    method : str
+        scipy.optimize.minimize method. Default 'Nelder-Mead'.
+    tol : float
+        Convergence tolerance (xatol = fatol).
+    max_iter : int
+        Maximum iterations.
+    verbose : bool
+        If True, print iteration trace.
+
+    Returns
+    -------
+    HylleraasState at the optimal (alpha, beta).
+    """
+    from scipy.optimize import minimize
+
+    history: List[Tuple[float, float, float]] = []
+
+    def obj(x: np.ndarray) -> float:
+        alpha, beta = float(x[0]), float(x[1])
+        # Constraint: alpha > 0, alpha > |beta| (cosh master convergence).
+        if alpha <= 0:
+            return 1e10
+        if abs(beta) >= alpha:
+            return 1e10
+        try:
+            res = solve_hylleraas_state(
+                basis, alpha, Z, state_index=state_index,
+                mode='eckart_double_alpha', beta=beta, spin=spin,
+            )
+            e = float(res.energy)
+            history.append((alpha, beta, e))
+            if verbose:
+                print(f"    a={alpha:.6f}, b={beta:.6f} -> E={e:.10f}")
+            return e
+        except Exception:
+            return 1e10
+
+    x0 = np.array([alpha_init, beta_init])
+    result = minimize(
+        obj, x0=x0,
+        method=method,
+        options={
+            'xatol': tol, 'fatol': tol,
+            'maxiter': max_iter, 'adaptive': True,
+        },
+    )
+    alpha_opt, beta_opt = float(result.x[0]), float(result.x[1])
+    final = solve_hylleraas_state(
+        basis, alpha_opt, Z, state_index=state_index,
+        mode='eckart_double_alpha', beta=beta_opt, spin=spin,
+    )
+    # Stash optimization trace in extras.
+    final.extras['beta'] = beta_opt
+    final.extras['opt_alpha'] = alpha_opt
+    final.extras['opt_n_iter'] = int(result.nit)
+    final.extras['opt_n_eval'] = int(result.nfev)
+    final.extras['opt_success'] = bool(result.success)
+    final.extras['opt_history_len'] = len(history)
+    return final
+
+
+def compute_he_2s_singlet_triplet_eckart(
+    omega: int = 4,
+    Z: int = 2,
+    verbose: bool = False,
+) -> Dict[str, Any]:
+    """Compute He 2^1S - 2^3S exchange splitting in the Eckart double-alpha basis.
+
+    Uses 2D variational optimization over (alpha, beta) separately for each
+    of the three target states:
+
+      * 1^1S (singlet ground)             -- optimize singlet, state_index=0
+      * 2^1S (singlet first excited)      -- optimize singlet, state_index=1
+      * 2^3S (triplet ground)             -- optimize triplet, state_index=0
+
+    The 2^1S - 2^3S splitting is the experimental observable (NIST: 6421.46 cm^-1).
+    Single-alpha Hylleraas overshoots by +209% (positive) for the splitting.
+    Eckart variational target is < 5% per Bethe-Salpeter §32 Table 13.
+
+    Parameters
+    ----------
+    omega : int
+        Total-degree truncation (l + 2m + n <= omega).
+    Z : int
+        Nuclear charge.
+    verbose : bool
+        Print per-state optimization details.
+
+    Returns
+    -------
+    dict with E_1S, E_2S_singlet, E_2S_triplet, splitting_Ha, splitting_cm_inv,
+    optimization metadata, and NIST comparison.
+    """
+    # Atomic-unit -> cm^-1 conversion (Hartree to wavenumbers).
+    HARTREE_TO_CM = 219474.631363
+    NIST_SPLITTING = 6421.46  # cm^-1 (Drake / NIST)
+
+    basis = hylleraas_basis_total_degree(omega)
+    n_basis = len(basis)
+
+    out: Dict[str, Any] = {
+        'omega': omega,
+        'n_basis': n_basis,
+        'Z': Z,
+    }
+
+    if verbose:
+        print(f"Eckart 2D variational sprint: omega={omega}, n_basis={n_basis}")
+
+    # 1^1S: singlet ground state.
+    if verbose:
+        print(f"  Optimizing 1^1S (singlet, state_index=0) ...")
+    res_1s = optimize_alpha_beta_for_state(
+        basis, Z, alpha_init=1.7, beta_init=0.0,
+        state_index=0, spin='singlet',
+    )
+    out['E_1S'] = float(res_1s.energy)
+    out['alpha_1S'] = float(res_1s.extras['opt_alpha'])
+    out['beta_1S'] = float(res_1s.extras['beta'])
+    if verbose:
+        print(f"    E={res_1s.energy:.10f}, alpha={out['alpha_1S']:.4f}, "
+              f"beta={out['beta_1S']:.4f}")
+
+    # 2^1S: singlet excited (second eigenvalue).
+    if verbose:
+        print(f"  Optimizing 2^1S (singlet, state_index=1) ...")
+    res_2s_s = optimize_alpha_beta_for_state(
+        basis, Z, alpha_init=1.0, beta_init=0.4,
+        state_index=1, spin='singlet',
+    )
+    out['E_2S_singlet'] = float(res_2s_s.energy)
+    out['alpha_2S_singlet'] = float(res_2s_s.extras['opt_alpha'])
+    out['beta_2S_singlet'] = float(res_2s_s.extras['beta'])
+    if verbose:
+        print(f"    E={res_2s_s.energy:.10f}, alpha={out['alpha_2S_singlet']:.4f}, "
+              f"beta={out['beta_2S_singlet']:.4f}")
+
+    # 2^3S: triplet ground (first triplet eigenvalue).
+    if verbose:
+        print(f"  Optimizing 2^3S (triplet, state_index=0) ...")
+    res_2s_t = optimize_alpha_beta_for_state(
+        basis, Z, alpha_init=0.85, beta_init=0.3,
+        state_index=0, spin='triplet',
+    )
+    out['E_2S_triplet'] = float(res_2s_t.energy)
+    out['alpha_2S_triplet'] = float(res_2s_t.extras['opt_alpha'])
+    out['beta_2S_triplet'] = float(res_2s_t.extras['beta'])
+    if verbose:
+        print(f"    E={res_2s_t.energy:.10f}, alpha={out['alpha_2S_triplet']:.4f}, "
+              f"beta={out['beta_2S_triplet']:.4f}")
+
+    # Splitting.
+    splitting_Ha = out['E_2S_singlet'] - out['E_2S_triplet']
+    splitting_cm = splitting_Ha * HARTREE_TO_CM
+    rel_err = (splitting_cm - NIST_SPLITTING) / NIST_SPLITTING
+
+    out['splitting_Ha'] = float(splitting_Ha)
+    out['splitting_cm_inv'] = float(splitting_cm)
+    out['NIST_splitting_cm_inv'] = NIST_SPLITTING
+    out['rel_err_vs_NIST'] = float(rel_err)
+    out['rel_err_pct'] = float(rel_err * 100)
+
+    if verbose:
+        print(f"  E(2^1S) - E(2^3S) = {splitting_Ha:.6f} Ha = "
+              f"{splitting_cm:.2f} cm^-1")
+        print(f"  vs NIST {NIST_SPLITTING:.2f} cm^-1: "
+              f"{out['rel_err_pct']:+.3f}%")
+
+    return out
 
 
 # ---------------------------------------------------------------------------
