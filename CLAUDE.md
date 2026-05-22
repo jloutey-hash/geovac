@@ -559,11 +559,11 @@ Papers are organized into six audience-targeted groups (see §6 Context Loading 
 |:------|:-------|:---------|:-----------:|
 | 1 — Operator algebras / NCG | `papers/group1_operator_algebras/` | math.OA mathematicians, NCG / spectral-triple community | 9 |
 | 2 — Quantum chemistry | `papers/group2_quantum_chemistry/` | Quantum chemists, atomic/molecular structure | 9 |
-| 3 — Foundations | `papers/group3_foundations/` | Mathematical physicists, spectral graph theorists | 9 |
+| 3 — Foundations | `papers/group3_foundations/` | Mathematical physicists, spectral graph theorists | 7 |
 | 4 — Quantum computing | `papers/group4_quantum_computing/` | Quantum computing, NISQ, VQE/QPE community | 4 + Track NI memo |
 | 5 — QED / gauge / Standard Model | `papers/group5_qed_gauge/` | High-energy / particle physics, gauge theory | 7 |
 | 6 — Precision physics / observations | `papers/group6_precision_observations/` | Precision AMO, atomic spectroscopy | 4 |
-| Archive | `papers/archive/` | Conjectural / superseded / historical | Papers 3, 4, 5, 10, 18v1 |
+| Archive | `papers/archive/` | Conjectural / superseded / historical | Papers 3, 4, 5, 6, 10, 18v1, 21 |
 | Synthesis | `papers/synthesis/` | Cross-group narrative drafts | group1, group3 syntheses (2026-05-22) |
 
 Reorganized 2026-05-22 from the previous tier-based folder layout (core / methods / applications / synthesis / standalone / observations / conjectures) into audience-targeted group folders. The "Tier" column in each group table preserves the loading-priority information.
@@ -600,7 +600,7 @@ Audience: quantum chemists, atomic/molecular structure community. Venues: J. Che
 | FCI-A | On-topic | `paper_fci_atoms.tex` | He 0.35%, Li 1.10%, Be 0.90% |
 | FCI-M | GUARDRAIL | `paper_fci_molecules.tex` | LCAO molecular FCI, R-independent graph Laplacian kinetic energy, 29-version diagnostic arc — **GUARDRAIL** for graph-concatenation molecular |
 
-#### Group 3 — Foundations / spectral graph theory (`papers/group3_foundations/`) — Always load (0, 1, 7, 22, 24, 31); On-topic (6, 18, 21)
+#### Group 3 — Foundations / spectral graph theory (`papers/group3_foundations/`) — Always load (0, 1, 7, 22, 24, 31); On-topic (18)
 
 Audience: mathematical physicists, spectral graph theorists, foundations community. Venues: J. Math. Phys., Found. Phys., Rep. Math. Phys., J. Phys. A.
 
@@ -608,24 +608,26 @@ Audience: mathematical physicists, spectral graph theorists, foundations communi
 |:------|:----:|:-----|:-----------|
 | 0 | Always | `Paper_0_Geometric_Packing.tex` | Universal constant K = -1/16 from packing axiom |
 | 1 | Always | `paper_1_spectrum.tex` | Spectral graph theory, O(N) eigenvalue methods. Berry phase retracted v1.2.0 |
-| 6 | On-topic | `Paper_6_Quantum_Dynamics.tex` | O(V) dynamics: Rabi, spectroscopy, AIMD |
-| 7 | Always | `Paper_7_Dimensionless_Vacuum.tex` | S³ proof (18/18 symbolic), Schrödinger recovery, SO(3N) generalization. The framework's theoretical foundation. |
+| 7 | Always | `Paper_7_Dimensionless_Vacuum.tex` | S³ proof (18/18 symbolic), Schrödinger recovery, SO(3N) generalization. The framework's theoretical foundation. Most-cited paper across the entire corpus (31 inbound citations per cross-group dependency analysis 2026-05-22). |
 | 18 | On-topic | `paper_18_exchange_constants.tex` | Spectral-geometric exchange constants taxonomy: six-tier classification (intrinsic / calibration / embedding / algebraic-implicit / composition / inner-factor input data). Master Mellin engine §III.7: M1 (Hopf-base measure), M2 (Seeley-DeWitt), M3 (vertex parity / Hurwitz) — three sub-cases of 𝓜[Tr(D^k·e^{-tD²})] at k ∈ {0,1,2}. |
-| 21 | On-topic | `paper_21_geometric_vacuum_synthesis.tex` | Earlier synthesis: S³ proof chain, N-electron S^(3N-1), exchange constant taxonomy, 6j recoupling sparsity, Hopf α conjecture, atomic spectra research program |
 | 22 | Always | `paper_22_angular_sparsity.tex` | Potential-independent angular sparsity theorem; ERI density 1.44% at l_max=3; universal/Coulomb-specific partition. Underwrites Paper 14 O(Q^2.5) Pauli scaling. |
 | 24 | Always | `paper_24_bargmann_segal.tex` | Bargmann-Segal lattice: π-free discretization of 3D HO on S⁵ Hardy space; HO rigidity theorem. Coulomb/HO asymmetry: four layers (Sprint L2-F.1) — (i) spectrum-computing L₀; (ii) calibration π; (iii) non-abelian Wilson gauge with natural matter; (iv) modular-Hamiltonian structure of the wedge KMS state. |
 | 31 | Always | `paper_31_universal_coulomb_partition.tex` | Universal/Coulomb partition (A/D split): universal sector (angular sparsity, composed scaling, selection rules) lives in A and transfers free; potential-specific sector depends on D. Frames Papers 22+23+24+25 in spectral-triple language. |
 
-#### Group 4 — Quantum computing / resource estimation (`papers/group4_quantum_computing/`) — Always load (14, 16); On-topic (20, 23, Track NI)
+(Papers 6 and 21 moved to `papers/archive/` 2026-05-22 based on cross-group dependency analysis: Paper 6 has 1-in/1-out citation pattern — essentially orphan; Paper 21 has only 1 inbound citation and is superseded by the two new group syntheses. Both retain their content; load via `papers/archive/` on explicit request.)
+
+#### Group 4 — Quantum computing / resource estimation (`papers/group4_quantum_computing/`) — Always load (14, 16, 23); On-topic (20, Track NI)
 
 Audience: quantum computing community, NISQ practitioners, VQE/QPE resource estimation. Venues: Quantum, PRX Quantum, npj Quantum Inf.
+
+**Cross-group hub:** Paper 23 is the framework's nuclear/multi-particle backbone, with 11 inbound citations across G1+G3+G5+G6 per the 2026-05-22 cross-group dependency analysis — broader reach than its G4 placement suggests because it introduces the Fock projection rigidity theorem (foundational across groups). Cite Paper 23 when extending any group's framework to multi-particle systems; Track NI memo is the companion case study.
 
 | Paper | Tier | File | Key Result |
 |:------|:----:|:-----|:-----------|
 | 14 | Always | `paper_14_qubit_encoding.tex` | Structurally sparse qubits: O(Q^3.15) atoms, O(Q^2.5) composed; 51×–1712× advantage over published Gaussian baselines |
 | 16 | Always | `paper_16_periodicity.tex` | Chemical periodicity from S_N representation theory; atomic classifier for composed geometry |
 | 20 | On-topic | `paper_20_resource_benchmarks.tex` | Resource benchmarks for quantum computing community: FCI PES, Gaussian comparison, pip install |
-| 23 | On-topic | `paper_23_nuclear_shell.tex` | Nuclear shell model qubit Hamiltonians: deuteron (Minnesota, 16 qubits, 592 Pauli), He-4 (712 Pauli), composed nuclear-electronic PoC, Fock projection rigidity theorem |
+| 23 | **Always** | `paper_23_nuclear_shell.tex` | Nuclear shell model qubit Hamiltonians: deuteron (Minnesota, 16 qubits, 592 Pauli), He-4 (712 Pauli), composed nuclear-electronic PoC, Fock projection rigidity theorem. **Cross-group hub** — 11 inbound citations across G1/G3/G5/G6 per dependency analysis; broader reach than G4 placement suggests. Promoted to "Always" 2026-05-22. |
 | Track NI memo | On-topic | `track_ni_spectral_triple_zenodo.md` | Composed nuclear–electronic deuterium Hamiltonian as explicit Connes-style real-space multi-particle spectral triple. 26 qubits, 614 non-identity Pauli, cross-register hyperfine validated against 21cm gap. Cross-references Paper 23 §VI, Paper 32 §V/§VIII.D, Paper 38. |
 
 #### Group 5 — QED / gauge theory / Standard Model (`papers/group5_qed_gauge/`) — On-topic (all)
@@ -669,8 +671,10 @@ Audience: anyone reading the corpus cold; new researchers wanting unified narrat
 | 3 | Conjecture | `paper_3_holography.tex` | Holographic entropy, spectral dimension, central charge — machinery partially retracted |
 | 4 | Archived 2026-05-03 | `Paper_4_Universality.tex` | Universal holographic central charge / muonic-hydrogen / proton-radius-puzzle resolution. Archived because (1) proton radius puzzle resolved by measurement (PDG 0.8409(4) fm), and (2) holographic claims inherit Paper 3 retraction. Salvageable kernel (mass as unit-fixing projection) absorbed into Paper 34/35. |
 | 5 | Conjecture | `Paper_5_Geometric_Vacuum.tex` | Comprehensive geometric vacuum framework (early synthesis) |
+| 6 | Archived 2026-05-22 | `Paper_6_Quantum_Dynamics.tex` | O(V) quantum dynamics on the graph (Rabi, spectroscopy, AIMD). Archived because cross-group dependency analysis (2026-05-22) showed 1-in/1-out citation pattern — essentially orphan in the corpus. Content remains valid as a tool paper; load on explicit request when graph-dynamics tooling is needed. |
 | 10 | Archive | `paper_10_nuclear_lattice.tex` | Rovibrational spectra from SU(2) algebraic chains (early draft) |
 | 18 v1 | Superseded | `paper_18_exchange_constants_v1.tex` | Earlier version of Paper 18; superseded by current `papers/group3_foundations/paper_18_exchange_constants.tex` |
+| 21 | Archived 2026-05-22 | `paper_21_geometric_vacuum_synthesis.tex` | Early synthesis: S³ proof chain, N-electron S^(3N-1), exchange constant taxonomy, 6j recoupling sparsity, Hopf α conjecture. Archived because cross-group dependency analysis showed only 1 inbound citation across the entire corpus AND because the two new group syntheses (`papers/synthesis/group1_operator_algebras_synthesis.tex` and `papers/synthesis/group3_foundations_synthesis.tex`) supersede its narrative role with explicit cross-group framing. Content remains valid as a historical snapshot. |
 
 
 
