@@ -308,7 +308,7 @@ proof: temporal compactification does not generate new analytical
 obstructions beyond what the foundation already handled.
 
 **Paper 45 drafted and pre-submission hardened.** New file:
-`papers/standalone/paper_45_lorentzian_propinquity.tex` (1,721 lines,
+`papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (1,721 lines,
 ~8,088 words, 18 pages, three-pass clean LaTeX compile, zero substantive
 warnings). 8 sections + abstract + bibliography. 5 theorems (main +
 L1' / L2 / L3 / L4 / L5 as supporting theorems), 4 lemmas, ~33 bibitems.
@@ -379,7 +379,7 @@ structurally additive on top of the proven Riemannian foundation, not a
 re-test of it).
 
 **File summary.**
-- New paper: `papers/standalone/paper_45_lorentzian_propinquity.tex`
+- New paper: `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex`
   (1,721 lines) + compiled `paper_45_lorentzian_propinquity.pdf` (18
   pages) + auxiliary `paper_45_lorentzian_propinquity.{aux,out,log}`.
 - New sprint memos: 5 (sub-sprints A/B/C/D + pre-submission hardening
@@ -428,7 +428,7 @@ Kantorovich on K⁺ states), natural setting for Sprint L3b. Riemannian limit at
 bit-exact (Frobenius residual = 0.0 in float64) across n_max ∈ {1, 2, 3}. Witness pair
 (M^{2,1,0,0}, M^{2,1,0,0*}) at ~38% residual exhibits non-multiplicative closure.
 
-**Paper 44 drafted.** `papers/standalone/paper_44_lorentzian_operator_system.tex` —
+**Paper 44 drafted.** `papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex` —
 sixth math.OA standalone in the GeoVac series (siblings: 38, 39, 40, 42, 43). 1698 LaTeX
 lines, ~14k words, 18 pages compiled (550 KB PDF), 33 bibitems, three-pass clean compile
 (after defining `\TT` macro for Tomita-Takesaki and adding `\label{sec:krein_space}`).
@@ -780,7 +780,7 @@ Three diagnostic-only scoping memos returned ABSORBED for all three candidates, 
 
 **Files modified:**
 
-- `papers/observations/paper_34_projection_taxonomy.tex` — 9 new §III subsections (§III.20–§III.28), 9 new §IV table rows, abstract count 19→28, §III boundary preamble extended, §IV V/D-correlation Observation extended (three witnesses in transcendental-only corner), §IV table caption + base-units caption extended, §X open-questions list reorganized with (a)/(b)/(c)/(d) plus Sprint 3 (s1)/(s2)/(s3) closure paragraph, §VIII Lorentz-boost candidate rewritten as "Operator-system-level Lorentzian extension", new §VIII "Candidate state-side dictionary enumeration" entry, §III.6 Structural reading paragraph added with master Mellin engine framing, §III.15 BW-reading footnote extended with Tomita-Takesaki naming, §III.27 honest scope + structural reading complete, §III.28 first state-side entry complete, §XI Conclusion with three Sprint paragraphs. Three small inline fixes during integration: T1 `sec:dead_ends_inherit` → CLAUDE.md §3 text reference; T5 `\bm{R}/\bm{r}` → `\vec{R}/\vec{r}` (no bm package loaded); T5 `sec:proj_adiabatic_BO` self-references → `sec:proj_coupled_channel`; T9 four label/macro fixes; two unicode α → `$\alpha$`. Total: 4,755 → 6,754 lines (+1,999 / +42%). Compiles to 86-page PDF.
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — 9 new §III subsections (§III.20–§III.28), 9 new §IV table rows, abstract count 19→28, §III boundary preamble extended, §IV V/D-correlation Observation extended (three witnesses in transcendental-only corner), §IV table caption + base-units caption extended, §X open-questions list reorganized with (a)/(b)/(c)/(d) plus Sprint 3 (s1)/(s2)/(s3) closure paragraph, §VIII Lorentz-boost candidate rewritten as "Operator-system-level Lorentzian extension", new §VIII "Candidate state-side dictionary enumeration" entry, §III.6 Structural reading paragraph added with master Mellin engine framing, §III.15 BW-reading footnote extended with Tomita-Takesaki naming, §III.27 honest scope + structural reading complete, §III.28 first state-side entry complete, §XI Conclusion with three Sprint paragraphs. Three small inline fixes during integration: T1 `sec:dead_ends_inherit` → CLAUDE.md §3 text reference; T5 `\bm{R}/\bm{r}` → `\vec{R}/\vec{r}` (no bm package loaded); T5 `sec:proj_adiabatic_BO` self-references → `sec:proj_coupled_channel`; T9 four label/macro fixes; two unicode α → `$\alpha$`. Total: 4,755 → 6,754 lines (+1,999 / +42%). Compiles to 86-page PDF.
 - `CLAUDE.md` — §6 Paper 34 inventory entry (both occurrences) extended with all three sprint contributions; §11 lookup table gained 9 new rows for §III.20–§III.28 + 2 open-question rows + 3 Sprint 3 absorption rows; Lorentz-boost candidate references updated 20th→26th and then absorbed into operator-system-level Lorentzian extension.
 
 **Files created (institutional record):**
@@ -942,13 +942,13 @@ Eight-track sprint (Phases A → B → C → C-follow-on, May 2026) refuting the
 
 **Phase B synthesis** at `debug/multifocal_phase_b_synthesis_memo.md`. Seven Phase B memos at `debug/multifocal_b_*_memo.md` (~30,000 words).
 
-**Phase C closures (production code, May 2026).** Four sprints in parallel. **C-positioning**: applied 10 paste-ready edits — Paper 32 §VIII.D frontier-of-field framing (~970 words), Paper 18 §IV.6 second-packing-axiom open-question paragraph, Paper 23 §VI positioning-in-NCG-literature subsection, Paper 32 §V Track NI cross-reference, Track NI Zenodo memo (`papers/observations/track_ni_spectral_triple_zenodo.md`, ~3000 words), CLAUDE.md WH4 deflation + §6 inventory + §2 sprint outcome. **C-W1a-physics**: new module `geovac/cross_register_vne.py` (~990 lines + 38 tests, 99/99 pass) building cross-register V_eN on the Roothaan 1951 closed form; multi-λ Shibuya-Wulfman extension with bit-identical bare-Coulomb regression; **Bethe-Salpeter leading-order hydrogen recoil reproduced at 2.86%** ($+2.65 \times 10^{-4}$ Ha vs $+2.72 \times 10^{-4}$ Ha) and **Eides Tab. 7.3 $-39.5$ ppm at $r_Z = 1.045$ fm reproduced verbatim** (W1b leading-order Layer-2 closure). **C-W1c**: new module `geovac/cross_center_screened_vne.py` (~470 lines + 22 tests, 183/183 total pass) with Newton-shell-theorem Clementi-Raimondi decomposition; cross-center attraction reduced 5.4–6.0× at NaH R=3.5 bohr (matches diagnostic prediction); LiH bit-identical regression preserves backward compat. NaH PES still monotonically descending — exposes new **W1c-residual sub-wall** (H valence ↔ [Ne]-core orthogonality, Phillips-Kleinman-class). **C-W2b-easy** first pass: new module `geovac/gh_convergence_tensor.py` (~870 lines + 53 tests) implementing tensor extension of Paper 38's five lemmas; closed-form joint cb-norm 4/((n_a+1)(n_b+1)); **numerical panel Λ(2,2)=2.0746, Λ(3,3)=1.6101, Λ(4,4)=1.3223** with ratio Λ(4,4)/Λ(2,2)=0.6374 matching single-factor Paper 38's 0.637 bit-identical. Verdict (b) proof-sketched (L1'/L2/L4 closed; L3 partial; L5 proof-sketched).
+**Phase C closures (production code, May 2026).** Four sprints in parallel. **C-positioning**: applied 10 paste-ready edits — Paper 32 §VIII.D frontier-of-field framing (~970 words), Paper 18 §IV.6 second-packing-axiom open-question paragraph, Paper 23 §VI positioning-in-NCG-literature subsection, Paper 32 §V Track NI cross-reference, Track NI Zenodo memo (`papers/group4_quantum_computing/track_ni_spectral_triple_zenodo.md`, ~3000 words), CLAUDE.md WH4 deflation + §6 inventory + §2 sprint outcome. **C-W1a-physics**: new module `geovac/cross_register_vne.py` (~990 lines + 38 tests, 99/99 pass) building cross-register V_eN on the Roothaan 1951 closed form; multi-λ Shibuya-Wulfman extension with bit-identical bare-Coulomb regression; **Bethe-Salpeter leading-order hydrogen recoil reproduced at 2.86%** ($+2.65 \times 10^{-4}$ Ha vs $+2.72 \times 10^{-4}$ Ha) and **Eides Tab. 7.3 $-39.5$ ppm at $r_Z = 1.045$ fm reproduced verbatim** (W1b leading-order Layer-2 closure). **C-W1c**: new module `geovac/cross_center_screened_vne.py` (~470 lines + 22 tests, 183/183 total pass) with Newton-shell-theorem Clementi-Raimondi decomposition; cross-center attraction reduced 5.4–6.0× at NaH R=3.5 bohr (matches diagnostic prediction); LiH bit-identical regression preserves backward compat. NaH PES still monotonically descending — exposes new **W1c-residual sub-wall** (H valence ↔ [Ne]-core orthogonality, Phillips-Kleinman-class). **C-W2b-easy** first pass: new module `geovac/gh_convergence_tensor.py` (~870 lines + 53 tests) implementing tensor extension of Paper 38's five lemmas; closed-form joint cb-norm 4/((n_a+1)(n_b+1)); **numerical panel Λ(2,2)=2.0746, Λ(3,3)=1.6101, Λ(4,4)=1.3223** with ratio Λ(4,4)/Λ(2,2)=0.6374 matching single-factor Paper 38's 0.637 bit-identical. Verdict (b) proof-sketched (L1'/L2/L4 closed; L3 partial; L5 proof-sketched).
 
 **Phase C follow-on (May 2026).** Four parallel sprints. **D-R1R2 keystone tightening**: Connes-Marcolli graded Pythagorean Leibniz with asymmetric-supremum correction closes R1 (full op-system $C_3 < 1$ at every finite cutoff); Latrémolière 2017 §4 explicit $\varepsilon_\text{cross}$ bound closes R2 (rate $O(\max\gamma)$, constant $\leq 2\sqrt{2}$). All five tensor lemmas now closed. **Keystone moves from verdict (b) proof-sketched to verdict (a) PROVEN at qualitative-rate level** — matches Paper 38 / WH1 PROVEN maturity. `gh_convergence_tensor.py` extended ~870 → 1881 lines; +37 new tests including 6 R1-asymmetric corrections; 84+ baseline pass with no regressions. **Framework now has two proven GH-convergence theorems: single-factor (Paper 38) and tensor-product (this sprint).** **D-Pachucki higher-order**: symbolic Taylor expansion of Roothaan $J_0$ to k=8 closes the question of the C-W1a-physics 2.86% leading-order match — it is a **Sturmian-basis truncation artifact at $n_\text{max}=1$, not a Pachucki-style sub-leading correction**. Odd-k terms alias to half-integer powers of $m_e/m_p$ at calibrated $\lambda_n = 2\sqrt{M_p}$ which are structurally absent in Pachucki–Patkóš–Yerokhin 2023's FW-reduced two-particle Hamiltonian (integer powers only). Half-integer artifact tower sums to $-2.92$% of leading. Integer-only sub-sum k=2,4,6,8 gives $+0.061$% sub-percent BUT flagged fortuitous: Roothaan k=4 has opposite sign from physical Pachucki next-order term ($-1/(2 M_p^2)$); multi-shell $n_\text{max} \geq 2$ expansion required to close the sign structurally. cross_register_vne.py +340 lines, 56 tests, 99/99 regression pass. **D-W1b operator-level magnetization-density**: new module `geovac/magnetization_density.py` (~480 lines + 27 tests, 148/148 total pass) realizes the W1b inner-fluctuation $\omega_\text{magn}$ as structural sibling of $\omega_\text{recoil}$ (W1a) per B-W1b-diag verdict (b). **Operator-level Zemach shift $-39.495276$ ppm vs Eides reference $-39.5$ ppm — residual $+0.0047$ ppm = 0.012% of the Eides shift** (well below the +12 to +18 ppm multi-loop budget). Profile independence verified (Gaussian = exponential bit-identical at leading order); $L=0$ multipole reduction collapses bilinear matrix element to $M_1[\rho_M] = r_Z$ automatically — no external scalar substitution. compose_with_cross_register_vne builds combined V_eN + ω_magn Pauli sum (additivity verified to 1e-15). **D-PES regression**: NaH/MgH₂/HCl with cross-V_ne reduction NaH 5.4–6.0× → MgH₂ 2.99× → HCl 1.79× exhibits **Z-decreasing W1c-residual orthogonality wall**: universal in cause but magnitude scales inversely with Z. Full FCI infeasible at Q≥40 ($2^Q$ allocation wall, same as Sprint 7) — n_e-projected FCI driver needed for binding determination. Slow tests on tensor-product convergence panel: 6/6 PASS.
 
-**Net result.** The structural-skeleton-scope framing is genuinely retired. Five of six refined walls landed closures (W1a first-pass production with operator-level closure, W1b structural via $\omega_\text{magn}$ at 0.012%, W1c at the screening mechanism, W2b-easy NCG keystone PROVEN, plus Track NI Zenodo positioning); W2a / W2b-medium-hard / W3 are honestly named as broader-program frontier (paper edits applied, no closure attempt). The framework composes focal lengths via cross-register two-body coordinate operators built on Roothaan 1951, anchored in a tensor-product propinquity-convergent NCG construction extending Paper 38. Open follow-ups: W1c-residual orthogonality diagnostic; multi-shell n_max ≥ 2 Pachucki match; n_e-projected FCI for second-row hydrides; L2 quantitative rate at small n_max (parallel to Paper 38 Track C). New papers: **Paper 39** (`papers/standalone/paper_39_tensor_propinquity_convergence.tex`) math.OA-style writeup of the W2b-easy PROVEN keystone, Paper 38 sibling. **Paper 23 §VII** new subsection "Cross-register V_eN and operator-level magnetization-density inner-fluctuations" documenting the cross-register operators.
+**Net result.** The structural-skeleton-scope framing is genuinely retired. Five of six refined walls landed closures (W1a first-pass production with operator-level closure, W1b structural via $\omega_\text{magn}$ at 0.012%, W1c at the screening mechanism, W2b-easy NCG keystone PROVEN, plus Track NI Zenodo positioning); W2a / W2b-medium-hard / W3 are honestly named as broader-program frontier (paper edits applied, no closure attempt). The framework composes focal lengths via cross-register two-body coordinate operators built on Roothaan 1951, anchored in a tensor-product propinquity-convergent NCG construction extending Paper 38. Open follow-ups: W1c-residual orthogonality diagnostic; multi-shell n_max ≥ 2 Pachucki match; n_e-projected FCI for second-row hydrides; L2 quantitative rate at small n_max (parallel to Paper 38 Track C). New papers: **Paper 39** (`papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex`) math.OA-style writeup of the W2b-easy PROVEN keystone, Paper 38 sibling. **Paper 23 §VII** new subsection "Cross-register V_eN and operator-level magnetization-density inner-fluctuations" documenting the cross-register operators.
 
-Files: `geovac/cross_register_vne.py`, `geovac/cross_center_screened_vne.py`, `geovac/gh_convergence_tensor.py`, `geovac/magnetization_density.py`, `tests/test_cross_register_vne.py`, `tests/test_cross_center_screened_vne.py`, `tests/test_gh_convergence_tensor.py`, `tests/test_magnetization_density.py`, `papers/observations/track_ni_spectral_triple_zenodo.md`, `papers/standalone/paper_39_tensor_propinquity_convergence.tex`. Memos: `debug/multifocal_*_memo.md` (~17 files, ~50,000 words). Production tests: ~210 new across the new modules; full regression green.
+Files: `geovac/cross_register_vne.py`, `geovac/cross_center_screened_vne.py`, `geovac/gh_convergence_tensor.py`, `geovac/magnetization_density.py`, `tests/test_cross_register_vne.py`, `tests/test_cross_center_screened_vne.py`, `tests/test_gh_convergence_tensor.py`, `tests/test_magnetization_density.py`, `papers/group4_quantum_computing/track_ni_spectral_triple_zenodo.md`, `papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex`. Memos: `debug/multifocal_*_memo.md` (~17 files, ~50,000 words). Production tests: ~210 new across the new modules; full regression green.
 
 ---
 
@@ -983,10 +983,10 @@ Latrémolière 2017/2023 version pinned vs the 2016/2018 alternates. New 95-line
 **Decisions logged.** LS-8a-renorm extension: DEFER (importing flat-space Z_2/δm conventions would contaminate structural-skeleton purity). Krajewski-Mellin compatibility audit: DEFER (current "engine constrains where A_F sits but doesn't pick A_F" is the result; audit unlikely to materially sharpen).
 
 ### Files modified
-- `papers/core/paper_18_exchange_constants.tex` (§III.7 cleanup, §IV fourth tier with two new theorems and three new bibitems)
-- `papers/observations/paper_35_time_as_projection.tex` (§VII.3 LS-8a addendum + Refined Prediction 1)
-- `papers/observations/paper_36_bound_state_qed.tex` (§VII subsec:ls8a_result + prop:ls7_finalized; applied by LS-8a fork)
-- `papers/standalone/paper_38_su2_propinquity_convergence.tex` (two proof bug fixes, Stein-Weiss appendix, related-work paragraph, four new citations, Latrémolière convention pinning)
+- `papers/group3_foundations/paper_18_exchange_constants.tex` (§III.7 cleanup, §IV fourth tier with two new theorems and three new bibitems)
+- `papers/group6_precision_observations/paper_35_time_as_projection.tex` (§VII.3 LS-8a addendum + Refined Prediction 1)
+- `papers/group5_qed_gauge/paper_36_bound_state_qed.tex` (§VII subsec:ls8a_result + prop:ls7_finalized; applied by LS-8a fork)
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` (two proof bug fixes, Stein-Weiss appendix, related-work paragraph, four new citations, Latrémolière convention pinning)
 - `geovac/gh_convergence.py` (Lipschitz-distortion height_B definition matching paper)
 - `tests/test_gh_convergence.py` (regression test for height_B → 0)
 - `geovac/two_loop_self_energy.py` (NEW, 313 lines)
@@ -1087,11 +1087,11 @@ Two new observation papers extending the Paper 34 projection dictionary, plus a 
 
 **Sprint sequence (chronological within the day):**
 
-- **Paper 4 archived** (`papers/conjectures/Paper_4_Universality.tex` → `papers/archive/Paper_4_Universality.tex`). Two reasons: (1) the proton radius puzzle the paper claimed to fully resolve has been settled in the physics community as a measurement artifact in older electronic spectroscopy (PDG consensus 0.8409(4) fm; April 2026 review "the puzzle is no more"); (2) the holographic central-charge / spectral-dimension claims (d_s ≈ 2.07, c ≈ 1/36) inherit the machinery retracted from Paper 3 (CLAUDE.md v2.18.2 retraction). Salvageable kernel (mass-as-unit-fixing-projection) absorbed into Paper 35.
+- **Paper 4 archived** (`papers/archive/Paper_4_Universality.tex` → `papers/archive/Paper_4_Universality.tex`). Two reasons: (1) the proton radius puzzle the paper claimed to fully resolve has been settled in the physics community as a measurement artifact in older electronic spectroscopy (PDG consensus 0.8409(4) fm; April 2026 review "the puzzle is no more"); (2) the holographic central-charge / spectral-dimension claims (d_s ≈ 2.07, c ≈ 1/36) inherit the machinery retracted from Paper 3 (CLAUDE.md v2.18.2 retraction). Salvageable kernel (mass-as-unit-fixing-projection) absorbed into Paper 35.
 
 - **CLAUDE.md §4 transcendentals policy refined.** Added "algebraic-first, observation-aware" language: irreducible transcendentals that survive algebraic decomposition are not failures of the algebraic-first discipline — they are the content of a specific Paper 34 projection and should be tagged to that projection. The diagnostic question for any quadrature wall is two-headed: missing algebraic structure (decompose) or observation-side projection signature (catalogue and stop). Anonymous transcendentals not allowed in production code or papers.
 
-- **Sprint KG (KG-1, KG-2, KG-3) → Paper 35**: `papers/observations/paper_35_time_as_projection.tex` (~810 lines after edits). KG-1 verified the bare Klein-Gordon spectrum on S³ × ℝ is π-free in ℚ[√d for d square-free positive integer] for every rational m² (200 cases, n ∈ [1,50] across panel {0, 1, 1/4, 2}, symbolic verification). KG-2 explicitly identified the Matsubara mode (n=0, k=1) at ω² = 4π² as the first π-bearing eigenvalue under temporal compactification on S³ × S¹_β; before/after table in §IV. KG-3 computed the conformally coupled massless scalar Casimir on unit S³ as **E_Cas = 1/240 exact rational** via ζ_R(s−2) reduction at s=−1 with B₄ = −1/30; matches Bytsenko et al. / Dowker-Critchley / Ford to 60 dps; per-step transcendental ledger has zero π injections in the spatial calculation. Stefan-Boltzmann π²/90 in the high-T limit on S³ × S¹_β enters only via the Matsubara sum.
+- **Sprint KG (KG-1, KG-2, KG-3) → Paper 35**: `papers/group6_precision_observations/paper_35_time_as_projection.tex` (~810 lines after edits). KG-1 verified the bare Klein-Gordon spectrum on S³ × ℝ is π-free in ℚ[√d for d square-free positive integer] for every rational m² (200 cases, n ∈ [1,50] across panel {0, 1, 1/4, 2}, symbolic verification). KG-2 explicitly identified the Matsubara mode (n=0, k=1) at ω² = 4π² as the first π-bearing eigenvalue under temporal compactification on S³ × S¹_β; before/after table in §IV. KG-3 computed the conformally coupled massless scalar Casimir on unit S³ as **E_Cas = 1/240 exact rational** via ζ_R(s−2) reduction at s=−1 with B₄ = −1/30; matches Bytsenko et al. / Dowker-Critchley / Ford to 60 dps; per-step transcendental ledger has zero π injections in the spatial calculation. Stefan-Boltzmann π²/90 in the high-T limit on S³ × S¹_β enters only via the Matsubara sum.
 
 - **Sprint KG-5 (Dirac Casimir spinor companion)**: spatial Dirac Casimir on unit S³ via Camporesi-Higuchi spectrum |λ_n| = n + 3/2 with degeneracy 2(n+1)(n+2). Spectral zeta ζ_|D|(s) = 4[ζ_R(s−2, 3/2) − (1/4) ζ_R(s, 3/2)] via Hurwitz with B_2(3/2)=11/12 and B_4(3/2)=127/240. Result: **E_Cas^Dirac = 17/480 exact rational** (full Dirac convention; Weyl 17/960; single-chirality-single-sign 17/1920). Matches Camporesi-Higuchi 1996 Eq. 5.27 to 40 dps. Confirms Paper 35 prediction in spinor sector.
 
@@ -1105,7 +1105,7 @@ Two new observation papers extending the Paper 34 projection dictionary, plus a 
 
 - **Sprint LS-7 (first pass at two-loop SE)**: iterated CC spectral action on Dirac-S³ confirms the two-loop SE prefactor (α/π)² · (Zα)⁴ · m_e c² / n³ — the 1/π² factor traces to two iterated Schwinger proper-time integrations, exactly as Paper 35 Prediction 1 specifies. Weak test (universal across two-loop QED). Strong test (LS-8a): native derivation of dimensionless bracket coefficient C_2S = +3.63 from iterated CC + bound-state Sturmian. **Critical residual reframing**: LS-7 identified that the LS-5/LS-6a "+7.10 MHz Tab 7.4 multi-loop ceiling" reading was a misreading. Eides Tab. 7.3 (proper α⁵ multi-loop QED) totals only ~+1.20 MHz; the rest of the −5.65 MHz residual is non-loop physics (recoil −2.40, finite nuclear size +1.18, hyperfine averaging ~+5.0). Multi-loop test target sharpened to ~+1.20 MHz; non-loop sectors covered by Paper 34 §III.14 rest-mass projection and Paper 23.
 
-- **Paper 36 (Bound-State QED on S³)**: `papers/observations/paper_36_bound_state_qed.tex` (~700 lines). Consolidates LS-1..LS-7 into a standalone observation paper. Architecture (Dirac-S³ + Sturmian projection at λ=Z/n); Bethe log (velocity vs acceleration vs Drake-Swainson); Eides convention reconciliation with Observation 1 (Uehling kernel double-counting); result and component breakdown including LS-7 reframed residual decomposition; LS-7 outlook with Proposition 1 sharpened (multi-loop test target ~+1.20 MHz; LS-8a strong test). Sub-percent closure confirms framework's internal completeness for one-loop QED on S³ even more cleanly than originally framed.
+- **Paper 36 (Bound-State QED on S³)**: `papers/group5_qed_gauge/paper_36_bound_state_qed.tex` (~700 lines). Consolidates LS-1..LS-7 into a standalone observation paper. Architecture (Dirac-S³ + Sturmian projection at λ=Z/n); Bethe log (velocity vs acceleration vs Drake-Swainson); Eides convention reconciliation with Observation 1 (Uehling kernel double-counting); result and component breakdown including LS-7 reframed residual decomposition; LS-7 outlook with Proposition 1 sharpened (multi-loop test target ~+1.20 MHz; LS-8a strong test). Sub-percent closure confirms framework's internal completeness for one-loop QED on S³ even more cleanly than originally framed.
 
 - **Paper 34 LS-3/LS-6a/LS-7 catalogue rows reflagged** to reflect LS-7 reframing: LS-3 row now C (resolved by LS-6a) + A; new LS-6a row with the clean 1052.19 MHz / −0.534% result and structural identification of +27.13 MHz convention shift; new LS-7 structural row.
 
@@ -1114,19 +1114,19 @@ Two new observation papers extending the Paper 34 projection dictionary, plus a 
 ### Files
 
 **New files created:**
-- `papers/observations/paper_35_time_as_projection.tex`
-- `papers/observations/paper_36_bound_state_qed.tex`
+- `papers/group6_precision_observations/paper_35_time_as_projection.tex`
+- `papers/group5_qed_gauge/paper_36_bound_state_qed.tex`
 - `debug/kg{1,2,3,5}_*.{py,memo.md}` + `debug/data/kg{1,2,3,5}_*.json` (4 sprint pairs)
 - `debug/kcc_{lambda_pslq,natural_lambda,unified_heatkernel,gaussian_check}.py` + memo + JSON
 - `debug/ls{5,6a,7}_*.{py,memo.md}` + JSON
 
 **Files modified:**
-- `papers/observations/paper_34_projection_taxonomy.tex` (Paper 34 amendments throughout)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (Paper 34 amendments throughout)
 - `CLAUDE.md` (extensive)
 - `CHANGELOG.md` (this entry)
 
 **Files moved:**
-- `papers/conjectures/Paper_4_Universality.tex` → `papers/archive/Paper_4_Universality.tex`
+- `papers/archive/Paper_4_Universality.tex` → `papers/archive/Paper_4_Universality.tex`
 
 ### What's queued for next session
 - LS-8a (~2 sprints): native derivation of C_2S = +3.63 from iterated CC + bound-state Sturmian; the strong test of Paper 35 Prediction 1 in the multi-loop sector
@@ -1138,7 +1138,7 @@ Two new observation papers extending the Paper 34 projection dictionary, plus a 
 
 ### Added — Paper 34: Projection Taxonomy and Empirical Matches Catalogue
 
-- **New paper** `papers/observations/paper_34_projection_taxonomy.tex` (~1065 lines) names the GeoVac framework's two-layer architecture explicitly:
+- **New paper** `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (~1065 lines) names the GeoVac framework's two-layer architecture explicitly:
   - **Layer 1** = bare combinatorial graph (quantum-number labels, integer eigenvalues, rational matrix elements, π-free, no physics)
   - **Layer 2** = thirteen named projection mechanisms; each adds (i) specific physical variables, (ii) specific physical dimensions, (iii) specific transcendental signature
 - **Three-axis dictionary** (Table 1, §IV) tags each projection by variable / dimension / transcendental class
@@ -1183,14 +1183,14 @@ The Paper 2 conjecture remains anomalous under Paper 34's projection-depth predi
 
 ### Notes
 
-- No production code modified in this version (all sprint deliverables in `debug/`; only `papers/observations/paper_34_projection_taxonomy.tex` and `CLAUDE.md` updated)
+- No production code modified in this version (all sprint deliverables in `debug/`; only `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` and `CLAUDE.md` updated)
 - Topological integrity tests (18/18 symbolic proofs in `tests/test_fock_projection.py` and `tests/test_fock_laplacian.py`) verified passing before commit
 
 ## [2.26.1] - 2026-04-18
 
 ### Changed — Paper 2 promoted from Conjectures to Core
 
-- **File move:** `papers/conjectures/paper_2_alpha.tex` → `papers/core/paper_2_alpha.tex` (via `git mv`; history preserved).
+- **File move:** `papers/group5_qed_gauge/paper_2_alpha.tex` → `papers/group5_qed_gauge/paper_2_alpha.tex` (via `git mv`; history preserved).
 - **Rationale:** Sprint A (2026-04-18) applied the structural reframe (see v2.26.0 notes + `debug/paper_2_reframe_skeleton.md` + `debug/alpha_sprint_a/`). Three structural verifications landed with partial positive / partial negative verdicts (α-PI, α-MI, α-SP, α-EB v2, α-X, α-LS); Marcolli-van Suijlekom 2014 gauge-network framework identified as published lineage (WH1 upgraded to MODERATE); Paper 2 body extended by 7 substantive edits (+168 lines) naming the triple m=3 selection, Hopf-measure π, APS-shape on Δ minus sign, π³α³ residual footnote (as hint, not derivation), and spectral-triple setting with Marcolli-vS citation.
 - **Conjectural-label prohibition narrowed** in `CLAUDE.md` §13.5 and §13.8: "Removal of the 'conjectural' label from Paper 2" → "Removal of the 'conjectural' label from the combination rule K = π(B + F − Δ) in Paper 2." The paper's surrounding theorems (three-homes, three obstructions, Sprint A verifications) are not conjectural; the combination rule observation remains conjectural until a first-principles derivation lands.
 - **Papers 25 and 30 updated** (same date) with Marcolli-van Suijlekom 2014 + Perez-Sanchez 2024/2025 citations establishing published gauge-network lineage.
@@ -1213,7 +1213,7 @@ The Paper 2 conjecture remains anomalous under Paper 34's projection-depth predi
 
 ### Added — Paper 27 (entropy as projection artifact)
 
-- **New core paper:** `papers/core/paper_27_entropy_projection.tex` ("Entropy as a Projection Artifact: One-Body Operators are Entanglement-Inert on Sparse Lattices"). Five results:
+- **New core paper:** `papers/group6_precision_observations/paper_27_entropy_projection.tex` ("Entropy as a Projection Artifact: One-Body Operators are Entanglement-Inert on Sparse Lattices"). Five results:
   1. Operator-theoretic floor (theorem): non-degenerate one-body GS has S_kin=0 in its natural-orbital basis. Verified S_kin/S_full ~ 1e-14 for He at n_max=2,3 (EP-1).
   2. Area-law identity: A_n = g_n² = 4n⁴ pair count corrects Paper 5's one-particle mislabeling.
   3. Cusp localization: (1s,1s) is the unique hot-node on the V_ee pair graph.

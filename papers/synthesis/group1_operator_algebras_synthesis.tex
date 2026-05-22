@@ -1,0 +1,1533 @@
+% =====================================================================
+% Group 1 synthesis paper: operator algebras / noncommutative geometry
+% arc of the GeoVac framework.
+%
+% Reading guide and unified narrative for Papers 29, 32, 38, 39, 40,
+% 42, 43, 44, 45. Math.OA style. Audience: working mathematician in
+% NCG or quantum metric geometry considering the GeoVac corpus.
+%
+% Not a survey of GeoVac as a whole; focused on the operator-algebra
+% arc. Assumes background in spectral triples, Lipschitz seminorms,
+% Latremoliere propinquity, and Connes-van Suijlekom 2021.
+%
+% Status: synthesis paper, no new theorems. May 2026.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+% Note: microtype intentionally disabled (matches Papers 38/42/45 to
+% avoid the MiKTeX font-expansion environmental issue).
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\Nt}{N_{t}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\sfive}{S^{5}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\AGV}{\mathcal{A}_{\mathrm{GV}}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\DL}{D_{L}}
+\newcommand{\JL}{J_{L}}
+\newcommand{\Krein}{\mathcal{K}}
+\newcommand{\Kplus}{\mathcal{K}^{+}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Manifold}{\mathcal{M}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Lipnorm}[1]{\lVert #1 \rVert_{\mathrm{Lip}}}
+\newcommand{\cbnorm}[1]{\lVert #1 \rVert_{\mathrm{cb}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Uone}{\mathrm{U}(1)}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\Lprop}{\Lambda^{L}}
+
+\title{The operator-algebra arc of the GeoVac framework:\\
+a reading guide for spectral triples, Latr\'emoli\`ere propinquity,
+and Lorentzian convergence}
+\author{J.~Loutey\thanks{Independent researcher.
+\texttt{jloutey@gmail.com}.
+This synthesis was prepared in an AI-augmented agentic workflow with
+Anthropic's Claude.  All design decisions and editorial choices are
+the author's responsibility.}}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We provide a unified reading of the nine papers that make up the
+operator-algebra arc of the GeoVac framework
+(Papers~29,~32,~38,~39,~40,~42,~43,~44,~45).  The arc constructs an
+explicit almost-commutative spectral triple
+$(\AGV, \HGV, \DGV)$ on the Fock-projected unit three-sphere with a
+Camporesi--Higuchi spinor Dirac operator, places it in the
+Marcolli--van~Suijlekom gauge-network lineage, and proves four
+load-bearing theorems.  First, the underlying truncated graphs are
+Ramanujan, with integer-algebraic Ihara zeros (Paper~29).  Second, the
+Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
+continuum spectral triple $\Tcal_{\sthree}$ in the Latr\'emoli\`ere
+propinquity at quantitative rate
+$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_3 \gamma_{\nmax}$
+with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38).
+Third, the rate constant $4/\pi$ is universal across the class of
+simple compact Lie groups with bi-invariant metric, via a
+Plancherel-weight $\times$ Vandermonde-Jacobian cancellation in the
+dual-Coxeter normalisation (Paper~40).  Fourth, a $K^{+}$-restricted
+weak-form Lorentzian propinquity convergence theorem holds on
+truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples (Paper~45) --
+to the author's knowledge the first such convergence result in the
+math.OA literature, closing a question deferred by Connes and van
+Suijlekom \cite{connes_vs2021}.  The constant $4/\pi$ identifies, in
+both Riemannian (Paper~38) and Lorentzian (Paper~43~\S 10.2) settings,
+as the $M_{1}$ Hopf-base measure signature of the master Mellin
+engine catalogued by the case-exhaustion theorem of Paper~32~\S\,VIII.
+This synthesis gathers the statements, sketches the load-bearing
+proofs, and exhibits the structural relationships between the papers;
+no new theorems are introduced.
+\end{abstract}
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+% =====================================================================
+
+The GeoVac framework is a discretization scheme for separable quantum
+systems on natural geometries.  When the geometry is the round
+$\sthree = \SU(2)$, the framework produces a sequence of finite
+truncations whose continuum limit is the Camporesi--Higuchi
+spectral triple of the round three-sphere
+\cite{camporesi_higuchi1996}.  The present paper synthesizes the nine
+documents in the project's operator-algebra group:
+Papers~\cite{paper29,paper32,paper38,paper39,paper40_unified,paper42,paper43,paper44,paper45}.
+Together they form a self-contained research thread in mathematical
+operator algebras with four headline results.
+
+\paragraph{Headline 1: the Hopf graphs are Ramanujan.}
+The finite Fock-projected $\sthree$ Coulomb graphs and the
+Bargmann--Segal $\sfive$ holomorphic graphs satisfy the
+Kotani--Sunada Ramanujan bound at every tested cutoff.  Their Ihara
+zeta zeros are algebraic integers with integer coefficients; no $\pi$
+or transcendental content appears in the Ihara polynomial
+factorizations (Paper~29~\cite{paper29}, Theorems~5.1--5.2 and
+Corollary~5.3).
+
+\paragraph{Headline 2: Riemannian propinquity convergence with explicit
+rate $4/\pi$.}
+The Connes--van~Suijlekom truncations
+$\Tcal_{\nmax} = (\Op_{\nmax}, \HGV, \DGV)$ of the
+$\SU(2)$ Camporesi--Higuchi spectral triple converge to the continuum
+triple $\Tcal_{\sthree}$ in the Latr\'emoli\`ere quantum
+Gromov--Hausdorff propinquity~\cite{latremoliere_metric_st_2017,
+latremoliere2018}, with
+\begin{equation}
+\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+\;\le\; C_3 \cdot \gamma_{\nmax},
+\qquad
+C_3 = 1, \qquad
+\gamma_{\nmax} \sim \frac{4}{\pi}\,\frac{\log \nmax}{\nmax}
+\quad (\nmax \to \infty).
+\label{eq:headline_2}
+\end{equation}
+The asymptotic constant $4/\pi = \Vol(S^{2})/\pi^{2}$ identifies as
+the Hopf-base measure of $\sthree \to S^{2}\times S^{1}$ and is
+discussed in detail in \S\ref{sec:gh}--\S\ref{sec:mellin} below
+(Paper~38~\cite{paper38}, Theorems~3.4 and 4.1).
+
+\paragraph{Headline 3: the rate constant $4/\pi$ is universal across
+compact simple Lie groups.}
+For any simple compact Lie group $G$ with bi-invariant metric (so
+$G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
+E_{7}, E_{8}\}$), the Plancherel-weight $\times$ Vandermonde-Jacobian
+cancellation theorem (Paper~40~\S 3.2~\cite{paper40_unified}) leaves
+exactly the rank-1 Stein--Weiss constant $4/\pi$ from each positive
+root direction's Euler--Catalan asymptote, in the dual-Coxeter
+normalisation.  The constant $C_{3} = 1$ remains asymptotically tight
+at all ranks via the PRV-summand bound of Kumar (1988) and Vinberg
+(1990), applied to the dominant image of the tensor product
+$V_{\lambda} \otimes V_{\lambda'}^{*}$.
+
+\paragraph{Headline 4: first Lorentzian propinquity convergence
+theorem.}
+On truncated $\SU(2)\times \Uone_{T}$ Krein spectral triples
+$\Tcal^{L}_{\nmax,\Nt,T}$ built via the Bizi--Brouder--Besnard
+\cite{bizi_brouder_besnard2018} signature $(3,1)$ data at
+$(m,n) = (4,6)$, the $K^{+}$-restricted weak-form Lorentzian
+propinquity satisfies
+\begin{equation}
+\Lprop(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold})
+\;\le\; C_3^{\mathrm{joint}} \cdot \gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
+\;\longrightarrow\; 0,
+\label{eq:headline_4}
+\end{equation}
+with $\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
+= O(\log \nmax / \nmax + T/\Nt)$, where
+$\Lprop(\cdot,\cdot) := \Lambda(\cdot|_{\Kplus},\cdot|_{\Kplus})$ is
+the propinquity of the standard metric spectral triple obtained from
+the Krein-positive subspace $\Kplus = \{|\psi\rangle : \JL|\psi\rangle
+= +|\psi\rangle\}$.  This is, to the author's knowledge, the first
+Lorentzian propinquity convergence theorem in the math.OA literature
+(Paper~45~\cite{paper45}, Theorem~5.1).  Connes and van~Suijlekom
+\cite{connes_vs2021} deferred this question three times to
+``elsewhere''; the present arc closes it at the K$^{+}$-weak-form
+level on truncated Krein spectral triples.
+
+\paragraph{Position against the literature.}
+The arc sits in the lineage of Connes--van~Suijlekom 2021
+\cite{connes_vs2021}, which formalised spectral truncations as
+operator systems with finite-cutoff Connes distance; of Marcolli and
+van~Suijlekom 2014 \cite{marcolli_vs2014}, which introduced
+gauge networks as a discrete-graph realisation of finite spectral
+triples carrying connection on edges; and of the subsequent
+Latr\'emoli\`ere--Hekkelman--McDonald--Toyota--Farsi--Leimbach school
+of quantitative propinquity convergence for spectral truncations
+\cite{latremoliere_metric_st_2017,
+hekkelman2022,hekkelman_mcdonald2024,
+hekkelman_mcdonald2024b,toyota2023,
+farsi_latremoliere2024,farsi_latremoliere2025,
+leimbach_vs2024}.  All these earlier convergence results
+are strictly Riemannian (and almost all are on flat structures
+$S^{1}$, $\T^{d}$, $S^{2}$ Berezin--Toeplitz).  The Paper~38
+$\SU(2)$ result and the Paper~40 generalisation are the first
+non-abelian non-flat instances at quantitative rate; the Paper~45
+result is the first Lorentzian instance.  Mondino and S\"amann's
+synthetic Lorentzian Gromov--Hausdorff program
+\cite{mondino_samann2024,mondino_samann2025} is categorically
+distinct in object class (pre-length spaces with causal diamonds,
+not operator-algebraic spectral triples) and is not in competition
+with the present arc.
+
+\paragraph{What this synthesis provides.}
+A working mathematician reading the corpus cold may find the
+nine-paper sequence difficult to navigate.  This document collects
+the constructions, restates the load-bearing theorems with
+cross-references back to the original papers, and exhibits the
+relationships between them.  No new theorems are introduced.  The
+reader is assumed familiar with spectral triples
+\cite{connes1995,chamseddine_connes2010}, Lipschitz seminorms and
+Rieffel quantum metric spaces, and the Latr\'emoli\`ere propinquity
+\cite{latremoliere_metric_st_2017,latremoliere2018}.
+Familiarity with \cite{connes_vs2021} is helpful but not strictly
+required.  No knowledge of the GeoVac physics-side corpus
+(quantum chemistry, QED, precision spectroscopy) is assumed; this
+arc is self-contained from the operator-algebra side.
+
+% =====================================================================
+\section{The GeoVac spectral triple}
+\label{sec:triple}
+% =====================================================================
+
+\subsection{The Camporesi--Higuchi data on $\sthree$}
+
+We work throughout on the unit three-sphere $\sthree$, identified
+with $\SU(2)$ under its bi-invariant round metric.  Following
+Camporesi and Higuchi \cite{camporesi_higuchi1996}, the spinor
+bundle is parallelisable, of rank $2$, and the Dirac operator
+$\DCH$ has spectrum
+\begin{equation}
+\mathrm{spec}(\DCH) = \{\pm(n + \tfrac{3}{2}) : n \in \N_{0}\},
+\qquad
+g^{\mathrm{Dirac}}_{n} = 2(n+1)(n+2)
+\label{eq:ch_spectrum}
+\end{equation}
+on each chirality of the half-integer Hurwitz-shifted shell.  We
+write $\Hilb_{\sthree} = L^{2}(\sthree, \Sigma)$ for the chirality-
+doubled spinor Hilbert space carrying the Camporesi--Higuchi data.
+
+\subsection{The GeoVac algebra, Hilbert space, and Dirac operator}
+
+The GeoVac construction (Paper~32~\S 3~\cite{paper32}) takes the
+following data:
+
+\begin{itemize}\setlength\itemsep{0pt}
+\item $\AGV \subset C^{\infty}(\sthree)$ is the involutive algebra
+of complex-valued smooth functions on $\sthree$, with the standard
+pointwise product and complex conjugation;
+\item $\HGV = \Hilb_{\sthree}$, with $\AGV$ acting by pointwise
+multiplication;
+\item $\DGV = \DCH$, the Camporesi--Higuchi Dirac operator;
+\item $J_{\mathrm{GV}}$ is the charge-conjugation real structure
+inherited from the spin structure of $\sthree$, satisfying
+$J_{\mathrm{GV}}^{2} = -I$ (Euclidean KO-dimension $3$),
+$J_{\mathrm{GV}} \DGV = + \DGV J_{\mathrm{GV}}$.
+\end{itemize}
+
+The triple $(\AGV, \HGV, \DGV; J_{\mathrm{GV}})$ is real, odd
+(no $\Z_{2}$-grading; KO-dimension $3$), and has compact resolvent
+$|\DGV|^{-1}$ with eigenvalue multiplicities given by
+\eqref{eq:ch_spectrum}.  The Connes axiom audit is recorded in
+Paper~32~\S 4~\cite{paper32}, where each of the seven axioms (order
+zero, bounded commutators, compact resolvent, order one, real
+structure, $\Z_{2}$-grading by convention, and finite summability)
+is checked.
+
+\subsection{The Marcolli--van~Suijlekom lineage}
+
+The role of GeoVac in the ecosystem of finite-and-graph spectral
+triples is explained in Paper~32~\S 7.  The Marcolli--van~Suijlekom
+construction \cite{marcolli_vs2014} attaches a finite spectral
+triple to each vertex of a graph and a connection (gauge group
+element) to each edge; the spectral action of the resulting object
+recovers Wilson lattice gauge theory.  The continuum-limit issue
+addressed by Perez-Sanchez \cite{perez_sanchez2024,
+perez_sanchez2025} clarifies that the limit is Yang--Mills without
+Higgs by default; a Higgs sector appears only via off-diagonal data
+on the finite factor.
+
+The GeoVac Fock-projected $\sthree$ graph fits this template
+naturally.  Its vertices are the Fock index $(n, \ell, m)$ with
+$n = 2j + 1$, $\ell$ the orbital, and $m$ the magnetic quantum
+number, providing a Peter--Weyl-indexed basis on $\sthree = \SU(2)$.
+Each Fock shell carries a finite spectral triple
+(roughly, a finite-dimensional subrepresentation of the
+Camporesi--Higuchi triple), and the edge structure encodes the
+SO(4) selection rules of the underlying graph.  The graph admits a
+$U(1)$ Wilson construction (recorded as GeoVac internal Paper~25),
+an $\SU(2)$ Wilson construction on $\sthree = \SU(2)$ (Paper~30),
+and an $\SU(3)$ Wilson construction on the Bargmann--Segal $\sfive$
+\cite{paper24}, all of which carry the universal kinetic
+coefficient $1/(4 N_{c})$.
+
+The Connes axiom audit (Paper~32~\S 4~\cite{paper32}) checks
+explicitly that $J^{2} = -I$ and $JD = +DJ$ hold on the truthful
+Camporesi--Higuchi data at every finite cutoff
+$\nmax \in \{1, 2, 3\}$ tested.  These two relations, together with
+the parallelisability of $\sthree = \SU(2)$, distinguish the
+GeoVac triple from the Connes--van~Suijlekom circulant comparator,
+which is commutative and gives propagation number $1$.
+
+\subsection{Truncations as operator systems}
+
+For each $\nmax \in \N$, the orthogonal projection
+$P_{\nmax}: \HGV \to \HGV$ onto the span of Peter--Weyl modes with
+$n \le \nmax$ defines a truncated operator system
+\begin{equation}
+\Op_{\nmax}
+\;:=\;
+P_{\nmax} \, \AGV \, P_{\nmax}
+\;\subset\;
+\mathcal{B}(P_{\nmax}\HGV),
+\label{eq:operator_system}
+\end{equation}
+which is self-adjoint, contains the identity, but is in general
+\emph{not} multiplicatively closed.  The defect is precisely the
+content of the Connes--van~Suijlekom operator-system formalism
+\cite{connes_vs2021}: in the natural envelope, $\Op_{\nmax}$ has
+propagation number $\mathrm{prop}(\Op_{\nmax}) = 2$ at every tested
+$\nmax \in \{2, 3, 4\}$, matching the Toeplitz $S^{1}$
+result \cite[Proposition 4.2]{connes_vs2021} verbatim.  A concrete
+witness pair at $\nmax = 2$ is $M_{2,1,0}^{2} \notin \Op_{2}$ with
+$14.9\%$ Frobenius residual against $\Op_{2}$, deficit concentrated
+on the top-shell diagonal in the natural Avery basis
+(Paper~32~\S 3.4~\cite{paper32}).  The truncated triple is then
+\begin{equation*}
+\Tcal_{\nmax} = (\Op_{\nmax}, P_{\nmax}\HGV, P_{\nmax}\DGV P_{\nmax}),
+\end{equation*}
+with continuum limit
+$\Tcal_{\sthree} = (\AGV, \HGV, \DGV)$.
+
+% =====================================================================
+\section{The Hopf graphs as Ramanujan substrate}
+\label{sec:ramanujan}
+% =====================================================================
+
+Before turning to convergence, we record the most basic
+spectral-graph property of the underlying finite truncations.
+
+\paragraph{Ihara zeta of the Fock graph.}
+For each $\nmax$, let $G_{\nmax}$ denote the directed Fock-projected
+$\sthree$ Coulomb graph: vertices are triples $(n, \ell, m)$ with
+$n \le \nmax$, $\ell < n$, $|m| \le \ell$; edges encode SO(4)
+selection rules.  The Ihara zeta function $\zeta_{G_{\nmax}}(s)$ is
+computed in Paper~29~\S 4~\cite{paper29} via the Ihara--Bass
+determinantal formula and via the $2E \times 2E$ Hashimoto
+non-backtracking edge operator.
+
+\begin{theorem}[Paper~29, Theorems~5.1--5.2]
+\label{thm:ramanujan}
+For every $\nmax \in \{2, 3, 4, 5\}$, the Fock-projected $\sthree$
+graph $G_{\nmax}$ satisfies the Kotani--Sunada Ramanujan bound
+strictly:\ the largest non-trivial Hashimoto eigenvalue sits strictly
+inside the spectral radius $\sqrt{q_{\max}}$ associated with the
+maximum (Perron) vertex degree.  All non-trivial Ihara zeros are
+algebraic integers; the corresponding Ihara polynomials factor over
+$\Z[s]$ into integer-coefficient pieces, and several factorizations
+admit explicit closed forms (e.g.~$(4s^{2}+1)^{2}$, $(9s^{2}+1)^{4}$,
+the $12 + 22$ dichotomy for $\sfive$ at $N_{\max} = 3$).
+\end{theorem}
+
+\paragraph{Structural consequences.}
+Theorem~\ref{thm:ramanujan} secures two facts about the truncated
+graphs that are used implicitly elsewhere in the arc.  First, no $\pi$
+or transcendental quantity appears anywhere in the Ihara
+polynomials, in any of the tested factorizations
+(Paper~29~\S 5.4~\cite{paper29}, Corollary on integer-algebraicity).
+This is the graph-spectral analog of the
+$\pi$-source case-exhaustion theorem (Paper~32~\S 8): both say that
+$\pi$ enters only through specific named mechanisms (Hopf-base measure,
+spectral action, vertex-parity Hurwitz character), never in the bare
+combinatorial data.  Second, the Hashimoto-spectrum Poisson
+statistics (Paper~29~\S 6.3) are categorically distinct from the
+GUE-like statistics seen on the spectral-zeta side of the framework,
+making clear that the Weil dictionary between Selberg and Riemann
+breaks at GeoVac by design.
+
+The Ramanujan property of the truncated graphs underwrites our
+freedom to take naive sums and traces over $G_{\nmax}$ without
+worrying about pathological spectral gaps: the cutoff
+graphs are well-conditioned for spectral analysis, and the Ihara
+polynomials are entirely in $\Z[s]$.  This is exactly the kind of
+substrate one wants under any convergence theorem to follow.
+
+% =====================================================================
+\section{Riemannian Gromov--Hausdorff convergence: the central
+theorem}
+\label{sec:gh}
+% =====================================================================
+
+\subsection{Statement (Paper~38)}
+
+The load-bearing theorem of the arc is Paper~38~\cite{paper38},
+Theorem~3.4.
+
+\begin{theorem}[Paper~38, GH convergence on $\sthree = \SU(2)$]
+\label{thm:gh_su2}
+The Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ of the round
+$\SU(2)$ Camporesi--Higuchi spectral triple converge to
+$\Tcal_{\sthree}$ in the Latr\'emoli\`ere quantum
+Gromov--Hausdorff propinquity:
+\begin{equation}
+\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+\;\le\;
+C_{3} \cdot \gamma_{\nmax} \;\to\; 0
+\quad (\nmax \to \infty),
+\label{eq:gh_su2}
+\end{equation}
+with $C_{3} = 1$ (asymptotic tight via the PRV summand bound) and
+asymptotic constant $4/\pi$:
+\begin{equation}
+n \,\gamma_{n} \;\sim\; (4/\pi)\,\log n
+\qquad (n \to \infty).
+\label{eq:gh_rate_constant}
+\end{equation}
+A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$ holds
+for all $n \ge 2$.
+\end{theorem}
+
+The proof proceeds via five lemmas L1$'$, L2, L3, L4, L5 of
+Paper~38~\S 4--\S 6.  We sketch each.
+
+\subsection{Lemma L1$'$: chirality-doubled truncated operator system}
+
+The original Connes--van~Suijlekom truncation is on the scalar Fock
+graph; the spinor lift to the full Camporesi--Higuchi bundle (with
+both chiralities) is the subject of an internal sprint (R3.5).  The
+truthful Camporesi--Higuchi data at finite $\nmax$ has the property
+that on most cross-shell pairs the Connes distance is $+\infty$
+(an artefact of the $n$-shell degeneracy in the Avery basis); this
+is repaired by lifting to the full Dirac sector with both
+chiralities and off-diagonal shell-coupling multipliers.  The
+chirality-doubled operator system has dimension
+$\dim \Op_{\nmax} = 1, 14, 55, 140, \dots$ at
+$\nmax = 1, 2, 3, 4, \dots$ and every cross-shell pair has finite
+Connes distance.  See Paper~38~\S 4.1~\cite{paper38} for the
+explicit construction.
+
+\subsection{Lemma L2: central spectral Fej\'er kernel on $\SU(2)$}
+
+The propinquity tunneling pair built in L5 below requires a positive,
+state-preserving, central good kernel on $\SU(2)$ whose
+mass-concentration moment vanishes at a known rate.  Paper~38~\S 4.2
+constructs the central spectral Fej\'er kernel
+\begin{equation}
+K_{\nmax}(g) \;=\; \frac{1}{Z_{\nmax}}
+\left|\sum_{j \le j_{\max}} \sqrt{2j+1}\,\chi_{j}(g)\right|^{2},
+\qquad
+j_{\max} = (\nmax-1)/2,
+\quad
+Z_{\nmax} = \frac{\nmax(\nmax+1)}{2}.
+\label{eq:fejer_kernel}
+\end{equation}
+The Plancherel symbol on the Avery--Wen--Avery basis is
+$\widehat{K}(j) = (2j+1)/Z_{\nmax}$ for $j \le j_{\max}$.  The
+cb-norm of the associated Herz--Schur multiplier acting on the
+group $C^{*}$-algebra is
+\begin{equation}
+\cbnorm{S_{K_{\nmax}}} \;=\; \frac{2}{\nmax + 1}
+\;=\; O\!\bigl(1/\nmax\bigr),
+\label{eq:cb_norm}
+\end{equation}
+via the Bo\.zejko--Fendler central-multiplier equality
+\cite{bozejko_fendler1991} on amenable compact groups (Pier
+\cite{pier1984}; Paulsen \cite{paulsen2002}; Pisier
+\cite{pisier2001}).
+
+\paragraph{The asymptotic constant $4/\pi$.}
+The mass-concentration moment $\gamma_{\nmax}$ of the kernel
+admits a closed-form decomposition via Stein--Weiss-type integration
+by parts \cite{stein_weiss1971}, leading to the
+\emph{Stein--Weiss sharpening} (Paper~38, Appendix~A):
+\begin{equation}
+\gamma_{\nmax}
+\;=\;
+\pi - \frac{4\, T_{\nmax}}{\pi\, Z_{\nmax}},
+\quad
+\text{with } \frac{n\,\gamma_{n}}{\log n} \to \frac{4}{\pi}
+\;\text{ as } n \to \infty.
+\label{eq:gamma_asymptote}
+\end{equation}
+The constant $4/\pi = \Vol(S^{2})/\pi^{2}$ is the
+\emph{Hopf-base measure factor} in the $\SU(2)/\Uone$ Haar
+normalisation.  Concretely, for the Hopf bundle
+$\sthree \to S^{2}$, $\Vol(S^{2}) = 4\pi$ and the right-hand side of
+\eqref{eq:gamma_asymptote} normalises by $\pi^{2}$ from the SU(2)
+character integration $\int_{0}^{2\pi} \sin^{2}(\theta/2)\,d\theta$.
+The expected one-log slowdown of the non-abelian SU(2) rate compared
+with the Leimbach--van~Suijlekom torus rate $O(1/\nmax)$
+\cite{leimbach_vs2024} is precisely the $\log n$ factor in
+\eqref{eq:gamma_asymptote}.
+
+\subsection{Lemma L3: Lipschitz comparison with $C_{3} = 1$}
+
+For each $f \in C^{\infty}(\sthree)$ and each truncated multiplier
+$\Mat_{f}$ on $\Op_{\nmax}$, the Lipschitz comparison
+\begin{equation}
+\opnorm{[\DCH, \Mat_{f}]}
+\;\le\;
+C_{3} \cdot \norm{\nabla f}_{L^{\infty}(\sthree)}
+\label{eq:lipschitz_bound}
+\end{equation}
+holds with $C_{3} = 1$ (Paper~38, Theorem~5.2).  The proof uses
+SO(4) selection rules: the off-diagonal element of $[\DCH, \Mat_{f}]$
+between Peter--Weyl shells $V_{\lambda}$ and $V_{\lambda'}$ is
+bounded by $\sqrt{C(\lambda)} - \sqrt{C(\lambda')}$ where
+$C(\lambda)$ is the quadratic Casimir of the highest weight; the
+Dirac-triangle inequality $|D(\pi) - D(\pi')| \le \sqrt{C(\sigma)}$
+on intertwining summands $\sigma \subset \pi \otimes \pi'^{*}$
+secures $C_{3} \le 1$, and the Avery harmonic gradient scaling
+forces $C_{3} = 1$ in the limit $\nmax \to \infty$.  At any finite
+$\nmax$, $C_{3} = (N-1)/\sqrt{N^{2}-1}$ for $N = \nmax$, which
+converges to $1$ from below.
+
+The same bound is proved for all simple compact Lie groups in
+Paper~40~\S 3.3~\cite{paper40_unified}, with asymptotic tightness
+$C_{3}(G) = 1$ at all ranks; see
+\S\ref{sec:universality} below.
+
+\subsection{Lemma L4: Berezin reconstruction}
+
+A Berezin map $B_{\nmax}: C(\sthree) \to \Op_{\nmax}$ is constructed
+in Paper~38~\S 5.3 as
+\begin{equation}
+B_{\nmax}(f) \;=\; \sum_{N \le \nmax,\,L,\,M}
+\widehat{K}(N)\, c_{NLM}\, M_{NLM},
+\quad
+\widehat{K}(N) = N / Z_{\nmax}.
+\label{eq:berezin}
+\end{equation}
+This is the $\SU(2)$ non-K\"ahler analog of the Connes--van~Suijlekom
+\cite{connes_vs2021} Fej\'er kernel reconstruction on $S^{1}$ and the
+non-holomorphic analog of Hawkins \cite{hawkins2000}.  Four properties
+are established:
+\begin{itemize}\setlength\itemsep{0pt}
+\item[(a)] Positivity: for $f \ge 0$, $B_{\nmax}(f)$ is a positive
+operator on $P_{\nmax}\HGV$ (via convolution + positivity-preserving
+compression);
+\item[(b)] Contractivity: $\opnorm{B_{\nmax}(f)} \le \norm{f}_{\infty}$;
+\item[(c)] Approximate identity: $\opnorm{B_{\nmax}(f) - P_{\nmax}
+M_{f} P_{\nmax}} \le \gamma_{\nmax} \norm{\nabla f}_{\infty}$ with
+$\gamma_{\nmax}$ as in L2;
+\item[(d)] L3 compatibility: $\opnorm{[\DCH, B_{\nmax}(f)]} \le
+\norm{\nabla f}_{\infty}$ (i.e.~$C_{3} = 1$ is inherited via
+$\widehat{K} \le 1$).
+\end{itemize}
+This is the operator-system analog of the Berezin--Toeplitz
+quantisation; see Hekkelman--McDonald \cite{hekkelman_mcdonald2024}
+for the closely related $\T^{d}$ case.
+
+\subsection{Lemma L5: Latr\'emoli\`ere propinquity assembly}
+
+The tunneling pair $(B_{\nmax}, P_{\nmax})$ between
+$\Tcal_{\sthree}$ and $\Tcal_{\nmax}$ has reach
+$\le \gamma_{\nmax}$ (by L4(c) approximate identity and L2(g)
+Bo\.zejko--Fendler dual estimate), and height contributions are
+bounded by L4(b) contractivity and the fact that the projection $P$
+contributes $\mathrm{height}_{P} = 0$.  The assembly machinery is
+Latr\'emoli\`ere \cite{latremoliere_metric_st_2017}, applied
+verbatim.  This gives
+\begin{equation}
+\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+\;\le\; C_{3} \cdot \gamma_{\nmax} \;\to\; 0,
+\label{eq:gh_assembly}
+\end{equation}
+completing the proof of Theorem~\ref{thm:gh_su2}.
+
+\subsection{Numerical verification}
+
+Paper~38 records the explicit $\Lambda$ values at small cutoffs:
+\begin{equation}
+\Lambda(\Tcal_{2}, \Tcal_{\sthree}) \approx 2.0746,
+\quad
+\Lambda(\Tcal_{3}, \Tcal_{\sthree}) \approx 1.6101,
+\quad
+\Lambda(\Tcal_{4}, \Tcal_{\sthree}) \approx 1.3223,
+\label{eq:numerical_lambda}
+\end{equation}
+with $\Lambda(4)/\Lambda(2) = 0.637$.  These are monotone decreasing
+and consistent with the $O(\log \nmax / \nmax)$ rate.
+
+\subsection{Tensor extension (Paper~39)}
+
+Paper~39 extends Theorem~\ref{thm:gh_su2} to tensor products
+$\Tcal_{\sthree}^{\lambda_{a}} \otimes \Tcal_{\sthree}^{\lambda_{b}}$
+of two copies of the same manifold at distinct focal lengths
+$\lambda_{a} \ne \lambda_{b}$ \cite{paper39}.  The result is a
+proved-at-qualitative-rate theorem closing the published-open NCG
+question of convergence for the tensor of two infinite metric
+spectral triples.  Two technical points underwrite the closure:
+\begin{itemize}\setlength\itemsep{0pt}
+\item \textbf{R1: asymmetric Pythagorean Leibniz.}  The Pythagorean
+Leibniz bound on tensor commutators (Connes--Marcolli graded form)
+combined with an asymmetric-supremum correction gives the full
+operator-system constant $C_{3}^{(2)}$ that is bounded away from
+$2 \sqrt{2}$ and approaches the single-factor $C_{3} = 1$
+asymptotically.
+\item \textbf{R2: Latr\'emoli\`ere 2017 explicit
+$\varepsilon_{\mathrm{cross}}$.}  The cross term in the tunneling
+pair is bounded explicitly by Latr\'emoli\`ere
+\cite{latremoliere_metric_st_2017}~\S 4, with rate $O(\max \gamma)$
+and constant $\le 2\sqrt{2}$.
+\end{itemize}
+
+The bit-identical convergence ratio
+$\Lambda(\nmax,\nmax) / \Lambda(2,2)$ on the diagonal matches the
+single-factor Paper~38 ratio numerically, providing a load-bearing
+sanity check.
+
+% =====================================================================
+\section{The universality of the rate constant $4/\pi$}
+\label{sec:universality}
+% =====================================================================
+
+Paper~40 \cite{paper40_unified} extends Theorem~\ref{thm:gh_su2}
+from $\SU(2)$ to the class of all simple compact Lie groups with
+bi-invariant metric.
+
+\begin{theorem}[Paper~40, universal rate constant]
+\label{thm:universal_rate}
+Let $G$ be a simple compact connected Lie group of rank $r \ge 1$
+with bi-invariant metric (so
+$G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4},
+E_{6}, E_{7}, E_{8}\}$).  The truncated Camporesi--Higuchi triples
+$\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the Latr\'emoli\`ere
+propinquity with the same asymptotic rate constant as
+\eqref{eq:gh_rate_constant}: namely $4/\pi$, in the dual-Coxeter
+normalisation.  The constant $C_{3}(G) = 1$ remains asymptotically
+tight at all ranks.
+\end{theorem}
+
+\paragraph{Plancherel-weight $\times$ Vandermonde-Jacobian
+cancellation.}
+The proof of Theorem~\ref{thm:universal_rate} runs through a
+structural identity which we record because it is the deepest
+algebraic content of the universality.  In the central spectral
+Fej\'er kernel on $G$,
+\begin{equation}
+K_{\nmax}(g) \;=\; \frac{1}{Z_{\nmax}(G)}
+\left|\sum_{\lambda \,:\, |\lambda + \rho|^{2} \le M(\nmax)^{2}}
+\sqrt{\dim V_{\lambda}}\,\chi_{\lambda}(g)\right|^{2},
+\label{eq:fejer_kernel_general}
+\end{equation}
+the Plancherel weight $\sqrt{\dim V_{\lambda}}$ on the squared
+amplitude (so the weight is $\dim V_{\lambda}$) and the Vandermonde
+Jacobian $|\Delta(t)|^{2}$ in the Weyl integration formula on $G$
+share the same $\prod_{\alpha > 0}$ product structure over positive
+roots.  In the dual-Coxeter normalisation these products cancel
+exactly, leaving only the rank-1 Stein--Weiss constant $4/\pi$ from
+each positive-root direction's Euler--Catalan asymptote
+$\sum_{d \mathrm{ odd}} 1/d^{2} = \pi^{2}/8$.  The universal constant
+$4/\pi$ is then \emph{independent} of rank, Weyl group order, and
+Lie type.
+
+\paragraph{Asymptotic tightness $C_{3}(G) = 1$ via PRV.}
+The Lipschitz comparison bound \eqref{eq:lipschitz_bound} extends to
+$G$ via the PRV-summand theorem (Kumar 1988, Vinberg 1990):\ for
+every Weyl group element $w \in W$, the dominant image
+$\sigma_{w}$ of $\lambda + w\lambda'^{*}$ is a summand of
+$V_{\lambda} \otimes V_{\lambda'}^{*}$, and
+$|\sigma_{w} + \rho|^{2} \ge |\lambda - \lambda'|^{2} + |\rho|^{2}$.
+This covers the asymptotic family
+$(\nmax, 0, \dots, 0) \otimes (1, 0, \dots, 0)^{*}$ rigorously, giving
+$C_{3}(G) = 1$ asymptotic-tight in all simple Lie algebra types
+$A_{n}, B_{n}, C_{n}, D_{n}, G_{2}, F_{4}, E_{6}, E_{7}, E_{8}$.
+Interior (non-PRV) summands at finite cutoff are verified
+numerically across the panel $\SU(3), \SU(4), \mathrm{Sp}(2), G_{2}$
+at $5641/5641$ cells; analytic closure via Brauer--Klimyk signed-sum
+cancellation is bookkeeping.
+
+\paragraph{Companion: state-space GH.}
+The state-space Gromov--Hausdorff convergence (without rate and
+without Dirac) at the same generality was proved by
+Gaudillot-Estrada--van~Suijlekom (IMRN 2025, paper rnaf197).
+Paper~40 provides the missing rate constant, the Lipschitz spinor
+bound, and the asymptotic tightness, lifting Gaudillot-Estrada--vS
+from state-space GH to spectral-triple-level propinquity convergence
+with explicit rate.
+
+% =====================================================================
+\section{Modular structure and Wick rotation}
+\label{sec:modular}
+% =====================================================================
+
+\subsection{The four-witness Wick-rotation theorem (Paper~42)}
+
+The Wick rotation between Euclidean and Lorentzian field theory is
+classically formulated through four equivalent presentations on a
+flat spacetime:
+\begin{itemize}\setlength\itemsep{0pt}
+\item Hartle--Hawking 1976 \cite{hartle_hawking1976}:
+the temperature of the Euclidean cigar's $\tau$-circumference
+identifies as the Hawking temperature;
+\item Sewell 1982 \cite{sewell1982}:
+the KMS state at inverse-temperature $\beta = 2\pi/\kappa_{g}$ is the
+wedge vacuum;
+\item Bisognano--Wichmann 1976 \cite{bisognano_wichmann1976}:
+the modular automorphism group of the wedge von~Neumann algebra
+acts as boosts around the wedge edge;
+\item Unruh 1976 \cite{unruh1976}:
+an accelerated observer with proper acceleration $a$ sees a
+$T_{U} = a/(2\pi)$ thermal bath in the vacuum.
+\end{itemize}
+On a flat background, the four are equivalent under standard
+Wick-rotation arguments.  On a curved background like $\sthree$ they
+are not obviously equivalent, and at finite cutoff (operator-system
+level) they require separate construction.
+
+Paper~42 \cite{paper42} establishes the four-witness theorem at the
+operator-system level on the truncated Camporesi--Higuchi spectral
+triple $\Tcal_{\nmax}$ via two structurally independent but
+operator-action conjugate constructions:
+
+\begin{theorem}[Paper~42, BW-$\alpha$ geometric realisation]
+\label{thm:bw_alpha}
+For each $\nmax \in \{2, 3, 4, 5\}$, there exists a wedge projection
+$P_{W} = \tfrac{1}{2}(I + R_{\mathrm{polar}})$ on $P_{\nmax}\HGV$
+(bit-exact idempotent and Hermitian) and a geometric modular
+Hamiltonian
+\begin{equation}
+K_{\alpha}^{W} \;=\; J_{\mathrm{polar}}
+\quad \text{(rotation generator preserving } W),
+\label{eq:k_alpha}
+\end{equation}
+with integer spectrum $\{\text{two}\, m_{j}\}$ on the full-Dirac basis.
+The modular flow satisfies $\sigma_{2\pi}(O) = O$ bit-exact (residual
+$O(\sqrt{\dim \Hilb} \cdot \varepsilon_{\mathrm{machine}})$) for the
+four witnesses BW, Hartle--Hawking, Sewell, Unruh, with cross-witness
+collapse residual identically zero.
+\end{theorem}
+
+\begin{theorem}[Paper~42, BW-$\gamma$ Tomita--Takesaki realisation]
+\label{thm:bw_gamma}
+On the Krein-GNS Hilbert--Schmidt space
+$\Hilb_{\mathrm{GNS}} = M_{\dim W}(\C)$ with KMS state
+$\rho_{W} = e^{-K_{\alpha}^{W}}/Z$ and the BW choice $H_{\mathrm{local}}
+:= K_{\alpha}^{W} / \beta$, the polar decomposition
+$S = J_{\mathrm{TT}} \cdot \Delta^{1/2}$ gives a Tomita-Takesaki
+modular Hamiltonian $K_{\mathrm{TT}} = -\log \Delta$ with the
+same integer spectrum, and the operator-action conjugacy
+\begin{equation}
+\sigma_{t}^{\mathrm{TT}}(a) \;=\; \sigma_{-t}^{\alpha}(a)
+\label{eq:bw_alpha_gamma_conjugacy}
+\end{equation}
+holds bit-exact at every tested $t \in \{1, \pi, 2\pi\}$.  The
+modular operator $\Delta$ satisfies $J_{\mathrm{TT}}^{2} = +I$,
+categorically distinct from the Connes $J_{\mathrm{GV}}$ (KO-dim $3$,
+$J^{2} = -I$).
+\end{theorem}
+
+\paragraph{Load-bearing scope finding (Paper~42~\S 7.2).}
+A key derived structural finding is that the local Hamiltonian
+required by Tomita--Takesaki at $\beta = 2\pi$ \emph{must} be
+$H_{\mathrm{local}} = K_{\alpha}^{W} / \beta$ rather than the
+intrinsic Camporesi--Higuchi Dirac operator $\DCH$.  The intrinsic
+$\DCH$ has half-integer spectrum, so $\beta \cdot \DCH$ would not have
+integer eigenvalues and the bit-exact closure $e^{i \cdot 2\pi \cdot
+n} = 1$ would fail.  Spectral-action (Chamseddine--Connes
+\cite{chamseddine_connes2010}) and thermal-time (Connes--Rovelli)
+paradigms point to different generators on the wedge KMS state.
+This is the open question O3 of Paper~42~\S 10, sharpened in
+Paper~43 to the signature-independence statement below.
+
+\subsection{Lorentzian extension at finite cutoff (Paper~43)}
+
+Paper~43 \cite{paper43} extends the four-witness theorem to the
+Lorentzian Krein space at signature $(3,1)$, built via the
+Bizi--Brouder--Besnard prescription \cite{bizi_brouder_besnard2018}
+at $(m,n) = (4,6)$ in the Peskin--Schroeder chiral basis, with
+Lorentzian Dirac
+\begin{equation}
+\DL \;=\; i\,\bigl(\gamma^{0} \otimes \partial_{t}
+\;+\; \DGV \otimes I_{\Nt}\bigr)
+\label{eq:lorentzian_dirac}
+\end{equation}
+per van~den~Dungen 2016 Proposition 4.1 \cite{vandungen2016}.
+
+\begin{theorem}[Paper~43~\S 5--\S 7, Lorentzian four-witness
+at finite cutoff]
+\label{thm:lorentzian_four_witness}
+At every tested $(\nmax, \Nt) \in \{1, 2, 3\} \times \{1, 11, 21\}$,
+the Krein-level analogues of \eqref{eq:k_alpha} and
+\eqref{eq:bw_alpha_gamma_conjugacy} hold bit-exact:
+\begin{itemize}\setlength\itemsep{0pt}
+\item[(i)] The geometric Lorentzian modular Hamiltonian
+$K_{L}^{\alpha,W} = J_{\mathrm{polar}}|_{W_{L}}$ has integer
+spectrum on the Krein hemispheric wedge.
+\item[(ii)] The Krein-Tomita modular operator $\Delta_{L}$ admits a
+polar decomposition $S = J_{L,\mathrm{TT}} \cdot \Delta_{L}^{1/2}$;
+the Tomita modular Hamiltonian $K_{L}^{\mathrm{TT}}$ has integer
+spectrum.
+\item[(iii)] $\sigma_{2\pi}^{L,\alpha}(O) = O$ and
+$\sigma_{2\pi}^{L,\mathrm{TT}}(a) = a$ bit-exact, with cross-witness
+collapse residual zero.
+\item[(iv)] At $\Nt = 1$, the Lorentzian construction reduces to the
+Riemannian one of Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma}
+bit-identically.
+\end{itemize}
+\end{theorem}
+
+\paragraph{Signature-independence of the load-bearing scope.}
+The deepest structural finding of Paper~43 is that the
+``$H_{\mathrm{local}} \ne D_{W}^{L}$'' statement is
+\emph{signature-independent} at the Riemannian reduction.  At
+$\Nt = 1$ the residual norm $\|H_{\mathrm{local}} - D_{W}^{L}\|_{F}$
+on the Lorentzian Krein wedge equals the Riemannian-side value at
+every $\nmax$ (Paper~43~\S 7.1):
+\begin{equation*}
+\|H_{\mathrm{local}}|_{(3,1),\Nt=1} - D_{L}^{W}|_{\Nt=1}\|_{F}
+\;=\;
+\|H_{\mathrm{local}}^{\mathrm{Riem}} - D_{W}\|_{F}
+\qquad
+(\text{at every } \nmax).
+\end{equation*}
+At $\Nt > 1$ the Lorentzian residual is refined upward by the
+temporal-derivative content of $\DL$: the spectral-action object
+$\DL$ has more content than $\DGV$, so the gap between
+$H_{\mathrm{local}}$ (modular-Hamiltonian generator) and $D_{W}^{L}$
+(spectral-action object) widens with temporal cutoff.  This refines
+the Paper~42~\S 10 open question O3 from
+``open about signature-dependence'' to a deeper structural feature.
+
+\subsection{Pythagorean HS-orthogonality and the $1/\pi^{2}$
+signature}
+
+Paper~43~\S 10.2 records a Pythagorean refinement of the modular vs
+spectral-action gap.  Let $\langle \cdot, \cdot \rangle_{\mathrm{HS}}$
+denote the Hilbert--Schmidt inner product on the wedge operator
+algebra.
+
+\begin{corollary}[Paper~43~\S 10.2, HS-orthogonality on the
+Lorentzian wedge]
+\label{cor:hs_orthogonality}
+For every $\kappa_{g} > 0$ and every panel cell
+$\nmax \in \{1, \dots, 6\}$, $\Nt \in \{1, 11\}$, and witness
+$w \in \{\mathrm{BW}, \mathrm{HH}_{1}, \mathrm{HH}_{2},
+\mathrm{Sew}, \mathrm{Unruh}_{1}, \mathrm{Unruh}_{2}\}$:
+\begin{equation}
+\langle H_{\mathrm{local}}, D_{W}^{L} \rangle_{\mathrm{HS}}
+\;=\; 0
+\qquad (\text{bit-exact}),
+\label{eq:hs_orthogonal}
+\end{equation}
+and the residual norm has the closed form
+\begin{equation}
+\|H_{\mathrm{local}} - D_{W}^{L}\|_{F}^{2}
+\;=\;
+\frac{\kappa_{g}^{2}}{4\pi^{2}}\,S(n)
+\;+\; D(n),
+\quad
+S(n) = \frac{n(n+1)(n+2)(2n^{2}+4n-1)}{15},
+\quad
+D(n) = \frac{n(n+1)(n+2)(2n+1)(2n+3)}{20}.
+\label{eq:hs_closed_form}
+\end{equation}
+\end{corollary}
+
+The closed form \eqref{eq:hs_closed_form} is PSLQ-verified at
+$100$ digits with coefficient ceiling $10^{6}$ at $18$ panel cells.
+The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ is the same
+$M_{1}$ Hopf-base measure signature
+\eqref{eq:gamma_asymptote} that appears in the Paper~38 GH
+convergence rate constant $4/\pi$.  This crosswiring between
+sections \ref{sec:gh} and \ref{sec:modular} is taken up systematically
+in \S\ref{sec:mellin}.
+
+\paragraph{Subspace decomposition.}
+The mechanism is the orthogonal decomposition of the operator
+algebra $B(\Krein_{W})$ into a diagonal subspace (where
+$H_{\mathrm{local}} = K_{\alpha}^{W}/\beta$ lives, since
+$K_{\alpha}^{W}$ has eigenvalues $\text{two}\,m_{j}$ on the full-Dirac
+basis) and an off-diagonal subspace with $\Delta n = \pm 1$ (where
+$D_{W}^{L}$ lives, since the Camporesi--Higuchi Dirac intertwines
+$\pm m_{j}$ chirality partners at adjacent shells).  Formal
+operator-theoretic proof of this decomposition is named as
+Paper~43 open question O4; the PSLQ-verified Pythagorean closed form
+\eqref{eq:hs_closed_form} is empirically sharp at $100$ digits
+and $18$ panel cells.
+
+% =====================================================================
+\section{Lorentzian propinquity}
+\label{sec:lorentzian}
+% =====================================================================
+
+\subsection{Operator-system substrate (Paper~44)}
+
+The first step in any Lorentzian propinquity proof is an operator-
+system substrate.  Paper~44 \cite{paper44} provides it on the
+chirality-doubled Camporesi--Higuchi spinor space
+$\Krein_{\nmax,\Nt} = \HGV^{\nmax} \otimes \C^{\Nt}$ at BBB signature
+$(m,n) = (4,6)$.
+
+\begin{theorem}[Paper~44, propagation number and envelope dependence]
+\label{thm:p44_prop_number}
+The truncated Lorentzian operator system $\Op^{L}_{\nmax,\Nt}$
+satisfies
+\begin{equation}
+\mathrm{prop}(\Op^{L}_{\nmax,\Nt}) \;=\; 2
+\quad \text{under the Weyl-doubled achievable envelope},
+\quad
+\mathrm{prop}(\Op^{L}_{\nmax,\Nt}) \;=\; \infty
+\quad \text{under the full } (\dim \Krein)^{2} \text{ envelope},
+\label{eq:p44_prop}
+\end{equation}
+generalising the Riemannian $\mathrm{prop} = 2$ result for
+$\Op_{\nmax}$ (Paper~32~\S 3.4) to the Lorentzian Krein setting.
+The witness pair $(M^{2,1,0,0}, M^{2,1,0,0*})$ at $\nmax = 2$
+exhibits $\sim 38\%$ Frobenius residual against $\Op^{L}_{2,3}$.
+Riemannian-limit recovery at $\Nt = 1$ is bit-exact (Frobenius
+residual $= 0.0$ in float64) across $\nmax \in \{1, 2, 3\}$.
+\end{theorem}
+
+\paragraph{$K^{+}$-positivity is trivial at the operator-multiplier
+level.}
+A key structural observation of Paper~44 is that all chirality-
+doubled scalar multipliers $M \oplus M$ commute with $\JL =$
+chirality-swap, and therefore preserve $\Kplus$ automatically:
+$\Op^{L,+} = \Op^{L}$ exactly.  Consequently the non-trivial
+Krein-positivity program shifts from operator level to \emph{state}
+level (Wasserstein--Kantorovich on $K^{+}$ states), which is the
+natural setting for the Paper~45 propinquity proof below.
+
+\subsection{$K^{+}$-restricted weak-form Lorentzian propinquity
+convergence (Paper~45)}
+
+Paper~45 \cite{paper45} closes the convergence theorem on the
+substrate of Paper~44.
+
+\begin{definition}[Paper~45~\S 1.3, K$^{+}$-weak-form Lorentzian
+propinquity]
+\label{def:k_plus_prop}
+For two truncated Lorentzian spectral triples
+$\Tcal_{i}^{L}$ ($i = 1, 2$), define
+\begin{equation}
+\Lprop(\Tcal_{1}^{L}, \Tcal_{2}^{L})
+\;:=\;
+\Lambda(\Tcal_{1}^{L}|_{\Kplus}, \Tcal_{2}^{L}|_{\Kplus}),
+\label{eq:k_plus_prop_def}
+\end{equation}
+where $\Lambda$ is the standard Latr\'emoli\`ere propinquity
+\cite{latremoliere_metric_st_2017,latremoliere2018} and the
+restriction to $\Kplus = \{|\psi\rangle : \JL|\psi\rangle =
++|\psi\rangle\}$ is the standard metric spectral triple obtained from
+the Krein-positive subspace, on which the indefinite Krein product
+reduces to a positive-definite Hilbert inner product.
+\end{definition}
+
+\begin{theorem}[Paper~45, Theorem~5.1]
+\label{thm:p45_main}
+For the truncated $\SU(2) \times \Uone_{T}$ Krein spectral triples
+$\Tcal^{L}_{\nmax,\Nt,T}$, with $\DL$ as in
+\eqref{eq:lorentzian_dirac} and $\Krein_{\nmax,\Nt} =
+\HGV^{\nmax} \otimes \C^{\Nt}$,
+\begin{equation}
+\Lprop(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold})
+\;\le\;
+C_{3}^{\mathrm{joint}} \cdot
+\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
+\;\longrightarrow\; 0
+\quad \text{as } (\nmax, \Nt) \to (\infty, \infty),
+\label{eq:p45_main}
+\end{equation}
+with $C_{3}^{\mathrm{joint}} \le 1$ asymptotically tight (inherited
+from Paper~38 L3 via the joint Lichnerowicz structural identity) and
+\begin{equation}
+\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
+\;=\;
+O\!\bigl(\log \nmax / \nmax \;+\; T / \Nt\bigr).
+\label{eq:p45_rate}
+\end{equation}
+\end{theorem}
+
+\subsection{Three structural simplifications}
+
+The proof of Theorem~\ref{thm:p45_main} transfers the Paper~38
+five-lemma chain to the joint $\SU(2) \times \Uone$ setting.  Three
+structural simplifications arise that are not visible in the
+Riemannian setting, and are recorded as substantive new content of
+the Paper~45 proof:
+
+\paragraph{PURE\_TENSOR Berezin map.}  The joint Berezin map
+$B^{\mathrm{joint}} = B^{\SU(2)} \otimes B^{\Uone}$ factorises as a
+pure tensor.  Each of the four required properties (positivity,
+contractivity, approximate identity, L3 compatibility) inherits
+factor-by-factor; no cross-factor verification is needed.
+
+\paragraph{Vanishing time-chirality cross-term.}  The joint
+Lichnerowicz commutator simplifies via the structural identity
+\begin{equation}
+[\DL,\, a_{s} \otimes a_{t}]
+\;=\;
+i\,[\DGV, a_{s}] \otimes a_{t}
+\label{eq:vanishing_cross_term}
+\end{equation}
+because $\{\gamma^{0}, \DGV\} = 0$ on the chirality-doubled basis.
+($\gamma^{0}$ anticommutes with the spatial Camporesi--Higuchi Dirac
+because $\DGV$ is chirality-diagonal in the Peskin--Schroeder chiral
+basis.)  The temporal direction contributes nothing to the joint
+commutator, and $C_{3}^{\mathrm{joint}} = C_{3}^{\SU(2)}$ verbatim.
+
+\paragraph{$\Nt$-independent joint cb-norm.}
+By the Bo\.zejko--Fendler central-multiplier equality
+\cite{bozejko_fendler1991} on the amenable group product
+$\SU(2) \times \Uone$, the joint cb-norm of the central spectral
+Fej\'er multiplier is
+\begin{equation}
+\cbnorm{S_{K^{\mathrm{joint}}}}
+\;=\;
+\frac{2}{\nmax + 1},
+\label{eq:joint_cb_norm}
+\end{equation}
+\emph{independent} of $\Nt$.  This reflects the trivial
+central-multiplier structure of the compact abelian factor $\Uone$,
+and means that the $\Nt$-dependence in
+\eqref{eq:p45_rate} lives entirely in the joint mass-concentration
+moment (the $T/\Nt$ Fej\'er-on-the-circle rate), not in the
+cb-norm height bound.
+
+\paragraph{Riemannian-limit recovery at $\Nt = 1$ bit-exact.}
+At $\Nt = 1$, the joint Berezin reduces bit-identically to
+$B^{\SU(2)} \otimes B^{\Uone}_{1,T} = B^{\SU(2)}$, since the
+$\Nt = 1$ temporal Berezin map is the identity on the single Fourier
+mode.  Hence $\Lprop(\Tcal^{L}_{\nmax,1,T}, \Tcal^{L}_{\Manifold})$
+agrees with the Riemannian Paper~38 bound bit-exactly, providing the
+load-bearing falsifier check for the joint construction.
+
+\subsection{Honest scope}
+
+Theorem~\ref{thm:p45_main} is, to the author's knowledge, the first
+published Lorentzian propinquity convergence theorem in the math.OA
+literature.  Several aspects of its scope require explicit comment.
+
+\begin{itemize}\setlength\itemsep{0pt}
+\item[(Q1)] \textbf{Strong-form Lorentzian propinquity (Paper~45
+\S 1.4 G1).}
+The K$^{+}$-restriction reduces the indefinite Krein product to a
+Hilbert inner product on $\Kplus$ and lets the standard Latr\'emoli\`ere
+machinery apply verbatim.  Strong-form Lorentzian propinquity
+(Latr\'emoli\`ere-style metric on Krein spectral triples in their own
+right, without K$^{+}$-restriction) requires an indefinite-inner-product
+analog of the operator-norm Lipschitz seminorm with appropriate
+behaviour under Krein-self-adjoint $\DL$.  This remains an open
+NCG-math problem; multi-month scale.
+\item[(G2)] \textbf{De-compactification $T \to \infty$.}  The temporal
+factor is compactified to $\Uone_{T}$ with finite radius $T$.
+De-compactification to non-compact $\R_{t}$ is a separate program
+(internal Sprint L3c) requiring renormalisation of the cb-norm bound
+and reach moment.
+\item[(G3)] \textbf{Cross-manifold $\Tcal_{\sthree} \otimes
+\Tcal_{\mathrm{Hardy}(\sfive)}$.}  Blocked at the NCG-framework level
+by the Riemannian-vs-Hardy-sector asymmetry recorded in Paper~24~\S V
+of the GeoVac corpus (a four-layer Coulomb/HO asymmetry); this is
+the Coulomb-side claim only.
+\item[(G4)] \textbf{Inner-factor calibration data.}  Higgs / Yukawa
+selection question of the Connes--Marcolli SM construction;
+orthogonal to the present convergence theorem, addressed by
+Paper~32~\S 8.C verdict POSITIVE-THIN (construction admits Higgs
+structurally, but no autonomous Yukawa selection from the present
+data).
+\end{itemize}
+
+% =====================================================================
+\section{The master Mellin engine and the cross-arc connection}
+\label{sec:mellin}
+% =====================================================================
+
+The most striking structural observation that emerges from reading
+the arc is that the same transcendental signatures appear in
+\emph{different} settings.  The constant $4/\pi$ of Paper~38 and the
+constant $1/\pi^{2}$ of Paper~43~\S 10.2 are not numerical
+coincidences: they are two appearances of the same Hopf-base measure
+mechanism, the $M_{1}$ sub-case of the master Mellin engine
+catalogued in Paper~32~\S 8.
+
+\subsection{The $\pi$-source case-exhaustion theorem (Paper~32~\S 8)}
+
+\begin{theorem}[Paper~32~\S 8, $\pi$-source case-exhaustion]
+\label{thm:pi_source}
+Let $\mathcal{C}$ be any finite composition of GeoVac projections
+applied to a Layer-1 datum on $(\AGV, \HGV, \DGV)$ or its
+Bargmann--Segal sibling triple.  The following are equivalent:
+\begin{itemize}\setlength\itemsep{0pt}
+\item[(i)] $\mathcal{C}$(datum) contains a transcendental of the form
+$\pi^{k}$ for $k \in \Q$;
+\item[(ii)] $\mathcal{C}$ contains at least one projection whose
+evaluation includes a continuous integration over a parameter
+promoted from the discrete graph spectrum;
+\item[(iii)] $\mathcal{C}$ engages at least one of three
+spectral-triple mechanisms,
+\begin{itemize}\setlength\itemsep{0pt}
+\item[$M_{1}$] (\emph{Hopf-base measure}):\
+$\pi = \Vol(S^{2})/4$ via the Hopf bundle $\sthree \to S^{2} \times
+S^{1}$, equivalently $4/\pi = \Vol(S^{2})/\pi^{2}$;
+\item[$M_{2}$] (\emph{Seeley--DeWitt}):\
+$\sqrt{\pi}$ via heat-kernel coefficients on the Camporesi--Higuchi
+Dirac spectrum on $\sthree$ (Paper~28 Theorem~T9:
+$\zeta_{D^{2}}(s)$ is polynomial in $\pi^{2}$ with rational
+coefficients at every integer $s$);
+\item[$M_{3}$] (\emph{vertex-topology Dirichlet $L$}):\
+Catalan $G$ and $\beta(s)$ via quarter-integer Hurwitz shifts in
+two-loop sunset vertices.
+\end{itemize}
+\end{itemize}
+\end{theorem}
+
+The TS-E3 sharpening of Paper~32 further shows that $M_{1}, M_{2},
+M_{3}$ are sub-cases of a single master Mellin-engine mechanism
+\begin{equation}
+\pi\text{-source}
+\;=\;
+\mathcal{M}\bigl[ \Tr(D^{k} e^{-tD^{2}}) \bigr]
+\quad \text{with } k \in \{0, 1, 2\},
+\label{eq:master_mellin_engine}
+\end{equation}
+where $k = 0$ selects $M_{1}$, $k = 1$ selects $M_{3}$, and $k = 2$
+selects $M_{2}$.
+
+\subsection{$M_{1}$ in the Riemannian GH rate}
+
+The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} is the
+$M_{1}$ Hopf-base measure signature.  This is not a derived
+observation; it is forced by the Plancherel-weight $\times$
+Vandermonde-Jacobian cancellation theorem (Paper~40~\S 3.2) which
+leaves only the rank-1 Stein--Weiss constant after the
+$\prod_{\alpha > 0}$ products cancel.  Equivalently, the
+single-positive-root Euler--Catalan sum
+\begin{equation*}
+\sum_{d \text{ odd}} \frac{1}{d^{2}} \;=\; \frac{\pi^{2}}{8}
+\end{equation*}
+produces the $\pi^{2}$ in the denominator, and the Hopf bundle
+$\sthree \to S^{2}$ produces $\Vol(S^{2}) = 4\pi$ in the numerator.
+
+\subsection{$M_{1}$ in the Lorentzian HS-orthogonality}
+
+The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ in the
+Pythagorean closed form \eqref{eq:hs_closed_form} is the same
+$M_{1}$ signature \emph{at the operator-system level}: the
+Krein wedge BW choice $H_{\mathrm{local}} = K_{\alpha}^{W}/(2\pi)$
+introduces a factor of $1/(2\pi)$ from the modular-circle
+circumference, which squared gives $1/(4\pi^{2})$ in
+$\|H_{\mathrm{local}}\|^{2}$.  The Hopf-base measure factor $4/\pi$
+of Paper~38 and the $1/\pi^{2}$ of Paper~43 are two manifestations
+of the same $\Vol(S^{2}) = 4\pi$ identity in the master Mellin
+engine.
+
+\paragraph{Why this matters.}
+The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
+\emph{spectral-triple-level} statement about which transcendentals
+can appear in evaluations of GeoVac projection chains.  The constant
+$4/\pi$ of Paper~38 is a \emph{metric-geometry-level} statement about
+the propinquity rate.  The fact that these two abstractly-different
+levels agree on the same signature is non-trivial: it identifies the
+metric geometry of the GeoVac spectral triple as carrying the same
+M$_{1}$ signature that the abstract Mellin engine catalogues.
+Abstract taxonomy meets concrete propinquity rates.  Paper~43~\S 10.2
+takes this further: the Lorentzian Pythagorean decomposition at the
+operator-system level carries the same M$_{1}$ signature again, this
+time on the operator algebra of the Krein wedge.
+
+% =====================================================================
+\section{Open questions and outlook}
+\label{sec:open}
+% =====================================================================
+
+The arc closes the convergence side of the operator-algebra story at
+the K$^{+}$-weak-form level (Paper~45) and the modular-Hamiltonian
+side at the operator-system level on Riemannian (Paper~42) and
+Lorentzian (Paper~43) backgrounds.  Several questions remain open.
+
+\paragraph{Strong-form Lorentzian propinquity (Q1).}
+As noted in \S\ref{sec:lorentzian}, the K$^{+}$-restriction is the
+move that lets the standard Latr\'emoli\`ere machinery apply
+verbatim.  Strong-form Lorentzian propinquity, formulated as a
+Latr\'emoli\`ere-style metric on Krein spectral triples in their
+own right, would require an indefinite-inner-product analog of the
+operator-norm Lipschitz seminorm with the right behaviour under
+Krein-self-adjoint $\DL$.  This is a genuine NCG-math problem at
+multi-month scale.  Paper~45~\S 1.4 G1 names this explicitly.
+
+\paragraph{De-compactification $T \to \infty$ (G2).}
+The temporal factor $\Uone_{T}$ is finite; the standard physics
+applications (Hawking, Unruh) require non-compact $\R_{t}$.  The
+rate $T/\Nt \to 0$ in \eqref{eq:p45_rate} is the joint
+mass-concentration on $\Uone_{T}$ as $\Nt \to \infty$ at fixed $T$;
+the $T \to \infty$ limit is a separate program (Sprint L3c).
+
+\paragraph{Cross-manifold $\Tcal_{\sthree} \otimes
+\Tcal_{\mathrm{Hardy}(\sfive)}$ (G3, Coulomb-side claim only).}
+The natural tensor product of the Coulomb $\sthree$ spectral triple
+with the Bargmann--Segal Hardy-sector spectral triple on $\sfive$
+\cite{paper24} is blocked at the NCG-framework level by a four-layer
+asymmetry recorded in Paper~24~\S V.  The four layers are:
+(i) spectrum-computing role of $L_{0}$ (Coulomb-side only, by Paper~23
+Fock rigidity);
+(ii) calibration $\pi$ (Coulomb-side only);
+(iii) non-abelian Wilson gauge with natural matter coupling (both
+sides have Wilson, only Coulomb-side has natural matter coupling
+because the Bargmann tower $(N,0)$ irreps have $N$-dependent
+dimensions and no uniform-rep matter sector); and (iv) modular-
+Hamiltonian structure of the wedge KMS state (Coulomb-side admits the
+Krein wedge HS-orthogonality of Corollary~\ref{cor:hs_orthogonality}
+with closed-form $M_{1}$ prefactor; the Hardy-sector side does not
+admit the construction at all).  Closing G3 requires new
+NCG-framework machinery to bridge Riemannian and Hardy-sector spectral
+triples in a single tensor product; we make no claim about whether
+this is achievable.
+
+\paragraph{Higgs as inner fluctuation (G4).}
+The GeoVac triple is naturally combined with a finite almost-
+commutative factor $\AGV \otimes (\C \oplus \mathbb{H})$ to produce
+an electroweak-like sector.  The Connes axiom audit at finite cutoff
+(Paper~32~\S 8.C) gives verdict POSITIVE-THIN: the construction
+\emph{admits} a Higgs sector structurally (i.e.~the inner fluctuation
+$D \mapsto D + \omega + \varepsilon' J \omega J^{-1}$ produces a
+non-trivial off-diagonal $\mathbb{C} \leftrightarrow \mathbb{H}$
+block iff the finite Yukawa $Y_{F}$ is non-zero), but \emph{GeoVac
+does not autonomously select} $Y_{F}$ from its internal data.  In
+Marcolli--vS terms, GeoVac sits on the Yang--Mills-without-Higgs side
+of the Perez-Sanchez \cite{perez_sanchez2024,perez_sanchez2025}
+clarification, with calibration data (the Yukawa) supplied externally.
+Paper~32~\S 8.C records this as the standing structural verdict.
+
+\paragraph{State-side complement of the dictionary.}
+Paper~44 highlights that the non-trivial K$^{+}$-positivity content of
+the Lorentzian operator system sits at the \emph{state} level, not the
+operator level.  The natural object is the Wasserstein--Kantorovich
+metric on $K^{+}$-states.  Paper~45's K$^{+}$-weak-form propinquity is
+the first concrete construction in this direction; substantially more
+mathematics on Wasserstein--Kantorovich on Krein-positive states is
+required to complete the state-side dictionary.
+
+\paragraph{Concluding remark.}
+The structural identification of GeoVac as an almost-commutative
+spectral triple in the Marcolli--van~Suijlekom lineage is proved at
+the GH-convergence level by Paper~38 (Riemannian, single factor),
+extended by Paper~39 (tensor product), generalised by Paper~40
+(all compact simple Lie groups), and extended in turn to the
+Lorentzian K$^{+}$-weak-form by Paper~45.  The metric geometry of
+the truncated triples carries the same M$_{1}$ Hopf-base measure
+signature ($4/\pi$ in the Riemannian rate, $1/\pi^{2}$ in the
+Lorentzian Pythagorean closed form) that the abstract
+$\pi$-source case-exhaustion theorem (Theorem~\ref{thm:pi_source})
+identifies at the spectral-triple level.  The cross-arc
+identification of these signatures is the deepest structural
+observation of the corpus.
+
+% =====================================================================
+% Bibliography
+% =====================================================================
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+
+\bibitem[Bisognano \& Wichmann(1976)]{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+\newblock \emph{On the duality condition for quantum fields},
+\newblock J.~Math.~Phys. \textbf{17} (1976), 303--321.
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard,
+\newblock \emph{Space and time dimensions of algebras with
+application to Lorentzian noncommutative geometry and quantum
+electrodynamics},
+\newblock J.~Math.~Phys. \textbf{59} (2018), 062303;
+\newblock arXiv:1611.07062.
+
+\bibitem[Bo\.zejko \& Fendler(1991)]{bozejko_fendler1991}
+M.~Bo\.zejko and G.~Fendler,
+\newblock \emph{Herz--Schur multipliers and uniformly bounded
+representations of discrete groups},
+\newblock Arch.~Math. \textbf{57} (1991), 290--298.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi,
+\newblock \emph{On the eigenfunctions of the Dirac operator on
+spheres and real hyperbolic spaces},
+\newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18;
+\newblock arXiv:gr-qc/9505009.
+
+\bibitem[Chamseddine \& Connes(2010)]{chamseddine_connes2010}
+A.~H.~Chamseddine and A.~Connes,
+\newblock \emph{Noncommutative geometry as a framework for
+unification of all fundamental interactions including gravity. I},
+\newblock Fortsch.~Phys. \textbf{58} (2010), 553--600.
+
+\bibitem[Connes(1995)]{connes1995}
+A.~Connes,
+\newblock \emph{Noncommutative Geometry},
+\newblock Academic Press, 1995.
+
+\bibitem[Connes \& van~Suijlekom(2021)]{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
+\newblock arXiv:2004.14115.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity of spectral propinquity for spectrally
+truncated spheres},
+\newblock preprint, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity for the spectral propinquity of the
+Dirac operators associated with an analytic path of Riemannian
+metrics},
+\newblock arXiv:2504.11715, 2025.
+
+\bibitem[Hartle \& Hawking(1976)]{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+\newblock \emph{Path-integral derivation of black-hole radiance},
+\newblock Phys.~Rev. D \textbf{13} (1976), 2188--2203.
+
+\bibitem[Hawkins(2000)]{hawkins2000}
+E.~Hawkins,
+\newblock \emph{Quantization of equivariant vector bundles, and the
+correspondence with deformation quantization},
+\newblock Comm.~Math.~Phys. \textbf{215} (2000), 409--432.
+
+\bibitem[Hekkelman(2022)]{hekkelman2022}
+E.~Hekkelman,
+\newblock \emph{Truncations of the circle and Connes' geometric
+formula},
+\newblock M.Sc.\ thesis, Radboud University, 2022;
+\newblock arXiv:2206.13744.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{Spectral truncations of $\T^{d}$ and quantum metric
+geometry},
+\newblock J.~Noncommut.~Geom., to appear (2024);
+\newblock arXiv:2403.18619.
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{A noncommutative integral on spectrally truncated
+spectral triples, and a link with quantum ergodicity},
+\newblock J.~Funct.~Anal., to appear (2025);
+\newblock arXiv:2412.00628.
+
+\bibitem[Latr\'emoli\`ere(2018/2023)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity for metric
+spectral triples},
+\newblock Adv.~Math. \textbf{415} (2023), Paper No.~108876, 88pp;
+\newblock preprint arXiv:1811.10843, November 2018.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+
+\bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
+L.~Leimbach and W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of spectral
+truncations of the torus},
+\newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}
+M.~Marcolli and W.~D.~van~Suijlekom,
+\newblock \emph{Gauge networks in noncommutative geometry},
+\newblock J.~Geom.~Phys. \textbf{75} (2014), 71--91;
+\newblock arXiv:1301.3480.
+
+\bibitem[Mondino \& S\"amann(2024)]{mondino_samann2024}
+A.~Mondino and C.~S\"amann,
+\newblock \emph{Lorentzian metric measure spaces},
+\newblock Lett.~Math.~Phys. \textbf{114} (2024), Paper No.~37.
+
+\bibitem[Mondino \& S\"amann(2025)]{mondino_samann2025}
+A.~Mondino and C.~S\"amann,
+\newblock \emph{Synthetic Lorentzian Gromov--Hausdorff convergence
+and pre-compactness},
+\newblock arXiv:2504.10380, 2025.
+
+\bibitem[Paulsen(2002)]{paulsen2002}
+V.~I.~Paulsen,
+\newblock \emph{Completely Bounded Maps and Operator Algebras},
+\newblock Cambridge Studies in Advanced Mathematics 78,
+Cambridge University Press, 2002.
+
+\bibitem[Perez-Sanchez(2024)]{perez_sanchez2024}
+C.~I.~Perez-Sanchez,
+\newblock \emph{On the continuum limit of gauge networks},
+\newblock arXiv:2401.03705, 2024.
+
+\bibitem[Perez-Sanchez(2025)]{perez_sanchez2025}
+C.~I.~Perez-Sanchez,
+\newblock \emph{Yang--Mills theories from gauge networks without
+Higgs},
+\newblock arXiv:2508.17338, 2025.
+
+\bibitem[Pier(1984)]{pier1984}
+J.-P.~Pier,
+\newblock \emph{Amenable Locally Compact Groups},
+\newblock Wiley, 1984.
+
+\bibitem[Pisier(2001)]{pisier2001}
+G.~Pisier,
+\newblock \emph{Similarity Problems and Completely Bounded Maps},
+\newblock Lecture Notes in Math.~1618, Springer, 2nd ed., 2001.
+
+\bibitem[Sewell(1982)]{sewell1982}
+G.~L.~Sewell,
+\newblock \emph{Quantum fields on manifolds:\ PCT and gravitationally
+induced thermal states},
+\newblock Ann.~Phys.\ (NY) \textbf{141} (1982), 201--224.
+
+\bibitem[Stein \& Weiss(1971)]{stein_weiss1971}
+E.~M.~Stein and G.~Weiss,
+\newblock \emph{Introduction to Fourier Analysis on Euclidean
+Spaces},
+\newblock Princeton Math.~Ser.~32, Princeton Univ.~Press, 1971.
+
+\bibitem[Toyota(2023)]{toyota2023}
+M.~Toyota,
+\newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
+truncations for groups with polynomial growth},
+\newblock arXiv:2309.13469, 2023.
+
+\bibitem[Unruh(1976)]{unruh1976}
+W.~G.~Unruh,
+\newblock \emph{Notes on black-hole evaporation},
+\newblock Phys.~Rev.\ D \textbf{14} (1976), 870--892.
+
+\bibitem[van~den~Dungen(2016)]{vandungen2016}
+K.~van~den~Dungen,
+\newblock \emph{Krein spectral triples and the fermionic action},
+\newblock Math.~Phys.~Anal.~Geom. \textbf{19} (2016), Art.~4, 22pp;
+\newblock arXiv:1505.01939.
+
+% --- Internal GeoVac papers (Group 1 operator-algebra arc) ---
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey,
+\newblock \emph{Bargmann--Segal lattice for the 3D harmonic
+oscillator and the Coulomb/HO structural asymmetry},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~29]{paper29}
+J.~Loutey,
+\newblock \emph{The GeoVac Hopf graphs are Ramanujan:\ Ihara zeta,
+integer-algebraic zeros, and the scope boundary on Selberg-on-
+hydrogen},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey,
+\newblock \emph{The GeoVac spectral triple, the master Mellin engine
+case-exhaustion theorem, and the GH-convergence theorem on
+$\sthree$},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of truncated
+Camporesi--Higuchi spectral triples on $\sthree$},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey,
+\newblock \emph{Tensor-product propinquity convergence for
+distinct-focal-length truncated Camporesi--Higuchi spectral triples
+on $\sthree$},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of spectral
+truncations of compact Lie groups with bi-invariant metric},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~42]{paper42}
+J.~Loutey,
+\newblock \emph{Tomita--Takesaki modular structure on truncated
+$\SU(2)$ spectral triples:\ four-witness Wick-rotation literal
+identification at finite cutoff},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey,
+\newblock \emph{Lorentzian extension of the four-witness
+Wick-rotation theorem at finite cutoff},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~44]{paper44}
+J.~Loutey,
+\newblock \emph{Operator-system extension of the BBB Krein spectral
+triple at finite cutoff:\ propagation number and envelope dependence
+on the Camporesi--Higuchi spinor bundle},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~45]{paper45}
+J.~Loutey,
+\newblock \emph{K$^{+}$-restricted weak-form Lorentzian propinquity
+convergence on truncated $\SU(2) \times \Uone_{T}$ Krein spectral
+triples},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\end{thebibliography}
+
+\end{document}

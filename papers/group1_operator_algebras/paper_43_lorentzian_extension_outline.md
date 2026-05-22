@@ -5,7 +5,7 @@
 **Sprint origin:** Sprint L2 closure (sub-sprints L2-A through L2-G). See `debug/sprint_l2_synthesis_memo.md`.
 **Companion paper(s):** Paper 42 (Riemannian closure of the four-witness theorem on SU(2) truncated triple). When drafted, **Paper 43 does NOT supersede Paper 42**. Paper 42 is the Riemannian closure; Paper 43 is the Lorentzian extension; together they constitute the four-witness Wick-rotation arc at the operator-system level.
 
-**Target venue:** math.OA / J. Geom. Phys. — sibling to Papers 38, 39, 40, 42 in `papers/standalone/`. Natural Zenodo deposit when drafted (per CLAUDE.md §6 papers_zenodo_not_journals rule).
+**Target venue:** math.OA / J. Geom. Phys. — sibling to Papers 38, 39, 40, 42 in `papers/group1_operator_algebras/`. Natural Zenodo deposit when drafted (per CLAUDE.md §6 papers_zenodo_not_journals rule).
 
 **Estimated draft length:** ~25-30 pages, ~12,000-15,000 words.
 
