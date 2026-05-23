@@ -23,7 +23,7 @@
 \geometry{margin=1in}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
-\usepackage{microtype}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue (same fix as Papers 38/40/42/45/46/47)
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage[numbers,sort&compress]{natbib}
@@ -48,6 +48,7 @@
 \newcommand{\Tcal}{\mathcal{T}}
 \newcommand{\Acal}{\mathcal{A}}
 \newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\cbnorm}[1]{\lVert #1 \rVert_{\mathrm{cb}}}
 \newcommand{\Lipnorm}[1]{\lVert #1 \rVert_{\mathrm{Lip}}}
 \newcommand{\norm}[1]{\lVert #1 \rVert}
 \newcommand{\R}{\mathbb{R}}
@@ -512,9 +513,9 @@ $\widehat{\KS}^{(a,b)}(j_1, j_2) = \widehat{\KS}^{(a)}(j_1) \cdot
 $\widehat{\KS}^{(\bullet)}(j) = (2j+1)/Z_{\nmax,\bullet}$ for
 $j \le j_{\max,\bullet}$ and zero otherwise.
 \item[(c)] (Cb-norm factorization.)
-$\opnorm{T_{\KS^{(a,b)}}}_{\mathrm{cb}}^{\mathrm{cent}} =
-\opnorm{T_{\KS^{(a)}}}_{\mathrm{cb}}^{\mathrm{cent}} \cdot
-\opnorm{T_{\KS^{(b)}}}_{\mathrm{cb}}^{\mathrm{cent}}
+$\cbnorm{T_{\KS^{(a,b)}}}^{\mathrm{cent}} =
+\cbnorm{T_{\KS^{(a)}}}^{\mathrm{cent}} \cdot
+\cbnorm{T_{\KS^{(b)}}}^{\mathrm{cent}}
 = 4 / [(\nmaxa + 1)(\nmaxb + 1)]$.
 \item[(d)] (Subadditive joint mass concentration.) Define
 $\gamma^{(a,b)}_{\nmaxa, \nmaxb} := \int \KS^{(a,b)}(g_1, g_2)\,
@@ -537,12 +538,12 @@ convolution by a central function on a product of compact groups acts
 diagonally on each isotypic component as the product of single-factor
 Fourier coefficients.
 \textbf{(c)} The Bo{\.z}ejko--Fendler equality
-$\opnorm{T_K}_{\mathrm{cb}} = \norm{\widehat{K}}_{\ell^\infty}$ for
+$\cbnorm{T_K} = \norm{\widehat{K}}_{\ell^\infty}$ for
 central convolutions on amenable compact groups
 \cite{bozejko_fendler1991, pisier2003} extends to product kernels via
 the standard tensor-product cb-norm identity
-$\opnorm{A \otimes B}_{\mathrm{cb}} = \opnorm{A}_{\mathrm{cb}}
-\opnorm{B}_{\mathrm{cb}}$ on the minimal tensor product
+$\cbnorm{A \otimes B} = \cbnorm{A}
+\cbnorm{B}$ on the minimal tensor product
 \cite[Ch.~8]{pisier2003}. Substituting the single-factor result
 \cite[Lemma~3.4(c)]{loutey_paper38} gives the displayed value.
 \textbf{(d)} The product Riemannian metric on $\sthree \times \sthree$
@@ -554,7 +555,7 @@ applying Fubini gives \eqref{eq:gamma_joint_subadditive}.
 
 \begin{remark}\label{rem:cb_norm_rate}
 Property (c) shows that the joint cb-norm is one order faster than the
-single-factor rate: $\opnorm{T_{\KS^{(a,b)}}}_{\mathrm{cb}} =
+single-factor rate: $\cbnorm{T_{\KS^{(a,b)}}} =
 O(1/(\nmaxa \nmaxb))$ vs.\ single-factor $O(1/\nmax)$. This is the
 structural reason joint convergence is well-behaved.
 \end{remark}
@@ -900,11 +901,11 @@ $\gamma_{\nmax}$ inherit from~\cite[Lemma~3.4]{loutey_paper38}:
 
 \paragraph{Joint cb-norm.} By Lemma~\ref{lem:L2-T}(c), the joint
 cb-norms are exact rationals:
-$\opnorm{T^{(2,2)}}_{\mathrm{cb}} = 4/9$,
-$\opnorm{T^{(2,3)}}_{\mathrm{cb}} = 1/3$,
-$\opnorm{T^{(3,3)}}_{\mathrm{cb}} = 1/4$,
-$\opnorm{T^{(3,4)}}_{\mathrm{cb}} = 1/5$,
-$\opnorm{T^{(4,4)}}_{\mathrm{cb}} = 4/25$.
+$\cbnorm{T^{(2,2)}} = 4/9$,
+$\cbnorm{T^{(2,3)}} = 1/3$,
+$\cbnorm{T^{(3,3)}} = 1/4$,
+$\cbnorm{T^{(3,4)}} = 1/5$,
+$\cbnorm{T^{(4,4)}} = 4/25$.
 
 \paragraph{Joint Lipschitz comparison constant.} By
 Lemma~\ref{lem:L3-T}, the diagonal sequence is
@@ -931,7 +932,7 @@ $1 + 2\sqrt{2}$ reach-plus-height factor of Lemma~\ref{lem:L5-T}.
 \begin{tabular}{ccccccc}
 \toprule
 $(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
-$\opnorm{T^{(a,b)}}_{\mathrm{cb}}$ & $\Lambda^{\mathrm{fact}}$ &
+$\cbnorm{T^{(a,b)}}$ & $\Lambda^{\mathrm{fact}}$ &
 $C_3^{(2)}$ & $\Lambda^{\mathrm{full}}$ \\
 \midrule
 $(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $0.707$ & $5.604$ \\
@@ -971,8 +972,8 @@ $\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) \approx
 offsetting the $\max(\gamma)$ decrease.
 
 \item \emph{Joint cb-norm decreases as $1/(\nmaxa \nmaxb)$.}
-$\opnorm{T^{(2,2)}}_{\mathrm{cb}} = 4/9 \approx 0.444$ vs.\
-$\opnorm{T^{(4,4)}}_{\mathrm{cb}} = 4/25 = 0.16$, an exact factor of
+$\cbnorm{T^{(2,2)}} = 4/9 \approx 0.444$ vs.\
+$\cbnorm{T^{(4,4)}} = 4/25 = 0.16$, an exact factor of
 $9/25 = 0.36$ reduction matching the closed form of
 Lemma~\ref{lem:L2-T}(c). The asymptotic order
 $O(1/(\nmaxa \nmaxb))$ is one order faster than the single-factor
@@ -1118,13 +1119,46 @@ sharper bounds via direct Sobolev embedding on $\sthree \times
 particular whether $C_3^{(2)}$ is sharp on functions with cross-mixing
 between the two factors --- is open.
 
-\paragraph{(iii) Higher tensor factors.} The proof extends mechanically
-to $k$-fold tensor products $\Tcal_{\sthree}^{\lambda_1} \otimes \cdots
+\paragraph{(iii) Higher tensor factors --- CLOSED 2026-05-23 with
+stronger constant.} The proof extends mechanically to $k$-fold tensor
+products $\Tcal_{\sthree}^{\lambda_1} \otimes \cdots
 \otimes \Tcal_{\sthree}^{\lambda_k}$ via repeated application of the
-Pythagorean Leibniz rule, with $C_3^{(k)}$ growing as $O(\sqrt{k})$ in
-the appropriate norm. The $k$-fold case is not motivated by a current
-GeoVac physics application, but is mathematically natural and
-structurally accessible.
+Pythagorean Leibniz rule. A sprint-scale closure (memo
+\texttt{debug/sprint\_paper39\_k\_fold\_extension\_memo.md},
+2026-05-23) establishes a stronger constant than the earlier
+$O(\sqrt{k})$ estimate suggested:
+\begin{equation}\label{eq:k_fold_main}
+\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
+\Tcal^{(k)}_{(\sthree)^{\otimes k}}\bigr)
+\;\le\; C_{3}^{(k)}(n_{1}, \ldots, n_{k}) \cdot \gamma^{(k)}_{n_{1}, \ldots, n_{k}},
+\end{equation}
+with
+\begin{equation}\label{eq:k_fold_C3}
+C_{3}^{(k)}(n_{1}, \ldots, n_{k})
+\;\le\; \sqrt{\frac{N_{*} - 1}{N_{*} + 1}},
+\qquad N_{*} := \max_{j} n_{j},
+\end{equation}
+\emph{$k$-INDEPENDENT and identical to the single-factor
+Paper~38~\cite{loutey_paper38} L3 constant}, with joint rate
+$\gamma^{(k)} = \max_{j} \gamma^{\SU(2)}_{n_{j}}$ also $k$-independent
+(worst-factor SU(2) rate). The substantive structural content is that
+the Pythagorean Leibniz identity (Lemma~\ref{lem:L3-T}) at $k$ factors
+gives a sum-of-squares (not sum-of-magnitudes) bound on the joint
+commutator: the $k$ summands of $D^{(k)} = \sum_{j} \gamma_{<j} \otimes
+\DCH^{(j)} \otimes I_{>j}$ pairwise anti-commute on the Connes-Marcolli
+graded module, so
+$\opnorm{\sum_{j} X_{j}}^{2} = \sum_{j} \opnorm{X_{j}}^{2}$
+(Pythagorean), not $\bigl(\sum_{j} \opnorm{X_{j}}\bigr)^{2}$ (triangle
+inequality with Cauchy-Schwarz). This eliminates the $\sqrt{k}$ factor
+that a triangle-inequality bound on the joint commutator would
+produce. The per-irrep ratio
+$\sum_{j} (N_{j} - 1)^{2} / \sum_{j} (N_{j} - 1)(N_{j} + 1)
+\le \max_{j} (N_{j} - 1)/(N_{j} + 1)$
+gives~\eqref{eq:k_fold_C3} on taking square roots; asymptotic
+$\to 1^{-}$ as $\min_{j} n_{j} \to \infty$. The $k$-fold case is
+mathematically natural; the closed-form $k$-independent constant makes
+it a clean drop-in tool for any future multi-focal-composition argument
+at arbitrary $k$.
 
 \paragraph{(iv) Conditional Coulomb/HO bridge.} Should a unifying
 NCG-framework extension be developed that bridges the Riemannian
