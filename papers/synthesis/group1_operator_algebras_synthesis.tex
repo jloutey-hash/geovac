@@ -3,8 +3,9 @@
 % arc of the GeoVac framework.
 %
 % Reading guide and unified narrative for Papers 29, 32, 38, 39, 40,
-% 42, 43, 44, 45. Math.OA style. Audience: working mathematician in
-% NCG or quantum metric geometry considering the GeoVac corpus.
+% 42, 43, 44, 45, 46, 47. Math.OA style. Audience: working
+% mathematician in NCG or quantum metric geometry considering the
+% GeoVac corpus.
 %
 % Not a survey of GeoVac as a whole; focused on the operator-algebra
 % arc. Assumes background in spectral triples, Lipschitz seminorms,
@@ -73,6 +74,8 @@
 \newcommand{\Tr}{\mathrm{Tr}}
 \newcommand{\Mat}{M}
 \newcommand{\Lprop}{\Lambda^{L}}
+\newcommand{\gammajoint}{\gamma^{\mathrm{joint}}}
+\newcommand{\Sone}{S^{1}}
 
 \title{The operator-algebra arc of the GeoVac framework:\\
 a reading guide for spectral triples, Latr\'emoli\`ere propinquity,
@@ -88,9 +91,9 @@ the author's responsibility.}}
 \maketitle
 
 \begin{abstract}
-We provide a unified reading of the nine papers that make up the
+We provide a unified reading of the eleven papers that make up the
 operator-algebra arc of the GeoVac framework
-(Papers~29,~32,~38,~39,~40,~42,~43,~44,~45).  The arc constructs an
+(Papers~29,~32,~38,~39,~40,~42,~43,~44,~45,~46,~47).  The arc constructs an
 explicit almost-commutative spectral triple
 $(\AGV, \HGV, \DGV)$ on the Fock-projected unit three-sphere with a
 Camporesi--Higuchi spinor Dirac operator, places it in the
@@ -110,13 +113,24 @@ weak-form Lorentzian propinquity convergence theorem holds on
 truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples (Paper~45) --
 to the author's knowledge the first such convergence result in the
 math.OA literature, closing a question deferred by Connes and van
-Suijlekom \cite{connes_vs2021}.  The constant $4/\pi$ identifies, in
-both Riemannian (Paper~38) and Lorentzian (Paper~43~\S 10.2) settings,
-as the $M_{1}$ Hopf-base measure signature of the master Mellin
-engine catalogued by the case-exhaustion theorem of Paper~32~\S\,VIII.
-This synthesis gathers the statements, sketches the load-bearing
-proofs, and exhibits the structural relationships between the papers;
-no new theorems are introduced.
+Suijlekom \cite{connes_vs2021}.  The convergence has since been
+strengthened in two directions:\ Paper~46 closes the strong-form
+Lorentzian propinquity convergence (without $K^{+}$ restriction) on
+the natural and enlarged operator-system substrates, and Paper~47
+closes the de-compactification limit $T \to \infty$ at the
+norm-resolvent / spectral level via a two-rate hybrid composite.  A
+master theorem (\S\ref{sec:closures_post_45}) subsumes Papers~38,~39,
+and~40 as special cases:\ for arbitrary $k \ge 1$ and arbitrary
+compact connected Lie groups $G_{1}, \ldots, G_{k}$, the k-fold
+tensor product propinquity converges at the universal $4/\pi$ rate
+with $k$-INDEPENDENT Lipschitz comparison constant.  The constant
+$4/\pi$ identifies, in both Riemannian (Paper~38) and Lorentzian
+(Paper~43~\S 10.2 / Paper~46) settings, as the $M_{1}$ Hopf-base
+measure signature of the master Mellin engine catalogued by the
+case-exhaustion theorem of Paper~32~\S\,VIII.  This synthesis gathers
+the statements, sketches the load-bearing proofs, and exhibits the
+structural relationships between the papers; no new theorems are
+introduced.
 \end{abstract}
 
 % =====================================================================
@@ -609,6 +623,7 @@ with $\Lambda(4)/\Lambda(2) = 0.637$.  These are monotone decreasing
 and consistent with the $O(\log \nmax / \nmax)$ rate.
 
 \subsection{Tensor extension (Paper~39)}
+\label{sec:tensor_extension}
 
 Paper~39 extends Theorem~\ref{thm:gh_su2} to tensor products
 $\Tcal_{\sthree}^{\lambda_{a}} \otimes \Tcal_{\sthree}^{\lambda_{b}}$
@@ -1187,6 +1202,212 @@ operator-system level carries the same M$_{1}$ signature again, this
 time on the operator algebra of the Krein wedge.
 
 % =====================================================================
+% =====================================================================
+\section{Closures since drafting (May 23, 2026)}
+\label{sec:closures_post_45}
+% =====================================================================
+
+The synthesis above (\S\ref{sec:intro}--\S\ref{sec:mellin})
+was drafted around the arc Papers~29,~32,~38,~39,~40,~42,~43,~44,~45.
+On 2026-05-23, four substantive closures landed in a single session,
+adding Papers~46 and~47 to the arc and promoting two named open
+follow-ons within Papers~39 and~43.  This section records the four
+closures in summary form.
+
+\subsection{Strong-form Lorentzian propinquity (Paper 46)}
+\label{sec:closures_paper46}
+
+Paper~45~\S 1.4 G1 named the strong-form Lorentzian propinquity (a
+Latr\'emoli\`ere-style metric on Krein spectral triples without
+$K^{+}$-restriction) as the principal open NCG-math problem of the
+Lorentzian arc.  Paper~46~\cite{paper46} closes this question on the
+natural chirality-doubled scalar-multiplier substrate of
+Paper~44~\cite{paper44} via the operator-norm Lipschitz seminorm
+$L_{\mathrm{op}}(a) := \opnorm{[\DL, a]}$:
+\begin{equation}\label{eq:p46_main}
+\Lambda^{\mathrm{strong}}\bigl(\Tcal^{L}_{\nmax, \Nt, T},\
+\Tcal^{L}_{\Manifold}\bigr)
+\;\le\; C_{3}^{\mathrm{op}}(\nmax) \cdot \gammajoint_{\nmax, \Nt, T}
+\;\to\; 0,
+\end{equation}
+with closed-form $C_{3}^{\mathrm{op}}(\nmax) = \sqrt{1 - 1/\nmax}
+\to 1^{-}$ and rate $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$
+surviving verbatim from Paper~45.  The numerical panel matches
+Paper~45's $K^{+}$-weak-form panel \emph{bit-exactly} at every
+tested cell --- the ``free-upgrade'' reading.
+
+Paper~46's Appendix~B (added 2026-05-22) extends the closure to the
+\emph{enlarged} operator system with chirality-flipping generators
+satisfying $\{\JL, M^{\mathrm{flip}}\} = 0$.  The substantive new
+content is the \emph{gradient-norm absorption mechanism}:\ the
+strict-strong-form separation between enlarged and $K^{+}$-weak-form
+substrates manifests at the Lipschitz seminorm level
+($L_{\mathrm{op}}(a^{\mathrm{flip}}) > 0$ on enlarged generators while
+$L^{+}_{\mathrm{P45}}(a^{\mathrm{flip}}) = 0$ identically), but the
+separation is paid \emph{entirely in a $J$-graded gradient-norm
+extension} $G^{\mathrm{enlarged}} = G^{\mathrm{natural}} + 2\opnorm{D_{t}}
+\opnorm{f^{\mathrm{flip}}}$, leaving the Latr\'emoli\`ere propinquity
+bound bit-exactly preserved:\
+$\Lambda^{\mathrm{enlarged}}(\nmax, \Nt) = \Lambda^{\mathrm{P46}}(\nmax, \Nt)$
+at every panel cell.
+
+\subsection{De-compactification limit, norm-resolvent / spectral closure (Paper 47)}
+\label{sec:closures_paper47}
+
+Paper~45~\S 1.4 G2 named the de-compactification limit
+$T \to \infty$ on the temporal carrier $\Sone_{T}$ as a separate
+open program.  Paper~47~\cite{paper47} closes it at the \emph{norm-resolvent / spectral} level via a \emph{two-rate hybrid composite}:
+
+\begin{equation}\label{eq:p47_composite}
+\Tcal^{L}_{\nmax, \Nt, T(\Nt)}
+\;\xrightarrow{\Lprop\text{-rate}\,
+O(\log\nmax/\nmax + T(\Nt)/\Nt)}\;
+\Tcal^{L}_{\sthree \times \Sone_{T(\Nt)}}
+\;\xrightarrow{\mathrm{nr}\text{-rate}\,
+O(e^{-|\Im z|T(\Nt)/2})}\;
+\Tcal^{L}_{\sthree \times \R_{t}}
+\end{equation}
+
+along any \emph{admissible scaling} $T(\Nt) \to \infty$ with
+$T(\Nt)/\Nt \to 0$.  The inner arrow is propinquity convergence at
+coupled cells (Paper~45/46 main theorem applied along the scaling);
+the outer arrow is norm-resolvent convergence of the Lorentzian Dirac
+on the compactified spacetime to the Lorentzian Dirac on the genuine
+spacetime, with explicit exponential tail bound
+$O(e^{-|\Im z|T/2})$ on compact-support subspaces via Reed--Simon
+\cite{reed_simon_iv}~\S~XIII.16 / Bloch-decomposition machinery and
+the Krein-isometric embedding $\widetilde J_{T}:\
+L^{2}(\Sone_{T}) \hookrightarrow L^{2}(\R)$.
+
+A strategic clarification appears in Paper~47~\S 1.1:\ the natural
+\emph{inductive-limit propinquity} framework of
+Latr\'emoli\`ere~\cite{latremoliere2018}~\S~5 for AF C$^{*}$-algebras
+is structurally wrong for the present setting because AF
+C$^{*}$-algebras have totally-disconnected Gelfand spectrum while
+$\R$ is connected, so $C_{0}(\R)$ cannot be an AF inductive limit.
+Norm-resolvent convergence is the right framework at the spectral
+level.
+
+Paper~47~\S 6 also establishes a \emph{three-carrier identification}:\
+the periodic compact $\sthree \times \Sone_{T}$ (Paper~45 substrate),
+the bounded Dirichlet $\sthree \times [-T/2, T/2]$
+(Paper~43 / Sprint L2-B/E substrate), and the non-compact
+$\sthree \times \R_{t}$ (Paper~47 limit) all converge in norm-resolvent
+sense to the same physical Lorentzian Dirac as $T \to \infty$.  This
+resolves the apparent tension between Paper~43's bounded-interval
+architecture (chosen to preserve causal structure / no CTCs via
+Geroch's theorem) and Paper~45's periodic-compact architecture (chosen
+to enable Latr\'emoli\`ere propinquity machinery on a compact
+carrier).  Both are valid compact approximations to the same physical
+Lorentzian Dirac.
+
+A numerical-verification panel (Sprint L3c-$\alpha$.2, 2026-05-23) at
+24 cells $(\nmax, \Nt) \in \{2, 3\} \times \{3, 5, 7, 11\}$ along
+three scalings ($T_{0} = 2\pi$ canonical, $T_{1} = \Nt/\log\Nt$
+sub-linear, $T_{2} = \sqrt{\Nt}$ square-root) confirms
+$\Lambda^{L}$ bit-exact $T$-and-$\Nt$-independence at fixed $\nmax$:\
+$\Lambda(\nmax=2) = 2.074551$ and $\Lambda(\nmax=3) = 1.610060$
+to 6+ significant figures across all three scalings, matching
+Paper~45 Table~1 verbatim.  Structural reason:\ $\gamma^{U(1)}(\Nt, T)$
+is subordinate to $\gamma^{\SU(2)}(\nmax)$ at every admissible-scaling
+cell, so the joint rate $\gammajoint = \max(\gamma^{\SU(2)},
+\gamma^{U(1)}) = \gamma^{\SU(2)}$ exactly.  The empirical confirmation
+upgrades the L3c-$\alpha$ theorem from ``analytical corollary of
+Paper~45'' to ``analytically AND empirically established.''
+
+\subsection{Pythagorean orthogonality formal proof (Paper 43 §10.2 promotion)}
+\label{sec:closures_pythagorean}
+
+Paper~43~\S 11~O4 named a formal proof of the diagonal/off-diagonal
+subspace-decomposition mechanism behind the L2-F.1 (2026-05-17)
+empirical observation $\langle H_{\mathrm{local}}, \DL^{W}
+\rangle_{\mathrm{HS}} = 0$ as a follow-on.  The formal proof landed on
+2026-05-23 via a $\Z_{2}$ wedge-chirality parity argument and is now
+recorded in Paper~43~\S 10.2 as a formal theorem.
+
+The argument has three structural inputs from
+Papers~42/43/44~\cite{paper42,paper43,paper44}:\
+(I1) the wedge chirality grading $\Pi_{W}$ (BBB Krein-chirality
+$\gamma^{5}$ restricted to the wedge) is a unitary self-adjoint
+involution;\
+(I2) $[\Pi_{W}, H_{\mathrm{local}}] = 0$ (even parity of the
+geometric BW-$\alpha$ generator $K_{\alpha}^{W} = J_{\mathrm{polar}}^{W}$
+under wedge chirality);\
+(I3) $\{\Pi_{W}, \DL^{W}\} = 0$ (odd parity of the wedge-restricted
+Lorentzian Dirac, via $\{\gamma^{0}, \gamma^{5}\} = 0$ on the
+temporal factor and the unfolded-wedge basis change on the spatial
+factor).
+
+The orthogonality follows from a parity / cyclicity-of-trace lemma:\
+for any unitary involution $\Pi$ on a Hilbert space, $[\Pi, A] = 0$,
+$\{\Pi, B\} = 0$ imply $\Tr(A^{\dagger} B) = 0$ via
+$\Tr(X) = \Tr(\Pi X \Pi^{-1})$ giving
+$\Tr(A^{\dagger} B) = \Tr(A^{\dagger} \cdot (-B)) = -\Tr(A^{\dagger} B)$,
+forcing $0$.  The bit-exact L2-F.1 numerical panel at 18 cells is
+empirical corroboration of the now-algebraic identity at
+machine precision.
+
+\subsection{Master theorem of the math.OA arc}
+\label{sec:closures_master_theorem}
+
+Paper~39~\S 6 (iii) and (v) named two open follow-ons:\ (iii) the
+k-fold extension of the Paper~39 two-factor tensor-product propinquity
+to $\Tcal_{\sthree}^{\otimes k}$, and (v) the higher-rank tensor product
+$\Tcal_{G_{1}} \otimes \Tcal_{G_{2}}$ at arbitrary compact connected
+Lie group factors.  Both closed on 2026-05-23.
+
+\textbf{(iii) k-fold extension --- $k$-independent constant.}  The
+sprint memo
+\texttt{debug/sprint\_paper39\_k\_fold\_extension\_memo.md}
+established the k-fold theorem at SU(2) factors with closed-form
+$C_{3}^{(k)} \le \sqrt{(N_{*} - 1)/(N_{*} + 1)}$ where $N_{*} :=
+\max_{j} n_{j}$ --- \textbf{$k$-INDEPENDENT, identical to the
+single-factor Paper~38 L3 constant}, asymptotic $\to 1^{-}$.  The
+$O(\sqrt{k})$ estimate that the GeoVac internal record had carried
+(triangle-inequality bound) was strictly improved by the k-fold
+Pythagorean Leibniz identity $\opnorm{\sum_{j} X_{j}}^{2} = \sum_{j}
+\opnorm{X_{j}}^{2}$ on the Connes-Marcolli graded module --- the $k$
+summands of $D^{(k)}$ pairwise anti-commute, so the cross-terms vanish
+and the sum-of-magnitudes bound is replaced by the sum-of-squares
+identity.  The improvement of $\sqrt{k}$ comes from precisely the
+Pythagorean refinement of the triangle inequality.
+
+\textbf{(v) Master theorem --- universal compact-Lie-group factors.}
+Combining the k-fold extension with the universal $4/\pi$ rate of
+Paper~40~\cite{paper40_unified} produces the master theorem of the
+math.OA arc:
+
+\begin{equation}\label{eq:master_theorem}
+\boxed{\;\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
+\Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
+\;\le\; \sup_{j} C_{3}^{G_{j}}(n_{j}) \cdot \max_{j}
+\gamma^{G_{j}}_{n_{j}}\;}
+\end{equation}
+
+for arbitrary $k \ge 1$ and arbitrary compact connected Lie groups
+$G_{1}, \ldots, G_{k}$ with bi-invariant metrics.
+$C_{3}^{(k)}$ is $k$-INDEPENDENT (bounded by the worst-factor
+Paper~40 L3 constant, $\to 1^{-}$).  The joint rate inherits the
+universal $4/\pi$ asymptotic from Paper~40's
+Plancherel-weight $\times$ Vandermonde-Jacobian cancellation.
+
+The two extensions are \emph{structurally orthogonal}:\ the k-fold
+mechanism (Pythagorean Leibniz) acts on the factor-counting
+dimension; the general-$G$ mechanism (PRV-summand Weyl harmonics) acts
+on the per-factor structure.  Each preserves the other's content
+cleanly.
+
+The master theorem subsumes Papers~\cite{paper38}
+($k = 1$, $G = \SU(2)$), \cite{paper40_unified}
+($k = 1$, general $G$), and the two-factor case
+treated above (\S\ref{sec:tensor_extension}, $k = 2$,
+$G_{1} = G_{2} = \SU(2)$) as special cases.  Paper~45's compact-temporal
+Lorentzian extension at $\sthree \times \Sone_{T}$ is the
+$k = 2$, $G_{1} = \SU(2)$, $G_{2} = \Uone$ special case, providing
+independent justification of Paper~45's main theorem from the master
+construction.
+
+% =====================================================================
 \section{Open questions and outlook}
 \label{sec:open}
 % =====================================================================
@@ -1196,22 +1417,42 @@ the K$^{+}$-weak-form level (Paper~45) and the modular-Hamiltonian
 side at the operator-system level on Riemannian (Paper~42) and
 Lorentzian (Paper~43) backgrounds.  Several questions remain open.
 
-\paragraph{Strong-form Lorentzian propinquity (Q1).}
+\paragraph{Strong-form Lorentzian propinquity (Q1) --- CLOSED by
+Paper~46 (\S\ref{sec:closures_paper46}).}
 As noted in \S\ref{sec:lorentzian}, the K$^{+}$-restriction is the
 move that lets the standard Latr\'emoli\`ere machinery apply
 verbatim.  Strong-form Lorentzian propinquity, formulated as a
 Latr\'emoli\`ere-style metric on Krein spectral triples in their
-own right, would require an indefinite-inner-product analog of the
-operator-norm Lipschitz seminorm with the right behaviour under
-Krein-self-adjoint $\DL$.  This is a genuine NCG-math problem at
-multi-month scale.  Paper~45~\S 1.4 G1 names this explicitly.
+own right (Paper~45~\S 1.4 G1), is now closed by
+Paper~46~\cite{paper46} via the operator-norm Lipschitz seminorm
+$L_{\mathrm{op}}(a) = \opnorm{[\DL, a]}$ on the natural
+chirality-doubled scalar-multiplier substrate of Paper~44.  The
+``free-upgrade'' reading holds:\ $\Lambda^{\mathrm{strong}}$ matches
+the $K^{+}$-weak-form bound bit-exactly at every panel cell, with
+$C_{3}^{\mathrm{op}}(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$.
+Paper~46~Appendix~B extends the closure to the enlarged operator
+system with chirality-flipping generators via a gradient-norm
+absorption mechanism, leaving the propinquity bound bit-exactly
+preserved.
 
-\paragraph{De-compactification $T \to \infty$ (G2).}
+\paragraph{De-compactification $T \to \infty$ (G2) --- CLOSED at
+norm-resolvent level by Paper~47 (\S\ref{sec:closures_paper47});\
+G2-metric open as multi-month frontier.}
 The temporal factor $\Uone_{T}$ is finite; the standard physics
 applications (Hawking, Unruh) require non-compact $\R_{t}$.  The
 rate $T/\Nt \to 0$ in \eqref{eq:p45_rate} is the joint
 mass-concentration on $\Uone_{T}$ as $\Nt \to \infty$ at fixed $T$;
-the $T \to \infty$ limit is a separate program (Sprint L3c).
+the $T \to \infty$ limit is closed at the \emph{norm-resolvent /
+spectral} level by Paper~47~\cite{paper47}'s two-rate hybrid
+composite \eqref{eq:p47_composite}.  The remaining open question is
+the \emph{metric / propinquity} level closure on a non-compact carrier
+(G2-metric or equivalently G1-genuine on the non-compact substrate),
+which requires a non-compact extension of Latr\'emoli\`ere's
+propinquity not in the published literature as of May~2026.  This is
+named multi-month frontier (Sprint L3e in our internal taxonomy),
+with the path-of-least-resistance being a pointed-propinquity bridge
+to the Mondino--S\"amann synthetic Lorentzian GH program
+(\S\ref{sec:closures_paper47}).
 
 \paragraph{Cross-manifold $\Tcal_{\sthree} \otimes
 \Tcal_{\mathrm{Hardy}(\sfive)}$ (G3, Coulomb-side claim only).}
@@ -1527,6 +1768,25 @@ J.~Loutey,
 convergence on truncated $\SU(2) \times \Uone_{T}$ Krein spectral
 triples},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~46]{paper46}
+J.~Loutey,
+\newblock \emph{Strong-form Lorentzian propinquity convergence on
+truncated $\SU(2) \times \Uone_{T}$ Krein spectral triples},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~47]{paper47}
+J.~Loutey,
+\newblock \emph{Norm-resolvent convergence to the non-compact
+Lorentzian Krein spectral triple on $\sthree \times \R_{t}$ and the
+two-rate hybrid limit},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Reed \& Simon(1978)]{reed_simon_iv}
+M.~Reed and B.~Simon,
+\newblock \emph{Methods of Modern Mathematical Physics, Vol.~IV:\
+Analysis of Operators},
+\newblock Academic Press, 1978.
 
 \end{thebibliography}
 
