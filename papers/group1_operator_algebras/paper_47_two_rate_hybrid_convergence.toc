@@ -1,0 +1,26 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The strategic reframing}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Two-rate convergence: what it is and what it is not}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Outline}{4}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Setup}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Krein spaces at finite, bounded, and non-compact temporal carrier}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Isometric embeddings}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}The Lorentzian Dirac at each carrier}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Admissible scaling and parametric setup}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}The inner arrow:\ parametric propinquity stability}{6}{section.3}%
+\contentsline {section}{\numberline {4}The outer arrow:\ norm-resolvent convergence}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Definition}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Main theorem (outer arrow)}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Proof of Theorem~\ref {thm:outer}}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Extension to the dense compact-support subspace}{9}{subsection.4.4}%
+\contentsline {section}{\numberline {5}The two-rate hybrid theorem}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Choice of scaling}{10}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Three-carrier identification}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Three carriers, one limit}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Why both Paper 43 and Paper 45 exist}{12}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Discussion and related work}{12}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Position vs Mondino--S\"amann synthetic Lorentzian GH}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Position vs Hekkelman--McDonald 2024}{12}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Position vs Latr\'emoli\`ere}{12}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}The two-rate hybrid framing in NCG}{13}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Open questions}{13}{section.8}%

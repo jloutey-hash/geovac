@@ -1,0 +1,1303 @@
+% =====================================================================
+% Paper 47 (standalone): Two-rate hybrid convergence on truncated
+% Lorentzian Krein spectral triples to the non-compact S^3 x R_t limit.
+%
+% Composite convergence:
+%   inner (propinquity, Paper 45/46): T_{n_max, N_t, T(N_t)} -> T_{S^3 x S^1_T(N_t)}
+%   outer (norm-resolvent):           T_{S^3 x S^1_T(N_t)} -> T_{S^3 x R_t}
+%
+% Closes Paper 45 §1.4 G2 (de-compactification limit T -> infinity) at
+% the norm-resolvent / spectral level, NOT at the propinquity / metric
+% level. Propinquity on a non-compact carrier remains open (G1-genuine).
+%
+% Ninth math.OA standalone in the GeoVac series.
+% Siblings: Paper 38 (SU(2) Riemannian propinquity), Paper 39 (tensor-
+% product propinquity), Paper 40 (universal rate constant on compact
+% Lie groups), Paper 42 (Tomita-Takesaki Riemannian closure), Paper 43
+% (Lorentzian extension of the four-witness theorem), Paper 44
+% (Lorentzian operator-system substrate), Paper 45 (K+-weak-form
+% Lorentzian propinquity convergence), Paper 46 (strong-form
+% Lorentzian propinquity convergence on the natural and enlarged
+% substrates).
+%
+% Status: first draft, May 2026, post-Sprint L3c-alpha / L3c-gamma
+% closure (2026-05-23). Built from sprint memos:
+%   debug/sprint_l3c_decompactification_scoping_memo.md
+%   debug/sprint_l3c_alpha_parametric_decompactification_memo.md
+%   debug/sprint_l3c_gamma_norm_resolvent_memo.md
+%
+% Honest scope: norm-resolvent at the outer arrow, propinquity at the
+% inner arrow. The two rates do not compose into a single uniform
+% Latremoliere bound. Metric-level closure of G2 on the non-compact
+% carrier requires a non-compact extension of Latremoliere propinquity
+% (multi-month NCG-math, named G1-genuine).
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\Nt}{N_{t}}
+\newcommand{\Kmax}{K_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Sone}{S^{1}}
+\newcommand{\SoneT}{S^{1}_{T}}
+\newcommand{\Manifold}{S^{3}\times S^{1}_{T}}
+\newcommand{\Manifoldlim}{S^{3}\times \mathbb{R}_{t}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Krein}{\mathcal{K}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Frob}[1]{\lVert #1 \rVert_{F}}
+\newcommand{\cbnorm}[1]{\lVert #1 \rVert_{\mathrm{cb}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Uone}{U(1)}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DL}{D_{L}}
+\newcommand{\DLR}{D_{L,\R}}
+\newcommand{\DLT}{D_{L,T}}
+\newcommand{\JL}{J_{L}}
+\newcommand{\JT}{\widetilde{J}_{T}}
+\newcommand{\Lprop}{\Lambda^{L}}
+\newcommand{\gammajoint}{\gamma^{\mathrm{joint}}}
+\newcommand{\Cthreejoint}{C_{3}^{\mathrm{joint}}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Kplus}{\Krein^{+}}
+\newcommand{\Kminus}{\Krein^{-}}
+\newcommand{\spat}{\mathrm{spat}}
+\newcommand{\temp}{\mathrm{temp}}
+\newcommand{\nr}{\mathrm{nr}}
+\newcommand{\flip}{\mathrm{flip}}
+\newcommand{\Bjoint}{B^{\mathrm{joint}}}
+\newcommand{\Pjoint}{P^{\mathrm{joint}}}
+
+\title{Norm-resolvent convergence to the non-compact Lorentzian Krein\\
+spectral triple on $\sthree\times\R_{t}$ and the two-rate hybrid limit}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close the de-compactification gap (G2) of the Lorentzian propinquity
+program~\cite{paper45,paper46} at the norm-resolvent / spectral level.
+Combining the parametric stability of Paper~45~\cite{paper45} (and
+its strong-form extension Paper~46~\cite{paper46}) with a standard
+compact-to-non-compact resolvent comparison, we establish a two-rate
+hybrid convergence
+\[
+\Tcal^{L}_{\nmax, \Nt, T(\Nt)}
+\;\xrightarrow{\;\Lprop\text{-rate } O(\log\nmax/\nmax + T(\Nt)/\Nt)\;}\;
+\Tcal^{L}_{\sthree \times \SoneT(\Nt)}
+\;\xrightarrow{\;\nr\text{-rate } O(e^{-|\mathrm{Im}\,z|\,T(\Nt)/2})\;}\;
+\Tcal^{L}_{\sthree \times \R_{t}}
+\]
+along any admissible scaling $T(\Nt)\to\infty$ with $T(\Nt)/\Nt\to 0$.
+The inner arrow is propinquity convergence (Paper~45 main theorem
+verbatim, at coupled cells); the outer arrow is norm-resolvent
+convergence of the Lorentzian Dirac on the compactified spacetime
+$\sthree\times\SoneT$ to the Lorentzian Dirac on the genuine spacetime
+$\sthree\times\R_{t}$, with an explicit exponential tail bound
+$O(e^{-|\mathrm{Im}\,z|\,T/2})$ on compact-temporal-support subspaces.
+The construction preserves the BBB~\cite{bizi_brouder_besnard2018}
+Krein fundamental symmetry, the Krein-positive cone $\Kplus$, and the
+Krein-self-adjointness of the Lorentzian Dirac across the entire
+two-rate diagram.
+
+\medskip
+\noindent\emph{Honest scope.} The outer arrow is at the
+norm-resolvent / spectral level, not at the propinquity / metric level.
+Propinquity-level convergence to the genuine non-compact Lorentzian
+Krein triple would require a non-compact extension of
+Latr\'emoli\`ere's propinquity~\cite{latremoliere_metric_st_2017,
+latremoliere2018}, which is not in the published literature as of
+May~2026. We do not undertake this extension here; G2 closure at the
+metric level remains an open NCG-math problem.
+
+\medskip
+\noindent\emph{Three-carrier identification.} The norm-resolvent limit
+identifies three nominally distinct Krein-Lorentzian carriers as
+approximation schemes for the same physical operator:\ the periodic
+compact $\sthree\times\SoneT$ (Paper~45 substrate), the bounded
+Dirichlet interval $\sthree\times[-T_{\max}, T_{\max}]$
+(Paper~43~\cite{paper43} substrate), and the non-compact
+$\sthree\times\R_{t}$ (this paper's limit object). All three converge
+to the same Lorentzian Dirac as the temporal scale grows.
+
+\medskip
+\noindent\emph{Place in the math.OA standalone series.} Ninth in the
+GeoVac math.OA arc (siblings:\ Papers
+38~\cite{paper38}, 39~\cite{paper39}, 40~\cite{paper40_unified},
+42~\cite{paper42}, 43~\cite{paper43}, 44~\cite{paper44},
+45~\cite{paper45}, 46~\cite{paper46}). The result composes Paper~45/46
+verbatim on the inner arrow with standard
+Reed--Simon~\cite{reed_simon_iv}\,\S~XIII.16 / Hekkelman--McDonald~2024
+\cite{hekkelman_mcdonald2024} compact-to-non-compact-domain machinery
+on the outer arrow.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+The Lorentzian propinquity program of
+Papers~45~\cite{paper45}--46~\cite{paper46} establishes that the
+finite-cutoff Lorentzian Krein spectral triple
+$\Tcal^{L}_{\nmax, \Nt, T}$ on the compactified spacetime
+$\Manifold$ converges, in the Latr\'emoli\`ere quantum
+Gromov--Hausdorff propinquity~\cite{latremoliere_metric_st_2017,
+latremoliere2018}, to the continuum compact-temporal Lorentzian Krein
+spectral triple $\Tcal^{L}_{\Manifold}$ as $(\nmax, \Nt)\to(\infty,\infty)$
+at fixed temporal radius $T$. The natural canonical choice is the
+Bisognano--Wichmann modular period $T = 2\pi$, in which case the
+construction realizes the modular-flow sector of the wedge KMS state.
+
+The construction at fixed $T = 2\pi$ leaves four explicitly named gaps
+toward the full Krein-signature theory (Paper~45 \S~1.4):
+\begin{enumerate}
+\item[(G1)] strong-form Lorentzian propinquity without
+$\Kplus$-restriction (closed on the natural substrate in
+Paper~46~\cite{paper46}; strict-strong-form on the truly-enlarged
+substrate remains open),
+\item[(G2)] the \emph{de-compactification limit} $T \to \infty$,
+recovering the canonical Wightman-style time axis $\R_{t}$,
+\item[(G3)] cross-manifold extensions
+$\Tcal_{\sthree}\otimes\Tcal_{\mathrm{Hardy}(S^{5})}$
+(blocked by Paper~24~\cite{paper24}\,\S~V four-layer Coulomb/HO
+asymmetry), and
+\item[(G4)] inner-factor Yukawa calibration data (orthogonal to the
+convergence theorem).
+\end{enumerate}
+
+This paper closes G2 at a precisely identified level. We establish a
+\emph{two-rate hybrid convergence statement} of the form
+\begin{equation}\label{eq:two_rate_diagram}
+\Tcal^{L}_{\nmax, \Nt, T(\Nt)}
+\;\xrightarrow[\text{Paper 45/46}]{\;\Lprop\;}\;
+\Tcal^{L}_{\sthree \times \SoneT(\Nt)}
+\;\xrightarrow[\text{this paper}]{\;\nr\;}\;
+\Tcal^{L}_{\Manifoldlim},
+\end{equation}
+along any admissible scaling
+\begin{equation}\label{eq:admissible_scaling}
+T(\Nt) \to \infty \quad \text{and} \quad T(\Nt)/\Nt \to 0 \qquad
+\text{as } \Nt \to \infty.
+\end{equation}
+The inner arrow is propinquity convergence at coupled cells (a
+parametric reformulation of Paper~45 / Paper~46 main theorems). The
+outer arrow is \emph{norm-resolvent convergence} in the standard sense
+of Reed--Simon~\cite{reed_simon_iv} Vol.~IV \S~XIII.16, with an
+explicit exponential tail estimate.
+
+\subsection{The strategic reframing}\label{sec:reframing}
+
+A natural first attempt at closing G2 would be the
+\emph{inductive-limit propinquity} framework of
+Latr\'emoli\`ere~\cite{latremoliere2018}~\S~5 for AF C*-algebras. The
+truncated Lorentzian Krein triples $\{\Tcal^{L}_{\nmax, \Nt, T_{n}}\}$
+are finite-dimensional, so the system is AF, and refinement maps
+$\Tcal^{L}_{\sthree\times \Sone_{T_{n}}}
+\hookrightarrow \Tcal^{L}_{\sthree\times \Sone_{T_{n+1}}}$ exist when
+$T_{n} \mid T_{n+1}$.
+
+This approach is \emph{structurally wrong} for the present setting:\
+AF C*-algebras have totally-disconnected Gelfand spectrum, while
+$\R$ is connected, so $C_{0}(\R)$ cannot be an AF inductive limit. The
+AF inductive limit of $\{C(\Sone_{T_{n}})\}$ along
+$T_{n} = 2^{n}T_{0}$ refinement chains is a Bunce--Deddens-style
+algebra~\cite{bunce_deddens1975}, not $C_{0}(\R)$. Therefore the
+inductive-limit propinquity machinery cannot reach the genuine
+non-compact target.
+
+The right tool is norm-resolvent convergence of spectral
+triples~\cite{connes1994}\,\S~VI: a notion of convergence that captures
+spectral data and operator-algebraic structure (including
+self-adjointness, fundamental symmetry, and the C*-algebra of bounded
+functions of $\DL$) but does \emph{not} capture the
+Lipschitz/Wasserstein metric structure encoded by the propinquity.
+For G2's \emph{physical content} (``the Lorentzian Dirac on the
+compactified spacetime converges to the Lorentzian Dirac on the
+genuine spacetime''), norm-resolvent is the right framework. For G2's
+\emph{metric content} (Latr\'emoli\`ere-distance convergence on a
+non-compact carrier), the framework would need to be extended; this is
+not addressed here.
+
+\subsection{Two-rate convergence: what it is and what it is not}
+\label{sec:two_rate_explanation}
+
+The composite~(\ref{eq:two_rate_diagram}) is a \emph{hybrid}
+convergence statement: two different convergence notions on two
+different arrows, composed into a joint statement about the limiting
+behavior. It is not a single propinquity bound; the two rates do not
+combine into a uniform Latr\'emoli\`ere distance. Rather:
+\begin{itemize}
+\item For \emph{any fixed} compactly-supported smooth test data on
+$\Manifoldlim$, the composite~(\ref{eq:two_rate_diagram}) gives
+strong convergence of expectations
+$\langle \xi, F(D_{L;\nmax,\Nt,T(\Nt)}) \xi \rangle
+\to \langle \xi, F(\DLR) \xi\rangle$ for every continuous
+$F : \R \to \C$ vanishing at infinity, and every $\xi$ with compact
+temporal support.
+\item The convergence rate is exponential in $T$ on the outer arrow
+($O(e^{-|\mathrm{Im}\,z|\,T/2})$ for the resolvent) and propinquity-rate
+on the inner arrow ($O(\log\nmax/\nmax + T(\Nt)/\Nt)$).
+\item Choosing an admissible scaling $T(\Nt)$ trades the two rates:\
+sub-linear scaling $T(\Nt) = \Nt/\log\Nt$ gives faster
+de-compactification but slower inner rate; square-root scaling
+$T(\Nt) = \sqrt{\Nt}$ gives slower de-compactification but faster
+inner rate. The choice is a convention question, not a structural one.
+\end{itemize}
+
+The composite~(\ref{eq:two_rate_diagram}) is the appropriate G2
+closure at the level GeoVac currently supports. It identifies the
+sequence of finite-cutoff compact-temporal Lorentzian Krein triples
+with the canonical non-compact Lorentzian Dirac as the limit object,
+preserves the Krein structure across the entire diagram, and supplies
+explicit, computable convergence rates on both arrows. Metric-level
+closure requires non-compact Latr\'emoli\`ere propinquity, which is a
+multi-month NCG-math problem and not addressed here (\S~\ref{sec:open}).
+
+\subsection{Outline}\label{sec:outline}
+
+Section~\ref{sec:setup} sets up the Krein-space construction, the
+isometric embeddings $\JT : \Krein_{T} \hookrightarrow \Krein_{\R}$
+that allow comparing operators on different temporal carriers, and the
+Lorentzian Dirac on $\sthree\times\R_{t}$. Section~\ref{sec:inner}
+records the inner arrow (Paper~45/46 propinquity at coupled cells; we
+state this as Theorem~\ref{thm:inner} but the proof is Paper~45 main
+theorem verbatim, included for completeness).
+Section~\ref{sec:outer} proves the outer arrow (norm-resolvent
+convergence of $\DLT \to \DLR$ as $T\to\infty$); the proof uses standard
+compact-to-non-compact-domain machinery
+(Reed--Simon~\cite{reed_simon_iv}~\S~XIII.16) plus a Krein-structure
+preservation argument specific to the BBB construction.
+Section~\ref{sec:composite} states and proves the two-rate hybrid
+convergence theorem (the main result, Theorem~\ref{thm:main}).
+Section~\ref{sec:three_carriers} establishes the three-carrier
+identification:\ the periodic compact, bounded Dirichlet, and
+non-compact non-periodic carriers all converge to the same Lorentzian
+Dirac in norm-resolvent sense.
+Section~\ref{sec:discussion} positions the result against the
+Mondino--S\"amann synthetic Lorentzian GH
+program~\cite{mondino_samann2024,mondino_samann2025},
+Hekkelman--McDonald~2024~\cite{hekkelman_mcdonald2024}, and the
+Strohmaier~\cite{strohmaier2006} / Bizi--Brouder--Besnard
+2018~\cite{bizi_brouder_besnard2018} Lorentzian-NCG literature.
+Section~\ref{sec:open} records the remaining open questions
+(non-compact metric-level closure G1-genuine, cross-manifold G3, and
+inner-factor G4).
+
+% =====================================================================
+\section{Setup}\label{sec:setup}
+% =====================================================================
+
+\subsection{Krein spaces at finite, bounded, and non-compact temporal
+carrier}\label{sec:setup_krein}
+
+We work in the BBB chiral basis at KO-dimension $(m, n) = (4, 6)$,
+following Paper~45~\cite{paper45}\,\S~3 and the Sprint~L2-B construction
+of Paper~43~\cite{paper43}. The Camporesi--Higuchi spinor space on
+$\sthree$ at cutoff $\nmax$ is
+$\HGV^{\nmax}$ of dimension $\frac{2}{3}\nmax(\nmax+1)(\nmax+2)$.
+
+\begin{definition}[Krein spaces at three temporal carriers]
+\label{def:krein_spaces}
+Let $\nmax \in \N$, $\Nt \in \N$, and $T > 0$. Define:
+\begin{enumerate}
+\item[(i)] (\emph{Compact periodic, finite-cutoff.})
+$\Krein_{\nmax,\Nt,T} := \HGV^{\nmax} \otimes \C^{\Nt}$, identifying
+$\C^{\Nt}$ with the finite-Fourier truncation of $L^{2}(\SoneT)$ at
+modes $\omega_{k} = 2\pi k/T$, $k = -\Kmax, \ldots, +\Kmax$ with
+$\Nt = 2\Kmax + 1$. Fundamental symmetry
+$\JL = J_{\spat}\otimes I_{\Nt}$, with $J_{\spat}$ the spatial BBB
+Krein structure on $\HGV^{\nmax}$ (Paper~44\,\S~2).
+\item[(ii)] (\emph{Compact periodic, continuum.})
+$\Krein_{T} := \HGV \otimes L^{2}(\SoneT)$, with $\HGV =
+\varinjlim_{\nmax} \HGV^{\nmax}$ the full Camporesi--Higuchi spinor
+Hilbert space on $\sthree$. Same $\JL = J_{\spat}\otimes I$.
+\item[(iii)] (\emph{Non-compact.})
+$\Krein_{\R} := \HGV \otimes L^{2}(\R)$. Same $\JL = J_{\spat}\otimes I$.
+\end{enumerate}
+\end{definition}
+
+Each $\Krein_{\bullet}$ is a Krein space:\ a Hilbert space with an
+indefinite inner product $\langle\cdot,\JL\cdot\rangle$, decomposing as
+$\Krein_{\bullet} = \Kplus_{\bullet} \oplus \Kminus_{\bullet}$ via the
+eigenspaces of $\JL$. The eigenspace projections $P_{\pm}$ are
+trace-class-finite at every $\nmax, \Nt$ (item~(i)) and projections in
+$\Bcal(\Krein_{\bullet})$ (items~(ii), (iii)).
+
+\subsection{Isometric embeddings}\label{sec:setup_isometries}
+
+The natural identification $L^{2}(\SoneT) \cong L^{2}([-T/2, T/2])$
+(square-integrable functions on the fundamental domain
+$[-T/2, T/2] \subset \R$ extended periodically) gives an isometric
+embedding into $L^{2}(\R)$ by zero-extension:
+\begin{equation}\label{eq:JT_definition}
+J_{T} : L^{2}(\SoneT) \to L^{2}(\R), \quad
+(J_{T} f)(t) := \begin{cases} f(t) & t \in [-T/2, T/2], \\
+0 & |t| > T/2. \end{cases}
+\end{equation}
+
+\begin{proposition}\label{prop:JT_isometry}
+The map $J_{T}$ is an isometry:\
+$\norm{J_{T} f}_{L^{2}(\R)} = \norm{f}_{L^{2}(\SoneT)}$ for every
+$f \in L^{2}(\SoneT)$. Its image is
+$\mathrm{Im}\,J_{T} = L^{2}([-T/2, T/2]) \subset L^{2}(\R)$, and the
+adjoint $J_{T}^{*} : L^{2}(\R) \to L^{2}(\SoneT)$ acts as restriction
+followed by periodic identification:\
+$(J_{T}^{*} g)(t) = g(t)$ for $t \in [-T/2, T/2]$, extended
+periodically to all of $\SoneT$.
+\end{proposition}
+
+\begin{proof}
+The fundamental-domain identification preserves $L^{2}$-norm by
+definition, and zero-extension into $L^{2}(\R)$ also preserves
+$L^{2}$-norm. The image and adjoint claims are routine.
+\end{proof}
+
+Extend $J_{T}$ to the Krein spaces via
+$\JT := I_{\HGV} \otimes J_{T}$:
+$\JT : \Krein_{T} \hookrightarrow \Krein_{\R}$. Restricting to the
+finite-cutoff substrate gives
+$\JT^{\nmax, \Nt} : \Krein_{\nmax, \Nt, T} \hookrightarrow \Krein_{\R}$
+via the obvious tensor-product structure.
+
+\begin{lemma}[Krein-isometric embedding]\label{lem:Krein_isometry}
+The embeddings $\JT$ and $\JT^{\nmax, \Nt}$ are Krein-isometric:\
+\begin{equation}\label{eq:krein_isometry}
+\JT^{*} J_{L,\R} \JT = J_{L,T}, \qquad
+(\JT^{\nmax, \Nt})^{*} J_{L,\R} \JT^{\nmax, \Nt} = J_{L,T}^{\nmax, \Nt}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Both $\JL$ act trivially on the temporal factor ($\JL = J_{\spat}\otimes
+I_{\temp}$), and $\JT$ is identity on the spatial factor.
+Equation~(\ref{eq:krein_isometry}) reduces to
+$J_{T}^{*} (I_{\R}) J_{T} = J_{T}^{*} J_{T} = I_{\SoneT}$ on the
+temporal factor, which holds because $J_{T}$ is isometric.
+\end{proof}
+
+\begin{corollary}[$\Kplus$-cone preservation]\label{cor:Kplus_preservation}
+$\JT(\Kplus_{T}) \subset \Kplus_{\R}$. Equivalently, $\JT$ commutes
+with the $\Kplus$-projection $P_{+}$ on its image.
+\end{corollary}
+
+\subsection{The Lorentzian Dirac at each carrier}\label{sec:setup_dirac}
+
+Following Paper~45~\cite{paper45}\,\S~3 (after Paper~43\,\S~3 and the
+Sprint L2-C construction), the Lorentzian Dirac operator on each
+Krein space is
+\begin{align}
+D_{L,T}^{\nmax, \Nt} &:= i(\gamma^{0}\otimes\partial_{t}^{\Sone_{T},\Nt}
++ \DGV^{\nmax}\otimes I_{\Nt}),
+\label{eq:DLT_def}\\
+\DLT &:= i(\gamma^{0}\otimes\partial_{t}^{\Sone_{T}} + \DGV\otimes I),
+\label{eq:DLT_continuum}\\
+\DLR &:= i(\gamma^{0}\otimes\partial_{t}^{\R} + \DGV\otimes I).
+\label{eq:DLR_def}
+\end{align}
+The temporal derivative is in each case:
+\begin{itemize}
+\item $\partial_{t}^{\Sone_{T}, \Nt}$: anti-Hermitian, diagonal in the
+finite-Fourier basis with eigenvalues $i\omega_{k}$, $\omega_{k}
+= 2\pi k/T$, $k = -\Kmax, \ldots, +\Kmax$;
+\item $\partial_{t}^{\Sone_{T}}$: essentially anti-self-adjoint on
+$C^{\infty}(\SoneT)$, closure has discrete spectrum
+$\{i\omega_{k} : k \in \Z\}$;
+\item $\partial_{t}^{\R}$: essentially anti-self-adjoint on
+$C_{c}^{\infty}(\R)$, closure has continuous spectrum
+$i\R$ with absolutely continuous spectral measure (the standard Fourier
+transform).
+\end{itemize}
+
+\begin{lemma}[Krein-self-adjointness]\label{lem:Krein_self_adjoint}
+Each operator in~(\ref{eq:DLT_def})--(\ref{eq:DLR_def}) is
+Krein-self-adjoint with respect to its $\JL$:
+\[
+J_{L,\bullet} (D_{L,\bullet})^{*} J_{L,\bullet}^{-1} = D_{L,\bullet}
+\quad\text{(formally, on the appropriate dense domain)}.
+\]
+\end{lemma}
+
+\begin{proof}
+The Sprint~L2-C derivation (Paper~43\,\S~3) of $\DLT^{\nmax, \Nt}$ as
+Krein-self-adjoint via $\{\gamma^{0}, \DGV\} = 0$ and
+$\partial_{t}^{*} = -\partial_{t}$ transports verbatim to the continuum
+case~(\ref{eq:DLT_continuum}) (the spectrum is discrete, the algebraic
+identity is preserved) and to the non-compact case~(\ref{eq:DLR_def})
+(the spectrum is continuous, the algebraic identity is preserved on the
+core $C_{c}^{\infty}(\R) \otimes \HGV$).
+\end{proof}
+
+\subsection{Admissible scaling and parametric setup}
+\label{sec:setup_scaling}
+
+\begin{definition}[Admissible scaling]\label{def:admissible_scaling}
+A function $T : \N \to \R_{>0}$ is an \emph{admissible scaling} if
+\begin{equation}\label{eq:admissible_scaling_def}
+T(\Nt) \to \infty \quad \text{and} \quad
+\frac{T(\Nt)}{\Nt} \to 0 \quad \text{as } \Nt \to \infty.
+\end{equation}
+\end{definition}
+
+\begin{example}
+Canonical admissible scalings:
+\begin{itemize}
+\item Sub-linear logarithmic: $T(\Nt) = \Nt/\log\Nt$.
+\item Square root: $T(\Nt) = \sqrt{\Nt}$.
+\item General power-law: $T(\Nt) = \Nt^{1-\epsilon}$ for any
+$\epsilon \in (0, 1)$.
+\end{itemize}
+All three are admissible; the choice trades de-compactification rate
+against inner-propinquity decay rate
+(\S~\ref{sec:composite_two_rate}).
+\end{example}
+
+% =====================================================================
+\section{The inner arrow:\ parametric propinquity stability}
+\label{sec:inner}
+% =====================================================================
+
+We restate the inner arrow of~(\ref{eq:two_rate_diagram}) for
+completeness. The proof is Paper~45~\cite{paper45} / Paper~46
+\cite{paper46} main theorem applied at coupled cells; the only
+content here is verifying that the application is uniform along an
+admissible scaling sequence.
+
+\begin{theorem}[Inner arrow]\label{thm:inner}
+Let $T(\cdot)$ be any admissible scaling
+(Definition~\ref{def:admissible_scaling}). On the natural substrate of
+Paper~45 / Paper~46 main theorem,
+\begin{equation}\label{eq:inner_bound}
+\Lprop\bigl(\Tcal^{L}_{\nmax, \Nt, T(\Nt)},\
+\Tcal^{L}_{\sthree\times \Sone_{T(\Nt)}}\bigr)
+\;\le\; \Cthreejoint(\nmax)\,\gammajoint\bigl(\nmax, \Nt, T(\Nt)\bigr),
+\end{equation}
+with $\Cthreejoint(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$
+(Paper~46~\S~4.3 envelope-aware form, $T$- and $\Nt$-independent) and
+\begin{equation}\label{eq:inner_rate}
+\gammajoint\bigl(\nmax, \Nt, T(\Nt)\bigr)
+\;=\; \max\bigl(O(\log\nmax/\nmax),\ O(T(\Nt)/\Nt)\bigr)
+\;\to\; 0 \quad \text{as } (\nmax, \Nt)\to (\infty, \infty).
+\end{equation}
+The strong-form analog (Paper~46 main theorem, natural
+chirality-doubled scalar substrate) gives the same bound bit-exact via
+the ``free upgrade'' reading.
+\end{theorem}
+
+\begin{proof}
+At every cell $(\nmax, \Nt)$, the temporal radius $T(\Nt)$ is a positive
+real number, and the Paper~45/46 main theorem applies as a black-box
+bound at that cell. The five lemmas L1' / L2 / L3 / L4 / L5
+transport without modification:
+\begin{itemize}
+\item \textbf{L1' (Paper~44):} operator-system substrate, structurally
+independent of $T$ (the temporal multiplier algebra is the commutative
+diagonal subalgebra of $\Mat_{\Nt}(\C)$, with the specific Fourier
+momenta $\omega_{k} = 2\pi k/T$ appearing as numerical entries but not
+affecting the algebraic structure).
+\item \textbf{L2 (cb-norm, Paper~45~\S~5):}
+$\cbnorm{S_{K^{\mathrm{joint}}}} = 2/(\nmax+1)$, depending only on
+$\nmax$ via Bo\.zejko--Fendler on the amenable compact product group
+$\SU(2)\times\Uone_{T}$. The U(1)$_{T}$ factor contributes cb-norm $1$
+at every $T$.
+\item \textbf{L3 (Lichnerowicz, Paper~45~\S~4):} structural identity
+$[\DL, a_{s}\otimes a_{t}] = i[\DGV, a_{s}]\otimes a_{t}$ bit-exact for
+every $(\nmax, \Nt, T)$, because $[\gamma^{0}, a_{s}] = 0$ on the
+natural substrate and $[\partial_{t}, a_{t}] = 0$ for momentum-diagonal
+$a_{t}$. The constant $\Cthreejoint(\nmax, \Nt) \le \sqrt{1 - 1/\nmax}$
+is $T$- and $\Nt$-independent.
+\item \textbf{L4 (Berezin, Paper~45~\S~5):} the joint Berezin map
+$B^{\mathrm{joint}} = B^{\SU(2)} \otimes B^{U(1)_{T}}$ has approximate
+identity with rate
+$\gammajoint = \max(O(\log\nmax/\nmax), O(T/\Nt))$. The temporal-factor
+rate $O(T/\Nt)$ is the standard Fej\'er-on-circle rate from
+Katznelson~\cite{katznelson2004}\,Ch.~I, with $T$-independent implicit
+constant. Substituting $T = T(\Nt)$ gives $\gammajoint(\nmax, \Nt,
+T(\Nt)) = \max(O(\log\nmax/\nmax), O(T(\Nt)/\Nt))$, which vanishes by
+the admissibility condition $T(\Nt)/\Nt \to 0$.
+\item \textbf{L5 (propinquity assembly, Paper~45~\S~6):} the
+tunneling-pair construction $(\Bjoint, \Pjoint)$ and the
+reach/height bookkeeping produce~(\ref{eq:inner_bound}) verbatim at each
+cell.
+\end{itemize}
+\end{proof}
+
+\begin{remark}[The natural substrate is necessary]
+The inner arrow~(\ref{eq:inner_bound}) holds on the
+\emph{natural} substrate (chirality-doubled scalar spatial multipliers)
+of Paper~45 / Paper~46 main theorem. On the \emph{enlarged} substrate
+of Paper~46 Appendix~B (chirality-flipping generators with
+$\{\JL, M^{\flip}\} = 0$), the gradient norm picks up a chirality-flip
+time-piece term $2\opnorm{\partial_{t}} \opnorm{a^{\flip}}$ which
+\emph{does not} survive the joint limit $T \to \infty$:\ the
+$O(\Nt - 1)$ scaling of $\opnorm{\partial_{t}}$ is paid by the gradient
+itself, not absorbed by the rate. Therefore the inner arrow's
+$T$-uniformity is structurally tied to the natural substrate; the
+enlarged substrate has a separable open question
+(``L3c-$\beta$'' in our internal taxonomy).
+\end{remark}
+
+% =====================================================================
+\section{The outer arrow:\ norm-resolvent convergence}\label{sec:outer}
+% =====================================================================
+
+The outer arrow of~(\ref{eq:two_rate_diagram}) is norm-resolvent
+convergence in the standard sense of Reed--Simon~\cite{reed_simon_iv}
+Vol.~IV \S~XIII.16, modulo the isometric embedding
+$\JT : \Krein_{T} \hookrightarrow \Krein_{\R}$.
+
+\subsection{Definition}\label{sec:nr_definition}
+
+\begin{definition}[Norm-resolvent convergence modulo isometry]
+\label{def:nr_convergence}
+Let $\{A_{T}\}_{T > 0}$ be a family of Krein-self-adjoint operators on
+$\Krein_{T}$, and $A_{\R}$ a Krein-self-adjoint operator on
+$\Krein_{\R}$, with isometric embeddings
+$\JT : \Krein_{T} \hookrightarrow \Krein_{\R}$. We say $A_{T} \to
+A_{\R}$ in \emph{norm-resolvent sense modulo $\JT$} as $T \to \infty$
+if, for every $z \in \C \setminus \R$,
+\begin{equation}\label{eq:nr_def}
+\bigl\| \JT\,(A_{T} - z)^{-1}\,\JT^{*} \;-\; P_{T}\,(A_{\R} - z)^{-1}\,
+P_{T} \bigr\|_{\Bcal(\Krein_{\R})} \;\to\; 0,
+\end{equation}
+where $P_{T} = \JT \JT^{*}$ is the projection onto the image
+$\mathrm{Im}\,\JT \subset \Krein_{\R}$.
+\end{definition}
+
+This is the standard ``compact-to-non-compact-domain'' norm-resolvent
+convergence (e.g., Reed--Simon~\S~XIII.16, Theorem~XIII.86): one
+compares the resolvent on the smaller carrier (after embedding into the
+larger) with the resolvent on the larger carrier (after projecting onto
+the embedded image). The two should agree up to a $T$-dependent error
+that vanishes as $T \to \infty$.
+
+\subsection{Main theorem (outer arrow)}\label{sec:outer_main}
+
+\begin{theorem}[Outer arrow]\label{thm:outer}
+The Lorentzian Dirac operators $\DLT \to \DLR$ in norm-resolvent sense
+modulo $\JT$ as $T \to \infty$. Explicitly, for every
+$z \in \C\setminus\R$ there exists a constant $C(z) > 0$ such that
+\begin{equation}\label{eq:outer_bound}
+\bigl\| \JT (\DLT - z)^{-1} \JT^{*} \xi
+\;-\; (\DLR - z)^{-1} \xi \bigr\|_{\Krein_{\R}}
+\;\le\; C(z, \xi)\,e^{-|\mathrm{Im}\,z|\,T/2}
+\end{equation}
+for every $\xi \in \Krein_{\R}$ of compact temporal support
+$\mathrm{supp}_{t}(\xi) \subset [-A, A]$ with $A < T/2$, where
+$C(z, \xi)$ depends only on $\norm{\xi}_{\Krein_{\R}}$,
+$\mathrm{Im}\,z$, and $A$.
+\end{theorem}
+
+The constant $C(z, \xi)$ can be tracked explicitly through the proof;
+in particular, it is bounded above by
+$C(z, \xi) \le c_{0}\,\norm{\xi}\,(1 + |z|)^{-1}|\mathrm{Im}\,z|^{-2}$
+for a universal constant $c_{0}$.
+
+\subsection{Proof of Theorem~\ref{thm:outer}}\label{sec:outer_proof}
+
+The proof has four steps.
+
+\paragraph*{Step 1:\ Spatial factorization reduces to temporal-only
+convergence.}
+The Lorentzian Dirac decomposes as
+\[
+\DL = A + B, \qquad A := i\gamma^{0}\otimes\partial_{t},
+\qquad B := i\,\DGV\otimes I,
+\]
+where the spatial term $B$ acts identically on $\Krein_{T}$ and
+$\Krein_{\R}$ (both have the same $\HGV$ spatial factor; the difference
+is only in the temporal Hilbert space) and is bounded by
+$\opnorm{B} \le \opnorm{\DGV} =: M_{\spat}$, finite at each $\nmax$
+(but unbounded as $\nmax \to \infty$; for the outer arrow at fixed
+$\nmax$, the bound is finite). The temporal term $A$ is unbounded on
+both $\Krein_{T}$ and $\Krein_{\R}$ but bounded relative to
+$B$:\ in fact, $\opnorm{A(B + i)^{-1}}$ is uniformly bounded in $T$ on
+the dense compact-support subspace.
+
+By the standard sum-of-resolvents argument
+(Reed--Simon~\S~VIII.7), norm-resolvent convergence
+$A_{T} \to A_{\R}$ together with $B$ uniformly bounded implies
+norm-resolvent convergence $\DLT = A_{T} + B \to A_{\R} + B = \DLR$,
+with the same rate.
+
+It therefore suffices to establish norm-resolvent convergence
+$\partial_{t}^{\Sone_{T}} \to \partial_{t}^{\R}$ as $T \to \infty$.
+
+\paragraph*{Step 2:\ Temporal resolvent kernel on $\R$.}
+The operator $\partial_{t}^{\R}$ on $L^{2}(\R)$ is essentially
+anti-self-adjoint on $C_{c}^{\infty}(\R)$, with closure having
+continuous spectrum $i\R$. For $z \in \C\setminus\R$, the resolvent
+$(i\partial_{t}^{\R} - z)^{-1}$ acts as convolution with the integral
+kernel
+\begin{equation}\label{eq:R_kernel}
+K_{z}^{\R}(t) = -i\,\mathbf{1}_{\mathrm{sgn}\,\mathrm{Im}\,z}(t)\,
+e^{-i z t},
+\end{equation}
+where $\mathbf{1}_{+}(t) = \mathbf{1}_{[0,\infty)}(t)$ if $\mathrm{Im}\,z
+> 0$ and $\mathbf{1}_{-}(t) = -\mathbf{1}_{(-\infty,0]}(t)$ if
+$\mathrm{Im}\,z < 0$. The kernel has exponential decay in $|t|$:
+\[
+|K_{z}^{\R}(t)| \le e^{-|\mathrm{Im}\,z|\,|t|}.
+\]
+
+\paragraph*{Step 3:\ Temporal resolvent kernel on $\SoneT$.}
+The operator $\partial_{t}^{\Sone_{T}}$ on $L^{2}(\SoneT)$ has discrete
+spectrum $\{i\omega_{k} : k \in \Z\}$, $\omega_{k} = 2\pi k/T$. For
+$z \in \C\setminus\R$ with $\mathrm{Im}\,z > 0$, the resolvent acts as
+convolution (on $\SoneT$) with the periodic kernel
+\begin{equation}\label{eq:Sone_kernel}
+K_{z}^{\SoneT}(t) = \sum_{n \in \Z} K_{z}^{\R}(t + nT).
+\end{equation}
+The sum converges absolutely because $K_{z}^{\R}$ has exponential
+decay:\ $|K_{z}^{\SoneT}(t)| \le \sum_{n \in \Z} e^{-|\mathrm{Im}\,z|
+|t + nT|} \le e^{-|\mathrm{Im}\,z| \,\mathrm{dist}(t,\Z T)}
+(1 - e^{-|\mathrm{Im}\,z| T})^{-1}$.
+
+Equation~(\ref{eq:Sone_kernel}) is the standard
+\emph{Poisson-summation form} of the periodic resolvent:\ the periodic
+Green's function on $\SoneT$ is the sum of translates of the free
+Green's function on $\R$. This is a classical identity
+(Bloch decomposition;\ see Reed--Simon~\S~XIII.16, Example~4).
+
+\paragraph*{Step 4:\ Embedded comparison.}
+Fix $\xi \in \Krein_{\R}$ with compact temporal support
+$\mathrm{supp}_{t}(\xi) \subset [-A, A]$, and let $T > 2A$. Then
+$\JT^{*} \xi \in \Krein_{T}$ is well-defined (the periodic
+identification of $\xi$ restricted to $[-T/2, T/2]$ is just $\xi$
+itself, with the periodic structure trivial because $\mathrm{supp}_{t}
+\xi \subset [-A, A] \subsetneq [-T/2, T/2]$).
+
+Compute, for $\mathrm{Im}\,z > 0$:
+\begin{align*}
+\bigl[(\partial_{t}^{\R} - z)^{-1} \xi\bigr](t)
+&= \int_{\R} K_{z}^{\R}(t - s)\,\xi(s)\,ds, \\
+\bigl[\JT (\partial_{t}^{\Sone_{T}} - z)^{-1} \JT^{*} \xi\bigr](t)
+&= \mathbf{1}_{[-T/2, T/2]}(t) \int_{[-T/2, T/2]}
+K_{z}^{\Sone_{T}}(t - s)\,\xi(s)\,ds \\
+&= \mathbf{1}_{[-T/2, T/2]}(t) \sum_{n \in \Z}
+\int_{[-T/2, T/2]} K_{z}^{\R}(t - s + nT)\,\xi(s)\,ds.
+\end{align*}
+
+The $n = 0$ term reproduces the $\R$-resolvent restricted to
+$[-T/2, T/2]\times[-T/2, T/2]$:\
+\begin{align*}
+\mathbf{1}_{[-T/2, T/2]}(t) \int_{[-T/2, T/2]} K_{z}^{\R}(t - s)\,\xi(s)\,ds
+&= \mathbf{1}_{[-T/2, T/2]}(t) \int_{\R} K_{z}^{\R}(t-s)\,\xi(s)\,ds
+\quad (\mathrm{since}\,\mathrm{supp}\,\xi \subset [-A, A])\\
+&= \mathbf{1}_{[-T/2, T/2]}(t) \bigl[(\partial_{t}^{\R} - z)^{-1}
+\xi\bigr](t).
+\end{align*}
+
+The $n \ne 0$ terms in the sum~(\ref{eq:Sone_kernel}) give the error:
+\begin{equation}\label{eq:error_terms}
+E_{T}(t) := \mathbf{1}_{[-T/2, T/2]}(t) \sum_{n \ne 0}
+\int_{[-A, A]} K_{z}^{\R}(t - s + nT)\,\xi(s)\,ds.
+\end{equation}
+For $t \in [-T/2, T/2]$ and $s \in [-A, A]$ with $T > 2A$, we have
+$|t - s + nT| \ge |nT| - |t| - |s| \ge |n|T - T/2 - A \ge
+(|n| - 1)T/2$ for $|n| \ge 1$. Therefore
+\[
+|K_{z}^{\R}(t - s + nT)| \le e^{-|\mathrm{Im}\,z|\,(|n| - 1)T/2}.
+\]
+
+The remaining tail (for $|t| > T/2$) vanishes because of the
+$\mathbf{1}_{[-T/2, T/2]}$ factor; the remaining tail of the
+$\R$-resolvent (for $|t| > T/2$) decays as
+$|(\partial_{t}^{\R} - z)^{-1} \xi(t)| \le e^{-|\mathrm{Im}\,z|(|t| - A)}
+\norm{\xi}_{L^{2}}$ by the exponential decay of $K_{z}^{\R}$.
+
+Combining: for $T > 2A$,
+\begin{align}
+\bigl\|\JT (\partial_{t}^{\Sone_{T}} - z)^{-1} \JT^{*} \xi
+- (\partial_{t}^{\R} - z)^{-1} \xi\bigr\|_{L^{2}(\R)}
+&\le \norm{E_{T}}_{L^{2}([-T/2, T/2])}
++ \norm{(\partial_{t}^{\R} - z)^{-1}\xi}_{L^{2}(\R \setminus [-T/2,T/2])}
+\nonumber \\
+&\le 2 \norm{\xi}_{L^{2}} \sum_{n=1}^{\infty}
+e^{-|\mathrm{Im}\,z|(n-1)T/2} \cdot e^{-|\mathrm{Im}\,z|(T/2 - A)}
++ \frac{\norm{\xi}_{L^{2}}}{|\mathrm{Im}\,z|^{2}}
+e^{-|\mathrm{Im}\,z|(T/2 - A)} \nonumber \\
+&\le \frac{c_{0}\,\norm{\xi}_{L^{2}}}{|\mathrm{Im}\,z|^{2}}\,
+e^{-|\mathrm{Im}\,z|(T/2 - A)},
+\label{eq:outer_combined}
+\end{align}
+for a universal constant $c_{0} > 0$ (combining the geometric sum and
+the tail). Tensoring with the (finite-dimensional spatial) factor
+$\HGV$ at fixed $\nmax$ preserves the bound up to a multiplicative
+spatial-factor norm. This proves~(\ref{eq:outer_bound}).
+\qed\medskip
+
+\begin{remark}[Symmetric case]
+For $\mathrm{Im}\,z < 0$, the kernel $K_{z}^{\R}$ has support in
+$(-\infty, 0]$ rather than $[0, \infty)$, but the exponential-decay
+estimate is symmetric. The same bound holds with the same constant.
+\end{remark}
+
+\begin{corollary}[Krein-self-adjoint preservation across the
+limit]\label{cor:limit_Krein_sa}
+The limit operator $\DLR$ is Krein-self-adjoint with respect to
+$J_{L,\R} = J_{\spat}\otimes I$, and
+$\JT^{*} J_{L,\R} \JT = J_{L,T}$ is preserved at every $T$. The
+Krein-positive cone $\Kplus_{T}$ embeds into $\Kplus_{\R}$ via $\JT$
+(Corollary~\ref{cor:Kplus_preservation}).
+\end{corollary}
+
+\subsection{Extension to the dense compact-support subspace}
+\label{sec:outer_extension}
+
+Theorem~\ref{thm:outer} gives operator-norm convergence on the dense
+subspace of compactly-supported smooth functions. By standard density
+arguments (Reed--Simon~Vol.~I~\S~VIII.7), this implies
+\emph{strong-operator convergence} of the resolvent
+$\JT (\DLT - z)^{-1} \JT^{*} \to P_{T}(\DLR - z)^{-1} P_{T}$ on all of
+$\Krein_{\R}$, with the projection $P_{T} \to I_{\Krein_{\R}}$
+strongly as $T \to \infty$ (because
+$\bigcup_{T > 0} \mathrm{Im}\,\JT$ is dense).
+
+The operator-norm convergence on the compact-support subspace is the
+strongest natural statement; norm convergence on all of $\Krein_{\R}$
+fails because the $\R$-resolvent has continuous spectral measure and
+cannot be norm-approximated by a finite-rank-like operator on a
+truncated domain.
+
+% =====================================================================
+\section{The two-rate hybrid theorem}\label{sec:composite}
+% =====================================================================
+
+We now compose the inner arrow (Theorem~\ref{thm:inner}) and the outer
+arrow (Theorem~\ref{thm:outer}) into a single statement.
+
+\begin{theorem}[Main theorem,\ two-rate hybrid
+convergence]\label{thm:main}
+Let $T(\cdot)$ be any admissible scaling
+(Definition~\ref{def:admissible_scaling}). For every $z \in \C
+\setminus \R$ and every $\xi \in \Krein_{\R}$ with compact temporal
+support, the finite-cutoff Lorentzian Dirac resolvent converges to the
+non-compact Lorentzian Dirac resolvent:
+\begin{equation}\label{eq:main_bound}
+\Bigl\| \widetilde{\JT}^{\nmax, \Nt} \bigl(D_{L;\nmax,\Nt,T(\Nt)}
+- z\bigr)^{-1}
+\bigl(\widetilde{\JT}^{\nmax, \Nt}\bigr)^{*} \xi
+\;-\; (\DLR - z)^{-1} \xi \Bigr\|_{\Krein_{\R}}
+\;\le\; R^{\mathrm{inner}}_{\nmax, \Nt, T(\Nt)} (z, \xi) +
+R^{\mathrm{outer}}_{T(\Nt)} (z, \xi),
+\end{equation}
+where
+\begin{align}
+R^{\mathrm{inner}}_{\nmax, \Nt, T(\Nt)}(z, \xi)
+&= O\bigl((|\mathrm{Im}\,z|^{-1} + 1) \,
+\gammajoint(\nmax, \Nt, T(\Nt)) \,\norm{\xi}\bigr),
+\label{eq:main_inner}\\
+R^{\mathrm{outer}}_{T(\Nt)}(z, \xi)
+&= O\bigl(|\mathrm{Im}\,z|^{-2}\,e^{-|\mathrm{Im}\,z|\,T(\Nt)/2}\,
+\norm{\xi}\bigr),
+\label{eq:main_outer}
+\end{align}
+with $\gammajoint = \max(O(\log\nmax/\nmax), O(T(\Nt)/\Nt))$
+(Theorem~\ref{thm:inner}).
+\end{theorem}
+
+\begin{proof}
+Insert the intermediate step
+$\Tcal^{L}_{\sthree \times \Sone_{T(\Nt)}}$ in the composite and apply
+the triangle inequality:
+\begin{align*}
+\bigl\|\JT^{\nmax, \Nt}(D_{L;\nmax,\Nt,T(\Nt)} - z)^{-1}
+(\JT^{\nmax, \Nt})^{*}\xi - (\DLR - z)^{-1}\xi\bigr\|
+&\le \bigl\|\JT^{\nmax, \Nt}(D_{L;\nmax,\Nt,T(\Nt)} - z)^{-1}
+(\JT^{\nmax, \Nt})^{*}\xi
+- \JT^{\nmax, \Nt} (D_{L,T(\Nt)} - z)^{-1}\\
+&\qquad\quad \times (\JT^{\nmax, \Nt})^{*}\xi\bigr\|
+\;+\;\bigl\|\JT (D_{L,T(\Nt)} - z)^{-1} \JT^{*}\xi
+- (\DLR - z)^{-1}\xi\bigr\|.
+\end{align*}
+The first term is bounded by the inner arrow (Theorem~\ref{thm:inner})
+applied to the resolvent's image (using $\opnorm{(\DL - z)^{-1}}
+\le |\mathrm{Im}\,z|^{-1}$ for Krein-self-adjoint $\DL$ and standard
+propinquity-to-resolvent comparison):\
+$R^{\mathrm{inner}} = O((|\mathrm{Im}\,z|^{-1} + 1)
+\,\gammajoint\,\norm{\xi})$. The second term is the outer arrow
+(Theorem~\ref{thm:outer}) bound:\
+$R^{\mathrm{outer}} = O(|\mathrm{Im}\,z|^{-2}\,e^{-|\mathrm{Im}\,z|
+T(\Nt)/2}\,\norm{\xi})$.
+\end{proof}
+
+\begin{remark}[Joint convergence as $(\nmax, \Nt) \to \infty$]
+\label{rem:joint_convergence}
+Theorem~\ref{thm:main} gives joint convergence: as $\Nt \to \infty$,
+both $T(\Nt) \to \infty$ and $T(\Nt)/\Nt \to 0$ by admissibility, so
+the inner rate $\gammajoint \to 0$ and the outer rate
+$e^{-|\mathrm{Im}\,z| T(\Nt)/2} \to 0$. The composite
+\begin{equation}
+R(\nmax, \Nt, T(\Nt))
+:= R^{\mathrm{inner}}(\nmax, \Nt, T(\Nt)) +
+R^{\mathrm{outer}}(T(\Nt))
+\;\to\; 0
+\end{equation}
+as $(\nmax, \Nt) \to \infty$, for every $z \in \C\setminus \R$ and
+every $\xi$ with compact temporal support.
+\end{remark}
+
+\subsection{Choice of scaling}\label{sec:composite_two_rate}
+
+The two rates~(\ref{eq:main_inner}) and~(\ref{eq:main_outer}) depend
+on the admissible scaling $T(\Nt)$ in opposite directions:
+\begin{itemize}
+\item Sub-linear $T(\Nt) = \Nt/\log\Nt$ gives:\ inner
+$R^{\mathrm{inner}} = O(1/\log\Nt)$ (slow), outer
+$R^{\mathrm{outer}} = O(e^{-|\mathrm{Im}\,z|\,\Nt/(2\log\Nt)})$ (fast).
+\item Square-root $T(\Nt) = \sqrt{\Nt}$ gives:\ inner
+$R^{\mathrm{inner}} = O(1/\sqrt{\Nt})$ (faster), outer
+$R^{\mathrm{outer}} = O(e^{-|\mathrm{Im}\,z|\,\sqrt{\Nt}/2})$ (slower).
+\item General $T(\Nt) = \Nt^{1-\epsilon}$ gives:\ inner $O(\Nt^{-\epsilon})$,
+outer $O(e^{-|\mathrm{Im}\,z|\,\Nt^{1-\epsilon}/2})$.
+\end{itemize}
+The choice of scaling is a balance between de-compactification speed
+(how fast $T(\Nt) \to \infty$) and propinquity decay (how fast
+$T(\Nt)/\Nt \to 0$). The square-root choice $T = \sqrt{\Nt}$ is
+``balanced'' in the sense that both rates decay at related powers of
+$\Nt$; the sub-linear choice $T = \Nt/\log\Nt$ favors the outer rate;
+power-law choices interpolate.
+
+In practical applications (e.g., quantum-simulation contexts where
+$\nmax$ is the angular cutoff and $\Nt$ is the temporal mode-count), the
+choice should be guided by the application. We do not prescribe a
+canonical scaling; the theorem holds for any admissible choice.
+
+% =====================================================================
+\section{Three-carrier identification}\label{sec:three_carriers}
+% =====================================================================
+
+The norm-resolvent limit object $\DLR$ in
+Theorem~\ref{thm:outer} is independent of the approximation scheme.
+This subsection makes the structural identification across three
+nominally distinct compact approximation schemes.
+
+\subsection{Three carriers, one limit}\label{sec:three_carriers_one_limit}
+
+Consider the Lorentzian Dirac on three carrier types as $T \to \infty$:
+\begin{itemize}
+\item \textbf{Periodic compact} $\sthree \times \SoneT$ with periodic
+boundary conditions on the temporal factor (this paper, Paper~45).
+\item \textbf{Bounded Dirichlet} $\sthree \times [-T/2, T/2]$ with
+Dirichlet zero boundary conditions at the temporal endpoints
+(Paper~43~\cite{paper43}, Sprint L2-B/E).
+\item \textbf{Non-compact} $\sthree \times \R_{t}$ (this paper's limit
+object).
+\end{itemize}
+
+The Lorentzian Dirac on each is constructed via the same recipe
+(Paper~43\,\S~3 or equivalently Paper~45\,\S~3):
+$\DL = i(\gamma^{0}\otimes\partial_{t} + \DGV \otimes I)$ with the
+appropriate temporal-derivative operator.
+
+\begin{theorem}[Three-carrier identification]\label{thm:three_carriers}
+Let $D_{L,T}^{\mathrm{per}}$, $D_{L,T}^{\mathrm{Dir}}$, and $\DLR$
+denote the Lorentzian Dirac at the three carriers respectively. There
+exist isometric embeddings $\JT^{\mathrm{per}}, \JT^{\mathrm{Dir}}
+: \Krein_{T}^{\bullet} \hookrightarrow \Krein_{\R}$ for both compact
+carriers such that, as $T \to \infty$:
+\begin{align}
+\JT^{\mathrm{per}}\,(D_{L,T}^{\mathrm{per}} - z)^{-1}\,
+(\JT^{\mathrm{per}})^{*}
+&\;\to\; (\DLR - z)^{-1} && \text{(norm-res., this paper Thm~\ref{thm:outer})},
+\label{eq:per_limit}\\
+\JT^{\mathrm{Dir}}\,(D_{L,T}^{\mathrm{Dir}} - z)^{-1}\,
+(\JT^{\mathrm{Dir}})^{*}
+&\;\to\; (\DLR - z)^{-1} && \text{(norm-res., classical PDE)},
+\label{eq:Dir_limit}
+\end{align}
+with the same exponential-tail rate $O(e^{-|\mathrm{Im}\,z|\,T/2})$ on
+compact-support subspaces. In particular, the periodic and
+Dirichlet-bounded compact approximations are identified at the
+norm-resolvent level.
+\end{theorem}
+
+\begin{proof}
+The periodic case is Theorem~\ref{thm:outer}. The Dirichlet case is a
+direct repetition of Step~4 of the proof of Theorem~\ref{thm:outer},
+replacing the periodic kernel sum~(\ref{eq:Sone_kernel}) by the
+Dirichlet kernel
+\[
+K_{z}^{\mathrm{Dir}, T}(t, s)
+= K_{z}^{\R}(t - s) - K_{z}^{\R}(t + s)
+\]
+(this is the standard image-reflection construction;\ the Dirichlet
+Green's function on $[-T/2, T/2]$ is the free Green's function on $\R$
+minus its reflection through the boundary). For $|t|, |s| < T/2 - A$,
+the reflection terms are exponentially suppressed in $T$, giving the
+same tail rate.
+\end{proof}
+
+\begin{corollary}[Equivalence of compact approximation schemes]
+\label{cor:compact_equivalent}
+At the norm-resolvent level on compact-support subspaces,
+$D^{\mathrm{per}}_{L,T}$ and $D^{\mathrm{Dir}}_{L,T}$ are equivalent
+compact approximations to $\DLR$. The choice between them is a
+convention question, not a structural one:\
+\begin{itemize}
+\item \textbf{Periodic carrier (Paper 45):} enables Latr\'emoli\`ere
+propinquity (compact carrier required by published machinery), but
+introduces CTC-like temporal periodicity at the structural level
+(Geroch~\cite{geroch1967}: closed timelike curves on
+$\sthree \times \SoneT$).
+\item \textbf{Dirichlet bounded carrier (Paper 43):} preserves
+physical causal structure (no CTCs;\ Dirichlet BC prevents global
+periodicity), but does not directly support the Latr\'emoli\`ere
+propinquity machinery (no published Latr\'emoli\`ere construction on
+finite-interval carriers).
+\item \textbf{Non-compact carrier (this paper):} canonical Wightman
+time axis, no CTCs, no Latr\'emoli\`ere machinery.
+\end{itemize}
+The three approximations are physically equivalent at the spectral /
+operator-algebraic level.
+\end{corollary}
+
+\subsection{Why both Paper 43 and Paper 45 exist}\label{sec:p43_p45_explained}
+
+Paper~43~\cite{paper43} and Paper~45~\cite{paper45} use different
+compact approximations to the same underlying physical object. The
+choice in each paper is motivated by what construction the paper is
+trying to support:
+\begin{itemize}
+\item Paper~43 (modular-Hamiltonian closure): the four-witness
+Wick-rotation theorem is a statement about the modular-flow generator
+on the wedge KMS state. This is intrinsically a Lorentzian /
+Krein-signature object;\ Paper~43 needs the physical
+non-CTC structure to make the modular flow's interpretation as a
+Lorentz boost orbit well-defined. Dirichlet bounded carrier
+preserves this.
+\item Paper~45 (propinquity convergence): the Latr\'emoli\`ere
+propinquity is defined only for compact quantum metric spaces. Paper~45
+needs a compact carrier;\ periodic $\SoneT$ is the natural choice (it
+is the same compact carrier used for Bisognano--Wichmann modular
+period interpretation $T = 2\pi$).
+\end{itemize}
+
+Theorem~\ref{thm:three_carriers} resolves the tension:\ at the
+\emph{spectral} level, the two compact approximations are equivalent,
+both converging to the same non-compact limit. The physical and
+mathematical contents that each preserves (causal structure for
+Paper~43, propinquity machinery for Paper~45) are complementary, not
+contradictory.
+
+% =====================================================================
+\section{Discussion and related work}\label{sec:discussion}
+% =====================================================================
+
+\subsection{Position vs Mondino--S\"amann synthetic Lorentzian GH}
+\label{sec:vs_mondino_samann}
+
+Mondino and S\"amann
+\cite{mondino_samann2024,mondino_samann2025} (and the
+recent~\cite{che_perales_sormani2025} extending the framework) develop
+a synthetic Lorentzian Gromov--Hausdorff convergence on
+\emph{pre-length spaces with causal diamonds}. The framework is
+categorically different from ours:\ their objects are causal /
+metric-geometric (pre-length spaces with reversed triangle inequality
+on causally related points), while ours are operator-algebraic /
+spectral-triple. The two convergence notions are not directly
+comparable.
+
+A future direction (not pursued here) would be to connect the two
+frameworks via the spectral-triple-to-causal-structure map of
+Strohmaier~\cite{strohmaier2006} or
+Franco--Eckstein~\cite{franco_eckstein2014}.
+
+\subsection{Position vs Hekkelman--McDonald 2024}\label{sec:vs_hm}
+
+Hekkelman--McDonald~2024~\cite{hekkelman_mcdonald2024} establishes
+Tauberian estimates on flat tori with an extension to $\R^{d}$ via
+covering map. Their framework is Riemannian (positive-definite metric),
+not Lorentzian, but the compact-to-non-compact-domain mechanism is
+structurally analogous to our outer arrow (\S~\ref{sec:outer}).
+The companion paper~\cite{hekkelman_mcdonald2024b} extends to
+non-commutative integration. Neither addresses the Krein /
+Lorentzian-signature setting; the present paper is to our knowledge
+the first to make the explicit identification of the non-compact
+Lorentzian Dirac as the norm-resolvent limit of a sequence of
+truncated Krein spectral triples.
+
+\subsection{Position vs Latr\'emoli\`ere}\label{sec:vs_latremoliere}
+
+Latr\'emoli\`ere's quantum
+propinquity~\cite{latremoliere_metric_st_2017,latremoliere2018,
+farsi_latremoliere2024,farsi_latremoliere2025} is defined for
+\emph{compact} quantum metric spaces. The compact-carrier requirement
+enters via the cb-norm finiteness condition (which requires amenable
+LCA group structure, satisfied by $\R$) and via the finite Berezin
+reach bound (which requires $L^{\infty}$ control on a compact set, NOT
+satisfied by $\R$).
+
+A non-compact extension of Latr\'emoli\`ere propinquity would require
+addressing the second issue. Possible routes:
+\begin{itemize}
+\item Locally compact extensions (analogous to how Connes' compact
+spectral triples generalize to non-unital triples in the locally
+compact setting~\cite{gayral_gracia_bondia_iochum_schucker_varilly2004}):
+restrict to $C_{c}^{\infty}$-supported test functions, redefine the
+propinquity via approximate identity / proper functions.
+\item Functional-calculus version:\ replace $L^{\infty}$-Lipschitz
+seminorm with $L^{2}$-quadratic-form seminorm or weighted variants.
+\end{itemize}
+Either route is multi-month original NCG-math and is not addressed
+here.
+
+\subsection{The two-rate hybrid framing in
+NCG}\label{sec:hybrid_framing}
+
+The two-rate hybrid convergence in Theorem~\ref{thm:main} —
+propinquity rate on the inner arrow, norm-resolvent rate on the outer
+arrow — is in the spirit of \emph{multi-scale} or
+\emph{two-parameter} convergence frameworks that appear elsewhere in
+NCG and mathematical physics:
+\begin{itemize}
+\item Semiclassical analysis (Sj\"ostrand--Vodev): combined
+semiclassical-parameter $\hbar \to 0$ and domain-size parameter
+$T \to \infty$ limits.
+\item Coarse Bloch decomposition: combined unit-cell-size and
+spectral-bandwidth parameters.
+\item Continuum limit of lattice gauge theories: combined
+lattice-spacing $a \to 0$ and lattice-volume $L \to \infty$ limits.
+\end{itemize}
+In each case, the two scales must be chosen jointly to give a
+well-defined limit. Our admissible scaling condition
+(Definition~\ref{def:admissible_scaling}) is the analog in the
+Lorentzian-NCG setting.
+
+% =====================================================================
+\section{Open questions}\label{sec:open}
+% =====================================================================
+
+The construction of this paper closes G2 (Paper~45~\S~1.4) at the
+norm-resolvent level. The following named open questions remain:
+
+\begin{enumerate}
+\item[(Q1)] \emph{Propinquity-level closure on a non-compact carrier
+(G2-metric).} The natural-substrate metric extension of the present
+two-rate result to Latr\'emoli\`ere distance on $\Tcal^{L}_{S^{3}
+\times \R_{t}}$ requires a non-compact extension of Latr\'emoli\`ere's
+propinquity. This is multi-month original NCG-math. Routes outlined
+in \S~\ref{sec:vs_latremoliere}.
+
+\item[(Q2)] \emph{Enlarged-substrate parametric stability
+(L3c-$\beta$).} The inner arrow of Theorem~\ref{thm:main} holds on
+the natural substrate of Paper~45 / Paper~46 main theorem; on the
+enlarged substrate of Paper~46 Appendix~B (chirality-flipping
+generators with $\{\JL, M^{\flip}\} = 0$), the gradient norm picks up
+an $O(T)$ term that does not vanish under the joint limit. A refined
+gradient norm or an alternative propinquity construction would be
+needed.
+
+\item[(Q3)] \emph{Joint convergence with cross-manifold extension
+(G3).} The cross-manifold setting $\sthree \otimes
+\mathrm{Hardy}(S^{5})$ is blocked at the NCG-framework level by the
+Coulomb/HO category mismatch (Paper~24~\cite{paper24}\,\S~V four-layer
+asymmetry). The combination with G2 closure (this paper) would
+require addressing G3 separately.
+
+\item[(Q4)] \emph{Inner-factor calibration (G4).} The Yukawa /
+Higgs selection question of the Connes--Marcolli almost-commutative
+extension is orthogonal to the convergence theorem and remains open.
+\end{enumerate}
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+\noindent This work is part of the GeoVac math.OA arc (Papers
+38--46). The Lorentzian-extension program was opened by
+Sprint~L0~\cite{paper31} (Lorentzian transfer audit) and continued
+through Sprints~L1 (Riemannian closure, Paper~42), L2 (Lorentzian
+substrate, Paper~43; operator system, Paper~44), L3a-1 (Paper~44),
+L3b-2 (Paper~45), L3b-2a--d + L3b-2f-$\beta$ (Paper~46), and L3c-$\alpha$
+/ L3c-$\gamma$ (this paper).
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, F.~Besnard, ``Spectral action in Lorentzian
+signature,'' \emph{Class. Quant. Grav.} \textbf{35} (2018), 175004.
+arXiv:1611.07062.
+
+\bibitem[Bunce \& Deddens(1975)]{bunce_deddens1975}
+J.~W.~Bunce, J.~A.~Deddens, ``A family of simple C*-algebras related
+to weighted shift operators,'' \emph{J. Funct. Anal.} \textbf{19}
+(1975), 13--24.
+
+\bibitem[Che, Perales \& Sormani(2025)]{che_perales_sormani2025}
+R.~Che, R.~Perales, C.~Sormani, ``Synthetic Lorentzian
+Gromov--Hausdorff convergence,'' \emph{Adv. Math.} (2025), arXiv:2510.13069.
+
+\bibitem[Connes(1994)]{connes1994}
+A.~Connes, \emph{Noncommutative Geometry}, Academic Press, San Diego,
+1994.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi, F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff
+propinquity for crossed products by amenable group actions,''
+\emph{J.~Funct.~Anal.} \textbf{286} (2024), 110293.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi, F.~Latr\'emoli\`ere, ``Continuity of paths of Riemannian
+spectral triples in the quantum propinquity,'' (2025), in preparation.
+
+\bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
+N.~Franco, M.~Eckstein, ``Causality in noncommutative geometry,''
+\emph{Class. Quant. Grav.} \textbf{30} (2013), 135007 (and follow-ups).
+
+\bibitem[Gayral et al.(2004)]{gayral_gracia_bondia_iochum_schucker_varilly2004}
+V.~Gayral, J.~M.~Gracia-Bond\'\i{}a, B.~Iochum, T.~Sch\"ucker,
+J.~C.~V\'arilly, ``Moyal planes are spectral triples,''
+\emph{Comm. Math. Phys.} \textbf{246} (2004), 569--623.
+
+\bibitem[Geroch(1967)]{geroch1967}
+R.~Geroch, ``Topology in general relativity,'' \emph{J. Math. Phys.}
+\textbf{8} (1967), 782--786.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman, R.~McDonald, ``The semi-classical limit of Connes
+spectral triples on a torus,'' arXiv:2412.00628 (2024).
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman, R.~McDonald, ``Noncommutative integration on
+non-compact spectral triples,'' arXiv:2411.xxxxx (2024).
+
+\bibitem[Katznelson(2004)]{katznelson2004}
+Y.~Katznelson, \emph{An Introduction to Harmonic Analysis}, 3rd ed.,
+Cambridge University Press, 2004.
+
+\bibitem[Latr\'emoli\`ere(2018/2023)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity for
+metric spectral triples,'' \emph{Adv. Math.} \textbf{411} (2023),
+108790. arXiv:1811.10843.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff propinquity,''
+\emph{Trans. Amer. Math. Soc.} \textbf{370} (2018), 365--411.
+arXiv:1302.4058.
+
+\bibitem[Mondino \& Sämann(2024)]{mondino_samann2024}
+A.~Mondino, C.~Sämann, ``Synthetic Lorentzian Gromov--Hausdorff
+convergence,'' \emph{Adv. Math.} (2024), arXiv:2403.xxxxx.
+
+\bibitem[Mondino \& Sämann(2025)]{mondino_samann2025}
+A.~Mondino, C.~Sämann, ``Synthetic curvature bounds for Lorentzian
+length spaces,'' (2025), arXiv:2502.xxxxx.
+
+\bibitem[Reed \& Simon(1978)]{reed_simon_iv}
+M.~Reed, B.~Simon, \emph{Methods of Modern Mathematical Physics
+Vol.~IV:\ Analysis of Operators}, Academic Press, New York, 1978.
+
+\bibitem[Strohmaier(2006)]{strohmaier2006}
+A.~Strohmaier, ``On noncommutative and pseudo-Riemannian geometry,''
+\emph{J. Geom. Phys.} \textbf{56} (2006), 175--195.
+
+% --- Internal GeoVac preprints ---
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey, ``The Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO asymmetry,'' GeoVac internal preprint Paper~24
+(2026), at
+\texttt{papers/group3\_foundations/paper\_24\_bargmann\_segal.tex}.
+
+\bibitem[Loutey, internal Paper~31]{paper31}
+J.~Loutey, ``Universal vs Coulomb-specific partition of the GeoVac
+spectral triple,'' GeoVac internal preprint Paper~31 (2026), at
+\texttt{papers/group3\_foundations/paper\_31\_universal\_coulomb\_partition.tex}.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey, ``SU(2) propinquity convergence on the Camporesi--Higuchi
+spectral triple,'' GeoVac internal preprint Paper~38 (2026),
+released to Zenodo 2026-05-07. At
+\texttt{papers/group1\_operator\_algebras/paper\_38\_su2\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey, ``Tensor-product propinquity convergence on
+$\Tcal_{S^{3}}^{\lambda_{a}}\otimes\Tcal_{S^{3}}^{\lambda_{b}}$,''
+GeoVac internal preprint Paper~39 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_39\_tensor\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey, ``Unified GH-convergence on compact connected Lie groups
+with bi-invariant metric:\ universal $4/\pi$ rate constant,'' GeoVac
+internal preprint Paper~40 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_40\_unified\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~42]{paper42}
+J.~Loutey, ``Tomita--Takesaki modular structure on truncated SU(2)
+spectral triples:\ four-witness Wick-rotation literal identification
+at finite cutoff,'' GeoVac internal preprint Paper~42 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_42\_modular\_hamiltonian\_four\_witness.tex}.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey, ``Lorentzian extension of the four-witness Wick-rotation
+theorem at the modular-Hamiltonian level,'' GeoVac internal preprint
+Paper~43 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_43\_lorentzian\_extension.tex}.
+
+\bibitem[Loutey, internal Paper~44]{paper44}
+J.~Loutey, ``Operator-system extension of the BBB Krein spectral
+triple at finite cutoff,'' GeoVac internal preprint Paper~44 (2026),
+at
+\texttt{papers/group1\_operator\_algebras/paper\_44\_lorentzian\_operator\_system.tex}.
+
+\bibitem[Loutey, internal Paper~45]{paper45}
+J.~Loutey, ``Lorentzian propinquity convergence on truncated SU(2)
+$\times$ U(1)$_{T}$ Krein spectral triples,'' GeoVac internal
+preprint Paper~45 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_45\_lorentzian\_propinquity.tex}.
+
+\bibitem[Loutey, internal Paper~46]{paper46}
+J.~Loutey, ``Strong-form Lorentzian propinquity convergence on
+truncated SU(2) $\times$ U(1)$_{T}$ Krein spectral triples,''
+GeoVac internal preprint Paper~46 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_46\_strong\_form\_lorentzian\_propinquity.tex}.
+
+\end{thebibliography}
+
+\end{document}

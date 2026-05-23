@@ -282,8 +282,21 @@ NCG-math problem not addressed here.
 \item[(G2)] \emph{De-compactification limit $T \to \infty$.} Our
 construction is at compact temporal radius $T$ canonical
 $T = 2\pi$ (the BW modular period). The non-compact $\R_{t}$ limit
-re-introduces the joint compact $\times$ non-compact issue and is a
-separate program (Sprint L3c in our internal taxonomy).
+re-introduces the joint compact $\times$ non-compact issue.
+\textbf{The norm-resolvent / spectral level of this limit is closed in
+Paper~47~\cite{paper47}\,\S~4--5 via a two-rate hybrid composite:\ the
+inner arrow is parametric propinquity stability of the present
+construction at coupled cells $(\nmax, \Nt, T(\Nt))$ along an
+admissible scaling $T(\Nt) \to \infty$ with $T(\Nt)/\Nt \to 0$, and the
+outer arrow is norm-resolvent convergence of the Lorentzian Dirac on
+$\sthree\times\SoneT$ to the Lorentzian Dirac on $\sthree\times\R_{t}$
+with explicit exponential tail $O(e^{-|\mathrm{Im}\,z|\,T/2})$ on
+compact-support subspaces.} The \emph{metric / propinquity} level of
+this limit on the non-compact carrier remains open (it requires a
+non-compact extension of Latr\'emoli\`ere's propinquity, which is not
+in the published literature as of May~2026):\ named G2-metric or
+equivalently G1-genuine on the non-compact substrate (Sprint L3c-$\beta$
+/ L3e in our internal taxonomy).
 \item[(G3)] \emph{Cross-manifold extensions} of the form
 $\Tcal_{\sthree} \otimes \Tcal_{\mathrm{Hardy}(S^{5})}$ are blocked at
 the NCG-framework level by the Riemannian--vs--Hardy-sector asymmetry
@@ -1183,6 +1196,36 @@ supplied by Lemmas~\ref{lem:L1prime}, \ref{lem:L2}, \ref{lem:L3},
 one of them. No new analytical input enters the assembly.
 \end{remark}
 
+\begin{remark}[Two-rate hybrid convergence to the non-compact carrier]
+\label{rem:two_rate_hybrid}
+The construction here is at \emph{fixed} compact temporal radius $T$
+(canonical $T = 2\pi$). At any \emph{admissible scaling}
+$T(\Nt) \to \infty$ with $T(\Nt)/\Nt \to 0$ as $\Nt \to \infty$, the
+present theorem applies at every coupled cell
+$(\nmax, \Nt, T(\Nt))$ with $\Cthreejoint(\nmax) =
+\sqrt{1 - 1/\nmax}$ ($T$-independent by L3 structural identity
+(\ref{eq:L3_struct_id})) and $\gammajoint = \max(O(\log\nmax/\nmax),
+O(T(\Nt)/\Nt)) \to 0$ (the U(1)$_{T}$ factor of L4 carries the only
+$T$-dependence in the bound, and it is the standard Fej\'er-on-circle
+rate). Composed with the norm-resolvent convergence
+$\Tcal^{L}_{\Manifold} \to \Tcal^{L}_{\sthree\times\R_{t}}$ of
+Paper~47~\cite{paper47}~\S~4, this gives a \emph{two-rate hybrid
+convergence} statement
+\[
+\Tcal^{L}_{\nmax, \Nt, T(\Nt)} \xrightarrow{\Lprop\text{-rate }
+O(\log\nmax/\nmax + T(\Nt)/\Nt)}
+\Tcal^{L}_{\sthree\times\Sone_{T(\Nt)}}
+\xrightarrow{\mathrm{nr}\text{-rate }
+O(e^{-|\mathrm{Im}\,z|\,T(\Nt)/2})}
+\Tcal^{L}_{\sthree\times\R_{t}}
+\]
+identifying the non-compact Lorentzian Dirac as the spectral limit of
+the framework's compact-temporal sequence. The propinquity-level
+closure on the non-compact carrier (single uniform Latr\'emoli\`ere
+bound to the non-compact target) remains open and is named G2-metric
+(Paper~47~\S~8 Q1).
+\end{remark}
+
 % =====================================================================
 \section{Numerical verification and Riemannian-limit recovery}
 \label{sec:numerical}
@@ -1759,6 +1802,17 @@ DOI via Zenodo. (Companion paper closing the strong-form gap
 identified as Q1/G1 of the present paper; identified the envelope
 refinement to (\ref{eq:C3_joint_bound}) in
 Remark~\ref{rem:envelope_v2}.)
+
+\bibitem[Loutey, internal Paper~47]{paper47}
+J.~Loutey,
+\newblock \emph{Norm-resolvent convergence to the non-compact
+Lorentzian Krein spectral triple on $\sthree\times\R_{t}$ and the
+two-rate hybrid limit},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo. (Closes the de-compactification limit G2 of the
+present paper at the norm-resolvent / spectral level via a two-rate
+hybrid composite;\ propinquity / metric level on a non-compact carrier
+remains open as named G2-metric / G1-genuine.)
 
 \end{thebibliography}
 
