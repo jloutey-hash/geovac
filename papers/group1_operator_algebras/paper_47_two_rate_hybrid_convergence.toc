@@ -15,12 +15,13 @@
 \contentsline {subsection}{\numberline {4.4}Extension to the dense compact-support subspace}{9}{subsection.4.4}%
 \contentsline {section}{\numberline {5}The two-rate hybrid theorem}{10}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Choice of scaling}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Empirical confirmation:\ numerical panel along admissible scalings}{11}{subsection.5.2}%
 \contentsline {section}{\numberline {6}Three-carrier identification}{11}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Three carriers, one limit}{11}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Why both Paper 43 and Paper 45 exist}{12}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Discussion and related work}{12}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Position vs Mondino--S\"amann synthetic Lorentzian GH}{12}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Position vs Hekkelman--McDonald 2024}{12}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Position vs Latr\'emoli\`ere}{12}{subsection.7.3}%
+\contentsline {section}{\numberline {7}Discussion and related work}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Position vs Mondino--S\"amann synthetic Lorentzian GH}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Position vs Hekkelman--McDonald 2024}{13}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Position vs Latr\'emoli\`ere}{13}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}The two-rate hybrid framing in NCG}{13}{subsection.7.4}%
-\contentsline {section}{\numberline {8}Open questions}{13}{section.8}%
+\contentsline {section}{\numberline {8}Open questions}{14}{section.8}%
