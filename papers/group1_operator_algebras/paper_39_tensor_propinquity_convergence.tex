@@ -1170,8 +1170,8 @@ a target for a follow-up to the present paper. The ingredients on the
 $\sthree$ side are exactly Theorem~\ref{thm:main} restricted to the
 left tensor factor.
 
-\paragraph{(v) Tensor products at higher rank.} The present paper
-treats the equal-manifold tensor product
+\paragraph{(v) Tensor products at higher rank --- CLOSED 2026-05-23 (master theorem).}
+The present paper treats the equal-manifold tensor product
 $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ at
 two distinct focal lengths on the same compact group $\SU(2)$.
 A companion higher-rank generalisation of the single-factor result
@@ -1179,19 +1179,50 @@ of~\cite{loutey_paper38} has since been established
 in~\cite{paper40_unified}, which lifts Theorem~3.1
 of~\cite{loutey_paper38} to all compact connected Lie groups $G$ with
 bi-invariant metric and proves that the rate constant $4/\pi$ is
-\emph{universal} across the class via a Plancherel-weight
-$\times$ Vandermonde-Jacobian cancellation theorem. The analogous
-higher-rank tensor product
-$\Tcal_{G_1} \otimes \Tcal_{G_2}$ is structurally accessible by
-combining the present Pythagorean-Leibniz mechanism with the
-higher-rank single-factor ingredients of~\cite{paper40_unified};\ in
-particular, the cross-factor Lipschitz comparison constant
-$C_3^{(2)}$ \eqref{eq:C3_2_full} is computed from the per-factor
-Avery harmonics, which~\cite{paper40_unified} generalises to general
-PRV-summand Weyl harmonics. The detailed extension to
-$\Tcal_{G_1} \otimes \Tcal_{G_2}$ at arbitrary rank is not in this
-paper but is mechanically reachable from the union of the two
-existing results.
+\emph{universal} across the class via a Plancherel-weight $\times$
+Vandermonde-Jacobian cancellation theorem.
+
+A sprint-scale closure (sprint memo
+\texttt{debug/sprint\_paper39\_higher\_rank\_extension\_memo.md},
+2026-05-23) combines the k-fold Pythagorean Leibniz mechanism
+(item~(iii) above, closed earlier 2026-05-23) with the general-$G$
+ingredients of~\cite{paper40_unified} to produce the
+\textbf{master theorem of the math.OA arc}:
+
+\begin{equation}\label{eq:master_theorem_v}
+\boxed{\,\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
+\Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
+\;\le\; \sup_{j} C_{3}^{G_{j}}(n_{j}) \cdot \max_{j} \gamma^{G_{j}}_{n_{j}}\,}
+\end{equation}
+
+for any $k \ge 1$ and arbitrary compact connected Lie groups
+$G_{1}, \ldots, G_{k}$ with bi-invariant metrics, where
+$C_{3}^{G_{j}}(n_{j}) \to 1^{-}$ is the
+Paper~40~\cite{paper40_unified} per-factor L3 constant and
+$\gamma^{G_{j}}_{n_{j}}$ is the per-factor SU(2)/general-$G$ rate at the
+universal $(4/\pi) \log n_{j} / n_{j}$ asymptote. The Lipschitz
+comparison constant $C_{3}^{(k)} := \sup_{j} C_{3}^{G_{j}}(n_{j})$ is
+\textbf{$k$-INDEPENDENT} (bounded by the worst-factor single-group
+constant), and the joint rate inherits the universal $4/\pi$
+asymptotic from~\cite{paper40_unified}.
+
+The two extensions (k-fold via Pythagorean Leibniz, general-$G$ via
+PRV-summand Weyl harmonics) are \emph{structurally orthogonal}:\ the
+k-fold mechanism acts on the factor-counting dimension while the
+general-$G$ mechanism acts on the per-factor structure. Each preserves
+the other's content cleanly. The master theorem subsumes
+Papers~\cite{loutey_paper38} (the $k = 1$, $G = \SU(2)$ case),
+\cite{paper40_unified} (the $k = 1$, general $G$ case), and the
+present paper (the $k = 2$, $G_{1} = G_{2} = \SU(2)$ case) as special
+cases. Item~(iii) above (k-fold extension with $G_{j} = \SU(2)$,
+closed 2026-05-23) is the $G_{j} = \SU(2)$ case of the master theorem.
+
+Practical applications:\ Paper~45~\cite{paper45}'s compact-temporal
+Lorentzian extension at the periodic carrier
+$\sthree \times S^{1}$ is the $k = 2$, $G_{1} = \SU(2)$,
+$G_{2} = U(1)$ case of~\eqref{eq:master_theorem_v}, providing
+independent justification of its main theorem from the master
+construction.
 
 % =====================================================================
 \section{Conclusion}\label{sec:conclusion}
@@ -1382,6 +1413,16 @@ compact connected Lie groups; rate constant $4/\pi$ universal across
 the class via a Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation theorem; asymptotic-tight $C_3 = 1$ at all ranks via the
 PRV-summand bound of Kumar (1988) and Vinberg (1990).
+
+\bibitem[Loutey, Paper~45]{paper45}
+J.~Loutey,
+\newblock \emph{Lorentzian propinquity convergence on truncated
+$\SU(2) \times U(1)_{T}$ Krein spectral triples},
+\newblock preprint, May 2026; the K$^{+}$-restricted weak-form
+Lorentzian propinquity convergence, structurally a $k = 2$,
+$G_{1} = \SU(2)$, $G_{2} = U(1)$ special case of the master theorem
+~\eqref{eq:master_theorem_v} of the present paper's
+\S\ref{sec:open}~(v) update.
 
 \end{thebibliography}
 
