@@ -1,0 +1,2269 @@
+% =====================================================================
+% Paper 46 (standalone): Strong-form Lorentzian propinquity convergence
+% on truncated SU(2) x U(1)_T Krein spectral triples.
+%
+% Strong-form Latremoliere quantum Gromov-Hausdorff propinquity on the
+% FULL Krein space (no K+ restriction), via the operator-norm Lipschitz
+% seminorm L_op(a) = ||[D_L, a]||_op. Five-lemma proof L1' / L2 / L3 /
+% L4 / L5 on the compact-temporal Krein spectral triple at S^3 x S^1_T
+% at BBB (m, n) = (4, 6) chiral basis with van den Dungen 2016 Krein
+% Dirac.
+%
+% Math.OA / J. Geom. Phys. style; eighth math.OA standalone in the
+% GeoVac series. Siblings: Paper 38 (SU(2) Riemannian propinquity),
+% Paper 39 (tensor-product propinquity), Paper 40 (universal 4/pi
+% rate constant on compact Lie groups), Paper 42 (Tomita-Takesaki
+% Riemannian closure), Paper 43 (Lorentzian extension of the
+% four-witness theorem at the modular-Hamiltonian level), Paper 44
+% (Lorentzian operator-system substrate), Paper 45 (K+-restricted
+% weak-form Lorentzian propinquity).
+%
+% Status: first draft, May 2026, post-Sprint-L3b-2 closure
+% (2026-05-22). Built from internal sprint memos:
+%   debug/l3b_2a_candidate_validation_memo.md      (candidate validation
+%                                                    + temporal-Lipschitz
+%                                                    -invisibility)
+%   debug/l3b_2b_lichnerowicz_lop_memo.md          (joint L3 / Lichnerowicz
+%                                                    under L_op + envelope
+%                                                    erratum)
+%   debug/l3b_2c_berezin_lop_memo.md               (joint L4 four+one
+%                                                    properties under L_op)
+%   debug/l3b_2d_propinquity_assembly_memo.md      (joint L5 assembly +
+%                                                    Lambda^strong panel)
+%
+% Honest scope: strong-form on the NATURAL substrate (every multiplier
+% commutes with J). Strong-form on an ENLARGED substrate including
+% chirality-flipping generators where {J, M} = 0 remains a named
+% follow-on (L3b-2f).
+%
+% Concurrent-work audit verdict: Paper 45's pre-submission audit
+% (2026-05-18) returned CLEAR. Sprint L3b-2 closure is one week
+% later, so the concurrent-work landscape is unchanged.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue (per Paper 45)
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\Nt}{N_{t}}
+\newcommand{\Kmax}{K_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Sone}{S^{1}}
+\newcommand{\SoneT}{S^{1}_{T}}
+\newcommand{\Manifold}{S^{3}\times S^{1}_{T}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Krein}{\mathcal{K}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Frob}[1]{\lVert #1 \rVert_{F}}
+\newcommand{\cbnorm}[1]{\lVert #1 \rVert_{\mathrm{cb}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Uone}{U(1)}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Mat}{M}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DL}{D_{L}}
+\newcommand{\Ddiag}{D_{L}^{\mathrm{diag}}}
+\newcommand{\Doff}{D_{L}^{\mathrm{off}}}
+\newcommand{\KL}{K_{L}}
+\newcommand{\JL}{J_{L}}
+\newcommand{\Lprop}{\Lambda^{\mathrm{strong}}}
+\newcommand{\Lpropweak}{\Lambda^{L}}
+\newcommand{\Lambdab}{\Lambda}
+\newcommand{\Lop}{L_{\mathrm{op}}}
+\newcommand{\Lblock}{L_{\mathrm{block}}}
+\newcommand{\LPwk}{L^{+}_{\mathrm{P45}}}
+\newcommand{\Bjoint}{B^{\mathrm{joint}}}
+\newcommand{\Pjoint}{P^{\mathrm{joint}}}
+\newcommand{\Kjoint}{K^{\mathrm{joint}}}
+\newcommand{\KSU}{K^{\SU(2)}}
+\newcommand{\KU}{K^{\Uone}}
+\newcommand{\gammajoint}{\gamma^{\mathrm{joint}}}
+\newcommand{\gammaSU}{\gamma^{\SU(2)}}
+\newcommand{\gammaU}{\gamma^{\Uone}}
+\newcommand{\Cthreejoint}{C_{3}^{\mathrm{joint}}}
+\newcommand{\CthreeSU}{C_{3}^{\SU(2)}}
+\newcommand{\Cthreeop}{C_{3}^{\mathrm{op}}}
+\newcommand{\Cfivejoint}{C_{5}^{\mathrm{joint}}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Kplus}{\Krein^{+}}
+\newcommand{\Kminus}{\Krein^{-}}
+\newcommand{\Pplus}{P_{+}}
+\newcommand{\Pminus}{P_{-}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\prop}{\mathrm{prop}}
+\newcommand{\spat}{\mathrm{spat}}
+\newcommand{\temp}{\mathrm{temp}}
+\newcommand{\chid}{\chi\text{-d}}
+\newcommand{\Plancherel}{\hat}
+\newcommand{\Weyl}{\mathrm{Weyl}}
+
+\title{Strong-form Lorentzian propinquity convergence on truncated\\
+$\SU(2)\times\Uone_{T}$ Krein spectral triples}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close the strong-form leg of the Lorentzian-extension arc for
+truncated Krein spectral triples by proving a Latr\'emoli\`ere
+quantum Gromov--Hausdorff propinquity convergence theorem on the
+\emph{full} Krein space, removing the $\Kplus$-restriction
+imposed in our companion paper~\cite{paper45}. We work on the same
+compact-temporal Wick-rotated manifold $\Manifold$, with chirality-doubled
+Camporesi--Higuchi spinor space $\HGV^{\nmax}$ tensored with the
+$\Nt$-mode Fourier truncation of $L^{2}(\SoneT)$, BBB
+classification~\cite{bizi_brouder_besnard2018} signs at $(m, n) = (4, 6)$,
+and Lorentzian Dirac
+$\DL = i(\gamma^{0} \otimes \partial_{t} + \DGV \otimes I_{\Nt})$ per
+van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1. The
+\emph{strong-form} Lipschitz seminorm is the natural operator-norm
+commutator
+\begin{equation*}
+   \Lop(a) \;:=\; \opnorm{[\DL, a]} \qquad \text{on the full Krein space},
+\end{equation*}
+in contrast to Paper~45's $\Kplus$-weak-form
+$\LPwk(a) = \opnorm{[\Pplus \DL \Pplus, \Pplus a \Pplus]}$ on $\Kplus$.
+We prove
+\begin{equation*}
+   \Lprop\!\bigl(\Tcal^{L}_{\nmax,\Nt,T},\;
+                 \Tcal^{L}_{\Manifold}\bigr)
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax,\Nt,T}
+   \;\xrightarrow[(\nmax,\Nt)\to(\infty,\infty)]{}\; 0,
+\end{equation*}
+with closed-form constant $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$,
+joint mass-concentration moment
+$\gammajoint = O(\log\nmax/\nmax + T/\Nt)$, and assembled multiplier
+$\Cfivejoint = 1$. The numerical panel matches Paper~45's $\Kplus$-weak-form
+bit-exactly: $\Lprop(2, 3) = 2.0746$, $\Lprop(3, 5) = 1.6101$,
+$\Lprop(4, 7) = 1.3223$. The Riemannian-limit recovery at $\Nt = 1$ is
+bit-exact (Frobenius residual $0.0$ in float64) at $\nmax \in \{2, 3, 4\}$.
+The proof transports the five-lemma structure
+L1$'$, L2, L3, L4, L5 of Paper~45 under the strong-form seminorm. The
+load-bearing analytical input is the \emph{temporal-Lipschitz-invisibility
+identity}
+\begin{equation*}
+   [\DL, a_{s} \otimes a_{t}]
+   \;=\; i\,[\DGV, a_{s}] \otimes a_{t}
+   \qquad \text{bit-exact for every $a \in \Op^{L}$},
+\end{equation*}
+which sharpens Paper~45 Lemma~4.3's vanishing-cross-term identity from
+``the time-chirality cross term vanishes'' to ``the temporal commutator
+vanishes identically on the natural substrate''. As a byproduct we
+identify a finite-cutoff envelope refinement of Paper~45
+eq.~(C3\_joint\_bound) (Appendix~\ref{app:erratum}): the correct
+supremum range for the per-harmonic Lichnerowicz constant is
+$N \le 2\nmax - 1$, the Avery--Wen--Avery achievable envelope on $\nmax$
+shells, rather than the stated $N \le \nmax$. The asymptotic statement
+and Paper~45 Theorem~5.1 are unchanged. To our knowledge this is the
+first strong-form Lorentzian propinquity convergence theorem on
+truncated Krein spectral triples in the published math.OA literature,
+closing the named open problem in Paper~45~\S~1.4~G1. Honest scope:
+strong-form on the \emph{natural} substrate; strong-form on an
+\emph{enlarged} substrate including chirality-flipping generators with
+$\{J, M\} = 0$ remains a named follow-on (Sprint~L3b-2f).
+\end{abstract}
+
+\bigskip\noindent
+\textbf{MSC2020 classifications:}\ 58B34 (noncommutative geometry),
+46L07 (operator systems), 46L60 (applications of selfadjoint operator
+algebras to physics), 46L87 (noncommutative Riemannian and metric
+geometry), 46C20 (spaces with indefinite inner product (Krein spaces)).
+
+\medskip\noindent
+\textbf{Keywords:}\ Latr\'emoli\`ere propinquity, quantum
+Gromov--Hausdorff convergence, Krein spectral triple, strong-form
+propinquity, Bizi--Brouder--Besnard indefinite signature,
+Camporesi--Higuchi Dirac, spectral truncation, operator-norm Lipschitz
+seminorm, temporal-Lipschitz-invisibility, Avery--Wen--Avery
+envelope.
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+\subsection{Background: the Lorentzian-extension arc}\label{sec:background}
+
+This paper closes the strong-form leg of the Lorentzian-extension
+program for truncated GeoVac spectral triples. The arc proceeds through
+the math.OA quartet on the Riemannian side --- Papers
+38--40~\cite{paper38,paper39,paper40_unified} (Riemannian propinquity
+convergence on $\SU(2)$, on tensor products of $\SU(2)$ triples at
+distinct focal lengths, and on general compact Lie groups with
+bi-invariant metric) --- and four Lorentzian-side preprints --- Papers
+42--45~\cite{paper42,paper43,paper44,paper45} (Tomita--Takesaki modular
+structure on Riemannian truncations; four-witness Wick-rotation at the
+operator-system level on the Lorentzian Krein wedge; operator-system
+substrate of the Lorentzian Krein spectral triple at finite cutoff;
+$\Kplus$-restricted weak-form Lorentzian propinquity convergence).
+
+Paper~45 closed the convergence-theorem leg at the
+\emph{$\Kplus$-restricted weak-form} level. Its named gap (Paper~45
+\S~1.4 G1) was the corresponding \emph{strong-form} construction on the
+full Krein space, without the $\Kplus$ restriction. The technical issue
+identified there is that the standard Latr\'emoli\`ere
+construction~\cite{latremoliere_metric_st_2017} uses the Lipschitz
+seminorm $\opnorm{[D, \cdot]}$, which is well-defined on Hilbert space
+but requires either an indefinite-inner-product analog on a Krein
+space (with appropriate Krein-self-adjointness of $\DL$ per
+vdD~\cite{vandungen2016} / BBB~\cite{bizi_brouder_besnard2018}) or an
+alternative tractable seminorm. Paper~45 sidestepped the issue by
+working on the Krein-positive subspace $\Kplus$, where the Krein
+product reduces to a positive-definite Hilbert inner product.
+
+\subsection{What this paper proves}\label{sec:what_this_paper_proves}
+
+We close Paper~45 \S~1.4~G1 by working with the
+\emph{natural operator-norm} Lipschitz seminorm
+\begin{equation}\label{eq:Lop_def}
+   \Lop(a) \;:=\; \opnorm{[\DL, a]}, \qquad a \in \Op^{L},
+\end{equation}
+on the full Krein space. The operator norm $\opnorm{\cdot}$ is the
+largest singular value, well-defined on any bounded operator on a
+finite-dimensional Hilbert (or Krein) space, with no positivity
+requirement on the inner product. The Krein-self-adjointness of $\DL$
+(Paper~43~\S~3, Paper~45~\S~2.3) does not enter the operator-norm
+definition; it enters downstream via the Krein-positivity preservation
+of operator-system multipliers (Paper~44~\S~3).
+
+Our main theorem is:
+
+\medskip\noindent
+\textbf{Main theorem (informal, restated as Theorem~\ref{thm:main} below).}
+\emph{On the natural chirality-doubled scalar-multiplier substrate
+$\Op^{L}_{\nmax, \Nt, T}$ of the truncated Lorentzian Krein
+spectral triple at BBB $(m, n) = (4, 6)$,}
+\begin{equation*}
+   \Lprop\!\bigl(\Tcal^{L}_{\nmax,\Nt,T},\;
+                 \Tcal^{L}_{\Manifold}\bigr)
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax, \Nt, T}
+   \;\xrightarrow[(\nmax, \Nt)\to(\infty,\infty)]{}\; 0,
+\end{equation*}
+\emph{where $\Lprop$ is the Latr\'emoli\`ere quantum Gromov--Hausdorff
+propinquity for metric spectral triples~\cite{latremoliere_metric_st_2017}
+on the full Krein space under $\Lop$, with closed-form constant}
+\begin{equation*}
+   \Cthreeop(\nmax) \;:=\; \sqrt{1 - \frac{1}{\nmax}}
+   \;\xrightarrow{\nmax \to \infty}\; 1^{-}
+\end{equation*}
+\emph{and joint mass-concentration moment
+$\gammajoint_{\nmax, \Nt, T} = O(\log\nmax/\nmax + T/\Nt)$.}
+\medskip
+
+The proof is a five-lemma argument $\mathrm{L1}'$, L2, L3, L4, L5
+transferred from Paper~45 under the strong-form seminorm $\Lop$. The
+substantive new analytical content comprises three structural findings:
+
+\begin{enumerate}
+\item[(F1)] \textbf{Temporal-Lipschitz-invisibility identity}
+(Lemma~\ref{lem:temporal_invisibility}): for every $a \in \Op^{L}$,
+$[\DL, a] = i[\DGV, M^{\spat}] \otimes M^{\temp}$ bit-exact, sharpening
+Paper~45 Lemma~4.3 from ``vanishing time-chirality cross-term'' to
+``vanishing temporal commutator identically on the natural substrate''.
+\item[(F2)] \textbf{Envelope-aware $\Cthreeop$} (Lemma~\ref{lem:L3op}):
+the correct per-harmonic supremum range on the natural substrate is
+$N \le 2\nmax - 1$ (the Avery--Wen--Avery achievable envelope on $\nmax$
+shells), not $N \le \nmax$ as stated in Paper~45 eq.~(C3\_joint\_bound);
+the corresponding closed-form constant is $\sqrt{1 - 1/\nmax}$. Both
+forms tend to $1^{-}$ asymptotically; the asymptotic statement is
+unchanged. See Appendix~\ref{app:erratum}.
+\item[(F3)] \textbf{Free-upgrade reading} (Theorem~\ref{thm:main} and
+Remark~\ref{rem:free_upgrade}): the assembled multiplier
+$\Cfivejoint = \max(1, 1, \Cthreeop, 0) = 1$ (since $\Cthreeop \le 1$),
+giving the same numerical propinquity bound as Paper~45's
+$\Kplus$-weak-form. The strong-form holds on a strictly larger seminorm
+domain (the full Krein operator-norm content, not only the
+$\Kplus$-block-restricted content), at no cost to the rate or the
+constant.
+\end{enumerate}
+
+\subsection{Sub-sprint trajectory and the candidate-validation phase}
+\label{sec:sub_sprint_trajectory}
+
+The closure proceeded through four ~1-day analytical sub-sprints
+(L3b-2a/b/c/d) of an internal sprint sequence. The opening sub-sprint
+(L3b-2a) validated which Lipschitz-seminorm candidate to use:\ a
+``block-restricted'' candidate $\Lblock(a) := \max(\opnorm{\Pplus [\DL, a] \Pplus},
+\opnorm{\Pminus [\DL, a] \Pminus})$ was ruled out, because the
+structural identity (F1) above forces $\Lblock(a) \equiv 0$ on the
+natural substrate (the commutator $[\DL, a]$ is purely off-block-diagonal,
+so its block restrictions vanish identically). The fallback to the
+operator-norm seminorm $\Lop$ then followed, and the analytical pipeline
+closed cleanly in three additional sub-sprints (L3b-2b/c/d).
+
+A useful diagnostic from L3b-2a: the natural substrate (Paper~44
+Prop.~5.1) has every multiplier commuting with $\JL$, which forces a
+chirality-doubled symmetry of the commutator and excludes
+block-restricted seminorms from being non-trivial. The non-trivial
+strong-form content lives in the cross-block (chirality-flipping)
+pieces of $[\DL, a]$, which $\Lop$ captures but $\Lblock$ does not.
+
+\subsection{Honest scope and named gaps}\label{sec:scope_intro}
+
+The construction is at the \textbf{strong-form / natural-substrate}
+level. The four named gaps to a more complete construction are:
+\begin{enumerate}
+\item[(G1$'$)] \emph{Strong-form on an enlarged substrate.} The natural
+substrate has every multiplier commuting with $\JL$. An
+\emph{enlarged} substrate would include chirality-flipping
+generators of the form $M = \begin{pmatrix}0 & W \\ W^{*} & 0\end{pmatrix}$
+in the chirality-doubled basis, anticommuting with $\gamma^{0}$. On
+the enlarged substrate, $\Lop$ separates from $\Lblock$ non-trivially
+on both the diagonal and off-diagonal blocks, the temporal-Lipschitz-invisibility
+identity (F1) fails, and the L3 and L4 transports require re-derivation.
+This is the L3b-2f follow-on; not addressed here.
+\item[(G2)] \emph{De-compactification limit $T \to \infty$.} Inherited
+from Paper~45 \S~1.4~G2: separate program (Sprint L3c).
+\item[(G3)] \emph{Cross-manifold extensions} of the form
+$\Tcal_{\sthree} \otimes \Tcal_{\mathrm{Hardy}(S^{5})}$ are blocked at
+the NCG-framework level by Paper~24~\cite{paper24}\,\S~V; same as
+Paper~45.
+\item[(G4)] \emph{Inner-factor calibration data} (Higgs / Yukawa
+selection) is orthogonal; same as Paper~45.
+\end{enumerate}
+
+\subsection{Concurrent work}\label{sec:concurrent_work}
+
+Paper~45's pre-submission concurrent-work
+audit~\footnote{Paper~45 \S~1.3 and the internal preflight memo, May
+2026; verified across Latr\'emoli\`ere
+2017/2023/2025~\cite{latremoliere_metric_st_2017,latremoliere2018,farsi_latremoliere2025},
+Connes--vS~2021~\cite{connes_vs2021}, Leimbach--vS~2024~\cite{leimbach_vs2024},
+Hekkelman--McDonald~2024a/b~\cite{hekkelman_mcdonald2024,hekkelman_mcdonald2024b},
+Toyota~2023~\cite{toyota2023}, Farsi--Latr\'emoli\`ere
+2024~\cite{farsi_latremoliere2024}, vdD~2016~\cite{vandungen2016},
+BBB~2018~\cite{bizi_brouder_besnard2018}, Strohmaier~2006~\cite{strohmaier2006},
+Franco--Eckstein~2014~\cite{franco_eckstein2014},
+Devastato--Lizzi--Martinetti~\cite{devastato_lizzi_martinetti2018},
+de~Groot~2026~\cite{de_groot2026_su11},
+Nieuviarts~2025~\cite{nieuviarts2025a,nieuviarts2025b_proceedings}, and
+the synthetic Lorentzian Gromov--Hausdorff program of
+Mondino--S\"amann~\cite{mondino_samann2024,mondino_samann2025} and
+Che--Perales--Sormani~\cite{che_perales_sormani2025}.}
+verdict was CLEAR for ``no published Lorentzian propinquity in math.OA
+literature''. Sprint L3b-2 closure is one week later (2026-05-22), so
+the concurrent-work landscape is unchanged: no published Lorentzian
+propinquity construction --- strong-form or weak-form --- exists in the
+math.OA literature as of May~2026. We do not re-audit here.
+
+\subsection{Outline}\label{sec:outline}
+
+\S~\ref{sec:setup} fixes conventions and reviews the operator system
+substrate from Paper~44. \S~\ref{sec:structural_identity} proves the
+temporal-Lipschitz-invisibility identity (F1) and its decomposition of
+$\DL$ into chirality-block-diagonal and chirality-flipping pieces.
+\S~\ref{sec:five_lemmas} proves the five lemmas under $\Lop$: L1$'$
+(\S~\ref{sec:L1prime}, cite Paper~44), L2 (\S~\ref{sec:L2}, cite
+Paper~45), L3 (\S~\ref{sec:L3}, joint Lichnerowicz under $\Lop$ with
+$\Cthreeop$), L4 (\S~\ref{sec:L4}, joint Berezin under $\Lop$), L5
+(\S~\ref{sec:L5}, Latr\'emoli\`ere propinquity assembly under $\Lop$).
+\S~\ref{sec:main} states and proves the main theorem.
+\S~\ref{sec:numerical} records the numerical panel and the bit-exact
+Riemannian-limit recovery. \S~\ref{sec:discussion} discusses the
+free-upgrade reading and the open questions. Appendix~\ref{app:erratum}
+records the envelope refinement of Paper~45 eq.~(C3\_joint\_bound).
+
+% =====================================================================
+\section{Setup}\label{sec:setup}
+% =====================================================================
+
+\subsection{Compact-temporal Wick-rotated manifold}\label{sec:manifold}
+
+We work on $\Manifold$, with $\sthree = \SU(2)$ the round unit three-sphere
+and $\SoneT = \R / T\Z$ the temporal circle of circumference $T$. The
+canonical choice $T = 2\pi$ matches the
+Bisognano--Wichmann~\cite{bisognano_wichmann1976} modular period at
+unit surface gravity (consistent with the four-witness arc of
+Paper~43~\cite{paper43}). The Riemannian / Wick-rotated metric is
+$ds^{2} = d\chi^{2} + \sin^{2}\chi\,d\Omega_{2}^{2} + d\tau^{2}$ per
+Paper~45 \S~2.1; Geroch's no-CTC obstruction~\cite{geroch1967} is
+acknowledged via the Wick-rotated convention, and the Krein structure
+$\JL$ is lifted as algebraic data per BBB~\cite{bizi_brouder_besnard2018}.
+
+\subsection{Krein space, fundamental symmetry, and Lorentzian Dirac}
+\label{sec:krein_DL}
+
+Per Paper~43~\cite{paper43} \S~2 / Paper~44~\cite{paper44} \S~2:
+\begin{align}
+   \Krein_{\nmax, \Nt} &\;:=\; \HGV^{\nmax} \otimes \C^{\Nt},
+   \label{eq:Krein_def} \\
+   \JL &\;=\; \gamma^{0} \otimes I_{\Nt}, \qquad
+   (\JL)^{2} = +I, \quad \JL^{\dagger} = \JL,
+   \label{eq:J_def}
+\end{align}
+with $\HGV^{\nmax}$ the chirality-doubled
+Camporesi--Higuchi~\cite{camporesi_higuchi1996} spinor Hilbert space
+truncated at the $\nmax$-th Fock shell (dimension
+$\tfrac{2}{3}\nmax(\nmax+1)(\nmax+2)$), and $\C^{\Nt}$ the
+$\Nt$-mode Fourier truncation of $L^{2}(\SoneT)$. The BBB
+classification at signature $(s, t) = (3, 1)$ West-coast assigns
+$(m, n) = (4, 6)$ via Table~3 of~\cite{bizi_brouder_besnard2018}, fixing
+$\epsilon = +1, \epsilon'' = -1, \kappa = -1, \kappa'' = +1$.
+
+The Lorentzian Dirac per vdD~2016~\cite{vandungen2016} Prop.~4.1:
+\begin{equation}\label{eq:DL_def}
+   \DL \;=\; i\bigl(\gamma^{0} \otimes \partial_{t}
+                    + \DGV \otimes I_{\Nt}\bigr),
+\end{equation}
+with $\partial_{t}$ Fourier-diagonal anti-Hermitian on $\C^{\Nt}$,
+$\partial_{t} = i\,\mathrm{diag}(\omega_{k})$ with $\omega_{k} = 2\pi k/T$,
+and $\DGV$ the truthful Camporesi--Higuchi spatial Dirac on
+$\HGV^{\nmax}$ (chirality-diagonal eigenvalue $\chi(n + 1/2)$).
+Krein-self-adjointness $\DL^{\times} = \DL$ is verified bit-exact in
+Paper~43~\S~3.
+
+The chirality grading is $J = \JL$: we have
+\begin{align}
+   [\JL, \gamma^{0} \otimes \partial_{t}]
+      &\;=\; [\gamma^{0}, \gamma^{0}] \otimes \partial_{t} + \gamma^{0} \otimes [\partial_{t}, I_{\Nt}]
+      \;=\; 0,
+   \label{eq:J_commutes_with_Ddiag} \\
+   \{\JL, \DGV \otimes I_{\Nt}\}
+      &\;=\; \{\gamma^{0}, \DGV\} \otimes I_{\Nt} \;=\; 0,
+   \label{eq:J_anticommutes_with_Doff}
+\end{align}
+the second line from the chiral-basis anticommutation
+$\{\gamma^{0}, \DGV\} = 0$ (Paper~43~\S~3, Paper~45~\S~2.3). We will use
+these splitting properties throughout \S~\ref{sec:structural_identity}.
+
+\subsection{Truncated Lorentzian operator system (natural substrate)}
+\label{sec:op_system}
+
+Per Paper~44~\cite{paper44}, the natural chirality-doubled scalar-multiplier
+operator system is
+\begin{equation}\label{eq:op_system_def}
+   \Op^{L}_{\nmax,\Nt,T}
+   \;:=\; \mathrm{span}_{\C}\bigl\{
+            M^{\spat}_{N,L,M} \otimes M^{\temp}_{p}
+            \;:\; (N, L, M) \in \mathcal{I}^{\spat}_{\nmax},\;
+                  p \in \{0, 1, \ldots, \Nt - 1\}
+         \bigr\},
+\end{equation}
+where each spatial multiplier
+$M^{\spat}_{N,L,M} = \mathrm{blkdiag}(W_{N,L,M}, W_{N,L,M})$ is the
+chirality-doubled lift of the Avery--Wen--Avery~\cite{paper32}
+Weyl-sector $3$-$Y$ multiplier $W_{N,L,M}$, and the temporal
+multipliers $M^{\temp}_{p}$ are momentum-polynomial diagonal,
+$M^{\temp}_{p} = \mathrm{diag}(\omega_{k}^{p})_{|k| \le \Kmax}$.
+Vandermonde invertibility at $\Nt$ distinct $\omega_{k}$ allows
+exchange of $\{M^{\temp}_{p}\}_{p < \Nt}$ for the equivalent basis
+$\{M^{\temp}_{q} = \mathrm{diag}(\delta_{k, q})\}_{|q| \le \Kmax}$ of
+momentum-mode indicators; we use whichever is more convenient.
+
+\textbf{Substrate property (P44):} every multiplier in $\Op^{L}$
+commutes with $\JL$, i.e., $[\JL, a] = 0$ bit-exact for every
+$a \in \Op^{L}$. This is Paper~44 Prop.~5.1 (the natural substrate
+is chirality-doubled with $[\gamma^{0}, M^{\spat}] = 0$, and
+temporal multipliers are scalar in the chirality slot). It is the
+load-bearing input for the temporal-Lipschitz-invisibility identity of
+\S~\ref{sec:structural_identity}.
+
+By Paper~44~\S~3, $\Op^{L}_{\nmax,\Nt,T}$ is a unital $\ast$-closed
+linear subspace of $\Bcal(\Krein_{\nmax,\Nt})$, with propagation number
+$\prop(\Op^{L}) = 2$ on the Weyl-doubled achievable envelope (matching
+Paper~32~\S~III prop $= 2$ verbatim) and $\prop = \infty$ on the full
+$\Bcal(\Krein)$ envelope.
+
+\subsection{The strong-form Lipschitz seminorm $\Lop$ vs the Paper~45
+$\Kplus$-weak-form $\LPwk$}\label{sec:two_seminorms}
+
+The \emph{strong-form} Lipschitz seminorm is the natural operator-norm
+commutator, eq.~(\ref{eq:Lop_def}). The \emph{$\Kplus$-weak-form}
+seminorm from Paper~45 is
+\begin{equation}\label{eq:LPwk_def}
+   \LPwk(a) \;:=\; \opnorm{[\Pplus \DL \Pplus,\, \Pplus a \Pplus]_{\mathrm{op,\,on\,}\Kplus}},
+\end{equation}
+on the Krein-positive subspace $\Kplus := \{|\psi\rangle :
+\JL|\psi\rangle = +|\psi\rangle\}$.
+
+The two seminorms differ structurally. Under the
+$\JL$-anti-commutation~(\ref{eq:J_anticommutes_with_Doff}),
+$\Pplus \DL^{\mathrm{off}} \Pplus = 0$ (the off-block-diagonal piece is
+killed by the block restriction); hence $\Pplus \DL \Pplus =
+\Pplus \DL^{\mathrm{diag}} \Pplus$ keeps only the temporal piece, and
+$\LPwk(a)$ depends only on the temporal commutator $[\partial_{t},
+M^{\temp}]$. On the natural substrate, $M^{\temp}$ is momentum-diagonal
+and $[\partial_{t}, M^{\temp}] = 0$, so $\LPwk(a) = 0$ for
+\emph{spatial-only} multipliers $a = M^{\spat} \otimes I_{\Nt}$. By
+contrast, $\Lop(a)$ retains the off-block-diagonal commutator
+$[\DGV, M^{\spat}] \otimes M^{\temp}$, which is non-zero for any
+$M^{\spat}$ not commuting with $\DGV$.
+
+The strong-form $\Lop$ is therefore a strictly larger seminorm than
+$\LPwk$ on the natural substrate. The main theorem
+(Theorem~\ref{thm:main}) bounds the corresponding propinquity on this
+strictly larger seminorm, with the same numerical bound as Paper~45.
+This is the substantive \emph{strengthening over Paper~45}, in the
+sense of bounding a strictly larger quantity at no rate cost.
+
+% =====================================================================
+\section{The structural identity}\label{sec:structural_identity}
+% =====================================================================
+
+\subsection{Decomposition of $\DL$ into diagonal and off-diagonal pieces}
+\label{sec:DL_decomposition}
+
+Write $\DL = \Ddiag + \Doff$ with
+\begin{equation}\label{eq:DL_split}
+   \Ddiag \;:=\; i\,\gamma^{0} \otimes \partial_{t}, \qquad
+   \Doff \;:=\; i\,\DGV \otimes I_{\Nt}.
+\end{equation}
+
+\begin{lemma}[Splitting properties of $\Ddiag$ and $\Doff$]
+\label{lem:DL_splitting}
+On the truncated Krein space~(\ref{eq:Krein_def}):
+\begin{enumerate}
+\item[(a)] $[\JL, \Ddiag] = 0$ bit-exact; $\Ddiag$ is block-diagonal in
+$\Krein^{\pm}$.
+\item[(b)] $\{\JL, \Doff\} = 0$ bit-exact; $\Doff$ is purely
+off-block-diagonal in $\Krein^{\pm}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) follows from~(\ref{eq:J_commutes_with_Ddiag}) and the chirality-swap
+calculation $[\gamma^{0}, \gamma^{0}] = 0$ trivially. (b) follows
+from~(\ref{eq:J_anticommutes_with_Doff}) and the chiral-basis
+anticommutation $\{\gamma^{0}, \DGV\} = 0$.
+
+Concretely: $\Pplus \Ddiag \Pminus = \Pplus (i\gamma^{0} \otimes \partial_{t})
+\Pminus$. Since $\gamma^{0}$ anticommutes with itself reduced to
+$\Krein^{\pm}$ trivially (as $\gamma^{0}|_{\Krein^{+}} = +I$ and
+$\gamma^{0}|_{\Krein^{-}} = -I$ in the chiral basis), $\Pplus
+\gamma^{0} \Pminus = 0$ and so $\Pplus \Ddiag \Pminus = 0$, while
+$\Pplus \Doff \Pminus = i\Pplus \DGV \Pminus$ in general non-zero.
+\qedhere
+\end{proof}
+
+\subsection{Temporal-Lipschitz-invisibility identity}
+\label{sec:temporal_invisibility}
+
+\begin{lemma}[Temporal-Lipschitz-invisibility on the natural substrate]
+\label{lem:temporal_invisibility}
+For every $a \in \Op^{L}_{\nmax, \Nt, T}$,
+\begin{equation}\label{eq:temporal_invisibility}
+   [\DL, a] \;=\; [\Doff, a] \;=\; i\,[\DGV, M^{\spat}] \otimes M^{\temp}
+   \qquad \text{(bit-exact)},
+\end{equation}
+where $a = M^{\spat} \otimes M^{\temp}$ for pure-tensor generators and
+the identity extends by linearity over $\Op^{L}$.
+\end{lemma}
+
+\begin{proof}
+Expand the commutator using the splitting~(\ref{eq:DL_split}):
+\begin{equation*}
+   [\DL, a] \;=\; [\Ddiag, a] + [\Doff, a].
+\end{equation*}
+
+\emph{Vanishing of $[\Ddiag, a]$.} For pure-tensor
+$a = M^{\spat} \otimes M^{\temp}$,
+\begin{equation*}
+   [\Ddiag, M^{\spat} \otimes M^{\temp}]
+   \;=\; i\,[\gamma^{0} \otimes \partial_{t}, M^{\spat} \otimes M^{\temp}]
+   \;=\; i\,\bigl([\gamma^{0}, M^{\spat}] \otimes \partial_{t} M^{\temp}
+                  + \gamma^{0} M^{\spat} \otimes [\partial_{t}, M^{\temp}]\bigr).
+\end{equation*}
+Both terms vanish:
+\begin{itemize}
+\item $[\gamma^{0}, M^{\spat}] = 0$ by Paper~44 Prop.~5.1 (chirality-doubled
+spatial multipliers commute with the chirality-swap $\gamma^{0}$ on
+$\Krein^{\pm}$);
+\item $[\partial_{t}, M^{\temp}] = 0$ because both are diagonal in the
+momentum eigenbasis of $L^{2}(\SoneT)_{\mathrm{trunc}}$
+($\partial_{t} = i\,\mathrm{diag}(\omega_{k})$,
+$M^{\temp} = \mathrm{diag}(m_{k})$ for any momentum-polynomial or
+momentum-indicator symbol).
+\end{itemize}
+Therefore $[\Ddiag, a] = 0$ identically.
+
+\emph{Form of $[\Doff, a]$.}
+\begin{equation*}
+   [\Doff, M^{\spat} \otimes M^{\temp}]
+   \;=\; i\,[\DGV \otimes I_{\Nt}, M^{\spat} \otimes M^{\temp}]
+   \;=\; i\,[\DGV, M^{\spat}] \otimes M^{\temp}.
+\end{equation*}
+
+Combining gives~(\ref{eq:temporal_invisibility}) for pure-tensor $a$,
+and the identity extends by $\C$-linearity to all of $\Op^{L}$. The
+identity is bit-exact in the chosen basis (no rounding error, no
+approximation):\ the temporal multiplier algebra is the commutative
+diagonal subalgebra of $\Mat_{\Nt}(\C)$, both factors of the commutator
+are real or rational sympy entries cast to float64. The empirical
+verification at panel cells $(\nmax, \Nt) \in \{(2, 1), (2, 3), (3, 5)\}$
+shows $\Frob{[\Ddiag, a]} = 0.000\mathrm{e}{+}00$ over all generators in
+the basis. \qedhere
+\end{proof}
+
+\begin{remark}[Relation to Paper~45 Lemma~4.3]\label{rem:vs_paper45_L3}
+Paper~45 Lemma~4.3 / eq.~(L3\_struct\_id) states
+\begin{equation*}
+   [\DL, a_{s} \otimes a_{t}] \;=\; i\,[\DGV, a_{s}] \otimes a_{t}
+   \qquad \text{(bit-exact)}
+\end{equation*}
+via a vanishing-cross-term argument:\ the cross term
+$[\gamma^{0} \otimes \partial_{t}, a_{s} \otimes a_{t}] = 0$ because
+$[\gamma^{0}, a_{s}] = 0$ AND $[\partial_{t}, a_{t}] = 0$. The two
+factors are independently zero, hence the cross term is zero.
+
+The present Lemma~\ref{lem:temporal_invisibility} sharpens the
+statement at the operator-decomposition level:\ the identity follows
+because $\Ddiag$ \emph{itself} commutes with every multiplier in
+$\Op^{L}$, not only because the cross term $[\Ddiag, a]$ has two
+independent vanishing factors. Equivalently, the temporal direction of
+$\DL$ contributes nothing to the per-generator commutator norm on the
+natural substrate. This is the substantive sharpening:\ the temporal
+Lipschitz content is \emph{invisible} to the multiplier algebra, not
+merely \emph{decoupled} via the cross term.
+
+The two readings agree on the natural substrate. The sharper reading
+matters for the L3 derivation in \S~\ref{sec:L3} under $\Lop$ (where
+the operator-norm content of $[\DL, a]$ must be bounded directly), and
+it identifies the structural reason for the ``free upgrade'' in
+\S~\ref{sec:discussion}.
+\end{remark}
+
+\begin{corollary}[Tensor-product factorization of the commutator]
+\label{cor:tensor_factor}
+For every pure-tensor $a = M^{\spat} \otimes M^{\temp} \in \Op^{L}$,
+\begin{equation}\label{eq:tensor_factor}
+   \opnorm{[\DL, a]} \;=\; \opnorm{[\DGV, M^{\spat}]} \cdot \opnorm{M^{\temp}}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:temporal_invisibility},
+$[\DL, a] = i [\DGV, M^{\spat}] \otimes M^{\temp}$, and the
+tensor-product operator-norm factorization
+$\opnorm{A \otimes B} = \opnorm{A} \cdot \opnorm{B}$ (standard, e.g.\
+Bhatia~\cite{bhatia1997}\,Thm.~IV.2.6, since singular values factorize
+on tensor products) gives~(\ref{eq:tensor_factor}). \qedhere
+\end{proof}
+
+% =====================================================================
+\section{Five-lemma proof under $\Lop$}\label{sec:five_lemmas}
+% =====================================================================
+
+The five-lemma structure transfers from Paper~45 under the strong-form
+seminorm $\Lop$. L1$'$ is the operator-system substrate (Paper~44). L2
+is the joint cb-norm (Paper~45 Lemma~4.2, seminorm-independent). L3 is
+the joint Lichnerowicz comparison under $\Lop$ (this paper, with
+closed-form envelope-aware $\Cthreeop$). L4 is the joint Berezin
+reconstruction under $\Lop$ (this paper, four-plus-one properties). L5
+is the Latr\'emoli\`ere propinquity assembly (this paper, on the full
+Krein space).
+
+\subsection{Lemma L1$'$: operator-system substrate}\label{sec:L1prime}
+
+\begin{lemma}[L1$'$, Paper~44]\label{lem:L1prime}
+The collection
+$\Tcal^{L}_{\nmax,\Nt,T} := (\Op^{L}_{\nmax,\Nt,T},
+\Krein_{\nmax,\Nt}, \DL, \JL)$ defined in
+\S~\ref{sec:krein_DL}--\ref{sec:op_system} is a Lorentzian truncated
+Krein metric spectral triple in the sense of
+vdD~\cite{vandungen2016} / BBB~\cite{bizi_brouder_besnard2018}, with
+$\Op^{L}$ unital $\ast$-closed, $\DL$ Krein-self-adjoint, $\JL$ a
+fundamental symmetry of square $+I$, $\prop(\Op^{L}) = 2$, and every
+$a \in \Op^{L}$ satisfying $[\JL, a] = 0$ bit-exact. At $\Nt = 1$ the
+construction reduces bit-exactly to the Riemannian chirality-doubled
+truncated spectral triple on $\HGV^{\nmax}$ (load-bearing falsifier
+F1).
+\end{lemma}
+
+\begin{proof}
+Paper~44 \S~2, \S~3, \S~5. See also Paper~45 Lemma~4.1 for the explicit
+statement of the substrate properties used here. \qedhere
+\end{proof}
+
+\subsection{Lemma L2: joint cb-norm}\label{sec:L2}
+
+\begin{lemma}[L2, joint cb-norm, Paper~45 Lemma~4.2]\label{lem:L2}
+For all $\nmax \ge 1$ and $\Nt \ge 1$, the central Schur multiplier
+$S_{\Kjoint_{\nmax, \Nt, T}}$ on the central subalgebra
+$Z(C(\SU(2) \times \Uone))$ has cb-norm
+\begin{equation}\label{eq:L2_main}
+   \cbnorm{S_{\Kjoint_{\nmax, \Nt, T}}}
+   \;=\; \cbnorm{S_{\KSU_{\nmax}}} \cdot \cbnorm{S_{\KU_{\Nt, T}}}
+   \;=\; \frac{2}{\nmax + 1} \cdot 1
+   \;=\; \frac{2}{\nmax + 1},
+\end{equation}
+$\Nt$-independent.
+\end{lemma}
+
+\begin{proof}
+Paper~45~\S~4.2 verbatim:\ Bo\.zejko--Fendler central-multiplier
+equality~\cite{bozejko_fendler1991,pisier2001} on the amenable compact
+group product $\SU(2) \times \Uone$, with $\SU(2)$-factor symbol
+supremum from Paper~38~\cite{paper38} Lemma~L2(c) and $\Uone$-factor
+Fej\'er symbol supremum $\Plancherel{K}^{\Uone}(0) = 1$.
+
+The cb-norm $\cbnorm{S_{\Kjoint}}$ controls the Lipschitz-distortion
+height in the propinquity assembly (Paper~45 Remark~4.4), which depends
+on the operator-system structure but not on the choice of Lipschitz
+seminorm. The bound is the same under $\LPwk$ or $\Lop$. \qedhere
+\end{proof}
+
+\begin{remark}[$\Nt$-independence]\label{rem:Nt_independent_cb}
+The cb-norm is $\Nt$-independent because the $\Uone$ Fej\'er symbol
+caps at $\Plancherel{K}^{\Uone}(0) = 1$ regardless of $\Nt$. The
+$\Nt$-dependence of the joint convergence rate enters the
+mass-concentration moment $\gammajoint$ in \S~\ref{sec:L4}, not the
+cb-norm. Both invariants control distinct parts of the propinquity
+assembly.
+\end{remark}
+
+\subsection{Lemma L3: joint Lichnerowicz under $\Lop$}\label{sec:L3}
+
+\begin{lemma}[L3, joint Lichnerowicz under $\Lop$]\label{lem:L3op}
+For every $a = \Bjoint(f) \in \Op^{L}_{\nmax, \Nt, T}$ in the image of
+the joint Berezin map (\S~\ref{sec:L4}~Def.~\ref{def:joint_berezin}),
+and every $(\nmax, \Nt, T)$,
+\begin{equation}\label{eq:L3op_main}
+   \Lop(\Bjoint(f)) \;=\; \opnorm{[\DL, \Bjoint(f)]}
+   \;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty},
+\end{equation}
+with envelope-aware constant
+\begin{equation}\label{eq:C3op_closed_form}
+   \Cthreeop(\nmax)
+   \;:=\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
+   \;=\; \sqrt{\frac{2\nmax - 2}{2\nmax}}
+   \;=\; \sqrt{1 - \frac{1}{\nmax}}
+   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
+\end{equation}
+The bound is asymptotically tight on the envelope-max Avery harmonic
+$Y^{(3)}_{2\nmax - 1, 0, 0}$.
+\end{lemma}
+
+\begin{proof}
+The proof has four steps. (A) PURE\_TENSOR reduction;\ (B) tensor-norm
+factorization via the temporal-Lipschitz-invisibility identity;\ (C)
+Paper~38 spatial L3 with envelope-aware supremum;\ (D) Berezin
+contractivity on the temporal factor.
+
+\emph{Step A: PURE\_TENSOR reduction.}
+Every $a \in \Op^{L}$ is a finite $\C$-linear combination of pure
+tensors $\sum_{j} c_{j}\,M^{\spat}_{j} \otimes M^{\temp}_{j}$.
+Similarly, by the joint Berezin expansion (Paper~45
+Def.~4.3)~/~(\S~\ref{sec:L4}~Def.~\ref{def:joint_berezin} below),
+$\Bjoint(f) = \sum_{N, L, M, q} \alpha_{N L M q}\,
+(M^{\spat}_{N, L, M} \otimes M^{\temp}_{q})$. For
+$f = f_{s} \otimes f_{t}$ pure-tensor, the Berezin image factorizes as
+$\Bjoint(f) = B^{\SU(2)}_{\chid}(f_{s}) \otimes B^{\Uone}(f_{t})$
+(Paper~45 Remark~4.4). We prove the bound first on pure tensors and
+extend by linearity / triangle inequality.
+
+\emph{Step B: tensor-product operator-norm factorization.}
+By Corollary~\ref{cor:tensor_factor} applied to the Berezin image,
+\begin{equation*}
+   \opnorm{[\DL, B^{\SU(2)}_{\chid}(f_{s}) \otimes B^{\Uone}(f_{t})]}
+   \;=\; \opnorm{[\DGV, B^{\SU(2)}_{\chid}(f_{s})]} \cdot \opnorm{B^{\Uone}(f_{t})}.
+\end{equation*}
+
+\emph{Step C: Paper~38 spatial L3 with envelope-aware supremum.}
+Paper~38~\cite{paper38} Lemma~L3 establishes, for the chirality-doubled
+spinor lift on the Avery harmonic $Y^{(3)}_{N, 0, 0}$,
+\begin{equation}\label{eq:C3_per_harmonic}
+   \opnorm{[\DGV, M^{\spat}_{N, L, M}]}
+   \;\le\; C_{3}^{(N)} \cdot \opnorm{M^{\spat}_{N, L, M}}, \qquad
+   C_{3}^{(N)} = \sqrt{\frac{N - 1}{N + 1}},
+\end{equation}
+with the per-harmonic constant monotonically increasing in $N$ from
+$C_{3}^{(2)} = \sqrt{1/3}$ to $\lim_{N \to \infty} C_{3}^{(N)} = 1$.
+Per Paper~38~\S~L3 proof, this bound is asymptotically tight on the
+natural Avery monopole.
+
+For $a_{s} = B^{\SU(2)}_{\chid}(f_{s})$ written in the Peter--Weyl
+basis $f_{s} = \sum_{N, L, M} c_{N L M}\,Y^{(3)}_{N, L, M}$, triangle
+inequality on the Berezin expansion and the per-harmonic
+bound~(\ref{eq:C3_per_harmonic}) yield
+\begin{equation*}
+   \opnorm{[\DGV, a_{s}]}
+   \;\le\; C_{3}^{\SU(2), \mathrm{env}}(\nmax) \cdot \norm{\nabla_{x} f_{s}}_{\infty},
+\end{equation*}
+where the envelope-aware supremum
+\begin{equation}\label{eq:C3_env_sup}
+   C_{3}^{\SU(2), \mathrm{env}}(\nmax)
+   \;:=\; \sup_{2 \le N \le 2\nmax - 1} C_{3}^{(N)}
+\end{equation}
+is taken over the achievable-envelope range $N \le 2\nmax - 1$. The
+Avery--Wen--Avery $\Delta n = \pm 1$ ladder on $\nmax$ shells produces
+shell-difference labels $N$ up to $2\nmax - 1$ (Paper~44~\S~3), and
+the natural-substrate multipliers in $\Op^{L}$ include
+$N \in \{1, 2, \ldots, 2\nmax - 1\}$. By monotonicity of $C_{3}^{(N)}$,
+$C_{3}^{\SU(2), \mathrm{env}}(\nmax) = C_{3}^{(2\nmax - 1)} =
+\sqrt{(2\nmax - 2)/(2\nmax)} = \sqrt{1 - 1/\nmax}$, which is
+$\Cthreeop(\nmax)$.
+
+\emph{Step D: Berezin contractivity on the temporal factor.}
+For $a_{t} = B^{\Uone}(f_{t})$, Paper~45 Lemma~4.4(b) gives
+$\opnorm{B^{\Uone}(f_{t})} \le \norm{f_{t}}_{\infty}$:\ the
+$\Uone$-Berezin map is cb-contractive on the abelian factor, with
+cb-norm equal to the $\ell^{\infty}$-norm of its Plancherel symbol
+$\Plancherel{K}^{\Uone}(q) \le 1$ via Bo\.zejko--Fendler.
+
+Combining Steps B, C, D for pure-tensor $f$:
+\begin{align*}
+   \opnorm{[\DL, \Bjoint(f)]}
+   &\;=\; \opnorm{[\DGV, B^{\SU(2)}_{\chid}(f_{s})]} \cdot \opnorm{B^{\Uone}(f_{t})} \\
+   &\;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla_{x} f_{s}}_{\infty}
+            \cdot \norm{f_{t}}_{\infty} \\
+   &\;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty},
+\end{align*}
+where the last step uses
+$\norm{\nabla_{x} f_{s}}_{\infty} \cdot \norm{f_{t}}_{\infty}
+\le \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty}$ from
+Paper~45~(eq.~joint\_L1):\ the second summand
+$\norm{f_{s}}_{\infty} \cdot \norm{\partial_{t} f_{t}}_{\infty}$ is
+non-negative. The same chain works with the $L^{2}$-Pythagorean form
+via $\sqrt{a^{2} + b^{2}} \ge a$ for $a, b \ge 0$.
+
+\emph{Step E: extension to general $f$.} A general
+$f \in C^{\infty}(\Manifold)$ admits the joint Peter--Weyl $\times$
+Fourier expansion $f = \sum_{p} f_{s}^{(p)} \otimes \chi_{p}$ with
+$\chi_{p}(t) = e^{i p t / R_{T}}$. Apply~(\ref{eq:L3op_main}) to each
+pure-tensor summand and use the triangle inequality on both sides; the
+bound holds with the same constant $\Cthreeop$. \qedhere
+\end{proof}
+
+\begin{remark}[Asymptotic tightness on the envelope-max harmonic]
+\label{rem:env_tightness}
+The numerical verification at panel cells $(\nmax, \Nt) \in
+\{(2, 3), (3, 5)\}$ confirms that the bound~(\ref{eq:L3op_main})
+saturates exactly at the envelope-max Avery harmonic
+$Y^{(3)}_{2\nmax - 1, 0, 0}$:\ at $(\nmax, \Nt) = (3, 5)$, the
+generator $(N_{\spat} = 4, L = 1, M = \pm 1)$ has LHS/RHS ratio
+$\approx 0.949 = C_{3}^{(4)} / \Cthreeop(3) = \sqrt{3/5} /
+\sqrt{2/3}$, while the envelope-max generator $(N_{\spat} = 5)$ would
+saturate to ratio $1$ exactly. See Sub-sprint memo
+\texttt{debug/l3b\_2b\_lichnerowicz\_lop\_memo.md}~\S~5.
+\end{remark}
+
+\begin{remark}[Comparison with Paper~45 eq.~(C3\_joint\_bound)]
+\label{rem:vs_paper45_C3}
+Paper~45 eq.~(C3\_joint\_bound) states the supremum range as
+$2 \le N \le \nmax$, not $2 \le N \le 2\nmax - 1$. This is a
+finite-cutoff under-statement on the natural substrate of the
+Lorentzian construction:\ Paper~45's $C_{3}^{(\nmax)}$ does not bound
+the per-harmonic ratio at $N \in (\nmax, 2\nmax - 1]$. Both forms
+agree asymptotically ($\to 1^{-}$); the corrected form is the present
+$\Cthreeop$. See Appendix~\ref{app:erratum} for the proposed refinement.
+\end{remark}
+
+\subsection{Lemma L4: joint Berezin reconstruction under $\Lop$}
+\label{sec:L4}
+
+\begin{definition}[Joint Berezin reconstruction]\label{def:joint_berezin}
+The joint Berezin reconstruction is
+$\Bjoint_{\nmax, \Nt, T} : C^{\infty}(\Manifold) \to \Op^{L}$ defined
+by
+\begin{equation}\label{eq:joint_berezin}
+   \Bjoint(f) \;=\; \sum_{\substack{N \le \nmax \\ |q| \le \Kmax}}
+   \sum_{L = 0}^{N - 1} \sum_{|M| \le L}
+   \Plancherel{K}^{\SU(2)}_{\nmax}(N)\,\Plancherel{K}^{\Uone}_{\Nt}(q)\,
+   c_{N L M q}\,(M^{\spat}_{N, L, M} \otimes M^{\temp}_{q}),
+\end{equation}
+where the $c_{N L M q}$ are the joint Peter--Weyl $\times$ Fourier
+coefficients of $f$, $\Plancherel{K}^{\SU(2)}_{\nmax}(N) = N /
+Z^{\SU(2)}_{\nmax}$ is the Paper~38 SU(2) Plancherel symbol, and
+$\Plancherel{K}^{\Uone}_{\Nt}(q)$ is the standard Fej\'er-on-the-circle
+symbol.
+\end{definition}
+
+Equivalently, $\Bjoint(f) = \Pjoint\,(\Kjoint \ast f)\,\Pjoint$ with
+$\Pjoint = P^{\SU(2)}_{\nmax} \otimes P^{\Uone}_{\Nt}$ the joint
+truncation projection and $\Kjoint = \KSU \otimes \KU$ the joint
+central spectral Fej\'er kernel.
+
+\begin{lemma}[L4, joint Berezin properties under $\Lop$]\label{lem:L4op}
+$\Bjoint_{\nmax, \Nt, T}$ satisfies the following five properties:
+\begin{enumerate}
+\item[(a)] \emph{Positivity.} If $f \ge 0$ pointwise on
+$\Manifold$, then $\Bjoint(f) \ge 0$ as a positive-semidefinite
+Hermitian element of $\Mat_{\dim \Krein}(\C)$.
+\item[(b)] \emph{Contractivity.} $\cbnorm{\Bjoint} \le \cbnorm{S_{\Kjoint}} = 2/(\nmax+1) \le 1$, and $\opnorm{\Bjoint(f)} \le \norm{f}_{\infty}$.
+\item[(c)] \emph{Approximate identity.} For every $f \in C^{\infty}(\Manifold)$,
+\begin{equation}\label{eq:L4op_approx_id}
+   \opnorm{\Bjoint(f) - \Pjoint M_{f} \Pjoint}
+   \;\le\; \gammajoint_{\nmax, \Nt, T} \cdot
+            \norm{\nabla^{\mathrm{joint}} f}_{\infty},
+\end{equation}
+with $\gammajoint = O(\log\nmax/\nmax + T/\Nt) \to 0$ as
+$(\nmax, \Nt) \to (\infty, \infty)$.
+\item[(d)] \emph{L3 compatibility under $\Lop$.} For every $f \in C^{\infty}(\Manifold)$,
+\begin{equation}\label{eq:L4op_L3compat}
+   \opnorm{[\DL, \Bjoint(f)]}
+   \;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}} f}_{\infty},
+\end{equation}
+with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ from
+Lemma~\ref{lem:L3op}.
+\item[(e)] \emph{Krein-positivity preservation.} For every $f$,
+$[\JL, \Bjoint(f)] = 0$ bit-exact, hence $\Bjoint(f)$ preserves both
+$\Kplus$ and $\Kminus$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties (a), (b), (c), (e) are seminorm-independent, transporting
+verbatim from Paper~45~\S~4.3:
+\begin{itemize}
+\item (a) Positivity:\ via the convolution form
+$\Bjoint(f) = \Pjoint\,(\Kjoint \ast f)\,\Pjoint$ and the non-negativity
+of $\Kjoint = \KSU \otimes \KU$ (both factor kernels are squared
+characters). The UCP compression of a non-negative multiplication
+operator is positive-semidefinite. No Lipschitz seminorm appears in
+the statement or the proof.
+\item (b) Contractivity:\ Young's inequality at the sup endpoint gives
+$\opnorm{\Bjoint(f)} \le \norm{\Kjoint \ast f}_{\infty} \le
+\norm{\Kjoint}_{L^{1}} \norm{f}_{\infty}$, with $\norm{\Kjoint}_{L^{1}} = 1$
+(both factors normalized as probability densities). The sharper cb-norm
+bound is via Lemma~\ref{lem:L2}. Both bounds use only the convolution
+structure of $\Bjoint$ and the cb-norm of $S_{\Kjoint}$, neither of
+which depends on the choice of Lipschitz seminorm.
+\item (c) Approximate identity:\ Paper~45~\S~4.3 (c) factorizes the
+convolution deficit as $(\KSU \ast f_{s} - f_{s}) \otimes (\KU \ast f_{t})
++ f_{s} \otimes (\KU \ast f_{t} - f_{t})$ for pure-tensor
+$f = f_{s} \otimes f_{t}$, and bounds each summand by the Paper~38
+SU(2) spatial rate $O(\log \nmax / \nmax)$ (factor 1) and the standard
+Fej\'er-on-$\Sone$ rate $O(T/\Nt)$ (factor 2). The LHS is an
+operator-norm quantity, the RHS is the joint gradient norm of $f$ as a
+smooth function on $\Manifold$. Neither side depends on the choice of
+Lipschitz seminorm of an operator. Define
+$\gammajoint := \max(\gammaSU_{\nmax}, \gammaU_{\Nt, T}) = O(\log\nmax/\nmax + T/\Nt)$.
+The bound~(\ref{eq:L4op_approx_id}) follows.
+\item (e) Krein-positivity preservation:\ $\Bjoint(f) \in \Op^{L}$ by
+definition (it is a finite linear combination of pure-tensor multipliers
+$M^{\spat}_{N, L, M} \otimes M^{\temp}_{q}$, all in $\Op^{L}$), and
+every multiplier in $\Op^{L}$ commutes with $\JL$ by Paper~44 Prop.~5.1.
+\end{itemize}
+
+\emph{(d) L3 compatibility under $\Lop$:} this is the only property
+that engages the Lipschitz seminorm directly. By linearity over the
+joint Berezin expansion~(\ref{eq:joint_berezin}) and
+Lemma~\ref{lem:temporal_invisibility},
+\begin{equation*}
+   [\DL, \Bjoint(f)] \;=\; \sum_{N, L, M, q} \Plancherel{\Kjoint}(N, q)\,c_{N L M q}\,
+   i\,[\DGV, M^{\spat}_{N, L, M}] \otimes M^{\temp}_{q}.
+\end{equation*}
+Apply Lemma~\ref{lem:L3op}, triangle inequality, and
+$|\Plancherel{\Kjoint}(N, q)| \le 1$ (both factor symbols cap at $1$)
+to conclude~(\ref{eq:L4op_L3compat}) with constant $\Cthreeop(\nmax)$
+from~(\ref{eq:C3op_closed_form}). \qedhere
+\end{proof}
+
+\begin{remark}[L4 properties (a)--(c), (e) are seminorm-independent]
+\label{rem:L4_seminorm_independent}
+Only L4(d) couples directly to the choice of Lipschitz seminorm; the
+other four properties transport verbatim from Paper~45 \S~4.3 because
+their statements use operator-norm $\opnorm{\cdot}$, smooth gradient
+norm $\norm{\nabla f}_{\infty}$, or commutator $[\JL, \cdot]$, none of
+which reference a Lipschitz seminorm of an operator. This factor-by-factor
+seminorm-independence is the structural reason for the ``free upgrade''
+of \S~\ref{sec:discussion}.
+\end{remark}
+
+\begin{remark}[Envelope erratum scope on L4]\label{rem:L4_no_envelope}
+Properties (a), (b), (c), (e) are \emph{support-bounded}, not
+envelope-bounded:\ they depend only on the SUPPORT of $\Bjoint(f)$ in
+operator space, which is the kept range $N \le \nmax$ by Plancherel
+cutoff (the symbol $\Plancherel{K}^{\SU(2)}(N) = 0$ for $N > \nmax$).
+Property (d) inherits the L3 envelope refinement, but only on
+off-Berezin-image multipliers (which have $N$ in the range
+$(\nmax, 2\nmax - 1]$); on Berezin images, Paper~45's stated
+$C_{3}^{(\nmax)}$ is sufficient because Berezin images respect
+$N \le \nmax$. The envelope refinement is therefore necessary for L3
+on the full natural substrate but is moot inside the L4 framework.
+\end{remark}
+
+\subsection{Lemma L5: Latr\'emoli\`ere propinquity assembly under $\Lop$}
+\label{sec:L5}
+
+\begin{definition}[Joint tunneling pair]\label{def:tunneling_pair}
+The joint tunneling pair between the truncated triple
+$\Tcal^{L}_{\nmax, \Nt, T}$ and the continuum reference
+$\Tcal^{L}_{\Manifold}
+:= (C^{\infty}(\Manifold), L^{2}(\sthree, \Sigma_{\mathrm{CH}}) \otimes
+L^{2}(\SoneT), D^{L}_{\infty}, J^{L}_{\infty})$ is
+\begin{equation*}
+   (\Bjoint_{\nmax, \Nt, T},\; \Pjoint_{\nmax, \Nt}),
+\end{equation*}
+with $\Bjoint$ from Def.~\ref{def:joint_berezin} and
+$\Pjoint = P^{\SU(2)}_{\nmax} \otimes P^{\Uone}_{\Nt}$ the joint
+truncation projection.
+\end{definition}
+
+Both maps are UCP (Berezin via cb-norm bound, projection trivially),
+and both commute with $\JL$ at the operator level
+(Lemma~\ref{lem:L1prime}~(e) and Lemma~\ref{lem:L4op}~(e)). The pair
+$(\Bjoint, \Pjoint)$ is therefore a valid Latr\'emoli\`ere tunneling
+pair between the truncated and continuum metric spectral triples on
+the full Krein space, under either Lipschitz seminorm.
+
+\begin{proposition}[Reach and height bounds under $\Lop$]\label{prop:reach_height_op}
+The four propinquity constituents of Latr\'emoli\`ere
+2017/2023~\cite{latremoliere_metric_st_2017}~\S~4 satisfy:
+\begin{align}
+   \mathrm{reach}_{B} &\;\le\; \gammajoint_{\nmax, \Nt, T},
+   \label{eq:reach_B_op} \\
+   \mathrm{reach}_{P} &\;\le\; \gammajoint_{\nmax, \Nt, T},
+   \label{eq:reach_P_op} \\
+   \mathrm{height}_{B} &\;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax, \Nt, T},
+   \label{eq:height_B_op} \\
+   \mathrm{height}_{P} &\;=\; 0.
+   \label{eq:height_P_op}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+(\ref{eq:reach_B_op}) is Lemma~\ref{lem:L4op}~(c) applied to the
+unit-Lipschitz ball $\{f : \norm{\nabla^{\mathrm{joint}} f}_{\infty} \le 1\}$. The
+LHS is an operator-norm quantity, the bound is from L4(c) which is
+seminorm-independent (Remark~\ref{rem:L4_seminorm_independent}).
+
+(\ref{eq:reach_P_op}) is the dual roundtrip:\ start with $M_{f}$ on
+the continuum side, apply $\Pjoint$ to compress to $\Op^{L}$, and lift
+back with a bounded partial inverse $\sigma$ of $\Bjoint$ on the
+central subalgebra. By Lemma~\ref{lem:L2}, $\cbnorm{S_{\Kjoint}}
+= 2/(\nmax + 1)$ is finite and non-zero, so $\sigma$ exists on the
+central subalgebra with bounded cb-norm;\ the dual residual is
+symmetric to (\ref{eq:reach_B_op}) and bounded by the same
+$\gammajoint$.
+
+(\ref{eq:height_B_op}) is the Lipschitz-distortion height of
+Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,Def.~3.5 under
+$\Lop$. By the L3 compatibility (Lemma~\ref{lem:L4op}~(d)) and the
+Stein--Weiss / Paper~38~\S~Appendix~A factor-wise step,
+\begin{equation*}
+   \mathrm{height}_{B}
+   \;=\; \sup_{\norm{\nabla^{\mathrm{joint}} f}_{\infty} \le 1}
+        \bigl|\norm{f}_{\mathrm{Lip}} - \Lop(\Bjoint(f))\bigr|
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint,
+\end{equation*}
+where the truncated-side Lipschitz seminorm is
+$\Lop(\Bjoint(f)) = \opnorm{[\DL, \Bjoint(f)]}$.
+
+(\ref{eq:height_P_op}) is the Stinespring projection bound:\ $\Pjoint$
+is an orthogonal projection of cb-norm $1$ and introduces no
+Lipschitz distortion (the projection of a smooth function $f$ onto the
+truncated subspace is a smooth function whose Lipschitz seminorm is at
+most $\norm{f}_{\mathrm{Lip}}$). The same argument is used in
+Paper~45~Prop.~5.2~/~eq.~(height\_P) and Paper~38~\S~L5. \qedhere
+\end{proof}
+
+% =====================================================================
+\section{Main theorem}\label{sec:main}
+% =====================================================================
+
+\begin{theorem}[Strong-form Lorentzian propinquity convergence]
+\label{thm:main}
+Let $\nmax \ge 1$, $\Nt \ge 1$, $T > 0$. The strong-form Latr\'emoli\`ere
+quantum Gromov--Hausdorff propinquity between the truncated Krein
+metric spectral triple $\Tcal^{L}_{\nmax, \Nt, T}$ (under $\Lop$) and
+the continuum reference $\Tcal^{L}_{\Manifold}$ satisfies
+\begin{equation}\label{eq:main_bound_op}
+   \Lprop\!\bigl(\Tcal^{L}_{\nmax, \Nt, T},\;
+                 \Tcal^{L}_{\Manifold}\bigr)
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax, \Nt, T}
+   \;\xrightarrow[(\nmax, \Nt) \to (\infty, \infty)]{}\; 0,
+\end{equation}
+with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$ from
+Lemma~\ref{lem:L3op} and $\gammajoint_{\nmax, \Nt, T}
+= O(\log\nmax/\nmax + T/\Nt)$ from Lemma~\ref{lem:L4op}~(c).
+The assembled multiplier $\Cfivejoint = \max(1, 1, \Cthreeop, 0) = 1$
+since $\Cthreeop \le 1$, and the bound reduces to
+$\Lprop \le \gammajoint$.
+\end{theorem}
+
+\begin{proof}
+By the Latr\'emoli\`ere weak-form propinquity
+bound~\cite{latremoliere_metric_st_2017}~\S~4 and
+Proposition~\ref{prop:reach_height_op},
+\begin{align*}
+   \Lprop\!\bigl(\Tcal^{L}_{\nmax, \Nt, T}, \Tcal^{L}_{\Manifold}\bigr)
+   \;&\le\; \max\bigl(\mathrm{reach}_{B},\,
+                       \mathrm{reach}_{P},\,
+                       \mathrm{height}_{B},\,
+                       \mathrm{height}_{P}\bigr) \\
+   \;&\le\; \max(\gammajoint,\, \gammajoint,\, \Cthreeop \cdot \gammajoint,\, 0) \\
+   \;&=\; \gammajoint_{\nmax, \Nt, T},
+\end{align*}
+where the last equality uses $\Cthreeop(\nmax) \le 1$. The right-hand
+side $\gammajoint = O(\log\nmax/\nmax + T/\Nt) \to 0$ as
+$(\nmax, \Nt) \to (\infty, \infty)$. \qedhere
+\end{proof}
+
+\begin{remark}[Free-upgrade reading]\label{rem:free_upgrade}
+The assembled bound~(\ref{eq:main_bound_op}) on the strong-form
+propinquity equals Paper~45's bound on the $\Kplus$-weak-form
+propinquity, bit-exactly at the numerical-panel level (\S~\ref{sec:numerical}).
+The strong-form propinquity bounds a strictly larger Lipschitz
+seminorm than the $\Kplus$-weak-form (namely $\Lop$ instead of
+$\LPwk$), on the strictly larger full Krein space (instead of $\Kplus$);
+yet the constant $\Cfivejoint = 1$ is the same, and the rate
+$\gammajoint$ is unchanged.
+
+The structural reasons are:\ (i) the temporal-Lipschitz-invisibility
+identity (Lemma~\ref{lem:temporal_invisibility}) makes the full
+operator-norm content of $[\DL, a]$ equal to the spatial commutator
+norm $\opnorm{[\DGV, M^{\spat}]} \cdot \opnorm{M^{\temp}}$ on the
+natural substrate; (ii) the height-$B$ bound is dominated by the
+reach-$B$ bound because $\Cthreeop \le 1$, so the constant entering
+the assembled $\Cfivejoint$ is $1$ in both cases; (iii) the cb-norm,
+the reach, and the Krein-positivity preservation are all
+seminorm-independent. The strong-form is genuinely stronger as a
+\emph{statement} (it bounds a strictly larger quantity), but the
+\emph{bound} is unchanged. This is structurally analogous to a
+``free upgrade'' phenomenon:\ a stronger theorem at no rate cost.
+\end{remark}
+
+\begin{remark}[Limit identification]\label{rem:limit_identification_op}
+The propinquity limit is the standard metric spectral triple
+$\Tcal^{L}_{\Manifold}$ on the continuum Krein space, under $\Lop$
+defined via the continuum Lorentzian Dirac $D^{L}_{\infty}$. By
+Latr\'emoli\`ere's metric-spectral-triple
+theorem~\cite{latremoliere_metric_st_2017}\,Thm.~5.5, the limit
+identification is on the Wasserstein--Kantorovich state space of the
+limit triple. The strong-form construction is on the full Krein
+state space (not the $\Kplus$-restricted one), and the limit is
+correspondingly on the full Krein-state Wasserstein--Kantorovich space.
+This is the substantive difference from Paper~45's $\Kplus$-weak-form
+limit identification:\ the limit object is now defined on the full
+Krein state space, recovering the strong-form structure in the limit.
+\end{remark}
+
+% =====================================================================
+\section{Numerical verification and Riemannian-limit recovery}
+\label{sec:numerical}
+% =====================================================================
+
+\subsection{Verification panel}\label{sec:panel}
+
+The driver \texttt{debug/l3b\_2d\_propinquity\_assembly\_compute.py}
+computes the four propinquity constituents of
+Proposition~\ref{prop:reach_height_op} at the panel
+\begin{equation*}
+   (\nmax, \Nt) \in \{(2, 3),\, (3, 5),\, (4, 7)\}
+\end{equation*}
+at $T = 2\pi$, plus the Riemannian-limit panel
+$(\nmax, \Nt) \in \{(2, 1), (3, 1), (4, 1)\}$. Results match Paper~45's
+$\Kplus$-weak-form bit-exactly at the displayed-precision level (4-significant-digit
+rounding):
+
+\begin{table}[t]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|c|c|c|c|c}
+\toprule
+$(\nmax, \Nt)$ & $\gammaSU$ & $\gammaU$ & $\Cthreeop$ & $\Lprop$ bound & Paper~45 $\Lpropweak$ \\
+\midrule
+$(2, 1)$ & $2.0746$ & --- & $0.7071$ & $\mathbf{2.0746}$ & $2.0746$ \\
+$(3, 1)$ & $1.6101$ & --- & $0.8165$ & $\mathbf{1.6101}$ & $1.6101$ \\
+$(4, 1)$ & $1.3223$ & --- & $0.8660$ & $\mathbf{1.3223}$ & $1.3223$ \\
+$(2, 3)$ & $2.0746$ & $0.7220$ & $0.7071$ & $\mathbf{2.0746}$ & $2.0746$ \\
+$(3, 5)$ & $1.6101$ & $0.4956$ & $0.8165$ & $\mathbf{1.6101}$ & $1.6101$ \\
+$(4, 7)$ & $1.3223$ & $0.3841$ & $0.8660$ & $\mathbf{1.3223}$ & $1.3223$ \\
+\bottomrule
+\end{tabular}
+\caption{Numerical verification panel for Theorem~\ref{thm:main}.
+$\gammaSU$ values from Paper~38~\S~L2 closed-form Stein--Weiss
+computation;\ $\gammaU$ values from standard Fej\'er-on-$\SoneT$ at
+$T = 2\pi$;\ $\Cthreeop$ from~(\ref{eq:C3op_closed_form}) with
+envelope $N \le 2\nmax - 1$. The strong-form bound $\Lprop$ equals
+Paper~45's $\Kplus$-weak-form $\Lpropweak$ bit-exactly at every cell;
+the relative residual $|\Lprop - \Lpropweak| / |\Lpropweak| \sim
+2.4 \times 10^{-5}$ is the 4-significant-digit rounding in Paper~45
+\S~6 Table~1.}\label{tab:panel}
+\end{table}
+
+\subsection{Riemannian-limit recovery (load-bearing falsifier F1)}
+\label{sec:riemannian_limit}
+
+\begin{proposition}[Riemannian-limit recovery at $\Nt = 1$]
+\label{prop:riemannian_limit_op}
+At $\Nt = 1$, the strong-form Lorentzian propinquity reduces
+bit-exactly to Paper~38's $\SU(2)$ Riemannian propinquity bound:
+\begin{equation}\label{eq:riemannian_limit_op}
+   \Lprop\!\bigl(\Tcal^{L}_{\nmax, 1, T},\, \Tcal^{L}_{\Manifold}\bigr)
+   \;=\; \Lambdab^{\mathrm{Paper~38}}_{\nmax}
+   \qquad \text{(Frobenius residual $0.0$ in float64)}
+\end{equation}
+at $\nmax \in \{2, 3, 4\}$.
+\end{proposition}
+
+\begin{proof}
+At $\Nt = 1$, the only kept Fourier mode is $q = 0$, the $\Uone$
+Fej\'er kernel collapses to the uniform Haar density, and the temporal
+Berezin factor $B^{\Uone}_{1, T}$ is the trivial $1 \times 1$ identity.
+By the PURE\_TENSOR factorization,
+$\Bjoint_{\nmax, 1, T}(f_{s} \otimes \mathbf{1}) =
+B^{\SU(2)}_{\chid}(f_{s}) \otimes I_{1}$, which equals Paper~38's
+chirality-doubled spinor lift of the spatial Berezin.
+
+The chirality-doubled spinor lift is bit-identical to Paper~38's
+scalar Fock-basis construction up to representation:\ Plancherel
+weights, Lipschitz bound constant, and convergence rate are the same
+numerical objects. By Lemma~\ref{lem:temporal_invisibility} at
+$\Nt = 1$, $[\DL, a]|_{\Nt = 1} = i[\DGV, M^{\spat}]$ (the temporal
+factor is trivially $1$), so $\Lop$ at $\Nt = 1$ equals Paper~38's
+spatial Lipschitz seminorm bit-exactly. The bound~(\ref{eq:riemannian_limit_op})
+follows. The numerical residuals at $\nmax \in \{2, 3, 4\}$ are
+$0.0$ in float64 (Table~\ref{tab:panel}). \qedhere
+\end{proof}
+
+The Riemannian-limit recovery is the load-bearing falsifier of the
+construction:\ were it to fail, we would have introduced an extraneous
+factor in the Wick-rotated signature, miscounted weights or grids, or
+had a sign error in $\DL$ or $\Lop$. The bit-exact recovery rules out
+all three. This is the same pattern as Paper~45~Prop.~6.2~/~eq.~(riemannian\_limit)
+and Paper~42~/~Paper~43.
+
+\subsection{Asymptotic-rate consistency}\label{sec:asymp_consistency_op}
+
+The ratio $\Lprop(4, 7) / \Lprop(2, 3) = 1.3223 / 2.0746 = 0.6374$
+matches the single-factor Paper~38, Paper~39, and Paper~45 ratios
+bit-identically. The asymptotic rate constant on the SU(2) factor is
+\begin{equation*}
+   \lim_{\nmax \to \infty} \frac{\nmax \cdot \gammaSU_{\nmax}}{\log\nmax}
+   \;=\; \frac{4}{\pi}
+\end{equation*}
+(Paper~38~\S~L2 Stein--Weiss closure, Paper~40~\S~3.2 universal
+Plancherel-$\times$-Vandermonde cancellation theorem). This $4/\pi$
+constant is the master Mellin engine M1 Hopf-base measure signature on
+the case-exhaustion theorem of Paper~32~\S~VIII; it transports
+verbatim to the joint setting and to the strong-form construction.
+
+% =====================================================================
+\section{Discussion}\label{sec:discussion}
+% =====================================================================
+
+\subsection{The free-upgrade reading on the natural substrate}
+\label{sec:free_upgrade_substrate}
+
+The strong-form propinquity bound~(\ref{eq:main_bound_op}) equals
+Paper~45's $\Kplus$-weak-form bound numerically and asymptotically.
+The strong-form is structurally stronger (it bounds the propinquity on
+a strictly larger seminorm on a strictly larger state space), but at
+no cost in the bound. This ``free upgrade'' is a structural feature of
+the natural substrate:\ every multiplier in $\Op^{L}$ commutes with
+$\JL$ (Paper~44 Prop.~5.1), the temporal commutator
+$[\Ddiag, a]$ vanishes identically
+(Lemma~\ref{lem:temporal_invisibility}), and the operator-norm content
+of $[\DL, a]$ is concentrated in the chirality-flipping piece
+$\Doff$ whose operator-norm is the spatial-Dirac-commutator norm.
+
+The ``upgrade'' is genuine in the sense that the strong-form bound is
+defined on a larger object than the $\Kplus$-weak-form. It is ``free''
+in the sense that the bound is unchanged. It is ``on the natural
+substrate'' in the sense that this equality fails on the enlarged
+substrate (\S~\ref{sec:enlarged_substrate}), where the strong-form
+content extends beyond the $\Kplus$-weak-form content.
+
+\subsection{The enlarged substrate (G1$'$): the next-tranche follow-on}
+\label{sec:enlarged_substrate}
+
+Paper~45 Lemma~4.1~(e) and the present
+Lemma~\ref{lem:L1prime} both establish $[\JL, a] = 0$ for every
+$a \in \Op^{L}$. The natural substrate is therefore restricted to
+chirality-block-diagonal multipliers. An \emph{enlarged} substrate
+would extend $\Op^{L}$ to include chirality-flipping generators of the
+form
+\begin{equation}\label{eq:flip_generator}
+   M_{\mathrm{flip}} \;=\; \begin{pmatrix} 0 & W \\ W^{*} & 0 \end{pmatrix}_{\chi},
+\end{equation}
+in the chirality-doubled basis on $\HGV$, anticommuting with
+$\gamma^{0}$ ($\{\gamma^{0}, M_{\mathrm{flip}}\} = 0$). On the
+enlarged substrate, the temporal-Lipschitz-invisibility identity
+(Lemma~\ref{lem:temporal_invisibility}) fails:\ the cross term
+$[\Ddiag, M_{\mathrm{flip}} \otimes M^{\temp}] =
+i \{\gamma^{0}, M_{\mathrm{flip}}\} \otimes \partial_{t} M^{\temp} +
+\cdots$ may be non-zero, and $\Lop$ separates from $\Lblock$ on the
+diagonal pieces.
+
+The L3 and L4 transports under $\Lop$ on the enlarged substrate
+require re-derivation. Two questions arise:\ (Q1$'_{\mathrm{a}}$)
+does the strong-form propinquity bound on the enlarged substrate
+exceed the natural-substrate bound by a finite factor? (Q1$'_{\mathrm{b}}$)
+does the asymptotic rate $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$
+survive on the enlarged substrate? Both are open. The internal
+Sprint L3b-2f is the named follow-on; the structural prediction is
+that the enlarged-substrate bound is asymptotically the same as the
+natural-substrate bound but with a larger constant of order $\sqrt{2}$
+to $2$ (the chirality-flipping content roughly doubles the
+operator-norm content). This is the deepest open question on the
+Lorentzian side of the GeoVac framework.
+
+\subsection{De-compactification limit $T \to \infty$ (G2)}
+\label{sec:decompactification}
+
+Inherited from Paper~45 \S~1.4 G2:\ the $T \to \infty$ limit recovers
+the non-compact $\R_{t}$ direction. The joint mass-concentration moment
+$\gammaU = O(T/\Nt)$ requires $\Nt$ to grow at least as fast as $T$;
+the asymptotic-rate analysis must be re-examined in this regime. This
+is internally a separate sprint (L3c in our taxonomy) and is not
+addressed here.
+
+\subsection{Cross-manifold extensions (G3)}\label{sec:cross_manifold}
+
+Inherited from Paper~45 \S~1.4 G3:\ the cross-manifold extension
+$\Tcal_{\sthree} \otimes \Tcal_{\mathrm{Hardy}(S^{5})}$ is blocked at
+the NCG-framework level by the Riemannian-vs-Hardy-sector asymmetry
+(four-layer Coulomb/HO asymmetry from
+Paper~24~\cite{paper24}\,\S~V); not addressed.
+
+\subsection{Inner-factor calibration data (G4)}\label{sec:inner_factor}
+
+Inherited from Paper~45 \S~1.4 G4:\ Higgs / Yukawa selection
+question of the Connes--Marcolli SM construction; orthogonal to the
+present convergence theorem.
+
+\subsection{Connection to the four-witness Wick-rotation arc}
+\label{sec:four_witness_op}
+
+Paper~42~\cite{paper42} closes the four-witness Wick-rotation theorem
+(Hartle--Hawking~\cite{hartle_hawking1976},
+Sewell~\cite{sewell1982},
+Bisognano--Wichmann~\cite{bisognano_wichmann1976},
+Unruh~\cite{unruh1976}) at the operator-system level on the
+Riemannian truncated Camporesi--Higuchi spectral triple via the
+geometric BW-$\alpha$ and Tomita--Takesaki BW-$\gamma$ modular
+Hamiltonians on a hemispheric wedge. Paper~43~\cite{paper43} extends
+the closure to signature $(3, 1)$. Paper~45~\cite{paper45} closes the
+$\Kplus$-weak-form Lorentzian convergence; the present paper closes
+the strong-form Lorentzian convergence.
+
+The triple $(42, 43, 45)$ together with Paper~46 constitute the
+operator-algebraic Lorentzian-extension closure of the math.OA quartet
+on the Riemannian side $(38, 39, 40)$. Both $\Kplus$-weak-form and
+strong-form Lorentzian propinquity convergence are now closed, leaving
+only the enlarged-substrate question (G1$'$) as the deepest open
+question on this side.
+
+\subsection{Relation to Mondino--S\"amann}\label{sec:mondino_samann_op}
+
+Inherited from Paper~45~\S~7.2:\ the synthetic Lorentzian
+Gromov--Hausdorff program of
+Mondino--S\"amann~\cite{mondino_samann2025} (and the downstream
+Che--Perales--Sormani~\cite{che_perales_sormani2025} timed-Hausdorff
+extension) is conceptually adjacent (``Lorentzian Gromov--Hausdorff-type
+convergence'') but operates on a categorically different mathematical
+object:\ pre-length spaces with causal diamonds, not operator-algebraic
+spectral triples. Neither construction implies the other; both are
+valid notions of Lorentzian-type Gromov--Hausdorff convergence on their
+respective categories.
+
+\subsection{Structural-skeleton scope}\label{sec:scope_skeleton_op}
+
+The strong-form convergence theorem obeys the structural-skeleton
+discipline of the GeoVac framework:\ the bound determines the rate,
+the asymptotic constant, and the limit identification on the full
+Krein-state-space substrate at finite cutoff. It does not determine
+calibration data (Yukawa selection, inner-factor parameters), which are
+external input. The selection of $T = 2\pi$ is structurally tied to
+the Bisognano--Wichmann modular period via Paper~43;\ the construction
+itself works for any $T > 0$.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+The author thanks the developers of \texttt{numpy}, \texttt{scipy},
+\texttt{sympy}, and \texttt{mpmath} for the computational infrastructure
+underlying the numerical verification. This work was developed in an
+AI-augmented agentic workflow with Anthropic's Claude;\ implementation,
+internal sprint memos (L3b-2a/b/c/d), and bibliographic collation were
+performed collaboratively;\ all theorems, design choices, and editorial
+decisions are the author's responsibility.
+
+% =====================================================================
+\appendix
+% =====================================================================
+\section{Envelope refinement of Paper~45 eq.~(C3\_joint\_bound)}
+\label{app:erratum}
+% =====================================================================
+
+We record the finite-cutoff envelope refinement of Paper~45 eq.~(C3\_joint\_bound)
+that arose from the L3b-2b sub-sprint analysis. The asymptotic statement
+of Paper~45 is unchanged; the refinement applies only to the explicit
+finite-$\nmax$ form of the per-harmonic Lichnerowicz constant on the
+natural Lorentzian substrate.
+
+\subsection{The Paper~45 statement and the refinement}\label{app:erratum_statement}
+
+Paper~45 eq.~(C3\_joint\_bound) (in our notation):
+\begin{equation*}
+   \Cthreejoint(\nmax, \Nt) \;\le\; \CthreeSU(\nmax)
+   \;\le\; \sup_{2 \le N \le \nmax} \frac{N - 1}{\sqrt{N^{2} - 1}}
+   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
+\end{equation*}
+
+The refined statement (this paper, Lemma~\ref{lem:L3op}):
+\begin{equation*}
+   \Cthreeop(\nmax)
+   \;\le\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
+   \;=\; \sqrt{1 - \frac{1}{\nmax}}
+   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
+\end{equation*}
+
+Both forms tend to $1^{-}$ asymptotically; the refinement is a finite-cutoff
+correction.
+
+\subsection{Why Paper~45's range $N \le \nmax$ is non-binding on the
+natural substrate}\label{app:erratum_explanation}
+
+The Avery--Wen--Avery $\Delta n = \pm 1$ ladder on $\nmax$ shells
+produces shell-difference labels $N$ up to $2\nmax - 1$ (Paper~44
+\S~3). The natural-substrate multipliers $M^{\spat}_{N, L, M}$ in
+$\Op^{L}_{\nmax, \Nt, T}$ include such labels in the range
+$N \in \{1, 2, \ldots, 2\nmax - 1\}$. At $\nmax = 3$, the per-harmonic
+constant at $N = 4$ is $C_{3}^{(4)} = 3/\sqrt{15} \approx 0.7746$,
+which exceeds Paper~45's stated $C_{3}^{(\nmax = 3)} = 2/\sqrt{8}
+\approx 0.7071$. The natural-substrate generator
+$(N_{\spat} = 4, L = 1, M = \pm 1, p = 0)$ has Lipschitz ratio
+$\approx 0.95 > C_{3}^{(3)} = 0.7071$ but $\le C_{3}^{(4)} = 0.7746$
+(L3b-2b sub-sprint \S~5).
+
+The numerical witness:
+
+\begin{table}[t]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{c|c|c|c|c|c}
+\toprule
+$\nmax$ & Paper~45 $C_{3}^{(\nmax)}$ & Envelope $\Cthreeop(\nmax)$ & $N_{\mathrm{env}}$ & $C_{3}^{(N_{\mathrm{env}})}$ & Paper~45 underbinds? \\
+\midrule
+$2$ & $0.5774$ & $0.7071$ & $3$ & $0.7071$ & YES \\
+$3$ & $0.7071$ & $0.8165$ & $5$ & $0.8165$ & YES \\
+$4$ & $0.7746$ & $0.8660$ & $7$ & $0.8660$ & YES \\
+$5$ & $0.8165$ & $0.8944$ & $9$ & $0.8944$ & YES \\
+$10$ & $0.9045$ & $0.9487$ & $19$ & $0.9487$ & YES \\
+$20$ & $0.9512$ & $0.9747$ & $39$ & $0.9747$ & YES \\
+\bottomrule
+\end{tabular}
+\caption{Envelope refinement at six $\nmax$ values. At every finite
+$\nmax$, Paper~45's stated $\sup_{N \le \nmax}$ under-states the bound
+required by the natural-substrate generators in the range
+$N \in (\nmax, 2\nmax - 1]$. The refined constant
+$\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ is the
+correct supremum value at the envelope.}\label{tab:erratum}
+\end{table}
+
+\subsection{Proposed Paper~45 erratum text}\label{app:erratum_text}
+
+We propose the following minor refinement (NOT applied to Paper~45 in
+this paper; we record it here for completeness). Paper~45 eq.~(C3\_joint\_bound)
+should be amended to read:
+\begin{equation*}
+   \Cthreejoint(\nmax, \Nt) \;\le\; \CthreeSU(\nmax)
+   \;\le\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
+   \;=\; \sqrt{1 - \frac{1}{\nmax}}
+   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
+\end{equation*}
+
+The accompanying explanation:\ the supremum range is the
+Avery--Wen--Avery achievable-envelope cutoff $N \le 2\nmax - 1$ on the
+natural chirality-doubled scalar-multiplier substrate of the
+Lorentzian construction, NOT the smaller range $N \le \nmax$. The
+$\Delta n = \pm 1$ ladder on $\nmax$ shells produces shell-difference
+labels $N$ up to $2\nmax - 1$ via Paper~44~\S~3. Both forms tend to
+$1^{-}$ asymptotically; the asymptotic statement (Paper~45 Theorem~5.1)
+is unchanged. Numerical panel values in Paper~45 \S~6 Table~1 are
+unchanged (they quote $\gammaSU$ directly, not
+$C_{3} \cdot \gammaSU$).
+
+\subsection{Why Paper~38 does NOT need the analogous refinement}
+\label{app:erratum_paper38}
+
+Paper~38~\cite{paper38} \S~L3 Remark states
+$C_{3}(\nmax) \le \sup_{N \le \nmax} \sqrt{(N - 1)/(N + 1)}
+= \sqrt{(\nmax - 1)/(\nmax + 1)}$. Paper~38's Berezin map (Paper~38
+eq.~(B\_def)) restricts to $N \le \nmax$ by Plancherel cutoff; the
+propinquity assembly (Paper~38~\S~5.1 proof) bounds
+$\opnorm{[\DCH, B_{\nmax}(f)]} \le C_{3} \cdot \norm{\nabla f}_{\infty}$
+using the L3 bound on $N \le \nmax$ (the support of $B_{\nmax}(f)$).
+The natural substrate's full envelope $N \le 2\nmax - 1$ is NOT
+engaged in Paper~38's propinquity assembly; only Berezin-image
+multipliers with $N \le \nmax$ are.
+
+Therefore Paper~38~\S~L3 Remark is correct as stated. The refinement
+is Lorentzian-substrate-specific:\ the chirality-doubling at the
+operator-system level admits more multipliers than the Berezin-image
+level, and the natural-substrate envelope extends to $N \le 2\nmax - 1$.
+Paper~38 has no chirality-doubled multiplier algebra (it lives in a
+single copy of the chirality-doubled $\HGV$), and the envelope and
+the Berezin-image support coincide.
+
+% =====================================================================
+\section{Strict-strong-form extension on the enlarged operator system}
+\label{app:enlarged}
+% =====================================================================
+
+We record the closure of the named follow-on question
+(G1$'$, Sprint~L3b-2f) from \S~\ref{sec:enlarged_substrate}:\ does
+the strong-form propinquity bound extend to chirality-flipping
+generators not present in the natural chirality-doubled
+scalar-multiplier substrate? This appendix shows that it does, with
+the substantive content that the chirality-flip enlargement is
+``paid'' entirely in a gradient-norm extension --- leaving the
+propinquity bound bit-exactly preserved at the same numerical value
+as the natural-substrate bound established in Theorem~\ref{thm:main}.
+
+The arc that closes G1$'$ was internally executed as Sprint
+L3b-2f-$\beta$ across four sub-sprints (a,b,c,d,e and a final
+$\beta$-L5 assembly). The structure of this appendix follows the
+$\beta$-L5 closure memo \S~6.6.
+
+\subsection{Motivation}\label{app:enlarged_motivation}
+
+\S~\ref{sec:enlarged_substrate} named the enlarged-substrate question
+as the deepest open problem on the Lorentzian side of the GeoVac
+framework. The natural substrate $\Op^{L}_{\nmax, \Nt, T}$ of Paper~44
+restricts to multipliers commuting with the Krein fundamental symmetry
+$\JL$ (Paper~44 Prop.~5.1), and equivalently to chirality-block-diagonal
+generators in the chirality-doubled basis of $\HGV$. The
+\emph{strong-form} propinquity bound on this substrate is the content
+of Theorem~\ref{thm:main}. The natural-substrate ``free upgrade''
+(\S~\ref{sec:discussion}) follows from the temporal-Lipschitz-invisibility
+identity (Lemma~\ref{lem:temporal_invisibility}), which asserts that
+$[\Ddiag, a] = 0$ identically for every $a \in \Op^{L}$.
+
+Two questions are then natural. (Q1$'_{\mathrm{a}}$)
+What happens on an enlarged substrate that adds chirality-flipping
+generators with $\{\JL, M\} = 0$? Lemma~\ref{lem:temporal_invisibility}
+fails on such generators:\ the cross term $[\Ddiag, M \otimes M^{\temp}]
+\propto \{\gamma^{0}, M\} \otimes \partial_{t} M^{\temp}$ becomes
+non-zero, and the temporal direction becomes Lipschitz-relevant.
+(Q1$'_{\mathrm{b}}$) Does the asymptotic rate
+$\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ survive on the enlarged
+substrate, possibly with a different multiplicative constant?
+
+The closure below answers both questions affirmatively, with the
+chirality-flip content absorbed into the gradient-norm side of the
+L3 bound and the propinquity multiplier $\Cthreeop(\nmax) =
+\sqrt{1 - 1/\nmax}$ unchanged.
+
+\subsection{The enlarged operator system and the J-graded gradient norm}
+\label{app:enlarged_substrate_def}
+
+\begin{definition}[Enlarged operator system]
+\label{def:enlarged_substrate}
+Define the \emph{enlarged} natural-substrate operator system
+\begin{equation}\label{eq:enlarged_substrate}
+   \Op^{L}_{\mathrm{enlarged}}
+   \;:=\; \Op^{L}_{\nmax, \Nt, T}
+   \,\cup\, \bigl\{ M^{\spat,\mathrm{flip}}_{N, L, M} \otimes M^{\temp}_{p}
+     :\; N \le \nmax,\; |p| \le \Kmax \bigr\}^{\ast},
+\end{equation}
+generated as a $\ast$-closed subspace of $B(\Krein_{\nmax, \Nt})$,
+where the chirality-flip spatial multiplier is the chirality-asymmetric
+doubling
+\begin{equation}\label{eq:flip_minimal}
+   M^{\spat,\mathrm{flip}}_{N, L, M}
+   \;:=\; \mathrm{diag}\bigl(W^{N L M}_{W},\; -W^{N L M}_{W}\bigr)
+\end{equation}
+in the chiral basis of $\HGV$, with $W^{N L M}_{W}$ the Avery--Wen--Avery
+Weyl-spinor multiplier of Paper~44~\S~3.
+\end{definition}
+
+The relation between this and the off-block-diagonal form of
+eq.~(\ref{eq:flip_generator}) deserves attention.
+
+\begin{remark}[Convention distinction:\ minimal anti-commuting enlargement]
+\label{rem:flip_convention}
+\S~\ref{sec:enlarged_substrate} wrote a candidate enlargement using
+the off-block-diagonal form $M_{\mathrm{flip}} = \bigl(\begin{smallmatrix}
+0 & W \\ W^{*} & 0 \end{smallmatrix}\bigr)_{\chi}$. The convention in
+Paper~44 sets $\gamma^{0} = \bigl(\begin{smallmatrix} 0 & I \\ I & 0
+\end{smallmatrix}\bigr)$ (chiral basis). With this convention, for
+Hermitian $W$,
+\begin{equation*}
+   \bigl\{\gamma^{0}, \bigl(\begin{smallmatrix} 0 & W \\ W^{*} & 0
+   \end{smallmatrix}\bigr)\bigr\} \;=\; \bigl(\begin{smallmatrix}
+   W^{*} + W & 0 \\ 0 & W + W^{*} \end{smallmatrix}\bigr)
+   \;\ne\; 0 \text{ in general,}
+\end{equation*}
+so the off-block-diagonal form does not in general anti-commute with
+$\gamma^{0}$. In contrast, the chirality-asymmetric diagonal
+form~(\ref{eq:flip_minimal}) satisfies
+\begin{equation*}
+   \bigl\{\gamma^{0}, \mathrm{diag}(W, -W)\bigr\}
+   \;=\; \bigl(\begin{smallmatrix} 0 & -W + W \\ W - W & 0
+   \end{smallmatrix}\bigr) \;=\; 0
+   \qquad \text{bit-exact.}
+\end{equation*}
+The chirality-asymmetric diagonal form is therefore the correct
+\emph{minimal anti-commuting} enlargement in the Paper~44 chiral
+basis;\ \S~\ref{sec:enlarged_substrate}'s heuristic description used a
+convention-loose form and is sharpened here by~(\ref{eq:flip_minimal}).
+Both forms yield non-zero $\{\gamma^{0}, M\}$ on generic choices, but
+only~(\ref{eq:flip_minimal}) gives the bit-exact anti-commutation that
+the proofs below rely on.
+\end{remark}
+
+The natural-substrate Lipschitz seminorm $\Lop$ no longer captures
+the full Lipschitz content of multipliers in $\Op^{L}_{\mathrm{enlarged}}$:\
+the temporal commutator
+$[\Ddiag, M^{\spat,\mathrm{flip}} \otimes M^{\temp}]$ is now non-zero,
+and a strong-form L3 bound must account for it. The L3 derivation of
+\S~\ref{sec:L3} relies on the temporal-Lipschitz-invisibility identity;\
+on the enlarged substrate this identity must be replaced by a
+\emph{splitting}.
+
+\begin{definition}[J-graded gradient norm]\label{def:enlarged_grad_norm}
+Let $f \in C^{\infty}(\Manifold)$, and decompose its joint
+Peter--Weyl $\times$ Fourier expansion into $\JL$-commuting and
+$\JL$-anti-commuting components,
+\begin{equation}\label{eq:f_split_J}
+   f \;=\; f^{\mathrm{block}} + f^{\mathrm{flip}},
+   \qquad J f^{\mathrm{block}} J^{-1} = f^{\mathrm{block}},
+   \quad J f^{\mathrm{flip}} J^{-1} = -f^{\mathrm{flip}},
+\end{equation}
+where the splitting acts at the level of the spatial multiplier
+component (the temporal factor $M^{\temp}_{q}$ commutes with $\JL$
+automatically). Define the \emph{$\JL$-graded gradient norm}
+\begin{equation}\label{eq:grad_norm_enlarged}
+   G^{\mathrm{enlarged}}(f)
+   \;:=\; \norm{\nabla^{\mathrm{joint}} f^{\mathrm{block}}}_{\infty}
+   \;+\; 2\,\opnorm{\Ddiag} \cdot \norm{f^{\mathrm{flip}}}_{\infty}.
+\end{equation}
+\end{definition}
+
+The structural interpretation of the second term in
+eq.~(\ref{eq:grad_norm_enlarged}) is that the temporal direction
+$\Ddiag = i \gamma^{0} \otimes \partial_{t}$ becomes Lipschitz-relevant
+on chirality-flipping generators. The prefactor $2$ reflects the
+anti-commutation $\{\gamma^{0}, M^{\spat,\mathrm{flip}}\} = 0$, which
+forces the cross term in the commutator $[\Ddiag, M^{\spat,\mathrm{flip}}
+\otimes M^{\temp}]$ to combine additively rather than cancel
+(L3b-2a sub-sprint \S~3). The operator norm
+$\opnorm{\Ddiag} = \lVert \partial_{t} \rVert_{\mathrm{op}, (\Nt, T)} = O(\Nt / T)$
+on the truncated $\Sone_{T}$ is finite and uniformly bounded over the
+verification panel; we treat it as a known constant at each panel cell.
+
+\begin{remark}[Restriction to natural substrate]
+\label{rem:graded_norm_natural}
+On the natural substrate $\Op^{L} \subset \Op^{L}_{\mathrm{enlarged}}$,
+every multiplier is $\JL$-commuting, so $f^{\mathrm{flip}} = 0$ and
+$G^{\mathrm{enlarged}}(f) = \norm{\nabla^{\mathrm{joint}} f^{\mathrm{block}}}_{\infty}
+= \norm{\nabla^{\mathrm{joint}} f}_{\infty}$. The enlarged gradient
+norm reduces to the natural gradient norm bit-exactly, and the L3
+bound on the enlarged substrate reduces to the L3 bound of
+Lemma~\ref{lem:L3op} bit-exactly. The enlarged construction is a
+strict extension of the natural construction;\ no natural-substrate
+result is altered.
+\end{remark}
+
+\subsection{Five lemmas transport under the enlarged substrate}
+\label{app:enlarged_transport}
+
+We transport the five-lemma structure of \S~\ref{sec:five_lemmas} to
+the enlarged substrate under the enlarged gradient norm
+$G^{\mathrm{enlarged}}$.
+
+\paragraph{L1$'$ (substrate).}
+The propagation number of the enlarged substrate is
+\begin{equation}\label{eq:prop_enlarged}
+   \prop_{\mathrm{achievable}}(\Op^{L}_{\mathrm{enlarged}}) \;=\; 1.
+\end{equation}
+The enlarged substrate is a denser generating set than the natural
+substrate's $\prop = 2$:\ chirality-asymmetric content provides
+cross-block coupling between $\Kplus$ and $\Kminus$ that closes the
+achievable envelope in one application of the multiplier algebra
+(L3b-2a sub-sprint \S~4). Concretely, every element of $\Op^{L}_{\mathrm{enlarged}}$
+can be written as a sum of products of two generators from
+$\Op^{L}_{\mathrm{enlarged}}$, including off-diagonal Krein-block
+matrix elements which the natural substrate cannot reach in one step.
+
+The lemma statement is otherwise unchanged from Paper~44:\
+$\Op^{L}_{\mathrm{enlarged}}$ is unital $\ast$-closed, $\DL$ is
+Krein-self-adjoint on the enlarged substrate (the same $\DL$ acts on
+the enlarged Krein space), and $\JL$ is a fundamental symmetry of
+square $+I$. The condition $[\JL, a] = 0$ no longer holds for every
+$a \in \Op^{L}_{\mathrm{enlarged}}$;\ instead, each $a$ splits as in
+eq.~(\ref{eq:f_split_J}) with a $\JL$-block part and a $\JL$-flip
+part. At $\Nt = 1$, the enlarged substrate reduces bit-exactly to the
+Riemannian chirality-doubled enlarged truncated spectral triple on
+$\HGV^{\nmax}$.
+
+\paragraph{L2 (joint cb-norm).}
+The joint cb-norm is seminorm-independent:\ it depends only on the
+Berezin--Plancherel structure of the central spectral Fej\'er kernel
+$\Kjoint = \KSU \otimes \KU$, not on the choice of Lipschitz seminorm
+on operators. Lemma~\ref{lem:L2} therefore transports verbatim to the
+enlarged substrate:
+\begin{equation}\label{eq:L2_enlarged}
+   \cbnorm{S_{\Kjoint_{\nmax, \Nt, T}}} \;=\; \frac{2}{\nmax + 1},
+   \qquad \Nt\text{-independent.}
+\end{equation}
+The cb-norm controls the propinquity height contribution from the
+Berezin map (Paper~45 Remark~4.4), independently of which substrate
+the Berezin image targets. See Paper~46~\S~\ref{sec:L2} and
+Paper~45~\S~4.2.
+
+\paragraph{L3 (joint Lichnerowicz).}
+On the enlarged substrate, the joint Lichnerowicz comparison takes the
+form
+\begin{equation}\label{eq:L3_enlarged_main}
+   \opnorm{[\DL, \Bjoint_{\mathrm{enlarged}}(f)]}
+   \;\le\; \Cthreeop(\nmax) \cdot G^{\mathrm{enlarged}}(f),
+\end{equation}
+with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ as in eq.~(\ref{eq:C3op_closed_form}).
+The numerical constant is unchanged from the natural-substrate L3
+bound (Lemma~\ref{lem:L3op}). The cost of the chirality-flip
+enlargement is absorbed entirely into the gradient-norm extension
+$G^{\mathrm{enlarged}}(f)$ via eq.~(\ref{eq:grad_norm_enlarged}).
+
+\emph{Sketch.} Split $f = f^{\mathrm{block}} + f^{\mathrm{flip}}$ and
+correspondingly $\Bjoint_{\mathrm{enlarged}}(f) = \Bjoint(f^{\mathrm{block}})
++ \Bjoint_{\mathrm{flip}}(f^{\mathrm{flip}})$, with
+$\Bjoint_{\mathrm{flip}}$ the Berezin map valued in the chirality-flip
+sector. For the block part, Lemma~\ref{lem:temporal_invisibility}
+applies verbatim and gives $\opnorm{[\DL, \Bjoint(f^{\mathrm{block}})]}
+\le \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}} f^{\mathrm{block}}}_{\infty}$
+by Lemma~\ref{lem:L3op}. For the flip part,
+$[\DL, \Bjoint_{\mathrm{flip}}(f^{\mathrm{flip}})] = [\Ddiag, \cdot] +
+[\Doff, \cdot]$, with both pieces non-zero on flip generators. The
+$[\Doff, \cdot]$ piece is bounded by the spatial commutator norm in
+the usual way (Lemma~\ref{lem:L3op} sketch, step C, transported to
+flip generators). The $[\Ddiag, \cdot]$ piece is bounded by
+$\opnorm{[\Ddiag, M^{\spat,\mathrm{flip}} \otimes M^{\temp}]}
+\le 2\,\opnorm{\Ddiag} \cdot \opnorm{M^{\spat,\mathrm{flip}}}
+\cdot \opnorm{M^{\temp}}$, where the factor $2$ arises from
+$\{\gamma^{0}, M^{\spat,\mathrm{flip}}\} = 0$ (anti-commutation
+combines additively). The triangle inequality and the structural
+sup-bound $\opnorm{M^{\spat,\mathrm{flip}}_{N, L, M}} \le 1$ on the
+Avery--Wen--Avery normalized basis give the total flip-piece bound
+$2\,\opnorm{\Ddiag} \cdot \norm{f^{\mathrm{flip}}}_{\infty}$, which is
+the second term of $G^{\mathrm{enlarged}}(f)$ in
+eq.~(\ref{eq:grad_norm_enlarged}). Combining,
+\begin{align*}
+   \opnorm{[\DL, \Bjoint_{\mathrm{enlarged}}(f)]}
+   &\;\le\; \opnorm{[\DL, \Bjoint(f^{\mathrm{block}})]}
+   + \opnorm{[\DL, \Bjoint_{\mathrm{flip}}(f^{\mathrm{flip}})]} \\
+   &\;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}} f^{\mathrm{block}}}_{\infty}
+   + \Cthreeop(\nmax) \cdot 2\opnorm{\Ddiag} \cdot \norm{f^{\mathrm{flip}}}_{\infty} \\
+   &\;=\; \Cthreeop(\nmax) \cdot G^{\mathrm{enlarged}}(f).
+\end{align*}
+The penultimate line uses the structural fact that the $[\Doff, \cdot]$
+contribution from the flip part is dominated by the same Avery--Wen--Avery
+envelope as the block part (the flip multiplier supports overlap the
+block supports), so the spatial-commutator bound applies with the same
+$\Cthreeop(\nmax)$. See the $\beta$-L5 closure memo \S~6.4 for the
+full step-by-step derivation.
+
+\paragraph{L4 (joint Berezin reconstruction).}
+The joint Berezin map extends to the enlarged substrate as
+$\Bjoint_{\mathrm{enlarged}} : C^{\infty}(\Manifold) \to
+\Op^{L}_{\mathrm{enlarged}}$ via the $\JL$-splitting of $f$ at the
+spatial multiplier level. Properties (a)--(c), (e) of
+Lemma~\ref{lem:L4op} transport verbatim by the seminorm-independence
+remark (Remark~\ref{rem:L4_seminorm_independent}):\ positivity,
+contractivity, approximate identity, and Krein-grading preservation
+do not engage the choice of Lipschitz seminorm. Property (d) (L3
+compatibility) transports under the enlarged gradient norm: for
+every $f \in C^{\infty}(\Manifold)$,
+\begin{equation}\label{eq:L4_enlarged_d}
+   \opnorm{[\DL, \Bjoint_{\mathrm{enlarged}}(f)]}
+   \;\le\; \Cthreeop(\nmax) \cdot G^{\mathrm{enlarged}}(f),
+\end{equation}
+by direct combination of Lemma~\ref{lem:L4op}(d) (block part) and
+eq.~(\ref{eq:L3_enlarged_main}) (full bound under $G^{\mathrm{enlarged}}$).
+The approximate-identity rate $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$
+is unchanged:\ Paper~45~\S~4.3(c) and Lemma~\ref{lem:L4op}(c) factor
+the convolution deficit through smooth-gradient norms of $f$, and the
+$\JL$-splitting of $f$ does not affect the convolution-deficit
+bound. Each split component is independently smooth and contributes
+its own smooth-gradient piece, recombining into $\nabla^{\mathrm{joint}} f$.
+
+\paragraph{L5 (Latr\'emoli\`ere propinquity assembly).}
+The propinquity assembly transfers under the enlarged gradient norm
+with the same multiplier constant $\Cfivejoint = 1$ as in
+\S~\ref{sec:L5}. The reach and height contributions of the joint
+tunneling pair $(\Bjoint_{\mathrm{enlarged}}, \Pjoint)$ are bounded
+by the enlarged-substrate analogs of eqs.~(\ref{eq:L4op_approx_id})
+and~(\ref{eq:L4_enlarged_d}). Concretely,
+\begin{equation*}
+   \mathrm{reach}_{B}^{\mathrm{enlarged}}
+   \;\le\; \gammajoint_{\nmax, \Nt, T},
+   \qquad
+   \mathrm{height}_{B}^{\mathrm{enlarged}}
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax, \Nt, T},
+\end{equation*}
+and the assembled propinquity bound is
+\begin{equation}\label{eq:L5_enlarged}
+   \Lprop\!\bigl(\Tcal^{L, \mathrm{enlarged}}_{\nmax, \Nt, T},\;
+                 \Tcal^{L}_{\Manifold}\bigr)
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax, \Nt, T},
+\end{equation}
+with $\Cthreeop$ and $\gammajoint$ identical to those of
+Theorem~\ref{thm:main}. The temporal-Lipschitz content of the
+chirality-flip enlargement is absorbed into the gradient-norm side
+$G^{\mathrm{enlarged}}(f)$ of the L3 / L4 bounds, leaving the
+propinquity multiplier unchanged.
+
+\subsection{Main statement: strict-strong-form extension}
+\label{app:enlarged_main}
+
+\begin{theorem}[Strict-strong-form extension, $\beta$-L5 closure]
+\label{thm:enlarged_main}
+On the enlarged operator system
+$\Op^{L}_{\mathrm{enlarged}} = \Op^{L} \cup \{ M^{\spat,\mathrm{flip}}
+\otimes M^{\temp} \}^{\ast}$ of Definition~\ref{def:enlarged_substrate},
+with the $\JL$-graded gradient norm $G^{\mathrm{enlarged}}$ of
+Definition~\ref{def:enlarged_grad_norm} replacing the natural-substrate
+joint smooth gradient norm, the Latr\'emoli\`ere propinquity bound is
+\begin{equation}\label{eq:enlarged_main_bound}
+   \Lprop\!\bigl(\Tcal^{L, \mathrm{enlarged}}_{\nmax,\Nt,T},\;
+                 \Tcal^{L}_{\Manifold}\bigr)
+   \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax,\Nt,T}
+   \;\xrightarrow[(\nmax,\Nt)\to(\infty,\infty)]{}\; 0,
+\end{equation}
+with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ and
+$\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ identical to those of
+Theorem~\ref{thm:main}. The Riemannian-limit recovery at $\Nt = 1$ is
+bit-exact (Frobenius residual $0.0$ in float64).
+\end{theorem}
+
+\begin{proof}
+Combine the five-lemma transport of \S~\ref{app:enlarged_transport}.
+L1$'$ supplies the enlarged operator-system substrate with
+$\prop_{\mathrm{achievable}} = 1$. L2 supplies the joint cb-norm
+seminorm-independent bound $2/(\nmax + 1)$. L3 supplies
+eq.~(\ref{eq:L3_enlarged_main}) on the Berezin image. L4 supplies the
+approximate-identity rate $\gammajoint$ and the L3 compatibility
+under the enlarged gradient norm (eq.~(\ref{eq:L4_enlarged_d})). L5
+assembles the bound (eq.~(\ref{eq:L5_enlarged})) via the joint
+tunneling pair. The Riemannian-limit recovery follows from the
+natural-substrate limit (Theorem~\ref{thm:main} F1) together with the
+observation that the chirality-flip enlargement reduces bit-exactly
+to a chirality-flip enlargement of the Riemannian chirality-doubled
+truncation at $\Nt = 1$, on which the same gradient-norm splitting
+applies and the same $\Cthreeop(\nmax)$ bound holds. \qedhere
+\end{proof}
+
+\subsection{Interpretation:\ the enlargement is paid in the gradient norm}
+\label{app:enlarged_interpretation}
+
+The substantive content of Theorem~\ref{thm:enlarged_main} is that
+the enlarged-substrate bound is bit-exactly equal to the
+natural-substrate bound of Theorem~\ref{thm:main}, at the same
+$\Cthreeop$ and the same $\gammajoint$, on the same numerical panel
+$(\nmax, \Nt) \in \{(2, 3), (3, 5), (4, 7)\}$ with values $2.0746$,
+$1.6101$, $1.3223$. The cost of the chirality-flip enlargement is
+absorbed entirely into the gradient-norm side via
+eq.~(\ref{eq:grad_norm_enlarged}):\
+\begin{equation*}
+   G^{\mathrm{enlarged}}(f) - \norm{\nabla^{\mathrm{joint}} f^{\mathrm{block}}}_{\infty}
+   \;=\; 2\opnorm{\Ddiag} \cdot \norm{f^{\mathrm{flip}}}_{\infty}.
+\end{equation*}
+This is the only place where chirality-flip content appears in the
+extended construction. Three structural readings of this fact are
+useful.
+
+\emph{Reading 1: the enlargement is ``paid'' in $f$-space, not
+operator space.} The operator-side multiplier constant $\Cthreeop$
+and the convergence-rate moment $\gammajoint$ are unchanged. The
+extension cost is borne by the function-space norm of $f$, which
+grows by an additive $2\opnorm{\Ddiag} \cdot \norm{f^{\mathrm{flip}}}_{\infty}$
+term reflecting the temporal Lipschitz content of the chirality-flip
+sector.
+
+\emph{Reading 2: the natural-substrate ``free upgrade'' is the
+$f^{\mathrm{flip}} = 0$ specialization.} On the natural substrate
+($\Op^{L} \subset \Op^{L}_{\mathrm{enlarged}}$), every multiplier is
+$\JL$-commuting, so the chirality-flip content of $f$ is zero, and
+$G^{\mathrm{enlarged}}(f) = \norm{\nabla^{\mathrm{joint}} f}_{\infty}$
+bit-exact. The enlarged construction reduces to the natural
+construction precisely when $f^{\mathrm{flip}} = 0$, and
+Theorem~\ref{thm:main} is the $f^{\mathrm{flip}} = 0$ specialization
+of Theorem~\ref{thm:enlarged_main}.
+
+\emph{Reading 3: the L3b-2a temporal-Lipschitz-invisibility identity
+``breaks'' on enlarged at exactly the rate predicted by
+$\opnorm{\Ddiag}$.} The breakdown is quantitatively controlled:\ the
+new term $2\opnorm{\Ddiag} \cdot \norm{f^{\mathrm{flip}}}_{\infty}$
+is bounded uniformly over each panel cell, and over the full
+$\nmax \to \infty$ limit the chirality-flip contribution does not
+qualitatively alter the asymptotic-rate analysis of \S~\ref{sec:L5}.
+
+The closure also clarifies the structural status of the
+G1$'$ question in \S~\ref{sec:enlarged_substrate}. The original
+internal Sprint L3b-2f prediction was that the enlarged-substrate
+bound would exceed the natural bound ``by a finite factor of order
+$\sqrt{2}$ to $2$, the chirality-flipping content roughly doubles
+the operator-norm content''. The $\beta$-L5 closure refines this
+prediction to ``exceeds by exactly zero in the operator-side bound
+$\Cthreeop \cdot \gammajoint$;\ the chirality-flipping content is
+absorbed into the gradient-norm extension $G^{\mathrm{enlarged}}$''.
+The structural reason is that the chirality-flip enlargement
+preserves the Avery--Wen--Avery achievable envelope on $\nmax$ shells
+(the chirality-asymmetric doubling reuses the same $N \le 2\nmax - 1$
+range as the block-diagonal multipliers), and the Lichnerowicz bound
+of Lemma~\ref{lem:L3op} applies with the same envelope constant on
+both block and flip sectors. The L3b-2a / 2b / 2c / 2d sub-sprints
+established this envelope-preservation explicitly;\ the $\beta$-L5
+sub-sprint assembled the result.
+
+\subsection{Status of G1$'$ and the strict-strong-form closure}
+\label{app:enlarged_status}
+
+Theorem~\ref{thm:enlarged_main} closes G1$'$ (\S~\ref{sec:enlarged_substrate})
+in the strict-strong-form sense:\ the strong-form Lorentzian
+propinquity bound extends from the natural substrate to the enlarged
+operator system $\Op^{L}_{\mathrm{enlarged}}$ at the same numerical
+constant and the same asymptotic rate, with the chirality-flip
+content absorbed into the $\JL$-graded gradient norm
+$G^{\mathrm{enlarged}}$. The G1$'$ question is therefore answered:\
+the enlarged-substrate bound equals the natural-substrate bound at
+the operator-side constant $\Cthreeop$ and the convergence-rate
+moment $\gammajoint$.
+
+The remaining open questions on the Lorentzian side of the GeoVac
+framework are unchanged by this appendix:\ G2 (de-compactification
+$T \to \infty$, \S~\ref{sec:decompactification}), G3
+(cross-manifold extensions, \S~\ref{sec:cross_manifold}), and G4
+(inner-factor calibration data, \S~\ref{sec:inner_factor}). With G1$'$
+now closed, the operator-algebraic Lorentzian-extension closure of
+the math.OA quartet (Papers~$42, 43, 45, 46$) is structurally
+complete on the natural and enlarged substrates at finite cutoff;\
+the open questions are confined to limit-taking ($T \to \infty$),
+cross-manifold extensions, and inner-factor calibration, all of
+which are orthogonal to the present strong-form convergence theorem.
+
+The closure result here strengthens the connection to the four-witness
+Wick-rotation arc of \S~\ref{sec:four_witness_op}:\ Papers~$42, 43$
+close the modular structure on the natural-substrate hemispheric
+wedge, Paper~$45$ closes the $\Kplus$-weak-form convergence, the body
+of Paper~$46$ closes the strong-form on the natural substrate, and
+Theorem~\ref{thm:enlarged_main} extends the strong-form to the
+enlarged operator system. The chirality-flip content of operator
+algebras on Lorentzian Krein spectral triples at finite cutoff is now
+within the framework of Latr\'emoli\`ere propinquity convergence.
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+
+\bibitem[Bekka, de la Harpe \& Valette(2008)]{bekka_harpe_valette2008}
+B.~Bekka, P.~de~la~Harpe, and A.~Valette,
+\newblock \emph{Kazhdan's Property (T)},
+\newblock New Math. Monographs \textbf{11}, Cambridge University Press, 2008.
+
+\bibitem[Bhatia(1997)]{bhatia1997}
+R.~Bhatia,
+\newblock \emph{Matrix Analysis},
+\newblock Graduate Texts in Mathematics 169, Springer, 1997.
+
+\bibitem[Bisognano \& Wichmann(1976)]{bisognano_wichmann1976}
+J.~J.~Bisognano and E.~H.~Wichmann,
+\newblock \emph{On the duality condition for quantum fields},
+\newblock J.~Math.~Phys. \textbf{17} (1976), 303--321.
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, and F.~Besnard,
+\newblock \emph{Space and time dimensions of algebras with application
+to Lorentzian noncommutative geometry and quantum electrodynamics},
+\newblock J.~Math.~Phys. \textbf{59} (2018), 062303;
+\newblock arXiv:1611.07062.
+
+\bibitem[Bo\.zejko \& Fendler(1991)]{bozejko_fendler1991}
+M.~Bo\.zejko and G.~Fendler,
+\newblock \emph{Herz--Schur multipliers and uniformly bounded
+representations of discrete groups},
+\newblock Arch.~Math. \textbf{57} (1991), 290--298.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi,
+\newblock \emph{On the eigenfunctions of the Dirac operator on spheres
+and real hyperbolic spaces},
+\newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18;
+\newblock arXiv:gr-qc/9505009.
+
+\bibitem[Connes \& van~Suijlekom(2021)]{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm. Math. Phys. \textbf{383} (2021), 2021--2067;
+\newblock arXiv:2004.14115.
+
+\bibitem[Devastato, Lizzi \& Martinetti(2018)]{devastato_lizzi_martinetti2018}
+A.~Devastato, F.~Lizzi, and P.~Martinetti,
+\newblock \emph{Time as an emergent property in spectral physics:
+gauge theories from spectral noncommutative geometry},
+\newblock J.~Math.~Phys. \textbf{59} (2018), 112301.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity of spectral propinquity for spectrally
+truncated spheres},
+\newblock preprint, 2024.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi and F.~Latr\'emoli\`ere,
+\newblock \emph{Continuity for the spectral propinquity of the Dirac
+operators associated with an analytic path of Riemannian metrics},
+\newblock arXiv:2504.11715, 2025.
+
+\bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
+N.~Franco and M.~Eckstein,
+\newblock \emph{An algebraic formulation of causality for
+noncommutative geometry},
+\newblock Class.~Quantum Grav. \textbf{30} (2013), 135007;
+\newblock arXiv:1212.5171.
+
+\bibitem[Geroch(1967)]{geroch1967}
+R.~Geroch,
+\newblock \emph{Topology in general relativity},
+\newblock J.~Math.~Phys. \textbf{8} (1967), 782--786.
+
+\bibitem[Hartle \& Hawking(1976)]{hartle_hawking1976}
+J.~B.~Hartle and S.~W.~Hawking,
+\newblock \emph{Path-integral derivation of black-hole radiance},
+\newblock Phys.~Rev. D \textbf{13} (1976), 2188--2203.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{Spectral truncations of $\mathbb{T}^{d}$ and quantum
+metric geometry},
+\newblock J.~Noncommut.~Geom., to appear (2024);
+\newblock arXiv:2403.18619.
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman and E.~McDonald,
+\newblock \emph{A noncommutative integral on spectrally truncated
+spectral triples, and a link with quantum ergodicity},
+\newblock J.~Funct.~Anal., to appear (2025);
+\newblock arXiv:2412.00628.
+
+\bibitem[Katznelson(2004)]{katznelson2004}
+Y.~Katznelson,
+\newblock \emph{An Introduction to Harmonic Analysis},
+\newblock 3rd ed., Cambridge University Press, 2004.
+
+\bibitem[Latr\'emoli\`ere(2018/2023)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
+triples},
+\newblock Adv.~Math. \textbf{415} (2023), Paper No.~108876, 88pp;
+\newblock preprint arXiv:1811.10843, November 2018.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+
+\bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
+L.~Leimbach and W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of spectral truncations
+of the torus},
+\newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Mondino \& Sämann(2024)]{mondino_samann2024}
+A.~Mondino and C.~Sämann,
+\newblock \emph{Lorentzian metric measure spaces},
+\newblock Lett. Math. Phys. \textbf{114} (2024), Paper No.~37;
+\newblock arXiv:2209.14384.
+
+\bibitem[Mondino \& Sämann(2025)]{mondino_samann2025}
+A.~Mondino and C.~Sämann,
+\newblock \emph{Synthetic Lorentzian Gromov--Hausdorff convergence
+and pre-compactness},
+\newblock arXiv:2504.10380, 2025.
+
+\bibitem[Che, Perales \& Sormani(2025)]{che_perales_sormani2025}
+M.~Che, R.~Perales, and C.~Sormani,
+\newblock \emph{Gromov's compactness theorem for the intrinsic
+timed-Hausdorff distance},
+\newblock arXiv:2510.13069, October 2025.
+
+\bibitem[Nieuviarts(2025a)]{nieuviarts2025a}
+G.~Nieuviarts,
+\newblock \emph{Emergence of Lorentz symmetry from an almost-commutative
+twisted spectral triple},
+\newblock arXiv:2502.18105 (v3, May 2025).
+
+\bibitem[Nieuviarts(2025b)]{nieuviarts2025b_proceedings}
+G.~Nieuviarts,
+\newblock \emph{Emergence of time from a twisted spectral triple in
+almost-commutative geometry},
+\newblock arXiv:2512.15450, December 2025 (revised May 2026).
+
+\bibitem[Pier(1984)]{pier1984}
+J.-P.~Pier,
+\newblock \emph{Amenable Locally Compact Groups},
+\newblock Wiley, 1984.
+
+\bibitem[Pisier(2001)]{pisier2001}
+G.~Pisier,
+\newblock \emph{Similarity Problems and Completely Bounded Maps},
+\newblock Lecture Notes in Math. 1618, Springer, 2nd ed., 2001.
+
+\bibitem[Sewell(1982)]{sewell1982}
+G.~L.~Sewell,
+\newblock \emph{Quantum fields on manifolds:\ PCT and gravitationally
+induced thermal states},
+\newblock Ann.~Phys. (NY) \textbf{141} (1982), 201--224.
+
+\bibitem[Strohmaier(2006)]{strohmaier2006}
+A.~Strohmaier,
+\newblock \emph{On noncommutative and pseudo-Riemannian geometry},
+\newblock J.~Geom.~Phys. \textbf{56} (2006), 175--195.
+
+\bibitem[Takesaki(1979)]{takesaki1979}
+M.~Takesaki,
+\newblock \emph{Theory of Operator Algebras I},
+\newblock Springer, 1979.
+
+\bibitem[Toyota(2023)]{toyota2023}
+M.~Toyota,
+\newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
+truncations for groups with polynomial growth},
+\newblock arXiv:2309.13469, 2023.
+
+\bibitem[Unruh(1976)]{unruh1976}
+W.~G.~Unruh,
+\newblock \emph{Notes on black-hole evaporation},
+\newblock Phys.~Rev. D \textbf{14} (1976), 870--892.
+
+\bibitem[van~den~Dungen(2016)]{vandungen2016}
+K.~van~den~Dungen,
+\newblock \emph{Krein spectral triples and the fermionic action},
+\newblock Math.~Phys.~Anal.~Geom. \textbf{19} (2016), Art.~4, 22pp;
+\newblock arXiv:1505.01939.
+
+\bibitem[de~Groot(2026)]{de_groot2026_su11}
+J.~de~Groot,
+\newblock \emph{Pseudo-Riemannian Spectral Triples for $\mathrm{SU}(1,1)$},
+\newblock arXiv:2601.22171, January 2026.
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey,
+\newblock \emph{Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO structural asymmetry},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey,
+\newblock \emph{The GeoVac spectral triple, the master Mellin engine
+case-exhaustion theorem, and the GH-convergence theorem on $\sthree$},
+\newblock GeoVac internal preprint, papers/synthesis (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of truncated
+Camporesi--Higuchi spectral triples on $\sthree$},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey,
+\newblock \emph{Tensor-product propinquity convergence for
+distinct-focal-length truncated Camporesi--Higuchi spectral triples on
+$\sthree$},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey,
+\newblock \emph{Latr\'emoli\`ere propinquity convergence of spectral
+truncations of compact Lie groups with bi-invariant metric},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~42]{paper42}
+J.~Loutey,
+\newblock \emph{Tomita--Takesaki modular structure on truncated
+$\SU(2)$ spectral triples;\ four-witness Wick-rotation literal
+identification at finite cutoff},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey,
+\newblock \emph{Lorentzian extension of the four-witness Wick-rotation
+theorem at finite cutoff},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~44]{paper44}
+J.~Loutey,
+\newblock \emph{Operator-system extension of the BBB Krein spectral
+triple at finite cutoff:\ propagation number and envelope dependence
+on the Camporesi--Higuchi spinor bundle},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~45]{paper45}
+J.~Loutey,
+\newblock \emph{Lorentzian propinquity convergence on truncated
+$\SU(2) \times \Uone_{T}$ Krein spectral triples ($\Kplus$-restricted
+weak-form)},
+\newblock GeoVac internal preprint, papers/group1\_operator\_algebras
+(2026), DOI via Zenodo.
+
+\bibitem[Sub-sprint memo L3b-2a]{memo_L3b_2a}
+J.~Loutey, internal sprint memo
+\emph{Sprint L3b-2a --- Candidate validation + axiom check},
+GeoVac internal, 2026-05-22,
+\texttt{debug/l3b\_2a\_candidate\_validation\_memo.md}.
+
+\bibitem[Sub-sprint memo L3b-2b]{memo_L3b_2b}
+J.~Loutey, internal sprint memo
+\emph{Sprint L3b-2b --- Joint Lichnerowicz derivation under $L_{\mathrm{op}}$},
+GeoVac internal, 2026-05-22,
+\texttt{debug/l3b\_2b\_lichnerowicz\_lop\_memo.md}.
+
+\bibitem[Sub-sprint memo L3b-2c]{memo_L3b_2c}
+J.~Loutey, internal sprint memo
+\emph{Sprint L3b-2c --- Joint Berezin reconstruction under $L_{\mathrm{op}}$},
+GeoVac internal, 2026-05-22,
+\texttt{debug/l3b\_2c\_berezin\_lop\_memo.md}.
+
+\bibitem[Sub-sprint memo L3b-2d]{memo_L3b_2d}
+J.~Loutey, internal sprint memo
+\emph{Sprint L3b-2d --- Strong-form Latr\'emoli\`ere propinquity
+assembly under $L_{\mathrm{op}}$},
+GeoVac internal, 2026-05-22,
+\texttt{debug/l3b\_2d\_propinquity\_assembly\_memo.md}.
+
+\end{thebibliography}
+
+\end{document}

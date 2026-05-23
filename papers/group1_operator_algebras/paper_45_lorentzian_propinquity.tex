@@ -761,12 +761,44 @@ $L^{2}$-Pythagorean joint gradient norm (\ref{eq:joint_L1}),
 \begin{equation}\label{eq:C3_joint_bound}
    \Cthreejoint(\nmax, \Nt)
    \;\le\; \CthreeSU(\nmax)
-   \;\le\; \sup_{2 \le N \le \nmax} \frac{N - 1}{\sqrt{N^{2} - 1}}
+   \;\le\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
+   \;=\; \sqrt{1 - \frac{1}{\nmax}}
    \;\xrightarrow{\nmax \to \infty}\; 1^{-},
 \end{equation}
-inherited verbatim from Paper~38~\cite{paper38} Lemma~L3 (and is
-asymptotically tight on the natural panel).
+where the supremum is taken over the natural-substrate envelope $N \le
+2\nmax - 1$ — the Avery--Wen--Avery $\Delta n = \pm 1$ ladder on
+$\nmax$ shells produces shell-difference labels $N$ up to $2\nmax - 1$
+via the chirality-doubling at the operator-system level (see
+Paper~44~\cite{paper44}~\S~3). The per-harmonic function
+$(N-1)/\sqrt{N^{2} - 1}$ is Paper~38~\cite{paper38} Lemma~L3 verbatim;
+the envelope range $N \le 2\nmax - 1$ extends Paper~38's $N \le \nmax$
+because Paper~38's Berezin map restricts to multiplier labels
+$N \le \nmax$ by Plancherel cutoff, while the Lorentzian natural
+substrate's full multiplier algebra reaches the larger envelope (see
+Remark~\ref{rem:envelope_v2} below).
 \end{lemma}
+
+\begin{remark}[On the supremum range]\label{rem:envelope_v2}
+The supremum is taken over the natural-substrate envelope $N \le
+2\nmax - 1$ rather than $N \le \nmax$. The per-harmonic functional
+form, the asymptotic limit $1^{-}$, and the main theorem
+(Theorem~\ref{thm:main}) are insensitive to this distinction.
+The finite-cutoff constant is sharpened by the envelope:\ at
+$\nmax = 3$, the natural-substrate generator
+$(N, L, M, p) = (4, 1, \pm 1, 0)$ has Lipschitz ratio $0.95$, which
+exceeds the per-shell value $C_3^{(3)} = 2/\sqrt{8} = 0.707$ but is
+bounded by the envelope-aware
+$C_3^{\mathrm{op}}(3) = \sqrt{(2 \cdot 3 - 1) - 1}/\sqrt{(2 \cdot 3 - 1)^{2} - 1} = \sqrt{2/3} \approx 0.816$.
+Numerical-panel values in \S\ref{sec:panel} are unaffected (they
+quote $\gammajoint$ directly, not $\Cthreejoint \cdot \gammajoint$).
+The envelope refinement was identified in
+Paper~46~\cite{paper46}~\S~4.3 (the strong-form companion under
+$L_{\mathrm{op}}(a) := \opnorm{[\DL, a]}$); Paper~38 is unaffected
+because Paper~38's Berezin map restricts multiplier labels to
+$N \le \nmax$ by Plancherel cutoff, while the Lorentzian natural
+substrate's chirality-doubled multiplier algebra reaches the larger
+envelope (see Paper~46~Appendix~A for the cross-paper analysis).
+\end{remark}
 
 \begin{proof}
 We first establish the structural identity:\ for every pure-tensor
@@ -825,9 +857,11 @@ $\sqrt{a^{2} + b^{2}} \ge a$ for $a, b \ge 0$, we obtain
 $a = \sum_{j} c_{j} (a_{s}^{j} \otimes a_{t}^{j})$ follows by triangle
 inequality on both sides.
 
-The bound (\ref{eq:C3_joint_bound}) is Paper~38~\S~L3 verbatim;
-asymptotic tightness $\to 1^{-}$ is via the per-harmonic Avery--Wen--Avery
-saturation on $Y^{(3)}_{N, 0, 0}$ as $N \to \nmax$. \qedhere
+The bound (\ref{eq:C3_joint_bound}) takes the Paper~38~\S~L3
+per-harmonic form $(N-1)/\sqrt{N^{2}-1}$ on the natural-substrate
+envelope $N \le 2\nmax - 1$ (per Remark~\ref{rem:envelope_v2});
+asymptotic tightness $\to 1^{-}$ is via the per-harmonic
+Avery--Wen--Avery saturation on $Y^{(3)}_{N, 0, 0}$ as $N \to 2\nmax - 1$. \qedhere
 \end{proof}
 
 \begin{remark}[The temporal direction contributes zero]\label{rem:no_cross}
@@ -1334,7 +1368,7 @@ within the present framework.
 
 \item[(Q4)] \textbf{Sharp asymptotic-tight $\Cthreejoint = 1$.} The
 present bound has $\Cthreejoint \le 1$ asymptotically tight, with
-finite-cutoff bound $\sup_{N \le \nmax} (N-1)/\sqrt{N^{2}-1} < 1$.
+finite-cutoff bound $\sup_{N \le 2\nmax - 1} (N-1)/\sqrt{N^{2}-1} = \sqrt{1 - 1/\nmax} < 1$ (per Remark~\ref{rem:envelope_v2}).
 A direct proof of $\Cthreejoint = 1$ in the joint limit (rather than
 inheriting from the SU(2) factor) would require a finer joint analysis
 of the temporal direction's contribution to the Lipschitz seminorm
@@ -1715,6 +1749,16 @@ triple at finite cutoff:\ propagation number and envelope dependence
 on the Camporesi--Higuchi spinor bundle},
 \newblock GeoVac internal preprint, papers/standalone (2026),
 DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~46]{paper46}
+J.~Loutey,
+\newblock \emph{Strong-form Lorentzian propinquity convergence on
+truncated SU(2) $\times$ U(1)$_{T}$ Krein spectral triples},
+\newblock GeoVac internal preprint, papers/standalone (2026),
+DOI via Zenodo. (Companion paper closing the strong-form gap
+identified as Q1/G1 of the present paper; identified the envelope
+refinement to (\ref{eq:C3_joint_bound}) in
+Remark~\ref{rem:envelope_v2}.)
 
 \end{thebibliography}
 

@@ -1,0 +1,2233 @@
+{
+  "sprint": "L3b-2c",
+  "date": "2026-05-22",
+  "purpose": "Verify Paper 45 Lemma 4.4 (L4 joint Berezin) under L_op on the natural chirality-doubled scalar-multiplier substrate.",
+  "panel_cells": [
+    {
+      "n_max": 2,
+      "N_t": 3
+    },
+    {
+      "n_max": 3,
+      "N_t": 5
+    },
+    {
+      "n_max": 4,
+      "N_t": 7
+    }
+  ],
+  "results_per_cell": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "T": 6.283185307179586,
+      "dim_K": 48,
+      "n_panel": 15,
+      "C3_op_envelope": 0.7071067811865476,
+      "C3_paper45_stated": 0.5773502691896257,
+      "positivity": {
+        "n_applicable": 1,
+        "n_pass": 1,
+        "details": [
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "is_PSD": true,
+            "min_eigenvalue": 0.001838145812154089
+          }
+        ]
+      },
+      "contractivity": {
+        "n_tested": 15,
+        "n_pass": 15,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "op_norm": 0.076526886873354,
+            "f_infty_bound": 1.111,
+            "ratio_op_over_finfty": 0.06888108629464806,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "op_norm": 0.15005271935951767,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.15005271935951767,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "op_norm": 0.15005271935951767,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.15005271935951767,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "op_norm": 0.12251753231595378,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.12251753231595378,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "op_norm": 0.06125876615797689,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06125876615797689,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "op_norm": 0.06125876615797689,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06125876615797689,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "op_norm": 0.15005271935951767,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.15005271935951767,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "op_norm": 0.07502635967975883,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "op_norm": 0.15005271935951767,
+            "f_infty_bound": 2.0,
+            "ratio_op_over_finfty": 0.07502635967975883,
+            "is_contractive": true
+          }
+        ]
+      },
+      "approximate_identity": {
+        "n_tested": 15,
+        "gamma_joint_max": 0.1500527193595177,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "residual_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.1500527193595177
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "residual_op_norm": 0.15080298295631528,
+            "joint_lipschitz_L1": 1.212,
+            "gamma_for_f": 0.12442490342930304
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "residual_op_norm": 0.07502635967975885,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.07502635967975885
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "residual_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.07502635967975885
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "residual_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.07502635967975885
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "residual_op_norm": 0.07502635967975883,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.07502635967975883
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "residual_op_norm": 0.15005271935951767,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.07502635967975883
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "residual_op_norm": 0.15005271935951767,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.07502635967975883
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "residual_op_norm": 0.0612587661579769,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.0612587661579769
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "residual_op_norm": 0.12251753231595379,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.061258766157976895
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "residual_op_norm": 0.12251753231595379,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.061258766157976895
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "residual_op_norm": 0.07502635967975885,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.07502635967975885
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "residual_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.07502635967975885
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "residual_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.07502635967975885
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "residual_op_norm": 0.12251753231595379,
+            "joint_lipschitz_L1": 3.0,
+            "gamma_for_f": 0.040839177438651265
+          }
+        ]
+      },
+      "l3_compatibility": {
+        "n_tested": 15,
+        "n_pass_at_C3op": 15,
+        "n_pass_at_C3p45_stated": 15,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "commutator_op_norm": 0.0,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.0,
+            "ratio_LHS_over_C3p45_grad": 0.0,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "commutator_op_norm": 0.001500527193595177,
+            "joint_lipschitz_L1": 1.212,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.0017508794619570446,
+            "ratio_LHS_over_C3p45_grad": 0.0021443806414567553,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.2122065907891938,
+            "ratio_LHS_over_C3p45_grad": 0.25989893374455875,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "commutator_op_norm": 0.07502635967975885,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.05305164769729845,
+            "ratio_LHS_over_C3p45_grad": 0.06497473343613969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "commutator_op_norm": 0.07502635967975885,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.05305164769729845,
+            "ratio_LHS_over_C3p45_grad": 0.06497473343613969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "commutator_op_norm": 0.15005271935951767,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.21220659078919374,
+            "ratio_LHS_over_C3p45_grad": 0.2598989337445587,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "commutator_op_norm": 0.07502635967975883,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.053051647697298435,
+            "ratio_LHS_over_C3p45_grad": 0.06497473343613967,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "commutator_op_norm": 0.07502635967975883,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.053051647697298435,
+            "ratio_LHS_over_C3p45_grad": 0.06497473343613967,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "commutator_op_norm": 0.12251753231595375,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.17326595582970572,
+            "ratio_LHS_over_C3p45_grad": 0.2122065907891937,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "commutator_op_norm": 0.061258766157976874,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.04331648895742643,
+            "ratio_LHS_over_C3p45_grad": 0.05305164769729843,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "commutator_op_norm": 0.061258766157976874,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.04331648895742643,
+            "ratio_LHS_over_C3p45_grad": 0.05305164769729843,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.2122065907891938,
+            "ratio_LHS_over_C3p45_grad": 0.25989893374455875,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "commutator_op_norm": 0.07502635967975885,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.05305164769729845,
+            "ratio_LHS_over_C3p45_grad": 0.06497473343613969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "commutator_op_norm": 0.07502635967975885,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.05305164769729845,
+            "ratio_LHS_over_C3p45_grad": 0.06497473343613969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 3.0,
+            "C3_op_envelope": 0.7071067811865476,
+            "C3_paper45_stated": 0.5773502691896257,
+            "ratio_LHS_over_C3op_grad": 0.07073553026306459,
+            "ratio_LHS_over_C3p45_grad": 0.08663297791485292,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          }
+        ]
+      },
+      "krein_positive_preservation": {
+        "n_tested": 15,
+        "n_pass": 15,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          }
+        ]
+      },
+      "elapsed_seconds": 0.09576702117919922
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "T": 6.283185307179586,
+      "dim_K": 200,
+      "n_panel": 28,
+      "C3_op_envelope": 0.816496580927726,
+      "C3_paper45_stated": 0.7071067811865476,
+      "positivity": {
+        "n_applicable": 1,
+        "n_pass": 1,
+        "details": [
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "is_PSD": true,
+            "min_eigenvalue": -1.7720259251097643e-17
+          }
+        ]
+      },
+      "contractivity": {
+        "n_tested": 28,
+        "n_pass": 28,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "op_norm": 0.03751317983987942,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.03751317983987942,
+            "is_contractive": true
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "op_norm": 0.03857421279382539,
+            "f_infty_bound": 1.111,
+            "ratio_op_over_finfty": 0.03472026354079693,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "op_norm": 0.10610329539459688,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.10610329539459688,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "op_norm": 0.0707355302630646,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.0707355302630646,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "op_norm": 0.0707355302630646,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.0707355302630646,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "op_norm": 0.08663297791485289,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08663297791485289,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "op_norm": 0.05775531860990193,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.05775531860990193,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "op_norm": 0.05775531860990193,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.05775531860990193,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "op_norm": 0.09312765299362664,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.09312765299362664,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "op_norm": 0.0620851019957511,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.0620851019957511,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "op_norm": 0.0620851019957511,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.0620851019957511,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "op_norm": 0.08663297791485289,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08663297791485289,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "op_norm": 0.05775531860990193,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.05775531860990193,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "op_norm": 0.05775531860990192,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.05775531860990192,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "op_norm": 0.18209280002103673,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.18209280002103673,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "op_norm": 0.12139520001402447,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.12139520001402447,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "op_norm": 0.12139520001402447,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.12139520001402447,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "op_norm": 0.1295427382787711,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.1295427382787711,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "op_norm": 0.08636182551918076,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08636182551918076,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "op_norm": 0.08636182551918076,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08636182551918076,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "op_norm": 0.12748963307902733,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.12748963307902733,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "op_norm": 0.08499308871935154,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08499308871935154,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "op_norm": 0.08499308871935154,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08499308871935154,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "op_norm": 0.12954273827877114,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.12954273827877114,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "op_norm": 0.08636182551918074,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08636182551918074,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "op_norm": 0.08636182551918076,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08636182551918076,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "op_norm": 0.10610329539459688,
+            "f_infty_bound": 2.0,
+            "ratio_op_over_finfty": 0.05305164769729844,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "op_norm": 0.12139520001402447,
+            "f_infty_bound": 2.0,
+            "ratio_op_over_finfty": 0.060697600007012235,
+            "is_contractive": true
+          }
+        ]
+      },
+      "approximate_identity": {
+        "n_tested": 28,
+        "gamma_joint_max": 0.2122065907891938,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "residual_op_norm": 0.1875658991993971,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.1875658991993971
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "residual_op_norm": 0.18968796510728902,
+            "joint_lipschitz_L1": 1.212,
+            "gamma_for_f": 0.15650822203571702
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "residual_op_norm": 0.2122065907891938,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.2122065907891938
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "residual_op_norm": 0.24757435592072607,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.12378717796036304
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "residual_op_norm": 0.24757435592072607,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.12378717796036304
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "residual_op_norm": 0.17326595582970583,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.17326595582970583
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "residual_op_norm": 0.20214361513465676,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.10107180756732838
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "residual_op_norm": 0.20214361513465676,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.10107180756732838
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "residual_op_norm": 0.18625530598725332,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.18625530598725332
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "residual_op_norm": 0.21729785698512888,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.10864892849256444
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "residual_op_norm": 0.21729785698512888,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.10864892849256444
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "residual_op_norm": 0.1732659558297059,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.1732659558297059
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "residual_op_norm": 0.20214361513465676,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.10107180756732838
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "residual_op_norm": 0.20214361513465676,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.10107180756732838
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "residual_op_norm": 0.18209280002103673,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.18209280002103673
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "residual_op_norm": 0.242790400028049,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.1213952000140245
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "residual_op_norm": 0.242790400028049,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.1213952000140245
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "residual_op_norm": 0.1295427382787711,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.1295427382787711
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "residual_op_norm": 0.17272365103836151,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.08636182551918076
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "residual_op_norm": 0.17272365103836151,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.08636182551918076
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "residual_op_norm": 0.12748963307902733,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.12748963307902733
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "residual_op_norm": 0.1699861774387031,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.08499308871935154
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "residual_op_norm": 0.1699861774387031,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.08499308871935154
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "residual_op_norm": 0.12954273827877114,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.12954273827877114
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "residual_op_norm": 0.17272365103836151,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.08636182551918076
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "residual_op_norm": 0.17272365103836151,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.08636182551918076
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "residual_op_norm": 0.21729785698512888,
+            "joint_lipschitz_L1": 3.0,
+            "gamma_for_f": 0.07243261899504295
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "residual_op_norm": 0.24757435592072607,
+            "joint_lipschitz_L1": 4.0,
+            "gamma_for_f": 0.06189358898018152
+          }
+        ]
+      },
+      "l3_compatibility": {
+        "n_tested": 28,
+        "n_pass_at_C3op": 28,
+        "n_pass_at_C3p45_stated": 28,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "commutator_op_norm": 0.0,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.0,
+            "ratio_LHS_over_C3p45_grad": 0.0,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "commutator_op_norm": 0.001061032953945969,
+            "joint_lipschitz_L1": 1.212,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.0010721903207283777,
+            "ratio_LHS_over_C3p45_grad": 0.00123805874059008,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "commutator_op_norm": 0.1061032953945969,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.12994946687227935,
+            "ratio_LHS_over_C3p45_grad": 0.15005271935951767,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "commutator_op_norm": 0.07073553026306459,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.043316488957426444,
+            "ratio_LHS_over_C3p45_grad": 0.05001757311983922,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "commutator_op_norm": 0.07073553026306459,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.043316488957426444,
+            "ratio_LHS_over_C3p45_grad": 0.05001757311983922,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "commutator_op_norm": 0.08663297791485287,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.10610329539459686,
+            "ratio_LHS_over_C3p45_grad": 0.12251753231595375,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "commutator_op_norm": 0.05775531860990195,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.03536776513153231,
+            "ratio_LHS_over_C3p45_grad": 0.04083917743865127,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "commutator_op_norm": 0.057755318609901934,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.035367765131532294,
+            "ratio_LHS_over_C3p45_grad": 0.04083917743865126,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "commutator_op_norm": 0.09312765299362664,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.1140576153886798,
+            "ratio_LHS_over_C3p45_grad": 0.13170238989556216,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "commutator_op_norm": 0.0620851019957511,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.03801920512955994,
+            "ratio_LHS_over_C3p45_grad": 0.043900796631854054,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "commutator_op_norm": 0.0620851019957511,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.03801920512955994,
+            "ratio_LHS_over_C3p45_grad": 0.043900796631854054,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "commutator_op_norm": 0.08663297791485286,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.10610329539459684,
+            "ratio_LHS_over_C3p45_grad": 0.12251753231595372,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "commutator_op_norm": 0.057755318609901934,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.035367765131532294,
+            "ratio_LHS_over_C3p45_grad": 0.04083917743865126,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "commutator_op_norm": 0.057755318609901934,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.035367765131532294,
+            "ratio_LHS_over_C3p45_grad": 0.04083917743865126,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "commutator_op_norm": 0.22507907903927651,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.27566444771089604,
+            "ratio_LHS_over_C3p45_grad": 0.31830988618379064,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.09188814923696535,
+            "ratio_LHS_over_C3p45_grad": 0.1061032953945969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.09188814923696535,
+            "ratio_LHS_over_C3p45_grad": 0.1061032953945969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "commutator_op_norm": 0.22507907903927651,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.27566444771089604,
+            "ratio_LHS_over_C3p45_grad": 0.31830988618379064,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "commutator_op_norm": 0.15005271935951767,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.09188814923696534,
+            "ratio_LHS_over_C3p45_grad": 0.10610329539459687,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "commutator_op_norm": 0.15005271935951767,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.09188814923696534,
+            "ratio_LHS_over_C3p45_grad": 0.10610329539459687,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "commutator_op_norm": 0.18377629847393068,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.22507907903927651,
+            "ratio_LHS_over_C3p45_grad": 0.2598989337445587,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "commutator_op_norm": 0.12251753231595378,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.07502635967975883,
+            "ratio_LHS_over_C3p45_grad": 0.08663297791485289,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "commutator_op_norm": 0.12251753231595378,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.07502635967975883,
+            "ratio_LHS_over_C3p45_grad": 0.08663297791485289,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "commutator_op_norm": 0.22507907903927651,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.27566444771089604,
+            "ratio_LHS_over_C3p45_grad": 0.31830988618379064,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.09188814923696535,
+            "ratio_LHS_over_C3p45_grad": 0.1061032953945969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "commutator_op_norm": 0.1500527193595177,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.09188814923696535,
+            "ratio_LHS_over_C3p45_grad": 0.1061032953945969,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "commutator_op_norm": 0.1061032953945969,
+            "joint_lipschitz_L1": 3.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.04331648895742646,
+            "ratio_LHS_over_C3p45_grad": 0.050017573119839225,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "commutator_op_norm": 0.15005271935951767,
+            "joint_lipschitz_L1": 4.0,
+            "C3_op_envelope": 0.816496580927726,
+            "C3_paper45_stated": 0.7071067811865476,
+            "ratio_LHS_over_C3op_grad": 0.04594407461848267,
+            "ratio_LHS_over_C3p45_grad": 0.053051647697298435,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          }
+        ]
+      },
+      "krein_positive_preservation": {
+        "n_tested": 28,
+        "n_pass": 28,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          }
+        ]
+      },
+      "elapsed_seconds": 4.41845703125
+    },
+    {
+      "n_max": 4,
+      "N_t": 7,
+      "T": 6.283185307179586,
+      "dim_K": 560,
+      "n_panel": 28,
+      "C3_op_envelope": 0.8660254037844386,
+      "C3_paper45_stated": 0.7745966692414834,
+      "positivity": {
+        "n_applicable": 1,
+        "n_pass": 1,
+        "details": [
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "is_PSD": true,
+            "min_eigenvalue": -1.0842021724855044e-19
+          }
+        ]
+      },
+      "contractivity": {
+        "n_tested": 28,
+        "n_pass": 28,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "op_norm": 0.022507907903927652,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.022507907903927652,
+            "is_contractive": true
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "op_norm": 0.023236279104011798,
+            "f_infty_bound": 1.111,
+            "ratio_op_over_finfty": 0.020914742667877406,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "op_norm": 0.07283712000841468,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07283712000841468,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "op_norm": 0.054627840006311004,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.054627840006311004,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "op_norm": 0.054627840006311004,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.054627840006311004,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "op_norm": 0.055132889542179216,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.055132889542179216,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "op_norm": 0.04134966715663442,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.04134966715663442,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "op_norm": 0.04134966715663441,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.04134966715663441,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "op_norm": 0.06647188259077236,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06647188259077236,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "op_norm": 0.04985391194307926,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.04985391194307926,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "op_norm": 0.049853911943079275,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.049853911943079275,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "op_norm": 0.055132889542179236,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.055132889542179236,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "op_norm": 0.04134966715663442,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.04134966715663442,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "op_norm": 0.04134966715663442,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.04134966715663442,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "op_norm": 0.1350474474235659,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.1350474474235659,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "op_norm": 0.10128558556767445,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.10128558556767445,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "op_norm": 0.10128558556767445,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.10128558556767445,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "op_norm": 0.08757432895837748,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08757432895837748,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "op_norm": 0.06568074671878311,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06568074671878311,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "op_norm": 0.06568074671878311,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06568074671878311,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "op_norm": 0.09796846936310855,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.09796846936310855,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "op_norm": 0.07347635202233144,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07347635202233144,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "op_norm": 0.07347635202233144,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.07347635202233144,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "op_norm": 0.08757432895837752,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.08757432895837752,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "op_norm": 0.06568074671878313,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06568074671878313,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "op_norm": 0.06568074671878313,
+            "f_infty_bound": 1.0,
+            "ratio_op_over_finfty": 0.06568074671878313,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "op_norm": 0.07283712000841468,
+            "f_infty_bound": 2.0,
+            "ratio_op_over_finfty": 0.03641856000420734,
+            "is_contractive": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "op_norm": 0.10128558556767445,
+            "f_infty_bound": 2.0,
+            "ratio_op_over_finfty": 0.05064279278383722,
+            "is_contractive": true
+          }
+        ]
+      },
+      "approximate_identity": {
+        "n_tested": 28,
+        "gamma_joint_max": 0.31511071065498714,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "residual_op_norm": 0.20257117113534887,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.20257117113534887
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "residual_op_norm": 0.20548465593568552,
+            "joint_lipschitz_L1": 1.212,
+            "gamma_for_f": 0.1695417953264732
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "residual_op_norm": 0.2913484800336587,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.2913484800336587
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "residual_op_norm": 0.30955776003576246,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.15477888001788123
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "residual_op_norm": 0.30955776003576246,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.15477888001788123
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "residual_op_norm": 0.22053155816871703,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.22053155816871703
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "residual_op_norm": 0.23431478055426172,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.11715739027713086
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "residual_op_norm": 0.2343147805542616,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.1171573902771308
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "residual_op_norm": 0.2658875303630895,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.2658875303630895
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "residual_op_norm": 0.28250550101078253,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.14125275050539127
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "residual_op_norm": 0.2825055010107825,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.14125275050539124
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "residual_op_norm": 0.2205315581687169,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.2205315581687169
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "residual_op_norm": 0.23431478055426172,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.11715739027713086
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "residual_op_norm": 0.23431478055426178,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.11715739027713089
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "residual_op_norm": 0.31511071065498714,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.31511071065498714
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "residual_op_norm": 0.3488725725108786,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.1744362862554393
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "residual_op_norm": 0.3488725725108786,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.1744362862554393
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "residual_op_norm": 0.20434010090288082,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.20434010090288082
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "residual_op_norm": 0.22623368314247522,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.11311684157123761
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "residual_op_norm": 0.2262336831424752,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.1131168415712376
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "residual_op_norm": 0.22859309518058665,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.22859309518058665
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "residual_op_norm": 0.25308521252136384,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.12654260626068192
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "residual_op_norm": 0.2530852125213639,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.12654260626068195
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "residual_op_norm": 0.20434010090288077,
+            "joint_lipschitz_L1": 1.0,
+            "gamma_for_f": 0.20434010090288077
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "residual_op_norm": 0.22623368314247516,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.11311684157123758
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "residual_op_norm": 0.22623368314247524,
+            "joint_lipschitz_L1": 2.0,
+            "gamma_for_f": 0.11311684157123762
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "residual_op_norm": 0.2913484800336587,
+            "joint_lipschitz_L1": 3.0,
+            "gamma_for_f": 0.09711616001121957
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "residual_op_norm": 0.3488725725108786,
+            "joint_lipschitz_L1": 4.0,
+            "gamma_for_f": 0.08721814312771965
+          }
+        ]
+      },
+      "l3_compatibility": {
+        "n_tested": 28,
+        "n_pass_at_C3op": 28,
+        "n_pass_at_C3p45_stated": 28,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "commutator_op_norm": 0.0,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.0,
+            "ratio_LHS_over_C3p45_grad": 0.0,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "commutator_op_norm": 0.0007283712000841469,
+            "joint_lipschitz_L1": 1.212,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.0006939361525388663,
+            "ratio_LHS_over_C3p45_grad": 0.0007758442045607841,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "commutator_op_norm": 0.07283712000841468,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.08410506168771059,
+            "ratio_LHS_over_C3p45_grad": 0.09403231759276702,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "commutator_op_norm": 0.054627840006311004,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.031539398132891465,
+            "ratio_LHS_over_C3p45_grad": 0.03526211909728763,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "commutator_op_norm": 0.054627840006311004,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.031539398132891465,
+            "ratio_LHS_over_C3p45_grad": 0.03526211909728763,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "commutator_op_norm": 0.05513288954217922,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.06366197723675816,
+            "ratio_LHS_over_C3p45_grad": 0.07117625434171773,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "commutator_op_norm": 0.04134966715663444,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.023873241463784323,
+            "ratio_LHS_over_C3p45_grad": 0.026691095378144163,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "commutator_op_norm": 0.041349667156634434,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.02387324146378432,
+            "ratio_LHS_over_C3p45_grad": 0.02669109537814416,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "commutator_op_norm": 0.06647188259077236,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.07675511861464725,
+            "ratio_LHS_over_C3p45_grad": 0.08581483142170535,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "commutator_op_norm": 0.04985391194307926,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.028783169480492712,
+            "ratio_LHS_over_C3p45_grad": 0.0321805617831395,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "commutator_op_norm": 0.04985391194307927,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.028783169480492716,
+            "ratio_LHS_over_C3p45_grad": 0.03218056178313951,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "commutator_op_norm": 0.05513288954217922,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.06366197723675816,
+            "ratio_LHS_over_C3p45_grad": 0.07117625434171773,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "commutator_op_norm": 0.041349667156634434,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.02387324146378432,
+            "ratio_LHS_over_C3p45_grad": 0.02669109537814416,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "commutator_op_norm": 0.04134966715663443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.023873241463784316,
+            "ratio_LHS_over_C3p45_grad": 0.026691095378144153,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "commutator_op_norm": 0.1350474474235659,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.15593936024673521,
+            "ratio_LHS_over_C3p45_grad": 0.17434550493976414,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.05847726009252571,
+            "ratio_LHS_over_C3p45_grad": 0.06537956435241156,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.05847726009252571,
+            "ratio_LHS_over_C3p45_grad": 0.06537956435241156,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "commutator_op_norm": 0.1350474474235659,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.15593936024673521,
+            "ratio_LHS_over_C3p45_grad": 0.17434550493976414,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.05847726009252571,
+            "ratio_LHS_over_C3p45_grad": 0.06537956435241156,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.05847726009252571,
+            "ratio_LHS_over_C3p45_grad": 0.06537956435241156,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "commutator_op_norm": 0.11388200694674834,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.13149961473311997,
+            "ratio_LHS_over_C3p45_grad": 0.14702103877914455,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "commutator_op_norm": 0.08541150521006127,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.049312355524920005,
+            "ratio_LHS_over_C3p45_grad": 0.05513288954217922,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "commutator_op_norm": 0.08541150521006127,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.049312355524920005,
+            "ratio_LHS_over_C3p45_grad": 0.05513288954217922,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "commutator_op_norm": 0.1350474474235659,
+            "joint_lipschitz_L1": 1.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.15593936024673521,
+            "ratio_LHS_over_C3p45_grad": 0.17434550493976414,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.05847726009252571,
+            "ratio_LHS_over_C3p45_grad": 0.06537956435241156,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 2.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.05847726009252571,
+            "ratio_LHS_over_C3p45_grad": 0.06537956435241156,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "commutator_op_norm": 0.07283712000841468,
+            "joint_lipschitz_L1": 3.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.028035020562570193,
+            "ratio_LHS_over_C3p45_grad": 0.03134410586425567,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "commutator_op_norm": 0.10128558556767443,
+            "joint_lipschitz_L1": 4.0,
+            "C3_op_envelope": 0.8660254037844386,
+            "C3_paper45_stated": 0.7745966692414834,
+            "ratio_LHS_over_C3op_grad": 0.029238630046262856,
+            "ratio_LHS_over_C3p45_grad": 0.03268978217620578,
+            "L4d_holds_at_C3op": true,
+            "L4d_holds_at_C3p45": true
+          }
+        ]
+      },
+      "krein_positive_preservation": {
+        "n_tested": 28,
+        "n_pass": 28,
+        "details": [
+          {
+            "name": "joint_constant_Y3_(1,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "joint_axisymmetric_positive_eps0.01_eps0.05",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,-1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,1,1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,0,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,0,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,-1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,-1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,-1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,0)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,1)_q0",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,1)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(3,1,1)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q0 + Y3_(2,1,0)_q1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          },
+          {
+            "name": "Y3_(2,0,0)_q1 + Y3_(3,0,0)_q-1",
+            "preserves_K_plus": true,
+            "J_commutator_F_norm": 0.0
+          }
+        ]
+      },
+      "elapsed_seconds": 76.3638744354248
+    }
+  ],
+  "riemannian_limit_check_n_max_3": {
+    "n_max": 3,
+    "constant_residual": 0.0,
+    "constant_pass": true,
+    "mode_Y200_residual": 0.0,
+    "mode_Y200_pass": true
+  },
+  "envelope_erratum_L4": {
+    "L4_a_positivity_uses_envelope": false,
+    "L4_b_contractivity_uses_envelope": false,
+    "L4_c_approx_identity_uses_envelope": false,
+    "L4_d_L3compatibility_uses_envelope": true,
+    "explanation": "L4(a)-(c) involve only the SUPPORT of B^joint(f), which is N <= n_max by the Plancherel-symbol cutoff. These are SUPPORT-bounded, not envelope-bounded. L4(d) inherits the L3 bound, which uses the envelope-aware C_3^op(n_max) = sqrt(1 - 1/n_max) for the natural-substrate generators in O^L, i.e., the same erratum already flagged in L3b-2b."
+  },
+  "total_elapsed_seconds": 81.49920272827148
+}

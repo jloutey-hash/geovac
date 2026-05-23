@@ -1,0 +1,240 @@
+{
+  "sprint": "L3b-2d",
+  "description": "Strong-form Latremoliere propinquity assembly under L_op",
+  "panel_cells": [
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      7
+    ]
+  ],
+  "panel_strong_vs_weak": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "T": 6.283185307179586,
+      "gamma_su2": 2.0745510936998897,
+      "gamma_u1": 0.7219831099305748,
+      "gamma_joint_L1": 2.7965342036304643,
+      "c3_op_envelope_aware": 0.7071067811865476,
+      "c3_paper45_stated": 0.5773502691896258,
+      "reach_B": 2.0745510936998897,
+      "reach_P": 2.0745510936998897,
+      "height_B_op": 1.4669291462731608,
+      "height_B_stated": 1.197742632395264,
+      "height_P": 0.0,
+      "lambda_strong_op": 2.0745510936998897,
+      "lambda_paper45_stated": 2.0745510936998897,
+      "cb_norm_joint": 0.6666666666666666,
+      "lambda_paper45_weak": 2.0746,
+      "relative_diff_vs_weak": 2.357384561388351e-05
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "T": 6.283185307179586,
+      "gamma_su2": 1.6100599680657361,
+      "gamma_u1": 0.49562415926901987,
+      "gamma_joint_L1": 2.105684127334756,
+      "c3_op_envelope_aware": 0.816496580927726,
+      "c3_paper45_stated": 0.7071067811865475,
+      "reach_B": 1.6100599680657361,
+      "reach_P": 1.6100599680657361,
+      "height_B_op": 1.3146084590142773,
+      "height_B_stated": 1.138484321536278,
+      "height_P": 0.0,
+      "lambda_strong_op": 1.6100599680657361,
+      "lambda_paper45_stated": 1.6100599680657361,
+      "cb_norm_joint": 0.5,
+      "lambda_paper45_weak": 1.6101,
+      "relative_diff_vs_weak": 2.486301115703367e-05
+    },
+    {
+      "n_max": 4,
+      "N_t": 7,
+      "T": 6.283185307179586,
+      "gamma_su2": 1.3223327942828407,
+      "gamma_u1": 0.38406187302086475,
+      "gamma_joint_L1": 1.7063946673037054,
+      "c3_op_envelope_aware": 0.8660254037844386,
+      "c3_paper45_stated": 0.7745966692414834,
+      "reach_B": 1.3223327942828407,
+      "reach_P": 1.3223327942828407,
+      "height_B_op": 1.1451737921062022,
+      "height_B_stated": 1.024274578080272,
+      "height_P": 0.0,
+      "lambda_strong_op": 1.3223327942828407,
+      "lambda_paper45_stated": 1.3223327942828407,
+      "cb_norm_joint": 0.4,
+      "lambda_paper45_weak": 1.3223,
+      "relative_diff_vs_weak": 2.480093990822238e-05
+    }
+  ],
+  "riemannian_limit": [
+    {
+      "n_max": 2,
+      "paper38_gamma_su2": 2.0745510936998897,
+      "lambda_strong_op_at_Nt_1": 2.0745510936998897,
+      "residual": 0.0,
+      "bit_exact": true
+    },
+    {
+      "n_max": 3,
+      "paper38_gamma_su2": 1.6100599680657361,
+      "lambda_strong_op_at_Nt_1": 1.6100599680657361,
+      "residual": 0.0,
+      "bit_exact": true
+    },
+    {
+      "n_max": 4,
+      "paper38_gamma_su2": 1.3223327942828407,
+      "lambda_strong_op_at_Nt_1": 1.3223327942828407,
+      "residual": 0.0,
+      "bit_exact": true
+    }
+  ],
+  "envelope_erratum": {
+    "table": [
+      {
+        "n_max": 2,
+        "c3_paper45_stated": 0.5773502691896258,
+        "c3_op_envelope_aware": 0.7071067811865476,
+        "envelope_N_max": 3,
+        "per_harm_at_envelope": 0.7071067811865475,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.2247448713915887
+      },
+      {
+        "n_max": 3,
+        "c3_paper45_stated": 0.7071067811865475,
+        "c3_op_envelope_aware": 0.816496580927726,
+        "envelope_N_max": 5,
+        "per_harm_at_envelope": 0.8164965809277261,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.1547005383792517
+      },
+      {
+        "n_max": 4,
+        "c3_paper45_stated": 0.7745966692414834,
+        "c3_op_envelope_aware": 0.8660254037844386,
+        "envelope_N_max": 7,
+        "per_harm_at_envelope": 0.8660254037844387,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.118033988749895
+      },
+      {
+        "n_max": 5,
+        "c3_paper45_stated": 0.8164965809277261,
+        "c3_op_envelope_aware": 0.8944271909999159,
+        "envelope_N_max": 9,
+        "per_harm_at_envelope": 0.8944271909999159,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.0954451150103321
+      },
+      {
+        "n_max": 6,
+        "c3_paper45_stated": 0.8451542547285166,
+        "c3_op_envelope_aware": 0.9128709291752769,
+        "envelope_N_max": 11,
+        "per_harm_at_envelope": 0.9128709291752769,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.0801234497346435
+      },
+      {
+        "n_max": 7,
+        "c3_paper45_stated": 0.8660254037844387,
+        "c3_op_envelope_aware": 0.9258200997725515,
+        "envelope_N_max": 13,
+        "per_harm_at_envelope": 0.9258200997725514,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.0690449676496974
+      },
+      {
+        "n_max": 8,
+        "c3_paper45_stated": 0.8819171036881969,
+        "c3_op_envelope_aware": 0.9354143466934853,
+        "envelope_N_max": 15,
+        "per_harm_at_envelope": 0.9354143466934853,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.0606601717798212
+      },
+      {
+        "n_max": 10,
+        "c3_paper45_stated": 0.9045340337332909,
+        "c3_op_envelope_aware": 0.9486832980505138,
+        "envelope_N_max": 19,
+        "per_harm_at_envelope": 0.9486832980505138,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.0488088481701514
+      },
+      {
+        "n_max": 20,
+        "c3_paper45_stated": 0.9511897312113419,
+        "c3_op_envelope_aware": 0.9746794344808963,
+        "envelope_N_max": 39,
+        "per_harm_at_envelope": 0.9746794344808964,
+        "stated_underestimates_at_envelope": true,
+        "ratio_envelope_to_stated": 1.02469507659596
+      }
+    ],
+    "paper38_has_same_erratum_issue": true,
+    "paper38_image_envelope_OK": true,
+    "interpretation": "Paper 38 Remark after Lemma L3 states C_3(n_max) <= sup_{N <= n_max} sqrt((N-1)/(N+1)).  Paper 38's Berezin map (eq:B_def) restricts to N <= n_max by Plancherel cutoff, so on Berezin images Paper 38 is correct.  But Paper 38 does NOT operate on the natural-substrate envelope N <= 2 n_max - 1; the natural-substrate-side L3 bound is moot for Paper 38's Riemannian propinquity assembly (which lives only on Berezin images via the tunneling pair).  The envelope erratum is a Paper 45 issue: Paper 45's natural substrate sees the larger envelope through the chirality-doubled multiplier algebra.",
+    "paper45_erratum_scope": "Replace sup_{2 <= N <= n_max} with sup_{2 <= N <= 2 n_max - 1} in Paper 45 eq:C3_joint_bound.  Numerical panel values in \u00a76 Table 1 are unchanged (panel values quote gamma_su2 directly, not C_3 * gamma).  No change to Paper 38."
+  },
+  "c5_assembly": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "c3_op": 0.7071067811865476,
+      "c3_paper45_stated": 0.5773502691896258,
+      "c5_strong_op": 1.0,
+      "c5_paper45_stated": 1.0,
+      "c5_match": true,
+      "interpretation": "C_5^joint = max(reach_B/gamma, reach_P/gamma, height_B/gamma, height_P/gamma) = max(1, 1, C_3, 0).  Since C_3^op <= 1 (envelope-aware) and C_3 paper45 stated <= 1, both give C_5 = 1.  Strong-form and K+-weak-form propinquity bounds agree at the assembled-constant level."
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "c3_op": 0.816496580927726,
+      "c3_paper45_stated": 0.7071067811865475,
+      "c5_strong_op": 1.0,
+      "c5_paper45_stated": 1.0,
+      "c5_match": true,
+      "interpretation": "C_5^joint = max(reach_B/gamma, reach_P/gamma, height_B/gamma, height_P/gamma) = max(1, 1, C_3, 0).  Since C_3^op <= 1 (envelope-aware) and C_3 paper45 stated <= 1, both give C_5 = 1.  Strong-form and K+-weak-form propinquity bounds agree at the assembled-constant level."
+    },
+    {
+      "n_max": 4,
+      "N_t": 7,
+      "c3_op": 0.8660254037844386,
+      "c3_paper45_stated": 0.7745966692414834,
+      "c5_strong_op": 1.0,
+      "c5_paper45_stated": 1.0,
+      "c5_match": true,
+      "interpretation": "C_5^joint = max(reach_B/gamma, reach_P/gamma, height_B/gamma, height_P/gamma) = max(1, 1, C_3, 0).  Since C_3^op <= 1 (envelope-aware) and C_3 paper45 stated <= 1, both give C_5 = 1.  Strong-form and K+-weak-form propinquity bounds agree at the assembled-constant level."
+    }
+  ],
+  "headline": {
+    "verdict": "GO (free-upgrade reading supported)",
+    "lambda_strong_op_at_2_3": 2.0745510936998897,
+    "lambda_strong_op_at_3_5": 1.6100599680657361,
+    "lambda_strong_op_at_4_7": 1.3223327942828407,
+    "paper45_weak_at_2_3": 2.0746,
+    "paper45_weak_at_3_5": 1.6101,
+    "paper45_weak_at_4_7": 1.3223,
+    "bit_exact_match": true,
+    "riemannian_limit_bit_exact_all": true,
+    "envelope_erratum_paper45_needed": true,
+    "envelope_erratum_paper38_needed": false,
+    "c5_joint_strong_op": 1.0,
+    "c5_joint_paper45": 1.0,
+    "c5_joint_match": true
+  }
+}

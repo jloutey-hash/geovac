@@ -1,0 +1,184 @@
+{
+  "sprint": "L3b-2f-beta.1",
+  "purpose": "Empirical confirmation of L3b-2f-alpha analytical predictions: Lambda^enlarged(2, 3) ~ 2.66, prop_achievable = 2, structural identity break at p >= 1.",
+  "panel_cell": [
+    2,
+    3
+  ],
+  "environmental_diagnostic": {
+    "numpy_import_secs": 0.0,
+    "numpy_version": "2.4.0",
+    "geovac_import_secs": 0.81,
+    "total_secs": 0.811,
+    "verdict": "CLEAN"
+  },
+  "panel": {
+    "n_max": 2,
+    "N_t": 3,
+    "T": 6.283185307179586,
+    "dim_K": 48,
+    "dim_Kplus": 24,
+    "dim_Kminus": 24,
+    "dim_spatial": 16,
+    "dim_Weyl": 8,
+    "dim_natural_substrate": 42,
+    "dim_enlarged_substrate": 84,
+    "num_natural_generators": 42,
+    "num_flip_generators": 42,
+    "num_pairs_diagnosed": 42,
+    "D_L_decomposition": {
+      "D_L_op_norm": 3.4999999999999996,
+      "D_L_diag_op_norm": 1.0,
+      "D_L_off_op_norm": 2.5,
+      "reconstruction_residual_fro": 0.0
+    },
+    "closed_form_sanity": {
+      "max_anti_J_M_flip_fro": 0.0,
+      "max_P_plus_M_flip_P_plus_fro": 0.0,
+      "max_comm_J_M_nat_fro": 0.0
+    },
+    "q3_structural_identity_breakdown_by_p": {
+      "0": {
+        "n_samples": 14,
+        "max_norm_comm_DL_diag_natural": 0.0,
+        "max_norm_comm_DL_diag_flip": 0.45015815807855303,
+        "max_norm_comm_DL_off_natural": 0.22507907903927654,
+        "max_norm_comm_DL_off_flip": 0.22507907903927654,
+        "max_L_op_natural": 0.22507907903927654,
+        "max_L_op_flip": 0.6752372371178297,
+        "max_P_plus_M_flip_P_plus_op": 0.0,
+        "max_L_block_P45_flip": 0.0
+      },
+      "1": {
+        "n_samples": 14,
+        "max_norm_comm_DL_diag_natural": 0.0,
+        "max_norm_comm_DL_diag_flip": 0.45015815807855303,
+        "max_norm_comm_DL_off_natural": 0.22507907903927654,
+        "max_norm_comm_DL_off_flip": 0.22507907903927654,
+        "max_L_op_natural": 0.22507907903927654,
+        "max_L_op_flip": 0.6752372371178297,
+        "max_P_plus_M_flip_P_plus_op": 0.0,
+        "max_L_block_P45_flip": 0.0
+      },
+      "2": {
+        "n_samples": 14,
+        "max_norm_comm_DL_diag_natural": 0.0,
+        "max_norm_comm_DL_diag_flip": 0.45015815807855303,
+        "max_norm_comm_DL_off_natural": 0.22507907903927654,
+        "max_norm_comm_DL_off_flip": 0.22507907903927654,
+        "max_L_op_natural": 0.22507907903927654,
+        "max_L_op_flip": 0.6752372371178297,
+        "max_P_plus_M_flip_P_plus_op": 0.0,
+        "max_L_block_P45_flip": 0.0
+      }
+    },
+    "sample_diagnostic_per_p": {
+      "0": {
+        "p": 0,
+        "norm_comm_DL_diag_natural": 0.0,
+        "norm_comm_DL_off_natural": 0.0,
+        "L_op_natural": 0.0,
+        "norm_comm_DL_diag_flip": 0.45015815807855303,
+        "norm_comm_DL_off_flip": 0.0,
+        "L_op_flip": 0.45015815807855303,
+        "P_plus_M_flip_P_plus_op": 0.0,
+        "P_plus_M_flip_P_plus_fro": 0.0,
+        "L_block_P45_flip": 0.0,
+        "anti_J_M_flip_fro": 0.0,
+        "comm_J_M_nat_fro": 0.0,
+        "label": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "1": {
+        "p": 1,
+        "norm_comm_DL_diag_natural": 0.0,
+        "norm_comm_DL_off_natural": 0.0,
+        "L_op_natural": 0.0,
+        "norm_comm_DL_diag_flip": 0.45015815807855303,
+        "norm_comm_DL_off_flip": 0.0,
+        "L_op_flip": 0.45015815807855303,
+        "P_plus_M_flip_P_plus_op": 0.0,
+        "P_plus_M_flip_P_plus_fro": 0.0,
+        "L_block_P45_flip": 0.0,
+        "anti_J_M_flip_fro": 0.0,
+        "comm_J_M_nat_fro": 0.0,
+        "label": [
+          1,
+          0,
+          0,
+          1
+        ]
+      },
+      "2": {
+        "p": 2,
+        "norm_comm_DL_diag_natural": 0.0,
+        "norm_comm_DL_off_natural": 0.0,
+        "L_op_natural": 0.0,
+        "norm_comm_DL_diag_flip": 0.45015815807855303,
+        "norm_comm_DL_off_flip": 0.0,
+        "L_op_flip": 0.45015815807855303,
+        "P_plus_M_flip_P_plus_op": 0.0,
+        "P_plus_M_flip_P_plus_fro": 0.0,
+        "L_block_P45_flip": 0.0,
+        "anti_J_M_flip_fro": 0.0,
+        "comm_J_M_nat_fro": 0.0,
+        "label": [
+          1,
+          0,
+          0,
+          2
+        ]
+      }
+    },
+    "q1_lambda_enlarged_empirical": {
+      "max_L_op_natural": 0.22507907903927654,
+      "max_L_op_flip": 0.6752372371178297,
+      "ratio_flip_over_natural": 3.0000000000000004,
+      "paper45_lambda": 2.0746,
+      "lambda_enlarged_empirical": 6.2238000000000016
+    },
+    "q1_falsified_bit_equivalent_to_paper45": false,
+    "q1_relative_diff_from_paper45": 2.0000000000000004,
+    "q2_propagation": {
+      "achievable": {
+        "prop": 1,
+        "trajectory": [
+          84,
+          384
+        ],
+        "elapsed": 10.3,
+        "target_dim": 384
+      },
+      "full": {
+        "prop": -1,
+        "trajectory": [
+          84,
+          384,
+          384
+        ],
+        "elapsed": 157.47,
+        "target_dim": 2304
+      }
+    },
+    "elapsed_seconds": 167.94377255439758
+  },
+  "verdict": {
+    "verdict": "POSITIVE-CONFIRM (with caveat)",
+    "reasoning": "Empirical Lambda^enlarged = 6.2238 differs from alpha estimate 2.66 by 134.0% but ratio 3.000 > 1.05 still gives positive separation.",
+    "lambda_enlarged_empirical": 6.2238000000000016,
+    "paper45_lambda": 2.0746,
+    "alpha_estimate": 2.66,
+    "alpha_vs_empirical_relative_diff": 1.339774436090226,
+    "ratio_flip_over_natural": 3.0000000000000004,
+    "q1_falsified": false,
+    "q2_prop_achievable": 1,
+    "q2_prop_full": -1,
+    "q3_p0_diag_zero": false,
+    "q3_p1_diag_nonzero": true,
+    "q3_pattern_confirmed": false
+  }
+}

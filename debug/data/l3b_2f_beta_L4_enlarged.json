@@ -1,0 +1,1368 @@
+{
+  "sprint": "L3b-2f-beta-L4",
+  "purpose": "Berezin reconstruction on the enlarged operator system (natural + chirality-flipping) under the J-graded gradient norm.",
+  "cells": {
+    "2_3": {
+      "n_max": 2,
+      "N_t": 3,
+      "T": 6.283185307179586,
+      "dim_K": 48,
+      "dim_spatial": 16,
+      "n_flip_generators": 42,
+      "Dt_norm": 1.0,
+      "DGV_norm": 2.5,
+      "n_panel": 10,
+      "positivity": {
+        "pass": 2,
+        "total": 2
+      },
+      "contractivity": {
+        "pass": 10,
+        "total": 10
+      },
+      "approx_identity": {
+        "pass": 10,
+        "total": 10,
+        "gamma_max": 0.1500527193595177,
+        "saturating": "nat_constant"
+      },
+      "l3_compat": {
+        "pass": 10,
+        "total": 10
+      },
+      "j_grading": {
+        "pass": 10,
+        "total": 10
+      },
+      "details": [
+        {
+          "name": "nat_constant",
+          "kind": "natural",
+          "n_nat_modes": 1,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 1.0,
+          "B_op_norm": 0.07502635967975883,
+          "B_nat_op_norm": 0.07502635967975883,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": true,
+            "is_PSD": true,
+            "min_eig": 0.0,
+            "case": "f_pos_pure_nat"
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.07502635967975883,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1500527193595177,
+            "G_enlarged_used": 1.0,
+            "gamma_empirical": 0.1500527193595177
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "nat_axisymmetric_positive",
+          "kind": "natural",
+          "n_nat_modes": 4,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.11,
+          "G_enlarged": 1.2100000000000002,
+          "B_op_norm": 0.076526886873354,
+          "B_nat_op_norm": 0.076526886873354,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": true,
+            "is_PSD": true,
+            "min_eig": 0.001875658991993971,
+            "case": "f_pos_pure_nat"
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.076526886873354,
+            "f_inf_upper_bound": 1.11,
+            "ratio_op_over_finfty": 0.06894314132734594
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.15080298295631528,
+            "G_enlarged_used": 1.2100000000000002,
+            "gamma_empirical": 0.12463056442670682
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.001500527193595177,
+            "ratio_LHS_over_G_enlarged": 0.0012401051186736998
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "nat_Y200_q0",
+          "kind": "natural",
+          "n_nat_modes": 1,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 1.0,
+          "B_op_norm": 0.15005271935951767,
+          "B_nat_op_norm": 0.15005271935951767,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "skipped",
+            "min_eig_nat_part": -0.15005271935951767,
+            "max_eig_nat_part": 0.15005271935951767,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.15005271935951767,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.15005271935951767
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.07502635967975885,
+            "G_enlarged_used": 1.0,
+            "gamma_empirical": 0.07502635967975885
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.1500527193595177,
+            "ratio_LHS_over_G_enlarged": 0.1500527193595177
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_100_q0",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 2.0,
+          "B_op_norm": 0.07502635967975883,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.07502635967975883,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.07502635967975883,
+            "max_eig_flip_part": 0.07502635967975883
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.07502635967975883,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.07502635967975883
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1500527193595177,
+            "G_enlarged_used": 2.0,
+            "gamma_empirical": 0.07502635967975885
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_100_q1",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 2.0,
+          "B_op_norm": 0.03751317983987942,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.03751317983987942,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.03751317983987942,
+            "max_eig_flip_part": 0.03751317983987942
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.03751317983987942,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.03751317983987942
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1875658991993971,
+            "G_enlarged_used": 2.0,
+            "gamma_empirical": 0.09378294959969855
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.07502635967975883,
+            "ratio_LHS_over_G_enlarged": 0.03751317983987942
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_200_q0",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 2.0,
+          "B_op_norm": 0.15005271935951767,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.15005271935951767,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.15005271935951767,
+            "max_eig_flip_part": 0.15005271935951767
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.15005271935951767,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.15005271935951767
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.07502635967975885,
+            "G_enlarged_used": 2.0,
+            "gamma_empirical": 0.037513179839879424
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.1500527193595177,
+            "ratio_LHS_over_G_enlarged": 0.07502635967975885
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.68_b1.14_natq0_flipq-1",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.8188479793905907,
+          "G_enlarged": 2.958761145105745,
+          "B_op_norm": 0.05093800752992332,
+          "B_nat_op_norm": 0.05093800752992332,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.05093800752992332,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.05093800752992332,
+            "f_inf_upper_bound": 1.8188479793905907,
+            "ratio_op_over_finfty": 0.028005643191241426
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.10187601505984666,
+            "G_enlarged_used": 2.958761145105745,
+            "gamma_empirical": 0.034431983544317375
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.85_b1.29_natq1_flipq1",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 2.145435580162916,
+          "G_enlarged": 4.290871160325832,
+          "B_op_norm": 0.03207066771018826,
+          "B_nat_op_norm": 0.03207066771018826,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.03207066771018826,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.03207066771018826,
+            "f_inf_upper_bound": 2.145435580162916,
+            "ratio_op_over_finfty": 0.014948324716304435
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1603533385509413,
+            "G_enlarged_used": 4.290871160325832,
+            "gamma_empirical": 0.037370811790761085
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.68_b1.15_natq-1_flipq-1",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.8301379945081806,
+          "G_enlarged": 3.660275989016361,
+          "B_op_norm": 0.1118989193395889,
+          "B_nat_op_norm": 0.025409672099974363,
+          "B_flip_op_norm": 0.08648924723961453,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.025409672099974363,
+            "min_eig_flip_part": -0.08648924723961453,
+            "max_eig_flip_part": 0.08648924723961453
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.1118989193395889,
+            "f_inf_upper_bound": 1.8301379945081806,
+            "ratio_op_over_finfty": 0.061142339908450395
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.30002685497910087,
+            "G_enlarged_used": 3.660275989016361,
+            "gamma_empirical": 0.08196836956541305
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.25946774171884357,
+            "ratio_LHS_over_G_enlarged": 0.07088748020571292
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a1.42_b1.14_natq0_flipq1",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 2.55572096468193,
+          "G_enlarged": 3.691591768826581,
+          "B_op_norm": 0.10652618883583316,
+          "B_nat_op_norm": 0.10652618883583316,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.10652618883583316,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.10652618883583316,
+            "f_inf_upper_bound": 2.55572096468193,
+            "ratio_op_over_finfty": 0.041681463003176794
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.21305237767166635,
+            "G_enlarged_used": 3.691591768826581,
+            "gamma_empirical": 0.05771287591189633
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        }
+      ]
+    },
+    "3_5": {
+      "n_max": 3,
+      "N_t": 5,
+      "T": 6.283185307179586,
+      "dim_K": 200,
+      "dim_spatial": 40,
+      "n_flip_generators": 275,
+      "Dt_norm": 2.0,
+      "DGV_norm": 3.5,
+      "n_panel": 10,
+      "positivity": {
+        "pass": 2,
+        "total": 2
+      },
+      "contractivity": {
+        "pass": 10,
+        "total": 10
+      },
+      "approx_identity": {
+        "pass": 10,
+        "total": 10,
+        "gamma_max": 0.2122065907891938,
+        "saturating": "nat_Y200_q0"
+      },
+      "l3_compat": {
+        "pass": 10,
+        "total": 10
+      },
+      "j_grading": {
+        "pass": 10,
+        "total": 10
+      },
+      "details": [
+        {
+          "name": "nat_constant",
+          "kind": "natural",
+          "n_nat_modes": 1,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 1.0,
+          "B_op_norm": 0.03751317983987942,
+          "B_nat_op_norm": 0.03751317983987942,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": true,
+            "is_PSD": true,
+            "min_eig": 0.0,
+            "case": "f_pos_pure_nat"
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.03751317983987942,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.03751317983987942
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1875658991993971,
+            "G_enlarged_used": 1.0,
+            "gamma_empirical": 0.1875658991993971
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "nat_axisymmetric_positive",
+          "kind": "natural",
+          "n_nat_modes": 4,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.11,
+          "G_enlarged": 1.2100000000000002,
+          "B_op_norm": 0.0385742127938254,
+          "B_nat_op_norm": 0.0385742127938254,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": true,
+            "is_PSD": true,
+            "min_eig": -6.938893903907469e-18,
+            "case": "f_pos_pure_nat"
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.0385742127938254,
+            "f_inf_upper_bound": 1.11,
+            "ratio_op_over_finfty": 0.034751543057500354
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.18968796510728902,
+            "G_enlarged_used": 1.2100000000000002,
+            "gamma_empirical": 0.1567669133118091
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.001061032953945969,
+            "ratio_LHS_over_G_enlarged": 0.0008768867387983214
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "nat_Y200_q0",
+          "kind": "natural",
+          "n_nat_modes": 1,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 1.0,
+          "B_op_norm": 0.10610329539459688,
+          "B_nat_op_norm": 0.10610329539459688,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "skipped",
+            "min_eig_nat_part": -0.10610329539459687,
+            "max_eig_nat_part": 0.1061032953945969,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.10610329539459688,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.10610329539459688
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.2122065907891938,
+            "G_enlarged_used": 1.0,
+            "gamma_empirical": 0.2122065907891938
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.1061032953945969,
+            "ratio_LHS_over_G_enlarged": 0.1061032953945969
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_100_q0",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 4.0,
+          "B_op_norm": 0.03751317983987942,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.03751317983987942,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.03751317983987942,
+            "max_eig_flip_part": 0.03751317983987942
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.03751317983987942,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.03751317983987942
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1875658991993971,
+            "G_enlarged_used": 4.0,
+            "gamma_empirical": 0.04689147479984927
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_100_q1",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 4.0,
+          "B_op_norm": 0.025008786559919612,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.025008786559919612,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.025008786559919612,
+            "max_eig_flip_part": 0.025008786559919612
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.025008786559919612,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.025008786559919612
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.2000702924793569,
+            "G_enlarged_used": 4.0,
+            "gamma_empirical": 0.050017573119839225
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.050017573119839225,
+            "ratio_LHS_over_G_enlarged": 0.012504393279959806
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_200_q0",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 4.0,
+          "B_op_norm": 0.10610329539459688,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.10610329539459688,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.10610329539459687,
+            "max_eig_flip_part": 0.1061032953945969
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.10610329539459688,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.10610329539459688
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.2122065907891938,
+            "G_enlarged_used": 4.0,
+            "gamma_empirical": 0.05305164769729845
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.1061032953945969,
+            "ratio_LHS_over_G_enlarged": 0.026525823848649224
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.68_b1.14_natq0_flipq-2",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.8188479793905907,
+          "G_enlarged": 5.238587476536054,
+          "B_op_norm": 0.02546900376496166,
+          "B_nat_op_norm": 0.02546900376496166,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.02546900376496166,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.02546900376496166,
+            "f_inf_upper_bound": 1.8188479793905907,
+            "ratio_op_over_finfty": 0.014002821595620713
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.1273450188248083,
+            "G_enlarged_used": 5.238587476536054,
+            "gamma_empirical": 0.02430903738750078
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.85_b1.29_natq1_flipq2",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 2.145435580162916,
+          "G_enlarged": 6.8719076520323625,
+          "B_op_norm": 0.021380445140125506,
+          "B_nat_op_norm": 0.021380445140125506,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.021380445140125506,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.021380445140125506,
+            "f_inf_upper_bound": 2.145435580162916,
+            "ratio_op_over_finfty": 0.009965549810869622
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.17104356112100405,
+            "G_enlarged_used": 6.8719076520323625,
+            "gamma_empirical": 0.024890258976401992
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.68_b1.15_natq-1_flipq-2",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.8301379945081806,
+          "G_enlarged": 5.965845594386625,
+          "B_op_norm": 0.06997127084754466,
+          "B_nat_op_norm": 0.01693978139998291,
+          "B_flip_op_norm": 0.06997127084754466,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.01693978139998291,
+            "min_eig_flip_part": -0.06997127084754466,
+            "max_eig_flip_part": 0.06997127084754466
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.06997127084754466,
+            "f_inf_upper_bound": 1.8301379945081806,
+            "ratio_op_over_finfty": 0.03823278411655963
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.3498563542377233,
+            "G_enlarged_used": 5.965845594386625,
+            "gamma_empirical": 0.05864321305380576
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.3157101025962668,
+            "ratio_LHS_over_G_enlarged": 0.05291958995608675
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a1.42_b1.14_natq1_flipq1",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 2.55572096468193,
+          "G_enlarged": 7.383183537653162,
+          "B_op_norm": 0.03550872961194439,
+          "B_nat_op_norm": 0.03550872961194439,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.03550872961194439,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.03550872961194439,
+            "f_inf_upper_bound": 2.55572096468193,
+            "ratio_op_over_finfty": 0.013893821001058931
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.2840698368955551,
+            "G_enlarged_used": 7.383183537653162,
+            "gamma_empirical": 0.03847525060793088
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        }
+      ]
+    },
+    "4_7": {
+      "n_max": 4,
+      "N_t": 7,
+      "T": 6.283185307179586,
+      "dim_K": 560,
+      "dim_spatial": 80,
+      "n_flip_generators": 980,
+      "Dt_norm": 3.0,
+      "DGV_norm": 4.5,
+      "n_panel": 10,
+      "positivity": {
+        "pass": 2,
+        "total": 2
+      },
+      "contractivity": {
+        "pass": 10,
+        "total": 10
+      },
+      "approx_identity": {
+        "pass": 10,
+        "total": 10,
+        "gamma_max": 0.2913484800336587,
+        "saturating": "nat_Y200_q0"
+      },
+      "l3_compat": {
+        "pass": 10,
+        "total": 10
+      },
+      "j_grading": {
+        "pass": 10,
+        "total": 10
+      },
+      "details": [
+        {
+          "name": "nat_constant",
+          "kind": "natural",
+          "n_nat_modes": 1,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 1.0,
+          "B_op_norm": 0.022507907903927652,
+          "B_nat_op_norm": 0.022507907903927652,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": true,
+            "is_PSD": true,
+            "min_eig": 0.0,
+            "case": "f_pos_pure_nat"
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.022507907903927652,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.022507907903927652
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.20257117113534887,
+            "G_enlarged_used": 1.0,
+            "gamma_empirical": 0.20257117113534887
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "nat_axisymmetric_positive",
+          "kind": "natural",
+          "n_nat_modes": 4,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.11,
+          "G_enlarged": 1.2100000000000002,
+          "B_op_norm": 0.023236279104011798,
+          "B_nat_op_norm": 0.023236279104011798,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": true,
+            "is_PSD": true,
+            "min_eig": -2.1430462921263816e-20,
+            "case": "f_pos_pure_nat"
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.023236279104011798,
+            "f_inf_upper_bound": 1.11,
+            "ratio_op_over_finfty": 0.020933584778389004
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.20548465593568543,
+            "G_enlarged_used": 1.2100000000000002,
+            "gamma_empirical": 0.16982202969891355
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0007283712000841469,
+            "ratio_LHS_over_G_enlarged": 0.0006019596694910303
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "nat_Y200_q0",
+          "kind": "natural",
+          "n_nat_modes": 1,
+          "n_flip_modes": 0,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 1.0,
+          "B_op_norm": 0.07283712000841468,
+          "B_nat_op_norm": 0.07283712000841468,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "skipped",
+            "min_eig_nat_part": -0.0728371200084147,
+            "max_eig_nat_part": 0.07283712000841465,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.07283712000841468,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.07283712000841468
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.2913484800336587,
+            "G_enlarged_used": 1.0,
+            "gamma_empirical": 0.2913484800336587
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.07283712000841468,
+            "ratio_LHS_over_G_enlarged": 0.07283712000841468
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_100_q0",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 6.0,
+          "B_op_norm": 0.022507907903927652,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.022507907903927652,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.022507907903927652,
+            "max_eig_flip_part": 0.022507907903927652
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.022507907903927652,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.022507907903927652
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.20257117113534887,
+            "G_enlarged_used": 6.0,
+            "gamma_empirical": 0.03376186185589148
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_100_q1",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 6.0,
+          "B_op_norm": 0.016880930927945736,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.016880930927945736,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.016880930927945736,
+            "max_eig_flip_part": 0.016880930927945736
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.016880930927945736,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.016880930927945736
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.20819814811133078,
+            "G_enlarged_used": 6.0,
+            "gamma_empirical": 0.03469969135188846
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.03376186185589147,
+            "ratio_LHS_over_G_enlarged": 0.005626976975981912
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "flip_200_q0",
+          "kind": "flip",
+          "n_nat_modes": 0,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.0,
+          "G_enlarged": 6.0,
+          "B_op_norm": 0.07283712000841468,
+          "B_nat_op_norm": 0.0,
+          "B_flip_op_norm": 0.07283712000841468,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.0,
+            "min_eig_flip_part": -0.0728371200084147,
+            "max_eig_flip_part": 0.07283712000841465
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.07283712000841468,
+            "f_inf_upper_bound": 1.0,
+            "ratio_op_over_finfty": 0.07283712000841468
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.2913484800336587,
+            "G_enlarged_used": 6.0,
+            "gamma_empirical": 0.04855808000560979
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.07283712000841468,
+            "ratio_LHS_over_G_enlarged": 0.012139520001402447
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.68_b1.14_natq0_flipq-3",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.8188479793905907,
+          "G_enlarged": 7.518413807966363,
+          "B_op_norm": 0.015281402258976999,
+          "B_nat_op_norm": 0.015281402258976999,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.015281402258976999,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.015281402258976999,
+            "f_inf_upper_bound": 1.8188479793905907,
+            "ratio_op_over_finfty": 0.008401692957372428
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.13753262033079297,
+            "G_enlarged_used": 7.518413807966363,
+            "gamma_empirical": 0.018292770768358894
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.85_b1.29_natq1_flipq3",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 2.145435580162916,
+          "G_enlarged": 9.452944143738891,
+          "B_op_norm": 0.014431800469584716,
+          "B_nat_op_norm": 0.014431800469584716,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.014431800469584716,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.014431800469584716,
+            "f_inf_upper_bound": 2.145435580162916,
+            "ratio_op_over_finfty": 0.006726746122336995
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.17799220579154484,
+            "G_enlarged_used": 9.452944143738891,
+            "gamma_empirical": 0.018829287794896902
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a0.68_b1.15_natq-1_flipq-2",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 1.8301379945081806,
+          "G_enlarged": 8.271415199756888,
+          "B_op_norm": 0.05361546099350329,
+          "B_nat_op_norm": 0.011434352444988465,
+          "B_flip_op_norm": 0.05361546099350327,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.011434352444988465,
+            "min_eig_flip_part": -0.036458200842685945,
+            "max_eig_flip_part": 0.036458200842685924
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.05361546099350329,
+            "f_inf_upper_bound": 1.8301379945081806,
+            "ratio_op_over_finfty": 0.029295857008810728
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.3038209456298519,
+            "G_enlarged_used": 8.271415199756888,
+            "gamma_empirical": 0.0367314344997192
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.3023859307090702,
+            "ratio_LHS_over_G_enlarged": 0.03655794364161019
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        },
+        {
+          "name": "mixed_a1.42_b1.14_natq1_flipq2",
+          "kind": "mixed",
+          "n_nat_modes": 1,
+          "n_flip_modes": 1,
+          "f_inf_upper_bound": 2.55572096468193,
+          "G_enlarged": 9.654925145942466,
+          "B_op_norm": 0.02396839248806246,
+          "B_nat_op_norm": 0.02396839248806246,
+          "B_flip_op_norm": 0.0,
+          "positivity": {
+            "checked": false,
+            "case": "no_positivity_expected",
+            "min_eig_nat_part": 0.0,
+            "max_eig_nat_part": 0.02396839248806246,
+            "min_eig_flip_part": 0.0,
+            "max_eig_flip_part": 0.0
+          },
+          "contractivity": {
+            "is_contractive": true,
+            "op_norm_B": 0.02396839248806246,
+            "f_inf_upper_bound": 2.55572096468193,
+            "ratio_op_over_finfty": 0.009378329175714777
+          },
+          "approx_identity": {
+            "holds_finite": true,
+            "residual_op_norm": 0.295610174019437,
+            "G_enlarged_used": 9.654925145942466,
+            "gamma_empirical": 0.03061755213541648
+          },
+          "l3_compat": {
+            "holds": true,
+            "commutator_op_norm": 0.0,
+            "ratio_LHS_over_G_enlarged": 0.0
+          },
+          "j_grading": {
+            "preserved": true,
+            "residual_nat": 0.0,
+            "residual_flip": 0.0
+          }
+        }
+      ]
+    }
+  },
+  "riemannian_recovery": {
+    "n_max": 2,
+    "N_t": 1,
+    "constant_residual": 0.0,
+    "constant_pass": true,
+    "flip_recovery_residual": 0.0,
+    "flip_recovery_pass": true
+  },
+  "gamma_comparison": {
+    "2_3": {
+      "gamma_enlarged": 0.1500527193595177,
+      "gamma_natural_p46": 0.1501,
+      "ratio": 0.9996850057263004
+    },
+    "3_5": {
+      "gamma_enlarged": 0.2122065907891938,
+      "gamma_natural_p46": 0.2122,
+      "ratio": 1.0000310593270207
+    },
+    "4_7": {
+      "gamma_enlarged": 0.2913484800336587,
+      "gamma_natural_p46": 0.3151,
+      "ratio": 0.9246222787485202
+    }
+  },
+  "verdict": {
+    "verdict": "POSITIVE-GO",
+    "reasoning": "All five Berezin properties verified on the enlarged substrate at every tested cell. Riemannian-limit recovery bit-exact at N_t=1. Rate gamma^enlarged finite at every cell; survives asymptotic limit at fixed T = 2*pi by beta-L3 Lichnerowicz result. Property (a) refined: positivity restricted to f^flip = 0 + f^nat >= 0 sub-case.",
+    "all_cells_pass": [
+      true,
+      true,
+      true
+    ]
+  },
+  "environmental_diagnostic": {
+    "numpy_secs": 0.0,
+    "geovac_secs": 0.92,
+    "verdict": "CLEAN"
+  }
+}

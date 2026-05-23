@@ -1,0 +1,13 @@
+{
+  "sprint": "L3b-2f-beta.1-decomp",
+  "n_max": 2,
+  "N_t": 3,
+  "T": 6.283185307179586,
+  "D_t_diagonal": [
+    -1.0,
+    0.0,
+    1.0
+  ],
+  "D_t_op_norm": 1.0,
+  "structural_finding": "Alpha \u00a74.2 claim that [D_L_diag, a^flip_p=0] = 0 is WRONG. At p=0, M^temp_0 = I, but D_t * M^temp_0 = D_t (non-zero diagonal of 2 pi i k / T). The alpha \u00a74.2 prose confused 'd/dt applied to the constant function = 0' with the actual matrix product D_t * M^temp_p, which at p=0 equals D_t. The structural-identity break occurs at ALL p, not just p >= 1."
+}

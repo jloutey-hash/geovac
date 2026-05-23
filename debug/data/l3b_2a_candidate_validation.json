@@ -1,0 +1,5494 @@
+{
+  "sprint": "L3b-2a",
+  "date": "2026-05-22",
+  "panel": [
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      5
+    ]
+  ],
+  "panels": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "T": 6.283185307179586,
+      "dim_K": 48,
+      "dim_O": 42,
+      "dim_Kplus": 24,
+      "dim_Kminus": 24,
+      "num_generators": 42,
+      "achievable_envelope_dim": 192,
+      "envelope_dim": 2304,
+      "krein_axioms": {
+        "J_squared_residual": 0.0,
+        "J_unitary_residual": 0.0,
+        "J_hermitian_residual": 0.0
+      },
+      "prop51_max_J_commutator_residual": 0.0,
+      "D_L_operator_norm": 3.4999999999999996,
+      "max_diff_L_op_minus_L_block_abs": 0.22507907903927654,
+      "max_diff_L_op_minus_L_block_rel": 1.0,
+      "max_diff_Kplus_minus_Kminus_abs": 0.0,
+      "max_diff_Kplus_minus_Kminus_rel": 0.0,
+      "per_generator": [
+        {
+          "label": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            1,
+            0,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.2250790790392766,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927662,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            2
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927662,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927654,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            1
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            2
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.18377629847393062,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.18377629847393068,
+          "diff_L_op_minus_L_block": 0.18377629847393062,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            1
+          ],
+          "L_op": 0.18377629847393062,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.1837762984739307,
+          "diff_L_op_minus_L_block": 0.18377629847393062,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            2
+          ],
+          "L_op": 0.18377629847393062,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.1837762984739307,
+          "diff_L_op_minus_L_block": 0.18377629847393062,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.2250790790392766,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            1
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            2
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        }
+      ],
+      "elapsed_seconds": 0.13311767578125
+    },
+    {
+      "n_max": 2,
+      "N_t": 1,
+      "T": 6.283185307179586,
+      "dim_K": 16,
+      "dim_O": 14,
+      "dim_Kplus": 8,
+      "dim_Kminus": 8,
+      "num_generators": 14,
+      "achievable_envelope_dim": 64,
+      "envelope_dim": 256,
+      "krein_axioms": {
+        "J_squared_residual": 0.0,
+        "J_unitary_residual": 0.0,
+        "J_hermitian_residual": 0.0
+      },
+      "prop51_max_J_commutator_residual": 0.0,
+      "D_L_operator_norm": 2.5,
+      "max_diff_L_op_minus_L_block_abs": 0.22507907903927654,
+      "max_diff_L_op_minus_L_block_rel": 1.0,
+      "max_diff_Kplus_minus_Kminus_abs": 0.0,
+      "max_diff_Kplus_minus_Kminus_rel": 0.0,
+      "per_generator": [
+        {
+          "label": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927654,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.18377629847393062,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.18377629847393062,
+          "diff_L_op_minus_L_block": 0.18377629847393062,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.22507907903927654,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.22507907903927654,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        }
+      ],
+      "elapsed_seconds": 0.019995689392089844
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "T": 6.283185307179586,
+      "dim_K": 200,
+      "dim_O": 275,
+      "dim_Kplus": 100,
+      "dim_Kminus": 100,
+      "num_generators": 275,
+      "achievable_envelope_dim": 2000,
+      "envelope_dim": 40000,
+      "krein_axioms": {
+        "J_squared_residual": 0.0,
+        "J_unitary_residual": 0.0,
+        "J_hermitian_residual": 0.0
+      },
+      "prop51_max_J_commutator_residual": 0.0,
+      "D_L_operator_norm": 5.500000000000005,
+      "max_diff_L_op_minus_L_block_abs": 7.2025305292568484,
+      "max_diff_L_op_minus_L_block_rel": 1.0,
+      "max_diff_Kplus_minus_Kminus_abs": 0.0,
+      "max_diff_Kplus_minus_Kminus_rel": 0.0,
+      "per_generator": [
+        {
+          "label": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            1,
+            0,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            1,
+            0,
+            0,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            1,
+            0,
+            0,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.31830988618379075,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.3183098861837908,
+          "diff_L_op_minus_L_block": 0.31830988618379075,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.6366197723675814,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.6366197723675817,
+          "diff_L_op_minus_L_block": 0.6366197723675814,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            2
+          ],
+          "L_op": 1.2732395447351628,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.2732395447351632,
+          "diff_L_op_minus_L_block": 1.2732395447351628,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            3
+          ],
+          "L_op": 2.5464790894703255,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.546479089470326,
+          "diff_L_op_minus_L_block": 2.5464790894703255,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            0,
+            0,
+            4
+          ],
+          "L_op": 5.092958178940651,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 5.092958178940651,
+          "diff_L_op_minus_L_block": 5.092958178940651,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.25989893374455875,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.25989893374455886,
+          "diff_L_op_minus_L_block": 0.25989893374455875,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            1
+          ],
+          "L_op": 0.5197978674891176,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5197978674891175,
+          "diff_L_op_minus_L_block": 0.5197978674891176,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            2
+          ],
+          "L_op": 1.0395957349782345,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.0395957349782345,
+          "diff_L_op_minus_L_block": 1.0395957349782345,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            3
+          ],
+          "L_op": 2.079191469956469,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.0791914699564704,
+          "diff_L_op_minus_L_block": 2.079191469956469,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            -1,
+            4
+          ],
+          "L_op": 4.158382939912938,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 4.158382939912938,
+          "diff_L_op_minus_L_block": 4.158382939912938,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.27938295898088006,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.27938295898088017,
+          "diff_L_op_minus_L_block": 0.27938295898088006,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            1
+          ],
+          "L_op": 0.55876591796176,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5587659179617601,
+          "diff_L_op_minus_L_block": 0.55876591796176,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            2
+          ],
+          "L_op": 1.1175318359235198,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.1175318359235202,
+          "diff_L_op_minus_L_block": 1.1175318359235198,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "L_op": 2.23506367184704,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.2350636718470405,
+          "diff_L_op_minus_L_block": 2.23506367184704,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            0,
+            4
+          ],
+          "L_op": 4.470127343694081,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 4.470127343694079,
+          "diff_L_op_minus_L_block": 4.470127343694081,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.25989893374455875,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.25989893374455875,
+          "diff_L_op_minus_L_block": 0.25989893374455875,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            1
+          ],
+          "L_op": 0.5197978674891179,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5197978674891176,
+          "diff_L_op_minus_L_block": 0.5197978674891179,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            2
+          ],
+          "L_op": 1.0395957349782354,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.0395957349782352,
+          "diff_L_op_minus_L_block": 1.0395957349782354,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            3
+          ],
+          "L_op": 2.07919146995647,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.0791914699564695,
+          "diff_L_op_minus_L_block": 2.07919146995647,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            2,
+            1,
+            1,
+            4
+          ],
+          "L_op": 4.15838293991294,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 4.15838293991294,
+          "diff_L_op_minus_L_block": 4.15838293991294,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.45015815807855303,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.4501581580785531,
+          "diff_L_op_minus_L_block": 0.45015815807855303,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.9003163161571061,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.9003163161571064,
+          "diff_L_op_minus_L_block": 0.9003163161571061,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            2
+          ],
+          "L_op": 1.8006326323142121,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.8006326323142126,
+          "diff_L_op_minus_L_block": 1.8006326323142121,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            3
+          ],
+          "L_op": 3.6012652646284242,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.6012652646284256,
+          "diff_L_op_minus_L_block": 3.6012652646284242,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            0,
+            0,
+            4
+          ],
+          "L_op": 7.2025305292568484,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 7.20253052925685,
+          "diff_L_op_minus_L_block": 7.2025305292568484,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.45015815807855303,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.4501581580785532,
+          "diff_L_op_minus_L_block": 0.45015815807855303,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            1
+          ],
+          "L_op": 0.9003163161571061,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.9003163161571065,
+          "diff_L_op_minus_L_block": 0.9003163161571061,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            2
+          ],
+          "L_op": 1.8006326323142121,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.8006326323142121,
+          "diff_L_op_minus_L_block": 1.8006326323142121,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            3
+          ],
+          "L_op": 3.6012652646284242,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.6012652646284242,
+          "diff_L_op_minus_L_block": 3.6012652646284242,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            -1,
+            4
+          ],
+          "L_op": 7.2025305292568484,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 7.202530529256849,
+          "diff_L_op_minus_L_block": 7.2025305292568484,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.36755259694786135,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.36755259694786147,
+          "diff_L_op_minus_L_block": 0.36755259694786135,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            1
+          ],
+          "L_op": 0.7351051938957227,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.7351051938957229,
+          "diff_L_op_minus_L_block": 0.7351051938957227,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            2
+          ],
+          "L_op": 1.4702103877914454,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.4702103877914456,
+          "diff_L_op_minus_L_block": 1.4702103877914454,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            3
+          ],
+          "L_op": 2.940420775582891,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.940420775582891,
+          "diff_L_op_minus_L_block": 2.940420775582891,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            0,
+            4
+          ],
+          "L_op": 5.880841551165782,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 5.8808415511657826,
+          "diff_L_op_minus_L_block": 5.880841551165782,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.45015815807855303,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.45015815807855314,
+          "diff_L_op_minus_L_block": 0.45015815807855303,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            1
+          ],
+          "L_op": 0.9003163161571061,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.9003163161571061,
+          "diff_L_op_minus_L_block": 0.9003163161571061,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            2
+          ],
+          "L_op": 1.8006326323142121,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.8006326323142123,
+          "diff_L_op_minus_L_block": 1.8006326323142121,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            3
+          ],
+          "L_op": 3.6012652646284242,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.6012652646284242,
+          "diff_L_op_minus_L_block": 3.6012652646284242,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            1,
+            1,
+            4
+          ],
+          "L_op": 7.2025305292568484,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 7.20253052925685,
+          "diff_L_op_minus_L_block": 7.2025305292568484,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            0
+          ],
+          "L_op": 0.45015815807855303,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.4501581580785531,
+          "diff_L_op_minus_L_block": 0.45015815807855303,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            1
+          ],
+          "L_op": 0.9003163161571061,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.900316316157106,
+          "diff_L_op_minus_L_block": 0.9003163161571061,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            2
+          ],
+          "L_op": 1.8006326323142121,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.8006326323142121,
+          "diff_L_op_minus_L_block": 1.8006326323142121,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            3
+          ],
+          "L_op": 3.6012652646284242,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.6012652646284247,
+          "diff_L_op_minus_L_block": 3.6012652646284242,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -2,
+            4
+          ],
+          "L_op": 7.2025305292568484,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 7.2025305292568484,
+          "diff_L_op_minus_L_block": 7.2025305292568484,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            0
+          ],
+          "L_op": 0.4026336968358963,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.40263369683589634,
+          "diff_L_op_minus_L_block": 0.4026336968358963,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            1
+          ],
+          "L_op": 0.8052673936717926,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.8052673936717926,
+          "diff_L_op_minus_L_block": 0.8052673936717926,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            2
+          ],
+          "L_op": 1.6105347873435851,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.6105347873435854,
+          "diff_L_op_minus_L_block": 1.6105347873435851,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            3
+          ],
+          "L_op": 3.2210695746871703,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.2210695746871707,
+          "diff_L_op_minus_L_block": 3.2210695746871703,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            -1,
+            4
+          ],
+          "L_op": 6.4421391493743405,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 6.4421391493743405,
+          "diff_L_op_minus_L_block": 6.4421391493743405,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            0
+          ],
+          "L_op": 0.34869100987952834,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.34869100987952845,
+          "diff_L_op_minus_L_block": 0.34869100987952834,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            1
+          ],
+          "L_op": 0.6973820197590567,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.697382019759057,
+          "diff_L_op_minus_L_block": 0.6973820197590567,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            2
+          ],
+          "L_op": 1.3947640395181133,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.3947640395181138,
+          "diff_L_op_minus_L_block": 1.3947640395181133,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            3
+          ],
+          "L_op": 2.7895280790362267,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.789528079036227,
+          "diff_L_op_minus_L_block": 2.7895280790362267,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            0,
+            4
+          ],
+          "L_op": 5.579056158072453,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 5.579056158072455,
+          "diff_L_op_minus_L_block": 5.579056158072453,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "L_op": 0.4026336968358963,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.40263369683589634,
+          "diff_L_op_minus_L_block": 0.4026336968358963,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            1
+          ],
+          "L_op": 0.8052673936717926,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.8052673936717929,
+          "diff_L_op_minus_L_block": 0.8052673936717926,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            2
+          ],
+          "L_op": 1.6105347873435851,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.6105347873435858,
+          "diff_L_op_minus_L_block": 1.6105347873435851,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            3
+          ],
+          "L_op": 3.2210695746871703,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.221069574687171,
+          "diff_L_op_minus_L_block": 3.2210695746871703,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            1,
+            4
+          ],
+          "L_op": 6.4421391493743405,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 6.442139149374341,
+          "diff_L_op_minus_L_block": 6.4421391493743405,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            0
+          ],
+          "L_op": 0.45015815807855303,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.4501581580785531,
+          "diff_L_op_minus_L_block": 0.45015815807855303,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            1
+          ],
+          "L_op": 0.9003163161571061,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.9003163161571063,
+          "diff_L_op_minus_L_block": 0.9003163161571061,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            2
+          ],
+          "L_op": 1.8006326323142121,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.8006326323142132,
+          "diff_L_op_minus_L_block": 1.8006326323142121,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            3
+          ],
+          "L_op": 3.6012652646284242,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.6012652646284256,
+          "diff_L_op_minus_L_block": 3.6012652646284242,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            3,
+            2,
+            2,
+            4
+          ],
+          "L_op": 7.2025305292568484,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 7.202530529256848,
+          "diff_L_op_minus_L_block": 7.2025305292568484,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.2250790790392765,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22507907903927657,
+          "diff_L_op_minus_L_block": 0.2250790790392765,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.450158158078553,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.45015815807855314,
+          "diff_L_op_minus_L_block": 0.450158158078553,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            0,
+            0,
+            2
+          ],
+          "L_op": 0.900316316157106,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.9003163161571061,
+          "diff_L_op_minus_L_block": 0.900316316157106,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            0,
+            0,
+            3
+          ],
+          "L_op": 1.800632632314212,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.8006326323142126,
+          "diff_L_op_minus_L_block": 1.800632632314212,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            0,
+            0,
+            4
+          ],
+          "L_op": 3.601265264628424,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.6012652646284247,
+          "diff_L_op_minus_L_block": 3.601265264628424,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.20546814802049995,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.20546814802049998,
+          "diff_L_op_minus_L_block": 0.20546814802049995,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            -1,
+            1
+          ],
+          "L_op": 0.4109362960409999,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.41093629604099996,
+          "diff_L_op_minus_L_block": 0.4109362960409999,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            -1,
+            2
+          ],
+          "L_op": 0.8218725920819998,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.821872592082,
+          "diff_L_op_minus_L_block": 0.8218725920819998,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            -1,
+            3
+          ],
+          "L_op": 1.6437451841639996,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.6437451841639994,
+          "diff_L_op_minus_L_block": 1.6437451841639996,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            -1,
+            4
+          ],
+          "L_op": 3.2874903683279992,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.2874903683280006,
+          "diff_L_op_minus_L_block": 3.2874903683279992,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.16776404034829018,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.16776404034829023,
+          "diff_L_op_minus_L_block": 0.16776404034829018,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            0,
+            1
+          ],
+          "L_op": 0.33552808069658036,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.3355280806965804,
+          "diff_L_op_minus_L_block": 0.33552808069658036,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            0,
+            2
+          ],
+          "L_op": 0.6710561613931607,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.6710561613931608,
+          "diff_L_op_minus_L_block": 0.6710561613931607,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            0,
+            3
+          ],
+          "L_op": 1.3421123227863214,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.3421123227863216,
+          "diff_L_op_minus_L_block": 1.3421123227863214,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            0,
+            4
+          ],
+          "L_op": 2.684224645572643,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.6842246455726437,
+          "diff_L_op_minus_L_block": 2.684224645572643,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.20546814802049995,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.20546814802049998,
+          "diff_L_op_minus_L_block": 0.20546814802049995,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            1,
+            1
+          ],
+          "L_op": 0.4109362960409999,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.4109362960409999,
+          "diff_L_op_minus_L_block": 0.4109362960409999,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            1,
+            2
+          ],
+          "L_op": 0.8218725920819998,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.8218725920819999,
+          "diff_L_op_minus_L_block": 0.8218725920819998,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            1,
+            3
+          ],
+          "L_op": 1.6437451841639996,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.6437451841639996,
+          "diff_L_op_minus_L_block": 1.6437451841639996,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            1,
+            1,
+            4
+          ],
+          "L_op": 3.2874903683279992,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 3.2874903683279997,
+          "diff_L_op_minus_L_block": 3.2874903683279992,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -2,
+            0
+          ],
+          "L_op": 0.15915494309189537,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.15915494309189543,
+          "diff_L_op_minus_L_block": 0.15915494309189537,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -2,
+            1
+          ],
+          "L_op": 0.31830988618379075,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.31830988618379075,
+          "diff_L_op_minus_L_block": 0.31830988618379075,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -2,
+            2
+          ],
+          "L_op": 0.6366197723675815,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.6366197723675816,
+          "diff_L_op_minus_L_block": 0.6366197723675815,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -2,
+            3
+          ],
+          "L_op": 1.273239544735163,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.2732395447351639,
+          "diff_L_op_minus_L_block": 1.273239544735163,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -2,
+            4
+          ],
+          "L_op": 2.546479089470326,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.5464790894703264,
+          "diff_L_op_minus_L_block": 2.546479089470326,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -1,
+            0
+          ],
+          "L_op": 0.1423525086834354,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.14235250868343546,
+          "diff_L_op_minus_L_block": 0.1423525086834354,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -1,
+            1
+          ],
+          "L_op": 0.2847050173668708,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.284705017366871,
+          "diff_L_op_minus_L_block": 0.2847050173668708,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -1,
+            2
+          ],
+          "L_op": 0.5694100347337416,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5694100347337416,
+          "diff_L_op_minus_L_block": 0.5694100347337416,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -1,
+            3
+          ],
+          "L_op": 1.1388200694674833,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.1388200694674835,
+          "diff_L_op_minus_L_block": 1.1388200694674833,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            -1,
+            4
+          ],
+          "L_op": 2.2776401389349665,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.277640138934967,
+          "diff_L_op_minus_L_block": 2.2776401389349665,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            0,
+            0
+          ],
+          "L_op": 0.12328088881229998,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.12328088881230001,
+          "diff_L_op_minus_L_block": 0.12328088881229998,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            0,
+            1
+          ],
+          "L_op": 0.24656177762459996,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.24656177762460005,
+          "diff_L_op_minus_L_block": 0.24656177762459996,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            0,
+            2
+          ],
+          "L_op": 0.49312355524919993,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.49312355524920015,
+          "diff_L_op_minus_L_block": 0.49312355524919993,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            0,
+            3
+          ],
+          "L_op": 0.9862471104983999,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.9862471104984001,
+          "diff_L_op_minus_L_block": 0.9862471104983999,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            0,
+            4
+          ],
+          "L_op": 1.9724942209967997,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.9724942209968002,
+          "diff_L_op_minus_L_block": 1.9724942209967997,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            1,
+            0
+          ],
+          "L_op": 0.1423525086834354,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.14235250868343544,
+          "diff_L_op_minus_L_block": 0.1423525086834354,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            1,
+            1
+          ],
+          "L_op": 0.2847050173668708,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.28470501736687087,
+          "diff_L_op_minus_L_block": 0.2847050173668708,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            1,
+            2
+          ],
+          "L_op": 0.5694100347337416,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5694100347337417,
+          "diff_L_op_minus_L_block": 0.5694100347337416,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            1,
+            3
+          ],
+          "L_op": 1.1388200694674833,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.138820069467484,
+          "diff_L_op_minus_L_block": 1.1388200694674833,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            1,
+            4
+          ],
+          "L_op": 2.2776401389349665,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.2776401389349674,
+          "diff_L_op_minus_L_block": 2.2776401389349665,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            2,
+            0
+          ],
+          "L_op": 0.15915494309189537,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.15915494309189546,
+          "diff_L_op_minus_L_block": 0.15915494309189537,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            2,
+            1
+          ],
+          "L_op": 0.31830988618379075,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.31830988618379075,
+          "diff_L_op_minus_L_block": 0.31830988618379075,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            2,
+            2
+          ],
+          "L_op": 0.6366197723675815,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.6366197723675816,
+          "diff_L_op_minus_L_block": 0.6366197723675815,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            2,
+            3
+          ],
+          "L_op": 1.273239544735163,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.2732395447351634,
+          "diff_L_op_minus_L_block": 1.273239544735163,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            2,
+            2,
+            4
+          ],
+          "L_op": 2.546479089470326,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.546479089470326,
+          "diff_L_op_minus_L_block": 2.546479089470326,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -3,
+            0
+          ],
+          "L_op": 0.15915494309189537,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.15915494309189543,
+          "diff_L_op_minus_L_block": 0.15915494309189537,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -3,
+            1
+          ],
+          "L_op": 0.31830988618379075,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.3183098861837908,
+          "diff_L_op_minus_L_block": 0.31830988618379075,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -3,
+            2
+          ],
+          "L_op": 0.6366197723675815,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.6366197723675815,
+          "diff_L_op_minus_L_block": 0.6366197723675815,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -3,
+            3
+          ],
+          "L_op": 1.273239544735163,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.2732395447351632,
+          "diff_L_op_minus_L_block": 1.273239544735163,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -3,
+            4
+          ],
+          "L_op": 2.546479089470326,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.5464790894703264,
+          "diff_L_op_minus_L_block": 2.546479089470326,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -2,
+            0
+          ],
+          "L_op": 0.1423525086834354,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.14235250868343544,
+          "diff_L_op_minus_L_block": 0.1423525086834354,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -2,
+            1
+          ],
+          "L_op": 0.2847050173668708,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.28470501736687087,
+          "diff_L_op_minus_L_block": 0.2847050173668708,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -2,
+            2
+          ],
+          "L_op": 0.5694100347337416,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5694100347337415,
+          "diff_L_op_minus_L_block": 0.5694100347337416,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -2,
+            3
+          ],
+          "L_op": 1.1388200694674833,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.1388200694674835,
+          "diff_L_op_minus_L_block": 1.1388200694674833,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -2,
+            4
+          ],
+          "L_op": 2.2776401389349665,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.2776401389349674,
+          "diff_L_op_minus_L_block": 2.2776401389349665,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -1,
+            0
+          ],
+          "L_op": 0.13504744742356595,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.13504744742356597,
+          "diff_L_op_minus_L_block": 0.13504744742356595,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -1,
+            1
+          ],
+          "L_op": 0.2700948948471319,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.27009489484713195,
+          "diff_L_op_minus_L_block": 0.2700948948471319,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -1,
+            2
+          ],
+          "L_op": 0.5401897896942638,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5401897896942639,
+          "diff_L_op_minus_L_block": 0.5401897896942638,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -1,
+            3
+          ],
+          "L_op": 1.0803795793885276,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.0803795793885278,
+          "diff_L_op_minus_L_block": 1.0803795793885276,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            -1,
+            4
+          ],
+          "L_op": 2.160759158777055,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.160759158777056,
+          "diff_L_op_minus_L_block": 2.160759158777055,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            0,
+            0
+          ],
+          "L_op": 0.11026577908435842,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.11026577908435843,
+          "diff_L_op_minus_L_block": 0.11026577908435842,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            0,
+            1
+          ],
+          "L_op": 0.22053155816871683,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.22053155816871686,
+          "diff_L_op_minus_L_block": 0.22053155816871683,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            0,
+            2
+          ],
+          "L_op": 0.44106311633743367,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.44106311633743384,
+          "diff_L_op_minus_L_block": 0.44106311633743367,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            0,
+            3
+          ],
+          "L_op": 0.8821262326748673,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.8821262326748676,
+          "diff_L_op_minus_L_block": 0.8821262326748673,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            0,
+            4
+          ],
+          "L_op": 1.7642524653497347,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.7642524653497356,
+          "diff_L_op_minus_L_block": 1.7642524653497347,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            1,
+            0
+          ],
+          "L_op": 0.13504744742356595,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.135047447423566,
+          "diff_L_op_minus_L_block": 0.13504744742356595,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            1,
+            1
+          ],
+          "L_op": 0.2700948948471319,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.270094894847132,
+          "diff_L_op_minus_L_block": 0.2700948948471319,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            1,
+            2
+          ],
+          "L_op": 0.5401897896942638,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5401897896942638,
+          "diff_L_op_minus_L_block": 0.5401897896942638,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            1,
+            3
+          ],
+          "L_op": 1.0803795793885276,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.0803795793885278,
+          "diff_L_op_minus_L_block": 1.0803795793885276,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            1,
+            4
+          ],
+          "L_op": 2.160759158777055,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.1607591587770556,
+          "diff_L_op_minus_L_block": 2.160759158777055,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            2,
+            0
+          ],
+          "L_op": 0.1423525086834354,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.14235250868343544,
+          "diff_L_op_minus_L_block": 0.1423525086834354,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            2,
+            1
+          ],
+          "L_op": 0.2847050173668708,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.28470501736687087,
+          "diff_L_op_minus_L_block": 0.2847050173668708,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            2,
+            2
+          ],
+          "L_op": 0.5694100347337416,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.5694100347337416,
+          "diff_L_op_minus_L_block": 0.5694100347337416,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            2,
+            3
+          ],
+          "L_op": 1.1388200694674833,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.1388200694674835,
+          "diff_L_op_minus_L_block": 1.1388200694674833,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            2,
+            4
+          ],
+          "L_op": 2.2776401389349665,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.2776401389349674,
+          "diff_L_op_minus_L_block": 2.2776401389349665,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            3,
+            0
+          ],
+          "L_op": 0.15915494309189537,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.1591549430918954,
+          "diff_L_op_minus_L_block": 0.15915494309189537,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            3,
+            1
+          ],
+          "L_op": 0.31830988618379075,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.3183098861837907,
+          "diff_L_op_minus_L_block": 0.31830988618379075,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            3,
+            2
+          ],
+          "L_op": 0.6366197723675815,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.6366197723675817,
+          "diff_L_op_minus_L_block": 0.6366197723675815,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "L_op": 1.273239544735163,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 1.273239544735163,
+          "diff_L_op_minus_L_block": 1.273239544735163,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            4,
+            3,
+            3,
+            4
+          ],
+          "L_op": 2.546479089470326,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 2.546479089470326,
+          "diff_L_op_minus_L_block": 2.546479089470326,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            0,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            0,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            0,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            0,
+            0,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            0,
+            0,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            -1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            -1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            -1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            -1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            0,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            0,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            1,
+            1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -2,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -2,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            -1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            0,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            0,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            2,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            2,
+            2,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -3,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -3,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -3,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -3,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -3,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -2,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -2,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            -1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            0,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            0,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            2,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            2,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            3,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            3,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            3,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            3,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            3,
+            3,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -4,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -4,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -4,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -4,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -4,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -3,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -3,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -3,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -3,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -3,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -2,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -2,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            -1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            0,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            0,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            0,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            0,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            0,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            1,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            1,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            1,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            1,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            1,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            2,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            2,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            2,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            2,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            2,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            3,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            3,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            3,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            3,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            3,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            4,
+            0
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            4,
+            1
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            4,
+            2
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            4,
+            3
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        },
+        {
+          "label": [
+            5,
+            4,
+            4,
+            4
+          ],
+          "L_op": 0.0,
+          "L_block": 0.0,
+          "L_block_Kplus": 0.0,
+          "L_block_Kminus": 0.0,
+          "L_cross": 0.0,
+          "diff_L_op_minus_L_block": 0.0,
+          "diff_Kplus_minus_Kminus": 0.0,
+          "J_commutator_residual": 0.0
+        }
+      ],
+      "elapsed_seconds": 38.37720584869385
+    }
+  ],
+  "axiom_checks": {
+    "a_seminorm": {
+      "status": "pass",
+      "justification": "L_block(0) = max(0, 0) = 0; for lambda*a, the commutator scales linearly so each block scales by |lambda|; max of two seminorms is a seminorm (triangle holds blockwise then for the max). Verified numerically on random samples.",
+      "note": "Pass technically (zero seminorm is a seminorm), but degenerate: L_block(a) = 0 for every a in O^L, so triangle and homogeneity hold vacuously."
+    },
+    "b_lsc": {
+      "status": "pass",
+      "justification": "L_block(a) is a max of two operator-norm-induced seminorms, each of which is lower semicontinuous on the bounded operator subspace generated by the Lipschitz subalgebra. The pointwise max of two lsc functionals is lsc. No new computational verification needed beyond (a)."
+    },
+    "c_star_closure": {
+      "status": "pass",
+      "justification": "For Hilbert-self-adjoint a (i.e. a* = a as Hilbert operators with a in O^L), [D_L, a]* = -[D_L, a*] = -[D_L, a] since [D_L, .] respects Hilbert adjoint of a when D_L is Krein-self-adjoint and a is Hilbert-self-adjoint. The operator norm is invariant under Hilbert adjoint and under multiplication by a sign. Block restriction commutes with Hilbert adjoint because P_+ is Hermitian. Hence L_block(a*) = L_block(a). Verified at the structural level by inspection."
+    },
+    "d_lichnerowicz_prerequisite": {
+      "status": "pass",
+      "justification": "On each block K^+ and K^-, [D_L, a]|_{K^pm} = P_pm [D_L, a] P_pm is a bounded Hilbert operator on the corresponding Hilbert subspace (since P_pm projects onto a Hilbert subspace where the Krein product reduces to a Hilbert inner product). Hence Paper 38 / Paper 45 L3 Lichnerowicz-style bounds apply on each block. The structural prerequisite holds; L3 is the dominant follow-on work for Sprint L3b-2b."
+    },
+    "e_berezin_compatibility": {
+      "status": "pass",
+      "justification": "Berezin image B(f) preserves K^+ and K^- (Paper 45 Lem 4.3 proof: B(f) commutes with J). Hence B(f) is block-diagonal in K^+/K^-, and the block restrictions of B(f) are well-defined Hilbert operators. L_block compatibility with Berezin map: L_block(B(f)) = max(L_block(B(f))|_K+, L_block(B(f))|_K-) is well-defined and finite for smooth f."
+    },
+    "f_k_plus_corollary": {
+      "status": "fail",
+      "justification": "Scoping memo claimed L_block restricts to Paper 45 K+-weak-form seminorm. This conflates P_+ [D_L, a] P_+ (block restriction of commutator) with [P_+ D_L P_+, P_+ a P_+] (Paper 45 K+-weak-form). These are different operators: P_+ does not commute with D_L. On the natural substrate both happen to give zero on spatial-only multipliers, but for different reasons; the propinquity bounds they produce are not equal even when both seminorms agree."
+    }
+  },
+  "axiom_check_a_full": {
+    "status": "pass",
+    "L_block_zero": 0.0,
+    "positive_homogeneity_max_residual": 0.0,
+    "triangle_inequality_max_violation": 0.0,
+    "triangle_holds": true,
+    "justification": "L_block(0) = max(0, 0) = 0; for lambda*a, the commutator scales linearly so each block scales by |lambda|; max of two seminorms is a seminorm (triangle holds blockwise then for the max). Verified numerically on random samples."
+  },
+  "summary_per_panel": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "dim_K": 48,
+      "dim_O": 42,
+      "num_generators": 42,
+      "max_diff_L_op_minus_L_block_abs": 0.22507907903927654,
+      "max_diff_L_op_minus_L_block_rel": 1.0,
+      "max_diff_Kplus_minus_Kminus_abs": 0.0,
+      "max_diff_Kplus_minus_Kminus_rel": 0.0,
+      "prop51_max_J_commutator_residual": 0.0
+    },
+    {
+      "n_max": 2,
+      "N_t": 1,
+      "dim_K": 16,
+      "dim_O": 14,
+      "num_generators": 14,
+      "max_diff_L_op_minus_L_block_abs": 0.22507907903927654,
+      "max_diff_L_op_minus_L_block_rel": 1.0,
+      "max_diff_Kplus_minus_Kminus_abs": 0.0,
+      "max_diff_Kplus_minus_Kminus_rel": 0.0,
+      "prop51_max_J_commutator_residual": 0.0
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "dim_K": 200,
+      "dim_O": 275,
+      "num_generators": 275,
+      "max_diff_L_op_minus_L_block_abs": 7.2025305292568484,
+      "max_diff_L_op_minus_L_block_rel": 1.0,
+      "max_diff_Kplus_minus_Kminus_abs": 0.0,
+      "max_diff_Kplus_minus_Kminus_rel": 0.0,
+      "prop51_max_J_commutator_residual": 0.0
+    }
+  ],
+  "paper_45_comparison": {
+    "note": "Paper 45 Lambda values depend on the joint Berezin reconstruction rate (L4) and propinquity assembly (L5), not just the per-generator Lipschitz seminorm. Sprint L3b-2a only verifies that the per-generator Lipschitz values agree between L_block (this sprint's candidate) and Paper 45's K^+-weak-form seminorm. This is task (f) of the axiom check above, and is verified by the L_block_Kplus = L_block (max of two equal arguments) result. Bit-exact bound reproduction at the Lambda level is a Sprint L3b-2d task.",
+    "paper_45_lambda": {
+      "(2,3)": 2.0746,
+      "(3,5)": 1.6101,
+      "(4,7)": 1.3223
+    }
+  },
+  "verdict": "NO-GO",
+  "verdict_reason": "L_block(a) = 0 identically on the natural chirality-doubled scalar-multiplier operator system. Mechanism: D_L decomposes as D_L_diag + D_L_off where D_L_diag = i*gamma^0 (x) d_t commutes with every generator (since [gamma^0, M^spat] = 0 by Paper 44 Prop 5.1, and [d_t, M^temp] = 0 in momentum diagonal basis), while D_L_off = i*D_GV (x) I anti-commutes with J and produces a purely off-block-diagonal commutator with every generator. Block restrictions P_+/- [D_L, a] P_+/- vanish identically. L_block is the zero seminorm; degenerate; cannot induce a Latremoliere metric on the state space. Recommended fallback: Candidate 1 (L_op = ||[D_L, a]||_op) for Sprint L3b-2b.",
+  "structural_decomposition": {
+    "D_L_diag": "i * gamma^0 (x) d_t (block-diagonal in K+/K-)",
+    "D_L_off": "i * D_GV (x) I_{N_t} (off-block-diagonal in K+/K-)",
+    "comm_J_D_L_diag": 0.0,
+    "anticomm_J_D_L_off": 0.0,
+    "max_norm_D_L_diag_commutator_with_O_L": 0.0,
+    "max_norm_off_block_block_diag_part_of_D_L_off_commutator": 0.0,
+    "witness_generator_at_2_3": "(2, 0, 0, 0)",
+    "witness_L_op": 0.225079,
+    "witness_L_block": 0.0,
+    "witness_L_block_Kplus": 0.0,
+    "witness_L_block_Kminus": 0.0,
+    "witness_cross_block_norm_pm": 0.225079,
+    "witness_cross_block_norm_mp": 0.225079
+  },
+  "axiom_pass_count": 5,
+  "axiom_fail_count": 1
+}
