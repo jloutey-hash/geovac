@@ -1,7 +1,7 @@
 # Paper 45 Pre-Submission Hardening Audit Memo
 
 **Date:** 2026-05-18
-**Paper:** `papers/standalone/paper_45_lorentzian_propinquity.tex`
+**Paper:** `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex`
 **Title:** Lorentzian propinquity convergence on truncated SU(2) × U(1)_T Krein spectral triples
 **Status entering audit:** drafted, three-pass clean compile, zero substantive LaTeX warnings
 **Verdict:** **REQUIRES_FIXES** — five citation errors (two factually wrong attribution, one wrong title, one date inconsistency, one bibliography inconsistency with Paper 38). Once fixed, **ARXIV_READY**. No scope/framing changes required. No proof gaps. Tests pass.
@@ -219,7 +219,7 @@ of the Fourier algebra of a locally compact group},
 extended version 1991.
 ```
 
-**Issue:** Paper 38 cites this differently — see `papers/standalone/paper_38_su2_propinquity_convergence.tex` line 1338–1342:
+**Issue:** Paper 38 cites this differently — see `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` line 1338–1342:
 ```
 \bibitem[Bo\.zejko \& Fendler(1991)]{bozejko_fendler1991}
 M.~Bo\.zejko and G.~Fendler,

@@ -375,6 +375,6 @@ the cleanest discriminator and is the natural next step.
 - XCWG-C Gaussian Wilson loops: `debug/xcwg_wilson_loop_scaling_memo.md`
   (witness #3; perimeter-law on free-photon kernel — XCWG-G shows that
   the perimeter law persists in the full compact regime at $n_\max \leq 3$)
-- Paper 41 v3: `papers/observations/paper_41_rule_b_wilson_u1.tex`
+- Paper 41 v3: `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex`
 - CLAUDE.md §2 entries: XCWG-D, XCWG-F (already documented); XCWG-G
   (this sprint) to be added in next sync.

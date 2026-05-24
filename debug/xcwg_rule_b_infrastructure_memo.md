@@ -9,7 +9,7 @@
 - `geovac/ihara_zeta_dirac.py` (Rule B adjacency, unchanged)
 - `geovac/dirac_matrix_elements.py` (DiracLabel, kappa_to_l, unchanged)
 - `geovac/fock_graph_hodge.py` (scalar Fock graph for comparison, unchanged)
-- `papers/observations/paper_29_ramanujan_hopf.tex` §RH-C (Rule B origin)
+- `papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex` §RH-C (Rule B origin)
 
 ---
 

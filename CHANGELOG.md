@@ -5,7 +5,95 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.26 range; CHANGELOG below jumps from v2.9.2 to v2.26.1). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30) are in `git log` commit messages but have not yet been back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
+> **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.59 range; CHANGELOG jumps from v2.9.2 to v2.26.1 to v2.49.0 to v2.59.0). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30), Lorentzian arc (v2.50–v2.58), and the modular propinquity / α-arc / F1–F6 sprints (v2.59) are in `git log` commit messages but have not been fully back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
+
+## [2.59.0] - 2026-05-23
+
+### Added — Modular propinquity arc + α-arc + W1c chemistry arc F1–F6: W1d closed at FCI level, W1e decomposed into three sub-sub-mechanisms
+
+Single-session day with ~15 sub-agent dispatches across three coordinated arcs that together produce **the most thorough structural dissection of the NaH W1c-residual binding wall to date** plus substantial new content on the math.OA modular propinquity side.
+
+#### Three arcs landed today
+
+**Modular propinquity arc (5 tracks).** Track 0 lit audit + M-X (Sturmian-FCI modular reading) + M-Y (NaH pin-state bimodule reading) + M-Z (Bethe log Lamb shift modular reading) + M-H1 (Higgs as inner-fluctuation dual modular). Headline findings: (a) Sturmian basis is a MODULE basis, not algebra basis (M-X + M-Z agree); (b) R1 gradient-Dirac is canonical via Bochner Laplacian, not a kludge (M-X); (c) **multi-focal-composition wall splits into bimodule cross-shifts (HANDLED) vs module endomorphisms (NOT HANDLED — LS-8a wall is precisely this piece) (M-Z headline)**; (d) PI's "Morita-equivalence-respecting" loose framing was wrong — "dual" in dual modular propinquity is bridge ↔ tunnel construction duality (Track 0); (e) Roothaan-autopsy vocabulary similarity is surface-level only. M-H1 negative on SM unification: H1 POSITIVE-THIN survives, no new Y constraint.
+
+**α arc (3 tracks).** α-Diagnostic confirmed M-Y bimodule prediction d_R/d_L = 3.23 (right-action dominance, factor-2 lower than M-Y's 6.7 but unambiguous), refined alkali-hydride scaling (LiH ≪ NaH ≈ KH with radial-node L²-cancellation mechanism — substantively new). α-Multi-zeta fitted physical Na 3s/3p to mixed-Slater-n multi-zeta (K=5/K=4, overlap > 0.999999, **mixed Slater-n essential — structural framework finding**, 14 new tests). α-PES Step 1 confirmed kernel differential (-0.135 Ha) but Step 2 FCI eigenvalue bit-zero shift (3.7×10⁻¹³ Ha) — surfaced what was initially named "Layer 3" of W1c.
+
+**W1c chemistry arc (F1–F6, six sprints).** Systematic dissection of the W1c residual wall on NaH:
+- **F1-P1+P2 (PARTIAL CLOSURE at max_n=2)**: combined W1c × multi-zeta lifts Na 3s FCI occupation from 0.000 to 0.981; descent depth 0.357 → 0.305 → 0.313 Ha. No internal minimum. Reveals natural occupations [1, 1] (separately-occupied, NOT bonding/antibonding partition).
+- **W1c × M-Z partition bridge sprint**: classified W1c sub-layers under M-Z partition; PROPOSED three-bucket refinement (cross-shift / basis-closable cross-shift / endomorphism) with three falsifiable predictions for F1 max_n=3.
+- **F1 max_n=3 (CLEAN NEGATIVE)**: three-bucket hypothesis FALSIFIED. P1 fails (no internal minimum at R_eq ∈ [3.0, 4.5] bohr; R_min = 2.0 bohr); P2 fails; P3 passes. Substantive new content: dominant natural orbital IS a true bonding combination (-0.698 Na 3s -0.687 H 1s ~50/50) — basis enlargement constructs the right orbital — but it's energetically unfavored. **Wall is energetic, not basis-flexibility.**
+- **F2 (KERNEL-NOT-IT with deeper structural finding)**: multipole expansion bit-faithful to 3D quadrature (max differential 2×10⁻⁵ Ha, 6-10 orders below wall depth). **Wall localized to ARCHITECTURAL ABSENCE**: framework's `composed_qubit.build_composed_hamiltonian` constructs h1 strictly block-diagonal; cross-block element ⟨Na 3s | V_ne | H 1s⟩ that should drive bonding-orbital h1 splitting **doesn't exist in the architecture**. New sub-layer named: **W1d-cross-block-h1**.
+- **F3 (W1d CLOSED at FCI level + W1e NEWLY NAMED)**: new module `geovac/cross_block_h1.py` (~437 lines, 18 tests). Cross-block h1 extension lifts FCI natural occupations from [1.000, 1.000] to **[1.9991, 0.0007]** (four-orders-of-magnitude structural advance — doubly-occupied bonding orbital with 50/50 Na/H mix). h1 eigenspectrum: lowest eigenvector character FLIPS from antibonding to bonding. But $D_e^\text{F3}$ = +4.37 Ha at $R_\min$ = 2.0 bohr (58× experimental); cross-block h1 over-binds without opposing Pauli repulsion. **W1e (inner-region overattraction) NAMED**.
+- **F4 (W1e REFRAMED — STOP at Step 1)**: bonding-orbital PK extension. Step 1 algebraic + FCI sensitivity test: bonding/Na 2s core overlap 17.5% but PK barrier only 0.194 Ha; even at saturation, closure asymptotes at 43%. **W1e is NOT single-particle Pauli orthogonality; it's multi-determinant FCI correlation that rank-1 PK cannot suppress.**
+- **F5 (W1e REFINED — STOP at Step 1)**: explicit core electrons in FCI via cross-block 2-body Coulomb J−K. Predicted correction = +1.123 Ha (right sign, repulsive) but only **25.7% closure** of 4.37 Ha wall. **W1e is "deep correlation beyond Hartree-level core-bonding J−K interaction"** — mean-field is structurally insufficient.
+- **F6 (W1e DECOMPOSED into three sub-sub-mechanisms)**: NaH max_n=4 with full F3 stack. **10.2% PES-derived closure** (vs misleading 26.1% 2-point gate reading). **Methodological finding: 2-pt gate overestimates closure by 2.5× vs PES well depth** — flag for future sprint quick-gates. **W1e = W1e-basis-truncation (~10% ceiling, F6) + W1e-Hartree-pressure (~25% ceiling, F5) + W1e-deep-correlation-residual (~65–90% of wall, OPEN — requires multi-week+ architectural lift such as Schmidt orthogonalization, DMRG-class, or explicit correlation factors).**
+
+#### Updated W1c wall taxonomy (current as of F6)
+
+| Sub-layer | Status | Sprint |
+|:----------|:-------|:-------|
+| W1c-cross-screening | CLOSED | Phase C-W1c |
+| W1c-multi-zeta-basis | CLOSED | α-PES architectural + F1-P1+P2 operational |
+| W1d-cross-block-h1 | **CLOSED at FCI level** | F2 named, F3 closed |
+| W1e-basis-truncation (~10% PES ceiling) | RULED OUT as standalone closure | F6 |
+| W1e-Hartree-pressure (~25% 2-pt ceiling) | RULED OUT as standalone closure | F5 |
+| W1e-single-particle-Pauli (43% saturation ceiling) | RULED OUT | F4 |
+| W1e-deep-correlation-residual | **OPEN — multi-week+ architectural target** | F6 named; Schmidt / DMRG / explicit correlation candidates |
+
+#### Three-bucket M-Z partition refinement: FALSIFIED, two-bucket stands
+
+The bridge sprint proposed adding "basis-closable cross-shift" as an intermediate bucket between cross-shift and endomorphism. F1 max_n=3 FALSIFIED this on P1. The original M-Z two-bucket partition (cross-shift / endomorphism) stands, with sharper understanding: chemistry endomorphisms include cross-V_ne kernel ENERGETICS (or rather, what the framework was missing — the cross-block matrix slot itself, named architectural-absence in F2). Architectural-absence is a third sub-category WITHIN the partition (not a contradiction): a missing matrix slot is structurally distinct from a wrong-value matrix element OR a self-deformation, but it's mitigable via architectural extension (F3 confirmed).
+
+#### Architectural deliverables (kept)
+
+- `geovac/cross_block_h1.py` — new module, 3D quadrature cross-block h1 with multi-zeta + screened-eigenvalue support (~437 lines, 18 tests)
+- `geovac/balanced_coupled.py` — extended with `cross_block_h1=False` kwarg + W1c × multi-zeta unified dispatch (NotImplementedError removed)
+- `geovac/composed_qubit.py` — extended with `cross_block_h1` passthrough
+- `geovac/cross_center_screened_vne.py` — extended with multi-zeta kwargs
+- `geovac/multi_zeta_orbitals.py` — Z=11 Na physical-fit registry added (Na 3s only; mixed Slater-n essential — BBB93/CR74 convention inadequate for screened-Schrödinger eigenstates)
+- `geovac/shibuya_wulfman.py` — multi-zeta cross-V_ne support
+- All backward-compatible (default kwargs preserve existing behavior bit-exact). Combined test regression: 150 passed + 1 skipped, zero regression across the chemistry test suite.
+
+#### Methodological + housekeeping deliverables
+
+- **Cleanup A**: fixed three pre-existing LaTeX compile failures (Papers 17 `\thanks` location, 32 + 34 unescaped `\texttt{underscore}`). New audit helper `debug/scan_unescaped_underscores.py`.
+- **Cleanup B**: fixed 11 pre-existing test-collection errors (8 estimated → 11 found). 6 files archived to `tests/_archive/superseded/`, 3 split-archive redirects, 1 mechanical kwarg fix, 1 pytest.ini config change. **Test count: 6908 collected, 0 collection errors** (was 6865 + 11 errors). Bonus: 247 stale `papers/standalone/` path replacements across 102 memo files.
+- **Sprint review at session midpoint**: PI flagged 400k tokens/sub-agent cost. Adopted three discipline practices: (1) tighter sub-agent prompts (~500-1000 words, no BACKGROUND recap), (2) main-thread judgment for small tasks, (3) memo word-count discipline (target 1500-2500 for sub-sprints, ~3000 for synthesis). Visible savings: F4 470k, F5 449k vs pre-discipline F3 514k baseline. CLAUDE.md §2 trim flagged for future cleanup sprint (largest token sink at ~75-100k loaded into every sub-agent).
+
+#### Paper edits applied (across two β sprints)
+
+Five papers extended with full F1–F6 arc:
+- **Paper 19 (Coupled Composition)**: §sec:w1c_residual replaced at F3 maturity (β-comprehensive) + appended W1e refinement subsubsection (β-update). 16 pages, three-pass clean.
+- **Paper 17 (Composed Geometries)**: §6.10 cross-references at F3 maturity + W1e refinement paragraph. 14 pages, three-pass clean.
+- **Paper 32 (Spectral Triple)**: §VIII.C Sprint M-Z addendum extended (β-comprehensive + β-update). 55 pages, three-pass clean.
+- **Paper 34 (Projection Taxonomy)**: §V.D.9 + V.D.10 + V.D.11 (W1c sub-walls, three-bucket falsified, W1e refinement). 116 pages, three-pass clean.
+- **Paper 18 (Exchange Constants)**: §III.7 master Mellin engine cross-reference (β-comprehensive). Three-pass clean.
+
+CLAUDE.md §2 development frontier extended with comprehensive F1–F6 sprint bullet at F3 maturity + F4–F6 β-update addendum. §3 dead-ends appended with five new rows: three-bucket M-Z partition (falsified), kernel-shape substitution (ruled out F2), single-particle Pauli orthogonality (ruled out F4), mean-field core J−K (ruled out F5), basis enlargement to max_n=4 alone (ruled out F6).
+
+#### Memory files
+
+New / superseded:
+- `memory/sprint_modular_propinquity_synthesis.md` — modular sprint synthesis
+- `memory/sprint_modular_alpha_arc.md` — α arc synthesis
+- `memory/sprint_w1c_full_arc_f3_closure.md` — F3-maturity comprehensive (supersedes `sprint_w1c_bridge_f1_maxn3_closure_superseded.md`)
+- `memory/sprint_w1c_arc_f4_f6_extension.md` — F4–F6 extension
+- MEMORY.md index entries added
+
+#### Recommended next directions
+
+- **Schmidt orthogonalization** (~3–4 weeks, mathematically definitive closure of W1e deep correlation)
+- **Cross-system test** (~1 week, apply F3 stack to LiH/HCl/HF/H₂O — test whether W1e is NaH-specific or generic)
+- **DMRG-class extension** (architectural transplant, multi-month)
+- **Pivot to math.OA continuation** (Schmidt orthogonalization on the bimodule basis would have math.OA dual; G4a Connes SM remains a 1–2 month sprint candidate)
+
+### Out-of-scope flagged for future cleanup
+
+- Papers 38, 40 missing microtype-disable fix (flagged by Cleanup A)
+- Paper 42 has 6 math-mode soft errors near p19
+- Production bug `geovac/rho_collapse_cache.py:348` (passes deprecated `Z_A_func`/`n_theta` kwargs; 3 test classes correctly authored but unrunnable, marked SKIP)
+- CLAUDE.md §2 trim (move historical entries to HISTORY.md; permanent token savings ~30–50k per sub-agent)
 
 ## [2.49.0] - 2026-05-18
 

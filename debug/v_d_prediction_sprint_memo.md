@@ -191,7 +191,7 @@ Per §13.8 living-document protocol for §V.D. PMs may append §V.D entries auto
 
 - `debug/v_d_prediction_sprint_memo.md` (this file)
 - `debug/data/v_d_prediction_sprint.json` (machine-readable verdicts, magnitude tables, paper-edit summary)
-- `papers/observations/paper_34_projection_taxonomy.tex` (modified: §V.D extended +2 entries, §V.C.4 refined, §V.B cross-references added)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (modified: §V.D extended +2 entries, §V.C.4 refined, §V.B cross-references added)
 
 ## §13.10 sprint plan exit criteria — all met
 

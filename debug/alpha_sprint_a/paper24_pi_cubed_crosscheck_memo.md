@@ -211,7 +211,7 @@ This is outside Paper 24 and outside the current Phase 4B–4I scope.
 
 **Cross-reference.**
 - α-EB v2 memo: `debug/alpha_sprint_a/error_budget_memo_v2.md`
-- Paper 24: `papers/core/paper_24_bargmann_segal.tex`
+- Paper 24: `papers/group3_foundations/paper_24_bargmann_segal.tex`
 - S³ SD module: `geovac/qed_vacuum_polarization.py`
-- Paper 2 §IV: `papers/conjectures/paper_2_alpha.tex`, lines 283–666
+- Paper 2 §IV: `papers/group5_qed_gauge/paper_2_alpha.tex`, lines 283–666
 - CLAUDE.md §1.7 WH1/WH5 (Sprint A register entries)

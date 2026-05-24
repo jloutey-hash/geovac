@@ -1,4 +1,12 @@
-"""Tests for Level 4 spectral angular solver (Track K).
+"""
+ARCHIVED 2026-05-23 (Cleanup Track B): Track K Jacobi spectral angular solver
+(Level4SpectralAngular, solve_angular_spectral, compute_adiabatic_curve_spectral)
+depends on compute_core_screening_analytical, which was removed from
+geovac/level4_multichannel.py in v2.7.0 (commit 8d692a0). Module import fails;
+all tests collected here are dead. Simplified level4_multichannel.py in current
+code retains only the FD pathway.
+
+Tests for Level 4 spectral angular solver (Track K).
 
 Validates the Jacobi polynomial spectral basis against the FD angular
 solver for accuracy and performance.

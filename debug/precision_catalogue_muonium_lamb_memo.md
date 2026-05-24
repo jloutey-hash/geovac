@@ -119,8 +119,8 @@ The two "LS-8a wall" contributions sum to +0.20 MHz. The two "recoil" contributi
 
 ## Provenance
 
-- **Paper 36** (`papers/observations/paper_36_bound_state_qed.tex`): one-loop hydrogen Lamb shift architecture (LS-1..LS-7 sprints).
-- **Paper 34 §III.14** (`papers/observations/paper_34_projection_taxonomy.tex`): rest-mass projection (14th projection).
+- **Paper 36** (`papers/group5_qed_gauge/paper_36_bound_state_qed.tex`): one-loop hydrogen Lamb shift architecture (LS-1..LS-7 sprints).
+- **Paper 34 §III.14** (`papers/group6_precision_observations/paper_34_projection_taxonomy.tex`): rest-mass projection (14th projection).
 - **Sprint MH Track A** (`debug/sprint_mh_track_a.py`): full Uehling kernel infrastructure, m_red → m_μ scaling on muonic H.
 - **Track 1** (`debug/precision_catalogue_muonium.py`): muonium 1S-2S framework + rest-mass rescaling at -0.11 ppm.
 - **This sprint:** completes the precision-catalogue extension to muonium fine structure / 2S-2P Lamb shift.

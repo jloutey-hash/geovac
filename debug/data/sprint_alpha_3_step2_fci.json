@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "sprint": "alpha-PES Step 2",
+    "date": "2026-05-23",
+    "R_eq_test": 3.5,
+    "R_diss_test": 10.0,
+    "max_n": 2,
+    "basis_kind": "NaH balanced FCI Q=20 2e"
+  },
+  "run_a_baseline_hydrogenic": {
+    "eq": {
+      "R": 3.5,
+      "multi_zeta": false,
+      "M": 10,
+      "Q": 20,
+      "n_electrons": 2,
+      "E_total": -169.19868228026078,
+      "V_NN_plus_E_core": -161.57328571428573,
+      "N_pauli": 239,
+      "one_norm": 191.3176829927776,
+      "h1_trace_cross_vne": -13.249502815028602,
+      "multi_zeta_diagnostics": []
+    },
+    "diss": {
+      "R": 10.0,
+      "multi_zeta": false,
+      "M": 10,
+      "Q": 20,
+      "n_electrons": 2,
+      "E_total": -164.8525458236655,
+      "V_NN_plus_E_core": -161.75900000000001,
+      "N_pauli": 239,
+      "one_norm": 176.43563103698023,
+      "h1_trace_cross_vne": -5.979079685158217,
+      "multi_zeta_diagnostics": []
+    },
+    "D_e_Ha": 4.346136456595275
+  },
+  "run_b_multizeta_physical": {
+    "eq": {
+      "R": 3.5,
+      "multi_zeta": true,
+      "M": 10,
+      "Q": 20,
+      "n_electrons": 2,
+      "E_total": -169.19868228026058,
+      "V_NN_plus_E_core": -161.57328571428573,
+      "N_pauli": 239,
+      "one_norm": 191.3176829927776,
+      "h1_trace_cross_vne": -13.192781819749179,
+      "multi_zeta_diagnostics": [
+        {
+          "sub_block": "NaH_bond_center",
+          "Z_nuc_center": 11.0,
+          "n_val_offset": 2,
+          "n_orbitals_substituted": 1,
+          "keys": [
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "diss": {
+      "R": 10.0,
+      "multi_zeta": true,
+      "M": 10,
+      "Q": 20,
+      "n_electrons": 2,
+      "E_total": -164.85254582366537,
+      "V_NN_plus_E_core": -161.75900000000001,
+      "N_pauli": 239,
+      "one_norm": 176.43563103698023,
+      "h1_trace_cross_vne": -5.978994809462543,
+      "multi_zeta_diagnostics": [
+        {
+          "sub_block": "NaH_bond_center",
+          "Z_nuc_center": 11.0,
+          "n_val_offset": 2,
+          "n_orbitals_substituted": 1,
+          "keys": [
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "D_e_Ha": 4.346136456595218
+  },
+  "differential": {
+    "delta_eq_Ha": 1.9895196601282805e-13,
+    "delta_diss_Ha": 1.4210854715202004e-13,
+    "delta_D_e_Ha": -5.684341886080802e-14
+  },
+  "verdict": "POSITIVE-BINDING",
+  "verdict_subnote": "strongly above M-Y prediction range \u2014 flag as anomalous",
+  "proceed_to_step_3": true,
+  "experimental_D_e_Ha": 0.0742
+}

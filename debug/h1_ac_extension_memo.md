@@ -243,7 +243,7 @@ Per the verdict (positive-thin), the right Paper 32 update is a **§VIII.C adden
 
 NOT a Paper 37 (the result is too thin to justify a self-contained paper; CLAUDE.md §1.5 rhetoric rule applies).
 
-The §VIII.C addendum is applied alongside this memo; see `papers/synthesis/paper_32_spectral_triple.tex` after this commit.
+The §VIII.C addendum is applied alongside this memo; see `papers/group1_operator_algebras/paper_32_spectral_triple.tex` after this commit.
 
 ---
 

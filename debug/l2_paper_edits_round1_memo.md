@@ -6,10 +6,10 @@
 
 **Companion deliverables:**
 
-- `papers/synthesis/paper_32_spectral_triple.tex` (+~280 lines new content; ~10 lines preamble fix)
-- `papers/observations/paper_34_projection_taxonomy.tex` (+~35 lines; +1 row status update)
-- `papers/core/paper_18_exchange_constants.tex` (+~25 lines)
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` (+~40 lines)
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (+~280 lines new content; ~10 lines preamble fix)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (+~35 lines; +1 row status update)
+- `papers/group3_foundations/paper_18_exchange_constants.tex` (+~25 lines)
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` (+~40 lines)
 - `CLAUDE.md` (+3 sprint bullets in §2, ~1 sentence appended to §1.7 WH1 entry)
 
 **Source memos and data consumed:**
@@ -25,7 +25,7 @@
 
 ### Edit 1: Paper 32 §IV — Connes axiom audit table extended to (m, n) = (4, 6) Lorentzian columns
 
-**File:** `papers/synthesis/paper_32_spectral_triple.tex` lines ~1080–1180 (around the existing `\subsection{Summary}` block, before `\begin{theorem}[Rigorous identification]`)
+**File:** `papers/group1_operator_algebras/paper_32_spectral_triple.tex` lines ~1080–1180 (around the existing `\subsection{Summary}` block, before `\begin{theorem}[Rigorous identification]`)
 
 **Changes:**
 - Extended the caption of `tab:axiom_audit` to clarify that it covers signature $(3, 0)$ and to cross-reference the new Lorentzian-extension table.
@@ -40,7 +40,7 @@
 
 ### Edit 2: Paper 32 §VIII.E — Three new subsections L2-B, L2-C, L2-D
 
-**File:** `papers/synthesis/paper_32_spectral_triple.tex` lines ~3088–3340 (new subsections inserted after the existing `sec:lorentzian_audit_paper32` and before `sec:modular_hamiltonian_l1`)
+**File:** `papers/group1_operator_algebras/paper_32_spectral_triple.tex` lines ~3088–3340 (new subsections inserted after the existing `sec:lorentzian_audit_paper32` and before `sec:modular_hamiltonian_l1`)
 
 **Three new subsections added:**
 
@@ -58,7 +58,7 @@
 
 ### Edit 3: Paper 34 §V.E — Lorentzian transfer audit refinement
 
-**File:** `papers/observations/paper_34_projection_taxonomy.tex` lines ~5722, ~5755 (existing §V.E `sec:lorentzian_transfer_audit`)
+**File:** `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` lines ~5722, ~5755 (existing §V.E `sec:lorentzian_transfer_audit`)
 
 **Changes:**
 
@@ -72,7 +72,7 @@
 
 ### Edit 4: Paper 18 §III.7 — Master Mellin engine sectional-convention sharpening
 
-**File:** `papers/core/paper_18_exchange_constants.tex` lines ~957–981 (inserted between "Mechanism-as-domain sharpening" paragraph and "Discrete $c_1$ verification" paragraph)
+**File:** `papers/group3_foundations/paper_18_exchange_constants.tex` lines ~957–981 (inserted between "Mechanism-as-domain sharpening" paragraph and "Discrete $c_1$ verification" paragraph)
 
 **Changes:** Added `\paragraph{M3 sectional convention refinement (Sprint L2-D, May 2026)}` (~25 lines). Documents that M3's mechanism is sectional in the chosen parity convention, not in spacetime signature: the L0 prediction holds trivially under chirality-pairing but falsifies under Paper 28's $n_{\mathrm{Fock}}$-parity reading. Names the closed-form identity $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$ as the M3 access point that survives. Clarifies that the BBB sign-flip $\{J, \gamma^5\} = 0$ is a spectral-triple-axiom statement, not a vertex-parity-sum statement, and does not change the master Mellin engine domain partition itself.
 
@@ -82,7 +82,7 @@ Cross-references Paper 32 §VIII.D and Paper 28 Theorem 3 (via existing `\cite{l
 
 ### Edit 5: Paper 42 §10 — Open Question O1 progress update
 
-**File:** `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` lines ~1568–1620 (extending the existing `(O1) Lorentzian extension at signature (3, 1)` block)
+**File:** `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` lines ~1568–1620 (extending the existing `(O1) Lorentzian extension at signature (3, 1)` block)
 
 **Changes:** Added an `\emph{Progress update (Sprints L2-B/C/D, 2026-05-16)}` block (~40 lines). Documents that the Hilbert-space and Lorentzian-Dirac levels of the $(3, 1)$ extension have landed:
 - L2-B Krein space (`geovac/krein_space_construction.py`) with all axioms bit-exact and load-bearing Riemannian-limit recovery passing;
@@ -198,7 +198,7 @@ The new content was checked for consistency across the four papers:
 Per CLAUDE.md §13.5 access control and §13.8 paper edit policy:
 
 - **No production code modified.** Only `.tex` files and `CLAUDE.md`.
-- **Paper 2 (`papers/observations/paper_2_alpha.tex`) not touched.** No cross-references to Paper 2 introduced by any L2-B/C/D edit.
+- **Paper 2 (`papers/group5_qed_gauge/paper_2_alpha.tex`) not touched.** No cross-references to Paper 2 introduced by any L2-B/C/D edit.
 - **Paper 38 not modified.** Cross-referenced from Paper 42 §10 update only, using the existing `\cite{paper38}` bibitem.
 - **CLAUDE.md §1.5 / §1.6 / §4 / §5 / §13 / §14 not touched.** All edits sit within PM-editable sections per §13.5.
 - **Paper 32 §IV `tab:axiom_audit` Riemannian-side rows not modified.** Only the caption was extended and a new table `tab:axiom_audit_lorentzian` added.

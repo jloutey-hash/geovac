@@ -2,7 +2,7 @@
 
 ## Scope
 Short structural remark documenting Phase 4B–4G findings added to
-`papers/conjectures/paper_2_alpha.tex`. Paper 2 kept in `conjectures/`;
+`papers/group5_qed_gauge/paper_2_alpha.tex`. Paper 2 kept in `conjectures/`;
 conjecture status preserved.
 
 ## Edits Applied
@@ -86,7 +86,7 @@ conclusion's honest assessment are untouched.
 - Matches Paper 2's existing cautious/observational voice.
 
 ## Files Modified
-- `papers/conjectures/paper_2_alpha.tex` — +15 lines (Edits 1, 2)
+- `papers/group5_qed_gauge/paper_2_alpha.tex` — +15 lines (Edits 1, 2)
 
 ## Files Created
 - `debug/data/track_alpha_phase4h/track_m_paper2_remark.md` — this note

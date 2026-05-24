@@ -1,4 +1,13 @@
 """
+ARCHIVED 2026-05-23 (Cleanup Track B): compute_vee_s3_overlap and _phi_s_orbital
+were removed from geovac/lattice_index.py in v2.7.0 (commit 8d692a0). The Slater
+F^k integrity check is now covered by tests/test_algebraic_exchange.py (which
+verifies F^0(1s,1s)=5/8 and other Slater integrals via the production algebraic
+path) and tests/test_casimir_ci.py (F^0/F^k for the FCI matrix). The S^3
+density-overlap formulation specifically is no longer in the codebase; the
+underlying Paper 7 §VI master formula remains validated by these alternate
+paths via the algebraic Slater integrals in geovac/algebraic_slater.py.
+
 Tests for V_ee as S3 density-overlap integral (Paper 7, Section VI).
 
 Verifies the master formula F0(a,b) = (4Z/pi) * integral_0^inf Phi_a(t)*Phi_b(t) dt

@@ -1,6 +1,6 @@
 """
 Generate publication-quality figures for Paper 15.
-Output: papers/core/paper_15_figures/{level4_coordinates,convergence_lmax,adiabatic_potential}.png
+Output: papers/group2_quantum_chemistry/paper_15_figures/{level4_coordinates,convergence_lmax,adiabatic_potential}.png
 """
 
 import numpy as np
@@ -259,4 +259,4 @@ if __name__ == '__main__':
     figure1_coordinates()
     figure2_convergence()
     figure3_adiabatic()
-    print("Done. Figures saved to papers/core/paper_15_figures/")
+    print("Done. Figures saved to papers/group2_quantum_chemistry/paper_15_figures/")

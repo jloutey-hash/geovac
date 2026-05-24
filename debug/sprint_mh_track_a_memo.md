@@ -183,9 +183,9 @@ bound-state QED.
 
 ## Sprint provenance
 
-- **Paper 36** (`papers/observations/paper_36_bound_state_qed.tex`):
+- **Paper 36** (`papers/group5_qed_gauge/paper_36_bound_state_qed.tex`):
   one-loop closure architecture (LS-1..LS-7 sprints).
-- **Paper 34** (`papers/observations/paper_34_projection_taxonomy.tex`):
+- **Paper 34** (`papers/group6_precision_observations/paper_34_projection_taxonomy.tex`):
   §III.14 rest-mass projection (one of fifteen).
 - **Phase C-W1a-physics** (`geovac/cross_register_vne.py`): cross-register
   V_eN at multi-focal lengths (Bethe-Salpeter recoil at 2.86%).

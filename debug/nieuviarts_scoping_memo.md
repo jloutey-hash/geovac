@@ -101,6 +101,6 @@ The May 9–10 Unruh + BW sprints landed the **structural-correspondence** verdi
 
 - `debug/lorentzian_literature_update_2026_05_16.md` — L1 update that flagged trigger (b)
 - `debug/lorentz_boost_scoping_memo.md` (May 2026 Track B) — original NO-GO with cost estimates this memo confirms unchanged
-- `papers/synthesis/paper_32_spectral_triple.tex` §VIII — case-exhaustion theorem and GH-convergence (Riemannian) where Lorentzian extension is named as open question, not load-bearing
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` §VIII — case-exhaustion theorem and GH-convergence (Riemannian) where Lorentzian extension is named as open question, not load-bearing
 - Bizi–Brouder–Besnard 2018, arXiv:1611.07062 — verified real, the path that remains
 - Nieuviarts arXiv:2502.18105v3, 2402.05839, 2512.15450v2 — all verified real, all carrying the even-dim restriction

@@ -554,6 +554,93 @@ def compute_cross_center_vne_element_lam(
     return -Z_nuc * total
 
 
+def _multizeta_to_poly_components(orbital) -> List[Tuple[np.ndarray, float]]:
+    """
+    Decompose a MultiZetaOrbital into a list of (poly_coeffs, alpha) pairs.
+
+    Each STO primitive chi_i(r) = N_i * r^{n_i - 1} * exp(-zeta_i r) is a
+    single polynomial-times-exponential.  The orbital is
+        R(r) = sum_i c_i * chi_i(r)
+    which is a SUM of K single-exponential terms at K decay rates zeta_i.
+    We return one (poly_coeffs, alpha) pair per primitive, with the
+    c_i * N_i factor absorbed into poly_coeffs.
+
+    Used by ``_radial_split_integral_multizeta`` (Sprint alpha-PES Step 2,
+    2026-05-23) to wire the physical-fit Na 3s / 3p multi-zeta basis into
+    the cross-V_ne split-region kernel.  The algebraic content of the
+    split-region integral (polynomial-times-exponential with incomplete-
+    gamma machinery in ``_split_integral_analytical``) is unchanged; the
+    multi-zeta extension is a sum of K_bra x K_ket pair-integrals.
+
+    Parameters
+    ----------
+    orbital : MultiZetaOrbital
+        A multi-zeta orbital from ``geovac.multi_zeta_orbitals``.
+
+    Returns
+    -------
+    components : list of (poly_coeffs, alpha)
+        Each pair represents one term exp(-alpha*r) * sum_k poly_coeffs[k] * r^k.
+        For a single STO primitive of Slater principal n, poly_coeffs has
+        nonzero entry only at index (n - 1).
+    """
+    components = []
+    for c, prim in zip(orbital.coefficients, orbital.primitives):
+        N = prim.normalization()
+        # chi(r) = N * r^{n-1} * exp(-zeta*r) so coefficient at r^{n-1} is N.
+        # The MultiZeta combination contributes c * chi(r), so coeff = c * N.
+        poly = np.zeros(prim.n)  # length n: poly_coeffs[k] for k = 0..n-1
+        poly[prim.n - 1] = c * N
+        components.append((poly, float(prim.zeta)))
+    return components
+
+
+def _radial_split_integral_multizeta(
+    orbital_bra,
+    orbital_ket,
+    L: int,
+    R_AB: float,
+) -> float:
+    """
+    Multi-zeta split-region radial integral (Sprint alpha-PES Step 2,
+    2026-05-23).
+
+    R_L = (1/R^{L+1}) int_0^R R_bra(r) R_ket(r) r^{L+2} dr
+        + R^L int_R^inf R_bra(r) R_ket(r) r^{1-L} dr,
+
+    where each R is a multi-zeta expansion sum_i c_i N_i r^{n_i - 1} e^{-zeta_i r}.
+    The product is a sum over (i, j) STO pairs, each polynomial-times-
+    single-exponential at decay rate zeta_i + zeta_j; the incomplete-gamma
+    machinery in ``_split_integral_analytical`` handles each one bit-exactly.
+
+    Parameters
+    ----------
+    orbital_bra, orbital_ket : MultiZetaOrbital
+        Multi-zeta orbitals from ``geovac.multi_zeta_orbitals``.
+    L : int
+        Multipole order.
+    R_AB : float
+        Internuclear distance (bohr).
+
+    Returns
+    -------
+    float
+        Radial split integral.
+    """
+    components_bra = _multizeta_to_poly_components(orbital_bra)
+    components_ket = _multizeta_to_poly_components(orbital_ket)
+
+    total = 0.0
+    for poly_i, alpha_i in components_bra:
+        for poly_j, alpha_j in components_ket:
+            prod_coeffs = _poly_product(poly_i, poly_j)
+            alpha_total = alpha_i + alpha_j
+            total += _split_integral_analytical(
+                prod_coeffs, alpha_total, L + 2, 1 - L, L, R_AB,
+            )
+    return total
+
+
 def _radial_split_integral_grid(
     Z_orb: float,
     n1: int, l1: int,
@@ -657,6 +744,7 @@ def compute_cross_center_vne(
     n_grid: int = 4000,
     nuc_parity: int = 1,
     direction: Optional[Tuple[float, float, float]] = None,
+    multi_zeta_basis: Optional[Dict[Tuple[int, int], object]] = None,
 ) -> np.ndarray:
     """
     Compute the full cross-center V_ne matrix for a set of orbitals.
@@ -664,7 +752,7 @@ def compute_cross_center_vne(
     Parameters
     ----------
     Z_orb : float
-        Nuclear charge for the orbital wavefunctions.
+        Nuclear charge for the orbital wavefunctions (hydrogenic baseline).
     states : list of (n, l, m) tuples
         Orbital quantum numbers.
     Z_nuc : float
@@ -684,6 +772,24 @@ def compute_cross_center_vne(
         The matrix is computed in the z-frame (nuc_parity=+1) and then
         rotated via a block-diagonal real spherical harmonic rotation
         D @ V_z @ D^T.
+    multi_zeta_basis : dict, optional
+        Optional override of the hydrogenic Z_orb radial wavefunctions
+        with multi-zeta orbital expansions.  Keyed by (n, l), valued by
+        ``MultiZetaOrbital`` instances (see ``geovac.multi_zeta_orbitals``).
+        When provided and the key (n1, l1) AND (n2, l2) are both present,
+        the radial split integral is computed via
+        ``_radial_split_integral_multizeta`` (sum of K_bra x K_ket
+        polynomial-times-exponential pair integrals) instead of the
+        single-exponential hydrogenic ``_radial_split_integral``.  Pairs
+        where only one of (n, l) has a multi-zeta override are computed
+        with the hydrogenic baseline (no mixed dispatch).  Default None
+        preserves the bit-exact hydrogenic path.
+
+        Sprint alpha-PES Step 2 (2026-05-23) named target: replace the
+        Z_orb=1 hydrogenic Na valence basis with the physical-fit
+        multi-zeta expansion from ``get_physical_valence_orbitals(11)``.
+        See ``debug/sprint_alpha_3_pes_test_memo.md`` for the M-Y
+        bimodule diagnostic motivation.
 
     Returns
     -------
@@ -696,6 +802,7 @@ def compute_cross_center_vne(
         vne_z = compute_cross_center_vne(
             Z_orb, states, Z_nuc, R_AB, L_max,
             n_grid=n_grid, nuc_parity=1, direction=None,
+            multi_zeta_basis=multi_zeta_basis,
         )
         # Build block-diagonal rotation matrix and rotate
         D = _build_block_rotation_matrix(states, direction)
@@ -719,9 +826,24 @@ def compute_cross_center_vne(
                     continue
                 key = (n1, l1, n2, l2, L)
                 if key not in radial_cache:
-                    radial_cache[key] = _radial_split_integral(
-                        Z_orb, n1, l1, n2, l2, L, R_AB, n_grid
+                    # Multi-zeta override: both (n1, l1) and (n2, l2) must
+                    # be present in multi_zeta_basis to use the multi-zeta
+                    # path.  This is conservative (no mixed dispatch).
+                    use_mz = (
+                        multi_zeta_basis is not None
+                        and (n1, l1) in multi_zeta_basis
+                        and (n2, l2) in multi_zeta_basis
                     )
+                    if use_mz:
+                        radial_cache[key] = _radial_split_integral_multizeta(
+                            multi_zeta_basis[(n1, l1)],
+                            multi_zeta_basis[(n2, l2)],
+                            L, R_AB,
+                        )
+                    else:
+                        radial_cache[key] = _radial_split_integral(
+                            Z_orb, n1, l1, n2, l2, L, R_AB, n_grid
+                        )
 
     # Build matrix
     for i, (n1, l1, m1) in enumerate(states):

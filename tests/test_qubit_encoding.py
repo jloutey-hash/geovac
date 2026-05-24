@@ -6,8 +6,18 @@ Validates:
   2. Pauli term counts match known values
   3. ERI sparsity decreases with basis size (selection rules)
   4. Max Pauli weight is bounded
-  5. Molecular (MolecularLatticeIndex) encoding works
-  6. Energy consistency: JW Hamiltonian eigenvalue matches FCI solver
+  5. Energy consistency: JW Hamiltonian eigenvalue matches FCI solver
+
+REDIRECT NOTE 2026-05-23 (Cleanup Track B): the previous version of this file
+also tested MolecularLatticeIndex encoding (TestMolecularEncoding class).
+MolecularLatticeIndex was the LCAO molecular encoding (one of the documented
+dead-end approaches in CLAUDE.md §3); the class was removed from
+geovac/lattice_index.py in v2.7.0 (commit 8d692a0) as part of the LCAO →
+natural geometry transition. The atomic LatticeIndex Jordan-Wigner pipeline
+tested here remains live. The molecular qubit encoding equivalent is now
+geovac/composed_qubit.py (separately tested in tests/test_composed_qubit.py
+and related test files). The dead TestMolecularEncoding fixture/tests were
+extracted to tests/_archive/superseded/test_qubit_encoding_molecular.py.
 
 Author: GeoVac Development Team
 Date: March 2026
@@ -19,7 +29,7 @@ import numpy as np
 
 from openfermion import jordan_wigner, get_sparse_operator
 
-from geovac.lattice_index import LatticeIndex, MolecularLatticeIndex
+from geovac.lattice_index import LatticeIndex
 from geovac.qubit_encoding import (
     JordanWignerEncoder,
     PauliAnalysis,
@@ -39,7 +49,7 @@ def he_nmax2() -> LatticeIndex:
     """He atom (Z=2, 2 electrons) at nmax=2."""
     return LatticeIndex(
         n_electrons=2, max_n=2, nuclear_charge=2,
-        vee_method='slater_full', h1_method='hybrid', fci_method='matrix',
+        vee_method='slater_full', h1_method='hybrid',
     )
 
 
@@ -48,7 +58,7 @@ def he_nmax3() -> LatticeIndex:
     """He atom (Z=2, 2 electrons) at nmax=3."""
     return LatticeIndex(
         n_electrons=2, max_n=3, nuclear_charge=2,
-        vee_method='slater_full', h1_method='hybrid', fci_method='matrix',
+        vee_method='slater_full', h1_method='hybrid',
     )
 
 
@@ -57,7 +67,7 @@ def h_nmax2() -> LatticeIndex:
     """H atom (Z=1, 1 electron) at nmax=2."""
     return LatticeIndex(
         n_electrons=1, max_n=2, nuclear_charge=1,
-        vee_method='slater_full', h1_method='hybrid', fci_method='matrix',
+        vee_method='slater_full', h1_method='hybrid',
     )
 
 
@@ -173,32 +183,9 @@ class TestEnergyConsistency:
 
 
 # --------------------------------------------------------------------------
-# Molecular encoding test
+# Molecular encoding test (REMOVED 2026-05-23, see header note;
+# archived at tests/_archive/superseded/test_qubit_encoding_molecular.py)
 # --------------------------------------------------------------------------
-
-class TestMolecularEncoding:
-    """Tests for MolecularLatticeIndex encoding."""
-
-    @pytest.fixture(scope="class")
-    def h2_mol(self) -> MolecularLatticeIndex:
-        """H2 molecule at R=1.4 bohr, nmax=2."""
-        return MolecularLatticeIndex(
-            Z_A=1, Z_B=1, nmax_A=2, nmax_B=2,
-            R=1.4, n_electrons=2, n_bridges=10,
-            vee_method='slater_full',
-        )
-
-    def test_h2_encoding(self, h2_mol: MolecularLatticeIndex) -> None:
-        """H2 molecule produces valid qubit encoding."""
-        enc = JordanWignerEncoder(h2_mol)
-        analysis = enc.analyze()
-        assert analysis.n_pauli_terms > 0
-        assert analysis.n_qubits == h2_mol.n_sp
-
-    def test_h2_nuclear_repulsion(self, h2_mol: MolecularLatticeIndex) -> None:
-        """Nuclear repulsion is automatically extracted."""
-        enc = JordanWignerEncoder(h2_mol)
-        assert enc._v_nn == pytest.approx(1.0 / 1.4, abs=1e-10)
 
 
 # --------------------------------------------------------------------------

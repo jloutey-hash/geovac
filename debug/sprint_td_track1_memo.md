@@ -6,7 +6,7 @@
 **Module:** `geovac/thermal_tensor_triple.py` (~580 lines).
 **Tests:** `tests/test_thermal_tensor_triple.py`, 36/36 passing.
 **Data:** `debug/data/sprint_td_track1.json`.
-**Paper:** `papers/observations/paper_35_time_as_projection.tex` §VIII subsection draft below.
+**Paper:** `papers/group6_precision_observations/paper_35_time_as_projection.tex` §VIII subsection draft below.
 
 ---
 
@@ -221,7 +221,7 @@ Every rational-valued result comes from a *discrete* spectral evaluation
 
 ## 8. Paper 35 §VIII subsection draft
 
-Recommended addition to `papers/observations/paper_35_time_as_projection.tex`
+Recommended addition to `papers/group6_precision_observations/paper_35_time_as_projection.tex`
 as a new §VIII "Tensor-product verification on T_{S³} ⊗ T_{S¹_β}"
 following §VII (the Refined Prediction 1 / LS-8a-renorm material):
 
@@ -341,7 +341,7 @@ tests) is the computational anchor.
 ## 9. Paper update recommendation
 
 **Recommended:** apply §VIII subsection draft above to
-`papers/observations/paper_35_time_as_projection.tex` after PI sign-off.
+`papers/group6_precision_observations/paper_35_time_as_projection.tex` after PI sign-off.
 The draft is ~150 lines of LaTeX, self-contained, and references
 existing Paper 35 §III/§V/§VII material plus Sprint MR-B and Paper 39.
 

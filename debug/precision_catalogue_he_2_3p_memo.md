@@ -133,8 +133,8 @@ The catalogue now covers:
 - `debug/precision_catalogue_he_2_3p.py` — main compute script
 - `debug/precision_catalogue_he_2_3p_memo.md` — this memo
 - `debug/data/precision_catalogue_he_2_3p.json` — full numerical results
-- `papers/observations/paper_34_projection_taxonomy.tex` — 2 §V rows + 1 §V.B row
-- `papers/core/paper_14_qubit_encoding.tex` — cross-reference paragraph
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — 2 §V rows + 1 §V.B row
+- `papers/group4_quantum_computing/paper_14_qubit_encoding.tex` — cross-reference paragraph
 - `CLAUDE.md` — §2 sprint outcome paragraph
 
 No production `geovac/` modifications. No git commits (worker fork).

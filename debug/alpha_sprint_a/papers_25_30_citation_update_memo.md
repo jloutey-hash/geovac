@@ -28,7 +28,7 @@ references is unchanged.
 
 ## 2. Paper 25 changes
 
-File: `papers/synthesis/paper_25_hopf_gauge_structure.tex`
+File: `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex`
 
 ### 2.1 In-text citation (introduction, §I)
 
@@ -112,7 +112,7 @@ IDs --- Paper 25 uses `\href` consistently for the `hyperref` style).
 
 ## 3. Paper 30 changes
 
-File: `papers/observations/paper_30_su2_wilson.tex`
+File: `papers/group5_qed_gauge/paper_30_su2_wilson.tex`
 
 ### 3.1 In-text citation (introduction, §1)
 
@@ -249,10 +249,10 @@ None detected.
 
 ## 6. Files modified
 
-- `papers/synthesis/paper_25_hopf_gauge_structure.tex`
+- `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex`
   - Lines 124--134: added positioning text (10 new lines of TeX)
   - Lines 1085--1105: added three bibliography entries
-- `papers/observations/paper_30_su2_wilson.tex`
+- `papers/group5_qed_gauge/paper_30_su2_wilson.tex`
   - Lines 116--131: added positioning text (8 new lines of TeX)
   - Lines 963--983: added three bibliography entries
 

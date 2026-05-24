@@ -201,7 +201,7 @@ about the 4th-decimal digit of the number.
 
 **Update the numerical value in Eq. (12).**
 
-Original (line 316 of `papers/observations/paper_28_qed_s3.tex`):
+Original (line 316 of `papers/group5_qed_gauge/paper_28_qed_s3.tex`):
 ```latex
 S_{\min} = 2.47953\,69980\,27334\ldots
 \label{eq:S_min_value}

@@ -362,6 +362,6 @@ prioritised.
   `debug/xcwg_rule_b_infrastructure_memo.md` §2.
 - XCWG-F monopole density: `debug/xcwg_monopole_density_memo.md`
   ($c_\rho = 9.40$ at $n_\max=2$, used for the Polyakov rate prediction).
-- Paper 41 v4 (current): `papers/observations/paper_41_rule_b_wilson_u1.tex`
+- Paper 41 v4 (current): `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex`
   §6.5 reports XCWG-G as WEAK PASS with finite-volume scope and recommends
   the $n_\max=4$ extension; v5 should add the present datum.

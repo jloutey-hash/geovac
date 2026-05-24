@@ -296,8 +296,8 @@ barrier did not close the wall as the named engineering closure for W1b.
 | `debug/pk_cross_center_nah.py` | New: 7-point NaH PES driver, 4 configs (bare / screened / PK only / both). |
 | `debug/data/pk_cross_center_nah.json` | New: PES results in machine-readable form. |
 | `debug/pk_cross_center_synthesis_memo.md` | This memo. |
-| `papers/supporting/paper_17_composed_geometries.tex` | Architectural clarification subsection (Track 2 retrospective: drift lives in `composed_diatomic.py`, balanced coupled is a different solver). |
-| `papers/observations/paper_19_coupled_composition.tex` | New subsection on W1c-residual orthogonality wall + PK cross-center engineering closure (negative result). |
+| `papers/group2_quantum_chemistry/paper_17_composed_geometries.tex` | Architectural clarification subsection (Track 2 retrospective: drift lives in `composed_diatomic.py`, balanced coupled is a different solver). |
+| `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` | New subsection on W1c-residual orthogonality wall + PK cross-center engineering closure (negative result). |
 | `CLAUDE.md` | §2 sprint outcome paragraph (post-Track-2 PK cross-center sprint). §3 row for negative engineering result. |
 
 ---

@@ -484,7 +484,7 @@ at the size-3 closed-cycle level).
 
 **Bibliography note (in-memo).** Polyakov 1977 NPB 120 429; Banks-Myerson-Kogut
 1977 NPB 129 493; Guth 1980 PRD 21 2291; DeGrand-Toussaint 1980 PRD 22 2478;
-Paper 41 v4 §VII (`papers/observations/paper_41_rule_b_wilson_u1.tex`); XCWG-F
+Paper 41 v4 §VII (`papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex`); XCWG-F
 memo `debug/xcwg_monopole_density_memo.md`; XCWG-G memo
 `debug/xcwg_full_mc_wilson_loops_memo.md`; Paper 32 §VIII (master Mellin engine,
 $4/\pi$ as M1 Hopf-base measure $\text{Vol}(S^2)/\pi^2$).

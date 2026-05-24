@@ -11,7 +11,7 @@
 - `debug/su4_rate_constant.py` — this sprint's canonical driver (rank-3 panel)
 - `debug/su4_rate_constant_finalize.py` — subleading-aware fit + verdict driver
 - `debug/data/su4_rate_constant.json` — full data dump
-- Paper 40, `papers/standalone/paper_40_unified_propinquity_convergence.tex`
+- Paper 40, `papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex`
 
 ---
 

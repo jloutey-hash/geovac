@@ -158,9 +158,9 @@ A new memory file `memory_lorentzian_l0_audit.md` capturing the partition's stru
 1. `debug/lorentzian_partition_transfer_memo.md` — persisted L3 input (created)
 2. `debug/lorentzian_l0_audit_memo.md` — this memo (created)
 3. `debug/data/lorentzian_l0_audit.json` — 28-row machine-readable table (created)
-4. `papers/core/paper_31_universal_coulomb_partition.tex` — new §8 Signature partition + §7 forward reference + bibliography additions
-5. `papers/observations/paper_34_projection_taxonomy.tex` — new §V.E Lorentzian transfer audit + §VIII open question 6 cross-reference back
-6. `papers/synthesis/paper_32_spectral_triple.tex` — new §VIII.E subsection on Lorentzian transfer audit
+4. `papers/group3_foundations/paper_31_universal_coulomb_partition.tex` — new §8 Signature partition + §7 forward reference + bibliography additions
+5. `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — new §V.E Lorentzian transfer audit + §VIII open question 6 cross-reference back
+6. `papers/group1_operator_algebras/paper_32_spectral_triple.tex` — new §VIII.E subsection on Lorentzian transfer audit
 7. `CLAUDE.md` §2 — new sprint bullet for Sprint L0
 8. `MEMORY.md` — new memory file pointer
 9. `memory/memory_lorentzian_l0_audit.md` — memory file

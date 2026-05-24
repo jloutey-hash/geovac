@@ -24,7 +24,7 @@ LaTeX compiles cleanly. The three undefined references that persist (`sec:matche
 
 ## §2. Paper 34 §III.17/18/19 identification
 
-Reading the relevant §III subsections directly (lines 608–780 of `papers/observations/paper_34_projection_taxonomy.tex`), the three new projections are well-specified at the standard five-element template (Source, Target, Variables introduced, Dimension introduced, Transcendental signature, Used in, Empirical anchor, Honest scope, Structural reading). Verdict on whether each is well-specified: **YES for all three.** Summary:
+Reading the relevant §III subsections directly (lines 608–780 of `papers/group6_precision_observations/paper_34_projection_taxonomy.tex`), the three new projections are well-specified at the standard five-element template (Source, Target, Variables introduced, Dimension introduced, Transcendental signature, Used in, Empirical anchor, Honest scope, Structural reading). Verdict on whether each is well-specified: **YES for all three.** Summary:
 
 ### §III.17 — Nuclear charge-density correction (Foldy/Friar)
 
@@ -81,7 +81,7 @@ This empirical separation matches catalogue behaviour:
 
 ### §3.1 EDIT-A — Paper 34 §VIII Lorentz-boost open question
 
-**File:** `papers/observations/paper_34_projection_taxonomy.tex`, lines 3966–4106 (the entire `\item \textbf{Lorentz boost as a candidate twentieth projection.}` block).
+**File:** `papers/group6_precision_observations/paper_34_projection_taxonomy.tex`, lines 3966–4106 (the entire `\item \textbf{Lorentz boost as a candidate twentieth projection.}` block).
 
 **Substituted Track A's synthesis-memo text (Hunt 4 framing) with Track B's refined version.** Key changes:
 
@@ -216,7 +216,7 @@ Per user directive ("If the existing text says '16th projection' referring to Br
 - **PI review items:** Three. (a) Paper 32 §VIII.D + Paper 35 §VIII.A Bisognano–Wichmann paragraphs (Track B's bonus recommendations, DEFERRED — out of explicit scope, well-specified in `debug/lorentz_boost_scoping_memo.md` §5.1/§9.1 if a future sprint wants to apply them). (b) Three pre-existing undefined references in Paper 34 (Track A's flagged item). (c) None of Track C's edits flagged for PI review beyond these.
 
 **Files modified:**
-- `papers/observations/paper_34_projection_taxonomy.tex` — §VIII Lorentz-boost entry refined; ten new `\bibitem` entries added.
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — §VIII Lorentz-boost entry refined; ten new `\bibitem` entries added.
 - `CLAUDE.md` — §6 line 504, §6 line 589, §11 lookup table updates.
 - `~/.claude/projects/.../memory/paper34_projection_taxonomy.md` — full rewrite to 19-projection state.
 

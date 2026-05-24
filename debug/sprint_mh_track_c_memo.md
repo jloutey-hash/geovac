@@ -130,7 +130,7 @@ The bigger picture remains: the framework's outer-skeleton scaling under the res
 - `debug/sprint_mh_track_b.py` (updated to use new API; Step 4c retitled)
 - `debug/sprint_mh_track_c_memo.md` (this memo)
 - `debug/data/sprint_mh_track_b.json` (re-run with new API)
-- `papers/observations/paper_34_projection_taxonomy.tex` (Track B Zemach §V row updated to note Track C operator-level upgrade)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (Track B Zemach §V row updated to note Track C operator-level upgrade)
 
 ## 10. Bottom line
 

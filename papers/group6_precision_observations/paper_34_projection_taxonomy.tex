@@ -2443,7 +2443,7 @@ Files:\ \verb|geovac/modular_hamiltonian_lorentzian.py|,
 all pass), \verb|debug/l2_e_modular_hamiltonian_lorentzian_memo.md|.
 Paper~32~\S~VIII.E.E and Paper~42~\S~11 carry the synthesis
 writeup;\ Paper~43 (Lorentzian-extension math.OA standalone, outlined
-in \texttt{papers/group1_operator_algebras/paper\_43\_lorentzian\_extension\_outline.md})
+in \verb|papers/group1_operator_algebras/paper_43_lorentzian_extension_outline.md|)
 is the natural Zenodo deposit for the standalone math.OA form.
 
 \subsection{Apparatus identity / state-side reduction}
@@ -4139,6 +4139,47 @@ Lorentzian extension to signature $(3, 1)$ via BBB Krein lift is the
 named Sprint L2 follow-up (6--12 month scale per Sprint L0 audit).
 See Paper~32~\S~VIII.F and \S~\ref{sec:proj_wick_rotation} honest-scope
 paragraph. \\
+Bekenstein--Hawking probe:\ scaling of
+$S(\rho_W) = -\mathrm{Tr}(\rho_W \log \rho_W)$ at finite $n_{\max}$ on the
+hemispheric wedge KMS state $\rho_W = e^{-K_\alpha^W}/Z$ &
+\S~\ref{sec:proj_wick_rotation} (Wick rotation) at BW canonical
+$\beta = 2\pi$;\ tests whether modular-Hamiltonian closure extends to
+BH area-law entanglement &
+clean negative on naive $S \sim n_{\max}^2$:\
+$S \approx 1.944\, \log(n_{\max}) + 0.565$, $R^2 = 0.99991$ across
+$n_{\max} \in \{2, \dots, 7\}$ & C &
+Sprint BH-Phase0 (\texttt{debug/bh\_phase0\_diagnostic\_memo.md},
+2026-05-22) tests whether the modular-Hamiltonian construction of
+Papers~42--46 carries a Bekenstein--Hawking area-law signature at
+finite cutoff.  Verdict:\ NO at the wedge KMS state level.  $S(\rho_W)$
+scales logarithmically, NOT polynomially.  Structural reading:\
+$S(\rho_W) \approx \log(n_{\mathrm{equator}})$ where
+$n_{\mathrm{equator}} = n_{\max}(n_{\max}+1)$ is the count of states
+with smallest $|m_j| = 1/2$;\ the BW canonical state is effectively
+maximally mixed on the lowest-$K_\alpha$ shell with exponentially
+suppressed higher-shell contributions.  The slope $\approx 2 =
+\dim(\partial W) = \dim S^2_{\mathrm{equator}}$ matches the boundary
+dimension, giving a Cardy--Calabrese-flavor log entropy along the
+$d = 2$ boundary, NOT a BH area-law $S \sim A/(4G)$.  Asymptotic
+limits saturate bit-exactly:\ $S(s \to 0^+) = \log(\dim W)$ and
+$S(s \to \infty) = \log(n_{\mathrm{equator}})$ at $n_{\max} = 7$.
+The $s$-parameter scan across $s \in \{0.01, \dots, 2\pi\}$ shows
+power-law exponents $\alpha \in [0.64, 0.72]$, never close to $2$ or
+$3$ --- no temperature regime produces polynomial scaling.  Structural
+implication:\ the operator-system truncation preserves the four-witness
+Wick-rotation theorem (period closure, KMS, $J^2$ signatures) but does
+NOT preserve continuum QFT vacuum entanglement.  The Bekenstein--Hawking
+area law and the modular-Hamiltonian period closure are structurally
+distinct features;\ the framework captures the latter and not the
+former.  Consistent with the structural-skeleton-scope pattern
+(Sprint H1, LS-8a, HF-3/4/5, multi-focal wall, W3).  Named follow-on
+candidate:\ \texttt{BH-Phase0-route-A} ($\sim 2$--$4$ days)
+testing the reduced density matrix of the GeoVac Dirac ground state
+on the same wedge.  The original May-16 BH scoping (Connes--Chamseddine
+spectral action on Euclidean Schwarzschild cigar with one-parameter
+$\Lambda^2 \leftrightarrow 1/G$ calibration) remains the longer-route
+alternative (8--14 weeks).  See Paper~32~\S~VIII
+\texttt{rem:bh\_phase0\_negative} for the spectral-triple-side reading. \\
 HD molecule $J=1$ deuteron quadrupole coupling
 $\chi_d \approx 224.54$~kHz (Code-Ramsey 1971;
 Komasa--Pachucki 2020 ab~initio $224.51(5)$~kHz) &
@@ -6522,6 +6563,19 @@ of single-zeta basis missing PK orthogonality &
 $\sim 10\times$ on $A_\text{hf}$ at Z=3; scales similarly for Na,
 K, Rb, Cs HFS &
 Multi-track Roothaan sprint Track~5, 2026-05-18 \\
+\S\ref{sec:conv_multifocal_bimodule} &
+Multi-focal-composition wall taxonomy (CLAUDE.md \S~1.7) &
+Single-observation reading vs.\ Hilbert $C^*$-bimodule reading
+(Latr\'emoli\`ere modular propinquity) &
+Wall splits into bimodule cross-shifts (HANDLED: HF-3 recoil, HF-4
+Zemach, HF-5 Parker--Toms, cross-register $V_{eN}$, FNS) vs.\
+module endomorphisms (NOT HANDLED: LS-8a $Z_2-1$, $\delta m$;
+Sprint H1 Yukawa; inner-factor calibration data).  \emph{Architecture
+class (iv) exposure}, framework-level structural taxonomy refinement &
+Qualitative structural finding;
+quantitative tests are LS-8a (multi-loop QED) and
+W1c Layer-3 (alkali-hydride binding) &
+Sub-sprint M-Z, 2026-05-23 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -7019,6 +7073,398 @@ the \S\ref{sec:autopsy_cs_hfs} Z\textgreater 20 cliff (also named in
 diagnostic).  Generalizes to Na ($Z=11$), K ($Z=19$), Rb ($Z=37$),
 Cs ($Z=55$) valence HFS as a precision-frontier challenge for the
 framework's atomic-spectroscopy reach.
+
+\subsubsection{Multi-focal-composition wall: bimodule cross-shifts
+vs.\ module endomorphisms (Sub-sprint M-Z, 2026-05-23)}
+\label{sec:conv_multifocal_bimodule}
+
+\textbf{Observable.}  The multi-focal-composition wall named in
+CLAUDE.md \S~1.7: five independent observables (Sprint H1 Yukawa
+selection, LS-8a multi-loop QED renormalization, HF-3 recoil, HF-4
+Zemach, HF-5 multi-loop $a_e$) hitting one structural wall on the
+framework's ability to compose multiple Fock-style projections.
+
+\textbf{Source compilations / framing perspectives.}  The
+single-observation reading (each observable a separate failure mode)
+versus the Hilbert $C^*$-bimodule reading of the modular propinquity
+literature (Latr\'emoli\`ere~2019, 2021;
+arXiv:1608.04881, arXiv:1811.04534).
+
+\textbf{Convention difference.}  Single-observation reading treats
+each instance as an independent kernel-approximation gap; the bimodule
+reading splits the wall cleanly into two structural pieces:
+\emph{bimodule cross-shifts} (the framework's production code does
+compose them: HF-3 recoil via \texttt{geovac/cross\_register\_vne.py},
+HF-4 Zemach via \texttt{geovac/magnetization\_density.py}, HF-5
+Parker--Toms first-order curvature on Dirac-$S^3$, FNS via Foldy--Friar,
+cross-register $V_{eN}$) versus \emph{module endomorphisms} (the
+framework does NOT compose them: LS-8a renormalization counterterms
+$Z_2-1$ and $\delta m$, Sprint H1 Yukawa $Y$, inner-factor calibration
+data).  The cross-shift piece is empirically handled (e.g., HF-3 at
+sub-ppm match with Bethe--Salpeter recoil); the endomorphism piece is
+the LS-8a wall precisely.  This is an architecture-class~(iv) exposure
+(framework-level structural taxonomy refinement); not a
+literature-convention mismatch in the strict sense.
+
+\textbf{Magnitude.}  Qualitative structural finding at this level.
+Quantitative tests live in the constituent sprints: LS-8a yields the
+two-loop QED renormalization gap (Paper~35 \S~VII.3 Refined Prediction~1);
+the W1c Layer~3 finding (Paper~19 \S~\ref{sec:w1c_residual}, 2026-05-23
+$\alpha$-PES test) is the most recent concrete demonstration that the
+module-endomorphism piece can be invisible at finite basis size when
+the FCI variational state does not occupy the affected subspace.
+
+\textbf{Sprint reference and closure.}
+Sub-sprint M-Z (\texttt{debug/sprint\_modular\_propinquity\_mZ\_bethe\_log\_memo.md},
+2026-05-23) surfaced the bimodule reading; the modular propinquity
+synthesis memo
+(\texttt{debug/sprint\_modular\_propinquity\_synthesis\_memo.md})
+consolidates it as the load-bearing structural finding of the
+modular sprint's chemistry-side thread.  The Track $\beta$ synthesis
+(\texttt{debug/sprint\_modular\_alpha\_arc\_synthesis\_memo.md})
+extends the consolidation with the W1c Layer~3 finding from the
+follow-on $\alpha$ arc.
+
+\subsubsection{Three-bucket M-Z partition hypothesis (basis-closable
+cross-shift as intermediate class) --- FALSIFIED via NaH max\_n=3 test}
+\label{sec:conv_three_bucket_falsified}
+
+\textbf{Observable.} The W1c $\times$ M-Z partition bridge sprint
+(\texttt{debug/sprint\_w1c\_mz\_partition\_analysis\_memo.md}, 2026-05-23)
+proposed a three-bucket refinement of the M-Z partition
+(\S\ref{sec:conv_multifocal_bimodule}): cross-shift (handled) /
+\emph{basis-closable cross-shift} (handled at sufficient basis size) /
+endomorphism (external input). The middle bucket was introduced to
+classify W1c sub-layer~3 (orbital-pair flexibility at NaH max\_n=2),
+on the reading that the bonding combination $[\text{H 1s} \pm
+\text{Na 3s}]_\pm$ is structurally a bimodule cross-shift (left+right
+linear combination in the bimodule basis) that the FCI cannot realize
+at max\_n=2 due to dimensional poverty alone.
+
+\textbf{Source compilations / framing perspectives.} Bridge sprint's
+three-bucket hypothesis (the refinement to test) vs.\ the
+original two-bucket M-Z partition (the null hypothesis). Three
+falsifiable predictions for NaH max\_n=3 were prespecified and frozen
+into \texttt{debug/data/sprint\_w1c\_mz\_partition\_predictions.json}
+before the test ran (curve-fit-audit discipline at inter-sprint scope):
+\textbf{P1} (internal PES minimum at $R_\text{eq} \in [3.0, 4.5]$~bohr),
+\textbf{P2} (binding $D_e \in [0.0375, 0.150]$~Ha within $2\times$
+experimental $D_e \approx 0.075$~Ha), \textbf{P3} (multi-zeta differential
+$\in [0.02, 0.30]$~Ha at $R_\text{eq}$).
+
+\textbf{Convention difference and verdict.} The F1 max\_n=3 sprint
+(\texttt{debug/sprint\_f1\_maxn3\_predictions\_test\_memo.md}, 2026-05-23)
+returned 1 of 3 predictions passing: P1 FAIL ($R_\text{min} = 2.0$~bohr,
+the smallest tested R, on the exact falsification criterion); P2 FAIL
+(spurious-binding descent depth $D_e^\text{PES} = +0.7097$~Ha, $\sim 10\times$
+experimental); P3 PASS (multi-zeta differential $0.2066$~Ha at $R = 2.0$,
+consistent with max\_n=2's $0.21$~Ha at the same $R$). \textbf{CLEAN
+NEGATIVE per the prespecified gate.} The proposed three-bucket
+refinement is falsified; the two-bucket M-Z partition stands.
+
+\textbf{Magnitude (structural finding).} The substantive new content
+the prediction test did not anticipate is the structural success /
+energetic failure split. At max\_n=3 under combined W1c+mz, the
+dominant natural orbital IS a true bonding combination:
+$\phi_\text{dom} = -0.698 \cdot \phi_\text{Na, 3s} - 0.687 \cdot
+\phi_\text{H, 1s}$ with $50/50$ amplitude$^2$ split (the 2nd NO is the
+antibonding combination). At max\_n=2 the dominant NO was 100\%
+H-localized at every architecture. \emph{The basis enlargement DID
+provide the orbital-mixing flexibility predicted by the bridge sprint.}
+But the constructed bonding orbital has higher energy than the separated
+configuration at every $R$; natural occupations remain $[1.0, 1.0]$
+(open-shell singlet), NOT $[2.0, 0.0]$ (closed-shell bond). The
+framework can BUILD the right orbital but cannot energetically PREFER
+it. Sub-layer~3 reclassifies from the bridge sprint's ``basis-closable
+cross-shift'' to ``module endomorphism (basis-irreducible at tested
+scales)'' and joins sub-layer~2 (multi-zeta basis-shape) in the
+endomorphism bucket.
+
+\textbf{Class.} This is an architecture class~(iv) exposure
+(framework-level structural taxonomy refinement), sibling to
+\S\ref{sec:conv_multifocal_bimodule} (the parent M-Z partition entry).
+The exposure is FALSIFICATION of a proposed sub-classification, not
+discovery of a new convention mismatch. It is retained in the running
+catalogue because the methodological lesson --- the structural
+success / energetic failure split is a robust new diagnostic, with
+the two-bucket partition surviving while the three-bucket refinement
+evaporates --- sharpens where chemistry endomorphisms localize in the
+M-Z framework.
+
+\textbf{Same-day refinement: F2 + F3 sharpen sub-layer~3 further.}
+F1 max\_n=3's verdict (sub-layer~3 as ``module endomorphism, basis-irreducible
+at tested scales'') is structurally correct but was further sharpened by
+two same-day same-arc follow-on sprints: F2 (cross-$V_{ne}$ kernel-shape
+diagnostic, KERNEL-NOT-IT verdict) ruled out kernel-shape substitution as
+a closure mechanism (multipole kernel bit-faithful to converged 3D
+quadrature within $\sim 10^{-5}$~Ha, six orders below wall depth) and
+discovered the framework's h1 in \texttt{composed\_qubit} is strictly
+block-diagonal --- the cross-block off-diagonal h1 slot is
+\emph{architecturally absent}, not just kernel-error-flawed. F3
+(cross-block h1 architectural extension) CLOSED W1d (the architectural
+absence named by F2) at the FCI level: naturals transform $[1.0, 1.0] \to
+[1.9991, 0.0007]$ at NaH max\_n=2 (four-orders-of-magnitude advance in
+dominant occupation signature). But F3 surfaced a new sub-layer W1e
+(inner-region overattraction): the bonding pair lacks Pauli repulsion
+against the [Ne] frozen core; PES still monotonically descending with
+$D_e^\text{F3} = 4.37$~Ha = $58\times$ experimental. \textbf{Net refined
+reading:} chemistry sub-walls split into THREE structurally distinct
+sub-categories within the two-bucket M-Z partition (cross-shift /
+endomorphism / \textbf{architectural-absence}), with architectural-absence
+sub-walls conditionally closable via architectural extension (W1d via
+\texttt{geovac/cross\_block\_h1.py}). Chemistry endomorphisms split
+further into basis-shape data (sub-layer~2, mitigable via FrozenCore +
+atomic-physics fits), kernel-energetics (F1's reading of sub-layer~3, now
+sharpened to architectural-absence + Pauli-repulsion candidates), and
+Pauli-class constraints (W1e, F4 target via bonding-orbital PK extension).
+See \S\ref{sec:conv_w1c_f2_f3} for the F2+F3 follow-on entry.
+
+\textbf{Sprint reference and closure.} W1c $\times$ M-Z bridge sprint
+(\texttt{debug/sprint\_w1c\_mz\_partition\_analysis\_memo.md}); F1
+max\_n=3 prediction test
+(\texttt{debug/sprint\_f1\_maxn3\_predictions\_test\_memo.md}); Sprint
+$\beta$-neg synthesis (F1-maturity, superseded for framing by the
+full-arc memo)
+(\texttt{debug/sprint\_beta\_neg\_synthesis\_memo.md}); F2
+architectural-absence diagnostic
+(\texttt{debug/sprint\_f2\_cross\_vne\_kernel\_memo.md}); F3 cross-block
+h1 closure
+(\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}); comprehensive
+full-arc synthesis
+(\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}). Cross-references
+Paper~19 \S\ref{sec:w1c_residual} (W1c-residual wall + F1-F2-F3 arc
+extension), CLAUDE.md~\S1.7 (multi-focal-composition wall taxonomy),
+CLAUDE.md~\S3 (dead-ends rows for the three-bucket hypothesis and
+kernel-shape substitution as W1c-residual closure mechanism), and
+\S\ref{sec:conv_multifocal_bimodule} (parent M-Z partition entry whose
+three-bucket refinement is here falsified).
+
+\subsubsection{Architectural-absence sub-category for chemistry sub-walls
+(F2 diagnosis + F3 closure of W1d; W1e newly named) --- W1d CLOSED at FCI
+level, W1e OPEN as F4 target}
+\label{sec:conv_w1c_f2_f3}
+
+\textbf{Observable.} Same-day same-arc follow-on to the three-bucket
+falsification entry above (\S\ref{sec:conv_three_bucket_falsified}): two
+sprints (F2 + F3) tightened the W1c-residual sub-layer hierarchy at NaH
+max\_n=2 beyond F1 max\_n=3's verdict. F2 (cross-$V_{ne}$ kernel-shape
+substitution diagnostic) executed a Step~1 algebraic gate before any
+production extension: five matrix elements computed via converged 3D
+quadrature vs the framework's default multipole expansion at
+$L_\text{max}=4$. Largest converged differential
+$2.0\times 10^{-5}$~Ha on the H 1s diagonal cross-$V_{ne}$ contribution
+($2.7\times 10^{-4} = 0.027\%$ of bond-energy scale 0.075~Ha). F3
+(cross-block h1 architectural extension) implemented the missing matrix
+slot: new module \texttt{geovac/cross\_block\_h1.py} ($\sim 437$~lines, 18
+new tests) computes off-diagonal h1 elements
+$\langle\psi_a^A \mid T + \sum_C (-Z_C/|r-R_C|) \mid \psi_b^B\rangle$
+between orbitals on different centers $A \neq B$ via 2D axial
+Gauss-Legendre quadrature. \texttt{build\_composed\_hamiltonian} and
+\texttt{build\_balanced\_hamiltonian} gain \texttt{cross\_block\_h1}
+kwargs; bit-exact backward compat at default \texttt{cross\_block\_h1=False}.
+
+\textbf{Source compilations / framing perspectives.} F2's diagnostic-first
+gate logic ruled out the obvious kernel-error hypothesis at six orders of
+magnitude below wall depth, ruling out kernel-shape substitution as a
+W1c-residual closure mechanism. F3's algebraic Step~1 diagnostic predicted
+strong bonding splitting (h1 lower-eigenvalue 3.46~Ha for hydrogenic and
+4.20~Ha for multi-zeta, both $\gtrsim 70\times$ the 50~mHa decision-gate
+threshold). F3 Steps~3+4 ran the production-wired FCI + mini-PES tests.
+
+\textbf{Convention difference and verdict.} F2 verdict:
+\textbf{KERNEL-NOT-IT}. The multipole expansion is bit-faithful where it
+lives; the W1c-residual wall is NOT a kernel-truncation artifact within
+the existing block-diagonal architecture. F2's substantive new content
+(\textbf{architectural-absence finding, W1d named}): the framework's h1 in
+\texttt{composed\_qubit} is strictly block-diagonal --- cross-block h1
+matrix elements for orbitals on different centers are \emph{architecturally
+absent}, not just kernel-error-flawed. F3 verdict: \textbf{PARTIAL-CLOSURE}
+--- bonding-orbital construction CLOSED at the FCI level; inner-region
+overattraction OPEN (\textbf{new sub-layer W1e}). Adding cross-block h1
+transforms FCI naturals $[1.0000, 1.0000] \to [\mathbf{1.9991},
+\mathbf{0.0007}]$ at NaH max\_n=2 R=3.5 --- four-orders-of-magnitude advance
+in the dominant natural-orbital occupation signature, with the bonding
+combination as a doubly-occupied ground state. Concurrently the h1 lowest
+eigenvector character flips from H-localized at $-0.802$~Ha to bonding
+combination Na/H = 0.51/0.49 at $-3.161$~Ha ($\sim 2.4$~Ha lower).
+
+\textbf{Magnitude (substantive structural finding).} F3 mini-PES across
+$R \in [2, 10]$~bohr is monotonically descending with $R_\text{min}=2.0$
+(smallest tested) and well depth $D_e^\text{F3} = +4.37$~Ha vs experimental
+NaH $D_e \approx 0.075$~Ha ($58\times$ too deep). Dominant NO is bonding
+(50/50 Na/H) at every R --- the cross-block h1 construction is robust across
+the full PES, not a localized feature. The new well-depth is WORSE than
+W1c+mz alone (0.69~Ha): cross-block h1 enables bonding without supplying
+opposing Pauli repulsion against the [Ne] frozen core. This is the W1e
+mechanism: 2-electron FCI on NaH max\_n=2 has NO explicit frozen-core
+electrons (the [Ne] core is a screening potential via W1c, not occupied
+orbitals); no Pauli-exclusion mechanism prevents the bonding pair from
+collapsing toward small R. Structural analog of the missing-Pauli-repulsion
+mechanism that standard Phillips-Kleinman pseudopotentials supply, but the
+framework's existing PK cross-center operates on partner-side valence
+orbital diagonal --- not on the bonding-combination orbital that
+cross-block h1 newly constructs.
+
+\textbf{Class.} This is an architecture class~(iv) exposure
+(framework-level structural taxonomy refinement) sibling to
+\S\ref{sec:conv_three_bucket_falsified} (the parent F1-arc entry) and
+\S\ref{sec:conv_multifocal_bimodule} (the grandparent M-Z partition
+entry). The exposure CONFIRMS the F2 architectural-absence diagnosis at
+the FCI level (F3) and surfaces W1e (inner-region overattraction) as a
+new structural sub-layer to be addressed by F4 (bonding-orbital PK
+extension, $\sim 1$~week). Refines the methodological lesson of
+\S\ref{sec:conv_three_bucket_falsified}: chemistry sub-walls have a
+richer sub-structure than the two-bucket M-Z partition alone captures
+--- architectural-absence sub-walls are CONDITIONALLY CLOSABLE via
+architectural extension (W1d demonstrated), and the architectural-extension
+ladder (W1c $\to$ W1c-multi-zeta $\to$ W1d $\to$ W1e?) is the chemistry-side
+analog of refinements that the QED side does not natively support
+(QED endomorphisms strictly external-input via UV-completion physics).
+
+\textbf{Sprint reference and closure.} F2 cross-$V_{ne}$ kernel-shape
+diagnostic (\texttt{debug/sprint\_f2\_cross\_vne\_kernel\_memo.md}); F3
+cross-block h1 architectural extension
+(\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}); comprehensive
+full-arc synthesis
+(\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}). Cross-references
+Paper~19 \S\ref{sec:w1c_residual} (W1c-residual wall + F1-F2-F3 arc
+extension with revised five-sub-layer hierarchy), Paper~17 \S6.10
+(composed-architecture cross-reference, updated to F3 maturity),
+Paper~32 \S VIII Sprint M-Z addendum (updated with W1d/W1e
+architectural-extension reading), CLAUDE.md~\S2 (F1-F2-F3 comprehensive
+sprint bullet), CLAUDE.md~\S3 (dead-ends rows for three-bucket hypothesis
+and kernel-shape substitution), and \S\ref{sec:conv_three_bucket_falsified}
+(parent entry).
+
+\subsubsection{W1e three-sub-sub-mechanism refinement after F4--F6
+($\beta$-update, 2026-05-23)}
+\label{sec:conv_w1e_f4_f6_refinement}
+
+\textbf{Observable.} Same-day same-arc follow-on to the F3 W1d-CLOSED
++ W1e-newly-named verdict above (\S\ref{sec:conv_w1c_f2_f3}): three
+sprints (F4, F5, F6) tested all three candidate W1e closure mechanisms
+F3 §6 had named, and refined the W1e mechanism characterization into
+a structurally distinct multi-sub-mechanism reading. \textbf{F4}
+(bonding-orbital Phillips--Kleinman extension on the F3-constructed
+bonding orbital): RULED OUT at Step~1 algebraic diagnostic +
+FCI rank-1 PK sensitivity injection. \textbf{F5} (explicit-core
+Hartree treatment of the [Ne] core electrons via $\sum_c (J - K)$):
+RULED OUT at Step~1 algebraic diagnostic. \textbf{F6} (valence
+basis enlargement to NaH max\_n=4 with full F3 stack):
+PARTIAL\_IMPROVEMENT only.
+
+\textbf{Source compilations / framing perspectives.} The three
+sprints each ran a Step~1 diagnostic before any production
+implementation, per the diagnostic-before-engineering discipline
+(CLAUDE.md §1.7, \texttt{feedback\_diagnostic\_before\_engineering.md}).
+F4 Step~1 computed bonding-core overlap from the full F3 h1
+diagonalization and ran an FCI sensitivity test injecting a rank-1
+PK shift at varying magnitudes. F5 Step~1 computed the cross-block
+2-body Coulomb correction $\sum_c (J - K)_{\text{bonding},c}$
+between the F3 bonding orbital and the five Na [Ne] core orbitals
+via Hartree mean-field plus Slater--Condon exchange. F6 executed
+full production wiring at max\_n=4 (Q=120, M=60, FCI dim 3600;
+${\sim}5$~min/single-point) across a 5-point PES.
+
+\textbf{Convention difference and verdict.}
+
+\emph{F4 verdict: RULED OUT.} Bonding orbital has substantial Na 2s
+core overlap ($|S| = 17.5\%$, well above the $5\%$ strong-gate
+threshold) but the Phillips--Kleinman barrier at strict absolute
+reference $E_v = 0$ is only $+0.194$~Ha (22$\times$ smaller than
+4.37~Ha wall depth). FCI sensitivity test injecting rank-1 PK shift
+$\Delta H = c \cdot |\text{bond}\rangle\langle\text{bond}|$ shows
+$0.05\%$ closure at the Step~1-predicted $c = +0.19$~Ha, and
+saturates at $43\%$ closure even at $c = 2.0$~Ha (10$\times$
+predicted). \textbf{W1e is NOT a single-particle Pauli-orthogonality
+wall.}
+
+\emph{F5 verdict: RULED OUT.} Hartree mean-field $J = +1.13$~Ha;
+Slater--Condon exchange $K = +0.008$~Ha; predicted correction
+$J - K = +1.12$~Ha. Right SIGN (repulsive, would lift inner-region
+collapse) but only $25.7\%$ of wall depth. Linear extrapolation
+predicts residual $D_e^\text{F5} \approx +3.25$~Ha = 43$\times$
+experimental NaH $D_e \approx 0.075$~Ha. \textbf{W1e is NOT
+addressable by Hartree-level core-bonding $J - K$ interaction
+alone.}
+
+\emph{F6 verdict: PARTIAL\_IMPROVEMENT.} At max\_n=4 with full
+F3 stack, PES well depth $D_e^\text{PES, F6} = +3.929$~Ha at
+$R_\text{min}=2.0$~bohr (smallest tested) vs F3 max\_n=2 baseline
+$D_e^\text{F3} = +4.374$~Ha --- \textbf{$10.2\%$ closure}. The
+2-point gate at R=3.5/R=10 (the standard F1/F2/F3 quick-gate) gives
+$26.1\%$ apparent closure but \textbf{this is ARTIFACTUAL}: the
+inner-region collapse continues from R=3.5 down to R=2.0 with another
+$0.696$~Ha descent the 2-point gate misses. Bonding signature
+preserved at every $R$ (dominant NO $\in [1.9971, 1.9992]$;
+Na/H amplitude $\approx 50/50$). \textbf{W1e is NOT addressable by
+basis enlargement at max\_n=4 alone.}
+
+\textbf{Magnitude (substantive structural finding).} W1e decomposes
+into three structurally INDEPENDENT sub-sub-mechanisms with
+closure ceilings:
+\begin{itemize}\setlength\itemsep{0pt}
+\item \textbf{W1e-basis-truncation:} ${\sim}10.2\%$ closure ceiling
+  at max\_n=4 PES level (F6 measured).
+\item \textbf{W1e-Hartree-pressure:} ${\sim}25.7\%$ closure ceiling
+  at max\_n=2 2-point level (F5 predicted; PES-level may be lower
+  per F6 2-pt-vs-PES caveat).
+\item \textbf{W1e-deep-correlation-residual:} ${\sim}65$--$90\%$ of
+  the wall remains beyond mean-field + single-determinant +
+  basis-enlargement architecture. Remaining closure candidates
+  (Schmidt orthogonalization, fully-correlated [Ne] cores) are
+  multi-week+ architectural investments.
+\end{itemize}
+
+\textbf{Methodological side finding: 2-point-vs-PES discrepancy.}
+F6 reveals that the 2-point gate at $R = 3.5$~bohr vs $R = 10$~bohr
+(the standard F1/F2/F3 quick-gate) \textbf{overestimates PES-derived
+closure by 2.5$\times$ on monotonically-descending PES in this
+regime}. The inner-region collapse extends below $R = 3.5$ down to
+$R_\text{min} = 2.0$ with significant additional descent
+(${\sim}0.7$~Ha at max\_n=4). Future quick-gate tests in this regime
+should use a 3-point or 5-point mini-PES with $R_\text{min}$
+unbounded below 3.5~bohr, not a 2-point differential at fixed
+reference geometry. The F3-reported $D_e^\text{F3} = +4.37$~Ha is
+itself a 2-pt value; the corresponding F3 PES well depth at
+$R_\text{min} = 2.0$ is likely larger (untested but expected by
+analogy to F6).
+
+\textbf{Class.} This is an architecture class~(iv) exposure
+(framework-level structural taxonomy refinement) sibling to
+\S\ref{sec:conv_w1c_f2_f3} (the parent F3 entry) and
+\S\ref{sec:conv_three_bucket_falsified} (the grandparent F1-arc
+entry). The exposure refines the W1e mechanism characterization from
+``missing Pauli repulsion'' (F3 working hypothesis) to ``deep
+multi-determinant correlation requiring architectural extension
+beyond mean-field + single-determinant + basis-enlargement.'' The
+three candidate closure mechanisms F3 §6 ranked by priority are now
+all empirically tested: priority~1 (F5 explicit-core Hartree) closes
+at most $25.7\%$; priority~2 (F4 bonding-orbital PK) closes at most
+$43\%$ in the FCI sensitivity test; priority~3 (F6 basis enlargement
+to max\_n=4) closes only $10.2\%$ at PES level. The remaining
+candidates not yet tested are multi-week+ architectural lifts
+(Schmidt orthogonalization at basis-construction level; fully
+correlated [Ne] cores requiring occupancy-restriction FCI
+infrastructure not present in framework).
+
+\textbf{Sprint reference and closure.} F4 bonding-orbital PK
+STOP-at-Step-1
+(\texttt{debug/sprint\_f4\_bonding\_pk\_memo.md}); F5 explicit-core
+Hartree STOP-at-Step-1
+(\texttt{debug/sprint\_f5\_explicit\_core\_memo.md}); F6 max\_n=4
+NaH PARTIAL\_IMPROVEMENT
+(\texttt{debug/sprint\_f6\_maxn4\_nah\_memo.md}); Sprint
+$\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis
+(\texttt{debug/sprint\_beta\_update\_f4f6\_memo.md}).
+Cross-references Paper~19 \S\ref{sec:w1e_refinement_f4_f6}
+(refined six-sub-layer hierarchy with the three W1e
+sub-sub-mechanisms), Paper~17 \S6.10 (composed-architecture
+cross-reference, updated to $\beta$-update F4--F6 maturity),
+Paper~32 \S VIII Sprint M-Z addendum (extended with F4--F6 refinement),
+CLAUDE.md~\S2 (F4--F6 $\beta$-update bullet appending to the
+F3-maturity baseline), CLAUDE.md~\S3 (three new dead-ends rows
+for the three ruled-out W1e closure mechanisms).
 
 \paragraph{Cross-pattern observation.}
 The exposures partition into \emph{three} structural classes.

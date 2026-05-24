@@ -736,7 +736,7 @@ are autonomous when supported by the analysis):
 
 ### §7.1 Paper 32 §VIII update
 
-`papers/synthesis/paper_32_spectral_triple.tex` — added two paragraphs:
+`papers/group1_operator_algebras/paper_32_spectral_triple.tex` — added two paragraphs:
 
 1. After Remark `rem:master_mellin_domain` (Sprint MR-A/B/C
    mechanism-as-domain partition), a new paragraph
@@ -756,7 +756,7 @@ are autonomous when supported by the analysis):
 
 ### §7.2 Paper 35 §VIII update
 
-`papers/observations/paper_35_time_as_projection.tex` — added a new
+`papers/group6_precision_observations/paper_35_time_as_projection.tex` — added a new
 subsection §VIII after `subsec:tensor_scope` titled
 "Bisognano–Wichmann reading of the temporal-window projection":
 
@@ -779,7 +779,7 @@ subsection §VIII after `subsec:tensor_scope` titled
 
 ### §7.3 Paper 34 updates
 
-`papers/observations/paper_34_projection_taxonomy.tex` — three small
+`papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — three small
 edits:
 
 1. **§III.15** (Observation/temporal-window projection) gains a footnote
@@ -845,11 +845,11 @@ priority MEDIUM-HIGH.
 - `debug/data/bisognano_wichmann_track_d_data.json` — structured data:
   literature citations with verification status, structural-identification
   claim, falsifier list, ranked forward implications, paper-update record.
-- `papers/synthesis/paper_32_spectral_triple.tex` — §VIII Remark
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` — §VIII Remark
   `rem:bisognano_wichmann_reading` added; bibliography +5 entries.
-- `papers/observations/paper_35_time_as_projection.tex` — new §VIII
+- `papers/group6_precision_observations/paper_35_time_as_projection.tex` — new §VIII
   subsection on Bisognano–Wichmann reading; bibliography +3 entries.
-- `papers/observations/paper_34_projection_taxonomy.tex` — §III.15
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — §III.15
   footnote; §V.B Hawking-$T$ row; §VIII Lorentz-boost-open-question
   paragraph extension.
 

@@ -549,11 +549,11 @@ These are recommendations to apply post-sprint, **not auto-applied edits**:
 
 ## §10. Files referenced
 
-- `papers/synthesis/paper_32_spectral_triple.tex` (Paper 32, especially
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (Paper 32, especially
   §VIII.B four-gap analysis).
-- `papers/observations/paper_30_su2_wilson.tex` (Paper 30, SU(2) Wilson;
+- `papers/group5_qed_gauge/paper_30_su2_wilson.tex` (Paper 30, SU(2) Wilson;
   YM-without-Higgs scope statement).
-- `papers/synthesis/paper_25_hopf_gauge_structure.tex` (Paper 25, U(1)
+- `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex` (Paper 25, U(1)
   Wilson; Cartan-torus reading).
 - `geovac/operator_system.py` (truncated commutative algebra).
 - `geovac/spinor_operator_system.py` (Weyl sector).

@@ -128,5 +128,5 @@ No production GeoVac code was modified.
 * Parker, L. & Toms, D. J. *Phys. Rev. D* **20**, 936 (1979) — heat-kernel curvature corrections to the Dirac anomalous moment.
 * Camporesi, R. & Higuchi, A. *J. Geom. Phys.* **20**, 1 (1996) — Dirac spectrum on $S^3$.
 * CLAUDE.md §2 (g_2 c2 verification entry, May 2026) — full curvature expansion analysis.
-* Paper 33 (`papers/observations/paper_33_qed_selection_rules.tex`) — 1+6+1 partition, $1/(4\pi)$ per-loop calibration.
-* Paper 36 (`papers/observations/paper_36_bound_state_qed.tex`) — Lamb shift one-loop closure (sub-percent), companion result to HF-2 in the bound-state QED program.
+* Paper 33 (`papers/group5_qed_gauge/paper_33_qed_selection_rules.tex`) — 1+6+1 partition, $1/(4\pi)$ per-loop calibration.
+* Paper 36 (`papers/group5_qed_gauge/paper_36_bound_state_qed.tex`) — Lamb shift one-loop closure (sub-percent), companion result to HF-2 in the bound-state QED program.

@@ -157,7 +157,7 @@ finding incommensurability where it might have expected unification.
   the unification hypothesis; this memo discharges it as PARTIAL.
 - Phase 4G memo (`debug/data/track_alpha_phase4g/`) proved the
   no-common-generator statement for K = π(B + F − Δ) formally.
-- Paper 28 `papers/observations/paper_28_qed_s3.tex` §IV states the
+- Paper 28 `papers/group5_qed_gauge/paper_28_qed_s3.tex` §IV states the
   three-axis QED taxonomy.
 - RH-J memo (`debug/spectral_chi_neg4_memo.md`) and RH-M memo
   (`debug/spectral_zero_stats_memo.md`) document T3's opposite Poisson/GUE

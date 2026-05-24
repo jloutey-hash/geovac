@@ -129,8 +129,8 @@ No production GeoVac code modified. HF-4 files untouched.
 * GeoVac Sprint LS-8a (`debug/ls8a_two_loop_self_energy_memo.md`, May 2026) — same-wall analog.
 * GeoVac Sprint LS-7 (`debug/ls7_two_loop_se_memo.md`, May 2026) — structural prefactor.
 * GeoVac Sprint HF-2 (`debug/sprint_hf_track2_memo.md`) — one-loop $a_e$ closure.
-* GeoVac Paper 35 (`papers/observations/paper_35_time_as_projection.tex`) — Prediction 1 (refined by LS-8a).
-* GeoVac Paper 18 (`papers/core/paper_18_exchange_constants.tex`) §IV — exchange-constant taxonomy (six tiers; inner-factor input added 2026-05-07).
+* GeoVac Paper 35 (`papers/group6_precision_observations/paper_35_time_as_projection.tex`) — Prediction 1 (refined by LS-8a).
+* GeoVac Paper 18 (`papers/group3_foundations/paper_18_exchange_constants.tex`) §IV — exchange-constant taxonomy (six tiers; inner-factor input added 2026-05-07).
 
 ## 11. Summary table
 

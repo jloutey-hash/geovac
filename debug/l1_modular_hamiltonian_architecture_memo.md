@@ -4,13 +4,13 @@
 **Sprint:** L1-A (architecture, no production code or paper edits)
 **Author:** L1-A architecture PM (Claude)
 **Status:** Architecture-only deliverable. Implementation by a follow-on agent gated on PI sign-off.
-**Inputs (verified):** `CLAUDE.md` §1.7 WH1 PROVEN entry + §2 Sprint TS-D / Sprint Unruh-pendant / Sprint L0; `papers/synthesis/paper_32_spectral_triple.tex` §IV (Connes axiom audit on truthful CH at finite n_max), §VIII (`thm:gh_convergence`, `rem:bisognano_wichmann_reading`, case-exhaustion theorem); `papers/observations/paper_34_projection_taxonomy.tex` §III.27 (Wick-rotation projection), §VIII (open question on operator-system-level Lorentzian extension); `papers/standalone/paper_38_su2_propinquity_convergence.tex` §5 (lemmas L1' / L2 / L3 / L4 / L5); `debug/bisognano_wichmann_track_d_memo.md` §2-3 (operator-level falsifier); `debug/lorentzian_l0_audit_memo.md` §3, §9 (M3 trivialization prediction at (3,1); Sprint L1 sequencing); existing modules `geovac/{real_structure, operator_system, connes_distance, full_dirac_operator_system, gh_convergence, berezin_reconstruction, central_fejer_su2, thermal_tensor_triple}.py`.
+**Inputs (verified):** `CLAUDE.md` §1.7 WH1 PROVEN entry + §2 Sprint TS-D / Sprint Unruh-pendant / Sprint L0; `papers/group1_operator_algebras/paper_32_spectral_triple.tex` §IV (Connes axiom audit on truthful CH at finite n_max), §VIII (`thm:gh_convergence`, `rem:bisognano_wichmann_reading`, case-exhaustion theorem); `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` §III.27 (Wick-rotation projection), §VIII (open question on operator-system-level Lorentzian extension); `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` §5 (lemmas L1' / L2 / L3 / L4 / L5); `debug/bisognano_wichmann_track_d_memo.md` §2-3 (operator-level falsifier); `debug/lorentzian_l0_audit_memo.md` §3, §9 (M3 trivialization prediction at (3,1); Sprint L1 sequencing); existing modules `geovac/{real_structure, operator_system, connes_distance, full_dirac_operator_system, gh_convergence, berezin_reconstruction, central_fejer_su2, thermal_tensor_triple}.py`.
 
 ---
 
 ## §1. What is being asked and what is being delivered
 
-Sprint L1-A is the architectural pass for the operator-level falsifier named in `papers/synthesis/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` and in `debug/bisognano_wichmann_track_d_memo.md` §3.1:
+Sprint L1-A is the architectural pass for the operator-level falsifier named in `papers/group1_operator_algebras/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` and in `debug/bisognano_wichmann_track_d_memo.md` §3.1:
 
 > *Compute the modular Hamiltonian K on T_{n_max} for a wedge-restricted Camporesi–Higuchi state and verify σ_{i·2π} = identity at finite n_max, then take the GH limit using the lemmas of Theorem `thm:gh_convergence`.*
 
@@ -337,7 +337,7 @@ How each Paper 38 lemma extends to the modular context:
 
 ## §8. Witness-specific parameter table (Question 7)
 
-Per the Sprint Unruh-pendant four-witness theorem (`debug/unruh_pendant_memo.md`, codified in `papers/synthesis/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` Unruh pendant paragraph):
+Per the Sprint Unruh-pendant four-witness theorem (`debug/unruh_pendant_memo.md`, codified in `papers/group1_operator_algebras/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` Unruh pendant paragraph):
 
 | Witness | Surface gravity κ_g | Inverse temperature β | Period statement | Wedge structure | Predicted K structure |
 |:---|:---|:---|:---|:---|:---|
@@ -400,7 +400,7 @@ Five obstructions are likely; each has a verification plan and pre-computed expe
 
 **Verification plan:** Compute K's spectrum at n_max = 2, 3, 4 and check whether its transcendental content (rationals × π powers; rationals × Catalan G; etc.) is in M1, M2, M3, or a combination. The Sprint MR-A/B/C master Mellin engine classification (`debug/mr_b_spectral_action_rate_memo.md`) provides the dictionary.
 
-**Expected outcome:** K's transcendental content is purely M1 (proportional to 2π = Vol(S^1)). This would be the framework-internal verification that the BW reading lives entirely in M1, consistent with `papers/synthesis/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading`. Any M2 or M3 content would be a surprise requiring re-interpretation.
+**Expected outcome:** K's transcendental content is purely M1 (proportional to 2π = Vol(S^1)). This would be the framework-internal verification that the BW reading lives entirely in M1, consistent with `papers/group1_operator_algebras/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading`. Any M2 or M3 content would be a surprise requiring re-interpretation.
 
 ### §10d. Wedge cutoff Gibbs phenomenon
 
@@ -430,7 +430,7 @@ The architecture is sound, but the implementation budget should be set at the up
 - **Weeks 2–3:** Verify σ_{i·2π} = id at n_max = 2 in the truthful CH path. Trace the residual against the §10a operator-system-leakage estimate. Decide between outcomes (3) / (4) / (5) of §9.
 - **Weeks 3–5:** Extend to n_max = 3, 4. Quantify GH-rate of σ_{i·2π} - id; cross-check against Paper 38 propinquity bound Λ_{n_max}. Verify witness factories (Hawking, Unruh, Sewell) reproduce expected β = 8πM / 2π/a / 8πM structures.
 - **Weeks 5–7:** Address obstructions §10b–§10e individually; for each, produce a verification script + memo subsection. Most likely outcome: §10a (operator-system leakage) requires the most attention; §10b (chirality symmetry) and §10c (M3 trivialization) become passing consistency checks; §10d (Gibbs phenomenon) and §10e (J_mod compatibility) are routine.
-- **Weeks 7–9:** Write `geovac/modular_hamiltonian.py` production module + 35–55 tests + memo + paper-edit pass on `papers/synthesis/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` and `papers/observations/paper_34_projection_taxonomy.tex` §III.27 to lift "structural correspondence" → "literal identification at finite n_max".
+- **Weeks 7–9:** Write `geovac/modular_hamiltonian.py` production module + 35–55 tests + memo + paper-edit pass on `papers/group1_operator_algebras/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` and `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` §III.27 to lift "structural correspondence" → "literal identification at finite n_max".
 
 **Caveats:**
 
@@ -441,7 +441,7 @@ The architecture is sound, but the implementation budget should be set at the up
 
 **No precursor sprint is needed.** All required infrastructure exists (truncated operator system + Avery–Wen–Avery integrals + Connes distance SDP framework + real structure J + Berezin reconstruction + central spectral Fejér kernel + thermal tensor triple). The L1-A implementation directly uses these modules.
 
-**Recommendation:** Dispatch L1-A implementation as a single agent with the 5–9 week budget. Set the falsifier verification at n_max = 2, 3, 4 as the gating exit criterion. The expected positive outcome promotes Paper 34 §III.27 and `papers/synthesis/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` from structural-correspondence to operator-system-level literal identification, which is a significant qualitative advance closing the principal Sprint L1 falsifier named in Paper 32 §VIII and in the Sprint L0 audit.
+**Recommendation:** Dispatch L1-A implementation as a single agent with the 5–9 week budget. Set the falsifier verification at n_max = 2, 3, 4 as the gating exit criterion. The expected positive outcome promotes Paper 34 §III.27 and `papers/group1_operator_algebras/paper_32_spectral_triple.tex` `rem:bisognano_wichmann_reading` from structural-correspondence to operator-system-level literal identification, which is a significant qualitative advance closing the principal Sprint L1 falsifier named in Paper 32 §VIII and in the Sprint L0 audit.
 
 ---
 

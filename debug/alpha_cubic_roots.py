@@ -9,7 +9,7 @@ Part B: One-loop QED running from the paper's α to find the scale
         where it matches CODATA α = 1/137.035999084.
 
 Reference: Paper 2 — "The Fine Structure Constant from Spectral
-Geometry of the Hopf Fibration" (papers/conjectures/paper_2_alpha.tex)
+Geometry of the Hopf Fibration" (papers/group5_qed_gauge/paper_2_alpha.tex)
 """
 
 import numpy as np

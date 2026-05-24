@@ -1,4 +1,10 @@
 """
+ARCHIVED 2026-05-23 (Cleanup Track B): Track J algebraic associated-Laguerre
+infrastructure (_build_laguerre_matrices_algebraic_associated,
+_associated_laguerre_moment_matrices, _lowered_moment_matrix, _stieltjes_matrix)
+was removed from geovac/prolate_spheroidal_lattice.py in v2.7.0 (commit 8d692a0).
+Functionality superseded by the simplified ProlateSpheroidalLattice in current code.
+
 Tests for the associated Laguerre algebraic radial solver (Track J Sub-agent 2).
 
 Validates:

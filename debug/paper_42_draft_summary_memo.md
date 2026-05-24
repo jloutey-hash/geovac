@@ -4,7 +4,7 @@
 **Sprint:** Paper 42 drafting (consolidation of Sprints L0 + L1 + L1-tighten)
 **Author:** Paper 42 drafting PM (Claude)
 **Title:** *Tomita--Takesaki modular structure on truncated $\SU(2)$ spectral triples:\ four-witness Wick-rotation literal identification at finite cutoff*
-**File:** `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex`
+**File:** `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex`
 **Status:** First draft, three-pass clean LaTeX compilation, ready for PI review.
 
 ---
@@ -179,9 +179,9 @@ The most structurally interesting is (O3), which the paper flags as a derived st
 
 ## §12. Files produced
 
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` (~2088 lines, 11,613 words, 23-page PDF, three-pass clean LaTeX, 587 KB).
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.pdf` (compiled output).
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.aux/.log/.out` (LaTeX auxiliary files).
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` (~2088 lines, 11,613 words, 23-page PDF, three-pass clean LaTeX, 587 KB).
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.pdf` (compiled output).
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.aux/.log/.out` (LaTeX auxiliary files).
 - `debug/paper_42_draft_summary_memo.md` (this memo, ~3500 words).
 
 ## §13. Recommended Zenodo / arXiv submission metadata (pending PI sign-off)

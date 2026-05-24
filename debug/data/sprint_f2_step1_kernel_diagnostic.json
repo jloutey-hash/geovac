@@ -1,0 +1,73 @@
+{
+  "sprint": "F2 Step 1 \u2014 algebraic kernel diagnostic",
+  "date": "2026-05-23",
+  "duration_s": 0.020713329315185547,
+  "R_AB_bohr": 3.566,
+  "Z_Na": 11.0,
+  "Z_H": 1.0,
+  "use_multi_zeta_for_Na3s": true,
+  "L_max_framework": 4,
+  "L_max_high": 20,
+  "matrix_elements": {
+    "A_NaA_3s__VneH__NaA_3s_diag_hydrogenic": {
+      "description": "<Na 3s_hyd | V_ne(H, R) | Na 3s_hyd>",
+      "mp_L_max_framework_Ha": -0.0911941459138875,
+      "mp_L_max_high_Ha": -0.0911941459138875,
+      "3d_quadrature_Ha": -0.0911949557487147,
+      "mp_vs_3d_diff_Ha": 8.09834827197875e-07,
+      "mp_vs_3d_relerr": 8.880259007190635e-06
+    },
+    "B_NaA_3s__VneH__NaA_4s_offdiag_hydrogenic": {
+      "description": "<Na 3s_hyd | V_ne(H, R) | Na 4s_hyd>",
+      "mp_L_max_framework_Ha": -0.02347459721399052,
+      "mp_L_max_high_Ha": -0.02347459721399052,
+      "3d_quadrature_Ha": -0.023717610720274764,
+      "mp_vs_3d_diff_Ha": 0.00024301350628424395,
+      "mp_vs_3d_relerr": 0.01024612087407718
+    },
+    "C_HB_1s__VneNa__HB_1s_diag": {
+      "description": "<H 1s | V_ne(Na, R) | H 1s>",
+      "mp_L_max_framework_Ha": -3.073433376760364,
+      "mp_L_max_high_Ha": -3.073433376760364,
+      "3d_quadrature_Ha": -3.0734534723146427,
+      "mp_vs_3d_diff_Ha": 2.0095554278842798e-05,
+      "mp_vs_3d_relerr": 6.538428012612364e-06
+    },
+    "D_HB_1s__VneNa__HB_2s_offdiag": {
+      "description": "<H 1s | V_ne(Na, R) | H 2s>",
+      "mp_L_max_framework_Ha": -0.06954534301801583,
+      "mp_L_max_high_Ha": -0.06954534301801583,
+      "3d_quadrature_Ha": -0.06956467671957194,
+      "mp_vs_3d_diff_Ha": 1.9333701556101257e-05,
+      "mp_vs_3d_relerr": 0.0002779241199386145
+    },
+    "E_NaA_3s_mz__VneH__NaA_3s_mz_diag_multi_zeta": {
+      "description": "<Na 3s_mz | V_ne(H, R) | Na 3s_mz>",
+      "mp_L_max_high_Ha": -0.22604712173365105,
+      "3d_quadrature_Ha": -0.2260409339575642,
+      "mp_vs_3d_diff_Ha": -6.187776086852281e-06,
+      "mp_vs_3d_relerr": 2.737458202156404e-05
+    }
+  },
+  "bonding_antibonding_h1_only": {
+    "hydrogenic_path": {
+      "h1_Na3s_diag_framework_Ha": -0.5911941459138875,
+      "h1_H1s_diag_framework_Ha": -3.573433376760364,
+      "h1_Na3s_diag_3d_Ha": -0.5911949557487147,
+      "h1_H1s_diag_3d_Ha": -3.5734534723146427,
+      "bonding_h1_framework_Ha": -2.082313761337126,
+      "antibonding_h1_framework_Ha": -2.082313761337126,
+      "bonding_minus_antibonding_framework_Ha": 0.0,
+      "bonding_h1_3d_Ha": -2.082324214031679,
+      "antibonding_h1_3d_Ha": -2.082324214031679,
+      "bonding_minus_antibonding_3d_Ha": 0.0
+    },
+    "multi_zeta_path": {
+      "h1_Na3s_mz_diag_framework_Ha": -0.3960471217336511,
+      "h1_Na3s_mz_diag_3d_Ha": -0.39604093395756423,
+      "bonding_h1_framework_Ha": -1.9847402492470074,
+      "bonding_h1_3d_Ha": -1.9847472031361035
+    },
+    "interpretation": "At the 2-state h1-only level in the {|Na 3s>, |H 1s>} basis, the framework has NO off-diagonal h1 cross-block element <Na 3s | V_ne | H 1s> (h1 is structurally block-diagonal in composed_qubit). Therefore h1 alone gives NO bonding-antibonding splitting in this basis -- the bonding orbital that F1 max_n=3 found is constructed by the 2-body ERIs in the FCI, not by h1 cross-coupling. The 'kernel-shape' question for h1 is therefore narrower: does multipole vs 3D-quadrature give the correct DIAGONAL cross-V_ne contributions (which set the absolute energies on each side), and does the on-site energy of the bonding-constructable combination differ enough from the separated configuration to be the bottleneck?"
+  }
+}

@@ -5,7 +5,7 @@
 **Author:** PM-dispatched research sub-agent (analytical proof attempt)
 **Status:** **PROVED-AT-ALL-RANKS** (qualitative-rate level; leading constant $c(G) = 4/\pi$ rigorous; quantitative remainder asymptotics for rank-$r \ge 2$ at the same level of rigor as Paper 38's SU(2) Step 3 Abel–Plana sketch).
 **Verdict:** Paper 40 §3.2 `thm:universal_constant` upgrades from a numerical-verification theorem to a rigorous analytical theorem at the leading-order level. The structural mechanism (rank-1 Stein–Weiss reduction along positive-root axes, with Vandermonde measure cancelling against Plancherel weight) is the substance of the proof.
-**Cross-refs:** Paper 38 Appendix A (SU(2) blueprint); `debug/r25_l2_proof_memo.md`; `debug/r25_l2_quantitative_rate_memo.md`; `debug/su3_rate_constant_memo.md`; `debug/sp2_g2_rate_constant_memo.md`; `papers/standalone/paper_40_unified_propinquity_convergence.tex` §3.2.
+**Cross-refs:** Paper 38 Appendix A (SU(2) blueprint); `debug/r25_l2_proof_memo.md`; `debug/r25_l2_quantitative_rate_memo.md`; `debug/su3_rate_constant_memo.md`; `debug/sp2_g2_rate_constant_memo.md`; `papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex` §3.2.
 
 ---
 
@@ -496,10 +496,10 @@ All work in `debug/`:
 - (No new numerical scripts needed; the rank-2 numerical data are from `debug/sp2_g2_rate_constant_memo.md` and `debug/su3_rate_constant_memo.md`.)
 
 Dependencies (read-only):
-- `papers/standalone/paper_38_su2_propinquity_convergence.tex` (Appendix A, SU(2) blueprint).
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` (Appendix A, SU(2) blueprint).
 - `debug/r25_l2_proof_memo.md` and `debug/r25_l2_quantitative_rate_memo.md` (Paper 38's internal proof memos).
 - `debug/sp2_g2_rate_constant_memo.md` and `debug/su3_rate_constant_memo.md` (rank-2 numerical verification).
-- `papers/standalone/paper_40_unified_propinquity_convergence.tex` (target paper for splice).
+- `papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex` (target paper for splice).
 
 ---
 

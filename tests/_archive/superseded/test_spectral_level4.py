@@ -1,4 +1,10 @@
 """
+ARCHIVED 2026-05-23 (Cleanup Track B): Track I Level 4 spectral Laguerre radial
+solver (solve_adiabatic_radial_spectral, solve_coupled_channel_radial_spectral,
+solve_direct_2d_spectral) was removed from geovac/level4_multichannel.py in
+v2.7.0 (commit 8d692a0). Simplified solve_level4_h2_multichannel retains only
+the FD pathway. All tests in this file reference dead spectral entry points.
+
 Tests for the Level 4 spectral Laguerre radial solver (Track I).
 
 Validates that the spectral basis reproduces FD results for the

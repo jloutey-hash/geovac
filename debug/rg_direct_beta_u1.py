@@ -67,7 +67,7 @@ References
 - geovac/qed_vacuum_polarization.py (existing infrastructure)
 - geovac/qed_self_energy.py (CH spectrum helpers)
 - geovac/dirac_s3.py (CH eigenvalues and degeneracies)
-- papers/observations/paper_28_qed_s3.tex (one-loop theorems)
+- papers/group5_qed_gauge/paper_28_qed_s3.tex (one-loop theorems)
 """
 
 from __future__ import annotations

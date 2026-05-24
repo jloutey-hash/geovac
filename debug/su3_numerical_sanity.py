@@ -33,7 +33,7 @@ Original three sub-tasks (preserved for historical record):
 Cross-references:
     geovac/central_fejer_su2.py (template)
     debug/unified_gh_scoping_memo.md (forward plan)
-    papers/standalone/paper_38_su2_propinquity_convergence.tex (Paper 38)
+    papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex (Paper 38)
 
 This script does NOT modify production code. All output goes to
 debug/data/su3_numerical_sanity.json.
@@ -1387,7 +1387,7 @@ def main():
             "date": "2026-05-10",
             "purpose": "SU(3) numerical sanity check for unified GH-convergence theorem",
             "cross_refs": [
-                "papers/standalone/paper_38_su2_propinquity_convergence.tex",
+                "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
                 "debug/unified_gh_scoping_memo.md",
                 "geovac/central_fejer_su2.py",
             ],

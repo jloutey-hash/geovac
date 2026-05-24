@@ -2,7 +2,7 @@
 
 **Date:** 2026-04-15
 **Status:** Draft complete (synthesis, observational)
-**Paper file:** `papers/synthesis/paper_25_hopf_gauge_structure.tex`
+**Paper file:** `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex`
 
 ## The Observational Claim
 
@@ -130,7 +130,7 @@ collided with graph-Hodge structure at the Hopf base.
 
 ## Files Created
 
-- `papers/synthesis/paper_25_hopf_gauge_structure.tex` (paper draft)
+- `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex` (paper draft)
 - `debug/qg_paper25_memo.md` (this memo)
 
 ## CLAUDE.md Updates Applied

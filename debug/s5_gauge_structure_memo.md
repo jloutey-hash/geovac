@@ -6,7 +6,7 @@
 
 ## Task
 
-Sprint 4 Track QG produced `papers/synthesis/paper_25_hopf_gauge_structure.tex` — the framework observation that GeoVac's S^3 Hopf graph at finite n_max is simultaneously a Fock-projection discretization of S^3, a triangle-free simplicial 1-complex with discrete Hodge decomposition, and a Wilson-type U(1) lattice gauge structure. Paper 25 §VII.1 lists an open question: does the S^5 Bargmann-Segal lattice (Paper 24) have an analogous gauge structure?
+Sprint 4 Track QG produced `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex` — the framework observation that GeoVac's S^3 Hopf graph at finite n_max is simultaneously a Fock-projection discretization of S^3, a triangle-free simplicial 1-complex with discrete Hodge decomposition, and a Wilson-type U(1) lattice gauge structure. Paper 25 §VII.1 lists an open question: does the S^5 Bargmann-Segal lattice (Paper 24) have an analogous gauge structure?
 
 Three candidate outcomes:
 - (a) Abelian U(1) analog — simple, same mechanism as S^3

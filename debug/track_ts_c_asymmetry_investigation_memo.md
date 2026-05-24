@@ -9,11 +9,11 @@
 - `debug/data/tx_a_composition_table.json` (TX-A data)
 - `debug/tx_a_signature_arithmetic.py` (TX-A driver, re-run live)
 - `debug/track_ts_b_dictionary_memo.md` (Track B asymmetry list)
-- `papers/observations/paper_2_alpha.tex` (B/F/Δ canonical decomposition)
-- `papers/observations/paper_34_projection_taxonomy.tex` (15-projection list, depth-prediction §VI, open question §VIII.3)
-- `papers/observations/paper_35_time_as_projection.tex` (rest-mass + observation/temporal-window proposition)
-- `papers/core/paper_31_universal_coulomb_partition.tex` (universal/Coulomb A/D split)
-- `papers/synthesis/paper_32_spectral_triple.tex` (K-decomposition Sec. \ref{sec:K_decomposition})
+- `papers/group5_qed_gauge/paper_2_alpha.tex` (B/F/Δ canonical decomposition)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (15-projection list, depth-prediction §VI, open question §VIII.3)
+- `papers/group6_precision_observations/paper_35_time_as_projection.tex` (rest-mass + observation/temporal-window proposition)
+- `papers/group3_foundations/paper_31_universal_coulomb_partition.tex` (universal/Coulomb A/D split)
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (K-decomposition Sec. \ref{sec:K_decomposition})
 - `debug/data/track_alpha_phase4b/track_d_analysis.md` (Hopf graph morphism, α-D)
 - `debug/data/track_alpha_phase4f/track_j_analysis.md` (F = D_{n²}(d_max), α-J)
 
@@ -47,7 +47,7 @@ and at §4 ("Most surprising entry"):
 >
 > This is the cleanest illustration in the table that the dimensional axiomatization captures real structure: the failure to commute encodes the same content as the field-theoretic UV/IR ordering.
 
-This claim is also reproduced verbatim in `papers/observations/paper_34_projection_taxonomy.tex` §IX (Conclusion):
+This claim is also reproduced verbatim in `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` §IX (Conclusion):
 
 > the 15×15 composition table encodes the field-theoretic UV/IR ordering anomaly through the mutual one-way relation between spectral action and observation/temporal-window.
 
@@ -102,7 +102,7 @@ The memo's intuition is right (the UV/IR limits do not commute in real QFT), but
 
 #### Recommended Paper 34 §IX (Conclusion) correction
 
-(Currently lines 1238–1241 of `papers/observations/paper_34_projection_taxonomy.tex` repeat the wrong claim. Recommend replacing:)
+(Currently lines 1238–1241 of `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` repeat the wrong claim. Recommend replacing:)
 
 > *(replace)* "the 15$\times$15 composition table encodes the field-theoretic UV/IR ordering anomaly through the mutual one-way relation between spectral action and observation/temporal-window."
 

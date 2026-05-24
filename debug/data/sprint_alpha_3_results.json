@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "sprint": "alpha-PES Step 1 + Step 2 + Step 3",
+    "date": "2026-05-23",
+    "framework_version": "v2.58.0+",
+    "verdict_line": "AMBIGUOUS / NEGATIVE-AT-CURRENT-BASIS",
+    "production_modules_modified": [
+      "geovac/shibuya_wulfman.py",
+      "geovac/balanced_coupled.py"
+    ],
+    "tests_added": "tests/test_balanced_coupled_multizeta.py (12 tests)",
+    "test_status": "123 passed + 1 skipped, zero regression on related modules"
+  },
+  "step_1_algebraic_kernel_differential": {
+    "R_eq_bohr": 3.566,
+    "R_diss_bohr": 10.0,
+    "kernel": "analytical split-region incomplete-gamma",
+    "production_modules_modified": "none (debug-only)",
+    "baseline_hydrogenic_z1_na_3s": {
+      "V_eq_Ha": -0.091194,
+      "V_diss_Ha": -0.074702
+    },
+    "path_a_physical_multizeta_na_3s": {
+      "V_eq_Ha": -0.226047,
+      "V_diss_Ha": -0.099915,
+      "K_primitives": 5
+    },
+    "differential": {
+      "diff_eq_Ha": -0.134853,
+      "diff_diss_Ha": -0.025213,
+      "ratio_diss_to_eq": 0.187
+    },
+    "classical_limit_check": {
+      "V_classical_eq_Ha": -0.280426,
+      "V_classical_diss_Ha": -0.100000,
+      "physical_residual_at_diss_Ha": 8.49e-05,
+      "hydrogenic_residual_at_diss_Ha": 0.0253
+    },
+    "step_1_gate": "PASSED (|diff_eq| = 0.135 Ha > 0.05 Ha threshold; differential at R_diss is 18.7% of R_eq value)",
+    "physical_finding": "Physical Na 3s is MORE attractive to the H nucleus at R_eq than the hydrogenic Z=1 placeholder by 0.135 Ha. This is because the compact physical 3s (<r>=4.5 bohr) has more density inside R_eq=3.566 bohr where the H Coulomb tail is unscreened. The diffuse hydrogenic Z=1 3s (<r>=13.5 bohr) extends past R_eq, parts on the far side of H partially cancel. Sign of the differential is opposite to naive 'compact -> less attractive' intuition."
+  },
+  "step_2_single_point_fci": {
+    "R_eq_bohr": 3.5,
+    "R_diss_bohr": 10.0,
+    "basis_kind": "NaH balanced FCI max_n=2 Q=20 2-electron",
+    "screened_cross_center": false,
+    "run_a_baseline_hydrogenic": {
+      "E_eq_Ha": -169.198682,
+      "E_diss_Ha": -164.852546,
+      "D_e_Ha": 4.346136,
+      "tr_h1_cross_vne_eq_Ha": -13.2495,
+      "tr_h1_cross_vne_diss_Ha": -5.9791
+    },
+    "run_b_multizeta_physical": {
+      "E_eq_Ha": -169.198682,
+      "E_diss_Ha": -164.852546,
+      "D_e_Ha": 4.346136,
+      "tr_h1_cross_vne_eq_Ha": -13.1928,
+      "tr_h1_cross_vne_diss_Ha": -5.9790
+    },
+    "differential": {
+      "delta_E_eq_Ha": 4.26e-13,
+      "delta_E_diss_Ha": 4.26e-13,
+      "delta_D_e_Ha": -1.42e-13
+    },
+    "h1_cross_vne_shift_eq_Ha": 0.0567,
+    "structural_finding": "Multi-zeta substitution shifts h1[0,0] (Na 3s on-site) by +57 mHa at R_eq, but the 2-electron FCI eigenvalue shifts by BIT-ZERO (-1.4e-13 Ha). Reason: the FCI ground state at NaH max_n=2 lives entirely on the H side. The H 1s orbital sees the un-screened Na Z=11 at R=3.5 bohr (h1_cross_vne[5,5] = -3.13 Ha), pulling H 1s deep to ~-3.6 Ha. Na 3s (h1[0,0] ~ -0.78 Ha) is irrelevant to the GS. The h1 eigenspectrum has the lowest 5 eigenvalues entirely on H-side states; the Na 3s diagonal shift moves only the i=5 eigenvalue, which is unoccupied in the n_e=2 GS."
+  },
+  "step_3_mini_pes": {
+    "R_grid_bohr": [2.5, 3.0, 3.5, 4.0, 5.0],
+    "architectures": ["bare", "bare+multi_zeta", "W1c_screened"],
+    "results": {
+      "bare_R_min": 2.5,
+      "bare_E_min_Ha": -171.0967,
+      "bare_has_internal_min": false,
+      "bare_mz_R_min": 2.5,
+      "bare_mz_E_min_Ha": -171.0967,
+      "bare_mz_has_internal_min": false,
+      "W1c_R_min": 2.5,
+      "W1c_E_min_Ha": -163.3160,
+      "W1c_has_internal_min": false,
+      "max_abs_E_diff_bare_vs_multizeta_Ha": 3.7e-13
+    },
+    "verdict": "All three architectures: monotonically descending PES, NO internal minimum. Multi-zeta has bit-zero effect at every R."
+  },
+  "comparison_to_track_3": {
+    "track_3_baseline": "PK + SV (W1c+screened_valence_basis+pk_cross_center): descent 0.305 Ha, no internal minimum",
+    "this_sprint_W1c_alone": "descent 0.252 Ha (E=-163.316 at R=2.5 vs -163.064 at R=5.0), no internal minimum",
+    "this_sprint_bare_baseline": "descent 3.34 Ha (E=-171.097 at R=2.5 vs -167.752 at R=5.0), no internal minimum",
+    "this_sprint_multi_zeta_alone": "bit-zero effect — not a corrective mechanism in this basis"
+  },
+  "headline_structural_finding": "The M-Y bimodule diagnostic predicted right-action (Na-side wavefunction shape) dominance for the W1c-residual orthogonality wall. The FCI test reveals the prediction does not hold for the framework's NaH max_n=2 variational state: the FCI ground state lives on the H side (over-attracted by the bare Na Z=11 nucleus), so Na-side wavefunction shape substitution has bit-zero effect on the FCI energy.\n\nThe M-Y pin-state distance was computed at fixed (c_H, c_M) = (1/sqrt(2), 1/sqrt(2)) bond character — a qualitative-shape probe assuming the GS is bonding. But the actual FCI variational state at NaH max_n=2 has c_M ~ 0 (Na valence essentially unoccupied at the GS) because the un-screened cross-V_ne attraction from Na Z=11 is much larger than the Na 3s binding energy.\n\nThe diagnostic-before-engineering rule converted a 5-6 hour wiring + FCI computation into a clean structural finding: M-Y's pin-state-distance metric is not a faithful proxy for the FCI eigenvalue sensitivity when the framework's basis is too small to support the physical bonding configuration.",
+  "verdict_paper_changes": "DEFER. No paper edits autonomously applied. The structural finding is reported; the synthesis sprint (beta) will integrate."
+}

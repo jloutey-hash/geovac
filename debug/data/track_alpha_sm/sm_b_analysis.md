@@ -184,7 +184,7 @@ Recommendation: **log in `debug/data/track_alpha_sm/` and in CLAUDE.md Section 2
 
 ## 9. References
 
-- Paper 2 (GeoVac): `papers/conjectures/paper_2_alpha.tex`, esp. Sec. III (Casimir B = 42, selection principle B/N = 3, Δ = 1/(|λ_3|·N(2))).
+- Paper 2 (GeoVac): `papers/group5_qed_gauge/paper_2_alpha.tex`, esp. Sec. III (Casimir B = 42, selection principle B/N = 3, Δ = 1/(|λ_3|·N(2))).
 - Paper 7 (GeoVac): `papers/core/Paper_7_Dimensionless_Vacuum.tex` (S³ conformal geometry, Fock projection).
 - Beta function (physics), Wikipedia: https://en.wikipedia.org/wiki/Beta_function_(physics)
 - Southampton QFT lecture notes, Sec. 3 (One-loop QED counterterms): https://www.southampton.ac.uk/~doug/qft/aqft3.pdf

@@ -10,7 +10,7 @@ The user-facing reframe at the end of the session: the framework's projection-ch
 
 The session ran approximately as:
 
-1. **Audit** of the `papers/observations/paper_34_projection_taxonomy.tex` projection dictionary against the new §IV.5 base-unit decomposition, surfacing nine informal projection names and two structural slot candidates.
+1. **Audit** of the `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` projection dictionary against the new §IV.5 base-unit decomposition, surfacing nine informal projection names and two structural slot candidates.
 2. **§IV.5 base-unit decomposition** added (Tables 1+2, inverse list, L–E asymmetry observation, compositional-projection observation generalized).
 3. **Three new §III projections** promoted: §III.17 charge-density (Foldy/Friar), §III.18 magnetization-density (Zemach), §III.19 tensor multipole. Plus §III.20 boundary subsection (internal-graph-derived vs Layer-2).
 4. **External-field hunting** verified Zeeman/Stark are Layer-2 inputs, not §III projections (clean negative; pinned the §III/Layer-2 distinction).
@@ -169,7 +169,7 @@ Sprint cadence: 2 tracks per sprint (1 verification + 1 prospective). Continue f
 
 ### Modified papers
 
-- `papers/observations/paper_34_projection_taxonomy.tex` — substantial extension (§III.17/18/19/20, §IV Tables 1+2, §IV.5 base-unit decomposition, §V matches catalogue +2 rows, §V.B rZG row multi-iteration, §V.C Roothaan autopsies subsection with 1 full table + 2 placeholders, §VI Prediction 1 refinement, §VII T3 expansion flag, §VIII Conclusion)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — substantial extension (§III.17/18/19/20, §IV Tables 1+2, §IV.5 base-unit decomposition, §V matches catalogue +2 rows, §V.B rZG row multi-iteration, §V.C Roothaan autopsies subsection with 1 full table + 2 placeholders, §VI Prediction 1 refinement, §VII T3 expansion flag, §VIII Conclusion)
 
 ### Modified CLAUDE.md sections
 

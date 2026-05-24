@@ -136,7 +136,7 @@ Even without the position-space sprint, this track produces three concrete §III
 - `debug/HD_rotational_HFS_scoping_track4_memo.md` (this memo)
 
 **Modified:**
-- `papers/observations/paper_34_projection_taxonomy.tex` (§III.19 entry: add `Operator-level test status` paragraph; §V.C: add `sec:autopsy_HD_rotational_HFS` subsection for the OoM result; §V.B: add HD off-precision row tagged to §III.19; §VIII: revise the §III.19 forward-looking note to reflect that §III.19 now has an operator-level scoping autopsy)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (§III.19 entry: add `Operator-level test status` paragraph; §V.C: add `sec:autopsy_HD_rotational_HFS` subsection for the OoM result; §V.B: add HD off-precision row tagged to §III.19; §VIII: revise the §III.19 forward-looking note to reflect that §III.19 now has an operator-level scoping autopsy)
 
 No production `geovac/` code modified (this is scoping only).
 

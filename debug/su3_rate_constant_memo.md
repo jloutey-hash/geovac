@@ -4,7 +4,7 @@
 **Author:** PM agent (numerical sanity sprint; no production code under `geovac/`)
 **Status:** sub-tasks (b) and (c) complete; pre-execution sanity check landed
 **Cross-refs:**
-- Paper 38 (`papers/standalone/paper_38_su2_propinquity_convergence.tex`) — SU(2) blueprint
+- Paper 38 (`papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex`) — SU(2) blueprint
 - `debug/unified_gh_scoping_memo.md` §4–§5 — forward plan
 - `geovac/central_fejer_su2.py` — SU(2) baseline template (L2 lemma machinery)
 - `debug/su3_numerical_sanity.py` — pre-existing SU(3) infrastructure (Klimyk + Weyl integration)

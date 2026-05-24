@@ -286,9 +286,9 @@
   "files": {
     "memo": "debug/bisognano_wichmann_track_d_memo.md",
     "data": "debug/data/bisognano_wichmann_track_d_data.json",
-    "paper_32_edit": "papers/synthesis/paper_32_spectral_triple.tex (§VIII master Mellin engine domain remark; §VIII.D frontier remark; bibliography +3 entries)",
-    "paper_35_edit": "papers/observations/paper_35_time_as_projection.tex (§VIII new Bisognano-Wichmann subsection; bibliography +3 entries)",
-    "paper_34_edit": "papers/observations/paper_34_projection_taxonomy.tex (§V.B Hawking row; §VIII Lorentz-boost open question paragraph extension; §III.15 footnote)"
+    "paper_32_edit": "papers/group1_operator_algebras/paper_32_spectral_triple.tex (§VIII master Mellin engine domain remark; §VIII.D frontier remark; bibliography +3 entries)",
+    "paper_35_edit": "papers/group6_precision_observations/paper_35_time_as_projection.tex (§VIII new Bisognano-Wichmann subsection; bibliography +3 entries)",
+    "paper_34_edit": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex (§V.B Hawking row; §VIII Lorentz-boost open question paragraph extension; §III.15 footnote)"
   },
 
   "no_production_code_modified": true,

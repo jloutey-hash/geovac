@@ -10,7 +10,7 @@ Part B: Seeley-DeWitt heat kernel coefficients & partition functions
 Part C: APS η-invariant, Chern-Simons invariant, index theory
 
 Reference: Paper 2 — "The Fine Structure Constant from Spectral
-Geometry of the Hopf Fibration" (papers/conjectures/paper_2_alpha.tex)
+Geometry of the Hopf Fibration" (papers/group5_qed_gauge/paper_2_alpha.tex)
 """
 
 import numpy as np

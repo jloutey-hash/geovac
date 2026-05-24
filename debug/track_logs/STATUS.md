@@ -110,8 +110,8 @@ New transcendental: ζ(3) enters via Dirac Dirichlet series at s=4.
 Hopf decomposition of Δ = 20+20 chirality split, alternating {4,5,4,5,4,5,4,5,4} over q ∈ {-2..+2}.
 
 ### Files Modified
-- `papers/conjectures/paper_2_alpha.tex` — §IV rewrite applied
-- `papers/core/paper_18_exchange_constants.tex` — new ζ(3) taxonomy entry
+- `papers/group5_qed_gauge/paper_2_alpha.tex` — §IV rewrite applied
+- `papers/group3_foundations/paper_18_exchange_constants.tex` — new ζ(3) taxonomy entry
 - `CLAUDE.md` — 5 mechanical edits (version bump, Phase 4I summary, §3 row, §10 benchmarks, §11 mappings)
 
 ### Files Created
@@ -192,9 +192,9 @@ None yet — all Tier 2 proposals are drop-in files awaiting PI approval.
 - gamma radial <1/r> = Z(gamma*n_r+kappa^2)/(gamma*N_D^3), algebraic over Q(Z,alpha,gamma_kappa)
 
 ### Files Modified
-- papers/core/paper_18_exchange_constants.tex — empty-cell closure paragraph + table row + bibitems added
-- papers/core/paper_24_bargmann_segal.tex — spinor-Lichnerowicz corollary subsection + bibitem added
-- papers/core/paper_14_qubit_encoding.tex — §V Dirac formula verification paragraph added
+- papers/group3_foundations/paper_18_exchange_constants.tex — empty-cell closure paragraph + table row + bibitems added
+- papers/group3_foundations/paper_24_bargmann_segal.tex — spinor-Lichnerowicz corollary subsection + bibitem added
+- papers/group4_quantum_computing/paper_14_qubit_encoding.tex — §V Dirac formula verification paragraph added
 - CLAUDE.md — v2.12.0 + §2/§3/§10/§11/§12 edits
 - debug/track_logs/STATUS.md — this session summary
 
@@ -250,12 +250,12 @@ None yet — all Tier 2 proposals are drop-in files awaiting PI approval.
 
 ### Files Modified
 
-- `papers/observations/paper_34_projection_taxonomy.tex` — 9 row additions across §V and §V.B
-- `papers/observations/paper_36_bound_state_qed.tex` — Mu Lamb subsection + Mu triple closure subsection (~160 lines new)
-- `papers/applications/paper_23_nuclear_shell.tex` — D HFS subsection (~80 lines) + 3 bibliography entries
-- `papers/core/paper_14_qubit_encoding.tex` — He 2³P internal-multi-focal cross-reference
-- `papers/core/paper_17_composed_geometries.tex` — §6.10 NEW "Architectural note: two solvers, two drift signatures"
-- `papers/methods/paper_19_coupled_composition.tex` — NEW subsection "W1c-residual orthogonality wall"
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — 9 row additions across §V and §V.B
+- `papers/group5_qed_gauge/paper_36_bound_state_qed.tex` — Mu Lamb subsection + Mu triple closure subsection (~160 lines new)
+- `papers/group4_quantum_computing/paper_23_nuclear_shell.tex` — D HFS subsection (~80 lines) + 3 bibliography entries
+- `papers/group4_quantum_computing/paper_14_qubit_encoding.tex` — He 2³P internal-multi-focal cross-reference
+- `papers/group2_quantum_chemistry/paper_17_composed_geometries.tex` — §6.10 NEW "Architectural note: two solvers, two drift signatures"
+- `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` — NEW subsection "W1c-residual orthogonality wall"
 - `geovac/balanced_coupled.py` — pk_cross_center kwarg added (bit-exact backward compat)
 - `CLAUDE.md` §1 (version v2.32.1 → v2.33.0), §2 (8 sprint paragraphs), §3 (1 failed-approach row)
 - `CHANGELOG.md` — v2.33.0 entry
@@ -310,10 +310,10 @@ The 1/π² is the master Mellin engine M1 Hopf-base-measure signature. Mechanism
 **Bit-exactness rule of thumb (PI-adopted heuristic).** New working principle: bit-exact closure = green light (skeleton operation); residuals = caution light (Layer 2 work); neither = drift detector needed. Used productively across all four tracks today; all stayed green-light.
 
 ### Files Modified
-- `papers/standalone/paper_43_lorentzian_extension.tex` — §10.2 new subsec:pythagorean_orthogonality + Corollary; §11 O4 extended (~137 lines)
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` — §8 new rem:pythagorean_underlies_collapse + §10 O3 extended (~96 lines)
-- `papers/synthesis/paper_32_spectral_triple.tex` — §VIII new rem:pythagorean_m1_closure (~104 lines); §VIII.C G4b paragraph revised
-- `papers/core/paper_24_bargmann_segal.tex` — §V new subsec:asymmetry_layer4 (~122 lines); preamble: `+amsthm`, `+\newtheorem{theorem}`, `+\newtheorem{corollary}`; cross-ref fixes (sec:ho-rigidity-theorem → sec:rigidity ×3; sec:coulomb-ho-asymmetry → sec:asymmetry)
+- `papers/group1_operator_algebras/paper_43_lorentzian_extension.tex` — §10.2 new subsec:pythagorean_orthogonality + Corollary; §11 O4 extended (~137 lines)
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` — §8 new rem:pythagorean_underlies_collapse + §10 O3 extended (~96 lines)
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` — §VIII new rem:pythagorean_m1_closure (~104 lines); §VIII.C G4b paragraph revised
+- `papers/group3_foundations/paper_24_bargmann_segal.tex` — §V new subsec:asymmetry_layer4 (~122 lines); preamble: `+amsthm`, `+\newtheorem{theorem}`, `+\newtheorem{corollary}`; cross-ref fixes (sec:ho-rigidity-theorem → sec:rigidity ×3; sec:coulomb-ho-asymmetry → sec:asymmetry)
 - `CLAUDE.md` — §1 v2.44.0 → v2.45.0; §1.7 WH1 sharpened (PROVEN maintained); §2 full sprint bullet; §6 4 paper entries × 2 tables = 8 edits; §11 3 new lookup rows
 - `CHANGELOG.md` — v2.45.0 entry
 - `MEMORY.md` — 2 one-line entries pointing at new memory files

@@ -136,7 +136,7 @@ The module is correct for what it computes (log-holonomy, k = 1.0). The docstrin
 
 | File | Status |
 |------|--------|
-| `papers/core/paper_1_spectrum.tex` | NEEDS UPDATE -- Berry phase claims unvalidated |
+| `papers/group3_foundations/paper_1_spectrum.tex` | NEEDS UPDATE -- Berry phase claims unvalidated |
 | `geovac/berry_phase.py` | CORRECT for log-holonomy; needs docstring clarification |
 | `debug/berry_phase_convergence/results.md` | CORRECT -- documents k = 1.0 |
 | `tests/test_berry_phase.py` | 7/7 passing, validates k = 1.0 |

@@ -233,7 +233,7 @@ If a Sprint L3 launches, three layered entry points are realistic, in increasing
 ## §9. Files cross-referenced
 
 - `CLAUDE.md` §1.7 WH1 entry (Sprint L2 closure paragraph)
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` §3.2 (Nieuviarts NO-GO footnote), §5.2 (Nieuviarts twist morphism subsection)
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` §3.2 (Nieuviarts NO-GO footnote), §5.2 (Nieuviarts twist morphism subsection)
 - `debug/lorentzian_l0_audit_memo.md` §4 (sequencing recommendation, L3 budget)
 - `debug/sprint_l2_synthesis_memo.md` §5.1 (Sprint L3 named as open frontier)
 - `debug/lorentzian_partition_transfer_memo.md` (cited L3 input)

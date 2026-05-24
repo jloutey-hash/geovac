@@ -352,7 +352,7 @@ sub-30 mfm precision.
   the original rZG; does not overwrite)
 - **Created:** `debug/data/calc_track_rZG_extended.json` (numerical output)
 - **Created:** `debug/calc_track_rZG_extended_memo.md` (this memo)
-- **Modified:** `papers/observations/paper_34_projection_taxonomy.tex` —
+- **Modified:** `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` —
   rZG row in §V.B updated to reflect extended-fit verdict
 - **Production code:** unchanged (verified by running
   `pytest tests/test_cross_register_vne.py tests/test_magnetization_density.py`

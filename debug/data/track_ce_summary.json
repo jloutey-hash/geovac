@@ -114,7 +114,7 @@
   },
 
   "paper_20": {
-    "file": "papers/applications/paper_20_resource_benchmarks.tex",
+    "file": "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
     "pages": 5,
     "tables": 5,
     "status": "compiles, all data from computed results"

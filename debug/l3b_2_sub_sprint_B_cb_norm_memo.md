@@ -19,8 +19,8 @@ Bożejko--Fendler 1991 (amenable case) and Paper 38 Lemma L2 part (c).
 `debug/r25_l2_quantitative_rate_memo.md` (Paper 38 §L2 quantitative rate);
 `debug/l2_universal_rate_proof.md` (Paper 40 §3.2 universal cancellation);
 `debug/l3b_first_move_memo.md` §4 (joint Fejér construction);
-`papers/standalone/paper_38_su2_propinquity_convergence.tex` §L2;
-`papers/standalone/paper_40_unified_propinquity_convergence.tex` §3.2;
+`papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` §L2;
+`papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex` §3.2;
 `geovac/central_fejer_su2.py` (SU(2) factor implementation);
 `geovac/central_fejer_compact_temporal.py` (joint factor implementation).
 

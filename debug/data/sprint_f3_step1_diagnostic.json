@@ -1,0 +1,97 @@
+{
+  "sprint": "F3 Step 1 \u2014 cross-block h1 algebraic diagnostic",
+  "date": "2026-05-23",
+  "hydrogenic": {
+    "R_AB_bohr": 3.566,
+    "na_3s_basis": "hydrogenic",
+    "quadrature": {
+      "n_rho": 80,
+      "n_z": 100,
+      "rho_max": 20.0,
+      "z_max": 20.0
+    },
+    "sanity_check": {
+      "S_NaNa_should_be_1": 0.9578231026706749,
+      "S_HH_should_be_1": 1.0001100272903762
+    },
+    "matrix_elements": {
+      "overlap_S_AB": -0.11402750554457851,
+      "Vne_H_NaH_offdiag_Ha": 0.07401322244376515,
+      "Vne_Na_NaH_offdiag_Ha": 0.26300952881849654,
+      "kinetic_T_NaH_offdiag_Ha": -0.0169994696714759,
+      "cross_block_h1_NaH_total_Ha": 0.3200232815907858,
+      "Vne_H_Na3s_diag_Ha": -0.08937169876743123,
+      "Vne_Na_H1s_diag_Ha": -3.0741242717973223
+    },
+    "on_site_eigenvalues": {
+      "E_Na_3s_onsite_Ha": -0.05555555555555555,
+      "E_H_1s_onsite_Ha": -0.5
+    },
+    "h1_2x2_matrix": {
+      "h11_Na3s_diag_Ha": -0.14492725432298678,
+      "h22_H1s_diag_Ha": -3.5741242717973223,
+      "h12_offdiag_Ha": 0.3200232815907858
+    },
+    "eigenvalues_orthogonal_basis": {
+      "E_lower_Ha": -3.6037341642908833,
+      "E_upper_Ha": -0.11531736182942579,
+      "splitting_Ha": -3.4884168024614577,
+      "lower_label": "antibonding"
+    },
+    "eigenvalues_generalized_with_overlap": {
+      "E_lower_Ha": -3.5763698427892483,
+      "E_upper_Ha": -0.11773046740404089,
+      "splitting_Ha": -3.4586393753852076,
+      "lower_label": "bonding"
+    },
+    "verdict": "PROCEED_TO_STEP_2_STRONG_BONDING",
+    "wall_time_s": 0.010839700698852539
+  },
+  "multi_zeta": {
+    "R_AB_bohr": 3.566,
+    "na_3s_basis": "multi_zeta",
+    "quadrature": {
+      "n_rho": 80,
+      "n_z": 100,
+      "rho_max": 20.0,
+      "z_max": 20.0
+    },
+    "sanity_check": {
+      "S_NaNa_should_be_1": 1.001181030304018,
+      "S_HH_should_be_1": 1.0001100272903762
+    },
+    "matrix_elements": {
+      "overlap_S_AB": 0.39673274926876717,
+      "Vne_H_NaH_offdiag_Ha": -0.23066515110672264,
+      "Vne_Na_NaH_offdiag_Ha": -1.1719645640455203,
+      "kinetic_T_NaH_offdiag_Ha": 0.03229877647233906,
+      "cross_block_h1_NaH_total_Ha": -1.3703309386799039,
+      "Vne_H_Na3s_diag_Ha": -0.2263728098920324,
+      "Vne_Na_H1s_diag_Ha": -3.0741242717973223
+    },
+    "on_site_eigenvalues": {
+      "E_Na_3s_onsite_Ha": -0.17,
+      "E_H_1s_onsite_Ha": -0.5
+    },
+    "h1_2x2_matrix": {
+      "h11_Na3s_diag_Ha": -0.3963728098920324,
+      "h22_H1s_diag_Ha": -3.5741242717973223,
+      "h12_offdiag_Ha": -1.3703309386799039
+    },
+    "eigenvalues_orthogonal_basis": {
+      "E_lower_Ha": -4.083422263374261,
+      "E_upper_Ha": 0.11292518168490584,
+      "splitting_Ha": -4.196347445059167,
+      "lower_label": "bonding"
+    },
+    "eigenvalues_generalized_with_overlap": {
+      "E_lower_Ha": -3.574846972774182,
+      "E_upper_Ha": 0.1530856803294252,
+      "splitting_Ha": -3.727932653103607,
+      "lower_label": "antibonding"
+    },
+    "verdict": "PROCEED_TO_STEP_2_STRONG_BONDING",
+    "wall_time_s": 0.009716033935546875
+  },
+  "sanity_S_HH": 0.9972591586029893
+}

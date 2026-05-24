@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-16
 **Sprint:** L2-F (falsifier-cataloguing pass; documentation only, no code, no paper edits)
-**Source briefs:** `debug/sprint_l2a_sprint_plan.md` (L2-B/C/D/E SUCCESS CRITERIA + RISKS), `debug/sprint_l2a_scoping_memo.md` §4 + §5.5 + §7, `debug/lorentzian_l0_audit_memo.md` §4 (M3 trivialization prediction), `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` §5–§7 (Riemannian-side falsifier model)
+**Source briefs:** `debug/sprint_l2a_sprint_plan.md` (L2-B/C/D/E SUCCESS CRITERIA + RISKS), `debug/sprint_l2a_scoping_memo.md` §4 + §5.5 + §7, `debug/lorentzian_l0_audit_memo.md` §4 (M3 trivialization prediction), `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` §5–§7 (Riemannian-side falsifier model)
 **Status:** Tracking document, drafted concurrent with L2-B (per sprint plan §5.6 sequencing).
 
 ---

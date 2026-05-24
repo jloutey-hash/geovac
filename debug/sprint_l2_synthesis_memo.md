@@ -202,13 +202,13 @@ Four options surfaced from the synthesis pass. Each is well-scoped at the 1–6 
 
 ### Option A: Draft Paper 43 (math.OA standalone Lorentzian-extension paper)
 
-**Scope:** ~2 weeks of writing + 1 week of review. Sibling to Papers 38, 39, 40, 42 in `papers/standalone/`. Natural Zenodo deposit when ready.
+**Scope:** ~2 weeks of writing + 1 week of review. Sibling to Papers 38, 39, 40, 42 in `papers/group1_operator_algebras/`. Natural Zenodo deposit when ready.
 
 **Rationale:** Sprint L2 produced a clean operator-system-level closure that warrants a math.OA-style standalone writeup. The closure is non-trivial (first operator-system literal identification of a Lorentzian QFT theorem in the framework); the construction is clean (van den Dungen 2016 Prop 4.1 + BBB 2018 at (m, n) = (4, 6) + Paper 42 verbatim with temporal slot); the H_local signature-independence finding is a substantive new structural result.
 
 **Risk:** thin — Sprint L2 closes at finite cutoff only, not in the GH limit. The Paper 43 writeup would explicitly NOT supersede Paper 42 — Paper 42 is the Riemannian closure, Paper 43 is the Lorentzian extension, and together they constitute the four-witness Wick-rotation arc at the operator-system level.
 
-**Outline drafted:** `papers/standalone/paper_43_lorentzian_extension_outline.md`.
+**Outline drafted:** `papers/group1_operator_algebras/paper_43_lorentzian_extension_outline.md`.
 
 ### Option B: Open Sprint L3 (Lorentzian propinquity construction)
 
@@ -240,17 +240,17 @@ Four options surfaced from the synthesis pass. Each is well-scoped at the 1–6 
 
 **Files modified:**
 
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` — new §11 "Lorentzian closure at finite cutoff" (~250 lines); §10 O3 refinement paragraph
-- `papers/synthesis/paper_32_spectral_triple.tex` — new §VIII.E.E "Krein-level unified-strong theorem" (~200 lines); new bibitem `paper42`
-- `papers/observations/paper_34_projection_taxonomy.tex` — §III.27 status flip + L2-E closure paragraph; §V.E new L2-E closure paragraph
-- `papers/core/paper_31_universal_coulomb_partition.tex` — §8 new "Empirical verification of the partition by Sprints L1 + L2" subsection
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` — new §11 "Lorentzian closure at finite cutoff" (~250 lines); §10 O3 refinement paragraph
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` — new §VIII.E.E "Krein-level unified-strong theorem" (~200 lines); new bibitem `paper42`
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` — §III.27 status flip + L2-E closure paragraph; §V.E new L2-E closure paragraph
+- `papers/group3_foundations/paper_31_universal_coulomb_partition.tex` — §8 new "Empirical verification of the partition by Sprints L1 + L2" subsection
 - `CLAUDE.md` — §2 new L2-E sprint bullet (~600 words); new Sprint L2 closure synthesis bullet (~500 words); §1.7 WH1 PROVEN entry extended with L2-D/L2-E sentences
 - `memory/MEMORY.md` — new index entry pointing to `sprint_l2_closure.md`
 
 **Files created:**
 
 - `debug/sprint_l2_synthesis_memo.md` — this synthesis memo (~3500 words)
-- `papers/standalone/paper_43_lorentzian_extension_outline.md` — Paper 43 outline (~2000 words)
+- `papers/group1_operator_algebras/paper_43_lorentzian_extension_outline.md` — Paper 43 outline (~2000 words)
 - `memory/sprint_l2_closure.md` — session-restoration memory file
 
 **Compile status (three-pass):** Paper 42 SUCCESS; Paper 32 SUCCESS; Paper 34 SUCCESS; Paper 31 SUCCESS. Three pre-existing warnings on Paper 34 unrelated to Sprint L2 edits (`sec:matches`, `sec:curvature_coefficients`, `tab:catalog_off`).

@@ -1,0 +1,53 @@
+{
+  "sprint": "F5 Step 1 \u2014 algebraic cross-block 2-body Coulomb diagnostic",
+  "date": "2026-05-23",
+  "R_AB_bohr": 3.566,
+  "bonding_orbital_composition": {
+    "Na(1,0,0)": -0.6200027604993643,
+    "Na(2,0,0)": 0.35196368219450197,
+    "H(1,0,0)": -0.4668081378568081,
+    "H(2,0,0)": 0.522125677340157
+  },
+  "spatial_norm_sq": 2.426965590639058,
+  "core_electron_count_check": 9.999924494382782,
+  "J_total_Ha": 1.1313887470358504,
+  "K_per_orbital": {
+    "(1,0,0)": {
+      "K_estimate_Ha": 0.00042192233496596813,
+      "S_bond_core": 0.007970643536808701,
+      "F0_cc_Ha": 6.6411875
+    },
+    "(2,0,0)": {
+      "K_estimate_Ha": 0.007731617869950026,
+      "S_bond_core": -0.06254330958509198,
+      "F0_cc_Ha": 1.97655390625
+    },
+    "(2,1,-1)": {
+      "K_estimate_Ha": 0.0,
+      "S_bond_core": 0.0,
+      "F0_cc_Ha": 2.20527109375
+    },
+    "(2,1,0)": {
+      "K_estimate_Ha": 0.0,
+      "S_bond_core": 0.0,
+      "F0_cc_Ha": 2.20527109375
+    },
+    "(2,1,1)": {
+      "K_estimate_Ha": 0.0,
+      "S_bond_core": 0.0,
+      "F0_cc_Ha": 2.20527109375
+    }
+  },
+  "K_total_Ha": 0.008153540204915995,
+  "predicted_correction_Ha": 1.1232352068309344,
+  "K_over_J_ratio": 0.007206665459840952,
+  "F3_baseline_wall_depth_Ha": 4.37,
+  "experimental_NaH_De_Ha": 0.075,
+  "predicted_residual_De_if_linear_Ha": 3.2467647931690657,
+  "gate_verdict": "INTERMEDIATE_PROCEED_FLAGGED",
+  "gate_outcomes": [
+    "0.5 < sum < 2 Ha \u2014 partial magnitude; proceed but expect partial closure only"
+  ],
+  "closure_fraction_pct": 25.70332281077653,
+  "wall_time_s": 0.01675219996832311
+}

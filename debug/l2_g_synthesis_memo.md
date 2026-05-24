@@ -10,22 +10,22 @@
 
 ### Files modified
 
-- `papers/standalone/paper_42_modular_hamiltonian_four_witness.tex`
+- `papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex`
   - New §11 "Lorentzian closure at finite cutoff" (~250 lines, 6 subsections plus Theorem 11.1 + Proposition + Theorem 7.1 sub-result).
   - §10 O3 refinement paragraph applied.
   - Page count grew 23 → 27 pages.
 
-- `papers/synthesis/paper_32_spectral_triple.tex`
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex`
   - New §VIII.E.E "Krein-level unified-strong four-witness theorem at finite cutoff (Sprint L2-E, 2026-05-17)" subsection (~200 lines) with statement of theorem, table of bit-exact residuals across the 9-cell panel, Riemannian-limit recovery proposition, H_local signature-independence finding, honest scope statement, and source list.
   - New `\bibitem{paper42}` added to bibliography.
 
-- `papers/observations/paper_34_projection_taxonomy.tex`
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex`
   - §V.E new L2-E closure paragraph (~50 lines) ahead of the pre-existing L2-D refinement paragraph.
   - §III.27 Wick rotation entry: appended L2-E closure subsection (~60 lines) at the end of the section, recording the status flip from "structural correspondence at the metric-functional level" to "literal identification at the Krein operator-system level (finite cutoff)."
   - §V.E table row 27 status flipped to "literal identification at Krein level (finite cutoff): Sprint L2-B/C/D/E closed bit-exact (2026-05-16/17)".
   - New `\bibitem{paper42}` added to bibliography.
 
-- `papers/core/paper_31_universal_coulomb_partition.tex`
+- `papers/group3_foundations/paper_31_universal_coulomb_partition.tex`
   - §8 new subsection "Empirical verification of the partition by Sprints L1 + L2 (2026-05-16/17)" (~50 lines) recording the 28/28 empirical verification of the a priori Sig/Op partition.
 
 - `CLAUDE.md`
@@ -39,7 +39,7 @@
 ### Files created
 
 - `debug/sprint_l2_synthesis_memo.md` — the synthesis memo (~3500 words, 7 sections covering executive summary, sub-sprint cascade, structural findings, WH1/Paper-38/40/42 framing, what's NOT closed, recommended next directions, and memory/CLAUDE.md status snapshot).
-- `papers/standalone/paper_43_lorentzian_extension_outline.md` — Paper 43 outline (~2000 words, 12 sections) modelled on Paper 42's structure with explicit "does NOT supersede Paper 42" relationship.
+- `papers/group1_operator_algebras/paper_43_lorentzian_extension_outline.md` — Paper 43 outline (~2000 words, 12 sections) modelled on Paper 42's structure with explicit "does NOT supersede Paper 42" relationship.
 - `memory/sprint_l2_closure.md` — session-restoration memory file with `metadata.type = project` and a single paragraph hook covering all five sub-sprints.
 
 ---
@@ -95,7 +95,7 @@ Synthesis memo §6 enumerates four next-direction options (A: draft Paper 43; B:
 
 Strong recommendation per the diagnostic-before-engineering rule + the strategic-skeleton-scope discipline of CLAUDE.md §1.5: do NOT auto-open Sprint L3. The operator-system finite-cutoff identification of Sprint L2-E is structurally sufficient for the four-witness Wick-rotation theorem on the framework's spectral-triple side. The continuum extension is original NCG-mathematics at 6-12 month scale, with a candidate shortcut (Nieuviarts 2025 morphism) that needs a separate L2-Nieuviarts-scoping pass to verify applicability to $S^3 = \mathrm{SU}(2)$ (odd-dim caveat).
 
-Option A (draft Paper 43) is the cleanest next deliverable per the Zenodo-deposit framing of CLAUDE.md §6. ~2 weeks of writing + 1 week of review; the outline at `papers/standalone/paper_43_lorentzian_extension_outline.md` is the starting point. Option C (state-side dictionary, §III.28 follow-on) is the lowest-risk parallel option if Paper 43 drafting is deferred.
+Option A (draft Paper 43) is the cleanest next deliverable per the Zenodo-deposit framing of CLAUDE.md §6. ~2 weeks of writing + 1 week of review; the outline at `papers/group1_operator_algebras/paper_43_lorentzian_extension_outline.md` is the starting point. Option C (state-side dictionary, §III.28 follow-on) is the lowest-risk parallel option if Paper 43 drafting is deferred.
 
 ---
 

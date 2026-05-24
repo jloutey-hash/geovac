@@ -16,7 +16,7 @@ Plus the operator-system-level six-witness collapse (§10):
 
 - **Six-witness collapse at Krein level (Paper 42 §8 lifted):** all six instantiations (BW, $\mathrm{HH}_{M=1}$, $\mathrm{HH}_{M=2}$, $\mathrm{Sew}_{M=1}$, $\mathrm{Unruh}_{a=1}$, $\mathrm{Unruh}_{a=2}$) give bit-identical period closures (cross-consistency residual exactly $0.0$). $\rho_W^L$ is $\beta$-independent under the BW choice $H_{\mathrm{local}} = K_L^{\alpha,W} / \beta$, so the modular operator $\Delta_L$ and modular Hamiltonian $K_L^{\mathrm{TT}}$ are bit-identical across the six witness instantiations.
 
-**Builds on:** Sprint L2-A scoping (`debug/sprint_l2a_scoping_memo.md` §4.7, §5.4), Sprint L2-B Krein space (`debug/l2_b_krein_construction_memo.md`), Sprint L2-C Lorentzian Dirac (`debug/l2_c_lorentzian_dirac_memo.md`), Sprint L2-D Connes audit (`debug/l2_d_connes_axiom_audit_31_memo.md`), Sprint L2-F falsifier catalogue (`debug/sprint_l2_falsifiers.md` §3 L2E-FALS-1/2/3), Paper 42 Riemannian closure (`papers/standalone/paper_42_modular_hamiltonian_four_witness.tex` §4-§8).
+**Builds on:** Sprint L2-A scoping (`debug/sprint_l2a_scoping_memo.md` §4.7, §5.4), Sprint L2-B Krein space (`debug/l2_b_krein_construction_memo.md`), Sprint L2-C Lorentzian Dirac (`debug/l2_c_lorentzian_dirac_memo.md`), Sprint L2-D Connes audit (`debug/l2_d_connes_axiom_audit_31_memo.md`), Sprint L2-F falsifier catalogue (`debug/sprint_l2_falsifiers.md` §3 L2E-FALS-1/2/3), Paper 42 Riemannian closure (`papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex` §4-§8).
 
 **Companion files:**
 

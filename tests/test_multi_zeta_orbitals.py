@@ -21,8 +21,12 @@ from geovac.multi_zeta_orbitals import (
     STO,
     MultiZetaOrbital,
     _build_ne_orbitals_neutral,
+    _build_na_valence_orbitals_physical,
+    _PHYSICAL_NA_OBSERVABLES,
+    _PHYSICAL_FIT_AVAILABLE,
     build_two_zeta_xe_orbitals_from_cr,
     density_from_orbitals,
+    get_physical_valence_orbitals,
     core_electron_count,
 )
 from geovac.neon_core import FrozenCore, _CLEMENTI_ZETA_XE
@@ -278,6 +282,175 @@ class TestFrozenCoreMultiZetaIntegration:
         assert fc.screening == 'single_zeta'
         # And basic queries work
         assert 0 < fc.z_eff(2.0) < 20.0
+
+
+# ---------------------------------------------------------------------------
+# Z=11 (Na) physical-fit valence orbital tabulation
+# Sprint alpha-Multi-zeta (Track alpha-2, 2026-05-23)
+# ---------------------------------------------------------------------------
+
+class TestPhysicalNaValenceOrbitals:
+    """Tests for the Na 3s/3p physical-fit multi-zeta tabulation.
+
+    These tests verify the production parameters added in Sprint
+    alpha-Multi-zeta Track alpha-2 (2026-05-23). The parameters were
+    fitted from the FrozenCore([Ne]) + radial Schrodinger solver against
+    the physical Na 3s and 3p screened wavefunctions, with bounded
+    coefficients to ensure a well-conditioned basis.
+    """
+
+    def test_physical_fit_registry_contains_z11(self):
+        """Z=11 is registered as a physical-fit Z."""
+        assert 11 in _PHYSICAL_FIT_AVAILABLE
+
+    def test_get_physical_valence_orbitals_na_returns_two_orbitals(self):
+        """Na has 3s and 3p valence orbitals."""
+        orbs = get_physical_valence_orbitals(11)
+        assert len(orbs) == 2
+        # (n, l) labels: 3s = (3, 0), 3p = (3, 1)
+        labels = sorted([(o.n_orbital, o.l_orbital) for o in orbs])
+        assert labels == [(3, 0), (3, 1)]
+
+    def test_get_physical_valence_orbitals_unsupported_z_raises(self):
+        """Unsupported Z raises NotImplementedError."""
+        with pytest.raises(NotImplementedError, match="physical-fit"):
+            get_physical_valence_orbitals(19)  # K not yet tabulated
+
+    def test_na_3s_is_normalized(self):
+        """integral |R_3s|^2 r^2 dr = 1 within 0.5%."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3s = orbs[0]
+        assert (na_3s.n_orbital, na_3s.l_orbital) == (3, 0)
+        r = np.geomspace(1e-4, 80.0, 8000)
+        R = na_3s.evaluate(r)
+        norm_sq = np.trapezoid(R ** 2 * r ** 2, r)
+        assert abs(norm_sq - 1.0) < 5e-3, (
+            f"Na 3s normalization {norm_sq:.6f} should be ~1.0"
+        )
+
+    def test_na_3p_is_normalized(self):
+        """integral |R_3p|^2 r^2 dr = 1 within 0.5%."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3p = orbs[1]
+        assert (na_3p.n_orbital, na_3p.l_orbital) == (3, 1)
+        r = np.geomspace(1e-4, 80.0, 8000)
+        R = na_3p.evaluate(r)
+        norm_sq = np.trapezoid(R ** 2 * r ** 2, r)
+        assert abs(norm_sq - 1.0) < 5e-3, (
+            f"Na 3p normalization {norm_sq:.6f} should be ~1.0"
+        )
+
+    def test_na_3s_radial_node_count(self):
+        """Na 3s has 2 radial nodes (3s has n_r = n - l - 1 = 2 nodes)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3s = orbs[0]
+        # Use uniform grid to count sign changes robustly
+        r = np.linspace(0.005, 50.0, 8000)
+        R = na_3s.evaluate(r)
+        sign_changes = int(np.sum(np.diff(np.sign(R)) != 0))
+        assert sign_changes == 2, (
+            f"Na 3s should have 2 radial nodes, got {sign_changes}"
+        )
+
+    def test_na_3p_radial_node_count(self):
+        """Na 3p has 1 radial node (3p has n_r = n - l - 1 = 1 node)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3p = orbs[1]
+        r = np.linspace(0.005, 50.0, 8000)
+        R = na_3p.evaluate(r)
+        sign_changes = int(np.sum(np.diff(np.sign(R)) != 0))
+        assert sign_changes == 1, (
+            f"Na 3p should have 1 radial node, got {sign_changes}"
+        )
+
+    def test_na_3s_mean_radius_matches_physical(self):
+        """<r>_3s ~ 4.47 bohr (physical Na 3s mean radius)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3s = orbs[0]
+        r = np.geomspace(1e-4, 80.0, 8000)
+        R = na_3s.evaluate(r)
+        # <r> = integral R^2 r^3 dr (radial part of integral <r> = integral |psi|^2 r dV)
+        mean_r = float(np.trapezoid(r * R ** 2 * r ** 2, r))
+        expected = _PHYSICAL_NA_OBSERVABLES['Na_3s_mean_radius_bohr']
+        # Allow 2% deviation (fit overlap was 0.999999 but L2 error gives small drift)
+        assert abs(mean_r - expected) / expected < 0.02, (
+            f"Na 3s mean radius {mean_r:.4f} should match physical "
+            f"{expected:.4f} within 2%"
+        )
+
+    def test_na_3p_mean_radius_matches_physical(self):
+        """<r>_3p ~ 5.93 bohr (physical Na 3p mean radius)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3p = orbs[1]
+        r = np.geomspace(1e-4, 80.0, 8000)
+        R = na_3p.evaluate(r)
+        mean_r = float(np.trapezoid(r * R ** 2 * r ** 2, r))
+        expected = _PHYSICAL_NA_OBSERVABLES['Na_3p_mean_radius_bohr']
+        assert abs(mean_r - expected) / expected < 0.02, (
+            f"Na 3p mean radius {mean_r:.4f} should match physical "
+            f"{expected:.4f} within 2%"
+        )
+
+    def test_na_3s_is_diffuse_not_compact(self):
+        """Na 3s mean radius is much larger than hydrogenic Z=1 1s (1.5 bohr).
+
+        This is the structural distinction the bimodule diagnostic
+        identified: physical Na 3s is diffuse (mean ~4.5 bohr) while
+        the hydrogenic Z_orb=1 placeholder is compact (mean ~1.5 bohr).
+        """
+        orbs = _build_na_valence_orbitals_physical()
+        na_3s = orbs[0]
+        r = np.geomspace(1e-4, 80.0, 8000)
+        R = na_3s.evaluate(r)
+        mean_r = float(np.trapezoid(r * R ** 2 * r ** 2, r))
+        # Diffuse: mean r > 3 bohr (hydrogenic Z=1 1s mean r = 1.5 bohr)
+        assert mean_r > 3.0, (
+            f"Na 3s should be diffuse (mean r > 3 bohr), got {mean_r:.4f}"
+        )
+
+    def test_na_3s_has_nonzero_density_at_origin(self):
+        """Na 3s has nonzero R(0) (s-orbital, finite at origin)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3s = orbs[0]
+        # Evaluate at very small r (R should be finite, large from core penetration)
+        r_small = np.array([0.001, 0.01])
+        R_small = na_3s.evaluate(r_small)
+        # R(0) for Na 3s should be at least a few bohr^(-3/2) from core penetration
+        assert R_small[0] > 0.5, (
+            f"Na 3s R(0+) should be substantial (>0.5), got {R_small[0]:.4e}"
+        )
+
+    def test_na_3p_vanishes_at_origin(self):
+        """Na 3p has R(0) = 0 (l=1 orbital, vanishes at origin as r^1)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3p = orbs[1]
+        r_small = np.array([0.001])
+        R_small = na_3p.evaluate(r_small)
+        # For l=1, R(r) ~ r at origin, so R(0.001) should be very small
+        # The STO primitives have r^{n-1} prefactor; for n=2 STO, prefactor is r,
+        # for n=3 it's r^2. The leading-order behavior is dominated by the n=2 STO
+        # contribution, giving R(r) ~ r at origin.
+        assert abs(R_small[0]) < 0.01, (
+            f"Na 3p R(0+ = 0.001) should be near zero, got {R_small[0]:.4e}"
+        )
+
+    def test_orbital_orthogonality_with_full_spherical_harmonic(self):
+        """3s and 3p have different l so they are angularly orthogonal regardless
+        of the radial overlap (full 3D overlap <3s|3p> = 0 by Y_lm orthogonality)."""
+        orbs = _build_na_valence_orbitals_physical()
+        na_3s, na_3p = orbs
+        assert na_3s.l_orbital != na_3p.l_orbital, (
+            "3s and 3p must have different l for angular orthogonality"
+        )
+
+    def test_na_orbital_evaluation_returns_arrays(self):
+        """Evaluation on a grid returns ndarray with matching shape."""
+        orbs = _build_na_valence_orbitals_physical()
+        r = np.linspace(0.1, 10.0, 100)
+        for orb in orbs:
+            R = orb.evaluate(r)
+            assert R.shape == r.shape
+            assert np.all(np.isfinite(R))
 
 
 # ---------------------------------------------------------------------------

@@ -242,7 +242,7 @@ Both failure modes produce useful information.
 ## Would-be Paper 40 outline
 
 If/when this gets written up as a standalone paper in
-`papers/observations/paper_40_*.tex`:
+`papers/group1_operator_algebras/paper_40_*.tex`:
 
   Title: Wolfenstein CKM Parameters and the Master Mellin Engine: A
   Candidate Spectral-Zeta Identification

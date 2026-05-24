@@ -46,6 +46,25 @@ module. Calling FrozenCore(Z, screening='multi_zeta') for those cores falls
 back to single-zeta with a UserWarning, preserving the existing behavior.
 The Xe-core upgrade is what closes the Cs HFS framework-native residual;
 the others can be added in follow-on commits.
+
+Sprint alpha-Multi-zeta (Track alpha-2, 2026-05-23):
+  - Z=11 (Na) physical-fit valence orbital tabulation. Mixed-Slater-n
+    multi-zeta expansion of the physical Na 3s and 3p screened
+    wavefunctions, fitted from FrozenCore([Ne]) + radial Schrodinger
+    solver. Marked `physical_fit=True` to distinguish from the heuristic
+    two-zeta path (CR67-based) used for the Xe core. Provides the
+    architecture for the W1c-residual orthogonality wall closure
+    (M-Y sub-sprint bimodule diagnostic): replaces the hydrogenic
+    Z_orb=1 Na valence basis with the proper screened-Schrodinger
+    eigenstates on the Na-centered side of NaH bond blocks.
+
+    Reproduction:
+      Na 3s: K=5 (n_slater_list=[1,1,2,3,3]), overlap=0.999999, L2 err 1.4e-6
+      Na 3p: K=4 (n_slater_list=[2,2,3,3]),   overlap=0.999999, L2 err 1.7e-6
+      Both have correct radial-node count (3s=2, 3p=1).
+    Source: GeoVac framework's own FrozenCore screening Schrodinger
+    solver + scipy.optimize.least_squares (bounded |c| <= 5 to keep
+    the basis well-conditioned).
 """
 
 from __future__ import annotations
@@ -421,6 +440,135 @@ def build_two_zeta_xe_orbitals_from_cr(
         _build_two_zeta_orbital(5, 0, 2, z5s),
         _build_two_zeta_orbital(5, 1, 6, z5p),
     ]
+
+
+# ---------------------------------------------------------------------------
+# Z=11 (Na) physical-fit valence orbital tabulation
+# ---------------------------------------------------------------------------
+# Sprint alpha-Multi-zeta (Track alpha-2, 2026-05-23).
+#
+# Physical-fit multi-zeta Slater expansion of the Na 3s and 3p valence
+# orbitals against the FrozenCore([Ne]) screened-Schrodinger eigenstates.
+# Fit performed via scipy.optimize.least_squares with bounded coefficients
+# (|c| <= 5) to keep the basis well-conditioned.
+#
+# Quality: both fits achieve overlap with physical > 0.999999 and L2 error
+# < 2e-6. Correct radial-node count (3s=2, 3p=1).
+#
+# Physical observables reproduced:
+#   Na 3s: eigenvalue -0.170 Ha, mean radius 4.466 bohr (matches FrozenCore HF)
+#   Na 3p: eigenvalue -0.110 Ha, mean radius 5.926 bohr
+#
+# Mark as physical_fit=True to distinguish from the heuristic two-zeta path
+# used for the Xe core (which uses CR67-based inner/outer ratios without
+# direct wavefunction fitting).
+
+# Na 3s: K=5, n_slater_list=[1,1,2,3,3]
+# Captures inner-shell amplitude (n=1 primitives) and outer diffuse tail
+# (n=3 primitives) with a node-mediating n=2 primitive.
+_PHYSICAL_NA_3S_PRIMITIVES = (
+    STO(n=1, zeta=7.342859),
+    STO(n=1, zeta=2.917049),
+    STO(n=2, zeta=4.181726),
+    STO(n=3, zeta=0.998238),
+    STO(n=3, zeta=0.667498),
+)
+_PHYSICAL_NA_3S_COEFFS = (
+    +0.296872, -0.815421, +0.454294, +0.437317, +0.604660,
+)
+
+# Na 3p: K=4, n_slater_list=[2,2,3,3]
+# Two inner n=2 primitives + two outer n=3 primitives. No n=1 needed (3p
+# has only 1 radial node and vanishes at origin as r).
+_PHYSICAL_NA_3P_PRIMITIVES = (
+    STO(n=2, zeta=6.905908),
+    STO(n=2, zeta=2.799357),
+    STO(n=3, zeta=0.816293),
+    STO(n=3, zeta=0.520949),
+)
+_PHYSICAL_NA_3P_COEFFS = (
+    +0.062615, +0.064902, -0.304300, -0.730867,
+)
+
+# Tabulated physical observables for the fit-quality regression
+_PHYSICAL_NA_OBSERVABLES = {
+    'Na_3s_eigenvalue_Ha': -0.170493,
+    'Na_3p_eigenvalue_Ha': -0.109992,
+    'Na_3s_mean_radius_bohr': 4.4661,
+    'Na_3p_mean_radius_bohr': 5.9262,
+    'Na_3s_radial_nodes': 2,
+    'Na_3p_radial_nodes': 1,
+}
+
+
+def _build_na_valence_orbitals_physical() -> List[MultiZetaOrbital]:
+    """Build the Na 3s and 3p physical-fit multi-zeta orbitals.
+
+    These are the VALENCE orbitals only (not the [Ne] core). Suitable
+    for substitution into the heavy-atom valence side of a bimodule
+    (e.g., the Na-centered sub-block of an NaH bond block) where the
+    hydrogenic Z_orb=1 placeholder is being replaced.
+
+    Returns
+    -------
+    list of MultiZetaOrbital
+        [Na 3s (occ=1, n=3, l=0), Na 3p (occ=0, n=3, l=1)].
+        Na ground-state config is 3s^1 (occ=1), so 3p occupancy=0;
+        callers using these orbitals as a basis for the molecular
+        Fock matrix should ignore the occupancy field and use the
+        physical molecular configuration.
+    """
+    return [
+        MultiZetaOrbital(
+            n_orbital=3, l_orbital=0, occupancy=1,
+            primitives=_PHYSICAL_NA_3S_PRIMITIVES,
+            coefficients=_PHYSICAL_NA_3S_COEFFS,
+        ),
+        MultiZetaOrbital(
+            n_orbital=3, l_orbital=1, occupancy=0,
+            primitives=_PHYSICAL_NA_3P_PRIMITIVES,
+            coefficients=_PHYSICAL_NA_3P_COEFFS,
+        ),
+    ]
+
+
+def get_physical_valence_orbitals(Z: int) -> List[MultiZetaOrbital]:
+    """Dispatch to the physical-fit valence orbital tabulation for Z.
+
+    Supported as of Sprint alpha-Multi-zeta (Track alpha-2, 2026-05-23):
+      Z=11 (Na): 3s, 3p physical-fit multi-zeta
+
+    Future cores (K, Rb, Cs, etc.) require their own physical-fit
+    sub-sprint. Until then, raise NotImplementedError so callers know
+    the tabulation is missing.
+
+    Parameters
+    ----------
+    Z : int
+        Nuclear charge.
+
+    Returns
+    -------
+    list of MultiZetaOrbital
+        Valence orbital multi-zeta expansions for the requested Z.
+
+    Raises
+    ------
+    NotImplementedError
+        If Z is not yet tabulated. Use the heuristic two-zeta or
+        hydrogenic-Z_orb=1 path as a fallback in that case.
+    """
+    if Z == 11:
+        return _build_na_valence_orbitals_physical()
+    raise NotImplementedError(
+        f"No physical-fit valence orbital tabulation for Z={Z}. "
+        "Currently supported: Z=11 (Na 3s, 3p). Future cores require "
+        "their own physical-fit sub-sprint."
+    )
+
+
+# Registry of Z values with physical-fit tabulations available.
+_PHYSICAL_FIT_AVAILABLE = {11}
 
 
 # ---------------------------------------------------------------------------

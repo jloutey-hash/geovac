@@ -1,0 +1,33 @@
+{
+  "sprint": "F6 Step 1b - empirical build test",
+  "date": "2026-05-23",
+  "R": 3.5,
+  "success": true,
+  "build_time_s": 290.6477266000584,
+  "build_time_min": 4.84412877666764,
+  "M": 60,
+  "h1_shape": [
+    60,
+    60
+  ],
+  "eri_shape": [
+    60,
+    60,
+    60,
+    60
+  ],
+  "nuclear_repulsion": -161.5785737521032,
+  "h1_frobenius_norm": 4.287279988221295,
+  "eri_frobenius_norm": 3.1894947054470455,
+  "max_abs_h1": 1.6506942229914046,
+  "max_abs_eri": 0.625,
+  "cross_block_h1_info": {
+    "enabled": true,
+    "n_nonzero": 32,
+    "max_abs": 1.6506942229914046,
+    "frobenius": 3.9239262112910924
+  },
+  "error": null,
+  "gate": "GO_FULL_2POINT",
+  "gate_reason": "Build < 30min, safe for both R=3.5 and R=10"
+}

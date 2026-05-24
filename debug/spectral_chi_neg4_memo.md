@@ -403,5 +403,5 @@ there.
 - Data: `debug/data/spectral_chi_neg4.json` (all 7 s-values, 100-dps PSLQ)
 - Tests: `tests/test_spectral_chi_neg4.py` (25 tests, all passing)
 - Related: `geovac/qed_vertex.py` (Paper 28 Eq.(4) implementation),
-  `papers/observations/paper_28_qed_s3.tex` (§Vertex Topology),
+  `papers/group5_qed_gauge/paper_28_qed_s3.tex` (§Vertex Topology),
   `debug/riemann_limit_memo.md` (Sprint 2 RH-G redirection rationale).

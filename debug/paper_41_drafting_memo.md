@@ -1,7 +1,7 @@
 # Paper 41 drafting memo
 
 **Date:** 2026-05-15
-**Task:** Synthesize the XCWG sprint results (XCWG-A foundation + XCWG-B RG/predictions/observables + XCWG-C Gaussian Wilson + XCWG-D strong-coupling Wilson) into a single coherent paper at `papers/observations/paper_41_rule_b_wilson_u1.tex`.
+**Task:** Synthesize the XCWG sprint results (XCWG-A foundation + XCWG-B RG/predictions/observables + XCWG-C Gaussian Wilson + XCWG-D strong-coupling Wilson) into a single coherent paper at `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex`.
 
 ---
 
@@ -9,8 +9,8 @@
 
 **Title:** "Wilson $U(1)$ Lattice Gauge on the Dirac-Rule-B Graph: Structural Compatibility with 3D Compact $U(1)$ on a Non-Cubic Substrate"
 
-**File:** `papers/observations/paper_41_rule_b_wilson_u1.tex` (54 KB)
-**PDF:** `papers/observations/paper_41_rule_b_wilson_u1.pdf` (420 KB, 17 pages)
+**File:** `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex` (54 KB)
+**PDF:** `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.pdf` (420 KB, 17 pages)
 **Word count:** 6,708 (including LaTeX markup; body text is ~6,000 words, within the requested 6000-8000 range)
 **Compile status:** Clean two-pass `pdflatex`, no warnings or errors in the log.
 
@@ -202,8 +202,8 @@ None of these are precluded by the current data; they are open follow-ons.
 
 ## 6. Files produced
 
-- `papers/observations/paper_41_rule_b_wilson_u1.tex` (54 KB, ~6,000 words body)
-- `papers/observations/paper_41_rule_b_wilson_u1.pdf` (420 KB, 17 pages)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex` (54 KB, ~6,000 words body)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.pdf` (420 KB, 17 pages)
 - `debug/paper_41_drafting_memo.md` (this file)
 
 ## 7. Reproducibility
@@ -277,8 +277,8 @@ Per CLAUDE.md §1.5 rhetoric rule and the agent's "INCONCLUSIVE-LEANING-3D-LIKE"
 
 ### 8.5 v2 files produced
 
-- `papers/observations/paper_41_rule_b_wilson_u1.tex` (v2, 64.7 KB)
-- `papers/observations/paper_41_rule_b_wilson_u1.pdf` (v2, 444 KB, 19 pages)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex` (v2, 64.7 KB)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.pdf` (v2, 444 KB, 19 pages)
 - `debug/paper_41_drafting_memo.md` (this file, §8 added)
 
 ---
@@ -428,8 +428,8 @@ resolution, not thermodynamic-limit physics.
 
 ### 9.5 v3 files produced
 
-- `papers/observations/paper_41_rule_b_wilson_u1.tex` (v3, 83.6 KB)
-- `papers/observations/paper_41_rule_b_wilson_u1.pdf` (v3, 487 KB, 23 pages)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex` (v3, 83.6 KB)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.pdf` (v3, 487 KB, 23 pages)
 - `debug/paper_41_drafting_memo.md` (this file, §9 added)
 
 ---
@@ -659,8 +659,8 @@ clean seven-pass statement.
 
 ### 10.7 v4 files produced
 
-- `papers/observations/paper_41_rule_b_wilson_u1.tex` (v4, 124.5 KB)
-- `papers/observations/paper_41_rule_b_wilson_u1.pdf` (v4, 558 KB, 33 pages)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex` (v4, 124.5 KB)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.pdf` (v4, 558 KB, 33 pages)
 - `debug/paper_41_drafting_memo.md` (this file, §10 added)
 
 ---

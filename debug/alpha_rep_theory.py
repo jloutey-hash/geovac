@@ -12,7 +12,7 @@ Part C: Plancherel formula and Weyl integration
 Part D: Unified representation-theoretic expression for K/pi
 
 Reference: Paper 2 — "The Fine Structure Constant from Spectral
-Geometry of the Hopf Fibration" (papers/conjectures/paper_2_alpha.tex)
+Geometry of the Hopf Fibration" (papers/group5_qed_gauge/paper_2_alpha.tex)
 """
 
 import sys

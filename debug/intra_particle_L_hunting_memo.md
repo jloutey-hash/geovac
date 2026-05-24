@@ -117,7 +117,7 @@ These are not framework defects — they are precise statements of where the Geo
 
 Promote three projections — charge-density (a), magnetization-density (b), tensor-distribution (c) — as §III.17–§III.19 candidates. Do *not* unify them into one projection. The audit memo §F.1's single "magnetization-density projection" candidate handles only (b); class (a) is a distinct sibling with its own operator-level analog needed when the framework eventually constructs a `geovac/charge_density.py` module to handle Foldy / Friar contact corrections to $V_{ne}$ at the operator level. Class (c) is a third sibling for tensor couplings, currently a forward-looking slot.
 
-**Files referenced:** `debug/paper34_v_base_unit_audit_memo.md` §F.1; `geovac/magnetization_density.py`; `papers/observations/paper_34_projection_taxonomy.tex` §III.16 (Breit retardation as the most recent precedent for adding a projection); `papers/applications/paper_23_nuclear_shell.tex` §VII.4–VIII (operator-level Zemach + deuterium HFS).
+**Files referenced:** `debug/paper34_v_base_unit_audit_memo.md` §F.1; `geovac/magnetization_density.py`; `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` §III.16 (Breit retardation as the most recent precedent for adding a projection); `papers/group4_quantum_computing/paper_23_nuclear_shell.tex` §VII.4–VIII (operator-level Zemach + deuterium HFS).
 
 **Sources for current values:**
 - Proton charge radius: [CODATA 2022 (NIST)](https://physics.nist.gov/cgi-bin/cuu/Value?rp), [CODATA 2022 arxiv](https://arxiv.org/html/2409.03787v1) — $r_p = 0.84075(64)$ fm

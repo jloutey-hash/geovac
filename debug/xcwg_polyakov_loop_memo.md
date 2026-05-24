@@ -8,7 +8,7 @@
 - `geovac/ihara_zeta_dirac.py` (Rule B adjacency, unchanged)
 - `debug/xcwg_alternative_observables_memo.md` §2.4 + §8 (where this sprint was scoped)
 - `debug/xcwg_monopole_density.py` (XCWG-F MC infrastructure that this sprint adapts)
-- `papers/observations/paper_41_rule_b_wilson_u1.tex` v3 (the five-witness verdict this sprint extends)
+- `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex` v3 (the five-witness verdict this sprint extends)
 
 ---
 

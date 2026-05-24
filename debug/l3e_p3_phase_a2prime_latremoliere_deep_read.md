@@ -56,7 +56,11 @@ $c_0(\Z) \rtimes_\alpha \Z$ as pointed proper QMS — non-unital, non-commutativ
 
 ## §2. Physics-side application #1 — Sturmian basis as L-Lipschitz μ-pinned exhaustive sequence
 
-### The structural identification (substantive new content)
+> **CORRECTION (2026-05-23, post-Sprint L3e-P3 X/Y/Z synthesis):** the structural identification below is at the WRONG level under the natural Coulomb-multiplication algebra reading ($\Acal = C_0(\R^3) \otimes M_d$). Under that reading, the Sturmian projector is NOT in $\Acal$ (it's not a multiplication operator); the exhaustive sequence is smooth radial cutoffs $\chi_n \in C_c^\infty(\R^3)$, and the Sturmian truncation lives at the operator-system-truncation level (tunnel quotient morphism), NOT at the exhaustive-sequence level. The identification below IS valid under a different reading ($\Acal$ = spectral algebra containing projectors), but two of three Def 1.29 axioms are then trivial (only L-decay is non-trivial). Both readings are legitimate but give different framings. See `debug/subsprint_x_sturmian_latremoliere_verification.md` (X memo, §1-§8) for the correction details and `debug/sprint_l3e_p3_synthesis_memo.md` (synthesis, §1) for the X/Z framing divergence.
+>
+> **Additional load-bearing finding (Sub-sprint X §3):** the Leibniz axiom $L(fg) \le \|f\|_\Acal L(g) + L(f) \|g\|_\Acal$ FAILS for second-order Schrödinger $L(f) = \|[D_\mathrm{S}, M_f]\|$ (cross-term $2 \nabla f \cdot \nabla g$ doesn't cancel). Holds cleanly for first-order Dirac. **R1 workaround:** use $L(f) = \|\nabla f\|_\infty$ (standard NCG spin-Dirac approach). The framework's Schrödinger-based atomic FCI inherits Latrémolière hypertopology via R1, NOT via the direct commutator.
+
+### The structural identification (substantive new content) — see correction above
 
 GeoVac uses **Coulomb Sturmian bases** in several places: `geovac/casimir_ci.py` (graph-native CI), `geovac/hylleraas_r12.py` (Hylleraas $r_{12}$ explicit correlation), `geovac/hylleraas_eckart_pstate.py` (Hylleraas-Eckart double-α P-state). The Sturmian basis at exponent $\lambda = Z/n_*$ consists of functions $\{S_{n, l, m}^\lambda(r)\}$ that:
 - Are eigenfunctions of a Sturmian operator (related to but distinct from the Schrödinger operator)

@@ -2,7 +2,7 @@
 
 **Paper:** *Latrémolière propinquity convergence of truncated Camporesi–Higuchi spectral triples on $S^3$*
 **Author:** J. Loutey (independent researcher)
-**Manuscript:** `papers/standalone/paper_38_su2_propinquity_convergence.tex`
+**Manuscript:** `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex`
 **Status:** First draft, May 2026, post-WH1-PROVEN closure (2026-05-06).
 
 This memo documents the outreach plan for Paper 38: targets, contacts, email templates, conferences, and timeline. The paper is the first standalone preprint in the GeoVac project's spectral-triple thread aimed at the noncommutative-geometry community proper, rather than at the project's internal synthesis (which lives in Paper 32).

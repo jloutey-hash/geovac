@@ -259,4 +259,4 @@ Runs in ~30 seconds. All tests pass.
 - **Johnson 2007**: W.R. Johnson, "Atomic Structure Theory" (Springer), Ch. 8: covers both the angular reduction via 6j/9j symbols and the radial integrals including retardation corrections.
 - **BR-B memo**: `debug/br_b_breit_radial_memo.md` — scoping that identified the region-splitting bug and classified bare 1/r₁₂³ as distributional-embedding.
 - **BR-C memo/script**: `debug/br_c_he_2P_benchmark.py` — benchmark that confirmed the angular J-pattern is correct but revealed the radial integrals were insufficient.
-- **Paper 18**: `papers/core/paper_18_exchange_constants.tex` §II.B — taxonomy of transcendental content in the framework.
+- **Paper 18**: `papers/group3_foundations/paper_18_exchange_constants.tex` §II.B — taxonomy of transcendental content in the framework.

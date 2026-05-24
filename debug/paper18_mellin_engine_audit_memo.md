@@ -77,14 +77,14 @@ Reasoning:
 
 ## 5. Files modified
 
-- `papers/core/paper_18_exchange_constants.tex` — four edits as above.
+- `papers/group3_foundations/paper_18_exchange_constants.tex` — four edits as above.
 - `debug/paper18_mellin_engine_audit_memo.md` — this file.
 
 ## 6. Files NOT modified (intentional)
 
-- `papers/synthesis/paper_32_spectral_triple.tex` — the §VIII case-exhaustion theorem and rem:master_mellin_domain are already in good shape; Paper 18 now cross-references them correctly.
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` — the §VIII case-exhaustion theorem and rem:master_mellin_domain are already in good shape; Paper 18 now cross-references them correctly.
 - `CLAUDE.md` — §1.7 WH1 entry and §2 sprint MR-A/B/C bullet already document the master Mellin engine domain partition with the same content as the post-edit §III.7.
-- `papers/observations/paper_28_qed_s3.tex` — Theorem 3 is the cleanest M3 signature and is now cross-referenced from Paper 18; no edit needed on the Paper 28 side.
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — Theorem 3 is the cleanest M3 signature and is now cross-referenced from Paper 18; no edit needed on the Paper 28 side.
 
 ## 7. Audit verdict
 

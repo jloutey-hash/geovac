@@ -27,8 +27,8 @@ L3 (Lorentzian propinquity) is the named multi-month follow-up, deferred.
 
 ```
 CONTEXT FILES (read once):
-  - papers/standalone/paper_42_modular_hamiltonian_four_witness.tex  (Riemannian Krein analog J_TT, BW-α)
-  - papers/synthesis/paper_32_spectral_triple.tex §III, §IV          (current GeoVac Riemannian triple)
+  - papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex  (Riemannian Krein analog J_TT, BW-α)
+  - papers/group1_operator_algebras/paper_32_spectral_triple.tex §III, §IV          (current GeoVac Riemannian triple)
   - debug/lorentzian_l0_audit_memo.md                                (28-projection partition)
   - debug/sprint_l2a_scoping_memo.md §2 (BBB tables), §4.1-4.2       (Krein space construction)
   - debug/data/sprint_l2a_bibliography.json                          (reference list)
@@ -91,8 +91,8 @@ RISKS:
 
 ```
 CONTEXT FILES (read once):
-  - papers/synthesis/paper_32_spectral_triple.tex §III                (D_GV definition)
-  - papers/standalone/paper_42_modular_hamiltonian_four_witness.tex §4, §6
+  - papers/group1_operator_algebras/paper_32_spectral_triple.tex §III                (D_GV definition)
+  - papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex §4, §6
   - debug/l2_b_krein_construction_memo.md                              (Krein space from L2-B)
   - geovac/krein_space_construction.py                                 (Krein space module from L2-B)
   - geovac/full_dirac_operator_system.py                               (existing Camporesi-Higuchi spatial D_GV)
@@ -158,12 +158,12 @@ RISKS:
 
 ```
 CONTEXT FILES (read once):
-  - papers/synthesis/paper_32_spectral_triple.tex §IV                  (existing R-side audit at KO-dim 3)
+  - papers/group1_operator_algebras/paper_32_spectral_triple.tex §IV                  (existing R-side audit at KO-dim 3)
   - debug/l2_b_krein_construction_memo.md, debug/l2_c_lorentzian_dirac_memo.md
   - geovac/krein_space_construction.py, geovac/lorentzian_dirac.py
   - geovac/real_structure.py                                            (existing R-side J at KO-dim 3)
   - debug/sprint_l2a_scoping_memo.md §2 (BBB sign table), §4.4         (Connes axiom audit)
-  - papers/observations/paper_34_projection_taxonomy.tex §V.E           (L0 audit table predictions)
+  - papers/group6_precision_observations/paper_34_projection_taxonomy.tex §V.E           (L0 audit table predictions)
 
 TASK:
   Verify Paper 32 §IV Connes axiom audit at signature (3, 1) using BBB Table 1
@@ -239,8 +239,8 @@ RISKS:
 
 ```
 CONTEXT FILES (read once):
-  - papers/standalone/paper_42_modular_hamiltonian_four_witness.tex   (Riemannian unified-strong proof; THE reference)
-  - papers/synthesis/paper_32_spectral_triple.tex §VIII rem:bisognano_wichmann_reading
+  - papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex   (Riemannian unified-strong proof; THE reference)
+  - papers/group1_operator_algebras/paper_32_spectral_triple.tex §VIII rem:bisognano_wichmann_reading
   - debug/l2_b_krein_construction_memo.md, debug/l2_c_lorentzian_dirac_memo.md, debug/l2_d_connes_axiom_audit_31_memo.md
   - geovac/krein_space_construction.py, geovac/lorentzian_dirac.py, geovac/connes_axiom_audit_31.py
   - geovac/modular_hamiltonian.py                                     (Riemannian TomitaConjugation, BW-α, BW-γ)
@@ -329,7 +329,7 @@ RISKS:
 CONTEXT FILES:
   - debug/sprint_l2a_scoping_memo.md §5.5 (falsifier list)
   - debug/lorentzian_l0_audit_memo.md
-  - papers/standalone/paper_42_modular_hamiltonian_four_witness.tex (Riemannian falsifier model)
+  - papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex (Riemannian falsifier model)
 
 TASK:
   Codify the falsifiers from L2-B/C/D/E into a single tracking document.
@@ -359,10 +359,10 @@ CONTEXT FILES:
   - All L2-B/C/D/E memos and data.
   - debug/sprint_l2a_scoping_memo.md
   - debug/sprint_l2_falsifiers.md (L2-F output)
-  - papers/standalone/paper_42_modular_hamiltonian_four_witness.tex
-  - papers/synthesis/paper_32_spectral_triple.tex
-  - papers/observations/paper_34_projection_taxonomy.tex
-  - papers/core/paper_31_universal_coulomb_partition.tex
+  - papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex
+  - papers/group1_operator_algebras/paper_32_spectral_triple.tex
+  - papers/group6_precision_observations/paper_34_projection_taxonomy.tex
+  - papers/group3_foundations/paper_31_universal_coulomb_partition.tex
 
 TASK:
   Write the Sprint L2 synthesis memo summarizing all closures and apply

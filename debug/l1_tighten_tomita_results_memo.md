@@ -266,8 +266,8 @@ GeoVac memos:
 - `debug/l1_witness_spec_memo.md` (L1-C four-witness specs; BW-γ as "definitional choice" recommendation)
 - `debug/unruh_pendant_memo.md` (four-witness Wick rotation, 2026-05-10)
 - `debug/bisognano_wichmann_track_d_memo.md` (Track D founding, 2026-05-09)
-- `papers/synthesis/paper_32_spectral_triple.tex` (§VIII rem:bisognano_wichmann_reading, §VIII.F Modular Hamiltonian)
-- `papers/observations/paper_34_projection_taxonomy.tex` (§III.27 Wick rotation)
-- `papers/standalone/paper_38_su2_propinquity_convergence.tex` (§6.3)
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (§VIII rem:bisognano_wichmann_reading, §VIII.F Modular Hamiltonian)
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (§III.27 Wick rotation)
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` (§6.3)
 
 End of Sprint L1-tighten closure memo.

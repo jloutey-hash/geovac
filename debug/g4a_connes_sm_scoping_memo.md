@@ -390,7 +390,7 @@ If PI prefers a different next sprint:
 - `debug/g3b_chirality_F_audit_memo.md`
 - `debug/g3c_tensor_chirality_memo.md` (referenced; not re-read in this scoping)
 - `debug/g4_cross_manifold_scoping_memo.md`
-- `papers/synthesis/paper_32_spectral_triple.tex` §VIII.B G2/G3/G4
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` §VIII.B G2/G3/G4
 
 External: Connes & Marcolli (2008), *Noncommutative Geometry, Quantum Fields and Motives*, Ch. 13. Connes (1996), J. Math. Phys. 36. Chamseddine, Connes, Marcolli (2007), Adv. Theor. Math. Phys. 11. van Suijlekom (2015), Ch. 8–9.
 

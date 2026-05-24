@@ -354,8 +354,8 @@ not a new wall.
 - Template inputs:
   - `debug/sprint_mh_track_a.py` (full Uehling kernel)
   - `debug/precision_catalogue_muonium_lamb.py` (rest-mass swap architecture)
-  - `papers/observations/paper_36_bound_state_qed.tex` (Paper 36 architecture)
-  - `papers/observations/paper_34_projection_taxonomy.tex` (§V.C autopsy template)
+  - `papers/group5_qed_gauge/paper_36_bound_state_qed.tex` (Paper 36 architecture)
+  - `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (§V.C autopsy template)
 
 ## 10. Headline numbers (one-line summary)
 

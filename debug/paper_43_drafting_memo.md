@@ -4,8 +4,8 @@
 **Date drafted:** 2026-05-17
 **Status:** First draft complete, three-pass clean LaTeX compile, arXiv-ready pending PI sign-off on metadata.
 **Files:**
-- `papers/standalone/paper_43_lorentzian_extension.tex` (1971 lines, 10,429 words)
-- `papers/standalone/paper_43_lorentzian_extension.pdf` (22 pages, 568 KB)
+- `papers/group1_operator_algebras/paper_43_lorentzian_extension.tex` (1971 lines, 10,429 words)
+- `papers/group1_operator_algebras/paper_43_lorentzian_extension.pdf` (22 pages, 568 KB)
 - `debug/paper_43_drafting_memo.md` (this file)
 
 ---

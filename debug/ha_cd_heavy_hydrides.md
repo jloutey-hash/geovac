@@ -87,7 +87,7 @@ BaH (Z=56) is the heaviest atom covered by Sunaga's main-paper data that GeoVac 
 ## 6. What this unblocks
 
 - **Sprint 3 HA-E (Sunaga SI scrape):** once Sunaga's SI Tables S1–S3 are obtained, fill the BeH/MgH/CaH/SrH/BaH Q=18 cells and do a true matched-Q comparison. Expected factor: GeoVac sits 80–250× below Sunaga on Pauli count at matched Q (Tier 2 T4 projection).
-- **Paper 20 Tier-2 table promotion:** the Tier-2 table in `papers/applications/paper_20_resource_benchmarks.tex` currently shows native-Q ratios (LiH, BeH, CaH). SrH / BaH rows can now be added at native Q=20.
+- **Paper 20 Tier-2 table promotion:** the Tier-2 table in `papers/group4_quantum_computing/paper_20_resource_benchmarks.tex` currently shows native-Q ratios (LiH, BeH, CaH). SrH / BaH rows can now be added at native Q=20.
 - **Tier 3+ extensions:** with [Kr]/[Xe] frozen cores and monohydride builders in production, the natural next heavy-atom targets are the Ra/Fr alkalis (require [Rn] core) and the transition-metal monohydrides at n_max=3 (require the T7 Kramers-Pasternak recursion for Dirac-Coulomb ⟨r^{-2,-3}⟩ off-diagonal matrix elements, Sprint 3 HA-F).
 
 ---

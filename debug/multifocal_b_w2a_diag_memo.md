@@ -8,7 +8,7 @@
 - `debug/multifocal_literature_review_memo.md` (Track 3, esp. §3 on Hekkelman–McDonald and §6a on Connes–vS post-2024 ecosystem; surprises S5 and S6).
 - `debug/track_ts_e1_theorem_promotion_memo.md` (Sprint TS-E1, Paper 32 §VIII case-exhaustion theorem — full statement, audit, proof skeleton, LaTeX draft).
 - `debug/mr_b_spectral_action_rate_memo.md` (Sprint MR-B closed-form modular residual ε(t) for the Camporesi–Higuchi Dirac heat kernel on $S^3$; the exact Jacobi-ϑ₂ identity used as the Q2 numerical anchor).
-- `papers/synthesis/paper_32_spectral_triple.tex` §VIII case-exhaustion theorem (lines ~1376–1543), §VIII.B SM gauge appendix, §VIII.C G4b cross-manifold scoping (the existing Hekkelman–McDonald citation is at line 2438, in the G4b "the closest analogs" remark).
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` §VIII case-exhaustion theorem (lines ~1376–1543), §VIII.B SM gauge appendix, §VIII.C G4b cross-manifold scoping (the existing Hekkelman–McDonald citation is at line 2438, in the G4b "the closest analogs" remark).
 
 ---
 

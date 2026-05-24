@@ -2,7 +2,7 @@
 
 **Phase:** 4H alpha documentation sprint
 **Date:** 2026-04-10
-**Target file:** `papers/core/paper_18_exchange_constants.tex`
+**Target file:** `papers/group3_foundations/paper_18_exchange_constants.tex`
 **Lines added:** ~168 lines (new file length ~1702 lines, up from 1534)
 **Insertion point:** After line 830 (end of second Observation in
 Section V, "Connection to the Fine Structure Constant"), before the

@@ -1,0 +1,55 @@
+{
+  "sprint": "F6 - NaH max_n=4 W1e closure test",
+  "date": "2026-05-23",
+  "summary": {
+    "verdict": "PARTIAL_IMPROVEMENT",
+    "verdict_source": "Step 3 PES",
+    "D_e_Ha": 3.9288343361499187,
+    "D_e_F3_baseline_max_n_2_Ha": 4.374,
+    "D_e_experimental_Ha": 0.075,
+    "wall_closure_fraction_pct": 10.177541468909029,
+    "F5_predicted_Hartree_closure_pct": 25.7,
+    "closure_coincidence_pct_diff": 15.52245853109097,
+    "bonding_signature_preserved": true
+  },
+  "step1_feasibility": {
+    "M_total": 60,
+    "Q_total": 120,
+    "fci_dim_singlet": 3600,
+    "gate": "PROCEED_WITH_CAVEATS",
+    "cross_block_h1_ss_coverage_pct": 1.7777777777777777
+  },
+  "step1b_build_test": {
+    "build_time_min": 4.84412877666764,
+    "gate": "GO_FULL_2POINT",
+    "n_xblockh1_nonzero": 32
+  },
+  "step2_fci_2point": {
+    "E_R3_5_Ha": -167.82047591479895,
+    "E_R10_Ha": -164.5882680829816,
+    "D_e_2pt_Ha": 3.232207831817334,
+    "wall_closure_pct": 26.104073346654456,
+    "verdict": "PARTIAL_IMPROVEMENT"
+  },
+  "step3_minipes": {
+    "R_grid": [
+      2.0,
+      3.0,
+      3.566,
+      5.0,
+      10.0
+    ],
+    "R_min_bohr": 2.0,
+    "E_min_Ha": -168.51710241913173,
+    "well_depth_Ha": 3.9288343361499187,
+    "internal_minimum": false,
+    "wall_closure_pct": 10.177541468909029,
+    "verdict": "PARTIAL_IMPROVEMENT"
+  },
+  "structural_findings": {
+    "two_point_gate_artifact": "Step 2 2-point gate at R=3.5/R=10 reported 26.1% closure (D_e = 3.232 Ha). Step 3 PES revealed inner-region collapse continues from R=3.5 down to R=2.0 with additional 0.696 Ha descent. PES-derived wall depth (E(R=10)-E(R_min=2.0)) is +3.929 Ha = 10.2% closure of F3 baseline 4.374 Ha. The 2-point gate OVERESTIMATES closure by 2.5x in this regime. Methodological caution for future quick-gate testing.",
+    "F5_F6_closure_independence": "F5 explicit-core Hartree J-K predicted 25.7% closure (at 2-pt level). F6 basis enlargement to max_n=4 closes 10.2% (at PES level). The two are structurally INDEPENDENT mechanisms, with the basis-truncation contribution substantially smaller than the Hartree-pressure contribution. Combined estimate: ~35% closure if additive, still far below the ~96% required for 2x experimental window.",
+    "W1e_classification_after_F6": "Genuine deep correlation effect that decomposes into structurally INDEPENDENT sub-mechanisms: (a) basis-truncation: ~10% closure ceiling at max_n=4 PES level (this sprint). (b) Hartree-pressure: ~25% closure ceiling at max_n=2 2-pt level (F5 predicted). (c) deep-correlation-residual: ~65-90% of wall remaining (requires multi-week+ architectural closure path such as Schmidt orthogonalization).",
+    "bonding_signature_preserved": "Dominant NO occupation 1.9971-1.9992 across full PES at max_n=4. Na/H amplitude split ~50/50 across full R range. F3 W1d closure (bonding-orbital construction) preserved under basis enlargement."
+  }
+}

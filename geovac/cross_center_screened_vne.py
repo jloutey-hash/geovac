@@ -76,6 +76,7 @@ from geovac.shibuya_wulfman import (
     _angular_coefficient,
     _build_block_rotation_matrix,
     _radial_split_integral,
+    _radial_split_integral_multizeta,
     compute_cross_center_vne,
 )
 
@@ -267,6 +268,8 @@ def _screened_radial_integral(
     n_grid: int = 4000,
     r_max: Optional[float] = None,
     n_legendre: int = 64,
+    orbital_bra=None,
+    orbital_ket=None,
 ) -> Tuple[float, float]:
     """Compute the L-th radial integral pieces of the screened cross-center V_ne.
 
@@ -282,24 +285,62 @@ def _screened_radial_integral(
     NOTE: rad_bare here is the radial part WITHOUT the -Z_nuc factor;
     f_screen_L is the L-th projection of f_screen(rho), which is
     (V_screened - V_bare). So total V_ne = -Z_nuc * rad_bare + rad_screen.
+
+    Multi-zeta extension (Sprint F1 Phase 1, 2026-05-23): if both
+    ``orbital_bra`` and ``orbital_ket`` are supplied as
+    ``MultiZetaOrbital`` instances (from ``geovac.multi_zeta_orbitals``),
+    the radial integration replaces the hydrogenic Z_orb wavefunctions
+    on BOTH the bare-Coulomb analytical piece (via
+    ``_radial_split_integral_multizeta``) AND the screening-correction
+    grid quadrature (via ``orbital.evaluate(r)``). When supplied, the
+    (Z_orb, n1/l1, n2/l2) arguments are ignored for the radial-shape
+    aspect of the calculation; they remain only as the legacy interface
+    for the hydrogenic fallback. Backward compatible: both None gives
+    bit-exact existing behavior.
     """
-    # 1. Bare Coulomb radial integral (analytical, exact) — same as
-    #    shibuya_wulfman._radial_split_integral
-    rad_bare = _radial_split_integral(
-        Z_orb, n1, l1, n2, l2, L, R_AB, n_grid=n_grid,
-    )
+    use_multi_zeta = (orbital_bra is not None) and (orbital_ket is not None)
+
+    # 1. Bare Coulomb radial integral
+    if use_multi_zeta:
+        # Multi-zeta split-region integral (sum of K_bra x K_ket pair-integrals
+        # at K distinct decay rates, each evaluated analytically). Same kernel
+        # as the bare path's multi-zeta dispatch.
+        rad_bare = _radial_split_integral_multizeta(
+            orbital_bra, orbital_ket, L, R_AB,
+        )
+    else:
+        # Legacy hydrogenic path (analytical, exact).
+        rad_bare = _radial_split_integral(
+            Z_orb, n1, l1, n2, l2, L, R_AB, n_grid=n_grid,
+        )
 
     # 2. Screening correction radial integral (numerical quadrature)
     if r_max is None:
         # Choose r_max from orbital extent: 80/Z is canonical for hydrogenic
         # orbitals, but make sure to extend several bohr past R_AB.
-        r_max = max(80.0 / max(Z_orb, 0.5), 4.0 * R_AB, 30.0)
+        # For multi-zeta orbitals we extend the grid wider because the
+        # physical-fit orbitals can have very small zetas in their outer
+        # primitives (Na 3s has zeta ~ 0.4 bohr^-1 in some BBB93 fits).
+        if use_multi_zeta:
+            # Use minimum exponent from the smaller side as an extent proxy.
+            zeta_min = min(
+                min(p.zeta for p in orbital_bra.primitives),
+                min(p.zeta for p in orbital_ket.primitives),
+            )
+            r_max = max(40.0 / max(zeta_min, 0.1), 4.0 * R_AB, 30.0)
+        else:
+            r_max = max(80.0 / max(Z_orb, 0.5), 4.0 * R_AB, 30.0)
 
     # Use uniform radial grid (np.linspace excludes 0)
     r_full = np.linspace(0, r_max, n_grid + 1)[1:]
 
-    R1 = _radial_wf_grid(Z_orb, n1, l1, r_full)
-    R2 = _radial_wf_grid(Z_orb, n2, l2, r_full)
+    if use_multi_zeta:
+        # Physical-fit radial wavefunctions evaluated on the grid.
+        R1 = orbital_bra.evaluate(r_full)
+        R2 = orbital_ket.evaluate(r_full)
+    else:
+        R1 = _radial_wf_grid(Z_orb, n1, l1, r_full)
+        R2 = _radial_wf_grid(Z_orb, n2, l2, r_full)
 
     # f_screen_L on r-grid
     f_L_grid = _f_L_screening_grid(
@@ -328,6 +369,8 @@ def compute_screened_cross_center_vne_element(
     n_grid: int = 4000,
     n_legendre: int = 64,
     nuc_parity: int = 1,
+    orbital_bra=None,
+    orbital_ket=None,
 ) -> float:
     """Single matrix element of the screened cross-center nuclear attraction.
 
@@ -393,6 +436,8 @@ def compute_screened_cross_center_vne_element(
         rad_bare, rad_screen = _screened_radial_integral(
             Z_orb, n1, l1, n2, l2, fc, Z_nuc, L, R_AB,
             n_grid=n_grid, n_legendre=n_legendre,
+            orbital_bra=orbital_bra,
+            orbital_ket=orbital_ket,
         )
         # V_screened = -Z_nuc/rho + f_screen(rho) gives matrix element:
         # -Z_nuc * rad_bare + rad_screen
@@ -412,6 +457,7 @@ def compute_screened_cross_center_vne(
     n_legendre: int = 64,
     nuc_parity: int = 1,
     direction: Optional[Tuple[float, float, float]] = None,
+    multi_zeta_basis: Optional[Dict[Tuple[int, int], object]] = None,
 ) -> np.ndarray:
     """Full screened cross-center V_ne matrix.
 
@@ -419,6 +465,20 @@ def compute_screened_cross_center_vne(
     first-row Z_nuc (no frozen core), exactly reproduces the bare result.
 
     See ``compute_screened_cross_center_vne_element`` for parameter docs.
+
+    Parameters
+    ----------
+    multi_zeta_basis : dict, optional
+        Mapping ``(n, l) -> MultiZetaOrbital`` from
+        ``geovac.multi_zeta_orbitals``. When supplied, the radial pieces of
+        each integral whose BOTH (n1, l1) and (n2, l2) keys are present are
+        evaluated against the physical-fit multi-zeta orbital shape on BOTH
+        the bare-Coulomb analytical sub-integral AND the screening-correction
+        grid quadrature. (n, l) pairs not in the dict fall back to the
+        hydrogenic Z_orb path bit-exactly. None gives bit-exact existing
+        behavior. (Sprint F1 Phase 1, 2026-05-23: unifies the W1c screened
+        path with the multi-zeta basis closure, removing the NaCl-class
+        NotImplementedError in ``balanced_coupled.build_balanced_hamiltonian``.)
 
     Returns
     -------
@@ -434,6 +494,7 @@ def compute_screened_cross_center_vne(
         return compute_cross_center_vne(
             Z_orb, states, Z_nuc, R_AB, L_max,
             n_grid=n_grid, nuc_parity=nuc_parity, direction=direction,
+            multi_zeta_basis=multi_zeta_basis,
         )
 
     # --- Direction-based rotation: compute in z-frame, then rotate ---
@@ -443,6 +504,7 @@ def compute_screened_cross_center_vne(
             core_type=core_type,
             n_grid=n_grid, n_legendre=n_legendre,
             nuc_parity=1, direction=None,
+            multi_zeta_basis=multi_zeta_basis,
         )
         D = _build_block_rotation_matrix(states, direction)
         return D @ vne_z @ D.T
@@ -466,10 +528,24 @@ def compute_screened_cross_center_vne(
                     continue
                 key = (n1, l1, n2, l2, L)
                 if key not in radial_cache:
-                    radial_cache[key] = _screened_radial_integral(
-                        Z_orb, n1, l1, n2, l2, fc, Z_nuc, L, R_AB,
-                        n_grid=n_grid, n_legendre=n_legendre,
+                    # Multi-zeta override: conservative (no mixed dispatch).
+                    use_mz = (
+                        multi_zeta_basis is not None
+                        and (n1, l1) in multi_zeta_basis
+                        and (n2, l2) in multi_zeta_basis
                     )
+                    if use_mz:
+                        radial_cache[key] = _screened_radial_integral(
+                            Z_orb, n1, l1, n2, l2, fc, Z_nuc, L, R_AB,
+                            n_grid=n_grid, n_legendre=n_legendre,
+                            orbital_bra=multi_zeta_basis[(n1, l1)],
+                            orbital_ket=multi_zeta_basis[(n2, l2)],
+                        )
+                    else:
+                        radial_cache[key] = _screened_radial_integral(
+                            Z_orb, n1, l1, n2, l2, fc, Z_nuc, L, R_AB,
+                            n_grid=n_grid, n_legendre=n_legendre,
+                        )
 
     # Build matrix
     for i, (n1, l1, m1) in enumerate(states):

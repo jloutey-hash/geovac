@@ -529,8 +529,8 @@ Production modules audited:
 - `geovac/gh_convergence_tensor.py` (partial — deferred to L1 follow-on)
 
 Memos / context:
-- `papers/synthesis/paper_32_spectral_triple.tex` §III, §IV, §VIII
-- `papers/standalone/paper_38_su2_propinquity_convergence.tex`
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` §III, §IV, §VIII
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex`
 - `debug/bisognano_wichmann_track_d_memo.md`
 - `debug/unruh_pendant_memo.md`
 - `CLAUDE.md` §1.7 WH1 PROVEN, §2 R3.5 / R2.5 / Berezin / J entries

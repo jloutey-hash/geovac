@@ -152,9 +152,9 @@ This treatment lives naturally inside Paper 32's spectral-triple framing, requir
 
 ## §5. Files referenced
 
-- `papers/synthesis/paper_25_hopf_gauge_structure.tex` (Paper 25, U(1) on S³)
-- `papers/observations/paper_30_su2_wilson.tex` (Paper 30, SU(2) on S³ = SU(2))
-- `papers/synthesis/paper_32_spectral_triple.tex` (Paper 32, recommended host)
+- `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex` (Paper 25, U(1) on S³)
+- `papers/group5_qed_gauge/paper_30_su2_wilson.tex` (Paper 30, SU(2) on S³ = SU(2))
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (Paper 32, recommended host)
 - `geovac/su2_wilson_gauge.py` (Paper 30 implementation)
 - `geovac/su3_wilson_s5.py` (ST-SU3 implementation)
 - `debug/st_su3_wilson_memo.md` (ST-SU3 sprint memo)

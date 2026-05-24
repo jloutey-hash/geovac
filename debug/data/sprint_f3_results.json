@@ -1,0 +1,92 @@
+{
+  "sprint": "F3 — cross-block h1 architectural extension",
+  "date": "2026-05-23",
+  "predecessor": "F2 (KERNEL-NOT-IT + architectural absence finding)",
+  "verdict_line": "PARTIAL-CLOSURE",
+  "verdict_detail": "Cross-block h1 closes the bonding-orbital-construction mechanism of the W1c-residual wall (natural occupations transform from [1, 1] to [1.9991, 0.0007], dominant NO bonding with 50/50 Na/H split, lowest h1 eigenvector is now bonding) but does NOT close the inner-region overattraction mechanism (PES still monotonically descending with R_min at 2.0 bohr, D_e well depth +4.37 Ha vs experimental 0.075 Ha).",
+  "step1_diagnostic": {
+    "R_AB_bohr": 3.566,
+    "verdict_hydrogenic": "PROCEED_TO_STEP_2_STRONG_BONDING",
+    "verdict_multi_zeta": "PROCEED_TO_STEP_2_STRONG_BONDING",
+    "hydrogenic": {
+      "cross_block_h1_NaH_Ha": 0.320023,
+      "splitting_orthogonal_Ha": -3.488417,
+      "splitting_generalized_Ha": -3.458639,
+      "lowest_eigvec_character": "bonding (generalized basis)"
+    },
+    "multi_zeta": {
+      "cross_block_h1_NaH_Ha": -1.370331,
+      "splitting_orthogonal_Ha": -4.196347,
+      "lowest_eigvec_character": "bonding"
+    },
+    "note": "Both bases pass the >50 mHa bonding threshold by several orders of magnitude. PROCEED to Step 2 confirmed."
+  },
+  "step2_production_wiring": {
+    "new_module": "geovac/cross_block_h1.py",
+    "lines": 437,
+    "tests": "tests/test_cross_block_h1.py: 18 tests, all pass",
+    "backward_compat": "bit-exact preserved across NaH/LiH/W1c/mz baseline regression",
+    "regression": "146 passed, 1 skipped (128 baseline + 18 new), zero regression"
+  },
+  "step3_fci_summary": {
+    "spec": "nah_spec(max_n=2), Q=20, M=10, 2-electron singlet FCI",
+    "architectures": {
+      "bare": {"E_R3.5": -169.204, "E_R10": -164.672, "D_e": 4.5319,
+                "naturals_R3.5": [1.9933, 0.0067], "dom_NO_char": "bonding (H-only, Na/H=0/1)"},
+      "W1c+mz": {"E_R3.5": -163.115, "E_R10": -162.779, "D_e": 0.3363,
+                  "naturals_R3.5": [1.0, 1.0], "dom_NO_char": "no-bond (Na/H=0.5/0.5 but [1,1] separated)"},
+      "W1c+mz+xblockh1": {"E_R3.5": -167.767, "E_R10": -163.985, "D_e": 3.7818,
+                           "naturals_R3.5": [1.9991, 0.0007],
+                           "dom_NO_char": "bonding 50/50 Na/H mix (STRUCTURAL ADVANCE)"}
+    }
+  },
+  "step4_minipes_summary": {
+    "R_grid_bohr": [2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 7.0, 10.0],
+    "W1c+mz+xblockh1_PES_Ha": [-168.359, -168.203, -168.081, -167.767, -167.464, -166.806, -165.561, -163.985],
+    "R_min": 2.0,
+    "D_e_well_depth_Ha": 4.3735,
+    "internal_min": false,
+    "verdict": "PARTIAL_NO_INTERNAL_MIN"
+  },
+  "comparison_to_baselines": {
+    "F1_P1P2_W1c_mz_alone": {
+      "R3.5_Ha": -163.115,
+      "R10_Ha": -162.779,
+      "D_e_2point": 0.336,
+      "naturals": [1.0, 1.0],
+      "internal_min": false,
+      "descent_depth_full_PES_Ha": 0.690
+    },
+    "F1_maxn3_W1c_mz_alone": {
+      "naturals_at_R3.5": "bonding orbital constructed by NOs (1.95, 0.05) but D_e^PES = +0.71 Ha spurious"
+    },
+    "F2_diagnosis": "Architectural absence: cross-block h1 slot does not exist in composed_qubit",
+    "F3_advance": "Bonding-orbital construction at h1 level IS the missing piece. Cross-block h1 transforms naturals from [1,1] to [1.999, 0.001] (4 orders of magnitude advance) and h1 lowest eigvec is now bonding (was antibonding under W1c+mz alone)."
+  },
+  "wall_classification_update": {
+    "before_F3": "W1d (architectural absence of cross-block h1 slot)",
+    "after_F3": "W1d-closed (cross-block h1 added) BUT new sub-layer surfaced:",
+    "new_sub_layer": "W1e: inner-region overattraction (missing Pauli repulsion mechanism between 2-electron bonding pair and frozen-core orbitals on Na). The 2-electron FCI on NaH max_n=2 has no explicit frozen-core electrons; W1c provides screening at the cross-V_ne level only, not full PK-projection. Cross-block h1 lowers the bonding-orbital energy across all R (since the matrix elements grow as orbitals overlap at smaller R), with no opposing repulsion. Inner-region collapse is the result."
+  },
+  "key_files": {
+    "production_new": ["geovac/cross_block_h1.py"],
+    "production_modified": ["geovac/balanced_coupled.py", "geovac/composed_qubit.py"],
+    "tests_new": ["tests/test_cross_block_h1.py"],
+    "debug_drivers": [
+      "debug/sprint_f3_step1_diagnostic.py",
+      "debug/sprint_f3_step1_convergence.py",
+      "debug/sprint_f3_step3_fci.py",
+      "debug/sprint_f3_step4_minipes.py"
+    ],
+    "data": [
+      "debug/data/sprint_f3_step1_diagnostic.json",
+      "debug/data/sprint_f3_step1_convergence.json",
+      "debug/data/sprint_f3_step3_fci.json",
+      "debug/data/sprint_f3_step4_minipes.json"
+    ]
+  },
+  "predicted_de_F3": 4.3735,
+  "experimental_NaH_de": 0.075,
+  "predicted_vs_experimental_factor": 58.3,
+  "interpretation": "Cross-block h1 OVER-corrects: it injects bonding mechanism but does not include the opposing Pauli repulsion that would form an internal minimum. The structural picture sharpens: cross-block h1 is necessary but not sufficient."
+}

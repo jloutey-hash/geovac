@@ -1,0 +1,34 @@
+{
+  "sprint": "F5 — Explicit frozen-core FCI on NaH (W1e closure attempt)",
+  "date": "2026-05-23",
+  "position": "F4 follow-on; W1e reclassified to FCI correlation wall",
+  "verdict": "PARTIAL",
+  "predicted_D_e_residual_Ha": 3.247,
+  "predicted_closure_fraction_pct": 25.7,
+  "step_1": {
+    "diagnostic": "algebraic cross-block 2-body Coulomb J - K over Na [Ne] core",
+    "J_total_Ha": 1.1314,
+    "K_total_Ha": 0.0082,
+    "correction_Ha": 1.1232,
+    "K_over_J_ratio_pct": 0.72,
+    "gate_verdict": "INTERMEDIATE_PROCEED_FLAGGED",
+    "rationale": "0.5 Ha < sum < 2 Ha; correction is the right SIGN (repulsive) but too small to take 4.37 Ha wall into the 0.0375-0.150 Ha closure window. Predicted residual 3.25 Ha = 43x experimental D_e."
+  },
+  "step_2_3_4": "NOT EXECUTED — Step 1 predicts predictably outside closure window; per diagnostic-before-engineering rule, stop and report.",
+  "F3_baseline_wall_depth_Ha": 4.37,
+  "experimental_NaH_De_Ha": 0.075,
+  "W1e_diagnosis": "Core-electron Hartree mean-field is the right SIGN but structurally insufficient magnitude. The dominant W1e correlation channels involve more than just the bonding-core Coulomb J - K coupling.",
+  "next_recommendations": [
+    "Sprint F6 candidate 1: Schmidt-orthogonalize bonding orbital against [Ne] core BEFORE FCI (mathematically definitive but expensive ~3-4 weeks).",
+    "Sprint F6 candidate 2: extend the valence active space beyond max_n=2 (closer to standard quantum chemistry CASSCF/CASPT2; tests whether the W1e wall is also a basis-truncation effect at the valence level).",
+    "Sprint F6 candidate 3: pivot to next paper-writing batch — F5 diagnostic + F4 + F3 + F1+F2 give a clean documentation arc for Papers 17/19 §W1c-residual revision."
+  ],
+  "bonding_orbital_composition_from_F3": {
+    "Na(1,0,0)_phys_n3_mz": -0.6200,
+    "Na(2,0,0)_phys_n4_mz": +0.3520,
+    "H(1,0,0)_hydrogenic": -0.4668,
+    "H(2,0,0)_hydrogenic": +0.5221
+  },
+  "spatial_norm_sq_in_nonorth_basis": 2.4270,
+  "core_density_check": "[Ne] core integrates to 9.9999 electrons (CR exponents Z_eff = n * zeta)"
+}

@@ -1,4 +1,10 @@
 """
+ARCHIVED 2026-05-23 (Cleanup Track B): Spectral radial solver in prolate
+spheroidal coordinates (ProlateSpheroidalLattice radial_method='spectral',
+n_basis parameter, _laguerre_moment_matrices) was removed from
+geovac/prolate_spheroidal_lattice.py in v2.7.0 (commit 8d692a0). The simplified
+ProlateSpheroidalLattice in current code uses pure FD. All spectral tests dead.
+
 Tests for the spectral Laguerre radial solver in prolate spheroidal coordinates.
 
 Validates that the spectral solver (radial_method='spectral') reproduces

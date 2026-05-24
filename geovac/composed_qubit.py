@@ -554,6 +554,12 @@ def build_composed_hamiltonian(
     relativistic: bool = False,
     alpha_num: float = 7.2973525693e-3,
     include_breit: bool = False,
+    cross_block_h1: bool = False,
+    cross_block_h1_n_rho: int = 80,
+    cross_block_h1_n_z: int = 100,
+    cross_block_h1_rho_max: float = 20.0,
+    cross_block_h1_z_max: float = 20.0,
+    cross_block_h1_nuclei: Optional[list] = None,
 ) -> Dict[str, Any]:
     """Build a composed qubit Hamiltonian from a MolecularSpec.
 
@@ -577,6 +583,30 @@ def build_composed_hamiltonian(
     include_breit : bool
         If True and the build is relativistic, include Breit-Pauli SS+SOO
         two-body corrections (α²-suppressed). Default False.
+    cross_block_h1 : bool, optional
+        If True, add the cross-block off-diagonal one-body h1 matrix
+        elements between orbitals on DIFFERENT centers (W1d architectural
+        extension, Sprint F3, 2026-05-23).  When False (default) the
+        builder produces the standard block-diagonal h1 and is bit-exact
+        backward compatible.  Requires geometric nucleus positions to be
+        meaningful, supplied either through ``spec.nuclei`` or via the
+        ``cross_block_h1_nuclei`` kwarg; for single-center systems with
+        no inter-center coupling the matrix is identically zero.
+        Note: the production path for chemistry is via
+        ``balanced_coupled.build_balanced_hamiltonian`` which also
+        exposes ``cross_block_h1`` and supplies the multi-zeta and
+        screened-eigenvalue overrides used by the cross-block matrix
+        element computer.  The kwarg on this builder is provided for
+        symmetry and to allow direct invocation when balanced-coupled
+        composition is not desired.
+    cross_block_h1_n_rho, cross_block_h1_n_z : int
+        Cross-block h1 quadrature point counts (defaults 80, 100).
+    cross_block_h1_rho_max, cross_block_h1_z_max : float
+        Cross-block h1 quadrature extents in bohr (defaults 20.0, 20.0).
+    cross_block_h1_nuclei : list of dict, optional
+        Nuclear positions for the cross-block h1 path. Each entry:
+        ``{'Z': float, 'position': (x,y,z), 'label': str}``.  If None
+        and ``spec.nuclei`` is set, the spec value is used.
 
     Returns
     -------
@@ -717,6 +747,92 @@ def build_composed_hamiltonian(
     # Symmetrize ERI
     eri = 0.5 * (eri + eri.transpose(2, 3, 0, 1))
 
+    # --- Phase 3.5: cross-block h1 architectural extension (W1d, F3) ---
+    h1_cross_block_matrix = np.zeros_like(h1)
+    cross_block_h1_info: Dict[str, Any] = {
+        'enabled': bool(cross_block_h1),
+        'n_nonzero': 0,
+        'max_abs': 0.0,
+        'frobenius': 0.0,
+    }
+    if cross_block_h1:
+        from geovac.cross_block_h1 import compute_cross_block_h1_matrix
+        # Resolve nuclei: explicit kwarg overrides spec.nuclei.
+        if cross_block_h1_nuclei is not None:
+            nuclei_list_local = cross_block_h1_nuclei
+        elif getattr(spec, 'nuclei', None):
+            nuclei_list_local = list(spec.nuclei)
+        else:
+            raise ValueError(
+                "cross_block_h1=True requires nuclear positions. "
+                "Either set `spec.nuclei` or pass `cross_block_h1_nuclei`."
+            )
+
+        # Map sub_blocks (composed_qubit internal format) onto the format
+        # cross_block_h1.compute_cross_block_h1_matrix expects (with
+        # 'states', 'offset', 'Z_orb', 'parent_block', 'label' keys).
+        sub_blocks_local = []
+        for sb in sub_blocks:
+            sub_blocks_local.append({
+                'label': sb['label'],
+                'offset': sb['offset'],
+                'states': sb['states'],
+                'Z_orb': sb['Z'],
+                'parent_block': spec.blocks.index(sb['block']),
+                'side': sb['side'],
+            })
+
+        # Sub-block positions: identify by side and parent_block.
+        sb_positions_local: Dict[str, tuple] = {}
+        for sb in sub_blocks:
+            blk = sb['block']
+            if sb['side'] == 'center':
+                idx = blk.center_nucleus_idx
+            else:
+                idx = blk.partner_nucleus_idx
+            if idx is not None and idx >= 0 and idx < len(nuclei_list_local):
+                sb_positions_local[sb['label']] = tuple(
+                    nuclei_list_local[idx]['position']
+                )
+            else:
+                # Legacy / single-center fallback: center on first heavy
+                # nucleus, partner on first H-like.
+                heavy = next(
+                    (n for n in nuclei_list_local if n['Z'] > 1.5),
+                    None,
+                )
+                if heavy is not None and sb['side'] == 'center':
+                    sb_positions_local[sb['label']] = tuple(heavy['position'])
+                else:
+                    light = next(
+                        (n for n in nuclei_list_local if n['Z'] <= 1.5),
+                        None,
+                    )
+                    if light is not None:
+                        sb_positions_local[sb['label']] = tuple(light['position'])
+                    else:
+                        sb_positions_local[sb['label']] = (0.0, 0.0, 0.0)
+
+        h1_cross_block_matrix = compute_cross_block_h1_matrix(
+            sub_blocks=sub_blocks_local,
+            sb_positions=sb_positions_local,
+            nuclei=nuclei_list_local,
+            M=M,
+            n_rho=cross_block_h1_n_rho,
+            n_z=cross_block_h1_n_z,
+            rho_max=cross_block_h1_rho_max,
+            z_max=cross_block_h1_z_max,
+            verbose=verbose,
+        )
+        h1 = h1 + h1_cross_block_matrix
+        nz = int(np.sum(np.abs(h1_cross_block_matrix) > 1e-15))
+        cross_block_h1_info['n_nonzero'] = nz
+        cross_block_h1_info['max_abs'] = float(np.max(np.abs(h1_cross_block_matrix)))
+        cross_block_h1_info['frobenius'] = float(np.linalg.norm(h1_cross_block_matrix))
+        if verbose:
+            print(f"  cross-block h1: {nz} nonzero, max={cross_block_h1_info['max_abs']:.4f}, "
+                  f"Frobenius={cross_block_h1_info['frobenius']:.4f}")
+
     # --- Phase 4: JW transform ---
     nuclear_repulsion = spec.nuclear_repulsion_constant
 
@@ -737,6 +853,8 @@ def build_composed_hamiltonian(
         'N_pauli': N_pauli,
         'h1': h1,
         'h1_pk': h1_pk if np.any(h1_pk) else None,
+        'h1_cross_block': h1_cross_block_matrix,
+        'cross_block_h1_info': cross_block_h1_info,
         'eri': eri,
         'nuclear_repulsion': nuclear_repulsion,
         'qubit_op': qubit_op,

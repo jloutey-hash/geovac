@@ -329,8 +329,8 @@ This row is more compact than its prose explanation; the substantive content is 
 - This memo (Calc-LAR autopsy): 2026-05-09.
 
 Cross-references:
-- `papers/observations/paper_34_projection_taxonomy.tex` §III.1, §III.5, §III.6, §III.7, §III.8, §III.13, §III.14, §III.16, **§III.17**, §V (rows 1453–1690), §VI Prediction 1.
-- `papers/observations/paper_36_bound_state_qed.tex` §V (LS-6a numerical result), §VI (LS-7 reframing), §VII (LS-7 outlook + LS-8a-finalized proposition).
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex` §III.1, §III.5, §III.6, §III.7, §III.8, §III.13, §III.14, §III.16, **§III.17**, §V (rows 1453–1690), §VI Prediction 1.
+- `papers/group5_qed_gauge/paper_36_bound_state_qed.tex` §V (LS-6a numerical result), §VI (LS-7 reframing), §VII (LS-7 outlook + LS-8a-finalized proposition).
 - `debug/ls1_lamb_shift_memo.md` (LS-1 baseline).
 - `debug/ls6a_eides_convention_memo.md` (canonical 10/9 convention).
 - `debug/ls7_two_loop_se_memo.md` (LS-7 two-loop prefactor + reframing).

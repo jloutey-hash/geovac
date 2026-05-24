@@ -30,7 +30,7 @@ The compact-manifold setting (S^3, S^5, Bargmann-Segal) remains unclaimed territ
 
 ### Q4. Any concrete Paper 29 citation that turned out wrong / retracted / mis-dated?
 
-**One caveat, no hard errors.** Paper 29's bibliography (lines 644-696 of `papers/observations/paper_29_ramanujan_hopf.tex`) cites only foundational material: Fock 1935, Bander-Itzykson 1966, Ihara 1966, Bass 1992, Hashimoto 1989, Kotani-Sunada 2000, Terras 2010, LPS 1988, Morgenstern 1994, Stark-Terras 1996, Alon-Milman 1985 / Alon 1986, Elstrodt-Grunewald-Mennicke 1998. **All 12 are verified by web search as correctly attributed.** No retraction or misdating found.
+**One caveat, no hard errors.** Paper 29's bibliography (lines 644-696 of `papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex`) cites only foundational material: Fock 1935, Bander-Itzykson 1966, Ihara 1966, Bass 1992, Hashimoto 1989, Kotani-Sunada 2000, Terras 2010, LPS 1988, Morgenstern 1994, Stark-Terras 1996, Alon-Milman 1985 / Alon 1986, Elstrodt-Grunewald-Mennicke 1998. **All 12 are verified by web search as correctly attributed.** No retraction or misdating found.
 
 **Caveat (minor):** Paper 29 does NOT currently cite:
 - Matsuura-Ohta 2022/2025 (Kazakov-Migdal ↔ Ihara zeta). This is the strongest post-2024 physics precedent for the Paper 25/29 framing and **should be added** before external release.

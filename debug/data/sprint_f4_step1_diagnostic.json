@@ -1,0 +1,57 @@
+{
+  "sprint": "F4 Step 1 \u2014 bonding-vs-core overlap diagnostic",
+  "date": "2026-05-23",
+  "R_AB_bohr": 3.566,
+  "quadrature": {
+    "n_rho": 80,
+    "n_z": 100,
+    "rho_max": 20.0,
+    "z_max": 20.0
+  },
+  "h1_2x2": {
+    "h11_Na3s_mz_diag_Ha": -0.17,
+    "h22_H1s_diag_Ha": -0.5,
+    "h12_cross_Ha": -1.3705771963489106,
+    "S_AB": 0.3967423551327182
+  },
+  "bonding_orbital": {
+    "E_bond_Ha": -1.232068446609896,
+    "c_Na_3s": -0.5418072316789111,
+    "c_H_1s": -0.6525972004577013,
+    "E_upper_Ha": 1.7275992769261532
+  },
+  "core_overlaps": {
+    "(1,0)": {
+      "S_bond_core": 0.010830443666079628,
+      "abs_S_pct": 1.0830443666079628,
+      "E_c_Ha": -40.4787,
+      "dH_pk_Ev_bond": 0.004603571403893511,
+      "dH_pk_abs_Ev0": 0.004748091196903947
+    },
+    "(2,0)": {
+      "S_bond_core": 0.06021844403329603,
+      "abs_S_pct": 6.021844403329603,
+      "E_c_Ha": -2.7967,
+      "dH_pk_Ev_bond": 0.00567376238423053,
+      "dH_pk_abs_Ev0": 0.010141564143709467
+    },
+    "(2,1)": {
+      "S_bond_core": -0.025689658885278598,
+      "abs_S_pct": 2.5689658885278597,
+      "E_c_Ha": -1.5181,
+      "dH_pk_Ev_bond": 0.00018876897599193115,
+      "dH_pk_abs_Ev0": 0.0010018831106458801
+    }
+  },
+  "summary": {
+    "max_abs_overlap_pct": 6.021844403329603,
+    "total_pk_barrier_Ev_eq_Ebond_Ha": 0.010466102764115973,
+    "total_pk_barrier_Ev_eq_0_Ha": 0.015891538451259294,
+    "barrier_threshold_Ha": 1.0,
+    "overlap_threshold_pct": 5.0,
+    "weak_overlap_threshold_pct": 1.0
+  },
+  "verdict": "PROCEED_WITH_WEAK_EXPECTED_IMPACT",
+  "verdict_reason": "max|S|=6.02% in intermediate range [1.0, 5.0]% or barrier=0.02 Ha in intermediate range; proceed but flag weak expected impact.",
+  "wall_time_s": 0.011392799904569983
+}

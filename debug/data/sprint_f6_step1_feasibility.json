@@ -1,0 +1,154 @@
+{
+  "sprint": "F6 Step 1 \u2014 NaH max_n=4 feasibility",
+  "date": "2026-05-23",
+  "spec": {
+    "name": "NaH",
+    "num_blocks": 1,
+    "blocks": [
+      {
+        "label": "NaH_bond",
+        "type": "bond",
+        "max_n": 4,
+        "Z_center": 1.0,
+        "n_electrons": 2,
+        "has_h_partner": true,
+        "max_n_partner": 4,
+        "n_val_offset": 2,
+        "Z_nuc_center": 11.0
+      }
+    ]
+  },
+  "orbital_counts": {
+    "M_Na": 30,
+    "M_H": 30,
+    "M_total": 60,
+    "Q_total": 120,
+    "per_n_Na": [
+      {
+        "block_n": 1,
+        "n_orbs": 1
+      },
+      {
+        "block_n": 2,
+        "n_orbs": 4
+      },
+      {
+        "block_n": 3,
+        "n_orbs": 9
+      },
+      {
+        "block_n": 4,
+        "n_orbs": 16
+      }
+    ]
+  },
+  "multi_zeta_registry": {
+    "Z": 11,
+    "num_entries": 2,
+    "entries": [
+      {
+        "n_orbital": 3,
+        "l_orbital": 0
+      },
+      {
+        "n_orbital": 3,
+        "l_orbital": 1
+      }
+    ],
+    "coverage_at_max_n_4": [
+      {
+        "block_n": 1,
+        "l": 0,
+        "physical_n": 3,
+        "label": "Na 3s",
+        "in_registry": true
+      },
+      {
+        "block_n": 2,
+        "l": 0,
+        "physical_n": 4,
+        "label": "Na 4s",
+        "in_registry": false
+      },
+      {
+        "block_n": 2,
+        "l": 1,
+        "physical_n": 4,
+        "label": "Na 4p",
+        "in_registry": false
+      },
+      {
+        "block_n": 3,
+        "l": 0,
+        "physical_n": 5,
+        "label": "Na 5s",
+        "in_registry": false
+      },
+      {
+        "block_n": 3,
+        "l": 1,
+        "physical_n": 5,
+        "label": "Na 5p",
+        "in_registry": false
+      },
+      {
+        "block_n": 3,
+        "l": 2,
+        "physical_n": 5,
+        "label": "Na 5d",
+        "in_registry": false
+      },
+      {
+        "block_n": 4,
+        "l": 0,
+        "physical_n": 6,
+        "label": "Na 6s",
+        "in_registry": false
+      },
+      {
+        "block_n": 4,
+        "l": 1,
+        "physical_n": 6,
+        "label": "Na 6p",
+        "in_registry": false
+      },
+      {
+        "block_n": 4,
+        "l": 2,
+        "physical_n": 6,
+        "label": "Na 6d",
+        "in_registry": false
+      },
+      {
+        "block_n": 4,
+        "l": 3,
+        "physical_n": 6,
+        "label": "Na 6f",
+        "in_registry": false
+      }
+    ]
+  },
+  "fci": {
+    "n_electrons": 2,
+    "M_total": 60,
+    "fci_dim_singlet": 3600,
+    "context_max_n_2": 100,
+    "context_max_n_3": 784
+  },
+  "multipole": {
+    "l_max_max_n_2": 1,
+    "l_max_max_n_3": 2,
+    "l_max_max_n_4": 3,
+    "L_max_xvne_max_n_4": 6
+  },
+  "cross_block_h1_scope": {
+    "s_orbs_per_side": 4,
+    "n_ss_pairs": 16,
+    "total_xb_pairs": 900,
+    "s_only_coverage_pct": 1.7777777777777777,
+    "l_gt_0_pairs_raise": true
+  },
+  "build_time_estimate_min": 81.27416076634736,
+  "gate": "PROCEED_WITH_CAVEATS",
+  "gate_reason": "Intermediate regime"
+}

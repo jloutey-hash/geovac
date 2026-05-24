@@ -286,11 +286,11 @@ The GeoVac record can name this gap honestly without claiming closure. Paper 32 
 
 ## §6. Files referenced
 
-- `papers/synthesis/paper_32_spectral_triple.tex` (esp. §VIII.B G4 entry)
-- `papers/observations/paper_30_su2_wilson.tex`
-- `papers/synthesis/paper_25_hopf_gauge_structure.tex`
-- `papers/core/paper_24_bargmann_segal.tex` (esp. §V Coulomb/HO asymmetry)
-- `papers/core/paper_31_universal_coulomb_partition.tex`
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (esp. §VIII.B G4 entry)
+- `papers/group5_qed_gauge/paper_30_su2_wilson.tex`
+- `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex`
+- `papers/group3_foundations/paper_24_bargmann_segal.tex` (esp. §V Coulomb/HO asymmetry)
+- `papers/group3_foundations/paper_31_universal_coulomb_partition.tex`
 - `geovac/almost_commutative.py` (Sprint H1 single-manifold AC extension; the natural extension target for G4a)
 - `geovac/operator_system.py` (WH1 R2 truncated operator system, A_{S³} = O_{n_max})
 - `geovac/full_dirac_operator_system.py` (R3.5 full Dirac sector on T_{S³})

@@ -355,8 +355,8 @@ substitution as the structural target.
 | `debug/data/w1c_residual_nah_track3_results.json` | New: PES results in machine-readable form. |
 | `debug/data/w1c_residual_nah_track3_diag.json` | New: diagnostic results. |
 | `debug/w1c_residual_nah_track3_memo.md` | This memo. |
-| `papers/core/paper_17_composed_geometries.tex` | Architectural note §6.10 extended with Track 3 SV finding. |
-| `papers/methods/paper_19_coupled_composition.tex` | §sec:w1c_residual extended (~70 lines): Track 3 paragraph documenting the SV diagonal-only correction, the structural finding (R-independence), the diagnostic positive, and the next-target options. |
+| `papers/group2_quantum_chemistry/paper_17_composed_geometries.tex` | Architectural note §6.10 extended with Track 3 SV finding. |
+| `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` | §sec:w1c_residual extended (~70 lines): Track 3 paragraph documenting the SV diagonal-only correction, the structural finding (R-independence), the diagnostic positive, and the next-target options. |
 | `CLAUDE.md` | §2 sprint outcome paragraph (Track 3 W1c-residual NaH closure attempt). §3 dead-ends row added with the structural reading and diagnostic next target. |
 
 ---

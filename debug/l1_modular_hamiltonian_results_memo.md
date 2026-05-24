@@ -265,7 +265,7 @@ GeoVac memos:
 - `debug/lorentzian_l0_audit_memo.md` (Sprint L0 audit, 2026-05-15)
 - `debug/bisognano_wichmann_track_d_memo.md` (Track D founding, 2026-05-09)
 - `debug/unruh_pendant_memo.md` (four-witness Wick rotation, 2026-05-10)
-- `papers/synthesis/paper_32_spectral_triple.tex` (§VIII case-exhaustion + GH + BW reading)
-- `papers/standalone/paper_38_su2_propinquity_convergence.tex` (WH1 PROVEN GH convergence)
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` (§VIII case-exhaustion + GH + BW reading)
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` (WH1 PROVEN GH convergence)
 
 End of Sprint L1 closure memo.

@@ -44,6 +44,9 @@ from geovac.phillips_kleinman_cross_center import (
 from geovac.screened_valence_basis import (
     apply_screened_valence_correction,
 )
+from geovac.cross_block_h1 import (
+    compute_cross_block_h1_matrix,
+)
 
 
 def _get_block_geometry(spec: MolecularSpec) -> List[Dict[str, Any]]:
@@ -417,6 +420,12 @@ def build_balanced_hamiltonian(
     pk_E_valence_ref: float = 0.0,
     screened_valence_basis: bool = False,
     screened_valence_n_grid: int = 4000,
+    multi_zeta_basis: bool = False,
+    cross_block_h1: bool = False,
+    cross_block_h1_n_rho: int = 80,
+    cross_block_h1_n_z: int = 100,
+    cross_block_h1_rho_max: float = 20.0,
+    cross_block_h1_z_max: float = 20.0,
 ) -> Dict[str, Any]:
     """
     Build a balanced coupled Hamiltonian: all four interaction types, no PK.
@@ -488,6 +497,51 @@ def build_balanced_hamiltonian(
     screened_valence_n_grid : int, optional
         Radial grid resolution for the screened-eigenvalue solver.
         Default 4000.
+    multi_zeta_basis : bool, optional
+        If True, replace the heavy-atom-side hydrogenic Z_orb radial
+        wavefunctions on frozen-core valence sub-blocks with physical-fit
+        multi-zeta Slater expansions of the screened-Schrödinger
+        eigenstates.  Auto-detects frozen-core blocks via
+        ``parent_block.Z_nuc_center`` and dispatches to
+        ``geovac.multi_zeta_orbitals.get_physical_valence_orbitals(Z_nuc)``
+        for the (n, l) keys appearing in the sub-block states (with the
+        ``n_val_offset`` mapping block_n -> physical_n).  First-row
+        blocks (Z<=10) and partner-side (H) blocks are unaffected, and
+        cores without a tabulated physical fit raise NotImplementedError
+        from the multi-zeta registry.
+
+        This is the W1c-residual orthogonality closure named in the M-Y
+        bimodule diagnostic (``debug/sprint_modular_propinquity_mY_pinstate_memo.md``
+        Path A) and prepared in Sprint alpha-Multi-zeta
+        (``debug/sprint_alpha_2_multizeta_memo.md``).  The hydrogenic
+        Z_orb=1 basis on the Na valence (mean radius 1.5 bohr for n=3
+        hydrogenic) is replaced by the physical screened Na 3s
+        (mean radius 4.5 bohr) and Na 3p (mean radius 5.9 bohr).  Default
+        False to preserve existing behavior.
+
+        Currently supported (Sprint alpha-PES Step 2, 2026-05-23): Z=11 (Na).
+        For other Z, ``get_physical_valence_orbitals`` raises
+        NotImplementedError, which will propagate.
+    cross_block_h1 : bool, optional
+        If True, add cross-block off-diagonal h1 matrix elements
+        ``<psi_a^A | T + sum_C (-Z_C/|r - R_C|) | psi_b^B>`` for orbitals
+        on DIFFERENT centers A != B. This is the W1d architectural
+        extension named in the Sprint F2 cross-V_ne kernel diagnostic
+        memo (2026-05-23): the framework's existing h1 architecture in
+        ``composed_qubit.build_composed_hamiltonian`` is strictly
+        block-diagonal — cross-block one-body coupling between orbitals
+        on different centers is architecturally absent. This flag adds
+        that coupling via direct 2D axial Gauss-Legendre quadrature
+        (s-orbital pairs only in the first-pass implementation; mixed
+        l > 0 cases raise NotImplementedError). Auto-detects collinear
+        geometry; non-axial nuclear arrangements raise.
+        Default False to preserve existing behavior bit-identically.
+    cross_block_h1_n_rho, cross_block_h1_n_z : int, optional
+        Quadrature point counts for the cross-block h1 axial integration.
+        Defaults 80, 100. Increase for tighter precision.
+    cross_block_h1_rho_max, cross_block_h1_z_max : float, optional
+        Quadrature domain extents (bohr) for cross-block h1.
+        Defaults 20.0, 20.0. Increase if orbitals extend beyond this.
 
     Returns
     -------
@@ -600,6 +654,81 @@ def build_balanced_hamiltonian(
     cross_vne_count = 0
     cross_vne_details: List[Dict[str, Any]] = []
 
+    # Pre-build multi-zeta basis dict per sub-block (if requested).
+    # Keys are sub-block label, values are dict[(n, l) -> MultiZetaOrbital]
+    # using the block_n (NOT physical_n) for the n-coordinate so the
+    # caller can index by the same (n, l) the sub-block enumerates.
+    multi_zeta_basis_by_sb: Dict[str, Dict[Tuple[int, int], Any]] = {}
+    multi_zeta_diagnostics: List[Dict[str, Any]] = []
+    if multi_zeta_basis:
+        from geovac.multi_zeta_orbitals import get_physical_valence_orbitals
+
+        for sb in sub_blocks:
+            # Only apply to CENTER-SIDE valence sub-blocks of frozen-core blocks.
+            if sb['side'] != 'center':
+                continue
+            parent_b_idx = sb['parent_block']
+            parent_block = spec.blocks[parent_b_idx]
+            Z_nuc_center = float(parent_block.Z_nuc_center)
+            n_val_offset = int(parent_block.n_val_offset)
+
+            # Auto-detect: frozen-core means Z_nuc_center >= 11 AND
+            # n_val_offset > 0.  Core blocks have n_val_offset = 0.
+            if Z_nuc_center < 11 or n_val_offset == 0:
+                continue
+
+            Z_int = int(round(Z_nuc_center))
+            try:
+                phys_orbitals = get_physical_valence_orbitals(Z_int)
+            except NotImplementedError as e:
+                raise NotImplementedError(
+                    f"multi_zeta_basis=True requested but no physical-fit "
+                    f"tabulation available for Z={Z_int} on sub-block "
+                    f"{sb['label']!r}. {e}"
+                )
+
+            # Map (block_n, l) -> MultiZetaOrbital by matching physical n
+            # = block_n + n_val_offset against orbital.n_orbital.
+            # The orbital's l_orbital matches l directly.
+            sb_multi_zeta: Dict[Tuple[int, int], Any] = {}
+            unique_nl = sorted(set((n, l) for n, l, m in sb['states']))
+            for (block_n, l) in unique_nl:
+                physical_n = block_n + n_val_offset
+                # Find a matching orbital
+                match = None
+                for orb in phys_orbitals:
+                    if orb.n_orbital == physical_n and orb.l_orbital == l:
+                        match = orb
+                        break
+                if match is not None:
+                    sb_multi_zeta[(block_n, l)] = match
+                # If no match, leave the (n, l) entry out and the
+                # split-integral kernel will fall back to hydrogenic for
+                # that pair.
+
+            if sb_multi_zeta:
+                multi_zeta_basis_by_sb[sb['label']] = sb_multi_zeta
+                multi_zeta_diagnostics.append({
+                    'sub_block': sb['label'],
+                    'Z_nuc_center': Z_nuc_center,
+                    'n_val_offset': n_val_offset,
+                    'n_orbitals_substituted': len(sb_multi_zeta),
+                    'keys': sorted(sb_multi_zeta.keys()),
+                })
+
+        if verbose:
+            print(
+                f"[balanced] multi_zeta_basis: built overrides for "
+                f"{len(multi_zeta_basis_by_sb)} sub-block(s):"
+            )
+            for d in multi_zeta_diagnostics:
+                print(
+                    f"  {d['sub_block']}: Z_nuc={d['Z_nuc_center']}, "
+                    f"n_val_offset={d['n_val_offset']}, "
+                    f"{d['n_orbitals_substituted']} orbital(s) "
+                    f"({d['keys']})"
+                )
+
     for sb in sub_blocks:
         orb_pos = np.array(sb_positions.get(sb['label'], (0.0, 0.0, 0.0)))
 
@@ -628,23 +757,36 @@ def build_balanced_hamiltonian(
                 _detect_core_type(Z_nuc) is not None
             )
 
+            # Multi-zeta override (Sprint alpha-PES Step 2, 2026-05-23)
+            sb_multi_zeta = multi_zeta_basis_by_sb.get(sb['label'])
+
             if verbose:
                 tag = 'screened' if use_screened else 'bare'
+                if sb_multi_zeta:
+                    tag = tag + '+multi_zeta'
                 print(f"[balanced] V_ne ({tag}): {sb['label']} (Z_orb={Z_orb}) "
                       f"<-- nucleus Z={Z_nuc} at R_AB={R_AB:.3f} "
                       f"dir=({direction[0]:.3f},{direction[1]:.3f},{direction[2]:.3f})")
 
             if use_screened:
+                # Unified path (Sprint F1 Phase 1, 2026-05-23): the screened
+                # kernel now accepts a multi-zeta basis dict and applies it to
+                # both the bare-Coulomb analytical sub-integral and the
+                # screening-correction grid quadrature. When sb_multi_zeta is
+                # None or missing the relevant (n, l) pair, the screened path
+                # falls back bit-exactly to the hydrogenic Z_orb baseline.
                 vne_matrix = compute_screened_cross_center_vne(
                     Z_orb, states, Z_nuc, R_AB,
                     L_max=L_max, n_grid=n_grid_vne,
                     direction=direction,
+                    multi_zeta_basis=sb_multi_zeta,
                 )
             else:
                 vne_matrix = compute_cross_center_vne(
                     Z_orb, states, Z_nuc, R_AB,
                     L_max=L_max, n_grid=n_grid_vne,
                     direction=direction,
+                    multi_zeta_basis=sb_multi_zeta,
                 )
 
             # Add to h1
@@ -767,6 +909,98 @@ def build_balanced_hamiltonian(
             )
 
     # ------------------------------------------------------------------
+    # 3d. Cross-block h1 architectural extension (Sprint F3 / W1d)
+    # ------------------------------------------------------------------
+    # Add the missing off-diagonal h1 matrix elements between orbitals on
+    # DIFFERENT centers. The existing block-diagonal h1 lacks these
+    # ``<psi_a^A | T + sum_C (-Z_C/|r-R_C|) | psi_b^B>`` slots; without
+    # them, h1 has no way to favor a bonding combination over the
+    # separated-orbital configuration.
+    h1_cross_block_matrix = np.zeros((M, M))
+    cross_block_h1_info: Dict[str, Any] = {
+        'enabled': bool(cross_block_h1),
+        'n_nonzero': 0,
+        'max_abs': 0.0,
+        'frobenius': 0.0,
+    }
+    if cross_block_h1:
+        # Build optional dictionaries for the cross-block computer
+        n_val_offset_by_sb: Dict[str, int] = {}
+        for sb in sub_blocks:
+            blk = spec.blocks[sb['parent_block']]
+            n_val_offset_by_sb[sb['label']] = int(getattr(blk, 'n_val_offset', 0))
+
+        # Precompute kinetic eigenvalue overrides for multi-zeta sub-blocks
+        kin_eigval_overrides: Dict[Tuple[str, int, int], float] = {}
+        if multi_zeta_basis and multi_zeta_basis_by_sb:
+            try:
+                from geovac.screened_valence_basis import (
+                    screened_valence_eigenvalue,
+                )
+            except ImportError:
+                screened_valence_eigenvalue = None  # fall back silently
+
+            if screened_valence_eigenvalue is not None:
+                for sb in sub_blocks:
+                    blk = spec.blocks[sb['parent_block']]
+                    Z_nuc_center = float(getattr(blk, 'Z_nuc_center', 0.0))
+                    n_val_offset = int(getattr(blk, 'n_val_offset', 0))
+                    if Z_nuc_center < 11 or n_val_offset == 0:
+                        continue
+                    sb_mz = multi_zeta_basis_by_sb.get(sb['label'], {})
+                    for (block_n, l), _orb in sb_mz.items():
+                        if l != 0:
+                            continue
+                        try:
+                            ev = screened_valence_eigenvalue(
+                                Z_nuc=int(round(Z_nuc_center)),
+                                block_n=int(block_n),
+                                l=int(l),
+                                n_val_offset=int(n_val_offset),
+                                n_grid=screened_valence_n_grid,
+                            )
+                            kin_eigval_overrides[
+                                (sb['label'], int(block_n), int(l))
+                            ] = float(ev)
+                        except Exception:
+                            # If the screened eigenvalue is unavailable for
+                            # this (block_n, l), the cross_block_h1 module
+                            # falls back to the -1/(2 n_phys^2) default
+                            # consistent with the multi-zeta path.
+                            pass
+
+        h1_cross_block_matrix = compute_cross_block_h1_matrix(
+            sub_blocks=sub_blocks,
+            sb_positions=sb_positions,
+            nuclei=nuclei_list,
+            M=M,
+            n_rho=cross_block_h1_n_rho,
+            n_z=cross_block_h1_n_z,
+            rho_max=cross_block_h1_rho_max,
+            z_max=cross_block_h1_z_max,
+            multi_zeta_basis_by_sb=multi_zeta_basis_by_sb,
+            n_val_offset_by_sb=n_val_offset_by_sb,
+            kinetic_eigenvalue_override_by_sb_nl=kin_eigval_overrides,
+            verbose=verbose,
+        )
+        h1_balanced = h1_balanced + h1_cross_block_matrix
+        nz_mask = np.abs(h1_cross_block_matrix) > 1e-15
+        cross_block_h1_info['n_nonzero'] = int(np.sum(nz_mask))
+        cross_block_h1_info['max_abs'] = float(
+            np.max(np.abs(h1_cross_block_matrix))
+        )
+        cross_block_h1_info['frobenius'] = float(
+            np.linalg.norm(h1_cross_block_matrix)
+        )
+        if verbose:
+            print(
+                f"[balanced] Cross-block h1: "
+                f"{cross_block_h1_info['n_nonzero']} nonzero, "
+                f"max|h1[a,b]| = {cross_block_h1_info['max_abs']:.4f} Ha, "
+                f"Frobenius = {cross_block_h1_info['frobenius']:.4f}"
+            )
+
+    # ------------------------------------------------------------------
     # 4. Build fermion operator and JW transform
     # ------------------------------------------------------------------
     fermion_op = build_fermion_op_from_integrals(
@@ -830,12 +1064,16 @@ def build_balanced_hamiltonian(
         'pk_cross_center_count': pk_count,
         'pk_cross_center_details': pk_details,
         'screened_valence_info': screened_valence_info,
+        'multi_zeta_basis_enabled': multi_zeta_basis,
+        'multi_zeta_diagnostics': multi_zeta_diagnostics if multi_zeta_basis else [],
         'h1': h1_balanced,
         'h1_balanced': h1_balanced,
         'h1_no_pk': h1_no_pk,
         'h1_cross_vne': h1_cross_vne,
         'h1_pk_cross': h1_pk_cross,
         'h1_screened_correction': h1_screened_correction,
+        'h1_cross_block': h1_cross_block_matrix,
+        'cross_block_h1_info': cross_block_h1_info,
         'h1_pk': h1_pk,
         'eri': eri_balanced,
         'qubit_op': qubit_op,

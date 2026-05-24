@@ -1,5 +1,5 @@
 import re
-with open('papers/standalone/paper_38_su2_propinquity_convergence.tex', encoding='utf-8') as f:
+with open('papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex', encoding='utf-8') as f:
     text = f.read()
 opens = text.count('{')
 closes = text.count('}')

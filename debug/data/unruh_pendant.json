@@ -160,12 +160,12 @@
   "files": {
     "memo": "debug/unruh_pendant_memo.md",
     "data": "debug/data/unruh_pendant.json",
-    "paper_35_edit": "papers/observations/paper_35_time_as_projection.tex (new subsec:unruh_pendant in §VIII)",
-    "paper_32_edit": "papers/synthesis/paper_32_spectral_triple.tex (Unruh paragraph appended to rem:bisognano_wichmann_reading)",
+    "paper_35_edit": "papers/group6_precision_observations/paper_35_time_as_projection.tex (new subsec:unruh_pendant in §VIII)",
+    "paper_32_edit": "papers/group1_operator_algebras/paper_32_spectral_triple.tex (Unruh paragraph appended to rem:bisognano_wichmann_reading)",
     "paper_34_edits": [
-      "papers/observations/paper_34_projection_taxonomy.tex §V.B (Unruh row in catalog_off table)",
-      "papers/observations/paper_34_projection_taxonomy.tex §III.15 (footnote extension)",
-      "papers/observations/paper_34_projection_taxonomy.tex §VIII (Lorentz-boost open question append)"
+      "papers/group6_precision_observations/paper_34_projection_taxonomy.tex §V.B (Unruh row in catalog_off table)",
+      "papers/group6_precision_observations/paper_34_projection_taxonomy.tex §III.15 (footnote extension)",
+      "papers/group6_precision_observations/paper_34_projection_taxonomy.tex §VIII (Lorentz-boost open question append)"
     ]
   },
 

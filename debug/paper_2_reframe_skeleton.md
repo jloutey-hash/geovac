@@ -30,7 +30,7 @@
 
 ## 1. Current state assessment (2026-04-18)
 
-Paper 2 v1.x (`papers/conjectures/paper_2_alpha.tex`, 1428 lines) has absorbed most of the Phase 4B-4I machinery:
+Paper 2 v1.x (`papers/group5_qed_gauge/paper_2_alpha.tex`, 1428 lines) has absorbed most of the Phase 4B-4I machinery:
 
 - Three-homes theorem (§IV.A) — stated cleanly
 - Three obstructions to unification (§IV.B) — documented

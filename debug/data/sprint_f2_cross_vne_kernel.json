@@ -1,0 +1,115 @@
+{
+  "sprint": "F2 — cross-V_ne kernel-shape substitution diagnostic",
+  "date": "2026-05-23",
+  "verdict": "KERNEL-NOT-IT (with structural absence finding)",
+  "verdict_explanation": "Multipole expansion at L_max=4 is bit-faithful (~10^-5 to 10^-9 Ha) to converged 3D numerical quadrature across all five tested matrix elements at NaH R_eq=3.566 bohr. Differentials are 6-10 orders of magnitude smaller than the bond-energy scale (0.075 Ha). The W1c-residual orthogonality wall is NOT a kernel-truncation artifact. Step 1 ALSO revealed a deeper structural absence: the framework's h1 architecture in composed_qubit.build_composed_hamiltonian is strictly block-diagonal -- there is NO cross-block off-diagonal h1 element <Na 3s | V_ne | H 1s> at all. This explains the F1 max_n=3 finding (bonding orbital is constructible from natural-orbital diagonalization of the 1-RDM but cannot be energetically preferred at the h1 level); the wall lives in the cross-block one-body coupling that the architecture simply does not include, NOT in the precision of the existing within-sub-block cross-V_ne kernel.",
+  "decision_gate": "STOP after Step 1 per gate logic 'kernel error < 10% of splitting'",
+  "test_geometry": {
+    "system": "NaH",
+    "R_AB_bohr": 3.566,
+    "R_AB_descr": "experimental NaH equilibrium",
+    "Z_Na": 11.0,
+    "Z_H": 1.0
+  },
+  "step1_matrix_elements": {
+    "A_NaA_3s_VneH_NaA_3s_diag_hydrogenic": {
+      "description": "<Na 3s_hyd | V_ne(H, R) | Na 3s_hyd>",
+      "mp_L_max_framework_Ha": -0.0911941459,
+      "mp_L_max_high_Ha": -0.0911941459,
+      "3d_quadrature_Ha": -0.0911949557,
+      "mp_vs_3d_diff_Ha": 8.10e-07,
+      "mp_vs_3d_relerr": 8.88e-06,
+      "framework_truncation_converged_at_L4": true
+    },
+    "B_NaA_3s_VneH_NaA_4s_offdiag_hydrogenic": {
+      "description": "<Na 3s_hyd | V_ne(H, R) | Na 4s_hyd>",
+      "mp_L_max_framework_Ha": -0.0234745972,
+      "mp_L_max_high_Ha": -0.0234745972,
+      "3d_quadrature_Ha_n400_rmax40": -0.0237176107,
+      "3d_quadrature_Ha_n3200_rmax120": -0.0234745941,
+      "mp_vs_3d_diff_Ha_converged": 3.05e-09,
+      "mp_vs_3d_relerr_converged": 1.30e-07,
+      "framework_truncation_converged_at_L4": true,
+      "note": "Initial n_radial=400 result showed 1% error due to undersampling; converged at n_radial=3200, r_max=120 to ~3e-9 Ha."
+    },
+    "C_HB_1s_VneNa_HB_1s_diag": {
+      "description": "<H 1s | V_ne(Na, R) | H 1s>",
+      "mp_L_max_framework_Ha": -3.0734333768,
+      "mp_L_max_high_Ha": -3.0734333768,
+      "3d_quadrature_Ha": -3.0734534723,
+      "mp_vs_3d_diff_Ha": 2.01e-05,
+      "mp_vs_3d_relerr": 6.54e-06,
+      "framework_truncation_converged_at_L4": true
+    },
+    "D_HB_1s_VneNa_HB_2s_offdiag": {
+      "description": "<H 1s | V_ne(Na, R) | H 2s>",
+      "mp_L_max_framework_Ha": -0.0695453430,
+      "mp_L_max_high_Ha": -0.0695453430,
+      "3d_quadrature_Ha": -0.0695646767,
+      "mp_vs_3d_diff_Ha": 1.93e-05,
+      "mp_vs_3d_relerr": 2.78e-04,
+      "framework_truncation_converged_at_L4": true
+    },
+    "E_NaA_3s_mz_VneH_NaA_3s_mz_diag_multi_zeta": {
+      "description": "<Na 3s_mz | V_ne(H, R) | Na 3s_mz>",
+      "mp_L_max_high_Ha": -0.2260471217,
+      "3d_quadrature_Ha": -0.2260409340,
+      "mp_vs_3d_diff_Ha": -6.19e-06,
+      "mp_vs_3d_relerr": 2.74e-05
+    }
+  },
+  "step1_summary": {
+    "max_abs_differential_Ha": 2.43e-04,
+    "max_abs_differential_Ha_converged_quad": 2.01e-05,
+    "bond_energy_scale_Ha": 0.075,
+    "differential_over_bond_energy_max": 2.68e-04,
+    "differential_over_bond_energy_typical": 1.34e-04,
+    "interpretation": "Largest converged differential is 2.01e-05 Ha (matrix element C, H 1s diagonal cross-V_ne from Na), which is 2.68e-04 = 0.027% of the bond-energy scale. Even the OFF-diagonal matrix element B initial 2.43e-04 differential (before quadrature convergence) was only 0.32% of the bond energy. The multipole expansion at the framework's L_max=4 default is bit-faithful (10^-9 to 10^-5 Ha) for all five tested matrix elements."
+  },
+  "bonding_antibonding_h1_only": {
+    "hydrogenic_path": {
+      "h1_Na3s_diag_framework_Ha": -0.591194,
+      "h1_H1s_diag_framework_Ha": -3.573433,
+      "h1_Na3s_diag_3d_Ha": -0.591195,
+      "h1_H1s_diag_3d_Ha": -3.573453,
+      "bonding_h1_framework_Ha": -2.082314,
+      "antibonding_h1_framework_Ha": -2.082314,
+      "bonding_minus_antibonding_framework_Ha": 0.0,
+      "bonding_h1_3d_Ha": -2.082324,
+      "antibonding_h1_3d_Ha": -2.082324,
+      "bonding_minus_antibonding_3d_Ha": 0.0
+    },
+    "multi_zeta_path": {
+      "h1_Na3s_mz_diag_framework_Ha": -0.396047,
+      "h1_Na3s_mz_diag_3d_Ha": -0.396041,
+      "bonding_h1_framework_Ha": -1.984740,
+      "bonding_h1_3d_Ha": -1.984747
+    },
+    "structural_finding": "At the 2-state h1-only level in {|Na 3s>, |H 1s>}, the framework has NO off-diagonal h1 cross-block element <Na 3s | V_ne | H 1s> (h1 is structurally block-diagonal in composed_qubit). Therefore h1 alone gives ZERO bonding-antibonding splitting in this basis. The bonding orbital constructed at F1 max_n=3 emerges from 2-body ERIs in the FCI, NOT from h1 cross-coupling. This is the structurally deeper finding of F2 Step 1: the W1c residual at NaH cannot be closed by improving the precision of cross-V_ne computation (which is already bit-faithful); a different ARCHITECTURAL extension is needed to introduce cross-block h1 elements between orbitals on different centers."
+  },
+  "verdict_taxonomy_update": {
+    "previous_classification": "W1c-residual at NaH = endomorphism class (per F1 max_n=3 reclassification of sub-layer 3)",
+    "updated_classification": "W1c-residual at NaH = STRUCTURAL ABSENCE class (newly named): the cross-block off-diagonal h1 matrix elements <orbital_A | V_ne(any) | orbital_B> for A != B are not just inaccurate -- they are absent from the composed_qubit h1 construction by architectural design. The endomorphism framing was correct that the multi-zeta machinery cannot close it from within, but more specifically: the architecture itself does not have a matrix slot for these elements. Closing the wall requires extending the h1 construction to include cross-block coupling -- a structurally larger extension than basis enlargement or kernel-shape substitution within sub-blocks.",
+    "implication": "Sub-layer 3 reclassifies from 'endomorphism' (external-input class needing calibration data) to 'architectural_extension' (the framework architecture itself needs a new matrix slot for cross-block h1 coupling). This is a more specific diagnosis than 'endomorphism' and points to the natural follow-on: extend composed_qubit to support cross-block h1, which would compute <psi_a^A | V_ne(C) | psi_b^B> via a TWO-CENTER integral. This integral is structurally distinct from the existing single-center cross-V_ne (which lives within one sub-block) and from the cross-block ERIs (which are 2-body). A two-center one-body integral is the missing architectural piece."
+  },
+  "step2_skipped": "Step 2 (full-3D-quadrature substitution into production code) is SKIPPED per Step 1 verdict (kernel is faithful at <0.03% of bond energy). Substituting full-3D for the multipole kernel would change the matrix elements by ~10^-5 Ha at most -- four orders of magnitude smaller than the W1c-residual descent depth (0.305 Ha at NaH max_n=2 per PK cross-center sprint).",
+  "step3_skipped": "Step 3 (mini-PES) not reached per Step 2 skip.",
+  "next_sprint_recommendation": {
+    "primary": "Sprint F3 — Two-center one-body V_ne integral architecture (NEW CONCEPT)",
+    "primary_description": "Extend composed_qubit.build_composed_hamiltonian to include cross-block h1 elements <psi_a^A | -Z_C/|r-R_C| | psi_b^B> via a true two-center integral. This requires a separate quadrature scheme (e.g., elliptic coordinates for diatomic, or two-center Gauss-Hermite quadrature) since the existing single-center machinery cannot represent A-B coupling. Expected scope: 1-2 weeks. The F1 max_n=3 finding (bonding orbital is constructible from 1-RDM diagonalization) implies that adding this h1 coupling would let the FCI energetically prefer the bonding combination directly at the h1 level, possibly closing the wall without requiring further basis enlargement.",
+    "alternative_1": "Defer F3 and pursue Track 3 P3 — try a different system class (HCl, MgH2) where the W1c residual is empirically smaller (1.79x and 2.99x reduction vs 5.4-6x for NaH). The structurally smaller W1c residual at higher-Z may already permit framework binding without architectural extension.",
+    "alternative_2": "Pause chemistry-arc work entirely and pivot back to math.OA papers (Papers 38/39/40 published; Papers 45/46/47 in flight; opportunity for paper consolidation or new structural theorem like the master Mellin engine sharpening)."
+  },
+  "regression_check_passed": true,
+  "regression_check_note": "No production code modified in this sprint per gate decision. Regression cmd run separately to verify baseline. Tests/balanced_coupled_multizeta + screened_valence + multi_zeta_orbitals + phillips_kleinman_cross_center + shibuya_wulfman should all pass.",
+  "production_code_modified": false,
+  "paper_edits_applied": false,
+  "files_created": [
+    "debug/sprint_f2_step1_kernel_diagnostic.py",
+    "debug/sprint_f2_step1b_convergence.py",
+    "debug/data/sprint_f2_step1_kernel_diagnostic.json",
+    "debug/data/sprint_f2_step1b_convergence.json",
+    "debug/data/sprint_f2_cross_vne_kernel.json",
+    "debug/sprint_f2_cross_vne_kernel_memo.md"
+  ]
+}

@@ -2,7 +2,7 @@
 
 Written by PM (sub-agent hit plan usage cap before producing its own memo).
 Purpose: identify what is stale, missing, or inconsistent in the current
-`papers/core/paper_18_exchange_constants.tex` (v1.0, 2000 lines) as
+`papers/group3_foundations/paper_18_exchange_constants.tex` (v1.0, 2000 lines) as
 input for the Paper 18 v2.0 consolidation sprint that the Leader's
 Strategic Brief recommended as Direction 1.
 
@@ -202,8 +202,8 @@ single highest-leverage move available.
   (Direction 1, Connections §1)
 - Three-taxonomy decomposition: `debug/three_taxonomy_decomposition_memo.md`
   (verdict: PARTIAL unification, meta-pattern is the headline)
-- Paper 28: `papers/observations/paper_28_qed_s3.tex` (reference for
+- Paper 28: `papers/group5_qed_gauge/paper_28_qed_s3.tex` (reference for
   three-axis QED taxonomy; eq:D_diff_closed is the RH-J identity)
-- Paper 29: `papers/observations/paper_29_ramanujan_hopf.tex`
+- Paper 29: `papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex`
   (reference for Ihara-zeta observations; §6 paragraphs for Sprint 2-4)
 - CLAUDE.md §2 Sprint 1-5 bullets (accumulated results reference)

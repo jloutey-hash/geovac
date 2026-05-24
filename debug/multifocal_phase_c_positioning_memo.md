@@ -19,12 +19,12 @@ in Paper 32 was repaired per the briefing).
 
 | Step | File | Action | Status | Note |
 |:-----|:-----|:-------|:-------|:-----|
-| 1 | `papers/synthesis/paper_32_spectral_triple.tex` | Insert §VIII.D `\subsection{Frontier-of-field framing...}` (~970 words LaTeX from B-position T3) between existing §VIII.C and §IX | ✓ landed | Inserted before `\section{Marcolli--van~Suijlekom Lineage}` at original line 2490; new §VIII.D label `frontier_framing`. |
-| 2 | `papers/synthesis/paper_32_spectral_triple.tex` | Add 3 new bibitems (`hekkelman_mcdonald2024`, `latremoliere2026`, `paper36`); fix `hekkelman2024` arXiv placeholder | ✓ landed | See deviation note below on the placeholder fix. |
-| 3 | `papers/synthesis/paper_32_spectral_triple.tex` | Add §V Track NI Zenodo cross-reference paragraph | ✓ landed | Inserted after `\caption{Sub-sector identification...}` table closing, as `\paragraph{Track NI as an explicit composed real-space spectral triple.}` |
-| 4 | `papers/applications/paper_23_nuclear_shell.tex` | Add §VI new subsection "Positioning in the noncommutative-geometry literature" cross-referencing Paper 32 §V/§VIII.D + Zenodo memo | ✓ landed | Also added `Paper32` bibitem to `\begin{thebibliography}` since Paper 23 did not previously cite Paper 32. |
+| 1 | `papers/group1_operator_algebras/paper_32_spectral_triple.tex` | Insert §VIII.D `\subsection{Frontier-of-field framing...}` (~970 words LaTeX from B-position T3) between existing §VIII.C and §IX | ✓ landed | Inserted before `\section{Marcolli--van~Suijlekom Lineage}` at original line 2490; new §VIII.D label `frontier_framing`. |
+| 2 | `papers/group1_operator_algebras/paper_32_spectral_triple.tex` | Add 3 new bibitems (`hekkelman_mcdonald2024`, `latremoliere2026`, `paper36`); fix `hekkelman2024` arXiv placeholder | ✓ landed | See deviation note below on the placeholder fix. |
+| 3 | `papers/group1_operator_algebras/paper_32_spectral_triple.tex` | Add §V Track NI Zenodo cross-reference paragraph | ✓ landed | Inserted after `\caption{Sub-sector identification...}` table closing, as `\paragraph{Track NI as an explicit composed real-space spectral triple.}` |
+| 4 | `papers/group4_quantum_computing/paper_23_nuclear_shell.tex` | Add §VI new subsection "Positioning in the noncommutative-geometry literature" cross-referencing Paper 32 §V/§VIII.D + Zenodo memo | ✓ landed | Also added `Paper32` bibitem to `\begin{thebibliography}` since Paper 23 did not previously cite Paper 32. |
 | 5 | `papers/observations/track_ni_spectral_triple_zenodo.md` | New file: Track NI Zenodo memo (~3000 words, 7 sections + cross-references + sprint provenance) | ✓ created | Markdown not LaTeX per briefing; title uses "an explicit … construction" not "the first" per T2/T5 scope-honest framing. |
-| 6 | `papers/core/paper_18_exchange_constants.tex` | Insert §IV.6 second-packing-axiom open-question paragraph (~150 words from B-W3-diag §8) | ✓ landed | Inserted as `\paragraph{Open question:\ a second packing axiom for inner-factor data.}` immediately after the closing of the existing "second packing axiom" sentence, before §V. |
+| 6 | `papers/group3_foundations/paper_18_exchange_constants.tex` | Insert §IV.6 second-packing-axiom open-question paragraph (~150 words from B-W3-diag §8) | ✓ landed | Inserted as `\paragraph{Open question:\ a second packing axiom for inner-factor data.}` immediately after the closing of the existing "second packing axiom" sentence, before §V. |
 | 7 | `CLAUDE.md` | Update §1.7 WH4 entry to deflated form ("one Fock-projection statement plus three forced consequences") | ✓ landed | PI explicitly authorized this §1.7 edit per dispatching prompt; CLAUDE.md §13.5 access control normally PM-prohibited. |
 | 8 | `CLAUDE.md` | Add §6 paper inventory entry for Track NI Zenodo deposit in Observations section | ✓ landed | Inserted as new row immediately after Paper 36 in the Observations table. |
 | 9 | `CLAUDE.md` | Add §2 multi-focal sprint outcome paragraph (refined six-wall taxonomy, Phase C plan) | ✓ landed | Inserted as bullet between the existing 2026-05-07 sprint bullet (line 245) and the "Architecture locked:" line. |
@@ -37,7 +37,7 @@ in Paper 32 was repaired per the briefing).
 Spot-checked each edit by grep against the target file. Results:
 
 ```
-$ grep -c "frontier_framing"   papers/synthesis/paper_32_spectral_triple.tex   →  2
+$ grep -c "frontier_framing"   papers/group1_operator_algebras/paper_32_spectral_triple.tex   →  2
 $ grep -c "hekkelman_mcdonald2024\|latremoliere2026\|paper36"   paper_32   →  6
 $ grep -c "2403.xxxxx"   paper_32   →  0   (placeholder gone)
 $ grep -c "Track NI as an explicit composed real-space"   paper_32   →  1
@@ -165,10 +165,10 @@ may shorten if desired.
 
 ## Files modified or created
 
-1. `papers/synthesis/paper_32_spectral_triple.tex` — modified: §VIII.D inserted (~970 words), 3 new bibitems added, `hekkelman2024` arXiv repaired, §V cross-reference paragraph added.
-2. `papers/applications/paper_23_nuclear_shell.tex` — modified: §VI subsection "Positioning in the NCG literature" added, `Paper32` bibitem added.
+1. `papers/group1_operator_algebras/paper_32_spectral_triple.tex` — modified: §VIII.D inserted (~970 words), 3 new bibitems added, `hekkelman2024` arXiv repaired, §V cross-reference paragraph added.
+2. `papers/group4_quantum_computing/paper_23_nuclear_shell.tex` — modified: §VI subsection "Positioning in the NCG literature" added, `Paper32` bibitem added.
 3. `papers/observations/track_ni_spectral_triple_zenodo.md` — created (new file, ~3000 words, ~18.8 KB).
-4. `papers/core/paper_18_exchange_constants.tex` — modified: §IV.6 second-packing-axiom open-question paragraph added (~150 words).
+4. `papers/group3_foundations/paper_18_exchange_constants.tex` — modified: §IV.6 second-packing-axiom open-question paragraph added (~150 words).
 5. `CLAUDE.md` — modified: §1.7 WH4 entry rewritten to deflated form, §6 Track NI Zenodo inventory row added in Observations, §2 multi-focal sprint outcome paragraph added.
 6. `debug/multifocal_phase_c_positioning_memo.md` — created (this memo).
 

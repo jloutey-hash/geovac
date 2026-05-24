@@ -45,7 +45,7 @@ Cross-references
 - debug/dirac_triangle_extended_verify.py: build_A, SimpleLieAlgebra (rank-agnostic).
 - debug/sp2_g2_rate_constant.py: rank-2 driver (reused infrastructure where possible).
 - debug/su3_rate_constant.py: SU(3) canonical baseline.
-- Paper 40, papers/standalone/paper_40_unified_propinquity_convergence.tex.
+- Paper 40, papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex.
 - debug/unified_gh_scoping_memo.md: scoping plan.
 
 Output

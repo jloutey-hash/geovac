@@ -30,7 +30,7 @@ Method
 
 References
 ----------
-- Paper 28 (papers/observations/paper_28_qed_s3.tex): vertex parity, D_even/D_odd.
+- Paper 28 (papers/group5_qed_gauge/paper_28_qed_s3.tex): vertex parity, D_even/D_odd.
 - debug/riemann_limit_memo.md: Sprint 2 RH-G structural redirection.
 - geovac/qed_vertex.py: existing Hurwitz implementations.
 """

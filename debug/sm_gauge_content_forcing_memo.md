@@ -233,9 +233,9 @@ None of these is in hand. The SM gauge content match is structurally suggestive 
 
 ## §9. Files referenced
 
-- `papers/observations/paper_30_su2_wilson.tex` (SU(2) on S³)
-- `papers/synthesis/paper_25_hopf_gauge_structure.tex` (U(1) on S³)
-- `papers/core/paper_24_bargmann_segal.tex` (S⁵ Bargmann lattice; HO rigidity; Coulomb/HO asymmetry §V)
+- `papers/group5_qed_gauge/paper_30_su2_wilson.tex` (SU(2) on S³)
+- `papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex` (U(1) on S³)
+- `papers/group3_foundations/paper_24_bargmann_segal.tex` (S⁵ Bargmann lattice; HO rigidity; Coulomb/HO asymmetry §V)
 - `geovac/su2_wilson_gauge.py`, `geovac/su3_wilson_s5.py`
 - `debug/st_su3_wilson_memo.md` (Sprint ST-SU3 — SU(3) on S⁵)
 - `debug/s5_gauge_structure_memo.md` (Sprint 5 Track S5 — SU(3) negative on (N,0) tower)

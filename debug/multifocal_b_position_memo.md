@@ -5,9 +5,9 @@
 **Sources read:**
 - `debug/multifocal_phase_a_synthesis_memo.md` (Section 4 Candidates 4 & 5; Section 6 Q3 & Q4)
 - `debug/multifocal_literature_review_memo.md` (full memo, especially S2/S3/S5/S6)
-- `papers/applications/paper_23_nuclear_shell.tex` §VI Composed Nuclear–Electronic Deuterium
-- `papers/synthesis/paper_32_spectral_triple.tex` §V (sub-sector identification), §VIII (case-exhaustion + GH-convergence + SM gauge appendix), §IX (Marcolli–vS lineage), §X (Open questions), bibitem list
-- `papers/standalone/paper_38_su2_propinquity_convergence.tex` (template scope)
+- `papers/group4_quantum_computing/paper_23_nuclear_shell.tex` §VI Composed Nuclear–Electronic Deuterium
+- `papers/group1_operator_algebras/paper_32_spectral_triple.tex` §V (sub-sector identification), §VIII (case-exhaustion + GH-convergence + SM gauge appendix), §IX (Marcolli–vS lineage), §X (Open questions), bibitem list
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` (template scope)
 - CLAUDE.md §1.5 (rhetoric rule), §1.7 (WH register), §6 (paper inventory)
 - Memory `papers_zenodo_not_journals.md` (publication policy)
 - WebSearch + WebFetch checks against arXiv 2603.19128 (Latrémolière 2026), 2412.00628 (Hekkelman–McDonald), 1805.00411 (Lizzi NCG review), 2511.07672 (Pati–Salam from NCG), and 8+ broad queries on `"spectral triple" + atom + multi-particle`, etc.

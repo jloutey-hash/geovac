@@ -515,9 +515,9 @@ framework an internal Bisognano–Wichmann theorem prover at finite cutoff.
 - This memo: `debug/unruh_pendant_memo.md`.
 - JSON: `debug/data/unruh_pendant.json` (closed-form $\beta_U$, M1
   identification, paper-edit list as machine-readable rows).
-- Paper edits: `papers/observations/paper_35_time_as_projection.tex`,
-  `papers/synthesis/paper_32_spectral_triple.tex`,
-  `papers/observations/paper_34_projection_taxonomy.tex`.
+- Paper edits: `papers/group6_precision_observations/paper_35_time_as_projection.tex`,
+  `papers/group1_operator_algebras/paper_32_spectral_triple.tex`,
+  `papers/group6_precision_observations/paper_34_projection_taxonomy.tex`.
 - No production code modified; `geovac/thermal_tensor_triple.py` was
   cited via manual sympy check (§5) but not extended.
 

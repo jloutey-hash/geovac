@@ -1,0 +1,38 @@
+{
+  "sprint": "F4 Step 1 EXTENDED \u2014 full F3 h1 diag",
+  "date": "2026-05-23",
+  "R_AB_bohr": 3.566,
+  "M": 10,
+  "h1_lowest_5_eigvalues": [
+    -3.140681518801152,
+    -0.7642576008775044,
+    -0.4382675606825637,
+    -0.38577453341947976,
+    -0.31337116427569656
+  ],
+  "bonding_orbital_idx": 0,
+  "bonding_orbital_E_Ha": -3.140681518801152,
+  "bonding_orbital_composition": {
+    "NaH_bond_center(1,0,0)": -0.6200027604993643,
+    "NaH_bond_center(2,0,0)": 0.35196368219450197,
+    "NaH_bond_partner(1,0,0)": -0.4668081378568081,
+    "NaH_bond_partner(2,0,0)": 0.522125677340157
+  },
+  "core_overlaps_s_cores": {
+    "(1,0)": {
+      "S_bond_core": 0.05162721059508167,
+      "abs_S_pct": 5.162721059508167,
+      "E_c_Ha": -40.4787,
+      "dH_pk_abs": 0.10789066703305844
+    },
+    "(2,0)": {
+      "S_bond_core": -0.17521947574627048,
+      "abs_S_pct": 17.52194757462705,
+      "E_c_Ha": -2.7967,
+      "dH_pk_abs": 0.0858639049527874
+    }
+  },
+  "total_pk_barrier_s_cores_Ha": 0.19375457198584584,
+  "max_abs_overlap_pct": 17.52194757462705,
+  "wall_time_s": 0.4578819000162184
+}

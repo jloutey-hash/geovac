@@ -479,7 +479,7 @@ S_min^diff  = -0.64766733757364631312228125339879418750
 
 ## Appendix B — cross-references
 
-- Paper 28 §IV: `papers/observations/paper_28_qed_s3.tex`
+- Paper 28 §IV: `papers/group5_qed_gauge/paper_28_qed_s3.tex`
 - `geovac/qed_vertex.py` (S_min factorization derivation)
 - `debug/spectral_chi_neg4_memo.md` (depth-1 RH-J.1 memo, Sprint 3)
 - `debug/smin_identification.py` (Paper 28 irreducibility check)

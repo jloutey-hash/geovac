@@ -1,0 +1,127 @@
+{
+  "sprint": "alpha-2 final stable multi-zeta fit for Na 3s and 3p",
+  "date": "2026-05-23",
+  "description": "Production parameters with bounded coefficients (|c| <= 5) to prevent near-degenerate basis instability. Selected based on overlap > 0.99 and correct node count.",
+  "physical_observables": {
+    "Na_3s_eigenvalue_Ha": -0.17049302908519912,
+    "Na_3p_eigenvalue_Ha": -0.10999194118830702,
+    "Na_3s_mean_radius_bohr_physical": 4.466118593222988,
+    "Na_3p_mean_radius_bohr_physical": 5.926233680906478,
+    "Na_3s_radial_nodes_physical": 2,
+    "Na_3p_radial_nodes_physical": 1
+  },
+  "production_fits": {
+    "Na_3s": {
+      "n_orbital": 3,
+      "l_orbital": 0,
+      "K": 4,
+      "n_slater_list": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "zetas": [
+        14.002047575206364,
+        3.5358573714198815,
+        0.9119760725284962,
+        0.6299916718478478
+      ],
+      "coefficients": [
+        0.0436913313453649,
+        -0.18164968723214192,
+        0.6004038810544352,
+        0.4301511884159761
+      ],
+      "overlap_with_physical": 0.99993929872304,
+      "L2_error": 0.00012140255392001686,
+      "max_pointwise_error": 0.9931078967844473,
+      "radial_nodes_fit": 2,
+      "mean_radius_bohr_fit": 4.466472079660805,
+      "selection_note": "K=4"
+    },
+    "Na_3p": {
+      "n_orbital": 3,
+      "l_orbital": 1,
+      "K": 4,
+      "n_slater_list": [
+        2,
+        2,
+        3,
+        3
+      ],
+      "zetas": [
+        6.905907506987677,
+        2.7993573622424557,
+        0.8162934302424126,
+        0.5209487035998419
+      ],
+      "coefficients": [
+        0.06261469851452041,
+        0.06490191647025319,
+        -0.30429992008896,
+        -0.7308669853927625
+      ],
+      "overlap_with_physical": 0.999999158178608,
+      "L2_error": 1.683642784162921e-06,
+      "max_pointwise_error": 0.021146595806412094,
+      "radial_nodes_fit": 1
+    }
+  },
+  "orthonormality": {
+    "norm_3s": 1.0000009555553535,
+    "norm_3p": 1.0000004611265663,
+    "radial_overlap_3s_3p": -0.9402882341139065
+  },
+  "alternative_fits": {
+    "Na_3s_K5": {
+      "n_slater_list": [
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "zetas": [
+        7.342859098567501,
+        2.917048601775854,
+        4.18172567788937,
+        0.9982384872027298,
+        0.6674976251988625
+      ],
+      "coefficients": [
+        0.29687235470264545,
+        -0.8154211168411772,
+        0.4542938671312491,
+        0.43731716228288825,
+        0.6046597507105625
+      ],
+      "overlap": 0.9999992964324401,
+      "L2_error": 1.407135119858485e-06,
+      "radial_nodes_fit": 2
+    },
+    "Na_3s_K4": {
+      "n_slater_list": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "zetas": [
+        14.002047575206364,
+        3.5358573714198815,
+        0.9119760725284962,
+        0.6299916718478478
+      ],
+      "coefficients": [
+        0.0436913313453649,
+        -0.18164968723214192,
+        0.6004038810544352,
+        0.4301511884159761
+      ],
+      "overlap": 0.99993929872304,
+      "L2_error": 0.00012140255392001686,
+      "radial_nodes_fit": 2
+    }
+  }
+}

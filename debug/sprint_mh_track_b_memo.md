@@ -189,8 +189,8 @@ No production GeoVac code modified.
 - GeoVac Phase C-W1b-operator (`debug/multifocal_phase_c_w1b_operator_memo.md`, May 2026) — operator-level Zemach matched Eides at $-39.5$ ppm verbatim.
 - GeoVac Sprint LS-8a (`debug/ls8a_two_loop_self_energy_memo.md`, May 2026) — multi-loop QED renormalization gap; same wall as the muonic Uehling correction missing here.
 - GeoVac Sprint H1 (`debug/h1_ac_extension_memo.md`, May 2026) — inner-factor input data tier (Paper 18 §IV.6).
-- GeoVac Paper 34 (`papers/observations/paper_34_projection_taxonomy.tex`) — projection family, rest-mass projection (14th, May 2026).
-- GeoVac Paper 35 (`papers/observations/paper_35_time_as_projection.tex`) — observation/temporal-window projection (15th, May 2026).
+- GeoVac Paper 34 (`papers/group6_precision_observations/paper_34_projection_taxonomy.tex`) — projection family, rest-mass projection (14th, May 2026).
+- GeoVac Paper 35 (`papers/group6_precision_observations/paper_35_time_as_projection.tex`) — observation/temporal-window projection (15th, May 2026).
 - CLAUDE.md memory `multi_focal_wall_pattern.md` (May 2026) — five-observable structural pattern, now extended to muonic regime.
 - CLAUDE.md memory `parker_toms_curved_qed.md` (May 2026) — first-order curvature correction $c_1 = R/12$ on Dirac-$S^3$.
 

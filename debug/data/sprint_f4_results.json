@@ -1,0 +1,92 @@
+{
+  "sprint": "F4 — bonding-orbital Phillips-Kleinman closure attempt for W1e",
+  "date": "2026-05-23",
+  "verdict": "STOP_AT_STEP_1_PK_STRUCTURALLY_INSUFFICIENT",
+  "verdict_summary": "PK barrier predicted 0.194 Ha vs 4.37 Ha wall. Even at saturation (rank-1 PK on bonding orbital), closure asymptotes at 43% — still 33x experimental D_e. W1e re-diagnosed as 2-electron FCI correlation wall, not single-particle Pauli wall.",
+  "predicted_de_F4_Ha": 4.37,
+  "wall_persists": true,
+  "wall_taxonomy_update": {
+    "W1c-cross-screening": "CLOSED (Phase C-W1c)",
+    "W1c-multi-zeta-basis": "CLOSED (F1-P1+P2)",
+    "W1d-cross-block-h1": "CLOSED (F3)",
+    "W1e-FCI-correlation": "NEWLY DIAGNOSED (F4 Step 1); was named in F3 as inner-region overattraction; now characterized as 2-electron FCI correlation channels, not single-particle Pauli wall"
+  },
+  "step_1_diagnostic": {
+    "two_by_two_subspace": {
+      "bonding_E_Ha": -1.232,
+      "bonding_coeff_Na_3s": -0.542,
+      "bonding_coeff_H_1s": -0.653,
+      "total_pk_barrier_Ev0_Ha": 0.016,
+      "max_overlap_pct": 6.02
+    },
+    "full_F3_h1_diag": {
+      "bonding_E_Ha": -3.14,
+      "bonding_composition": {
+        "Na_3s_block_n1_l0": -0.620,
+        "Na_4s_block_n2_l0": 0.352,
+        "H_1s_block_n1_l0": -0.467,
+        "H_2s_block_n2_l0": 0.522
+      },
+      "core_overlaps": {
+        "Na_1s": {"abs_S_pct": 5.16, "dH_pk_Ha": 0.108},
+        "Na_2s": {"abs_S_pct": 17.52, "dH_pk_Ha": 0.086},
+        "Na_2pz": {"abs_S_pct": 0.32, "dH_pk_Ha": 0.0000}
+      },
+      "total_pk_barrier_s_plus_2pz_Ha": 0.194,
+      "max_overlap_pct": 17.52
+    },
+    "fci_sensitivity_rank1_pk": {
+      "method": "Inject dH = c * |bond><bond| on h1, run 2-electron FCI",
+      "R_values_bohr": [2.0, 3.5, 10.0],
+      "baseline_de_Ha": 4.3735,
+      "pk_shift_predicted_Ha": 0.194,
+      "de_at_predicted_pk_Ha": 4.3712,
+      "pct_wall_closed_by_predicted_pk": 0.05,
+      "saturation_pct_wall_closed": 43.24,
+      "saturation_pk_shift_Ha": 5.0,
+      "structural_finding": "Rank-1 PK on bonding orbital is structurally near-orthogonal to 2-electron FCI correlation channels at small R"
+    }
+  },
+  "gate_logic": {
+    "strong_gate_max_S_gt_5pct_AND_barrier_gt_1Ha": "FAIL (barrier 0.194 < 1 Ha)",
+    "intermediate_gate": "TRIGGERED (formally proceed but FCI test sharpens to insufficient)",
+    "stop_gate_max_S_lt_1pct": "NOT TRIGGERED (max S = 17.52%)",
+    "decision_rationale": "FCI sensitivity test directly answers the gate question: at predicted barrier, well depth changes by 0.05%, far below the 2x experimental window [0.0375, 0.150] Ha. Per diagnostic-before-engineering rule, STOP."
+  },
+  "step_2_3_4_status": "NOT_EXECUTED_per_step_1_stop_gate",
+  "files_created": {
+    "drivers": [
+      "debug/sprint_f4_step1_diagnostic.py",
+      "debug/sprint_f4_step1_full_h1_diag.py",
+      "debug/sprint_f4_step1_with_2p.py",
+      "debug/sprint_f4_step1_fci_sensitivity.py"
+    ],
+    "data": [
+      "debug/data/sprint_f4_step1_diagnostic.json",
+      "debug/data/sprint_f4_step1_full_h1_diag.json",
+      "debug/data/sprint_f4_step1_with_2p.json",
+      "debug/data/sprint_f4_step1_fci_sensitivity.json",
+      "debug/data/sprint_f4_results.json"
+    ],
+    "memo": "debug/sprint_f4_bonding_pk_memo.md"
+  },
+  "production_code_modified": false,
+  "tests_modified": false,
+  "regression_status": "Sprint F3 regression (146 + 1 skipped) preserved bit-exactly (no code touched)",
+  "next_sprint_recommendations": {
+    "priority_1_F5_explicit_core_FCI": {
+      "scope": "Lift to 4 + N_core electron FCI with occupancy constraints on [Ne] core orbitals; 2-body Coulomb repulsion between bonding pair and core electrons acts as Pauli exclusion at correlated level",
+      "cost_weeks": 2,
+      "expected_closure": "Physically motivated; could close to within ~2x experimental"
+    },
+    "priority_2_F4_extend_Schmidt": {
+      "scope": "Strict Schmidt orthogonalization of heavy-atom valence against [Ne] core BEFORE cross-block h1; modifies basis construction",
+      "cost_weeks": 3,
+      "expected_closure": "Open; depends on whether FCI correlation channels are addressed"
+    },
+    "priority_3_pivot_consolidate": {
+      "scope": "Pause chemistry arc; update CLAUDE.md/papers with F4 STOP verdict; pivot to math.OA paper drafts",
+      "cost_hours": 4
+    }
+  }
+}

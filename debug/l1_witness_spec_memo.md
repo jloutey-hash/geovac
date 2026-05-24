@@ -266,9 +266,9 @@ GH-convergence machinery.
 **Files referenced:** `debug/unruh_pendant_memo.md`,
 `debug/bisognano_wichmann_track_d_memo.md`,
 `debug/lorentzian_l0_audit_memo.md`,
-`papers/synthesis/paper_32_spectral_triple.tex` (§VIII
+`papers/group1_operator_algebras/paper_32_spectral_triple.tex` (§VIII
 `rem:bisognano_wichmann_reading`, §VIII.E),
-`papers/observations/paper_34_projection_taxonomy.tex` (§III.27),
+`papers/group6_precision_observations/paper_34_projection_taxonomy.tex` (§III.27),
 `geovac/thermal_tensor_triple.py` (Sprint TD Track 1 apparatus),
 `geovac/operator_system.py` (Connes-vS truncated operator system),
 `geovac/connes_distance.py` (existing SDP framework, extensible to

@@ -3,7 +3,7 @@
 **Date:** 2026-05-09
 **Source:** `debug/synthesis_pattern_review_memo.md` (May 2026 synthesis pass)
 **Companion data:** `debug/data/synthesis_pattern_review_data.json`
-**Files modified:** `papers/observations/paper_34_projection_taxonomy.tex`
+**Files modified:** `papers/group6_precision_observations/paper_34_projection_taxonomy.tex`
 
 ---
 
