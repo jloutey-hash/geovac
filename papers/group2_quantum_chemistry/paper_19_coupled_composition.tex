@@ -1611,6 +1611,103 @@ F6 max\_n=4 PARTIAL\_IMPROVEMENT:
 Sprint $\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis:
 \texttt{debug/sprint\_beta\_update\_f4f6\_memo.md}.
 
+\subsubsection{Closure of the W1e sprint-scale candidate space and cross-domain pattern (Schmidt + core correlation, 2026-05-23)}
+\label{sec:w1e_schmidt_core_correlation}
+
+The two named multi-week+ candidates from \S\ref{sec:w1e_refinement_f4_f6}
+(``Schmidt orthogonalization at basis-construction level'' and
+``fully correlated [Ne] cores'') were tested by Day-1 diagnostics,
+executing the diagnostic-before-engineering rule at sprint-cycle scale.
+\textbf{Both ruled out as W1e closure mechanisms.}
+
+\textbf{Schmidt orthogonalization at basis-construction level
+(Day-1 algebraic diagnostic, STOP).} The H 1s basis function on the
+H center has total projection mass
+$\sum_c |S_c|^2 = 1.00 \times 10^{-3}$ on the Na [Ne] core at
+NaH $R = 3.5$~bohr --- only $0.1\%$ of H 1s lives in [Ne]-core
+space. Three nonzero overlaps (Na 1s, 2s, 2p$_0$) survive the
+axial $m$-selection rule; Na 2s dominates
+($|S|^2 = 8.9 \times 10^{-4}$, $|S| \approx 3.0\%$). The
+$17.5\%$ max-overlap F4 found
+(\S\ref{sec:w1e_refinement_f4_f6}) was specifically on the
+F3-constructed \emph{bonding orbital}, which mixes H 1s with
+Na 3s; the H 1s basis function alone is structurally far outside
+the [Ne] core's significant amplitude. Total diagonal-element
+differential: $\Delta_\text{total} = +8.6$~mHa (converging from
+below across a 4-step Cartesian-grid sweep $80^3 \to 140^3$), which
+is $\sim 12\times$ below the 100~mHa prespecified GO threshold
+and $\sim 3$--$4\times$ below the 30~mHa BORDERLINE threshold;
+it would close at most $\sim 0.2\%$ of the 4.37~Ha W1e wall depth.
+\textbf{The W1e wall is not a basis-level non-orthogonality wall.}
+Day-1 driver and memo:
+\texttt{debug/sprint\_w1e\_schmidt\_diagnostic\_memo.md},
+\texttt{debug/data/sprint\_w1e\_schmidt\_diagnostic.json}.
+
+\textbf{Fully correlated [Ne] cores (Day-1 literature
+order-of-magnitude estimate, DEFER).} The binding-relevant
+[Ne] core-correlation differential at NaH $R_\text{eq}$ converges
+from three independent literature anchors to $\sim 0.001$--$0.003$~Ha
+(central), $\sim 0.007$~Ha (upper bound): Iron-Oren-Martin 2003
+qualitative ranking of Na subvalence correlation strength;
+Sylvetsky-Martin 2018 W4-17 diatomic core-valence band; atomic
+Na [Ne]-core correlation ($\sim 0.36$~Ha) times an estimated
+active fraction at NaH bond geometry ($0.5$--$2\%$). All three
+sit $14$--$1000\times$ below the prespecified $0.1$~Ha DEFER
+threshold. \textbf{Core correlation is a Layer-2 sub-percent
+effect for Na chemistry; it cannot close a $\sim 3.85$~Ha
+structural wall (scales mismatch by $\sim 10^3$).} Day-1 memo:
+\texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md},
+\texttt{debug/data/sprint\_w1e\_core\_correlation\_estimate.json}.
+
+\textbf{Net W1e closure verdict: sprint-scale candidate space
+exhausted.} Five independent sprint-scale W1e closure mechanisms
+now ruled out: F4 single-particle Phillips--Kleinman ($43\%$
+saturation ceiling), F5 mean-field Hartree $J - K$ ($25.7\%$
+predicted ceiling), F6 basis enlargement at $n_{\max} = 4$
+($10.2\%$ PES closure), basis-level Schmidt orthogonality
+($0.2\%$ closure), [Ne] core correlation
+($\sim 10^{-3}$--$10^{-2}$ of wall). The W1e wall is deep
+multi-determinant correlation at the heavy-atom valence/core
+boundary in the second-row regime; closure candidates beyond
+sprint scale are multi-month architectural commitments
+(self-consistent $Z_\text{eff}$ depending on cross-center
+electronic density; fully-correlated all-electron treatment
+incompatible with the two-electron active-space architecture;
+fundamentally different basis families) or acceptance of the
+framework's structural-skeleton scope as the autonomous boundary
+for second-row binding energetics.
+
+\textbf{Cross-domain pattern crystallization.} The W1e wall is the
+\textbf{sixth structurally-independent instance of the
+multi-focal-composition wall pattern} documented across the
+framework (CLAUDE.md \S1.7; Paper~34
+\S\ref{sec:conv_w1e_cross_domain_wall}). The five previous
+instances are all in physics observables: Sprint H1 Yukawa (no
+autonomous $Y_F$ selection); LS-8a $Z_2/\delta m$ (no autonomous
+renormalization counterterms despite faithful reproduction of
+two-loop UV-divergent integrand); HF-3 recoil (no cross-register
+$V_{ne}(\hat r_e, \hat R_n)$ coordinate operator); HF-4 Zemach
+(no magnetization-density operator at the proton coordinate);
+HF-5 multi-loop $a_e$ (same renormalization wall as LS-8a, vertex
+sector). W1e adds a chemistry-domain instance: the framework
+constructs the correct bonding orbital at the FCI level (W1d
+closure in F3) but does not autonomously generate the energetic
+preference for that orbital at the correct $R_\text{eq}$.
+\textbf{The structural-skeleton scope statement extends from
+``five physics observables'' to ``five physics + one chemistry
+observable'' --- the framework determines the structural skeleton
+across both domains but does not autonomously generate calibration
+data in either.}
+
+\paragraph{Source documentation (W1e Schmidt + core correlation
+closeout).}
+Schmidt orthogonalization Day-1 diagnostic STOP:
+\texttt{debug/sprint\_w1e\_schmidt\_diagnostic\_memo.md},
+\texttt{debug/data/sprint\_w1e\_schmidt\_diagnostic.json}.
+[Ne] core-correlation order-of-magnitude estimate DEFER:
+\texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md},
+\texttt{debug/data/sprint\_w1e\_core\_correlation\_estimate.json}.
+
 %% ========================================================================
 \section{Discussion}
 \label{sec:discussion}

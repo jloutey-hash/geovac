@@ -5,7 +5,51 @@ All notable changes to GeoVac will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-> **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (CLAUDE.md tracks v2.10–v2.59 range; CHANGELOG jumps from v2.9.2 to v2.26.1 to v2.49.0 to v2.59.0). Intermediate version entries for the RH sprint series (v2.20–v2.25, Papers 28/29/30), Lorentzian arc (v2.50–v2.58), and the modular propinquity / α-arc / F1–F6 sprints (v2.59) are in `git log` commit messages but have not been fully back-filled into this CHANGELOG. A consolidation sprint is flagged for future work.
+> **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
+
+## [3.0.0] - 2026-05-24
+
+### Content discipline release — CLAUDE.md §13.11, MEMORY.md trim, §3 dead-ends compaction
+
+**Major version bump.** Not a research-content release. This release codifies the token-efficiency and content-discipline rules that have been accumulating as technical debt across the v2.20+ sprint series, and applies the rules to MEMORY.md and the most-bloated CLAUDE.md tables. Going forward, sprint chronicle lives in `CHANGELOG.md` (this file) rather than CLAUDE.md §2; CLAUDE.md §2 entries are one-liner summaries.
+
+#### Added
+
+- **CLAUDE.md §13.11 "Content Discipline and Token Efficiency"** — new canonical home for PM operating rules on size discipline. Eight hard rules (no synthesis memos, §2 one-liners, §3 short rows + memo link, memory files for cross-session facts only, agent prompts terse, prefer Explore for read-only diagnostics, no sub-agents for tasks doable in main session, one canonical record per fact) with enforcement note.
+- **CLAUDE.md §2 banner note** clarifying that the development-frontier section is being compacted from sprint chronicle to one-liner summaries, with full detail moving to CHANGELOG.md. Existing long bullets flagged as technical debt to be compacted as touched, not in a one-time pass.
+- **Three feedback memories** (`memory/`): `feedback_no_synthesis_memos.md` (one canonical memo per sprint), `feedback_agent_prompts_terse.md` (agents read CLAUDE.md by default; <1500w diagnostic / <2500w impl), `feedback_changelog_for_chronicle.md` (sprint chronicle in CHANGELOG.md, not CLAUDE.md §2).
+- **W1e closeout sprint** (2026-05-23 evening): two Day-1 diagnostics ruled out the last two sprint-scale W1e closure mechanisms (Schmidt orthogonalization 0.2% closure, [Ne] core correlation ~10⁻³ of wall). W1e is the sixth structurally-independent instance of the multi-focal-composition wall pattern across the framework, joining five physics observables (Sprint H1 Yukawa, LS-8a Z_2/δm, HF-3 recoil, HF-4 Zemach, HF-5 multi-loop a_e). First chemistry instance. Structural-skeleton scope statement extends from physics-only to physics+chemistry. Files: `debug/sprint_w1e_schmidt_diagnostic.py`, `debug/data/sprint_w1e_schmidt_diagnostic.json`, `debug/sprint_w1e_schmidt_diagnostic_memo.md`, `debug/data/sprint_w1e_core_correlation_estimate.json`, `debug/sprint_w1e_core_correlation_estimate_memo.md`.
+
+#### Changed
+
+- **CLAUDE.md §13.3 Sub-Agent Prompt Template** simplified — removed verbose CONSTRAINTS / SUCCESS CRITERIA / PAPER UPDATES blocks; new format is task + decision gate + specific files + output, with note that agents already load CLAUDE.md by default.
+- **MEMORY.md trimmed**: 111 entries → 75 categorized entries; 35.5KB → 16.9KB (52% reduction, now under the 24.4KB silent-truncation limit). Long paragraph-length entries rewritten to one-liners under 200 chars per the long-standing rule.
+- **CLAUDE.md §3 (failed approaches) compacted**: most long paragraph-rows rewritten to 1–2 sentences + memo link, per §13.11. Rows touched: TC-in-2Q, Schwartz hot-node patch, energy graph V_ee, SM-running for Δ, σ-vertex vector QED, co-exact q-labeling, Dirac-sector lift of Paper 2 B/F/Δ, multi-focal spatial composition Sprint HF, PK cross-center, screened-Schrödinger valence basis, W3 spectral-zeta, Multi-focal Path C5, heuristic two-zeta screening, radial-nodes diagnostic, multi-zeta Na valence, three-bucket M-Z partition FALSIFIED, kernel-shape substitution F2, single-particle PK F4, mean-field J-K F5, basis enlargement F6, Schmidt diagnostic, [Ne] core correlation. Two new rows added for Schmidt and core-correlation closeouts.
+- **CLAUDE.md §2 partial compaction**: four of the most recent multi-thousand-word bullets compacted to one-liners (W1e Schmidt + core correlation closeout, Paper 39 master theorem, W1c full arc F1→F2→F3, plus §2 banner). The remainder of the §2 chronicle remains as technical debt to be compacted incrementally per the new rule.
+
+#### Paper edits (W1e Schmidt + core correlation closeout)
+
+- **Paper 19 §sec:w1e_schmidt_core_correlation** new subsubsection appended documenting the closure of the W1e sprint-scale candidate space and the cross-domain pattern crystallization.
+- **Paper 34 §sec:conv_w1e_cross_domain_wall** new V.D entry: first explicit cross-domain instance documented in the §V.D running catalogue. Architecture class iv. Cross-references Paper 19, Paper 32, CLAUDE.md §1.7.
+- **Paper 32 §VIII.D Sprint M-Z addendum** extended with Schmidt + core correlation Day-1 diagnostics paragraph; sixth instance of multi-focal-composition wall pattern named.
+- **Paper 17 §6.10** cross-reference updated with "Closure of W1e candidate space at sprint scale" paragraph.
+
+#### Net token savings
+
+- **MEMORY.md**: 52% reduction, paid every session (largest single saving — system silently truncates at 24.4KB, the warning has been firing for weeks).
+- **CLAUDE.md §3**: estimated 30-50 KB saved from row compaction.
+- **CLAUDE.md §2**: limited single-pass savings (banner + 4 bullets); the bulk drains as touched per §13.11.
+- **Going forward**: agent prompts terse (saves per-dispatch tokens), no synthesis memos (eliminates 3-4× duplication pattern), CHANGELOG.md as canonical sprint chronicle (loaded only when explicitly needed, not in every PM/sub-agent context).
+
+#### Migration notes
+
+- The previously-tracked single-line giant bullets in CLAUDE.md §2 are now treated as **technical debt to be compacted when touched**, per §13.11. New sprints write one-line §2 entries + full CHANGELOG.md entries; old bullets compact incrementally.
+- The "comprehensive synthesis memo that supersedes earlier synthesis memos" pattern is **explicitly forbidden** under §13.11 rule 1. Cross-sprint synthesis lives in CHANGELOG.md or a paper section.
+- Memory files are for cross-session facts not derivable from CLAUDE.md or papers (§13.11 rule 4). Do not auto-create memory files for sprint outcomes — sprint detail lives in CHANGELOG.md and the canonical sprint memo.
+
+This release marks the inflection point where the framework's content-discipline catches up with the framework's research content. Research progress continues under v3.x.
+
+---
 
 ## [2.59.0] - 2026-05-23
 

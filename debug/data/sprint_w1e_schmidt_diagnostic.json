@@ -1,0 +1,160 @@
+{
+  "sprint": "W1e Schmidt orthogonalization Day-1 diagnostic",
+  "date": "2026-05-23",
+  "geometry": {
+    "Na_at": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "H_at": [
+      0.0,
+      0.0,
+      3.5
+    ],
+    "R_AB_bohr": 3.5,
+    "z_aligned": true,
+    "note": "z-aligned for simplicity; physically equivalent to x-aligned NaH"
+  },
+  "core_orbitals": {
+    "1s": {
+      "n": 1,
+      "l": 0,
+      "m": 0,
+      "zeta": 10.6259,
+      "Z_eff": 10.6259,
+      "energy": -40.4787
+    },
+    "2s": {
+      "n": 2,
+      "l": 0,
+      "m": 0,
+      "zeta": 6.5714,
+      "Z_eff": 13.1428,
+      "energy": -2.7967
+    },
+    "2p_-1": {
+      "n": 2,
+      "l": 1,
+      "m": -1,
+      "zeta": 6.8018,
+      "Z_eff": 13.6036,
+      "energy": -1.5181
+    },
+    "2p_0": {
+      "n": 2,
+      "l": 1,
+      "m": 0,
+      "zeta": 6.8018,
+      "Z_eff": 13.6036,
+      "energy": -1.5181
+    },
+    "2p_+1": {
+      "n": 2,
+      "l": 1,
+      "m": 1,
+      "zeta": 6.8018,
+      "Z_eff": 13.6036,
+      "energy": -1.5181
+    }
+  },
+  "overlap_signed": {
+    "1s": 0.007025274587976414,
+    "2s": -0.02979690349905992,
+    "2p_-1": 0.0,
+    "2p_0": 0.008134869623023351,
+    "2p_+1": 0.0
+  },
+  "overlap_squared": {
+    "1s": 4.935448303646717e-05,
+    "2s": 0.0008878554581322894,
+    "2p_-1": 0.0,
+    "2p_0": 6.617610378358807e-05,
+    "2p_+1": 0.0
+  },
+  "projection_norm_squared": 0.0010033860449523446,
+  "expected_orth_norm_unnorm": 0.9989966139550477,
+  "grid_convergence_sweep": [
+    {
+      "norm_H1s_grid": 0.9997370832162179,
+      "norm_H1s_orth_unnorm": 0.9987834925221702,
+      "sum_Sc_squared": 0.0010033860449523446,
+      "expected_orth_norm_sq": 0.9989966139550477,
+      "h1_H1s": -0.49135336285764636,
+      "h1_H1s_orth": -0.48577755739832,
+      "vne_H1s": -0.2872478578332145,
+      "vne_H1s_orth": -0.2888194187564674,
+      "grid_n": 80.0,
+      "grid_extent": 12.0,
+      "delta_h1_Ha": 0.005575805459326344,
+      "delta_v_ne_Ha": -0.0015715609232528904,
+      "delta_total_Ha": 0.0040042445360734535
+    },
+    {
+      "norm_H1s_grid": 0.9999561674728643,
+      "norm_H1s_orth_unnorm": 0.9989872731569022,
+      "sum_Sc_squared": 0.0010033860449523446,
+      "expected_orth_norm_sq": 0.9989966139550477,
+      "h1_H1s": -0.4968584581412068,
+      "h1_H1s_orth": -0.4900198028715732,
+      "vne_H1s": -0.2874266584238721,
+      "vne_H1s_orth": -0.28713005458366725,
+      "grid_n": 100.0,
+      "grid_extent": 10.0,
+      "delta_h1_Ha": 0.00683865526963362,
+      "delta_v_ne_Ha": 0.00029660384020485653,
+      "delta_total_Ha": 0.0071352591098384766
+    },
+    {
+      "norm_H1s_grid": 0.9999734330982251,
+      "norm_H1s_orth_unnorm": 0.9990179536172548,
+      "sum_Sc_squared": 0.0010033860449523446,
+      "expected_orth_norm_sq": 0.9989966139550477,
+      "h1_H1s": -0.497719116151815,
+      "h1_H1s_orth": -0.4888640510594343,
+      "vne_H1s": -0.28746989207857293,
+      "vne_H1s_orth": -0.28803228717298474,
+      "grid_n": 120.0,
+      "grid_extent": 8.0,
+      "delta_h1_Ha": 0.00885506509238071,
+      "delta_v_ne_Ha": -0.000562395094411805,
+      "delta_total_Ha": 0.008292669997968904
+    },
+    {
+      "norm_H1s_grid": 0.9999801993014238,
+      "norm_H1s_orth_unnorm": 0.999029057783881,
+      "sum_Sc_squared": 0.0010033860449523446,
+      "expected_orth_norm_sq": 0.9989966139550477,
+      "h1_H1s": -0.49861535490284953,
+      "h1_H1s_orth": -0.48882947715570635,
+      "vne_H1s": -0.2874873386222864,
+      "vne_H1s_orth": -0.2887231447693127,
+      "grid_n": 140.0,
+      "grid_extent": 8.0,
+      "delta_h1_Ha": 0.009785877747143179,
+      "delta_v_ne_Ha": -0.001235806147026286,
+      "delta_total_Ha": 0.008550071600116893
+    }
+  ],
+  "finest_grid": {
+    "norm_H1s_grid": 0.9999801993014238,
+    "norm_H1s_orth_unnorm": 0.999029057783881,
+    "sum_Sc_squared": 0.0010033860449523446,
+    "expected_orth_norm_sq": 0.9989966139550477,
+    "h1_H1s": -0.49861535490284953,
+    "h1_H1s_orth": -0.48882947715570635,
+    "vne_H1s": -0.2874873386222864,
+    "vne_H1s_orth": -0.2887231447693127,
+    "grid_n": 140,
+    "grid_extent": 8.0
+  },
+  "delta_h1_Ha": 0.009785877747143179,
+  "delta_v_ne_Ha": -0.001235806147026286,
+  "delta_total_Ha": 0.008550071600116893,
+  "delta_h1_mHa": 9.785877747143179,
+  "delta_v_ne_mHa": -1.235806147026286,
+  "delta_total_mHa": 8.550071600116894,
+  "gate_verdict": "STOP",
+  "gate_comment": "Wall is not basis-level Schmidt; report honestly.",
+  "elapsed_seconds": 4.484921455383301
+}

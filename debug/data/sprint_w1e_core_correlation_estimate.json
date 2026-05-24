@@ -1,0 +1,121 @@
+{
+  "sprint": "W1e_core_correlation_estimate",
+  "date": "2026-05-23",
+  "mode": "literature_estimate_no_code",
+  "question": "Binding-relevant [Ne]-core correlation differential between Na+H at infinity and NaH at R_eq=3.566 bohr",
+  "estimate_ha": 0.002,
+  "estimate_range_ha": [0.0003, 0.0072],
+  "estimate_central_kcal_mol": 1.2,
+  "estimate_central_cm_inv": 440,
+  "confidence": "medium",
+  "experimental_anchor": {
+    "NaH_De_cm_inv": 15797.4,
+    "NaH_De_eV": 1.9586,
+    "NaH_De_Ha": 0.07198,
+    "NaH_De_uncertainty_cm_inv": 4.3,
+    "source": "Le Roy et al. J. Chem. Phys. 142, 044305 (2015)"
+  },
+  "framework_wall_context": {
+    "F3_well_depth_Ha": 4.37,
+    "F6_well_depth_Ha_maxn4": 3.929,
+    "wall_to_close_Ha": 3.85,
+    "estimate_as_fraction_of_wall": 0.0005,
+    "estimate_as_fraction_of_De_exp": 0.028
+  },
+  "three_estimates": {
+    "A_Iron_Martin_Na_compound_scaling": {
+      "method": "Halve max Iron-Martin CV deviation (2.3 kcal/mol for Mg+Br2) for single-Na NaH",
+      "value_kcal_mol": [1.0, 1.5],
+      "value_Ha": [0.0016, 0.0024]
+    },
+    "B_Na2_scaling": {
+      "method": "Halve Na2 CV correction (~100-300 cm-1) for single-Na NaH",
+      "value_cm_inv": [50, 150],
+      "value_Ha": [0.0003, 0.0007]
+    },
+    "C_atomic_correlation_active_fraction": {
+      "method": "Total Na [Ne]-core correlation (~0.36 Ha) times active fraction (0.5-2%)",
+      "active_fraction_percent": [0.5, 2.0],
+      "value_Ha": [0.0018, 0.0072]
+    }
+  },
+  "key_references": [
+    {
+      "authors": "Iron, M. A.; Oren, M.; Martin, J. M. L.",
+      "year": 2003,
+      "journal": "Molecular Physics",
+      "volume": "101 (9)",
+      "pages": "1345-1361",
+      "arxiv": "physics/0301056",
+      "value": "Subvalence correlation 'strongly recommended for Na'; reaction enthalpy CV up to 2.3 kcal/mol (Mg+Br2)",
+      "comment": "Load-bearing reference for Na subvalence correlation ranking"
+    },
+    {
+      "authors": "Sylvetsky, N.; Martin, J. M. L.",
+      "year": 2018,
+      "journal": "ChemRxiv / arXiv",
+      "arxiv": "1805.02000",
+      "value": "CV contributions to W4-17 atomization energies: 0.01-1.0 kcal/mol band; basis-set extrapolation RMSD 0.01 kcal/mol",
+      "comment": "Quantitative scale for diatomic CV contributions"
+    },
+    {
+      "authors": "Le Roy, R. J., et al.",
+      "year": 2015,
+      "journal": "J. Chem. Phys.",
+      "volume": "142",
+      "pages": "044305",
+      "value": "NaH ground state D_e = 15797.4 +/- 4.3 cm-1 = 0.07198 Hartree",
+      "comment": "Modern experimental anchor"
+    },
+    {
+      "authors": "Hussein, A., et al.",
+      "year": 2010,
+      "journal": "J. Chem. Phys.",
+      "volume": "133",
+      "pages": "044301",
+      "value": "NaH D_e = 15815 +/- 5 cm-1",
+      "comment": "Predecessor experimental determination"
+    },
+    {
+      "authors": "Pair natural orbital CCSD (PCCP)",
+      "year": 2017,
+      "journal": "Phys. Chem. Chem. Phys.",
+      "doi": "10.1039/C7CP00836H",
+      "value": "CV effects on Na/Mg reaction enthalpies; max single deviation 2.3 kcal/mol; most Na reactions > 1 kcal/mol",
+      "comment": "Reaction-enthalpy scale-setting for Na"
+    },
+    {
+      "authors": "Prascher, B. P.; Woon, D. E.; Peterson, K. A.; Dunning, T. H.; Wilson, A. K.",
+      "year": 2011,
+      "journal": "Theor. Chem. Acc.",
+      "volume": "130",
+      "pages": "69-82",
+      "value": "cc-pCVnZ basis sets for Li, Be, Na, Mg; recommended for accurate CV treatment",
+      "comment": "Modern basis-set infrastructure for Na CV studies"
+    },
+    {
+      "authors": "Aymar, M.; Dulieu, O.",
+      "year": 2009,
+      "journal": "arXiv",
+      "arxiv": "quant-ph/0502059",
+      "value": "alpha_d(Na+) approx 0.945 a.u., r_c approx 1.4 bohr (CPP for alkali hydrides)",
+      "comment": "Core polarization potential scale for Na+ in molecular environment"
+    }
+  ],
+  "decision_gate": {
+    "GO_threshold_Ha": 0.5,
+    "MODERATE_band_Ha": [0.1, 0.5],
+    "DEFER_threshold_Ha": 0.1
+  },
+  "gate_verdict": "DEFER",
+  "gate_verdict_reasoning": "Estimate 0.001-0.003 Ha is 2-3 orders of magnitude below DEFER threshold (0.1 Ha). Even upper bound 0.007 Ha is 14x below threshold. Core correlation contributes ~1% of experimental D_e, sub-kcal/mol scale; cannot close ~3.85 Ha structural wall.",
+  "honest_assessment": {
+    "core_correlation_is_real": true,
+    "Iron_Martin_strongly_recommended_for_Na": true,
+    "but_at_structural_wall_scale": "invisible",
+    "scale_of_wall_vs_estimate": "~1000x mismatch",
+    "next_step": "Schmidt orthogonalization (Track 1) is the only remaining sprint-scale architectural candidate with right order of magnitude; core correlation parks as Layer-2 polish for future precision-spectroscopy sprint",
+    "literature_gap_flagged": "No published explicit frozen-core vs all-electron CCSD(T) D_e differential for NaH at basis-set limit; CCCBDB has tabular data but was unreachable in this search",
+    "residual_caveat": "Estimate is for binding-relevant differential; absolute Na core correlation is ~0.36 Ha; if F6 wall is unexpectedly sensitive to absolute core treatment (unlikely given dissociation-reference behavior), revisit"
+  }
+}
