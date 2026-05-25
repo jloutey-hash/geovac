@@ -1,0 +1,205 @@
+{
+  "sprint": "Phase A.4'-B",
+  "date": "2026-05-24",
+  "title": "Mechanical verification of Mondino-Sämann Def 3.6 LGH-convergence axioms on the Berezin / projection correspondence: closure of named gap G-B4",
+  "predecessor_sprints": [
+    "Phase A.3' bridge construction (Bridge Theorem 6.4 with G-B2 and G-B4 named gaps)",
+    "Phase A.2' Krein-lift formalization (POSITIVE)",
+    "L3b-2 Sub-Sprint C (joint Berezin reconstruction)",
+    "L3b-2 Sub-Sprint D (Latremoliere propinquity assembly on K+ restriction)",
+    "L3e-P3 Phase A.2 epsilon-net + R1/R2/R3 candidates"
+  ],
+  "task": "Close Phase A.3' named gap G-B4: mechanically verify MS Def 3.6 axioms (extension property + forward density) on the Berezin/projection correspondence",
+  "verdict": "POSITIVE",
+  "summary": "All four MS Def 3.6 axioms (i)-(iv) verify mechanically on the Berezin / projection correspondence built in Paper 45 Sub-Sprint D, including both weak and strong forms of (iv) timelike forward density. The convergence transport theorem (B4) closes at theorem-grade rigor, completing the named gap G-B4 of Phase A.3' Bridge Theorem 6.4.",
+
+  "ms_def_3_6_axiom_verification": {
+    "axiom_i_cardinality_matching": {
+      "ms_statement": "|S_n| = |S| for all n >= n_0, where S and S_n are finite epsilon-nets for A and A_n",
+      "krein_side_analog": "epsilon-net cardinality at fixed admissible cutoff (n_max(k), N_t(k), T(k)) is independent of n, so |S_n| = |S| trivially for all n",
+      "verification_lemma": "Lemma 4.1 (Cardinality matching)",
+      "verification_status": "VERIFIED at theorem-grade rigor",
+      "stronger_than_ms": true,
+      "stronger_than_ms_note": "Krein-side verification holds for all n, not just large n",
+      "load_bearing_dependency": "Phase A.2' substrate (fixed admissible cutoff structure) + Sub-Sprint D §3 (propinquity constituents bounded uniformly)",
+      "substantive_new_content": false
+    },
+    "axiom_ii_correspondence_distortion": {
+      "ms_statement": "For all n >= n_0, exists correspondence R_n of V(S_n) and V(S) with dis(R_n) -> 0 as n -> infinity",
+      "krein_side_analog": "Berezin / projection correspondence R_{B,P}^n at scale gamma^joint (Definition 3.2) realizes the correspondence",
+      "verification_lemma": "Lemma 4.2 (Vanishing distortion of Berezin / projection correspondence)",
+      "verification_status": "VERIFIED at theorem-grade rigor",
+      "distortion_bound": "dis(R_n) <= 2 * gamma^joint_{n_max(k), N_t(k), T(k)} -> 0",
+      "rate": "O(log n_max / n_max + T/N_t) along admissible-scaling sequence",
+      "constructive": true,
+      "load_bearing_dependency": "Sub-Sprint D §3.1 (reach_B bound) + §3.3 (height_B bound) at rate gamma^joint",
+      "substantive_new_content": "Constructive realization (Berezin/projection pair) of MS abstract correspondence; rate identified as master Mellin engine M1 signature 4/pi at leading SU(2) order"
+    },
+    "axiom_iii_extension_property": {
+      "ms_statement": "For all l in N, each 1/l-net in the limit can be enlarged to include a 1/(l+1)-net while preserving convergence of the vertices, with extension f_{n'}^{l+1} satisfying dis(f_{n'}^{l+1}) <= dis(f_{n'}^l) for some n' >= n",
+      "krein_side_analog": "Joint Berezin map at level l+1 (Plancherel cutoff n_max(l+1), N_t(l+1)) extends joint Berezin map at level l (cutoff n_max(l), N_t(l)), with bit-identical Plancherel weights on common support",
+      "verification_lemma": "Lemma 4.3 (Plancherel-nested extension of Berezin maps)",
+      "verification_status": "VERIFIED at theorem-grade rigor",
+      "load_bearing_dependency": "Sub-Sprint C §1.2 joint Plancherel symbol factorization (tensor-product structure with bit-identical intrinsic weights)",
+      "substantive_new_content": "Identification of Plancherel-nested Berezin structure as the structural realization of MS extension property; verification is mechanical because the structures align by construction",
+      "verification_steps": [
+        "Step 1: Plancherel nesting (joint symbol factorizes; supports nested; weights bit-identical on common support)",
+        "Step 2: Berezin nesting (level-(l+1) Berezin map is level-l Berezin map plus additional Plancherel terms)",
+        "Step 3: Vertex-set extension (V(S^{l+1}) contains V(S^l) via Plancherel cutoff refinement)",
+        "Step 4: Distortion non-increase (joint rate monotone-decreasing along admissible-scaling sequence)"
+      ]
+    },
+    "axiom_iv_weak_forward_density": {
+      "ms_statement": "For each x in A \\ V (V = union of vertex sets), exists sequence (x_k) in V with x_k <= x_{k+1} <= x and x_k -> x",
+      "krein_side_analog": "For each character omega-hat on bridge image not in vertex set V = union_l V(S^l), exists modular-flow orbit discretization (omega-hat_j) with omega-hat_j <= omega-hat_{j+1} <= omega-hat and omega-hat_j -> omega-hat in chronological topology",
+      "verification_lemma": "Lemma 4.4 (Forward density via modular flow orbit)",
+      "verification_status": "VERIFIED at theorem-grade rigor with structural-care note",
+      "load_bearing_dependency": "Phase A.3' R3 modular-flow orbit structure + Phase A.2' §2.3 weak-* metrization (chronological topology finer than weak-*)",
+      "structural_care_note": "Forward density holds in the chronological topology of the bridge image (modular-precedence topology), not just in the weak-* Gelfand topology. By Phase A.2' weak-* metrization, weak-* is finer than chronological so chronological-density implies weak-* density; the reverse is not automatic but the chronological-density side is what MS requires.",
+      "substantive_new_content": "Modular-flow orbit discretization as the natural Krein-side analog of MS Cauchy-grid forward density (cf. MS Example 3.13)"
+    },
+    "axiom_iv_strong_timelike_forward_density": {
+      "ms_statement": "For each x in A \\ V, exists sequence (x_k) in V with x_k << x_{k+1} << x (strict timelike precedence) and x_k -> x",
+      "krein_side_analog": "Strict modular precedence omega-hat_j << omega-hat_{j+1} corresponds to strictly positive modular-flow increment t_{j+1} - t_j > 0, which transports to strict ell^L-positivity via Connes-Rovelli identification ell^L = kappa_g * t > 0",
+      "verification_lemma": "Lemma 4.4-strong (Timelike forward density)",
+      "verification_status": "VERIFIED automatically on the bridge image",
+      "load_bearing_dependency": "Phase A.3' Def 6.3(4) ell^L(omega-hat, omega-hat') = kappa_g * tau_mod(omega-hat, omega-hat') with strict positivity on modular orbits",
+      "substantive_new_content": false,
+      "note": "The 'strong' qualifier in MS Def 3.6 is automatic on the bridge image because strict modular precedence is the natural structure of modular flow"
+    }
+  },
+
+  "convergence_transport_theorem": {
+    "theorem_label": "Theorem 5.1 (B4 convergence transport — closure of Phase A.3' G-B4)",
+    "statement": "If a sequence of Krein pointed proper QMS converges in the Krein-side metametric topology of Phase A.2' Theorem 4.2-K (Đ^K(X^K_n, X^K_infinity) -> 0), then the bridge images under the Wick-rotation functor W converge in the Mondino-Sämann pointed LorGH topology of MS Def 3.12 (strong sense, with timelike forward density)",
+    "rigor_level": "theorem-grade",
+    "proof_structure": [
+      "Step 1: Per-cover LGH convergence at each k (via four-axiom verification + admissible-scaling)",
+      "Step 2: pLGH convergence via MS Def 3.12 (per-cover LGH convergence at every k)",
+      "Step 3: Strong sense via Lemma 4.4-strong (timelike forward density automatic)"
+    ],
+    "riemannian_limit_corollary": {
+      "label": "Corollary 5.2 (Riemannian-limit consistency)",
+      "statement": "At N_t = 1, the convergence transport reduces bit-exactly to Paper 38's SU(2) propinquity convergence with rate 4/pi (Paper 38 §L2 quantitative rate)",
+      "rigor_level": "theorem-grade",
+      "load_bearing_falsifier": "Riemannian-limit recovery is the load-bearing falsifier; the bit-exact reduction confirms the Lorentzian convergence reduces to proven Paper 38 convergence at N_t = 1"
+    }
+  },
+
+  "bridge_theorem_status_post_g_b4": {
+    "label": "Phase A.3' Bridge Theorem 6.4 (Krein–Mondino–Sämann Bridge), post-G-B4 closure",
+    "properties_status": {
+      "B1_structural_correspondence": "theorem-grade (Phase A.3' §6, 15-row table)",
+      "B2_reverse_triangle_inequality": "on-orbit case theorem-grade; off-orbit case proof-sketch with named gap G-B2 remaining",
+      "B3_pre_compactness_inheritance": "theorem-grade (Phase A.3' §6 via Paper 44 prop=2 + Sub-Sprint D cardinality bound)",
+      "B4_convergence_transport": "theorem-grade via Theorem 5.1 of this memo (G-B4 CLOSED)"
+    },
+    "remaining_named_gap": "G-B2 only (super-additivity of off-orbit Wick-rotated modular flow)"
+  },
+
+  "aggregate_g_b4_verdict": {
+    "verdict": "POSITIVE",
+    "rationale": "All four MS Def 3.6 axioms verified mechanically at theorem-grade rigor; both weak and strong forms of (iv) hold; no structural obstruction; mechanical-verification character of G-B4 confirmed",
+    "bridge_theorem_implication": "B4 closes cleanly; bridge theorem now has only one remaining named gap (G-B2)"
+  },
+
+  "substantive_new_content_summary": {
+    "headline": "The MS Def 3.6 axioms (i)-(iv) match the structural ingredients of Paper 45 Sub-Sprint C/D one-to-one",
+    "structural_alignments": {
+      "i_cardinality": "ε-net cardinality is cutoff-dependent not sequence-dependent ← Sub-Sprint D fixed-cutoff structure",
+      "ii_distortion": "propinquity constituents reach_B + height_B at rate gamma^joint ← Sub-Sprint D §3",
+      "iii_extension": "Plancherel-nested Berezin structure with bit-identical weights on common support ← Sub-Sprint C §1.2",
+      "iv_forward_density": "modular-flow orbit discretization in chronological topology ← Phase A.3' R3 modular-flow framework"
+    },
+    "durable_insight": "When the bridge functor is constructed correctly, the MS axioms verify mechanically because the Krein-side structure is exactly the right shape for the MS structure to apply. The verification is mechanical because the structures align by construction, not by happenstance.",
+    "most_surprising_finding": "MS Def 3.6(iii) extension property is structurally Plancherel nesting in disguise — the Berezin map at finer cutoff is the Berezin map at coarser cutoff PLUS additional Plancherel terms with bit-identical weights on the common support. This is the substantive structural identification."
+  },
+
+  "recommendations": {
+    "primary_next_sprint": {
+      "label": "Phase A.4'-C (GeoVac wedge instantiation of the bridge)",
+      "target": "Apply W to specific GeoVac wedge PPQMS at panel cells (n_max, N_t) in {(2,3), (3,5), (4,7)} and verify structural correspondence row-by-row",
+      "estimated_effort": "4 weeks",
+      "deliverable": "GeoVac wedge synthetic compactness corollary at theorem-grade rigor"
+    },
+    "alternative_or_parallel": {
+      "label": "Phase A.4'-D (G-B2 super-additivity proof)",
+      "target": "Close the remaining named gap (G-B2) via Paper 42 four-witness theorem transport",
+      "estimated_effort": "3-5 weeks",
+      "deliverable": "Theorem-grade super-additivity of off-orbit Wick-rotated modular flow",
+      "scheduling_note": "Parallel to A.4'-C is reasonable; G-B2 is structurally deeper than G-B4"
+    },
+    "do_not_pursue_now": {
+      "label": "Q1' strong-form bridge (Phase A.5'+ or Paper 48 §8)",
+      "rationale": "K+-weak-form bridge is the right scope; strong-form requires either K+-cone-of-enlarged-substrate (where K+ preservation may fail for chirality-flipping generators) or non-commutative MS extension (substantial NCG-research target)"
+    }
+  },
+
+  "updated_paper_48_timeline_post_a4prime_b": {
+    "A_2prime_krein_lift": {"effort": "3-6 weeks", "status": "DONE", "cumulative": "3-6 weeks"},
+    "A_3prime_bridge_construction": {"effort": "3-4 weeks", "status": "DONE", "cumulative": "6-10 weeks"},
+    "A_4prime_B_G_B4_closure_this_sprint": {"effort": "1-2 weeks", "status": "DONE", "cumulative": "7-12 weeks"},
+    "A_4prime_C_geovac_wedge_application": {"effort": "4 weeks", "status": "NEXT", "cumulative": "11-16 weeks"},
+    "A_4prime_D_G_B2_super_additivity": {"effort": "3-5 weeks (parallel)", "status": "QUEUED", "cumulative": "11-16 weeks"},
+    "A_4prime_E_synthesis_close": {"effort": "1 week", "status": "PLANNED", "cumulative": "12-17 weeks"},
+    "A_5prime_synthesis_decision_gate": {"effort": "3 weeks", "status": "PLANNED", "cumulative": "15-20 weeks"},
+    "B_paper_48_draft": {"effort": "1.5 months", "status": "PLANNED", "cumulative": "21-26 weeks (~5-6.5 months)"}
+  },
+
+  "total_estimated_end_to_end_post_a4prime_b": "~5-6.5 months (slightly tighter than Phase A.3' estimate of 6.5-8.5 months due to G-B4 closing faster than upper bound)",
+
+  "honest_scope_statement": {
+    "what_is_established": [
+      "MS Def 3.6 verbatim extracted from arXiv:2504.10380 v4 PDF (pages 11-14)",
+      "Krein-side analog of MS Def 3.6 (Defs 3.1-3.3)",
+      "Four-axiom mechanical verification at theorem-grade rigor (Lemmas 4.1-4.4 + 4.4-strong)",
+      "Convergence transport theorem (Theorem 5.1) closing Phase A.3' G-B4",
+      "Riemannian-limit cross-check (Corollary 5.2)"
+    ],
+    "what_is_not_established": [
+      "G-B2 super-additivity proof (Phase A.4'-D target)",
+      "GeoVac wedge specific application (Phase A.4'-C target)",
+      "Paper 48 §5 draft (Phase B drafting)",
+      "Quantitative joint rate constant (sub-sprint follow-on)",
+      "Strong-form bridge / Q1' (Phase A.5'+ or Paper 48 §8)",
+      "Production code (verification is purely mathematical)"
+    ],
+    "load_bearing_dependencies": [
+      "Phase A.2' merged Paper 48 §3 substrate",
+      "Phase A.3' Bridge Theorem 6.4 (functor W definition + structural correspondence)",
+      "Paper 45 Sub-Sprint C (joint Berezin reconstruction with UCP + Plancherel factorization)",
+      "Paper 45 Sub-Sprint D (Latremoliere propinquity assembly + four constituents at rate gamma^joint)",
+      "Mondino-Sämann arXiv:2504.10380 v4 Defs 3.2, 3.4, 3.5, 3.6, 3.8, 3.12, Thm 6.2",
+      "Connes-Rovelli 1994 thermal-time hypothesis (modular flow = thermal time = kappa_g * geometric time on BW wedge)"
+    ]
+  },
+
+  "concurrent_work_risk_assessment_post_g_b4": {
+    "Latremoliere_writes_Lorentzian_lift": "LOW (unchanged)",
+    "Mondino_Samann_moves_to_operator_algebras": "LOW (unchanged)",
+    "Sormani_Sakovich_Lorentzian_OA_bridge": "MEDIUM (different category, unchanged)",
+    "Connes_Rovelli_thermal_time_NCG_applications": "MEDIUM (32-year-old hypothesis, unchanged)",
+    "independent_Berezin_correspondence_on_MS_axioms": "LOW (Plancherel-nesting identification is specific framing surfacing here)",
+    "mitigation": "Phase A.4' deliverables continue as arXiv-deposit-ready memos; A.5' decision gate at ~5-7 months coincides with arXiv-submission of Phase A report"
+  },
+
+  "files_added": [
+    "debug/sprint_phase_a4prime_b_gb4_axiom_verification_memo.md (~6500 words formal verification memo)",
+    "debug/data/sprint_phase_a4prime_b_gb4.json (this structured data file)"
+  ],
+
+  "cross_references": [
+    "debug/sprint_phase_a3prime_mondino_samann_bridge_memo.md",
+    "debug/sprint_phase_a2prime_krein_lift_formalization_memo.md",
+    "debug/l3b_2_sub_sprint_C_berezin_memo.md",
+    "debug/l3b_2_sub_sprint_D_propinquity_memo.md",
+    "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+    "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
+    "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+    "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+    "papers/group1_operator_algebras/paper_47_two_rate_hybrid_convergence.tex",
+    "arXiv:2504.10380 v4 (Mondino-Sämann, Dec 9 2025)",
+    "arXiv:2512.03573 (Latremoliere, Dec 3 2025)",
+    "Connes-Rovelli 1994 (Class. Quantum Grav. 11, 2899)"
+  ]
+}

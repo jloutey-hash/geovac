@@ -18,7 +18,9 @@
       "cb_norm_central": 0.6666666666666666,
       "reach_B_panel": 0.10610329539459692,
       "reach_B_bound": 2.0745510936998897,
-      "height_B_panel": 0.21220659078919377,
+      "height_B_panel": 0.4244131815783876,
+      "height_B_bound": 2.0745510936998897,
+      "height_B_op_norm_panel": 0.21220659078919377,
       "propinquity_bound": 2.0745510936998897,
       "qualitative_rate_only": true,
       "track_c_constant": null
@@ -30,7 +32,9 @@
       "cb_norm_central": 0.5,
       "reach_B_panel": 0.3001054387190354,
       "reach_B_bound": 1.6100599680657361,
-      "height_B_panel": 0.257518107400242,
+      "height_B_panel": 0.991648465735759,
+      "height_B_bound": 1.6100599680657361,
+      "height_B_op_norm_panel": 0.257518107400242,
       "propinquity_bound": 1.6100599680657361,
       "qualitative_rate_only": true,
       "track_c_constant": null
@@ -42,7 +46,9 @@
       "cb_norm_central": 0.4,
       "reach_B_panel": 0.4456338406573069,
       "reach_B_bound": 1.3223327942828407,
-      "height_B_panel": 0.1909859317102744,
+      "height_B_panel": 1.732230777881624,
+      "height_B_bound": 1.3223327942828407,
+      "height_B_op_norm_panel": 0.1909859317102744,
       "propinquity_bound": 1.3223327942828407,
       "qualitative_rate_only": true,
       "track_c_constant": null

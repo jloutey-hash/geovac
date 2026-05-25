@@ -7,6 +7,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.1.0] - 2026-05-25
+
+### Lorentzian arc completion — Papers 48 + 49 — math.OA standalones 10 and 11
+
+**Minor version bump.** Captures the full Lorentzian-anchor arc — from K⁺-weak-form bridge (Paper 48) through strong-form bridge on enlarged substrate with OSLPLS target (Paper 49) — across 17 sub-sprints in one extended 2026-05-24/25 session. Two arXiv-ready math.OA standalones produced (10th and 11th in the GeoVac series), closing both the F2 forward-vs-reverse triangle mismatch (Paper 48) and the Q1' strong-form Krein-MS bridge open question (Paper 49) at theorem-grade rigor.
+
+#### Added — Paper 48 (10th math.OA standalone)
+
+- **`papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex`** — *Krein-pointed proper quantum metric spaces and the bridge to Mondino–Sämann Lorentzian pre-length spaces, with application to the GeoVac hemispheric wedge.* 29 pages, 51 bibitems, three-pass clean. Built across 10 sub-sprints (Phase 1B Anchor Closure + Tier 3-Light + A.2' + A.3' + A.4'-A/B/C + A.5' synthesis + Phase B drafting).
+- **Wick-rotation functor** $W : \mathbf{KreinMetaMet}_{\mathrm{pp}} \to \mathbf{LorPLG}_{\mathrm{cov}}$ identified via R3 Connes-Rovelli thermal-time identification refined as R2(a)+R2(c) composite. Bridge is functorial, not isometric: $\mathrm{Đ}^K$ measures thermal-time distance (additive forward triangle), $\ell^L$ measures geometric proper time (super-additive reverse triangle), related by Wick rotation $t_{\mathrm{thermal}} = (1/\kappa_g) t_{\mathrm{geometric}}$. Bridge Theorem 6.4 with all four properties (B1)+(B2)+(B3)+(B4) theorem-grade.
+- **Headline result T6 G2 metric-level closure for the GeoVac wedge** — published-open-problem workaround at the wedge-specific level. Converts the non-existent non-compact Latrémolière propinquity question into a well-defined MS pLGH question.
+- **T3 synthetic bit-exact panel inheritance** — Paper 45 panel $\{2.0746, 1.6101, 1.3223\}$ transports verbatim as the **first quantitative pLGH-convergence panel in Mondino-Sämann literature derived from operator-algebraic input**.
+- **T5 synthetic Pythagorean orthogonality with $1/\pi^2$ master Mellin engine M1 signature**.
+
+#### Added — Paper 49 (11th math.OA standalone)
+
+- **`papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex`** — *Operator-system Lorentzian pre-length spaces and the strong-form Krein-Mondino-Sämann bridge: cross-KMS-state thermal-time stack and strict super-additivity.* 32 pages, 57 bibitems (44 published + 13 internal), 28 theorem-style environments, three-pass clean. Built across 7 sub-sprints (Q1'-Light + Phase-1 + Phase-2.A + Phase-2.B.1 + Phase-2.B.2 + Phase-2.B.3 + Phase-2.D drafting).
+- **OSLPLS category** $\mathbf{OSLPLS}_{\mathrm{cov}}$ — *Operator-System Lorentzian Pre-Length Space* category, generalizes Mondino-Sämann pre-length space to non-commutative topographies. The structure is UNIQUELY constrained by substrate, NOT freely chosen. 8/8 MS Def 3.6 axioms transport to operator-system setting (5 directly, 3 with structural modification). Lemma 4.2-OS: M5 modular-flow intertwining is automatic from M3 (Tomita functoriality). Theorem 5.1-OS: commutative MS embeds as faithful sub-category via $\iota: X \mapsto C(X)$.
+- **Connes-Rovelli thermal-time stack across distinct KMS states** — genuinely new operator-algebraic content extending Connes-Rovelli 1994 single-KMS-state framework. Lemma 3.1-B2 Orbit-KMS Lemma. **Theorem 3.2-B2 Triple-Intersection Cocycle Identity (TICI)** $u_t^{\sigma_1\sigma_3} = u_t^{\sigma_1\sigma_2} \cdot \sigma_t^{\omega^{\sigma_1}}(u_t^{\sigma_2\sigma_3})$ — implicit in Connes 1973 (C4) but not stated explicitly as stack-consistency property in published literature.
+- **Headline result — twin-paradox-as-quantum-information theorem** (Theorem 3.3-B2): strict super-additivity of OSLPLS reverse triangle on off-orbit triples IS the operator-algebraic dual of the special-relativistic twin paradox, with the deficit quantified by Uhlmann's relative-entropy monotonicity inequality. The detoured worldline pays *two* entropy-production costs $\Delta S^{\sigma_1\to\sigma_2} + \Delta S^{\sigma_2\to\sigma_3}$; the direct worldline pays *one* cost $\Delta S^{\sigma_1\to\sigma_3}$; strict inequality from relative-entropy monotonicity. Substantive new connection between modular theory of operator algebras and synthetic Lorentzian geometry.
+- **Bridge Theorem 6.4'-Q1'** — all four properties B1' (structural correspondence) + B2' (strict super-additivity via Uhlmann monotonicity) + B3' (pre-compactness) + B4' (convergence transport) theorem-grade closed.
+- **Numerical verification panel** (`debug/q1prime_phase2b3_panel_compute.py`): Lambda bit-exact at all 3 panel cells $\{(2,3), (3,5), (4,7)\}$ (residual 0.0 in float64 — empirical confirmation that the "free upgrade" structural reading extends to the OSLPLS bridge functor). Uhlmann relative-entropy deficits substantially positive (66.998, 68.720, 81.256 nats, monotone-increasing). Riemannian-limit residual = 0.0. Propagation = 2 verified at (2,3).
+
+#### Added — Sprint memos (17 sub-sprints, ~90,000 words total)
+
+Memos and structured JSON data files in `debug/` and `debug/data/` for each of the 17 sub-sprints: Phase 1B-A/B/C/E + Tier 3-Light + Phase A.2'/A.3'/A.3'-concurrent-work/A.4'-A/B/C + A.5' + Phase B + Q1'-Light + Q1'-concurrent-work + Q1'-Phase-1 + Phase-2.A + Phase-2.B.1/B.2/B.3 + Phase-2.D.
+
+#### Changed
+
+- **CLAUDE.md §6 Group 1 inventory** — added Paper 48 entry (K⁺-weak-form bridge) and Paper 49 entry (strong-form bridge with OSLPLS target). Header updated to include 48 and 49 in On-topic list.
+- **CLAUDE.md §6 Paper 45 entry** extended with full Phase A.2'/A.3'/A.4'/A.5'/B closure narrative.
+- **CLAUDE.md §2** — three new sprint entries (Phase 1B Anchor Closure + Tier 3-Light + Phase A.2' arc; Phase A.3' + A.4' wedge application arc; Q1' strong-form bridge arc).
+- **Paper 40** — three pre-existing `\opnorm{X}_{...}` double-subscript LaTeX errors fixed via standard `\cbnorm` macro pattern (lines 604/649/1512). Paper 40 now three-pass clean exit 0; substantive math content (Lemma 3.3-interior Brauer-Klimyk closure from Phase 1B-E) unchanged. Paper 40 grew 22 → 25 pages with the new Lemma 3.18 + Remarks 3.19/3.20/3.21 + Corollary 3.22.
+
+#### Paper edits (Phase 1B Anchor Closure)
+
+- **Paper 45 §L5 K⁺-preservation bookkeeping closure** via explicit Latrémolière 2017/2023 Thm 5.5 transcription. Paper 45 grew 19 → 20 pages.
+- **Paper 44 witness-pair Connes-vS §IV sharpening Remark** (`rem:cvs_sharpening`) naming the achievable/full envelope dichotomy as the Lorentzian sharpening of Paper 32 §III `rem:operator_system` reading.
+- **Paper 47 §1.1 strategic reframing update** acknowledging Latrémolière arXiv:2512.03573 (Dec 2025) as published Riemannian non-compact extension. Bibitem `farsi_latremoliere2025` corrected from 'in preparation' stub to verified published reference. Paper 47 grew 15 → 16 pages.
+- **Paper 43 §3.2 footnote update** noting Nieuviarts arXiv:2512.15450 (Dec 2025; rev May 2026) twist-morphism follow-up.
+
+#### Verified
+
+- **All 5 Lorentzian-arc papers reproduce numerically** (Phase 1D reproducibility audit): 43 cell-level entries verified across Papers 38, 40, 45, 46, 47. Zero discrepancies. No broken drivers.
+- **Phase A.3' + Phase A.5' + Q1' concurrent-work re-checks all CLEAR** — no scoop risk for either Paper 48 (F2 mismatch resolution) or Paper 49 (strong-form Krein-MS bridge, OSLPLS, non-commutative MS pre-length space concept). All papers arXiv-ready pending PI metadata sign-off.
+
+#### Pattern crystallization across the arc
+
+The 17-sub-sprint Lorentzian arc compressed from a ~12-month projected timeline to one extended session via **substrate-inheritance compression**:
+
+- K⁺-weak-form sub-sprints compressed because of M-diagonal topography simplifications (off-orbit cases vacuous via orbit-pair contradiction).
+- **Phase-2.A (genuinely-new OSLPLS category) compressed because substrate inheritances FORCED the design choices** — Connes-vS 2021 operator-system template + Paper 44 propagation number + Paper 46 enlarged substrate + Phase-2.A axiom-transport analysis uniquely determined the OSLPLS object structure, the morphism class, and the UCP convention. No design freedom.
+- **Phase-2.B.2 (substantive thermal-time stack) compressed because all ingredients existed in literature** — Connes 1973 cocycle Radon-Nikodym + Bratteli-Robinson Thm 5.3.10 + Paper 42 four-witness theorem + Phase-2.A OSLPLS structure + Uhlmann 1977 relative-entropy monotonicity. The SYNTHESIS into the thermal-time stack across distinct KMS states is the new GeoVac contribution; all individual ingredients pre-existed.
+
+**The structural-skeleton scope statement** (CLAUDE.md §1.7) extends: the GeoVac framework's substrate consistently provides enough scaffolding to compress even genuinely-new mathematical constructions, when the new content is a SYNTHESIS of existing literature ingredients. Calibration data (specific values like Yukawa couplings) remains structurally outside the framework's reach.
+
+#### Remaining open frontiers (outside Paper 48/49 scope)
+
+- **Q2' non-commutative MS extension** — build non-commutative Mondino-Sämann pre-length space concept from scratch. Multi-month NCG-research target (3-12 months). Q1'-Phase-3 from Q1'-Light diagnostic.
+- **Closed-form cocycle entropy production deficit** as function of OSLPLS state-space coordinates — sprint-scale 2-4 weeks; Paper 49 §10 named open question.
+- **G3 cross-manifold** $\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$ — blocked by Paper 24 §V Coulomb/HO category mismatch.
+- **G4 inner-factor calibration data** — W3 spectral-zeta candidate FALSIFIED. "Second packing axiom" question remains open as the speculative frontier.
+
+#### Net deliverables
+
+- **Two arXiv-ready math.OA standalones**: Papers 48 (29 pp) + 49 (32 pp) = 61 pages of theorem-grade math.OA content across the Lorentzian arc.
+- **~90,000 words of sprint memos** + structured JSON data files for each sub-sprint.
+- **First quantitative pLGH-convergence panel in Mondino-Sämann literature** derived from operator-algebraic input (Paper 48 T3).
+- **First operator-algebraic dual of the special-relativistic twin paradox** via Uhlmann's relative-entropy monotonicity inequality (Paper 49 Theorem 3.3-B2).
+- **Two genuinely new mathematical structures**: (a) Krein pointed proper QMS at signature (3,1) with extent element pair (Paper 48); (b) OSLPLS category as the operator-system generalization of Mondino-Sämann pre-length space (Paper 49).
+
 ## [3.0.0] - 2026-05-24
 
 ### Content discipline release — CLAUDE.md §13.11, MEMORY.md trim, §3 dead-ends compaction

@@ -1,0 +1,177 @@
+{
+  "sprint": "Tier 3-Light Krein-lift diagnostic",
+  "date": "2026-05-24",
+  "predecessor_sprints": [
+    "Phase A.1 literature audit (debug/l3e_p3_phase_a1_literature_audit.md)",
+    "Phase A.2' deep-read (debug/l3e_p3_phase_a2prime_latremoliere_deep_read.md, abstract-only)",
+    "Sprint L3b-2 Sub-sprints A-D (Paper 45 K+-weak-form propinquity)",
+    "Sprint L3b-2a-d (Paper 46 strong-form on natural substrate)"
+  ],
+  "target": "Latremoliere arXiv:2512.03573 pointed-QLCMS framework Krein-lift",
+  "substrate": "Paper 44/45/46/47 Krein operator-system architecture",
+  "diagnostic_method": "Axiom-by-axiom Krein-lift test against Latremoliere 2512.03573 sections 1.18, 1.22, 1.26, 1.29, 2, 4, 5",
+  "honest_scope": "Diagnostic only; no implementation; no theorem claims; no paper modifications",
+
+  "per_axiom_verdicts": {
+    "3.1_Def_1.18_Leibniz_seminorm": {
+      "axiom": "L(ab) <= ||a||*L(b) + L(a)*||b||",
+      "verdict": "GO",
+      "krein_lift_choice": "L^K(a) = ||[D_L, a]||_op on K+ restriction, with D_L Krein-self-adjoint Lorentzian Dirac (Paper 43/44)",
+      "key_dependency": "Paper 46 natural-substrate L_op choice; Phase A.2' R1 second-order Schrodinger failure not relevant (D_L is first-order)",
+      "obstruction": "none"
+    },
+    "3.2_Def_1.22_FM_Fortet_Mourier": {
+      "axiom": "Fortet-Mourier distance metrizes weak-* on state space",
+      "verdict": "GO",
+      "krein_lift_choice": "Krein-positive Wasserstein-Kantorovich distance (Paper 44 + geovac/krein_positive_state_space.py SDP)",
+      "key_dependency": "Paper 44 SDP infrastructure; matches Connes' 1989 weak-* metrization on Riemannian spectral triples",
+      "obstruction": "none"
+    },
+    "3.2_Def_1.22_CB_closed_unit_ball": {
+      "axiom": "Lipschitz unit ball is closed in self-adjoint algebra",
+      "verdict": "GO",
+      "krein_lift_choice": "Standard Banach-Alaoglu argument on K+-restricted L^K unit ball",
+      "key_dependency": "Sub-sprint A K+ structure + Paper 45 §3 setup",
+      "obstruction": "none"
+    },
+    "3.2_Def_1.22_B_strictly_positive_element": {
+      "axiom": "Exists strictly positive h, state mu with mu(h)=1, boundedness condition",
+      "verdict": "GO",
+      "krein_lift_choice": "h = K_alpha^W / Z (BW geometric Hamiltonian); mu = omega_W^L (BW vacuum)",
+      "key_dependency": "Paper 42 §5 BW geometric K_alpha integer spectrum; Paper 43 §4.2 BW vacuum",
+      "obstruction": "none"
+    },
+    "3.3_Def_1.26_pinned_QLCMS_tightness": {
+      "axiom": "{phi : mk_L(phi, mu) < infty} weak-* dense in S(A)",
+      "verdict": "GO-WITH-CAVEAT",
+      "krein_lift_choice": "Pin state = omega_W^L; tightness on truncated triples inherited from Paper 38 SU(2) via Sub-sprint D Riemannian-limit",
+      "key_dependency": "Sub-sprint D Riemannian-limit bit-exact at N_t=1; truncated tightness follows; continuum tightness needs sub-sprint extension",
+      "obstruction": "Continuum tightness on T^L_{S^3 x S^1_T} needs 2-3 week sub-sprint (analog of Paper 38 Thm 5.5 for K+ Wasserstein-Kantorovich state space)"
+    },
+    "3.4_Def_1.29_exhaustive_sequence_Thm_1.30": {
+      "axiom": "L(h_n) -> 0, mu(h_n) -> 1, ||h_n||_A -> 1; approximate unit",
+      "verdict": "GO",
+      "krein_lift_choice": "Truncated Krein triple sequence T^L_{n_max, N_t, T} with joint cutoff (n_max, N_t) -> (infty, infty)",
+      "key_dependency": "Sub-sprint C Lemma 4.1 approximate-identity property; Sub-sprint D Riemannian-limit recovery; operator-system reading from Paper 44 (not multiplication-algebra reading from Phase A.2' X-memo)",
+      "obstruction": "none"
+    },
+    "3.5_Section_2_tunneling_pairs": {
+      "axiom": "Symmetric UCP tunneling pair with reach/height/alignment control",
+      "verdict": "GO",
+      "krein_lift_choice": "(B^joint,+, P^joint,+) from Paper 45 §3 / Sub-sprint D §2 — already built",
+      "key_dependency": "Sub-sprint C §6 K+ preservation [J, B^joint(f)] = 0; Sub-sprint D Lemma 2.2 UCP property",
+      "obstruction": "none — essentially already proved; needs naming"
+    },
+    "3.6_Section_4_hypertopology_inframetric": {
+      "axiom": "4-point relaxed triangle d(X,Z) <= d(X,Y)+d(Y,W)+d(W,Z)",
+      "verdict": "GO",
+      "krein_lift_choice": "Inframetric naturally inherited from Krein-positive Wasserstein structure (weaker than metric, fits 4-point form for free)",
+      "key_dependency": "Paper 44 Krein-positive Wasserstein gives metric on K+-cone (stronger than required); 4-point relaxed inequality is strictly weaker",
+      "obstruction": "none — easiest part; Krein-positive naturally lands in inframetric framework"
+    },
+    "3.7_Section_5_compact_case_agreement": {
+      "axiom": "Krein-lift reduces to Latremoliere 2014 propinquity on compact wedge case",
+      "verdict": "GO",
+      "krein_lift_choice": "Paper 43 hemispheric wedge construction; Sub-sprint D Riemannian-limit at N_t=1 gives Lambda^L_{n_max, 1, T} = Lambda^{P38}_{n_max} bit-exact",
+      "key_dependency": "Sub-sprint D Riemannian-limit-recovery falsifier (bit-exact at N_t=1 across n_max in {2,3,4})",
+      "obstruction": "none"
+    }
+  },
+
+  "aggregate_verdict": "POSITIVE-WITH-NAMED-OBSTRUCTIONS",
+  "verdict_summary": {
+    "axioms_tested": 9,
+    "axioms_GO": 8,
+    "axioms_GO_WITH_CAVEAT": 1,
+    "axioms_NEGATIVE": 0,
+    "axioms_OBSTRUCTION_STRUCTURAL": 0,
+    "named_obstructions": [
+      "Def 1.26 continuum tightness on T^L_{S^3 x S^1_T} (2-3 week sub-sprint, named in §5.1 A.2'.4)"
+    ]
+  },
+
+  "structural_finding": {
+    "headline": "The Krein-lift is structurally compatible with Latremoliere 2512.03573's pinned-QLCMS framework, AND most of the lift is already built in Papers 44/45/46/47 + L3b-2 sub-sprints A-D.",
+    "remaining_work": "Naming, formalization, writing — not new mathematics.",
+    "scope_inheritance": "The Krein-lift inherits exactly the K+-restricted weak-form scope limitation of Paper 45 / Sprint L3b-2; the strong-form (continuum, without K+ restriction) remains G1-genuine multi-month frontier.",
+    "easiest_axiom": "§4 inframetric/hypertopology — Krein-positive naturally lands in the weaker 4-point relaxed triangle framework Latremoliere set up.",
+    "hardest_axiom": "Def 1.26 continuum tightness — the named 2-3 week sub-sprint analog of Paper 38 Thm 5.5"
+  },
+
+  "recommended_tier3_sequencing": {
+    "phase_A.2'_krein_lift_naming_formalization": {
+      "effort_months": "1-2",
+      "sub_sprints": [
+        "A.2'.1 Krein-self-adjoint Lipschitz seminorm formalization (~2 weeks)",
+        "A.2'.2 Krein-positive Wasserstein-Kantorovich as Fortet-Mourier (~2 weeks)",
+        "A.2'.3 BW vacuum + strictly-positive element setup (~1 week)",
+        "A.2'.4 Def 1.26 continuum tightness sub-sprint (~2-3 weeks) — the named caveat",
+        "A.2'.5 Def 1.29 exhaustive sequence formalization (~1 week)"
+      ]
+    },
+    "phase_A.3'_bridge_to_mondino_samann": {
+      "effort_months": "1.5-2",
+      "notes": "Unchanged from re-scope memo §3; bridge construction is separate from Krein-lift and remains central open content"
+    },
+    "phase_A.4'_geovac_wedge_application": {
+      "effort_months": "1",
+      "notes": "Unchanged from re-scope memo §3; apply A.2'+A.3' to Paper 43 wedge construction"
+    },
+    "phase_A.5'_synthesis_decision_gate": {
+      "effort_months": "0.75",
+      "notes": "Unchanged from re-scope memo; closure memo with POSITIVE/MIXED/NEGATIVE verdict"
+    },
+    "phase_B_merged_paper_48": {
+      "effort_months": "1.5",
+      "notes": "Single merged paper ~25-30 pages, math.OA submission, following re-scope memo §4 outline"
+    },
+    "total_effort_months": "6-7",
+    "comparison_to_original_estimate": {
+      "original_l3e_p3_scoping_pre_scoop": "~12 months for two papers",
+      "post_scoop_rescope_memo_estimate": "~6-9 months for one merged paper, A.2' targeted at 10 weeks",
+      "post_tier3_light_diagnostic_estimate": "~6-7 months total, A.2' refined to 1-2 months not 10 weeks",
+      "delta_from_diagnostic": "~3-5 months reduction in A.2' estimate (most lift already done in existing Papers 44-47)"
+    }
+  },
+
+  "what_diagnostic_does_NOT_address": [
+    "Mondino-Samann pLGH bridge (Phase A.3' of re-scope — separate from Krein-lift)",
+    "Strong-form Lorentzian propinquity on continuum non-compact carrier (G1-genuine, multi-month frontier)",
+    "G2-metric closure on S^3 x R_t (named for DEFER in Sprint L3e scoping memo)",
+    "Implementation of any Krein-lift theorems (diagnostic only)",
+    "Verification of continuum tightness on T^L_{S^3 x S^1_T} (Def 1.26 caveat, 2-3 week sub-sprint)"
+  ],
+
+  "pi_questions_queued": {
+    "Q1": "Continue with merged Paper 48 (Tier 3 commit) or pause Tier 3? — Diagnostic recommends PROCEED",
+    "Q2": "Phase ordering A.2' -> A.3' -> A.4' or parallelize? — Diagnostic recommends STANDARD ORDERING",
+    "Q3": "Trigger immediate paper updates? — Diagnostic recommends NO, wait for Phase A.2'.5 or Phase B"
+  },
+
+  "comparison_to_phase_a2prime_deep_read": {
+    "refined": [
+      "Sec 2 tunneling pair structure (reach/height/alignment as Paper 38 analogs)",
+      "Sec 4 inframetric is 4-point relaxed triangle (Krein-positive naturally inherits)",
+      "Sec 5 compact-case agreement reduces to Latremoliere 2014 (Paper 38 verifies at N_t=1)",
+      "Sec 6 c_0(Z) crossed-product as prototype for non-compact non-commutative convergence"
+    ],
+    "sharpened": [
+      "Sturmian-as-exhaustive-sequence X/Z divergence does NOT apply to Krein-lift (operator-system reading natural here)",
+      "Phase A.2' R1 Schrodinger second-order Leibniz failure does NOT apply (D_L first-order)"
+    ],
+    "no_contradictions": "All structural alignments from Phase A.2' deep-read corroborated by full PDF read"
+  },
+
+  "load_bearing_dependencies": {
+    "paper_44_propagation_2": "Bit-exact at panel cells (Paper 44 §5); diagnostic relies on this for inframetric inheritance",
+    "sub_sprint_D_riemannian_limit": "Bit-exact at (n_max, N_t) = (2,1), (3,1), (4,1) (Sub-sprint D memo §7); diagnostic relies on this for §5 compact-case agreement",
+    "paper_46_appendix_B_free_upgrade": "Lambda^enlarged = Lambda^{P45} bit-exact (Paper 46 Appendix B); diagnostic relies on this for §3.1 Leibniz seminorm choice"
+  },
+
+  "estimated_tier3_cost_months": 6.5,
+  "diagnostic_recommendation": "GO with specific Tier 3 work plan as in §5",
+  "files_added": [
+    "debug/sprint_tier3_light_krein_lift_diagnostic_memo.md (~5000 words)",
+    "debug/data/sprint_tier3_light_krein_lift_diagnostic.json (this file)"
+  ]
+}

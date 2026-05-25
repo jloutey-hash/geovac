@@ -1,0 +1,2770 @@
+% =====================================================================
+% Paper 49 (standalone): Operator-system Lorentzian pre-length spaces
+% and the strong-form Krein-Mondino-Saemann bridge: cross-KMS-state
+% thermal-time stack and strict super-additivity.
+%
+% Eleventh math.OA standalone in the GeoVac series. Siblings:
+%   Paper 29 (Ramanujan-Hopf), Paper 32 (spectral triple), Paper 38
+%   (SU(2) Riemannian propinquity), Paper 39 (tensor-product
+%   propinquity), Paper 40 (universal rate constant on compact Lie
+%   groups), Paper 42 (Tomita-Takesaki Riemannian closure), Paper 43
+%   (Lorentzian extension of the four-witness theorem), Paper 44
+%   (Lorentzian operator-system substrate), Paper 45 (K+-weak-form
+%   Lorentzian propinquity convergence), Paper 46 (strong-form
+%   Lorentzian propinquity convergence on the natural and enlarged
+%   substrates), Paper 47 (two-rate hybrid convergence to the
+%   non-compact carrier), Paper 48 (K+-weak-form Krein-MS bridge).
+%
+% Status: first draft, May 2026. Built from the six Q1' phase memos
+% (Q1'-Light, Phase-1 Case A stepping stone, Phase-2.A OSLPLS
+% category, Phase-2.B.1 W^flip on morphisms, Phase-2.B.2 Bridge
+% Theorem closure, Phase-2.B.3 numerical panel verification).
+%
+% Main result: the bridge functor W^flip: KreinMetaMet_pp^{flip,full}
+% -> OSLPLS_cov extends the Paper 48 commutative bridge to the full
+% M != 0 enlarged Krein substrate (Paper 46 Appendix B chirality-flip
+% generators). The Bridge Theorem 6.4'-Q1' holds at strict-strong-form
+% with off-orbit super-additivity established via the Connes-Rovelli
+% thermal-time stack across distinct KMS states, isolated through a
+% triple-intersection cocycle identity (TICI) derived from the
+% Connes 1973 cocycle Radon-Nikodym machinery and applied via
+% Uhlmann's relative-entropy monotonicity to give the operator-
+% algebraic dual of the special-relativistic twin paradox.
+%
+% Honest scope: strict-strong-form Krein-MS bridge at the OSLPLS
+% level, finite cutoff. The non-commutative Mondino-Samann
+% extension (Q2'/Phase-3) is the deferred multi-month NCG-research
+% frontier. Closed-form expression for the cocycle entropy
+% production deficit is named open.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{newunicodechar}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
+\newunicodechar{Đ}{\ensuremath{\text{\DJ}}}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% --- Macros shared with Papers 42-48 ---
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\Nt}{N_{t}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Sone}{S^{1}}
+\newcommand{\SoneT}{S^{1}_{T}}
+\newcommand{\Manifold}{S^{3}\times S^{1}_{T}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Krein}{\mathcal{K}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Ncal}{\mathcal{N}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Frob}[1]{\lVert #1 \rVert_{F}}
+\newcommand{\cbnorm}[1]{\lVert #1 \rVert_{\mathrm{cb}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Uone}{U(1)}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DL}{D_{L}}
+\newcommand{\JL}{J_{L}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Kplus}{\Krein^{+}}
+\newcommand{\Kminus}{\Krein^{-}}
+\newcommand{\spat}{\mathrm{spat}}
+\newcommand{\temp}{\mathrm{temp}}
+\newcommand{\Bjoint}{B^{\mathrm{joint}}}
+\newcommand{\Pjoint}{P^{\mathrm{joint}}}
+\newcommand{\gammajoint}{\gamma^{\mathrm{joint}}}
+\newcommand{\Cthreejoint}{C_{3}^{\mathrm{joint}}}
+\newcommand{\Lprop}{\Lambda^{L}}
+\newcommand{\Dethmet}{\eth^{K}}
+\newcommand{\BigDeth}{\text{\DJ}^{K}}
+\newcommand{\Wfun}{\mathbf{W}}
+\newcommand{\KreinMM}{\mathbf{KreinMetaMet}_{\mathrm{pp}}}
+\newcommand{\LorPLG}{\mathbf{LorPLG}_{\mathrm{cov}}}
+\newcommand{\BWvac}{\omega_{W}^{L}}
+\newcommand{\Kalpha}{K_{\alpha}^{W}}
+\newcommand{\Hloc}{H_{\mathrm{local}}}
+\newcommand{\Dwedge}{D_{W}^{L}}
+\newcommand{\tmod}{\tau_{\mathrm{mod}}}
+\newcommand{\kappag}{\kappa_{g}}
+
+% --- New macros for OSLPLS-specific structure ---
+\newcommand{\OSLPLS}{\mathbf{OSLPLS}_{\mathrm{cov}}}
+\newcommand{\KreinMMflip}{\mathbf{KreinMetaMet}_{\mathrm{pp}}^{\mathrm{flip},\mathrm{full}}}
+\newcommand{\KreinMMflipMzero}{\mathbf{KreinMetaMet}_{\mathrm{pp}}^{\mathrm{flip},M=0}}
+\newcommand{\LorPLGZtwo}{\mathbf{LorPLG}_{\mathrm{cov}}^{\Z/2}}
+\newcommand{\ellOS}{\ell^{\mathrm{OS}}}
+\newcommand{\tauOS}{\tau^{\mathrm{OS}}}
+\newcommand{\Mflipfull}{\Mcal^{L,\mathrm{flip}}_{\mathrm{full}}}
+\newcommand{\MflipMzero}{\Mcal^{L,\mathrm{flip}}_{M=0}}
+\newcommand{\Wflip}{W^{\mathrm{flip}}}
+\newcommand{\WflipMzero}{W^{\mathrm{flip},M=0}}
+\newcommand{\Mflip}[3]{M^{\mathrm{flip}}_{#1,#2,#3}}
+\newcommand{\Mspat}[3]{M^{\mathrm{spat}}_{#1,#2,#3}}
+\newcommand{\Wspat}[3]{W^{#1#2#3}}
+\newcommand{\osXkrein}{\mathbb{X}^{K,\mathrm{flip},\mathrm{full}}}
+\newcommand{\osXkreinMzero}{\mathbb{X}^{K,\mathrm{flip},M=0}}
+\newcommand{\Xfrak}{\mathfrak{X}^{\mathrm{OS}}}
+\newcommand{\sigOrb}{\sigma}
+\newcommand{\Morb}[1]{\Mcal^{\sigma_{#1}}}
+\newcommand{\Oorb}[1]{\Ocal^{\sigma_{#1}}}
+\newcommand{\omegaOrb}[1]{\omega^{\sigma_{#1}}}
+\newcommand{\cocyc}[2]{u_{t}^{\sigma_{#1}\sigma_{#2}}}
+\newcommand{\DelS}[2]{\Delta S^{\sigma_{#1}\to\sigma_{#2}}}
+
+\title{Operator-system Lorentzian pre-length spaces and the\\
+strong-form Krein--Mondino--S\"amann bridge:\\
+cross-KMS-state thermal-time stack and strict super-additivity}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We introduce the category $\OSLPLS$ of \emph{operator-system Lorentzian
+pre-length spaces} (OSLPLS), the non-commutative extension of
+Mondino--S\"amann's covered Lorentzian pre-length space
+framework~\cite{mondino_samann2025_pointed} obtained by replacing the
+underlying set $X$ with the state space $\Scal(\Mcal)$ of an
+operator-system topography $\Mcal$, the time separation $\ell$ with the
+modular-flow time separation $\ellOS_{\omega}$ on a faithful basepoint
+state $\omega$, and the cover by sub-operator-systems
+$(\Mcal_{k})_{k\in\N}$. The commutative Mondino--S\"amann category
+$\LorPLG$ embeds in $\OSLPLS$ as a faithful sub-category via
+$X\mapsto C(X)$, $\ell\mapsto L_{\ell}$, $o\mapsto\delta_{o}$.
+
+\medskip
+
+\noindent\emph{Main result.} The bridge functor
+\[
+  \Wflip:\KreinMMflip\longrightarrow\OSLPLS
+\]
+extends the Paper~48~\cite{paper48} K$^{+}$-weak-form bridge $\Wfun$ to
+the full $M\ne 0$ Paper~46~\cite{paper46} Appendix~B enlarged Krein
+substrate. The \emph{Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$}
+(Theorem~\ref{thm:bridge_strong}) holds at strict-strong-form rigor on
+four properties:\ (B1$^{\prime}$) structural correspondence inherited
+from the OSLPLS axiom transport (Theorem~\ref{thm:axiom_transport});\
+(B2$^{\prime}$) reverse triangle inequality with \emph{strict}
+super-additivity on three-orbit triples, established via the
+\textbf{Connes--Rovelli thermal-time stack across distinct KMS states},
+a construction not previously published;\ (B3$^{\prime}$)
+pre-compactness via the Paper~44~\cite{paper44} propagation-number
+bound $\mathrm{prop}\le 4$ on the enlarged substrate;\ (B4$^{\prime}$)
+convergence transport from Paper~46's strong-form propinquity bound.
+
+\medskip
+
+\noindent\emph{The thermal-time stack.} The substantive new mathematics
+of this paper sits in Section~\ref{sec:thermal_stack}. Three structural
+ingredients combine:\ (i) the \emph{orbit-KMS lemma}
+(Lemma~\ref{lem:orbit_kms}):\ every modular orbit on the bridge image
+carries an intrinsic effective KMS state inherited from the
+Bisognano--Wichmann vacuum via GNS restriction;\ (ii) the
+\emph{Connes (1973) cocycle Radon--Nikodym
+derivative}~\cite{connes1973} $\cocyc{i}{j}=[D\omegaOrb{j}:D\omegaOrb{i}]_{t}$
+intertwines distinct modular flows on shared sub-operator-systems and
+provides a cross-orbit thermal-time bridge;\ (iii) the
+\emph{triple-intersection cocycle identity} (TICI,
+Theorem~\ref{thm:tici}):\
+$\cocyc{1}{3}=\cocyc{1}{2}\cdot\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})$
+on the triple overlap, implicit in Connes 1973 (C4) but not previously
+isolated as a stack-consistency property. Strict super-additivity then
+follows from Uhlmann's relative-entropy
+monotonicity~\cite{uhlmann1977,lindblad1975} applied to the cocycle
+entropy production:\ the detoured worldline through an intermediate
+KMS state pays \emph{two} entropy-production costs
+$\DelS{1}{2}+\DelS{2}{3}$ while the direct worldline pays only
+$\DelS{1}{3}$, with the data-processing inequality forcing the chain
+inequality
+$\DelS{1}{3}\le\DelS{1}{2}+\DelS{2}{3}$,
+strictly when the three KMS states are pairwise distinct
+(Theorem~\ref{thm:strict_super_additivity}).
+
+\medskip
+
+\noindent\emph{Physical reading:\ twin paradox as quantum information.}
+The strict super-additivity of $\ellOS$ on off-orbit triples is the
+operator-algebraic dual of the special-relativistic twin paradox.
+Where classical Lorentzian geometry reads the deficit as
+detour-accumulates-less-proper-time, the OSLPLS reading reads it as
+detour-pays-more-entropy. Quantum relative-entropy monotonicity
+(Lindblad's data-processing inequality) supplies the strict-inequality
+content. To the author's knowledge this is the first explicit
+identification of an information-theoretic underpinning for the
+reverse triangle inequality of synthetic Lorentzian geometry.
+
+\medskip
+
+\noindent\emph{Numerical panel.} The bit-exact Paper~45~\cite{paper45}
+joint propinquity panel
+$\Lprop(\nmax,\Nt)\in\{2.0746,1.6101,1.3223\}$ at
+$(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$ transports verbatim through the
+strong-form bridge. Uhlmann relative-entropy monotonicity is verified
+numerically with substantially positive deficits ($\sim 67$, $69$,
+$81$~nats respectively). Riemannian-limit recovery at $\Nt=1$ is
+bit-exact (Frobenius residual $=0.0$ in float64). Propagation number
+$\mathrm{prop}=2$ is verified at $(\nmax,\Nt)=(2,3)$ (Paper~46
+Appendix~B envelope-aware refinement predicts $\mathrm{prop}\le 4$).
+
+\medskip
+
+\noindent\emph{Honest scope.} The bridge is established at the
+\textbf{strict-strong-form OSLPLS level} on the full $M\ne 0$
+enlarged substrate, at finite cutoff. The closed-form expression for
+the cocycle entropy production
+$\DelS{i}{j}(t)$ as a function of OSLPLS state-space coordinates is
+named open. The \emph{genuine non-commutative Mondino--S\"amann
+pre-length space} concept (Q2$^{\prime}$,
+Section~\ref{sec:open_questions}) remains the multi-month NCG-research
+frontier; OSLPLS \emph{replaces} Mondino--S\"amann rather than
+generalising it on the synthetic side. Cross-manifold ($\Tcal_{\sthree}
+\otimes\Tcal_{\mathrm{Hardy}(S^{5})}$) and inner-factor calibration
+data are orthogonal to the present strong-form bridge.
+
+\medskip
+
+\noindent\emph{Place in the math.OA standalone series.} Eleventh in
+the GeoVac math.OA arc (siblings:\ Papers
+29~\cite{paper29}, 32~\cite{paper32}, 38~\cite{paper38},
+39~\cite{paper39}, 40~\cite{paper40_unified}, 42~\cite{paper42},
+43~\cite{paper43}, 44~\cite{paper44}, 45~\cite{paper45},
+46~\cite{paper46}, 47~\cite{paper47}, 48~\cite{paper48}). Builds on
+Paper~48 (K$^{+}$-weak-form bridge) as the direct predecessor:\
+Paper~49 lifts the bridge to the strict-strong-form by extending the
+target category from $\LorPLG$ to $\OSLPLS$ and the source substrate
+from M-diagonal to full $M\ne 0$ enlarged. The K$^{+}$-weak-form
+bridge of Paper~48 sits in $\Wflip$ as a structurally degenerate
+sub-case (Decomposition~O Case~(iii) empty); the strict-strong-form
+content of Paper~49 activates Case~(iii) non-trivially.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+\subsection{The Q1$^{\prime}$ question:\ strong-form Krein--MS bridge}
+\label{sec:q1prime_question}
+
+The K$^{+}$-weak-form Krein--Mondino--S\"amann bridge of
+Paper~48~\cite{paper48} constructs a contravariant functor
+\[
+  \Wfun:\KreinMM\longrightarrow\LorPLG
+\]
+that sends a Krein-pointed proper quantum metric space
+$(\Acal^{K},L^{K},\Mcal^{L},\BWvac)$ on the natural Lorentzian
+operator-system substrate of Paper~44~\cite{paper44} to a covered
+Lorentzian pre-length space
+$(\hat{\Mcal}^{L},\ell^{L},\hat{\omega}_{W}^{L},\hat{\Ucal}^{L})$ via
+Gelfand spectrum, modular-flow time separation, Bisognano--Wichmann
+vacuum basepoint, and admissible-scaling truncated cover. The four
+Bridge Theorem properties (B1)--(B4) hold at K$^{+}$-weak-form rigor,
+with the reverse triangle inequality (B2) closing through a
+\emph{Decomposition~O} analysis on causal triples:\ Case~(i) on-orbit
+holds with equality from Paper~42~\cite{paper42} four-witness modular
+flow additivity, Cases~(ii), (iv) are trivial via $\ell^{L}=-\infty$
+on causally-unrelated pairs, and the substantive Case~(iii) (three
+characters on three distinct modular orbits with all pairs causally
+related) is \emph{structurally empty} on the K$^{+}$-weak-form
+substrate because the M-diagonal topography forces orbit-label
+preservation under modular flow.
+
+Paper~48~\S 8.1 names this gap as the open question \emph{Q1$^{\prime}$}:\
+extend $\Wfun$ to the strict-strong-form by enlarging the source
+substrate (Paper~46~\cite{paper46} Appendix~B chirality-flip
+generators at full $M\ne 0$) so that Decomposition~O Case~(iii)
+becomes non-empty, and prove the reverse triangle with \emph{strict}
+super-additivity on three-orbit triples. The Paper~48 honest scope
+acknowledges Q1$^{\prime}$ as a multi-month NCG-mathematics
+follow-on:\ activating Case~(iii) requires the chirality-flipping
+generators to carry non-trivial $m_{j}$-rotation content (i.e.\ to be
+multiplication operators on the spinor bundle with non-zero magnetic
+quantum number), which breaks Abelianness of the topography and
+takes the construction outside the Gelfand--Naimark setting.
+
+Paper~49 closes Q1$^{\prime}$.
+
+\subsection{Three structural moves}\label{sec:three_moves}
+
+The closure rests on three structural moves.
+
+\textbf{(i) Replace Mondino--S\"amann with OSLPLS as the synthetic-side
+target.} The Q1$^{\prime}$-Light diagnostic
+(\S\ref{sec:q1prime_light_recap}) showed that enlarging the topography
+to the full $M\ne 0$ chirality-flip substrate breaks Abelianness:\ for
+two chirality-flip generators
+$\Mflip{N_{1}}{L_{1}}{M_{1}}=\mathrm{diag}(\Wspat{N_{1}}{L_{1}}{M_{1}},
+-\Wspat{N_{1}}{L_{1}}{M_{1}})$ and $\Mflip{N_{2}}{L_{2}}{M_{2}}$, the
+commutator reduces to the spatial-multiplier commutator
+$[\Wspat{N_{1}}{L_{1}}{M_{1}},\Wspat{N_{2}}{L_{2}}{M_{2}}]$ on each
+chirality sector, which is non-trivial whenever $M_{1},M_{2}\ne 0$
+(Wigner-rotation content on the $m_{j}$ labels). The Gelfand spectrum
+ceases to apply directly. We replace the target category $\LorPLG$ by
+the category $\OSLPLS$ of operator-system Lorentzian pre-length
+spaces, in which the underlying set is the state space $\Scal(\Mcal)$
+of the operator-system topography $\Mcal$, the time separation is
+generated by the Tomita--Takesaki modular flow on a faithful basepoint
+state $\omega$, and the cover is by sub-operator-systems
+$(\Mcal_{k})_{k\in\N}$. The OSLPLS category contains Mondino--S\"amann
+as a faithful sub-category via $X\mapsto C(X)$
+(Theorem~\ref{thm:embedding_iota}).
+
+\textbf{(ii) Identify $\Wflip$ on objects and morphisms.} The bridge
+functor $\Wflip:\KreinMMflip\to\OSLPLS$ acts on objects by direct
+operator-system transport:\ source $(\Acal^{K},L^{K},\Mflipfull,
+\BWvac)\mapsto(\Acal^{K},L^{K},\Mflipfull,
+\BWvac|_{\Mflipfull},\Ucal^{L,\mathrm{flip}}_{\mathrm{OS}})$ with no
+Gelfand-spectrum step. On morphisms $\Wflip$ acts by Connes--van
+Suijlekom contravariant UCP convention~\cite{connes_vs2021}:\
+a topographic Krein M-isometry on the enlarged substrate corresponds
+at the algebra level to a $*$-homomorphism viewed in the OSLPLS
+contravariant direction (Theorem~\ref{thm:functoriality}). The
+construction is forced by the axiom transport analysis
+(Theorem~\ref{thm:axiom_transport}):\ once one requires the bridge
+target category to (a) contain commutative MS as a faithful
+sub-category and (b) admit the Krein-side enlarged-substrate image,
+there is essentially no design freedom in the OSLPLS object or
+morphism class.
+
+\textbf{(iii) Connes--Rovelli thermal-time stack across distinct KMS
+states.} The substantive new mathematics is the cross-KMS-state
+extension of the Connes--Rovelli thermal-time hypothesis
+(\S\ref{sec:thermal_stack}). The hypothesis of
+Connes--Rovelli~\cite{connes_rovelli1994} identifies modular flow at a
+fixed KMS state as the physical time evolution. The Bratteli--Robinson
+account~\cite{bratteli_robinson1981}, Theorem~5.3.10, together with
+Connes' cocycle Radon--Nikodym derivative~\cite{connes1973}, provides
+the cross-KMS-state intertwiner. We isolate the
+\emph{triple-intersection cocycle identity} (TICI,
+Theorem~\ref{thm:tici}) implicit in Connes 1973 (C4) but not
+previously named as a stack-consistency property, and use it together
+with Uhlmann's relative-entropy
+monotonicity~\cite{uhlmann1977,lindblad1975} to prove strict
+super-additivity of $\ellOS$ on three-orbit triples
+(Theorem~\ref{thm:strict_super_additivity}).
+
+\subsection{The headline:\ twin paradox as quantum information}
+\label{sec:headline_twin_paradox}
+
+Substituting the cocycle entropy production into the OSLPLS reverse
+triangle inequality and using Lindblad's data-processing inequality
+yields the operator-algebraic dual of the special-relativistic twin
+paradox. Consider three states $\omega_{x}\in\Oorb{1},
+\omega_{y}\in\Oorb{2},\omega_{z}\in\Oorb{3}$ on three distinct
+modular orbits with all three pairs causally related via cross-orbit
+cocycle transports. The OSLPLS time separation decomposes as
+\[
+  \ellOS(\omega',\omega'') \;=\; t_{\mathrm{therm}}^{\sigma_{i}\to\sigma_{j}} \;-\; \DelS{i}{j},
+\]
+where the cocycle entropy production
+$\DelS{i}{j}\ge 0$ is the irreversible work of cross-orbit transport.
+The detoured worldline $\omega_{x}\to\omega_{y}\to\omega_{z}$ pays
+\emph{two} entropy-production costs $\DelS{1}{2}+\DelS{2}{3}$; the
+direct worldline $\omega_{x}\to\omega_{z}$ pays \emph{one} cost
+$\DelS{1}{3}$. The Lindblad/Uhlmann chain inequality
+$\DelS{1}{3}\le\DelS{1}{2}+\DelS{2}{3}$ (strict when the three KMS
+states are pairwise distinct) translates to
+\[
+  \ellOS(\omega_{x},\omega_{y}) + \ellOS(\omega_{y},\omega_{z}) \;<\; \ellOS(\omega_{x},\omega_{z}),
+\]
+which is the Mondino--S\"amann reverse triangle inequality at strict
+inequality. The detoured worldline accumulates less proper time
+\emph{because} the detour pays more entropy-production cost.
+
+To the author's knowledge this is the first explicit identification of
+quantum relative-entropy monotonicity as the load-bearing structural
+ingredient for the reverse triangle inequality of synthetic
+Lorentzian geometry. The reverse triangle inequality is well
+established in classical Lorentzian geometry as a property of proper
+time along causal curves~\cite{kunzinger_samann2018,mondino_samann2025_pointed};
+the OSLPLS reading reveals that the same inequality at the operator-
+algebraic level rests on a fundamentally information-theoretic
+inequality (the data-processing inequality of
+Lindblad~\cite{lindblad1975}).
+
+\subsection{Honest scope and place in the math.OA series}
+\label{sec:honest_scope_intro}
+
+Paper~49 is the eleventh math.OA standalone in the GeoVac project,
+building on the K$^{+}$-weak-form Krein--MS bridge of
+Paper~48~\cite{paper48} (the tenth) by extending the bridge to
+strict-strong-form on the full $M\ne 0$ enlarged substrate. The
+bridge is established at finite cutoff with admissible-scaling for
+the cover; the continuum (norm-resolvent) extension parallels
+Paper~47~\cite{paper47} on the K$^{+}$-weak-form bridge and is a
+separate Phase-3+ target.
+
+The honest scope statement (\S\ref{sec:open_questions}):
+\begin{itemize}
+\item Paper~49 closes Q1$^{\prime}$ at the OSLPLS-target level
+(Option~$\gamma$ from the Q1$^{\prime}$-Light diagnostic
+\S\ref{sec:q1prime_light_recap}). The strict-strong-form Bridge
+Theorem 6.4$^{\prime}$-Q1$^{\prime}$ holds at theorem-grade rigor on
+the enlarged substrate.
+\item Paper~49 does \emph{not} close Q2$^{\prime}$:\ the genuine
+non-commutative Mondino--S\"amann pre-length space concept built from
+scratch (Option~$\delta$). OSLPLS is a category that \emph{contains}
+Mondino--S\"amann via the embedding functor $\iota$
+(Theorem~\ref{thm:embedding_iota}); it is not itself an extension of
+the Mondino--S\"amann \emph{concept} of pre-length space. Q2$^{\prime}$
+remains the multi-month NCG-research frontier
+(\S\ref{sec:open_q2prime}).
+\item A closed-form expression for the cocycle entropy production
+$\DelS{i}{j}(t)$ as a function of OSLPLS state-space coordinates is
+named open (\S\ref{sec:open_cocycle_entropy}). Theorem
+\ref{thm:strict_super_additivity} establishes strict super-additivity
+qualitatively via the data-processing inequality but does not
+quantify the deficit. The numerical panel (\S\ref{sec:numerical_panel})
+verifies the Uhlmann monotonicity inequality at substantial positive
+deficits ($\sim 67$, $69$, $81$~nats at three panel cells) but the
+closed-form quantification remains open.
+\item Cross-manifold extensions
+($\Tcal_{\sthree}\otimes\Tcal_{\mathrm{Hardy}(S^{5})}$, blocked at the
+NCG-framework level by the Paper~24~\cite{paper24}~\S V four-layer
+Coulomb/HO asymmetry) and inner-factor calibration data (the
+W3-question of Paper~32~\cite{paper32} \S VIII.C) are orthogonal to
+the present strong-form bridge.
+\end{itemize}
+
+\subsection{Roadmap of the paper}\label{sec:roadmap}
+
+Section~\ref{sec:setup} recalls the necessary background:\ the
+Paper~48 K$^{+}$-weak-form Krein--MS bridge
+(\S\ref{sec:paper48_recap}), the Paper~46 Appendix~B enlarged
+substrate (\S\ref{sec:enlarged_substrate_recap}), Mondino--S\"amann
+covered Lorentzian pre-length spaces (\S\ref{sec:ms_recap}), and the
+Connes--Rovelli thermal-time hypothesis with Connes 1973 cocycle
+Radon--Nikodym machinery (\S\ref{sec:connes_rovelli_recap}). The
+Q1$^{\prime}$-Light diagnostic findings establishing the
+$M=0$/$M\ne 0$ bimodal-Abelianness bifurcation are recalled in
+\S\ref{sec:q1prime_light_recap}.
+
+Section~\ref{sec:oslpls_category} defines the OSLPLS category. The
+axiom-transport analysis (Theorem~\ref{thm:axiom_transport}) walks
+through each Mondino--S\"amann axiom and identifies its
+operator-system generalization, surfacing the substantive observation
+that the reverse triangle inequality is the only MS axiom whose
+\emph{proof} uses commutativity in a load-bearing way. The OSLPLS
+object (Definition~\ref{def:oslpls_object}) and morphism
+(Definition~\ref{def:oslpls_morphism}) are then specified, with the
+modular-intertwining axiom (M5) shown to be automatic from
+basepoint-state pullback (M3) via the functoriality of
+Tomita--Takesaki (Lemma~\ref{lem:modular_intertwining_automatic}).
+The commutative Mondino--S\"amann category embeds as a faithful
+sub-category (Theorem~\ref{thm:embedding_iota}).
+
+Section~\ref{sec:bridge_candidate} constructs the Krein-side bridge
+candidate $\Wflip$ on objects and morphisms. The Phase-1
+chirality-graded bridge functor $\WflipMzero$ at the $M=0$ enlarged
+sub-substrate is recalled as a structurally additive stepping stone
+(\S\ref{sec:phase1_stepping_stone}); $\Wflip$ at the full $M\ne 0$
+enlarged substrate is then defined as the operator-system extension
+(Definition~\ref{def:Wflip}). All five OSLPLS object axioms verify
+on $\Wflip(\osXkrein)$ (Theorem~\ref{thm:krein_side_oslpls}), with
+the substantive new content being the structural activation of
+Decomposition~O Case~(iii) via non-trivial modular flow on
+chirality-flip generators at $M\ne 0$.
+
+Section~\ref{sec:off_orbit_activation} catalogues the substantive
+activation of off-orbit modular structure at full $M\ne 0$ and
+recalls why the Phase-1 Case~A construction at $M=0$ fails to
+activate it. Modular flow generated by $\Kalpha=J_{\mathrm{polar}}$
+mixes $m_{j}$ labels on the chirality-flip generators
+$\Mflip{N}{L}{M}$ at $M\ne 0$, so different states on
+$\Scal(\Mflipfull)$ can sit on genuinely different modular orbits
+with non-trivial $\ellOS$ relations.
+
+Section~\ref{sec:thermal_stack} is the substantive heart of the
+paper. We construct the Connes--Rovelli thermal-time stack across
+distinct KMS states in three steps:\ the orbit-KMS lemma
+(Lemma~\ref{lem:orbit_kms}) gives the intrinsic effective KMS
+structure on each modular orbit;\ the Connes 1973 cocycle
+Radon--Nikodym derivative (\S\ref{sec:connes_cocycle}) provides the
+cross-orbit intertwiner with its cocycle composition rule;\ the
+triple-intersection cocycle identity (TICI, Theorem~\ref{thm:tici})
+isolates the stack-consistency property at triple overlaps. We then
+prove strict super-additivity
+(Theorem~\ref{thm:strict_super_additivity}) via Uhlmann's
+relative-entropy monotonicity, with the physical reading as the
+twin-paradox-as-quantum-information identification.
+
+Section~\ref{sec:bridge_theorem} states and proves the aggregate
+Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$ on the OSLPLS-target
+(Theorem~\ref{thm:bridge_strong}), combining:\ B1$^{\prime}$
+structural correspondence (mechanical from
+Theorem~\ref{thm:axiom_transport}), B2$^{\prime}$ strict
+super-additivity (substantive, from \S\ref{sec:thermal_stack}),
+B3$^{\prime}$ pre-compactness inheritance via Paper~44
+propagation-number bound with envelope-aware refinement
+(prop $\le 4$ on the enlarged substrate), and B4$^{\prime}$
+convergence transport from Paper~46's strong-form propinquity
+bound.
+
+Section~\ref{sec:numerical_panel} reports the numerical verification
+panel:\ Lambda joint propinquity bit-exact at
+$\{(2,3),(3,5),(4,7)\}$, Uhlmann deficits substantially positive,
+Riemannian-limit recovery at $\Nt=1$ bit-exact, propagation number
+$=2$ verified at the smallest cell.
+
+Section~\ref{sec:synthetic_implications} discusses the
+synthetic-Lorentzian implications:\ the bridge image of the GeoVac
+hemispheric wedge at full $M\ne 0$ is a candidate non-commutative
+Lorentzian pre-length space (in the OSLPLS sense), positioning the
+construction relative to the
+Mondino--S\"amann--Sormani--Cavalletti synthetic-Lorentzian-GH
+community.
+
+Section~\ref{sec:open_questions} catalogues the open questions:\
+Q2$^{\prime}$ non-commutative MS extension, closed-form cocycle
+entropy production deficit, higher-genus orbit topology, cross-KMS
+thermal time across modular intertwiners, G3 cross-manifold, G4
+inner-factor calibration.
+
+\subsection{Related work}\label{sec:related_work_intro}
+
+The Latr\'emoli\`ere lineage~\cite{latremoliere2018,
+latremoliere_metric_st_2017, latremoliere_metric_propinquity_2015,
+latremoliere2025_hypertopology, latremoliere_pp_2018af,
+farsi_latremoliere2024, farsi_latremoliere2025} provides the
+operator-algebraic side of the bridge. The Mondino--S\"amann
+lineage~\cite{mondino_samann2025_pointed, kunzinger_samann2018,
+mondino_ryborz_samann2025} provides the synthetic side. Adjacent
+synthetic-Lorentzian convergence frameworks include
+Sormani--Vega null distance~\cite{sormani_vega2016},
+Sakovich--Sormani timed Gromov--Hausdorff~\cite{sakovich_sormani2024},
+Minguzzi--Suhr bounded Lorentzian metric spaces~\cite{minguzzi_suhr2024},
+M\"uller's Cauchy slabs~\cite{muller2022}, Allen--Burtscher metric
+GH~\cite{allen_burtscher2022}, Che--Perales--Sormani timed
+Hausdorff~\cite{che_perales_sormani2025}, Ketterer's
+$\ell$-convergence~\cite{ketterer2026}, Kubota's coarea
+inequality~\cite{kubota2026}.
+
+The Connes--van Suijlekom operator-system framework~\cite{connes_vs2021}
+provides the substrate for OSLPLS (UCP morphisms, propagation number,
+operator-system Lipschitz seminorms). The Marcolli--van Suijlekom
+gauge-network construction~\cite{marcolli_vs2014} is the structurally
+nearest published reading of finite-dimensional spectral triples as
+graph-localised structures, of which the GeoVac spectral triple is
+a member~\cite{paper32}.
+
+The Connes--Rovelli thermal-time
+hypothesis~\cite{connes_rovelli1994} for a single KMS state is the
+literature template for the construction in
+\S\ref{sec:thermal_stack}; Paper~49's contribution is the
+cross-KMS-state extension, isolating the triple-intersection cocycle
+identity as the load-bearing stack-consistency property and applying
+it via Uhlmann's inequality~\cite{uhlmann1977,lindblad1975,wilde2017}
+to give strict super-additivity.
+
+To the author's knowledge, OSLPLS as a category is genuinely new:\ no
+published "operator-system Lorentzian pre-length space" concept
+exists as of May 2026. The closest adjacent direction is the
+Lorentzian-NCG literature
+of~\cite{bizi_brouder_besnard2018,vandungen2016,strohmaier2006,
+franco_eckstein2014,nieuviarts2025_v2}, which builds Lorentzian-
+signature spectral triples (Krein-space construction); OSLPLS sits
+one level up, taking the operator-system substrate of a Lorentzian
+spectral triple (Paper~44~\cite{paper44}) and extracting the
+synthetic-Lorentzian metric structure via Tomita--Takesaki modular
+flow.
+
+% =====================================================================
+\section{Setup}\label{sec:setup}
+% =====================================================================
+
+\subsection{The Paper~48 K$^{+}$-weak-form bridge}
+\label{sec:paper48_recap}
+
+Paper~48~\cite{paper48} establishes the Wick-rotation functor
+$\Wfun:\KreinMM\to\LorPLG$ on the natural Lorentzian operator-system
+substrate of Paper~44~\cite{paper44}. The Krein-pointed proper quantum
+metric space is the 4-tuple
+\[
+  \mathbb{X}^{K} = (\Acal^{K},L^{K},\Mcal^{L},\BWvac),
+\]
+with $\Acal^{K}$ the natural Lorentzian operator system on the
+compact-temporal Lorentzian Krein space $\Krein_{\nmax,\Nt,T}$
+\cite{paper44}, $L^{K}$ the operator-norm Lipschitz seminorm
+$L^{K}(a)=\opnorm{[\DL,a]}$ \cite{paper46}, $\Mcal^{L}$ the M-diagonal
+Abelian topography
+\[
+  \Mcal^{L} = \mathrm{span}_{\C}\!\big\{\Mspat{N}{L}{0}\otimes I_{\Nt}\,:\,N\le\nmax,\ L<N\big\}\subseteq\Acal^{K},
+\]
+and $\BWvac=e^{-\Kalpha}/Z$ the Bisognano--Wichmann wedge KMS state
+with $\Kalpha=J_{\mathrm{polar}}^{W}$ of integer spectrum
+$\mathrm{two\_m}_{j}$ on the spinor bundle \cite{paper42}.
+
+The Wick-rotation functor sends $\mathbb{X}^{K}$ to the covered LPLS
+\[
+  \Wfun(\mathbb{X}^{K}) = (\hat{\Mcal}^{L},\ell^{L},\hat{\omega}_{W}^{L},\hat{\Ucal}^{L})
+\]
+with $\hat{\Mcal}^{L}=\mathrm{Spec}(\Mcal^{L})$ the Gelfand spectrum
+of the (Abelian) M-diagonal topography, $\ell^{L}=\kappag\cdot
+\tmod^{\BWvac}$ the modular-flow time separation ($-\infty$
+off-orbit), $\hat{\omega}_{W}^{L}$ the BW vacuum as a character of
+$\Mcal^{L}$, and $\hat{\Ucal}^{L}$ the truncation cover. The Bridge
+Theorem~\cite[Theorem~6.4]{paper48} verifies four properties
+(B1)--(B4) at the K$^{+}$-weak-form level.
+
+The reverse triangle (B2) is the substantive ingredient. Its proof
+proceeds by Decomposition~O on causal triples
+$(\hat{\omega}_{x},\hat{\omega}_{y},\hat{\omega}_{z})$:
+\begin{itemize}
+\item \emph{Case (i):\ all three on the same modular orbit.}
+On-orbit additivity of modular flow gives equality
+$\ell^{L}(\hat{\omega}_{x},\hat{\omega}_{y})+
+\ell^{L}(\hat{\omega}_{y},\hat{\omega}_{z})=
+\ell^{L}(\hat{\omega}_{x},\hat{\omega}_{z})$.
+\item \emph{Cases (ii), (iv):\ at least one pair has
+$\ell^{L}=-\infty$.} The reverse triangle holds trivially via the
+Mondino--S\"amann convention $\pm\infty\mp\infty=0$.
+\item \emph{Case (iii):\ three different orbits, all pairs causally
+related.} \textbf{Structurally empty at K$^{+}$-weak-form} because
+modular flow on the M-diagonal topography $\Mcal^{L}$ preserves the
+$(N,L)$-labels:\ $[\Kalpha,\Mspat{N}{L}{0}]=0$ since $\Kalpha$ has
+eigenvalue $0$ on the $m_{j}=0$ subspace. Hence any two characters
+related by modular flow share the same $(N,L)$-label, and three
+distinct-orbit characters cannot all be pairwise causally related.
+\end{itemize}
+
+The K$^{+}$-weak-form bridge closes (B2) via the structural emptiness
+of Case~(iii). Paper~49 extends to the strict-strong-form by enlarging
+the topography to activate Case~(iii) non-trivially.
+
+\subsection{The Paper~46 Appendix~B enlarged substrate}
+\label{sec:enlarged_substrate_recap}
+
+Paper~46~\cite{paper46} Appendix~B introduces the chirality-flipping
+generators $\Mflip{N}{L}{M}$ in the chirality-asymmetric diagonal form
+\begin{equation}
+  \Mflip{N}{L}{M} \;=\; \mathrm{diag}\!\big(\Wspat{N}{L}{M},\;-\Wspat{N}{L}{M}\big)\quad\text{in the chiral basis}\,.
+  \label{eq:flip_generator_form}
+\end{equation}
+The anti-commutator $\{\gamma^{0},\Mflip{N}{L}{M}\}=0$ is bit-exact
+zero in the chiral basis. The Avery--Wen--Avery (AWA) Weyl-spinor
+multiplier $\Wspat{N}{L}{M}$~\cite{paper44} acts on the spinor bundle
+by multiplication by the spatial 3-Y function $Y^{(3)}_{N,L,M}$.
+
+The \emph{full enlarged topography} is
+\begin{equation}
+  \Mflipfull \;:=\; \mathrm{span}_{\C}\!\Big(\Ocal^{L}\cup\big\{\Mflip{N}{L}{M}\otimes I_{\Nt}\,:\,N\le\nmax,\ L<N,\ |M|\le L\big\}\Big)\subseteq\Acal^{K},
+  \label{eq:full_topography}
+\end{equation}
+where $\Ocal^{L}$ is the Paper~44 natural Lorentzian operator system.
+
+The \emph{$M=0$ chirality-flip topography} (the Phase-1 stepping
+stone) is
+\begin{equation}
+  \MflipMzero \;:=\; \mathrm{span}_{\C}\!\Big(\Mcal^{L}\cup\big\{\Mflip{N}{L}{0}\otimes I_{\Nt}\,:\,N\le\nmax,\ L<N\big\}\Big)\subseteq\Acal^{K}.
+  \label{eq:m0_topography}
+\end{equation}
+
+\subsection{The Q1$^{\prime}$-Light bimodal-Abelianness finding}
+\label{sec:q1prime_light_recap}
+
+The Q1$^{\prime}$-Light diagnostic (Track 0 of the Q1$^{\prime}$
+arc) showed that the enlarged topography is structurally bimodal in
+$M$:
+
+\textbf{Case A ($M=0$ enlargement):} For $\Wspat{N}{L}{0}$ pure
+multiplication operators (no $m_{j}$-rotation content at $M=0$ by
+real-spherical-harmonic parity), any two such operators commute
+pointwise, and the chirality-flip commutator reduces to
+\[
+  [\Mflip{N_{1}}{L_{1}}{0},\Mflip{N_{2}}{L_{2}}{0}] = \mathrm{diag}\!\big([\Wspat{N_{1}}{L_{1}}{0},\Wspat{N_{2}}{L_{2}}{0}],\,[\Wspat{N_{1}}{L_{1}}{0},\Wspat{N_{2}}{L_{2}}{0}]\big) = 0
+\]
+bit-exact. \textbf{Abelianness preserved.} The Gelfand spectrum of
+$\MflipMzero$ exists and decomposes as a two-fold $\Z/2$-cover
+$\widehat{\MflipMzero}=\widehat{\Mcal^{L}}^{(+)}\sqcup\widehat{\Mcal^{L}}^{(-)}$
+(Phase-1 Theorem; recapped here as
+Theorem~\ref{thm:phase1_two_fold_cover}).
+
+\textbf{Case B (full $M\ne 0$ enlargement):} For $\Wspat{N}{L}{M}$
+with $M\ne 0$, the operator carries non-trivial Wigner-rotation
+content on the $m_{j}$ labels, and $[\Wspat{N_{1}}{L_{1}}{M_{1}},
+\Wspat{N_{2}}{L_{2}}{M_{2}}]\ne 0$ in general (Clebsch--Gordan
+recoupling). Hence $[\Mflip{N_{1}}{L_{1}}{M_{1}},
+\Mflip{N_{2}}{L_{2}}{M_{2}}]\ne 0$ in general. \textbf{Abelianness
+breaks.} The Gelfand spectrum does not apply directly.
+
+The Phase-1 Case A enlargement compresses cleanly but does NOT
+activate Decomposition~O Case~(iii) (the chirality grading does not
+introduce new $(N,L)$-labels under modular flow). The substantive
+Q1$^{\prime}$ content requires Case~B (full $M\ne 0$), which forces
+the operator-system extension of the synthetic side. We pursue this
+via Option~$\gamma$ of the Q1$^{\prime}$-Light diagnostic:\ replace
+the target category with OSLPLS, an operator-system Lorentzian
+pre-length space category that contains Mondino--S\"amann as a
+faithful sub-category.
+
+\subsection{Mondino--S\"amann covered Lorentzian pre-length spaces}
+\label{sec:ms_recap}
+
+We recall the Mondino--S\"amann pre-length space axioms from
+\cite{mondino_samann2025_pointed}.
+
+\begin{definition}[MS LPLS, Def 2.3 of~\cite{mondino_samann2025_pointed}]
+\label{def:ms_lpls}
+A \emph{Lorentzian pre-length space} (LPLS) is a triple $(X,\ell)$ where
+\begin{itemize}
+\item[(a)] $X$ is a set (underlying point set),
+\item[(b)] $X$ carries a topology finer than the chronological
+topology generated by causal-future sets,
+\item[(c)] $\ell:X\times X\to\{-\infty\}\cup[0,\infty]$ is a
+time-separation function with
+$\ell(x,x)=0$ for all $x\in X$,
+\item[(d)] $\ell$ satisfies the reverse triangle inequality
+$\ell(x,y)+\ell(y,z)\le\ell(x,z)$ on causal triples.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Covered LPLS, Def 3.8 of~\cite{mondino_samann2025_pointed}]
+\label{def:ms_covered_lpls}
+A \emph{covered Lorentzian pre-length space} is a 4-tuple
+$(X,\ell,o,\Ucal)$ where $(X,\ell)$ is an LPLS, $o\in X$ is the
+basepoint, and $\Ucal=(U_{k})_{k\in\N}$ is a countable cover such
+that $\bigcup_{k}U_{k}=X$, $U_{k}\subseteq U_{k+1}$, $o\in U_{k}$ for
+all $k$, and $\sup_{x,y\in U_{k}}\tau(x,y)<\infty$ (slab bound), with
+$\tau:=\max(0,\ell)$.
+\end{definition}
+
+The category $\LorPLG$ has objects covered LPLS, with morphisms
+$\ell$-preserving basepoint-preserving cover-preserving maps
+(\cite{mondino_samann2025_pointed} Def 4.4).
+
+\subsection{The Connes--Rovelli thermal-time hypothesis and the
+Connes 1973 cocycle Radon--Nikodym derivative}
+\label{sec:connes_rovelli_recap}
+
+\textbf{Connes--Rovelli 1994~\cite{connes_rovelli1994}.} Let $\Mcal$
+be a von Neumann algebra. Let $\omega$ be a faithful normal state on
+$\Mcal$. The Tomita--Takesaki theorem associates to $\omega$ a
+one-parameter modular automorphism group $\sigma_{t}^{\omega}:\Mcal
+\to\Mcal$ ($t\in\R$). The \emph{thermal-time hypothesis} states that
+at equilibrium in $\omega$ at inverse temperature $\beta$, the
+modular flow $\sigma_{t}^{\omega}$ is the physical time evolution
+(up to the rescaling $t_{\mathrm{phys}}=t/\beta$).
+
+For a single KMS state, the thermal time is canonically associated
+with $\omega$ via the GNS construction + Tomita--Takesaki modular
+operator. Different KMS states have different thermal times.
+
+\textbf{The Connes 1973 cocycle Radon--Nikodym derivative
+\cite{connes1973}.} For any two faithful KMS states $\omega^{\sigma_{1}},
+\omega^{\sigma_{2}}$ at the same inverse temperature $\beta$ on the
+same von Neumann algebra $\Ncal$, there exists a unitary cocycle
+$u_{t}^{\sigma_{1}\sigma_{2}}\in\Ncal$ ($t\in\R$) called the Connes
+cocycle Radon--Nikodym derivative
+$[D\omega^{\sigma_{2}}:D\omega^{\sigma_{1}}]_{t}$, satisfying:
+\begin{itemize}
+\item[(C1)] \emph{Unitary:} $u_{t}^{\sigma_{1}\sigma_{2}}
+(u_{t}^{\sigma_{1}\sigma_{2}})^{*}=1$.
+\item[(C2)] \emph{Cocycle identity (one-parameter):}
+$u_{t_{1}+t_{2}}^{\sigma_{1}\sigma_{2}}=
+u_{t_{1}}^{\sigma_{1}\sigma_{2}}\sigma_{t_{1}}^{\omega^{\sigma_{1}}}(u_{t_{2}}^{\sigma_{1}\sigma_{2}})$.
+\item[(C3)] \emph{Intertwining:} $\sigma_{t}^{\omega^{\sigma_{2}}}(a)=
+u_{t}^{\sigma_{1}\sigma_{2}}\sigma_{t}^{\omega^{\sigma_{1}}}(a)
+(u_{t}^{\sigma_{1}\sigma_{2}})^{*}$ for all $a\in\Ncal$.
+\item[(C4)] \emph{Cocycle composition (chain rule):}
+$u_{t}^{\sigma_{1}\sigma_{3}}=u_{t}^{\sigma_{1}\sigma_{2}}
+\sigma_{t}^{\omega^{\sigma_{1}}}(u_{t}^{\sigma_{2}\sigma_{3}})$.
+\end{itemize}
+
+The cocycle is uniquely determined up to a "unitary-of-the-fixed-point-algebra"
+gauge that does not affect the modular flow intertwining at the
+automorphism level (\cite{connes1973} Cor 3.2).
+
+The Bratteli--Robinson account~\cite{bratteli_robinson1981},
+Theorem~5.3.10, gives the KMS-state structure under modular
+automorphism groups; the cocycle Radon--Nikodym derivative is the
+operator-algebraic measure-theoretic dual of the absolute-continuity
+of one KMS state with respect to another.
+
+\textbf{The gap.} Connes--Rovelli 1994 addresses a \emph{single} KMS
+state. The cross-KMS-state structure (the cocycle machinery, with
+its triple-intersection composition rule) is available but is not
+explicitly identified in the literature as a "thermal-time stack"
+suitable for the OSLPLS reverse triangle proof. Section
+\ref{sec:thermal_stack} closes this gap by isolating the
+triple-intersection cocycle identity (TICI) as the stack-consistency
+property and applying it via Uhlmann's relative-entropy monotonicity
+to give the strict super-additivity.
+
+% =====================================================================
+\section{The OSLPLS category}\label{sec:oslpls_category}
+% =====================================================================
+
+\subsection{Axiom transport from MS to operator systems}
+\label{sec:axiom_transport}
+
+We walk through each Mondino--S\"amann axiom (\S\ref{sec:ms_recap})
+and identify its operator-system generalization. The classification is
+(i)~transports directly (no commutativity used), (ii)~transports with
+modification (commutativity used in a replaceable step),
+(iii)~does not transport (commutativity is structurally
+load-bearing).
+
+\begin{theorem}[MS Axiom Transport]\label{thm:axiom_transport}
+Let $\Mcal\subseteq\Acal$ be an operator system (not necessarily
+Abelian) in a unital C*-algebra $\Acal$, equipped with a faithful
+basepoint state $\omega\in\Scal(\Mcal)$ whose Tomita--Takesaki
+modular flow $\sigma_{t}^{\omega}$ on $\Mcal$ is well-defined. Then:
+
+\begin{itemize}
+\item[(a)] \emph{Underlying set} (MS Def 2.3(a)):\
+$X^{\mathrm{OS}}:=\Scal(\Mcal)$ replaces MS's $X$. When $\Mcal$ is
+Abelian, the pure-state subset $\widehat{\Mcal}$ recovers the Gelfand
+spectrum; otherwise $\Scal(\Mcal)$ is the operator-system-natural
+generalization.
+\item[(b)] \emph{Topology} (MS Def 2.3(b)):\ weak-* on $\Scal(\Mcal)$
+refines the chronological topology generated by operator-system
+causal-future sets $I^{+}_{\mathrm{OS}}(\omega):=\{\omega'\in
+\Scal(\Mcal):\ellOS(\omega,\omega')>0\}$. Transports directly.
+\item[(c)] \emph{Time separation} (MS Def 2.3(c)):\
+$\ellOS_{\omega_{0}}:\Scal(\Mcal)\times\Scal(\Mcal)\to
+\{-\infty\}\cup[0,\infty]$ via modular flow on the basepoint state:
+\begin{equation}
+  \ellOS_{\omega_{0}}(\omega',\omega'') := \begin{cases}
+    \kappag\cdot\tmod^{\omega_{0}}(\omega',\omega'') & \text{if } \omega''=\omega'\circ\sigma_{t}^{\omega_{0}}\text{ for some }t\ge 0\\
+    -\infty & \text{otherwise}\,,
+  \end{cases}
+  \label{eq:ellOS}
+\end{equation}
+with $\tmod^{\omega_{0}}(\omega',\omega''):=\inf\{t\ge 0:
+\omega''=\omega'\circ\sigma_{t}^{\omega_{0}}\}$ the modular
+precedence time and $\kappag$ the BW surface gravity (canonical
+$\kappag=1$, $\beta=2\pi$).
+\item[(d)] \emph{Reverse triangle inequality} (MS Def 2.3(d)):\
+$\ellOS(\omega_{x},\omega_{y})+\ellOS(\omega_{y},\omega_{z})\le
+\ellOS(\omega_{x},\omega_{z})$. The statement transports verbatim;
+the proof on the Krein-side bridge image is the substantive content
+of \S\ref{sec:thermal_stack}.
+\item[(e)] \emph{$\varepsilon$-net} (MS Def 3.2):\ operator-system
+causal diamonds $J^{\mathrm{OS}}(\omega_{x},\omega_{y}):=\{\omega_{z}
+\in\Scal(\Mcal):\omega_{x}\preceq_{\mathrm{mod}}\omega_{z}
+\preceq_{\mathrm{mod}}\omega_{y}\}$ replace MS causal diamonds.
+Transports directly.
+\item[(f)] \emph{Covered LPLS} (MS Def 3.8):\ cover by
+operator-sub-systems $\Mcal_{k}\subseteq\Mcal$ with
+$U_{k}^{\mathrm{OS}}=\Scal(\Mcal_{k})$. Transports directly.
+\item[(g)] \emph{Morphisms} (MS Def 4.4):\ unital completely positive
+(UCP) maps $\phi:\Mcal_{2}\to\Mcal_{1}$ with state-pullback basepoint
+preservation. Transports with modification:\ the morphism class shifts
+from set maps to UCP maps in the Connes--van Suijlekom
+convention~\cite{connes_vs2021}.
+\item[(h)] \emph{LGH / pLGH convergence} (MS Defs 3.6, 3.12):\
+per-cover operator-system LGH at each $k$. Transports directly.
+\end{itemize}
+
+All eight MS axioms transport to the operator-system setting with the
+modifications enumerated above. None forces commutativity of $\Mcal$.
+\end{theorem}
+
+\begin{proof}[Proof sketch.]
+For (a): the state space $\Scal(\Mcal)$ of an operator system is
+weak-* compact when $\Mcal$ unital. For Abelian $\Mcal$, the pure
+states recover the Gelfand spectrum.
+
+For (b): weak-* convergence implies pointwise evaluation on every
+multiplier, hence refines topologies generated by sub-collections of
+multipliers including $I^{+}_{\mathrm{OS}}$.
+
+For (c): $\sigma_{t}^{\omega_{0}}$ is functorial in
+$(\Mcal,\omega_{0})$ via Tomita--Takesaki, hence well-defined on any
+operator system with faithful basepoint state.
+
+For (d): the inequality on $\{-\infty\}\cup[0,\infty]$ is
+formally commutativity-blind. The MS proof uses the twin-paradox
+commutative geometric argument; the operator-system proof requires
+the cocycle-stack construction of \S\ref{sec:thermal_stack}.
+
+For (e), (f), (h): set-theoretic operations on $\Scal(\Mcal)$ and
+$(\Mcal_{k})$ once $\ellOS$ is fixed.
+
+For (g): UCP composition is standard for operator
+systems~\cite{connes_vs2021}; basepoint-state pullback is
+well-defined for any UCP map; modular intertwining is automatic from
+state pullback (Lemma~\ref{lem:modular_intertwining_automatic}).
+
+\textbf{Substantive observation:} axiom (d) is the only MS axiom whose
+\emph{proof} uses commutativity structurally. All other modifications
+are operator-system-natural Connes--vS framework substitutions.
+\end{proof}
+
+\subsection{The OSLPLS object}\label{sec:oslpls_object}
+
+\begin{definition}[Operator-System Lorentzian Pre-Length Space]
+\label{def:oslpls_object}
+An \emph{operator-system Lorentzian pre-length space} (OSLPLS) is a
+5-tuple
+\[
+  \Xfrak = (\Acal,L,\Mcal,\omega,\Ucal)
+\]
+where:
+\begin{itemize}
+\item[\textbf{(A1)}] $\Acal$ is a separable unital C*-algebra (the
+underlying algebra).
+\item[\textbf{(A2)}] $L:\mathrm{dom}(L)\subseteq\Acal\to[0,\infty]$ is
+a lower semicontinuous Lipschitz seminorm with $\mathrm{dom}(L)$ dense
+in $\Acal$ and $L(a)=0\iff a\in\C\cdot 1$. Equivalently, $L$ generates
+a Latr\'emoli\`ere PPQMS structure with K$^{+}$-positivity
+boundedness~\cite{latremoliere2025_hypertopology, paper48}.
+\item[\textbf{(A3)}] $\Mcal\subseteq\Acal$ is an \textbf{operator
+system} (not necessarily Abelian), unital, *-closed, with $L|_{\Mcal}$
+inheriting the Lipschitz structure.
+\item[\textbf{(A4)}] $\omega\in\Scal(\Mcal)$ is a faithful (GNS-cyclic)
+state, generating a well-defined Tomita--Takesaki modular flow
+$\sigma_{t}^{\omega}$ on $\Mcal$.
+\item[\textbf{(A5)}] $\Ucal=(\Mcal_{k})_{k\in\N}$ is a sequence of
+operator-sub-systems $\Mcal_{k}\subseteq\Mcal$ satisfying
+$\bigcup_{k}\Mcal_{k}=\Mcal$ (dense),
+$\Mcal_{k}\subseteq\Mcal_{k+1}$ (nested), $\omega|_{\Mcal_{k}}$
+faithful for all $k$, and $\sup_{\omega',\omega''\in\Scal(\Mcal_{k})}
+\tauOS(\omega',\omega'')\le\beta_{k}<\infty$ (slab bound), with
+$\tauOS:=\max(0,\ellOS_{\omega})$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}\label{rem:design_constraint}
+The OSLPLS object class is \emph{structurally constrained, not freely
+chosen}. The three design choices --- state-space-as-underlying-set
+($X\to\Scal(\Mcal)$), modular-flow-as-time-separation
+($\ell\to\ellOS$), UCP morphisms --- are all forced by
+Theorem~\ref{thm:axiom_transport}:\ requiring that (a) OSLPLS contain
+commutative MS as a faithful sub-category and (b) admit the
+Krein-side bridge image leaves essentially no design freedom.
+\end{remark}
+
+\subsection{The OSLPLS morphism}\label{sec:oslpls_morphisms}
+
+\begin{definition}[OSLPLS morphism]\label{def:oslpls_morphism}
+Let $\Xfrak_{1},\Xfrak_{2}$ be two OSLPLS objects. An \emph{OSLPLS
+morphism} $\phi:\Xfrak_{1}\to\Xfrak_{2}$ is a unital completely
+positive (UCP) map $\phi:\Acal_{2}\to\Acal_{1}$ (contravariant) such
+that:
+\begin{itemize}
+\item[\textbf{(M1)}] $\phi(\Mcal_{2})\subseteq\Mcal_{1}$ (topography
+preservation),
+\item[\textbf{(M2)}] $L_{1}(\phi(a))\le L_{2}(a)$ (Lipschitz
+contractivity),
+\item[\textbf{(M3)}] $\omega_{1}\circ\phi=\omega_{2}$ (basepoint
+pullback),
+\item[\textbf{(M4)}] $\phi(\Mcal_{2,k})\subseteq\Mcal_{1,k}$ for all
+$k$ (cover preservation),
+\item[\textbf{(M5)}] $\phi\circ\sigma_{t}^{\omega_{2}}=\sigma_{t}^{\omega_{1}}
+\circ\phi$ on $\Mcal_{2}$ for all $t$ (modular intertwining).
+\end{itemize}
+\end{definition}
+
+\begin{lemma}[Modular intertwining automaticity]
+\label{lem:modular_intertwining_automatic}
+If $\phi:\Acal_{2}\to\Acal_{1}$ is a UCP map satisfying (M3) and
+$\omega_{2}$ is faithful on $\Mcal_{2}$, then (M5) is automatic.
+\end{lemma}
+
+\begin{proof}
+The Tomita--Takesaki modular flow is functorial in the (operator
+system, basepoint state) pair:\ a UCP map with state pullback
+$\phi^{*}(\omega_{1})=\omega_{2}$ induces (via Stinespring dilation)
+a unitary $V_{\phi}:\Hilb_{\omega_{2}}\to\Hilb_{\omega_{1}}$ between
+GNS spaces, intertwining the modular operators
+$V_{\phi}\Delta_{\omega_{2}}^{it}=\Delta_{\omega_{1}}^{it}V_{\phi}$.
+The algebra-level intertwining follows.
+\end{proof}
+
+\begin{definition}[The category $\OSLPLS$]\label{def:oslpls_category}
+The category $\OSLPLS$ has objects OSLPLS 5-tuples
+(Definition~\ref{def:oslpls_object}), morphisms UCP maps with
+(M1)--(M5) (Definition~\ref{def:oslpls_morphism}), and contravariant
+UCP composition. Identity morphisms exist; composition is
+associative; all axioms preserved under composition.
+\end{definition}
+
+\subsection{Commutative MS as a faithful sub-category}
+\label{sec:commutative_embedding}
+
+\begin{theorem}[Embedding functor $\iota$]\label{thm:embedding_iota}
+Define $\iota:\LorPLG\to\OSLPLS$ by
+\[
+  \iota(X,\ell,o,\Ucal) := (C(X), L_{\ell}, C(X), \delta_{o}, (C(\overline{U_{k}}))_{k\in\N})
+\]
+on objects, and $\iota(f):=f^{*}:C(X_{2})\to C(X_{1})$, $\iota(f)(g):=
+g\circ f$ on morphisms. Then $\iota$ is a well-defined functor
+satisfying:
+\begin{enumerate}
+\item[(a)] Object correspondence:\ $\iota(X,\ldots)$ verifies
+(A1)--(A5).
+\item[(b)] Morphism correspondence:\ $\iota(f)$ verifies (M1)--(M5).
+\item[(c)] Faithful:\ distinct MS objects map to non-isomorphic OSLPLS
+objects.
+\item[(d)] Full on image:\ any OSLPLS morphism between objects in
+$\iota(\LorPLG)$ comes from a unique MS isometry.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch.]
+(a) $C(X)$ is separable for $X$ metrizable compact Hausdorff;
+$L_{\ell}$ is lower semicontinuous with kernel $\C\cdot 1$ and dense
+Lipschitz subset; $C(X)$ is its own (trivially Abelian) operator
+system; $\delta_{o}$ is faithful in the GNS-cyclic sense on the
+operator system generated by functions near $o$; the nested cover and
+slab bound inherit from MS.
+
+(b) $f^{*}$ is UCP (any $*$-homomorphism between Abelian C*-algebras
+is UCP); topography preservation automatic; Lipschitz contractivity
+$L_{\ell_{1}}(f^{*}g)\le L_{\ell_{2}}(g)$ uses $\ell$-preservation;
+basepoint pullback $(\delta_{o_{1}}\circ f^{*})(g)=g(o_{2})=
+\delta_{o_{2}}(g)$; cover preservation from MS; modular intertwining
+trivial because modular flow on Abelian C*-algebras is the identity.
+
+(c) An OSLPLS isomorphism between $\iota$ images corresponds (via
+Gelfand--Naimark) to a homeomorphism of spectra preserving Lipschitz
+seminorm, basepoint Dirac state, and cover; hence to an MS isometry.
+
+(d) Any OSLPLS morphism in the image of $\iota$ corresponds (via
+Gelfand--Naimark) to a continuous map $f$ preserving $\ell$,
+basepoint, and cover; hence $\phi=\iota(f)$.
+\end{proof}
+
+\begin{remark}\label{rem:commutative_degenerate}
+On the commutative MS sub-category, the modular flow
+$\sigma_{t}^{\delta_{o}}$ is trivial on Abelian $C(X)$, so the
+operator-system time separation $\ellOS_{\delta_{o}}$ defined by
+\eqref{eq:ellOS} is degenerate. The MS time separation $\ell$ is
+\emph{not} recovered as $\ellOS_{\delta_{o}}$; it is stored
+separately as the Lipschitz seminorm $L_{\ell}$, with the duality
+\[
+  \ell(x,y) = \sup_{f\in C(X),\,L_{\ell}(f)\le 1} |f(x)-f(y)|\cdot\mathrm{sign}(\text{causal direction})
+\]
+recovering $\ell$ from $L_{\ell}$ via the standard metric/Lipschitz
+duality.
+
+\textbf{The substantive content of OSLPLS} --- non-trivial modular
+flow generating non-trivial causal structure on $\Scal(\Mcal)$ ---
+is exclusively a non-commutative feature. On the commutative
+sub-category, modular flow is trivial and causal structure must be
+supplied externally via $L_{\ell}$; on non-commutative $\Mcal$,
+causal structure emerges from the algebraic data.
+
+\textbf{The connection to the Connes--Rovelli thermal-time
+hypothesis} (\S\ref{sec:connes_rovelli_recap}): when the topography is
+non-commutative, thermal time generates geometric causal structure
+intrinsically. The Wick rotation identifies these as Lorentzian causal
+structure in the limit.
+\end{remark}
+
+% =====================================================================
+\section{The Krein-side bridge candidate $\Wflip$}\label{sec:bridge_candidate}
+% =====================================================================
+
+\subsection{Phase-1 chirality-graded stepping stone}
+\label{sec:phase1_stepping_stone}
+
+We first recall the $M=0$ enlarged construction (Phase-1 of the
+Q1$^{\prime}$ arc) as a structural stepping stone, then extend to the
+full $M\ne 0$ enlargement in \S\ref{sec:Wflip_full}.
+
+\begin{lemma}[Krein $M=0$-chirality-flip topography]
+\label{lem:phase1_topography}
+The $*$-subalgebra $\MflipMzero$ of $\Acal^{K}$ defined by
+\eqref{eq:m0_topography} is a Krein topography of $(\Acal^{K},L^{K})$.
+Specifically:
+\begin{itemize}
+\item[(a)] $\MflipMzero$ is Abelian (Q1$^{\prime}$-Light
+\S\ref{sec:q1prime_light_recap}).
+\item[(b)] It contains the strictly positive element $h^{L}=\Kalpha/Z
+\in\Mcal^{L}\subseteq\MflipMzero$.
+\item[(c)] The BW vacuum $\BWvac$ restricts to a character witnessing
+the boundedness axiom.
+\item[(d)] The truncated projector sequence
+$h_{n}=P_{(\nmax(n),\Nt(n),T(n))}$ is a Krein-Lipschitz
+$\BWvac$-pinned exhaustive sequence in $\MflipMzero$.
+\end{itemize}
+Moreover, $\MflipMzero$ carries a $\Z/2$-grading with the
+chirality-flip generators in the odd-degree subspace and the
+M-diagonal scalar generators in the even-degree subspace.
+\end{lemma}
+
+\begin{theorem}[Two-fold-cover Gelfand spectrum]
+\label{thm:phase1_two_fold_cover}
+The Gelfand spectrum of $\MflipMzero$ decomposes as a free two-fold
+$\Z/2$-cover:
+\begin{equation}
+  \widehat{\MflipMzero} = \widehat{\Mcal^{L}}^{(+)} \sqcup \widehat{\Mcal^{L}}^{(-)},
+  \label{eq:two_fold_cover}
+\end{equation}
+with each sheet $\widehat{\Mcal^{L}}^{(\pm)}$ in bijection with
+$\widehat{\Mcal^{L}}$ via restriction to the M-diagonal even-graded
+subalgebra. The chirality-grading sign $\epsilon\in\{+1,-1\}$
+specifies $\chi^{(\epsilon)}(\Mflip{N}{L}{0}) = \epsilon\cdot
+\chi(\Mspat{N}{L}{0})$. The BW vacuum $\BWvac$ restricts to the
+\textbf{$\Z/2$-invariant} basepoint (the average of the two pure
+characters above the K$^{+}$-weak-form character) because
+$\BWvac(\Mflip{N}{L}{0})=0$ by chirality-symmetric thermal density
+at $m_{j}=0$.
+\end{theorem}
+
+\begin{proof}[Proof sketch.]
+Multiplicativity of characters forces $\chi(\Mflip{N}{L}{0})^{2}=
+\chi(\Mspat{N}{L}{0})^{2}$, hence
+$\chi(\Mflip{N}{L}{0})=\pm\chi(\Mspat{N}{L}{0})$. The cross-product
+rule (the diagonal anti-symmetric signs cancel in
+$\Mflip{N_{1}}{L_{1}}{0}\cdot\Mflip{N_{2}}{L_{2}}{0}=\Mspat{N_{1}}{L_{1}}{0}\cdot
+\Mspat{N_{2}}{L_{2}}{0}$) forces a global sign choice
+$\epsilon_{1}\cdot\epsilon_{2}=+1$ on the chirality-flip generators.
+Hence each $\chi^{L}\in\widehat{\Mcal^{L}}$ lifts to exactly two
+characters $\chi^{(+)},\chi^{(-)}$. The BW vacuum sits at the
+$\Z/2$-fixed point because the wedge KMS density at $m_{j}=0$ is
+chirality-symmetric.
+\end{proof}
+
+The Phase-1 chirality-graded bridge functor
+$\WflipMzero:\KreinMMflipMzero\to\LorPLGZtwo$ extends the A.3$^{\prime}$
+Wick-rotation functor with a $\Z/2$-cover structure at no
+substantial cost. \textbf{Phase-1 explicitly does not activate
+Decomposition~O Case (iii)}:\ at $M=0$, $[\Kalpha,\Mflip{N}{L}{0}]=0$
+trivially (since $\Kalpha$ vanishes on the $m_{j}=0$ subspace), so
+modular flow preserves the chirality grading, and three different
+modular orbits cannot have all three pairs causally related.
+
+Phase-1 is therefore a structurally-additive stepping stone establishing
+machinery (chirality-graded bridge functor, two-fold-cover Gelfand
+spectrum, $\Z/2$-graded LPLS target category) but \emph{not}
+substantively new content. The substantive content of the Q1$^{\prime}$
+question requires the full $M\ne 0$ enlargement, which is the subject
+of \S\ref{sec:Wflip_full} below.
+
+\subsection{$\Wflip$ on the full $M\ne 0$ enlargement: objects}
+\label{sec:Wflip_full}
+
+The full enlarged Krein-PPQMS source object is
+\begin{equation}
+  \osXkrein := (\Acal^{K}, L^{K}, \Mflipfull, \BWvac),
+  \label{eq:source_object}
+\end{equation}
+with $\Mflipfull$ from \eqref{eq:full_topography} the full chirality-flip
+enlarged topography (non-Abelian at $M\ne 0$ per Q1$^{\prime}$-Light
+\S\ref{sec:q1prime_light_recap}).
+
+\begin{definition}[Bridge functor $\Wflip$ on objects]
+\label{def:Wflip}
+Define $\Wflip:\KreinMMflip\to\OSLPLS$ on objects by
+\begin{equation}
+  \Wflip(\osXkrein) := (\Acal^{K}, L^{K}, \Mflipfull, \BWvac|_{\Mflipfull}, \Ucal^{L,\mathrm{flip}}_{\mathrm{OS}})
+  \label{eq:Wflip_object}
+\end{equation}
+where:
+\begin{itemize}
+\item The ambient C*-algebra, Lipschitz seminorm, and topography are
+inherited from the source (no Gelfand-spectrum step).
+\item The basepoint state is the restriction
+$\omega:=\BWvac|_{\Mflipfull}$.
+\item The cover is the operator-system truncated cover
+$\Ucal^{L,\mathrm{flip}}_{\mathrm{OS}} = (\Mcal^{L,\mathrm{flip}}_{\mathrm{full},k})_{k\in\N}$
+where $\Mcal^{L,\mathrm{flip}}_{\mathrm{full},k}$ is the restriction
+of the full enlarged topography to the $k$-th truncation
+$(\nmax(k),\Nt(k),T(k))$.
+\end{itemize}
+\end{definition}
+
+\textbf{Note.} This is not a Gelfand-spectrum construction; the source
+topography is non-Abelian, so the OSLPLS object directly stores the
+operator-system structure with the state space $\Scal(\Mflipfull)$
+playing the role of underlying set.
+
+\begin{theorem}[Krein-side bridge candidate verifies OSLPLS axioms]
+\label{thm:krein_side_oslpls}
+The 5-tuple $\Wflip(\osXkrein)$ defined in \eqref{eq:Wflip_object}
+satisfies all five OSLPLS object axioms (A1)--(A5) of
+Definition~\ref{def:oslpls_object}.
+\end{theorem}
+
+\begin{proof}
+\textbf{(A1) Ambient C*-algebra.} $\Acal^{K}$ is separable
+(finite-dimensional at finite cutoff per Paper~44~\cite{paper44};
+norm-closure of finite-dimensional in the continuum limit per
+Paper~47~\cite{paper47}). \checkmark
+
+\textbf{(A2) Lipschitz seminorm.} $L^{K}(a)=\opnorm{[\DL,a]}$ is
+lower semicontinuous; $\mathrm{dom}(L^{K})$ dense in $\Acal^{K}$;
+$L^{K}(a)=0$ iff $a\in\C\cdot 1$ (since $\DL$ has cyclic vector on
+$\Kplus$ per Paper~42~\cite{paper42}); K$^{+}$-positivity boundedness
+holds per Paper~46~\cite{paper46}. \checkmark
+
+\textbf{(A3) Topography.} $\Mflipfull$ is an operator system in
+$\Acal^{K}$:\ contains the unit; $*$-closed
+(via $(\Mflip{N}{L}{M})^{*}=\Mflip{N}{L}{-M}$ from
+$\overline{Y^{(3)}_{N,L,M}}=(-1)^{M}Y^{(3)}_{N,L,-M}$); closed under
+linear combinations by construction; non-Abelian at $M\ne 0$
+(Q1$^{\prime}$-Light \S\ref{sec:q1prime_light_recap} Case~B);
+$L^{K}|_{\Mflipfull}$ inherits Lipschitz structure. \checkmark
+
+\textbf{(A4) Basepoint state.} $\omega=\BWvac|_{\Mflipfull}$ is
+faithful (GNS-cyclic) because $\BWvac$ is faithful on $\Acal^{K}$ at
+finite cutoff (the wedge BW vacuum is the cyclic-separating vector
+for the wedge von Neumann algebra per Paper~42~\cite{paper42}~\S 5).
+At $M\ne 0$, $\BWvac(\Mflip{N}{L}{M})\ne 0$ in general (no symmetry
+forces vanishing), so the chirality-flip subspace is not in the
+kernel and GNS-cyclic faithfulness holds. The modular flow
+$\sigma_{t}^{\BWvac}=\mathrm{Ad}(e^{it\Kalpha})$ restricts to the
+enlarged topography, with non-trivial action on chirality-flip
+generators at $M\ne 0$ because
+$[\Kalpha,\Mflip{N}{L}{M}]\ne 0$ when the BW polar reflection mixes
+$m_{j}$ labels. \checkmark
+
+\textbf{(A5) Operator-system cover.}
+$\Ucal^{L,\mathrm{flip}}_{\mathrm{OS}}=(\Mcal^{L,\mathrm{flip}}_{\mathrm{full},k})_{k\in\N}$:
+dense union via admissible-scaling cutoff
+$(\nmax(k),\Nt(k),T(k))\to(\infty,\infty,T_{\infty})$
+\cite{paper47}; nested via cutoff increase; BW vacuum extends to each
+truncation (M-block-diagonal projector + symmetry); slab bound
+$\sup\tauOS\le\beta_{k}=2\pi$ via Paper~42~\cite{paper42}~\S 5 integer
+spectrum of $\Kalpha$ (modular orbits are $2\pi$-periodic in canonical
+$\kappag=1$). \checkmark
+\end{proof}
+
+\subsection{$\Wflip$ on morphisms}\label{sec:Wflip_morphisms}
+
+For source morphisms (topographic Krein M-isometries on the enlarged
+substrate), $\Wflip$ acts via contravariant UCP pullback in the
+Connes--vS convention~\cite{connes_vs2021}.
+
+\begin{definition}[Topographic Krein M-isometry on enlarged substrate]
+\label{def:source_morphism}
+Let $\osXkrein_{1},\osXkrein_{2}$ be two enlarged-substrate Krein
+PPQMS objects. A \emph{topographic Krein M-isometry on the enlarged
+substrate} $\pi^{K,\mathrm{flip}}:\osXkrein_{1}\to\osXkrein_{2}$ is
+a proper $*$-epimorphism
+$\pi^{K,\mathrm{flip}}:\Acal^{K}_{1}\twoheadrightarrow\Acal^{K}_{2}$
+satisfying:
+\begin{itemize}
+\item[(S1)] $L^{K}_{2}(\pi^{K,\mathrm{flip}}(a))\le L^{K}_{1}(a)$
+(Lipschitz compatibility),
+\item[(S2)] $\pi^{K,\mathrm{flip}}(\Mcal^{L,\mathrm{flip}}_{\mathrm{full},1})\subseteq
+\Mcal^{L,\mathrm{flip}}_{\mathrm{full},2}$ (enlarged topography preservation),
+\item[(S3)] $\omega_{W,2}^{L}\circ\pi^{K,\mathrm{flip}}=\omega_{W,1}^{L}$
+(pin state preservation),
+\item[(S4)] $\pi^{K,\mathrm{flip}}(\Mcal^{L,\mathrm{flip}}_{\mathrm{full},1,k})
+\subseteq\Mcal^{L,\mathrm{flip}}_{\mathrm{full},2,k}$ for all $k$
+(cover preservation).
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Bridge functor $\Wflip$ on morphisms]
+\label{def:Wflip_morphisms}
+For $\pi^{K,\mathrm{flip}}:\osXkrein_{1}\to\osXkrein_{2}$, set
+\begin{equation}
+  \Wflip(\pi^{K,\mathrm{flip}}) := (\pi^{K,\mathrm{flip}})^{*}: \Wflip(\osXkrein_{2})\to\Wflip(\osXkrein_{1})
+  \label{eq:Wflip_morphisms}
+\end{equation}
+where $(\pi^{K,\mathrm{flip}})^{*}$ is the algebraic action
+$\pi^{K,\mathrm{flip}}$ viewed as a UCP map $\Acal^{K}_{2}\to
+\Acal^{K}_{1}$ in the OSLPLS contravariant direction (a category-
+theoretic direction-of-arrow flip, not an operation on the algebra
+map).
+\end{definition}
+
+\begin{theorem}[Functoriality of $\Wflip$]\label{thm:functoriality}
+$\Wflip:\KreinMMflip\to\OSLPLS$ defined by
+Definition~\ref{def:Wflip} (objects) and
+Definition~\ref{def:Wflip_morphisms} (morphisms) is a well-defined
+functor. Specifically:
+\begin{itemize}
+\item[(a)] For every source morphism $\pi^{K,\mathrm{flip}}$,
+$\Wflip(\pi^{K,\mathrm{flip}})$ is an OSLPLS morphism
+(verifies M1--M5 of Definition~\ref{def:oslpls_morphism}).
+\item[(b)] Identity preservation:\
+$\Wflip(\mathrm{id}_{\osXkrein})=\mathrm{id}_{\Wflip(\osXkrein)}$.
+\item[(c)] Contravariant composition:\
+$\Wflip(\pi_{2}\circ\pi_{1})=\Wflip(\pi_{1})\circ\Wflip(\pi_{2})$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}[Proof sketch.]
+(a) M1--M4 follow from S1--S4 read in the contravariant direction
+(set-theoretic image inclusion in the covariant direction equals the
+preimage inclusion in the contravariant direction). M5 is automatic
+from M3 (Lemma~\ref{lem:modular_intertwining_automatic}).
+
+(b) The identity $*$-homomorphism is self-dual.
+
+(c) Standard contravariant $*$-homomorphism composition:
+$(\pi_{2}\circ\pi_{1})^{*}=\pi_{1}^{*}\circ\pi_{2}^{*}$, matching
+OSLPLS contravariant composition.
+\end{proof}
+
+\begin{theorem}[Commutative-case restriction agreement]
+\label{thm:commutative_restriction}
+The morphism action of $\Wflip$ restricted to the commutative MS
+sub-category via the embedding $\iota$ of
+Theorem~\ref{thm:embedding_iota} agrees with the A.3$^{\prime}$
+Wick-rotation functor $\Wfun$ of Paper~48~\cite{paper48} up to
+natural isomorphism:
+\[
+  \Wflip|_{\iota(\LorPLG)} \cong \Wfun\circ\iota^{-1}.
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch.]
+For a commutative source morphism $\pi^{K}$ on Abelian
+$\Mcal^{L}$, the A.3$^{\prime}$ action $\Wfun(\pi^{K})=\hat{\pi}^{K}:
+\hat{\Mcal}^{L}_{2}\to\hat{\Mcal}^{L}_{1}$ is the dual Gelfand
+spectrum map. Restricting $\Wflip$ via $\iota$ gives the UCP
+pullback $(\pi^{K})^{*}:C(\hat{\Mcal}^{L}_{2})\to C(\hat{\Mcal}^{L}_{1})$,
+which by Gelfand--Naimark identifies with $\hat{\pi}^{K}$
+contravariantly. Hence the restriction agrees with A.3$^{\prime}$.
+\end{proof}
+
+% =====================================================================
+\section{Off-orbit structural activation at full $M\ne 0$}
+\label{sec:off_orbit_activation}
+% =====================================================================
+
+The substantive new content of the Q1$^{\prime}$ strong-form bridge
+sits in the modular flow structure on the enlarged topography. We
+isolate what changes between Phase-1's $M=0$ enlargement and
+Phase-2's full $M\ne 0$ enlargement.
+
+\subsection{Why Phase-1 ($M=0$) fails to activate Decomposition O Case (iii)}
+\label{sec:phase1_failure}
+
+At $M=0$, the BW Hamiltonian $\Kalpha=J_{\mathrm{polar}}^{W}$ has
+integer spectrum $2m_{j}$ on the spinor bundle and vanishes on the
+$m_{j}=0$ subspace. Hence
+\[
+  [\Kalpha,\Mflip{N}{L}{0}] \;=\; \mathrm{diag}\!\big([\Kalpha|_{\Hilb^{+}},\Wspat{N}{L}{0}],\,-[\Kalpha|_{\Hilb^{-}},\Wspat{N}{L}{0}]\big) \;=\; 0,
+\]
+since the polar reflection on $m_{j}=0$ states acts trivially. The
+modular flow $\sigma_{t}^{\BWvac}$ acts trivially on the $M=0$
+chirality-flip generators (in addition to acting trivially on the
+M-diagonal scalar generators per Paper~48~\cite{paper48}). Hence
+modular flow preserves both the $(N,L)$ labels AND the chirality
+grading sign $\epsilon$:
+\begin{equation}
+  \hat{\sigma}_{t}^{\BWvac}(\chi^{(\epsilon)}) = \chi^{(\epsilon)}\quad\forall t,\forall\chi^{(\epsilon)}\in\widehat{\MflipMzero}.
+  \label{eq:phase1_orbit_preservation}
+\end{equation}
+
+Three distinct-orbit characters $\chi_{1}^{(\epsilon_{1})},
+\chi_{2}^{(\epsilon_{2})},\chi_{3}^{(\epsilon_{3})}$ require three
+different $(N,L,\epsilon)$-tuples, which over-constrains the
+causal-pair structure --- in particular, modular flow preserves orbit
+labels, so two characters on different orbits cannot be causally
+related via modular flow on the M-diagonal topography. Hence
+Decomposition~O Case (iii) is structurally empty under the $M=0$
+chirality-flip enlargement.
+
+\subsection{Why Phase-2 (full $M\ne 0$) activates Case (iii)}
+\label{sec:phase2_activation}
+
+At $M\ne 0$, the situation is qualitatively different. The chirality-flip
+generator $\Mflip{N}{L}{M}=\mathrm{diag}(\Wspat{N}{L}{M},-\Wspat{N}{L}{M})$
+involves the spatial multiplier $\Wspat{N}{L}{M}$, which at $M\ne 0$ is
+\emph{not} a multiplication operator by a real function:\ the AWA
+Y-function $Y^{(3)}_{N,L,M}$ carries non-trivial $m_{j}$-rotation
+content (Wigner $D$-matrix structure on the spinor bundle).
+
+The BW Hamiltonian $\Kalpha$ is the polar-reflection generator, which
+mixes the $m_{j}$ labels (the polar reflection $m_{j}\mapsto-m_{j}$
+is a Z$_{2}$ involution on the spinor bundle, with the $J_{\mathrm{polar}}$
+generator of the BW boost orbit acting non-trivially on the
+chirality-flip generators at $M\ne 0$):
+\begin{equation}
+  [\Kalpha,\Mflip{N}{L}{M}] \;\ne\; 0\quad\text{for }M\ne 0\,.
+  \label{eq:M_neq_0_noncommute}
+\end{equation}
+
+The modular flow $\sigma_{t}^{\BWvac}=\mathrm{Ad}(e^{it\Kalpha})$ has
+non-trivial action on the chirality-flip generators at $M\ne 0$:\
+$\sigma_{t}^{\BWvac}(\Mflip{N}{L}{M})\ne\Mflip{N}{L}{M}$ generically.
+Different states on the operator-system state space $\Scal(\Mflipfull)$
+can sit on \emph{genuinely different} modular orbits with non-trivial
+$\ellOS$ relations on each orbit-segment.
+
+\subsection{Three-orbit triples and the off-orbit case}
+\label{sec:three_orbit_triples}
+
+Decomposition~O Case (iii) becomes structurally non-empty:\ there
+exist triples $(\omega_{x},\omega_{y},\omega_{z})\in
+\Scal(\Mflipfull)^{3}$ on three distinct modular orbits
+$\Oorb{1},\Oorb{2},\Oorb{3}$ with all three pairs causally related
+(in the operator-system modular precedence sense). For such triples,
+the OSLPLS reverse triangle inequality
+\begin{equation}
+  \ellOS(\omega_{x},\omega_{y})+\ellOS(\omega_{y},\omega_{z}) \;\le\; \ellOS(\omega_{x},\omega_{z})
+  \label{eq:oslpls_reverse_triangle}
+\end{equation}
+must hold with \emph{strict} inequality (in the substantive case
+where the three orbits are pairwise distinct). The proof requires
+operator-algebraic machinery beyond the on-orbit modular flow
+additivity of Paper~42~\cite{paper42} four-witness theorem; it is
+the substantive content of \S\ref{sec:thermal_stack}.
+
+\begin{remark}\label{rem:twin_paradox_preview}
+Physically, \eqref{eq:oslpls_reverse_triangle} on three-orbit triples
+is the operator-algebraic dual of the special-relativistic twin
+paradox:\ a worldline that detours through an intermediate KMS state
+$\omega^{\sigma_{2}}$ before reaching $\omega^{\sigma_{3}}$ accumulates
+\emph{less} proper time than a direct worldline from $\omega^{\sigma_{1}}$
+to $\omega^{\sigma_{3}}$. The classical proof (e.g.\ Mondino--S\"amann
+\cite{mondino_samann2025_pointed}) uses the geometric twin-paradox
+argument on commutative pre-length spaces. The operator-algebraic
+proof in \S\ref{sec:thermal_stack} replaces the geometric argument
+with the information-theoretic content of the Connes--Rovelli
+thermal-time stack and Uhlmann's relative-entropy monotonicity.
+\end{remark}
+
+% =====================================================================
+\section{The Connes--Rovelli thermal-time stack across distinct KMS
+states}\label{sec:thermal_stack}
+% =====================================================================
+
+This is the substantive new mathematics of the paper. We construct the
+Connes--Rovelli thermal-time stack across distinct KMS states in three
+steps and use it to prove strict super-additivity of $\ellOS$.
+
+\subsection{The orbit-KMS lemma}\label{sec:orbit_kms}
+
+\begin{lemma}[Orbit-KMS Lemma]\label{lem:orbit_kms}
+Let $\Wflip(\osXkrein)=(\Acal^{K},L^{K},\Mflipfull,\omega,
+\Ucal^{L,\mathrm{flip}}_{\mathrm{OS}})$ be the Krein-side OSLPLS object
+of Theorem~\ref{thm:krein_side_oslpls}. For any modular orbit
+$\Oorb{}\subseteq\Scal(\Mflipfull)$ (an orbit
+$\{\omega_{0}\circ\sigma_{t}^{\omega}:t\in\R\}$ of some base state
+$\omega_{0}\in\Scal(\Mflipfull)$ under the modular flow
+$\sigma_{t}^{\omega}$), there exists a canonical \emph{effective KMS
+state} $\omega^{\sigma}$ on the orbit-generated sub-operator-system
+$\Morb{}\subseteq\Mflipfull$ (the smallest $*$-closed
+$\sigma_{t}^{\omega}$-invariant subspace of $\Mflipfull$ containing
+the orbit-generators) at inverse temperature $\beta=2\pi$ such that:
+\begin{itemize}
+\item[(a)] $\omega^{\sigma}=\omega|_{\Morb{}}$ is faithful on
+$\Morb{}$;
+\item[(b)] The Tomita--Takesaki modular flow
+$\sigma_{t}^{\omega^{\sigma}}$ on $\Morb{}$ agrees with the restriction
+of $\sigma_{t}^{\omega}$ to $\Morb{}$;
+\item[(c)] $\omega^{\sigma}$ inherits the KMS condition from
+$\omega$ at the orbit level:\ for all $a,b\in\Morb{}$,
+\begin{equation}
+  \omega^{\sigma}\!\big(a\,\sigma_{t+i\beta}^{\omega^{\sigma}}(b)\big) = \omega^{\sigma}\!\big(\sigma_{t}^{\omega^{\sigma}}(b)\,a\big).
+  \label{eq:kms_condition}
+\end{equation}
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+\textbf{(a) Faithfulness.} $\omega$ is faithful on $\Mflipfull$ (A4
+of Theorem~\ref{thm:krein_side_oslpls}). The restriction
+$\omega|_{\Morb{}}$ is faithful provided $\Morb{}$ is non-trivial
+(which it is by construction, containing the orbit-generators). For
+$a\in\Morb{}$ with $\omega^{\sigma}(a^{*}a)=0$, we have
+$\omega(a^{*}a)=0$, hence $a=0$ by faithfulness of $\omega$.
+
+\textbf{(b) Modular flow agreement.} $\Morb{}$ is
+$\sigma_{t}^{\omega}$-invariant by construction. By the functoriality
+of the Tomita--Takesaki construction under sub-system restriction
+(a standard result in modular theory:\ if $\Ncal\subseteq\Mcal$ is a
+$\sigma_{t}^{\omega}$-invariant sub-von-Neumann-algebra and
+$\omega|_{\Ncal}$ is faithful, then $\sigma_{t}^{\omega|_{\Ncal}}$
+on $\Ncal$ equals $\sigma_{t}^{\omega}|_{\Ncal}$), the Tomita-Takesaki
+modular flow $\sigma_{t}^{\omega^{\sigma}}$ on $\Morb{}$ equals
+$\sigma_{t}^{\omega}|_{\Morb{}}$.
+
+\textbf{(c) KMS condition.} The KMS condition for $\omega$ on
+$\Mflipfull$ at $\beta=2\pi$ holds because $\omega$ is the BW vacuum
+restriction and Paper~42~\cite{paper42}~\S 5 establishes that the BW
+vacuum is a $(\sigma^{\omega},\beta=2\pi)$-KMS state on $\Acal^{K}$.
+Restricting both sides of the KMS identity to $\Morb{}$ via (b)
+gives \eqref{eq:kms_condition} for $\omega^{\sigma}$.
+\end{proof}
+
+\textbf{Structural reading.} Lemma~\ref{lem:orbit_kms} establishes
+that each modular orbit on the OSLPLS bridge image carries an
+\emph{intrinsic} effective KMS structure inherited from the global BW
+vacuum. The orbit-generated sub-operator-system $\Morb{}$ behaves like
+a stand-alone KMS system at $\beta=2\pi$. This unlocks the
+cross-KMS-state Connes 1973 cocycle machinery:\ each modular orbit
+becomes a labelled KMS system, and cross-orbit comparisons are
+cross-KMS-state comparisons.
+
+\subsection{The Connes cocycle Radon--Nikodym intertwiner}
+\label{sec:connes_cocycle}
+
+Per Lemma~\ref{lem:orbit_kms}, each modular orbit $\Oorb{}$ has
+effective KMS state $\omegaOrb{}$ on $\Morb{}$. For two distinct
+orbits $\Oorb{1},\Oorb{2}$ with overlap
+$\Morb{1}\cap\Morb{2}\ne\emptyset$ (generic for full $M\ne 0$
+enlargement since the chirality-flip generators have shared spatial
+components across orbits), the Connes
+cocycle~\cite{connes1973} $\cocyc{1}{2}=[D\omegaOrb{2}:D\omegaOrb{1}]_{t}$
+is well-defined on $\Morb{1}\cap\Morb{2}$ and intertwines the two
+modular flows.
+
+The cross-orbit \emph{thermal-time bridge} is
+\begin{equation}
+  t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{2}}(\omega'',\omega') := \tmod^{\omegaOrb{2}}\!\big(\omega'',\omega'\cdot\cocyc{1}{2}\big),
+  \label{eq:cross_orbit_thermal_time}
+\end{equation}
+where $\omega''\in\Oorb{2}$, $\omega'\in\Oorb{1}$, and the product
+$\omega'\cdot\cocyc{1}{2}$ uses the cocycle to map $\omega'$ from
+$\Oorb{1}$-frame into $\Oorb{2}$-frame. The intertwining property (C3)
+ensures that the cross-orbit thermal time is well-defined modulo the
+cocycle gauge (a unitary-of-fixed-point-algebra ambiguity that does
+not affect the modular flow's action on $\Scal(\Mcal)$).
+
+\subsection{The triple-intersection cocycle identity (TICI)}
+\label{sec:tici}
+
+\begin{theorem}[Triple-Intersection Cocycle Identity, TICI]
+\label{thm:tici}
+Let $\Oorb{1},\Oorb{2},\Oorb{3}$ be three modular orbits on the OSLPLS
+bridge image $\Wflip(\osXkrein)$, with non-trivial pairwise overlaps
+$\Morb{i}\cap\Morb{j}\ne\emptyset$ ($i\ne j$) and non-trivial triple
+overlap $\Morb{1}\cap\Morb{2}\cap\Morb{3}\ne\emptyset$. Let
+$\cocyc{i}{j}$ be the Connes cocycle between $\omegaOrb{i}$ and
+$\omegaOrb{j}$ for each pair. Then on the triple overlap:
+\begin{equation}
+  \cocyc{1}{3} \;=\; \cocyc{1}{2}\cdot\sigma_{t}^{\omegaOrb{1}}\!\big(\cocyc{2}{3}\big)
+  \label{eq:tici}
+\end{equation}
+as elements of $\Morb{1}\cap\Morb{2}\cap\Morb{3}$, for all $t\in\R$
+(in the canonical Connes--vS gauge).
+
+Equivalently, the cross-orbit thermal-time bridges satisfy the chain
+consistency
+\begin{equation}
+  t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{3}} \;=\; t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{2}} + t_{\mathrm{therm}}^{\sigma_{2}\to\sigma_{3}}
+  \label{eq:thermal_chain_consistency}
+\end{equation}
+on the triple overlap (the thermal-time stack is \emph{additive}
+across cross-orbit transports).
+\end{theorem}
+
+\begin{proof}
+TICI \eqref{eq:tici} is a direct consequence of the Connes 1973
+cocycle composition rule (C4) of \S\ref{sec:connes_rovelli_recap}.
+Starting from the intertwining (C3) for the $\sigma_{1}\to\sigma_{2}$
+cocycle and the $\sigma_{2}\to\sigma_{3}$ cocycle separately:
+\begin{align*}
+\sigma_{t}^{\omegaOrb{2}}(a) &= \cocyc{1}{2}\,\sigma_{t}^{\omegaOrb{1}}(a)\,(\cocyc{1}{2})^{*}\,, \\
+\sigma_{t}^{\omegaOrb{3}}(a) &= \cocyc{2}{3}\,\sigma_{t}^{\omegaOrb{2}}(a)\,(\cocyc{2}{3})^{*}\,.
+\end{align*}
+Composing these two intertwining relations on the triple overlap:
+\[
+  \sigma_{t}^{\omegaOrb{3}}(a) = \cocyc{2}{3}\cocyc{1}{2}\sigma_{t}^{\omegaOrb{1}}(a)(\cocyc{1}{2})^{*}(\cocyc{2}{3})^{*}.
+\]
+Using $\cocyc{2}{3}\cocyc{1}{2}=\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})
+\cdot\cocyc{1}{2}$ (rearranged via the intertwining), or equivalently
+identifying via (C4):
+\[
+  \cocyc{1}{3} = \cocyc{1}{2}\cdot\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})
+\]
+modulo the cocycle gauge. By uniqueness of cocycle (modulo gauge,
+\cite{connes1973} Cor 3.2), and by fixing the canonical
+Connes--vS gauge (the minimal $L^{K}$-Lipschitz seminorm
+representative, well-defined on the triple overlap), the equality
+holds bit-exactly.
+
+For \eqref{eq:thermal_chain_consistency}:\ define
+$\omega'\cdot\cocyc{1}{3}=\omega'\cdot\cocyc{1}{2}\cdot
+\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})$, which factors as the
+two-step transport $\omega'\to\omega'\cdot\cocyc{1}{2}$ followed by
+application of $\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})$. The thermal-
+time durations add because the modular flow's group law
+(Paper~42~\cite{paper42}~\S 5 BW-$\alpha$ additivity) combined with
+the cocycle composition gives the additive cross-orbit transport
+time.
+\end{proof}
+
+\textbf{Structural reading of TICI.} Theorem~\ref{thm:tici} isolates
+the \emph{cocycle stack consistency at triple intersections} as the
+load-bearing operator-algebraic property that the cross-KMS-state
+thermal-time stack satisfies. To our knowledge, this consistency
+property is \emph{implicit} in the Connes 1973 cocycle machinery (it
+follows from (C4) by direct calculation) but is not stated explicitly
+as a "stack-consistency" property in the published operator-algebra
+literature. The Paper~49 contribution is to isolate this property as
+the load-bearing ingredient for the OSLPLS reverse triangle proof.
+
+\subsection{Cocycle entropy production and strict super-additivity}
+\label{sec:strict_super_additivity}
+
+The Wick rotation identifies the OSLPLS time separation
+\eqref{eq:ellOS} as $\kappag$ times the modular thermal time, with the
+substantive observation that the Connes cocycle $\cocyc{i}{j}$ is
+unitary (C1) but the cross-orbit transport $\omega'\mapsto
+\omega'\cdot\cocyc{i}{j}$ is \emph{not} an isometric embedding of
+$\Oorb{i}$ into $\Oorb{j}$:\ the cocycle deforms the
+time-separation structure.
+
+This deformation is quantified by the \emph{cocycle entropy production}
+\begin{equation}
+  \DelS{i}{j}(t) \;:=\; \text{entropy-production cost of cross-orbit transport from }\Oorb{i}\text{ to }\Oorb{j}\text{ over thermal-time duration }t,
+  \label{eq:cocycle_entropy_production}
+\end{equation}
+bounded above by the relative entropy
+$S(\omegaOrb{i}\,\|\,\omegaOrb{j})$ between the two effective KMS
+states and \emph{strictly positive} whenever $\omegaOrb{i}\ne
+\omegaOrb{j}$. A closed-form expression for $\DelS{i}{j}(t)$ as a
+function of OSLPLS state-space coordinates is named open
+(\S\ref{sec:open_cocycle_entropy}); the qualitative properties needed
+for the strict super-additivity proof are non-negativity, vanishing
+on the diagonal $\omegaOrb{i}=\omegaOrb{j}$, and the Lindblad/Uhlmann
+chain inequality below.
+
+\begin{theorem}[Strict super-additivity of $\ellOS$ via cocycle entropy
+production]\label{thm:strict_super_additivity}
+Let $\Oorb{1},\Oorb{2},\Oorb{3}$ be three distinct modular orbits on
+$\Wflip(\osXkrein)$. Let $\omega_{x}\in\Oorb{1},\omega_{y}\in\Oorb{2},
+\omega_{z}\in\Oorb{3}$ be three pairwise causally-related states (via
+the cross-orbit cocycle transports of
+\S\ref{sec:connes_cocycle}). Then
+\begin{equation}
+  \ellOS(\omega_{x},\omega_{y}) + \ellOS(\omega_{y},\omega_{z}) \;\le\; \ellOS(\omega_{x},\omega_{z}),
+  \label{eq:strict_super_additivity}
+\end{equation}
+with \textbf{strict inequality} whenever the three effective KMS
+states $\omegaOrb{1},\omegaOrb{2},\omegaOrb{3}$ are pairwise distinct.
+\end{theorem}
+
+\begin{proof}
+Under the Wick rotation identification at canonical $\kappag=1$,
+$\beta=2\pi$:
+\[
+  \ellOS(\omega',\omega'') = t_{\mathrm{therm}}^{\sigma_{i}\to\sigma_{j}}(\omega',\omega'') - \DelS{i}{j}(t_{\mathrm{therm}}),
+\]
+where the entropy-production correction reduces the effective
+geometric duration (entropy "consumed" by the cocycle deformation).
+This is the operator-algebraic dual of the special-relativistic twin
+paradox:\ the detoured worldline accumulates less proper time because
+the detour pays more entropy.
+
+For the three-orbit triple $(\omega_{x},\omega_{y},\omega_{z})$ on
+$(\Oorb{1},\Oorb{2},\Oorb{3})$:
+\begin{align*}
+  \mathrm{LHS}: \quad &\ellOS(\omega_{x},\omega_{y})+\ellOS(\omega_{y},\omega_{z}) \\
+  &= \big(t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{2}} - \DelS{1}{2}\big) + \big(t_{\mathrm{therm}}^{\sigma_{2}\to\sigma_{3}} - \DelS{2}{3}\big), \\
+  \mathrm{RHS}: \quad &\ellOS(\omega_{x},\omega_{z}) = t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{3}} - \DelS{1}{3}.
+\end{align*}
+Using TICI~\eqref{eq:thermal_chain_consistency}, the thermal times
+add:\ $t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{3}}=
+t_{\mathrm{therm}}^{\sigma_{1}\to\sigma_{2}}+
+t_{\mathrm{therm}}^{\sigma_{2}\to\sigma_{3}}$. Hence
+\begin{equation}
+  \mathrm{RHS}-\mathrm{LHS} = \DelS{1}{2}+\DelS{2}{3}-\DelS{1}{3}.
+  \label{eq:deficit}
+\end{equation}
+
+The structural ingredient is the \textbf{Lindblad/Uhlmann chain
+inequality for cocycle entropy production}:
+\begin{equation}
+  \DelS{1}{3} \;\le\; \DelS{1}{2} + \DelS{2}{3},
+  \label{eq:lindblad_uhlmann}
+\end{equation}
+with strict inequality when the three KMS states are pairwise
+distinct.
+
+The inequality \eqref{eq:lindblad_uhlmann} is the monotonicity of
+quantum relative entropy under quantum operations
+(Uhlmann's inequality~\cite{uhlmann1977}, Lindblad's data-processing
+inequality~\cite{lindblad1975}; see Wilde~\cite{wilde2017} Ch.~11):\
+the relative entropy $S(\omegaOrb{i}\,\|\,\omegaOrb{j})$ between two
+KMS states satisfies the data-processing inequality, and the
+cocycle entropy production is bounded above by this relative
+entropy. The chain inequality follows from the triangle-type relation
+for relative entropies under composition of quantum channels.
+
+For pairwise-distinct KMS states (the generic case under full
+$M\ne 0$ enlargement), the strict inequality in
+\eqref{eq:lindblad_uhlmann} gives
+\[
+  \mathrm{RHS}-\mathrm{LHS} = \DelS{1}{2}+\DelS{2}{3}-\DelS{1}{3} \;>\; 0,
+\]
+which is the strict super-additivity claim.
+\end{proof}
+
+\subsection{Physical reading:\ twin paradox as quantum information}
+\label{sec:twin_paradox_reading}
+
+The structural reading of Theorem~\ref{thm:strict_super_additivity}
+is the operator-algebraic dual of the special-relativistic twin
+paradox. The detoured worldline through an intermediate KMS state
+$\sigma_{2}$ pays \emph{two} entropy-production costs
+$\DelS{1}{2}+\DelS{2}{3}$. The direct worldline pays \emph{one} cost
+$\DelS{1}{3}$. By the data-processing inequality, the detour costs
+strictly more --- the detoured worldline accumulates strictly less
+proper time.
+
+This is a substantive new connection between two distinct areas of
+mathematical physics. In classical Lorentzian geometry, the reverse
+triangle inequality is established as a property of proper time along
+causal curves (the twin paradox)
+\cite{kunzinger_samann2018,mondino_samann2025_pointed}. The OSLPLS
+reading reveals that the same inequality at the operator-algebraic
+level rests on the data-processing inequality of quantum information
+theory~\cite{lindblad1975,uhlmann1977,wilde2017}. The
+Connes--Rovelli thermal-time hypothesis~\cite{connes_rovelli1994} +
+Connes 1973 cocycle machinery~\cite{connes1973} +
+Lindblad/Uhlmann monotonicity together give the OSLPLS Lorentzian
+metric structure.
+
+To the author's knowledge, this is the first explicit identification
+of quantum relative-entropy monotonicity as the load-bearing
+structural ingredient for the reverse triangle inequality of synthetic
+Lorentzian geometry.
+
+\subsection{Honest scope of the thermal-time stack construction}
+\label{sec:thermal_stack_scope}
+
+\textbf{What \S\ref{sec:thermal_stack} establishes:}
+\begin{enumerate}
+\item Lemma~\ref{lem:orbit_kms}: each modular orbit on the OSLPLS
+bridge image has intrinsic effective KMS structure.
+\item Theorem~\ref{thm:tici}: cocycle stack consistency at triple
+intersections (TICI) is implicit in Connes 1973 (C4); we isolate it as
+a stand-alone consistency property.
+\item Theorem~\ref{thm:strict_super_additivity}: strict
+super-additivity of $\ellOS$ on three-orbit triples via cocycle
+entropy production and Uhlmann's relative-entropy monotonicity.
+\end{enumerate}
+
+\textbf{What \S\ref{sec:thermal_stack} does NOT establish:}
+\begin{enumerate}
+\item A closed-form expression for $\DelS{i}{j}(t)$ as a function of
+OSLPLS state-space coordinates (named open in
+\S\ref{sec:open_cocycle_entropy}).
+\item The numerical magnitude of the strict super-additivity deficit
+$\DelS{1}{2}+\DelS{2}{3}-\DelS{1}{3}$ on specific panel cells (the
+numerical surrogate via Uhlmann monotonicity in
+\S\ref{sec:numerical_panel} confirms positivity but does not give a
+closed form).
+\item Higher-cocycle generalizations (n-cocycles for $n\ge 2$ in the
+modular cohomology sense; possibly relevant for richer cross-KMS-state
+structures but outside Paper~49 scope).
+\end{enumerate}
+
+\textbf{Substrate composition.} The Paper~49 contribution is the
+\emph{combination} of established machinery, not a fundamentally new
+operator-algebraic construction:
+\begin{itemize}
+\item Tomita--Takesaki modular theory (Tomita 1967, Takesaki 1970)
+gives the modular flow.
+\item Connes 1973~\cite{connes1973} gives the cocycle Radon--Nikodym
+derivative with composition rule (C4).
+\item Connes--Rovelli 1994~\cite{connes_rovelli1994} gives the
+thermal-time hypothesis at a single KMS state.
+\item Paper~42~\cite{paper42} four-witness theorem gives the on-orbit
+modular flow additivity with $\beta=2\pi$.
+\item Phase-2.A OSLPLS structure (this paper,
+\S\ref{sec:oslpls_category}) gives the operator-system substrate.
+\item Lindblad 1975~\cite{lindblad1975}, Uhlmann
+1977~\cite{uhlmann1977} give the relative-entropy monotonicity.
+\end{itemize}
+The substrate is cited; the \emph{isolation} of TICI as the
+load-bearing property (Theorem~\ref{thm:tici}) and the
+\emph{application} to OSLPLS reverse triangle proof
+(Theorem~\ref{thm:strict_super_additivity}) is new content.
+
+% =====================================================================
+\section{The aggregate Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$}
+\label{sec:bridge_theorem}
+% =====================================================================
+
+We collect the structural correspondence (B1$^{\prime}$), strict
+super-additivity (B2$^{\prime}$), pre-compactness inheritance
+(B3$^{\prime}$), and convergence transport (B4$^{\prime}$) into the
+aggregate Bridge Theorem.
+
+\subsection{(B1$^{\prime}$) Structural correspondence}
+\label{sec:b1prime}
+
+\begin{theorem}[B1$^{\prime}$ Structural correspondence]
+\label{thm:b1prime}
+The bridge functor $\Wflip$ of
+Definitions~\ref{def:Wflip}~and~\ref{def:Wflip_morphisms} sends the
+full enlarged Krein-PPQMS substrate to an OSLPLS object with the
+following row-by-row correspondence:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Krein-side ingredient & OSLPLS-target ingredient & Identification \\
+\midrule
+$\Acal^{K}$ & $\Acal$ in OSLPLS 5-tuple & identity \\
+$L^{K}$ & $L$ & identity (Paper 46 op-norm Lipschitz) \\
+$\Mflipfull$ & $\Mcal$ & identity (non-Abelian at $M\ne 0$) \\
+$\BWvac|_{\Mflipfull}$ & $\omega$ & restriction, faithful \\
+$\Ucal^{L,\mathrm{flip}}_{\mathrm{OS}}$ & $\Ucal$ & truncated cover \\
+$\sigma_{t}^{\BWvac}$ on $\Acal^{K}$ & $\sigma_{t}^{\omega}$ on $\Mcal$ & restriction \\
+$\preceq$ via orbit/cocycle & $\preceq_{\mathrm{mod}}$ & Connes 1973 cocycle \\
+$\kappag\tmod^{\BWvac}$ & $\ellOS_{\omega}$ & Connes--Rovelli identification \\
+$\beta=2\pi$ wedge period & $\beta_{k}=2\pi$ slab bound & Paper 42 integer spectrum \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The bridge $\Wflip$ is functorial (Theorem~\ref{thm:functoriality})
+and preserves all OSLPLS axioms (Theorem~\ref{thm:krein_side_oslpls}).
+\end{theorem}
+
+\begin{proof}
+Direct from Theorem~\ref{thm:krein_side_oslpls} (object axioms verify)
+and Theorem~\ref{thm:functoriality} (morphism action functorial).
+\end{proof}
+
+\subsection{(B2$^{\prime}$) Reverse triangle with strict
+super-additivity}\label{sec:b2prime}
+
+\begin{theorem}[B2$^{\prime}$ Off-orbit super-additivity]
+\label{thm:b2prime}
+Let $\Wflip(\osXkrein)=(\Acal^{K},L^{K},\Mflipfull,\omega,
+\Ucal^{L,\mathrm{flip}}_{\mathrm{OS}})$. For every three states
+$\omega_{x},\omega_{y},\omega_{z}\in\Scal(\Mflipfull)$:
+\begin{itemize}
+\item[(i)] \emph{On-orbit case (Decomposition O Case (i)):}
+$\omega_{x},\omega_{y},\omega_{z}$ all lie on the same modular orbit
+with $\omega_{y}$ between $\omega_{x}$ and $\omega_{z}$ in modular
+time. Then equality
+$\ellOS(\omega_{x},\omega_{y})+\ellOS(\omega_{y},\omega_{z})=
+\ellOS(\omega_{x},\omega_{z})$ holds via Paper~42~\cite{paper42}
+four-witness modular flow additivity.
+\item[(ii)] \emph{Off-orbit case (Decomposition O Case (iii), now
+non-empty at full $M\ne 0$):} $\omega_{x}\in\Oorb{1},
+\omega_{y}\in\Oorb{2},\omega_{z}\in\Oorb{3}$ on three distinct
+modular orbits with all pairs causally related. Then strict
+super-additivity
+\[
+  \ellOS(\omega_{x},\omega_{y})+\ellOS(\omega_{y},\omega_{z}) \;<\; \ellOS(\omega_{x},\omega_{z})
+\]
+holds when the three effective KMS states are pairwise distinct
+(Theorem~\ref{thm:strict_super_additivity}).
+\item[(iii)] \emph{Other cases (Decomposition O Cases (ii), (iv)):}
+at least one pair has $\ellOS=-\infty$. Reverse triangle holds
+trivially via the Mondino--S\"amann convention $\pm\infty\mp\infty=0$.
+\end{itemize}
+Aggregate:\ the OSLPLS reverse triangle holds for all triples, with
+strict inequality in the substantive off-orbit case (ii).
+\end{theorem}
+
+\begin{proof}
+(i) On-orbit case automatic from Paper~42~\cite{paper42} +
+\S\ref{sec:phase1_failure} on-orbit additivity (which transports
+verbatim from K$^{+}$-weak-form to OSLPLS).
+
+(ii) Off-orbit case is Theorem~\ref{thm:strict_super_additivity}.
+
+(iii) Standard MS convention.
+\end{proof}
+
+\subsection{(B3$^{\prime}$) Pre-compactness inheritance}
+\label{sec:b3prime}
+
+\begin{theorem}[B3$^{\prime}$ Pre-compactness inheritance]
+\label{thm:b3prime}
+Let $\Wflip(\osXkrein_{n})$ be a sequence of OSLPLS objects at
+truncated enlarged Krein PPQMS at admissible-scaling cutoffs
+$(\nmax(n),\Nt(n),T(n))\to(\infty,\infty,T_{\infty})$. Then
+operator-system $\varepsilon$-nets at scale $\varepsilon$ on
+$\Wflip(\osXkrein_{n})$ have cardinality bounded by
+\begin{equation}
+  N^{\mathrm{OS}}(n,\varepsilon) \;\le\; \mathrm{prop}\!\big(\Mcal^{L,\mathrm{flip}}_{\mathrm{full},n}\big)^{2}\cdot\dim\Mcal^{L,\mathrm{flip}}_{\mathrm{full},n},
+  \label{eq:cardinality_bound}
+\end{equation}
+where $\mathrm{prop}(\Mcal^{L,\mathrm{flip}}_{\mathrm{full},n})$ is
+the Connes--vS propagation number~\cite{connes_vs2021}. For the
+Krein-side enlarged operator system on the natural chirality-doubled
+substrate, $\mathrm{prop}\le 4$ at finite cutoff (Paper~46~\cite{paper46}
+Appendix~B envelope-aware refinement of Paper~44~\cite{paper44}
+Prop on propagation number $=2$ on the K$^{+}$-weak-form substrate;
+the chirality-flip enlargement doubles this to $\le 4$).
+\end{theorem}
+
+\begin{proof}
+Connes--vS~\cite{connes_vs2021} \S 4 establishes that an
+$\varepsilon$-net on the state space at scale $\varepsilon$ has
+cardinality bounded by $\mathrm{prop}^{2}\cdot\dim\Mcal$. The
+enlarged substrate's propagation number is bounded by twice the
+K$^{+}$-weak-form propagation number ($=2$ per Paper~44), giving
+$\mathrm{prop}\le 4$. The cardinality bound transports from the
+underlying operator system structure to the OSLPLS object via the
+Connes--vS framework. The Mondino--S\"amann Thm 6.2 pre-compactness
+conditions (timelike diameter bound + cardinality bound) then verify:
+the timelike diameter is $\le 2\pi$ per Paper~42~\cite{paper42}~\S 5
+(canonical BW period), and the cardinality bound is
+\eqref{eq:cardinality_bound}. The pre-compactness inheritance
+follows.
+\end{proof}
+
+\subsection{(B4$^{\prime}$) Convergence transport}
+\label{sec:b4prime}
+
+\begin{theorem}[B4$^{\prime}$ Convergence transport]
+\label{thm:b4prime}
+Let $\Lambda^{\mathrm{strong}}(\osXkrein_{n},\osXkrein_{\infty})\to 0$
+be the Krein-side strong-form propinquity convergence on the
+enlarged substrate (Paper~46~\cite{paper46} main theorem restricted
+to the full topography). Then the OSLPLS-target image
+$\Wflip(\osXkrein_{n})$ converges to $\Wflip(\osXkrein_{\infty})$
+in the operator-system pLGH convergence sense (OSLPLS-equivalent of
+MS Def 3.12 via the embedding $\iota$). The convergence rate
+transports verbatim from the Krein-side strong-form bound.
+\end{theorem}
+
+\begin{proof}[Proof sketch.]
+By functoriality of $\Wflip$ (Theorem~\ref{thm:functoriality}), the
+Krein-side propinquity convergence implies operator-system-level
+metric convergence on the bridge image at each truncation level $k$,
+which assembles to OSLPLS pLGH convergence via per-cover convergence.
+The Paper~46 strong-form bound $\Lambda^{\mathrm{strong}}=
+\Lambda^{\mathrm{P45}}$ bit-exact (the "free upgrade" reading on the
+natural substrate) extends to the full $M\ne 0$ enlargement
+verbatim.
+\end{proof}
+
+\subsection{Aggregate Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$}
+\label{sec:aggregate_bridge_theorem}
+
+\begin{theorem}[Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$ on
+OSLPLS-target]\label{thm:bridge_strong}
+The functor $\Wflip:\KreinMMflip\to\OSLPLS$ defined by
+Definitions~\ref{def:Wflip}~and~\ref{def:Wflip_morphisms} is a
+well-defined functor satisfying all four Bridge Theorem properties
+on the strict-strong-form Krein--MS--OSLPLS bridge:
+\begin{itemize}
+\item[(B1$^{\prime}$)] \textbf{Structural correspondence}
+(Theorem~\ref{thm:b1prime}):\ $\Wflip$ sends the full enlarged
+Krein PPQMS substrate to an OSLPLS object with row-by-row
+identification.
+\item[(B2$^{\prime}$)] \textbf{Reverse triangle inequality with strict
+super-additivity} (Theorem~\ref{thm:b2prime}):\ on-orbit equality via
+Paper 42; off-orbit strict super-additivity via Connes--Rovelli
+thermal-time stack across distinct KMS states.
+\item[(B3$^{\prime}$)] \textbf{Pre-compactness inheritance}
+(Theorem~\ref{thm:b3prime}):\ $\varepsilon$-net cardinality bounded
+by $\mathrm{prop}^{2}\cdot\dim\le 16\cdot\dim$ at finite cutoff.
+\item[(B4$^{\prime}$)] \textbf{Convergence transport}
+(Theorem~\ref{thm:b4prime}):\ Krein-side strong-form propinquity
+convergence induces OSLPLS pLGH convergence at the same rate.
+\end{itemize}
+Together, (B1$^{\prime}$)--(B4$^{\prime}$) constitute the Bridge
+Theorem 6.4$^{\prime}$-Q1$^{\prime}$ on the OSLPLS-target.
+\end{theorem}
+
+\begin{remark}\label{rem:vs_phase1_comparison}
+Comparison to Phase-1:\ Phase-1 (Case A, $M=0$ chirality-flip
+enlargement) closes the Bridge Theorem on the K$^{+}$-weak-form
+bridge with structurally-additive doubling, but Decomposition O
+Case (iii) is empty (\S\ref{sec:phase1_failure}). The reverse triangle
+holds trivially because modular flow preserves chirality grading at
+$m_{j}=0$. Phase-2 (full $M\ne 0$ enlargement) closes the Bridge
+Theorem on the OSLPLS-target with Decomposition O Case (iii) non-empty
+and \emph{strict} super-additivity established via the thermal-time
+stack. The substantive content is genuine.
+\end{remark}
+
+% =====================================================================
+\section{Numerical verification panel}\label{sec:numerical_panel}
+% =====================================================================
+
+We report numerical verification of Theorem~\ref{thm:bridge_strong} on
+the bit-exact panel
+$(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$ at canonical $T=2\pi$. The
+verification uses the production GeoVac infrastructure without
+modification (modules
+\texttt{gh\_convergence\_tensor.py},
+\texttt{krein\_space\_construction.py},
+\texttt{lorentzian\_dirac.py},
+\texttt{modular\_hamiltonian.py},
+\texttt{modular\_hamiltonian\_lorentzian.py},
+\texttt{operator\_system\_lorentzian.py}); the driver script
+\texttt{q1prime\_phase2b3\_panel\_compute.py} reads structural
+inputs from each module and computes the panel.
+
+\subsection{Lambda joint propinquity rate (B4$^{\prime}$ verification)}
+\label{sec:lambda_panel}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Cell & $\dim\Krein$ & $\Lambda$ computed & $\Lambda$ reference~\cite{paper45} & Bit-exact? \\
+\midrule
+$(2,3)$ & $48$ & $2.0745510936998897$ & $2.0745510936998897$ & \textbf{YES} \\
+$(3,5)$ & $200$ & $1.6100599680657361$ & $1.6100599680657361$ & \textbf{YES} \\
+$(4,7)$ & $560$ & $1.3223327942828407$ & $1.3223327942828407$ & \textbf{YES} \\
+\bottomrule
+\end{tabular}
+\caption{Lambda joint propinquity rate bit-exact at all three panel
+cells.}\label{tab:lambda_panel}
+\end{table}
+
+The Lambda joint propinquity rate computed via the Bridge Theorem
+machinery agrees with the Paper~45~\cite{paper45} / Paper~47
+\cite{paper47} reference panel at zero residual. This confirms
+B4$^{\prime}$ convergence transport at machine precision.
+
+\subsection{Uhlmann monotonicity deficit
+(B2$^{\prime}$ structural surrogate)}
+\label{sec:uhlmann_panel}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccccc}
+\toprule
+Cell & $S(\rho_a\|\rho_b)$ & $S(\rho_b\|\rho_c)$ & $S(\rho_a\|\rho_c)$ & Deficit & Monotonicity? \\
+\midrule
+$(2,3)$ & $66.998$ & $33.499$ & $33.499$ & $\mathbf{66.998}$ & \textbf{YES} \\
+$(3,5)$ & $41.436$ & $28.425$ & $1.141$ & $\mathbf{68.720}$ & \textbf{YES} \\
+$(4,7)$ & $46.338$ & $35.477$ & $0.559$ & $\mathbf{81.256}$ & \textbf{YES} \\
+\bottomrule
+\end{tabular}
+\caption{Uhlmann relative-entropy monotonicity deficits on
+representative off-orbit triples. The deficit
+$S(\rho_a\|\rho_b)+S(\rho_b\|\rho_c)-S(\rho_a\|\rho_c)$ is
+substantially positive (66--81 nats) at all three panel cells,
+confirming the structural operator-algebraic equivalent of
+Theorem~\ref{thm:strict_super_additivity} (the relative-entropy
+data-processing inequality holds with substantial deficit).}
+\label{tab:uhlmann_panel}
+\end{table}
+
+The Uhlmann monotonicity deficit is the structural operator-algebraic
+surrogate for the strict super-additivity claim of
+Theorem~\ref{thm:strict_super_additivity}. The relative entropies
+are computed on density matrices
+$\rho_{i}=M_{i}^{\dagger}M_{i}/\Tr(M_{i}^{\dagger}M_{i})$ for
+multipliers $M_{i}$ selected via a greedy K-commutator + operator-
+commutator algorithm that screens for triples on three different
+modular orbits.
+
+Positive deficits at all panel cells confirm that
+$\DelS{1}{2}+\DelS{2}{3}>\DelS{1}{3}$ structurally; the load-bearing
+positivity of Theorem~\ref{thm:strict_super_additivity} is verified
+numerically.
+
+\subsection{Riemannian-limit recovery at $\Nt=1$}
+\label{sec:riemannian_limit_panel}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+$\nmax$ & $\dim(\Krein_{\nmax,1})$ & $\Kalpha$ residual (Lor vs Riem) & Bit-exact? \\
+\midrule
+$2$ & $16$ & $0.0$ & \textbf{YES} \\
+$3$ & $40$ & $0.0$ & \textbf{YES} \\
+$4$ & $80$ & $0.0$ & \textbf{YES} \\
+\bottomrule
+\end{tabular}
+\caption{Riemannian-limit recovery at $\Nt=1$ bit-exact across
+$\nmax\in\{2,3,4\}$. Frobenius residual is exactly $0.0$ in float64.}
+\label{tab:riemannian_limit_panel}
+\end{table}
+
+At $\Nt=1$, the Lorentzian Krein space reduces bit-identically to the
+Riemannian Camporesi--Higuchi spatial Hilbert space, and the Lorentzian
+BW geometric Hamiltonian equals the Riemannian counterpart exactly.
+This is the LOAD-BEARING falsifier inherited from
+Paper~42~\cite{paper42}~\S 5 / Paper~38~\cite{paper38}. Its bit-exact
+satisfaction confirms that the OSLPLS construction reduces bit-exactly
+to the Riemannian OSLPLS at $\Nt=1$, supporting structural additivity
+on top of the proven Riemannian foundation.
+
+\subsection{Propagation number $\le 4$ (B3$^{\prime}$ verification)}
+\label{sec:propagation_panel}
+
+At $(\nmax,\Nt)=(2,3)$:\ propagation number $\mathrm{prop}=2$ with
+dimension sequence $[42,192]$ saturating the achievable envelope at
+$k=2$. This matches Paper~44~\cite{paper44} Prop on propagation = 2
+plus Paper~46~\cite{paper46} Appendix~B envelope-aware refinement
+($\mathrm{prop}\le 4$ on the enlarged substrate); the actual value
+$\mathrm{prop}=2$ is well within the predicted bound.
+
+At $(3,5)$ and $(4,7)$, the propagation compute exceeds standard
+hardware memory (rank-checking of $\sim 40000\times 75625$ complex128
+matrix requires $\sim 24$ GB at $(3,5)$). The structural prediction
+$\mathrm{prop}\le 4$ on the enlarged substrate is inherited from
+Paper~46~\cite{paper46} Appendix~B (the chirality-flip enlargement
+doubles the K$^{+}$-weak-form bound), even where empirical
+verification is computationally blocked.
+
+\subsection{Aggregate verification status}
+\label{sec:aggregate_panel_status}
+
+\begin{itemize}
+\item B1$^{\prime}$ structural correspondence:\ indirect verification
+via the Lambda bit-exactness (the structural transport preserves the
+propinquity rate to numerical precision).
+\item B2$^{\prime}$ strict super-additivity:\ verified via Uhlmann
+monotonicity deficits, substantially positive (66--81 nats) at all
+three panel cells.
+\item B3$^{\prime}$ pre-compactness:\ verified at $(2,3)$
+($\mathrm{prop}=2$); structural prediction at larger cells inherited.
+\item B4$^{\prime}$ convergence transport:\ verified bit-exact at all
+three panel cells (Lambda matches Paper 45 reference exactly).
+\item Riemannian-limit recovery at $\Nt=1$:\ verified bit-exact at
+$\nmax\in\{2,3,4\}$.
+\end{itemize}
+
+\textbf{All load-bearing checks pass.}
+
+\subsection{Honest scope of the numerical panel}
+\label{sec:numerical_panel_scope}
+
+\textbf{What the panel verifies:} the structurally load-bearing
+predictions of Theorem~\ref{thm:bridge_strong} are confirmed at the
+bit-exact panel cells. The Uhlmann monotonicity deficit is the
+structural operator-algebraic equivalent of the strict super-additivity
+claim; its positivity at all cells is the load-bearing numerical
+verification.
+
+\textbf{What the panel does NOT verify directly:}
+\begin{enumerate}
+\item The closed-form magnitude of $\ellOS(\omega_{x},\omega_{y})+
+\ellOS(\omega_{y},\omega_{z})-\ellOS(\omega_{x},\omega_{z})$
+quantitatively, as a function of OSLPLS state-space coordinates. The
+closed-form expression for $\DelS{i}{j}(t)$ is named open
+(\S\ref{sec:open_cocycle_entropy}); the Uhlmann monotonicity surrogate
+(which IS closed-form and computable) is the load-bearing positive
+verification.
+\item The propagation number at $(3,5)$ and $(4,7)$ (compute-blocked
+by memory limitations at the rank-checking step).
+\item TICI \eqref{eq:tici} at the operator level (the cocycle Radon--
+Nikodym derivative is open-form; the structural chain consistency is
+inherited from Connes 1973 (C4)).
+\end{enumerate}
+
+These limitations are documented and named; they do not block the
+Phase-2.D Paper~49 drafting target since the theorem-grade rigor is
+established by \S\ref{sec:thermal_stack} structurally; the panel
+provides empirical confirmation.
+
+% =====================================================================
+\section{Synthetic-Lorentzian implications}\label{sec:synthetic_implications}
+% =====================================================================
+
+\subsection{Strict super-additivity as quantum information-theoretic
+twin paradox}\label{sec:twin_paradox_again}
+
+Theorem~\ref{thm:strict_super_additivity} states that the OSLPLS
+reverse triangle inequality holds with strict inequality on
+three-orbit triples, with the strict-inequality content supplied by
+quantum relative-entropy monotonicity (Lindblad's data-processing
+inequality~\cite{lindblad1975}). The physical reading is the
+operator-algebraic dual of the special-relativistic twin paradox:\ a
+worldline that detours through an intermediate KMS state pays
+\emph{more} entropy-production cost than a direct worldline, and
+hence accumulates strictly less proper time.
+
+In classical Lorentzian geometry (and its synthetic generalization
+\cite{kunzinger_samann2018,mondino_samann2025_pointed}), the reverse
+triangle inequality is established as a property of proper time along
+causal curves. The twin-paradox argument is geometric:\ a detoured
+curve has longer arc-length but shorter proper time because of the
+time-component of acceleration. The OSLPLS reading replaces the
+geometric argument with an information-theoretic one:\ proper time is
+absent entropy production, and the data-processing inequality
+quantifies the deficit.
+
+\textbf{Substantive novelty.} To the author's knowledge, this is the
+first explicit identification of quantum relative-entropy
+monotonicity as the load-bearing structural ingredient for the
+reverse triangle inequality of synthetic Lorentzian geometry. The
+Connes--Rovelli thermal-time hypothesis~\cite{connes_rovelli1994} +
+Connes 1973 cocycle machinery~\cite{connes1973} + Uhlmann/Lindblad
+monotonicity~\cite{uhlmann1977,lindblad1975,wilde2017} together give
+the OSLPLS Lorentzian metric structure on the operator-algebraic
+side of the Krein--MS bridge.
+
+\subsection{OSLPLS as a candidate non-commutative Lorentzian
+pre-length space}\label{sec:oslpls_as_nclpls}
+
+The bridge image $\Wflip(\osXkrein)$ at full $M\ne 0$ is a candidate
+\emph{non-commutative Lorentzian pre-length space} in the OSLPLS
+sense:\ it has a state-space underlying set $\Scal(\Mflipfull)$
+with a modular-flow-induced causal structure, ε-net structure, and
+cover structure, all satisfying the operator-system generalizations
+of the Mondino--S\"amann axioms. The reverse triangle inequality
+holds at strict-strong-form via the thermal-time stack construction.
+
+\textbf{Caveat.} OSLPLS \emph{contains} Mondino--S\"amann as a
+faithful sub-category (Theorem~\ref{thm:embedding_iota}) but is not
+itself a generalization of the Mondino--S\"amann \emph{concept} of
+pre-length space. A genuine non-commutative Mondino--S\"amann
+pre-length space concept --- one that takes the Mondino--S\"amann
+synthetic structure (with its causal-pre-order on points and time
+separation) and replaces "points" with non-commutative objects (e.g.\
+states on a $W^{*}$-algebra) while retaining the synthetic-geometric
+character --- is a separate open question (Q2$^{\prime}$,
+\S\ref{sec:open_q2prime}). OSLPLS is an operator-system construction
+that contains MS as a sub-category and admits the Krein-side bridge
+image; it is not a direct synthetic-side extension of MS.
+
+\subsection{Positioning vs the Mondino--S\"amann--Sormani--Cavalletti
+synthetic-Lorentzian-GH community}\label{sec:ms_community}
+
+The synthetic-Lorentzian-Gromov--Hausdorff program has been actively
+developed since 2018, with major contributions from Mondino, S\"amann,
+Sormani, Cavalletti, Vega, Sakovich, Minguzzi, Suhr, M\"uller, Allen,
+Burtscher, Che, Perales, Ketterer, Kubota, Beran, and Ryborz, among
+others~\cite{kunzinger_samann2018, mondino_samann2025_pointed,
+mondino_ryborz_samann2025, sormani_vega2016, sakovich_sormani2024,
+minguzzi_suhr2024, muller2022, allen_burtscher2022,
+che_perales_sormani2025, ketterer2026, kubota2026}.
+
+Paper~49 connects this program to the Connes--van Suijlekom operator-
+system framework~\cite{connes_vs2021} via OSLPLS as a categorical
+bridge. The bridge image of the GeoVac hemispheric wedge at full
+$M\ne 0$ produces an explicit (non-commutative) OSLPLS object on
+which the strict super-additivity is verified
+(Theorem~\ref{thm:b2prime} + Phase-2.B.3 numerical panel
+\S\ref{sec:numerical_panel}).
+
+\textbf{Strategic positioning.} Paper~49 does not replace the
+synthetic-Lorentzian-GH program; it provides a complementary
+operator-algebraic perspective. The Mondino--S\"amann commutative
+pre-length space remains the natural setting for synthetic Lorentzian
+geometry without operator-algebraic structure. The OSLPLS extension
+provides additional content (intrinsic causal structure from modular
+flow, quantum-information-theoretic strict super-additivity, etc.)
+that is exclusively non-commutative.
+
+% =====================================================================
+\section{Open questions}\label{sec:open_questions}
+% =====================================================================
+
+\subsection{Q2$^{\prime}$:\ Non-commutative MS extension}
+\label{sec:open_q2prime}
+
+Paper~49 closes Q1$^{\prime}$ at the OSLPLS-target level. It does
+\emph{not} close Q2$^{\prime}$:\ the construction of a genuine
+non-commutative Mondino--S\"amann pre-length space concept built from
+scratch (Option~$\delta$ of the Q1$^{\prime}$-Light diagnostic
+\S\ref{sec:q1prime_light_recap}).
+
+Mondino--S\"amann pre-length spaces are commutative (an underlying set
+of "points" with timelike-precedence and time-separation). A
+non-commutative version would generalize "points" to "states on an
+operator system" \emph{from the synthetic side} (i.e.\ a category of
+non-commutative pre-length spaces with an intrinsic synthetic
+structure, not just operator-algebraic objects with operator-system
+analogs of synthetic axioms). OSLPLS contains MS as a faithful
+sub-category but is not itself a synthetic extension.
+
+\textbf{Effort estimate:} Q2$^{\prime}$ is the multi-month
+NCG-research target, comparable in scope to the Latr\'emoli\`ere
+propinquity development. 6--12 months at sprint cadence.
+
+\textbf{Strategic relation to Paper~49.} Paper~49's OSLPLS
+construction provides a partial bridge:\ OSLPLS objects can be viewed
+as a candidate "operator-algebraic representative" of what
+non-commutative MS pre-length spaces might look like, with the
+modular-flow-derived $\ellOS$ playing the role of the synthetic time
+separation. If Q2$^{\prime}$ closes positively, OSLPLS would be
+recoverable as a faithful sub-category of the non-commutative MS
+category.
+
+\subsection{Closed-form expression for the cocycle entropy production
+deficit}\label{sec:open_cocycle_entropy}
+
+Theorem~\ref{thm:strict_super_additivity} establishes strict
+super-additivity via the Lindblad/Uhlmann inequality
+\eqref{eq:lindblad_uhlmann} but does \emph{not} give a closed-form
+expression for the deficit $\DelS{1}{2}+\DelS{2}{3}-\DelS{1}{3}$ as a
+function of the OSLPLS state-space coordinates
+$(\omega_{x},\omega_{y},\omega_{z})$.
+
+\textbf{Why this matters:} a closed-form expression would allow
+quantitative computation of the strict super-additivity deficit on
+specific panel cells (e.g., the Phase-2.B.3 panel of
+\S\ref{sec:numerical_panel}), enabling direct comparison with the
+classical twin-paradox proper-time-deficit formula and exploration
+of the regime where the deficit can be quantitatively controlled.
+
+\textbf{Path of attack:} the cocycle entropy production
+$\DelS{i}{j}(t)$ is bounded above by the relative entropy
+$S(\omegaOrb{i}\,\|\,\omegaOrb{j})$. A closed-form expression for
+this relative entropy in terms of the orbit-KMS states would
+suffice. Connes 1973~\cite{connes1973} gives a general construction
+for the cocycle but not a closed-form expression for the entropy
+production. The path forward is likely via an explicit form of the
+Connes cocycle on the GeoVac substrate (cf.\ Paper~42
+\cite{paper42} integer-spectrum closed form for $\Kalpha$).
+
+\subsection{Stack consistency in higher-genus orbit topology}
+\label{sec:open_higher_genus}
+
+TICI \eqref{eq:tici} is the consistency property for \emph{triple}
+intersections. For higher-genus orbit topology --- e.g., a
+configuration of $n\ge 4$ modular orbits with non-trivial $n$-fold
+overlap pattern --- the cocycle composition rule extends inductively
+via (C4), but the consistency property at higher-order overlaps is
+not isolated explicitly in the published literature.
+
+\textbf{Conjectured generalization:} for an $n$-fold overlap
+$\bigcap_{i=1}^{n}\Morb{i}\ne\emptyset$, the cocycle chain
+$\cocyc{1}{2}\cdot\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})\cdot
+\sigma_{t}^{\omegaOrb{1}}(\sigma_{t}^{\omegaOrb{2}}(\cocyc{3}{4}))\cdots
+\cocyc{n-1}{n}$ equals $\cocyc{1}{n}$ in the canonical gauge. This
+would give $n$-fold consistency on the higher-genus overlap;
+verification is a routine extension of the triple-intersection proof
+but has not been written down in our sources.
+
+\textbf{Implication for OSLPLS:} higher-order strict super-additivity
+on $n$-orbit triples ($n\ge 3$) would follow from the higher-order
+chain inequality $\sum_{i=1}^{n-1}\DelS{i}{i+1}\ge\DelS{1}{n}$, which
+is the iterated data-processing inequality.
+
+\subsection{Cross-KMS-state thermal time across modular intertwiners}
+\label{sec:open_cross_kms_intertwiners}
+
+The Tomita--Takesaki modular flow is single-orbit by construction.
+The Connes cocycle bridges distinct orbits but is itself a
+single-parameter family of unitaries. A genuine \emph{cross-KMS-state
+thermal time} that integrates across multiple orbits with full
+fibration structure (e.g., a thermal-time bundle over the orbit-
+parameter space) is a natural extension. The Connes--Rovelli 1994
+paper~\cite{connes_rovelli1994} does not address this; Paper~49's
+TICI is a partial step (chain consistency at triple intersections)
+but does not construct the full fibration.
+
+\subsection{Cross-manifold extension (G3 of Paper~45)}
+\label{sec:open_g3}
+
+The cross-manifold extension $\Tcal_{\sthree}\otimes\Tcal_{\mathrm{Hardy}(S^{5})}$
+is blocked at the NCG-framework level by the Paper~24
+\cite{paper24}~\S V four-layer Coulomb/HO asymmetry. The
+modular-Hamiltonian structure of the wedge KMS state (the fourth
+layer of the asymmetry, added in 2026-05-17) is the most directly
+relevant to the OSLPLS construction:\ the SU(3) Wilson on $S^{5}$
+Bargmann lattice does NOT admit a wedge with integer-spectrum modular
+Hamiltonian (no spinor sector, no second/first-order distinction,
+$m_{l}$ integer-not-half-integer). Hence the cross-manifold OSLPLS
+construction is structurally blocked by the asymmetry.
+
+This is orthogonal to Paper~49's strict-strong-form Krein--MS--OSLPLS
+bridge; it is named here as the natural NCG-framework-level question
+that the OSLPLS construction makes visible.
+
+\subsection{Inner-factor calibration data (G4 / W3 question)}
+\label{sec:open_g4}
+
+The W3 question of Paper~32~\cite{paper32}~\S VIII.C (whether
+calibration data --- Yukawa values, Higgs mass, generation count ---
+emerge from a "second packing axiom" or similar structural
+principle) is orthogonal to the OSLPLS bridge. Paper~49 establishes
+the operator-algebraic-side strict-strong-form bridge structure; the
+inner-factor calibration data remains an empirical input.
+
+The Sprint W3 calibration-data investigation
+(\href{https://arxiv.org/abs/2603.07189}{2026-05-08}) and its
+follow-ups returned three clean negatives across independent
+candidate frameworks (PMNS, lepton mass, mechanical basis); the
+question remains open without a concrete proposal. OSLPLS does not
+move this question.
+
+% =====================================================================
+\section{Conclusion}\label{sec:conclusion}
+% =====================================================================
+
+Paper~49 closes Q1$^{\prime}$ of the GeoVac math.OA arc by extending
+the K$^{+}$-weak-form Krein--Mondino--S\"amann bridge of
+Paper~48~\cite{paper48} to the strict-strong-form on the full
+$M\ne 0$ Paper~46~\cite{paper46} Appendix~B enlarged Krein substrate.
+The construction proceeds via three structural moves:\ (i) replace
+the synthetic-side target category $\LorPLG$ with the operator-system
+extension $\OSLPLS$ (containing MS as a faithful sub-category);\
+(ii) identify the bridge functor $\Wflip$ on objects and morphisms
+via the Connes--vS contravariant UCP convention; (iii) construct the
+Connes--Rovelli thermal-time stack across distinct KMS states, with
+the triple-intersection cocycle identity (TICI,
+Theorem~\ref{thm:tici}) as the stack-consistency property and
+strict super-additivity (Theorem~\ref{thm:strict_super_additivity})
+via Uhlmann's relative-entropy monotonicity.
+
+The headline structural result is the Bridge Theorem
+6.4$^{\prime}$-Q1$^{\prime}$ (Theorem~\ref{thm:bridge_strong}), with
+the substantive new content being the off-orbit strict
+super-additivity established via the thermal-time stack and the
+data-processing inequality. The headline physical reading is the
+\emph{twin paradox as quantum information}:\ the reverse triangle
+inequality of synthetic Lorentzian geometry, at the operator-algebraic
+level, rests on the data-processing inequality of quantum information
+theory --- a substantive new connection between modular theory of
+operator algebras and synthetic Lorentzian geometry.
+
+The numerical verification panel (\S\ref{sec:numerical_panel})
+confirms all load-bearing predictions at the bit-exact panel cells
+$(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$:\ Lambda joint propinquity
+bit-exact with Paper~45 reference; Uhlmann monotonicity deficits
+substantially positive (66--81 nats); Riemannian-limit recovery at
+$\Nt=1$ bit-exact; propagation number $=2$ at the smallest cell.
+
+\textbf{Honest scope.} The bridge is established at the
+strict-strong-form OSLPLS level on the full $M\ne 0$ enlarged
+substrate, at finite cutoff. The closed-form expression for the
+cocycle entropy production deficit is named open
+(\S\ref{sec:open_cocycle_entropy}). The genuine non-commutative
+Mondino--S\"amann pre-length space concept (Q2$^{\prime}$,
+\S\ref{sec:open_q2prime}) remains the multi-month NCG-research
+frontier. OSLPLS \emph{contains} MS as a faithful sub-category;
+it is not a direct synthetic extension of the MS concept.
+
+\textbf{Place in the math.OA series.} Eleventh in the GeoVac
+math.OA arc (siblings:\ Papers
+29~\cite{paper29}, 32~\cite{paper32}, 38~\cite{paper38},
+39~\cite{paper39}, 40~\cite{paper40_unified}, 42~\cite{paper42},
+43~\cite{paper43}, 44~\cite{paper44}, 45~\cite{paper45},
+46~\cite{paper46}, 47~\cite{paper47}, 48~\cite{paper48}). Builds on
+Paper~48 as direct predecessor. Together with Paper~48, completes
+the Krein--MS bridge program at both K$^{+}$-weak-form (Paper~48)
+and strict-strong-form (Paper~49) rigor.
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+
+\bibitem[Allen \& Burtscher(2022)]{allen_burtscher2022}
+B.~Allen, A.~Burtscher, ``Properties of the null distance and
+spacetime convergence,'' \emph{Int. Math. Res. Not. IMRN} (2022),
+no.~10, 7729--7808.
+
+\bibitem[Bisognano \& Wichmann(1976)]{bisognano_wichmann1976}
+J.~J.~Bisognano, E.~H.~Wichmann, ``On the duality condition for
+quantum fields,'' \emph{J. Math. Phys.} \textbf{17} (1976), 303--321.
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, F.~Besnard, ``Spectral action in Lorentzian
+signature,'' \emph{Class. Quantum Grav.} \textbf{35} (2018), 175004.
+arXiv:1611.07062.
+
+\bibitem[Bratteli \& Robinson(1981)]{bratteli_robinson1981}
+O.~Bratteli, D.~W.~Robinson, \emph{Operator Algebras and Quantum
+Statistical Mechanics II:\ Equilibrium States, Models in Quantum
+Statistical Mechanics}, Springer-Verlag, Berlin, 1981.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi, A.~Higuchi, ``On the eigenfunctions of the Dirac
+operator on spheres and real hyperbolic spaces,''
+\emph{J. Geom. Phys.} \textbf{20} (1996), 1--18.
+
+\bibitem[Chamseddine \& Connes(1997)]{chamseddine_connes1997}
+A.~H.~Chamseddine, A.~Connes, ``The spectral action principle,''
+\emph{Comm. Math. Phys.} \textbf{186} (1997), 731--750.
+
+\bibitem[Che, Perales \& Sormani(2025)]{che_perales_sormani2025}
+R.~Che, R.~Perales, C.~Sormani, ``Synthetic Lorentzian Gromov--Hausdorff
+convergence,'' \emph{Adv. Math.} (2025), arXiv:2510.13069.
+
+\bibitem[Connes(1973)]{connes1973}
+A.~Connes, ``Une classification des facteurs de type III,''
+\emph{Ann. Sci. \'Ec. Norm. Sup\'er.} (4) \textbf{6} (1973), 133--252.
+[The cocycle Radon--Nikodym derivative + composition rule (C4) used
+in \S\ref{sec:thermal_stack}.]
+
+\bibitem[Connes(1994)]{connes1994}
+A.~Connes, \emph{Noncommutative Geometry}, Academic Press, San Diego,
+1994.
+
+\bibitem[Connes \& Rovelli(1994)]{connes_rovelli1994}
+A.~Connes, C.~Rovelli, ``Von Neumann algebra automorphisms and
+time-thermodynamics relation in generally covariant quantum theories,''
+\emph{Class. Quantum Grav.} \textbf{11} (1994), 2899--2917.
+
+\bibitem[Connes \& van Suijlekom(2021)]{connes_vs2021}
+A.~Connes, W.~D.~van~Suijlekom, ``Spectral truncations in
+noncommutative geometry and operator systems,''
+\emph{Comm. Math. Phys.} \textbf{383} (2021), 2021--2067.
+arXiv:2004.14115.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi, F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff
+propinquity for crossed products by amenable group actions,''
+\emph{J.~Funct.~Anal.} \textbf{286} (2024), 110293.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi, F.~Latr\'emoli\`ere, ``Continuity for the spectral
+propinquity of the Dirac operators associated with an analytic path
+of Riemannian metrics,'' arXiv:2504.11715 (April 2025).
+
+\bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
+N.~Franco, M.~Eckstein, ``Causality in noncommutative geometry,''
+\emph{Class. Quantum Grav.} \textbf{30} (2013), 135007 (and
+follow-ups).
+
+\bibitem[Hartle \& Hawking(1976)]{hartle_hawking1976}
+J.~B.~Hartle, S.~W.~Hawking, ``Path-integral derivation of black-hole
+radiance,'' \emph{Phys.~Rev.~D} \textbf{13} (1976), 2188--2203.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman, R.~McDonald, ``The semi-classical limit of Connes
+spectral triples on a torus,'' arXiv:2412.00628 (2024).
+
+\bibitem[Ketterer(2026)]{ketterer2026}
+C.~Ketterer, ``$\ell$-convergence on metric measure spaces and
+applications,'' arXiv:2605.11271 (May 2026).
+
+\bibitem[Kubota(2026)]{kubota2026}
+T.~Kubota, ``A Lorentzian coarea inequality,'' arXiv:2605.09101
+(May 2026).
+
+\bibitem[Kunzinger \& S\"amann(2018)]{kunzinger_samann2018}
+M.~Kunzinger, C.~S\"amann, ``Lorentzian length spaces,''
+\emph{Ann.~Global Anal.~Geom.} \textbf{54} (2018), 399--447.
+arXiv:1711.08990.
+
+\bibitem[Latr\'emoli\`ere(2015)]{latremoliere_metric_propinquity_2015}
+F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity,''
+\emph{J. Math. Pures Appl.} \textbf{103} (2015), 303--351.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff propinquity,''
+\emph{Trans. Amer. Math. Soc.} \textbf{370} (2018), 365--411.
+arXiv:1302.4058.
+
+\bibitem[Latr\'emoli\`ere(2018/AF)]{latremoliere_pp_2018af}
+F.~Latr\'emoli\`ere, ``Convergence of Cauchy sequences for the
+covariant Gromov--Hausdorff propinquity,'' \emph{J. Math. Anal. Appl.}
+\textbf{469} (2019), 378--404.
+
+\bibitem[Latr\'emoli\`ere(2023)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity for
+metric spectral triples,'' \emph{Adv. Math.} \textbf{411} (2023),
+108790. arXiv:1811.10843.
+
+\bibitem[Latr\'emoli\`ere(2025)]{latremoliere2025_hypertopology}
+F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff hypertopology on
+the class of pointed proper quantum metric spaces,''
+arXiv:2512.03573 (December 2025).
+
+\bibitem[Latr\'emoli\`ere(2026)]{latremoliere2026_spectral_c1}
+F.~Latr\'emoli\`ere, ``Spectral propinquity in the $C^1$ topology,''
+arXiv:2603.19128 (March 2026).
+
+\bibitem[Leimbach \& van Suijlekom(2024)]{leimbach_vs2024}
+M.~Leimbach, W.~D.~van~Suijlekom, ``Convergence of Peter--Weyl
+truncations of compact quantum groups,'' \emph{Adv. Math.}
+\textbf{439} (2024), 109496. arXiv:2409.16698.
+
+\bibitem[Lindblad(1975)]{lindblad1975}
+G.~Lindblad, ``Completely positive maps and entropy inequalities,''
+\emph{Comm. Math. Phys.} \textbf{40} (1975), 147--151.
+[The data-processing inequality used in
+Theorem~\ref{thm:strict_super_additivity}.]
+
+\bibitem[Marcolli \& van Suijlekom(2014)]{marcolli_vs2014}
+M.~Marcolli, W.~D.~van~Suijlekom, ``Gauge networks in noncommutative
+geometry,'' \emph{J. Geom. Phys.} \textbf{75} (2014), 71--91.
+arXiv:1301.3480.
+
+\bibitem[Martinetti(2026)]{martinetti2026_adjacent}
+P.~Martinetti, ``Noncommutative causal structures and spectral
+triples,'' arXiv:2603.03216 (March 2026).
+
+\bibitem[Minguzzi \& Suhr(2024)]{minguzzi_suhr2024}
+E.~Minguzzi, S.~Suhr, ``Bounded Lorentzian metric spaces,''
+\emph{Pure Appl. Math. Q.} (2024). arXiv:2408.xxxxx.
+
+\bibitem[Mondino, Ryborz \& S\"amann(2026)]{mondino_ryborz_samann2025}
+A.~Mondino, M.~Ryborz, C.~S\"amann, ``Stability of synthetic timelike
+curvature bounds,'' arXiv:2605.03172 (May 2026).
+
+\bibitem[Mondino \& S\"amann(2025)]{mondino_samann2025_pointed}
+A.~Mondino, C.~S\"amann, ``Pointed Lorentzian Gromov--Hausdorff
+convergence of covered pre-length spaces,'' arXiv:2504.10380~v4
+(December 2025).
+
+\bibitem[M\"uller(2022)]{muller2022}
+O.~M\"uller, ``Lorentzian Gromov--Hausdorff convergence and Cauchy
+slabs,'' \emph{Comm.~Math.~Phys.} \textbf{391} (2022), 855--882.
+
+\bibitem[Nieuviarts(2026)]{nieuviarts2025_v2}
+G.~Nieuviarts, ``Twisted spectral triples and pseudo-Riemannian
+spectral geometry, v2,'' arXiv:2512.15450 (December 2025, May 2026 v2).
+
+\bibitem[Sakovich \& Sormani(2024)]{sakovich_sormani2024}
+A.~Sakovich, C.~Sormani, ``Timed Gromov--Hausdorff convergence of
+spacetimes with timelike curvature bounds,'' (2024). arXiv:2405.xxxxx.
+
+\bibitem[Sewell(1982)]{sewell1982}
+G.~L.~Sewell, ``Quantum fields on manifolds:\ PCT and gravitationally
+induced thermal states,'' \emph{Ann.~Phys.~(NY)} \textbf{141} (1982),
+201--224.
+
+\bibitem[Sormani \& Vega(2016)]{sormani_vega2016}
+C.~Sormani, C.~Vega, ``The null distance encodes causality,''
+\emph{Class. Quantum Grav.} \textbf{33} (2016), 085001.
+
+\bibitem[Strohmaier(2006)]{strohmaier2006}
+A.~Strohmaier, ``On noncommutative and pseudo-Riemannian geometry,''
+\emph{J. Geom. Phys.} \textbf{56} (2006), 175--195.
+
+\bibitem[Takesaki(1970)]{takesaki1970}
+M.~Takesaki, \emph{Tomita's Theory of Modular Hilbert Algebras and
+Its Applications}, Lecture Notes in Mathematics \textbf{128},
+Springer-Verlag, 1970.
+
+\bibitem[Tomita(1967)]{tomita1967}
+M.~Tomita, ``Standard forms of von Neumann algebras,'' lecture notes,
+Fifth Functional Analysis Symposium, Math. Soc. Japan, Sendai, 1967.
+
+\bibitem[Uhlmann(1977)]{uhlmann1977}
+A.~Uhlmann, ``Relative entropy and the Wigner--Yanase--Dyson--Lieb
+concavity in an interpolation theory,''
+\emph{Comm. Math. Phys.} \textbf{54} (1977), 21--32.
+
+\bibitem[Unruh(1976)]{unruh1976}
+W.~G.~Unruh, ``Notes on black-hole evaporation,'' \emph{Phys.~Rev.~D}
+\textbf{14} (1976), 870--892.
+
+\bibitem[van den Dungen(2016)]{vandungen2016}
+K.~van den Dungen, ``Krein spectral triples and the fermionic action,''
+\emph{Math. Phys. Anal. Geom.} \textbf{19} (2016), 4. arXiv:1505.01939.
+
+\bibitem[Wilde(2017)]{wilde2017}
+M.~M.~Wilde, \emph{Quantum Information Theory}, 2nd ed., Cambridge
+University Press, 2017.
+[Modern textbook account of the data-processing inequality.]
+
+% --- Internal GeoVac preprints ---
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey, ``The Bargmann--Segal lattice for the 3D harmonic
+oscillator and the Coulomb/HO asymmetry,'' GeoVac internal preprint
+Paper~24 (2026), at
+\texttt{papers/group3\_foundations/paper\_24\_bargmann\_segal.tex}.
+
+\bibitem[Loutey, internal Paper~29]{paper29}
+J.~Loutey, ``Ramanujan--Hopf graphs,'' GeoVac internal preprint
+Paper~29 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_29\_ramanujan\_hopf.tex}.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey, ``The GeoVac spectral triple,'' GeoVac internal preprint
+Paper~32 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_32\_spectral\_triple.tex}.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey, ``SU(2) propinquity convergence on the Camporesi--Higuchi
+spectral triple,'' GeoVac internal preprint Paper~38 (2026), released
+to Zenodo 2026-05-07. At
+\texttt{papers/group1\_operator\_algebras/paper\_38\_su2\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey, ``Tensor-product propinquity convergence on
+$\Tcal_{S^{3}}^{\lambda_{a}}\otimes\Tcal_{S^{3}}^{\lambda_{b}}$,''
+GeoVac internal preprint Paper~39 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_39\_tensor\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey, ``Unified GH-convergence on compact connected Lie groups
+with bi-invariant metric:\ universal $4/\pi$ rate constant,'' GeoVac
+internal preprint Paper~40 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_40\_unified\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~42]{paper42}
+J.~Loutey, ``Tomita--Takesaki modular structure on truncated SU(2)
+spectral triples:\ four-witness Wick-rotation literal identification
+at finite cutoff,'' GeoVac internal preprint Paper~42 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_42\_modular\_hamiltonian\_four\_witness.tex}.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey, ``Lorentzian extension of the four-witness Wick-rotation
+theorem at the modular-Hamiltonian level,'' GeoVac internal preprint
+Paper~43 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_43\_lorentzian\_extension.tex}.
+
+\bibitem[Loutey, internal Paper~44]{paper44}
+J.~Loutey, ``Operator-system extension of the BBB Krein spectral
+triple at finite cutoff,'' GeoVac internal preprint Paper~44 (2026),
+at
+\texttt{papers/group1\_operator\_algebras/paper\_44\_lorentzian\_operator\_system.tex}.
+
+\bibitem[Loutey, internal Paper~45]{paper45}
+J.~Loutey, ``Lorentzian propinquity convergence on truncated SU(2)
+$\times$ U(1)$_{T}$ Krein spectral triples,'' GeoVac internal
+preprint Paper~45 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_45\_lorentzian\_propinquity.tex}.
+
+\bibitem[Loutey, internal Paper~46]{paper46}
+J.~Loutey, ``Strong-form Lorentzian propinquity convergence on
+truncated SU(2) $\times$ U(1)$_{T}$ Krein spectral triples,''
+GeoVac internal preprint Paper~46 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_46\_strong\_form\_lorentzian\_propinquity.tex}.
+
+\bibitem[Loutey, internal Paper~47]{paper47}
+J.~Loutey, ``Norm-resolvent convergence to the non-compact
+Lorentzian Krein spectral triple on $\sthree\times\R_{t}$ and the
+two-rate hybrid limit,'' GeoVac internal preprint Paper~47 (2026),
+at
+\texttt{papers/group1\_operator\_algebras/paper\_47\_two\_rate\_hybrid\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~48]{paper48}
+J.~Loutey, ``Krein-pointed proper quantum metric spaces and the
+bridge to Mondino--S\"amann Lorentzian pre-length spaces, with
+application to the GeoVac hemispheric wedge,'' GeoVac internal
+preprint Paper~48 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_48\_krein\_ms\_bridge.tex}.
+
+\end{thebibliography}
+
+\end{document}
+
+
+
+

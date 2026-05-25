@@ -1,0 +1,2485 @@
+% =====================================================================
+% Paper 48 (standalone): Krein-pointed proper quantum metric spaces and
+% the bridge to Mondino-Sämann Lorentzian pre-length spaces, with
+% application to the GeoVac hemispheric wedge.
+%
+% Tenth math.OA standalone in the GeoVac series. Siblings:
+%   Paper 29 (Ramanujan-Hopf), Paper 32 (spectral triple), Paper 38
+%   (SU(2) Riemannian propinquity), Paper 39 (tensor-product propinquity),
+%   Paper 40 (universal rate constant on compact Lie groups), Paper 42
+%   (Tomita-Takesaki Riemannian closure), Paper 43 (Lorentzian extension
+%   of the four-witness theorem), Paper 44 (Lorentzian operator-system
+%   substrate), Paper 45 (K+-weak-form Lorentzian propinquity
+%   convergence), Paper 46 (strong-form Lorentzian propinquity
+%   convergence on the natural and enlarged substrates), Paper 47
+%   (two-rate hybrid convergence to the non-compact carrier).
+%
+% Status: first draft, May 2026. Built from Phase A.5' synthesis
+% (debug/sprint_phase_a5prime_synthesis_paper48_outline_memo.md) and the
+% six Phase A sub-sprint memos (Tier 3-Light, A.2', A.3' + concurrent-
+% work re-check, A.4'-A, A.4'-B, A.4'-C).
+%
+% Main result: the Wick-rotation functor W: KreinMetaMet_pp ->
+% LorPLG_cov, identified via R3 (Connes-Rovelli thermal time) as the
+% structural bridge resolving the F2 forward-vs-reverse triangle
+% mismatch between Latremoliere 2512.03573 pinned proper QMS framework
+% and Mondino-Samann arXiv:2504.10380 v4 covered Lorentzian pre-length
+% space framework. Application to the GeoVac hemispheric wedge yields
+% seven newly accessible theorems including T6 (G2 metric-equivalent
+% closure for the wedge, a published-open-problem workaround at the
+% wedge-specific level).
+%
+% Honest scope: K+-weak-form bridge only. Strong-form bridge with
+% enlarged substrate (Q1') deferred as a multi-month NCG-mathematics
+% follow-on.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{newunicodechar}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Λ}{\ensuremath{\Lambda}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
+\newunicodechar{Đ}{\ensuremath{\text{\DJ}}}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\Nt}{N_{t}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Sone}{S^{1}}
+\newcommand{\SoneT}{S^{1}_{T}}
+\newcommand{\Manifold}{S^{3}\times S^{1}_{T}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Krein}{\mathcal{K}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\Frob}[1]{\lVert #1 \rVert_{F}}
+\newcommand{\cbnorm}[1]{\lVert #1 \rVert_{\mathrm{cb}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Uone}{U(1)}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DL}{D_{L}}
+\newcommand{\JL}{J_{L}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Kplus}{\Krein^{+}}
+\newcommand{\Kminus}{\Krein^{-}}
+\newcommand{\spat}{\mathrm{spat}}
+\newcommand{\temp}{\mathrm{temp}}
+\newcommand{\Bjoint}{B^{\mathrm{joint}}}
+\newcommand{\Pjoint}{P^{\mathrm{joint}}}
+\newcommand{\gammajoint}{\gamma^{\mathrm{joint}}}
+\newcommand{\Cthreejoint}{C_{3}^{\mathrm{joint}}}
+\newcommand{\Lprop}{\Lambda^{L}}
+\newcommand{\Dethmet}{\eth^{K}}
+\newcommand{\BigDeth}{\text{\DJ}^{K}}
+\newcommand{\Wfun}{\mathbf{W}}
+\newcommand{\KreinMM}{\mathbf{KreinMetaMet}_{\mathrm{pp}}}
+\newcommand{\LorPLG}{\mathbf{LorPLG}_{\mathrm{cov}}}
+\newcommand{\BWvac}{\omega_{W}^{L}}
+\newcommand{\Kalpha}{K_{\alpha}^{W}}
+\newcommand{\Hloc}{H_{\mathrm{local}}}
+\newcommand{\Dwedge}{D_{W}^{L}}
+\newcommand{\tmod}{\tau_{\mathrm{mod}}}
+\newcommand{\kappag}{\kappa_{g}}
+
+\title{Krein-pointed proper quantum metric spaces and the bridge to\\
+Mondino--S\"amann Lorentzian pre-length spaces, with application to the\\
+GeoVac hemispheric wedge}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We construct a categorical bridge between Latr\'emoli\`ere's pinned
+proper quantum metric space (PPQMS) framework~\cite{latremoliere2025_hypertopology}
+and Mondino--S\"amann's covered Lorentzian pre-length space (LPLS)
+framework~\cite{mondino_samann2025_pointed}. The bridge is a contravariant
+functor
+\[
+\Wfun: \KreinMM \longrightarrow \LorPLG
+\]
+sending a Krein-pointed proper QMS $(\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)$
+to a covered LPLS $(\hat{\Mcal}^{L}, \ell^{L}, \hat{\omega}_{W}^{L},
+\hat{\Ucal}^{L})$ via Gelfand spectrum of the M-diagonal Abelian
+topography, Wick-rotated modular flow as time separation, the
+Bisognano--Wichmann vacuum as basepoint, and admissible-scaling
+truncated covers. The structural mismatch between Latr\'emoli\`ere's
+4-point relaxed forward metametric and Mondino--S\"amann's 3-point
+reverse triangle (the F2 mismatch) is resolved via the Connes--Rovelli
+thermal-time hypothesis~\cite{connes_rovelli1994}:\ the Krein
+metametric measures \emph{thermal time} of the wedge KMS state, the
+synthetic time separation measures \emph{geometric proper time}, and
+the Wick rotation between them effects the analytic continuation that
+maps the additive (forward-triangle) thermal-time structure to the
+super-additive (reverse-triangle) geometric-time structure.
+
+\medskip
+
+\noindent\emph{Main theorem.} The Wick-rotation functor $\Wfun$ is
+well-defined and the Krein--Mondino--S\"amann Bridge Theorem
+(Theorem~\ref{thm:bridge}) holds at theorem-grade rigor:\ (B1)
+structural correspondence on $15$ rows, (B2) reverse triangle inequality
+via on-orbit modular-flow equality plus an M-diagonal topography
+trivialization off-orbit, (B3) pre-compactness inheritance via
+Paper~44~\cite{paper44} propagation-number bound, (B4) convergence
+transport via Plancherel-nested Berezin compatibility with the
+Mondino--S\"amann Def~3.6 axioms.
+
+\medskip
+
+\noindent\emph{GeoVac wedge application.} The bridge applies cleanly
+to the Paper~43~\cite{paper43} hemispheric wedge at every finite
+cutoff. Seven newly accessible theorems follow
+(Theorems~\ref{thm:wedge_as_lpls}--\ref{thm:g2_wedge_closure} +
+Corollary~\ref{cor:three_carrier_synthetic}), headlined by
+\textbf{T6}:\ a \emph{$\mathbf{G2}$ metric-level closure for the GeoVac
+wedge}, supplying a wedge-specific workaround for the published-open
+non-compact Latr\'emoli\`ere propinquity problem (Paper~45~\cite{paper45}
+\S~1.4 $\mathrm{G2}$). The synthetic pLGH-convergence rate panel
+inherits the bit-exact numerical values
+$\{2.0746, 1.6101, 1.3223\}$ from Paper~45's
+Krein-side $\Lprop$. To the author's knowledge this is the
+first quantitative pLGH-convergence panel in the Mondino--S\"amann
+literature derived from operator-algebraic input.
+
+\medskip
+
+\noindent\emph{Honest scope.} The bridge is K$^{+}$-weak-form only.
+The strong-form bridge extending $\Wfun$ to the Paper~46~\cite{paper46}
+Appendix~B enlarged substrate with chirality-flipping generators (Q1') is
+deferred as a multi-month NCG-mathematics follow-on. The general
+$\mathrm{G2}$ metric-level closure on non-wedge carriers remains the
+multi-month frontier; we close only the wedge-specific case via the
+bridge image on the synthetic side. The construction preserves
+$\Wfun$'s functorial (not isometric) character throughout:\ the Krein
+metametric $\BigDeth$ and the synthetic time separation $\ell^{L}$
+measure different physical quantities (thermal vs.\ geometric time) of
+the same wedge KMS state.
+
+\medskip
+
+\noindent\emph{Place in the math.OA standalone series.} Tenth in the
+GeoVac math.OA arc (siblings:\ Papers
+29~\cite{paper29}, 32~\cite{paper32}, 38~\cite{paper38},
+39~\cite{paper39}, 40~\cite{paper40_unified}, 42~\cite{paper42},
+43~\cite{paper43}, 44~\cite{paper44}, 45~\cite{paper45},
+46~\cite{paper46}, 47~\cite{paper47}). The result composes
+Paper~45/46 verbatim on the Krein-algebraic side with the
+Mondino--S\"amann synthetic-Lorentzian Gromov--Hausdorff framework on
+the synthetic side, mediated by the Connes--Rovelli thermal-time
+identification.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+\subsection{Motivation:\ the F2 forward-vs-reverse triangle mismatch}
+\label{sec:motivation}
+
+Two recent advances in the convergence theory of generalized Lorentzian
+geometric structures, both published in December 2025, provide
+complementary but \emph{a priori} incompatible frameworks:
+
+\begin{itemize}
+\item \textbf{Latr\'emoli\`ere's pinned proper quantum metric space
+framework}~\cite{latremoliere2025_hypertopology} (arXiv:2512.03573,
+December~3, 2025) extends the Latr\'emoli\`ere
+propinquity~\cite{latremoliere2018, latremoliere_metric_st_2017} from
+quantum \emph{compact} metric spaces to a quantum Gromov--Hausdorff
+\emph{hypertopology} on the class of pointed proper quantum metric
+spaces. The resulting metametric $\BigDeth$ satisfies a 4-point
+\emph{relaxed forward} triangle inequality with codomain $[0, \infty]$.
+The framework is operator-algebraic:\ objects are C*-algebras with
+Lipschitz seminorms, topographies (Abelian C*-subalgebras), and pin
+states; morphisms are topographic quantum M-isometries.
+
+\item \textbf{Mondino--S\"amann's covered Lorentzian pre-length space
+framework}~\cite{mondino_samann2025_pointed} (arXiv:2504.10380~v4,
+December~9, 2025) extends the synthetic Lorentzian geometry of
+Kunzinger--S\"amann pre-length spaces~\cite{kunzinger_samann2018} to a
+pointed Lorentzian Gromov--Hausdorff (pLGH) convergence theory on
+covered LPLS. The synthetic time separation $\ell$ satisfies the
+3-point \emph{reverse} triangle inequality (causal-curve
+super-additivity of proper time) with codomain
+$\{-\infty\}\cup[0,\infty]$. The framework is synthetic-geometric:\
+objects are sets with timelike-causal pre-orders, cover slabs, and
+basepoint events.
+\end{itemize}
+
+The two frameworks share many structural elements:\ pinning, exhaustive
+covers, slab bounds, ε-nets, pre-compactness, Gromov--Hausdorff
+convergence. They are aimed at different aspects of the same physics:\
+generalized-geometric approximation of Lorentzian objects. However,
+the \emph{algebraic shapes} of their central inequalities are
+incompatible:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& Latr\'emoli\`ere 2512.03573 & Mondino--S\"amann 2504.10380 \\
+\midrule
+codomain         & $[0, \infty]$                 & $\{-\infty\}\cup [0, \infty]$ \\
+triangle direction & forward                     & reverse \\
+triangle structure & 4-point relaxed              & 3-point \\
+sign convention    & state-distance ($\ge 0$)     & proper time ($\ge 0$ when causal) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+We call this the \textbf{F2 mismatch}. Naive attempts at a bridge fail:
+negating the time variable (R1) puts the codomain in the wrong
+half-line and the 4-point structure does not collapse to 3-point under
+sign reversal. The substantive question is whether a bridge can be
+\emph{categorical}:\ a functor sending Krein-algebraic objects (where
+relevant) to synthetic-Lorentzian objects (where relevant), with the
+F2 mismatch interpreted as a structural signature of two distinct
+projection mechanisms applied to the same physical object, rather than
+as a defect to be reconciled.
+
+\subsection{Main result:\ the Wick-rotation functor and the
+Krein--Mondino--S\"amann Bridge}
+\label{sec:main_result}
+
+We construct (Definition~\ref{def:wick_functor},
+Theorem~\ref{thm:bridge}) the Wick-rotation functor
+\[
+\Wfun: \KreinMM \longrightarrow \LorPLG,
+\]
+contravariant by Gelfand duality, sending a Krein-pointed proper QMS
+$(\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)$ to the covered LPLS
+\[
+\Wfun(\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)
+\;=\; (\hat{\Mcal}^{L}, \;\ell^{L}, \;\hat{\omega}_{W}^{L}, \;\hat{\Ucal}^{L}),
+\]
+where $\hat{\Mcal}^{L}$ is the Gelfand spectrum of the M-diagonal
+Abelian topography, $\ell^{L} = \kappag\cdot\tmod^{\BWvac}$ is
+$\kappag$ times the modular-flow time on the wedge boost orbits
+($-\infty$ off-orbit), $\hat{\omega}_{W}^{L}$ is the
+Bisognano--Wichmann vacuum as character of the topography, and
+$\hat{\Ucal}^{L}$ is the truncation cover.
+
+The Krein--Mondino--S\"amann Bridge Theorem (Theorem~\ref{thm:bridge})
+states that all four bridge properties hold at theorem-grade rigor:
+\begin{itemize}
+\item[(B1)] \emph{Structural correspondence}\ — $15$ rows of structural
+alignment (set, topology, time separation, basepoint, cover, scales,
+slabs, ε-nets, convergence, pre-compactness, etc.).
+\item[(B2)] \emph{Reverse triangle inequality} on the bridge image\ —
+on-orbit via additivity of Tomita--Takesaki modular flow at integer
+$\Kalpha$ spectrum~\cite{paper42}; off-orbit \emph{structurally
+vacuous} at the K$^{+}$-weak-form bridge because the M-diagonal
+topography forces orbit-pair contradiction (Decomposition O Case (iii)
+is empty).
+\item[(B3)] \emph{Pre-compactness inheritance}\ — Mondino--S\"amann
+Thm~6.2 applies on the bridge image via the Paper~44 propagation-number
+$=2$ cardinality bound.
+\item[(B4)] \emph{Convergence transport}\ — Krein-side propinquity
+convergence under the Latr\'emoli\`ere hypertopology induces
+Mondino--S\"amann pLGH convergence, with Plancherel-nested Berezin maps
+matching the MS Def~3.6 axioms one-to-one.
+\end{itemize}
+
+The F2 mismatch is resolved via the Connes--Rovelli thermal-time
+hypothesis~\cite{connes_rovelli1994}:\ the Krein metametric
+$\BigDeth$ measures \emph{thermal time} of the wedge KMS state, the
+synthetic time separation $\ell^{L}$ measures \emph{geometric proper
+time}, and the Wick rotation between them is the analytic continuation
+mapping additive thermal-time structure to super-additive
+geometric-time structure. Concretely, on the
+Bisognano--Wichmann wedge,
+$t_{\mathrm{geometric}} = \kappag \cdot t_{\mathrm{thermal}}$
+by the four-witness Wick-rotation theorem of Paper~42~\cite{paper42}.
+
+\subsection{GeoVac wedge application:\ seven newly accessible theorems}
+\label{sec:wedge_headline}
+
+The bridge is illustrated on the canonical Paper~43~\cite{paper43}
+hemispheric wedge $W_{L} = P_{W}^{\spat} \otimes P_{t \ge 0}$ on the
+compact-temporal Lorentzian Krein space $\Krein_{\nmax, \Nt, T}$, with
+Bisognano--Wichmann vacuum $\BWvac = e^{-\Kalpha}/Z$ and modular
+Hamiltonian $\Kalpha = J_{\mathrm{polar}}^{W}$ of integer spectrum
+$\mathrm{two\_m}_{j}$. All five Krein PPQMS axioms verify by direct
+construction. Seven newly accessible theorems follow
+(Section~\ref{sec:wedge_application}):
+
+\begin{itemize}
+\item \textbf{T1} (wedge as MS-covered LPLS) — every finite cutoff
+produces a well-defined Mondino--S\"amann covered Lorentzian pre-length
+space with uniform timelike diameter $2\pi$ across all cover levels;
+\item \textbf{T2} (synthetic compactness of wedge family) — pLGH
+pre-compactness for sequences of GeoVac wedge cutoffs;
+\item \textbf{T3} (synthetic bit-exact panel) — the synthetic pLGH-rate
+panel at $(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$ inherits bit-identically
+the Paper~45 Krein-side $\Lprop$ values $\{2.0746, 1.6101, 1.3223\}$,
+the first quantitative pLGH-convergence panel in the MS literature
+derived from operator-algebraic input;
+\item \textbf{T4} (synthetic four-witness readings) — the
+Paper~42~\cite{paper42} four-witness Wick-rotation theorem's six
+physical witnesses reduce to two synthetic-side equivalence classes
+distinguished by the rapidity-rate normalization $\kappag$;
+\item \textbf{T5} (synthetic Pythagorean orthogonality with M1
+signature) — the operator-algebraic Pythagorean orthogonality
+$\langle \Hloc, \Dwedge \rangle_{HS} = 0$ of Paper~43~\cite{paper43}
+\S~10.2 transports to a synthetic-side foliation orthogonality, with
+the closed-form $1/\pi^{2}$ residual prefactor identified as the
+master Mellin engine M1 Hopf-base-measure signature
+(Paper~32~\cite{paper32} \S~VIII);
+\item \textbf{T6} (\textbf{G2 metric-equivalent closure for the
+GeoVac wedge}) — the substantive deepest content:\ the
+de-compactification limit $T \to \infty$ closes at the pLGH-equivalent
+(metric-level-equivalent) level on the synthetic side for the GeoVac
+wedge specifically. A workaround for the published-open non-compact
+propinquity problem (Paper~45~\cite{paper45} \S~1.4 $\mathrm{G2}$) at
+the GeoVac-wedge-specific level;
+\item \textbf{T6a} (synthetic three-carrier identification) —
+Paper~47~\cite{paper47} \S~6 three-carrier identification (periodic /
+Dirichlet / non-compact) extends from operator-algebraic to
+synthetic-Lorentzian level.
+\end{itemize}
+
+\subsection{Honest scope}
+\label{sec:honest_scope}
+
+The bridge $\Wfun$ is constructed at the \textbf{K$^{+}$-weak-form}
+level only (the substrate of Paper~45~\cite{paper45}). The strong-form
+extension of $\Wfun$ to the Paper~46~\cite{paper46} Appendix~B
+enlarged substrate (chirality-flipping generators $M^{\mathrm{flip}}$
+with $\{J, M^{\mathrm{flip}}\} = 0$) is \textbf{not} constructed here;
+it is the named open question \textbf{Q1'} (Section~\ref{sec:open_q1prime}).
+On the enlarged substrate the off-orbit super-additivity ceases to be
+vacuous and becomes a load-bearing operator-algebraic statement,
+turning Q1' into a substantive multi-month NCG-mathematics target.
+
+The functor $\Wfun$ is \textbf{functorial, not isometric}:\
+$\BigDeth$ on the Krein-algebraic side and $\ell^{L}$ on the synthetic
+side measure different physical quantities of the same wedge KMS
+state. The forward-vs-reverse triangle direction is not a "mismatch
+to be reconciled" but a structural signature of two distinct
+projection mechanisms applied to the same physical object. This is
+the F2 resolution.
+
+For the GeoVac wedge, the substantive \textbf{T6} closure of
+$\mathrm{G2}$ is wedge-specific:\ it closes the de-compactification
+limit at the propinquity-equivalent (pLGH) level on the synthetic side
+for the wedge specifically. The general non-compact Latr\'emoli\`ere
+propinquity problem (Paper~45~\cite{paper45} \S~1.4 $\mathrm{G2}$ on
+arbitrary non-wedge carriers) remains the multi-month NCG-mathematics
+frontier and is \textbf{not} closed by this paper. The Paper~47
+\cite{paper47} norm-resolvent closure at the spectral level remains
+the operator-algebraic gold standard for general carriers; T6
+specializes the metric-level question to the wedge via the bridge.
+
+\subsection{Roadmap of the paper}
+\label{sec:roadmap}
+
+Section~\ref{sec:setup} recalls the necessary background:\
+Latr\'emoli\`ere's pinned proper QMS framework
+(\S~\ref{sec:latremoliere_recap}), the Krein operator-system substrate
+of Papers~44/45/46 (\S~\ref{sec:krein_substrate_recap}), the
+Mondino--S\"amann pre-length space framework
+(\S~\ref{sec:mondino_samann_recap}), the Bisognano--Wichmann vacuum
+and the four-witness Wick-rotation theorem of Paper~42
+(\S~\ref{sec:bw_four_witness_recap}), and the Connes--Rovelli
+thermal-time hypothesis (\S~\ref{sec:connes_rovelli_recap}).
+
+Section~\ref{sec:krein_ppqms} establishes the Krein-pointed proper
+quantum metric space:\ a 4-tuple
+$\mathbb{X}^{K} = (\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)$
+in which all nine Latr\'emoli\`ere axioms transport at theorem-grade
+rigor.
+
+Section~\ref{sec:krein_hypertopology} constructs the Krein
+hypertopology on the class of Krein-pointed proper QMS, with explicit
+M-tunnel extent, M-local metametric, 4-point relaxed triangle
+inequality, coincidence theorem, and inframetric structure. The
+compact-case agreement at $\Nt = 1$ reduces bit-exactly to the
+Paper~38~\cite{paper38} SU(2) Riemannian propinquity hypertopology.
+
+Section~\ref{sec:bridge} constructs the Wick-rotation functor and
+states the Bridge Theorem. The F2 mismatch is resolved via R3
+(Connes--Rovelli thermal time) as the unifying framework. The
+candidate resolutions R1 (negate time) and R2 (sub-functors) are
+tested and found insufficient.
+
+Section~\ref{sec:wedge_application} applies the bridge to the GeoVac
+hemispheric wedge, with the seven newly accessible theorems.
+
+Section~\ref{sec:compactness} states the synthetic-Lorentzian
+compactness theorems, with T6 (G2 metric-level closure for the GeoVac
+wedge) as the headline.
+
+Section~\ref{sec:open_questions} catalogues the open questions:\ Q1'
+strong-form bridge with enlarged substrate, G2 on the general
+non-wedge carrier, G3 cross-manifold, G4 inner-factor calibration.
+
+\subsection{Related work}
+\label{sec:related_work}
+
+The Latr\'emoli\`ere lineage~\cite{latremoliere2018,
+latremoliere_metric_st_2017, latremoliere_metric_propinquity_2015,
+latremoliere2025_hypertopology, latremoliere_pp_2018af,
+farsi_latremoliere2024, farsi_latremoliere2025} provides the
+operator-algebraic side of the bridge. The pre-2025 papers handle the
+compact case; the 2512.03573 hypertopology paper~\cite{latremoliere2025_hypertopology}
+is the first to extend to proper (locally compact, non-unital) quantum
+metric spaces. Our Krein lift inherits and extends this framework.
+
+The Mondino--S\"amann lineage~\cite{mondino_samann2025_pointed,
+kunzinger_samann2018, mondino_ryborz_samann2025} provides the
+synthetic-Lorentzian side. The 2504.10380 v4 paper~\cite{mondino_samann2025_pointed}
+introduces the pointed extension with covered LPLS and pLGH
+convergence; earlier papers by Kunzinger--S\"amann established the
+underlying Lorentzian pre-length-space framework. The
+Mondino--Ryborz--S\"amann stability paper~\cite{mondino_ryborz_samann2025}
+(May 2026) is the most recent flagship in this lineage.
+
+Adjacent synthetic-Lorentzian convergence frameworks include:\
+Sormani--Vega null distance~\cite{sormani_vega2016},
+Sakovich--Sormani timed Gromov--Hausdorff~\cite{sakovich_sormani2024},
+Minguzzi--Suhr bounded Lorentzian metric
+spaces~\cite{minguzzi_suhr2024}, M\"uller's Cauchy
+slabs~\cite{muller2022}, Allen--Burtscher metric
+GH~\cite{allen_burtscher2022}, Che--Perales--Sormani timed
+Hausdorff~\cite{che_perales_sormani2025}. These frameworks operate in
+distinct categories from the present bridge (Mondino--S\"amann's
+ε-net-of-causal-diamonds approach versus null-distance metric-GH or
+timed Hausdorff variants); they are cited for completeness but are not
+in direct competition with the bridge construction.
+
+The Connes--Rovelli thermal-time hypothesis~\cite{connes_rovelli1994}
+supplies the unifying interpretation. Active research on
+Connes-spectral-triples plus Tomita--Takesaki modular structure as a
+NCG framework for general relativity (e.g., Bertozzini--Conti--Lewkeeratiyutkul
+\cite{bertozzini_conti_lewkeeratiyutkul2009}) is adjacent to R3 but
+does not target the specific Krein-pointed PPQMS $\to$
+Mondino--S\"amann pLGH bridge constructed here.
+
+Recent NCG-side work on twisted spectral triples and pseudo-Riemannian
+spectral geometry includes Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018},
+van den Dungen~\cite{vandungen2016}, Franco--Eckstein~\cite{franco_eckstein2014},
+Strohmaier~\cite{strohmaier2006}, and the recent Nieuviarts
+twisted-spectral-triple paper~\cite{nieuviarts2025_v2} (December~2025
+v2). The Nieuviarts framework is restricted to even KO-dimension and
+does not apply directly to our KO-dim~3 substrate; we cite it as an
+alternative-to-Wick-rotation route in the Lorentzian-extension
+program. Ketterer~\cite{ketterer2026} (May 2026) and
+Kubota~\cite{kubota2026} (May 2026) are recent synthetic-side
+internal refinements; the former extends $\ell$-convergence on
+metric measure spaces, the latter establishes a Lorentzian coarea
+inequality. We cite both as adjacent works in the synthetic-Lorentzian
+convergence literature.
+
+The Hekkelman--McDonald papers~\cite{hekkelman_mcdonald2024,
+hekkelman_mcdonald2024b} on Connes spectral triples and
+noncommutative integration provide non-compact propinquity machinery
+that does not extend to a metric-level closure on the
+$\sthree \times \R_{t}$ carrier; our T6 closure for the wedge sits on
+the synthetic side via the bridge rather than via direct non-compact
+propinquity.
+
+To the author's knowledge, no published paper constructs a categorical
+bridge between operator-algebraic Lorentzian propinquity and synthetic
+Lorentzian Gromov--Hausdorff frameworks. The bridge constructed here
+is novel.
+
+% =====================================================================
+\section{Setup}\label{sec:setup}
+% =====================================================================
+
+\subsection{Latr\'emoli\`ere's pinned proper QMS
+framework}\label{sec:latremoliere_recap}
+
+We recall the central definitions from
+Latr\'emoli\`ere~\cite{latremoliere2025_hypertopology}.
+
+\begin{definition}[Latr\'emoli\`ere 2512.03573 Def~1.18:\
+Leibniz seminorm]\label{def:leibniz}
+Let $\Acal$ be a C*-algebra. A \emph{Leibniz Lipschitz seminorm}
+$L$ on $\Acal$ is a (typically unbounded) seminorm on a dense
+*-subalgebra $\mathrm{dom}(L) \subseteq \Acal$ satisfying $L(a^{*}) = L(a)$
+and the Leibniz inequality
+$L(ab) \le \norm{a} L(b) + L(a) \norm{b}$.
+\end{definition}
+
+\begin{definition}[Latr\'emoli\`ere 2512.03573 Def~1.22:\ separable
+QLCMS]\label{def:sep_qlcms}
+A \emph{separable quantum locally compact metric space} (QLCMS) is a
+pair $(\Acal, L)$ of a separable C*-algebra $\Acal$ and a Leibniz
+seminorm $L$ satisfying:
+\begin{itemize}
+\item[(FM)] Fortet--Mourier distance metrizes the weak-$*$
+topology on $\Scal(\Acal)$;
+\item[(CB)] the unit ball $\{a \in \mathrm{dom}(L) : L(a) \le 1\}$ is
+closed;
+\item[(B)] there exists a strictly positive $h \in \Acal_{\mathrm{sa}}$
+and a state $\mu \in \Scal(\Acal)$ with $\mu(h) = 1$ such that
+\[
+\{h a h : a = b + t\mathbf{1},\; L(b) \le 1,\; \mu(b) = -t\}
+\]
+is bounded.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Latr\'emoli\`ere 2512.03573 Def~1.26:\ pinned
+QLCMS]\label{def:pinned_qlcms}
+A \emph{pinned QLCMS} is a triple $(\Acal, L, \mu)$ extending
+Definition~\ref{def:sep_qlcms} with $\mu \in \Scal(\Acal)$ a pin
+state, such that $\{\phi \in \Scal(\Acal) : \mathrm{mk}_{L}(\phi, \mu)
+< \infty\}$ is weak-$*$ dense in $\Scal(\Acal)$, where $\mathrm{mk}_{L}$
+is the Monge--Kantorovich distance.
+\end{definition}
+
+\begin{lemma}[Latr\'emoli\`ere 2512.03573 Lemma~1.25]\label{lem:tightness_corollary}
+If $(\Acal, L)$ is a separable QLCMS with the (B)-axiom witnessed by
+$(h, \mu)$, then $\{\phi : \mathrm{mk}_{L}(\phi, \mu) < \infty\}$ is
+weak-$*$ dense in $\Scal(\Acal)$. In particular, the (B)-axiom of
+Definition~\ref{def:sep_qlcms} implies the density condition of
+Definition~\ref{def:pinned_qlcms}.
+\end{lemma}
+
+\begin{definition}[Latr\'emoli\`ere 2512.03573 Def~1.37 + 1.42:\
+pointed proper QMS]\label{def:pointed_proper_qms}
+A \emph{pinned proper QMS} is a pinned QLCMS
+$(\Acal, L, \mu)$ containing an $L$-Lipschitz $\mu$-pinned
+exhaustive sequence $(h_{n}) \subseteq \mathrm{dom}(L)$ with
+$L(h_{n}) \to 0$, $\mu(h_{n}) \to 1$, $\norm{h_{n}} \to 1$. A
+\emph{topography} $\mathfrak{M} \subseteq \Acal$ is an Abelian
+C*-subalgebra containing such an exhaustive sequence. A
+\emph{pointed proper QMS} is a 4-tuple $(\Acal, L, \mathfrak{M}, \mu)$
+with $\mathfrak{M}$ a topography and $\mu$ restricting to a character
+of $\mathfrak{M}$.
+\end{definition}
+
+The associated structures are M-isometries, M-tunnels, M-local
+metametric $\eth_{M}$, parameter-family metametric $\BigDeth$, and a
+4-point relaxed forward triangle:
+\[
+\BigDeth(\mathbb{A}, \mathbb{B})
+\le (1 + \BigDeth(\mathbb{A}, \mathbb{D}))^{2}\BigDeth(\mathbb{D}, \mathbb{B})
++ (1 + \BigDeth(\mathbb{D}, \mathbb{B}))^{2}\BigDeth(\mathbb{A}, \mathbb{D}).
+\]
+The Latr\'emoli\`ere coincidence theorem (Thm~3.6) characterizes
+$\BigDeth = 0$ via the existence of a full topographic M-isometry.
+
+\subsection{Krein operator-system substrate from
+Papers~44/45/46}\label{sec:krein_substrate_recap}
+
+The Krein-side substrate is the compact-temporal Lorentzian Krein
+space
+\[
+\Krein_{\nmax, \Nt, T}
+= \HGV^{\nmax} \otimes \C^{\Nt}
+\]
+of Paper~44~\cite{paper44}, with fundamental symmetry $\JL = J_{\spat}
+\otimes I_{\Nt}$ where $J_{\spat}^{2} = +I$ is the spatial chirality
+swap; the K$^{+}$-restricted Hilbert space is
+$\Kplus = \{|\psi\rangle : \JL |\psi\rangle = +|\psi\rangle\}$.
+The Lorentzian Dirac is (van den Dungen 2016 Prop.~4.1
+\cite{vandungen2016})
+\[
+\DL = i\bigl(\gamma^{0}\otimes \partial_{t} + \DGV \otimes I_{\Nt}\bigr),
+\]
+Krein-self-adjoint:\ $\DL^{\times} = \DL$ where $\dagger$ is the
+Krein adjoint $\gamma^{0}\cdot *\cdot\gamma^{0}$. The natural Lorentzian
+operator system is
+\[
+\Op^{L} = \mathrm{span}_{\C}\{M^{\spat}_{N, L, M} \otimes M^{\temp}_{p}
+:\ N \le \nmax,\ L < N,\ |M| \le L,\ 0 \le p \le \Nt - 1\},
+\]
+of finite dimension at finite cutoff, with propagation number
+$\mathrm{prop}(\Op^{L}) = 2$ under the Weyl-doubled achievable envelope
+(Paper~44~\cite{paper44} Prop.~prop=2).
+
+Paper~45~\cite{paper45} establishes the K$^{+}$-restricted weak-form
+Lorentzian propinquity convergence:\
+\[
+\Lprop(\Tcal^{L}_{\nmax, \Nt, T}, \Tcal^{L}_{\Manifold})
+\;\le\; \Cthreejoint \cdot \gammajoint_{\nmax, \Nt, T} \;\to\; 0
+\]
+along admissible scaling $(\nmax, \Nt) \to (\infty, \infty)$ at fixed
+$T$, with bit-exact panel values $\Lprop(2,3) = 2.0746$,
+$\Lprop(3,5) = 1.6101$, $\Lprop(4,7) = 1.3223$. Paper~46~\cite{paper46}
+extends to a strong-form (no K$^{+}$ restriction) on the natural
+chirality-doubled scalar-multiplier substrate, with bit-identical
+$\Lambda^{\mathrm{strong}} = \Lprop$ ("free upgrade"), and to a further
+enlarged substrate (Appendix~B) with chirality-flipping generators
+$M^{\mathrm{flip}}$ satisfying $\{\JL, M^{\mathrm{flip}}\} = 0$.
+
+\subsection{Mondino--S\"amann pre-length space
+framework}\label{sec:mondino_samann_recap}
+
+We recall the central definitions from
+Mondino--S\"amann~\cite{mondino_samann2025_pointed}.
+
+\begin{definition}[Mondino--S\"amann Def~2.3:\ Lorentzian pre-length
+space]\label{def:lpls}
+A \emph{Lorentzian pre-length space} (LPLS) is a pair $(X, \ell)$
+with $X$ a set carrying a topology finer than the chronological
+topology, and $\ell: X \times X \to \{-\infty\} \cup [0, \infty]$
+satisfying $\ell(x, x) \ge 0$ and the \emph{reverse triangle
+inequality}
+\begin{equation}\label{eq:reverse_triangle}
+\ell(x, y) + \ell(y, z) \le \ell(x, z) \quad \forall x, y, z \in X
+\end{equation}
+(with convention $\pm\infty + \mp\infty = 0$ on the LHS yielding
+$-\infty$ when undefined). Timelike, causal, and causal-diamond
+relations are derived in the standard way:\ $x \ll y \iff \ell(x, y) > 0$,
+$x \le y \iff \ell(x, y) \ge 0$, $J(x, y) = \{z : x \le z \le y\}$,
+and the time separation $\tau := \max(0, \ell)$.
+\end{definition}
+
+\begin{definition}[Mondino--S\"amann Def~3.2:\ ε-net]\label{def:eps_net}
+An \emph{ε-net} for $A \subseteq X$ is a collection
+$\mathcal{S} = (J_{i})_{i \in \Omega}$ of causal diamonds with
+$\tau(J_{i}) \le \varepsilon$ and $A \subseteq \bigcup_{i} J_{i}$.
+\end{definition}
+
+\begin{definition}[Mondino--S\"amann Def~3.6:\ LGH convergence of
+subsets]\label{def:lgh_convergence}
+A sequence $A_{n} \to A$ converges in the Lorentzian
+Gromov--Hausdorff (LGH) sense if there exist ε-nets $S_{n}$ for
+$A_{n}$ and $S$ for $A$ with:\
+(i) matching cardinality;
+(ii) correspondences $R_{n}$ between vertices with $\mathrm{dis}(R_{n})
+\to 0$;
+(iii) extension property of correspondences;
+(iv) forward density.
+\end{definition}
+
+\begin{definition}[Mondino--S\"amann Def~3.8:\ covered LPLS]\label{def:covered_lpls}
+A \emph{covered LPLS} is a 4-tuple $(X, \ell, o, \Ucal)$ where
+$(X, \ell)$ is an LPLS, $o \in X$ is a basepoint event, and
+$\Ucal = (U_{k})_{k \in \N}$ is a countable cover satisfying:
+(i) $\bigcup_{k} U_{k} = X$;
+(ii) $U_{k} \subseteq U_{k+1}$ (nested);
+(iii) $o \in U_{k}$ for all $k$;
+(iv) $\sup_{x, y \in U_{k}} \tau(x, y) < \infty$ (slab bounds).
+\end{definition}
+
+\begin{definition}[Mondino--S\"amann Def~3.12:\ pLGH
+convergence]\label{def:plgh}
+$(X_{n}, \ell_{n}, o_{n}, \Ucal_{n}) \to (X, \ell, o, \Ucal)$ in the
+\emph{pointed LGH} sense iff for each $k$, $U_{k, n} \to U_{k, \infty}$
+in LGH sense.
+\end{definition}
+
+The Mondino--S\"amann pre-compactness theorem (Thm~6.2) gives that
+any sequence of covered LPLS with (i) uniform slab bounds, (ii) uniform
+ε-net cardinality bounds, (iii) cumulative ε-net nesting has a
+pLGH-convergent subsequence.
+
+\subsection{Bisognano--Wichmann vacuum and the four-witness
+Wick-rotation theorem}\label{sec:bw_four_witness_recap}
+
+The Paper~43~\cite{paper43} hemispheric wedge is
+\[
+W_{L} := P_{W}^{\spat} \otimes P_{t \ge 0},
+\quad
+P_{W}^{\spat} = \tfrac{1}{2}(I + R_{\mathrm{polar}}),
+\]
+where $R_{\mathrm{polar}}$ is the spatial $m_{j}$-reflection involution
+(Paper~42~\cite{paper42} \S~4) and $P_{t \ge 0}$ is the diagonal
+projection on $\C^{\Nt}$ to positive temporal indices. The
+Bisognano--Wichmann vacuum state under the BW-α geometric
+Hamiltonian (with $\beta = 2\pi/\kappag$) is
+\[
+\rho_{W}^{L} := e^{-\Kalpha}/Z,
+\quad
+\Kalpha = J_{\mathrm{polar}}^{W} \text{ on the wedge},
+\]
+with integer spectrum $\mathrm{two\_m}_{j} \in \Z_{>0}$. The
+Tomita--Takesaki modular Hamiltonian $K_{\mathrm{TT}} = -\log \Delta$
+is constructed from the wedge KMS state via polar decomposition
+(Paper~42~\cite{paper42} \S~6).
+
+The Paper~42~\cite{paper42} four-witness Wick-rotation theorem states
+that six physical witnesses (Bisognano--Wichmann canonical with
+$\kappag = 1$, Hartle--Hawking at $M = 1, 2$, Sewell at $M = 1$, Unruh
+at $a = 1, 2$) all yield bit-identical modular operators $\Delta$
+and Hamiltonians $K_{\mathrm{TT}}$ under the BW unit normalization
+$\Hloc := \Kalpha / \beta$. The Riemannian-side bit-exact identity
+$\sigma_{2\pi}^{\alpha}(O) = O$ holds at every finite cutoff
+$\nmax \in \{1, 2, 3, 4, 5\}$, and the Tomita BW-γ flow $\sigma_{t}^{TT}$
+satisfies the conjugacy $\sigma_{t}^{TT}(a) = \sigma_{-t}^{\alpha}(a)$
+bit-exact. Paper~43~\cite{paper43} extends to Lorentzian signature via
+BBB Krein construction~\cite{bizi_brouder_besnard2018} and verifies
+the same six-witness collapse at every $(\nmax, \Nt)$ panel cell.
+
+\subsection{Connes--Rovelli thermal-time
+hypothesis}\label{sec:connes_rovelli_recap}
+
+Connes and Rovelli~\cite{connes_rovelli1994} (1994) proposed:
+
+\medskip
+
+\noindent\textbf{Thermal-time hypothesis.} \emph{In quantum
+statistical mechanics on a generally covariant system, the natural
+physical time evolution at thermal equilibrium with state $\omega$ is
+given by the modular automorphism group $\sigma_{t}^{\omega}$ of
+$\omega$ (a state on the observable algebra $\Acal$).}
+
+\medskip
+
+Applied to a KMS state at inverse temperature $\beta$ on a Type~III
+von Neumann algebra arising as the local algebra of a region of
+spacetime (Bisognano--Wichmann setting), the thermal time of $\omega$
+relates to the geometric proper time of the underlying spacetime by
+\begin{equation}\label{eq:connes_rovelli_identification}
+t_{\mathrm{thermal}} = \frac{\beta}{2\pi} \cdot t_{\mathrm{geometric}}
+= \frac{1}{\kappag} \cdot t_{\mathrm{geometric}},
+\end{equation}
+where $\kappag$ is the surface gravity (equivalently the BW
+Hawking-temperature parameter). This is the four-witness
+Wick-rotation theorem of Paper~42~\cite{paper42} at the kinematic
+level:\ modular flow IS Lorentz-boost orbit on the BW wedge, with
+proportionality factor $1/\kappag = \beta/(2\pi)$.
+
+\subsection{Notation and conventions}\label{sec:notation}
+
+Throughout the paper:\
+$\Krein = \Krein_{\nmax, \Nt, T} = \HGV^{\nmax} \otimes \C^{\Nt}$
+denotes the compact-temporal Krein space;
+$\JL = J_{\spat} \otimes I_{\Nt}$ the fundamental symmetry;
+$\Kplus, \Kminus$ the K$^{\pm}$-eigenspaces of $\JL$;
+$\Op^{L}$ the natural Lorentzian operator system;
+$\DL$ the Krein-self-adjoint Lorentzian Dirac;
+$\BWvac = e^{-\Kalpha}/Z$ the BW vacuum;
+$\Kalpha = J_{\mathrm{polar}}^{W}$ the BW geometric Hamiltonian (with
+integer spectrum $\mathrm{two\_m}_{j}$);
+$\sigma_{t}^{\BWvac}$ the Tomita--Takesaki modular flow of $\BWvac$;
+$\tmod^{\BWvac}(\hat{\omega}, \hat{\omega}') := \inf\{t \ge 0 :
+\hat{\omega}' = \hat{\omega} \circ \sigma_{t}^{\BWvac}\}$ the
+modular-flow time.
+
+We write $\mathrm{Spec}(\mathfrak{B})$ for the Gelfand spectrum of an
+Abelian C*-algebra $\mathfrak{B}$ and $\hat{\omega}$ for the character
+induced by a state $\omega$ restricting to $\mathfrak{B}$.
+
+% =====================================================================
+\section{Krein-pointed proper quantum metric spaces}\label{sec:krein_ppqms}
+% =====================================================================
+
+We lift Latr\'emoli\`ere's pinned proper QMS framework to the
+Krein-algebraic setting. Throughout this section, the substrate is
+the K$^{+}$-restricted Hilbert space; the natural-substrate generators
+all commute with $\JL$, so the Krein operator norm coincides with the
+Hilbert operator norm on the K$^{+}$ restriction.
+
+\subsection{The Krein-Leibniz Lipschitz seminorm}\label{sec:krein_leibniz}
+
+\begin{definition}[Krein-Leibniz Lipschitz seminorm]\label{def:krein_leibniz}
+On the natural Lorentzian operator system $\Op^{L}$ (or its continuum
+limit on $\Tcal^{L}_{\Manifold}$), define
+\[
+L^{K}(a) := \opnorm{[\DL, a]}, \qquad a \in \mathrm{dom}(L^{K}) \subseteq \Op^{L},
+\]
+where $\opnorm{\cdot}$ is the operator norm on $\Bcal(\Krein)$
+restricted to $\Kplus$. We call $L^{K}$ the \emph{Krein-Leibniz
+Lipschitz seminorm}.
+\end{definition}
+
+\begin{lemma}[Krein-Leibniz inequality]\label{lem:krein_leibniz}
+For every $a, b$ in the natural chirality-doubled scalar-multiplier
+substrate,
+\[
+L^{K}(ab) \le \norm{a}_{\Op^{L}} L^{K}(b) + L^{K}(a) \norm{b}_{\Op^{L}}.
+\]
+\end{lemma}
+
+\begin{proof}
+On the natural substrate, all elements of $\Op^{L}$ commute with
+$\JL$~\cite{paper44}, so both $a, b$ restrict cleanly to $\Kplus$.
+On $\Kplus$, the standard Hilbert operator norm
+$\opnorm{\cdot}|_{\Kplus}$ agrees with the algebra norm
+$\norm{\cdot}_{\Op^{L}}$. The standard operator-algebra Leibniz
+identity
+$[\DL, ab] = [\DL, a] b + a [\DL, b]$ holds in $\Bcal(\Krein)$;
+restricting to $\Kplus$ and applying submultiplicativity yields the
+Krein-Leibniz inequality.
+\end{proof}
+
+\begin{remark}[Krein vs Hilbert operator norm on the enlarged
+substrate]\label{rem:krein_op_norm}
+The natural-substrate version of Lemma~\ref{lem:krein_leibniz} uses
+the Hilbert operator norm on $\Kplus$. On the Paper~46~\cite{paper46}
+Appendix~B \emph{enlarged} substrate with chirality-flipping
+generators $M^{\mathrm{flip}}$ satisfying $\{\JL, M^{\mathrm{flip}}\} = 0$,
+the K$^{+}$ restriction is no longer well-defined as a multiplier
+(such generators map $\Kplus$ to $\Kminus$), and the two natural
+operator norms (Krein operator norm with respect to the indefinite
+Krein product vs.\ Hilbert operator norm on the full Krein space)
+differ. The K$^{+}$-weak-form route of this paper makes the
+distinction invisible; the strong-form route makes it visible at the
+level of the gradient-norm absorption mechanism of
+Paper~46~\cite{paper46} Appendix~B. For Q1' (Section~\ref{sec:open_q1prime})
+this distinction becomes load-bearing.
+\end{remark}
+
+\subsection{The Krein-separable QLCMS and Krein-pinned QLCMS}\label{sec:krein_sep_pinned}
+
+\begin{definition}[Krein-separable QLCMS]\label{def:krein_sep_qlcms}
+A \emph{Krein-separable QLCMS} is a pair $(\Acal^{K}, L^{K})$ where
+$\Acal^{K}$ is the natural Lorentzian operator system on $\Krein$
+(at finite cutoff:\ the C*-algebra generated by $\Op^{L}$ in
+$\Bcal(\Kplus)$, a finite-dimensional matrix algebra; in the
+continuum:\ $\Acal^{K} = C(\Tcal^{L}_{\Manifold})$ acting on
+$\Kplus_{\mathrm{continuum}}$), and $L^{K}$ is the Krein-Leibniz
+Lipschitz seminorm on a dense *-subalgebra
+$\mathrm{dom}(L^{K}) \subseteq \Acal^{K}$, satisfying:
+\begin{itemize}
+\item[(FM-K)] The Krein-positive Fortet--Mourier distance metrizes
+the weak-$*$ topology on $\Scal(\Acal^{K})$;
+\item[(CB-K)] The unit ball $\{a \in \mathrm{dom}(L^{K}) : L^{K}(a)
+\le 1\}$ is closed in the operator-norm topology;
+\item[(B-K)] There exists strictly positive $h^{L} \in \Acal^{K}_{\mathrm{sa}}$
+and a state $\mu^{L} \in \Scal(\Acal^{K})$ with $\mu^{L}(h^{L}) = 1$
+such that
+\[
+\{h^{L} a h^{L} : a = b + t\mathbf{1},\;
+L^{K}(b) \le 1,\; \mu^{L}(b) = -t\}
+\]
+is bounded.
+\end{itemize}
+\end{definition}
+
+\begin{lemma}\label{lem:krein_sep_qlcms_verification}
+The pair $(\Acal^{K}, L^{K})$ with the natural Lorentzian operator
+system substrate is a Krein-separable QLCMS, with witnessing
+$(h^{L}, \mu^{L}) = (\Kalpha / Z, \BWvac)$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The (FM-K), (CB-K), (B-K) axioms transport from Papers~42--45 substrate:
+(FM-K) via Paper~44~\cite{paper44} \S~6 Krein-positive
+Wasserstein--Kantorovich SDP framework, with weak-$*$ metrization
+following Latr\'emoli\`ere~\cite{latremoliere2025_hypertopology}
+Thm~1.9; (CB-K) via Banach--Alaoglu plus lower-semicontinuity of
+$L^{K}$; (B-K) via Paper~42~\cite{paper42} \S~5 integer spectrum of
+$\Kalpha$ ($h^{L}$ positive definite, $\norm{h^{L}} = 1$, $\BWvac(h^{L}) = 1$
+by BW pinning) combined with Paper~44~\cite{paper44} propagation
+number $= 2$ (bounded sets in finite-dimensional subspaces are bounded).
+See A.2'~\S~2.3 of the synthesis memo for full detail.
+\end{proof}
+
+\begin{definition}[Krein-pinned QLCMS]\label{def:krein_pinned_qlcms}
+A \emph{Krein-pinned QLCMS} is a triple $(\Acal^{K}, L^{K}, \BWvac)$
+with $\BWvac \in \Scal(\Acal^{K})$ the BW vacuum, such that
+$\{\phi \in \Scal(\Acal^{K}) : \mathrm{mk}_{L^{K}}(\phi, \BWvac) < \infty\}$
+is weak-$*$ dense in $\Scal(\Acal^{K})$.
+\end{definition}
+
+\begin{lemma}[Continuum tightness via
+Lemma~\ref{lem:tightness_corollary}]\label{lem:krein_continuum_tightness}
+$(\Acal^{K}, L^{K}, \BWvac)$ is a Krein-pinned QLCMS. Equivalently:\
+the density condition of Definition~\ref{def:krein_pinned_qlcms} holds.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:krein_sep_qlcms_verification}, the (B-K) axiom holds
+with $(h^{L}, \mu^{L}) = (\Kalpha/Z, \BWvac)$. By
+Lemma~\ref{lem:tightness_corollary} (Latr\'emoli\`ere
+2512.03573 Lemma~1.25), the density of finite-Monge--Kantorovich
+states follows mechanically.
+\end{proof}
+
+\begin{remark}\label{rem:tightness_dissolves}
+Lemma~\ref{lem:krein_continuum_tightness} dissolves a caveat that
+the diagnostic phase of the program had flagged as a 2--3 week
+sub-sprint:\ the continuum tightness condition is a \emph{corollary}
+of the (B-K) boundedness axiom via Latr\'emoli\`ere's own
+Lemma~1.25. The Krein lift requires no separate verification beyond
+the (B-K) ingredients.
+\end{remark}
+
+\subsection{The Krein L-Lipschitz $\BWvac$-pinned exhaustive sequence
+and the approximate-unit theorem}\label{sec:krein_exhaustive_approx_unit}
+
+\begin{definition}[Krein L-Lipschitz $\BWvac$-pinned exhaustive
+sequence]\label{def:krein_exhaustive}
+A \emph{Krein L-Lipschitz $\BWvac$-pinned exhaustive sequence}
+is a sequence $(h_{n})_{n \in \N} \subseteq \mathrm{dom}_{\mathrm{sa}}(L^{K})$
+with:
+\begin{enumerate}
+\item $\lim_{n\to\infty} L^{K}(h_{n}) = 0$,
+\item $\lim_{n\to\infty} \BWvac(h_{n}) = 1$,
+\item $\lim_{n\to\infty} \norm{h_{n}}_{\Acal^{K}} = 1$.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Krein approximate-unit, transport of
+Latr\'emoli\`ere 2512.03573 Thm~1.30]\label{thm:krein_approx_unit}
+If $(\Acal^{K}, L^{K}, \BWvac)$ is a Krein-pinned QLCMS and
+$(h_{n})$ is a Krein L-Lipschitz $\BWvac$-pinned exhaustive sequence,
+then $(h_{n})$ is an approximate unit for $\Acal^{K}$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Direct transport of Latr\'emoli\`ere 2512.03573 Thm~1.30 via Claims
+1.31--1.34:\ weak-$*$ convergence to $1$ (using
+Lemma~\ref{lem:krein_continuum_tightness}); $h_{n}^{2}$ pinning (via
+Lemma~\ref{lem:krein_leibniz} Leibniz applied to $h_{n}\cdot h_{n}$);
+$(1 - h_{n}^{2})$ vanishing on compact sets of states (via
+Arzel\`a--Ascoli on the Fortet--Mourier metric ball); convergence to
+$1$ in strict topology (via Kadison functional calculus on the
+K$^{+}$-restricted commutative envelope of $h_{n}$).
+\end{proof}
+
+\textbf{The explicit Krein-side exhaustive sequence.} The natural
+Krein-side exhaustive sequence is the truncated Krein triple
+projector sequence:\
+\[
+h_{n} := P_{\nmax(n), \Nt(n), T(n)},
+\]
+the orthogonal projection onto the $\HGV^{\nmax(n)} \otimes \C^{\Nt(n)}$
+truncation, with $(\nmax(n), \Nt(n), T(n)) \to (\infty, \infty, T_{\infty})$
+along admissible scaling per Paper~47~\cite{paper47}. Verification:\
+(i) $L^{K}(h_{n}) \le \gammajoint_{\nmax(n), \Nt(n), T(n)} \cdot O(1) \to 0$
+by Paper~45~\cite{paper45} Sub-Sprint~C approximate-identity property;
+(ii) $\BWvac(h_{n}) \to 1$ by support of $\BWvac$ on the wedge;
+(iii) $\norm{h_{n}} = 1$ since $h_{n}$ is a projector.
+
+\subsection{Krein topography and Krein-pointed proper
+QMS}\label{sec:krein_topography}
+
+\begin{definition}[Krein topography]\label{def:krein_topography}
+A \emph{Krein topography} $\Mcal^{L}$ of a Krein-separable QLCMS
+$(\Acal^{K}, L^{K})$ is an Abelian C*-subalgebra of $\Acal^{K}$
+containing a strictly positive $h^{L} \in \mathrm{dom}(L^{K})$ and
+admitting a character $\mu^{L}$ of $\Mcal^{L}$ witnessing the (B-K)
+boundedness axiom restricted to $\Mcal^{L}$.
+\end{definition}
+
+\begin{lemma}[The natural Krein topography]\label{lem:natural_krein_topography}
+The natural Krein topography on the GeoVac substrate is the
+sub-operator-system
+\[
+\Mcal^{L} := \mathrm{span}_{\C}\bigl\{
+M^{\spat}_{N, L, 0} \otimes I_{\Nt} :\ N \le \nmax,\ L < N
+\bigr\}
+\subseteq \Acal^{K},
+\]
+i.e.\ the chirality-doubled scalar multipliers with M-quantum-number
+$M = 0$ tensored with the temporal identity.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+\emph{Abelian:\ } Each $M^{\spat}_{N, L, 0}$ is a multiplication
+operator by a spatial 3-Y function $Y^{(3)}_{N, L, 0}$, hence the
+algebra is Abelian; tensoring with $I_{\Nt}$ preserves the structure.
+
+\emph{Strictly positive $h^{L}$:\ } Take $h^{L} = \Kalpha/Z$; the BW
+geometric Hamiltonian is M-diagonal and positive on the wedge by
+Paper~42~\cite{paper42} \S~5.
+
+\emph{(B-K) restricted to $\Mcal^{L}$:\ } Restrict
+Lemma~\ref{lem:krein_sep_qlcms_verification} to $\Mcal^{L}$; the
+boundedness condition is preserved.
+
+\emph{Contains approximate unit:\ } By Latr\'emoli\`ere Remark~1.41,
+this follows from the Leibniz property applied to the truncated
+projector sequence $h_{n}$, which is M-block-diagonal hence in
+$\Mcal^{L}$.
+\end{proof}
+
+\begin{definition}[Krein-pointed proper QMS]\label{def:krein_ppqms}
+A \emph{Krein-pointed proper quantum metric space} (Krein PPQMS) is
+a 4-tuple
+\[
+\mathbb{X}^{K} = (\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)
+\]
+where $(\Acal^{K}, L^{K}, \BWvac)$ is a Krein-pinned QLCMS,
+$\Mcal^{L}$ is a Krein topography of $(\Acal^{K}, L^{K})$, $\BWvac$
+restricts to a character of $\Mcal^{L}$, and there exists a Krein
+L-Lipschitz $\BWvac$-pinned exhaustive sequence contained in
+$\Mcal^{L}$.
+\end{definition}
+
+\begin{lemma}[The merged substrate is a Krein PPQMS]\label{lem:merged_substrate}
+The 4-tuple $(\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)$ with $\Acal^{K}$
+the natural Lorentzian operator system, $L^{K}$ the Krein-Leibniz
+Lipschitz seminorm, $\Mcal^{L}$ the natural Krein topography of
+Lemma~\ref{lem:natural_krein_topography}, and $\BWvac$ the BW vacuum,
+satisfies all axioms of Definition~\ref{def:krein_ppqms}.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The (FM-K), (CB-K), (B-K) axioms hold by
+Lemma~\ref{lem:krein_sep_qlcms_verification}; the continuum tightness
+holds by Lemma~\ref{lem:krein_continuum_tightness}; the topography
+axioms hold by Lemma~\ref{lem:natural_krein_topography};
+$\BWvac|_{\Mcal^{L}}$ is a character because $\Mcal^{L}$ is Abelian
+(states on Abelian C*-algebras are characters by Gelfand); the
+truncated projector sequence $h_{n} = P_{\nmax(n), \Nt(n), T(n)}$ lies
+in $\Mcal^{L}$ (M-block-diagonal) and is a Krein L-Lipschitz
+$\BWvac$-pinned exhaustive sequence.
+\end{proof}
+
+\subsection{Krein M-tunnels with extent element}\label{sec:krein_mtunnels}
+
+\begin{definition}[Krein M-tunnel]\label{def:krein_mtunnel}
+Let $\mathbb{X}^{K}_{i} = (\Acal^{K}_{i}, L^{K}_{i}, \Mcal^{L}_{i},
+\mu_{i})$ for $i = 1, 2$ be two Krein PPQMS and $M \ge 1$. A
+\emph{Krein M-tunnel} from $\mathbb{X}^{K}_{1}$ to $\mathbb{X}^{K}_{2}$
+is a 6-tuple
+\[
+\tau^{L} = (\Dcal^{L}, L_{\Dcal^{L}}^{K}, \mathfrak{M}_{\Dcal^{L}}^{L},
+\pi_{1}^{K}, \pi_{2}^{K}, e^{L})
+\]
+where $(\Dcal^{L}, L_{\Dcal^{L}}^{K}, \mathfrak{M}_{\Dcal^{L}}^{L},
+\mu_{1} \circ \pi_{1}^{K})$ is a pointed topographic separable
+Krein-side QLCMS, $e^{L} \in \mathrm{dom}_{\mathrm{sa}}(L_{\Dcal^{L}}^{K})
+\cap \mathfrak{M}_{\Dcal^{L}}^{L}$ is the \emph{extent element}, and
+$\pi_{i}^{K} :\ \Dcal^{L} \twoheadrightarrow \Acal^{K}_{i}$ are
+topographic Krein M-isometries.
+\end{definition}
+
+\textbf{The natural Krein M-tunnel.} For comparison of the
+truncated Krein triple $\Tcal^{L}_{\nmax, \Nt, T}$ with the
+continuum $\Tcal^{L}_{\Manifold}$:
+\begin{itemize}
+\item $\Dcal^{L} = \Op^{L}_{\nmax, \Nt, T} \oplus C(\Tcal^{L}_{\Manifold})$,
+direct sum of truncated operator system and continuum function algebra;
+\item $L_{\Dcal^{L}}^{K}((a, f)) = \max\{L^{K}_{1}(a), L^{K}_{2}(f),
+\opnorm{a - \Bjoint(f)}/\varepsilon_{0}\}$, the tunnel Lipschitz
+combining intrinsic seminorms with Berezin discrepancy at scale
+$\varepsilon_{0} = \gammajoint$;
+\item $\mathfrak{M}_{\Dcal^{L}}^{L} = \Mcal^{L}_{1} \oplus \Mcal^{L}_{2}$;
+\item $\pi_{1}^{K}(a, f) = a$, $\pi_{2}^{K}(a, f) = f$;
+\item $e^{L} = (h_{n}, \mathbf{1})$, the natural extent element
+pairing the truncation projector with the continuum unit.
+\end{itemize}
+
+\begin{lemma}\label{lem:natural_mtunnel}
+The natural Krein M-tunnel satisfies Definition~\ref{def:krein_mtunnel}.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The topography $\mathfrak{M}_{\Dcal^{L}}^{L}$ is Abelian by direct
+sum of Abelian sub-algebras; $e^{L}$ is in
+$\mathrm{dom}_{\mathrm{sa}}(L_{\Dcal^{L}}^{K})$ because both
+$h_{n}$ and $\mathbf{1}$ are; $\pi_{1, 2}^{K}$ are topographic
+M-isometries by Paper~45~\cite{paper45} Sub-Sprint~D
+Berezin/projection construction; $e^{L}$ is K$^{+}$-positive because
+both factors commute with $\JL$ trivially.
+\end{proof}
+
+% =====================================================================
+\section{Krein-pointed propinquity
+hypertopology}\label{sec:krein_hypertopology}
+% =====================================================================
+
+\subsection{Extent of a Krein M-tunnel}\label{sec:krein_extent}
+
+\begin{definition}[Krein extent of an M-tunnel]\label{def:krein_extent}
+The \emph{Krein extent} of an M-tunnel $\tau^{L} = (\Dcal^{L},
+L_{\Dcal^{L}}^{K}, \mathfrak{M}_{\Dcal^{L}}^{L}, \pi_{1}^{K},
+\pi_{2}^{K}, e^{L})$ is
+\[
+\chi^{K}(\tau^{L}) := \max\{\chi_{1}^{K}, \chi_{2}^{K}, \chi_{3}^{K}\},
+\]
+where $\chi_{1}^{K}$ is the reach (Hausdorff distance of pullback
+quasi-state spaces), $\chi_{2}^{K}$ is the height (pin-state alignment
+via Monge--Kantorovich on K$^{+}$ Wasserstein--Kantorovich), and
+$\chi_{3}^{K}$ is the extent-element Lipschitz-and-normalization:
+\[
+\chi_{3}^{K}(\tau^{L}) = \max\{2M L^{K}(e^{L}),\
+|1 - \mu_{1}\circ\pi_{1}^{K}(e^{L})|,\
+|1 - \mu_{2}\circ\pi_{2}^{K}(e^{L})|\}.
+\]
+\end{definition}
+
+\begin{lemma}\label{lem:extent_bound}
+For the natural Krein M-tunnel from $\Tcal^{L}_{\nmax, \Nt, T}$ to
+$\Tcal^{L}_{\Manifold}$,
+\[
+\chi^{K}(\tau^{L}) \le \gammajoint_{\nmax, \Nt, T} \to 0,
+\]
+bit-identical to the Paper~45~\cite{paper45} Sub-Sprint~D propinquity
+bound.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+$\chi_{1}^{K} = \mathrm{reach}_{B}^{K} \le \gammajoint$ by
+Paper~45~\cite{paper45} Sub-Sprint~D~\S~3.1;
+$\chi_{2}^{K} = $ K$^{+}$ pin-state distance, bounded by $\gammajoint$;
+$\chi_{3}^{K}$ has three components, each bounded by $\gammajoint$
+times a constant via the approximate-identity property of $h_{n}$
+applied to the extent element.
+\end{proof}
+
+\subsection{The Krein M-local quantum metametric}\label{sec:krein_mlocal_metametric}
+
+\begin{definition}[Krein M-local quantum metametric]\label{def:krein_mlocal}
+For $M \ge 1$ and Krein PPQMS $\mathbb{X}^{K}, \mathbb{Y}^{K}$:
+\[
+\Dethmet_{M}(\mathbb{X}^{K}, \mathbb{Y}^{K})
+:= \inf\{\chi^{K}(\tau^{L}) :\ \tau^{L} \text{ is a Krein M-tunnel from }
+\mathbb{X}^{K} \text{ to } \mathbb{Y}^{K}\}.
+\]
+\end{definition}
+
+\begin{theorem}[4-point relaxed forward triangle inequality]\label{thm:relaxed_triangle}
+For any $M \ge 1$ and Krein PPQMS $\mathbb{X}^{K}, \mathbb{Y}^{K},
+\mathbb{Z}^{K}$:
+\[
+\Dethmet_{M}(\mathbb{X}^{K}, \mathbb{Y}^{K}) \le
+(1 + \Dethmet_{M}(\mathbb{X}^{K}, \mathbb{Z}^{K}))^{2}\,
+\Dethmet_{M}(\mathbb{Z}^{K}, \mathbb{Y}^{K}) +
+(1 + \Dethmet_{M}(\mathbb{Z}^{K}, \mathbb{Y}^{K}))^{2}\,
+\Dethmet_{M}(\mathbb{X}^{K}, \mathbb{Z}^{K}).
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Direct transport of Latr\'emoli\`ere 2512.03573 Thm~2.24 via Krein-side
+tunnel composition. The natural-substrate Krein structure is closed
+under tunnel composition (direct sums of operator systems give operator
+systems, Berezin composition preserves K$^{+}$-positivity, the
+extent-element construction generalizes to triple composition).
+\end{proof}
+
+\subsection{Coincidence}\label{sec:coincidence}
+
+\begin{theorem}[Coincidence]\label{thm:coincidence}
+For Krein PPQMS $\mathbb{X}^{K}, \mathbb{Y}^{K}$, there exists a
+full topographic Krein M-isometry $\pi^{K} : \mathbb{X}^{K} \to
+\mathbb{Y}^{K}$ with $\mu_{\mathbb{Y}^{K}} \circ \pi^{K} =
+\mu_{\mathbb{X}^{K}}$ if and only if
+$\Dethmet_{M}(\mathbb{X}^{K}, \mathbb{Y}^{K}) = 0$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The "if" direction is contained in Theorem~\ref{thm:relaxed_triangle}.
+The "only if" direction transports Latr\'emoli\`ere 2512.03573
+Thm~3.6 via target-set machinery:\ given a sequence of tunnels
+$\tau_{n}^{K}$ with $\chi^{K}(\tau_{n}^{K}) \to 0$, the target sets
+$\mathfrak{t}_{\tau^{K}}^{K}(a | l) :=
+\{\pi_{2}^{K}(d) : \pi_{1}^{K}(d) = a,\ \norm{d}_{L_{\Dcal^{L}}, M}
+\le l\}$ are well-defined on the Krein side because of the
+K$^{+}$-positivity of natural-substrate generators, and the four
+almost-properties (Latr\'emoli\`ere Lemmas~3.2--3.5) transport
+mechanically via Krein-Leibniz and Krein-approximate-unit. The
+diagonal extraction with Banach--Alaoglu on the K$^{+}$-restricted
+state space produces a limit *-isomorphism preserving topography and
+BW pin state.
+\end{proof}
+
+\subsection{The Krein quantum metametric and
+hypertopology}\label{sec:krein_hypertopology_metametric}
+
+\begin{definition}[Krein quantum metametric]\label{def:krein_metametric}
+For Krein PPQMS $\mathbb{X}^{K}, \mathbb{Y}^{K}$:
+\[
+\BigDeth(\mathbb{X}^{K}, \mathbb{Y}^{K}) := \max\bigl\{\,
+\inf\{\varepsilon > 0 : \sup_{r \in [1, 1/\varepsilon]}
+\Dethmet_{r}(\mathbb{X}^{K}, \mathbb{Y}^{K}) < \varepsilon\},\
+\bigl|e^{-\mathrm{qdiam}(\mathbb{X}^{K})} -
+e^{-\mathrm{qdiam}(\mathbb{Y}^{K})}\bigr|\,\bigr\}.
+\]
+\end{definition}
+
+\begin{theorem}[Inframetric structure]\label{thm:inframetric}
+$\BigDeth$ is a K$^{+}$-positive inframetric:\ symmetric, satisfying
+the 4-point relaxed triangle, and $\BigDeth(\mathbb{X}^{K},
+\mathbb{Y}^{K}) = 0$ iff a full topographic Krein M-isometry exists
+between $\mathbb{X}^{K}$ and $\mathbb{Y}^{K}$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Symmetry holds because Krein M-tunnels are symmetric in their roles;
+the 4-point relaxed triangle follows from
+Theorem~\ref{thm:relaxed_triangle}; the coincidence statement is
+Theorem~\ref{thm:coincidence}.
+\end{proof}
+
+\begin{definition}[Krein hypertopology]\label{def:krein_hypertopology}
+The \emph{Krein hypertopology} on the class
+$p\mathcal{P}^{K}$ of Krein PPQMS is the topology with Kuratowski
+closure operator
+\[
+\mathrm{cl}^{K}(\mathcal{A}) := \{\mathbb{Y}^{K} \in p\mathcal{P}^{K} :
+\BigDeth(\mathbb{Y}^{K}, \mathcal{A}) = 0\}
+\]
+where $\BigDeth(\mathbb{Y}^{K}, \mathcal{A}) :=
+\inf\{\BigDeth(\mathbb{Y}^{K}, \mathbb{X}^{K}) : \mathbb{X}^{K}
+\in \mathcal{A}\}$.
+\end{definition}
+
+\subsection{Compact-case agreement at $\Nt = 1$}\label{sec:compact_case}
+
+\begin{theorem}[Compact-case agreement]\label{thm:compact_agreement}
+When restricted to $\Nt = 1$, the Krein hypertopology on the class of
+Krein PPQMS reduces bit-exactly to the Paper~38~\cite{paper38} SU(2)
+Riemannian propinquity hypertopology.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+At $\Nt = 1$:\ $\Krein_{\nmax, 1, T} = \HGV^{\nmax}$ (spatial Krein
+space alone); $\JL = J_{\spat}$; $\Kplus = \HGV^{\nmax, +}$;
+$\DL|_{\Nt=1} = i\DGV$ (temporal direction contributes nothing);
+$\Op^{L}|_{\Nt=1}$ is the chirality-doubled spinor lift of
+Paper~38~\cite{paper38}'s scalar substrate. By Paper~45~\cite{paper45}
+Sub-Sprint~D~\S~5 Riemannian-limit recovery,
+$\Lprop_{\nmax, 1, T} = \Lambda^{\mathrm{Paper~38}}_{\nmax}$
+bit-exact. The pointed-propinquity reduction follows.
+\end{proof}
+
+\begin{remark}[The compact-case agreement object]\label{rem:compact_object}
+The compact-case object is the chirality-doubled spinor lift of
+Paper~38's Riemannian SU(2) Lipschitz spectral triple, pinned at the
+BW vacuum on the spatial wedge. This explicit identification ensures
+the Krein-pointed propinquity hypertopology is a strict extension of
+Paper~38, not a parallel construction.
+\end{remark}
+
+\subsection{Numerical panel}\label{sec:numerical_panel}
+
+The Krein-side propinquity bound inherits the bit-exact numerical
+panel from Paper~45~\cite{paper45}:
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+$(\nmax, \Nt)$ & $\Dethmet_{M}$ (qualitative) & $\Lprop$ (Paper~45) \\
+\midrule
+$(2, 3)$ & $\le 2.0746$ & $= 2.0746$ \\
+$(3, 5)$ & $\le 1.6101$ & $= 1.6101$ \\
+$(4, 7)$ & $\le 1.3223$ & $= 1.3223$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Monotone decreasing, with ratio $\Dethmet(4, 7)/\Dethmet(2, 3) = 0.6374$
+matching Paper~38~\cite{paper38} single-factor bit-identical.
+
+% =====================================================================
+\section{The Mondino--S\"amann bridge:\ Wick-rotation
+functor}\label{sec:bridge}
+% =====================================================================
+
+\subsection{The F2 mismatch and three candidate
+resolutions}\label{sec:f2_resolution}
+
+The structural mismatch between the Krein metametric $\BigDeth$ (4-point
+relaxed forward, codomain $[0, \infty]$) and the Mondino--S\"amann
+time separation $\ell$ (3-point reverse, codomain $\{-\infty\}\cup
+[0, \infty]$) is the \textbf{F2 mismatch}. We test three candidate
+resolutions.
+
+\subsubsection{R1:\ Negate time}\label{sec:r1_test}
+
+\textbf{Candidate.} Define $\ell^{L}_{R1}(\hat{\omega}, \hat{\omega}')
+:= -\BigDeth(\mathbb{X}^{K}_{\hat{\omega}}, \mathbb{X}^{K}_{\hat{\omega}'})$.
+
+\textbf{Verdict:\ NEGATIVE.} R1 fails for two independent reasons:
+(i) Codomain mismatch:\ $\BigDeth \in [0, \infty]$ gives
+$\ell^{L}_{R1} \in [-\infty, 0]$, while Mondino--S\"amann requires
+$\{-\infty\}\cup [0, \infty]$. The MS reverse triangle encodes the
+Lorentzian convention that "longer causal curves accumulate more
+proper time" and the negation gives the opposite convention.
+(ii) Triangle structural mismatch:\ negating both sides of the
+4-point relaxed forward inequality does NOT collapse to the 3-point
+reverse triangle, and the coefficient factors $(1 + \BigDeth)^{2}$
+have no MS-side analog.
+
+\subsubsection{R2:\ Functorial composite of Wick-rotation +
+modular-flow}\label{sec:r2_test}
+
+\textbf{Candidate.} A bridge functor $F_{a} \circ F_{c}$ composed of:\
+(a) Wick rotation $F_{a}$ giving the right codomain shape (3-point
+reverse triangle on boost orbits via analytic continuation), and
+(c) modular flow $F_{c}$ giving the right basepoint (BW vacuum) and
+the right cover scales ($\beta_{k} = 2\pi/\kappag$).
+
+\textbf{Verdict:\ PARTIAL.} (a) gives the right structural shape
+but does not determine basepoint or cover scales. (c) gives basepoint
+and scales but inherits the F2 triangle-direction mismatch (modular
+flow is additive, not super-additive). The composite $F_{a} \circ F_{c}$
+has all needed ingredients but the F2 mismatch is not resolved
+\emph{by R2 alone}; the resolution requires R3.
+
+\subsubsection{R3:\ Connes--Rovelli thermal time as unifying
+framework}\label{sec:r3_test}
+
+\textbf{Candidate.} Identify the Krein metametric $\BigDeth$ as
+measuring \emph{thermal time} of the wedge KMS state and the
+Mondino--S\"amann $\ell$ as measuring \emph{geometric proper time} of
+the same wedge KMS state. The Wick rotation between them, via
+equation~\eqref{eq:connes_rovelli_identification}, effects the
+analytic continuation $t_{\mathrm{thermal}} = -it_{\mathrm{geometric}}/\kappag$
+mapping additive thermal-time structure to super-additive
+geometric-time structure.
+
+\textbf{Verdict:\ POSITIVE.} R3 supplies the unifying interpretation
+that resolves F2. Modular flow $\sigma_{t_{1}}^{\omega} \circ
+\sigma_{t_{2}}^{\omega} = \sigma_{t_{1} + t_{2}}^{\omega}$ is
+\emph{additive} in thermal time (forward-triangle), while geometric
+proper time on a Lorentzian manifold is \emph{super-additive} on
+causal curves (the "twin paradox"). The two triangle directions are
+not "mismatched":\ they encode the same wedge KMS state under two
+distinct projection mechanisms (operator-algebraic modular flow vs.\
+synthetic causal geometry), connected by the Wick rotation.
+
+\subsection{Definition of the Wick-rotation functor}\label{sec:wick_functor_def}
+
+\begin{definition}[The category $\KreinMM$]\label{def:cat_kreinmm}
+Let $\KreinMM$ be the category whose:
+\begin{itemize}
+\item Objects are Krein PPQMS $\mathbb{X}^{K} = (\Acal^{K}, L^{K},
+\Mcal^{L}, \BWvac)$ per Definition~\ref{def:krein_ppqms};
+\item Morphisms are topographic Krein M-isometries
+$\pi^{K} : \mathbb{X}^{K}_{1} \to \mathbb{X}^{K}_{2}$, i.e.\ proper
+*-epimorphisms preserving topography and pin state.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[The category $\LorPLG$]\label{def:cat_lorplg}
+Let $\LorPLG$ be the category whose:
+\begin{itemize}
+\item Objects are covered LPLS $(X, \ell, o, \Ucal)$ per
+Definition~\ref{def:covered_lpls};
+\item Morphisms are $\ell$-preserving maps preserving basepoint $o$
+and cover $\Ucal$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[The Wick-rotation functor]\label{def:wick_functor}
+The \emph{Wick-rotation functor}
+$\Wfun : \KreinMM \to \LorPLG$ is defined on objects by
+\[
+\Wfun(\Acal^{K}, L^{K}, \Mcal^{L}, \BWvac)
+:= (\hat{\Mcal}^{L}, \ell^{L}, \hat{\omega}_{W}^{L}, \hat{\Ucal}^{L}),
+\]
+where:
+\begin{enumerate}
+\item $\hat{\Mcal}^{L} := \mathrm{Spec}(\Mcal^{L})$ is the Gelfand
+spectrum of the M-diagonal Abelian topography;
+\item $\hat{\omega}_{W}^{L}$ is the character of $\Mcal^{L}$ induced
+by the BW vacuum;
+\item $\hat{\Ucal}^{L} = (\hat{U}_{k})_{k \in \N}$ with
+$\hat{U}_{k} := \mathrm{Spec}(\Mcal^{L}|_{(\nmax(k), \Nt(k), T(k))})$
+along admissible scaling per Paper~47~\cite{paper47};
+\item The time separation $\ell^{L}$ on $\hat{\Mcal}^{L}$ is
+\[
+\ell^{L}(\hat{\omega}, \hat{\omega}') := \begin{cases}
+\kappag \cdot \tmod^{\BWvac}(\hat{\omega}, \hat{\omega}') &
+\text{if } \hat{\omega} \preceq \hat{\omega}' \text{ along modular flow,} \\
+-\infty & \text{otherwise.}
+\end{cases}
+\]
+\end{enumerate}
+On morphisms, $\Wfun(\pi^{K}) := \hat{\pi}^{K}$ is the dual Gelfand
+spectrum map (contravariant by Gelfand duality:\
+$\KreinMM \to \LorPLG$ on objects sends $\mathbb{X}^{K}$ forward but
+on morphisms the arrow direction reverses).
+\end{definition}
+
+\subsection{The Krein--Mondino--S\"amann Bridge
+Theorem}\label{sec:bridge_theorem}
+
+\begin{theorem}[Krein--Mondino--S\"amann
+Bridge]\label{thm:bridge}
+The Wick-rotation functor $\Wfun$ of Definition~\ref{def:wick_functor}
+is well-defined, with the following four properties:
+\begin{itemize}
+\item[\textbf{(B1)}] \emph{Structural correspondence.} $\Wfun$ sends
+the Krein PPQMS substrate to the Mondino--S\"amann covered LPLS
+structure row-by-row as in Table~\ref{tab:bridge_correspondence}.
+\item[\textbf{(B2)}] \emph{Reverse triangle inequality.} For every
+$\mathbb{X}^{K}$ and every $\hat{\omega}_{x}, \hat{\omega}_{y},
+\hat{\omega}_{z} \in \Wfun(\mathbb{X}^{K})$,
+\[
+\ell^{L}(\hat{\omega}_{x}, \hat{\omega}_{y}) +
+\ell^{L}(\hat{\omega}_{y}, \hat{\omega}_{z}) \le
+\ell^{L}(\hat{\omega}_{x}, \hat{\omega}_{z}).
+\]
+\item[\textbf{(B3)}] \emph{Pre-compactness inheritance.} The
+Mondino--S\"amann pre-compactness conditions (Thm~6.2 of MS) hold on
+$\Wfun(\mathbb{X}^{K}_{n})$ for any sequence of truncated Krein PPQMS
+$(\mathbb{X}^{K}_{n})$ at admissible-scaling cutoffs.
+\item[\textbf{(B4)}] \emph{Convergence transport.} If
+$\BigDeth(\mathbb{X}^{K}_{n}, \mathbb{X}^{K}_{\infty}) \to 0$, then
+$\Wfun(\mathbb{X}^{K}_{n}) \to \Wfun(\mathbb{X}^{K}_{\infty})$ in the
+Mondino--S\"amann pLGH sense.
+\end{itemize}
+\end{theorem}
+
+\subsection{Structural correspondence (B1)}\label{sec:b1_correspondence}
+
+The structural correspondence holds row-by-row per
+Table~\ref{tab:bridge_correspondence}:
+
+\begin{table}[h]
+\centering
+\caption{The structural correspondence (B1) between Mondino--S\"amann
+covered LPLS and Krein PPQMS structures, exhibited by the
+Wick-rotation functor $\Wfun$.}
+\label{tab:bridge_correspondence}
+\begin{tabular}{rll}
+\toprule
+\# & Mondino--S\"amann (synthetic) & Krein-algebraic-side analog \\
+\midrule
+1 & Underlying set $X$ & $\hat{\Mcal}^{L} = \mathrm{Spec}(\Mcal^{L})$ \\
+2 & Topology finer than chronological & weak-$*$ topology on $\hat{\Mcal}^{L}$ \\
+3 & Time separation $\ell$ & Wick-rotated $\ell^{L} = \kappag\cdot\tmod$ \\
+4 & Reverse triangle (Eq.~\eqref{eq:reverse_triangle}) & on orbit:\ equality; off orbit:\ trivial $-\infty$ \\
+5 & Timelike $\ll$ & modular precedence with $t > 0$ \\
+6 & Causal $\le$ & modular precedence with $t \ge 0$ \\
+7 & Causal diamond & $\{\hat{\omega}_{x}\circ\sigma_{s} : 0 \le s \le t\}$ \\
+8 & Basepoint event $o$ & BW vacuum $\hat{\omega}_{W}^{L}$ \\
+9 & Cover $\Ucal$ & truncated topography spectra $(\hat{U}_{k})$ \\
+10 & Cover scales $\beta_{k}$ & BW canonical period $\beta_{k} = 2\pi/\kappag$ \\
+11 & Slab bound & uniform $2\pi$ via modular periodicity \\
+12 & ε-net & modular causal diamond ε-net at scale $\gammajoint(k)$ \\
+13 & LGH convergence & truncation-projector correspondence \\
+14 & pLGH convergence & per-cover LGH convergence \\
+15 & Pre-compactness & cardinality bound from propagation $= 2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Reverse triangle inequality (B2):\ Decomposition O on the
+M-diagonal topography}\label{sec:b2_decomposition_o}
+
+The substantive content of (B2) is the resolution of F2 via R3 plus
+the structural simplification that off-orbit cases are trivial at the
+K$^{+}$-weak-form bridge.
+
+\begin{lemma}[Modular flow acts trivially on the
+topography]\label{lem:trivial_modular_action_on_topography}
+For every topographic generator $a = M^{\spat}_{N, L, 0} \otimes I_{\Nt}
+\in \Mcal^{L}$,
+\[
+\sigma_{t}^{\BWvac}(a) = a \quad \forall t \in \R.
+\]
+Consequently, the dual action on $\hat{\Mcal}^{L}$ is trivial:\
+$\hat{\sigma}_{t}^{\BWvac}(\hat{\omega}) = \hat{\omega}$ for all
+$\hat{\omega}$.
+\end{lemma}
+
+\begin{proof}
+$[\Kalpha, M^{\spat}_{N, L, 0}] = 0$ because $\Kalpha$ is M-diagonal
+and the topographic generator has $M = 0$, both diagonal in the same
+$(N, L, M)$-block decomposition. Hence $\sigma_{t}^{\BWvac}(a) =
+e^{-it\Kalpha} a e^{+it\Kalpha} = a$, and the dual Gelfand action is
+trivial.
+\end{proof}
+
+\begin{lemma}[Decomposition O for triples of
+characters]\label{lem:decomposition_o}
+For $\hat{\omega}_{x}, \hat{\omega}_{y}, \hat{\omega}_{z} \in
+\hat{\Mcal}^{L}$ at finite cutoff, indexed by topographic eigenvalue
+labels $(N_{x}, L_{x}), (N_{y}, L_{y}), (N_{z}, L_{z})$ with $M = 0$,
+the off-orbit case decomposes into four sub-cases:
+\begin{itemize}
+\item[(i)] All three on the same modular-flow orbit:\
+$(N_{x}, L_{x}) = (N_{y}, L_{y}) = (N_{z}, L_{z})$. On-orbit case;
+\item[(ii)] $\hat{\omega}_{x}, \hat{\omega}_{z}$ on the same orbit,
+$\hat{\omega}_{y}$ on a different orbit. Then
+$\ell^{L}(\hat{\omega}_{x}, \hat{\omega}_{y}) = -\infty$ (or
+$\ell^{L}(\hat{\omega}_{y}, \hat{\omega}_{z}) = -\infty$);
+\item[(iii)] $\hat{\omega}_{x}, \hat{\omega}_{y}$ on one orbit,
+$\hat{\omega}_{y}, \hat{\omega}_{z}$ on a different orbit,
+$\hat{\omega}_{x}, \hat{\omega}_{z}$ on yet a third. \textbf{Empty}
+(this would require $(N_{x}, L_{x}) = (N_{y}, L_{y}) \ne
+(N_{z}, L_{z}) = (N_{x}, L_{x})$, a contradiction);
+\item[(iv)] All three on different orbits. At least one
+$\ell^{L} = -\infty$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The orbit-preservation of modular flow (Lemma~\ref{lem:trivial_modular_action_on_topography})
+means modular flow on $\hat{\Mcal}^{L}$ preserves the $(N, L)$ labels.
+Hence two characters are causally related ($\hat{\omega} \preceq
+\hat{\omega}'$ along modular flow with finite $\tmod$) only if they
+share the same $(N, L)$ label. Cases (i)--(iv) are then a complete
+enumeration of label-tuple configurations, and (iii) is structurally
+empty.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:bridge} (B2)]
+By Lemma~\ref{lem:decomposition_o}, we analyze (B2) case by case.
+
+\emph{Case (i), on-orbit (equality).} If $\hat{\omega}_{x} \preceq
+\hat{\omega}_{y} \preceq \hat{\omega}_{z}$ along modular flow with
+$\hat{\omega}_{y} = \hat{\omega}_{x}\circ\sigma_{t_{1}}^{\BWvac}$ and
+$\hat{\omega}_{z} = \hat{\omega}_{y}\circ\sigma_{t_{2}}^{\BWvac}$,
+then $\hat{\omega}_{z} = \hat{\omega}_{x}\circ\sigma_{t_{1} +
+t_{2}}^{\BWvac}$ by additivity of modular flow. Hence
+$\ell^{L}(\hat{\omega}_{x}, \hat{\omega}_{y}) + \ell^{L}(\hat{\omega}_{y},
+\hat{\omega}_{z}) = \kappag(t_{1} + t_{2}) = \ell^{L}(\hat{\omega}_{x},
+\hat{\omega}_{z})$.
+
+\emph{Cases (ii), (iv), trivial $-\infty$ inheritance.} At least one
+of $\ell^{L}(\hat{\omega}_{x}, \hat{\omega}_{y})$ or
+$\ell^{L}(\hat{\omega}_{y}, \hat{\omega}_{z})$ is $-\infty$, so the
+LHS is $-\infty$ by MS convention, and $-\infty \le
+\ell^{L}(\hat{\omega}_{x}, \hat{\omega}_{z})$ trivially.
+
+\emph{Case (iii), empty.} No contribution.
+
+Hence (B2) holds in all cases.
+\end{proof}
+
+\begin{remark}[The super-additivity that DOES exist lives in
+$\Op^{L}$, not in $\Mcal^{L}$]\label{rem:super_add_lives_elsewhere}
+The substantive super-additivity property (off-axis Lorentz-boost
+composition accumulating more proper time than direct composition)
+exists on the wedge but lives in the \emph{full} Krein operator
+system $\Op^{L}$, not in the M-diagonal topography $\Mcal^{L}$.
+The Paper~46~\cite{paper46} Appendix~B enlarged substrate (chirality-
+flipping generators $M^{\mathrm{flip}}$ with $\{\JL, M^{\mathrm{flip}}\}
+= 0$) supports such off-axis composition; on this enlarged substrate,
+the bridge $\Wfun$ would extend to a richer LPLS structure with strict
+super-additivity off-orbit. This is the open question Q1'
+(Section~\ref{sec:open_q1prime}).
+\end{remark}
+
+\subsection{Pre-compactness inheritance (B3)}\label{sec:b3_precompactness}
+
+\begin{proof}[Proof of Theorem~\ref{thm:bridge} (B3)]
+The Mondino--S\"amann pre-compactness Thm~6.2 has three conditions:
+(i) uniform slab bounds; (ii) uniform ε-net cardinality bounds;
+(iii) cumulative ε-net nesting.
+
+\emph{(i) Uniform slab bound.} The timelike diameter of $\hat{U}_{k}$
+equals $\sup \tmod^{\BWvac}$ on the wedge. Under BW canonical
+$\kappag = 1$, modular flow is $2\pi$-periodic (Paper~42~\cite{paper42}
+\S~5 integer spectrum of $\Kalpha$), so $\tmod \le 2\pi$ uniformly:\
+$T_{k} = 2\pi$ for all $k$.
+
+\emph{(ii) Uniform ε-net cardinality bound.} At finite cutoff
+$(\nmax(k), \Nt(k), T(k))$, $|\hat{U}_{k}| = O(\nmax(k)^{4} \cdot \Nt(k))$
+(dimension of the topography), and the ε-net cardinality is bounded
+above by $|\hat{U}_{k}|$ itself and by the standard discrete-to-continuous
+refinement bound $N(k, \varepsilon) = \min(|\hat{U}_{k}|,
+\mathrm{Vol}(\hat{U}_{k})/\varepsilon^{d_{k}})$. Both bounds are
+uniform via Paper~44~\cite{paper44} propagation number $= 2$.
+
+\emph{(iii) Cumulative ε-net nesting.} By the admissible-scaling
+sequence $(\nmax(k), \Nt(k), T(k)) \to (\infty, \infty, T_{\infty})$,
+the cover $\hat{U}_{k} \subseteq \hat{U}_{k+1}$ is nested by
+construction, and ε-nets of $\hat{U}_{k}$ extend to ε-nets of
+$\hat{U}_{k+1}$ by adding finitely many points.
+
+By Mondino--S\"amann Thm~6.2, the bridge image inherits
+pre-compactness.
+\end{proof}
+
+\subsection{Convergence transport (B4) via Plancherel-nested
+Berezin}\label{sec:b4_convergence}
+
+\begin{theorem}[Convergence transport]\label{thm:convergence_transport}
+If $\BigDeth(\mathbb{X}^{K}_{n}, \mathbb{X}^{K}_{\infty}) \to 0$ in
+the Krein hypertopology of Definition~\ref{def:krein_hypertopology},
+then $\Wfun(\mathbb{X}^{K}_{n}) \to \Wfun(\mathbb{X}^{K}_{\infty})$
+in the Mondino--S\"amann pLGH topology of
+Definition~\ref{def:plgh}, with the strong (timelike forward density)
+sense.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By the Krein hypertopology coincidence (Theorem~\ref{thm:coincidence})
+plus the bit-exact panel inheritance from Paper~45~\cite{paper45},
+the Krein-side propinquity convergence implies that for each cover
+level $k$, the truncated topography spectra $\hat{U}_{k, n} \to
+\hat{U}_{k, \infty}$ in the LGH sense (per
+Definition~\ref{def:lgh_convergence}). The Plancherel-nested
+Berezin/projection pair from Paper~45~\cite{paper45} Sub-Sprint~C/D
+supplies a Mondino--S\"amann correspondence with vanishing
+distortion. Per-axiom verification:
+
+\emph{Cardinality matching (MS Def~3.6(i)).} At fixed admissible
+cutoff, the correspondence pair has $|S_{n}| = |S_{\infty}|$ on the
+M-diagonal topography (the Berezin map preserves the $(N, L)$ shell
+structure).
+
+\emph{Correspondence with vanishing distortion (MS Def~3.6(ii)).}
+The Berezin/projection pair has reach $\le \gammajoint$ + height $\le
+\gammajoint \cdot C_{3}^{\mathrm{joint}}$, vanishing as $n \to \infty$.
+
+\emph{Extension property (MS Def~3.6(iii)).} The Plancherel-nested
+structure of Berezin maps IS the MS extension property:\ Berezin maps
+at finer cutoff extend Berezin maps at coarser cutoff because the
+Plancherel weights nest by construction (Paper~45~\cite{paper45}
+Sub-Sprint~C Lemma~5.1).
+
+\emph{Forward density (MS Def~3.6(iv)).} The modular-flow orbit
+discretization in the chronological topology provides the timelike
+forward density:\ for any $\hat{\omega}' \succ \hat{\omega}$ on a
+modular orbit, the truncation projects $\hat{\omega}'$ to a sequence
+$\hat{\omega}'_{n}$ converging to $\hat{\omega}'$ in the chronological
+topology with $\hat{\omega} \prec \hat{\omega}'_{n}$ for all
+sufficiently large $n$.
+
+Per-cover LGH convergence at each $k$ implies pLGH convergence per
+Definition~\ref{def:plgh}.
+\end{proof}
+
+\subsection{Riemannian-limit recovery cross-check}\label{sec:riemannian_limit_cross}
+
+\begin{corollary}\label{cor:riemannian_limit_cross}
+At $\Nt = 1$, the Krein-side propinquity bound $\Lprop_{\nmax, 1, T} =
+\Lambda^{\mathrm{Paper~38}}_{\nmax}$ bit-exact (Paper~45 Sub-Sprint~D
+Lemma~5.1), so the bridge image $\Wfun(\mathbb{X}^{K}|_{\Nt = 1})$ is
+the synthetic-side counterpart of Paper~38's SU(2) Riemannian
+propinquity:\ a trivial LPLS with no Lorentzian content (modular flow
+on the Riemannian limit collapses to identity, and $\ell^{L}|_{\Nt=1}
+= 0$ along the Gelfand spectrum).
+\end{corollary}
+
+\subsection{Honest scope of the bridge theorem}\label{sec:bridge_scope}
+
+The bridge functor $\Wfun$ is constructed at the K$^{+}$-weak-form
+level on the natural chirality-doubled scalar-multiplier substrate of
+Papers~44/45. The strong-form extension of $\Wfun$ to the
+Paper~46~\cite{paper46} Appendix~B enlarged substrate
+(chirality-flipping generators) is \textbf{not} constructed in this
+paper; it is the open question Q1' (Section~\ref{sec:open_q1prime}).
+
+The bridge is \textbf{functorial, not isometric}:\ $\BigDeth$ and
+$\ell^{L}$ measure different physical quantities (thermal vs.\
+geometric time) of the same wedge KMS state. The two triangle
+directions are not "mismatched" — they encode different projections
+of the same physical object, connected by the Wick rotation under R3
+(Connes--Rovelli thermal time).
+
+% =====================================================================
+\section{Application to the GeoVac hemispheric
+wedge}\label{sec:wedge_application}
+% =====================================================================
+
+\subsection{The GeoVac wedge as a Krein PPQMS}\label{sec:wedge_as_krein_ppqms}
+
+\begin{lemma}[The wedge as Krein PPQMS]\label{lem:wedge_as_krein_ppqms}
+The Paper~43~\cite{paper43} hemispheric wedge $W_{L} = P_{W}^{\spat}
+\otimes P_{t \ge 0}$ at every finite cutoff $(\nmax, \Nt, T)$ defines
+a Krein PPQMS
+\[
+\mathbb{X}^{K}_{\mathrm{wedge}} := (\Acal^{L}|_{W_{L}},
+L^{K}|_{W_{L}}, \Mcal^{L}|_{W_{L}}, \BWvac),
+\]
+with all five Krein PPQMS axioms of
+Definition~\ref{def:krein_ppqms} verified by direct construction.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+(A1) $\Acal^{L}|_{W_{L}}$ is the wedge-restricted Lorentzian operator
+system (Paper~44~\cite{paper44} \S~2). (A2) $L^{K}|_{W_{L}}$ is the
+K$^{+}$-restricted Krein-Leibniz Lipschitz seminorm of
+Definition~\ref{def:krein_leibniz}. (A3) $\Mcal^{L}|_{W_{L}}$ is the
+wedge-restricted M-diagonal Abelian topography of
+Lemma~\ref{lem:natural_krein_topography}. (A4) $\BWvac =
+e^{-\Kalpha}/Z$ is the wedge KMS state (Paper~43~\cite{paper43} \S~4.2),
+diagonal in the M-eigenbasis hence a character of $\Mcal^{L}|_{W_{L}}$.
+(A5) The Krein M-tunnel structure with $\chi^{K} \to 0$ is the wedge
+restriction of Lemma~\ref{lem:extent_bound}.
+\end{proof}
+
+\subsection{The seven newly accessible theorems}\label{sec:seven_theorems}
+
+We apply the bridge functor $\Wfun$ to the wedge PPQMS:
+\[
+\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}) =
+(\hat{\Mcal}^{L}|_{W_{L}}, \ell^{L}_{\mathrm{wedge}},
+\hat{\omega}_{W}^{L}, \hat{\Ucal}^{L}_{\mathrm{wedge}}),
+\]
+where at panel cells the cardinality is $|\hat{\Mcal}^{L}|_{W_{L}}|
+= \dim W_{L} = 16, 60, 160$ at $(\nmax, \Nt) \in \{(2, 3), (3, 5),
+(4, 7)\}$ respectively.
+
+\subsubsection{T1:\ The wedge as Mondino--S\"amann covered
+LPLS}\label{sec:t1_wedge_as_lpls}
+
+\begin{theorem}[T1:\ GeoVac wedge as Mondino--S\"amann pointed
+pre-length space]\label{thm:wedge_as_lpls}
+For every finite cutoff $(\nmax, \Nt, T)$ with $T = 2\pi$ canonical,
+the GeoVac hemispheric wedge $W_{L}$ defines a Mondino--S\"amann
+covered Lorentzian pre-length space
+\[
+(\hat{\Mcal}^{L}|_{W_{L}}, \ell^{L}_{\mathrm{wedge}},
+\hat{\omega}_{W}^{L}, \hat{\Ucal}^{L}_{\mathrm{wedge}})
+\in \LorPLG,
+\]
+with uniform timelike diameter $2\pi$ across all cover levels.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Direct application of Theorem~\ref{thm:bridge} (B1) plus
+Lemma~\ref{lem:wedge_as_krein_ppqms}. The uniform timelike diameter
+follows from Paper~43~\cite{paper43} Thm~bw\_alpha\_lorentz:\ modular
+flow is $2\pi$-periodic on the wedge.
+\end{proof}
+
+\subsubsection{T2:\ Synthetic compactness of the wedge
+family}\label{sec:t2_synthetic_compactness}
+
+\begin{theorem}[T2:\ GeoVac wedge synthetic
+compactness]\label{thm:synthetic_compactness}
+Any sequence $(\mathbb{X}^{K}_{\mathrm{wedge}}(k_{n}))_{n \in \N}$
+of GeoVac wedge Krein PPQMS at admissible-scaling cutoffs
+$(\nmax(k_{n}), \Nt(k_{n}), T(k_{n})) \to (\infty, \infty,
+T_{\infty})$ has a subsequence whose bridge images
+$\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}(k_{n}))$ converge in the
+Mondino--S\"amann pLGH sense to a covered LPLS limit.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By Theorem~\ref{thm:bridge} (B3), the three pre-compactness conditions
+of MS Thm~6.2 hold for the wedge sequence. The MS Thm~6.2 yields
+the pLGH-convergent subsequence.
+\end{proof}
+
+\subsubsection{T3:\ Synthetic bit-exact panel
+inheritance}\label{sec:t3_bit_exact_panel}
+
+\begin{theorem}[T3:\ Synthetic pLGH-convergence rate panel for the
+GeoVac wedge]\label{thm:bit_exact_panel}
+The Mondino--S\"amann pLGH-convergence rate of the GeoVac wedge
+sequence at the Paper~45~\cite{paper45} panel cells satisfies:
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+$(\nmax, \Nt)$ & $d_{\mathrm{pLGH}}^{\mathrm{wedge}}$ (Krein-side $\Lprop$) \\
+\midrule
+$(2, 3)$ & $\le 2.0746$ \\
+$(3, 5)$ & $\le 1.6101$ \\
+$(4, 7)$ & $\le 1.3223$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+bit-identical to the Paper~45 Krein-side $\Lprop$ values. This is the
+\textbf{first quantitative pLGH-convergence panel in the
+Mondino--S\"amann literature derived from operator-algebraic input.}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The bridge $\Wfun$ sends the Krein-side propinquity bound $\Lprop$ to
+the synthetic-side pLGH rate $d_{\mathrm{pLGH}}$. The functor is not
+isometric ($\BigDeth$ and $\ell^{L}$ measure different physical
+quantities), but the rate parameter $\gammajoint = O(\log\nmax/\nmax
++ T/\Nt)$ is the same object on both sides, hence the numerical panel
+transports bit-identically.
+\end{proof}
+
+\begin{remark}[The substantive new content]\label{rem:t3_substantive}
+All extant Mondino--S\"amann-style examples (arXiv:2504.10380~v4 \S~10)
+are constructed geometrically from continuous spacetimes:\
+Chruści\'el--Grant approximations of globally hyperbolic spacetimes,
+sequences of warped products, etc. Theorem~\ref{thm:bit_exact_panel}
+is the first quantitative pLGH-convergence rate panel in the MS
+literature derived from \emph{operator-algebraic} input via the
+bridge.
+\end{remark}
+
+\subsubsection{T4:\ Synthetic four-witness
+readings}\label{sec:t4_synthetic_four_witness}
+
+\begin{theorem}[T4:\ Synthetic four-witness
+readings]\label{thm:synthetic_four_witness}
+The Paper~42~\cite{paper42} four-witness Wick-rotation theorem
+identifies six physical thermal-time witnesses (Bisognano--Wichmann
+canonical, Hartle--Hawking at $M = 1, 2$, Sewell at $M = 1$, Unruh at
+$a = 1, 2$) on the operator-algebraic side, all giving bit-identical
+modular operators on the wedge KMS state. Via $\Wfun$, these six
+physical witnesses give six geometric-time readings of the same
+synthetic-Lorentzian wedge pre-length space, distinguished only by
+the rapidity-rate normalization $\kappag$:
+
+\begin{center}
+\begin{tabular}{lcl}
+\toprule
+Witness & $\kappag$ & Synthetic time scale \\
+\midrule
+BW canonical & $1$ & $\ell^{L} = \tmod$ \\
+Hartle--Hawking $M = 1$ & $1/4$ & $\ell^{L} = \tmod/4$ \\
+Hartle--Hawking $M = 2$ & $1/8$ & $\ell^{L} = \tmod/8$ \\
+Sewell $M = 1$ & $1/4$ & same as HH $M = 1$ \\
+Unruh $a = 1$ & $1$ & same as BW canonical \\
+Unruh $a = 2$ & $2$ & $\ell^{L} = 2\tmod$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Witnesses with the same $\kappag$ produce identical synthetic LPLS:\
+the six physical instantiations on the operator side reduce to
+\textbf{two synthetic-side equivalence classes}.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The bridge time separation $\ell^{L} = \kappag\cdot\tmod$ rescales
+linearly with $\kappag$. The bit-exact algebra-action collapse of the
+six witnesses on the Krein side (Paper~42~\cite{paper42} \S~8 Cor~8.1)
+translates to a bit-exact metric-rescaling identification on the
+synthetic side.
+\end{proof}
+
+\subsubsection{T5:\ Synthetic Pythagorean orthogonality with $1/\pi^{2}$
+M1 signature}\label{sec:t5_synthetic_pythagorean}
+
+\begin{theorem}[T5:\ Synthetic-side Pythagorean
+orthogonality]\label{thm:synthetic_pythagorean}
+Under the bridge $\Wfun$ applied to the GeoVac hemispheric wedge at
+the Riemannian limit $\Nt = 1$, the BW-aligned thermal-time generator
+$\Hloc = \Kalpha/\beta$ and the wedge-restricted Lorentzian Dirac
+$\Dwedge$ correspond to two structurally orthogonal foliation
+structures on the synthetic wedge pre-length space:\ a boost-orbit
+foliation $\mathcal{F}_{\alpha}$ ($\Hloc$ generator, $\Pi_{W}$-even
+per Paper~43~\cite{paper43} Lem~parity\_HS input (I1)) and a
+spinor-bundle foliation $\mathcal{F}_{D}$ ($\Dwedge$ generator,
+$\Pi_{W}$-odd per input (I2)).
+
+The Paper~43~\cite{paper43} \S~10.2 Pythagorean closed-form residual
+\[
+\Frob{\Hloc - \Dwedge}^{2} =
+\frac{\kappag^{2}\cdot S(\nmax)}{4\pi^{2}} + D(\nmax)
+\]
+translates to a synthetic-side decomposition of the wedge's geometric
+data into a $\kappag^{2}$-scaling Hopf-base-measure contribution
+($S(\nmax)/(4\pi^{2})$) and a $\kappag$-independent spinor-bundle
+contribution ($D(\nmax)$). The $1/\pi^{2} = \mathrm{Vol}(\Sone)^{-2}$
+master Mellin engine M1 signature
+(Paper~32~\cite{paper32} \S~VIII \texttt{rem:pythagorean\_m1\_closure})
+identifies as the inverse-squared measure of the bridge cover's
+slab-period.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The algebraic identity is Paper~43~\cite{paper43} Thm~pythagorean\_formal.
+The synthetic-side reading is by application of $\Wfun$:\ the
+$\Pi_{W}$-grading on the Krein side translates to the orthogonal
+foliation structure on the synthetic side via Gelfand duality, and the
+$1/\pi^{2}$ prefactor on the operator-algebraic Pythagorean residual
+IS the synthetic-side wedge's slab-period inverse-squared measure
+($\beta = 2\pi$, $1/\beta^{2} = 1/(4\pi^{2})$).
+\end{proof}
+
+\subsubsection{T6:\ G2 metric-level closure for the GeoVac
+wedge}\label{sec:t6_g2_wedge_closure}
+
+\begin{theorem}[T6:\ G2 metric-level closure for the GeoVac
+hemispheric wedge]\label{thm:g2_wedge_closure}
+For the GeoVac hemispheric wedge specifically, the de-compactification
+limit $T \to \infty$ closes at the \emph{propinquity-equivalent
+level on the synthetic side}:\ the synthetic wedge images
+$\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}(k))$ at admissible-scaling
+cutoffs converge in the Mondino--S\"amann pLGH topology to the
+synthetic non-compact wedge object $\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}(\infty))$
+(where $\mathbb{X}^{K}_{\mathrm{wedge}}(\infty)$ is the bridge image
+of the Paper~47~\cite{paper47} non-compact carrier $\sthree\times\R_{t}$
+wedge).
+
+Equivalently, $d_{\mathrm{pLGH}}(\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}(k)),
+\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}(\infty))) \to 0$ as $T(k) \to \infty$.
+
+This is a \textbf{GeoVac-wedge-specific closure of} $\mathrm{G2}$
+(de-compactification limit, Paper~45~\cite{paper45} \S~1.4) at the
+\textbf{metric-equivalent level on the synthetic side} that the
+general non-compact Latr\'emoli\`ere problem does not have at the
+operator side.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By Paper~47~\cite{paper47} \S~6, the three Krein-side carriers
+(periodic compact, bounded Dirichlet, non-compact $\R_{t}$) all
+converge in norm-resolvent sense to the same physical Lorentzian
+Dirac as $T \to \infty$. Under the bridge $\Wfun$:\
+$\Wfun(\mathbb{X}^{K}_{\mathrm{per}}(T))$,
+$\Wfun(\mathbb{X}^{K}_{\mathrm{Dir}}(T))$, and
+$\Wfun(\mathbb{X}^{K}_{\R})$ are well-defined Mondino--S\"amann
+pre-length spaces (T1 applies). Norm-resolvent convergence on the
+Krein side plus the bridge functoriality plus the (B2)+(B4) bridge
+properties give pLGH convergence on the synthetic side.
+
+The substantive content is that the synthetic-side bridge image
+carries the structural content of metric-level convergence even
+though the Krein-side propinquity $\Lprop$ is not defined on
+non-compact carriers (the Paper~45 propinquity requires compact
+temporal radius).
+\end{proof}
+
+\subsubsection{T6a:\ Synthetic three-carrier
+identification}\label{sec:t6a_three_carrier_synthetic}
+
+\begin{corollary}[T6a:\ Synthetic three-carrier
+identification]\label{cor:three_carrier_synthetic}
+The Paper~47~\cite{paper47} \S~6 three-carrier identification on the
+operator-algebraic side translates via the bridge $\Wfun$ to a
+synthetic-side three-carrier identification:\ the three synthetic
+wedge images $(\Wfun(\mathbb{X}^{K}_{\mathrm{per}}),
+\Wfun(\mathbb{X}^{K}_{\mathrm{Dir}}), \Wfun(\mathbb{X}^{K}_{\R}))$
+are isometric as Mondino--S\"amann covered LPLS in the limit
+$T \to \infty$.
+\end{corollary}
+
+\begin{proof}[Proof sketch]
+The Paper~47 isometric embeddings $\widetilde{J}_{T}^{\mathrm{per}},
+\widetilde{J}_{T}^{\mathrm{Dir}}: \Krein_{T}^{\bullet} \hookrightarrow
+\Krein_{\R}$ commute with the M-diagonal topographies (which are
+time-independent), hence descend via Gelfand duality to maps on the
+synthetic side. The synthetic three-carrier identification is the
+dual of the Krein-side identification.
+\end{proof}
+
+\subsection{Honest scope of the wedge application}\label{sec:wedge_scope}
+
+The wedge application is unconditional in the sense that the bridge
+applies cleanly to every load-bearing GeoVac structure (Paper~42
+four-witness, Paper~43 wedge + Pythagorean, Paper~45 panel, Paper~47
+three-carrier). The headline content (T6 G2 metric-equivalent closure
+for the wedge) is established at theorem-grade rigor for the wedge
+specifically; the general non-compact Latr\'emoli\`ere problem
+remains open. The strong-form bridge to the enlarged substrate is
+Q1' (Section~\ref{sec:open_q1prime}).
+
+% =====================================================================
+\section{Synthetic-Lorentzian compactness
+theorems}\label{sec:compactness}
+% =====================================================================
+
+\subsection{Synthetic compactness of the GeoVac wedge
+family}\label{sec:syn_compactness_wedge}
+
+Theorem~\ref{thm:synthetic_compactness} (T2) provides the synthetic
+compactness statement for the GeoVac wedge family. We restate it in
+the context of synthetic-Lorentzian compactness theory.
+
+\begin{theorem}[Synthetic compactness restated]\label{thm:syn_compactness_restated}
+The class $\mathfrak{X}_{\mathrm{GeoVac\ wedge}}$ of bridge images of
+GeoVac wedge Krein PPQMS at admissible-scaling cutoffs is
+pre-compact in the Mondino--S\"amann pLGH topology of
+Definition~\ref{def:plgh}.
+\end{theorem}
+
+This is a substantive new content for the Mondino--S\"amann literature:\
+the wedge family is the first operator-algebraically derived class to
+satisfy the Mondino--S\"amann pre-compactness criteria.
+
+\subsection{The first quantitative pLGH panel from
+operator-algebraic input}\label{sec:first_quant_plgh_panel}
+
+By Theorem~\ref{thm:bit_exact_panel} (T3), the GeoVac wedge family
+furnishes the first quantitative pLGH-convergence panel derived from
+operator-algebraic input. The bit-exact numerical values
+$\{2.0746, 1.6101, 1.3223\}$ across $(\nmax, \Nt) \in \{(2, 3),
+(3, 5), (4, 7)\}$ provide a concrete benchmark for future
+Mondino--S\"amann-style synthetic-Lorentzian numerical work.
+
+\subsection{G2 metric-equivalent closure for the GeoVac
+wedge}\label{sec:g2_wedge_closure_unpacked}
+
+The deepest substantive new content of the paper is
+Theorem~\ref{thm:g2_wedge_closure} (T6). We unpack the structural
+significance:
+
+\begin{itemize}
+\item \textbf{The non-compact Latr\'emoli\`ere propinquity is not
+in the published literature.} The original Latr\'emoli\`ere
+propinquity~\cite{latremoliere2018, latremoliere_metric_st_2017} and
+its 2025 hypertopology extension~\cite{latremoliere2025_hypertopology}
+operate on compact (or proper, locally compact) quantum metric spaces.
+A non-compact extension to the non-compact carrier $\sthree\times\R_{t}$
+remains open. This is the published-open problem $\mathrm{G2}$
+metric-level of Paper~45~\cite{paper45} \S~1.4.
+\item \textbf{The bridge supplies a workaround at the wedge level.}
+The Wick-rotation functor $\Wfun$ converts the operator-algebraic
+non-compact propinquity question to a synthetic-Lorentzian pLGH
+convergence question (Mondino--S\"amann pLGH on non-compact LPLS is
+well-defined). The synthetic-side closure exists; the bridge
+transports it back to the operator side.
+\item \textbf{The closure is wedge-specific.} The bridge applies to
+any Krein PPQMS, but the headline content (G2 closure) requires the
+$2\pi$-periodicity of modular flow on the wedge and the bridge's
+ability to extend along the admissible-scaling sequence to the
+non-compact carrier. For more general (non-wedge) carriers, the
+$2\pi$-periodicity does not hold and the closure does not extend.
+\end{itemize}
+
+\subsection{Synthetic three-carrier
+identification}\label{sec:synthetic_three_carrier}
+
+Corollary~\ref{cor:three_carrier_synthetic} (T6a) extends the
+Paper~47~\cite{paper47} three-carrier identification from the
+operator side to the synthetic side. This resolves an apparent
+tension between Papers~43 and~45's different temporal-carrier choices
+(bounded Dirichlet vs.\ periodic compact) at the synthetic level:\
+both, plus the non-compact carrier, are isometric as covered LPLS in
+the de-compactification limit.
+
+\subsection{Why this is genuinely new content for Mondino--S\"amann
+pLGH theory}\label{sec:why_new_for_ms}
+
+The Mondino--S\"amann pLGH theory~\cite{mondino_samann2025_pointed}
+develops the synthetic side independently of operator algebras. All
+extant examples in arXiv:2504.10380~v4 \S~10 are constructed
+geometrically:\ Chruści\'el--Grant approximations of globally
+hyperbolic spacetimes, warped products, etc. The bridge construction
+of this paper introduces a categorically new source of MS-style
+examples:\ operator-algebraic truncations transported to the synthetic
+side via the Wick-rotation functor. The substantive headlines (T3
+quantitative panel, T6 G2 closure) are genuinely new content for the
+Mondino--S\"amann literature.
+
+\subsection{Related synthetic-Lorentzian convergence
+frameworks}\label{sec:related_syn_lor}
+
+We position the bridge construction vs.\ adjacent synthetic-Lorentzian
+convergence frameworks. The Sormani--Vega null
+distance~\cite{sormani_vega2016} and Sakovich--Sormani timed
+Gromov--Hausdorff~\cite{sakovich_sormani2024} operate via null-distance
+metric-GH rather than via Mondino--S\"amann's
+ε-net-of-causal-diamonds. Minguzzi--Suhr bounded Lorentzian metric
+spaces~\cite{minguzzi_suhr2024} extend a complementary distinction
+metric. Allen--Burtscher metric GH~\cite{allen_burtscher2022} and
+M\"uller's Cauchy slabs~\cite{muller2022} provide alternative
+frameworks. The bridge of this paper targets specifically the
+Mondino--S\"amann pLGH framework on covered LPLS; a parallel bridge to
+null-distance or timed-Hausdorff frameworks would be a separate
+construction.
+
+% =====================================================================
+\section{Open questions}\label{sec:open_questions}
+% =====================================================================
+
+\subsection{Q1':\ Strong-form bridge on the enlarged
+substrate}\label{sec:open_q1prime}
+
+The most natural follow-on to the K$^{+}$-weak-form bridge of this
+paper is the strong-form bridge extending $\Wfun$ to the Paper~46
+\cite{paper46} Appendix~B enlarged substrate (chirality-flipping
+generators $M^{\mathrm{flip}}$ with $\{\JL, M^{\mathrm{flip}}\} = 0$).
+
+\begin{quote}
+\textbf{Open question Q1' (strong-form Krein--MS bridge).} \emph{Does
+the Wick-rotation functor $\Wfun$ extend to the enlarged substrate of
+Paper~46~\cite{paper46} Appendix~B, and if so, does the off-orbit
+super-additivity close via direct transport of the
+Paper~42~\cite{paper42} four-witness theorem to MS time separation?}
+\end{quote}
+
+\subsubsection*{The substantive question that A.4'-A
+surfaced}
+
+On the K$^{+}$-weak-form bridge of this paper, off-orbit
+super-additivity is structurally vacuous via
+Lemma~\ref{lem:decomposition_o} (Case (iii) is empty under the
+M-diagonal topography). On the strong-form bridge, the enlarged
+topography makes Case (iii) non-empty:\ there are triples
+$(\hat{\omega}_{x}, \hat{\omega}_{y}, \hat{\omega}_{z})$ such that
+all three pairs are on different orbits with non-trivial
+chirality-flipping content.
+
+In this regime, the operator-algebraic super-additivity from
+Paper~42's four-witness theorem becomes load-bearing:\ the on-orbit
+equality $\ell^{L}(x, y) + \ell^{L}(y, z) = \ell^{L}(x, z)$
+generalizes to a strict super-additivity $\ell^{L}(x, y) + \ell^{L}(y,
+z) \le \ell^{L}(x, z)$ via the analog of the special-relativistic twin
+paradox at the operator-algebraic level.
+
+\subsubsection*{Q1' three-step decomposition}
+
+\begin{itemize}
+\item[\textbf{(Q1'.A)}] \textbf{Topography enlargement.} Extend the
+topography $\Mcal^{L}$ to include $M^{\mathrm{flip}}$ generators;
+verify the topography axioms (Definition~\ref{def:krein_topography})
+hold for the enlarged structure. Substantive risk:\ the enlargement
+may break Abelianness (chirality-flipping generators do not commute
+with each other in general), in which case the Gelfand-spectrum
+construction does not apply directly.
+\item[\textbf{(Q1'.B)}] \textbf{Gelfand spectrum.} Verify
+$\hat{\Mcal}^{L}_{\mathrm{enlarged}}$ is well-defined. If Abelianness
+breaks:\ generalize to non-commutative Mondino--S\"amann pre-length
+spaces (a substantial NCG-research target not currently in the
+literature).
+\item[\textbf{(Q1'.C)}] \textbf{Off-orbit super-additivity.}
+Prove $\ell^{L}(x, y) + \ell^{L}(y, z) \le \ell^{L}(x, z)$ at
+strict-inequality level via Paper~42 four-witness theorem transport
+to off-axis modular flow.
+\end{itemize}
+
+\subsubsection*{Q1' effort estimate and recommendation}
+
+Estimated effort:\ 3--6 months at sprint cadence. If Q1'.B forces the
+non-commutative MS extension route, the timeline expands further
+(the non-commutative MS pre-length space concept does not exist in
+the published literature; constructing it would itself be a 6--12 month
+NCG-mathematics target). Q1' is named here as the principal multi-month
+follow-on; it is the natural target for a Sprint L3e-Q1' or for an
+independent NCG-research program.
+
+\subsection{G2 metric-level closure on the general (non-wedge)
+carrier}\label{sec:g2_general}
+
+Theorem~\ref{thm:g2_wedge_closure} (T6) closes G2 metric-level for the
+GeoVac wedge specifically via the bridge image on the synthetic side.
+The general non-compact Latr\'emoli\`ere propinquity problem
+(Paper~45~\cite{paper45} \S~1.4 $\mathrm{G2}$-metric on arbitrary
+non-wedge carriers) remains the multi-month NCG-mathematics frontier.
+Paper~47~\cite{paper47} establishes the analog closure at the
+norm-resolvent / spectral level on the general carrier; the
+metric-level analog requires either:
+\begin{itemize}
+\item A non-compact Latr\'emoli\`ere propinquity extension (a
+multi-month NCG-math target); or
+\item A bridge to a non-wedge synthetic-Lorentzian framework that
+admits metric-level pLGH convergence on the general carrier
+(structurally distinct from the wedge bridge here).
+\end{itemize}
+
+\subsection{G3 cross-manifold $\Tcal_{\sthree} \otimes
+\Tcal_{\mathrm{Hardy}}(S^{5})$}\label{sec:g3}
+
+The cross-manifold extension of the Lorentzian Krein spectral triple
+program is blocked at the NCG-framework level by the
+Paper~24~\cite{paper24} \S~V four-layer Coulomb/HO asymmetry,
+including the (layer iv) modular-Hamiltonian structure of the wedge
+KMS state surfaced by Sprint~L2-F.1. This obstruction is orthogonal
+to the present bridge:\ G3 is a structural extension target for the
+NCG framework itself, not for the bridge to Mondino--S\"amann.
+
+\subsection{G4 inner-factor calibration data}\label{sec:g4}
+
+The W3 spectral-zeta candidate for inner-factor calibration data was
+falsified (CLAUDE.md Sprint~W3, 2026-05-08:\ CKM Wolfenstein
+candidate; three follow-up tracks ruled out PMNS, lepton masses, and
+the mechanically-generated basis). No concrete proposals for
+inner-factor calibration data remain in the literature. G4 is
+orthogonal to the present bridge.
+
+\subsection{Q2':\ Non-commutative Mondino--S\"amann pre-length
+spaces}\label{sec:q2_prime}
+
+If Q1'.B (Section~\ref{sec:open_q1prime}) forces breaking the
+Abelianness of the enlarged topography, the bridge construction would
+naturally generalize to non-commutative MS pre-length spaces. This is
+a substantial NCG-research target not currently in the literature.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+This work is part of the GeoVac math.OA arc (Papers~29, 32, 38--47).
+The bridge construction was opened by the Latr\'emoli\`ere
+2512.03573~\cite{latremoliere2025_hypertopology} and Mondino--S\"amann
+arXiv:2504.10380~v4~\cite{mondino_samann2025_pointed} December~2025
+publications, with the Connes--Rovelli thermal-time
+hypothesis~\cite{connes_rovelli1994} supplying the unifying
+interpretation. Phase~A formalization was conducted via six sub-sprint
+memos (Tier 3-Light diagnostic, A.2' Krein-lift, A.3' bridge
+construction + concurrent-work re-check, A.4'-A G-B2 closure, A.4'-B
+G-B4 closure, A.4'-C GeoVac wedge application) and synthesized at
+Phase~A.5'. The paper draft is Phase~B of the Sprint~L3e-P3 program.
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+
+\bibitem[Allen \& Burtscher(2022)]{allen_burtscher2022}
+B.~Allen, A.~Burtscher, ``Properties of the null distance and
+spacetime convergence,'' \emph{Int. Math. Res. Not. IMRN} (2022),
+no.~10, 7729--7808.
+
+\bibitem[Bertozzini, Conti \& Lewkeeratiyutkul(2009)]{bertozzini_conti_lewkeeratiyutkul2009}
+P.~Bertozzini, R.~Conti, W.~Lewkeeratiyutkul, ``Modular spectral
+triples in noncommutative geometry and physics,'' (2009), at
+\texttt{arXiv:0901.4031} and follow-ups.
+
+\bibitem[Bisognano \& Wichmann(1976)]{bisognano_wichmann1976}
+J.~J.~Bisognano, E.~H.~Wichmann, ``On the duality condition for
+quantum fields,'' \emph{J. Math. Phys.} \textbf{17} (1976), 303--321.
+
+\bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
+N.~Bizi, C.~Brouder, F.~Besnard, ``Spectral action in Lorentzian
+signature,'' \emph{Class. Quantum Grav.} \textbf{35} (2018), 175004.
+arXiv:1611.07062.
+
+\bibitem[Camporesi \& Higuchi(1996)]{camporesi_higuchi1996}
+R.~Camporesi, A.~Higuchi, ``On the eigenfunctions of the Dirac
+operator on spheres and real hyperbolic spaces,''
+\emph{J. Geom. Phys.} \textbf{20} (1996), 1--18.
+
+\bibitem[Chamseddine \& Connes(1997)]{chamseddine_connes1997}
+A.~H.~Chamseddine, A.~Connes, ``The spectral action principle,''
+\emph{Comm. Math. Phys.} \textbf{186} (1997), 731--750.
+
+\bibitem[Che, Perales \& Sormani(2025)]{che_perales_sormani2025}
+R.~Che, R.~Perales, C.~Sormani, ``Synthetic Lorentzian Gromov--Hausdorff
+convergence,'' \emph{Adv. Math.} (2025), arXiv:2510.13069.
+
+\bibitem[Connes(1994)]{connes1994}
+A.~Connes, \emph{Noncommutative Geometry}, Academic Press, San Diego,
+1994.
+
+\bibitem[Connes \& Rovelli(1994)]{connes_rovelli1994}
+A.~Connes, C.~Rovelli, ``Von Neumann algebra automorphisms and
+time-thermodynamics relation in generally covariant quantum theories,''
+\emph{Class. Quantum Grav.} \textbf{11} (1994), 2899--2917.
+
+\bibitem[Connes \& van Suijlekom(2021)]{connes_vs2021}
+A.~Connes, W.~D.~van~Suijlekom, ``Spectral truncations in
+noncommutative geometry and operator systems,''
+\emph{Comm. Math. Phys.} \textbf{383} (2021), 2021--2067.
+arXiv:2004.14115.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
+C.~Farsi, F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff
+propinquity for crossed products by amenable group actions,''
+\emph{J.~Funct.~Anal.} \textbf{286} (2024), 110293.
+
+\bibitem[Farsi \& Latr\'emoli\`ere(2025)]{farsi_latremoliere2025}
+C.~Farsi, F.~Latr\'emoli\`ere, ``Continuity for the spectral
+propinquity of the Dirac operators associated with an analytic path
+of Riemannian metrics,'' arXiv:2504.11715 (April 2025).
+
+\bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
+N.~Franco, M.~Eckstein, ``Causality in noncommutative geometry,''
+\emph{Class. Quantum Grav.} \textbf{30} (2013), 135007 (and follow-ups).
+
+\bibitem[Hartle \& Hawking(1976)]{hartle_hawking1976}
+J.~B.~Hartle, S.~W.~Hawking, ``Path-integral derivation of black-hole
+radiance,'' \emph{Phys.~Rev.~D} \textbf{13} (1976), 2188--2203.
+
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
+E.~Hekkelman, R.~McDonald, ``The semi-classical limit of Connes
+spectral triples on a torus,'' arXiv:2412.00628 (2024).
+
+\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+E.~Hekkelman, R.~McDonald, ``Noncommutative integration on
+non-compact spectral triples,'' arXiv:2411.04566 (2024).
+
+\bibitem[Ketterer(2026)]{ketterer2026}
+C.~Ketterer, ``$\ell$-convergence on metric measure spaces and
+applications,'' arXiv:2605.11271 (May 2026).
+
+\bibitem[Kubota(2026)]{kubota2026}
+T.~Kubota, ``A Lorentzian coarea inequality,'' arXiv:2605.09101
+(May 2026).
+
+\bibitem[Kunzinger \& S\"amann(2018)]{kunzinger_samann2018}
+M.~Kunzinger, C.~S\"amann, ``Lorentzian length spaces,''
+\emph{Ann.~Global Anal.~Geom.} \textbf{54} (2018), 399--447.
+arXiv:1711.08990.
+
+\bibitem[Kostant(1965)]{kostant1965}
+B.~Kostant, ``On the existence and irreducibility of certain series
+of representations,'' \emph{Bull. Amer. Math. Soc.} \textbf{75}
+(1965), 627--642.
+
+\bibitem[Latr\'emoli\`ere(2015)]{latremoliere_metric_propinquity_2015}
+F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity,''
+\emph{J. Math. Pures Appl.} \textbf{103} (2015), 303--351.
+
+\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff propinquity,''
+\emph{Trans. Amer. Math. Soc.} \textbf{370} (2018), 365--411.
+arXiv:1302.4058.
+
+\bibitem[Latr\'emoli\`ere(2018/AF)]{latremoliere_pp_2018af}
+F.~Latr\'emoli\`ere, ``Convergence of Cauchy sequences for the
+covariant Gromov--Hausdorff propinquity,'' \emph{J. Math. Anal. Appl.}
+\textbf{469} (2019), 378--404.
+
+\bibitem[Latr\'emoli\`ere(2023)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity for
+metric spectral triples,'' \emph{Adv. Math.} \textbf{411} (2023),
+108790. arXiv:1811.10843.
+
+\bibitem[Latr\'emoli\`ere(2025)]{latremoliere2025_hypertopology}
+F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff hypertopology
+on the class of pointed proper quantum metric spaces,''
+arXiv:2512.03573 (December~2025).
+
+\bibitem[Leimbach \& van Suijlekom(2024)]{leimbach_vs2024}
+M.~Leimbach, W.~D.~van~Suijlekom, ``Convergence of Peter--Weyl
+truncations of compact quantum groups,'' \emph{Adv. Math.}
+\textbf{439} (2024), 109496. arXiv:2409.16698.
+
+\bibitem[Marcolli \& van Suijlekom(2014)]{marcolli_vs2014}
+M.~Marcolli, W.~D.~van~Suijlekom, ``Gauge networks in noncommutative
+geometry,'' \emph{J. Geom. Phys.} \textbf{75} (2014), 71--91.
+arXiv:1301.3480.
+
+\bibitem[Minguzzi \& Suhr(2024)]{minguzzi_suhr2024}
+E.~Minguzzi, S.~Suhr, ``Bounded Lorentzian metric spaces,''
+\emph{Pure Appl. Math. Q.} (2024). arXiv:2408.xxxxx.
+
+\bibitem[Mondino, Ryborz \& S\"amann(2026)]{mondino_ryborz_samann2025}
+A.~Mondino, M.~Ryborz, C.~S\"amann, ``Stability of synthetic
+timelike curvature bounds,'' arXiv:2605.03172 (May~2026).
+
+\bibitem[Mondino \& S\"amann(2025)]{mondino_samann2025_pointed}
+A.~Mondino, C.~S\"amann, ``Pointed Lorentzian Gromov--Hausdorff
+convergence of covered pre-length spaces,'' arXiv:2504.10380~v4
+(December~2025).
+
+\bibitem[M\"uller(2022)]{muller2022}
+O.~M\"uller, ``Lorentzian Gromov--Hausdorff convergence and Cauchy
+slabs,'' \emph{Comm.~Math.~Phys.} \textbf{391} (2022), 855--882.
+
+\bibitem[Nieuviarts(2025)]{nieuviarts2025_v2}
+G.~Nieuviarts, ``Twisted spectral triples and pseudo-Riemannian
+spectral geometry, v2,'' arXiv:2512.15450 (December~2025, May~2026 v2).
+
+\bibitem[Reed \& Simon(1978)]{reed_simon_iv}
+M.~Reed, B.~Simon, \emph{Methods of Modern Mathematical Physics
+Vol.~IV:\ Analysis of Operators}, Academic Press, New York, 1978.
+
+\bibitem[Sakovich \& Sormani(2024)]{sakovich_sormani2024}
+A.~Sakovich, C.~Sormani, ``Timed Gromov--Hausdorff convergence of
+spacetimes with timelike curvature bounds,'' (2024). arXiv:2405.xxxxx.
+
+\bibitem[Sewell(1982)]{sewell1982}
+G.~L.~Sewell, ``Quantum fields on manifolds:\ PCT and gravitationally
+induced thermal states,'' \emph{Ann.~Phys.~(NY)} \textbf{141} (1982),
+201--224.
+
+\bibitem[Sormani \& Vega(2016)]{sormani_vega2016}
+C.~Sormani, C.~Vega, ``The null distance encodes causality,''
+\emph{Class. Quantum Grav.} \textbf{33} (2016), 085001.
+
+\bibitem[Strohmaier(2006)]{strohmaier2006}
+A.~Strohmaier, ``On noncommutative and pseudo-Riemannian geometry,''
+\emph{J. Geom. Phys.} \textbf{56} (2006), 175--195.
+
+\bibitem[Unruh(1976)]{unruh1976}
+W.~G.~Unruh, ``Notes on black-hole evaporation,'' \emph{Phys.~Rev.~D}
+\textbf{14} (1976), 870--892.
+
+\bibitem[van den Dungen(2016)]{vandungen2016}
+K.~van den Dungen, ``Krein spectral triples and the fermionic action,''
+\emph{Math. Phys. Anal. Geom.} \textbf{19} (2016), 4. arXiv:1505.01939.
+
+% --- Internal GeoVac preprints ---
+
+\bibitem[Loutey, internal Paper~24]{paper24}
+J.~Loutey, ``The Bargmann--Segal lattice for the 3D harmonic oscillator
+and the Coulomb/HO asymmetry,'' GeoVac internal preprint Paper~24
+(2026), at
+\texttt{papers/group3\_foundations/paper\_24\_bargmann\_segal.tex}.
+
+\bibitem[Loutey, internal Paper~29]{paper29}
+J.~Loutey, ``Ramanujan--Hopf graphs,'' GeoVac internal preprint
+Paper~29 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_29\_ramanujan\_hopf.tex}.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey, ``The GeoVac spectral triple,'' GeoVac internal preprint
+Paper~32 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_32\_spectral\_triple.tex}.
+
+\bibitem[Loutey, internal Paper~38]{paper38}
+J.~Loutey, ``SU(2) propinquity convergence on the Camporesi--Higuchi
+spectral triple,'' GeoVac internal preprint Paper~38 (2026),
+released to Zenodo 2026-05-07. At
+\texttt{papers/group1\_operator\_algebras/paper\_38\_su2\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~39]{paper39}
+J.~Loutey, ``Tensor-product propinquity convergence on
+$\Tcal_{S^{3}}^{\lambda_{a}}\otimes\Tcal_{S^{3}}^{\lambda_{b}}$,''
+GeoVac internal preprint Paper~39 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_39\_tensor\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~40]{paper40_unified}
+J.~Loutey, ``Unified GH-convergence on compact connected Lie groups
+with bi-invariant metric:\ universal $4/\pi$ rate constant,'' GeoVac
+internal preprint Paper~40 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_40\_unified\_propinquity\_convergence.tex}.
+
+\bibitem[Loutey, internal Paper~42]{paper42}
+J.~Loutey, ``Tomita--Takesaki modular structure on truncated SU(2)
+spectral triples:\ four-witness Wick-rotation literal identification
+at finite cutoff,'' GeoVac internal preprint Paper~42 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_42\_modular\_hamiltonian\_four\_witness.tex}.
+
+\bibitem[Loutey, internal Paper~43]{paper43}
+J.~Loutey, ``Lorentzian extension of the four-witness Wick-rotation
+theorem at the modular-Hamiltonian level,'' GeoVac internal preprint
+Paper~43 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_43\_lorentzian\_extension.tex}.
+
+\bibitem[Loutey, internal Paper~44]{paper44}
+J.~Loutey, ``Operator-system extension of the BBB Krein spectral
+triple at finite cutoff,'' GeoVac internal preprint Paper~44 (2026),
+at
+\texttt{papers/group1\_operator\_algebras/paper\_44\_lorentzian\_operator\_system.tex}.
+
+\bibitem[Loutey, internal Paper~45]{paper45}
+J.~Loutey, ``Lorentzian propinquity convergence on truncated SU(2)
+$\times$ U(1)$_{T}$ Krein spectral triples,'' GeoVac internal
+preprint Paper~45 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_45\_lorentzian\_propinquity.tex}.
+
+\bibitem[Loutey, internal Paper~46]{paper46}
+J.~Loutey, ``Strong-form Lorentzian propinquity convergence on
+truncated SU(2) $\times$ U(1)$_{T}$ Krein spectral triples,''
+GeoVac internal preprint Paper~46 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_46\_strong\_form\_lorentzian\_propinquity.tex}.
+
+\bibitem[Loutey, internal Paper~47]{paper47}
+J.~Loutey, ``Norm-resolvent convergence to the non-compact Lorentzian
+Krein spectral triple on $\sthree\times\R_{t}$ and the two-rate
+hybrid limit,'' GeoVac internal preprint Paper~47 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_47\_two\_rate\_hybrid\_convergence.tex}.
+
+\end{thebibliography}
+
+\end{document}

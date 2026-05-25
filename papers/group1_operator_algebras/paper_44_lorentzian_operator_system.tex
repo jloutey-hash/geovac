@@ -931,6 +931,65 @@ phenomenon — propagation number depends on which natural envelope is
 targeted — has a published parallel.
 \end{remark}
 
+\begin{remark}[Connes--vS \S IV sharpening:\ envelope-relative
+informative content]\label{rem:cvs_sharpening}
+The Connes--van~Suijlekom~\cite{connes_vs2021} reading of the
+Riemannian truncated operator system, as articulated in
+Paper~32~\S~III \texttt{rem:operator\_system}~\cite{paper32}, frames
+the $C^*$-envelope $C^*(\Op_\Lambda)$ as the ``non-informative full
+matrix algebra'' that the spectral truncation collapses to, while
+the operator-system data $\Op_\Lambda$ itself carries the surviving
+algebraic content. On the Toeplitz worked example
+$C(S^1)^{(n)}$~\cite[\S\,3.1]{connes_vs2021} and on the
+$\sthree$~scalar Fock-projected Hilbert space (Paper~32 Definition~3.2),
+these two readings cohere into a single statement:\
+$\dim(\Op_{\nmax}) < \dim(\mathrm{env}) = N^2$ strictly (the operator
+system is informative because it is sub-envelope), yet
+$\dim(\Op_{\nmax}^2) = N^2$ (its second power fills the envelope), so
+$\prop = 2$. The Paper~32 witness pair (raise-then-lower at the top
+shell) and the propagation-2 result are then two facets of the same
+single envelope.
+
+The present Lorentzian construction sharpens this Riemannian
+template into a dichotomy that has no analog in
+Paper~32~\S~III. Under the Weyl-doubled achievable envelope
+$\mathcal{V}_\achievable$ — the structural target for
+scalar-multiplier closure on the chirality-doubled spinor bundle —
+the Paper~32 reading transports verbatim:\ the witness pair of
+Theorem~\ref{thm:witness_pair} exhibits closure failure at
+$\sim 38\%$ relative Frobenius residual at $\nmax = 2$ ($35.89\%$ at
+$\nmax = 3$, \texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json}),
+yet $\dim((\Op^L)^2) = \dim_\achievable$ exactly
+(Theorem~\ref{thm:prop_envelope_dependent} eq.~\eqref{eq:prop_ach}).
+The operator system is ``informative'' in the Connes--vS sense
+because its products fill the natural target, and the witness pair
+is the residual visible only inside that target.
+
+Under the full $\Bcal(\Krein)$ envelope, however, the witness-pair
+residual is supplemented by a deeper, second structural obstruction:\
+chirality-block-diagonal closure plus a commutative temporal
+subalgebra together cannot generate the chirality-flipping or
+non-diagonal-temporal directions of $\Bcal(\Krein)$ at any finite
+$k$ (Theorem~\ref{thm:prop_envelope_dependent}
+eq.~\eqref{eq:prop_full_inf}). This is a real structural ceiling
+imposed by the Lorentzian geometry itself — the chirality doubling
+forced by the BBB $(m, n) = (4, 6)$ Krein structure plus the
+commutative temporal slot — not a residual closure failure of the
+truncation.
+
+The operator system's informative content is therefore
+\emph{envelope-relative}. On the achievable envelope, Paper~44
+preserves Paper~32's Connes--vS structural reading exactly:\
+sub-envelope linear dimension, full second-power dimension, $\prop =
+2$. On the full envelope, the operator system is ``even more
+sub-informative'' than its Riemannian template, because it hits the
+Lorentzian-geometric ceiling before reaching $\Bcal(\Krein)$. We
+therefore name the achievable envelope as the natural target for the
+Connes--vS propagation question on the Lorentzian extension, with
+the full-envelope $\prop = \infty$ recorded as a structural ceiling
+that does not vitiate the achievable-envelope reading.
+\end{remark}
+
 % =====================================================================
 \section{Trivial Krein-positive restriction}\label{sec:krein_positivity}
 % =====================================================================

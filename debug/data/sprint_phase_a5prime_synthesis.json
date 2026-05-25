@@ -1,0 +1,259 @@
+{
+  "sprint": "Phase A.5'",
+  "date": "2026-05-24",
+  "sprint_position": "Phase A.5' of Sprint L3e-P3 — synthesis + Paper 48 outline + Phase A.5'.5 gate decision",
+  "status": "FORMAL_SYNTHESIS_MEMO",
+  "aggregate_verdict": "POSITIVE",
+  "recommendation": "PROCEED to Phase B Paper 48 drafting (single sprint, ~1.5 months estimated)",
+
+  "phase_a_summary": {
+    "sub_sprints_completed": 6,
+    "all_positive": true,
+    "predecessor_memos": [
+      {"memo": "debug/sprint_tier3_light_krein_lift_diagnostic_memo.md", "verdict": "POSITIVE-WITH-NAMED-OBSTRUCTIONS", "axioms_verified": "7/7"},
+      {"memo": "debug/sprint_phase_a2prime_krein_lift_formalization_memo.md", "verdict": "POSITIVE", "axioms_verified": "9/9 theorem-grade", "key_finding": "Def 1.26 caveat dissolves via Latrémolière Lemma 1.25"},
+      {"memo": "debug/sprint_phase_a3prime_mondino_samann_bridge_memo.md", "verdict": "POSITIVE", "key_finding": "Wick-rotation functor W via R3 Connes-Rovelli thermal time"},
+      {"memo": "debug/sprint_phase_a3prime_concurrent_work_recheck_memo.md", "verdict": "CLEAR-WITH-MINOR-FLAGS", "key_finding": "no published Krein-MS bridge in 3-month window; 5 MEDIUM-risk adjacent works flagged"},
+      {"memo": "debug/sprint_phase_a4prime_a_gb2_super_additivity_memo.md", "verdict": "POSITIVE", "key_finding": "off-orbit super-additivity structurally vacuous at K⁺-weak-form via M-diagonal topography (Decomposition O Case (iii) empty)"},
+      {"memo": "debug/sprint_phase_a4prime_b_gb4_axiom_verification_memo.md", "verdict": "POSITIVE", "key_finding": "Plancherel-nested Berezin IS MS Def 3.6 axioms, mechanical verification"},
+      {"memo": "debug/sprint_phase_a4prime_c_wedge_application_memo.md", "verdict": "POSITIVE", "newly_accessible_theorems": "7/7 (T1-T6+T6a)"}
+    ],
+    "bridge_theorem_status": {
+      "name": "Bridge Theorem 6.4 (Krein-Mondino-Sämann Bridge, post-A.4' closure)",
+      "B1_structural_correspondence": "theorem-grade (A.3' §2 table, 15 rows)",
+      "B2_reverse_triangle": "theorem-grade (A.4'-A Theorem 2.1)",
+      "B3_pre_compactness": "theorem-grade (A.3' Theorem 6.4(B3))",
+      "B4_convergence_transport": "theorem-grade (A.4'-B Theorem 5.1)",
+      "fully_closed_at": "K⁺-weak-form level"
+    },
+    "headline_finding": "Categorical bridge between operator-algebraic Latrémolière 2512.03573 metametric and synthetic-Lorentzian Mondino-Sämann 2504.10380 pre-length space, via R3 Connes-Rovelli thermal-time identification. The bridge is functorial (not isometric); Đ^K measures thermal time, ℓ^L measures geometric proper time, both are images of the same wedge KMS state under different projection mechanisms."
+  },
+
+  "named_gap_status_table": {
+    "G1_Q1_K_plus_weak_form_propinquity": {
+      "source": "Paper 45 §1.4",
+      "status_post_phase_A": "CLOSED",
+      "action": "Paper 45 main theorem (2026-05-18)"
+    },
+    "G1_Q1_prime_strong_form_natural_substrate": {
+      "source": "Paper 45 §1.4 G1, Paper 46 §1.4",
+      "status_post_phase_A": "CLOSED",
+      "action": "Paper 46 main theorem (Sprint L3b-2a-d, 2026-05-22): Λ^strong = Λ^P45 bit-exact"
+    },
+    "G1_prime_prime_strong_form_enlarged_substrate": {
+      "source": "Paper 46 §1.4, A.4'-A §8",
+      "status_post_phase_A": "CLOSED",
+      "action": "Paper 46 Appendix B (Sprint L3b-2f-β, 2026-05-22): gradient-norm absorption, Λ^enlarged = Λ^P46 bit-exact"
+    },
+    "G2_metric_level_de_compactification_general_carrier": {
+      "source": "Paper 45 §1.4",
+      "status_post_phase_A": "PARTIAL",
+      "details": "Paper 47 (2026-05-23) closes at norm-resolvent/spectral level; metric-level on general non-wedge carrier remains the multi-month G2-metric frontier"
+    },
+    "G2_metric_level_closure_for_GeoVac_wedge": {
+      "source": "Paper 45 §1.4, A.4'-C T6",
+      "status_post_phase_A": "CLOSED-FOR-WEDGE",
+      "action": "A.4'-C Theorem T6 (new, this Phase A): closes at propinquity-equivalent level on synthetic side via bridge functor + Paper 47 three-carrier identification + T6a. A workaround for the published-open problem at the GeoVac-wedge-specific level."
+    },
+    "G_B1_structural_correspondence": {
+      "source": "A.3' Theorem 6.4",
+      "status_post_phase_A": "CLOSED",
+      "action": "A.3' §2 table (15 rows) theorem-grade"
+    },
+    "G_B2_reverse_triangle": {
+      "source": "A.3' Theorem 6.4",
+      "status_post_phase_A": "CLOSED",
+      "action": "A.4'-A Theorem 2.1 (new, this Phase A): structurally vacuous at K⁺-weak-form via M-diagonal topography. Strong-form Q1' off-orbit super-additivity deferred"
+    },
+    "G_B3_pre_compactness": {
+      "source": "A.3' Theorem 6.4",
+      "status_post_phase_A": "CLOSED",
+      "action": "A.3' Theorem 6.4(B3) theorem-grade"
+    },
+    "G_B4_convergence_transport": {
+      "source": "A.3' Theorem 6.4",
+      "status_post_phase_A": "CLOSED",
+      "action": "A.4'-B Theorem 5.1 (new, this Phase A): Plancherel-nested Berezin = MS Def 3.6 axioms"
+    },
+    "G3_cross_manifold_S3_x_HardyS5": {
+      "source": "Paper 45 §1.4",
+      "status_post_phase_A": "OPEN",
+      "details": "Paper 24 §V Coulomb/HO category mismatch (four-layer asymmetry). Out of Phase A / Paper 48 scope."
+    },
+    "G4_inner_factor_calibration": {
+      "source": "Paper 45 §1.4",
+      "status_post_phase_A": "OPEN",
+      "details": "W3 spectral-zeta candidate FALSIFIED (Sprint W3, 2026-05-08); no concrete proposals. Out of Phase A / Paper 48 scope."
+    },
+    "net_status_summary": {
+      "closed": 7,
+      "partial": 1,
+      "open": 2,
+      "structurally_orthogonal": 1,
+      "closed_specifically": ["G1", "G1'", "G1''", "G2-wedge", "G-B1", "G-B2", "G-B3", "G-B4"]
+    }
+  },
+
+  "Q1_prime_deferred_strong_form_bridge": {
+    "question": "Does the Wick-rotation functor W extend to the enlarged substrate of Paper 46 Appendix B, and if so, does the off-orbit super-additivity close via direct transport of the Paper 42 four-witness theorem to MS time separation?",
+    "decomposition": {
+      "Q1_prime_A_topography_enlargement": {
+        "task": "Extend topography M^L to include M^flip generators; verify Def 1.40-K axioms hold for enlarged structure",
+        "risk": "Abelianness may break (chirality-flipping generators do not commute in general)"
+      },
+      "Q1_prime_B_Gelfand_spectrum": {
+        "task": "Verify enlarged spectrum well-defined",
+        "fallback": "If Abelianness breaks, generalize to non-commutative MS pre-length spaces (substantial NCG-research target, not in published literature)"
+      },
+      "Q1_prime_C_off_orbit_super_additivity": {
+        "task": "Prove ℓ^L(x,y) + ℓ^L(y,z) ≤ ℓ^L(x,z) at strict-inequality level via Paper 42 four-witness theorem transport to off-axis modular flow"
+      }
+    },
+    "estimated_effort": "3-6 months at sprint cadence, depending on Q1'.B forcing non-commutative-MS-extension route",
+    "recommendation": "DEFER to Paper 48 §8 (open questions); natural follow-on for Sprint L3e-Q1' or independent NCG-research program"
+  },
+
+  "paper_48_outline": {
+    "title_working": "Krein-pointed proper quantum metric spaces and the bridge to Mondino-Sämann Lorentzian pre-length spaces, with application to the GeoVac hemispheric wedge",
+    "subject_classifications": ["math.OA (primary)", "math-ph (secondary)", "gr-qc (secondary)"],
+    "venue_target": "J. Geom. Phys. or Adv. Math.",
+    "position_in_GeoVac_series": "tenth math.OA standalone (after Papers 29, 32, 38, 39, 40, 42, 43, 44, 45, 46, 47)",
+    "estimated_length_pages": "35-45",
+    "estimated_length_words": "13,600-18,000",
+    "estimated_drafting_effort_weeks": "6-7 (~1.5 months at standard math.OA cadence)",
+    "sections": [
+      {
+        "section": "§1 Introduction",
+        "pages_estimate": "3-4",
+        "key_theorems": [],
+        "cross_references_phase_B": ["A.5' §1", "A.5' §3"],
+        "content": "F2 motivation, Wick-rotation functor headline, GeoVac wedge application, honest scope, related work"
+      },
+      {
+        "section": "§2 Setup",
+        "pages_estimate": "4-5",
+        "key_theorems": [],
+        "cross_references_phase_B": ["A.2' §1.2", "A.3' §1.2", "A.5' §1.3", "A.5' §1.4"],
+        "content": "Latrémolière 2512.03573 recap, Krein operator-system substrate recap (Papers 44/45/46), Mondino-Sämann pre-length space recap (arXiv:2504.10380 v4 §3), BW vacuum + four-witness recap, Connes-Rovelli 1994 recap"
+      },
+      {
+        "section": "§3 Krein-pointed proper QMS",
+        "pages_estimate": "6-8",
+        "key_theorems": ["Lemma 3.8 (Krein-Leibniz)", "Theorem 3.11 (Krein approximate-unit)"],
+        "cross_references_phase_B": ["A.2' §2 (Defs 2.1-2.16)", "A.2' §3 (axiom transports)", "A.2' §4 (Def 1.26 dissolution)"],
+        "content": "Definitional layer (Def 3.1-3.7), axiom transports (Lemma 3.8, Verifications 3.9-3.10), natural topography (Lemma 3.12), merged substrate verification (3.13), Krein M-tunnels (Def 3.14, Lemma 3.15)"
+      },
+      {
+        "section": "§4 Krein-pointed propinquity hypertopology",
+        "pages_estimate": "4-5",
+        "key_theorems": ["Thm 4.4 (4-point triangle)", "Thm 4.5 (coincidence)", "Thm 4.7 (inframetric)", "Thm 4.9 (compact-case agreement)"],
+        "cross_references_phase_B": ["A.2' §3.11-3.17", "A.2' §6 (compact-case)"],
+        "content": "Extent (4.1-4.2), M-local propinquity (4.3-4.4), coincidence (4.5), metametric Đ and hypertopology (4.6-4.8), compact-case agreement (4.9), numerical panel (Tab 4.1)"
+      },
+      {
+        "section": "§5 Mondino-Sämann bridge",
+        "pages_estimate": "6-8",
+        "key_theorems": ["Thm 5.4 (Bridge Theorem, all four properties theorem-grade)", "Thm 5.7 (convergence transport)"],
+        "cross_references_phase_B": ["A.3' §3-§6", "A.4'-A §3-§4", "A.4'-B §3-§5"],
+        "content": "F2 mismatch + R1/R2/R3 testing (5.1), R3 Connes-Rovelli identification (5.2), Wick-rotation functor (5.3), Bridge Theorem (5.4), 15-row correspondence table (5.5), reverse triangle proof via Decomposition O (5.6), convergence transport theorem (5.7), honest scope (5.8)"
+      },
+      {
+        "section": "§6 GeoVac wedge application",
+        "pages_estimate": "5-7",
+        "key_theorems": ["Thm 6.2 (T1 wedge as MS PPQMS)", "Thm 6.3 (T3 bit-exact panel)", "Thm 6.4 (T4 four-witness synthetic)", "Thm 6.5 (T5 synthetic Pythagorean)", "Cor 6.6 (T6a three-carrier identification)"],
+        "cross_references_phase_B": ["A.4'-C §2-§3"],
+        "content": "Wedge as Krein PPQMS (6.1), application of W (6.2), bit-exact panel inheritance (6.3), four-witness synthetic readings (6.4), synthetic Pythagorean orthogonality (6.5), three-carrier identification (6.6), compact-case agreement on wedge (6.7)"
+      },
+      {
+        "section": "§7 Synthetic-Lorentzian compactness theorems",
+        "pages_estimate": "4-5",
+        "key_theorems": ["Thm 7.1 (T2 synthetic compactness)", "Thm 7.2 (T6 G2 metric-level closure for wedge — deepest substantive new content)"],
+        "cross_references_phase_B": ["A.4'-C §3", "A.3' §10"],
+        "content": "Synthetic compactness (7.1), G2 metric-level closure for wedge (7.2), positioning vs MS §10 examples (7.3), related work synthesis (7.4)"
+      },
+      {
+        "section": "§8 Open questions",
+        "pages_estimate": "2-3",
+        "key_theorems": [],
+        "cross_references_phase_B": ["A.5' §3 (Q1' detailed framing)", "Paper 45 §1.4", "CLAUDE.md §1.7 WH1"],
+        "content": "Q1' strong-form bridge with enlarged substrate (8.1), G2 metric-level on general carrier (8.2), G3 cross-manifold (8.3), G4 inner-factor calibration (8.4), Q2' non-commutative MS extension (8.5)"
+      }
+    ],
+    "bibliography_estimate": {
+      "total_entries": "50-60",
+      "key_sources": [
+        "Latrémolière 2017, 2018, 2023, 2025, 2512.03573 (Dec 2025)",
+        "Mondino-Sämann arXiv:2504.10380 v4 (Dec 2025)",
+        "Connes-Rovelli 1994 (Class. Quantum Grav. 11, 2899)",
+        "Papers 38, 42, 43, 44, 45, 46, 47 (GeoVac math.OA series)",
+        "Paper 32 §VIII (master Mellin engine M1 closure)",
+        "Paper 24 §V (Coulomb/HO four-layer asymmetry, G3 blocker)"
+      ],
+      "medium_risk_concurrent_works_to_cite": [
+        {"paper": "Ketterer arXiv:2605.11271", "topic": "ℓ-convergence (synthetic-side internal refinement)"},
+        {"paper": "Kubota arXiv:2605.09101", "topic": "Lorentzian coarea inequality"},
+        {"paper": "Mondino-Ryborz-Sämann arXiv:2605.03172", "topic": "Stability of synthetic TCD"},
+        {"paper": "Che-Perales-Sormani arXiv:2510.13069", "topic": "Timed-metric Hausdorff"},
+        {"paper": "Nieuviarts arXiv:2512.15450 v2", "topic": "Twisted spectral triple (KO-dim 3 restriction noted)"}
+      ],
+      "adjacent_synthetic_Lorentzian_literature": [
+        "Sormani-Vega 2016 null distance",
+        "Sakovich-Sormani 2024 timed Gromov-Hausdorff",
+        "Minguzzi-Suhr 2024 bounded Lorentzian metric spaces",
+        "Müller 2022 Cauchy slabs",
+        "Allen-Burtscher 2022 / Kunzinger-Steinbauer 2022 metric GH with null distance"
+      ]
+    }
+  },
+
+  "phase_A5prime_5_gate_verdict": {
+    "questions": {
+      "phase_A_complete": "YES",
+      "bridge_fully_closed_K_plus_weak_form": "YES",
+      "GeoVac_wedge_application_complete": "YES",
+      "Paper_48_outline_ready_for_drafting": "YES",
+      "Q1_prime_deferred_cleanly": "YES"
+    },
+    "aggregate_verdict": "POSITIVE",
+    "recommendation": "PROCEED to Phase B Paper 48 drafting"
+  },
+
+  "phase_B_sequencing": {
+    "recommended": "single_sprint",
+    "estimated_effort": "1.5 months at standard math.OA paper cadence (Papers 42, 45 ~1.5 months each)",
+    "rationale": "Papers 42/43/45/46 each consolidated multiple sub-sprints into single math.OA standalone at ~1.5-2 months drafting effort. Paper 48 is structurally analogous (5 sub-sprints + 1 application sprint → 1 standalone). Math.OA convention is single-paper consolidation of sprint arcs.",
+    "alternative_if_PI_wants_compression": "staged delivery: §3+§4 first (Krein-lift + hypertopology), then §5 (bridge), then §6+§7 (application + compactness), then §1+§2+§8 (introduction + setup + open questions)"
+  },
+
+  "what_phase_B_needs_beyond_phase_A": [
+    "production-quality LaTeX writing of §1-§8 per §4 outline",
+    "bibliography assembly with all sources integrated (50-60 entries)",
+    "cross-references to Papers 38, 42, 43, 44, 45, 46, 47 throughout §3-§7",
+    "MS Def 3.6 + Latrémolière Def 1.18-5.1 verbatim quotations integrated into prose",
+    "final concurrent-work re-check at submission time (per standard GeoVac math.OA pre-submission hardening)",
+    "optional: Riemannian-limit recovery numerical panel cross-check at N_t=1"
+  ],
+
+  "what_phase_B_does_NOT_need": [
+    "new mathematical content (all substantive structural findings are at theorem-grade rigor in Phase A memos)",
+    "new theorem statements (§4 outline lists all key theorems per section)",
+    "new structural identifications (Wick-rotation functor, Plancherel-nesting, Decomposition O all in Phase A memos)",
+    "production code (the bridge is mathematical)"
+  ],
+
+  "methodological_note": {
+    "diagnostic_before_engineering_rule_applied": true,
+    "compression_mechanism": "Phase A.4'-A G-B2 closure (originally estimated 3-5 weeks) collapsed to single session via structural finding that off-orbit super-additivity is structurally vacuous at K⁺-weak-form bridge level. Phase A.2' Def 1.26 caveat (originally estimated 2-3 weeks) resolved via Latrémolière Lemma 1.25. Phase A.4'-B G-B4 closure (originally 1-2 weeks) closed in single session via Plancherel-nesting structural identification.",
+    "realized_vs_estimated_effort": "Tier 3-Light estimated 6-7 months end-to-end; Phase A formal-memo arc compressed Phases A.2' + A.3' + A.4'-A + A.4'-B + A.4'-C into single day at formal-memo level. Remaining Phase B is ~1.5 months at standard math.OA cadence."
+  },
+
+  "most_surprising_finding_during_synthesis": {
+    "finding": "Strong-form Q1' (Paper 46 enlarged substrate) is structurally distinct from K⁺-weak-form Q1 because the M-diagonal topography of the K⁺-weak-form bridge makes off-orbit super-additivity STRUCTURALLY VACUOUS (Decomposition O Case (iii) empty). This means the same Bridge Theorem 6.4 has two qualitatively different closures: K⁺-weak-form closes via trivial vacuity (no super-additivity content needed), strong-form requires substantive operator-algebraic super-additivity (via Paper 42 four-witness transport to off-axis modular flow). The 'difficulty' of the bridge proof is concentrated entirely on the enlarged-substrate side.",
+    "implication": "Q1' is a genuine multi-month NCG-mathematics target with substantive new content (off-axis super-additivity proof), not merely a routine extension. Defers cleanly as Paper 48 §8 open question and Sprint L3e-Q1' candidate."
+  },
+
+  "files_added": [
+    "debug/sprint_phase_a5prime_synthesis_paper48_outline_memo.md (~9500 words formal synthesis)",
+    "debug/data/sprint_phase_a5prime_synthesis.json (this file)"
+  ]
+}

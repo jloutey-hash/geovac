@@ -1,0 +1,169 @@
+{
+  "sprint": "Phase A.4'-A",
+  "date": "2026-05-24",
+  "objective": "Close G-B2 named gap from A.3' bridge theorem: super-additivity (Mondino-Sämann reverse triangle) of bridge image l^L off-orbit",
+  "aggregate_verdict": "POSITIVE",
+  "verdict_summary": "G-B2 closes at theorem-grade rigor; on-orbit case is equality (Paper 42 four-witness); off-orbit case is trivial -inf (M-diagonal topography orbit preservation); sub-case 2b of A.3' sketch is empty (Decomposition O Case iii)",
+  "decomposition_O": {
+    "framework": "Off-orbit case decomposition by topographic-label pattern",
+    "cases": [
+      {
+        "case": "i",
+        "description": "On-orbit: (N_x,L_x)=(N_y,L_y)=(N_z,L_z), y between x and z in modular time",
+        "verdict": "EQUALITY",
+        "mechanism": "Tomita-Takesaki modular flow additivity + Paper 42 four-witness Wick rotation",
+        "load_bearing_inputs": ["Paper 42 Thm 5.4 BW-alpha period closure", "Paper 42 Thm 6.3 BW-gamma Tomita-Takesaki", "Paper 42 Thm 7.1 flow conjugacy", "Paper 42 Thm 8.1 six-witness collapse"]
+      },
+      {
+        "case": "ii",
+        "description": "Intermediate y on different orbit: (N_x,L_x)=(N_z,L_z) but (N_y,L_y) different",
+        "verdict": "TRIVIAL",
+        "mechanism": "M-diagonal topography preserves (N,L) labels under modular flow; ell^L(x,y) = ell^L(y,z) = -inf; LHS = -inf <= ell^L(x,z) trivially",
+        "load_bearing_inputs": ["Phase A.2' Lemma 2.15 (M-diagonal topography)", "(1.1) modular flow acts trivially on topography", "A.3' Def 6.3(4) off-orbit convention"]
+      },
+      {
+        "case": "iii",
+        "description": "Three different orbit pairs (A.3' Step 2 sub-case 2b)",
+        "verdict": "EMPTY",
+        "mechanism": "Constraints (N_x,L_x)=(N_y,L_y) AND (N_x,L_x)=(N_z,L_z) force (N_y,L_y)=(N_z,L_z), contradicting (N_y,L_y) != (N_z,L_z). No triples satisfy all three constraints at K+ weak-form bridge level.",
+        "substantive_implication": "The A.3' Step 2 sub-case 2b 'super-additivity from Lorentz boost composition' argument is NOT NEEDED at K+ weak-form bridge level; the case it contemplates is structurally empty under the M-diagonal-topography constraint"
+      },
+      {
+        "case": "iv",
+        "description": "All three on different orbits",
+        "verdict": "TRIVIAL",
+        "mechanism": "All three pairwise ell^L values are -inf; reverse triangle holds trivially as -inf = -inf",
+        "load_bearing_inputs": ["A.3' Def 6.3(4) off-orbit convention"]
+      }
+    ]
+  },
+  "theorem_2_1": {
+    "name": "G-B2 Krein-MS super-additivity at the K+ weak-form bridge",
+    "statement": "For every Krein pointed proper QMS X^K and every hat-omega_x, hat-omega_y, hat-omega_z in W(X^K), ell^L(x,y) + ell^L(y,z) <= ell^L(x,z) with MS convention. Equality holds iff all three on same modular orbit with y between x and z.",
+    "rigor_level": "theorem-grade",
+    "proof_structure": {
+      "on_orbit_case": "Step 1 modular flow additivity + Step 2 Wick rotation thermal->geometric time + Paper 42 four-witness dependencies",
+      "off_orbit_case_ii": "Topographic labels preserved under modular flow + Def 6.3(4) off-orbit convention",
+      "off_orbit_case_iii": "Vacuous: constraint contradiction at K+ weak-form bridge level",
+      "off_orbit_case_iv": "All three pairwise -inf; trivial reverse triangle"
+    }
+  },
+  "winning_candidate_approach": {
+    "name": "Sewell-witness / Paper 42 four-witness theorem (Candidate c)",
+    "scope": "Load-bearing for ON-ORBIT case (Case i) only; off-orbit cases close without invoking Paper 42",
+    "alternatives_considered": [
+      {"name": "Modular orbit lattice structure (Candidate a)", "verdict": "NOT NEEDED (off-orbit cases collapse to trivial -inf)"},
+      {"name": "KMS-state coherence across orbits (Candidate b)", "verdict": "PARTIAL (useful for on-orbit case but not off-orbit)"},
+      {"name": "Sewell-witness extension (Candidate c)", "verdict": "WINNING for on-orbit case; off-orbit cases independent"}
+    ]
+  },
+  "substantive_new_content": [
+    "Decomposition O of off-orbit case into Cases (ii), (iii), (iv) with (iii) shown empty",
+    "Sub-case 2b of A.3' Step 2 proof sketch is structurally empty at K+ weak-form bridge level (NOT a real gap)",
+    "M-diagonal topography orbit-preservation property (1.1) makes off-orbit super-additivity trivial",
+    "Paper 42 four-witness theorem is load-bearing for on-orbit case ONLY",
+    "Q1' refinement: super-additivity at strict-inequality level requires strong-form bridge (Paper 46 enlarged substrate)"
+  ],
+  "most_surprising_finding": "The off-orbit super-additivity 'substantive open content' that A.3' named as G-B2 turned out to be structurally trivial at the K+ weak-form bridge level via the M-diagonal topography orbit-preservation property. The A.3' Step 2 sub-case 2b ('different parallel orbits') is structurally empty at K+ weak-form, not non-empty as the proof sketch implicitly assumed. The 3-5 week effort estimate was based on a misreading of the off-orbit case.",
+  "estimated_vs_realized_effort": {
+    "estimated_weeks": "3-5",
+    "realized_hours": "2-4 wall time",
+    "reason_for_disparity": "Estimate assumed substantive operator-algebraic super-additivity proof; formalization showed the M-diagonal-topography constraint makes the off-orbit case trivial via the orbit-preservation property"
+  },
+  "edge_cases_verified": [
+    {
+      "case": "MS +-inf convention",
+      "verdict": "OK",
+      "note": "Cases (ii) and (iv) always have at least one -inf on LHS, so convention applies trivially"
+    },
+    {
+      "case": "K+ / K- boundary",
+      "verdict": "OK",
+      "note": "Natural Krein topography commutes with J, restricts cleanly to both sectors; Gelfand spectrum is the same; off-orbit convention preserved under chirality involution"
+    },
+    {
+      "case": "Equality vs strict inequality",
+      "verdict": "Characterized",
+      "note": "On-orbit case (i): equality (geodesic). Off-orbit cases (ii), (iv): trivial inequality. Case (iii) empty."
+    },
+    {
+      "case": "Bridge image stays in natural Krein topography",
+      "verdict": "OK",
+      "note": "M-diagonal topography content only; no leakage into K- or non-Abelian sector"
+    },
+    {
+      "case": "Compatibility with Paper 47 norm-resolvent convergence",
+      "verdict": "OK",
+      "note": "Norm-resolvent operates at spectral-data level; bridge l^L derived via Tomita-Takesaki; off-orbit -inf convention preserved through admissible-scaling refinement"
+    }
+  ],
+  "bridge_theorem_6_4_status_after_a4_a": {
+    "B1_structural_correspondence": "Theorem-grade (A.3')",
+    "B2_reverse_triangle": "Theorem-grade (this sprint, via Theorem 2.1)",
+    "B3_precompactness_inheritance": "Theorem-grade (A.3')",
+    "B4_convergence_transport": "Proof-sketch with named gap G-B4 (Phase A.4'-B target)"
+  },
+  "implications_for_a4_c_wedge_application": {
+    "scope": "GeoVac wedge Krein PPQMS instantiation",
+    "what_becomes_accessible": [
+      "Bridge image W(X^K_wedge) is fully theorem-grade for B1, B2, B3",
+      "Corollary 7.1 of A.3' (GeoVac wedge synthetic compactness) inherits B3 directly",
+      "Cases (ii), (iv) close trivially at wedge instantiation per Decomposition O",
+      "Cases (i) closes via Paper 42 four-witness theorem at wedge",
+      "Case (iii) is empty at wedge as at general"
+    ],
+    "what_still_requires_g_b4": [
+      "Convergence transport (Krein-side propinquity convergence implies MS pLGH convergence)",
+      "Berezin / projection correspondence compatibility with MS Def 3.6 axioms",
+      "Cumulative epsilon-net structure verification (MS Def 3.6(iii))",
+      "Forward density verification (MS Def 3.6(iv))"
+    ]
+  },
+  "q1_prime_refinement": {
+    "statement": "Does the bridge functor W extend to strong-form Krein PPQMS on enlarged substrate (Paper 46 Appendix B), and does off-orbit super-additivity hold on the enlarged Gelfand spectrum?",
+    "status": "OPEN, multi-week sprint for Phase A.5'+",
+    "decomposition": [
+      "Q1'.A: Extend topography M^L to include M^flip generators; verify topography axioms (Def 1.40-K)",
+      "Q1'.B: Verify Gelfand spectrum is well-defined (since enlargement may break Abelianness)",
+      "Q1'.C: Prove off-orbit super-additivity at strict-inequality level via Paper 42 four-witness theorem transport to off-axis modular flow"
+    ],
+    "structural_obstruction": "Mondino-Samann pre-length space requires set (commutative) not non-commutative algebra; enlargement may require non-commutative MS extension"
+  },
+  "recommended_next_sprint": {
+    "name": "Phase A.4'-B (G-B4 mechanical verification)",
+    "scope": "MS Def 3.6 axioms for Berezin / projection correspondence",
+    "estimated_effort_weeks": "1-2",
+    "rationale": "G-B4 is the remaining named gap from A.3'; mechanical verification, not new mathematics"
+  },
+  "updated_phase_a4_prime_effort": {
+    "a3_prime_original_estimate": "2-3 months",
+    "post_a4_a_revised_estimate": "1.5-2 months",
+    "breakdown": {
+      "a4_prime_a_g_b2_closure": "DONE (this sprint)",
+      "a4_prime_b_g_b4_closure": "1-2 weeks",
+      "a4_prime_c_wedge_instantiation": "1 month"
+    }
+  },
+  "load_bearing_dependencies": [
+    "Phase A.3' Wick-rotation functor (Definition 6.3, Theorem 6.4)",
+    "Phase A.2' Krein PPQMS substrate (4-tuple), especially Lemma 2.15 M-diagonal topography",
+    "Paper 42 Theorems 5.4, 6.3, 7.1, 8.1 (four-witness Wick-rotation theorem, all four components)",
+    "Paper 43 §4.2 BW vacuum on hemispheric wedge",
+    "Paper 45 main theorem (K+ weak-form Lorentzian propinquity)",
+    "Mondino-Samann arXiv:2504.10380 v4 Def 2.3 reverse triangle inequality + +-inf convention",
+    "Connes-Rovelli 1994 thermal-time hypothesis (R3 in A.3' §5)"
+  ],
+  "files_added": [
+    "debug/sprint_phase_a4prime_a_gb2_super_additivity_memo.md",
+    "debug/data/sprint_phase_a4prime_a_gb2.json"
+  ],
+  "no_production_code_modified": true,
+  "no_paper_modifications": true,
+  "honest_scope_what_this_does_NOT_establish": [
+    "Super-additivity at strict-inequality level on strong-form (enlarged substrate) bridge (Q1' refinement, deferred)",
+    "G-B4 named gap (Phase A.4'-B target)",
+    "GeoVac wedge instantiation at panel cells (Phase A.4'-C target)",
+    "Non-commutative MS extension (out of scope)",
+    "Production code implementation (bridge is mathematical)"
+  ]
+}

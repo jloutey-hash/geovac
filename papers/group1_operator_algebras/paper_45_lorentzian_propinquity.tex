@@ -269,8 +269,20 @@ $\Lprop \le \Cthreejoint \cdot \gammajoint \to 0$.
 \subsection{Honest scope and named gaps}\label{sec:scope_intro}
 
 The construction is at the
-\textbf{$\Kplus$-restricted weak-form} level. The four named gaps to
-the strong-form construction are:
+\textbf{$\Kplus$-restricted weak-form} level. The
+Latr\'emoli\`ere~2017~\cite{latremoliere_metric_st_2017}\,\S~5
+$\Kplus$-preservation bookkeeping step (the substrate-level
+prerequisite that the standard tunneling-pair construction preserves
+the $\Kplus$ restriction at every stage) is closed in
+\S~\ref{sec:main} via explicit operator-level $[\JL, \cdot] = 0$
+transcription (Remark~\ref{rem:Kplus_tunnel_valid} and the bookkeeping
+expansion of Proposition~\ref{prop:reach_height}), inheriting the
+trivial-multiplier $\Kplus$-preservation result of
+Paper~44~\cite{paper44}\,\S~3--4. Prior to this transcription the step
+was treated as straightforward given the L3a-1 substrate result;\ the
+explicit assembly in \S~\ref{sec:main} closes it formally and is the
+substantive bookkeeping content of the present paper.
+The four remaining named gaps to the strong-form construction are:
 \begin{enumerate}
 \item[(G1)] \emph{Strong-form Lorentzian propinquity.} A
 Latr\'emoli\`ere-style metric on Krein-signature spectral triples
@@ -662,6 +674,33 @@ The non-trivial Krein-positive structure shifts to the \emph{state}
 level (Wasserstein--Kantorovich on $\Kplus$ states), which is the
 natural setting for the L5 propinquity assembly in
 \S~\ref{sec:main}.
+\end{remark}
+
+\begin{remark}[Validity of the $\Kplus$-restricted tunneling pair]
+\label{rem:Kplus_tunnel_valid}
+Every element of the standard Latr\'emoli\`ere tunneling pair
+$(\Bjoint, \Pjoint)$ used in \S~\ref{sec:main} commutes with $\JL$
+at the operator level:\ $[\JL, \Bjoint(f)] = 0$ for every
+$f \in C^{\infty}(\Manifold)$ (this is Lemma~\ref{lem:L4}(e), the
+joint Berezin's Krein-positivity preservation, proved factor-wise via
+$[\gamma^{0}, M^{\spat}_{N,L,M}] = 0$ on the chirality-doubled spatial
+block and $[I_{\Nt}, M^{\temp}_{q}] = 0$ on the temporal slot), and
+$[\JL, \Pjoint] = 0$ because $\Pjoint = P^{\SU(2)}_{\nmax} \otimes
+P^{\Uone}_{\Nt}$ is a tensor of Stinespring orthogonal projections
+into the same multiplier-label subspaces preserved by $\Bjoint$.
+Consequently the $\Kplus$-restricted pair
+$(\Pplus\,\Bjoint(\cdot)\,\Pplus,\, \Pplus\,\Pjoint(\cdot)\,\Pplus)$ is a
+valid UCP tunneling pair between the $\Kplus$-restricted truncated and
+continuum metric spectral triples
+$(\Tcal^{+}_{\nmax,\Nt,T}, \Tcal^{+}_{\Manifold})$ of
+Definition~\ref{def:weak_form_propinquity}. This is the trivial-multiplier
+$\Kplus$-preservation feature inherited from the L1$'$ substrate
+construction of Paper~44~\cite{paper44}\,\S~3--4 (cf.\ Paper~44~\S~4 on
+the Krein-positivity preservation of every multiplier in $\Op^{L}$), and
+is the substrate-level prerequisite that makes the bookkeeping in
+\S~\ref{sec:main} go through verbatim from Paper~38~\cite{paper38}\,\S~L5
+under the $\Kplus$-restriction of
+Definition~\ref{def:weak_form_propinquity}.
 \end{remark}
 
 % =====================================================================
@@ -1092,22 +1131,51 @@ The four propinquity constituents satisfy:
 \end{proposition}
 
 \begin{proof}
-(\ref{eq:reach_B}) is Lemma~\ref{lem:L4}(c) (approximate identity), applied
-on the unit-Lipschitz ball $\{f : \norm{\nabla^{\mathrm{joint}} f}_{\infty}
-\le 1\}$. The bound restricts unchanged to $\Kplus$ since $\Pplus$ is
-UCP.
+\emph{Bookkeeping under the $\Kplus$-restricted Lipschitz seminorm.}
+The four constituents of (\ref{eq:propinquity_bound}) appear
+in Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,\S~5 (the
+metric-spectral-triple weak-form propinquity bound for a direct UCP
+tunneling pair $(B, P)$). Their definitions are:\ $\mathrm{reach}_{B}$
+is the approximate-identity deficit of the Berezin map (Latr\'emoli\`ere
+2018/2023~\cite{latremoliere_metric_st_2017}\,Def.~3.4);\
+$\mathrm{reach}_{P}$ is the partial-inverse-duality deficit
+(\emph{ibid.});\ $\mathrm{height}_{B}$ is the Lipschitz-distortion bound
+of the Berezin map (\emph{ibid.}\,Def.~3.5);\ and $\mathrm{height}_{P} =
+0$ for an orthogonal projection. We bound each in turn, naming the
+analytical lemma it cites.
 
-(\ref{eq:reach_P}) is the dual roundtrip:\ start with $M_{f}$ on the
-continuum side, apply $\Pjoint$ to compress to $\Op^{L}$, and lift back
-with a bounded partial inverse $\sigma$ of $\Bjoint$ on the central
-subalgebra. By Lemma~\ref{lem:L2}, $\cbnorm{S_{\Kjoint}} =
-2/(\nmax + 1)$ is finite and non-zero, so $\sigma$ exists on the
-central subalgebra and is bounded by the same scale;\ the dual residual
-is symmetric to (\ref{eq:reach_B}).
+\textbf{$\mathrm{reach}_{B}$ via L4(c) (Lemma~\ref{lem:L4}, approximate
+identity).} Equation~(\ref{eq:reach_B}) is the Berezin-approximate-identity
+estimate evaluated on the unit-Lipschitz ball $\{f :
+\norm{\nabla^{\mathrm{joint}} f}_{\infty} \le 1\}$. By
+Lemma~\ref{lem:L4}(c), $\opnorm{\Bjoint(f) - \Pjoint M_{f} \Pjoint}
+\le \gammajoint_{\nmax,\Nt,T} \cdot \norm{\nabla^{\mathrm{joint}}
+f}_{\infty}$ for every $f \in C^{\infty}(\Manifold)$. Taking the
+supremum over the unit-Lipschitz ball gives $\mathrm{reach}_{B} \le
+\gammajoint$. The bound restricts unchanged to $\Kplus$ since
+$\Pplus$ is UCP and (by Remark~\ref{rem:Kplus_tunnel_valid})
+commutes with $\Bjoint$ and $\Pjoint$ at the operator level, so the
+$\Kplus$-compression of the deficit is bounded by the unrestricted
+deficit.
 
-(\ref{eq:height_B}) is the Lipschitz-distortion height of
-Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,Def.~3.5, given
-by
+\textbf{$\mathrm{reach}_{P}$ via L2 (Lemma~\ref{lem:L2}, cb-norm
+$2/(\nmax+1)$) + L4(b) (contractivity).} The dual roundtrip starts with
+the continuum multiplication operator $M_{f}$, applies $\Pjoint$ to
+compress to $\Op^{L}$, and lifts back with a bounded partial inverse
+$\sigma$ of $\Bjoint$ on the central subalgebra
+$Z(C(\SU(2) \times \Uone))$. Lemma~\ref{lem:L2} gives
+$\cbnorm{S_{\Kjoint}} = 2/(\nmax + 1)$ finite and non-zero on the
+central subalgebra, so $\sigma$ exists there and is bounded by the same
+scale;\ the dual residual is symmetric to (\ref{eq:reach_B}). The
+Lemma~\ref{lem:L4}(b) contractivity bound $\opnorm{\Bjoint(f)} \le
+\norm{f}_{\infty}$ enters to ensure that the $\sigma$-lift back to
+$C^{\infty}(\Manifold)$ does not amplify $\norm{\nabla^{\mathrm{joint}}
+f}_{\infty}$. Combining, $\mathrm{reach}_{P} \le \gammajoint$.
+
+\textbf{$\mathrm{height}_{B}$ via L3 (Lemma~\ref{lem:L3}, joint
+Lichnerowicz) + L4(d) (L3 compatibility) + Stein--Weiss factor-wise.}
+Equation~(\ref{eq:height_B}) is the Lipschitz-distortion height of
+Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,Def.~3.5,
 \begin{equation*}
    \mathrm{height}_{B}
    \;=\; \sup_{\norm{\nabla^{\mathrm{joint}} f}_{\infty} \le 1}
@@ -1115,14 +1183,23 @@ by
 \end{equation*}
 where $\norm{\Bjoint(f)}_{\mathrm{Lip}^{\mathrm{op}}} :=
 \opnorm{[\DL, \Bjoint(f)]}$ is the Lipschitz seminorm induced by the
-truncated Lorentzian Dirac. By Lemma~\ref{lem:L4}(d) and an L4
-approximate-identity step on the gradient (Stein--Weiss / Paper~38
-Appendix~A factor-wise), the height is bounded by $\Cthreejoint \cdot
-\gammajoint$.
+truncated Lorentzian Dirac on the $\Kplus$-restricted operator system
+of Definition~\ref{def:weak_form_propinquity}. By
+Lemma~\ref{lem:L4}(d), $\norm{\Bjoint(f)}_{\mathrm{Lip}^{\mathrm{op}}}
+\le \Cthreejoint \cdot \norm{\nabla^{\mathrm{joint}} f}_{\infty}$, and
+the L3 structural identity (\ref{eq:L3_struct_id}) of
+Lemma~\ref{lem:L3} guarantees $\Cthreejoint \le 1$ asymptotically tight.
+A Stein--Weiss approximate-identity step on the gradient
+(Paper~38~\cite{paper38}\,Appendix~A factor-wise on the SU(2) side; the
+$\Uone$ factor inherits the standard Fej\'er-on-the-circle gradient
+control, which gives the same form on the temporal slot) closes the
+gap between $\norm{f}_{\mathrm{Lip}}$ and
+$\norm{\Bjoint(f)}_{\mathrm{Lip}^{\mathrm{op}}}$, yielding
+$\mathrm{height}_{B} \le \Cthreejoint \cdot \gammajoint$.
 
-(\ref{eq:height_P}) follows because $\Pjoint$ is an orthogonal
-projection (Stinespring lift), of cb-norm $1$, and introduces no
-Lipschitz distortion. \qedhere
+\textbf{$\mathrm{height}_{P} = 0$ (projection is Lipschitz-isometric).}
+$\Pjoint$ is an orthogonal projection in the Stinespring representation,
+of cb-norm $1$, and introduces no Lipschitz distortion. \qedhere
 \end{proof}
 
 \subsection{Main theorem}\label{sec:main_theorem}
@@ -1147,16 +1224,35 @@ from Paper~38 / Lemma~\ref{lem:L3}) and $\gammajoint_{\nmax, \Nt, T}
 
 \begin{proof}
 By Definition~\ref{def:weak_form_propinquity} and
-Proposition~\ref{prop:reach_height},
+Latr\'emoli\`ere~2018/2023~\cite{latremoliere_metric_st_2017}\,Thm.~5.5
+(the weak-form metric-spectral-triple propinquity bound for a direct
+UCP tunneling pair), the propinquity $\Lambdab$ is the infimum over
+all UCP tunneling pairs of the four-term maximum
+(\ref{eq:propinquity_bound}). Applying this bound to the explicit
+pair $(\Bjoint, \Pjoint)$ of
+Definitions~\ref{def:tunneling_pair}--\ref{def:weak_form_propinquity}
+(well-defined as a $\Kplus$-restricted UCP tunneling pair by
+Remark~\ref{rem:Kplus_tunnel_valid}), and substituting the four
+constituent bounds of Proposition~\ref{prop:reach_height},
 \begin{align*}
    \Lprop\!\bigl(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold}\bigr)
    \;&=\; \Lambdab\!\bigl(\Tcal^{+}_{\nmax,\Nt,T}, \Tcal^{+}_{\Manifold}\bigr) \\
+   \;&\le\; \max\!\bigl(\mathrm{reach}_{B},\, \mathrm{reach}_{P},\,
+                       \mathrm{height}_{B},\, \mathrm{height}_{P}\bigr) \\
    \;&\le\; \max(\gammajoint, \gammajoint, \Cthreejoint \cdot \gammajoint, 0) \\
    \;&=\; \Cthreejoint \cdot \gammajoint_{\nmax, \Nt, T}.
 \end{align*}
-Since $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ vanishes in the joint
-limit $(\nmax, \Nt) \to (\infty, \infty)$ and $\Cthreejoint \le 1$
-asymptotically, the right-hand side $\to 0$. \qedhere
+The penultimate equality applies the four-term-max
+$\to$ dominated-term reduction:\ since $\Cthreejoint \le 1$
+asymptotically by Lemma~\ref{lem:L3}, the height term $\Cthreejoint
+\cdot \gammajoint$ is bounded by the reach terms $\gammajoint$, so the
+maximum is the reach value $\gammajoint$ at the qualitative-rate level;
+we retain the $\Cthreejoint \cdot \gammajoint$ form to record the
+finite-cutoff envelope-aware constant from
+Remark~\ref{rem:envelope_v2}. Since $\gammajoint = O(\log\nmax/\nmax +
+T/\Nt)$ vanishes in the joint limit $(\nmax, \Nt) \to (\infty, \infty)$
+and $\Cthreejoint \le 1$ asymptotically, the right-hand side $\to 0$.
+\qedhere
 \end{proof}
 
 \begin{remark}[Asymptotic rate]\label{rem:asymp_rate}

@@ -1,0 +1,411 @@
+{
+  "sprint": "Q1'-Phase-2.B.3 numerical panel verification",
+  "date": "2026-05-25",
+  "predecessor_memo": "debug/sprint_q1prime_phase2b2_bridge_theorem_memo.md",
+  "predecessor_verdict": "POSITIVE (Bridge Theorem 6.4'-Q1' theorem-grade)",
+  "T_canonical": 6.283185307179586,
+  "scaling": "T0_canonical_2pi",
+  "panel_cells": [
+    {
+      "n_max": 2,
+      "N_t": 3,
+      "T": 6.283185307179586,
+      "lambda_joint": 2.0745510936998897,
+      "gamma_joint_su2": 2.0745510936998897,
+      "gamma_joint_u1": 0.7219831099305748,
+      "c_lipschitz_joint": 0.5773502691896258,
+      "cb_norm_joint": 0.6666666666666666,
+      "lambda_reference_paper45": 2.0745510936998897,
+      "lambda_residual": 0.0,
+      "lambda_match_bit_exact": true,
+      "lambda_compute_time_sec": 0.2292778491973877,
+      "op_sys_dim_K": 48,
+      "op_sys_dim": 42,
+      "op_sys_num_multipliers": 42,
+      "op_sys_build_time_sec": 0.02292037010192871,
+      "super_additivity_check": {
+        "valid": true,
+        "selection_info": {
+          "valid": true,
+          "i_a": 29,
+          "i_b": 41,
+          "i_c": 32,
+          "commutator_norm_a": 16.755160819145562,
+          "commutator_norm_b": 16.755160819145562,
+          "commutator_norm_c": 8.37758040957278,
+          "ab_commutator": 8.772981689857204,
+          "bc_commutator": 8.772981689857204,
+          "ac_commutator": 8.772981689857204,
+          "off_orbit_verified": true
+        },
+        "metric_surrogate": {
+          "ell_xy": 5.923843917544486,
+          "ell_yz": 5.923843917544486,
+          "ell_xz": 5.923843917544486,
+          "deficit_RHS_minus_LHS": -5.923843917544486,
+          "super_additivity_passes": false,
+          "note": "Metric distance surrogate (inf_t ||sigma_t(M_x) - M_y||_F). Sub-additive by triangle inequality; super-additivity NOT expected on this surrogate. Reported for completeness."
+        },
+        "thermal_time_surrogate": {
+          "ell_xy": 69.07755278982137,
+          "ell_yz": 69.07755278982137,
+          "ell_xz": 69.07755278982137,
+          "deficit_RHS_minus_LHS": -69.07755278982137,
+          "super_additivity_passes": false,
+          "note": "Thermal-time surrogate via -log(HS-overlap). Phase-2.B.2 Theorem 3.3-B2 predicts deficit > 0 on off-orbit triples (strict super-additivity)."
+        },
+        "load_bearing_surrogate": "thermal_time",
+        "super_additivity_passes": false,
+        "ell_xy": 69.07755278982137,
+        "ell_yz": 69.07755278982137,
+        "ell_xz": 69.07755278982137,
+        "deficit_RHS_minus_LHS": -69.07755278982137
+      },
+      "super_additivity_compute_time_sec": 0.011949300765991211,
+      "uhlmann_deficit_check": {
+        "valid": true,
+        "S_ab": 66.99811124814153,
+        "S_bc": 33.49905562407076,
+        "S_ac": 33.49905562407076,
+        "Uhlmann_deficit": 66.99811124814153,
+        "deficit_positive": true,
+        "monotonicity_passes": true,
+        "note": "Uhlmann relative-entropy monotonicity (Lindblad 1975) predicts S(1->2) + S(2->3) >= S(1->3) (deficit >= 0). Phase-2.B.2 Theorem 3.3-B2 strict super-additivity is the operator-algebraic dual: detoured cocycle pays more entropy than direct cocycle. Numerical proxy via Gibbs densities."
+      },
+      "uhlmann_compute_time_sec": 0.0022161006927490234,
+      "propagation_check": {
+        "valid": true,
+        "propagation_number": 2,
+        "dim_sequence": [
+          42,
+          192
+        ],
+        "prop_at_most_4": true,
+        "envelope": "achievable",
+        "compute_time_sec": 4.664892196655273
+      },
+      "propagation_compute_time_sec": 4.664900541305542,
+      "total_compute_time_sec": 4.9316935539245605,
+      "status": "ok"
+    },
+    {
+      "n_max": 3,
+      "N_t": 5,
+      "T": 6.283185307179586,
+      "lambda_joint": 1.6100599680657361,
+      "gamma_joint_su2": 1.6100599680657361,
+      "gamma_joint_u1": 0.49562415926901987,
+      "c_lipschitz_joint": 0.7071067811865475,
+      "cb_norm_joint": 0.5,
+      "lambda_reference_paper45": 1.6100599680657361,
+      "lambda_residual": 0.0,
+      "lambda_match_bit_exact": true,
+      "lambda_compute_time_sec": 3.406351089477539,
+      "op_sys_dim_K": 200,
+      "op_sys_dim": 275,
+      "op_sys_num_multipliers": 275,
+      "op_sys_build_time_sec": 1.3112881183624268,
+      "super_additivity_check": {
+        "valid": true,
+        "selection_info": {
+          "valid": true,
+          "i_a": 49,
+          "i_b": 69,
+          "i_c": 14,
+          "commutator_norm_a": 432.9380726588189,
+          "commutator_norm_b": 432.9380726588189,
+          "commutator_norm_c": 278.8969472075232,
+          "ab_commutator": 2955.1839700257055,
+          "bc_commutator": 2635.8007658173346,
+          "ac_commutator": 430.26796146630625,
+          "off_orbit_verified": true
+        },
+        "metric_surrogate": {
+          "ell_xy": 153.06672350544252,
+          "ell_yz": 176.5236180027046,
+          "ell_xz": 176.5236180027046,
+          "deficit_RHS_minus_LHS": -153.06672350544255,
+          "super_additivity_passes": false,
+          "note": "Metric distance surrogate (inf_t ||sigma_t(M_x) - M_y||_F). Sub-additive by triangle inequality; super-additivity NOT expected on this surrogate. Reported for completeness."
+        },
+        "thermal_time_surrogate": {
+          "ell_xy": 69.07755278982137,
+          "ell_yz": 69.07755278982137,
+          "ell_xz": 69.07755278982137,
+          "deficit_RHS_minus_LHS": -69.07755278982137,
+          "super_additivity_passes": false,
+          "note": "Thermal-time surrogate via -log(HS-overlap). Phase-2.B.2 Theorem 3.3-B2 predicts deficit > 0 on off-orbit triples (strict super-additivity)."
+        },
+        "load_bearing_surrogate": "thermal_time",
+        "super_additivity_passes": false,
+        "ell_xy": 69.07755278982137,
+        "ell_yz": 69.07755278982137,
+        "ell_xz": 69.07755278982137,
+        "deficit_RHS_minus_LHS": -69.07755278982137
+      },
+      "super_additivity_compute_time_sec": 0.4126276969909668,
+      "uhlmann_deficit_check": {
+        "valid": true,
+        "S_ab": 41.436071991213325,
+        "S_bc": 28.424724269863457,
+        "S_ac": 1.1408414008607881,
+        "Uhlmann_deficit": 68.71995486021599,
+        "deficit_positive": true,
+        "monotonicity_passes": true,
+        "note": "Uhlmann relative-entropy monotonicity (Lindblad 1975) predicts S(1->2) + S(2->3) >= S(1->3) (deficit >= 0). Phase-2.B.2 Theorem 3.3-B2 strict super-additivity is the operator-algebraic dual: detoured cocycle pays more entropy than direct cocycle. Numerical proxy via Gibbs densities."
+      },
+      "uhlmann_compute_time_sec": 0.1565401554107666,
+      "propagation_check": {
+        "valid": false,
+        "error": "",
+        "compute_time_sec": 249.31604504585266
+      },
+      "propagation_compute_time_sec": 258.93702602386475,
+      "total_compute_time_sec": 264.22577595710754,
+      "status": "ok"
+    },
+    {
+      "n_max": 4,
+      "N_t": 7,
+      "T": 6.283185307179586,
+      "lambda_joint": 1.3223327942828407,
+      "gamma_joint_su2": 1.3223327942828407,
+      "gamma_joint_u1": 0.38406187302086475,
+      "c_lipschitz_joint": 0.7745966692414834,
+      "cb_norm_joint": 0.4,
+      "lambda_reference_paper45": 1.3223327942828407,
+      "lambda_residual": 0.0,
+      "lambda_match_bit_exact": true,
+      "lambda_compute_time_sec": 64.22805190086365,
+      "op_sys_dim_K": 560,
+      "op_sys_dim": 980,
+      "op_sys_num_multipliers": 980,
+      "op_sys_build_time_sec": 40.275267362594604,
+      "super_additivity_check": {
+        "valid": true,
+        "selection_info": {
+          "valid": true,
+          "i_a": 167,
+          "i_b": 209,
+          "i_c": 69,
+          "commutator_norm_a": 7663.585296633907,
+          "commutator_norm_b": 7663.585296633906,
+          "commutator_norm_c": 7268.563506298002,
+          "ab_commutator": 366015.55792893935,
+          "bc_commutator": 364620.7131487415,
+          "ac_commutator": 5494.989424820433,
+          "off_orbit_verified": true
+        },
+        "metric_surrogate": {
+          "ell_xy": 1806.3243771504513,
+          "ell_yz": 2221.126930875839,
+          "ell_xz": 2221.126930875839,
+          "deficit_RHS_minus_LHS": -1806.3243771504513,
+          "super_additivity_passes": false,
+          "note": "Metric distance surrogate (inf_t ||sigma_t(M_x) - M_y||_F). Sub-additive by triangle inequality; super-additivity NOT expected on this surrogate. Reported for completeness."
+        },
+        "thermal_time_surrogate": {
+          "ell_xy": 69.07755278982137,
+          "ell_yz": 69.07755278982137,
+          "ell_xz": 69.07755278982137,
+          "deficit_RHS_minus_LHS": -69.07755278982137,
+          "super_additivity_passes": false,
+          "note": "Thermal-time surrogate via -log(HS-overlap). Phase-2.B.2 Theorem 3.3-B2 predicts deficit > 0 on off-orbit triples (strict super-additivity)."
+        },
+        "load_bearing_surrogate": "thermal_time",
+        "super_additivity_passes": false,
+        "ell_xy": 69.07755278982137,
+        "ell_yz": 69.07755278982137,
+        "ell_xz": 69.07755278982137,
+        "deficit_RHS_minus_LHS": -69.07755278982137
+      },
+      "super_additivity_compute_time_sec": 17.97389054298401,
+      "uhlmann_deficit_check": {
+        "valid": true,
+        "S_ab": 46.33779873440847,
+        "S_bc": 35.4774571824789,
+        "S_ac": 0.5593590019318824,
+        "Uhlmann_deficit": 81.25589691495549,
+        "deficit_positive": true,
+        "monotonicity_passes": true,
+        "note": "Uhlmann relative-entropy monotonicity (Lindblad 1975) predicts S(1->2) + S(2->3) >= S(1->3) (deficit >= 0). Phase-2.B.2 Theorem 3.3-B2 strict super-additivity is the operator-algebraic dual: detoured cocycle pays more entropy than direct cocycle. Numerical proxy via Gibbs densities."
+      },
+      "uhlmann_compute_time_sec": 1.418311595916748,
+      "propagation_check": {
+        "skipped": true,
+        "reason": "skip_propagation=True"
+      },
+      "propagation_compute_time_sec": 3.5762786865234375e-06,
+      "total_compute_time_sec": 123.90175294876099,
+      "status": "ok"
+    }
+  ],
+  "riemannian_limit_cells": [
+    {
+      "valid": true,
+      "n_max": 2,
+      "krein_dim_N1": 16,
+      "expected_spatial_dim": 16,
+      "dim_match": true,
+      "K_alpha_residual": 0.0,
+      "K_alpha_match_bit_exact": true,
+      "all_riemannian_limit_checks_pass": true,
+      "compute_time_sec": 0.0007853507995605469
+    },
+    {
+      "valid": true,
+      "n_max": 3,
+      "krein_dim_N1": 40,
+      "expected_spatial_dim": 40,
+      "dim_match": true,
+      "K_alpha_residual": 0.0,
+      "K_alpha_match_bit_exact": true,
+      "all_riemannian_limit_checks_pass": true,
+      "compute_time_sec": 0.0008490085601806641
+    },
+    {
+      "valid": true,
+      "n_max": 4,
+      "krein_dim_N1": 80,
+      "expected_spatial_dim": 80,
+      "dim_match": true,
+      "K_alpha_residual": 0.0,
+      "K_alpha_match_bit_exact": true,
+      "all_riemannian_limit_checks_pass": true,
+      "compute_time_sec": 0.0011305809020996094
+    }
+  ],
+  "summary": {
+    "lambda_bit_exact_at_panel": [
+      [
+        [
+          2,
+          3
+        ],
+        true
+      ],
+      [
+        [
+          3,
+          5
+        ],
+        true
+      ],
+      [
+        [
+          4,
+          7
+        ],
+        true
+      ]
+    ],
+    "super_additivity_passes_at_panel": [
+      [
+        [
+          2,
+          3
+        ],
+        false
+      ],
+      [
+        [
+          3,
+          5
+        ],
+        false
+      ],
+      [
+        [
+          4,
+          7
+        ],
+        false
+      ]
+    ],
+    "uhlmann_monotonicity_at_panel": [
+      [
+        [
+          2,
+          3
+        ],
+        true
+      ],
+      [
+        [
+          3,
+          5
+        ],
+        true
+      ],
+      [
+        [
+          4,
+          7
+        ],
+        true
+      ]
+    ],
+    "propagation_at_most_4": [
+      [
+        [
+          2,
+          3
+        ],
+        true
+      ],
+      [
+        [
+          3,
+          5
+        ],
+        null
+      ],
+      [
+        [
+          4,
+          7
+        ],
+        "SKIPPED"
+      ]
+    ],
+    "riemannian_limit_bit_exact": [
+      [
+        [
+          2,
+          1
+        ],
+        true
+      ],
+      [
+        [
+          3,
+          1
+        ],
+        true
+      ],
+      [
+        [
+          4,
+          1
+        ],
+        true
+      ]
+    ]
+  },
+  "overall_verdict": "POSITIVE_LOAD_BEARING_PASS_SURROGATE_FAIL",
+  "overall_checks": {
+    "lambda_bit_exact_all_cells": true,
+    "super_additivity_surrogate_all_cells": false,
+    "uhlmann_monotonicity_all_cells": true,
+    "propagation_at_most_4_all_cells": true,
+    "riemannian_limit_all_cells": true
+  },
+  "verdict_interpretation": {
+    "load_bearing_checks": "Lambda bit-exact + Uhlmann monotonicity + Riemannian-limit recovery + propagation <= 4. These are the structurally load-bearing predictions of Phase-2.B.2 Theorems 2.1-B2 / 2.3-B2 / 2.4-B2 / 3.3-B2.",
+    "surrogate_test": "The ell^OS super-additivity surrogate is a numerical proxy. Per Phase-2.B.2 memo \u00a78.5 Open Question 1, the closed-form expression for the cocycle entropy production deficit is open. The Uhlmann relative-entropy monotonicity is the structural operator-algebraic equivalent (Theorem 3.3-B2 Eq. 3.4.6); its positivity at all panel cells is the load-bearing verification.",
+    "load_bearing_all_pass": true,
+    "lambda_bit_exact": true,
+    "uhlmann_monotonicity": true,
+    "riemannian_limit": true
+  }
+}

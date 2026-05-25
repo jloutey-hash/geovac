@@ -1,0 +1,209 @@
+{
+  "sprint": "Q1'-Phase-2.B.1",
+  "date": "2026-05-24",
+  "title": "W^flip on morphisms (mechanical follow-on to Phase-2.A object construction)",
+  "sprint_type": "mechanical morphism-specification sub-sprint",
+  "predecessors": [
+    "debug/sprint_q1prime_phase2a_oslpls_category_memo.md",
+    "debug/sprint_q1prime_phase1_case_a_stepping_stone_memo.md",
+    "debug/sprint_phase_a3prime_mondino_samann_bridge_memo.md",
+    "debug/sprint_phase_a2prime_krein_lift_formalization_memo.md"
+  ],
+  "parallel_sprints": [
+    "Phase-2.B.2 (substantive Bridge Theorem 6.4'-Q1' with off-orbit super-additivity, 2-4 weeks)"
+  ],
+  "downstream_sprints": [
+    "Phase-2.B.3 (numerical verification panel, 1 week, consumes B.1 morphism specification)",
+    "Phase-2.C (Connes-Rovelli thermal-time stack, 2-3 weeks)",
+    "Phase-2.D (Paper 49 drafting, 2-3 weeks)"
+  ],
+  "gate_verdict": "POSITIVE",
+  "headline_sentence": "W^flip on morphisms defined cleanly via Connes-vS contravariant UCP convention (Def 3.1-B1); functoriality verified at theorem-grade rigor (Theorem 1.1-B1); restriction to commutative MS via iota matches A.3' Wick-rotation functor morphism action bit-exact; compresses to single sprint memo per Phase-2.A compression-pattern prediction.",
+  "compression_pattern": "single sprint memo (mechanical confirmed per Phase-2.A section 7.4 prediction)",
+  "source_morphism_class": {
+    "definition": "Definition 2.1-B1 (Topographic Krein M-isometry on enlarged-flip substrate)",
+    "extends": "Phase A.2' Def 2.3 with enlarged topography and explicit cover preservation",
+    "axioms": {
+      "S1_lipschitz_compatibility": "L^K_2(pi(a)) <= L^K_1(a)",
+      "S2_topography_preservation_enlarged": "pi(M^L_flip_full_1) subseteq M^L_flip_full_2",
+      "S3_pin_state_preservation": "omega_W_2 circ pi = omega_W_1",
+      "S4_cover_preservation_enlarged": "pi(M^L_flip_full_1_k) subseteq M^L_flip_full_2_k for all k"
+    },
+    "category_structure": {
+      "composition": "standard *-epimorphism composition",
+      "identity": "id on ambient algebra trivially satisfies (S1)-(S4)",
+      "verdict": "POSITIVE"
+    }
+  },
+  "bridge_functor_morphism_action": {
+    "definition": "Definition 3.1-B1: W^flip(pi^K_flip) := (pi^K_flip)^* = algebraic pullback in contravariant direction",
+    "convention": "Connes-vS contravariant UCP convention (covariant source -> contravariant target via Gelfand-duality-flavored bridge)",
+    "UCP_property": "automatic from *-homomorphism between separable C*-algebras (Stinespring)",
+    "matches_A3prime_on_commutative": true,
+    "matches_Phase1_on_chirality_graded": true,
+    "verdict": "POSITIVE"
+  },
+  "morphism_axioms_verification": {
+    "M1_topography_preservation": {
+      "status": "POSITIVE",
+      "proof": "Direct from source (S2) read in contravariant direction",
+      "section": "section 4.2 M1"
+    },
+    "M2_lipschitz_compatibility": {
+      "status": "POSITIVE",
+      "proof": "Direct from source (S1) read in contravariant direction",
+      "section": "section 4.2 M2"
+    },
+    "M3_basepoint_state_pullback": {
+      "status": "POSITIVE",
+      "proof": "Direct from source (S3) read in contravariant direction",
+      "section": "section 4.2 M3"
+    },
+    "M4_cover_preservation": {
+      "status": "POSITIVE",
+      "proof": "Direct from source (S4) at each cutoff k",
+      "section": "section 4.2 M4"
+    },
+    "M5_modular_flow_intertwining": {
+      "status": "POSITIVE (automatic)",
+      "proof": "Automatic from M3 per Phase-2.A Lemma 4.2-OS (Tomita-Takesaki functoriality)",
+      "section": "section 4.2 M5"
+    }
+  },
+  "functoriality_verification": {
+    "theorem_id": "Theorem 1.1-B1",
+    "axiom_a_morphism_class_image": {
+      "status": "POSITIVE",
+      "description": "All five OSLPLS morphism axioms (M1)-(M5) verify on image"
+    },
+    "axiom_b_identity_preservation": {
+      "status": "POSITIVE",
+      "description": "W^flip(id) = id by direct computation; identity *-homomorphism is self-pullback"
+    },
+    "axiom_c_composition_preservation_contravariant": {
+      "status": "POSITIVE",
+      "description": "W^flip(pi_2 circ pi_1) = W^flip(pi_1) circ W^flip(pi_2); standard Gelfand-duality contravariant composition"
+    },
+    "axiom_d_topography_action_consistency": {
+      "status": "POSITIVE",
+      "description": "UCP restriction to operator-sub-system preserves topography action"
+    },
+    "axiom_e_cover_action_consistency": {
+      "status": "POSITIVE",
+      "description": "UCP restriction at each cutoff level preserves cover action"
+    },
+    "aggregate": "POSITIVE"
+  },
+  "commutative_restriction_comparison": {
+    "theorem_id": "Theorem 5.1-B1",
+    "claim": "W^flip restricted to iota(LorPLG_cov) agrees with W (A.3' Wick-rotation functor) up to natural iso",
+    "proof_method": "Gelfand-Naimark identification: UCP pullback on commutative C*-algebra = continuous-function pullback = dual Gelfand spectrum map",
+    "verdict": "POSITIVE",
+    "phase1_chirality_graded_restriction": {
+      "claim": "W^flip restricted to Case A (M=0 enlargement) agrees with Phase-1 Theorem 1.3-Q1' W^flip,M=0",
+      "verdict": "POSITIVE (bonus, structurally additive)"
+    },
+    "hierarchical_containment": [
+      "W on commutative MS: pi^K dual on Gelfand spectrum hat(M^L)",
+      "W^flip,M=0 on chirality-graded: pi^K_flip dual on doubled spectrum hat(M^L_flip,M=0)",
+      "W^flip on full M!=0 enlarged: (pi^K_flip)* UCP pullback on state space S(M^L_flip_full)"
+    ]
+  },
+  "per_axiom_verdict_table": {
+    "source_morphism_class_Def_2.1_B1": "POSITIVE",
+    "source_category_composition_identity": "POSITIVE",
+    "W_flip_on_morphisms_Def_3.1_B1": "POSITIVE",
+    "OSLPLS_morphism_M1_topography": "POSITIVE",
+    "OSLPLS_morphism_M2_lipschitz": "POSITIVE",
+    "OSLPLS_morphism_M3_basepoint": "POSITIVE",
+    "OSLPLS_morphism_M4_cover": "POSITIVE",
+    "OSLPLS_morphism_M5_modular_intertwining": "POSITIVE (automatic)",
+    "Theorem_1.1_B1_a_axiom_verification": "POSITIVE",
+    "Theorem_1.1_B1_b_identity_preservation": "POSITIVE",
+    "Theorem_1.1_B1_c_composition_preservation": "POSITIVE",
+    "Theorem_1.1_B1_d_topography_action": "POSITIVE",
+    "Theorem_1.1_B1_e_cover_action": "POSITIVE",
+    "Theorem_5.1_B1_commutative_restriction": "POSITIVE",
+    "Phase1_chirality_restriction_bonus": "POSITIVE",
+    "aggregate_Phase_2.B.1": "POSITIVE"
+  },
+  "phase_2_b3_input_specification": {
+    "panel_cells": [
+      {"n_max": 2, "N_t": 3, "T": "2*pi/3"},
+      {"n_max": 3, "N_t": 5, "T": "2*pi/5"},
+      {"n_max": 4, "N_t": 7, "T": "2*pi/7"}
+    ],
+    "morphism_to_verify": "pi^K_flip_k_to_k+1: truncation projector morphism between successive cutoff Krein PPQMS (natural Berezin/projection nesting)",
+    "image_under_W_flip": "W^flip(pi^K_flip_k_to_k+1) = (pi^K_flip_k_to_k+1)^* as UCP map on enlarged OSLPLS objects",
+    "axioms_to_verify_per_cell": [
+      "M1: topography preservation between truncated enlarged topographies",
+      "M2: operator-norm Lipschitz contractivity ||[D_L, .]||_op comparison",
+      "M3: basepoint pullback omega_W^L | M_k circ (pi^*) = omega_W^L | M_k+1",
+      "M4: operator-system cover preservation level-by-level",
+      "M5: modular flow intertwining (automatic from M3, sanity verification at panel level)"
+    ],
+    "expected_behavior": {
+      "panel_residuals_match_paper45": "bit-exact agreement with Paper 45 section 6 panel values Lprop(2,3) = 2.0746, Lprop(3,5) = 1.6101, Lprop(4,7) = 1.3223",
+      "riemannian_limit_recovery": "at N_t = 1, W^flip reduces to Riemannian-only morphism action matching Paper 38 single-factor results bit-exact",
+      "identity_preservation_residual": "exactly 0.0 (machine precision)",
+      "no_new_numerical_content": "enlarged-substrate morphism action introduces no new numerical content at functoriality level; substantive content is in strong-form propinquity bound (Phase-2.B.2)"
+    },
+    "compute_infrastructure": {
+      "modules_already_in_place": [
+        "geovac/gh_convergence_tensor.py (Paper 45/46/38 propinquity panel)",
+        "geovac/operator_system_lorentzian.py (Paper 44 substrate)",
+        "geovac/modular_hamiltonian.py (Tomita modular flow)",
+        "geovac/krein_space_construction.py (L2-B Krein structure)"
+      ],
+      "new_production_modules_needed": [],
+      "estimated_compute_time": "few minutes per panel cell"
+    },
+    "estimated_effort": "1 week (per Phase-2.A section 10 (d) sub-task estimate)"
+  },
+  "honest_scope": {
+    "what_phase_2_b1_establishes": [
+      "Definition 2.1-B1 source morphism class (Topographic Krein M-isometry on enlarged-flip substrate)",
+      "Definition 3.1-B1 bridge functor on morphisms via algebraic pullback in contravariant direction",
+      "Theorem 1.1-B1 functoriality (5 axioms verified at theorem-grade rigor)",
+      "Theorem 5.1-B1 commutative-case restriction agreement with A.3'",
+      "Phase-2.B.3 numerical verification panel input specification"
+    ],
+    "what_phase_2_b1_does_not_establish": [
+      "Bridge Theorem 6.4'-Q1' substantive content B2'-Q1' off-orbit super-additivity (Phase-2.B.2)",
+      "Functor faithfulness (named open follow-on for Phase-2.B.2)",
+      "Numerical verification of morphism action (Phase-2.B.3, gated on this specification)",
+      "Naturality with respect to other bridge functors (Phase-2.B.2 or Phase-2.D)",
+      "Connes-Rovelli thermal-time stack construction (Phase-2.C)"
+    ],
+    "failure_modes_avoided": [
+      "Claim Phase-2.B.1 closes the Bridge Theorem - explicitly defer to Phase-2.B.2",
+      "Claim functoriality without verifying all four axioms - section 4 verifies (a)-(e) explicitly",
+      "Skip commutative-case restriction comparison - section 5 establishes Theorem 5.1-B1",
+      "Conflate source-side morphism class with target-side OSLPLS morphism class - sections 2/3/4 distinct",
+      "Promote Phase-2.B.1 from mechanical to substantive - section 6.2 recommends GO to Phase-2.B.3, parallel Phase-2.B.2"
+    ]
+  },
+  "substantive_new_findings": {
+    "finding_1": {
+      "title": "Morphism action is fully constrained by the substrate (parallel to Phase-2.A object finding)",
+      "section": "section 8.4.1",
+      "description": "Bridge functor's morphism action is dictated by (a) Phase-2.A object construction, (b) Connes-vS contravariant UCP convention, (c) source-side morphism class (extension of A.2' Def 2.3). No design freedom; the morphism action is forced. Parallels Phase-2.A's 'object is structurally constrained, not freely chosen' finding."
+    },
+    "finding_2": {
+      "title": "Contravariance is the convention-bridge between covariant Krein source and contravariant UCP target",
+      "section": "section 8.4.2",
+      "description": "Source category uses covariant Krein M-isometries (proper *-epimorphisms in natural causal direction); target uses contravariant UCP maps. Bridge functor W^flip pulls covariant source arrow back to contravariant target arrow via algebraic pullback. Natural Connes-vS convention (operator-system category presented contravariantly per Gelfand duality). A.3' handled this via Gelfand spectrum dual; Phase-2.B.1 via algebraic pullback (reduces to A.3' on commutative sub-category per Theorem 5.1-B1). Contravariance is inherited from underlying duality, not a Phase-2.B.1 design choice."
+    }
+  },
+  "phase_2_b_remaining_status": {
+    "Phase_2_B_1": "POSITIVE (this sprint, closed 2026-05-24)",
+    "Phase_2_B_2": "RUNNING IN PARALLEL (substantive Bridge Theorem 6.4'-Q1' with off-orbit super-additivity; 2-4 weeks)",
+    "Phase_2_B_3": "GATED ON Phase-2.B.1 (numerical verification panel; ready to dispatch with this specification; 1 week)",
+    "Phase_2_C": "GATED ON Phase-2.B.2 (Connes-Rovelli thermal-time stack; 2-3 weeks)",
+    "Phase_2_D": "GATED ON Phase-2.B.2 + Phase-2.C (Paper 49 drafting; 2-3 weeks)"
+  },
+  "files_added": [
+    "debug/sprint_q1prime_phase2b1_wflip_morphisms_memo.md (this memo, ~4500 words)",
+    "debug/data/sprint_q1prime_phase2b1.json (this data file)"
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "sprint": "Q1'-Phase-2.A",
+  "title": "Operator-System Lorentzian Pre-Length Space (OSLPLS) category definition",
+  "date": "2026-05-24",
+  "memo": "debug/sprint_q1prime_phase2a_oslpls_category_memo.md",
+  "predecessors": [
+    "debug/sprint_q1prime_phase1_case_a_stepping_stone_memo.md",
+    "debug/sprint_q1prime_light_diagnostic_memo.md",
+    "debug/sprint_q1prime_concurrent_work_recheck_memo.md",
+    "debug/sprint_phase_a3prime_mondino_samann_bridge_memo.md",
+    "debug/sprint_phase_a2prime_krein_lift_formalization_memo.md"
+  ],
+
+  "phase_2a_5_gate_verdict": {
+    "aggregate": "POSITIVE",
+    "headline": "OSLPLS category defined cleanly at theorem-grade rigor; commutative MS embeds as faithful sub-category; Krein-side strong-form candidate verifies all OSLPLS axioms and activates Decomposition O Case (iii) substantively; recommend GO to Phase-2.B",
+    "recommendation": "GO to Phase-2.B (bridge functor extension proving OSLPLS-target Bridge Theorem 6.4'-Q1' with off-orbit super-additivity via Connes-Rovelli thermal-time stack)"
+  },
+
+  "axiom_transport_analysis": {
+    "ms_axioms_tested": 8,
+    "transports_directly_count": 5,
+    "transports_with_modification_count": 3,
+    "does_not_transport_count": 0,
+    "per_axiom": [
+      {
+        "axiom": "MS Def 2.3(a) Underlying set X",
+        "classification": "(ii) transports with modification",
+        "modification": "X -> S(M) state space; pure characters when Abelian",
+        "load_bearing_for_substantive_content": false
+      },
+      {
+        "axiom": "MS Def 2.3(b) Topology finer than chronological",
+        "classification": "(i) transports directly",
+        "modification": "weak-* topology on S(M)",
+        "load_bearing_for_substantive_content": false
+      },
+      {
+        "axiom": "MS Def 2.3(c) Time separation ell",
+        "classification": "(ii) transports with modification",
+        "modification": "ell^OS_omega via Tomita-Takesaki modular flow on M with basepoint state omega; modular precedence time tau_mod^omega",
+        "load_bearing_for_substantive_content": true,
+        "substantive_content_owner": "Phase-2.A (definition) + Phase-2.B (proof)"
+      },
+      {
+        "axiom": "MS Def 2.3(d) Reverse triangle inequality",
+        "classification": "(ii) transports with modification",
+        "modification": "statement transports verbatim; proof on Krein-side bridge image deferred to Phase-2.B via Connes-Rovelli thermal-time stack",
+        "load_bearing_for_substantive_content": true,
+        "substantive_content_owner": "Phase-2.B"
+      },
+      {
+        "axiom": "MS Def 3.2 epsilon-net",
+        "classification": "(i) transports directly",
+        "modification": "operator-system causal diamonds in S(M)",
+        "load_bearing_for_substantive_content": false
+      },
+      {
+        "axiom": "MS Def 3.6 LGH convergence (4 sub-conditions)",
+        "classification": "(i) transports directly",
+        "modification": "set-theoretic on S(M); cardinality and correspondences inherit cleanly",
+        "load_bearing_for_substantive_content": false
+      },
+      {
+        "axiom": "MS Def 3.8 Covered LPLS (4-tuple)",
+        "classification": "(i) transports directly",
+        "modification": "cover by operator-system sub-cells M_k subseteq M; slab bound beta_k inherits from BW canonical period 2pi",
+        "load_bearing_for_substantive_content": false
+      },
+      {
+        "axiom": "MS Def 3.12 pLGH convergence",
+        "classification": "(i) transports directly",
+        "modification": "per-cover operator-system LGH at each k",
+        "load_bearing_for_substantive_content": false
+      },
+      {
+        "axiom": "MS Def 4.4 Morphisms (paraphrased)",
+        "classification": "(ii) transports with modification",
+        "modification": "UCP maps with state-pullback basepoint preservation and modular-flow intertwining (automatic from state-pullback via Lemma 4.2-OS)",
+        "load_bearing_for_substantive_content": false
+      }
+    ],
+    "substantive_new_finding": "MS reverse triangle 2.3(d) is the *only* MS axiom whose *proof* uses commutativity structurally (via twin-paradox commutative geometric argument). All other axioms transport (i) directly or (ii) with structural / formula-level modification. The OSLPLS reverse triangle proof requires the Connes-Rovelli thermal-time stack — Phase-2.B substantive content."
+  },
+
+  "oslpls_object_definition": {
+    "tuple_arity": 5,
+    "components": {
+      "A1_ambient_algebra": {
+        "spec": "separable C*-algebra",
+        "verdict": "POSITIVE",
+        "load_bearing_dependency": "Paper 44 finite-dimensional at finite cutoff; Paper 47 norm-closure in continuum"
+      },
+      "A2_lipschitz_seminorm": {
+        "spec": "L: dom(L) subseteq A -> [0, infty]; lower semicontinuous; L(a) = 0 iff a in C*1; (B-K) boundedness axiom",
+        "verdict": "POSITIVE",
+        "load_bearing_dependency": "Paper 46 Def 5.2 strong-form L^K(a) = ||[D_L, a]||_op; Phase A.2' Lemma krein_sep_qlcms_verification"
+      },
+      "A3_topography_operator_system": {
+        "spec": "operator system M subseteq A (not necessarily Abelian); contains unit; *-closed; L|_M inheriting Lipschitz structure",
+        "verdict": "POSITIVE",
+        "load_bearing_dependency": "Connes-vS arXiv:2004.14115 operator-system framework; Paper 44 propagation number = 2"
+      },
+      "A4_basepoint_state": {
+        "spec": "faithful (GNS-cyclic) state omega in S(M); Tomita-Takesaki modular flow sigma_t^omega on M well-defined",
+        "verdict": "POSITIVE",
+        "load_bearing_dependency": "Paper 42 four-witness theorem (BW vacuum modular structure); Tomita-Takesaki standard"
+      },
+      "A5_operator_system_cover": {
+        "spec": "sequence M_k of operator-sub-systems with: (i) dense union; (ii) nested; (iii) basepoint extends to each sub-cell; (iv) slab bound beta_k < infty",
+        "verdict": "POSITIVE",
+        "load_bearing_dependency": "Paper 47 admissible-scaling cutoff; Paper 42 BW canonical period 2pi as slab bound"
+      }
+    },
+    "design_choices_forced_by_axiom_transport": [
+      "state-space-as-underlying-set (vs operator-system-as-underlying-set)",
+      "bimodule-sided time-separation form via modular flow (vs symmetric form)",
+      "UCP morphisms (vs *-homomorphisms)"
+    ],
+    "alternative_paths_not_taken": [
+      "bimodule-extension over a non-commutative base (would give different OSLPLS-like category)",
+      "operator-valued time separation (operator system to B(K) instead of state pair to R)",
+      "*-homomorphism morphisms (too restrictive; UCP is Connes-vS standard)"
+    ]
+  },
+
+  "oslpls_morphism_definition": {
+    "morphism_class": "UCP maps phi: A_2 -> A_1 (contravariant) with five preservation axioms",
+    "components": {
+      "M1_topography_preservation": {
+        "spec": "phi(M_2) subseteq M_1; equivalently phi restricts to UCP map M_2 -> M_1",
+        "verdict": "POSITIVE"
+      },
+      "M2_lipschitz_compatibility": {
+        "spec": "L_1(phi(a)) <= L_2(a) for all a in dom(L_2); standard Lipschitz-contractive UCP morphism property",
+        "verdict": "POSITIVE"
+      },
+      "M3_basepoint_state_pullback": {
+        "spec": "phi^*(omega_1) = omega_2; equivalently omega_1 circ phi = omega_2 on A_2",
+        "verdict": "POSITIVE"
+      },
+      "M4_cover_preservation": {
+        "spec": "phi(M_{2,k}) subseteq M_{1,k} for all k",
+        "verdict": "POSITIVE"
+      },
+      "M5_modular_flow_intertwining": {
+        "spec": "phi circ sigma_t^{omega_2} = sigma_t^{omega_1} circ phi on M_2 for all t in R",
+        "verdict": "POSITIVE (automatic from M3 per Lemma 4.2-OS)",
+        "automaticity_lemma": "Lemma 4.2-OS modular intertwining automaticity"
+      }
+    },
+    "composition_associativity": "POSITIVE (UCP composition is standard)",
+    "identity_existence": "POSITIVE (identity UCP map)"
+  },
+
+  "category_oslpls_cov_verdict": {
+    "well_defined": "POSITIVE",
+    "composition_with_identity": "POSITIVE",
+    "associativity": "POSITIVE",
+    "subcategory_OSLPLS_Z2_for_chirality_graded_objects": "POSITIVE (refinement of Phase-1 LorPLG_cov^{Z/2} to operator-system level)"
+  },
+
+  "commutative_ms_embedding_iota": {
+    "functor": "iota: LorPLG_cov -> OSLPLS_cov",
+    "construction": {
+      "object_action": "(X, ell, o, U) maps to (C(X), L_ell, M_X = C(X), omega_o = delta_o, U_OS = (C(closure(U_k))))",
+      "morphism_action": "ell-preserving map f: X_1 -> X_2 maps to pullback UCP map f^*: C(X_2) -> C(X_1), f^*(g) = g circ f"
+    },
+    "theorem_5_1_OS_parts": {
+      "a_object_correspondence": "POSITIVE (all 5 OSLPLS axioms verify on Abelian C(X))",
+      "b_morphism_correspondence": "POSITIVE (UCP pullback satisfies M1-M5)",
+      "c_faithful": "POSITIVE (distinct MS objects map to non-iso OSLPLS objects via Gelfand-Naimark)",
+      "d_full_on_image": "POSITIVE (iso between iota-images comes from MS isometry)"
+    },
+    "structural_reading": "Commutative MS is a 'degenerate' sub-case of OSLPLS: topography = full Abelian algebra, modular flow trivial (so ell^OS is degenerate), MS time-separation stored as Lipschitz seminorm L_ell instead. OSLPLS is generative refinement: non-commutative cases derive causal structure from algebraic data, while commutative MS must supply it externally.",
+    "caveat_on_time_separation_storage": "ell^OS_{delta_o} = 0 on commutative C(X) because modular flow trivial; MS time-separation ell stored as L_ell via Connes distance formula. This is the natural storage convention for commutative objects."
+  },
+
+  "krein_side_bridge_candidate": {
+    "functor": "W^{flip}: KreinMetaMet_pp^{flip, full} -> OSLPLS_cov",
+    "object_action": "(A^K, L^K, M^{L, flip}_{full}, omega_W^L) maps to (A^K, L^K, M^{L, flip}_{full}, omega_W^L|_M, U^{L, flip}_{OS})",
+    "source_object_specification": {
+      "ambient": "natural Lorentzian operator system A^K on K_{n_max, N_t, T}",
+      "lipschitz": "operator-norm L^K(a) = ||[D_L, a]||_op (Paper 46 Def 5.2)",
+      "topography": "M^{L, flip}_{full} = span_C(O^L union {M^flip_{N, L, M} otimes I_{N_t}: all (N, L, M)}); FULL M != 0 enlargement; non-Abelian per Q1'-Light Case B",
+      "basepoint": "BW vacuum omega_W^L"
+    },
+    "theorem_6_1_OS_axiom_verification": {
+      "A1_ambient_algebra": "POSITIVE (separable C*-algebra)",
+      "A2_lipschitz_seminorm": "POSITIVE (Paper 46 strong-form (B-K) inherited)",
+      "A3_topography_operator_system": "POSITIVE (operator system, non-Abelian for M != 0)",
+      "A4_basepoint_state": "POSITIVE (BW vacuum faithful on enlarged topography; modular flow non-trivial on chirality-flip generators at M != 0)",
+      "A5_operator_system_cover": "POSITIVE (admissible-scaling truncation; slab bound beta_k = 2pi via BW canonical period)"
+    },
+    "substantive_new_content_activated": "Decomposition O Case (iii) is structurally NON-EMPTY on the full M != 0 enlargement. Modular flow on chirality-flip generators with M != 0 introduces genuinely different orbit structure beyond (N, L) labels — Phase-1's chirality-grading-preservation argument (Eq. 6.1) FAILS at full M != 0 because [K_alpha^W, M^flip_{N, L, M}] != 0 for M != 0 (BW polar reflection mixes m_j labels).",
+    "what_phase_2a_explicitly_does_not_establish": [
+      "Reverse triangle inequality 2.3(d) at proof level on the Krein-side bridge image (Phase-2.B substantive content)",
+      "Functoriality of W^flip on morphisms (mechanical, deferred to Phase-2.B.1)",
+      "Convergence transport property B4'-Q1' analog (Phase-2.B.3 + Phase-2.D)",
+      "Connes-Rovelli thermal-time stack construction (Phase-2.C substantive content)"
+    ]
+  },
+
+  "three_substantive_findings": {
+    "finding_1_axiom_transport_constrained": "MS reverse triangle 2.3(d) is the only MS axiom whose proof uses commutativity structurally (twin-paradox commutative geometric argument). All other axioms transport (i) directly or (ii) with structural / formula-level modification. OSLPLS reverse triangle proof is Phase-2.B substantive content.",
+    "finding_2_oslpls_object_structurally_constrained": "OSLPLS object is structurally constrained, not freely chosen. Three design choices (state-space-as-underlying-set, bimodule-sided time separation, UCP morphisms) all FORCED by axiom transport analysis. OSLPLS is the unique operator-system generalization of MS satisfying: (i) contains commutative MS as faithful sub-category, (ii) admits Krein-side bridge image, (iii) is compatible with Connes-vS framework.",
+    "finding_3_propagation_number_replaces_cardinality_bound": "Connes-vS propagation number (Paper 44 Prop prop_2 = 2) substitutes for MS Thm 6.2 cardinality bounds: epsilon-net cardinality bounded by prop^2 * dim(M_k) at finite cutoff. Operator-system invariant naturally plays role of MS underlying-set invariant. Convergence theory of MS pre-length spaces (Thm 6.2 pre-compactness, etc.) inherits cleanly via operator-system invariants — encouraging for Phase-2.B / Phase-2.D."
+  },
+
+  "phase_2b_specification": {
+    "estimated_effort_weeks": "3-6",
+    "sub_tasks": {
+      "phase_2b_1_morphism_action": {
+        "effort_weeks": "1",
+        "scope": "Specify W^flip on morphisms (mechanical from Phase-2.A object action + Connes-vS contravariant UCP convention)"
+      },
+      "phase_2b_2_substantive_bridge_theorem": {
+        "effort_weeks": "2-4",
+        "scope": "Prove Bridge Theorem 6.4'-Q1' properties (B1'-Q1'), (B2'-Q1') with substantive off-orbit super-additivity, (B3'-Q1'), (B4'-Q1'). Substantive content is (B2'-Q1') via Connes-Rovelli thermal-time stack across distinct KMS states.",
+        "substantive_content": "off-orbit super-additivity (B2'-Q1') — operator-algebraic analog of twin paradox via thermal-time stack"
+      },
+      "phase_2b_3_numerical_verification": {
+        "effort_weeks": "1",
+        "scope": "Numerical verification on bit-exact panel (n_max, N_t) in {(2,3), (3,5), (4,7)} — analog of Phase-1 Theorem 1.4 (B3') panel verification but on OSLPLS object structure"
+      }
+    },
+    "bridge_theorem_6_4_prime_Q1_prime_conjecture": {
+      "B1_prime_Q1_prime_structural_correspondence": "Mechanical from Lemma 2.1-OS + Theorem 6.1-OS",
+      "B2_prime_Q1_prime_reverse_triangle_with_strict_super_additivity": {
+        "on_orbit_case_decomposition_O_i": "equality holds via additivity of modular flow (Paper 42 transports verbatim)",
+        "off_orbit_case_decomposition_O_iii_NOW_NON_EMPTY": "strict super-additivity via Connes-Rovelli thermal-time stack — SUBSTANTIVE NEW CONTENT"
+      },
+      "B3_prime_Q1_prime_pre_compactness": "Connes-vS propagation number = 2 substitutes for MS Thm 6.2 cardinality bounds",
+      "B4_prime_Q1_prime_convergence_transport": "Paper 46 strong-form propinquity convergence induces OSLPLS-pLGH convergence on bridge image"
+    }
+  },
+
+  "phase_2c_specification": {
+    "estimated_effort_weeks": "2-3",
+    "scope": "Operator-system Connes-Rovelli thermal-time stack across distinct KMS states as standalone structural construction. Genuinely new operator-algebraic content; not in published literature."
+  },
+
+  "phase_2d_specification": {
+    "estimated_effort_weeks": "2-3",
+    "scope": "Paper 49 drafting (math.OA standalone, 11th in GeoVac series). Title candidate: 'Operator-system Lorentzian pre-length spaces and the strong-form Krein-Mondino-Saemann bridge.'"
+  },
+
+  "total_phase_2_post_2a_effort_weeks": "7-12",
+
+  "compression_pattern_assessment": {
+    "phase_2a_compression": "PARTIAL — substrate inheritances (Connes-vS 2021 operator-system, Paper 44 propagation number, Paper 46 enlarged substrate, Paper 42 four-witness, A.3'/Phase-1 bridge template) compressed three structural design choices to forced derivations. Phase-2.A completes in one focused session despite being genuinely new content.",
+    "phase_2b_compression_uncertainty": "Phase-2.B reverse triangle proof requires Connes-Rovelli thermal-time stack — substrate does NOT directly provide this. Connes-Rovelli 1994 is single-KMS-state; stack across distinct KMS states is genuinely new. Phase-2.B may compress to one session if construction admits clean substrate-inherited structure, or extend to multi-week if structural surprises surface.",
+    "expected_phase_2_total_weeks": "7-12 (consistent with Q1'-Light §5.2 6-10 week estimate for Option γ)"
+  },
+
+  "named_follow_ons_q2_prime": {
+    "q2_prime_non_commutative_ms_extension": {
+      "estimated_effort_months": "6-12",
+      "scope": "Build non-commutative MS pre-length space concept from scratch (vs OSLPLS which is operator-system replacement). Multi-month NCG-research target; comparable in scope to Latrémolière propinquity development. Not currently in published literature."
+    },
+    "phase_2a_relationship_to_q2_prime": "Phase-2.A delivers Option γ (operator-system replacement), NOT Option δ (genuine non-commutative MS). Q2' is the natural Phase-3 follow-on if Phase-2 closes positively and PI decides to pursue genuine non-commutative MS extension."
+  },
+
+  "concurrent_work_check_pre_phase_2a": {
+    "verdict": "CLEAR",
+    "from_q1prime_concurrent_work_recheck_memo": "No published 'operator-system Lorentzian pre-length space' concept exists as of 2026-05-24. Mondino-Saemann lineage active in 2025-2026 but strictly synthetic/metric. Connes-vS / Latrémolière lineage active but strictly Riemannian. OSLPLS is open territory."
+  },
+
+  "cross_references": [
+    "debug/sprint_q1prime_phase1_case_a_stepping_stone_memo.md",
+    "debug/sprint_q1prime_light_diagnostic_memo.md",
+    "debug/sprint_q1prime_concurrent_work_recheck_memo.md",
+    "debug/sprint_phase_a3prime_mondino_samann_bridge_memo.md",
+    "debug/sprint_phase_a2prime_krein_lift_formalization_memo.md",
+    "debug/sprint_phase_a4prime_a_gb2_super_additivity_memo.md",
+    "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+    "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+    "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+    "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex"
+  ]
+}

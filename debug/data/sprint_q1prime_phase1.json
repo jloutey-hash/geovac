@@ -1,0 +1,143 @@
+{
+  "sprint": "Q1'-Phase-1",
+  "date": "2026-05-24",
+  "type": "FORMAL_THEOREM_GRADE_MEMO",
+  "production_code_modified": false,
+  "papers_modified": false,
+  "memo_path": "debug/sprint_q1prime_phase1_case_a_stepping_stone_memo.md",
+  "predecessors": [
+    "debug/sprint_q1prime_light_diagnostic_memo.md",
+    "debug/sprint_q1prime_concurrent_work_recheck_memo.md",
+    "debug/sprint_phase_a2prime_krein_lift_formalization_memo.md",
+    "debug/sprint_phase_a3prime_mondino_samann_bridge_memo.md",
+    "debug/sprint_phase_a4prime_a_gb2_super_additivity_memo.md",
+    "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+    "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+    "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+    "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex"
+  ],
+  "headline_verdict": "POSITIVE",
+  "headline_summary": "Case A (M=0 chirality-flip topography enlargement) closes at theorem-grade rigor as stepping stone toward Phase-2; substantive strict-strong-form G-B2 content remains structurally vacuous because Decomposition O Case (iii) is empty under M=0 chirality-flip enlargement (chirality grading preserved by modular flow at m_j=0); recommended GO to Phase-2 (Option gamma operator-system Lorentzian pre-length space, Paper 49 drafting).",
+  "phase_1_5_gate_verdict": "POSITIVE_GO_TO_PHASE_2",
+  "topography_axiom_verification": {
+    "axiom_a_abelian": {
+      "status": "PROVEN",
+      "mechanism": "M=0 chirality-flip generators reduce to spatial multiplication operators on each chirality sheet; any two multiplication operators commute. Bit-exact [M_flip_1, M_flip_2] = diag(0, 0).",
+      "memo_reference": "Section 3.1, 2.3"
+    },
+    "axiom_b_strictly_positive": {
+      "status": "PROVEN",
+      "mechanism": "Inherited from K+-weak-form: h^L = K_alpha^W / Z lies in M^L which is a subalgebra of the enlarged topography.",
+      "memo_reference": "Section 3.2"
+    },
+    "axiom_c_character": {
+      "status": "PROVEN",
+      "mechanism": "BW vacuum extends to character of enlarged Abelian topography; substantive finding (the Z/2-invariance) discussed in 4.3.",
+      "memo_reference": "Section 3.3"
+    },
+    "axiom_d_approximate_unit": {
+      "status": "PROVEN",
+      "mechanism": "Truncated projector sequence h_n = P_{(n_max(n), N_t(n), T(n))} is M-block-diagonal hence in M^L subset of enlarged topography; all exhaustive-sequence properties transport verbatim.",
+      "memo_reference": "Section 3.4"
+    }
+  },
+  "theorems_stated": {
+    "Lemma_1_1_QPrime": {
+      "name": "Krein M=0-chirality-flip topography",
+      "status": "PROVEN",
+      "memo_reference": "Section 3.5",
+      "key_property": "All four Krein topography axioms verified; Z/2-graded structure exhibited"
+    },
+    "Theorem_1_2_QPrime": {
+      "name": "Two-fold-cover Gelfand spectrum",
+      "status": "PROVEN",
+      "memo_reference": "Section 4.1, 4.2",
+      "key_property": "Gelfand spectrum decomposes as disjoint Z/2-graded cover: M^L_flip_M=0_hat = M^L_hat^(+) sqcup M^L_hat^(-)",
+      "substantive_finding": "BW vacuum is Z/2-invariant (sits at the rho-fixed basepoint, NOT chirality-asymmetric); refines Q1'-Light 3.1 prediction"
+    },
+    "Theorem_1_3_QPrime": {
+      "name": "Chirality-graded bridge functor on M=0 enlarged substrate",
+      "status": "PROVEN",
+      "memo_reference": "Section 5.4, 5.5",
+      "key_property": "Functor W^flip_M=0: KreinMetaMet_pp^flip_M=0 -> LorPLG_cov^{Z/2} extending A.3' Wick-rotation functor",
+      "diagram_commutativity": "V o W^flip_M=0 = W o U (Phase-1 strictly additive on K+-weak-form bridge)"
+    },
+    "Theorem_1_4_QPrime": {
+      "name": "Bridge Theorem on Case A",
+      "status": "PROVEN_with_honest_scope",
+      "memo_reference": "Section 6.1-6.5",
+      "key_property": "B1'-B4' all verified per chirality sheet",
+      "honest_scope": "B2' closes via Decomposition O Case (iii) emptiness on each sheet, NOT via strict super-additivity; chirality grading preserved by modular flow at m_j=0"
+    }
+  },
+  "structural_findings": {
+    "finding_1_BW_vacuum_Z2_invariant": {
+      "name": "BW vacuum is Z/2-invariant on enlarged topography",
+      "memo_reference": "Section 8.1",
+      "summary": "BW vacuum has omega_W^L(M_flip_{N,L,0}) = 0 for all (N,L); corresponds to average state on the two-fold cover (NOT pure character on a single sheet); refines Q1'-Light 3.1 prediction",
+      "phase_2_implication": "OSLPLS must allow Z/2-fixed basepoints"
+    },
+    "finding_2_chirality_preserved_by_modular_flow": {
+      "name": "Chirality grading preserved by modular flow at M=0",
+      "memo_reference": "Section 8.2, Eq. 6.1",
+      "summary": "[K_alpha^W, M_flip_{N,L,0}] = 0 trivially at M=0 (K_alpha^W = 0 on m_j=0 subspace); modular flow preserves chirality grading; structural reason Decomposition O Case (iii) remains empty",
+      "phase_2_implication": "Activating Case (iii) requires either M != 0 (chirality-flip generators carry non-trivial m_j-rotation) or non-commutative topography extension"
+    },
+    "finding_3_bridge_extension_is_free": {
+      "name": "Bridge extension is structurally free (analogous to Paper 46 free upgrade)",
+      "memo_reference": "Section 8.3, 5.6, 6.5",
+      "summary": "Chirality-graded bridge extends K+-weak-form bridge at no structural cost; bridge bound, convergence rate, structural correspondence all transport bit-identically",
+      "phase_2_implication": "Substantive content of strong-form bridge requires Case B full M != 0 enlargement where bridge bound and structural correspondence change non-trivially (sqrt(2) to 2 factor per Paper 46 sec:enlarged_substrate prediction)"
+    }
+  },
+  "honest_scope_statements": [
+    "Case A closes at theorem-grade rigor as STEPPING STONE; substantive Q1' content requires Phase-2 (Case B)",
+    "Decomposition O Case (iii) remains EMPTY under M=0 chirality-flip enlargement (no strict super-additivity exercised)",
+    "Bridge extension is structurally free (no enrichment beyond K+-weak-form bridge's substantive content)",
+    "Q2' (non-commutative MS pre-length space from scratch) is multi-month NCG-research target, NOT addressed by Phase-1 or Phase-2"
+  ],
+  "phase_2_refinement": {
+    "recommended_structure": "Three sub-sprints (Phase-2.A operator-system extension of MS / Phase-2.B bridge functor extension / Phase-2.C off-orbit super-additivity closure) plus Phase-2.D paper drafting",
+    "phase_2_a_operator_system_MS_extension": {
+      "effort_weeks": "2-3",
+      "target": "Define OSLPLS category (operator-system Lorentzian pre-length space) generalizing MS to non-commutative substrates",
+      "phase_1_relevance": "Phase-1 chirality-graded OSLPLS is special case (operator system is doubled K+-weak-form algebra with Z/2 grading)"
+    },
+    "phase_2_b_bridge_functor_extension": {
+      "effort_weeks": "3-4",
+      "target": "Extend A.3' Wick-rotation functor W to W^full: KreinMetaMet_pp^{flip,full} -> OSLPLS_cov on full Paper 46 Appendix B enlarged substrate (Abelianness BROKEN)",
+      "phase_1_relevance": "Phase-1 W^flip_M=0 is the structurally additive boundary case; Phase-2.B is non-free extension"
+    },
+    "phase_2_c_off_orbit_super_additivity": {
+      "effort_weeks": "2-3",
+      "target": "Close G-B2 at strict-strong-form via Connes-Rovelli thermal-time stack across distinct KMS states",
+      "phase_1_relevance": "Phase-1 G-B2 closes via K+-weak-form mechanism; Phase-2.C closes via genuine off-orbit operator-algebraic super-additivity"
+    },
+    "phase_2_d_paper_49_drafting": {
+      "effort_weeks": "2-3",
+      "target": "Math.OA standalone, 11th in GeoVac series (siblings: 38, 39, 40, 42, 43, 44, 45, 46, 47, 48)"
+    },
+    "total_phase_2_effort_weeks": "7-10"
+  },
+  "compression_pattern_check": {
+    "k_weak_form_compression_pattern": "10 sub-sprints in one session because A.2' substrate did most of heavy lifting",
+    "phase_1_compression_pattern": "Single sprint session at theorem-grade rigor; Case A is the analog of K+-weak-form simplification (M-diagonal topography preserved)",
+    "phase_1_compression_observed": "CONFIRMED",
+    "phase_2_compression_predicted": "UNLIKELY (source category becomes non-Abelian; OSLPLS target requires substantive new construction not in published literature)",
+    "compression_mechanism": "Phase-1 inherits via the Z/2-doubling architecture: Lemma 1.1-Q1' transports Paper 48 lem:natural_krein_topography; Theorem 1.4-Q1' inherits per chirality sheet from A.3' Theorem 6.4 + A.4'-A Theorem 2.1"
+  },
+  "failure_modes_avoided": [
+    "Claiming Case A closes G-B2 at strict-strong-form (it does not; Section 7.2 explicit)",
+    "Conflating chirality-grading Z/2 structure with substantive off-axis structure (Theorem 1.3-Q1' shows Z/2 acts trivially on orbit labels)",
+    "Promoting Phase-1 from stepping stone to Q1' closure (Section 7.3 explicit GO to Phase-2)",
+    "Claiming chirality-graded bridge functor is final form for strong-form bridge (Phase-2 will extend to operator-system level on full enlarged substrate)"
+  ],
+  "concurrent_work_risk_status": "CLEAR (per Q1' concurrent-work re-check); no scoop risk; Mondino-Samann community active but has not extended to operator algebras",
+  "wh1_status_impact": "WH1 PROVEN status maintained; Phase-1 is structurally additive on the Lorentzian-extension arc (Papers 42/43/44/45/46/47/48), not a re-test",
+  "recommended_next_actions": [
+    "Submit Phase-1 memo to PI for review",
+    "If PI approves: dispatch Phase-2.A (OSLPLS definition sprint, 2-3 weeks)",
+    "Continue concurrent-work monitoring on Mondino-Samann lineage (6-month re-check trigger at 2026-11-24 per Q1' recheck memo)",
+    "Defer Phase-3 (Option delta non-commutative MS) until Phase-2 closes"
+  ]
+}

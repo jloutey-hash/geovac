@@ -1,0 +1,299 @@
+{
+  "sprint": "Phase A.3' — Mondino-Sämann bridge construction",
+  "date": "2026-05-24",
+  "sprint_position": "Phase A.3' of Sprint L3e-P3 (re-scoped)",
+  "predecessors": [
+    "Phase A.2' (Krein-lift formalization, POSITIVE)",
+    "Tier 3-Light diagnostic (POSITIVE-WITH-NAMED-OBSTRUCTIONS)",
+    "Phase A.2 ε-net (F2 mismatch identification + R1/R2/R3 candidates)",
+    "Phase A.1 literature audit"
+  ],
+  "aggregate_verdict": "POSITIVE",
+  "verdict_summary": "Bridge constructed at theorem-grade rigor as the Wick-rotation functor W : KreinMetaMet_pp → LorPLG_cov; F2 mismatch resolved via R3 (Connes–Rovelli thermal time) extending R2(a)+R2(c); two named gaps G-B2 and G-B4 deferred to Phase A.4'",
+
+  "per_candidate_verdicts": {
+    "R1_negate_time": {
+      "phase_a2_framing": "probably still wrong",
+      "phase_a3prime_verdict": "NEGATIVE",
+      "reasoning": [
+        "Codomain mismatch: -Đ^K maps to [-∞, 0], not Mondino-Sämann codomain {-∞} ∪ [0, ∞]",
+        "Triangle structural mismatch: 4-point relaxed forward triangle of Đ^K does not collapse to 3-point reverse triangle of MS Eq. 1 under any sign convention; (1 + Đ^K)^2 coefficient factors have no MS-side analog"
+      ],
+      "verdict_strength": "structural negative (sharper than Phase A.2 §5 framing)"
+    },
+    "R2_functorial": {
+      "phase_a2_framing": "now favored",
+      "phase_a3prime_verdict": "PARTIAL as composite F_a + F_c",
+      "sub_candidates": {
+        "R2a_wick_rotation": {
+          "verdict": "PARTIAL",
+          "gives": ["codomain match {-∞} ∪ [0, ∞]", "3-point reverse triangle on wedge boost orbits"],
+          "lacks": ["doesn't determine basepoint (could be any pin state)", "doesn't determine cover scales β_k"]
+        },
+        "R2b_polar_decomposition": {
+          "verdict": "TRIVIAL on natural substrate",
+          "gives": ["Riemannian Lipschitz seminorm via |D_L|"],
+          "lacks": ["no Lorentzian-specific content on natural substrate (chirality-symmetric)", "non-trivial only on enlarged substrate (Paper 46 Appendix B), out of K⁺-weak-form scope"]
+        },
+        "R2c_modular_flow": {
+          "verdict": "PARTIAL",
+          "gives": ["basepoint BW vacuum ω_W^L", "cover scales β_k = 2π/κ_g (BW canonical period)", "modular orbit algebra τ_mod"],
+          "lacks": ["inherits F2 forward-vs-reverse triangle mismatch (modular flow is additive, hence forward triangle, not reverse)"]
+        },
+        "R2d_connes_embedding": {
+          "verdict": "UNDER-DETERMINED",
+          "gives": ["set X = Spec(M^L) via Gelfand-Naimark", "topology = weak-*"],
+          "lacks": ["doesn't specify time separation ℓ"]
+        }
+      },
+      "composite_required": "F_a (Wick rotation) ∘ F_c (modular flow) provides all four needed ingredients (set, topology, ℓ, basepoint + cover); F2 still requires R3 to resolve"
+    },
+    "R3_connes_rovelli_thermal_time": {
+      "phase_a2_framing": "may be unifying framework",
+      "phase_a3prime_verdict": "POSITIVE as unifying framework",
+      "reasoning": [
+        "Connes-Rovelli 1994 (CQG 11, 2899): in a quantum statistical system, the modular automorphism group σ_t^ω IS the physical thermal time",
+        "On BW wedge KMS state: thermal time t_thermal = β · t_geometric / (2π) = (1/κ_g) · t_geometric (four-witness theorem of Paper 42)",
+        "F2 resolution: Đ^K measures thermal-time distance (forward, additive), ℓ^L measures geometric proper time (reverse, super-additive); they are different physical quantities measured on the same wedge KMS state",
+        "Wick rotation σ_t = -i · t_geometric/κ_g effects the analytic continuation that maps additive thermal-time structure to super-additive geometric-time structure",
+        "The forward-vs-reverse triangle direction is not a mismatch but a structural signature that the two categories project different aspects of the same physics"
+      ],
+      "key_identification": "ℓ^L = κ_g · τ_mod (on wedge boost orbits); reverse triangle inherited from Wick rotation of modular flow",
+      "verdict_strength": "structural identification at theorem-grade rigor"
+    }
+  },
+
+  "bridge_theorem": {
+    "name": "Theorem 6.4 (Krein–Mondino–Sämann Bridge)",
+    "functor": {
+      "name": "W : KreinMetaMet_pp → LorPLG_cov",
+      "type": "Wick-rotation functor",
+      "construction": "R3-extended R2(a) + R2(c) composite",
+      "on_objects": {
+        "input": "(A^K, L^K, M^L, ω_W^L) Krein pointed proper QMS",
+        "output": "(Spec(M^L), ℓ^L, ω̂_W^L, Û^L) covered Lorentzian pre-length space",
+        "set": "Spec(M^L) Gelfand spectrum of topography",
+        "topology": "weak-* on Spec(M^L)",
+        "time_separation": "ℓ^L(ω̂, ω̂') = κ_g · τ_mod^{ω_W^L}(ω̂, ω̂') on wedge boost orbits, -∞ otherwise",
+        "basepoint": "ω̂_W^L as character of M^L (BW vacuum)",
+        "cover": "(Û_k)_{k∈N} with Û_k = Spec(M^L|_{n_max(k), N_t(k), T(k)}) along admissible scaling",
+        "cover_scales": "β_k = 2π/κ_g (BW canonical period)"
+      },
+      "on_morphisms": "contravariant via Gelfand duality (Krein M-isometry ↦ dual spectrum map)"
+    },
+    "properties": {
+      "B1_structural_correspondence": {
+        "rigor": "theorem-grade",
+        "content": "W sends Krein PPQMS structure to MS-covered LPLS structure row-by-row per §2 table (15 rows)"
+      },
+      "B2_reverse_triangle": {
+        "rigor": "proof-sketch with named gap",
+        "named_gap": "G-B2",
+        "gap_description": "Super-additivity of off-orbit Wick-rotated modular flow on the M-diagonal topography requires formal transport of Paper 42 four-witness theorem to MS time separation",
+        "gap_effort_estimate": "3-5 weeks within Phase A.4'",
+        "on_orbit_case": "trivial — modular flow is additive, hence ℓ^L additive on orbits, hence reverse triangle holds with equality (geodesic case)",
+        "off_orbit_case_2a": "trivial — un-causally-related state pairs give -∞ on LHS",
+        "off_orbit_case_2b": "non-trivial — Wick rotation of off-axis modular flow inherits super-additivity of Lorentz boost composition; formal proof requires Connes-Rovelli at operator level"
+      },
+      "B3_pre_compactness_inheritance": {
+        "rigor": "theorem-grade",
+        "content": "MS Thm 6.2 three conditions hold on W(X^K_n) for admissible-scaling cutoff sequences",
+        "conditions_verified": {
+          "i_timelike_diameter": "T_k = 2π uniformly (BW canonical period)",
+          "ii_cardinality_bound": "N(k,ε) = O(n_max(k)^4 · N_t(k)) uniformly inherited from Paper 44 propagation = 2",
+          "iii_cumulative_e_net": "Û_k ⊆ Û_{k+1} nested via admissible scaling"
+        }
+      },
+      "B4_convergence_transport": {
+        "rigor": "proof-sketch with named gap",
+        "named_gap": "G-B4",
+        "gap_description": "Mechanical verification of MS Def 3.6 extension property and forward density on Berezin/projection correspondence",
+        "gap_effort_estimate": "1-2 weeks within Phase A.4'",
+        "content": "Đ^K(X^K_n, X^K_∞) → 0 implies W(X^K_n) →^{pLGH} W(X^K_∞)"
+      }
+    },
+    "compact_case_agreement": {
+      "riemannian_limit": "N_t = 1 reduces W(X^K) to trivial LPLS associated to SU(2) Riemannian spectral triple",
+      "consistency": "ℓ^L = 0 off-modular-flow on Riemannian limit; modular flow collapses to identity"
+    }
+  },
+
+  "f2_resolution": {
+    "f2_statement": "Latrémolière metametric Đ^K satisfies 4-point relaxed FORWARD triangle; Mondino-Sämann time separation ℓ^L satisfies 3-point REVERSE triangle",
+    "resolution_path": "R3-extended R2(a)+R2(c) composite",
+    "resolution_mechanism": "Connes-Rovelli thermal-time hypothesis identifies modular flow time (additive, forward) with Wick rotation of geometric proper time (super-additive, reverse); the two triangle directions are structural signatures of different physical projections of the same wedge KMS state",
+    "resolution_status": "POSITIVE structural identification; one mechanical proof gap G-B2 remains for off-orbit super-additivity"
+  },
+
+  "correspondence_table_summary": {
+    "total_rows": 15,
+    "r_independent_rows": 13,
+    "r_dependent_rows": [3, 4],
+    "r3_dependent_resolution": "rows 3 (time separation function) and 4 (triangle direction) resolved under R3-extended R2"
+  },
+
+  "named_gaps": {
+    "G_B2": {
+      "name": "Super-additivity of off-orbit Wick-rotated modular flow",
+      "location": "Theorem 6.4 (B2) reverse triangle, sub-case 2b",
+      "input_required": "Paper 42 §6 BW-γ Tomita-Takesaki construction (K_TT = -log Δ)",
+      "estimated_effort": "3-5 weeks within Phase A.4'",
+      "structural_status": "mechanical (not a structural obstruction); Lorentz boost composition super-additivity is well-known in special relativity; operator-algebraic counterpart is the formal task"
+    },
+    "G_B4": {
+      "name": "MS Def 3.6 mechanical verification on Berezin/projection correspondence",
+      "location": "Theorem 6.4 (B4) convergence transport",
+      "input_required": "Paper 45 Sub-Sprint C (joint Berezin) + Sub-Sprint D (propinquity assembly)",
+      "estimated_effort": "1-2 weeks within Phase A.4'",
+      "structural_status": "mechanical (the Berezin pair already has the right nesting structure; MS Def 3.6 axioms are essentially the same nesting rewritten in MS conventions)"
+    }
+  },
+
+  "open_question": {
+    "Q1prime_strong_form_bridge": {
+      "name": "Strong-form bridge with enlarged substrate (Paper 46 Appendix B)",
+      "description": "Does the bridge functor W extend to chirality-flipping generators M^flip with {J, M^flip} = 0? These are NOT in the topography M^L (which requires [J, M] = 0)",
+      "status": "open for Phase A.5'+ or Paper 48 §8 open-questions",
+      "extension_options": [
+        "Restrict to K⁺-positive cone of enlarged substrate (K⁺ preservation may fail for flip generators)",
+        "Generalize Mondino-Sämann to non-commutative pre-length spaces (substantial NCG-research target, not currently in the literature)"
+      ]
+    }
+  },
+
+  "geovac_wedge_application_preview": {
+    "scope": "Phase A.4'",
+    "input": "GeoVac wedge Krein PPQMS (A^L|_{W^L}, L^K|_{W^L}, M^L|_{W^L}, ω_W^L) from Paper 43 hemispheric wedge",
+    "output": "MS-covered LPLS (Spec(M^L|_{W^L}), ℓ^L_wedge, ω̂_W^L, Û^L_wedge)",
+    "panel_cells": ["(n_max, N_t) = (2, 3, 2π)", "(3, 5, 2π)", "(4, 7, 2π)"],
+    "new_theorems_accessible": [
+      "Corollary 7.1: GeoVac wedge synthetic compactness (any admissible-scaling sequence has pLGH-convergent subsequence)",
+      "MS chronological/causal/diamond/chronocausal topologies on bridge image",
+      "Convergence transport: Λ^K(n_max, N_t) → 0 ⟹ pLGH convergence"
+    ],
+    "what_stays_internal": [
+      "Full operator system O^L (only topography M^L transports)",
+      "Non-commutative Lipschitz seminorm L^K (only commutative-topography restriction transports)",
+      "Propagation number = 2 (operator-algebraic; bridge image uses MS Thm 6.2 cardinality bounds instead)",
+      "Krein indefinite-inner-product structure",
+      "Strong-form Lorentzian propinquity (Paper 46 enlarged substrate)"
+    ]
+  },
+
+  "phase_a4prime_recommendation": {
+    "verdict": "PROCEED",
+    "estimated_effort": "2-3 months",
+    "scope": [
+      "Apply W to GeoVac wedge PPQMS at panel cells",
+      "Verify structural correspondence row-by-row on panel",
+      "Close G-B2 (super-additivity) via Paper 42 four-witness theorem transport",
+      "Close G-B4 (MS Def 3.6 mechanical verification)",
+      "State GeoVac wedge synthetic compactness corollary at theorem-grade rigor",
+      "Identify γ^joint → 0 as MS pLGH convergence rate"
+    ],
+    "no_a3prime_subsprint_required": true,
+    "a3prime_subsprint_rationale": "Two named gaps G-B2, G-B4 are part of Phase A.4' natural scope (instantiation + mechanical verification), not a separate sub-sprint"
+  },
+
+  "merged_paper_48_timeline_post_a3prime": {
+    "A2prime_krein_lift_formalization": "3-6 weeks (DONE)",
+    "A3prime_bridge_construction": "3-4 weeks (DONE, this memo)",
+    "A4prime_geovac_wedge_plus_gap_closure": "2-3 months",
+    "A5prime_synthesis_decision_gate": "3 weeks",
+    "B_paper_48_draft": "1.5 months",
+    "total_end_to_end": "6.5-8.5 months"
+  },
+
+  "load_bearing_dependencies": [
+    {
+      "name": "Phase A.2' merged Paper 48 §3 substrate",
+      "content": "4-tuple Krein PPQMS, M-tunnel, Đ^K inframetric, Theorem 4.2-K"
+    },
+    {
+      "name": "Paper 42 four-witness Wick-rotation theorem",
+      "content": "BW-α + BW-γ Tomita-Takesaki constructions; supplies R3 at operator level"
+    },
+    {
+      "name": "Paper 43 hemispheric wedge construction",
+      "content": "BW vacuum ω_W^L, K_α^W integer spectrum, modular flow period 2π"
+    },
+    {
+      "name": "Paper 45 Sub-Sprint D Riemannian-limit recovery",
+      "content": "Compact-case agreement at N_t = 1"
+    },
+    {
+      "name": "Paper 47 norm-resolvent convergence",
+      "content": "Admissible-scaling truncation sequence; T → ∞ limit"
+    },
+    {
+      "name": "Mondino-Sämann arXiv:2504.10380 v4",
+      "content": "Def 2.3, Def 3.6, Def 3.8, Def 3.12, Thm 6.2"
+    },
+    {
+      "name": "Latrémolière arXiv:2512.03573",
+      "content": "Defs 1.18-5.1 via Phase A.2'"
+    },
+    {
+      "name": "Connes-Rovelli 1994 CQG 11:2899",
+      "content": "Thermal-time hypothesis supplying R3"
+    },
+    {
+      "name": "Paper 32 §VIII rem:pythagorean_m1_closure",
+      "content": "2π as M1 Hopf-base measure signature; supplies cover-scale matching"
+    }
+  ],
+
+  "concurrent_work_risk_assessment": {
+    "Latrémolière_Lorentzian_lift": {
+      "level": "LOW",
+      "rationale": "No follow-up to 2512.03573 in scope"
+    },
+    "Mondino_Sämann_operator_algebraic_extension": {
+      "level": "LOW",
+      "rationale": "No signal in 2024-2026"
+    },
+    "Sormani_Sakovich_null_distance_bridge": {
+      "level": "MEDIUM",
+      "rationale": "Different convergence category but should be cited in related work"
+    },
+    "Connes_Rovelli_thermal_time_applied_to_NCG_geometry": {
+      "level": "MEDIUM",
+      "rationale": "32 years of adjacent literature; many applications but none specific to Krein-MS bridge"
+    },
+    "independent_Krein_Mondino_Sämann_bridge": {
+      "level": "LOW",
+      "rationale": "No published Lorentzian propinquity exists; combining metametric + reverse-triangle requires specific framing surfacing here"
+    }
+  },
+
+  "phase_a3prime_5_gate_decision": {
+    "verdict": "POSITIVE",
+    "recommendation": "PROCEED to Phase A.4'",
+    "next_sprint": "Phase A.4' GeoVac wedge application + G-B2 + G-B4 closure",
+    "estimated_phase_a4prime_effort": "2-3 months",
+    "no_a3prime_subsprint_required": true
+  },
+
+  "honest_scope_caveats": {
+    "established_at_theorem_grade": [
+      "Categorical setup (Defs 6.1, 6.2)",
+      "Wick-rotation functor definition (Def 6.3)",
+      "Bridge Theorem 6.4(B1) structural correspondence",
+      "Bridge Theorem 6.4(B3) pre-compactness inheritance",
+      "R1 negative (structural)",
+      "R3 positive as unifying framework",
+      "§2 correspondence table (15 rows)"
+    ],
+    "established_at_proof_sketch_with_named_gaps": [
+      "Bridge Theorem 6.4(B2) reverse triangle (gap G-B2: off-orbit super-additivity)",
+      "Bridge Theorem 6.4(B4) convergence transport (gap G-B4: MS Def 3.6 verification)"
+    ],
+    "not_established_open_for_phase_a4prime_or_later": [
+      "Merged Paper 48 §5 draft (Phase B)",
+      "G-B2 formal closure (Phase A.4')",
+      "G-B4 mechanical verification (Phase A.4')",
+      "Strong-form bridge Q1' (Phase A.5'+ or Paper 48 §8)",
+      "Non-commutative MS extension (substantial NCG-research target; out of scope)"
+    ]
+  }
+}

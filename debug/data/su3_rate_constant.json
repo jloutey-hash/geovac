@@ -221,7 +221,7 @@
       "max_pq": 2,
       "max_dynkin_for_saturation": 40,
       "n_quad": 40,
-      "time_seconds": 0.004717111587524414,
+      "time_seconds": 0.009035587310791016,
       "L*gamma/log(L)": 5.54595752107021
     },
     {
@@ -232,7 +232,7 @@
       "max_pq": 3,
       "max_dynkin_for_saturation": 40,
       "n_quad": 40,
-      "time_seconds": 0.006846427917480469,
+      "time_seconds": 0.007081747055053711,
       "L*gamma/log(L)": 4.529281309848588
     },
     {
@@ -243,7 +243,7 @@
       "max_pq": 4,
       "max_dynkin_for_saturation": 40,
       "n_quad": 40,
-      "time_seconds": 0.007469892501831055,
+      "time_seconds": 0.007549285888671875,
       "L*gamma/log(L)": 4.667672624551832
     },
     {
@@ -254,7 +254,7 @@
       "max_pq": 4,
       "max_dynkin_for_saturation": 40,
       "n_quad": 40,
-      "time_seconds": 0.010708808898925781,
+      "time_seconds": 0.01057577133178711,
       "L*gamma/log(L)": 4.0196233858658825
     },
     {
@@ -265,7 +265,7 @@
       "max_pq": 5,
       "max_dynkin_for_saturation": 40,
       "n_quad": 40,
-      "time_seconds": 0.014641284942626953,
+      "time_seconds": 0.015038013458251953,
       "L*gamma/log(L)": 3.7260433079006656
     },
     {
@@ -276,7 +276,7 @@
       "max_pq": 6,
       "max_dynkin_for_saturation": 40,
       "n_quad": 42,
-      "time_seconds": 0.021433115005493164,
+      "time_seconds": 0.02216315269470215,
       "L*gamma/log(L)": 3.508601149615587
     },
     {
@@ -287,7 +287,7 @@
       "max_pq": 8,
       "max_dynkin_for_saturation": 40,
       "n_quad": 46,
-      "time_seconds": 0.03437471389770508,
+      "time_seconds": 0.03590750694274902,
       "L*gamma/log(L)": 3.5156995631737735
     },
     {
@@ -298,7 +298,7 @@
       "max_pq": 9,
       "max_dynkin_for_saturation": 40,
       "n_quad": 48,
-      "time_seconds": 0.05067110061645508,
+      "time_seconds": 0.05196094512939453,
       "L*gamma/log(L)": 3.1630176329820925
     },
     {
@@ -309,7 +309,7 @@
       "max_pq": 10,
       "max_dynkin_for_saturation": 40,
       "n_quad": 50,
-      "time_seconds": 0.07060408592224121,
+      "time_seconds": 0.07209515571594238,
       "L*gamma/log(L)": 3.0526962579912644
     },
     {
@@ -320,7 +320,7 @@
       "max_pq": 12,
       "max_dynkin_for_saturation": 40,
       "n_quad": 54,
-      "time_seconds": 0.10776758193969727,
+      "time_seconds": 0.1105051040649414,
       "L*gamma/log(L)": 2.9218605501279233
     },
     {
@@ -331,7 +331,7 @@
       "max_pq": 14,
       "max_dynkin_for_saturation": 40,
       "n_quad": 58,
-      "time_seconds": 0.18486428260803223,
+      "time_seconds": 0.18301963806152344,
       "L*gamma/log(L)": 2.815800966998988
     },
     {
@@ -342,7 +342,7 @@
       "max_pq": 18,
       "max_dynkin_for_saturation": 40,
       "n_quad": 66,
-      "time_seconds": 0.3504936695098877,
+      "time_seconds": 0.3574976921081543,
       "L*gamma/log(L)": 2.715615747053629
     },
     {
@@ -353,7 +353,7 @@
       "max_pq": 22,
       "max_dynkin_for_saturation": 40,
       "n_quad": 74,
-      "time_seconds": 0.6958911418914795,
+      "time_seconds": 0.7139689922332764,
       "L*gamma/log(L)": 2.557763303134023
     },
     {
@@ -364,7 +364,7 @@
       "max_pq": 26,
       "max_dynkin_for_saturation": 40,
       "n_quad": 82,
-      "time_seconds": 1.2560851573944092,
+      "time_seconds": 1.2663533687591553,
       "L*gamma/log(L)": 2.4993645825324062
     },
     {
@@ -375,7 +375,7 @@
       "max_pq": 32,
       "max_dynkin_for_saturation": 40,
       "n_quad": 94,
-      "time_seconds": 2.7342984676361084,
+      "time_seconds": 2.859635591506958,
       "L*gamma/log(L)": 2.3940760336903333
     },
     {
@@ -386,7 +386,7 @@
       "max_pq": 38,
       "max_dynkin_for_saturation": 40,
       "n_quad": 106,
-      "time_seconds": 4.650164365768433,
+      "time_seconds": 4.890244960784912,
       "L*gamma/log(L)": 2.3642108574448226
     },
     {
@@ -397,7 +397,7 @@
       "max_pq": 42,
       "max_dynkin_for_saturation": 40,
       "n_quad": 114,
-      "time_seconds": 6.704340934753418,
+      "time_seconds": 7.152342319488525,
       "L*gamma/log(L)": 2.303249896389226
     },
     {
@@ -408,7 +408,7 @@
       "max_pq": 50,
       "max_dynkin_for_saturation": 50,
       "n_quad": 130,
-      "time_seconds": 12.544656038284302,
+      "time_seconds": 15.237482070922852,
       "L*gamma/log(L)": 2.233475199051142
     },
     {
@@ -419,7 +419,7 @@
       "max_pq": 61,
       "max_dynkin_for_saturation": 60,
       "n_quad": 152,
-      "time_seconds": 25.14998698234558,
+      "time_seconds": 28.822540760040283,
       "L*gamma/log(L)": 2.1970317511422337
     }
   ],
