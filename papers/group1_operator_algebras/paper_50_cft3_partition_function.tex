@@ -915,6 +915,92 @@ remain open. Importing AdS$_{4}$ / H$^{4}$ infrastructure is the
 named multi-month engineering commitment that would reach these.
 \end{enumerate}
 
+\subsection{Catalogue and open targets}
+\label{sec:catalogue}
+
+The bit-exact matches at $S^{3}$ and $S^{5}$ exhibit a pattern: the
+framework's discrete spectral-zeta machinery reproduces
+\emph{independently-published} continuum CFT-on-sphere free-energy
+values, and the transcendental signature decomposes via the master
+Mellin engine~\cite{paper18}. This pattern admits systematic
+extension. The following table catalogues the current status:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+System & Continuum reference & Framework status & M-engine reading \\
+\midrule
+Free scalar (conformal) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M2 + M3 \\
+Free Dirac (Weyl, CH) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M2 + M3 \\
+Free scalar (conformal) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M2 + M3 extended \\
+Free Dirac (Weyl, CH) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M2 + M3 extended \\
+Free scalar (conformal) on $S^{7}$ & --- & numerical only; PSLQ fails on simple ring & UNKNOWN (Remark~\ref{rem:general_d_conjecture}) \\
+\midrule
+Free Maxwell on $\sthree$ & 3D scalar duality~\cite{beccaria_tseytlin2017} & open: $\sthree$ Maxwell-scalar duality gives same as scalar & expected M2 + M3 \\
+Free Maxwell on $S^{5}$ & BT~\cite{beccaria_tseytlin2017} & TODO; needs transverse 1-form Hodge spectrum & open \\
+Free higher-rank tensor ($p \ge 2$) on $S^{d}$ & BT~\cite{beccaria_tseytlin2017}, Anninos & TODO; needs $\mathrm{SO}(d+1)$ rep theory & open \\
+Free (non-)minimal scalar (zero mode) on $S^{d}$ & --- & open: $m{=}2$ edge correction introduces $\log 3 + \log 5$ at $S^{5}$ & ring extension needed \\
+Squashed $\sthree$ partition function & JKPS, Hama-Hosomichi-Lee & open: deformed half-integer Hurwitz not in MR-B Jacobi-$\vartheta_{2}$ closed form & may require new structural mechanism \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Areas yet to be explored.}
+Beyond the immediate catalogue targets, several adjacent directions
+extend the framework's reach into established physics:
+
+\begin{itemize}
+\item \textbf{Holographic central charges} ($a$- and $c$-anomalies in
+even $d$). Henningson-Skenderis~\cite{henningson_skenderis1998} and
+follow-ups give closed forms for the holographic dual of free CFT
+central charges. The framework's spectral-action machinery
+(Paper~28~\cite{paper28}) potentially provides a discrete-cutoff
+reproduction; the connection to Paper~24's Bargmann-Segal $S^{5}$ is
+unexplored.
+
+\item \textbf{Entanglement-entropy universal terms.} The continuum
+Casini-Huerta-Myers~\cite{casini_huerta_myers2011} entanglement
+entropy of a ball region has a universal subleading constant equal
+to $-F$. Connecting this to the framework's wedge KMS structure
+(Sec.~\ref{sec:wedge_kms}) and to the master Mellin engine
+decomposition would strengthen the F-as-engine-signature reading.
+
+\item \textbf{Higher-rank Lie groups beyond $\mathrm{SU}(2)$.} The
+Paper~40 unified GH-convergence theorem~\cite{paper40} extends the
+propinquity machinery to all simple compact Lie groups. A natural
+catalogue extension is CFT-on-$G$ partition functions for various
+$G$ (heat-kernel zeta on $\mathrm{SU}(3)$, $\mathrm{Sp}(2)$, etc.)
+where the framework's GH-rate constant $4/\pi$ is universal but the
+specific transcendental ring may differ.
+
+\item \textbf{Spectral-action coefficients.} The
+Connes-Chamseddine~\cite{chamseddine_connes1997} spectral action
+$\mathrm{Tr}\,f(D/\Lambda)$ has heat-kernel expansion coefficients
+that classify the gravitational + matter content of an
+almost-commutative spectral triple. These coefficients are exactly
+the master Mellin engine M2 sector. The catalogue could include
+M-engine readings of standard spectral-action calculations on
+$\sthree$, $S^{5}$, and higher.
+
+\item \textbf{Lorentzian-side observables.} The catalogue here is
+boundary-side Riemannian. The Lorentzian extension (Papers~42-49)
+provides modular Hamiltonian, Pythagorean orthogonality, and
+twin-paradox-as-quantum-information structures. Cataloguing
+Lorentzian-side CFT observables (thermal partition functions on
+$\sthree \times \mathbb{R}_{t}$, Rindler-wedge entropies, etc.) is a
+parallel direction.
+\end{itemize}
+
+Each catalogue entry either (i) verifies the master Mellin engine on
+independent physics data, (ii) extends a structural cancellation
+theorem (like log~3 cancellation on $S^{5}$,
+Theorem~\ref{thm:log3_cancellation}), or (iii) identifies a wall
+where the simple ring fails (like the $S^{7}$ scalar negative,
+Remark~\ref{rem:general_d_conjecture}). Each outcome is paper-worthy
+in its own right; the cumulative catalogue would constitute a
+structural classification of free-field CFT-on-sphere partition
+functions via the GeoVac spectral triple.
+
 \subsection{Place in the GeoVac math.OA series}
 
 This paper is the twelfth math.OA standalone in the GeoVac series,
@@ -972,6 +1058,14 @@ GeoVac internal preprint, 2026.
 
 \bibitem{paper38} J.~Loutey,
 \emph{Paper~38: SU(2) Propinquity Convergence on the Camporesi--Higuchi Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper28} J.~Loutey,
+\emph{Paper~28: QED on $S^{3}$},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper40} J.~Loutey,
+\emph{Paper~40: Unified Propinquity Convergence on Compact Lie Groups},
 GeoVac internal preprint, 2026.
 
 \bibitem{paper42} J.~Loutey,
@@ -1037,6 +1131,14 @@ JHEP \textbf{04} (2017) 100, arXiv:1702.02325.
 \bibitem{lei_van_leuven2024} J.~Lei and W.~D.~van Leuven,
 \emph{Modularity in $d > 2$ free conformal field theory},
 arXiv:2406.01567, 2024.
+
+\bibitem{henningson_skenderis1998} M.~Henningson and K.~Skenderis,
+\emph{The holographic Weyl anomaly},
+JHEP \textbf{07} (1998) 023, arXiv:hep-th/9806087.
+
+\bibitem{chamseddine_connes1997} A.~H.~Chamseddine and A.~Connes,
+\emph{The spectral action principle},
+Comm.~Math.~Phys.\ \textbf{186} (1997), 731--750.
 
 \bibitem{casini_huerta_myers2011} H.~Casini, M.~Huerta, and R.~C.~Myers,
 \emph{Towards a derivation of holographic entanglement entropy},
