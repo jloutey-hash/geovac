@@ -677,6 +677,163 @@ but does not autonomously generate the bulk-dual geometry. Importing
 AdS$_{4}$ infrastructure would be a multi-month engineering
 commitment outside the present paper's scope.
 
+\section{Extension to $S^{5}$: structural refinement of the dual-basis decomposition}
+\label{sec:s5_extension}
+
+The bit-exact match of Sec.~\ref{sec:partition} extends to round $S^{5}$
+via the same Hurwitz-zeta machinery. The Camporesi--Higuchi spectra on
+$S^{5}$ are spectrally analogous to $S^{3}$: the conformally coupled
+scalar has eigenvalues $(n + 3/2)(n + 5/2)$ with multiplicity
+$(2n + 4)(n + 1)(n + 2)(n + 3)/6$ for $n = 0, 1, 2, \dots$, and the
+Weyl Camporesi--Higuchi Dirac has $|\lambda_{n}| = n + 5/2$ with
+multiplicity $(n + 1)(n + 2)(n + 3)(n + 4)/12$. The framework's
+spectral-zeta machinery on these spectra produces partition function
+values in a closed-form ring extending~\cite{klebanov_pufu_safdi2011}'s
+S$^{3}$ ring by one $\zeta(5)/\pi^{4}$ generator.
+
+\subsection{Bit-exact closed forms on $S^{5}$}
+
+\begin{theorem}[Conformally coupled scalar on $S^{5}$]
+\label{thm:scalar_S5}
+The framework's scalar zeta-derivative on round unit $S^{5}$ satisfies
+\begin{equation}
+F_{s}^{S^{5}} := -\tfrac{1}{2}\,\zeta'_{\Delta_\text{conf}}(0)^{S^{5}}
+= -\frac{\log 2}{32} - \frac{\zeta(3)}{32\pi^{2}} + \frac{15\,\zeta(5)}{64\pi^{4}}
+\approx -0.02297.
+\label{eq:Fs_S5}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The Hurwitz expansion
+\begin{equation}
+\zeta_{S^{5}}^\text{conf}(s) = \frac{1}{3}\sum_{k \ge 0} g_{k}(s) [\zeta_{R}(2s + 2k - 4) - \zeta_{R}(2s + 2k - 2)]
+\end{equation}
+with $g_{k}(s) = \binom{s + k - 1}{k}/4^{k}$ follows from the
+re-indexed multiplicity structure $v^{2}(v^{2} - 1)/3$ at $v = n + 2$.
+At $s = 0$, only $g_{0}(0) = 1$ survives, giving
+$\zeta_{S^{5}}^\text{conf}(0) = 0$; the derivative
+\begin{equation}
+\zeta'_{S^{5}}(0) = \frac{2}{3}[\zeta_{R}'(-4) - \zeta_{R}'(-2)]
++ \frac{1}{3}\sum_{k \ge 1} \frac{\zeta_{R}(2k - 4) - \zeta_{R}(2k - 2)}{k \cdot 4^{k}}
+\end{equation}
+converges geometrically in $k$. PSLQ at 200~dps and $k_{\max} = 100$
+finds the integer relation $[32, -2, -2, 15]$ bit-exactly identifying
+\begin{equation}
+\zeta'_{S^{5}}(0) = \frac{\log 2}{16} + \frac{\zeta(3)}{16\pi^{2}}
+- \frac{15\,\zeta(5)}{32\pi^{4}}.
+\end{equation}
+The standard identities $\zeta_{R}'(-2) = -\zeta(3)/(4\pi^{2})$ and
+$\zeta_{R}'(-4) = +3\zeta(5)/(4\pi^{4})$ deliver the $\zeta(5)/\pi^{4}$
+contribution; the $\log 2$ piece arises from
+$\zeta_{R}'(0) = -\tfrac{1}{2}\log(2\pi)$ via the Hurwitz
+analytic-continuation tail.
+\end{proof}
+
+\begin{theorem}[Weyl Camporesi--Higuchi Dirac on $S^{5}$]
+\label{thm:dirac_S5}
+The framework's Weyl Camporesi--Higuchi Dirac zeta-derivative on round
+unit $S^{5}$ satisfies, as an exact symbolic identity,
+\begin{equation}
+D'_\text{Dirac}(0)^{S^{5}}
+= -\frac{3\log 2}{128} - \frac{5\,\zeta(3)}{128\pi^{2}} - \frac{15\,\zeta(5)}{256\pi^{4}}
+\approx -0.02163.
+\label{eq:DD_S5}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The Dirichlet series
+\begin{equation}
+D_\text{Dirac}(s)^{S^{5}} = \frac{1}{12} \left[\zeta_{H}(s - 4, 5/2) - \tfrac{5}{2}\zeta_{H}(s - 2, 5/2) + \tfrac{9}{16}\zeta_{H}(s, 5/2)\right]
+\label{eq:DD_S5_closed}
+\end{equation}
+follows from re-indexing $u = n + 5/2$ in the multiplicity
+$(n + 1)(n + 2)(n + 3)(n + 4)/12 = (u^{2} - 9/4)(u^{2} - 1/4)/12$. The
+half-integer Hurwitz function $\zeta_{H}(s, 5/2)$ has closed form
+$(2^{s} - 1)\zeta_{R}(s) - 2^{s} - (2/3)^{s}$. Differentiating each
+shift symbolically at $s = 0$ and combining via the multiplicity
+coefficients $(1, -5/2, 9/16)$ delivers the claimed result.
+\end{proof}
+
+\subsection{Log 3 cancellation theorem}
+
+\begin{theorem}[$\log 3$ cancellation on $S^{5}$]
+\label{thm:log3_cancellation}
+The $(2/3)^{s}$ terms in $\zeta_{H}(s - a, 5/2)$ for
+$a \in \{0, 2, 4\}$ contribute, at $s = 0$, factors of
+$\log(2/3) = \log 2 - \log 3$ scaled by $(2/3)^{-a} = (3/2)^{a}$. The
+coefficient of $\log 3$ in $D'_\text{Dirac}(0)^{S^{5}}$ evaluates to
+\begin{equation}
+\frac{1}{12}\left[\frac{81}{16} - \frac{5}{2}\cdot\frac{9}{4} + \frac{9}{16}\cdot 1\right]
+= \frac{1}{12}\left[\frac{81 - 90 + 9}{16}\right] = 0
+\end{equation}
+exactly.
+\end{theorem}
+
+\begin{remark}
+The structural combination $(1, -5/2, 9/16)$ encoded in the
+multiplicity polynomial $(u^{2} - 9/4)(u^{2} - 1/4) = u^{4} - (5/2) u^{2} + 9/16$
+aligns the three shift operators $\{\zeta_{H}(s, 5/2),
+\zeta_{H}(s-2, 5/2), \zeta_{H}(s-4, 5/2)\}$ such that all $\log 3$
+contributions cancel exactly. The framework's spectral content on
+$S^{5}$ stays in the M-engine ring $\{\log 2, \zeta(3)/\pi^{2},
+\zeta(5)/\pi^{4}\}$, even though the naive Hurwitz expansion suggests
+a contribution from $\log 3$. The same mechanism extends the M2/M3
+ring statement from $S^{3}$ to $S^{5}$.
+\end{remark}
+
+\subsection{Dual-basis projection: structural-specificity to $S^{3}$}
+
+Theorem~\ref{thm:mellin_decomp} of Sec.~\ref{sec:partition} establishes
+that on $S^{3}$, the (scalar, Dirac) pair admits a dual-basis
+projection onto the M2/M3 axes: $F_{D} + 2 F_{s} = \log(2)/2$ (M2
+only), $F_{D} - 2 F_{s} = 3\zeta(3)/(4\pi^{2})$ (M3 only). On $S^{5}$,
+the analogous statement \emph{fails}.
+
+\begin{proposition}[Dual-basis non-extension to $S^{5}$]
+\label{prop:dual_basis_S5}
+The Paper~50 Theorem~\ref{thm:mellin_decomp} dual-basis projection
+does not extend to $S^{5}$. The M-engine ring on $S^{5}$ is
+three-dimensional ($\log 2$, $\zeta(3)/\pi^{2}$, $\zeta(5)/\pi^{4}$),
+but the (scalar, Dirac) plane is two-dimensional. The system
+$a F_{s}^{S^{5}} + b F_{D}^{S^{5}} = c \cdot (\text{single M-axis})$
+is over-determined: imposing isolation of one M-axis requires three
+linear conditions on two parameters $(a, b)$, which has no nontrivial
+solution.
+
+Explicitly, attempting to isolate $\log 2$:
+\begin{align}
+\zeta(3)/\pi^{2}\text{ coefficient} = 0 \;&\Longrightarrow\; -4a - 5b = 0 \;\Longrightarrow\; a = -5b/4,\\
+\zeta(5)/\pi^{4}\text{ coefficient} = 0 \;&\Longrightarrow\; 60a - 15b = 0 \;\Longrightarrow\; a = b/4,
+\end{align}
+which are inconsistent unless $b = 0$.
+\end{proposition}
+
+\begin{remark}[Conjecture for general odd $d$]
+\label{rem:general_d_conjecture}
+The structural-specificity of Theorem~\ref{thm:mellin_decomp} to
+$S^{3}$ has a natural generalization. Round $S^{d}$ for odd $d \ge 3$
+is conjectured to have $F$ in a ring of dimension $(d - 1)/2 + 1$
+generated by $\{\log 2, \zeta(3)/\pi^{2}, \zeta(5)/\pi^{4}, \dots,
+\zeta(d - 2)/\pi^{d - 3}\}$, and the dual-basis projection on free
+CFT species requires $(d - 1)/2 + 1$ independent species: scalar
+plus $(d - 1)/2 - 1$ higher-spin CFTs. Completing the dual basis on
+$S^{5}$ requires computing $F$ for a third free CFT species --- a
+natural candidate is the Maxwell ($p = 1$ form) gauge field with
+proper ghost subtraction, or a higher-rank antisymmetric tensor.
+\end{remark}
+
+\subsection{Implementation effort and continuation pattern}
+
+The S$^{5}$ extension was computed in ~35 minutes of focused
+main-session work, continuing the discrete-tractability advantage
+documented across the math.OA arc. The
+\texttt{debug/ads\_track\_a\_s5\_\{scalar, dirac\}\_partition\_function.py}
+scripts implement the Hurwitz expansions and PSLQ verifications;
+\texttt{debug/ads\_track\_a\_s5\_extension\_memo.md} documents the
+findings in full.
+
 \section{Synthesis and open questions}
 \label{sec:synthesis}
 

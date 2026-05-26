@@ -1,0 +1,19 @@
+{
+  "track": "AdS-A S^5 extension",
+  "system": "free massless Weyl Camporesi-Higuchi Dirac on round S^5",
+  "spectrum": "|lambda_n| = n + 5/2, multiplicity (n+1)(n+2)(n+3)(n+4)/12",
+  "D_prime_at_0_analytical_closed_form": "-(3/128) log(2) - (5/128) zeta(3)/pi^2 - (15/256) zeta(5)/pi^4",
+  "D_prime_at_0_numerical": "-0.0216269437292999030208101068889493615329600547469",
+  "M_engine_ring_membership": "{log(2), zeta(3)/pi^2, zeta(5)/pi^4}",
+  "log_3_cancellation": "Yes, log(3) coefficient = 0 exactly via the (1, -5/2, 9/16) algebraic combination across (s-4, s-2, s) shift",
+  "scalar_dirac_orthogonal_decomp_attempt": {
+    "verdict": "Paper 50 Theorem 3.4 does NOT extend to S^5",
+    "reason": "M-engine ring is 3-dim on S^5 but only 2 free CFTs (scalar, Dirac); over-determined projection",
+    "needs": "Third free CFT (e.g., higher-rank tensor or Maxwell-style) to complete dual basis on S^5"
+  },
+  "coefficients": {
+    "log2": "-3/128",
+    "zeta3_over_pi2": "-5/128",
+    "zeta5_over_pi4": "-15/256"
+  }
+}
