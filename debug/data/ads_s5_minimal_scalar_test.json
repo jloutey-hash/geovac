@@ -1,0 +1,5 @@
+{
+  "edge_correction_value": "5.2870233599292777886461613089294408320883665734830266616239288244995441479475092",
+  "structural_observation": "Minimal (non-conformal) scalar on S^5 introduces log 3 and log 5 from m=2 zero-mode handling, polluting the simple M3 ring",
+  "conclusion": "Dual basis completion on S^5 requires non-trivial free CFT species selection; simple route via minimal scalar doesn't stay in M3 ring"
+}
