@@ -971,6 +971,43 @@ Squashed $\sthree$ partition function & JKPS, Hama-Hosomichi-Lee & open: deforme
 \end{tabular}
 \end{center}
 
+\paragraph{Relation to the TT-bar cut-off AdS picture.}
+Hartman, Kruthoff, Shaghoulian, and Tajdini~\cite{hartman_kruthoff_shaghoulian_tajdini2019}
+showed that sphere partition functions of TT-bar-deformed large-$N$
+holographic CFT$_d$ in $d \in \{2, 3, 4, 5, 6\}$ non-perturbatively
+match bulk computations of AdS$_{d+1}$ at finite radial cut-off. The
+parallel to the present paper's discrete-cutoff framework
+($\Tcal_{\nmax}$ at finite $\nmax$ matching continuum CFT) is suggestive,
+but the two cut-off structures are \emph{categorically distinct}:
+
+\begin{itemize}
+\item \textbf{TT-bar (Hartman et al.~2019):} a \emph{deformation of the
+action}. The TT-bar operator $\mathcal{O}_{T\bar T}(\mu)$ modifies the
+field theory's UV at finite $\mu$; the deformed CFT has a different
+energy spectrum and a different action. The bulk dual is AdS at finite
+radial cutoff $r_c$ related to $\mu$ via a (dimension-dependent)
+explicit formula.
+
+\item \textbf{GeoVac $\nmax$ (this paper):} a \emph{truncation of the
+spectrum}, not the action. The framework's discrete spectral triple at
+$\nmax$ keeps the underlying free CFT and its action intact, but
+restricts the mode sum to $n \le \nmax$. As $\nmax \to \infty$, the
+spectral data converges to the round-sphere CFT bit-exactly
+(Theorems~\ref{thm:scalar_bitexact},~\ref{thm:dirac_bitexact}); the
+intermediate $\nmax$ values are not a TT-bar-deformed CFT but
+genuine spectral truncations of the original CFT.
+\end{itemize}
+
+\textbf{At the partition-function-value level,} the two regularizations
+might still be related: each produces a finite number $Z_{\text{cutoff}}$
+that converges to the continuum CFT partition function as the cutoff is
+removed. Whether there exists a $\mu(\nmax, R)$ such that
+$Z_{\nmax}^{\text{GeoVac}}(R) = Z_{\text{TT-bar}}(\mu(\nmax, R), R)$ is
+an open question. A positive answer would identify the framework's
+spectral cutoff with a specific TT-bar-deformation strength; a negative
+answer would crystallize that the two cutoffs are structurally
+incompatible at the partition-function level.
+
 \paragraph{Areas yet to be explored.}
 Beyond the immediate catalogue targets, several adjacent directions
 extend the framework's reach into established physics:
@@ -1161,6 +1198,10 @@ arXiv:2406.01567, 2024.
 \bibitem{henningson_skenderis1998} M.~Henningson and K.~Skenderis,
 \emph{The holographic Weyl anomaly},
 JHEP \textbf{07} (1998) 023, arXiv:hep-th/9806087.
+
+\bibitem{hartman_kruthoff_shaghoulian_tajdini2019} T.~Hartman, J.~Kruthoff,
+E.~Shaghoulian, and A.~Tajdini, \emph{Holography at finite cutoff with a
+$T^{2}$ deformation}, JHEP \textbf{03} (2019) 004, arXiv:1902.10893.
 
 \bibitem{chamseddine_connes1997} A.~H.~Chamseddine and A.~Connes,
 \emph{The spectral action principle},
