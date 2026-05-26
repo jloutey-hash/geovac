@@ -52,7 +52,19 @@ arithmetic at every finite cutoff; (d) the framework's results split
 cleanly along an A/D partition---an algebra-only universal sector that
 transfers free across central potentials, and a Dirac-operator-specific
 sector containing the spectrum, the calibration $\pi$, and the
-candidate fine-structure-constant combination of Paper~2.  We present
+candidate fine-structure-constant combination of Paper~2.  A structural reading we make explicit in this synthesis is that
+the framework's substrate-level scale-freedom---the packing diameter
+$d_{0}$ cancelling out of every spectral quantity, and physical
+scales entering only through the Fock-projection focal length
+$p_{0}$---is the geometric expression of the same principle that
+conformal field theory~\cite{klebanov_pufu_safdi2011} embodies at
+the physics level.  GeoVac provides a scale-free mathematical
+substrate; CFT is a scale-free physics theory living on such a
+substrate.  This is not a claim that GeoVac is a CFT; it is a
+structural reflection that explains why the framework reproduces
+continuum CFT-on-sphere observables bit-exactly (documented in the
+operator-algebra arc, outside the foundations scope of this
+synthesis).  We present
 GeoVac as a discretization framework that exploits natural geometry,
 not as a new foundation for quantum mechanics: the discrete graph and
 the continuous Laplace--Beltrami operator are dual descriptions
@@ -314,6 +326,75 @@ separation between dimensionless topology and dimensional projection
 is the \emph{dimensionless vacuum} viewpoint of Paper~7: the
 calibration content of physical observables is concentrated entirely in
 the focal-length parameter $p_0$.
+
+\subsection*{Scale-freedom of the substrate and its reflection in conformal field theory}
+\label{sec:cft_reflection}
+
+The separation between dimensionless topology and dimensional projection
+described above is more than a computational convenience.  It is the
+geometric expression of a principle that physics encounters in another
+guise:\ conformal field theory.
+
+A conformal field theory is a quantum field theory whose action and
+correlators are invariant under rescaling of the underlying coordinates,
+together with the larger conformal group $SO(d, 2)$ in $d$ spacetime
+dimensions.  Operationally:\ a CFT has no preferred length scale, and
+its observables transform predictably under conformal
+transformations.  The standard examples include free massless scalars
+and fermions on round $S^d$, where the partition functions
+$Z_{S^d}^{\text{CFT}}$ are computable in closed form and reproduce
+universal coefficients (e.g.\ the F-theorem constant
+$F_{S^d}$~\cite{klebanov_pufu_safdi2011}).
+
+GeoVac's substrate exhibits an analogous property at the
+\emph{geometric / mathematical} layer, prior to physics.  The packing
+construction (Paper~0~\cite{loutey_paper0}) takes a circle of diameter
+$d_0$---intended as ``the Planck length'' in spirit, but without
+committing to a specific physical value---and outputs a graph whose
+Laplacian eigenvalues are the pure rational numbers $n^2 - 1$, the
+multiplicities are integers, the Wigner-symbol couplings are exact
+rationals, and the packing diameter $d_0$ \emph{cancels out} of every
+spectral quantity.  Shrink $d_0$ to the Planck length, grow it to a
+galactic radius, set it to anything in between:\ the substrate is the
+same.  The eigenvalues that come out of the packing are atomic quantum
+numbers in interpretation, but they are not atomic-scale in
+construction.  The packing produces a scale-free structural skeleton.
+
+The Fock projection of Paper~7~\cite{loutey_paper7} is a
+\emph{conformal map}:\ stereographic projection from $S^3$ to
+$\mathbb{R}^3$ preserves angles but rescales lengths by a
+position-dependent conformal factor $\Omega(\mathbf{p}) = 2 p_0 /
+(p^2 + p_0^2)$.  Physical scales enter the framework through exactly
+this factor, in the form of the focal-length parameter $p_0$.  The
+scale-free substrate becomes scale-bearing physics only when a specific
+$p_0$ is supplied (e.g.\ $p_0 = Z/n$ for hydrogenic atomic levels).
+Different choices of $p_0$ correspond to different physical
+interpretations of the same combinatorial skeleton; the substrate is
+agnostic to the choice.
+
+This is structurally the same principle that CFT scale-invariance
+embodies.  A CFT is a physics theory with no preferred length scale at
+the level of its action and observables; GeoVac's graph is a
+mathematical object with no preferred length scale at the level of its
+eigenvalues and matrix elements.  CFT scale-invariance is the physics
+side of the principle; the dimensionless graph is the substrate side.
+The two converge structurally because they realise the same
+property---scale-freedom---at different layers of description, and the
+Fock projection that connects them is the conformal map that
+implements the scale-free-to-scale-bearing transition.
+
+This reading is not a claim that GeoVac \emph{is} a CFT, nor that the
+discrete graph derives CFT scale-invariance.  Those would overshoot:\
+GeoVac provides a geometric / spectral substrate, and a CFT is a
+quantum field theory living on a substrate.  But the framework's
+ability to reproduce continuum CFT-on-sphere partition functions
+bit-exactly (recently demonstrated for the conformally coupled scalar
+and Camporesi--Higuchi Dirac on $S^3$ and $S^5$ in the operator-algebra
+arc, outside the foundations scope of this synthesis but cross-referenced
+in the open-questions section below) is structurally explained by the
+substrate-side scale-freedom established here.  The framework reproduces
+what it does because the substrate is the right kind of mathematical
+object to host scale-free physics.
 
 \subsection*{Multi-electron extension to $S^{3N-1}$}
 
@@ -1124,6 +1205,12 @@ GeoVac Paper~31 (2026).
 J.~Loutey,
 ``Projection Taxonomy and Empirical Matches Catalogue,''
 GeoVac Paper~34 (Observations, 2026).
+
+\bibitem{klebanov_pufu_safdi2011}
+I.~R.~Klebanov, S.~S.~Pufu, B.~R.~Safdi,
+``F-Theorem without Supersymmetry,''
+\textit{Journal of High Energy Physics} \textbf{10} (2011) 038,
+arXiv:1105.4598.
 
 \end{thebibliography}
 

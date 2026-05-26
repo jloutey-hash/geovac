@@ -91,9 +91,9 @@ the author's responsibility.}}
 \maketitle
 
 \begin{abstract}
-We provide a unified reading of the eleven papers that make up the
+We provide a unified reading of the fourteen papers that make up the
 operator-algebra arc of the GeoVac framework
-(Papers~29,~32,~38,~39,~40,~42,~43,~44,~45,~46,~47).  The arc constructs an
+(Papers~29,~32,~38,~39,~40,~42,~43,~44,~45,~46,~47,~48,~49,~50).  The arc constructs an
 explicit almost-commutative spectral triple
 $(\AGV, \HGV, \DGV)$ on the Fock-projected unit three-sphere with a
 Camporesi--Higuchi spinor Dirac operator, places it in the
@@ -127,10 +127,32 @@ with $k$-INDEPENDENT Lipschitz comparison constant.  The constant
 $4/\pi$ identifies, in both Riemannian (Paper~38) and Lorentzian
 (Paper~43~\S 10.2 / Paper~46) settings, as the $M_{1}$ Hopf-base
 measure signature of the master Mellin engine catalogued by the
-case-exhaustion theorem of Paper~32~\S\,VIII.  This synthesis gathers
-the statements, sketches the load-bearing proofs, and exhibits the
-structural relationships between the papers; no new theorems are
-introduced.
+case-exhaustion theorem of Paper~32~\S\,VIII.  Three further closures land subsequent to the May~22, 2026 drafting
+of this synthesis and are recorded in
+\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}:\
+Paper~48 constructs the Krein-pointed proper quantum metric spaces
+and the bridge to Mondino--S\"amann Lorentzian pre-length spaces,
+giving the first quantitative pLGH-convergence panel in the
+synthetic-Lorentzian literature from operator-algebraic input;
+Paper~49 closes the strong-form bridge on the enlarged operator
+system via the Connes--Rovelli thermal-time stack across distinct
+KMS states, identifying off-orbit super-additivity as the
+operator-algebraic dual of the twin paradox quantified by
+Uhlmann's relative-entropy monotonicity; and Paper~50 demonstrates
+bit-exact reproduction of CFT-on-sphere partition functions on
+$\sthree$ and $\sfive$ via the framework's existing Hurwitz machinery,
+revealing a master Mellin engine $M_{2}$/$M_{3}$ orthogonal
+decomposition of the (scalar, Dirac) sector and a log~3 cancellation
+theorem on $\sfive$.  These closures position the arc against the
+larger CFT/AdS lineage:\ the framework's substrate-level
+scale-freedom---packing diameter $d_{0}$ cancels out, scales enter
+only through the Fock focal length $p_{0}$---is the structural
+reflection of the scale-invariance that conformal field theory
+embodies at the physics level, and explains why the framework
+naturally hosts CFT-on-sphere observables bit-exactly.  This
+synthesis gathers the statements, sketches the load-bearing proofs,
+and exhibits the structural relationships between the papers; no
+new theorems are introduced.
 \end{abstract}
 
 % =====================================================================
@@ -1408,6 +1430,198 @@ independent justification of Paper~45's main theorem from the master
 construction.
 
 % =====================================================================
+\section{Further closures: Krein--Mondino--S\"amann bridge, OSLPLS,
+and bit-exact CFT-on-sphere}
+\label{sec:closures_post_47}
+% =====================================================================
+
+The arc admits three further closures landed subsequent to the
+May~22, 2026 drafting of this synthesis.  These add three further
+papers (48, 49, 50) and extend the math.OA standalone count from eleven
+to fourteen.
+
+\subsection{Krein-pointed proper QMS and the Mondino--S\"amann bridge
+(Paper 48)}
+\label{sec:closures_paper48}
+
+Paper~48~\cite{paper48} constructs Krein-pointed proper quantum metric
+spaces $\mathbf{KreinMetaMet}_{\mathrm{pp}}$ as the natural Krein-lift
+of Latr\'emoli\`ere's recent pointed proper quantum metric space
+framework~\cite{latremoliere2025_hypertopology}, and builds a
+\emph{bridge functor} $W: \mathbf{KreinMetaMet}_{\mathrm{pp}} \to
+\mathbf{LorPLG}_{\mathrm{cov}}$ to the Mondino--S\"amann synthetic
+Lorentzian pre-length space category~\cite{mondino_samann2024,
+mondino_samann2025}.  The bridge is identified via the
+Connes--Rovelli thermal-time hypothesis~\cite{connes_rovelli1994}:\
+the modular distance $\mathrm{\DJ}^{K}$ on the Krein side measures
+thermal time (additive, forward triangle), while the proper-time
+distance $\ell^{L}$ on the Mondino--S\"amann side measures geometric
+proper time (super-additive, reverse triangle); Connes--Rovelli
+identifies these as two readings of the same wedge KMS state, related
+by Wick rotation.  The bridge is functorial, not isometric.
+
+Bridge Theorem~6.4 with all four properties (B1)+(B2)+(B3)+(B4)
+theorem-grade at the K$^{+}$-weak-form level yields seven newly
+accessible theorems on the GeoVac hemispheric wedge, including:
+(T3) bit-exact panel inheritance --- the
+$\Lambda(2,3) = 2.0746$, $\Lambda(3,5) = 1.6101$, $\Lambda(4,7) = 1.3223$
+panel of Paper~45 transports verbatim, giving \emph{the first
+quantitative pLGH-convergence panel in the synthetic Lorentzian
+literature from operator-algebraic input}; (T5) synthetic Pythagorean
+orthogonality with the $1/\pi^{2}$ master Mellin engine $M_{1}$
+signature as the inverse-squared bridge cover slab-period; and
+(T6) G2 metric-level closure for the GeoVac wedge specifically, via
+the bridge $\to$ MS pLGH workaround.  This last item is the deepest
+substantive new content of Paper~48:\ it closes the
+Paper~45~\S 1.4 G2 metric-level problem on the synthetic side for the
+GeoVac wedge specifically, sidestepping the absence of a published
+non-compact Latr\'emoli\`ere propinquity by working through the
+Mondino--S\"amann category instead.
+
+Paper~48 is the tenth math.OA standalone in the arc, sibling to
+Papers~38, 42, 43, 44, 45, 46, 47, 29, 32, 40.
+
+\subsection{OSLPLS and the strong-form bridge:\ twin paradox as
+quantum information (Paper 49)}
+\label{sec:closures_paper49}
+
+Paper~49~\cite{paper49} closes Paper~48~\S 8.1's open question Q1$'$
+by constructing an \emph{OSLPLS} (Operator-System Lorentzian
+Pre-Length Space) category and a strong-form bridge functor
+$W^{\mathrm{flip}}: \mathbf{KreinMetaMet}_{\mathrm{pp}}^{\mathrm{flip}}
+\to \mathbf{OSLPLS}_{\mathrm{cov}}$ on the Paper~46 Appendix~B enlarged
+substrate (chirality-flipping generators
+$M^{\mathrm{flip}} = \mathrm{diag}(W, -W)$ where $\{J, M\} = 0$).
+The closure rests on a genuinely new operator-algebraic construction:\
+the Connes--Rovelli thermal-time stack across \emph{distinct} KMS
+states, extending Connes--Rovelli~\cite{connes_rovelli1994} from the
+single-KMS-state setting to multi-state stack consistency.  All four
+properties (B1$'$)+(B2$'$)+(B3$'$)+(B4$'$) hold theorem-grade.
+
+The headline structural finding is the
+\emph{twin-paradox-as-quantum-information} reading:\ strict
+super-additivity of the OSLPLS reverse triangle on off-orbit triples
+is the operator-algebraic dual of the special-relativistic twin
+paradox, with the deficit quantified by Uhlmann's relative-entropy
+monotonicity inequality.  The detoured worldline pays \emph{two}
+entropy-production costs $\Delta S^{\sigma_{1} \to \sigma_{2}} +
+\Delta S^{\sigma_{2} \to \sigma_{3}}$; the direct worldline pays
+\emph{one} cost $\Delta S^{\sigma_{1} \to \sigma_{3}}$; the strict
+inequality follows from relative-entropy monotonicity.  Numerical
+verification at $(\nmax, \Nt) \in \{(2,3), (3,5), (4,7)\}$ confirms:\
+$\Lambda$ bit-exact at all three panel cells (free-upgrade reading
+extends to the OSLPLS bridge functor), Uhlmann relative-entropy
+deficits 66.998 / 68.720 / 81.256 nats positive and monotone-increasing
+in $\nmax$, Riemannian-limit recovery at $\Nt = 1$ bit-exact.
+
+The Bousso--Casini--Fisher--Maldacena 2020 ``kink transform'' / Connes
+cocycle flow gravity dual~\cite{bousso_etal2020} appears here as a
+natural bulk reading of the OSLPLS construction (Paper~49~\S 11):\ the
+strict super-additivity of the OSLPLS reverse triangle on off-orbit
+triples translates, under the kink-transform dictionary, to a positive
+relative entropy on the gravitational dual --- recovering the BCFM
+positivity statement from the operator-algebraic side.
+
+Paper~49 is the eleventh math.OA standalone in the arc.  Closed-form
+expression for the cocycle entropy production deficit as a function of
+OSLPLS state-space coordinates remains the named open question
+(Paper~49~\S 10, Q2$'$).
+
+\subsection{Bit-exact CFT-on-sphere partition functions and the
+master Mellin engine $M_{2}$/$M_{3}$ orthogonal decomposition
+(Paper 50)}
+\label{sec:closures_post_49}
+
+Paper~50~\cite{paper50} demonstrates that the framework's existing
+Hurwitz-zeta machinery (used throughout Papers~38--47 for spectral
+sums on the Camporesi--Higuchi tower) reproduces continuum
+CFT-on-sphere partition functions \emph{bit-exactly}, via a closed-form
+combination of $\zeta'(-2)$, $\zeta'(-4)$, $\zeta(3)$, $\zeta(5)$,
+$\log 2$, and $\pi$ identified by PSLQ at 80--100 digit precision.
+
+\paragraph{Bit-exact match on $\sthree$.}
+For the conformally coupled scalar and Camporesi--Higuchi Dirac on
+round $\sthree$,
+\begin{align*}
+F_{\mathrm{scalar}}^{\sthree}
+&= \frac{\log 2}{8} - \frac{3\zeta(3)}{16\pi^{2}}
+\approx 0.0638
+\qquad\text{(PSLQ integer relation $[8, 2, -3]$)},\\
+F_{\mathrm{Dirac}}^{\sthree}
+&= \frac{\log 2}{4} + \frac{3\zeta(3)}{8\pi^{2}}
+\approx 0.21896
+\qquad\text{(symbolic Hurwitz expansion)}.
+\end{align*}
+These reproduce the Klebanov--Pufu--Safdi values
+\cite{klebanov_pufu_safdi2011} bit-exactly.
+
+\paragraph{Orthogonal decomposition and log~3 cancellation theorem
+on $\sfive$.}
+On the $(\text{scalar}, \text{Dirac})$ sector, the framework reveals
+an orthogonal decomposition:
+\begin{equation*}
+F_{D} + 2 F_{s} = \frac{\log 2}{2} \quad (M_{2}\text{ sector}),
+\qquad
+F_{D} - 2 F_{s} = \frac{3 \zeta(3)}{4 \pi^{2}} \quad (M_{3}\text{ sector}).
+\end{equation*}
+On $\sfive$, the pattern extends:
+$F_{\mathrm{scalar}}^{\sfive} = -\log(2)/32 - \zeta(3)/(32\pi^{2})
++ 15\zeta(5)/(64\pi^{4})$ (PSLQ relation $[32, -2, -2, 15]$),
+$F_{\mathrm{Dirac}}^{\sfive} = -(3\log 2)/128 - 5\zeta(3)/(128\pi^{2})
+- 15\zeta(5)/(256\pi^{4})$.  The log~3 contributions that arise from
+zero-mode boundary structure in the minimal-scalar variant cancel
+algebraically against M$_{2}$-sector identities (Paper~50~Theorem~7.2),
+restricting the substrate-natural ring to $\log 2 \cdot \Q + \zeta(3)/
+\pi^{2} \cdot \Q + \zeta(5)/\pi^{4} \cdot \Q$ on $\sfive$.
+
+\paragraph{$S^{7}$ negative.}
+On $S^{7}$, no PSLQ relation in any tested natural ring closes the
+scalar value $\approx -0.001594\ldots$, including bases extended with
+$\log 3$, $\log 5$, $\log 7$, Catalan~$G$, polygamma at $1/2$, and
+zeta-zeta products of total weight up to 7 (Paper~50~\S 8).  Cross-check
+against direct numerical computation of the Hurwitz expansion verifies
+that the framework machinery is faithful and the negative is
+structural, not a computational artifact.  This identifies an open
+target:\ which spectral object on $S^{7}$ would close the
+substrate-natural ring at this multiplicity?
+
+\paragraph{Cataloguing the master Mellin engine in physics.}
+The S$^{3}$ and S$^{5}$ closures are recorded in Paper~50~\S 9 as the
+first two entries of a running catalogue of master-Mellin-engine
+appearances on the physics side.  Paper~50 also flags structural
+correspondences to other M$_{2}$-sector results in the QFT literature,
+including Henningson--Skenderis holographic Weyl
+anomaly~\cite{henningson_skenderis1998} (M$_{2}$ Seeley--DeWitt
+content), TT-bar / cutoff AdS \cite{hartman_etal2019}, and the
+Chamseddine--Connes spectral action~\cite{chamseddine_connes2010}
+(also M$_{2}$).  These correspondences are flagged as structural, not
+as new derivations.
+
+\paragraph{Structural reading: scale-freedom on substrate
+$\leftrightarrow$ scale-invariance in physics.}
+The bit-exact CFT closures on $\sthree$ and $\sfive$ are structurally
+explained by the framework's substrate-level scale-freedom:\ the
+GeoVac packing axiom outputs a graph whose Laplacian eigenvalues are
+pure rationals $n^{2} - 1$, the multiplicities are integers, the
+Wigner-symbol couplings are exact rationals, and the packing diameter
+$d_{0}$ \emph{cancels out} of every spectral quantity.  Physical scales
+enter only through the Fock projection focal length $p_{0}$, which is
+a stereographic conformal map.  This scale-freedom on the substrate is
+the geometric reflection of the same principle that conformal field
+theory~\cite{klebanov_pufu_safdi2011} embodies on the physics side:\
+a CFT has no preferred length scale at the level of its action and
+observables; the GeoVac graph has no preferred length scale at the
+level of its eigenvalues and matrix elements.  The framework's
+ability to host continuum CFT-on-sphere observables bit-exactly
+reflects this structural alignment.  This is \emph{not} a claim that
+GeoVac \emph{is} a CFT; it is a structural reflection that explains
+\emph{why} the framework reproduces what it does.  (The substrate-side
+account of this principle is developed in the Group~3 foundations
+synthesis~\cite{geovac_g3_synthesis}.)
+
+Paper~50 is the twelfth math.OA standalone in the arc.
+
+% =====================================================================
 \section{Open questions and outlook}
 \label{sec:open}
 % =====================================================================
@@ -1787,6 +2001,71 @@ M.~Reed and B.~Simon,
 \newblock \emph{Methods of Modern Mathematical Physics, Vol.~IV:\
 Analysis of Operators},
 \newblock Academic Press, 1978.
+
+\bibitem[Loutey, internal Paper~48]{paper48}
+J.~Loutey,
+\newblock \emph{Krein-pointed proper quantum metric spaces and the
+bridge to Mondino--S\"amann Lorentzian pre-length spaces, with
+application to the GeoVac hemispheric wedge},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~49]{paper49}
+J.~Loutey,
+\newblock \emph{OSLPLS and the strong-form Krein--Mondino--S\"amann
+bridge:\ twin-paradox-as-quantum-information via the Connes--Rovelli
+thermal-time stack across distinct KMS states},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, internal Paper~50]{paper50}
+J.~Loutey,
+\newblock \emph{Bit-exact CFT-on-sphere partition functions on
+$\sthree$ and $\sfive$ from the master Mellin engine
+$M_{2}$/$M_{3}$ orthogonal decomposition},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
+\bibitem[Loutey, Group 3 synthesis(2026)]{geovac_g3_synthesis}
+J.~Loutey,
+\newblock \emph{The foundations arc of the GeoVac framework:\ a
+reading guide for spectral graph theory, the dimensionless vacuum,
+and the natural geometry hierarchy},
+\newblock GeoVac internal synthesis (2026).
+
+\bibitem[Klebanov, Pufu \& Safdi(2011)]{klebanov_pufu_safdi2011}
+I.~R.~Klebanov, S.~S.~Pufu, and B.~R.~Safdi,
+\newblock \emph{F-theorem without supersymmetry},
+\newblock J.~High~Energy~Phys. \textbf{10} (2011), 038;
+\newblock arXiv:1105.4598.
+
+\bibitem[Henningson \& Skenderis(1998)]{henningson_skenderis1998}
+M.~Henningson and K.~Skenderis,
+\newblock \emph{The holographic Weyl anomaly},
+\newblock J.~High~Energy~Phys. \textbf{07} (1998), 023;
+\newblock arXiv:hep-th/9806087.
+
+\bibitem[Hartman, Kruthoff, Shaghoulian \& Tajdini(2019)]{hartman_etal2019}
+T.~Hartman, J.~Kruthoff, E.~Shaghoulian, and A.~Tajdini,
+\newblock \emph{Holography at finite cutoff with a $T^{2}$
+deformation},
+\newblock J.~High~Energy~Phys. \textbf{03} (2019), 004;
+\newblock arXiv:1807.11401.
+
+\bibitem[Bousso, Casini, Fisher \& Maldacena(2020)]{bousso_etal2020}
+R.~Bousso, H.~Casini, Z.~Fisher, and J.~Maldacena,
+\newblock \emph{Modular Hamiltonians on the null plane and the
+Markov property of the vacuum state},
+\newblock arXiv:2008.03319, 2020.
+
+\bibitem[Connes \& Rovelli(1994)]{connes_rovelli1994}
+A.~Connes and C.~Rovelli,
+\newblock \emph{Von~Neumann algebra automorphisms and time-
+thermodynamics relation in generally covariant quantum theories},
+\newblock Class.~Quantum~Grav. \textbf{11} (1994), 2899--2917.
+
+\bibitem[Latr\'emoli\`ere(2025)]{latremoliere2025_hypertopology}
+F.~Latr\'emoli\`ere,
+\newblock \emph{The hypertopology of the Gromov--Hausdorff propinquity
+for pointed proper quantum metric spaces},
+\newblock arXiv:2512.03573, December 2025.
 
 \end{thebibliography}
 
