@@ -1,0 +1,25 @@
+{
+  "track": "AdS-A",
+  "system": "free massless Dirac on unit S^3 (Camporesi-Higuchi, Weyl chirality)",
+  "spectrum": "|lambda_n| = n + 3/2 for n = 0, 1, 2, ...",
+  "multiplicity": "2(n+1)(n+2)  [Weyl, one chirality]",
+  "Dirichlet_series_closed_form": "-(2**s/2 - 1/2)*zeta(s) + (2*2**(s - 2) - 2)*zeta(s - 2)",
+  "F_Dirac_framework_analytical": "3*zeta(3)/(8*pi**2) + log(2)/4",
+  "F_Dirac_framework_numerical_value": "0.2189594807275762335246853260712763069893757589075247179096278371619051324098290269181577090704164158",
+  "F_KPS_reference": "~~ 0.21896 (KPS 2011 arXiv:1105.4598)",
+  "symbolic_identity_check": {
+    "diff_from_expected": "0",
+    "bit_exact_match": true
+  },
+  "master_mellin_engine_decomposition": {
+    "log(2)/4_M2_contribution": "0.1732867951399863273543080303645441420188750335900638135301700023733484054924236789014658317491046719",
+    "3*zeta(3)/(8*pi^2)_M3_contribution": "0.04567268558758990617037729570673216497050072531746090437945783478855672691740534801669187732131174396",
+    "M2_ring": "log(2) in sqrt(pi)*Q + pi^2*Q (Seeley-DeWitt / heat kernel)",
+    "M3_ring": "zeta(3) in half-integer Hurwitz / odd-zeta (vertex parity)"
+  },
+  "scalar_dirac_cross_check": {
+    "F_Dirac_plus_2_F_scalar": "log(2)/2",
+    "F_Dirac_minus_2_F_scalar": "3*zeta(3)/(4*pi**2)",
+    "ratio_F_Dirac_over_F_scalar_numerical": "(3*zeta(3)/(8*pi**2) + log(2)/4)/(-3*zeta(3)/(16*pi**2) + log(2)/8)"
+  }
+}

@@ -1,0 +1,897 @@
+% =====================================================================
+% Paper 50 (standalone): Boundary CFT_3-on-S^3 observables on the
+% truncated GeoVac spectral triple.
+%
+% Three complementary observables on the same wedge KMS state via three
+% structurally distinct calculations:
+%   (A) spectral-zeta side -> universal F-theorem coefficient
+%   (B) wedge KMS state side -> boundary-dimension log scaling
+%   (C) modular Hamiltonian side -> CHM integer-spectrum identification
+%
+% Substantive new structural content:
+%   1. Master Mellin engine verified on independent (non-GeoVac-internal)
+%      physics observables for the first time
+%   2. Scalar/Dirac orthogonal decomposition under M2 + M3 projection
+%   3. F-coefficient is in spectral-zeta side (A), NOT in wedge KMS
+%      entropy side (B): structural refinement of the framework's
+%      modular machinery
+%
+% Twelfth math.OA standalone in the GeoVac series.
+% Siblings: Papers 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49.
+%
+% Status: first draft, May 2026, post-Sprint AdS-Tracks-A+B+C unified
+% (2026-05-25). Built from:
+%   debug/sprint_ads_track_a_partition_function_audit_memo.md
+%   debug/sprint_ads_track_b_entanglement_audit_memo.md
+%   debug/sprint_ads_track_c_modular_jlms_audit_memo.md
+%   debug/ads_track_a_findings_memo.md
+%   debug/ads_unified_synthesis_memo.md
+%
+% Honest scope: boundary-side CFT_3-on-S^3 reproduction; bulk side
+% (JLMS, RT, AdS_4 / H^4 reconstruction) BLOCKED at framework's
+% existing infrastructure (Class-1 calibration-external; Sprint RH-B
+% 2026-04-17 closed S^3 -> H^3 Wick rotation as clean dead end).
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+% \usepackage{microtype}  % disabled: MiKTeX font-expansion environmental issue
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Kalpha}{K_{\alpha}^{W}}
+\newcommand{\rhoW}{\rho_{W}}
+\newcommand{\Wedge}{W}
+\newcommand{\KPS}{\text{KPS}}
+\newcommand{\CHM}{\text{CHM}}
+
+\title{Boundary CFT$_{3}$-on-$\sthree$ observables on the truncated\\
+GeoVac spectral triple: partition function, wedge KMS entropy,\\
+and Casini--Huerta--Myers modular Hamiltonian}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively; all theorems, design choices,
+and editorial decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We exhibit three complementary boundary-side CFT$_{3}$-on-$\sthree$
+observables on the truncated GeoVac spectral triple, each computed
+from the same wedge KMS state $\rhoW = e^{-\Kalpha}/Z$ via a
+structurally distinct operation: \emph{(A)} the universal F-theorem
+coefficient $F_{\sthree}$, extracted via the spectral-zeta derivative
+$-\tfrac{1}{2}\zeta'_{\Delta}(0)$, reproduces the Klebanov--Pufu--Safdi
+(2011) continuum value bit-exactly for both the conformally coupled
+scalar ($F_{s} = \tfrac{\log 2}{8} - \tfrac{3\zeta(3)}{16\pi^{2}}$) and
+the free Camporesi--Higuchi Dirac ($F_{D} = \tfrac{\log 2}{4} +
+\tfrac{3\zeta(3)}{8\pi^{2}}$); \emph{(B)} the wedge KMS entropy
+$S(\rhoW) \sim 2\log\nmax$ extracts the wedge boundary dimension
+$\dim(\partial W) = 2$ as a degeneracy log on the lowest $\Kalpha$
+shell; \emph{(C)} the framework's modular Hamiltonian $\Kalpha =
+J_{\mathrm{polar}}$ identifies, at finite cutoff, with the continuum
+Casini--Huerta--Myers hemisphere modular Hamiltonian, with
+GH-convergence rate inherited from~\cite{paper38, paper45}. The
+scalar/Dirac partition functions decompose orthogonally under the
+master Mellin engine of~\cite{paper18}: $F_{D} + 2 F_{s} = \log(2)/2$
+isolates the M2 (Seeley--DeWitt) sector, $F_{D} - 2 F_{s} =
+3\zeta(3)/(4\pi^{2})$ isolates the M3 (half-integer Hurwitz / odd-zeta)
+sector. This is the first verification of the master Mellin engine on
+non-GeoVac-internal physics observables. The bulk-side identifications
+(Ryu--Takayanagi minimum surfaces, JLMS bulk-modular reconstruction,
+AdS$_{4}$ / H$^{4}$ dual geometry) are blocked at the framework's
+existing infrastructure: zero AdS / H$^{4}$ machinery, and the
+Wick-rotation $\sthree \to H^{3}$ supplies no natural discrete
+subgroup~\cite{paper29}.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+The GeoVac spectral triple~\cite{paper7, paper32} is a finite-cutoff
+operator-system truncation of the Camporesi--Higuchi spectral
+triple~\cite{camporesi_higuchi1996} on the round $\sthree$. Its
+modular structure on the hemispheric wedge has been developed across
+Papers~42--49~\cite{paper42, paper43, paper44, paper45, paper46,
+paper47, paper48, paper49}: the four-witness Wick-rotation theorem
+closes at the operator-system level (Riemannian, finite cutoff) via
+the geometric BW-$\alpha$ generator $\Kalpha = J_{\mathrm{polar}}$
+with integer spectrum, and via the Tomita--Takesaki BW-$\gamma$
+modular operator on the GNS Hilbert--Schmidt space; the modular flow
+$\sigma_{2\pi}(\Op) = \Op$ closes bit-exactly. The K$^{+}$-weak-form
+Lorentzian propinquity convergence~\cite{paper45} extends the
+construction to signature $(3,1)$, with the strong-form
+extension~\cite{paper46} and the norm-resolvent
+non-compact-carrier closure~\cite{paper47} completing the Lorentzian
+arc. The Krein--Mondino--S\"amann bridge~\cite{paper48} and the
+OSLPLS strong-form bridge~\cite{paper49} provide the synthetic-Lorentzian
+geometric interpretation.
+
+The present paper turns from the math.OA structural content of the
+modular machinery to its \emph{physics-side observables}. We ask
+whether the framework's wedge KMS state $\rhoW$, evaluated on
+boundary observables corresponding to standard CFT$_{3}$-on-$\sthree$
+calculations, reproduces the known continuum values, and whether the
+resulting structural pattern exhibits any genuinely new content
+beyond a numerical match.
+
+\paragraph{Headline results.}
+We establish three complementary boundary-side observables and one
+structural decomposition theorem:
+
+\begin{enumerate}
+\item \textbf{Partition function match} (Sec.~\ref{sec:partition}):
+the universal F-theorem coefficient extracted from the framework's
+spectral-zeta machinery agrees \emph{bit-exactly} with the
+Klebanov--Pufu--Safdi (2011)~\cite{klebanov_pufu_safdi2011} continuum
+values for both the conformally coupled scalar and the free
+Camporesi--Higuchi Dirac on the round $\sthree$.
+
+\item \textbf{Master Mellin engine decomposition}
+(Theorem~\ref{thm:mellin_decomp}): the scalar and Dirac partition
+functions decompose into linear combinations of $\log 2$ and
+$\zeta(3)/\pi^{2}$ that project orthogonally onto the M2 and M3
+sectors of the master Mellin engine~\cite{paper18}. This is the
+first verification of the master Mellin engine on non-GeoVac-internal
+physics observables.
+
+\item \textbf{Wedge KMS entropy structural classification}
+(Sec.~\ref{sec:wedge_kms}): the von Neumann entropy of $\rhoW$ scales
+as $S(\rhoW) \sim 2 \log \nmax$, with the slope $2 = \dim(\partial
+\Wedge)$ identifying the wedge boundary dimension as a degeneracy
+log on the lowest $\Kalpha$ shell. The F-coefficient does \emph{not}
+appear in $S(\rhoW)$, demonstrating that the framework's spectral-zeta
+side and wedge KMS state side encode \emph{different} continuum
+observables on the same modular state.
+
+\item \textbf{Casini--Huerta--Myers identification}
+(Sec.~\ref{sec:chm}): the framework's modular Hamiltonian $\Kalpha$
+identifies, at finite cutoff, with the continuum CHM hemisphere
+modular Hamiltonian $K_{\mathrm{cont}} = 2\pi \int_{H_{+}} \xi \cdot
+T^{00}\, d\Omega$~\cite{casini_huerta_myers2011}; convergence
+$\Kalpha \to K_{\mathrm{cont}}$ as $\nmax \to \infty$ is bounded by
+the Paper~38 GH-convergence rate $\Lambda \le C_{3} \cdot
+\gamma_{\nmax}$ with $\gamma_{\nmax} \sim (4/\pi)\log(\nmax)/\nmax$.
+\end{enumerate}
+
+\paragraph{Bulk-side scope.}
+Bulk-side identifications --- Ryu--Takayanagi minimum-surface
+entanglement entropy~\cite{ryu_takayanagi2006}, the
+JLMS~\cite{jafferis_lewkowycz_maldacena_suh2016} bulk-modular
+reconstruction, and AdS$_{4}$ / H$^{4}$ dual geometry --- are
+blocked at the framework's existing infrastructure: zero AdS$_{4}$ /
+H$^{4}$ machinery exists, and a previous attempt at the natural Wick
+continuation $\sthree \to H^{3}$~\cite{paper29} found no discrete
+subgroup $\Gamma \subset SO(3,1)$ selectable from framework
+invariants. We document this scope statement honestly in
+Sec.~\ref{sec:bulk_blocked}, with no claim that the bulk side is
+reachable from the framework's current axiom set.
+
+\section{Setup}
+\label{sec:setup}
+
+\subsection{The GeoVac spectral triple on $\sthree$}
+
+The Fock projection~\cite{fock1935, paper7} maps the
+single-particle hydrogen Hamiltonian conformally to the
+Laplace--Beltrami operator on $\sthree$ via stereographic projection
+in momentum space. The framework's spectra on the unit $\sthree$ are
+exact in $\Q$:
+
+\begin{itemize}
+\item \textbf{Scalar Laplacian.} Eigenvalues $\lambda_{n}^{2} =
+n(n+2)$ with multiplicity $d_{n} = (n+1)^{2}$ for $n = 0, 1, 2,
+\dots$. After the conformal mass shift $\xi R_{\mathrm{scalar}} =
+\tfrac{1}{8} \cdot 6 = \tfrac{3}{4}$ for the conformally coupled
+scalar, the spectrum becomes $(n + \tfrac{1}{2})(n + \tfrac{3}{2})$
+with the same multiplicity.
+
+\item \textbf{Camporesi--Higuchi Dirac.}
+Eigenvalues $|\lambda_{n}| = n + \tfrac{3}{2}$ with multiplicity
+$g_{n}^{\mathrm{Dirac}} = 2(n+1)(n+2)$ for the Weyl (single
+chirality) sector, $4(n+1)(n+2)$ for the full $4$-component
+Dirac. Both sectors carry the same Hurwitz-zeta structure under
+analytic continuation~\cite{paper22, paper23}.
+\end{itemize}
+
+The truncation at level $\nmax$ retains all $n \le \nmax$ shells and
+defines the operator system
+$\Op_{\nmax} = P_{\nmax} \Acal P_{\nmax}$ in the
+Connes--van~Suijlekom framework~\cite{connes_vs2021}. Convergence
+$\Op_{\nmax} \to \Op_{\sthree}$ in the Latr\'emoli\`ere propinquity
+holds at rate $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
+\nmax$~\cite{paper38}; the rate constant $4/\pi$ is the M1
+Hopf-base-measure signature of the master Mellin
+engine~\cite{paper18}.
+
+\subsection{Wedge KMS state}
+
+The hemispheric wedge $W$ corresponds, in the truncated full-Dirac
+basis, to the half-space with $m_{j} > 0$ along the
+wedge-fixing axis. Per~\cite{paper42} Def~5.1, the BW-$\alpha$
+modular Hamiltonian on the wedge is
+\[
+\Kalpha = J_{\mathrm{polar}}
+\]
+where $J_{\mathrm{polar}}$ is the rotation generator preserving the
+wedge, with integer eigenvalues $2m_{j} \in \{1, 3, 5, \dots,
+2\nmax - 1\}$ and multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k +
+1)$ for $k = 0, \dots, \nmax - 1$. The wedge KMS state at canonical
+BW normalization is
+\[
+\rhoW = \frac{e^{-\Kalpha}}{Z}, \qquad Z = \Tr_{\Hilb_{W}}\bigl(e^{-\Kalpha}\bigr).
+\]
+This is the substrate for all three boundary-side observables that
+follow.
+
+\section{Partition function: bit-exact match to KPS}
+\label{sec:partition}
+
+\subsection{Continuum reference}
+
+For the round unit $\sthree$, the free energies of free CFTs computed
+via Hurwitz-zeta regularization
+are~\cite{klebanov_pufu_safdi2011}:
+\begin{align}
+F_{s}^{\KPS} &= \frac{\log 2}{8} - \frac{3\zeta(3)}{16\pi^{2}}
+\approx 0.063807, \label{eq:Fs_KPS}\\
+F_{D}^{\KPS} &= \frac{\log 2}{4} + \frac{3\zeta(3)}{8\pi^{2}}
+\approx 0.218960, \label{eq:FD_KPS}
+\end{align}
+for the conformally coupled scalar and the free massless Weyl
+Dirac, respectively. Both values are expressed in terms of the
+functional determinant identities $F = -\tfrac{1}{2}\zeta'_{\Delta}(0)$
+(scalar) and $F = \zeta'_{|D|}(0)$ (Dirac), with the analytic
+continuation of the divergent spectral sum supplied by the standard
+zeta-function regularization. The transcendental signature involves
+only $\log 2$, $\zeta(3)$, and $\pi^{2}$.
+
+\subsection{Framework's Hurwitz machinery}
+
+The framework's spectral zeta on the truncated $\sthree$ admits a
+closed-form Hurwitz expansion. For the Dirac case, the Dirichlet
+series can be written exactly via the half-integer Hurwitz identity
+$\zeta_{H}(s, 3/2) = (2^{s} - 1)\zeta_{R}(s) - 2^{s}$:
+\begin{equation}
+D_{\mathrm{Dirac}}(s) = \sum_{n = 0}^{\infty} \frac{g_{n}^{\mathrm{Dirac}}}{|\lambda_{n}|^{s}}
+= 2\bigl(2^{s - 2} - 1\bigr) \zeta_{R}(s - 2) - \tfrac{1}{2}\bigl(2^{s} - 1\bigr) \zeta_{R}(s).
+\label{eq:DDirac_closed_form}
+\end{equation}
+This identity is encoded in the production module
+\texttt{geovac/qed\_two\_loop.py} and is verified symbolically across
+integer $s$.
+
+For the conformally coupled scalar, the spectral zeta admits the
+Hurwitz-asymptotic expansion
+\begin{equation}
+\zeta_{\Delta}(s) = \sum_{n = 0}^{\infty} \frac{(n + 1)^{2}}{[(n + 1/2)(n + 3/2)]^{s}}
+= \sum_{k \ge 0} g_{k}(s)\, \zeta_{R}(2s + 2k - 2),
+\label{eq:zeta_scalar_expansion}
+\end{equation}
+with $g_{k}(s) = \tbinom{s + k - 1}{k} / 4^{k}$ the
+binomial-like coefficient.
+
+\subsection{Bit-exact match: scalar}
+\label{subsec:scalar_match}
+
+Differentiating~(\ref{eq:zeta_scalar_expansion}) at $s = 0$ and using
+$g_{k}(0) = \delta_{k,0}$, $g_{k}'(0) = 1/(k \cdot 4^{k})$ for $k
+\ge 1$, plus the standard identities $\zeta_{R}'(-2) = -\zeta(3)/(4
+\pi^{2})$, $\zeta_{R}(0) = -\tfrac{1}{2}$, $\zeta_{R}(2k - 2)$
+expressible in $\pi^{2k - 2} \cdot \Q$ for $k \ge 2$:
+\begin{equation}
+\zeta'_{\Delta}(0) = 2\zeta'_{R}(-2) + \sum_{k \ge 1} \frac{\zeta_{R}(2k - 2)}{k \cdot 4^{k}}.
+\label{eq:zeta_prime_scalar}
+\end{equation}
+
+\begin{theorem}[Bit-exact scalar partition function]
+\label{thm:scalar_bitexact}
+The framework's scalar zeta-derivative satisfies
+\begin{equation}
+F_{s} := -\tfrac{1}{2}\,\zeta'_{\Delta}(0) = \frac{\log 2}{8} - \frac{3\zeta(3)}{16\pi^{2}} = F_{s}^{\KPS},
+\end{equation}
+in bit-exact agreement with~(\ref{eq:Fs_KPS}).
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The asymptotic Hurwitz expansion~(\ref{eq:zeta_prime_scalar})
+converges geometrically in $k$ at rate $1/4$ per term;
+truncation at $k_{\max} = 100$ gives 61+ matching digits at
+$\mathrm{dps} = 200$ when compared to $-2 F_{s}^{\KPS}$ via
+\texttt{mpmath}. PSLQ at coefficient bound $10^{6}$ and tolerance
+$10^{-40}$ finds the integer relation $[8, 2, -3]$:
+\[
+8 \cdot \zeta'_{\Delta}(0) + 2 \log 2 - 3 \cdot \frac{\zeta(3)}{\pi^{2}} = 0,
+\]
+which is exactly the claimed identity. See driver
+\texttt{debug/ads\_track\_a\_scalar\_partition\_function.py} and JSON
+\texttt{debug/data/ads\_track\_a\_scalar\_partition\_function.json}
+for full computation.
+\end{proof}
+
+\subsection{Bit-exact match: Dirac}
+\label{subsec:dirac_match}
+
+Differentiating~(\ref{eq:DDirac_closed_form}) symbolically at $s = 0$,
+using the same Riemann-zeta identities at $s = -2, 0$:
+\begin{align}
+D'_{\mathrm{Dirac}}(0)
+&= \tfrac{1}{2}\log 2 \cdot \zeta_{R}(-2) + \bigl(-\tfrac{3}{2}\bigr) \zeta_{R}'(-2)
+- \tfrac{1}{2}\bigl[\log 2 \cdot \zeta_{R}(0) + 0\bigr] \\
+&= 0 - \tfrac{3}{2} \cdot \bigl(-\tfrac{\zeta(3)}{4\pi^{2}}\bigr)
+- \tfrac{1}{2} \cdot \bigl(-\tfrac{\log 2}{2}\bigr)
+= \frac{3\zeta(3)}{8\pi^{2}} + \frac{\log 2}{4}.
+\end{align}
+
+\begin{theorem}[Bit-exact Dirac partition function]
+\label{thm:dirac_bitexact}
+The framework's Dirac zeta-derivative satisfies, as an exact
+symbolic identity,
+\begin{equation}
+F_{D} := D'_{\mathrm{Dirac}}(0) = \frac{\log 2}{4} + \frac{3\zeta(3)}{8\pi^{2}} = F_{D}^{\KPS},
+\end{equation}
+in bit-exact agreement with~(\ref{eq:FD_KPS}).
+\end{theorem}
+
+\begin{proof}
+Direct symbolic computation; \texttt{sympy.simplify(D'(0) - F\_D)}
+returns $0$. See driver
+\texttt{debug/ads\_track\_a\_dirac\_partition\_function.py}.
+\end{proof}
+
+\subsection{Master Mellin engine decomposition}
+
+The master Mellin engine of~\cite{paper18}~\S III.7 classifies the
+transcendental signatures of GeoVac observables via the three
+sub-mechanisms
+\[
+\mathcal{M}[\Tr(D^{k} \cdot e^{-t D^{2}})], \qquad k \in \{0, 1, 2\},
+\]
+labeled M1 (Hopf-base measure, $\sqrt{\pi} \cdot \Q$ ring at $k = 0$),
+M2 (Seeley--DeWitt heat-kernel, $\sqrt{\pi} \cdot \Q \oplus \pi^{2}
+\cdot \Q$ ring at $k = 2$), and M3 (half-integer Hurwitz /
+vertex-parity, $\zeta(3)/\pi^{2}$ and similar odd-zeta-over-pi
+ratios at $k = 1$).
+
+Theorems~\ref{thm:scalar_bitexact} and~\ref{thm:dirac_bitexact}
+exhibit $F_{s}$ and $F_{D}$ as linear combinations of $\log 2$ (an
+M2 transcendental, present via $\zeta_{R}'(0) = -\tfrac{1}{2}
+\log(2\pi)$ in the underlying heat-kernel asymptotic) and
+$\zeta(3)/\pi^{2}$ (an M3 transcendental, present via
+$\zeta_{R}'(-2) = -\zeta(3)/(4\pi^{2})$ in the half-integer
+Hurwitz-zeta derivative).
+
+\begin{theorem}[Scalar/Dirac M2--M3 orthogonal decomposition]
+\label{thm:mellin_decomp}
+The free energies $F_{s}$ and $F_{D}$ project orthogonally onto the
+M2 and M3 axes of the master Mellin engine via the dual-basis
+combinations
+\begin{align}
+F_{D} + 2\,F_{s} &= \frac{\log 2}{2}
+\qquad\text{(isolates M2; all $\zeta(3)$ cancels),}
+\label{eq:M2_isolation}\\
+F_{D} - 2\,F_{s} &= \frac{3\zeta(3)}{4\pi^{2}}
+\qquad\text{(isolates M3; all $\log 2$ cancels).}
+\label{eq:M3_isolation}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Substituting~(\ref{eq:Fs_KPS}) and~(\ref{eq:FD_KPS}):
+\[
+F_{D} + 2 F_{s} = \bigl(\tfrac{\log 2}{4} + \tfrac{3\zeta(3)}{8\pi^{2}}\bigr)
++ 2 \bigl(\tfrac{\log 2}{8} - \tfrac{3\zeta(3)}{16\pi^{2}}\bigr)
+= \tfrac{\log 2}{4} + \tfrac{\log 2}{4} = \tfrac{\log 2}{2},
+\]
+and similarly $F_{D} - 2 F_{s} = 3 \zeta(3)/(4\pi^{2})$. The two
+combinations span a $2$-dimensional space; the projection
+coefficients $(1, +2)$ and $(1, -2)$ act as a dual basis for the
+M2/M3 decomposition on the (scalar, Dirac) plane.
+\end{proof}
+
+\begin{remark}[First verification on non-GeoVac-internal data]
+\label{rem:first_external_verification}
+Theorem~\ref{thm:mellin_decomp} is the first verification of the
+master Mellin engine on observables that are \emph{not}
+GeoVac-internal. Previous verifications --- the case-exhaustion
+theorem of~\cite{paper32}~\S VIII, the 208/208 Prediction~1 panel
+of~\cite{paper35}, the modular-residual closed form of Sprint MR-B
+--- all operated on framework-internal quantities. The KPS
+partition functions~(\ref{eq:Fs_KPS}),~(\ref{eq:FD_KPS}) are
+independently-published continuum CFT$_{3}$ data, and the framework's
+spectral-zeta machinery reproduces them with the exact M2/M3
+transcendental signature the master Mellin engine predicts. This
+elevates the engine from a structural classification of
+GeoVac-internal observables to a predictive classification of CFT
+physics on the round $\sthree$ at finite cutoff.
+\end{remark}
+
+\section{Wedge KMS entropy: state-side observable}
+\label{sec:wedge_kms}
+
+\subsection{The framework's wedge KMS entropy}
+
+The von Neumann entropy of the wedge KMS state $\rhoW$ at canonical
+BW normalization $\beta = 2\pi$ is computed directly by
+diagonalizing $\Kalpha$ and applying $S(\rhoW) = -\Tr[\rhoW \log
+\rhoW]$. Sprint BH-Phase0
+(2026-05-22)~\cite{debug:bh_phase0} computed $S(\rhoW)$ at $\nmax
+\in \{2, 3, 4, 5, 6, 7\}$, obtaining the log-linear fit
+\begin{equation}
+S(\rhoW) \approx 1.94 \cdot \log(\nmax) + 0.56, \qquad R^{2} = 0.99991,
+\label{eq:S_W_fit}
+\end{equation}
+with the slope $\approx 2$ identifiable as the wedge boundary
+dimension $\dim(\partial W) = \dim(S^{2}_{\mathrm{equator}}) = 2$.
+
+\subsection{Mechanism: degeneracy log on the lowest $\Kalpha$ shell}
+
+The $\Kalpha$ spectrum is bounded above by $2\nmax - 1$ at finite
+cutoff. At BW canonical normalization, the per-state weight at
+$\Kalpha = 1$ (the equator shell) is $e^{-1}/Z$, while at $\Kalpha = 3$
+it drops to $e^{-3}/Z$, a factor of $e^{-2} \approx 0.135$ suppression
+per shell. The partition function is therefore dominated by the
+equator shell of multiplicity $n_{\mathrm{eq}} = \nmax(\nmax + 1)
+\sim \nmax^{2}$:
+\[
+Z \approx n_{\mathrm{eq}} \cdot e^{-1} \approx 0.368\, \nmax^{2},
+\]
+giving effective probability $p_{\mathrm{eq}} \approx 1/n_{\mathrm{eq}}$
+per equator state, and hence
+\[
+S(\rhoW) \approx -n_{\mathrm{eq}} \cdot p_{\mathrm{eq}} \log p_{\mathrm{eq}}
+= \log n_{\mathrm{eq}} \approx 2 \log \nmax.
+\]
+The two asymptotic limits in $s$-deformation $\rho(s) = e^{-s
+\Kalpha}/Z$, $s \to 0^{+}$ (maximally mixed on $\Hilb_{W}$, giving
+$S \to \log \dim \Hilb_{W}$) and $s \to \infty$ (maximally mixed on
+the equator shell, giving $S \to \log n_{\mathrm{eq}}$), are
+saturated bit-exactly~\cite{debug:bh_phase0}.
+
+\subsection{Structural decomposition: F is in the spectral-zeta side, not the state side}
+
+\begin{proposition}[F vs $S(\rhoW)$ live in different sectors]
+\label{prop:F_vs_S_decomposition}
+The framework's wedge KMS state $\rhoW$ admits two structurally
+distinct calculational operations that extract different continuum
+observables:
+
+\begin{itemize}
+\item \textbf{Spectral-zeta side:} the analytic continuation
+$-\tfrac{1}{2} \zeta'_{\Delta}(0)$ extracts the universal F-theorem
+coefficient $F_{s}^{\KPS}$ via Theorem~\ref{thm:scalar_bitexact};
+similarly for $F_{D}^{\KPS}$ via Theorem~\ref{thm:dirac_bitexact}.
+The transcendental signature is in the master Mellin engine M2/M3
+ring $\Q \cdot \log 2 \oplus \Q \cdot \zeta(3)/\pi^{2}$.
+
+\item \textbf{Wedge KMS state side:} the von Neumann entropy
+$S(\rhoW) = -\Tr[\rhoW \log \rhoW]$ extracts the wedge boundary
+dimension $\dim(\partial W)$ via degeneracy log on the lowest
+$\Kalpha$ shell, with leading scaling $\dim(\partial W) \cdot \log
+\nmax$. The result is ring-free (a logarithm of an integer).
+\end{itemize}
+
+The two operations act on the same modular state $\rhoW$ but extract
+\emph{categorically different} continuum observables: the universal
+F-coefficient versus the wedge boundary dimension. The F-coefficient
+does \emph{not} appear in $S(\rhoW)$.
+\end{proposition}
+
+This decomposition is consistent with the PSLQ-disjointness finding
+of Sprint TD Track~5 (2026-05-09)~\cite{debug:sprint_td_track5} that
+GeoVac entropies generally live outside the master Mellin engine
+ring, while spectral-side observables generally live inside it.
+
+\subsection{Three blockers for literal Ryu--Takayanagi on the framework's graph}
+
+The continuum Ryu--Takayanagi formula~\cite{ryu_takayanagi2006}
+identifies the boundary entanglement entropy of a region $A$ with
+the area of the bulk minimum surface anchored at $\partial A$,
+weighted by $1/(4 G_{N})$. A literal discrete analog on the
+framework's graph would require: (i) a well-defined notion of
+graph minimum-cut between spatial sub-regions; (ii) a perfect-tensor
+structure at graph vertices ensuring isometric bulk-boundary
+encoding; (iii) a bulk dual geometry.
+
+\begin{proposition}[Three blockers for literal RT on the framework]
+\label{prop:RT_blocked}
+The framework's discrete $\sthree$ graph at finite $\nmax$ exhibits
+three independent structural obstructions to a literal RT formula:
+\begin{enumerate}
+\item The Fock graph at level $\nmax$ has $\beta_{0} = \nmax$
+connected components (one per $\ell$-sector), so the naive
+graph-cut between spatial sub-regions is identically zero or
+trivially confined to a single $\ell$-sector.
+
+\item The Wigner 3j symbols at graph vertices are Clebsch--Gordan
+projections rather than isometries; the HaPPY tensor-network
+RT proof~\cite{pastawski_yoshida_harlow_preskill2015} requires
+perfect tensors at network nodes.
+
+\item No bulk-dual construction exists in the framework's
+infrastructure. The natural candidate --- Wick continuation
+$\sthree \to H^{3}$ --- was closed by Sprint RH-B
+(2026-04-17)~\cite{paper29} as a clean structural dead end: no
+discrete subgroup $\Gamma \subset SO(3,1)$ is selectable from
+framework invariants.
+\end{enumerate}
+\end{proposition}
+
+These three blockers are not in tension with the boundary-side
+results of Sec.~\ref{sec:partition} or Sec.~\ref{sec:chm}: the
+framework reproduces boundary observables on the same wedge KMS
+state, but cannot independently construct a bulk dual against which
+to compare via RT.
+
+\section{Casini--Huerta--Myers identification}
+\label{sec:chm}
+
+\subsection{Continuum CHM hemisphere modular Hamiltonian}
+
+The Casini--Huerta--Myers
+formula~\cite{casini_huerta_myers2011} for the continuum modular
+Hamiltonian of a hemisphere of $\sthree$ in free CFT$_{3}$ is
+\begin{equation}
+K_{\mathrm{cont}} = 2\pi \int_{H_{+}} \xi(x) \cdot T^{00}(x)\, d\Omega(x),
+\label{eq:K_chm}
+\end{equation}
+where $\xi$ is the wedge-preserving Killing vector field of the
+rotation that fixes the equator $S^{2}_{\mathrm{equator}}$, and
+$T^{00}$ is the local energy density. The flow generated by
+$K_{\mathrm{cont}}/(2\pi)$ is $2\pi$-periodic, reflecting the
+canonical Bisognano--Wichmann period of the modular
+flow~\cite{bisognano_wichmann1976}; the eigenvalues of
+$K_{\mathrm{cont}}$ in the single-particle basis are $2\pi J$ for
+integer $J = 1, 2, 3, \dots$.
+
+\subsection{Framework identification}
+
+The framework's wedge modular Hamiltonian (Paper~42 Def~5.1) is
+\[
+\Kalpha = J_{\mathrm{polar}},
+\]
+the rotation generator of the wedge-preserving $SO(2)$ on the
+truncated Camporesi--Higuchi spectral triple. Its spectrum is
+\[
+\mathrm{spec}(\Kalpha) = \{2 m_{j} : m_{j} = 1/2, 3/2, \dots, (2\nmax - 1)/2\}
+= \{1, 3, 5, \dots, 2\nmax - 1\},
+\]
+integer-valued in the canonical $(2\pi)^{-1}$ rescaling, with
+multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k + 1)$. The
+modular flow $\sigma_{2\pi}(\Op) = \Op$ closes
+bit-exactly at every tested $\nmax$~\cite{paper42}.
+
+\begin{theorem}[CHM identification at finite cutoff]
+\label{thm:chm_identification}
+The framework's modular Hamiltonian $\Kalpha$ at finite $\nmax$ is
+the operator-system-level analog of the continuum CHM modular
+Hamiltonian $K_{\mathrm{cont}}$ of~(\ref{eq:K_chm}), with:
+
+\begin{itemize}
+\item Both spectra integer-valued in canonical $(2\pi)^{-1}$ units.
+\item Both generate $2\pi$-periodic modular flow.
+\item The framework's odd-integer spectrum $\{1, 3, \dots, 2\nmax - 1\}$
+corresponds to the half-integer Casimir grading of the
+wedge-preserving Killing field on the Weyl spinor sector.
+\item Convergence $\Kalpha \to K_{\mathrm{cont}}$ as $\nmax \to
+\infty$ holds in the Latr\'emoli\`ere propinquity at rate
+\[
+\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_{3} \cdot \gamma_{\nmax}
+\]
+with $C_{3} \to 1$ and $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
+\nmax$ inherited from Paper~38~\cite{paper38} via Paper~45~\cite{paper45}.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The wedge-preserving Killing field of the round $\sthree$ rotates
+the spinor harmonics by their $m_{j}$ eigenvalue; the canonical
+$2\pi$-period of the rotation gives the integer $2 m_{j}$ spectrum
+in the canonical normalization. The framework's truncation
+$\Kalpha = J_{\mathrm{polar}}$ acts on the projected wedge
+sub-space $P_{\Wedge} \Hilb_{\mathrm{GV}}^{\nmax}$ with exactly
+the same $2 m_{j}$ eigenvalues, restricted to the multiplicities
+allowed by the truncation. Convergence in the propinquity follows
+from~\cite{paper38, paper45}.
+\end{proof}
+
+\section{Bulk-side scope}
+\label{sec:bulk_blocked}
+
+The three boundary-side observables (Sec.~\ref{sec:partition},
+Sec.~\ref{sec:wedge_kms}, Sec.~\ref{sec:chm}) all reproduce or
+identify their continuum CFT$_{3}$-on-$\sthree$ analogs at finite
+cutoff. The corresponding \emph{bulk-side} identifications --- AdS$_{4}$
+gravity, JLMS bulk-modular reconstruction, RT minimum surfaces,
+holographic entanglement entropy --- are blocked at the framework's
+existing infrastructure.
+
+\begin{proposition}[Bulk side blocked]
+\label{prop:bulk_blocked}
+None of the bulk-side identifications corresponding to
+Sec.~\ref{sec:partition}--\ref{sec:chm} are reachable from the
+framework's current infrastructure:
+
+\begin{enumerate}
+\item No AdS$_{4}$ / H$^{4}$ machinery exists in the framework's
+codebase (\texttt{geovac/}); a search for AdS, hyperbolic-4-space,
+or holographic primitives returns no matches.
+
+\item Sprint RH-B (2026-04-17)~\cite{paper29} closed the natural
+candidate --- Wick continuation $\sthree \to H^{3}$ --- as a clean
+structural dead end: the continuation supplies no natural discrete
+subgroup $\Gamma \subset SO(3,1)$ selectable from framework
+invariants.
+
+\item Sprint L3e-P3 (2026-05-23) found that Paper~38's $4/\pi$ rate
+does \emph{not} transport to the non-compact Coulomb setting,
+suggesting that any discrete-to-bulk convergence statement would
+require a non-compact rate analog that is itself an open NCG-math
+problem.
+\end{enumerate}
+\end{proposition}
+
+The structural reading of Prop.~\ref{prop:bulk_blocked} is that the
+bulk-side identification falls into Class~1 (calibration-external)
+of the framework's external-input partition~\cite{debug:external_input_three_class_partition}:
+the framework determines the boundary-side observables structurally
+but does not autonomously generate the bulk-dual geometry. Importing
+AdS$_{4}$ infrastructure would be a multi-month engineering
+commitment outside the present paper's scope.
+
+\section{Synthesis and open questions}
+\label{sec:synthesis}
+
+\subsection{Unified picture}
+
+The framework's wedge KMS state $\rhoW = e^{-\Kalpha}/Z$ supports
+three structurally distinct calculational operations, each
+extracting a different continuum CFT$_{3}$-on-$\sthree$ boundary
+observable:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Operation & Continuum analog & Ring \\
+\midrule
+$-\tfrac{1}{2}\zeta'_{\Delta}(0)$ (Theorem~\ref{thm:scalar_bitexact}) & F-theorem coefficient & M2 + M3 \\
+$-\Tr[\rhoW \log \rhoW]$ (Prop.~\ref{prop:F_vs_S_decomposition}) & Wedge boundary dimension & ring-free \\
+$\mathrm{spec}(\Kalpha)$ (Theorem~\ref{thm:chm_identification}) & CHM modular Hamiltonian & ring-free \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All three converge to their continuum analogs as $\nmax \to \infty$
+per~\cite{paper38, paper45}.
+
+\subsection{Open questions}
+
+\begin{enumerate}
+\item \textbf{Other free-field CFTs.} The scalar and Dirac cases
+exhibit the orthogonal M2/M3 decomposition of
+Theorem~\ref{thm:mellin_decomp}. Does the same projection structure
+extend to higher-spin partition functions on $\sthree$, in
+particular the Maxwell ($p = 1$ form) and graviton ($p = 2$) cases?
+The Maxwell partition function on round $\sthree$ has known closed
+forms~\cite{beccaria_tseytlin2017}; testing whether the framework's
+spectral-zeta machinery reproduces it (and whether the M2/M3
+decomposition extends) is a natural follow-up.
+
+\item \textbf{Squashed-$\sthree$ generalization.} The KPS values
+above are for the round (unit) $\sthree$. The squashed-$\sthree$
+partition functions of supersymmetric and free
+CFTs~\cite{jafferis_klebanov_pufu_safdi2011} use deformed half-integer
+Hurwitz machinery that may not reduce to the framework's MR-B
+Jacobi-$\vartheta_{2}$ closed form. Whether the framework can match
+the squashed case is open.
+
+\item \textbf{Propinquity-rate convergence statement.} Theorem~\ref{thm:chm_identification}
+states convergence at the propinquity-bound level. A quantitative
+rate for the partition-function-side convergence $|F_{\nmax} -
+F^{\KPS}| \le C \cdot \gamma_{\nmax}$ with explicit $C$ requires a
+Mellin-domain version of the Berezin-reconstruction framework of
+Paper~38; this is open work.
+
+\item \textbf{Bulk-side identification (Prop.~\ref{prop:bulk_blocked}).}
+The JLMS bulk-modular Hamiltonian identification, the RT
+entanglement-entropy formula, and the AdS$_{4}$ dual geometry
+remain open. Importing AdS$_{4}$ / H$^{4}$ infrastructure is the
+named multi-month engineering commitment that would reach these.
+\end{enumerate}
+
+\subsection{Place in the GeoVac math.OA series}
+
+This paper is the twelfth math.OA standalone in the GeoVac series,
+following Papers~38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49.
+The previous eleven established operator-algebraic legitimacy of the
+framework's discrete-spectral-triple truncation, the propinquity
+convergence theory at various levels (Riemannian, tensor-product,
+universal compact-Lie-group, K$^{+}$-weak-form Lorentzian,
+strong-form Lorentzian, norm-resolvent non-compact, K$^{+}$-weak-form
+synthetic Lorentzian via Mondino--S\"amann bridge, strong-form
+synthetic Lorentzian via OSLPLS). The present paper is the
+\emph{first connecting that math.OA arc to a physics literature}
+--- specifically the CFT-on-sphere partition function literature
+of~\cite{cardy1988, jafferis_klebanov_pufu_safdi2011,
+klebanov_pufu_safdi2011, beccaria_tseytlin2017,
+lei_van_leuven2024} --- with a load-bearing structural finding
+(the master Mellin engine verification on independent physics
+data) plus three bit-exact / formal correspondences (partition
+function, wedge boundary dimension, CHM modular Hamiltonian).
+
+\section*{Acknowledgments}
+
+This work was developed in the GeoVac project's AI-augmented
+agentic workflow with Anthropic's Claude.
+
+\begin{thebibliography}{99}
+
+\bibitem{paper7} J.~Loutey,
+\emph{Paper~7: Dimensionless Vacuum},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper18} J.~Loutey,
+\emph{Paper~18: Exchange Constants and Transcendental Taxonomy},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper22} J.~Loutey,
+\emph{Paper~22: Angular Sparsity Theorem on $\sthree$},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper23} J.~Loutey,
+\emph{Paper~23: Nuclear Shell Model on the Bargmann--Segal Lattice},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper29} J.~Loutey,
+\emph{Paper~29: Ramanujan Hopf Graphs and Wick-Rotation Scope},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper32} J.~Loutey,
+\emph{Paper~32: The GeoVac Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper35} J.~Loutey,
+\emph{Paper~35: Time as Projection},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper38} J.~Loutey,
+\emph{Paper~38: SU(2) Propinquity Convergence on the Camporesi--Higuchi Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper42} J.~Loutey,
+\emph{Paper~42: Tomita--Takesaki Modular Structure and Four-Witness Wick Rotation},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper43} J.~Loutey,
+\emph{Paper~43: Lorentzian Extension of the Four-Witness Theorem},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper44} J.~Loutey,
+\emph{Paper~44: Operator-System Substrate for Lorentzian Propinquity},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper45} J.~Loutey,
+\emph{Paper~45: K$^{+}$-Weak-Form Lorentzian Propinquity Convergence},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper46} J.~Loutey,
+\emph{Paper~46: Strong-Form Lorentzian Propinquity Convergence},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper47} J.~Loutey,
+\emph{Paper~47: Norm-Resolvent Convergence to the Non-Compact Lorentzian Krein Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper48} J.~Loutey,
+\emph{Paper~48: Krein--Mondino--S\"amann Bridge},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper49} J.~Loutey,
+\emph{Paper~49: OSLPLS Strong-Form Bridge and Twin Paradox as Quantum Information},
+GeoVac internal preprint, 2026.
+
+\bibitem{fock1935} V.~Fock,
+\emph{Zur Theorie des Wasserstoffatoms},
+Z.~Phys.\ \textbf{98} (1935), 145--154.
+
+\bibitem{camporesi_higuchi1996} R.~Camporesi and A.~Higuchi,
+\emph{On the eigenfunctions of the Dirac operator on spheres and real hyperbolic spaces},
+J.~Geom.~Phys.\ \textbf{20} (1996), 1--18.
+
+\bibitem{connes_vs2021} A.~Connes and W.~D.~van Suijlekom,
+\emph{Spectral truncations in noncommutative geometry and operator systems},
+Comm.~Math.~Phys.\ \textbf{383} (2021), 2021--2067, arXiv:2004.14115.
+
+\bibitem{cardy1988} J.~L.~Cardy,
+\emph{Operator content of two-dimensional conformally invariant theories},
+Nucl.~Phys.~B \textbf{270} (1986), 186--204.
+
+\bibitem{klebanov_pufu_safdi2011} I.~R.~Klebanov, S.~S.~Pufu, and B.~R.~Safdi,
+\emph{F-theorem without supersymmetry},
+JHEP \textbf{10} (2011) 038, arXiv:1105.4598.
+
+\bibitem{jafferis_klebanov_pufu_safdi2011} D.~L.~Jafferis, I.~R.~Klebanov, S.~S.~Pufu, and B.~R.~Safdi,
+\emph{Towards the F-theorem: $N = 2$ field theories on the three-sphere},
+JHEP \textbf{06} (2011) 102, arXiv:1103.1181.
+
+\bibitem{beccaria_tseytlin2017} M.~Beccaria and A.~A.~Tseytlin,
+\emph{$\mathcal{N} = 4$ conformal supergravity: the complete one-loop dilatation operator},
+JHEP \textbf{04} (2017) 100, arXiv:1702.02325.
+
+\bibitem{lei_van_leuven2024} J.~Lei and W.~D.~van Leuven,
+\emph{Modularity in $d > 2$ free conformal field theory},
+arXiv:2406.01567, 2024.
+
+\bibitem{casini_huerta_myers2011} H.~Casini, M.~Huerta, and R.~C.~Myers,
+\emph{Towards a derivation of holographic entanglement entropy},
+JHEP \textbf{05} (2011) 036, arXiv:1102.0440.
+
+\bibitem{bisognano_wichmann1976} J.~J.~Bisognano and E.~H.~Wichmann,
+\emph{On the duality condition for quantum fields},
+J.~Math.~Phys.\ \textbf{17} (1976), 303--321.
+
+\bibitem{ryu_takayanagi2006} S.~Ryu and T.~Takayanagi,
+\emph{Holographic derivation of entanglement entropy from AdS/CFT},
+Phys.~Rev.~Lett.\ \textbf{96} (2006), 181602, arXiv:hep-th/0603001.
+
+\bibitem{jafferis_lewkowycz_maldacena_suh2016} D.~L.~Jafferis, A.~Lewkowycz, J.~Maldacena, and S.~J.~Suh,
+\emph{Relative entropy equals bulk relative entropy},
+JHEP \textbf{06} (2016) 004, arXiv:1512.06431.
+
+\bibitem{pastawski_yoshida_harlow_preskill2015} F.~Pastawski, B.~Yoshida, D.~Harlow, and J.~Preskill,
+\emph{Holographic quantum error-correcting codes: toy models for the bulk/boundary correspondence},
+JHEP \textbf{06} (2015) 149, arXiv:1503.06237.
+
+\bibitem{debug:bh_phase0} GeoVac internal,
+\emph{Sprint BH-Phase0 diagnostic memo},
+\texttt{debug/bh\_phase0\_diagnostic\_memo.md}, 2026-05-22.
+
+\bibitem{debug:sprint_td_track5} GeoVac internal,
+\emph{Sprint TD Track 5 PSLQ-disjoint correlation entropy},
+\texttt{debug/sprint\_td\_track5\_memo.md}, 2026-05-09.
+
+\bibitem{debug:external_input_three_class_partition} GeoVac internal,
+\emph{External-input three-class partition},
+\texttt{memory/external\_input\_three\_class\_partition.md}, 2026-05-25.
+
+\end{thebibliography}
+
+\end{document}

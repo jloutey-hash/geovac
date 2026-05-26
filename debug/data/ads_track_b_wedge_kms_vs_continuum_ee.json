@@ -1,0 +1,27 @@
+{
+  "track": "AdS-B",
+  "title": "Wedge KMS entropy vs continuum CFT_3 hemisphere entanglement entropy",
+  "bh_phase0_reference": "debug/bh_phase0_diagnostic_memo.md (2026-05-22)",
+  "bh_phase0_result": {
+    "fit": "S(rho_W) = 1.94 * log(n_max) + 0.56",
+    "R_squared": 0.99991,
+    "slope": "~ 2 = dim(S^2_equator) = dim(wedge boundary)",
+    "mechanism": "BW canonical state is maximally mixed on K_alpha=1 equator shell with dim ~ n_max(n_max+1)"
+  },
+  "F_continuum_universal_subleading": {
+    "scalar": "0.06380705477619821059196536732890598852418715413630145457535608379239583928750916544238697721389646396",
+    "dirac": "0.2189594807275762335246853260712763069893757589075247179096278371619051324098290269181577090704164158",
+    "source": "Track A spectral-zeta computation; also = continuum F-theorem coefficient = -(universal subleading constant in continuum hemisphere EE)"
+  },
+  "structural_finding": {
+    "spectral_zeta_side_Track_A": "extracts F (universal F-theorem coefficient, in master Mellin engine M2 + M3 ring)",
+    "wedge_KMS_state_side_Track_B": "extracts log(n_equator) = log(dim of K_alpha=1 shell) ~ 2 log(n_max) (degeneracy counting, ring-free)",
+    "categorical_distinction": "Same wedge KMS state, two different operations, two different continuum observables"
+  },
+  "three_blockers_for_literal_RT": [
+    "S^3 Fock graph has beta_0 = n_max disconnected components (one per ell-sector); naive min-cut trivial",
+    "No perfect-tensor structure at Fock vertices (Wigner 3j are CG projections, not isometries); HaPPY's RT proof fails",
+    "No bulk-dual construction (S^3 is boundary; would need AdS_4 / H^4 bulk); Sprint RH-B 2026-04-17 closed S^3 -> H^3 Wick rotation as clean dead end"
+  ],
+  "verdict": "Track B clean negative on direct continuum-EE match; substantive structural finding: F lives in spectral-zeta side (Track A), not in wedge KMS entropy (Track B). These are categorically different framework operations on the same modular state."
+}

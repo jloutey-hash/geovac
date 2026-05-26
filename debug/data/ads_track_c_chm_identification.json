@@ -1,0 +1,20 @@
+{
+  "track": "AdS-C",
+  "title": "CHM modular Hamiltonian identification at finite cutoff",
+  "paper_42_existing_statement": "Lines ~280-310 + 1493-1510 cite the CHM continuum formula K_cont = 2*pi * int_{H_+} xi * T^{00} dOmega and identify K_alpha^W as the operator-system-level analog",
+  "framework_K_alpha_spectrum_formula": "two_m_j in {1, 3, 5, ..., 2*n_max - 1} with multiplicity (n_max - k)(n_max - k + 1)",
+  "continuum_chm_spectrum": "{2*pi*J for integer J = 1, 2, 3, ...}",
+  "structural_identification": {
+    "statement": "K_alpha^W at finite n_max is the operator-system truncation of K_cont on the wedge sector of round S^3 Camporesi-Higuchi spectral triple",
+    "convergence_rate": "Lambda <= C_3 * gamma_n_max with gamma_n_max ~ (4/pi) log(n_max)/n_max per Paper 38 L2"
+  },
+  "JLMS_bulk_status": "BLOCKED -- requires AdS_4 / H^4 infrastructure absent in framework; Sprint RH-B 2026-04-17 closed S^3 -> H^3 Wick rotation as clean dead end; Sprint L3e-P3 2026-05-23 found 4/pi rate does NOT transport to non-compact Coulomb",
+  "unified_A_B_C_picture": {
+    "Track_A_spectral_zeta": "F-coefficient (universal F-theorem), M2 + M3 ring",
+    "Track_B_wedge_KMS_state": "Boundary-dim log scaling, ring-free degeneracy",
+    "Track_C_modular_Hamiltonian": "CHM integer-spectrum analog, GH-convergence to continuum",
+    "common_substrate": "wedge KMS state rho_W = e^{-K_alpha^W}/Z on truncated Camporesi-Higuchi triple",
+    "bulk_side_BLOCKED": "Class-1 calibration-external; no AdS/H^4 infrastructure"
+  },
+  "deliverable_recommendation": "12th math.OA standalone paper consolidating A + B + C as first-published connection between framework's modular machinery and CFT_3-on-S^3 partition function / entanglement / modular Hamiltonian structure on BOUNDARY side. Bulk side flagged as open for future AdS infrastructure sprint."
+}

@@ -1708,6 +1708,95 @@ Schmidt orthogonalization Day-1 diagnostic STOP:
 \texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md},
 \texttt{debug/data/sprint\_w1e\_core\_correlation\_estimate.json}.
 
+\subsubsection{Structural classification of W1e and the
+explicit-core HF decision-gate diagnostic (2026-05-25)}
+\label{sec:w1e_classification_and_diagnostic}
+
+After the sprint-scale candidate-space closure
+(\S\ref{sec:w1e_schmidt_core_correlation}), a diagnostic-only
+structural reading sprint placed W1e within the cross-domain
+multi-focal-composition wall pattern and named a load-bearing
+decision-gate diagnostic.
+
+\textbf{Structural reading: W1e is H1-class, not LS-8a-class.}
+Three independent comparisons place W1e in the same structural
+sub-class as Sprint H1's Yukawa-undetermined verdict (admits
+structure, lacks autonomous selection) rather than the LS-8a /
+HF-5 sub-class (requires external counterterms parameterizing UV
+physics): (i) the framework CAN build the right structure --- W1d
+closure in F3 constructed the bonding orbital at the FCI level
+(naturals $[1.9991, 0.0007]$, four orders advance over W1c+mz
+alone); (ii) the closure mechanism is ``external preference data''
+(supplying the Pauli pressure to select the bonding orbital at the
+correct $R_\text{eq}$), not ``external counterterms'' (which have
+the open-ended Landau-pole character of LS-8a / HF-5); (iii) the
+calibration data is framework-internally computable in principle
+(existing \texttt{geovac/neon\_core.py} infrastructure can be
+inverted from screening-potential mode to explicit-orbital mode;
+\texttt{geovac/multi\_zeta\_orbitals.py} provides the basis
+infrastructure). The chemistry-side distinguishing feature is that
+the relevant external input (atomic-structure data) is
+\emph{closer at hand} than UV-completion physics --- multi-week to
+multi-month architectural commitments rather than a fundamental
+UV completion outside the framework.
+
+\textbf{Closure-prospect classification: (a-with-caveat)
+sprint-scale exhausted but multi-month tractable for components,
+with a calibration-external residual whose magnitude depends on
+the Reading A vs Reading B verdict.} The three sub-sub-mechanisms
+identified at F4-F6 (basis-truncation $\sim 10.2\%$ / Hartree-pressure
+$\sim 25.7\%$ / deep-correlation-residual $65$--$90\%$) stack to
+$\sim 35$--$45\%$ combined ceiling at sprint scale; the question is
+whether multi-month implementation pushes this to $\sim 85$--$95\%$
+(Reading A: active-space deficit, well-defined CCSD-class closure)
+or to $\sim 30$--$50\%$ leaving a structurally bounded residual
+(Reading B: architectural-scope boundary analogous to H1's
+Yukawa-undetermined verdict).
+
+\textbf{Explicit-core 12-electron HF on NaH (~2--4 weeks) is the
+named load-bearing diagnostic.} Implement HF on the full 12-electron
+NaH problem in the framework's existing basis machinery (single-zeta
+CR67 + multi-zeta for valence, $\sim 120$-orbital matrix size at
+$n_{\max} = 2$). Run 8-point PES sweep. Decision-gate: if HF gives
+internal minimum at $R_\text{eq} \in [3.0, 4.5]$~bohr with
+$D_e \in [0.04, 0.12]$~Ha $\rightarrow$ \textbf{Reading A confirmed}
+(W1e is active-space deficit; multi-month CCSD-class post-HF closure
+path is well-defined). If HF still gives monotone-descending PES
+$\rightarrow$ \textbf{Reading B confirmed} (W1e is structurally tied
+to the composed-architecture choice; chemistry-domain
+architectural-scope boundary established, structurally analogous to
+H1's Yukawa-undetermined verdict in the physics domain).
+
+\textbf{Three-class partition of the framework's external-input
+space (Sprint Chemistry Positioning Track 2, 2026-05-25).}
+The cross-domain wall pattern at the boundary (6 instances, 5
+physics + 1 chemistry) is one structural reading. What sits
+\emph{outside} the boundary refines into three categorically
+distinct classes: \textbf{(1) Calibration parameter values}
+(Yukawas, $Z_2$, $\delta m$; UV-physics or AC-inner-factor tied;
+structurally bounded; ``second packing axiom'' is the speculative
+path forward) --- members H1, LS-8a, HF-5. \textbf{(2) Multi-focal
+composition} (spatial $\times$ spatial composition rules; architectural
+extension well-defined within existing computational primitives) ---
+members HF-3, HF-4 (operator-level largely closed by W1b extension).
+\textbf{(3) Multi-determinant correlation} (N-representable
+density-matrix manifold beyond the zero-entropy class; chemistry-methods
+on the correlation submanifold; ambiguous between Reading A
+framework-internal-extendable and Reading B
+architecturally-scoped) --- member W1e. The diagnostic-before-engineering
+implication: don't propose Class-2 closure mechanisms (single-particle PK,
+mean-field Hartree, magnetization extensions) for Class-3 walls --- they
+project onto the zero-entropy density-matrix submanifold and saturate
+below the wall, as F4-F6 + Schmidt + core correlation empirically
+demonstrated.
+
+\paragraph{Source documentation (structural classification + diagnostic).}
+W1e structural reading + closure-prospect classification:
+\texttt{debug/sprint\_chemistry\_position\_w1e\_structural\_memo.md}.
+Modular $\rightarrow$ chemistry clean-negative + three-class partition:
+\texttt{debug/sprint\_chemistry\_modular\_connection\_memo.md}.
+Memory: \texttt{memory/external\_input\_three\_class\_partition.md}.
+
 %% ========================================================================
 \section{Discussion}
 \label{sec:discussion}
