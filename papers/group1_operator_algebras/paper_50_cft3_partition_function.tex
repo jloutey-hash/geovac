@@ -826,17 +826,43 @@ independent species: scalar plus $(d - 1)/2 - 1$ higher-spin CFTs.
 not hold in this simple form at $S^{7}$.} The framework's value
 $\zeta'_{S^{7}, \text{conf}}(0) \approx -0.00159466$ (computed to 30+
 digits via the same Hurwitz machinery) does \emph{not} admit a PSLQ
-integer relation in the 4-dimensional ring $\{\log 2, \zeta(3)/\pi^{2},
-\zeta(5)/\pi^{4}, \zeta(7)/\pi^{6}\}$ at tolerance $10^{-30}$ to
-$10^{-80}$ with $\mathrm{maxcoeff}$ up to $10^{16}$. Three structurally
-distinct alternative bases ($\log 2$ basis plus $\{\log\pi\}, \{\log 3\},
-\{\zeta(9)/\pi^{8}\}$, or $\{\log 2, \zeta(3), \zeta(5), \zeta(7), \pi^{2},
-\pi^{4}, \pi^{6}\}$ with constants released) all return no relation. The
-structural pattern observed at $S^{3}$ and $S^{5}$ either requires an
-enlarged basis at $S^{7}$ (Dirichlet $L$-values, Catalan-class constants,
-or product transcendentals such as $\log 2 \cdot \zeta(3)/\pi^{2}$) or
-fails outright. The Hurwitz expansion is sound; the issue is structural,
-not computational.
+integer relation in any of the natural candidate bases tested.
+Specifically, no integer relation is found at tolerance $10^{-30}$ to
+$10^{-80}$ with $\mathrm{maxcoeff}$ up to $10^{16}$ for the following
+fifteen-plus bases:
+
+\begin{itemize}
+\item Simple M3-extended ring: $\{\log 2, \zeta(3)/\pi^{2}, \zeta(5)/\pi^{4},
+\zeta(7)/\pi^{6}\}$ ($\pm$ constants $\{1\}$, $\{\log \pi\}$, $\{\log 3\}$,
+$\{\zeta(9)/\pi^{8}\}$);
+\item Unscaled separation: $\{\log 2, \zeta(3), \zeta(5), \zeta(7),
+\pi^{2}, \pi^{4}, \pi^{6}\}$;
+\item Log-of-primes extension: $\{\log 2, \log 3, \log 5, \log 7,
+\zeta(3)/\pi^{2}, \zeta(5)/\pi^{4}, \zeta(7)/\pi^{6}\}$ (testing the
+S$^{5}$-minimal-scalar log $3$-log $5$ pollution pattern documented
+in this session's v3.2.3 finding);
+\item Dirichlet $L$-class additions: $\{\log 2, \log 3, G, \zeta(3)/\pi^{2},
+\zeta(5)/\pi^{4}, \zeta(7)/\pi^{6}\}$ (Catalan's $G$);
+\item Polygamma at half-integer: $\{\log 2, \zeta(3)/\pi^{2}, \zeta(5)/\pi^{4},
+\zeta(7)/\pi^{6}, \psi(1/2), \psi'(1/2)\}$;
+\item Weight-8 MZV products: $\{\log 2, \zeta(3)/\pi^{2}, \zeta(5)/\pi^{4},
+\zeta(7)/\pi^{6}, \zeta(3)^{2}/\pi^{6}, \zeta(3)\,\zeta(5)/\pi^{6}\}$ and variants;
+\item Composite logarithmic combinations: $\{\log 2, \log(15/4),
+\zeta(3)/\pi^{2}, \zeta(5)/\pi^{4}, \zeta(7)/\pi^{6}, \zeta(9)/\pi^{8}\}$.
+\end{itemize}
+
+\textbf{Computation cross-check.} The same Hurwitz machinery reproduces
+the $S^{3}$ and $S^{5}$ bit-exact values to 30+ digits with zero
+residual (Hurwitz machinery is correct across the dimensional family).
+The $S^{7}$ non-match is therefore \emph{structural, not computational}.
+The framework's spectral data on $S^{7}$ converges to a real algebraic
+or transcendental number that does not lie in any of the simple
+M-engine-extended rings tested. Open question whether the value is
+expressible in a richer ring (e.g., weight-9 multiple zeta values, or
+specific polynomial combinations of $\log p$ for $p$ prime up to $7$),
+or whether the structural identification fails outright. Resolving this
+is the natural next step in extending the master Mellin engine
+classification beyond $d \le 5$.
 
 Completing the dual basis on $S^{5}$ via a third free CFT species (the
 original motivation for the conjecture's extension) remains the
