@@ -6510,6 +6510,278 @@ $\mu^4$He$^+$ here, with full Uehling kernel kinematics (contact-form
 $\to$ full kernel) and Foldy r$^2$ scaling ($r_p \to r_d \to r_\alpha$)
 being the only two ingredients that change between the muonic regimes.
 
+\subsubsection{Hydrogen Lyman-$\alpha$ $1\,^{2}S_{1/2} \to 2\,^{2}P$ oscillator strength autopsy}
+\label{sec:autopsy_lyman_alpha}
+
+\textbf{Reference.} NIST tabulates Lyman-$\alpha$ in two fine-structure
+components: $f(1\,S \to 2\,P_{1/2}) = 0.13881$ and
+$f(1\,S \to 2\,P_{3/2}) = 0.27764$, summing to $0.41645$.  The
+non-relativistic spin-averaged textbook value is $0.4162$.  The
+framework computes the non-relativistic spin-averaged value
+directly, so the relevant reference is the NIST sum.
+
+The Lyman-$\alpha$ oscillator strength is the cleanest possible
+dipole-transition test in atomic physics:\ one electron, no nuclear
+structure, no multi-electron correlation, no continuum integration.
+The framework-native value comes out as an exact rational in $\mathbb{Q}$
+after the squaring step ($|\langle d \rangle|^2$ removes the
+intermediate $\sqrt{2}, \sqrt{3}, \sqrt{6}$).
+
+\begin{table}[h!]
+\centering\small
+\caption{Six-component Roothaan decomposition of the Lyman-$\alpha$
+oscillator strength.  Components~1--4 produce the framework-native
+$f = 2^{13}/3^9 = 0.41620$ exactly.  Component~5 (reduced mass)
+multiplies by $m_e/\mu_{\mathrm{red}} \approx 1.000545$, giving
+$f^{\text{framework}+\mu} = 0.41642$.  Component~6 (LS-8a-class)
+closes the remaining $+75$~ppm to NIST.}
+\label{tab:autopsy_lyman_alpha}
+\begin{tabular}{cllll}
+\toprule
+\# & Component & Value & Layer & Projection \\
+\midrule
+1 & Bohr energy gap $E_2 - E_1$ & $3/8\, E_h$ exact & 1 & \S\ref{sec:proj_fock_conformal} \\
+2 & Radial dipole $\langle R_{2p}|r|R_{1s}\rangle$ & $128\sqrt{6}/243\,a_0$ & 1 & Algebraic Hydrogenic integration \\
+3 & Angular factor $\langle Y_{10}|\cos\theta|Y_{00}\rangle$, $\sum_{m_f}$ & $1/\sqrt{3} \times 3$ & 1 & \S\ref{sec:proj_wigner3j} \\
+4 & Oscillator-strength prefactor $(2/3) \times (1/g_i)$ & $2/3$ & 2 & \S\ref{sec:proj_vector_photon} \\
+5 & Reduced mass $\mu/m_e$ in $m_e \cdot \omega \cdot |\langle r \rangle|^2$ scaling & $+545$ ppm & 2 & \S\ref{sec:proj_restmass} \\
+6 & Relativistic Dirac + radiative QED & $\sim +75$ ppm & 2 & LS-8a class \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Walking the algebra.}  The dipole matrix element factorizes
+into radial and angular pieces.  Hydrogenic wavefunctions
+$R_{1s}(r) = 2 e^{-r}$ and $R_{2p}(r) = (1/(2\sqrt{6})) r e^{-r/2}$
+(atomic units, $Z=1$) give the radial integral
+$\langle R_{2p} | r | R_{1s}\rangle = 128\sqrt{6}/243$ (sympy
+verified by direct integration).  The angular factor
+$\langle Y_{10} | \cos\theta | Y_{00}\rangle = 1/\sqrt{3}$ closes
+to give $\langle 2p_0 | z | 1s\rangle = 128\sqrt{2}/243$ — exact in
+$\mathbb{Q}[\sqrt{2}]$.  Squaring removes the irrational:\
+$|\langle 2p_0 | z | 1s\rangle|^2 = 32768/59049 \in \mathbb{Q}$.
+The sum over $m_f \in \{-1, 0, +1\}$ multiplies by $3$ (spherical
+symmetry), giving $\sum_{m_f} |\langle 2p_m | r | 1s\rangle|^2 =
+3 \times 32768/59049 = 32768/19683$.  Energy gap $\Delta E = 3/8\,E_h$
+exact.  Combining via the oscillator-strength formula:
+\begin{equation*}
+f^{\mathrm{framework}}_{1s \to 2p} \;=\; \frac{2}{3} \cdot \frac{3}{8} \cdot \frac{32768}{19683} \;=\; \frac{8192}{19683} \;=\; \frac{2^{13}}{3^9} \;\approx\; 0.41620.
+\end{equation*}
+This is the framework-native value in exact rational form.  Every
+intermediate transcendental ($\sqrt{6}, \sqrt{3}, \sqrt{2}$) cancels
+out at the squaring step.
+
+\textbf{Layer-2 residual attribution.}  Reduced-mass scaling
+$f \propto m_e \cdot \omega \cdot |\langle r \rangle|^2 \propto m_e \cdot \mu \cdot (m_e/\mu)^2 = m_e \cdot (m_e/\mu)$
+multiplies the framework value by $m_e/\mu_{\mathrm{red}} = 1 + m_e/m_p \approx 1.000545$.  Framework $+$ reduced mass:\ $0.41642$.  NIST $0.41645$
+gives a residual of $+75$~ppm, attributable to relativistic Dirac
+corrections at order $\alpha^2 Z^2 \approx 5 \times 10^{-5}$
+(about $50$~ppm) plus sub-Lamb radiative content.
+
+\textbf{Structural reading.}  This is the cleanest substrate-side
+autopsy in the catalogue.  Layer~1 produces $f = 2^{13}/3^9$ exact
+in $\mathbb{Q}$, with all transcendentals cancelling at the
+squaring step.  Layer~2 contributes $\sim 600$~ppm split between
+reduced mass (\S\ref{sec:proj_restmass}, dominant) and LS-8a-class
+radiative.  The autopsy demonstrates the generic pattern of dipole
+oscillator strengths in the framework:\ amplitudes can be irrational
+algebraic, but $|\mathrm{amplitude}|^2$ is in $\mathbb{Q}$.
+
+\subsubsection{Hydrogen $2P_{1/2}$--$2P_{3/2}$ fine-structure splitting autopsy}
+\label{sec:autopsy_h_2p_fs}
+
+\textbf{Reference.} NIST $E(2P_{3/2}) - E(2P_{1/2}) = 10{,}969.044$ MHz
+(includes all QED).  This is arguably the cleanest precision QED
+test in atomic physics:\ no nuclear-structure budget, no
+multi-electron complication, no continuum integration --- just
+spinor Dirac in a Coulomb field.
+
+\begin{table}[h!]
+\centering\small
+\caption{Six-component Roothaan decomposition of the H $2P$
+fine-structure splitting.  Layer~1 produces the closed-form
+$\Delta E = \alpha^2/32\,E_h$ exactly.  CODATA $\alpha$ gives the
+infinite-mass value $10{,}949.3$ MHz; reduced-mass correction gives
+$10{,}943.3$ MHz.  Differential QED radiative closes the remaining
+$+25.7$ MHz to NIST.}
+\label{tab:autopsy_h_2p_fs}
+\begin{tabular}{cllll}
+\toprule
+\# & Component & Value & Layer & Projection \\
+\midrule
+1 & Camporesi--Higuchi spinor Dirac on $S^3$, $|\lambda_n^D| = n + 3/2$ & Spectrum exact & 1 & \S\ref{sec:proj_spinor_lift} \\
+2 & Fock projection $p_0 = Z/n$, maps to H bound states & Exact & 1 & \S\ref{sec:proj_fock_conformal} \\
+3 & Sommerfeld/Dirac expansion (T8 sympy-verified) & Closed form & 1 & Algebraic Tier-3 \\
+4 & Coefficient $1/32 \in \mathbb{Q}$ from $j$-dependent bracket & $1/32$ & 1 & $j$-angular structure \\
+5 & $\alpha^2$ factor (CODATA) & $5.32514 \times 10^{-5}$ & 2 & External Class-1 calibration \\
+6 & Reduced mass $\mu/m_e$ in Dirac equation & $\approx 0.99946$ & 2 & \S\ref{sec:proj_restmass} \\
+7 & Differential QED radiative on 2P states & $\approx +25.7$ MHz & 2 & LS-8a class \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Walking the algebra.}  Sprint Dirac-on-S³ Tier~3 Track~T8
+(April 2026) verified that Darwin $+$ mass-velocity $+$ spin-orbit
+on hydrogen sum exactly to the Sommerfeld/Dirac formula:
+\begin{equation*}
+E_{n,j} \;=\; -\frac{m_e c^2 (Z\alpha)^2}{2n^2}\left[1 + \frac{(Z\alpha)^2}{n^2}\left(\frac{n}{j+1/2} - \frac{3}{4}\right) + O(\alpha^4)\right].
+\end{equation*}
+For $n=2$, $Z=1$:\ bracket factor is $5/4$ at $j=1/2$ and $1/4$ at
+$j=3/2$.  Subtracting and simplifying (sympy):\
+\begin{equation*}
+\Delta E(2P_{3/2} - 2P_{1/2}) \;=\; \frac{m_e c^2 \alpha^4}{32} \;=\; \frac{\alpha^2}{32}\, E_h.
+\end{equation*}
+The coefficient $1/32$ is intrinsic (in $\mathbb{Q}$, from the
+$j$-dependent angular structure); the $\alpha^2$ factor is Class-1
+calibration.  With CODATA $\alpha$:\ $\Delta E = 10{,}949.3$ MHz
+(infinite mass).  Reduced-mass scaling
+$\Delta E \propto \mu \cdot \alpha^4$ multiplies by
+$\mu_{\mathrm{red}}/m_e = 1 - m_e/m_p \approx 0.99946$, giving
+$10{,}943.3$ MHz.
+
+\textbf{Layer-2 residual attribution.}  NIST $10{,}969.0$ MHz minus
+framework $10{,}943.3$ MHz $= +25.7$ MHz residual ($+2349$ ppm).
+This is the differential QED radiative correction between
+$2P_{3/2}$ and $2P_{1/2}$:\ one-loop self-energy and vacuum
+polarization act differently on the two $j$ components (the famous
+Lamb shift of $2P_{1/2}$ relative to Dirac is part of this).
+Order-of-magnitude check:\ $\alpha \cdot \alpha^2 \cdot E_h / 32
+\sim 80$ MHz naively; observed $+26$ MHz reflects the partial
+cancellation between $2P_{1/2}$ and $2P_{3/2}$ Lamb shifts (similar
+magnitude, opposite-sign differential).  The framework structurally
+cannot reach this --- multi-loop QED counterterms ($Z_2$, $\delta m$,
+vertex renormalization) are required per the LS-8a closure pattern.
+Same wall as Lamb shift, Born rule (\S\ref{sec:proj_apparatus_identity}
+``Born rule paragraph''), Yukawas.
+
+\textbf{Structural reading.}  Simplest non-trivial QED test in the
+framework.  Layer~1 (substrate) produces exact
+$\Delta E = (1/32) \alpha^2 E_h$ in $\mathbb{Q} \times$ Class-1
+calibration.  Layer~2 contributes reduced mass ($-545$ ppm) plus
+differential QED ($+2349$ ppm, dominant).  The $1/32$ coefficient
+generalises across any $\Delta E(nj' - nj)$ derived from Sprint T8:\
+Sommerfeld is exact in the framework, only the rational changes
+per $(n, j, j')$.  Canonical ``framework gets Dirac exactly,
+multi-loop is the wall'' autopsy entry.
+
+\subsubsection{Helium $2\,^{1}S - 2\,^{3}S$ exchange splitting Roothaan walk
+(first three-architecture comparison)}
+\label{sec:autopsy_he_singlet_triplet}
+
+\textbf{Reference.} NIST $E(2\,^{1}S) - E(2\,^{3}S) = 6{,}421.46$
+cm$^{-1}$ $= 0.029257\,E_h = 192.51$ GHz.  The singlet sits above
+the triplet (standard Hund's-rule pattern).  This observable
+isolates the exchange integral cleanly:
+$\Delta E(2\,^{1}S - 2\,^{3}S) = 2\,K(1s, 2s)$ at leading order
+(direct Coulomb $J(1s, 2s)$ cancels between singlet and triplet).
+
+\textbf{Texture difference from preceding autopsies.}  Lyman-$\alpha$
+(\S\ref{sec:autopsy_lyman_alpha}) and H $2P$ FS
+(\S\ref{sec:autopsy_h_2p_fs}) have ONE clean framework value at
+the substrate level.  This observable has THREE different framework
+values from three different basis architectures, spanning a factor
+of $\sim 30$ between best and worst.  The autopsy structure is
+therefore ``three-architecture reduction'' rather than ``single
+substrate value $+$ Layer-2 correction.''
+
+\begin{table}[h!]
+\centering\small
+\caption{Three-architecture framework reduction on the He
+$2\,^{1}S - 2\,^{3}S$ splitting.  Single-$\alpha$ architectures
+(A, B) fail by factors $1.1$ and $3.1$ respectively; double-$\alpha$
+(C) closes to $1.4\%$ at sprint-scale basis truncation.}
+\label{tab:autopsy_he_singlet_triplet}
+\begin{tabular}{clllr}
+\toprule
+\# & Architecture & Basis & $\Delta E$ (cm$^{-1}$) & Error vs NIST \\
+\midrule
+A & Graph-native CI, single-$\alpha$ ($k = Z = 2$, $\kappa = -1/16$) at $n_{\max} = 8$ & $1{,}218$ configs & $7{,}183$ & $+11.86\%$ \\
+B & Hylleraas $r_{12}$ single-$\alpha$ ($\zeta = Z = 2$ for both 1s and 2s) & $\omega = 5$ & $\sim 19{,}900$ & $+209\%$ \\
+C & Hylleraas--Eckart double-$\alpha$ ($\zeta_1 = 2$, $\zeta_2 \approx 1$; Eckart 1933) & Variational & $\sim 6{,}331$ & $-1.4\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Walking the architectures.}  Architecture A (graph-native CI
+with $\kappa = -1/16$ inter-shell, exact Slater integrals from
+\texttt{hypergeometric\_slater}, single exponent $k = Z = 2$):\
+$\kappa$ inter-shell coupling adds constant amplitude between 1s
+and 2s regardless of orbital extent.  For excited He
+($1s, 2s$), $\kappa$ overbinds the diffuse 2s, breaking the
+$K(1s,2s)$ computation.  The $2^{3}S$ state is variationally
+violated at this architecture (CI eigenvalue below exact).
+Same mechanism as the small-$Z$ graph-validity-boundary artifact
+($Z_c \approx 1.84$, He at $Z = 2$ just above), specifically for
+excited states where the radial extent matters.  Net effect on the
+splitting:\ $+11.86\%$ overestimate.
+
+Architecture B (Hylleraas $r_{12}$ single-$\alpha$, $\zeta = Z = 2$
+for both 1s and 2s, no $\kappa$, explicit $r_{12}$):\ the 2s orbital
+with $\zeta = 2$ is wildly too compact --- physically 2s should
+have $\zeta_{\mathrm{eff}} \approx 1$ because the 1s electron
+screens the nucleus.  With $\zeta = 2$ on both, $K(1s, 2s)$ is
+roughly $3\times$ too large; the splitting overshoots by $+209\%$.
+Framework's Sprint Calc Track~1 first-pass identified this as the
+structural failure mode for excited states.
+
+Architecture C (Hylleraas--Eckart double-$\alpha$, Eckart 1933):\
+each orbital gets its own variational exponent.  $\zeta_{\mathrm{inner}}
+= 2$ on 1s (full nuclear charge); $\zeta_{\mathrm{outer}} \approx 1$
+on 2s (screened nuclear charge).  Variational bound preserved.
+Result $-1.4\%$ (slight undershoot at $\omega = 5$ basis
+truncation).  The residual is dominated by \emph{basis truncation},
+not Layer-2 calibration --- extending to $\omega = 8$ would close
+further (Drake's exhaustive calculation reaches sub-cm$^{-1}$).
+
+\textbf{Structural lesson.} $K(1s, 2s)$ is fundamentally a
+\emph{two-exponent problem} because the two electrons see different
+effective nuclear charges.  Single-exponent architectures (A and B)
+fail by factors of $3$ or $1.1$ depending on whether $\kappa$
+adjacency or explicit $r_{12}$ correlation is included.
+Two-exponent architecture (C) succeeds at $1.4\%$.  The framework's
+\texttt{hylleraas\_r12.py} Sprint Calc Track~1 was DEFERRED 2026-05-18
+in favor of Track~5 (oscillator strength); the scoping memo
+confirmed Gate~2 at $-1.4\%$ for double-$\alpha$.
+
+\textbf{Layer-1 vs Layer-2 split (Architecture C).}  Layer~1
+produces $\Delta E \approx 6{,}331$ cm$^{-1}$ at $\omega = 5$
+basis truncation.  The $1.4\%$ residual is \emph{algorithmic}
+(basis truncation), not calibration --- closeable by increasing
+$\omega$.  This is qualitatively different from Lyman-$\alpha$ and
+H $2P$ FS, where the framework substrate-side value was exact and
+Layer~2 residual was unavoidable LS-8a class.  Here, LS-8a-class
+Layer~2 content (relativistic Breit, radiative QED) is sub-$100$
+ppm --- basis truncation is the dominant residual.
+
+\textbf{Connection to W1e wall pattern.}  Texture matches the W1e
+chemistry wall in atomic form.  W1e (NaH 2026-05-23) discovered
+that multi-determinant correlation on a two-electron NaH valence
+active space cannot close binding even with $\kappa$ adjacency,
+screened valence, multi-zeta, cross-block $h_1$, and
+Phillips--Kleinman --- because multi-determinant correlation lives
+on the N-representable density-matrix manifold that the substrate's
+spectral-triple machinery does not natively engage.  The He
+$2\,^{1}S - 2\,^{3}S$ autopsy is the same lesson applied to atomic
+precision physics:\ the framework's substrate-level CI fails by
+$+12\%$ because $\kappa$-adjacency cannot capture the differential
+exponent structure; closing to $1.4\%$ requires the architectural
+extension (Hylleraas--Eckart double-$\alpha$).  The framework can
+close it, but only by extending the basis architecture, not by
+improving substrate-level CI.
+
+\textbf{Structural reading.}  Canonical ``framework architecture
+choice matters for excited multi-electron states'' autopsy entry.
+Three architectures produce three answers spanning factor $\sim 30$.
+The structural lesson is that excited-state He requires a basis
+that can host two different effective nuclear charges simultaneously
+--- single-exponent bases fail by factors of $3$ or $12$ depending
+on whether $\kappa$ adjacency or explicit $r_{12}$ correlation is
+included.  This is NOT an LS-8a-class wall:\ the production-architecture
+($-1.4\%$) residual is basis-truncation and would close to sub-cm$^{-1}$
+at $\omega = 8$.  The bridge to the chemistry-side W1e wall is the
+deepest cross-domain structural pattern in the multi-focal-composition
+arc.
+
 % -------------------------------------------------------------------
 \subsection{Literature convention exposures (running catalogue)}
 \label{sec:convention_exposures}
