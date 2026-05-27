@@ -2666,6 +2666,50 @@ dictionary is therefore named here as deliberately incomplete but
 \emph{not} blocked: extension is structurally available and is the
 natural next direction for the dictionary's axis-completeness.
 
+\paragraph{Born rule paragraph (added 2026-05-26 after sprint
+\texttt{ahha\_born\_rule\_attempt}).} The apparatus identity
+construction produces Born-rule probabilities directly via the
+standard GNS construction:\ for a Layer~1 pure state $\psi \in
+\mathcal{H}_{\mathrm{GV}}$ and apparatus subalgebra $\mathcal{A}_W$
+with apparatus observable $\hat{A} = \sum_a a \, P_a$, the
+state-side reduction $\omega_\psi$ assigns probability
+$\omega_\psi(P_a) = \langle\psi|P_a|\psi\rangle = \|P_a \psi\|^2 =
+|\langle a|\psi\rangle|^2$ to outcome $a$ when $P_a = |a\rangle\langle
+a|$.  The squared-modulus structure is inherited from the complex
+inner product on $\mathcal{H}_{\mathrm{GV}}$, which is itself
+inherited from the standard Peter--Weyl construction on
+$L^2(S^3, \Sigma)$ (Paper~32~\S~III, where $\mathcal{H}_{\mathrm{GV}}$
+is taken as input data of the spectral triple).  No GeoVac-specific
+operation reduces the Born rule to more primitive structures:\ in
+this framework, as in standard algebraic quantum mechanics, the Born
+rule follows from the Hilbert-space + GNS combination via Gleason's
+theorem (1957) and the standard projection-measure formalism.  The
+attempt of 2026-05-26 to derive a non-Gleason / non-standard Born
+expression from §III.28 plus Pythagorean orthogonality
+(Paper~43~\S~10.2) plus the master Mellin engine
+(Paper~32~\S~VIII) returned the same Born expression by all three
+routes, indicating that the framework is structurally consistent
+with Gleason but does not reach further than Gleason at the
+substrate level.  The honest framework-internal classification of
+the Born rule is therefore that it sits at the
+\emph{calibration-data tier} in the sense of Paper~18~\S~IV.6
+(inner-factor input data) and CLAUDE.md~\S~1.7 WH5 (calibration as
+external input):\ alongside the Yukawa couplings, the fine-structure
+constant $\alpha$, the gauge-group lower-bound calibration, and the
+multi-loop QED counterterms (LS-8a renormalization gap), the
+probability-weighting structure of measurement is external to the
+substrate, not derivable from the packing axiom + Fock projection +
+spectral-triple data.  The Pythagorean orthogonality theorem of
+Paper~43~\S~10.2 contributes a decoherence-flavored constraint on
+\emph{which observables} the apparatus's preferred basis selects (the
+centralizer of $H_{\mathrm{local}}$ in $\mathcal{A}_W$) but does not
+modify the Born probability assignment.  This is a closed structural
+position, not an open question; the framework is in the Wigner /
+calibration-tier camp on Born rule rather than the Deutsch--Wallace /
+Zurek / Bub--Pitowsky derivation camps.  See \S~\ref{sec:open}
+``Born rule as calibration data'' for the corresponding §VIII
+closure note.
+
 A final structural reading: the apparatus identity / state-side
 reduction is the projection that names ``how an observer extracts a
 number from the system,'' as a structural complement to the
@@ -8970,6 +9014,56 @@ unchanged, since the same operator-level falsifier
 a wedge-restricted state) tests all four Wick-rotation faces
 simultaneously --- the bridge runs through the same
 KMS-Tomita-Takesaki algebra in every case.
+
+\item \textbf{Born rule as calibration data --- CLOSED structural
+position (added 2026-05-26).}  The question ``does GeoVac derive
+the Born rule from substrate primitives?'' was attacked in sprint
+\texttt{ahha\_born\_rule\_attempt} (2026-05-26, generative pass +
+audit + literature check + explicit construction) and \emph{closed
+in the negative as a structural position}, not left as an open
+question.  The §III.28 apparatus identity / state-side reduction
+projection produces Born-rule probabilities via the standard GNS
+construction; the squared-modulus structure is inherited from the
+complex inner product on $\mathcal{H}_{\mathrm{GV}}$ (taken as input
+in the spectral-triple framework of Paper~32~\S~III), and the Born
+rule follows from Hilbert-space + GNS via Gleason's theorem (1957).
+No GeoVac-specific operation reduces Born rule to more primitive
+structures.  Three attempted derivation routes (§III.28 + GNS;
+Pythagorean orthogonality + apparatus preferred basis; master Mellin
+engine $M_1$ modular trace) all return the same Born expression by
+the same standard argument, with the Pythagorean route adding
+decoherence-flavored content (preferred basis = centralizer of
+$H_{\mathrm{local}}$ in $\mathcal{A}_W$) but not modifying the Born
+weighting.  The framework's structural position is therefore:\ the
+Born rule sits at the calibration-data tier (Paper~18~\S~IV.6
+inner-factor input data; CLAUDE.md~\S~1.7 WH5; the
+external-input three-class partition documented in memory file
+\texttt{external\_input\_three\_class\_partition.md}), alongside the
+Yukawa couplings, $\alpha$, the gauge-group lower-bound calibration,
+and the multi-loop QED counterterms.  Probabilistic weighting of
+measurement is external input to the structural skeleton, not
+derivable from the packing axiom + Fock projection + spectral-triple
+data.  This places GeoVac in the Wigner / calibration-tier camp on
+the Born rule rather than the Deutsch--Wallace / Zurek /
+Bub--Pitowsky derivation camps; in particular, GeoVac uses Gleason
+1957 via standard Hilbert inheritance, does not improve on Gleason,
+and does not claim to.  What the framework \emph{does} contribute to
+the measurement-problem literature is the operator-algebraic
+realization with Pythagorean orthogonality
+$\langle H_{\mathrm{local}}, D_W^L\rangle_{\mathrm{HS}} = 0$
+(Paper~43~\S~10.2, formal theorem with $1/\pi^2$ master Mellin
+engine $M_1$ signature):\ a concrete realization of relational-QM-style
+measurement structure where the modular (observer-defined) generator
+and the spectral-action (substrate) generator decouple at the
+Hilbert--Schmidt inner-product level.  This is novel as a theorem;
+it is not novel as a Born rule derivation.  The honest contribution
+of the framework on this question is therefore a positional
+clarification:\ Born rule is calibration data in the same sense that
+Yukawas are calibration data, structurally consistent with the
+framework's broader scope statement.  The corresponding §III.28
+catalogue paragraph documents this in the dictionary;\ this open-
+questions entry records the closure.  No further derivation work on
+Born rule is planned at the substrate level.
 
 \end{enumerate}
 
