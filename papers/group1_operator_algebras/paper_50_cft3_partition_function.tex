@@ -1054,6 +1054,82 @@ spectral cutoff with a specific TT-bar-deformation strength; a negative
 answer would crystallize that the two cutoffs are structurally
 incompatible at the partition-function level.
 
+\paragraph{Structural distinction from holographic correspondences (dS/CFT and AdS/CFT).}
+\label{para:category_iii_position}
+The bit-exact reproduction of CFT$_{3}$-on-$\sthree$ partition function
+data (Sec.~\ref{sec:partition}) places the framework in structural
+adjacency with both AdS/CFT and dS/CFT, but in neither category.
+Specifically, the framework's $\sthree$ substrate occupies the same
+geometric position that Euclidean dS/CFT~\cite{maldacena2002} assigns to
+its boundary CFT$_{3}$: in Maldacena's Euclidean sharpening of
+Strominger's dS/CFT proposal~\cite{strominger2001}, the Hartle--Hawking
+wavefunctional of dS$_{4}$ at $I^{+}$ equals the CFT$_{3}$-on-$\sthree$
+partition function $\Psi_{\mathrm{dS}_{4}}[\phi_{0}] = Z_{\mathrm{CFT}_{3}}[\phi_{0}]$.
+The KPS values reproduced bit-exactly here
+(Theorems~\ref{thm:scalar_bitexact},~\ref{thm:dirac_bitexact}) are
+precisely the boundary CFT data that dS/CFT would predict via this
+identification.
+
+However, the framework does \emph{not} contain a bulk dS$_{4}$ (or its
+Euclidean partner $S^{4}$). The $\sthree$ is the Fock-projection image
+of the Coulomb spectrum (Paper~7~\cite{paper7}), not a future-infinity
+boundary of any 4D bulk; there is no Hartle--Hawking wavefunctional
+construction (no functional integral over 4D geometries); and there is
+no holographic dictionary mapping bulk fields to boundary operators.
+The CFT$_{3}$ partition function values emerge directly from spectral
+asymptotics of the discrete spectral triple, not from holographic
+reconstruction. This places the framework in a third structural
+category, distinct from the holographic correspondences:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Theory & Bulk & Correspondence mechanism \\
+\midrule
+AdS$_{5}$/CFT$_{4}$ & AdS$_{5}$ IIB SUGRA & Holographic dictionary \\
+AdS$_{4}$/CFT$_{3}$ (ABJM) & AdS$_{4}$ M-theory & Holographic dictionary \\
+dS$_{4}$/CFT$_{3}$ & dS$_{4}$ & Hartle--Hawking wavefunctional \\
+Chern--Simons / WZW & 3D topological & State-sum / topological \\
+Connes--vS (2021) $S^{1}$ & Discrete spectral triple & Propinquity convergence \\
+\textbf{GeoVac} (this paper) & \textbf{Discrete spectral triple on $\sthree$} & \textbf{Latr\'emoli\`ere propinquity convergence at rate $4/\pi$} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The framework's analog of the holographic correspondence is the
+Paper~38~\cite{paper38} propinquity convergence theorem
+$\Lambda(\Tcal_{\nmax}, \Tcal_{\infty}) \le C_{3} \gamma_{\nmax} \to 0$.
+This is a correspondence between two operator-algebraic objects (the
+discrete spectral triple at finite cutoff and the continuum spectral
+triple on round $\sthree$), not between two physical geometries
+(bulk gravity and boundary CFT). The third category is structurally
+characterized by:
+\begin{itemize}
+\item the ``bulk'' replaced by a discrete spectral-triple substrate
+(operator-system level, finite cutoff);
+\item the ``correspondence'' replaced by propinquity convergence in
+the continuum limit (Paper~38's five-lemma proof);
+\item boundary CFT data emerging from spectral asymptotics
+(zeta-function derivatives at zero), not from holographic reconstruction.
+\end{itemize}
+
+In one sentence: \emph{the framework is the discrete spectral-triple
+realization of the boundary CFT$_{3}$-on-$\sthree$ partition function
+data and modular structure, distinguished from AdS/CFT and dS/CFT by
+absence of any bulk gravitational theory and presence of a
+propinquity-convergence ``correspondence'' between operator-algebraic
+discretization levels}. This is not a new holographic correspondence
+(no bulk = no holography), nor a refutation of dS/CFT (the boundary
+data is consistent with what dS/CFT would predict); it is a structurally
+distinct realization that produces the same boundary CFT data via a
+different mechanism. The bulk-side identifications named in
+Prop.~\ref{prop:bulk_blocked} for AdS$_{4}$ remain unreachable from the
+framework's existing infrastructure for the same reasons (no bulk
+geometric machinery in \texttt{geovac/}). The framework's contribution
+is to provide a non-holographic operationalization of the
+boundary-CFT-on-$\sthree$ data, structurally distinct from both AdS/CFT
+and dS/CFT.
+
 \paragraph{Areas yet to be explored.}
 Beyond the immediate catalogue targets, several adjacent directions
 extend the framework's reach into established physics:
@@ -1284,6 +1360,14 @@ JHEP \textbf{06} (2015) 149, arXiv:1503.06237.
 \bibitem{debug:external_input_three_class_partition} GeoVac internal,
 \emph{External-input three-class partition},
 \texttt{memory/external\_input\_three\_class\_partition.md}, 2026-05-25.
+
+\bibitem{strominger2001} A.~Strominger,
+\emph{The dS/CFT correspondence},
+JHEP \textbf{10} (2001) 034, arXiv:hep-th/0106113.
+
+\bibitem{maldacena2002} J.~Maldacena,
+\emph{Non-Gaussian features of primordial fluctuations in single field inflationary models},
+JHEP \textbf{05} (2003) 013, arXiv:astro-ph/0210603.
 
 \end{thebibliography}
 

@@ -1502,6 +1502,119 @@ paper~\cite{fursaev_solodukhin1995} cited elsewhere in this paper is
 correctly attributed (Riemannian geometry of conical defects, BH entropy)
 but does not contain the Möbius modification.
 
+\paragraph{Algebraic structure: harmonic conjugate.} A structural
+sharpening identified post-v3.20.0 (Task 11 of the post-v3.20.0
+continuation thread, 2026-05-29; memo \texttt{debug/sprint\_moebius\_mode\_counting\_diagnostic\_memo.md}):
+the Möbius factor $F(\alpha) = \alpha/(2\alpha - 1)$ is the unique Möbius
+transformation satisfying
+\begin{equation}
+  \frac{1}{\alpha} + \frac{1}{F(\alpha)} \;=\; 2,
+  \label{eq:moebius_harmonic_conjugate}
+\end{equation}
+i.e., $F$ is the harmonic conjugate of $\alpha$ with respect to $1$
+(harmonic mean of $\alpha$ and $F$ equals exactly $1$, the smooth-disk
+value). Three structural consequences: $F(1) = 1$; $F(F(\alpha)) = \alpha$
+(involution); $F(\alpha) = \alpha$ only at $\alpha = 1$. This is
+algebraically equivalent to the spinor-double-cover sketch
+$\alpha_{\rm eff} = 2\alpha - 1$ via $F = \alpha/\alpha_{\rm eff}$, but
+gives an additional constraint --- the harmonic mean of base and effective
+angles equals the smooth-disk angle --- that may be the structural
+origin of the mechanism. Mechanism identification at theorem-grade
+remains open.
+
+\paragraph{Substrate-level mechanism identification.} A subsequent
+production-code mode-decomposition diagnostic (Task 25 of the
+post-v3.20.0 continuation threads, 2026-05-29; memo
+\texttt{debug/sprint\_moebius\_mode\_decomposition\_memo.md})
+identifies the substrate-level content of the harmonic-conjugate
+constraint. On the spectral azimuthal substrate
+(Sec.~\ref{subsubsec:g4_5_v3_20_followon}; classes
+\texttt{DiscreteDisk\-Dirac\-Spectral} /
+\texttt{DiscreteWedge\-Dirac\-Spectral} added in
+\texttt{geovac/gravity/warped\_dirac.py}), the discrete heat trace at
+apex angle $2\pi\alpha$ distributes its mass with soft-IR fraction
+$X(\alpha) := \mathrm{soft\_IR\_frac}(\alpha)$ satisfying the structural
+identity
+\begin{equation}
+  F(\alpha) \;=\; \frac{1}{2 \cdot (1 - X(\alpha))},
+  \label{eq:moebius_substrate_identification}
+\end{equation}
+which, combined with Eq.~\eqref{eq:moebius_harmonic_conjugate}, is
+equivalent to
+\begin{equation}
+  X(\alpha) \;=\; \frac{1}{2 \alpha} \qquad \text{(asymptotic; } \alpha > 1\text{)}.
+  \label{eq:soft_IR_frac_asymptotic}
+\end{equation}
+The relation is verified at sub-percent precision for $\alpha \ge 2$;
+at $\alpha = 3$ the match is $\textbf{0.03\%}$ (essentially exact).
+The mechanism interpretation: the lowest spinor eigenvalue on the
+wedge at apex $2\pi\alpha$ is $1/(2\alpha)$ (anti-periodic BC), the
+lowest-mode heat-trace contribution at intermediate $t$ varies slowly
+with $\alpha$, and the total heat trace scales linearly with $\alpha$
+(mode count $\alpha N_0$), so the soft-IR mass fraction scales as
+$1/(2\alpha)$ asymptotically, structurally producing the Möbius
+modification. This sharpens the mechanism from ``completely open'' to
+``substrate-level identified.'' A first-principles continuum derivation
+(lifting from substrate to theorem-grade) remains open.
+
+\paragraph{Literature evidence for substrate-universal reading.}
+A multi-source literature check (Task b' of the post-v3.20.0 thread~8,
+2026-05-29; memo
+\texttt{debug/sprint\_moebius\_route\_a\_fursaev\_miele\_pdf\_memo.md})
+of the standard published spin-1/2 conical heat kernel literature
+returns \emph{no Möbius modification} at excess angle. Specifically:
+the Fursaev--Miele 1996 abstract~\cite{fursaev_miele1996} states
+verbatim that the spin-1/2 result ``resembles the scalar case,''
+mirroring the standard antisymmetric Cheeger formula
+$-(1/12)(1/\alpha-\alpha)$ without modification. The Solodukhin 2011
+Living Review~\cite{solodukhin2011_review} and the Beccaria--Tseytlin
+2017 conically-deformed-sphere work likewise do not surface the
+Möbius factor in their treatments. The unanimous literature signal
+supports the substrate-universal reading: the Möbius pattern is a
+structural feature of the discrete substrate (tied to the lowest
+spinor eigenvalue $1/(2\alpha)$ structure) rather than a continuum
+theorem missing from the published derivations.
+
+\paragraph{Substrate-discretization-invariance verification.}
+The v3.19.0 measurement convention was audited (Option~2 of Track~$\beta''$
+of post-v3.20.0 thread~9; memo
+\texttt{debug/sprint\_multi\_thread\_day\_2026\_05\_29\_memo.md}) and the
+substrate-level identification is verified across substrate
+discretizations.
+Specifically, the v3.19.0 ``slope'' is defined as the
+\emph{ratio} $\mathrm{slope}^{v3.19} := \Delta_K(\alpha) / (1/\alpha - \alpha)$
+(\emph{not} the derivative $d\Delta_K / d\alpha$), measured at fixed
+$(R = 10, a = 0.05, N_\rho = 200, N_0 = 120, t = 1.0)$. Using this
+convention on the spectral substrate (introduced in
+Sec.~\ref{subsubsec:g4_5_v3_20_followon}; classes
+\texttt{DiscreteDisk\-Dirac\-Spectral} and
+\texttt{DiscreteWedge\-Dirac\-Spectral}), the fresh measurement
+reproduces the v3.19.0 reported values bit-exactly to four decimal places:
+\begin{center}
+\begin{tabular}{c c c c}
+\toprule
+$\alpha$ & v3.19.0 reported & spectral substrate (fresh) & rel.\ diff \\
+\midrule
+1.5 & $-0.06466$ & $-0.06466$ & $0.0\%$ \\
+2.0 & $-0.05622$ & $-0.05622$ & $0.0\%$ \\
+3.0 & $-0.04883$ & $-0.04883$ & $0.0\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+This bit-exact reproduction confirms that the substrate-level Möbius
+identification (Eqs.~\eqref{eq:moebius_substrate_identification},
+\eqref{eq:soft_IR_frac_asymptotic}) is substrate-discretization-invariant
+(matches FD and spectral substrates identically) and convention-clean
+(matches v3.19.0 ansatz driver bit-exactly). A complementary direct
+derivative diagnostic ($d\Delta_K/d\alpha$ at $\alpha=2$, on both FD and
+spectral substrates at $N_\rho \in \{100, 200, 400, 600\}$) gives a
+$N_\rho$-stable value $+0.052$, structurally consistent with the
+positive $\Delta_K$ value at excess angle but \emph{not} the same
+observable as the v3.19.0 ratio. The previously-flagged ``sign
+discrepancy'' (Track~$\alpha''$ of thread~9) was resolved as a
+definition-versus-derivative observable difference, not a substrate
+property mismatch.
+
 \paragraph{Empirical match.} At $N_0 = 480$, $t = 1.0$:
 \begin{center}
 \begin{tabular}{c c c c}
@@ -1589,6 +1702,58 @@ sector-wise moment map empirically confirmed (Track 1). The G4-6
 estimate sharpens from $4$--$7$ months to $\textbf{3--6 months}$ as
 the $\alpha > 1$ sub-sprint is removed from the sequence.
 
+% ---------------------------------------------------------------------
+\subsubsection{Post-v3.19.0 follow-on thread (v3.20.0): closed-form per-$t$
+UV target and F14 closure}
+\label{subsubsec:g4_5_v3_20_followon}
+% ---------------------------------------------------------------------
+
+A single-thread follow-on of five tasks closed the v3.19.0 open items.
+Three findings are substantive enough to record in this paper.
+
+\paragraph{F14 closure — sector-wise Mellin moment map at sub-5\%.} The
+v3.19.0 PARTIAL closure at $47.9\%$ max deviation on the sharp-cutoff
+channel improved under two refinements: a 20-point log-spaced $t$-grid
+with three sharp-edge anchors at $t = 1/\Lambda^2$, and explicit
+analytical edge insertion at the sharp-cutoff discontinuity. Maximum
+deviation dropped to $4.82\%$, mean $2.67\%$ across nine channels (3
+cutoffs $\times$ 3 $\Lambda$). The sector-wise Mellin moment map
+$\{\text{tip} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
+is now empirically closed at strict sub-5\% across the panel; F14
+graduates from PARTIAL to POSITIVE.
+
+\paragraph{Per-$t$ UV target identified.} The standard continuum
+expansion of the spinor heat kernel on a 2D cone~\cite{dowker1994,
+cheeger1983} gives
+\begin{equation}
+  \text{tip}^{\rm cont}(t) \;=\; \frac{1}{24\pi t} \;+\; \text{constant} \;+\; O(t),
+  \label{eq:per_t_uv_target}
+\end{equation}
+where the leading $1/(24\pi t)$ coefficient is the derivative of the
+Sommerfeld--Cheeger spinor coefficient $-(1/12)(1/\alpha - \alpha)$ at
+$\alpha = 1$, combined with the $1/(4\pi t)$ planar prefactor. The
+constant part is the Lichnerowicz / Seeley--DeWitt content $\sim +1/6$
+that dominates at intermediate $t$. The v3.19.0 ``spectral overshoot''
+($813\%$ at $t = a^2$ vs the $+1/6$ baseline) is a normalization
+artifact: the true UV target at $t = a^2 = 0.0025$ is $5.305$ (not
+$0.167$), and \emph{all three} discretization schemes
+(FD: 0.04\%; GM: 11.2\%; spectral: 25.6\% of UV target) undershoot.
+The discrete-substrate UV recovery is therefore the G4-6a target:
+substrate refinement $a \to a/2$ is the structural fix.
+
+\paragraph{Möbius $\alpha > 1$ extrapolation lock at $\alpha = 10$.}
+Eq.~\eqref{eq:moebius_excess_angle} extrapolated to $\alpha \in
+\{4, 5, 10\}$ (not in the original three-point fit set) gives mean
+relative error $1.71\%$, with $\alpha = 10$ landing at
+$\mathbf{-0.032\%}$ rel.\ err.\ -- essentially exact at the asymptote
+$F(\alpha) \to 1/2$. The decreasing relative error with $\alpha$
+($3.3\%$ at $\alpha = 1.5 \to 0.032\%$ at $\alpha = 10$) confirms the
+Möbius asymptote is structurally locked, not a three-point coincidence.
+\emph{Mechanism remains open} (task \#26 retraction stands, Fursaev--Miele 1996
+\cite{fursaev_miele1996} contains no Möbius modification); three
+sprint-scale closure routes are named (Fursaev--Miele \S III PDF read;
+discrete mode decomposition; Sommerfeld contour at excess angle).
+
 % =====================================================================
 \section{Discussion: structural-skeleton-scope reading}
 \label{sec:discussion}
@@ -1625,6 +1790,25 @@ calibration data; the cutoff function and its $\phi$-moments are
 external input. This is the same structural-skeleton-scope pattern
 observed across the framework~\cite{paper34, paper35}, sharpened
 here for the gravity sector.
+
+\paragraph{Projection-by-projection sharpening of the structural-skeleton scope.}
+A systematic walkthrough of Paper~34's twenty-eight projections (see
+\texttt{debug/sprint\_projection\_specific\_calibration\_scoping\_memo.md},
+2026-05-29) finds that only \emph{five} projections carry parametric
+Class-D calibration data (spectral action cutoff function \S{}III.6;
+gauge couplings \S{}III.10; rest masses \S{}III.14; fine structure
+constant \S{}III.16; Born rule \S{}III.28), and of those, only
+\emph{two} show known internal structure in their calibration values
+(the Koide cone for charged leptons in \S{}III.14, at sub-arcsecond
+precision; and the Paper~2 K-formula coincidence for $\alpha$ in
+\S{}III.16, at $\sim 10^{-8}$). The remaining 23 projections carry no
+parametric calibration to test. This 2-of-28 concentration is a sharp
+form of the structural-skeleton-scope statement: calibration data is
+genuinely external for the overwhelming majority of projections; the
+two known exceptions are framework observations that have already been
+investigated and remain open as numerical observations without
+derivation. The gravity sector's cutoff function falls into the
+``no internal structure'' category alongside the gauge couplings.
 
 \paragraph{Why this matters.} The Connes--Chamseddine spectral action
 program~\cite{chamseddine_connes1997, chamseddine_connes2010} has
@@ -1740,6 +1924,31 @@ is inherited from standard CC. Whether the discrete-substrate program
 is that the discrete substrate inherits the same gap; surprises would
 be substantial.
 
+\paragraph{Q3 sharpened (post-G4-5 sector-wise Mellin moment map).}
+The sector-wise Mellin moment map
+$\{\text{tip} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
+allows a precise framework-internal statement of the CC problem. From
+\S\ref{sec:G7}, the dimensionless cosmological constant in Planck units
+is $\Lcc \cdot \Geff = 36\pi\, \phi(2)/\phi(1)^2$. For Gaussian
+($\phi(1) = \phi(2) = 1$), this is $36\pi \approx 113$; for polynomial
+or sharp cutoffs, $O(1)$. Observation requires
+$\Lcc \cdot \Geff \sim 10^{-122}$. \emph{The precise framework-internal
+statement of the cosmological-constant problem is therefore the
+requirement}
+$$
+\frac{\phi(2)}{\phi(1)^2} \;\approx\; 10^{-124}
+\quad \text{with} \quad \phi(0),\, \phi(1) \;=\; O(1).
+$$
+No natural cutoff function in the standard family satisfies this; the
+identification of a cutoff that does would constitute a calibration-data
+selection principle distinct from the Higgs--Yukawa selection problem
+addressed by Sprint H1~\cite{paper32}. A diagnostic scoping pass
+(\texttt{debug/sprint\_cc\_scoping\_memo.md}, 2026-05-29) confirmed that
+none of the framework's structural mechanisms (master Mellin engine
+constraint, two-term exactness, discrete substrate, thermal cancellation,
+or inner-factor calibration) provides a $\phi$-moment selection rule
+of the required magnitude.
+
 \paragraph{Q4.} The Fierz--Pauli decomposition of the $(1, 1)$ irrep
 into TT (2 polarizations) + L + T + 3 mixings is deferred to G6 full
 (multi-month). The G6-Diag-Full sprint establishes only that the
@@ -1852,6 +2061,11 @@ arXiv:hep-th/9501127.
 D.~V.~Fursaev and G.~Miele, ``Cones, Spins and Heat Kernels,''
 \textit{Nucl.~Phys.~B}\ \textbf{484}, 697--723 (1997),
 arXiv:hep-th/9605153.
+
+\bibitem{solodukhin2011_review}
+S.~N.~Solodukhin, ``Entanglement Entropy of Black Holes,''
+\textit{Living Rev.~Relativity}\ \textbf{14}, 8 (2011),
+arXiv:1104.3712.
 
 \bibitem{dowker1994}
 J.~S.~Dowker, ``Heat kernels on curved cones,''

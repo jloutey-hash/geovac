@@ -189,24 +189,41 @@ across the full $t$-grid $\{0.0025, 0.005, \ldots, 10\}$. **Falsifier**: the res
 
 ## §6. Sub-sprint sequence with effort estimates
 
-Six sub-sprints, sized per the G4-4 / G4-5 cadence and the Paper 51 §12.7 multi-month estimates:
+**ORIGINAL sequencing (pre-2026-05-29 reframing) — preserved for reference:**
 
-| Sub-sprint | Scope | Falsifier | Effort | Parallel? |
+| Sub-sprint | Scope | Falsifier | Effort | Original sequencing |
 |---|---|---|---|---|
-| **G4-6a** | UV multi-substrate continuum extrapolation | F13 | 2–3 months | Sequential (foundation) |
-| **G4-6b** | IR-boundary regularization analysis | F14 | 1–2 months | Parallel to G4-6c, G4-6d |
-| **G4-6c** | α > 1 analytical + discrete-substrate resolution | F15a/F15b | 1–2 months | Parallel to G4-6b, G4-6d |
-| **G4-6d** | Spectral azimuthal discretization (DST/Fourier) | F17 | 1–2 months | Parallel to G4-6b, G4-6c |
-| **G4-6e** | Sector-wise Mellin moment map at theorem grade | F16 | 1 month | Sequential (after G4-6a/b) |
-| **G4-6f** | Synthesis + Paper 51 §12.8 + closure verdict | (closure narrative) | 1 month | Sequential (final) |
+| G4-6a | UV multi-substrate continuum extrapolation | F13 | 2–3 months | Sequential foundation |
+| G4-6b | IR-boundary regularization analysis | F14 | 1–2 months | Parallel to G4-6c, G4-6d |
+| G4-6c | α > 1 analytical + discrete-substrate resolution | F15a/F15b | 1–2 months | Parallel to G4-6b, G4-6d |
+| G4-6d | Spectral azimuthal discretization (DST/Fourier) | F17 | 1–2 months | Parallel to G4-6b, G4-6c |
+| G4-6e | Sector-wise Mellin moment map at theorem grade | F16 | 1 month | After G4-6a/b |
+| G4-6f | Synthesis + Paper 51 §12.8 + closure verdict | (closure narrative) | 1 month | Final |
 
-**Total G4-6 commitment: 4–7 months** (parallelized to 4 if G4-6b/c/d run concurrently and finish before G4-6e; sequential 7 months if dependencies surface).
+**REFRAMED sequencing (post-2026-05-29 multi-task thread, Track B.1/B.2 findings):**
 
-**Dependency structure**:
-- G4-6a foundation: must close F13 before G4-6e can lift the Mellin moment map to theorem grade.
-- G4-6b, G4-6c, G4-6d: structurally independent (different axes), can run in parallel sub-agent dispatches.
-- G4-6e: depends on G4-6a + G4-6b for clean Mellin moment extraction at converged substrate.
-- G4-6f: synthesis only after G4-6a–e close.
+The G4-6a first-move panel sweep on the FD substrate (`debug/g4_6a_multi_substrate_uv_first_move_memo.md`) confirmed analytically what v3.20.0 task #28 predicted: FD recovers $\sim 0.04\%$ of the UV target at $t = a^2$. The B.2 spectral substrate first-move (`debug/g4_6a_spectral_substrate_first_move_memo.md`) confirmed that spectral azimuthal discretization improves this 160× (to 6.36% recovery). Spectral substrate furthermore exposes a substrate-dependent Lichnerowicz constant $B \approx 0.30$ (vs continuum $+1/6 = 0.167$) that contaminates the joint linear fit of $A$. This identifies G4-6b as a SEQUENTIAL prerequisite to G4-6a refined.
+
+| Sub-sprint | Scope | Falsifier | Effort | **Reframed sequencing** |
+|---|---|---|---|---|
+| **G4-6d** | Spectral azimuthal discretization | F17 | 1–2 months | **DONE (thread 5 Track A, 2026-05-29). 14 production tests pass.** |
+| **G4-6b** | IR-boundary regularization (B identification) | F14 | 1–2 months | **DONE (thread 6 Track α + thread 7 Track b, 2026-05-29). $B_{\rm substrate}$ = 0.163 at R≥10, within 2.3% of continuum +1/6; analytical B-subtraction NOT needed.** |
+| **G4-6a refined** | $N_\phi$-sweep refinement on spectral substrate (REFRAMED axis per thread 7 Track a finding) | F13 | sprint-scale to ~2-4 weeks | **REFRAMED-IN-PROGRESS.** Original radial-axis refinement reframed to $N_\phi$-axis. Simplified extraction strategy validated. Next move: $N_\phi$-sweep at fixed $a$. |
+| **G4-6c** | α > 1 analytical (Möbius mechanism) | F15a/F15b | 1–2 months | **SUBSTRATE-LEVEL IDENTIFIED (thread 5 Track C, 2026-05-29).** Paper 51 §subsubsec documented. Continuum theorem requires Route A (Fursaev-Miele PDF) or Route C' (Sommerfeld contour at excess angle). |
+| **G4-6e** | Sector-wise Mellin moment map at theorem grade | F16 | 1 month | After G4-6a refined |
+| **G4-6f** | Synthesis + Paper 51 §12.8 + closure verdict | (closure narrative) | 1 month | Final |
+
+**Total G4-6 commitment: 3–6 months** UNCHANGED (parallelized to 3 if G4-6b/c run concurrently after G4-6d; sequential 6 months if dependencies surface).
+
+**Reframed dependency structure**:
+- **G4-6d (spectral) foundation:** B.1 implementation + B.2 verification COMPLETED 2026-05-29; G4-6d remaining work is production tests + formal closure memo (~1 week).
+- **G4-6b IR regularization:** SEQUENTIAL prerequisite to G4-6a refined. Subtract substrate-finite contributions to $B$ analytically (or via subtracting bulk-warp asymptotic) before joint $A/B$ fit. Then $A$-extraction has constraining power.
+- **G4-6a refined:** REPLACES original G4-6a. After G4-6b lands, rerun multi-substrate sweep on spectral substrate with $B$ subtracted.
+- **G4-6c:** STRUCTURALLY INDEPENDENT (α > 1 axis). Can run parallel to G4-6b.
+- **G4-6e:** depends on G4-6a refined + G4-6b for clean Mellin moment extraction.
+- **G4-6f:** synthesis only after G4-6a refined / b / c / e close.
+
+**Why the reframing matters.** The original G4-6a-first sequencing would have committed 2–3 months to multi-substrate refinement on FD substrate (which task #28 / B.1 first-move show would essentially fail). The reframed G4-6d-first sequencing landed substrate verification in a single afternoon's main-session work, and identified the $B$-contamination structural finding that needs G4-6b before further refinement. Total estimate unchanged at 3-6 months; sequencing now well-grounded.
 
 ---
 

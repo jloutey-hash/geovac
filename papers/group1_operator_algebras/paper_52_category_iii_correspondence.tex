@@ -1,0 +1,814 @@
+% =====================================================================
+% Paper 52 (standalone): Discrete spectral-triple realization of
+% CFT_3-on-S^3 -- a non-holographic alternative to dS/CFT for boundary
+% CFT data.
+%
+% Headline structural identification:
+%   GeoVac sits in a third structural category in the
+%   correspondence-physics landscape, distinct from Category I
+%   (holographic: AdS/CFT, dS/CFT) and Category II (topological:
+%   Chern-Simons/WZW). Category III is the spectral-triple
+%   discretization category, with the framework's S^3 substrate
+%   reproducing boundary CFT_3 data via propinquity convergence
+%   (Paper 38), without any bulk gravitational dual.
+%
+% Substantive new structural content:
+%   1. Three-category taxonomy of correspondence-physics relations
+%   2. Articulation of GeoVac's actual position in the landscape
+%   3. Connection of propinquity convergence (Paper 38) to the
+%      "correspondence" mechanism role
+%   4. Explicit distinction from both AdS/CFT and dS/CFT
+%
+% Fourteenth math.OA standalone in the GeoVac series.
+% Siblings: Papers 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50.
+%
+% Status: first draft, May 2026, post-Sprint dS/CFT scoping
+% (2026-05-29). Built from:
+%   debug/sprint_ds_cft_scoping_memo.md
+%   debug/geovac_correspondence_position_memo.md
+%   debug/thread_3_synthesis_memo.md
+%   papers/group1_operator_algebras/paper_50_cft3_partition_function.tex
+%     (sec:catalogue, particularly the structural-distinction paragraph)
+%
+% Honest scope: framework-positioning paper, NOT a new holographic
+% correspondence. The paper does NOT claim GeoVac is a Theory of
+% Everything, a refutation of dS/CFT, or a new bulk-boundary duality.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\DGV}{D_{\mathrm{GV}}}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+\newcommand{\Kalpha}{K_{\alpha}^{W}}
+\newcommand{\rhoW}{\rho_{W}}
+\newcommand{\KPS}{\text{KPS}}
+
+\title{Discrete spectral-triple realization of\\
+CFT$_{3}$-on-$\sthree$ partition function data:\\
+a non-holographic alternative to dS/CFT}
+\author{J.~Loutey\thanks{Independent researcher.
+\texttt{jloutey@gmail.com}. This work was developed in an
+AI-augmented agentic workflow with Anthropic's Claude.
+Implementation, internal memos, and bibliographic collation were
+performed collaboratively; all theorems, design choices, and editorial
+decisions are the author's responsibility.}}
+\date{May 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The boundary CFT$_{3}$-on-$\sthree$ partition function data of the
+GeoVac discrete spectral triple --- including bit-exact matches to the
+Klebanov--Pufu--Safdi free energies of the conformally coupled scalar
+and the free Weyl Camporesi--Higuchi Dirac~\cite{paper50,
+klebanov_pufu_safdi2011} --- is reproduced without any bulk
+gravitational theory. The framework's $\sthree$ substrate occupies
+the geometric position that Euclidean dS/CFT~\cite{maldacena2002,
+strominger2001} assigns to its boundary CFT$_{3}$, but the
+construction lacks the bulk dS$_{4}$ (or its Euclidean partner $S^{4}$),
+the Hartle--Hawking wavefunctional, and the holographic dictionary.
+We argue that GeoVac sits in a structurally distinct \emph{third
+category} of correspondence-physics relations, separated from both
+\emph{Category I} (holographic: AdS/CFT, dS/CFT) and \emph{Category II}
+(topological: Chern--Simons/WZW). \emph{Category III} is the
+spectral-triple-discretization category; the framework's analog of the
+holographic correspondence is the Latr\'emoli\`ere propinquity
+convergence theorem~\cite{paper38} operating between two
+operator-algebraic discretization levels (discrete spectral triple at
+finite cutoff $\nmax$ and continuum spectral triple on round
+$\sthree$) at convergence rate $C_{3} \gamma_{\nmax}$. This is not a
+new holographic correspondence and not a refutation of dS/CFT; it is
+a structurally distinct realization that produces the same boundary
+CFT data via a different mechanism. We articulate the taxonomy, place
+GeoVac within it, and identify the operational consequences of the
+Category III reading for the framework's existing bit-exact boundary
+CFT$_{3}$ results and for the modular structure of the wedge KMS
+state~\cite{paper42, paper43}.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+% =====================================================================
+
+\subsection{The dS/CFT question}
+
+Strominger's dS/CFT proposal~\cite{strominger2001} posited a duality
+between gravity on $(d+1)$-dimensional de Sitter spacetime and a
+Euclidean CFT$_{d}$ on its conformal boundary. For $d = 3$, the
+proposal places a CFT$_{3}$ on the future timelike infinity $I^{+}$
+of dS$_{4}$, which is geometrically a copy of $\sthree$. Maldacena's
+Euclidean sharpening~\cite{maldacena2002} via Wick rotation makes
+the boundary identification precise: Euclidean dS$_{4}$ is the round
+$S^{4}$, the equatorial $\sthree$ hosts the boundary CFT$_{3}$, and
+the Hartle--Hawking wavefunctional of dS$_{4}$ at $I^{+}$ equals the
+boundary CFT$_{3}$ partition function:
+\begin{equation}
+\Psi_{\mathrm{dS}_{4}}[\phi_{0}] \;=\; Z_{\mathrm{CFT}_{3}}[\phi_{0}].
+\label{eq:dS_CFT_partition}
+\end{equation}
+
+The conjectural Eq.~\eqref{eq:dS_CFT_partition} relates a 4D bulk
+quantity (a path integral over geometries with appropriate boundary
+conditions) to a 3D boundary quantity (a CFT partition function on
+$\sthree$).
+
+\subsection{The GeoVac substrate as boundary geometry}
+
+The GeoVac framework~\cite{paper7, paper38} constructs a discrete
+spectral triple
+$\Tcal_{\nmax} = (\Acal_{\nmax}, \Hilb_{\nmax}, \DGV)$ on the
+Fock-projected $\sthree$. This $\sthree$ is the same manifold ---
+same topology, same SO(4) symmetry, same Camporesi--Higuchi
+spinor bundle~\cite{camporesi_higuchi1996} --- that
+Eq.~\eqref{eq:dS_CFT_partition} assigns as the host of the boundary
+CFT$_{3}$. The framework's discrete spectral-zeta machinery on
+$\Tcal_{\nmax}$ produces bit-exact reproductions of the standard
+Klebanov--Pufu--Safdi (KPS)~\cite{klebanov_pufu_safdi2011} closed-form
+F-theorem coefficients for both the conformally coupled scalar and
+the free Weyl Dirac~\cite{paper50}. The KPS values are precisely
+the boundary CFT$_{3}$ partition function data that
+Eq.~\eqref{eq:dS_CFT_partition} would predict via Hartle--Hawking.
+
+\subsection{The structural question}
+
+The GeoVac framework produces the boundary CFT$_{3}$ data
+\emph{without invoking dS$_{4}$}: there is no bulk de Sitter
+geometry in the framework's existing infrastructure, no Hartle--Hawking
+wavefunctional construction, no functional integral over 4D
+geometries, and no holographic dictionary mapping bulk fields to
+boundary operators. The boundary CFT$_{3}$ values emerge directly
+from spectral asymptotics of the discrete spectral triple ---
+specifically, from the spectral-zeta derivative $-\tfrac{1}{2}
+\zeta'_{\Delta}(0)$ evaluated on the round-$\sthree$ continuum limit
+of $\DGV$~\cite{paper50}.
+
+This raises a structural question: \emph{what is the framework's
+position in the correspondence-physics landscape?} Is GeoVac a
+non-standard realization of dS/CFT? An alternative to dS/CFT? A
+different correspondence entirely?
+
+\subsection{This paper's contribution}
+
+We argue that GeoVac sits in a third structural category, distinct
+from both AdS/CFT (Category I) and dS/CFT (Category I) on one hand,
+and from topological constructions like Chern--Simons/WZW
+(Category II) on the other. Category III is the
+spectral-triple-discretization category, with two distinguishing
+features:
+\begin{enumerate}
+\item There is no bulk gravitational theory; the framework's primary
+object is a discrete spectral triple at finite cutoff, not a 4D
+geometry to be holographic from.
+\item The ``correspondence'' is between two operator-algebraic
+objects (the discrete spectral triple at finite cutoff and the
+continuum spectral triple on round $\sthree$), realized via
+Latr\'emoli\`ere propinquity convergence~\cite{paper38} at rate
+$C_{3} \gamma_{\nmax} \to 0$.
+\end{enumerate}
+
+The Connes--van Suijlekom truncation of the Toeplitz algebra on the
+unit circle $S^{1}$~\cite{connes_vs2021} is the structural precedent
+for Category III; GeoVac's $\sthree$ construction is the natural
+non-abelian extension via Paper 38's five-lemma propinquity proof.
+
+We do not claim that GeoVac is a new holographic correspondence
+(it cannot be: there is no bulk). We do not claim it refutes
+dS/CFT (the boundary data is consistent with what dS/CFT would
+predict). We argue instead that GeoVac provides a structurally
+distinct \emph{realization} of the boundary CFT$_{3}$-on-$\sthree$
+partition function data, via a discrete spectral-triple mechanism that
+operates differently from holographic reconstruction.
+
+\subsection{Outline}
+
+Section~\ref{sec:taxonomy} articulates the three-category taxonomy.
+Section~\ref{sec:geovac_substrate} reviews the GeoVac substrate at
+the level needed for the structural argument.
+Section~\ref{sec:boundary_data} summarizes the bit-exact KPS matches
+from Paper 50~\cite{paper50}.
+Section~\ref{sec:propinquity_mechanism} identifies propinquity
+convergence (Paper 38) as the framework's analog of the holographic
+correspondence.
+Section~\ref{sec:modular_structure} addresses the wedge KMS modular
+structure and its place in the boundary side of correspondence
+theories.
+Section~\ref{sec:comparison} explicitly compares the framework to
+AdS/CFT and dS/CFT.
+Section~\ref{sec:open} lists open questions.
+
+% =====================================================================
+\section{The three-category taxonomy of correspondence-physics relations}
+\label{sec:taxonomy}
+% =====================================================================
+
+We organize the landscape of ``$X$/CFT-like'' relations into three
+structural categories.
+
+\subsection{Category I --- Holographic (bulk gravity $\leftrightarrow$ boundary CFT)}
+
+\textbf{Examples.} AdS/CFT~\cite{maldacena1997}, dS/CFT~\cite{strominger2001,
+maldacena2002}, Kerr/CFT, the flat-space/BMS analog.
+
+\textbf{Structural ingredients.}
+\begin{itemize}
+\item A bulk gravitational theory in $d + 1$ dimensions (anti-de
+Sitter, de Sitter, Kerr, flat space, etc.).
+\item A boundary theory in $d$ dimensions, typically a CFT.
+\item A holographic dictionary mapping bulk fields $\phi_{\rm bulk}$ to
+boundary operators $\mathcal{O}_{\rm boundary}$ via an asymptotic
+relation $\phi_{\rm bulk}(x, z) \sim z^{\Delta}\mathcal{O}_{\rm boundary}(x)$
+as $z \to 0$.
+\item A partition-function or wavefunction identification:
+$Z_{\rm bulk}[\phi_{0}] = Z_{\rm boundary}[\phi_{0}]$ (AdS/CFT) or
+$\Psi_{\rm bulk}[\phi_{0}] = Z_{\rm boundary}[\phi_{0}]$ (dS/CFT).
+\end{itemize}
+
+\textbf{Operationally.} Boundary CFT data is RECONSTRUCTED from bulk
+gravity by holographic computation. Equivalently, bulk gravity is
+computed from boundary CFT via reconstruction techniques (RT/HRT
+minimum surfaces, JLMS bulk-modular reconstruction).
+
+\subsection{Category II --- Topological (discrete bulk $\leftrightarrow$ boundary state)}
+
+\textbf{Examples.} Chern--Simons / WZW boundary~\cite{witten1989},
+state-sum models, tensor networks and MERA.
+
+\textbf{Structural ingredients.}
+\begin{itemize}
+\item A bulk in $d + 1$ dimensions, typically with a discrete or
+topological structure (lattice, simplicial complex, tensor network).
+\item A boundary theory on a $d$-manifold, derived from bulk
+topological data.
+\item An identification of the boundary partition function with a
+bulk topological invariant.
+\end{itemize}
+
+\textbf{Operationally.} Boundary observables emerge as topological
+invariants of the bulk discrete structure. The bulk is finite or
+discrete; the boundary CFT (or its analog) emerges in a continuum
+limit of the discrete bulk data.
+
+\subsection{Category III --- Spectral-triple discretization (substrate $\leftrightarrow$ continuum CFT)}
+
+\textbf{Examples.} Connes--van Suijlekom truncation of the Toeplitz
+algebra on $S^{1}$~\cite{connes_vs2021}; the GeoVac $\sthree$
+extension via Paper~38's propinquity proof~\cite{paper38}; the present
+paper's KPS-reproducing construction~\cite{paper50}.
+
+\textbf{Structural ingredients.}
+\begin{itemize}
+\item A discrete spectral triple
+$\Tcal_{\nmax} = (\Acal_{\nmax}, \Hilb_{\nmax}, D_{\nmax})$ at
+finite cutoff.
+\item A continuum spectral triple
+$\Tcal_{\infty} = (\Acal_{\infty}, \Hilb_{\infty}, D_{\infty})$ in
+the limit.
+\item A propinquity-style metric $\Lambda$ on the space of spectral
+triples.
+\item Convergence: $\Lambda(\Tcal_{\nmax}, \Tcal_{\infty}) \to 0$ at
+proven rate (Paper 38: $C_{3} \cdot \gamma_{\nmax}$ with
+$\gamma_{\nmax} \sim (4/\pi) \log\nmax / \nmax$).
+\item Continuum CFT$_{d}$ partition function data is the SPECTRAL
+content of the limit triple, extracted via zeta-function derivatives
+(KPS-style).
+\end{itemize}
+
+\textbf{Operationally.} Boundary CFT data is COMPUTED DIRECTLY from
+spectral asymptotics of the discrete substrate, not reconstructed from
+any bulk. There is no ``bulk'' --- the discrete substrate is the
+framework's intrinsic object, and the continuum CFT is what the
+substrate looks like at the propinquity limit.
+
+\subsection{The three categories at a glance}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Category & Bulk object & Correspondence mechanism \\
+\midrule
+I (Holographic) & Bulk gravity in $d+1$ dimensions & Holographic dictionary; reconstruction \\
+II (Topological) & Bulk discrete / topological in $d+1$ dimensions & State-sum; topological invariant \\
+III (Spectral) & Discrete spectral triple at finite cutoff & Propinquity convergence; spectral asymptotics \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The three categories are not mutually exclusive in principle: one
+could imagine constructions that combine, e.g., a holographic bulk
+with a topological boundary lattice. We do not survey such hybrid
+constructions here; we focus on the structural placement of GeoVac
+as a Category III paradigm.
+
+% =====================================================================
+\section{The GeoVac substrate}
+\label{sec:geovac_substrate}
+% =====================================================================
+
+The framework's primary geometric object is the discrete spectral
+triple
+\begin{equation}
+\Tcal_{\nmax} = (\Acal_{\nmax}, \Hilb_{\nmax}, \DGV)
+\label{eq:geovac_triple}
+\end{equation}
+on the Fock-projected~\cite{paper7} round $\sthree$, parameterized by
+a cutoff $\nmax \in \N$. The Hilbert space
+$\Hilb_{\nmax} = \bigoplus_{n=1}^{\nmax} \Hilb_{n}$ is the truncation
+of the full $L^{2}$ spinor bundle on $\sthree$ at the $\nmax$-th
+shell; the algebra $\Acal_{\nmax}$ is the (algebraic) Fock multiplier
+algebra at that cutoff; $\DGV$ is the discrete Camporesi--Higuchi
+Dirac operator with eigenvalues $|\lambda_{n}| = n + 3/2$ and
+multiplicities $g_{n}^{\rm Dirac} = 2(n+1)(n+2)$ on the spinor bundle.
+
+The continuum limit $\Tcal_{\infty}$ is the round-$\sthree$
+Camporesi--Higuchi spectral triple on the full spinor $L^{2}$, with
+the same eigenvalue structure extended to all $n \in \N$.
+
+The substrate has no ``higher-dimensional'' geometry. There is no
+4D bulk, no internal $z$-coordinate, no holographic radial direction.
+The $\sthree$ is the framework's natural geometric arena, intrinsic to
+the Fock projection of the Coulomb spectrum~\cite{paper7}.
+
+\begin{remark}[Why no bulk]
+\label{rem:no_bulk}
+A natural question is whether the GeoVac framework could be
+\emph{extended} with a 4D bulk geometry (Lorentzian dS$_{4}$ or
+Euclidean $S^{4}$). The substrate's existing infrastructure does not
+contain any such geometry: Paper 50~\cite{paper50} \S 6 documents that
+the framework's codebase has no AdS$_{4}$ / H$^{4}$ / dS$_{4}$ / $S^{4}$
+machinery, and Sprint RH-B (2026-04-17)~\cite{paper29} closed the
+$\sthree \to H^{3}$ Wick continuation as a clean structural dead end
+(the continuation supplies no natural discrete subgroup
+$\Gamma \subset \mathrm{SO}(3, 1)$ selectable from framework
+invariants). Importing a 4D bulk would be a multi-month engineering
+commitment outside the present paper's scope and would, in any case,
+be an \emph{extension} of the framework rather than something
+already present.
+\end{remark}
+
+% =====================================================================
+\section{The boundary CFT$_{3}$ partition function data}
+\label{sec:boundary_data}
+% =====================================================================
+
+Paper 50~\cite{paper50} establishes that the GeoVac substrate
+reproduces standard boundary CFT$_{3}$-on-$\sthree$ partition function
+data bit-exactly. We summarize the headline results here for
+self-containment.
+
+\subsection{Conformally coupled scalar}
+
+\begin{theorem}[Paper 50 \cite{paper50}, Theorem~3.1]
+\label{thm:scalar_match}
+On the truncated GeoVac spectral triple $\Tcal_{\nmax}$, the
+spectral-zeta derivative of the conformally coupled scalar Laplacian
+on round unit $\sthree$ satisfies
+\begin{equation}
+F_{s}^{\sthree} \;:=\; -\tfrac{1}{2}\, \zeta'_{\Delta_{\rm conf}}(0)
+\;=\; \frac{\log 2}{8} - \frac{3 \zeta(3)}{16 \pi^{2}}.
+\label{eq:Fs_S3}
+\end{equation}
+This matches the Klebanov--Pufu--Safdi closed
+form~\cite{klebanov_pufu_safdi2011} at $61+$ digits and admits the
+PSLQ integer relation $[8, 2, -3]$ across the basis
+$\{\log 2, \zeta(3)/\pi^{2}\}$.
+\end{theorem}
+
+\subsection{Free Weyl Dirac}
+
+\begin{theorem}[Paper 50 \cite{paper50}, Theorem~3.2]
+\label{thm:dirac_match}
+On the truncated GeoVac spectral triple $\Tcal_{\nmax}$, the
+spectral-zeta derivative of the free Weyl Camporesi--Higuchi Dirac
+on round unit $\sthree$ satisfies
+\begin{equation}
+F_{D}^{\sthree} \;:=\; -\tfrac{1}{2}\, \zeta'_{\DCH}(0)
+\;=\; \frac{\log 2}{4} + \frac{3 \zeta(3)}{8 \pi^{2}}.
+\label{eq:FD_S3}
+\end{equation}
+This matches the KPS closed form symbolically (sympy-exact).
+\end{theorem}
+
+\subsection{Orthogonal master Mellin engine decomposition}
+
+The scalar and Dirac F-values combine linearly to extract orthogonal
+master Mellin engine sectors~\cite{paper50, paper18}:
+\begin{equation}
+F_{D} + 2 F_{s} \;=\; \frac{\log 2}{2}
+\qquad (\text{M2 only, all $\zeta(3)$ cancels})
+\label{eq:M2_isolation}
+\end{equation}
+\begin{equation}
+F_{D} - 2 F_{s} \;=\; \frac{3 \zeta(3)}{4 \pi^{2}}
+\qquad (\text{M3 only, all $\log 2$ cancels}).
+\label{eq:M3_isolation}
+\end{equation}
+
+This is the framework's first verification of the master Mellin engine
+on non-GeoVac-internal physics observables~\cite{paper50, paper32}.
+
+\subsection{The data the framework reproduces}
+
+Eqs.~\eqref{eq:Fs_S3}--\eqref{eq:M3_isolation} are standard CFT$_{3}$
+data. Eq.~\eqref{eq:Fs_S3} is the F-theorem
+coefficient~\cite{klebanov_pufu_safdi2011} that monotonically decreases
+along renormalization-group flows of 3D CFTs. The Maldacena
+identification~\eqref{eq:dS_CFT_partition} would predict exactly these
+values via the holographic computation of the Hartle--Hawking
+wavefunctional of dS$_{4}$ at $I^{+}$. The framework reproduces them
+without that computation.
+
+% =====================================================================
+\section{Propinquity convergence as the ``correspondence'' mechanism}
+\label{sec:propinquity_mechanism}
+% =====================================================================
+
+The framework's analog of the holographic correspondence is
+Latr\'emoli\`ere propinquity convergence between the discrete spectral
+triple at finite cutoff and its continuum limit.
+
+\subsection{Statement of the convergence theorem}
+
+\begin{theorem}[Paper 38 \cite{paper38}; WH1 PROVEN]
+\label{thm:propinquity}
+The discrete GeoVac spectral triples $\Tcal_{\nmax}$ on the
+Fock-projected $\sthree$ converge to the continuum round-$\sthree$
+Camporesi--Higuchi spectral triple $\Tcal_{\infty}$ in the
+Latr\'emoli\`ere propinquity metric:
+\begin{equation}
+\Lambda(\Tcal_{\nmax}, \Tcal_{\infty})
+\;\le\; C_{3} \cdot \gamma_{\nmax}
+\;\to\; 0 \quad \text{as } \nmax \to \infty,
+\label{eq:propinquity_rate}
+\end{equation}
+where $C_{3} = 1$ asymptotically (Lipschitz comparison constant) and
+$\gamma_{\nmax} = O(\log \nmax / \nmax)$ is the central-Fej\'er
+moment with universal asymptotic rate constant $4/\pi$.
+\end{theorem}
+
+The proof is the five-lemma chain $\mathrm{L1}'$-$\mathrm{L2}$-$\mathrm{L3}$-$\mathrm{L4}$-$\mathrm{L5}$
+of Paper 38~\cite{paper38}, generalized to all simple compact Lie
+groups in Paper 40~\cite{paper40}.
+
+\subsection{Why this is the ``correspondence'' mechanism}
+
+The propinquity convergence relates two operator-algebraic objects
+(the discrete and continuum spectral triples) by a quantitative
+metric, with proven convergence rate. The boundary CFT$_{3}$
+partition function data of Section~\ref{sec:boundary_data} is
+extracted from the continuum spectral triple $\Tcal_{\infty}$ via the
+zeta-function derivative $-\tfrac{1}{2}\zeta'(0)$; this derivative is
+PRESERVED by the propinquity limit because
+\begin{itemize}
+\item the spectral data of $D_{\nmax}$ converges to that of
+$D_{\infty}$ in the operator-norm sense (per Berezin reconstruction,
+Paper 38 L4);
+\item the spectral-zeta function converges term-by-term and uniformly
+on the strip $\mathrm{Re}(s) > d/2$;
+\item the meromorphic continuation to $s = 0$ commutes with the
+propinquity limit by standard analytic-continuation arguments.
+\end{itemize}
+
+In holographic terminology, this is the framework's ``dictionary'':
+the discrete spectral triple at finite cutoff is the framework's
+``bulk-like'' object (more precisely, its substrate), and the
+boundary CFT$_{3}$ data is what that object looks like at the
+propinquity limit. There is no separate ``bulk theory'' to translate
+from; the spectral triple at finite cutoff is itself the framework's
+primary object.
+
+\subsection{Difference from holographic reconstruction}
+
+Holographic reconstruction recovers boundary CFT data from bulk
+gravity by integrating field-theoretic correlators against bulk
+modes. The boundary CFT exists in the same dimensional setting as the
+bulk's asymptotic boundary, and the dictionary translates between two
+distinct physical theories.
+
+Propinquity convergence recovers continuum CFT data from a discrete
+substrate by taking the continuum limit of the substrate's spectral
+asymptotics. Both objects (discrete and continuum spectral triples)
+live in the same dimensional setting (both are spectral triples on
+$\sthree$); the dictionary translates between two operator-algebraic
+discretization levels, not between two physical theories of different
+dimension.
+
+This is a structurally distinct mechanism. It is appropriate to call
+both a ``correspondence'' in the abstract sense (each relates
+mathematical structures in a way that yields physical data), but the
+specific nature of the correspondence differs.
+
+% =====================================================================
+\section{Wedge KMS modular structure}
+\label{sec:modular_structure}
+% =====================================================================
+
+A second structural feature of the GeoVac framework that overlaps
+with holographic theories is the wedge KMS modular
+structure~\cite{paper42, paper43, paper50}.
+
+\subsection{Wedge KMS state on the framework}
+
+Paper 50~\cite{paper50} defines a wedge KMS state $\rhoW = e^{-\Kalpha} / Z$
+on a hemispheric wedge of the $\sthree$ substrate, where $\Kalpha$ is
+the modular Hamiltonian associated with the boost generator of the
+wedge. The state $\rhoW$ has the structural properties of the
+Bisognano--Wichmann vacuum~\cite{bisognano_wichmann1976}.
+
+Paper 42~\cite{paper42} establishes the four-witness Wick-rotation
+theorem: the modular structure of $\rhoW$ corresponds bit-exactly with
+the thermal-state readings of Hawking, Sewell, Bisognano--Wichmann,
+and Unruh at finite cutoff $\nmax$. The Tomita--Takesaki modular flow
+on the wedge KMS state is a literal identification at the
+operator-system level (Riemannian).
+
+\subsection{Connection to holographic theories}
+
+Any holographic correspondence involving thermal states
+(AdS-Schwarzschild $\leftrightarrow$ thermal CFT, dS-Schwarzschild
+$\leftrightarrow$ static patch CFT, BTZ $\leftrightarrow$ thermal
+CFT on $S^{1} \times \R$) has the SAME modular-flow structure on its
+boundary CFT side. The four-witness theorem of Paper 42 explicitly
+identifies Hawking, Sewell, Bisognano--Wichmann, and Unruh as four
+readings of one modular-flow structure.
+
+GeoVac therefore shares the boundary-modular-flow content with all
+holographic-correspondence theories. The Connes--Rovelli thermal-time
+identification of Paper 49~\cite{paper49} makes this concrete:
+thermal time is the modular flow, regardless of whether one came at
+it from a bulk-gravity calculation or a direct boundary-CFT analysis.
+
+The structural distinction we are drawing is therefore:
+\begin{itemize}
+\item The boundary-modular-flow content is SHARED across Category I
+and Category III.
+\item The bulk content distinguishes them: Category I has a bulk
+gravitational theory; Category III has a discrete spectral-triple
+substrate.
+\end{itemize}
+
+% =====================================================================
+\section{Comparison to AdS/CFT and dS/CFT}
+\label{sec:comparison}
+% =====================================================================
+
+We summarize the comparison in a cross-table.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Theory & Bulk object & Correspondence mechanism \\
+\midrule
+AdS$_{5}$/CFT$_{4}$~\cite{maldacena1997} & AdS$_{5}$ IIB SUGRA & Holographic dictionary \\
+AdS$_{4}$/CFT$_{3}$ (ABJM) & AdS$_{4}$ M-theory & Holographic dictionary \\
+dS$_{4}$/CFT$_{3}$~\cite{strominger2001, maldacena2002} & dS$_{4}$ & Hartle--Hawking wavefunctional \\
+Kerr/CFT & Kerr & Asymptotic-symmetry holography \\
+Chern--Simons/WZW~\cite{witten1989} & 3D topological & State-sum \\
+Connes--vS $S^{1}$~\cite{connes_vs2021} & Discrete spectral triple on $S^{1}$ & Propinquity (Toeplitz $S^{1}$) \\
+\textbf{GeoVac} (Papers~\cite{paper38, paper50}) & \textbf{Discrete spectral triple on $\sthree$} & \textbf{Latr\'emoli\`ere propinquity at rate $4/\pi$} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{What GeoVac shares with dS/CFT}
+
+\begin{itemize}
+\item The same boundary host manifold: the Euclidean dS/CFT
+identification~\eqref{eq:dS_CFT_partition} places the boundary
+CFT$_{3}$ on $\sthree$; GeoVac's substrate is on the same $\sthree$.
+\item The same boundary CFT$_{3}$ partition function data:
+Eqs.~\eqref{eq:Fs_S3}, \eqref{eq:FD_S3} reproduce values that
+Hartle--Hawking would predict.
+\item The same wedge KMS / modular-flow structure on the boundary side
+(four-witness theorem, Paper 42~\cite{paper42}).
+\end{itemize}
+
+\subsection{What GeoVac does not share with dS/CFT}
+
+\begin{itemize}
+\item GeoVac has no bulk dS$_{4}$ (Lorentzian) or $S^{4}$ (Euclidean).
+\item GeoVac has no Hartle--Hawking wavefunctional construction.
+\item GeoVac has no functional integral over 4D geometries.
+\item GeoVac has no holographic dictionary mapping bulk fields to
+boundary operators.
+\end{itemize}
+
+\subsection{The Category III alternative}
+
+The framework's mechanism for producing the boundary CFT$_{3}$ data
+is the propinquity convergence of Theorem~\ref{thm:propinquity}: the
+discrete spectral triple at finite cutoff approaches the continuum
+round-$\sthree$ spectral triple in an explicit metric, with proven
+convergence rate. The boundary CFT$_{3}$ data is the spectral-zeta
+content of the continuum limit, and this content is preserved by the
+propinquity limit by standard analytic-continuation arguments. This
+is structurally distinct from any holographic mechanism.
+
+\begin{remark}[What this paper is NOT claiming]
+\label{rem:not_claiming}
+We explicitly do not claim:
+\begin{enumerate}
+\item GeoVac is a new holographic correspondence (no bulk $=$ no
+holography in the standard sense).
+\item GeoVac is a refutation of dS/CFT (the boundary data is
+consistent; we just produce it differently).
+\item GeoVac is a Theory of Everything (per the rhetoric rule of
+the GeoVac project~\cite{paper7}, the framework does not assert
+ontological priority of the spectral-triple description over
+continuum quantum mechanics).
+\item GeoVac proves Maldacena's identification~\eqref{eq:dS_CFT_partition}
+(we have no access to the bulk side).
+\end{enumerate}
+What we do claim is that GeoVac produces the same boundary CFT$_{3}$
+data via a structurally distinct mechanism that places the framework
+in a third category, distinct from holographic correspondences.
+\end{remark}
+
+% =====================================================================
+\section{Open questions}
+\label{sec:open}
+% =====================================================================
+
+\paragraph{Q1.} The framework's bulk-side identifications corresponding
+to Hartle--Hawking dS$_{4}$ (or its Euclidean $S^{4}$ partner), if any,
+remain unreachable from the existing infrastructure. Importing
+4D bulk machinery would be a multi-month engineering commitment.
+Whether such an extension is structurally compatible with the
+framework's existing Coulomb / Fock-projection origin is open.
+
+\paragraph{Q2.} The Connes--van Suijlekom Toeplitz $S^{1}$
+truncation~\cite{connes_vs2021} is the abelian Category III precedent.
+Paper 40~\cite{paper40} extends propinquity convergence to all simple
+compact Lie groups at universal rate constant $4/\pi$. Whether the
+boundary CFT data for other groups (e.g., $\mathrm{SU}(3)$,
+$\mathrm{Sp}(2)$, $G_{2}$) similarly reproduces standard CFT-on-group
+partition functions is a natural extension.
+
+\paragraph{Q3.} The boundary CFT$_{3}$ data of Eqs.~\eqref{eq:Fs_S3},
+\eqref{eq:FD_S3} reproduces free-field KPS values. Whether the framework
+extends to interacting CFT$_{3}$ partition function data is open. The
+master Mellin engine~\cite{paper18, paper32} suggests that the
+transcendental signature of any CFT$_{3}$ partition function decomposes
+under M1/M2/M3, but mapping this decomposition to interacting CFT$_{3}$
+data requires further analysis.
+
+\paragraph{Q4.} The Lorentzian extension of the propinquity convergence
+(Papers 45~\cite{paper45}, 46, 47~\cite{paper47}) extends Category III
+to non-compact carriers. Whether the framework's Lorentzian extension
+produces dS-thermal-state observables (Hawking radiation on the
+discrete substrate, thermal density of states, etc.) that match
+dS/CFT predictions is open.
+
+% =====================================================================
+\section*{Acknowledgments}
+% =====================================================================
+
+This paper consolidates findings from the post-v3.20.0 continuation
+thread (2026-05-29) of the GeoVac development, building on Paper 50
+(boundary CFT$_{3}$ partition function data) and Paper 38 (propinquity
+convergence). The framework-positioning argument was developed in
+internal memos
+\texttt{debug/sprint\_ds\_cft\_scoping\_memo.md}~\cite{debug:ds_cft_scoping}
+and
+\texttt{debug/geovac\_correspondence\_position\_memo.md}~\cite{debug:correspondence_position}.
+The work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude.
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+
+\bibitem{paper7} J.~Loutey,
+\emph{Paper 7: The Dimensionless Vacuum},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper18} J.~Loutey,
+\emph{Paper 18: Exchange Constants and Transcendental Taxonomy},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper29} J.~Loutey,
+\emph{Paper 29: Ramanujan Hopf Graphs and Wick-Rotation Scope},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper32} J.~Loutey,
+\emph{Paper 32: The GeoVac Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper38} J.~Loutey,
+\emph{Paper 38: SU(2)/$\sthree$ Latr\'emoli\`ere Propinquity
+Convergence on the Camporesi--Higuchi Truncated Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper40} J.~Loutey,
+\emph{Paper 40: Unified Propinquity Convergence on Compact Lie Groups},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper42} J.~Loutey,
+\emph{Paper 42: Tomita--Takesaki Modular Structure and the
+Four-Witness Wick-Rotation Theorem at Finite Cutoff},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper43} J.~Loutey,
+\emph{Paper 43: Lorentzian Extension of the Four-Witness Wick-Rotation
+Theorem},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper45} J.~Loutey,
+\emph{Paper 45: K$^{+}$-Restricted Weak-Form Lorentzian Propinquity
+Convergence},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper47} J.~Loutey,
+\emph{Paper 47: Norm-Resolvent Convergence to the Non-Compact
+Lorentzian Krein Spectral Triple and the Two-Rate Hybrid Limit},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper49} J.~Loutey,
+\emph{Paper 49: OSLPLS Category and the Strong-Form Krein--Mondino--S\"amann
+Bridge},
+GeoVac internal preprint, 2026.
+
+\bibitem{paper50} J.~Loutey,
+\emph{Paper 50: Boundary CFT$_{3}$-on-$\sthree$ Observables on the
+Truncated GeoVac Spectral Triple},
+GeoVac internal preprint, 2026.
+
+\bibitem{camporesi_higuchi1996} R.~Camporesi and A.~Higuchi,
+\emph{On the eigenfunctions of the Dirac operator on spheres and real
+hyperbolic spaces},
+J. Geom. Phys. \textbf{20} (1996) 1--18.
+
+\bibitem{connes_vs2021} A.~Connes and W.~D.~van Suijlekom,
+\emph{Spectral truncations in noncommutative geometry and operator systems},
+Comm. Math. Phys. \textbf{383} (2021) 2021--2067, arXiv:2004.14115.
+
+\bibitem{strominger2001} A.~Strominger,
+\emph{The dS/CFT correspondence},
+JHEP \textbf{10} (2001) 034, arXiv:hep-th/0106113.
+
+\bibitem{maldacena1997} J.~Maldacena,
+\emph{The large $N$ limit of superconformal field theories and supergravity},
+Adv. Theor. Math. Phys. \textbf{2} (1998) 231--252, arXiv:hep-th/9711200.
+
+\bibitem{maldacena2002} J.~Maldacena,
+\emph{Non-Gaussian features of primordial fluctuations in single field inflationary models},
+JHEP \textbf{05} (2003) 013, arXiv:astro-ph/0210603.
+
+\bibitem{klebanov_pufu_safdi2011} I.~R.~Klebanov, S.~S.~Pufu, and B.~R.~Safdi,
+\emph{F-Theorem without Supersymmetry},
+JHEP \textbf{10} (2011) 038, arXiv:1105.4598.
+
+\bibitem{bisognano_wichmann1976} J.~J.~Bisognano and E.~H.~Wichmann,
+\emph{On the duality condition for quantum fields},
+J. Math. Phys. \textbf{17} (1976) 303--321.
+
+\bibitem{witten1989} E.~Witten,
+\emph{Quantum field theory and the Jones polynomial},
+Comm. Math. Phys. \textbf{121} (1989) 351--399.
+
+\bibitem{debug:ds_cft_scoping} GeoVac internal,
+\emph{Sprint dS/CFT scoping memo},
+\texttt{debug/sprint\_ds\_cft\_scoping\_memo.md}, 2026-05-29.
+
+\bibitem{debug:correspondence_position} GeoVac internal,
+\emph{GeoVac correspondence position memo},
+\texttt{debug/geovac\_correspondence\_position\_memo.md}, 2026-05-29.
+
+\end{thebibliography}
+
+\end{document}

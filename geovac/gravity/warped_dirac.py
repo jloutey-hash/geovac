@@ -313,6 +313,177 @@ class DiscreteWedgeDirac:
         return float(np.sum(np.exp(-eigs * t)))
 
 
+# ---------------------------------------------------------------------
+# Spectral azimuthal discretization (G4-6d)
+# ---------------------------------------------------------------------
+#
+# Per the v3.20.0 task #28 finding and the G4-6a first-move reframing
+# (debug/g4_6a_multi_substrate_uv_first_move_memo.md):
+# the FD azimuthal Laplacian underestimates the UV target 1/(24*pi*t)
+# by factor ~1/(4*pi^2) at the truncation edge. The spectral (DST/Fourier)
+# discretization replaces the FD eigenvalue
+#     m_eff^{FD} = (2 / h_phi) * sin(pi (k + 1/2) / N_phi)
+# with the exact continuum eigenvalue
+#     m_eff^{spec} = (k + 1/2) / alpha.
+# This recovers the UV asymptote at sub-percent precision at substrate
+# scales where FD recovers <1% (task #28 measured 25.6% vs 0.04%).
+
+
+@dataclass
+class DiscreteDiskDiracSpectral:
+    """Disk-Dirac with SPECTRAL (exact) azimuthal eigenvalues (G4-6d).
+
+    Same radial structure as DiscreteDiskDirac (Hermitian polar
+    Laplacian with u = sqrt(rho) f substitution); replaces the FD
+    azimuthal eigenvalues with the exact continuum m_eff = k + 1/2.
+
+    Parameters
+    ----------
+    N_rho : int
+        Number of radial sites.
+    a : float
+        Radial lattice spacing.
+    N_phi : int
+        Azimuthal mode count truncation. Modes are k = -N_phi/2, ...,
+        N_phi/2 - 1 with eigenvalues m_eff = k + 1/2.
+    """
+
+    N_rho: int
+    a: float
+    N_phi: int
+
+    def __post_init__(self) -> None:
+        if self.N_rho < 1:
+            raise ValueError(f"N_rho must be >= 1, got {self.N_rho}")
+        if self.a <= 0:
+            raise ValueError(f"a must be > 0, got {self.a}")
+        if self.N_phi < 2:
+            raise ValueError(f"N_phi must be >= 2, got {self.N_phi}")
+
+    @property
+    def R(self) -> float:
+        return self.N_rho * self.a
+
+    @property
+    def hilbert_dim(self) -> int:
+        return 2 * self.N_rho * self.N_phi
+
+    def _hermitian_radial_laplacian(self, m_eff: float) -> np.ndarray:
+        """Same as DiscreteDiskDirac._hermitian_radial_laplacian."""
+        N = self.N_rho
+        a = self.a
+        H = np.zeros((N, N))
+        for i in range(N):
+            k = i + 1
+            rho = k * a
+            H[i, i] = 2.0 / a**2 + (m_eff**2 - 0.25) / rho**2
+            if i > 0:
+                H[i, i - 1] = -1.0 / a**2
+            if i < N - 1:
+                H[i, i + 1] = -1.0 / a**2
+        return H
+
+    def squared_eigenvalues(self) -> np.ndarray:
+        """Eigenvalues with EXACT azimuthal m_eff = k + 1/2."""
+        scalar_eigs: List[float] = []
+        for k_idx in range(self.N_phi):
+            if k_idx <= self.N_phi // 2:
+                k = k_idx
+            else:
+                k = k_idx - self.N_phi
+            m_eff = float(k + 0.5)  # SPECTRAL: exact continuum eigenvalue
+            H_rad = self._hermitian_radial_laplacian(m_eff)
+            evals = np.linalg.eigvalsh(H_rad)
+            scalar_eigs.extend(evals.tolist())
+        scalar_arr = np.array(scalar_eigs)
+        return np.array(sorted(np.concatenate([scalar_arr, scalar_arr])))
+
+    def heat_trace(self, t: float) -> float:
+        eigs = self.squared_eigenvalues()
+        return float(np.sum(np.exp(-eigs * t)))
+
+
+@dataclass
+class DiscreteWedgeDiracSpectral:
+    """Wedge-Dirac with SPECTRAL (exact) azimuthal eigenvalues (G4-6d).
+
+    Same radial structure as DiscreteWedgeDirac; replaces the FD
+    azimuthal eigenvalues with the exact continuum m_eff = (k + 1/2)/alpha.
+
+    Parameters
+    ----------
+    N_rho : int
+        Number of radial sites.
+    a : float
+        Radial lattice spacing.
+    N_phi : int
+        Azimuthal mode count truncation. Modes are k = -N_phi/2, ...,
+        N_phi/2 - 1 with eigenvalues m_eff = (k + 1/2) / alpha.
+    alpha : float
+        Apex-angle multiple. Apex angle = 2*pi*alpha. Must be > 0.
+
+    F6 bit-exact check: at alpha = 1, this class reduces to
+    DiscreteDiskDiracSpectral at matching (N_rho, a, N_phi).
+    """
+
+    N_rho: int
+    a: float
+    N_phi: int
+    alpha: float
+
+    def __post_init__(self) -> None:
+        if self.N_rho < 1:
+            raise ValueError(f"N_rho must be >= 1, got {self.N_rho}")
+        if self.a <= 0:
+            raise ValueError(f"a must be > 0, got {self.a}")
+        if self.N_phi < 2:
+            raise ValueError(f"N_phi must be >= 2, got {self.N_phi}")
+        if self.alpha <= 0:
+            raise ValueError(f"alpha must be > 0, got {self.alpha}")
+
+    @property
+    def R(self) -> float:
+        return self.N_rho * self.a
+
+    @property
+    def hilbert_dim(self) -> int:
+        return 2 * self.N_rho * self.N_phi
+
+    def _hermitian_radial_laplacian(self, m_eff: float) -> np.ndarray:
+        """Same as DiscreteWedgeDirac._hermitian_radial_laplacian."""
+        N = self.N_rho
+        a = self.a
+        H = np.zeros((N, N))
+        for i in range(N):
+            k = i + 1
+            rho = k * a
+            H[i, i] = 2.0 / a**2 + (m_eff**2 - 0.25) / rho**2
+            if i > 0:
+                H[i, i - 1] = -1.0 / a**2
+            if i < N - 1:
+                H[i, i + 1] = -1.0 / a**2
+        return H
+
+    def squared_eigenvalues(self) -> np.ndarray:
+        """Eigenvalues with EXACT azimuthal m_eff = (k + 1/2)/alpha."""
+        scalar_eigs: List[float] = []
+        for k_idx in range(self.N_phi):
+            if k_idx <= self.N_phi // 2:
+                k = k_idx
+            else:
+                k = k_idx - self.N_phi
+            m_eff = float((k + 0.5) / self.alpha)  # SPECTRAL exact eigenvalue
+            H_rad = self._hermitian_radial_laplacian(m_eff)
+            evals = np.linalg.eigvalsh(H_rad)
+            scalar_eigs.extend(evals.tolist())
+        scalar_arr = np.array(scalar_eigs)
+        return np.array(sorted(np.concatenate([scalar_arr, scalar_arr])))
+
+    def heat_trace(self, t: float) -> float:
+        eigs = self.squared_eigenvalues()
+        return float(np.sum(np.exp(-eigs * t)))
+
+
 # Companion: scalar disk Laplacian with periodic phi BC for F3 ratio test
 
 

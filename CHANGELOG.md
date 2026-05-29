@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.21.0] - 2026-05-29
+
+### Sprint Multi-Thread Day — nine conversational threads + Möbius convention audit (45 tasks)
+
+**Minor version bump** (new paper addition + completed diagnostic arc + new production code module). A single ~12-hour conversational day across nine sequential threads (41 tasks) plus a same-day post-sprint-close Möbius convention audit (4 tasks) = 45 tasks total. Triggered by the PI's dS/CFT question early in the conversation. **STRONG — three substantive successes + one clean negative + one resolved false alarm.** Canonical memo: `debug/sprint_multi_thread_day_2026_05_29_memo.md`.
+
+#### Substantive output 1 — Paper 52 drafted ARXIV_READY (fourteenth math.OA standalone)
+
+`papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex`, "Discrete spectral-triple realization of CFT₃-on-S³ partition function data: a non-holographic alternative to dS/CFT." 10 pages, 25 bibitems, three-pass clean LaTeX.
+
+Headline claim: GeoVac sits in a structurally distinct **third category** of correspondence-physics relations, separated from Category I (holographic: AdS/CFT, dS/CFT) and Category II (topological: Chern-Simons/WZW). Category III is the spectral-triple discretization category; the framework's analog of the holographic correspondence is the Latrémolière propinquity convergence theorem (Paper 38) operating between two operator-algebraic discretization levels (discrete spectral triple at finite cutoff and continuum spectral triple on round S³) at rate C₃·γ_{n_max} → 0. The framework's S³ substrate occupies the geometric position that Euclidean dS/CFT (Maldacena 2002) assigns to its boundary CFT₃, and reproduces the standard Klebanov-Pufu-Safdi free energies (Paper 50) without any bulk gravitational theory. Honest scope: NOT a new holographic correspondence, NOT a refutation of dS/CFT, NOT a Theory of Everything candidate. Concurrent-work check CLEAR. Submission-readiness memo: `debug/paper_52_submission_readiness_memo.md`. Proposed metadata: math.OA primary, math-ph + hep-th secondary.
+
+Seeded by the Paper 50 §8 Category-III extension (applied earlier the same day): `papers/group1_operator_algebras/paper_50_cft3_partition_function.tex` 15 → 16 pages with the Category-III cross-table + Strominger 2001 / Maldacena 2002 bibitems. Articulation memo: `debug/geovac_correspondence_position_memo.md`; scoping memo: `debug/sprint_ds_cft_scoping_memo.md`.
+
+#### Substantive output 2 — Two G4-6 sub-sprints formally closed at sprint scale
+
+**G4-6d (spectral azimuthal discretization).** New production classes `DiscreteDiskDiracSpectral` + `DiscreteWedgeDiracSpectral` in `geovac/gravity/warped_dirac.py`, replacing the FD azimuthal eigenvalue (2/h_φ)·sin(π(k+1/2)/N_φ) with the exact continuum eigenvalue (k+1/2)/α. 14 production tests in `tests/test_warped_dirac_spectral.py` (13 fast + 1 slow), all pass. F6 bit-exact at α=1 (wedge spectral reduces to disk spectral). Spectral substrate recovers 6.36% of the UV target 1/(24πt) at t=a² vs FD's 0.04% — ~160× improvement, matching v3.20.0 task #28's analytical prediction. First multi-month G4-6 sub-sprint to close at sprint scale. Closure memo: `debug/g4_6d_spectral_closure_memo.md`.
+
+**G4-6b (IR-boundary regularization).** Diagnostic found B_substrate (Lichnerowicz constant) is essentially R-independent at R ≥ 10 with value 0.163, within 2.3% of continuum +1/6 = 0.167. The B.2 small-t-panel "B_fit = 0.318" was a fit artifact, NOT a substrate property; analytical B-subtraction is NOT needed. Production test `test_B_substrate_R_independent_at_R_geq_10` added; passes. Simplified A-extraction strategy validated. Second multi-month G4-6 sub-sprint to close at sprint scale. Closure memo: `debug/g4_6b_closure_memo.md`; first-move memo: `debug/g4_6b_ir_boundary_first_move_memo.md`.
+
+#### Substantive output 3 — Möbius mechanism: substrate-level identification verified + convention audit RESOLVED
+
+The empirical Möbius factor F(α) = α/(2α-1) modifying the spinor Sommerfeld-Cheeger tip coefficient at excess angle (α > 1) was identified at the substrate level: the discrete heat trace at apex 2πα distributes its mass with soft-IR fraction X(α) → 1/(2α) asymptotically, equivalent to F(α) = 1/(2(1-X(α))). Verified at sub-percent precision; at α=3 the match is 0.03%. The harmonic-conjugate algebraic structure 1/α + 1/F = 2 (Task 11) underlies it. Memos: `debug/sprint_moebius_mode_decomposition_memo.md`, `debug/moebius_harmonic_conjugate_structural_derivation_attempt.md`.
+
+**Reading B literature signal** (thread 8 Track b', via WebFetch/WebSearch): six independent sources (Fursaev-Miele 1996 abstract verbatim "spin 1/2 resembles the scalar case," Solodukhin 2011 Living Review, Beccaria-Tseytlin 2017) unanimously give no Möbius modification in the standard published spin-1/2 conical heat kernel literature. Supports the substrate-universal reading (Möbius is a substrate feature, not a continuum theorem). Memo: `debug/sprint_moebius_route_a_fursaev_miele_pdf_memo.md`.
+
+**Convention audit RESOLVED** (post-sprint-close, PI-greenlit Option 2). A thread-9 "sign discrepancy" flag (direct derivative dΔ_K/dα = +0.052 at α=2 vs v3.19.0 reported -0.0562) was resolved as a definition-versus-derivative observable difference: the v3.19.0 "slope" is the RATIO Δ_K(α)/(1/α-α), not the derivative. Fresh spectral substrate measurement using the v3.19.0 convention reproduces v3.19.0 reported values bit-exactly to four decimal places at α ∈ {1.5, 2, 3}. The substrate-level Möbius identification is verified substrate-discretization-invariant (FD = spectral) and convention-clean. Paper 51 §subsubsec:g4_5_v3_20_followon re-examination flag REMOVED, replaced with a substrate-discretization-invariance verification paragraph. Memo: `debug/sprint_moebius_convention_audit_resolution_memo.md`.
+
+#### Substantive output 4 — Compression-pattern-has-limits finding
+
+The day's pattern of 10-50× sub-sprint compression (multi-month estimates realized at sprint scale) was shown to have a clean limit. The G4-6a refined N_φ-sweep (thread 8 Track a') is a clean NEGATIVE: A coefficient recovery DEGRADES with N_0 (+172.6% at N_0=60 → -18.9% at N_0=480) — the apparent "A signal" was a finite-N_0 artifact from incomplete bulk α·K_disk subtraction. Single-axis substrate refinement does NOT close A coefficient extraction at production substrate values; G4-6a refined needs genuine multi-axis exploration (3-6 months). The framework-state reading: structural-skeleton work compresses (tractable in main session), but calibration / direct numerical convergence at substrate values does NOT compress. New memory file `memory/compression_pattern_with_limits.md`. Multi-axis scoping memo: `debug/g4_6a_refined_multi_axis_scoping_memo.md`.
+
+#### Earlier-thread findings (threads 1-2)
+
+- **CC scoping** (NO-GO with sharpened statement): the cosmological constant problem in GeoVac is precisely the requirement φ(2)/φ(1)² ≈ 10⁻¹²⁴ on the cutoff function with φ(0), φ(1) both O(1) — sharper than the standard 10¹²⁰ framing. No GeoVac-internal mechanism suppresses it. New memory file `memory/cc_phi_moment_fine_tuning_statement.md`. Memo: `debug/sprint_cc_scoping_memo.md`.
+- **2-of-28 projection finding**: of Paper 34's 28 projections, only §III.14 (Koide cone) and §III.16 (Paper 2 K-formula) carry Class-D calibration with known internal structure; the other 26 carry none. Sharpens the structural-skeleton-scope reading at the projection level. Memo: `debug/sprint_projection_specific_calibration_scoping_memo.md`.
+- **Per-t UV target 1/(24πt)**: confirmed structurally derived from CC + replica method (not an external import). Memo: `debug/sprint_per_t_uv_target_derivation_check_memo.md`.
+
+### Added
+
+- `papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex` — NEW (10 pages, fourteenth math.OA standalone; Category III correspondence-physics positioning; arXiv-ready pending PI metadata sign-off).
+- `geovac/gravity/warped_dirac.py` — `DiscreteDiskDiracSpectral` + `DiscreteWedgeDiracSpectral` classes (spectral azimuthal discretization, G4-6d).
+- `tests/test_warped_dirac_spectral.py` — NEW, 14 tests (13 fast + 1 slow), all pass.
+- `memory/cc_phi_moment_fine_tuning_statement.md` — CC problem as φ(2)/φ(1)² ≈ 10⁻¹²⁴.
+- `memory/compression_pattern_with_limits.md` — when sub-sprint estimates compress vs don't.
+- ~50 debug memos + 7 driver scripts + 7 JSON data files (full set listed in canonical memo §6).
+
+### Changed
+
+- `CLAUDE.md` — §1 version v3.20.0 → v3.21.0; §2 Multi-Thread Day one-liner; §3 two dead-end rows (N_φ-sweep clean negative; spurious sign-discrepancy RESOLVED).
+- `papers/group1_operator_algebras/paper_50_cft3_partition_function.tex` — 15 → 16 pages, §8 Category-III extension + Strominger/Maldacena bibitems, three-pass clean.
+- `papers/group5_qed_gauge/paper_51_gravity_arc.tex` — 25 → 27 pages: v3.20.0 follow-on paragraphs, projection-by-projection sharpening (2-of-28), Q3 CC sharpening (φ(2)/φ(1)²), Möbius harmonic-conjugate + substrate-level identification + Reading B literature evidence + substrate-discretization-invariance verification (re-examination flag removed). Three-pass clean.
+- `memory/geovac_structural_skeleton_scope_pattern.md` — extended with 2-of-28 + CC fine-tuning sharpenings.
+- `debug/g4_6_scoping_memo.md` — sub-sprint sequencing reframed multiple times (G4-6d-first → G4-6b sequential prereq → G4-6a refined to N_φ-axis → multi-axis honest sizing).
+
+### Closed
+
+- **G4-6d** (spectral azimuthal discretization) — formally closed at sprint scale; 14 production tests pass; 160× UV improvement over FD.
+- **G4-6b** (IR-boundary regularization) — formally closed at sprint scale; B_substrate clean at R ≥ 10; analytical B-subtraction not needed.
+- **Möbius convention audit** — RESOLVED; substrate-level identification verified bit-exact across substrate discretizations in the v3.19.0 ratio convention.
+
+### Dead ends recorded (CLAUDE.md §3)
+
+- Single-axis N_φ-sweep for G4-6a refined A-coefficient extraction — A recovery DEGRADES with N_0; single-axis refinement does not close A extraction at production substrate values.
+- Spurious "sign discrepancy" Track α'' thread 9 — RESOLVED same day; the two drivers measure different observables (ratio vs derivative); substrate-level Möbius identification is supported.
+
+### Honest scope
+
+- **Theorem-grade:** G4-6d 14 production tests; G4-6b R-independence of B measured directly; Möbius substrate-level identification verified bit-exact (four decimal places) across FD and spectral substrates in the v3.19.0 ratio convention; Paper 52 Category III structural argument at Papers 38/50 rigor.
+- **Structural sketch:** the soft_IR_frac → 1/(2α) mechanism interpretation for the Möbius factor.
+- **Numerical observation:** Möbius F(α) = α/(2α-1) matches measured substrate ratio at sub-3% across α ∈ {1.5, 2, 3}.
+- **Named open follow-ons:** continuum theorem for Möbius (Reading B literature signal favors substrate-universal, not continuum theorem; alternative-discretization verification ~1 week); G4-6a refined multi-axis exploration (genuine 3-6 months if pursued); Paper 52 arXiv submission (PI metadata sign-off); G4-6e (Mellin moment theorem grade, depends on G4-6a refined); G4-6f (final synthesis + Paper 51 §12.8).
+
 ## [3.20.0] - 2026-05-29
 
 ### Sprint v3.19.0 follow-on thread — single-thread queue closure (tasks #24-28)
