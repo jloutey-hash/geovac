@@ -7,6 +7,214 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.6.0] - 2026-05-28
+
+### Sprint G3 — gravity Path 1 closure: scalar Laplacian + TT-tensor Lichnerowicz on $S^3$
+
+**Minor version bump.** Closes the structural-test phase of the gravity arc (G1 → G2 → G3 sequence opened after the PI question "can we make GeoVac a gravity theory?"). Tests whether Paper 28's two-term exactness on the Dirac sector of $S^3$ propagates to other natural operators. Verdict: POSITIVE-WITH-STRUCTURAL-DISTINCTION.
+
+#### Added — three closed-form heat traces on unit $S^3$
+
+All three closed forms verified bit-exactly (rel diff $\sim 10^{-50}$).
+
+- **Dirac** (Paper 28 two-term exactness, recap):
+$$K_{D^2}(t) = \frac{\sqrt{\pi}}{2}\,t^{-3/2} - \frac{\sqrt{\pi}}{4}\,t^{-1/2} + O(e^{-\pi^2/t})$$
+
+- **Scalar Laplacian** (new closed form):
+$$K_\Delta(t) = \frac{\sqrt{\pi}}{4}\cdot\frac{e^t}{t^{3/2}} + O(e^{-\pi^2/t})$$
+
+- **TT-tensor Lichnerowicz** (new closed form, mixed half-integer + integer + discrete corrections):
+$$K_{\Delta_L^{TT}}(t) = e^{3t}\!\left[\frac{\sqrt{\pi}}{2}\,t^{-3/2} - 4\sqrt{\pi}\,t^{-1/2} + 4\right] + 6 e^{2t} + O(e^{-\pi^2/t})$$
+
+#### Added — Theorem (scalar SD closed form on $S^3$)
+
+**Theorem `thm:scalar_ak`**: For the scalar Laplacian on unit $S^3$,
+$$a_k^\Delta = \frac{2\pi^2}{k!} \quad \forall k \geq 0$$
+
+All Seeley-DeWitt coefficients are nonzero and given by the explicit factorial formula. Verified numerically (rel diff $10^{-8}$ to $10^{-6}$ for low $k$; high-$k$ degradation is fit-conditioning artifact).
+
+Values: $a_0 = a_1 = 2\pi^2 \approx 19.74$, $a_2 = \pi^2 \approx 9.87$, $a_3 = \pi^2/3$, $a_4 = \pi^2/12$, $a_5 = \pi^2/60$, ...
+
+#### Structural distinction table
+
+| Operator | Spectrum shift | Two-term exact? | Higher SD coefficients |
+|---|---|---|---|
+| Dirac $D^2$ | half-integer | YES (Paper 28) | $a_k = 0$ for $k \geq 2$ |
+| Scalar $\Delta$ | integer | NO | $a_k = 2\pi^2/k!$ |
+| TT $\Delta_L^{TT}$ | integer (truncated $n \geq 2$) | NO | all nonzero + non-SD pieces |
+
+**Mechanism**: Two-term exactness comes from Jacobi theta inversion. Dirac uses $\theta_2$ (half-integer-shifted sum) → clean two-term. Scalar uses $\theta_3$ (integer sum) → infinite series with $e^t$ prefactor. TT uses $\theta_3$ truncated to $n \geq 2$ → series + discrete corrections from missing low modes.
+
+#### Implication for GeoVac gravity sector
+
+**The clean Einstein-Hilbert + cosmological constant structure from G1/G2 is spinor-bundle-specific.** It lives in the spin-1/2 (Dirac) sector that the Fock projection sources (Paper 23 rigidity theorem). The spin-0 and spin-2 (graviton) sectors inherit standard CC continuum expansion with infinitely many higher-curvature corrections at every order, NOT the clean two-term form.
+
+This sharpens the structural-skeleton-scope reading (per CLAUDE.md memory `geovac_structural_skeleton_scope_pattern`): GeoVac's clean structure is sector-specific. Gravitons, were they constructed via CC-style metric variation on the GeoVac substrate, would behave like standard CC (no special cleanness).
+
+#### Added — Paper 28 §4.9 new subsection `sec:spinor_specificity`
+
+- Three closed forms `eq:K_dirac_recap`, `eq:K_scalar_closed`, `eq:K_TT_closed`
+- Theorem `thm:scalar_ak` with proof + equation `eq:scalar_ak`
+- TT-tensor SD coefficient list with explicit polynomial structure
+- Structural distinction table
+- Implication paragraph: spinor-bundle specificity + structural-skeleton scope refinement
+
+#### Files
+
+- `debug/g3_graviton_lichnerowicz_S3.py` (~330 lines) — 7-step driver (scalar closed-form, scalar SD coefficients, numerical SD fit, TT heat trace, TT SD fit, Dirac recap, structural summary)
+- `debug/data/g3_graviton_lichnerowicz_S3.json` — structured numerical results
+- `debug/g3_graviton_lichnerowicz_S3_memo.md` — canonical memo
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.9 added (~120 lines)
+- `memory/sprint_g3_scalar_TT_S3.md` — durable-findings memory file
+- `MEMORY.md` index updated
+
+#### Gravity arc status after G3
+
+**Path 1 structural-test phase: CLOSED.** G1 (one-parameter $S^3_R$) + G2 (two-parameter $S^3 \times S^1_\beta$) + G3 (spinor-bundle specificity) collectively map out the structural shape of GeoVac's spectral-action gravity claims:
+- Clean Einstein-Hilbert + cosmological constant on Dirac sector (G1, G2)
+- Specific to spinor bundle, not framework-wide (G3)
+- Graviton sector inherits standard CC continuum behavior (G3)
+
+**Remaining gravity-arc paths** (multi-month):
+- **G4** — cigar geometry parameterized by $M$, chasing Bekenstein-Hawking $S = A/4$
+- **G5** — spectral action on decompactified $S^3 \times \mathbb{R}_\tau$, making zero-T de Sitter explicit
+- **G6** — genuine graviton dynamics from CC-style metric variation on the GeoVac substrate
+
+---
+
+## [3.5.0] - 2026-05-28
+
+### Sprint G2 — gravity Path 1 follow-on: spectral action on $S^3_R \times S^1_\beta$
+
+**Minor version bump.** Extension of Sprint G1 from the one-parameter $\{S^3_R\}$ to the two-parameter thermal product $\{S^3_R \times S^1_\beta\}$. Tests whether the 3D two-term exactness theorem propagates to the natural 4D thermal compactification. Verdict: POSITIVE.
+
+#### Added — propagation theorems
+
+- **Heat-kernel factorization theorem**: on $S^3_R \times S^1_\beta$, since $D^2 = D_{S^3}^2 \otimes I + I \otimes (-\partial_\tau^2)$ and the factors anticommute via $\{\gamma^0, D_{S^3}\} = 0$,
+$$\mathrm{Tr}\,e^{-tD^2}\big|_{S^3_R \times S^1_\beta} = K_{S^3}(t, R) \cdot K_{S^1}(t, \beta)$$
+exact at finite $t$. Verified bit-exactly (rel diff $\sim 10^{-50}$).
+- **Two-term exactness propagates**: at small $t$,
+$$K(t)\big|_{S^3 \times S^1} = \frac{\beta R^3}{4}\,t^{-2} - \frac{\beta R}{8}\,t^{-1} + O(\text{exp small in }\min(R^2/t,\,\beta^2/t))$$
+EXACTLY two power-law terms, no Taylor terms in $t$, no higher-curvature corrections at any order. Mechanism: $K_{S^3}$ has 2 power-law terms (G1), $K_{S^1}$ has 1 power-law term (Poisson resummation leading), product has $2 \times 1 = 2$. Cross-products with exp-small remain exp-small.
+- **Corollary `cor:zeta_4D_neg_k`**: $\zeta_{S^3 \times S^1}(-k) = 0$ for all $k \geq 0$. Propagates G1's $\zeta_{\rm unit}(-k) = 0$ identity to the 4-manifold.
+
+#### Added — exact 4D Connes-Chamseddine spectral action
+
+For Gaussian cutoff $f(x) = e^{-x}$:
+$$S(R, \beta, \Lambda) = \frac{\beta R^3}{4}\,\Lambda^4 - \frac{\beta R}{8}\,\Lambda^2 + O(\text{exp small})$$
+
+- $\Lambda^4$ term: cosmological constant, coefficient $\beta R^3/4 = \mathrm{Vol}(S^3 \times S^1)/(8\pi^2)$
+- $\Lambda^2$ term: Einstein-Hilbert, coefficient $-\beta R/8 = -\frac{1}{96\pi^2}\int R_{\rm scalar}\sqrt{g}d^4x$
+- Higher $\Lambda$ powers: identically zero by `cor:zeta_4D_neg_k`
+
+Bit-exact agreement with QM exact at $\Lambda = 10$ across all tested $(R, \beta)$: rel diff $\sim 10^{-44}$.
+
+#### Added — formal extremum and de Sitter vacuum reading
+
+- $\partial S / \partial R = 0$ gives $R_{\rm crit} \Lambda = 1/\sqrt{6} \approx 0.408$ — same as G1.
+- At $R = R_{\rm crit}$: $\partial S/\partial \beta < 0$ linearly.
+- Joint $(R, \beta)$-minimum: $R = R_{\rm crit}$, $\beta \to \infty$ (decompactified $S^1$).
+- Physical reading: zero-temperature de Sitter vacuum with radius $R_{\rm crit} \sim 1/\Lambda$ (Planck scale). Standard CC prediction with standard cosmological-constant-scale gap.
+
+#### Stefan-Boltzmann placement
+
+- Stefan-Boltzmann free energy $F_{\rm SB} \sim T^4$ does NOT appear in the UV asymptotic spectral action.
+- It lives in the exp-small (IR) corrections from higher Matsubara modes ($m \geq 1$ in Poisson resum).
+- CC spectral-action expansion (UV) and Stefan-Boltzmann thermal physics (IR) are structurally distinct. Already known in CC's continuum literature; G2 verifies on the GeoVac substrate.
+
+#### Added — Paper 28 §4.8 new subsection `sec:parametric_spectral_action_4D`
+
+- Factorization theorem `eq:K_factorize_4D`
+- Two-term asymptotic `eq:K_two_term_4D`
+- Corollary `cor:zeta_4D_neg_k`
+- Exact 4D CC spectral action `eq:S_action_4D`
+- Formal extremum analysis + de Sitter vacuum reading
+- Stefan-Boltzmann placement clarification
+
+#### Fixed (pre-existing tech debt)
+
+- **Paper 28 `ruledtabular` LaTeX bug**: lines 2765+ used REVTeX `\begin{ruledtabular}` environment in an `\documentclass{article}` paper, causing fatal compile error. Pre-existing (flagged but not fixed in G1's v3.4.0). Replaced with `\begin{tabular}` + `booktabs` `\toprule/\midrule/\bottomrule`. Paper 28 now compiles cleanly to 42 pages, exit 0.
+
+#### Files
+
+- `debug/g2_spectral_action_S3_x_S1.py` (~340 lines) — 6-step driver (factorization, Poisson resum, two-term asymptotic, SD coefficients, spectral action panel, extremum analysis)
+- `debug/data/g2_spectral_action_S3_x_S1.json` — structured numerical results
+- `debug/g2_spectral_action_S3_x_S1_memo.md` — canonical memo
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.8 added (~115 lines) + ruledtabular bug fixed
+- `memory/sprint_g2_spectral_action_S3_x_S1.md` — durable-findings memory file
+- `MEMORY.md` index updated
+
+#### Next steps in the gravity arc (post-G2)
+
+- **G3** — linearized graviton spectrum on $S^3$ via Lichnerowicz Laplacian (2-4 weeks)
+- **G4** — cigar parameterized by $M$ chasing Bekenstein-Hawking $S = A/4$ (multi-month)
+- **G5 (new candidate)** — spectral action on $S^3 \times \mathbb{R}_\tau$ (decompactified) to make the $\beta \to \infty$ minimum explicit
+
+---
+
+## [3.4.0] - 2026-05-28
+
+### Sprint G1 — Path 1 gravity scoping: spectral action on $S^3_R$
+
+**Minor version bump.** First sprint of the gravity arc opened after the PI question "can we make GeoVac a gravity theory?" Tests whether the framework's Connes-Chamseddine-style spectral action $\operatorname{Tr} f(D^2/\Lambda^2)$ on the family of round $S^3$ has gravity-like structure analogous to CC's "spectral action principle picks out a preferred metric." Verdict: POSITIVE-WITH-NUANCE.
+
+#### Added — substantive new structural identity
+
+- **$\zeta_{\rm unit}(-k) = 0$ for all $k \geq 0$**: spectral-zeta side of Paper 28's two-term exactness theorem. Equivalent to the Bernoulli polynomial identity $4(2k+1) B_{2k+3}(3/2) = (2k+3) B_{2k+1}(3/2)$. Verified symbolically in sympy for $k = 0, 1, 2, 3, 4, 5$ (exact rational zero). Structural proof: the heat-kernel side has no Taylor terms $t^k$ for $k \geq 0$; these would otherwise be sourced by poles of $\Gamma(s)$ at non-positive integers with residues proportional to $\zeta_{\rm unit}(-k)$. Their absence forces the identity.
+- **Corollary — exact two-term spectral action on $S^3_R$ for arbitrary cutoff**:
+  $$S(R, \Lambda) = \phi(3/2) (\Lambda R)^3 - \tfrac{1}{4} \phi(1/2) (\Lambda R) + O(\text{exp small in }(\Lambda R)^2)$$
+  for any cutoff $f$ whose Mellin transform $\phi(s) = \int_0^\infty f(x) x^{s-1} dx$ is meromorphic with poles only at non-positive integers (covers Gaussian $e^{-x}$, polynomial $e^{-x^2}$, sharp $\Theta(1-x)$). **No power-law corrections at any order.** Corrections from $\phi$-poles at $s = -k$ vanish identically because they multiply $\zeta_{\rm unit}(-k) = 0$. This is the cleanest possible statement of "GeoVac M2 mechanism on $S^3$ has no higher-curvature corrections at any order."
+
+#### Added — formal CC extremum on the family
+
+- **Three cutoffs tested, formal extremum at $u_{\rm crit} = O(1)$**:
+  - Gaussian: $A = \sqrt{\pi}/2$, $B = \sqrt{\pi}/4$, $u_{\rm crit} = 1/\sqrt{6} \approx 0.408$
+  - Polynomial $e^{-x^2}$: $A = \tfrac{1}{2}\Gamma(3/4)$, $B = \tfrac{1}{4}\Gamma(1/4)$, $u_{\rm crit} \approx 0.497$
+  - Sharp: $A = 2/3$, $B = 1/2$, $u_{\rm crit} = 1/2$
+
+  All three give $u_{\rm crit}$ in $[0.41, 0.50]$ — the GeoVac analog of CC's de-Sitter radius selection at $R_{\rm crit} \sim 1/\Lambda$.
+
+#### Honest scope (preserved)
+
+- **The formal extremum sits in the IR regime** where the asymptotic does NOT faithfully represent the QM exact sum. Asymptotic matches QM exact to machine precision for $u \gtrsim 2$ (Gaussian, rel diff $10^{-15}$ at $u=2$, $10^{-51}$ at $u=10$).
+- **The literal QM exact sum is monotonically increasing in $u$** — no literal extremum. At $u \to 0$ all modes are Boltzmann-suppressed and $S_{\rm QM} \to 0$; at $u \to \infty$ many modes pass and $S_{\rm QM} \to A u^3$.
+- **Two readings**: (A) literal QM — no extremum; framework does not select preferred radius. (B) Connes-Chamseddine spectral-action principle — asymptotic IS the classical action regardless; extremum gives formal de-Sitter-like preferred radius. CC always operates under reading (B). Under reading (B), GeoVac reproduces CC's Einstein-Hilbert + cosmological constant structure with a **stronger structural result**: no higher-curvature corrections at any order, by the $\zeta_{\rm unit}(-k) = 0$ theorem.
+
+#### Added — Paper 28 §4.7 new subsection `sec:parametric_spectral_action`
+
+- **Theorem `thm:zeta_unit_neg_k`**: $\zeta_{\rm unit}(-k) = 0$ for all $k \geq 0$, with proof sketch via Mellin pole structure + reference to two-term exactness.
+- **Equation `eq:zeta_unit_hurwitz`**: Hurwitz decomposition of $\zeta_{\rm unit}$.
+- **Equation `eq:zeta_unit_neg_k`**: explicit Bernoulli-polynomial form.
+- **Equation `eq:bernoulli_identity`**: equivalent Bernoulli-polynomial identity.
+- **Equation `eq:S_two_term_exact`**: exact two-term spectral action on $S^3_R$.
+- **Table of three cutoffs**: $\phi(3/2)$, $\phi(1/2)$, $u_{\rm crit}$.
+- **Honest-scope paragraph**: QM-vs-asymptotic regime boundary, CC reading explicitly named.
+
+#### Files
+
+- `debug/g1_spectral_action_S3_radius.py` (~340 lines) — driver with three cutoffs, six steps (symbolic identity verification, pole residues, asymptotic coefficients, QM vs asymptotic comparison, convergence, regime boundary)
+- `debug/data/g1_spectral_action_S3_radius.json` — structured numerical results
+- `debug/g1_spectral_action_S3_radius_memo.md` — canonical memo (~8000 words)
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — Paper 28 §4.7 added (~110 lines)
+- `memory/sprint_g1_path1_spectral_action_S3_radius.md` — durable-findings memory file
+- `MEMORY.md` index updated
+
+#### Next steps in the gravity arc
+
+Three named follow-ons (PI to direct):
+
+- **G2** — spectral action on $S^3 \times S^1_\beta$ (Stefan-Boltzmann, 2-4 weeks)
+- **G3** — linearized graviton spectrum on $S^3$ via Lichnerowicz Laplacian (2-4 weeks)
+- **G4** — cigar parameterized by $M$ chasing Bekenstein-Hawking $S = A/4$ (multi-month, Paper 49 §11 BCFM anchor)
+
+The structural obstacle to a "real" gravity theory remains: the metric on $S^3$ is rigid under the Fock projection (Paper 23 rigidity theorem). $R$ varies the size at fixed shape; true Einstein-equation tests require varying over $g_{\mu\nu}$ at fixed topology, which requires a genuine metric degree of freedom.
+
+#### Pre-existing tech debt flagged
+
+- Paper 28 uses `\begin{ruledtabular}` (REVTeX environment) at line 2765+ with `\documentclass{article}` — causes fatal LaTeX compile error. **Pre-existing** (HEAD has it before the v3.4.0 edit). Not fixed in this sprint per scope discipline. Mechanical fix: replace `ruledtabular` with `tabular`, or add `\usepackage{revtex4-1}`.
+
+---
+
 ## [3.1.0] - 2026-05-25
 
 ### Lorentzian arc completion — Papers 48 + 49 — math.OA standalones 10 and 11

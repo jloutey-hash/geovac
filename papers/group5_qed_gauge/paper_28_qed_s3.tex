@@ -1039,6 +1039,356 @@ does \emph{not} provide a mechanism to fix~$\Lambda$.  The value
 $\Lambda = 3.710\ldots$ is determined by inverting the spectral
 action at $K/\pi$, not selected autonomously.
 
+\subsection{Parametric spectral action on $S^3_R$ and $\zeta_{\rm unit}(-k) = 0$}
+\label{sec:parametric_spectral_action}
+
+The two-term exactness theorem~\eqref{eq:sd_two_term} has an equivalent
+formulation on the spectral-zeta side which makes the spectral action
+on the family $\{S^3_R : R > 0\}$ \emph{exactly} two-term for any
+reasonable cutoff function $f$.
+
+\paragraph{The $\zeta_{\rm unit}(-k) = 0$ identity.}
+The spectral zeta of $D^2$ on unit $S^3$ admits a Hurwitz decomposition:
+\begin{equation}
+  \zeta_{\rm unit}(s)
+  = \sum_n 2(n{+}1)(n{+}2)\,(n+\tfrac{3}{2})^{-2s}
+  = 2\,\zeta_H(2s{-}2,\,\tfrac{3}{2})
+   - \tfrac{1}{2}\,\zeta_H(2s,\,\tfrac{3}{2}).
+  \label{eq:zeta_unit_hurwitz}
+\end{equation}
+At non-positive integers $s = -k$ ($k = 0, 1, 2, \ldots$), using
+$\zeta_H(-n, a) = -B_{n+1}(a)/(n+1)$:
+\begin{equation}
+  \zeta_{\rm unit}(-k)
+  = -\frac{2\,B_{2k+3}(3/2)}{2k+3}
+   + \frac{B_{2k+1}(3/2)}{2(2k+1)}.
+  \label{eq:zeta_unit_neg_k}
+\end{equation}
+
+\begin{theorem}[$\zeta_{\rm unit}(-k) = 0$ for all $k \geq 0$]
+\label{thm:zeta_unit_neg_k}
+The right-hand side of~\eqref{eq:zeta_unit_neg_k} vanishes identically
+for every non-negative integer $k$. Equivalently,
+\begin{equation}
+  4(2k+1)\,B_{2k+3}(3/2) = (2k+3)\,B_{2k+1}(3/2)
+  \qquad \forall\,k \geq 0.
+  \label{eq:bernoulli_identity}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Via the Mellin transform $\operatorname{Tr} e^{-tD^2} = (1/2\pi i)
+\int \Gamma(s)\,\zeta_{\rm unit}(s)\,t^{-s}\,ds$, shifting the contour
+through the right half-plane picks up contributions from poles of
+$\Gamma(s)\zeta_{\rm unit}(s)$. The two-term exactness theorem
+\eqref{eq:sd_two_term} states that the asymptotic expansion at small
+$t$ has only the leading $t^{-3/2}$ and $t^{-1/2}$ terms, with no
+Taylor terms $t^k$ ($k \geq 0$). The Taylor coefficients would
+otherwise be sourced by poles of $\Gamma(s)$ at $s = -k$ with residue
+$(-1)^k/k!$, giving contributions proportional to $\zeta_{\rm unit}(-k)$.
+Their absence forces $\zeta_{\rm unit}(-k) = 0$. Verified symbolically
+in \texttt{sympy} for $k = 0, 1, 2, 3, 4, 5$.
+\end{proof}
+
+\paragraph{Exact two-term spectral action on $S^3_R$.}
+For any cutoff $f$ with Mellin transform $\phi(s) = \int_0^\infty f(x)\,
+x^{s-1}\,dx$ that is meromorphic with poles only at non-positive
+integers (e.g.\ Gaussian $e^{-x}$, polynomial $e^{-x^2}$, sharp
+$\Theta(1-x)$), the spectral action on $S^3_R$ is
+\begin{equation}
+  S(R, \Lambda) := \operatorname{Tr} f(D^2/\Lambda^2)
+  = \phi(3/2)\,(\Lambda R)^3
+   - \tfrac{1}{4}\,\phi(1/2)\,(\Lambda R)
+   + O(\text{exp small})
+  \label{eq:S_two_term_exact}
+\end{equation}
+modulo exponentially small corrections in $(\Lambda R)^2$. The
+two-term form is \emph{exact}: there are no power-law corrections at
+any order. Corrections from poles of $\phi(s)$ at non-positive integers
+vanish identically because each one is proportional to
+$\zeta_{\rm unit}(-k) = 0$.
+
+This is a clean structural consequence of two-term exactness: on the
+family of round $S^3_R$ at fixed cutoff function, the spectral action
+is EXACTLY of Einstein--Hilbert plus cosmological-constant form
+($\phi(3/2)(\Lambda R)^3$ is the cosmological-constant slot via
+$\operatorname{Vol}(S^3_R) \propto R^3$; $-\tfrac{1}{4}\phi(1/2)\Lambda R$
+is the Einstein--Hilbert slot via $R_{\rm scalar}\cdot V \propto R$).
+
+\paragraph{Formal extremum and the CC spectral-action reading.}
+Three natural cutoffs give:
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Cutoff & $\phi(3/2)$ & $\phi(1/2)$ & $u_{\rm crit} = \sqrt{\phi(1/2)/(12\,\phi(3/2))}$ \\
+\hline
+Gaussian $e^{-x}$ & $\sqrt{\pi}/2$ & $\sqrt{\pi}$ & $1/\sqrt{6} \approx 0.408$ \\
+Polynomial $e^{-x^2}$ & $\tfrac{1}{2}\Gamma(3/4)$ & $\tfrac{1}{2}\Gamma(1/4)$ & $\approx 0.497$ \\
+Sharp $\Theta(1-x)$ & $2/3$ & $2$ & $1/2$ \\
+\hline
+\end{tabular}
+\end{center}
+The asymptotic spectral action $S_{\rm asymp}(u) = A u^3 - B u$ with
+$A = \phi(3/2) > 0$, $B = \tfrac{1}{4}\phi(1/2) > 0$ has a unique
+minimum at $u_{\rm crit} = \sqrt{B/(3A)} = O(1)$. Under the Connes--Chamseddine
+spectral action principle (Chamseddine--Connes 1997), $S_{\rm asymp}$ IS the
+effective classical action for the geometry; this gives a formal de-Sitter-like
+preferred radius $R_{\rm crit} \sim 1/\Lambda$, the GeoVac analog of CC's
+spectral-action-selects-metric mechanism.
+
+\paragraph{Honest scope.}
+The literal QM action $S_{\rm QM}(u) = \sum_n g_n f(\lambda_n^2/\Lambda^2)$
+is monotonically increasing in $u$ for all three cutoffs and has no
+literal extremum: at $u \to 0$ all modes are Boltzmann-suppressed by
+the cutoff and $S_{\rm QM} \to 0$, while at $u \to \infty$ many modes
+pass the cutoff and $S_{\rm QM} \to A u^3$. The asymptotic
+$S_{\rm asymp} = A u^3 - B u$ agrees with $S_{\rm QM}$ to machine
+precision for $u \gtrsim 2$ (Gaussian); the formal extremum at
+$u_{\rm crit} \sim 0.4$--$0.5$ sits in the IR regime where the
+asymptotic does NOT faithfully represent the QM exact sum.
+
+Under the CC spectral-action reading (asymptotic = classical action),
+GeoVac on $S^3_R$ reproduces CC-style Einstein--Hilbert + cosmological
+constant with a stronger structural result: \emph{the asymptotic
+terminates at two terms with no higher-curvature corrections at any
+order}, by Theorem~\ref{thm:zeta_unit_neg_k}. CC's continuum spectral
+action on a generic 4-manifold has higher-curvature corrections at
+every order; the GeoVac substrate eliminates them structurally.
+Sprint G1 driver: \texttt{debug/g1\_spectral\_action\_S3\_radius.py}
+and memo \texttt{debug/g1\_spectral\_action\_S3\_radius\_memo.md}.
+
+\subsection{Extension to $S^3_R \times S^1_\beta$: factorization and 4D CC structure}
+\label{sec:parametric_spectral_action_4D}
+
+The two-term exactness theorem~\eqref{eq:sd_two_term} and the
+$\zeta_{\rm unit}(-k) = 0$ identity~\eqref{eq:zeta_unit_neg_k}
+PROPAGATE from $S^3$ to the thermal product $S^3_R \times S^1_\beta$
+(Euclidean compactified time with antiperiodic boundary conditions for
+fermions). On the product, the spectral action acquires the exact 4D
+Connes--Chamseddine form: Einstein--Hilbert + cosmological constant
+with no higher-curvature corrections at any order.
+
+\paragraph{Factorization.} The Dirac operator on $S^3_R \times S^1_\beta$
+is $D = \gamma^0 \otimes \partial_\tau + I \otimes D_{S^3}$ with
+$\{\gamma^0, D_{S^3}\} = 0$, so $D^2 = D_{S^3}^2 \otimes I + I \otimes (-\partial_\tau^2)$.
+The heat kernel factorizes:
+\begin{equation}
+  \operatorname{Tr} e^{-tD^2}\big|_{S^3_R \times S^1_\beta}
+  = K_{S^3}(t, R) \cdot K_{S^1}(t, \beta).
+  \label{eq:K_factorize_4D}
+\end{equation}
+$K_{S^3}(t, R) = K_{\rm unit}(t/R^2)$ has the two-term form
+\eqref{eq:sd_two_term}. $K_{S^1}(t, \beta) = \sum_k e^{-t\omega_k^2}$
+with Matsubara frequencies $\omega_k = 2\pi(k+1/2)/\beta$ admits
+Poisson resummation:
+\begin{equation}
+  K_{S^1}(t, \beta) = \frac{\beta}{2\sqrt{\pi t}}\,\theta_4\!\left(0,
+    e^{-\beta^2/(4t)}\right)
+  = \frac{\beta}{2\sqrt{\pi t}} + O\!\left(e^{-\beta^2/(4t)}\right).
+\end{equation}
+
+\paragraph{Two-term exactness on the product.} Both factors have
+clean asymptotic expansions modulo exp-small. Multiplying:
+\begin{equation}
+  \operatorname{Tr} e^{-tD^2}\big|_{S^3_R \times S^1_\beta}
+  = \frac{\beta R^3}{4}\, t^{-2}
+   - \frac{\beta R}{8}\, t^{-1}
+   + O\!\left(\text{exp small in }\min(R^2/t, \beta^2/t)\right).
+  \label{eq:K_two_term_4D}
+\end{equation}
+EXACTLY two power-law terms, no Taylor terms in $t$, no higher
+curvature corrections. The cross-product of "exp small'' with
+"power-law'' remains exp small.
+
+\begin{corollary}[$\zeta_{S^3 \times S^1}(-k) = 0$]
+\label{cor:zeta_4D_neg_k}
+For the product space $S^3_R \times S^1_\beta$ with antiperiodic
+boundary conditions for fermions,
+$\zeta_{S^3 \times S^1}(-k) = 0$ for all non-negative integers $k$.
+\end{corollary}
+
+\begin{proof}
+$\zeta_{S^3 \times S^1}(-k)$ corresponds to the Taylor coefficient of
+$\operatorname{Tr} e^{-tD^2}$ at $t = 0$ via Mellin inversion (cf.\
+proof of Theorem~\ref{thm:zeta_unit_neg_k}). By
+\eqref{eq:K_two_term_4D}, $\operatorname{Tr} e^{-tD^2}$ has no Taylor
+terms in $t$, only power-law $t^{-2}, t^{-1}$ and exp-small corrections.
+\end{proof}
+
+\paragraph{4D Connes--Chamseddine form.} For Gaussian cutoff
+$f(x) = e^{-x}$, the spectral action factorizes and matches the
+asymptotic to bit-exact precision at large $\Lambda$:
+\begin{equation}
+  S(R, \beta, \Lambda)
+  = \operatorname{Tr} e^{-D^2/\Lambda^2}
+  = \frac{\beta R^3}{4}\, \Lambda^4
+   - \frac{\beta R}{8}\, \Lambda^2
+   + O(\text{exp small}).
+  \label{eq:S_action_4D}
+\end{equation}
+This is the standard 4D CC form: $\Lambda^4$ cosmological constant +
+$\Lambda^2$ Einstein--Hilbert.
+\begin{itemize}
+\item $\Lambda^4$ coefficient: $\beta R^3 / 4 =
+      \operatorname{Vol}(S^3_R \times S^1_\beta) / (8\pi^2)$ where
+      $\operatorname{Vol} = 2\pi^2 R^3 \beta$.
+\item $\Lambda^2$ coefficient: $-\beta R / 8 =
+      -\frac{1}{96\pi^2} \int R_{\rm scalar}\sqrt{g}\,d^4x$ where
+      $\int R_{\rm scalar} \sqrt{g}\,d^4 x = 12\pi^2 R \beta$ (only
+      $S^3$ contributes; $S^1$ is flat).
+\item Higher $\Lambda$ powers: exactly zero by
+      Corollary~\ref{cor:zeta_4D_neg_k}.
+\end{itemize}
+
+\paragraph{Formal extremum and de Sitter vacuum.} The asymptotic
+$S(R, \beta, \Lambda) = (\beta R^3/4)\Lambda^4 - (\beta R/8)\Lambda^2$
+has $\partial S/\partial R = 0$ at $R_{\rm crit}\Lambda = 1/\sqrt{6}$
+(identical to the one-parameter G1 extremum). At $R = R_{\rm crit}$,
+$\partial S/\partial \beta < 0$, so the joint minimum is at
+$\beta \to \infty$. This corresponds to the decompactified $S^1 =
+\mathbb{R}_\tau$ limit, i.e., the **zero-temperature de Sitter vacuum**
+with radius $R_{\rm crit} \sim 1/\Lambda$. Same standard de
+Sitter prediction (and same cosmological-constant-problem gap) as
+CC's continuum spectral action.
+
+\paragraph{Stefan--Boltzmann lives in the exp-small.} The thermal
+free energy $F_{\rm SB}(T) = -7\pi^2/180 \cdot V T^4$ for free fermions
+does NOT appear in the UV asymptotic \eqref{eq:S_action_4D}. It lives
+in the exp-small corrections from higher Matsubara modes
+($m \geq 1$ in Poisson resum). The CC spectral-action expansion
+(UV / asymptotic) and Stefan--Boltzmann thermal physics (IR /
+convergent) are structurally distinct contributions, as already
+known in CC's continuum literature.
+
+Sprint G2 driver: \texttt{debug/g2\_spectral\_action\_S3\_x\_S1.py}
+and memo \texttt{debug/g2\_spectral\_action\_S3\_x\_S1\_memo.md}.
+
+\subsection{Spinor-bundle specificity: scalar and TT-tensor heat traces}
+\label{sec:spinor_specificity}
+
+The two-term exactness theorem~\eqref{eq:sd_two_term}, which underwrites
+both the parametric spectral action on $S^3_R$ (\S\ref{sec:parametric_spectral_action})
+and the 4D thermal extension (\S\ref{sec:parametric_spectral_action_4D}),
+is \emph{specific to the spinor bundle on} $S^3$. The scalar
+Laplacian and the Lichnerowicz Laplacian on transverse-traceless
+symmetric rank-2 tensors (the graviton sector) have heat traces with
+infinitely many Seeley--DeWitt coefficients, the standard CC continuum
+expansion.
+
+This sharpens the structural reading of two-term exactness: it reflects
+the half-integer-shifted Dirac spectrum, NOT the geometry of $S^3$ per
+se. We derive closed-form heat traces for the three operators of
+interest.
+
+\paragraph{Three closed forms.}
+
+\textbf{Dirac} (Theorem~\eqref{eq:sd_two_term}, half-integer spectrum
+$(n+3/2)^2$ with multiplicity $2(n+1)(n+2)$, Jacobi $\theta_2$ inversion):
+\begin{equation}
+  K_{D^2}(t)\big|_{S^3}
+  = \frac{\sqrt{\pi}}{2}\,t^{-3/2}
+   - \frac{\sqrt{\pi}}{4}\,t^{-1/2}
+   + O(e^{-\pi^2/t}).
+  \label{eq:K_dirac_recap}
+\end{equation}
+
+\textbf{Scalar Laplacian} (integer spectrum $n(n+2)$ with multiplicity
+$(n+1)^2$, $n \geq 0$, Jacobi $\theta_3$ inversion + exponential
+prefactor):
+\begin{equation}
+  K_\Delta(t)\big|_{S^3}
+  = \frac{\sqrt{\pi}}{4}\,\frac{e^t}{t^{3/2}}
+   + O(e^{-\pi^2/t}).
+  \label{eq:K_scalar_closed}
+\end{equation}
+
+\textbf{TT-tensor Lichnerowicz} (integer spectrum $n(n+2) - 2$ for
+$n \geq 2$ with multiplicity $2(n-1)(n+3)$, Jacobi $\theta_3$
+inversion + discrete corrections from missing $n=0, 1$ levels):
+\begin{equation}
+  K_{\Delta_L^{TT}}(t)\big|_{S^3}
+  = e^{3t}\!\left[\frac{\sqrt{\pi}}{2}\,t^{-3/2}
+                  - 4\sqrt{\pi}\,t^{-1/2}
+                  + 4\right]
+   + 6 e^{2t}
+   + O(e^{-\pi^2/t}).
+  \label{eq:K_TT_closed}
+\end{equation}
+
+All three closed forms are verified bit-exactly (relative error
+$< 10^{-50}$ at $t \leq 0.1$) numerically in
+\texttt{debug/g3\_graviton\_lichnerowicz\_S3.py}.
+
+\paragraph{Seeley--DeWitt coefficient comparison.} Expanding into
+standard form $K(t) = (4\pi t)^{-3/2}\sum_k a_k t^k$:
+
+\begin{theorem}[Scalar SD closed form on $S^3$]
+\label{thm:scalar_ak}
+For the scalar Laplacian on unit $S^3$, all Seeley--DeWitt
+coefficients are nonzero and given by
+\begin{equation}
+  a_k^\Delta = \frac{2\pi^2}{k!} \qquad \forall k = 0, 1, 2, \ldots
+  \label{eq:scalar_ak}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+From \eqref{eq:K_scalar_closed}, expanding $e^t = \sum_k t^k/k!$ gives
+$K_\Delta(t) = \sum_k (\sqrt{\pi}/(4 k!))\,t^{k-3/2}$. Matching to
+$K_\Delta = (4\pi t)^{-3/2}\sum_k a_k t^k$ yields
+$a_k = (4\pi)^{3/2}\sqrt{\pi}/(4 k!) = 2\pi^2/k!$.
+\end{proof}
+
+For the TT-tensor, the heat trace \eqref{eq:K_TT_closed} contains BOTH
+half-integer-power terms (from the smooth Weyl asymptotic with $e^{3t}$
+prefactor) AND integer-power terms (from the constant $4$ and the
+discrete correction $6 e^{2t}$). The standard SD form captures only
+the half-integer-power content; the integer-power content is "non-SD,''
+reflecting the truncation of the spectrum to $n \geq 2$.
+
+Half-integer-power coefficients from
+$e^{3t}[(\sqrt{\pi}/2)\,t^{-3/2} - 4\sqrt{\pi}\,t^{-1/2}]$:
+\begin{align*}
+  a_0^{TT} &= 4\pi^2, \\
+  a_1^{TT} &= -20\pi^2 = (\sqrt{\pi}/2)(3) - 4\sqrt{\pi} \text{ scaled by }(4\pi)^{3/2},\\
+  a_2^{TT} &= -78\pi^2, \quad \text{etc.}
+\end{align*}
+All nonzero, with $a_k^{TT} \propto \pi^2 \cdot p_k(3)$ for explicit
+polynomials $p_k$ from the $e^{3t}$ expansion.
+
+\paragraph{Structural distinction.}
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+Operator & Spectrum shift & Two-term exact? & Higher SD coefficients \\
+\hline
+$D^2$ Dirac & half-integer & YES (Paper~28) & $a_k = 0$ for $k \geq 2$ \\
+$\Delta$ scalar & integer & NO & $a_k = 2\pi^2/k!$ (Thm~\ref{thm:scalar_ak}) \\
+$\Delta_L^{TT}$ Lichnerowicz & integer (truncated) & NO & all nonzero + non-SD pieces \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Implication.} The clean CC Einstein--Hilbert + cosmological
+constant structure on $S^3$ that emerges from the spectral action
+\eqref{eq:S_two_term_exact} (Sprint G1) and \eqref{eq:S_action_4D}
+(Sprint G2) is a feature of the \emph{spinor bundle}, not of $S^3$
+as a manifold. Gravitons (spin-2 TT modes) on $S^3$ have a heat trace
+with infinite higher-curvature SD coefficients plus non-SD discrete
+corrections from the spectrum's $n \geq 2$ cutoff. The graviton
+sector on the GeoVac substrate, were it constructed via CC-style
+metric variation, would inherit the standard CC continuum expansion
+with corrections at every order, NOT the clean two-term form of the
+Dirac sector.
+
+This is consistent with the framework's structural-skeleton scope:
+clean structure lives in the Dirac sector sourced by the Fock
+projection (Paper 23 rigidity), with gravity-side coupling constants
+remaining external calibration data.
+
+Sprint G3 driver: \texttt{debug/g3\_graviton\_lichnerowicz\_S3.py}
+and memo \texttt{debug/g3\_graviton\_lichnerowicz\_S3\_memo.md}.
+
 % ===================================================================
 \section{Two-Loop Irreducible Constant: $S_{\min}$}
 \label{sec:smin}
@@ -2644,10 +2994,10 @@ where $G_e(b)$ is the electron propagator.
 Scalar electrons recover 7~of~8 rules; Dirac electrons recover
 \textbf{8~of~8} at $n_{\max} = 2$.}
 \label{tab:vector_selection_rules}
-\begin{ruledtabular}
 \begin{tabular}{clccl}
+\toprule
 \# & Rule & Scalar${}+{}$vec & Dirac${}+{}$vec & Mechanism \\
-\hline
+\midrule
 1 & Gaunt/CG sparsity & PASS & PASS & 3$j$ symbol \\
 2 & GS structural zero & PASS & PASS & $2l_{\mathrm{int}}$ odd \\
 3 & SO(4) channel count & PASS & PASS & triangle ineq. \\
@@ -2656,8 +3006,8 @@ Scalar electrons recover 7~of~8 rules; Dirac electrons recover
 6 & Furry's theorem & FAIL & PASS & Dirac spinor phase \\
 7 & Ward identity & PASS${}^a$ & PASS${}^a$ & $\Sigma$ block-diag. \\
 8 & Charge conjugation & PASS & PASS & $\Sigma$ Hermiticity \\
+\bottomrule
 \end{tabular}
-\end{ruledtabular}
 \raggedright ${}^a$ Ward identity passes at $n_{\max} = 2$;
 truncation artifacts at $n_{\max} \geq 3$ (ratio $0.61$ Dirac,
 $3.1$ scalar).

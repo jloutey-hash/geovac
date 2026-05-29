@@ -80,6 +80,7 @@ geometric-solver/
 *.log
 *.aux
 *.out
+*.toc
 *.bbl
 *.blg
 *.synctex.gz
