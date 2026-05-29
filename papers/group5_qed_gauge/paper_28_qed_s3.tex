@@ -1592,6 +1592,78 @@ $\mathbb{R}_\tau$ vacuum.
 Sprint G5: \texttt{debug/g5\_decompactified\_S3\_x\_R.py} and
 \texttt{debug/g5\_decompactified\_memo.md}.
 
+\subsection{Newton constant, cosmological constant, and background extremality}
+\label{sec:newton_cc_extremality}
+
+Sprint G7 consolidates the gravity arc's connection to standard
+Connes--Chamseddine gravity by deriving the framework's gravitational
+parameters in standard QFT language and verifying a structural
+background-extremality consistency check.
+
+\paragraph{Background extremality.} From the G6-Diag-Full physical
+$(1, 1)$-irrep eigenvalues $A_\lambda = a_\lambda(4\lambda^2/\Lambda^4
+- 2/\Lambda^2)$, the Gaussian-weighted integral over the spectrum
+vanishes exactly:
+\begin{equation}
+  \int_0^\infty (4u^2 - 2)\,e^{-u^2}\,du
+  = 4 \cdot \frac{\sqrt{\pi}}{4} - 2 \cdot \frac{\sqrt{\pi}}{2}
+  = 0.
+  \label{eq:extremality_check}
+\end{equation}
+This confirms the standard background-extremality condition: the
+spectral action is stationary at the CH Dirac background, with
+sub-leading perturbations giving the actual graviton kinetic
+structure. Sympy-verified.
+
+\paragraph{Newton constant and cosmological constant from G2.}
+Matching G2's spectral action coefficients
+$(\beta R^3/4)\Lambda^4 - (\beta R/8)\Lambda^2$
+\eqref{eq:S_action_4D} against the standard Einstein--Hilbert +
+cosmological constant action
+$S_{EH} = -(1/16\pi G_{\rm eff})\int(R_{\rm scalar}
+- 2\Lambda_{cc})\sqrt{g}\,d^4 x$
+using $\operatorname{Vol}(S^3_R \times S^1_\beta) = 2\pi^2 R^3 \beta$
+and $\int R_{\rm scalar}\sqrt{g} = 12\pi^2 R\beta$:
+
+\begin{proposition}[Newton constant + cosmological constant]
+\label{prop:newton_cc}
+The Gaussian-cutoff spectral action on $S^3_R \times S^1_\beta$
+identifies the framework's effective gravitational parameters as
+\begin{equation}
+  G_{\rm eff} = \frac{6\pi}{\Lambda^2}, \qquad
+  \Lambda_{cc} = 6\Lambda^2.
+  \label{eq:newton_cc}
+\end{equation}
+\end{proposition}
+
+\paragraph{Planck-scale identification.} Setting $\Lambda \to M_{\rm Planck}$:
+$G_{\rm eff} = 6\pi/M_{\rm Planck}^2 = 6\pi G_{\rm Newton}$ (Planck-scale
+Newton's constant); $\Lambda_{cc} = 6 M_{\rm Planck}^2 = 6/G_{\rm eff}$
+(Planck-scale cosmological constant).
+
+\paragraph{Cosmological constant scale gap.} The predicted ratio
+$\Lambda_{cc}/M_{\rm Planck}^2 = 6$ vs. the observed cosmological dark
+energy $\Lambda_{cc}/M_{\rm Planck}^2 \sim 10^{-120}$ gives a
+$\sim 120$ orders of magnitude gap. This is the standard CC
+cosmological-constant-scale problem, inherited from continuum
+Connes--Chamseddine and not GeoVac-specific. The framework's discrete
+substrate does not modify this leading-order prediction. Standard
+interpretation: cosmological constant scale is Class~1 calibration
+data (see \texttt{memory/external\_input\_three\_class\_partition.md}).
+
+\paragraph{Master Mellin engine classification.} Gravity content is
+M2 (Seeley--DeWitt heat-kernel coefficients $\sqrt{\pi}\cdot \mathbb{Q}
+\oplus \pi^2\cdot \mathbb{Q}$; see Paper~18~\S III.7). G2's coefficients
+$1/(8\pi^2)$ and $-1/(96\pi^2)$ are M2 ring members. On the Dirac
+substrate, M2 terminates at two terms by~\eqref{eq:sd_two_term};
+on scalar/tensor sectors, M2 is the full infinite series
+(\S\ref{sec:spinor_specificity}, eq~\eqref{eq:scalar_ak}). The gravity
+arc's content is thus the M2 sub-mechanism of the master Mellin engine,
+with substrate-specific termination on the Dirac bundle.
+
+Sprint G7 driver: \texttt{debug/g7\_extremality\_newton.py}, memo
+\texttt{debug/g7\_extremality\_newton\_memo.md}.
+
 % ===================================================================
 \section{Two-Loop Irreducible Constant: $S_{\min}$}
 \label{sec:smin}

@@ -7,6 +7,111 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.9.0] - 2026-05-28
+
+### Sprint G7 — Background extremality + Newton constant + cosmological constant
+
+**Minor version bump.** Gravity arc consolidation sprint connecting G2 and G6-Diag-Full to standard CC predictions. **POSITIVE** on both parts.
+
+#### Part A — Background extremality consistency check
+
+From G6-Diag-Full, physical (1,1) eigenvalues are $A_\lambda = a_\lambda(4\lambda^2/\Lambda^4 - 2/\Lambda^2)$ with $a_\lambda = e^{-\lambda^2/\Lambda^2}$. The Gaussian-weighted continuum integral:
+
+$$\int_0^\infty (4u^2 - 2) e^{-u^2}\,du = 4\cdot\sqrt{\pi}/4 - 2\cdot\sqrt{\pi}/2 = 0$$
+
+**Exactly zero.** Symbolically verified by sympy.
+
+**Interpretation**: spectral action is EXTREMIZED at the background CH Dirac. This is the consistency condition that the spectral action's variational principle (defining the de Sitter vacuum in G1, G2, G5) coheres with the perturbation-theory analysis (G6-Diag-Full). Sub-leading corrections give the actual graviton kinetic structure.
+
+#### Part B — Newton constant + cosmological constant from G2
+
+Matching G2's spectral action $(\beta R^3/4)\Lambda^4 - (\beta R/8)\Lambda^2$ to standard Einstein-Hilbert + cosmological constant $S_{EH} = -\frac{1}{16\pi G_{\rm eff}}\int(R - 2\Lambda_{cc})\sqrt{g}$ using Vol$(S^3_R \times S^1_\beta) = 2\pi^2 R^3 \beta$ and $\int R_{\rm scalar} \sqrt{g} = 12\pi^2 R\beta$:
+
+$$G_{\rm eff} = \frac{6\pi}{\Lambda^2}, \qquad \Lambda_{cc} = 6\Lambda^2$$
+
+**Planck-scale identification** ($\Lambda \to M_{\rm Planck}$):
+- $G_{\rm eff} = 6\pi/M_{\rm Planck}^2 = 6\pi G_{\rm Newton}$
+- $\Lambda_{cc} = 6 M_{\rm Planck}^2 = 6/G_{\rm eff}$
+
+#### Cosmological constant scale gap (standard CC issue, inherited)
+
+- Predicted: $\Lambda_{cc}/M_{\rm Planck}^2 = 6$
+- Observed: $\Lambda_{cc}/M_{\rm Planck}^2 \sim 10^{-120}$
+- **Gap: ~120 orders of magnitude**
+
+This is the standard Connes-Chamseddine cosmological-constant-scale problem, not GeoVac-specific. The framework's discrete substrate doesn't modify this leading-order prediction. Cosmological constant scale is Class 1 calibration data per `memory/external_input_three_class_partition`.
+
+#### Master Mellin engine classification
+
+Per Paper 18 §III.7, gravity content is **M2** (Seeley-DeWitt heat-kernel coefficients). G2's coefficients $1/(8\pi^2)$ and $-1/(96\pi^2)$ are M2 ring members.
+
+- **M2 on Dirac sector**: terminates at 2 SD coefficients (Paper 28 two-term exactness theorem)
+- **M2 on scalar/tensor sectors**: full infinite series ($a_k = 2\pi^2/k!$ for scalar Laplacian, G3)
+
+Gravity arc lives entirely within the master Mellin engine M2 sub-mechanism.
+
+#### Paper 28 §4.13 new subsection `sec:newton_cc_extremality`
+
+- Equation `eq:extremality_check` (background extremality)
+- Proposition `prop:newton_cc` ($G_{\rm eff} = 6\pi/\Lambda^2$, $\Lambda_{cc} = 6\Lambda^2$)
+- Equation `eq:newton_cc`
+- Planck-scale identification
+- Cosmological-constant-scale gap acknowledgment
+- Master Mellin engine M2 classification
+
+Paper 28 now 47 pages, three-pass clean compile.
+
+#### Honest scope
+
+**Reached:**
+- Extremality consistency check verified ✓
+- $G_{\rm eff} = 6\pi/\Lambda^2$ derived ✓
+- $\Lambda_{cc} = 6\Lambda^2$ derived ✓
+- Standard CC cosmological-constant-scale gap acknowledged ✓
+- Master Mellin engine M2 classification ✓
+
+**Not reached:**
+- Resolution of cosmological-constant-scale problem (standard CC issue, not addressed)
+- Matter contribution to $\Lambda_{cc}$ (G7-extension; would add scalar + Dirac + gauge contributions)
+- Inner fluctuation analysis (Marcolli-vS gauge field structure)
+- Discrete-substrate corrections at finite $n_{\max}$
+
+#### Files
+
+- `debug/g7_extremality_newton.py` — symbolic derivation driver
+- `debug/data/g7_extremality_newton.json` — structured results
+- `debug/g7_extremality_newton_memo.md` — canonical memo
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.13 added (~70 lines)
+- `memory/sprint_g7_extremality_newton.md` — durable findings
+- `MEMORY.md` index updated
+
+#### Gravity arc status after G7
+
+| Sprint | Verdict | Status |
+|---|---|---|
+| G1, G2, G3 | structural-test phase | CLOSED v3.6.0 |
+| G6-Diag-Full | graviton diagnostic POSITIVE | CLOSED v3.7.0 |
+| G4, G5 | BH entropy + de Sitter vacuum | CLOSED v3.8.0 |
+| G7 | extremality + Newton + Λ_cc | CLOSED v3.9.0 |
+
+**Net gravity arc statement (consolidated):**
+- CC Einstein-Hilbert + cosmological constant emerges exactly on Dirac sector (G1, G2)
+- Two-term exactness is spinor-bundle-specific (G3)
+- Gravitons exist at substrate level with positive kinetic eigenvalue (G6-Diag-Full)
+- Bekenstein-Hawking standard derivation works at continuum (G4); discrete analog multi-month
+- De Sitter vacuum closed-form (G5)
+- Newton constant and cosmological constant in CC language: $G_{\rm eff} = 6\pi/\Lambda^2$, $\Lambda_{cc} = 6\Lambda^2$ (G7)
+- Standard CC cosmological-constant-scale gap inherited (G7)
+- Background extremality consistency check verified (G7)
+
+The framework is "spectral-action gravity on a discrete substrate" — clean structural features at the substrate level, standard CC predictions at matched-coefficient level, with standard CC limitations (cosmological constant scale) inherited.
+
+**Remaining multi-month commitments:**
+- G4 full — discrete spectral triple on cigar
+- G6 full — Fierz-Pauli derivation
+
+---
+
 ## [3.8.0] - 2026-05-28
 
 ### Sprints G4 + G5 — Bekenstein-Hawking entropy + decompactified de Sitter vacuum

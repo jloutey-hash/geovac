@@ -1,0 +1,21 @@
+{
+  "extremality_check": {
+    "integrand": "exp(-u^2) (4 u^2 - 2)",
+    "integral_from_0_to_infty": "0",
+    "is_zero": true,
+    "interpretation": "Background extremality: spectral action stationary at background"
+  },
+  "newton_and_cc": {
+    "Lambda4_coefficient_G2": "Lambda**4*R**3*beta/4",
+    "Lambda2_coefficient_G2": "-Lambda**2*R*beta/8",
+    "Volume_S3xS1": "2*pi**2*R**3*beta",
+    "integral_R_sqrt_g": "12*pi**2*R*beta",
+    "G_eff": "6*pi/Lambda**2",
+    "Lambda_cc": "6*Lambda**2"
+  },
+  "planck_scale_interpretation": {
+    "G_eff_at_Lambda_eq_MPlanck": "6 pi G_Newton",
+    "Lambda_cc_at_Lambda_eq_MPlanck": "6 M_Planck^2",
+    "predicted_to_observed_ratio": "10^120 gap (standard CC issue)"
+  }
+}
