@@ -7,6 +7,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.12.0] - 2026-05-28
+
+### Sprint G8 — Cutoff-function dependence of $G_{\rm eff}$ and $\Lambda_{cc}$
+
+**Minor version bump.** Generalizes G7's Gaussian-cutoff Newton constant derivation to arbitrary cutoff functions via the Mellin transform $\phi(s) = \int_0^\infty f(x)\, x^{s-1}\,dx$. **POSITIVE-CALIBRATION-CLARIFICATION.**
+
+#### Setup
+
+Sprint G7 derived $G_{\rm eff} = 6\pi/\Lambda^2$ and $\Lambda_{cc} = 6\Lambda^2$ specifically for the Gaussian cutoff $f(x) = e^{-x}$. Sprint G8 asks how these change for arbitrary $f$ and which (if any) combinations are cutoff-independent (true framework predictions).
+
+#### Closed-form general formulas
+
+From the G2 spectral action on $S^3_R \times S^1_\beta$ with cutoff $f$:
+$$S(R, \beta, \Lambda) = \phi(2)\cdot\frac{\beta R^3}{4}\Lambda^4 - \phi(1)\cdot\frac{\beta R}{8}\Lambda^2$$
+
+Matching against Einstein-Hilbert plus cosmological constant gives:
+- $G_{\rm eff}(f, \Lambda) = 6\pi/(\phi(1)\,\Lambda^2)$
+- $\Lambda_{cc}(f, \Lambda) = 6\,\phi(2)/\phi(1) \cdot \Lambda^2$
+- $R_{\rm crit}\,\Lambda = \sqrt{\phi(1)/(6\,\phi(2))}$
+
+#### Three specific cutoffs
+
+| Cutoff $f(x)$ | $\phi(1)$ | $\phi(2)$ | $G_{\rm eff}\Lambda^2$ | $\Lambda_{cc}/\Lambda^2$ | $R_{\rm crit}\Lambda$ |
+|---|---|---|---|---|---|
+| Gaussian $e^{-x}$ | $1$ | $1$ | $6\pi$ | $6$ | $1/\sqrt{6}$ |
+| Polynomial $e^{-x^2}$ | $\sqrt{\pi}/2$ | $1/2$ | $12\sqrt{\pi}$ | $6/\sqrt{\pi}$ | $\sim 0.544$ |
+| Sharp $\Theta(1-x)$ | $1$ | $1/2$ | $6\pi$ | $3$ | $1/\sqrt{3}$ |
+
+All values verified symbolically.
+
+#### Cutoff-independence analysis
+
+Tested all natural combinations: $G_{\rm eff}\Lambda^2$, $\Lambda_{cc}/\Lambda^2$, $G_{\rm eff}\Lambda_{cc}$, $(G_{\rm eff}\Lambda^2)/(\Lambda_{cc}/\Lambda^2)$, $R_{\rm crit}\Lambda$. **None are cutoff-independent.** All depend on $\phi(1)$ and/or $\phi(2)/\phi(1)$.
+
+#### Class 1 calibration classification
+
+The cutoff function $f$ is Class 1 calibration data alongside Yukawas, $Z_2/\delta m$ multi-loop QED, and the Born rule (per `memory/external_input_three_class_partition.md`). The framework determines the structural shape and proportionality; it does not select $\phi(1), \phi(2)$ from first principles.
+
+#### Structural vs numerical scope
+
+Sprints G1, G2, G3, G4, G5, G6-Diag-Full produced **structural** findings (closed forms, theorems, mechanisms) — cutoff-independent.  
+Sprint G7 produced **numerical** predictions (specific values of $G_{\rm eff}$, $\Lambda_{cc}$) — cutoff-dependent (Gaussian specifically).  
+This is the standard situation in Chamseddine-Connes spectral action.
+
+#### Gravity arc consolidation
+
+After G1 through G8, the gravity arc has produced 11 sprint outputs (structural theorems + numerical predictions + calibration clarification). The conceptual framework for $S_{BH}$ from spectral action is fully in place at the continuum level. Multi-month G4-3 onwards (discrete-substrate construction) is the structural target for future commitments. **G8 reaches natural sprint-scale closure of the gravity arc.**
+
+#### Honest scope
+
+Continuum-level cutoff dependence analysis on $S^3 \times S^1$. Discrete-substrate analog (G4-3+) is multi-month. First-principles selection of cutoff function remains open (structurally external, Class 1 calibration data).
+
+#### Verdict
+
+**POSITIVE-CALIBRATION-CLARIFICATION.** Framework's structural skeleton is cutoff-independent; numerical gravity predictions are cutoff-dependent. Consistent with standard CC.
+
+#### Added
+
+- `debug/g8_cutoff_dependence.py` — symbolic derivation driver
+- `debug/data/g8_cutoff_dependence.json` — structured results
+- `debug/g8_cutoff_dependence_memo.md` — canonical memo (~3500 words)
+
+#### Changed
+
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.16 added with general formulas, three-cutoff table, Class 1 classification, structural-vs-numerical scope clarification (~110 lines, 51 pages, three-pass clean). Two new bibitems: `chamseddine_connes1997`, `chamseddine_connes2010`.
+- `CLAUDE.md` — version bumped to v3.12.0; §2 one-liner entry added.
+
 ## [3.11.0] - 2026-05-28
 
 ### Sprint G4-2 — Conical defect / replica method for BH entropy

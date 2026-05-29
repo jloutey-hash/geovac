@@ -1,0 +1,46 @@
+{
+  "general_formulas": {
+    "G_eff": "6 pi / (phi(1) Lambda^2)",
+    "Lambda_cc": "6 phi(2) / phi(1) * Lambda^2"
+  },
+  "specific_cutoffs": [
+    {
+      "name": "Gaussian",
+      "f": "e^{-x}",
+      "phi_1": "1",
+      "phi_2": "1",
+      "G_eff": "6*pi/Lambda**2",
+      "Lambda_cc": "6*Lambda**2"
+    },
+    {
+      "name": "Polynomial e^{-x^2}",
+      "f": "e^{-x^2}",
+      "phi_1": "sqrt(pi)/2",
+      "phi_2": "1/2",
+      "G_eff": "12*sqrt(pi)/Lambda**2",
+      "Lambda_cc": "6*Lambda**2/sqrt(pi)"
+    },
+    {
+      "name": "Sharp",
+      "f": "Theta(1 - x)",
+      "phi_1": "1",
+      "phi_2": "1/2",
+      "G_eff": "6*pi/Lambda**2",
+      "Lambda_cc": "3*Lambda**2"
+    }
+  ],
+  "cutoff_dependence_analysis": {
+    "G_eff_Lambda2": "6*pi/phi_1",
+    "Lambda_cc_over_Lambda2": "6*phi_2/phi_1",
+    "R_crit_Lambda_general": "sqrt(6)*sqrt(phi_1)/(6*sqrt(phi_2))",
+    "all_cutoff_dependent": true,
+    "no_simple_universal_combination": true
+  },
+  "framework_implication": {
+    "all_gravity_predictions_cutoff_dependent": true,
+    "cutoff_calibration_class": "Class 1 (external)",
+    "consistent_with_standard_CC": true,
+    "framework_predictions_proportional_to_phi_moments": true
+  },
+  "verdict": "POSITIVE-CALIBRATION-CLARIFICATION"
+}

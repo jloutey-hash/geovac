@@ -1827,6 +1827,131 @@ multi-month implementation follows.
 Sprint G4-2 driver: \texttt{debug/g4\_2\_conical\_replica.py} and memo
 \texttt{debug/g4\_2\_conical\_replica\_memo.md}.
 
+\subsection{Cutoff-function dependence of the gravity predictions
+            (Sprint G8)}
+\label{subsec:g8_cutoff_dependence}
+
+Sprints G2 and G7 derived $G_{\rm eff} = 6\pi/\Lambda^2$ and
+$\Lambda_{cc} = 6\Lambda^2$ assuming the Gaussian cutoff
+$f(x) = e^{-x}$. Sprint G8 generalizes these to arbitrary cutoff
+functions and identifies which framework predictions are
+cutoff-independent (structural) versus cutoff-dependent
+(calibration).
+
+\paragraph{Mellin transform of the cutoff.}
+For a general cutoff function $f$, the spectral content is captured
+by the Mellin transform:
+\begin{equation}
+  \phi(s) := \int_0^\infty f(x)\,x^{s-1}\,dx.
+  \label{eq:cutoff_mellin}
+\end{equation}
+The relevant moments for spectral action matching are $\phi(1)$
+(Einstein-Hilbert scale) and $\phi(2)$ (cosmological-constant scale).
+
+\paragraph{General formulas.}
+From the G2 spectral action on $S^3_R \times S^1_\beta$,
+\begin{equation}
+  S(R, \beta, \Lambda) = \phi(2)\cdot \frac{\beta R^3}{4}\Lambda^4
+                       - \phi(1)\cdot \frac{\beta R}{8}\Lambda^2,
+\end{equation}
+matching against Einstein-Hilbert plus cosmological constant gives:
+\begin{equation}
+  G_{\rm eff}(f, \Lambda) = \frac{6\pi}{\phi(1)\,\Lambda^2},
+  \quad
+  \Lambda_{cc}(f, \Lambda) = \frac{6\,\phi(2)}{\phi(1)}\,\Lambda^2,
+  \label{eq:g8_general}
+\end{equation}
+\begin{equation}
+  R_{\rm crit}\,\Lambda = \sqrt{\frac{\phi(1)}{6\,\phi(2)}}.
+  \label{eq:g8_r_crit}
+\end{equation}
+
+\paragraph{Three cutoff examples.}
+\begin{table}[h]
+  \centering
+  \caption{Gravity predictions for three cutoff functions.}
+  \begin{tabular}{l c c c c}
+    \toprule
+    Cutoff $f(x)$
+      & $\phi(1)$
+      & $\phi(2)$
+      & $G_{\rm eff} \Lambda^2$
+      & $\Lambda_{cc}/\Lambda^2$ \\
+    \midrule
+    Gaussian $e^{-x}$
+      & $1$ & $1$
+      & $6\pi$ & $6$ \\
+    Polynomial $e^{-x^2}$
+      & $\sqrt{\pi}/2$ & $1/2$
+      & $12\sqrt{\pi}$ & $6/\sqrt{\pi}$ \\
+    Sharp $\Theta(1-x)$
+      & $1$ & $1/2$
+      & $6\pi$ & $3$ \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:g8_cutoffs}
+\end{table}
+
+\paragraph{No cutoff-independent gravity prediction.}
+Direct algebra on \eqref{eq:g8_general}--\eqref{eq:g8_r_crit} shows
+that every combination of $G_{\rm eff}$ and $\Lambda_{cc}$ depends
+on $\phi(1)$ and/or $\phi(2)/\phi(1)$:
+\begin{itemize}
+  \item $G_{\rm eff}\cdot\Lambda^2 = 6\pi/\phi(1)$
+        (depends on $\phi(1)$)
+  \item $\Lambda_{cc}/\Lambda^2 = 6\,\phi(2)/\phi(1)$
+        (depends on ratio)
+  \item $G_{\rm eff}\cdot\Lambda_{cc} = 36\pi\,\phi(2)/(\phi(1)^2
+        \Lambda^2)$ (depends on both)
+  \item $R_{\rm crit}\Lambda = \sqrt{\phi(1)/(6\,\phi(2))}$
+        (depends on ratio)
+\end{itemize}
+
+\paragraph{Class~1 calibration data.}
+Per the framework's external-input three-class partition
+(see CLAUDE.md \S1.7 and project memory), the cutoff
+function~$f$ is \emph{Class~1 calibration data} alongside
+Yukawas, $Z_2/\delta m$ multi-loop renormalization data,
+and the Born rule. The framework determines:
+\begin{itemize}
+  \item the \emph{structural form} of $S[D]$ (spectrum,
+        Seeley-DeWitt coefficients),
+  \item the \emph{proportionality} of $G_{\rm eff}$ and
+        $\Lambda_{cc}$ to specific $\phi$-moments,
+  \item the \emph{functional form} of $G_{\rm eff}(f)$,
+        $\Lambda_{cc}(f)$, $R_{\rm crit}(f)$.
+\end{itemize}
+The framework does \emph{not} determine:
+\begin{itemize}
+  \item the numerical value of $G_{\rm eff}$ or $\Lambda_{cc}$
+        in absolute units,
+  \item which cutoff function to use.
+\end{itemize}
+
+\paragraph{Consistency with standard CC.}
+This is the standard situation in the Chamseddine-Connes
+spectral action~\cite{chamseddine_connes1997,
+chamseddine_connes2010}: the cutoff function is external
+input, the framework determines the structural shape.
+
+\paragraph{Structural vs numerical scope.}
+Sprints G1, G2, G3, G4, G5, G6-Diag-Full produced
+\emph{structural} findings (closed forms, theorems, mechanisms)
+that are cutoff-independent. Sprint G7 produced
+\emph{numerical} predictions (specific values of $G_{\rm eff}$,
+$\Lambda_{cc}$) that depend on the Gaussian cutoff choice.
+Sprint G8 clarifies that the framework's gravity-arc
+predictions are best understood as:
+\begin{itemize}
+  \item structural skeleton: cutoff-independent,
+        determined by GeoVac's spectral structure;
+  \item numerical calibration: cutoff-dependent,
+        proportional to $\phi$-moment combinations.
+\end{itemize}
+
+Sprint G8 driver: \texttt{debug/g8\_cutoff\_dependence.py};
+memo: \texttt{debug/g8\_cutoff\_dependence\_memo.md}.
+
 % ===================================================================
 \section{Two-Loop Irreducible Constant: $S_{\min}$}
 \label{sec:smin}
@@ -3937,6 +4062,16 @@ GeoVac Project.  Spectral $\chi_{-4}$ identification in
 $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)$: closed-form derivation
 and verification (Sprint~3 Track~RH-J),
 \texttt{debug/spectral\_chi\_neg4\_memo.md}, April 2026.
+
+\bibitem{chamseddine_connes1997}
+A.~H.~Chamseddine and A.~Connes, ``The spectral action principle,''
+\textit{Comm.~Math.~Phys.}\ \textbf{186}, 731--750 (1997).
+
+\bibitem{chamseddine_connes2010}
+A.~H.~Chamseddine and A.~Connes, ``Noncommutative geometry as a
+framework for unification of all fundamental interactions
+including gravity,'' \textit{Fortsch.~Phys.}\ \textbf{58}, 553--600
+(2010).
 
 \end{thebibliography}
 
