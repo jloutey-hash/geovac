@@ -7,6 +7,125 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.20.0] - 2026-05-29
+
+### Sprint v3.19.0 follow-on thread — single-thread queue closure (tasks #24-28)
+
+**Minor version bump.** Five-task single-thread follow-on queue closing the sprint-scale named follow-ons from the v3.19.0 second push (G4-5 Möbius + Mellin map + UV bracketing + IR cure + G4-6 scoping). Executed in main session, ~70 minutes total vs ~1.5 week estimate at task creation. **MIXED — three POSITIVE, one PARTIAL, one MIXED, with two substantive structural corrections to v3.19.0.**
+
+Headline: two load-bearing corrections to v3.19.0 caught by this thread. (1) Task #26 caught a confabulated arXiv citation (hep-th/9512134 was claimed Fursaev-Solodukhin; actually Preitschopf's "Octonions and Supersymmetry"). The Möbius α/(2α-1) empirical match is preserved (task #25 locked it at sub-2% across 6 α values) but the "Fursaev-Solodukhin spinor double-cover correction" mechanism attribution was retracted; mechanism remains OPEN. The curve-fit-audit memory rule worked as designed. (2) Task #28 identified the correct per-t UV target as **1/(24πt)** (derived from Dowker 1977 + Cheeger 1983), replacing the v3.19.0 Track 2 "+1/6 IR baseline" reading at small t. The v3.19.0 "spectral overshoot" (813%) was a normalization artifact relative to +1/6; against the true UV target 5.305 at t=a², all three discretizations (FD/GM/Spec) UNDERSHOOT (0.04% / 11% / 26% respectively). Reframes the G4-6c azimuthal-refinement sub-sprint target.
+
+#### Task #24 — F14 20-point Mellin panel (POSITIVE strict-5%)
+
+Two cures applied to close the G4-5d-refined PARTIAL (47.9% max deviation): denser t-grid (20 log-spaced points + 3 sharp-edge anchors at t = 1/Λ²) + explicit analytical edge insertion at t = 1/Λ² for the sharp cutoff (turning log-trapezoidal-across-discontinuity into clean analytical truncation). Result: **max deviation 4.82%, mean 2.67%** across 9 channels (3 cutoffs × 3 Λ). Sector-wise Mellin moment map (tip ↔ φ(0), EH ↔ φ(1), Λ_cc ↔ φ(2)) closed POSITIVE at strict 20% gate, in fact at sub-5%. Bit-exact at t = 1 vs G4-5d.
+
+Files: `debug/g4_5d_F14_20pt_panel.{py, _memo.md}`, `debug/data/g4_5d_F14_20pt_panel.json`.
+
+#### Task #25 — α > 1 Möbius validation at α ∈ {4, 5, 10} (POSITIVE-EMPIRICAL-LOCK)
+
+Tested v3.19.0 Track 5 Möbius slope = -(1/12)·α/(2α-1) at three NEW α values not in the original fit set {1.5, 2, 3}:
+
+| α | rel err | recovery |
+|---|---:|---:|
+| 4 | +2.78% | 55.6% |
+| 5 | +2.32% | 54.3% |
+| **10** | **-0.032%** | **52.65%** |
+
+Mean **1.71%** (better than the original fit set's 2.3%). The α = 10 result at -0.032% is essentially exact at the asymptote where F(α) → 1/2. Rel err **decreases** with α (3.3% at α=1.5 → 0.032% at α=10), confirming the Möbius asymptote is structurally locked, not a 3-point fit coincidence.
+
+Files: `debug/alpha_gt_1_moebius_validation_4_5_10.{py, _memo.md}`, `debug/data/alpha_gt_1_moebius_validation_4_5_10.json`.
+
+#### Task #26 — Fursaev-Solodukhin literature grounding (MIXED — mechanism retracted)
+
+**Substantive new finding:** the v3.19.0 sub-agent fabricated the citation. Verified via WebFetch:
+- **hep-th/9512134 is Preitschopf's "Octonions and Supersymmetry"** — not Fursaev-Solodukhin.
+- The actual spinor-on-cone paper is **Fursaev-Miele 1996** (hep-th/9605153, Nucl. Phys. B 484, 697), not Fursaev-Solodukhin 1995.
+- **Fursaev-Miele 1996 says spin 1/2 "resembles the scalar case"** — antisymmetric Cheeger-like, no Möbius modification at α > 1.
+
+**Paper 51 §12.7.7 revised in-place:** mechanism paragraph rewritten to retract the Fursaev-Solodukhin spinor double-cover attribution and frame the Möbius mechanism as OPEN. New bibitems added: `fursaev_miele1996`, `dowker1994`. The existing `fursaev_solodukhin1995` bibitem is retained (correctly cited at three other places in Paper 51 for the BH entropy / Riemannian-geometry context). Page count unchanged (25 → 25), three-pass clean.
+
+Memory file `memory/alpha_gt_1_moebius_closed_form.md` revised: mechanism reframed as OPEN; v3.19.0 retraction logged; task #25 empirical lock noted.
+
+**The curve-fit-audit memory rule (`feedback_audit_numerical_claims.md`) worked exactly as designed.** It caught the confabulated mechanism claim that v3.19.0 sub-agent produced without verification. Empirical match preserved as POSITIVE-EMPIRICAL-LOCK; only the mechanism attribution was confabulated.
+
+Files: `debug/fursaev_solodukhin_1995_grounding_memo.md` (~2500 words, no driver/data, pure literature work).
+
+#### Task #27 — Geometric-mean azimuthal discretization (PARTIAL-OVERSHOOT with substantive structural finding)
+
+Implemented per-mode geometric mean of FD and spectral m_eff²: m²_GM(k) = √(m²_FD(k) · m²_spec(k)). **F6 bit-exact at α = 1** (max_diff = 0.0). Edge ratio at k = N_φ/2: 0.631 vs predicted 2/π = 0.637 (0.8% slack from finite N_φ = 120).
+
+Per-t recovery comparison at substrate panel:
+
+| t | FD % | GM % | Spec % |
+|---:|---:|---:|---:|
+| 0.0025 (t=a²) | 1.31 | **355.92** | 813.38 |
+| 0.05 | 67.59 | 122.63 | 127.62 |
+| 0.1 | 76.34 | 88.89 | 83.01 |
+| 0.5 - 10 | (converged ≈ 89-98%, all three identical) | | |
+
+**GM is genuinely a bracket interior at every t** (FD ≤ GM ≤ Spec throughout; converges at t ≥ 0.2 where IR Lichnerowicz dominates). But at t = a², GM lands at 355.9% — outside the [50%, 200%] gate window relative to the +1/6 baseline. **Cheap geometric-mean cure for sub-percent UV closure ruled out.** Substrate refinement (a → a/2) is the structural fix per task #28.
+
+Files: `debug/g4_5a_geomean_azimuthal.{py, _memo.md}`, `debug/data/g4_5a_geomean_azimuthal.json`.
+
+#### Task #28 — Wedge-spectral-density per-t UV target (POSITIVE-CLOSED-FORM-IDENTIFIED)
+
+**Substantive new finding:** derived the true per-t UV target from standard continuum theory (Dowker 1977 + Cheeger 1983). The continuum prediction is:
+
+$$\text{tip}^{\text{cont}}(t) = \frac{1}{24\pi t} + \text{constant} + O(t)$$
+
+Leading 1/t coefficient: 1/(24π) ≈ 0.01326. Derived by differentiating Dowker's spinor cone formula −(1/12)(1/α − α) at α = 1. The "constant" approaches +1/6 (Lichnerowicz / Seeley-DeWitt) at intermediate t.
+
+**Empirical verification against the v3.19.0 Track 2 + task #27 data:**
+
+| Scheme | tip(t=a²) | vs +1/6 (v3.19.0 framing) | **vs true UV target 5.305** |
+|---|---:|---:|---:|
+| FD | 0.0022 | 1.31% | **0.04%** |
+| GM | 0.5932 | 355.9% | **11.2%** |
+| Spectral | 1.3556 | 813% | **25.6%** |
+
+**All three schemes UNDERSHOOT the true UV target at the substrate UV cell.** The v3.19.0 Track 2 "spectral overshoot" was a normalization artifact (relative to +1/6 = 0.167, off by 31.83× from the true UV target 5.305).
+
+Linear fit tip(t) = A/t + B on small-t data (t < 0.2):
+
+| Scheme | A | A vs continuum A_cont = 0.013263 |
+|---|---:|---:|
+| FD | -0.000303 | -2.29% |
+| GM | 0.001038 | +7.83% |
+| **Spec** | **0.003017** | **+22.75%** |
+
+Spectral recovers the 1/t shape at ~23% of continuum A_cont. Substrate refinement (a → a/2 at proportional N_ρ increase) is the structural cure.
+
+Files: `debug/wedge_spectral_density_per_t_uv_target.{py, _memo.md}`, `debug/data/wedge_spectral_density_per_t_uv_target.json`.
+
+### Updated G4-6 target status
+
+| Target | Status post-v3.20.0 |
+|---|---|
+| (i) Subleading O(a²/r_h²) UV | Reframed: target is **1/(24πt)** UV divergence recovery (task #28). Multi-substrate refinement is the structural direction. |
+| (ii) Subleading O(r_h²/R²) IR | Unchanged. |
+| (iii) α > 1 structural asymmetry | Closed by v3.19.0 Möbius, **reinforced** by task #25 at α ∈ {4,5,10}. Mechanism reframed as OPEN (task #26). |
+| (iv) Spectral azimuthal discretization | Partial closure by task #27 (GM as cheap interim) + task #28 (correct target identified). True closure needs substrate refinement, not just spectral azimuthal. |
+
+G4-6 estimate unchanged at 3-6 months. **G4-6a (multi-substrate UV foundation, sequential gate) is the load-bearing next sprint** for the multi-month commitment.
+
+### Added (production code)
+
+No production code modifications.
+
+### Changed
+
+- **Paper 51 §12.7.7 mechanism paragraph revised in-place** (task #26): retracted Fursaev-Solodukhin spinor double-cover attribution, reframed mechanism as OPEN. Paper 51: 25 → 25 pages, three-pass clean.
+- **Paper 51 bibliography extended**: new bibitems `fursaev_miele1996` (the correct attribution for spinor-on-cone), `dowker1994` (heat kernels on curved cones).
+- **Memory file `alpha_gt_1_moebius_closed_form.md` revised** (task #26): mechanism reframed as OPEN; v3.19.0 retraction logged; task #25 empirical lock noted.
+
+### Process precedent
+
+Single-thread sequential queue (~5 tasks) executed entirely in main session. No sub-agents dispatched. Pattern matches v3.3.0 policy update (main-session by default; sub-agents opt-in for parallel or context-heavy work). Total wall-clock ~70 minutes for what was scoped at ~1.5 weeks at task creation — consistent with the discrete-tractability collapse-of-estimates pattern observed throughout the gravity arc.
+
+The curve-fit-audit memory rule + diagnostic-before-engineering rule both fired correctly and caught load-bearing structural issues (task #26 mechanism retraction; task #27 PARTIAL → task #28 closed-form identification).
+
+---
+
 ## [3.19.0] - 2026-05-29
 
 ### Sprint G4-5 parallel push #2 — α > 1 closed form + Mellin map empirical confirmation

@@ -1,0 +1,73 @@
+{
+  "substrate": {
+    "R": 10.0,
+    "a": 0.05,
+    "N_rho": 200,
+    "N_0": 120,
+    "t_eval": 1.0,
+    "alphas": [
+      4.0,
+      5.0,
+      10.0
+    ],
+    "K_disk": 42.003309144243524,
+    "SC_continuum_target": -0.08333333333333333
+  },
+  "ansatz": {
+    "formula_slope": "-(1/12) * alpha / (2*alpha - 1)",
+    "formula_Delta_K": "(alpha^2 - 1) / (24 * (alpha - 1/2))",
+    "F_moebius": "F(alpha) = alpha / (2*alpha - 1)",
+    "asymptote": "F(alpha) -> 1/2 as alpha -> infinity"
+  },
+  "data": [
+    {
+      "alpha": 4.0,
+      "N_phi": 480,
+      "K_wedge": 168.1869738608766,
+      "Delta_K_measured": 0.1737372839025113,
+      "Delta_K_predicted": 0.17857142857142858,
+      "slope_measured": -0.046329942374003015,
+      "slope_predicted": -0.047619047619047616,
+      "recovery_measured": 0.5559593084880362,
+      "recovery_predicted": 0.5714285714285714,
+      "rel_err_slope_pct": 2.7824451725801267,
+      "rel_err_Delta_K_pct": 2.7824451725801334,
+      "rel_err_recovery_pct": 2.7824451725801214,
+      "elapsed_s": 0.8636412620544434
+    },
+    {
+      "alpha": 5.0,
+      "N_phi": 600,
+      "K_wedge": 210.2337209182485,
+      "Delta_K_measured": 0.21717519703088328,
+      "Delta_K_predicted": 0.2222222222222222,
+      "slope_measured": -0.045244832714767355,
+      "slope_predicted": -0.046296296296296294,
+      "recovery_measured": 0.5429379925772083,
+      "recovery_predicted": 0.5555555555555556,
+      "rel_err_slope_pct": 2.323941803824493,
+      "rel_err_Delta_K_pct": 2.323941803824503,
+      "rel_err_recovery_pct": 2.3239418038244923,
+      "elapsed_s": 1.0817842483520508
+    },
+    {
+      "alpha": 10.0,
+      "N_phi": 1200,
+      "K_wedge": 420.46744198547407,
+      "Delta_K_measured": 0.4343505430388177,
+      "Delta_K_predicted": 0.4342105263157895,
+      "slope_measured": -0.0438737922261432,
+      "slope_predicted": -0.043859649122807015,
+      "recovery_measured": 0.5264855067137185,
+      "recovery_predicted": 0.5263157894736842,
+      "rel_err_slope_pct": -0.032235880735562494,
+      "rel_err_Delta_K_pct": -0.03223588073555147,
+      "rel_err_recovery_pct": -0.03223588073557831,
+      "elapsed_s": 2.173945665359497
+    }
+  ],
+  "mean_rel_err_pct": 1.7128742857133943,
+  "max_rel_err_pct": 2.7824451725801267,
+  "verdict": "POSITIVE-EMPIRICAL-LOCK",
+  "msg": "Moebius ansatz extrapolates cleanly from the original fit set {1.5, 2, 3} to the new alpha values {4, 5, 10}. Mean rel err 1.71% < 3% gate. v3.19.0 Track 5 headline result empirically locked as a structural identification."
+}

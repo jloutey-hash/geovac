@@ -1481,14 +1481,26 @@ transformation with three structural features:
   \item $F'(1)$ finite (smooth at the deficit/excess transition).
 \end{enumerate}
 
-\paragraph{Mechanism: Fursaev--Solodukhin spinor double-cover
-correction.} At excess angle the Sommerfeld image-method contour
-integral picks up additional poles that the standard analytic
-continuation of the deficit-angle ($\alpha < 1$) Sommerfeld--Cheeger
-formula misses. The discrete wedge-Dirac substrate computes the
-proper excess-angle formula cleanly, not the simpler analytic
-continuation. The literature reference is the spinor case treated
-in~\cite{fursaev_solodukhin1995}.
+\paragraph{Mechanism: open structural question.} A literature grounding
+sprint (task \#26 of the post-v3.19.0 follow-on queue,
+2026-05-29) found that the Möbius factor $F(\alpha) = \alpha/(2\alpha - 1)$
+has no analog in the standard published spinor-on-cone literature
+(Cheeger~\cite{cheeger1983}, Dowker~\cite{dowker1994},
+Fursaev--Miele~\cite{fursaev_miele1996}), where the spinor heat-kernel
+coefficient at conical defect resembles the antisymmetric scalar
+Cheeger formula $-(1/12)(1/\alpha - \alpha)$ with no Möbius modification
+at $\alpha > 1$. The discrete substrate computes a result that is either
+(i)~a yet-unidentified continuum excess-angle correction missed in the
+standard derivations, or (ii)~a discrete-substrate-specific UV artifact;
+the latter is partially ruled out by the G4-4c week 2
+$N_0$-independence at $N_0 \in \{120, 240, 480\}$ but not eliminated.
+Mechanism identification is a named follow-on. Note: the v3.19.0 first-pass
+attribution to a ``Fursaev--Solodukhin spinor double-cover correction''
+(via an arXiv ID that turned out to be a different paper) was retracted
+during the post-v3.19.0 audit; the Fursaev--Solodukhin 1995
+paper~\cite{fursaev_solodukhin1995} cited elsewhere in this paper is
+correctly attributed (Riemannian geometry of conical defects, BH entropy)
+but does not contain the Möbius modification.
 
 \paragraph{Empirical match.} At $N_0 = 480$, $t = 1.0$:
 \begin{center}
@@ -1833,7 +1845,18 @@ entropy in induced gravity,'' \textit{J.~High Energy Phys.}\ \textbf{9707},
 \bibitem{fursaev_solodukhin1995}
 D.~V.~Fursaev and S.~N.~Solodukhin, ``On the description of the
 Riemannian geometry in the presence of conical defects,''
-\textit{Phys.~Rev.~D}\ \textbf{52}, 2133--2143 (1995).
+\textit{Phys.~Rev.~D}\ \textbf{52}, 2133--2143 (1995),
+arXiv:hep-th/9501127.
+
+\bibitem{fursaev_miele1996}
+D.~V.~Fursaev and G.~Miele, ``Cones, Spins and Heat Kernels,''
+\textit{Nucl.~Phys.~B}\ \textbf{484}, 697--723 (1997),
+arXiv:hep-th/9605153.
+
+\bibitem{dowker1994}
+J.~S.~Dowker, ``Heat kernels on curved cones,''
+\textit{Class.~Quant.~Grav.}\ \textbf{11}, L137--L140 (1994),
+arXiv:hep-th/9406002.
 
 \bibitem{bekenstein1973}
 J.~D.~Bekenstein, ``Black holes and entropy,''
