@@ -1389,6 +1389,95 @@ remaining external calibration data.
 Sprint G3 driver: \texttt{debug/g3\_graviton\_lichnerowicz\_S3.py}
 and memo \texttt{debug/g3\_graviton\_lichnerowicz\_S3\_memo.md}.
 
+\subsection{Graviton diagnostic: physical $(1, 1)$ modes on the truncated substrate}
+\label{sec:graviton_diagnostic}
+
+The structural-test phase of G1--G3 establishes that the spectral action
+on the GeoVac substrate has EXACT Einstein--Hilbert + cosmological
+constant form on the Dirac sector but inherits standard CC continuum
+behavior on the spin-2 sector. The natural follow-up question: does
+the discrete substrate host graviton-like perturbations of $D$ at the
+operator level, or are gravitons structurally blocked?
+
+\paragraph{Setup.} Perturb $D = D_0 + \epsilon V$ where $V \in
+\operatorname{Herm}(\mathcal{H}_{n_{\max}})$. Expand the spectral
+action: $S[D_0 + \epsilon V] = S[D_0] + \epsilon S^{(1)}[V] +
+\tfrac{1}{2}\epsilon^2 S^{(2)}[V, V] + O(\epsilon^3)$. The quadratic
+form $S^{(2)}$ is diagonal in the $D_0$ eigenbasis.
+
+\paragraph{Gauge--physical classification.} Modes
+$V = i[X, D_0]$ for Hermitian $X$ are tangent to the gauge orbit
+$D_0 \to U D_0 U^*$, and the spectral action is invariant under unitary
+conjugation. Therefore $S^{(2)}$ eigenvalues on gauge modes measure
+the curvature of the gauge orbit along the linear direction, not
+physical kinetic content. For the truncated CH Dirac, the gauge
+subspace equals the cross-sector off-block Hermitian matrices, and
+within-sector modes are physical.
+
+\paragraph{Spin-2 content.} The $SU(2)_L \times SU(2)_R$ irreps at
+level $n$ are $((n+1)/2, n/2)$ for $+$chirality and $(n/2, (n+1)/2)$
+for $-$chirality. Within-sector tensor products
+$\rho \otimes \rho$ contain the graviton irrep $(j_L, j_R) = (1, 1)$
+for $n \geq 1$.
+
+\begin{proposition}[Physical $(1, 1)$ modes on the substrate]
+\label{prop:graviton_physical}
+At every $n_{\max} \geq 1$, the second variation $S^{(2)}$ has
+PHYSICAL (within-sector) eigenmodes carrying $(j_L, j_R) = (1, 1)$
+irrep content with POSITIVE eigenvalue
+\begin{equation}
+  A_\lambda = a_\lambda \!\left(\frac{4\lambda^2}{\Lambda^4} -
+  \frac{2}{\Lambda^2}\right), \quad
+  a_\lambda = e^{-\lambda^2/\Lambda^2},
+\end{equation}
+for each within-sector block at CH eigenvalue $|\lambda|$. Numerically
+verified by 5-point finite-difference stencil to rel diff $\sim 10^{-9}$
+at $\Lambda^2 = 6$, $n_{\max} \in \{1, 2, 3\}$:
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+$|\lambda|$ & blocks containing $(1, 1)$ & $A_\lambda$ \\
+\hline
+$5/2$ & $S_3 \otimes S_3$, $S_4 \otimes S_4$ & $+0.127$ \\
+$7/2$ & $S_5 \otimes S_5$, $S_6 \otimes S_6$ & $+0.133$ \\
+$9/2$ & $S_7 \otimes S_7$, $S_8 \otimes S_8$ & $+0.066$ \\
+\hline
+\end{tabular}
+\end{center}
+Eigenvalues are stable across $n_{\max}$ (no sign changes), and the
+$|\lambda|$-dependence reflects the standard Gaussian-regulated kinetic
+behavior of the CC spectral action.
+\end{proposition}
+
+\paragraph{Honest scope.} Proposition~\ref{prop:graviton_physical}
+establishes the NECESSARY condition for graviton dynamics on the
+discrete substrate: physical (1, 1)-irrep eigenmodes exist and
+propagate with positive kinetic eigenvalue. SUFFICIENT conditions ---
+Fierz--Pauli kinetic structure separating TT graviton (2 polarizations)
+from longitudinal/scalar modes (7 of the 9 within $(1, 1)$), gauge
+invariance of the TT projector, propagator structure, and continuum
+graviton emergence via Paper~38-style propinquity --- are not
+verified here and constitute the full G6 multi-month sprint. The
+$S^3$ Fock projection rigidity (Paper~23) fixes the background metric;
+graviton candidates here are operator-level perturbations of $D$, not
+direct metric perturbations.
+
+\emph{Structural reading.} Sprint G3 (\S\ref{sec:spinor_specificity})
+established that the spin-2 sector inherits standard CC continuum
+expansion. Sprint G6-Diag-Full establishes that this expansion's
+graviton modes are accessible on the discrete substrate at the
+necessary-condition level. The clean structure of G1/G2
+(Einstein--Hilbert + cosmological constant exactly on Dirac sector)
+does NOT extend to gravitons; gravitons inherit CC continuum behavior
+with infinite higher-curvature corrections. Substrate-level
+existence of $(1, 1)$ modes confirms gravitons are not structurally
+blocked.
+
+Sprint G6-Diag-Full driver: \texttt{debug/g6\_diag\_full.py},
+companion first-pass \texttt{debug/g6\_diag\_quadratic\_form.py},
+scoping memo \texttt{debug/g6\_scoping\_memo.md}, and full memo
+\texttt{debug/g6\_diag\_full\_memo.md}.
+
 % ===================================================================
 \section{Two-Loop Irreducible Constant: $S_{\min}$}
 \label{sec:smin}

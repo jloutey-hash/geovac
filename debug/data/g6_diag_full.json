@@ -1,0 +1,671 @@
+{
+  "n_max=1": {
+    "n_max": 1,
+    "Lambda_sq": 6.0,
+    "dim_H": 16,
+    "n_sectors": 4,
+    "sectors": [
+      {
+        "idx": 1,
+        "lambda": 1.5,
+        "jL": 0.5,
+        "jR": 0.0,
+        "dim": 2
+      },
+      {
+        "idx": 2,
+        "lambda": -1.5,
+        "jL": 0.0,
+        "jR": 0.5,
+        "dim": 2
+      },
+      {
+        "idx": 3,
+        "lambda": 2.5,
+        "jL": 1.0,
+        "jR": 0.5,
+        "dim": 6
+      },
+      {
+        "idx": 4,
+        "lambda": -2.5,
+        "jL": 0.5,
+        "jR": 1.0,
+        "dim": 6
+      }
+    ],
+    "physical_11_blocks": [
+      {
+        "block_label": "S_3 x S_3",
+        "lambda": 2.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0
+        ],
+        "eigenvalue": 0.12742386274902875,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_4 x S_4",
+        "lambda": -2.5,
+        "jL_decomp": [
+          0.0,
+          1.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.12742386274902875,
+        "type": "PHYSICAL"
+      }
+    ],
+    "gauge_11_blocks": [
+      {
+        "block_label": "S_1 x S_4",
+        "lambda_a": 1.5,
+        "lambda_b": -2.5,
+        "jL_decomp": [
+          0.0,
+          1.0
+        ],
+        "jR_decomp": [
+          1.0
+        ],
+        "eigenvalue": -0.15942492681946502,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_2 x S_3",
+        "lambda_a": -1.5,
+        "lambda_b": 2.5,
+        "jL_decomp": [
+          1.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0
+        ],
+        "eigenvalue": -0.15942492681946502,
+        "type": "GAUGE"
+      }
+    ],
+    "n_physical_11_blocks": 2,
+    "n_gauge_11_blocks": 2,
+    "n_physical_11_modes": 18,
+    "n_gauge_11_modes": 18
+  },
+  "n_max=2": {
+    "n_max": 2,
+    "Lambda_sq": 6.0,
+    "dim_H": 40,
+    "n_sectors": 6,
+    "sectors": [
+      {
+        "idx": 1,
+        "lambda": 1.5,
+        "jL": 0.5,
+        "jR": 0.0,
+        "dim": 2
+      },
+      {
+        "idx": 2,
+        "lambda": -1.5,
+        "jL": 0.0,
+        "jR": 0.5,
+        "dim": 2
+      },
+      {
+        "idx": 3,
+        "lambda": 2.5,
+        "jL": 1.0,
+        "jR": 0.5,
+        "dim": 6
+      },
+      {
+        "idx": 4,
+        "lambda": -2.5,
+        "jL": 0.5,
+        "jR": 1.0,
+        "dim": 6
+      },
+      {
+        "idx": 5,
+        "lambda": 3.5,
+        "jL": 1.5,
+        "jR": 1.0,
+        "dim": 12
+      },
+      {
+        "idx": 6,
+        "lambda": -3.5,
+        "jL": 1.0,
+        "jR": 1.5,
+        "dim": 12
+      }
+    ],
+    "physical_11_blocks": [
+      {
+        "block_label": "S_3 x S_3",
+        "lambda": 2.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0
+        ],
+        "eigenvalue": 0.12742386274902875,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_4 x S_4",
+        "lambda": -2.5,
+        "jL_decomp": [
+          0.0,
+          1.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.12742386274902875,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_5 x S_5",
+        "lambda": 3.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.13341807065697797,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_6 x S_6",
+        "lambda": -3.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "eigenvalue": 0.13341807065697797,
+        "type": "PHYSICAL"
+      }
+    ],
+    "gauge_11_blocks": [
+      {
+        "block_label": "S_1 x S_4",
+        "lambda_a": 1.5,
+        "lambda_b": -2.5,
+        "jL_decomp": [
+          0.0,
+          1.0
+        ],
+        "jR_decomp": [
+          1.0
+        ],
+        "eigenvalue": -0.15942492681946502,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_1 x S_5",
+        "lambda_a": 1.5,
+        "lambda_b": 3.5,
+        "jL_decomp": [
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          1.0
+        ],
+        "eigenvalue": 0.09609854986540423,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_2 x S_3",
+        "lambda_a": -1.5,
+        "lambda_b": 2.5,
+        "jL_decomp": [
+          1.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0
+        ],
+        "eigenvalue": -0.15942492681946502,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_2 x S_6",
+        "lambda_a": -1.5,
+        "lambda_b": -3.5,
+        "jL_decomp": [
+          1.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.09609854986540423,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_3 x S_6",
+        "lambda_a": 2.5,
+        "lambda_b": -3.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0
+        ],
+        "eigenvalue": -0.0742504345911753,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_4 x S_5",
+        "lambda_a": -2.5,
+        "lambda_b": 3.5,
+        "jL_decomp": [
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": -0.0742504345911753,
+        "type": "GAUGE"
+      }
+    ],
+    "n_physical_11_blocks": 4,
+    "n_gauge_11_blocks": 6,
+    "n_physical_11_modes": 36,
+    "n_gauge_11_modes": 54
+  },
+  "n_max=3": {
+    "n_max": 3,
+    "Lambda_sq": 6.0,
+    "dim_H": 80,
+    "n_sectors": 8,
+    "sectors": [
+      {
+        "idx": 1,
+        "lambda": 1.5,
+        "jL": 0.5,
+        "jR": 0.0,
+        "dim": 2
+      },
+      {
+        "idx": 2,
+        "lambda": -1.5,
+        "jL": 0.0,
+        "jR": 0.5,
+        "dim": 2
+      },
+      {
+        "idx": 3,
+        "lambda": 2.5,
+        "jL": 1.0,
+        "jR": 0.5,
+        "dim": 6
+      },
+      {
+        "idx": 4,
+        "lambda": -2.5,
+        "jL": 0.5,
+        "jR": 1.0,
+        "dim": 6
+      },
+      {
+        "idx": 5,
+        "lambda": 3.5,
+        "jL": 1.5,
+        "jR": 1.0,
+        "dim": 12
+      },
+      {
+        "idx": 6,
+        "lambda": -3.5,
+        "jL": 1.0,
+        "jR": 1.5,
+        "dim": 12
+      },
+      {
+        "idx": 7,
+        "lambda": 4.5,
+        "jL": 2.0,
+        "jR": 1.5,
+        "dim": 20
+      },
+      {
+        "idx": 8,
+        "lambda": -4.5,
+        "jL": 1.5,
+        "jR": 2.0,
+        "dim": 20
+      }
+    ],
+    "physical_11_blocks": [
+      {
+        "block_label": "S_3 x S_3",
+        "lambda": 2.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0
+        ],
+        "eigenvalue": 0.12742386274902875,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_4 x S_4",
+        "lambda": -2.5,
+        "jL_decomp": [
+          0.0,
+          1.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.12742386274902875,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_5 x S_5",
+        "lambda": 3.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.13341807065697797,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_6 x S_6",
+        "lambda": -3.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "eigenvalue": 0.13341807065697797,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_7 x S_7",
+        "lambda": 4.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "eigenvalue": 0.06558472676402656,
+        "type": "PHYSICAL"
+      },
+      {
+        "block_label": "S_8 x S_8",
+        "lambda": -4.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0
+        ],
+        "eigenvalue": 0.06558472676402656,
+        "type": "PHYSICAL"
+      }
+    ],
+    "gauge_11_blocks": [
+      {
+        "block_label": "S_1 x S_4",
+        "lambda_a": 1.5,
+        "lambda_b": -2.5,
+        "jL_decomp": [
+          0.0,
+          1.0
+        ],
+        "jR_decomp": [
+          1.0
+        ],
+        "eigenvalue": -0.15942492681946502,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_1 x S_5",
+        "lambda_a": 1.5,
+        "lambda_b": 3.5,
+        "jL_decomp": [
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          1.0
+        ],
+        "eigenvalue": 0.09609854986540423,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_2 x S_3",
+        "lambda_a": -1.5,
+        "lambda_b": 2.5,
+        "jL_decomp": [
+          1.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0
+        ],
+        "eigenvalue": -0.15942492681946502,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_2 x S_6",
+        "lambda_a": -1.5,
+        "lambda_b": -3.5,
+        "jL_decomp": [
+          1.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.09609854986540423,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_3 x S_6",
+        "lambda_a": 2.5,
+        "lambda_b": -3.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0
+        ],
+        "eigenvalue": -0.0742504345911753,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_3 x S_7",
+        "lambda_a": 2.5,
+        "lambda_b": 4.5,
+        "jL_decomp": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0
+        ],
+        "eigenvalue": 0.12136394520743751,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_4 x S_5",
+        "lambda_a": -2.5,
+        "lambda_b": 3.5,
+        "jL_decomp": [
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "eigenvalue": -0.0742504345911753,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_4 x S_8",
+        "lambda_a": -2.5,
+        "lambda_b": -4.5,
+        "jL_decomp": [
+          1.0,
+          2.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "eigenvalue": 0.12136394520743751,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_5 x S_8",
+        "lambda_a": 3.5,
+        "lambda_b": -4.5,
+        "jL_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "jR_decomp": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "eigenvalue": -0.02534683964152209,
+        "type": "GAUGE"
+      },
+      {
+        "block_label": "S_6 x S_7",
+        "lambda_a": -3.5,
+        "lambda_b": 4.5,
+        "jL_decomp": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "jR_decomp": [
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        "eigenvalue": -0.02534683964152209,
+        "type": "GAUGE"
+      }
+    ],
+    "n_physical_11_blocks": 6,
+    "n_gauge_11_blocks": 10,
+    "n_physical_11_modes": 54,
+    "n_gauge_11_modes": 90
+  },
+  "convergence": [
+    {
+      "n_max": 1,
+      "n_physical_blocks": 2,
+      "unique_eigenvalues": [
+        0.127424
+      ]
+    },
+    {
+      "n_max": 2,
+      "n_physical_blocks": 4,
+      "unique_eigenvalues": [
+        0.127424,
+        0.133418
+      ]
+    },
+    {
+      "n_max": 3,
+      "n_physical_blocks": 6,
+      "unique_eigenvalues": [
+        0.065585,
+        0.127424,
+        0.133418
+      ]
+    }
+  ],
+  "verdict": "POSITIVE-G6-DIAG-FULL"
+}

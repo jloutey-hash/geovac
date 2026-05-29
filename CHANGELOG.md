@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.7.0] - 2026-05-28
+
+### Sprint G6-Diag-Full — graviton diagnostic on the discrete CH Dirac substrate
+
+**Minor version bump.** Refines G6-Diag first-pass with (i) gauge-vs-physical classification of the (1,1) candidate blocks and (ii) extension to $n_{\max} = 2, 3$ for convergence. **Verdict: POSITIVE-G6-DIAG-FULL.**
+
+#### Added — gauge/physical classification
+
+Modes $V = i[X, D_0]$ for Hermitian $X$ are tangent to the gauge orbit ($D_0 \to U D_0 U^*$ unitary conjugation), so $S^{(2)}$ eigenvalues on the gauge subspace measure gauge-orbit curvature, NOT physical kinetic content. For the truncated CH Dirac, the commutant of $D_0$ is block-diagonal Hermitian matrices, so:
+
+- **Within-sector modes (block-diagonal) = PHYSICAL**
+- **Cross-sector modes (off-block) = GAUGE**
+
+This re-classifies the G6-Diag first-pass: the 2 cross-sector (1,1) blocks at $n_{\max}=1$ (eigenvalue $-0.159$) are gauge artifacts; the 2 within-sector (1,1) blocks (eigenvalue $+0.127$) are physical with positive kinetic energy.
+
+#### Added — extension to $n_{\max} = 2, 3$
+
+| $|\lambda|$ | Physical (1,1) blocks | $A_\lambda$ |
+|---|---|---|
+| $5/2$ | $S_3 \otimes S_3$, $S_4 \otimes S_4$ | $+0.127$ |
+| $7/2$ | $S_5 \otimes S_5$, $S_6 \otimes S_6$ | $+0.133$ |
+| $9/2$ | $S_7 \otimes S_7$, $S_8 \otimes S_8$ | $+0.066$ |
+
+Formula: $A_\lambda = a_\lambda(4\lambda^2/\Lambda^4 - 2/\Lambda^2)$ with $a_\lambda = e^{-\lambda^2/\Lambda^2}$. All eigenvalues POSITIVE, no sign changes or instabilities. Gaussian-regulator suppression at high $|\lambda|$ consistent with standard CC.
+
+#### Added — Paper 28 §4.10 new subsection `sec:graviton_diagnostic`
+
+- Proposition `prop:graviton_physical`: physical (1,1)-irrep eigenmodes exist with positive eigenvalue $A_\lambda$ at every $n_{\max} \geq 1$
+- Gauge-vs-physical classification via commutant criterion
+- Numerical verification (5-point FD stencil, rel diff $\sim 10^{-9}$)
+- Honest scope: NECESSARY condition only; Fierz-Pauli decomposition (TT/L/T within (1,1)) deferred to multi-month G6 full sprint
+
+#### Implication for gravity arc
+
+**Gravitons are NOT structurally blocked at the GeoVac discrete substrate level.** The necessary condition for graviton dynamics is met. Multi-month G6 (full Fierz-Pauli derivation, Path P1 = explicit gamma-matrix re-derivation per scoping memo) is justified by strong evidence.
+
+#### Honest scope
+
+The G6-Diag-Full diagnostic verifies NECESSARY conditions only:
+- Existence of physical (1,1)-irrep eigenmodes ✓
+- Positive kinetic eigenvalues ✓
+- Stable behavior with $n_{\max}$ ✓
+- Gauge structure consistent ✓
+
+NOT verified (multi-month G6 full):
+- Fierz-Pauli TT (2 polarizations) / L (3 longitudinal) / T (1 trace) / 3 mixings decomposition within (1,1) dim 9
+- TT modes' kinetic ratio matching Fierz-Pauli structure
+- Gauge invariance of TT projector
+- Propagator residue analysis
+- Continuum graviton emergence via Paper 38-style propinquity convergence
+- Coupling to matter via stress-energy source
+
+#### Files
+
+- `debug/g6_scoping_memo.md` — Three candidate paths (P1: explicit gamma re-derivation; P2: bilinear extension; P3: hybrid continuum), structural obstacles, minimum-cost diagnostic
+- `debug/g6_diag_quadratic_form.py` — first-pass driver
+- `debug/data/g6_diag_quadratic_form.json` — first-pass results
+- `debug/g6_diag_memo.md` — first-pass canonical memo (POSITIVE-FIRST-PASS)
+- `debug/g6_diag_full.py` (~260 lines) — refined driver with gauge classification
+- `debug/data/g6_diag_full.json` — structured results across $n_{\max} = 1, 2, 3$
+- `debug/g6_diag_full_memo.md` — canonical G6-Diag-Full memo (POSITIVE-G6-DIAG-FULL)
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.10 added (~80 lines)
+- `memory/sprint_g6_diag_full.md` — durable findings
+- `MEMORY.md` index updated
+
+#### Gravity arc forward direction (post-G6-Diag-Full)
+
+- **G6 full** (multi-month): Fierz-Pauli derivation, justified by POSITIVE diagnostic
+- **G4** (multi-month): Bekenstein-Hawking on cigar, parallel-runnable
+- **G5** (1-2 weeks): decompactified $S^3 \times \mathbb{R}_\tau$
+- **Pause** gravity arc and rotate to a different focus
+
+---
+
 ## [3.6.0] - 2026-05-28
 
 ### Sprint G3 — gravity Path 1 closure: scalar Laplacian + TT-tensor Lichnerowicz on $S^3$
