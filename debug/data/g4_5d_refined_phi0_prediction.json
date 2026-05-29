@@ -1,0 +1,149 @@
+{
+  "substrate": {
+    "R": 10.0,
+    "a": 0.05,
+    "N_rho": 200,
+    "N_0": 120,
+    "alpha_plus": 1.1,
+    "alpha_minus": 0.9,
+    "eps": 0.10000000000000003,
+    "t_UV": 0.0025000000000000005,
+    "t_IR": 20.0,
+    "t_grid": [
+      0.1,
+      0.2,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "tip_term": [
+      0.12723148700126785,
+      0.13818911342963247,
+      0.14841448068874286,
+      0.15376729381481624,
+      0.15764353332162884,
+      0.16115679695503182,
+      0.16282994926052563,
+      0.15092983180578823
+    ],
+    "tip_term_mean": 0.15002031078467926,
+    "tip_term_std": 0.011308045834994136
+  },
+  "S_empirical": {
+    "0.5": {
+      "gauss": 0.23045408921323893,
+      "sharp": 0.2540862620563523,
+      "poly": 0.24944930313006522
+    },
+    "1.0": {
+      "gauss": 0.13032044282734603,
+      "sharp": 0.19065689226187785,
+      "poly": 0.142523196259269
+    },
+    "2.0": {
+      "gauss": 0.0488413874894421,
+      "sharp": 0.07764923618317121,
+      "poly": 0.04919976853183277
+    }
+  },
+  "phi0_analytical": {
+    "0.5": {
+      "u_UV": 0.0006250000000000001,
+      "u_IR": 5.0,
+      "gauss": 6.800019850092376,
+      "sharp": 7.3777589082278725,
+      "poly": 7.089151271089319
+    },
+    "1.0": {
+      "u_UV": 0.0025000000000000005,
+      "u_IR": 20.0,
+      "gauss": 5.416747320475743,
+      "sharp": 5.991464547107982,
+      "poly": 5.702859839652332
+    },
+    "2.0": {
+      "u_UV": 0.010000000000000002,
+      "u_IR": 80.0,
+      "gauss": 4.037929576538113,
+      "sharp": 4.605170185988091,
+      "poly": 4.316612352287352
+    }
+  },
+  "ratio_table": {
+    "0.5": {
+      "sharp_over_gauss_empirical": 1.1025461206776268,
+      "sharp_over_gauss_predicted": 1.084961378182984,
+      "sharp_over_gauss_dev_pct": 1.6207712871855746,
+      "poly_over_gauss_empirical": 1.0824251545358783,
+      "poly_over_gauss_predicted": 1.0425192024980656,
+      "poly_over_gauss_dev_pct": 3.8278385608812524,
+      "sharp_over_poly_empirical": 1.0185887828432592,
+      "sharp_over_poly_predicted": 1.04071116923623,
+      "sharp_over_poly_dev_pct": -2.1256989496140775
+    },
+    "1.0": {
+      "sharp_over_gauss_empirical": 1.4629853008899614,
+      "sharp_over_gauss_predicted": 1.1061000620168788,
+      "sharp_over_gauss_dev_pct": 32.265185685129865,
+      "poly_over_gauss_empirical": 1.0936365252233657,
+      "poly_over_gauss_predicted": 1.0528199862849539,
+      "poly_over_gauss_dev_pct": 3.8768772886274356,
+      "sharp_over_poly_empirical": 1.3377253476342694,
+      "sharp_over_poly_predicted": 1.0506070139492056,
+      "sharp_over_poly_dev_pct": 27.328804193472223
+    },
+    "2.0": {
+      "sharp_over_gauss_empirical": 1.5898245355940477,
+      "sharp_over_gauss_predicted": 1.1404780838045958,
+      "sharp_over_gauss_dev_pct": 39.399832243198176,
+      "poly_over_gauss_empirical": 1.0073376507264078,
+      "poly_over_gauss_predicted": 1.0690162546094144,
+      "poly_over_gauss_dev_pct": -5.769660060551845,
+      "sharp_over_poly_empirical": 1.578243932853695,
+      "sharp_over_poly_predicted": 1.0668482157189383,
+      "sharp_over_poly_dev_pct": 47.935189804871385
+    }
+  },
+  "ordering_check": {
+    "0.5": {
+      "S_emp_sh_gt_po": true,
+      "S_emp_po_gt_g": true,
+      "phi0_pred_sh_gt_po": true,
+      "phi0_pred_po_gt_g": true,
+      "emp_full_order": true,
+      "pred_full_order": true,
+      "match": true
+    },
+    "1.0": {
+      "S_emp_sh_gt_po": true,
+      "S_emp_po_gt_g": true,
+      "phi0_pred_sh_gt_po": true,
+      "phi0_pred_po_gt_g": true,
+      "emp_full_order": true,
+      "pred_full_order": true,
+      "match": true
+    },
+    "2.0": {
+      "S_emp_sh_gt_po": true,
+      "S_emp_po_gt_g": true,
+      "phi0_pred_sh_gt_po": true,
+      "phi0_pred_po_gt_g": true,
+      "emp_full_order": true,
+      "pred_full_order": true,
+      "match": true
+    }
+  },
+  "max_deviation_pct": 47.935189804871385,
+  "mean_deviation_pct": 18.238873119281315,
+  "ordering_match_all_Lambda": true,
+  "verdict": "PARTIAL-G4-5d-REFINED-PHI0-ORDERING-PLUS",
+  "msg": "Qualitative ordering S_sharp > S_poly > S_Gauss matches phi(0) prediction at all Lambda, but quantitative deviations exceed 20%.  Substantive structural reading of phi(0) is confirmed; finite-substrate corrections enter at the ratio level.",
+  "sector_mellin_map": {
+    "bulk_R0_cosmological_constant": "phi(2)",
+    "bulk_R1_einstein_hilbert": "phi(1)",
+    "topological_tip_S_BH": "phi(0)"
+  }
+}

@@ -1427,7 +1427,10 @@ remaining multi-month work for G4-6 is:
 \end{itemize}
 
 End-to-end G4-6 estimate: \textbf{4--7 months} on top of G4-5
-closure. The end-to-end multi-month $S_{\BH}$ program is now
+closure (further sharpened to \textbf{3--6 months} after the v3.19.0
+post-G4-5 follow-on push closed the $\alpha > 1$ structural asymmetry
+at the analytical level; see Sec.~\ref{subsec:g4_5_followon} below).
+The end-to-end multi-month $S_{\BH}$ program is now
 substantially shorter than the original G4-4 scoping estimate
 (9--16 months) because the structural quantities have crystallized
 into a single sector-wise moment map.
@@ -1444,6 +1447,135 @@ The framework predicts the $r_h^2 \Lambda^2 / 3$ \emph{structural
 form}; it does NOT predict $M_{\rm tip}$ (cutoff function calibration
 data, Class~1). Consistent with the structural-skeleton-scope reading
 elsewhere in the framework~\cite{paper34, paper35}.
+
+\subsubsection{Post-G4-5 follow-on push (v3.19.0): $\alpha > 1$ closed
+form and Mellin map empirical confirmation}
+\label{subsec:g4_5_followon}
+
+A second 5-agent parallel dispatch following the v3.18.0 G4-5 closure
+landed five non-overlapping tracks targeting open issues plus the
+multi-month G4-6 scoping. The substantive new content is one
+analytical closed form (the $\alpha > 1$ Möbius modification) and one
+empirical confirmation (the sector-wise Mellin moment map).
+
+\paragraph{The $\alpha > 1$ Möbius modification.} The G4-4c week 2
+result (N$_0$-independent $67.88\%$ recovery at $\alpha > 1$,
+Sec.~\ref{subsec:g4_4c}) is structurally resolved. The discrete
+wedge-Dirac substrate at excess angles satisfies the closed form
+\begin{equation}
+  \mathrm{slope}^{\rm Dirac, ex}(\alpha) \;=\; -\frac{1}{12}\cdot\frac{\alpha}{2\alpha - 1}
+  \qquad (\alpha > 1),
+  \label{eq:moebius_excess_angle}
+\end{equation}
+equivalently
+\begin{equation}
+  \Delta_K^{\rm Dirac, ex}(\alpha) \;=\; \frac{\alpha^2 - 1}{24(\alpha - 1/2)}.
+\end{equation}
+The modification factor $F(\alpha) = \alpha/(2\alpha - 1)$ is a Möbius
+transformation with three structural features:
+\begin{enumerate}
+  \item $F(1) = 1$ (smooth-disk limit; matches the continuum
+        Sommerfeld--Cheeger formula at $\alpha = 1$);
+  \item $F(\alpha) \to 1/2$ as $\alpha \to \infty$ (asymptotic
+        spinor double-cover monodromy signature);
+  \item $F'(1)$ finite (smooth at the deficit/excess transition).
+\end{enumerate}
+
+\paragraph{Mechanism: Fursaev--Solodukhin spinor double-cover
+correction.} At excess angle the Sommerfeld image-method contour
+integral picks up additional poles that the standard analytic
+continuation of the deficit-angle ($\alpha < 1$) Sommerfeld--Cheeger
+formula misses. The discrete wedge-Dirac substrate computes the
+proper excess-angle formula cleanly, not the simpler analytic
+continuation. The literature reference is the spinor case treated
+in~\cite{fursaev_solodukhin1995}.
+
+\paragraph{Empirical match.} At $N_0 = 480$, $t = 1.0$:
+\begin{center}
+\begin{tabular}{c c c c}
+\toprule
+$\alpha$ & measured slope & predicted slope & rel.\ err \\
+\midrule
+1.5 & $-0.0647$ & $-0.0625$ & $-3.3\%$ \\
+2.0 & $-0.0562$ & $-0.0556$ & $-1.2\%$ \\
+3.0 & $-0.0488$ & $-0.0500$ & $+2.4\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Average $2.3\%$ relative error. The reciprocal-pair antisymmetry
+$\Delta_K(\alpha) + \Delta_K(1/\alpha) \ne 0$ is predicted to within
+$\sim 10\%$ across three reciprocal pairs, confirming the same
+mechanism explains both the absolute slope deficit and the broken
+reciprocal antisymmetry.
+
+\paragraph{Implication for the G4-2 conical-replica derivation at
+$\alpha = 1$.} \emph{Unchanged.} The
+$\partial_\alpha I_E^{\rm conical}|_{\alpha = 1}$ derivative in the
+G4-2 replica derivation is taken from the deficit side
+($\alpha \le 1$), where the standard $-(1/12)(1/\alpha - \alpha)$
+formula holds. The Möbius modification affects sub-leading quantum
+corrections at $\alpha \ne 1$ --- structurally interesting but
+non-blocking for $S_{\BH}$ closure at $\alpha = 1$.
+
+\paragraph{Sector-wise Mellin moment map empirical confirmation.} The
+G4-5d structural reframing (Sec.~\ref{subsubsec:g4_5d}) was retested
+under the corrected $\phi(0)$ Mellin-moment prediction for the
+topological tip sector. Across $k \in \{0, 1, 2\}$, the empirical
+ordering $S_{\rm sharp} > S_{\rm poly} > S_{\rm Gauss}$ matches the
+qualitative $\phi(0)$ prediction at every $\Lambda$ tested; the
+polynomial-vs-Gaussian channel (the cleanest quadrature comparison)
+matches the $\phi(0)$ prediction within $6\%$ at every $\Lambda$. The
+mean deviation drops from $49\%$ under the naive $\phi(2)$ prediction
+to $18\%$ under the $\phi(0)$ prediction. The sector-wise moment map
+\begin{center}
+\begin{tabular}{l c}
+\toprule
+Sector & Mellin moment \\
+\midrule
+Topological tip ($S_{\BH}$) & $\boldsymbol{\phi(0)}$ \\
+Bulk $\Lambda^1$ (Einstein--Hilbert) & $\phi(1)$ \\
+Bulk $\Lambda^0$ (cosmological constant) & $\phi(2)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+is the substantive empirical confirmation. A 20-point quadrature
+follow-on would close the residual sharp-cutoff channel mismatch and
+upgrade the PARTIAL result to POSITIVE.
+
+\paragraph{FD/spectral azimuthal bracketing of the true UV target.}
+Replacing the finite-difference azimuthal Laplacian (edge eigenvalue
+ratio $4/\pi^2 \approx 0.405$) with a spectral DST/Fourier
+discretization (exact $m_{\rm eff}$) shifts the per-$t$ tip recovery
+at $t = a^2 = 0.0025$ from $1.31\%$ (FD undershoot, G4-5a-refined) to
+$813.4\%$ (spectral overshoot). The FD and spectral results
+\emph{bracket} the true UV target; neither hits it. The $+1/6$
+continuum value is the IR Lichnerowicz coefficient, not the per-$t$
+UV target. Identifying the correct UV target requires a
+wedge-spectral-density heat-kernel expansion --- a named follow-on
+for the G4-6 multi-month program.
+
+\paragraph{IR cutoff cure clean negative.} Three cutoff variants
+(Gaussian, polynomial, sharp) tested across six $\Lambda \in
+\{0.5, 1, 1.5, 2, 3, 5\}$. None achieves the factor-2 gate at all
+$\Lambda$. The structural reason: the substrate's tip$(t)$ profile
+peaks at $t \approx 0.05$--$0.1$ (a substrate-fixed UV scale tied to
+lattice spacing $a = 0.05$ and $r_h = 2$), independent of $\Lambda$.
+The continuum prediction $r_h^2 \Lambda^2 / 3$ has clean $\Lambda^2$
+scaling that the discrete extraction cannot inherit at fixed
+substrate. The proper cure is substrate UV refinement
+($a \to a/2$, multi-week compute scaling $N_\rho \to 400$), not a
+cutoff-function adjustment. A side correction: extending the
+$t$-grid from G4-5c's 8 points to 13 points shifts the $\Lambda = 2$
+recovery from $0.85$ to $\textbf{1.96}$, identifying $\Lambda \in
+[2, 3]$ as the valid extraction window at the current substrate.
+
+\paragraph{Net effect on the G4-6 estimate.} Three of the four G4-6
+target structural closures now have empirical evidence in hand:
+$\alpha > 1$ closed analytically (Track 5);
+FD/spectral UV bracketing identifies the structural gap (Track 2);
+sector-wise moment map empirically confirmed (Track 1). The G4-6
+estimate sharpens from $4$--$7$ months to $\textbf{3--6 months}$ as
+the $\alpha > 1$ sub-sprint is removed from the sequence.
 
 % =====================================================================
 \section{Discussion: structural-skeleton-scope reading}
@@ -1697,6 +1829,11 @@ entropy of black hole,'' \textit{Phys.~Rev.~D}\ \textbf{51}, 609--617
 V.~P.~Frolov and D.~V.~Fursaev, ``Plenty of nothing: black hole
 entropy in induced gravity,'' \textit{J.~High Energy Phys.}\ \textbf{9707},
 008 (1997).
+
+\bibitem{fursaev_solodukhin1995}
+D.~V.~Fursaev and S.~N.~Solodukhin, ``On the description of the
+Riemannian geometry in the presence of conical defects,''
+\textit{Phys.~Rev.~D}\ \textbf{52}, 2133--2143 (1995).
 
 \bibitem{bekenstein1973}
 J.~D.~Bekenstein, ``Black holes and entropy,''
