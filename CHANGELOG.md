@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.13.0] - 2026-05-28
+
+### Sprint G4-3 — Discrete warped-product substrate for the cigar (scoping + first-pass)
+
+**Minor version bump.** Opens the multi-month discrete-substrate gravity arc per the G4-2 memo's named follow-on. **POSITIVE-SCOPING-G4-3a.**
+
+#### Setup
+
+Sprints G1 through G8 produced the continuum gravity arc (closed-form spectral action, two-term exactness, Bekenstein-Hawking via conical-defect / replica, cutoff dependence). G4-3 opens the *discrete-substrate* arc: rebuild these results on GeoVac's discrete substrate.
+
+#### Discrete substrate
+
+For the cigar's near-horizon limit $ds^2 = d\rho^2 + \rho^2 d\phi^2 + r_h^2 d\Omega_2^2$:
+$$\mathcal{G}_{\rm cigar}(a, N_\rho, N_\phi, l_{\max}, r_h) = \mathbb{Z}_+(a)|_{N_\rho} \times \mathbb{Z}/N_\phi \times \mathrm{Fock}(S^2, l_{\max})$$
+
+with conical-defect parameter $\alpha = N_\phi/N_0$.
+
+#### Constant-warp factorization
+
+At $r(\rho) = r_h$ constant, the Laplacian factorizes by construction:
+$$\Delta_{\rm cigar} = \Delta_{D^2}(\rho, \phi) + (1/r_h^2)\,\Delta_{S^2}$$
+$$K_{\rm cigar}(t) = K_{D^2}(t) \cdot K_{S^2_{r_h}}(t)$$
+
+#### Sub-sprint sequence (multi-month commitment)
+
+| Sub-sprint | Scope | Commitment |
+|---|---|---|
+| **G4-3a** (this) | Constant-warp substrate + scoping | Sprint-scale ✓ |
+| G4-3a-cleanup | Hermitian discrete polar Laplacian | ~1 week |
+| G4-3b | Variable warp $r(\rho)$ for Schwarzschild | ~2-4 weeks |
+| G4-3c | Discrete conical-defect ($N_\phi$ sweeps) | ~2-4 weeks |
+| G4-3d | Continuum-limit heat-kernel asymptotics | ~2-4 weeks |
+| G4-4 | Warped Dirac spectrum | ~1-2 months |
+| G4-5 | Discrete replica method | ~1-2 months |
+| G4-6 | Full discrete-substrate $S_{BH}$ derivation | ~1-2 months |
+
+Estimated total: ~6-12 months.
+
+#### Honest scope
+
+G4-3a is **scoping**. The driver uses a naive non-Hermitian discrete polar Laplacian; the numerical heat-trace values are quantitatively wrong (smallest disk eigenvalues come out negative due to polar-measure mismatch). The **structural content** — substrate definition, constant-warp factorization at operator level, conical-defect parameterization, sub-sprint sequence — is correct and load-bearing. Hermitian discretization on $L^2(\rho\,d\rho)$ via standard symmetrization is sprint-scale engineering for G4-3a-cleanup.
+
+#### Gravity arc status
+
+- **Continuum gravity arc**: G1–G8 complete (8 sprints, natural sprint-scale closure on 2026-05-28)
+- **Discrete-substrate gravity arc**: G4-3a opens; G4-3b–G4-6 estimated ~6-12 months to full $S_{BH}$ derivation
+
+#### Connection to G4-2 (continuum) and G8 (cutoff)
+
+G4-2 derived $S_{BH} = A\Lambda^2/(12\pi)$ continuum. G4-3 onwards rebuilds discrete with three targets: (i) discrete conical contribution → $(1/12)(1/\alpha - \alpha)$; (ii) discrete Dirac on warped → G4-1 $S^2$ Dirac at constant warp; (iii) discrete replica → continuum $S_{BH}$. The $\Lambda^2$ prefactor calibration inherits from G8 (cutoff-dependent, Class 1 calibration data).
+
+#### Verdict
+
+**POSITIVE-SCOPING-G4-3a.** Substrate defined; constant-warp factorization at operator level; sub-sprint sequence named for multi-month commitment. Opens the next major project arc.
+
+#### Added
+
+- `debug/g4_3_warped_substrate.py` — substrate construction + first-pass driver
+- `debug/data/g4_3_warped_substrate.json` — structured results
+- `debug/g4_3_warped_substrate_memo.md` — canonical memo (~3500 words, 11 sections)
+
+#### Changed
+
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.17 added: substrate definition, constant-warp factorization, sub-sprint sequence, honest scope (~120 lines, 53 pages, three-pass clean).
+- `CLAUDE.md` — version bumped to v3.13.0; §2 one-liner entry added.
+
 ## [3.12.0] - 2026-05-28
 
 ### Sprint G8 — Cutoff-function dependence of $G_{\rm eff}$ and $\Lambda_{cc}$

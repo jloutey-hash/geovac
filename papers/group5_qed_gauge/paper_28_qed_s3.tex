@@ -1952,6 +1952,106 @@ predictions are best understood as:
 Sprint G8 driver: \texttt{debug/g8\_cutoff\_dependence.py};
 memo: \texttt{debug/g8\_cutoff\_dependence\_memo.md}.
 
+\subsection{Discrete warped-product substrate for the cigar
+            (Sprint G4-3 opening)}
+\label{subsec:g4_3_warped_substrate}
+
+Sprints G1 through G8 produced the continuum gravity arc:
+closed-form spectral action on $S^3_R$ and $S^3 \times S^1_\beta$,
+two-term exactness theorems, $S^2$ Dirac structure,
+Bekenstein-Hawking entropy via the conical-defect / replica method,
+and the cutoff-function dependence of the gravity predictions.
+Sprint G4-3 \emph{opens} the discrete-substrate gravity arc:
+rebuild the gravity-arc results on GeoVac's discrete substrate
+rather than at the continuum level.
+
+This sprint is \emph{scoping + first-pass}: define the discrete
+substrate, identify the load-bearing pieces, and specify the
+multi-month sub-sprint sequence G4-3a through G4-6.
+
+\paragraph{Discrete substrate.}
+For the cigar's near-horizon limit
+$ds^2 = d\rho^2 + \rho^2 d\phi^2 + r_h^2 d\Omega_2^2$
+(constant warp $r = r_h$):
+\begin{equation}
+  \mathcal{G}_{\rm cigar} =
+  \mathbb{Z}_+(a)|_{N_\rho}
+  \times \mathbb{Z}/N_\phi
+  \times \mathrm{Fock}(S^2, l_{\max})
+\end{equation}
+where:
+\begin{itemize}
+  \item $\mathbb{Z}_+(a)|_{N_\rho}$ = $N_\rho$-truncation of
+        $\mathbb{Z}_+$ with lattice spacing $a$, $\rho_k = ka$;
+  \item $\mathbb{Z}/N_\phi$ = discrete $\phi$-circle, $N_\phi$ sites;
+  \item $\mathrm{Fock}(S^2, l_{\max})$ = standard $S^2$ Fock
+        projection with $l \le l_{\max}$ angular cutoff.
+\end{itemize}
+The conical-defect parameter is $\alpha = N_\phi/N_0$ where $N_0$
+is the reference smooth-tip count.
+
+\paragraph{Constant-warp factorization.}
+At $r(\rho) = r_h$ constant, the Laplacian factorizes:
+$$\Delta_{\rm cigar} = \Delta_{D^2}(\rho, \phi) + \frac{1}{r_h^2}\,\Delta_{S^2}.$$
+The two factors act on independent sectors, so by construction:
+$$K_{\rm cigar}(t) = K_{D^2}(t) \cdot K_{S^2_{r_h}}(t).$$
+This factorization holds at the operator level on the discrete
+substrate.
+
+\paragraph{Sub-sprint sequence.}
+G4-3 opens the multi-month discrete-substrate track:
+\begin{itemize}
+  \item \textbf{G4-3a} (this): constant-warp substrate + scoping
+  \item G4-3a-cleanup: Hermitian discrete polar Laplacian (engineering)
+  \item G4-3b: variable warp $r(\rho)$ for asymptotic Schwarzschild
+  \item G4-3c: discrete conical-defect deformation ($N_\phi$ sweeps)
+  \item G4-3d: continuum-limit heat-kernel asymptotics verification
+  \item G4-4: warped Dirac spectrum
+  \item G4-5: discrete replica method
+  \item G4-6: full discrete-substrate $S_{BH}$ derivation
+\end{itemize}
+Estimated multi-month commitment: $\sim 6$--$12$ months.
+
+\paragraph{Honest scope of G4-3a.}
+G4-3a is \emph{scoping}: substrate definition, constant-warp
+factorization at operator level, and sub-sprint plan. The
+sprint-scale driver uses a naive non-Hermitian discrete polar
+Laplacian; numerical heat-trace values are quantitatively wrong
+but the structural framework (factorization, conical
+parameterization, continuum-limit targets) is intact. A
+Hermitian discrete radial Laplacian on $L^2(\rho\,d\rho)$ via
+standard symmetrization is sprint-scale engineering for
+G4-3a-cleanup.
+
+\paragraph{Connection to G4-2 continuum derivation.}
+G4-2 derived $S_{BH} = A\Lambda^2/(12\pi)$ at the continuum level
+via the conical-defect / replica method. G4-3 onwards rebuilds
+this on the discrete substrate. The target is to show:
+\begin{enumerate}
+  \item Discrete substrate has analog conical-defect contribution
+        $\to (1/12)(1/\alpha - \alpha)$ in continuum limit
+  \item Discrete Dirac on warped substrate $\to$ G4-1 $S^2$ Dirac
+        at constant warp
+  \item Discrete replica method gives $S_{BH} \to A\Lambda^2/(12\pi)$
+\end{enumerate}
+
+\paragraph{Connection to G8 cutoff dependence.}
+The $\Lambda^2$ prefactor in $S_{BH}$ depends on the cutoff
+function $f$ per G8. The discrete substrate inherits this
+calibration: any discrete-substrate $S_{BH}$ derivation will
+have prefactor $\propto \phi(2)/\phi(1)$. The cutoff dependence
+is structural, not a feature of G4-3 specifically.
+
+\paragraph{Gravity-arc status.}
+Continuum gravity arc: G1--G8 complete (sprint-scale closure).
+Discrete-substrate gravity arc: G4-3a opens; G4-3b through G4-6
+estimated $\sim 6$--$12$ months to full $S_{BH}$ derivation on
+the discrete substrate. This is the natural multi-month
+commitment for the next major project arc.
+
+Sprint G4-3a driver: \texttt{debug/g4\_3\_warped\_substrate.py};
+memo: \texttt{debug/g4\_3\_warped\_substrate\_memo.md}.
+
 % ===================================================================
 \section{Two-Loop Irreducible Constant: $S_{\min}$}
 \label{sec:smin}

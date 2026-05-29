@@ -1,0 +1,67 @@
+{
+  "substrate_params": {
+    "N_rho": 20,
+    "a": 0.5,
+    "N_phi": 12,
+    "l_max": 6,
+    "r_h": 2.0,
+    "rho_max": 10.0,
+    "A_disk": 314.1592653589793,
+    "A_S2": 50.26548245743669
+  },
+  "heat_trace": [
+    {
+      "t": 0.01,
+      "K_disk": 242.0419395431469,
+      "K_S2": 46.17417783417488,
+      "K_cigar": 11176.087559793868,
+      "K_continuum_4D": 999999.9999999999,
+      "ratio_discrete_continuum": 0.01117608755979387
+    },
+    {
+      "t": 0.05,
+      "K_disk": 326.1382550859407,
+      "K_S2": 36.849211853815106,
+      "K_cigar": 12017.937655295422,
+      "K_continuum_4D": 40000.0,
+      "ratio_discrete_continuum": 0.3004484413823855
+    },
+    {
+      "t": 0.1,
+      "K_disk": 514.8598399563429,
+      "K_S2": 28.546954456409342,
+      "K_cigar": 14697.680402667922,
+      "K_continuum_4D": 10000.0,
+      "ratio_discrete_continuum": 1.469768040266792
+    },
+    {
+      "t": 0.5,
+      "K_disk": 82853.17351012268,
+      "K_S2": 8.325824165178846,
+      "K_cigar": 689820.9541723352,
+      "K_continuum_4D": 400.0,
+      "ratio_discrete_continuum": 1724.552385430838
+    },
+    {
+      "t": 1.0,
+      "K_disk": 118086728.73366025,
+      "K_S2": 4.350835683360039,
+      "K_cigar": 513775953.1056662,
+      "K_continuum_4D": 100.0,
+      "ratio_discrete_continuum": 5137759.531056662
+    }
+  ],
+  "conical_defect": {
+    "alpha_definition": "alpha = N_phi / N_0",
+    "smooth_at_alpha_eq_1": true,
+    "sommerfeld_cheeger_target": "(1/12)(1/alpha - alpha)",
+    "verification_deferred_to_G4_3c": true
+  },
+  "verdict": "POSITIVE-SCOPING (G4-3a)",
+  "sub_sprint_sequence": [
+    "G4-3a (this): constant-warp r = r_h",
+    "G4-3b: variable-warp r(rho) for Schwarzschild",
+    "G4-3c: discrete conical-defect (N_phi sweeps)",
+    "G4-3d: continuum-limit heat-kernel asymptotics"
+  ]
+}
