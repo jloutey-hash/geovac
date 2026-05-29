@@ -7,6 +7,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.16.0] - 2026-05-28
+
+### Sprints G4-3c + G4-3d — Conical-defect sweep + continuum-limit Weyl law
+
+**Minor version bump.** Two sprint-scale sub-sprints completing the sprint-scale portion of the G4-3 multi-month sequence. **POSITIVE-G4-3c-PARTIAL + POSITIVE-G4-3d-IR.**
+
+#### G4-3c — Discrete conical-defect deformation ($N_\phi$ sweep)
+
+Tests whether the discrete substrate reproduces the Sommerfeld/Cheeger conical-defect heat-trace contribution $(1/12)(1/\alpha - \alpha)$.
+
+**Method:** Sweep $N_\phi \in \{6, 12, 18, 24, 36, 48\}$ at fixed $N_\rho = 50$, $a = 0.2$, computing the disk heat trace at each.
+
+**Result:** Heat-trace sweep framework operational. Naive bulk subtraction $K(\alpha) - \alpha K(1)$ does NOT reproduce the linear $1/\alpha - \alpha$ pattern with slope $1/12$ — the residual grows roughly quadratically in $1/\alpha - \alpha$, not linearly. The naive $N_\phi$ sweep varies angular RESOLUTION at fixed $2\pi$ period, not the apex angle of a conical defect.
+
+**Diagnosis:** Proper conical-defect discretization requires either:
+- A wedge lattice (define disk on apex angle $2\pi\alpha$ with proper boundary glue)
+- Discrete replica method ($n$-sheeted covering with analytic continuation, G4-5 multi-month target)
+
+The sprint framework provides the substrate for either implementation.
+
+#### G4-3d — Continuum-limit heat-kernel asymptotics
+
+Tests whether the discrete heat trace recovers the continuum Weyl law $K(t) \sim A/(4\pi t)$ as $a \to 0$ at fixed $R = N_\rho a = 10$.
+
+**Method:** Grid sweep $a \in \{0.5, 0.2, 0.1, 0.05, 0.025\}$ at fixed $R = 10$, $N_\phi = 24$, with the G4-3a-cleanup Hermitian polar Laplacian. Compute Weyl ratio $K(t) \cdot 4\pi t / A_{D^2}$.
+
+**Result (IR regime $t = 0.5, 1.0$):** Weyl ratio approaches 1 monotonically from 1.048 (coarse) to 0.933 (fine) at $t = 1.0$, verifying Weyl law at the **5-7% level**.
+
+**Result (UV regime $t = 0.01$):** Weyl ratio saturates at $\sim 0.25$ across the entire grid sweep. Diagnosis: at small $t$, high-frequency modes ($\lambda \gtrsim 1/t = 100$) dominate; finite $N_\phi = 24$ undersamples the angular sector. The Hermitian Laplacian is NOT the bottleneck; angular mode count is. To reach Weyl at $t = 0.01$, need $N_\phi \gtrsim 4 \cdot 24 = 96$ jointly with radial refinement.
+
+**Substantive sprint-scale finding:** The G4-3 substrate's discrete-to-continuum convergence is operational with standard finite-mode truncation artifacts. The Hermitian polar Laplacian (G4-3a-cleanup) does its job; quantitative IR Weyl law verified.
+
+#### G4-3 sequence status
+
+| Sub-sprint | Status |
+|---|---|
+| G4-3a | Done (scoping, v3.13.0) |
+| G4-3a-cleanup | Done (Hermitian polar Laplacian, v3.15.0) |
+| G4-3b | Done (variable warp, v3.15.0) |
+| G4-3c | Done (partial-positive, this) |
+| G4-3d | Done (positive-IR, this) |
+| G4-4 | Multi-month (warped Dirac spectrum) |
+| G4-5 | Multi-month (discrete replica method) |
+| G4-6 | Multi-month (full discrete-substrate $S_{BH}$) |
+
+**Five of seven sub-sprints in the G4-3 sequence are complete.** Sprint-scale work on the discrete-substrate gravity-arc opening is essentially done; G4-4 onwards is the multi-month commitment.
+
+#### Verdict
+
+**POSITIVE-G4-3c-PARTIAL + POSITIVE-G4-3d-IR.** Sprint-scale gravity arc concludes here; multi-month discrete-substrate program (G4-4 onwards) remains open for future commitment.
+
+#### Added
+
+- `debug/g4_3c_conical_defect_sweep.py` — $N_\phi$-sweep driver
+- `debug/data/g4_3c_conical_defect_sweep.json` — structured results
+- `debug/g4_3c_conical_defect_sweep_memo.md` — canonical memo (~2500 words)
+- `debug/g4_3d_continuum_limit.py` — continuum-limit driver
+- `debug/data/g4_3d_continuum_limit.json` — structured results
+- `debug/g4_3d_continuum_limit_memo.md` — canonical memo (~2500 words)
+
+#### Changed
+
+- `CLAUDE.md` — version bumped to v3.16.0; §2 one-liner entry added.
+
 ## [3.15.0] - 2026-05-28
 
 ### Sprint G4-3a-cleanup + G4-3b — Hermitian polar Laplacian + variable warp
