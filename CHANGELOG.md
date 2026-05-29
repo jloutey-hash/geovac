@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.15.0] - 2026-05-28
+
+### Sprint G4-3a-cleanup + G4-3b — Hermitian polar Laplacian + variable warp
+
+**Minor version bump.** Phase B of the two-phase commit ("do A then start B"). Two sub-sprints landed sequentially advancing the G4-3 multi-month discrete-substrate sequence. **POSITIVE-CLEANUP + POSITIVE-G4-3b.**
+
+#### G4-3a-cleanup — Hermitian discrete polar Laplacian
+
+The G4-3a naive discretization was non-Hermitian (smallest disk eigenvalues came out negative). The fix uses the standard substitution $u = \sqrt{\rho} f$ which converts the polar Laplacian on $L^2(\rho\,d\rho)$ to a symmetric 1D Schrödinger-like operator on $L^2(d\rho)$:
+$$-u'' + \frac{m^2 - 1/4}{\rho^2} u = \lambda u$$
+
+Discrete matrix is symmetric tridiagonal:
+- $H_{kk} = 2/a^2 + (m^2 - 1/4)/(ka)^2$
+- $H_{k, k\pm 1} = -1/a^2$
+
+**Verification:**
+- Hermiticity bit-exact: $\|H - H^T\| = 0$ at machine precision
+- Positive eigenvalues for all tested $m \in \{0, 1, 2, 5\}$
+- Bessel-zero continuum convergence verified ($\sim 4$-$5\%$ rel. err. on higher modes at $N_\rho = 50, a = 0.1$)
+- Heat-trace ratios in physical range $0.42$-$0.77$ (vs G4-3a's wildly-divergent $10^4$+ values)
+
+**Known artifact:** $m = 0$ ground state shows $\sim 18\%$ error from centrifugal-near-origin attractive potential $-1/(4\rho^2)$, a well-known FD difficulty. Not load-bearing for the gravity-arc heat-trace asymptotics (dominated by spectrum bulk; conical defect captured by separate $N_\phi$ mechanism in G4-3c).
+
+#### G4-3b — Variable warp $r(\rho)$
+
+Extends to variable warp $r(\rho) = r_h \sqrt{1 + (\rho/r_h)^2}$:
+- Smooth at $\rho = 0$ with $r(0) = r_h$ (horizon)
+- Asymptotic $r(\rho)/\rho \to 1$ for large $\rho$ (Schwarzschild-like outer region)
+
+Warped-product Laplacian for $ds^2 = d\rho^2 + \rho^2 d\phi^2 + r(\rho)^2 d\Omega_2^2$:
+$$\Delta f = \partial_\rho^2 f + \left(\frac{1}{\rho} + \frac{2r'(\rho)}{r(\rho)}\right)\partial_\rho f + \frac{1}{\rho^2}\partial_\phi^2 f + \frac{1}{r(\rho)^2}\Delta_{S^2} f$$
+
+The first-derivative coupling $2r'/r$ has variable coefficient, so the discrete matrix is asymmetric. Underlying operator is self-adjoint on $L^2(\rho\,r(\rho)^2\,d\rho)$, so eigenvalues are guaranteed real.
+
+**Verification:**
+- Eigenvalues real to machine precision (max $|\mathrm{Im}(\lambda)| = 0$ exact) at all tested $(m, l)$
+- Asymptotic limit $r(\rho)/\rho \to 1$ verified at $\rho = 5, 10, 20$
+- Heat-trace response to warp: $K_{\rm var}/K_{\rm const} \in [0.89, 2.19]$ across $t \in [0.1, 5.0]$
+- Variable warp lowers $\ell \geq 1$ eigenvalues (larger $r$ reduces angular potential $\ell(\ell+1)/r^2$)
+
+**Operator-form caveat:** comparison with G4-3a-cleanup at $(m=0, l=0)$ is muddied by operator-form mismatch (asymmetric variable-warp vs Schrödinger-substituted constant-warp). The substantive content (real eigenvalues, warp asymptotics, heat-trace response) is established.
+
+#### G4-3 multi-month sequence status
+
+| Sub-sprint | Status |
+|---|---|
+| G4-3a | Done (scoping, v3.13.0) |
+| G4-3a-cleanup | Done (this) |
+| G4-3b | Done (this) |
+| G4-3c | Next (sprint-scale: conical-defect sweep) |
+| G4-3d | Next (sprint-scale: continuum-limit verification) |
+| G4-4 | Multi-month (warped Dirac spectrum) |
+| G4-5 | Multi-month (discrete replica method) |
+| G4-6 | Multi-month (full discrete-substrate $S_{BH}$) |
+
+**Three of seven sub-sprints in the G4-3 discrete-substrate sequence are now complete.**
+
+#### Verdict
+
+**POSITIVE-CLEANUP + POSITIVE-G4-3b.** Discrete substrate framework operational. Hermitian discretization unblocks numerical work; variable warp framework demonstrates the warp's effect on the spectrum. G4-3c and G4-3d are the next sprint-scale targets; G4-4 onwards is the multi-month commitment.
+
+#### Added
+
+- `debug/g4_3a_cleanup_hermitian_polar.py` — Hermitian polar Laplacian driver
+- `debug/data/g4_3a_cleanup_hermitian_polar.json`
+- `debug/g4_3a_cleanup_hermitian_polar_memo.md` — canonical memo (~2500 words)
+- `debug/g4_3b_variable_warp.py` — variable-warp driver
+- `debug/data/g4_3b_variable_warp.json`
+- `debug/g4_3b_variable_warp_memo.md` — canonical memo (~3000 words)
+
+#### Changed
+
+- `CLAUDE.md` — version bumped to v3.15.0; §2 one-liner entry added.
+
 ## [3.14.0] - 2026-05-28
 
 ### Paper 51 drafted — Gravity from the GeoVac spectral action
