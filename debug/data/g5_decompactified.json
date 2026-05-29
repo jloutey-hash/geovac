@@ -1,0 +1,17 @@
+{
+  "heat_kernel_density": "R**3/(4*t**2) - R/(8*t)",
+  "action_density": "Lambda**4*R**3/4 - Lambda**2*R/8",
+  "extremum": {
+    "R_crit_solutions": [
+      "sqrt(6)/(6*Lambda)"
+    ],
+    "R_crit_Lambda": "sqrt(6)/6",
+    "matches_1_over_sqrt6": true
+  },
+  "minimum_action_density": {
+    "s_min": "-sqrt(6)*Lambda/72",
+    "expected": "-sqrt(6)*Lambda/72",
+    "matches_expected": true
+  },
+  "verdict": "POSITIVE"
+}

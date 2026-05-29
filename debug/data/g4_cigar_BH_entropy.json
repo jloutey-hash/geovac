@@ -1,0 +1,31 @@
+{
+  "geometry": {
+    "r_h": "2 M",
+    "beta": "8*pi*M",
+    "T_H": "1/(8*pi*M)",
+    "A": "16*pi*M**2",
+    "S_BH": "4*pi*M**2/G"
+  },
+  "S_E": {
+    "form": "A/(4G)",
+    "S_E_total": "beta**2/(16*pi*G)",
+    "equivalent_at_G_eq_1": "beta**2/(16*pi)"
+  },
+  "thermodynamic_entropy": {
+    "dI_E_dbeta": "beta/(8*pi*G)",
+    "beta_dI_E_dbeta": "beta**2/(8*pi*G)",
+    "S_thermo": "beta**2/(16*pi*G)",
+    "matches_A_over_4G": true
+  },
+  "heat_kernel_structure": {
+    "bulk_R_integral": "0 (Ricci-flat)",
+    "Lambda4_volume": "divergent, regulated by background subtraction",
+    "asymptotic_boundary": "beta M",
+    "horizon_boundary": "-A/(4G)",
+    "net_on_shell_action": "beta M - A/(4G)",
+    "BH_entropy": "A/(4G) = 4 pi M^2 / G",
+    "load_bearing_mechanism": "horizon boundary heat-kernel coefficient"
+  },
+  "verdict": "POSITIVE-CONCEPTUAL",
+  "next_step": "Multi-month G4 full: construct discrete spectral triple on cigar, compute Dirac spectrum, extract S_BH = A/4"
+}

@@ -7,6 +7,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.8.0] - 2026-05-28
+
+### Sprints G4 + G5 — Bekenstein-Hawking entropy + decompactified de Sitter vacuum
+
+**Minor version bump.** Two gravity-arc sprints landed together, completing the geometry-extension phase before the multi-month G4 full / G6 full commitments.
+
+#### G4 first-pass — Bekenstein-Hawking entropy from cigar spectral action
+
+**Verdict: POSITIVE-CONCEPTUAL.**
+
+Standard CC derivation of $S_{BH} = A/(4G) = 4\pi M^2/G$ from Euclidean Schwarzschild cigar reproduced symbolically.
+
+- **Setup**: Euclidean Schwarzschild $ds^2 = (1-2M/r)d\tau^2 + (1-2M/r)^{-1}dr^2 + r^2 d\Omega^2$. Regularity at horizon $\Rightarrow \beta = 8\pi M$. Horizon area $A = 16\pi M^2$.
+- **On-shell action**: $I_E = A/(4G) = \beta^2/(16\pi G)$ after Gibbons-Hawking flat-space subtraction.
+- **Thermodynamic entropy**: $S_{\rm thermo} = -I_E + \beta \partial_\beta I_E = A/(4G)$. Sympy-exact.
+- **Load-bearing mechanism**: horizon boundary heat-kernel coefficient at the smooth conical tip generates GHY $(1/8\pi G)\oint K\sqrt{h} = A/(4G)$.
+
+**Connection to existing work**: Sprint TD Track 4 (2026-05-08) reproduced $T_H = 1/(8\pi M)$ from $\tau$-circle Matsubara. G4 + TD Track 4 together close the cigar's "Hawking temperature + Bekenstein-Hawking entropy" structure at the continuum level.
+
+**GeoVac discrete substrate question**: Substrate (CH Dirac on truncated $S^3$) does NOT natively describe cigar. Full discrete-substrate analog requires constructing discrete spectral triple on $\mathbb{R} \times S^2 \times S^1$ with horizon boundary preservation — multi-month G4 full sprint.
+
+#### G5 — Decompactified $S^3 \times \mathbb{R}_\tau$ and de Sitter vacuum
+
+**Verdict: POSITIVE.**
+
+The $\beta \to \infty$ limit of G2's $S^3 \times S^1_\beta$ result is now manifest.
+
+- **Heat-kernel decompactification**: $K_\mathbb{R}(t) = \int dk/(2\pi) e^{-k^2 t} = 1/(2\sqrt{\pi t})$ (density per unit length). Matches $K_{S^1}(t,\beta)/\beta$ in the $\beta \to \infty$ limit.
+- **Two-term exactness propagates**: $K_{\rm full}(t, R) = (R^3/4) t^{-2} - (R/8) t^{-1}$ + exp small. Same structure as G2's per-$\beta$ density.
+- **Spectral action density** (Gaussian cutoff): $s(R, \Lambda) = (R^3/4)\Lambda^4 - (R/8)\Lambda^2$.
+- **Extremum**: $R_{\rm crit} \Lambda = 1/\sqrt{6}$ — same as G1, G2 (robust to temporal compactification choice).
+- **Closed-form minimum**: $s_{\rm min} = -\Lambda/(12\sqrt{6})$. Sympy-verified (residual exact zero).
+
+**Physical reading**: framework's preferred zero-temperature de Sitter vacuum has Planck-scale radius $R_{\rm crit} \sim 1/\Lambda$ and vacuum action density $-\Lambda/(12\sqrt{6})$. Standard CC spectral-action-principle prediction with the well-known cosmological-constant-scale gap.
+
+**G2's joint minimum at $\beta \to \infty$ is now explicit in G5.**
+
+#### Comparison across G1, G2, G5
+
+| Sprint | Geometry | Action | Extremum |
+|---|---|---|---|
+| G1 | $S^3_R$ | $\phi(3/2) u^3 - \tfrac{1}{4}\phi(1/2) u$ | $u = R\Lambda = 1/\sqrt{6}$ |
+| G2 | $S^3_R \times S^1_\beta$ | $\beta R^3 \Lambda^4/4 - \beta R \Lambda^2/8$ | $R\Lambda = 1/\sqrt{6}$, $\beta \to \infty$ |
+| G5 | $S^3_R \times \mathbb{R}_\tau$ | $R^3 \Lambda^4/4 - R \Lambda^2/8$ | $R\Lambda = 1/\sqrt{6}$, $s_{\rm min} = -\Lambda/(12\sqrt{6})$ |
+
+The preferred zero-temperature de Sitter vacuum is described identically across the three geometries.
+
+#### Paper 28 additions
+
+- **§4.11** `sec:cigar_BH_entropy` — Euclidean Schwarzschild setup, on-shell action $I_E = A/(4G)$, thermodynamic derivation of $S_{BH}$, load-bearing horizon boundary mechanism, GeoVac discrete-substrate question
+- **§4.12** `sec:decompactified_dS` — Heat-kernel decompactification, spectral action density, extremum at $R_{\rm crit}\Lambda = 1/\sqrt{6}$, closed-form $s_{\rm min} = -\Lambda/(12\sqrt{6})$, de Sitter vacuum reading
+
+Paper 28 now 46 pages, three-pass clean compile, exit 0.
+
+#### Honest scope (preserved)
+
+**Reached:**
+- G4: standard CC derivation of $S_{BH} = A/(4G)$ at continuum level ✓
+- G4: load-bearing mechanism identified (horizon boundary heat-kernel coefficient) ✓
+- G5: heat-kernel decompactification clean ✓
+- G5: two-term exactness propagates to non-compact case ✓
+- G5: $R_{\rm crit}\Lambda = 1/\sqrt{6}$, closed-form $s_{\rm min}$ ✓
+
+**Not reached:**
+- G4 full: discrete spectral triple on cigar (multi-month)
+- G4 full: $S_{BH} = A/4$ on the discrete substrate (multi-month)
+- G5 + Stefan-Boltzmann at finite $\beta$ (sub-question, deferred)
+- Connection to observed cosmological constant (standard CC gap, not addressed)
+
+#### Files
+
+- `debug/g4_cigar_BH_entropy.py` — symbolic derivation driver
+- `debug/data/g4_cigar_BH_entropy.json` — structured results
+- `debug/g4_cigar_BH_entropy_memo.md` — G4 first-pass memo
+- `debug/g5_decompactified_S3_x_R.py` — symbolic derivation driver
+- `debug/data/g5_decompactified.json` — structured results
+- `debug/g5_decompactified_memo.md` — G5 memo
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.11 + §4.12 added (~150 lines combined)
+- `memory/sprint_g4_g5_BH_dS.md` — durable findings
+- `MEMORY.md` index updated
+
+#### Gravity arc status after G4 + G5
+
+| Sprint | Verdict | Status |
+|---|---|---|
+| G1, G2, G3 | structural-test phase | CLOSED v3.6.0 |
+| G6-Diag-Full | graviton diagnostic POSITIVE | CLOSED v3.7.0 |
+| G4 first-pass | $S_{BH} = A/4$ POSITIVE-CONCEPTUAL | CLOSED v3.8.0 |
+| G5 | decompactified de Sitter POSITIVE | CLOSED v3.8.0 |
+
+**Remaining multi-month gravity-arc commitments:**
+- G4 full — discrete spectral triple on cigar
+- G6 full — Fierz-Pauli derivation
+- Pause arc and rotate to different focus
+
+---
+
 ## [3.7.0] - 2026-05-28
 
 ### Sprint G6-Diag-Full — graviton diagnostic on the discrete CH Dirac substrate
