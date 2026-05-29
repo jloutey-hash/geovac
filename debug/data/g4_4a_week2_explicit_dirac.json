@@ -1,0 +1,87 @@
+{
+  "F2_operator_level": {
+    "small": {
+      "max_anticom_residual": 0.0,
+      "anticom_passed": true,
+      "hermitian_passed": true
+    },
+    "medium": {
+      "max_anticom_residual": 0.0,
+      "anticom_passed": true,
+      "hermitian_passed": true
+    },
+    "larger": {
+      "max_anticom_residual": 0.0,
+      "anticom_passed": true,
+      "hermitian_passed": true
+    }
+  },
+  "D_squared_match": {
+    "small": {
+      "max_diff": 3.552713678800501e-15,
+      "passed": true
+    },
+    "medium": {
+      "max_diff": 1.4210854715202004e-14,
+      "passed": true
+    },
+    "larger": {
+      "max_diff": 1.1368683772161603e-13,
+      "passed": true
+    }
+  },
+  "lowest_mode_validation": {
+    "uv_small": {
+      "N_rho": 50,
+      "N_phi": 24,
+      "R": 10.0,
+      "lam_min": 0.3079020360399596,
+      "target_pi_over_R": 0.3141592653589793,
+      "rel_err": -0.019917379523630485
+    },
+    "uv_med": {
+      "N_rho": 100,
+      "N_phi": 48,
+      "R": 10.0,
+      "lam_min": 0.31102384526327076,
+      "target_pi_over_R": 0.3141592653589793,
+      "rel_err": -0.009980352138033593
+    },
+    "uv_fine": {
+      "N_rho": 200,
+      "N_phi": 96,
+      "R": 10.0,
+      "lam_min": 0.3125899711795198,
+      "target_pi_over_R": 0.3141592653589793,
+      "rel_err": -0.004995218516526392
+    }
+  },
+  "spectrum_symmetry": {
+    "small": {
+      "n_positive": 80,
+      "n_negative": 80,
+      "n_zero": 0,
+      "max_pair_diff": 0.0,
+      "passed": true
+    },
+    "medium": {
+      "n_positive": 240,
+      "n_negative": 240,
+      "n_zero": 0,
+      "max_pair_diff": 0.0,
+      "passed": true
+    },
+    "larger": {
+      "n_positive": 480,
+      "n_negative": 480,
+      "n_zero": 0,
+      "max_pair_diff": 0.0,
+      "passed": true
+    }
+  },
+  "verdict": "POSITIVE-G4-4a-WEEK2-VERIFIED",
+  "F2_op_all": true,
+  "D_sq_all": true,
+  "sym_all": true,
+  "lowest_continuum_close": true
+}

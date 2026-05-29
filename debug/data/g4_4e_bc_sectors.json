@@ -1,0 +1,35 @@
+{
+  "side_by_side": {
+    "2/5": {
+      "alpha": 0.4,
+      "spinor_slope": -0.08332519889760041,
+      "spinor_recovery": 0.999902386771205,
+      "scalar_slope": 0.060339917097333995,
+      "scalar_recovery": 0.7240790051680079
+    },
+    "1/2": {
+      "alpha": 0.5,
+      "spinor_slope": -0.08317138249678162,
+      "spinor_recovery": 0.9980565899613795,
+      "scalar_slope": 0.05648673837384758,
+      "scalar_recovery": 0.677840860486171
+    },
+    "3/5": {
+      "alpha": 0.6,
+      "spinor_slope": -0.08273510443725594,
+      "spinor_recovery": 0.9928212532470714,
+      "scalar_slope": 0.05310528597479435,
+      "scalar_recovery": 0.6372634316975323
+    },
+    "2/3": {
+      "alpha": 0.6666666666666666,
+      "spinor_slope": -0.0822058054372576,
+      "spinor_recovery": 0.9864696652470912,
+      "scalar_slope": 0.051068719601851595,
+      "scalar_recovery": 0.6128246352222192
+    }
+  },
+  "mean_spinor_recovery": 0.9943124738066867,
+  "mean_scalar_recovery": 0.6630019831434826,
+  "verdict": "POSITIVE-G4-4e-DIAGNOSTIC-CONFIRMED"
+}

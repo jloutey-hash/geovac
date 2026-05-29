@@ -1,0 +1,11 @@
+{
+  "c0_measured": 62.17116117984962,
+  "c0_predicted": 50.0,
+  "c0_rel_err": 0.2434232235969924,
+  "c1_measured": -41.686221811525925,
+  "c2_measured": -28.820883799841567,
+  "c3_measured": 163.06604268552397,
+  "c1_continuum_best_match": "-L/(2sqrt(pi))",
+  "c1_match_ratio": 2.3518932123524205,
+  "verdict": "PARTIAL-G4-4d"
+}

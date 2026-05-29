@@ -87,12 +87,23 @@ generalize to $\Geff = 6\pi/(\phi(1) \Lambda^2)$,
 $\Lcc = 6 \phi(2)/\phi(1) \cdot \Lambda^2$, and
 $\Rcrit \Lambda = \sqrt{\phi(1)/(6\phi(2))}$; \emph{no} simple
 combination is cutoff-independent, classifying the cutoff function as
-external Class~1 calibration data (G8). Finally, we open the
-multi-month discrete-substrate program by defining
+external Class~1 calibration data (G8). Finally, we report on the
+multi-month discrete-substrate program. The substrate
 $\mathcal{G}_{\rm cigar} = \mathbb{Z}_+(a)|_{N_\rho} \times \mathbb{Z}/N_\phi
-\times \mathrm{Fock}(S^2, l_{\max})$, identifying the constant-warp
-factorization at the operator level, and specifying the sub-sprint
-sequence G4-3a through G4-6 (G4-3, estimated $\sim 6$--$12$ months).
+\times \mathrm{Fock}(S^2, l_{\max})$ is operational at sprint scale
+through five closed sub-sprints (G4-3a / cleanup / b / c / d, plus
+the G4-3d-UV extension): Hermitian polar Laplacian built, variable
+warp realized, and the continuum Weyl law $K(t) \sim A/(4\pi t)$
+verified within $1\%$ at the sweet-spot $t \approx 0.1$,
+$N_\phi = 192$. The wedge-lattice proper conical-defect test
+(G4-3c-proper) has the correct sign at every apex angle $\alpha$
+but shows the literal Sommerfeld--Cheeger $(1/12)(1/\alpha - \alpha)$
+extraction sits below the bulk-subtraction discretization floor at
+sprint scale, identifying G4-5 (discrete replica method) as the
+proper target. The architectural scoping for G4-4 (warped Dirac on the
+discrete substrate, with load-bearing falsifiers F1/F2/F3) is closed.
+End-to-end commitment for the remaining G4-4 through G4-6 program is
+estimated at $\sim 9$--$16$ months.
 \end{abstract}
 
 \tableofcontents
@@ -787,41 +798,108 @@ The two factors act on independent sectors, so by construction:
 This factorization holds at the operator level on the discrete
 substrate.
 
-\subsection{Sub-sprint sequence}
+\subsection{Sub-sprint sequence (updated)}
+\label{subsec:g4_3_sequence}
 
-G4-3 opens a multi-month discrete-substrate sub-sprint sequence:
+G4-3 opens a multi-month discrete-substrate sub-sprint sequence.
+Status as of this version of the paper:
 \begin{itemize}
-  \item \textbf{G4-3a} (this paper's contribution): constant-warp
-        substrate + scoping (sprint-scale, done)
-  \item G4-3a-cleanup: Hermitian discrete polar Laplacian
-        (engineering, $\sim 1$ week)
-  \item G4-3b: variable warp $r(\rho)$ for asymptotic Schwarzschild
-        ($\sim 2$--$4$ weeks)
-  \item G4-3c: discrete conical-defect deformation ($N_\phi$ sweeps)
-        ($\sim 2$--$4$ weeks)
-  \item G4-3d: continuum-limit heat-kernel asymptotics verification
-        ($\sim 2$--$4$ weeks)
-  \item G4-4: warped Dirac spectrum on discrete substrate ($\sim 1$--$2$
-        months)
-  \item G4-5: discrete replica method ($\sim 1$--$2$ months)
-  \item G4-6: full discrete-substrate $S_{\BH}$ derivation
-        ($\sim 1$--$2$ months)
+  \item \textbf{G4-3a}: constant-warp substrate + scoping
+        (sprint-scale, \textsc{done})
+  \item \textbf{G4-3a-cleanup}: Hermitian discrete polar Laplacian
+        via $u = \sqrt{\rho}\,f$ substitution and symmetric finite
+        differences. Bessel-zero continuum convergence verified;
+        Hermiticity bit-exact (\textsc{done})
+  \item \textbf{G4-3b}: variable warp
+        $r(\rho) = r_h\sqrt{1+(\rho/r_h)^2}$ for asymptotic
+        Schwarzschild. Asymmetric tridiagonal radial operator
+        preserves self-adjointness numerically; heat-trace ratios
+        in physical range (\textsc{done})
+  \item \textbf{G4-3c} (naive $N_\phi$ sweep): tested whether the
+        original sweep at fixed period $2\pi$ extracts the
+        Sommerfeld--Cheeger $(1/12)(1/\alpha - \alpha)$ coefficient.
+        \textsc{Done, partial-positive}: framework operational but
+        the sweep varies angular resolution, not apex angle. Proper
+        wedge follow-on indicated.
+  \item \textbf{G4-3c-proper}: wedge-lattice with apex angle
+        $2\pi\alpha$ and fixed angular resolution
+        $h_\phi = 2\pi / N_0$, $N_\phi(\alpha) = \alpha N_0$. Sign of
+        the topological residual correct at every $\alpha$;
+        magnitude $\sim 1/4$ of the SC target with strong
+        $\alpha < 1$ vs $\alpha > 1$ asymmetry attributable to
+        UV-truncation mismatch between branches.
+        \textsc{Done, negative-with-structural-diagnosis}; sharpens
+        G4-5 (discrete replica method) as the proper SC-extraction
+        target.
+  \item \textbf{G4-3d}: continuum-limit heat-kernel asymptotics
+        verification via $a$-sweep at fixed $N_\phi = 24$.
+        Weyl law $K(t) = A/(4\pi t) + \cdots$ verified in the IR
+        regime ($t \in \{0.5, 1.0\}$) at the 5--7\% level;
+        UV regime saturated by angular truncation
+        (\textsc{done, positive-IR}).
+  \item \textbf{G4-3d-UV}: same $a$-sweep substrate refined in
+        $N_\phi \in \{24, 48, 96, 144, 192\}$. Weyl law recovers
+        within 1\% at $t = 0.1$, $N_\phi = 192$; within 7\% across
+        $t \in [0.01, 0.1]$ at the finest grid. The G4-3d Sec.~5
+        prediction that the small-$t$ saturation is angular
+        truncation (NOT Hermiticity) is confirmed quantitatively at
+        the $3\times$ gain factor on the $N_\phi = 96$ vs
+        $N_\phi = 24$ panel
+        (\textsc{done, positive-UV-verified}). A high-$m$ overshoot
+        mechanism is identified at fine $N_\phi$ (ratio $4/\pi^2$
+        between discrete and continuum azimuthal Laplacian at the
+        truncation edge), structural to the uniform-$\phi$ FD
+        angular discretization.
+  \item \textbf{G4-4}: warped Dirac spectrum on the discrete
+        substrate ($\sim 5$--$8$ months, multi-month).
+        Architectural scoping memo (G4-4 first-move) closed;
+        sub-sprint sequence G4-4a/b/c/d/e/f named with
+        load-bearing falsifiers F1 (constant-warp factorization),
+        F2 (chirality grading), F3 (continuum recovery at small $t$).
+  \item \textbf{G4-5}: discrete replica method ($\sim 2$--$4$
+        months). \emph{Now identified as the proper target for
+        literal Sommerfeld--Cheeger extraction} per the G4-3c-proper
+        structural diagnosis.
+  \item \textbf{G4-6}: full discrete-substrate $S_{\BH}$ derivation
+        from the G4-4 + G4-5 fusion ($\sim 2$--$4$ months).
 \end{itemize}
 
-Estimated total commitment: $\sim 6$--$12$ months for full
-discrete-substrate derivation of $S_{\BH}$.
+Estimated total commitment after the G4-3a$\to$G4-3d-UV closure:
+$\sim 9$--$16$ months for end-to-end discrete-substrate derivation of
+$S_{\BH}$ from G4-4 onwards.
 
-\subsection{Honest scope of G4-3a}
+\subsection{Honest scope at G4-3 closure}
+\label{subsec:g4_3_honest_scope}
 
-G4-3a defines the discrete substrate, verifies the constant-warp
-factorization at the operator level, identifies the conical-defect
-parameterization, and names the sub-sprint sequence. A naive
-non-Hermitian discrete polar Laplacian was used in the first-pass
-driver; numerical heat-trace values are quantitatively wrong but the
-structural framework (factorization, parameterization, continuum-limit
-targets) is intact. A Hermitian discrete radial Laplacian on
-$L^2(\rho\, d\rho)$ via standard symmetrization is sprint-scale
-engineering for G4-3a-cleanup.
+Five of seven sub-sprints in the G4-3 sequence
+(G4-3a / cleanup / b / c / d, plus the G4-3d-UV extension) are
+closed at sprint scale. The substrate is intact and operational:
+constant-warp factorization at the operator level holds by
+construction, variable-warp tip-regular substrate built, conical-defect
+parameterization defined via $N_\phi(\alpha)$ wedge lattice, continuum
+Weyl law verified at finer than $1\%$ in the UV sweet spot. The
+remaining sub-sprints G4-4, G4-5, G4-6 form the
+\emph{multi-month commitment} to derive $S_{\BH}$ from the discrete
+substrate.
+
+\textbf{What is NOT extracted at sprint scale:}
+\begin{itemize}
+  \item Literal Sommerfeld--Cheeger $(1/12)(1/\alpha - \alpha)$
+        coefficient extraction (off by factor 2--4 at proper wedge
+        lattice with $N_0 = 120$; the bulk subtraction inherits
+        UV-asymmetry between $\alpha < 1$ and $\alpha > 1$ branches
+        that is structurally larger than the SC tip term at this
+        discretization).
+  \item Discrete spinor Dirac on the cigar substrate
+        (G4-4 multi-month target).
+  \item Discrete replica method (G4-5 multi-month target).
+\end{itemize}
+
+The G4-3c-proper finding is the sharpening result: the literal
+Sommerfeld--Cheeger extraction is structurally below the bulk
+subtraction's discretization floor at sprint scale, even with the
+proper apex-angle wedge lattice. G4-5 (discrete replica method) is
+named as the correct path.
 
 \subsection{Connection to G4-2 continuum derivation}
 
@@ -910,15 +988,40 @@ say about gravity at the spectral action level, the discrete-substrate
 arc shows what it says \emph{intrinsically}, before passing to the
 continuum limit.
 
+\paragraph{Empirical verification at G4-3 closure.} The G4-3d-UV
+sweep (Section~\ref{subsec:g4_3_sequence}) demonstrates that the
+discrete substrate recovers the continuum Weyl law within $1\%$ at the
+sweet-spot $t \approx 0.1$ when $N_\phi$ is refined into the UV regime.
+This is the first quantitative bridge from the discrete substrate to a
+continuum-gravity prediction. The slight overshoot at fine $N_\phi$
+and small $t$ is identified as a structural artifact of the
+azimuthal FD discretization (ratio $4/\pi^2 \approx 0.405$ between
+discrete and continuum angular Laplacian at the truncation edge), not
+a Hermiticity or implementation issue. The framework's continuum-limit
+prediction is robust at the discrete-substrate level when the
+discretization choices are properly characterized.
+
 % =====================================================================
 \section{Open questions}
 \label{sec:open}
 % =====================================================================
 
-\paragraph{Q1.} The discrete-substrate program G4-3a through G4-6 is
-specified but the multi-month commitment is open. The first
-sprint-scale steps (G4-3a-cleanup, G4-3b, G4-3c, G4-3d) tractable;
-the multi-month G4-4 through G4-6 require sustained commitment.
+\paragraph{Q1.} The discrete-substrate program is now closed at
+G4-3 sub-sprint scale (G4-3a/cleanup/b/c/d/UV all done, five of seven
+sub-sprints). The remaining multi-month commitment G4-4
+through G4-6 is open. The G4-4 architectural scoping (warped Dirac on
+the discrete substrate, with three load-bearing falsifiers F1, F2, F3
+named) is closed; first-move sub-sprint G4-4a (constant-warp Dirac +
+falsifier verification) is 4--8 weeks. End-to-end G4-4 through G4-6 is
+estimated at $\sim 9$--$16$ months.
+
+The literal Sommerfeld--Cheeger $(1/12)(1/\alpha - \alpha)$ extraction
+is now identified as a G4-5 target (discrete replica method), not a
+sprint-scale sub-sprint, based on the G4-3c-proper wedge-lattice
+diagnosis: the bulk subtraction at sprint-scale discretization
+($N_0 = 120$) leaves a residual with $\alpha < 1$ UV-asymmetry that is
+structurally larger than the SC tip term. This is a discretization
+floor, not an algorithm bug.
 
 \paragraph{Q2.} The factor-of-2 calibration between G7's
 $\Geff = 6 \pi / \Lambda^2$ and G4-2's $G_N = 3\pi/\Lambda^2$

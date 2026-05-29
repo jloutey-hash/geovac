@@ -1,0 +1,162 @@
+{
+  "F2": {
+    "algebra": {
+      "g1_squared_is_I": 0.0,
+      "g2_squared_is_I": 0.0,
+      "g5_squared_is_I": 0.0,
+      "g1_g2_anticom": 0.0,
+      "g5_definition": 0.0,
+      "g5_g1_anticom": 0.0,
+      "g5_g2_anticom": 0.0
+    },
+    "passed": true,
+    "tolerance": 1e-14
+  },
+  "F1": {
+    "small": {
+      "0.05": {
+        "K_factorized": 3366.9806869695617,
+        "K_direct": 3366.9806869695617,
+        "abs_err": 0.0,
+        "rel_err": 0.0,
+        "passed": true
+      },
+      "0.1": {
+        "K_factorized": 2140.6977333339196,
+        "K_direct": 2140.697733333919,
+        "abs_err": 4.547473508864641e-13,
+        "rel_err": 2.124295008143169e-16,
+        "passed": true
+      },
+      "0.5": {
+        "K_factorized": 284.92495307520585,
+        "K_direct": 284.9249530752058,
+        "abs_err": 5.684341886080802e-14,
+        "rel_err": 1.9950312616460878e-16,
+        "passed": true
+      },
+      "1.0": {
+        "K_factorized": 79.68126437216421,
+        "K_direct": 79.6812643721642,
+        "abs_err": 1.4210854715202004e-14,
+        "rel_err": 1.7834625024055738e-16,
+        "passed": true
+      },
+      "all_passed": true,
+      "tolerance": 1e-12
+    },
+    "medium": {
+      "0.05": {
+        "K_factorized": 12953.430258577513,
+        "K_direct": 12953.43025857751,
+        "abs_err": 3.637978807091713e-12,
+        "rel_err": 2.8085061134155673e-16,
+        "passed": true
+      },
+      "0.1": {
+        "K_factorized": 6989.598546431694,
+        "K_direct": 6989.598546431694,
+        "abs_err": 0.0,
+        "rel_err": 0.0,
+        "passed": true
+      },
+      "0.5": {
+        "K_factorized": 904.9630078190867,
+        "K_direct": 904.9630078190864,
+        "abs_err": 2.2737367544323206e-13,
+        "rel_err": 2.51251900330369e-16,
+        "passed": true
+      },
+      "1.0": {
+        "K_factorized": 242.02994116807747,
+        "K_direct": 242.02994116807753,
+        "abs_err": 5.684341886080802e-14,
+        "rel_err": 2.3486110266552987e-16,
+        "passed": true
+      },
+      "all_passed": true,
+      "tolerance": 1e-12
+    },
+    "larger": {
+      "0.05": {
+        "K_factorized": 22293.009196073202,
+        "K_direct": 22293.0091960732,
+        "abs_err": 3.637978807091713e-12,
+        "rel_err": 1.6318922111836407e-16,
+        "passed": true
+      },
+      "0.1": {
+        "K_factorized": 12093.086091240593,
+        "K_direct": 12093.086091240593,
+        "abs_err": 0.0,
+        "rel_err": 0.0,
+        "passed": true
+      },
+      "0.5": {
+        "K_factorized": 1499.0221002729193,
+        "K_direct": 1499.0221002729197,
+        "abs_err": 4.547473508864641e-13,
+        "rel_err": 3.033626727742509e-16,
+        "passed": true
+      },
+      "1.0": {
+        "K_factorized": 377.90693392920866,
+        "K_direct": 377.9069339292086,
+        "abs_err": 5.684341886080802e-14,
+        "rel_err": 1.5041644848849533e-16,
+        "passed": true
+      },
+      "all_passed": true,
+      "tolerance": 1e-12
+    }
+  },
+  "F3_rough": {
+    "0.05": {
+      "K_Dirac": 813.4675424730546,
+      "K_scalar": 406.743457934988,
+      "ratio": 1.999952369493489,
+      "target": 2.0,
+      "passed": true
+    },
+    "0.1": {
+      "K_Dirac": 475.82364087545267,
+      "K_scalar": 237.92772258447116,
+      "ratio": 1.9998663279203273,
+      "target": 2.0,
+      "passed": true
+    },
+    "0.2": {
+      "K_Dirac": 258.6339997290246,
+      "K_scalar": 129.3390915007566,
+      "ratio": 1.9996583919681516,
+      "target": 2.0,
+      "passed": true
+    },
+    "0.5": {
+      "K_Dirac": 100.19781608986024,
+      "K_scalar": 50.12875265026363,
+      "ratio": 1.998809281948756,
+      "target": 2.0,
+      "passed": true
+    },
+    "1.0": {
+      "K_Dirac": 44.91128027490433,
+      "K_scalar": 22.49088156777812,
+      "ratio": 1.996866158383365,
+      "target": 2.0,
+      "passed": true
+    }
+  },
+  "sample_heat_trace": {
+    "t": 0.1,
+    "K_disk": 111.13209547217625,
+    "K_S2": 62.89450870816753,
+    "K_cigar_factorized": 6989.598546431694,
+    "K_disk_times_K_S2": 6989.598546431694,
+    "match": true
+  },
+  "verdict": "POSITIVE-G4-4a-FIRST-MOVE-VERIFIED",
+  "F1_overall": true,
+  "F2_overall": true,
+  "F3_overall": true
+}
