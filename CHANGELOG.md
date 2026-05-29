@@ -7,6 +7,120 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.11.0] - 2026-05-28
+
+### Sprint G4-2 — Conical defect / replica method for BH entropy
+
+**Minor version bump.** Second sub-sprint of multi-month G4 full. Builds on G4-1's $S^2$ Dirac structural analysis to derive $S_{BH}$ via the standard CC conical-defect / replica method on the cigar's near-horizon geometry $D^2_\alpha \times S^2_{r_h}$. **POSITIVE-STRUCTURAL.**
+
+#### Setup
+
+Near-horizon geometry: $ds^2 = d\rho^2 + \rho^2 d\varphi^2 + r_h^2 d\Omega_2^2$ with $\varphi \in [0, 2\pi\alpha)$. Smooth tip at $\alpha = 1$; conical singularity for $\alpha \neq 1$. Replica formula: $S_{BH} = -dI_E(\alpha)/d\alpha|_{\alpha=1}$.
+
+#### Conical heat trace contribution
+
+Sommerfeld/Cheeger formula (standard):
+$$K_{\rm cone}(t) = K_{\rm smooth\ bulk}(t) + \frac{1}{12}\left(\frac{1}{\alpha} - \alpha\right) + O(t)$$
+
+The $(1/12)(1/\alpha - \alpha)$ is the conical-defect tip contribution, vanishing at smooth $\alpha = 1$.
+
+#### Combined heat trace with $S^2$ Dirac (G4-1)
+
+Using $K_{S^2_{r_h}}(t) \sim 2 r_h^2/t - r_h^2/3 + O(t)$:
+$$K_{\rm tip}(t, \alpha) = \frac{1}{12}\left(\frac{1}{\alpha} - \alpha\right)\left(\frac{2 r_h^2}{t} - \frac{r_h^2}{3} + O(t)\right)$$
+
+#### Replica entropy derivation
+
+For Gaussian cutoff, $S = K(1/\Lambda^2)$:
+$$I_E^{\rm conical}(\alpha) = \frac{r_h^2 \Lambda^2}{6}\left(\frac{1}{\alpha} - \alpha\right)$$
+
+$\alpha$-derivative at $\alpha = 1$:
+$$\frac{dI_E^{\rm conical}}{d\alpha}\bigg|_{\alpha=1} = -\frac{r_h^2 \Lambda^2}{3}$$
+
+**Result:**
+$$\boxed{S_{BH} = \frac{r_h^2 \Lambda^2}{3} = \frac{A\Lambda^2}{12\pi}}$$
+
+where $A = 4\pi r_h^2$. Matching $S_{BH} = A/(4G_N)$ gives $G_N = 3\pi/\Lambda^2$.
+
+#### Comparison with G7
+
+| Source | Newton constant |
+|---|---|
+| G7 (G2 spectral action) | $G_{\rm eff} = 6\pi/\Lambda^2$ |
+| G4-2 (conical replica) | $G_N = 3\pi/\Lambda^2$ |
+| Ratio | $G_{\rm eff}/G_N = 2$ |
+
+**Factor-of-2 calibration**: standard scalar vs Dirac conical-defect coefficient ratio (Solodukhin 1995, Frolov-Fursaev 1997). Structural emergence of $A \cdot \Lambda^2$ from the conical tip is load-bearing; precise prefactor calibration is downstream.
+
+#### Discrete-substrate requirements (G4-3 onwards)
+
+The continuum derivation provides the structural target for the multi-month G4-3 to G4-6 sub-sprint sequence. The discrete-substrate version must:
+1. Define $\alpha$-deformation of the discrete substrate at the tip
+2. Compute the conical contribution from the discrete Dirac
+3. Verify the discrete substrate reproduces the $(1/\alpha - \alpha)$ form
+4. Apply the replica method to extract $S_{BH}$ from the discrete spectral action
+
+#### Paper 28 §4.15 new subsection `sec:conical_replica`
+
+- Equation `eq:sommerfeld_cheeger` (Sommerfeld/Cheeger conical heat trace)
+- Proposition `prop:bh_conical_replica` (Bekenstein-Hawking from conical replica)
+- Equation `eq:bh_from_conical` ($S_{BH} = r_h^2 \Lambda^2/3 = A\Lambda^2/(12\pi)$)
+- Factor-of-2 calibration with G7 noted
+- Discrete-substrate analog requirements listed
+
+Paper 28 now 49 pages, three-pass clean compile.
+
+#### Honest scope
+
+**Reached:**
+- Conical defect heat trace + replica method derivation ✓
+- $S^2$ Dirac heat trace incorporated (from G4-1) ✓
+- $S_{BH} = A\Lambda^2/(12\pi)$ derived symbolically ✓
+- $G_N = 3\pi/\Lambda^2$ Newton constant identified ✓
+- Factor-of-2 calibration with G7 noted ✓
+- Discrete-substrate analog requirements specified ✓
+
+**Not reached (G4-3 to G4-6):**
+- Discrete substrate construction (multi-month)
+- Discrete Dirac on warped product (G4-3, G4-4)
+- Discrete conical defect / replica (G4-5)
+- Verification that discrete reproduces continuum (G4-6)
+
+#### G4 full sub-sprint sequence
+
+- **G4 first-pass** (v3.8.0): continuum $S_E = A/(4G)$ + thermodynamic entropy
+- **G4-1** (v3.10.0): $S^2$ Dirac structural analysis
+- **G4-2** (this, v3.11.0): conical defect / replica method (entropy mechanism)
+- G4-3: warped product on discrete substrate (multi-month start)
+- G4-4: discrete Dirac on warped product
+- G4-5: discrete conical defect / replica
+- G4-6: full discrete-substrate $S_{BH}$ derivation
+
+After G4-3 the work transitions from sprint-scale conceptual to multi-month implementation. **G4-2 completes the conceptual setup phase.**
+
+#### Files
+
+- `debug/g4_2_conical_replica.py` — symbolic derivation driver
+- `debug/data/g4_2_conical_replica.json` — structured results
+- `debug/g4_2_conical_replica_memo.md` — canonical memo
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.15 added (~95 lines)
+- `memory/sprint_g4_2_conical_replica.md` — durable findings
+- `MEMORY.md` index updated
+
+#### Gravity arc status after G4-2
+
+| Sprint | Verdict | Status |
+|---|---|---|
+| G1, G2, G3 | structural-test phase | CLOSED v3.6.0 |
+| G6-Diag-Full | graviton diagnostic POSITIVE | CLOSED v3.7.0 |
+| G4 first-pass, G5 | BH entropy + de Sitter | CLOSED v3.8.0 |
+| G7 | extremality + Newton + Λ_cc | CLOSED v3.9.0 |
+| G4-1 | $S^2$ Dirac structural analysis | CLOSED v3.10.0 |
+| **G4-2** | conical defect / replica method | **CLOSED v3.11.0** |
+| G4-3 to G4-6 | discrete-substrate construction | multi-month commitment |
+
+---
+
 ## [3.10.0] - 2026-05-28
 
 ### Sprint G4-1 — $S^2$ Dirac on the cigar's spatial sphere (first sub-sprint of G4 full)

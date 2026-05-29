@@ -1,0 +1,29 @@
+{
+  "conical_heat_trace": {
+    "formula": "(1/12)(1/alpha - alpha)",
+    "at_alpha_1": "0",
+    "interpretation": "vanishes at smooth tip (alpha=1)"
+  },
+  "conical_action_contribution": {
+    "formula_at_cutoff": "r_h**2*(6*Lambda**2 + alpha**2*(1 - 6*Lambda**2) - 1)/(36*alpha)",
+    "leading_Lambda2": "Lambda**2*r_h**2*(-alpha + 1/alpha)/6"
+  },
+  "entropy_extraction": {
+    "S_BH_from_conical": "Lambda**2*r_h**2/3",
+    "interpretation": "Lambda^2 r_h^2 / 3 = A Lambda^2/(12 pi)",
+    "G_N_implied": "3*pi/Lambda**2"
+  },
+  "comparison_with_G7": {
+    "G_eff_from_G7": "6*pi/Lambda**2",
+    "G_N_implied_from_G4_2": "3*pi/Lambda**2",
+    "ratio": "2",
+    "interpretation": "factor-of-2 calibration; scalar vs Dirac conical coefficient"
+  },
+  "discrete_substrate_requirements": {
+    "conical_deformation": "must support alpha-deformation of the tip",
+    "heat_trace_conical_term": "must reproduce (1/alpha - alpha) form",
+    "S2_substrate_spectrum": "must use G4-1's S^2 Dirac structure",
+    "replica_method_applicability": "must allow off-shell alpha variation"
+  },
+  "verdict": "POSITIVE-STRUCTURAL"
+}

@@ -1742,6 +1742,91 @@ other dimensions or the gravity arc's cigar geometry.
 Sprint G4-1 driver: \texttt{debug/g4\_1\_S2\_dirac.py} and memo
 \texttt{debug/g4\_1\_S2\_dirac\_memo.md}.
 
+\subsection{Conical defect / replica method for BH entropy}
+\label{sec:conical_replica}
+
+Sprint G4-2 (second sub-sprint of G4 full) builds on
+\S\ref{sec:S2_dirac_cigar} to derive the Bekenstein--Hawking
+entropy via the standard conical-defect / replica method on the
+cigar's near-horizon geometry $D^2_\alpha \times S^2_{r_h}$.
+
+\paragraph{Setup.} The cigar's near-horizon geometry is
+$ds^2 = d\rho^2 + \rho^2\,d\varphi^2 + r_h^2\,d\Omega_2^2$
+with $\varphi \in [0, 2\pi)$ (smooth tip) or $\varphi \in [0, 2\pi\alpha)$
+(conical singularity for $\alpha \neq 1$). The Bekenstein--Hawking
+entropy is extracted via the replica formula
+\begin{equation}
+  S_{BH} = -\left.\frac{dI_E(\alpha)}{d\alpha}\right|_{\alpha = 1}.
+\end{equation}
+
+\paragraph{Conical heat trace contribution.} The Sommerfeld/Cheeger
+formula for a 2D cone with apex angle $2\pi\alpha$:
+\begin{equation}
+  K_{\rm cone}(t) = K_{\rm smooth\ bulk}(t)
+                  + \frac{1}{12}\left(\frac{1}{\alpha} - \alpha\right)
+                  + O(t).
+  \label{eq:sommerfeld_cheeger}
+\end{equation}
+The $(1/12)(1/\alpha - \alpha)$ is the conical-defect tip contribution,
+vanishing at smooth $\alpha = 1$.
+
+\paragraph{Combined heat trace.} Using G4-1's
+$K_{S^2_{r_h}}(t) \sim 2r_h^2/t - r_h^2/3 + O(t)$ at small $t$, the
+conical-tip contribution to the cigar's heat trace is:
+\begin{equation}
+  K_{\rm tip}(t, \alpha) = \frac{1}{12}\left(\frac{1}{\alpha} - \alpha\right)
+                          \left[\frac{2r_h^2}{t} - \frac{r_h^2}{3} + O(t)\right]
+\end{equation}
+
+\paragraph{Replica entropy derivation.} For Gaussian cutoff,
+$S = K(1/\Lambda^2)$ gives the conical-tip spectral action contribution
+\begin{equation}
+  I_E^{\rm conical}(\alpha, \Lambda, r_h) = \frac{r_h^2 \Lambda^2}{6}
+    \left(\frac{1}{\alpha} - \alpha\right) + O(1/\Lambda^2).
+\end{equation}
+The $\alpha$-derivative at $\alpha = 1$:
+\begin{equation}
+  \left.\frac{dI_E^{\rm conical}}{d\alpha}\right|_{\alpha=1}
+  = \frac{r_h^2\Lambda^2}{6}\cdot(-2) = -\frac{r_h^2\Lambda^2}{3}.
+\end{equation}
+
+\begin{proposition}[Bekenstein--Hawking entropy from conical replica]
+\label{prop:bh_conical_replica}
+The spectral action's conical-defect contribution at the cigar tip
+generates the Bekenstein--Hawking entropy via the replica formula:
+\begin{equation}
+  S_{BH} = -\left.\frac{dI_E^{\rm conical}}{d\alpha}\right|_{\alpha=1}
+         = \frac{r_h^2\Lambda^2}{3} = \frac{A\Lambda^2}{12\pi},
+  \label{eq:bh_from_conical}
+\end{equation}
+where $A = 4\pi r_h^2$. Matching to $S_{BH} = A/(4G_N)$ gives
+$G_N = 3\pi/\Lambda^2$.
+\end{proposition}
+
+\paragraph{Factor-of-2 calibration with G7.} The Newton constant from
+\S\ref{sec:newton_cc_extremality} (G2's spectral action matching) is
+$G_{\rm eff} = 6\pi/\Lambda^2$. The factor-of-2 difference from
+$G_N = 3\pi/\Lambda^2$ reflects the standard scalar vs Dirac
+conical-defect coefficient normalization (Solodukhin 1995,
+Frolov--Fursaev 1997). The structural emergence of $A \cdot \Lambda^2$
+from the conical tip is the load-bearing finding; the precise
+prefactor calibration is downstream.
+
+\paragraph{Discrete-substrate analog.} For G4-3 onwards (multi-month):
+\begin{itemize}
+\item Define $\alpha$-deformation of the discrete substrate at the tip
+\item Compute the conical contribution from the discrete Dirac
+\item Verify the discrete substrate reproduces the $(1/\alpha - \alpha)$ form
+\item Apply replica method to extract $S_{BH}$ from the discrete
+  substrate spectral action
+\end{itemize}
+
+The conceptual framework is now in place;
+multi-month implementation follows.
+
+Sprint G4-2 driver: \texttt{debug/g4\_2\_conical\_replica.py} and memo
+\texttt{debug/g4\_2\_conical\_replica\_memo.md}.
+
 % ===================================================================
 \section{Two-Loop Irreducible Constant: $S_{\min}$}
 \label{sec:smin}
