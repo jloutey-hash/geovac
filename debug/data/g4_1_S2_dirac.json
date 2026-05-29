@@ -1,0 +1,27 @@
+{
+  "S2_dirac_spectrum": {
+    "eigenvalues": "|lambda_n| = n + 1",
+    "multiplicity": "g_n = 4(n+1) for full Dirac",
+    "spectrum_shift": "INTEGER (unlike S^3 which has HALF-INTEGER)"
+  },
+  "S2_heat_trace_leading": {
+    "form": "K(t) ~ 2/t + (exp small in 1/t)",
+    "matches_dim_S_times_Vol_over_4pi_t": true
+  },
+  "a_1_coefficient": {
+    "value": "-4 pi / 3 (from formula)",
+    "implication": "a_1 != 0 on S^2 Dirac (unlike S^3 where two-term exactness has a_2 = 0)"
+  },
+  "structural_comparison": {
+    "S3_Dirac": "two-term exact (half-integer spectrum, Jacobi theta_2)",
+    "S2_Dirac": "full SD series (integer spectrum, Jacobi theta_3 + exp prefactor)",
+    "pattern": "two-term exactness is specific to half-integer Dirac"
+  },
+  "implications_for_G4_full": {
+    "cigar_spatial_S2": "standard CC infinite SD series",
+    "discrete_substrate_construction": "must account for higher-curvature corrections",
+    "two_term_exactness_specificity": "specific to S^3 Dirac (the GeoVac substrate)",
+    "consistency_with_G3": "spinor-bundle specificity confirmed"
+  },
+  "verdict": "POSITIVE-STRUCTURAL-FINDING"
+}

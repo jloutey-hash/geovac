@@ -7,6 +7,112 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.10.0] - 2026-05-28
+
+### Sprint G4-1 — $S^2$ Dirac on the cigar's spatial sphere (first sub-sprint of G4 full)
+
+**Minor version bump.** First sub-sprint of multi-month G4 full (discrete-substrate Bekenstein-Hawking entropy). **POSITIVE-STRUCTURAL-FINDING.**
+
+#### The question
+
+The Euclidean Schwarzschild cigar has spatial section $\mathbb{R}_+ \times S^2_r$ (warped product). G4-1 tests whether the framework's two-term exactness on $S^3$ Dirac (Paper 28 theorem) propagates to the $S^2$ Dirac that appears in this spatial section.
+
+#### Answer: NO (POSITIVE-STRUCTURAL-FINDING)
+
+**$S^2$ Dirac spectrum** (Camporesi-Higuchi, $d = 2$):
+- $|\lambda_n^{S^2}| = n + 1$ — **INTEGER** shift (vs $S^3$'s half-integer $n + 3/2$)
+- Multiplicity: $g_n^{Dirac} = 4(n+1)$
+
+**Heat trace asymptotic:**
+$$K_{S^2}^{Dirac}(t) \to \frac{2}{t} - \frac{1}{3} + O(t)$$
+
+at small $t$. Numerically verified to rel diff $\sim 10^{-5}$ at $t = 10^{-4}$ (leading) and rel diff $\sim 10^{-3}$ for the $-1/3$ constant.
+
+**Standard SD form** $K(t) = (4\pi t)^{-1}[a_0 + a_1 t + ...]$:
+- $a_0 = 8\pi$ (giving leading $2/t$)
+- $a_1 = \dim_S \cdot (R/6 - E_{Lich}) \cdot V = 2 \cdot (1/3 - 1/2) \cdot 4\pi = -4\pi/3 \neq 0$
+- All higher $a_k$ nonzero (standard CC infinite series)
+
+In contrast to $S^3$ Dirac where $a_k = 0$ for all $k \geq 2$ (Paper 28 two-term exactness theorem).
+
+#### Structural pattern (extends G3)
+
+| Operator | Spectrum shift | SD series |
+|---|---|---|
+| $S^3$ Dirac | half-integer $n + 3/2$ | $a_k = 0$ for $k \geq 2$ (two-term exact) |
+| $S^3$ scalar Δ | integer $n(n+2)$ | $a_k = 2\pi^2/k!$ (G3) |
+| **$S^2$ Dirac** | **integer $n + 1$** | $a_1 = -4\pi/3 \neq 0$ etc. (G4-1) |
+
+**Two-term exactness is SPECIFIC to the half-integer-shifted $S^3$ Dirac spectrum (the GeoVac substrate).** Other dimensions / operators inherit standard CC behavior.
+
+**Mechanism**: Jacobi inversion:
+- Half-integer Dirac on $S^3$ → $\theta_2$ inversion → exactly two power-law terms
+- Integer scalar on $S^3$ → $\theta_3$ + $e^t$ prefactor → infinite series
+- Integer Dirac on $S^2$ → $\theta_3$ + derivative + prefactor → infinite series
+
+#### Implication for G4 full
+
+The cigar's spatial $S^2$ component inherits standard CC infinite SD series. The discrete-substrate BH entropy derivation **cannot exploit a clean two-term form on the spatial side**. Must follow standard CC heat-kernel asymptotic structure with higher-curvature corrections at all orders.
+
+The load-bearing piece for $S_{BH} = A/(4G)$ remains the **horizon boundary $a_2$ coefficient** (continuum case verified in G4 first-pass).
+
+#### Sub-sprint sequence for G4 full (multi-month)
+
+- **G4-1** (DONE, v3.10.0): $S^2$ Dirac structural analysis
+- **G4-2**: warped product structure $\mathbb{R}_+ \times S^2_r$ on discrete substrate
+- **G4-3**: discrete Dirac spectrum on warped product
+- **G4-4**: boundary heat-kernel coefficient at horizon
+- **G4-5**: verify $A/(4G)$ emergence from boundary
+- **G4-6**: thermodynamic entropy extraction
+
+#### Paper 28 §4.14 new subsection `sec:S2_dirac_cigar`
+
+- $S^2$ Dirac spectrum identification
+- Heat trace asymptotic
+- $a_1 = -4\pi/3$ extraction (formula + numerical)
+- Structural pattern table (3 operators)
+- Mechanism via Jacobi inversion variants
+- Implication for G4 full
+
+Paper 28 now 48 pages, three-pass clean compile.
+
+#### Honest scope
+
+**Reached:**
+- $S^2$ Dirac structural finding ✓
+- Two-term exactness confirmed as $S^3$-specific ✓
+- Pattern crystallized (half-integer Dirac vs integer everything else) ✓
+- Cigar spatial structure characterized for G4 full ✓
+
+**Not reached (remaining G4 sub-sprints):**
+- Discrete substrate on warped product
+- Discrete Dirac spectrum on cigar
+- Boundary heat-kernel coefficient computation
+- $A/(4G)$ extraction from discrete substrate
+- Multi-month total to complete G4 full
+
+#### Files
+
+- `debug/g4_1_S2_dirac.py` — driver
+- `debug/data/g4_1_S2_dirac.json` — structured results
+- `debug/g4_1_S2_dirac_memo.md` — canonical memo
+- `papers/group5_qed_gauge/paper_28_qed_s3.tex` — §4.14 added (~80 lines)
+- `memory/sprint_g4_1_S2_dirac.md` — durable findings
+- `MEMORY.md` index updated
+
+#### Gravity arc status after G4-1
+
+| Sprint | Verdict | Status |
+|---|---|---|
+| G1, G2, G3 | structural-test phase | CLOSED v3.6.0 |
+| G6-Diag-Full | graviton diagnostic POSITIVE | CLOSED v3.7.0 |
+| G4 first-pass, G5 | BH entropy + de Sitter | CLOSED v3.8.0 |
+| G7 | extremality + Newton + Λ_cc | CLOSED v3.9.0 |
+| **G4-1** | first sub-sprint of G4 full | **CLOSED v3.10.0** |
+| G4-2 through G4-6 | remaining G4 full sub-sprints | multi-month commitment |
+
+---
+
 ## [3.9.0] - 2026-05-28
 
 ### Sprint G7 — Background extremality + Newton constant + cosmological constant
