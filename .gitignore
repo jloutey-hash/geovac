@@ -95,6 +95,10 @@ geometric-solver/
 # Local scratch / runtime
 temp/
 .claude/scheduled_tasks.lock
+.claude/worktrees/
 
 # Hylleraas-Eckart closed-form precompilation cache (derivable from code)
 geovac/_cache/
+
+# Compiled paper PDFs (regeneratable from .tex sources via pdflatex)
+papers/**/*.pdf
