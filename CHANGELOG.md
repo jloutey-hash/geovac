@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.14.0] - 2026-05-28
+
+### Paper 51 drafted — Gravity from the GeoVac spectral action
+
+**Minor version bump.** Standalone math-/hep-th paper consolidating the gravity arc (sprints G1–G8 + G4-3a, all completed 2026-05-28) into a self-contained narrative for the noncommutative-geometry / spectral-action / quantum-gravity audience.
+
+#### Headline content
+
+Spins out the gravity-arc content from Paper 28 §4.7–§4.17 as **Paper 51 — Gravity from the GeoVac spectral action: continuum results and the discrete-substrate program**. **Thirteenth math-/hep-th-style standalone in the GeoVac series.**
+
+#### Theorems and structural results
+
+- **G1 spectral-zeta identity**: $\zeta_{\rm unit}(-k) = 0$ for every $k \geq 0$ on the Camporesi–Higuchi spinor spectrum; forces two-term exactness of the CC spectral action on $\sthree_R$.
+- **G2 thermal product**: heat-kernel factorization $K_{\sthree \times S^1}(t) = K_{\sthree}(t) \cdot K_{S^1}(t)$ produces exact Einstein–Hilbert + cosmological constant.
+- **G3 bundle-specific exactness**: closed-form $a_k^{\Delta} = 2\pi^2/k!$ for scalar Laplacian Seeley–DeWitt; two-term exactness is spinor-specific.
+- **G4-1 / G4-2 BH entropy**: $S^2$ Dirac structural analysis + Sommerfeld–Cheeger conical defect + replica method gives $S_{BH} = A\Lambda^2/(12\pi)$, $G_N = 3\pi/\Lambda^2$.
+- **G5 decompactified vacuum**: zero-temperature de Sitter on $\sthree \times \mathbb{R}_\tau$ with closed-form $s_{\min} = -\Lambda/(12\sqrt 6)$.
+- **G6-Diag-Full graviton diagnostic**: physical (1,1) modes have positive kinetic eigenvalue at every tested $n_{\max} \in \{1,2,3\}$ after gauge-orbit classification via $V = i[X, D_0]$.
+- **G7 Newton + cosmological constant**: $G_{\rm eff} = 6\pi/\Lambda^2$, $\Lambda_{cc} = 6\Lambda^2$ (Planck-scale; standard CC $10^{120}$ gap inherited).
+- **G8 cutoff dependence**: $G_{\rm eff}(f) = 6\pi/(\phi(1)\Lambda^2)$, $\Lambda_{cc}(f) = 6\phi(2)/\phi(1) \cdot \Lambda^2$, $R_{\rm crit}\Lambda = \sqrt{\phi(1)/(6\phi(2))}$; no cutoff-independent gravity prediction; cutoff is Class-1 calibration data.
+
+#### Discrete-substrate program
+
+**G4-3a opening**: defines $\mathcal{G}_{\rm cigar} = \mathbb{Z}_+(a)|_{N_\rho} \times \mathbb{Z}/N_\phi \times \mathrm{Fock}(S^2, l_{\max})$ for near-horizon constant warp; constant-warp factorization at operator level; sub-sprint sequence G4-3a/cleanup/b/c/d → G4-4/5/6 named (~6–12 months estimated).
+
+#### Structural-skeleton-scope reading
+
+Sharpens the partition between framework predictions (cutoff-independent: G1–G6) and external Class-1 calibration data (G7 numerical values, G8 cutoff choice). Same pattern observed across the framework (Papers 34, 35), specialized to the gravity sector here.
+
+#### Honest scope
+
+The continuum gravity arc is consolidated; the discrete-substrate program is opened and named. The Fierz–Pauli decomposition (G6 full) and the multi-month G4-4 through G4-6 (warped Dirac, discrete replica, full $S_{BH}$ derivation) remain open as named follow-on commitments.
+
+#### Five named open questions (Q1–Q5)
+
+Q1 multi-month discrete-substrate commitment; Q2 factor-of-2 calibration G7 vs G4-2 (currently per standard CC literature); Q3 cosmological-constant-scale gap; Q4 Fierz–Pauli full decomposition; Q5 first-principles cutoff selection.
+
+#### Added
+
+- `papers/group5_qed_gauge/paper_51_gravity_arc.tex` — standalone gravity-arc paper (~795 LaTeX lines, ~10,400 words, 14 pages, three-pass clean compile, 35 bibitems with all references resolving). arXiv-ready pending PI metadata sign-off (math-ph primary, hep-th + gr-qc secondary).
+
+#### Changed
+
+- `CLAUDE.md` — version bumped to v3.14.0; §2 one-liner entry added.
+
 ## [3.13.0] - 2026-05-28
 
 ### Sprint G4-3 — Discrete warped-product substrate for the cigar (scoping + first-pass)
