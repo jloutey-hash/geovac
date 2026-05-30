@@ -191,8 +191,10 @@ The continuum arc produces the following structural results.
         Sommerfeld--Cheeger conical-defect contribution
         $(1/12)(1/\alpha - \alpha)$ at the cigar tip, the replica
         method gives $S_{\BH} = A \Lambda^2/(12\pi)$, with Newton
-        constant $G_N = 3\pi/\Lambda^2$ (Planck-scale,
-        factor-of-2 calibration with G7).
+        constant $G_N = 3\pi/\Lambda^2$ (Planck-scale; the factor of
+        $2$ relative to G7 is a \emph{forced bookkeeping artifact}, not
+        calibration, by Wald's theorem in the two-term-exact
+        Einstein-gravity sector --- see \S\ref{sec:g4}).
 
   \item \textbf{Decompactified de Sitter vacuum} (G5): the
         $\beta \to \infty$ decompactification of the G2 product
@@ -542,11 +544,36 @@ with horizon area $A = 4 \pi r_h^2$.
 \begin{equation}
   G_N = \frac{3 \pi}{\Lambda^2},
 \end{equation}
-Planck-scale Newton constant. (Factor-of-2 calibration relative to G7
-follows the standard scalar vs Dirac conical-defect coefficient
-calibration~\cite{solodukhin1995, frolov_fursaev1997}; the
-load-bearing structural finding is the emergence of $A \Lambda^2$
-from the conical tip via the replica method.)
+Planck-scale Newton constant. This differs by a factor of $2$ from the
+$\Geff = 6\pi/\Lambda^2$ of the Einstein--Hilbert route (G7,
+\S\ref{sec:g7}).
+
+\begin{remark}[The factor of $2$ is Wald-forced, not a cone coefficient]
+A natural first reading attributes this factor to a scalar-vs-Dirac
+conical-defect coefficient. That reading is \emph{incorrect}: the 2D
+Dirac and scalar cones share the conical coefficient
+$(1/12)(1/\alpha - \alpha)$, confirmed three independent ways --- by
+central charge ($c = 1$ for both a free 2D Dirac fermion and a free
+real scalar), by Fursaev--Miele~\cite{fursaev_miele1996} (``spin $1/2$
+resembles the scalar case''), and by the discrete-substrate spinor
+extraction of G4-4 ($-1/12$, bit-exact, the anti-periodic half-integer
+spectrum being structurally essential). The factor of $2$ is instead
+\emph{forced to be a bookkeeping artifact} by Wald's
+theorem~\cite{wald1993}: the Dirac-sector spectral action is two-term
+exact (G1--G2: Einstein--Hilbert plus cosmological constant, no higher
+curvature), so the geometry is pure Einstein gravity, where the $G$ in
+the action and the $G$ in $S_{\BH} = A/(4G)$ are \emph{identically
+equal}. The action-route $G$ (G7, the $\phi(1)$ Mellin channel) and the
+entropy-route $G$ (G4-2, the $\phi(0)$ channel) are therefore not
+independent calibration data; their discrepancy is a normalization
+mismatch between the 4D-bulk ($\sthree \times S^1$) and factorized
+2D$\times$2D ($D^2 \times S^2$) spectral-action setups --- most
+plausibly the distribution of the 4D Dirac spinor trace
+$a_0 = 4 = 2 \otimes 2$ across the factorized product --- and closing it
+is a convention-alignment computation, not a free choice. The
+load-bearing structural finding remains the emergence of $A \Lambda^2$
+from the conical tip via the replica method.
+\end{remark}
 
 % =====================================================================
 \section{Decompactified de Sitter vacuum on $\sthree \times \mathbb{R}_\tau$ (G5)}
@@ -2428,6 +2455,11 @@ arXiv:hep-th/9605153.
 S.~N.~Solodukhin, ``Entanglement Entropy of Black Holes,''
 \textit{Living Rev.~Relativity}\ \textbf{14}, 8 (2011),
 arXiv:1104.3712.
+
+\bibitem{wald1993}
+R.~M.~Wald, ``Black hole entropy is the Noether charge,''
+\textit{Phys.~Rev.~D}\ \textbf{48}, R3427--R3431 (1993),
+arXiv:gr-qc/9307038.
 
 \bibitem{dowker1994}
 J.~S.~Dowker, ``Heat kernels on curved cones,''

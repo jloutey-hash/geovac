@@ -4,6 +4,8 @@
 **Path:** Gravity arc, second sub-sprint of G4 full. Builds on G4-1 ($S^2$ Dirac structural analysis) to derive $S_{BH}$ via the standard conical-defect / replica method on the cigar's near-horizon geometry $D^2_\alpha \times S^2_{r_h}$.
 **Verdict:** **POSITIVE-STRUCTURAL.** The conical-defect heat-trace contribution $(1/12)(1/\alpha - \alpha)$ at the tip, combined with the $S^2$ Dirac heat trace (G4-1), gives via the replica method $S_{BH} = \Lambda^2 r_h^2 / 3 = A\Lambda^2/(12\pi)$. Matches $S_{BH} = A/(4G_N)$ with $G_N = 3\pi/\Lambda^2$ (Planck-scale, factor-of-2 calibration vs G7's $G_{\rm eff} = 6\pi/\Lambda^2$ from scalar vs Dirac coefficient normalization).
 
+> **ERRATUM (2026-05-30):** The "scalar vs Dirac coefficient normalization" attribution of the factor of 2 is **wrong**. The 2D Dirac and scalar cones share the conical coefficient $(1/12)(1/\alpha-\alpha)$ — three ways: central charge ($c=1$ both), Fursaev–Miele 1996, and our own G4-4c discrete extraction ($-1/12$ bit-exact). The cone is exonerated. The factor of 2 is instead **forced to be a bookkeeping artifact** by Wald's theorem (two-term-exact = pure Einstein gravity ⇒ action-$G$ ≡ entropy-$G$), living in a 4D-bulk vs factorized-2D×2D normalization mismatch. The honest close is a convention audit, not a coefficient swap. See `debug/wald_forces_entropy_relation_memo.md`.
+
 ## 1. Setup
 
 The Euclidean Schwarzschild cigar has near-horizon geometry:
