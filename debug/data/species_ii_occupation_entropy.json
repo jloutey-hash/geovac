@@ -1,0 +1,74 @@
+{
+  "R_bohr": 3.566,
+  "rows": [
+    {
+      "molecule": "H2",
+      "R_bohr": 3.566,
+      "n_electrons": 2,
+      "M_spatial": 10,
+      "filling_fraction": 0.1,
+      "S_mode": 0.6931471805599453,
+      "S_occ_nodes": 1.0346626487209853,
+      "n_partially_occupied_orbitals": 2,
+      "degeneracy": 2
+    },
+    {
+      "molecule": "NaH",
+      "R_bohr": 3.566,
+      "n_electrons": 2,
+      "M_spatial": 10,
+      "filling_fraction": 0.1,
+      "S_mode": 1.3858407733764821,
+      "S_occ_nodes": 4.309809608001206,
+      "n_partially_occupied_orbitals": 4,
+      "degeneracy": 1
+    },
+    {
+      "molecule": "KH",
+      "R_bohr": 3.566,
+      "n_electrons": 2,
+      "M_spatial": 10,
+      "filling_fraction": 0.1,
+      "S_mode": 1.3861387901862154,
+      "S_occ_nodes": 4.3044892633746095,
+      "n_partially_occupied_orbitals": 4,
+      "degeneracy": 1
+    },
+    {
+      "molecule": "LiH",
+      "R_bohr": 3.566,
+      "n_electrons": 4,
+      "M_spatial": 15,
+      "filling_fraction": 0.13333333333333333,
+      "S_mode": 1.3715071846865368,
+      "S_occ_nodes": 5.196738375873177,
+      "n_partially_occupied_orbitals": 6,
+      "degeneracy": 1
+    },
+    {
+      "molecule": "MgH2",
+      "R_bohr": 3.566,
+      "n_electrons": 4,
+      "M_spatial": 20,
+      "filling_fraction": 0.1,
+      "S_mode": 1.7427539940364216,
+      "S_occ_nodes": 8.09302801193479,
+      "n_partially_occupied_orbitals": 8,
+      "degeneracy": 1
+    }
+  ],
+  "corr_Smode_Soccnodes": 0.9616984400562336,
+  "corr_Smode_filling": 0.08146067179929788,
+  "frozen_Socc": [
+    1.0346626487209853,
+    4.309809608001206,
+    4.3044892633746095
+  ],
+  "responsive_Socc": [
+    5.196738375873177,
+    8.09302801193479
+  ],
+  "separation": 0.8869287678719706,
+  "_prediction": "S_occ_nodes LOW 1-pair, HIGH 2-pair, tracks S_mode",
+  "_guard": "filling fraction should NOT discriminate"
+}

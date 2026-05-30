@@ -1,0 +1,111 @@
+{
+  "MgH2": {
+    "Z": 12,
+    "n_electrons": 4,
+    "rows": [
+      {
+        "R_bohr": 2.0,
+        "E_Ha": -234.81407288702613,
+        "gap_Ha": 2.477669821760628,
+        "degeneracy": 1,
+        "S_mode": 2.7256075914445863,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.6027720104559471,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 2.5,
+        "E_Ha": -224.41067577291622,
+        "gap_Ha": 0.690737655448487,
+        "degeneracy": 1,
+        "S_mode": 2.7442427892024783,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.6068932110473408,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 3.0,
+        "E_Ha": -219.89819293205886,
+        "gap_Ha": 0.2759062199954485,
+        "degeneracy": 1,
+        "S_mode": 1.7838317406078346,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.39449693638086436,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 3.566,
+        "E_Ha": -217.054276004911,
+        "gap_Ha": 0.07416753220135774,
+        "degeneracy": 1,
+        "S_mode": 1.7427539940363035,
+        "schmidt_rank": 90,
+        "S_mode_over_ceiling": 0.3872950461721181,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 4.0,
+        "E_Ha": -215.82427033569485,
+        "gap_Ha": 0.037023982035606195,
+        "degeneracy": 1,
+        "S_mode": 2.9389833625846182,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.6499603669003527,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 5.0,
+        "E_Ha": -213.0658240158126,
+        "gap_Ha": 0.01917609430779521,
+        "degeneracy": 1,
+        "S_mode": 2.9582393389526183,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.6542188535677163,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 7.0,
+        "E_Ha": -208.80788817308076,
+        "gap_Ha": 0.19525582726470248,
+        "degeneracy": 1,
+        "S_mode": 1.420532343779457,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.3141527560553282,
+        "n_heavy": 10,
+        "n_H": 10
+      },
+      {
+        "R_bohr": 10.0,
+        "E_Ha": -204.4823143647435,
+        "gap_Ha": 0.25710971551043826,
+        "degeneracy": 1,
+        "S_mode": 1.5078115664008442,
+        "schmidt_rank": 92,
+        "S_mode_over_ceiling": 0.3334546807548564,
+        "n_heavy": 10,
+        "n_H": 10
+      }
+    ],
+    "ratio_range": 0.34006609751238803,
+    "binds": false
+  },
+  "_predictions": {
+    "electron_count": "RESPONSIVE",
+    "valence_freedom_josh": "RESPONSIVE",
+    "binding": "FROZEN",
+    "core_valence": "FROZEN"
+  },
+  "_ref": {
+    "LiH": 0.203,
+    "NaH": 0.004,
+    "KH": 0.002,
+    "H2": 0.0
+  },
+  "_verdict": "RESPONSIVE -> supports {electron-count, VALENCE-FREEDOM}; kills {binding, core-valence}"
+}
