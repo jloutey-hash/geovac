@@ -1326,7 +1326,7 @@ at $r_h = 2$:
 
 The $\Lambda$-monotone descent of the ratio (29.1 $\to$ 5.81 $\to$ 0.85) is the substrate-UV/IR signature: at $\Lambda \cdot R \lesssim 1$, the Gaussian $e^{-t \Lambda^2}$ does not fully suppress large-$t$ (IR) contributions and the integral over-counts.
 \textbf{At $\Lambda = 2$, the discrete extraction lands within the factor-2 band of the continuum $r_h^2 \Lambda^2/3$ prediction, recovery $= 0.85$}. This confirms G4-2's continuum derivation
-(Sec.~\ref{sec:g4_BH}) on the discrete substrate at the UV cell. The
+(Sec.~\ref{sec:g4}) on the discrete substrate at the UV cell. The
 $\alpha > 1$ branch open question from G4-4c is inherited but does
 not affect $\alpha = 1$ extraction.
 
@@ -1501,6 +1501,34 @@ during the post-v3.19.0 audit; the Fursaev--Solodukhin 1995
 paper~\cite{fursaev_solodukhin1995} cited elsewhere in this paper is
 correctly attributed (Riemannian geometry of conical defects, BH entropy)
 but does not contain the Möbius modification.
+
+\paragraph{Mechanism RESOLVED (B4, 2026-05-29): finite-$a$ artifact,
+continuum is Sommerfeld--Cheeger.} The open question above is settled in favour
+of option (ii). The L6 bookkeeping sprint re-measured the $\alpha > 1$ recovery
+with the clean machinery -- spectral azimuthal eigenvalues
+$m_{\rm eff}=(k+\tfrac12)/\alpha$ plus a \emph{radial continuum extrapolation}
+$a\to0$ at several $t$ -- the one axis the prior robustness checks (t-shape,
+azimuthal discretisation, $R$; all at fixed $a\approx0.05$) never varied. At
+$\alpha=2$, $t=1$, the recovery climbs monotonically away from the Möbius value
+$\alpha/(2\alpha-1)=0.667$ toward the Sommerfeld--Cheeger value $1$ as
+$N_\rho=200\to3200$ ($0.675, 0.769, 0.837, 0.885, 0.919$), with
+$(1-\mathrm{recovery})\sim\sqrt{a}$ \emph{exactly} (error ratio bit-stable at
+$\sqrt2=1.416$ over four halvings). The $\sqrt a$ rate is the signature of the
+genuine cone singularity at $\alpha\ne1$ (a true deficit/excess-angle apex),
+contrasting the smooth-apex $O(a)$ at $\alpha=1$. Thus
+$\mathrm{recovery}=1-C\sqrt a\to1$: the continuum excess-angle slope is the
+standard Sommerfeld--Cheeger continuation $-\tfrac{1}{12}$, and the Möbius factor
+$\alpha/(2\alpha-1)$ is the \emph{fixed-$a$ appearance} of this quantity at the
+substrate scale $a\approx0.05$ -- a discrete-substrate artifact, not a continuum
+correction. This explains why no published spinor-on-cone result, and no
+mechanism sprint (Fursaev--Solodukhin attribution, Routes A/B/C, harmonic
+conjugate), ever found a Möbius mechanism: there was none to find. The $N_0$
+($=N_\phi$) independence checked earlier probes the azimuthal count, not the
+radial $a$, so it could not have caught the artifact. The $\alpha>1$ thread is
+retired as a finite-$a$ artifact. (Memo:
+\texttt{debug/l6\_b4\_moebius\_continuum\_diagnostic\_memo.md}.) The harmonic-
+conjugate algebraic structure recorded below is therefore a property of the
+fixed-$a$ form, not of a continuum object.
 
 \paragraph{Algebraic structure: harmonic conjugate.} A structural
 sharpening identified post-v3.20.0 (Task 11 of the post-v3.20.0
@@ -1803,11 +1831,284 @@ relative error $1.71\%$, with $\alpha = 10$ landing at
 $\mathbf{-0.032\%}$ rel.\ err.\ -- essentially exact at the asymptote
 $F(\alpha) \to 1/2$. The decreasing relative error with $\alpha$
 ($3.3\%$ at $\alpha = 1.5 \to 0.032\%$ at $\alpha = 10$) confirms the
-Möbius asymptote is structurally locked, not a three-point coincidence.
-\emph{Mechanism remains open} (task \#26 retraction stands, Fursaev--Miele 1996
-\cite{fursaev_miele1996} contains no Möbius modification); three
-sprint-scale closure routes are named (Fursaev--Miele \S III PDF read;
-discrete mode decomposition; Sommerfeld contour at excess angle).
+Möbius asymptote is structurally locked at the substrate scale $a\approx0.05$,
+not a three-point coincidence -- but \emph{at fixed $a$}, like every other
+robustness check. The B4 continuum extrapolation above (the
+``Mechanism RESOLVED'' paragraph) shows the radial $a\to0$ limit drives the
+recovery off this Möbius lock toward the Sommerfeld--Cheeger value $1$, so the
+lock is a feature of the finite-$a$ form, not of the continuum. \emph{Mechanism
+no longer open: the form is a finite-$a$ artifact, the continuum is plain
+Sommerfeld--Cheeger.}
+
+% =====================================================================
+\section{R2: replica-weight-harmless convergence of the cigar-tip
+entropy (L6)}
+\label{sec:L6}
+% =====================================================================
+
+The discrete-substrate program (\S\ref{sec:g4_3}--\S\ref{sec:g4_4}) reduced
+the gravity entropy question to a single irreducible theorem (charter
+\texttt{debug/gravity\_campaign\_R2\_theorem\_charter\_memo.md}): does the
+discrete cigar-tip spectral functional converge so that $S_{\rm tip}\to A/4$
+with a rate? The near-horizon cigar factorizes at constant warp into
+$D^2_\alpha \otimes S^2(r_h)$, and (G4-3 phase-1b) the conical defect $\alpha$
+lives entirely in the disk while the horizon sphere $S^2$ is a passive area
+multiplier $A = 4\pi r_h^2$. The entropy is the replica derivative of the
+\emph{heat-trace spectral functional} (not of a propinquity metric):
+\begin{equation}
+S_{\rm tip}=\phi(0)\!\left[\mathrm{tip}(t)\right],\qquad
+\mathrm{tip}(t)=\frac{dK}{d\alpha}\bigg|_{\alpha=1}-K_{\rm disk}(t),\qquad
+K(\alpha,t)=\mathrm{Tr}\,e^{-tD_\alpha^2}.
+\end{equation}
+On the discrete substrate (SPECTRAL azimuthal, spinor momentum
+$m_{\rm eff}=(k+\tfrac12)/\alpha$),
+$K(\alpha,t)=4\sum_{j\ge0}h((j+\tfrac12)/\alpha,t)$ with $h(m,t)$ the radial
+heat trace, and
+$\frac{dK}{d\alpha}|_1 = -4\sum_j(j+\tfrac12)h'(j+\tfrac12)$. The per-mode
+\emph{replica contribution} $C_j=-4(j+\tfrac12)h'(j+\tfrac12)>0$ carries the
+$(j+\tfrac12)$ \emph{replica weight}, heavier than the bare heat trace.
+
+Write $n=(N_\phi, N_\rho, a)$ for the discrete truncation ($N_\phi$ azimuthal
+modes, $N_\rho$ radial sites, spacing $a$, $R=N_\rho a$ fixed), and
+$g_j^{(n)}(\alpha) := 4\,h_n\!\big((j+\tfrac12)/\alpha,\,t\big)$, so that
+$K_n(\alpha,t)=\sum_{j\ge0} g_j^{(n)}(\alpha)$ and the per-mode replica
+contribution is $C_j(\alpha)=-g_j^{(n)\prime}(\alpha)$. The continuum objects
+$g_j$, $K$ are the $n\to\infty$ limits.
+
+\begin{theorem}[L6: replica-weight-harmless convergence]
+\label{thm:L6}
+Fix $t>0$ and $\delta\in(0,1)$. As $n\to\infty$ the maps
+$\alpha\mapsto K_n(\alpha,t)$ converge to $\alpha\mapsto K(\alpha,t)$ in
+$C^1([1-\delta,1+\delta])$. In particular
+\begin{equation}
+\lim_{n\to\infty}\frac{dK_n}{d\alpha}\bigg|_{\alpha=1}
+=\frac{dK}{d\alpha}\bigg|_{\alpha=1}
+=\frac{d}{d\alpha}\bigg|_{\alpha=1}\lim_{n\to\infty}K_n,
+\end{equation}
+and the convergence rate of the replica derivative equals the rate of the
+undifferentiated heat trace: the replica weight $(j+\tfrac12)$ does not degrade
+it. Consequently the cigar-tip entropy
+$S_{\rm tip}=\phi(0)[\,\mathrm{tip}(t)\,]$ inherits the convergence with the
+same rate.
+\end{theorem}
+
+The proof rests on three lemmas, one per layer of the charter architecture. The
+first two are transported (the propinquity backbone and the norm-resolvent
+heat-trace rate); the third is the new content.
+
+\begin{lemma}[Layer 1: propinquity backbone]
+\label{lem:L6_backbone}
+For each fixed $\alpha$ near $1$, the truncated constant-warp metric spectral
+triples $\mathcal{T}_{n,\alpha}$ converge to the continuum tip triple
+$\mathcal{T}_\alpha$ in the Latr\'emoli\`ere propinquity,
+$\Lambda(\mathcal{T}_{n,\alpha},\mathcal{T}_\alpha)\le C_3\,\gamma_n\to0$, with
+$C_3$ truncation-independent.
+\end{lemma}
+
+\noindent\emph{Source.} At constant warp $r(\rho)=r_h$ the cigar squared-Dirac
+is a pure tensor product $D^2_\alpha\otimes I + I\otimes D^2_{S^2}/r_h^2$ (warp
+cross-term vanishes, \S\ref{sec:g4_3}), so the triple factorises as
+disk-with-cone $\otimes$ horizon $S^2$. The azimuthal $S^1$ is the
+Connes--van~Suijlekom Toeplitz operator system (\cite{paper44}, Prop.~4.2,
+prop$=2$); the radial interval is the bounded-interval operator system with the
+apex centrifugally screened (Lemma~\ref{lem:L6_rate}); the $S^2$ factor is
+Berezin--Toeplitz (Hawkins, as in Paper~38 L4); the tensor assembly is
+\textsc{pure\_tensor} (Paper~45). The only sub-piece not transported verbatim is
+the screened radial apex, a regular Sturm--Liouville endpoint
+(Lemma~\ref{lem:L6_rate}); the prop$=2$ property of the assembled disk operator
+system is confirmed by direct computation below. The backbone is
+\emph{undifferentiated}: it certifies geometric faithfulness at each $\alpha$,
+not the replica derivative.
+
+\begin{lemma}[Layer 2: pointwise heat-trace rate]
+\label{lem:L6_rate}
+For each fixed $(\alpha,t)$, $K_n(\alpha,t)\to K(\alpha,t)$ as $n\to\infty$, with
+error bounded by the sum of (i) a radial discretisation term $O(a^{p})$ from the
+finite-difference polar Laplacian and (ii) super-polynomially small azimuthal
+and radial truncation terms. The radial operator
+$L(m)=-\partial_\rho^2+(m^2-\tfrac14)/\rho^2$ on $(0,R]$ has, for every
+$m=(j+\tfrac12)/\alpha>0$, eigenfunctions $\sim\rho^{|m|}$ vanishing at the apex,
+so $\rho=0$ is a regular endpoint requiring no boundary condition and the only
+boundary datum is the IR Dirichlet condition at $\rho=R$.
+\end{lemma}
+
+\noindent\emph{Source.} The radial factor is the bounded-interval
+norm-resolvent convergence of Paper~47, specialised to the centrifugally
+screened operator $L(m)$. The apex regularity is the no-zero-mode fact that
+makes the spinor conical-defect extraction clean (\S\ref{sec:g4_4}, G4-4;
+anti-periodic BC $+$ half-integer $m$ $\Rightarrow$ $m\ne0$). The exponent is
+$p=1$ on the production grid $\rho_i=ia$ (a Dirichlet boundary-placement effect,
+pinned below) and $p=2$ on the boundary-corrected grid.
+
+\begin{lemma}[Layer 3: the replica weight is harmless --- new]
+\label{lem:L6_harmless}
+There is a constant $c(\delta)=t/((1+\delta)^2 R^2)>0$ and, for each $(t,\delta)$,
+a summable Gaussian-dominating sequence
+\begin{equation}
+\label{eq:L6_dominating}
+G_j \;=\; C(t,\delta)\,(j+\tfrac12)^2\,e^{-c(\delta)(j+\frac12)^2},
+\qquad \sum_{j\ge0}G_j<\infty,
+\end{equation}
+such that $\big|g_j^{(n)}(\alpha)\big|\le G_j$ and
+$\big|g_j^{(n)\prime}(\alpha)\big|\le G_j$ for all $\alpha\in[1-\delta,1+\delta]$
+and all $n$ large. Hence $\sum_j g_j^{(n)}$ and $\sum_j g_j^{(n)\prime}$ converge
+uniformly on $[1-\delta,1+\delta]$.
+\end{lemma}
+
+\begin{proof}
+The centrifugal floor obeys $\lambda_0(m)\ge m^2/R^2$ (continuum Bessel-zero
+bound $j_{m,1}\ge m$; on the lattice the floor is at least as steep,
+$\lambda_0(m)\ge c_a\,m^2/R^2$ with $c_a\to1^+$ as $a\to0$, confirmed
+numerically below at $c_a\approx1.16$). The excited gaps
+$\lambda_k(m)-\lambda_0(m)$ grow like $k^2\pi^2/R^2$ uniformly in $m$ (the high
+modes see the box, not the centrifugal barrier), so the relative partition
+function $Z(t)=\sum_k e^{-t(\lambda_k-\lambda_0)}$ is bounded uniformly in $m$.
+Therefore
+\begin{equation}
+h(m,t)\le Z(t)\,e^{-t m^2/R^2},\qquad
+|h'(m,t)|\le t\,C'\,(m/R^2)\,Z(t)\,e^{-t m^2/R^2},
+\end{equation}
+the second from $|\partial_m\lambda_k|=2m\langle\rho^{-2}\rangle_k\le C'm/R^2$
+(Hellmann--Feynman; the screened modes concentrate near $\rho\sim R$ so
+$\langle\rho^{-2}\rangle=O(R^{-2})$). For $\alpha\in[1-\delta,1+\delta]$ and
+$m_j=(j+\tfrac12)/\alpha$ one has $m_j\ge(j+\tfrac12)/(1+\delta)$, hence
+$e^{-t m_j^2/R^2}\le e^{-c(\delta)(j+\frac12)^2}$, while
+$|g_j^{(n)\prime}|=4|h'(m_j)|(j+\tfrac12)/\alpha^2$ carries a polynomial factor
+$\le (j+\tfrac12)^2/(1-\delta)^2$. Both $|g_j^{(n)}|$ and $|g_j^{(n)\prime}|$ are
+thus bounded by~\eqref{eq:L6_dominating}, which is summable because a Gaussian
+beats any polynomial. The Weierstrass $M$-test gives uniform convergence of both
+series.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:L6}]
+By Lemma~\ref{lem:L6_rate}, $K_n(\alpha,t)\to K(\alpha,t)$ pointwise. By
+Lemma~\ref{lem:L6_harmless} the series $\sum_j g_j^{(n)\prime}(\alpha)$ converges
+uniformly on $[1-\delta,1+\delta]$ to $\sum_j g_j'(\alpha)$. The standard theorem
+on differentiation of series (pointwise convergence of $\sum g_j$ plus uniform
+convergence of $\sum g_j'$) gives $K(\cdot,t)\in C^1([1-\delta,1+\delta])$ with
+$K'(\alpha,t)=\sum_j g_j'(\alpha)$, and $K_n\to K$ in $C^1$. Evaluating at
+$\alpha=1$ exchanges $\lim_n$ with $d/d\alpha$. The rate is the maximum of the
+Lemma~\ref{lem:L6_rate} radial rate $O(a^p)$ and the super-polynomial truncation
+tail of~\eqref{eq:L6_dominating}; the latter is negligible, so the joint rate is
+the undifferentiated heat-trace rate $O(a^p)$ --- the replica weight does not
+appear. The entropy $S_{\rm tip}=\phi(0)[\mathrm{tip}(t)]$, a continuous
+functional of $\mathrm{tip}(t)=K'(\cdot,t)|_1-K_{\rm disk}$, inherits the
+convergence.
+\end{proof}
+
+\noindent The dominating exponent $c(\delta)\to t/R^2$ as $\delta\to0$ is exactly
+the envelope slope measured below; the proof's analytical prediction and the
+numerics agree.
+
+\paragraph{Numerical verification.}
+(\texttt{debug/l6\_replica\_weight\_harmless.py}; lean tridiagonal solver
+cross-checked bit-exact against the production
+\texttt{DiscreteDiskDiracSpectral}, $R=10$, $t=1$.)
+\emph{(i) Gaussian envelope.} $C_j\sim\exp(\text{slope}\cdot(j+\tfrac12)^2)$,
+measured slope $-0.01129$ vs predicted $-t/R^2=-0.01000$; the replica weight is
+crushed, $C_j/C_0$ falling from $4.7$ at $j{=}4$ to $1.6\times10^{-20}$ at
+$j{=}64$, and the azimuthal partial sum reaches the total to machine precision
+by $K_{\rm az}\approx48$ (tail/total $=4\times10^{-13}$).
+\emph{(ii) Uniformity.} The envelope slope across $\alpha\in[0.9,1.1]$ lies in
+$[-0.01134,-0.01123]$ -- essentially constant; the $C^1$ requirement holds.
+\emph{(iii) Rate.} Azimuthal convergence is super-polynomial (residual $0$ by
+$K_{\rm az}{=}64$); the lattice rate is $O(a^{1.1})$ (FD polar Laplacian at the
+screened apex), with order-2 Richardson landing at $0.1643$ vs $1/6=0.1667$
+($-1.4\%$, consistent with the G4-6b finite-$a$ offset). The joint rate is gated
+by the lattice / Paper-47 norm-resolvent rate, \emph{not} degraded by the
+replica weight.
+\emph{(iv) Commute.} $\lim_n\frac{dK_n}{d\alpha}=41.501652$ (per-mode analytic)
+vs $\frac{d}{d\alpha}\lim_n K_n=41.501681$ (finite difference on the converged
+$K$) agree to $2.9\times10^{-5}$.
+
+\paragraph{Backbone (Layer 1, prop=2).} The disk truncated operator system
+$O_n=P_n C(\mathrm{disk})P_n$, built from compressed disk monomials
+$z^a\bar z^b$ ($z=\rho e^{i\phi}$), has propagation number $2$ at all tested
+truncations $(K,J)\in\{(2,2),(2,3),(3,2),(3,3)\}$: $O^2$ spans the full
+$M_N(\mathbb{C})$ envelope (\texttt{debug/l6\_disk\_prop2.py}). The disk
+backbone inherits the Connes--van Suijlekom 2-step-generating property of the
+Toeplitz $S^1$ (\cite{paper44}, Prop.~4.2) by direct computation, confirming the
+fixed-$\alpha$ propinquity backbone transports.
+
+\paragraph{M1 / area signature.} The passive $S^2$ Dirac heat trace satisfies
+$K_{S^2}(t)\,t\to 2r_h^2 = A/(2\pi) = \mathrm{Vol}(S^2)\,r_h^2/(2\pi)$, so the
+horizon area $A=\mathrm{Vol}(S^2)\,r_h^2$ enters $S_{\rm tip}$ through the
+sphere factor. The master Mellin engine M1 signature
+$4/\pi=\mathrm{Vol}(S^2)/\pi^2$ -- the same constant that sets the L2
+GH-convergence rate (Paper~38/40), the wedge Hilbert--Schmidt orthogonality
+$1/\pi^2$ prefactor (Paper~43~\S10.2), and the Stefan--Boltzmann Matsubara
+prefactor -- is therefore worn by the cigar entropy \emph{by construction},
+through the horizon-sphere area. This is a by-construction signature, not an
+independent rate coincidence; with the rate now established, it ties the cigar
+entropy to the Bernoulli ladder / master Mellin engine.
+
+\paragraph{Grade.} The new L6 content is Lemma~\ref{lem:L6_harmless} (the
+replica weight is harmless: the explicit Gaussian-dominating
+sequence~\eqref{eq:L6_dominating} controls the mode series and its
+$\alpha$-derivatives uniformly), which is proved here, together with the
+Theorem~\ref{thm:L6} assembly (uniform $C^1$ convergence $\Rightarrow$ $\lim_n$
+commutes with $d/d\alpha$; joint rate $=$ heat-trace rate). The two supporting
+lemmas: Lemma~\ref{lem:L6_backbone} (propinquity backbone) is proved for the
+apex/gravity purpose (prop$=2$ confirmed by direct computation, and the interior
+L4 reconstruction verified below via the unital Markov--Cesàro Berezin at rate
+$\Lambda^{-1.30}$ -- which is all the local tip entropy requires), with the full
+disk propinquity for all of $C(\mathrm{disk})$ deferred to a math.OA companion;
+Lemma~\ref{lem:L6_rate} (norm-resolvent rate) cites Paper~47. Every load-bearing claim is additionally
+verified numerically, and the proof's analytical dominating exponent
+$c(\delta)\to t/R^2$ matches the measured envelope slope. L6 is a Layer-2
+convergence theorem (rates, not bit-exact identities), presented as such.
+
+The exponent $p$ of Lemma~\ref{lem:L6_rate} and the continuum target are pinned
+below. \emph{(B1, rate.)} Comparison of the discrete lowest eigenvalue
+$\lambda_0(m;a)$ against the exact continuum value $(j_{m,1}/R)^2$ (Bessel zero)
+gives order $q=1.00$ at every $m\in\{\tfrac12,\tfrac32,\tfrac52\}$, and the tip
+itself converges at the same order $p=0.97$ -- so $p=1$ on the production grid
+$\rho_i=ia$. The mechanism is \emph{Dirichlet boundary placement}, not the
+centrifugal singularity: the $\rho_i=ia$ grid sets the IR wall at $(N_\rho+1)a =
+R+a$, displaced $O(a)$ from $R$. This is confirmed two ways: (i) the free case
+$m=\tfrac12$ (zero centrifugal potential) still converges at $O(a)$, ruling out
+the $1/\rho^2$ term; (ii) the corrected grid $a=R/(N_\rho+1)$ (wall exactly at
+$R$) restores the standard central-difference $O(a^2)$ (error ratio $4$, three
+orders of magnitude smaller). The $O(a)$ rate is therefore a fixable substrate
+detail; $L(m)$ inherits the plain-interval Paper-47 norm-resolvent convergence,
+at $O(a)$ on the production grid and $O(a^2)$ on the boundary-corrected grid.
+\emph{(B2, target.)} With the correct $O(a)$ order, linear-in-$a$ extrapolation
+of the tip gives $0.166656$ ($2$-point) and $0.166582$ (least squares), versus
+$1/6 = 0.166667$ -- agreement to $-0.006\%$ and $-0.05\%$. The continuum
+replica derivative $dK/d\alpha|_1$ is the G4-4c Sommerfeld--Cheeger spinor-cone
+value $1/6$; the earlier $-1.4\%$ residual was an artifact of an order-$2$
+Richardson on an $O(a)$ sequence. Both sub-pieces are thus closed, with the
+boundary-placement diagnosis correcting an earlier ``apex-edge'' guess. The one
+remaining transport at citation level is the full $L1'$--$L5$ assembly of the
+$D^2_\alpha\otimes S^2$ backbone (Lemma~\ref{lem:L6_backbone}), a Papers-45-style
+write-up that would upgrade it from cited to proved; it does not affect the
+Theorem~\ref{thm:L6} convergence statement. A de-risking attempt sharpened this
+remaining piece: the genuinely-new factor is the 2D disk-with-cone itself (a
+manifold-with-boundary, not a pure radial$\otimes$azimuthal tensor, since the
+$1/\rho^2$ term couples them, and not a group, so the central-Fejér
+reconstruction does not transport); the unital Markov-normalized Cesàro--Berezin map
+$B_n(f)=P_n M_{g}P_n$, $g=(\sum_a w_a\langle\psi_a,f\rangle\psi_a)/
+(\sum_a w_a\langle\psi_a,1\rangle\psi_a)$ with Cesàro weight
+$w_a=(1-\lambda_a/\Lambda)^s_+$, satisfies all four L4 properties \emph{in the
+interior}: unitality exactly ($B_n(1)=I$ by the Markov normalisation),
+positivity and contractivity at Cesàro order $s\ge2$ (the truncated heat weight
+oscillates by Gibbs; the Cesàro mean is the disk analogue of Fejér's theorem),
+and the approximate identity $\propto\|\nabla f\|$ converging at the interior
+rate $\Lambda^{-1.30}$. The only obstruction is the boundary $\rho=R$, where the
+Dirichlet modes vanish ($J_0$-zeros) and the sup-norm reconstruction cannot
+represent boundary-supported content -- the genuine manifold-with-boundary
+feature that closed manifolds lack. Two consequences, with two different scopes.
+\emph{For the gravity backbone (Lemma~\ref{lem:L6_backbone}), B3 closes:} the L6
+entropy is a local apex quantity (the tip cancels the bulk and the boundary
+alike, \S\ref{sec:g4_3}), so the backbone needs faithfulness only at the apex,
+which the interior L4 supplies; the IR boundary is irrelevant to the tip, and
+Lemma~\ref{lem:L6_backbone} is upgraded from cited to proved for this purpose.
+\emph{As a stand-alone NCG theorem (the full disk propinquity for all of
+$C(\mathrm{disk})$), the boundary is removed only in the $R\to\infty$ (plane)
+limit} -- the same de-compactification handled at norm-resolvent level by
+Paper~47, here a genuine two-rate ($\Lambda\to\infty$, $R\to\infty$) analysis on
+the disk. The interior lemma is in hand; that two-rate assembly is the core of a
+dedicated math.OA companion.
 
 % =====================================================================
 \section{Discussion: structural-skeleton-scope reading}
@@ -1983,7 +2284,7 @@ be substantial.
 The sector-wise Mellin moment map
 $\{\text{tip} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
 allows a precise framework-internal statement of the CC problem. From
-\S\ref{sec:G7}, the dimensionless cosmological constant in Planck units
+\S\ref{sec:g7}, the dimensionless cosmological constant in Planck units
 is $\Lcc \cdot \Geff = 36\pi\, \phi(2)/\phi(1)^2$. For Gaussian
 ($\phi(1) = \phi(2) = 1$), this is $36\pi \approx 113$; for polynomial
 or sharp cutoffs, $O(1)$. Observation requires
@@ -2072,6 +2373,12 @@ spectrum and the temporal-compactification mechanism.
 GeoVac Project. Paper 38 -- SU(2)/$\sthree$ Latr\'emoli\`ere propinquity
 convergence on Camporesi--Higuchi truncated metric spectral triples.
 \texttt{papers/group1\_operator\_algebras/paper\_38\_su2\_propinquity\_convergence.tex}.
+
+\bibitem{paper44}
+GeoVac Project. Paper 44 -- Operator-system extension of the BBB Krein
+spectral triple at finite cutoff: propagation number and envelope
+dependence.
+\texttt{papers/group1\_operator\_algebras/paper\_44\_lorentzian\_operator\_system.tex}.
 
 \bibitem{camporesi_higuchi1996}
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac

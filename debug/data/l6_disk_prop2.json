@@ -1,0 +1,62 @@
+{
+  "rows": [
+    {
+      "K": 2,
+      "J": 2,
+      "N": 8,
+      "n_gens": 27,
+      "dim_O": 27,
+      "dim_O2": 64,
+      "envelope": 64,
+      "dim_sequence": [
+        27,
+        64
+      ],
+      "prop": 2
+    },
+    {
+      "K": 2,
+      "J": 3,
+      "N": 12,
+      "n_gens": 27,
+      "dim_O": 27,
+      "dim_O2": 144,
+      "envelope": 144,
+      "dim_sequence": [
+        27,
+        144
+      ],
+      "prop": 2
+    },
+    {
+      "K": 3,
+      "J": 2,
+      "N": 12,
+      "n_gens": 37,
+      "dim_O": 37,
+      "dim_O2": 144,
+      "envelope": 144,
+      "dim_sequence": [
+        37,
+        144
+      ],
+      "prop": 2
+    },
+    {
+      "K": 3,
+      "J": 3,
+      "N": 18,
+      "n_gens": 37,
+      "dim_O": 37,
+      "dim_O2": 324,
+      "envelope": 324,
+      "dim_sequence": [
+        37,
+        324
+      ],
+      "prop": 2
+    }
+  ],
+  "verdict": "PROP2-CONFIRMED",
+  "all_prop2": true
+}
