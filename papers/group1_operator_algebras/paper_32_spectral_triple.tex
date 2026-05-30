@@ -1724,6 +1724,82 @@ Source: \texttt{debug/mr\_a\_dirac\_propinquity\_*},
 \texttt{debug/mr\_c\_l2\_subleading\_*}.
 \end{remark}
 
+\begin{remark}[Rational-residue extension of the case-exhaustion theorem:
+the Bernoulli ladder and the functional-equation reading of the two-layer
+split (Sprint GB, 2026-05-29)]
+\label{rem:bernoulli_ladder}
+The case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion} classifies
+the $\pi$-content of every GeoVac observable as
+$\mathcal{M}[\mathrm{Tr}(D^k\, e^{-tD^2})]$. The companion question is
+where the framework's \emph{rational} coefficients come from. A
+diagnostic on the gravity sector's small rationals places them on a single
+Bernoulli ladder, with each rung $B_{2n}$ glued across two windows by the
+Riemann functional equation:
+$$
+\zeta(2n) = (-1)^{n+1}\frac{B_{2n}(2\pi)^{2n}}{2(2n)!}
+   \in \pi^{2n}\,\mathbb{Q}
+\qquad\Longleftrightarrow\qquad
+\zeta(1-2n) = -\frac{B_{2n}}{2n} \in \mathbb{Q}.
+$$
+The left (positive-even) window is the M2 transcendental ring of
+Layer~2 observables; the right (negative-integer) window is the
+$\pi$-free rational residue carried by Layer~1 skeleton coefficients.
+Verified placements (all exact in \texttt{sympy}):
+\begin{itemize}
+\item Conical-defect tip coefficient $\tfrac{1}{12} = -\zeta(-1) =
+B_2/2$ (\S4.15); per-$t$ UV target $\tfrac{1}{24} = -\zeta(-1)/2 =
+B_2/4$ (the string $c/24$); scalar $S^3$ Casimir $\tfrac{1}{240} =
++\zeta(-3)/2$ ($B_4$ rung); the $\alpha$-conjecture's
+$F = \pi^2/6 = \pi^2 B_2 = \zeta(2)$ (Paper~2; the M2 window of the
+same $B_2$ whose skeleton window is the conical tip).
+\item \emph{Non-trivial internal check}: the replica-entropy
+derivative is forced, not free ---
+$\frac{d}{d\alpha}\big[\tfrac{1}{12}(\tfrac{1}{\alpha}-\alpha)\big]
+\big|_{\alpha=1} = -\tfrac{1}{6} = -B_2 = 2\zeta(-1)$, the
+$\alpha$-derivative of the tip's $B_2/2$.
+\item \emph{Controls behave}: $\kappa = -1/16$ (the Fock Jacobian
+$\Omega^{-4}$) has no clean $\zeta$ form; the Dirac Casimir
+$17/480$ misses the scalar $B_4$ rung by exactly $1/32$ and requires
+the half-integer Hurwitz shift $\zeta(-3,\tfrac{1}{2})$, i.e.\ the
+scalar/spinor distinction is the integer/half-integer (M2/M3) split.
+\end{itemize}
+The reading is the rational-residue extension of
+Theorem~\ref{thm:pi_source_case_exhaustion}: the rational coefficients
+are the negative-integer analytic continuation of the \emph{same}
+Mellin object whose positive-even values are the Layer-2
+transcendentals, and the empirical two-layer split (Paper~34/35) is the
+Riemann functional-equation reflection $\zeta(s)\leftrightarrow
+\zeta(1-s)$ instantiated per Bernoulli order.
+
+\emph{Honest scope.} This is a structural correspondence at the same
+epistemic level as Theorem~\ref{thm:pi_source_case_exhaustion}, not a
+forcing proof; it concerns $\zeta$ at \emph{integer} arguments
+(special values), not the non-trivial zeros, so it makes no contact
+with the critical-line structure (cf.\ WH6 and the three classical-RH
+walls RH-N/O/M, which remain in force). The $B_2$, $B_4$, \emph{and}
+$B_6$ rungs are now populated (Sprint GB-3): the $B_6$ rung's
+falsifiable target was met by the conformal-scalar Casimir on $S^5$
+(a GeoVac manifold via the Bargmann--Segal lattice, Paper~24), which
+evaluates to $-31/60480 = \tfrac{1}{24}(\zeta(-5) - \zeta(-3))$ --- the
+$B_6$ rung $\zeta(-5) = -1/252$ enters with clean coefficient
+$+\tfrac{1}{24}$, alongside $B_4$ at $-\tfrac{1}{24}$, with $B_2$
+\emph{absent}. The $\zeta(-5) - \zeta(-3)$ spreading (rather than a
+pure $\zeta(-5)$) is the \emph{same} quadratic-multiplicity mechanism
+that obstructs the functional equation in Paper~28's
+functional-equation obstruction remark (the $S^5$ harmonic degeneracy is quartic),
+now seen on the Casimir side from an independent observable; the method
+reproduces the $S^3$ control $1/240 = \tfrac{1}{2}\zeta(-3)$ (Paper~35).
+The integer/half-integer (M2/M3) split recurs: the conformal scalar
+gives the clean ladder value, the half-integer HO/Bargmann $S^5$
+Casimir gives $-17/3840$ (the ``$17$'' echoing the Dirac-$S^3$ $17/480$).
+Next rung: $S^7$ conformal Casimir is predicted to spread across
+$\zeta(-7), \zeta(-5), \zeta(-3)$. The ladder is thus supported across
+three rungs and two observable types, but remains a structural
+correspondence, not a forcing theorem.
+Source: \texttt{debug/sprint\_gb\_bernoulli\_ladder\_memo.md},
+\texttt{debug/sprint\_gb3\_b6\_rung\_memo.md}.
+\end{remark}
+
 \begin{remark}[Bisognano--Wichmann reading of the M1 sub-mechanism on
 temporal compactifications (Track D, May 2026)]
 \label{rem:bisognano_wichmann_reading}

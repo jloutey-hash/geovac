@@ -1557,6 +1557,61 @@ modification. This sharpens the mechanism from ``completely open'' to
 ``substrate-level identified.'' A first-principles continuum derivation
 (lifting from substrate to theorem-grade) remains open.
 
+\paragraph{$t$-robustness audit (Sprint GD-2, 2026-05-29) --- form
+robust, coefficient and soft-IR identity $t\!\approx\!1$-tuned.}
+Both the coefficient match and the soft-IR identity
+Eq.~\eqref{eq:soft_IR_frac_asymptotic} were extracted at a single
+heat-trace time $t = 1.0$ (a deliberately chosen ``sweet spot''). A
+robustness audit sweeping $t \in \{0.25, 0.5, 1, 2, 4\}$ separates the
+robust content from the sweet-spot artifact:
+\begin{itemize}
+\item \emph{Robust.} At every $t$ and $\alpha \in \{2,3,5\}$ the measured
+slope is far closer to the Möbius form $-(1/12)\alpha/(2\alpha-1)$ than
+to the continuum Sommerfeld--Cheeger form $-(1/12)(1/\alpha-\alpha)$
+(e.g.\ at $\alpha=2$: measured $\approx -0.05$, Möbius $=-0.056$,
+SC $=+0.125$, wrong sign). The $\alpha>1$ slope is unambiguously
+Möbius-\emph{shaped}, not SC-shaped --- robustly in $t$.
+\item \emph{$t\!\approx\!1$-tuned.} The \emph{exact} coefficient match
+($\text{slope}/\text{Möbius}$) crosses unity near $t \approx 1$ but
+drifts to $\sim 0.78$ at $t=0.25$ and $\sim 1.13$ at $t=4$ (spread
+$\sim 0.34$); the soft-IR ratio $(1-X)F$ likewise hits $1/2$ only at
+$t\approx 1$ and drifts $0.31$--$0.59$ across the same window. The
+``sub-$2\%$ / $0.03\%$'' precision was therefore a $t\approx1$ crossing,
+not a $t$-robust coefficient, and the soft-IR identity
+Eq.~\eqref{eq:soft_IR_frac_asymptotic} is a $t\approx1$ coincidence
+rather than a structural mechanism.
+\end{itemize}
+This is consistent with the per-$t$ UV structure $1/(24\pi t)$
+(Sec.~\ref{subsubsec:g4_5_v3_20_followon}): the substrate's tip
+extraction is genuinely $t$-dependent, and clean continuum coefficients
+appear only at a sweet-spot $t$. Net: the Möbius \emph{functional form}
+is the robust gravity-sector finding; the exact coefficient and the
+soft-IR ``mechanism'' are sweet-spot artifacts, and the continuum
+mechanism remains open. A companion Reading-B test (Sprint GD-3) further
+finds the form \emph{discretization}-robust: the FD-azimuthal and
+exact-spectral wedge substrates give Möbius-shaped slopes agreeing to
+$\sim 4$ significant figures at every tested $(\alpha, t)$ --- so the
+form is substrate-class-universal (set by the anti-periodic spinor BC +
+discrete radial structure + $\alpha$-scaling), not a discretization
+artifact, consistent with the literature's absence of a continuum
+Möbius (Reading B). A further probe (Sprint GD-6) rules out a
+subtraction-convention origin: sweeping the radial extent $R = N_\rho a
+\in \{5, 7.5, 10, 15\}$ leaves the slope \emph{bit-identical}
+(slope/Möbius $= 1.012, 0.977, 0.977$ at $\alpha = 2,3,5$ for every $R$),
+so the $\Delta_K = K_{\rm wedge} - \alpha K_{\rm disk}$ subtraction
+cleanly isolates an $R$-independent tip (bulk $R^2$ and perimeter $R$
+cancel) --- the Möbius is a genuine tip effect, not an edge/convention
+artifact. The form is thus robust on three independent axes ($t$,
+discretization, $R$); only the exact-coefficient match to
+$\alpha/(2\alpha-1)$ is $t\!\approx\!1$-sharp. Drivers
+\texttt{debug/sprint\_gd2\_moebius\_t\_robustness.py},
+\texttt{debug/sprint\_gd2\_moebius\_slope\_t.py},
+\texttt{debug/sprint\_gd3\_reading\_b\_substrate.py},
+\texttt{debug/sprint\_gd6\_moebius\_convention.py}; memos
+\texttt{debug/sprint\_gd2\_moebius\_t\_robustness\_memo.md},
+\texttt{debug/sprint\_gd3\_reading\_b\_memo.md},
+\texttt{debug/sprint\_gd6\_moebius\_convention\_memo.md}.
+
 \paragraph{Literature evidence for substrate-universal reading.}
 A multi-source literature check (Task b' of the post-v3.20.0 thread~8,
 2026-05-29; memo

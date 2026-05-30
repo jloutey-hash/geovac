@@ -386,6 +386,44 @@ $1/240$ matches an independently established physics quantity.  By the
 projection-depth criterion of Paper~34, a single-projection match
 should be exact, and indeed it is.
 
+\begin{observation}[The dimensional Casimir ladder: $S^1, S^3, S^5$ and
+the Bernoulli rungs (Sprint GB-3)]
+\label{obs:casimir_ladder}
+The conformal-scalar Casimir on $S^{2k-1}$,
+$E_\text{Cas} = \tfrac{1}{2}\sum_l \omega_l\,\deg_l$ with $\omega_l =
+l + (d{-}1)/2$, leads with $\zeta_R(-(2k{-}1))$, i.e.\ the Bernoulli
+number $B_{2k}$. The first three rungs:
+\begin{center}
+\small
+\begin{tabular}{p{1.4cm} p{3.2cm} p{2.0cm} p{2.2cm}}
+\toprule
+Manifold & $\omega\cdot\deg$ (in $n$) & $E_\text{Cas}$ & rung \\
+\midrule
+$S^1$ & $n$ & $\tfrac{1}{2}\zeta(-1) = -1/24$ & $B_2$ \\
+$S^3$ & $n^3$ & $\tfrac{1}{2}\zeta(-3) = 1/240$ & $B_4$ \\
+$S^5$ & $(n^5 - n^3)/12$ & $\tfrac{1}{24}(\zeta(-5){-}\zeta(-3)) = -31/60480$ & $B_6$ (+ $B_4$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+On $S^3$ the degeneracy $n^2$ keeps $\omega\cdot\deg$ a single power
+($n^3$), so the Casimir is a clean single rung. On $S^5$ the quartic
+degeneracy $n^2(n^2{-}1)/12$ spreads $\omega\cdot\deg$ across $n^5$ and
+$n^3$, so the $S^5$ Casimir carries \emph{both} $B_6$ ($\zeta(-5) =
+-1/252$, coefficient $+1/24$) and $B_4$ ($-1/24$), with $B_2$
+\emph{absent}. The value $-31/60480$ is exact (verified in
+\texttt{sympy}) and, to our knowledge, newly computed; $S^5$ is a GeoVac
+manifold via the Bargmann--Segal lattice (Paper~24). The spreading is
+the same multiplicity mechanism that obstructs the Dirac-zeta
+functional equation (Paper~28's functional-equation obstruction), and the
+$S^3$/$S^5$ rungs place the framework's Casimirs on the Bernoulli
+ladder of Paper~32 (the two-layer split read as the $\zeta$
+functional-equation reflection $\zeta(s)\leftrightarrow\zeta(1{-}s)$,
+with the transcendental window $\zeta(2k) = \text{rational}\cdot
+\pi^{2k}$ supplying the M2 observables and the negative-integer window
+$\zeta(1{-}2k)$ the $\pi$-free skeleton). Source:
+\texttt{debug/sprint\_gb3\_b6\_rung\_memo.md}.
+\end{observation}
+
 \subsection{The Stefan--Boltzmann constant lives in the temporal projection}
 
 Compactifying the temporal direction to $S^1_\beta$ promotes the
@@ -417,6 +455,62 @@ $\zeta_R(4)$-controlled spectral integral.  Without the temporal
 compactification, the same spatial spectrum gives Casimir $1/240$
 (Observation~\ref{obs:casimir}), with no $\pi$.
 \end{remark}
+
+\begin{observation}[Two-window discriminator: each Bernoulli rung is lit
+from both sides by distinct physics (Sprint GB-4)]
+\label{obs:two_window_duality}
+Remark~\ref{rem:sb_provenance} is the $B_4$ instance of a general
+structure. The conformal-scalar Casimir on $S^{2k-1}$ supplies the
+\emph{skeleton} window $\zeta_R(1-2k)$ (vacuum, $\pi$-free); the
+Stefan--Boltzmann free energy on $S^{2k-1}\times S^1_\beta$ supplies the
+\emph{transcendental} ($M_2$) window $\zeta_R(2k) =
+\text{rational}\cdot\pi^{2k}$ (thermal). The Bose--Einstein integral
+$\int_0^\infty x^d/(e^x-1)\,dx = \Gamma(d{+}1)\zeta_R(d{+}1)$ makes this
+explicit: $d=3$ gives $\zeta_R(4) = \pi^4/90$ ($B_4$), $d=5$ gives
+$\zeta_R(6) = \pi^6/945$ ($B_6$).
+
+\begin{center}
+\small
+\begin{tabular}{p{1.0cm} p{3.4cm} p{3.4cm}}
+\toprule
+rung & skeleton $\zeta(1{-}2k)$ (vacuum) & $M_2$ $\zeta(2k)$ (thermal) \\
+\midrule
+$B_4$ & $\zeta(-3)=1/120$, $S^3$ Casimir & $\zeta(4)=\pi^4/90$, $S^3{\times}S^1$ S--B \\
+$B_6$ & $\zeta(-5)={-}1/252$, $S^5$ Casimir & $\zeta(6)=\pi^6/945$, $S^5{\times}S^1$ S--B \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Each rung is thus lit from \emph{both} functional-equation windows by
+\emph{physically distinct} observables --- vacuum Casimir and thermal
+radiation --- related by the temperature-inversion duality $T
+\leftrightarrow 1/T$, which is the $\zeta$ functional equation
+$\zeta(s)\leftrightarrow\zeta(1{-}s)$ on the thermal circle.
+
+\emph{Negative control (the discriminating half).} The genuinely
+combinatorial GeoVac invariants --- those forced by the packing axiom
+rather than by sphere field theory --- are \emph{off} the ladder:
+$B = 42$, $\Delta = 1/40$ (Paper~2), and $\kappa = -1/16$ are not
+$\zeta$-rung values (and the correlation entropy $S_{\rm full}(\mathrm{GS})$
+is PSLQ-null off the master Mellin engine, Sprint TD Track~5). So the
+ladder is the functional-equation structure of the framework's
+\emph{spectral-geometry} sector (Casimir $+$ thermal $+$ heat-kernel),
+\emph{not} a universal property of every GeoVac quantity.
+
+\emph{Honest scope.} Both windows are lit by sphere field theory, so
+the positive landings are textbook in isolation (Planck blackbody,
+Casimir, Cardy temperature inversion); the GeoVac content is (i) that
+the framework's gravity and thermal sectors realize this two-window
+structure at three rungs, and (ii) the clean boundary against the
+combinatorial core. This sharpens, but does not exceed, the structural
+correspondence of Paper~32's Bernoulli-ladder remark;\ the
+non-trivial zeros remain untouched (Paper~28's functional-equation
+obstruction). As a cross-connection, the
+on-ladder/off-ladder split ($F=\zeta(2)$ on, $B$ and $\Delta$ off) is
+exactly the Phase-4G ``no common generator'' decomposition of
+$K = \pi(B+F-\Delta)$ viewed from the ladder. Source:
+\texttt{debug/sprint\_gb4\_discriminator\_memo.md}.
+\end{observation}
 
 % ===================================================================
 \section{Implications for Paper 34}

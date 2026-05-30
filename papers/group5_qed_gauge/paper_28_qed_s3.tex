@@ -11,6 +11,7 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem{observation}{Observation}
+\newtheorem{remark}{Remark}
 
 \title{QED on $S^3$: Spectral Geometry of Perturbative Transcendentals}
 \author{GeoVac Project}
@@ -298,6 +299,53 @@ $s$ & $\zeta_{D^2}(s)$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{remark}[No functional equation for $\zeta_{D^2}$: the quadratic
+multiplicity is the obstruction (Sprint GB-2, 2026-05-29)]
+\label{rem:zetaD2_no_fe}
+Sprint RH-O (Apr.\ 2026) reported, by a 13{,}080-template numerical
+search, that the Dirac spectral zeta $D(s)$ admits no spectral-triple
+functional equation (best residual $0.594$ vs.\ classical anchors at
+$10^{-51}$). The closed form~\eqref{eq:T9} upgrades this to an
+\emph{analytic} statement and pinpoints the mechanism. Since
+$\zeta_{D^2}(s) = D(2s)$, both $\zeta_{D^2}(s)$ and its reflection
+$\zeta_{D^2}(c-s)$ lie in the two-dimensional space
+$\mathrm{span}\{\zeta_R(2s),\,\zeta_R(2s{-}2)\}$ over the field of
+elementary (gamma/exponential/trigonometric) functions; a functional
+equation $\zeta_{D^2}(s) = \chi(s)\,\zeta_{D^2}(c-s)$ with $\chi$
+elementary exists iff the two coefficient vectors are parallel,
+i.e.\ $\det = AD - BC = 0$.
+
+The Riemann reflection $z \mapsto 1-z$ matches the argument set
+$\{2s{-}2,\,2s\}$ to its reflected partner only at the natural axis
+$c = 3/2$ (equivalently $c=1/2$), the Dirac ground-state value
+$|\lambda_0| = 3/2$ --- so the axis is \emph{not} the problem. The
+obstruction is the multiplier: the two terms acquire the gamma ratio
+$\Gamma(2s)/\Gamma(2s{-}2) = (2s{-}1)(2s{-}2)$, which forces
+$\det \neq 0$ (verified $|\det| = 2.8,\,8.4,\,60.3,\,8.2$ at
+$s = 1{+}i,\,\tfrac{3}{2}{+}3i,\,2{+}5i,\,\tfrac{1}{2}{+}10i$; the
+candidate-multiplier ratio $\chi_1/\chi_2$ tracks $(2s{-}1)(2s{-}2)$).
+The exponent gap of $2$ between the two $\lambda$-terms is produced
+\emph{precisely} by the quadratic Weyl multiplicity $g_n = 2(n{+}1)(n{+}2)$:
+a constant-multiplicity (single-power) spectrum lies in a one-dimensional
+span, is trivially parallel, and \emph{does} inherit a functional
+equation. The reflection algebra is cross-checked against direct
+evaluation of~\eqref{eq:T9} to $10^{-41}$.
+
+\emph{Consequence (unification of two RH walls).} The ``wrong Weyl law''
+wall (RH-N: $\gamma_n \sim \sqrt{n}$, harmonic-oscillator density) and
+the ``no functional equation'' wall (RH-O) are the \emph{same}
+structural fact: both are consequences of the $S^3$ quadratic
+degeneracy. The very multiplicity $n^2$ that places the framework's
+even-$s$ values on the Bernoulli ladder
+(Paper~32's Bernoulli-ladder remark: $F = \zeta(2) = \pi^2 B_2$,
+etc.) is the multiplicity that denies $\zeta_{D^2}$ a critical line.
+This is consistent with --- and sharpens --- WH6: the framework's
+zeta carries $\zeta_R$'s special values but not its zero-controlling
+functional equation. Source:
+\texttt{debug/sprint\_gb2\_zeta\_dsq\_functional\_eq.py},
+\texttt{debug/sprint\_gb2\_zeta\_dsq\_memo.md}.
+\end{remark}
 
 % ===================================================================
 \section{Theorem 2: Even/Odd Parity Discriminant}
@@ -1472,6 +1520,75 @@ does NOT extend to gravitons; gravitons inherit CC continuum behavior
 with infinite higher-curvature corrections. Substrate-level
 existence of $(1, 1)$ modes confirms gravitons are not structurally
 blocked.
+
+\paragraph{DOF count is a continuum-limit statement (Sprint GD-1).}
+The reduction of the $9$-dimensional $(1,1)$ irrep to the $2$
+transverse-traceless physical polarizations does \emph{not} occur at
+finite truncation. The continuum count is standard: under the diagonal
+$SU(2)$, $(1,1) = \text{spin-}2 \oplus \text{spin-}1 \oplus
+\text{spin-}0 = 5 \oplus 3 \oplus 1$, and diffeomorphism gauge ($4$)
+plus constraints ($3$) leave $2$ TT. On the discrete substrate,
+however, the inner-automorphism (diffeomorphism) gauge tangent
+$i[X, D_0]$ has entries $(\lambda_b - \lambda_a)X_{ab}$, which vanish
+\emph{within} a sector ($\lambda_a = \lambda_b$); the inner gauge is
+therefore \emph{entirely cross-sector} (verified zero within-sector
+gauge entries at $n_{\max} = 1,2,3$). Within a within-sector $(1,1)$
+block the gauge does not act, so all $9$ modes are non-inner-gauge at
+finite truncation. The continuum diffeomorphism gauge acts within the
+tensor field at each point; the discrete inner gauge connects different
+$\lambda$-sectors. These reconcile only as $n_{\max}\to\infty$, when the
+cross-sector directions assemble into continuum diffeomorphisms that
+remove $7$ of the $9$ within-sector modes. Thus the graviton DOF
+reduction is a \emph{propinquity-limit phenomenon} (Paper~38-style),
+not an internal-to-the-block projection --- which is the structural
+reason the Fierz--Pauli decomposition is the multi-month G6 task and
+not a sprint-scale one. Source:
+\texttt{debug/sprint\_gd1\_graviton\_dof\_memo.md}.
+
+\paragraph{Which irrep carries the TT graviton (Sprint GD-4).}
+A rep-theory diagnostic sharpens \emph{which} sector the necessary-condition
+test should examine. The helicity of an $SO(4) = SU(2)_L \times SU(2)_R$
+irrep $(j_L, j_R)$ is $|j_L - j_R|$; the TT spin-2 graviton is helicity
+$\pm 2$, hence lives in $|j_L - j_R| = 2$ reps (the TT tensor harmonics
+on $S^3$ are $(k{+}2, k) \oplus (k, k{+}2)$, lowest $(2,0)\oplus(0,2)$).
+The $(1,1)$ irrep that Proposition~\ref{prop:graviton_physical} tested
+has $|j_L - j_R| = 0$ --- \emph{helicity zero}, the scalar/trace-class
+sector. The within-sector blocks $\text{sector}_i \otimes \text{sector}_i$
+do contain the helicity-2 reps $(2,0)\oplus(0,2)$ (verified present at
+$n = 1,2,3,4$), but these were not examined. \emph{Caveat:} in
+Connes--Chamseddine the physical graviton enters through the
+$\delta D \leftrightarrow h_{\mu\nu}$ dictionary, which can shift irrep
+assignments --- the \emph{local} polarization space is $(1,1)$ while the
+\emph{global} TT harmonic modes are $|\Delta j| = 2$. So GD-4 does not
+refute the necessary-condition result; it identifies a concrete gap: the
+multi-month G6 must either examine the $|\Delta j| = 2$ $\delta D$-modes
+directly or establish the dictionary showing the $(1,1)$ bilinear carries
+the physical graviton. Together with the GD-1 finding, the multi-month G6
+has two sharply identified must-dos: (i) test the helicity-2 sector and
+fix the dictionary; (ii) realize the $9 \to 2$ gauge reduction in the
+continuum (propinquity) limit. Source:
+\texttt{debug/sprint\_gd4\_graviton\_irrep\_memo.md}.
+
+\paragraph{Helicity-2 modes are positive too (Sprint GD-5).}
+The necessary-condition half of GD-4's concern is resolved directly.
+The coefficient $A_\lambda = a(\lambda)(4\lambda^2/\Lambda^4 -
+2/\Lambda^2)$ is a function of the sector eigenvalue $\lambda$ alone
+(the spectral action sees only the degenerate-sector eigenvalue), hence
+\emph{irrep-blind} within a block: every irrep --- $(1,1)$, $(2,0)$,
+$(0,2)$, \ldots --- inherits the same $A_\lambda$. Therefore the
+helicity-2 (TT-graviton-class) reps carry the \emph{same positive}
+$A_\lambda$ as the $(1,1)$ ($+0.127, +0.133, +0.066$ at
+$n = 1,2,3$, $\Lambda^2 = 6$). So
+Proposition~\ref{prop:graviton_physical}'s positivity is \emph{not}
+confined to the scalar/trace sector; it extends to the actual
+TT-graviton irrep class. \emph{Honest scope:} the irrep-blindness that
+makes this immediate is exactly the G6 approximation --- the
+\emph{sufficient} condition (a TT kinetic structure \emph{distinct} from
+the trace, Fierz--Pauli) requires lifting $A_\lambda$ to an
+irrep-resolved second variation, the multi-month task where the
+blindness must break. GD-5 closes the necessary condition for the TT
+sector; it does not close the TT-vs-trace distinction. Source:
+\texttt{debug/sprint\_gd5\_helicity2\_memo.md}.
 
 Sprint G6-Diag-Full driver: \texttt{debug/g6\_diag\_full.py},
 companion first-pass \texttt{debug/g6\_diag\_quadratic\_form.py},
