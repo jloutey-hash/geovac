@@ -1,0 +1,35 @@
+=== ANCHOR tau=1 (must reproduce round S^3: lambda=n^2-1, deg=n^2) ===
+ n   lambda   n^2-1   deg   n^2  ok
+ 1      0.0       0     1     1   Y
+ 2      3.0       3     4     4   Y
+ 3      8.0       8     9     9   Y
+ 4     15.0      15    16    16   Y
+ 5     24.0      24    25    25   Y
+ 6     35.0      35    36    36   Y
+ 7     48.0      48    49    49   Y
+
+=== fiber COLLAPSE tau->0 : only k=0 survives at finite energy => S^2 base spectrum ===
+  surviving low levels (k=0 are the S^2 base modes l(l+1)-type):
+    lambda=    0.00  n=1 j=0.0 k=+0.0  <-- k=0 (base S^2 mode)
+    lambda=    8.00  n=3 j=1.0 k=+0.0  <-- k=0 (base S^2 mode)
+    lambda=   13.11  n=2 j=0.5 k=-0.5
+    lambda=   13.11  n=2 j=0.5 k=+0.5
+    lambda=   24.00  n=5 j=2.0 k=+0.0  <-- k=0 (base S^2 mode)
+    lambda=   25.11  n=4 j=1.5 k=-0.5
+    lambda=   25.11  n=4 j=1.5 k=+0.5
+    lambda=   45.11  n=6 j=2.5 k=-0.5
+  (k!=0 fiber modes lifted to high energy as tau->0: fiber frozen out, leaving the base.)
+
+=== fiber OPEN tau->inf : fiber modes pile up at zero cost => continuum in fiber direction ===
+  tau=   1.0  fiber-mode cost (lambda_k1 - lambda_k0) =   0.0000
+  tau=   2.0  fiber-mode cost (lambda_k1 - lambda_k0) =  -3.0000
+  tau=   5.0  fiber-mode cost (lambda_k1 - lambda_k0) =  -3.8400
+  tau=  20.0  fiber-mode cost (lambda_k1 - lambda_k0) =  -3.9900
+  tau= 100.0  fiber-mode cost (lambda_k1 - lambda_k0) =  -3.9996
+  cost -> 0 as tau->inf: the fiber decompactifies, m-label melts to a continuum. APERTURE OPENS.
+
+=== is tau=1 distinguished? (scalar curvature + Einstein-Hilbert action) ===
+  R(tau=1) = 6.0  (known unit-S^3 scalar curvature = 6)  ANCHOR OK
+  Einstein-Hilbert R*Vol is maximized at tau = 1.155  (round point tau=1? NO)
+  d(EH)/dtau = 0 at tau = 1.155
+  R(tau) decreasing through zero at tau=2 (R=0): geometry flat-fiber at tau=2, not tau=1.

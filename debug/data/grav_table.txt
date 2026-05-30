@@ -1,0 +1,30 @@
+=== ANCHOR: exact Schwarzschild (must pass before trusting anything) ===
+first law  max|T dS - dM| = 2.48e-04   (target 0)
+spec. heat C vs -8 pi M^2, max rel resid = 4.95e-04  (target 0; C<0 = neg. heat)
+
+=== gravity aperture opening (beta -> inf, T -> 0, M -> inf) ===
+      M  beta=8piM  a=1/beta        T_H    S_BH=A/4    rho~exp(S)
+-----------------------------------------------------------------
+      1      25.13   0.03979    0.03979       12.57     exp(12.6)
+      2      50.27   0.01989    0.01989       50.27     exp(50.3)
+      5     125.66   0.00796    0.00796      314.16    exp(314.2)
+     10     251.33   0.00398    0.00398     1256.64   exp(1256.6)
+     20     502.65   0.00199    0.00199     5026.55   exp(5026.5)
+     50    1256.64   0.00080    0.00080    31415.93  exp(31415.9)
+    100    2513.27   0.00040    0.00040   125663.71 exp(125663.7)
+-----------------------------------------------------------------
+S_BH = 4 pi M^2 = beta^2/(16 pi)  ->  S ~ (1/aperture)^2 : QUADRATIC divergence as aperture opens
+holographic bound S <= A/4 is SATURATED (achieved), not approached -> gravity sits at a CEILING
+
+=== density-of-states divergence at the open end (the direct twin) ===
+ELECTRON (Coulomb, power-law spectrum):
+  N(|E|) exponent  N ~ |E|^(-p):  p = [1.488 1.503 1.501 1.5   1.5  ]  -> 3/2  => dN/dE ~ |E|^(-5/2)
+GRAVITY (area law):
+  rho(M) = exp(4 pi M^2)  => dln rho/dM = 8 pi M  : EXPONENTIAL divergence as M -> inf
+
+=== UNIVERSALITY VERDICT ===
+ARROW (same): both DOS diverge as the aperture opens. Confinement removes states; opening restores+floods them.
+RATE  (differs by structure): electron power-law |E|^{-5/2} (Coulomb 1/n^2 ladder);
+                              gravity exponential exp(M^2) (area law). System-specific, not universal.
+BOUND (the real contrast): electron entropy sits ABOVE the BBM floor (open above);
+                           gravity entropy SATURATES the holographic ceiling A/4 (bound achieved).

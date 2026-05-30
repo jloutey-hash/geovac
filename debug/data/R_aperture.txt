@@ -1,0 +1,42 @@
+=== R-aperture for H2+ (prolate spheroidal = ellipsoid with foci = nuclei, focal sep = R) ===
+ANCHORS (exact 1-electron limits, electronic energy in Ha, Z=1 each nucleus):
+  R->0   united atom He+(1s): E_elec -> -Z_tot^2/2 = -2.0000   (sphere; SO(3) multiplet restored)
+  R->inf separated H(1s)+p : E_elec -> -1/2 = -0.5000   (two spheres; symmetry BROKEN to 2 atoms)
+
+=== separation-constant / multiplet structure across the aperture ===
+  R->0   : angular eq -> Legendre; separation const A -> l(l+1); degeneracy 2l+1 (FULL SO(3)).
+           the round sphere is RECOVERED -> united-atom = symmetry RESTORATION (contraction run backward).
+  R finite: A(R) splits the 2l+1 multiplet by |m| (sigma,pi,delta...). SO(3) BROKEN to SO(2)=axial U(1).
+  R->inf : levels coalesce into hydrogenic atoms, each with its OWN SO(3); spectrum = 2x atomic.
+           the single axial symmetry FRAGMENTS into two independent atomic symmetries.
+
+=== is R a group contraction? (the test that distinguishes it from the locked Hopf fiber) ===
+  Hopf fiber: weight k bounded by shell (k in -j..j) -> LOCKED, cannot open without leaving SU(2).
+  R is FREE: no quantum number bounds it. The symmetry group is GENUINELY R-dependent:
+    R=0      : SO(3) (or SO(4) for the Coulomb bound problem) -- maximal, sphere
+    0<R<inf  : SO(2) axial only -- the sphere is squashed to a spheroid, rotational symmetry broken to axial
+    R=inf    : SO(3) x SO(3) -- two independent atoms; the axial symmetry has FRAGMENTED, not melted
+  VERDICT: R opening is a symmetry FRAGMENTATION (1 atom -> 2 atoms), NOT a single contraction to a
+           non-compact group. Different from electron/gravity/fiber (each: compact -> non-compact).
+           R->0 IS a contraction run backward (restoration to the united-atom sphere).
+
+=== entropy reading of the R aperture (does opening raise entropy, as the other legs did?) ===
+  At R=inf the electron is in a SUPERPOSITION over two atomic wells (bonding orbital = (A+B)/sqrt2).
+  Tracing out which-atom: the one-electron reduced state -> maximally mixed over 2 sites -> S = ln 2.
+  At R=0 (united atom) there is ONE well: which-atom entropy S = 0.
+    R=0.0      which-atom entropy ~ 0.0000   (united atom, 1 well)
+    R=2.0      which-atom entropy ~ 0.3466   (near eq, partial delocalization (illustrative))
+    R=1000000000.0 which-atom entropy ~ 0.6931   (dissociated, equal 2-site mixture)
+  => opening R RAISES the which-atom (site) entanglement entropy 0 -> ln2. Same ARROW as the other legs.
+     but it SATURATES at ln2 (two sites), it does not diverge: a FINITE, COMBINATORIAL aperture.
+
+=== PLACEMENT in the costume table ===
+  electron threshold : compact SO(4) -> non-compact SO(3,1)   [entropy diverges, power-law]
+  gravity beta->inf  : compact U(1)  -> non-compact R         [entropy diverges, area law/exp]
+  Hopf fiber         : LOCKED (k child of j); opening = SU(2)->E(2) contraction [not independent]
+  internuclear R     : SO(3) -> SO(2) -> SO(3)xSO(3)          [entropy 0->ln2, FINITE/combinatorial]
+  => R is a FOURTH leg but a DIFFERENT SPECIES: a FISSION aperture (one center -> many), compact
+     throughout, entropy saturating not diverging. The continuum it touches is the SPATIAL-SEPARATION
+     continuum (nuclei can sit anywhere), not a spectral continuum. This is the molecular/chemistry wall
+     seen as an aperture: dissociation = a combinatorial site-fission, which is WHY the chemistry sector
+     behaves unlike the atomic one (it is a different KIND of boundary).
