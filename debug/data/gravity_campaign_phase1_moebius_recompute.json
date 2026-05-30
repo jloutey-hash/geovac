@@ -1,0 +1,64 @@
+{
+  "substrate": {
+    "a": 0.05,
+    "N_0": 120,
+    "N_rho": 200,
+    "R": 10.0,
+    "t": 1.0,
+    "eps": 0.05,
+    "azimuthal": "spectral m_eff=(k+1/2)/alpha",
+    "K_disk": 41.6892922486493
+  },
+  "rows": [
+    {
+      "alpha": 1.5,
+      "actual_alpha": 1.5,
+      "delta_K": 0.053879361527904734,
+      "inv_minus_alpha": -0.8333333333333334,
+      "ratio_v3_19_observable": -0.06465523383348568,
+      "ratio_moebius_pred": -0.0625,
+      "ratio_rel_err_vs_moebius": 0.03448374133577081,
+      "deriv_thread9_observable": 0.07574510765188329,
+      "deriv_sc_continuum": 0.12037037037037036,
+      "deriv_rel_err_vs_sc": -0.3707329518151234,
+      "compute_time_s": 0.9684693813323975
+    },
+    {
+      "alpha": 2.0,
+      "actual_alpha": 2.0,
+      "delta_K": 0.08433352304213315,
+      "inv_minus_alpha": -1.5,
+      "ratio_v3_19_observable": -0.05622234869475543,
+      "ratio_moebius_pred": -0.05555555555555555,
+      "ratio_rel_err_vs_moebius": 0.012002276505597834,
+      "deriv_thread9_observable": 0.05130487140021962,
+      "deriv_sc_continuum": 0.10416666666666666,
+      "deriv_rel_err_vs_sc": -0.5074732345578916,
+      "compute_time_s": 1.2937359809875488
+    },
+    {
+      "alpha": 3.0,
+      "actual_alpha": 3.0,
+      "delta_K": 0.1302023572089439,
+      "inv_minus_alpha": -2.6666666666666665,
+      "ratio_v3_19_observable": -0.048825883953353966,
+      "ratio_moebius_pred": -0.05,
+      "ratio_rel_err_vs_moebius": -0.02348232093292074,
+      "deriv_thread9_observable": 0.043764947283762165,
+      "deriv_sc_continuum": 0.09259259259259259,
+      "deriv_rel_err_vs_sc": -0.5273385693353686,
+      "compute_time_s": 1.950348138809204
+    }
+  ],
+  "alpha2_summary": {
+    "delta_K": 0.08433352304213315,
+    "ratio_v3_19_observable": -0.05622234869475543,
+    "deriv_thread9_observable": 0.05130487140021962,
+    "sc_ratio_continuum": -0.08333333333333333,
+    "sc_deriv_continuum": 0.10416666666666666,
+    "moebius_ratio_pred": -0.05555555555555555
+  },
+  "verdict": "A_ARTIFACT_OF_OBSERVABLE_DEFINITION",
+  "source_of_sign_flip": "ratio (Delta_K / (1/a - a)) vs derivative (dDelta_K/dalpha). Delta_K(2) > 0; (1/a - a) < 0 for alpha>1 so the ratio is negative; Delta_K is increasing in alpha so the derivative is positive. Same substrate, same Delta_K -- different observable.",
+  "continuum_consistency": "RATIO sign (neg) matches SC ratio -1/12 (neg); DERIV sign (pos) matches SC derivative 5/48 (pos). Both discrete signs are continuum-consistent for their own observable."
+}

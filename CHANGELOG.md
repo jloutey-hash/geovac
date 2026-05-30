@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.23.0] - 2026-05-29
+
+### Gravity Campaign — scoping arc (charter → Phase 1 → Task 1 → R2 scoping → R2 theorem charter)
+
+**Minor version bump (scoping-only: no production code, no paper edits, no tests — five gravity-campaign sub-sprints landing as `debug/` memos).** Conversational session opened by the PI's request to "start the gravity campaign" for the discrete-substrate Bekenstein–Hawking entropy program (the G4-x multi-month track). Gate-first discipline collapsed a vague 4–7 month campaign into a single sharply-stated theorem. **Net: the entire campaign reduces to one new theorem (L6, α-differentiable spectral-functional convergence), with its two supporting proof layers transported from Papers 45 and 47.** No theorem proven this sprint — this is the scoping/charter layer.
+
+#### Phase 0 — Charter
+Campaign north star set as the binary deliverable "does discrete S_BH → A/4 with a rate?", with a gate-first phase structure (Phase 1 gate → Direction R/F branch → R2 convergence core → Paper 5x).
+
+#### Phase 1 — Möbius sign gate (false alarm)
+The α>1 conical-slope "sign discrepancy" (v3.19.0 ratio −0.056 vs thread-9 derivative +0.052) resolved as a **ratio-vs-derivative false alarm**: both read the same substrate quantity Δ_K(2)=+0.0843 through two observable definitions, each sign-consistent with its own continuum Sommerfeld–Cheeger anchor (SC ratio −1/12, SC derivative +5/48). Independently re-derives the same-day Track α'' resolution (already in CLAUDE.md §3), hardened with the continuum anchor the earlier work omitted. **Consequence: the 3–6 month multi-axis A-coefficient sweep is NOT needed** — the sign flag was its only justification. Memo `debug/gravity_campaign_phase1_moebius_sign_memo.md` (+ recompute driver + JSON). [Process note: this Phase 1 was the session's one sub-agent dispatch; the PI flagged a §13.1/§13.2 protocol violation — dispatch without asking — and the PM corrected to main-session-default for all subsequent steps.]
+
+#### Task 1 — tip/bulk independence gate (SEPARABLE, structural)
+Does the conical-tip/replica entropy coefficient extract independently of the non-converging bulk Weyl A-coefficient (1/24π)? **SEPARABLE, structurally.** Synthesis of existing G4-6b + G4-5d data: (i) the entropy coefficient B is measured at large t where A/t < 1% of B, giving B=0.163 vs 1/6 (−2.3%), R-independent at R≥10; (ii) entropy and bulk-A are different Mellin moments — entropy is φ(0), Einstein–Hilbert φ(1), cosmological-constant φ(2) (G4-5d sector map); (iii) the tip = (dK/dα)|_{α=1} − K_disk is the difference of two large ~530 values at small t, in which **the divergent bulk A cancels by construction** before the entropy is formed. Direction F (full-spectral-action north star, multi-month bulk-A convergence) **AXED**. Memo `debug/gravity_campaign_phase1b_tip_bulk_independence_memo.md`.
+
+#### R2 scoping — lemma-transport map + radial-apex check
+Mapped the Paper 38/39/40/45/47 five-lemma propinquity machinery onto the cigar tip geometry (warped product D²×S² factorizing at constant warp). Findings: (a) warp cross-term zero at constant warp (L3 flag cleared — only variable warp couples radial↔S², which the entropy doesn't use); (b) α lives entirely in the disk via spinor azimuthal momentum m_eff=(k+½)/α, with S² a passive α-independent area factor — reduces R2 from "warped-product cigar" to "2-disk-with-cone ⊗ passive S²"; (c) **radial apex centrifugally screened** — spinor modes ~ρ^{|m_eff|}→0 at ρ=0 (no zero mode, the same anti-periodic/half-integer fact G4-4 found essential for clean SC extraction), so the cone vertex needs no boundary condition; regular Sturm–Liouville on (0,R] with only the IR boundary (Paper 47). All scaffolding transports. Memo `debug/gravity_campaign_R2_scoping_memo.md` (§8 phase-1 check).
+
+#### R2 theorem charter
+Precise statement + three-layer proof skeleton for the single irreducible deliverable. **Framing correction:** the differentiated object is the heat-trace spectral functional, NOT the propinquity metric (propinquity is the undifferentiated backbone). Architecture: **Layer 1** propinquity backbone (transported, Paper 45 PURE_TENSOR); **Layer 2** norm-resolvent heat-trace convergence (transported, Paper 47 — R2 is structurally a Paper 47 two-rate hybrid); **Layer 3 = L6, the prize** (new): uniform-in-α, C¹ convergence of the (k+½)-weighted replica derivative, enabling lim_n and d/dα|_{α=1} to commute. L6 difficulty: tractable, not a wall (heat kernel dominates the (k+½) weight for t>0; the tip's φ(0) moment is IR-weighted; genuine work is rate + uniformity, not bare convergence). Romantic hook: M1 4/π=Vol(S²)/π² may enter S_tip=A/4 through the area A=Vol(S²)·r_h² by construction (Bernoulli-ladder / master-Mellin-engine tie). Memo `debug/gravity_campaign_R2_theorem_charter_memo.md`.
+
+### Added
+- `debug/gravity_campaign_phase1_moebius_sign_memo.md` + recompute driver + JSON (Phase 1)
+- `debug/gravity_campaign_phase1b_tip_bulk_independence_memo.md` (Task 1)
+- `debug/gravity_campaign_R2_scoping_memo.md` (R2 scoping + phase-1 check §8)
+- `debug/gravity_campaign_R2_theorem_charter_memo.md` (R2 charter)
+- `memory/gravity_campaign_scoping_R2_charter.md` + MEMORY.md index line
+
+### Closed / re-scoped
+- Direction F (full-spectral-action north star) AXED — entropy doesn't inherit bulk-A non-convergence.
+- Multi-axis A-coefficient sweep deemed unnecessary (Möbius sign false alarm).
+- Gravity campaign reduced to one theorem (L6) + two transported proof layers.
+
+### Honest scope
+- **Nothing proven at theorem grade.** This is the scoping/charter layer of the campaign.
+- Task 1 SEPARABLE and radial-apex screening are **solid analytical arguments** resting on established facts (G4-6b data, G4-5d Mellin map, the no-zero-mode fact); the explicit prop=2 confirmation on the assembled disk operator system is a named follow-on compute, not run.
+- Phase 1 Möbius numbers are the dispatched agent's recompute (numerical).
+- **Named open follow-ons:** L6 proof (the prize, unproven); Layer 1–2 explicit assembly for D²_α⊗S²; prop=2 confirmation compute; M1/area rate-signature check.
+
 ## [3.22.0] - 2026-05-29
 
 ### Sprint GB + GD arc — Bernoulli ladder / RH consequences / discriminator / Avery connection; graviton DOF + Möbius audit (11 diagnostic sprints)
