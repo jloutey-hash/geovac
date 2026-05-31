@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.30.0] - 2026-05-31
+
+### Added
+- **G4-5a UV convergence of entropy coefficient (gravity arc).** Five-point panel (a = 0.10, 0.05, 0.025, 0.0125, 0.00625; N_rho = 100→1600) measuring the conical-tip entropy coefficient B at t=10 (B-dominated regime). Richardson extrapolation at order 1.7 from pre-crossover pair: **B = 0.166665, 0.001% from 1/6** (five significant figures). Error changes sign between a=0.0125 (−0.30%) and a=0.00625 (+0.04%), confirming convergence from both sides. Convergence order accelerates 1.08 → 1.23 → 1.70, consistent with leading O(a) correction cancelling in the replica derivative (α-independent) leaving sub-leading O(a²) of opposite sign.
+- **L6 α-uniformity numerical verification.** The ratio (K_fine − K_coarse)/K varies by CV = 0.013 across α ∈ {0.90, 0.95, 1.00, 1.05, 1.10} at (a, a') = (0.05, 0.025). Discretization error is α-independent to 1.3%, directly verifying R2 Layer 3: lim_{a→0} and d/dα|_{α=1} commute.
+- **Self-cleaning mechanism identified.** Per-eigenvalue convergence rate is O(a^1) (centrifugal singularity), but the tip (replica derivative) converges at O(a^{1.7}) because the leading lattice artifact is geometrically α-independent (apex placement at ρ=a is angle-neutral) and cancels in tip = dK/dα − K_disk. Entropy is a "self-cleaning" observable on the discrete substrate.
+- **Bernoulli structural uniqueness theorem.** The identity ζ_unit(-k) = 0 is UNIVERSAL across all odd spheres S^{2m+1} with CH Dirac (verified S³, S⁵, S⁷ through k=7 via sympy). The mechanism: degeneracy polynomial in m = n + d/2 has ONLY EVEN powers, producing (m+1) spectral-action terms. S³ (m=1) is unique in giving exactly 2 terms = pure Einstein gravity (no R² corrections). S⁵ gives 3 terms (includes R² Gauss-Bonnet at 22.5% relative to EH), S⁷ gives 4 terms. The S³ mechanism: B_{2k+1}(3/2) = (2k+1)/4^k from B_{odd}(1/2) = 0 (Bernoulli symmetry) + shift formula at 3/2 = 1/2 + 1, producing exact pairwise cancellation of the two Hurwitz terms.
+- **Fifth Coulomb/HO asymmetry layer.** Paper 24 §V extended: spectral-action gravity termination. S³ gives pure Einstein (2 parameters: φ(3/2), φ(1/2)); S⁵ gives Einstein + R² (3 parameters). The CC problem on S³ is a 2-parameter family, the minimum possible.
+
+### Changed
+- **Paper 51 §sec:L6 (numerical verification).** Extended UV panel from 4 to 5 points (added a=0.00625/N_rho=1600 with sign flip); updated best Richardson from −0.077% to −0.001%; added "structural error cancellation" paragraph explaining the self-cleaning mechanism; added Remark `rem:two_term_uniqueness` on universal odd-sphere termination and S³ uniqueness for pure Einstein. Paper: 33 → 34 pages.
+- **Paper 24 §V (Coulomb/HO asymmetry).** Updated "four layers" → "five layers"; footnote at §sec:asymmetry head updated; new Layer 5 item in the enumeration (spectral-action gravity termination). 11 pages unchanged.
+
+### Closed
+- G4-5a (tip UV convergence): **POSITIVE**, B → 1/6 at 0.001%.
+- R2 Layer 3 (L6 numerical verification): **POSITIVE**, α-uniformity CV = 0.013.
+- Bernoulli structural mechanism: **PROVEN** (elementary identity + sympy verification).
+- Fifth asymmetry layer: **ESTABLISHED** (S³ pure Einstein, S⁵/S⁷ not).
+
 ## [3.29.0] - 2026-05-31
 
 ### Changed

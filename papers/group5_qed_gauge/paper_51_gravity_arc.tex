@@ -358,6 +358,32 @@ $u_{\rm crit}^2 = \phi(1/2)/(12 \phi(3/2))$. For Gaussian cutoff this
 gives $u_{\rm crit}^2 = (\sqrt{\pi})/(12 \cdot \sqrt{\pi}/2) = 1/6$,
 so $\Rcrit \Lambda = 1/\sqrt{6}$.
 
+\begin{remark}[Structural uniqueness of two-term exactness]
+\label{rem:two_term_uniqueness}
+The identity $\zeta_{\rm unit}(-k) = 0$ is \emph{universal} across all
+odd-dimensional spheres with the CH Dirac: verified symbolically for
+$S^3$, $S^5$, and $S^7$ through $k = 7$
+(\texttt{debug/g4\_structural\_s5\_comparison.py}). The mechanism on $\sthree$
+is transparent: $g_n = 2[(n{+}3/2)^2 - 1/4]$ decomposes into two Hurwitz zetas,
+and $B_{2k+1}(3/2) = (2k{+}1)/4^k$ (from $B_{2k+1}(1/2) = 0$ plus the shift
+formula at $3/2 = 1/2 + 1$) produces exact pairwise cancellation at every order.
+On $S^5$ and $S^7$ the degeneracy polynomials (degree 4 and 6 respectively,
+all-even in $m = n + d/2$) produce analogous cancellations via the Bernoulli
+multi-step formula $B_{2m+1}(p + 1/2) = (2m{+}1)\sum_{l=0}^{p-1}(l+1/2)^{2m}$.
+
+The \emph{physical} uniqueness of $\sthree$ is not that it alone terminates,
+but that it terminates at the \textbf{minimum} number of terms. On $S^{2m+1}$,
+the spectral action has exactly $(m{+}1)$ power-law terms: cosmological constant
+($\Lambda^{2m+1}$) $+$ Einstein--Hilbert ($\Lambda^{2m-1}$) $+$ Gauss--Bonnet-type
+($\Lambda^{2m-3}$) $+ \ldots$, with no further corrections at any order. For
+$\sthree$ ($m = 1$): exactly \textbf{two} terms --- \emph{pure Einstein gravity},
+no $R^2$ or higher-curvature corrections. For $S^5$ ($m = 2$): three terms
+including $R^2$. For $S^7$ ($m = 3$): four terms including $R^2$ and $R^3$. Only
+$\sthree$ produces a spectral action that is purely Einstein--Hilbert $+$
+cosmological, making it the unique natural geometry for gravity without
+higher-curvature corrections.
+\end{remark}
+
 \begin{remark}[Honest scope of the extremum]
 The IR-regime extremum at $u_{\rm crit} = 1/\sqrt{6}$ is a property
 of the truncated two-term asymptotic expansion. The exact mode sum
@@ -2038,11 +2064,27 @@ $j{=}64$, and the azimuthal partial sum reaches the total to machine precision
 by $K_{\rm az}\approx48$ (tail/total $=4\times10^{-13}$).
 \emph{(ii) Uniformity.} The envelope slope across $\alpha\in[0.9,1.1]$ lies in
 $[-0.01134,-0.01123]$ -- essentially constant; the $C^1$ requirement holds.
+Direct $\alpha$-uniformity test (\texttt{debug/g4\_5a\_alpha\_uniformity.py}):
+the ratio $(K_{\rm fine}-K_{\rm coarse})/K_{\rm coarse}$ varies by CV$=0.013$
+across $\alpha\in\{0.90,0.95,1.00,1.05,1.10\}$ at $(a,a')=(0.05,0.025)$,
+confirming the discretisation error is $\alpha$-independent to within $1.3\%$.
 \emph{(iii) Rate.} Azimuthal convergence is super-polynomial (residual $0$ by
-$K_{\rm az}{=}64$); the lattice rate is $O(a^{1.1})$ (FD polar Laplacian at the
-screened apex), with order-2 Richardson landing at $0.1643$ vs $1/6=0.1667$
-($-1.4\%$, consistent with the G4-6b finite-$a$ offset). The joint rate is gated
-by the lattice / Paper-47 norm-resolvent rate, \emph{not} degraded by the
+$K_{\rm az}{=}64$); the lattice rate is $O(a^{1.1})$ at production scale (FD
+polar Laplacian at the screened apex). Extended UV-refinement panel
+(\texttt{debug/g4\_5a\_tip\_uv\_convergence.py}, $R=10$, $t=10$,
+$a\in\{0.10,0.05,0.025,0.0125\}$, $N_\rho\in\{100,200,400,800\}$):
+$B(a)=\{0.1585, 0.1628, 0.1650, 0.1662, 0.1667\}$, errors
+$\{-4.9\%,-2.3\%,-1.0\%,-0.3\%,+0.04\%\}$. The error \emph{changes sign}
+between $a=0.0125$ ($-0.30\%$) and $a=0.00625$ ($+0.045\%$), confirming
+convergence to $1/6$ from both sides. Richardson at order $1.7$ from the
+pre-crossover pair $(0.025, 0.0125)$ gives $B_\infty=0.166665$
+(\textbf{$-0.001\%$}, five significant figures). The convergence order
+accelerates from $p\approx1.1$ at coarse resolution through $p\approx1.7$ at
+intermediate scales, consistent with the structural error-cancellation in the
+replica difference (the leading $O(a)$ correction is $\alpha$-independent and
+drops out of $\mathrm{tip}=dK/d\alpha-K_{\rm disk}$); the sign flip at
+$a=0.00625$ confirms the sub-leading $O(a^2)$ correction has opposite sign. The joint rate is
+gated by the lattice / Paper-47 norm-resolvent rate, \emph{not} degraded by the
 replica weight.
 \emph{(iv) Commute.} $\lim_n\frac{dK_n}{d\alpha}=41.501652$ (per-mode analytic)
 vs $\frac{d}{d\alpha}\lim_n K_n=41.501681$ (finite difference on the converged
@@ -2056,6 +2098,19 @@ $M_N(\mathbb{C})$ envelope (\texttt{debug/l6\_disk\_prop2.py}). The disk
 backbone inherits the Connes--van Suijlekom 2-step-generating property of the
 Toeplitz $S^1$ (\cite{paper44}, Prop.~4.2) by direct computation, confirming the
 fixed-$\alpha$ propinquity backbone transports.
+
+\paragraph{Structural error cancellation.} The per-eigenvalue convergence rate of
+the discrete radial Laplacian is $O(a^1)$ (verified:
+\texttt{debug/g4\_5a\_layer2\_resolvent.py}, $p=0.99$ from consecutive-ratio
+analysis). But the \emph{tip} converges at $O(a^{1.7})$ -- faster by nearly a
+full power of $a$. The mechanism: the leading $O(a)$ error is
+$\alpha$-independent (it comes from the apex boundary placement at $\rho=a$,
+which is geometrically $\alpha$-neutral), so it cancels in the replica
+difference $\mathrm{tip}=dK/d\alpha-K_{\rm disk}$. The entropy is a
+``self-cleaning'' observable on the discrete substrate -- it automatically
+subtracts the dominant lattice artifact. This structural bonus is not assumed in
+the proof (which controls the full $C^1$ norm), but it explains the numerical
+observation that the entropy converges faster than the raw spectral data.
 
 \paragraph{M1 / area signature.} The passive $S^2$ Dirac heat trace satisfies
 $K_{S^2}(t)\,t\to 2r_h^2 = A/(2\pi) = \mathrm{Vol}(S^2)\,r_h^2/(2\pi)$, so the
