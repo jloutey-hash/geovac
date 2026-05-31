@@ -16,8 +16,10 @@ Close the sprint we just completed. Walk the protocol below. If a step does not 
 
 **6. MEMORY.md index entry (only if a cross-session-worthy fact landed).** Strict ≤ 200 chars in MEMORY.md, full content in a new `memory/*.md` file. Do NOT auto-create memory files for sprint outcomes — those go in CHANGELOG.md. Reserve memory for facts not derivable from the corpus.
 
-**7. Verification.** Have all relevant tests pass? Has every new equation in a paper edit got a verification test (§13.4a)? Has the PM not modified anything in the hard-prohibitions list (§13.5)?
+**7. Reference tables.** If the sprint added new benchmarks, add rows to `docs/validation_benchmarks.md` (NOT to CLAUDE.md §10). If the sprint added new topic→paper mappings, add rows to `docs/topic_to_paper_lookup.md` (NOT to CLAUDE.md §11). These files are the canonical homes for those tables.
 
-**8. Honest scope check.** What was closed at theorem grade? What is structural sketch? What is numerical observation? What are the named open follow-ons? Write these into the memo §6 ("Honest scope") section explicitly.
+**8. Verification.** Have all relevant tests pass? Has every new equation in a paper edit got a verification test (§13.4a)? Has the PM not modified anything in the hard-prohibitions list (§13.5)?
+
+**9. Honest scope check.** What was closed at theorem grade? What is structural sketch? What is numerical observation? What are the named open follow-ons? Write these into the memo §6 ("Honest scope") section explicitly.
 
 After completing the protocol, summarize what you did and what is ready for `/release`.

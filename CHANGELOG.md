@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.29.0] - 2026-05-31
+
+### Changed
+- **CLAUDE.md compaction (43% reduction, 2207→1263 lines).** Sprint chronicles in §2 compacted from multi-paragraph entries to grouped one-liner summaries organized by arc (QED, spectral triple, Lorentzian, gauge, Dirac, chemistry, precision, gravity). "Best results" converted to table. §10 (Validation Benchmarks, 330 lines) extracted to `docs/validation_benchmarks.md`. §11 (Topic-to-Paper Lookup, 404 lines) extracted to `docs/topic_to_paper_lookup.md`. Both replaced with pointers in CLAUDE.md. No information lost — all detail preserved in CHANGELOG.md, sprint memos, and standalone files.
+- **Confinement reframing ARCHIVED as organizing reading.** §2 banner removed, §1.7 paragraph compacted. PI assessment: "discreteness = compactness" is established mathematics (Paper 18 §III); species-II predictions were falsified (MgH2), occupation-confinement reframe was post-hoc, entropy-bridge inventory confirmed existing PSLQ null. Valid as description of what the framework does, not as predictive principle.
+- `/sprint-close` skill gained step 7 (reference table updates to `docs/validation_benchmarks.md` and `docs/topic_to_paper_lookup.md`).
+
+### Added
+- `docs/validation_benchmarks.md` — extracted §10 benchmark table (330 lines, canonical home for new benchmark rows)
+- `docs/topic_to_paper_lookup.md` — extracted §11 topic→paper table (404 lines, canonical home for new mappings)
+
 ## [3.27.0] - 2026-05-30
 
 ### Species-II aperture test → occupation-confinement reframe
