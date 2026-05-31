@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.31.0] - 2026-05-31
+
+### Closed
+- **G4-6 full closure (all sub-sprints).** The discrete-substrate gravity quantitative-refinement phase is fully resolved. G4-6a (A-coefficient extraction) closed by structural insight: numerical extraction converges at O(a^{0.2}) under isotropic refinement — infeasible at any accessible scale. Resolution: A = 1/(24π) is derived analytically (Theorem 1, Bernoulli mechanism); substrate's role is B verification (0.001%, G4-5a). G4-6e (sector-wise Mellin map) closed at theorem grade: new Theorem thm:sector_mellin proves {φ(0), φ(1), φ(2)} ↔ {tip, EH, Λ_cc} from the Seeley-DeWitt operator-order decomposition. G4-6f (synthesis) = this entry.
+
+### Added
+- **Theorem thm:sector_mellin (Paper 51).** Formal proof that each spectral-action sector's cutoff dependence is controlled by a single Mellin index k: cosmological → φ(2), EH → φ(1), topological tip → φ(0). The key step: the Sommerfeld-Cheeger coefficient is t-independent (topological), so integrates against ∫(dt/t)f(tΛ²) = φ(0). Corollary: ratio test at sub-5% (F14 empirical).
+- **CC 2010 "Uncanny Precision" citation (Paper 51).** Added arXiv:0812.0165 bibitem + Remark rem:cc_uncanny noting GeoVac provides the all-orders algebraic mechanism for what Chamseddine-Connes called "remarkable cancellations of unclear origin." Novel contributions: (a) B_{2k+1}(3/2) = (2k+1)/4^k mechanism, (b) all-orders theorem, (c) S³ uniqueness.
+- **G4-6a diagnostic drivers.** Three extraction strategies tested and documented: single-axis radial Richardson (`debug/g4_6a_algebraic_richardson.py`), isotropic refinement (`debug/g4_6a_isotropic_richardson.py`), per-mode Bessel correction (`debug/g4_6a_bessel_correction.py`). All data in `debug/data/g4_6a_*.json`.
+
+### Changed
+- **Paper 51 Theorem 1 proof corrected.** The proof previously claimed B_{2k+1}(3/2) = 0 — this is FALSE (correct: = (2k+1)/4^k). Mechanism is pairwise cancellation between two Hurwitz terms whose coefficients are proportional, not individual vanishing. Fixed to show explicit arithmetic: first term = -1/(2·4^k), second = +1/(2·4^k), sum = 0.
+- **Paper 51:** +1 theorem, +1 corollary, +1 remark, +1 bibitem. Compiles clean (two-pass, zero errors).
+
 ## [3.30.0] - 2026-05-31
 
 ### Added

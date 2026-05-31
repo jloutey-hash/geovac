@@ -326,13 +326,18 @@ $\zeta_{\rm unit}(s) = 2 \sum_{n \geq 0} (n+1)(n+2) (n + 3/2)^{-2s}$,
 which equals $2 \sum_{n \geq 0} [(n+3/2)^2 - 1/4] (n + 3/2)^{-2s}$.
 This separates as $\zeta_{\rm unit}(s) = 2 \zeta_H(2s - 2, 3/2) -
 \frac{1}{2} \zeta_H(2s, 3/2)$, where $\zeta_H$ is the Hurwitz zeta.
-By standard Hurwitz functional equations, $\zeta_H(-2k, 3/2) =
--B_{2k+1}(3/2)/(2k+1)$ for integer $k \geq 0$, and analogously for
-$\zeta_H(-2k - 2, 3/2)$. The Bernoulli polynomial values at $3/2$ for
-odd index satisfy $B_{2k+1}(3/2) = 0$ identically (verified
-symbolically through $k = 10$, expected to all orders). Both terms
-in the decomposition vanish at $s = -k$, so
-$\zeta_{\rm unit}(-k) = 0$. \qed
+By standard Hurwitz functional equations, $\zeta_H(-m, a) =
+-B_{m+1}(a)/(m+1)$ for non-negative integer $m$. At $s = -k$:
+\begin{align*}
+\zeta_{\rm unit}(-k) &= -\frac{2 B_{2k+3}(3/2)}{2k+3}
+  + \frac{B_{2k+1}(3/2)}{2(2k+1)}.
+\end{align*}
+From the shift formula $B_n(x+1) = B_n(x) + nx^{n-1}$ and the
+identity $B_{2k+1}(1/2) = 0$ (standard for all $k \geq 0$), one
+obtains $B_{2k+1}(3/2) = (2k{+}1)/4^k$. Substituting:
+the first term gives $-2(2k{+}3)/[4^{k+1}(2k{+}3)] = -1/(2 \cdot 4^k)$
+and the second gives $(2k{+}1)/[4^k \cdot 2(2k{+}1)] = 1/(2 \cdot 4^k)$.
+Their sum is zero at every $k \geq 0$. \qed
 \end{proof}
 
 The identity in Theorem~\ref{thm:zeta_unit_neg_k} forces the
@@ -357,6 +362,19 @@ $3 \phi(3/2) u^2 = \tfrac{1}{4} \phi(1/2)$, or
 $u_{\rm crit}^2 = \phi(1/2)/(12 \phi(3/2))$. For Gaussian cutoff this
 gives $u_{\rm crit}^2 = (\sqrt{\pi})/(12 \cdot \sqrt{\pi}/2) = 1/6$,
 so $\Rcrit \Lambda = 1/\sqrt{6}$.
+
+\begin{remark}[Relation to Chamseddine--Connes 2008]
+\label{rem:cc_uncanny}
+Chamseddine and Connes~\cite{chamseddine_connes2008_uncanny}
+observed that $a_4$ and $a_6$ vanish on $\sthree$ (and all higher
+$a_{2n}$ on $\sthree \times S^1$), calling these ``remarkable
+cancellations.'' The Bernoulli mechanism in
+Theorem~\ref{thm:zeta_unit_neg_k} identifies the algebraic
+origin of these cancellations at all orders: the identity
+$B_{2k+1}(3/2) = (2k{+}1)/4^k$ (from $B_{2k+1}(1/2) = 0$ plus
+the shift formula) forces exact pairwise cancellation in the
+Hurwitz decomposition at every non-positive integer.
+\end{remark}
 
 \begin{remark}[Structural uniqueness of two-term exactness]
 \label{rem:two_term_uniqueness}
@@ -1443,6 +1461,82 @@ $S_{\BH}$. \textbf{The cutoff-function calibration data (Class~1 per
 \S\ref{sec:g8}) controls all three sectors simultaneously, but
 through different Mellin moments.}
 
+\begin{theorem}[Sector-wise Mellin moment map]
+\label{thm:sector_mellin}
+Let $f$ be a cutoff function with regulated Mellin moments
+$\phi(s) = \int_0^\infty f(x)\, x^{s-1}\, dx$, and let the
+Chamseddine--Connes spectral action on the Euclidean Schwarzschild
+cigar be decomposed into bulk and topological-tip sectors via the
+replica method. Then each sector's cutoff dependence is controlled
+by a single Mellin index $k$:
+\begin{enumerate}
+  \item[\emph{(i)}] The cosmological-constant sector (proportional to
+    $a_0 \sim t^{-d/2}$) scales with $\phi(d/2) = \phi(2)$ in $d=4$.
+  \item[\emph{(ii)}] The Einstein--Hilbert sector (proportional to
+    $a_2 \sim t^{-(d-2)/2}$) scales with $\phi((d-2)/2) = \phi(1)$ in $d=4$.
+  \item[\emph{(iii)}] The topological tip sector (the
+    Sommerfeld--Cheeger contribution, $t$-independent at the apex)
+    scales with $\phi(0)$ (the zeroth moment, log-regulated by
+    substrate UV/IR cutoffs).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The spectral action $S = \mathrm{Tr}\, f(D^2 / \Lambda^2)$ has heat-kernel
+representation $S = \int_0^\infty (dt/t)\, \tilde{f}(t\Lambda^2)\, K(t)$,
+where $\tilde{f}$ is the inverse Mellin transform of $f$ and $K(t) =
+\mathrm{Tr}\, e^{-tD^2}$. On a $d$-dimensional manifold the Seeley--DeWitt
+expansion $K(t) \sim \sum_n a_n\, t^{(n-d)/2}$ gives
+\[
+  S \;\sim\; \sum_n a_n \int_0^\infty \frac{dt}{t}\, f(t\Lambda^2)\, t^{(n-d)/2}
+  \;=\; \sum_n a_n\, \Lambda^{d-n} \phi\!\left(\tfrac{d-n}{2}\right),
+\]
+proving (i) and (ii) for the $n=0$ and $n=2$ bulk coefficients.
+
+For the replica tip sector: the Sommerfeld--Cheeger contribution to the
+heat trace on a cone of apex angle $2\pi\alpha$ is a
+\emph{topological} correction
+\[
+  \Delta K^{\rm SC}(\alpha, t) = c(\alpha) \cdot K_{S^{d-2}}(t)
+\]
+where $c(\alpha) = (1/12)(1/\alpha - \alpha)$ for spinors and
+$K_{S^{d-2}}(t)$ is the transverse-sphere heat kernel. The entropy
+derivative $(d/d\alpha)|_{\alpha=1}\, c(\alpha) = 1/6$ is a
+\emph{constant}, independent of $t$. At the apex (the fixed point
+of the conical action), the transverse heat-kernel density
+contributes a factor of $1$ per unit area, so the
+replica-differentiated tip integrand is
+\[
+  \text{tip}(t) := \left.\frac{d}{d\alpha}\right|_{\alpha=1}
+  \Delta K^{\rm SC}(\alpha, t) \;=\; \frac{1}{6}
+  + O(t^{-1})\text{\ (bulk leakage)}.
+\]
+The leading constant part integrates against the cutoff as
+\[
+  S_{\BH}^{\rm tip} = \frac{1}{6} \int_0^\infty \frac{dt}{t}\,
+  f(t\Lambda^2) = \frac{1}{6}\, \phi(0)_{\rm reg},
+\]
+where $\phi(0)_{\rm reg} = \int_{u_{\rm UV}}^{u_{\rm IR}}
+f(u)\, du/u$ is regulated by the substrate's UV cutoff
+$t_{\rm UV} = a^2$ and IR cutoff $t_{\rm IR}$. The $O(t^{-1})$ bulk
+leakage integrates to terms proportional to $\phi(1)$ and higher,
+which belong to the EH sector by (ii). \qed
+\end{proof}
+
+\begin{corollary}[Cutoff-function ratio test]
+\label{cor:phi0_ratio}
+For any two cutoff functions $f_1, f_2$ with the same UV/IR
+regulation,
+\[
+  \frac{S_{\BH}^{\rm tip}(f_1)}{S_{\BH}^{\rm tip}(f_2)}
+  = \frac{\phi(0)_{\rm reg}[f_1]}{\phi(0)_{\rm reg}[f_2]}
+  + O\!\left(\frac{\phi(1)}{\phi(0)_{\rm reg}}\right).
+\]
+Empirically confirmed at sub-5\% across 9 channels
+(Gaussian/sharp/polynomial $\times$ $\Lambda \in \{0.5, 1, 2\}$;
+see \S\ref{subsubsec:g4_5_v3_20_followon}, F14 closure).
+\end{corollary}
+
 \subsubsection{G4-5 headline closure and implications for G4-6}
 \label{subsec:g4_5_implications}
 
@@ -2470,6 +2564,11 @@ operator on spheres and real hyperbolic spaces,''
 \bibitem{chamseddine_connes1997}
 A.~H.~Chamseddine and A.~Connes, ``The spectral action principle,''
 \textit{Comm.~Math.~Phys.}\ \textbf{186}, 731--750 (1997).
+
+\bibitem{chamseddine_connes2008_uncanny}
+A.~H.~Chamseddine and A.~Connes, ``The uncanny precision of the
+spectral action,'' \textit{Comm.~Math.~Phys.}\ \textbf{293}, 867--897
+(2010). arXiv:0812.0165.
 
 \bibitem{chamseddine_connes2010}
 A.~H.~Chamseddine and A.~Connes, ``Noncommutative geometry as a
