@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "sprint": "Bridge Test 2 (final, v3): atomic correlation entropy modular? (calibrated)",
+    "question": "Is S_full(GS) in a modular / q-series ring (vs the spectral ring Track 5 used)?",
+    "context": "Track 5 PSLQ'd S against a SPECTRAL mechanical basis and got NULL. v3 ADDS the tau=i / q=e^{-2pi} modular ring (q-powers q,q^2,q^3 + e^-pi + lemniscatic logGamma(1/4)) and CALIBRATES precision/lattice: dps=500, hits judged by hard small-coeff cap (<=1000) to separate genuine identifications from over-large-lattice noise. v2 had flagged a SPURIOUS internal relation (coeffs ~1e5 at maxcoeff 1e6) -- v3 shows the basis is genuinely clean at trustworthy maxcoeff.",
+    "dps": 500,
+    "tol_exp": 120,
+    "hit_residual_threshold": "1e-120",
+    "trust_coeff_cap": 1000,
+    "calibration_rule": "trustworthy hit = (resid < 1e-120) AND (max|coeff| <= 1000); dps=500 gives N*log10(cap) ~ 60 << 500",
+    "protocol": "W3: freeze basis, validate machinery (controls), THEN read targets"
+  },
+  "spectral_basis": [
+    "1",
+    "pi^2",
+    "pi^4",
+    "pi^6",
+    "zeta3",
+    "zeta5",
+    "log2",
+    "log3",
+    "log5",
+    "Catalan",
+    "beta4",
+    "sqrt2",
+    "sqrt3",
+    "sqrt5"
+  ],
+  "modular_basis_added": [
+    "q_e^-2pi",
+    "q_e^-pi",
+    "q2_e^-4pi",
+    "q3_e^-6pi",
+    "logGamma14",
+    "log_pi"
+  ],
+  "full_basis": [
+    "1",
+    "pi^2",
+    "pi^4",
+    "pi^6",
+    "zeta3",
+    "zeta5",
+    "log2",
+    "log3",
+    "log5",
+    "Catalan",
+    "beta4",
+    "sqrt2",
+    "sqrt3",
+    "sqrt5",
+    "q_e^-2pi",
+    "q_e^-pi",
+    "q2_e^-4pi",
+    "q3_e^-6pi",
+    "logGamma14",
+    "log_pi"
+  ],
+  "n_spectral": 14,
+  "n_full": 20,
+  "basis_linear_cleanliness": {
+    "maxcoeff_for_check": 10000,
+    "pslq_returned_relation": false,
+    "max_abs_coeff_if_any": null,
+    "is_real_small_coeff_dependency": false,
+    "verdict": "CLEAN (no small-coeff internal relation)"
+  },
+  "positive_controls": {
+    "PC1_spectral_only": {
+      "intended_coeffs": {
+        "pi^2": 3,
+        "zeta3": -2,
+        "log2": 5
+      },
+      "hit": true,
+      "residual": "1.9507751e-500",
+      "max_abs_coeff": 5,
+      "relation_str": "1*CONTROL + -3*pi^2 + 2*zeta3 + -5*log2"
+    },
+    "PC2_modular_only": {
+      "intended_coeffs": {
+        "q_e^-2pi": 7,
+        "logGamma14": -3,
+        "log_pi": 2
+      },
+      "hit": true,
+      "residual": "0.0",
+      "max_abs_coeff": 7,
+      "relation_str": "1*CONTROL + -7*q_e^-2pi + 3*logGamma14 + -2*log_pi"
+    },
+    "PC3_mixed": {
+      "intended_coeffs": {
+        "zeta5": -1,
+        "Catalan": 4,
+        "q_e^-pi": -6,
+        "log_pi": 1
+      },
+      "hit": true,
+      "residual": "2.4384688e-501",
+      "max_abs_coeff": 6,
+      "relation_str": "1*CONTROL + 1*zeta5 + -4*Catalan + 6*q_e^-pi + -1*log_pi"
+    },
+    "PC4_cross_clean": {
+      "intended_coeffs": {
+        "1": 2,
+        "pi^4": -1,
+        "logGamma14": 3,
+        "sqrt3": -5
+      },
+      "hit": true,
+      "residual": "7.8031003e-500",
+      "max_abs_coeff": 5,
+      "relation_str": "-1*CONTROL + 2*1 + -1*pi^4 + -5*sqrt3 + 3*logGamma14"
+    },
+    "PC5_modular_entropy_shape": {
+      "intended_coeffs": {
+        "log3": 1,
+        "q_e^-2pi": 5,
+        "q2_e^-4pi": -2
+      },
+      "hit": true,
+      "residual": "4.5635712e-502",
+      "max_abs_coeff": 5,
+      "relation_str": "1*CONTROL + -1*log3 + -5*q_e^-2pi + 2*q2_e^-4pi"
+    },
+    "PC6_deep_qseries": {
+      "intended_coeffs": {
+        "q_e^-2pi": 1,
+        "q2_e^-4pi": -3,
+        "q3_e^-6pi": 4,
+        "beta4": -1
+      },
+      "hit": true,
+      "residual": "4.1911474e-502",
+      "max_abs_coeff": 4,
+      "relation_str": "1*CONTROL + 1*beta4 + -1*q_e^-2pi + 3*q2_e^-4pi + -4*q3_e^-6pi"
+    }
+  },
+  "positive_controls_all_hit": true,
+  "null_control": {
+    "value": "0.30472950187634281937",
+    "hit": false,
+    "residual": null,
+    "max_abs_coeff": null,
+    "verdict": "NULL (correct)"
+  },
+  "machinery_valid": true,
+  "spectral_only_target_check": {
+    "He_n3": {
+      "hit": false,
+      "residual": null,
+      "max_abs_coeff": null
+    },
+    "Li+_n3": {
+      "hit": false,
+      "residual": null,
+      "max_abs_coeff": null
+    },
+    "He_n4": {
+      "hit": false,
+      "residual": null,
+      "max_abs_coeff": null
+    }
+  },
+  "target_results": {
+    "He_n3": {
+      "any_trustworthy_hit": false,
+      "by_maxcoeff": {
+        "maxcoeff_1000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": false,
+          "residual": null,
+          "max_abs_coeff": null,
+          "note": "no relation",
+          "relation_str": null
+        },
+        "maxcoeff_10000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": false,
+          "residual": null,
+          "max_abs_coeff": null,
+          "note": "no relation",
+          "relation_str": null
+        },
+        "maxcoeff_1000000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": true,
+          "residual": "5.2136364e-118",
+          "max_abs_coeff": 960211,
+          "note": "lattice-noise (huge coeffs, NOT a hit)",
+          "relation_str": "-353572*TARGET + -343896*1 + -912858*pi^2 + -104220*pi^4 + 17897*pi^6 + 425080*zeta3 + -52695*zeta5 + -148801*log2 + -886968*log3 + 432523*log5 + -237070*Catalan + 145837*beta4 + 595963*sqrt2 + -15301*sqrt3 + 44105*sqrt5 + -80656*q_e^-2pi + 13931*q_e^-pi + -960211*q2_e^-4pi + 77228*q3_e^-6pi + 706765*logGamma14 + 424729*log_pi"
+        }
+      }
+    },
+    "Li+_n3": {
+      "any_trustworthy_hit": false,
+      "by_maxcoeff": {
+        "maxcoeff_1000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": false,
+          "residual": null,
+          "max_abs_coeff": null,
+          "note": "no relation",
+          "relation_str": null
+        },
+        "maxcoeff_10000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": false,
+          "residual": null,
+          "max_abs_coeff": null,
+          "note": "no relation",
+          "relation_str": null
+        },
+        "maxcoeff_1000000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": true,
+          "residual": "5.2834344e-118",
+          "max_abs_coeff": 830993,
+          "note": "lattice-noise (huge coeffs, NOT a hit)",
+          "relation_str": "72469*TARGET + -682624*1 + -830993*pi^2 + 105973*pi^4 + -523*pi^6 + -32933*zeta3 + 686583*zeta5 + 493196*log2 + -737717*log3 + 57189*log5 + 108580*Catalan + 115088*beta4 + -95944*sqrt2 + -198174*sqrt3 + -177397*sqrt5 + -287528*q_e^-2pi + -192797*q_e^-pi + 779587*q2_e^-4pi + -490174*q3_e^-6pi + -313401*logGamma14 + -137553*log_pi"
+        }
+      }
+    },
+    "He_n4": {
+      "any_trustworthy_hit": false,
+      "by_maxcoeff": {
+        "maxcoeff_1000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": false,
+          "residual": null,
+          "max_abs_coeff": null,
+          "note": "no relation",
+          "relation_str": null
+        },
+        "maxcoeff_10000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": false,
+          "residual": null,
+          "max_abs_coeff": null,
+          "note": "no relation",
+          "relation_str": null
+        },
+        "maxcoeff_1000000": {
+          "trustworthy_hit": false,
+          "pslq_returned_relation": true,
+          "residual": "7.8783596e-118",
+          "max_abs_coeff": 788237,
+          "note": "lattice-noise (huge coeffs, NOT a hit)",
+          "relation_str": "-514409*TARGET + 224725*1 + -711764*pi^2 + 203627*pi^4 + -15907*pi^6 + 675672*zeta3 + 442835*zeta5 + 86106*log2 + 28597*log3 + -35204*log5 + -249484*Catalan + -418093*beta4 + -12016*sqrt2 + 256121*sqrt3 + 262142*sqrt5 + -207658*q_e^-2pi + 234774*q_e^-pi + 228227*q2_e^-4pi + 68490*q3_e^-6pi + -240181*logGamma14 + 788237*log_pi"
+        }
+      }
+    }
+  },
+  "cross_ratio_check": {
+    "He_n3/Li+_n3": {
+      "value": "3.64003550519747988161575127953",
+      "trustworthy_hit": false,
+      "max_abs_coeff": null
+    },
+    "He_n3/He_n4": {
+      "value": "0.974489177121636619509489616456",
+      "trustworthy_hit": false,
+      "max_abs_coeff": null
+    },
+    "He_n4/Li+_n3": {
+      "value": "3.73532676468414729371207044114",
+      "trustworthy_hit": false,
+      "max_abs_coeff": null
+    }
+  },
+  "verdict": "TARGETS NULL against spectral+modular basis with VALID machinery (only over-large-lattice noise at maxcoeff 1e6, NOT genuine hits) -> correlation entropy genuinely not in this ring (spectral OR modular) -> Track 5 hardened; the bridge stops at correlation entropy",
+  "headline": "headline-dead-Track-5-hardened"
+}

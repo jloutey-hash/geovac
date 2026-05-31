@@ -1,0 +1,39 @@
+{
+ "dps": 60,
+ "maxcoeff": 100000000,
+ "basis": [
+  "1",
+  "log2",
+  "log3",
+  "log5",
+  "log7",
+  "logpi",
+  "logGamma14",
+  "log_varpi",
+  "pi",
+  "pi2",
+  "zeta3",
+  "zeta3_over_pi2",
+  "varpi",
+  "G14",
+  "catalan",
+  "e^-pi",
+  "e^-2pi"
+ ],
+ "He_n3": {
+  "label": "He_n3",
+  "verdict": "NULL"
+ },
+ "Li+_n3": {
+  "label": "Li+_n3",
+  "verdict": "NULL"
+ },
+ "He_n4": {
+  "label": "He_n4",
+  "verdict": "NULL"
+ },
+ "null_control": {
+  "label": "null_control",
+  "verdict": "NULL"
+ }
+}

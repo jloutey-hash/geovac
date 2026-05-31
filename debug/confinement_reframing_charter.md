@@ -187,3 +187,33 @@ THE MATCHED-GEOMETRY APERTURE TEST (the payoff): He and a heteronuclear molecule
 - debug/hopf_fiber_aperture.py + debug/data/hopf_fiber.txt   (Berger-sphere fiber aperture; SU(2)->E(2) leg)
 - debug/R_aperture.py + debug/data/R_aperture.txt            (internuclear R; fission aperture, 2nd species)
 - debug/bargmann_avery_s5.py                                 (Bargmann=holomorphic slice of Avery S^5; matched-geometry aperture test)
+
+---
+
+## 7. Entropy inventory — the bridge sprint (2026-05-30)
+
+The inventory of §3 was tested directly. Asking which entropies map to which seam, and whether one *bridge* connects them, returned a sharp edge instead of a blur: **there are two species of confinement entropy and they live in mathematically disjoint worlds. Only one is bridged.**
+
+### Three verified results (debug/bridge_test{1,2,3}_*.py, debug/data/bridge_test*.json)
+
+| Test | Object | Result | Verdict |
+|:-----|:-------|:-------|:--------|
+| **1** | wedge KMS (thermal) entropy at BW point β=2π | S(ρ_W) = **log(g₁) + q-series**, q=e⁻²ᵖ; g₁=n_max(n_max+1); S=log{6,12,20,30} for n_max=2..5; reconstructs to 10⁻¹⁶; diverges as log(n_max) = **Species-I aperture signature** | PASS — thermal entropy is **modular**, dominated by Boltzmann log-of-integer |
+| **3** | the two analytic faces of the wedge partition function | discrete (q-series) face and continuum (Bernoulli/Mellin) face rebuild the same Z (resid 0.0 / 5e-18); continuum coeffs **are** Bernoulli (resid 0.0); ζ(2k)=π²ᵏ·Bernoulli to 1e-61 | PASS — **the thermal bridge IS the functional equation** = GB-4 two-window duality / Bernoulli ladder (idealized constant-degeneracy wedge; GeoVac-degeneracy version awaits MR-B Jacobi theta inversion) |
+| **2** | atomic correlation entropy S_full(GS) (Track 5: He n3 0.040811…, Li⁺ 0.011212…, He n4) | calibrated PSLQ (dps≥250, 6 positive controls all HIT incl. one of modular log+q form, null-control NULL, machinery_valid=True) → **targets NULL** against spectral+modular basis | PASS (clean negative) — correlation entropy is **ring-orphan**: not spectral, not modular |
+
+### The structural finding
+
+- **Thermal-confinement entropy** (ρ = Gibbs state of D) → **modular** (q = e⁻²ᵖ), dominated by Boltzmann log-degeneracy, **bridged** to its continuum face by the **functional equation**. Spectral-side / D-data.
+- **Geometric-confinement entropy** (ρ = spatial bipartition, no modular relation to D) → **ring-orphan**, von Neumann of algebraic 1-RDM occupations, **no bridge reaches it**. State-side / ρ-data. Joins K, the L2 constant c, and the Wolfenstein parameters as a natural-but-ring-orphan constant.
+- **Discriminant** (guessed at sprint start, survived every test): **"is ρ a Gibbs state of D?"** That is the line between the two species.
+
+### What this does to the thesis
+
+"Every entropy is confinement" is **sharpened, not confirmed**. The monolithic reading would predict one unified entropy. The data says confinement entropy comes in (at least) **two species with disjoint arithmetic homes**, and only the thermal one has a discrete↔continuum bridge. This is more falsifiable than the monolith. It does **not** yet predict past the known (Test 2 is a negative; the thermal bridge is a known-mechanism identification). The candidate thesis still needs a *prediction*.
+
+### Honest scope / open
+
+- Test 3 is the **idealized** constant-degeneracy wedge. GeoVac-specific growing degeneracies need the real Jacobi theta inversion — `debug/mr_b_modular_residual_high_prec.py` is the existing machinery. **Open follow-on.**
+- Test 2 is a clean negative at the tested basis/ceiling; "ring-orphan" means *no closed form in spectral∪modular rings*, not a proof of transcendental independence.
+- **Methodological note:** the sprint mid-run produced fabricated phantom results (caught + retracted) and twice hit PSLQ basis-degeneracy pathologies (caught by positive-control gates). The positive-control discipline is what makes the Test 2 negative trustworthy rather than an instrument artifact. Audit-every-numerical-claim earned its keep.

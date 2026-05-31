@@ -1,0 +1,23 @@
+{
+ "beta": "0.5",
+ "Z_exact": "0.9595173756674718597461014",
+ "discrete_qseries_face": "0.9595173756674718597461014",
+ "continuum_bernoulli_face": "0.9595173756674718651190044",
+ "discrete_resid": "0.0",
+ "continuum_resid": "5.373e-18",
+ "continuum_coeffs_are_Bernoulli_resid_k0to5": [
+  "0.0",
+  "0.0",
+  "0.0",
+  "0.0",
+  "0.0",
+  "0.0"
+ ],
+ "functional_eqn_zeta2k_eq_pi2k_Bernoulli_resid_k1to5": [
+  "3.11e-61",
+  "1.56e-61",
+  "3.11e-61",
+  "3.11e-61",
+  "3.11e-61"
+ ]
+}

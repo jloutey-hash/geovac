@@ -1,0 +1,97 @@
+{
+ "dps": 220,
+ "basis": [
+  "1",
+  "log2",
+  "log3",
+  "log5",
+  "log7",
+  "logpi",
+  "logGamma14",
+  "log_varpi",
+  "pi",
+  "pi2",
+  "zeta3",
+  "varpi",
+  "G14",
+  "catalan",
+  "e^-pi",
+  "e^-2pi"
+ ],
+ "runs": {
+  "maxcoeff_10000": {
+   "POS_ctrl_1": {
+    "label": "POS_ctrl_1",
+    "verdict": "NULL"
+   },
+   "POS_ctrl_2_log6": {
+    "label": "POS_ctrl_2",
+    "verdict": "HIT",
+    "max_abs_coeff": 1,
+    "residual": "0.0",
+    "terms": {
+     "x": 1,
+     "log2": -1,
+     "log3": -1
+    }
+   },
+   "POS_ctrl_3": {
+    "label": "POS_ctrl_3",
+    "verdict": "NULL"
+   },
+   "He_n3": {
+    "label": "He_n3",
+    "verdict": "NULL"
+   },
+   "Li+_n3": {
+    "label": "Li+_n3",
+    "verdict": "NULL"
+   },
+   "He_n4": {
+    "label": "He_n4",
+    "verdict": "NULL"
+   },
+   "NULL_ctrl": {
+    "label": "NULL_ctrl",
+    "verdict": "NULL"
+   }
+  },
+  "maxcoeff_1000000": {
+   "POS_ctrl_1": {
+    "label": "POS_ctrl_1",
+    "verdict": "NULL"
+   },
+   "POS_ctrl_2_log6": {
+    "label": "POS_ctrl_2",
+    "verdict": "HIT",
+    "max_abs_coeff": 1,
+    "residual": "0.0",
+    "terms": {
+     "x": 1,
+     "log2": -1,
+     "log3": -1
+    }
+   },
+   "POS_ctrl_3": {
+    "label": "POS_ctrl_3",
+    "verdict": "NULL"
+   },
+   "He_n3": {
+    "label": "He_n3",
+    "verdict": "NULL"
+   },
+   "Li+_n3": {
+    "label": "Li+_n3",
+    "verdict": "NULL"
+   },
+   "He_n4": {
+    "label": "He_n4",
+    "verdict": "NULL"
+   },
+   "NULL_ctrl": {
+    "label": "NULL_ctrl",
+    "verdict": "NULL"
+   }
+  }
+ }
+}
