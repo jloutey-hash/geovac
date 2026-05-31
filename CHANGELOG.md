@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.33.0] - 2026-05-31
+
+### Added
+- **Sprint G4a: Full Connes Standard Model on the GeoVac spectral triple.** Extended Sprint H1's electroweak slice (A_F = ℂ ⊕ ℍ, dim H_F = 8) to the full Connes-Chamseddine-Marcolli finite algebra A_F = ℂ ⊕ ℍ ⊕ M₃(ℂ) with dim H_F = 32 (16 matter + 16 antimatter).
+  - **Gauge group recovery:** Inner fluctuations of the combined triple T_GV ⊗ T_F^SM decompose into U(1) × SU(2) × SU(3) gauge 1-forms + Higgs scalar field. Verified by census at n_max=2 (30 random (a,b) pairs). SU(3) color content confirmed via Gell-Mann projection onto 8 generators.
+  - **Connes axioms bit-exact:** J² = -I, JD = +DJ, order-zero [a, JbJ⁻¹] = 0, order-one [[D,a], JbJ⁻¹] = 0 — all residual 0.0 at n_max ∈ {1, 2}. Finite-triple axioms (J_F² = +I, {J_F, γ_F} = 0, {γ_F, D_F} = 0) verified independently.
+  - **Falsifier result:** Higgs sector non-trivial when Yukawa imposed (higgs/gauge ratio = 0.003); identically zero when Y = 0. Construction works — the falsifier does NOT fire.
+  - **Structural decoupling:** Matter-antimatter off-diagonal = 0 (from π_F acting on matter only). Lepton-quark off-diagonal = 0 (M₃ trivial on color singlets). Both verified to machine precision.
+  - **H1 consistency:** SM lepton-sector Yukawa and chirality match the H1 electroweak triple bit-exactly.
+  - **Verdict: POSITIVE-THIN.** The G2-G3 corollary generalizes: Yukawa, hypercharge assignment, chirality assignment, and generation count are all imposed inputs (Paper 18 calibration tier). The framework is SM-consistent, not SM-selecting. Adding M₃(ℂ) introduces SU(3) but does not change the Yukawa-undetermined structural fact.
+- **New module `geovac/standard_model_triple.py`** (~530 lines): `StandardModelFiniteTriple` (32D), `StandardModelACTriple` (combined T_GV ⊗ T_F^SM), inner-fluctuation decomposition, gauge-group census, color-content extraction, axiom verification, falsifier check. Gell-Mann matrices as infrastructure.
+- **Test suite `tests/test_standard_model_triple.py`** (45 tests): Gell-Mann (5), finite triple (14), combined axioms (10), gauge group (3), falsifier (3), decomposition (3), color content (1), H1 consistency (2), constructors (3). All passing.
+
+### Changed
+- **G4a status:** CLOSED at POSITIVE-THIN verdict. Paper 32 §VIII.C G4a entry now has computational backing. G4b (cross-manifold T_{S³} ⊗ T_{S⁵}) remains open and structurally blocked at NCG-framework level.
+
 ## [3.32.0] - 2026-05-31
 
 ### Added

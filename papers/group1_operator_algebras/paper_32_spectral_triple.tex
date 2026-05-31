@@ -3329,9 +3329,12 @@ undetermined because $\gamma_{\mathrm{GV}}$ and $\gamma_F$ are
 independent commuting $\mathbb{Z}_2$ gradings on the tensor product
 (G3 NEGATIVE).
 \item G4 splits cleanly:\ G4a (Connes SM on $\mathcal{T}_{S^3}$
-alone with $M_3(\mathbb{C})$) is a 1--2~month sprint with predicted
-positive-thin outcome;\ G4b (genuine cross-manifold) is blocked at
-the NCG-framework level by the Coulomb/HO structural asymmetry.
+alone with $M_3(\mathbb{C})$) is \textbf{closed at POSITIVE-THIN}
+(2026-05-31):\ $\mathrm{U}(1) \times \mathrm{SU}(2) \times
+\mathrm{SU}(3)$ recovered from inner fluctuations, all Connes axioms
+bit-exact, Yukawa/hypercharge/generations remain imposed;\ G4b
+(genuine cross-manifold) is blocked at the NCG-framework level by the
+Coulomb/HO structural asymmetry.
 \item G1 (three generations) is unchanged from H1:\ formally
 definable, not selected by GeoVac structure.
 \end{itemize}
@@ -3343,11 +3346,31 @@ on each of those choices.  This is a clean structural verdict, in
 the sense of CLAUDE.md~\S 1.5:\ the framework is consistent with a
 GeoVac SM construction, but the framework does not select one.
 
-\paragraph{Files.}  Memo
+\paragraph{G4a closure (Sprint G4a, 2026-05-31).}
+The full Connes SM finite algebra
+$\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$
+has been implemented and verified on
+$\mathcal{T}_{S^3}$ at $n_{\max} \in \{1, 2\}$ with
+$\dim \mathcal{H}_F = 32$ (16 matter + 16 antimatter).
+All five Connes axioms ($J^2 = -I$, $JD = +DJ$, Hermiticity,
+order-zero, order-one) pass at zero residual.
+Inner fluctuations decompose into
+$\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$
+gauge 1-forms plus a Higgs scalar that is non-trivial whenever the
+Yukawa-Dirac off-diagonal blocks are imposed and identically zero
+otherwise.  Matter-antimatter and lepton-quark cross-sectors decouple
+exactly.  The predicted POSITIVE-THIN verdict is confirmed:
+the construction admits the full SM gauge content with imposed
+Yukawa, hypercharge, and generation choices, and the GeoVac data is
+silent on each of those choices.
+Module \texttt{geovac/standard\_model\_triple.py} ($\sim 530$ lines),
+45 tests passing.
+
+\paragraph{Files.}  Scoping memo
 \texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
-($\sim 5\,100$ words);\ no production module created (consistent
-with the FAR verdict and the §1.5 rhetoric rule).  G4a sprint is
-queued as the follow-up;\ G4b is recorded as an open structural
+($\sim 5\,100$ words).  G4a sprint memo
+\texttt{debug/sprint\_g4a\_connes\_sm\_memo.md}.
+G4b is recorded as an open structural
 question.
 
 % -------------------------------------------------------------------

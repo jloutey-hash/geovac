@@ -142,6 +142,8 @@
 | Wilson/graph-Hodge dictionary | 25 | Sec II.E | Synthesis |
 | Lattice gauge theory on Fock-projected S³ | 25 | Sec III, VI | Synthesis |
 | Why the lattice-gauge / graph-Hodge gap remained | 25 | Sec VI.D | Synthesis |
+| Connes Standard Model (full SM on T_{S³}) | 32 | Sec VIII.C (G4a) | On-topic |
+| SM gauge group U(1)×SU(2)×SU(3) from inner fluctuations | 32 | Sec VIII.C (G4a) | On-topic |
 | SU(3) gauge on Bargmann-Segal S⁵ (open question) | 25 | Sec VII.A | Synthesis |
 | Rank-2 Breit as 2-form gauge (open question) | 25 | Sec VII.B | Synthesis |
 | Potential-independent angular sparsity | 22 | All | Core |
