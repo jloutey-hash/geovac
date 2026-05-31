@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.32.0] - 2026-05-31
+
+### Added
+- **Sprint G6-Full: Graviton Fierz-Pauli from discrete spectral action.** Compressed multi-month G6 scoping into one sprint via CG-algebraic approach (SO(4)-projected finite-dimensional quadratic form, no integrals). Three structural findings:
+  - **(1) Bit-exact integer kinetic spectrum.** The discrete Laplacian ||[D,V]||^2 on the (1,1) graviton irrep subspace gives eigenvalues exactly (2k)^2 (k=1,2,3,4) with multiplicities (72, 36, 36, 36) at n_max=3. Ratios 1:4:9:16 — the squared eigenvalue-differences of the CH Dirac are exact integers.
+  - **(2) Correct Seeley-DeWitt sign structure.** The A_1 coefficient (Einstein-Hilbert content) of the SD expansion of S^(2)(t) is positive for physical graviton modes and negative for gauge/trace modes. A_0 approximately zero for all modes (TT / volume-preserving). No fitting.
+  - **(3) Convergence toward Lichnerowicz.** Lambda sweep: first positive-eigenvalue ratio 2.209 at Lambda^2=4 (multiplicity 24), within 2% of the continuum Lichnerowicz ratio 13/6 = 2.167. Clean resolution at higher n_max would fully establish the convergence.
+- **Graviton three-layer structure identified.** Layer 1 (skeleton): integer kinetic spectrum (2k)^2 — algebraic, zero parameters. Layer 2 (projection): spectral action Gaussian selects specific combination, Lichnerowicz emerges as SD expansion coefficient. Layer 3 (convergence): as n_max -> infinity, SD expansion becomes exact. Same three-layer pattern as the rest of GeoVac.
+- **Infrastructure.** `debug/g6_graviton_projected.py` (~250 lines): SO(4)-projected graviton computation via CG coefficients (sympy) + finite-difference S^(2). Validated against G6-Diag analytical sector formulas to 6 significant figures.
+
+### Changed
+- **G6 status:** Upgraded from "G6-Diag-Full POSITIVE (necessary condition)" to "G6-Full POSITIVE-STRUCTURAL (three algebraic findings)." Multi-month Paths P1/P2/P3 from the scoping memo are all SUPERSEDED by the CG-algebraic approach.
+- All three G6 scoping paths (P1: gamma-matrix re-derivation, P2: bilinear extension, P3: external hybrid) are now unnecessary — the discrete substrate hosts gravitons natively via the integer-kinetic + SD-projection mechanism.
+
 ## [3.31.0] - 2026-05-31
 
 ### Closed
