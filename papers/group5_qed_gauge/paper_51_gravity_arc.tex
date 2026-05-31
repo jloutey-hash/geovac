@@ -77,7 +77,16 @@ $S_{\BH} = A \Lambda^2/(12 \pi)$ (G4-2). The kinetic graviton sector
 of the $(1,1)$ irrep of $SO(4) = SU(2) \times SU(2)$ admits physical
 modes with positive kinetic eigenvalue after gauge-orbit
 classification via $V = i[X, D_0]$, satisfying the necessary
-condition for graviton dynamics (G6-Diag-Full). The Newton constant
+condition for graviton dynamics (G6-Diag-Full). The subsequent
+Fierz--Pauli analysis (G6-FP) decomposes the $(1,1)$ subspace under
+the diagonal $SU(2)$ into $J{=}0 \oplus J{=}1 \oplus J{=}2$ and
+proves a $J$-blindness theorem: the spectral action $S^{(2)}$ has
+identical eigenvalue spectra across all three $J$-sectors, by
+Schur's lemma from the $SO(4)$ invariance of the trace functional.
+The Fierz--Pauli decomposition (TT vs.\ trace vs.\ longitudinal)
+therefore requires the metric identification $\delta D \leftrightarrow
+\delta g_{\mu\nu}$, not just the spectral action.
+The Newton constant
 $\Geff = 6\pi/\Lambda^2$ and the cosmological constant $\Lcc = 6\Lambda^2$
 emerge from the G2 coefficients (G7), with the standard
 cosmological-constant-scale gap inherited from Connes--Chamseddine.
@@ -209,6 +218,19 @@ The continuum arc produces the following structural results.
         tested $n_{\max} \in \{1, 2, 3\}$, satisfying the necessary
         condition for graviton dynamics on the discrete substrate.
 
+  \item \textbf{Fierz--Pauli decomposition and $J$-blindness} (G6-FP):
+        the $(1, 1)$ subspace decomposes under the diagonal
+        $SU(2) \subset SU(2)_L \times SU(2)_R$ as
+        $J{=}0 \oplus J{=}1 \oplus J{=}2$
+        (trace + antisymmetric + graviton). The spectral-action
+        second variation $S^{(2)}$ is
+        $J$-blind: identical eigenvalues across all three sectors,
+        with cross-sector multiplicities scaling as $1{:}3{:}5$
+        (Schur's lemma). The Fierz--Pauli decomposition (TT vs.\
+        trace vs.\ longitudinal) requires the metric identification,
+        not just the spectral action. This structurally closes the
+        graviton program at the spectral-action level.
+
   \item \textbf{Newton constant and cosmological constant} (G7):
         $\Geff = 6\pi/\Lambda^2$ and $\Lcc = 6\Lambda^2$ for Gaussian
         cutoff. The cosmological-constant-scale gap of $\sim 10^{120}$
@@ -245,7 +267,9 @@ The discrete-substrate arc opens with G4-3:
 The paper is organized as follows. Section~\ref{sec:substrate}
 recalls the GeoVac substrate background needed for the gravity arc.
 Sections~\ref{sec:g1} through \ref{sec:g8} document the continuum
-sprints in order. Section~\ref{sec:g4_3} opens the discrete-substrate
+sprints in order, with Section~\ref{sec:fierz_pauli} presenting
+the Fierz--Pauli decomposition and the $J$-blindness theorem.
+Section~\ref{sec:g4_3} opens the discrete-substrate
 program. Section~\ref{sec:discussion} discusses the
 structural-skeleton-scope reading of the framework's gravity
 predictions, and section~\ref{sec:open} lists open questions.
@@ -697,11 +721,145 @@ condition for graviton dynamics is satisfied.
 \end{proposition}
 
 \paragraph{Honest scope.} This is a necessary condition, not
-sufficient. The full Fierz--Pauli decomposition of the $(1, 1)$ irrep
-into TT (2 polarizations) + L (3 longitudinal) + T (1 trace) + 3
-mixings is a multi-month commitment (G6 full); 7 of 9 modes within
-each $(1, 1)$ block are gauge/longitudinal/scalar pieces. G6-Diag-Full
-establishes only that the physical sector exists with the right sign.
+sufficient. The Fierz--Pauli decomposition within the $(1, 1)$ irrep
+is addressed in Section~\ref{sec:fierz_pauli}.
+
+% =====================================================================
+\section{Fierz--Pauli decomposition within $(1, 1)$ (G6-FP)}
+\label{sec:fierz_pauli}
+% =====================================================================
+
+The $(1, 1)$ irrep of $SO(4) = SU(2)_L \times SU(2)_R$ decomposes
+under the diagonal $SU(2) \subset SU(2)_L \times SU(2)_R$ as
+\begin{equation}
+  (1, 1) = J{=}0 \;\oplus\; J{=}1 \;\oplus\; J{=}2.
+  \label{eq:j_decomp}
+\end{equation}
+Physically, $J{=}0$ (1~dim) is the trace/conformal mode, $J{=}1$
+(3~dim) is the antisymmetric tensor (not a metric perturbation), and
+$J{=}2$ (5~dim) is the symmetric traceless tensor containing the
+graviton.
+
+\subsection{Dimensions}
+
+\begin{center}
+\begin{tabular}{ccccccc}
+\hline
+$n_{\max}$ & $\dim H$ & $J{=}0$ & $J{=}1$ & $J{=}2$ & Total \\
+\hline
+1 & 16 & 6 & 14 & 26 & 46 \\
+2 & 40 & 16 & 40 & 72 & 128 \\
+3 & 80 & 26 & 66 & 118 & 210 \\
+4 & 140 & 36 & 92 & 164 & 292 \\
+\hline
+\end{tabular}
+\end{center}
+
+Within-sector modes (where $\|[D_0, V]\|^2 = 0$) scale as
+$1{:}1{:}3$ across $J = 0, 1, 2$ rather than the na\"ive $1{:}3{:}5$,
+because Hermitianisation $(V + V^T)/2$ eliminates 4 of 9 modes per
+within-sector block (each block contributes $1 + 1 + 3 = 5$ modes
+instead of $1 + 3 + 5 = 9$).
+
+\subsection{J-blindness theorem}
+
+\begin{theorem}[$J$-blindness of $S^{(2)}$]
+\label{thm:j_blindness}
+The Gaussian spectral-action second variation $S^{(2)}$ restricted to
+the $(1, 1)$ subspace of $\mathrm{Herm}(H_{n_{\max}})$ has identical
+eigenvalue spectra across $J = 0, 1, 2$. For cross-sector modes,
+eigenvalue multiplicities scale as $\dim(J) = 1{:}3{:}5$.
+\end{theorem}
+
+\begin{proof}
+The spectral action $S = \mathrm{Tr}(f(D^2/\Lambda^2))$ is invariant
+under unitary conjugation $D \mapsto UDU^*$, hence under the
+$SO(4)$ symmetry of $D_0$ and in particular under the diagonal
+$SU(2)$. The second variation $S^{(2)}$ is therefore equivariant
+under diagonal $SU(2)$. By Schur's lemma, $S^{(2)}$ is proportional
+to the identity on each irreducible $J$-component within a given
+sector pair $(a, b)$, with proportionality constant
+\begin{equation}
+  w(\lambda_a, \lambda_b) =
+  \begin{cases}
+    e^{-\lambda_a^2/\Lambda^2}
+    (4\lambda_a^2/\Lambda^4 - 2/\Lambda^2)
+    & \lambda_a = \lambda_b, \\[4pt]
+    \dfrac{(\lambda_a + \lambda_b)^2}{\Lambda^4}\,
+    \dfrac{\Lambda^2(a_a - a_b)}{\lambda_b^2 - \lambda_a^2}
+    - \dfrac{a_a + a_b}{\Lambda^2}
+    & \lambda_a \neq \lambda_b,
+  \end{cases}
+  \label{eq:s2_weight}
+\end{equation}
+where $a_k = e^{-\lambda_k^2/\Lambda^2}$. This weight depends only on
+the eigenvalues $\lambda_a, \lambda_b$ of $D_0$, not on the angular
+quantum numbers or on $J$.
+\end{proof}
+
+Numerical verification: the analytical formula~\eqref{eq:s2_weight}
+matches the five-point central-difference stencil to relative error
+$1.24 \times 10^{-6}$ at $n_{\max} = 2$.
+
+\paragraph{Eigenvalue table at $n_{\max} = 3$, $\Lambda^2 = 6$.}
+At $n_{\max} = 3$, the $J = 2$ sector has $\dim = 118$ and
+the $S^{(2)}$ eigenvalue clusters are:
+\begin{center}
+\begin{tabular}{ccccc}
+\hline
+$S^{(2)}$ value & $J{=}0$ mult & $J{=}1$ mult & $J{=}2$ mult & Ratio \\
+\hline
+$+0.1334$ & 2 & 2 & 6 & $1{:}1{:}3$ \\
+$+0.1274$ & 2 & 2 & 6 & $1{:}1{:}3$ \\
+$+0.1214$ & 4 & 12 & 20 & $1{:}3{:}5$ \\
+$+0.0961$ & 4 & 12 & 20 & $1{:}3{:}5$ \\
+$+0.0656$ & 2 & 2 & 6 & $1{:}1{:}3$ \\
+$-0.0253$ & 4 & 12 & 20 & $1{:}3{:}5$ \\
+$-0.0743$ & 4 & 12 & 20 & $1{:}3{:}5$ \\
+$-0.1594$ & 4 & 12 & 20 & $1{:}3{:}5$ \\
+\hline
+\end{tabular}
+\end{center}
+Each eigenvalue appears in \emph{every} $J$-sector at the same value.
+Within-sector modes ($\|[D_0,V]\|^2 = 0$) show the $1{:}1{:}3$
+multiplicity pattern; cross-sector modes show the full $1{:}3{:}5$.
+
+\subsection{Implications for graviton physics}
+
+The $J$-blindness theorem draws a sharp scope boundary:
+
+\begin{itemize}
+  \item \textbf{Accessible from $S^{(2)}$:}
+        existence of positive kinetic modes (Prop.~\ref{prop:graviton_physical}),
+        bit-exact integer kinetic spectrum~$(2k)^2$,
+        correct Seeley--DeWitt $a_1$ sign structure,
+        2\% approach to the Lichnerowicz ratio $13/6$.
+  \item \textbf{Not accessible from $S^{(2)}$:}
+        distinction between TT (2~DOF), longitudinal (3~DOF), and trace (1~DOF)
+        within $(1, 1)$; the Fierz--Pauli mass structure;
+        the identification of which modes are physical gravitons.
+  \item \textbf{Source of the missing structure:}
+        the metric identification $\delta D \leftrightarrow \delta g_{\mu\nu}$
+        (inner fluctuation / Connes--Chamseddine dictionary), which breaks
+        $SO(4) \to SO(3)$ and distinguishes symmetric from antisymmetric
+        perturbations. On the discrete substrate, this identification emerges
+        in the propinquity limit (Paper~38).
+\end{itemize}
+
+The theorem unifies three earlier diagnostics:
+GD-5's irrep-blindness (special case for within-sector modes),
+GD-1's $9 \to 2$ reduction as a continuum phenomenon (consistent with
+$J$-blindness: the spectral action alone does not reduce degrees of
+freedom within $(1, 1)$), and
+GD-4's helicity question (irrelevant at the $S^{(2)}$ level since
+$J$-blindness makes all helicities equivalent).
+
+\paragraph{Structural closing of G6 at the spectral-action level.}
+The $J$-blindness theorem shows that $S^{(2)}$ has extracted all
+information available from the $(1, 1)$ subspace via the spectral
+action alone. Further graviton physics (TT isolation, propagator,
+linearised Einstein equations) requires the metric identification,
+which is a propinquity-level construction.
 
 % =====================================================================
 \section{Newton constant and cosmological constant from G2 (G7)}
@@ -2491,9 +2649,11 @@ ratios $1{:}4{:}9{:}16$; (ii)~the Seeley--DeWitt $a_1$ coefficient
 (Einstein--Hilbert content) is positive for physical modes and
 negative for gauge modes; (iii)~the $\Lambda$-sweep at $\Lambda^2 = 4$
 gives first positive-eigenvalue ratio $2.209$, within $2\%$ of the
-Lichnerowicz ratio $13/6 = 2.167$.  Clean resolution of the full
-Lichnerowicz spectrum requires $n_{\max} \geq 5$; the multi-month Paths
-P1--P3 from the scoping memo are superseded by the algebraic approach.
+Lichnerowicz ratio $13/6 = 2.167$.  The Fierz--Pauli decomposition
+(Section~\ref{sec:fierz_pauli}) further establishes that $S^{(2)}$ is
+$J$-blind within $(1, 1)$ (Theorem~\ref{thm:j_blindness}):
+the spectral action has extracted all the graviton information it can,
+and the TT~vs.~trace distinction requires the metric identification.
 
 \paragraph{Q5.} The choice of cutoff function (Class~1 calibration
 data per G8) is structurally external. Whether GeoVac admits an

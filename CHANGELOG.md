@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.34.0] - 2026-05-31
+
+### Added
+- **Sprint G6-FP: Fierz-Pauli decomposition of the (1,1) graviton subspace.** Decomposed the (1,1) irrep of SO(4) under diagonal SU(2) ⊂ SU(2)_L × SU(2)_R into J=0 (trace, 1 dim) ⊕ J=1 (antisymmetric, 3 dim) ⊕ J=2 (symmetric-traceless/graviton, 5 dim). Computed S^(2) analytically (no stencil) within each J-sector at n_max=1..4.
+  - **J-blindness theorem (Theorem, Schur's lemma).** The spectral-action second variation S^(2) has identical eigenvalue spectra across J=0, J=1, J=2. Cross-sector multiplicities scale as 1:3:5 = dim(J). Proved by SO(4) invariance of Tr(f(D²/Λ²)) + Schur's lemma on the diagonal SU(2) action. Verified numerically at n_max=1,2,3,4.
+  - **Analytical S^(2) weight formula.** Closed-form w(λ_a, λ_b) for both same-eigenvalue and different-eigenvalue sector pairs. Validated against 5-point central-difference stencil to 1.24×10⁻⁶ relative error at n_max=2.
+  - **Multiplicity structure.** Within-sector modes scale as 1:1:3 (not 1:3:5) because Hermitianisation eliminates 4 of 9 modes per block (antisymmetric content killed by (V+V^T)/2). Cross-sector modes show the full 1:3:5 = dim(J) scaling.
+  - **Scope boundary established.** The spectral action provides: existence of positive kinetic modes, bit-exact (2k)² integer spectrum, correct SD A₁ sign structure, 2% Lichnerowicz approach. The spectral action CANNOT provide: TT vs trace vs longitudinal distinction, Fierz-Pauli mass structure, graviton polarization identification. The missing structure is the metric identification δD ↔ δg_μν (Connes-Chamseddine dictionary), which breaks SO(4) → SO(3) and emerges in the propinquity limit.
+  - **Unifies GD-1/4/5.** J-blindness subsumes GD-5 irrep-blindness (special case for within-sector), GD-1 (9→2 as continuum phenomenon), and GD-4 (helicity question irrelevant at S^(2) level).
+- **New driver `debug/g6_fierz_pauli.py`**: analytical S^(2) computation with diagonal-SU(2) CG decomposition, Gram-Schmidt orthogonalisation per J-sector, discrete Laplacian, within/cross-sector census. Runs n_max=1..4 in 3 seconds.
+- **Data `debug/data/g6_fierz_pauli.json`**: full eigenvalue data across n_max and J-sectors.
+
+### Changed
+- **Paper 51 extended** (36 → 37 pages, three-pass clean):
+  - New §6.5 "Fierz-Pauli decomposition within (1,1)" with Theorem (J-blindness), proof, dimensions table, concrete eigenvalue table at n_max=3, implications subsection, and structural-closing paragraph.
+  - Abstract updated with FP summary (J-blindness, metric identification scope boundary).
+  - Introduction item list: new item 6a (Fierz-Pauli and J-blindness) between G6-Diag-Full and G7.
+  - §6 honest scope paragraph shortened to forward-reference §6.5.
+  - Q4 paragraph updated to reference J-blindness theorem.
+- **CLAUDE.md** v3.33.0 → v3.34.0: §2 sprint entry, gravity arc bullet.
+
+### Closed
+- **G6 at the spectral-action level:** The J-blindness theorem shows that S^(2) has extracted ALL information available from the (1,1) subspace via the spectral action alone. The "multi-month G6" recharacterised: further graviton physics is a propinquity/CC-dictionary task, not a deeper spectral-action computation.
+
 ## [3.33.0] - 2026-05-31
 
 ### Added
