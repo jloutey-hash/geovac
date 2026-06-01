@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.38.0] - 2026-06-01
+
+### Added
+- **Tensor-product spectral action generates genuine two-body interaction.** Built D_total = D₁⊗I + γ₁⊗D₂ on the chirality-doubled scalar S³ basis at n_max=2,3. Free D²_total factorizes exactly ({D,γ}=0 analytically, verified numerically). The GAUGED operator (D+A)² with inner fluctuation A = Σ aᵢ[D,bᵢ] from the 3-Y multiplier algebra has **75% connected (non-factorizable) fraction** — a genuine, irreducibly two-body interaction. Stable across n_max (75.7% → 74.3%). Angular decomposition: 100% m-conserving, k=0 monopole dominant (96.5–100%), k=2 quadrupole appears at n_max=3 (3.5%), k=1 dipole absent (correct for identical particles). Gaunt-compatible 100% at n_max=2, 65% at n_max=3 (single-multiplier gauge field; full algebra sum expected to recover 100%). Hermiticity and exchange symmetry exact (0.00 error). Drivers: `debug/tensor_product_dirac.py`, `debug/tensor_product_gauged.py`, `debug/tensor_product_decompose.py`.
+- **Sturmian (exponential) basis for deuteron.** Coulomb-Sturmian-like basis with exp(-αr/2) tails replaces HO basis (Gaussian tails). At n_basis=16, α=1.1: B_d = 2.197 MeV (−1.2% vs exp 2.225). HO basis gives B_d ≈ 0 for relative motion at hw=8. Charge radius r_d = 2.118 fm (−0.5%). Conditioning < 10². Driver: `debug/deuteron_sturmian_nuclear.py`.
+- **Coupled ³S₁+³D₁ deuteron with Gaussian tensor force.** Standard S₁₂ matrix elements (⟨S|S₁₂|S⟩=0, ⟨D|S₁₂|S⟩=√8, ⟨D|S₁₂|D⟩=−2). Best fit at κ_T=0.7: V_T0=−16.1 MeV, Q_d=0.286 fm² (exact match), B_d=2.395 MeV (+7.7%), P_D=0.37%, μ_d=0.878 n.m. (+2.4%). B_d/Q_d/P_D tension is physical — Gaussian tensor needs OPEP 1/r³ for P_D~5%. Driver: `debug/deuteron_tensor_force.py`.
+- **M_J-projected deuteron observables.** Full catalogue at hw=8: r_d=2.119 fm (−0.4%), μ_d=0.880 n.m. (+2.6%), Q_d=0 (no tensor), Zemach r_Z=2.569 fm (+13.7%), Friar moment 26.6 fm³ (+51%), α_E=0.694 fm³ (+9.7%). He-4 r_pp=1.527 fm (+4.5%) at hw=20. Drivers: `debug/nuclear_structure_observables_v2.py`.
+- **LIT method validated as diagnostic negative.** Lorentz Integral Transform bit-exact vs eigendecomposition. Tikhonov inversion adds positive bias. +9.7% α_E error is from Minnesota (EWSR=152%>TRK), not method. N_shells=2→3 bit-identical. Drivers: `debug/deuteron_lit_polarizability.py`, `debug/deuteron_lit_diagnostic.py`.
+
+### Changed
+- **Minnesota V_S/V_T parameter swap FIXED in `geovac/nuclear/minnesota.py`.** Singlet and triplet labels were reversed (V_S=−178 → V_T=−178, V_T=−91.4 → V_S=−91.4). Ground state now correctly ³S₁ (J=1, 3-fold degenerate) instead of ¹S₀ (J=0). Eigenvalue spectrum invariant (values swap channels). All Paper 23 Pauli counts, 1-norms, resource estimates unchanged.
+- **Paper 23 line 322** parameter ordering corrected: `(V_R, V_S, V_T)` → `(V_R, V_T, V_S)` to match corrected code. Compiles clean, 12 pages.
+
+### Closed
+- NaH Z_orb scan: basis extent is NOT the chemistry wall. PES monotonically descending at all Z_orb ∈ {0.5–2.0}. The NaH overattraction is W1e (multi-determinant FCI), not basis quality.
+- IR extrapolation for nuclear E1 polarizability: all models (exponential, power-law, combined) extrapolate to 2–16 fm³ (exp 0.63). Multi-scale continuum response not amenable to single-scale IR correction.
+- Sturmian basis attempts for nuclear polarizability: v1 grid-coarseness, v2 overbinds 20× (Minnesota effective), v3 alpha-unstable. Sum-over-states fragile for continuum response.
+
 ## [3.37.0] - 2026-06-01
 
 ### Added

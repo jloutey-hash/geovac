@@ -42,10 +42,10 @@ class TestMinnesotaPotential:
         p = minnesota_params()
         assert p['V_R'] == 200.0, "V_R should be 200.0 MeV"
         assert p['kappa_R'] == 1.487, "kappa_R should be 1.487 fm^-2"
-        assert p['V_S'] == -178.0, "V_S should be -178.0 MeV"
-        assert p['kappa_S'] == 0.639, "kappa_S should be 0.639 fm^-2"
-        assert p['V_T'] == -91.4, "V_T should be -91.4 MeV"
-        assert p['kappa_T'] == 0.465, "kappa_T should be 0.465 fm^-2"
+        assert p['V_S'] == -91.4, "V_S should be -91.4 MeV (singlet, weaker)"
+        assert p['kappa_S'] == 0.465, "kappa_S should be 0.465 fm^-2"
+        assert p['V_T'] == -178.0, "V_T should be -178.0 MeV (triplet, stronger)"
+        assert p['kappa_T'] == 0.639, "kappa_T should be 0.639 fm^-2"
 
     def test_minnesota_singlet_attractive(self):
         """V_NN(r=1 fm, S=0) < 0 at typical nuclear distances."""
