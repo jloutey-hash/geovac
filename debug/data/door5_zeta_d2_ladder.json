@@ -1,0 +1,566 @@
+{
+  "Z2_ladder": [
+    {
+      "s": 2,
+      "closed_form": "-pi**4/12 + pi**2",
+      "value": "1.75218014825582218246446327582",
+      "exact_vs_num_relerr": 2.416447823346069e-100,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "1",
+          "pi^4": "-1/12"
+        },
+        "residual": 1.1617775744547955e-120
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 3,
+      "closed_form": "-pi**6/30 + pi**4/3",
+      "value": "0.423390558823997844472796107821",
+      "exact_vs_num_relerr": 3.32319747724588e-101,
+      "pslq_pi_even": {
+        "components": {
+          "pi^4": "1/3",
+          "pi^6": "-1/30"
+        },
+        "residual": 6.389776659501375e-120
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 4,
+      "closed_form": "-17*pi**8/1260 + 2*pi**6/15",
+      "value": "0.165362894802688333246891243803",
+      "exact_vs_num_relerr": 2.322945938317412e-100,
+      "pslq_pi_even": {
+        "components": {
+          "pi^6": "2/15",
+          "pi^8": "-17/1260"
+        },
+        "residual": 1.718462662214385e-119
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 5,
+      "closed_form": "-31*pi**10/5670 + 17*pi**8/315",
+      "value": "0.0707264830726624331793136618996",
+      "exact_vs_num_relerr": 3.584837538227663e-101,
+      "pslq_pi_even": {
+        "components": {
+          "pi^8": "17/315",
+          "pi^10": "-31/5670"
+        },
+        "residual": 9.608868688719871e-120
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 6,
+      "closed_form": "-691*pi**12/311850 + 62*pi**10/2835",
+      "value": "0.0310384936175737083393309073057",
+      "exact_vs_num_relerr": 4.3419500375430577e-101,
+      "pslq_pi_even": {
+        "components": {
+          "pi^10": "62/2835",
+          "pi^12": "-691/311850"
+        },
+        "residual": 6.972178177945511e-119
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 7,
+      "closed_form": "-5461*pi**14/6081075 + 1382*pi**12/155925",
+      "value": "0.0137347732595349569738317822718",
+      "exact_vs_num_relerr": 2.5664414457942473e-100,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "-310693/789396",
+          "pi^4": "-278897/3157584",
+          "pi^6": "121889/263132",
+          "pi^8": "12911/1578792",
+          "pi^10": "-711487/1578792",
+          "pi^12": "-233489/526264",
+          "pi^14": "241411/1578792",
+          "pi^16": "-1197647/3157584",
+          "pi^18": "1697933/3157584",
+          "pi^20": "-266711/1578792",
+          "pi^22": "828205/3157584",
+          "pi^24": "-13347/526264"
+        },
+        "residual": 6.631934560482749e-76
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 8,
+      "closed_form": "-929569*pi**16/2554051500 + 21844*pi**14/6081075",
+      "value": "0.00609495816052222848845269372806",
+      "exact_vs_num_relerr": 8.311258048662897e-103,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "-82541/523177",
+          "pi^4": "-396573/523177",
+          "pi^6": "-1172693/523177",
+          "pi^8": "-643636/523177",
+          "pi^10": "-3121107/1046354",
+          "pi^12": "689077/1046354",
+          "pi^14": "-1406047/523177",
+          "pi^16": "-1225025/523177",
+          "pi^18": "527151/523177",
+          "pi^20": "-3601365/1046354",
+          "pi^22": "512615/1046354",
+          "pi^24": "-7888/523177"
+        },
+        "residual": 4.438284696114955e-75
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 9,
+      "closed_form": "-3202291*pi**18/21709437750 + 929569*pi**16/638512875",
+      "value": "0.00270738650857431824193243148058",
+      "exact_vs_num_relerr": 1.6971083689441564e-100,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "-1757362/487891",
+          "pi^4": "-7025111/1951564",
+          "pi^6": "-398911/1951564",
+          "pi^8": "-1840687/975782",
+          "pi^10": "-1394241/975782",
+          "pi^12": "-669089/1951564",
+          "pi^14": "955822/487891",
+          "pi^16": "927767/975782",
+          "pi^18": "4558749/1951564",
+          "pi^20": "1813515/487891",
+          "pi^22": "-202467/1951564",
+          "pi^24": "-58933/1951564"
+        },
+        "residual": 1.8547757386796707e-76
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 10,
+      "closed_form": "-221930581*pi**20/3712313855250 + 6404582*pi**18/10854718875",
+      "value": "0.00120304689962244681065033100934",
+      "exact_vs_num_relerr": 2.1353395717744735e-100,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "-8396199/6981146",
+          "pi^4": "-9583123/6981146",
+          "pi^6": "-13844949/6981146",
+          "pi^8": "-10087479/6981146",
+          "pi^10": "750626/3490573",
+          "pi^12": "127972/3490573",
+          "pi^14": "-16043237/6981146",
+          "pi^16": "1636286/3490573",
+          "pi^18": "-5014373/3490573",
+          "pi^20": "5416557/6981146",
+          "pi^22": "-70209/6981146",
+          "pi^24": "-38235/6981146"
+        },
+        "residual": 1.5511762779693707e-76
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 11,
+      "closed_form": "-4722116521*pi**22/194896477400625 + 443861162*pi**20/1856156927625",
+      "value": "0.000534649865115037111162124674472",
+      "exact_vs_num_relerr": 1.501696634663518e-101,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "2454507/347801",
+          "pi^4": "-3584517/347801",
+          "pi^6": "3361306/347801",
+          "pi^8": "-3004151/347801",
+          "pi^10": "-978428/347801",
+          "pi^12": "1565798/347801",
+          "pi^14": "-423329/347801",
+          "pi^16": "590473/347801",
+          "pi^18": "-3892135/347801",
+          "pi^20": "4918474/347801",
+          "pi^22": "-1105058/347801",
+          "pi^24": "65462/347801"
+        },
+        "residual": 4.0725904038916175e-76
+      },
+      "T9_pi_even_only": true
+    },
+    {
+      "s": 12,
+      "closed_form": "-56963745931*pi**24/5801036327336250 + 18888466084*pi**22/194896477400625",
+      "value": "0.000237616148064171219530179693472",
+      "exact_vs_num_relerr": 6.875512274765605e-101,
+      "pslq_pi_even": {
+        "components": {
+          "pi^2": "3489389/658112",
+          "pi^4": "6476217/658112",
+          "pi^6": "-206123/94016",
+          "pi^8": "-164029/50624",
+          "pi^10": "6526841/658112",
+          "pi^12": "566217/329056",
+          "pi^14": "-511921/329056",
+          "pi^16": "-3037591/658112",
+          "pi^18": "2080413/658112",
+          "pi^20": "25273/5876",
+          "pi^22": "-32607/94016",
+          "pi^24": "-7767/658112"
+        },
+        "residual": 1.0428699062190242e-74
+      },
+      "T9_pi_even_only": true
+    }
+  ],
+  "D_ladder": [
+    {
+      "s": 4,
+      "closed_form": "-pi**4/12 + pi**2",
+      "value": "1.75218014825582218246446327582",
+      "exact_vs_num_relerr": 2.416447823346069e-100
+    },
+    {
+      "s": 5,
+      "closed_form": "-31*zeta(5)/2 + 14*zeta(3)",
+      "value": "0.756416439512086137460169221076",
+      "exact_vs_num_relerr": 4.934726646350334e-101
+    },
+    {
+      "s": 6,
+      "closed_form": "pi**4*(10 - pi**2)/30",
+      "value": "0.423390558823997844472796107821",
+      "exact_vs_num_relerr": 3.32319747724588e-101
+    },
+    {
+      "s": 7,
+      "closed_form": "-127*zeta(7)/2 + 62*zeta(5)",
+      "value": "0.259341705136835928217515744874",
+      "exact_vs_num_relerr": 2.8567962306399512e-101
+    },
+    {
+      "s": 8,
+      "closed_form": "pi**6*(168 - 17*pi**2)/1260",
+      "value": "0.165362894802688333246891243803",
+      "exact_vs_num_relerr": 2.322945938317412e-100
+    },
+    {
+      "s": 9,
+      "closed_form": "-511*zeta(9)/2 + 254*zeta(7)",
+      "value": "0.107572087944392233547195122967",
+      "exact_vs_num_relerr": 1.5703796658331375e-101
+    },
+    {
+      "s": 10,
+      "closed_form": "pi**8*(306 - 31*pi**2)/5670",
+      "value": "0.0707264830726624331793136618996",
+      "exact_vs_num_relerr": 3.584837538227663e-101
+    },
+    {
+      "s": 11,
+      "closed_form": "-2047*zeta(11)/2 + 1022*zeta(9)",
+      "value": "0.0467754319397511592137439896831",
+      "exact_vs_num_relerr": 2.4123951961147185e-101
+    },
+    {
+      "s": 12,
+      "closed_form": "pi**10*(6820 - 691*pi**2)/311850",
+      "value": "0.0310384936175737083393309073057",
+      "exact_vs_num_relerr": 4.3419500375430577e-101
+    }
+  ],
+  "split_ladder": [
+    {
+      "s": 4,
+      "Deven": "1.16800590438345637544750811109",
+      "Dodd": "0.584174243872365807016955164725",
+      "Ddiff": "0.583831660511090568430552946368",
+      "chi4_closed_form": "-8*beta(2) + 8*beta(4)",
+      "chi4_residual": 8.713331808410966e-121,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^2": "1/2",
+          "pi^4": "-1/24",
+          "beta(4)": "4",
+          "beta(2)": "-4"
+        },
+        "residual": 9.681479787123296e-121
+      }
+    },
+    {
+      "s": 5,
+      "Deven": "0.595901674297792536911560792811",
+      "Dodd": "0.160514765214293600548608428266",
+      "Ddiff": "0.435386909083498936362952364545",
+      "chi4_closed_form": "-pi**3/2 + 5*pi**5/96",
+      "chi4_residual": 1.9362959574246591e-121,
+      "chi4_verified": true,
+      "pslq_Deven": null
+    },
+    {
+      "s": 6,
+      "Deven": "0.36754600704932371156724852802",
+      "Dodd": "0.0558445517746741329055475798013",
+      "Ddiff": "0.311701455274649578661700948219",
+      "chi4_closed_form": "-32*beta(4) + 32*beta(6)",
+      "chi4_residual": 4.840739893561648e-122,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^4": "1/6",
+          "pi^6": "-1/60",
+          "beta(6)": "16",
+          "beta(4)": "-16"
+        },
+        "residual": 3.1948883297506876e-120
+      }
+    },
+    {
+      "s": 7,
+      "Deven": "0.238364606598877019789627673016",
+      "Dodd": "0.0209770985379589084278880718583",
+      "Ddiff": "0.217387508060918111361739601157",
+      "chi4_closed_form": "-5*pi**5/24 + 61*pi**7/2880",
+      "chi4_residual": 4.840739893561648e-120,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^2": "79050456/53916935",
+          "pi^4": "7622802/53916935",
+          "pi^6": "18229751/53916935",
+          "pi^8": "2471827/10783387",
+          "pi^10": "-43779044/53916935",
+          "pi^12": "9381507/53916935",
+          "pi^14": "-516056/53916935",
+          "beta(7)": "2486074/53916935",
+          "beta(5)": "27189048/53916935"
+        },
+        "residual": 9.186245247962598e-72
+      }
+    },
+    {
+      "s": 8,
+      "Deven": "0.157226601218401503997286990238",
+      "Dodd": "0.00813629358428682924960425356494",
+      "Ddiff": "0.149090307634114674747682736673",
+      "chi4_closed_form": "-128*beta(6) + 128*beta(8)",
+      "chi4_residual": 5.591054577063703e-120,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^6": "1/15",
+          "pi^8": "-17/2520",
+          "beta(8)": "64",
+          "beta(6)": "-64"
+        },
+        "residual": 5.179591686110963e-120
+      }
+    },
+    {
+      "s": 9,
+      "Deven": "0.104368609947259198375174956016",
+      "Dodd": "0.00320347799713303517202016695061",
+      "Ddiff": "0.101165131950126163203154789066",
+      "chi4_closed_form": "256*beta(9) - 61*pi**7/720",
+      "chi4_residual": 7.031174695398293e-120,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^2": "-35102/111713",
+          "pi^4": "1352123/223426",
+          "pi^6": "-157457/223426",
+          "pi^8": "650995/223426",
+          "pi^10": "802409/223426",
+          "pi^12": "-116472/111713",
+          "pi^14": "-201961/223426",
+          "pi^16": "94551/31918",
+          "pi^18": "-32418/111713",
+          "beta(9)": "-821501/223426",
+          "beta(7)": "-473701/111713"
+        },
+        "residual": 1.7886764859621364e-67
+      }
+    },
+    {
+      "s": 10,
+      "Deven": "0.0694557290543398098629165347246",
+      "Dodd": "0.00127075401832262331639712717498",
+      "Ddiff": "0.0681849750360171865465194075496",
+      "chi4_closed_form": "-512*beta(8) + 512*beta(10)",
+      "chi4_residual": 1.2259173780444873e-119,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^2": "265403/897188",
+          "pi^4": "107347/448594",
+          "pi^6": "-21709/224297",
+          "pi^8": "138921/897188",
+          "pi^10": "-971161/897188",
+          "pi^12": "392693/897188",
+          "pi^14": "-174515/448594",
+          "pi^16": "33703/448594",
+          "pi^18": "-107347/224297",
+          "pi^20": "21573/448594",
+          "beta(10)": "82133/448594",
+          "beta(8)": "-259139/448594"
+        },
+        "residual": 6.690875454603966e-67
+      }
+    },
+    {
+      "s": 11,
+      "Deven": "0.0462693987109235656925440002871",
+      "Dodd": "0.000506033228827593521199989396095",
+      "Ddiff": "0.045763365482095972171344010891",
+      "chi4_closed_form": "-1024*beta(9) + 1024*beta(11)",
+      "chi4_residual": 1.2685158891078298e-118,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^2": "-851577/1069774",
+          "pi^4": "-154422/534887",
+          "pi^6": "81957/534887",
+          "pi^8": "241196/534887",
+          "pi^10": "1479429/1069774",
+          "pi^12": "-818323/1069774",
+          "pi^14": "265576/534887",
+          "pi^16": "656186/534887",
+          "pi^18": "-478753/1069774",
+          "pi^20": "41590/534887",
+          "pi^22": "-4927/1069774",
+          "beta(11)": "616121/1069774",
+          "beta(9)": "611649/1069774"
+        },
+        "residual": 6.567762079992684e-66
+      }
+    },
+    {
+      "s": 12,
+      "Deven": "0.0308365709851757703959562594622",
+      "Dodd": "0.000201922632397937943374647843509",
+      "Ddiff": "0.0306346483527778324525816116187",
+      "chi4_closed_form": "-2048*beta(10) + 2048*beta(12)",
+      "chi4_residual": 6.22640168809367e-119,
+      "chi4_verified": true,
+      "pslq_Deven": {
+        "components": {
+          "pi^2": "-57349/5329",
+          "pi^4": "-23448/5329",
+          "pi^6": "26340/5329",
+          "pi^8": "-20931/5329",
+          "pi^10": "50165/5329",
+          "pi^12": "35098/5329",
+          "pi^14": "28591/5329",
+          "pi^16": "-92625/5329",
+          "pi^18": "11747/5329",
+          "pi^20": "-25886/5329",
+          "pi^22": "29549/5329",
+          "pi^24": "-2731/5329",
+          "beta(12)": "-90385/5329",
+          "beta(10)": "-22165/5329"
+        },
+        "residual": 1.8852120428834153e-63
+      }
+    }
+  ],
+  "sommerfeld_Dp": {
+    "2": "-5/4 zeta(2) + zeta(3)",
+    "3": "19/8 zeta(4) - 11/4 zeta(5)",
+    "4": "-205/64 zeta(6) + 71/8 zeta(7) - 9/2 zeta(3)zeta(4)",
+    "5": "497/128 zeta(8) - 467/16 zeta(9) + 385/32 zeta(3)zeta(6) + 75/8 zeta(4)zeta(5)",
+    "6": "-2289/512 zeta(10) + 1589/16 zeta(11) - 1617/64 zeta(3)zeta(8) - 1785/64 zeta(4)zeta(7) - 2065/64 zeta(5)zeta(6)"
+  },
+  "D_odd_ladder_audit": {
+    "claim": "D(odd s) = (2^{s-1}-2) zeta(s-2) - ((2^s-1)/2) zeta(s)",
+    "free_params": 0,
+    "mechanism": "Forced by Hurwitz-at-3/2 reduction; the -2^s constant pieces cancel between the two terms (NOT fitted).",
+    "checks": [
+      {
+        "s": 5,
+        "a_pred": "14",
+        "a_actual": "14",
+        "b_pred": "31/2",
+        "b_actual": "31/2",
+        "match": true
+      },
+      {
+        "s": 7,
+        "a_pred": "62",
+        "a_actual": "62",
+        "b_pred": "127/2",
+        "b_actual": "127/2",
+        "match": true
+      },
+      {
+        "s": 9,
+        "a_pred": "254",
+        "a_actual": "254",
+        "b_pred": "511/2",
+        "b_actual": "511/2",
+        "match": true
+      },
+      {
+        "s": 11,
+        "a_pred": "1022",
+        "a_actual": "1022",
+        "b_pred": "2047/2",
+        "b_actual": "2047/2",
+        "match": true
+      }
+    ],
+    "all_match": true
+  },
+  "observable_map": {
+    "Z2(2) = pi^2 - pi^4/12": {
+      "status": "connected",
+      "observable": "one-loop QED functional determinant / vacuum-polarization spectral input on S^3; the s=2 value enters zeta'_{D^2}(0) regularization. Paper 28 Theorem T9, Paper 50 F-theorem (scalar/Dirac spectral-zeta derivative).",
+      "paper34_projection": "spectral action (proj #6)",
+      "transcendental_tier": "calibration_pi (M2 Seeley-DeWitt)"
+    },
+    "Z2(3) = pi^4/3 - pi^6/30": {
+      "status": "partially-connected",
+      "observable": "next spectral-action heat-kernel moment (a_4-order on S^3); enters the s=3 Mellin moment Tr(D^{-6}). Not individually pinned to a measured observable -- it is an internal spectral-action coefficient, same status as a_2.",
+      "paper34_projection": "spectral action (proj #6)",
+      "transcendental_tier": "calibration_pi (M2)"
+    },
+    "Z2(s>=4)": {
+      "status": "unconnected-internal",
+      "observable": "higher Mellin moments Tr(D^{-2s}); each is an exact two-term pi^even closed form (T9) but maps to UV-suppressed spectral-action coefficients with no isolated physical measurement. Internal to the heat-kernel expansion.",
+      "paper34_projection": "spectral action (proj #6)",
+      "transcendental_tier": "calibration_pi (M2)"
+    },
+    "D(4) = pi^2 - pi^4/12 = Z2(2)": {
+      "status": "connected",
+      "observable": "D(4) coincides with Z2(2): the d_max=4 Fock evaluation. This is the F=zeta(2)-adjacent value; Paper 2 alpha apparatus uses the n^2 Fock degeneracy Dirichlet at s=4.",
+      "paper34_projection": "Hopf/spectral action",
+      "transcendental_tier": "calibration_pi (M2)"
+    },
+    "D(5)": {
+      "status": "connected (free) / distinct from Sommerfeld D_5",
+      "observable": "free CH-spectrum Dirichlet at s=5: D(5) = 14 zeta(3) - 31 zeta(5)/2 (Paper 28 flat-space section, R-independent). First ODD-s free-Dirichlet value: introduces odd-zeta zeta(3), zeta(5) at the FREE spectrum level (mechanism = half-integer Hurwitz shift, M3 vertex-parity).",
+      "paper34_projection": "vertex parity / half-integer Hurwitz (M3)",
+      "transcendental_tier": "spinor-intrinsic odd-zeta (M3)"
+    },
+    "Ddiff(s) = 2^{s-1}(beta(s)-beta(s-2))": {
+      "status": "connected (identity)",
+      "observable": "spectral-zeta -> Dirichlet-L bridge (Paper 28 Theorem chi_4). Even-s: Catalan G, beta(4), beta(6); odd-s: pi-powers (beta(odd) closed form). NOT pinned to a measured observable -- it is the L(s,chi_{-4}) content exposed by vertex parity.",
+      "paper34_projection": "vertex parity (M3)",
+      "transcendental_tier": "Dirichlet-L / M3 vertex-parity Hurwitz"
+    },
+    "D_2 = -5/4 zeta(2) + zeta(3)": {
+      "status": "connected",
+      "observable": "(Z alpha)^4 degeneracy-weighted Dirac fine-structure shell sum; zeta(3) is the quantum-defect injection. Paper 28.",
+      "paper34_projection": "Dirac fine structure",
+      "transcendental_tier": "mixed even/odd zeta (M3)"
+    },
+    "D_5, D_6": {
+      "status": "connected",
+      "observable": "(Z alpha)^{10}, (Z alpha)^{12} hydrogen fine-structure Sommerfeld sums; product survival rule (Paper 28 Obs). Physical = high-order relativistic energy expansion.",
+      "paper34_projection": "Dirac fine structure",
+      "transcendental_tier": "Euler-Zagier MZV (M3)"
+    }
+  }
+}

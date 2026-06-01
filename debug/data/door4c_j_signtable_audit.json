@@ -1,0 +1,239 @@
+{
+  "internal_real_forms": {
+    "quaternionic": {
+      "J_squared": -1.0,
+      "fix_dim": 4,
+      "division_ring": true
+    },
+    "real_complex": {
+      "J_squared": 1.0,
+      "fix_dim": 4,
+      "division_ring": false
+    }
+  },
+  "ko_dim_forcing": {
+    "outer_ko": 3,
+    "outer_J_squared": -1,
+    "per_d_F": [
+      {
+        "d_F": 0,
+        "combined_ko": 3,
+        "combined_eps": -1,
+        "combined_eps_prime": 1,
+        "finite_eps": 1,
+        "finite_eps_prime": 1,
+        "finite_eps_pp": 1,
+        "combined_is_1_mod_8": false
+      },
+      {
+        "d_F": 1,
+        "combined_ko": 4,
+        "combined_eps": -1,
+        "combined_eps_prime": 1,
+        "finite_eps": -1,
+        "finite_eps_prime": 1,
+        "finite_eps_pp": null,
+        "combined_is_1_mod_8": false
+      },
+      {
+        "d_F": 2,
+        "combined_ko": 5,
+        "combined_eps": 1,
+        "combined_eps_prime": -1,
+        "finite_eps": -1,
+        "finite_eps_prime": -1,
+        "finite_eps_pp": -1,
+        "combined_is_1_mod_8": false
+      },
+      {
+        "d_F": 3,
+        "combined_ko": 6,
+        "combined_eps": 1,
+        "combined_eps_prime": -1,
+        "finite_eps": -1,
+        "finite_eps_prime": 1,
+        "finite_eps_pp": null,
+        "combined_is_1_mod_8": false
+      },
+      {
+        "d_F": 4,
+        "combined_ko": 7,
+        "combined_eps": 1,
+        "combined_eps_prime": 1,
+        "finite_eps": -1,
+        "finite_eps_prime": 1,
+        "finite_eps_pp": 1,
+        "combined_is_1_mod_8": false
+      },
+      {
+        "d_F": 5,
+        "combined_ko": 0,
+        "combined_eps": 1,
+        "combined_eps_prime": 1,
+        "finite_eps": 1,
+        "finite_eps_prime": -1,
+        "finite_eps_pp": null,
+        "combined_is_1_mod_8": false
+      },
+      {
+        "d_F": 6,
+        "combined_ko": 1,
+        "combined_eps": -1,
+        "combined_eps_prime": 1,
+        "finite_eps": 1,
+        "finite_eps_prime": -1,
+        "finite_eps_pp": -1,
+        "combined_is_1_mod_8": true
+      },
+      {
+        "d_F": 7,
+        "combined_ko": 2,
+        "combined_eps": -1,
+        "combined_eps_prime": -1,
+        "finite_eps": 1,
+        "finite_eps_prime": 1,
+        "finite_eps_pp": null,
+        "combined_is_1_mod_8": false
+      }
+    ],
+    "d_F_giving_combined_1mod8": [
+      6
+    ]
+  },
+  "j_sign_table": {
+    "candidate_cH": {
+      "n2_factor": "H",
+      "internal_C2_structure": "J_q = i*sigma_2 * K",
+      "internal_J_squared": -1.0,
+      "fixed_point_real_dim": 4,
+      "fixed_point_is_division_ring": true,
+      "doubled_finite_J_F_squared": 1.0,
+      "finite_ko_dim": 6,
+      "combined_ko_dim": 1,
+      "combined_eps": -1,
+      "combined_eps_prime": 1
+    },
+    "candidate_cM2": {
+      "n2_factor": "M_2(C)",
+      "internal_C2_structure": "J_r = K  (or full complex algebra, no quaternionic constraint)",
+      "internal_J_squared": 1.0,
+      "fixed_point_real_dim": 4,
+      "fixed_point_is_division_ring": false,
+      "doubled_finite_J_F_squared": 1.0,
+      "finite_ko_dim": 6,
+      "combined_ko_dim": 1,
+      "combined_eps": -1,
+      "combined_eps_prime": 1
+    },
+    "headline": "Combined J^2, combined eps', combined KO-dim are IDENTICAL for both candidates. They differ ONLY in the internal C^2 antilinear involution (j_q^2 = -1 -> H vs j_r^2 = +1 -> M_2(C)), which the combined-J sign table does not constrain."
+  },
+  "combined_sign_audits": [
+    {
+      "n_max": 1,
+      "dim_H": 32,
+      "J2_eq_plus_I_residual": 11.313708498984761,
+      "J2_eq_minus_I_residual": 0.0,
+      "JD_eq_plus_DJ_residual": 0.0,
+      "JD_eq_minus_DJ_residual": 16.97056274847714,
+      "measured_eps": -1,
+      "measured_eps_prime": 1
+    },
+    {
+      "n_max": 2,
+      "dim_H": 128,
+      "J2_eq_plus_I_residual": 22.627416997969522,
+      "J2_eq_minus_I_residual": 0.0,
+      "JD_eq_plus_DJ_residual": 0.0,
+      "JD_eq_minus_DJ_residual": 51.84592558726288,
+      "measured_eps": -1,
+      "measured_eps_prime": 1
+    },
+    {
+      "n_max": 3,
+      "dim_H": 320,
+      "J2_eq_plus_I_residual": 35.77708763999664,
+      "J2_eq_minus_I_residual": 0.0,
+      "JD_eq_plus_DJ_residual": 0.0,
+      "JD_eq_minus_DJ_residual": 109.98181667894016,
+      "measured_eps": -1,
+      "measured_eps_prime": 1
+    }
+  ],
+  "order_conditions_audits": [
+    {
+      "n_max": 1,
+      "kind": "H",
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    },
+    {
+      "n_max": 2,
+      "kind": "H",
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    },
+    {
+      "n_max": 1,
+      "kind": "M2",
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    },
+    {
+      "n_max": 2,
+      "kind": "M2",
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    }
+  ],
+  "order_one_with_yukawa_audits": [
+    {
+      "n_max": 1,
+      "kind": "H",
+      "yukawa": 0.3,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    },
+    {
+      "n_max": 2,
+      "kind": "H",
+      "yukawa": 0.3,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    },
+    {
+      "n_max": 1,
+      "kind": "M2",
+      "yukawa": 0.3,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    },
+    {
+      "n_max": 2,
+      "kind": "M2",
+      "yukawa": 0.3,
+      "order_one_max_residual": 0.0,
+      "n_samples": 30
+    }
+  ],
+  "ccm_order_one_selector": {
+    "H_preserves_order_one_with_yukawa": true,
+    "M2_breaks_order_one_with_yukawa": false,
+    "selection_mechanism_operative": false,
+    "note": "This selector is the standard CCM finite-triple order-one/second-order-condition argument. It involves ONLY the finite data (D_F, J_F, algebra action) and NOT the outer J_GV. Even when it fires, the selection is the LITERATURE'S argument transported into the finite factor -- it is NOT driven by GeoVac's J_GV^2 = -1. The probe's target (close the fork FROM GeoVac's native J_GV) therefore remains unmet regardless of this selector: GeoVac would be IMPORTING the CCM order-one argument, not supplying a new one from J_GV."
+  },
+  "verdict": {
+    "result": "ADMITS H (does NOT force H)",
+    "sign_table_identical_for_both": true,
+    "H_order_conditions_ok_gauge_only": true,
+    "M2_order_conditions_ok_gauge_only": true,
+    "d_F_giving_combined_1mod8": [
+      6
+    ],
+    "reasoning": "The combined J = J_GV (x) J_F sign table is IDENTICAL for the two candidate inner algebras: both carry the doubled swap-conjugation J_F (J_F^2 = +1, finite KO-dim 6), so the combined triple has KO-dim 3+6 = 1 (mod 8) and combined (eps, eps') = (-1, +1) in BOTH cases. The H-vs-M_2(C) distinction is an INTERNAL C^2 real-form choice (quaternionic j_q^2 = -1 vs non-quaternionic j_r^2 = +1) that lives on the ALGEBRA side and is invisible to the combined-J / KO-dim bookkeeping. Therefore the outer J_GV^2 = -1 (KO-dim 3) does NOT exclude M_2(C): it is consistent with both. H is a literature import (the CCM second-order-condition / complex-rep argument), not a GeoVac forcing from J_GV alone.",
+    "inner_algebra_status": "PARTIAL - n=2 factor stays a fork; H admitted not forced by combined-J / KO-dim. (Door 4b verdict unchanged; the conjectured GeoVac-native handle does NOT close the fork via the sign table.)"
+  }
+}

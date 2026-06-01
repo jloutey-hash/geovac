@@ -1,0 +1,221 @@
+{
+  "track": "Door 1 \u2014 F-theorem closed forms in general odd d",
+  "dps": 220,
+  "dimensions": {
+    "3": {
+      "dirac": {
+        "D_prime_0_symbolic_closed": "3*zeta(3)/(32*pi**2) + log(2)/16",
+        "D_prime_0_latex": "\\frac{3 \\zeta\\left(3\\right)}{32 \\pi^{2}} + \\frac{\\log{\\left(2 \\right)}}{16}",
+        "D_prime_0_numeric": "0.0547398701818940583811713315178190767473439397268811794774069592904762831024572567295394273",
+        "closed_form_residual": "0.0",
+        "nonzero_atoms": {
+          "log2": "1/16",
+          "zeta3/pi^2": "3/32"
+        },
+        "log_odd_prime_present": false,
+        "sanity_vs_paper50": "Paper50 |diff|=0.164 ; ratio mine/Paper50=0.25 (S3=Weyl 1/4 of Paper50 full-Dirac)"
+      },
+      "scalar": {
+        "zeta_prime_0_numeric": "-0.1276141095523964211839307346578119770483743082726029091507121675847916785750183308847739544277929279299595090416532795715051505822153976662299419039886113793874103231930647745109008684313061740626396747339112706084007564",
+        "convergence_k180_k120": "1.554936263899029767006421709468129081286665775635418169405790982028478405477875843764554189703163744484142657970756743773119061680735497200506392542718037349869388038690708280858959578600072701899606254115913324438237107e-75",
+        "pslq_simple_ring": {
+          "status": "relation_found",
+          "integer_relation": [
+            8,
+            2,
+            -3
+          ],
+          "tol": "1e-40",
+          "maxcoeff": 100000,
+          "normalized_coefficients": {
+            "log2": "-1/4",
+            "zeta3/pi^2": "3/8"
+          }
+        }
+      },
+      "M_ring_dim": 2,
+      "n_species_scalar_dirac": 2,
+      "single_axis_dual_basis_possible": true
+    },
+    "5": {
+      "dirac": {
+        "D_prime_0_symbolic_closed": "-3*log(2)/128 - 5*zeta(3)/(128*pi**2) - 15*zeta(5)/(256*pi**4)",
+        "D_prime_0_latex": "- \\frac{3 \\log{\\left(2 \\right)}}{128} - \\frac{5 \\zeta\\left(3\\right)}{128 \\pi^{2}} - \\frac{15 \\zeta\\left(5\\right)}{256 \\pi^{4}}",
+        "D_prime_0_numeric": "-0.0216269437292999030208101068889493615329600547469002597781134783031345674033328804679603226",
+        "closed_form_residual": "0.0",
+        "nonzero_atoms": {
+          "log2": "-3/128",
+          "zeta3/pi^2": "-5/128",
+          "zeta5/pi^4": "-15/256"
+        },
+        "log_odd_prime_present": false,
+        "sanity_vs_paper50": "Paper50 |diff|=0.0 ; ratio mine/Paper50=1.0 (S3=Weyl 1/4 of Paper50 full-Dirac)"
+      },
+      "scalar": {
+        "zeta_prime_0_numeric": "0.01148598272329425233955111773992035368142383023308065992118000268420714829579149579361878198167260704729687041895285409932509228977865032155400245015032524010290211307435653894074597638672790479812551133257672511515692548",
+        "convergence_k180_k120": "1.763958342471711450336156825683637982696184289455282975280338725281905360071682000758011574650801730275602609936555037523996260532314810464483082525553633855930145472237917460583251470526026704695840966865398088334461579e-148",
+        "pslq_simple_ring": {
+          "status": "relation_found",
+          "integer_relation": [
+            128,
+            -2,
+            -2,
+            15
+          ],
+          "tol": "1e-40",
+          "maxcoeff": 100000,
+          "normalized_coefficients": {
+            "log2": "1/64",
+            "zeta3/pi^2": "1/64",
+            "zeta5/pi^4": "-15/128"
+          }
+        }
+      },
+      "M_ring_dim": 3,
+      "n_species_scalar_dirac": 2,
+      "single_axis_dual_basis_possible": false,
+      "ladder_recursion": {
+        "residual_coeffs": {
+          "log2": "1/16",
+          "zeta3/pi^2": "3/32"
+        },
+        "lower_dirac_coeffs": {
+          "log2": "1/16",
+          "zeta3/pi^2": "3/32"
+        },
+        "ratios": {
+          "log2": "1",
+          "zeta3/pi^2": "1"
+        },
+        "consistent": true,
+        "c_d": "1"
+      }
+    },
+    "7": {
+      "dirac": {
+        "D_prime_0_symbolic_closed": "63*zeta(7)/(4096*pi**6) + 35*zeta(5)/(2048*pi**4) + 259*zeta(3)/(30720*pi**2) + 5*log(2)/1024",
+        "D_prime_0_latex": "\\frac{63 \\zeta\\left(7\\right)}{4096 \\pi^{6}} + \\frac{35 \\zeta\\left(5\\right)}{2048 \\pi^{4}} + \\frac{259 \\zeta\\left(3\\right)}{30720 \\pi^{2}} + \\frac{5 \\log{\\left(2 \\right)}}{1024}",
+        "D_prime_0_numeric": "0.00460940515559018882432506455235352463216104281797961276110853860882573424477589801492804254",
+        "closed_form_residual": "0.0",
+        "nonzero_atoms": {
+          "log2": "5/1024",
+          "zeta3/pi^2": "259/30720",
+          "zeta5/pi^4": "35/2048",
+          "zeta7/pi^6": "63/4096"
+        },
+        "log_odd_prime_present": false,
+        "sanity_vs_paper50": ""
+      },
+      "scalar": {
+        "zeta_prime_0_numeric": "-0.001594661553469573861754924339767631502157941737490904366839661933915815212114644204124076239635008467256776909467444858925395855234172780879085333168833152373789761135483570897955781768406159330592343834744753443313013796",
+        "convergence_k180_k120": "4.137564912198530762971297402082599262074884620561884092381135689295251815039151157292829116185237202578688377974368013302409814048042263389365896974370511509589018233963315961102771345526295296285334408449120273803643204e-191",
+        "pslq_simple_ring": {
+          "status": "relation_found",
+          "integer_relation": [
+            30720,
+            60,
+            82,
+            -150,
+            -945
+          ],
+          "tol": "1e-40",
+          "maxcoeff": 100000,
+          "normalized_coefficients": {
+            "log2": "-1/512",
+            "zeta3/pi^2": "-41/15360",
+            "zeta5/pi^4": "5/1024",
+            "zeta7/pi^6": "63/2048"
+          }
+        }
+      },
+      "M_ring_dim": 4,
+      "n_species_scalar_dirac": 2,
+      "single_axis_dual_basis_possible": false,
+      "ladder_recursion": {
+        "residual_coeffs": {
+          "log2": "-3/256",
+          "zeta3/pi^2": "-5/256",
+          "zeta5/pi^4": "-15/512"
+        },
+        "lower_dirac_coeffs": {
+          "log2": "-3/128",
+          "zeta3/pi^2": "-5/128",
+          "zeta5/pi^4": "-15/256"
+        },
+        "ratios": {
+          "log2": "1/2",
+          "zeta3/pi^2": "1/2",
+          "zeta5/pi^4": "1/2"
+        },
+        "consistent": true,
+        "c_d": "1/2"
+      }
+    },
+    "9": {
+      "dirac": {
+        "D_prime_0_symbolic_closed": "-35*log(2)/32768 - 3229*zeta(3)/(1720320*pi**2) - 141*zeta(5)/(32768*pi**4) - 189*zeta(7)/(32768*pi**6) - 255*zeta(9)/(65536*pi**8)",
+        "D_prime_0_latex": "- \\frac{35 \\log{\\left(2 \\right)}}{32768} - \\frac{3229 \\zeta\\left(3\\right)}{1720320 \\pi^{2}} - \\frac{141 \\zeta\\left(5\\right)}{32768 \\pi^{4}} - \\frac{189 \\zeta\\left(7\\right)}{32768 \\pi^{6}} - \\frac{255 \\zeta\\left(9\\right)}{65536 \\pi^{8}}",
+        "D_prime_0_numeric": "-0.00102123121486537191789367071912823422961311731733503077552872745243729960643342913873162424",
+        "closed_form_residual": "0.0",
+        "nonzero_atoms": {
+          "log2": "-35/32768",
+          "zeta3/pi^2": "-3229/1720320",
+          "zeta5/pi^4": "-141/32768",
+          "zeta7/pi^6": "-189/32768",
+          "zeta9/pi^8": "-255/65536"
+        },
+        "log_odd_prime_present": false,
+        "sanity_vs_paper50": ""
+      },
+      "scalar": {
+        "zeta_prime_0_numeric": "0.000262240148064350576375190837920293856854286774319744829496814399538267909521090730000772788640914590434754330518338901631782375751342827263982645459845191853958207008581200855358072852806715982231851346200644914000104512",
+        "convergence_k180_k120": "2.697291023123806848783272428684322995152978439312109631472707269315590227845729384670661907332114521155811036828840928440198776490715547575318500413059103853786874830265793175334036281856497805469002509633230805891831706e-221",
+        "pslq_simple_ring": {
+          "status": "relation_found",
+          "integer_relation": [
+            3440640,
+            -1050,
+            -1588,
+            210,
+            13230,
+            26775
+          ],
+          "tol": "1e-40",
+          "maxcoeff": 10000000,
+          "normalized_coefficients": {
+            "log2": "5/16384",
+            "zeta3/pi^2": "397/860160",
+            "zeta5/pi^4": "-1/16384",
+            "zeta7/pi^6": "-63/16384",
+            "zeta9/pi^8": "-255/32768"
+          }
+        }
+      },
+      "M_ring_dim": 5,
+      "n_species_scalar_dirac": 2,
+      "single_axis_dual_basis_possible": false,
+      "ladder_recursion": {
+        "residual_coeffs": {
+          "log2": "5/2048",
+          "zeta3/pi^2": "259/61440",
+          "zeta5/pi^4": "35/4096",
+          "zeta7/pi^6": "63/8192"
+        },
+        "lower_dirac_coeffs": {
+          "log2": "5/1024",
+          "zeta3/pi^2": "259/30720",
+          "zeta5/pi^4": "35/2048",
+          "zeta7/pi^6": "63/4096"
+        },
+        "ratios": {
+          "log2": "1/2",
+          "zeta3/pi^2": "1/2",
+          "zeta5/pi^4": "1/2",
+          "zeta7/pi^6": "1/2"
+        },
+        "consistent": true,
+        "c_d": "1/2"
+      }
+    }
+  }
+}

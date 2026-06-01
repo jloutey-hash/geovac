@@ -453,14 +453,40 @@ The von Neumann entropy of the wedge KMS state $\rhoW$ at canonical
 BW normalization $\beta = 2\pi$ is computed directly by
 diagonalizing $\Kalpha$ and applying $S(\rhoW) = -\Tr[\rhoW \log
 \rhoW]$. Sprint BH-Phase0
-(2026-05-22)~\cite{debug:bh_phase0} computed $S(\rhoW)$ at $\nmax
-\in \{2, 3, 4, 5, 6, 7\}$, obtaining the log-linear fit
+(2026-05-22)~\cite{debug:bh_phase0} first reported a small-cutoff
+log-linear fit $S(\rhoW) \approx 1.94 \log\nmax + 0.56$ over $\nmax
+\in \{2, \dots, 7\}$. A subsequent re-analysis (forcing-catalogue
+Door~2, 2026-06-01, \texttt{debug/door2\_bw\_entropy\_reread\_memo.md})
+replaced this fit by the exact $\nmax \to \infty$ resummation of the
+closed-form entropy $S = \log Z + \langle \Kalpha \rangle$ (which
+reproduces the direct diagonalization to $\le 4 \times 10^{-16}$).
+The leading $\nmax^{2}$ shell degeneracy $g(2k+1) = (\nmax - k)(\nmax
+- k + 1)$ forces the slope to be \emph{exactly} $2$, and the additive
+constant has the exact closed form
 \begin{equation}
-S(\rhoW) \approx 1.94 \cdot \log(\nmax) + 0.56, \qquad R^{2} = 0.99991,
+S(\rhoW) = 2 \log \nmax + \big(\coth 1 - \log(2 \sinh 1)\big)
++ O(1/\nmax), \qquad \coth 1 - \log(2 \sinh 1) = 0.458448\ldots,
 \label{eq:S_W_fit}
 \end{equation}
-with the slope $\approx 2$ identifiable as the wedge boundary
-dimension $\dim(\partial W) = \dim(S^{2}_{\mathrm{equator}}) = 2$.
+the constant verified by PSLQ to residual $< 10^{-80}$ (integer
+relation $[-1, 1, -1, -1]$ against $\{C_\infty, \coth 1, \log 2, \log
+\sinh 1\}$). The windowed least-squares slope climbs monotonically
+$1.94 \to 2.00005$ as the fit window moves to $\nmax \in [350,
+2000]$; the original $1.94$ is a small-$\nmax$ artifact of a sequence
+converging to exactly $2$. The slope $2 = \dim(\partial W) =
+\dim(S^{2}_{\mathrm{equator}})$ identifies the wedge boundary
+dimension as a degeneracy log on the lowest $\Kalpha$ shell. The
+additive constant lives in the Boltzmann-base ring (functions of $e$
+via $\coth 1$, $\sinh 1$, tied to the integer spacing
+$\Delta\Kalpha = 2$ at $\beta = 2\pi$); it carries no master Mellin
+engine transcendental, consistent with
+Prop.~\ref{prop:F_vs_S_decomposition}. A PSLQ search against the
+F-theorem ring $\{1, \log 2, \zeta(3)/\pi^{2}\}$ at coefficient
+ceiling $10^{8}$ returns null: the wedge-entropy constant and the
+F-coefficient lie in disjoint rings, sharpening
+Prop.~\ref{prop:F_vs_S_decomposition} from ``F absent from $S(\rhoW)$''
+to ``the state-side constant is provably outside the spectral-zeta
+ring.''
 
 \subsection{Mechanism: degeneracy log on the lowest $\Kalpha$ shell}
 

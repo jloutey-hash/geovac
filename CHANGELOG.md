@@ -7,6 +7,87 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.41.0] - 2026-06-01
+
+### Added
+- **The Forcing Catalogue (`docs/forcing_catalogue.md`).** A new living artifact: every
+  bit-exact result is a *forcing-certificate* ("this, I did not choose"), and each gets a
+  crack column asking *what else the same rigidity forces that was never checked.* Seeded
+  with 16 fully-worked certificates, then a six-arc Explore sweep catalogued ~165 across
+  gravity / QED-gauge / math.OA / foundations / chemistry-QC / precision-entropy. Two
+  meta-findings: (i) the FILED-AS tag is dominated by *consistency-check* over *prediction* —
+  the engine has been run backwards, and that ratio measures the remaining forward-run; (ii)
+  negatives logged against a specific hypothesis hide half-doors (confirmed on the first
+  sweep, Door 2).
+- **Five candidate-door probes + three graduation probes (sub-agent dispatch).** Scorecard:
+  2 doors, 1 theorem-consolidation, 1 deep theorem, 1 vindicating partial, 2 clean kills.
+  - **Door 1 (F-theorem odd-d ladder) → DOOR.** Paper 50 Prop 7.4 holds: the conformal-scalar
+    F-coefficient on S⁷, S⁹, S¹¹ is an exact ℚ-combination of {log2, ζ(3)/π², …, ζ(d)/π^{d-1}};
+    the ζ(odd) ladder continues, closed at 1e-302 on a frozen basis across three dimensions.
+    A prior "falsification" was a PSLQ maxsteps artifact (verified PSLQ-independently). The
+    engine demonstrably *generates* new closed forms. Graduation: the bonus recursion
+    scalar−2·Dirac = c_d·Dirac_{d−2} does NOT graduate (c₁₁ irrational; old c₇=c₉=½ was an
+    inconsistent Dirac normalization; top-atom cancellation holds only at d=5, derived
+    analytically). Files `debug/door1_*`, `debug/door1b_*`.
+  - **Door 2 (BW wedge entropy re-read) → PARTIAL.** The negative ("area-law rejected") hid a
+    positive: slope is provably EXACTLY 2 (degeneracy n² forces it; 1.963 was a small-n
+    artifact, windowed slope → 2.00005 at n∈[350,2000]), and the constant has the exact
+    closed form C_∞ = coth(1) − log(2 sinh 1) = 0.4584… (PSLQ [−1,1,−1,−1], residual <1e-80;
+    original 0.540 was small-n contamination). BUT the conjectured F-theorem link is RULED
+    OUT — C_∞ is PSLQ-null against {1, log2, ζ(3)/π²}; entropy (state-side, boundary
+    dimension) and the F-coefficient (operator-side, 3D free energy) live in disjoint rings.
+    Files `debug/door2_*`.
+  - **Door 3 (Paper 35 π-criterion) → THEOREM (full coverage).** The criterion ("π appears
+    iff a continuous temporal/spectral integration is in the evaluation") holds across all 28
+    Paper 34 projections + the case-exhaustion list + M1/M2/M3, zero counterexamples. M1
+    prime suspect resolved: discrete c₁ on the finite Hopf graph = 0 (exact integer);
+    continuum π reappears only via the Vol(S²)/4 measure integral. Sharpening: two disjoint
+    transcendental engines — spectral-side master Mellin (π-class) and state-side von Neumann
+    (log-class, π-free). Sampled → fully-covered. Files `debug/door3_*`.
+  - **Door 4 (gauge/Yukawa seam) → WALL+DOOR (deepest result).** The forced/free boundary is
+    the tensor-product seam of the AC triple: D² = D_GV²⊗1 + 1⊗D_F² factorizes the master
+    Mellin engine into an outer ring (M1/M2/M3) × an inner Yukawa Dirichlet ring ℚ[y_i^{−2s}]
+    with no shared generator. "AC-extension cannot select the Yukawa" is a THEOREM
+    (η-trivialization + factorization + G3 commuting-Z₂ ⇒ bone-ring ⊥ calibration-ring) — the
+    cleanest proof of the structural-skeleton scope in the corpus, and it explains why
+    H1/W3/Koide all failed (each probed inside the AC category where the seam forbids
+    selection). Files `debug/door4_*`.
+  - **Door 4b/4c (inner-algebra forcing).** Among finite real *-algebras reproducing
+    U(1)×SU(2)×SU(3), only ℂ⊕ℍ⊕M₃(ℂ) and ℂ⊕M₂(ℂ)⊕M₃(ℂ) survive; the Bertrand × Hopf-tower
+    truncation forces the factor count, ℂ (n=1), and M₃ (n=3). The residual ℍ-vs-M₂(ℂ) fork
+    at n=2 was tested by a J sign-table audit (Door 4c) and the conjectured J_GV²=−1 handle
+    closed NEGATIVE: over ℂ the two are the same algebra (ℍ⊗ℂ ≅ M₂), the real-form
+    distinction is an internal involution invisible to the combined J (combined J²/signs/
+    KO-dim bit-identical at n_max∈{1,2,3}); ℍ is a literature import (CCM), not GeoVac-forced.
+    Honest ledger: factor count + ℂ + M₃ FORCED; n=2 real form ADMITTED-not-forced;
+    generation count + inner KO-dim + Yukawa values FREE. Files `debug/door4b_*`,
+    `debug/door4c_*`.
+  - **Door 5 (ζ_{D²} / χ₋₄ ladder) → WALL.** Ladder rigid through s=12, forms exact, but every
+    value is already-connected or an internal coefficient with no isolated measurement; the
+    "new observable" claim was selection-attributable (W3/c₂ failure mode) and correctly
+    demoted. Files `debug/door5_*`.
+
+### Changed
+- **Paper 50 §5** (`paper_50_cft3_partition_function.tex`): the small-cutoff log-linear fit
+  S ≈ 1.94 log n + 0.56 replaced by the exact n→∞ asymptotic
+  S = 2 log n_max + (coth 1 − log 2 sinh 1) + O(1/n_max), with slope provably exactly 2 and
+  the constant in closed form (PSLQ residual <1e-80). The F-disjointness is made rigorous,
+  sharpening Prop. `prop:F_vs_S_decomposition` from "F absent from S(ρ_W)" to "the state-side
+  constant is provably outside the spectral-zeta ring." (Door 2.)
+- **Paper 32 §VIII** (`paper_32_spectral_triple.tex`): two new paragraphs after the Yukawa
+  non-selection theorem — the forced/free seam theorem (Door 4) and the inner-algebra forcing
+  ledger (Door 4b + 4c). The Door 4c negative is recorded honestly (J_GV²=−1 admits but does
+  not force ℍ; ℍ is a literature import, not a GeoVac forcing).
+
+### Closed
+- **Door 4 forced/free seam** at theorem grade: bone-ring ⊥ calibration-ring; the Yukawa is
+  free because it generates its own Dirichlet ring. Explains the H1/W3/Koide negatives
+  structurally. See `debug/sprint_forcing_catalogue_memo.md`.
+- **Door 4c ℍ-forcing conjecture**: NEGATIVE — J_GV²=−1 admits but does not force ℍ; the
+  ℍ/M₂ real-form distinction is invisible to the combined J.
+- **Door 2 BW-entropy F-link**: NEGATIVE — wedge entropy and the F-coefficient live in
+  disjoint rings (state-side boundary dimension vs operator-side 3D free energy).
+
 ## [3.40.0] - 2026-06-01
 
 ### Added
