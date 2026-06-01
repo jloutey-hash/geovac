@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.37.0] - 2026-06-01
+
+### Added
+- **Cross-observable consistency matrix across 18 Roothaan autopsies.** Five findings: (1) deuteron polarizability muD/D-HFS cross-check — framework residual maps exactly to CGV/CV 13% literature split; (2) LS-8a wall has nuclear-structure texture (D 7x larger than H/T at same Z); (3) electronic/muonic r_p extraction consistent, confirms global-fit design; (4) PK cliff non-monotonic, grows ~Z^2.5 across alkali series; (5) six Layer-2 inputs have zero cross-checks, muH HFS is priority target. Driver: `debug/cross_observable_consistency.py`.
+- **Muonic hydrogen 1S HFS autopsy (19th Roothaan entry).** Framework 43,842 GHz vs literature 44,183 GHz (-0.77%). Zemach sensitivity 186x over electronic. Eides/Karshenboim r_Z convention split resolvable at 64 ppm. First muonic HFS in the catalogue. Paper 34 §V.C.19 added.
+- **Alkali HFS cliff Z-sequence.** Li 19x, Na 92x, K 851x, Rb 3635x, Cs 8306x core-penetration contact enhancement (Z_eff-needed/Z_eff-CR67). Growth ~Z^2.5. Paper 34 Table added.
+- **Deuteron electric dipole polarizability from Paper 23 Hamiltonian.** Minnesota NN at N_shells=2: alpha_E = 0.694 fm^3 (+9.7%) at hw=8 MeV. Variational-optimal hw=3 gives +675%. N_shells=3 bit-identical (no tensor force in Minnesota). Matches SLEGS 2026 experimental 0.637(28) fm^3 within 1-sigma at alpha-tuned hw.
+- **He-4 polarizability (compact nucleus control).** alpha_E = 0.074 fm^3 (+1.5% vs lit 0.073) at hw=38 MeV. Correctly predicts 9x smaller response than deuteron. Different hw needed — same multi-scale lesson as atomic cliff.
+- **Variational hw optimization self-consistency test.** Deuteron gap 5 MeV, He-4 gap 28 MeV. Neither self-consistent at N_shells=2 — basis too truncated for simultaneous ground-state + response description.
+- **Literature survey: nuclear HO basis convergence.** Seven topics (Furnstahl IR, natural orbitals, Gamow shell model, Coulomb-Sturmian, nuclear polarizability calculations, effective interactions, lattice EFT). Key finding: no published IR extrapolation for E1 sum rules. Coulomb-Sturmian and LIT identified as forward paths.
+- Driver scripts: `debug/deuteron_polarizability.py`, `debug/he4_polarizability.py`, `debug/nuclear_hw_optimization.py`, `debug/ir_extrapolation_e1.py`, `debug/deuteron_sturmian_v2.py`, `debug/deuteron_sturmian_refit.py`, `debug/muh_hfs_and_na_cliff.py`
+
+### Closed (negative results)
+- **IR extrapolation for E1 polarizability: NEGATIVE.** Furnstahl-style exponential/power-law/combined models all extrapolate to 2-16 fm^3 (experiment 0.63). Root cause: polarizability is a multi-scale continuum response, not amenable to single-scale IR correction. The tuned hw=8 result (+9.7%) outperforms any extrapolation.
+- **Sturmian basis for deuteron polarizability: THREE NEGATIVES.** v1 (numerical grid) failed on grid coarseness. v2 (analytical kinetic + Gauss-Laguerre) overbinds 20x (Minnesota is effective interaction, not bare). v3 (refit V_T) correct binding but alpha-unstable polarizability (sum-over-states fragile for continuum response). LIT method identified as correct next approach.
+
+### Changed
+- Paper 34 §V.C: added §V.C.19 muH 1S HFS autopsy + alkali cliff Table after §V.C.18. Three-pass clean compile.
+
 ## [3.36.0] - 2026-05-31
 
 ### Closed

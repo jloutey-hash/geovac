@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.36.0 (May 31, 2026)
+**Version:** v3.37.0 (June 1, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint cross-observable + nuclear (2026-06-01):** Consistency matrix across 18 autopsies; 19th muH HFS autopsy; deuteron/He-4 polarizability; IR extrapolation NEGATIVE; Sturmian NEGATIVE. See `debug/sprint_cross_observable_nuclear_memo.md`.
 - **Sprint follow-on closure (2026-05-31):** 18/18 Roothaan autopsies; H1 Higgs POSITIVE-THIN with Yukawa non-selection theorem; G4a n_max=3 bit-exact; BH-Phase0 S~2log(n); H_local proof. See `debug/sprint_followon_closure_memo.md`.
 - **Sprint G4a Connes SM (2026-05-31):** POSITIVE-THIN; U(1)×SU(2)×SU(3) from inner fluctuations; 45/45 tests; Yukawa not selected. See `debug/sprint_g4a_connes_sm_memo.md`.
 - **Sprint G6-Full graviton (2026-05-31):** Bit-exact (2k)^2 integer kinetic spectrum; SD sign structure correct; Lichnerowicz 2% at Lambda^2=4. See `debug/g6_full_graviton_memo.md`.
@@ -341,6 +342,8 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | Naive de-compactification of the finite-R Dirichlet disk (Paper 53 B3, 2026-05-29) | 1 | Taking R→∞ with the finite-R Dirichlet disk does NOT remove the boundary obstruction: the Markov–Cesàro ratio g=num/den is 0/0 at ρ=R (all modes vanish there), so g(R)≠f(R) regardless of f's decay — a construction artifact, not a function-content effect (collar error stays ~0.26 even where f(R−1)=5e−27). The fix is the boundaryless plane ℝ²_α directly via the 2D Bochner–Riesz/Hankel band-limit (no Dirichlet boundary). See `debug/b3_disk_backbone_memo.md`. |
 | Species-II spatial fission-aperture discriminator (which-site entanglement frozen=non-binder / responsive=binder, 2026-05-30) | 1 | "Responsive vs frozen" was a LiH-only confound: MgH2 (4e, non-binder) is strongly RESPONSIVE, killing the binding reading; H2 (2e, binder) is FROZEN. The real variable is ≥2 active electron pairs (inter-pair correlation), not binding or fission topology. Spatial fission-aperture reading retired; superseded by the occupation-confinement coordinate (closed subshell = Fock-closure). See `debug/sprint_species_ii_aperture_memo.md`. |
 | BW wedge entanglement entropy as Bekenstein-Hawking area law (BH-Phase0, 2026-05-31) | 1 | S ~ 2·log(n_max), NOT area law (R²=0.83 rejected). Boltzmann suppression concentrates probability on ground shell; BH entropy comes from spectral-action replica (Paper 51), not BW entanglement. See `debug/bh_phase0_entanglement_entropy_memo.md`. |
+| Furnstahl IR extrapolation for E1 polarizability (2026-06-01) | 3 | Exponential, power-law, and combined models all extrapolate to 2-16 fm^3 (experiment 0.63). Multi-scale continuum response not amenable to single-scale IR correction. See `debug/sprint_cross_observable_nuclear_memo.md`. |
+| Sturmian basis for deuteron polarizability with Minnesota NN (2026-06-01) | 3 | v1 grid-coarseness failure; v2 overbinds 20x (Minnesota is effective interaction for HO); v3 refit gives correct binding but alpha-unstable polarizability. Sum-over-states fragile for continuum response; LIT is the correct method. See `debug/sprint_cross_observable_nuclear_memo.md`. |
 
 
 ---

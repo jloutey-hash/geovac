@@ -1,0 +1,18 @@
+{
+  "finding_1": {
+    "mud_pol_implied": 1.938500000000007,
+    "mud_pol_cgv": 1.69,
+    "mud_pol_cv2011": 1.94,
+    "mud_pull_sigma": 12.425000000000352,
+    "mud_fractional_shift_pct": 14.704142011834737,
+    "d_hfs_pol_implied_ppm": 199.60000000000002,
+    "d_hfs_pol_py2010_ppm": 200.0
+  },
+  "finding_3": {
+    "rp_input": 0.84087,
+    "rp_implied_h_lamb": 0.9958608686440484,
+    "rp_implied_muh_lamb": 0.8179217901066599,
+    "delta_rp_h_mfm": 154.99086864404836,
+    "delta_rp_muh_mfm": -22.948209893340117
+  }
+}

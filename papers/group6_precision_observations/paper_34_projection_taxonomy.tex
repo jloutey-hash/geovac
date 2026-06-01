@@ -6806,6 +6806,128 @@ at $\omega = 8$.  The bridge to the chemistry-side W1e wall is the
 deepest cross-domain structural pattern in the multi-focal-composition
 arc.
 
+\subsubsection{Muonic hydrogen 1S hyperfine structure autopsy
+(first muonic HFS; $r_Z(p)$ cross-link)}
+\label{sec:autopsy_muh_hfs}
+
+\textbf{Reference.}  $E_\text{HFS}(\mu\text{H},\,1S) = 182.725$ meV
+$= 44\,183$~GHz (Karshenboim--Ivanov 2002, \emph{Phys.\ Lett.\ B}
+\textbf{524}, 259; no direct experimental measurement --- muon lifetime
+$\tau_\mu = 2.2\,\mu$s prevents conventional precision HFS spectroscopy).
+\textbf{First muonic HFS entry in the catalogue.}  Creates the
+cross-link for $r_Z(p)$ identified in the cross-observable consistency
+matrix (Finding~5, May~31 2026).
+
+The projection chain is \emph{identical} to
+\S\ref{sec:autopsy_21cm} (H 21cm): Fock $\circ$ spinor $\circ$ 3$j$
+$\circ$ rest-mass $\circ$ magnetization-density, with the single
+architectural substitution $m_e \to m_\mu$ via
+\S\ref{sec:proj_restmass}.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{4.5cm} r p{5.5cm} c}
+\toprule
+Component & GHz & Projection chain & Status \\
+\midrule
+BF strict ($g_\mu = 2$, point nucleus) & $+44\,115$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\S\ref{sec:proj_3j} $\circ$ \S\ref{sec:proj_restmass}
+& FN \\
+$+$ Schwinger $a_\mu$ ($g_\mu = 2.0023318$) & $\times 1.001166$ &
+\S\ref{sec:proj_spectral_action} & FN (with calibration) \\
+$+$ Reduced mass $(m_p/(m_\mu+m_p))^3 = 0.7261$ &
+(folded into BF) &
+\S\ref{sec:proj_restmass} & FN \\
+$+$ Zemach $r_Z = 1.045$~fm (Eides 2024) & $\times(1 - 7340\text{~ppm})$ &
+\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
+\textbf{\S\ref{sec:proj_magnetization_density}} & FN at op-level $+$ L2 ($r_Z$) \\
+\midrule
+\textbf{Final (Eides $r_Z$)} & $+43\,842$ & & \\
+\textbf{Final (Karshenboim $r_Z = 1.054$)} & $+43\,839$ & & \\
+Literature (Karshenboim--Ivanov) & $+44\,183$ & & \\
+\textbf{Residual} & $-341$ & $= -0.77\%$; LS-8a $+$ recoil-mixing budget & \\
+\bottomrule
+\end{tabular}
+\caption{Muonic hydrogen 1S HFS Roothaan autopsy.  First muonic HFS
+entry in the catalogue; creates the $r_Z(p)$ cross-link.  The
+$-0.77\%$ residual is the same LS-8a $+$ recoil-mixing budget as
+electronic H 21cm (\S\ref{sec:autopsy_21cm}), scaled to muonic mass.
+Source: \texttt{debug/muh\_hfs\_and\_na\_cliff.py}.}
+\label{tab:autopsy_muh_hfs}
+\end{table}
+
+\textbf{Zemach sensitivity enhancement: $186\times$.}  The Zemach
+correction at muonic mass is $-7340$~ppm (at $r_Z = 1.045$~fm) versus
+$-39.5$~ppm at electronic mass --- an enhancement factor
+$m_{\text{red},\mu p}/m_{\text{red},ep} = 185.84/0.999 = 186$.  The
+Eides ($r_Z = 1.045$~fm) vs Karshenboim ($r_Z = 1.054$~fm) convention
+split produces a $64$~ppm $= 2{,}792$~MHz difference in the muonic HFS,
+versus $\sim 0.3$~ppm $\sim 56$~kHz at electronic H 21cm.  \textbf{The
+convention split is resolvable at muonic sensitivity}: $64$~ppm is well
+above any plausible framework residual budget.
+
+\textbf{Cross-link with H 21cm (\S\ref{sec:autopsy_21cm}).}  The two
+autopsies share the same Layer-2 input ($r_Z(p)$) consumed through the
+same projection (\S\ref{sec:proj_magnetization_density}), at mass ratios
+differing by $186\times$.  A simultaneous fit constraining $r_Z(p)$ from
+both channels would:
+\begin{itemize}\setlength\itemsep{0pt}
+\item resolve the Eides/Karshenboim convention split (currently
+$\pm 5$~ppm on H 21cm, below the $+18$~ppm framework residual;
+$\pm 64$~ppm on $\mu$H HFS, resolvable);
+\item test whether the LS-8a multi-loop QED budget scales correctly
+from electronic to muonic mass (same physics, different kinematics);
+\item provide the first muonic-electronic HFS consistency check in
+the precision catalogue.
+\end{itemize}
+
+\textbf{Alkali contact-density cliff: quantitative Z-sequence.}
+The cross-observable consistency analysis (Finding~4, May~31 2026)
+computed the hydrogenic-$Z_\text{eff}$ BF A-constant across all five
+stable alkali ground-state HFS systems, testing the cliff severity
+prediction from \S\ref{sec:autopsy_li7_hfs} and
+\S\ref{sec:autopsy_cs_hfs}.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{l c c c r r r r}
+\toprule
+Atom & $Z$ & $n$s & $Z_\text{eff}$(CR67) & $A_\text{fw}$ (MHz) &
+$A_\text{exp}$ (MHz) & Cliff & $Z_\text{eff}^\text{needed}/Z_\text{eff}^\text{CR67}$ \\
+\midrule
+Li-7    &  3 & 2s & 1.279 &  21.0 &  401.8 & $-94.8\%$  & $19\times$ \\
+Na-23   & 11 & 3s & 2.507 &   9.6 &  885.8 & $-98.9\%$  & $92\times$ \\
+K-39    & 19 & 4s & 2.162 &   0.3 &  230.9 & $-99.9\%$  & $851\times$ \\
+Rb-85   & 37 & 5s & 2.771 &   0.3 & 1011.9 & $-100.0\%$ & $3{,}635\times$ \\
+Cs-133  & 55 & 6s & 3.475 &   0.3 & 2298.2 & $-100.0\%$ & $8{,}306\times$ \\
+\bottomrule
+\end{tabular}
+\caption{Alkali ground-state HFS cliff sequence using
+hydrogenic-$Z_\text{eff}$ contact density (CR67 single-zeta).
+The rightmost column shows the ratio of true contact density to the
+$Z_\text{eff}^3/(\pi n^3)$ estimate --- the quantitative measure of
+core-penetration contact enhancement from PK orthogonality
+(\S\ref{sec:proj_phillips_kleinman}).  The enhancement grows as
+$\sim Z^{2.5}$ across the alkali series.  Source:
+\texttt{debug/muh\_hfs\_and\_na\_cliff.py}.}
+\label{tab:alkali_cliff_sequence}
+\end{table}
+
+The $Z_\text{eff}^\text{needed}/Z_\text{eff}^\text{CR67}$ ratio column
+is the quantitative measure of the PK contact-enhancement cliff:
+$19\times$ at Li (the existing \S\ref{sec:autopsy_li7_hfs} finding),
+growing to $8{,}306\times$ at Cs.  The growth scaling $\sim Z^{2.5}$
+reflects the increasing number of inner shells against which the valence
+$ns$ orbital must orthogonalize --- each orthogonalization pulls a
+radial node inward, piling amplitude at the origin.  The existing Cs
+autopsy (\S\ref{sec:autopsy_cs_hfs}) achieved $-47\%$ using the full
+\texttt{FrozenCore} screened wavefunction (which captures \emph{some}
+core penetration); the $-100\%$ here uses the bare
+hydrogenic-$Z_\text{eff}$ contact density (which captures \emph{none}).
+The gap between $-47\%$ and $-100\%$ at Cs quantifies the partial
+recovery from the \texttt{FrozenCore} infrastructure.
+
 % -------------------------------------------------------------------
 \subsection{Literature convention exposures (running catalogue)}
 \label{sec:convention_exposures}
