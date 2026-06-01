@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.34.0 (May 31, 2026)
+**Version:** v3.35.0 (May 31, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -227,9 +227,10 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 - Sprint L3a-1 + Paper 44 (2026-05-17): Lorentzian operator system, prop=2/∞ envelope-dependent. Paper 44.
 - Sprint L3b-2 + Paper 45 (2026-05-18): K⁺-weak Lorentzian propinquity — first in literature. Paper 45.
 - Sprint L3b-2a-d + Paper 46 (2026-05-22): Strong-form closed; Λ^strong=Λ^P45 bit-exact. Paper 46.
-- Sprint L3c + Paper 47 (2026-05-23): G2 de-compactification at norm-resolvent level; three-carrier identification. Paper 47.
-- Phase A + Paper 48 (2026-05-24): Krein-MS bridge via Wick-rotation functor + Connes-Rovelli; 7 newly accessible theorems. Paper 48.
-- Q1' + Paper 49 (2026-05-24/25): OSLPLS strong-form bridge; twin-paradox-as-quantum-information; Uhlmann monotonicity. Paper 49.
+- Sprint L3c + Paper 47 (2026-05-23): G2 norm-resolvent; three-carrier identification. Paper 47.
+- Phase A + Paper 48 (2026-05-24): Krein-MS bridge; 7 newly accessible theorems. Paper 48.
+- Q1' + Paper 49 (2026-05-24/25): OSLPLS strong-form bridge; twin paradox. Paper 49.
+- **Sprint math.OA-arc-closure (2026-05-31):** G2-metric, G3, Q2, Q2' all CLOSED. See `debug/sprint_mathoa_arc_closure_memo.md`.
 
 **Gauge arc (Papers 25, 30, 41, April-May 2026):**
 - Paper 30 (v2.25.0): SU(2) Wilson on S³; maximal-torus → Paper 25 U(1); L₁ = kinetic term. See Paper 30.

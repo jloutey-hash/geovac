@@ -1530,6 +1530,84 @@ Coulomb-projection $S^3$ triple, where the calibration is the
 $S^2$ Hopf-base Weyl constant.
 \end{observation}
 
+\begin{theorem}[G3 closure: Bertrand-rigidity category obstruction]%
+\label{thm:g3_closure}
+There is no tensor-product spectral triple
+$\Tcal_{\sthree} \otimes \Tcal^{\mathrm{BL}}_{S^5}$
+that simultaneously preserves:
+\begin{enumerate}
+\item[(a)] the Riemannian-Dirac character of $\Tcal_{\sthree}$
+  (second-order spectral action, spinor bundle,
+  Camporesi--Higuchi spectrum $|\lambda_n| = n + 3/2$); and
+\item[(b)] the Bargmann character of $\Tcal^{\mathrm{BL}}_{S^5}$
+  ($\pi$-free certificate, Hardy-sector tower structure,
+  first-order Euler spectrum $E_N = N + 5/2$).
+\end{enumerate}
+The obstruction is categorical and rests on three premises:
+\begin{itemize}
+\item \emph{Bertrand's theorem (1873):}  the only central
+  potentials with all bounded orbits closed are $V = -Z/r$
+  (Coulomb) and $V = \omega^2 r^2$ (harmonic oscillator).
+\item \emph{Fock rigidity (Paper~23~\cite{paper23}, Thm.~4):}
+  the $\sthree$ conformal projection is unique to $-Z/r$;\ the
+  projection is second-order (stereographic / conformal), yielding
+  a Riemannian spectral triple with the Laplace--Beltrami
+  operator.
+\item \emph{HO rigidity (Paper~24~\cite{paper24}, Thm.~3):}
+  the $S^5$ Bargmann--Segal projection is unique to $\omega^2 r^2$;\
+  the projection is first-order (complex-analytic / holomorphic),
+  yielding a Berezin--Toeplitz construction with the Euler number
+  operator on the Hardy space.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\emph{Step 1 (category identification).}
+Fock rigidity and HO rigidity place the two potentials in different
+mathematical categories: Coulomb $\to$ second-order conformal
+$\to$ Riemannian spectral triple; HO $\to$ first-order
+holomorphic $\to$ Berezin--Toeplitz quantization.
+
+\emph{Step 2 (exhaustion of tensor-product options).}
+Three constructions are available:
+(i)~the standard graded tensor product with the round-$S^5$
+Riemannian Dirac---this preserves~(a) but violates~(b)
+($\pi$ re-enters via the Seeley--DeWitt coefficients on $S^5$);
+(ii)~the tensor product with the Bargmann--Euler operator---this
+preserves~(b) but violates~(a)
+($E_{\mathrm{BL}}$ is not a Dirac-type operator on $S^5$,
+being the radial part of the Laplacian restricted to the
+holomorphic sector, not an elliptic differential operator
+on the total space);
+(iii)~a hypothetical framework-extending construction beyond
+standard Connes spectral triples and Berezin--Toeplitz
+quantization---no such framework exists in published
+mathematics.
+
+\emph{Step 3 (irreducibility).}
+Bertrand exhausts the potentials;\ the two rigidity theorems fix
+the projection type for each.  The category mismatch is a
+structural feature of central-force quantum mechanics, not an
+artifact of the GeoVac construction.  The five asymmetry layers
+of Paper~24~\S~V (spectrum-computing role of $L_0$; calibration
+$\pi$; Wilson gauge matter coupling; modular-Hamiltonian
+Pythagorean orthogonality; spectral-action gravity termination)
+are all downstream consequences of this single categorical
+obstruction.
+\end{proof}
+
+\begin{remark}[G3 scope]%
+\label{rem:g3_scope}
+Theorem~\ref{thm:g3_closure} does not assert that $S^3$ and $S^5$
+are unrelated --- they are the two Bertrand geometries, deeply connected
+through the angular sparsity theorem (Paper~22).  It asserts that their
+\emph{spectral-triple-type structures} live in different mathematical
+categories, and no published framework bridges the gap while preserving
+both structural contents.  Cross-manifold unification, if achievable,
+requires framework-extending mathematics beyond the scope of this paper
+and the published NCG literature.
+\end{remark}
+
 % ===================================================================
 \section{The $\pi$-Source Case-Exhaustion Theorem}
 \label{sec:pi_source_theorem}

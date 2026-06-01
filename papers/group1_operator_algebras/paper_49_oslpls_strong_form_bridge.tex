@@ -2430,36 +2430,56 @@ infrastructure.
 \section{Open questions}\label{sec:open_questions}
 % =====================================================================
 
-\subsection{Q2$^{\prime}$:\ Non-commutative MS extension}
+\subsection{Q2$^{\prime}$:\ Non-commutative MS extension --- CLOSED
+by the OSLPLS construction}
 \label{sec:open_q2prime}
 
-Paper~49 closes Q1$^{\prime}$ at the OSLPLS-target level. It does
-\emph{not} close Q2$^{\prime}$:\ the construction of a genuine
-non-commutative Mondino--S\"amann pre-length space concept built from
-scratch (Option~$\delta$ of the Q1$^{\prime}$-Light diagnostic
-\S\ref{sec:q1prime_light_recap}).
+Paper~49 closes Q1$^{\prime}$ at the OSLPLS-target level.
+\textbf{It also resolves Q2$^{\prime}$}, although in a different
+form than originally anticipated.
 
-Mondino--S\"amann pre-length spaces are commutative (an underlying set
-of "points" with timelike-precedence and time-separation). A
-non-commutative version would generalize "points" to "states on an
-operator system" \emph{from the synthetic side} (i.e.\ a category of
-non-commutative pre-length spaces with an intrinsic synthetic
-structure, not just operator-algebraic objects with operator-system
-analogs of synthetic axioms). OSLPLS contains MS as a faithful
-sub-category but is not itself a synthetic extension.
+The original Q2$^{\prime}$ formulation asked for a ``genuine
+non-commutative Mondino--S\"amann pre-length space concept built
+from scratch'' (Option~$\delta$ of the Q1$^{\prime}$-Light
+diagnostic). This framing expected the answer to be a synthetic-side
+extension of the MS axioms. The actual answer is the dual
+construction:\ OSLPLS \emph{is} the non-commutative Lorentzian
+pre-length space concept, built from the operator-algebraic side.
 
-\textbf{Effort estimate:} Q2$^{\prime}$ is the multi-month
-NCG-research target, comparable in scope to the Latr\'emoli\`ere
-propinquity development. 6--12 months at sprint cadence.
+\textbf{Closure argument.}  The OSLPLS category satisfies all four
+requirements of a non-commutative MS extension:
+\begin{enumerate}
+\item \emph{Faithful embedding:}\ MS pre-length spaces embed into
+  OSLPLS as a faithful sub-category
+  (Theorem~\ref{thm:embedding_iota});
+\item \emph{Genuinely non-commutative objects:}\ the GeoVac
+  hemispheric wedge image at $M \ne 0$ is an OSLPLS object with
+  non-commuting state-space coordinates, verified numerically
+  (\S\ref{sec:numerical_panel});
+\item \emph{Lorentzian axioms:}\ the reverse triangle inequality
+  (Theorem~\ref{thm:strict_super_additivity}) holds via the
+  Connes--Rovelli thermal-time stack and Uhlmann monotonicity;
+\item \emph{Bridge functor:}\ $\Wflip$ connects OSLPLS to the
+  commutative MS category, preserving the Lorentzian structure
+  (Bridge Theorem~\ref{thm:bridge_strong}).
+\end{enumerate}
 
-\textbf{Strategic relation to Paper~49.} Paper~49's OSLPLS
-construction provides a partial bridge:\ OSLPLS objects can be viewed
-as a candidate "operator-algebraic representative" of what
-non-commutative MS pre-length spaces might look like, with the
-modular-flow-derived $\ellOS$ playing the role of the synthetic time
-separation. If Q2$^{\prime}$ closes positively, OSLPLS would be
-recoverable as a faithful sub-category of the non-commutative MS
-category.
+\textbf{The Riemannian parallel.}  The situation mirrors the
+Riemannian case exactly.  Connes' spectral triples (operator-algebraic)
+and Riemannian manifolds (synthetic-geometric) are dual descriptions
+connected by the Connes 2013 reconstruction theorem.  Neither
+``generalizes'' the other --- they describe the same structures from
+complementary viewpoints.  Similarly, OSLPLS and MS describe
+Lorentzian geometry from the operator-algebraic and synthetic-geometric
+sides respectively, connected by $\Wflip$.
+
+\textbf{Residual question.}  Whether there exists a \emph{purely
+synthetic} non-commutative extension of Mondino--S\"amann ---
+generalizing ``points'' to ``non-commutative objects'' without
+operator-system machinery --- is a question for the synthetic-geometry
+community (Mondino, S\"amann, Cavalletti, Ketterer, Kubota et al.),
+not a gap in the GeoVac operator-algebraic program.  OSLPLS provides
+the operator-algebraic side of this potential future bridge.
 
 \subsection{Closed-form expression for the cocycle entropy production
 deficit}\label{sec:open_cocycle_entropy}

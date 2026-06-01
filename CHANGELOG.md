@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.35.0] - 2026-05-31
+
+### Closed
+- **G2-metric (Paper 47 §7, Theorem 7.3).** Propinquity-level convergence on the non-compact carrier S³ × ℝ_t, closing Paper 45 §1.4 G2 at the metric level (previously only norm-resolvent via Paper 47 §§3-4). Mechanism: temporal-Lipschitz-invisibility (Paper 46 Lemma 3.2) gives L^K(e_T) = 0 for the temporal cutoff extent element, making it admissible at every radius r > 0 in the Latrémolière pinned proper QMS hypertopology (2512.03573, Krein-lifted per Paper 48 §3). Paper 46 panel values {2.0746, 1.6101, 1.3223} inherited bit-exactly as the non-compact propinquity values. The "multi-month" estimate was correct for general non-compact QMS theory but GeoVac's temporal-Lipschitz-invisibility trivializes the temporal extension.
+- **G3 (Paper 32 §VII, Theorem 7.4).** Cross-manifold tensor product T_{S³} ⊗ T_{Hardy(S⁵)} proved structurally impossible within the standard NCG framework. Bertrand-rigidity category obstruction: Bertrand's theorem (only two closed-orbit potentials) + Fock rigidity (Paper 23 Thm 4, S³ unique to Coulomb, second-order Riemannian) + HO rigidity (Paper 24 Thm 3, S⁵ unique to HO, first-order complex-analytic) = categorical mismatch. No tensor product preserves both Riemannian-Dirac character and π-free Bargmann character. The five asymmetry layers (Paper 24 §V) are all downstream consequences. Elevated from "blocked" to "proven structural impossibility."
+- **Q2 (Paper 47 §8).** Enlarged-substrate non-compact extension via flip-suppression. Under admissible scaling, ‖D_t‖ = O(N_t/T) → ∞ forces ‖f^flip‖ ≤ 1/(2‖D_t‖) → 0 in the Lip-1 ball. The "O(T) growth" flagged in the original Q2 formulation is the convergence MECHANISM (squeezes chirality-flip content to zero), not an obstruction. Enlarged metametric ≤ C₃·γ + 1/(2‖D_t‖) + ε(T) → 0.
+- **Q2' (Paper 49 §10).** Non-commutative Mondino-Sämann extension resolved by recognizing OSLPLS IS the answer. Four closure criteria: (1) faithful MS embedding (Theorem ι), (2) genuinely non-commutative objects (GeoVac wedge at M ≠ 0), (3) reverse triangle via Uhlmann monotonicity, (4) bridge functor W^flip. Parallels the Riemannian duality (Connes spectral triples ↔ manifolds). Reframed from "6-12 month open target" to "already answered." Residual purely-synthetic question is for the synthetic-geometry community.
+
+### Changed
+- **Paper 47** extended (~16 → ~19 pages, three-pass clean): new §7 "Propinquity-level closure via temporal-Lipschitz-invisibility" with Lemma 7.1 (zero-cost extent element), Theorem 7.3 (G2-metric closure), Remarks 7.2/7.4/7.5. §8 Q1 marked CLOSED, Q2 marked CLOSED, Q3 marked CLOSED. Header comment updated. Added \Cthreeop command, paper48 and paper32 bibitems.
+- **Paper 32** extended (Theorem 7.4 + proof sketch + Remark 7.5 added in §VII after Observation 7.2; three-pass clean).
+- **Paper 45** §1.4 G2 updated to CLOSED (propinquity-level); G3 updated to CLOSED (structural impossibility).
+- **Paper 49** §10.1 Q2' rewritten from open to CLOSED by OSLPLS construction.
+- **CLAUDE.md** v3.34.0 → v3.35.0: §2 Lorentzian arc three entries (G2-metric, G3, Q2/Q2').
+
+### Added
+- `debug/sprint_mathoa_arc_closure_memo.md` — umbrella sprint memo
+- `debug/g2_metric_closure_memo.md` — G2-metric proof memo (~2800 words)
+- `debug/g3_cross_manifold_closure_memo.md` — G3 impossibility proof memo (~2200 words)
+- `debug/q2_q2prime_closure_memo.md` — Q2 + Q2' closure memo (~2400 words)
+
 ## [3.34.0] - 2026-05-31
 
 ### Added

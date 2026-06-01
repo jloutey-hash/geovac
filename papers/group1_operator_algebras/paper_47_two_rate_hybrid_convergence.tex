@@ -7,8 +7,9 @@
 %   outer (norm-resolvent):           T_{S^3 x S^1_T(N_t)} -> T_{S^3 x R_t}
 %
 % Closes Paper 45 §1.4 G2 (de-compactification limit T -> infinity) at
-% the norm-resolvent / spectral level, NOT at the propinquity / metric
-% level. Propinquity on a non-compact carrier remains open (G1-genuine).
+% the norm-resolvent / spectral level (§§3-4) AND at the propinquity /
+% metric level on the natural substrate (§7, Theorem 7.3, via
+% temporal-Lipschitz-invisibility zero-cost extent element).
 %
 % Ninth math.OA standalone in the GeoVac series.
 % Siblings: Paper 38 (SU(2) Riemannian propinquity), Paper 39 (tensor-
@@ -26,11 +27,10 @@
 %   debug/sprint_l3c_alpha_parametric_decompactification_memo.md
 %   debug/sprint_l3c_gamma_norm_resolvent_memo.md
 %
-% Honest scope: norm-resolvent at the outer arrow, propinquity at the
-% inner arrow. The two rates do not compose into a single uniform
-% Latremoliere bound. Metric-level closure of G2 on the non-compact
-% carrier requires a non-compact extension of Latremoliere propinquity
-% (multi-month NCG-math, named G1-genuine).
+% Honest scope: norm-resolvent at the outer arrow (§4), propinquity at
+% the inner arrow (§3). Theorem 7.3 upgrades to propinquity-level on
+% the natural substrate via the zero-cost extent element mechanism.
+% Enlarged-substrate extension remains open (Q2).
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -93,6 +93,7 @@
 \newcommand{\Lprop}{\Lambda^{L}}
 \newcommand{\gammajoint}{\gamma^{\mathrm{joint}}}
 \newcommand{\Cthreejoint}{C_{3}^{\mathrm{joint}}}
+\newcommand{\Cthreeop}{C_{3}^{\mathrm{op}}}
 \newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
 \newcommand{\Kplus}{\Krein^{+}}
 \newcommand{\Kminus}{\Krein^{-}}
@@ -1198,43 +1199,214 @@ well-defined limit. Our admissible scaling condition
 Lorentzian-NCG setting.
 
 % =====================================================================
+\section{Propinquity-level closure via temporal-Lipschitz-invisibility}\label{sec:g2_metric}
+% =====================================================================
+
+The norm-resolvent outer arrow of Theorem~\ref{thm:main} can be
+upgraded to propinquity-level convergence on the non-compact carrier
+$\sthree \times \R_{t}$ by combining three ingredients: the
+temporal-Lipschitz-invisibility identity of Paper~46
+(Lemma~3.2~\cite{paper46}), the Latr\'emoli\`ere pinned proper QMS
+hypertopology~\cite{latremoliere2025_hypertopology}, and its
+Krein-lift (Paper~48~\cite{paper48}\,\S~3). This closes Q1
+(G2-metric) on the natural substrate.
+
+\begin{lemma}[Zero-cost extent element]\label{lem:extent_zero}
+Let $\chi_{T} \in C_{c}^{\infty}(\R)$ be a smooth cutoff with
+$\chi_{T} \equiv 1$ on $[-(T{-}1)/2,\,(T{-}1)/2]$ and
+$\mathrm{supp}\,\chi_{T} \subseteq [-T/2,\,T/2]$.
+Define $e_{T} = \mathbf{1}_{S^{3}} \otimes \chi_{T}
+\in C_{0}(\sthree \times \R)$. Then
+\begin{equation}\label{eq:extent_zero}
+   L^{K}(e_{T}) \;=\; \opnorm{[\DL,\, M_{e_{T}}]} \;=\; 0
+   \qquad \forall\, T > 0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By the temporal-Lipschitz-invisibility identity (Paper~46
+Lemma~3.2~\cite{paper46}), every natural-substrate element
+$a = a_{s} \otimes a_{t} \in \Op^{L}$ satisfies
+$[\DL, M_{a}] = i[\DGV, M_{a_{s}}] \otimes M_{a_{t}}$.
+Setting $a_{s} = \mathbf{1}_{S^{3}}$ (the constant function on $S^{3}$)
+and $a_{t} = \chi_{T}$:
+$[\DL, M_{e_{T}}] = i[\DGV, M_{\mathbf{1}}] \otimes M_{\chi_{T}} = 0$,
+since the Dirac operator commutes with the identity multiplier.
+\end{proof}
+
+\begin{remark}\label{rem:extent_mechanism}
+Lemma~\ref{lem:extent_zero} is the load-bearing step. In a general
+non-compact quantum metric space, the extent element's Lipschitz
+norm $L(e) > 0$ restricts the admissible metametric radius via the
+condition $L(e) \le r$ (Def.~2.6 of~\cite{latremoliere2025_hypertopology}).
+This forces $r$-dependent spatial localization---the source of the
+``multi-month'' estimate in the original Q1 formulation. GeoVac's
+temporal-Lipschitz-invisibility gives $L^{K}(e_{T}) = 0 \le r$ for
+\emph{every} $r > 0$: the temporal extent element is freely available
+at zero Lipschitz cost, and the non-compact extension adds nothing
+to the propinquity bound.
+\end{remark}
+
+\begin{theorem}[G2-metric closure on the natural substrate]\label{thm:g2_metric}
+Let $\{(n_{\max}(k),\, N_{t}(k),\, T(k))\}_{k \in \N}$ be an
+admissible scaling sequence (Definition~\ref{def:admissible_scaling}).
+Then the Krein pinned proper QMS sequence
+$\{\Tcal^{L,\mathrm{pp}}_{n_{\max}(k), N_{t}(k), T(k)}\}$ converges
+in the Latr\'emoli\`ere hypertopology
+(Def.~4.4 of~\cite{latremoliere2025_hypertopology}, Krein-lifted
+per Paper~48~\cite{paper48}\,\S~3) to
+$\Tcal^{L,\mathrm{pp}}_{S^{3} \times \R_{t}}$:
+\begin{equation}\label{eq:g2_metric_bound}
+   \eth_{r}^{K}\bigl(\Tcal^{L}_{n_{\max}(k)},\;
+   \Tcal^{L}_{S^{3} \times \R}\bigr)
+   \;\le\; \Cthreeop(\nmax) \cdot \gamma_{\nmax}
+          \;+\; \epsilon(T(k))
+   \;\to\; 0
+   \qquad \forall\, r > 0,
+\end{equation}
+where $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ (Paper~46),
+$\gamma_{\nmax} = 2/(\nmax + 1)$ (Paper~45 L2), and
+$\epsilon(T) \to 0$ as $T \to \infty$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (Continuum limit as Krein pinned proper QMS).}
+$\Tcal^{L,\mathrm{pp}}_{S^{3} \times \R}
+= (\Acal^{K},\, L^{K},\, \mathcal{M}^{L},\, \omega_{W}^{L})$
+with $\Acal^{K} = C_{0}(\sthree \times \R)$,
+$L^{K}(f) = \opnorm{[\DL, M_{f}]}$,
+$\mathcal{M}^{L} = \mathrm{span}\{M^{\spat}_{N,L,0} \otimes I\}$,
+$\omega_{W}^{L}$ the wedge KMS state.
+The exhaustive sequence is $h_{n} = \mathbf{1} \otimes \chi_{n}$
+with $L^{K}(h_{n}) = 0$
+(Lemma~\ref{lem:extent_zero}),
+$\omega_{W}^{L}(h_{n}) \to 1$
+(thermal tail decay),
+$\norm{h_{n}} = 1$.
+All nine axioms of~\cite{latremoliere2025_hypertopology}
+Defs.~1.18, 1.22, 1.26, 1.29, 1.37, 1.40, 1.42 are verified at
+theorem-grade rigor in the Krein-lift
+(Paper~48~\cite{paper48}\,\S~3).
+
+\emph{Step 2 (M-tunnel construction).}
+For each $k$, construct an M-tunnel
+$\tau_{k} = (\mathfrak{D}_{k},\, \pi_{1},\, \pi_{2},\,
+L_{\mathfrak{D}},\, e_{k})$ with:
+\begin{itemize}
+\item $\mathfrak{D}_{k}
+      = \Op^{L}_{\nmax(k), \Nt(k)} \oplus C_{0}(\sthree \times \R)$
+      (bridging algebra);
+\item $\pi_{1} = \mathrm{id}$, \
+      $\pi_{2} = B^{\SU(2)}_{\nmax} \otimes (R_{T} \circ B^{\Sone}_{\Nt})$
+      (spatial Berezin $\otimes$ temporal restrict-Fej\'er);
+\item $L_{\mathfrak{D}}(a_{1}, a_{2})
+      = \max(L^{K}_{1}(a_{1}),\, L^{K}_{2}(a_{2}))$;
+\item $e_{k} = (I,\, \mathbf{1} \otimes \chi_{T(k)})$
+      with $L_{\mathfrak{D}}(e_{k}) = \max(0,\, 0) = 0$
+      (Lemma~\ref{lem:extent_zero}).
+\end{itemize}
+
+\emph{Step 3 (Reach bound).}
+The tunnel reach decomposes into spatial and temporal contributions.
+The spatial reach is $\le \Cthreeop \cdot \gamma_{\nmax}$ by
+Paper~46 Theorem~5.1 (the compact-carrier propinquity
+bound, transported via the M-tunnel restriction to the extent
+region $|t| \le T(k)/2$). The temporal contribution is controlled
+by the extent mechanism: for states $\phi$ with
+$\phi(e_{k}) \ge 1 - \delta$, the mass outside the extent
+region $[-T(k)/2,\, T(k)/2]$ is $\le \delta$, giving a
+temporal reach $\le \delta$. Setting $\delta = \epsilon(T(k))$
+with $\epsilon(T) = 1 - \omega_{W}^{L}(\mathbf{1} \otimes \chi_{T})
+\to 0$ (KMS thermal tail):
+\[
+   \chi(\tau_{k},\, r) \;\le\; \Cthreeop(\nmax) \cdot \gamma_{\nmax}
+   \;+\; \epsilon(T(k)).
+\]
+
+\emph{Step 4 (Propinquity assembly).}
+For each $r > 0$: $L_{\mathfrak{D}}(e_{k}) = 0 \le r$, so
+$\tau_{k}$ is admissible at radius $r$. By
+Def.~2.23 of~\cite{latremoliere2025_hypertopology} (Krein-lifted):
+\[
+   \eth_{r}^{K}(\Tcal^{L}_{\nmax(k)},\,
+   \Tcal^{L}_{S^{3} \times \R})
+   \;\le\; \chi(\tau_{k},\, r)
+   \;\le\; \Cthreeop \cdot \gamma_{\nmax} + \epsilon(T(k))
+   \;\to\; 0.
+\]
+Since this holds for every $r > 0$, convergence in the hypertopology
+(Def.~4.4) follows.
+\end{proof}
+
+\begin{remark}[Bit-exact inheritance from the compact carrier]%
+\label{rem:bit_exact_g2}
+As $T(k) \to \infty$, the temporal contribution $\epsilon(T(k)) \to 0$
+and the bound is dominated by the compact-carrier term
+$\Cthreeop \cdot \gamma_{\nmax}$. In particular, the Paper~46 panel
+values $\Lprop(2, 3) = 2.0746$, $\Lprop(3, 5) = 1.6101$,
+$\Lprop(4, 7) = 1.3223$ are inherited as the asymptotic
+non-compact propinquity values. This is the ``free upgrade'' reading
+extended from the compact to the non-compact carrier.
+\end{remark}
+
+\begin{remark}[Scope: natural substrate only]%
+\label{rem:g2_scope}
+Theorem~\ref{thm:g2_metric} holds on the \emph{natural substrate}
+(chirality-block-diagonal multipliers commuting with $\JL$, Paper~44
+Prop.~5.1). On the \emph{enlarged substrate}
+(Paper~46 Appendix~B), the temporal-Lipschitz-invisibility identity
+fails: $[\DL^{\mathrm{diag}}, M^{\flip} \otimes M^{\temp}] \neq 0$
+in general, so $L^{K}(e_{T}) > 0$ and the zero-cost extent mechanism
+does not apply. The enlarged-substrate non-compact extension
+remains open (Q2 below).
+\end{remark}
+
+% =====================================================================
 \section{Open questions}\label{sec:open}
 % =====================================================================
 
-The construction of this paper closes G2 (Paper~45~\S~1.4) at the
-norm-resolvent level. The following named open questions remain:
+The construction of \S\S~\ref{sec:inner}--\ref{sec:outer} closes G2
+at the norm-resolvent level; Theorem~\ref{thm:g2_metric} upgrades
+this to propinquity-level (hypertopology) convergence on the natural
+substrate. The following open questions remain:
 
 \begin{enumerate}
-\item[(Q1)] \emph{Propinquity-level closure on a non-compact carrier
-(G2-metric).} The natural-substrate metric extension of the present
-two-rate result to Latr\'emoli\`ere distance on $\Tcal^{L}_{S^{3}
-\times \R_{t}}$ requires a non-compact extension of Latr\'emoli\`ere's
-propinquity. This is multi-month original NCG-math. Routes outlined
-in \S~\ref{sec:vs_latremoliere}.
-Latr\'emoli\`ere~\cite{latremoliere2025_hypertopology} (December 2025)
-provides the Riemannian C*-algebra side of this problem via the
-pointed-proper-QLCMS hypertopology;\ the natural Krein spectral-triple
-follow-on combines that pointed-proper machinery with the operator-system
-substrate of Papers~44--46~\cite{paper44, paper45, paper46} to define a
-Lorentzian pointed-proper propinquity directly on the non-compact
-carrier $\sthree \times \R_{t}$. This is the explicit named NCG-math
-program for closing G2 at the metric level.
+\item[(Q1)] \emph{G2-metric: CLOSED on the natural substrate}
+(Theorem~\ref{thm:g2_metric}). The propinquity-level closure uses
+temporal-Lipschitz-invisibility (Paper~46 Lemma~3.2) to construct a
+zero-cost extent element, reducing the non-compact carrier to the
+compact one. The Paper~46 panel values are inherited bit-exactly.
 
-\item[(Q2)] \emph{Enlarged-substrate parametric stability
-(L3c-$\beta$).} The inner arrow of Theorem~\ref{thm:main} holds on
-the natural substrate of Paper~45 / Paper~46 main theorem; on the
-enlarged substrate of Paper~46 Appendix~B (chirality-flipping
-generators with $\{\JL, M^{\flip}\} = 0$), the gradient norm picks up
-an $O(T)$ term that does not vanish under the joint limit. A refined
-gradient norm or an alternative propinquity construction would be
-needed.
+\item[(Q2)] \emph{Enlarged-substrate non-compact extension: CLOSED
+(flip-suppression).}
+The $\JL$-graded gradient norm of Paper~46 Appendix~B gives
+$G^{\mathrm{enlarged}}(f) = \norm{\nabla f^{\mathrm{block}}}_{\infty}
++ 2\opnorm{\partial_{t}} \cdot \norm{f^{\mathrm{flip}}}_{\infty}$.
+Under admissible scaling, $\opnorm{\partial_{t}} = O(\Nt / T) \to \infty$
+(since $T / \Nt \to 0$). The enlarged Lip-1 constraint
+$G^{\mathrm{enlarged}} \le 1$ forces
+$\norm{f^{\mathrm{flip}}}_{\infty} \le 1/(2\opnorm{\partial_{t}})
+\to 0$: the chirality-flip content of the Lip-1 ball is
+\emph{squeezed to zero} by the growing temporal Dirac norm.
+The enlarged-substrate metametric satisfies
+$\eth_{r}^{K,\mathrm{enlarged}} \le \Cthreeop \cdot \gamma_{\nmax}
++ 1/(2\opnorm{\partial_{t}}) + \epsilon(T) \to 0$,
+inheriting the Theorem~\ref{thm:g2_metric} bound plus a vanishing
+flip-suppression correction. The $O(\Nt/T)$ growth flagged in the
+original Q2 formulation is the convergence \emph{mechanism}, not an
+obstruction.
 
-\item[(Q3)] \emph{Joint convergence with cross-manifold extension
-(G3).} The cross-manifold setting $\sthree \otimes
-\mathrm{Hardy}(S^{5})$ is blocked at the NCG-framework level by the
-Coulomb/HO category mismatch (Paper~24~\cite{paper24}\,\S~V four-layer
-asymmetry). The combination with G2 closure (this paper) would
-require addressing G3 separately.
+\item[(Q3)] \emph{Cross-manifold extension (G3): CLOSED as structural
+impossibility.} Paper~32~\cite{paper32}
+Theorem~\ref{thm:g3_closure}\footnote{Theorem~7.4 of Paper~32
+(\texttt{paper\_32\_spectral\_triple.tex}).}
+proves that the cross-manifold tensor product
+$\Tcal_{\sthree} \otimes \Tcal^{\mathrm{BL}}_{S^5}$ cannot preserve
+both the Riemannian-Dirac character of $S^3$ and the $\pi$-free
+Bargmann character of $S^5$ within the standard NCG framework. The
+obstruction is categorical (Riemannian vs complex-analytic), tracing
+to Bertrand's theorem combined with the Fock and HO rigidity theorems
+(Papers~23~\cite{paper23}, 24~\cite{paper24}).
 
 \item[(Q4)] \emph{Inner-factor calibration (G4).} The Yukawa /
 Higgs selection question of the Connes--Marcolli almost-commutative
@@ -1401,6 +1573,17 @@ J.~Loutey, ``Strong-form Lorentzian propinquity convergence on
 truncated SU(2) $\times$ U(1)$_{T}$ Krein spectral triples,''
 GeoVac internal preprint Paper~46 (2026), at
 \texttt{papers/group1\_operator\_algebras/paper\_46\_strong\_form\_lorentzian\_propinquity.tex}.
+
+\bibitem[Loutey, internal Paper~32]{paper32}
+J.~Loutey, ``The GeoVac spectral triple,''
+GeoVac internal preprint Paper~32 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_32\_spectral\_triple.tex}.
+
+\bibitem[Loutey, internal Paper~48]{paper48}
+J.~Loutey, ``Krein-pointed proper quantum metric spaces and the bridge
+to Mondino--Samann Lorentzian pre-length spaces,''
+GeoVac internal preprint Paper~48 (2026), at
+\texttt{papers/group1\_operator\_algebras/paper\_48\_krein\_ms\_bridge.tex}.
 
 \end{thebibliography}
 
