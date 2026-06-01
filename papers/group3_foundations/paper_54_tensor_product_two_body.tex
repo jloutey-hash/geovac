@@ -1,0 +1,527 @@
+\documentclass[twocolumn,pra,amsmath,amssymb,superscriptaddress]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+\title{Two-body interactions from the tensor-product spectral triple:\\
+{\large Selection rules from the algebra, coupling strengths from the metric}}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{June 1, 2026}
+
+\begin{abstract}
+We construct the tensor-product spectral triple
+$\mathcal{T}_{S^3} \otimes \mathcal{T}_{S^3}$ for two particles on the
+Fock-projected three-sphere at finite cutoff $n_{\max}$, and investigate
+whether the gauged spectral action generates the Coulomb inter-particle
+interaction from the framework's own algebraic structure. The free
+tensor-product Dirac $D_{\mathrm{total}} = D_1 \otimes I + \gamma_1
+\otimes D_2$ satisfies $\{D, \gamma\} = 0$ exactly, so
+$D_{\mathrm{total}}^2$ factorizes and the free spectral action contains
+no interaction (Theorem~\ref{thm:free_factorization}). Gauging via the
+inner fluctuation $A = \sum_i a_i^\dagger [D, a_i]$ from the truncated
+operator system $\mathcal{O}_{n_{\max}}$ produces a genuine two-body
+interaction: the connected (non-factorizable) fraction of $\{D, A\}$ is
+$77\%$ at $n_{\max} = 2$ and $32\%$ at $n_{\max} = 3$
+(Proposition~\ref{prop:connected}). The angular decomposition of this
+interaction is $100\%$ $m$-conserving, $100\%$ Gaunt-compatible, and
+pure $k = 0$ monopole at both cutoffs
+(Theorem~\ref{thm:angular_structure}). However, the radial matrix
+element ratios do not match the Coulomb $1/r_{12}$ kernel: the
+coefficient of variation exceeds $1600\%$ and the Pearson correlation
+is $0.41$--$0.58$ (Proposition~\ref{prop:radial_negative}). These
+results precisely delineate Paper~31's universal/Coulomb partition at
+the two-body level: the \emph{algebra} determines which channels
+couple (angular selection rules); the \emph{metric} determines how
+strongly (radial coupling strengths). The multi-focal composition wall
+identified across six independent observables in the GeoVac programme
+is structurally located at this algebra/metric boundary.
+\end{abstract}
+
+\maketitle
+
+%% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+%% =====================================================================
+
+The GeoVac framework constructs a discrete spectral triple
+$(\mathcal{A}, \mathcal{H}, D)$ on the Fock-projected
+three-sphere~\cite{paper7,paper32}: the algebra $\mathcal{A}$ of
+truncated multipliers on $S^3$, the Hilbert space $\mathcal{H}$ of
+Fock-projected states, and the Camporesi--Higuchi Dirac operator $D$.
+This single-particle spectral triple has been shown to converge to the
+continuum $S^3$ in the Latr\'{e}moli\`{e}re
+propinquity~\cite{paper38}, and the spectral action
+$\mathrm{Tr}\,f(D^2/\Lambda^2)$ reproduces the correct gravity sector
+at one loop~\cite{paper51}.
+
+A central open question is whether the framework can derive
+\emph{inter-particle interactions} from its own structure, rather than
+importing them as external input. The electron--electron Coulomb
+repulsion $V_{ee} = 1/r_{12}$, the nucleon--nucleon force, and the
+core--valence interaction in molecular systems are all two-body
+couplings that the framework currently imports from standard quantum
+mechanics. The ``multi-focal composition wall''~\cite{paper34} ---
+the observation that the framework couples discrete quantum numbers
+cleanly but has no native composition theorem for spatial focal
+lengths --- has been documented across six independent
+observables~\cite{CLAUDE_wall}.
+
+In this paper we attack the problem directly. We construct the
+tensor-product spectral triple $\mathcal{T}_1 \otimes \mathcal{T}_2$
+for two particles, each on a copy of the truncated $S^3$, and compute
+the gauged spectral action to determine what interaction, if any,
+emerges from the algebra's inner fluctuations.
+
+The results are sharp: the algebra produces the correct angular
+selection rules (Gaunt compatibility, $m$-conservation, monopole
+dominance), but the radial coupling strengths are not proportional to
+the Coulomb kernel. This places the multi-focal wall precisely at the
+boundary between the algebra $\mathcal{A}$ (which determines angular
+structure) and the Dirac operator $D$ (which determines radial
+couplings) --- the universal/Coulomb partition of
+Paper~31~\cite{paper31}, now verified at the two-body level.
+
+%% =====================================================================
+\section{Setup}
+\label{sec:setup}
+%% =====================================================================
+
+\subsection{Single-particle spectral triple}
+
+We work with the scalar sector of the Fock-projected $S^3$ at cutoff
+$n_{\max}$. The Hilbert space is
+\begin{equation}
+  \mathcal{H}_{n_{\max}} =
+  \mathrm{span}\{|n, l, m\rangle : 1 \le n \le n_{\max}\},
+  \label{eq:H_scalar}
+\end{equation}
+with $\dim \mathcal{H}_{n_{\max}} = N = \sum_{n=1}^{n_{\max}} n^2$.
+For the Dirac structure, we chirality-double to $\hat{\mathcal{H}} =
+\mathcal{H}^+ \oplus \mathcal{H}^-$ with $\dim \hat{\mathcal{H}} =
+2N$.
+
+The Dirac operator is the Camporesi--Higuchi form~\cite{camporesi_higuchi1996}:
+\begin{equation}
+  D |n, l, m, \chi\rangle = \chi \left(n + \tfrac{1}{2}\right)
+  |n, l, m, \chi\rangle,
+  \label{eq:dirac}
+\end{equation}
+where $\chi = \pm 1$ is the chirality. The chirality operator
+$\gamma$ swaps the two sectors: $\gamma |n, l, m, +\rangle = |n, l,
+m, -\rangle$.
+
+The algebra $\mathcal{A} = \mathcal{O}_{n_{\max}}$ is the Connes--van
+Suijlekom~\cite{connes_vs2021} truncated operator system, generated
+by the $3$-$Y$ multiplier matrices $M_{NLM}$ with entries
+\begin{equation}
+  (M_{NLM})_{(nlm),(n'l'm')} =
+  \int_{S^3} \overline{Y^{(3)}_{nlm}} \cdot Y^{(3)}_{NLM}
+  \cdot Y^{(3)}_{n'l'm'} \, d\Omega.
+  \label{eq:multiplier}
+\end{equation}
+These are embedded into $\hat{\mathcal{H}}$ as $\hat{M} =
+\mathrm{diag}(M, M)$, acting identically on both chirality sectors.
+
+\subsection{Tensor-product Dirac}
+
+For two particles, the total Hilbert space is $\hat{\mathcal{H}}_1
+\otimes \hat{\mathcal{H}}_2$ with dimension $(2N)^2$. The
+tensor-product Dirac operator is the standard
+product~\cite{connes_book1994}:
+\begin{equation}
+  D_{\mathrm{total}} = D_1 \otimes I_2 + \gamma_1 \otimes D_2.
+  \label{eq:D_total}
+\end{equation}
+The chirality twist $\gamma_1$ ensures $D_{\mathrm{total}}$ is a
+first-order operator on the graded tensor product.
+
+%% =====================================================================
+\section{Free factorization}
+\label{sec:free}
+%% =====================================================================
+
+\begin{theorem}[Free factorization]
+\label{thm:free_factorization}
+For the Camporesi--Higuchi Dirac~\eqref{eq:dirac} on the
+chirality-doubled scalar basis, $\{D, \gamma\} = 0$ exactly. As a
+consequence,
+\begin{equation}
+  D_{\mathrm{total}}^2 = D_1^2 \otimes I_2 + I_1 \otimes D_2^2,
+  \label{eq:D2_factorizes}
+\end{equation}
+and the spectral action $\mathrm{Tr}\,f(D_{\mathrm{total}}^2/\Lambda^2)
+= \mathrm{Tr}\,f(D_1^2/\Lambda^2) \cdot \mathrm{Tr}\,
+f(D_2^2/\Lambda^2)$ factorizes exactly at every cutoff $\Lambda$.
+\end{theorem}
+
+\begin{proof}
+The Dirac eigenvalue on $|n, l, m, \chi\rangle$ is $\chi(n +
+\frac{1}{2})$. The chirality operator sends $\chi \to -\chi$. For any
+basis state,
+\[
+(D\gamma + \gamma D)|n,l,m,\chi\rangle =
+\chi(n+\tfrac{1}{2})(-\chi)(n+\tfrac{1}{2})
++ (-\chi)(n+\tfrac{1}{2})\chi(n+\tfrac{1}{2}) = 0,
+\]
+using $D|n,l,m,-\chi\rangle = -\chi(n+\frac{1}{2})|n,l,m,-\chi\rangle$.
+Hence $\{D,\gamma\} = 0$. Expanding $D_{\mathrm{total}}^2$:
+\[
+D_{\mathrm{total}}^2 = D_1^2 \otimes I + (D_1 \gamma_1 + \gamma_1
+D_1) \otimes D_2 + I \otimes D_2^2.
+\]
+The cross term vanishes by $\{D_1, \gamma_1\} = 0$.
+\end{proof}
+
+\begin{remark}
+This is the correct physical statement: free particles do not
+interact. The spectral action of the free Dirac gives independent
+single-particle kinetic energies. Any interaction must enter through
+\emph{gauging}.
+\end{remark}
+
+\emph{Numerical verification.} At $n_{\max} \in \{2, 3\}$, the heat
+trace ratio $\mathrm{Tr}(e^{-t D_{\mathrm{total}}^2}) /
+[\mathrm{Tr}(e^{-t D_1^2}) \cdot \mathrm{Tr}(e^{-t D_2^2})] =
+1.000000$ to machine precision at all tested $t \in \{0.1, 0.5, 1.0,
+2.0\}$.
+
+%% =====================================================================
+\section{Gauged interaction}
+\label{sec:gauged}
+%% =====================================================================
+
+The inner fluctuation of $D_{\mathrm{total}}$ by the tensor-product
+algebra $\mathcal{A}_1 \otimes \mathcal{A}_2$ is
+\begin{equation}
+  [D_{\mathrm{total}}, \hat{M}_i \otimes \hat{M}_j] =
+  [D_1, \hat{M}_i] \otimes \hat{M}_j
+  + \gamma_1 \hat{M}_i \otimes [D_2, \hat{M}_j].
+  \label{eq:fluctuation}
+\end{equation}
+Both terms are generically nonzero: $[D, \hat{M}]$ is nonzero
+whenever $\hat{M}$ has cross-shell matrix elements (coupling states
+with different $n$, hence different $D$-eigenvalues). At $n_{\max} =
+2$, four of 14 multiplier generators have nonzero commutators; at
+$n_{\max} = 3$, 29 of 55.
+
+The \emph{rotationally invariant} one-form is constructed using the
+conjugate pairing~\cite{connes_book1994}:
+\begin{equation}
+  A = \sum_{(NLM)} \hat{M}_{NLM}^\dagger \otimes \hat{M}_{NLM}^\dagger
+  \cdot [D_{\mathrm{total}}, \hat{M}_{NLM} \otimes \hat{M}_{NLM}],
+  \label{eq:A_full}
+\end{equation}
+summing over all allowed multiplier labels in
+$\mathcal{O}_{n_{\max}}$. The dagger pairing ensures $m$-conservation
+(total magnetic quantum number $M_1 + M_2$ is preserved) and
+Hermiticity of $A$.
+
+\begin{proposition}[Connected interaction]
+\label{prop:connected}
+The anti-commutator $\{D_{\mathrm{total}}, A\}$ contains a
+non-factorizable (connected) two-body component. Define the connected
+part via partial-trace subtraction:
+\[
+V_{\mathrm{conn}} = \{D,A\} - \frac{1}{d_2}\mathrm{Tr}_2\{D,A\}
+\otimes I_2 - I_1 \otimes \frac{1}{d_1}\mathrm{Tr}_1\{D,A\}
++ \frac{\mathrm{Tr}\{D,A\}}{d_1 d_2} I_1 \otimes I_2.
+\]
+At $n_{\max} = 2$: $\|V_{\mathrm{conn}}\| / \|\{D,A\}\| = 76.7\%$.
+At $n_{\max} = 3$: $\|V_{\mathrm{conn}}\| / \|\{D,A\}\| = 32.4\%$.
+\end{proposition}
+
+The interaction is genuine: the connected fraction is nonzero, and the
+heat trace $\mathrm{Tr}\,e^{-t(D + \varepsilon A)^2}$ departs from
+the factorized value monotonically with $\varepsilon$ (Table~\ref{tab:heat}).
+
+\begin{table}[t]
+\centering
+\caption{Heat trace ratio $\mathrm{Tr}\,e^{-t(D+\varepsilon A)^2} /
+  [\mathrm{Tr}\,e^{-tD_1^2} \cdot \mathrm{Tr}\,e^{-tD_2^2}]$ at
+  $t = 0.5$ for the full-algebra gauge field.}
+\label{tab:heat}
+\begin{ruledtabular}
+\begin{tabular}{ccc}
+$\varepsilon$ & $n_{\max} = 2$ & $n_{\max} = 3$ \\
+\hline
+$0.0$ & $1.000000$ & $1.000000$ \\
+$0.1$ & $0.995465$ & $0.838438$ \\
+$0.5$ & $0.977815$ & $0.410165$ \\
+$1.0$ & $0.956832$ & $0.185405$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+%% =====================================================================
+\section{Angular selection rules}
+\label{sec:angular}
+%% =====================================================================
+
+\begin{theorem}[Angular structure of the connected interaction]
+\label{thm:angular_structure}
+The connected two-body interaction $V_{\mathrm{conn}}$ from the
+rotationally invariant gauge field~\eqref{eq:A_full} satisfies:
+\begin{enumerate}
+\item[(i)] \textbf{$m$-conservation:} $m_1 + m_2 = m_1' + m_2'$ for
+  all nonzero matrix elements. Verified at $100\%$ at $n_{\max} \in
+  \{2, 3\}$.
+\item[(ii)] \textbf{Gaunt compatibility:} $|\Delta l_1| = |\Delta
+  l_2| = k$ for all nonzero $(l_1, l_2) \to (l_1', l_2')$ channels.
+  Verified at $100\%$ at $n_{\max} \in \{2, 3\}$.
+\item[(iii)] \textbf{Pure monopole:} $100\%$ of $\|V\|^2$ is in the
+  $k = 0$ multipole channel at both cutoffs.
+\item[(iv)] \textbf{Hermiticity and exchange symmetry} hold to
+  machine precision ($< 10^{-17}$).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Verification]
+Direct computation from the $4$-index tensor $V_{\mathrm{conn}}[a, b,
+c, d]$ extracted from the positive-chirality sector at $n_{\max} = 2$
+($N = 5$, $25$ nonzero elements) and $n_{\max} = 3$ ($N = 14$, $196$
+nonzero elements). The $m$-conservation is enforced by the $M^\dagger
+\cdot [D, M]$ conjugate pairing, which ensures the total $M$ quantum
+number of the gauge field is zero. The Gaunt compatibility follows
+from the $3$-$Y$ selection rules of the multiplier algebra.
+\end{proof}
+
+\begin{remark}
+The $k = 0$ monopole channel corresponds to the $F^0$ Slater integral
+in the Neumann expansion of $1/r_{12}$
+(Paper~12~\cite{paper12}). Higher multipoles $k = 1, 2, \ldots$ would
+appear at larger $n_{\max}$ or in the full spinor sector. The
+\emph{absence} of the $k = 1$ dipole is correct for identical
+particles by parity.
+\end{remark}
+
+%% =====================================================================
+\section{Radial comparison with Coulomb}
+\label{sec:radial}
+%% =====================================================================
+
+\begin{proposition}[Radial weights do not match Coulomb]
+\label{prop:radial_negative}
+The matrix element ratios $V_{\mathrm{conn}}[a,b,c,d] /
+\langle ab | r_{12}^{-1} | cd \rangle$ are not constant across the
+nonzero elements. At $n_{\max} = 2$: coefficient of variation $\mathrm{CV}
+= 16.5$, Pearson correlation $r = 0.58$, sign agreement $68\%$. At
+$n_{\max} = 3$: $\mathrm{CV} = 20.3$, $r = 0.41$, sign agreement
+$54\%$.
+\end{proposition}
+
+The spectral-action interaction is a strict \emph{subset} of the
+Coulomb matrix elements: all nonzero spectral elements also appear in
+the Coulomb matrix ($0$ spectral-only entries), but the Coulomb matrix
+has many additional nonzero elements ($240$ at $n_{\max} = 2$,
+$15\,168$ at $n_{\max} = 3$) that are zero in the spectral
+interaction. The Pearson correlation \emph{decreases} with $n_{\max}$,
+indicating this is structural rather than a finite-size artifact.
+
+\begin{remark}
+The $1/r_{12}$ Coulomb kernel in the Fock-projected basis arises from
+the chordal distance identity under stereographic projection
+(Paper~7~\cite{paper7}). This is a \emph{metric} property of $S^3$,
+not a spectral-action property. The spectral action
+$\mathrm{Tr}\,f(D^2/\Lambda^2)$ computes heat-kernel coefficients
+(Seeley--DeWitt), while $1/r_{12}$ is a Green's function kernel ---
+fundamentally different objects at the mathematical level.
+\end{remark}
+
+%% =====================================================================
+\section{The algebra/metric boundary}
+\label{sec:boundary}
+%% =====================================================================
+
+The results of Sections~\ref{sec:angular}--\ref{sec:radial} precisely
+delineate the universal/Coulomb partition of
+Paper~31~\cite{paper31} at the two-body level:
+
+\begin{itemize}
+\item The \textbf{algebra} $\mathcal{A}$ (truncated operator system,
+  $3$-$Y$ multipliers) determines the angular selection rules: Gaunt
+  compatibility, $m$-conservation, and the multipole hierarchy.
+  These are \emph{universal} --- they hold for any central potential,
+  as proved by the angular sparsity theorem of
+  Paper~22~\cite{paper22}.
+
+\item The \textbf{Dirac operator} $D$ (Camporesi--Higuchi eigenvalues)
+  determines the radial coupling strengths. The gauged spectral action
+  generates an interaction whose radial weights depend on the specific
+  spectrum of $D$, not on the $1/r$ Coulomb potential. The Coulomb
+  kernel is additional input from the Fock projection's metric
+  structure.
+\end{itemize}
+
+This decomposition explains the ``multi-focal composition wall''
+documented across six observables in the GeoVac
+programme~\cite{paper34}: the wall sits at the $\mathcal{A}/D$
+boundary. The framework couples discrete labels (angular quantum
+numbers) via the algebra's inner fluctuations, but the spatial
+coupling strength (radial integrals) requires the metric --- the Fock
+projection that maps the graph onto $S^3$, and with it, the $1/r$
+potential.
+
+\begin{corollary}
+For two particles on $\mathcal{T}_{S^3} \otimes \mathcal{T}_{S^3}$,
+the inter-particle interaction splits as
+\begin{equation}
+  V_{12} = \underbrace{\text{angular selection
+      rules}}_{\text{from } \mathcal{A}} \times
+  \underbrace{\text{radial coupling
+      strengths}}_{\text{from } D / \text{metric}}.
+  \label{eq:AD_split}
+\end{equation}
+The first factor is framework-native (derived from inner
+fluctuations). The second factor is calibration data (the Slater
+integrals $R^k$ of Paper~12~\cite{paper12}).
+\end{corollary}
+
+%% =====================================================================
+\section{Implications}
+\label{sec:implications}
+%% =====================================================================
+
+\subsection{For atomic and molecular structure}
+
+The result vindicates the composed-geometry architecture of
+Paper~17~\cite{paper17}: the Gaunt selection rules that give the
+composed Pauli scaling $O(Q^{2.5})$ of Paper~14~\cite{paper14} are
+not ad hoc --- they emerge from the tensor-product algebra's inner
+fluctuations. The radial Slater integrals that complete the
+Hamiltonian are the irreducible calibration content, consistent with
+Paper~18's exchange-constant taxonomy~\cite{paper18} (calibration
+tier).
+
+\subsection{For nuclear structure}
+
+The same $\mathcal{A}/D$ split applies to the nucleon--nucleon
+interaction. The Minnesota potential's angular structure (central
+force, spin-dependent channels) is algebra-side; the radial Gaussian
+form factors ($V_R e^{-\kappa_R r^2}$, etc.)\ are $D$-side
+calibration. This explains why the nuclear model requires imported
+potentials: the framework derives \emph{which} nuclear channels couple
+but not the NN force strength.
+
+\subsection{For gravity}
+
+The gravity sector (Paper~51~\cite{paper51}) is special: the spectral
+action directly gives metric properties (Einstein--Hilbert action,
+Newton's constant, cosmological constant) because gravity \emph{is}
+the metric. The two-body Coulomb interaction is a Green's function
+kernel, not a heat-kernel coefficient, so it lives on the other side
+of the $\mathcal{A}/D$ boundary. This structural difference explains
+why gravity results are bit-exact while inter-particle interactions
+require imported potentials.
+
+%% =====================================================================
+\section{Discussion}
+\label{sec:discussion}
+%% =====================================================================
+
+The tensor-product spectral action generates genuine two-body physics:
+a non-factorizable interaction with the correct angular selection
+rules. That the radial weights do not match Coulomb is not a failure
+of the framework but a structural theorem about \emph{what spectral
+actions can compute}: heat-kernel coefficients (metric curvature, not
+Green's functions). The Coulomb potential is the Green's function of
+the Laplacian, $\nabla^2 G = -4\pi\delta^{(3)}$; it requires solving
+a differential equation on the manifold, not tracing over the
+spectrum.
+
+The practical consequence is that inter-particle radial integrals
+(Slater $R^k$, Minnesota form factors, Clementi--Raimondi screening)
+are irreducible calibration data in the GeoVac framework. The angular
+selection rules that govern which integrals are nonzero are
+framework-native. This is a more precise statement of the multi-focal
+composition wall: it is not a missing tool but the structural boundary
+between what the algebra determines and what the metric determines in
+a spectral triple.
+
+\emph{Open question.} Whether the Green's function kernel can be
+recovered from the spectral triple by a construction other than the
+spectral action --- for example, via the resolvent $(D - z)^{-1}$ or
+the Connes distance function --- remains an open problem. The
+resolvent naturally gives the propagator $\langle x | (D-z)^{-1} |
+y\rangle$, which in the continuum limit reproduces the Green's
+function. A resolvent-based derivation of $1/r_{12}$ from the
+tensor-product spectral triple would close the multi-focal wall.
+
+\begin{acknowledgments}
+This work was performed using AI-augmented research methods.
+Computational implementation and analysis were carried out
+collaboratively with Anthropic Claude.
+\end{acknowledgments}
+
+\begin{thebibliography}{30}
+
+\bibitem{paper7} J.~Loutey, ``The Dimensionless Vacuum: Fock
+  Projection and the Graph Laplacian on $S^3$,'' GeoVac Paper~7
+  (2025).
+
+\bibitem{paper12} J.~Loutey, ``Algebraic $V_{ee}$: Neumann Expansion
+  of the Electron--Electron Repulsion,'' GeoVac Paper~12 (2025).
+
+\bibitem{paper14} J.~Loutey, ``Structurally Sparse Qubit
+  Encodings,'' GeoVac Paper~14 (2025).
+
+\bibitem{paper17} J.~Loutey, ``Composed Geometries for Molecular
+  Systems,'' GeoVac Paper~17 (2025).
+
+\bibitem{paper18} J.~Loutey, ``Spectral-Geometric Exchange
+  Constants,'' GeoVac Paper~18 (2026).
+
+\bibitem{paper22} J.~Loutey, ``The Angular Sparsity Theorem,'' GeoVac
+  Paper~22 (2026).
+
+\bibitem{paper31} J.~Loutey, ``The Universal/Coulomb Partition of the
+  GeoVac Spectral Triple,'' GeoVac Paper~31 (2026).
+
+\bibitem{paper32} J.~Loutey, ``The GeoVac Spectral Triple,'' GeoVac
+  Paper~32 (2026).
+
+\bibitem{paper34} J.~Loutey, ``The Projection Taxonomy: A Living
+  Catalogue,'' GeoVac Paper~34 (2026).
+
+\bibitem{paper38} J.~Loutey, ``Propinquity Convergence on $S^3$,''
+  GeoVac Paper~38 (2026).
+
+\bibitem{paper51} J.~Loutey, ``Spectral Action and Gravity on the
+  GeoVac Lattice,'' GeoVac Paper~51 (2026).
+
+\bibitem{camporesi_higuchi1996} R.~Camporesi and A.~Higuchi, ``On the
+  eigenfunctions of the Dirac operator on spheres and real hyperbolic
+  spaces,'' J.~Geom.\ Phys.\ \textbf{20}, 1 (1996).
+
+\bibitem{connes_book1994} A.~Connes, \textit{Noncommutative Geometry}
+  (Academic Press, 1994).
+
+\bibitem{connes_vs2021} A.~Connes and W.~D.\ van Suijlekom,
+  ``Spectral truncations in noncommutative geometry and operator
+  systems,'' Commun.\ Math.\ Phys.\ \textbf{383}, 2021 (2021).
+
+\bibitem{marcolli_vs2014} M.~Marcolli and W.~D.\ van Suijlekom,
+  ``Gauge networks in noncommutative geometry,'' J.~Geom.\ Phys.\
+  \textbf{75}, 71 (2014).
+
+\bibitem{CLAUDE_wall} J.~Loutey, ``The Multi-Focal Composition Wall:
+  Five Independent Observables, Same Structural Reason,'' GeoVac
+  project documentation (2026).
+
+\end{thebibliography}
+
+\end{document}

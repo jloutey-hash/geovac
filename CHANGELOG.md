@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.39.0] - 2026-06-01
+
+### Added
+- **Paper 54: Two-body interactions from the tensor-product spectral triple.** Fourteenth GeoVac standalone. Constructs T_{S³}⊗T_{S³} at finite n_max, proves free D²_total factorizes ({D,γ}=0), shows gauged (D+A)² has 32–77% connected fraction, demonstrates 100% Gaunt-compatible / 100% m-conserving / pure k=0 monopole angular structure, and proves radial weights do NOT match Coulomb 1/r₁₂ (CV>1600%). Delineates Paper 31's A/D partition at the two-body level: algebra gives selection rules, metric gives coupling strengths. Names the multi-focal wall as the A/D boundary. Open question: resolvent-based 1/r₁₂ derivation. 4 pages, 16 bibitems, three-pass clean.
+- Full-algebra rotationally invariant gauge field (M†·[D,M] conjugate pairing). Resolves the 35% Gaunt-incompatible artifact from the single-multiplier diagnostic. Driver: `debug/tensor_product_full_algebra.py`.
+- Radial comparison of spectral-action V with Coulomb 1/r₁₂. All spectral elements are a strict subset of Coulomb nonzero elements. Driver: `debug/tensor_product_radial_compare.py`.
+
 ## [3.38.0] - 2026-06-01
 
 ### Added

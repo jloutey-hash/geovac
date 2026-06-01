@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.38.0 (June 1, 2026)
+**Version:** v3.39.0 (June 1, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Paper 54 (2026-06-01):** Two-body interactions from the tensor-product spectral triple; algebra gives selection rules, metric gives coupling strengths. See `papers/group3_foundations/paper_54_tensor_product_two_body.tex`.
 - **Sprint nuclear + tensor-product spectral action (2026-06-01):** Gauged T_{S³}⊗T_{S³} generates two-body interaction at 75% connected fraction with correct multipole hierarchy; Minnesota V_S/V_T fix; Sturmian B_d −1.2%. See `debug/sprint_nuclear_tensor_product_memo.md`.
 - **Sprint cross-observable + nuclear (2026-06-01):** Consistency matrix across 18 autopsies; 19th muH HFS autopsy; deuteron/He-4 polarizability; IR extrapolation NEGATIVE; Sturmian NEGATIVE. See `debug/sprint_cross_observable_nuclear_memo.md`.
 - **Sprint follow-on closure (2026-05-31):** 18/18 Roothaan autopsies; H1 Higgs POSITIVE-THIN with Yukawa non-selection theorem; G4a n_max=3 bit-exact; BH-Phase0 S~2log(n); H_local proof. See `debug/sprint_followon_closure_memo.md`.
