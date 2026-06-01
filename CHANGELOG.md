@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.40.0] - 2026-06-01
+
+### Added
+- **Resolvent two-body diagnostic: CLEAN NEGATIVE.** Tested four resolvent-weight candidates (Laplacian 1/(N²-1), Dirac 1/(N+½)², uniform, 1/N) for the two-body interaction on T_{S³}⊗T_{S³} against exact Coulomb Slater integrals at n_max=2,3. Corrected conjugation pattern V_{abcd} = Σ M[a,c]×conj(M[d,b])×w(N) enforces 100% m-conservation (initial bug at ~40% diagnosed and fixed). Best performer: Dirac resolvent (Pearson 0.807/0.751 at n_max=2/3), but correlation DECREASES with n_max — structural divergence, not finite-size. Laplacian resolvent essentially uncorrelated (Pearson -0.13/-0.04) due to N=1 zero-mode exclusion killing the dominant (1s,1s) element. **Root cause identified:** 3-Y multipliers use Gegenbauer radial overlap on S³; Coulomb uses Slater integrals in flat space. The conversion is the Fock projection conformal factor (chordal = 2R sin(geodesic/2R)), which is a function not a constant. Neither the spectral action (Paper 54) nor the resolvent can bypass the Fock projection. Driver: `debug/resolvent_two_body_diagnostic.py`.
+
+### Changed
+- **Paper 54 folded into Paper 31 §10 "Two-body verification of the partition."** Per PI direction, Paper 54's results (gauged spectral action + resolvent diagnostic) belong as a verification section in Paper 31 (universal/Coulomb partition), not as a standalone paper. New §10 with three subsections (gauged spectral action, resolvent construction, structural diagnosis) added before the Conclusion. Paper 31: 14 pages (was ~13), two-pass clean (pre-existing undefined refs in §8 unchanged). Eq.~\ref{eq:two_body_AD} captures the headline: V₁₂ = angular(A) × radial(D/metric).
+
+### Closed
+- Paper 54 open question (resolvent-based 1/r₁₂ derivation): answered in the NEGATIVE. The wall is the Fock projection conformal factor — a structural boundary between S³-native physics and flat-space physics. See `debug/sprint_resolvent_two_body_memo.md`.
+- Resolvent as alternative to spectral action for two-body interaction: NEGATIVE for same structural reason (Gegenbauer vs Slater radial basis mismatch).
+
 ## [3.39.0] - 2026-06-01
 
 ### Added

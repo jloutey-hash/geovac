@@ -1266,6 +1266,95 @@ ingredients~\cite{paper2_alpha}, is the most consequential open
 question in the framework.
 
 %=================================================================
+\section{Two-body verification of the partition}
+\label{sec:two_body}
+%=================================================================
+
+The $\mathcal{A}/D$ partition can be tested directly by constructing
+the tensor-product spectral triple
+$\mathcal{T}_1 \otimes \mathcal{T}_2$ for two particles on the
+Fock-projected $S^3$ and asking what interaction, if any, emerges
+from the framework's own structure.
+
+\subsection{Gauged spectral action}
+
+The free tensor-product Dirac
+$D_{\mathrm{total}} = D_1 \otimes I + \gamma_1 \otimes D_2$
+satisfies $\{D, \gamma\} = 0$ exactly, so $D_{\mathrm{total}}^2$
+factorizes and the free spectral action contains no interaction.
+Gauging via the inner fluctuation
+$A = \sum_i a_i^\dagger [D, a_i]$ from the 3-$Y$ multiplier algebra
+produces a genuine two-body interaction: the connected
+(non-factorizable) fraction of $\{D, A\}$ is $77\%$ at
+$n_{\max} = 2$ and $32\%$ at $n_{\max} = 3$.
+
+The angular decomposition of this interaction is $100\%$
+$m$-conserving, $100\%$ Gaunt-compatible, and pure $k = 0$ monopole
+at both cutoffs --- precisely the selection rules of the Coulomb
+$1/r_{12}$ kernel.  However, the radial matrix element ratios do not
+match Coulomb: the Pearson correlation is $0.41$--$0.58$ and
+decreases with $n_{\max}$.
+
+\subsection{Resolvent construction}
+
+The spectral action uses heat-kernel weights
+$\mathrm{Tr}\,f(D^2/\Lambda^2)$.  An alternative is the resolvent
+$(D^2)^{-1}$, which in the continuum gives the Green's function.
+The two-body matrix elements from the resolvent are
+\begin{equation}
+  V^{\mathrm{res}}_{abcd} = \sum_{NLM}
+  M_{NLM}[a,c] \cdot \overline{M_{NLM}[d,b]} \cdot w(N),
+  \label{eq:resolvent_interaction}
+\end{equation}
+where $M_{NLM}$ are the 3-$Y$ multiplier matrices and $w(N)$ is the
+resolvent weight.  Four candidates were tested: the Laplacian
+resolvent $w = 1/(N^2-1)$, the Dirac resolvent $w = 1/(N+\frac{1}{2})^2$,
+uniform $w = 1$, and $w = 1/N$.
+
+The Dirac resolvent gives the highest Pearson correlation ($0.81$ at
+$n_{\max} = 2$, $0.75$ at $n_{\max} = 3$), outperforming the
+spectral action.  But the correlation \emph{decreases} with
+$n_{\max}$ across all four weightings.  The Laplacian resolvent is
+essentially uncorrelated ($r < 0.05$) because the $N = 1$ zero mode
+of $\Delta_{S^3}$ excludes the dominant $(1s,1s)$ contribution.
+The Dirac operator naturally regularizes this zero mode.
+
+\subsection{Structural diagnosis}
+
+The 3-$Y$ multiplier $M_{NLM}$ factorizes as
+$I_{\mathrm{rad}}^{S^3} \times G_{\mathrm{Gaunt}}$: the Gegenbauer
+triple integral on $S^3$ times the $S^2$ Gaunt coefficient.  The
+Coulomb two-electron integral factorizes as
+$G_{\mathrm{Gaunt}} \times R^k_{\mathrm{Slater}}$: the same Gaunt
+coefficient times the flat-space Slater integral with the
+$r_<^k / r_>^{k+1}$ kernel.
+
+The \textbf{angular} Gaunt part is shared --- hence the $100\%$
+$m$-conservation and correct selection rules from both the spectral
+action and the resolvent.  The \textbf{radial} parts are structurally
+different: the Gegenbauer triple integral on $S^3$ versus the Slater
+integral in flat Euclidean coordinates.  The conversion between them
+is the Fock projection (Paper~7~\cite{paper7}), specifically the
+conformal factor
+$r_{\mathrm{chordal}} = 2R \sin(\chi_{\mathrm{geodesic}} / 2R)$,
+which is a nonlinear function of the geodesic angle, not a single
+calibration constant.
+
+This places the multi-focal composition wall --- documented across
+six independent observables in the framework~\cite{paper34} ---
+precisely at the $\mathcal{A}/D$ boundary:
+\begin{equation}
+  V_{12} = \underbrace{\text{angular selection rules}}_{\mathcal{A}
+    \text{ (universal)}} \times
+  \underbrace{\text{radial coupling strengths}}_{D / \text{metric
+    (potential-specific)}}.
+  \label{eq:two_body_AD}
+\end{equation}
+The algebra determines which channels couple.  The Dirac operator
+--- through the Fock projection that maps its eigenvalues to
+physical coordinates --- determines how strongly.
+
+%=================================================================
 \section{Conclusion}
 \label{sec:conclusion}
 %=================================================================

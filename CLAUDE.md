@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.39.0 (June 1, 2026)
+**Version:** v3.40.0 (June 1, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -147,6 +147,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
 - **Paper 54 (2026-06-01):** Two-body interactions from the tensor-product spectral triple; algebra gives selection rules, metric gives coupling strengths. See `papers/group3_foundations/paper_54_tensor_product_two_body.tex`.
+- **Sprint resolvent two-body (2026-06-01):** CLEAN NEGATIVE — resolvent does not recover Coulomb; wall is Fock projection conformal factor. See `debug/sprint_resolvent_two_body_memo.md`.
 - **Sprint nuclear + tensor-product spectral action (2026-06-01):** Gauged T_{S³}⊗T_{S³} generates two-body interaction at 75% connected fraction with correct multipole hierarchy; Minnesota V_S/V_T fix; Sturmian B_d −1.2%. See `debug/sprint_nuclear_tensor_product_memo.md`.
 - **Sprint cross-observable + nuclear (2026-06-01):** Consistency matrix across 18 autopsies; 19th muH HFS autopsy; deuteron/He-4 polarizability; IR extrapolation NEGATIVE; Sturmian NEGATIVE. See `debug/sprint_cross_observable_nuclear_memo.md`.
 - **Sprint follow-on closure (2026-05-31):** 18/18 Roothaan autopsies; H1 Higgs POSITIVE-THIN with Yukawa non-selection theorem; G4a n_max=3 bit-exact; BH-Phase0 S~2log(n); H_local proof. See `debug/sprint_followon_closure_memo.md`.
@@ -348,6 +349,7 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | Sturmian basis for deuteron polarizability with Minnesota NN (2026-06-01) | 3 | v1 grid-coarseness failure; v2 overbinds 20x (Minnesota is effective interaction for HO); v3 refit gives correct binding but alpha-unstable polarizability. Sum-over-states fragile for continuum response; LIT is the correct method. See `debug/sprint_cross_observable_nuclear_memo.md`. |
 | LIT for deuteron E1 polarizability (2026-06-01) | 1 | Validated (bit-exact vs eigendecomp) but unhelpful — the +9.7% alpha_E error is from Minnesota (EWSR=152%>TRK), not the solver method. N_shells=2→3 bit-identical. See `debug/sprint_nuclear_tensor_product_memo.md`. |
 | NaH Z_orb scan as chemistry-wall diagnostic (2026-06-01) | 1 | PES monotonically descending at all Z_orb ∈ {0.5–2.0}. NaH overattraction is W1e (multi-determinant FCI), not basis extent. Sturmian nuclear improvement does NOT transfer to the chemistry solver. See `debug/sprint_nuclear_tensor_product_memo.md`. |
+| Resolvent (D²)⁻¹ for two-body Coulomb interaction (2026-06-01) | 4 | Four weightings tested (Laplacian, Dirac, uniform, 1/N); best Pearson 0.81 DECREASING with n_max. Mismatch is Fock projection conformal factor (Gegenbauer radial on S³ vs Slater in flat space), a function not a constant. See `debug/sprint_resolvent_two_body_memo.md`. |
 
 
 ---
