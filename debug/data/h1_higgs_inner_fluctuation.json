@@ -1,0 +1,156 @@
+{
+  "fluctuated_dirac": {
+    "n_max": 2,
+    "dim_GV": 16,
+    "dim_F": 32,
+    "dim_H": 512,
+    "D_A_hermitian_residual": 0.758138621173997,
+    "gauge_norm": 0.3269420721054025,
+    "higgs_norm": 0.00200899482537821,
+    "higgs_gauge_ratio": 0.006144803611358198
+  },
+  "gauge_higgs_decomposition": {
+    "n_max": 2,
+    "n_samples": 50,
+    "gauge_norm_max": 0.9075676944195681,
+    "gauge_norm_mean": 0.1045308623337787,
+    "higgs_norm_max": 0.008402826621551127,
+    "higgs_norm_mean": 0.001968751851664547,
+    "mat_anti_off_max": 0.0,
+    "lep_quark_off_max": 0.0,
+    "su3_detected": true,
+    "gauge_higgs_split_clean": true,
+    "zero_yukawa_higgs_max": 0.0
+  },
+  "higgs_doublet": {
+    "n_max": 2,
+    "lepton_higgs_frob": 0.002668504399548313,
+    "quark_higgs_singlet_norm": 0.01951059368218516,
+    "quark_higgs_off_singlet_norm": 0.01167466539312376,
+    "quark_higgs_total_norm": 0.02273677808909444,
+    "color_singlet_fraction": 0.8581072307489028,
+    "higgs_is_doublet": true,
+    "doublet_dim": 2
+  },
+  "spectral_action": {
+    "n_max": 2,
+    "dim_H": 512,
+    "Tr_D0_sq": 2688.0,
+    "Tr_D0_4th": 15648.0,
+    "yukawa_grid": [
+      0.0,
+      0.001,
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.5
+    ],
+    "Tr_D2_vals": [
+      2688.0,
+      2688.0004479999993,
+      2688.0112,
+      2688.0448000000006,
+      2688.1792000000005,
+      2689.12,
+      2692.4800000000005,
+      2705.92,
+      2800.0
+    ],
+    "Tr_D4_vals": [
+      15648.0,
+      15648.014112000441,
+      15648.352800280001,
+      15649.411204480006,
+      15653.64487168,
+      15683.282800000003,
+      15789.164799999999,
+      16213.196800000002,
+      19204.0
+    ],
+    "delta_Tr_D2": [
+      0.0,
+      0.0004479999993236561,
+      0.011199999999917054,
+      0.04480000000057771,
+      0.17920000000049185,
+      1.1199999999998909,
+      4.480000000000473,
+      17.920000000000073,
+      112.0
+    ],
+    "delta_Tr_D4": [
+      0.0,
+      0.014112000440945849,
+      0.3528002800012473,
+      1.4112044800058356,
+      5.644871680000506,
+      35.28280000000268,
+      141.16479999999865,
+      565.1968000000015,
+      3556.0
+    ],
+    "power_Tr_D2": 2.0000000001730562,
+    "c2_of_D2": 448.0000000000001,
+    "c2_of_D4": 14112.000000000036,
+    "c4_of_D4": 447.9999999998664,
+    "mexican_hat": true,
+    "Tr_DF2": 0.28,
+    "Tr_DF4": 0.0028000000000000004,
+    "heat_trace_t_values": [
+      0.01,
+      0.1,
+      1.0
+    ],
+    "heat_traces_0": [
+      485.8867744811216,
+      307.75046455249253,
+      14.232395132230076
+    ],
+    "heat_traces_higgs": [
+      485.84869940030444,
+      307.74615739476485,
+      14.7203236776867
+    ],
+    "heat_trace_ratios": [
+      0.9999216379559666,
+      0.9999860043826938,
+      1.0342829538474294
+    ]
+  },
+  "yukawa_non_selection": {
+    "n_max": 2,
+    "dim_H_F": 32,
+    "chirality_constrained_dim": 512,
+    "J_constrained_dim": 128,
+    "yukawa_real_params_1gen": 8,
+    "gauge_real_params": 12,
+    "order_one_diagonal_residual": 0.0,
+    "order_one_offdiag_max": 0.0,
+    "chirality_commutator_norm": 0.0,
+    "chirality_difference_norm": 32.0,
+    "gamma_GV_independent_of_gamma_F": true,
+    "gammas_commute": true,
+    "theorem_statement": "THEOREM (Yukawa non-selection): Let (A_GV, H_GV, D_GV, J_GV) be the GeoVac spectral triple on the Fock-projected S^3 at cutoff n_max, and let A_F = C (+) H (+) M_3(C) with H_F = C^32 be the CCM finite Standard Model algebra. The most general finite Dirac D_F satisfying: (i) Hermiticity, (ii) J_F D_F = D_F J_F, (iii) {gamma_F, D_F} = 0, (iv) order-one condition [[D_total, a], J b J^{-1}] = 0, is parametrized by the Yukawa matrix Y = diag(y_nu, y_e) x diag(y_u, y_d) with 4 free complex parameters (8 real). The gauge sector U(1) x SU(2) x SU(3) is forced by the algebra A_F; the Yukawa couplings are free calibration data (Paper 18 inner-factor tier). No GeoVac-side observable constrains Y because gamma_GV and gamma_F are independent commuting Z_2 gradings (Sprint G3)."
+  },
+  "nmax3_check": {
+    "dim_GV": 40,
+    "dim_H": 1280,
+    "axioms": {
+      "J_squared_residual": 0.0,
+      "JD_relation_residual": 0.0,
+      "gamma_D_anticommutator_residual": 219.96363335788033,
+      "gamma_squared_residual": 0.0,
+      "J_gamma_residual": 71.55417527999327,
+      "D_hermitian_residual": 0.0,
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0
+    },
+    "higgs_zero": false,
+    "higgs_max": 0.04849132832296585,
+    "gauge_max": 1.5989816586700958
+  },
+  "elapsed_seconds": 37.26723051071167
+}

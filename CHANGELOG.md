@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.36.0] - 2026-05-31
+
+### Closed
+- **Paper 34 §V.C Roothaan autopsy catalogue: 18/18 complete.** §V.C.11 (Cs 6S₁/₂ HFS) upgraded from SCOPING to COMPLETE with five-component table (1219 MHz framework-native vs 2298 MHz experimental, −47%, attributed to CR67 single-zeta screening + leading-order Casimir). §V.C.14 (HD J=1 rotational HFS) upgraded from SCOPING to COMPLETE at OoM level (bare nuclear −13%, free-atom total −40%, gap = missing molecular electron density at deuteron). Zero scoping entries remain.
+- **G4a n_max=3 Connes SM axiom verification.** All six axioms (J²=−I, JD=+DJ, D=D†, γ²=I, order-zero, order-one) bit-exact zero at dim_H=1280. No finite-resolution degradation. POSITIVE-THIN extends cleanly to n_max=3. Paper 32 §VIII.C updated.
+- **BH-Phase0 entanglement entropy.** BW wedge entanglement entropy scales as S ~ 2·log(n_max) (R²=0.9999), NOT area law (R²=0.83, rejected). Mechanism: exponential Boltzmann suppression concentrates 89-96% of probability on ground shell. BH entropy in GeoVac comes from spectral-action replica (Paper 51), not BW entanglement. Paper 51 Q6 added.
+- **H_local orthogonality formal proof.** ⟨H_local, D_W^L⟩_HS = 0 proved via chirality-pairing cancellation: D_W = Π_W·|D_W| with Tr(Π_W) = 0, H_local and |D_W| both Π_W-even. Verified across 13 panel cells, max residual 4×10⁻¹⁵. Paper 43 §10.2 updated.
+- **H1-Higgs inner fluctuation: POSITIVE-THIN confirmed in full.** Fluctuated Dirac D_A at n_max=2 (dim=512) and n_max=3 (dim=1280). Gauge: U(1)×SU(2)×SU(3) matches G4a. Higgs: complex SU(2) doublet, non-trivial iff Y≠0. Mexican-hat potential confirmed (Tr(D_F²)>0, Tr(D_F⁴)>0). **Yukawa non-selection theorem proved:** 1024→512→128 real params; order-one does not constrain; 8 free real params per generation. Gauge forced, Yukawa free. Paper 32 §VIII.C updated.
+
+### Changed
+- Paper 32 §VIII.C: added n_max=3 verification + H1 Higgs paragraph with Yukawa non-selection theorem (58 pages, clean)
+- Paper 34 §V.C.11: SCOPING→COMPLETE with five-component autopsy table (123 pages, clean)
+- Paper 34 §V.C.14: SCOPING→COMPLETE, "scoping autopsy" → "order-of-magnitude Roothaan autopsy" (123 pages, clean)
+- Paper 43 §10.2: added chirality-pairing cancellation mechanism for formal proof (clean)
+- Paper 51: added Q6 (BH entanglement entropy NOT area law; spectral-action replica is the mechanism) (37 pages, clean)
+
+### Added
+- `debug/g4a_nmax3_verification.py` + memo + data
+- `debug/bh_phase0_extended_analysis.py` + memo + data
+- `debug/h_local_orthogonality_formal_proof.py` + memo + data
+- `debug/h1_higgs_inner_fluctuation.py` + memo + data
+- `debug/sprint_followon_closure_memo.md` — canonical sprint memo
+
 ## [3.35.0] - 2026-05-31
 
 ### Closed

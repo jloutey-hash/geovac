@@ -1,0 +1,151 @@
+{
+  "system": "He2_v2_two_center",
+  "n_electrons": 4,
+  "pairs": 2,
+  "pair_interaction": "NON-interacting closed 1s^2 shells (now coupled in build)",
+  "R_grid": [
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.6,
+    6.0,
+    7.0,
+    8.0
+  ],
+  "rows": [
+    {
+      "R_bohr": 1.5,
+      "E_Ha": -8.054356299005358,
+      "gap_Ha": 0.2945230840221287,
+      "degeneracy": 1,
+      "S_mode": 2.7746053697901534,
+      "schmidt_rank": 29,
+      "S_occ": 1.4083486001931307,
+      "cross_site_coupling": 1.4474015988303672
+    },
+    {
+      "R_bohr": 2.0,
+      "E_Ha": -6.6520372374419035,
+      "gap_Ha": 0.05273624568083868,
+      "degeneracy": 1,
+      "S_mode": 2.772654589362415,
+      "schmidt_rank": 29,
+      "S_occ": 1.3257060483359335,
+      "cross_site_coupling": 0.8267313179562066
+    },
+    {
+      "R_bohr": 2.5,
+      "E_Ha": -6.091419865836144,
+      "gap_Ha": 0.018478051920173044,
+      "degeneracy": 1,
+      "S_mode": 2.7635654577405298,
+      "schmidt_rank": 29,
+      "S_occ": 1.4215116584029108,
+      "cross_site_coupling": 0.7429651035971092
+    },
+    {
+      "R_bohr": 3.0,
+      "E_Ha": -5.784928450872876,
+      "gap_Ha": 0.15471134607686654,
+      "degeneracy": 1,
+      "S_mode": 2.690311492567875,
+      "schmidt_rank": 29,
+      "S_occ": 1.4062289525227096,
+      "cross_site_coupling": 0.6620347406994456
+    },
+    {
+      "R_bohr": 3.5,
+      "E_Ha": -5.259812078348446,
+      "gap_Ha": 0.19690526480878567,
+      "degeneracy": 1,
+      "S_mode": 2.5729164684654524,
+      "schmidt_rank": 29,
+      "S_occ": 1.356301687688917,
+      "cross_site_coupling": 0.6054183156460444
+    },
+    {
+      "R_bohr": 4.0,
+      "E_Ha": -4.811426629174554,
+      "gap_Ha": 0.23433712224789005,
+      "degeneracy": 1,
+      "S_mode": 2.411136230000107,
+      "schmidt_rank": 29,
+      "S_occ": 1.2935174899972037,
+      "cross_site_coupling": 0.5423708401822851
+    },
+    {
+      "R_bohr": 4.5,
+      "E_Ha": -4.444063174219649,
+      "gap_Ha": 0.2631833100920211,
+      "degeneracy": 1,
+      "S_mode": 2.224470702043052,
+      "schmidt_rank": 29,
+      "S_occ": 1.2197654982735917,
+      "cross_site_coupling": 0.46358242966531205
+    },
+    {
+      "R_bohr": 5.0,
+      "E_Ha": -4.138471911149497,
+      "gap_Ha": 0.29495656145970406,
+      "degeneracy": 1,
+      "S_mode": 1.9706258466444737,
+      "schmidt_rank": 29,
+      "S_occ": 1.1109440945372966,
+      "cross_site_coupling": 0.4009404969746606
+    },
+    {
+      "R_bohr": 5.6,
+      "E_Ha": -3.865866824005446,
+      "gap_Ha": 0.3160498155650924,
+      "degeneracy": 1,
+      "S_mode": 1.6600948273351044,
+      "schmidt_rank": 29,
+      "S_occ": 0.9611910371368177,
+      "cross_site_coupling": 0.31221248323092876
+    },
+    {
+      "R_bohr": 6.0,
+      "E_Ha": -3.725932200692246,
+      "gap_Ha": 0.3294383952559161,
+      "degeneracy": 1,
+      "S_mode": 1.4335961075224042,
+      "schmidt_rank": 29,
+      "S_occ": 0.8381514017703301,
+      "cross_site_coupling": 0.26763855933873026
+    },
+    {
+      "R_bohr": 7.0,
+      "E_Ha": -3.4910651903864554,
+      "gap_Ha": 0.3647876571093587,
+      "degeneracy": 1,
+      "S_mode": 0.8985834212780762,
+      "schmidt_rank": 29,
+      "S_occ": 0.5013592970849717,
+      "cross_site_coupling": 0.1652785566506927
+    },
+    {
+      "R_bohr": 8.0,
+      "E_Ha": -3.361890808979378,
+      "gap_Ha": 0.38992210245527703,
+      "degeneracy": 1,
+      "S_mode": 0.5341900001428657,
+      "schmidt_rank": 29,
+      "S_occ": 0.23257715502373738,
+      "cross_site_coupling": 0.09649426005930528
+    }
+  ],
+  "build_valid": true,
+  "cross_h1_small_R_max": 1.4474015988303672,
+  "S_mode_full_range": 2.2404153696472875,
+  "S_mode_large_R_range_R>=4": 1.8769462298572412,
+  "S_mode_small_R_range_R<4": 0.20168890132470096,
+  "corr_Smode_cross_h1": 0.8030195110676688,
+  "verdict": "RESPONSIVE at large R -> pair-count (A) -> MY BET FALSIFIED",
+  "headline": "responsive-pair-count",
+  "prereg_file": "debug/species_ii_he2_prediction_registered.md"
+}

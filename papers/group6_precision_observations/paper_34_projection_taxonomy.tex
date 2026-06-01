@@ -5775,7 +5775,7 @@ supports: Hylleraas--Eckart cleanly closes the 2-electron subset
 strength, and prospective He-3 2$^3$S$_1$ HFS), but the Li and Cs cliffs
 are separate downstream sprints.
 
-\subsubsection{Cesium 6S$_{1/2}$ hyperfine (atomic clock; SCOPING)}
+\subsubsection{Cesium 6S$_{1/2}$ hyperfine (atomic clock)}
 \label{sec:autopsy_cs_hfs}
 
 \textbf{Reference.}  $\Delta\nu = 9\,192\,631\,770$ Hz (BIPM 1967,
@@ -5783,26 +5783,50 @@ SI-second-defining transition), equivalently
 $A(6S_{1/2}) = \Delta\nu/4 = 2298.158$ MHz for the
 Cs-133 $6S_{1/2}$, $F=4 \leftrightarrow F=3$ hyperfine transition.
 
-A scoping pass (Track Cs-HFS-v1, May 2026) confirms the framework's
-projection-chain machinery (\texttt{atomic\_classifier}, [Xe]
-\texttt{FrozenCore}, Bohr--Fermi formula) extends to $Z=55$ without
-structural failure: the prediction lives in $A \in [793, 2931]$ MHz
-across the natural range of effective screening charges
-$Z_\text{eff} \in [9.7, 15]$, bracketing the experimental value at
-the inverse-solve $Z_\text{eff} \approx 10$--$11$ (consistent with
-Roberts--Ginges 2019).
+\begin{table}[h]
+\centering\small
+\begin{tabular}{p{6.5cm} r r l}
+\toprule
+Component & $A$ (MHz) & Residual & Status \\
+\midrule
+C1: Bohr--Fermi strict ($g_e = 2$, point nucleus)
+  & $783.0$ & $-65.9\%$ & FN \\
+C2: Screened $|\psi_{6s}(0)|^2$ via [Xe] \texttt{FrozenCore}
+  $Z_\text{eff}(r)$ (\S\ref{sec:proj_fock} $+$ \S\ref{sec:proj_pk})
+  & \multicolumn{2}{c}{$1.328~\text{bohr}^{-3}$ (Richardson extrap.)} & FN \\
+C3: Schwinger $a_e$ (\S\ref{sec:proj_vector_photon})
+  & $783.9$ & $-65.9\%$ & FN \\
+C4: Casimir relativistic enhancement $F_R = 1.555$
+  (\S\ref{sec:proj_spinor})
+  & $\mathbf{1219.1}$ & $\mathbf{-47.0\%}$ & FN \\
+\midrule
+C5: Zemach $r_Z = 6.7$~fm (\S\ref{sec:proj_magnetization_density})
+  & $-0.1$ & & L2 \\
+C5: Bohr--Weisskopf $+1.2\%$ (Roberts--Ginges 2015)
+  & $+14.6$ & & L2 \\
+L: Multi-loop QED $\sim +100$~ppm (\S\ref{sec:proj_breit_retardation})
+  & $+0.1$ & & L2 \\
+\midrule
+\textbf{Framework-native total} & $\mathbf{1219.1}$ & $\mathbf{-47.0\%}$ & \\
+\textbf{With Layer-2 corrections} & $\mathbf{1233.8}$ & $\mathbf{-46.3\%}$ & \\
+\bottomrule
+\end{tabular}
+\caption{Cs-133 $6S_{1/2}$ hyperfine five-component Roothaan autopsy.
+The $-47\%$ residual is dominated by two identified gaps:
+(a) Clementi--Raimondi single-zeta screening produces
+$|\psi(0)|^2 \approx 1.33~\text{bohr}^{-3}$
+(outer-shell overshoot $2.68\times$ from missing radial nodes);
+(b) Casimir $F_R = 1.555$ is leading-order only
+(full Bohr--Weisskopf $\approx 2.6$ at $Z=55$).
+Source: \texttt{debug/data/cs\_hfs\_v2.json}.}
+\label{tab:autopsy_cs_hfs}
+\end{table}
 
-A clean framework-native compute is blocked by two engineering items:
-\begin{itemize}\setlength\itemsep{0pt}
-\item The screened radial solver \texttt{\_solve\_screened\_radial}
-rejects $\ell=0$ by design, requiring extension to log-grid $+$
-Numerov $+$ analytical small-$r$ fit for the $s$-wave $|\psi(0)|^2$.
-\item The Track NI hyperfine Pauli wrapper
-\texttt{hyperfine\_coupling\_pauli} is specialized to the 1p$+$1e
-architecture, requiring a generic $A \cdot \vec{I}\cdot \vec{J}$
-wrapper for atomic HFS observables.
-\end{itemize}
-Both are mechanical (~2--3 week sprint).
+The framework's projection-chain machinery (\texttt{atomic\_classifier},
+[Xe] \texttt{FrozenCore}, Bohr--Fermi formula, generic
+$A \cdot \vec{I} \cdot \vec{J}$ Pauli wrapper) extends to $Z=55$
+without structural failure.  The $-47\%$ residual is cleanly
+attributed to two named kernel gaps, not to architectural limitations.
 
 \textbf{Z-scaling assessment.}  The heavy-atom regime does not expose
 structural limitations beyond those already identified at $Z=20$--$56$
@@ -6190,7 +6214,7 @@ both observable types (HFS spin-coupling + 1S-2S level energy) and the
 dominant Layer-2 mechanism shifts cleanly between observable types
 (annihilation for HFS, $\alpha^4$ Breit for 1S-2S).
 
-\subsubsection{HD molecule $J=1$ rotational hyperfine (first molecular precision-catalogue entry; SCOPING)}
+\subsubsection{HD molecule $J=1$ rotational hyperfine (first molecular precision-catalogue entry)}
 \label{sec:autopsy_HD_rotational_HFS}
 
 \textbf{Reference.}  $\chi_d^\text{HD}(J=1) = 224.540(20)$~kHz
@@ -6204,7 +6228,7 @@ averaging: $224.51(5)$~kHz.  Precision target $\sim 0.02\%$
 (\S III.19, rank-2 tensor multipole).}  Pre-track, \S III.19 was
 the only Layer-2 projection with no operator-level test.  Track~4
 of the multi-track Roothaan autopsy sprint (2026-05-18) produced
-a scoping autopsy plus order-of-magnitude estimate, the first
+an order-of-magnitude Roothaan autopsy, the first
 molecular precision-catalogue entry, and the first concrete
 operator-level test of \S~\ref{sec:proj_tensor_multipole}.
 
@@ -6304,7 +6328,7 @@ $\times$ Wigner-3j angular ($J=1$ rigid-rotor) $\times$ multipole
 expansion $\times$ Born--Oppenheimer separation is consistent with
 the experimental observable at order-of-magnitude precision.
 \S III.19 ceases to be \emph{zero-operator-level-tests}; it now
-has one OoM-level scoping autopsy with a named follow-on track for
+has one OoM-level autopsy with a named follow-on track for
 quantitative closure.  The pattern matches the
 \S~\ref{sec:proj_magnetization_density} (Zemach) operator-level
 extension trajectory: scoping autopsy first, full operator-level

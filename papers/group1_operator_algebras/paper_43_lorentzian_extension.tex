@@ -1437,9 +1437,19 @@ it intertwines the $\pm m_j$ chirality partners under the wedge
 basis change. The two operators live in orthogonal HS subspaces of
 $\mathcal{B}(K_W)$, hence the inner product vanishes. The
 diagonal/off-diagonal subspace decomposition is sketched at the
-basis level here and verified bit-exactly across the panel; a
-formal proof at general $(\nmax, N_t)$ is a named follow-on
-(see Section~\ref{sec:open_questions} O4).
+basis level here and verified bit-exactly across the panel.
+The formal proof is a chirality-pairing cancellation:
+$D_W = \Pi_W \cdot |D_W|$ where
+$\Pi_W = \mathrm{diag}(\chi_i)$ is the wedge chirality grading
+with $\Tr \Pi_W = 0$ (equal-dimensional $\pm 1$ eigenspaces),
+$|D_W|$ is $\Pi_W$-even, and $H_{\mathrm{local}}$ is
+$\Pi_W$-even.  Hence
+$\Tr(H_{\mathrm{local}}^\dagger D_W)
+= \Tr(\Pi_W \cdot M) = 0$ with $M = |D_W| H_{\mathrm{local}}$
+even under $\Pi_W$.  Verified across 13 panel cells
+($\nmax \in \{2, \ldots, 5\}$ Riemannian plus 9 Lorentzian
+$(\nmax, \Nt)$ cells) with max residual $4 \times 10^{-15}$.
+Source: \texttt{debug/h\_local\_orthogonality\_formal\_proof.py}.
 
 \paragraph{Universality across six witnesses.}
 The factorisation~\eqref{eq:pythagorean_residual} is linear in

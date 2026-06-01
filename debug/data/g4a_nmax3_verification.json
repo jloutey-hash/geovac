@@ -1,0 +1,127 @@
+{
+  "n_max_1": {
+    "n_max": 1,
+    "dim_GV": 4,
+    "dim_F": 32,
+    "dim_H": 128,
+    "build_time_s": 0.008,
+    "axiom_time_s": 0.063,
+    "gauge_time_s": 0.0,
+    "falsifier_time_s": 0.039,
+    "axioms": {
+      "J_squared_residual": 0.0,
+      "JD_relation_residual": 0.0,
+      "gamma_D_anticommutator_residual": 33.94112549695428,
+      "gamma_squared_residual": 0.0,
+      "J_gamma_residual": 22.627416997969522,
+      "D_hermitian_residual": 0.0,
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0
+    },
+    "extra_axioms": {
+      "gamma_squared_residual": 0.0,
+      "gamma_D_anticommutator_residual": 33.94112549695428,
+      "J_gamma_relation_residual": 22.627416997969522
+    },
+    "gauge_census": {
+      "gauge_group": "trivial (n_max=1)",
+      "note": "skipped"
+    },
+    "falsifier_with_yukawa": {
+      "higgs_zero": false,
+      "higgs_max": 0.003567424249378158,
+      "gauge_max": 0.0
+    },
+    "falsifier_no_yukawa": {
+      "higgs_zero": true,
+      "higgs_max": 0.0,
+      "gauge_max": 0.0
+    }
+  },
+  "n_max_2": {
+    "n_max": 2,
+    "dim_GV": 16,
+    "dim_F": 32,
+    "dim_H": 512,
+    "build_time_s": 0.063,
+    "axiom_time_s": 1.56,
+    "gauge_time_s": 0.9,
+    "falsifier_time_s": 0.831,
+    "axioms": {
+      "J_squared_residual": 0.0,
+      "JD_relation_residual": 0.0,
+      "gamma_D_anticommutator_residual": 103.69185117452577,
+      "gamma_squared_residual": 0.0,
+      "J_gamma_residual": 45.254833995939045,
+      "D_hermitian_residual": 0.0,
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0
+    },
+    "extra_axioms": {
+      "gamma_squared_residual": 0.0,
+      "gamma_D_anticommutator_residual": 103.69185117452577,
+      "J_gamma_relation_residual": 45.254833995939045
+    },
+    "gauge_census": {
+      "SU2_lepton": true,
+      "SU2_quark": true,
+      "SU3": true,
+      "U1": true,
+      "lepton_quark_mixing": false,
+      "gauge_group": "U(1) x SU(2) x SU(3)"
+    },
+    "falsifier_with_yukawa": {
+      "higgs_zero": false,
+      "higgs_max": 0.0022611700544400027,
+      "gauge_max": 0.7376367706523744
+    },
+    "falsifier_no_yukawa": {
+      "higgs_zero": true,
+      "higgs_max": 0.0,
+      "gauge_max": 0.7376367706523744
+    }
+  },
+  "n_max_3": {
+    "n_max": 3,
+    "dim_GV": 40,
+    "dim_F": 32,
+    "dim_H": 1280,
+    "build_time_s": 0.612,
+    "axiom_time_s": 17.454,
+    "gauge_time_s": 8.085,
+    "falsifier_time_s": 8.083,
+    "axioms": {
+      "J_squared_residual": 0.0,
+      "JD_relation_residual": 0.0,
+      "gamma_D_anticommutator_residual": 219.96363335788033,
+      "gamma_squared_residual": 0.0,
+      "J_gamma_residual": 71.55417527999327,
+      "D_hermitian_residual": 0.0,
+      "order_zero_max_residual": 0.0,
+      "order_one_max_residual": 0.0
+    },
+    "extra_axioms": {
+      "gamma_squared_residual": 0.0,
+      "gamma_D_anticommutator_residual": 219.96363335788033,
+      "J_gamma_relation_residual": 71.55417527999327
+    },
+    "gauge_census": {
+      "SU2_lepton": true,
+      "SU2_quark": true,
+      "SU3": true,
+      "U1": true,
+      "lepton_quark_mixing": false,
+      "gauge_group": "U(1) x SU(2) x SU(3)"
+    },
+    "falsifier_with_yukawa": {
+      "higgs_zero": false,
+      "higgs_max": 0.0023071887063697157,
+      "gauge_max": 0.8068572151128589
+    },
+    "falsifier_no_yukawa": {
+      "higgs_zero": true,
+      "higgs_max": 0.0,
+      "gauge_max": 0.8068572151128589
+    }
+  }
+}

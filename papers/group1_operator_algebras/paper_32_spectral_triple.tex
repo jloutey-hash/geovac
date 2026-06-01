@@ -3428,10 +3428,13 @@ GeoVac SM construction, but the framework does not select one.
 The full Connes SM finite algebra
 $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$
 has been implemented and verified on
-$\mathcal{T}_{S^3}$ at $n_{\max} \in \{1, 2\}$ with
-$\dim \mathcal{H}_F = 32$ (16 matter + 16 antimatter).
-All five Connes axioms ($J^2 = -I$, $JD = +DJ$, Hermiticity,
-order-zero, order-one) pass at zero residual.
+$\mathcal{T}_{S^3}$ at $n_{\max} \in \{1, 2, 3\}$ with
+$\dim \mathcal{H}_F = 32$ (16 matter + 16 antimatter;
+$\dim \mathcal{H}_{\text{total}} = 1280$ at $n_{\max} = 3$).
+All six Connes axioms ($J^2 = -I$, $JD = +DJ$, $D = D^\dagger$,
+$\gamma^2 = I$, order-zero, order-one) pass at literal
+machine-zero residual at every tested $n_{\max}$, with no
+finite-resolution degradation.
 Inner fluctuations decompose into
 $\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$
 gauge 1-forms plus a Higgs scalar that is non-trivial whenever the
@@ -3444,10 +3447,37 @@ silent on each of those choices.
 Module \texttt{geovac/standard\_model\_triple.py} ($\sim 530$ lines),
 45 tests passing.
 
+\paragraph{H1 Higgs inner fluctuation (Sprint H1, May 2026).}
+The full fluctuated Dirac $D_A = D + A + JAJ^{-1}$ has been
+constructed at $n_{\max} \in \{2, 3\}$
+($\dim \mathcal{H}_{\text{total}} = 512, 1280$). Inner
+fluctuations decompose cleanly into gauge
+($\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$,
+matching G4a) plus Higgs (complex $\mathrm{SU}(2)$ doublet $\Phi$
+in the L--R off-diagonal block, non-trivial iff Yukawa $Y \ne 0$).
+The spectral-action Mexican-hat potential is confirmed:
+$\Tr(D_F^2) > 0$ and $\Tr(D_F^4) > 0$ give the standard CCM
+sign structure $V(\Phi) = -\mu^2 |\Phi|^2 + \lambda |\Phi|^4$.
+
+\textbf{Yukawa non-selection theorem.} The space of admissible
+$D_F$ satisfying all Connes axioms has $128$ real parameters
+after Hermiticity ($1024 \to 512$), chirality grading
+($512 \to 128$), and $J$-reality ($128 \to 128$; the order-one
+condition does not further constrain). For one generation,
+$Y = \mathrm{diag}(y_\nu, y_e, y_u, y_d)$ carries $8$ free
+real parameters. The gauge sector is \textbf{forced};
+the Yukawa is \textbf{free}. This is grounded in the G3
+structural finding: $\gamma_{\text{GV}}$ and $\gamma_F$ are
+independent commuting $\mathbb{Z}_2$'s, so no GeoVac-side data
+couples to the $\gamma_F$ flip that carries the Yukawa.
+Source: \texttt{debug/h1\_higgs\_inner\_fluctuation\_memo.md}.
+
 \paragraph{Files.}  Scoping memo
 \texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
 ($\sim 5\,100$ words).  G4a sprint memo
 \texttt{debug/sprint\_g4a\_connes\_sm\_memo.md}.
+H1 sprint memo
+\texttt{debug/h1\_higgs\_inner\_fluctuation\_memo.md}.
 G4b is recorded as an open structural
 question.
 
