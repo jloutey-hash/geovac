@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.41.0 (June 1, 2026)
+**Version:** v3.42.0 (June 1, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint confidence-review-infra (2026-06-01):** New CONFIDENCE_AUDITOR + CITATION_CHECKER agents (cross-corpus + exact-text discipline); calibrated blind on Paper 2; 2 verified Paper 2 fixes; audit discoveries wiped for fresh-model restart. See `debug/sprint_confidence_review_infra_memo.md`.
 - **Sprint forcing-catalogue (2026-06-01):** `docs/forcing_catalogue.md` + 5-door forward-run; forced/free seam THEOREM (Door 4), inner SM-algebra mostly-forced, ℍ/M₂ fork open (Door 4c neg). See `debug/sprint_forcing_catalogue_memo.md`.
 - **Paper 54 (2026-06-01):** Two-body interactions from the tensor-product spectral triple; algebra gives selection rules, metric gives coupling strengths. See `papers/group3_foundations/paper_54_tensor_product_two_body.tex`.
 - **Sprint resolvent two-body (2026-06-01):** CLEAN NEGATIVE — resolvent does not recover Coulomb; wall is Fock projection conformal factor. See `debug/sprint_resolvent_two_body_memo.md`.

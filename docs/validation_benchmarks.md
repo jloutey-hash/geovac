@@ -326,5 +326,7 @@
 | Connes distance m-reflection | d(|n,l,-m⟩,|n,l,+m⟩)=0 | SO(3) m-reflection symmetry — physical, not pathology |
 | Connes distance n_max=2 ratios | 1:2:3 with 50√3 | Algebraic fingerprint: 28.87 : 57.73 : 86.60, 86.6020 = 50√3 to 5dp |
 | Speed regression | < 10% | Performance control |
+| Paper 2 cubic root 1/α | 137.036011 (above CODATA, 8.8e-8) | Table II/abstract value correction (mpmath) |
+| Paper 2 §VIII.D identity (k=0) | B_formal/N=d, root m=2 | Summation-index correction (sympy) |
 
 ---

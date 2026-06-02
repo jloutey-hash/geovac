@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.42.0] - 2026-06-01
+
+### Added
+- **Confidence-review infrastructure (`agents/CONFIDENCE_AUDITOR.md`, `agents/CITATION_CHECKER.md`).**
+  Two reusable subagent definitions for pre-broadcast paper auditing. The auditor is an external
+  skeptical referee that inverts the prior (internal "PROVEN"/"first-in-literature" labels are claims
+  under audit, never evidence), grounds every verdict in an external result / a computation it ran / a
+  derivation it did, and outputs a per-claim verdict taxonomy (A externally-verified / B
+  internally-consistent-only / C overstated / D unverifiable-here / E wrong) plus a circularity map
+  (EXTERNAL vs GEOVAC-ONLY). The citation checker is web-enabled with an honest novelty ceiling (can
+  confirm-false, never confirm, "first in the literature"). Calibrated **blind** on Paper 2 — both
+  independently reproduced its honest profile (noteworthy conjecture, cubic match 8.8e-8 EXTERNAL,
+  citations clean) without being told the expected verdict.
+- **`debug/confidence_review/LEDGER.md`** — clean ledger scaffold for the campaign.
+- **`tests/test_paper2_corrections.py`** — locks the two Paper 2 fixes below (2 tests, pass).
+- **Two methodology lessons baked into the auditor** (the durable carry-forward): (1) *verify-the-verifier
+  against exact text* — re-derive every consequential finding from the paper's exact wording, never a
+  paraphrase, before it drives an edit; (2) *cross-corpus check* — per-paper-in-isolation audits over-flag
+  because the corpus self-corrects across papers; search for a later/companion treatment (esp. the Paper 18
+  taxonomy) before calling a defect.
+
+### Changed
+- **Paper 2 (α observation), two verified corrections.**
+  - Table II + abstract value `137.035987` → `137.036011`: the printed value sat on the wrong side of
+    CODATA; the paper's own cubic x³−Kx+1=0 (K=π(42+ζ(2)−1/40)) has physical root 1/α=137.036011 (above
+    CODATA, same 8.8e-8 magnitude). Verified at 30 dps (mpmath).
+  - §VIII.D summation lower limit `k=1` → `k=0` in the B_formal/N definitions: the printed closed form
+    N(2)=(d+1)(d+4)/2 and the stated quadratic m²+dm−2(d+2)=0 are both k=0-consistent; only the
+    definition's lower limit was off. Verified symbolically (sympy): under k=0 the identity B_formal/N=d
+    gives numerator d(m−2)(m+d+2), root m=2; under k=1 it fails. The combination-rule "conjectural" label
+    is untouched (§13.5).
+
+### Notes
+- Meta/tooling sprint. A partial foundations audit (Papers 7/0/1) was run and then its discoveries
+  **deliberately cleared at PI direction** to enable an unbiased replication by a fresh model; only the
+  instruments, the two methodology lessons, and the verified Paper 2 fixes are kept. See
+  `debug/sprint_confidence_review_infra_memo.md`.
+
 ## [3.41.0] - 2026-06-01
 
 ### Added

@@ -22,7 +22,7 @@ spectral zeta function of the $S^1$ fiber ($F = \zeta(2) = \pi^2/6$),
 and a boundary correction from the $S^3$ total space
 ($\Delta = 1/40$). The selection principle $B/N = \dim(S^3) = 3$ is
 proven algebraically to select $n_{\max} = 3$ uniquely. The resulting
-$\alpha^{-1} = 137.035987$ agrees with experiment to
+$\alpha^{-1} = 137.036011$ agrees with experiment to
 $8.8 \times 10^{-8}$ relative error with zero free parameters. A
 combinatorial search over $1.92 \times 10^9$ formulas built from the
 same spectral ingredients yields a $p$-value of
@@ -469,7 +469,7 @@ perturbative QED ($\alpha \ll 1$).
 Quantity & Value & Source \\
 \hline
 $K$ & $137.036064$ & Eq.~(\ref{eq:K}) \\
-$\alpha^{-1}$ (formula) & $137.035987$ & Eq.~(\ref{eq:cubic}) \\
+$\alpha^{-1}$ (formula) & $137.036011$ & Eq.~(\ref{eq:cubic}) \\
 $\alpha^{-1}$ (CODATA 2018) & $137.035999\ldots$ & Experiment \\
 \hline
 Relative error & $8.8 \times 10^{-8}$ & \\
@@ -1226,9 +1226,9 @@ imply that $\alpha$ is transcendental (since $\pi$ is).
 For any round sphere $S^d$, define the \textit{formal} spectral moment
 \begin{equation}\label{eq:B_formal}
   B_{\mathrm{formal}}(m) \;=\;
-  \tfrac{1}{2}\sum_{k=1}^{m} g_k\,|\lambda_k|,
+  \tfrac{1}{2}\sum_{k=0}^{m} g_k\,|\lambda_k|,
   \qquad
-  N(m) \;=\; \sum_{k=1}^{m} g_k,
+  N(m) \;=\; \sum_{k=0}^{m} g_k,
 \end{equation}
 where $\lambda_k = -k(k+d-1)$ and
 $g_k = \binom{k+d}{d} - \binom{k+d-2}{d}$ are the eigenvalues and
@@ -1246,7 +1246,7 @@ universal property of eigenvalue moments on round spheres, not a
 selection principle specific to~$S^3$.
 
 \textit{Why the formula is specific to $S^3$.}
-The quantity $B$ appearing in the formula (Sec.~\ref{sec:selection})
+The quantity $B$ appearing in the formula (Sec.~\ref{sec:triple_selection})
 is \textit{not} $B_{\mathrm{formal}}$. It is the
 degeneracy-weighted trace of the $SO(3)$ \textit{sub}-Casimir
 $l(l+1)$ over the $SO(4) \to SO(3)$ branching of each $S^3$ shell:
