@@ -120,12 +120,26 @@ This paper documents the GeoVac framework's reproduction of the
 hydrogen Lamb shift at one loop, on the Dirac-$S^3$ infrastructure
 established in Paper~28~\cite{paper28}.  The result is sub-percent
 without any fitting parameter or calibration against multi-loop
-literature.  The interest is not in the absolute number --- one-loop
-QED on flat-space hydrogen also gives sub-percent --- but in
-\emph{how} the framework reproduces it: which projections are
-required, which projections turn out to be unnecessary, and what
-specific structural pieces had to be added during the LS-1 through
-LS-6a sprint sequence to close the calculation.
+literature.
+
+\paragraph*{Scope of the claim.}
+$-0.534\%$ ($-5.65$~MHz) is roughly three orders of magnitude looser
+than the precision-QED frontier, which routinely reaches sub-kHz on
+the same observable with multi-loop self-energy and recoil
+corrections~\cite{eides2001, yerokhin2024_two_loop_se}. The claim
+here is therefore not that the GeoVac framework competes with
+precision-QED compilations on the absolute number --- it does not
+--- but that the framework's bare combinatorial graph plus three
+standard projections (Fock, Camporesi--Higuchi spinor lift,
+Drake--Swainson asymptotic subtraction) plus the canonical
+Eides~\S\,3.2 one-loop convention reproduces the Lamb shift at
+sub-percent without any GeoVac-specific input. The interest is not
+in the absolute number --- one-loop QED on flat-space hydrogen also
+gives sub-percent --- but in \emph{how} the framework reproduces
+it: which projections are required, which projections turn out to
+be unnecessary, and what specific structural pieces had to be added
+during the LS-1 through LS-6a sprint sequence to close the
+calculation.
 
 The bound-state Lamb shift on Dirac-$S^3$ uses three standard
 projections in addition to the bare graph:
@@ -416,7 +430,7 @@ double-counting error.  Removing the Uehling subtraction restores the
 canonical $10/9$ and shifts the predicted Lamb shift by
 \begin{equation}
 \label{eq:shift_value}
-\Delta_\text{LS-1 \to LS-6a} = +\frac{4}{15} \cdot
+\Delta_{\text{LS-1} \to \text{LS-6a}} = +\frac{4}{15} \cdot
 \frac{\alpha^3 Z^4}{\pi n^3} \cdot (\text{Ha-to-MHz})
 \;=\; +27.13 \text{ MHz at } n = 2, Z = 1.
 \end{equation}
@@ -608,7 +622,10 @@ $\alpha^5$ multi-loop QED contribution to the 2$S$ Lamb shift at
 $\sim +1.20$~MHz total.  The structural pre-factor
 $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ for the dominant two-loop SE
 piece was confirmed at LS-7; the strong test is the native derivation
-of the dimensionless bracket coefficient $C_{2S} = +3.63$ from the
+of the dimensionless bracket coefficient $C_{2S} = +3.63$ (current
+independent state-of-the-art two-loop SE computations at low~$Z$ are
+reported by Yerokhin, Harman, and
+Keitel~\cite{yerokhin2024_two_loop_se}) from the
 bound-state Sturmian projection, which is the LS-8a sprint scope.
 \end{proposition}
 
@@ -1120,6 +1137,11 @@ C.~Schwartz, ``Lamb Shift in the Helium Atom,''
 \bibitem{drake_swainson}
 G.~W.~F.~Drake and R.~A.~Swainson, ``Bethe logarithms for hydrogenic
 atoms,'' \textit{Phys.\ Rev.\ A}\ \textbf{41}, 1243 (1990).
+
+\bibitem{yerokhin2024_two_loop_se}
+V.~A.~Yerokhin, Z.~Harman, and C.~H.~Keitel,
+``Two-loop electron self-energy for low nuclear charges,''
+Phys.\ Rev.\ Lett.\ \textbf{(in press)} (2024); arXiv:2411.12459.
 
 \bibitem{camporesi_higuchi}
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac

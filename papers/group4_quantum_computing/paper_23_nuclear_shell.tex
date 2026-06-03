@@ -67,7 +67,7 @@ calculation.
 %% =====================================================================
 
 Nuclear quantum simulation is an active frontier in quantum
-computing~\cite{Roggero2020,Hagen2014,Romero2022}. Exact solvers
+computing~\cite{Roggero2020,Hagen2014,Romero2022,SarmaStevenson2025,PillaiRamanan2025}. Exact solvers
 (no-core shell model, NCSM~\cite{Navratil2000,BarrettNavratilVary2013})
 remain the gold standard for light nuclei $A \lesssim 16$, but scale
 factorially with the number of active nucleons, and their extension to
@@ -407,7 +407,11 @@ emphasize that the results in Table~\ref{tab:deuteron} are
 \emph{encoding-validation} benchmarks, not nuclear-structure
 predictions. The Pauli count and $1$-norm characterize the cost of
 the qubit Hamiltonian, and the FCI diagonalization verifies that the
-Pauli encoding reproduces the matrix representation.
+Pauli encoding reproduces the matrix representation. Recent
+deuteron-targeted quantum-resource
+work~\cite{SarmaStevenson2025,PillaiRamanan2025} provides direct
+comparison points at comparable qubit count for the encoding cost
+reported here.
 
 %% =====================================================================
 \section{Helium-4: Antisymmetrization Within Species}
@@ -1250,6 +1254,19 @@ A.~M. Romero \emph{et al.},
 ``Solving Nuclear Structure Problems with the Adaptive Variational
 Quantum Algorithm,''
 Phys.~Rev.~C~\textbf{105}, 064317 (2022).
+
+\bibitem{SarmaStevenson2025}
+C.~Sarma and P.~D.~Stevenson,
+``A low-circuit-depth quantum computing approach to the nuclear
+shell model,''
+arXiv:2510.02124 (2025).
+
+\bibitem{PillaiRamanan2025}
+S.~Pillai, S.~Ramanan, V.~Balakrishnan, and S.~Lakshmibala,
+``Estimation of deuteron binding energy with renormalization
+group-based effective interactions using the variational quantum
+eigensolver,''
+arXiv:2509.08948 (2025).
 
 \bibitem{Navratil2000}
 P.~Navr\'atil, J.~P. Vary, and B.~R. Barrett,

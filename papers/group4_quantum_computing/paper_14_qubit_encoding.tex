@@ -2273,7 +2273,9 @@ gate count rather than Pauli term count, and are implemented as
 sequences of rotations within a linear combination of unitaries (LCU)
 circuit.  Published benchmarks focus on large active spaces: FeMoCo at
 108--152~qubits~\cite{lee2021}, cytochrome~P450 at
-96--116~qubits~\cite{caesura2025}, and similar production-scale systems.
+96--116~qubits~\cite{caesura2025}, and similar production-scale systems,
+with further reductions reported through improved tensor factorization
+and active volume compilation~\cite{caesura2025_tensor_factorization}.
 To our knowledge, no published DF, THC, or SCDF $\lambda$~values exist
 for molecules at the 10--70~qubit operating scale of the present work
 (LiH at $Q = 30$, H$_2$O at $Q = 70$), because these systems are too
@@ -2628,6 +2630,14 @@ A.~Caesura, C.~L.~Cortes, W.~Pol, R.~M.~Parrish, and P.~D.~Johnson,
 ``Efficient fault-tolerant implementations of real-space quantum chemistry
 Hamiltonians using BLISS,''
 PRX Quantum \textbf{6}, 030337 (2025).
+
+\bibitem{caesura2025_tensor_factorization}
+A.~E.~Caesura, C.~L.~Cortes, A.~Pol, S.~Sim, M.~Steudtner,
+G.-L.~R.~Anselmetti, M.~Degroote, N.~Moll, R.~Santagati, M.~Streif,
+and C.~S.~Tautermann,
+``Faster quantum chemistry simulations on a quantum computer with
+improved tensor factorization and active volume compilation,''
+arXiv:2501.06165 (2025).
 
 \bibitem{trenev2025}
 D.~Trenev, P.~J.~Ollitrault, S.~M.~Harwood, T.~P.~Gujarati,

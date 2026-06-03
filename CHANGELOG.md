@@ -7,6 +7,153 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.45.2] - 2026-06-03
+
+### Summary
+
+PI-requested comprehensive literature audit followed by full follow-through.
+Four parallel lit-survey phases (precedence, connections, physics, long-tail)
+across the entire 50-paper corpus, plus a defensive citation-verification gate
+that caught a **18% hallucination rate (6/33) in sub-agent-proposed arXiv IDs**
+for post-training-cutoff (2024-2026) papers. The hallucination signature is
+"topically-correct paper at the right arXiv ID, with fabricated author
+attribution" — content-only verification would have missed every one. Six wrong
+attributions corrected, 21 new citations added across 14 papers, 5 substantive
+framing edits applied, 2 incidental pre-existing-bug fixes (Paper 51 `\nmax`,
+Paper 36 `\to` in `\text{}`). No `geovac/` code touched. All touched papers
+compile clean.
+
+### Added (citations, verified)
+
+- **Paper 14:** Caesura et al. arXiv:2501.06165 (PsiQuantum + Boehringer
+  Ingelheim, 11-author consortium) as BLISS-THC fault-tolerant baseline in
+  `\sec:ft_gaussian`. Bibitem key collision avoided (existing `caesura2025`
+  was a different paper; used `caesura2025_tensor_factorization`).
+- **Paper 18 §III.7 (master Mellin engine):** Fathizadeh-Marcolli
+  arXiv:1611.01815 (periods/motives in R-W spectral action), Rejzner
+  arXiv:1603.02748 (pAQFT periods), Connes-Marcolli arXiv:math/0409306
+  (renormalization + motivic Galois) as forward pointers to motivic/period
+  theory.
+- **Paper 23:** Sarma-Stevenson (Surrey) arXiv:2510.02124 and Pillai-Ramanan-
+  Balakrishnan-Lakshmibala arXiv:2509.08948 as direct deuteron-VQE comparison
+  points.
+- **Paper 24:** Higgs-Pickrell arXiv:2503.23549 (SO(d)-invariant HO on
+  d-spheres) — Pickrell's open $d \ge 3$ question is exactly Paper 24's $d=5$
+  case.
+- **Paper 29 §6:** Matsuura-Ohta arXiv:2403.07385 PTEP 2024 (KM-Ihara
+  phases/duality follow-up to the existing 2022 cite).
+- **Paper 30 §1 footnote:** Garofalo et al. arXiv:2311.15926 + Jakobs et al.
+  arXiv:2503.03397 (Bonn/DESY SU(2) Hamiltonian lattice gauge from $S_3$
+  symmetric-group partitioning — note title gloss: $S_3$ symmetric group, not
+  $S^3$ manifold).
+- **Paper 32:** van Suijlekom arXiv:2409.02773 (K-theory of operator systems)
+  added to the operator-system lineage citation; Perez-Sanchez,
+  Hekkelman-McDonald, Perez-Sanchez-2024-Bratteli verified already present.
+- **Paper 34 §III.27:** Tener arXiv:2506.10625 (BW for non-unitary CFTs) at the
+  Wick-rotation projection; Cavalletti-Mondino arXiv:2004.08934 (Cambridge J.
+  Math. 12 (2024)) for synthetic-Lorentzian foundational reference.
+- **Paper 35 §VII Falsifiable prediction:** Morinelli arXiv:2412.20410
+  (geometric AQFT) at the BW reading subsection; Tener arXiv:2506.10625 forward
+  pointer.
+- **Paper 36 §VII:** Yerokhin-Harman-Keitel arXiv:2411.12459 PRL 2024 (two-loop
+  electron self-energy at low Z) as the missing state-of-the-art comparison
+  point.
+- **Paper 47 §6.1:** Behrndt-Holzmann-Stelzer-Landauer arXiv:2507.01482 (Math.
+  Nachr. 2026, norm-resolvent Dirac with $\delta$-shell, II) as adjacent PDE
+  thread on norm-resolvent convergence.
+- **Paper 48 §5:** Braun-Sämann arXiv:2506.10852 (Lorentzian Gromov
+  reconstruction, June 2025) as concurrent measured-GH extension.
+- **Paper 49 §10.2:** Rotondo arXiv:2604.08349 (April 2026, thermal time +
+  irreversibility from non-commuting observables) as closest concurrent thread
+  on thermal-time + KMS + relative-entropy irreversibility. Single-author
+  Rotondo, **not** Chirco-Josset-Rovelli (lit-survey agent misattribution
+  caught by verification gate).
+- **Paper 51 §G4-3:** Homšak-Veroni arXiv:2404.11670 PRD 109, 124035 (causal-set
+  BH entropy) as discrete-substrate BH entropy comparison point. Authors are
+  Homšak + Veroni, **not** Iazzi-Glaser (lit-survey misattribution caught by
+  verification gate).
+
+### Changed (framing edits)
+
+- **Paper 51 abstract:** promoted Chamseddine-Connes 2008 (arXiv:0812.0165,
+  "Uncanny precision of the spectral action") into the abstract; reframed
+  GeoVac's contribution as the **Bernoulli-mechanism sharpening** of CC's
+  asymptotic "remarkable cancellations" observation into an exact structural
+  identity. Mitigates de-novo-discovery framing risk identified by Phase 3.
+- **Paper 48 §1 `\subsection{Main result}`:** added explicit
+  `\paragraph*{What this paper contributes and what it inherits}` paragraph
+  enumerating take-vs-contribute split between MS (covered LPLS framework,
+  3-point reverse triangle, pLGH axioms, pre-compactness), Latrémolière (PPQMS
+  framework, 4-point relaxed metametric, hypertopology), and Connes-Rovelli
+  (thermal-time hypothesis) on the inherit side, vs the Wick-rotation functor,
+  F2 resolution, Bridge Theorem B1-B4, and 7 newly accessible wedge theorems
+  on the contribute side. Most precedence-sensitive paper of the six.
+- **Paper 50 abstract:** added explicit sentence reframing as
+  verification-with-structural-insight — the F-theorem values themselves are
+  due to KPS 2011 and are not new; contributions are (i) bit-exact reproduction
+  from the discrete truncated spectral triple, (ii) orthogonal M2/M3
+  dual-basis decomposition, (iii) finite-cutoff CHM identification at the
+  Paper 38/45 GH-convergence rate.
+- **Paper 35 §VII (after Prediction 1):** added explicit forward-pointer
+  sentence naming Bisognano-Wichmann theorem (Bisognano-Wichmann 1976, Morinelli
+  2024, Tener 2025) as closest continuum theorem-grade analog to the
+  "$\pi$-from-temporal-compactification" prediction.
+- **Paper 36 §1 Introduction:** added explicit `\paragraph*{Scope of the claim}`
+  acknowledging that $-0.534\%$ residual is ~3 orders of magnitude looser than
+  precision-QED's sub-kHz frontier; sharpens the existing structural-not-
+  precision framing into an explicit scope claim.
+
+### Fixed (incidental, pre-existing bugs surfaced during compile verification)
+
+- **Paper 51 preamble:** added `\newcommand{\nmax}{n_{\max}}` (matching the
+  project standard from Papers 38, 39, 42, 43). Paper had a pre-existing fatal
+  compile error from undefined `\nmax`; needed for citation verification.
+- **Paper 36 equation 433:** `\Delta_\text{LS-1 \to LS-6a}` →
+  `\Delta_{\text{LS-1} \to \text{LS-6a}}`. Pre-existing math-mode error
+  (`\to` inside `\text{}`); needed for citation verification.
+
+### Notes — hallucination-pattern discipline
+
+- **Six of 33 sub-agent-proposed arXiv IDs (18%) had MISMATCHED authors but
+  topically-correct content.** Pattern: pre-2024 IDs verified 100% clean;
+  2024-2026 IDs (post-training-cutoff for the lit-survey agents) had 6 of 23
+  mismatches. The hallucination signature is "grab a nearby plausible arXiv ID
+  and invent an author attribution that fits the topic." Three of the six are
+  famous-name swaps to better-known researchers in the relevant field
+  (Chirco-Josset-Rovelli, Iazzi-Glaser, "Stetcu group"); three are
+  fabricated-name swaps (Camassa, Crisand, Behrndt-Holzmann-Stelzer-at-wrong-ID).
+- **Practical takeaway:** content-only citation checks would have missed every
+  one. Author-level WebFetch verification of arxiv.org abstract pages is
+  required whenever sub-agents propose post-training-cutoff citations. The
+  defensive verification gate caught all six before they shipped.
+- **Substitute papers serve the citation purpose:** every MISMATCH resolves to
+  a real paper on the same topic. Verification + substitution is more efficient
+  than re-search. Adopted as default: corrected attribution, same arXiv ID
+  (with one exception, #3 BHS, where a different arXiv ID 2507.01482 had to
+  replace the wrong 2404.07784).
+
+### Sprint memos
+
+- `debug/sprint_literature_audit_followup_memo.md` (canonical)
+- `debug/lit_survey_phase1_precedence_memo.md`
+- `debug/lit_survey_phase2_connections_memo.md`
+- `debug/lit_survey_phase3_physics_memo.md`
+- `debug/lit_survey_phase4_longtail_memo.md`
+- `debug/citation_verification_table.md`
+
+### Carved out (PI decisions, not in this sprint)
+
+- **Mixed-Tate period test** (1-week sprint candidate): are GeoVac discrete SD
+  coefficients on $S^3$ mixed-Tate periods (Fathizadeh-Marcolli arXiv:1611.01815
+  lineage)? Either outcome publishable.
+- **Collaboration outreach**: Garofalo/Urbach (Bonn/DESY) on Paper 30; Hall
+  (Notre Dame) and Pickrell on Paper 24; Stetcu/Johnson/Sarma-Stevenson on
+  Paper 23; Hekkelman/van Suijlekom/Latrémolière/Farsi cluster on Papers 38-49.
+- **Paper 14 §sec:ft_gaussian** explicit BLISS-THC comparison row (cite added,
+  full comparison table needs additional resource estimate).
+
+---
+
 ## [3.45.1] - 2026-06-03
 
 ### Summary

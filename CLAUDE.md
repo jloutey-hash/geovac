@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.45.1 (June 3, 2026)
+**Version:** v3.45.2 (June 3, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint literature-audit-followup (2026-06-03):** 4-phase lit sweep + verification gate caught 18% (6/33) hallucinated arXiv IDs in post-cutoff sub-agent proposals (topical-content right, authors wrong); 21 verified cites added across 14 papers; 5 framing edits (Paper 51 Bernoulli mechanism / CC 2008 promotion; Paper 48 take/contribute; Paper 50 reproduction framing; Paper 35 BW pointer; Paper 36 scope-of-claim). See `debug/sprint_literature_audit_followup_memo.md`.
 - **Audit-backlog closure (2026-06-03):** Six v3.43-audit PI items resolved — Paper 22 density→physical Coulomb (6.06%/8.52%), Paper 34 Lamb 2P-sign (rows 1–4 = Paper 36 LS-6a), ucp\_maps→Rieffel, Eides2024 (=Krachkov–Lee) removed, Barut companion, Pachucki verified; two verify-the-verifier reversals. See CHANGELOG v3.45.1.
 - **Sprint verify-directions (2026-06-03):** Forcing-catalogue forward-run; verify-the-verifier corrected a Paper 50 false negative, vindicated Paper 54's numbers (eq:A_full fix), and placed the seam necessity in Paper 32. See `debug/sprint_verify_directions_memo.md`.
 - **Sprint Door 4 series closure (4d/4e/4f, 2026-06-02):** PARTIAL-DOOR FINAL. ℍ-vs-M₂(ℂ) fork closeable via sphere-Lie-group axiom (Upgrade B); net axiom savings vs CCM is 1 (T7 audit); 12 downstream tests Outcome 3 NEUTRAL. See `debug/sprint_door4_series_closure_memo.md`.
