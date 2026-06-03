@@ -643,7 +643,7 @@ triples or one-infinite-plus-one-finite products. The structural
 observation, an explicit literature comparison, and the empirical
 validation against the $21\,$cm hyperfine gap are formalized in a
 standalone Zenodo memo at
-\texttt{papers/group4_quantum_computing/track\_ni\_spectral\_triple\_zenodo.md},
+\texttt{papers/group4\_quantum\_computing/track\_ni\_spectral\_triple\_zenodo.md},
 with cross-references to Paper~32~\S V (sub-sector table) and
 \S VIII.D (frontier-of-field framing).
 
@@ -672,7 +672,7 @@ $\mathcal{H}_e \otimes \mathcal{H}_p$ register:
   \item a magnetization-density inner-fluctuation
     $\omega_{\mathrm{magn}}$, parameterized by a calibrated radial
     profile $\rho_M(r;\,r_Z)$ on the proton register, that reproduces
-    the Eides Zemach correction~\cite{EidesGrotchShelyuto2007,Eides2024}
+    the Eides Zemach correction~\cite{EidesGrotchShelyuto2007}
     at the operator level rather than as an external scalar substitution.
 \end{enumerate}
 The two operators share the same joint-register layout, the same
@@ -767,8 +767,8 @@ generalization: \texttt{\_hydrogenic\_poly\_coeffs\_lam(lam, n, l)}
 returns the Sturmian polynomial coefficients
 $R^\lambda_{n\ell}(r) = e^{-\lambda r}\sum_k c_k r^k$ at independent
 exponent $\lambda$, and
-\texttt{\_radial\_split\_integral\_lam(lam\_a, n_1, l_1, lam\_b, n_2,
-l_2, L, R)} computes the mismatched-exponent split-region radial
+\texttt{\_radial\_split\_integral\_lam(lam\_a, n\_1, l\_1, lam\_b, n\_2,
+l\_2, L, R)} computes the mismatched-exponent split-region radial
 integral. Bit-identical regression to the legacy single-$\lambda$
 functions is verified to relative error $\sim 10^{-12}$ across the full
 single-$\lambda$ test suite (26/26 tests pass without modification).
@@ -879,7 +879,7 @@ $\omega_{\mathrm{magn}}$}
 \label{ssec:omega-magn}
 
 The Eides Zemach correction to the hydrogen hyperfine
-splitting~\cite{EidesGrotchShelyuto2007,Eides2024} is conventionally
+splitting~\cite{EidesGrotchShelyuto2007} is conventionally
 written as a scalar substitution
 \begin{equation}
   \frac{\Delta\nu_Z}{\nu_F}
@@ -937,7 +937,7 @@ differ only at $M_2$, the Friar moment, which controls the sub-leading
 shape-dependent correction.
 
 \paragraph{Verification.}
-At the Eides~2024 calibration $r_Z = 1.045$\,fm
+At the Eides calibration $r_Z = 1.045$\,fm
 $= 1.974 \times 10^{-5}$\,bohr, the operator-level construction gives
 \begin{equation}
   \frac{\Delta\nu_Z}{\nu_F}\Big|_{\mathrm{operator}}
@@ -1025,7 +1025,7 @@ Sec.~\ref{ssec:cross-omega-magn}. The cumulative chain
 (BF + recoil + Schwinger $a_e$ + leading Zemach) lands at $327.4779$~MHz
 with $+286$~ppm residual against experiment, consistent with the
 deuteron polarizability ($+44$~ppm,
-Pachucki--Yerokhin~2010~\cite{PachuckiYerokhin2010}, QCD-internal NN
+Pachucki~2011~\cite{PachuckiYerokhin2010}, QCD-internal NN
 dynamics) plus multi-loop QED (LS-8a wall, $\sim$few ppm) plus
 recoil~NLO and finite-size charge corrections.
 
@@ -1340,14 +1340,12 @@ M.~I.~Eides, H.~Grotch, and V.~A.~Shelyuto,
 \emph{Theory of Light Hydrogenic Bound States}
 (Springer, Berlin, 2007).
 
-\bibitem{Eides2024}
-M.~I.~Eides and V.~A.~Shelyuto,
-``Two-loop corrections to Lamb shift and hyperfine splitting in
-hydrogen,'' \emph{JHEP} \textbf{07} (2023), 211, arXiv:2306.13369.
-[Replaces an earlier mis-attributed bibitem (PLB DOI
-10.1016/j.physletb.2024.139049 resolved to an unrelated black-hole
-paper); current entry is the best-match Eides--Shelyuto two-loop
-QED reference; PI to verify intended source.]
+% Eides2024 bibitem removed (2026-06-03): arXiv:2306.13369 is
+% Krachkov--Lee, ``Two-loop corrections to Lamb shift and hyperfine
+% splitting in hydrogen via multi-loop methods'' (JHEP 07 (2023) 211),
+% NOT Eides--Shelyuto. The Zemach / Tab.~7.3 content cited in text is
+% carried by EidesGrotchShelyuto2007; the two co-citations and the
+% prose ``Eides~2024 calibration'' have been redirected accordingly.
 
 \bibitem{ChamseddineConnes2010}
 A.~H.~Chamseddine and A.~Connes,
@@ -1365,7 +1363,7 @@ Phys.~Rev.~A~\textbf{97}, 062511 (2018), arXiv:1803.10313.
 J.~Loutey, ``The Composed Nuclear--Electronic Deuterium Hamiltonian as
 an Explicit Connes-Style Real-Space Multi-Particle Spectral Triple,''
 GeoVac Project Zenodo Memo (2026), Track~NI standalone observation,
-\texttt{papers/group4_quantum_computing/track\_ni\_spectral\_triple\_zenodo.md}.
+\texttt{papers/group4\_quantum\_computing/track\_ni\_spectral\_triple\_zenodo.md}.
 
 \bibitem{WinelandRamsey1972}
 D.~J.~Wineland and N.~F.~Ramsey,
@@ -1384,8 +1382,10 @@ K.~Pachucki,
 \emph{Phys.~Rev.~Lett.} \textbf{106}, 193007 (2011).
 [Replaces an earlier mis-attributed bibitem (PRL 104, 070403 (2010)
 resolved to a heliumlike-ions fine-structure paper, not deuterium
-HFS); current entry is the best-match Pachucki muonic-deuterium
-reference; PI to verify intended source.]
+HFS). Web-verified 2026-06-03: PRL 106, 193007 (2011), K.~Pachucki,
+``Nuclear Structure Corrections in Muonic Deuterium'' is a real,
+topical reference, cited here for the deuteron-polarizability
+contribution to deuterium HFS.]
 
 \bibitem{SprintHF}
 J.~Loutey, ``Sprint HF: Hydrogen 21 cm Hyperfine Multi-Focal Precision

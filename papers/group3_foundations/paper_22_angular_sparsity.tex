@@ -20,12 +20,16 @@ of spherical harmonics and arbitrary radial functions, the fraction of
 nonzero two-body matrix elements is determined solely by angular
 momentum selection rules and is independent of the radial potential.
 Exact enumeration of the Gaunt coefficients yields the angular ERI
-density $D(l_{\max})$: $7.81\%$ at $l_{\max}=1$, $2.76\%$ at
-$l_{\max}=2$, $1.44\%$ at $l_{\max}=3$, $0.90\%$ at $l_{\max}=4$, and
-$0.62\%$ at $l_{\max}=5$.  At $l_{\max}=2$, $97.24\%$ of all possible
-two-body matrix elements are guaranteed to vanish by the
-Wigner--Eckart theorem before any property of the potential is
-invoked.  The bound is independent of the number of radial quantum
+density $D(l_{\max})$ under the Coulomb selection rule (conservation
+of total magnetic quantum number, $m_a+m_b=m_c+m_d$): $14.84\%$ at
+$l_{\max}=1$, $8.52\%$ at $l_{\max}=2$, $6.06\%$ at $l_{\max}=3$,
+$4.83\%$ at $l_{\max}=4$, and $3.99\%$ at $l_{\max}=5$.  At
+$l_{\max}=2$, $91.48\%$ of all possible two-body matrix elements are
+guaranteed to vanish by the Wigner--Eckart theorem before any
+property of the potential is invoked.  A stricter pair-diagonal
+restriction ($m_a=m_c$, $m_b=m_d$), applicable to axially-symmetric
+or $m$-decoupled bases, gives a further reduction ($2.76\%$ at
+$l_{\max}=2$, $1.44\%$ at $l_{\max}=3$).  The bound is independent of the number of radial quantum
 numbers retained at fixed $l_{\max}$, and therefore independent of
 qubit count.  Numerical verification across five potentials (Coulomb,
 harmonic oscillator, Woods--Saxon, square well, Yukawa) confirms the
@@ -247,26 +251,32 @@ selection rules.
 \textit{Exact enumeration of the Gaunt selection rules gives:}
 
 \begin{center}
-\begin{tabular}{cccrr}
+\begin{tabular}{cccrrr}
 \toprule
-$l_{\max}$ & Shells & $N_{\mathrm{orb}}$ & $N_{\mathrm{orb}}^4$ & $D(l_{\max})$ \\
+$l_{\max}$ & Shells & $N_{\mathrm{orb}}$ & $N_{\mathrm{orb}}^4$ & $D(l_{\max})$ & $D_{\mathrm{pd}}(l_{\max})$ \\
 \midrule
-0 & $s$                 & 1  &           1 & $100.00\%$ \\
-1 & $s + p$             & 4  &         256 & $7.8125\%$ \\
-2 & $s + p + d$         & 9  &       6{,}561 & $2.7587\%$ \\
-3 & $s + p + d + f$     & 16 &      65{,}536 & $1.4404\%$ \\
-4 & $s + p + d + f + g$ & 25 &     390{,}625 & $0.9024\%$ \\
-5 & through $h$         & 36 &   1{,}679{,}616 & $0.6190\%$ \\
+0 & $s$                 & 1  &           1 & $100.00\%$ & $100.00\%$ \\
+1 & $s + p$             & 4  &         256 & $14.8438\%$ & $7.8125\%$ \\
+2 & $s + p + d$         & 9  &       6{,}561 & $8.5200\%$ & $2.7587\%$ \\
+3 & $s + p + d + f$     & 16 &      65{,}536 & $6.0608\%$ & $1.4404\%$ \\
+4 & $s + p + d + f + g$ & 25 &     390{,}625 & $4.8274\%$ & $0.9024\%$ \\
+5 & through $h$         & 36 &   1{,}679{,}616 & $3.9863\%$ & $0.6190\%$ \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\textit{These values are obtained by exact enumeration of the
-$N_{\mathrm{orb}}^4$ four-index combinations, applying the conditions
-of the definition above.  The enumeration is implemented in
+\textit{$D(l_{\max})$ is the physical Coulomb density (conservation
+of total magnetic quantum number $M_L = m_a + m_b = m_c + m_d$);
+$D_{\mathrm{pd}}$ is the stricter pair-diagonal restriction
+($m_a = m_c$, $m_b = m_d$ per pair) that holds only for
+axially-symmetric or $m$-decoupled bases.  These values are obtained
+by exact enumeration of the $N_{\mathrm{orb}}^4$ four-index
+combinations, applying the conditions of the definition above.  The
+enumeration is implemented in
 \texttt{geovac/nuclear/potential\_sparsity.py} as
-\texttt{angular\_zero\_count}, and the values in the table are
-reproduced by \texttt{debug/verify\_paper22\_lmax3.py}.}
+\texttt{angular\_zero\_count}; $D_{\mathrm{pd}}$ matches
+\texttt{debug/verify\_paper22\_lmax3.py} and both conventions are
+reproduced by \texttt{debug/paper22\_m\_selection\_diagnostic.py}.}
 
 The density decreases monotonically with $l_{\max}$: the number of
 orbitals grows as $(l_{\max}+1)^2$ and the number of four-index
@@ -380,9 +390,9 @@ wavefunctions.
 Theorem~2 provides a \textit{potential-independent} upper bound on
 the number of nonzero two-body Pauli terms in any qubit Hamiltonian
 constructed from a spherical harmonic basis at angular momentum
-cutoff $l_{\max}$.  At $l_{\max} = 2$, at most $2.76\%$ of all
+cutoff $l_{\max}$.  At $l_{\max} = 2$, at most $8.52\%$ of all
 possible two-body terms are nonzero; at $l_{\max}=3$, at most
-$1.44\%$.  This bound applies identically to:
+$6.06\%$.  This bound applies identically to:
 
 \begin{itemize}
 \item \textit{Electronic structure:} Coulomb repulsion in
@@ -540,9 +550,10 @@ the two-body interaction (provided it is rotationally invariant),
 and independent of the number of radial quantum numbers retained in
 the basis.
 
-The explicit angular ERI densities obtained by exact enumeration are
-$7.81\%$ at $l_{\max}=1$, $2.76\%$ at $l_{\max}=2$, $1.44\%$ at
-$l_{\max}=3$, $0.90\%$ at $l_{\max}=4$, and $0.62\%$ at $l_{\max}=5$.
+The explicit angular ERI densities (physical Coulomb selection rule,
+global $M_L$ conservation) obtained by exact enumeration are
+$14.84\%$ at $l_{\max}=1$, $8.52\%$ at $l_{\max}=2$, $6.06\%$ at
+$l_{\max}=3$, $4.83\%$ at $l_{\max}=4$, and $3.99\%$ at $l_{\max}=5$.
 Numerical verification across five potentials (Coulomb, harmonic
 oscillator, Woods--Saxon, square well, Yukawa) at $l_{\max}=2$
 confirms the theorem to machine precision: the angular zero patterns
@@ -618,9 +629,11 @@ convention that Paper~22's existing scalar table uses (stricter rule:
 $m_a = m_c$ and $m_b = m_d$ per pair), and the \emph{full-Gaunt}
 convention (physically correct Coulomb selection rule:
 $m_{j,a} + m_{j,b} = m_{j,c} + m_{j,d}$ global). The two conventions
-give quantitatively similar ratios; the scalar column of the
-pair-diagonal-$m$ table reproduces Paper~22 \S\ref{sec:theorem}'s
-published numbers bit-exactly. All densities are exact rationals
+give quantitatively similar ratios; both scalar conventions now
+appear in Paper~22 \S\ref{sec:theorem} ($D$ = full-Gaunt physical
+density, $D_{\mathrm{pd}}$ = pair-diagonal), and the
+$d_{\mathrm{sc}}^{\mathrm{FG}}$ column here reproduces the headline
+$D(l_{\max})$ bit-exactly. All densities are exact rationals
 from \texttt{sympy.Fraction}; percentages are their 4-decimal
 renderings.
 
@@ -629,9 +642,11 @@ renderings.
 in the $jj$-coupled basis, compared to the scalar density
 $d_{\mathrm{scalar}}(l_{\max})$ of
 \S\ref{sec:theorem}. $Q_{\mathrm{scalar}} = (l_{\max}+1)^2$,
-$Q_{\mathrm{spinor}} = 2(l_{\max}+1)^2$. The pair-diagonal-$m$
-convention is the one published in Paper~22 \S\ref{sec:theorem}; the
-full-Gaunt convention is the physically correct Coulomb selection rule.}
+$Q_{\mathrm{spinor}} = 2(l_{\max}+1)^2$. Both conventions are
+tabulated in Paper~22 \S\ref{sec:theorem}: the full-Gaunt convention
+is the physically correct Coulomb selection rule (the headline
+$D(l_{\max})$), and the pair-diagonal-$m$ convention is the stricter
+axial sub-case ($D_{\mathrm{pd}}$).}
 \label{tab:d_spinor}
 \begin{ruledtabular}
 \begin{tabular}{c|cccccc|cccc}

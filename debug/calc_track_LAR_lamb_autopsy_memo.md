@@ -1,5 +1,7 @@
 # Calc-Track LAR — Roothaan Autopsy of the Hydrogen 1S Lamb Shift
 
+> **CORRECTION (2026-06-03).** The §4 sum block and §5 framework-native subtotal list the 2P self-energy as a −12.88 MHz *level shift* and then sum it flat (giving 1031.41 and a 97.5% FN subtotal). In the contribution convention the 2P self-energy enters the 2S₁/₂−2P₁/₂ splitting as **+12.88 MHz**, so rows 1–4 sum to **1052.19 MHz** (= Paper 36 LS-6a, authoritative), the full 8-component sum is **+1057.17 MHz** (residual +0.68), and the FN subtotal is **+1057.19 MHz (99.9%)** — matching this header's ≈99.6% reading. Paper 34 §V.C.1 (`tab:autopsy_lamb`) has been corrected; the §4/§5 numbers below are kept for provenance.
+
 **Date:** 2026-05-09
 **Sprint:** Calc-LAR (Lamb shift Autopsy / Roothaan-style decomposition)
 **Goal:** Decompose the experimentally measured ν(2S₁/₂ − 2P₁/₂) = 1057.845(9) MHz into focal-length-tagged contributions, with each piece given an explicit Layer-2 projection chain from Paper 34. Show that the framework's projection-chain decomposition reproduces the standard literature decomposition (Eides Tab. 7.3 / Karshenboim 2005 / LS-7 reframing) with each piece traceable to a §III projection. No new computation; structural autopsy of an already-closed observable.

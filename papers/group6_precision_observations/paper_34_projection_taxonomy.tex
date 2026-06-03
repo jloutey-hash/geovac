@@ -4442,7 +4442,7 @@ SE 2$S_{1/2}$ (Bethe + Eides 10/9) & $+1066.44$ &
 & FN \\
 VP 2$S_{1/2}$ (Uehling) & $-27.13$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action} & FN \\
-SE 2$P_{1/2}$ & $-12.88$ &
+SE 2$P_{1/2}$ & $+12.88$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
 \S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_spinor}
 $\circ$ \S\ref{sec:proj_drake_swainson} & FN \\
@@ -4462,23 +4462,26 @@ Hyperfine averaging (F-state mixing) & $\sim +5.00$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_3j} $\circ$ \S\ref{sec:proj_restmass} & FN \\
 \midrule
-\textbf{Sum} & $+1057.41$ & & \\
+\textbf{Sum} & $+1057.17$ & & \\
 Experimental & $+1057.845(9)$ & & \\
-\textbf{Residual} & $+0.43$ & within Eides Tab.~7.3 quoting precision & \\
+\textbf{Residual} & $+0.68$ & within Eides Tab.~7.3 quoting precision & \\
 \bottomrule
 \end{tabular}
 \caption{Hydrogen 1S Lamb shift Roothaan autopsy.  Each component is
-tagged to its \S\ref{sec:layer2} projection chain.  Status: FN
+tagged to its \S\ref{sec:layer2} projection chain.  All entries are
+contributions to the $2S_{1/2}-2P_{1/2}$ splitting: the $2P_{1/2}$
+self-energy is a $-12.88$~MHz level shift, entering the splitting as
+$+12.88$~MHz.  Status: FN
 $=$ framework-native; L2 $=$ Layer-2 input.  Source memo:
 \texttt{debug/calc\_track\_LAR\_lamb\_autopsy\_memo.md}.}
 \label{tab:autopsy_lamb}
 \end{table}
 
-\textbf{Framework-native subtotal:} $+1031.43$ MHz ($97.5\%$ of
+\textbf{Framework-native subtotal:} $+1057.19$ MHz ($99.9\%$ of
 measurement).  \textbf{Layer-2 net:} $+1.20 + 1.18 - 2.40 \approx
 -0.02$ MHz --- empirical near-cancellation specific to the H 1S
 Lamb shift, \emph{not} a generic property.  The framework-native
-components alone reproduce the measurement at $\approx 4 \times
+components alone reproduce the measurement at $\approx 6 \times
 10^{-4}$ precision; the Layer-2 inputs cancel in this observable.
 
 \textbf{Multi-focal-composition wall visible.}  The two non-cancelling
@@ -4505,10 +4508,10 @@ of the 2026-05-09 promotion.
 entries: eight components, eight different projection chains, every
 Eides Tab.~7.3 row reproduced.  The structural-skeleton scope
 statement is made concrete --- framework-native pieces reproduce the
-observable to $\approx 4 \times 10^{-4}$, with the remaining $0.4\%$
-split between renormalization (Component 5) and two-body kinematics
-(Component 7), and FNS (Component 6) now in projection-chain language
-rather than as a black-box external constant.
+observable to $\approx 6 \times 10^{-4}$, with the Layer-2 inputs
+(renormalization, Component 5; two-body kinematics, Component 7)
+netting to $-0.02$~MHz, and FNS (Component 6) now in projection-chain
+language rather than as a black-box external constant.
 
 \subsubsection{Hydrogen 21~cm hyperfine autopsy}
 \label{sec:autopsy_21cm}
