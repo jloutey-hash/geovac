@@ -3,6 +3,9 @@
 \usepackage{amsmath,amssymb,graphicx,xcolor,bm,braket,dcolumn,booktabs}
 \usepackage{hyperref}
 
+% dcolumn shorthand: enable `d{N.M}` as alias for `D{.}{.}{N.M}`
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+
 \begin{document}
 
 \title{Structurally Sparse Qubit Hamiltonians\\from Spectral Graph Theory}
@@ -276,7 +279,13 @@ cc-pVDZ produces 23{,}189 terms at 100\% ERI density---a
 \label{sec:scaling}
 
 \begin{figure}[t]
-  \includegraphics[width=\columnwidth]{paper_14_figures/pauli_scaling.png}
+  % TODO: regenerate pauli_scaling.png via benchmarks/qubit_encoding/pauli_comparison.py
+  %       and place at papers/group4_quantum_computing/paper_14_figures/pauli_scaling.png
+  \centering
+  \fbox{\parbox{0.85\columnwidth}{\centering\itshape Figure placeholder ---
+  regenerate \texttt{pauli\_scaling.png} via
+  \texttt{benchmarks/qubit\_encoding/pauli\_comparison.py} and place at
+  \texttt{paper\_14\_figures/}.}}
   \caption{Pauli term count after Jordan--Wigner transformation versus
   number of qubits~$Q$.  Red squares: Gaussian basis sets (STO-3G, 6-31G,
   cc-pVDZ).  Blue circles: GeoVac lattice ($n_{\max} = 2$--$5$).  Dashed
@@ -314,7 +323,12 @@ GeoVac advantage grows with system size.
 \label{sec:eri_density}
 
 \begin{figure}[t]
-  \includegraphics[width=\columnwidth]{paper_14_figures/eri_density.png}
+  % TODO: regenerate eri_density.png (companion to pauli_scaling.png) and place at
+  %       papers/group4_quantum_computing/paper_14_figures/eri_density.png
+  \centering
+  \fbox{\parbox{0.85\columnwidth}{\centering\itshape Figure placeholder ---
+  regenerate \texttt{eri\_density.png} (companion plot to
+  Fig.~\ref{fig:pauli_scaling}) and place at \texttt{paper\_14\_figures/}.}}
   \caption{ERI tensor density versus number of spatial orbitals~$M$.
   Red squares: Gaussian bases (50--100\% dense).  Blue circles: GeoVac
   lattice, showing monotonic decay from 10.4\% ($M = 5$) to 1.3\%

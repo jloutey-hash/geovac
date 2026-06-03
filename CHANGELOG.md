@@ -7,6 +7,147 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.45.3] - 2026-06-03
+
+### Summary
+
+Follow-on to v3.45.2 covering two PI-authorized items from the
+literature-audit carved-outs: (1) Mixed-Tate period test sprint (1-week
+diagnostic) — **POSITIVE with pure-Tate refinement**: GeoVac's discrete
+$S^3$ Seeley–DeWitt coefficients inherit the Fathizadeh–Marcolli mixed-Tate
+classification (arXiv:1611.01815) at the standard volume-normalized
+convention, sitting in the strictly smaller pure-Tate sub-ring
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ (no $\zeta(3)$, no MZVs at the SD
+level); and (3) corpus cleanup of pre-existing compile bugs in Paper 14
+(dcolumn shorthand undefined, missing PNG figures) and Paper 30 (`remark`
+environment undefined). 5 paper edits applied (Papers 18, 28, 32, 51 + 1
+WH2 status update in CLAUDE.md §1.7). No `geovac/` code touched.
+Companion to v3.45.2; ships together with the citation work.
+
+### Added (Mixed-Tate sprint results)
+
+- **`debug/sprint_mixed_tate_test_memo.md`** (canonical, ~2,400 words):
+  full verdict, enumeration of GeoVac discrete SD coefficients on $S^3$
+  in both Dirac and scalar-Laplacian sectors, arithmetic classification,
+  $\sqrt\pi$-slot cross-check vs Paper 28 T9, paper-level implications,
+  open questions including inhomogeneous R–W extension and $S^5$
+  Bargmann–Segal analog.
+- **`debug/mixed_tate_test_sd_coefficients.py`** (reproducible
+  computation): sympy verification of T9 by direct summation, raw and
+  volume-normalized SD coefficient table, arithmetic classifier.
+- **Paper 32 §VIII**: new `\begin{corollary}[M2 sub-mechanism inherits
+  Fathizadeh--Marcolli mixed-Tate classification, with pure-Tate
+  refinement]` (`cor:m2_mixed_tate`) after the case-exhaustion theorem
+  proof. The M2 sector on $S^3$ inherits F–M's mixed-Tate-over-$\mathbb{Q}$
+  classification as a corollary (static-R–W sub-case $a(t) \equiv 1$),
+  with two structural sharpenings: Dirac SD two-term exactness and
+  scalar geometric-series collapse. The M3 sub-mechanism is cyclotomic
+  mixed Tate at level 4 (over $\mathbb{Z}[i]$, not $\mathbb{Q}$) and
+  does not contaminate the SD coefficients (operator-order partition:
+  $k=2$ vs $k=1$ in $\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$).
+- **Paper 28 §T9**: new `\begin{remark}[$\sqrt{\pi}$ slot at
+  half-integer $s$ vs integer $s$]` after Table 1, clarifying that the
+  $\sqrt\pi \cdot \mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$ two-term
+  ring of T9 is populated at half-integer $s$ (heat-trace poles) only;
+  integer-$s$ values are pure $\pi^{2k}\cdot\mathbb{Q}$.
+- **Paper 51 `rem:cc_uncanny`**: extended with a cross-reference noting
+  that the two-term-exact Dirac SD coefficients $a_0 = 4\pi^2$,
+  $a_1 = -2\pi^2$ and the scalar series $a_k^\Delta = 2\pi^2/k!$ are
+  mixed-Tate periods over $\mathbb{Q}$ under standard CC normalization,
+  with the full inheritance corollary recorded in Paper 32 §VIII.
+- **Bibitems added**: `fathizadeh_marcolli2016` to Papers 32 and 51;
+  `paper32`, `paper51` to Paper 28.
+
+### Changed
+
+- **Paper 18 §III.7 forward pointer paragraph**: converted from
+  "natural sprint question raised but not closed" to
+  "**closed in the POSITIVE direction with the pure-Tate refinement**"
+  (Sprint Mixed-Tate Test, June 2026). Explicit refinement statement
+  added: GeoVac discrete M2 SD coefficients on $S^3$ sit in the
+  strictly smaller sub-ring $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$; no
+  $\zeta(3)$, no MZVs at the SD level; F–M classification inherits as
+  a corollary. M3's cyclotomic-mixed-Tate-level-4 verdict noted.
+- **CLAUDE.md §1.7 WH2 Status**: appended sprint-result paragraph noting
+  M2 sub-mechanism inheritance with pure-Tate refinement; M3 remains
+  open as a parallel mini-sprint.
+
+### Fixed (Paper 14 + Paper 30 corpus cleanup)
+
+- **Paper 14 preamble**: added `\newcolumntype{d}[1]{D{.}{.}{#1}}` to
+  enable the `d{N.M}` table column shorthand the paper uses for
+  decimal-aligned columns (the standard `dcolumn` package was already
+  loaded but the lowercase-`d` shorthand was undefined, producing
+  "Illegal pream-token" fatal errors on 7+ tables).
+- **Paper 14 figures**: replaced the two missing-PNG includes
+  (`paper_14_figures/pauli_scaling.png`, `eri_density.png`) with
+  `\fbox` placeholders and TODO comments pointing at the generator at
+  `benchmarks/qubit_encoding/pauli_comparison.py`. The generator
+  outputs to `benchmarks/qubit_encoding/`, not `paper_14_figures/` —
+  regenerating the figures and placing them at the correct path
+  remains a separate follow-on. Paper now compiles clean (21 pages).
+- **Paper 30 preamble**: added `\newtheorem{remark}{Remark}` (the
+  preamble had `theorem`, `proposition`, `corollary`, `observation`,
+  `definition` but was missing `remark`, causing two fatal "Environment
+  remark undefined" errors at lines 487 and 624). Paper now compiles
+  clean (15 pages).
+
+### Notes — Mixed-Tate verdict details (preserve as discipline)
+
+- **POSITIVE verdict has a structural caveat about raw heat-trace
+  coefficients.** Before the standard $(4\pi)^{-d/2}$ volume
+  normalization, the raw heat-trace coefficients $\tilde a_k$ literally
+  contain $\sqrt\pi$ (the standard spinor-fiber-dimension factor in
+  odd-$d$ heat-kernel expansions on spin manifolds). $\sqrt\pi$ is NOT
+  a mixed-Tate period over $\mathbb{Q}$. The $\sqrt\pi$ cancels
+  exactly against $(4\pi)^{3/2}$ in $d=3$ to give the mixed-Tate
+  $\pi^2 \cdot \mathbb{Q}$ output. Convention dependent in a structural
+  way at raw level; convention independent at the SD / spectral-zeta
+  level that F–M actually classify.
+- **GeoVac is more restricted than F–M.** F–M allow generic mixed-Tate
+  including $\zeta(3), \zeta(5),$ MZVs. GeoVac discrete $S^3$ SD
+  produces only $\pi^{2k}\cdot\mathbb{Q}$ (pure even-weight Tate). No
+  odd zetas, no MZVs, appear at the SD level. The continuum R–W case
+  produces $\zeta(3)$ and higher when $a(t)$ derivatives are
+  non-trivial; the static GeoVac substrate cannot.
+- **M3 clean separation.** Catalan $G = \beta(2), \beta(4)$ and
+  Dirichlet $L$-values at non-principal characters are cyclotomic
+  mixed-Tate at level $m$ (mixed Tate over $\mathbb{Z}[\zeta_m, 1/m]$,
+  NOT over $\mathbb{Q}$). They appear ONLY in M3
+  (vertex-parity Hurwitz, Paper 28 Theorem 3 vertex-restricted
+  $D_{\rm even}(s) - D_{\rm odd}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$),
+  not in M2. The case-exhaustion theorem's operator-order partition
+  ($k=2$ for SD vs $k=1$ for vertex parity) keeps the two arithmetic
+  classes structurally separated.
+
+### Carved out (open follow-on items)
+
+- **Inhomogeneous R–W extension** (2–4 weeks): does the F–M
+  classification extend to the GeoVac $S^3$ sector with non-trivial
+  $a(t)$? F–M proved the continuum result; the GeoVac discrete
+  substrate with time-dependent $a(t)$ would need its own derivation.
+- **$S^5$ Bargmann–Segal analog** (mini-sprint): does the same
+  classification hold on $S^5$ (three power-law terms including $R^2$,
+  per Paper 51 `rem:two_term_uniqueness`)? $S^5$ retains pure-Tate at
+  the volume-normalized SD level but explicit closed forms not yet
+  written out.
+- **M3 cyclotomic-mixed-Tate verdict** (parallel mini-sprint): verify
+  M3 against the Brown–Goncharov cyclotomic mixed-Tate classification
+  at level 4.
+- **Inner-factor extension** (Sprint H1 / Yukawa Dirichlet ring,
+  Paper 18 §IV): whether AC-extension SD coefficients remain
+  mixed-Tate is an open question.
+- **Paper 14 figure regeneration** (separate task): run the generator
+  at `benchmarks/qubit_encoding/pauli_comparison.py` and place the
+  output at `paper_14_figures/`. Pauli-scaling and ERI-density plots
+  currently rendered as `\fbox` placeholders with TODO comments.
+
+### Sprint memo
+
+- `debug/sprint_mixed_tate_test_memo.md` (canonical)
+
+---
+
 ## [3.45.2] - 2026-06-03
 
 ### Summary
