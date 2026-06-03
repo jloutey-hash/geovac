@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.45.4] - 2026-06-03
+
+### Summary
+
+Audit-and-closure follow-up to v3.45.3 catching one citation gap missed by
+the parallel sub-agent dispatch and adding a durable follow-on register so
+nothing else slips between sessions. **Paper 41 had a `marcolli_vs2014`
+orphan bibitem (defined but never `\cite{}`'d) and was missing the
+Phase 2 recommendation to add Perez-Sanchez 2024 + 2025 follow-ups** that
+Papers 25 and 30 already had. The orphan is closed by a new paragraph in
+the related-work section ("Relation to Marcolli–van Suijlekom gauge
+networks") citing all three. No `geovac/` code touched.
+
+### Added
+
+- **`debug/followon_register.md`** (new): canonical, session-durable list
+  of carved-out follow-ons from recent sprints, organized as (A)
+  substantive research sprints awaiting PI authorization, (B)
+  collaboration outreach (user has flagged as a separate later push), (C)
+  mechanical / technical follow-ons (Paper 14 figure regeneration,
+  BLISS-THC comparison table). Includes a closed-items section preserving
+  the audit trail for v3.45.2 and v3.45.3 completions. Designed to be
+  picked up cold by a fresh PM session.
+- **Paper 41 §"Relation to Marcolli–van Suijlekom gauge networks"** new
+  paragraph at the end of the related-work section, citing
+  Marcolli–vS~\cite{marcolli_vs2014} (closing the orphan),
+  Perez-Sanchez 2024~\cite{perez_sanchez2024}, and
+  Perez-Sanchez 2025~\cite{perez_sanchez2025}. Notes that the
+  continuum-limit reading is Yang–Mills without an autonomously generated
+  Higgs sector (cf. Paper 32 §VIII.C Sprint H1 verdict). Anchors the
+  Rule B Wilson U(1) construction inside the gauge-networks-in-NCG
+  lineage and cross-references the maximal-torus projection examined
+  in Paper 30.
+- **Paper 41 bibitems**: `perez_sanchez2024` (arXiv:2401.03705) and
+  `perez_sanchez2025` (arXiv:2508.17338) added before `marcolli_vs2014`
+  to match Papers 25 and 30's citation ordering.
+
+### Audit notes
+
+- Audited all Phase 1–4 lit-survey recommendations from the v3.45.2 memos
+  against the actual paper state at v3.45.3. All high-priority citation
+  and framing recommendations were applied except the Paper 41 gap above.
+  Paper 14 §ft_gaussian BLISS-THC comparison table and Paper 14 figure
+  regeneration remain as deferred follow-ons (C1, C2 in the register).
+  Hall–Mitchell coherent-states papers flagged in Phase 4 for Paper 24
+  judged not necessary (the foundational Hall 1994 Bargmann–Segal–Hall
+  reference is already cited; Higgs–Pickrell 2025 is the more directly
+  relevant addition and was applied in v3.45.2).
+
+---
+
 ## [3.45.3] - 2026-06-03
 
 ### Summary
