@@ -260,7 +260,7 @@ $\SU(2)$ result and the Paper~40 generalisation are the first
 non-abelian non-flat instances at quantitative rate; the Paper~45
 result is the first Lorentzian instance.  Mondino and S\"amann's
 synthetic Lorentzian Gromov--Hausdorff program
-\cite{mondino_samann2024,mondino_samann2025} is categorically
+\cite{minguzzi_suhr2024,mondino_samann2025} is categorically
 distinct in object class (pre-length spaces with causal diamonds,
 not operator-algebraic spectral triples) and is not in competition
 with the present arc.
@@ -337,8 +337,8 @@ construction \cite{marcolli_vs2014} attaches a finite spectral
 triple to each vertex of a graph and a connection (gauge group
 element) to each edge; the spectral action of the resulting object
 recovers Wilson lattice gauge theory.  The continuum-limit issue
-addressed by Perez-Sanchez \cite{perez_sanchez2024,
-perez_sanchez2025} clarifies that the limit is Yang--Mills without
+addressed by Perez-Sanchez \cite{perez_sanchez2025}
+clarifies that the limit is Yang--Mills without
 Higgs by default; a Higgs sector appears only via off-diagonal data
 on the finite factor.
 
@@ -1450,7 +1450,7 @@ of Latr\'emoli\`ere's recent pointed proper quantum metric space
 framework~\cite{latremoliere2025_hypertopology}, and builds a
 \emph{bridge functor} $W: \mathbf{KreinMetaMet}_{\mathrm{pp}} \to
 \mathbf{LorPLG}_{\mathrm{cov}}$ to the Mondino--S\"amann synthetic
-Lorentzian pre-length space category~\cite{mondino_samann2024,
+Lorentzian pre-length space category~\cite{minguzzi_suhr2024,
 mondino_samann2025}.  The bridge is identified via the
 Connes--Rovelli thermal-time hypothesis~\cite{connes_rovelli1994}:\
 the modular distance $\mathrm{\DJ}^{K}$ on the Krein side measures
@@ -1502,15 +1502,19 @@ The headline structural finding is the
 \emph{twin-paradox-as-quantum-information} reading:\ strict
 super-additivity of the OSLPLS reverse triangle on off-orbit triples
 is the operator-algebraic dual of the special-relativistic twin
-paradox, with the deficit quantified by Uhlmann's relative-entropy
-monotonicity inequality.  The detoured worldline pays \emph{two}
-entropy-production costs $\Delta S^{\sigma_{1} \to \sigma_{2}} +
-\Delta S^{\sigma_{2} \to \sigma_{3}}$; the direct worldline pays
-\emph{one} cost $\Delta S^{\sigma_{1} \to \sigma_{3}}$; the strict
-inequality follows from relative-entropy monotonicity.  Numerical
-verification at $(\nmax, \Nt) \in \{(2,3), (3,5), (4,7)\}$ confirms:\
+paradox, with the deficit quantified by Datta's max-divergence chain
+inequality~\cite{datta2009}.  The detoured worldline pays \emph{two}
+max-divergence cocycle costs
+$\Delta_{\max} S^{\sigma_{1} \to \sigma_{2}} +
+\Delta_{\max} S^{\sigma_{2} \to \sigma_{3}}$; the direct worldline pays
+\emph{one} cost $\Delta_{\max} S^{\sigma_{1} \to \sigma_{3}}$; the
+strict inequality follows from Datta 2009's max-divergence chain
+inequality (the Umegaki relative entropy itself does not satisfy a
+chain inequality in general --- see Paper~49~\S 5.4 and Q3$'$ for
+the honest scope).  Numerical verification at
+$(\nmax, \Nt) \in \{(2,3), (3,5), (4,7)\}$ confirms:\
 $\Lambda$ bit-exact at all three panel cells (free-upgrade reading
-extends to the OSLPLS bridge functor), Uhlmann relative-entropy
+extends to the OSLPLS bridge functor), max-divergence cocycle
 deficits 66.998 / 68.720 / 81.256 nats positive and monotone-increasing
 in $\nmax$, Riemannian-limit recovery at $\Nt = 1$ bit-exact.
 
@@ -1700,7 +1704,7 @@ non-trivial off-diagonal $\mathbb{C} \leftrightarrow \mathbb{H}$
 block iff the finite Yukawa $Y_{F}$ is non-zero), but \emph{GeoVac
 does not autonomously select} $Y_{F}$ from its internal data.  In
 Marcolli--vS terms, GeoVac sits on the Yang--Mills-without-Higgs side
-of the Perez-Sanchez \cite{perez_sanchez2024,perez_sanchez2025}
+of the Perez-Sanchez \cite{perez_sanchez2025}
 clarification, with calibration data (the Yukawa) supplied externally.
 Paper~32~\S 8.C records this as the standing structural verdict.
 
@@ -1837,7 +1841,7 @@ F.~Latr\'emoli\`ere,
 \newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
 
 \bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
-L.~Leimbach and W.~D.~van~Suijlekom,
+M.~Leimbach and W.~D.~van~Suijlekom,
 \newblock \emph{Gromov--Hausdorff convergence of spectral
 truncations of the torus},
 \newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
@@ -1848,10 +1852,11 @@ M.~Marcolli and W.~D.~van~Suijlekom,
 \newblock J.~Geom.~Phys. \textbf{75} (2014), 71--91;
 \newblock arXiv:1301.3480.
 
-\bibitem[Mondino \& S\"amann(2024)]{mondino_samann2024}
-A.~Mondino and C.~S\"amann,
-\newblock \emph{Lorentzian metric measure spaces},
-\newblock Lett.~Math.~Phys. \textbf{114} (2024), Paper No.~37.
+\bibitem[Minguzzi \& Suhr(2024)]{minguzzi_suhr2024}
+E.~Minguzzi and S.~Suhr,
+\newblock \emph{Bounded Lorentzian metric spaces},
+\newblock Lett.~Math.~Phys. \textbf{114} (2024), Paper No.~73;
+\newblock arXiv:2209.14384.
 
 \bibitem[Mondino \& S\"amann(2025)]{mondino_samann2025}
 A.~Mondino and C.~S\"amann,
@@ -1867,13 +1872,12 @@ Cambridge University Press, 2002.
 
 \bibitem[Perez-Sanchez(2024)]{perez_sanchez2024}
 C.~I.~Perez-Sanchez,
-\newblock \emph{On the continuum limit of gauge networks},
+\newblock \emph{Bratteli networks and the Spectral Action on quivers},
 \newblock arXiv:2401.03705, 2024.
 
 \bibitem[Perez-Sanchez(2025)]{perez_sanchez2025}
 C.~I.~Perez-Sanchez,
-\newblock \emph{Yang--Mills theories from gauge networks without
-Higgs},
+\newblock \emph{Comment on `Gauge networks in noncommutative geometry'},
 \newblock arXiv:2508.17338, 2025.
 
 \bibitem[Pier(1984)]{pier1984}
@@ -2066,6 +2070,13 @@ F.~Latr\'emoli\`ere,
 \newblock \emph{The hypertopology of the Gromov--Hausdorff propinquity
 for pointed proper quantum metric spaces},
 \newblock arXiv:2512.03573, December 2025.
+
+\bibitem[Datta(2009)]{datta2009}
+N.~Datta,
+\newblock \emph{Min- and max-relative entropies and a new entanglement
+monotone},
+\newblock IEEE Trans.~Inf.~Theory \textbf{55} (2009), 2816--2826;
+arXiv:0803.2770.
 
 \end{thebibliography}
 

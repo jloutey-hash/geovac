@@ -1,0 +1,57 @@
+{
+  "corrected_table": [
+    {
+      "s": 1,
+      "symbolic": "-pi**2/4",
+      "symbolic_latex": "- \\frac{\\pi^{2}}{4}",
+      "numerical_50dps": "-2.4674011002723396547086227499690377838284248518102",
+      "agrees_to_dps": 59
+    },
+    {
+      "s": 2,
+      "symbolic": "-pi**4/12 + pi**2",
+      "symbolic_latex": "- \\frac{\\pi^{4}}{12} + \\pi^{2}",
+      "numerical_50dps": "1.7521801482558221824644632758173918645030672678503",
+      "agrees_to_dps": 59
+    },
+    {
+      "s": 3,
+      "symbolic": "pi**4*(10 - pi**2)/30",
+      "symbolic_latex": "\\frac{\\pi^{4} \\left(10 - \\pi^{2}\\right)}{30}",
+      "numerical_50dps": "0.42339055882399784447279610782104045433527762152692",
+      "agrees_to_dps": 60
+    },
+    {
+      "s": 4,
+      "symbolic": "pi**6*(168 - 17*pi**2)/1260",
+      "symbolic_latex": "\\frac{\\pi^{6} \\left(168 - 17 \\pi^{2}\\right)}{1260}",
+      "numerical_50dps": "0.16536289480268833324689124380279719511150293628367",
+      "agrees_to_dps": 60
+    }
+  ],
+  "diagnostic_off_by_one": [
+    {
+      "row_s": 1,
+      "current_expr": "-pi**4/12 + pi**2",
+      "actually_is_s": [
+        2
+      ]
+    },
+    {
+      "row_s": 2,
+      "current_expr": "-2*pi**6/15 + 2*pi**4/3",
+      "actually_is_s": []
+    },
+    {
+      "row_s": 3,
+      "current_expr": "-16*pi**8/63 + 16*pi**6/15",
+      "actually_is_s": []
+    },
+    {
+      "row_s": 4,
+      "current_expr": "-256*pi**10/495 + 32*pi**8/9",
+      "actually_is_s": []
+    }
+  ],
+  "convention": "zeta_{D^2}(s) = sum_n g_n / |lambda_n|^{2s} with g_n = 2(n+1)(n+2), |lambda_n| = n+3/2; equivalently 2 zeta_H(2s-2, 3/2) - (1/2) zeta_H(2s, 3/2); equivalently Theorem 1 / Eq. (5)."
+}

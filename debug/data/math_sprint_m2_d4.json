@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "sprint": "M2",
+    "purpose": "Resolve Paper 18 Eq.(38) D(4) substitution error",
+    "mpmath_dps": 60
+  },
+  "task1_D4_value": {
+    "D_direct_sum_CH_spectrum_50dps": "1.7521801482558221824644632758173918645030672678503",
+    "D_closed_form_pi2_minus_pi4_over_12": "1.7521801482558221824644632758173918645030672678503",
+    "D_Eq30_Hurwitz_form": "1.7521801482558221824644632758173918645030672678503",
+    "direct_vs_closed_residual": "1.55575e-61",
+    "direct_vs_Eq30_residual": "1.55575e-61",
+    "numeric_decimal": "1.75218014825582218246446327582"
+  },
+  "task2_cross_validation_even_s": {
+    "s=2": {
+      "D_direct": "1319.53335532923543004772846744",
+      "D_Eq30": "-2.46740110027233965470862274997",
+      "D_closed_form": null,
+      "direct_vs_Eq30_residual": "1322.0",
+      "Eq30_vs_closed_residual": null
+    },
+    "s=4": {
+      "D_direct": "1.75218014825582218246446327582",
+      "D_Eq30": "1.75218014825582218246446327582",
+      "D_closed_form": "1.75218014825582218246446327582",
+      "direct_vs_Eq30_residual": "1.55575e-61",
+      "Eq30_vs_closed_residual": "0.0"
+    },
+    "s=6": {
+      "D_direct": "0.423390558823997844472796107821",
+      "D_Eq30": "0.423390558823997844472796107821",
+      "D_closed_form": "0.423390558823997844472796107821",
+      "direct_vs_Eq30_residual": "1.2446e-60",
+      "Eq30_vs_closed_residual": "4.97841e-60"
+    },
+    "s=8": {
+      "D_direct": "0.165362894802688333246891243803",
+      "D_Eq30": "0.165362894802688333246891243803",
+      "D_closed_form": "0.165362894802688333246891243803",
+      "direct_vs_Eq30_residual": "2.78091e-60",
+      "Eq30_vs_closed_residual": "0.0"
+    }
+  },
+  "task3_zeta3_search": {
+    "3": {
+      "D_direct": "22.89004052767479220963897475",
+      "D_closed_form": null,
+      "D_Eq30_hurwitz_form": "DIVERGENT/POLE \u2014 zeta_R(s-2=1) at the s-2=1 pole"
+    },
+    "5": {
+      "D_direct": "0.756416439512086137460169221076",
+      "D_closed_form": "0.756416439512086137460169221076",
+      "D_Eq30_hurwitz_form": "0.756416439512086137460169221076"
+    },
+    "7": {
+      "D_direct": "0.259341705136835928217515744874",
+      "D_closed_form": "0.259341705136835928217515744874",
+      "D_Eq30_hurwitz_form": "0.259341705136835928217515744874"
+    },
+    "9": {
+      "D_direct": "0.107572087944392233547195122967",
+      "D_closed_form": "0.107572087944392233547195122967",
+      "D_Eq30_hurwitz_form": "0.107572087944392233547195122967"
+    }
+  },
+  "task3_zeta3_witness_at_s5": {
+    "interpretation": "Per Eq.(30), zeta_R(3) first appears with non-divergent coefficient at s=5 (the s=3 case multiplies zeta_R(1) which diverges). So the CH-spinor-bundle 'first zeta(3) witness' is D(5) = 14 zeta_R(3) - (31/2) zeta_R(5).",
+    "D5_direct": "0.75641643951208613746016922107627026582505384048734",
+    "D5_closed_form_14_zeta3_minus_31_over_2_zeta5": "0.75641643951208613746016922107627026582505384048734",
+    "residual": "3.88938e-61"
+  },
+  "task4_wrong_sum_value": {
+    "S_wrong_eq38_sum_over_INTEGER_m": "5.69398194001564144374430665631",
+    "claimed_identification_2_zeta2_plus_2_zeta3": "5.69398194001564144374430665631",
+    "true_D4_value": "1.75218014825582218246446327582",
+    "discrepancy_S_wrong_minus_D4": "3.9418017917598192612798433805",
+    "note": "The sum 'sum_{m>=1} 2m(m+1)/m^4 = 2 zeta(2)+2 zeta(3) ~ 5.694' is itself correct. The error is the IDENTIFICATION with D(4). The CH spectrum has half-integer eigenvalues lambda_n = n + 3/2, not integers m. The correct sum is sum_{n>=0} 2(n+1)(n+2)/(n+3/2)^4."
+  },
+  "task5_corrected_eq38_diagnostic": {
+    "closed_form_pi2_minus_pi4_over_12": "1.752180148255822182464463275817391864503",
+    "summed_via_lambda_odd": "1.752180148255822182464463275817391864503",
+    "direct_CH_sum": "1.752180148255822182464463275817391864503",
+    "all_agree_relative_residual": "8.87896e-62"
+  }
+}

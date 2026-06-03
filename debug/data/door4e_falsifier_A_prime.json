@@ -1,0 +1,90 @@
+{
+  "probe": "Door_4e_falsifier_A_prime",
+  "date": "2026-06-02",
+  "predecessor_memos": [
+    "debug/door4_gauge_yukawa_boundary_memo.md",
+    "debug/door4b_inner_algebra_forcing_memo.md",
+    "debug/door4c_j_signtable_audit_memo.md",
+    "debug/door4d_division_algebra_sphere_memo.md"
+  ],
+  "C1": {
+    "test_name": "C1_SU2_Ad_invariance",
+    "n_samples": 64,
+    "H_Ad_invariant": true,
+    "H_violations_out_of_samples": 0,
+    "M2C_Ad_invariant_trivially": true,
+    "distinguishes_H_from_M2C": false,
+    "minimal_SU2_Ad_invariant_starsubalgebra_containing_I": "H",
+    "maximal_such_subalgebra": "M_2(C)",
+    "verdict": "Both H and M_2(C) are SU(2)-Ad-invariant real *-subalgebras of M_2(C). The MINIMAL such is H; the MAXIMAL is M_2(C). SU(2)-Ad-invariance ALONE does not distinguish them; a MINIMALITY axiom would select H."
+  },
+  "C2": {
+    "test_name": "C2_Hopf_U1_equivariance",
+    "n_samples": 64,
+    "max_commutator_norm_with_scalar_phase": 0.0,
+    "all_matrices_commute_with_scalar_phase": true,
+    "distinguishes_H_from_M2C": false,
+    "verdict": "Hopf U(1) right-action is scalar phase multiplication e^{i\u03b8}I. Every 2x2 complex matrix commutes with scalar phase trivially (scalar phases are central). Hopf U(1)-equivariance is vacuous as a distinguisher of inner algebras."
+  },
+  "C3": {
+    "test_name": "C3_principal_bundle_compatibility",
+    "n_samples": 32,
+    "H_compatibility_max_error": 1.88411095042053e-15,
+    "M2C_compatibility_max_error": 1.336885555457667e-15,
+    "H_compatible_with_Hopf_U1": true,
+    "M2C_compatible_with_Hopf_U1": true,
+    "distinguishes_H_from_M2C": false,
+    "verdict": "Both H (via standard embedding into M_2(C)) and M_2(C) (full) act on C^2 by matrix multiplication, which commutes with the right scalar-phase U(1) action by associativity. Principal-bundle compatibility with the Hopf U(1) fiber is satisfied bit-exactly by both candidates."
+  },
+  "import_comparison": {
+    "standard_CCM_derivation": {
+      "axioms_invoked": [
+        "Connes second-order condition: [[D, a], [J b J^{-1}, c]] = 0 (with nonzero D_F)",
+        "Complex chiral fermion representation requirement (forces L-doublet pairing with anti-L-doublet)",
+        "Dimension count: 2N\u00b2 = 32 / 4x4-grading argument (Chamseddine-Connes-Marcolli 2007)"
+      ],
+      "n_axioms": 3,
+      "selects": "H over M_2(C)",
+      "source": "Chamseddine-Connes 2008, J. Geom. Phys. 58, 38"
+    },
+    "DAS_derivation": {
+      "axioms_invoked": [
+        "DAS: inner algebra at rung n IS the natural associative real normed division algebra whose unit-norm sphere is the rung-n Hopf bundle total space S^(2n-1)"
+      ],
+      "n_axioms": 1,
+      "selects": "H over M_2(C)",
+      "source": "GeoVac Door 4d (2026-06-02); structurally uses Bertrand \u00d7 Hopf-tower (Paper 32 \u00a7VIII.B) + Hurwitz's classification (1898)"
+    },
+    "comparison": "Both derivations are IMPORTS relative to the bare Connes axioms (neither follows from the AC tensor-product compatibility conditions C1/C2/C3 alone, all of which are vacuous as distinguishers \u2014 see Parts 1-3). CCM uses 3 algebraic axioms; DAS uses 1 geometric criterion. By INPUT MINIMALITY, DAS is leaner. By INTEGRATION WITH EXISTING NCG MACHINERY, CCM is more standard. Neither is derivable from the other; they are alternative \u210d-selectors, not redundant.",
+    "implication_for_DAS_status": "DAS is PARTIAL-DOOR CONFIRMED. The FULL-DOOR upgrade requires elevating DAS from 'consistent extension' to 'natural construction principle.' Natural principle candidate: 'the inner algebra at rung n is the MINIMAL real *-subalgebra of M_n(C) containing the identity and closed under Ad SU(n).' This minimality criterion picks out H at n=2 (the 4-dim minimal SU(2)-Ad-invariant *-subalgebra of M_2(C) containing I; the only candidates are \u2102\u00b7I (trivial, no non-abelian structure) and H itself, with M_2(C) being non-minimal). This minimal-AC axiom would be the natural geometric formulation, complementary to CCM's algebraic three-axiom path."
+  },
+  "structural_upgrade": {
+    "candidate_upgrades": {
+      "upgrade_A_minimality": {
+        "name": "Minimal-AC axiom",
+        "statement": "The inner algebra at rung n is the MINIMAL real *-subalgebra of M_n(C) that (a) contains the identity, (b) is closed under Ad SU(n), and (c) is non-abelian (to support a non-trivial gauge group).",
+        "selects_at_n2": "H (the unique 4-real-dim minimal non-abelian SU(2)-Ad-invariant *-subalgebra of M_2(C) containing I)",
+        "agrees_at_n1_n3": "Yes (gives C at n=1, M_3(C) at n=3 via similar minimality argument)",
+        "naturalness": "Strong: 'minimal' is a standard guiding principle in NCG (Connes constructs spectral triples with minimal algebraic content satisfying axioms). The principle 'use the minimal algebra reproducing the gauge group' is a SHARPER version of CCM's 'maximal sub-algebra satisfying order-one.'"
+      },
+      "upgrade_B_sphere_Lie": {
+        "name": "Sphere-Lie-group axiom",
+        "statement": "When the rung-n Hopf-bundle total sphere S^(2n-1) has a Lie-group structure (i.e., for n=1, 2: from C, H division algebras), the inner algebra at rung n is the *-algebra whose group of unitaries IS this Lie group. When S^(2n-1) has no Lie-group structure (n=3: S^5 not a Lie group; n=4: S^7 a Lie group only non-associatively via O), fall back to the minimal matrix algebra M_n(C) reproducing SU(n).",
+        "selects_at_n2": "H (because S^3 = Sp(1) = U(H) is the unique Lie-group structure on S^3)",
+        "agrees_at_n1_n3": "Yes (C at n=1 because S^1 = U(1) = U(C); M_3(C) at n=3 fallback)",
+        "naturalness": "Very strong: directly reads the algebraic content off the geometric content GeoVac already extracts via Bertrand \u00d7 Hopf-tower. No new input data; just reads the Hopf-rung sphere fully (Lie structure + topology), where the existing construction reads it partially (gauge group only)."
+      },
+      "upgrade_C_division_ring": {
+        "name": "Division-ring axiom",
+        "statement": "The inner algebra at rung n is, when possible, a DIVISION ring (every nonzero element invertible). When no division ring of the right Wedderburn type exists, fall back to M_n(C).",
+        "selects_at_n2": "H (the unique 4-real-dim division ring of complex-realizable type)",
+        "agrees_at_n1_n3": "Yes (C at n=1; M_3(C) at n=3 fallback because no associative real division algebra has dim 9)",
+        "naturalness": "Moderate: 'prefer division rings' is a common preference in algebraic foundations but less STRUCTURALLY tied to the Hopf-rung geometry than upgrades A or B."
+      }
+    },
+    "recommended_upgrade": "upgrade_B_sphere_Lie",
+    "recommendation_rationale": "Upgrade B reads the Hopf-rung sphere's FULL geometric content (Lie-group structure when it exists) rather than just the gauge group. This is the LEANEST extension of the existing Bertrand \u00d7 Hopf-tower argument and uses NO input outside what GeoVac already extracts. Upgrades A and C are good alternative framings but invoke axioms (minimality, division-ring preference) that are less directly tied to the Hopf tower.",
+    "verdict_after_falsifier_A_prime": "PARTIAL-DOOR (CONFIRMED)",
+    "verdict_rationale": "Falsifier A' (Parts 1-3) confirms that no standard AC compatibility condition forces H over M_2(C). The standard CCM construction is genuinely too permissive at the n=2 rung; \u210d is imported via the CCM second-order condition. DAS provides an alternative, LEANER import (Upgrade B's sphere-Lie axiom) that is structurally tied to the Hopf-rung geometry rather than to second-order Connes axioms. DAS does NOT upgrade from PARTIAL-DOOR to FULL-DOOR via Falsifier A'; the upgrade requires adopting the sphere-Lie axiom as a foundational construction principle. The open question for the next round: is adopting the sphere-Lie axiom JUSTIFIED relative to alternative constructions, or is it merely an aesthetic preference? This is a paper-level question (no further compute beyond what's here) and is the natural next thread to launch."
+  }
+}

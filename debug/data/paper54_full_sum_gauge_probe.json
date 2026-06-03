@@ -1,0 +1,46 @@
+{
+  "2": {
+    "single_pair": {
+      "connected_fraction": 0.7571877794400365,
+      "gaunt_compat_pct": 100.0,
+      "m_conserv_pct": 100.0,
+      "multipole_k": {
+        "0": 100.0
+      },
+      "V_norm": 0.02331982892158575
+    },
+    "full_sum": {
+      "connected_fraction": 0.8428974970162092,
+      "n_nonzero_generators": 4,
+      "gaunt_compat_pct": 100.0,
+      "m_conserv_pct": 100.0,
+      "multipole_k": {
+        "0": 100.0
+      },
+      "V_norm": 0.06868241354532013
+    }
+  },
+  "3": {
+    "single_pair": {
+      "connected_fraction": 0.7434219817243486,
+      "gaunt_compat_pct": 65.30523145456546,
+      "m_conserv_pct": 100.0,
+      "multipole_k": {
+        "0": 96.542575495548,
+        "2": 3.4574245044519945
+      },
+      "V_norm": 0.11077315434252946
+    },
+    "full_sum": {
+      "connected_fraction": 0.7137730031642995,
+      "n_nonzero_generators": 29,
+      "gaunt_compat_pct": 97.33738502861863,
+      "m_conserv_pct": 100.0,
+      "multipole_k": {
+        "0": 97.46656372459263,
+        "2": 2.533436275407365
+      },
+      "V_norm": 0.8220441003203229
+    }
+  }
+}

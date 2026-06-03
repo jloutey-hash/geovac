@@ -33,10 +33,11 @@ Compact Lie groups have discrete unitary representations
 directly.  Transcendental conversion factors appear when these
 discrete representations are projected onto non-compact coordinate
 systems used for measurement.  We classify these factors by the
-type of compactness mismatch they mediate---a five-tier taxonomy
-(intrinsic, conformal/calibration, embedding, flow, composition)
-spanning the GeoVac hierarchy through Level~5---and identify them
-with Weyl--Selberg exchange constants of spectral geometry.  The
+type of compactness mismatch they mediate---a six-tier taxonomy
+(intrinsic, conformal/calibration, embedding, algebraic-implicit,
+composition, inner-factor input data) spanning the GeoVac hierarchy
+through Level~5 plus the almost-commutative inner factor---and identify
+them with Weyl--Selberg exchange constants of spectral geometry.  The
 falsifiable claim: the transcendental content of any GeoVac
 observable is determined entirely by the type of projection
 linking the compact discrete description to the non-compact
@@ -170,7 +171,9 @@ not from $\kappa$ alone.
 The origin of $\kappa$ is well understood geometrically: it is
 the Jacobian of the stereographic projection composed with the
 conformal factor of the Fock map.  Specifically, if $\Omega$
-is the conformal factor $\Omega = (1 + p^2/p_0^2)^{-1}$, then
+is the conformal factor $\Omega = 2p_0/(p^2 + p_0^2)$ (so that
+$\Omega(0) = 2$ at the ground-state shell $p_0 = 1$, matching
+\S\ref{sec:kappa_derivation} and Paper~7~\cite{paper7}), then
 the Laplace--Beltrami operator on $S^3$ and the flat-space
 kinetic operator are related by
 $\nabla^2_{S^3} = \Omega^{-2}[\nabla^2_{\mathrm{flat}} + \text{lower order}]$,
@@ -1194,26 +1197,36 @@ on the factorization topology (which groups share coordinates).
 The Dirac operator on unit $S^3$ (Camporesi--Higuchi~\cite{camporesi_higuchi1996}
 spectrum $|\lambda_n| = n + 3/2$, degeneracy
 $g_n^{\text{Dirac}} = 2(n+1)(n+2)$) introduces a structurally new
-transcendental: the Fock Dirichlet series at the packing exponent
-$s = d_{\max} = 4$ evaluates to
-\begin{equation}\label{eq:dirac_dirichlet_zeta3}
-  D_{g^{\text{Dirac}}}(4)
-  \;=\; \sum_{m \geq 1} \frac{2m(m+1)}{m^4}
-  \;=\; 2\,\zeta_R(2) + 2\,\zeta_R(3)
-  \;=\; \frac{\pi^2}{3} + 2\,\zeta_R(3),
+transcendental: odd-zeta values $\zeta_R(2k{+}1)$ enter the Dirac
+Dirichlet series $D(s) = \sum_n g_n^{\text{Dirac}}/|\lambda_n|^s$ at
+odd integer $s \ge 5$.  The Hurwitz decomposition (Theorem~1) gives
+\begin{equation}\label{eq:dirac_zeta3_witness}
+  D(5) \;=\; 14\,\zeta_R(3) \;-\; \tfrac{31}{2}\,\zeta_R(5),
 \end{equation}
-a sympy-exact identity.  The two summands reflect the two homogeneity
-classes of $g_m^{\text{Dirac}} = 2m^2 + 2m$: the weight-$m^2$ subchannel
-produces $2\zeta_R(2)$ (the scalar $F$ content), while the weight-$m$
-subchannel produces $2\zeta_R(3)$---a channel absent from the scalar
-Fock degeneracy $g_n = n^2$.
+the first integer~$s$ at which $\zeta_R(3)$ appears with a non-divergent
+coefficient (at $s = 3$ the term proportional to $\zeta_R(s{-}2) = \zeta_R(1)$
+diverges).  At the packing exponent $s = 4$, by contrast,
+\begin{equation}\label{eq:dirac_d4_value}
+  D(4) \;=\; 6\,\zeta_R(2) - \tfrac{15}{2}\,\zeta_R(4)
+        \;=\; \pi^2 - \frac{\pi^4}{12},
+\end{equation}
+purely $\pi^{\text{even}}$---consistent with Theorem~\ref{thm:T9}
+below (squaring the spectrum maps every odd-power Dirichlet sum to an
+even power, and $\zeta_{D^2}(s)$ lies in $\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2\cdot\mathbb{Q}$
+at integer $s$).  The half-integer eigenvalue $|\lambda_n| = n + 3/2$
+is essential: naive substitution of an integer~$m$ for the eigenvalue
+would predict an even-$s$ odd-zeta witness, contradicting Theorem~1
+part~(2) and Paper~28~\cite{loutey_paper28} Theorem~5 / Eq.~(43).
+The shift~$3/2$ is what cancels the singular $m=1$ term in the
+odd-integer rewrite of the spectral sum.
 
-This odd-zeta content is categorically different from calibration-tier
-content.  Calibration constants carry even-zeta or $\pi^{\text{even}}$
-content arising from second-order Riemannian operators through
-Jacobi-$\theta$ inversion; the odd-zeta $\zeta_R(3)$ enters through
-the first-order Dirac operator via half-integer Hurwitz-zeta identities,
-and is $\mathbb{Q}$-linearly independent of $\zeta_R(2)$ by Ap\'ery's
+This odd-zeta content (entering at odd $s$ on the spinor bundle) is
+categorically different from calibration-tier content.  Calibration
+constants carry even-zeta or $\pi^{\text{even}}$ content arising from
+second-order Riemannian operators through Jacobi-$\theta$ inversion;
+the odd-zeta $\zeta_R(3)$ enters through the first-order Dirac operator
+via half-integer Hurwitz-zeta identities at \emph{odd} $s$, and is
+$\mathbb{Q}$-linearly independent of $\zeta_R(2)$ by Ap\'ery's
 theorem.  Within Paper~2's $K = \pi(B + F - \Delta)$, the odd-zeta tier
 is a byproduct rather than a summand: $\zeta_R(3)$ is structurally
 present on $S^3$ without participating in $K$.
@@ -1431,7 +1444,7 @@ partition:
 At motivic weight~3, $\zeta_R(3)$ appears as a period of
 $\mathbb{Q}(-3)$ in multiple independent geometric contexts:
 the Dirac Dirichlet series on~$S^3$ (this work,
-Eq.~\ref{eq:dirac_dirichlet_zeta3}), hyperbolic 3-manifold volumes
+Eq.~\ref{eq:dirac_zeta3_witness}), hyperbolic 3-manifold volumes
 (Goncharov~\cite{goncharov1999}), two-loop QED $g{-}2$
 (Petermann~\cite{petermann1957}; Sommerfield~\cite{sommerfield1957}),
 and Chern--Simons theory / algebraic K-theory
@@ -1456,9 +1469,12 @@ The even/odd Hurwitz spectral zeta of the first-order Dirac operator
 (Eq.~\ref{eq:hurwitz_discriminant} of Theorem~\ref{thm:operator_order})
 provides a sharp computational check.
 This exact formula separates the even and odd content at each~$s$:
-at $s = 4$, $D(4) = 2\zeta_R(2) + 2\zeta_R(3)$, reproducing
-Eq.~(\ref{eq:dirac_dirichlet_zeta3}).  At even~$s$, both terms are
-$\pi^{\text{even}}$; at odd~$s$, the $\zeta_R(s{-}2)$ and
+at $s = 4$ both terms are $\pi^{\text{even}}$
+(Eq.~\ref{eq:dirac_d4_value}: $D(4) = \pi^2 - \pi^4/12$); the first
+odd-zeta witness on the CH spinor bundle is
+Eq.~\eqref{eq:dirac_zeta3_witness}: $D(5) = 14\,\zeta_R(3) -
+\tfrac{31}{2}\,\zeta_R(5)$.  At even~$s$ the spectral sum is purely
+$\pi^{\text{even}}$; at odd $s \ge 5$, the $\zeta_R(s{-}2)$ and
 $\zeta_R(s)$ terms are independently transcendental.  The QED vacuum
 polarization at one loop involves the Seeley--DeWitt coefficients
 $a_0$, $a_1$, $a_2$ of~$D^2$, which by

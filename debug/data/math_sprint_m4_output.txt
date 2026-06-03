@@ -1,0 +1,138 @@
+========================================================================
+SPRINT M4: Paper 50 §7 S^5 multiplicity audit
+========================================================================
+mpmath precision: 80 dps
+
+--- (0) Spectrum sanity: S^5 Laplacian multiplicities ---
+  n    paper50_mult   correct_S5_mult     ratio
+  0               4                 1         4
+  1              24                 6         4
+  2              80                20         4
+  3             200                50         4
+  4             420               105         4
+  5             784               196         4
+
+Cross-check vs textbook formula (2n+d-1) * binomial(n+d-2, d-1):
+  n    d=5 textbook   correct_S5_mult
+  0               1                 1
+  1               6                 6
+  2              20                20
+  3              50                50
+  4             105               105
+  5             196               196
+
+--- (1) F_s^{S^5} computation ---
+
+With Paper 50 multiplicity (/6):
+  F_s^{S^5} [paper50] = -0.02297196544658850467910223547984070736285
+  Expected from paper: -0.02297
+
+With KPS-correct multiplicity (/24):
+  F_s^{S^5} [correct] = -0.005742991361647126169775558869960176840712
+  KPS Table 1 d=5: -5.74e-3 (~ -0.00574)
+
+Ratio F_paper50 / F_correct = 4.0
+  Expected: 4 (Paper 50 has 4x the correct value)
+
+--- (2) PSLQ identification of corrected F_s^{S^5} ---
+Basis: ['log 2', 'zeta(3)/pi^2', 'zeta(5)/pi^4']
+Trying PSLQ on F_correct = -0.005742991361647126169775558869960176840712
+  PSLQ relation: [256, 2, 2, -15]
+  Coefficients (F = sum c_i * basis_i):
+                -0.0078125 * log 2
+                -0.0078125 * zeta(3)/pi^2
+                0.05859375 * zeta(5)/pi^4
+  Rationalized:
+                    -1/128 * log 2
+                    -1/128 * zeta(3)/pi^2
+                    15/256 * zeta(5)/pi^4
+  Residual: 1.330827673e-72
+
+--- (3) Cross-check: Paper 50 closed form / 4 ---
+  Paper 50 stated symbolic value = -0.02297196544658850467910223547984070736285
+  Paper 50 / 4                   = -0.005742991361647126169775558869960176840712
+  F_correct (numerical)          = -0.005742991361647126169775558869960176840712
+  Match (paper/4 vs F_correct)?  True
+
+Therefore the CORRECTED closed form is:
+  F_s^{S^5} = -log(2)/128 - zeta(3)/(128*pi^2) + 15*zeta(5)/(256*pi^4)
+            = -0.005742991361647126169775558869960176840712
+  Diff from numerical: 1.330827673e-72
+
+--- (4) Dirac analog D'_Dirac(0)^{S^5} ---
+  D'_Dirac(0)^{S^5} (Paper 50 mult) = -0.02162694372929990302081010688894936153296
+  Paper 50 closed-form claim       = -0.02162694372929990302081010688894936153296
+  Diff:                             9.883310572e-83
+
+If the diff is ~0, Paper 50 Dirac analog Theorem 7.1 IS correct as stated
+(consistent with the standard Weyl CH multiplicity on S^5).
+
+--- (5) Theorem 7.3 (log 3 cancellation) ---
+  Dirac log 3 coefficient sum (Paper 50 statement):
+    81/16 - 5/2 * 9/4 + 9/16 * 1 = 0
+  Theorem 7.3 survives: True
+
+  Theorem 7.3 is about the DIRAC log-3 cancellation. The Dirac multiplicity
+  is UNCHANGED by the scalar /24 fix. Theorem 7.3 stands unmodified.
+
+--- (6) Proposition 7.4 (dual-basis non-extension to S^5) ---
+  With CORRECTED F_s = -log2/128 - z3/(128 pi^2) + 15 z5/(256 pi^4):
+    Isolating log 2 (zeta(3)/pi^2 coef = 0): a + 5b = 0 -> a = -5b
+    Isolating log 2 (zeta(5)/pi^4 coef = 0): a - b = 0 -> a = b
+    Inconsistent unless b = 0. NON-EXTENSION HOLDS.
+
+  Paper 50 claims (using WRONG F_s, 4x larger):
+    -4a - 5b = 0 -> a = -5b/4
+    60a - 15b = 0 -> a = b/4
+    Also inconsistent unless b = 0.
+
+  Conclusion: Proposition 7.4 SURVIVES the /24 fix. The numerical
+  coefficients in the displayed equations need to be updated, but the
+  structural conclusion (no nontrivial solution) is preserved.
+
+--- (7) Cross-check: KPS Table 1 d=5 reference ---
+  KPS-correct closed form: -log2/128 - z3/(128 pi^2) + 15 z5/(256 pi^4)
+  Numerical value:        -0.005742991361647126169775558869960176840712
+  ~ -5.74e-3:             -0.00574299
+  Match to F_correct?     True
+
+========================================================================
+SUMMARY
+========================================================================
+(1) 4x factor error confirmed:
+    Paper 50 mult (/6):   F_s = -0.0229719654466
+    Correct mult (/24):   F_s = -0.00574299136165
+    Ratio:                = 4.0 (expected 4)
+
+(2) Corrected closed form for F_s^{S^5}:
+    F_s^{S^5} = -log(2)/128 - zeta(3)/(128*pi^2) + 15*zeta(5)/(256*pi^4)
+             ~ -5.74e-3 (matches KPS Table 1 d=5)
+
+(3) Dirac analog: Paper 50's claim and multiplicity are CORRECT.
+    D'_Dirac(0)^{S^5} = -3 log(2)/128 - 5 zeta(3)/(128*pi^2) - 15 zeta(5)/(256*pi^4)
+                     ~ -0.0216269
+
+(4) Theorem 7.3 (log 3 cancellation): SURVIVES (Dirac-only, scalar unchanged).
+(5) Proposition 7.4 (dual-basis non-extension): SURVIVES (numerics update needed).
+
+PROPOSED PAPER PATCHES:
+  - L713: change (2n+4)(n+1)(n+2)(n+3)/6 -> /24
+  - L739: 'multiplicity structure v^2(v^2-1)/3' -> 'v^2(v^2-1)/12'
+  - Eq. 7.1 (F_s^{S^5} value): coefficients /4 -> -log2/128 - zeta(3)/(128 pi^2) + 15 zeta(5)/(256 pi^4),
+    numerical value ~ -5.74e-3 (was -0.02297)
+  - L743: zeta'_{S^5}(0) = 1/6 [...] -> 1/24 [...]
+  - L747: PSLQ relation [32, -2, -2, 15] (un-renormalized) becomes coefficients
+    after the /4 factor; the relation in the F-coefficient ring is unchanged in form
+    but the prefactor 1/16 -> 1/64 (multiply F_s closed form by 4 -> divide by 4):
+      zeta'_{S^5}(0)/24 = log(2)/64 + zeta(3)/(64 pi^2) - 15 zeta(5)/(128 pi^4)
+  - L709: 'bit-exact match extends to S^5' -> still TRUE after the fix, since the
+    corrected closed form IS bit-exact to KPS/Beccaria-Tseytlin. No framing change needed.
+  - Prop 7.4 equations (lines 833-834): update -4a - 5b = 0 -> -(a + 5b)/128 = 0 -> a + 5b = 0,
+    and 60a - 15b = 0 -> 15(a - b)/256 = 0 -> a - b = 0. Conclusion unchanged.
+
+DECISION GATE: §7 extension SALVAGEABLE with a few-edit patch.
+  Hurwitz machinery is correct.
+  Dirac analog is correct.
+  Theorem 7.3 and Prop 7.4 structural claims SURVIVE.
+  Only the scalar multiplicity prefactor (and its downstream numerical values)
+  need updating.

@@ -41,7 +41,7 @@ representation---the conjugate of the spin Young diagram---whose
 first-column length $\lambda_1$ fixes the minimum angular quantum
 number $\nu = N - \lambda_1$.  For all atoms with ground-state spin
 $S < N/2$, the spatial irrep has $\lambda_1 = 2$, giving the
-universal result $\nu = N - 2$ and $\mufree = 2(N-2)^2$.  This
+universal result $\nu = N - 2$ and $\mufree = 2(N-2)(N-1)$.  This
 formula, combined with the structure of the $S_N$ irrep, yields a
 classification of atoms into four types---A (trivial), B~(noble gas),
 C~(alkali), D~(alkaline earth)---that recasts the periodic table's
@@ -91,7 +91,7 @@ hypersphere $S^{3N-1}$.  The key results are:
 \begin{enumerate}
   \item The ground-state angular quantum number is universally $\nu =
     N - 2$ for atoms with spin $S < N/2$ (Sec.~\ref{sec:framework}).
-  \item The Pauli centrifugal cost $\mufree = 2(N-2)^2$ grows
+  \item The Pauli centrifugal cost $\mufree = 2(N-2)(N-1)$ grows
     quadratically, contributing exactly~4 units per electron pair in
     the large-$N$ limit (Sec.~\ref{sec:mu_formula}).
   \item The shape of the $S_N$ irrep classifies atoms into chemical
@@ -147,7 +147,7 @@ important to distinguish them from the new contributions.
     that, for all ground-state atoms with $S < N/2$, the spatial
     irrep has first-column length $\lambda_1 = 2$, yielding the
     universal angular quantum number $\nu = N - 2$ and $\mufree =
-    2(N-2)^2$.  This specific identification appears to be new.
+    2(N-2)(N-1)$.  This specific identification appears to be new.
 
   \item \textbf{The four-type classification (A/B/C/D).}  The
     observation that the $S_N$ irrep shape naturally partitions atoms
@@ -276,7 +276,7 @@ Substituting $\nu = N - 2$ into Eq.~(\ref{eq:casimir}):
   \mufree &= \frac{\nu(\nu + 3N - 2)}{2}
            = \frac{(N-2)(N - 2 + 3N - 2)}{2} \notag \\
           &= \frac{(N-2)(4N-4)}{2}
-           = \boxed{2(N-2)^2}.
+           = \boxed{2(N-2)(N-1)}.
   \label{eq:mu_formula}
 \end{align}
 
@@ -321,7 +321,7 @@ the periodic table.
 \begin{table}[h]
 \centering
 \caption{Ground-state hyperspherical parameters for neutral atoms
-($S < N/2$).  $\nu = N-2$, $\mufree = 2(N-2)^2$, and the asymptotic
+($S < N/2$).  $\nu = N-2$, $\mufree = 2(N-2)(N-1)$, and the asymptotic
 ratios $\mufree/N^2 \to 2$, $\mufree/\binom{N}{2} \to 4$,
 $\nu/(3N-2) \to 1/3$.}
 \label{tab:mu_values}
@@ -331,17 +331,17 @@ Atom & $N$ & $S^{3N-1}$ & $\nu$ & $\mufree$ & $\mufree/N^2$ & Type \\
 \midrule
 H     &   1 & $S^2$    &   0 &       0 & 0.00 & A \\
 He    &   2 & $S^5$    &   0 &       0 & 0.00 & B \\
-Li    &   3 & $S^8$    &   1 &       2 & 0.22 & C \\
-Be    &   4 & $S^{11}$ &   2 &       8 & 0.50 & D \\
-N     &   7 & $S^{20}$ &   5 &      50 & 1.02 & E \\
-Ne    &  10 & $S^{29}$ &   8 &     128 & 1.28 & B \\
-Na    &  11 & $S^{32}$ &   9 &     162 & 1.34 & C \\
-Mg    &  12 & $S^{35}$ &  10 &     200 & 1.39 & D \\
-Ar    &  18 & $S^{53}$ &  16 &     512 & 1.58 & B \\
-Kr    &  36 & $S^{107}$&  34 &   2312 & 1.78 & B \\
-Xe    &  54 & $S^{161}$&  52 &   5408 & 1.85 & B \\
-Rn    &  86 & $S^{257}$&  84 &  14112 & 1.91 & B \\
-Og    & 118 & $S^{353}$& 116 &  26912 & 1.93 & B \\
+Li    &   3 & $S^8$    &   1 &       4 & 0.44 & C \\
+Be    &   4 & $S^{11}$ &   2 &      12 & 0.75 & D \\
+N     &   7 & $S^{20}$ &   5 &      60 & 1.22 & E \\
+Ne    &  10 & $S^{29}$ &   8 &     144 & 1.44 & B \\
+Na    &  11 & $S^{32}$ &   9 &     180 & 1.49 & C \\
+Mg    &  12 & $S^{35}$ &  10 &     220 & 1.53 & D \\
+Ar    &  18 & $S^{53}$ &  16 &     544 & 1.68 & B \\
+Kr    &  36 & $S^{107}$&  34 &   2380 & 1.84 & B \\
+Xe    &  54 & $S^{161}$&  52 &   5512 & 1.89 & B \\
+Rn    &  86 & $S^{257}$&  84 &  14280 & 1.93 & B \\
+Og    & 118 & $S^{353}$& 116 &  27144 & 1.95 & B \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -353,7 +353,7 @@ Og    & 118 & $S^{353}$& 116 &  26912 & 1.93 & B \\
 \section{Structure Type Classification}
 \label{sec:classification}
 
-While $\nu = N - 2$ and $\mufree = 2(N-2)^2$ are universal, the
+While $\nu = N - 2$ and $\mufree = 2(N-2)(N-1)$ are universal, the
 \emph{shape} of the $S_N$ irrep varies with the electron
 configuration.  This shape encodes the internal structure of the
 atom---how the $N$~electrons partition into core and valence.
@@ -600,7 +600,7 @@ non-relativistic $S_N$ representation theory:
   \item \textbf{Dirac instability, finite nucleus} ($Z \sim 170$):
     spontaneous $e^+e^-$ pair creation from the vacuum.
 \end{enumerate}
-The SO$(3N)$ topology predicts no limit: $\mufree = 2(N-2)^2$ is
+The SO$(3N)$ topology predicts no limit: $\mufree = 2(N-2)(N-1)$ is
 defined for all $N$.  The physical end of the periodic table is set by
 nuclear physics ($Z \lesssim 130$), not by electronic topology.
 
@@ -697,7 +697,7 @@ key results are:
 \begin{enumerate}
   \item The ground-state angular quantum number $\nu = N - 2$ is
     universal for $S < N/2$, yielding the Pauli centrifugal cost
-    $\mufree = 2(N-2)^2$.
+    $\mufree = 2(N-2)(N-1)$.
 
   \item The shape of the $S_N$ spatial irrep classifies atoms into
     types (A/B/C/D/E) that recast the chemical group structure in
@@ -805,10 +805,11 @@ P.~Pyykk\"o,
 \emph{Phys.\ Chem.\ Chem.\ Phys.} \textbf{13}, 161 (2011).
 
 \bibitem{Schwerdtfeger2015}
-P.~Schwerdtfeger, L.~F.~Pashtedsky, A.~Pernpointner, and B.~Fricke,
-``Relativistic effects in superheavy elements,''
-in \emph{The Chemistry of Superheavy Elements}, 2nd ed.\
-(Springer, Berlin, 2015).
+V.~Pershina,
+``Theoretical Chemistry of the Heaviest Elements,''
+in M.~Sch\"adel and D.~Shaughnessy (eds.),
+\emph{The Chemistry of Superheavy Elements}, 2nd ed.\
+(Springer, Berlin, 2014).
 
 \end{thebibliography}
 

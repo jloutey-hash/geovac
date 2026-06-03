@@ -61,9 +61,9 @@ operator~\cite{camporesi_higuchi1996} on unit~$S^3$.  This is not a
 new derivation; it is a structural map.  Three results follow.
 (1)~\emph{Lineage.}~The construction sits inside the published
 Marcolli--van~Suijlekom gauge-network framework~\cite{marcolli_vs2014}
-(with the Perez-Sanchez correction~\cite{perez_sanchez2024,%
-perez_sanchez2025} that the continuum limit is Yang--Mills without
-Higgs), and inside the Connes--van~Suijlekom spectral-truncation
+(with the Perez-Sanchez correction~\cite{perez_sanchez2025} that the
+continuum limit is Yang--Mills without Higgs), and inside the
+Connes--van~Suijlekom spectral-truncation
 program~\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024}.  Every
 structural ingredient of the GeoVac construction has published
 precedent; what is not duplicated is the $\alpha$ prediction at
@@ -187,7 +187,12 @@ specific finite-algebra content $\mathbb{C} \oplus \mathbb{H} \oplus
 M_3(\mathbb{C})$.  GeoVac is not the Standard Model.  It is a finite
 spectral triple in the same lineage, with the empirically interesting
 property that one of its spectral-action coefficient combinations
-matches~$\alpha^{-1}$ at $8.8 \times 10^{-8}$.
+$K = \pi(B + F - \Delta)$ satisfies, after subtraction of the leading
+Sprint-A correction~$\alpha^2$, a residual
+$K - 1/\alpha - \alpha^2 \approx 1.2 \times 10^{-5}$ corresponding to
+a post-correction relative residual of $8.8\times 10^{-8}$ that
+matches~$\pi^3\alpha^3$ to within 0.25\% (the raw match
+$|K - 1/\alpha|/(1/\alpha)$ is $4.77 \times 10^{-7}$).
 
 \paragraph{Internal register.}  This paper makes explicit the
 spectral-triple framing already operating informally in the working
@@ -1672,7 +1677,13 @@ $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
 (i)~$\Leftrightarrow$~(ii) is Paper~35 Prediction~1, verified across
 208 individual checks (sprints KG, TX-B, May 2026~\cite{paper35}).
 
-(ii)~$\Rightarrow$~(iii):\ each of the fifteen Paper~34 projections is
+(ii)~$\Rightarrow$~(iii):\ the proof body that follows enumerates the
+fifteen Paper~34 projections in §III.1--§III.15 (the corpus state at
+this theorem's drafting; Paper~34 has since grown to twenty-eight
+projections~\cite{paper34}, and the theorem's claim is here restricted
+to those first fifteen pending an extension of the case-by-case
+enumeration to projections~16--28).  Each of the fifteen Paper~34
+projections is
 either $\pi$-free at the projection step (projections~1,~3,~4,~5,~8,
 9,~12,~13,~14: Fock conformal, Bargmann--Segal, Stereographic, Sturmian,
 Wigner~$3j$, Wigner~$D$, Molecule-frame, Drake--Swainson, Rest-mass) or
@@ -2366,9 +2377,9 @@ The three constructions are summarised in
 Table~\ref{tab:unified_gauge}.  The columns are not independent
 discoveries:\ each is a specialisation of the gauge-networks
 framework of Marcolli--van~Suijlekom~\cite{marcolli_vs2014}, with
-the Perez-Sanchez correction~\cite{perez_sanchez2024,%
-perez_sanchez2025} that the continuum limit of such gauge networks
-is Wilson Yang--Mills \emph{without} a Higgs sector.
+the Perez-Sanchez correction~\cite{perez_sanchez2025} that the
+continuum limit of such gauge networks is Wilson Yang--Mills
+\emph{without} a Higgs sector.
 
 \begin{table}[h]
 \centering
@@ -2471,9 +2482,8 @@ gauge--matter coupling is not.
 Each construction in Table~\ref{tab:unified_gauge} is a specific
 gauge-networks instance in the sense of Marcolli and
 van~Suijlekom~\cite{marcolli_vs2014}, with the Perez-Sanchez
-correction~\cite{perez_sanchez2024,perez_sanchez2025} that the
-continuum limit of such a gauge network is Wilson Yang--Mills
-\emph{without} a Higgs.  The vertex algebra is
+correction~\cite{perez_sanchez2025} that the continuum limit of
+such a gauge network is Wilson Yang--Mills \emph{without} a Higgs.  The vertex algebra is
 $\mathcal{A}_v = \mathbb{C}$ (or $C(V)$ globally) in all three rows;
 the vertex Hilbert space and the gauge group differ row-by-row, as
 listed in the table.  In each row the gauge-network spectral action
@@ -3550,6 +3560,171 @@ remain outside the forcing. Sources:
 \texttt{debug/door4b\_inner\_algebra\_forcing\_memo.md},
 \texttt{debug/door4c\_j\_signtable\_audit\_memo.md}.
 
+\paragraph{A geometric handle on the $n=2$ fork (Door~4d, 2026-06-02).}
+A second handle, structurally orthogonal to the combined-$J$ sign table
+of Door~4c, is the \emph{Division-Algebra-of-the-Sphere} (DAS) criterion:
+\emph{at each Hopf rung $n$, the inner algebra is the natural associative
+real normed division algebra whose unit-norm sphere IS the rung's Hopf
+bundle total space $S^{2n-1}$.} The identifications are bit-exact at
+all three rungs:\ $S^1$ is the unit-norm sphere of $\mathbb{C}$ under
+complex multiplication (closure $1.1 \times 10^{-16}$); $S^3$ is the
+unit-norm sphere of $\mathbb{H}$ under quaternion multiplication and is
+bit-exactly isomorphic to $\mathrm{Sp}(1) = \mathrm{SU}(2)$ via the
+standard $\mathbb{H} \to M_2(\mathbb{C})$ embedding (closure
+$2.2 \times 10^{-16}$, $\mathrm{SU}(2)$-isomorphism error
+$3.3 \times 10^{-16}$); and by Hurwitz's classification of finite-dimensional
+real normed division algebras (only $\mathbb{R}, \mathbb{C}, \mathbb{H}$
+are associative, with unit spheres $S^0, S^1, S^3$ respectively), $S^5$
+has no associative-division-algebra realization, so the inner algebra at
+$n=3$ falls back to a matrix algebra. DAS \emph{agrees} with Door 4b's
+elimination forcings at $n=1$ ($\mathbb{C}$) and $n=3$ ($M_3(\mathbb{C})$),
+and \emph{closes} the $n=2$ fork by selecting $\mathbb{H}$ --- the
+direct realization with $\mathrm{U}(\mathbb{H}) = \mathrm{Sp}(1) =
+\mathrm{SU}(2)$ on the 3-dimensional $S^3$, in contrast to the
+$M_2(\mathbb{C})$ realization whose unit-norm sphere is the 4-dimensional
+$\mathrm{U}(2)$ with $\mathrm{SU}(2)$ reached only via the
+$\mathrm{U}(2)/\mathrm{U}(1)$ unimodularity quotient. The DAS argument
+never invokes any $J$ or sign-table data; it is a purely geometric
+criterion identifying the rung-$n$ sphere with the unit-norm subset of
+the rung's associative division algebra. The verdict is
+\emph{partial-door}: the existing argument of
+Sec.~\ref{sec:unified_gauge} extracts only the gauge group from the
+Hopf-rung sphere; adopting DAS as a forcing requires the additional
+structural theorem that the AC tensor product
+$\mathcal{H} = \mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$ transfers
+the rung-$n$ sphere's division-algebra structure to a constraint on
+$\mathcal{H}_F$'s inner algebra. This theorem is sprint-reachable and
+paper-level; if it closes, the inner-algebra status upgrades from
+``mostly forced with the $\mathbb{H}$-vs-$M_2(\mathbb{C})$ fork closed
+by literature import (CCM second-order condition)'' to ``mostly forced
+with the fork closed by a GeoVac-coherent geometric criterion,'' leaving
+only the generation count, the inner KO-dimension, and the Yukawa values
+outside the forcing. Source:
+\texttt{debug/door4d\_division\_algebra\_sphere\_memo.md}.
+
+\paragraph{Falsifier A$'$ on DAS (Door 4e, 2026-06-02).}
+The DAS handle introduced above is partial-door because the existing
+construction of Sec.~\ref{sec:unified_gauge} extracts only the gauge
+group from the Hopf-rung sphere. The natural test was whether any
+standard AC tensor-product compatibility condition fills the gap, i.e.,
+distinguishes $\mathbb{H}$ from $M_2(\mathbb{C})$ as the $n=2$ inner
+algebra. Three candidates were tested literally:\ (C1)
+SU(2)-equivariance under the Ad action $g \cdot m \cdot g^{-1}$;\
+(C2) Hopf U(1)-equivariance under scalar phase $e^{i\theta}I$ acting
+from the right;\ (C3) principal-bundle compatibility with the Hopf U(1)
+fiber. All three returned \emph{negative}: (C1) both $\mathbb{H}$ and
+$M_2(\mathbb{C})$ are SU(2)-Ad-invariant real $*$-subalgebras of
+$M_2(\mathbb{C})$ (the former is the unique minimal non-abelian such,
+the latter is the maximal; the distinction requires a minimality
+criterion that is itself extra input); (C2) every $2 \times 2$ complex
+matrix commutes with the scalar phase $e^{i\theta}I$ trivially, so the
+condition is vacuous; (C3) both candidate actions are
+principal-bundle compatible at machine precision by associativity of
+matrix multiplication and centrality of scalar phases. \emph{No standard
+AC tensor-product compatibility condition forces} $\mathbb{H}$
+\emph{over} $M_2(\mathbb{C})$. The substantive content of the test is
+not the negative outcome (which was the expected one) but the
+\emph{import comparison} it enables:\ the standard
+Chamseddine--Connes--Marcolli derivation of $\mathbb{H}$ at the $n=2$
+factor invokes \emph{three} axioms beyond the bare Connes spectral-triple
+data (second-order condition with nonzero finite Dirac, complex chiral
+fermion representation, and the $2N^2 = 32$ dimension count), whereas
+DAS invokes \emph{one} (the rung-$n$ sphere's division-algebra
+structure is inherited by the inner algebra). Both are imports relative
+to the bare axioms; DAS is leaner. The path to upgrading partial-door
+to door is therefore not a theorem about existing CCM machinery but a
+paper-level structural axiom:\ adopting ``the inner algebra at rung $n$
+is the $*$-algebra whose unit group IS the rung-$n$ sphere $S^{2n-1}$ as
+a Lie group, when one exists; else fallback $M_n(\mathbb{C})$.'' This
+reads the Hopf-rung sphere fully (Lie-group structure plus topology)
+where the existing construction reads it partially (gauge group only),
+and gives $\mathbb{C}$ at $n=1$ (via $S^1 = \mathrm{U}(1) =
+\mathrm{U}(\mathbb{C})$), $\mathbb{H}$ at $n=2$ (via $S^3 =
+\mathrm{Sp}(1) = \mathrm{U}(\mathbb{H})$), and $M_3(\mathbb{C})$ at
+$n=3$ (since $S^5$ is not a Lie group at all, by Adams 1958). Source:
+\texttt{debug/door4e\_falsifier\_A\_prime\_memo.md}.
+
+\paragraph{Closure of the Door 4 series (Door 4f, 2026-06-02; net axiom
+savings audited).} The natural next test was whether adopting Upgrade B
+introduces any new downstream constraint on existing GeoVac observables.
+Twelve sub-tests were run:\ inner KO-dimension (T1), chirality grading
+$\gamma_F$ (T2), Yukawa eigenvalues (T3), generation count (T4),
+Connes order-zero (T5), order-one (T6), and second-order (T7)
+conditions, bosonic spectral-action gauge-sector coefficient (T8),
+Higgs vacuum manifold (T9), cross-rung Yukawa coupling (T10),
+extensibility to rung $n \ge 4$ via Adams 1958 (T11), and consistency
+with the Bertrand $\times$ Hopf-tower reading of
+Sec.~\ref{sec:unified_gauge} (T12). \emph{All twelve} return either
+SILENT (Upgrade B unconstrained on the target), COMPATIBLE (the
+pre-existing constraint passes for $\mathbb{H}$, the mechanism
+unaffected), IDENTICAL to CCM (same observable from either
+$\mathbb{H}$ or $M_2(\mathbb{C})$ post-unimodularity), or a CLEAN
+extensibility/strengthening rule (T11, T12). Zero sub-tests introduce
+a new constraint; zero contradict any existing GeoVac result. Upgrade B
+is therefore a \emph{clean reformulation} of the CCM $\mathbb{H}$-selection
+with no new predictive content.
+
+\textbf{Honest axiom-savings audit.} The naive comparison in the
+preceding paragraph (CCM 3 axioms vs DAS 1 axiom) over-counts. Sub-test
+T7 (Connes second-order condition) shows that the second-order
+condition is \emph{still} required in the Upgrade-B formulation,
+because it constrains the off-diagonal Yukawa structure of $D_F$
+(which $\mathbb{H}$-selection alone does not determine).
+Upgrade B therefore replaces \emph{two} of CCM's three
+$\mathbb{H}$-selection axioms --- the complex chiral fermion
+representation requirement and the $2N^2 = 32$ dimension count ---
+with the single sphere-Lie-group axiom; the second-order condition
+persists in both formulations. Net axiom savings: \emph{one}. The
+Door~4 series is structurally complete at \textbf{partial-door (final)}.
+The remaining open questions are paper-level (whether to adopt
+Upgrade B's axiom-minimality advantage as the working construction
+principle) and the deep wall (force $N_{\mathrm{gen}}$ and the inner
+KO-dim from a packing principle; no known handle; deferred). Source:
+\texttt{debug/door4f\_falsifier\_A\_double\_prime\_memo.md}.
+
+\paragraph{The deep wall is a relative necessity, not a gap (Direction~2
+  scoping, 2026-06-03).} The ``deep wall'' named above --- forcing
+$N_{\mathrm{gen}}$ and the inner KO-dimension from a packing principle ---
+is sharper than an open gap:\ relative to the packing construction of
+Paper~0 as presently formulated, it is a \emph{necessity}. Two
+established facts compose. First, the Door~4 seam:\ the inner
+Yukawa/real-structure data lives in a ring (and a set of
+$(\mathcal{H}_F, D_F, J_F, \gamma_F)$ data) provably disjoint from every
+forced outer ring. Second, Paper~0~\S VII:\ the packing construction is
+\emph{kinematic} --- it emits the label set $(n, \ell, m, s)$ and the
+graph topology, and emits no operator, no real structure, no coupling,
+and no Hilbert-space multiplicity. But $N_{\mathrm{gen}}$ is exactly a
+Hilbert-space multiplicity (the factor in $\mathcal{H}_F =
+\mathbb{C}^{N_{\mathrm{gen}}} \otimes \mathcal{H}_F^{(1)}$, invisible to
+every algebra- and automorphism-level mechanism), and the inner
+KO-dimension is exactly a $(J_F, \gamma_F)$ datum --- both of the type
+the packing construction does not produce. The packing axiom therefore
+cannot constrain either:\ the residue is packing-inaccessible by
+composition of these two facts. The single logically-open escape is a
+\emph{packing-native multiplicity} --- a datum the construction emits on
+the outer labels that would map to a factor-$N_{\mathrm{gen}}$ tripling
+of $\mathcal{H}_F$. It is empty:\ Paper~0's entire multiplicity inventory
+is the $2\ell+1$ angular slots (odd, and \emph{growing} with $\ell$,
+hence not a generation-universal multiplicity) together with a single
+$\mathbb{Z}_2$ already consumed by spin; no constant factor of three
+appears anywhere. This promotes the structural-skeleton scope from an
+observation to a \emph{relative theorem of necessity} for the
+$N_{\mathrm{gen}}$/inner-KO-dimension residue, and gives a single
+structural reason the H1, W3, and Koide selection attempts failed:\ all
+probed inside the almost-commutative category, on the side of the seam
+where the disjointness forbids selection and the packing axiom has no
+reach. The qualifier ``relative'' is load-bearing:\ the statement
+forecloses the residue for the \emph{current} packing construction, not
+for every conceivable discrete one. Lifting it would require a
+\emph{sibling axiom} that emits fiber multiplicities --- a new primitive
+Paper~0 does not contain --- recorded as the open (multi-year) direction
+with no present handle. The inner \emph{algebra shape} $\mathbb{C}
+\oplus \mathbb{H} \oplus M_3(\mathbb{C})$ is the one inner datum the
+construction does reach (Door~4b/4d, via the Hopf tower and Hurwitz's
+classification); the residue it cannot reach is precisely the
+multiplicity- and real-structure-valued data. Source:\
+\texttt{debug/seam\_packing\_scoping\_memo.md}.
+
 \paragraph{Files.}  Scoping memo
 \texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
 ($\sim 5\,100$ words).  G4a sprint memo
@@ -4572,7 +4747,7 @@ Machine-readable results:\
 The construction of Sec.~\ref{sec:construction} is structurally a
 specialization of the gauge networks framework of Marcolli and
 van~Suijlekom~\cite{marcolli_vs2014}, with the
-Perez-Sanchez correction~\cite{perez_sanchez2024,perez_sanchez2025}
+Perez-Sanchez correction~\cite{perez_sanchez2025}
 that the continuum limit is Yang--Mills without Higgs.  The key
 parallels:
 
@@ -4794,7 +4969,7 @@ M.~Paschke and A.~Sitarz,
 \bibitem{cacic2009}
 B.~\'Ca\'ci\'c,
 ``Real structures on almost-commutative spectral triples,''
-\textit{Lett.~Math.~Phys.}\ \textbf{100}, 181--202 (2012).
+\textit{Lett.~Math.~Phys.}\ \textbf{103}, 793--816 (2013), arXiv:1209.4832.
 
 \bibitem{camporesi_higuchi1996}
 R.~Camporesi and A.~Higuchi,
@@ -4903,8 +5078,8 @@ entanglement properties of quantum field theory,''
 
 \bibitem{bizi_brouder_besnard2018}
 N.~Bizi, C.~Brouder, and F.~Besnard,
-``Towards a noncommutative geometry of the Standard Model with neutrino
-mixing,''
+``Space and time dimensions of algebras with applications to
+Lorentzian noncommutative geometry and quantum electrodynamics,''
 \textit{J.~Math.~Phys.}\ \textbf{59}, 062303 (2018), arXiv:1611.07062.
 
 \bibitem{vandungen2016}
@@ -4914,7 +5089,7 @@ K.~van~den~Dungen,
 arXiv:1505.01939.
 
 \bibitem{nieuviarts2025a}
-A.~Nieuviarts,
+G.~Nieuviarts,
 ``Emergence of Lorentz symmetry from an almost-commutative twisted
 spectral triple,''
 arXiv:2502.18105 (2025).

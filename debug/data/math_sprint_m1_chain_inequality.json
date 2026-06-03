@@ -1,0 +1,143 @@
+{
+  "panel_A": {
+    "n_trials": 400,
+    "d": 4,
+    "n_fail": 13,
+    "fail_rate": 0.0325,
+    "deficit_min": -0.8244841716374882,
+    "deficit_max": 5.722479761803653,
+    "deficit_mean": 1.2567835142265176,
+    "deficit_median": 1.1561326957350295,
+    "worst_case": {
+      "s12": 0.693116741981357,
+      "s23": 1.0262861363098432,
+      "s13": 2.5438870499286885,
+      "deficit": -0.8244841716374882,
+      "holds": false
+    }
+  },
+  "panel_B": {
+    "n_trials": 400,
+    "d": 4,
+    "n_fail": 0,
+    "fail_rate": 0.0,
+    "deficit_min": 0.5206439577252935,
+    "deficit_max": 8.938627611738355,
+    "deficit_mean": 3.3978393293471107,
+    "worst_case": {
+      "s12": 1.4328350106418606,
+      "s23": 2.187403212023048,
+      "s13": 3.0995942649396153,
+      "deficit": 0.5206439577252935,
+      "holds": true
+    }
+  },
+  "panel_C": {
+    "n_trials": 200,
+    "d": 4,
+    "beta": 6.283185307179586,
+    "n_fail": 10,
+    "fail_rate": 0.05,
+    "deficit_min": -5.188184035895816,
+    "deficit_max": 47.72805702530964,
+    "deficit_mean": 15.245547969040528,
+    "deficit_median": 15.124357672947042,
+    "worst_case": {
+      "s12": 13.95500484560895,
+      "s23": 8.518717247902822,
+      "s13": 27.66190612940759,
+      "deficit": -5.188184035895816,
+      "holds": false
+    }
+  },
+  "panel_D": {
+    "n_trials": 400,
+    "d": 4,
+    "beta": 6.283185307179586,
+    "n_fail": 93,
+    "fail_rate": 0.2325,
+    "deficit_min": -14.86003940779556,
+    "deficit_max": 39.96750293474864,
+    "deficit_mean": 6.00658832522761,
+    "worst_case": {
+      "s12": 10.07269375989489,
+      "s23": 1.9882161094790178,
+      "s13": 26.920949277169466,
+      "deficit": -14.86003940779556,
+      "holds": false
+    }
+  },
+  "panel_E": {
+    "trace_distance_chain": {
+      "n_trials": 200,
+      "holds_count": 200,
+      "hold_rate": 1.0,
+      "deficit_min": 0.22583750877920217,
+      "deficit_mean": 0.5471184581018208
+    },
+    "dmax_chain": {
+      "n_trials": 200,
+      "d": 4,
+      "n_fail": 0,
+      "fail_rate": 0.0,
+      "deficit_min": 16.062979059644253,
+      "deficit_max": 36.836136949867495,
+      "deficit_mean": 28.97202570605878
+    },
+    "single_orbit_sanity": {
+      "n_trials": 50,
+      "max_abs_rel_entropy": 3.8786248518496436e-15,
+      "all_hold": true
+    }
+  },
+  "panel_F": {
+    "rows": [
+      {
+        "eps": 1.0,
+        "n_trials": 200,
+        "n_fail": 11,
+        "fail_rate": 0.055,
+        "deficit_min": -4.606062962795303,
+        "deficit_mean": 10.579460250077052,
+        "deficit_max": 30.913163919086532
+      },
+      {
+        "eps": 0.3,
+        "n_trials": 200,
+        "n_fail": 20,
+        "fail_rate": 0.1,
+        "deficit_min": -2.267138285091371,
+        "deficit_mean": 1.4116634354157411,
+        "deficit_max": 8.824817448308917
+      },
+      {
+        "eps": 0.1,
+        "n_trials": 200,
+        "n_fail": 25,
+        "fail_rate": 0.125,
+        "deficit_min": -0.14328144858503739,
+        "deficit_mean": 0.1509784664163342,
+        "deficit_max": 0.8104781507994385
+      },
+      {
+        "eps": 0.03,
+        "n_trials": 200,
+        "n_fail": 21,
+        "fail_rate": 0.105,
+        "deficit_min": -0.015296420333415169,
+        "deficit_mean": 0.014067441804608427,
+        "deficit_max": 0.10842437799711213
+      },
+      {
+        "eps": 0.01,
+        "n_trials": 200,
+        "n_fail": 31,
+        "fail_rate": 0.155,
+        "deficit_min": -0.001488598813146719,
+        "deficit_mean": 0.0014608524605159157,
+        "deficit_max": 0.009443807513458458
+      }
+    ]
+  },
+  "elapsed_seconds": 1.0494728088378906
+}

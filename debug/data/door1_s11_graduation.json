@@ -1,0 +1,387 @@
+{
+  "track": "Door 1 graduation \u2014 F-theorem zeta(odd) ladder to S^11 + recursion c_d",
+  "date": "2026-06-03",
+  "dps": 260,
+  "K_MAX": 460,
+  "dirac_normalisation": "genuine Camporesi-Higuchi: g_n = 2^{floor(d/2)} binom(n+d-1,n) = prod_{j=1}^{d-1}(n+j)/c_d, c_d=(d-1)!/2^{floor(d/2)} (FROZEN)",
+  "c_d_CH": {
+    "3": 1,
+    "5": 6,
+    "7": 90,
+    "9": 2520,
+    "11": 113400
+  },
+  "claim_A_in_ring_closure": {
+    "dirac": {
+      "3": {
+        "closed_form": "3*zeta(3)/(16*pi**2) + log(2)/8",
+        "latex": "\\frac{3 \\zeta\\left(3\\right)}{16 \\pi^{2}} + \\frac{\\log{\\left(2 \\right)}}{8}",
+        "numeric": "0.109479740363788116762342663035638153494687879453762358954813918580952566204914513459078855",
+        "atoms": {
+          "log2": "1/8",
+          "zeta3/pi^2": "3/16"
+        },
+        "in_ring": true,
+        "residual": "0.0",
+        "cross_check_independent_numeric": "4.6479179207947938426529260650747299885805348162565460534158545375079082169308768050259306618606193705766585106410504014301900555585763560130011659455806761592252675752411841531491021510815867557209643959454246983428538765574652972281236743894287539614623716762e-91"
+      },
+      "5": {
+        "closed_form": "-3*log(2)/64 - 5*zeta(3)/(64*pi**2) - 15*zeta(5)/(128*pi**4)",
+        "latex": "- \\frac{3 \\log{\\left(2 \\right)}}{64} - \\frac{5 \\zeta\\left(3\\right)}{64 \\pi^{2}} - \\frac{15 \\zeta\\left(5\\right)}{128 \\pi^{4}}",
+        "numeric": "-0.0432538874585998060416202137778987230659201094938005195562269566062691348066657609359206453",
+        "atoms": {
+          "log2": "-3/64",
+          "zeta3/pi^2": "-5/64",
+          "zeta5/pi^4": "-15/128"
+        },
+        "in_ring": true,
+        "residual": "0.0",
+        "cross_check_independent_numeric": "1.4068503087036562551599157353061591718805391134381305120943052115498312959618196790237279069417696433631051043385096796624659703471759843688813627238264594719900908258230225907771692403832326014438776005027305320646582113419229600146621158139906682475219823888e-92"
+      },
+      "7": {
+        "closed_form": "63*zeta(7)/(1024*pi**6) + 35*zeta(5)/(512*pi**4) + 259*zeta(3)/(7680*pi**2) + 5*log(2)/256",
+        "latex": "\\frac{63 \\zeta\\left(7\\right)}{1024 \\pi^{6}} + \\frac{35 \\zeta\\left(5\\right)}{512 \\pi^{4}} + \\frac{259 \\zeta\\left(3\\right)}{7680 \\pi^{2}} + \\frac{5 \\log{\\left(2 \\right)}}{256}",
+        "numeric": "0.0184376206223607552973002582094140985286441712719184510444341544353029369791035920597121702",
+        "atoms": {
+          "log2": "5/256",
+          "zeta3/pi^2": "259/7680",
+          "zeta5/pi^4": "35/512",
+          "zeta7/pi^6": "63/1024"
+        },
+        "in_ring": true,
+        "residual": "0.0",
+        "cross_check_independent_numeric": "3.6304268478031835094734468394381587569871041128948823226809192362496736002080065536914551098245660535476710209362037905198955879319410788896090491118131001949072771480279106850582185517978014403947146263707083478130195899476882904854148321384766888937720376996e-92"
+      },
+      "9": {
+        "closed_form": "-35*log(2)/4096 - 3229*zeta(3)/(215040*pi**2) - 141*zeta(5)/(4096*pi**4) - 189*zeta(7)/(4096*pi**6) - 255*zeta(9)/(8192*pi**8)",
+        "latex": "- \\frac{35 \\log{\\left(2 \\right)}}{4096} - \\frac{3229 \\zeta\\left(3\\right)}{215040 \\pi^{2}} - \\frac{141 \\zeta\\left(5\\right)}{4096 \\pi^{4}} - \\frac{189 \\zeta\\left(7\\right)}{4096 \\pi^{6}} - \\frac{255 \\zeta\\left(9\\right)}{8192 \\pi^{8}}",
+        "numeric": "-0.00816984971892297534314936575302587383690493853868024620422981961949839685146743310985299393",
+        "atoms": {
+          "log2": "-35/4096",
+          "zeta3/pi^2": "-3229/215040",
+          "zeta5/pi^4": "-141/4096",
+          "zeta7/pi^6": "-189/4096",
+          "zeta9/pi^8": "-255/8192"
+        },
+        "in_ring": true,
+        "residual": "0.0",
+        "cross_check_independent_numeric": "2.7157926007549348694405898037179232879408918735303421952439769486642008290743575718787078405340571316672825100658215322554783577980878863376945663274344363653163678855747066634638179753752628438958833529701569984958340866627722687658516540508739793748001933668e-93"
+      },
+      "11": {
+        "closed_form": "1023*zeta(11)/(65536*pi**10) + 935*zeta(9)/(32768*pi**8) + 4389*zeta(7)/(163840*pi**6) + 17281*zeta(5)/(1032192*pi**4) + 117469*zeta(3)/(17203200*pi**2) + 63*log(2)/16384",
+        "latex": "\\frac{1023 \\zeta\\left(11\\right)}{65536 \\pi^{10}} + \\frac{935 \\zeta\\left(9\\right)}{32768 \\pi^{8}} + \\frac{4389 \\zeta\\left(7\\right)}{163840 \\pi^{6}} + \\frac{17281 \\zeta\\left(5\\right)}{1032192 \\pi^{4}} + \\frac{117469 \\zeta\\left(3\\right)}{17203200 \\pi^{2}} + \\frac{63 \\log{\\left(2 \\right)}}{16384}",
+        "numeric": "0.00370644461670319411355755958458037256465967624233210633008030839840505707301856234336796364",
+        "atoms": {
+          "log2": "63/16384",
+          "zeta3/pi^2": "117469/17203200",
+          "zeta5/pi^4": "17281/1032192",
+          "zeta7/pi^6": "4389/163840",
+          "zeta9/pi^8": "935/32768",
+          "zeta11/pi^10": "1023/65536"
+        },
+        "in_ring": true,
+        "residual": "0.0",
+        "cross_check_independent_numeric": "1.7111258739827708070051486455369716671962004259335559473907277087062899873478029128622915700194793141406269848039585517187364682066206604344188253673451638241997986631088824521843285490994390168689274346862268679051890957810329827999866339213800381625385761709e-93"
+      }
+    },
+    "scalar": {
+      "3": {
+        "numeric": "-0.12761410955239642118393073465781197704837430827260290915071216758479167857501833088477395442779292792995950904087055588178875783398602852982554605898844548254700717158954672278128589143581995206726380326776253501563067195285754338769922169389759891481645652346",
+        "convergence": "1.9467251540801134247126435580385769329664996343447445388112488125543675090622470983917045787008722247386007876635010200577027551558540401752059261136556157336216111297409634209916023326394171576647598872456036734498692509493689001228249508016088702252791618993e-208",
+        "pslq": {
+          "status": "relation_found",
+          "tol": "1e-140",
+          "maxcoeff": 10000000000,
+          "reconstruction_error": "2.5405852245238004927139102292358393619532156634524270401386470052644390259027801791214220461652760936801664507495795875471617266629669343759336774464809296261198573659402343106659315339765212077243030058937588088864849159535192783806830905999888542989973751283e-262",
+          "coefficients": {
+            "log2": "-1/4",
+            "zeta3/pi^2": "3/8"
+          }
+        },
+        "in_ring": true
+      },
+      "5": {
+        "numeric": "0.011485982723294252339551117739920353681423830233080659921180002684207148295791495793618781981672607047296870418952854099325092289778650321554002450150325240102902113074356538940745976386727904798125511332576725115156925542942043038755329959230786758637529496171",
+        "convergence": "0.0",
+        "pslq": {
+          "status": "relation_found",
+          "tol": "1e-140",
+          "maxcoeff": 10000000000,
+          "reconstruction_error": "4.287237566383913331454723511835478923296051432075970630233966821383740856210941552267399702903903408085280885639915553985835413743756701759388080690936568744077259305024145399248759463585379538034761322445717989995943295671563782267402715387481191629558070529e-262",
+          "coefficients": {
+            "log2": "1/64",
+            "zeta3/pi^2": "1/64",
+            "zeta5/pi^4": "-15/128"
+          }
+        },
+        "in_ring": true
+      },
+      "7": {
+        "numeric": "-0.0015946615534695738617549243397676315021579417374909043668396619339158152121146442041240762396350084672567769094674448589253958552341727808790853331688331523737897611354835708979557817684061593305923438347447534433130137917654335258418387494993522945611586755873",
+        "convergence": "0.0",
+        "pslq": {
+          "status": "relation_found",
+          "tol": "1e-140",
+          "maxcoeff": 10000000000,
+          "reconstruction_error": "4.3666308546502820968520332064990989033570894215588589752382995402982545757704034328649441418465682860127860872258399160966842177019744184586360081111390977948935048477097777214570698240221458257761457913798979527736459492951112597167990619687308433264017385017e-262",
+          "coefficients": {
+            "log2": "-1/512",
+            "zeta3/pi^2": "-41/15360",
+            "zeta5/pi^4": "5/1024",
+            "zeta7/pi^6": "63/2048"
+          }
+        },
+        "in_ring": true
+      },
+      "9": {
+        "numeric": "0.00026224014806435057637519083792029385685428677431974482949681439953826790952109073000077278864091459043475433051833890163178237575134282726398264545984519185395820700858120085535807285280671598223185134620064491400010453459562297241233019209223384769499553635581",
+        "convergence": "0.0",
+        "pslq": {
+          "status": "relation_found",
+          "tol": "1e-140",
+          "maxcoeff": 10000000000,
+          "reconstruction_error": "1.2226566393020789871185692978197476929399850380364805130667238712835112812157129612021843597170391200835801044232351765070715809565528371684180822711189473825701813573587377620079795507262008312173208215863714267766208658026311527207037373512446361313924867805e-261",
+          "coefficients": {
+            "log2": "5/16384",
+            "zeta3/pi^2": "397/860160",
+            "zeta5/pi^4": "-1/16384",
+            "zeta7/pi^6": "-63/16384",
+            "zeta9/pi^8": "-255/32768"
+          }
+        },
+        "in_ring": true
+      },
+      "11": {
+        "numeric": "-0.000047310030344786694752140411491570544224099128376002096504325176418017669089394276444816665241372228204970219784319556575508336104169204662659119373410477120201199764377287649794313714186515003216470020391335269190544111791924549591736433617202249142752174284821",
+        "convergence": "0.0",
+        "pslq": {
+          "status": "relation_found",
+          "tol": "1e-140",
+          "maxcoeff": 10000000000,
+          "reconstruction_error": "2.8934511752639347945461718330962566014588759151462956297711851598774613310385447406209769783096671019063985537357699750851451998803892705493879423633029513215054986880797360927308359406364926225373781963363758465758211631913017777631954466161835953172345837978e-261",
+          "coefficients": {
+            "log2": "-7/131072",
+            "zeta3/pi^2": "-3897/45875200",
+            "zeta5/pi^4": "-485/8257536",
+            "zeta7/pi^6": "609/1310720",
+            "zeta9/pi^8": "425/262144",
+            "zeta11/pi^10": "1023/524288"
+          }
+        },
+        "in_ring": true
+      }
+    },
+    "all_in_ring_through_S11": true,
+    "verdict": "GREEN"
+  },
+  "claim_B_layer1_degree_obstruction": {
+    "d5_m1": {
+      "deg_residual_mult": 4,
+      "deg_lower_Dirac_mult": 2,
+      "lead_residual": "-1/12",
+      "degree_drops_to_lower": false
+    },
+    "d5_m2": {
+      "deg_residual_mult": 4,
+      "deg_lower_Dirac_mult": 2,
+      "lead_residual": "-1/4",
+      "degree_drops_to_lower": false
+    },
+    "d7_m1": {
+      "deg_residual_mult": 6,
+      "deg_lower_Dirac_mult": 4,
+      "lead_residual": "-1/120",
+      "degree_drops_to_lower": false
+    },
+    "d7_m2": {
+      "deg_residual_mult": 6,
+      "deg_lower_Dirac_mult": 4,
+      "lead_residual": "-7/360",
+      "degree_drops_to_lower": false
+    },
+    "d9_m1": {
+      "deg_residual_mult": 8,
+      "deg_lower_Dirac_mult": 6,
+      "lead_residual": "-1/2880",
+      "degree_drops_to_lower": false
+    },
+    "d9_m2": {
+      "deg_residual_mult": 8,
+      "deg_lower_Dirac_mult": 6,
+      "lead_residual": "-1/1344",
+      "degree_drops_to_lower": false
+    },
+    "d11_m1": {
+      "deg_residual_mult": 10,
+      "deg_lower_Dirac_mult": 8,
+      "lead_residual": "-1/120960",
+      "degree_drops_to_lower": false
+    },
+    "d11_m2": {
+      "deg_residual_mult": 10,
+      "deg_lower_Dirac_mult": 8,
+      "lead_residual": "-31/1814400",
+      "degree_drops_to_lower": false
+    }
+  },
+  "claim_B_recursion_frozen_CH": {
+    "m=1": {
+      "5": {
+        "ratios": {
+          "log2": "1/2",
+          "zeta3/pi^2": "1/2"
+        },
+        "atoms_with_no_lower_home": [],
+        "consistent": true,
+        "c_d": "1/2"
+      },
+      "7": {
+        "ratios": {
+          "log2": "11/24",
+          "zeta3/pi^2": "559/1200",
+          "zeta5/pi^4": "13/24"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta7/pi^6"
+        ],
+        "consistent": false,
+        "c_d": null
+      },
+      "9": {
+        "ratios": {
+          "log2": "29/64",
+          "zeta3/pi^2": "13313/29008",
+          "zeta5/pi^4": "563/1120",
+          "zeta7/pi^6": "11/16"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta9/pi^8"
+        ],
+        "consistent": false,
+        "c_d": null
+      },
+      "11": {
+        "ratios": {
+          "log2": "73/160",
+          "zeta3/pi^2": "951443/2066560",
+          "zeta5/pi^4": "19819/40608",
+          "zeta7/pi^6": "1643/2880",
+          "zeta9/pi^8": "83/96"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta11/pi^10"
+        ],
+        "consistent": false,
+        "c_d": null
+      }
+    },
+    "m=2": {
+      "5": {
+        "ratios": {
+          "log2": "7/8",
+          "zeta3/pi^2": "11/12"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta5/pi^4"
+        ],
+        "consistent": false,
+        "c_d": null
+      },
+      "7": {
+        "ratios": {
+          "log2": "7/8",
+          "zeta3/pi^2": "359/400",
+          "zeta5/pi^4": "9/8"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta7/pi^6"
+        ],
+        "consistent": false,
+        "c_d": null
+      },
+      "9": {
+        "ratios": {
+          "log2": "57/64",
+          "zeta3/pi^2": "3747/4144",
+          "zeta5/pi^4": "161/160",
+          "zeta7/pi^6": "23/16"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta9/pi^8"
+        ],
+        "consistent": false,
+        "c_d": null
+      },
+      "11": {
+        "ratios": {
+          "log2": "29/32",
+          "zeta3/pi^2": "378239/413312",
+          "zeta5/pi^4": "92327/94752",
+          "zeta7/pi^6": "221/192",
+          "zeta9/pi^8": "57/32"
+        },
+        "atoms_with_no_lower_home": [
+          "zeta11/pi^10"
+        ],
+        "consistent": false,
+        "c_d": null
+      }
+    }
+  },
+  "claim_B_analytic_top_atom": {
+    "data": {
+      "5": {
+        "scalar_top": "-15/128",
+        "dirac_top": "-15/128",
+        "ratio_scalar_over_1dirac": "1",
+        "ratio_scalar_over_2dirac": "1/2",
+        "predicted_2pow_minus_d_minus_5_over_2": "1",
+        "matches_prediction": true,
+        "cancels_at_m1": true,
+        "cancels_at_m2": false
+      },
+      "7": {
+        "scalar_top": "63/2048",
+        "dirac_top": "63/1024",
+        "ratio_scalar_over_1dirac": "1/2",
+        "ratio_scalar_over_2dirac": "1/4",
+        "predicted_2pow_minus_d_minus_5_over_2": "1/2",
+        "matches_prediction": true,
+        "cancels_at_m1": false,
+        "cancels_at_m2": false
+      },
+      "9": {
+        "scalar_top": "-255/32768",
+        "dirac_top": "-255/8192",
+        "ratio_scalar_over_1dirac": "1/4",
+        "ratio_scalar_over_2dirac": "1/8",
+        "predicted_2pow_minus_d_minus_5_over_2": "1/4",
+        "matches_prediction": true,
+        "cancels_at_m1": false,
+        "cancels_at_m2": false
+      },
+      "11": {
+        "scalar_top": "1023/524288",
+        "dirac_top": "1023/65536",
+        "ratio_scalar_over_1dirac": "1/8",
+        "ratio_scalar_over_2dirac": "1/16",
+        "predicted_2pow_minus_d_minus_5_over_2": "1/8",
+        "matches_prediction": true,
+        "cancels_at_m1": false,
+        "cancels_at_m2": false
+      }
+    },
+    "closed_form_ratio_scalar_over_Dirac_top": "2^{-(d-5)/2}  (genuine CH) = {1,1/2,1/4,1/8} at d={5,7,9,11}",
+    "cancellation_dimension": "d = 5 only (ratio=1 -> m=1 top atom cancels); no d>=7"
+  },
+  "verdict": {
+    "claim_A_F_coefficient_in_ring": "GO (GREEN)",
+    "claim_B_recursion_constant": "STOP (single-rung S^5 coincidence)",
+    "rungs_where_recursion_closes": [
+      5
+    ],
+    "c_d_is_closed_form_constant": false,
+    "c5_value_under_frozen_CH_m1": "1/2",
+    "overall": "BORDERLINE -> RESOLVED. (A) The F-coefficient zeta(odd) ladder GRADUATES: bit-exact in-ring closure in R={log2, zeta(2k+1)/pi^{2k}} continues to S^11, PSLQ-confirmed at 260 dps with a frozen basis. (B) The cross-species recursion constant c_d does NOT graduate: with the Dirac normalisation FROZEN to the genuine Camporesi-Higuchi multiplicity the recursion closes at S^5 ONLY, and only for the tuned pair (m,c_d)=(1,1/2). The original {c_5=1, c_7=c_9=1/2} sequence was produced by a NON-FROZEN Dirac normalisation (genuine at d<=5, doubled at d>=7) that supplied the missing factor of 2 by hand. Analytic cause: the residual top atom zeta_d/pi^{d-1} scales as scalar_top/Dirac_top = 2^{-(d-3)/2}, hitting the required value (m) only at one dimension. NO out-of-ring transcendental appears at S^11 -> WH2 grid intact, no 4th master-Mellin sub-mechanism. Net: GO on the closed-form ladder; STOP on c_d as a dimensional recursion constant."
+  }
+}

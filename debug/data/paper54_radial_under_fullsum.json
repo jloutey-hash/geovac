@@ -1,0 +1,20 @@
+{
+  "2": {
+    "n_nonzero_generators": 4,
+    "pearson": -0.8164965809277259,
+    "cv_ratio": 0.935533628474119,
+    "sign_agree": 0.125,
+    "n_spec_nonzero": 25,
+    "n_coul_nonzero": 54,
+    "n_overlap": 16
+  },
+  "3": {
+    "n_nonzero_generators": 29,
+    "pearson": -0.359005591051188,
+    "cv_ratio": 4.8659043069180505,
+    "sign_agree": 0.2939297124600639,
+    "n_spec_nonzero": 356,
+    "n_coul_nonzero": 1949,
+    "n_overlap": 313
+  }
+}

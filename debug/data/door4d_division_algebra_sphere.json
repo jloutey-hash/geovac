@@ -1,0 +1,97 @@
+{
+  "probe": "Door_4d_DAS",
+  "date": "2026-06-02",
+  "predecessor_memos": [
+    "debug/door4_gauge_yukawa_boundary_memo.md",
+    "debug/door4b_inner_algebra_forcing_memo.md",
+    "debug/door4c_j_signtable_audit_memo.md"
+  ],
+  "part1_n1": {
+    "rung": 1,
+    "sphere": "S^1",
+    "candidate_division_algebra": "C",
+    "n_samples": 32,
+    "max_norm_error": 1.1102230246251565e-16,
+    "max_closure_error_under_multiplication": 1.1102230246251565e-16,
+    "is_multiplicative_group": true,
+    "verdict_n1": "S^1 = unit norm sphere of C; closed under complex multiplication; bit-exact."
+  },
+  "part2_n2": {
+    "rung": 2,
+    "sphere": "S^3",
+    "candidate_division_algebra": "H",
+    "n_samples": 32,
+    "max_norm_error": 2.220446049250313e-16,
+    "max_closure_error_under_quaternion_multiplication": 2.220446049250313e-16,
+    "max_SU2_isomorphism_error": 3.3422138886441676e-16,
+    "is_multiplicative_group": true,
+    "is_isomorphic_to_SU2": true,
+    "verdict_n2": "S^3 = unit norm sphere of H under quaternion multiplication AND S^3 is bit-exactly isomorphic to SU(2) = Sp(1). The H-unit-sphere identification is DIRECT (single chart, no quotient)."
+  },
+  "part3_n3": {
+    "rung": 3,
+    "sphere": "S^5",
+    "associative_real_normed_division_algebras_by_Hurwitz": {
+      "R": {
+        "dim": 1,
+        "unit_sphere": "S^0"
+      },
+      "C": {
+        "dim": 2,
+        "unit_sphere": "S^1"
+      },
+      "H": {
+        "dim": 4,
+        "unit_sphere": "S^3"
+      }
+    },
+    "non_associative_normed_division_algebras": {
+      "O": {
+        "dim": 8,
+        "unit_sphere": "S^7",
+        "associative": false
+      }
+    },
+    "S5_is_unit_sphere_of_associative_division_algebra": false,
+    "verdict_n3": "Hurwitz: associative real normed division algebras are R, C, H (dim 1, 2, 4; unit spheres S^0, S^1, S^3). S^5 has NO associative division-algebra realization. Inner algebra at n=3 must fall back to a matrix algebra; M_3(C) is selected by Door 4b elimination (only M_3(C) has SU(3) as its post-unimodularity unitary group)."
+  },
+  "part4_n2_fork": {
+    "candidate_H": {
+      "unitary_group": "U(H) = Sp(1) = SU(2)",
+      "unit_sphere_dim": 3,
+      "unit_sphere": "S^3",
+      "matches_rung_sphere_directly": true,
+      "requires_quotient": false
+    },
+    "candidate_M2_C": {
+      "unitary_group": "U(M_2(C)) = U(2)",
+      "unit_sphere_dim": 4,
+      "unit_sphere": "U(2)",
+      "SU2_from_unimodularity_quotient": "U(2)/U(1) = SU(2)",
+      "matches_rung_sphere_directly": false,
+      "requires_quotient": true
+    },
+    "DAS_selection_at_n2": "H (direct unit-sphere realization)",
+    "verdict_n2_fork": "DAS selects H. H's unit sphere IS S^3 directly; M_2(C)'s unit sphere is U(2) (4-dim), with S^3 = SU(2) obtained only via the unimodularity quotient. DAS picks the direct (non-quotient) realization."
+  },
+  "part5_DAS_summary": {
+    "DAS_principle": "The inner algebra at rung n is the natural associative real normed division algebra whose unit-norm sphere IS the rung's Hopf bundle total space S^(2n-1). When no such division algebra exists (no associative candidate at dim 2n), the inner algebra falls back to the minimal matrix algebra M_n(C) reproducing the rung's gauge group SU(n).",
+    "rung_by_rung_DAS_selection": {
+      "n=1": "C (S^1 = unit C)",
+      "n=2": "H (S^3 = unit H = Sp(1))",
+      "n=3": "M_3(C) (no associative div algebra has S^5 as unit sphere; fallback)"
+    },
+    "Door_4b_elimination_forcing": {
+      "n=1": "C (only C has U(1) as its unitary group)",
+      "n=2": "H or M_2(C) (BOTH have SU(2) post-unimodularity)",
+      "n=3": "M_3(C) (only M_3(C) has SU(3) as post-unimodularity unitary group)"
+    },
+    "agreement_at_n1": "DAS agrees with Door 4b (both give C).",
+    "agreement_at_n3": "DAS agrees with Door 4b (both give M_3(C), by different routes).",
+    "extension_at_n2": "DAS CLOSES the fork (selects H) where Door 4b is silent (both H and M_2(C) reproduce SU(2)). The DAS handle is structurally DISTINCT from Door 4c (combined-J sign table): DAS invokes only the geometric identification of S^(2n-1) with the unit-norm sphere of the rung's associative division algebra; no J or sign-table data is referenced.",
+    "is_DAS_derivable_from_existing_GeoVac_structure?": "DAS is CONSISTENT WITH the Bertrand x Hopf-tower forcing (the tower produces the rung-n sphere S^(2n-1); the geometric identification of this sphere with a division-algebra unit sphere is a CLASSICAL FACT about real normed division algebras, Hurwitz 1898). However, the existing Paper 32 SS VIII.B argument extracts only the GAUGE GROUP from the Hopf tower; it does not invoke the unit-sphere identification to constrain the inner-algebra REALIZATION. Adopting DAS as a forcing requires a STRENGTHENING of the construction principle: 'the inner algebra at rung n is the natural division algebra of which the rung's sphere is the unit-norm subset.' This strengthening is CONSISTENT with existing forcings at n=1 and n=3 (where it gives the same answer as elimination) and CLOSES the fork at n=2.",
+    "verdict": "PARTIAL-DOOR",
+    "verdict_rationale": "DAS is a coherent and natural extension of the Bertrand x Hopf-tower forcing. It closes the H-vs-M_2(C) fork by selecting H, agreeing with the existing n=1 and n=3 forcings. It is structurally orthogonal to Doors 4b/4c (no algebra-enumeration, no J sign-table). It is NOT a TRUE forcing derivable from the EXISTING Paper 32 SS VIII.B construction, which extracts only the gauge group from the Hopf tower. Adopting DAS as a new forcing principle is the minimal structural extension that would upgrade the inner-algebra status from 'mostly-forced' (Door 4b) to 'fully forced'. This is the door-side content of the deeper 'second packing axiom for inner-factor data' question (Paper 18 SS IV).",
+    "open_follow_on": "(a) Is there a GeoVac-NATIVE structural argument (beyond classical Hurwitz / division-algebra mathematics) that FORCES the inner algebra to inherit the rung-n sphere's division-algebra structure? If yes, DAS is upgraded from PARTIAL-DOOR to FULL-DOOR. If no, DAS remains a new axiom on the same standing as the CCM second-order condition -- literature-grade rather than GeoVac-grade. (b) Does adopting DAS introduce any new constraints downstream (e.g., on the Higgs sector, the chirality grading gamma_F, the inner KO-dim)? If yes, those constraints become falsifiers for DAS itself."
+  }
+}

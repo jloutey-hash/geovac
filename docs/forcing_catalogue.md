@@ -109,6 +109,54 @@ Doors 1 and 4 each got a second probe to graduate or break.
   + M₃ FORCED; n=2 real form ADMITTED-not-forced; generation count + Yukawa FREE. Written
   up in Paper 32 §VIII. debug/door4b_*, door4c_*
 
+- **Door 4f (Falsifier A'' on Upgrade B, 2026-06-02) → PARTIAL DOOR FINAL (Outcome 3 NEUTRAL).**
+  12 sub-tests on whether adopting Upgrade B (sphere-Lie-group axiom from Door 4e) introduces
+  new downstream constraints on existing GeoVac observables: **0 new constraints**, **0
+  contradictions**, 5 silent (T1 inner KO-dim, T2 γ_F, T3 Yukawa, T4 N_gen, T10 cross-rung
+  CKM), 3 compatible (T5/T6/T7 Connes order-0/1/2), 2 identical to CCM (T8 spectral action
+  gauge coefficient, T9 Higgs vacuum S²), 1 clean extensibility rule via Adams 1958 (T11),
+  1 consistent strengthening of Bertrand × Hopf-tower reading (T12). Honest axiom-savings
+  accounting: Upgrade B replaces 2 of CCM's 3 axioms (complex chiral fermion rep + 2N²=32
+  dimension count) but the **CCM second-order condition stays in both formulations** because
+  it constrains D_F's off-diagonal Yukawa structure, not A_F. Net axiom savings: **1 axiom**
+  (not 2). The **Door 4 series is structurally complete at PARTIAL-DOOR FINAL.** Remaining
+  open questions are PI/community-side judgment (adopt Upgrade B vs CCM-3-axiom) and the
+  deeper wall (force N_gen / inner KO-dim from a packing principle — no known handle,
+  deferred indefinitely). debug/door4f_*
+
+- **Door 4e (Falsifier A' on DAS, 2026-06-02) → PARTIAL DOOR (CONFIRMED).**
+  Literal Falsifier A' tested three natural AC tensor-product compatibility conditions for
+  distinguishing ℍ from M₂(ℂ) at n=2: (C1) SU(2)-equivariance under Ad action — both pass
+  (ℍ minimal, M₂(ℂ) maximal SU(2)-Ad-invariant *-subalgebra; no distinguishing); (C2) Hopf
+  U(1)-equivariance under scalar phase — vacuous (every matrix commutes with e^{iθ}I);
+  (C3) principal-bundle compatibility with Hopf U(1) fiber — both pass at machine precision.
+  **No standard AC condition forces ℍ over M₂(ℂ).** Substantive content: CCM ℍ-selection
+  requires 3 axioms (second-order condition + complex chiral fermion rep + dimension count);
+  DAS requires 1 axiom (sphere = unit-norm subset of division algebra). Both are imports;
+  DAS is **leaner**. FULL-DOOR upgrade path identified: adopt **Upgrade B (sphere-Lie-group
+  axiom)** as foundational — "the inner algebra at rung n is the *-algebra whose unit group
+  IS the rung-n sphere as a Lie group, when one exists; else fallback M_n(ℂ)." Reads the
+  Hopf-rung sphere FULLY (Lie structure + topology) where the existing construction reads it
+  PARTIALLY (gauge group only). Paper-level, sprint-reachable. Falsifier A'' (does Upgrade B
+  introduce new downstream constraints?) is the next sharpest thread. debug/door4e_*
+
+- **Door 4d (DAS, 2026-06-02) → PARTIAL DOOR (a NEW handle, structurally orthogonal to 4c).**
+  Division-Algebra-of-the-Sphere criterion: the inner algebra at Hopf rung n is the natural
+  associative real normed division algebra whose unit-norm sphere IS the rung's Hopf bundle
+  total space S^(2n−1). Bit-exact verification at all three rungs: S¹ = unit ℂ (closure
+  1.1e−16); S³ = unit ℍ = Sp(1) = SU(2) (closure 2.2e−16, SU(2)-iso 3.3e−16); S⁵ has NO
+  associative-division-algebra realization (Hurwitz: only ℝ, ℂ, ℍ at dim 1, 2, 4 →
+  fallback M₃(ℂ)). DAS **agrees** with Door 4b at n=1 (ℂ) and n=3 (M₃(ℂ)) and **closes**
+  the n=2 fork by selecting ℍ — the direct (no-quotient) realization where U(ℍ)=Sp(1)=SU(2)
+  matches S³ directly, while M₂(ℂ)'s SU(2) is reached only via the U(2)/U(1) unimodularity
+  quotient. Structurally orthogonal to Door 4c: no J or sign-table data is invoked. Verdict
+  PARTIAL-DOOR because Paper 32 §VIII.B's existing argument extracts only the gauge group
+  from the Hopf tower, not the algebra realization; adoption as a forcing requires one
+  structural theorem (Falsifier A', sprint-reachable, paper-level): the AC tensor-product
+  H = H_GV ⊗ H_F transfers the rung-n sphere's division-algebra structure to H_F. If that
+  closes, PARTIAL-DOOR upgrades to DOOR and the inner-algebra status becomes "fully
+  forced except for N_gen, inner KO-dim, and Yukawa values." debug/door4d_*
+
 ### Door 1 — F-theorem closed forms in general odd d  `PROBED→DOOR`  ★ flagship
 - **Forced:** the spectral-zeta F-coefficient is an exact closed form, bit-exact to
   Klebanov–Pufu–Safdi on S³ (61+ digits, PSLQ [8,2,−3]). Pushed to S⁵ the *same

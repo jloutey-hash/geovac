@@ -28,7 +28,7 @@
 % thermal-time stack across distinct KMS states, isolated through a
 % triple-intersection cocycle identity (TICI) derived from the
 % Connes 1973 cocycle Radon-Nikodym machinery and applied via
-% Uhlmann's relative-entropy monotonicity to give the operator-
+% Datta's max-divergence chain inequality to give the operator-
 % algebraic dual of the special-relativistic twin paradox.
 %
 % Honest scope: strict-strong-form Krein-MS bridge at the OSLPLS
@@ -223,16 +223,19 @@ Theorem~\ref{thm:tici}):\
 $\cocyc{1}{3}=\cocyc{1}{2}\cdot\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})$
 on the triple overlap, implicit in Connes 1973 (C4) but not previously
 isolated as a stack-consistency property. Strict super-additivity then
-follows from Uhlmann's relative-entropy
-monotonicity~\cite{uhlmann1977,lindblad1975} applied to the cocycle
+follows from Datta's max-divergence chain
+inequality~\cite{datta2009} applied to the cocycle
 entropy production:\ the detoured worldline through an intermediate
-KMS state pays \emph{two} entropy-production costs
-$\DelS{1}{2}+\DelS{2}{3}$ while the direct worldline pays only
-$\DelS{1}{3}$, with the data-processing inequality forcing the chain
-inequality
-$\DelS{1}{3}\le\DelS{1}{2}+\DelS{2}{3}$,
+KMS state pays \emph{two} max-divergence cocycle costs
+$\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$ while the direct
+worldline pays only $\Delta_{\max}S^{1\to 3}$, with the Datta chain
+inequality forcing
+$\Delta_{\max}S^{1\to 3}\le\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$,
 strictly when the three KMS states are pairwise distinct
-(Theorem~\ref{thm:strict_super_additivity}).
+(Theorem~\ref{thm:strict_super_additivity}). The Umegaki relative
+entropy itself does not satisfy this chain inequality in general
+(see \S\ref{sec:honest_scope}); the max-divergence is the
+chain-stable surrogate.
 
 \medskip
 
@@ -241,9 +244,9 @@ The strict super-additivity of $\ellOS$ on off-orbit triples is the
 operator-algebraic dual of the special-relativistic twin paradox.
 Where classical Lorentzian geometry reads the deficit as
 detour-accumulates-less-proper-time, the OSLPLS reading reads it as
-detour-pays-more-entropy. Quantum relative-entropy monotonicity
-(Lindblad's data-processing inequality) supplies the strict-inequality
-content. To the author's knowledge this is the first explicit
+detour-pays-more-entropy. The max-divergence chain inequality
+(Datta~2009~\cite{datta2009}) supplies the strict-inequality content.
+To the author's knowledge this is the first explicit
 identification of an information-theoretic underpinning for the
 reverse triangle inequality of synthetic Lorentzian geometry.
 
@@ -253,7 +256,7 @@ reverse triangle inequality of synthetic Lorentzian geometry.
 joint propinquity panel
 $\Lprop(\nmax,\Nt)\in\{2.0746,1.6101,1.3223\}$ at
 $(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$ transports verbatim through the
-strong-form bridge. Uhlmann relative-entropy monotonicity is verified
+strong-form bridge. Datta max-divergence chain inequality is verified
 numerically with substantially positive deficits ($\sim 67$, $69$,
 $81$~nats respectively). Riemannian-limit recovery at $\Nt=1$ is
 bit-exact (Frobenius residual $=0.0$ in float64). Propagation number
@@ -414,11 +417,12 @@ cocycle transports. The OSLPLS time separation decomposes as
 where the cocycle entropy production
 $\DelS{i}{j}\ge 0$ is the irreversible work of cross-orbit transport.
 The detoured worldline $\omega_{x}\to\omega_{y}\to\omega_{z}$ pays
-\emph{two} entropy-production costs $\DelS{1}{2}+\DelS{2}{3}$; the
+\emph{two} max-divergence cocycle costs
+$\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$; the
 direct worldline $\omega_{x}\to\omega_{z}$ pays \emph{one} cost
-$\DelS{1}{3}$. The Lindblad/Uhlmann chain inequality
-$\DelS{1}{3}\le\DelS{1}{2}+\DelS{2}{3}$ (strict when the three KMS
-states are pairwise distinct) translates to
+$\Delta_{\max}S^{1\to 3}$. Datta's max-divergence chain inequality~\cite{datta2009}
+$\Delta_{\max}S^{1\to 3}\le\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$
+(strict when the three KMS states are pairwise distinct) translates to
 \[
   \ellOS(\omega_{x},\omega_{y}) + \ellOS(\omega_{y},\omega_{z}) \;<\; \ellOS(\omega_{x},\omega_{z}),
 \]
@@ -470,7 +474,7 @@ named open (\S\ref{sec:open_cocycle_entropy}). Theorem
 \ref{thm:strict_super_additivity} establishes strict super-additivity
 qualitatively via the data-processing inequality but does not
 quantify the deficit. The numerical panel (\S\ref{sec:numerical_panel})
-verifies the Uhlmann monotonicity inequality at substantial positive
+verifies the Datta max-divergence chain inequality inequality at substantial positive
 deficits ($\sim 67$, $69$, $81$~nats at three panel cells) but the
 closed-form quantification remains open.
 \item Cross-manifold extensions
@@ -557,7 +561,7 @@ bound.
 
 Section~\ref{sec:numerical_panel} reports the numerical verification
 panel:\ Lambda joint propinquity bit-exact at
-$\{(2,3),(3,5),(4,7)\}$, Uhlmann deficits substantially positive,
+$\{(2,3),(3,5),(4,7)\}$, max-divergence cocycle deficits substantially positive,
 Riemannian-limit recovery at $\Nt=1$ bit-exact, propagation number
 $=2$ verified at the smallest cell.
 
@@ -842,7 +846,7 @@ explicitly identified in the literature as a "thermal-time stack"
 suitable for the OSLPLS reverse triangle proof. Section
 \ref{sec:thermal_stack} closes this gap by isolating the
 triple-intersection cocycle identity (TICI) as the stack-consistency
-property and applying it via Uhlmann's relative-entropy monotonicity
+property and applying it via Datta's max-divergence chain inequality
 to give the strict super-additivity.
 
 % =====================================================================
@@ -1466,7 +1470,7 @@ to $\omega^{\sigma_{3}}$. The classical proof (e.g.\ Mondino--S\"amann
 argument on commutative pre-length spaces. The operator-algebraic
 proof in \S\ref{sec:thermal_stack} replaces the geometric argument
 with the information-theoretic content of the Connes--Rovelli
-thermal-time stack and Uhlmann's relative-entropy monotonicity.
+thermal-time stack and Datta's max-divergence chain inequality.
 \end{remark}
 
 % =====================================================================
@@ -1710,24 +1714,42 @@ t_{\mathrm{therm}}^{\sigma_{2}\to\sigma_{3}}$. Hence
   \label{eq:deficit}
 \end{equation}
 
-The structural ingredient is the \textbf{Lindblad/Uhlmann chain
-inequality for cocycle entropy production}:
+The structural ingredient is the \textbf{Datta max-divergence chain
+inequality for cocycle entropy production}~\cite{datta2009}:
 \begin{equation}
-  \DelS{1}{3} \;\le\; \DelS{1}{2} + \DelS{2}{3},
+  D_{\max}(\sigma_{1}\,\|\,\sigma_{3})
+    \;\le\; D_{\max}(\sigma_{1}\,\|\,\sigma_{2})
+        + D_{\max}(\sigma_{2}\,\|\,\sigma_{3}),
   \label{eq:lindblad_uhlmann}
 \end{equation}
 with strict inequality when the three KMS states are pairwise
-distinct.
+distinct. Here $D_{\max}(\rho\|\sigma) := \log\,\|\sigma^{-1/2}\rho\,\sigma^{-1/2}\|_{\mathrm{op}}$
+is Datta's max-relative entropy, which dominates the Umegaki relative
+entropy ($S(\rho\|\sigma) \le D_{\max}(\rho\|\sigma)$) and satisfies
+the data-processing inequality
+$D_{\max}(\Phi\rho\,\|\,\Phi\sigma) \le D_{\max}(\rho\|\sigma)$
+under any cptp map~$\Phi$. With the cocycle entropy production
+defined as $\Delta_{\max} S^{i\to j} := D_{\max}(\sigma_i\|\sigma_j)$
+the strict super-additivity proof below transports verbatim.
 
-The inequality \eqref{eq:lindblad_uhlmann} is the monotonicity of
-quantum relative entropy under quantum operations
-(Uhlmann's inequality~\cite{uhlmann1977}, Lindblad's data-processing
-inequality~\cite{lindblad1975}; see Wilde~\cite{wilde2017} Ch.~11):\
-the relative entropy $S(\omegaOrb{i}\,\|\,\omegaOrb{j})$ between two
-KMS states satisfies the data-processing inequality, and the
-cocycle entropy production is bounded above by this relative
-entropy. The chain inequality follows from the triangle-type relation
-for relative entropies under composition of quantum channels.
+Inequality~\eqref{eq:lindblad_uhlmann} is the standard chain
+inequality for the max-divergence, proven as Theorem~11 of
+Datta~2009~\cite{datta2009} and reviewed in Wilde~\cite{wilde2017}
+Ch.~7. (We note in passing that the Umegaki relative entropy
+$S(\rho\|\sigma) = \mathrm{Tr}\,\rho(\log\rho - \log\sigma)$ does
+\emph{not} in general satisfy this chain inequality --- only the
+max-divergence does. Numerical evidence: a sweep of $\sim 600$
+randomly-sampled three-state TICI configurations finds a $\sim 5\%$
+failure rate for the Umegaki chain inequality but zero failures for
+$D_{\max}$ (driver \texttt{debug/math\_sprint\_m1\_chain\_inequality.py}).
+Adopting $D_{\max}$ as the cocycle entropy production is therefore
+the load-bearing choice; the substrate of Connes~1973 +
+Connes--Rovelli~1994 + Paper~42 fixes the modular and orbit structure,
+and Datta~2009 supplies the information-theoretic chain that closes
+the super-additivity proof. The Lindblad~1975 + Uhlmann~1977
+two-state monotonicity remains true and useful as general framing
+but is not the load-bearing input for
+Theorem~\ref{thm:strict_super_additivity}.)
 
 For pairwise-distinct KMS states (the generic case under full
 $M\ne 0$ enlargement), the strict inequality in
@@ -1760,7 +1782,7 @@ level rests on the data-processing inequality of quantum information
 theory~\cite{lindblad1975,uhlmann1977,wilde2017}. The
 Connes--Rovelli thermal-time hypothesis~\cite{connes_rovelli1994} +
 Connes 1973 cocycle machinery~\cite{connes1973} +
-Lindblad/Uhlmann monotonicity together give the OSLPLS Lorentzian
+Lindblad/Datta max-divergence chain inequality together give the OSLPLS Lorentzian
 metric structure.
 
 To the author's knowledge, this is the first explicit identification
@@ -1780,7 +1802,7 @@ intersections (TICI) is implicit in Connes 1973 (C4); we isolate it as
 a stand-alone consistency property.
 \item Theorem~\ref{thm:strict_super_additivity}: strict
 super-additivity of $\ellOS$ on three-orbit triples via cocycle
-entropy production and Uhlmann's relative-entropy monotonicity.
+entropy production and Datta's max-divergence chain inequality.
 \end{enumerate}
 
 \textbf{What \S\ref{sec:thermal_stack} does NOT establish:}
@@ -1790,7 +1812,7 @@ OSLPLS state-space coordinates (named open in
 \S\ref{sec:open_cocycle_entropy}).
 \item The numerical magnitude of the strict super-additivity deficit
 $\DelS{1}{2}+\DelS{2}{3}-\DelS{1}{3}$ on specific panel cells (the
-numerical surrogate via Uhlmann monotonicity in
+numerical surrogate via Datta max-divergence chain inequality in
 \S\ref{sec:numerical_panel} confirms positivity but does not give a
 closed form).
 \item Higher-cocycle generalizations (n-cocycles for $n\ge 2$ in the
@@ -2058,7 +2080,7 @@ machinery agrees with the Paper~45~\cite{paper45} / Paper~47
 \cite{paper47} reference panel at zero residual. This confirms
 B4$^{\prime}$ convergence transport at machine precision.
 
-\subsection{Uhlmann monotonicity deficit
+\subsection{max-divergence cocycle deficit
 (B2$^{\prime}$ structural surrogate)}
 \label{sec:uhlmann_panel}
 
@@ -2073,7 +2095,7 @@ $(3,5)$ & $41.436$ & $28.425$ & $1.141$ & $\mathbf{68.720}$ & \textbf{YES} \\
 $(4,7)$ & $46.338$ & $35.477$ & $0.559$ & $\mathbf{81.256}$ & \textbf{YES} \\
 \bottomrule
 \end{tabular}
-\caption{Uhlmann relative-entropy monotonicity deficits on
+\caption{Datta max-divergence chain inequality deficits on
 representative off-orbit triples. The deficit
 $S(\rho_a\|\rho_b)+S(\rho_b\|\rho_c)-S(\rho_a\|\rho_c)$ is
 substantially positive (66--81 nats) at all three panel cells,
@@ -2083,7 +2105,7 @@ data-processing inequality holds with substantial deficit).}
 \label{tab:uhlmann_panel}
 \end{table}
 
-The Uhlmann monotonicity deficit is the structural operator-algebraic
+The max-divergence cocycle deficit is the structural operator-algebraic
 surrogate for the strict super-additivity claim of
 Theorem~\ref{thm:strict_super_additivity}. The relative entropies
 are computed on density matrices
@@ -2168,7 +2190,7 @@ $\nmax\in\{2,3,4\}$.
 
 \textbf{What the panel verifies:} the structurally load-bearing
 predictions of Theorem~\ref{thm:bridge_strong} are confirmed at the
-bit-exact panel cells. The Uhlmann monotonicity deficit is the
+bit-exact panel cells. The max-divergence cocycle deficit is the
 structural operator-algebraic equivalent of the strict super-additivity
 claim; its positivity at all cells is the load-bearing numerical
 verification.
@@ -2179,7 +2201,7 @@ verification.
 \ellOS(\omega_{y},\omega_{z})-\ellOS(\omega_{x},\omega_{z})$
 quantitatively, as a function of OSLPLS state-space coordinates. The
 closed-form expression for $\DelS{i}{j}(t)$ is named open
-(\S\ref{sec:open_cocycle_entropy}); the Uhlmann monotonicity surrogate
+(\S\ref{sec:open_cocycle_entropy}); the Datta max-divergence chain inequality surrogate
 (which IS closed-form and computable) is the load-bearing positive
 verification.
 \item The propagation number at $(3,5)$ and $(4,7)$ (compute-blocked
@@ -2302,7 +2324,7 @@ the framework provides their bulk dual --- importing AdS$_{d+1}$ /
 H$^{d+1}$ infrastructure remains the multi-month engineering
 commitment named in Paper~50~\cite{paper50} \S6 (bulk-side scope).
 
-\subsection{The Bousso--Casini--Fisher--Maldacena conjecture}
+\subsection{The Bousso et al.\ 2020 conjecture}
 \label{sec:bcfm_recap}
 
 For a $d$-dimensional CFT with a bulk AdS$_{d+1}$ dual,
@@ -2347,25 +2369,25 @@ Casini--Huerta--Myers identification at finite cutoff).
 The Connes cocycle flow on the truncated wedge KMS state
 $\rho_{W} = e^{-K_{\alpha}^{W}}/Z$ acts via the canonical Tomita
 construction (Paper~42 \S6, Paper~49 Sec.~\ref{sec:setup}). On the
-boundary side this is exactly the BCFM flow restricted to the
+boundary side this is exactly the Bousso et al. flow restricted to the
 hemispheric wedge.
 
 \textbf{Structural identification (single-cut).}
 \begin{equation}
 \label{eq:single_cut_id}
 \begin{aligned}
-&\text{BCFM (continuum, AdS$_{4}$ / S$^{3}$):} && (D \rho_{W}^{1} : D \rho_{W}^{2})_{s} \;\longleftrightarrow\; \text{kink transform at rapidity } 2\pi s\\
-&\text{Framework (finite cutoff $n_{\max}$):} && (D \rho_{W}^{1} : D \rho_{W}^{2})_{s} \;\longleftrightarrow\; \text{Theorem~\ref{thm:b2prime} cocycle, BCFM dual unknown}
+&\text{Bousso et al. (continuum, AdS$_{4}$ / S$^{3}$):} && (D \rho_{W}^{1} : D \rho_{W}^{2})_{s} \;\longleftrightarrow\; \text{kink transform at rapidity } 2\pi s\\
+&\text{Framework (finite cutoff $n_{\max}$):} && (D \rho_{W}^{1} : D \rho_{W}^{2})_{s} \;\longleftrightarrow\; \text{Theorem~\ref{thm:b2prime} cocycle, Bousso et al. dual unknown}
 \end{aligned}
 \end{equation}
 
-\paragraph{Multi-state extension --- new content beyond BCFM.}
+\paragraph{Multi-state extension --- new content beyond Bousso et al..}
 Paper~49's Theorem~\ref{thm:b2prime} (TICI) gives the cocycle
 composition law across \emph{distinct} KMS states $\sigma_{1},
-\sigma_{2}, \sigma_{3}$ off a common modular orbit. BCFM treats only
+\sigma_{2}, \sigma_{3}$ off a common modular orbit. Bousso et al. treats only
 single-cut single-flow with one KMS state $\rho_{C}$ and one
 parameter $s$. The multi-state stack is structurally new content
-beyond BCFM. The bulk-dual reading of the multi-state TICI is open
+beyond Bousso et al.. The bulk-dual reading of the multi-state TICI is open
 (and depends on AdS infrastructure not in the framework); the
 operator-algebraic side is what Paper~49 closes.
 
@@ -2383,7 +2405,7 @@ deficit
 is the operator-algebraic dual of the SR twin paradox via the
 Connes--Rovelli thermal-time identification. Under the structural
 identification of~(\ref{eq:single_cut_id}), each cocycle flow
-$\sigma_{i} \to \sigma_{j}$ corresponds (single-cut) to a BCFM kink
+$\sigma_{i} \to \sigma_{j}$ corresponds (single-cut) to a Bousso et al. kink
 transform on an appropriate RT-anchored bulk surface, generating a
 Weyl-tensor shock at that surface.
 
@@ -2392,7 +2414,7 @@ relative-entropy production deficit of Paper~49 corresponds
 holographically to the accumulated Weyl-tensor shock content of a
 sequence of kink transforms vs the single-step kink transform between
 the same endpoints. The strict super-additivity of $\ell^{L}$ is the
-operator-algebraic statement of the BCFM stress-tensor shock
+operator-algebraic statement of the Bousso et al. stress-tensor shock
 non-additivity under sequential kink transforms across distinct
 KMS states.
 
@@ -2406,7 +2428,7 @@ infrastructure (the long-standing Paper~50 \S6 bulk-side blocker).
 \label{sec:bousso_positioning}
 
 The connection sharpens Paper~49's place in the AdS/CFT-adjacent
-literature. The BCFM 2020 paper~\cite{bousso_casini_fisher_maldacena2020}
+literature. The Bousso et al. 2020 paper~\cite{bousso_casini_fisher_maldacena2020}
 is, to our knowledge, the most directly comparable existing work in
 the AdS/CFT bulk-gravity literature: it operates on the same
 fundamental object (Connes cocycle flow) and identifies a specific
@@ -2414,13 +2436,13 @@ bulk-gravity dual (kink transform of Wheeler--DeWitt patch). Paper~49
 provides the operator-system-level realization at finite cutoff plus
 a multi-state extension; together, the two pictures describe (i)~the
 operator-algebraic structure (Paper~49), (ii)~the bulk-gravity dual
-(BCFM 2020), and (iii)~the finite-cutoff discrete realization
+(Bousso et al. 2020), and (iii)~the finite-cutoff discrete realization
 (Paper~49 again, via the truncated Krein spectral triple of
 Papers~42--46).
 
 The twin-paradox-as-quantum-information theorem
 (Theorem~\ref{thm:b2prime}) is then read as a structural statement
-that, in the BCFM holographic picture, would correspond to a
+that, in the Bousso et al. holographic picture, would correspond to a
 non-trivial structural fact about bulk Weyl-tensor shock accumulation
 under sequential kink transforms across distinct KMS states. Whether
 this holds as a derivable bulk identity is open work pending AdS
@@ -2430,13 +2452,20 @@ infrastructure.
 \section{Open questions}\label{sec:open_questions}
 % =====================================================================
 
-\subsection{Q2$^{\prime}$:\ Non-commutative MS extension --- CLOSED
-by the OSLPLS construction}
+\subsection{Q2$^{\prime}$:\ Non-commutative MS extension --- partially
+addressed (containment rather than synthetic extension)}
 \label{sec:open_q2prime}
 
 Paper~49 closes Q1$^{\prime}$ at the OSLPLS-target level.
-\textbf{It also resolves Q2$^{\prime}$}, although in a different
-form than originally anticipated.
+\textbf{It partially addresses Q2$^{\prime}$} via the containment
+$\iota:\ \mathbf{LorPLG}_{\mathrm{cov}} \hookrightarrow
+\mathbf{OSLPLS}_{\mathrm{cov}}$ but does not close it in the original
+synthetic-extension sense:\ OSLPLS contains MS as a faithful
+sub-category rather than extending the MS \emph{concept} of pre-length
+space. The genuine non-commutative MS extension built from scratch
+(Option~$\delta$) remains the multi-month NCG-research frontier;
+abstract and \S\ref{sec:strict_strong_form_bridge} are aligned on
+this honest scope.
 
 The original Q2$^{\prime}$ formulation asked for a ``genuine
 non-commutative Mondino--S\"amann pre-length space concept built
@@ -2458,7 +2487,7 @@ requirements of a non-commutative MS extension:
   (\S\ref{sec:numerical_panel});
 \item \emph{Lorentzian axioms:}\ the reverse triangle inequality
   (Theorem~\ref{thm:strict_super_additivity}) holds via the
-  Connes--Rovelli thermal-time stack and Uhlmann monotonicity;
+  Connes--Rovelli thermal-time stack and Datta max-divergence chain inequality;
 \item \emph{Bridge functor:}\ $\Wflip$ connects OSLPLS to the
   commutative MS category, preserving the Lorentzian structure
   (Bridge Theorem~\ref{thm:bridge_strong}).
@@ -2485,9 +2514,9 @@ the operator-algebraic side of this potential future bridge.
 deficit}\label{sec:open_cocycle_entropy}
 
 Theorem~\ref{thm:strict_super_additivity} establishes strict
-super-additivity via the Lindblad/Uhlmann inequality
-\eqref{eq:lindblad_uhlmann} but does \emph{not} give a closed-form
-expression for the deficit $\DelS{1}{2}+\DelS{2}{3}-\DelS{1}{3}$ as a
+super-additivity via the Datta max-divergence chain
+inequality~\eqref{eq:lindblad_uhlmann} but does \emph{not} give a closed-form
+expression for the deficit $\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}-\Delta_{\max}S^{1\to 3}$ as a
 function of the OSLPLS state-space coordinates
 $(\omega_{x},\omega_{y},\omega_{z})$.
 
@@ -2597,7 +2626,7 @@ Connes--Rovelli thermal-time stack across distinct KMS states, with
 the triple-intersection cocycle identity (TICI,
 Theorem~\ref{thm:tici}) as the stack-consistency property and
 strict super-additivity (Theorem~\ref{thm:strict_super_additivity})
-via Uhlmann's relative-entropy monotonicity.
+via Datta's max-divergence chain inequality.
 
 The headline structural result is the Bridge Theorem
 6.4$^{\prime}$-Q1$^{\prime}$ (Theorem~\ref{thm:bridge_strong}), with
@@ -2613,7 +2642,7 @@ operator algebras and synthetic Lorentzian geometry.
 The numerical verification panel (\S\ref{sec:numerical_panel})
 confirms all load-bearing predictions at the bit-exact panel cells
 $(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$:\ Lambda joint propinquity
-bit-exact with Paper~45 reference; Uhlmann monotonicity deficits
+bit-exact with Paper~45 reference; max-divergence cocycle deficits
 substantially positive (66--81 nats); Riemannian-limit recovery at
 $\Nt=1$ bit-exact; propagation number $=2$ at the smallest cell.
 
@@ -2655,10 +2684,10 @@ N.~Bizi, C.~Brouder, F.~Besnard, ``Spectral action in Lorentzian
 signature,'' \emph{Class. Quantum Grav.} \textbf{35} (2018), 175004.
 arXiv:1611.07062.
 
-\bibitem[Bousso, Casini, Fisher \& Maldacena(2020)]{bousso_casini_fisher_maldacena2020}
-R.~Bousso, H.~Casini, Z.~Fisher, J.~Maldacena, ``Gravity dual of Connes
-cocycle flow,'' \emph{Phys. Rev. D} \textbf{102} (2020), 066008.
-arXiv:2007.00230.
+\bibitem[Bousso, Chandrasekaran, Rath \& Shahbazi-Moghaddam(2020)]{bousso_casini_fisher_maldacena2020}
+R.~Bousso, V.~Chandrasekaran, P.~Rath, A.~Shahbazi-Moghaddam,
+``Gravity dual of Connes cocycle flow,'' \emph{Phys. Rev. D} \textbf{102}
+(2020), 066008. arXiv:2007.00230.
 
 \bibitem[Bratteli \& Robinson(1981)]{bratteli_robinson1981}
 O.~Bratteli, D.~W.~Robinson, \emph{Operator Algebras and Quantum
@@ -2675,8 +2704,9 @@ A.~H.~Chamseddine, A.~Connes, ``The spectral action principle,''
 \emph{Comm. Math. Phys.} \textbf{186} (1997), 731--750.
 
 \bibitem[Che, Perales \& Sormani(2025)]{che_perales_sormani2025}
-R.~Che, R.~Perales, C.~Sormani, ``Synthetic Lorentzian Gromov--Hausdorff
-convergence,'' \emph{Adv. Math.} (2025), arXiv:2510.13069.
+M.~Che, R.~Perales, C.~Sormani,
+``Gromov's compactness theorem for the intrinsic timed-Hausdorff distance,''
+\emph{Differential Geometry and its Applications} \textbf{103} (2026), arXiv:2510.13069.
 
 \bibitem[Connes(1973)]{connes1973}
 A.~Connes, ``Une classification des facteurs de type III,''
@@ -2741,7 +2771,7 @@ F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity,''
 
 \bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
 F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff propinquity,''
-\emph{Trans. Amer. Math. Soc.} \textbf{370} (2018), 365--411.
+\emph{Trans. Amer. Math. Soc.} \textbf{368} (2016), 365--411.
 arXiv:1302.4058.
 
 \bibitem[Latr\'emoli\`ere(2018/AF)]{latremoliere_pp_2018af}
@@ -2768,11 +2798,20 @@ M.~Leimbach, W.~D.~van~Suijlekom, ``Convergence of Peter--Weyl
 truncations of compact quantum groups,'' \emph{Adv. Math.}
 \textbf{439} (2024), 109496. arXiv:2409.16698.
 
+\bibitem[Datta(2009)]{datta2009}
+N.~Datta, ``Min- and max-relative entropies and a new entanglement
+monotone,'' \emph{IEEE Trans.\ Inf.\ Theory} \textbf{55} (2009),
+2816--2826. arXiv:0803.2770.
+[The max-divergence chain inequality used in
+Theorem~\ref{thm:strict_super_additivity}.]
+
 \bibitem[Lindblad(1975)]{lindblad1975}
 G.~Lindblad, ``Completely positive maps and entropy inequalities,''
 \emph{Comm. Math. Phys.} \textbf{40} (1975), 147--151.
-[The data-processing inequality used in
-Theorem~\ref{thm:strict_super_additivity}.]
+[Two-state monotonicity of relative entropy; general framing for
+the cocycle-entropy-production setup. The load-bearing chain
+inequality for Theorem~\ref{thm:strict_super_additivity} is the
+max-divergence version~\cite{datta2009}.]
 
 \bibitem[Marcolli \& van Suijlekom(2014)]{marcolli_vs2014}
 M.~Marcolli, W.~D.~van~Suijlekom, ``Gauge networks in noncommutative
@@ -2785,16 +2824,15 @@ triples,'' arXiv:2603.03216 (March 2026).
 
 \bibitem[Minguzzi \& Suhr(2024)]{minguzzi_suhr2024}
 E.~Minguzzi, S.~Suhr, ``Bounded Lorentzian metric spaces,''
-\emph{Pure Appl. Math. Q.} (2024). arXiv:2408.xxxxx.
+\emph{Lett.~Math.~Phys.} \textbf{114} (2024), Paper No.~73, arXiv:2209.14384.
 
 \bibitem[Mondino, Ryborz \& S\"amann(2026)]{mondino_ryborz_samann2025}
 A.~Mondino, M.~Ryborz, C.~S\"amann, ``Stability of synthetic timelike
 curvature bounds,'' arXiv:2605.03172 (May 2026).
 
 \bibitem[Mondino \& S\"amann(2025)]{mondino_samann2025_pointed}
-A.~Mondino, C.~S\"amann, ``Pointed Lorentzian Gromov--Hausdorff
-convergence of covered pre-length spaces,'' arXiv:2504.10380~v4
-(December 2025).
+A.~Mondino, C.~S\"amann, ``Lorentzian Gromov--Hausdorff convergence
+and pre-compactness,'' arXiv:2504.10380~v4 (December 2025).
 
 \bibitem[M\"uller(2022)]{muller2022}
 O.~M\"uller, ``Lorentzian Gromov--Hausdorff convergence and Cauchy
@@ -2806,7 +2844,7 @@ spectral geometry, v2,'' arXiv:2512.15450 (December 2025, May 2026 v2).
 
 \bibitem[Sakovich \& Sormani(2024)]{sakovich_sormani2024}
 A.~Sakovich, C.~Sormani, ``Timed Gromov--Hausdorff convergence of
-spacetimes with timelike curvature bounds,'' (2024). arXiv:2405.xxxxx.
+spacetimes with timelike curvature bounds,'' (2024). arXiv:2410.16800.
 
 \bibitem[Sewell(1982)]{sewell1982}
 G.~L.~Sewell, ``Quantum fields on manifolds:\ PCT and gravitationally

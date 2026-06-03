@@ -222,14 +222,18 @@ $n_{\max} = 3$, 29 of 55.
 The \emph{rotationally invariant} one-form is constructed using the
 conjugate pairing~\cite{connes_book1994}:
 \begin{equation}
-  A = \sum_{(NLM)} \hat{M}_{NLM}^\dagger \otimes \hat{M}_{NLM}^\dagger
-  \cdot [D_{\mathrm{total}}, \hat{M}_{NLM} \otimes \hat{M}_{NLM}],
+  A = \sum_{(NLM)} \sum_{(N'L'M')}
+  \bigl(\hat{M}_{NLM}^\dagger \otimes \hat{M}_{N'L'M'}^\dagger\bigr)
+  \cdot [D_{\mathrm{total}}, \hat{M}_{NLM} \otimes \hat{M}_{N'L'M'}],
   \label{eq:A_full}
 \end{equation}
-summing over all allowed multiplier labels in
-$\mathcal{O}_{n_{\max}}$. The dagger pairing ensures $m$-conservation
-(total magnetic quantum number $M_1 + M_2$ is preserved) and
-Hermiticity of $A$.
+summing \emph{independently} over all allowed multiplier labels on each
+tensor factor in $\mathcal{O}_{n_{\max}}$. This is the full inner
+fluctuation of the product algebra $\mathcal{A} \otimes \mathcal{A}$,
+not only the diagonal ($N'L'M' = NLM$) terms; all numerical results in
+this paper use this double sum. The dagger pairing ensures
+$m$-conservation (total magnetic quantum number $M_1 + M_2$ is
+preserved) and Hermiticity of $A$.
 
 \begin{proposition}[Connected interaction]
 \label{prop:connected}
