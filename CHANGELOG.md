@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.45.1] - 2026-06-03
+
+### Summary
+
+Closure of the six PI-judgment items carried over from the v3.43 two-day audit
+cycle. Investigation reversed three of the six premises: two of the audit's own
+MEDIUM-confidence citation replacements were themselves false attributions, and
+the Paper 34 "Lamb table sum off 26 MHz" was a sign/convention error rather than
+a missing component. No `geovac/` code touched.
+
+### Changed
+
+- **Paper 22 (angular sparsity):** angular ERI-density headline switched from the
+  pair-diagonal count to the physical Coulomb selection rule (global magnetic
+  quantum-number conservation, $m_a+m_b=m_c+m_d$): $14.84/8.52/6.06/4.83/3.99\%$
+  at $l_{\max}=1..5$. The pair-diagonal restriction ($m_a=m_c$, $m_b=m_d$;
+  $7.81/2.76/1.44/0.90/0.62\%$) is retained as the stricter axial sub-case
+  $D_{\mathrm{pd}}$. Abstract, Theorem 3 table (now two columns), prose, and the
+  spinor-section consistency note updated. Verified by the new diagnostic
+  `debug/paper22_m_selection_diagnostic.py` (production `two_electron_integral`
+  realizes global-$M_L$, not pair-diagonal). Does not affect Paper 14's
+  $O(Q^{2.5})$ Pauli scaling (computed directly, not from this density).
+- **Paper 34 §V.C.1 (Lamb-shift autopsy):** corrected the 2P self-energy
+  *contribution* sign ($-12.88 \to +12.88$ MHz). The $-12.88$ MHz is the 2P
+  level shift; the contribution to the $2S_{1/2}-2P_{1/2}$ splitting is $+12.88$.
+  Rows 1–4 now sum to $1052.19$ MHz $=$ Paper 36 LS-6a (authoritative); full sum
+  $+1057.17$, residual $+0.68$, framework-native subtotal corrected $97.5\% \to
+  99.9\%$. Caption documents the contribution convention; source memo
+  (`debug/calc_track_LAR_lamb_autopsy_memo.md`) given a correction banner.
+- **Paper 46 Appendix B:** honest-scope note added — the gradient-norm
+  absorption step is proof-sketch grade, with the bit-exact numerical panel as
+  the load-bearing verification.
+
+### Fixed (citation hygiene, from the v3.43 audit backlog)
+
+- **Papers 38, 42:** `ucp_maps_2024` re-attributed to Rieffel 2004
+  (arXiv:math/0108005, Mem. AMS 168 no. 796). arXiv:2410.15454 is
+  Bhattacharyya–Duhan–Pradhan, *not* Hekkelman–McDonald–van Suijlekom; the cited
+  "Berezin–Toeplitz on $S^2$ / Kähler coadjoint orbit" content is verbatim
+  Rieffel.
+- **Paper 7:** added the Barut–Kleinert PR **157**, 1180 (1967) companion
+  citation ("Current Operators and Majorana Equation… from Dynamical Groups") at
+  the SO(4,2) dynamical-group claim; the existing PR 156,1541 cite was valid.
+- **Paper 23:** "Pachucki–Yerokhin 2010" → "Pachucki 2011" (PRL **106**, 193007,
+  web-verified, solo author); removed the mis-attributed `Eides2024` bibitem
+  (arXiv:2306.13369 is Krachkov–Lee, not Eides–Shelyuto) and merged its two
+  co-citations + one prose mention into the existing `EidesGrotchShelyuto2007`
+  book reference.
+- **Papers 23, 42:** escaped pre-existing raw-underscore `\texttt{}` bugs (group
+  folder names; a function signature in Paper 23) that blocked a strict compile;
+  both now compile clean under `-halt-on-error`.
+
+### Notes
+
+- **Two verify-the-verifier reversals.** The audit's MEDIUM-confidence
+  replacements for `ucp_maps` (arXiv:2410.15454) and `Eides2024`
+  (arXiv:2306.13369) were both false attributions, caught by checking the actual
+  arXiv authorship before the edits shipped.
+- **Paper 38** retains a pre-existing font-expansion configuration issue in the
+  local MiKTeX sandbox (microtype auto-expansion vs. non-scalable fonts) — an
+  environment limitation, not a content bug; the Rieffel re-attribution is
+  verified via a zero-undefined-citations second pass and the paper builds clean
+  under a standard TeX Live.
+- **Verification:** Papers 7, 22, 23, 34, 42, 46 compile clean (exit 0) under
+  `-halt-on-error`; 0 undefined citations on the second pass.
+
 ## [3.45.0] - 2026-06-03
 
 ### Summary
