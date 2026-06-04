@@ -1481,22 +1481,87 @@ Proposition~\ref{prop:vertex_parity_descent}).  Both occurrences trace
 to the dimension-$3$ parity of $\sthree$:\ M2 via the Euclidean
 signature $(+,+,+,+)$ on $\R^4 \supset \sthree$, M3 via the
 half-integer Camporesi--Higuchi shift $3/2$ on
-$\mathrm{spin}(3) = \mathrm{SU}(2)$.  An open question:\ is there a
-single object (a motive, a Tannakian symmetry, an enriched motivic
-Galois group of the discrete spectral triple) whose action
-simultaneously selects $\Q(\zeta_4)$ as Witt-splitting field for the
-SD integrand AND as cyclotomic conductor for the $\eta$-invariant
-Mellin slot, with a natural identification between the trivial
-M2-Galois and the non-trivial M3-Galois on the respective output rings?
-Sprint A7 (2026-06-03;\ memo
+$\mathrm{spin}(3) = \mathrm{SU}(2)$.  Sprint A7 (2026-06-03;\ memo
 \texttt{debug/sprint\_a7\_m2\_m3\_cyclotomic\_memo.md}) returns
 HALF-STRUCTURAL:\ the shared field is robust at the number-field
 level, but no shared Tannakian symmetry is known in the published
 periods program (Brown~\cite{brown2012}, Deligne~\cite{deligne2010},
 Glanois~\cite{glanois2015}, Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016}).
-A structural unification would require an enriched motivic Galois
-group of the GeoVac discrete spectral triple, not yet constructed in
-the literature.  Multi-year mathematical research project.
+
+A nine-sprint scoping arc (2026-06-03/04;\ six Round-1/2 memos
+\texttt{sprint\_q5p\_dim\_sweep\_memo.md},
+\texttt{sprint\_q5p\_qsm\_litread\_memo.md},
+\texttt{sprint\_q5p\_tannakian\_obstruction\_memo.md},
+\texttt{sprint\_q5p\_deflation\_test\_memo.md},
+\texttt{sprint\_q5p\_k\_slot\_tannakian\_memo.md},
+\texttt{sprint\_q5p\_greenfield\_marcolli\_transport\_memo.md},
+plus Round-3 closures
+\texttt{sprint\_q5p\_r3\_hp\_star\_check\_memo.md} and
+\texttt{sprint\_q5p\_r3\_pro\_dg\_category\_memo.md})
+sharpens Q5' along three axes:
+
+\emph{Period-ring level (DEFLATED).}  The M2 $\oplus$ M3 output
+rings sit inside an explicitly identifiable Tannakian sub-category
+$M^{\mathrm{GV}} \subset \mathrm{MT}(\Z[i, 1/2], 4)$ with the single
+$\mathrm{Gal}(\Q(i)/\Q) \subset G^{M^{\mathrm{GV}}}$ acting compatibly
+(trivially on the M2 pure-Tate sub-category, non-trivially on the M3
+cyclotomic part via $\chi_{-4}$).  At this level the ambient motivic
+Galois group already suffices;\ no GeoVac-distinguishing Tannakian
+symmetry is needed on the period output values.
+
+\emph{Dg-category level (HP$_*$ / Marcolli--Tabuada route
+STRUCTURALLY DEAD).}  The master Mellin engine slot index
+$k \in \{0, 1, 2\}$ is TANNAKIAN-INVISIBLE on the ambient
+$M^{\mathrm{GV}}$ (the same period value arises from multiple
+$k$-slots).  The natural sharpening would be a candidate enriched
+fiber functor
+$\omega^{\mathrm{tri}}: \mathrm{dg}(\mathcal{T}) \to \mathrm{Vec}_\Q \otimes
+\mathrm{IndexCat}(\{0, 1, 2\})$ recording which Mellin slot produced
+each period, via the Marcolli--Tabuada noncommutative-motives
+machinery (arXiv:1110.2438 Thm 1.1, arXiv:1112.5422) applied to
+$\varprojlim_{n_{\max}} \mathrm{dg}(\mathcal{T}_{n_{\max}})$ with Berezin
+reconstruction maps (Paper~38 \S L4).  Round-3 closes this route at
+the source on two independent grounds:\
+(a) $\mathrm{HP}_*(\mathcal{A}_{\mathrm{GV}}^{(n_{\max})})$ is
+Morita-trivial at every finite cutoff and the pro-limit collapses to
+$\mathrm{HP}_*(C^\infty(\sthree))$, still pure-Tate, with no
+$k$-distinguishing content (R3.1);\
+(b) the Berezin maps are completely positive but \emph{not}
+multiplicative (the approximate-identity error $\gamma_{n_{\max}}$
+IS the multiplicativity defect), so they live in a propinquity
+tunnel-pair category, not a pro-dg category --- propinquity
+convergence and cyclic-homology convergence are categorically
+orthogonal (R3.2).
+
+\emph{Cohomological side (HP$^*$ / cosmic-Galois $U^*$ route
+VIABLE).}  R3.1's substantive find:\ the Chern/Connes character of
+$(\mathcal{A}_{\mathrm{GV}}, H_{\mathrm{GV}}, D_{\mathrm{GV}})$ is
+non-trivial and lives in $\mathrm{HP}^*$ (cohomology, dual to
+HP$_*$);\ the master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k\, e^{-tD^2})]$ \emph{is} the
+$k$-decomposition of this character.  The $k$-slot therefore lives on
+the cohomological-dual side --- wrong side for Marcolli--Tabuada,
+right side for the Connes--Marcolli cosmic Galois group $U^*$
+(arXiv:math/0409306;\ Connes--Marcolli book 2008 Ch.~4).  The
+$U^*$-shape acts on counterterm-labelled data in the Connes--Kreimer
+Hopf algebra of Feynman diagrams;\ the GeoVac analog acts on
+Mellin-moment-labelled-by-$k$ data on a Hopf algebra structure that
+must be constructed.  This is the precise multi-year mathematical
+target.
+
+\emph{Honest scope.}  The QSM / Bost--Connes / Greenfield--Marcolli--Teh
+lineage (Greenfield--Marcolli--Teh, arXiv:1305.5492 (2014);\
+Connes--Marcolli--Ramachandran, arXiv:math/0501424 (2005);\
+Connes--Marcolli book 2008 Ch.~4) is RULED OUT as a transport target
+on four independent structural grounds (type III vs.\ type II/I,
+$\sigma$-twisted vs.\ standard Connes axioms, arithmetic adelic input
+vs.\ combinatorial graph input, infinite vs.\ finite cutoff;\ see
+the Greenfield--Marcolli transport memo).  Viable lineage:\
+Connes--Marcolli motivic Galois (arXiv:math/0409306) + Marcolli--Tabuada
+noncommutative motives + Fathizadeh--Marcolli periods
+(\cite{fathizadeh_marcolli2016}) + Deligne--Glanois cyclotomic
+descent (\cite{deligne2010}, \cite{glanois2015}).  Multi-year
+mathematical research project on the viable lineage.
 
 % =====================================================================
 \section{Conclusion}

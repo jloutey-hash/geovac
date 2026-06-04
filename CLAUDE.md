@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.48.0 (June 3, 2026)
+**Version:** v3.49.0 (June 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint Q5'-scoping (2026-06-03/04, v3.49.0):** Period-ring DEFLATED ($M^{\mathrm{GV}} \subset$ MT(ℤ[i,1/2],4)); HP$_*$/Marcolli–Tabuada dg-route STRUCTURALLY DEAD; cosmic-Galois $U^*$ on Mellin-moment Hopf algebra is the viable multi-year target. See `debug/sprint_q5p_*_memo.md` (8 memos).
 - **Identity paper / field guide (2026-06-03, v3.48.0):** Drafted `papers/synthesis/geovac_field_guide.tex`, 10pp narrative arc from packing puzzle to periods of the spectral triple. See CHANGELOG v3.48.0.
 - **Sprint periods A-tier closure (2026-06-03, v3.48.0):** Eight A-register items closed in one day (A1 stratified; A2/A3/A4/A5/A6/A8 positive; A1-Matsubara negative; A7 half-structural). Paper 55 9→20pp. See CHANGELOG v3.48.0.
 - **Sprint Read 2 N_gen scoping (2026-06-03):** NO-GO on Hopf-tower-to-representation extension as a shortcut for $N_{\mathrm{gen}} = 3$. The "3 algebra factors" and "3 generations" are different 3's in the standard SM rep (each gen contains all 3 factors). Falsifier:\ exhibit a non-standard rep with phenomenology + algebra-to-gen correspondence. No published predecessor. Deep move stays multi-year, no sprint-scale handle. See `debug/sprint_read2_n_gen_scoping_memo.md`.

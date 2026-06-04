@@ -7,6 +7,123 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.49.0] - 2026-06-04
+
+### Summary
+
+Q5'-scoping arc closure.  Nine sub-agent dispatches over two days took the
+last remaining periods open question — Sprint A7's HALF-STRUCTURAL verdict
+on the M2 / M3 cyclotomic-level-4 coincidence — and walked it from a vague
+"multi-year open question, possibly forbidden, no sprint-scale handle" to a
+precisely characterized multi-year construction target with named viable
+lineage and identified structural location.  Round 1 (three parallel
+sub-agents on dimension sweep, QSM literature, Tannakian obstruction)
+closed the cheap-falsification path:\ the coincidence is generic-Euclidean
+$\times$ generic-conductor across odd dimensions, the QSM toolkit exists
+but no GeoVac-specific synthesis, and the ambient
+$\mathrm{MT}(\Z[i, 1/2], 4)$ category already contains both M2 and M3 with
+a single $\mathrm{Gal}(\Q(i)/\Q)$ acting compatibly.  Round 2 (deflation
+test, k-slot Tannakian relevance, Greenfield--Marcolli transport) sharpened
+the picture:\ the M2 $\oplus$ M3 output rings deflate to a Tannakian
+sub-category $M^{\mathrm{GV}} \subset \mathrm{MT}(\Z[i, 1/2], 4)$, the
+master Mellin engine slot index $k \in \{0, 1, 2\}$ is the one piece of
+GeoVac-specific structure, and the QSM / Bost--Connes / Greenfield--Marcolli
+lineage is RULED OUT on four independent structural grounds (type III vs.\
+type I, no KMS phase transition, no canonical endomorphism semigroup, no
+arithmetic input number field).  Round 3 (HP$_*$ triviality check,
+pro-dg-category Berezin check, baseline edits) closed the Marcolli--Tabuada
+route at source:\ HP$_*$ of $\mathcal{A}_{\mathrm{GV}}$ at finite $n_{\max}$
+is Morita-trivial (collapses to $\mathrm{HP}_*(\C^{N_{\mathrm{Fock}}}) =
+\Q^{N_{\mathrm{Fock}}}$ in degree 0, zero in degree 1), the pro-limit
+collapses to $\mathrm{HP}_*(C^\infty(\sthree))$ (still pure-Tate, no
+$k$-distinguishing content), and the Berezin reconstruction maps are
+completely positive but \emph{not} multiplicative — they live in a
+propinquity tunnel-pair category, not a pro-dg category, so propinquity
+convergence and cyclic-homology convergence are categorically orthogonal.
+R3.1's substantive find:\ the Chern/Connes character of the GeoVac
+spectral triple is non-trivial and lives in $\mathrm{HP}^*$ (cohomology,
+dual to HP$_*$);\ the master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k\, e^{-tD^2})]$ \emph{is} the $k$-decomposition
+of this character.  The $k$-slot therefore lives on the cohomological-dual
+side — wrong side for Marcolli--Tabuada, right side for the
+Connes--Marcolli cosmic Galois group $U^*$.  Net effect:\ Q5' is now
+precisely characterized as ``does $U^*$ act non-trivially on the
+$k$-decomposition of the Connes character of the GeoVac spectral
+triple?''  Multi-year mathematical research project with named viable
+lineage (Strand A from Round 1 lit-read:\ Connes--Marcolli math/0409306 +
+2008 monograph Ch.~4 + Fathizadeh--Marcolli + Deligne--Glanois);\ no
+sprint-scale handle remaining.  Side finding:\ Round 2's
+Greenfield--Marcolli probe caught a Round 1 hallucination
+(arXiv:1305.5564 should be arXiv:1305.5492, missed Teh as third author) —
+the 18\% post-cutoff arXiv-ID hallucination signature from
+\texttt{debug/sprint\_literature\_audit\_followup\_memo.md} fired again,
+caught and corrected in-arc.
+
+### Added
+
+- **Eight sprint memos** under \texttt{debug/sprint\_q5p\_*\_memo.md}:\
+  Round 1 (dim\_sweep, qsm\_litread, tannakian\_obstruction), Round 2
+  (deflation\_test, k\_slot\_tannakian, greenfield\_marcolli\_transport),
+  Round 3 (r3\_hp\_star\_check, r3\_pro\_dg\_category).  R3.3 baseline-edits
+  agent did not write a memo (edits-only sprint per task scope).
+- **Paper 55 \texttt{papers/group3\_foundations/paper\_55\_periods\_of\_geovac.tex}
+  \S subsec:open\_m2\_m3 sharpened in two passes** (R3.3 + closing
+  micro-edit):\ original ``open question'' wording replaced by three-axis
+  sharpening — period-ring level DEFLATED, dg-category HP$_*$/Marcolli--Tabuada
+  route STRUCTURALLY DEAD, cohomological HP$^*$/cosmic-Galois $U^*$ route
+  VIABLE.  Three-pass clean compile (20pp, 658KB, unchanged page count).
+
+### Changed
+
+- **\texttt{debug/followon\_register.md}** Q5' entry:\ from ``multi-year
+  research project; no sprint-scale handle'' (Sprint A7 baseline) to
+  ``multi-year Connes--Marcolli cosmic-Galois $U^*$ construction on
+  Mellin-moment-labelled Hopf algebra;\ HP$_*$/Marcolli--Tabuada route
+  ruled out at source;\ QSM lineage ruled out structurally;\ viable strands
+  A/C/D/E from Round 1 lit-read.''
+- **CLAUDE.md \S 2 Q5'-scoping one-liner**:\ updated from R3.3 placeholder
+  (still framed via $\omega^{\mathrm{tri}}$ via Marcolli--Tabuada) to the
+  R3-closed framing (HP$_*$/MT route dead, $U^*$ route viable).  Memo count
+  6 → 9.
+- **CLAUDE.md \S 1 version cursor**:\ v3.48.0 → v3.49.0.
+- **\texttt{debug/sprint\_q5p\_qsm\_litread\_memo.md}** reference correction
+  (R3.3):\ Strand B and reference table row \#8 corrected from arXiv:1305.5564
+  to arXiv:1305.5492;\ Teh added as third author.  Verdict text NOT modified.
+  Paper 55 bibliography does not cite Greenfield--Marcolli at all — no fix
+  needed there.
+
+### Closed
+
+- **Q5' at period-ring level (DEFLATED)**:\ $M^{\mathrm{GV}} \subset
+  \mathrm{MT}(\Z[i, 1/2], 4)$ Tannakian sub-category with single
+  $\mathrm{Gal}(\Q(i)/\Q)$ acting compatibly (trivially on M2 pure-Tate
+  sub-category, non-trivially on M3 cyclotomic part via $\chi_{-4}$
+  Deligne--Glanois level-4-to-2 descent).  Period values do not encode
+  GeoVac-specific Tannakian symmetry beyond the ambient.
+- **Q5' via Marcolli--Tabuada NC numerical motives (STRUCTURALLY DEAD)**:\
+  HP$_*$ of $\mathcal{A}_{\mathrm{GV}}^{(n_{\max})}$ Morita-trivial at every
+  finite cutoff;\ pro-limit collapses to $\mathrm{HP}_*(C^\infty(\sthree))$
+  (still pure-Tate);\ Berezin maps CP-but-not-multiplicative, propinquity
+  $\neq$ cyclic-homology.  Marcolli--Tabuada arXiv:1110.2438 Thm 1.1
+  framework gives only the trivial Tannakian category here.
+- **Q5' via QSM / Bost--Connes / Greenfield--Marcolli--Teh (RULED OUT)**:\
+  four independent structural obstructions (type III vs type I,
+  $\sigma$-twisted vs standard Connes axioms, arithmetic adelic input vs
+  combinatorial graph input, infinite vs finite cutoff).  Data flow is
+  \emph{opposite} direction (QSM:\ arithmetic $\to$ KMS states $\to$
+  periods;\ Q5':\ spectral $\to$ periods $\to$ Galois).
+
+### Open
+
+- **Sharpened Q5' (cosmic-Galois $U^*$ shape)**:\ does the Connes--Marcolli
+  cosmic Galois group $U^*$ act non-trivially on the master Mellin engine
+  $k$-decomposition of the Connes character of $(\mathcal{A}_{\mathrm{GV}},
+  H_{\mathrm{GV}}, D_{\mathrm{GV}})$?  The $U^*$-shape acts on
+  counterterm-labelled data in the Connes--Kreimer Hopf algebra;\ the
+  GeoVac analog would act on Mellin-moment-labelled-by-$k$ data on a Hopf
+  algebra structure that must be constructed.  No sprint-scale handle.
+  Multi-year mathematical research project on the viable lineage strands.
+
 ## [3.48.0] - 2026-06-03
 
 ### Summary

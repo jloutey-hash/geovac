@@ -94,14 +94,34 @@ Q5' subsection opened for deeper unification (recorded as multi-year research
 project under Section A.M2-M3-unification below). Memo:
 `debug/sprint_a7_m2_m3_cyclotomic_memo.md`.
 
-### A.M2-M3-unification. M2/M3 motivic Galois unification (new multi-year research project from A7)
+### A.M2-M3-unification. M2/M3 motivic Galois unification (multi-year Marcolli–Tabuada construction of $\omega^{\mathrm{tri}}$)
 **Source:** Sprint A7 (2026-06-03; memo
-`debug/sprint_a7_m2_m3_cyclotomic_memo.md`).
-**Estimated effort:** multi-year mathematical research project; no sprint-scale
-handle.
-**Question:** is there an enriched motivic Galois group of the GeoVac discrete
-spectral triple that unifies M2's Witt-splitting $\Q(i)$ action with M3's
-cyclotomic-conductor $\Q(\zeta_4)$ action via a single Tannakian symmetry?
+`debug/sprint_a7_m2_m3_cyclotomic_memo.md`). Six-sprint scoping arc closed
+2026-06-03/04 (memos `debug/sprint_q5p_dim_sweep_memo.md`,
+`debug/sprint_q5p_qsm_litread_memo.md`,
+`debug/sprint_q5p_tannakian_obstruction_memo.md`,
+`debug/sprint_q5p_deflation_test_memo.md`,
+`debug/sprint_q5p_k_slot_tannakian_memo.md`,
+`debug/sprint_q5p_greenfield_marcolli_transport_memo.md`).
+**Estimated effort:** multi-year Marcolli–Tabuada-lineage construction;
+no sprint-scale handle. Viable lineage strands A/C/D/E only (Connes–Marcolli
+motivic Galois, arXiv:math/0409306 / Marcolli–Tabuada noncommutative motives,
+arXiv:1110.2438 + arXiv:1112.5422 / Fathizadeh–Marcolli periods, arXiv:1611.01815
+/ Deligne–Glanois cyclotomic descent, arXiv:math/0302267 + arXiv:1411.4947).
+QSM / Bost–Connes / Greenfield–Marcolli–Teh lineage (strand B,
+arXiv:1305.5492) RULED OUT on four structural grounds.
+**Sharpened target:** construct the enriched fiber functor
+$\omega^{\mathrm{tri}}: \mathrm{dg}(\Tcal) \to \mathrm{Vec}_\Q \otimes
+\mathrm{IndexCat}(\{0, 1, 2\})$ recording the master Mellin engine
+slot index $k$ on the pro-dg category $\varprojlim_{n_{\max}}
+\mathrm{dg}(\Tcal_{n_{\max}})$ with Berezin reconstruction maps
+(Paper 38 §L4), and check whether its associated motivic Galois group
+reads $k$ as a Tannakian invariant. Period-ring level deflates
+($M^{\mathrm{GV}} \subset \mathrm{MT}(\Z[i,1/2], 4)$ already
+suffices); dg-category level is the precise multi-year target.
+$k$-slot Tannakian status BORDERLINE (TANNAKIAN-INVISIBLE on ambient
+$M^{\mathrm{GV}}$, TANNAKIAN-RELEVANT on the candidate enriched
+$\omega^{\mathrm{tri}}$).
 
 ### ~~A8.~~ ~~F-M general-n Grothendieck-class closed form~~ — **CLOSED 2026-06-03 (Sprint A8)**
 Sub-agent retrieved closed form from F-M §7.6 Theorem 7.6: three equivalent
