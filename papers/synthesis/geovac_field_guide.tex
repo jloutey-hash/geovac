@@ -1,0 +1,784 @@
+% =====================================================================
+% GeoVac: A Field Guide
+%
+% An identity statement for the Geometric Vacuum (GeoVac) framework.
+% Audience: readers who want to understand the project's arc from
+% origin to current frontier without first learning the machinery
+% (Connes distance, propinquity convergence, Glanois cyclotomic basis,
+% etc.).  This is the "what is GeoVac" document — narrative, sober,
+% honest about scope.  Math is layered in where it's load-bearing for
+% the story; deep technical content is cross-referenced to the
+% appropriate paper rather than recapitulated.
+%
+% Status: drafted June 2026 after the Periods-reframe arc (v3.46.0)
+% and the seven A-tier register closures of 2026-06-03 (Sprints A1
+% scoping + A2 + A4 + A5 + A6 + A7 + A8 + A1-Matsubara).
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage[expansion=false]{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\newcommand{\sthree}{S^{3}}
+\newcommand{\sfive}{S^{5}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\MT}{\mathcal{MT}}
+
+\title{GeoVac:\ A Field Guide \\
+\large From a Packing Puzzle to Periods of the Spectral Triple}
+\author{J.~Loutey\thanks{Independent researcher.
+\texttt{jloutey@gmail.com}.  Developed in an AI-augmented agentic
+workflow with Anthropic's Claude;\ all theorems, design choices, and
+editorial decisions are the author's responsibility.}}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Geometric Vacuum (GeoVac) framework began as a packing puzzle that
+produced something resembling the periodic table.  Over several years
+of investigation, it acquired a precise structural identity:\ a
+discrete spectral triple in the Marcolli--van Suijlekom graph-network
+lineage, whose transcendentals classify as cyclotomic mixed-Tate
+periods at level $\le 4$, and which separates --- through theorems,
+not preference --- what the underlying geometry forces from what
+empirical measurement supplies.  This field guide is the project's
+identity statement.  It tells the arc from origin to current frontier
+without recapitulating the technical machinery, and points each kind
+of reader toward the right entry into the corpus.  The one-sentence
+reading:\ \emph{GeoVac is a discrete spectral triple whose periods
+classify the projective content of physics, sharply separating what
+geometry forces from what measurement supplies.}
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{The Packing Puzzle}
+\label{sec:packing}
+% =====================================================================
+
+The framework's origin is a geometric construction:\ pack
+Planck's constant.  Treat $\hbar$ as a unit volume to be filled, and
+ask which node arrangements complete the packing without gaps.  In two
+dimensions the node counts give $(l, m)$:\ the integer pair indexing
+azimuthal and magnetic quantum numbers, before any quantum-mechanical
+input.  In three dimensions, an inductive argument over periodic-table
+row lengths fixes the principal and spin quantum numbers
+$(n, s)$~\cite{loutey_paper0}.  The resulting graph has nodes labeled
+by quantum-number tuples $(n, l, m, s)$ and edges encoding spectral
+selection rules.
+
+The graph Laplacian on this object has eigenvalues
+\begin{equation}
+\label{eq:graph_eigs}
+\lambda_n = -(n^2 - 1), \qquad n \in \N_{\ge 1},
+\end{equation}
+with multiplicity $n^2$ on the unit-radius rescaling --- the spectrum
+of the hydrogen atom, to within an overall scale.  The shape of the
+periodic table fell out of the packing.
+
+This was the seed:\ a combinatorial object that, when interrogated,
+returned the same numerology as observed atomic structure.  Whether
+that was a coincidence or a clue was the question the rest of the
+project tried to answer.
+
+% =====================================================================
+\section{Fock 1935:\ Discrete and Continuous Are the Same Thing}
+\label{sec:fock}
+% =====================================================================
+
+In 1935 Vladimir Fock observed~\cite{fock1935} that the hydrogen atom
+on $\R^3$ has a hidden $SO(4)$ symmetry, and that the stereographic
+projection $\R^3 \hookrightarrow \sthree$ converts the Schr\"odinger
+equation into an angular eigenvalue problem on the unit three-sphere.
+What hydrogen really is, from this point of view, is the
+Laplace--Beltrami operator on the unit $\sthree$;\ the $1/r$ Coulomb
+potential is the coordinate distortion produced by the projection
+(specifically, the chordal-distance identity that takes the round
+metric to the stereographic one).
+
+The decisive observation for GeoVac is this:\ the graph Laplacian on
+the packed lattice of \S\ref{sec:packing} is conformally equivalent to
+the continuous $\sthree$ Laplace--Beltrami operator, in a precise sense
+that can be checked symbolically.  Paper~7 of the GeoVac
+corpus~\cite{loutey_paper7} provides $18$ independent symbolic proofs
+of this equivalence (\texttt{tests/test\_fock\_projection.py} and
+\texttt{tests/test\_fock\_laplacian.py}).  The universal scaling
+constant relating the two is $\kappa = -1/16$, derivable from the
+packing construction~\cite{loutey_paper0}.
+
+This is the framework's load-bearing identification:
+\begin{quote}
+\itshape
+The discrete Fock graph and the continuous unit-$\sthree$
+Laplace--Beltrami operator are not two models of the hydrogen atom.
+They are the same object in two coordinates.
+\end{quote}
+The implication is operational:\ where the continuous formulation
+requires integration over $\R^3$ with a $1/r$ singularity, the
+discrete formulation requires a sparse matrix eigenvalue problem with
+integer entries.  Same physics, different cost.
+
+% =====================================================================
+\section{Natural Geometry:\ a Hierarchy}
+\label{sec:natural_geometry}
+% =====================================================================
+
+Section~\ref{sec:fock}'s identification works because $\sthree$ is the
+natural geometry for the hydrogen atom:\ it is the coordinate system in
+which the Schr\"odinger equation separates fully into angular
+variables.  For other systems --- molecules, multi-electron atoms,
+polyatomics --- the natural geometry shifts.  The framework's chemistry
+investigation (2024--2026, Phase~2 of the project) systematically
+catalogued the natural geometries:
+
+\begin{center}
+\begin{tabular}{@{}cllll@{}}
+\toprule
+Level & System & Natural geometry & Best accuracy & Paper \\
+\midrule
+1 & H (1-center, 1e) & $\sthree$ (Fock) & $< 0.1\%$ & 7 \\
+2 & H$_2^+$ (2-center, 1e) & Prolate spheroid & $0.0002\%$ & 11 \\
+3 & He (1-center, 2e) & Hyperspherical & $0.019\%$ & 13 \\
+4 & H$_2$ (2-center, 2e) & Mol-frame hyperspherical & $96.0\%$ $D_e$ & 15 \\
+5 & LiH (composed) & Composed (Level 3 $\otimes$ Level 4) & $5.3\%$ $R_{\mathrm{eq}}$ & 17 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The choice of geometry is determined by where separation of variables
+occurs;\ in each case the discrete graph Laplacian on the natural
+geometry reproduces the continuous Schr\"odinger problem with the
+same conformal-equivalence identification as in
+\S\ref{sec:fock}.
+
+Phase~2 reached known structural ceilings.  Heavy molecules
+($Z \ge 20$ or strong multi-determinant correlation) escape the
+framework's accuracy targets through identifiable channels (the
+``multi-focal-composition wall'' documented in six independent
+sprints).  The framework's most natural quantum-simulation
+application --- $O(Q^{2.5})$ Pauli scaling on the composed
+architecture, $51\times$--$1712\times$ Pauli-count advantage over
+published Gaussian baselines, $28$ molecules in the
+library~\cite{loutey_paper14} --- shipped at the end of Phase~2.
+
+But a different question began to dominate the conversation around the
+project, and that question is where the rest of this guide goes.
+
+% =====================================================================
+\section{The Rotation:\ from Solver to Spectral Triple}
+\label{sec:rotation}
+% =====================================================================
+
+Phase~3 was planned as quantum simulation.  Instead, the project
+rotated to a different question:\ \emph{what is this thing we have
+been working with?}
+
+The graph Laplacian on $\sthree$, the conformal equivalence with the
+continuous problem, the natural-geometry hierarchy that produces
+discrete substrates for every electron configuration --- these are
+collectively the data of a Riemannian spectral
+geometry.  Made precise, that means an algebra of functions, a
+Hilbert space of states, and a Dirac-type operator, all assembled
+into a structure that mathematicians call a spectral triple
+\cite{connes1994}.
+
+The precise structural claim:
+
+\begin{quote}
+\itshape
+GeoVac is a discrete spectral triple in the lineage of
+Marcolli--van Suijlekom 2014 gauge networks
+\cite{marcolli_vs2014}, refined by the Perez-Sanchez 2024/2025
+clarification that the continuum limit is Yang--Mills without Higgs
+in general.
+\end{quote}
+
+This claim was checked, not assumed.  Working hypothesis WH1 (in the
+project's internal register, CLAUDE.md~\S~1.7) was elevated to
+PROVEN status in May 2026 via a five-lemma Gromov--Hausdorff
+convergence theorem on truncated Camporesi--Higuchi spectral
+triples~\cite{loutey_paper38} (Paper~38, released to Zenodo
+2026-05-07).  The proof rests on the Latr\'emoli\`ere propinquity
+framework~\cite{latremoliere2017} for quantifying when two spectral
+triples are close in the Connes--Hausdorff sense, with the asymptotic
+rate constant
+\begin{equation}
+\label{eq:propinquity_rate}
+\Lambda_{n_{\max}} \le C_3 \cdot \gamma_{n_{\max}},
+\qquad \gamma_{n_{\max}} \xrightarrow{n_{\max} \to \infty}
+\frac{4}{\pi},
+\end{equation}
+universal across compact connected Lie groups~\cite{loutey_paper40}.
+The rate constant $4/\pi$ is the substrate's $\mathrm{Vol}(S^2) /
+\pi^2$ signature --- the Hopf-base measure entering through a single
+geometric mechanism, classified in
+\S\ref{sec:periods} below.
+
+Following Paper~38, the project produced eleven math.OA standalone
+papers (Papers~38--49) extending the framework along the Lorentzian
+axis~\cite{loutey_paper42, loutey_paper43, loutey_paper44,
+loutey_paper45, loutey_paper46, loutey_paper47, loutey_paper48,
+loutey_paper49}.  Sub-results include the first published Lorentzian
+propinquity convergence theorem on truncated Krein spectral triples
+(Paper~45)~\cite{loutey_paper45}, an explicit strong-form extension
+(Paper~46)~\cite{loutey_paper46}, and the operator-system Lorentzian
+pre-length space (OSLPLS) category that closes a published-open
+question of Connes--van Suijlekom on Lorentzian extensions
+(Paper~49)~\cite{loutey_paper49}.  These results were checked
+independently against the four published-open questions Connes--van
+Suijlekom 2021~\cite{connes_vs2021} explicitly deferred to ``elsewhere.''
+
+\paragraph{Why this rotation mattered.}
+The shift from ``how accurately can we solve quantum chemistry?'' to
+``what is GeoVac?'' produced the right kind of answers.  Chemistry
+accuracy is a sliding scale --- always tighter at more cost.  But
+the spectral-triple structural reading is binary:\ either GeoVac IS
+the data of a spectral triple, or it isn't.  Theorem-grade closure
+is available either way.  The framework's identity is now in the
+first category.
+
+% =====================================================================
+\section{Periods:\ Where Transcendentals Come From}
+\label{sec:periods}
+% =====================================================================
+
+A spectral triple has a heat kernel, and the heat kernel produces
+transcendentals.  In GeoVac, those transcendentals are not random.
+They sit in named classes, with named mechanisms producing them.
+
+\paragraph{The graph itself is $\pi$-free.}
+At what the project calls \emph{Layer 1} --- the bare combinatorial
+graph and its integer eigenvalue spectrum --- there are no
+transcendentals.  Matrix elements are rationals (or, at most,
+algebraic over $\Q$).  This has been checked across the corpus:
+verified explicitly on the unit $\sthree$ Coulomb spectrum (Paper~7),
+on the Hopf bundle gauge structure (Paper~25), on the Bargmann--Segal
+$\sfive$ Hardy lattice (Paper~24), and on $28$ molecular
+species in the qubit Hamiltonian library (Paper~14).
+
+\paragraph{Transcendentals enter at projection.}
+Layer~1 by itself does not produce physical observables.  Observables
+come from \emph{Layer~2:}\ projections of the discrete substrate onto
+continuous manifolds, integration regions, or measurement-coordinate
+choices.  Each projection introduces a controlled transcendental
+through a controlled mechanism.
+
+The project's full classification fits in three named mechanisms,
+collectively the \emph{master Mellin engine}~\cite{loutey_paper18,
+loutey_paper32, loutey_paper55}:
+
+\begin{center}
+\begin{tabular}{@{}cllc@{}}
+\toprule
+Slot $k$ & Mechanism & Period-ring home & Source \\
+\midrule
+$k = 0$ & M1 (Hopf-base measure) & $\Q[\pi, \pi^{-1}]$ & Paper~55 \S 3 \\
+$k = 2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ & Paper~55 \S 4 \\
+$k = 1$ & M3 (vertex parity / Hurwitz / Dirichlet $L$) & $\MT(\Z[i, 1/2])$ at level $\le 4$ & Paper~55 \S 5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The three rows are the three sub-cases of a single Mellin transform
+\begin{equation}
+\label{eq:master_mellin}
+\mathcal{M}\!\left[\Tr\bigl(D^k \cdot e^{-tD^2}\bigr)\right](s)
+\end{equation}
+on the discrete Camporesi--Higuchi $\sthree$ spectral triple, with
+operator-order index $k \in \{0, 1, 2\}$ selecting which mechanism
+produces which kind of transcendental.
+
+\paragraph{The classification is complete.}
+Paper~32~\S~VIII~\cite{loutey_paper32} contains a
+\emph{case-exhaustion theorem}:\ every appearance of $\pi$ in any
+closed-form GeoVac spectral observable arises from one of M1, M2, or
+M3.  No fourth mechanism has been found despite specific searches.
+Paper~55~\cite{loutey_paper55} promotes this from a partition theorem
+to a period-theoretic classification:\ every transcendental observed
+in the corpus sits in cyclotomic mixed-Tate periods at level $\le 4$
+over $\Z[i, 1/2]$ (Kontsevich--Zagier~\cite{kontsevich_zagier2001},
+Brown~\cite{brown2012}, Deligne~\cite{deligne2010},
+Glanois~\cite{glanois2015}, Fathizadeh--Marcolli
+\cite{fathizadeh_marcolli2016} are the relevant published
+classifications;\ each piece of GeoVac's data is placed inside one of
+their named period rings).
+
+\paragraph{What was a zoo became a classified program.}
+Three years ago the project produced transcendentals through ad-hoc
+calculations and was uncertain whether different appearances of $\pi$
+or $\zeta(2)$ were ``the same'' or ``different.''  Today every
+transcendental observation has a named motivic home, indexed by which
+slot of \eqref{eq:master_mellin} produced it.  The classification
+makes the operational question --- ``what kind of transcendental can
+appear from \emph{this} calculation?'' --- algorithmic.
+
+\paragraph{A note on periods.}  A period in the sense of
+Kontsevich--Zagier 2001~\cite{kontsevich_zagier2001} is a complex
+number whose real and imaginary parts can be expressed as integrals of
+algebraic functions over domains defined by polynomial inequalities
+with rational coefficients.  $\pi$, $\log 2$, $\zeta(n)$ for $n \ge
+2$, Catalan's constant $G = \beta(2)$, the Dirichlet $\beta(s)$ values
+at integer $s$ --- all are periods.  The cyclotomic mixed-Tate
+sub-class at level $\le 4$ over $\Z[i, 1/2]$ is, conjecturally, a
+small and well-understood corner of the full period algebra.  GeoVac
+sits in this corner.
+
+% =====================================================================
+\section{The Forced/Free Seam}
+\label{sec:forced_free}
+% =====================================================================
+
+The master Mellin engine of \S\ref{sec:periods} classifies what GeoVac
+\emph{generates}.  An equally important question is what GeoVac
+\emph{does not} generate --- in particular, the empirical constants of
+physics (the fine-structure constant $\alpha$, the Yukawa couplings,
+the generation count $N_{\mathrm{gen}}$, the cosmological constant)
+that must enter as external inputs.  The framework's most operationally
+useful structural discipline is the clean separation between what
+geometry forces and what measurement supplies.
+
+\paragraph{What geometry forces (the structural skeleton).}
+
+The following are all theorem-grade forced by the framework's
+construction, independent of any empirical input:
+
+\begin{itemize}
+  \item The outer manifold is $\sthree$.  Forced by Bertrand's
+    theorem~\cite{bertrand1873} (only $1/r$ and harmonic-oscillator
+    central potentials produce closed bound orbits, of which $1/r$ is
+    the Coulomb case) plus the $SO(4)$ hidden symmetry of the Coulomb
+    problem (Paper~7).
+  \item The Hopf bundle structure $\sthree \to S^2$ is forced by the
+    maximal-torus reduction of $SU(2) = \sthree$
+    (Paper~25)~\cite{loutey_paper25}.
+  \item The Camporesi--Higuchi Dirac sector is forced by the
+    parallelizability of $\sthree$ (Paper~32)~\cite{loutey_paper32}.
+  \item The Wilson $SU(2)$ gauge structure is forced by the
+    non-abelian generalization of the abelian Hopf structure
+    (Paper~30)~\cite{loutey_paper30}.
+  \item The Standard Model gauge group $U(1) \times SU(2) \times
+    SU(3)$ truncated at $n \le 3$ in the complex-Hopf tower
+    $S^{2n-1} \to SU(n)$ is forced by Bertrand $\times$ Hopf-tower
+    structural saturation (CLAUDE.md~\S~1.7 WH4 and the May~2026
+    Door~4 Sprint).
+  \item The dimension of the inner Dirac moduli space is
+    $\dim \mathcal{M}(D_F) = 128$ per generation, $8$ in the diagonal
+    slice.  Bertrand-shaped Forced-Count Theorem (Paper~32~\S~VIII,
+    June~2026).
+\end{itemize}
+
+\paragraph{What measurement supplies (calibration data).}
+
+The following are all empirical inputs to the framework, falling
+outside any structural derivation it offers:
+
+\begin{itemize}
+  \item The fine-structure constant $\alpha^{-1} \approx 137.036$.
+    Three independent spectral homes for the framework's combination
+    $K = \pi(B + F - \Delta)$ have been established (B as Casimir
+    trace, $F = \zeta(2)$ as Fock-Dirichlet, $\Delta = 1/40$ as
+    Dirac mode degeneracy), but the combination rule itself remains
+    a numerical observation, not derived.  Paper~2 is in the
+    Observations folder~\cite{loutey_paper2};\ twelve mechanisms
+    have been eliminated for a single-principle derivation of $K$.
+  \item The Yukawa coupling values.  A 162-cell PSLQ sweep against
+    low-coefficient pure-Tate periods (Sprint Yukawa-PSLQ,
+    2026-06-03) returned zero hits.  The Yukawa Dirichlet ring lives
+    in Paper~18~\S~IV.6's sixth tier (parameter-tied Dirichlet,
+    categorically disjoint from M1/M2/M3).
+  \item The generation count $N_{\mathrm{gen}} = 3$.  The
+    Hopf-tower-to-representation extension was ruled out as a
+    shortcut for forcing $N_{\mathrm{gen}}$
+    (Sprint Read~2, 2026-06-03):\ the ``3 algebra factors'' and the
+    ``3 generations'' are different $3$s in the standard SM
+    representation.  Multi-year wall.
+  \item The cosmological constant.  The framework's CC formula
+    $\Lambda_{\mathrm{cc}} = 6\phi(2)/\phi(1) \cdot \Lambda^2$
+    inherits the standard $\sim 10^{120}$ fine-tuning problem
+    (Paper~51 G7).
+\end{itemize}
+
+\paragraph{The seam is itself a theorem.}
+
+What makes the forced/free separation operationally useful, rather
+than rhetorical, is that the boundary between the two categories is
+itself controlled by named theorems:
+
+\begin{itemize}
+  \item The Forced-Count Theorem (Paper~32~\S~VIII):\ the gauge structure
+    of GeoVac is forced.
+  \item The Yukawa Non-Selection Theorem (Sprint H1
+    POSITIVE-THIN closure, 2026-05-31):\ the framework's
+    almost-commutative extension admits a Higgs structure but does
+    not autonomously select the Yukawa matrix.
+  \item The $\eta$-Trivialization Theorem and AC-Factorization
+    Theorem (Paper~18~\S~IV.6):\ the combined heat trace on the AC
+    extension factorises cleanly into an outer pure-Tate factor and
+    an inner Dirichlet factor in the Yukawa variables, with no
+    mixing.
+\end{itemize}
+
+These three theorems collectively pin the seam:\ values are free,
+relations are forced (CLAUDE.md~\S~1.7 WH4 closure).  This is the
+project's most operationally useful structural reading.
+
+% =====================================================================
+\section{What's in the Corpus}
+\label{sec:corpus}
+% =====================================================================
+
+The GeoVac corpus is $50$+ papers organised into six audience-targeted
+groups (\texttt{papers/group1\_operator\_algebras/}, etc.) plus an
+archive and a synthesis folder.  Each group is described in CLAUDE.md
+\S~6 with detailed paper-by-paper coverage.  This section gives
+one-line summaries.
+
+\begin{itemize}
+  \item \textbf{Group~1 --- Operator algebras / NCG} ($14$ papers).
+    Math.OA arc.  Headline:\ WH1 PROVEN (Paper~38) with five-lemma
+    Gromov--Hausdorff convergence;\ Lorentzian propinquity
+    first-in-literature (Paper~45);\ Mondino--S\"amann bridge
+    (Paper~48);\ OSLPLS strong-form bridge (Paper~49).  Closes
+    four published-open questions of Connes--van Suijlekom
+    2021~\cite{connes_vs2021}.
+  \item \textbf{Group~2 --- Quantum chemistry} ($9$ papers).
+    Natural-geometry hierarchy levels~1--5.  Headline:\ structural
+    accuracy ceilings characterized via the multi-focal-composition
+    wall;\ Paper~8--9 and FCI-M are guardrail papers documenting
+    proven negative results.
+  \item \textbf{Group~3 --- Foundations} ($7$ papers including this
+    field guide).  Headline:\ Paper~0 (packing), Paper~7
+    (Fock-projection conformal equivalence), Paper~22 (angular
+    sparsity), Paper~24 (Bargmann--Segal $\sfive$ lattice), Paper~31
+    (universal/Coulomb partition), Paper~55 (periods classification).
+  \item \textbf{Group~4 --- Quantum computing} ($4$ papers).
+    Qubit-encoding resource estimates.  Headline:\ $O(Q^{2.5})$
+    composed Pauli scaling, $51\times$--$1712\times$ advantage over
+    Gaussian baselines, $28$ molecules in the library (Paper~14).
+  \item \textbf{Group~5 --- QED / gauge / SM} ($7$ papers).
+    Headline:\ hydrogen Lamb shift at $-0.534\%$ one-loop closure
+    (Paper~36);\ SU(2) Wilson lattice gauge structure with
+    maximal-torus reduction to U(1) Paper~25 (Paper~30);\ QED on
+    $\sthree$ with five theorems and $S_{\min}$ irreducible at 200
+    dps (Paper~28).
+  \item \textbf{Group~6 --- Precision observations} ($4$ papers).
+    Headline:\ five Roothaan autopsies decomposing observables into
+    projection-chain contributions (Paper~34);\ time as projection
+    (Paper~35);\ universal $S_B$ scaling on sparse lattices
+    (Paper~27).
+\end{itemize}
+
+The \texttt{papers/archive/} folder contains historical and
+superseded drafts.  The \texttt{papers/synthesis/} folder contains
+this field guide plus two group-level syntheses (Group~1 and
+Group~3) drafted May~2026.
+
+% =====================================================================
+\section{What's Open}
+\label{sec:open}
+% =====================================================================
+
+The project is honest about scope.  The following are named open
+questions, in rough order of how much external infrastructure each
+would require:
+
+\begin{itemize}
+  \item \textbf{The $\alpha$-derivation}.  Paper~2's combination rule
+    $K = \pi(B + F - \Delta)$ matches the empirical $\alpha^{-1}$ at
+    $8.8 \times 10^{-8}$ relative precision, but is classified as a
+    numerical observation, not a derivation.  Twelve mechanisms
+    eliminated for a single-principle derivation.  CLAUDE.md~\S~1.7
+    WH5 reads ``$\alpha$ is a projection constant, not a derivable
+    number.''
+  \item \textbf{The Yukawa values}.  Sprint Yukawa-PSLQ (2026-06-03)
+    ruled out the Yukawas as low-coefficient pure-Tate periods.  They
+    are Class~1 calibration data and live in Paper~18~\S~IV.6's sixth
+    tier.  Whether they admit a deeper non-period derivation is open
+    and falls outside the master Mellin engine's classification scope.
+  \item \textbf{$N_{\mathrm{gen}} = 3$}.  Multi-year wall;\ no
+    sprint-scale handle (Sprint Read~2, 2026-06-03).
+  \item \textbf{The cosmological constant problem}.  Standard fine-tuning
+    $\sim 10^{120}$ inherited from the Connes--Chamseddine spectral
+    action expansion (Paper~51 G7).  No GeoVac-specific resolution
+    proposed.
+  \item \textbf{The chemistry W1e wall}.  Multi-determinant FCI correlation
+    in second-row and heavier diatomic binding is below the
+    framework's structural accuracy ceiling.  Six diagnostic sprints
+    (May~2026) identified the wall as multi-focal-composition rather
+    than a missing single mechanism.
+  \item \textbf{The M2/M3 motivic Galois unification (Q5')}.  Both M2 and
+    M3 engage the cyclotomic field $\Q(i) = \Q(\zeta_4)$, but via
+    structurally independent mechanisms.  Whether a single Tannakian
+    symmetry unifies them is an open mathematical research project
+    (Sprint A7, 2026-06-03).  Multi-year.
+  \item \textbf{Inhomogeneous extensions}.  The full
+    Fathizadeh--Marcolli generic Robertson--Walker spacetime with
+    non-trivial scaling factor $a(t)$ requires either a continuum
+    substrate or a time-dependent Camporesi--Higuchi spectral triple,
+    outside the discrete-substrate principle.  The closest GeoVac
+    analog is the discrete-warped-substrate program of
+    Paper~51~\S G4-3 (multi-month follow-on).
+  \item \textbf{Full Standard Model spectral triple}.  G4a (Connes
+    Standard Model on $\sthree$ alone) was closed POSITIVE-THIN in
+    May~2026;\ G4b (genuine cross-manifold $\sthree \otimes
+    \mathrm{Hardy}(\sfive)$) is blocked at the
+    Coulomb-versus-harmonic-oscillator asymmetry of Paper~24~\S~V at
+    layer~4 (modular Hamiltonian of the wedge KMS state).  Resolution
+    requires NCG-framework extension.
+\end{itemize}
+
+What is \emph{not} open --- but is sometimes asked --- is whether
+GeoVac is a new foundation for quantum mechanics.  It is not.  GeoVac
+is a discretization framework whose discrete substrate is conformally
+equivalent to known continuous quantum mechanics at every level where
+the equivalence has been tested.  The math supports both readings;\
+the interpretive question is left to the reader.
+
+% =====================================================================
+\section{Reader's Map}
+\label{sec:readers_map}
+% =====================================================================
+
+This is a multi-paper corpus.  Here is where each kind of reader
+should start.
+
+\begin{itemize}
+  \item \textbf{The mathematician (NCG, math.OA, spectral triples)}.
+    Read Papers~38, 32, 47, 48, and 49.  Paper~38 is WH1 PROVEN;\
+    Paper~32 is the explicit spectral triple construction with
+    Connes axiom audit;\ Paper~47 closes the de-compactification
+    limit at norm-resolvent level;\ Papers~48 and 49 are the
+    Mondino--S\"amann bridge and the OSLPLS strong-form bridge.
+  \item \textbf{The mathematician (periods, motives)}.
+    Read Paper~55 (this corpus's most recent
+    foundations paper).  Cyclotomic mixed-Tate classification at level
+    $\le 4$, with explicit Glanois descent identification on the
+    vertex-parity Mellin slot.  Open M2/M3 unification question
+    (Q5') discussed in Paper~55~\S~7.6.
+  \item \textbf{The physicist (atomic, molecular, optical)}.  Read
+    Papers~7, 22, and 14.  Paper~7 is the Fock-projection conformal
+    equivalence;\ Paper~22 is the angular sparsity theorem (universal
+    across central potentials);\ Paper~14 is the quantum-computing
+    resource benchmarks.
+  \item \textbf{The physicist (high-energy, gauge, SM)}.  Read
+    Papers~30, 25, 28, and 36.  Paper~30 is SU(2) Wilson on
+    $\sthree$;\ Paper~25 is the abelian-Hopf reduction;\ Paper~28 is
+    QED on $\sthree$;\ Paper~36 is the bound-state QED arc closing
+    the Lamb shift at $-0.534\%$ one-loop.
+  \item \textbf{The physicist (gravity)}.  Read Paper~51.  Spectral
+    action approach, two-term exact on $\sthree$, $S_{\mathrm{BH}} =
+    A/4$ derivation pending the L6 sub-sprint (closed in May~2026).
+  \item \textbf{The quantum computing practitioner}.  Read Paper~14
+    and Paper~20.  Pauli scaling, OpenFermion/Qiskit/PennyLane
+    export, market test against published Gaussian baselines.
+  \item \textbf{The chemist}.  Read Papers~11, 13, 15, 17.  The
+    natural-geometry hierarchy, levels~2--5.  Note the guardrail
+    papers~8--9 and FCI-M before proposing any single-center or
+    LCAO molecular encoding (these document proven negative
+    results).
+\end{itemize}
+
+The CLAUDE.md document in the repository root is the project's
+internal coordination file;\ it indexes every paper, every sprint,
+every working hypothesis, and every documented failed approach.
+External readers do not need to read it but may find the
+``Failed approaches'' table (\S~3) instructive for understanding the
+boundary between what works and what doesn't.
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% =====================================================================
+
+The one-sentence reading:\ \emph{GeoVac is a discrete spectral triple
+whose periods classify the projective content of physics, sharply
+separating what geometry forces from what measurement supplies.}
+
+The story is a journey from a packing puzzle through Fock~1935's
+$\sthree$ identification, through the natural-geometry hierarchy and
+its chemistry investigation, to a structural reading as a discrete
+spectral triple in the Marcolli--van Suijlekom lineage, with
+transcendentals classified as cyclotomic mixed-Tate periods at level
+$\le 4$, and with the forced-versus-free seam pinned by three named
+theorems.
+
+The discipline is the separation:\ what geometry forces gets a name,
+a theorem, and a paper;\ what measurement supplies is recorded as
+calibration data and stays calibration data unless the framework can
+produce a derivation, which so far it cannot.
+
+The project began as an amateur geometric puzzle and has acquired the
+status of a discrete spectral triple capable of closing
+published-open questions in the math.OA literature.  That trajectory
+was AI-augmented at every step:\ implementation, sprint memos,
+literature collation, paper drafting, and the internal coordination
+machinery were all developed collaboratively with Anthropic's Claude,
+with PI direction and quality control.
+
+The invitation:\ come read.  The corpus is dense, but the entry points
+are now indexed.  Section~\ref{sec:readers_map} above is the
+reader's map.
+
+% =====================================================================
+\paragraph*{Acknowledgments.}
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude.  Implementation, internal sprint memos, paper
+drafting, and bibliographic collation were performed collaboratively;\
+all theorems, design choices, and editorial decisions are the
+author's responsibility.  The project has no institutional affiliation
+and is disseminated through DOI-stamped Zenodo releases.
+
+% =====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{fock1935}
+V.~Fock, ``Zur Theorie des Wasserstoffatoms,''
+\textit{Z. Physik}~\textbf{98}, 145--154 (1935).
+
+\bibitem{bertrand1873}
+J.~Bertrand, ``Th\'eor\`eme relatif au mouvement d'un point attir\'e
+vers un centre fixe,''
+\textit{C.~R.\ Acad.\ Sci.\ Paris}~\textbf{77}, 849--853 (1873).
+
+\bibitem{connes1994}
+A.~Connes, \textit{Noncommutative Geometry}, Academic Press (1994).
+
+\bibitem{connes_vs2021}
+A.~Connes and W.~D.~van Suijlekom, ``Spectral truncations in
+noncommutative geometry and operator systems,''
+\textit{Commun.\ Math.\ Phys.}~\textbf{383}, 2021--2059 (2021).
+
+\bibitem{marcolli_vs2014}
+M.~Marcolli and W.~D.~van Suijlekom, ``Gauge networks in
+noncommutative geometry,''
+\textit{J.\ Geom.\ Phys.}~\textbf{75}, 71--91 (2014);\ preprint
+arXiv:1301.3480 (2013).
+
+\bibitem{latremoliere2017}
+F.~Latr\'emoli\`ere, ``The dual Gromov-Hausdorff propinquity,''
+\textit{J.\ Math.\ Pures Appl.}~\textbf{103}, 303--351 (2015).
+
+\bibitem{kontsevich_zagier2001}
+M.~Kontsevich and D.~Zagier, ``Periods,'' in \textit{Mathematics
+Unlimited --- 2001 and Beyond}, Springer (2001), pp.~771--808.
+
+\bibitem{brown2012}
+F.~Brown, ``Mixed Tate motives over $\Z$,''
+\textit{Ann.\ of Math.}~(2)~\textbf{175}, 949--976 (2012).
+
+\bibitem{deligne2010}
+P.~Deligne, ``Le groupe fondamental unipotent motivique de
+$\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6$ ou $8$,''
+\textit{Publ.\ Math.\ IHES}~\textbf{112}, 101--141 (2010).
+
+\bibitem{glanois2015}
+C.~Glanois, ``Motivic unipotent fundamental groupoid of
+$\mathbb{G}_m \setminus \mu_N$ for $N = 2, 3, 4, 6, 8$ and Galois
+descents,'' arXiv:1411.4947 (2015);\ \textit{J.\ Number Theory}~\textbf{182},
+36--90 (2018).
+
+\bibitem{fathizadeh_marcolli2016}
+F.~Fathizadeh and M.~Marcolli, ``Periods and motives in the spectral
+action of Robertson--Walker spacetimes,''
+\textit{Commun.\ Math.\ Phys.}~\textbf{356}, 641--671 (2017);\ preprint
+arXiv:1611.01815 (2016).
+
+\bibitem{loutey_paper0}
+J.~Loutey, ``Paper 0: Geometric Packing and the Universal Constant
+$\kappa = -1/16$,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper2}
+J.~Loutey, ``Paper 2: $\alpha = K^{-1}$ as a spectral coincidence on
+the Fock-projected $\sthree$,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey, ``Paper 7: The Dimensionless Vacuum on $\sthree$,''
+GeoVac corpus (2026).
+
+\bibitem{loutey_paper14}
+J.~Loutey, ``Paper 14: Qubit encoding, Pauli scaling, and composed
+sparsity,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper18}
+J.~Loutey, ``Paper 18: Exchange constants and the master Mellin
+engine,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper25}
+J.~Loutey, ``Paper 25: GeoVac Hopf graphs as discrete lattice-gauge
+structure,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper30}
+J.~Loutey, ``Paper 30: SU(2) Wilson lattice gauge on $\sthree =
+SU(2)$,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper32}
+J.~Loutey, ``Paper 32: The GeoVac Spectral Triple,''
+GeoVac corpus (2026).
+
+\bibitem{loutey_paper38}
+J.~Loutey, ``Paper 38: SU(2) propinquity convergence of truncated
+Camporesi--Higuchi spectral triples,'' GeoVac corpus (2026);\
+released to Zenodo 2026-05-07.
+
+\bibitem{loutey_paper40}
+J.~Loutey, ``Paper 40: Universal $4/\pi$ rate constant in
+Latr\'emoli\`ere propinquity across compact connected Lie groups,''
+GeoVac corpus (2026).
+
+\bibitem{loutey_paper42}
+J.~Loutey, ``Paper 42: Tomita--Takesaki modular structure and the
+four-witness Wick-rotation theorem,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper43}
+J.~Loutey, ``Paper 43: Lorentzian extension at finite cutoff via
+Krein-space at signature (3, 1),'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper44}
+J.~Loutey, ``Paper 44: Operator-system extension of the BBB Krein
+spectral triple,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper45}
+J.~Loutey, ``Paper 45: K$^+$-restricted weak-form Lorentzian
+propinquity convergence,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper46}
+J.~Loutey, ``Paper 46: Strong-form Lorentzian propinquity on the
+enlarged substrate,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper47}
+J.~Loutey, ``Paper 47: Norm-resolvent convergence to the non-compact
+Lorentzian Krein spectral triple,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper48}
+J.~Loutey, ``Paper 48: Krein-pointed proper QMS and the bridge to
+Mondino--S\"amann Lorentzian pre-length spaces,''
+GeoVac corpus (2026).
+
+\bibitem{loutey_paper49}
+J.~Loutey, ``Paper 49: OSLPLS strong-form bridge and the
+twin-paradox structural identification,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper55}
+J.~Loutey, ``Paper 55: Periods of GeoVac,'' GeoVac corpus (2026).
+
+\end{thebibliography}
+
+\end{document}

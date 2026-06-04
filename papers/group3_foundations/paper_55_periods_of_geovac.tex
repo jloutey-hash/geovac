@@ -438,11 +438,71 @@ R--W scalar expansion has no such closed form.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-Direct inheritance is by application of
-Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016} Theorem on the
-Rosenfeld integral representation of Seeley--DeWitt coefficients on
-$\R \times \sthree$, specialised to constant scaling factor.  The
-pure-Tate refinement on the static sub-case has two parts:
+The inheritance is via specialisation of the
+Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016} Theorem~6.2:\
+on the general Robertson--Walker spacetime $\R \times \sthree$ with
+metric $dt^2 + a(t)^2 d\Omega_3^2$, the $a_{2n}$ Seeley--DeWitt
+coefficient (prior to time integration) is a period of an algebraic
+differential form
+$\omega_{\varepsilon_1, \ldots, \varepsilon_{2n}}(u_0, u_1, \ldots, u_{2n+2})$
+defined on the affine complement
+\begin{equation}
+\label{eq:fm_complement}
+\mathcal{V}_n^{\mathrm{F\text{-}M}}(\lambda)
+\;:=\; \mathbb{A}^{2n+3} \;\setminus\;
+\bigl( C_{Z_{\lambda, 2n}} \,\cup\, H_0 \,\cup\, H_1 \bigr),
+\end{equation}
+where $H_0 = \{u_0 = 0\}$, $H_1 = \{u_0 = 1\}$, $C_{Z_{\lambda, 2n}}$
+is the affine cone of the projective quadric defined by
+\begin{equation}
+\label{eq:fm_quadric}
+Q_{\lambda, 2n}(u_1, \ldots, u_{2n+2}) \;=\;
+u_1^2 + \lambda^{-2}(u_2^2 + u_3^2 + u_4^2)
++ u_5^2 + u_6^2 + \ldots + u_{2n+2}^2,
+\end{equation}
+$\lambda \in \mathbb{G}_m$ is the affine parameterisation of the scaling
+factor $a(t)$, and
+$\varepsilon_i = a^{(i)}(t)$ for $i = 1, \ldots, 2n$ are the auxiliary
+affine parameters corresponding to the time derivatives of the scaling
+factor.  The algebraic differential form
+$\omega_{\varepsilon_1, \ldots, \varepsilon_{2n}}$ is polynomial in
+$\varepsilon_1, \ldots, \varepsilon_{2n}$ with monomials carrying explicit
+exponents $k_1, \ldots, k_{2n}$ in the expansion of Fathizadeh--Marcolli
+Theorem~6.1.
+
+The GeoVac static sub-case $a(t) \equiv 1$ corresponds to specialisation
+along the closed immersion
+\begin{equation}
+\label{eq:geovac_specialisation}
+\iota:\ \{1\} \times \{0\}^{2n}
+\;\hookrightarrow\; \mathbb{G}_m \times \mathbb{A}^{2n}_{(\varepsilon_1, \ldots, \varepsilon_{2n})},
+\qquad \lambda = 1,\;\; \varepsilon_1 = \ldots = \varepsilon_{2n} = 0.
+\end{equation}
+On this slice, every monomial of the Fathizadeh--Marcolli integrand that
+carries an $\varepsilon$-factor vanishes identically;\ the surviving
+``$\varepsilon$-independent core'' depends only on $u_0, u_1, \ldots, u_{2n+2}$
+with all $u_i$ exponents even, and the quadric specialises to the standard
+unit-isotropic form
+\begin{equation}
+\label{eq:geovac_quadric}
+Q_{1, 2n} \;=\; u_1^2 + u_2^2 + u_3^2 + u_4^2 + u_5^2 + \ldots + u_{2n+2}^2.
+\end{equation}
+The corresponding GeoVac affine complement is
+\begin{equation}
+\label{eq:geovac_complement}
+\mathcal{V}_n^{\mathrm{GeoVac}}
+\;:=\; \mathbb{A}^{2n+3} \;\setminus\;
+\bigl( C_{Z_{1, 2n}} \,\cup\, H_0 \,\cup\, H_1 \bigr).
+\end{equation}
+Over the quadratic extension $\Q(\sqrt{-1})$, the quadric $Q_{1, 2n}$ is
+hyperbolic (isotropic), and the motive of $\mathcal{V}_n^{\mathrm{GeoVac}}$
+is mixed Tate by direct application of Fathizadeh--Marcolli Theorem~7.3
+(at $n = 1$), Theorem~7.5 (at $n = 2$), and the inductive treatment of
+\S~7.6, 7.7 (general $n$).  Over $\Q$, the period output lies in the
+pure-Tate even-weight sub-ring $\bigoplus_k \pi^{2k} \cdot \Q$.
+
+The pure-Tate refinement on the static sub-case has two parts at the
+spectrum level:
 \begin{itemize}
   \item \textit{Dirac sector.}  The Camporesi--Higuchi spectrum
     $|\lambda_n| = n + 3/2$ admits the Jacobi $\vartheta_2$ modular
@@ -457,13 +517,92 @@ pure-Tate refinement on the static sub-case has two parts:
     form $\Tr e^{-t\Delta} = (\sqrt\pi/4) \cdot e^t/t^{3/2} +
     O(e^{-\pi^2/t})$, with $a_k^\Delta = 2\pi^2/k!$.
 \end{itemize}
-Both sectors are explicit in Paper~51~\cite{loutey_paper51}.  The
-empirical pure-Tate restriction (no $\zeta(3)$, no MZVs) is consistent
-with this closed-form structure:\ the F--M generic R--W classification
-allows MZV content when scaling-factor derivatives are non-trivial;\
-on the static sub-case those derivatives vanish, eliminating the MZV
-content.
+Both sectors are explicit in Paper~51~\cite{loutey_paper51}.  The empirical
+pure-Tate restriction (no $\zeta(3)$, no MZVs) is consistent with the
+motivic collapse:\ the F--M generic R--W classification admits MZV content
+through the $\varepsilon_i$ dependence (time derivatives of the scaling
+factor);\ on the static sub-case those derivatives vanish, eliminating the
+MZV content at the motivic level.
+
+A precise refinement of the ``trivial complement'' reading:\ the
+$(\lambda, \varepsilon)$-fiber of the F--M classification collapses to the
+single point $\{1\} \times \{0\}^{2n}$ on the GeoVac sub-case;\ the
+$u$-coordinate complement $\mathcal{V}_n^{\mathrm{GeoVac}}$ remains a
+genuine $(2n + 3)$-dimensional mixed-Tate variety.
 \end{proof}
+
+\begin{remark}[Specialisation as motive equivalence]
+\label{rem:m2_specialisation}
+The relationship between the F--M generic Robertson--Walker classification
+and the GeoVac static $\sthree$ specialisation is a closed immersion of
+relative motives:\ the F--M classification supplies the universal
+``period-with-parameter-data'' object
+$\mathcal{V}_n^{\mathrm{F\text{-}M}}(\lambda) \times \mathbb{A}^{2n}_{\varepsilon}$
+over $\mathbb{G}_m \times \mathbb{A}^{2n}$, and the GeoVac static sub-case
+is the fiber over the single closed point
+$\{1\} \times \{0\}^{2n}$.  The Grothendieck-class computation of
+Fathizadeh--Marcolli Lemma~7.1.5 evaluated at $\lambda = 1$
+(equivalently:\ at the standard unit-isotropic quadric over $\Q(\sqrt{-1})$)
+gives
+\begin{equation}
+\label{eq:geovac_grothendieck_class}
+[\mathcal{V}_n^{\mathrm{GeoVac}}] \;=\;
+\mathbb{L}^{2n+3} - 2 \mathbb{L}^{2n+2}
+- (\mathbb{L} - 2)(\mathbb{L} - 1)[Z_{1, 2n}] - (\mathbb{L} - 2),
+\end{equation}
+where $[Z_{1, 2n}]$ is the Grothendieck class of the standard unit isotropic
+quadric in $\mathbb{P}^{2n+1}$.  By the Fathizadeh--Marcolli inductive
+argument (\cite{fathizadeh_marcolli2016} Theorem~7.6 and the paragraph
+following it), $[Z_{1, 2n}]$ admits the explicit closed form
+\begin{equation}
+\label{eq:z_quadric_class}
+[Z_{1, 2n}]
+\;=\;
+\mathbb{L}^{2n} + \mathbb{L}^{2n-1} + \cdots + \mathbb{L}^{n+1}
++ 2 \mathbb{L}^n
++ \mathbb{L}^{n-1} + \cdots + \mathbb{L}^2 + \mathbb{L} + 1
+\;=\; [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n),
+\end{equation}
+i.e.\ a palindrome of length $2n + 1$ in $\mathbb{L}$ with all coefficients
+equal to $1$ except the middle coefficient $\mathbb{L}^n$ which is doubled,
+factoring as $[\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$.  Substituting
+\eqref{eq:z_quadric_class} into \eqref{eq:geovac_grothendieck_class} and
+expanding yields the fully explicit GeoVac affine-complement Grothendieck class
+\begin{equation}
+\label{eq:geovac_grothendieck_class_explicit}
+[\mathcal{V}_n^{\mathrm{GeoVac}}]
+\;=\;
+\mathbb{L}^{2n+3} - 3 \mathbb{L}^{2n+2} + 2 \mathbb{L}^{2n+1}
+- \mathbb{L}^{n+2} + 3 \mathbb{L}^{n+1} - 2 \mathbb{L}^n
+\quad \in \quad \Z[\mathbb{L}] \subset K_0(\mathrm{Var}_\Q),
+\end{equation}
+the standard mixed-Tate Grothendieck sub-ring.  At $n = 1$ the two middle
+terms collapse ($2n + 1 = n + 2 = 3$), giving
+$\mathbb{L}^5 - 3 \mathbb{L}^4 + \mathbb{L}^3 + 3 \mathbb{L}^2 - 2 \mathbb{L}$,
+matching the explicit calculation in Fathizadeh--Marcolli Theorem~7.2
+(sprint memo \texttt{debug/sprint\_a8\_grothendieck\_class\_memo.md}, June 2026;
+verified symbolically at $n = 1, \ldots, 5$).
+
+\textit{Distinction from the M3 cyclotomic-level-4 ring (\S\ref{sec:m3}).}
+The $\Q(\sqrt{-1})$ appearing here is the \emph{Witt-splitting field} of the
+standard Euclidean quadratic form $Q_{1, 2n}$:\ a generic field selected by
+the positive-definite signature alone, with $\mathrm{Gal}(\Q(i)/\Q)$ acting
+\emph{trivially} on M2 outputs (the pure-Tate ring
+$\bigoplus_k \pi^{2k}\cdot\Q$ descends to $\Q$).  The same field appearing
+in \S\ref{sec:m3} as $\Q(\zeta_4)$ is the \emph{cyclotomic conductor} of the
+non-trivial primitive Dirichlet character $\chi_{-4}$, with
+$\mathrm{Gal}(\Q(\zeta_4)/\Q)$ acting \emph{non-trivially} via the
+Deligne--Glanois descent from level $4$ to level $2$.  The coincidence of
+fields is at the number-field level only;\ the two motivic Galois actions
+are structurally independent (sprint memo
+\texttt{debug/sprint\_a7\_m2\_m3\_cyclotomic\_memo.md}, June 2026).  The
+factorisation $[Z_{1, 2n}] = [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$
+exhibits the two split-quadric maximal isotropic subspaces over $\Q(i)$ as
+the source of the doubled middle Tate twist $\Z(n)[2n]$, sharpening the
+coincidence at the Grothendieck-class level without promoting it to a
+shared Tannakian symmetry;\ a possible deeper unification is recorded as
+an open question (Q5', \S\ref{sec:open}).
+\end{remark}
 
 \subsection{Witnesses}
 
@@ -511,44 +650,589 @@ the Deligne--Glanois Galois descent}
 \label{sec:m3}
 % =====================================================================
 
-[\textbf{Drafting in progress.}  This section will state and prove
-the M3 period-ring theorem, parallel to Theorems~\ref{thm:m1_pure_tate}
-and~\ref{thm:m2_mixed_tate}, with full witness panel from Paper~28
-Theorems 2--3 ($D(s)$ parity discriminant; $\chi_{-4}$ identity),
-Paper~28 §K-Sommerfeld separation (Sommerfeld $D_p$ with harmonic-number
-weights), Paper~28 §$S_{\min}$ (two-loop irreducible at 200 dps), and
-Paper~28 §depth-$k$ tower.  The substantive new content of \S\ref{sec:m3}
-is the identification of the vertex-parity-as-$\chi_{-4}$ correspondence
-as the literal Deligne--Glanois Galois descent at $N = 4$ on the
-framework's natural QED observables.  Source memo:
-\texttt{debug/sprint\_m3\_cyclotomic\_mixed\_tate\_memo.md}.]
+\subsection{Period-ring statement}
+
+\begin{theorem}[M3 period-ring]
+\label{thm:m3_cyclotomic_mixed_tate}
+The M3 sub-mechanism on the discrete Camporesi--Higuchi $\sthree$
+spectral triple produces period values in cyclotomic mixed-Tate
+periods at level $\le 4$ over the ring of $S$-integers
+$\mathcal{O}_4[1/4] = \Z[i, 1/2]$:
+\begin{equation}
+\label{eq:m3_ring}
+M_3 \;\subset\; \MT(\Z[i, 1/2]),
+\end{equation}
+with depth equal to loop order and three structurally distinct
+sub-sectors:
+\begin{enumerate}
+  \item \textbf{Un-restricted Dirac Dirichlet.}  $D(s)$ at integer
+    $s \ge 2$ lies in $\MT(\Z[1/2])$ at depth $1$.  Via the Hurwitz
+    shift $\zeta(s, 3/2) = \zeta(s, 1/2) - 2^s$, this further reduces
+    to $\MT(\Z)$ (classical Brown MZV at level $1$,
+    \cite{brown2012}):\ $\pi^{\mathrm{even}}\cdot\Q$ at even $s$ and
+    $\zeta(\mathrm{odd})\cdot\Q$ at odd $s$.
+  \item \textbf{Vertex-restricted $\chi_{-4}$ content.}  The parity
+    discriminant
+    \[
+    D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) \;=\; 2^{s-1}\bigl(\beta(s) - \beta(s-2)\bigr)
+    \]
+    (Paper~28 Theorem~3, \cite{loutey_paper28}) at integer $s \ge 2$
+    lies in $\MT(\Z[i, 1/2])$ at level $N = 4$ and depth $1$.  Catalan
+    $G = \beta(2)$ and $\beta(4)$ are level-$4$ Dirichlet $L$-periods
+    individually, accessed through Hurwitz at quarter-integer shifts
+    $1/4, 3/4, 5/4$.
+  \item \textbf{Depth-$k$ loop tower.}  At loop order $k \ge 2$ on the
+    iterated sunset with vertex restriction, the M3 sector contributes
+    a new irreducible at depth $k$ in $\MT$ at level $\le 4$.  The
+    canonical depth-$2$ witness is $S_{\min}$ (Paper~28~\S$S_{\min}$,
+    \cite{loutey_paper28}), PSLQ-irreducible at 200 dps against a
+    100-element basis of all known depth-$\le 2$ transcendentals.
+\end{enumerate}
+The classification is a direct application of Deligne
+2010~\cite{deligne2010} and Glanois 2015~\cite{glanois2015} to the
+Hurwitz / Dirichlet-$L$ / MZV building blocks already enumerated in
+Paper~28.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The Mellin transform at $k = 1$,
+$\Mcal[\Tr(D \cdot e^{-tD^2})](s)$, extracts the spectral zeta
+$D(2s + 1)$ via Eq.~\eqref{eq:mellin_extract}.  On the
+Camporesi--Higuchi spectrum~\eqref{eq:ch_spectrum}, the half-integer
+shift $3/2$ writes
+\[
+D(s) = 2\,\zeta(s-2, 3/2) - \tfrac{1}{2}\,\zeta(s, 3/2),
+\]
+so the M3 output is a $\Q$-linear combination of Hurwitz zeta values
+at the half-integer shift $3/2$.  Under the elementary identity
+$\zeta(s, 3/2) = \zeta(s, 1/2) - 2^s$ and the duplication
+$\zeta(s, 1/2) = (2^s - 1)\zeta(s)$, these reduce at integer $s \ge 2$
+to $\Q$-linear combinations of $\zeta(s)$ and $\zeta(s-2)$, which sit
+in $\MT(\Z)$ at depth $1$ by Brown 2012~\cite{brown2012} (sub-sector
+1).  For the vertex-restricted decomposition
+$D = D_{\mathrm{even}} + D_{\mathrm{odd}}$ on the parity of the Fock
+quantum number $n_{\mathrm{Fock}}$, the individual pieces decompose
+into Hurwitz at quarter-integer shifts $1/4, 3/4, 5/4$ (Paper~28
+Theorem~3 proof), and the $\zeta(s, 1/4)$ contribution cancels in
+$D_{\mathrm{even}} - D_{\mathrm{odd}}$ via the Dirichlet $\beta$
+definition
+$\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$.  Hurwitz at
+quarter-integer shifts are periods of $\MT(\Z[i, 1/2])$ at level
+$N = 4$ by the explicit Glanois 2015 basis $\Bcal^4$
+(\cite{glanois2015} Corollaries 1.1--1.2), so $D_{\mathrm{even}}$,
+$D_{\mathrm{odd}}$, and their difference all lie in
+$\MT(\Z[i, 1/2])$ at depth $1$ (sub-sector 2).  The depth-$k$ tower
+inherits its motivic content by iterated convolution:\ at loop order
+$k$, the iterated sunset on $\sthree$ produces a $k$-fold convolution
+of Hurwitz building blocks, raising the motivic depth by exactly the
+loop order.  This is the GeoVac-side realisation of the Glanois
+depth-filtration $\mathrm{gr}_p^D \Hcal^N$ at $N \le 4$ (sub-sector 3).
+\end{proof}
+
+\subsection{Arithmetic stratification}
+
+The three sub-sectors of Theorem~\ref{thm:m3_cyclotomic_mixed_tate}
+sit in three nested period rings selected jointly by (i) presence
+or absence of vertex restriction and (ii) loop order = motivic depth:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Sub-sector & Object & Depth & Period ring & Level $N$ \\
+\midrule
+Un-restricted $D(s)$, $s$ even & $D(2k) \in \pi^{2k}\cdot\Q$ & $1$ & $\MT(\Z)$ pure Tate & $1$ \\
+Un-restricted $D(s)$, $s$ odd & $D(2k+1) \in \zeta(2k+1)\cdot\Q$ & $1$ & $\MT(\Z)$ depth $1$ & $1$ \\
+$\chi_{-4}$ vertex parity & $\beta(s) - \beta(s-2)$ via Hurwitz $1/4, 3/4$ & $1$ & $\MT(\Z[i, 1/2])$ & $4$ \\
+Catalan $G = \beta(2)$, $\beta(4)$ individually & level-$4$ Dirichlet $L$ & $1$ & $\MT(\Z[i, 1/2])$ & $4$ \\
+Sommerfeld $D_p$, $p \ge 2$ & weight-$(2p-1)$ MZV products & $\le 2$ & $\MT(\Z)$ Euler--Zagier & $1$ \\
+$S_{\min}$ depth-$2$ & new period at depth $2$ & $2$ & $\MT(\Z[1/2])$ & $2$ \\
+Depth-$k$ tower, $k \ge 3$ & new period at depth $k$ & $k$ & $\MT$ at level $\le 4$ & $\le 4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The aggregate ring containment is
+\begin{equation}
+\label{eq:m3_nested}
+\MT(\Z) \;\subset\; \MT(\Z[1/2]) \;\subset\; \MT(\Z[i, 1/2]),
+\end{equation}
+selected sub-sector by sub-sector by the vertex-restriction and depth
+data above.  No M3 closed form escapes the largest of these,
+$\MT(\Z[i, 1/2])$ at level $4$.
+
+\subsection{Witness panel}
+
+\subsubsection{Un-restricted $D(s)$ (Paper 28 Theorem 2)}
+
+The Dirac Dirichlet at integer $s \ge 2$ produces a clean two-pattern
+sequence on parity of $s$ (Paper~28
+Theorem~2~\cite{loutey_paper28}):
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}clc@{}}
+\toprule
+$s$ & $D(s)$ & Class \\
+\midrule
+$4$ & $\pi^2 - \pi^4/12$ & $\pi^{\mathrm{even}}\cdot\Q$ \\
+$5$ & $14\,\zeta(3) - \tfrac{31}{2}\,\zeta(5)$ & $\zeta(\mathrm{odd})\cdot\Q$ \\
+$6$ & $\pi^4/3 - \pi^6/30$ & $\pi^{\mathrm{even}}\cdot\Q$ \\
+$7$ & $62\,\zeta(5) - \tfrac{127}{2}\,\zeta(7)$ & $\zeta(\mathrm{odd})\cdot\Q$ \\
+$8$ & $2\pi^6/15 - 17\pi^8/1260$ & $\pi^{\mathrm{even}}\cdot\Q$ \\
+$9$ & $254\,\zeta(7) - \tfrac{511}{2}\,\zeta(9)$ & $\zeta(\mathrm{odd})\cdot\Q$ \\
+$10$ & $17\pi^8/315 - 31\pi^{10}/4725$ & $\pi^{\mathrm{even}}\cdot\Q$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All seven entries sit in $\MT(\Z)$ at depth $1$.
+
+\subsubsection{$\chi_{-4}$ vertex-restricted content (Paper 28 Theorem 3)}
+
+At integer $s \ge 2$,
+\[
+D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) \;=\; 2^{s-1}\bigl(\beta(s) - \beta(s-2)\bigr).
+\]
+Explicit values at $s = 4$:
+\begin{align*}
+D_{\mathrm{even}}(4) &= \tfrac{\pi^2}{2} - \tfrac{\pi^4}{24} - 4G + 4\beta(4), \\
+D_{\mathrm{odd}}(4)  &= \tfrac{\pi^2}{2} - \tfrac{\pi^4}{24} + 4G - 4\beta(4),
+\end{align*}
+where $G = \beta(2)$.  Each of $D_{\mathrm{even}}(s)$,
+$D_{\mathrm{odd}}(s)$, and their difference sits in
+$\MT(\Z[i, 1/2])$ at level $4$, depth $1$;\ their sum recovers the
+un-restricted $D(s)$ in the smaller level-$2$ ring above.
+
+\subsubsection{Sommerfeld $D_p$ (Paper 28 \S K-Sommerfeld)}
+
+Vertex-restricted Sommerfeld sums weighted by harmonic numbers
+$H_{n-1}^{(r)}$.  Canonical closed form at $p = 4$:
+\[
+D_4 \;=\; -\tfrac{41\pi^6}{12096} + \tfrac{71}{8}\,\zeta(7)
+        - \tfrac{\pi^4}{20}\,\zeta(3).
+\]
+Three-tier decomposition:\ $\pi^6$ (M3-$\pi$-even sub-sector),
+$\zeta(7)$ (M3-odd-$\zeta$ sub-sector), mixed product
+$\pi^4 \cdot \zeta(3)$ (depth-$2$ MZV).  At Sommerfeld order $p \ge 2$,
+$D_p$ is a $\Q$-linear sum of weight-$(2p-1)$ MZV elements with
+$\max(0, \lfloor (2p-5)/2 \rfloor)$ surviving cross-products
+$\zeta(a)\zeta(b)$, $a + b = 2p-1$ (Paper~28
+Observation~product\_rule).  PSLQ at 80 dps against
+$\{G, \beta(3), \beta(4)\}$ returns no level-$4$ content
+(Paper~28~\cite{loutey_paper28});\ all $D_p$ remain in $\MT(\Z)$
+at depth $\le 2$.
+
+\subsubsection{Two-loop irreducible $S_{\min}$ (Paper 28 \S $S_{\min}$)}
+
+\[
+S_{\min} \;=\; \sum_{k=1}^\infty T(k)^2, \quad
+T(k) \;=\; 2\,\zeta(2, k+\tfrac{3}{2}) - \tfrac{1}{2}\,\zeta(4, k+\tfrac{3}{2}).
+\]
+At 200 dps:\ $S_{\min} = 2.47993\,69380\,34222\,55441\,\ldots$  PSLQ
+at 200 dps against the 100-element basis of Paper~28 §$S_{\min}$
+(spanning $\{\pi^{2k}\}_{k \le 5}$, $\{\zeta(2k+1)\}_{k \le 4}$,
+$G$, $\beta(3)$, $\beta(4)$, depth-$2$ cross-products $G^2, G\pi^2,
+\beta(4)\pi^2, G\beta(4), \zeta(3)^2, \zeta(3)\zeta(5)$, Euler sums
+$\{s_{2,3}, s_{3,2}\}$, Tornheim--Witten $\{T(2,2,2), T(2,2,4)\}$,
+double Hurwitz at quarter-integer shifts, Hurwitz at $3/2$ for
+$s = 2, \ldots, 6$, $D_{\mathrm{even}}(4)$, $D_{\mathrm{odd}}(4)$,
+polygamma $\{\psi^{(1)}(3/2), \psi^{(3)}(3/2)\}$,
+$\mathrm{Li}_4(1/2)$, $\mathrm{Cl}_2(\pi/3)$,
+Euler--Mascheroni $\gamma$) returns NULL identification.  The natural
+motivic prediction (per the building-block content of $T(k)$, Hurwitz
+at level $2$) is $S_{\min} \in \MT(\Z[1/2])$ at depth $2$ as a new
+element not in the tested basis.
+
+\subsubsection{Depth-$k$ loop tower (Paper 28 Proposition depth\_k)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}clcc@{}}
+\toprule
+Loop order $k$ & Witness & Depth & Status \\
+\midrule
+$1$ & $\pi^{\mathrm{even}}$ only & $1$ in $\MT(\Z)$ & T9 proven \\
+$2$ & $S_{\min}$ irreducible & $2$ in $\MT(\Z[1/2])$ & PSLQ-irreducible 200 dps \\
+$3$ & $S^{(3)}$ independent of $S_{\min}$ & $3$ predicted & motivic prediction \\
+$k$ general & new irreducible at depth $k$ & $k$ in $\MT$, level $\le 4$ & motivic prediction \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The empirical tower (loop order $\leftrightarrow$ motivic depth) is
+the GeoVac realisation of the Glanois depth filtration
+$\mathrm{gr}_p^D \Hcal^N$ at $N \le 4$, with each $k$-loop process
+contributing a new period at depth $k$.
+
+\subsection{The Deligne--Glanois Galois descent identification}
+\label{subsec:m3_galois_descent}
+
+The substantive new content of this section is the structural
+identification of the vertex-parity-as-$\chi_{-4}$ mechanism (the
+sub-sector accessing Catalan $G$, $\beta(4)$, and the difference
+$D_{\mathrm{even}} - D_{\mathrm{odd}}$) as the Deligne--Glanois Galois
+descent at $N = 4$ on the framework's natural M3 observables.
+
+Glanois 2015~\cite{glanois2015} establishes (Corollaries 1.1--1.2)
+that for $N \in \{2, 3, 4, 6, 8\}$ the period map
+$\mathrm{per}: \Hcal^N \to \Zcal^N$ is an isomorphism, and provides
+an explicit basis $\Bcal^N$ of motivic multiple zeta values relative
+to $N$-th roots of unity.  At $N = 4$ the basis indexing data
+$(x_1, \ldots, x_p; \epsilon_1, \ldots, \epsilon_p)$ allows
+$\epsilon_p = \sqrt{-1}$ and $\epsilon_i \in \{\pm 1\}$ at other
+entries, with level filtration controlled by the number of even
+$x_i$ entries.  The descent from level $4$ to level $2$ is realised
+by restricting to the sub-basis with $\epsilon_p \in \{\pm 1\}$
+(equivalently, even number of imaginary-root insertions, fixed by
+the Galois involution $\mathrm{Gal}(\Q(i)/\Q)$).
+
+On the GeoVac side, the parity decomposition
+$D = D_{\mathrm{even}} + D_{\mathrm{odd}}$ acts on the half-integer
+Camporesi--Higuchi spectrum precisely as follows:\ the
+$D_{\mathrm{even}}$ sector contributes Hurwitz $\zeta(s, 1/4)$ via the
+even-parity Fock-number selection, the $D_{\mathrm{odd}}$ sector
+contributes Hurwitz $\zeta(s, 3/4)$, and the Dirichlet $\beta$
+definition $\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$ realises
+the Galois involution $\chi_{-4}: n \mapsto \chi_{-4}(n)$ as the
+arithmetic descent operation.  The cancellation $\zeta(s, 1/4) +
+\zeta(s, 3/4) = (4^s - 2^s)\zeta(s)$ in the sum
+$D_{\mathrm{even}} + D_{\mathrm{odd}} = D$ implements the descent
+from $N = 4$ to $N = 1$ in the un-restricted Dirac Dirichlet.
+
+We summarise:
+
+\begin{proposition}[Vertex parity is Deligne--Glanois descent]
+\label{prop:vertex_parity_descent}
+The Galois descent from level $N = 4$ to level $N = 2$ in the
+Glanois 2015 cyclotomic mixed-Tate framework is realised on the
+discrete Camporesi--Higuchi $\sthree$ spectral triple by the
+vertex-parity decomposition $D = D_{\mathrm{even}} + D_{\mathrm{odd}}$.
+The further descent from $N = 2$ to $N = 1$ (classical MZV) is
+realised on the un-restricted sum, which absorbs the level-$4$
+asymmetric content via the cancellation
+$\zeta(s, 1/4) + \zeta(s, 3/4) = (4^s - 2^s)\zeta(s)$ at integer $s$.
+\end{proposition}
+
+This identification places the parity-discriminant and $\chi_{-4}$
+theorems of Paper~28 inside the standard cyclotomic-mixed-Tate Galois
+hierarchy at the operator-level resolution provided by the discrete
+spectral triple, with no new motivic conjecture required:\ Deligne
+2010~\cite{deligne2010} proves the period map is an isomorphism at
+$N = 4$, Glanois 2015~\cite{glanois2015} provides the explicit
+descent operation, and Paper~28 supplies the closed forms that match
+the descent on the spectral-triple side.
+
+\subsection{Cross-manifold extension to $\sfive$:\ same classification,
+three-term polynomial structure}
+\label{subsec:m3_s5}
+
+The $\sfive$ Bargmann--Segal Hardy lattice (Paper~24~\cite{loutey_paper24})
+substrate has the Camporesi--Higuchi Dirac spectrum
+\[
+|\lambda_n^{\mathrm{CH},\sfive}| = n + \tfrac{5}{2}, \qquad
+g_n = \tfrac{(n+1)(n+2)(n+3)(n+4)}{3},
+\]
+with the quartic degeneracy polynomial
+\[
+g(m) = \tfrac{1}{3}\,m^4 - \tfrac{5}{6}\,m^2 + \tfrac{3}{16},
+\qquad m = n + \tfrac{5}{2}.
+\]
+Identities $g(1/2) = g(3/2) = 0$ extend the spectrum to all positive
+half-integers without spurious modes (the same Bernoulli mechanism that
+gives the three-term-exact $\sfive$ scalar SD expansion in
+\S\ref{subsec:open_s5} below).
+
+The $\sfive$ Dirac Dirichlet series writes
+\begin{equation}
+\label{eq:DS5}
+D^{(\sfive)}(s) = \tfrac{1}{3}\,Z(s - 4) - \tfrac{5}{6}\,Z(s - 2) + \tfrac{3}{16}\,Z(s),
+\end{equation}
+where
+$Z(s) := \zeta(s, 1/2) - 2^s - (2/3)^s
+        = (2^s - 1)\,\zeta(s) - 2^s - (2/3)^s$
+captures the half-integer-shift-corrected sum over $m \in (\Z + 1/2)$,
+$m \ge 5/2$.  This is a three-term polynomial in
+$\zeta(s-4), \zeta(s-2), \zeta(s)$ --- one term more than the two-term
+$\sthree$ counterpart, reflecting the quartic-vs-quadratic degeneracy
+polynomial.
+
+\begin{theorem}[Parity discriminant on $\sfive$]
+\label{thm:m3_s5_parity}
+At every even integer $s \ge 6$, $D^{(\sfive)}(s)$ is purely
+$\pi^{\mathrm{even}}\cdot\Q$ (a three-term polynomial in
+$\{\pi^{s-4}, \pi^{s-2}, \pi^s\}$).  At every odd integer $s \ge 7$,
+$D^{(\sfive)}(s)$ is a $\Q$-linear combination of
+$\zeta(s-4), \zeta(s-2), \zeta(s)$.
+\end{theorem}
+
+\begin{theorem}[$\chi_{-4}$ identity on $\sfive$]
+\label{thm:m3_s5_chi4}
+For every integer $s \ge 6$,
+\begin{equation}
+\label{eq:m3_s5_chi4}
+D_{\mathrm{even}}^{(\sfive)}(s) - D_{\mathrm{odd}}^{(\sfive)}(s)
+\;=\; \tfrac{1}{3}\, f_5(s - 4) - \tfrac{5}{6}\, f_5(s - 2) + \tfrac{3}{16}\, f_5(s),
+\end{equation}
+where
+$f_5(s) := 2^s\,\beta(s) - 2^s + (2/3)^s$ and $\beta(s) = L(s, \chi_{-4})$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Writing $m = n + 5/2$, the parity decomposition gives
+$Z_{\mathrm{even}}(s) = 2^{-s}\zeta(s, 5/4)$,
+$Z_{\mathrm{odd}}(s) = 2^{-s}\zeta(s, 7/4)$.
+Applying the Hurwitz shift identities
+$\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$,
+$\zeta(s, 7/4) = \zeta(s, 3/4) - (4/3)^s$, and the Dirichlet beta
+definition $\zeta(s, 1/4) - \zeta(s, 3/4) = 4^s\,\beta(s)$, the
+difference reduces to $f_5(s)$.  Inserting into~\eqref{eq:DS5} yields
+the claimed three-term combination.  Bit-exact verification at
+$s \in \{6, 7, 8, 9, 10\}$ in
+\texttt{debug/sprint\_a6\_m3\_s5\_derivation.py}, residuals
+$\le 10^{-12}$ at $s = 6$ falling to $10^{-33}$ at $s = 10$ (matching
+the $N^{-s}/s$ truncation rate at $N = 2 \times 10^5$).
+\end{proof}
+
+\begin{corollary}[Cyclotomic mixed-Tate classification on $\sfive$]
+\label{cor:m3_s5_cyclotomic}
+$M_3^{(\sfive)} \subset \MT(\Z[i, 1/2])$ at level $\le 4$, depth equal
+to loop order.  The Glanois 2015~\cite{glanois2015} basis $\Bcal^4$
+controls the period-theoretic placement;\ no extension to level $8$ is
+required, because the $\sfive$ shifts $5/4, 7/4$ reduce to the
+level-$4$ shifts $1/4, 3/4$ via the Hurwitz shift identity
+$\zeta(s, a + 1) = \zeta(s, a) - a^{-s}$, with the $-a^{-s}$ correction
+adding only $\Q$-rational content.
+\end{corollary}
+
+The structural transfer mechanism is identical to $\sthree$:\ the
+vertex-parity-as-$\chi_{-4}$ Galois descent from level $4$ to level $2$
+acts on $D^{(\sfive)}$ exactly as on $D^{(\sthree)}$;\ only the rational
+coefficients (and the number of polynomial terms, $3$ vs.\ $2$) differ.
+
+\paragraph{Specific motivic identification of $S_{\min}^{(\sfive)}$.}
+The two-loop $\sfive$ irreducible
+\[
+S_{\min}^{(\sfive)} := \sum_{k \ge 1} T_5(k)^2, \quad
+T_5(k) := \tfrac{1}{3}\zeta(2, k + \tfrac{5}{2})
+        - \tfrac{5}{6}\zeta(4, k + \tfrac{5}{2})
+        + \tfrac{3}{16}\zeta(6, k + \tfrac{5}{2}),
+\]
+truncates to $S_{\min}^{(\sfive)} \approx 0.0399612091165\ldots$ at
+$K_{\max} = 500$, $50$ dps.  Full 200-dps PSLQ irreducibility against
+the Paper~28~\S$S_{\min}$ basis is the natural verification target
+(estimated effort:\ $2$--$3$ weeks, mirroring the $\sthree$ sprint).
+The natural prediction is $S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$
+at depth $2$ as a new period not in the tested basis.
 
 % =====================================================================
 \section{Joint engagement and physical observables}
 \label{sec:joint}
 % =====================================================================
 
-[\textbf{Outline.}  Sub-mechanisms M1, M2, M3 are role-disjoint at the
-Mellin slot index but not set-theoretically disjoint;\ joint engagement
-is the typical case in physical observables.  Canonical examples:
+\subsection{Role-disjointness vs set-theoretic overlap}
+
+The three sub-mechanisms M1, M2, M3 are role-disjoint at the Mellin
+slot index $k \in \{0, 1, 2\}$:\ each \emph{elementary spectral
+object} of GeoVac is produced by exactly one Mellin slot of
+$\Tr(D^k e^{-tD^2})$ at one operator order $k$.  This is a structural
+property of the master Mellin engine, inherited from the
+case-exhaustion theorem (Theorem~\ref{thm:case_exhaustion}).
+
+The corresponding period rings $M_1, M_2, M_3$, however, are not
+set-theoretically disjoint.  The nesting structure is
+\begin{equation}
+\label{eq:ring_nesting}
+M_2 = \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
+\;\subset\; \MT(\Z)
+\;\subset\; M_3 = \MT(\Z[i, 1/2]),
+\qquad
+M_1 \cap \MT(\Z[i, 1/2]) = \Q[\pi].
+\end{equation}
+A given period value $\pi^{2k}$ can be reached by M1 (as an integer
+power of the Hopf-base measure), by M2 (as a Seeley--DeWitt
+coefficient at order $k$), or by M3 (as an even-weight Brown MZV
+inside the un-restricted Dirac Dirichlet).  The Mellin slot index
+$k$ is the structural label that distinguishes the three readings;\
+the period value alone does not.
+
+The rational subring $\Q$ sits inside every $M_i$ at Tate weight
+$0$ and depth $0$;\ rational coefficients (the Casimir trace
+$B = 42$ of Paper~2, the Dirac mode count $\Delta = 1/40$, $\Q$-linear
+combination weights throughout) are mechanism-tagged by what
+produces them, not by their numerical value.  This is the cleanest
+form of the role-disjointness statement:\ \emph{mechanisms} are
+disjoint;\ \emph{values} can overlap.
+
+\subsection{Tate-weight bookkeeping}
+
+For a physical observable that decomposes as a product of M1, M2, M3
+contributions
+\begin{equation}
+\label{eq:obs_factorise}
+\mathcal{O} = \alpha_1 \cdot \alpha_2 \cdot \alpha_3, \quad
+\alpha_i \in M_i,
+\end{equation}
+the Tate weight is additive,
+\begin{equation}
+\label{eq:weight_additive}
+\mathrm{wt}(\mathcal{O}) = \mathrm{wt}(\alpha_1) + \mathrm{wt}(\alpha_2) + \mathrm{wt}(\alpha_3),
+\end{equation}
+and the motivic depth is sub-additive,
+\begin{equation}
+\label{eq:depth_subadditive}
+\mathrm{dep}(\mathcal{O}) \le \mathrm{dep}(\alpha_1) + \mathrm{dep}(\alpha_2) + \mathrm{dep}(\alpha_3),
+\end{equation}
+with equality when the factors are algebraically independent (the
+generic case).  For an observable that decomposes as an additive
+combination
+$\mathcal{O} = \alpha_1 + \alpha_2 + \alpha_3$,
+the Tate weight is the maximum of the constituent weights (the
+weight grading is preserved by sums only within a fixed weight
+component), and motivic depth is again sub-additive.  Joint-engagement
+bookkeeping for a general physical observable $\mathcal{O}$ thus
+follows the rule:\ decompose into a sum of products
+$\mathcal{O} = \sum_j \prod_i \alpha_{i,j}$, then apply
+\eqref{eq:weight_additive}--\eqref{eq:depth_subadditive} to each
+summand and take the maximum over $j$.
+
+\subsection{Canonical example 1:\ the K-formula
+$K = \pi(B + F - \Delta)$}
+
+The Paper~2~\cite{loutey_paper2} combination rule
+\begin{equation}
+\label{eq:K_formula}
+K = \pi\,(B + F - \Delta), \qquad
+B = 42, \;\; F = \zeta(2) = \tfrac{\pi^2}{6}, \;\; \Delta = \tfrac{1}{40},
+\end{equation}
+contains exactly one elementary spectral object from each of the
+three Mellin slots, plus a rational scalar:
 \begin{itemize}
-  \item The K-formula $K = \pi(B + F - \Delta)$ of
-    Paper~2~\cite{loutey_paper2}:\ explicit $\pi$ from M1, $F = \zeta(2)$
-    from M2 inside the Fock Dirichlet evaluation, $\Delta = 1/40$
-    rational from M3 weight-$0$ Dirac mode count.
-  \item Paper~50 F-theorem coefficient
-    $F_s = (\log 2)/8 - 3\zeta(3)/(16\pi^2)$:\ $1/\pi^2$ from M1,
-    $\zeta(3)$ from M3 in cross-product.  The decomposition
-    $F_D + 2F_s = (\log 2)/2$ isolates M2 (all $\zeta(3)$ cancels);
-    the decomposition $F_D - 2F_s = 3\zeta(3)/(4\pi^2)$ isolates M3
-    (all $\log 2$ cancels).
-  \item Paper~38 L2 asymptotic propinquity rate constant
-    $4/\pi = \Vol(S^2)/\pi^2$:\ M1 factor $\Vol(S^2)$ in the
-    numerator, M1 inverse-period $\pi^{-2}$ in the denominator.
+  \item The explicit prefactor $\pi$ is the Hopf-base measure from
+    M1, Tate weight $+1$, depth $0$.
+  \item $B = 42$ is a rational Casimir trace at the $k = 0$ scalar
+    sub-mechanism (the rational core of M1), Tate weight $0$,
+    depth $0$.
+  \item $F = \zeta(2) = \pi^2/6$ is the Fock-Dirichlet evaluation at
+    $s = 2$ on the scalar Laplacian, accessed via the M2 Mellin
+    slot at $k = 2$ (Seeley--DeWitt at integer $s$;\
+    cf.\ Paper~28 Theorem~1, \cite{loutey_paper28}), Tate weight
+    $+2$, depth $0$.
+  \item $\Delta = 1/40$ is the inverse $g_3^{\mathrm{Dirac}}$ Dirac
+    mode degeneracy at $n = 3$, accessed via the M3 Mellin slot at
+    $k = 1$ as a rational vertex-counting coefficient, Tate weight
+    $0$, depth $0$.
 \end{itemize}
-Section will formalise the joint-engagement combinatorics as a
-$(k_1, k_2, k_3) \to k_1 + k_2 + k_3$ product of Tate weights
-modulo the master Mellin index multiplicativity.]
+Multiplying out:
+\[
+K \;=\; \pi B - \pi\Delta + \pi F \;=\; \underbrace{\pi(B - \Delta)}_{\text{weight }+1} + \underbrace{\pi^3/6}_{\text{weight }+3}.
+\]
+The constant $K$ sits in $\Q[\pi]$ at weight $\le 3$, in
+$M_1 \cdot (M_0 \oplus M_2)$.  This is the canonical \emph{additive}
+joint engagement:\ one representative per Mellin slot summed inside
+a single linear combination, with the dominant term $\pi^3/6$
+recognisable as the M1$\times$M2 cross-product of Hopf-base measure
+and scalar Seeley--DeWitt evaluation at $s = 2$.  The empirical
+equality $K = \alpha^{-1}$ to $8.8 \times 10^{-8}$ relative precision
+is the Paper~2 observation;\ the present paper does not derive it,
+but places each term inside a named motivic home.
+
+\subsection{Canonical example 2:\ Paper 50 F-theorem coefficients}
+
+Paper~50~\cite{loutey_paper50} computes the boundary-CFT$_3$
+F-theorem coefficients on the truncated $\sthree$ spectral triple
+for the conformally-coupled scalar and the free Camporesi--Higuchi
+Dirac:
+\begin{align}
+\label{eq:paper50_Fs}
+F_s &= \frac{\log 2}{8} - \frac{3\,\zeta(3)}{16\pi^2}, \\
+\label{eq:paper50_FD}
+F_D &= \frac{\log 2}{4} + \frac{3\,\zeta(3)}{8\pi^2}.
+\end{align}
+Both observables are non-trivial multiplicative joint engagements
+between M1 and M3:
+\begin{itemize}
+  \item $\log 2$ is M3 at level $N = 2$, depth $1$ (a Glanois
+    $\Bcal^2$ basis element);\ Tate weight $+1$ in the cyclotomic
+    grading.
+  \item $\zeta(3)/\pi^2$ is the canonical M1$\times$M3 cross-product:\
+    $\zeta(3) \in M_3 \cap \MT(\Z)$ at Tate weight $+3$ depth $1$,
+    and $1/\pi^2 \in M_1$ at Tate weight $-2$ depth $0$.  Combined
+    Tate weight $+1$, matching $\log 2$.
+\end{itemize}
+The match in Tate weight between the two summands of $F_s$ and $F_D$
+is the internal consistency of a weight-$1$ period;\ if the cancellations
+required a weight mismatch, the F-theorem coefficient could not be
+single-valued in the cyclotomic-mixed-Tate framework.
+
+Paper~50 Theorem~3.5 isolates the M3 and M1$\times$M3 sectors via the
+orthogonal projection
+\begin{align}
+\label{eq:Fproj_m3}
+F_D + 2 F_s &= \frac{\log 2}{2}
+  \quad \text{(isolates M3-only sub-sector;\ all $\zeta(3)$ cancels)}, \\
+\label{eq:Fproj_m1m3}
+F_D - 2 F_s &= \frac{3\,\zeta(3)}{4\pi^2}
+  \quad \text{(isolates M1$\times$M3 cross-product;\ all $\log 2$ cancels)}.
+\end{align}
+The dual-basis projection in \eqref{eq:Fproj_m3}--\eqref{eq:Fproj_m1m3}
+is the prototypical experimental form of joint-engagement bookkeeping:\
+by linearly combining two physical observables ($F_s$ and $F_D$),
+the contribution of one mechanism (or cross-product of mechanisms)
+can be isolated empirically.  Each side of the projection is a
+single-mechanism observable in a named period ring of
+Sections~\ref{sec:m1}--\ref{sec:m3}.
+
+\subsection{Canonical example 3:\ Paper 38 universal propinquity rate}
+
+The asymptotic rate constant $4/\pi$ in the Latr\'emoli\`ere
+propinquity convergence of truncated Camporesi--Higuchi spectral
+triples (Paper~38 Theorem~L2, \cite{loutey_paper38};\ universal across
+compact connected Lie groups, Paper~40 Theorem~1,
+\cite{loutey_paper40}) is a pure M1 expression:
+\begin{equation}
+\label{eq:propinquity_rate_M1}
+\frac{4}{\pi} \;=\; \frac{\Vol(S^2)}{\pi^2}.
+\end{equation}
+The numerator $\Vol(S^2) = 4\pi$ is the canonical M1 Hopf-base
+measure (Tate weight $+1$);\ the denominator $\pi^2$ is the squared
+inverse period (Tate weight $-2$).  Net Tate weight $-1$, depth $0$.
+No M2 or M3 content enters at any step of the propinquity convergence
+argument.  This is the operator-algebraic statement of the fact that
+propinquity convergence rates measure the Hopf-base-measure content
+of the substrate independent of its heat-kernel and vertex-parity
+sectors:\ the rate constant lives in $M_1$ alone, and the
+universality across compact connected Lie groups
+(Paper~40)~\cite{loutey_paper40} is the universality of the
+Hopf-base-measure construction.
+
+\subsection{Joint-engagement modes}
+
+The three examples above exhibit the three natural composition modes:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Mode & Combination & Example & Ring \\
+\midrule
+Additive & $\sum_i \alpha_i$ inside a single linear combination & Paper~2 K-formula & $M_1 \cdot (M_0 \oplus M_2 \oplus M_3) \subset \Q[\pi]$ \\
+Multiplicative & $\prod_i \alpha_i$ across mechanism boundaries & Paper~50 F-theorem & $M_1 \cdot M_3 \subset \MT(\Z[i, 1/2])$ \\
+Pure single-mechanism & all factors from one slot & Paper~38 rate & $M_1$ alone \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The dual-basis projection of Paper~50 Theorem~3.5 demonstrates the
+operational utility of joint-engagement bookkeeping:\ linear
+combinations of physical observables that isolate one mechanism (or
+one cross-product) at a time make the projective content of each
+sub-mechanism readable from empirical data.  This is the operational
+form of the periods-of-GeoVac classification --- every physical
+observable decomposes into a sum of products of M1, M2, M3 factors,
+each factor sits in a named period ring of
+Sections~\ref{sec:m1}--\ref{sec:m3}, and the dual-basis projections
+recover the contribution of each Mellin slot independently.
 
 % =====================================================================
 \section{Open questions}
@@ -577,34 +1261,242 @@ element of the Deligne--Glanois basis $\Bcal^N$ at depth $k$.  Higher
 PSLQ precision (300 dps) against an enriched depth-$k$ basis is the
 natural mini-sprint at each $k$.
 
-\subsection{Inhomogeneous extension}
+\subsection{Inhomogeneous extension:\ three sub-cases}
+\label{subsec:open_inhomo}
 
 The Fathizadeh--Marcolli result holds on $\R \times \sthree$ with
 arbitrary scaling factor $a(t)$;\ the present paper restricts to
-$a(t) \equiv 1$.  Whether the GeoVac discrete substrate admits a
-time-dependent $a(t)$ generalisation with the same period-theoretic
-content is open.
+$a(t) \equiv 1$, the closed-point specialisation $\{1\} \times \{0\}^{2n}$
+of \S\ref{sec:m2}.  Scoping (Sprint~A1, 2026-06-03; memo
+\texttt{debug/sprint\_a1\_scoping\_memo.md}) splits ``inhomogeneous
+extension'' into three structurally distinct sub-cases:
 
-\subsection{Cross-manifold extension to $\sfive$ Bargmann--Segal}
+\begin{itemize}
+  \item \textit{Constant warp.}  Rescaling to $a(t) \equiv a_0 > 0$
+    rational corresponds to the $\lambda$-slice
+    $\{\lambda = a_0\} \times \{0\}^{2n} \hookrightarrow
+    \mathbb{G}_m \times \mathbb{A}^{2n}$.  The pure-Tate ring is preserved
+    by rational rescaling because Paper~51~\cite{loutey_paper51}
+    Theorem~\texttt{thm:zeta\_unit\_neg\_k} ($\zeta_{\sthree, R}(-k) = 0$
+    for all $k$) gives a two-term exact spectral action at all $R$.  No
+    sprint required;\ trivial corollary of \S\ref{sec:m2}.
+  \item \textit{Thermal-time compactification (closed in the negative).}
+    The temporal compactification $\R \to S^1_\beta$ (the natural GeoVac
+    time-direction surrogate via the Paper~35~\cite{loutey_paper35} Matsubara
+    substrate $\sthree \times S^1_\beta$, not literally an $a(t)$ in F--M's
+    sense) does NOT inject classical odd-zeta $\zeta(2k+1)$ or MZV content
+    into the 4D Seeley--DeWitt coefficients.  Sprint A1-Matsubara
+    (2026-06-03, \texttt{debug/sprint\_a1\_matsubara\_memo.md}) computes the
+    small-$t$ asymptotic of the product heat kernel
+    $K_{\sthree \times S^1_\beta}(t) = K_{\sthree}(t) \cdot K_{S^1_\beta}(t)$
+    and finds that the temporal factor contributes a single power
+    $\beta/\sqrt{4\pi t}$ at $t \to 0^+$ (the $m = 0$ winding of
+    $\vartheta_3$), with the $m \neq 0$ winding terms exponentially
+    suppressed by $e^{-m^2\beta^2/(4t)}$.  The Matsubara mode sum --- the
+    mechanism by which $\zeta(2k+1)$ could enter --- lives in the orthogonal
+    large-$t$ (IR) regime of $K_{S^1_\beta}(t)$, reached only via Jacobi
+    $\vartheta_3$ modular inversion, and is not visible to the SD
+    asymptotic.
 
-Paper~24~\cite{loutey_paper24} establishes a parallel discrete
-spectral-triple structure on the Hardy sector of $\sfive$, encoding
-the 3D harmonic oscillator with a $\pi$-free skeleton.  Whether
-the master Mellin engine partition extends to this cross-manifold
-substrate, and whether the period-theoretic classification holds at
-the same level $4$, is open.
+    \begin{proposition}[Pure-Tate refinement on $\sthree \times S^1_\beta$]
+    \label{prop:thermal_pure_tate}
+    The volume-normalised 4D Seeley--DeWitt coefficients on
+    $\sthree \times S^1_\beta$ for the scalar Laplacian and the
+    Camporesi--Higuchi Dirac satisfy
+    \begin{align}
+    a_k^{\mathrm{4D, scalar}}(\beta) &= \frac{2\pi^2\,\beta}{k!} \quad (k \ge 0), \\
+    a_0^{\mathrm{4D, Dirac}}(\beta)  &= 4\pi^2\,\beta, \quad
+    a_1^{\mathrm{4D, Dirac}}(\beta)  = -2\pi^2\,\beta, \quad
+    a_k^{\mathrm{4D, Dirac}}(\beta)  = 0 \;\; (k \ge 2).
+    \end{align}
+    Each coefficient factorises as $\beta\cdot a_k^{\sthree}$, where
+    $a_k^{\sthree}$ is the corresponding SD coefficient on the static
+    $\sthree$ sub-case (\S\ref{sec:m2}, Paper~51~Thm~3.1 and
+    Cor.~2.1~\cite{loutey_paper51}).  The two-term exactness of the
+    $\sthree$ Dirac sector is inherited verbatim.  All coefficients
+    therefore lie in the rational-rescaled pure-Tate ring
+    \[
+    M_2^{\mathrm{(4D, thermal)}} \subset \beta\cdot
+    \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q.
+    \]
+    \end{proposition}
 
-\subsection{Inner-factor Yukawa content}
+    The Stefan--Boltzmann $\pi$-injection of Paper~35~\S~III is structurally
+    a different extraction --- the Mellin transform at integer $s$ on the
+    same product heat kernel, not the small-$t$ SD asymptotic --- and lives
+    in the M1$\times$M2 cross-product joint engagement of
+    \S\ref{sec:joint}, not in M2 itself.  No conflict.
+  \item \textit{Generic continuum $a(t)$ with non-trivial derivatives
+    $\varepsilon_i = a^{(i)}(t) \neq 0$.}  Requires either a 4D continuum
+    substrate or a time-dependent Camporesi--Higuchi spectral triple, both
+    outside the discrete-substrate principle that defines GeoVac.  The
+    closest GeoVac analog is the discrete-warped-substrate program of
+    Paper~51~\cite{loutey_paper51} \S G4-3, currently a multi-month
+    follow-on.  No active sprint.
+\end{itemize}
+The original ``inhomogeneous extension'' open question is therefore
+stratified, with constant warp closed by Paper 51 \S G1, A1-Matsubara
+named as a new sprint-scale open question, and the full generic case
+recorded as a structural multi-month frontier tied to the Paper 51
+discrete-warped-substrate program.
+
+\subsection{Cross-manifold extension to $\sfive$ Bargmann--Segal:\ M2
+closes by dimension-parity sharpening}
+\label{subsec:open_s5}
+
+The M2 sub-mechanism on the Hardy sector of $\sfive$ (Paper~24
+substrate~\cite{loutey_paper24}) inherits the F--M mixed-Tate
+classification verbatim, refined by the dimension parity of the
+substrate.  On round unit $\sfive$:
+
+\begin{proposition}[Pure-Tate refinement on $\sfive$]
+\label{prop:s5_pure_tate}
+The volume-normalised Seeley--DeWitt coefficients of the
+Camporesi--Higuchi Dirac $D^2$ and the scalar Laplacian on round
+unit $\sfive$ are:
+\begin{itemize}
+  \item \textit{Dirac (three-term exact).}  Exactly three non-zero
+    coefficients,
+    \[
+    a_0^{D^2} = 4\pi^3,\qquad
+    a_1^{D^2} = -\tfrac{20}{3}\pi^3,\qquad
+    a_2^{D^2} = 3\pi^3,
+    \]
+    and $a_k^{D^2} = 0$ for $k \ge 3$.  The three-term truncation
+    matches the general $S^{2m+1}$ count $(m{+}1)$ at $m = 2$
+    (Paper~51 \texttt{rem:two\_term\_uniqueness},
+    \cite{loutey_paper51}).
+  \item \textit{Scalar Laplacian (infinite closed form).}
+    \[
+    a_0^\Delta = \pi^3,\qquad
+    a_k^\Delta = \frac{(6 - k)\cdot 4^{k-1}\cdot 2}{3\cdot k!}\,\pi^3
+    \quad (k \ge 1),
+    \]
+    with the single mid-series zero $a_6^\Delta = 0$ from the
+    $(6 - k)$ factor.
+\end{itemize}
+All coefficients lie in the single Tate-weight-$3$ slice
+$\pi^3\cdot\Q \subset \Q[\pi] \subset \MT(\Q)$.  Consequently
+\begin{equation}
+\label{eq:m2_s5_ring}
+M_2^{(\sfive)} \;\subset\; \pi^3\cdot\Q,
+\end{equation}
+which sits in the same Kontsevich--Zagier mixed-Tate-over-$\Q$ class
+as the $\sthree$ counterpart but in a strictly different single-weight
+slice (odd weight $+3$ rather than even-weight sub-ring).
+\end{proposition}
+
+The dimension parity controls the Tate weight of the SD slice:\ on $\sthree$,
+$\Vol(\sthree) = 2\pi^2$, and the SD coefficients sit in
+$\bigoplus_k \pi^{2k}\cdot\Q$ (even-weight pure-Tate sub-ring);\ on $\sfive$,
+$\Vol(\sfive) = \pi^3$, and the SD coefficients sit in the
+single slice $\pi^3\cdot\Q$ (odd-weight pure-Tate slice).  Both rings sit
+in $\Q[\pi] \subset \MT(\Q)$;\ both inherit the F--M
+classification~\cite{fathizadeh_marcolli2016} at the static-substrate
+sub-case $a(t) \equiv 1$.  Closed forms derived by Jacobi $\vartheta_2,
+\vartheta_3$ modular transformation in
+\texttt{debug/sprint\_a2\_s5\_sd\_coefficients.py};\ memo
+\texttt{debug/sprint\_a2\_s5\_mixed\_tate\_memo.md} (June~2026)
+documents the full derivation, numerical verification, and
+dimension-parity sharpening.
+
+The M1 sub-mechanism transfers to $\sfive$ via the $\mathbb{CP}^2$
+base measure on the Hopf-like projection $\sfive \to \mathbb{CP}^2$,
+$\Vol(\mathbb{CP}^2)/4 = \pi^2/2 \in \Q[\pi]$.  Whether the M3
+sub-mechanism (vertex parity and Hurwitz at the half-integer shift
+$5/2$) admits a parallel cyclotomic-mixed-Tate-at-level-$\le 4$
+classification on $\sfive$ is a sub-sprint of identical structural shape
+to the $\sthree$ argument in \S\ref{sec:m3};\ we record it as an open
+sub-question below (Q3').
+
+\subsection{M3 on $\sfive$:\ structural closure, empirical PSLQ deferred}
+\label{subsec:open_s5_m3}
+
+The structural classification ``does M3 on $\sfive$ admit a parallel
+cyclotomic-mixed-Tate-at-level-$\le 4$ classification?'' is closed
+POSITIVE by \S\ref{subsec:m3_s5} above (Sprint A6, 2026-06-03;\ memo
+\texttt{debug/sprint\_a6\_m3\_s5\_memo.md}).  Corollary
+\ref{cor:m3_s5_cyclotomic} states that $M_3^{(\sfive)} \subset
+\MT(\Z[i, 1/2])$ at level $\le 4$, depth equal to loop order.  The
+remaining empirical target is specific motivic identification of
+$S_{\min}^{(\sfive)}$ via 200-dps PSLQ against the Paper~28~\S$S_{\min}$
+basis, estimated 2--3 weeks (parallel to the $\sthree$ sprint of the
+same effort), with the natural prediction
+$S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$ at depth $2$.
+
+\subsection{Inner-factor Yukawa content:\ closed by factorisation +
+Yukawa-PSLQ}
+\label{subsec:open_inner_yukawa}
 
 The almost-commutative extension
-$\mathcal{A}_{\mathrm{GV}} \otimes (\C \oplus \mathbb{H})$ studied in
+$\mathcal{A}_{\mathrm{GV}} \otimes \mathcal{A}_F$ studied in
 Paper~32 \S~VIII.C~\cite{loutey_paper32} (Sprint H1 closure) admits a
 Higgs structure but does not autonomously select the Yukawa coupling
-matrix.  The associated inner-factor input data (Yukawa Dirichlet
-ring, Paper~18 \S~IV tier 6~\cite{loutey_paper18}) is classified
-empirically as Dirichlet-$L$-class, but its period-theoretic placement
-inside the M1/M2/M3 trinity (or as a genuinely new sub-mechanism) is
-open.
+matrix.  Scoping (Sprint~A4, 2026-06-03; memo
+\texttt{debug/sprint\_a4\_scoping\_memo.md}) settles the period-theoretic
+placement using three theorem-grade prior results:
+
+\begin{enumerate}
+  \item Paper~18~\S~IV.6 Theorem~\texttt{thm:eta\_trivialization}:\ on the
+    AC extension, the inner M3 (odd-$k$) Mellin slot vanishes identically.
+    Inner Mellin reaches only $k \in \{0, 2\}$.
+  \item Paper~18~\S~IV.6 Theorem~\texttt{thm:ac\_factorization}:\ the
+    combined heat trace factorises cleanly into an outer (M2 on $\sthree$)
+    factor and an inner factor, with no mixing.
+  \item Sprint Yukawa-PSLQ (2026-06-03,
+    \texttt{debug/sprint\_yukawa\_pslq\_memo.md}):\ a 162-cell empirical
+    PSLQ sweep at both $\overline{\mathrm{MS}}\,M_Z$ and unification scales
+    returned zero hits for Yukawa values in low-coefficient pure-Tate
+    periods.
+\end{enumerate}
+
+The combined statement:\ the AC-extension Seeley--DeWitt coefficients
+factorise as
+\begin{equation}
+\label{eq:ac_factorisation}
+a_k^{\mathrm{AC}} \;=\; \underbrace{a_k^{\mathrm{outer}}}_{\in\, \bigoplus_j \pi^{2j}\cdot\Q}
+\;\times\; \underbrace{a^{\mathrm{inner}}(y_1, \ldots, y_g)}_{\in\, \Q[y_i^{-2s}]},
+\end{equation}
+with outer pure-Tate (M2 on $\sthree$) times inner Dirichlet ring in the
+Yukawa coupling variables.  The inner ring is mixed-Tate over $\Q$
+iff $y_i^2 \in \Q$;\ Sprint Yukawa-PSLQ empirically rejects this at
+coefficient ceiling $M \le 10^3$.  The inner-factor content therefore
+lives in Paper~18~\S~IV.6's sixth tier (parameter-tied Dirichlet, Paper~18
+``inner-factor input data''), \emph{categorically disjoint} from
+M1/M2/M3.
+
+No new sub-mechanism is required.  The ``genuinely new sub-mechanism''
+reading of the original open question is closed in the negative:\ the
+inner-factor escape route is the already-classified sixth tier, which is
+structurally compatible with --- but not derived from --- the master
+Mellin engine M1/M2/M3.
+
+\subsection{Open Q5':\ a possible deeper M2/M3 cyclotomic unification}
+\label{subsec:open_m2_m3}
+
+Both M2 and M3 sub-mechanisms engage $\Q(i) = \Q(\zeta_4)$, but via two
+structurally independent mechanisms (Witt-splitting field for M2 per
+Remark~\ref{rem:m2_specialisation};\ cyclotomic conductor for M3 per
+Proposition~\ref{prop:vertex_parity_descent}).  Both occurrences trace
+to the dimension-$3$ parity of $\sthree$:\ M2 via the Euclidean
+signature $(+,+,+,+)$ on $\R^4 \supset \sthree$, M3 via the
+half-integer Camporesi--Higuchi shift $3/2$ on
+$\mathrm{spin}(3) = \mathrm{SU}(2)$.  An open question:\ is there a
+single object (a motive, a Tannakian symmetry, an enriched motivic
+Galois group of the discrete spectral triple) whose action
+simultaneously selects $\Q(\zeta_4)$ as Witt-splitting field for the
+SD integrand AND as cyclotomic conductor for the $\eta$-invariant
+Mellin slot, with a natural identification between the trivial
+M2-Galois and the non-trivial M3-Galois on the respective output rings?
+Sprint A7 (2026-06-03;\ memo
+\texttt{debug/sprint\_a7\_m2\_m3\_cyclotomic\_memo.md}) returns
+HALF-STRUCTURAL:\ the shared field is robust at the number-field
+level, but no shared Tannakian symmetry is known in the published
+periods program (Brown~\cite{brown2012}, Deligne~\cite{deligne2010},
+Glanois~\cite{glanois2015}, Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016}).
+A structural unification would require an enriched motivic Galois
+group of the GeoVac discrete spectral triple, not yet constructed in
+the literature.  Multi-year mathematical research project.
 
 % =====================================================================
 \section{Conclusion}
@@ -649,6 +1541,11 @@ structure,'' GeoVac corpus (2026).
 
 \bibitem{loutey_paper28}
 J.~Loutey, ``Paper 28: QED on $\sthree$,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper35}
+J.~Loutey, ``Paper 35: Time as projection -- Klein-Gordon on
+$\sthree \times \R$ and Matsubara temporal compactification,''
+GeoVac corpus (2026).
 
 \bibitem{loutey_paper32}
 J.~Loutey, ``Paper 32: The GeoVac spectral triple,'' GeoVac corpus

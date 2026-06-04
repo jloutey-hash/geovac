@@ -1,6 +1,6 @@
 # Follow-on register
 
-**Last updated:** 2026-06-03 (post-v3.45.3, post-Paper-41-marcolli-vs-closure)
+**Last updated:** 2026-06-03 (post-Paper-55-§5+§6 + post-A2/A5 sub-agent sprints)
 
 This file is the durable list of carved-out follow-ons from recent sprints that
 the PI has not yet authorized for execution. New items are added at the top of
@@ -12,59 +12,140 @@ including the originating sprint reference for context.
 
 ## A. Substantive research sprints (PI decision required)
 
-### A1. Inhomogeneous Robertson–Walker extension of Mixed-Tate test
-**Source:** Sprint Mixed-Tate Test (v3.45.3, 2026-06-03; memo
-`debug/sprint_mixed_tate_test_memo.md` §"Open questions" #1).
-**Estimated effort:** 2–4 weeks.
-**Question:** does the Fathizadeh–Marcolli mixed-Tate classification extend
-to the GeoVac $S^3$ sector with a non-trivial scaling factor $a(t)$ (the
-actual R–W substrate, not the static-$S^3$ sub-case proved in v3.45.3)?
-**Why interesting:** F–M proved the result on continuum R–W. The GeoVac
-discrete substrate with time-dependent $a(t)$ would need its own
-re-derivation, and the discrete-vs-continuum gap is itself informative.
+### ~~A1.~~ ~~Inhomogeneous Robertson–Walker extension~~ — **STRATIFIED 2026-06-03 (Sprint A1 scoping)**
+A1 splits cleanly into three sub-cases. (i) Constant warp $a(t) \equiv a_0$:
+trivial corollary of Paper 51 G1 `thm:zeta_unit_neg_k`; closed by drop-in
+paragraph in Paper 55 §7.2. (ii) Generic continuum $a(t)$ with non-trivial
+$\varepsilon_i = a^{(i)}(t) \ne 0$: NO-GO at discrete-substrate level; tied
+to Paper 51 G4-3 discrete-warped-substrate multi-month program. (iii)
+Thermal-time compactification $S^3 \times S^1_\beta$ (Paper 35 Matsubara
+substrate, the natural GeoVac time-direction surrogate, NOT literally an
+$a(t)$): sprint-scale 2-3 weeks, named A1-Matsubara (new item below).
+Memo: `debug/sprint_a1_scoping_memo.md`. Paper 55 §7.2 updated with the
+three-sub-case stratification.
 
-### A2. $S^5$ Bargmann–Segal mixed-Tate analog
-**Source:** Sprint Mixed-Tate Test (v3.45.3) §"Open questions" #2.
-**Estimated effort:** mini-sprint (1–2 weeks).
-**Question:** does the same pure-Tate refinement hold on $S^5$ (where the
-analogous CC expansion has three power-law terms including $R^2$, per
-Paper 51 `rem:two_term_uniqueness`)?
-**Status:** $S^5$ retains the pure-Tate sub-ring at the volume-normalized
-SD level; explicit closed forms not yet written out.
+### ~~A1-Matsubara.~~ ~~Thermal-time compactification of M2 pure-Tate refinement~~ — **CLOSED-NEGATIVE 2026-06-03 (Sprint A1-Matsubara)**
+Sub-agent returned NEGATIVE-no-structural-engagement. Temporal compactification
+multiplies SD coefficients by Tate-weight-0 rational factor $\beta$ and changes
+no other structural feature. Explicit closed forms (sympy-verified bit-exact):
+scalar $a_k^{\mathrm{4D,scalar}}(\beta) = 2\pi^2\beta/k!$ for all $k \ge 0$;
+Dirac $a_0 = 4\pi^2\beta$, $a_1 = -2\pi^2\beta$, $a_k = 0$ for $k \ge 2$
+(two-term exactness inherited verbatim). Mechanism: $m \ne 0$ windings of
+$K_{S^1_\beta}(t)$ are exponentially suppressed in small-$t$ asymptotic; the
+Matsubara mode sum lives in the orthogonal $t \to \infty$ regime reached via
+Jacobi $\vartheta_3$ inversion. Two regimes don't exchange transcendental
+content at SD level. **No conflict with Paper 35 Stefan-Boltzmann** $\pi^2/90$
+— that's the M1×M2 Mellin-at-integer-$s$ extraction, structurally distinct
+observable. Paper 55 §7.2 thermal-time bullet upgraded to closure-in-the-negative
++ new Proposition `prop:thermal_pure_tate`. Memo:
+`debug/sprint_a1_matsubara_memo.md`.
 
-### A3. M3 cyclotomic-mixed-Tate verdict at level 4 over $\mathbb{Z}[i]$
-**Source:** Sprint Mixed-Tate Test (v3.45.3) §"Open questions" #3.
-**Estimated effort:** parallel mini-sprint (1–2 weeks).
-**Question:** verify that the M3 sub-mechanism (vertex-parity Hurwitz,
-Catalan $G$, $\beta(s)$) lives in cyclotomic mixed-Tate at level 4 over
-$\mathbb{Z}[\zeta_4] = \mathbb{Z}[i]$ against the Brown–Goncharov
-cyclotomic mixed-Tate classification.
-**Why interesting:** would close the arithmetic classification of the
-master Mellin engine at all three sub-mechanisms (M1 trivial, M2 pure-Tate
-over $\mathbb{Q}$ via v3.45.3, M3 cyclotomic-MT-level-4 via this sprint).
+### ~~A2.~~ ~~S^5 Bargmann–Segal mixed-Tate analog~~ — **CLOSED 2026-06-03 (Sprint A2)**
+Sub-agent dispatch returned POSITIVE with structural refinement: Dirac D² on S⁵ is
+three-term exact (a₀ = 4π³, a₁ = -20π³/3, a₂ = 3π³); scalar Laplacian gives infinite
+closed form a_k^Δ = (6-k)·4^(k-1)·2/(3·k!)·π³ with single mid-series zero at k=6.
+Both sit in single Tate-weight-3 slice π³·Q. **Dimension-parity sharpening** (new
+structural finding): S³ (even-dim Vol=2π²) → even-weight ⊕π^(2k)·Q; S⁵ (odd-dim
+Vol=π³) → single odd-weight slice π³·Q. Closed forms in
+`debug/sprint_a2_s5_sd_coefficients.py`; memo at
+`debug/sprint_a2_s5_mixed_tate_memo.md`. Paper 55 §7.3 updated with Proposition
+`prop:s5_pure_tate` + dimension-parity remark; new Q3' subsection records
+M3-on-S⁵ as new sprint-scale open question (2-3 weeks).
 
-### A4. Inner-factor mixed-Tate extension (Sprint H1 / Yukawa Dirichlet ring)
-**Source:** Sprint Mixed-Tate Test (v3.45.3) §"Open questions" #4.
-**Estimated effort:** multi-week.
-**Question:** the almost-commutative extension $\mathcal{A}_{GV} \otimes
-(\mathbb{C} \oplus \mathbb{H})$ (Paper 32 §VIII.C) introduces Yukawa
-coupling content classified in Paper 18 §IV's "inner-factor input data"
-tier. Whether these inner-factor SD coefficients remain mixed-Tate over
-$\mathbb{Q}$ is open.
-**Dependency:** would benefit from completing A3 first (M3 mechanism
-classified) to scope cleanly.
+### ~~A3.~~ ~~M3 cyclotomic-mixed-Tate verdict at level 4 over Z[i]~~ — **CLOSED 2026-06-03 (Sprint M3 + Paper 55 §5)**
+Sprint M3 Cyclotomic Mixed-Tate verified M3 ⊂ MT(Z[i, 1/2]) at level ≤ 4 via
+direct application of Deligne 2010 + Glanois 2015. Vertex-parity-as-χ_{-4} identified
+as the literal Deligne-Glanois Galois descent from level 4 to level 2 on the
+framework's natural QED observables. Closed by Paper 55 §5 fill (Theorem 5.1
+`thm:m3_cyclotomic_mixed_tate` + Proposition 5.3 `prop:vertex_parity_descent`).
+Memo: `debug/sprint_m3_cyclotomic_mixed_tate_memo.md`.
 
-### A5. Fathizadeh–Marcolli full paper read for precise relative-motive structure
-**Source:** Sprint Mixed-Tate Test (v3.45.3) §"Open questions" #5.
-**Estimated effort:** 1–2 days reading + writeup.
-**Why:** v3.45.3's verdict relied on the F–M abstract + search-surfaced
-quotes. A full F–M read would let us write down the specific affine
-complement of quadrics + hyperplanes that the GeoVac $S^3$ SD coefficients
-reduce to (essentially trivial — a point — in our case, since there are
-no continuous $a^{(n)}(t)$ derivatives).
-**Why interesting:** would let us state the F–M inheritance corollary as
-an explicit motive-equivalence rather than the current text-level
-inheritance statement.
+### ~~A6.~~ ~~M3-on-S⁵ cyclotomic-mixed-Tate refinement~~ — **CLOSED 2026-06-03 (Sprint A6)**
+Sub-agent returned POSITIVE. Cyclotomic-mixed-Tate-at-level-≤4 transfers from
+S³ to S⁵ verbatim. Explicit S⁵ Dirac Dirichlet:
+$D^{(\sfive)}(s) = (1/3)Z(s-4) - (5/6)Z(s-2) + (3/16)Z(s)$ (three-term, vs S³'s
+two-term). χ_{-4} identity:
+$D_{\mathrm{even}}^{(\sfive)} - D_{\mathrm{odd}}^{(\sfive)} = (1/3)f_5(s-4) -
+(5/6)f_5(s-2) + (3/16)f_5(s)$ with $f_5(s) := 2^s\beta(s) - 2^s + (2/3)^s$,
+verified bit-exact at $s \in \{6,7,8,9,10\}$. **Level 4 sufficient** — S⁵ shifts
+$5/4, 7/4$ reduce to level-4 shifts $1/4, 3/4$ via Hurwitz $\mathbb{Q}$-rational
+corrections. Paper 55 §5.5 new subsection `subsec:m3_s5` with two Theorems +
+Corollary; §7.4 updated to mark structural closure. Memo:
+`debug/sprint_a6_m3_s5_memo.md`. Driver: `debug/sprint_a6_m3_s5_derivation.py`.
+
+### A6-followon. S_min^(S⁵) PSLQ irreducibility (new from A6)
+**Source:** Sprint A6 closure (Paper 55 §5.5 paragraph "Specific motivic
+identification").
+**Estimated effort:** 2-3 weeks (mirrors S³ sprint of same effort).
+**Question:** 200-dps PSLQ irreducibility of $S_{\min}^{(\sfive)} := \sum_k
+T_5(k)^2 \approx 0.0399612091165\ldots$ against the Paper 28 §$S_{\min}$
+basis. Natural prediction: $S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$ at depth 2.
+
+### ~~A7.~~ ~~M2-M3 cyclotomic coincidence at level 4~~ — **HALF-STRUCTURAL CLOSED 2026-06-03 (Sprint A7)**
+Sub-agent returned HALF-STRUCTURAL. M2's $\Q(i)$ is the Witt-splitting field of
+the standard Euclidean quadratic form $Q_{1,2n}$ (Gal acts trivially on M2
+outputs, pure-Tate descends to $\Q$). M3's $\Q(i) = \Q(\zeta_4)$ is the
+cyclotomic conductor of $\chi_{-4}$ (Gal acts non-trivially via Glanois descent
+$N=4 \to N=2$). Both trace to dimension-3 parity of S³ via INDEPENDENT
+mechanisms — no shared Tannakian symmetry. Sharpened (not promoted) by A8
+factored form $[Z_{1,2n}] = [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$. Paper 55
+§4 Remark `rem:m2_specialisation` extended with Distinction paragraph; new §7.6
+Q5' subsection opened for deeper unification (recorded as multi-year research
+project under Section A.M2-M3-unification below). Memo:
+`debug/sprint_a7_m2_m3_cyclotomic_memo.md`.
+
+### A.M2-M3-unification. M2/M3 motivic Galois unification (new multi-year research project from A7)
+**Source:** Sprint A7 (2026-06-03; memo
+`debug/sprint_a7_m2_m3_cyclotomic_memo.md`).
+**Estimated effort:** multi-year mathematical research project; no sprint-scale
+handle.
+**Question:** is there an enriched motivic Galois group of the GeoVac discrete
+spectral triple that unifies M2's Witt-splitting $\Q(i)$ action with M3's
+cyclotomic-conductor $\Q(\zeta_4)$ action via a single Tannakian symmetry?
+
+### ~~A8.~~ ~~F-M general-n Grothendieck-class closed form~~ — **CLOSED 2026-06-03 (Sprint A8)**
+Sub-agent retrieved closed form from F-M §7.6 Theorem 7.6: three equivalent
+forms. **Factored (structural reading):
+$[Z_{1,2n}] = [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$** — two maximal isotropic
+subspaces over $\Q(i)$ as the source of the doubled middle Tate twist.
+Palindrome + complement forms also given. Substituted into Sprint A5 GeoVac
+Grothendieck-class equation:
+$[\mathcal{V}_n^{\mathrm{GeoVac}}] = \mathbb{L}^{2n+3} - 3\mathbb{L}^{2n+2} +
+2\mathbb{L}^{2n+1} - \mathbb{L}^{n+2} + 3\mathbb{L}^{n+1} - 2\mathbb{L}^n$.
+Verified symbolically at $n=1,\ldots,5$. Matches F-M Thm 7.2 at $n=1$. Paper 55
+§4 Remark `rem:m2_specialisation` expanded with explicit polynomial
+(`eq:z_quadric_class` + `eq:geovac_grothendieck_class_explicit`). Memo:
+`debug/sprint_a8_grothendieck_class_memo.md`.
+
+### ~~A4.~~ ~~Inner-factor mixed-Tate extension~~ — **CLOSED-BY-PRIOR 2026-06-03 (Sprint A4 scoping)**
+Three theorem-grade prior ingredients jointly settle A4 without new
+computation: (i) Paper 18 §IV.6 `thm:eta_trivialization` (inner M3
+vanishes); (ii) Paper 18 §IV.6 `thm:ac_factorization` (heat trace
+factorises cleanly into outer × inner); (iii) Sprint Yukawa-PSLQ
+(2026-06-03; 162-cell sweep, zero hits, Yukawas not in low-coefficient
+pure-Tate). Combined: AC-extension SD coefficients factor as (outer
+pure-Tate $\bigoplus_k \pi^{2k}\mathbb{Q}$) × (inner Dirichlet
+$\mathbb{Q}[y_i^{-2s}]$); inner factor generically NOT mixed-Tate over
+$\mathbb{Q}$ because Yukawas are Class 1 calibration. Inner-factor
+content lives in Paper 18 §IV.6 sixth tier (parameter-tied Dirichlet),
+categorically disjoint from M1/M2/M3. **No new sub-mechanism required.**
+Memo: `debug/sprint_a4_scoping_memo.md`. Paper 55 §7.4 updated with the
+factorisation + sixth-tier escape route.
+
+### ~~A5.~~ ~~Fathizadeh–Marcolli full paper read~~ — **CLOSED 2026-06-03 (Sprint A5)**
+Sub-agent dispatch returned POSITIVE with one correction. F-M Thm 6.2 gives the
+explicit affine complement $\mathcal{V}_n^{F\text{-}M}(\lambda) = \mathbb{A}^{2n+3}
+\setminus (C_{Z_{\lambda,2n}} \cup H_0 \cup H_1)$ with quadric
+$Q_{\lambda,2n} = u_1^2 + \lambda^{-2}(u_2^2+u_3^2+u_4^2) + u_5^2 + \ldots$;
+GeoVac static specialisation is the closed immersion $\{1\} \times \{0\}^{2n}$.
+**Correction to v3.45.3 expected reading:** "trivial complement (a point)" is half-right
+— the $(\lambda,\varepsilon)$-fiber collapses, but the $u$-coordinate complement
+$\mathcal{V}_n^{GeoVac}$ remains a genuine $(2n+3)$-dim mixed-Tate variety.
+Grothendieck-class formula computed (eq:geovac_grothendieck_class). **Side observation
+flagged as open question:** the M2 quadric ring $\mathbb{Q}(\sqrt{-1}) = \mathbb{Q}(\zeta_4)$
+matches the M3 vertex-parity Glanois level-4 ring — possible deeper M2-M3 cyclotomic
+coupling at level 4. Memo at `debug/sprint_a5_fm_full_read_memo.md`. Paper 55 §4
+proof sketch + new Remark `rem:m2_specialisation` applied.
 
 ---
 

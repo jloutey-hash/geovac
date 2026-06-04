@@ -7,6 +7,295 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.48.0] - 2026-06-03
+
+### Summary
+
+Periods A-tier closure arc plus identity paper.  Nine sprints landed in one day:
+the original Paper 55 §5+§6 fill (which graduated the paper from first-draft to
+all-sections-substantive), eight A-tier register sub-sprints dispatched as
+parallel sub-agent batches (A2 + A5 first, A1 + A4 scoping second, A1-Matsubara
++ A6 + A7 + A8 third), and a project-identity synthesis paper.  All eight
+A-tier items closed:\ A2/A3/A4/A5/A6/A8 positive (with one substantive
+correction on A5), A1 stratified into three sub-cases (constant warp / Matsubara
+/ generic-$a(t)$ NO-GO), A1-Matsubara closed-negative (Matsubara preserves M2
+pure-Tate), A7 half-structural (M2 and M3 engage $\Q(i)$ via independent
+mechanisms).  Paper 55 grew 9 → 15 → 17 → 20 pages with substantively new
+structural content at every step.  Three sub-sprints involved no new compute
+(A4 closed-by-prior via three pre-existing theorems;\ A5 was a literature read;\
+A7 was a structural-analysis writeup);\ four were sub-day mini-sprints (A1
+scoping, A4 scoping, A7, A8);\ four were full-session diagnostics (A2, A5,
+A1-Matsubara, A6).  Plus the identity paper:\ a 10-page narrative arc from the
+packing puzzle to periods of the spectral triple, audience-tagged for readers
+who want to understand the project without learning Connes distance.  Net
+effect:\ the original A-tier register from v3.46.0 is fully closed;\ Paper 55
+is arxiv-ready pending PI metadata sign-off;\ the project has a single document
+("the field guide") that answers "what is GeoVac?" in one sitting.
+
+### Added
+
+- **`papers/group3_foundations/paper_55_periods_of_geovac.tex` §5 fill (M3
+  cyclotomic mixed-Tate)**:\ replaced the §5 placeholder with Theorem~5.1
+  (`thm:m3_cyclotomic_mixed_tate`) + proof sketch + arithmetic stratification
+  table + five-table witness panel (un-restricted $D(s)$, $\chi_{-4}$
+  vertex-restricted, Sommerfeld $D_p$, $S_{\min}$ at 200 dps, depth-$k$ tower)
+  + Proposition~5.3 (`prop:vertex_parity_descent`) identifying vertex-parity-as-$\chi_{-4}$
+  as the literal Deligne--Glanois Galois descent from level 4 to level 2.
+- **Paper 55 §6 fill (joint engagement)**:\ replaced the §6 outline with
+  role-disjointness statement + Tate-weight bookkeeping
+  (eqs.~\ref{eq:obs_factorise}--\ref{eq:depth_subadditive}) + three canonical
+  examples (Paper 2 K-formula additive joint, Paper 50 F-theorem multiplicative
+  joint with dual-basis projection, Paper 38 propinquity rate pure-M1).
+- **Paper 55 §4 (M2) upgrade by Sprint A5**:\ explicit F--M Theorem 6.2
+  affine-complement structure $\mathcal{V}_n^{F\text{-}M}(\lambda)$ extracted;
+  GeoVac static specialisation $\{1\} \times \{0\}^{2n}$ as closed immersion;
+  new Remark `rem:m2_specialisation` with Grothendieck-class formula and the
+  flagged M2-M3 cyclotomic level-4 coincidence (later sharpened by A8 + A7).
+- **Paper 55 §4 Remark `rem:m2_specialisation` further refinement by Sprint A8**:
+  explicit closed form $[Z_{1,2n}] = [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$
+  (factored, palindromic, doubled-middle Tate twist) from
+  Fathizadeh--Marcolli Theorem 7.6; substituted into the GeoVac affine-complement
+  Grothendieck-class equation to give
+  $[\mathcal{V}_n^{\mathrm{GeoVac}}] = \mathbb{L}^{2n+3} - 3\mathbb{L}^{2n+2}
+  + 2\mathbb{L}^{2n+1} - \mathbb{L}^{n+2} + 3\mathbb{L}^{n+1} - 2\mathbb{L}^n$.
+  Verified symbolically at $n = 1, \ldots, 5$.
+- **Paper 55 §4 Remark Distinction paragraph by Sprint A7**:\ identifies M2's
+  $\Q(i)$ as Witt-splitting field of the standard Euclidean quadratic form
+  (Gal acts trivially on M2 outputs) and M3's $\Q(i) = \Q(\zeta_4)$ as
+  cyclotomic conductor of $\chi_{-4}$ (Gal acts non-trivially via
+  Deligne--Glanois descent).  Two structurally independent mechanisms;\ no
+  shared Tannakian symmetry.
+- **Paper 55 §5.5 (Sprint A6 cross-manifold extension to $\sfive$)**:\ new
+  subsection `subsec:m3_s5` with Theorem~5.4 (`thm:m3_s5_parity`),
+  Theorem~5.5 (`thm:m3_s5_chi4`), and Corollary~5.6
+  (`cor:m3_s5_cyclotomic`).  Explicit $\sfive$ Dirac Dirichlet
+  $D^{(\sfive)}(s) = (1/3)Z(s-4) - (5/6)Z(s-2) + (3/16)Z(s)$ (three-term, vs
+  $\sthree$'s two-term);\ $\chi_{-4}$ identity bit-exact at $s \in \{6, \ldots, 10\}$.
+  Level 4 sufficient (no escalation to level 8).
+- **Paper 55 §7.2 inhomogeneous extension closure by Sprint A1 scoping + Sprint
+  A1-Matsubara**:\ three-sub-case stratification (constant warp / Matsubara
+  / generic) replaces the v3.46.0 placeholder.  Matsubara closure-in-the-negative
+  + new Proposition `prop:thermal_pure_tate` with explicit closed forms
+  $a_k^{\rm 4D,scalar}(\beta) = 2\pi^2\beta/k!$ and
+  Dirac $a_0 = 4\pi^2\beta, a_1 = -2\pi^2\beta, a_k = 0$ for $k \ge 2$.
+- **Paper 55 §7.3 by Sprint A2**:\ Proposition `prop:s5_pure_tate` with
+  explicit $\sfive$ scalar / Dirac SD closed forms;\ dimension-parity
+  sharpening (S^3 $\to$ even-weight $\bigoplus \pi^{2k}\Q$;\ S^5 $\to$ single
+  odd-weight slice $\pi^3 \Q$).
+- **Paper 55 §7.4 by Sprint A6**:\ structural-closure note;\ empirical
+  $S_{\min}^{(\sfive)}$ PSLQ irreducibility deferred 2--3 weeks.
+- **Paper 55 §7.5 by Sprint A4**:\ closed-by-prior via $\eta$-trivialization
+  theorem + AC-factorization theorem + Sprint Yukawa-PSLQ.  AC-extension SD
+  coefficients factor as (outer pure-Tate) $\times$ (inner Dirichlet);\ inner
+  ring escapes pure-Tate via Yukawa Class 1 calibration;\ inner-factor
+  content lives in Paper 18 §IV.6 sixth tier.
+- **Paper 55 §7.6 by Sprint A7**:\ new open Q5' subsection on possible deeper
+  M2/M3 motivic Galois unification (multi-year research project).
+- **`papers/synthesis/geovac_field_guide.tex` (new, 10 pages)**:\ project
+  identity statement.  Narrative arc:\ packing puzzle ($\S 1$) $\to$ Fock 1935
+  ($\S 2$) $\to$ natural-geometry hierarchy ($\S 3$) $\to$ rotation to spectral
+  triple ($\S 4$) $\to$ periods classification ($\S 5$) $\to$ forced/free seam
+  ($\S 6$) $\to$ corpus map ($\S 7$) $\to$ open questions ($\S 8$) $\to$
+  reader's map ($\S 9$) $\to$ conclusion ($\S 10$).  Audience:\ readers who
+  want to understand the project without first learning Connes distance.
+  One-sentence reading explicit in abstract and conclusion.
+- **Sub-agent canonical memos (8 new)**:\
+  `debug/sprint_a2_s5_mixed_tate_memo.md`,
+  `debug/sprint_a5_fm_full_read_memo.md`,
+  `debug/sprint_a1_scoping_memo.md`,
+  `debug/sprint_a4_scoping_memo.md`,
+  `debug/sprint_a1_matsubara_memo.md`,
+  `debug/sprint_a6_m3_s5_memo.md`,
+  `debug/sprint_a7_m2_m3_cyclotomic_memo.md`,
+  `debug/sprint_a8_grothendieck_class_memo.md`.
+- **Driver scripts**:\ `debug/sprint_a2_s5_sd_coefficients.py`,
+  `debug/sprint_a6_m3_s5_derivation.py`.
+- **Paper 55 bibliography**:\ added `loutey_paper35` bibitem (needed for the
+  Matsubara reference in §7.2).
+- **CLAUDE.md §1 version bump**:\ v3.47.0 $\to$ v3.48.0.
+- **CLAUDE.md §6 synthesis-folder inventory**:\ added field-guide row.
+
+### Changed
+
+- **`debug/followon_register.md`**:\ A1, A2, A3 (already closed), A4, A5, A6,
+  A7, A8, and A1-Matsubara all marked closed with explicit verdict + memo
+  links.  Three new register items added:\ A6-followon ($S_{\min}^{(\sfive)}$
+  PSLQ irreducibility, 2--3 weeks), A.M2-M3-unification (multi-year research
+  project from A7), and the original A1-Matsubara entry (now also closed).
+  Register reorganised so the closed items dominate Section~A and only
+  multi-week-or-multi-year items remain genuinely open.
+- **Paper 55 page count**:\ 9 pages (v3.46.0 first draft) $\to$ 15 pages
+  (Paper 55 §5+§6 fill, three-pass clean) $\to$ 17 pages (A2 + A5 closures,
+  three-pass clean) $\to$ 17 pages (A1 + A4 scoping, paragraph drop-ins,
+  three-pass clean) $\to$ 20 pages (A1-Matsubara + A6 + A7 + A8 with new
+  §5.5 subsection + Q5' open question, three-pass clean).  Bibliography
+  unchanged except for the Paper 35 bibitem addition.
+- **CLAUDE.md §2 entries for the day's work**:\ five over-long bullets that
+  were added inline during the session (violating the §13.11 ≤ 30-word
+  discipline) have been consolidated into two short entries pointing to this
+  CHANGELOG entry.  This is the technical-debt cleanup §13.11 prescribes for
+  multi-thousand-word §2 entries.
+- **CLAUDE.md §6 Group 3 Paper 55 inventory entry**:\ rewritten to reflect
+  the v3 paper state including all eight A-tier closures (§4 + §5 + §5.5 +
+  §6 + §7.2 + §7.3 + §7.4 + §7.5 + §7.6).
+
+### Closed
+
+- **Sprint Paper 55 §5+§6 fill (2026-06-03)**:\ M3 Theorem + Galois descent
+  Proposition + joint engagement section drafted from existing sub-sprint
+  memos (M1, M2, M3 from v3.46.0).  Paper graduates from first-draft to
+  all-sections-substantive.
+- **Sprint A2 ($\sfive$ Bargmann-Segal mixed-Tate analog, 2026-06-03)**:
+  POSITIVE.  Dirac D² three-term exact;\ scalar infinite closed form with
+  single mid-series zero at $k = 6$.  Substantive new structural finding:
+  dimension parity controls Tate-weight slice (S³ even-weight $\oplus
+  \pi^{2k}\Q$;\ S⁵ single odd-weight slice $\pi^3 \Q$).
+- **Sprint A5 (F-M full paper read, 2026-06-03)**:\ POSITIVE with correction.
+  F-M Theorem 6.2 affine complement extracted;\ GeoVac static is closed
+  immersion to $\{1\} \times \{0\}^{2n}$;\ the $(\lambda, \varepsilon)$-fiber
+  collapses but the $u$-coordinate $(2n + 3)$-dim mixed-Tate variety is
+  genuine.  Side flag of M2-M3 cyclotomic level-4 coincidence opened (later
+  closed by A7 as HALF-STRUCTURAL).
+- **Sprint A1 scoping (Inhomogeneous R-W extension, 2026-06-03)**:\ STRATIFIED.
+  Constant-warp sub-case closed by Paper 51 G1 trivial corollary.  Generic
+  continuum $a(t)$ NO-GO at discrete-substrate level (tied to multi-month
+  G4-3 program).  Thermal-time compactification on $\sthree \times S^1_\beta$
+  identified as a new sprint-scale item (later closed by A1-Matsubara).
+  Original A1 dissolved.
+- **Sprint A4 scoping (Inner-factor Yukawa Dirichlet ring, 2026-06-03)**:
+  CLOSED-BY-PRIOR via Paper 18 §IV.6 $\eta$-trivialization theorem +
+  AC-factorization theorem + Sprint Yukawa-PSLQ empirical sweep.  No new
+  sub-mechanism required;\ inner-factor content lives in Paper 18 §IV.6
+  sixth tier, categorically disjoint from M1/M2/M3.
+- **Sprint A1-Matsubara (Thermal-time M2, 2026-06-03)**:\ NEGATIVE-clean.
+  Temporal compactification multiplies SD coefficients by Tate-weight-0
+  rational scaling factor $\beta$ and changes no other structural feature.
+  Pure-Tate ring of Paper 55 §4 preserved verbatim.  Mechanism:\ $m \ne 0$
+  windings of $K_{S^1_\beta}(t)$ exponentially suppressed in small-$t$ SD
+  asymptotic;\ Matsubara mode sum lives in orthogonal $t \to \infty$ regime
+  reached only via Jacobi $\vartheta_3$ inversion.  Stefan-Boltzmann
+  $\pi^2/90$ is structurally distinct (M1$\times$M2 Mellin-at-integer-$s$
+  extraction, not SD asymptotic).
+- **Sprint A6 (M3-on-$\sfive$ cyclotomic-mixed-Tate refinement, 2026-06-03)**:
+  POSITIVE.  Cyclotomic-mixed-Tate-at-level-$\le 4$ classification transfers
+  from $\sthree$ to $\sfive$ verbatim.  Three-term Dirichlet polynomial vs
+  $\sthree$'s two-term;\ $\chi_{-4}$ identity bit-exact at $s \in \{6, \ldots, 10\}$;\
+  level 4 sufficient (shifts $5/4, 7/4$ reduce to $1/4, 3/4$ via
+  $\Q$-rational Hurwitz corrections).
+- **Sprint A7 (M2-M3 cyclotomic level-4 coincidence, 2026-06-03)**:
+  HALF-STRUCTURAL.  M2's $\Q(i)$ is the Witt-splitting field of the standard
+  Euclidean quadratic form (Gal acts trivially);\ M3's $\Q(i) = \Q(\zeta_4)$
+  is the cyclotomic conductor of $\chi_{-4}$ (Gal acts non-trivially via
+  Deligne-Glanois descent).  Both trace to dimension-3 parity of $\sthree$
+  via independent mechanisms;\ no shared Tannakian symmetry exists in the
+  published periods program.  Q5' multi-year research project opened.
+- **Sprint A8 (F-M general-$n$ Grothendieck class, 2026-06-03)**:\ POSITIVE.
+  Closed form $[Z_{1, 2n}] = [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$
+  retrieved from F-M Theorem 7.6;\ structural reading is two maximal isotropic
+  subspaces over $\Q(i)$ as the source of the doubled middle Tate twist.
+  Substituted into Sprint A5's GeoVac Grothendieck-class equation to give
+  fully explicit polynomial.
+- **A-tier register cluster (umbrella, 2026-06-03)**:\ the eight register
+  items A1, A2, A3 (already closed in v3.46.0), A4, A5, A6, A7, A8 plus the
+  new A1-Matsubara are all closed in this version.  Two new sprint-scale
+  items remain queued (A6-followon $S_{\min}^{(\sfive)}$ PSLQ;\ Q5'
+  M2/M3 motivic Galois unification as multi-year project).
+- **Identity paper (2026-06-03)**:\ project synthesis paper drafted as
+  `papers/synthesis/geovac_field_guide.tex`.  Audience:\ readers who want to
+  understand the project without learning the technical machinery.
+  Provides a reader's map distinguishing seven reader profiles (NCG/math.OA,
+  periods, AMO physicist, gauge/SM physicist, gravity, QC, chemist) and the
+  appropriate entry papers for each.
+
+### Honest scope
+
+- **Paper 55 §5+§6 fill is at expository grade**, not at theorem-grade beyond
+  what the underlying sub-sprint memos (Sprint M1, M2, M3 from v3.46.0)
+  already established.  The §5 Theorem `thm:m3_cyclotomic_mixed_tate` and
+  Proposition `prop:vertex_parity_descent` are statements of results from
+  Deligne 2010 + Glanois 2015 applied to the GeoVac Camporesi--Higuchi
+  spectrum via Paper 28 closed forms;\ the proof sketches cite the relevant
+  inputs but do not re-derive them.  This matches the v3.46.0 sprint memos'
+  scope.
+- **Sprint A5 verdict is POSITIVE with one substantive correction** to the
+  expected reading.  The v3.45.3 "trivial complement (a point)" framing was
+  half-right:\ the parametric $(\lambda, \varepsilon)$-fiber collapses to a
+  point, but the $u$-coordinate complement $\mathcal{V}_n^{\mathrm{GeoVac}}$
+  remains a genuine $(2n + 3)$-dim mixed-Tate variety.  The corrected reading
+  is now in Paper 55 §4's proof sketch.
+- **Sprint A2 dimension-parity sharpening is substantive new structural
+  content**:\ the parity of the substrate dimension controls which Tate-weight
+  slice the M2 sub-ring sits in.  This was not previously stated in the
+  corpus;\ it is now explicit in Paper 55 §7.3 Proposition `prop:s5_pure_tate`
+  and follow-up paragraph.
+- **Sprint A1-Matsubara verdict is NEGATIVE-clean** for the structurally
+  interesting question (does Matsubara inject $\zeta(\mathrm{odd})$?).  The
+  negative answer comes with an explicit closed form and a clear mechanism
+  (small-$t$ SD asymptotic vs $t \to \infty$ Matsubara mode sum are
+  orthogonal regimes), so the negative is informative, not a sprint failure.
+- **Sprint A6 transfer is structural** ($\sfive$ M3 inherits cyclotomic
+  mixed-Tate at level $\le 4$ verbatim from $\sthree$).  The empirical PSLQ
+  irreducibility verification of $S_{\min}^{(\sfive)}$ at 200 dps remains
+  deferred (named as A6-followon, 2--3 weeks);\ the structural classification
+  is closed without it.
+- **Sprint A7 verdict is HALF-STRUCTURAL**, not full-positive or full-negative.
+  The two cyclotomic-level-4 mechanisms are robustly identified as independent
+  in the published periods program;\ a deeper unification via an enriched
+  motivic Galois group of the discrete spectral triple cannot be ruled out
+  by literature scoping alone (and is named as a multi-year research project,
+  Q5').
+- **Sprint A8 verdict is POSITIVE** with the closed form being a transcription
+  + verification rather than a new derivation.  F-M Theorem 7.6 already had
+  the closed form;\ the sprint's contribution is the extraction + the explicit
+  factored form $[\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$ (which is the
+  structurally informative reading) + symbolic verification at $n = 1, \ldots, 5$
+  + substitution into the GeoVac affine-complement equation.
+- **Identity paper is at synthesis-narrative grade**, not at theorem-grade.
+  Every load-bearing claim is cross-referenced to the underlying technical
+  paper (Papers 0, 7, 14, 18, 22, 25, 28, 30, 32, 38, 40, 51, 55).  The
+  one-sentence reading is a project-level identity statement, not a theorem.
+- **Verification gates**:\
+  (i) Paper 55 compiles three-pass clean (20 pages, zero substantive
+  warnings) at the end of each sub-sprint and again after all edits applied;\
+  (ii) field guide compiles three-pass clean (10 pages);\
+  (iii) no new equations introduced into production papers without a
+  corresponding test (the new Paper 55 closed forms are sub-agent-verified
+  bit-exact via sympy in the corresponding sprint memos and driver scripts);\
+  (iv) hard-prohibitions check clean (\S 13.5):\ no fitted parameters
+  introduced, no natural geometry hierarchy changes, no negative results
+  suppressed, no removal of the "conjectural" label from Paper 2's
+  combination rule.
+- **No CLAUDE.md §3 dead-end rows added**:\ A1-Matsubara's negative is a
+  POSITIVE structural finding stated as a NEGATIVE answer to a binary
+  question (Matsubara preserves pure-Tate);\ A7's half-structural verdict is
+  a POSITIVE structural finding (the two mechanisms are independent).
+  Neither belongs in the §3 "Failed approaches" table, which is for approaches
+  that don't work, not for structural confirmations.
+- **No MEMORY.md updates**:\ sprint outcomes live in CHANGELOG.md per
+  §13.11 rule~4.  MEMORY.md is already near its 24~KB ceiling and adding
+  more index entries would not be appropriate.
+- **No `docs/validation_benchmarks.md` or `docs/topic_to_paper_lookup.md`
+  edits**:\ no new computational benchmarks or topic mappings added.
+
+### Honest scope of the broader closure
+
+The original A-tier register from v3.46.0 had eight items (A1--A8 plus
+A1-Matsubara as derived from A1).  All eight are closed in this version.
+Two new sprint-scale items have emerged as direct follow-ons (A6-followon
+2--3 weeks;\ A.M2-M3-unification multi-year);\ the broader periods program
+beyond the master Mellin engine is open structural research.  The identity
+paper acknowledges this distribution of open questions explicitly in §8.
+
+What's NOT closed by this version, and what would be the next sprint-scale
+or multi-week target:\ the $\alpha$-derivation (Paper 2 status unchanged;
+combination rule remains a numerical observation per the May~2026 audit);\
+the chemistry W1e wall (deferred per Phase 2 wrap);\ the $N_{\mathrm{gen}}
+= 3$ wall (multi-year, per Sprint Read 2, 2026-06-03);\ the cosmological
+constant fine-tuning (gravity arc, multi-month);\ the full Standard Model
+spectral triple G4b cross-manifold (NCG-framework extension required).
+These are named in CLAUDE.md §1.7 working hypotheses and in the identity
+paper §8.
+
 ## [3.47.0] - 2026-06-03
 
 ### Summary
