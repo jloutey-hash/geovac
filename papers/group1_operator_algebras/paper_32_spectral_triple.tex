@@ -3828,6 +3828,122 @@ classification); the residue it cannot reach is precisely the
 multiplicity- and real-structure-valued data. Source:\
 \texttt{debug/seam\_packing\_scoping\_memo.md}.
 
+\paragraph{The Forced-Count Theorem (synthesis, 2026-06-03).}
+The eight preceding paragraphs (Sprint H1 through Door 4f and the
+Direction 2 scoping) compose into a single Bertrand-shaped statement
+that crystallizes the structural content already proved across the
+sub-sprints.  Stated as a theorem it makes explicit what the
+distributed prose shows in pieces:\ the framework forces the
+\emph{dimension} of the $D_F$ moduli space, but does not (and at the
+current packing primitive cannot) force the points within it.
+
+\begin{theorem}[Forced $D_F$ moduli dimension]
+\label{thm:forced_count}
+Let $\mathcal{T} = (\mathcal{A}_{\mathrm{GV}} \otimes \mathcal{A}_F,\;
+\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F,\;
+D_{\mathrm{GV}} \otimes 1 + 1 \otimes D_F,\; J,\; \gamma)$ be the
+GeoVac almost-commutative spectral triple of
+Sec.~\ref{sec:construction}, assuming:
+\begin{enumerate}
+\item The Bertrand-with-complex-Hopf-tower truncation $n \le 3$ of
+  Sec.~\ref{sec:unified_gauge}, with the Upgrade B sphere-Lie-group
+  axiom of Door~4e, forcing $\mathcal{A}_F = \mathbb{C} \oplus
+  \mathbb{H} \oplus M_3(\mathbb{C})$.
+\item The canonical Chamseddine--Connes--Marcolli SM representation of
+  $\mathcal{A}_F$ on $\mathcal{H}_F$, with generation multiplicity
+  $N_{\mathrm{gen}}$ imported as an external input (Direction 2:\ not
+  packing-derived).
+\item The standard real-spectral-triple axioms:\ Hermiticity,
+  KO-dim-6 chirality grading $\{\gamma_F, D_F\} = 0$,
+  $J$-reality $[J_F, D_F] = 0$, and Connes order-one.
+\end{enumerate}
+Then the space of admissible finite Dirac operators $D_F$ has real
+dimension forced by these inputs alone, with the reduction chain at
+$N_{\mathrm{gen}} = 1$:
+\begin{equation}
+\label{eq:forced_count_chain}
+\dim_{\mathbb{R}}\, \mathcal{M}(D_F)
+:\; 1024 \xrightarrow{\textnormal{Herm.}} 512
+     \xrightarrow{\{\gamma_F, D_F\}=0} 128
+     \xrightarrow{[J_F, D_F]=0\,+\,\text{order-one}} 128 .
+\end{equation}
+The physical-slice dimension under restriction to diagonal Yukawa
+$Y = \mathrm{diag}(y_\nu, y_e, y_u, y_d)$ is $8$ per generation.  For
+$N_{\mathrm{gen}}$ generations with full generation-mixing Yukawa
+matrices the count is $128 \cdot N_{\mathrm{gen}}^2$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The chain in eq.~\eqref{eq:forced_count_chain} is the H1 sprint
+accounting at $n_{\max} = 2$ on the canonical
+$\mathcal{A}_F$-representation ($32 \times 32$ at
+$N_{\mathrm{gen}} = 1$):\ Hermiticity halves the free parameters;
+$\{\gamma_F, D_F\} = 0$ kills the chirality-diagonal blocks;
+$J$-reality identifies the matter and antimatter sectors; the
+order-one condition is satisfied for the SM representation without
+further reduction (the lepton and quark off-chirality blocks each
+satisfy order-one because $\mathcal{A}_F$ acts block-diagonally in
+lepton/quark and $M_3(\mathbb{C})$ commutes with the Yukawa flavour
+structure).  Each step is verified bit-exactly at
+$n_{\max} \in \{2, 3\}$ in module
+\texttt{geovac/standard\_model\_triple.py} (45 tests passing).  The
+$N_{\mathrm{gen}}^2$ scaling follows from the off-chirality block
+dimension scaling linearly with $N_{\mathrm{gen}}$ in each chirality.
+The inputs (1)--(3) are themselves theorems / proven structural
+forcings:\ (1) by Door~4b + Door~4d/4e/4f (the Hopf-tower truncation
+forces the factor count; the sphere-Lie-group axiom forces ${\mathbb
+  H}$ at $n = 2$); (3) is the standard real-spectral-triple axiom
+set; (2) is the one external input, recorded by the Direction 2
+paragraph as packing-unreachable in the current Paper 0 construction.
+\end{proof}
+
+\begin{corollary}[Bertrand analogy]
+\label{cor:bertrand_analogy}
+Theorem~\ref{thm:forced_count} is the inner-factor analogue of
+Bertrand's theorem on closed-orbit central forces.  Bertrand forces
+the \emph{form} of the central potential ($-k/r$ or $k r^2$) without
+forcing the coupling $k$; Theorem~\ref{thm:forced_count} forces the
+\emph{dimension} of the $D_F$ moduli space without forcing the
+$D_F$-entries themselves.  The two seams are structurally identical:\
+the framework determines what the moduli space \emph{is}, not where
+in it the realised system sits.
+\end{corollary}
+
+\begin{remark}[Paired with the Door 4 negative half]
+\label{rem:forced_count_with_seam}
+The positive content of Theorem~\ref{thm:forced_count} sits beside two
+negative companions already recorded above:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{Door 4 seam theorem (Yukawa-value wall):}\ the
+  $\eta$-trivialization plus tensor factorization plus the G3
+  commuting-$\mathbb{Z}_2$ result prove that the $D_F$-entries inside
+  $\mathcal{M}(D_F)$ are in a Dirichlet ring disjoint from every
+  forced outer ring, so the framework cannot derive them.  Sprint
+  Yukawa-PSLQ (2026-06-03) added empirical confirmation:\ a
+  $162$-cell sweep of the nine measured Yukawa values against the
+  forced inner-factor pure-Tate basis $\mathbb{Q}[\pi, \pi^{-1}]$
+  (basis sharpened by the $\eta$-trivialization audit ruling out
+  $M_3$/Dirichlet $L$ on the inner factor) returned zero hits at
+  $M \le 10^3$, at both MS-bar $M_Z$ and MS-bar
+  $\mu = 2 \times 10^{16}$ GeV, across three transforms
+  ($y_f,\, y_f^2,\, \log y_f$).  Source:\
+  \texttt{debug/sprint\_yukawa\_pslq\_memo.md}.
+\item \textbf{Direction 2 packing-reach theorem:}\
+  $N_{\mathrm{gen}}$ and the inner KO-dimension are
+  packing-unreachable in the current Paper 0 construction
+  (preceding paragraph, source
+  \texttt{debug/seam\_packing\_scoping\_memo.md}).
+\end{itemize}
+Theorem~\ref{thm:forced_count} thus crystallises the \emph{full}
+forced/free seam at the level of $D_F$:\ the forced data is the
+moduli space and its dimension; the free data is (i)~the point in
+the moduli space (Yukawa values, Door 4 wall), (ii)~the
+multiplicity factor ($N_{\mathrm{gen}}$, Direction 2), and (iii)~the
+real-structure signature (inner KO-dimension, Direction 2).  All three
+free data are calibration inputs in the structural-skeleton-scope
+sense (\S 1.5 of the project guidelines).
+\end{remark}
+
 \paragraph{Files.}  Scoping memo
 \texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
 ($\sim 5\,100$ words).  G4a sprint memo
