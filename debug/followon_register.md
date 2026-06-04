@@ -12,27 +12,21 @@ including the originating sprint reference for context.
 
 ## A. Substantive research sprints (PI decision required)
 
-### A9. Paper 34 — 22 of 28 named projections still without numerical tests
-**Source:** Verification cleanup workflow `wf_39fc232e-906` (2026-06-04;
-`tests/test_paper34_projection_spot_checks.py` covered 6 of 28).
-**Covered:** §III.2 (Hopf bundle), §III.6 (spectral action a_0/a_1/a_2 on S³),
-§III.7 (Camporesi–Higuchi spinor), §III.8 (Wigner 3j / Gaunt),
-§III.14 (rest-mass / KG-S³×ℝ Casimir), §III.27 (Wick rotation σ_{2π}).
-**Not yet covered (22):** §III.1 Fock conformal (combinatorial-only via
-`test_fock_projection.py`); §III.3 Bargmann–Segal; §III.4 Stereographic;
-§III.5 Sturmian (Bethe-log calibration tier); §III.9 Wigner D rotation;
-§III.10 Wilson plaquette (partial via `geovac/su2_wilson_gauge.py` tests);
-§III.11 Vector-photon promotion 1/(4π) per loop; §III.12 Mol-frame
-hyperspherical separation; §III.13 Drake–Swainson asymptotic subtraction;
-§III.15 Observation / temporal-window; §III.16 Two-body Dirac / Breit;
-§III.17 Foldy–Friar (nuclear charge density); §III.18 Zemach
-(nuclear magnetization density); §III.19 Tensor multipole;
-§III.20 Phillips–Kleinman / core-valence orthogonality;
-§III.21 Multipole / Gaunt termination; §III.22 Bipolar harmonic /
-Drake combining; §III.23 Symmetry / Young tableau; §III.24 Adiabatic /
-Born–Oppenheimer; §III.25 Coupled-channel; §III.26 Gauge choice
-(Coulomb / Lorenz / Feynman); §III.28 Apparatus identity.
-**Estimated effort:** ~3–4 days per batch of ~8 projections (≈ 3 batches total).
+### ~~A9.~~ ~~Paper 34 — 22 of 28 named projections still without numerical tests~~ — **CLOSED 2026-06-04 (A9 batches 1+2+3)**
+All 28 named Paper 34 §III projections now have numerical spot-checks
+across four files (`tests/test_paper34_projection_spot_checks.py` for 6,
+`..._batch1.py` for 8 load-bearing, `..._batch2.py` for 7
+gauge/symmetry/separation, `..._batch3.py` for 7 remaining). 108 tests
+total, all passing. §13.4a equation-verification coverage on Paper 34 is
+complete. **Side discovery:** Paper 34 §III.16 had a transcription error
+in the $R^0_\text{BP}(1s,2s;1s,2s)$ closed form (paper said
+$-4\log 2 - 19/9 + 9\log 3/2 \approx 0.060$, correct value is the pure
+rational $4/81 \approx 0.0494$ matching the production module's existing
+regression test). Paper 34 corrected; autopsy memo
+`debug/ps_1s2s_autopsy_track4_memo.md` line 81 corrected with provenance
+note. Also surfaced CLAUDE.md §7 drift: claimed `geovac/constants.py` does
+not exist (KAPPA_SCALAR lives at `geovac/graph_qed_propagator.py:103`);
+filed as C4 below.
 
 ### A10. Paper 40 §sec:open trio — log-power ansatz, rank-3 SU(4), compact symmetric spaces G/K
 **Source:** Verification cleanup math.OA drift scan (2026-06-04); Paper 40
@@ -300,28 +294,54 @@ arc (Papers 38–49) is in citation distance.
 
 ## C. Mechanical / technical follow-ons (PM-actionable, low-substantive)
 
-### C1. Paper 14 figure regeneration
-**Source:** v3.45.3 corpus cleanup. Replaced 2 missing-PNG figure includes
-with `\fbox` TODO placeholders.
-**Action:** run `benchmarks/qubit_encoding/pauli_comparison.py`, capture the
-two output PNGs (`pauli_scaling.png`, `eri_density.png`), and place them at
-`papers/group4_quantum_computing/paper_14_figures/`. The generator currently
-outputs to `benchmarks/qubit_encoding/` so a path fix or manual copy is
-required. After placement, replace the `\fbox` placeholders in Paper 14
-with the original `\includegraphics` lines.
-**Estimated effort:** 30 min (assuming the generator script's dependencies
-work in the current environment).
-**Blocker risk:** uses `openfermion` and other packages — may need a venv
-setup if those aren't currently installed.
+### ~~C1.~~ ~~Paper 14 figure regeneration~~ — **CLOSED 2026-06-04**
+Created `benchmarks/qubit_encoding/generate_paper14_figures.py` (figure
+generator dedicated to Paper 14, using canonical Table I/II data so the
+figures match the paper exactly). Generates `pauli_scaling.png` and
+`eri_density.png` directly into `papers/group4_quantum_computing/paper_14_figures/`.
+Extracted GeoVac scaling exponent 3.147 matches Paper 14's claimed
+$\alpha = 3.15$. Paper 14 `\fbox` placeholders replaced with
+`\includegraphics`. Three-pass clean compile, 21 pages.
 
-### C2. Paper 14 §sec:ft_gaussian BLISS-THC comparison table
-**Source:** Phase 3 physics audit (v3.45.2; memo
-`debug/lit_survey_phase3_physics_memo.md`). Caesura et al. 2025 cite added
-but full BLISS-THC fault-tolerant comparison table not built.
-**Action:** populate a comparison row in §sec:ft_gaussian using the
-Caesura et al. resource estimates vs GeoVac composed numbers from Paper 20.
-**Estimated effort:** 1–2 days (requires reading Caesura et al. carefully
-for the right comparison metrics).
+### C3. Paper 14 missing bibitems + section labels (NEW from C1 compile audit)
+**Source:** Closing C1 surfaced 8 cite keys used in Paper 14 but missing
+from the inline `\thebibliography` block: `reiher2017`, `BJL`,
+`ChildsBerry`, `Szmytkowski2007`, `MartinezYRomero2004`, `Dyall`,
+`BreitPauli`, `Sunaga2025`. Plus 3 missing section labels (cross-refs to
+sections that don't exist in the current Paper 14): `sec:pk_partitioning`,
+`sec:frozen_core`, `sec:paper22_spinor`. The missing `sec:*` labels
+suggest text was migrated out without updating refs; redirect to the
+correct papers (likely Paper 22 for sec:paper22_spinor; Paper 17 / 19 for
+PK and frozen core) or remove the refs.
+**Estimated effort:** 2-4 hours. Requires looking up each bibitem in
+existing project corpus (most are likely already cited in other papers).
+
+### C4. CLAUDE.md §7 — geovac.constants module doesn't exist (NEW from A9 batch 1)
+**Source:** A9 batch 1 test ModuleNotFoundError. CLAUDE.md §7 Code
+Architecture table lists `Physical constants | geovac/constants.py |
+HBAR, C, ALPHA, etc.` but the file does not exist. `KAPPA_SCALAR` lives
+at `geovac/graph_qed_propagator.py:103`.
+**Decision needed:** (a) create `geovac/constants.py` as a true central
+constants module and migrate `KAPPA_SCALAR` and others; (b) update
+CLAUDE.md §7 to reflect reality (drop the row or point to the correct
+module). Per CLAUDE.md §13.5 access control, PM may edit §7 directly
+to update module paths.
+**Estimated effort:** 15 minutes for (b); 1-2 hours for (a) plus
+downstream import-path updates.
+
+### ~~C2.~~ ~~Paper 14 §sec:ft_gaussian BLISS-THC comparison table~~ — **CLOSED 2026-06-04 (as paragraph not table)**
+Added a contextualizing paragraph ("BLISS-THC at the production-scale
+ceiling") to Paper 14 §sec:ft\_gaussian after the "Computed 1-norm
+comparison" paragraph. Pulled specific numbers from Caesura et al. 2025
+(arXiv:2501.06165) via PDF extraction: P450 (63e/58o, Q=116) BLISS-THC at
+999 memory qubits, λ ≈ 133 Ha, 1.71×10⁹ Toffolis; prior-art THC at
+λ = 388.9 Ha, 7.79×10⁹ Toffolis; ~233× total speedup with breakdown
+(25× AV + 8× BLISS + 1.1× circuit). Framed honestly per CLAUDE.md §1.5:
+the GeoVac C₂H₆ entry at Q=160 is the framework's library ceiling but
+the metrics aren't directly comparable (Pauli/QWC for VQE vs Toffoli/λ
+for FT qubitization-LCU). Paper 14 compiles 22 pages, zero undefined
+references. A literal head-to-head table is structurally impossible
+because the molecule sets and circuit-family targets don't overlap.
 
 ---
 

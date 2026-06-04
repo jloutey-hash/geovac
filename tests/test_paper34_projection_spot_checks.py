@@ -13,7 +13,14 @@ projection's stated transcendental signature and/or its load-bearing
 identity. Each test references a specific Paper 34 §III subsection and is
 named `test_paper34_<sec>_<descriptor>` for traceability.
 
-Projections covered (6 of 28):
+Projections covered HERE (6 of 28). The remaining 22 are covered by:
+  test_paper34_projection_spot_checks_batch1.py (§III.1, 5, 11, 13, 16, 17, 18, 19) -- 8 load-bearing rows
+  test_paper34_projection_spot_checks_batch2.py (§III.9, 10, 20, 21, 22, 23, 26) -- 7 gauge/symmetry/separation rows
+  test_paper34_projection_spot_checks_batch3.py (§III.3, 4, 12, 15, 24, 25, 28) -- 7 remaining rows
+Together with this file, the four spot-check files close §13.4a equation-
+verification coverage on all 28 named Paper 34 projections.
+
+Projections covered HERE (6 of 28):
   §III.2  Hopf bundle (sec:proj_hopf)             — Vol(S^2)/4 = pi (M1)
   §III.6  Spectral action (sec:proj_spectral_action)
                                                   — a_0 = a_1 = sqrt(pi),
@@ -28,7 +35,7 @@ Projections covered (6 of 28):
   §III.27 Wick rotation (sec:proj_wick_rotation)  — sigma_{2pi}(O) = O at
                                                     BW canonical (beta=2pi)
 
-Projections NOT covered here (22 of 28), for the next register entry:
+Projections covered by batch 1 / 2 / 3 (22 of 28; A9 closed 2026-06-04):
   §III.1  Fock conformal (sec:proj_fock) -- covered combinatorially by
           tests/test_fock_projection.py, tests/test_fock_laplacian.py
   §III.3  Bargmann-Segal (sec:proj_bargmann) -- pi-free, requires S^5 lattice

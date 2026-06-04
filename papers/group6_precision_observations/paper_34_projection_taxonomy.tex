@@ -645,9 +645,14 @@ module \texttt{geovac.breit\_integrals} (26 tests; exact
 Fraction/sympy arithmetic).  Closed-form matrix elements at $Z=1$,
 $k=0$ for the $(1s,1s)$, $(1s,2s)$, $(2s,2s)$ orbital pairs that
 participate in the Ps 1S--2S level structure live in
-$\mathbb{Q}[\log 2, \log 3]$ (Paper~18 embedding-log content;
+$\mathbb{Q}[\log 2, \log 3]$ (Paper~18 embedding-log content) for
+the diagonal orbital pairs and in $\mathbb{Q}$ for the
+$(1s,2s;1s,2s)$ exchange,
 \emph{e.g.\,} $R^0_\text{BP}(1s,1s;1s,1s) = -5 + 8\log 2$,
-$R^0_\text{BP}(1s,2s;1s,2s) = -4\log 2 - 19/9 + 9\log(3)/2$).
+$R^0_\text{BP}(1s,2s;1s,2s) = 4/81$
+(production-verified by \texttt{tests/test\_breit\_integrals.py}
+and \texttt{tests/test\_paper34\_projection\_spot\_checks\_batch1.py};
+the $(1s,2s;1s,2s)$ value is a pure rational, no $\log$ content).
 Roothaan multipole termination at $L_\text{max} = 2 l_\text{max}$ is
 preserved at the equal-mass limit $\lambda_a = \lambda_b = 0.5$
 because it is angular content (Wigner-3j triangle inequality,

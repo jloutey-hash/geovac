@@ -7,6 +7,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.51.0] - 2026-06-04
+
+### Summary
+
+Outreach-polish sprint.  Five followon-register items closed in a single push, all visible-blemish or coverage-gap polish rather than new physics.  Triggered by PI question: "what's left that's not reach-out — get us in good shape for a wave of reach-outs."  Closed:\ (C1) Paper 14 `\fbox` figure placeholders, (A9 batches 1+2+3) all 28 named Paper 34 §III projections now have numerical spot-check tests, (C2) Paper 14 BLISS-THC contextualization with specific Caesura et al.\ 2025 numbers, (C3) Paper 14 missing-bibitems + missing-section-labels cleanup, (C4) CLAUDE.md §7 `geovac.constants` drift.
+
+### Added
+
+- **`benchmarks/qubit_encoding/generate_paper14_figures.py`** --- dedicated Paper 14 figure generator using canonical Table I/II data points.  Produces `papers/group4_quantum_computing/paper_14_figures/{pauli_scaling,eri_density}.png` directly into the paper directory.  Extracted GeoVac scaling exponent from table data is 3.147, matching Paper 14's claimed $\alpha = 3.15$ to three significant figures.
+- **`tests/test_paper34_projection_spot_checks_batch1.py`** --- 8 load-bearing Paper 34 §III projections covered (§III.1 Fock conformal, §III.5 Sturmian, §III.11 vector-photon $1/(4\pi)$, §III.13 Drake--Swainson, §III.16 Breit retardation, §III.17 Foldy/Friar, §III.18 Zemach, §III.19 tensor multipole).  31 tests, all PASS.
+- **`tests/test_paper34_projection_spot_checks_batch2.py`** --- 7 gauge/symmetry/separation projections covered (§III.9 Wigner D, §III.10 Wilson plaquette, §III.20 Phillips--Kleinman, §III.21 multipole/Gaunt termination, §III.22 bipolar harmonic / Drake combining, §III.23 Young tableau, §III.26 gauge choice).  22 tests, all PASS.
+- **`tests/test_paper34_projection_spot_checks_batch3.py`** --- 7 remaining projections (§III.3 Bargmann--Segal, §III.4 stereographic, §III.12 mol-frame, §III.15 observation/temporal-window, §III.24 adiabatic/BO, §III.25 coupled-channel, §III.28 apparatus identity).  11 tests, all PASS.  Together with the original `test_paper34_projection_spot_checks.py` (6 projections), this brings Paper 34 §13.4a equation-verification coverage to **28 of 28 named projections, 108 tests total**.
+- **Paper 14 §sec:ft_gaussian "BLISS-THC at the production-scale ceiling" paragraph** --- contextualizes the FTQC operating scale with specific Caesura \textit{et al.} 2025 numbers for cytochrome P450 (63e, 58o, Q=116):\ BLISS-THC at 999 memory qubits, $\lambda \approx 133$ Ha, $1.71 \times 10^9$ Toffolis vs prior-art THC at $\lambda = 388.9$ Ha, $7.79 \times 10^9$ Toffolis; ${\sim}233\times$ total speedup breakdown ($25\times$ AV + $8\times$ BLISS + $1.1\times$ circuit).  Explicitly states that a literal head-to-head Pauli-vs-Toffoli comparison is structurally impossible (different molecule sets, different circuit-family targets:\ VQE Pauli/QWC vs FT qubitization-LCU 1-norm/Toffoli).
+- **Four verified bibitems in Paper 14**:\ `Dyall` (Oxford 2007 Relativistic QC textbook, cross-checked against Paper 31), `reiher2017` (PNAS 114:7555, nitrogenase QPE), `Szmytkowski2007` (J. Math. Chem. 42:397), `BreitPauli` (Bethe--Salpeter 1957).
+- **Four `[VERIFY-REF]` placeholder bibitems in Paper 14**:\ `BJL`, `ChildsBerry`, `MartinezYRomero2004`, `Sunaga2025` --- each with `% [VERIFY]` comment giving line number, citation context, and best-guess candidate for PI verification.
+
+### Changed
+
+- **Paper 14**:\ `\fbox` placeholders for `pauli_scaling.png` and `eri_density.png` replaced with `\includegraphics`; three cross-paper section refs (`sec:pk_partitioning`, `sec:frozen_core`, `sec:paper22_spinor`) converted to explicit prose (`sec:paper22_spinor` verified to exist at Paper 22 line 583); BLISS-THC contextual paragraph added.  **21 $\to$ 22 pages, three-pass clean, zero undefined citations or references.**
+- **Paper 34 §III.16**:\ closed form for $R^0_\text{BP}(1s,2s;1s,2s)$ corrected from the wrong $-4\log 2 - 19/9 + 9\log(3)/2$ (numerically $0.060$) to the pure rational $4/81 \approx 0.0494$.  Verified bit-exact by production module `geovac.breit_integrals.compute_radial` and by two independent test sites (`tests/test_breit_integrals.py:131-132` pre-existing regression and the new `test_paper34_III16_breit_R0_1s2s_1s2s` in batch 1).  Paper 34:\ 125 pages, three-pass clean (unchanged).
+- **`debug/ps_1s2s_autopsy_track4_memo.md`** (origin of the Paper 34 §III.16 transcription error):\ line 81 entry corrected; "CORRECTION 2026-06-04 (A9 batch 1)" provenance note added preserving original audit trail.
+- **CLAUDE.md §7 Code Architecture table**:\ "Physical constants" row updated to reflect actual code state (no `geovac/constants.py` module exists; constants live next to their modules:\ `C_LIGHT` in `geovac/dirac_hamiltonian.py`, `ALPHA` in `geovac/two_loop_self_energy.py`, `KAPPA_SCALAR = \text{Rational}(-1,16)$ in `geovac/graph_qed_propagator.py`).
+- **`tests/test_paper34_projection_spot_checks.py`** header rewritten to reference the three new batch files and document the 28-of-28 closure.
+- **`debug/followon_register.md`** updated:\ A9, C1, C2, C4 marked closed with strikethrough + closure date; C3 added (surfaced by C1 compile audit) then closed; A10--A14 carried as substantive-research items unchanged.
+
+### Closed
+
+- **A9** (Paper 34 §13.4a equation-verification gap, 22 of 28 projections without tests):\ closed.  28 of 28 now covered.
+- **C1** (Paper 14 `\fbox` figure placeholders):\ closed.
+- **C2** (Paper 14 §sec:ft_gaussian BLISS-THC contextualization):\ closed as paragraph rather than table per honest-scope analysis.
+- **C3** (Paper 14 missing bibitems + section labels, newly named from C1 compile audit):\ closed with caveat that 4 of the 8 bibitems are `[VERIFY-REF]` placeholders for PI sign-off before outreach.
+- **C4** (CLAUDE.md §7 `geovac.constants` drift, newly named from A9 batch 1 ModuleNotFoundError):\ closed by updating §7 to reflect actual code state.  Option of creating a central `geovac/constants.py` module deferred as a separate refactor.
+
+### Honest scope
+
+- This sprint added **no new theorems, no new structural claims, and no new physics**.  Everything closed is mechanical-polish or coverage-gap polish.
+- The Paper 34 §III.16 correction is a numerical-fact correction (right answer was always in the production code; the paper had a transcription error).  Verified bit-exact at two independent test sites.
+- The 108 spot-check tests verify Paper 34's *stated* transcendental signatures and load-bearing identities at the per-projection level; they do not constitute new derivations of the underlying physics.
+- The Caesura et al.\ 2025 numbers in the new BLISS-THC paragraph are quoted with proper attribution from the published source (arXiv:2501.06165, Table II/III/IV via `pdftotext` extraction); they are not independently re-derived.
+- Four `[VERIFY-REF]` placeholder bibitems in Paper 14 (`BJL`, `ChildsBerry`, `MartinezYRomero2004`, `Sunaga2025`) are **named open items** that PI must resolve before outreach.  Marked inline in the `.tex` source with comments giving citation context.
+- B1--B4 reach-out queue unchanged per sprint scope ("not reach-out").
+- A10--A14 substantive-research follow-ons unchanged per sprint scope (they are not polish gaps).
+
+### Tests
+
+Affected suites all PASS:\ `tests/test_paper34_projection_spot_checks*.py` 108 passed (1 slow-skipped), `tests/test_breit_integrals.py` 38 passed.  No regressions.  The Paper 34 §III.16 correction is verified by both the new spot-check test and the pre-existing Breit integrals regression test --- two independent test sites now agree.
+
+### Verification-protocol observation
+
+The Paper 34 §III.16 transcription error had been on paper since the Sprint Calc-Ps-1S2S Track 4 autopsy in May 2026 (~ one month) without detection.  It surfaced the moment the §13.4a spot-check test pattern was applied --- exactly what the discipline `memory/feedback_audit_numerical_claims.md` is for:\ when a paper says "X = closed form", run X through the production code path and check.  Cost of the test:\ five minutes.  Cost of an outreach email containing a wrong closed form:\ very high.  Recording this here so future sprints carry the lesson:\ the verification gate is structurally cheap and structurally load-bearing.
+
+### Files touched
+
+**New:**
+- `benchmarks/qubit_encoding/generate_paper14_figures.py`
+- `papers/group4_quantum_computing/paper_14_figures/{pauli_scaling,eri_density}.png`
+- `tests/test_paper34_projection_spot_checks_batch{1,2,3}.py`
+- `debug/sprint_outreach_polish_memo.md`
+
+**Modified:**
+- `papers/group4_quantum_computing/paper_14_qubit_encoding.tex`
+- `papers/group6_precision_observations/paper_34_projection_taxonomy.tex`
+- `tests/test_paper34_projection_spot_checks.py` (header only)
+- `debug/ps_1s2s_autopsy_track4_memo.md`
+- `debug/followon_register.md`
+- `CLAUDE.md` (§1 version, §2 entry, §7 constants row)
+
 ## [3.50.0] - 2026-06-04
 
 ### Summary

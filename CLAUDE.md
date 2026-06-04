@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.50.0 (June 4, 2026)
+**Version:** v3.51.0 (June 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint outreach polish (2026-06-04, v3.51.0):** C1/A9/C2/C3/C4 closed; Paper 34 §III.16 R⁰_BP(1s,2s;1s,2s) corrected to 4/81; Paper 14 22pp clean with zero undefined refs. See `debug/sprint_outreach_polish_memo.md`.
 - **Sprint verification cleanup (2026-06-04, v3.50.0):** 224 tests close §13.4a gaps for 12 named theorems across Papers 34/45/46/51/55; A9–A14 added to register; Paper 51 added to §6 inventory. See `debug/sprint_verification_cleanup_memo.md`.
 - **Sprint Q5'-scoping (2026-06-03/04, v3.49.0):** Period-ring DEFLATED ($M^{\mathrm{GV}} \subset$ MT(ℤ[i,1/2],4)); HP$_*$/Marcolli–Tabuada dg-route STRUCTURALLY DEAD; cosmic-Galois $U^*$ on Mellin-moment Hopf algebra is the viable multi-year target. See `debug/sprint_q5p_*_memo.md` (8 memos).
 - **Identity paper / field guide (2026-06-03, v3.48.0):** Drafted `papers/synthesis/geovac_field_guide.tex`, 10pp narrative arc from packing puzzle to periods of the spectral triple. See CHANGELOG v3.48.0.
@@ -741,7 +742,7 @@ Audience: anyone reading the corpus cold; new researchers wanting unified narrat
 | Graph-native CI | `geovac/casimir_ci.py` | `build_graph_native_fci()`, `build_graph_consistent_fci()`, `_build_graph_h1()` |
 | Hypergeometric Slater integrals | `geovac/hypergeometric_slater.py` | `compute_rk_float()`, `compute_rk_exact()`, exact Fraction-arithmetic R^k evaluator for arbitrary n_max |
 | DUCC downfolding | `geovac/downfolding.py` | Exact (2J-K) core potential, PK divergence root-cause analysis |
-| Physical constants | `geovac/constants.py` | `HBAR`, `C`, `ALPHA`, etc. |
+| Physical constants | scattered next to their modules | `C_LIGHT` in `geovac/dirac_hamiltonian.py`; `ALPHA` in `geovac/two_loop_self_energy.py`; `KAPPA_SCALAR = Rational(-1,16)` in `geovac/graph_qed_propagator.py`. No central `geovac/constants.py` module. `-1/16` per CLAUDE.md §8 may be used directly. |
 | Breit retarded integrals | `geovac/breit_integrals.py` | `compute_radial()`, exact Fraction/sympy r_<^k / r_>^{k+3} kernel |
 | Breit composed pipeline | `geovac/composed_qubit.py` | `build_composed_hamiltonian(spec, include_breit=True)` passthrough to relativistic builder |
 | QED vacuum polarization | `geovac/qed_vacuum_polarization.py` | `seeley_dewitt_coefficients_s3()`, `vacuum_polarization_coefficient()`, `beta_function_qed()`, `spectral_zeta_massive()`, `spectral_zeta_derivative_at_zero()`, `classify_transcendental_content()` |

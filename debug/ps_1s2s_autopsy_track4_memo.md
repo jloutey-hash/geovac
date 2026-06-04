@@ -78,10 +78,10 @@ which are **exactly** the integrals computed by `geovac.breit_integrals` (produc
 |:-------------|:-----------:|---------:|
 | $(1s,1s; 1s,1s)$ | $-5 + 8\log 2$ | $0.545177$ |
 | $(1s,1s; 2s,2s)$ | $4/81$ | $0.049383$ |
-| $(1s,2s; 1s,2s)$ | $-4\log 2 - 19/9 + 9\log 3/2$ | $0.060055$ |
+| $(1s,2s; 1s,2s)$ | $4/81$ | $0.049383$ |
 | $(2s,2s; 2s,2s)$ | $-175/256 + \log 2$ | $0.009553$ |
 
-These are exact closed-form expressions in $\mathbb{Q}[\log 2, \log 3]$ — Paper 18 *embedding-log* content (rational coefficients × $\log p$ for small primes $p$, with Mellin regularization producing the $\log$ tail of the inner integral for orbital pairs that involve negative-power singularities).
+These are exact closed-form expressions: the diagonal pairs $(1s,1s)$ and $(2s,2s)$ live in $\mathbb{Q}[\log 2]$, the $(1s,1s; 2s,2s)$ cross-diagonal and the $(1s,2s;1s,2s)$ exchange are pure rationals (no $\log$ content). The $\log p$ entries are Paper 18 *embedding-log* content (rational coefficients × $\log p$ for small primes $p$, with Mellin regularization producing the $\log$ tail of the inner integral for orbital pairs that involve negative-power singularities). **CORRECTION 2026-06-04 (A9 batch 1):** The original memo table listed $(1s,2s;1s,2s)$ as $-4\log 2 - 19/9 + 9\log 3/2$ (numerically $0.060055$); the verified production value (`tests/test_breit_integrals.py:131-132` and `tests/test_paper34_projection_spot_checks_batch1.py`) is the pure rational $4/81 \approx 0.049383$. Paper 34 §III.16 corrected to match.
 
 **§III.16 operator-level verification — three subtests:**
 

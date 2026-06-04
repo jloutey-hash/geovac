@@ -279,13 +279,8 @@ cc-pVDZ produces 23{,}189 terms at 100\% ERI density---a
 \label{sec:scaling}
 
 \begin{figure}[t]
-  % TODO: regenerate pauli_scaling.png via benchmarks/qubit_encoding/pauli_comparison.py
-  %       and place at papers/group4_quantum_computing/paper_14_figures/pauli_scaling.png
   \centering
-  \fbox{\parbox{0.85\columnwidth}{\centering\itshape Figure placeholder ---
-  regenerate \texttt{pauli\_scaling.png} via
-  \texttt{benchmarks/qubit\_encoding/pauli\_comparison.py} and place at
-  \texttt{paper\_14\_figures/}.}}
+  \includegraphics[width=0.95\columnwidth]{paper_14_figures/pauli_scaling.png}
   \caption{Pauli term count after Jordan--Wigner transformation versus
   number of qubits~$Q$.  Red squares: Gaussian basis sets (STO-3G, 6-31G,
   cc-pVDZ).  Blue circles: GeoVac lattice ($n_{\max} = 2$--$5$).  Dashed
@@ -323,12 +318,8 @@ GeoVac advantage grows with system size.
 \label{sec:eri_density}
 
 \begin{figure}[t]
-  % TODO: regenerate eri_density.png (companion to pauli_scaling.png) and place at
-  %       papers/group4_quantum_computing/paper_14_figures/eri_density.png
   \centering
-  \fbox{\parbox{0.85\columnwidth}{\centering\itshape Figure placeholder ---
-  regenerate \texttt{eri\_density.png} (companion plot to
-  Fig.~\ref{fig:pauli_scaling}) and place at \texttt{paper\_14\_figures/}.}}
+  \includegraphics[width=0.95\columnwidth]{paper_14_figures/eri_density.png}
   \caption{ERI tensor density versus number of spatial orbitals~$M$.
   Red squares: Gaussian bases (50--100\% dense).  Blue circles: GeoVac
   lattice, showing monotonic decay from 10.4\% ($M = 5$) to 1.3\%
@@ -1255,7 +1246,8 @@ at $n_{\max} = 2$.
 \caption{Composed vs.\ balanced coupled resource census at
 $n_{\max} = 2$.  Pauli counts exclude the identity term.
 Composed~$\lambda$ values are electronic-only 1-norms
-(PK classically partitioned via 1-RDM; see Sec.~\ref{sec:pk_partitioning}).
+(PK classically partitioned via 1-RDM; the partitioning machinery is
+implemented in \texttt{geovac/pk\_partitioning.py} per CLAUDE.md~\S~7).
 Balanced~$\lambda$ values include cross-center $V_{ne}$ (no PK).}
 \label{tab:balanced}
 \begin{ruledtabular}
@@ -1599,9 +1591,9 @@ reuses the exact-rational $R^k$ evaluator from
 Three single-bond hydrides, spanning $Z \in \{3, 4, 20\}$ and covering
 both first-row (LiH, BeH) and the [Ar]-frozen-core third row (CaH).
 BeH is constructed as a one-bond reduction of BeH$_2$; CaH is the
-Ca analog of BeH with the third-row frozen-core decomposition of
-\S\ref{sec:frozen_core} (equivalently, the v2.2.0 Z=20 entry in the
-atomic classifier). All three specs enumerate Dirac labels directly
+Ca analog of BeH with the third-row frozen-core decomposition
+implemented in \texttt{geovac/neon\_core.py} (extended to [Ar]
+in v2.2.0; equivalently, the Z=20 entry in the atomic classifier). All three specs enumerate Dirac labels directly
 rather than spin-doubling a spatial-orbital basis; the resulting
 qubit count $Q$ coincides with the scalar qubit count by construction
 because $2(l_{\max}+1)^2$ Dirac labels at shell $n$ equal
@@ -1700,7 +1692,8 @@ reduction~\cite{Dyall} in its pre-recoupled ``separable'' form,
 \]
 where $X_k$ is the full-Gaunt $jj$-coupled angular coefficient
 (parity $l_a + l_c + k$ even, $j$-triangle, and the two 3j bottom-row
-constraints; see also \S\ref{sec:paper22_spinor}), and $R^k$ is the
+constraints; see also Paper~22 \S~5 ``Restatement in the spinor basis''),
+and $R^k$ is the
 scalar radial integral evaluated by the same exact-rational
 \texttt{hypergeometric\_slater.py} evaluator used by the spinless
 builder. The explicit 6j symbol from Dyall's \emph{coupled} form
@@ -1795,8 +1788,8 @@ spin-spin and spin-other-orbit terms, which is Tier 3+ work.
 The potential-independent angular sparsity theorem of Paper~22 extends
 verbatim to the $jj$-coupled spinor basis, with the ERI density
 replaced by the spinor analog $d_{\mathrm{spinor}}(l_{\max})$ of
-Paper~22's scalar density $d(l_{\max})$. See \S\ref{sec:paper22_spinor}
-(a new section of Paper~22) for the full table in both conventions.
+Paper~22's scalar density $d(l_{\max})$. See Paper~22 \S~5
+``Restatement in the spinor basis'' for the full table in both conventions.
 Briefly: $d_{\mathrm{spinor}} \leq d_{\mathrm{scalar}}$ at every
 $l_{\max}$, with ratio $0.25$ at $l_{\max}=0$ (pure spin dilution)
 climbing to $0.92$ at $l_{\max}=5$; the sparsity \emph{exponent}
@@ -2321,6 +2314,38 @@ the GeoVac lattice has $6.8\times$ lower 1-norm than Gaussian
 cc-pVTZ ($\lambda = 78.4$ vs.\ $530.5$~Ha), demonstrating that the
 1-norm advantage grows with basis size for single-center systems.
 
+\paragraph{BLISS-THC at the production-scale ceiling.}
+For context on the FTQC operating scale, Caesura
+\textit{et al.}~\cite{caesura2025} report the current best-of-class
+BLISS-THC factorization for cytochrome P450 in a (63e, 58o) active
+space ($Q = 116$ spin-orbitals): 999~memory qubits,
+$\lambda_{\mathrm{BLISS\text{-}THC}} \approx 133$~Ha,
+and $1.71 \times 10^9$ Toffoli gates after circuit improvements;
+the prior-art THC of Goings \textit{et al.}~\cite{lee2021}
+reported $\lambda_{\mathrm{THC}} = 388.9$~Ha and
+$7.79 \times 10^9$ Toffolis at the same active space.  Caesura's
+$\sim$233$\times$ runtime speedup over baseline THC combines a
+factor of $\sim$25 from Active Volume photonic compilation, a
+factor of $\sim$8 from BLISS within THC, and $\sim$1.1 from
+block-encoding circuit improvements; the $\lambda$ improvement
+alone is roughly $3\times$, bringing the BLISS-THC 1-norm to within
+a factor of 2 of the symmetry-shifted lower bound 69.3~Ha for
+P450~\cite{caesura2025}.  These resource estimates are reported
+for a single P450 active space, the smallest molecule in the
+Caesura benchmark; the GeoVac multi-center library
+(Tracks~CU--CX) includes ethane C$_2$H$_6$ at $Q = 160$ with
+$1{,}777$~Pauli terms under the composed encoding (CLAUDE.md~\S2),
+but Pauli term count and 1-norm/Toffoli count are not directly
+comparable metrics --- Pauli count drives VQE measurement overhead
+and Trotterization step depth, while the BLISS-THC pipeline
+optimizes the qubitization 1-norm and Toffoli budget through a
+non-Pauli (block-encoded LCU) circuit family.  The two operating
+points target different algorithmic regimes; the appropriate
+head-to-head comparison would require running BLISS-THC on a
+GeoVac-scale molecule (LiH, H$_2$O), which is below the published
+benchmark range, or running GeoVac at P450 scale, which is above
+the current library ceiling.
+
 \subsection{Limitations}
 \label{sec:limitations}
 
@@ -2672,6 +2697,74 @@ J.~Loutey,
 ``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian
 Integrals and Coupled Composition,''
 GeoVac Paper~19 (2026).
+
+% ----------------------------------------------------------------------
+% References added 2026-06-04 (C3 follow-on closure). Mix of verified
+% (Dyall confirmed from Paper 31; Reiher 2017 / Szmytkowski 2007 well-
+% known) and best-guess (BJL / ChildsBerry / MartinezYRomero2004 /
+% Sunaga2025 unverified from project corpus; PI please verify each
+% entry marked [VERIFY] below).
+% ----------------------------------------------------------------------
+
+\bibitem{Dyall}
+K.~G.~Dyall and K.~F\ae gri,
+\textit{Introduction to Relativistic Quantum Chemistry}
+(Oxford University Press, Oxford, 2007).
+
+\bibitem{reiher2017}
+M.~Reiher, N.~Wiebe, K.~M.~Svore, D.~Wecker, and M.~Troyer,
+``Elucidating reaction mechanisms on quantum computers,''
+Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{114}, 7555 (2017);
+arXiv:1605.03590.
+
+\bibitem{Szmytkowski2007}
+R.~Szmytkowski,
+``Recurrence and differential relations for spherical spinors,''
+J.~Math.\ Chem.\ \textbf{42}, 397 (2007).
+
+\bibitem{BreitPauli}
+H.~A.~Bethe and E.~E.~Salpeter,
+\textit{Quantum Mechanics of One- and Two-Electron Atoms}
+(Springer, Berlin, 1957); the Breit--Pauli Hamiltonian and the
+spin-orbit, spin-spin, and spin-other-orbit operators are treated
+canonically in Chs.~38--39.
+
+% [VERIFY] -- 'BJL' abbreviation in source; identification uncertain.
+% Used at line ~1580 for a 'spinor obstruction'. Candidate references
+% include Bjorken-Drell relativistic QM textbook or a 3-author paper
+% beginning B-J-L. PI please confirm.
+\bibitem{BJL}
+[VERIFY-REF: PI please supply the intended reference for the
+``BJL'' citation tag at Paper~14 ca.\ line~1580 (``spinor
+obstruction''); this is a placeholder.]
+
+% [VERIFY] -- ChildsBerry: well-known pairing in Hamiltonian
+% simulation. Candidate is Childs, Cleve, Deotto, Farhi, Gutmann,
+% Spielman (QIC 2003), OR Berry-Ahokas-Cleve-Sanders (CMP 2007),
+% OR Berry-Childs-Cleve-Kothari-Somma (PRL 2015). Used at line
+% ~1653 for ``complexity''. PI please confirm.
+\bibitem{ChildsBerry}
+[VERIFY-REF: PI please supply the intended Childs--Berry reference
+for the Hamiltonian-simulation complexity citation at Paper~14 ca.\
+line~1653; this is a placeholder.]
+
+% [VERIFY] -- MartinezYRomero2004: hydrogenic three-term recursion.
+% Candidate is R.~P.~Mart\'inez-y-Romero, ``Relativistic hydrogenic
+% radial integrals,'' Am.\ J.\ Phys.\ or Eur.\ J.\ Phys., around 2004.
+% PI please confirm exact reference.
+\bibitem{MartinezYRomero2004}
+[VERIFY-REF: PI please supply the exact 2004 Mart\'inez-y-Romero
+reference used at Paper~14 ca.\ line~1680 for the three-term
+recursion; this is a placeholder.]
+
+% [VERIFY] -- Sunaga2025: heavy-atom quantum-chemistry resource paper.
+% Used at line ~1720 for direct head-to-head comparison
+% (``Sunaga RaH-18q''). Candidate is Sunaga et al.\ on relativistic
+% quantum chemistry with RaH benchmark. PI please confirm.
+\bibitem{Sunaga2025}
+[VERIFY-REF: PI please supply the exact 2025 Sunaga et al.\
+reference (RaH-18q benchmark) used at Paper~14 ca.\ line~1720;
+this is a placeholder.]
 
 \end{thebibliography}
 
