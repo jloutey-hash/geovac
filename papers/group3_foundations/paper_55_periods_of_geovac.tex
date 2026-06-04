@@ -604,6 +604,26 @@ shared Tannakian symmetry;\ a possible deeper unification is recorded as
 an open question (Q5', \S\ref{sec:open}).
 \end{remark}
 
+\begin{remark}[Convention:\ asymptotic heat-trace vs.\ Vassilevich--Branson--Gilkey]
+\label{rem:m2_convention}
+The closed forms in this section are stated in the volume-normalised
+asymptotic heat-trace convention used by Paper~51~\cite{loutey_paper51}
+Cor.~2.1.  The Vassilevich--Branson--Gilkey curvature-polynomial convention
+implemented by \texttt{seeley\_dewitt\_coefficients\_s3()} in
+\texttt{geovac/qed\_vacuum\_polarization.py} returns the spinor-sector
+$a_0 = \sqrt\pi$ before $(4\pi)^{d/2}$
+volume rescaling, sitting in $\sqrt\pi \cdot \Q$ at the raw level;\
+multiplying by $\dim_S \cdot \Vol(\sthree) = 4 \cdot 2\pi^2$ recovers the
+bare Dirac coefficient $8\pi^2 \in \pi^2 \cdot \Q$, consistent with the
+$a_0^{D^2} = 4\pi^2$ (vol-norm) of \cite{loutey_paper51} Cor.~2.1 line~513.
+Both readings put the SD content in the same M2 pure-Tate ring;\ the
+classification is convention-invariant.  Future readers reproducing the
+M2 witness panel from production code should apply the $(4\pi)^{d/2}$
+rescaling to land in the asymptotic convention used here.  Verified at
+$k = 0, 1$ in \texttt{tests/test\_paper55\_M2\_mixed\_tate.py}
+(2026-06-04 verification cleanup).
+\end{remark}
+
 \subsection{Witnesses}
 
 The empirical pure-Tate witness panel from the GeoVac corpus:

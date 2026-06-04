@@ -7,6 +7,188 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.50.0] - 2026-06-04
+
+### Summary
+
+Verification-cleanup sprint.  Twelve named theorems across Papers 34, 45,
+46, 51, 55 went from ``stated, no test'' to ``stated, verified
+numerically at framework grade'' via a parallel two-wave workflow
+(\texttt{wf\_39fc232e-906}).  Wave 1 (Paper 51 gravity arc):\
+\texttt{thm:zeta\_unit\_neg\_k}, \texttt{thm:scalar\_ak},
+\texttt{thm:dS\_vacuum}, \texttt{thm:j\_blindness},
+\texttt{thm:cutoff\_dep} + \texttt{thm:sector\_mellin}, \texttt{thm:L6}
+F1--F7.  Wave 2 (periods + Lorentzian + projection taxonomy):\ Paper 55
+M1 / M2 / M3 mixed-Tate classifications, Paper 45 asymptotic $4/\pi$
+rate, Paper 46 closed-form constant
+$C_3^{\mathrm{op}}(n_{\max}) = \sqrt{1 - 1/n_{\max}}$, Paper 34
+six-of-twenty-eight projection spot-checks.  224 new tests under
+\texttt{tests/test\_paper\{34,45,46,51,55\}\_*.py}, all PASS.  Wall time
+~25 min for 12 parallel verification agents; ~10 min sequential side-fix
+edits.
+
+Triggered by a PI question after Sprint Q5'-scoping closed:\ ``is there
+low-hanging fruit we didn't follow up on?''  Three Explore-agent drift
+scans (math.OA arc, gravity arc, equation-verification §13.4a protocol)
+found twelve unverified named theorems plus drift in two side places --
+Paper 51 was missing from CLAUDE.md §6 inventory entirely (despite
+publication at v3.14.0 / 2026-05-28; pre-edit grep for ``paper\_51''
+returned zero matches), and a convention split between Paper 55 §4
+closed forms and production code that future readers would hit.
+
+### Added
+
+- \textbf{Twelve verification test files} under
+  \texttt{tests/test\_paper\{34,45,46,51,55\}\_*.py}, 224 tests total, all
+  PASS.  Wave 1 average runtime 0.71~s; Wave 2 average ~38~s (dominated by
+  Paper 45 sweep at 215~s).  One agent
+  (\texttt{thm:zeta\_unit\_neg\_k}) self-corrected a Mellin-residue
+  Jacobian error during its first draft -- the falsifier-not-tautology
+  discipline working as designed.
+- \textbf{Paper 55
+  \texttt{papers/group3\_foundations/paper\_55\_periods\_of\_geovac.tex}
+  \S\ref{sec:m2} new Remark \texttt{rem:m2\_convention}} (after
+  \texttt{rem:m2\_specialisation}):\ documents the
+  volume-normalised-asymptotic vs Vassilevich--Branson--Gilkey
+  curvature-polynomial SD convention split.  Both readings produce the
+  same M2 pure-Tate ring;\ the rescaling factor is $(4\pi)^{d/2}$.  Future
+  readers reproducing M2 verification from production code now land in
+  the right ring without confusion.  Three-pass clean compile (21pp,
+  661504 bytes, +1pp from v3.49.0).
+- \textbf{Sprint memo} at
+  \texttt{debug/sprint\_verification\_cleanup\_memo.md} (~1500 words,
+  includes \S6 honest-scope section per \texttt{/sprint-close} protocol
+  step 9).
+
+### Changed
+
+- \textbf{CLAUDE.md \S6 Group 5 table:} Paper 51 row added (was missing
+  from the §6 inventory entirely; pre-edit grep for ``paper\_51'' in
+  CLAUDE.md returned zero matches).  Row mirrors Paper 41's format with
+  tier ``On-topic'', key result summary cross-referencing the six
+  now-tested theorems and the L6 closure.
+- \textbf{\texttt{debug/followon\_register.md}} header updated to
+  ``Last updated 2026-06-04'' and six consolidated A-entries A9--A14
+  added at top of Section A capturing cross-arc drift identified by the
+  three Explore scans:\ A9 (Paper 34 -- 22 of 28 projections still
+  untested), A10 (Paper 40 \S sec:open trio:\ log-power ansatz, rank-3
+  SU(4), G/K symmetric spaces), A11 (Paper 42 \S10 O3 + O4:\ Pythagorean
+  formal proof, higher-rank modular Hamiltonian), A12 (Paper 50 \S8:\
+  Maxwell partition function, squashed-$S^3$, quantitative propinquity
+  rate), A13 (Paper 53 Q1--Q4 cluster:\ sharp propinquity constant,
+  interior Berezin rate, boundary-adapted operator system, higher-dim
+  warped carriers), A14 (Gravity arc:\ G4-6a Q1--Q3 dichotomy, Möbius
+  v3.19.0 sign-convention audit, L6 standalone L1'--L5 write-out, L6
+  sharp lattice rate + B1 constant).
+
+### Closed (now verified at framework grade)
+
+- Paper 51 \texttt{thm:zeta\_unit\_neg\_k}: Bernoulli identity
+  $\zeta_{S^3, R}(-k) = 0$ for all $k \ge 0$ via
+  $B_{2k+1}(3/2) = (2k+1)/4^k$, sympy bit-exact at $k = 0..5$ + mpmath
+  50-dps cross-check + heat-kernel asymptotic to relative error
+  $< 10^{-40}$ at $t \in [0.005, 0.02]$.
+- Paper 51 \texttt{thm:scalar\_ak}: $a_k^\Delta = 2\pi^2/k!$ for scalar
+  Laplacian SD coefficients via Jacobi $\vartheta_3$ modular
+  transformation;\ verified symbolically at $k = 0..4$ plus 12-point
+  Vandermonde extraction to $10^{-12}$.
+- Paper 51 \texttt{thm:dS\_vacuum}: $s_{\min} = -\Lambda/(12\sqrt{6})$
+  zero-temperature de Sitter vacuum density;\ symbolic extremum + sign
+  + prefactor + second-derivative check, sympy residual $= 0$.
+- Paper 51 \texttt{thm:j\_blindness}: Schur's-lemma blockade of
+  Fierz--Pauli at the spectral-action level;\ eigenvalue-set equality
+  across $J = 0, 1, 2$ sectors of the $(1, 1)$ subspace verified at
+  $n_{\max} = 1, 2$ to $10^{-6}$.  Multiplicity ratios 1:1:3 (within
+  Hermitised) and 1:3:5 (cross-sector) match Paper 51 §6.1 Table
+  bit-exactly.
+- Paper 51 \texttt{thm:cutoff\_dep} + \texttt{thm:sector\_mellin}: closed
+  forms $G_{\mathrm{eff}} = 6\pi/(\phi(1)\Lambda^2)$,
+  $\Lambda_{\mathrm{cc}} = 6\phi(2)/\phi(1) \cdot \Lambda^2$,
+  $R_{\mathrm{crit}}\Lambda = \sqrt{\phi(1)/(6\phi(2))}$ verified at 3
+  cutoffs (Gaussian, polynomial, sharp) $\times$ 5 $\Lambda$ values to
+  $\sim 10^{-7}$;\ \texttt{tab:g8\_cutoffs} reproduced bit-exactly.
+- Paper 51 \texttt{thm:L6} F1--F7: existing
+  \texttt{tests/test\_warped\_dirac.py} covered F1, F2, F3, F4, F6, F7;
+  new \texttt{tests/test\_paper51\_L6\_full.py} fills the genuine gaps
+  -- F5 (cone-Dirac saturation) and explicit L6 theorem content
+  (Lemma L6.3 Gaussian envelope, $\alpha$-uniformity,
+  $\lim_n$ / $d/d\alpha$ commute).
+- Paper 55 \texttt{thm:m1\_pure\_tate}: M1 $\subset \Q[\pi, \pi^{-1}]$
+  via PSLQ at 80 dps over $\pi^n$, $n \in [-4, 4]$;\ all five tested
+  witnesses (Hopf base $\pi$, propinquity rate $4/\pi$, Pythagorean
+  $1/\pi^2$) identify as single rational $\times$ pi-power.
+- Paper 55 \texttt{thm:m2\_mixed\_tate}: M2 $\subset \bigoplus_k
+  \pi^{2k}\cdot\Q$ via 11 witnesses at 120 dps with
+  \texttt{maxsteps=3000};\ PSLQ-negative against
+  $\{\pi^n, \zeta(3), \zeta(5), \text{Catalan } G\}$ (no odd-zeta or
+  MZV content needed);\ two-term Dirac exactness verified via Jacobi
+  $\vartheta_2$ modular tail $1.5 \times 10^{-39}$ at $t = 0.1$.
+- Paper 55 \texttt{thm:m3\_cyclotomic\_mixed\_tate}: M3 $\subset
+  \mathrm{MT}(\Z[i, 1/2], 4)$ at level $\le 4$;\ Catalan $G$ and
+  $\beta(4)$ verified as genuine level-4 generators
+  (PSLQ-disprovable in level-2 basis at 100 dps with
+  \texttt{maxcoeff=1000});\ Sprint 3 RH-J identity
+  $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
+  \beta(s-2))$ verified at $s = 4, 5, 6$.
+- Paper 45 \texttt{thm:main} asymptotic $4/\pi$ rate verified at
+  $n_{\max}$ up to 500 via Paper 38 L2 SU(2) Fejér rate substitute;\
+  full \texttt{LorentzianTunnelingPair} construction is memory-bound
+  at $(n_{\max}, N_t) = (5, 9)$ (~60 GB), but
+  \texttt{Lambda\_bound == gamma\_joint\_su2} bit-exactly at every
+  buildable panel cell (\texttt{height\_P} $= 0$), so substitution
+  preserves the convergence-rate identification.
+- Paper 46 closed form $C_3^{\mathrm{op}}(n_{\max}) = \sqrt{1 -
+  1/n_{\max}}$ bit-exact at $n_{\max} \in \{2, \ldots, 10\} \cup
+  \{20, 100, 1000\}$ via sympy enumeration of the per-harmonic supremum
+  $(N-1)/\sqrt{N^2-1}$ over envelope $2 \le N \le 2n_{\max} - 1$;\
+  supremum attained at envelope max;\ asymptote $1 - 1/(2n_{\max}) +
+  O(1/n_{\max}^2)$ verified via \texttt{sp.series}.
+- Paper 34 six-of-twenty-eight numerical projection spot-checks:\
+  \S III.2 (Hopf bundle $\pi$, $2\pi^2$), \S III.6 (Seeley--DeWitt
+  $\sqrt\pi$, $\sqrt\pi/8$ on $S^3$ -- cross-consistent with
+  \texttt{thm:scalar\_ak} after $(4\pi)^{3/2}$ rescaling), \S III.7
+  (CH spinor $|\lambda_n| = n + 3/2$, $g_n = 2(n+1)(n+2)$), \S III.8
+  (Wigner 3j Gaunt identity on 5 triples), \S III.14 (rest-mass
+  KG-$S^3 \times \R$ rationality + $S^3$ conformal-scalar Casimir
+  $= 1/240$ from $\zeta_R(-3)$ Bernoulli), \S III.27 (Wick
+  $\sigma_{2\pi}(O) = O$ STRONG\_IDENTIFICATION at BW canonical
+  $\beta = 2\pi$, $\kappa_g = 1$).
+
+### Honest scope
+
+- Tests verify the paper's stated closed forms agree with independent
+  numerical computation at the precision the paper claims;\ they do not
+  prove the theorems from scratch.  What changed in the corpus's
+  epistemic state:\ each tested equation now has a falsifier installed
+  -- future drift in a paper edit fails the test and is caught.
+- 22 of 28 Paper 34 projections remain numerically untested (A9 in
+  register).
+- Paper 45 asymptotic verified via the cheap-$\gamma$-rate substitute
+  only;\ the full \texttt{LorentzianTunnelingPair} construction at
+  $n_{\max} \ge 5$ is memory-bound (~60 GB at $(5, 9)$).  Substitution
+  is mathematically equivalent at every buildable cell, so the
+  convergence-rate identification is preserved -- but a sweep over the
+  full construction at higher $n_{\max}$ is computationally infeasible.
+- Paper 42 O3 (Pythagorean diagonal/off-diagonal formal proof at general
+  $n_{\max}$) remains a structural sketch, named in register A11.
+
+### Verification status
+
+- All 12 verification tests PASS in the workflow run.
+- Paper 55 three-pass pdflatex compile clean for the new content:\
+  0 errors;\ one new overfull hbox introduced by a long
+  \texttt{\textbackslash texttt} on line 613 was caught and fixed
+  pre-commit (split into two \texttt{\textbackslash texttt} segments,
+  zero overfull in the Remark line range after fix).  The 37 hyperref
+  Unicode warnings and 15 remaining overfull hboxes are pre-existing
+  throughout the paper.
+- No CLAUDE.md §13.5 hard prohibitions touched.
+- §13.4a equation-verification protocol observed:\ every new theorem
+  verification follows the \texttt{test\_paper\{N\}\_\{descriptor\}.py}
+  naming convention.
+
+---
+
 ## [3.49.0] - 2026-06-04
 
 ### Summary

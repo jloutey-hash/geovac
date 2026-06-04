@@ -1,6 +1,6 @@
 # Follow-on register
 
-**Last updated:** 2026-06-03 (post-Paper-55-§5+§6 + post-A2/A5 sub-agent sprints)
+**Last updated:** 2026-06-04 (post verification-cleanup workflow `wf_39fc232e-906`; A9–A14 added for cross-arc drift)
 
 This file is the durable list of carved-out follow-ons from recent sprints that
 the PI has not yet authorized for execution. New items are added at the top of
@@ -11,6 +11,99 @@ including the originating sprint reference for context.
 ---
 
 ## A. Substantive research sprints (PI decision required)
+
+### A9. Paper 34 — 22 of 28 named projections still without numerical tests
+**Source:** Verification cleanup workflow `wf_39fc232e-906` (2026-06-04;
+`tests/test_paper34_projection_spot_checks.py` covered 6 of 28).
+**Covered:** §III.2 (Hopf bundle), §III.6 (spectral action a_0/a_1/a_2 on S³),
+§III.7 (Camporesi–Higuchi spinor), §III.8 (Wigner 3j / Gaunt),
+§III.14 (rest-mass / KG-S³×ℝ Casimir), §III.27 (Wick rotation σ_{2π}).
+**Not yet covered (22):** §III.1 Fock conformal (combinatorial-only via
+`test_fock_projection.py`); §III.3 Bargmann–Segal; §III.4 Stereographic;
+§III.5 Sturmian (Bethe-log calibration tier); §III.9 Wigner D rotation;
+§III.10 Wilson plaquette (partial via `geovac/su2_wilson_gauge.py` tests);
+§III.11 Vector-photon promotion 1/(4π) per loop; §III.12 Mol-frame
+hyperspherical separation; §III.13 Drake–Swainson asymptotic subtraction;
+§III.15 Observation / temporal-window; §III.16 Two-body Dirac / Breit;
+§III.17 Foldy–Friar (nuclear charge density); §III.18 Zemach
+(nuclear magnetization density); §III.19 Tensor multipole;
+§III.20 Phillips–Kleinman / core-valence orthogonality;
+§III.21 Multipole / Gaunt termination; §III.22 Bipolar harmonic /
+Drake combining; §III.23 Symmetry / Young tableau; §III.24 Adiabatic /
+Born–Oppenheimer; §III.25 Coupled-channel; §III.26 Gauge choice
+(Coulomb / Lorenz / Feynman); §III.28 Apparatus identity.
+**Estimated effort:** ~3–4 days per batch of ~8 projections (≈ 3 batches total).
+
+### A10. Paper 40 §sec:open trio — log-power ansatz, rank-3 SU(4), compact symmetric spaces G/K
+**Source:** Verification cleanup math.OA drift scan (2026-06-04); Paper 40
+§sec:open.
+**(i) Log-power ansatz test (sprint-scale, 1–2 weeks):** is γ_n ~
+(4/π)·log(n)/n single-log or double-log at rank ≥ 2? Clean discriminator
+needs Λ² ≳ 10⁵. Analytic Plancherel × Vandermonde already shows
+rank-invariance (Paper 40 Thm L2); a sharper Stein–Weiss derivation at
+rank 2 would settle the question.
+**(ii) Rank-3 SU(4) numerical extraction (sprint-scale, 1–2 weeks):**
+current 29.3 % error; pre-asymptotic structure dominates at rank 3.
+Larger n_max sweep would verify 4/π constant directly.
+**(iii) Compact symmetric spaces G/K (medium, 3–6 months):** extend from
+compact Lie groups to S^n, CP^n, Grassmannians, flag varieties. Zonal
+spherical-function machinery expected to lift; 4/π presumed to persist.
+
+### A11. Paper 42 §10 O3 + O4 — Pythagorean formal proof, higher-rank modular Hamiltonian
+**Source:** Verification cleanup math.OA drift scan (2026-06-04); Paper 42 §10.
+**(O3) Pythagorean diagonal / off-diagonal formal proof (sprint-scale, 2–3 weeks):**
+the H_local diagonal + D_W^L off-diagonal decomposition under Δn = ±1 sectoring
+is sketched (rem:pythagorean_underlies_collapse, Sprint L2-F.1) but not formally
+proved at general n_max.
+**(O4) Higher-rank modular Hamiltonian (sprint-scale, 2–3 weeks):** verify
+integer-spectrum property of BW-α generator analog on SU(n) for n ≥ 3.
+
+### A12. Paper 50 §8 — Maxwell, squashed-S³, quantitative propinquity rate
+**Source:** Verification cleanup math.OA drift scan (2026-06-04); Paper 50 §8
+Catalogue and open targets.
+**(i) Maxwell partition function p = 1 (sprint-scale, 2–4 weeks):** apply
+F-theorem coefficient + Pythagorean M2/M3 decomposition machinery to Maxwell
+(vector p = 1) and graviton (p = 2) on S³/S⁵. Closed forms known in literature.
+**(ii) Squashed-S³ generalization (sprint-scale, 1–3 weeks):** does the
+deformed half-integer Hurwitz machinery still reduce to the MR-B
+Jacobi-θ_2 closed form, or does the deformation introduce a non-M2/M3
+transcendental?
+**(iii) Quantitative propinquity rate (medium, 3–6 weeks):** prove
+|F_{n_max} − F^{KPS}| ≤ C·γ_{n_max} via Mellin-domain Berezin reconstruction.
+
+### A13. Paper 53 — Q1 / Q2 / Q3 / Q4 cluster (disk-with-cone open questions)
+**Source:** Verification cleanup gravity-arc drift scan (2026-06-04);
+Paper 53 §Open.
+**(Q1) Sharp self-contained propinquity constant C (medium, 3–6 weeks):**
+closed-form constant in the disk-with-cone full-plane propinquity bound.
+**(Q2) Sharp interior Berezin reconstruction rate (medium, 3–6 weeks):**
+plus closed-form Cesàro-order dependence.
+**(Q3) Boundary-adapted operator system (medium, 3–6 weeks):** for
+finite-R reconstruction of boundary observables.
+**(Q4) Higher-dimensional + warped carriers (multi-month, 3–6 months):**
+extend to cigar D²_α × S² as a single carrier.
+
+### A14. Gravity arc — G4-6a Q1–Q3 dichotomy, Möbius v3.19.0 audit, L6 write-out, L6 sharp rate
+**Source:** Verification cleanup gravity-arc drift scan (2026-06-04); items
+flagged in `papers/group5_qed_gauge/paper_51_gravity_arc.tex` §sec:open and in
+L6 closure memo lines 135–138.
+**(i) G4-6a Q1–Q3 dichotomy decision (sprint-scale, 1–2 weeks):** resolve
+whether A-coefficient extraction is (Q1) a genuine multi-month substrate
+refinement, (Q2) a compute-budget limit, or (Q3) an observable mismatch.
+Currently unresolved after the N_φ-axis clean negative.
+**(ii) Möbius v3.19.0 sign-convention audit (sprint-scale, 1–2 weeks):**
+substrate slope +0.052 (Track α'' thread 9) vs v3.19.0 reported −0.0562.
+Note: the v3.19.0 Fursaev–Solodukhin mechanism attribution was already
+retired in §3 dead-ends (B4, v3.24.0); this is the remaining sign-convention
+audit only.
+**(iii) L6 B3-standalone L1'–L5 write-out (medium, 3–6 weeks):** transport
+the framework-grade proof sketch from the L6 closure memo into a
+self-contained document (Paper 53 §appendix-B or standalone memo). No new
+analytical content; bookkeeping only.
+**(iv) L6 sharp lattice rate + B1 constant (medium, 3–6 weeks):** current
+empirical scaling is O(a^{1.1}); the expected exact O(a) from Lichnerowicz
+scalar curvature is not yet recovered. Resolve and extract the sharp B1
+constant.
 
 ### ~~A1.~~ ~~Inhomogeneous Robertson–Walker extension~~ — **STRATIFIED 2026-06-03 (Sprint A1 scoping)**
 A1 splits cleanly into three sub-cases. (i) Constant warp $a(t) \equiv a_0$:

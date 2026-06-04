@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.49.0 (June 4, 2026)
+**Version:** v3.50.0 (June 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint verification cleanup (2026-06-04, v3.50.0):** 224 tests close §13.4a gaps for 12 named theorems across Papers 34/45/46/51/55; A9–A14 added to register; Paper 51 added to §6 inventory. See `debug/sprint_verification_cleanup_memo.md`.
 - **Sprint Q5'-scoping (2026-06-03/04, v3.49.0):** Period-ring DEFLATED ($M^{\mathrm{GV}} \subset$ MT(ℤ[i,1/2],4)); HP$_*$/Marcolli–Tabuada dg-route STRUCTURALLY DEAD; cosmic-Galois $U^*$ on Mellin-moment Hopf algebra is the viable multi-year target. See `debug/sprint_q5p_*_memo.md` (8 memos).
 - **Identity paper / field guide (2026-06-03, v3.48.0):** Drafted `papers/synthesis/geovac_field_guide.tex`, 10pp narrative arc from packing puzzle to periods of the spectral triple. See CHANGELOG v3.48.0.
 - **Sprint periods A-tier closure (2026-06-03, v3.48.0):** Eight A-register items closed in one day (A1 stratified; A2/A3/A4/A5/A6/A8 positive; A1-Matsubara negative; A7 half-structural). Paper 55 9→20pp. See CHANGELOG v3.48.0.
@@ -613,6 +614,7 @@ Audience: high-energy / particle physics, gauge theory, lattice gauge, particle 
 | 33 | On-topic | `paper_33_qed_selection_rules.tex` | The 1+6+1 partition of QED selection rules on S³: graph-topological + angular-momentum (vector-photon promotion at 1/(4π) per loop) + Dirac-kinematic (Furry from spinor phase constraint). Scalar Fock 1/8 → Dirac graph 4/8 → vector photon 7/8 (scalar), 8/8 (Dirac). |
 | 36 | On-topic | `paper_36_bound_state_qed.tex` | Bound-state QED on Dirac-S³ — one-loop closure of hydrogen Lamb shift at −0.534%. LS-1..LS-7 sprint sequence consolidated. LS-6a Uehling-kernel double-counting fix (+27.13 MHz = 4/15 × α³Z⁴/πn³). |
 | 41 | On-topic | `paper_41_rule_b_wilson_u1.tex` | Wilson U(1) lattice gauge on the Dirac-Rule-B graph: seven-witness structural compatibility with 3D compact U(1). Closes RG-flow gap with SM at the Wilson lattice gauge level. Non-perturbative Polyakov monopole density signature. |
+| 51 | On-topic | `paper_51_gravity_arc.tex` | Gravity from GeoVac spectral action — consolidates G1–G8 + G4-3 discrete-warped-substrate sequence. S³ spectral action is two-term exact via Bernoulli identity ζ_{S³,R}(-k) = 0 (thm:zeta_unit_neg_k); closed forms a_k^Δ = 2π²/k! (thm:scalar_ak), vacuum density s_min = -Λ/(12√6) (thm:dS_vacuum), cutoff sector Mellin map (tip / Einstein–Hilbert / Λ_cc ↔ φ(0) / φ(1) / φ(2)). J-blindness theorem (thm:j_blindness) closes the graviton at the spectral-action level — Fierz–Pauli decomposition requires propinquity-level metric identification. L6 (replica weight harmless) closed v3.24.0. Eleven theorems with numerical verification (`tests/test_paper51_*.py`, 2026-06-04). Companion: Paper 53 (math.OA disk-with-cone propinquity providing the L6.1 apex backbone). |
 
 #### Group 6 — Precision physics / observations (`papers/group6_precision_observations/`) — Always load (27); On-topic (26, 34, 35)
 
