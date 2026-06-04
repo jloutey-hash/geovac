@@ -234,6 +234,14 @@
 | Two-loop sunset diagram on S³ | 18 | §IV (new) | Core |
 | Three-axis transcendental taxonomy | 18 | §IV (new) | Core |
 | Dirichlet L-function L(s, χ₋₄) | 18 | §IV (new) | Core |
+| Master Mellin engine M1/M2/M3 trinity | 18, 32, 55 | Paper 18 §III.7; Paper 32 §VIII `thm:pi_source_case_exhaustion` + `cor:m1`/`m2`/`m3`; Paper 55 §2–4 | Core |
+| Period-ring stratification (M1 ⊂ ℚ[π, π⁻¹]; M2 ⊂ ⊕π^{2k}ℚ; M3 ⊂ MT(ℤ[i, 1/2]) level ≤ 4) | 18, 32, 55 | Paper 18 §III.7 `eq:m_engine_period_stratification`; Paper 32 §VIII corollaries; Paper 55 §3/§4/§5 | Core |
+| Cyclotomic mixed-Tate at level 4 (Deligne–Glanois) | 32, 55 | Paper 32 §VIII `cor:m3_cyclotomic_mixed_tate`; Paper 55 §5 | Core |
+| Vertex-parity = χ₋₄ as Deligne–Glanois Galois descent | 28, 32, 55 | Paper 28 `rem:chi4_motivic`; Paper 32 §VIII `cor:m3`; Paper 55 §5 | Core |
+| Fathizadeh–Marcolli mixed-Tate inheritance (pure-Tate refinement on S³) | 18, 32, 55 | Paper 18 §III.7; Paper 32 §VIII `cor:m2_mixed_tate`; Paper 55 §4 | Core |
+| Localised pure-Tate ring ℚ[π, π⁻¹] (M1 Hopf-base measure) | 18, 32, 55 | Paper 18 §III.7 M1 closure paragraph; Paper 32 §VIII `cor:m1_pure_tate`; Paper 55 §3 | Core |
+| Kontsevich–Zagier periods (motivic placement) | 18, 55 | Paper 55 §1, §3–5 | Core |
+| Periods of GeoVac (synthesis paper) | 55 | All | Standalone |
 | Compactness thesis (Peter-Weyl) | 18 | §III (new) | Core |
 | Weyl asymptotic / flat-space limit | 18 | §IV | Core |
 | R-dependent spectral sums on S³ | 18 | §IV | Core |

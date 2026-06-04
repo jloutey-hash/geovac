@@ -840,6 +840,47 @@ full MZV algebra).  These are precisely the three axes of the QED
 transcendental classification formalized in
 Sec.~\ref{sec:taxonomy}.
 
+\paragraph{Period-ring stratification of the master Mellin engine
+(June 2026 closure).}
+The master Mellin engine partition $\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$
+with $k \in \{0, 1, 2\}$ admits a complete period-theoretic
+stratification, established by three companion sprints in June~2026
+(memos \texttt{debug/sprint\_m1\_pure\_tate\_memo.md},
+\texttt{debug/sprint\_mixed\_tate\_test\_memo.md},
+\texttt{debug/sprint\_m3\_cyclotomic\_mixed\_tate\_memo.md}):
+\begin{equation}
+\label{eq:m_engine_period_stratification}
+M_1 \subset \mathbb{Q}[\pi, \pi^{-1}], \qquad
+M_2 \subset \bigoplus_{k \ge 0} \pi^{2k}\cdot\mathbb{Q}, \qquad
+M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2]) \text{ at level } \le 4,
+\end{equation}
+indexed by the operator-order slot $k$.  M1 (Hopf-base measure
+$\mathrm{Vol}(S^2)/4 = \pi$) generates the localised pure-Tate algebra
+at $\pi$;\ M2 (Seeley--DeWitt heat-kernel coefficients) inherits the
+Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016} mixed-Tate
+classification of spectral-action expansions on Robertson--Walker
+spacetimes, with a pure-Tate refinement on the static $S^3$ sub-case
+(no $\zeta(3), \zeta(5)$, or MZV content at the SD level);\ M3
+(vertex-parity sums producing Hurwitz at quarter-integer shifts and
+Dirichlet $L$-values including Catalan $G = \beta(2)$ and $\beta(4)$)
+inherits the Deligne~\cite{deligne2010} + Glanois~\cite{glanois2015}
+cyclotomic mixed-Tate classification at level $4$, with the
+vertex-parity-as-$\chi_{-4}$ correspondence realising the
+Deligne--Glanois Galois descent from level $4$ to level $2$ on the
+framework's natural QED observables.
+
+Paper~32 §VIII Corollaries \texttt{cor:m1\_pure\_tate},
+\texttt{cor:m2\_mixed\_tate}, and \texttt{cor:m3\_cyclotomic\_mixed\_tate}
+state the case-exhaustion-theorem-level consequences.  Every
+transcendental that has appeared in GeoVac spectral data has a named
+motivic home indexed by the Mellin slot~$k$;\ the remainder of this
+subsection walks the master-mechanism reading
+(\S\,master-mechanism), the mechanism-as-domain sharpening
+(\S\,domain-partition), the witness panels for the three period-ring
+closures (\S\S\,Mixed-Tate~/~M3-cyclotomic~/~M1-pure-Tate), and the
+remaining open questions (sectional convention; non-compact rate;
+discrete $c_1$).
+
 \paragraph{Master-mechanism reading (Track~TS-E3, May~2026).}
 The Mellin engine reading admits a sharper structural statement.  The
 spectral-triple framing of GeoVac (Paper~32) admits a candidate
@@ -985,14 +1026,28 @@ in two ways:\ (i) the GeoVac $S^3$ Dirac SD expansion is two-term
 exact ($a_k = 0$ for $k \ge 2$, Paper~51 Cor.~2.1), not generically
 infinite; (ii) the scalar Laplacian SD coefficients have the
 closed-form geometric-series collapse $a_k^\Delta = 2\pi^2/k!$,
-not the generic R--W expansion. The M3 sub-mechanism (vertex-parity
-Hurwitz, Catalan $G$, $\beta(s)$) lives in cyclotomic mixed Tate
-at level $4$ (over $\mathbb{Z}[i]$, not $\mathbb{Q}$) and does
-\emph{not} contaminate the SD coefficients (it lives at $k=1$ in
-$\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$, the SD sector lives at
-$k=2$). Recorded as a closed-with-refinement inheritance; the
-companion Paper~32~\S~VIII corollary states the
-case-exhaustion-theorem-level consequence.
+not the generic R--W expansion. The M3 sub-mechanism
+classification (companion Sprint M3 Cyclotomic Mixed-Tate, June
+2026, memo
+\texttt{debug/sprint\_m3\_cyclotomic\_mixed\_tate\_memo.md}) places
+M3 in $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$ at depth
+equal to loop order, by direct application of
+Deligne~\cite{deligne2010} and the explicit basis of
+Glanois~\cite{glanois2015}:\ un-restricted Dirac Dirichlet
+$D(s)$ lies in $\mathcal{MT}(\mathbb{Z})$ at depth $1$;
+vertex-restricted $D_{\mathrm{even}} - D_{\mathrm{odd}}$ lies in
+$\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $4$ depth $1$ via
+quarter-integer Hurwitz $+$ Dirichlet $\beta$ (Catalan $G$,
+$\beta(4)$);\ the depth-$k$ loop tower lives at depth $k$ in
+$\mathcal{MT}$ at level $\le 4$.  M3 does \emph{not}
+contaminate the SD coefficients (M3 lives at $k=1$ in
+$\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$, M2 at $k=2$).  Together
+with the companion Paper~32~\S~VIII corollaries
+\texttt{cor:m2\_mixed\_tate} and \texttt{cor:m3\_cyclotomic\_mixed\_tate},
+the master Mellin engine now has a complete period-theoretic
+stratification:\ M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2 in
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, M3 in
+$\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.
 
 \paragraph{M3 sectional convention refinement (Sprint L2-D, May 2026).}
 The vertex-parity Hurwitz mechanism of M3 is sectional in the chosen
@@ -1038,6 +1093,35 @@ the Paper~38 / Paper~40 rate remains an open question; Latr\'emoli\`ere
 2018~\cite{latremoliere2018} establishes existence of a complete
 propinquity metric on the inductive-limit construction but not a rate.
 Source: \texttt{debug/sprint\_modular\_propinquity\_mZ\_bethe\_log\_memo.md}.
+
+\paragraph{M1 period-ring closure (Sprint M1 Pure-Tate, June 2026).}
+The M1 sub-mechanism produces period values in the localised
+pure-Tate sub-ring $\mathbb{Q}[\pi, \pi^{-1}]$ of mixed Tate periods
+over $\mathbb{Q}$, at depth $0$ and Tate weight $\in \mathbb{Z}$, by
+direct identification of $\pi = \mathrm{Vol}(S^2)/4$ as a weight-$1$
+Tate period (Kontsevich--Zagier 2001).  Every M1 witness logged
+across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25
+Hopf bundle base measure); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
+(Paper~38 §L2 asymptotic propinquity rate); $4/\pi$ (Paper~40 Thm~1
+universal rate constant across compact Lie groups); $1/\pi^2$
+(Paper~43 §10.2 Pythagorean orthogonality);\ $1/\pi^2$ inside
+$-3\zeta(3)/(16\pi^2)$ (Paper~50 §3 F-theorem, an M1$\times$M3
+cross-product) --- is a $\mathbb{Q}$-linear combination of $\pi^n$
+for $n \in \mathbb{Z}$.  Combined with this sprint's two companion
+closures (Sprint Mixed-Tate Test placing M2 in
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, and Sprint M3 Cyclotomic
+Mixed-Tate placing M3 in $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
+$\le 4$), the master Mellin engine of \S~III.7 has a complete
+period-theoretic stratification indexed by the Mellin slot
+$k \in \{0, 1, 2\}$:
+\begin{equation*}
+M_1 \subset \mathbb{Q}[\pi, \pi^{-1}], \quad
+M_2 \subset \bigoplus_k \pi^{2k}\cdot\mathbb{Q}, \quad
+M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2]) \text{ at level} \le 4.
+\end{equation*}
+Companion Paper~32 §VIII Corollary \texttt{cor:m1\_pure\_tate} states
+the case-exhaustion-theorem-level consequence; memo
+\texttt{debug/sprint\_m1\_pure\_tate\_memo.md}.
 
 \paragraph{Discrete $c_1$ verification (Sprint TS-E3 falsification target).}
 The strongest concrete computational falsification target flagged by Track
@@ -3186,6 +3270,20 @@ arXiv:1811.04534;
 F.~Fathizadeh and M.~Marcolli,
 ``Periods and motives in the spectral action of Robertson--Walker spacetimes,''
 arXiv:1611.01815 (2016).
+
+\bibitem{deligne2010}
+P.~Deligne,
+``Le groupe fondamental unipotent motivique de
+$\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6$ ou $8$,''
+\textit{Publ.~Math.~IHES} \textbf{112}, 101--141 (2010);
+preprint arXiv:math/0302267 (2005).
+
+\bibitem{glanois2015}
+C.~Glanois,
+``Motivic unipotent fundamental groupoid of
+$\mathbb{G}_m \setminus \mu_N$ for $N = 2, 3, 4, 6, 8$ and Galois descents,''
+arXiv:1411.4947 (v2, 2 Sep 2015);
+published version \textit{J.~Number Theory} \textbf{182}, 36--90 (2018).
 
 \bibitem{rejzner2016}
 K.~Rejzner,

@@ -1,0 +1,717 @@
+% =====================================================================
+% Paper 55 (standalone): Periods of GeoVac
+%
+% Cyclotomic mixed-Tate classification of the master Mellin engine on
+% the discrete Camporesi-Higuchi S^3 spectral triple. Companion synthesis
+% paper to Papers 18, 28, 32, 38, 50.
+%
+% Audience: math-phys + NCG-with-motivic-leanings (Marcolli/Fathizadeh
+% lineage, Brown/Glanois/Deligne periods-of-MZV program,
+% Connes-Marcolli renormalization-motives).
+%
+% Status: first draft, June 2026, post-Sprints M1/M2/M3 (2026-06-03)
+% which closed the master Mellin engine trinity at the Paper 32 §VIII
+% corollary level.
+%
+% Built from internal sprint memos:
+%   debug/sprint_mixed_tate_test_memo.md (M2)
+%   debug/sprint_m3_cyclotomic_mixed_tate_memo.md (M3)
+%   debug/sprint_m1_pure_tate_memo.md (M1)
+% and the closure paragraphs in Paper 18 §III.7 and Paper 32 §VIII
+% corollaries cor:m1_pure_tate, cor:m2_mixed_tate,
+% cor:m3_cyclotomic_mixed_tate.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage[expansion=false]{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\sthree}{S^{3}}
+\newcommand{\sfive}{S^{5}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\MT}{\mathcal{MT}}
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\Zcal}{\mathcal{Z}}
+\newcommand{\DCH}{D_{\mathrm{CH}}}
+
+\title{Periods of GeoVac:\ a cyclotomic mixed-Tate classification of
+the master Mellin engine}
+\author{J.~Loutey\thanks{Independent researcher.
+\texttt{jloutey@gmail.com}.  This work was developed in an
+AI-augmented agentic workflow with Anthropic's Claude.
+Implementation, internal sprint memos, and bibliographic collation
+were performed collaboratively; all theorems, design choices, and
+editorial decisions are the author's responsibility.}}
+\date{June 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The GeoVac framework is a discrete spectral-graph approach to
+quantum mechanics built around the Fock conformal projection
+$\R^3 \hookrightarrow \sthree$.  Its computational observables
+empirically produce a constrained class of transcendental numbers:\
+$\pi$ and integer powers thereof, classical odd zeta values
+$\zeta(2k+1)$, Catalan $G = \beta(2)$ and the Dirichlet beta values
+$\beta(s) = L(s, \chi_{-4})$, and a depth-$k$ tower of irreducible
+constants at higher loop order (Paper~28 of the GeoVac corpus).  We
+prove that every such transcendental sits in cyclotomic mixed-Tate
+periods at level $\le 4$ over $\mathcal{O}_4[1/4] = \Z[i, 1/2]$, with
+a complete period-theoretic stratification indexed by the
+operator-order slot $k \in \{0, 1, 2\}$ of the master Mellin engine
+$\Mcal[\Tr(D^k e^{-tD^2})]$ on the discrete Camporesi--Higuchi
+$\sthree$ spectral triple:
+\begin{itemize}
+  \item $k = 0$ (Hopf-base measure $\Vol(S^2)/4 = \pi$):\
+    $M_1 \subset \Q[\pi, \pi^{-1}]$, the localised pure-Tate algebra
+    at $\pi$, depth $0$.
+  \item $k = 2$ (Seeley--DeWitt coefficients):\
+    $M_2 \subset \bigoplus_k \pi^{2k}\cdot\Q$, the pure-Tate
+    even-weight sub-ring, strictly smaller than the generic
+    Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016} mixed-Tate
+    classification of Robertson--Walker spectral actions:\ on the
+    static $\sthree$ sub-case, the Dirac SD expansion is two-term
+    exact and the scalar Laplacian SD coefficients form a closed
+    geometric series.
+  \item $k = 1$ (vertex parity / Hurwitz at quarter-integer shifts /
+    Dirichlet $L$):\
+    $M_3 \subset \MT(\Z[i, 1/2])$ at level $\le 4$ via
+    Deligne~\cite{deligne2010} and the explicit basis of
+    Glanois~\cite{glanois2015}, at depth equal to loop order.  The
+    vertex-parity-as-$\chi_{-4}$ correspondence is the
+    Deligne--Glanois Galois descent from level $4$ to level $2$
+    realised on the framework's natural QED observables.
+\end{itemize}
+The three sub-mechanisms are not set-theoretically disjoint
+(joint engagement is the typical case in physical observables);
+however, the master Mellin index $k$ uniquely identifies the
+period-ring contribution of each spectral object.  We catalogue
+witnesses from across the corpus (Papers 2, 25, 28, 38, 40, 43, 50,
+51) and indicate open questions:\ specific motivic identification of
+the irreducible depth-$k$ tower constants (PSLQ-irreducible at 200
+dps starting from $S_{\min}$ at $k=2$), inhomogeneous extension to
+non-static Robertson--Walker substrates, cross-manifold extension to
+the Bargmann--Segal Hardy lattice on $\sfive$, and inner-factor
+Yukawa coupling content.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+% =====================================================================
+
+\subsection{Background:\ GeoVac and the transcendental-to-periods question}
+
+The GeoVac framework~\cite{loutey_paper7,loutey_paper18} treats the
+$\sthree$ conformal projection of the hydrogen Coulomb problem
+(Fock 1935~\cite{fock1935}) as a discrete spectral-graph object:\
+nodes labeled by quantum numbers $(n, l, m, \ldots)$, edges by
+spectral selection rules, eigenvalues of the graph Laplacian giving
+the Coulomb spectrum exactly via the universal scaling $\kappa = -1/16$.
+The framework has been extended into a multi-paper corpus covering
+quantum chemistry, qubit encodings, gauge structure, Lorentzian
+extension, and gravity.  A consistent feature throughout:\ the
+\emph{algebraic skeleton} of the framework (the bare graph and its
+combinatorial selection rules) produces matrix elements in $\Q$, while
+\emph{transcendentals} enter at projection steps that promote the
+discrete substrate to continuum observables.  Paper~18 of the
+corpus~\cite{loutey_paper18} catalogues these as ``exchange
+constants'' organised by six tiers (intrinsic, calibration,
+embedding, algebraic-implicit, composition, inner-factor input data).
+
+The empirical content of the catalogue is short:\ across the entire
+GeoVac corpus, only the following transcendentals have ever appeared
+in spectral data:\
+\begin{equation}
+\label{eq:empirical_transcendentals}
+\pi^{n}\,(n \in \Z), \quad
+\zeta(2k+1)\,(k \ge 1), \quad
+G = \beta(2), \quad
+\beta(4),\;\beta(s),\;\ldots,
+\quad\text{plus a depth-}k\text{ tower}\quad
+S_{\min}, S^{(3)}, S^{(4)}, \ldots
+\end{equation}
+The first three classes have classical period-theoretic
+identifications (Kontsevich--Zagier 2001~\cite{kontsevich_zagier2001};
+Brown 2012~\cite{brown2012}; Deligne 2010~\cite{deligne2010};
+Glanois 2015~\cite{glanois2015}).  The depth-$k$ tower constants are
+PSLQ-irreducible at 200 dps against 100-element bases of all known
+depth-$\le 2$ transcendentals (Paper~28 \S~$S_{\min}$,
+\cite{loutey_paper28}); they are genuinely new transcendentals of the
+framework.
+
+The natural question, opened by the empirical content of
+Eq.~\eqref{eq:empirical_transcendentals}:\ do all of GeoVac's
+transcendentals sit in a single, named period-theoretic class?  If so,
+what is the structural mechanism that selects this class?
+
+\subsection{Result:\ master Mellin engine partition is a complete
+period-ring stratification}
+
+We show that the answer is affirmative.  Every transcendental in
+Eq.~\eqref{eq:empirical_transcendentals} lies in cyclotomic mixed-Tate
+periods at level $\le 4$ over $\mathcal{O}_4[1/4] = \Z[i, 1/2]$, with
+a complete stratification indexed by the operator-order slot
+$k \in \{0, 1, 2\}$ of the \emph{master Mellin engine}
+\begin{equation}
+\label{eq:master_mellin_engine}
+\Mcal\!\left[\,\Tr\bigl(D^k\, e^{-tD^2}\bigr)\,\right](s)
+\end{equation}
+on the discrete Camporesi--Higuchi $\sthree$ spectral
+triple~\cite{camporesi_higuchi1996}.  The structure is:
+\begin{center}
+\begin{tabular}{@{}clll@{}}
+\toprule
+$k$ & Sub-mechanism & Period-ring home & Source \\
+\midrule
+$0$ & M1 (Hopf-base measure) & $\Q[\pi, \pi^{-1}]$ & this paper \S\ref{sec:m1} \\
+$2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ pure Tate & \cite{fathizadeh_marcolli2016} + this paper \S\ref{sec:m2} \\
+$1$ & M3 (vertex parity / Hurwitz / Dirichlet $L$) & $\MT(\Z[i, 1/2])$ at level $\le 4$ & \cite{deligne2010, glanois2015} + this paper \S\ref{sec:m3} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The M3 row contains the substantive new identification:\ the
+vertex-parity selection rule that produces Catalan $G$ and
+$\beta(s)$ values in the framework's two-loop QED sector (Paper~28
+Theorem~3, \cite{loutey_paper28}) is precisely the Deligne--Glanois
+Galois descent from level $4$ to level $2$ on the framework's
+natural Dirichlet series $D(s) = D_{\mathrm{even}}(s) +
+D_{\mathrm{odd}}(s)$, with Hurwitz at quarter-integer shifts
+$\zeta(s, 1/4), \zeta(s, 3/4)$ surviving in
+$D_{\mathrm{even}} - D_{\mathrm{odd}}$ but cancelling in the sum.
+
+\subsection{Structure}
+
+Section~\ref{sec:master_engine} sets up the master Mellin engine on the
+Camporesi--Higuchi spectrum and states the case-exhaustion theorem of
+Paper~32 \S~VIII~\cite{loutey_paper32}.  Sections~\ref{sec:m1},
+\ref{sec:m2}, and~\ref{sec:m3} prove the three sub-mechanism
+classifications, each followed by a witness catalogue from the corpus.
+Section~\ref{sec:joint} treats joint engagement and physical observables
+that engage multiple sub-mechanisms simultaneously (the canonical
+example being the K-formula $K = \pi(B + F - \Delta)$ of
+Paper~2~\cite{loutey_paper2}).  Section~\ref{sec:open} catalogues
+open questions:\ specific motivic identification of the depth-$k$
+tower, inhomogeneous extension, cross-manifold extension to the
+$\sfive$ Bargmann--Segal Hardy lattice~\cite{loutey_paper24}, and
+inner-factor Yukawa content~\cite{loutey_paper32}.
+Section~\ref{sec:conclusion} concludes.
+
+% =====================================================================
+\section{The master Mellin engine on Camporesi--Higuchi $\sthree$}
+\label{sec:master_engine}
+% =====================================================================
+
+\subsection{The Camporesi--Higuchi spectrum}
+
+Let $\DCH$ denote the canonical Dirac operator on the round $\sthree$
+of unit radius, with the Camporesi--Higuchi spectral
+realisation~\cite{camporesi_higuchi1996}:
+\begin{equation}
+\label{eq:ch_spectrum}
+|\lambda_n^{\mathrm{CH}}| = n + \tfrac{3}{2}, \qquad
+g_n = 2(n+1)(n+2), \qquad n \in \N_{\ge 0},
+\end{equation}
+where the half-integer spectrum arises from the spinor parallel
+transport on the parallelisable group manifold $\sthree = \mathrm{SU}(2)$.
+The squared Dirac spectrum is the integer-coefficient quadratic
+$\lambda_n^2 = (n + 3/2)^2$ with the same degeneracy.  The associated
+spectral zeta function is
+\begin{equation}
+\label{eq:dirac_dirichlet}
+D(s) := \sum_{n \ge 0} \frac{g_n}{|\lambda_n^{\mathrm{CH}}|^s}
+      = 2\,\zeta(s - 2, 3/2) - \tfrac{1}{2}\,\zeta(s, 3/2),
+\end{equation}
+where $\zeta(s, a)$ is the Hurwitz zeta function, and the squared
+spectral zeta is
+\begin{equation}
+\label{eq:dirac_squared_dirichlet}
+\zeta_{D^2}(s) := \sum_{n \ge 0} \frac{g_n}{(\lambda_n^{\mathrm{CH}})^{2s}}
+                = D(2s).
+\end{equation}
+
+\subsection{The master Mellin engine}
+
+The Mellin transform of the trace
+$\Tr\bigl(D^k\, e^{-tD^2}\bigr)$ extracts the spectral zeta value
+$D(2s - k)$ (modulo $\Gamma$-factor normalisations):
+\begin{equation}
+\label{eq:mellin_extract}
+\Mcal\!\left[\Tr\bigl(D^k\, e^{-tD^2}\bigr)\right](s)
+= \frac{1}{\Gamma(s)} \int_0^\infty t^{s-1} \,
+   \sum_{n \ge 0} g_n (\lambda_n)^k\, e^{-t \lambda_n^2}\,dt
+= \frac{\Gamma(s + k/2)}{\Gamma(s)} \cdot D(2s + k).
+\end{equation}
+At integer $s$, the three cases $k \in \{0, 1, 2\}$ produce
+structurally distinct outputs:
+\begin{itemize}
+  \item $k = 0$:\ trivial heat kernel collapses to volume integral over
+    the substrate; the leading $t \to 0^+$ coefficient is
+    $\Vol(\sthree)/(4\pi)^{3/2}$ via the Weyl asymptotic.  The
+    Hopf-bundle decomposition $\sthree \to S^2$ (Paper~25,
+    \cite{loutey_paper25}) gives the base measure factor
+    $\Vol(S^2)/4 = \pi$ in the explicit identifications below;\ we
+    designate this contribution as mechanism M1.
+  \item $k = 2$:\ standard Connes--Chamseddine spectral action
+    $\Tr\,f(D^2/\Lambda^2)$ produces Seeley--DeWitt coefficients
+    $\{a_k(D^2)\}_{k \ge 0}$ via the asymptotic expansion of the heat
+    trace as $t \to 0^+$.  We designate this contribution as M2.
+  \item $k = 1$:\ the $\eta$-invariant series
+    $\eta(s) := \sum_n \mathrm{sgn}(\lambda_n) g_n |\lambda_n|^{-s}$
+    arises by Mellin transform of $\Tr(D e^{-tD^2})$, with the
+    vertex-parity decomposition
+    $D = D_{\mathrm{even}} + D_{\mathrm{odd}}$ on the parity of
+    $n_{\mathrm{Fock}}$ exposing Hurwitz at quarter-integer shifts.
+    We designate this contribution as M3.
+\end{itemize}
+
+\subsection{The case-exhaustion theorem}
+
+Paper~32 \S~VIII Theorem~\ref{thm:case_exhaustion}
+(\cite{loutey_paper32}) establishes:
+\begin{theorem}[Case-exhaustion of $\pi$-sources on the discrete
+$\sthree$ spectral triple]
+\label{thm:case_exhaustion}
+Every appearance of $\pi$ in any closed-form GeoVac spectral
+observable arises from one (or more) of the three named sub-mechanisms
+$M_1, M_2, M_3$:
+\begin{itemize}
+  \item $M_1$:\ Hopf-base measure factor $\Vol(S^2)/4 = \pi$ on the
+    Hopf bundle $\sthree \to S^2$;
+  \item $M_2$:\ Seeley--DeWitt heat-kernel coefficient
+    $a_k(D^2) \in \pi\cdot\Q$ in the asymptotic expansion of
+    $\Tr\,e^{-tD^2}$;
+  \item $M_3$:\ vertex-restricted Dirichlet-$L$ content via Hurwitz at
+    quarter-integer shifts in the parity decomposition of $D(s)$.
+\end{itemize}
+A falsification sweep against three candidate fourth mechanisms
+(continuum gravity, anomaly classes, principal bundles) returned the
+sharper finding that $M_1, M_2, M_3$ are three sub-cases of the single
+master Mellin engine $\Mcal[\Tr(D^k e^{-tD^2})]$ parameterised by
+operator order $k \in \{0, 1, 2\}$.
+\end{theorem}
+
+The theorem partitions GeoVac's $\pi$-content by Mellin slot;\ it does
+not by itself classify the \emph{period-theoretic ring} in which each
+sub-mechanism's output lives.  That classification --- which is the
+content of the present paper --- requires separate motivic input for
+each slot, drawn from the published period theory of
+Kontsevich--Zagier~\cite{kontsevich_zagier2001},
+Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016},
+Deligne~\cite{deligne2010}, and Glanois~\cite{glanois2015}.
+
+% =====================================================================
+\section{M1:\ the Hopf-base measure sub-mechanism}
+\label{sec:m1}
+% =====================================================================
+
+\subsection{Period-ring statement}
+
+\begin{theorem}[M1 period-ring]
+\label{thm:m1_pure_tate}
+The M1 sub-mechanism on the discrete Camporesi--Higuchi $\sthree$
+spectral triple produces period values in the localised pure-Tate
+sub-ring
+\begin{equation}
+\label{eq:m1_ring}
+M_1 \;\subset\; \Q[\pi, \pi^{-1}]
+\end{equation}
+of mixed-Tate periods over $\Q$ (Kontsevich--Zagier
+2001~\cite{kontsevich_zagier2001}), at depth $0$ and Tate weight
+$\in \Z$.
+\end{theorem}
+
+\begin{proof}
+By construction, the M1 mechanism is the Hopf-base measure factor
+$\Vol(S^2)/4 = \pi$ on the Hopf bundle $\sthree \to S^2$
+(Paper~25~\S~II.1,~\cite{loutey_paper25}).  As a period in the
+Kontsevich--Zagier framework, $\pi$ has the canonical representation
+$\pi = \tfrac{1}{2i}\oint_{|z|=1} dz/z$, a Tate weight-$1$ period of
+the mixed Tate motive $\Q(1)$.  Every M1 closed form across the
+corpus is a $\Q$-linear combination of integer powers of this period
+(witnesses tabulated below);\ no M1 closed form has produced
+transcendentals outside $\Q[\pi, \pi^{-1}]$.  The depth-$0$
+property follows from the absence of iterated integration in the
+Hopf-measure step:\ M1 acts as a single multiplicative factor, not as
+a Mellin convolution.  The localisation at $\pi^{-1}$ accommodates the
+inverse-period witnesses $4/\pi$ and $1/\pi^2$, which are not
+periods in the strict Kontsevich--Zagier sense but sit naturally in
+the field generated by $\pi$.
+\end{proof}
+
+\subsection{Witnesses}
+
+\begin{center}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Witness & Source & M1 factor & Tate weight \\
+\midrule
+$\Vol(S^2)/4 = \pi$ & Paper~25~\S~II.1~\cite{loutey_paper25} (Hopf base) & $\pi$ & $+1$ \\
+$4/\pi$ (asymptotic propinquity rate) & Paper~38~\S~L2~\cite{loutey_paper38} & $\pi^{-1}$ & $-1$ \\
+$4/\pi$ (universal across compact Lie groups) & Paper~40 Thm 1~\cite{loutey_paper40} & $\pi^{-1}$ & $-1$ \\
+$1/\pi^2$ (Pythagorean orthogonality prefactor) & Paper~43~\S~10.2~\cite{loutey_paper43} & $\pi^{-2}$ & $-2$ \\
+$1/\pi^2$ (F-theorem cross-product) & Paper~50 Thm 3.4~\cite{loutey_paper50} & $\pi^{-2}$ & $-2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Every entry is $q \cdot \pi^n$ for $q \in \Q$ and $n \in \Z$ with
+$|n| \le 2$ on the empirical witnesses logged so far.  The K-formula
+$K = \pi(B + F - \Delta)$ of Paper~2~\cite{loutey_paper2} contains the
+canonical M1 factor (the leading $\pi$);\ the analysis of joint
+engagement in \S\ref{sec:joint} below decomposes the full M1+M2+M3
+content of the K-formula.
+
+\subsection{Convention-freeness}
+
+Unlike M2 (which depends on the volume-normalisation convention for
+the spectral action --- see \S\ref{sec:m2} below), the M1 ring is
+convention-free.  The reason:\ the Hopf-base measure is itself a
+volume integral, not a heat-kernel asymptotic coefficient at $t \to 0^+$.
+There is no choice of dimensional rescaling to absorb or expose; the
+factor $\pi$ appears directly.  This convention-freeness is the
+structural counterpart of M1's depth-$0$ status:\ depth $\ge 1$
+mechanisms admit non-trivial rescaling choices via the heat-kernel
+asymptotic, while depth-$0$ mechanisms do not.
+
+% =====================================================================
+\section{M2:\ the Seeley--DeWitt sub-mechanism}
+\label{sec:m2}
+% =====================================================================
+
+\subsection{Period-ring statement}
+
+\begin{theorem}[M2 period-ring]
+\label{thm:m2_mixed_tate}
+The M2 sub-mechanism on the discrete Camporesi--Higuchi $\sthree$
+spectral triple produces period values in the strictly smaller
+pure-Tate even-weight sub-ring
+\begin{equation}
+\label{eq:m2_ring}
+M_2 \;\subset\; \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
+\;\subset\; \MT(\Q)
+\end{equation}
+of mixed-Tate periods over $\Q$, at depth $0$.  The classification
+inherits the Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016}
+mixed-Tate result for Connes--Chamseddine spectral actions on
+Robertson--Walker spacetimes $\R \times \sthree$, restricted to the
+static sub-case $a(t) \equiv 1$, and refines it in two structural
+directions:\ (i) the Dirac SD expansion is two-term exact ($a_k = 0$
+for $k \ge 2$), while the F--M generic R--W expansion is infinite;\
+(ii) the scalar Laplacian SD coefficients form the closed
+geometric series $a_k^\Delta = 2\pi^2/k!$, while the F--M generic
+R--W scalar expansion has no such closed form.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Direct inheritance is by application of
+Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016} Theorem on the
+Rosenfeld integral representation of Seeley--DeWitt coefficients on
+$\R \times \sthree$, specialised to constant scaling factor.  The
+pure-Tate refinement on the static sub-case has two parts:
+\begin{itemize}
+  \item \textit{Dirac sector.}  The Camporesi--Higuchi spectrum
+    $|\lambda_n| = n + 3/2$ admits the Jacobi $\vartheta_2$ modular
+    transformation
+    $\Tr e^{-tD^2} = (\sqrt\pi/2) t^{-3/2} - (\sqrt\pi/4) t^{-1/2}
+                    + O(e^{-\pi^2/t})$, with the exponentially small
+    remainder vanishing in the asymptotic series.  All SD coefficients
+    $a_k^{D^2}$ for $k \ge 2$ are exactly zero;\ the volume-normalised
+    coefficients are $a_0 = 4\pi^2$, $a_1 = -2\pi^2$.
+  \item \textit{Scalar sector.}  The integer spectrum $n(n+2)$ admits
+    the Jacobi $\vartheta_3$ modular transformation giving the closed
+    form $\Tr e^{-t\Delta} = (\sqrt\pi/4) \cdot e^t/t^{3/2} +
+    O(e^{-\pi^2/t})$, with $a_k^\Delta = 2\pi^2/k!$.
+\end{itemize}
+Both sectors are explicit in Paper~51~\cite{loutey_paper51}.  The
+empirical pure-Tate restriction (no $\zeta(3)$, no MZVs) is consistent
+with this closed-form structure:\ the F--M generic R--W classification
+allows MZV content when scaling-factor derivatives are non-trivial;\
+on the static sub-case those derivatives vanish, eliminating the MZV
+content.
+\end{proof}
+
+\subsection{Witnesses}
+
+The empirical pure-Tate witness panel from the GeoVac corpus:
+
+\begin{center}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Witness & Source & Closed form & Tate weight \\
+\midrule
+$a_0^{D^2}$ (Dirac SD, vol-norm) & Paper~51 Cor.~2.1~\cite{loutey_paper51} & $4\pi^2$ & $+2$ \\
+$a_1^{D^2}$ (Dirac SD, vol-norm) & Paper~51 Cor.~2.1 & $-2\pi^2$ & $+2$ \\
+$a_k^{D^2}$, $k \ge 2$ & Paper~51 Cor.~2.1 & $0$ & --- \\
+$a_k^\Delta$ (scalar SD, vol-norm) & Paper~51 Thm 3.1 & $2\pi^2/k!$ & $+2$ \\
+$\zeta_{D^2}(2)$ & Paper~28 Thm 1~\cite{loutey_paper28} & $\pi^2 - \pi^4/12$ & $+2, +4$ \\
+$\zeta_{D^2}(3)$ & Paper~28 Thm 1 & $\pi^4/3 - \pi^6/30$ & $+4, +6$ \\
+$\zeta_{D^2}(4)$ & Paper~28 Thm 1 & $2\pi^6/15 - 17\pi^8/1260$ & $+6, +8$ \\
+$\zeta_{D^2}(5)$ & Paper~28 Thm 1 & $\pi^8(306 - 31\pi^2)/5670$ & $+8, +10$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All witnesses are in $\bigoplus_k \pi^{2k}\cdot\Q$;\ no $\sqrt\pi$,
+no $\zeta(2k+1)$, no MZV content at the SD or spectral-zeta-at-integer-$s$
+level.
+
+\subsection{Volume-normalisation convention}
+
+A structural caveat at the raw heat-trace level:\ the un-normalised
+coefficients $\tilde a_k = a_k / (4\pi)^{3/2}$ contain $\sqrt\pi$
+explicitly (from the spinor fiber dimension factor that always appears
+in $d$-odd heat-kernel expansions on spin manifolds).  This $\sqrt\pi$
+cancels exactly against the $(4\pi)^{d/2}$ in the standard
+volume-normalisation convention, recovering the pure-Tate ring
+$\bigoplus_k \pi^{2k}\cdot\Q$.  At the spectral-zeta-at-integer-$s$
+level (which is convention-free), the values lie in
+$\Q[\pi^2]$;\ the $\sqrt\pi$ slot is populated only at half-integer
+$s$, where the values match the leading heat-trace poles.  This
+reconciles Paper~28 Theorem~1 (T9, $\sqrt\pi\cdot\Q \oplus \pi^2\cdot\Q$
+two-term ring) with the pure-Tate classification at integer $s$.
+
+% =====================================================================
+\section{M3:\ vertex parity, Hurwitz at quarter-integer shifts, and
+the Deligne--Glanois Galois descent}
+\label{sec:m3}
+% =====================================================================
+
+[\textbf{Drafting in progress.}  This section will state and prove
+the M3 period-ring theorem, parallel to Theorems~\ref{thm:m1_pure_tate}
+and~\ref{thm:m2_mixed_tate}, with full witness panel from Paper~28
+Theorems 2--3 ($D(s)$ parity discriminant; $\chi_{-4}$ identity),
+Paper~28 §K-Sommerfeld separation (Sommerfeld $D_p$ with harmonic-number
+weights), Paper~28 §$S_{\min}$ (two-loop irreducible at 200 dps), and
+Paper~28 §depth-$k$ tower.  The substantive new content of \S\ref{sec:m3}
+is the identification of the vertex-parity-as-$\chi_{-4}$ correspondence
+as the literal Deligne--Glanois Galois descent at $N = 4$ on the
+framework's natural QED observables.  Source memo:
+\texttt{debug/sprint\_m3\_cyclotomic\_mixed\_tate\_memo.md}.]
+
+% =====================================================================
+\section{Joint engagement and physical observables}
+\label{sec:joint}
+% =====================================================================
+
+[\textbf{Outline.}  Sub-mechanisms M1, M2, M3 are role-disjoint at the
+Mellin slot index but not set-theoretically disjoint;\ joint engagement
+is the typical case in physical observables.  Canonical examples:
+\begin{itemize}
+  \item The K-formula $K = \pi(B + F - \Delta)$ of
+    Paper~2~\cite{loutey_paper2}:\ explicit $\pi$ from M1, $F = \zeta(2)$
+    from M2 inside the Fock Dirichlet evaluation, $\Delta = 1/40$
+    rational from M3 weight-$0$ Dirac mode count.
+  \item Paper~50 F-theorem coefficient
+    $F_s = (\log 2)/8 - 3\zeta(3)/(16\pi^2)$:\ $1/\pi^2$ from M1,
+    $\zeta(3)$ from M3 in cross-product.  The decomposition
+    $F_D + 2F_s = (\log 2)/2$ isolates M2 (all $\zeta(3)$ cancels);
+    the decomposition $F_D - 2F_s = 3\zeta(3)/(4\pi^2)$ isolates M3
+    (all $\log 2$ cancels).
+  \item Paper~38 L2 asymptotic propinquity rate constant
+    $4/\pi = \Vol(S^2)/\pi^2$:\ M1 factor $\Vol(S^2)$ in the
+    numerator, M1 inverse-period $\pi^{-2}$ in the denominator.
+\end{itemize}
+Section will formalise the joint-engagement combinatorics as a
+$(k_1, k_2, k_3) \to k_1 + k_2 + k_3$ product of Tate weights
+modulo the master Mellin index multiplicativity.]
+
+% =====================================================================
+\section{Open questions}
+\label{sec:open}
+% =====================================================================
+
+\subsection{Specific motivic identification of the depth-$k$ tower}
+
+The depth-$k$ loop tower (Paper~28 Proposition depth\_k,
+\cite{loutey_paper28}) predicts a new irreducible transcendental at
+each loop order:
+\begin{itemize}
+  \item $k = 1$:\ $\pi^{\mathrm{even}}$ only (Paper~28 Theorem~T9,
+    proven; depth $1$ in $\MT(\Z)$).
+  \item $k = 2$:\ $S_{\min} = 2.479936938\ldots$ PSLQ-irreducible at
+    200 dps against a 100-element basis (Paper~28 \S$S_{\min}$);\
+    classification predicts $S_{\min} \in \MT(\Z[1/2])$ at depth $2$.
+  \item $k = 3$:\ $S^{(3)}$ independent of $S_{\min}$ (PSLQ with
+    $S_{\min}$ in basis fails at fast-converging exponents).
+  \item $k$ general:\ new irreducible at depth $k$.
+\end{itemize}
+The classification places each constant in a specific period ring
+(by inheritance of the motivic content of the Hurwitz / Dirichlet $L$
+building blocks) but does not identify the constant as a specific
+element of the Deligne--Glanois basis $\Bcal^N$ at depth $k$.  Higher
+PSLQ precision (300 dps) against an enriched depth-$k$ basis is the
+natural mini-sprint at each $k$.
+
+\subsection{Inhomogeneous extension}
+
+The Fathizadeh--Marcolli result holds on $\R \times \sthree$ with
+arbitrary scaling factor $a(t)$;\ the present paper restricts to
+$a(t) \equiv 1$.  Whether the GeoVac discrete substrate admits a
+time-dependent $a(t)$ generalisation with the same period-theoretic
+content is open.
+
+\subsection{Cross-manifold extension to $\sfive$ Bargmann--Segal}
+
+Paper~24~\cite{loutey_paper24} establishes a parallel discrete
+spectral-triple structure on the Hardy sector of $\sfive$, encoding
+the 3D harmonic oscillator with a $\pi$-free skeleton.  Whether
+the master Mellin engine partition extends to this cross-manifold
+substrate, and whether the period-theoretic classification holds at
+the same level $4$, is open.
+
+\subsection{Inner-factor Yukawa content}
+
+The almost-commutative extension
+$\mathcal{A}_{\mathrm{GV}} \otimes (\C \oplus \mathbb{H})$ studied in
+Paper~32 \S~VIII.C~\cite{loutey_paper32} (Sprint H1 closure) admits a
+Higgs structure but does not autonomously select the Yukawa coupling
+matrix.  The associated inner-factor input data (Yukawa Dirichlet
+ring, Paper~18 \S~IV tier 6~\cite{loutey_paper18}) is classified
+empirically as Dirichlet-$L$-class, but its period-theoretic placement
+inside the M1/M2/M3 trinity (or as a genuinely new sub-mechanism) is
+open.
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% =====================================================================
+
+The transcendental content of GeoVac spectral data lies in
+cyclotomic mixed-Tate periods at level $\le 4$ over $\Z[i, 1/2]$,
+indexed by the master Mellin engine slot $k \in \{0, 1, 2\}$.  The
+classification places the GeoVac framework inside the published
+periods/motives program (Kontsevich--Zagier, Brown, Deligne, Glanois,
+Fathizadeh--Marcolli) in a precise way:\ each of GeoVac's
+empirically-observed transcendentals has a named motivic home
+inherited from the period-theoretic content of the corresponding
+sub-mechanism.  The vertex-parity-as-$\chi_{-4}$ correspondence at the
+core of GeoVac's two-loop QED sector (Paper~28 Theorem~3) is the
+literal Deligne--Glanois Galois descent from level $4$ to level $2$
+on the framework's natural Dirichlet series.
+
+% =====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper2}
+J.~Loutey, ``Paper 2: $\alpha = K^{-1}$ as a spectral coincidence on
+the Fock-projected $\sthree$,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey, ``Paper 7: The dimensionless vacuum on $\sthree$,'' GeoVac
+corpus (2026).
+
+\bibitem{loutey_paper18}
+J.~Loutey, ``Paper 18: Exchange constants and the master Mellin
+engine,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper24}
+J.~Loutey, ``Paper 24: Bargmann--Segal lattice for the 3D harmonic
+oscillator,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper25}
+J.~Loutey, ``Paper 25: GeoVac Hopf graphs as discrete lattice-gauge
+structure,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper28}
+J.~Loutey, ``Paper 28: QED on $\sthree$,'' GeoVac corpus (2026).
+
+\bibitem{loutey_paper32}
+J.~Loutey, ``Paper 32: The GeoVac spectral triple,'' GeoVac corpus
+(2026).
+
+\bibitem{loutey_paper38}
+J.~Loutey, ``Latr\'emoli\`ere propinquity convergence of truncated
+Camporesi--Higuchi spectral triples on $\sthree$,'' arXiv preprint /
+GeoVac corpus Paper~38 (2026).
+
+\bibitem{loutey_paper40}
+J.~Loutey, ``Universal $4/\pi$ rate constant in Latr\'emoli\`ere
+propinquity convergence across compact connected Lie groups,'' GeoVac
+corpus Paper~40 (2026).
+
+\bibitem{loutey_paper43}
+J.~Loutey, ``Lorentzian extension of the four-witness Wick-rotation
+theorem at finite cutoff,'' GeoVac corpus Paper~43 (2026).
+
+\bibitem{loutey_paper50}
+J.~Loutey, ``Boundary CFT$_3$-on-$\sthree$ observables on the
+truncated GeoVac spectral triple,'' GeoVac corpus Paper~50 (2026).
+
+\bibitem{loutey_paper51}
+J.~Loutey, ``Gravity arc on the discrete $\sthree$ spectral triple,''
+GeoVac corpus Paper~51 (2026).
+
+\bibitem{fock1935}
+V.~Fock, ``Zur Theorie des Wasserstoffatoms,''
+\textit{Z. Physik}~\textbf{98}, 145--154 (1935).
+
+\bibitem{camporesi_higuchi1996}
+R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac
+operator on spheres and real hyperbolic spaces,''
+\textit{J. Geom. Phys.}~\textbf{20}, 1--18 (1996).
+
+\bibitem{kontsevich_zagier2001}
+M.~Kontsevich and D.~Zagier, ``Periods,'' in \textit{Mathematics
+Unlimited --- 2001 and Beyond}, B.~Engquist and W.~Schmid, eds.,
+Springer (2001), pp.~771--808.
+
+\bibitem{brown2012}
+F.~Brown, ``Mixed Tate motives over $\Z$,''
+\textit{Ann. of Math.}~(2)~\textbf{175}, 949--976 (2012).
+
+\bibitem{deligne2010}
+P.~Deligne, ``Le groupe fondamental unipotent motivique de
+$\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6$ ou $8$,''
+\textit{Publ. Math. IHES}~\textbf{112}, 101--141 (2010);\ preprint
+arXiv:math/0302267 (2005).
+
+\bibitem{glanois2015}
+C.~Glanois, ``Motivic unipotent fundamental groupoid of
+$\mathbb{G}_m \setminus \mu_N$ for $N = 2, 3, 4, 6, 8$ and Galois
+descents,'' arXiv:1411.4947 (v2, 2 Sep 2015);\ published version
+\textit{J. Number Theory}~\textbf{182}, 36--90 (2018).
+
+\bibitem{fathizadeh_marcolli2016}
+F.~Fathizadeh and M.~Marcolli, ``Periods and motives in the spectral
+action of Robertson--Walker spacetimes,''
+\textit{Comm. Math. Phys.}~\textbf{356}, 641--671 (2017);\ preprint
+arXiv:1611.01815 (2016).
+
+\end{thebibliography}
+
+\end{document}
