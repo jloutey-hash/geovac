@@ -182,12 +182,6 @@ class TestLiHL2Comparison:
         assert lih_l2_channel_blind.pes_result['D_e'] > 0
         assert lih_l2_l_dependent.pes_result['D_e'] > 0
 
-    @pytest.mark.skip(
-        reason="See test_ab_initio_pk_v2 named production regression: "
-               "ComposedDiatomicSolver.LiH_ab_initio R_eq collapsed from "
-               "~3 bohr to ~0.8 bohr after the v3.x PK/composed-qubit "
-               "refactor. PI judgment required."
-    )
     def test_r_eq_comparison(
         self,
         lih_l2_channel_blind: ComposedDiatomicSolver,
@@ -250,12 +244,6 @@ class TestLiHL3LDependent:
         print(f"  D_e (l3, l_dep) = {D_e:.6f} Ha")
         assert D_e > 0
 
-    @pytest.mark.skip(
-        reason="See test_ab_initio_pk_v2 named production regression: "
-               "ComposedDiatomicSolver.LiH_ab_initio R_eq collapsed from "
-               "~3 bohr to ~0.7 bohr after the v3.x PK/composed-qubit "
-               "refactor. PI judgment required."
-    )
     def test_r_eq_physical(
         self, lih_l3_l_dependent: ComposedDiatomicSolver,
     ) -> None:
@@ -279,12 +267,6 @@ class TestLiHL4LDependent:
         print(f"  D_e (l4, l_dep) = {D_e:.6f} Ha")
         assert D_e > 0
 
-    @pytest.mark.skip(
-        reason="See test_ab_initio_pk_v2 named production regression: "
-               "ComposedDiatomicSolver.LiH_ab_initio R_eq collapsed from "
-               "~3 bohr to ~0.7 bohr after the v3.x PK/composed-qubit "
-               "refactor. PI judgment required."
-    )
     def test_r_eq_physical(
         self, lih_l4_l_dependent: ComposedDiatomicSolver,
     ) -> None:

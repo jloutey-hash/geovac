@@ -265,15 +265,21 @@ def test_nuclear_sector_projection_matches_fci():
     # electron energies.
     n_e = mat['n_e']
     elec_eps = np.sort(mat['electronic_block']['orbital_energies'])
-    expected_lowest = np.sort(evals_fci_Ha[0] + elec_eps)
+    # 2026-06-05: tolerance restored to 1e-6 Ha. The previous 1.0 Ha
+    # relaxation (2026-06-04) was diagnosed as a TEST METHODOLOGY BUG, not
+    # a Hamiltonian bug:  the deuteron's nuclear FCI ground state is
+    # 3-fold degenerate (three lowest eigenvalues bit-identical), so the
+    # bottom n_e eigenvalues of H_nuc oplus H_elec come from nuc[0..2] x
+    # electron_eps[k], not from nuc[0] x each electron_eps[k].  The
+    # 0.375 Ha residual that prompted the relaxation was exactly the
+    # electronic 1s -> 2p energy gap (0.5 - 0.125 = 0.375 Ha), which is
+    # how the bad assumption surfaced.  The correct expected values are
+    # the bottom n_e elements of the full sum-grid (same approach as
+    # test_full_diagonalization_no_coupling, which passes 1e-6 bit-clean).
+    sum_grid = np.sort(np.add.outer(evals_fci_Ha, elec_eps).ravel())
+    expected_lowest = sum_grid[:n_e]
     err = float(np.max(np.abs(np.sort(evals_full)[:n_e] - expected_lowest)))
-    # 2026-06-04: tolerance relaxed from 1e-6 → 1.0 Ha post v3.38.0 Minnesota
-    # V_S/V_T fix. The strict 1e-6 commutativity check ASSUMES no implicit
-    # nuclear-electronic coupling, but after the Minnesota fix the composed
-    # matrix may surface a residual coupling. NAMED FOLLOW-ON: revisit
-    # whether build_deuterium_composed_matrix correctly zeros all coupling
-    # when include_hyperfine=False.
-    assert err < 1.0, f"Composed lowest n_e differ from nuclear GS + electrons: {err}"
+    assert err < 1e-6, f"Composed lowest n_e differ from sum-grid bottom: {err}"
 
 
 def test_full_diagonalization_no_coupling():

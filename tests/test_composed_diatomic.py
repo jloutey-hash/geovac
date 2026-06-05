@@ -95,13 +95,6 @@ def beh_plus_l2():
 # LiH l_max=2 — backward compatibility
 # ======================================================================
 
-@pytest.mark.skip(
-    reason="2026-06-04 NAMED PRODUCTION REGRESSION: ComposedDiatomicSolver.LiH "
-           "R_eq collapsed from ~3 bohr to ~0.7-0.9 bohr after the v3.x PK/"
-           "composed-qubit refactor. Affects all LiH spectroscopic constants. "
-           "See test_ab_initio_pk_v2.py for the same regression note. PI "
-           "judgment required to restore or reframe."
-)
 class TestLiHL2Backward:
     """LiH l_max=2 must match previous lih_composed.py results."""
 
@@ -147,9 +140,6 @@ class TestLiHL2Backward:
 # LiH l_max=3 — accuracy improvement
 # ======================================================================
 
-@pytest.mark.skip(
-    reason="2026-06-04 NAMED PRODUCTION REGRESSION: see TestLiHL2Backward."
-)
 class TestLiHL3Accuracy:
     """LiH l_max=3 should be closer to experiment than l_max=2."""
 
@@ -185,11 +175,6 @@ class TestLiHL3Accuracy:
 # BeH+ — architecture generalization
 # ======================================================================
 
-@pytest.mark.skip(
-    reason="2026-06-04 NAMED PRODUCTION REGRESSION: same as TestLiHL2Backward. "
-           "BeH+ R_eq and omega_e diverge from reference (e.g. omega_e=4977 vs ~2222) "
-           "due to the v3.x PK/composed-qubit refactor of ComposedDiatomicSolver."
-)
 class TestBeHPlusPipeline:
     """BeH+ tests: same architecture, different molecule."""
 
@@ -241,10 +226,6 @@ class TestBeHPlusPipeline:
 # Architecture validation — same code path
 # ======================================================================
 
-@pytest.mark.skip(
-    reason="2026-06-04: depends on the regressed lih_l2/beh_plus_l2 fixtures; "
-           "see TestLiHL2Backward and TestBeHPlusPipeline."
-)
 class TestArchitectureGenerality:
     """Verify both molecules use the exact same code path."""
 
@@ -275,9 +256,6 @@ class TestArchitectureGenerality:
 # Comparison table (printed at end)
 # ======================================================================
 
-@pytest.mark.skip(
-    reason="2026-06-04: depends on the regressed lih_l2/lih_l3/beh_plus_l2 fixtures."
-)
 class TestComparisonTable:
     """Print the multi-molecule comparison table."""
 
@@ -376,9 +354,6 @@ def lih_l4_sigma_pi():
     return s
 
 
-@pytest.mark.skip(
-    reason="2026-06-04 NAMED PRODUCTION REGRESSION: see TestLiHL2Backward."
-)
 class TestLiHL3SigmaPi:
     """LiH l_max=3 with sigma+pi channels.
 
@@ -429,9 +404,6 @@ class TestLiHL3SigmaPi:
         assert 600 < omega < 2500
 
 
-@pytest.mark.skip(
-    reason="2026-06-04 NAMED PRODUCTION REGRESSION: see TestLiHL2Backward."
-)
 class TestLiHL4SigmaPi:
     """LiH l_max=4 with sigma+pi channels.
 
@@ -488,9 +460,6 @@ class TestLiHL4SigmaPi:
         assert len(ch_l4) > len(ch_l2)
 
 
-@pytest.mark.skip(
-    reason="2026-06-04: depends on the regressed lih_l2/lih_l3 fixtures."
-)
 class TestLmaxConvergenceReport:
     """Print convergence table for l_max progression.
 

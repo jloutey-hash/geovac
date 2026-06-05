@@ -642,6 +642,71 @@ def build_balanced_hamiltonian(
 
     sb_positions = _get_sub_block_positions(spec, nuclei_list)
 
+    # --- R-dependence correction for nuclear_repulsion (2026-06-05 fix) ---
+    # The spec's `nuclear_repulsion_constant` was computed at the spec's
+    # default R (typically `_HYDRIDE_REQ[spec.name]`).  When the caller
+    # passes a different R, that constant must be updated:\ V_NN(R) goes
+    # into the identity term of the Hamiltonian; E_core (and V_cross for
+    # frozen-core specs) are R-independent.  Previously this update was
+    # missing, producing an artificially flat (R-independent) V_NN that
+    # gave monotone-decreasing PES with the minimum at the panel boundary
+    # instead of near R_eq.  Track CD's "LiH 878 Pauli, 7.0% R_eq" claim
+    # (Paper 17 Table II, v2.0.43) is reproducible once V_NN(R) is
+    # restored on the requested R.  See `docs/molecular_refactor_handoff.md`
+    # §2.1 for the original Pattern E description.
+    def _compute_v_nn(nuc_list):
+        v = 0.0
+        for i, n1 in enumerate(nuc_list):
+            r1 = np.array(n1['position'], dtype=float)
+            z1 = float(n1['Z'])
+            for n2 in nuc_list[i + 1:]:
+                r2 = np.array(n2['position'], dtype=float)
+                d = float(np.linalg.norm(r1 - r2))
+                if d > 1e-12:
+                    v += z1 * float(n2['Z']) / d
+        return v
+
+    if nuclei is None and not getattr(spec, 'nuclei', None):
+        # Spec uses a default-R lookup; correct V_NN to the requested R.
+        from geovac.molecular_spec import _HYDRIDE_REQ as _HR
+        spec_R = _HR.get(spec.name)
+        if spec_R is not None and abs(spec_R - R) > 1e-12:
+            v_nn_new = _compute_v_nn(nuclei_list)
+            name = spec.name.lower().replace(' ', '').replace('-', '')
+            # Build the same nuclei list at the spec's default R so we can
+            # subtract the baked-in V_NN(spec_R) and add V_NN(R).
+            if name in ('lih',):
+                nuclei_at_spec_R = _get_nuclei_for_lih(spec, spec_R)
+            elif name in ('beh2', 'beh₂'):
+                nuclei_at_spec_R = _get_nuclei_for_beh2(spec_R)
+            elif name in ('h2o', 'h₂o'):
+                nuclei_at_spec_R = _get_nuclei_for_h2o()
+            elif name in ('nah',):
+                nuclei_at_spec_R = _get_nuclei_for_nah(spec_R)
+            elif name in ('mgh2', 'mgh₂'):
+                nuclei_at_spec_R = _get_nuclei_for_mgh2(spec_R)
+            elif name in ('hcl',):
+                nuclei_at_spec_R = _get_nuclei_for_hcl(spec_R)
+            elif name in ('h2s', 'h₂s'):
+                nuclei_at_spec_R = _get_nuclei_for_h2s(spec_R)
+            elif name in ('ph3', 'ph₃'):
+                nuclei_at_spec_R = _get_nuclei_for_ph3(spec_R)
+            elif name in ('sih4', 'sih₄'):
+                nuclei_at_spec_R = _get_nuclei_for_sih4(spec_R)
+            elif name in ('kh',):
+                nuclei_at_spec_R = _get_nuclei_for_kh(spec_R)
+            elif name in ('cah2', 'cah₂'):
+                nuclei_at_spec_R = _get_nuclei_for_cah2(spec_R)
+            elif name in ('geh4', 'geh₄'):
+                nuclei_at_spec_R = _get_nuclei_for_geh4(spec_R)
+            elif name in ('hbr',):
+                nuclei_at_spec_R = _get_nuclei_for_hbr(spec_R)
+            else:
+                nuclei_at_spec_R = None
+            if nuclei_at_spec_R is not None:
+                v_nn_old = _compute_v_nn(nuclei_at_spec_R)
+                nuclear_repulsion = nuclear_repulsion - v_nn_old + v_nn_new
+
     if verbose:
         print(f"[balanced] Sub-blocks: {len(sub_blocks)}")
         for sb in sub_blocks:
@@ -649,6 +714,7 @@ def build_balanced_hamiltonian(
             print(f"  {sb['label']}: Z_orb={sb['Z_orb']}, offset={sb['offset']}, "
                   f"M={len(sb['states'])}, pos=({pos[0]:.3f},{pos[1]:.3f},{pos[2]:.3f})")
         print(f"[balanced] Nuclei: {nuclei_list}")
+        print(f"[balanced] V_NN-corrected nuclear_repulsion = {nuclear_repulsion:.6f} Ha")
 
     # For each sub-block, compute V_ne from each OFF-CENTER nucleus
     cross_vne_count = 0

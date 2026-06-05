@@ -1917,7 +1917,30 @@ def build_composed_beh2(
     dict with keys:
         M, Q, N_pauli, M_core, M_bond, M_bond_be, M_bond_h,
         ERI_density_total, h1, eri, nuclear_repulsion, qubit_op, etc.
+
+    Notes
+    -----
+    The h1 diagonal entries on bond-Be orbitals differ from
+    ``build_composed_hamiltonian(beh2_spec())`` by ~5% because this
+    legacy builder uses Z²-scaled Li²⁺ PK parameters (A=12.32, B=12.44)
+    while the modern path uses ab initio PK parameters (A=13.01,
+    B=12.53) from Paper 17 / Track BI. This is the intentional update
+    from a placeholder to ab initio values, not a bug. When run with
+    matching PK parameters the two builders produce bit-identical h1.
+    See ``docs/molecular_refactor_handoff.md`` §2.3 and the
+    ``test_h1_match`` skip reason for details.
     """
+    import warnings
+    warnings.warn(
+        "build_composed_beh2 is deprecated since v2.8.0; use "
+        "build_composed_hamiltonian(beh2_spec()) for the modern "
+        "ab initio PK pseudopotential. The legacy path uses Z²-scaled "
+        "placeholder PK values (A=12.32, B=12.44) that differ from "
+        "the ab initio path (A=13.01, B=12.53) by ~5% on bond-Be h1 "
+        "diagonal entries.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     t0 = time.perf_counter()
 
     # --- Physical parameters ---

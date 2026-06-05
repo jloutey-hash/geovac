@@ -344,19 +344,22 @@ class ComposedDiatomicSolver:
     def _solve_valence_at_R(self, R: float, n_Re: int = 300) -> float:
         """Solve Level 4 valence problem at a single R.
 
-        NOTE (Sprint 6 convention audit, v2.16.0): The pk_potentials kwarg
-        was passed to solve_level4_h2_multichannel which never accepted it,
-        causing a TypeError on every call. This is an evolutionary artifact:
-        Track CB (v2.0.37) confirmed PK overcorrects (decoupled 10.9% vs
-        PK 15.0%), and Track CD (v2.0.39) replaced PK with balanced coupled
-        (PK-free, cross-center V_ne) for classical PES accuracy. The
-        classical PES path through composed_diatomic was effectively
-        superseded by balanced_coupled.py. PK remains live only in the
-        quantum pipeline (composed_qubit.py) where it provides sparsity
-        (334 vs 878 Pauli terms) and is partitioned classically via
-        pk_partitioning.py (pk_in_hamiltonian=False is the ecosystem
-        default). The broken kwarg is removed rather than fixed because
-        the balanced coupled path is the correct classical PES solver.
+        2026-06-05 (Sprint F.2): ``pk_potentials`` propagation restored.
+        Earlier removal (Sprint 6 convention audit, v2.16.0) assumed the
+        classical PES path through ``composed_diatomic`` was superseded by
+        ``balanced_coupled``.  In practice that left the
+        ``ComposedDiatomicSolver.LiH_ab_initio`` and ``BeH_plus`` paths
+        without the Phillips-Kleinman barrier they require, collapsing the
+        Li/Be valence electron into the 1s² core region at short R and
+        breaking ~39 Pattern E tests plus the Paper 17 Sec V Table II "5.3
+        percent R_eq" claim.  Restoring the kwarg fixes both:
+        ``pk_potentials`` is threaded through to
+        ``build_angular_hamiltonian`` where the Gaussian/r^2 monopole
+        barrier is applied diagonally on the channel-grid index.  When
+        ``pk_mode='none'`` the solver passes ``None`` and the call is
+        bit-identical to the prior no-PK path.  See
+        ``debug/sprint_lih_binding_fix_memo.md`` for the full regression
+        analysis.
         """
         result = solve_level4_h2_multichannel(
             R=R,
@@ -368,6 +371,7 @@ class ComposedDiatomicSolver:
             verbose=False,
             m_max=self.m_max,
             l_max_per_m=self.l_max_per_m,
+            pk_potentials=self.pk_potentials,
         )
         return result['E_elec']
 

@@ -113,11 +113,16 @@ class TestBeH2GeneralBuilder:
         assert new['N_pauli'] in (555, 556)
 
     @pytest.mark.skip(
-        reason="Deprecated build_composed_beh2 and the production "
-               "build_composed_hamiltonian path use different PK conventions; "
-               "h1 diagonals diverge by ~5% (cross-block W1c/W1d arc). "
-               "The deprecated builder is preserved as backward-compat shim "
-               "but is not the production reference."
+        reason="Intentional PK convention difference: legacy "
+               "build_composed_beh2 uses Z^2-scaled placeholder PK "
+               "(A=12.32, B=12.44 from Li2+) while the production "
+               "build_composed_hamiltonian path uses ab initio PK "
+               "(A=13.01, B=12.53) from Paper 17 / Track BI. "
+               "Diagonals diverge by ~5% on bond-Be entries; with "
+               "matching PK params the builders agree bit-identically. "
+               "The legacy builder is deprecated (DeprecationWarning "
+               "since v2.8.0) and preserved only as a backward-compat "
+               "shim for external callers."
     )
     def test_h1_match(self, results):
         old, new = results

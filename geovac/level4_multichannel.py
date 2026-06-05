@@ -21,7 +21,7 @@ import numpy as np
 from scipy.linalg import eigh
 from scipy.interpolate import CubicSpline
 from scipy.linalg import eigh_tridiagonal
-from typing import Tuple, List, Union
+from typing import Tuple, List, Union, Optional
 from math import sqrt
 
 from geovac.hyperspherical_angular import gaunt_integral
@@ -255,6 +255,120 @@ def compute_nuclear_coupling(
     return V
 
 
+def compute_pk_pseudopotential(
+    alpha: np.ndarray,
+    rho_A: float,
+    R_e: float,
+    pk_potentials: List[dict],
+    rho_B: float = None,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Phillips-Kleinman effective core potential (ECP) in hyperspherical coordinates.
+
+    Repulsive Gaussian/r² barrier (Fuentealba-Durand-Barthelat form)
+
+        V_ECP(r) = C × exp(-β r²) / r²
+
+    that prevents active electrons from collapsing into the locked core
+    orbital.  The 1/r² divergence at r→0 overwhelms the nuclear -Z/r,
+    creating the Pauli-exclusion-like barrier; at r >> 1/√β, V_ECP → 0
+    and the electron sees only the nuclear potential.
+
+    The angle-averaged (monopole) component is computed in closed form
+    via the exponential integral E₁:
+
+        ⟨V_ECP⟩(s, ρ, R_e) = C / (4 R_e² s ρ) × [E₁(β a²) - E₁(β b²)]
+
+    where a = R_e|s-ρ|, b = R_e(s+ρ).
+
+    Restored 2026-06-05 (Sprint F.2): this function was removed during the
+    v2.7.0 PK / composed-qubit refactor on the assumption that the
+    classical PES path through ``composed_diatomic`` was superseded by
+    ``balanced_coupled``.  However, ``ComposedDiatomicSolver.LiH_ab_initio``
+    was not migrated; without PK the Li valence electron collapses into the
+    1s^2 core region at short R, breaking ~39 Pattern E tests and the
+    Paper 17 Sec V Table II "5.3 percent R_eq" claim.  Restoration recovers
+    the legacy path's binding behavior.  See
+    ``docs/molecular_refactor_handoff.md`` Sec 2.1 + Sec 3.1.
+
+    Parameters
+    ----------
+    alpha : ndarray
+        Alpha grid points (hyperspherical angle).
+    rho_A : float
+        Distance of nucleus A from origin in R_e units.
+    R_e : float
+        Electronic hyperradius.
+    pk_potentials : list of dict
+        Each entry: ``{'C_core': float, 'beta_core': float,
+                        'atom': str ('A' or 'B'),
+                        'channel_mode': str (optional)}``.
+        ``C_core``: amplitude of Gaussian/r^2 repulsive core (Ha * bohr^2).
+        ``beta_core``: Gaussian exponent (1/bohr^2).
+    rho_B : float or None
+        Distance of nucleus B from origin in R_e units.
+
+    Returns
+    -------
+    V_pk_e1, V_pk_e2 : ndarray of shape (n_alpha,)
+        ECP for electrons 1 and 2, in charge-function units (V/R_e).
+    """
+    from scipy.special import exp1
+
+    n_alpha = len(alpha)
+    V_e1 = np.zeros(n_alpha)
+    V_e2 = np.zeros(n_alpha)
+
+    pks_A = [p for p in pk_potentials if p.get('atom') == 'A']
+    pks_B = [p for p in pk_potentials if p.get('atom') == 'B']
+
+    if not pks_A and not pks_B:
+        return V_e1, V_e2
+
+    cos_a = np.cos(alpha)
+    sin_a = np.sin(alpha)
+
+    def _ecp_mono(s: np.ndarray, rho_nuc: float,
+                  C: float, beta: float) -> np.ndarray:
+        """Monopole-averaged ECP at electron distance s from origin.
+
+        V_ECP(r) = C exp(-β r²) / r²
+        ⟨V_ECP⟩ = C / (4 R_e² s ρ) × [E₁(β a²) - E₁(β b²)]
+
+        Returns V_ECP / R_e (charge-function units).
+        """
+        a = R_e * np.abs(s - rho_nuc)
+        b = R_e * (s + rho_nuc)
+        denom = 4.0 * R_e ** 2 * s * rho_nuc
+        safe = denom > 1e-30
+        # E₁ is monotone-decreasing in its argument; E₁(βa²) > E₁(βb²)
+        # since a < b, so the result is positive (repulsive).
+        ba2 = beta * a ** 2
+        bb2 = beta * b ** 2
+        # Clamp argument to avoid overflow in exp1 at very small values
+        ba2 = np.maximum(ba2, 1e-30)
+        E1_a = exp1(ba2)
+        E1_b = exp1(bb2)
+        result = np.zeros_like(s)
+        result[safe] = C / denom[safe] * (E1_a[safe] - E1_b[safe])
+        return result / R_e
+
+    for p in pks_A:
+        C = p['C_core']
+        beta = p['beta_core']
+        V_e1 += _ecp_mono(cos_a, rho_A, C, beta)
+        V_e2 += _ecp_mono(sin_a, rho_A, C, beta)
+
+    if rho_B is not None:
+        for p in pks_B:
+            C = p['C_core']
+            beta = p['beta_core']
+            V_e1 += _ecp_mono(cos_a, rho_B, C, beta)
+            V_e2 += _ecp_mono(sin_a, rho_B, C, beta)
+
+    return V_e1, V_e2
+
+
 def _ee_coupling(
     l1p: int, l2p: int, l1: int, l2: int,
     alpha: np.ndarray, l_max: int,
@@ -409,6 +523,7 @@ def build_angular_hamiltonian(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
+    pk_potentials: Optional[List[dict]] = None,
 ) -> np.ndarray:
     """
     Build the full coupled-channel angular Hamiltonian.
@@ -555,6 +670,42 @@ def build_angular_hamiltonian(
                 if ic != jc:
                     H[jj, ii] += val
 
+    # --- Phillips-Kleinman pseudopotential (core-active orthogonality) ---
+    # Repulsive Gaussian/r² barrier prevents active electrons from collapsing
+    # into the locked core orbital.  Diagonal in channels (monopole;
+    # spherically symmetric core).  Per-channel mode (per-electron weight):
+    #
+    #   'channel_blind' (default): w_i = 1 for all channels.
+    #   'l_dependent':  w_i = δ_{l_i, 0} since the 1s² core projector only
+    #                   couples to l=0 electrons.  Prevents unphysical
+    #                   repulsion in higher-l channels that are already
+    #                   automatically orthogonal to the core by angular
+    #                   momentum (Paper 17 §VI.A).
+    #
+    # Restored 2026-06-05 (Sprint F.2); removed in v2.7.0 PK refactor.
+    if pk_potentials:
+        V_pk_e1, V_pk_e2 = compute_pk_pseudopotential(
+            alpha_grid, rho_A, R_e, pk_potentials, rho_B=rho_B,
+        )
+        # Determine channel mode from any pk_potentials entry that sets it
+        pk_ch_mode = 'channel_blind'
+        for p in pk_potentials:
+            if p.get('channel_mode') == 'l_dependent':
+                pk_ch_mode = 'l_dependent'
+                break
+
+        for ic, (l1, m1, l2, m2) in enumerate(channels_4):
+            if pk_ch_mode == 'l_dependent':
+                w1 = 1.0 if l1 == 0 else 0.0
+                w2 = 1.0 if l2 == 0 else 0.0
+            else:
+                w1 = 1.0
+                w2 = 1.0
+            for i in range(n_alpha):
+                ii = idx(ic, i)
+                # Both electrons see the PK barrier from each PK center.
+                H[ii, ii] += R_e * (w1 * V_pk_e1[i] + w2 * V_pk_e2[i])
+
     return H
 
 
@@ -570,6 +721,7 @@ def solve_angular_multichannel(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
+    pk_potentials: Optional[List[dict]] = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, list]:
     """
     Solve the coupled-channel angular eigenvalue problem.
@@ -616,7 +768,8 @@ def solve_angular_multichannel(
     alpha = (np.arange(n_alpha) + 1) * h
 
     H = build_angular_hamiltonian(alpha, rho, R_e, l_max, Z, m_max,
-                                   l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0)
+                                   l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+                                   pk_potentials=pk_potentials)
 
     evals, evecs = eigh(H)
 
@@ -641,6 +794,7 @@ def compute_adiabatic_curve_mc(
     Z_A: float = None,
     Z_B: float = None,
     z0: float = 0.0,
+    pk_potentials: Optional[List[dict]] = None,
 ) -> np.ndarray:
     """
     Compute adiabatic potential U(R_e) with multichannel angular solver.
@@ -679,6 +833,7 @@ def compute_adiabatic_curve_mc(
         evals, _, _, _ = solve_angular_multichannel(
             rho, R_e, l_max, Z, n_alpha, m_max=m_max,
             l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+            pk_potentials=pk_potentials,
         )
         mu_vals[i] = evals[0]
 
@@ -1122,7 +1277,12 @@ def solve_level4_h2_multichannel(
     E_exact: float = None,
     D_e_exact: float = None,
     origin: str = 'midpoint',
-    pk_potentials=None,  # Deprecated 2026-06-04; PK now handled classically
+    pk_potentials=None,  # Restored 2026-06-05 (Sprint F.2). When non-None,
+                          # threads through to build_angular_hamiltonian for
+                          # the Phillips-Kleinman barrier on the valence
+                          # solver.  Required by ComposedDiatomicSolver
+                          # ab_initio path; ignored when None (composed_qubit
+                          # path which partitions PK classically).
 ) -> dict:
     """
     Full Level 4 multichannel solver for two-electron diatomics.
@@ -1287,6 +1447,7 @@ def solve_level4_h2_multichannel(
         U_angular = compute_adiabatic_curve_mc(
             R, R_e_angular, l_max, Z, n_alpha, m_max=m_max,
             l_max_per_m=l_max_per_m, Z_A=Z_A, Z_B=Z_B, z0=z0,
+            pk_potentials=pk_potentials,
         )
 
         t1 = time.time()
