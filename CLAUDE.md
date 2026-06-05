@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.51.0 (June 4, 2026)
+**Version:** v3.54.0 (June 5, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,10 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint S2-v2 closed-form (2026-06-05, v3.54.0):** Theorem 3.2.A.unified structural closure — (A) χ^h1=2·rank(h_cross)+1_LL+1_RR bit-exact 29/29; (B)+(C) subadditivity bounds verified; (D) F3 inheritance; (E) boundary saturation; universal {4,16,16,9,9,9,6,3,3,2} interior profile reproduced. Extended negative control:\ 12/12 balanced-coupled boundaries lift to 7 or 14 = N_cross × DF rank. Paper 14 §sec:mpo_bond_rank + QPT stacking paragraph + bibitem. See `debug/sprint_s2_v2_memo.md` + `debug/sprint_s2_v2_balanced_library_memo.md`.
+- **Sprint algebraic-equivalence-arc (2026-06-05, v3.53.0):** 8 results — DF=Cholesky=multipole bit-exact, QPT stacks with Hopf-Z₂, MPO χ_k=2 at boundaries (Theorem 3.2.A empirically proven), F3 inheritance conjecture. Papers 14/20/54 edited. See `debug/sprint_day_consolidation_memo.md`.
+- **Sprint chemistry-qc-reentry (2026-06-04, v3.52.0):** Five-track parallel push applying spectral-triple machinery to chemistry/QC. **GO:** Z₂ Hopf-U(1) tapering (ΔQ=−3 across 37/37 molecules, machine-precision spectrum preservation, Paper 14 §sec:hopf_tapering). **STOP-with-structural-content:** W1e in M1/M2/M3 (0/11 hits — wrong by structure, chemistry-side analog of H1 Yukawa non-selection, Paper 18 §IV.6); propinquity Trotter bound at production parameters (heuristic only, 3-4 OoM too loose, Paper 20 footnote). **DEFER:** tensor-product two-body Coulomb (Green's-function vs heat-kernel category, multi-year); real-time dynamics via Krein (category-error to force, not a chemistry-dynamics generator). See `debug/sprint_{trotter_propinquity,z2_tapering,w1e_period_class,tensor_two_body_scoping,realtime_dynamics_scoping}_memo.md` + `debug/audit_*_memo.md`.
+- **Sprint Z₂ per-sub-block tapering + production module (2026-06-04, v3.52.0 follow-on):** Same-day extension of the global Hopf-U(1) sprint, plus production-grade module shipped. Closed-form ΔQ = 2 + n_sub_blocks across 37/37 molecules; range −3 (H₂, He) to −12 (CO, N₂, F₂); total library savings 254 qubits (vs 111 global); ~12.6% Pauli reduction across panel. Machine-precision spectrum preservation (|ΔE|/|E| ≤ 4×10⁻¹⁵) on all 6 directly-verifiable cases. Cross-block ERIs vanish in standard composed builder, so {P_i} commute pairwise and with H (audit residual <10⁻¹³ on 37/37). Paper 14 §sec:hopf_tapering updated to per-sub-block headline. New `geovac/z2_tapering.py` production module with public API (build_pm_rotation, rotate_h1_eri, build_stabilizers, apply_hopf_tapering, hopf_tapered_from_spec); new `tapered={None, 'global', 'per_block'}` keyword on `ecosystem_export.hamiltonian()`, backward-compatible default `None`. 17/17 regression tests pass in `tests/test_z2_tapering.py`. See `debug/sprint_z2_per_subblock_memo.md`.
 - **Sprint outreach polish (2026-06-04, v3.51.0):** C1/A9/C2/C3/C4 closed; Paper 34 §III.16 R⁰_BP(1s,2s;1s,2s) corrected to 4/81; Paper 14 22pp clean with zero undefined refs. See `debug/sprint_outreach_polish_memo.md`.
 - **Sprint verification cleanup (2026-06-04, v3.50.0):** 224 tests close §13.4a gaps for 12 named theorems across Papers 34/45/46/51/55; A9–A14 added to register; Paper 51 added to §6 inventory. See `debug/sprint_verification_cleanup_memo.md`.
 - **Sprint Q5'-scoping (2026-06-03/04, v3.49.0):** Period-ring DEFLATED ($M^{\mathrm{GV}} \subset$ MT(ℤ[i,1/2],4)); HP$_*$/Marcolli–Tabuada dg-route STRUCTURALLY DEAD; cosmic-Galois $U^*$ on Mellin-moment Hopf algebra is the viable multi-year target. See `debug/sprint_q5p_*_memo.md` (8 memos).
@@ -372,6 +376,8 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | Gauged tensor-product spectral action (full double-sum gauge field) for two-body Coulomb radial weights (2026-06-03) | 1 | Angular selection rules recovered (Gaunt/m-cons/monopole, Paper 54 Thm 3); radial weights do NOT match Coulomb (Pearson 0.58/0.41, decreasing with n_max) — same Fock conformal-factor wall as the resolvent route. Spectral action gives metric, not Green's functions (Bochniak–Sitarz 2022 confirms). See `debug/paper54_two_body_forward_scoping_memo.md`. |
 | Yukawa values in low-coefficient pure-Tate periods M1 ∪ M2 (Sprint Yukawa-PSLQ, 2026-06-03) | 1 | 162-cell PSLQ sweep (9 fermions × 3 transforms × 3 ceilings × 2 scales): zero hits at M ≤ 1000 against M1 ∪ M2 basis (basis sharpened by η-trivialization audit ruling out M3 on inner factor). Charged-lepton precision (8 digits at M_Z) honest at M=10. Empirical confirmation of Sprint H1 Yukawa non-selection theorem and Class 1 calibration-data classification. See `debug/sprint_yukawa_pslq_memo.md`. |
 | Hopf-tower-to-representation extension as shortcut for forcing N_gen = 3 (Sprint Read 2 scoping, 2026-06-03) | 1 | Naive identification "same 3 (associativity wall) gives both 3 algebra factors and 3 generations" fails on representation theory: in the standard CCM SM rep every generation contains fields from ALL three algebra factors, so the two 3's are different. Multi-year deep wall stands as named (Direction 2 packing-reach NO-GO); no sprint-scale handle. See `debug/sprint_read2_n_gen_scoping_memo.md`. |
+| W1e chemistry corrections as outer-factor M1/M2/M3 periods (Sprint W1e period-class, 2026-06-04) | 1 | 0/11 W1e correction terms (NaH F4/F5/F6 sprints) identify with low-coefficient M1, M2, or M3 at audit ceiling 100 or permissive 10⁶; independent random-rational null gives 0/50 on M2/M3. Wrong by structure, not precision: M3 lives at k=1 vertex-parity, W1e has zero vertex-parity content. W1e is the chemistry-side analog of the H1 Yukawa non-selection theorem — calibration-data tier (Paper 18 §IV.6 chemistry-side analog), categorically disjoint from outer-factor periods. See `debug/sprint_w1e_period_class_memo.md`. |
+| Propinquity-derived Trotter bound at production parameters (Sprint Trotter propinquity, 2026-06-04) | 1 | Paper 38 GH-rate γ_{n_max} lifted via Childs-Su Duhamel + N_active-linearity gives a single-particle Lipschitz-distortion heuristic estimate of truncation error, not a rigorous bound; overshoots ε/2 budget by 3-4 OoM at production n_max=2 for LiH/BeH₂/H₂O at ε=10⁻³; LiH first becomes feasible at n_max≈5000 (computationally inaccessible). Uniformly looser than naive Suzuki-Trotter at production parameters. The 4/π M1 master-Mellin signature appears only in the (loose, non-binding) truncation budget. Tightening = multi-step research (sharper L_H from multipole structure; sharper L2 Stein-Weiss on low-harmonic subspace), not sprint-scale. See `debug/sprint_trotter_propinquity_memo.md`. |
 
 
 ---
@@ -819,13 +825,15 @@ Before implementing new physics:
 
 ### Benchmarking Rule
 
-After any modification to `hamiltonian.py`, `lattice.py`, or `solver.py`:
-1. Run topological integrity: `pytest tests/test_fock_projection.py tests/test_fock_laplacian.py -v`
-2. Run validation: `pytest tests/advanced_benchmarks.py`
-3. Verify 18/18 symbolic proofs pass (topological foundation)
-4. Verify H2+ < 0.1% error (topological control)
-5. Verify H2 Full CI < 1.0% error (accuracy control)
-6. Report any speed regression > 10%
+After any modification to production code in `geovac/`:
+1. Run `/regression` (default scope `touched`) — derives the test selection from `git diff` + import graph (consumer test files of every touched module) plus the topological-integrity baseline plus a small reproducible random sample. 30s–2min typical wall.
+2. If the diff spans more than 2–3 modules, prefer `/regression full` — the 10–15 min full pass. Catches cross-cutting consumers that the diff-derived selection might miss when a refactor cascades across the codebase.
+3. Verify the 18 symbolic S³ proofs pass (always included in `touched` and `topo` scopes).
+4. Verify H2+ < 0.1% error (topological control).
+5. Verify H2 Full CI < 1.0% error (accuracy control).
+6. Report any speed regression > 10%.
+
+The previous narrow 3-file allowlist (`tests/test_fock_projection.py`, `tests/test_fock_laplacian.py`, `tests/advanced_benchmarks.py`) silently let test rot accumulate when refactors cascaded into the dozens of test files that import from `composed_qubit`, `inter_fiber_coupling`, etc.  `/regression touched` removes the consumer-selection bottleneck by deriving it mechanically from the diff.  Use it as the standard discipline after any code edit.
 
 ### Clean Room Rule
 

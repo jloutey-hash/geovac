@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage{xcolor}
 \usepackage{listings}
 
@@ -97,6 +98,24 @@ Jordan-Wigner baselines at comparable qubit counts~\cite{GeoVac_Paper14}.
 This structural sparsity is compatible with all downstream optimizations
 (tapering, grouping, tensor factorization) and is basis-intrinsic rather
 than compression-dependent.
+
+The relationship to numerical factorization techniques can be sharpened.
+Double factorization~\cite{vonBurg2021} applied to a GeoVac ERI tensor
+reproduces the analytic multipole-channel decomposition exactly at the
+production basis ($n_{\max} = 2$): the double-factorization rank equals
+the count of distinct radial-density channels (seven for valence
+$\{1s, 2s, 2p\}$), and every singular vector of the reshaped two-electron
+tensor lives strictly inside the multipole-channel subspace.  At larger
+basis ($n_{\max} \geq 3$), double factorization still produces only
+linear combinations of multipole channels, but the radial-integral matrix
+develops a graded singular-value spectrum reflecting the well-known
+near-degeneracy of hydrogenic radial integrals; the additional
+compression beyond the bare multipole count is therefore a numerical
+realization of structure already present in the analytic decomposition,
+not a new algebraic substructure.  Double factorization on a GeoVac
+Hamiltonian is, in this precise sense, the multipole expansion accessed
+by SVD rather than by closed form (see Paper~14 \S\ref{sec:intro} and
+\texttt{debug/sprint\_df\_multipole\_lift\_memo.md}).
 
 This paper presents benchmark data for the GeoVac Hamiltonian library:
 accuracy characterization via full configuration interaction (FCI),
@@ -379,7 +398,36 @@ expected Pauli ratio is $(100)^{4.1}/(100)^{2.2} \approx 6{,}000\times$.
 The GeoVac advantage is strongest in the NISQ/VQE regime where Pauli
 term count and QWC measurement groups dominate the runtime cost.
 For fault-tolerant QPE, the relevant cost metric is the Pauli 1-norm
-$\lambda = \sum_j |c_j|$, which determines the Trotter step count.
+$\lambda = \sum_j |c_j|$, which determines the Trotter step
+count.\footnote{%
+The GH-convergence theorem on the GeoVac spectral
+triple~\cite{GeoVac_Paper38} (Latrémolière propinquity
+$\Lambda(T_{n_{\max}}, T_{S^3}) \le C_3 \gamma_{n_{\max}}$ with
+$\gamma_{n_{\max}} \to 0$) admits a single-particle
+Lipschitz-distortion \emph{heuristic} estimate
+$\|H_\infty - H_{n_{\max}}\|_{\rm op}
+\lesssim N_{\rm active}\,\gamma_{n_{\max}}\,L_H$ via the standard
+Childs--Su Duhamel and $N_{\rm active}$-linearity
+lift~\cite{Childs2021}.  Combining this with the commutator-tightened
+Trotter bound under an even error budget produces a
+\emph{feasibility certificate}: the minimum $n_{\max}$ at which a
+target $\epsilon$ is achievable, separate from the Trotter step
+count.  At production $n_{\max} = 2$ and target $\epsilon = 10^{-3}$
+the truncation budget is overshot by three to four orders of
+magnitude across LiH, BeH$_2$, H$_2$O; LiH first becomes feasible at
+$n_{\max} \approx 5000$.  The heuristic is uniformly looser than
+naive Suzuki--Trotter at production parameters (the natural
+like-for-like comparison would require $\lambda$ evaluated at the
+same large $n_{\max}$, which is computationally inaccessible and is
+exactly the reason the propinquity-aware route was tried).  The
+heuristic is loose because (i) $L_H = \mathrm{mean}\,|c_j|$ is a
+conservative single-particle Lipschitz constant, (ii) the L2
+Stein--Weiss rate on the low-harmonic subspace can be much sharper
+than the all-$C^\infty(S^3)$ bound, and (iii) the Duhamel plus
+$N_{\rm active}$ lift admits a factor-of-2 tightening for
+antisymmetric ERIs (Paper~22 Gaunt sparsity).  Sharpening each
+is a multi-step research target rather than a sprint-scale fix.
+Details: \texttt{debug/sprint\_trotter\_propinquity\_memo.md}.}
 At matched accuracy (GeoVac balanced $n_{\max}=3$ vs.\ Gaussian
 cc-pVTZ), the 1-norm comparison is less favorable due to the larger
 qubit count of the GeoVac encoding (84 vs.\ 54 qubits for LiH).

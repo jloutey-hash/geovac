@@ -30,20 +30,26 @@ warnings.filterwarnings("ignore", message=".*MolecularLatticeIndex.*")
 
 @pytest.fixture(scope="module")
 def lih_full_fci():
-    """Full 4-electron LiH FCI at R=3.015 (reference)."""
-    from geovac import MolecularLatticeIndex
-    mol = MolecularLatticeIndex(
-        Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
-        R=3.015, n_electrons=4,
-        vee_method='slater_full', fci_method='auto',
+    """Full 4-electron LiH FCI at R=3.015 (reference).
+
+    SUPERSEDED: MolecularLatticeIndex (LCAO molecular FCI) was retired during
+    the natural-geometry migration (CLAUDE.md §3 LCAO entry). Tests that depend
+    on this fixture are skipped via pytest.importorskip.
+    """
+    pytest.skip(
+        "MolecularLatticeIndex (LCAO molecular FCI) was retired during the "
+        "natural-geometry migration; LiH-style molecular frozen-core tests "
+        "live in the natural-geometry stack (composed_diatomic, balanced_coupled). "
+        "See CLAUDE.md §3 LCAO entry."
     )
-    E, psi = mol.compute_ground_state(n_states=1)
-    return mol, E[0]
 
 
 @pytest.fixture(scope="module")
 def lih_frozen_core(lih_full_fci):
-    """Frozen-core LiH: freeze Li 1s², solve 2-electron active space."""
+    """Frozen-core LiH: freeze Li 1s², solve 2-electron active space.
+
+    SUPERSEDED — see lih_full_fci.
+    """
     from geovac.frozen_core import FrozenCoreLatticeIndex
     mol, _ = lih_full_fci
     fc = FrozenCoreLatticeIndex(mol, frozen_orbitals=[0], n_active_electrons=2)
@@ -54,7 +60,7 @@ def lih_frozen_core(lih_full_fci):
 @pytest.fixture(scope="module")
 def he_full_fci():
     """Full 2-electron He FCI (reference)."""
-    from geovac import LatticeIndex
+    from geovac.lattice_index import LatticeIndex
     idx = LatticeIndex(
         n_electrons=2, max_n=4, nuclear_charge=2,
         vee_method='slater_full', h1_method='exact',
@@ -99,7 +105,7 @@ class TestConstruction:
 
     def test_electron_count_validation(self):
         """Mismatched electron counts raise ValueError."""
-        from geovac import LatticeIndex
+        from geovac.lattice_index import LatticeIndex
         from geovac.frozen_core import FrozenCoreLatticeIndex
         idx = LatticeIndex(
             n_electrons=2, max_n=3, nuclear_charge=2,
@@ -186,23 +192,28 @@ class TestAccuracy:
 # Tests: Convenience constructor
 # ---------------------------------------------------------------------------
 
+@pytest.mark.skip(
+    reason="FrozenCoreLatticeIndex.from_molecular depends on MolecularLatticeIndex "
+           "(LCAO molecular FCI), which was retired during the natural-geometry "
+           "migration; from_molecular now raises NotImplementedError. See "
+           "CLAUDE.md §3 LCAO entry. Molecular frozen-core work belongs in the "
+           "natural-geometry stack (composed_diatomic, balanced_coupled)."
+)
 class TestFromMolecular:
-    """Test the from_molecular convenience constructor."""
+    """Test the from_molecular convenience constructor.
+
+    SUPERSEDED — the convenience constructor's MolecularLatticeIndex backend is gone.
+    """
 
     def test_from_molecular_lih(self):
-        """from_molecular builds a valid frozen-core LiH solver."""
         from geovac.frozen_core import FrozenCoreLatticeIndex
         fc = FrozenCoreLatticeIndex.from_molecular(
             Z_A=3, Z_B=1, nmax_A=3, nmax_B=3,
             R=3.015, n_core_A=2, n_core_B=0,
         )
         assert fc.n_frozen_el == 2
-        assert fc.n_active_electrons == 2
-        E, _ = fc.solve()
-        assert E[0] < -7.5, f"LiH energy {E[0]} should be < -7.5 Ha"
 
     def test_from_molecular_odd_core_raises(self):
-        """Odd core electron count raises ValueError."""
         from geovac.frozen_core import FrozenCoreLatticeIndex
         with pytest.raises(ValueError, match="even"):
             FrozenCoreLatticeIndex.from_molecular(
@@ -232,8 +243,15 @@ class TestPerformance:
 # Tests: PES scan
 # ---------------------------------------------------------------------------
 
+@pytest.mark.skip(
+    reason="LiH PES scans via from_molecular depend on the retired LCAO molecular "
+           "FCI; see CLAUDE.md §3."
+)
 class TestPESScan:
-    """Test frozen-core PES at multiple R values."""
+    """Test frozen-core PES at multiple R values.
+
+    SUPERSEDED — uses from_molecular which now raises NotImplementedError.
+    """
 
     def test_lih_pes_bound(self):
         """Frozen-core LiH should be bound (energy minimum exists)."""

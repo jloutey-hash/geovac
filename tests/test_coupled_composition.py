@@ -28,7 +28,7 @@ from geovac.coupled_composition import (
 @pytest.fixture
 def lih_data():
     """Build LiH composed and coupled Hamiltonians for comparison."""
-    spec = lih_spec(max_n_core=2, max_n_val=2, include_pk=True)
+    spec = lih_spec(max_n=2, include_pk=True)
     composed = build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
     coupled = build_coupled_hamiltonian(spec, verbose=False)
     no_pk = build_composed_hamiltonian(spec, pk_in_hamiltonian=False, verbose=False)
@@ -160,8 +160,12 @@ class TestPauliRegression:
     """Regression tests for Pauli count and 1-norm."""
 
     def test_composed_pauli_count(self, lih_data):
-        """Composed LiH at Q=30 should have exactly 334 Pauli terms."""
-        assert lih_data['composed']['N_pauli'] == 334
+        """Composed LiH at Q=30 should have exactly 333 Pauli terms.
+
+        Was 334 before the global Z-tapering sprint; identity-tapering shed
+        one redundant identity term (2026-06-04 cleanup).
+        """
+        assert lih_data['composed']['N_pauli'] == 333
 
     def test_coupled_pauli_count(self, lih_data):
         """Coupled LiH at Q=30 should have exactly 854 Pauli terms."""

@@ -583,7 +583,22 @@ class FrozenCoreLatticeIndex:
         -------
         FrozenCoreLatticeIndex
         """
-        from .lattice_index import MolecularLatticeIndex
+        # MolecularLatticeIndex (LCAO molecular FCI) was retired during the
+        # natural-geometry migration; CLAUDE.md §3 lists three failed LCAO
+        # attempts and the architecture is locked. The from_molecular path is
+        # preserved as a stub so callers get a clear message rather than an
+        # ImportError. For molecular FCI, use the natural-geometry stack
+        # (geovac.composed_diatomic, geovac.balanced_coupled, etc.).
+        try:
+            from .lattice_index import MolecularLatticeIndex  # type: ignore[attr-defined]
+        except ImportError as exc:
+            raise NotImplementedError(
+                "MolecularLatticeIndex (LCAO molecular FCI) was removed during "
+                "the natural-geometry migration; FrozenCoreLatticeIndex.from_molecular "
+                "is no longer reachable. Use the composed-geometry stack "
+                "(composed_diatomic / balanced_coupled / composed_qubit) for "
+                "molecular FCI work. See CLAUDE.md §3 LCAO entry."
+            ) from exc
 
         if n_core_A % 2 != 0 or n_core_B % 2 != 0:
             raise ValueError("Core electron counts must be even (doubly-occupied orbitals)")

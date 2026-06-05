@@ -30,6 +30,77 @@ from geovac.hyperspherical_adiabatic import (
 )
 
 
+# ---------------------------------------------------------------------------
+# Algebraic Laguerre moment matrices (Paper 13 Track H/P2, v2.0.10/v2.0.13).
+#
+# Restored 2026-06-04 to keep CLAUDE.md §12 algebraic-registry entries
+# (Level 3 hyperradial overlap/kinetic, Level 4 hyperradial overlap/kinetic)
+# load-bearing. The helpers themselves are zero-quadrature closed-form
+# Laguerre identities; only their callers (`solve_radial_spectral` etc.)
+# were retired in v2.7.0 during the PK/composed-qubit refactor.
+# ---------------------------------------------------------------------------
+
+
+def _laguerre_moment_matrices(N: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Build Laguerre moment matrices M_k[i,j] = int_0^inf x^k L_i(x) L_j(x) e^{-x} dx.
+
+    Uses the three-term recurrence x*L_j = -(j+1)L_{j+1} + (2j+1)L_j - j*L_{j-1}
+    to derive closed-form band structure.  M0 = identity, M1 = tridiagonal,
+    M2 = pentadiagonal (Paper 13 Track H).
+    """
+    M0 = np.eye(N)
+
+    M1 = np.zeros((N, N))
+    for i in range(N):
+        M1[i, i] = 2 * i + 1
+        if i + 1 < N:
+            M1[i, i + 1] = -(i + 1)
+            M1[i + 1, i] = -(i + 1)
+
+    M2 = np.zeros((N, N))
+    for j in range(N):
+        M2[j, j] = 6 * j * j + 6 * j + 2
+        if j + 1 < N:
+            val = -4 * (j + 1) ** 2
+            M2[j, j + 1] = val
+            M2[j + 1, j] = val
+        if j + 2 < N:
+            val = (j + 1) * (j + 2)
+            M2[j, j + 2] = val
+            M2[j + 2, j] = val
+
+    return M0, M1, M2
+
+
+def _build_laguerre_SK_algebraic(
+    n_basis: int, alpha: float
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Build overlap S and kinetic K matrices algebraically for Level 3.
+
+    Basis: phi_n(R) = (R-R_min) * exp(-alpha*(R-R_min)) * L_n(2*alpha*(R-R_min)).
+    Returns the pentadiagonal/closed-form (S, K) pair without quadrature
+    (Paper 13 Track H).
+    """
+    N = n_basis
+    _, _, M2 = _laguerre_moment_matrices(N)
+
+    # Overlap: S_ij = 1/(8*alpha^3) * M2[i,j]
+    S = M2 / (8.0 * alpha ** 3)
+
+    # Kinetic: expand B_n(x) = (1 - x/2) L_n(x) + x L'_n(x) in Laguerre basis
+    # B_n = -n/2 L_{n-1} + 1/2 L_n + (n+1)/2 L_{n+1}
+    b = np.zeros((N, N + 1))
+    for n in range(N):
+        if n > 0:
+            b[n, n - 1] = -n / 2.0
+        b[n, n] = 0.5
+        b[n, n + 1] = (n + 1) / 2.0
+
+    K = (b @ b.T) / (4.0 * alpha)
+
+    return S, K
+
+
 def solve_radial(
     V_eff_func,
     R_min: float = 0.05,

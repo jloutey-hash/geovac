@@ -1,0 +1,182 @@
+[
+  {
+    "file": "tests/test_1rdm_exchange.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 4,
+    "failed": 5,
+    "errors": 4,
+    "skipped": 0,
+    "tail": "FAILED tests/test_1rdm_exchange.py::test_full_exchange_r_dependence - TypeErr...\nFAILED tests/test_1rdm_exchange.py::test_full_exchange_reduces_req_error - Ru...\nFAILED tests/test_1rdm_exchange.py::test_kinetic_orthog_positive - TypeError:...\nFAILED tests/test_1rdm_exchange.py::test_kinetic_orthog_r_dependence - TypeEr...\nFAILED tests/test_1rdm_exchange.py::test_full_exchange_kinetic_runs - Runtime...\nERROR tests/test_1rdm_exchange.py::test_full_exchange_negative - TypeError: s...\nERROR tests/test_1rdm_exchange.py::test_full_exchange_offdiag_nonzero - TypeE...\nERROR tests/test_1rdm_exchange.py::test_full_exchange_parity_symmetry - TypeE...\nERROR tests/test_1rdm_exchange.py::test_kinetic_orthog_magnitude - TypeError:...\n5 failed, 4 passed, 4 errors in 240.96s (0:04:00)"
+  },
+  {
+    "file": "tests/test_ab_initio_pk.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_ab_initio_pk_v2.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_composed_diatomic.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_composed_qubit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........................                                                [100%]\n25 passed in 380.57s (0:06:20)"
+  },
+  {
+    "file": "tests/test_gh_convergence.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_gh_convergence_tensor.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_ihara_zeta_dirac.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_l_dependent_pk.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_level4_multichannel.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_lorentzian_lichnerowicz.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 29,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "................ss...........s..                                         [100%]\n29 passed, 3 skipped in 128.14s (0:02:08)"
+  },
+  {
+    "file": "tests/test_lorentzian_propinquity.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 33,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": ".................................ss                                      [100%]\n33 passed, 2 skipped in 360.96s (0:06:00)"
+  },
+  {
+    "file": "tests/test_mo_fci.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 12,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "...s.........                                                            [100%]\n12 passed, 1 skipped in 146.97s (0:02:26)"
+  },
+  {
+    "file": "tests/test_n_electron_2d.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "........sss                                                              [100%]\n8 passed, 3 skipped in 237.80s (0:03:57)"
+  },
+  {
+    "file": "tests/test_prolate_heteronuclear_scf.py",
+    "status": "TIMEOUT_15min",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 900s"
+  },
+  {
+    "file": "tests/test_prolate_relaxed_ci.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".............                                                            [100%]\n13 passed in 418.98s (0:06:58)"
+  },
+  {
+    "file": "tests/test_prolate_stress.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............                                                          [100%]\n15 passed in 226.39s (0:03:46)"
+  },
+  {
+    "file": "tests/test_r25_l3_lipschitz_bound.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "...................................s                                     [100%]\n35 passed, 1 skipped in 277.34s (0:04:37)"
+  }
+]

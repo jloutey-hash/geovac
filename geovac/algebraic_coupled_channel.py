@@ -42,8 +42,29 @@ from geovac.algebraic_angular import AlgebraicAngularSolver
 from geovac.hyperspherical_adiabatic import effective_potential
 from geovac.hyperspherical_radial import (
     solve_radial, solve_coupled_radial,
-    solve_radial_spectral, solve_coupled_radial_spectral,
 )
+
+# Optional spectral radial solver (Track P2 era; removed during PK/composed-qubit
+# refactor — `radial_method='spectral'` paths are no longer reachable from
+# production callers, but the import was load-bearing for module import).
+# Provide a sentinel that raises NotImplementedError if anyone tries the
+# spectral path; the fd path remains the production-default and is unaffected.
+try:
+    from geovac.hyperspherical_radial import (  # type: ignore[attr-defined]
+        solve_radial_spectral, solve_coupled_radial_spectral,
+    )
+except ImportError:  # pragma: no cover - the expected production path
+    def solve_radial_spectral(*args, **kwargs):  # type: ignore[no-redef]
+        raise NotImplementedError(
+            "solve_radial_spectral was removed during the PK/composed-qubit "
+            "refactor; use radial_method='fd' (the production default)."
+        )
+
+    def solve_coupled_radial_spectral(*args, **kwargs):  # type: ignore[no-redef]
+        raise NotImplementedError(
+            "solve_coupled_radial_spectral was removed during the PK/composed-qubit "
+            "refactor; use radial_method='fd' (the production default)."
+        )
 
 
 def _enforce_sign_consistency(

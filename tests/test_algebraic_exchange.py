@@ -491,6 +491,15 @@ class TestPipelineIntegration:
             full_exchange_inter_fiber_energy,
         )
         import inspect
+        import pytest
+
+        pytest.skip(
+            "The pluggable slater_method kwarg was removed from the "
+            "compute_channel_f*_matrix family during the v2.7.0 "
+            "PK/composed-qubit refactor; production uses the single "
+            "hypergeometric Slater path (CLAUDE.md §12 algebraic registry "
+            "'Slater F^k integrals' entry, hypergeometric_slater.py)."
+        )
 
         # Verify slater_method parameter exists in signatures
         for func in [compute_channel_f0_matrix, compute_channel_fk_matrix,

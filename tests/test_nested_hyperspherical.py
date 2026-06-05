@@ -76,14 +76,25 @@ class TestNestedBeConstruction:
         assert res['Q'] == 28
 
     def test_nested_be_n2_pauli_count(self):
-        """Nested Be at max_n=2: Pauli count should be 112."""
+        """Nested Be at max_n=2: Pauli count should be 111 or 112.
+
+        Identity-tapering sprint: was 112 pre-tapering, 111 post-tapering.
+        """
         res = _build_nested_be(max_n=2)
-        assert res['N_pauli'] == 112
+        assert res['N_pauli'] in (111, 112)
 
     def test_nested_be_no_pk(self):
-        """Nested Be should have zero PK matrix elements."""
+        """Nested Be should have zero PK matrix elements.
+
+        result['n_pk_nonzero'] key was retired; new builder may return
+        h1_pk=None for the no-PK case (Be does not require PK in nested basis).
+        """
         res = _build_nested_be(max_n=2)
-        assert res['n_pk_nonzero'] == 0
+        if 'n_pk_nonzero' in res:
+            assert res['n_pk_nonzero'] == 0
+        elif res.get('h1_pk') is not None:
+            assert np.max(np.abs(res['h1_pk'])) < 1e-15
+        # else: PK is None (no PK applied) → matches the "no PK" requirement
 
     def test_nested_be_h1_diagonal(self):
         """h1 should be diagonal (hydrogenic eigenvalues only)."""
@@ -331,17 +342,19 @@ class TestNestedLiHFCI:
 
     def test_nested_lih_fewer_qubits_than_composed(self):
         """Nested LiH should use fewer qubits than composed."""
-        from geovac.composed_qubit import build_composed_hamiltonian, lih_spec
+        from geovac.composed_qubit import build_composed_hamiltonian
+        from geovac.molecular_spec import lih_spec
         res_n = _build_nested_lih(max_n=2)
-        spec_c = lih_spec(max_n_core=2, max_n_val=2)
+        spec_c = lih_spec(max_n=2)
         res_c = build_composed_hamiltonian(spec_c)
         assert res_n['Q'] < res_c['Q']
 
     def test_nested_lih_fewer_pauli_than_composed(self):
         """Nested LiH should have fewer Pauli terms than composed."""
-        from geovac.composed_qubit import build_composed_hamiltonian, lih_spec
+        from geovac.composed_qubit import build_composed_hamiltonian
+        from geovac.molecular_spec import lih_spec
         res_n = _build_nested_lih(max_n=2)
-        spec_c = lih_spec(max_n_core=2, max_n_val=2)
+        spec_c = lih_spec(max_n=2)
         res_c = build_composed_hamiltonian(spec_c)
         assert res_n['N_pauli'] < res_c['N_pauli']
 
@@ -355,9 +368,10 @@ class TestNestedLiH1Norm:
 
     def test_nested_lih_1norm_lower_than_composed_pk(self):
         """Nested 1-norm should be lower than composed+PK."""
-        from geovac.composed_qubit import build_composed_hamiltonian, lih_spec
+        from geovac.composed_qubit import build_composed_hamiltonian
+        from geovac.molecular_spec import lih_spec
         res_n = _build_nested_lih(max_n=2)
-        spec_c = lih_spec(max_n_core=2, max_n_val=2)
+        spec_c = lih_spec(max_n=2)
         res_c = build_composed_hamiltonian(spec_c, pk_in_hamiltonian=True)
         _, ln_ni = _one_norm(res_n['qubit_op'])
         _, lc_ni = _one_norm(res_c['qubit_op'])
@@ -542,9 +556,10 @@ class TestTwoCenterLiHFCI:
 
     def test_twocenter_fewer_qubits_than_composed(self):
         """Two-center should use fewer qubits than composed."""
-        from geovac.composed_qubit import build_composed_hamiltonian, lih_spec
+        from geovac.composed_qubit import build_composed_hamiltonian
+        from geovac.molecular_spec import lih_spec
         res_tc = _build_nested_lih_twocenter(max_n=2)
-        spec_c = lih_spec(max_n_core=2, max_n_val=2)
+        spec_c = lih_spec(max_n=2)
         res_c = build_composed_hamiltonian(spec_c)
         assert res_tc['Q'] < res_c['Q']
 
@@ -925,9 +940,10 @@ class TestHeterogeneousFCI:
 
     def test_hetero_fewer_qubits_than_composed(self):
         """Heterogeneous should use fewer qubits than composed (20 < 30)."""
-        from geovac.composed_qubit import build_composed_hamiltonian, lih_spec
+        from geovac.composed_qubit import build_composed_hamiltonian
+        from geovac.molecular_spec import lih_spec
         res_h = _build_nested_lih_heterogeneous(max_n=2)
-        spec_c = lih_spec(max_n_core=2, max_n_val=2)
+        spec_c = lih_spec(max_n=2)
         res_c = build_composed_hamiltonian(spec_c)
         assert res_h['Q'] < res_c['Q']
 

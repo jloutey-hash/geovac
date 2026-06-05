@@ -99,11 +99,25 @@ class TestAtomicClassifierExtended:
         assert '3d10' in c.valence_config
         assert '4s1' in c.valence_config
 
-    def test_z31_unsupported(self):
-        """Z=31 (Ga) is beyond the classifier range."""
+    def test_z31_supported_after_row3_extension(self):
+        """Z=31 (Ga) is now supported after the third-row p-block extension
+        (CLAUDE.md §1.5; Tracks CQ-CT v2.2.0).  Verifies the classifier
+        returns supported=True and the expected [Ar]3d10 frozen-core +
+        4s2 4p1 valence configuration."""
         from geovac.atomic_classifier import classify_atom
         c = classify_atom(31)
+        assert c.supported
+        assert c.n_core_electrons == 28  # [Ar]3d10
+        assert c.valence_config == '4s2 4p1'
+
+    def test_z50_unsupported(self):
+        """Z=50 (Sn) is in the 5p block, which requires a [Kr]4d10 frozen
+        core not yet implemented; should be flagged as unsupported with
+        a note explaining the gap."""
+        from geovac.atomic_classifier import classify_atom
+        c = classify_atom(50)
         assert not c.supported
+        assert '5p block' in c.support_note or '4d10' in c.support_note
 
 
 # ---------------------------------------------------------------------------

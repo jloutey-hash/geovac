@@ -25,8 +25,19 @@ from geovac.cusp_correction import cusp_correction_h2_point
 # Fast unit tests — no PES scan required
 # ======================================================================
 
+@pytest.mark.skip(
+    reason="The cusp_correction= constructor kwarg on ComposedDiatomicSolver "
+           "was removed during the v2.7.0 PK/composed-qubit refactor; the "
+           "standalone cusp_correction_h2_point/cusp_correction_from_level4 "
+           "functions remain in geovac.cusp_correction and are exercised by "
+           "the standalone tests in this file."
+)
 class TestCuspCorrectionWiring:
-    """Verify parameter plumbing without running expensive PES scans."""
+    """Verify parameter plumbing without running expensive PES scans.
+
+    SUPERSEDED: ComposedDiatomicSolver no longer accepts cusp_correction= via
+    constructor. The standalone cusp-correction functions are still tested.
+    """
 
     def test_default_cusp_off(self):
         """cusp_correction defaults to False."""

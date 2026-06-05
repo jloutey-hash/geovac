@@ -2088,6 +2088,73 @@ electroweak symmetry restoration and is empirically falsified by the
 sphaleron transition at $T_C \approx 160$~GeV; this sharpens the
 positive-thin H1 verdict.
 
+\paragraph{Chemistry-side analog: external atomic-physics calibration
+data.}
+The same structural classification applies to GeoVac's composed
+natural-geometry chemistry side.  The composed-qubit architecture
+builds heavy-atom molecules ($Z \ge 11$) using a frozen-core
+treatment: the [Ne], [Ar], [Kr], [Xe] cores are reduced to a screened
+$Z_{\rm eff}(r)$ profile via the FrozenCore solver, with hydrogenic
+plus multi-zeta valence orbitals built on top.  The five
+Clementi--Raimondi 1963 exponents per row, the multi-zeta
+coefficients, and the screened-core orbital shapes are external
+atomic-physics inputs to the framework---they are not derived from
+any outer-factor Mellin mechanism (M1/M2/M3).
+
+Sprint W1e period-class diagnostic (2026-06-04;
+\verb|debug/sprint_w1e_period_class_memo.md|) tested whether the
+W1c\,$\to$\,W1e chemistry-correlation wall sits in a higher-weight
+cyclotomic-mixed-Tate (M3) period class than the diagonal of the
+composed Hamiltonian.  Eleven NaH correction terms extracted from
+sprints F4 / F5 / F6 were PSLQ-classified at 100~dps against M1, M2,
+M3, and an INNER analog basis built from the Clementi--Raimondi
+exponents.  Result: zero outer-factor (M1/M2/M3) identifications across
+all eleven terms at audit ceiling 100 and permissive ceiling $10^6$,
+after filtering for rational-only fits, basis-internal $\mathbb{Q}$-linear
+dependencies, and the curve-fit-audit failure mode (basis size
+vs.\ input precision).  An independent random-rational null-hypothesis
+test against the same bases gave $0/50$ false positives on M2 and M3,
+confirming the bases are sparse enough that ``0~hits across 11~targets''
+is informative, not a measurement-noise artifact.
+
+The PSLQ result is a consistency check, not a derivation: the
+load-bearing argument is structural.  The M3 sub-mechanism lives at
+$k=1$ in the master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ (Sec.~\ref{sec:mellin}),
+which ties to vertex-parity / parity-character spectral sums on the
+GeoVac graph.  The W1e correction terms have no vertex-parity
+content---they are FCI eigenvalues and Hartree integrals over
+hydrogenic plus multi-zeta orbital products---so they categorically
+cannot pick up M3 content.  The PSLQ pass rules out the loophole
+``W1e might happen to land in M1/M2/M3 by coincidence''; the
+structural argument is what carries the negative.
+
+The chemistry-side corrections classify cleanly into the chemistry-side
+analog of the inner-factor input-data tier: FCI eigenvalues are
+algebraic-implicit roots of polynomials with externally-fitted matrix
+elements; Hartree $J$ and Slater--Condon $K$ integrals are rational
+in external $Z_{\rm eff}$ values; Phillips--Kleinman barriers depend
+on the same external orbital fits.  Six W1c / W1e closure attempts
+(CLAUDE.md~\S{}3 entries for cross-center PK, screened-Schrödinger
+valence, multi-zeta substitution, kernel-shape substitution,
+bonding-PK rank-1, basis enlargement, explicit-core Hartree) are
+explained at the structural level by this non-selection: they attempt
+outer-factor mechanisms (rational/algebraic modifications) on a wall
+whose content lies entirely in the external input-data tier.
+
+The chemistry analog of Sprint H1's Yukawa non-selection theorem is
+the W1e wall: the framework can compose any Clementi--Raimondi
+exponent set into the heavy-atom Hamiltonian but cannot autonomously
+select the exponents.  Outer-factor M-mechanism machinery is silent
+on inner-factor / calibration-data content in both the SM-side
+(Yukawa values) and the chemistry-side (atomic-physics calibration
+set) directions.  The five chemistry-side observables in the
+Sprint~TD Track~3 analog role (alkali-hydride binding energies,
+ionisation energies, fine-structure splittings, hyperfine splittings,
+polarisabilities) are not predicted by GeoVac alone; they are
+consistency checks that constrain candidate atomic-physics calibration
+sets, not framework-derived predictions.
+
 
 %% ========================================================================
 %% V. THE FINE STRUCTURE CONSTANT CONNECTION

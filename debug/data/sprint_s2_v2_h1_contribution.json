@@ -1,0 +1,268 @@
+{
+  "M": 15,
+  "Q": 30,
+  "h1_nonzero": 17,
+  "rows": [
+    {
+      "cut": 1,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 2,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 3,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 4,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 5,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 6,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 7,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 8,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 9,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 10,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 11,
+      "chi_h1": 4,
+      "cross_rk": 1,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 4,
+      "match": true
+    },
+    {
+      "cut": 12,
+      "chi_h1": 6,
+      "cross_rk": 2,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 6,
+      "match": true
+    },
+    {
+      "cut": 13,
+      "chi_h1": 4,
+      "cross_rk": 1,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 4,
+      "match": true
+    },
+    {
+      "cut": 14,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 15,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 16,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 17,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 18,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 19,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 20,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 21,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 22,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 23,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 24,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 25,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 26,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 27,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 28,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    },
+    {
+      "cut": 29,
+      "chi_h1": 2,
+      "cross_rk": 0,
+      "LL_nonzero": 1,
+      "RR_nonzero": 1,
+      "pred": 2,
+      "match": true
+    }
+  ]
+}

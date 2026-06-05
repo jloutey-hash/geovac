@@ -5,7 +5,9 @@ import pytest
 
 PAPER_PATH = os.path.join(
     os.path.dirname(os.path.dirname(__file__)),
-    "papers", "core", "paper_14_qubit_encoding.tex",
+    # Papers reorganized 2026-05-22 from papers/core/ to papers/group{1..6}/.
+    # Paper 14 (qubit encoding) lives in group4 (quantum computing).
+    "papers", "group4_quantum_computing", "paper_14_qubit_encoding.tex",
 )
 
 

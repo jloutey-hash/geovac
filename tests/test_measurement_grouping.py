@@ -56,7 +56,7 @@ def geovac_he_nmax2():
     """GeoVac He at nmax=2."""
     return LatticeIndex(
         n_electrons=2, max_n=2, nuclear_charge=2,
-        vee_method='slater_full', h1_method='hybrid', fci_method='matrix',
+        vee_method='slater_full', h1_method='hybrid',  # fci_method removed v2.7.0; default is matrix
     )
 
 
@@ -65,7 +65,7 @@ def geovac_he_nmax3():
     """GeoVac He at nmax=3."""
     return LatticeIndex(
         n_electrons=2, max_n=3, nuclear_charge=2,
-        vee_method='slater_full', h1_method='hybrid', fci_method='matrix',
+        vee_method='slater_full', h1_method='hybrid',  # fci_method removed v2.7.0; default is matrix
     )
 
 

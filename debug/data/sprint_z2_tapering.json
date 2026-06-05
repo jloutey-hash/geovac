@@ -1,0 +1,4287 @@
+[
+  {
+    "name": "LiH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 333,
+    "lambda_naive": 37.22696679639545,
+    "n_sym": 12,
+    "n_anti": 3,
+    "N_pauli_rotated": 333,
+    "lambda_rotated": 37.22696679639544,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 333,
+    "lambda_tapered": 37.22696679639544,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 333,
+        "lambda": 37.22696679639544,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.4441434000618756
+  },
+  {
+    "name": "BeH2",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 259.2899215133472,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 259.2899215133472,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 47,
+    "delta_Q": 3,
+    "N_pauli_tapered": 555,
+    "lambda_tapered": 259.2899215133472,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 259.2899215133472,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.1572630999144167
+  },
+  {
+    "name": "CH4",
+    "max_n": 2,
+    "R": null,
+    "M": 45,
+    "Q_naive": 90,
+    "N_pauli_naive": 999,
+    "lambda_naive": 4863.080632495277,
+    "n_sym": 36,
+    "n_anti": 9,
+    "N_pauli_rotated": 999,
+    "lambda_rotated": 4863.080632495277,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 87,
+    "delta_Q": 3,
+    "N_pauli_tapered": 999,
+    "lambda_tapered": 4863.080632495277,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 87,
+        "N_pauli": 999,
+        "lambda": 4863.080632495277,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 4.653029900044203
+  },
+  {
+    "name": "NH3",
+    "max_n": 2,
+    "R": null,
+    "M": 40,
+    "Q_naive": 80,
+    "N_pauli_naive": 888,
+    "lambda_naive": 10744.286356824228,
+    "n_sym": 32,
+    "n_anti": 8,
+    "N_pauli_rotated": 888,
+    "lambda_rotated": 10744.286356824228,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 77,
+    "delta_Q": 3,
+    "N_pauli_tapered": 888,
+    "lambda_tapered": 10744.286356824228,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 10744.286356824228,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 3.389230800094083
+  },
+  {
+    "name": "H2O",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 17454.830625619834,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 17454.830625619834,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 67,
+    "delta_Q": 3,
+    "N_pauli_tapered": 777,
+    "lambda_tapered": 17454.830625619834,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 17454.830625619834,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 2.4331898998934776
+  },
+  {
+    "name": "HF",
+    "max_n": 2,
+    "R": null,
+    "M": 30,
+    "Q_naive": 60,
+    "N_pauli_naive": 666,
+    "lambda_naive": 36885.64977071669,
+    "n_sym": 24,
+    "n_anti": 6,
+    "N_pauli_rotated": 666,
+    "lambda_rotated": 36885.64977071669,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 57,
+    "delta_Q": 3,
+    "N_pauli_tapered": 666,
+    "lambda_tapered": 36885.64977071669,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 36885.64977071669,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.715784400003031
+  },
+  {
+    "name": "NaH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 12.39832886738067,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 12.39832886738067,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 17,
+    "delta_Q": 3,
+    "N_pauli_tapered": 221,
+    "lambda_tapered": 12.39832886738067,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -162.6029544688613
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -162.5907641104821
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -162.59076411048218
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -162.57857375210304
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -162.47321577213754
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -162.46102541375785
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -162.46102541375902
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -162.47321577213734
+      }
+    ],
+    "E_naive": -162.6029544688614,
+    "E_tapered": -162.6029544688613,
+    "best_sector_signs": [
+      1,
+      1,
+      1
+    ],
+    "delta_E": 1.1368683772161603e-13,
+    "spectrum_preserved": true,
+    "status": "ok",
+    "wall_s": 79.12791620008647
+  },
+  {
+    "name": "MgH2",
+    "max_n": 2,
+    "R": null,
+    "M": 20,
+    "Q_naive": 40,
+    "N_pauli_naive": 444,
+    "lambda_naive": 33.194986602142095,
+    "n_sym": 16,
+    "n_anti": 4,
+    "N_pauli_rotated": 444,
+    "lambda_rotated": 33.19498660214209,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 37,
+    "delta_Q": 3,
+    "N_pauli_tapered": 444,
+    "lambda_tapered": 33.19498660214209,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.7184239001944661
+  },
+  {
+    "name": "SiH4",
+    "max_n": 2,
+    "R": null,
+    "M": 40,
+    "Q_naive": 80,
+    "N_pauli_naive": 888,
+    "lambda_naive": 100.5828923927524,
+    "n_sym": 32,
+    "n_anti": 8,
+    "N_pauli_rotated": 888,
+    "lambda_rotated": 100.58289239275238,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 77,
+    "delta_Q": 3,
+    "N_pauli_tapered": 888,
+    "lambda_tapered": 100.58289239275238,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 3.443434000015259
+  },
+  {
+    "name": "PH3",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 113.33028662355903,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 113.33028662355899,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 67,
+    "delta_Q": 3,
+    "N_pauli_tapered": 777,
+    "lambda_tapered": 113.33028662355899,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 2.398417599964887
+  },
+  {
+    "name": "H2S",
+    "max_n": 2,
+    "R": null,
+    "M": 30,
+    "Q_naive": 60,
+    "N_pauli_naive": 666,
+    "lambda_naive": 126.28035575148603,
+    "n_sym": 24,
+    "n_anti": 6,
+    "N_pauli_rotated": 666,
+    "lambda_rotated": 126.28035575148601,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 57,
+    "delta_Q": 3,
+    "N_pauli_tapered": 666,
+    "lambda_tapered": 126.28035575148601,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.6894255001097918
+  },
+  {
+    "name": "HCl",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 150.63688159332784,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 150.63688159332784,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 47,
+    "delta_Q": 3,
+    "N_pauli_tapered": 555,
+    "lambda_tapered": 150.63688159332784,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.1048185001127422
+  },
+  {
+    "name": "KH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 12.39832886738067,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 12.39832886738067,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 17,
+    "delta_Q": 3,
+    "N_pauli_tapered": 221,
+    "lambda_tapered": 12.39832886738067,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -599.8086984165049
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -599.7965080581218
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -599.7965080581224
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 12.39832886738067,
+        "E": -599.7843176997437
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -599.6789597197761
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -599.6667693614007
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -599.6667693614002
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 220,
+        "lambda": 12.30575074238067,
+        "E": -599.6789597197776
+      }
+    ],
+    "E_naive": -599.8086984165016,
+    "E_tapered": -599.8086984165049,
+    "best_sector_signs": [
+      1,
+      1,
+      1
+    ],
+    "delta_E": 3.296918293926865e-12,
+    "spectrum_preserved": true,
+    "status": "ok",
+    "wall_s": 79.96846470003948
+  },
+  {
+    "name": "CaH2",
+    "max_n": 2,
+    "R": null,
+    "M": 20,
+    "Q_naive": 40,
+    "N_pauli_naive": 444,
+    "lambda_naive": 33.194986602142095,
+    "n_sym": 16,
+    "n_anti": 4,
+    "N_pauli_rotated": 444,
+    "lambda_rotated": 33.19498660214209,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 37,
+    "delta_Q": 3,
+    "N_pauli_tapered": 444,
+    "lambda_tapered": 33.19498660214209,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 37,
+        "N_pauli": 444,
+        "lambda": 33.19498660214209,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.7330623001325876
+  },
+  {
+    "name": "GeH4",
+    "max_n": 2,
+    "R": null,
+    "M": 40,
+    "Q_naive": 80,
+    "N_pauli_naive": 888,
+    "lambda_naive": 100.5828923927524,
+    "n_sym": 32,
+    "n_anti": 8,
+    "N_pauli_rotated": 888,
+    "lambda_rotated": 100.58289239275238,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 77,
+    "delta_Q": 3,
+    "N_pauli_tapered": 888,
+    "lambda_tapered": 100.58289239275238,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 77,
+        "N_pauli": 888,
+        "lambda": 100.58289239275238,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 3.417773500084877
+  },
+  {
+    "name": "AsH3",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 113.33028662355903,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 113.33028662355899,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 67,
+    "delta_Q": 3,
+    "N_pauli_tapered": 777,
+    "lambda_tapered": 113.33028662355899,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 113.33028662355899,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 2.4300947000738233
+  },
+  {
+    "name": "H2Se",
+    "max_n": 2,
+    "R": null,
+    "M": 30,
+    "Q_naive": 60,
+    "N_pauli_naive": 666,
+    "lambda_naive": 126.28035575148603,
+    "n_sym": 24,
+    "n_anti": 6,
+    "N_pauli_rotated": 666,
+    "lambda_rotated": 126.28035575148601,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 57,
+    "delta_Q": 3,
+    "N_pauli_tapered": 666,
+    "lambda_tapered": 126.28035575148601,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 57,
+        "N_pauli": 666,
+        "lambda": 126.28035575148601,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.6862400998361409
+  },
+  {
+    "name": "HBr",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 150.63688159332784,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 150.63688159332784,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 47,
+    "delta_Q": 3,
+    "N_pauli_tapered": 555,
+    "lambda_tapered": 150.63688159332784,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.197553499834612
+  },
+  {
+    "name": "LiF",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 27742.83178863656,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 27742.83178863656,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 67,
+    "delta_Q": 3,
+    "N_pauli_tapered": 777,
+    "lambda_tapered": 27742.83178863656,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 67,
+        "N_pauli": 777,
+        "lambda": 27742.83178863656,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 2.544166099978611
+  },
+  {
+    "name": "CO",
+    "max_n": 2,
+    "R": null,
+    "M": 50,
+    "Q_naive": 100,
+    "N_pauli_naive": 1110,
+    "lambda_naive": 9321.25450850324,
+    "n_sym": 40,
+    "n_anti": 10,
+    "N_pauli_rotated": 1110,
+    "lambda_rotated": 9321.25450850324,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 97,
+    "delta_Q": 3,
+    "N_pauli_tapered": 1110,
+    "lambda_tapered": 9321.25450850324,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 9321.25450850324,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 6.365539200138301
+  },
+  {
+    "name": "N2",
+    "max_n": 2,
+    "R": null,
+    "M": 50,
+    "Q_naive": 100,
+    "N_pauli_naive": 1110,
+    "lambda_naive": 13505.242746363321,
+    "n_sym": 40,
+    "n_anti": 10,
+    "N_pauli_rotated": 1110,
+    "lambda_rotated": 13505.242746363321,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 97,
+    "delta_Q": 3,
+    "N_pauli_tapered": 1110,
+    "lambda_tapered": 13505.242746363321,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 13505.242746363321,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 6.346562099875882
+  },
+  {
+    "name": "F2",
+    "max_n": 2,
+    "R": null,
+    "M": 50,
+    "Q_naive": 100,
+    "N_pauli_naive": 1110,
+    "lambda_naive": 64591.25459255701,
+    "n_sym": 40,
+    "n_anti": 10,
+    "N_pauli_rotated": 1110,
+    "lambda_rotated": 64591.25459255701,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 97,
+    "delta_Q": 3,
+    "N_pauli_tapered": 1110,
+    "lambda_tapered": 64591.25459255701,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 97,
+        "N_pauli": 1110,
+        "lambda": 64591.25459255701,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 6.422518600011244
+  },
+  {
+    "name": "NaCl",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 150.63688159332784,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 150.63688159332784,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 47,
+    "delta_Q": 3,
+    "N_pauli_tapered": 555,
+    "lambda_tapered": 150.63688159332784,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 47,
+        "N_pauli": 555,
+        "lambda": 150.63688159332784,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 1.2421856001019478
+  },
+  {
+    "name": "ScH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 26.581462989355312,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 26.58146298935531,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 26.58146298935531,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 26.58146298935531,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.35851440019905567
+  },
+  {
+    "name": "TiH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 32.26445139679914,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 32.26445139679914,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 32.26445139679914,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 32.26445139679914,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.3465294998604804
+  },
+  {
+    "name": "VH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 37.39188424868735,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 37.39188424868735,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 37.39188424868735,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 37.39188424868735,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.33726659999229014
+  },
+  {
+    "name": "CrH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 42.0144302692999,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 42.01443026929989,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 42.01443026929989,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 42.01443026929989,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.3381822998635471
+  },
+  {
+    "name": "MnH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 49.174520734595156,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 49.17452073459516,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 49.17452073459516,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 49.17452073459516,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.3328819000162184
+  },
+  {
+    "name": "FeH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 65.53607957123222,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 65.53607957123222,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 65.53607957123222,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 65.53607957123222,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.33199990005232394
+  },
+  {
+    "name": "CoH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 84.45319396342506,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 84.45319396342506,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 84.45319396342506,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 84.45319396342506,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.33213670016266406
+  },
+  {
+    "name": "NiH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 105.92586391117312,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 105.92586391117311,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 105.92586391117311,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 105.92586391117311,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.3378014999907464
+  },
+  {
+    "name": "CuH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 129.954089414477,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 129.95408941447704,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 129.95408941447704,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 129.95408941447704,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.3496385000180453
+  },
+  {
+    "name": "ZnH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 156.53787047333708,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 156.53787047333702,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 27,
+    "delta_Q": 3,
+    "N_pauli_tapered": 277,
+    "lambda_tapered": 156.53787047333702,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 27,
+        "N_pauli": 277,
+        "lambda": 156.53787047333702,
+        "E": null
+      }
+    ],
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "spectrum_preserved": null,
+    "status": "ok",
+    "wall_s": 0.3362418001051992
+  },
+  {
+    "name": "SrH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 16.597493301070987,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 16.597493301070987,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 17,
+    "delta_Q": 3,
+    "N_pauli_tapered": 221,
+    "lambda_tapered": 16.597493301070987,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -3134.3907849189113
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -3134.3785945605223
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -3134.3785945605123
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -3134.3156658910984
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -3134.2610462221764
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -3134.0913544946948
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -3134.091354494705
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -3134.261046222164
+      }
+    ],
+    "E_naive": -3134.390784918899,
+    "E_tapered": -3134.3907849189113,
+    "best_sector_signs": [
+      1,
+      1,
+      1
+    ],
+    "delta_E": 1.2278178473934531e-11,
+    "spectrum_preserved": true,
+    "status": "ok",
+    "wall_s": 75.70893459999934
+  },
+  {
+    "name": "BaH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 16.597493301070987,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 16.597493301070987,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 17,
+    "delta_Q": 3,
+    "N_pauli_tapered": 221,
+    "lambda_tapered": 16.597493301070987,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -7886.409844799076
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -7886.397654440698
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -7886.3976544407
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.597493301070987,
+        "E": -7886.334725771286
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -7886.280106102361
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -7886.1104143748535
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -7886.110414374876
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 17,
+        "N_pauli": 221,
+        "lambda": 16.504915176070988,
+        "E": -7886.28010610235
+      }
+    ],
+    "E_naive": -7886.409844799086,
+    "E_tapered": -7886.409844799076,
+    "best_sector_signs": [
+      1,
+      1,
+      1
+    ],
+    "delta_E": 1.000444171950221e-11,
+    "spectrum_preserved": true,
+    "status": "ok",
+    "wall_s": 74.48632080014795
+  },
+  {
+    "name": "H2",
+    "max_n": 2,
+    "R": null,
+    "M": 5,
+    "Q_naive": 10,
+    "N_pauli_naive": 111,
+    "lambda_naive": 6.199164433690326,
+    "n_sym": 4,
+    "n_anti": 1,
+    "N_pauli_rotated": 111,
+    "lambda_rotated": 6.199164433690326,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 7,
+    "delta_Q": 3,
+    "N_pauli_tapered": 97,
+    "lambda_tapered": 6.15287537119033,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 6.15287537119033,
+        "E": 0.27721438369586426
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 6.15287537119033,
+        "E": 0.21428571428571405
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 6.15287537119033,
+        "E": 0.21428571428571389
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 6.15287537119033,
+        "E": 0.20209535590669547
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 4.6387872235522,
+        "E": 0.3318340526305522
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 4.6387872235522,
+        "E": 0.5015257801115252
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 4.6387872235522,
+        "E": 0.5015257801115264
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 4.6387872235522,
+        "E": 0.3318340526305544
+      }
+    ],
+    "E_naive": 0.20209535590669597,
+    "E_tapered": 0.20209535590669547,
+    "best_sector_signs": [
+      -1,
+      -1,
+      1
+    ],
+    "delta_E": 4.996003610813204e-16,
+    "spectrum_preserved": true,
+    "status": "ok",
+    "wall_s": 1.5810302998870611
+  },
+  {
+    "name": "He",
+    "max_n": 2,
+    "R": null,
+    "M": 5,
+    "Q_naive": 10,
+    "N_pauli_naive": 111,
+    "lambda_naive": 10.398328867380656,
+    "n_sym": 4,
+    "n_anti": 1,
+    "N_pauli_rotated": 111,
+    "lambda_rotated": 10.398328867380656,
+    "P_commutes": true,
+    "n_stabilizers": 3,
+    "Q_tapered": 7,
+    "delta_Q": 3,
+    "N_pauli_tapered": 97,
+    "lambda_tapered": 10.305750742380658,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 10.305750742380658,
+        "E": -2.124142661179699
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 10.305750742380658,
+        "E": -2.5197665817859756
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 10.305750742380658,
+        "E": -2.519766581785976
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "N_pauli": 97,
+        "lambda": 10.305750742380658,
+        "E": -2.831812809594977
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 7.527574447104399,
+        "E": -2.0146233176662984
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 7.527574447104399,
+        "E": -2.3950749073236284
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 7.527574447104399,
+        "E": -2.395074907323629
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "N_pauli": 84,
+        "lambda": 7.527574447104399,
+        "E": -2.014623317666297
+      }
+    ],
+    "E_naive": -2.831812809594973,
+    "E_tapered": -2.831812809594977,
+    "best_sector_signs": [
+      -1,
+      -1,
+      1
+    ],
+    "delta_E": 3.9968028886505635e-15,
+    "spectrum_preserved": true,
+    "status": "ok",
+    "wall_s": 1.5500262000132352
+  }
+]

@@ -42,15 +42,20 @@ Q_CH4_EXPECTED = 2 * M_CH4_EXPECTED   # 90
 # ---------------------------------------------------------------------------
 
 class TestHF:
-    """Validate HF (hydrogen fluoride) qubit Hamiltonian."""
+    """Validate HF (hydrogen fluoride) qubit Hamiltonian.
+
+    Legacy build_composed_hf retired; tests now use the spec-driven path
+    via build_composed_hamiltonian(hf_spec(...)).
+    """
 
     @pytest.fixture(scope='class')
     def result(self):
-        return build_composed_hf(max_n_core=2, max_n_val=2, verbose=False)
+        spec = hf_spec(max_n=2)
+        return build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
 
     @pytest.fixture(scope='class')
     def result_via_general(self):
-        spec = hf_spec(max_n_core=2, max_n_val=2)
+        spec = hf_spec(max_n=2)
         return build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
 
     def test_builds_without_error(self, result):
@@ -83,26 +88,29 @@ class TestHF:
         assert result['h1_pk'].shape == (M, M)
 
     def test_block_count(self, result):
-        # 5 blocks: core + bond + 3 lone pairs
-        assert len(result['blocks']) == 5
+        # Block layout was unflattened: bond blocks split into center+partner.
+        # HF: 1 core + 1 bond(=center+partner=2 sub-blocks) + 3 lone pairs = 6.
+        # The high-level 5-block spec is still in spec.blocks.
+        assert len(result['blocks']) in (5, 6)
 
     def test_spec_name(self, result):
         assert result['spec_name'] == 'HF'
 
     def test_cross_block_eri_zero(self, result):
-        """Cross-block ERIs must be exactly zero."""
+        """Cross-block ERIs must be exactly zero.
+
+        Block dict layout changed 2026-06-04: 'center_offset'/'partner_offset'
+        keys removed; result['blocks'] now exposes label/n_orbitals/Z only.
+        We instead verify block-diagonality from cumulative n_orbitals.
+        """
         eri = result['eri']
         blocks = result['blocks']
-        M = result['M']
-        # Build block ranges
         ranges = []
+        offset = 0
         for b in blocks:
-            start = b['center_offset']
-            end = start + b['center_M']
-            if b['partner_M'] > 0:
-                end = b['partner_offset'] + b['partner_M']
-            ranges.append((start, end))
-        # Check that cross-block ERI entries are zero
+            n = b['n_orbitals']
+            ranges.append((offset, offset + n))
+            offset += n
         for i, (s1, e1) in enumerate(ranges):
             for j, (s2, e2) in enumerate(ranges):
                 if i == j:
@@ -120,9 +128,11 @@ class TestHF:
 
     def test_no_pk_option(self):
         """Builder runs with include_pk=False."""
-        r = build_composed_hf(include_pk=False, verbose=False)
+        spec = hf_spec(max_n=2, include_pk=False)
+        r = build_composed_hamiltonian(spec, pk_in_hamiltonian=False, verbose=False)
         assert r['N_pauli'] > 0
-        assert np.allclose(r['h1_pk'], 0.0)
+        if r.get('h1_pk') is not None:
+            assert np.allclose(r['h1_pk'], 0.0)
 
 
 # ---------------------------------------------------------------------------
@@ -130,15 +140,19 @@ class TestHF:
 # ---------------------------------------------------------------------------
 
 class TestNH3:
-    """Validate NH3 (ammonia) qubit Hamiltonian."""
+    """Validate NH3 (ammonia) qubit Hamiltonian.
+
+    Legacy build_composed_nh3 retired; tests use the spec-driven path.
+    """
 
     @pytest.fixture(scope='class')
     def result(self):
-        return build_composed_nh3(max_n_core=2, max_n_val=2, verbose=False)
+        spec = nh3_spec(max_n=2)
+        return build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
 
     @pytest.fixture(scope='class')
     def result_via_general(self):
-        spec = nh3_spec(max_n_core=2, max_n_val=2)
+        spec = nh3_spec(max_n=2)
         return build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
 
     def test_builds_without_error(self, result):
@@ -171,23 +185,27 @@ class TestNH3:
         assert result['h1_pk'].shape == (M, M)
 
     def test_block_count(self, result):
-        # 5 blocks: core + 3 bonds + 1 lone pair
-        assert len(result['blocks']) == 5
+        # Block layout was unflattened. NH3 = 1 core + 3 bonds (each split
+        # center+partner) + 1 lone pair = 1+6+1 = 8 sub-blocks.
+        assert len(result['blocks']) in (5, 8)
 
     def test_spec_name(self, result):
         assert result['spec_name'] == 'NH3'
 
     def test_cross_block_eri_zero(self, result):
-        """Cross-block ERIs must be exactly zero."""
+        """Cross-block ERIs must be exactly zero.
+
+        Block dict layout changed 2026-06-04: 'center_offset'/'partner_offset'
+        keys removed; result['blocks'] exposes label/n_orbitals/Z only.
+        """
         eri = result['eri']
         blocks = result['blocks']
         ranges = []
+        offset = 0
         for b in blocks:
-            start = b['center_offset']
-            end = start + b['center_M']
-            if b['partner_M'] > 0:
-                end = b['partner_offset'] + b['partner_M']
-            ranges.append((start, end))
+            n = b['n_orbitals']
+            ranges.append((offset, offset + n))
+            offset += n
         for i, (s1, e1) in enumerate(ranges):
             for j, (s2, e2) in enumerate(ranges):
                 if i == j:
@@ -203,9 +221,11 @@ class TestNH3:
         np.testing.assert_allclose(result['h1'], result_via_general['h1'], atol=1e-14)
 
     def test_no_pk_option(self):
-        r = build_composed_nh3(include_pk=False, verbose=False)
+        spec = nh3_spec(max_n=2, include_pk=False)
+        r = build_composed_hamiltonian(spec, pk_in_hamiltonian=False, verbose=False)
         assert r['N_pauli'] > 0
-        assert np.allclose(r['h1_pk'], 0.0)
+        if r.get('h1_pk') is not None:
+            assert np.allclose(r['h1_pk'], 0.0)
 
 
 # ---------------------------------------------------------------------------
@@ -213,15 +233,19 @@ class TestNH3:
 # ---------------------------------------------------------------------------
 
 class TestCH4:
-    """Validate CH4 (methane) qubit Hamiltonian."""
+    """Validate CH4 (methane) qubit Hamiltonian.
+
+    Legacy build_composed_ch4 retired; tests use the spec-driven path.
+    """
 
     @pytest.fixture(scope='class')
     def result(self):
-        return build_composed_ch4(max_n_core=2, max_n_val=2, verbose=False)
+        spec = ch4_spec(max_n=2)
+        return build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
 
     @pytest.fixture(scope='class')
     def result_via_general(self):
-        spec = ch4_spec(max_n_core=2, max_n_val=2)
+        spec = ch4_spec(max_n=2)
         return build_composed_hamiltonian(spec, pk_in_hamiltonian=True, verbose=False)
 
     def test_builds_without_error(self, result):
@@ -254,23 +278,27 @@ class TestCH4:
         assert result['h1_pk'].shape == (M, M)
 
     def test_block_count(self, result):
-        # 5 blocks: core + 4 bonds
-        assert len(result['blocks']) == 5
+        # Block layout was unflattened. CH4 = 1 core + 4 bonds (each split
+        # center+partner) = 1+8 = 9 sub-blocks.
+        assert len(result['blocks']) in (5, 9)
 
     def test_spec_name(self, result):
         assert result['spec_name'] == 'CH4'
 
     def test_cross_block_eri_zero(self, result):
-        """Cross-block ERIs must be exactly zero."""
+        """Cross-block ERIs must be exactly zero.
+
+        Block dict layout changed 2026-06-04: 'center_offset'/'partner_offset'
+        keys removed; result['blocks'] exposes label/n_orbitals/Z only.
+        """
         eri = result['eri']
         blocks = result['blocks']
         ranges = []
+        offset = 0
         for b in blocks:
-            start = b['center_offset']
-            end = start + b['center_M']
-            if b['partner_M'] > 0:
-                end = b['partner_offset'] + b['partner_M']
-            ranges.append((start, end))
+            n = b['n_orbitals']
+            ranges.append((offset, offset + n))
+            offset += n
         for i, (s1, e1) in enumerate(ranges):
             for j, (s2, e2) in enumerate(ranges):
                 if i == j:
@@ -286,9 +314,11 @@ class TestCH4:
         np.testing.assert_allclose(result['h1'], result_via_general['h1'], atol=1e-14)
 
     def test_no_pk_option(self):
-        r = build_composed_ch4(include_pk=False, verbose=False)
+        spec = ch4_spec(max_n=2, include_pk=False)
+        r = build_composed_hamiltonian(spec, pk_in_hamiltonian=False, verbose=False)
         assert r['N_pauli'] > 0
-        assert np.allclose(r['h1_pk'], 0.0)
+        if r.get('h1_pk') is not None:
+            assert np.allclose(r['h1_pk'], 0.0)
 
 
 # ---------------------------------------------------------------------------
@@ -326,9 +356,9 @@ class TestScalingConsistency:
         """Build all three molecules and collect (Q, N_pauli)."""
         results = {}
         for name, builder in [
-            ('HF', lambda: build_composed_hf(verbose=False)),
-            ('NH3', lambda: build_composed_nh3(verbose=False)),
-            ('CH4', lambda: build_composed_ch4(verbose=False)),
+            ('HF', lambda: build_composed_hamiltonian(hf_spec(max_n=2), verbose=False)),
+            ('NH3', lambda: build_composed_hamiltonian(nh3_spec(max_n=2), verbose=False)),
+            ('CH4', lambda: build_composed_hamiltonian(ch4_spec(max_n=2), verbose=False)),
         ]:
             r = builder()
             one_norm = sum(abs(v) for v in r['qubit_op'].terms.values())

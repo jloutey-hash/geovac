@@ -1,0 +1,278 @@
+{
+  "M_sp": 15,
+  "Q": 30,
+  "Ls": [
+    0,
+    1,
+    2
+  ],
+  "n_pauli_Vee": 334,
+  "n_pauli_per_L": {
+    "0": 286,
+    "1": 103,
+    "2": 64
+  },
+  "rows": [
+    {
+      "cut": 1,
+      "chi_Vee": 4,
+      "chi_L0": 4,
+      "chi_L1": 4,
+      "chi_L2": 1,
+      "sum_L": 9,
+      "slack": 5
+    },
+    {
+      "cut": 2,
+      "chi_Vee": 16,
+      "chi_L0": 16,
+      "chi_L1": 11,
+      "chi_L2": 1,
+      "sum_L": 28,
+      "slack": 12
+    },
+    {
+      "cut": 3,
+      "chi_Vee": 16,
+      "chi_L0": 8,
+      "chi_L1": 11,
+      "chi_L2": 1,
+      "sum_L": 20,
+      "slack": 4
+    },
+    {
+      "cut": 4,
+      "chi_Vee": 9,
+      "chi_L0": 3,
+      "chi_L1": 7,
+      "chi_L2": 1,
+      "sum_L": 11,
+      "slack": 2
+    },
+    {
+      "cut": 5,
+      "chi_Vee": 9,
+      "chi_L0": 4,
+      "chi_L1": 7,
+      "chi_L2": 2,
+      "sum_L": 13,
+      "slack": 4
+    },
+    {
+      "cut": 6,
+      "chi_Vee": 9,
+      "chi_L0": 4,
+      "chi_L1": 7,
+      "chi_L2": 3,
+      "sum_L": 14,
+      "slack": 5
+    },
+    {
+      "cut": 7,
+      "chi_Vee": 6,
+      "chi_L0": 4,
+      "chi_L1": 5,
+      "chi_L2": 4,
+      "sum_L": 13,
+      "slack": 7
+    },
+    {
+      "cut": 8,
+      "chi_Vee": 3,
+      "chi_L0": 3,
+      "chi_L1": 2,
+      "chi_L2": 3,
+      "sum_L": 8,
+      "slack": 5
+    },
+    {
+      "cut": 9,
+      "chi_Vee": 3,
+      "chi_L0": 3,
+      "chi_L1": 2,
+      "chi_L2": 3,
+      "sum_L": 8,
+      "slack": 5
+    },
+    {
+      "cut": 10,
+      "chi_Vee": 2,
+      "chi_L0": 2,
+      "chi_L1": 2,
+      "chi_L2": 2,
+      "sum_L": 6,
+      "slack": 4
+    },
+    {
+      "cut": 11,
+      "chi_Vee": 5,
+      "chi_L0": 5,
+      "chi_L1": 5,
+      "chi_L2": 2,
+      "sum_L": 12,
+      "slack": 7
+    },
+    {
+      "cut": 12,
+      "chi_Vee": 16,
+      "chi_L0": 16,
+      "chi_L1": 12,
+      "chi_L2": 2,
+      "sum_L": 30,
+      "slack": 14
+    },
+    {
+      "cut": 13,
+      "chi_Vee": 16,
+      "chi_L0": 8,
+      "chi_L1": 12,
+      "chi_L2": 2,
+      "sum_L": 22,
+      "slack": 6
+    },
+    {
+      "cut": 14,
+      "chi_Vee": 9,
+      "chi_L0": 3,
+      "chi_L1": 8,
+      "chi_L2": 2,
+      "sum_L": 13,
+      "slack": 4
+    },
+    {
+      "cut": 15,
+      "chi_Vee": 9,
+      "chi_L0": 4,
+      "chi_L1": 8,
+      "chi_L2": 3,
+      "sum_L": 15,
+      "slack": 6
+    },
+    {
+      "cut": 16,
+      "chi_Vee": 9,
+      "chi_L0": 4,
+      "chi_L1": 8,
+      "chi_L2": 3,
+      "sum_L": 15,
+      "slack": 6
+    },
+    {
+      "cut": 17,
+      "chi_Vee": 6,
+      "chi_L0": 4,
+      "chi_L1": 5,
+      "chi_L2": 4,
+      "sum_L": 13,
+      "slack": 7
+    },
+    {
+      "cut": 18,
+      "chi_Vee": 3,
+      "chi_L0": 3,
+      "chi_L1": 2,
+      "chi_L2": 3,
+      "sum_L": 8,
+      "slack": 5
+    },
+    {
+      "cut": 19,
+      "chi_Vee": 3,
+      "chi_L0": 3,
+      "chi_L1": 2,
+      "chi_L2": 3,
+      "sum_L": 8,
+      "slack": 5
+    },
+    {
+      "cut": 20,
+      "chi_Vee": 2,
+      "chi_L0": 2,
+      "chi_L1": 2,
+      "chi_L2": 2,
+      "sum_L": 6,
+      "slack": 4
+    },
+    {
+      "cut": 21,
+      "chi_Vee": 5,
+      "chi_L0": 5,
+      "chi_L1": 5,
+      "chi_L2": 2,
+      "sum_L": 12,
+      "slack": 7
+    },
+    {
+      "cut": 22,
+      "chi_Vee": 16,
+      "chi_L0": 16,
+      "chi_L1": 12,
+      "chi_L2": 2,
+      "sum_L": 30,
+      "slack": 14
+    },
+    {
+      "cut": 23,
+      "chi_Vee": 16,
+      "chi_L0": 8,
+      "chi_L1": 12,
+      "chi_L2": 2,
+      "sum_L": 22,
+      "slack": 6
+    },
+    {
+      "cut": 24,
+      "chi_Vee": 9,
+      "chi_L0": 3,
+      "chi_L1": 7,
+      "chi_L2": 2,
+      "sum_L": 12,
+      "slack": 3
+    },
+    {
+      "cut": 25,
+      "chi_Vee": 9,
+      "chi_L0": 4,
+      "chi_L1": 7,
+      "chi_L2": 3,
+      "sum_L": 14,
+      "slack": 5
+    },
+    {
+      "cut": 26,
+      "chi_Vee": 9,
+      "chi_L0": 4,
+      "chi_L1": 7,
+      "chi_L2": 3,
+      "sum_L": 14,
+      "slack": 5
+    },
+    {
+      "cut": 27,
+      "chi_Vee": 6,
+      "chi_L0": 4,
+      "chi_L1": 4,
+      "chi_L2": 4,
+      "sum_L": 12,
+      "slack": 6
+    },
+    {
+      "cut": 28,
+      "chi_Vee": 3,
+      "chi_L0": 3,
+      "chi_L1": 1,
+      "chi_L2": 3,
+      "sum_L": 7,
+      "slack": 4
+    },
+    {
+      "cut": 29,
+      "chi_Vee": 2,
+      "chi_L0": 2,
+      "chi_L1": 1,
+      "chi_L2": 2,
+      "sum_L": 5,
+      "slack": 3
+    }
+  ]
+}

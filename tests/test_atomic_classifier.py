@@ -180,9 +180,14 @@ class TestPKParams:
         assert c.pk_params['B'] == pytest.approx(12.53)
 
     def test_oxygen_z2_scaled(self) -> None:
-        """O (Z=8) PK matches _PK_HELIKE_DEFAULTS in composed_qubit.py."""
+        """O (Z=8) PK matches _PK_HELIKE_DEFAULTS in composed_qubit.py.
+
+        Note: pk_source label upgraded from 'z2_scaled' to 'computed' when
+        the classifier's PK construction was unified across Z>=4 atoms during
+        the v2.7.0 PK/composed-qubit refactor; numerical values unchanged.
+        """
         c = classify_atom(8)
-        assert c.pk_source == 'z2_scaled'
+        assert c.pk_source == 'computed'
         assert c.pk_params['A'] == pytest.approx(49.28, abs=0.01)
         assert c.pk_params['B'] == pytest.approx(49.78, abs=0.01)
 
@@ -307,10 +312,11 @@ class TestEdgeCases:
         assert c.pk_params is None
 
     @pytest.mark.parametrize("Z", [21, 25, 30])
-    def test_transition_metal_raises(self, Z: int) -> None:
-        """Transition metals (Z=21-30) raise NotImplementedError."""
-        with pytest.raises(NotImplementedError, match="Transition metals"):
-            classify_atom(Z)
+    def test_transition_metal_supported_after_tm_hydride_extension(self, Z: int) -> None:
+        """Transition metals (Z=21-30) are now supported (CLAUDE.md v2.8.0 TM hydrides extension)."""
+        c = classify_atom(Z)
+        assert c.supported is True
+        assert c.period == 4
 
     def test_third_row_supported(self) -> None:
         """Z=19-20 and Z=31-36 are now supported (v2.2.0)."""

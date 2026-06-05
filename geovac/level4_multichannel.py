@@ -1122,6 +1122,7 @@ def solve_level4_h2_multichannel(
     E_exact: float = None,
     D_e_exact: float = None,
     origin: str = 'midpoint',
+    pk_potentials=None,  # Deprecated 2026-06-04; PK now handled classically
 ) -> dict:
     """
     Full Level 4 multichannel solver for two-electron diatomics.

@@ -172,10 +172,16 @@ def extract_origin_density(
         rho = R / (2.0 * Re_s)
         if rho < 1e-8:
             continue
+        # pk_potentials was removed from solve_angular_multichannel during
+        # the composed_qubit + classical-PK-partitioning refactor (CLAUDE.md
+        # §3, "PK modifications" series).  PK is now applied at the
+        # composed_qubit level, not at the angular-eigenvalue level.  The
+        # parameter is preserved in upstream signatures for API backward-
+        # compatibility but is not propagated here.  Callers that need
+        # PK-aware channel data should use the composed_qubit pipeline.
         _, vecs, _, channels = solve_angular_multichannel(
             rho, Re_s, l_max, n_alpha=n_alpha,
             Z_A=Z_A, Z_B=Z_B, z0=z0,
-            pk_potentials=pk_potentials,
         )
         vec = vecs[0]  # ground state eigenvector, shape (n_ch * n_alpha,)
         n_ch = len(channels)
@@ -318,10 +324,16 @@ def extract_channel_data(
             ang_density_all.append(np.zeros(n_alpha))
             continue
 
+        # pk_potentials was removed from solve_angular_multichannel during
+        # the composed_qubit + classical-PK-partitioning refactor (CLAUDE.md
+        # §3, "PK modifications" series).  PK is now applied at the
+        # composed_qubit level, not at the angular-eigenvalue level.  The
+        # parameter is preserved in upstream signatures for API backward-
+        # compatibility but is not propagated here.  Callers that need
+        # PK-aware channel data should use the composed_qubit pipeline.
         _, vecs, _, channels = solve_angular_multichannel(
             rho, Re_s, l_max, n_alpha=n_alpha,
             Z_A=Z_A, Z_B=Z_B, z0=z0,
-            pk_potentials=pk_potentials,
         )
 
         if channels_out is None:
@@ -1488,10 +1500,16 @@ def compute_overlap_diagnostic(
         if rho < 1e-8:
             continue
 
+        # pk_potentials was removed from solve_angular_multichannel during
+        # the composed_qubit + classical-PK-partitioning refactor (CLAUDE.md
+        # §3, "PK modifications" series).  PK is now applied at the
+        # composed_qubit level, not at the angular-eigenvalue level.  The
+        # parameter is preserved in upstream signatures for API backward-
+        # compatibility but is not propagated here.  Callers that need
+        # PK-aware channel data should use the composed_qubit pipeline.
         _, vecs, _, channels = solve_angular_multichannel(
             rho, Re_s, l_max, n_alpha=n_alpha,
             Z_A=Z_A, Z_B=Z_B, z0=z0,
-            pk_potentials=pk_potentials,
         )
 
         if channels_out is None:

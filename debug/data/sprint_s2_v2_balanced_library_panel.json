@@ -1,0 +1,122 @@
+{
+  "LiH": {
+    "molecule": "LiH",
+    "M": 15,
+    "Q": 30,
+    "R": 3.015,
+    "n_pauli_composed": 334,
+    "n_pauli_balanced": 878,
+    "sub_block_boundaries": [
+      10,
+      20
+    ],
+    "boundary_data": [
+      {
+        "cut": 10,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      },
+      {
+        "cut": 20,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      }
+    ]
+  },
+  "BeH2": {
+    "molecule": "BeH2",
+    "M": 25,
+    "Q": 50,
+    "R": 2.539,
+    "n_pauli_composed": 556,
+    "n_pauli_balanced": 2652,
+    "sub_block_boundaries": [
+      10,
+      20,
+      30,
+      40
+    ],
+    "boundary_data": [
+      {
+        "cut": 10,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      },
+      {
+        "cut": 20,
+        "chi_composed": 2,
+        "chi_balanced": 16,
+        "lift": 14
+      },
+      {
+        "cut": 30,
+        "chi_composed": 2,
+        "chi_balanced": 16,
+        "lift": 14
+      },
+      {
+        "cut": 40,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      }
+    ]
+  },
+  "H2O": {
+    "molecule": "H2O",
+    "M": 35,
+    "Q": 70,
+    "R": 1.808,
+    "n_pauli_composed": 778,
+    "n_pauli_balanced": 5798,
+    "sub_block_boundaries": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60
+    ],
+    "boundary_data": [
+      {
+        "cut": 10,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      },
+      {
+        "cut": 20,
+        "chi_composed": 2,
+        "chi_balanced": 16,
+        "lift": 14
+      },
+      {
+        "cut": 30,
+        "chi_composed": 2,
+        "chi_balanced": 16,
+        "lift": 14
+      },
+      {
+        "cut": 40,
+        "chi_composed": 2,
+        "chi_balanced": 16,
+        "lift": 14
+      },
+      {
+        "cut": 50,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      },
+      {
+        "cut": 60,
+        "chi_composed": 2,
+        "chi_balanced": 9,
+        "lift": 7
+      }
+    ]
+  }
+}

@@ -95,6 +95,28 @@ ERI tensor entries.  As the basis grows, the ERI density decays as
 $\sim 1/M^2$, in stark contrast to Gaussian bases where the ERI tensor
 is nearly dense.
 
+The relationship to numerical low-rank factorizations~\cite{motta2021,
+lee2021} can be made precise.  The two-electron operator
+$V_{ee} = \sum_P L_P \otimes L_P$ that double factorization and tensor
+hypercontraction produce is an element of $\mathcal{A} \otimes \mathcal{A}$
+in the tensor-product spectral triple, and in the GeoVac basis the same
+decomposition is supplied analytically by the multipole expansion
+$1/r_{12} = \sum_{L,M} (4\pi/(2L{+}1))\,(r_<^L/r_>^{L{+}1})\,Y_{LM}(1)\,
+Y_{LM}^{*}(2)$, with $L_P$ proportional to $Y_{LM}$ and rank fixed by
+the count of distinct radial-density channels at each angular momentum.
+Numerically, the double factorization of a GeoVac ERI tensor lives
+entirely within this multipole subspace: every singular vector of the
+reshaped two-electron tensor has machine-precision unit overlap with the
+analytic multipole-channel subspace, verified bit-exactly across
+LiH/BeH$_2$/H$_2$O sub-blocks at $n_{\max} \in \{2, 3, 4\}$.  At the
+production basis ($n_{\max} = 2$, valence set $\{1s, 2s, 2p\}$) the
+double-factorization rank equals the analytic count of distinct radial
+densities (seven) exactly.  Double factorization on a GeoVac Hamiltonian
+is therefore an SVD-sorted basis for the same algebraic subspace the
+multipole expansion supplies by construction, not a complementary
+compression of an independent structure (see
+\texttt{debug/sprint\_df\_multipole\_lift\_memo.md}).
+
 Under the Jordan--Wigner transformation~\cite{jordan1928,bravyi2002},
 each nonzero two-body operator
 $a^\dagger_p a^\dagger_q a_s a_r$ maps to a bounded number of Pauli
@@ -2208,6 +2230,237 @@ al.}~\cite{trenev2025} already use this reduction; GeoVac's
 advantages are reported \emph{without} it, making the comparisons
 conservative.
 
+\subsubsection{Hopf-$U(1)$ tapering: per-sub-block qubit reduction
+unique to the natural-geometry basis}
+\label{sec:hopf_tapering}
+
+The $\{Z_\alpha, Z_\beta\}$ pair (particle number and $S_z$) is
+available to any Jordan--Wigner encoded chemistry Hamiltonian.
+GeoVac admits a further $\mathbb{Z}_2$ \emph{per orbital sub-block}
+that Gaussian encodings break structurally: the Hopf-$U(1)$
+$m_\ell \to -m_\ell$ reflection identified in
+Paper~29~\cite{loutey_paper29}~\S{}5.3 (Observation~5.1) as the
+only sub-action of the continuous Hopf-$U(1)$ of
+Paper~25~\cite{loutey_paper25} that commutes with a real-integer
+adjacency.  In the standard composed builder the ERI tensor is
+block-diagonal across sub-blocks
+(\texttt{composed\_qubit.py:727--745}), so the $m_\ell \to -m_\ell$
+reflection acts independently within each sub-block, giving one
+commuting $\mathbb{Z}_2$ stabiliser $P_i$ per sub-block with at
+least one $\ell \ge 1$ shell.  For a molecule with $n_{\rm sb}$
+such sub-blocks (the universal case at $n_{\max} \ge 2$, where
+every block carries a $2p$ shell), the total qubit reduction is
+\begin{equation}
+  \Delta Q = 2 + n_{\rm sb}.
+\end{equation}
+
+Applied across the 37-molecule library covered by the
+\texttt{ecosystem\_export} interface, this gives $\Delta Q$ ranging
+from $-3$ (He, H$_2$; $n_{\rm sb} = 1$) to $-12$ (CO, N$_2$, F$_2$;
+$n_{\rm sb} = 10$), with total library qubit savings of $254$
+(mean $-6.9$ per molecule) and machine-precision spectrum
+preservation ($|\Delta E_{\rm GS}|/|E_{\rm GS}| \le 4 \times 10^{-15}$
+verified directly for every system small enough to diagonalise the
+naive Hamiltonian sparsely at $Q_{\rm naive} \le 20$: H$_2$, He,
+NaH, KH, SrH, BaH).  The remaining $31/37$ systems rely on the
+structural argument:\ the basis rotation is orthogonal, the
+$\{P_i\}$ are mutually commuting Pauli $Z$-strings with disjoint
+qubit supports (per-stabiliser commutator residual $< 10^{-13}$
+verified numerically per molecule), and projecting onto the $+1$
+eigenspace of a Hamiltonian-commuting stabiliser preserves the
+spectrum exactly on that sector.  Unlike the $n_{\rm sb}=1$
+special case (atom or single-block molecule), where the orthogonal
+rotation does not merge Pauli strings at scale, the per-sub-block
+tapering produces a substantial $\sim 12.6\%$ proportional reduction
+in Pauli term count across the panel (e.g.\ CO: $1110 \to 970$;
+BeH$_2$: $555 \to 485$; H$_2$O: $777 \to 679$).
+
+In the native $(n, \ell, m)$ orbital basis the reflection is a
+permutation, not a Pauli $Z$-string.  An orthogonal rotation to
+the symmetric / antisymmetric combinations
+$\phi_\pm = (\phi_{n,\ell,m} \pm \phi_{n,\ell,-m})/\sqrt{2}$ turns
+it into the JW $Z$-string
+$P_i = \prod_{p \in \text{antisym}(i)} Z_{2p}\,Z_{2p+1}$ per
+sub-block~$i$, which commutes with the rotated Hamiltonian by
+construction (cross-block ERIs vanish in the standard composed
+builder; within each sub-block the Gaunt selection rule
+$m_1 + m_2 = m_3 + m_4$ is enforced at the ERI tensor level).
+Together with $\{Z_\alpha, Z_\beta\}$ this yields $2 + n_{\rm sb}$
+commuting stabilisers.
+
+The reduction is library-universal because the symmetry is
+basis-intrinsic.  Gaussian encodings break the $\mathbb{Z}_2$
+structurally via the multi-center AO orthogonalisation that mixes
+$m$-channels; only an angular-momentum eigenbasis that does not
+cross-center-mix---such as GeoVac's natural composed build---preserves
+the symmetry bit-exact, and only such a basis admits the further
+decomposition into $n_{\rm sb}$ independent per-sub-block
+reflections.  The $\mathbb{Z}_2$'s that survive JW encoding are a
+direct structural consequence of the framework's geometric origin
+(the Hopf bundle structure of $S^3$), not accidental basis-choice
+symmetries.
+
+The scaling pattern is notable.  Most tapering schemes give
+diminishing returns at scale; for the GeoVac composed encoding
+specifically, $\Delta Q$ scales linearly with sub-block count,
+which scales linearly with chemical complexity (atoms, bonds,
+lone pairs).  The largest beneficiaries are precisely the
+production-relevant 100-qubit diatomics (CO, N$_2$, F$_2$ at
+$\Delta Q = -12$), where qubit count is the binding constraint
+for NISQ and early-FT simulation.  The per-sub-block construction
+degrades gracefully under future extensions:\ if cross-block ERIs
+become non-zero (e.g.\ \texttt{cross\_block\_h1=True}, or
+balanced-coupled multipole), the per-stabiliser commutator audit
+catches the offending $P_i$ and drops it from the stabiliser list,
+recovering the global $n_{\rm sb}=1$ result rather than producing
+an incorrect spectrum.  Per-molecule tapering panel documented in
+\texttt{debug/sprint\_z2\_per\_subblock\_memo.md} (data file
+\texttt{debug/data/sprint\_z2\_per\_subblock.json}; same-day
+predecessor at \texttt{debug/sprint\_z2\_tapering\_memo.md}
+covers the $n_{\rm sb}=1$ global construction).
+
+\paragraph*{Triply-additive blocking with spin adaptation.}
+The Hopf-$U(1)$ $\mathbb{Z}_2$ stabilisers $\{P_i\}_{i=1}^{n_{\rm sb}}$
+commute pairwise with the total spin operator $S^2$ and with the
+particle-number-and-$S_z$ stabilisers $\{Z_\alpha, Z_\beta\}$,
+bit-exactly on LiH, BeH$_2$, and H$_2$O (every commutator coefficient
+is exact zero across 21, 36, and 55 pairs respectively; see
+\texttt{debug/sprint\_qpt\_hopf\_stacking\_memo.md}).  The Hopf tapering
+therefore stacks additively with $S^2$-spin-adaptation techniques such
+as the recent Quantum Paldus
+Transform~\cite{burkat_fitzpatrick2025}, which block-diagonalises a JW
+Hamiltonian by $u(d)\!\times\!SU(2)$ irrep at $O(d^3)$ Toffoli depth.
+On LiH (4 electrons, 3 active Hopf sub-blocks), the joint $(N, S_z,
+P_{\rm Hopf})$ sector is $5.7\times$ smaller than the
+particle-number-only sector of standard Bravyi~2017
+tapering~\cite{bravyi2017} ($4{,}791$ Slater determinants vs $27{,}405$),
+with further reduction available from full QPT adaptation to $S^2$
+eigenstates.  At spectral-triple level the structural reason is that
+$\{P_i\}$ acts on spatial labels only (the $m_\ell \to -m_\ell$
+reflection within each sub-block), while $S^2$ acts on spin labels
+only; the two operators factor cleanly through the spatial--spin
+tensor decomposition of the GeoVac one-body bundle.  The compatibility
+extends to the spinor-coupled Tier 2 builder
+(Sec.~\ref{sec:spinor_composed}) with $J^2$ replacing $S^2$:\ on LiH
+relativistic at CODATA $\alpha$, $\|H_{\rm rel}(\alpha) - H_{\rm
+rel}(0)\|_1 / \alpha^2 = 3.5417$ bit-identical at $\alpha/2, \alpha,
+2\alpha$ (ratio max/min $= 1.0000$), and the spinor $m_j \to -m_j$
+parity commutes with $H_{\rm rel}$ exactly.  Across the $18$-molecule
+hydride library at $n_{\max}=2$, the per-molecule QPT cost
+($\sim M^3$ Toffoli, range $1{,}000$--$91{,}125$, total $561{,}000$)
+is $4$--$6$ orders of magnitude below typical fault-tolerant QPE
+budgets~\cite{lee2021,reiher2017} ($10^9$--$10^{11}$),
+making spin-adaptation effectively free at GeoVac scale.
+
+\subsubsection{MPO bond rank: structural inheritance from the
+multipole expansion}
+\label{sec:mpo_bond_rank}
+
+The operator Schmidt rank $\chi_k$ at qubit cut $k$ of a chemistry
+Hamiltonian under Jordan--Wigner ordering equals the MPO bond
+dimension after maximally compact decomposition.  For chemistry
+Hamiltonians this can be computed directly from the Pauli expansion
+without running DMRG, by SVD of the coefficient matrix
+$M[P_{\rm L}, P_{\rm R}]$ that decomposes each Pauli string into left
+and right parts at the cut.
+
+\paragraph*{Bond rank decomposition of the GeoVac composed
+Hamiltonian (Thm.~3.2.A.unified).}
+\label{thm:mpo_bond_rank}
+Let $H = h_1 + V_{ee}$ be a GeoVac composed Hamiltonian on $N$
+spin-orbitals.  At every Jordan--Wigner cut $k \in \{1, \ldots, N-1\}$,
+the operator Schmidt rank $\chi_k$ decomposes into five components.
+
+\emph{(A) One-body exact closed form.}
+\begin{equation}
+  \chi_k^{h_1}  =  2\,\mathrm{rank}\big(h_{p\le k,\,q > k}\big)
+  + \mathbf{1}_{LL} + \mathbf{1}_{RR},
+\label{eq:chi_h1_closed}
+\end{equation}
+where $h_{p\le k,\,q>k}$ is the $k \times (N-k)$ cross-cut sub-matrix
+of $h_1$ in spin-orbital indexing and $\mathbf{1}_{LL}, \mathbf{1}_{RR}$
+indicate the existence of nonzero pure-left and pure-right one-body
+content.  The factor of $2$ is the JW $XX + YY$ structure of the
+cross-cut hopping.
+
+\emph{(B) Two-piece subadditivity.}
+\begin{equation}
+  \chi_k^H  \le  \chi_k^{h_1} + \chi_k^{V_{ee}},
+\label{eq:chi_subadd}
+\end{equation}
+with slack absorbed by additive baseline mode sharing between $h_1$
+and $V_{ee}$.
+
+\emph{(C) Per-multipole subadditivity.}
+\begin{equation}
+  \chi_k^{V_{ee}}  \le  \sum_L \chi_k^{V_{ee}^L},
+\label{eq:chi_perL_subadd}
+\end{equation}
+where $V_{ee}^L$ is the $L$-multipole component of $V_{ee}$ under the
+Slater--Gaunt decomposition (Sec.~\ref{sec:methods}).  Slack absorbs
+cross-$L$ operator overlap when a fermionic pair $a^\dagger_p a_q$
+carries weight in multiple Gaunt-allowed $L$.
+
+\emph{(D) F3 inheritance.}  The per-$L$ rank $\chi_k^{V_{ee}^L}$
+inherits the graded singular-value spectrum of the radial-integral
+matrix $R^L(\rho_\alpha; \rho_\beta)$ that controls the
+double-factorization rank reported in Sec.~\ref{sec:intro} (the same
+hydrogenic-basis Laguerre-recurrence ill-conditioning).
+
+\emph{(E) Boundary saturation.}  At every sub-block boundary the
+composed builder has zero cross-block ERI content (F4 of the
+DF--multipole equivalence), all cross-cut content vanishes, and
+$\chi_k^H = 2$ (additive baseline of $H_{\rm left\ block} \otimes I
++ I \otimes H_{\rm right\ block}$).
+
+\paragraph*{Universal interior profile.}
+For the standard $\{1s, 2s, 2p_{-1,0,+1}\}$ valence at $n_{\max}=2$,
+the interior bond rank within any sub-block follows the universal
+sequence $\chi_k^H = \{4, 16, 16, 9, 9, 9, 6, 3, 3, 2\}$ at cuts $k =
+1, \ldots, 10$, depending only on the orbital basis (not on the
+sub-block role or the molecule).  Verified bit-exactly across LiH
+(3 sub-blocks), BeH$_2$ (5 sub-blocks), and H$_2$O (7 sub-blocks), at
+$12/12$ sub-block boundaries giving $\chi_k = 2$ and $8\times$
+interior/boundary ratio.  The dominant rank carrier transitions with
+the cut position:\ $L=0$ governs cuts $1$--$3$ (1s--2s cross-cut
+active), $L=1$ governs cuts $4$--$6$
+(1s,\,2s\,$\leftrightarrow$\,2p active), $L=2$ governs cuts $7$--$9$
+(sequential 2p closure).  The profile is determined by the orbital
+structure and the multipole hierarchy ($L_{\max} = 2 \ell_{\max}$),
+with no fit parameters.
+
+\paragraph*{Bit-exact verification panel.}
+On LiH, statement~(A) holds at $29/29$ cuts
+(eq.~\eqref{eq:chi_h1_closed} exact); (B) and (C) hold at $29/29$
+with average slack $2.3$ and $5.9$ respectively, both from shared
+additive baseline modes between $h_1, V_{ee}^L$.  Driver and data
+files:\ \texttt{debug/sprint\_s2\_v2\_unified\_panel.py} +
+\texttt{debug/data/sprint\_s2\_v2\_unified\_panel.json}.  Memo:\
+\texttt{debug/sprint\_s2\_v2\_memo.md}.  Negative control extended to
+the balanced-coupled library:\ across LiH, BeH$_2$, H$_2$O at $12/12$
+sub-block boundaries the chi$=2$ floor is broken into a clean
+two-value quantization $\chi_k^{H,\,{\rm balanced}} \in \{9, 16\}$ that
+decomposes as $\chi_k^{H,\,{\rm balanced}} - 2 = N_{\rm cross}(k)
+\times 7$, where $N_{\rm cross}(k) \in \{1, 2\}$ counts cross-block
+multipole couplings straddling the boundary and $7$ equals the
+double-factorisation rank of the $\{1s, 2s, 2p\}$ valence basis
+(Sec.~\ref{sec:intro}).  The boundary lift therefore directly
+inherits the F3 graded structure: the same Laguerre--Gaunt ring that
+fixes DF rank fixes the per-boundary lift, bit-identically across
+three molecules and twelve boundaries (Sprint S1 / S2-v2 negative
+controls,
+\texttt{debug/sprint\_s2\_v2\_balanced\_library\_memo.md}).
+
+This bond-rank inheritance is a chemistry-side manifestation of the
+spectral-truncation propinquity structure underlying the GeoVac
+spectral triple:\ the $L$-multipole density operators are the natural
+carriers of the operator system at the cut, and the MPO bond rank
+inherits the graded rank of the radial-integral matrix $R^L$ from the
+same Laguerre--Gaunt ring that supplies double-factorization
+compression (Sec.~\ref{sec:intro}).  Properties~(A)--(E) above provide
+a quantitative DMRG-side realisation of the qualitative ``$V_{ee} \in
+\mathcal{A}\otimes \mathcal{A}$'' statement of Sec.~\ref{sec:intro}.
+
 \emph{Pauli grouping} (QWC, general commutativity, unitary
 partitioning~\cite{verteletskyi2020,yen2020}) reduces measurement
 overhead by identifying simultaneously measurable Pauli strings.
@@ -2657,6 +2910,21 @@ GeoVac Paper~13 (2026).
 J.~Loutey,
 ``Composed Natural Geometries for Core-Valence Diatomics,''
 GeoVac Paper~17 (2026).
+
+\bibitem{loutey_paper25}
+J.~Loutey,
+``The Hopf Gauge Structure of the GeoVac Lattice,''
+GeoVac Paper~25 (2026).
+
+\bibitem{loutey_paper29}
+J.~Loutey,
+``Ramanujan Property of the GeoVac Hopf Graphs and the Spectral Hopf-$U(1)$ Block Decomposition,''
+GeoVac Paper~29 (2026).
+
+\bibitem{burkat_fitzpatrick2025}
+G.~Burkat and S.~Fitzpatrick,
+``The Quantum Paldus Transform: O(d$^3$) circuit for $u(d) \times SU(2)$ block-diagonalization,''
+arXiv:2506.09151 (2025).
 
 \bibitem{rocca2024}
 D.~Rocca, C.~L.~Cortes, J.~F.~Gonthier, P.~D.~Johnson, and R.~M.~Parrish,

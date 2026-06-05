@@ -18,7 +18,7 @@ Close the sprint we just completed. Walk the protocol below. If a step does not 
 
 **7. Reference tables.** If the sprint added new benchmarks, add rows to `docs/validation_benchmarks.md` (NOT to CLAUDE.md §10). If the sprint added new topic→paper mappings, add rows to `docs/topic_to_paper_lookup.md` (NOT to CLAUDE.md §11). These files are the canonical homes for those tables.
 
-**8. Verification.** Have all relevant tests pass? Has every new equation in a paper edit got a verification test (§13.4a)? Has the PM not modified anything in the hard-prohibitions list (§13.5)?
+**8. Verification.** Run `/regression touched` after the sprint's code edits (cheap, 30s–2min, mechanical diff → consumer-test selection).  For sprints that span more than 2–3 modules or touched cross-cutting infrastructure (composed_qubit, inter_fiber_coupling, ecosystem_export, the JW pipeline), prefer `/regression full` — slow (~10–15 min) but catches the cross-cutting consumer rot that the diff-derived selection might miss.  Has every new equation in a paper edit got a verification test (§13.4a)?  Has the PM not modified anything in the hard-prohibitions list (§13.5)?  `/regression` is a recommended discipline, not a hard gate; surface its result honestly in the §2 one-liner and let the PI decide whether to revise the sprint scope before `/release`.
 
 **9. Honest scope check.** What was closed at theorem grade? What is structural sketch? What is numerical observation? What are the named open follow-ons? Write these into the memo §6 ("Honest scope") section explicitly.
 

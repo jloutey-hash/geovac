@@ -1,0 +1,2809 @@
+[
+  {
+    "name": "LiH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 333,
+    "lambda_naive": 37.22696679639545,
+    "n_sym": 12,
+    "n_anti": 3,
+    "N_pauli_rotated": 333,
+    "lambda_rotated": 37.22696679639544,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'Li_core', 'center')",
+      "(1, 'LiH_bond', 'center')",
+      "(1, 'LiH_bond', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 291,
+    "lambda_tapered": 36.995521483895494,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.35152170015498996
+  },
+  {
+    "name": "BeH2",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 259.2899215133472,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 259.2899215133472,
+    "n_sub_blocks": 5,
+    "n_sub_blocks_with_antisym": 5,
+    "sub_block_keys": [
+      "(0, 'Be_core', 'center')",
+      "(1, 'BeH2_bond_1', 'center')",
+      "(1, 'BeH2_bond_1', 'partner')",
+      "(2, 'BeH2_bond_2', 'center')",
+      "(2, 'BeH2_bond_2', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 7,
+    "Q_tapered": 43,
+    "delta_Q": 7,
+    "N_pauli_tapered": 485,
+    "lambda_tapered": 258.8270308883472,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.9907500999979675
+  },
+  {
+    "name": "CH4",
+    "max_n": 2,
+    "R": null,
+    "M": 45,
+    "Q_naive": 90,
+    "N_pauli_naive": 999,
+    "lambda_naive": 4863.080632495277,
+    "n_sym": 36,
+    "n_anti": 9,
+    "N_pauli_rotated": 999,
+    "lambda_rotated": 4863.080632495277,
+    "n_sub_blocks": 9,
+    "n_sub_blocks_with_antisym": 9,
+    "sub_block_keys": [
+      "(0, 'C_core', 'center')",
+      "(1, 'CH4_bond_1', 'center')",
+      "(1, 'CH4_bond_1', 'partner')",
+      "(2, 'CH4_bond_2', 'center')",
+      "(2, 'CH4_bond_2', 'partner')",
+      "(3, 'CH4_bond_3', 'center')",
+      "(3, 'CH4_bond_3', 'partner')",
+      "(4, 'CH4_bond_4', 'center')",
+      "(4, 'CH4_bond_4', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 11,
+    "Q_tapered": 79,
+    "delta_Q": 11,
+    "N_pauli_tapered": 873,
+    "lambda_tapered": 4861.877116870298,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 4.25218170019798
+  },
+  {
+    "name": "NH3",
+    "max_n": 2,
+    "R": null,
+    "M": 40,
+    "Q_naive": 80,
+    "N_pauli_naive": 888,
+    "lambda_naive": 10744.286356824228,
+    "n_sym": 32,
+    "n_anti": 8,
+    "N_pauli_rotated": 888,
+    "lambda_rotated": 10744.286356824228,
+    "n_sub_blocks": 8,
+    "n_sub_blocks_with_antisym": 8,
+    "sub_block_keys": [
+      "(0, 'N_core', 'center')",
+      "(1, 'NH3_bond_1', 'center')",
+      "(1, 'NH3_bond_1', 'partner')",
+      "(2, 'NH3_bond_2', 'center')",
+      "(2, 'NH3_bond_2', 'partner')",
+      "(3, 'NH3_bond_3', 'center')",
+      "(3, 'NH3_bond_3', 'partner')",
+      "(4, 'N_lp', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 10,
+    "Q_tapered": 70,
+    "delta_Q": 10,
+    "N_pauli_tapered": 776,
+    "lambda_tapered": 10742.897684949257,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 3.0953512000851333
+  },
+  {
+    "name": "H2O",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 17454.830625619834,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 17454.830625619834,
+    "n_sub_blocks": 7,
+    "n_sub_blocks_with_antisym": 7,
+    "sub_block_keys": [
+      "(0, 'O_core', 'center')",
+      "(1, 'H2O_bond_1', 'center')",
+      "(1, 'H2O_bond_1', 'partner')",
+      "(2, 'H2O_bond_2', 'center')",
+      "(2, 'H2O_bond_2', 'partner')",
+      "(3, 'O_lp_1', 'center')",
+      "(4, 'O_lp_2', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 9,
+    "Q_tapered": 61,
+    "delta_Q": 9,
+    "N_pauli_tapered": 679,
+    "lambda_tapered": 17453.25679749489,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 2.147267200052738
+  },
+  {
+    "name": "HF",
+    "max_n": 2,
+    "R": null,
+    "M": 30,
+    "Q_naive": 60,
+    "N_pauli_naive": 666,
+    "lambda_naive": 36885.64977071669,
+    "n_sym": 24,
+    "n_anti": 6,
+    "N_pauli_rotated": 666,
+    "lambda_rotated": 36885.64977071669,
+    "n_sub_blocks": 6,
+    "n_sub_blocks_with_antisym": 6,
+    "sub_block_keys": [
+      "(0, 'F_core', 'center')",
+      "(1, 'HF_bond', 'center')",
+      "(1, 'HF_bond', 'partner')",
+      "(2, 'F_lp_1', 'center')",
+      "(3, 'F_lp_2', 'center')",
+      "(4, 'F_lp_3', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 8,
+    "Q_tapered": 52,
+    "delta_Q": 8,
+    "N_pauli_tapered": 582,
+    "lambda_tapered": 36883.89078634159,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 1.4586230001877993
+  },
+  {
+    "name": "NaH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 12.39832886738067,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 12.39832886738067,
+    "n_sub_blocks": 2,
+    "n_sub_blocks_with_antisym": 2,
+    "sub_block_keys": [
+      "(0, 'NaH_bond', 'center')",
+      "(0, 'NaH_bond', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 4,
+    "Q_tapered": 16,
+    "delta_Q": 4,
+    "N_pauli_tapered": 194,
+    "lambda_tapered": 12.305750742380665,
+    "E_naive": -162.6029544688614,
+    "E_tapered": -162.60295446886116,
+    "best_sector_signs": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "delta_E": 2.5579538487363607e-13,
+    "relative_delta_E": 1.5731287645368158e-15,
+    "spectrum_preserved": true,
+    "sector_table_len": 16,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.60295446886116
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.5907641104819
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.59076411048196
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.5785737521032
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.4732157721372
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.46102541375876
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.46102541375788
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -162.47321577213685
+      },
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.47321577213714
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.4610254137592
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.46102541375907
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.47321577213722
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.3434770754131
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.17378534793235
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.1737853479325
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -162.34347707541366
+      }
+    ],
+    "status": "ok",
+    "wall_s": 72.25865420000628
+  },
+  {
+    "name": "MgH2",
+    "max_n": 2,
+    "R": null,
+    "M": 20,
+    "Q_naive": 40,
+    "N_pauli_naive": 444,
+    "lambda_naive": 33.194986602142095,
+    "n_sym": 16,
+    "n_anti": 4,
+    "N_pauli_rotated": 444,
+    "lambda_rotated": 33.19498660214209,
+    "n_sub_blocks": 4,
+    "n_sub_blocks_with_antisym": 4,
+    "sub_block_keys": [
+      "(0, 'MgH2_bond_1', 'center')",
+      "(0, 'MgH2_bond_1', 'partner')",
+      "(1, 'MgH2_bond_2', 'center')",
+      "(1, 'MgH2_bond_2', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 6,
+    "Q_tapered": 34,
+    "delta_Q": 6,
+    "N_pauli_tapered": 388,
+    "lambda_tapered": 32.91725222714205,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.6449123001657426
+  },
+  {
+    "name": "SiH4",
+    "max_n": 2,
+    "R": null,
+    "M": 40,
+    "Q_naive": 80,
+    "N_pauli_naive": 888,
+    "lambda_naive": 100.5828923927524,
+    "n_sym": 32,
+    "n_anti": 8,
+    "N_pauli_rotated": 888,
+    "lambda_rotated": 100.58289239275238,
+    "n_sub_blocks": 8,
+    "n_sub_blocks_with_antisym": 8,
+    "sub_block_keys": [
+      "(0, 'SiH4_bond_1', 'center')",
+      "(0, 'SiH4_bond_1', 'partner')",
+      "(1, 'SiH4_bond_2', 'center')",
+      "(1, 'SiH4_bond_2', 'partner')",
+      "(2, 'SiH4_bond_3', 'center')",
+      "(2, 'SiH4_bond_3', 'partner')",
+      "(3, 'SiH4_bond_4', 'center')",
+      "(3, 'SiH4_bond_4', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 10,
+    "Q_tapered": 70,
+    "delta_Q": 10,
+    "N_pauli_tapered": 776,
+    "lambda_tapered": 99.65711114275234,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 3.109734399942681
+  },
+  {
+    "name": "PH3",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 113.33028662355903,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 113.33028662355899,
+    "n_sub_blocks": 7,
+    "n_sub_blocks_with_antisym": 7,
+    "sub_block_keys": [
+      "(0, 'PH3_bond_1', 'center')",
+      "(0, 'PH3_bond_1', 'partner')",
+      "(1, 'PH3_bond_2', 'center')",
+      "(1, 'PH3_bond_2', 'partner')",
+      "(2, 'PH3_bond_3', 'center')",
+      "(2, 'PH3_bond_3', 'partner')",
+      "(3, 'P_lp', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 9,
+    "Q_tapered": 61,
+    "delta_Q": 9,
+    "N_pauli_tapered": 679,
+    "lambda_tapered": 112.26563818605912,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 2.2100206001196057
+  },
+  {
+    "name": "H2S",
+    "max_n": 2,
+    "R": null,
+    "M": 30,
+    "Q_naive": 60,
+    "N_pauli_naive": 666,
+    "lambda_naive": 126.28035575148603,
+    "n_sym": 24,
+    "n_anti": 6,
+    "N_pauli_rotated": 666,
+    "lambda_rotated": 126.28035575148601,
+    "n_sub_blocks": 6,
+    "n_sub_blocks_with_antisym": 6,
+    "sub_block_keys": [
+      "(0, 'H2S_bond_1', 'center')",
+      "(0, 'H2S_bond_1', 'partner')",
+      "(1, 'H2S_bond_2', 'center')",
+      "(1, 'H2S_bond_2', 'partner')",
+      "(2, 'S_lp_1', 'center')",
+      "(3, 'S_lp_2', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 8,
+    "Q_tapered": 52,
+    "delta_Q": 8,
+    "N_pauli_tapered": 582,
+    "lambda_tapered": 125.07684012648619,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 1.4764213000889868
+  },
+  {
+    "name": "HCl",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 150.63688159332784,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 150.63688159332784,
+    "n_sub_blocks": 5,
+    "n_sub_blocks_with_antisym": 5,
+    "sub_block_keys": [
+      "(0, 'HCl_bond', 'center')",
+      "(0, 'HCl_bond', 'partner')",
+      "(1, 'Cl_lp_1', 'center')",
+      "(2, 'Cl_lp_2', 'center')",
+      "(3, 'Cl_lp_3', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 7,
+    "Q_tapered": 43,
+    "delta_Q": 7,
+    "N_pauli_tapered": 485,
+    "lambda_tapered": 149.29449878082815,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.9601461000274867
+  },
+  {
+    "name": "KH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 12.39832886738067,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 12.39832886738067,
+    "n_sub_blocks": 2,
+    "n_sub_blocks_with_antisym": 2,
+    "sub_block_keys": [
+      "(0, 'KH_bond', 'center')",
+      "(0, 'KH_bond', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 4,
+    "Q_tapered": 16,
+    "delta_Q": 4,
+    "N_pauli_tapered": 194,
+    "lambda_tapered": 12.305750742380665,
+    "E_naive": -599.8086984165016,
+    "E_tapered": -599.8086984164993,
+    "best_sector_signs": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "delta_E": 2.2737367544323206e-12,
+    "relative_delta_E": 3.7907698911919734e-15,
+    "spectrum_preserved": true,
+    "sector_table_len": 16,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.8086984164993
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.7965080581243
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.7965080581221
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.7843176997452
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.6789597197773
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.6667693613973
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.6667693613994
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -599.678959719777
+      },
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.6789597197792
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.6667693613987
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.6667693613992
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.6789597197776
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.549221023054
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.3795292955734
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.3795292955738
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -599.5492210230561
+      }
+    ],
+    "status": "ok",
+    "wall_s": 71.9324608000461
+  },
+  {
+    "name": "CaH2",
+    "max_n": 2,
+    "R": null,
+    "M": 20,
+    "Q_naive": 40,
+    "N_pauli_naive": 444,
+    "lambda_naive": 33.194986602142095,
+    "n_sym": 16,
+    "n_anti": 4,
+    "N_pauli_rotated": 444,
+    "lambda_rotated": 33.19498660214209,
+    "n_sub_blocks": 4,
+    "n_sub_blocks_with_antisym": 4,
+    "sub_block_keys": [
+      "(0, 'CaH2_bond_1', 'center')",
+      "(0, 'CaH2_bond_1', 'partner')",
+      "(1, 'CaH2_bond_2', 'center')",
+      "(1, 'CaH2_bond_2', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 6,
+    "Q_tapered": 34,
+    "delta_Q": 6,
+    "N_pauli_tapered": 388,
+    "lambda_tapered": 32.91725222714205,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.6248283998575062
+  },
+  {
+    "name": "GeH4",
+    "max_n": 2,
+    "R": null,
+    "M": 40,
+    "Q_naive": 80,
+    "N_pauli_naive": 888,
+    "lambda_naive": 100.5828923927524,
+    "n_sym": 32,
+    "n_anti": 8,
+    "N_pauli_rotated": 888,
+    "lambda_rotated": 100.58289239275238,
+    "n_sub_blocks": 8,
+    "n_sub_blocks_with_antisym": 8,
+    "sub_block_keys": [
+      "(0, 'GeH4_bond_1', 'center')",
+      "(0, 'GeH4_bond_1', 'partner')",
+      "(1, 'GeH4_bond_2', 'center')",
+      "(1, 'GeH4_bond_2', 'partner')",
+      "(2, 'GeH4_bond_3', 'center')",
+      "(2, 'GeH4_bond_3', 'partner')",
+      "(3, 'GeH4_bond_4', 'center')",
+      "(3, 'GeH4_bond_4', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 10,
+    "Q_tapered": 70,
+    "delta_Q": 10,
+    "N_pauli_tapered": 776,
+    "lambda_tapered": 99.65711114275234,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 3.174604200059548
+  },
+  {
+    "name": "AsH3",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 113.33028662355903,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 113.33028662355899,
+    "n_sub_blocks": 7,
+    "n_sub_blocks_with_antisym": 7,
+    "sub_block_keys": [
+      "(0, 'AsH3_bond_1', 'center')",
+      "(0, 'AsH3_bond_1', 'partner')",
+      "(1, 'AsH3_bond_2', 'center')",
+      "(1, 'AsH3_bond_2', 'partner')",
+      "(2, 'AsH3_bond_3', 'center')",
+      "(2, 'AsH3_bond_3', 'partner')",
+      "(3, 'As_lp', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 9,
+    "Q_tapered": 61,
+    "delta_Q": 9,
+    "N_pauli_tapered": 679,
+    "lambda_tapered": 112.26563818605912,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 2.206022199941799
+  },
+  {
+    "name": "H2Se",
+    "max_n": 2,
+    "R": null,
+    "M": 30,
+    "Q_naive": 60,
+    "N_pauli_naive": 666,
+    "lambda_naive": 126.28035575148603,
+    "n_sym": 24,
+    "n_anti": 6,
+    "N_pauli_rotated": 666,
+    "lambda_rotated": 126.28035575148601,
+    "n_sub_blocks": 6,
+    "n_sub_blocks_with_antisym": 6,
+    "sub_block_keys": [
+      "(0, 'H2Se_bond_1', 'center')",
+      "(0, 'H2Se_bond_1', 'partner')",
+      "(1, 'H2Se_bond_2', 'center')",
+      "(1, 'H2Se_bond_2', 'partner')",
+      "(2, 'Se_lp_1', 'center')",
+      "(3, 'Se_lp_2', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 8,
+    "Q_tapered": 52,
+    "delta_Q": 8,
+    "N_pauli_tapered": 582,
+    "lambda_tapered": 125.07684012648619,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 1.4895562001038343
+  },
+  {
+    "name": "HBr",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 150.63688159332784,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 150.63688159332784,
+    "n_sub_blocks": 5,
+    "n_sub_blocks_with_antisym": 5,
+    "sub_block_keys": [
+      "(0, 'HBr_bond', 'center')",
+      "(0, 'HBr_bond', 'partner')",
+      "(1, 'Br_lp_1', 'center')",
+      "(2, 'Br_lp_2', 'center')",
+      "(3, 'Br_lp_3', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 7,
+    "Q_tapered": 43,
+    "delta_Q": 7,
+    "N_pauli_tapered": 485,
+    "lambda_tapered": 149.29449878082815,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 1.011984899872914
+  },
+  {
+    "name": "LiF",
+    "max_n": 2,
+    "R": null,
+    "M": 35,
+    "Q_naive": 70,
+    "N_pauli_naive": 777,
+    "lambda_naive": 27742.83178863656,
+    "n_sym": 28,
+    "n_anti": 7,
+    "N_pauli_rotated": 777,
+    "lambda_rotated": 27742.83178863656,
+    "n_sub_blocks": 7,
+    "n_sub_blocks_with_antisym": 7,
+    "sub_block_keys": [
+      "(0, 'Li_core', 'center')",
+      "(1, 'LiF_bond', 'center')",
+      "(1, 'LiF_bond', 'partner')",
+      "(2, 'F_core', 'center')",
+      "(3, 'F_lp_1', 'center')",
+      "(4, 'F_lp_2', 'center')",
+      "(5, 'F_lp_3', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 9,
+    "Q_tapered": 61,
+    "delta_Q": 9,
+    "N_pauli_tapered": 679,
+    "lambda_tapered": 27740.933937074078,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 2.180778000038117
+  },
+  {
+    "name": "CO",
+    "max_n": 2,
+    "R": null,
+    "M": 50,
+    "Q_naive": 100,
+    "N_pauli_naive": 1110,
+    "lambda_naive": 9321.25450850324,
+    "n_sym": 40,
+    "n_anti": 10,
+    "N_pauli_rotated": 1110,
+    "lambda_rotated": 9321.25450850324,
+    "n_sub_blocks": 10,
+    "n_sub_blocks_with_antisym": 10,
+    "sub_block_keys": [
+      "(0, 'C_core', 'center')",
+      "(1, 'CO_bond_1', 'center')",
+      "(1, 'CO_bond_1', 'partner')",
+      "(2, 'CO_bond_2', 'center')",
+      "(2, 'CO_bond_2', 'partner')",
+      "(3, 'CO_bond_3', 'center')",
+      "(3, 'CO_bond_3', 'partner')",
+      "(4, 'C_lp', 'center')",
+      "(5, 'O_core', 'center')",
+      "(6, 'O_lp', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 12,
+    "Q_tapered": 88,
+    "delta_Q": 12,
+    "N_pauli_tapered": 970,
+    "lambda_tapered": 9318.754899128191,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 5.945649999892339
+  },
+  {
+    "name": "N2",
+    "max_n": 2,
+    "R": null,
+    "M": 50,
+    "Q_naive": 100,
+    "N_pauli_naive": 1110,
+    "lambda_naive": 13505.242746363321,
+    "n_sym": 40,
+    "n_anti": 10,
+    "N_pauli_rotated": 1110,
+    "lambda_rotated": 13505.242746363321,
+    "n_sub_blocks": 10,
+    "n_sub_blocks_with_antisym": 10,
+    "sub_block_keys": [
+      "(0, 'N_core', 'center')",
+      "(1, 'N2_bond_1', 'center')",
+      "(1, 'N2_bond_1', 'partner')",
+      "(2, 'N2_bond_2', 'center')",
+      "(2, 'N2_bond_2', 'partner')",
+      "(3, 'N2_bond_3', 'center')",
+      "(3, 'N2_bond_3', 'partner')",
+      "(4, 'N_lp', 'center')",
+      "(5, 'N_core', 'center')",
+      "(6, 'N_lp', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 12,
+    "Q_tapered": 88,
+    "delta_Q": 12,
+    "N_pauli_tapered": 970,
+    "lambda_tapered": 13502.743136988322,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 5.942322500050068
+  },
+  {
+    "name": "F2",
+    "max_n": 2,
+    "R": null,
+    "M": 50,
+    "Q_naive": 100,
+    "N_pauli_naive": 1110,
+    "lambda_naive": 64591.25459255701,
+    "n_sym": 40,
+    "n_anti": 10,
+    "N_pauli_rotated": 1110,
+    "lambda_rotated": 64591.25459255701,
+    "n_sub_blocks": 10,
+    "n_sub_blocks_with_antisym": 10,
+    "sub_block_keys": [
+      "(0, 'F_core', 'center')",
+      "(1, 'F2_bond', 'center')",
+      "(1, 'F2_bond', 'partner')",
+      "(2, 'F_lp_1', 'center')",
+      "(3, 'F_lp_2', 'center')",
+      "(4, 'F_lp_3', 'center')",
+      "(5, 'F_core', 'center')",
+      "(6, 'F_lp_1', 'center')",
+      "(7, 'F_lp_2', 'center')",
+      "(8, 'F_lp_3', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 12,
+    "Q_tapered": 88,
+    "delta_Q": 12,
+    "N_pauli_tapered": 970,
+    "lambda_tapered": 64587.82920193179,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 5.869698300026357
+  },
+  {
+    "name": "NaCl",
+    "max_n": 2,
+    "R": null,
+    "M": 25,
+    "Q_naive": 50,
+    "N_pauli_naive": 555,
+    "lambda_naive": 150.63688159332784,
+    "n_sym": 20,
+    "n_anti": 5,
+    "N_pauli_rotated": 555,
+    "lambda_rotated": 150.63688159332784,
+    "n_sub_blocks": 5,
+    "n_sub_blocks_with_antisym": 5,
+    "sub_block_keys": [
+      "(0, 'NaCl_bond', 'center')",
+      "(0, 'NaCl_bond', 'partner')",
+      "(1, 'Cl_lp_1', 'center')",
+      "(2, 'Cl_lp_2', 'center')",
+      "(3, 'Cl_lp_3', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 7,
+    "Q_tapered": 43,
+    "delta_Q": 7,
+    "N_pauli_tapered": 485,
+    "lambda_tapered": 149.29449878082815,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.9869035999290645
+  },
+  {
+    "name": "ScH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 26.581462989355312,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 26.58146298935531,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'ScH_sigma', 'center')",
+      "(0, 'ScH_sigma', 'partner')",
+      "(1, 'Sc_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 26.396306739355282,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.25585950003005564
+  },
+  {
+    "name": "TiH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 32.26445139679914,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 32.26445139679914,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'TiH_sigma', 'center')",
+      "(0, 'TiH_sigma', 'partner')",
+      "(1, 'Ti_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 32.033006084299124,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.25493680010549724
+  },
+  {
+    "name": "VH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 37.39188424868735,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 37.39188424868735,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'VH_sigma', 'center')",
+      "(0, 'VH_sigma', 'partner')",
+      "(1, 'V_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 37.11414987368734,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.25356430001556873
+  },
+  {
+    "name": "CrH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 42.0144302692999,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 42.01443026929989,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'CrH_sigma', 'center')",
+      "(0, 'CrH_sigma', 'partner')",
+      "(1, 'Cr_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 41.69040683179992,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.25371169997379184
+  },
+  {
+    "name": "MnH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 49.174520734595156,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 49.17452073459516,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'MnH_sigma', 'center')",
+      "(0, 'MnH_sigma', 'partner')",
+      "(1, 'Mn_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 48.80420823459518,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.2554184999316931
+  },
+  {
+    "name": "FeH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 65.53607957123222,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 65.53607957123222,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'FeH_sigma', 'center')",
+      "(0, 'FeH_sigma', 'partner')",
+      "(1, 'Fe_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 65.11947800873229,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.2525653000921011
+  },
+  {
+    "name": "CoH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 84.45319396342506,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 84.45319396342506,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'CoH_sigma', 'center')",
+      "(0, 'CoH_sigma', 'partner')",
+      "(1, 'Co_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 83.99030333842511,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.25529110012575984
+  },
+  {
+    "name": "NiH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 105.92586391117312,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 105.92586391117311,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'NiH_sigma', 'center')",
+      "(0, 'NiH_sigma', 'partner')",
+      "(1, 'Ni_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 105.41668422367324,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.2589622000232339
+  },
+  {
+    "name": "CuH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 129.954089414477,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 129.95408941447704,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'CuH_sigma', 'center')",
+      "(0, 'CuH_sigma', 'partner')",
+      "(1, 'Cu_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 129.39862066447725,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.2573988998774439
+  },
+  {
+    "name": "ZnH",
+    "max_n": 2,
+    "R": null,
+    "M": 15,
+    "Q_naive": 30,
+    "N_pauli_naive": 277,
+    "lambda_naive": 156.53787047333708,
+    "n_sym": 11,
+    "n_anti": 4,
+    "N_pauli_rotated": 277,
+    "lambda_rotated": 156.53787047333702,
+    "n_sub_blocks": 3,
+    "n_sub_blocks_with_antisym": 3,
+    "sub_block_keys": [
+      "(0, 'ZnH_sigma', 'center')",
+      "(0, 'ZnH_sigma', 'partner')",
+      "(1, 'Zn_3d', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 5,
+    "Q_tapered": 25,
+    "delta_Q": 5,
+    "N_pauli_tapered": 246,
+    "lambda_tapered": 155.9361126608369,
+    "E_naive": null,
+    "E_tapered": null,
+    "delta_E": null,
+    "relative_delta_E": null,
+    "spectrum_preserved": null,
+    "sector_table_len": 0,
+    "sector_table": [],
+    "status": "ok",
+    "wall_s": 0.25233719986863434
+  },
+  {
+    "name": "SrH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 16.597493301070987,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 16.597493301070987,
+    "n_sub_blocks": 2,
+    "n_sub_blocks_with_antisym": 2,
+    "sub_block_keys": [
+      "(0, 'SrH_bond', 'center')",
+      "(0, 'SrH_bond', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 4,
+    "Q_tapered": 16,
+    "delta_Q": 4,
+    "N_pauli_tapered": 194,
+    "lambda_tapered": 16.458626113570986,
+    "E_naive": -3134.390784918899,
+    "E_tapered": -3134.390784918898,
+    "best_sector_signs": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "delta_E": 9.094947017729282e-13,
+    "relative_delta_E": 2.901663398670504e-16,
+    "spectrum_preserved": true,
+    "sector_table_len": 16,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -3134.390784918898
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -3134.378594560529
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -3134.3785945605305
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -3134.3156658911075
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -3133.9418566582576
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -3133.9540470166266
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -3133.9540470166335
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -3133.9418566582467
+      },
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3134.261046222167
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3134.0913544947043
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3134.091354494693
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3134.261046222187
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3133.6546165924196
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3133.824308319906
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3133.8243083199045
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -3133.654616592424
+      }
+    ],
+    "status": "ok",
+    "wall_s": 68.40600319998339
+  },
+  {
+    "name": "BaH",
+    "max_n": 2,
+    "R": null,
+    "M": 10,
+    "Q_naive": 20,
+    "N_pauli_naive": 222,
+    "lambda_naive": 16.597493301070987,
+    "n_sym": 8,
+    "n_anti": 2,
+    "N_pauli_rotated": 222,
+    "lambda_rotated": 16.597493301070987,
+    "n_sub_blocks": 2,
+    "n_sub_blocks_with_antisym": 2,
+    "sub_block_keys": [
+      "(0, 'BaH_bond', 'center')",
+      "(0, 'BaH_bond', 'partner')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true,
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0,
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 4,
+    "Q_tapered": 16,
+    "delta_Q": 4,
+    "N_pauli_tapered": 194,
+    "lambda_tapered": 16.458626113570986,
+    "E_naive": -7886.409844799086,
+    "E_tapered": -7886.409844799084,
+    "best_sector_signs": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "delta_E": 2.7284841053187847e-12,
+    "relative_delta_E": 3.4597290262795053e-16,
+    "spectrum_preserved": true,
+    "sector_table_len": 16,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -7886.409844799084
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -7886.397654440684
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -7886.397654440687
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          1
+        ],
+        "Q": 16,
+        "E": -7886.334725771308
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -7885.9609165384245
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -7885.973106896833
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -7885.973106896826
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          1
+        ],
+        "Q": 16,
+        "E": -7885.960916538435
+      },
+      {
+        "signs": [
+          1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7886.280106102352
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7886.110414374892
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7886.110414374885
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7886.280106102393
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7885.673676472615
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7885.843368200112
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7885.843368200112
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 16,
+        "E": -7885.673676472607
+      }
+    ],
+    "status": "ok",
+    "wall_s": 67.13451170013286
+  },
+  {
+    "name": "H2",
+    "max_n": 2,
+    "R": null,
+    "M": 5,
+    "Q_naive": 10,
+    "N_pauli_naive": 111,
+    "lambda_naive": 6.199164433690326,
+    "n_sym": 4,
+    "n_anti": 1,
+    "N_pauli_rotated": 111,
+    "lambda_rotated": 6.199164433690326,
+    "n_sub_blocks": 1,
+    "n_sub_blocks_with_antisym": 1,
+    "sub_block_keys": [
+      "(0, 'H2_bond', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 3,
+    "Q_tapered": 7,
+    "delta_Q": 3,
+    "N_pauli_tapered": 97,
+    "lambda_tapered": 6.15287537119033,
+    "E_naive": 0.20209535590669597,
+    "E_tapered": 0.20209535590669547,
+    "best_sector_signs": [
+      -1,
+      -1,
+      1
+    ],
+    "delta_E": 4.996003610813204e-16,
+    "relative_delta_E": 2.472102136339924e-15,
+    "spectrum_preserved": true,
+    "sector_table_len": 8,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "E": 0.27721438369586426
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "E": 0.21428571428571405
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "E": 0.21428571428571389
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "E": 0.20209535590669547
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "E": 0.3318340526305522
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "E": 0.5015257801115252
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "E": 0.5015257801115264
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "E": 0.3318340526305544
+      }
+    ],
+    "status": "ok",
+    "wall_s": 1.490665900055319
+  },
+  {
+    "name": "He",
+    "max_n": 2,
+    "R": null,
+    "M": 5,
+    "Q_naive": 10,
+    "N_pauli_naive": 111,
+    "lambda_naive": 10.398328867380656,
+    "n_sym": 4,
+    "n_anti": 1,
+    "N_pauli_rotated": 111,
+    "lambda_rotated": 10.398328867380656,
+    "n_sub_blocks": 1,
+    "n_sub_blocks_with_antisym": 1,
+    "sub_block_keys": [
+      "(0, 'He_core', 'center')"
+    ],
+    "P_per_block_commutes_with_H": [
+      true
+    ],
+    "P_per_block_commutator_max_coef": [
+      0.0
+    ],
+    "all_P_commute_with_H": true,
+    "all_stabs_pairwise_commute": true,
+    "failing_stabilizer_pairs": [],
+    "n_P_dropped": 0,
+    "n_stabilizers": 3,
+    "Q_tapered": 7,
+    "delta_Q": 3,
+    "N_pauli_tapered": 97,
+    "lambda_tapered": 10.305750742380658,
+    "E_naive": -2.831812809594973,
+    "E_tapered": -2.831812809594977,
+    "best_sector_signs": [
+      -1,
+      -1,
+      1
+    ],
+    "delta_E": 3.9968028886505635e-15,
+    "relative_delta_E": 1.4113937457688865e-15,
+    "spectrum_preserved": true,
+    "sector_table_len": 8,
+    "sector_table": [
+      {
+        "signs": [
+          1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "E": -2.124142661179699
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          1
+        ],
+        "Q": 7,
+        "E": -2.5197665817859756
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "E": -2.519766581785976
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          1
+        ],
+        "Q": 7,
+        "E": -2.831812809594977
+      },
+      {
+        "signs": [
+          1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "E": -2.0146233176662984
+      },
+      {
+        "signs": [
+          -1,
+          1,
+          -1
+        ],
+        "Q": 7,
+        "E": -2.3950749073236284
+      },
+      {
+        "signs": [
+          1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "E": -2.395074907323629
+      },
+      {
+        "signs": [
+          -1,
+          -1,
+          -1
+        ],
+        "Q": 7,
+        "E": -2.014623317666297
+      }
+    ],
+    "status": "ok",
+    "wall_s": 1.481360899982974
+  }
+]

@@ -385,6 +385,7 @@ def hamiltonian(
     max_n: int = 2,
     verbose: bool = False,
     core_method: str = 'pk',
+    tapered: Optional[str] = None,
 ) -> GeoVacHamiltonian:
     """
     Build a GeoVac qubit Hamiltonian and return as a
@@ -408,6 +409,17 @@ def hamiltonian(
         Maximum principal quantum number (default 2).
     verbose : bool
         Print build progress.
+    tapered : {None, 'global', 'per_block'}, optional
+        If set, apply Hopf-U(1) ``m -> -m`` Z2 tapering on top of the
+        standard alpha/beta parity tapering (Paper 14 §sec:hopf_tapering,
+        Paper 29 §5.3).  ``'global'`` removes 3 qubits per molecule;
+        ``'per_block'`` removes ``2 + n_sub_blocks`` qubits (recommended,
+        ranges from 3 for He/H2 to 12 for CO/N2/F2).  Default ``None``
+        preserves the historical Pauli/qubit counts of Paper 14 Tables
+        I/II.  The tapering is a similarity transform onto the
+        fully-symmetric (all stabilisers ``+1``) sector, which is the
+        physical ground-state sector for closed-shell molecules in the
+        standard composed builder.
 
     Returns
     -------
@@ -424,24 +436,124 @@ def hamiltonian(
         )
 
     if canonical in _HYDRIDE_Z:
-        return _build_hydride(_HYDRIDE_Z[canonical], R=R, max_n=max_n,
-                              verbose=verbose, core_method=core_method)
+        ham = _build_hydride(_HYDRIDE_Z[canonical], R=R, max_n=max_n,
+                             verbose=verbose, core_method=core_method)
     elif canonical in _MULTI_CENTER:
-        return _build_multi_center(canonical, R=R, max_n=max_n,
-                                   verbose=verbose)
+        ham = _build_multi_center(canonical, R=R, max_n=max_n,
+                                  verbose=verbose)
     elif canonical in _TM_HYDRIDE_Z:
-        return _build_tm_hydride(_TM_HYDRIDE_Z[canonical], R=R,
-                                 verbose=verbose)
+        ham = _build_tm_hydride(_TM_HYDRIDE_Z[canonical], R=R,
+                                verbose=verbose)
     elif canonical in ('SrH', 'BaH'):
-        return _build_alkaline_earth_monohydride(
+        ham = _build_alkaline_earth_monohydride(
             canonical, R=R, max_n=max_n, verbose=verbose,
         )
     elif canonical == 'He':
-        return _build_he(max_n=max_n, verbose=verbose)
+        ham = _build_he(max_n=max_n, verbose=verbose)
     elif canonical == 'H2':
-        return _build_h2(max_n=max_n, R=R, verbose=verbose)
+        ham = _build_h2(max_n=max_n, R=R, verbose=verbose)
     else:
         raise ValueError(f"System {canonical!r} not yet implemented.")
+
+    if tapered is not None:
+        ham = _apply_hopf_tapering_to_geovac_hamiltonian(
+            ham, canonical, R=R, max_n=max_n, mode=tapered,
+            core_method=core_method, verbose=verbose,
+        )
+    return ham
+
+
+def _apply_hopf_tapering_to_geovac_hamiltonian(
+    ham: GeoVacHamiltonian,
+    canonical: str,
+    R: Optional[float],
+    max_n: int,
+    mode: str,
+    core_method: str,
+    verbose: bool,
+) -> GeoVacHamiltonian:
+    """Rebuild the molecule via ``geovac.z2_tapering.hopf_tapered_from_spec``
+    and wrap the tapered operator in a ``GeoVacHamiltonian``.
+
+    Re-runs the spec build (cheap relative to the JW + rotation cost)
+    rather than trying to taper an already-JW-encoded operator that was
+    not built in the P-eigenbasis.
+    """
+    from geovac.z2_tapering import hopf_tapered_from_spec
+
+    if mode not in ('global', 'per_block'):
+        raise ValueError(
+            f"tapered must be None, 'global', or 'per_block'; got {mode!r}"
+        )
+
+    spec = _rebuild_spec(canonical, R=R, max_n=max_n, core_method=core_method)
+    pk_in_ham = (core_method == 'downfolded')
+    result = hopf_tapered_from_spec(
+        spec, mode=mode, pk_in_hamiltonian=pk_in_ham, verbose=verbose,
+    )
+
+    meta = dict(ham._metadata)
+    meta.update({
+        'tapered_mode': mode,
+        'Q_tapered': result['Q_tapered'],
+        'delta_Q': result['delta_Q'],
+        'n_sub_blocks': result['n_sub_blocks'],
+        'n_sub_blocks_with_antisym': result['n_sub_blocks_with_antisym'],
+        'dropped_P_indices': result['dropped_P_indices'],
+    })
+    return GeoVacHamiltonian(
+        result['qubit_op_tapered'], metadata=meta,
+        h1_pk=ham._h1_pk,
+    )
+
+
+def _rebuild_spec(
+    canonical: str, R: Optional[float], max_n: int, core_method: str,
+) -> Any:
+    """Rebuild the MolecularSpec for a given canonical system name.
+    Mirrors the dispatch logic of :func:`hamiltonian` at the spec level.
+    """
+    from geovac import molecular_spec as ms
+
+    if canonical in _HYDRIDE_Z:
+        return ms.hydride_spec(_HYDRIDE_Z[canonical], R=R, max_n=max_n,
+                               core_method=core_method)
+    if canonical in _MULTI_CENTER:
+        factory = getattr(ms, _MULTI_CENTER[canonical])
+        kwargs: Dict[str, Any] = {'max_n': max_n}
+        if R is not None:
+            kwargs['R'] = R
+        return factory(**kwargs)
+    if canonical in _TM_HYDRIDE_Z:
+        return ms.transition_metal_hydride_spec(_TM_HYDRIDE_Z[canonical], R=R)
+    if canonical == 'SrH':
+        return ms.srh_spec(R=R, max_n=max_n)
+    if canonical == 'BaH':
+        return ms.bah_spec(R=R, max_n=max_n)
+    if canonical == 'H2':
+        from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+        Rh = R if R is not None else 1.4
+        return MolecularSpec(
+            name='H2',
+            blocks=[OrbitalBlock(
+                label='H2_bond', block_type='bond_pair', Z_center=1.0,
+                n_electrons=2, max_n=max_n,
+            )],
+            nuclear_repulsion_constant=1.0 / Rh,
+        )
+    if canonical == 'He':
+        from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+        return MolecularSpec(
+            name='He',
+            blocks=[OrbitalBlock(
+                label='He_core', block_type='atomic', Z_center=2.0,
+                n_electrons=2, max_n=max_n,
+            )],
+            nuclear_repulsion_constant=0.0,
+        )
+    raise ValueError(
+        f"_rebuild_spec: no spec factory for {canonical!r}"
+    )
 
 
 # ---------------------------------------------------------------------------

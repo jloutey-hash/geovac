@@ -187,10 +187,10 @@ class TestSupportRow2:
         assert c.supported is True
 
     @pytest.mark.parametrize("Z", [21, 30])
-    def test_transition_metals_raise(self, Z: int) -> None:
-        """Z=21-30 raise NotImplementedError."""
-        with pytest.raises(NotImplementedError):
-            classify_atom(Z)
+    def test_transition_metals_supported(self, Z: int) -> None:
+        """Z=21-30 are now supported (CLAUDE.md v2.8.0 TM hydrides extension)."""
+        c = classify_atom(Z)
+        assert c.supported is True
 
     def test_unsupported_has_correct_N(self) -> None:
         """Z=19 returns correct N_electrons and nu."""

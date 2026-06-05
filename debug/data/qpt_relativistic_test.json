@@ -1,0 +1,42 @@
+{
+  "LiH": {
+    "Q": 30,
+    "alpha_scaling": {
+      "alphas": [
+        0.0,
+        0.00364867628465,
+        0.0072973525693,
+        0.0145947051386
+      ],
+      "H0_n_terms": 1414,
+      "H0_l1_norm": 41.38160335890209,
+      "differences": {
+        "0.00364867628465": {
+          "n_terms_diff": 18,
+          "max_abs_coef": 1.1232707594288627e-05,
+          "l1_norm": 4.714963681545781e-05,
+          "scaling_vs_alpha_squared": 3.541666666687838
+        },
+        "0.0072973525693": {
+          "n_terms_diff": 18,
+          "max_abs_coef": 4.493083037693246e-05,
+          "l1_norm": 0.00018859854726077652,
+          "scaling_vs_alpha_squared": 3.5416666666680316
+        },
+        "0.0145947051386": {
+          "n_terms_diff": 18,
+          "max_abs_coef": 0.00017972332150728576,
+          "l1_norm": 0.000754394189042884,
+          "scaling_vs_alpha_squared": 3.5416666666669894
+        }
+      }
+    },
+    "alpha_squared_scaling_consistent": "True",
+    "commutators_at_codata": {
+      "[H_rel, J_z]": 0.0,
+      "[H_rel, N]": 0.0,
+      "[H_rel, P_global_spinor]": 0.0,
+      "[J_z, N]": 0.0
+    }
+  }
+}

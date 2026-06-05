@@ -1,0 +1,786 @@
+{
+  "sprint": "W1e period-class diagnostic",
+  "date": "2026-06-04",
+  "decision_gate": "GO if W1e correction terms reproducible by low-coefficient M1/M2/M3 relations at 100 dps; BORDERLINE if precision insufficient; STOP if corrections are FCI eigenvalues without closed form (in which case period-class framing was wrong).",
+  "verdict_one_line": "STOP because 0/11 W1e correction terms identify with low-coefficient outer-factor periods (M1/M2/M3) after audit filtering [spurious_rational=0, basis_internal=5].  At audit ceiling 100 with the M1/M2/M3 bases (3-5 generators with TRANSCENDENTAL content), no term identifies as an outer-factor period.  The INNER-basis hits (3/11) are at coefficients 20-70 with 6-7 basis elements vs ~3-4 digit input precision (curve-fit-audit failure mode: any value fits at this basis/precision ratio).  Conclusion: W1e correction terms are NOT periods of the outer-factor Mellin engine; they are FCI eigenvalues and Hartree integrals built from external (chemistry-side) calibration data (Clementi-Raimondi exponents).  Period-class framing was the WRONG axis.  W1e lives in Class 1 (calibration data) / inner-factor input data tier (Paper 18 IV.6 chemistry-side analog), STRUCTURALLY separate from outer M1/M2/M3.",
+  "method": "PSLQ at 100 dps against M1 (Q[pi, 1/pi]), M2 (bigoplus_k pi^{2k} Q on unit S^3), M3 (Q[1, log2, Catalan G, beta(4), zeta(3), zeta(5)]) at coefficient ceiling 10^6.",
+  "mpmath_dps": 100,
+  "corrections_Ha": {
+    "F4_baseline_De_Ha": "4.373456603993361",
+    "F4_PK_barrier_Ha": "0.194",
+    "F4_De_at_predicted_PK_Ha": "4.371167525063612",
+    "F4_correction_at_PK_Ha": "0.002289078929749",
+    "F5_J_total_Ha": "1.1313887470358504",
+    "F5_K_total_Ha": "0.008153540204915995",
+    "F5_JmK_correction_Ha": "1.1232352068309344",
+    "F5_K_over_J": "0.007206665459840952",
+    "F6_well_depth_at_max_n_4_Ha": "3.9288343361499187",
+    "F6_F3_baseline_Ha": "4.374",
+    "F6_closure_Ha": "0.4451656638500813",
+    "NaH_De_exp_Ha": "0.0746"
+  },
+  "period_bases": {
+    "M1": {
+      "name": "Hopf-base measure (k=0, pure Tate Q[pi, 1/pi])",
+      "elements": {
+        "pi": "3.14159265358979323846264338328",
+        "1/pi": "0.318309886183790671537767526745",
+        "pi^2": "9.86960440108935861883449099988",
+        "1/pi^2": "0.10132118364233777144387946321"
+      }
+    },
+    "M2": {
+      "name": "Seeley-DeWitt (k=2, bigoplus_k pi^{2k} . Q on unit S^3)",
+      "elements": {
+        "pi^2": "9.86960440108935861883449099988",
+        "pi^4": "97.4090910340024372364403326887",
+        "pi^6": "961.389193575304437030219443652"
+      }
+    },
+    "M3": {
+      "name": "Vertex-parity Hurwitz (k=1, MT(Z[i, 1/2]) level <= 4)",
+      "elements": {
+        "log2": "0.693147180559945309417232121458",
+        "Catalan_G": "0.915965594177219015054603514932",
+        "beta(4)": "0.988944551741105336108422633228",
+        "zeta(3)": "1.20205690315959428539973816151",
+        "zeta(5)": "1.03692775514336992633136548646"
+      }
+    },
+    "INNER": {
+      "name": "Chemistry inner-factor (CR Z_eff Dirichlet ring)",
+      "elements": {
+        "zeta_1s_CR": "10.6259",
+        "zeta_2s_CR": "6.5714",
+        "zeta_2p_CR": "6.8018",
+        "E_1s_CR": "56.454875405",
+        "E_2s_CR": "5.397912245",
+        "E_2p_CR": "5.783060405"
+      }
+    }
+  },
+  "pslq_classification": {
+    "F4_baseline_De_Ha": {
+      "label": "F4_baseline_De_Ha",
+      "value_str": "4.373456603993361",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": -88,
+            "zeta_2s_CR": -84,
+            "zeta_2p_CR": 71,
+            "E_1s_CR": 22,
+            "E_2s_CR": 47,
+            "E_2p_CR": -85
+          },
+          "hit": true
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": -88,
+            "zeta_2s_CR": -84,
+            "zeta_2p_CR": 71,
+            "E_1s_CR": 22,
+            "E_2s_CR": 47,
+            "E_2p_CR": -85
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {
+        "type": "FCI eigenvalue gap (variational)",
+        "closed_form_status": "Eigenvalue of a 100-determinant FCI matrix.  Matrix elements include rational Slater integrals over hydrogenic + multi-zeta basis functions, hydrogenic energies -Z^2/(2 n^2), and multipole-expanded cross-V_ne (rational + Gaunt-terminated, algebraic-closed under Sprint F2 KERNEL-NOT-IT).  But the EIGENVALUE itself does not generally have a closed form: it is a root of a characteristic polynomial of order 100, with transcendental-input matrix elements (multi-zeta exponents).",
+        "Mellin_sector_a_priori": "FCI eigenvalue is a generic algebraic-implicit object (Paper 18 algebraic-implicit tier) whose value depends on external chemistry-side input data.",
+        "Paper_18_tier": "algebraic-implicit (with inner-factor inputs)"
+      },
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 397,
+        "target_coef": 0,
+        "basis_internal_only": true
+      },
+      "first_hit_basis_internal": "INNER"
+    },
+    "F4_PK_barrier_Ha": {
+      "label": "F4_PK_barrier_Ha",
+      "value_str": "0.194",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 11,
+            "zeta_1s_CR": 33,
+            "zeta_2s_CR": 20,
+            "zeta_2p_CR": -25,
+            "E_1s_CR": -9,
+            "E_2s_CR": -8,
+            "E_2p_CR": 41
+          },
+          "hit": true
+        }
+      },
+      "first_hit": "INNER",
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 61,
+            "zeta_1s_CR": -57,
+            "zeta_2s_CR": 85,
+            "zeta_2p_CR": 180,
+            "E_1s_CR": -7,
+            "E_2s_CR": -116,
+            "E_2p_CR": -29
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {
+        "type": "operator-shift (rank-1 projector eigenshift)",
+        "closed_form_status": "Predicted from sum_c (E_v - E_c) |S_pc|^2 where E_c are Clementi-Raimondi core eigenvalues (transcendental fits, not closed form) and S_pc are non-orthogonal cross-overlaps (integrals against fitted core shapes, also not closed form). Predicted value 0.194 Ha is an EMPIRICAL float, not a period.",
+        "Mellin_sector_a_priori": "No master-Mellin assignment: the cross-overlap S_pc is computed against fitted (non-hydrogenic) core orbital shapes supplied by an external atomic-physics code (Clementi-Raimondi 1963).  The barrier value lives in the chemistry-side endomorphism / external-input ring of the multi-focal-composition wall taxonomy, not in M1/M2/M3.",
+        "Paper_18_tier": "inner-factor input data analog (chemistry-side)"
+      },
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 136,
+        "target_coef": 11,
+        "basis_internal_only": false
+      }
+    },
+    "F4_De_at_predicted_PK_Ha": {
+      "label": "F4_De_at_predicted_PK_Ha",
+      "value_str": "4.371167525063612",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": null,
+          "hit": false
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": null,
+          "hit": false
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {}
+    },
+    "F4_correction_at_PK_Ha": {
+      "label": "F4_correction_at_PK_Ha",
+      "value_str": "0.002289078929749",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": -39,
+            "zeta_2s_CR": 72,
+            "zeta_2p_CR": -10,
+            "E_1s_CR": -2,
+            "E_2s_CR": -47,
+            "E_2p_CR": 65
+          },
+          "hit": true
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": -39,
+            "zeta_2s_CR": 72,
+            "zeta_2p_CR": -10,
+            "E_1s_CR": -2,
+            "E_2s_CR": -47,
+            "E_2p_CR": 65
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {},
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 235,
+        "target_coef": 0,
+        "basis_internal_only": true
+      },
+      "first_hit_basis_internal": "INNER"
+    },
+    "F5_J_total_Ha": {
+      "label": "F5_J_total_Ha",
+      "value_str": "1.1313887470358504",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": null,
+          "hit": false
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": null,
+          "hit": false
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {
+        "type": "Hartree mean-field cross-block 2-body Coulomb",
+        "closed_form_status": "Computed as 4 pi integral of |phi_b(r)|^2 V_core(r) where V_core(r) is the Coulomb potential of 10 [Ne] electrons distributed across five Clementi-Raimondi hydrogenic orbitals with five FITTED zeta exponents.  The radial integrals reduce to closed-form rationals in the zetas (Slater integrals are rational-in-Z), but the value depends on zeta(2s) = 6.5714, zeta(2p) = 6.8018, zeta(1s) = 10.6259 which are external fits. Predicted value +1.131 Ha is also an EMPIRICAL float.",
+        "Mellin_sector_a_priori": "Same as F4: outside outer-factor M1/M2/M3.  The Clementi-Raimondi exponents are chemistry-side calibration data; the Hartree integral over hydrogenic radial functions is rational in the exponents but the exponents themselves are external.",
+        "Paper_18_tier": "inner-factor input data analog (chemistry-side)"
+      }
+    },
+    "F5_K_total_Ha": {
+      "label": "F5_K_total_Ha",
+      "value_str": "0.008153540204915995",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": 55,
+            "zeta_2s_CR": 18,
+            "zeta_2p_CR": -39,
+            "E_1s_CR": 1,
+            "E_2s_CR": -54,
+            "E_2p_CR": -35
+          },
+          "hit": true
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": 50,
+            "zeta_2s_CR": -11,
+            "zeta_2p_CR": 101,
+            "E_1s_CR": -8,
+            "E_2s_CR": 1,
+            "E_2p_CR": -121
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {
+        "type": "exchange (Slater-Condon estimate)",
+        "closed_form_status": "K_{b,c} ~ |S_{b,c}|^2 . F^0(c,c) with F^0(1s,1s) = 5Z/8, F^0(2s,2s) = 77Z/512, F^0(2p,2p) = 83Z/512 (hydrogenic closed forms, rational-in-Z).  Z_eff values are external fits, so value is fitted-data-dependent.",
+        "Mellin_sector_a_priori": "same external-data tier as F5 J",
+        "Paper_18_tier": "inner-factor input data analog"
+      },
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 202,
+        "target_coef": 0,
+        "basis_internal_only": true
+      },
+      "first_hit_basis_internal": "INNER"
+    },
+    "F5_JmK_correction_Ha": {
+      "label": "F5_JmK_correction_Ha",
+      "value_str": "1.1232352068309344",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": null,
+          "hit": false
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": null,
+          "hit": false
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {}
+    },
+    "F6_well_depth_at_max_n_4_Ha": {
+      "label": "F6_well_depth_at_max_n_4_Ha",
+      "value_str": "3.9288343361499187",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": -55,
+            "zeta_2s_CR": -18,
+            "zeta_2p_CR": 39,
+            "E_1s_CR": -1,
+            "E_2s_CR": 54,
+            "E_2p_CR": 35
+          },
+          "hit": true
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": -55,
+            "zeta_2s_CR": -18,
+            "zeta_2p_CR": 39,
+            "E_1s_CR": -1,
+            "E_2s_CR": 54,
+            "E_2p_CR": 35
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {
+        "type": "FCI eigenvalue at larger basis (max_n=4, Q=120, dim=3600)",
+        "closed_form_status": "same as F4 baseline at larger basis",
+        "Mellin_sector_a_priori": "same algebraic-implicit tier",
+        "Paper_18_tier": "algebraic-implicit (with inner-factor inputs)"
+      },
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 202,
+        "target_coef": 0,
+        "basis_internal_only": true
+      },
+      "first_hit_basis_internal": "INNER"
+    },
+    "F6_F3_baseline_Ha": {
+      "label": "F6_F3_baseline_Ha",
+      "value_str": "4.374",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 10,
+            "zeta_1s_CR": -26,
+            "zeta_2s_CR": 24,
+            "zeta_2p_CR": 11,
+            "E_1s_CR": 0,
+            "E_2s_CR": 0,
+            "E_2p_CR": 0
+          },
+          "hit": true
+        }
+      },
+      "first_hit": "INNER",
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 10,
+            "zeta_1s_CR": -26,
+            "zeta_2s_CR": 24,
+            "zeta_2p_CR": 11,
+            "E_1s_CR": 0,
+            "E_2s_CR": 0,
+            "E_2p_CR": 0
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {},
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 61,
+        "target_coef": 10,
+        "basis_internal_only": false
+      }
+    },
+    "F6_closure_Ha": {
+      "label": "F6_closure_Ha",
+      "value_str": "0.4451656638500813",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": 97,
+            "zeta_2s_CR": -69,
+            "zeta_2p_CR": 46,
+            "E_1s_CR": -30,
+            "E_2s_CR": 46,
+            "E_2p_CR": 96
+          },
+          "hit": true
+        }
+      },
+      "first_hit": null,
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 0,
+            "zeta_1s_CR": 97,
+            "zeta_2s_CR": -69,
+            "zeta_2p_CR": 46,
+            "E_1s_CR": -30,
+            "E_2s_CR": 46,
+            "E_2p_CR": 96
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {},
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 384,
+        "target_coef": 0,
+        "basis_internal_only": true
+      },
+      "first_hit_basis_internal": "INNER"
+    },
+    "NaH_De_exp_Ha": {
+      "label": "NaH_De_exp_Ha",
+      "value_str": "0.0746",
+      "verdicts": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 39,
+            "zeta_1s_CR": 4,
+            "zeta_2s_CR": 11,
+            "zeta_2p_CR": -25,
+            "E_1s_CR": -3,
+            "E_2s_CR": 70,
+            "E_2p_CR": -27
+          },
+          "hit": true
+        }
+      },
+      "first_hit": "INNER",
+      "verdicts_permissive_ceiling_10pow6": {
+        "M1": {
+          "relation": null,
+          "hit": false
+        },
+        "M2": {
+          "relation": null,
+          "hit": false
+        },
+        "M3": {
+          "relation": null,
+          "hit": false
+        },
+        "INNER": {
+          "relation": {
+            "target": 39,
+            "zeta_1s_CR": 4,
+            "zeta_2s_CR": 11,
+            "zeta_2p_CR": -25,
+            "E_1s_CR": -3,
+            "E_2s_CR": 70,
+            "E_2p_CR": -27
+          },
+          "hit": true
+        }
+      },
+      "audit_ceiling": 100,
+      "permissive_ceiling": 1000000,
+      "structural_classification": {
+        "type": "experimental binding energy (Huber-Herzberg)",
+        "closed_form_status": "outside framework; measured quantity",
+        "Mellin_sector_a_priori": "Class 1 (calibration data, external input)",
+        "Paper_18_tier": "external observation, not a period"
+      },
+      "audit": {
+        "rational_only_fit": false,
+        "transcendental_coeff_sum": 140,
+        "target_coef": 39,
+        "basis_internal_only": false
+      }
+    }
+  },
+  "audit_checklist": [
+    {
+      "question": "How many free parameters fed into each correction term?",
+      "answer": "F4 PK barrier: 5 (Clementi-Raimondi exponents for [Ne] core) + bonding orbital coefficients (4 mixing weights from h1 diagonalization, themselves derived from the multi-zeta + cross-block-h1 stack).  Total ~9 fitted/derived inputs.\nF5 J,K: same 5 CR exponents + same 4 bonding coefficients.\nFCI eigenvalues: ~5-20 multi-zeta exponents/coefficients plus the framework's Z, R inputs.\nNone of these terms are zero-parameter periods in the sense of M1, M2, M3.  All are EMPIRICAL FLOATS produced by computer code that takes calibration data as input."
+    },
+    {
+      "question": "Selection bias: are alternative bases tested?",
+      "answer": "PSLQ run against M1, M2, M3 in parallel at the same coefficient ceiling (10^6).  No basis is preferred a priori; any hit (or all-misses) is reported.  Negative result here would be 'no hits in any basis' which is the strongest support for the 'outside the period framework' verdict."
+    },
+    {
+      "question": "Robustness across systems?",
+      "answer": "The corrections were extracted at NaH at R = R_eq = 3.566 bohr.  We do NOT have analogous F4/F5 diagnostics on LiH (W1c was already small at LiH, the chemistry arc largely skipped F4/F5 there) or on MgH_2 / H_2O at the same sprint-scale precision.  Cross-system test is a NAMED follow-on, not in this sprint."
+    },
+    {
+      "question": "What would close GO at the period-class level?",
+      "answer": "A correction term reproducible to ~10^-6 by a single low-coefficient relation in M1, M2, or M3 with the Clementi-Raimondi exponents held fixed at their published rational approximations.  We have NEITHER the precision (corrections are at float64 ~10^-7 from the JSONs, not 100-dps recomputed) NOR the closed-form path (the FCI eigenvalue route does not produce closed-form output even with rational inputs)."
+    }
+  ],
+  "honest_scope": [
+    "Corrections are loaded as float64 from prior sprint JSONs (~15 digits precision); PSLQ ceiling 10^6 needs 100 dps INPUTS to be meaningful.  Treat hits with care; treat non-hits as decisive.",
+    "FCI eigenvalues do not have closed forms even with rational inputs; the 'no hit' result for F4_baseline_De_Ha and F6_well_depth_at_max_n_4_Ha is structurally expected.",
+    "The Hartree J term uses Clementi-Raimondi fits (Z_eff values from a 1963 atomic Hartree-Fock fit).  Even if the J integral is rational in those Z_eff values, the Z_eff values themselves are external calibration data, not framework-derived periods.",
+    "Cross-system robustness (LiH / MgH2 / H2O analogs of F5 J) is a NAMED follow-on, not executed in this sprint."
+  ],
+  "real_hits_count": 3,
+  "spurious_rational_hits_count": 0,
+  "basis_internal_hits_count": 5
+}

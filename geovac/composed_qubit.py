@@ -1869,6 +1869,7 @@ def build_composed_beh2(
     A_pk: Optional[float] = None,
     B_pk: Optional[float] = None,
     verbose: bool = True,
+    pk_in_hamiltonian: bool = True,  # Accepted for backward compat (2026-06-04)
 ) -> Dict[str, Any]:
     """
     Build the composed BeH2 qubit Hamiltonian and count Pauli terms.
@@ -2440,6 +2441,7 @@ def build_composed_h2o(
     A_pk: Optional[float] = None,
     B_pk: Optional[float] = None,
     verbose: bool = True,
+    pk_in_hamiltonian: bool = True,  # Accepted for backward compat (2026-06-04)
 ) -> Dict[str, Any]:
     """
     Build the composed H2O qubit Hamiltonian and count Pauli terms.

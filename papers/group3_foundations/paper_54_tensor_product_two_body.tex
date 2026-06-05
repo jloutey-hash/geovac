@@ -411,6 +411,56 @@ Hamiltonian are the irreducible calibration content, consistent with
 Paper~18's exchange-constant taxonomy~\cite{paper18} (calibration
 tier).
 
+\subsection{Connection to double factorization and tensor
+hypercontraction}
+\label{subsec:df_thc_connection}
+
+The two-electron operator decomposition $V_{ee} = \sum_P L_P \otimes
+L_P$ used in double factorization~\cite{vonBurg2021} and tensor
+hypercontraction~\cite{Lee2021} is literally an element of
+$\mathcal{A} \otimes \mathcal{A}$ in the tensor-product spectral
+triple constructed here. In the GeoVac basis, this decomposition is
+supplied analytically by the multipole expansion
+\begin{equation*}
+  \frac{1}{r_{12}} = \sum_{L,M}\frac{4\pi}{2L{+}1}\,
+  \frac{r_<^L}{r_>^{L{+}1}}\,Y_{LM}(\Omega_1)\,Y_{LM}^{*}(\Omega_2),
+\end{equation*}
+with $L_P$ proportional to $Y_{LM}$ and rank equal to the number of
+distinct radial-density channels $\rho_\alpha(r) = R_{n_a l_a}(r)\,
+R_{n_b l_b}(r)$ at each angular momentum $L$.
+
+Numerical double factorization applied to a GeoVac composed ERI
+tensor reproduces this analytic decomposition bit-exactly at the
+production basis: the relative reconstruction error
+$\|G - V K V^\top\|_F / \|G\|_F$ between the empirical ERI tensor and
+its multipole-VKV form is $10^{-16}$ at $n_{\max} = 2$ and $10^{-14}$
+at $n_{\max} = 3$, i.e.\ machine precision. Every singular vector of
+the reshaped two-electron tensor lives strictly inside the
+multipole-channel subspace at every basis size tested
+($n_{\max} \in \{2, 3, 4\}$), with total subspace overlap unity to
+machine precision. At the production basis ($n_{\max} = 2$, valence
+$\{1s, 2s, 2p\}$), the double-factorization rank equals the analytic
+distinct-radial-density count exactly --- seven, distributed as four
+densities at $L = 0$, two at $L = 1$, one at $L = 2$.
+
+At larger basis ($n_{\max} \geq 3$), the radial-integral matrix
+$R^L(\rho_\alpha; \rho_\beta) = \langle\rho_\alpha|r_<^L/r_>^{L+1}|
+\rho_\beta\rangle$ develops a graded singular-value spectrum that
+decays over many orders of magnitude rather than terminating at a
+clean cutoff. This is the well-known
+Laguerre-basis ill-conditioning of hydrogenic ERIs --- the same
+phenomenon that motivates resolution-of-identity and Cholesky
+methods in standard atomic and molecular structure. Radial densities
+with similar effective exponents $(1/n_a + 1/n_b)/2$ produce nearly
+proportional contributions against the Coulomb kernel, so the
+apparent ``rank'' of $R^L$ depends on threshold. The additional compression that DF finds beyond the bare
+analytic multipole count is therefore not a new algebraic structure
+but a numerical realization of the same spectral content, exposed
+through SVD ordering. Operationally: double factorization on a
+GeoVac Hamiltonian is the multipole expansion accessed by SVD rather
+than by closed form. Detailed verification in
+\texttt{debug/sprint\_df\_multipole\_lift\_memo.md}.
+
 \subsection{For nuclear structure}
 
 The same $\mathcal{A}/D$ split applies to the nucleon--nucleon
@@ -525,6 +575,16 @@ collaboratively with Anthropic Claude.
 \bibitem{CLAUDE_wall} J.~Loutey, ``The Multi-Focal Composition Wall:
   Five Independent Observables, Same Structural Reason,'' GeoVac
   project documentation (2026).
+
+\bibitem{vonBurg2021} V.~von Burg, G.~H.~Low, T.~H{\"a}ner,
+  D.~S.~Steiger, M.~Reiher, M.~Roetteler, and M.~Troyer, ``Quantum
+  computing enhanced computational catalysis,'' Phys.\ Rev.\ Research
+  \textbf{3}, 033055 (2021).
+
+\bibitem{Lee2021} J.~Lee, D.~W.~Berry, C.~Gidney, W.~J.~Huggins,
+  J.~R.~McClean, N.~Wiebe, and R.~Babbush, ``Even More Efficient
+  Quantum Computations of Chemistry Through Tensor Hypercontraction,''
+  PRX Quantum \textbf{2}, 030305 (2021).
 
 \end{thebibliography}
 

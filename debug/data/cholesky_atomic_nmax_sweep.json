@@ -1,0 +1,47 @@
+{
+  "max_n=2_Z=3.0": {
+    "max_n": 2,
+    "Z": 3.0,
+    "n_orbitals": 5,
+    "df_rank_1e-10": 7,
+    "df_rank_1e-6": 7,
+    "cholesky_rank_1e-10": 7,
+    "cholesky_rank_1e-6": 7,
+    "multipole_channels": 7,
+    "reconstruction_error": 3.3945017078478436e-17,
+    "min_overlap_squared": 0.9999999999999993,
+    "max_residual": 4.965068306494546e-16,
+    "subspace_overlap_trace": 7.000000000000003,
+    "subspace_match": true
+  },
+  "max_n=3_Z=3.0": {
+    "max_n": 3,
+    "Z": 3.0,
+    "n_orbitals": 14,
+    "df_rank_1e-10": 24,
+    "df_rank_1e-6": 18,
+    "cholesky_rank_1e-10": 24,
+    "cholesky_rank_1e-6": 18,
+    "multipole_channels": 28,
+    "reconstruction_error": 1.0206174753710798e-10,
+    "min_overlap_squared": 0.9999999999999996,
+    "max_residual": 1.6091010782873108e-08,
+    "subspace_overlap_trace": 23.999985799207252,
+    "subspace_match": false
+  },
+  "max_n=4_Z=3.0": {
+    "max_n": 4,
+    "Z": 3.0,
+    "n_orbitals": 30,
+    "df_rank_1e-10": 46,
+    "df_rank_1e-6": 34,
+    "cholesky_rank_1e-10": 45,
+    "cholesky_rank_1e-6": 33,
+    "multipole_channels": 83,
+    "reconstruction_error": 6.068697176808525e-10,
+    "min_overlap_squared": 0.9999999999995273,
+    "max_residual": 6.873451453881999e-07,
+    "subspace_overlap_trace": 44.99979134415848,
+    "subspace_match": false
+  }
+}

@@ -142,7 +142,7 @@ class TestTCComposedAngular:
     def test_radial_only_matches_bx3_pauli_count(self):
         """LiH radial-only should give 562 Pauli terms (BX-3 reference)."""
         from geovac.tc_integrals import build_tc_composed_hamiltonian
-        from geovac.composed_qubit import lih_spec
+        from geovac.molecular_spec import lih_spec
         spec = lih_spec()
         result = build_tc_composed_hamiltonian(spec, include_angular=False)
         assert result['N_pauli'] == 562, (
@@ -152,7 +152,7 @@ class TestTCComposedAngular:
     def test_angular_increases_pauli_count(self):
         """LiH with angular gradient should have more Pauli terms than radial-only."""
         from geovac.tc_integrals import build_tc_composed_hamiltonian
-        from geovac.composed_qubit import lih_spec
+        from geovac.molecular_spec import lih_spec
         spec = lih_spec()
         r_rad = build_tc_composed_hamiltonian(spec, include_angular=False)
         r_full = build_tc_composed_hamiltonian(spec, include_angular=True)
@@ -163,7 +163,7 @@ class TestTCComposedAngular:
     def test_default_is_radial_only(self):
         """Default include_angular=False should match radial-only explicitly."""
         from geovac.tc_integrals import build_tc_composed_hamiltonian
-        from geovac.composed_qubit import lih_spec
+        from geovac.molecular_spec import lih_spec
         spec = lih_spec()
         r_default = build_tc_composed_hamiltonian(spec)
         r_explicit = build_tc_composed_hamiltonian(spec, include_angular=False)

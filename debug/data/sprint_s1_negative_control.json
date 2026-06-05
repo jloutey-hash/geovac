@@ -1,0 +1,192 @@
+{
+  "molecule": "LiH",
+  "builder": "balanced_coupled",
+  "M": 15,
+  "Q": 30,
+  "n_pauli": 878,
+  "subblock_boundaries": [
+    10,
+    20
+  ],
+  "profile": [
+    {
+      "cut": 1,
+      "bond_rank": 4,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 2,
+      "bond_rank": 16,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 3,
+      "bond_rank": 18,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 4,
+      "bond_rank": 18,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 5,
+      "bond_rank": 19,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 6,
+      "bond_rank": 19,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 7,
+      "bond_rank": 16,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 8,
+      "bond_rank": 9,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 9,
+      "bond_rank": 9,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 10,
+      "bond_rank": 9,
+      "is_subblock_boundary": true
+    },
+    {
+      "cut": 11,
+      "bond_rank": 16,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 12,
+      "bond_rank": 27,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 13,
+      "bond_rank": 27,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 14,
+      "bond_rank": 20,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 15,
+      "bond_rank": 20,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 16,
+      "bond_rank": 20,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 17,
+      "bond_rank": 13,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 18,
+      "bond_rank": 10,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 19,
+      "bond_rank": 10,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 20,
+      "bond_rank": 9,
+      "is_subblock_boundary": true
+    },
+    {
+      "cut": 21,
+      "bond_rank": 16,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 22,
+      "bond_rank": 23,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 23,
+      "bond_rank": 21,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 24,
+      "bond_rank": 13,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 25,
+      "bond_rank": 13,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 26,
+      "bond_rank": 13,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 27,
+      "bond_rank": 6,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 28,
+      "bond_rank": 3,
+      "is_subblock_boundary": false
+    },
+    {
+      "cut": 29,
+      "bond_rank": 2,
+      "is_subblock_boundary": false
+    }
+  ],
+  "boundary_ranks": [
+    9,
+    9
+  ],
+  "interior_ranks": [
+    4,
+    16,
+    18,
+    18,
+    19,
+    19,
+    16,
+    9,
+    9,
+    16,
+    27,
+    27,
+    20,
+    20,
+    20,
+    13,
+    10,
+    10,
+    16,
+    23,
+    21,
+    13,
+    13,
+    13,
+    6,
+    3,
+    2
+  ],
+  "composed_boundary_rank_reference": 2
+}

@@ -345,11 +345,13 @@ class AngularCache:
             # Fall back to building full Hamiltonian directly
             from geovac.level4_multichannel import build_angular_hamiltonian
 
+            # 2026-06-04: Z_A_func and n_theta args removed during the
+            # v2.7.0 PK/composed-qubit refactor of build_angular_hamiltonian
+            # signature; the scalar Z_A path remains the production default.
             H = build_angular_hamiltonian(
                 self.alpha_grid, rho, R_e, self.l_max, self.Z_A,
                 self.m_max, self.l_max_per_m,
                 Z_A=self.Z_A, Z_B=self.Z_B, z0=z0,
-                Z_A_func=self.Z_A_func, n_theta=self.n_theta,
             )
 
             # Only need lowest n_eig eigenvalues

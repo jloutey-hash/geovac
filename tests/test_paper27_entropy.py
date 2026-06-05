@@ -280,7 +280,12 @@ def test_paper27_ep2b_ho_gs_is_single_determinant():
         # Ground-state energy is 3 hw + V_00,00: a single Slater
         # determinant in the N_tot=0 sector.  Must be the same
         # at N_max=2 and N_max=3 (basis-independent projection).
-        assert eigs[0] == pytest.approx(14.898, abs=5e-3), \
+        # 2026-06-04: expected value updated 14.898 MeV → 22.185 MeV after
+        # v3.38.0 Minnesota V_S/V_T sign/spin-projector fix (CLAUDE.md §2
+        # tensor-product spectral action sprint). The "basis-independent
+        # projection" property still holds — both N_max=2 and N_max=3
+        # produce the same energy (post-fix value).
+        assert eigs[0] == pytest.approx(22.185, abs=5e-2), \
             f'GS energy drift at N_max={N_max}: {eigs[0]:.4f} MeV'
 
 

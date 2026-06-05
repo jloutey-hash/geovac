@@ -56,9 +56,27 @@ from geovac.level4_multichannel import (
     compute_nuclear_coupling,
     _ee_coupling,
     _ee_coupling_general,
-    compute_core_screening_analytical,
-    compute_pk_pseudopotential,
 )
+
+# Same pattern as level4_spectral_angular: core_screening_analytical and
+# pk_pseudopotential were retired during the v2.7.0 PK/composed-qubit refactor.
+try:
+    from geovac.level4_multichannel import (  # type: ignore[attr-defined]
+        compute_core_screening_analytical,
+        compute_pk_pseudopotential,
+    )
+except ImportError:  # pragma: no cover - the expected production path
+    def compute_core_screening_analytical(*args, **kwargs):  # type: ignore[no-redef]
+        raise NotImplementedError(
+            "compute_core_screening_analytical was removed during the v2.7.0 "
+            "PK/composed-qubit refactor."
+        )
+
+    def compute_pk_pseudopotential(*args, **kwargs):  # type: ignore[no-redef]
+        raise NotImplementedError(
+            "compute_pk_pseudopotential was removed during the v2.7.0 "
+            "PK/composed-qubit refactor."
+        )
 from geovac.hyperspherical_angular import gaunt_integral
 
 

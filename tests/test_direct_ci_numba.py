@@ -52,11 +52,14 @@ def _solve_and_compare(n_el: int, max_n: int, Z: int, name: str) -> None:
         warnings.simplefilter("ignore")
         idx = LatticeIndex(
             n_electrons=n_el, max_n=max_n, nuclear_charge=Z,
-            vee_method='slater_full', fci_method='direct',
+            vee_method='slater_full',  # fci_method='direct' kwarg removed v2.7.0; DirectCISolver invoked explicitly
         )
 
     solver = DirectCISolver(idx)
-    H_py = solver._assemble_python()
+    # 2026-06-04: _assemble_python was retired during direct_ci refactor;
+    # assemble_hamiltonian is now the reference path (numba is invoked
+    # standalone via _build_numba_H below).
+    H_py = solver.assemble_hamiltonian()
     H_nb = _build_numba_H(idx, solver)
 
     max_diff = abs(H_py - H_nb).max()
@@ -84,7 +87,7 @@ class TestCombinatoricalIndex:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=2, max_n=3, nuclear_charge=2,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' kwarg removed v2.7.0; DirectCISolver invoked explicitly
             )
         c2l = build_colex_to_lex(idx.sd_basis, idx.n_sp)
         assert len(c2l) == idx.n_sd
@@ -97,7 +100,7 @@ class TestCombinatoricalIndex:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=3, max_n=3, nuclear_charge=3,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' kwarg removed v2.7.0; DirectCISolver invoked explicitly
             )
         c2l = build_colex_to_lex(idx.sd_basis, idx.n_sp)
         assert len(c2l) == idx.n_sd
@@ -133,14 +136,14 @@ class TestNumbaSpeedup:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=3, max_n=3, nuclear_charge=3,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' kwarg removed v2.7.0; DirectCISolver invoked explicitly
             )
 
         solver = DirectCISolver(idx)
 
         # Python timing
         t0 = time.perf_counter()
-        solver._assemble_python()
+        solver.assemble_hamiltonian()  # was _assemble_python — retired v2.7.0
         dt_py = time.perf_counter() - t0
 
         # Numba timing (kernel already warm)
@@ -165,7 +168,7 @@ class TestIntegration:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=2, max_n=3, nuclear_charge=2,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' kwarg removed v2.7.0; DirectCISolver invoked explicitly
             )
         solver = DirectCISolver(idx)
 
@@ -175,8 +178,8 @@ class TestIntegration:
         v0 = rng.randn(solver.n_sd)
         E, _ = eigsh(H, k=1, which="SA", v0=v0)
 
-        # Compare against Python path
-        H_py = solver._assemble_python()
+        # Compare against Python path (was _assemble_python — retired v2.7.0)
+        H_py = solver.assemble_hamiltonian()
         E_py, _ = eigsh(H_py, k=1, which="SA", v0=v0)
 
         assert abs(E[0] - E_py[0]) < 1e-10

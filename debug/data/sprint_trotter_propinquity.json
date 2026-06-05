@@ -1,0 +1,481 @@
+{
+  "sim_time": 1.0,
+  "eps_targets": [
+    0.1,
+    0.001,
+    1e-06
+  ],
+  "results": [
+    {
+      "name": "LiH",
+      "R": 3.015,
+      "max_n": 2,
+      "N_active": 2,
+      "Q": 30,
+      "n_terms": 334,
+      "lambda": 32.59227982121736,
+      "L_H_max": 5.984031955463326,
+      "L_H_median": 0.04052734374999999,
+      "L_H_mean": 0.0975816761114288,
+      "L_H_p90": 0.18209876543209874,
+      "L_H_used": 0.0975816761114288,
+      "max_coeff_L_H": 0.0975816761114288,
+      "alpha_comm": 6.966691226395142,
+      "onenorm_alpha": 531.1283519722662,
+      "tightening_comm_vs_onenorm": 0.013116775258796544,
+      "n_anticomm_pairs": 5160,
+      "n_total_pairs": 55611,
+      "anticomm_fraction": 0.09278739817661974,
+      "gamma_n_max": 2.0745510936998897,
+      "propinquity_bound": 2.0745510936998897,
+      "per_eps": [
+        {
+          "epsilon": 0.1,
+          "eps_trunc_budget": 0.05,
+          "trunc_upper_bound": 0.40487634580406606,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 73,
+          "r_commutator_full_eps": 9,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        },
+        {
+          "epsilon": 0.001,
+          "eps_trunc_budget": 0.0005,
+          "trunc_upper_bound": 0.40487634580406606,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 729,
+          "r_commutator_full_eps": 84,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        },
+        {
+          "epsilon": 1e-06,
+          "eps_trunc_budget": 5e-07,
+          "trunc_upper_bound": 0.40487634580406606,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 23047,
+          "r_commutator_full_eps": 2640,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        }
+      ],
+      "wall_time_seconds": 4.99494194984436,
+      "n_max_sweep_eps_1e-3": [
+        {
+          "n_max": 2,
+          "gamma": 2.0745510936998897,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.40487634580406606,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 3,
+          "gamma": 1.6100599680657361,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.31422470064753616,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 4,
+          "gamma": 1.3223327942828407,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.25807090088645757,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 5,
+          "gamma": 1.1302189548203845,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.22057731996856067,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 10,
+          "gamma": 0.6723712388014212,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.13122222490272087,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 20,
+          "gamma": 0.3868250688282845,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.07549407715636562,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 50,
+          "gamma": 0.18003596515301923,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.03513642247994081,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 100,
+          "gamma": 0.058634847910354226,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.011443373475262149,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 200,
+          "gamma": 0.03373013595823014,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.006582886404540944,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 500,
+          "gamma": 0.015825369571885052,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.003088532175814696,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 1000,
+          "gamma": 0.008795227186553133,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.001716506021289322,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 5000,
+          "gamma": 0.002168885436292048,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.00042328695233409113,
+          "feasible": true,
+          "r_required": 13934
+        }
+      ]
+    },
+    {
+      "name": "BeH2",
+      "R": 2.54,
+      "max_n": 2,
+      "N_active": 4,
+      "Q": 50,
+      "n_terms": 556,
+      "lambda": 66.04025262959762,
+      "L_H_max": 13.898707362957794,
+      "L_H_median": 0.04057478035025349,
+      "L_H_mean": 0.11877743278704574,
+      "L_H_p90": 0.242798353909465,
+      "L_H_used": 0.11877743278704574,
+      "max_coeff_L_H": 0.11877743278704574,
+      "alpha_comm": 17.34377341547515,
+      "onenorm_alpha": 2180.6574836905374,
+      "tightening_comm_vs_onenorm": 0.007953460616897388,
+      "n_anticomm_pairs": 8600,
+      "n_total_pairs": 154290,
+      "anticomm_fraction": 0.055739192429839914,
+      "gamma_n_max": 2.0745510936998897,
+      "propinquity_bound": 2.0745510936998897,
+      "per_eps": [
+        {
+          "epsilon": 0.1,
+          "eps_trunc_budget": 0.05,
+          "trunc_upper_bound": 0.9856394123809235,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 148,
+          "r_commutator_full_eps": 14,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        },
+        {
+          "epsilon": 0.001,
+          "eps_trunc_budget": 0.0005,
+          "trunc_upper_bound": 0.9856394123809235,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 1477,
+          "r_commutator_full_eps": 132,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        },
+        {
+          "epsilon": 1e-06,
+          "eps_trunc_budget": 5e-07,
+          "trunc_upper_bound": 0.9856394123809235,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 46698,
+          "r_commutator_full_eps": 4165,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        }
+      ],
+      "wall_time_seconds": 5.0404462814331055,
+      "n_max_sweep_eps_1e-3": [
+        {
+          "n_max": 2,
+          "gamma": 2.0745510936998897,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.9856394123809235,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 3,
+          "gamma": 1.6100599680657361,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.7649551585601639,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 4,
+          "gamma": 1.3223327942828407,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.6282531783801459,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 5,
+          "gamma": 1.1302189548203845,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.5369780237632932,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 10,
+          "gamma": 0.6723712388014212,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.31945011849871396,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 20,
+          "gamma": 0.3868250688282845,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.1837843544523836,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 50,
+          "gamma": 0.18003596515301923,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.0855368390008546,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 100,
+          "gamma": 0.058634847910354226,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.027857986826602992,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 200,
+          "gamma": 0.03373013595823014,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.01602551582670638,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 500,
+          "gamma": 0.015825369571885052,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.007518787082618942,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 1000,
+          "gamma": 0.008795227186553133,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.004178698023990448,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 5000,
+          "gamma": 0.002168885436292048,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.0010304585765279243,
+          "feasible": false,
+          "r_required": null
+        }
+      ]
+    },
+    {
+      "name": "H2O",
+      "R": 1.8,
+      "max_n": 2,
+      "N_active": 8,
+      "Q": 70,
+      "n_terms": 778,
+      "lambda": 358.9136525024451,
+      "L_H_max": 183.36537756248862,
+      "L_H_median": 0.04394531249999997,
+      "L_H_mean": 0.46132860218822924,
+      "L_H_p90": 0.3641975308641975,
+      "L_H_used": 0.46132860218822924,
+      "max_coeff_L_H": 0.46132860218822924,
+      "alpha_comm": 188.41274925094876,
+      "onenorm_alpha": 64409.50497632295,
+      "tightening_comm_vs_onenorm": 0.0029252320650533254,
+      "n_anticomm_pairs": 12040,
+      "n_total_pairs": 302253,
+      "anticomm_fraction": 0.03983417865165937,
+      "gamma_n_max": 2.0745510936998897,
+      "propinquity_bound": 2.0745510936998897,
+      "per_eps": [
+        {
+          "epsilon": 0.1,
+          "eps_trunc_budget": 0.05,
+          "trunc_upper_bound": 7.656398049797058,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 803,
+          "r_commutator_full_eps": 44,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        },
+        {
+          "epsilon": 0.001,
+          "eps_trunc_budget": 0.0005,
+          "trunc_upper_bound": 7.656398049797058,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 8026,
+          "r_commutator_full_eps": 435,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        },
+        {
+          "epsilon": 1e-06,
+          "eps_trunc_budget": 5e-07,
+          "trunc_upper_bound": 7.656398049797058,
+          "feasible_at_n_max": false,
+          "r_naive_onenorm": 253791,
+          "r_commutator_full_eps": 13727,
+          "r_propinquity": null,
+          "tightening_vs_naive": null,
+          "tightening_vs_comm": null
+        }
+      ],
+      "wall_time_seconds": 5.501233100891113,
+      "n_max_sweep_eps_1e-3": [
+        {
+          "n_max": 2,
+          "gamma": 2.0745510936998897,
+          "gamma_source": "closed-form",
+          "trunc_bound": 7.656398049797058,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 3,
+          "gamma": 1.6100599680657361,
+          "gamma_source": "closed-form",
+          "trunc_bound": 5.942133716055928,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 4,
+          "gamma": 1.3223327942828407,
+          "gamma_source": "closed-form",
+          "trunc_bound": 4.8802395169132655,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 5,
+          "gamma": 1.1302189548203845,
+          "gamma_source": "closed-form",
+          "trunc_bound": 4.171218644751435,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 10,
+          "gamma": 0.6723712388014212,
+          "gamma_source": "closed-form",
+          "trunc_bound": 2.481472669982622,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 20,
+          "gamma": 0.3868250688282845,
+          "gamma_source": "closed-form",
+          "trunc_bound": 1.4276277463513445,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 50,
+          "gamma": 0.18003596515301923,
+          "gamma_source": "closed-form",
+          "trunc_bound": 0.6644459211812089,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 100,
+          "gamma": 0.058634847910354226,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.21639945940802505,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 200,
+          "gamma": 0.03373013595823014,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.12448541178583392,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 500,
+          "gamma": 0.015825369571885052,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.058405564989678936,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 1000,
+          "gamma": 0.008795227186553133,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.032459918911203756,
+          "feasible": false,
+          "r_required": null
+        },
+        {
+          "n_max": 5000,
+          "gamma": 0.002168885436292048,
+          "gamma_source": "asymptotic",
+          "trunc_bound": 0.008004551093048146,
+          "feasible": false,
+          "r_required": null
+        }
+      ]
+    }
+  ]
+}

@@ -12,6 +12,16 @@ import numpy as np
 import pytest
 
 from geovac.lattice_index import LatticeIndex
+from geovac.direct_ci import DirectCISolver
+
+
+def _direct_solve(idx):
+    """Drop-in replacement for the removed fci_method='direct' path.
+
+    The fci_method= kwarg was removed during the v2.7.0 PK/composed-qubit
+    refactor; DirectCISolver(idx).solve() is the production direct-CI entry.
+    """
+    return DirectCISolver(idx).solve()
 
 
 def _solve_both(n_electrons: int, max_n: int, Z: int) -> tuple:
@@ -25,15 +35,15 @@ def _solve_both(n_electrons: int, max_n: int, Z: int) -> tuple:
 
         idx_m = LatticeIndex(
             n_electrons=n_electrons, max_n=max_n, nuclear_charge=Z,
-            vee_method='slater_full', fci_method='matrix',
+            vee_method='slater_full',  # fci_method='matrix' removed; default is matrix
         )
         E_m, _ = idx_m.compute_ground_state()
 
         idx_d = LatticeIndex(
             n_electrons=n_electrons, max_n=max_n, nuclear_charge=Z,
-            vee_method='slater_full', fci_method='direct',
+            vee_method='slater_full',  # fci_method='direct' → use DirectCISolver
         )
-        E_d, _ = idx_d.compute_ground_state()
+        E_d, _ = _direct_solve(idx_d)
 
     return E_m[0], E_d[0]
 
@@ -67,9 +77,9 @@ class TestDirectCIAccuracy:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=2, max_n=5, nuclear_charge=2,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
-            E, _ = idx.compute_ground_state()
+            E, _ = _direct_solve(idx)
         assert E[0] < -2.84, f"He nmax=5: E={E[0]:.6f}, expected < -2.84"
 
     def test_direct_ci_li_accuracy(self) -> None:
@@ -78,9 +88,9 @@ class TestDirectCIAccuracy:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=3, max_n=4, nuclear_charge=3,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
-            E, _ = idx.compute_ground_state()
+            E, _ = _direct_solve(idx)
         assert E[0] < -7.39, f"Li nmax=4: E={E[0]:.6f}, expected < -7.39"
 
 
@@ -93,9 +103,9 @@ class TestDirectCINewAtoms:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=4, max_n=3, nuclear_charge=4,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
-            E, _ = idx.compute_ground_state()
+            E, _ = _direct_solve(idx)
         # Just check it ran and produced a finite energy
         assert np.isfinite(E[0]), f"Be nmax=3: E={E[0]}"
         print(f"  Be nmax=3: E={E[0]:.6f} Ha")
@@ -107,9 +117,9 @@ class TestDirectCINewAtoms:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=4, max_n=4, nuclear_charge=4,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
-            E, _ = idx.compute_ground_state()
+            E, _ = _direct_solve(idx)
         assert E[0] < -14.0, f"Be nmax=4: E={E[0]:.6f}, expected < -14.0"
         error = abs(E[0] - (-14.6674)) / 14.6674 * 100
         print(f"  Be nmax=4: E={E[0]:.4f} Ha, error={error:.2f}%")
@@ -120,9 +130,9 @@ class TestDirectCINewAtoms:
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
                 n_electrons=3, max_n=5, nuclear_charge=3,
-                vee_method='slater_full', fci_method='direct',
+                vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
-            E, _ = idx.compute_ground_state()
+            E, _ = _direct_solve(idx)
         assert E[0] < -7.39, f"Li nmax=5: E={E[0]:.6f}, expected < -7.39"
         error = abs(E[0] - (-7.4781)) / 7.4781 * 100
         print(f"  Li nmax=5: E={E[0]:.4f} Ha, error={error:.2f}%")
@@ -141,10 +151,10 @@ class TestScaling:
                 warnings.simplefilter("ignore")
                 idx = LatticeIndex(
                     n_electrons=2, max_n=nmax, nuclear_charge=2,
-                    vee_method='slater_full', fci_method='direct',
+                    vee_method='slater_full',  # fci_method='direct' → DirectCISolver
                 )
             t0 = time.perf_counter()
-            idx.compute_ground_state()
+            _direct_solve(idx)
             dt = time.perf_counter() - t0
 
             if dt > 0.001:  # skip tiny timings

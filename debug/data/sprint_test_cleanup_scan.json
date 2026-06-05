@@ -1,0 +1,2202 @@
+[
+  {
+    "file": "tests/test_1rdm_exchange.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_ab_initio_pk.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_ab_initio_pk_v2.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_algebraic_angular.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 36,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................................                                     [100%]\n36 passed in 3.56s"
+  },
+  {
+    "file": "tests/test_algebraic_coupled_channel.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 17,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_algebraic_coupled_channel.py::test_exact_lmax_convergence_monotonic\nFAILED tests/test_algebraic_coupled_channel.py::test_exact_improves_over_full\nFAILED tests/test_algebraic_coupled_channel.py::test_lmax5_error_below_025 - ...\nFAILED tests/test_algebraic_coupled_channel.py::test_5_channels_matches_3 - I...\n17 failed in 0.99s"
+  },
+  {
+    "file": "tests/test_algebraic_curve.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 75,
+    "failed": 11,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "FAILED tests/test_algebraic_curve.py::TestAlgebraicVeffLmax0::test_veff_c1_matches_known\nFAILED tests/test_algebraic_curve.py::TestAlgebraicHeEnergy::test_energy_matches_quadrature_solver\nFAILED tests/test_algebraic_curve.py::TestAlgebraicHeEnergy::test_energy_physical\nFAILED tests/test_algebraic_curve.py::TestAlgebraicHeEnergy::test_energy_variational\n11 failed, 75 passed, 3 skipped in 27.74s"
+  },
+  {
+    "file": "tests/test_algebraic_curve_level4.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 39,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6,
+    "tail": "................s......sssss.................                            [100%]\n39 passed, 6 skipped in 20.71s"
+  },
+  {
+    "file": "tests/test_algebraic_exchange.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 26,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........................F                                              [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_algebraic_exchange.py::TestPipelineIntegration::test_algebraic_method_available_in_pipeline\n1 failed, 26 passed in 1.56s"
+  },
+  {
+    "file": "tests/test_algebraic_pk.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 1,
+    "failed": 12,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_algebraic_pk.py::test_algebraic_pk_solver_runs - AttributeE...\nFAILED tests/test_algebraic_pk.py::test_algebraic_pk_single_R - AttributeErro...\nFAILED tests/test_algebraic_pk.py::test_projector_rank_one - AttributeError: ...\nFAILED tests/test_algebraic_pk.py::test_projector_has_offdiag_in_00_block - A...\n12 failed, 1 passed in 84.63s (0:01:24)"
+  },
+  {
+    "file": "tests/test_algebraic_zeff.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 8,
+    "failed": 2,
+    "errors": 14,
+    "skipped": 0,
+    "tail": "ERROR tests/test_algebraic_zeff.py::TestSpeedup::test_evaluation_speed - Type...\nERROR tests/test_algebraic_zeff.py::test_print_comparison_table - TypeError: ...\nERROR tests/test_algebraic_zeff.py::test_transcendental_content - TypeError: ...\nERROR tests/test_algebraic_zeff.py::TestBackwardCompat::test_spline_result_unchanged\n2 failed, 8 passed, 14 errors in 1.96s"
+  },
+  {
+    "file": "tests/test_almost_commutative.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 53,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....................................................                    [100%]\n53 passed in 10.36s"
+  },
+  {
+    "file": "tests/test_alon_boppana_sweep.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".                                                                        [100%]\n1 passed in 0.26s"
+  },
+  {
+    "file": "tests/test_angular_integrals.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 12,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "............                                                             [100%]\n12 passed in 1.31s"
+  },
+  {
+    "file": "tests/test_atomic_classifier.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 97,
+    "failed": 4,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_atomic_classifier.py::TestPKParams::test_oxygen_z2_scaled\nFAILED tests/test_atomic_classifier.py::TestEdgeCases::test_transition_metal_raises[21]\nFAILED tests/test_atomic_classifier.py::TestEdgeCases::test_transition_metal_raises[25]\nFAILED tests/test_atomic_classifier.py::TestEdgeCases::test_transition_metal_raises[30]\n4 failed, 97 passed in 1.70s"
+  },
+  {
+    "file": "tests/test_atomic_classifier_row2.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 94,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...................FF...                                                 [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_atomic_classifier_row2.py::TestSupportRow2::test_transition_metals_raise[21]\nFAILED tests/test_atomic_classifier_row2.py::TestSupportRow2::test_transition_metals_raise[30]\n2 failed, 94 passed in 1.69s"
+  },
+  {
+    "file": "tests/test_balanced_coupled_multizeta.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................                                                        [100%]\n17 passed in 48.27s"
+  },
+  {
+    "file": "tests/test_balanced_coupled_screened_valence.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........................                                                [100%]\n25 passed in 62.54s (0:01:02)"
+  },
+  {
+    "file": "tests/test_balanced_row2.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 15,
+    "tail": "..................sss.........ssssssssssss                               [100%]\n27 passed, 15 skipped in 16.96s"
+  },
+  {
+    "file": "tests/test_bargmann_graph.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................                                                        [100%]\n17 passed in 1.37s"
+  },
+  {
+    "file": "tests/test_berezin_reconstruction.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 49,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................................................                        [100%]\n49 passed in 16.03s"
+  },
+  {
+    "file": "tests/test_breit_composed.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...........                                                              [100%]\n11 passed in 45.74s"
+  },
+  {
+    "file": "tests/test_breit_integrals.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 38,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................................                                   [100%]\n38 passed in 73.62s (0:01:13)"
+  },
+  {
+    "file": "tests/test_casimir_ci.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 90,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "...............................................s..ss.................... [ 77%]\n.....................                                                    [100%]\n90 passed, 3 skipped in 18.52s"
+  },
+  {
+    "file": "tests/test_central_fejer_su2.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 147,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "....................s........................................s.......... [ 48%]\n..............................s......................................... [ 96%]\n......                                                                   [100%]\n147 passed, 3 skipped in 49.60s"
+  },
+  {
+    "file": "tests/test_chirality_grading.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 50,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..................................................                       [100%]\n50 passed in 16.89s"
+  },
+  {
+    "file": "tests/test_circulant_s3.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...................................                                      [100%]\n35 passed in 3.00s"
+  },
+  {
+    "file": "tests/test_composed_beh2.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 16,
+    "failed": 0,
+    "errors": 16,
+    "skipped": 0,
+    "tail": "ERROR tests/test_composed_beh2.py::test_channel_f0_dominant_channel - TypeErr...\nERROR tests/test_composed_beh2.py::test_algebraic_overlap_matches_diagnostic\nERROR tests/test_composed_beh2.py::test_algebraic_exchange_sign_and_magnitude\nERROR tests/test_composed_beh2.py::test_direct_exchange_close_to_product - Ty...\n16 passed, 16 errors in 64.85s (0:01:04)"
+  },
+  {
+    "file": "tests/test_composed_cusp.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 3,
+    "failed": 4,
+    "errors": 0,
+    "skipped": 9,
+    "tail": "FAILED tests/test_composed_cusp.py::TestCuspCorrectionWiring::test_default_cusp_off\nFAILED tests/test_composed_cusp.py::TestCuspCorrectionWiring::test_cusp_on_via_kwarg\nFAILED tests/test_composed_cusp.py::TestCuspCorrectionWiring::test_cusp_on_beh_plus\nFAILED tests/test_composed_cusp.py::TestCuspCorrectionWiring::test_cusp_on_manual_pk\n4 failed, 3 passed, 9 skipped in 1.03s"
+  },
+  {
+    "file": "tests/test_composed_diatomic.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_composed_h2o.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................                                                        [100%]\n17 passed in 8.90s"
+  },
+  {
+    "file": "tests/test_composed_qubit.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_composed_triatomic.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 19,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 10,
+    "tail": "...................Fssssssssss                                           [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_composed_triatomic.py::TestSymmetry::test_bond_pair_symmetry\n1 failed, 19 passed, 10 skipped in 29.87s"
+  },
+  {
+    "file": "tests/test_composed_water.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 12,
+    "failed": 4,
+    "errors": 5,
+    "skipped": 2,
+    "tail": "ERROR tests/test_composed_water.py::TestPESScan::test_d_e_positive - RuntimeE...\nERROR tests/test_composed_water.py::TestPESScan::test_r_eq_physical - Runtime...\nERROR tests/test_composed_water.py::TestREquilibrium::test_r_eq_within_range\nERROR tests/test_composed_water.py::TestNoCoupling::test_no_coupling_runs - R...\n4 failed, 12 passed, 2 skipped, 5 errors in 65.30s (0:01:05)"
+  },
+  {
+    "file": "tests/test_connes_axiom_audit_31.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 75,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 96%]\n...                                                                      [100%]\n75 passed in 8.46s"
+  },
+  {
+    "file": "tests/test_connes_distance.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................                                                        [100%]\n17 passed in 14.37s"
+  },
+  {
+    "file": "tests/test_core_screening.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....................                                                    [100%]\n21 passed in 22.91s"
+  },
+  {
+    "file": "tests/test_coupled_composition.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 13,
+    "skipped": 0,
+    "tail": "ERROR tests/test_coupled_composition.py::TestPauliRegression::test_pauli_ratio\nERROR tests/test_coupled_composition.py::TestPauliRegression::test_coupled_one_norm\nERROR tests/test_coupled_composition.py::TestFCISolver::test_fci_hermiticity\nERROR tests/test_coupled_composition.py::TestFCISolver::test_fci_valence_ground_state\n13 errors in 6.00s"
+  },
+  {
+    "file": "tests/test_coupled_en.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................                                                   [100%]\n22 passed in 1.24s"
+  },
+  {
+    "file": "tests/test_cross_block_h1.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..................                                                       [100%]\n18 passed in 18.02s"
+  },
+  {
+    "file": "tests/test_cross_center_screened_vne.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................                                                   [100%]\n22 passed in 8.58s"
+  },
+  {
+    "file": "tests/test_cross_register_vne.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 69,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....................................................................    [100%]\n69 passed in 5.21s"
+  },
+  {
+    "file": "tests/test_cusp_angular_basis.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 19,
+    "failed": 10,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_cusp_angular_basis.py::TestChannelAnalysis::test_channel_convergence\nFAILED tests/test_cusp_angular_basis.py::TestComparison::test_comparison_runs\nFAILED tests/test_cusp_angular_basis.py::TestComparison::test_no_extrapolation_at_lmax0\nFAILED tests/test_cusp_angular_basis.py::TestComparison::test_extrapolation_difference_at_lmax2\n10 failed, 19 passed in 1.27s"
+  },
+  {
+    "file": "tests/test_cusp_correction.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": ".....................ss                                                  [100%]\n21 passed, 2 skipped in 1.07s"
+  },
+  {
+    "file": "tests/test_cusp_correction_2d.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "sssss                                                                    [100%]\n5 skipped in 0.27s"
+  },
+  {
+    "file": "tests/test_cusp_correction_l4.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "sssssssss                                                                [100%]\n9 skipped in 0.27s"
+  },
+  {
+    "file": "tests/test_cusp_factor.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 16,
+    "errors": 0,
+    "skipped": 4,
+    "tail": "FAILED tests/test_cusp_factor.py::TestCuspFactorHermiticity::test_overlap_conditioning\nFAILED tests/test_cusp_factor.py::TestCuspFactorHermiticity::test_hamiltonian_symmetric\nFAILED tests/test_cusp_factor.py::TestCuspFactorGerade::test_channel_labels_preserved\nFAILED tests/test_cusp_factor.py::TestCuspFactorGerade::test_gerade_selection\n16 failed, 4 skipped in 1.11s"
+  },
+  {
+    "file": "tests/test_cusp_graph.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 37,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....................................                                    [100%]\n37 passed in 0.83s"
+  },
+  {
+    "file": "tests/test_dirac_ci.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 46,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..............................................                           [100%]\n46 passed in 17.67s"
+  },
+  {
+    "file": "tests/test_dirac_lattice.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 32,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "................................                                         [100%]\n32 passed in 1.83s"
+  },
+  {
+    "file": "tests/test_dirac_matrix_elements.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 108,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 66%]\n....................................                                     [100%]\n108 passed in 141.34s (0:02:21)"
+  },
+  {
+    "file": "tests/test_dirac_s3.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 51,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...................................................                      [100%]\n51 passed in 1.77s"
+  },
+  {
+    "file": "tests/test_direct_ci.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 8,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_direct_ci.py::TestDirectCINewAtoms::test_direct_ci_be_runs\nFAILED tests/test_direct_ci.py::TestDirectCINewAtoms::test_direct_ci_be_nmax4\nFAILED tests/test_direct_ci.py::TestDirectCINewAtoms::test_direct_ci_li_nmax5\nFAILED tests/test_direct_ci.py::TestScaling::test_scaling_sublinear - TypeErr...\n8 failed in 0.91s"
+  },
+  {
+    "file": "tests/test_direct_ci_numba.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 8,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_direct_ci_numba.py::TestNumbaVsPython::test_li_nmax3 - Type...\nFAILED tests/test_direct_ci_numba.py::TestNumbaVsPython::test_be_nmax3 - Type...\nFAILED tests/test_direct_ci_numba.py::TestNumbaSpeedup::test_li_speedup - Typ...\nFAILED tests/test_direct_ci_numba.py::TestIntegration::test_auto_numba - Type...\n8 failed in 1.48s"
+  },
+  {
+    "file": "tests/test_ecosystem_export.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 96,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 75%]\n........................                                                 [100%]\n96 passed in 99.77s (0:01:39)"
+  },
+  {
+    "file": "tests/test_fine_structure.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 43,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...........................................                              [100%]\n43 passed in 2.33s"
+  },
+  {
+    "file": "tests/test_fock_graph_hodge.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 52,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................................................                     [100%]\n52 passed in 2.00s"
+  },
+  {
+    "file": "tests/test_fock_laplacian.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........                                                                 [100%]\n8 passed in 2.62s"
+  },
+  {
+    "file": "tests/test_fock_projection.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........                                                               [100%]\n10 passed in 2.08s"
+  },
+  {
+    "file": "tests/test_frozen_core.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 4,
+    "errors": 10,
+    "skipped": 0,
+    "tail": "ERROR tests/test_frozen_core.py::TestAccuracy::test_lih_energy_close_to_full_fci\nERROR tests/test_frozen_core.py::TestAccuracy::test_lih_frozen_core_is_variational\nERROR tests/test_frozen_core.py::TestAccuracy::test_he_frozen_nothing - Impor...\nERROR tests/test_frozen_core.py::TestPerformance::test_speedup - ImportError:...\n4 failed, 10 errors in 0.95s"
+  },
+  {
+    "file": "tests/test_full_dirac_operator_system.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 33,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": ".............................s....s                                      [100%]\n33 passed, 2 skipped in 51.70s"
+  },
+  {
+    "file": "tests/test_galois_ihara.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...........................                                              [100%]\n27 passed in 1.30s"
+  },
+  {
+    "file": "tests/test_gaussian_reference.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "sssssssssssssssssssssss                                                  [100%]\n23 skipped in 4.42s"
+  },
+  {
+    "file": "tests/test_general_builder.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 5,
+    "failed": 3,
+    "errors": 25,
+    "skipped": 0,
+    "tail": "ERROR tests/test_general_builder.py::TestH2BondPairGeneralBuilder::test_eri_match\nERROR tests/test_general_builder.py::TestH2BondPairGeneralBuilder::test_nuclear_repulsion_match\nERROR tests/test_general_builder.py::TestHeGeneralBuilder::test_qubit_count\nERROR tests/test_general_builder.py::TestHeGeneralBuilder::test_pauli_count\n3 failed, 5 passed, 25 errors in 5.62s"
+  },
+  {
+    "file": "tests/test_geometric_elevation.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": ".....ss......ss....                                                      [100%]\n15 passed, 4 skipped in 2.74s"
+  },
+  {
+    "file": "tests/test_gh_convergence.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_gh_convergence_tensor.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_graph_qed_continuum_bridge.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 63,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............................................................          [100%]\n63 passed in 30.05s"
+  },
+  {
+    "file": "tests/test_graph_qed_nmax3.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 45,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".............................................                            [100%]\n45 passed in 4.15s"
+  },
+  {
+    "file": "tests/test_graph_qed_photon.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 53,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": ".....................................................ss                  [100%]\n53 passed, 2 skipped in 2.05s"
+  },
+  {
+    "file": "tests/test_graph_qed_propagator.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 52,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................................................                     [100%]\n52 passed in 1.83s"
+  },
+  {
+    "file": "tests/test_graph_qed_self_energy.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 72,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 15,
+    "tail": "...............................................................sssssssss [ 82%]\nssssss.........                                                          [100%]\n72 passed, 15 skipped in 6.20s"
+  },
+  {
+    "file": "tests/test_graph_qed_vertex.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 55,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".......................................................                  [100%]\n55 passed in 5.94s"
+  },
+  {
+    "file": "tests/test_h2_bond_pair_qubit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..................                                                       [100%]\n18 passed in 7.06s"
+  },
+  {
+    "file": "tests/test_h2_energy_decomposition.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 7,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "......FFs.                                                               [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_h2_energy_decomposition.py::TestFullCIEnergy::test_h2_energy_in_physical_range\nFAILED tests/test_h2_energy_decomposition.py::TestFullCIEnergy::test_h2_error_below_5pct\n2 failed, 7 passed, 1 skipped in 1.36s"
+  },
+  {
+    "file": "tests/test_he_spectrum.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "........................s.s                                              [100%]\n25 passed, 2 skipped in 2.66s"
+  },
+  {
+    "file": "tests/test_heavy_cores.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 63,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............................................................          [100%]\n63 passed in 1.21s"
+  },
+  {
+    "file": "tests/test_heavy_hydrides.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...........................                                              [100%]\n27 passed in 11.61s"
+  },
+  {
+    "file": "tests/test_hodge1_s3.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 121,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 59%]\n.................................................                        [100%]\n121 passed in 1.52s"
+  },
+  {
+    "file": "tests/test_hopf_bundle.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "sssssssssssssssssssssssssssssssssssssssss                                [100%]\n41 skipped in 0.75s"
+  },
+  {
+    "file": "tests/test_hopf_u1_block.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 6,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6,
+    "tail": "......ssssss                                                             [100%]\n6 passed, 6 skipped in 1.37s"
+  },
+  {
+    "file": "tests/test_hp_operator.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".............                                                            [100%]\n13 passed in 0.77s"
+  },
+  {
+    "file": "tests/test_hylleraas.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 34,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..................................                                       [100%]\n34 passed in 14.61s"
+  },
+  {
+    "file": "tests/test_hylleraas_eckart_closed_forms.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 47,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............................................                          [100%]\n47 passed in 12.53s"
+  },
+  {
+    "file": "tests/test_hylleraas_eckart_pstate.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 69,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 10,
+    "tail": "...............................ss...................s.....sss.......ss.. [ 91%]\n.....ss                                                                  [100%]\n69 passed, 10 skipped in 19.06s"
+  },
+  {
+    "file": "tests/test_hylleraas_eckart_recurrence.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "......s.....                                                             [100%]\n11 passed, 1 skipped in 2.13s"
+  },
+  {
+    "file": "tests/test_hylleraas_eckart_track2.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................                                                     [100%]\n20 passed in 2.47s"
+  },
+  {
+    "file": "tests/test_hylleraas_eckart_track3.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 4,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "....s                                                                    [100%]\n4 passed, 1 skipped in 18.36s"
+  },
+  {
+    "file": "tests/test_hylleraas_eckart_track3p5.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": ".........s..sss                                                          [100%]\n11 passed, 4 skipped in 7.75s"
+  },
+  {
+    "file": "tests/test_hylleraas_r12.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "....................ss.                                                  [100%]\n21 passed, 2 skipped in 2.28s"
+  },
+  {
+    "file": "tests/test_hyperfine_a_constant.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................                                                        [100%]\n17 passed in 1.10s"
+  },
+  {
+    "file": "tests/test_hypergeometric_slater.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 32,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6,
+    "tail": "...............ss......s......s.....ss                                   [100%]\n32 passed, 6 skipped in 131.63s (0:02:11)"
+  },
+  {
+    "file": "tests/test_hyperspherical_he.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................                                                     [100%]\n20 passed in 2.50s"
+  },
+  {
+    "file": "tests/test_ibm_quantum_demo.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6,
+    "tail": ".....ssssss                                                              [100%]\n5 passed, 6 skipped in 4.84s"
+  },
+  {
+    "file": "tests/test_ihara_zeta.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............                                                          [100%]\n15 passed in 83.11s (0:01:23)"
+  },
+  {
+    "file": "tests/test_ihara_zeta_dirac.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_ihara_zeta_weighted.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..............                                                           [100%]\n14 passed in 12.09s"
+  },
+  {
+    "file": "tests/test_internal_multifocal.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 28,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "..................s..........s                                           [100%]\n28 passed, 2 skipped in 4.18s"
+  },
+  {
+    "file": "tests/test_joint_berezin_compact_temporal.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 45,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".............................................s                           [100%]\n45 passed, 1 skipped in 43.55s"
+  },
+  {
+    "file": "tests/test_krein_positive_state_space.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...................................                                      [100%]\n35 passed in 8.16s"
+  },
+  {
+    "file": "tests/test_krein_space_construction.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 109,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 66%]\n.....................................                                    [100%]\n109 passed in 2.36s"
+  },
+  {
+    "file": "tests/test_l_dependent_pk.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_level3_variational.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "...............ss                                                        [100%]\n15 passed, 2 skipped in 44.06s"
+  },
+  {
+    "file": "tests/test_level4_multichannel.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_level4_sigma.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 12,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "............                                                             [100%]\n12 passed in 24.37s"
+  },
+  {
+    "file": "tests/test_lih_validation.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FF                                                                       [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_lih_validation.py::test_lih_bridge_r_dependence - KeyError:...\nFAILED tests/test_lih_validation.py::test_lih_conformal_factors - TypeError: ...\n2 failed in 0.90s"
+  },
+  {
+    "file": "tests/test_locked_shell.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 12,
+    "errors": 6,
+    "skipped": 0,
+    "tail": "ERROR tests/test_locked_shell.py::TestClassification::test_locked_electrons\nERROR tests/test_locked_shell.py::TestClassification::test_sd_count - ImportE...\nERROR tests/test_locked_shell.py::TestAccuracy::test_energy_within_5pct - Imp...\nERROR tests/test_locked_shell.py::TestAccuracy::test_variational - ImportErro...\n12 failed, 6 errors in 0.98s"
+  },
+  {
+    "file": "tests/test_locked_shell_hyperspherical.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 4,
+    "errors": 18,
+    "skipped": 0,
+    "tail": "ERROR tests/test_locked_shell_hyperspherical.py::TestHeHPlus::test_heh_charge_center_origin\nERROR tests/test_locked_shell_hyperspherical.py::TestLiH::test_lih_energy_reasonable\nERROR tests/test_locked_shell_hyperspherical.py::TestLiH::test_lih_bound - Im...\nERROR tests/test_locked_shell_hyperspherical.py::TestLiH::test_lih_screened_is_h2_like\n4 failed, 18 errors in 1.03s"
+  },
+  {
+    "file": "tests/test_lone_pair_solver.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 6,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......                                                                   [100%]\n6 passed in 21.61s"
+  },
+  {
+    "file": "tests/test_lorentzian_cb_norm.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 93,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 77%]\n.....................                                                    [100%]\n93 passed in 2.01s"
+  },
+  {
+    "file": "tests/test_lorentzian_dirac.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 108,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 66%]\n....................................                                     [100%]\n108 passed in 5.04s"
+  },
+  {
+    "file": "tests/test_lorentzian_lichnerowicz.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_lorentzian_propinquity.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_lorentzian_propinquity_foundation.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 48,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "....................................ss............                       [100%]\n48 passed, 2 skipped in 27.68s"
+  },
+  {
+    "file": "tests/test_magnetization_density.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 57,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........................................................                [100%]\n57 passed in 4.68s"
+  },
+  {
+    "file": "tests/test_measurement_grouping.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 17,
+    "failed": 0,
+    "errors": 3,
+    "skipped": 0,
+    "tail": "=========================== short test summary info ===========================\nERROR tests/test_measurement_grouping.py::TestGeoVacVsGaussian::test_comparison_he\nERROR tests/test_measurement_grouping.py::TestGeoVacVsGaussian::test_correctness_geovac_he\nERROR tests/test_measurement_grouping.py::TestScaling::test_groups_per_term_ratio\n17 passed, 3 errors in 4.83s"
+  },
+  {
+    "file": "tests/test_mo_fci.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_modular_hamiltonian.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 63,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": ".......................................ss........................ss      [100%]\n63 passed, 4 skipped in 92.21s (0:01:32)"
+  },
+  {
+    "file": "tests/test_modular_hamiltonian_lorentzian.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 74,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "................................s....................................... [ 93%]\n...ss                                                                    [100%]\n74 passed, 3 skipped in 171.19s (0:02:51)"
+  },
+  {
+    "file": "tests/test_molecular_bugs.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 4,
+    "failed": 3,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "=========================== short test summary info ===========================\nFAILED tests/test_molecular_bugs.py::TestBridgeConnectivityRegression::test_n1_state_is_first_bridge_endpoint\nFAILED tests/test_molecular_bugs.py::TestBridgeConnectivityRegression::test_n1_state_connected_in_molecule\nFAILED tests/test_molecular_bugs.py::TestBridgeConnectivityRegression::test_bonding_antibonding_splitting_exists\n3 failed, 4 passed in 5.09s"
+  },
+  {
+    "file": "tests/test_molecular_sturmian.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........                                                               [100%]\n10 passed in 43.25s"
+  },
+  {
+    "file": "tests/test_multi_center.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 13,
+    "failed": 15,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_multi_center.py::TestBackwardCompatibility::test_molecular_spec_default_nuclei_empty\nFAILED tests/test_multi_center.py::TestBackwardCompatibility::test_existing_composed_pauli_unchanged[lih_spec-334]\nFAILED tests/test_multi_center.py::TestBackwardCompatibility::test_existing_composed_pauli_unchanged[beh2_spec-556]\nFAILED tests/test_multi_center.py::TestBackwardCompatibility::test_existing_composed_pauli_unchanged[h2o_spec-778]\n15 failed, 13 passed in 36.29s"
+  },
+  {
+    "file": "tests/test_multi_zeta_orbitals.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 39,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".......................................s                                 [100%]\n39 passed, 1 skipped in 1.42s"
+  },
+  {
+    "file": "tests/test_n_electron_2d.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_n_electron_coupled.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 7,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": ".......ssss                                                              [100%]\n7 passed, 4 skipped in 123.35s (0:02:03)"
+  },
+  {
+    "file": "tests/test_n_electron_qubit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "tail": "............ssss..sss                                                    [100%]\n14 passed, 7 skipped in 8.75s"
+  },
+  {
+    "file": "tests/test_n_electron_scope.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 37,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....................................                                    [100%]\n37 passed in 1.50s"
+  },
+  {
+    "file": "tests/test_n_electron_solver.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 49,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "tail": "......................sss...................ss........ss                 [100%]\n49 passed, 7 skipped in 40.28s"
+  },
+  {
+    "file": "tests/test_n_electron_spectral.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 50,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..................................................                       [100%]\n50 passed in 0.87s"
+  },
+  {
+    "file": "tests/test_neon_core.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 149,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "........................................................................ [ 47%]\n...............................................................s........ [ 95%]\n......s                                                                  [100%]\n149 passed, 2 skipped in 6.14s"
+  },
+  {
+    "file": "tests/test_nested_hyperspherical.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 42,
+    "failed": 7,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "FAILED tests/test_nested_hyperspherical.py::TestNestedLiHFCI::test_nested_lih_fewer_pauli_than_composed\nFAILED tests/test_nested_hyperspherical.py::TestNestedLiH1Norm::test_nested_lih_1norm_lower_than_composed_pk\nFAILED tests/test_nested_hyperspherical.py::TestTwoCenterLiHFCI::test_twocenter_fewer_qubits_than_composed\nFAILED tests/test_nested_hyperspherical.py::TestHeterogeneousFCI::test_hetero_fewer_qubits_than_composed\n7 failed, 42 passed, 2 skipped in 64.32s (0:01:04)"
+  },
+  {
+    "file": "tests/test_neumann_vee.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........................                                                [100%]\n25 passed in 121.72s (0:02:01)"
+  },
+  {
+    "file": "tests/test_new_molecules.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 3,
+    "failed": 3,
+    "errors": 38,
+    "skipped": 0,
+    "tail": "ERROR tests/test_new_molecules.py::TestCH4::test_cross_block_eri_zero - TypeE...\nERROR tests/test_new_molecules.py::TestCH4::test_wrapper_matches_general - Ty...\nERROR tests/test_new_molecules.py::TestScalingConsistency::test_pauli_counts_reasonable\nERROR tests/test_new_molecules.py::TestScalingConsistency::test_print_benchmark_table\n3 failed, 3 passed, 38 errors in 8.21s"
+  },
+  {
+    "file": "tests/test_nuclear_deuteron.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "....................s                                                    [100%]\n20 passed, 1 skipped in 4.04s"
+  },
+  {
+    "file": "tests/test_nuclear_electronic.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 16,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "............F....                                                        [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_nuclear_electronic.py::test_nuclear_sector_projection_matches_fci\n1 failed, 16 passed in 3.72s"
+  },
+  {
+    "file": "tests/test_nuclear_form_factor.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 18,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": "..........s..s......ss                                                   [100%]\n18 passed, 4 skipped in 2.20s"
+  },
+  {
+    "file": "tests/test_nuclear_harmonic.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".................s...                                                    [100%]\n20 passed, 1 skipped in 3.55s"
+  },
+  {
+    "file": "tests/test_nuclear_he4.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "...........s......                                                       [100%]\n17 passed, 1 skipped in 6.80s"
+  },
+  {
+    "file": "tests/test_nuclear_lattice.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 52,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................................................                     [100%]\n52 passed in 1.39s"
+  },
+  {
+    "file": "tests/test_nuclear_sparsity.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 5,
+    "tail": ".........................sssss                                           [100%]\n25 passed, 5 skipped in 171.13s (0:02:51)"
+  },
+  {
+    "file": "tests/test_nuclear_spin_orbit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 31,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............................                                          [100%]\n31 passed in 27.43s"
+  },
+  {
+    "file": "tests/test_operator_system.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 24,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................                                                 [100%]\n24 passed in 52.65s"
+  },
+  {
+    "file": "tests/test_operator_system_lorentzian.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 33,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "................................s.                                       [100%]\n33 passed, 1 skipped in 45.85s"
+  },
+  {
+    "file": "tests/test_ov_scaling_rigorous.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...                                                                      [100%]\n3 passed in 3.53s"
+  },
+  {
+    "file": "tests/test_paper14_revision.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 5,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_paper14_revision.py::test_paper14_contains_composed - FileN...\nFAILED tests/test_paper14_revision.py::test_paper14_contains_trenev - FileNot...\nFAILED tests/test_paper14_revision.py::test_paper14_contains_h2o - FileNotFou...\nFAILED tests/test_paper14_revision.py::test_paper14_no_460 - FileNotFoundErro...\n5 failed in 0.43s"
+  },
+  {
+    "file": "tests/test_paper27_entropy.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 25,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "...............F.........s.                                              [100%]\n=========================== short test summary info ===========================\nFAILED tests/test_paper27_entropy.py::test_paper27_ep2b_ho_gs_is_single_determinant\n1 failed, 25 passed, 1 skipped in 118.42s (0:01:58)"
+  },
+  {
+    "file": "tests/test_paper2_corrections.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 2,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..                                                                       [100%]\n2 passed in 4.51s"
+  },
+  {
+    "file": "tests/test_paper34_projection_spot_checks.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 44,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "............................................s                            [100%]\n44 passed, 1 skipped in 1.70s"
+  },
+  {
+    "file": "tests/test_paper34_projection_spot_checks_batch1.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 31,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............................                                          [100%]\n31 passed in 4.20s"
+  },
+  {
+    "file": "tests/test_paper34_projection_spot_checks_batch2.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................                                                   [100%]\n22 passed in 3.38s"
+  },
+  {
+    "file": "tests/test_paper34_projection_spot_checks_batch3.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...........                                                              [100%]\n11 passed in 1.41s"
+  },
+  {
+    "file": "tests/test_paper35_predictions.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........                                                                [100%]\n9 passed in 0.88s"
+  },
+  {
+    "file": "tests/test_paper45_asymptotic_rate.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": "ss....ss.                                                                [100%]\n5 passed, 4 skipped in 3.61s"
+  },
+  {
+    "file": "tests/test_paper46_C3op_closed_form.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "ssssssssss                                                               [100%]\n10 skipped in 0.74s"
+  },
+  {
+    "file": "tests/test_paper51_L6_full.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................                                                   [100%]\n22 passed in 1.10s"
+  },
+  {
+    "file": "tests/test_paper51_cutoff_mellin.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 32,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "................................                                         [100%]\n32 passed in 1.04s"
+  },
+  {
+    "file": "tests/test_paper51_dS_vacuum.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 4,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....                                                                     [100%]\n4 passed in 1.06s"
+  },
+  {
+    "file": "tests/test_paper51_j_blindness.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".....s                                                                   [100%]\n5 passed, 1 skipped in 1.12s"
+  },
+  {
+    "file": "tests/test_paper51_scalar_ak.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........                                                               [100%]\n10 passed in 1.78s"
+  },
+  {
+    "file": "tests/test_paper51_zeta_unit_neg_k.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 40,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................                                 [100%]\n40 passed in 0.90s"
+  },
+  {
+    "file": "tests/test_paper55_M2_mixed_tate.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".................s                                                       [100%]\n17 passed, 1 skipped in 2.69s"
+  },
+  {
+    "file": "tests/test_paper55_m1_pure_tate.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........                                                                [100%]\n9 passed in 0.86s"
+  },
+  {
+    "file": "tests/test_paper55_m3_cyclotomic_mixed_tate.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 19,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...................                                                      [100%]\n19 passed in 1.07s"
+  },
+  {
+    "file": "tests/test_phillips_kleinman_cross_center.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....................                                                    [100%]\n21 passed in 5.91s"
+  },
+  {
+    "file": "tests/test_pk_partitioning.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 7,
+    "failed": 10,
+    "errors": 2,
+    "skipped": 0,
+    "tail": "FAILED tests/test_pk_partitioning.py::TestBackwardCompatibility::test_include_pk_false_still_works\nFAILED tests/test_pk_partitioning.py::TestBackwardCompatibility::test_1norm_reduction_h2o_nmax2\nERROR tests/test_pk_partitioning.py::TestPKMatrixCorrectness::test_beh2_h1_pk_equals_difference\nERROR tests/test_pk_partitioning.py::TestPauliCountInvariance::test_beh2_pauli_count_unchanged\n10 failed, 7 passed, 2 errors in 4.24s"
+  },
+  {
+    "file": "tests/test_pk_rref.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...............                                                          [100%]\n15 passed in 7.24s"
+  },
+  {
+    "file": "tests/test_prolate_active.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 6,
+    "failed": 10,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_prolate_active.py::TestLiH::test_lih_prolate_runs - ImportE...\nFAILED tests/test_prolate_active.py::TestLiH::test_lih_prolate_pes_has_minimum\nFAILED tests/test_prolate_active.py::TestLiH::test_lih_e_locked_correct - Imp...\nFAILED tests/test_prolate_active.py::TestBackwardCompat::test_lcao_default - ...\n10 failed, 6 passed in 22.40s"
+  },
+  {
+    "file": "tests/test_prolate_grid_scf.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........                                                               [100%]\n10 passed in 34.96s"
+  },
+  {
+    "file": "tests/test_prolate_h2_4sigma.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 20,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "....................                                                     [100%]\n20 passed in 81.17s (0:01:21)"
+  },
+  {
+    "file": "tests/test_prolate_h2plus.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 11,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...........                                                              [100%]\n11 passed in 125.31s (0:02:05)"
+  },
+  {
+    "file": "tests/test_prolate_heh_plus.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........                                                               [100%]\n10 passed in 28.41s"
+  },
+  {
+    "file": "tests/test_prolate_heteronuclear_scf.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_prolate_relaxed_ci.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_prolate_scf.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 6,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......                                                                   [100%]\n6 passed in 119.67s (0:01:59)"
+  },
+  {
+    "file": "tests/test_prolate_stress.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_qed_anomalous_moment.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 38,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "..........................s............                                  [100%]\n38 passed, 1 skipped in 39.22s"
+  },
+  {
+    "file": "tests/test_qed_consistency.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 389,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 55%]\n........................................................................ [ 74%]\n........................................................................ [ 92%]\n.............................                                            [100%]\n389 passed in 1.90s"
+  },
+  {
+    "file": "tests/test_qed_flat_limit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": ".........................sss                                             [100%]\n25 passed, 3 skipped in 1.42s"
+  },
+  {
+    "file": "tests/test_qed_self_energy.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "...................................                                      [100%]\n35 passed in 0.88s"
+  },
+  {
+    "file": "tests/test_qed_three_loop.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 28,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4,
+    "tail": "...............sss.............s                                         [100%]\n28 passed, 4 skipped in 38.20s"
+  },
+  {
+    "file": "tests/test_qed_two_loop.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".........................s..........                                     [100%]\n35 passed, 1 skipped in 1.32s"
+  },
+  {
+    "file": "tests/test_qed_vacuum_polarization.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 33,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................................                                        [100%]\n33 passed in 2.39s"
+  },
+  {
+    "file": "tests/test_qed_vertex.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 41,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 9,
+    "tail": "...................ssss......................sssss                       [100%]\n41 passed, 9 skipped in 3.49s"
+  },
+  {
+    "file": "tests/test_qubit_encoding.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "  C:\\Users\\jlout\\Desktop\\Project_Geometric\\tests\\test_qubit_encoding.py:59: UserWarning: LatticeIndex V_ee uses full Slater integrals (F^k direct + G^k exchange) with proper angular coupling via Wigner 3j symbols. Off-diagonal two-electron matrix elements enabled for FCI.\n    return LatticeIndex(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n13 passed, 3 warnings in 7.84s"
+  },
+  {
+    "file": "tests/test_r25_l3_lipschitz_bound.py",
+    "status": "TIMEOUT",
+    "returncode": -1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "TIMEOUT 180s"
+  },
+  {
+    "file": "tests/test_real_structure.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 43,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "...........................................s                             [100%]\n43 passed, 1 skipped in 2.08s"
+  },
+  {
+    "file": "tests/test_rho_collapse.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 2,
+    "failed": 7,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "FAILED tests/test_rho_collapse.py::TestFastPES::test_dissociation_energy - Ty...\nFAILED tests/test_rho_collapse.py::TestFastPES::test_dissociation_limit - Typ...\nFAILED tests/test_rho_collapse.py::TestFastPES::test_performance - TypeError:...\nFAILED tests/test_rho_collapse.py::TestFastPES::test_compare_with_level4 - Ty...\n7 failed, 2 passed in 17.62s"
+  },
+  {
+    "file": "tests/test_shibuya_wulfman.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 26,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........................                                               [100%]\n26 passed in 3.83s"
+  },
+  {
+    "file": "tests/test_smin_chi_neg4.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........                                                               [100%]\n10 passed in 29.18s"
+  },
+  {
+    "file": "tests/test_smin_extended.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": "........ss                                                               [100%]\n8 passed, 2 skipped in 8.25s"
+  },
+  {
+    "file": "tests/test_so4_three_y_integral.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "...............s..                                                       [100%]\n17 passed, 1 skipped in 1.64s"
+  },
+  {
+    "file": "tests/test_spectral_chi_neg4.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........................                                                [100%]\n25 passed in 1.09s"
+  },
+  {
+    "file": "tests/test_spectral_pes_wiring.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 1,
+    "failed": 2,
+    "errors": 17,
+    "skipped": 0,
+    "tail": "ERROR tests/test_spectral_pes_wiring.py::TestSpectralWavefunction::test_spectral_fxi_decays\nERROR tests/test_spectral_pes_wiring.py::TestSpectralWavefunction::test_spectral_energy_matches_solve\nERROR tests/test_spectral_pes_wiring.py::TestSpectralWavefunction::test_angular_wfn_consistent\nERROR tests/test_spectral_pes_wiring.py::TestSpectralWavefunction::test_spectral_fxi_shape_similar_to_fd\n2 failed, 1 passed, 17 errors in 21.16s"
+  },
+  {
+    "file": "tests/test_spectral_pk.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 0,
+    "failed": 6,
+    "errors": 0,
+    "skipped": 4,
+    "tail": "FAILED tests/test_spectral_pk.py::TestSpectralPKConstruction::test_dominant_component_is_l0_k0\nFAILED tests/test_spectral_pk.py::TestSpectralPKConstruction::test_energy_shift_positive\nFAILED tests/test_spectral_pk.py::TestSpectralPKConstruction::test_rank1_subset_of_rank3\nFAILED tests/test_spectral_pk.py::TestSpectralPKConstruction::test_coefficients_sum_to_unity\n6 failed, 4 skipped in 6.15s"
+  },
+  {
+    "file": "tests/test_spectral_pk_sweep.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "ssssss                                                                   [100%]\n6 skipped in 0.99s"
+  },
+  {
+    "file": "tests/test_spectral_triple.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 89,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".............................s.......................................... [ 80%]\n..................                                                       [100%]\n89 passed, 1 skipped in 3.70s"
+  },
+  {
+    "file": "tests/test_spectral_zero_stats.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".............                                                            [100%]\n13 passed in 8.43s"
+  },
+  {
+    "file": "tests/test_spin_ful_composed.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..............                                                           [100%]\n14 passed in 21.33s"
+  },
+  {
+    "file": "tests/test_spin_orbit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................                                                   [100%]\n22 passed in 1.57s"
+  },
+  {
+    "file": "tests/test_spinor_certificate.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".........................                                                [100%]\n25 passed in 2.03s"
+  },
+  {
+    "file": "tests/test_spinor_operator_system.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 29,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".............................s                                           [100%]\n29 passed, 1 skipped in 18.11s"
+  },
+  {
+    "file": "tests/test_standard_model_triple.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 45,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".............................................                            [100%]\n45 passed in 23.84s"
+  },
+  {
+    "file": "tests/test_sturmian_qubit.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".....s                                                                   [100%]\n5 passed, 1 skipped in 14.05s"
+  },
+  {
+    "file": "tests/test_sturmian_solver.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 11,
+    "tail": "..........ssssss.......sssss                                             [100%]\n17 passed, 11 skipped in 2.14s"
+  },
+  {
+    "file": "tests/test_su2_wilson_gauge.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 26,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........................                                               [100%]\n26 passed in 2.10s"
+  },
+  {
+    "file": "tests/test_su3_wilson_s5.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 39,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": ".......................................s                                 [100%]\n39 passed, 1 skipped in 8.81s"
+  },
+  {
+    "file": "tests/test_tc_angular.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 10,
+    "failed": 3,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "=========================== short test summary info ===========================\nFAILED tests/test_tc_angular.py::TestTCComposedAngular::test_radial_only_matches_bx3_pauli_count\nFAILED tests/test_tc_angular.py::TestTCComposedAngular::test_angular_increases_pauli_count\nFAILED tests/test_tc_angular.py::TestTCComposedAngular::test_default_is_radial_only\n3 failed, 10 passed, 1 skipped in 10.74s"
+  },
+  {
+    "file": "tests/test_thermal_tensor_triple.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 38,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "......................................                                   [100%]\n38 passed in 2.52s"
+  },
+  {
+    "file": "tests/test_track_r_benchmark.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 1,
+    "failed": 3,
+    "errors": 9,
+    "skipped": 3,
+    "tail": "ERROR tests/test_track_r_benchmark.py::TestLiHSinglePoint::test_energy_agreement\nERROR tests/test_track_r_benchmark.py::TestLiHSinglePoint::test_core_energy_identical\nERROR tests/test_track_r_benchmark.py::TestLiHSinglePoint::test_pk_parameters_identical\nERROR tests/test_track_r_benchmark.py::TestLiHSinglePoint::test_print_comparison\n3 failed, 1 passed, 3 skipped, 9 errors in 1.18s"
+  },
+  {
+    "file": "tests/test_transition_metals.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 49,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................................................                        [100%]\n49 passed in 5.88s"
+  },
+  {
+    "file": "tests/test_trotter_bounds.py",
+    "status": "BROKEN",
+    "returncode": 1,
+    "passed": 20,
+    "failed": 0,
+    "errors": 4,
+    "skipped": 0,
+    "tail": "ERROR tests/test_trotter_bounds.py::TestComparison::test_comparison_table - T...\nERROR tests/test_trotter_bounds.py::TestScaling::test_lambda_per_qubit - Type...\nERROR tests/test_trotter_bounds.py::TestCommutatorBound::test_comm_bound_tighter_than_onenorm\nERROR tests/test_trotter_bounds.py::TestCommutatorBound::test_anticommuting_fraction_decreases\n20 passed, 4 errors in 4.32s"
+  },
+  {
+    "file": "tests/test_two_loop_self_energy.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "tail": "....................s.                                                   [100%]\n21 passed, 1 skipped in 0.90s"
+  },
+  {
+    "file": "tests/test_universal_constant_origin.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".....                                                                    [100%]\n5 passed in 9.57s"
+  },
+  {
+    "file": "tests/test_vector_qed.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 99,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 72%]\n...........................                                              [100%]\n99 passed in 2.05s"
+  },
+  {
+    "file": "tests/test_vqe_benchmark.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "ssssssssssss                                                             [100%]\n12 skipped in 5.11s"
+  },
+  {
+    "file": "tests/test_warped_dirac.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 75,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "........................................................................ [ 96%]\n...                                                                      [100%]\n75 passed in 1.62s"
+  },
+  {
+    "file": "tests/test_warped_dirac_spectral.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 13,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 2,
+    "tail": ".............ss                                                          [100%]\n13 passed, 2 skipped in 1.05s"
+  },
+  {
+    "file": "tests/test_wigner_d_l2.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 26,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "..........................                                               [100%]\n26 passed in 4.05s"
+  },
+  {
+    "file": "tests/test_wigner_so4.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 44,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": "............................................                             [100%]\n44 passed in 0.84s"
+  },
+  {
+    "file": "tests/test_z2_tapering.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "tail": ".................                                                        [100%]\n17 passed in 7.59s"
+  },
+  {
+    "file": "tests/test_z_eff_injection.py",
+    "status": "GREEN",
+    "returncode": 0,
+    "passed": 2,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 3,
+    "tail": "ss..s                                                                    [100%]\n2 passed, 3 skipped in 0.99s"
+  }
+]

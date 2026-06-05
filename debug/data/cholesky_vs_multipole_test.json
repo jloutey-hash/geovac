@@ -1,0 +1,1085 @@
+{
+  "LiH": {
+    "spec": "LiH",
+    "M_total": 15,
+    "sub_blocks": [
+      {
+        "label": "Li_core_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 3.3945017078478436e-17,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.7355044399154034,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 8.092071311423672e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.9582159044529414,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.0007415106216802e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.45794846223910474,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.44828583204090794,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.1954322737646606e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.2617018666311446,
+            "squared_overlap_with_multipole": 1.0000000000000004,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.1564631387932616,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.482534153247273e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.017655346953786222,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          3.4167954648150296,
+          0.6537295363540149,
+          0.22460423395504275,
+          0.06328125000000002,
+          0.053600427110343504
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000003,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "LiH_bond_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.0019939555649489,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.5532262103776864,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.26439666794872235,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.25881794580271344,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.1510936431469189,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.09033403530054328,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.01019331931640685,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          1.13893182160501,
+          0.21790984545133826,
+          0.07486807798501426,
+          0.021093749999999977,
+          0.017866809036781166
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "LiH_bond_partner",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.0019939555649489,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.5532262103776864,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.26439666794872235,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.25881794580271344,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.1510936431469189,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.09033403530054328,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.01019331931640685,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          1.13893182160501,
+          0.21790984545133826,
+          0.07486807798501426,
+          0.021093749999999977,
+          0.017866809036781166
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      }
+    ]
+  },
+  "BeH2": {
+    "spec": "BeH2",
+    "M_total": 25,
+    "sub_blocks": [
+      {
+        "label": "Be_core_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 2.0039879111298977,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 1.1064524207553728,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.5287933358974447,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.5176358916054269,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.3021872862938378,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.18066807060108656,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.0203866386328137,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          4.55572728642004,
+          0.871639381805353,
+          0.299472311940057,
+          0.08437499999999991,
+          0.07146723614712466
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "BeH2_bond_1_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0966995880160425e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.4170334413758152,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.2566871346510768e-16
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.7823800097763951,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.3739133536593389,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.36602384913974206,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.1930776018818703e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.21367867932673335,
+            "squared_overlap_with_multipole": 1.0000000000000004,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.1277516178659183,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 3.236828524569469e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.014415530422860139,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          2.27786364321002,
+          0.4358196909026765,
+          0.1497361559700285,
+          0.042187499999999954,
+          0.03573361807356233
+        ],
+        "subspace_overlap_chol_svd_trace": 7.0,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "BeH2_bond_1_partner",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.0019939555649489,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.5532262103776864,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.26439666794872235,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.25881794580271344,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.1510936431469189,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.09033403530054328,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.01019331931640685,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          1.13893182160501,
+          0.21790984545133826,
+          0.07486807798501426,
+          0.021093749999999977,
+          0.017866809036781166
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "BeH2_bond_2_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0966995880160425e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.4170334413758152,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.2566871346510768e-16
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.7823800097763951,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.3739133536593389,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.36602384913974206,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.1930776018818703e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.21367867932673335,
+            "squared_overlap_with_multipole": 1.0000000000000004,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.1277516178659183,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 3.236828524569469e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.014415530422860139,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          2.27786364321002,
+          0.4358196909026765,
+          0.1497361559700285,
+          0.042187499999999954,
+          0.03573361807356233
+        ],
+        "subspace_overlap_chol_svd_trace": 7.0,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "BeH2_bond_2_partner",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.0019939555649489,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.5532262103776864,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.26439666794872235,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.25881794580271344,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.1510936431469189,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.09033403530054328,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.01019331931640685,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          1.13893182160501,
+          0.21790984545133826,
+          0.07486807798501426,
+          0.021093749999999977,
+          0.017866809036781166
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      }
+    ]
+  },
+  "H2O": {
+    "spec": "H2O",
+    "M_total": 35,
+    "sub_blocks": [
+      {
+        "label": "O_core_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0966995880160425e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 2.8340668827516304,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.2566871346510768e-16
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 1.5647600195527902,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.7478267073186778,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.7320476982794841,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.1930776018818703e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.4273573586534667,
+            "squared_overlap_with_multipole": 1.0000000000000004,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.2555032357318366,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 3.236828524569469e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.028831060845720277,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          9.11145457284008,
+          1.743278763610706,
+          0.598944623880114,
+          0.16874999999999982,
+          0.14293447229424933
+        ],
+        "subspace_overlap_chol_svd_trace": 7.0,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "H2O_bond_1_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 8.131820294829109e-17,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 2.4543739164870857,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 1.3551219277589512,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.6653345369377348e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.6476369261664452,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.6339719034919595,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.3144831455046754e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.3701023290881197,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.2212722928928944,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.024968431110443716,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          6.833590929630059,
+          1.3074590727080297,
+          0.4492084679100855,
+          0.12656250000000005,
+          0.10720085422068701
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000002,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999996,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "H2O_bond_1_partner",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.0019939555649489,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.5532262103776864,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.26439666794872235,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.25881794580271344,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.1510936431469189,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.09033403530054328,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.01019331931640685,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          1.13893182160501,
+          0.21790984545133826,
+          0.07486807798501426,
+          0.021093749999999977,
+          0.017866809036781166
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "H2O_bond_2_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 8.131820294829109e-17,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 2.4543739164870857,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 1.3551219277589512,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.6653345369377348e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.6476369261664452,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.6339719034919595,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.3144831455046754e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.3701023290881197,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.2212722928928944,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.024968431110443716,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          6.833590929630059,
+          1.3074590727080297,
+          0.4492084679100855,
+          0.12656250000000005,
+          0.10720085422068701
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000002,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999996,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "H2O_bond_2_partner",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 1.0950736425881522e-16,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 1.0019939555649489,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 0.5532262103776864,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.26439666794872235,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.25881794580271344,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.8531978627211462e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.1510936431469189,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.09033403530054328,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.9893669801409083e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.01019331931640685,
+            "squared_overlap_with_multipole": 0.9999999999999993,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          1.13893182160501,
+          0.21790984545133826,
+          0.07486807798501426,
+          0.021093749999999977,
+          0.017866809036781166
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000001,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999993,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "O_lp_1_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 8.131820294829109e-17,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 2.4543739164870857,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 1.3551219277589512,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.6653345369377348e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.6476369261664452,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.6339719034919595,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.3144831455046754e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.3701023290881197,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.2212722928928944,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.024968431110443716,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          6.833590929630059,
+          1.3074590727080297,
+          0.4492084679100855,
+          0.12656250000000005,
+          0.10720085422068701
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000002,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999996,
+        "max_residual": 4.965068306494546e-16
+      },
+      {
+        "label": "O_lp_2_center",
+        "n_orbitals": 5,
+        "df_rank": 7,
+        "cholesky_rank": 7,
+        "n_multipole_channels": 7,
+        "reconstruction_error": 8.131820294829109e-17,
+        "cholesky_modes": [
+          {
+            "mode": 0,
+            "pivot": 0,
+            "norm": 2.4543739164870857,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 7.473417450352271e-17
+          },
+          {
+            "mode": 1,
+            "pivot": 18,
+            "norm": 1.3551219277589512,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.6653345369377348e-16
+          },
+          {
+            "mode": 2,
+            "pivot": 8,
+            "norm": 0.6476369261664452,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.7554167342883506e-16
+          },
+          {
+            "mode": 3,
+            "pivot": 12,
+            "norm": 0.6339719034919595,
+            "squared_overlap_with_multipole": 0.9999999999999998,
+            "residual_norm": 1.3144831455046754e-16
+          },
+          {
+            "mode": 4,
+            "pivot": 3,
+            "norm": 0.3701023290881197,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 1.5700924586837752e-16
+          },
+          {
+            "mode": 5,
+            "pivot": 6,
+            "norm": 0.2212722928928944,
+            "squared_overlap_with_multipole": 1.0,
+            "residual_norm": 2.2887833992611187e-16
+          },
+          {
+            "mode": 6,
+            "pivot": 1,
+            "norm": 0.024968431110443716,
+            "squared_overlap_with_multipole": 0.9999999999999996,
+            "residual_norm": 4.965068306494546e-16
+          }
+        ],
+        "top_5_sv": [
+          6.833590929630059,
+          1.3074590727080297,
+          0.4492084679100855,
+          0.12656250000000005,
+          0.10720085422068701
+        ],
+        "subspace_overlap_chol_svd_trace": 7.000000000000002,
+        "subspace_overlap_expected": 7.0,
+        "subspace_match": true,
+        "min_overlap": 0.9999999999999996,
+        "max_residual": 4.965068306494546e-16
+      }
+    ]
+  }
+}

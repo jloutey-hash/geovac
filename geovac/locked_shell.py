@@ -144,7 +144,12 @@ class LockedShellMolecule:
         prolate_kwargs: Optional[Dict] = None,
         hyperspherical_kwargs: Optional[Dict] = None,
     ) -> None:
-        from .lattice_index import MolecularLatticeIndex
+        # MolecularLatticeIndex (LCAO molecular FCI) was retired during the
+        # natural-geometry migration; CLAUDE.md §3 LCAO entry.
+        try:
+            from .lattice_index import MolecularLatticeIndex  # type: ignore[attr-defined]
+        except ImportError:
+            MolecularLatticeIndex = None  # type: ignore[assignment]
 
         self.Z_A = Z_A
         self.Z_B = Z_B
@@ -167,6 +172,12 @@ class LockedShellMolecule:
 
         # --- LCAO path (original) ---
         # Build molecular index (skip SD enumeration — we build our own)
+        if MolecularLatticeIndex is None:
+            raise NotImplementedError(
+                "LockedShellMolecule LCAO path requires MolecularLatticeIndex "
+                "which was retired during the natural-geometry migration. Use "
+                "active_method='hyperspherical' or 'prolate'."
+            )
         self._parent = MolecularLatticeIndex(
             Z_A=Z_A, Z_B=Z_B,
             nmax_A=nmax_A, nmax_B=nmax_B,
