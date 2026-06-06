@@ -1,0 +1,324 @@
+{
+  "sprint": "Q5p-mJ-Smash-Product (T4)",
+  "date": "2026-06-06 (continuation of v3.63.0 L5 sub-sprint)",
+  "purpose": "Structural test of m_J-resolved OffDiag substrate at n_max=2 confirming the Delta m_J in {-1, 0, +1} grading and the U(1) z-rotation eigenspace decomposition. Scopes the multi-year smash-product extension.",
+  "n_max": 2,
+  "dim_H": 16,
+  "n_states": 16,
+  "labels": [
+    {
+      "index": 0,
+      "n_fock": 1,
+      "kappa": -1,
+      "two_m_J": -1,
+      "m_J_str": "-1/2",
+      "sector": [
+        1,
+        0
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 1,
+      "n_fock": 1,
+      "kappa": -1,
+      "two_m_J": 1,
+      "m_J_str": "1/2",
+      "sector": [
+        1,
+        0
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 2,
+      "n_fock": 1,
+      "kappa": 1,
+      "two_m_J": -1,
+      "m_J_str": "-1/2",
+      "sector": [
+        1,
+        1
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 3,
+      "n_fock": 1,
+      "kappa": 1,
+      "two_m_J": 1,
+      "m_J_str": "1/2",
+      "sector": [
+        1,
+        1
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 4,
+      "n_fock": 2,
+      "kappa": -1,
+      "two_m_J": -1,
+      "m_J_str": "-1/2",
+      "sector": [
+        2,
+        0
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 5,
+      "n_fock": 2,
+      "kappa": -1,
+      "two_m_J": 1,
+      "m_J_str": "1/2",
+      "sector": [
+        2,
+        0
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 6,
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_J": -3,
+      "m_J_str": "-3/2",
+      "sector": [
+        2,
+        1
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 7,
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_J": -1,
+      "m_J_str": "-1/2",
+      "sector": [
+        2,
+        1
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 8,
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_J": 1,
+      "m_J_str": "1/2",
+      "sector": [
+        2,
+        1
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 9,
+      "n_fock": 2,
+      "kappa": -2,
+      "two_m_J": 3,
+      "m_J_str": "3/2",
+      "sector": [
+        2,
+        1
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 10,
+      "n_fock": 2,
+      "kappa": 1,
+      "two_m_J": -1,
+      "m_J_str": "-1/2",
+      "sector": [
+        2,
+        1
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 11,
+      "n_fock": 2,
+      "kappa": 1,
+      "two_m_J": 1,
+      "m_J_str": "1/2",
+      "sector": [
+        2,
+        1
+      ],
+      "j": "1/2"
+    },
+    {
+      "index": 12,
+      "n_fock": 2,
+      "kappa": 2,
+      "two_m_J": -3,
+      "m_J_str": "-3/2",
+      "sector": [
+        2,
+        2
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 13,
+      "n_fock": 2,
+      "kappa": 2,
+      "two_m_J": -1,
+      "m_J_str": "-1/2",
+      "sector": [
+        2,
+        2
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 14,
+      "n_fock": 2,
+      "kappa": 2,
+      "two_m_J": 1,
+      "m_J_str": "1/2",
+      "sector": [
+        2,
+        2
+      ],
+      "j": "3/2"
+    },
+    {
+      "index": 15,
+      "n_fock": 2,
+      "kappa": 2,
+      "two_m_J": 3,
+      "m_J_str": "3/2",
+      "sector": [
+        2,
+        2
+      ],
+      "j": "3/2"
+    }
+  ],
+  "n_off_diagonal_transitions": 100,
+  "delta_mJ_times_2_values": [
+    -2,
+    0,
+    2
+  ],
+  "wigner_eckart_passes": true,
+  "u1_grade_dims": {
+    "dim_A_minus_1": 30,
+    "dim_A_0": 40,
+    "dim_A_plus_1": 30
+  },
+  "u1_grade_dims_total": 100,
+  "u1_grade_dims_match_total_transitions": true,
+  "j_values": [
+    "1/2",
+    "3/2"
+  ],
+  "j_max_required": "3/2",
+  "L2_decorated_PW_j_max": "1/2",
+  "L2_sufficient_for_full_SU2_on_mJ_OffDiag": false,
+  "L2_needs_extension_to_j_max": "3/2",
+  "sector_mJ_decomposition": {
+    "(1, 0)": [
+      {
+        "two_mJ": -1,
+        "kappa": -1,
+        "state_index": 0
+      },
+      {
+        "two_mJ": 1,
+        "kappa": -1,
+        "state_index": 1
+      }
+    ],
+    "(1, 1)": [
+      {
+        "two_mJ": -1,
+        "kappa": 1,
+        "state_index": 2
+      },
+      {
+        "two_mJ": 1,
+        "kappa": 1,
+        "state_index": 3
+      }
+    ],
+    "(2, 0)": [
+      {
+        "two_mJ": -1,
+        "kappa": -1,
+        "state_index": 4
+      },
+      {
+        "two_mJ": 1,
+        "kappa": -1,
+        "state_index": 5
+      }
+    ],
+    "(2, 1)": [
+      {
+        "two_mJ": -3,
+        "kappa": -2,
+        "state_index": 6
+      },
+      {
+        "two_mJ": -1,
+        "kappa": -2,
+        "state_index": 7
+      },
+      {
+        "two_mJ": -1,
+        "kappa": 1,
+        "state_index": 10
+      },
+      {
+        "two_mJ": 1,
+        "kappa": -2,
+        "state_index": 8
+      },
+      {
+        "two_mJ": 1,
+        "kappa": 1,
+        "state_index": 11
+      },
+      {
+        "two_mJ": 3,
+        "kappa": -2,
+        "state_index": 9
+      }
+    ],
+    "(2, 2)": [
+      {
+        "two_mJ": -3,
+        "kappa": 2,
+        "state_index": 12
+      },
+      {
+        "two_mJ": -1,
+        "kappa": 2,
+        "state_index": 13
+      },
+      {
+        "two_mJ": 1,
+        "kappa": 2,
+        "state_index": 14
+      },
+      {
+        "two_mJ": 3,
+        "kappa": 2,
+        "state_index": 15
+      }
+    ]
+  },
+  "smash_product_scope": "multi-year; sprint-scale n_max=2 Delta m_J grading + U(1) z-rotation diagonalization verified; full SU(2) action needs L2 extension to j_max >= 3/2; bit-exact Hopf-axiom check is sprint-scale at j_max = 3/2.",
+  "named_followons": [
+    "Extend L2 decorated-PW substrate to j_max = 3/2 (sprint-scale, ~1 day)",
+    "Construct H_{m_J-OD} cross-prod O(SL_2) at n_max=2, j_max=3/2 (sprint-scale, ~2-3 days)",
+    "Bit-exact verification of Hopf-axiom panel for the smash product (sprint-scale, ~1-2 days after construction)",
+    "Generalize to n_max=3 (multi-year given growing j-content)"
+  ],
+  "wall_seconds": 0.006107807159423828
+}

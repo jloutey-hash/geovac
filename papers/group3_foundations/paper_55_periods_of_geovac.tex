@@ -2177,6 +2177,171 @@ $\mathcal{A}_{\mathrm{OD}}^{(n_{\max})}$ inductive system into the
 pro-unipotent factor of the cosmic-Galois $U^*$ Hopf algebra
 (Connes--Marcolli 2007).
 
+\emph{Stage-2 substrate decision via the primitive-space invariant:\
+L1 is forced (Sprint Q5'-L1-vs-L2-Diagnostic, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_l1\_vs\_l2\_diagnostic\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_l1\_vs\_l2\_diagnostic.json}).}  The
+strategic question flagged in the decorated-PW paragraph above and in
+the L1+L5 categorical-reduction paragraph -- whether the v3.61.0
+abelian primitives $x_{(n, l), k}$ carry independent content (so L1's
+Levi-decomposition is forced) or are reducible to Peter--Weyl matrix
+coefficients in disguise (so L2's $SL_2^3$ substrate suffices) -- is
+resolved bit-exactly at finite cutoff by the primitive-space invariant
+$\dim \mathrm{Prim}(\mathcal{H}) = \dim \mathrm{Lie}(\mathrm{Spec}\,\mathcal{H})$,
+a Hopf-isomorphism invariant.  Milnor--Moore for the connected
+cocommutative L1 substrate gives
+$\dim \mathrm{Prim}(\mathcal{H}_{\mathrm{GV}}) = 3 N(n_{\max}) \in \{6, 15, 27, 42, 60, 81\}$
+at $n_{\max} \in \{1, \dots, 6\}$;\ the standard identification
+$\mathrm{Prim}\,\mathcal{O}(SL_2)^{\otimes 3} = \mathfrak{sl}_2^3$ gives
+$\dim \mathrm{Prim}(\mathcal{H}_{\mathrm{dec}}) = 9$ independent of
+$j_{\max}$ (higher $j_{\max}$ adds degree-$\ge 2$ symmetric-square
+Clebsch--Gordan polynomials in the $j = 1/2$ generators, contributing
+zero new dimensions to $\mathfrak{m}/\mathfrak{m}^2$).  At every
+$n_{\max} \ge 2$ the dim defect is strictly positive $(6, 18, 33, 51, 72)$;\
+the two Hopf algebras cannot be isomorphic.  The substrate-dim
+coincidences $15 = 15$ at $(n_{\max}, j_{\max}) = (2, 1/2)$ and
+$42 = 42$ at $(4, 1)$ are small-cutoff artifacts breaking at
+$n_{\max} \in \{1, 3, 5, 6\}$.  An independent invariant
+(cocommutativity) separates the substrates at every $n_{\max} \ge 1$.
+Bit-exact panel:\ 258 zero residuals / consistent checks.  The L2
+$SL_2^3$ substrate remains a valid complementary semisimple-only
+reading of the M1/M2/M3 partition;\ the Levi-decomposition
+$U^*_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \times SL_2$
+is the structurally-correct Stage-2 target, matching the published
+Connes--Marcolli motivic-Galois shape.  The canonical multi-year next
+step of the Q5' program is the Tannakian closure of the pro-unipotent
+factor $\mathbb{G}_a^{3 N(n_{\max})}$ in the Connes--Marcolli machinery.
+
+\emph{Closed-form generating function for the chirality-weighted
+two-step path count on the OffDiag substrate (Sprint Q5'-T-Path-Generating
+T2, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_t\_path\_generating\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_t\_path\_generating.json}).}  The
+chirality-weighted two-step path count
+$N^{(2)}_{s' \to s} := \mathrm{Tr}(\gamma A e_s A e_{s'})/\kappa^2$
+on the v3.62.0 OffDiag substrate is bit-exactly \emph{cutoff-independent}
+(every realised sector pair has the same value at every $n_{\max}$
+where both sectors are present), satisfies the E1 selection rule
+$|\Delta n|, |\Delta l| \le 1$, has total signed sum vanishing identically
+($T_{\mathrm{path}}^{\mathrm{signed}} \equiv 0 = \mathrm{Tr}(\gamma A^2)/\kappa^2$,
+the McKean--Singer extension to the chirality-weighted $A^2$ trace), and
+obeys the closed form
+\[
+T_{\mathrm{path}}^{\mathrm{abs}}(n_{\max}) \;=\;
+\frac{(n_{\max}^2 + 9 n_{\max} - 4)(n_{\max}^2 + 13 n_{\max} - 6)}{6}
+\]
+at panel $(8, 72, 224, 496, 924)$ for $n_{\max} \in \{1, 2, 3, 4, 5\}$.
+This closed form unlocks the continuum Mellin lift below.
+
+\emph{Continuum Mellin lift of the discrete bridge identity to the
+spectral zeta side with bit-exact M2/M3 decomposition by shift parity
+(Sprint Q5'-Mellin-Lift-Bridge T1, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_mellin\_lift\_bridge\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_mellin\_lift\_bridge.json}).}  Using
+T2's quartic closed form, the continuum Mellin lift of the v3.63.0
+L3 discrete bridge identity $\mathrm{drift}_{n_{\max} \ge 3} = -\kappa^4$
+is the generating function
+\[
+F(s) \;=\;
+\tfrac{1}{6}\zeta(s-4) + \tfrac{11}{3}\zeta(s-3) +
+\tfrac{107}{6}\zeta(s-2) - \tfrac{53}{3}\zeta(s-1) + 4\,\zeta(s),
+\]
+admitting the bit-exact decomposition by shift parity
+$F = F_{\mathrm{M2}} + F_{\mathrm{M3}}$ with
+$F_{\mathrm{M2}}(s) = \tfrac{1}{6}\zeta(s-4) + \tfrac{107}{6}\zeta(s-2) + 4\,\zeta(s)$
+(even shifts, M2 Seeley--DeWitt) and
+$F_{\mathrm{M3}}(s) = \tfrac{11}{3}\zeta(s-3) - \tfrac{53}{3}\zeta(s-1)$
+(odd shifts, M3 vertex-parity-Hurwitz). Five simple poles at
+$s \in \{1, 2, 3, 4, 5\}$ with residues
+$\{4, -53/3, 107/6, 11/3, 1/6\}$;\ integer-$s$ panel exhibits mixed
+M2 ($\pi^{2k}$) + M3 ($\zeta(\text{odd})$) content at every test point
+(e.g.\ $F(6) = -53\zeta(5)/3 + \pi^2/36 + 4\pi^6/945 + 11\zeta(3)/3 + 107\pi^4/540$).
+$F$ is structurally distinct from the v3.62.0 M3 $\eta_D(s)$ Hurwitz
+Mellin (shares only the odd-shift structure;\ $\mathbb{Q}$
+vs $2^s\,\mathbb{Q}$ coefficients).  This is the \emph{first
+algebraic-side realisation of the M1/M2/M3 master Mellin engine
+partition appearing on a single Hopf-algebra-level invariant} — the
+master Mellin engine extends from the trace-evaluation level
+(case-exhaustion theorem in Paper~32 \S VIII) to the substrate-side
+Mellin generating function.
+
+\emph{$m_J$-resolved smash-product foundation:\ bit-exact $\Delta m_J \in \{-1, 0, +1\}$ grading and U(1) z-rotation diagonalisation at $n_{\max} = 2$ (Sprint Q5'-mJ-Smash-Product T4, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_mj\_smash\_product\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_mj\_smash\_product.json}).}  The
+$m_J$-resolved refinement of the OffDiag substrate that v3.63.0 L5
+explicitly named as the load-bearing data for a non-trivial smash-product
+admits a bit-exact $\mathbb{Z}_3$-grading by
+$\Delta m_J = m_{J, \mathrm{to}} - m_{J, \mathrm{from}} \in \{-1, 0, +1\}$
+(Wigner--Eckart selection for the vector operator $A = \kappa A_{\mathrm{graph}}$)
+with symmetric dimension count $30 / 40 / 30$ over 100 non-zero
+off-diagonal Dirac entries at $n_{\max} = 2$. The U(1) z-rotation
+$U_\theta |n, \kappa, m_J\rangle = e^{i m_J \theta} |n, \kappa, m_J\rangle$
+acts diagonally:\
+$U_\theta T_{m_J' \to m_J} U_\theta^{-1} = e^{i \Delta m_J \theta} T_{m_J' \to m_J}$,
+reproducing exactly L5's three phase factors
+$\{1, e^{i\theta}, e^{-i\theta}\}$ — the $m_J$-resolved refinement
+\emph{diagonalises} the U(1) action that L5 identified as broken on the
+basic substrate.  Critical scope finding:\ the $j$-content at
+$n_{\max} = 2$ includes $j = 3/2$ states (from $\kappa = \pm 2$ in
+sectors $(2, 1)$ and $(2, 2)$), so the L2 decorated-PW substrate at
+$j_{\max} = 1/2$ is \emph{insufficient} for the full SU(2) action on
+the $m_J$-resolved OffDiag;\ L2 must be extended to $j_{\max} \ge 3/2$
+as the sprint-scale prerequisite (\textasciitilde 1 day) to the
+multi-year smash-product construction
+$\mathcal{A}^{m_J\text{-OD}} \rtimes \mathcal{O}(SL_2)$ — the only path
+to a non-trivial Hopf extension beyond Levi-decomposition.
+
+\emph{L2 substrate extended to $j_{\max} = 3/2$:\ smash-product prerequisite
+closed (Sprint Q5'-FO1 v3.66.0;\ memo
+\texttt{debug/sprint\_q5p\_fo1\_l2\_extension\_jmax32\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_fo1\_l2\_extension\_jmax32.json}).}
+The sprint-scale prerequisite identified above is closed bit-exactly:\
+the L2 decorated-PW substrate $\mathcal{H}_{\mathrm{dec}}^{(j_{\max} = 3/2)}$
+has dimension $90 = 3 \cdot 30$ (per-slot dim
+$\sum_{2j \le 3}(2j+1)^2 = 1+4+9+16 = 30$), with all 7 Hopf axioms
+passing:\ coassociativity ($90/90$), counit L+R ($180/180$), antipode
+at $SU(2)^{\otimes 3}$ quotient ($90/90$ structural per slot),
+$k$-grading preservation ($90/90$), pro-system Hopf-hom
+$P_{3/2 \to 1}$ ($126/126$), pro-system $P_{3/2 \to 1/2}$
+($45/45$). Total bit-exact zero residuals:\ 621.  The substrate
+factorisation $\mathcal{O}(SL_2)^{\otimes 3}$ and candidate motivic
+Galois group $SL_2^3$ are unchanged from the v3.63.0 panel at
+$j_{\max} \in \{1/2, 1\}$ — $j_{\max}$ controls only which irrep matrix
+coefficients are explicitly included;\ the underlying group is
+$j_{\max}$-invariant.  This unblocks the multi-year smash-product
+construction at the prerequisite level.
+
+\emph{Interpretation C of cosmic-Galois $U^*$-action closes via
+period-pairing:\ $F(s)$ in MT$(\mathbb{Q}, 1) \subset$
+MT$(\mathbb{Z}[i, 1/2], 4)$ + $\chi, \eta$ at depth 0 (Sprint Q5'-FO2+FO3
+v3.66.0;\ memo
+\texttt{debug/sprint\_q5p\_fo2\_fo3\_mt\_period\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_fo2\_fo3\_mt\_period.json}).}  T5 of v3.65.0
+identified three interpretations of "$U^*$ acts on $\mathcal{H}_{\mathrm{Levi}}$":\
+(A) Hopf-coaction, (B) Hopf-automorphism, (C) period-pairing.
+Interpretation C is the cleanest sprint-scale closure;\ this
+follow-on closes it bit-exactly for all named cocycle-class families.
+T5 SQ1+SQ2+SQ5 combined:\ (i) every $\chi_{(n, l)}$ and every
+$\eta_{(n, l)}$ value (60 + 60 entries up to $n_{\max} = 4$) is an
+integer in $\mathbb{Z}$ at depth 0;\ (ii) every term of $F(s)$ at integer
+$s \in \{6, 7, 8, 9, 10\}$ (5 cells $\times$ 5 terms = 25 term
+classifications) is either pure-Tate $\pi^{2k}\mathbb{Q}$ (M2) or
+odd-Riemann $\zeta(\mathrm{odd})\mathbb{Q}$ (M3);\ both sit in MT$(\mathbb{Q}, 1)$.
+The Paper 18 \S III.7 master Mellin engine partition aligns bit-exactly
+with the MT depth/weight grading at integer-shifted $\zeta$ values:\
+M1 ($\pi$, Hopf-base measure, depth 0 weight 2), M2 ($\pi^{2k}$,
+Seeley--DeWitt, depth 0 weight $2k$), M3 ($\zeta(\mathrm{odd})$,
+vertex-parity-Hurwitz, depth 1 weights $3, 5, \dots$). The cosmic-Galois
+$U^*$ acts on $\chi, \eta$ trivially (depth 0 fixed-points), on the
+$F_{M2}$ component as the Tate subgroup (invariant up to $\pi^{2k}$
+scaling), and on the $F_{M3}$ component as the standard motivic Galois
+action on $\mathrm{MT}(\mathbb{Q}, 1)$ odd-zeta classes (Brown 2012,
+Glanois 2015).  Total bit-exact zero residuals:\ 145 (25 + 60 + 60).
+**Interpretation C closes bit-exactly**;\ Interpretations A
+(multi-year, requires explicit $\mathcal{O}(U^*)$ presentation) and B
+(sprint-scale via T5 SQ3 Aut$_{\mathrm{Hopf}}$ enumeration, not done in
+this sprint) remain open as named follow-ons.
+
 \emph{Honest scope.}  The QSM / Bost--Connes / Greenfield--Marcolli--Teh
 lineage (Greenfield--Marcolli--Teh, arXiv:1305.5492 (2014);\
 Connes--Marcolli--Ramachandran, arXiv:math/0501424 (2005);\

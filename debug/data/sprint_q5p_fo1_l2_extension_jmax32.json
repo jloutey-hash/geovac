@@ -1,0 +1,42 @@
+{
+  "sprint": "Q5p_FO1_L2_Extension_jmax32",
+  "date": "2026-06-06 (v3.66.0 follow-on to v3.65.0 T4)",
+  "purpose": "Extend v3.63.0 L2 decorated-PW substrate to j_max=3/2 (sprint-scale prerequisite from T4 of v3.65.0) for multi-year smash-product construction.",
+  "j_max_2": 3,
+  "j_max_str": "3/2",
+  "n_k": 3,
+  "dim_H_dec": 90,
+  "primitive_check": true,
+  "non_primitive_count": 89,
+  "expected_non_primitive": 89,
+  "coassoc_pass": 90,
+  "coassoc_total": 90,
+  "coassoc_fail": [],
+  "eps_left_pass": 90,
+  "eps_left_total": 90,
+  "eps_right_pass": 90,
+  "eps_right_total": 90,
+  "antipode_pass": 90,
+  "antipode_total": 90,
+  "antipode_fail": [],
+  "k_grading_pass": 90,
+  "k_grading_total": 90,
+  "prosystem_jmax_3half_to_1": {
+    "delta_compat": 42,
+    "eps_compat": 42,
+    "S_compat": 42,
+    "total": 42,
+    "all_pass": true
+  },
+  "prosystem_jmax_3half_to_half": {
+    "delta_compat": 15,
+    "eps_compat": 15,
+    "S_compat": 15,
+    "total": 15,
+    "all_pass": true
+  },
+  "total_bit_exact_zero_residuals": 621,
+  "all_checks_pass": true,
+  "wall_seconds": 0.09193849563598633,
+  "sl2_cubed_structure_preserved": true
+}

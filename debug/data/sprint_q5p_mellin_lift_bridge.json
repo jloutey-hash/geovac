@@ -1,0 +1,132 @@
+{
+  "sprint": "Q5p-Mellin-Lift-Bridge (T1)",
+  "date": "2026-06-06 (continuation of v3.63.0 L3 + T2)",
+  "purpose": "Continuum Mellin lift of the discrete bridge identity drift = -kappa^4 to the spectral zeta side via T2's closed-form T_path_abs(n_max). Decompose by shift parity into M2 (Seeley-DeWitt at even k) and M3 (vertex-parity Hurwitz at odd k) components.",
+  "t_path_abs_closed_form": "n**4/6 + 11*n**3/3 + 107*n**2/6 - 53*n/3 + 4",
+  "F_s_closed_form": "4*zeta(s) + zeta(s - 4)/6 + 11*zeta(s - 3)/3 + 107*zeta(s - 2)/6 - 53*zeta(s - 1)/3",
+  "F_M2_component": "4*zeta(s) + zeta(s - 4)/6 + 107*zeta(s - 2)/6",
+  "F_M3_component": "11*zeta(s - 3)/3 - 53*zeta(s - 1)/3",
+  "decomposition_bit_exact": true,
+  "eta_D_v362_form_lift": "(2**(s - 2) - 2)*zeta(s - 3) - (2**(s - 2) - 1/2)*zeta(s - 1)",
+  "eta_D_v362_form_hurwitz": "2*zeta(s - 3, 3/2) - zeta(s - 1, 3/2)/2",
+  "eta_D_hurwitz_to_riemann_panel": {
+    "5": {
+      "lift_form": "-pi**4/12 + pi**2",
+      "hurwitz_form": "-zeta(4, 3/2)/2 + 2*zeta(2, 3/2)",
+      "difference_symbolic": "-pi**4/12 - 2*zeta(2, 3/2) + zeta(4, 3/2)/2 + pi**2",
+      "difference_numeric": "0.e-159",
+      "bit_exact_match": true
+    },
+    "6": {
+      "lift_form": "-31*zeta(5)/2 + 14*zeta(3)",
+      "hurwitz_form": "-zeta(5, 3/2)/2 + 2*zeta(3, 3/2)",
+      "difference_symbolic": "-31*zeta(5)/2 - 2*zeta(3, 3/2) + zeta(5, 3/2)/2 + 14*zeta(3)",
+      "difference_numeric": "0.e-159",
+      "bit_exact_match": true
+    },
+    "7": {
+      "lift_form": "pi**4*(10 - pi**2)/30",
+      "hurwitz_form": "-zeta(6, 3/2)/2 + 2*zeta(4, 3/2)",
+      "difference_symbolic": "-pi**6/30 - 2*zeta(4, 3/2) + zeta(6, 3/2)/2 + pi**4/3",
+      "difference_numeric": "-0.e-159",
+      "bit_exact_match": true
+    },
+    "8": {
+      "lift_form": "-127*zeta(7)/2 + 62*zeta(5)",
+      "hurwitz_form": "-zeta(7, 3/2)/2 + 2*zeta(5, 3/2)",
+      "difference_symbolic": "-127*zeta(7)/2 - 2*zeta(5, 3/2) + zeta(7, 3/2)/2 + 62*zeta(5)",
+      "difference_numeric": "0.e-159",
+      "bit_exact_match": true
+    },
+    "9": {
+      "lift_form": "pi**6*(168 - 17*pi**2)/1260",
+      "hurwitz_form": "-zeta(8, 3/2)/2 + 2*zeta(6, 3/2)",
+      "difference_symbolic": "-17*pi**8/1260 - 2*zeta(6, 3/2) + zeta(8, 3/2)/2 + 2*pi**6/15",
+      "difference_numeric": "0.e-158",
+      "bit_exact_match": true
+    },
+    "10": {
+      "lift_form": "-511*zeta(9)/2 + 254*zeta(7)",
+      "hurwitz_form": "-zeta(9, 3/2)/2 + 2*zeta(7, 3/2)",
+      "difference_symbolic": "-511*zeta(9)/2 - 2*zeta(7, 3/2) + zeta(9, 3/2)/2 + 254*zeta(7)",
+      "difference_numeric": "0.e-159",
+      "bit_exact_match": true
+    }
+  },
+  "F_vs_eta_D_structural_distinction": "F has all 5 zeta shifts at k in {0,1,2,3,4}; eta_D only has 2 shifts at odd k in {1, 3}; F = F_M2 + F_M3 splits by shift parity; M3 component of F shares the SAME shifts as eta_D but with rational rather than 2^s coefficients.",
+  "pole_structure": [
+    {
+      "k": 0,
+      "pole_at_s": 1,
+      "residue": "4"
+    },
+    {
+      "k": 1,
+      "pole_at_s": 2,
+      "residue": "-53/3"
+    },
+    {
+      "k": 2,
+      "pole_at_s": 3,
+      "residue": "107/6"
+    },
+    {
+      "k": 3,
+      "pole_at_s": 4,
+      "residue": "11/3"
+    },
+    {
+      "k": 4,
+      "pole_at_s": 5,
+      "residue": "1/6"
+    }
+  ],
+  "F_evaluation_panel": {
+    "6": {
+      "s": 6,
+      "is_pole": false,
+      "F_value_symbolic": "-53*zeta(5)/3 + pi**2/36 + 4*pi**6/945 + 11*zeta(3)/3 + 107*pi**4/540",
+      "F_value_numeric": "9.73344389764677572825045650006",
+      "F_M2_symbolic": "pi**2*(105 + 16*pi**4 + 749*pi**2)/3780",
+      "F_M3_symbolic": "-53*zeta(5)/3 + 11*zeta(3)/3"
+    },
+    "7": {
+      "s": 7,
+      "is_pole": false,
+      "F_value_symbolic": "-53*pi**6/2835 + zeta(3)/6 + 11*pi**4/270 + 4*zeta(7) + 107*zeta(5)/6",
+      "F_value_numeric": "8.72107598865995927510402786248",
+      "F_M2_symbolic": "zeta(3)/6 + 4*zeta(7) + 107*zeta(5)/6",
+      "F_M3_symbolic": "pi**4*(231 - 106*pi**2)/5670"
+    },
+    "8": {
+      "s": 8,
+      "is_pole": false,
+      "F_value_symbolic": "-53*zeta(7)/3 + pi**4/540 + 11*zeta(5)/3 + 2*pi**8/4725 + 107*pi**6/5670",
+      "F_value_numeric": "8.32721243757802983672156138773",
+      "F_M2_symbolic": "pi**4*(105 + 24*pi**4 + 1070*pi**2)/56700",
+      "F_M3_symbolic": "-53*zeta(7)/3 + 11*zeta(5)/3"
+    },
+    "9": {
+      "s": 9,
+      "is_pole": false,
+      "F_value_symbolic": "-53*pi**8/28350 + zeta(5)/6 + 11*pi**6/2835 + 4*zeta(9) + 107*zeta(7)/6",
+      "F_value_numeric": "8.15464157825181110729948815924",
+      "F_M2_symbolic": "zeta(5)/6 + 4*zeta(9) + 107*zeta(7)/6",
+      "F_M3_symbolic": "pi**6*(110 - 53*pi**2)/28350"
+    },
+    "10": {
+      "s": 10,
+      "is_pole": false,
+      "F_value_symbolic": "-53*zeta(9)/3 + pi**6/5670 + 11*zeta(7)/3 + 4*pi**10/93555 + 107*pi**8/56700",
+      "F_value_numeric": "8.07471407351161916058474900365",
+      "F_M2_symbolic": "pi**6*(330 + 80*pi**4 + 3531*pi**2)/1871100",
+      "F_M3_symbolic": "-53*zeta(9)/3 + 11*zeta(7)/3"
+    }
+  },
+  "bridge_identity_T_path_at_n3": {
+    "formula": "(n**2 + 9*n - 4)*(n**2 + 13*n - 6)/6",
+    "value_at_n_max_3": 224,
+    "bit_exact_match_T2_panel": true
+  },
+  "wall_seconds": 1.0250842571258545
+}

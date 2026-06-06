@@ -1,0 +1,517 @@
+{
+  "sprint": "Q5'-L1-vs-L2-Diagnostic",
+  "date": "2026-06-06 (close-of-day follow-on to Sprint Q5'-Levi-Arc v3.63.0)",
+  "purpose": "Test whether L2's decorated-PW substrate (Sprint Q5'-Decorated-PW) subsumes L1's Levi-decomposition substrate (Sprint Q5'-Levi-Synthesis) as a Hopf algebra at finite cutoff.",
+  "discriminating_invariant": "dim Prim(H) = dim Lie(Spec H) (Hopf-isomorphism invariant)",
+  "h_gv_prim_panel": {
+    "1": {
+      "n_max": 1,
+      "N_n_max": 2,
+      "n_generators": 6,
+      "dim_prim": 6,
+      "primitive_check": {
+        "n_max": 1,
+        "n_generators": 6,
+        "n_primitive_residual_zero": 6,
+        "all_primitive": true
+      }
+    },
+    "2": {
+      "n_max": 2,
+      "N_n_max": 5,
+      "n_generators": 15,
+      "dim_prim": 15,
+      "primitive_check": {
+        "n_max": 2,
+        "n_generators": 15,
+        "n_primitive_residual_zero": 15,
+        "all_primitive": true
+      }
+    },
+    "3": {
+      "n_max": 3,
+      "N_n_max": 9,
+      "n_generators": 27,
+      "dim_prim": 27,
+      "primitive_check": {
+        "n_max": 3,
+        "n_generators": 27,
+        "n_primitive_residual_zero": 27,
+        "all_primitive": true
+      }
+    },
+    "4": {
+      "n_max": 4,
+      "N_n_max": 14,
+      "n_generators": 42,
+      "dim_prim": 42,
+      "primitive_check": {
+        "n_max": 4,
+        "n_generators": 42,
+        "n_primitive_residual_zero": 42,
+        "all_primitive": true
+      }
+    },
+    "5": {
+      "n_max": 5,
+      "N_n_max": 20,
+      "n_generators": 60,
+      "dim_prim": 60,
+      "primitive_check": {
+        "n_max": 5,
+        "n_generators": 60,
+        "n_primitive_residual_zero": 60,
+        "all_primitive": true
+      }
+    },
+    "6": {
+      "n_max": 6,
+      "N_n_max": 27,
+      "n_generators": 81,
+      "dim_prim": 81,
+      "primitive_check": {
+        "n_max": 6,
+        "n_generators": 81,
+        "n_primitive_residual_zero": 81,
+        "all_primitive": true
+      }
+    }
+  },
+  "h_dec_prim_panel": {
+    "1": {
+      "j_max_2": 1,
+      "j_max": "1/2",
+      "substrate_dim": 15,
+      "dim_prim": 9,
+      "primitive_growth_with_j_max": false
+    },
+    "2": {
+      "j_max_2": 2,
+      "j_max": "2/2",
+      "substrate_dim": 42,
+      "dim_prim": 9,
+      "primitive_growth_with_j_max": false
+    },
+    "3": {
+      "j_max_2": 3,
+      "j_max": "3/2",
+      "substrate_dim": 90,
+      "dim_prim": 9,
+      "primitive_growth_with_j_max": false
+    },
+    "4": {
+      "j_max_2": 4,
+      "j_max": "4/2",
+      "substrate_dim": 165,
+      "dim_prim": 9,
+      "primitive_growth_with_j_max": false
+    },
+    "5": {
+      "j_max_2": 5,
+      "j_max": "5/2",
+      "substrate_dim": 273,
+      "dim_prim": 9,
+      "primitive_growth_with_j_max": false
+    }
+  },
+  "m_mod_m2_at_j_half": {
+    "per_slot_m_dim": 4,
+    "per_slot_rel_rank": 1,
+    "per_slot_m_mod_m2_dim": 3,
+    "n_k": 3,
+    "total_m_mod_m2_dim": 9,
+    "bit_exact_det_relation_match": true,
+    "det_linear_part": "u + v",
+    "expected_linear": "u + v"
+  },
+  "m_mod_m2_at_j_one": {
+    "j_one_substrate_dim_per_slot": 9,
+    "j_one_new_m_mod_m2_per_slot": 0,
+    "per_slot_m_mod_m2_dim": 3,
+    "total_m_mod_m2_dim": 9,
+    "n_k": 3
+  },
+  "h_dec_j_half_non_primitivity": {
+    "n_k": 3,
+    "per_slot_results": {
+      "residual_a": "aL*aR - aL - aR + bL*cR",
+      "residual_b": "aL*bR + bL*dR - bL - bR",
+      "residual_c": "aR*cL - cL + cR*dL - cR",
+      "residual_d": "bR*cL + dL*dR - dL - dR",
+      "all_residuals_nonzero": true
+    },
+    "per_slot_failing_count": 4,
+    "total_failing_count": 12,
+    "all_j_half_non_primitive": true
+  },
+  "substrate_dim_coincidence": {
+    "h_gv_substrate_dim_per_slot": {
+      "1": 2,
+      "2": 5,
+      "3": 9,
+      "4": 14,
+      "5": 20,
+      "6": 27
+    },
+    "h_dec_substrate_dim_per_slot": {
+      "1": 5,
+      "2": 14,
+      "3": 30,
+      "4": 55,
+      "5": 91
+    },
+    "matches": [
+      {
+        "n_max": 1,
+        "j_max_2": null,
+        "N_n_max": 2,
+        "nearest_dec_dims": {
+          "1": 5,
+          "2": 14,
+          "3": 30,
+          "4": 55,
+          "5": 91
+        }
+      },
+      {
+        "n_max": 2,
+        "j_max_2": 1,
+        "N_n_max": 5
+      },
+      {
+        "n_max": 3,
+        "j_max_2": null,
+        "N_n_max": 9,
+        "nearest_dec_dims": {
+          "1": 5,
+          "2": 14,
+          "3": 30,
+          "4": 55,
+          "5": 91
+        }
+      },
+      {
+        "n_max": 4,
+        "j_max_2": 2,
+        "N_n_max": 14
+      },
+      {
+        "n_max": 5,
+        "j_max_2": null,
+        "N_n_max": 20,
+        "nearest_dec_dims": {
+          "1": 5,
+          "2": 14,
+          "3": 30,
+          "4": 55,
+          "5": 91
+        }
+      },
+      {
+        "n_max": 6,
+        "j_max_2": null,
+        "N_n_max": 27,
+        "nearest_dec_dims": {
+          "1": 5,
+          "2": 14,
+          "3": 30,
+          "4": 55,
+          "5": 91
+        }
+      }
+    ],
+    "all_n_max_match": false
+  },
+  "chi_eta_cross_check": {
+    "1": {
+      "sectors": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "chi": [
+        2,
+        -2
+      ],
+      "eta": [
+        3,
+        3
+      ],
+      "chi_match_prosystem_memo": true,
+      "eta_match_prosystem_memo": true
+    },
+    "2": {
+      "sectors": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "chi": [
+        2,
+        -2,
+        2,
+        2,
+        -4
+      ],
+      "eta": [
+        3,
+        3,
+        5,
+        15,
+        10
+      ],
+      "chi_match_prosystem_memo": true,
+      "eta_match_prosystem_memo": true
+    },
+    "3": {
+      "sectors": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "chi": [
+        2,
+        -2,
+        2,
+        2,
+        -4,
+        2,
+        2,
+        2,
+        -6
+      ],
+      "eta": [
+        3,
+        3,
+        5,
+        15,
+        10,
+        7,
+        21,
+        35,
+        21
+      ],
+      "chi_match_prosystem_memo": true,
+      "eta_match_prosystem_memo": true
+    },
+    "4": {
+      "sectors": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "chi": [
+        2,
+        -2,
+        2,
+        2,
+        -4,
+        2,
+        2,
+        2,
+        -6,
+        2,
+        2,
+        2,
+        2,
+        -8
+      ],
+      "eta": [
+        3,
+        3,
+        5,
+        15,
+        10,
+        7,
+        21,
+        35,
+        21,
+        9,
+        27,
+        45,
+        63,
+        36
+      ],
+      "chi_match_prosystem_memo": true,
+      "eta_match_prosystem_memo": true
+    }
+  },
+  "q_iso_falsifier": {
+    "1": {
+      "n_max": 1,
+      "h_gv_prim_dim": 6,
+      "h_dec_prim_dim_natural": 9,
+      "defect": -3,
+      "injection_possible_by_dim": true,
+      "injection_possible_by_cocommutativity": false,
+      "l2_subsumes_l1": false,
+      "l1_forced": false
+    },
+    "2": {
+      "n_max": 2,
+      "h_gv_prim_dim": 15,
+      "h_dec_prim_dim_natural": 9,
+      "defect": 6,
+      "injection_possible_by_dim": false,
+      "injection_possible_by_cocommutativity": false,
+      "l2_subsumes_l1": false,
+      "l1_forced": true
+    },
+    "3": {
+      "n_max": 3,
+      "h_gv_prim_dim": 27,
+      "h_dec_prim_dim_natural": 9,
+      "defect": 18,
+      "injection_possible_by_dim": false,
+      "injection_possible_by_cocommutativity": false,
+      "l2_subsumes_l1": false,
+      "l1_forced": true
+    },
+    "4": {
+      "n_max": 4,
+      "h_gv_prim_dim": 42,
+      "h_dec_prim_dim_natural": 9,
+      "defect": 33,
+      "injection_possible_by_dim": false,
+      "injection_possible_by_cocommutativity": false,
+      "l2_subsumes_l1": false,
+      "l1_forced": true
+    },
+    "5": {
+      "n_max": 5,
+      "h_gv_prim_dim": 60,
+      "h_dec_prim_dim_natural": 9,
+      "defect": 51,
+      "injection_possible_by_dim": false,
+      "injection_possible_by_cocommutativity": false,
+      "l2_subsumes_l1": false,
+      "l1_forced": true
+    },
+    "6": {
+      "n_max": 6,
+      "h_gv_prim_dim": 81,
+      "h_dec_prim_dim_natural": 9,
+      "defect": 72,
+      "injection_possible_by_dim": false,
+      "injection_possible_by_cocommutativity": false,
+      "l2_subsumes_l1": false,
+      "l1_forced": true
+    }
+  },
+  "verdict": {
+    "l1_forced": true,
+    "l2_subsumes_l1": false,
+    "reason": "dim Prim(H_GV)(n_max) = 3 * N(n_max) grows quadratically with n_max while dim Prim(H_dec)(j_max) = 9 is constant. The two Hopf algebras have different Lie-algebra dimensions (and different cocommutativity status), hence cannot be Hopf-isomorphic at any n_max >= 2.",
+    "sprint_scale_decision_resolved": true,
+    "multi_year_target": "Tannakian closure of L1's pro-unipotent factor G_a^{3 N(n_max)} in the Connes-Marcolli machinery"
+  },
+  "wall_seconds": 0.02993299998342991
+}

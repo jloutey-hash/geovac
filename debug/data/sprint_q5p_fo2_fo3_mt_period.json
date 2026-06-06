@@ -1,0 +1,413 @@
+{
+  "sprint": "Q5p_FO2_FO3_MT_period_containment_and_C_closure",
+  "date": "2026-06-06 (v3.66.0 follow-on to v3.65.0 T1+T5)",
+  "purpose": "T5 SQ2: verify F(s) integer-s panel sits in MT period ring at level <= 4 over Z[i, 1/2]. T5 SQ1+SQ5: close Interpretation C (period-pairing) of U*-action for chi, eta, F(s) cocycle classes.",
+  "F_integer_s_panel": {
+    "6": {
+      "s": 6,
+      "F_value_symbolic": "-53*zeta(5)/3 + pi**2/36 + 4*pi**6/945 + 11*zeta(3)/3 + 107*pi**4/540",
+      "n_terms": 5,
+      "terms": [
+        {
+          "term": "-53*zeta(5)/3",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "pi**2/36",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "4*pi**6/945",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "11*zeta(3)/3",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "107*pi**4/540",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        }
+      ],
+      "max_MT_level": 1,
+      "max_depth": 1,
+      "in_MT_Z_i_half_4": true,
+      "in_MT_Q_1": true,
+      "in_pure_Tate": false
+    },
+    "7": {
+      "s": 7,
+      "F_value_symbolic": "-53*pi**6/2835 + zeta(3)/6 + 11*pi**4/270 + 4*zeta(7) + 107*zeta(5)/6",
+      "n_terms": 5,
+      "terms": [
+        {
+          "term": "4*zeta(7)",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "-53*pi**6/2835",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "zeta(3)/6",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "11*pi**4/270",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "107*zeta(5)/6",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        }
+      ],
+      "max_MT_level": 1,
+      "max_depth": 1,
+      "in_MT_Z_i_half_4": true,
+      "in_MT_Q_1": true,
+      "in_pure_Tate": false
+    },
+    "8": {
+      "s": 8,
+      "F_value_symbolic": "-53*zeta(7)/3 + pi**4/540 + 11*zeta(5)/3 + 2*pi**8/4725 + 107*pi**6/5670",
+      "n_terms": 5,
+      "terms": [
+        {
+          "term": "-53*zeta(7)/3",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "pi**4/540",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "2*pi**8/4725",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "11*zeta(5)/3",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "107*pi**6/5670",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        }
+      ],
+      "max_MT_level": 1,
+      "max_depth": 1,
+      "in_MT_Z_i_half_4": true,
+      "in_MT_Q_1": true,
+      "in_pure_Tate": false
+    },
+    "9": {
+      "s": 9,
+      "F_value_symbolic": "-53*pi**8/28350 + zeta(5)/6 + 11*pi**6/2835 + 4*zeta(9) + 107*zeta(7)/6",
+      "n_terms": 5,
+      "terms": [
+        {
+          "term": "4*zeta(9)",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "-53*pi**8/28350",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "zeta(5)/6",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "11*pi**6/2835",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "107*zeta(7)/6",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        }
+      ],
+      "max_MT_level": 1,
+      "max_depth": 1,
+      "in_MT_Z_i_half_4": true,
+      "in_MT_Q_1": true,
+      "in_pure_Tate": false
+    },
+    "10": {
+      "s": 10,
+      "F_value_symbolic": "-53*zeta(9)/3 + pi**6/5670 + 11*zeta(7)/3 + 4*pi**10/93555 + 107*pi**8/56700",
+      "n_terms": 5,
+      "terms": [
+        {
+          "term": "-53*zeta(9)/3",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "pi**6/5670",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "4*pi**10/93555",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        },
+        {
+          "term": "11*zeta(7)/3",
+          "classification": "odd-Riemann-zeta (M3)",
+          "MT_level": 1,
+          "depth": 1,
+          "transcendental_type": "zeta(odd)",
+          "paper18_tier": "M3 vertex-parity-Hurwitz (zeta(odd))"
+        },
+        {
+          "term": "107*pi**8/56700",
+          "classification": "pure-Tate (M2)",
+          "MT_level": 0,
+          "depth": 0,
+          "transcendental_type": "pi^{2k}",
+          "paper18_tier": "M2 Seeley-DeWitt (pi^{2k})"
+        }
+      ],
+      "max_MT_level": 1,
+      "max_depth": 1,
+      "in_MT_Z_i_half_4": true,
+      "in_MT_Q_1": true,
+      "in_pure_Tate": false
+    }
+  },
+  "F_all_in_MT_Q_1": true,
+  "F_all_in_MT_Z_i_half_4": true,
+  "chi_eta_panel": {
+    "1": {
+      "n_max": 1,
+      "n_sectors": 2,
+      "chi_values": [
+        2,
+        -2
+      ],
+      "eta_values": [
+        3,
+        3
+      ],
+      "chi_all_integers": true,
+      "eta_all_integers": true,
+      "chi_MT_level": 0,
+      "eta_MT_level": 0,
+      "chi_depth": 0,
+      "eta_depth": 0,
+      "in_pure_rational_Q": true
+    },
+    "2": {
+      "n_max": 2,
+      "n_sectors": 5,
+      "chi_values": [
+        2,
+        -2,
+        2,
+        2,
+        -4
+      ],
+      "eta_values": [
+        3,
+        3,
+        5,
+        15,
+        10
+      ],
+      "chi_all_integers": true,
+      "eta_all_integers": true,
+      "chi_MT_level": 0,
+      "eta_MT_level": 0,
+      "chi_depth": 0,
+      "eta_depth": 0,
+      "in_pure_rational_Q": true
+    },
+    "3": {
+      "n_max": 3,
+      "n_sectors": 9,
+      "chi_values": [
+        2,
+        -2,
+        2,
+        2,
+        -4,
+        2,
+        2,
+        2,
+        -6
+      ],
+      "eta_values": [
+        3,
+        3,
+        5,
+        15,
+        10,
+        7,
+        21,
+        35,
+        21
+      ],
+      "chi_all_integers": true,
+      "eta_all_integers": true,
+      "chi_MT_level": 0,
+      "eta_MT_level": 0,
+      "chi_depth": 0,
+      "eta_depth": 0,
+      "in_pure_rational_Q": true
+    },
+    "4": {
+      "n_max": 4,
+      "n_sectors": 14,
+      "chi_values": [
+        2,
+        -2,
+        2,
+        2,
+        -4,
+        2,
+        2,
+        2,
+        -6,
+        2,
+        2,
+        2,
+        2,
+        -8
+      ],
+      "eta_values": [
+        3,
+        3,
+        5,
+        15,
+        10,
+        7,
+        21,
+        35,
+        21,
+        9,
+        27,
+        45,
+        63,
+        36
+      ],
+      "chi_all_integers": true,
+      "eta_all_integers": true,
+      "chi_MT_level": 0,
+      "eta_MT_level": 0,
+      "chi_depth": 0,
+      "eta_depth": 0,
+      "in_pure_rational_Q": true
+    }
+  },
+  "chi_eta_all_integers": true,
+  "interpretation_C_closure": {
+    "interpretation": "C (period-pairing)",
+    "statement_of_closure": "U* acts on the image pi(H_Levi) subset C via motivic Galois conjugation. The relevant period maps are: (a) trace-evaluation of JLO HP^even cocycle classes -> chi_{(n,l)} in Z (depth 0); (b) trace-evaluation of CM-eta cocycle classes -> eta_{(n,l)} in Z (depth 0); (c) Mellin transform F(s) of the OffDiag substrate's chirality-weighted path count -> integer-s values in MT(Q, 1) (odd-zeta sub-ring) at every test point.",
+    "u_star_action_on_chi": "Trivial. chi_{(n,l)} in Z subset Q is depth 0. U* acts by preserving rationals identically.",
+    "u_star_action_on_eta": "Trivial. eta_{(n,l)} in Z subset Q is depth 0. U* acts identically.",
+    "u_star_action_on_F_integer_s": "Non-trivial in M3 sub-component. Pi^{2k} pieces (M2) are pure-Tate level 0, U*-invariant under the Tate subgroup. Zeta(odd) pieces (M3) are MT(Q, 1), U* acts via the standard motivic Galois action on MT(Q) with odd-zeta classes generating MT(Q, 1) at successive weights.",
+    "m1_m2_m3_partition_compatibility": "The Paper 18 \u00a7III.7 M1/M2/M3 master Mellin engine partition is exactly the MT depth/weight grading at integer-shifted \u03b6 values: M1 (pi, Hopf-base measure) is pure-Tate depth 0; M2 (pi^{2k}, Seeley-DeWitt) is pure-Tate weight-2k; M3 (zeta(odd), vertex-parity Hurwitz at half-integer shifts) is MT(Q, 1) odd-zeta sub-ring. Bit-exactly compatible.",
+    "interpretation_C_closed_for": [
+      "chi_{(n,l)} cocycle classes (v3.61.0 prosystem)",
+      "eta_{(n,l)} cocycle classes (v3.61.0 prosystem)",
+      "F(s) Mellin lift values at integer s (v3.65.0 T1)"
+    ],
+    "not_closed_for": [
+      "Interpretation A (Hopf-coaction): requires explicit O(U*) presentation, multi-year",
+      "Interpretation B (Hopf-automorphism): requires Aut_Hopf enumeration, sprint-scale via T5 SQ3",
+      "Full U* coaction on H_Levi at all weights (Tannakian closure, multi-year, L1 follow-on a)"
+    ],
+    "verdict": "POSITIVE \u2014 Interpretation C closes bit-exactly for all named cocycle classes and F(s) panel."
+  },
+  "all_verifications_pass": true,
+  "wall_seconds": 0.22099590301513672
+}
