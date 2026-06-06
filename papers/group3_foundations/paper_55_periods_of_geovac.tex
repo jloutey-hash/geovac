@@ -1771,6 +1771,44 @@ operating on \emph{two} cocycle classes (JLO HP$^{\mathrm{even}}$
 class hosting $M_1, M_2$;\ CM-residue $\eta$-class hosting $M_3$)
 rather than three slots of a single functor.
 
+\emph{Stage~1 second span:\ explicit CM-residue $\eta$-pairing
+bicomplex and CM $\eta$-class identification (Sprint
+Q5'-Stage1-CM-Bicomplex, 2026-06-05;\ memo
+\texttt{debug/sprint\_q5p\_cm\_bicomplex\_memo.md}).}
+The Connes--Moscovici $\eta$-pairing residue cocycle
+$\psi_n^{\eta}(a_0, \dots, a_n; t)
+= \int_{\Delta_n}\mathrm{Tr}(\gamma D\,a_0\,e^{-s_0 t D^2}\,
+[D, a_1]\cdots[D, a_n]\,e^{-s_n t D^2})\,ds$ on the truncated CH
+spectral triple at $n_{\max} = 2$ is constructed bit-exactly in
+\texttt{sympy.Rational};\ it replaces the JLO leftmost insertion
+$\gamma$ with $\gamma D$ and shares the bicomplex structure
+$(b + B)\psi = 0$ with JLO.  The load-bearing degree-1 cocycle
+condition $b\psi_0^{\eta} + B\psi_2^{\eta} = 0$ holds bit-exactly
+on the full panel of $36$ idempotent-pair inputs at three
+$t$-orders both flavors (216 bit-exact zero residuals), with
+\emph{no} truncation artifact of the JLO $\pm 1/196\,608$ type at
+the load-bearing degree.  The CM $\eta$-class on the Morita-trivial
+baseline is explicitly
+\[
+   [\psi_{\mathrm{CM}}^{\eta, \mathrm{even}}]^{\mathrm{HP}_\eta}
+   \;=\; (3, 3, 5, 15, 10) \in \Z^5,
+\]
+summing to $M_3(n_{\max} = 2) = 36$ (the Sub-Sprint 1 ground
+truth).  The sector-resolved structure is the chirality-symmetrized
+eigenvalue magnitude per sector $\eta_s = \dim_s \cdot (n_s + 1/2)$,
+in clean dual to the JLO HP$^{\mathrm{even}}$ chirality balance
+$\chi_s = \dim(\gamma_+ e_s \mathcal{H}) - \dim(\gamma_- e_s \mathcal{H})$:
+both classes decompose over the same $K_0$ generators
+$\{[e_s]\}_{s=0..4}$ but encode distinct cohomological content (JLO:
+zeroth heat-kernel supertrace coefficient = McKean--Singer index
+$\chi(S^3) = 0$;\ CM-$\eta$:\ leading $t^0$ $\eta$-density
+supertrace coefficient = $M_3$).  Cross-cutoff sanity at
+$n_{\max} = 3$:\ $M_3(3) = 120$ bit-exact, CM-$\eta$ degree-1
+cocycle bit-exact zero on all $9$ diagonal sectors.  The umbrella
+memo's structural sketch "M3 lives outside JLO and inside the CM
+residue framework" is hereby upgraded to a theorem-grade closure
+at the bicomplex-cocycle-class level.
+
 \emph{Honest scope.}  The QSM / Bost--Connes / Greenfield--Marcolli--Teh
 lineage (Greenfield--Marcolli--Teh, arXiv:1305.5492 (2014);\
 Connes--Marcolli--Ramachandran, arXiv:math/0501424 (2005);\

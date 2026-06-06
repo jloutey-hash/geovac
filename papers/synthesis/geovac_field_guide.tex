@@ -70,6 +70,61 @@ geometry forces from what measurement supplies.}
 \tableofcontents
 
 % =====================================================================
+\section{How This Started}
+\label{sec:origin}
+% =====================================================================
+
+A short note on the path that led to the framework, told in the first
+person.  The reader can skip it without missing technical content;\ the
+arc proper begins in \S\ref{sec:packing}.
+
+In high school I looked at the periodic table and wondered why it had
+that shape --- in particular, why the rows didn't grow uniformly but
+in a stepped pattern.  I sketched what I thought might be a more
+natural picture:\ a circular layout with the first row at the centre
+and successive rows fanning outward.  I had no mathematics to back it
+up;\ it was a visual hunch.
+
+In college I learned summation notation and the discipline of
+inductive proof, and I felt --- for the first time --- that I had
+permission to do real mathematics.  I went back to the periodic
+table.  The row lengths grew by a recurring $+4$ between successive
+pairs.  I built a nested summation that captured the pattern and
+arrived at $2n^2$.  I looked up the number.  It was the degeneracy of
+the Schr\"odinger principal quantum level.  I felt something between
+satisfaction and disappointment:\ the pattern was already known ---
+to Schr\"odinger, who had derived it by solving a differential
+equation on $\R^3$.  My combinatorial route to the same number was a
+curiosity, not a discovery.  I set the question down.
+
+Years later, listening to a guest on Sean Carroll's podcast, I heard
+the suggestion that perhaps, instead of quantising gravity, one
+should try to quantise spacetime --- a discrete substrate as
+foundation, not as a tool for approximating something continuous.
+The framing revived the old question.  This time I posed it in polar
+coordinates and treated Planck's constant as a unit volume to be
+packed.  I wrote down a small set of packing axioms.  The
+construction, executed honestly, produced circles whose node counts
+reproduced the periodic table.
+
+\begin{quote}
+\itshape
+This struck me as deeply important.
+\end{quote}
+
+I wrote a first paper that I would now describe as a book report:\ a
+narrative explanation of how the packing maps to the periodic table,
+without any of the spectral or geometric machinery that came later.
+That paper became Paper~0~\cite{loutey_paper0} in its mature form.  I
+then set out to see how the nodes might relate to quantum-number
+counting.  Everything in the rest of this field guide --- the
+Fock~1935 identification, the natural-geometry hierarchy, the
+spectral-triple rotation, the periods classification, the
+forced-versus-free seam --- is what happened next.
+
+What follows is the technical arc.
+
+% =====================================================================
 \section{The Packing Puzzle}
 \label{sec:packing}
 % =====================================================================

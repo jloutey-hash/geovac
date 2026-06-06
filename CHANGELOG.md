@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.59.0] - 2026-06-05
+
+### Summary
+
+**Q5'-Stage1-Followon — joint closure of Stage 1's two open follow-ons.**  Close-of-day continuation of v3.58.0's afternoon Q5'-Stage1-Arc.  Two parallel sub-sprints (Track 1: CM-residue bicomplex for M3; Track 2: continuum-limit Mellin analysis) dispatched as background agents while PI conversation proceeded; both returned POSITIVE.  Paper 32 §VIII edits applied sequentially after both returned to avoid race; Papers 55 and 18 edited in-track.  Joint structural finding: the cohomological-dual side of Stage 1 closes by TWO cocycle classes on the same $K_0$ sector decomposition (JLO $\mathrm{HP}^{\mathrm{even}}$ chirality balance + CM-$\eta$ chirality-symmetrized magnitude), and the analytical side closes via bit-exact $\sqrt{\pi}/2$ Mellin residue at $s = d/2$ derived two independent ways.  Three-sibling Hopf-base normalization ($\pi$ $\leftrightarrow$ $4/\pi$ $\leftrightarrow$ $\sqrt{\pi}/2$) across Papers 18, 38, this sprint is internally consistent via exact factors $\pi^2/4$ and $\pi^{3/2}/8$ (pure powers of $\pi$; no spectral-data input).  Umbrella memo:\ `debug/sprint_q5p_stage1_followon_2026_06_05_memo.md`.
+
+### Closed
+
+- **Track 1 (CM-residue bicomplex for M3) — POSITIVE.**  The CM-$\eta$ pairing residue $(b, B)$ bicomplex on the truncated CH triple at $n_{\max} = 2$ constructed bit-exactly in sympy.Rational.  The CM-$\eta$ cochain $\psi_n^{\eta}(a_0, \dots, a_n; t)$ replaces the JLO leftmost insertion $\gamma$ by $\gamma D$, sharing the $(b+B)\psi = 0$ structure with JLO via the same $b/B$ formulas.  Degree-1 cocycle bit-exactly zero on the full 216-cell panel (36 idempotent pairs $\times$ 3 $t$-orders $\times$ 2 flavours) with NO truncation artifact of the JLO $\pm 1/196608$ type.  Explicit CM-$\eta$ class on the Morita-trivial baseline $\mathbb{Q}^5 = \mathrm{HP}_0(\mathbb{C}^5)$:\ $(3, 3, 5, 15, 10) \in \mathbb{Z}^5$, summing to $36 = M_3(n_{\max}=2)$ (Sub-Sprint 1 ground truth).  Sector-resolved structure $\eta_s = \dim_s \cdot (n_s + 1/2)$ in clean dual to JLO chirality balance $\chi_s = \dim(\gamma_+ e_s \mathcal{H}) - \dim(\gamma_- e_s \mathcal{H})$.  Cross-check $n_{\max} = 3$:\ $M_3(3) = 120$ bit-exact, cocycle bit-exact zero on all 9 diagonal sectors.  Driver:\ `debug/compute_cm_residue_bicomplex.py`; data:\ `debug/data/sprint_q5p_cm_bicomplex.json`; memo:\ `debug/sprint_q5p_cm_bicomplex_memo.md`.
+
+- **Track 2 (continuum-limit Mellin analysis) — POSITIVE.**  Continuum-limit Tauberian step from Sub-Sprint 2b's "structurally sketched" finding closed at Paper 38 L2 grade.  The continuum spectral zeta $\zeta_{D^2}^{\mathrm{cont}}(s) = 2\,\zeta(2s-2, 3/2) - (1/2)\,\zeta(2s, 3/2)$ has a simple pole at $s = d/2 = 3/2$ with bit-exact meromorphic residue $1$ (two independent routes:\ Hurwitz pole at $u = 2s - 2 = 1$ + direct Laurent expansion via digamma).  Mellin residue $\Gamma(3/2) \cdot 1 = \sqrt{\pi}/2$ matches Gilkey 1995 / Vassilevich 2003 heat-kernel Weyl-law leading coefficient $2 \cdot \mathrm{Vol}(S^3)/(4\pi)^{3/2} = \sqrt{\pi}/2$ bit-exactly.  M2 panel at integer $s \in \{1, 2, 3, 4, 5\}$ reproduces the Q5'-CH-2 Seeley--DeWitt panel verbatim:\ $-\pi^2/4$, $\pi^2 - \pi^4/12$, $\pi^4/3 - \pi^6/30$, $2\pi^6/15 - 17\pi^8/1260$, $17\pi^8/315 - 31\pi^{10}/5670$ (5/5 bit-exact).  M3 $\eta$-pairing values $(6, 36, 120, 300)$ bit-exact at $n_{\max} \in \{1, 2, 3, 4\}$.  Tauberian rate uniformity in a neighborhood of $s = 3/2$ named as the only Stage-2-relevant gap, reachable from Karamata 1962 / Korevaar 2004 published precedent.  Driver:\ `debug/compute_continuum_mellin_residue.py`; data:\ `debug/data/sprint_q5p_continuum_mellin.json`; memo:\ `debug/sprint_q5p_continuum_mellin_memo.md`.
+
+### Added
+
+- **Paper 55 §subsec:open_m2_m3** (Track 1):\ +1 paragraph on the CM-residue bicomplex closure of Stage 1's CM-side open follow-on, the explicit CM-$\eta$ class, and the dual reading vs JLO $\mathrm{HP}^{\mathrm{even}}$.  Pages:\ 23 $\to$ 24, three-pass clean.
+- **Paper 18 §III.7** (Track 2):\ M1 paragraph sharpened in place with explicit $s = d/2$ pole interpretation, $\sqrt{\pi}/2$ closed-form Mellin residue, and the three-sibling Hopf-base normalization identification across Papers 18, 38, this sprint.  Pages:\ 26 (unchanged), three-pass clean.  Two new bibitems on Paper 18:\ Karamata 1962 + Korevaar 2004 (Tauberian-theory standard references).
+- **Paper 32 §VIII** (both tracks, sequential application):\ two new remarks — `rem:q5p_cm_residue_class` (Track 1) inserted after `rem:q5p_hp_even_class`; `rem:q5p_continuum_residue` (Track 2) inserted after `rem:q5p_mellin_extraction_points`.  Four new bibitems on Paper 32:\ gilkey1995, vassilevich2003 (heat-kernel asymptotic), karamata1962, korevaar2004 (Tauberian).  Pages:\ 66 (unchanged at page-count resolution), three-pass clean.  One sprint-introduced LaTeX warning (cross-paper `\ref` to a Paper 55 label) corrected to literal text per the existing §VIII convention.
+- **Two new drivers** in `debug/`:\ `compute_cm_residue_bicomplex.py`, `compute_continuum_mellin_residue.py`.
+- **Two new data dumps** in `debug/data/`:\ `sprint_q5p_cm_bicomplex.json`, `sprint_q5p_continuum_mellin.json`.
+- **Three new memos** in `debug/`:\ `sprint_q5p_cm_bicomplex_memo.md`, `sprint_q5p_continuum_mellin_memo.md`, `sprint_q5p_stage1_followon_2026_06_05_memo.md` (umbrella).
+
+### Changed
+
+- **CLAUDE.md §1 version cursor:** v3.58.0 $\to$ v3.59.0.
+- **CLAUDE.md §2:** new one-liner for Q5'-Stage1-Followon at the head of the Current Development Frontier index.
+
+### Notes
+
+- **No production code touched** (`geovac/` clean).  All activity in `debug/` scripts + three papers.  Per CLAUDE.md §9 / `/regression` skill, the diff-derived consumer-test selection is therefore empty; topological-integrity baseline (18 S$^3$ symbolic proofs) unaffected by paper edits or new debug scripts.
+- **No new equations needing tests** (§13.4a):\ Track 1's bicomplex cocycle condition is verified bit-exactly on the explicit 216-cell panel against Sub-Sprint 1 ground truth $M_3(n_{\max}=2) = 36$; Track 2's Mellin residue is two-independent-route bit-exact derivation against existing Q5'-CH-2 panel and standard Gilkey / Vassilevich heat-kernel coefficient.
+- **No hard-prohibition list touches** (§13.5 audit clean):\ natural-geometry hierarchy unchanged, no fitted parameters introduced, no negative results suppressed, Paper 2 combination-rule "conjectural" label unchanged.
+- **Curve-fit-audit clean** (per `feedback_audit_numerical_claims`):\ Track 1's CM-$\eta$ class is structurally derived ($\eta_s = \dim_s \cdot (n_s + 1/2)$), not fit; Track 2's $\sqrt{\pi}/2$ is two-independent-route derivation, not curve-fit; three-sibling normalization is exact-factor algebraic ($\pi^2/4$ and $\pi^{3/2}/8$), no PSLQ.
+- **Discrete-for-skeleton compliance** (per `feedback_discrete_for_skeleton`):\ both tracks bit-exact sympy.Rational throughout; transcendental content tagged per Paper 18 §III.7 master Mellin engine.
+- **Sprint cost:** $\sim 30$ minutes active wall after agent dispatch (sequential paper edits + three-pass compiles + umbrella memo); two sub-sprint agents ran $\sim 10$ minutes and $\sim 12$ minutes in background.
+- **Stage 1 status:** bit-exactly constructed on FIVE diagnostic axes (the original four from v3.58.0 + the dual cocycle-class structure made visible by this sprint).
+- **Stage 2 status:** multi-year, better-scoped — motivic Galois action coordinates THREE analytic extractions on TWO COCYCLE CLASSES (JLO $\mathrm{HP}^{\mathrm{even}}$ hosting M1+M2, CM-$\eta$ class hosting M3) on the SAME $K_0$ sector decomposition.
+- **Open follow-ons:**  (i) continuum-limit analysis for M3 (analog of Track 2's M1/M2 closure on the CM-$\eta$ side); (ii) pro-system functoriality across cutoffs (still no published precedent; now unblocked because Track 1's bicomplex and Track 2's continuum machinery are both in place); (iii) Stage 2 multi-year Tannakian construction.
+
 ## [3.58.0] - 2026-06-05
 
 ### Summary

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.58.0 (June 5, 2026)
+**Version:** v3.59.0 (June 5, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint Q5'-Stage1-Followon (2026-06-05, v3.59.0):** Stage 1's two open follow-ons closed in parallel — CM-η class (3,3,5,15,10) dual to JLO HP^even; M1 residue √π/2 at s=3/2 via two routes. See `debug/sprint_q5p_stage1_followon_2026_06_05_memo.md`.
 - **Sprint Q5'-Stage1-Arc (2026-06-05, v3.58.0):** Second span of cosmic-Galois U* bridge — JLO+CM mixed cochain on HP^* bit-exact at n_max=2; symbol extends polynomial-closed-form to n_max≤4; HP^even = (+2,−2,+2,+2,−4); four papers edited. See `debug/sprint_q5p_stage1_arc_2026_06_05_memo.md`.
 - **Sprint Q5'-CH-arc (2026-06-05, v3.57.0):** Three-stone first span of the cosmic-Galois $U^*$ bridge — CH-1 chirality-parity factorisation at finite $n_{\max}$, CH-2 bit-exact M2 at integer $s$ (5/5), CH-3 bit-exact M3 with parity stratification (3/3 at <10⁻⁸⁰); $\omega^{\mathrm{tri}}$ symbol-level target now explicit on M1/M2/M3; Paper 55 §subsec:open_m2_m3 +3 paragraphs, 20→22pp. See `debug/sprint_q5p_ch{1,2,3}_memo.md`.
 - **Sprint chemistry-test-rot reconciliation H+G+F.1+F.2 (2026-06-05, v3.56.0):** Closes v3.55.0 handoff §2.1/§2.2/§2.3 — G+H dissolved on diagnosis, F.1 V_NN(R) fix + F.2 PK pseudopotential restored; LiH ab initio R_eq 2.82%, balanced 6.93%; ~85 tests unblocked, 943/943 pass. See `debug/sprint_lih_binding_fix_memo.md`.

@@ -2002,6 +2002,39 @@ action acts at continuum, not at finite cutoff.  Source:
 \texttt{debug/sprint\_q5p\_2b\_phi0\_mellin\_memo.md}.
 \end{remark}
 
+\begin{remark}[Continuum residue identification of the master-Mellin
+$M_1$ Hopf-base coefficient (Sprint Q5'-Stage1-2b-continuum, 2026-06-05)]
+\label{rem:q5p_continuum_residue}
+The Mellin extraction-points reading of
+Remark~\ref{rem:q5p_mellin_extraction_points} is closed at theorem
+grade for the $M_1$ component on the truncated Camporesi--Higuchi
+spectral triple of dimension $d = 3$.  The continuum spectral zeta
+$\zeta_{D^2}^{\mathrm{cont}}(s)
+   = 2\,\zeta(2s - 2, 3/2) - \tfrac{1}{2}\,\zeta(2s, 3/2)$
+has a simple pole at the spectral-dimension value $s = d/2 = 3/2$
+with bit-exact meromorphic residue $1$ (verified two independent
+ways: from the Hurwitz pole at $u = 2s - 2 = 1$ with residue $1$,
+and from direct Laurent expansion via the digamma identity).  The
+Mellin residue of $\Gamma(s)\,\zeta_{D^2}^{\mathrm{cont}}(s)$ at
+$s = 3/2$ is therefore $\Gamma(3/2) \cdot 1 = \sqrt{\pi}/2$, which
+matches the standard heat-kernel Weyl-law leading coefficient
+$r\,\mathrm{Vol}(S^3)/(4\pi)^{3/2}\big|_{r=2}$
+(\cite{gilkey1995, vassilevich2003}) bit-exactly.  The three
+published instances of the $M_1$ Hopf-base measure
+($\mathrm{Vol}(S^2)/4 = \pi$ in Paper~18~\S~III.2;
+$\mathrm{Vol}(S^2)/\pi^2 = 4/\pi$ in Paper~38~\S~VIII as the L2
+asymptote rate constant; $\Gamma(d/2) = \sqrt{\pi}/2$ here at the
+Mellin pole) are sibling normalizations of the same spectral object,
+related by exact factors of $\pi^2/4$ and $\pi^{3/2}/8$ with no
+spectral-data input.  The M2 continuum panel at integer
+$s \in \{1, 2, 3, 4, 5\}$ reproduces the Sprint~Q5'-CH-2
+Seeley--DeWitt panel bit-exactly (5/5 matches).  Tauberian rate
+uniformity in a neighborhood of $s = 3/2$ is the Stage-2-relevant
+open question, reachable from Karamata~\cite{karamata1962} and
+Korevaar~\cite{korevaar2004}.  Source:
+\texttt{debug/sprint\_q5p\_continuum\_mellin\_memo.md}.
+\end{remark}
+
 \begin{remark}[$\mathrm{HP}^{\mathrm{even}}$ class identification on
 the bicomplex of the truncated CH triple (Sprint Q5'-Stage1-2c-Bicomplex, 2026-06-05)]
 \label{rem:q5p_hp_even_class}
@@ -2029,6 +2062,45 @@ on commutative $\mathcal{A}$.  The CM-residue cocycle for $M_3$ is
 single-cochain and immune to this artifact;\ the JLO/CM-residue
 distinction is Stage-2-relevant.  Source:
 \texttt{debug/sprint\_q5p\_2c\_bicomplex\_memo.md}.
+\end{remark}
+
+\begin{remark}[CM-residue $\eta$-class identification, Sprint Q5'-Stage1-CM-Bicomplex,
+June 2026]
+\label{rem:q5p_cm_residue_class}
+The second span of the Stage-1 cosmic-Galois $U^*$ bridge --- the
+Connes--Moscovici $\eta$-pairing residue cocycle on the truncated
+Camporesi--Higuchi spectral triple at $n_{\max} = 2$ --- has been
+constructed bit-exactly in $\mathsf{sympy.Rational}$
+(\texttt{debug/sprint\_q5p\_cm\_bicomplex\_memo.md},
+\texttt{debug/data/sprint\_q5p\_cm\_bicomplex.json}). The CM-$\eta$
+cochain $\psi_n^{\eta}(a_0, \dots, a_n; t) := \int_{\Delta_n}
+\mathrm{Tr}(\gamma D\,a_0\,e^{-s_0 t D^2}\,[D, a_1]\cdots[D, a_n]\,
+e^{-s_n t D^2})\,ds$ replaces the JLO leftmost insertion $\gamma$ by
+$\gamma D$, and shares the bicomplex structure $(b + B)\psi = 0$ with
+JLO via the same formulas. The degree-1 cocycle condition
+$b\psi_0^{\eta} + B\psi_2^{\eta} = 0$ holds bit-exactly on the full
+panel of 36 idempotent-pair inputs at three $t$-orders both flavors
+(216 bit-exact zero residuals), with NO truncation artifact of the
+JLO $\pm 1/196608$ type. The CM-$\eta$ class on the Morita-trivial
+baseline $\mathbb{Q}^5 = \mathrm{HP}_0(\mathbb{C}^5)$ is explicitly
+\[
+[\psi_{\mathrm{CM}}^{\eta, \mathrm{even}}]^{\mathrm{HP}_{\eta}}
+= (3, 3, 5, 15, 10) \in \mathbb{Z}^5,
+\]
+summing to $36 = M_3(n_{\max} = 2)$ (the Sub-Sprint 1 master-Mellin
+M3 ground truth). The sector-resolved structure is the
+chirality-symmetrized eigenvalue magnitude per sector
+$\eta_s = \dim_s \cdot (n_s + 1/2)$, in clean dual to the JLO
+$\chi_s = \dim(\gamma_+ e_s \mathcal{H}) - \dim(\gamma_- e_s \mathcal{H})$
+chirality balance per sector. The two classes share the same $K_0$
+sector-decomposition $\{[e_s]\}_{s=0..4}$ but encode distinct
+cohomological content: JLO captures the zeroth heat-kernel
+supertrace coefficient (McKean--Singer index $\chi(S^3) = 0$),
+CM-$\eta$ captures the leading $t^0$ $\eta$-density supertrace
+coefficient ($M_3$ mechanism leading). Cross-check at $n_{\max} = 3$:
+$M_3(3) = 120$ bit-exact, CM-$\eta$ degree-1 cocycle bit-exact zero
+on all 9 diagonal sectors. See Paper~55~\S~subsec:open\_m2\_m3 for
+the Stage-1 Q5' construction context.
 \end{remark}
 
 \begin{remark}[Rational-residue extension of the case-exhaustion theorem:
@@ -5337,6 +5409,27 @@ R.~Camporesi and A.~Higuchi,
 ``On the eigenfunctions of the Dirac operator on spheres and real
 hyperbolic spaces,''
 \textit{J.~Geom.~Phys.}\ \textbf{20}, 1--18 (1996).
+
+\bibitem{gilkey1995}
+P.~B.~Gilkey,
+\textit{Invariance Theory, the Heat Equation, and the Atiyah--Singer
+Index Theorem}, 2nd ed., CRC Press, Boca Raton, 1995.
+
+\bibitem{vassilevich2003}
+D.~V.~Vassilevich,
+``Heat kernel expansion: user's manual,''
+\textit{Phys.~Rep.}\ \textbf{388}, 279--360 (2003), arXiv:hep-th/0306138.
+
+\bibitem{karamata1962}
+J.~Karamata,
+\textit{Theory and Applications of Stieltjes Integrals},
+SANU Posebna izdanja CCCXLIII, Belgrade, 1962.
+
+\bibitem{korevaar2004}
+J.~Korevaar,
+\textit{Tauberian Theory:\ A Century of Developments},
+Grundlehren der mathematischen Wissenschaften \textbf{329},
+Springer, Berlin, 2004.
 
 \bibitem{paper0}
 GeoVac Project, ``Geometric packing and the origin of quantum

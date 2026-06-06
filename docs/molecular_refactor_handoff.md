@@ -1,5 +1,7 @@
 # Molecular subsystem refactor — handoff packet
 
+> **RETIRED 2026-06-05 (PI directive, same-day).** The planned molecular refactor is **not needed.** Sprint chemistry-test-rot reconciliation (v3.56.0, `debug/sprint_lih_binding_fix_memo.md`) closed the load-bearing items: §2.1 LiH binding collapse resolved by F.1 V_NN(R) fix + F.2 PK pseudopotential restore (LiH ab initio R_eq 2.82%, balanced 6.93%, 943/943 tests pass); §2.2 nuclear-electronic commutativity and §2.3 BeH₂ cross-block h1 dissolved on diagnosis (G + H sub-tracks). The §4 shim audit and §3.1 Paper 17 reconciliation remain as low-priority follow-ons but do not require a sprint-scale refactor. This document is preserved for institutional memory; treat it as a historical snapshot of the v3.52.0–v3.55.0 problem statement, not as an active to-do.
+
 **Prepared:** 2026-06-05 (close of v3.52.0 sprint cycle)
 **Audience:** the next session that picks up the planned molecular refactor.
 **Purpose:** hand off the chemistry-test-rot situation cleanly so the refactor inherits a problem statement rather than having to re-diagnose.
