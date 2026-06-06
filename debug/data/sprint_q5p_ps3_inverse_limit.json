@@ -1,0 +1,597 @@
+{
+  "sprint": "Q5'-ProSystem-Lockdown PS-3",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "n_pairs": 15,
+  "chi_universal_property": {
+    "total_sectors_tested": 77,
+    "total_mismatches": 0,
+    "all_bit_exact": true,
+    "per_cutoff": {
+      "1": {
+        "sectors_tested": 2,
+        "bit_exact": true
+      },
+      "2": {
+        "sectors_tested": 5,
+        "bit_exact": true
+      },
+      "3": {
+        "sectors_tested": 9,
+        "bit_exact": true
+      },
+      "4": {
+        "sectors_tested": 14,
+        "bit_exact": true
+      },
+      "5": {
+        "sectors_tested": 20,
+        "bit_exact": true
+      },
+      "6": {
+        "sectors_tested": 27,
+        "bit_exact": true
+      }
+    }
+  },
+  "eta_universal_property": {
+    "total_sectors_tested": 77,
+    "total_mismatches": 0,
+    "all_bit_exact": true,
+    "per_cutoff": {
+      "1": {
+        "sectors_tested": 2,
+        "bit_exact": true
+      },
+      "2": {
+        "sectors_tested": 5,
+        "bit_exact": true
+      },
+      "3": {
+        "sectors_tested": 9,
+        "bit_exact": true
+      },
+      "4": {
+        "sectors_tested": 14,
+        "bit_exact": true
+      },
+      "5": {
+        "sectors_tested": 20,
+        "bit_exact": true
+      },
+      "6": {
+        "sectors_tested": 27,
+        "bit_exact": true
+      }
+    }
+  },
+  "chi_continuity": {
+    "n_pairs": 15,
+    "all_bit_exact": true,
+    "per_pair": [
+      {
+        "m": 2,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 3,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 3,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 4,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 4,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 4,
+        "k": 3,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 3,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 4,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 3,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 4,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 5,
+        "bit_exact": true
+      }
+    ]
+  },
+  "eta_continuity": {
+    "n_pairs": 15,
+    "all_bit_exact": true,
+    "per_pair": [
+      {
+        "m": 2,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 3,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 3,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 4,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 4,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 4,
+        "k": 3,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 3,
+        "bit_exact": true
+      },
+      {
+        "m": 5,
+        "k": 4,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 1,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 2,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 3,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 4,
+        "bit_exact": true
+      },
+      {
+        "m": 6,
+        "k": 5,
+        "bit_exact": true
+      }
+    ]
+  },
+  "F_integer_s_panel": {
+    "6": [
+      {
+        "term": "-53*zeta(5)/3",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 5,
+        "symbolic_weight": 5,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "pi**2/36",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 2,
+        "symbolic_weight": 2,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "4*pi**6/945",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 6,
+        "symbolic_weight": 6,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "11*zeta(3)/3",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 3,
+        "symbolic_weight": 3,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "107*pi**4/540",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 4,
+        "symbolic_weight": 4,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      }
+    ],
+    "7": [
+      {
+        "term": "4*zeta(7)",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 7,
+        "symbolic_weight": 7,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "-53*pi**6/2835",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 6,
+        "symbolic_weight": 6,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "zeta(3)/6",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 3,
+        "symbolic_weight": 3,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "11*pi**4/270",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 4,
+        "symbolic_weight": 4,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "107*zeta(5)/6",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 5,
+        "symbolic_weight": 5,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      }
+    ],
+    "8": [
+      {
+        "term": "-53*zeta(7)/3",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 7,
+        "symbolic_weight": 7,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "pi**4/540",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 4,
+        "symbolic_weight": 4,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "11*zeta(5)/3",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 5,
+        "symbolic_weight": 5,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "2*pi**8/4725",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 8,
+        "symbolic_weight": 8,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "107*pi**6/5670",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 6,
+        "symbolic_weight": 6,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      }
+    ],
+    "9": [
+      {
+        "term": "-53*pi**8/28350",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 8,
+        "symbolic_weight": 8,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "zeta(5)/6",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 5,
+        "symbolic_weight": 5,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "11*pi**6/2835",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 6,
+        "symbolic_weight": 6,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "4*zeta(9)",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 9,
+        "symbolic_weight": 9,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "107*zeta(7)/6",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 7,
+        "symbolic_weight": 7,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      }
+    ],
+    "10": [
+      {
+        "term": "-53*zeta(9)/3",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 9,
+        "symbolic_weight": 9,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "pi**6/5670",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 6,
+        "symbolic_weight": 6,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "11*zeta(7)/3",
+        "panel_classification": "M3",
+        "symbolic_classification": "M3",
+        "panel_weight": 7,
+        "symbolic_weight": 7,
+        "panel_depth": 1,
+        "symbolic_depth": 1,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "4*pi**10/93555",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 10,
+        "symbolic_weight": 10,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      },
+      {
+        "term": "107*pi**8/56700",
+        "panel_classification": "M2",
+        "symbolic_classification": "M2",
+        "panel_weight": 8,
+        "symbolic_weight": 8,
+        "panel_depth": 0,
+        "symbolic_depth": 0,
+        "classification_match": true,
+        "weight_match": true,
+        "depth_match": true,
+        "in_MT_Q_1": true
+      }
+    ]
+  },
+  "F_summary": {
+    "total_terms": 25,
+    "classification_matches": 25,
+    "weight_matches": 25,
+    "depth_matches": 25,
+    "MT_Q_1_containment": 25,
+    "M2_count": 13,
+    "M3_count": 12,
+    "ustar_preserves_weight_depth_grading": true
+  },
+  "bit_exact_summary": {
+    "chi_universal_property_sectors": 77,
+    "eta_universal_property_sectors": 77,
+    "chi_continuity_pairs": 15,
+    "eta_continuity_pairs": 15,
+    "F_classification": 25,
+    "F_weight": 25,
+    "F_depth": 25,
+    "F_MT_Q_1": 25,
+    "total_zero_residuals": 284,
+    "total_identities": 284
+  },
+  "wall_time_seconds": 0.324826717376709
+}

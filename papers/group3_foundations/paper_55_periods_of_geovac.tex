@@ -2342,6 +2342,368 @@ Glanois 2015).  Total bit-exact zero residuals:\ 145 (25 + 60 + 60).
 (sprint-scale via T5 SQ3 Aut$_{\mathrm{Hopf}}$ enumeration, not done in
 this sprint) remain open as named follow-ons.
 
+\emph{Pro-system lockdown PS-1:\ transition maps as closed-form
+algebra homomorphisms with bit-exact cofiltered axiom (Sprint
+Q5'-ProSystem-Lockdown, PS-1 sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_ps1\_transitions\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_ps1\_transitions.json};\ module
+\texttt{geovac/pro\_system.py}).}  The transition maps
+$P_{m, k}: \mathcal{O}_m \to \mathcal{O}_k$ between truncated
+sector-idempotent algebras are realised as closed-form
+$N(k) \times N(m)$ 0/1 integer matrices in canonical lex order on
+sectors:\ $P_{m, k} = [I_{N(k)} \mid 0_{N(k) \times (N(m) - N(k))}]$,
+sending $e_{(n, l)} \mapsto e_{(n, l)}$ if $n \le k$ and $0$
+otherwise.  The cofiltered axiom $P_{m, k} = P_{n, k} \cdot
+P_{m, n}$ is verified bit-exact for every triple
+$1 \le k < n < m \le 5$ (10 matrix-level identities, 10 bit-exact
+zero residuals), promoting the v3.60.0 result (pull-back
+compatibility at consecutive cutoffs) to a closed-form inverse
+system in the strict categorical sense.  The per-sector closed
+forms $\chi_{(n, l)}, \eta_{(n, l)}$ extend bit-exact to the new
+cell $n_{\max} = 5$ (six new sectors, 20 total), with all-pairs
+pull-back $P^*_{m, k}[\psi^{(m)}] = [\psi^{(k)}]$ holding bit-exact
+for the 10 pairs $\{(m, k) : 1 \le k < m \le 5\}$ and both
+characters $\chi, \eta$ (20 bit-exact zero residuals at the
+class-vector level).  Total bit-exact zero residuals across the
+panel:\ $100 + 10 + 20 = 130$.  PS-1 is the substrate layer of
+the pro-system lockdown program;\ PS-2 will verify that the
+cosmic-Galois $U^* = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$
+acts compatibly with $P_{m, k}$ for each generator on each of the
+three Interpretation-C-closed characters $\chi, \eta, F(s)$;\ PS-3
+constructs the inverse limit
+$\mathcal{O}_\infty = \varprojlim \mathcal{O}_{n_{\max}}$ and
+extends the $U^*$-action to the limit;\ PS-4 probes endomorphism
+rigidity and Tannakian readiness.
+
+\emph{Pro-system lockdown PS-2:\ $U^*$-action compatibility with
+PS-1 transitions (Sprint Q5'-ProSystem-Lockdown, PS-2 sub-track,
+2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_ps2\_ustar\_compatibility\_memo.md};\
+data
+\texttt{debug/data/sprint\_q5p\_ps2\_ustar\_compatibility.json}).}
+The block-diagonal Hopf-hom lift $\Phi_{m, k}: \mathcal{H}_{\mathrm{GV}}(m)
+\to \mathcal{H}_{\mathrm{GV}}(k)$ of PS-1's $P_{m, k}$ acts on the
+primitive generators by $\Phi(x_{(n, l), s}^{(m)}) = x_{(n, l), s}^{(k)}$
+if $n \le k$ and $0$ otherwise, where $s \in \{0, 1, 2\}$ indexes
+the master Mellin engine slots (M1, M3, M2 per Paper~18 \S III.7).
+The $3 N(k) \times 3 N(m)$ matrix of $\Phi_{m, k}$ is the
+block-diagonal $\mathrm{diag}(P_{m, k}, P_{m, k}, P_{m, k})$ — three
+independent copies of PS-1's transition, one per Mellin slot. Three
+bit-exact verifications at $n_{\max} \le 5$:\ (i) the cofiltered
+axiom $\Phi_{m, k} = \Phi_{n, k} \cdot \Phi_{m, n}$ holds bit-exact
+at all 10 triples;\ (ii) the 435 $\mathbb{G}_a^{3 N(m)}$ translation
+generators across the 10 pairs $(m, k) \le 5$ all satisfy the
+sector-locality survival rule
+$\Phi_{m, k}(e_g^{(m)} \cdot x) = e_g^{(k)} \cdot \Phi_{m, k}(x)$
+when the generator's sector has $n \le k$, and the action drops
+to zero when $n > k$;\ (iii) the class-level $U^*$-action on
+$\chi, \eta$ (depth-0 trivial by v3.66.0 FO3 Interpretation C)
+commutes with $\Phi_{m, k}$ bit-exact at all 10 pairs (40
+identities). The $SL_2$ factor of $U^* = \mathbb{G}_a \rtimes SL_2$
+acts on the Peter--Weyl decoration ($j_{\max}$ axis), independent
+of the $n_{\max}$ axis on which $\Phi_{m, k}$ acts;\ commutativity
+is categorical (independence-of-axes), not requiring a per-cell
+check. The Hopf-axiom compatibility under $\Phi_{m, k}$ is
+structurally trivial on the abelian primitive substrate of v3.61.0
+Track A — the substantive PS-2 content lives at the cofiltered
+axiom + generator compatibility + class-action levels, which is the
+honest reading of why PS-2 is lighter than PS-1. Total bit-exact
+zero residuals across the panel:\ $10 + 435 + 40 = 485$. The
+cosmic-Galois $U^*$ lifts to the PS-1 pro-system by construction;\
+PS-3 carries the inverse limit
+$\mathcal{O}_\infty = \varprojlim \mathcal{O}_{n_{\max}}$ and extends
+the $U^*$-action to it, including the non-trivial part of
+Interpretation C on the continuum $F(s)$ Mellin lift (M2 Tate
+subgroup action + M3 standard motivic Galois action on
+$\mathrm{MT}(\mathbb{Q}, 1)$ odd-zeta classes per v3.66.0 FO2).
+
+\emph{Pro-system lockdown PS-3:\ inverse limit $\mathcal{O}_\infty$
+and the continuum $F(s)$ panel (Sprint Q5'-ProSystem-Lockdown, PS-3
+sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_ps3\_inverse\_limit\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_ps3\_inverse\_limit.json}).}  The
+truncated CH pro-system has a sequential inverse limit
+$\mathcal{O}_\infty = \varprojlim_{n_{\max}} \mathcal{O}_{n_{\max}}
+\cong \mathbb{Q}^{\mathbb{N}_{\mathrm{sec}}}$ where
+$\mathbb{N}_{\mathrm{sec}} = \{(n, l) : n \ge 1, 0 \le l \le n\}$
+is the infinite sector index, equipped with the product /
+inverse-limit topology under which every projection
+$\pi_{n_{\max}}: \mathcal{O}_\infty \to \mathcal{O}_{n_{\max}}$ is
+continuous.  The continuum cocycle classes $\chi_\infty, \eta_\infty$
+are defined by the v3.60.0 closed-form sector-local extensions
+$\chi_{(n, l)} = +2$ if $l < n$ and $-2n$ if $l = n$;\
+$\eta_{(n, l)} = (2l + 1)(2n + 1)$ if $l < n$ and $n(2n + 1)$ if
+$l = n$.  Universal property bit-exact at 6 cutoffs:\
+$\pi_{n_{\max}}(\chi_\infty) = \chi^{(n_{\max})}$ and
+$\pi_{n_{\max}}(\eta_\infty) = \eta^{(n_{\max})}$ for every
+$n_{\max} \in \{1, \ldots, 6\}$ (154 sector-level identities,
+including the new falsifier cell $n_{\max} = 6$ with 27 sectors at
+shell 6 and $\dim \mathcal{H} = 224$).  Continuity under transitions
+bit-exact at 15 pairs $\times$ 2 characters (30 identities).  The
+v3.66.0 FO2 $F(s)$ integer-$s$ panel at $s \in \{6, 7, 8, 9, 10\}$
+(25 terms) carries to the inverse limit with bit-exact $\mathrm{MT}(\mathbb{Q}, 1)$
+weight / depth grading per term:\ each M2 component
+$\pi^{2k} \cdot \mathbb{Q}$ has depth 0 weight $2k$, each M3
+component $\zeta(2k + 1) \cdot \mathbb{Q}$ has depth 1 weight
+$2k + 1$;\ classification, weight, depth and $\mathrm{MT}(\mathbb{Q}, 1)$ membership all
+bit-exact at $25/25$ terms by independent symbolic parsing.  The
+cosmic-Galois $U^*$ acts on the M2 / M3 components at the period
+level via Tate subgroup (M2) and standard motivic Galois action on
+odd-zeta generators (M3, Brown 2012, Glanois 2015);\ $U^*$-orbit
+closure at the panel's (weight, depth) level is automatic by the
+one-dimensionality of the (depth-1, weight-$2k + 1$) slots in
+$\mathrm{MT}(\mathbb{Q}, 1)$ at weight $\le 10$.  Total bit-exact
+zero residuals across the PS-3 panel:\ $154 + 30 + 100 = 284$.
+Three of four Pro-System-Lockdown sub-tracks now closed;\ PS-4
+(endomorphism rigidity / Tannakian readiness probe) is the
+lockdown sprint's final sub-track.
+
+\emph{Pro-system lockdown PS-4:\ endomorphism rigidity probe and
+Tannakian-readiness gap-list (Sprint Q5'-ProSystem-Lockdown, PS-4
+sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_ps4\_endo\_rigidity\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_ps4\_endo\_rigidity.json}).}
+$\mathrm{End}_{\mathrm{compat}}(\mathcal{O}_n)$ --- the
+$\mathbb{Q}$-linear endomorphisms of the truncated sector-idempotent
+algebra that admit a compatible family at every lower cutoff
+$k \le n_{\max}$ --- is the block-lower-triangular subalgebra under
+the shell filtration
+$N(1) \subset \cdots \subset N(n_{\max})$, with closed-form dimension
+$\dim_{\mathbb{Q}} \mathrm{End}_{\mathrm{compat}}(\mathcal{O}_n) =
+\sum_{1 \le j \le i \le n_{\max}} (i+1)(j+1)$;\ bit-exact panel
+$\dim = 19, 55, 125, 245$ at $n_{\max} = 2, 3, 4, 5$ via direct
+basis enumeration matching the closed form
+($444 + 370 + 4 + 4 + 50 = 872$ bit-exact checks).  This is
+strictly larger than the depth-0 scalar diagonal
+$\mathbb{Q}^{N(n_{\max})}$ and strictly smaller than the full
+$M_{N(n_{\max})}(\mathbb{Q})$;\ algebra-of-functions rigidity at
+finite cutoff is structurally weaker than scalar-diagonal rigidity
+because the algebra is commutative and the transitions are sector
+projections.  The Tannakian-rigidity content (in the Deligne--Milne
+1982 sense) lives one level up at
+$\mathrm{Rep}(\mathcal{H}_{\mathrm{GV}})$, where the abelian
+primitive coproduct and antipode $S(x) = -x$ make rigidity
+automatic on finite-dim modules.  Tannakian-readiness gap-list
+across the four standard prerequisites (Deligne--Milne 1982):\
+abelian category structure, symmetric monoidal structure, and
+rigidity are SATISFIED at finite cutoff with sprint-scale
+($\sim 1$--$2$ months combined) bookkeeping closures;\ the fiber
+functor's identification
+$\mathrm{Aut}^\otimes(\omega) \cong U^*_{\mathrm{GeoVac},
+\mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ is the
+heart of Tannakian closure proper and is multi-year, requiring
+(i) explicit construction of $\mathrm{Aut}^\otimes(\omega)$ via
+Tannakian reconstruction, (ii) matching with v3.63.0 L1's Levi
+decomposition, and (iii) verification against v3.66.0 FO3
+Interpretation C at the period level on the inverse limit
+$\mathcal{O}_\infty$ (PS-3). PS-4 closes the fourth and final
+sub-track of the Pro-System-Lockdown sprint;\ the substrate for
+Tannakian closure as a standalone sprint or collaboration target
+is now fully named.
+
+\emph{Tannakian closure foundation TC-1a:\
+$\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}})$ is abelian
+(Sprint Q5'-Tannakian-Closure, TC-1a sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc1a\_abelian\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_tc1a\_abelian.json}).}  The category
+$\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$
+of finite-dim rational representations of the v3.61.0 Track A
+abelian primitive Hopf algebra
+$\mathcal{H}_{\mathrm{GV}}(n_{\max}) = \mathrm{Sym}_\mathbb{Q}(V_{n_{\max}})
+= \mathcal{O}(\mathbb{G}_a^{3 N(n_{\max})})$ is an abelian category
+in the Deligne--Milne 1982 sense.  An object is a finite-dim
+$\mathbb{Q}$-vector space $M$ with $3 N(n_{\max})$ pairwise commuting
+nilpotent endomorphisms $\{X_g\}$ indexed by the primitive generators
+$g = (n, l, s)$;\ a morphism is a $\mathbb{Q}$-linear map intertwining
+all $X_g$.  Verified bit-exact on a five-rep five-morphism panel at
+$n_{\max} \in \{2, 3\}$ across all six universal-property axioms:\
+zero object (5 reps $\times$ 2 directions $\times$ 2 cutoffs),
+direct sum universal property (3 pairs $\times$ 5 identities $\times$
+2 cutoffs), kernel universal property
+(4 morphisms $\times$ 2 conditions $\times$ 2 cutoffs), cokernel
+universal property (4 $\times$ 2 $\times$ 2), mono $=$ ker(coker)
+(2 $\times$ 3 $\times$ 2), epi $=$ coker(ker) (2 $\times$ 3 $\times$ 2).
+Total bit-exact zero residuals:\ $106 / 106$.  TC-1a closes the
+FIRST of four sprint-scale Tannakian-closure prerequisites named by
+PS-4 (v3.69.0):\ abelian category structure. TC-1b (symmetric
+monoidal), TC-1c (rigidity), TC-1d (fiber functor) are the remaining
+sprint-scale prerequisites;\ TC-1e (the first stone of the multi-year
+wall:\ $\mathrm{Aut}^\otimes(\omega) \supseteq
+U^\ast_{\mathrm{GeoVac}, \mathrm{Levi}}$ at $n_{\max} = 2$) opens
+the multi-year arc.  The category structure inherits from the
+v3.61.0 Track A abelian primitive substrate with no GeoVac-specific
+obstruction;\ the closure runs in 0.03 s wall time on a representative
+panel.
+
+\emph{Tannakian closure foundation TC-1b:\ symmetric monoidal
+structure (Sprint Q5'-Tannakian-Closure, TC-1b sub-track, 2026-06-06;\
+memo \texttt{debug/sprint\_q5p\_tc1b\_monoidal\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_tc1b\_monoidal.json}).}  The category
+$\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$
+is symmetric monoidal under $\otimes_\mathbb{Q}$ with the diagonal
+Hopf action
+$X_g^{M \otimes N} = X_g^M \otimes I_N + I_M \otimes X_g^N$
+determined by the v3.61.0 Track A abelian primitive coproduct
+$\Delta(x_g) = x_g \otimes 1 + 1 \otimes x_g$.  Unit object
+$\mathbf{1} = $ trivial 1-dim rep;\ unitors $\lambda_M, \rho_M$ are
+the identity matrices on $\dim(M)$;\ associator $\alpha_{M, N, P}$
+is the identity matrix in the canonical lex basis;\ braiding
+$\sigma_{M, N}$ is the swap-permutation matrix and is symmetric
+($\sigma_{N, M} \circ \sigma_{M, N} = \mathrm{id}$).  Verified
+bit-exact on a five-rep panel at $n_{\max} \in \{2, 3\}$ across six
+axiom panels totalling 56 identities:\ tensor diagonal action
+(4 pairs $\times$ 2 checks $\times$ 2 cutoffs $= 16$), tensor
+functoriality (3 tests $\times$ 2 cutoffs $= 6$), unitor intertwining
+(3 reps $\times$ 2 unitors $\times$ 2 cutoffs $= 12$), associator
+intertwining (2 triples $\times$ 2 cutoffs $= 4$), braiding
+intertwining + symmetric (3 pairs $\times$ 2 checks $\times$
+2 cutoffs $= 12$), and coherence diagrams pentagon + triangle +
+hexagon (3 $\times$ 2 cutoffs $= 6$).  Total bit-exact zero
+residuals:\ $56 / 56$.  This closes the SECOND of four sprint-scale
+Tannakian-closure prerequisites named by PS-4 (v3.69.0).  TC-1c
+(rigidity) and TC-1d (fiber functor) are next;\ TC-1e (multi-year
+first stone) opens the heart of Tannakian closure.
+
+\emph{Tannakian closure foundation TC-1c:\ rigidity (Sprint
+Q5'-Tannakian-Closure, TC-1c sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc1c\_rigidity\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_tc1c\_rigidity.json}).}  The category
+$\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$
+is \emph{rigid}.  Every finite-dim rep $V$ admits a dual
+$V^\vee = \mathrm{Hom}_\mathbb{Q}(V, \mathbb{Q})$ with the
+contragredient Hopf action $X_g^{V^\vee} = -(X_g^V)^T$ determined
+by the antipode $S(x_g) = -x_g$ of the abelian primitive Hopf
+algebra (v3.61.0 Track A).  Evaluation
+$\mathrm{ev}_V : V^\vee \otimes V \to \mathbf{1}$ is the canonical
+pairing $\phi_i \otimes e_j \mapsto \delta_{ij}$ in the dual basis;\
+coevaluation $\mathrm{coev}_V : \mathbf{1} \to V \otimes V^\vee$
+sends $1 \mapsto \sum_i e_i \otimes \phi_i$.  Both snake (zigzag)
+identities reduce to matrix identities in the canonical lex bases
+(where the associator and unitors are identity matrices, cf.\
+TC-1b) and are verified bit-exact on a four-rep panel
+$(T_1, T_2, J_2, J_3)$ at $n_{\max} \in \{2, 3\}$ across seven
+axiom panels totalling 50 identities:\ contragredient action
+(4 reps $\times$ 2 cutoffs $= 8$), evaluation intertwining
+($8$), coevaluation intertwining ($8$), first snake ($8$), second
+snake ($8$), double dual $(V^\vee)^\vee = V$ as strict equality
+of endo data ($8$), and unit self-dual
+$\mathbf{1}^\vee = \mathbf{1}$ ($2$).  Total bit-exact zero
+residuals:\ $50 / 50$.  \emph{Structural surprise:} the double
+dual is \emph{strict equality} of endomorphism data on the
+Track-A abelian substrate (because $S^2 = \mathrm{id}$ via
+$S(x_g) = -x_g$ and $(M^T)^T = M$);\ this should not be claimed
+beyond TC-1c, since a non-abelian extension of the Hopf substrate
+would introduce a non-trivial canonical isomorphism in place of
+strict equality.  TC-1c closes the THIRD of four sprint-scale
+Tannakian-closure prerequisites named by PS-4 (v3.69.0).
+
+\emph{Tannakian closure foundation TC-1d:\ fiber functor $\omega$
+(Sprint Q5'-Tannakian-Closure, TC-1d sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc1d\_fiber\_functor\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_tc1d\_fiber\_functor.json}).}
+The forgetful functor $\omega:
+\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))
+\to \mathrm{Vec}_\mathbb{Q}$ sending a representation
+$(M, \{X_g^M\}_g)$ to its underlying $\mathbb{Q}$-vector space $M$
+verifies the four Deligne--Milne 1982 fiber-functor properties
+bit-exactly at $n_{\max} \in \{2, 3\}$ on the representative panel
+$\{\mathbf{1}, T_2, J_2, J_3\}$ and morphism panel
+$\{f_1, f_2, f_3, f_4\}$ (mono / epi / identity / zero):\ twenty
+bit-exact zero-residual identities per cutoff (one unit $+$ four
+$\otimes$-preservation $+$ four kernel $+$ four cokernel $+$ three
+direct-sum $+$ four faithfulness), totalling $40$ identities at
+zero residual.  Combined with TC-1a (abelian) and TC-1b (symmetric
+monoidal), $\omega$ is identified as a faithful exact
+$\mathbb{Q}$-linear symmetric $\otimes$-functor with
+$\omega(\mathbf{1}) = \mathbb{Q}$.  At the implementation level
+$\omega$ is essentially the no-op forgetful functor — a rep IS its
+underlying $\mathbb{Q}$-vector space plus the Hopf-action data, so
+forgetting returns the rep's dim / matrix unchanged;\ naturality of
+$\otimes$-preservation is automatic because tensor products use
+Kronecker products in canonical lex basis.  The
+Tannakian-closure precondition for
+$\mathcal{H}_{\mathrm{GV}}(n_{\max})$ is met at the
+verified-precondition level;\ the motivic Galois group
+$\mathrm{Aut}^\otimes(\omega) = U^{*(n_{\max})}_{\mathrm{GeoVac}}
+= \mathbb{G}_a^{3 N(n_{\max})}$ is the v3.61.0 Track A structural
+reading.  TC-1d closes the FOURTH and last sprint-scale
+Tannakian-closure prerequisite named by PS-4 (v3.69.0);\ TC-1e
+(multi-year first stone:\ explicit inclusion
+$\mathrm{Aut}^\otimes(\omega) \supseteq U^\ast_{\mathrm{Levi}}$
+at $n_{\max} = 2$) opens the heart of Tannakian closure.
+
+\emph{Tannakian closure foundation TC-1e:\ first stone of the
+multi-year wall (Sprint Q5'-Tannakian-Closure, TC-1e sub-track,
+2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc1e\_aut\_inclusion\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_tc1e\_aut\_inclusion.json}).}
+The pro-unipotent factor $\mathbb{G}_a^{3 N(n_{\max})}(\mathbb{Q})$
+of $U^*_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})}
+\rtimes SL_2$ maps explicitly into the natural
+$\otimes$-automorphisms of the fiber functor $\omega$ (TC-1d) via
+$\Phi: \mathbb{Q}^{3 N(n_{\max})} \to \mathrm{Aut}^\otimes(\omega)$,
+$\Phi(t)(V) = \exp(\sum_g t_g X_g^V)$.  Each
+$\eta_V(t) = \Phi(t)(V)$ is the truncated matrix exponential of a
+$\mathbb{Q}$-linear combination of the commuting nilpotent
+endomorphisms $\{X_g^V\}_g$.  All four Deligne--Milne 1982 natural
+$\otimes$-automorphism axioms (invertibility, unit, naturality,
+$\otimes$-compatibility) plus the group law $\Phi(t_1 + t_2) =
+\Phi(t_1) \cdot \Phi(t_2)$ are verified bit-exact on a five-rep
+panel $(T_1, T_2, J_2, J_3, K_2)$ — including reps $J_2, J_3$
+activating primitive generator $g_0 = (1, 0, 0)$ and $K_2$
+activating $g_1 = (2, 0, 1)$ — at $n_{\max} \in \{2, 3\}$ across
+four test parameter values $(0, t_{g_0}^{(1)}, t_{g_1}^{(2)},
+t_{\mathrm{mixed}})$.  Total bit-exact zero residuals:\ $98 / 98$
+(49 per cutoff:\ invertibility $5 \times 4 = 20$ $+$ unit
+$1 \times 4 = 4$ $+$ naturality $2 \times 4 = 8$ $+$ $\otimes$
+$3 \times 4 = 12$ $+$ group law $5$).  $SL_2$ commutativity at the
+inclusion level is categorical (independence-of-axes:\ $SL_2$
+acts on the $j_{\max}$ axis, $\Phi$ on the $n_{\max}$ axis), not
+requiring a per-cell check.  TC-1e closes the \emph{inclusion
+direction} $\mathrm{Aut}^\otimes(\omega) \supseteq
+U^*_{\mathrm{Levi}}$ at finite cutoff;\ the \emph{converse
+equality} $\mathrm{Aut}^\otimes(\omega) = U^*$ (full Tannakian
+closure proper, requiring the pro-finite Tannakian theorem
+coherent with v3.66.0 FO3 Interpretation C at the period level
+on $\mathcal{O}_\infty$ / PS-3) remains the multi-year content.
+This is the FIRST STONE of the multi-year wall named by PS-4
+(v3.69.0):\ the substrate for Tannakian closure as a standalone
+sprint or collaboration target is now fully constructed at the
+verified-precondition level, and the explicit inclusion direction
+is bit-exact.
+
+\emph{Tannakian closure foundation TC-1f:\ explicit $\mathbb{G}_a
+\times SL_2$ inclusion + full-panel injectivity (Sprint
+Q5'-Tannakian-Closure, TC-1f sub-track, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc1f\_sl2\_inclusion\_memo.md};\ data
+\texttt{debug/data/q5p\_tc1f\_sl2\_inclusion.json}).}
+The $SL_2$ factor of $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})}
+\rtimes SL_2$ is realised on the Peter--Weyl panel
+$\{V_{\mathrm{triv}}, V_{\mathrm{fund}} = \mathbb{Q}^2, \mathrm{Sym}^2
+V_{\mathrm{fund}} = \mathbb{Q}^3\}$ with explicit rep
+$\rho: SL_2(\mathbb{Q}) \to \mathrm{GL}(V_{\mathrm{PW}})$, and the same
+three structural identities TC-1e proved for $\mathbb{G}_a$ ---
+invertibility, $\otimes$-compatibility, group law --- are bit-exact for
+$SL_2$ across an $SL_2(\mathbb{Q})$ panel of five elements (identity,
+unipotent, torus, generic, Weyl involution).  The Levi-decomposition
+compatibility $\mathbb{G}_a \times SL_2 = \mathbb{G}_a \cdot SL_2$ on
+the combined rep $V \otimes V_{\mathrm{PW}}$ is bit-exact by the
+Kronecker identity $(A \otimes I)(I \otimes B) = (I \otimes B)(A
+\otimes I)$ on $100 / 100$ (parameter, $g$, $V$, $V_{\mathrm{PW}}$)
+cells.  Injectivity of $\Phi:\ U^*_{\mathrm{Levi}}(\mathbb{Q}) \to
+\mathrm{Aut}^\otimes(\omega)$ on the full primitive panel at
+$n_{\max} = 2$ is bit-exact:\ for each of the $3 \cdot N(2) = 15$
+primitive generators $g$ a 2-dim test rep $V_g$ with
+$X_g^{V_g} = E_{12}$ and $X_h^{V_g} = 0$ for $h \ne g$ detects $g$
+uniquely, with $\eta_{V_g}(t) = I$ iff $t_g = 0$;\ predicate bit-exact
+on $255 / 255$ (generator, parameter regime) cells across zero,
+single-generator, and generic three-generator test parameters.  Total
+TC-1f residuals:\ $490 / 490$ (block 1 $135$:\ invertibility $15$,
+$\otimes$ $45$, group law $75$; block 2 $100$; block 3 $255$).  This
+extends the v3.73.0 TC-1e inclusion from the $\mathbb{G}_a$ factor to
+the explicit $\mathbb{G}_a \times SL_2$ inclusion at finite cutoff with
+explicit witnesses on the full primitive panel.
+
 \emph{Honest scope.}  The QSM / Bost--Connes / Greenfield--Marcolli--Teh
 lineage (Greenfield--Marcolli--Teh, arXiv:1305.5492 (2014);\
 Connes--Marcolli--Ramachandran, arXiv:math/0501424 (2005);\

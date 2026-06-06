@@ -1,0 +1,475 @@
+{
+  "sprint": "Q5'-Tannakian-Closure TC-1c",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    2,
+    3
+  ],
+  "results_by_cutoff": {
+    "2": {
+      "dual_action": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "evaluation": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "coevaluation": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "snake_first": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "composite_shape": [
+            1,
+            1
+          ],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "composite_shape": [
+            3,
+            3
+          ],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "snake_second": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "composite_shape": [
+            1,
+            1
+          ],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "composite_shape": [
+            3,
+            3
+          ],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "double_dual": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "unit_self_dual": {
+        "n_max": 2,
+        "dim_match": true,
+        "endos_match": true,
+        "bit_exact": true
+      },
+      "zero_residuals": 25,
+      "total_identities": 25
+    },
+    "3": {
+      "dual_action": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "commutativity_ok": true,
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "evaluation": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "coevaluation": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "snake_first": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "composite_shape": [
+            1,
+            1
+          ],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "composite_shape": [
+            3,
+            3
+          ],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "snake_second": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "composite_shape": [
+            1,
+            1
+          ],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "composite_shape": [
+            2,
+            2
+          ],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "composite_shape": [
+            3,
+            3
+          ],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "double_dual": [
+        {
+          "V_label": "T1_unit",
+          "V_dim": 1,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "V_label": "T2",
+          "V_dim": 2,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "T2"
+        },
+        {
+          "V_label": "J2",
+          "V_dim": 2,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3",
+          "V_dim": 3,
+          "dim_match": true,
+          "gens_match": true,
+          "mismatches": [],
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "unit_self_dual": {
+        "n_max": 3,
+        "dim_match": true,
+        "endos_match": true,
+        "bit_exact": true
+      },
+      "zero_residuals": 25,
+      "total_identities": 25
+    }
+  },
+  "totals": {
+    "zero_residuals": 50,
+    "total_identities": 50
+  },
+  "wall_time_seconds": 0.018413543701171875
+}

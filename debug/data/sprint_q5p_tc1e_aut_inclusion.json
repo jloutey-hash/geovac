@@ -1,0 +1,918 @@
+{
+  "sprint": "Q5'-Tannakian-Closure TC-1e",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    2,
+    3
+  ],
+  "results_by_cutoff": {
+    "2": {
+      "per_t": {
+        "t_zero": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 2,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        },
+        "t_g0_one": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 2,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        },
+        "t_g1_one": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 2,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        },
+        "t_mixed": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 2,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        }
+      },
+      "group_law": [
+        {
+          "V_label": "J2_g0",
+          "V_dim": 2,
+          "bit_exact": true,
+          "test": "t_g0 + t_g1 on J2",
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3_g0",
+          "V_dim": 3,
+          "bit_exact": true,
+          "test": "t_g0 + t_g1 on J3",
+          "rep": "J3"
+        },
+        {
+          "V_label": "K2_g1",
+          "V_dim": 2,
+          "bit_exact": true,
+          "test": "t_g0 + t_g1 on K2",
+          "rep": "K2"
+        },
+        {
+          "V_label": "J2_g0",
+          "V_dim": 2,
+          "bit_exact": true,
+          "test": "2 t_g0 on J2",
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3_g0",
+          "V_dim": 3,
+          "bit_exact": true,
+          "test": "2 t_g0 on J3",
+          "rep": "J3"
+        }
+      ],
+      "zero_residuals": 49,
+      "total_identities": 49
+    },
+    "3": {
+      "per_t": {
+        "t_zero": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 3,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        },
+        "t_g0_one": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 3,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        },
+        "t_g1_one": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 3,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        },
+        "t_mixed": {
+          "invertibility": [
+            {
+              "V_label": "T1",
+              "V_dim": 1,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T1"
+            },
+            {
+              "V_label": "T2",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "T2"
+            },
+            {
+              "V_label": "J2_g0",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J2"
+            },
+            {
+              "V_label": "J3_g0",
+              "V_dim": 3,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "J3"
+            },
+            {
+              "V_label": "K2_g1",
+              "V_dim": 2,
+              "det": "1",
+              "invertible": true,
+              "bit_exact": true,
+              "rep": "K2"
+            }
+          ],
+          "unit": {
+            "n_max": 3,
+            "eta_unit": "Matrix([[1]])",
+            "expected": "Matrix([[1]])",
+            "bit_exact": true
+          },
+          "naturality": [
+            {
+              "f_label": "f1_T1_to_J2",
+              "source_dim": 1,
+              "target_dim": 2,
+              "bit_exact": true,
+              "morphism": "f1"
+            },
+            {
+              "f_label": "f2_J2_to_T1",
+              "source_dim": 2,
+              "target_dim": 1,
+              "bit_exact": true,
+              "morphism": "f2"
+            }
+          ],
+          "tensor": [
+            {
+              "V_label": "T1",
+              "W_label": "J2_g0",
+              "VW_dim": 2,
+              "bit_exact": true,
+              "pair": [
+                "T1",
+                "J2"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "J3_g0",
+              "VW_dim": 6,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "J3"
+              ]
+            },
+            {
+              "V_label": "J2_g0",
+              "W_label": "K2_g1",
+              "VW_dim": 4,
+              "bit_exact": true,
+              "pair": [
+                "J2",
+                "K2"
+              ]
+            }
+          ],
+          "subtotal": [
+            11,
+            11
+          ]
+        }
+      },
+      "group_law": [
+        {
+          "V_label": "J2_g0",
+          "V_dim": 2,
+          "bit_exact": true,
+          "test": "t_g0 + t_g1 on J2",
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3_g0",
+          "V_dim": 3,
+          "bit_exact": true,
+          "test": "t_g0 + t_g1 on J3",
+          "rep": "J3"
+        },
+        {
+          "V_label": "K2_g1",
+          "V_dim": 2,
+          "bit_exact": true,
+          "test": "t_g0 + t_g1 on K2",
+          "rep": "K2"
+        },
+        {
+          "V_label": "J2_g0",
+          "V_dim": 2,
+          "bit_exact": true,
+          "test": "2 t_g0 on J2",
+          "rep": "J2"
+        },
+        {
+          "V_label": "J3_g0",
+          "V_dim": 3,
+          "bit_exact": true,
+          "test": "2 t_g0 on J3",
+          "rep": "J3"
+        }
+      ],
+      "zero_residuals": 49,
+      "total_identities": 49
+    }
+  },
+  "totals": {
+    "zero_residuals": 98,
+    "total_identities": 98
+  },
+  "SL2_categorical_commutativity": true,
+  "wall_time_seconds": 0.030968666076660156
+}

@@ -1,0 +1,28 @@
+{
+  "sprint": "Q5'-TC-1f",
+  "n_total": 490,
+  "n_pass": 490,
+  "block1_sl2_axioms": {
+    "invertibility": {
+      "n": 15,
+      "pass": 15
+    },
+    "tensor": {
+      "n": 45,
+      "pass": 45
+    },
+    "group_hom": {
+      "n": 75,
+      "pass": 75
+    }
+  },
+  "block2_ga_sl2_commute": {
+    "n": 100,
+    "pass": 100
+  },
+  "block3_injectivity_at_nmax2": {
+    "n": 255,
+    "pass": 255,
+    "n_generators": 15
+  }
+}

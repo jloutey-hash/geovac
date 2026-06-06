@@ -1,0 +1,527 @@
+{
+  "sprint": "Q5'-Tannakian-Closure TC-1d",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    2,
+    3
+  ],
+  "results_by_cutoff": {
+    "2": {
+      "unit": {
+        "n_max": 2,
+        "omega_unit_dim": 1,
+        "expected_dim": 1,
+        "ok": true,
+        "bit_exact": true
+      },
+      "tensor": [
+        {
+          "M": "T1",
+          "N": "J2",
+          "omega_M_tensor_N": 2,
+          "omega_M_times_omega_N": 2,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "J2"
+          ]
+        },
+        {
+          "M": "J2",
+          "N": "J2",
+          "omega_M_tensor_N": 4,
+          "omega_M_times_omega_N": 4,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J2"
+          ]
+        },
+        {
+          "M": "J2",
+          "N": "J3",
+          "omega_M_tensor_N": 6,
+          "omega_M_times_omega_N": 6,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J3"
+          ]
+        },
+        {
+          "M": "J3",
+          "N": "J2",
+          "omega_M_tensor_N": 6,
+          "omega_M_times_omega_N": 6,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J3",
+            "J2"
+          ]
+        }
+      ],
+      "kernel": [
+        {
+          "f_label": "f1",
+          "omega_ker_dim": 0,
+          "ker_omega_f_dim": 0,
+          "dims_ok": true,
+          "iota_shape": [
+            1,
+            0
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f1"
+        },
+        {
+          "f_label": "f2",
+          "omega_ker_dim": 1,
+          "ker_omega_f_dim": 1,
+          "dims_ok": true,
+          "iota_shape": [
+            2,
+            1
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f2"
+        },
+        {
+          "f_label": "f3",
+          "omega_ker_dim": 0,
+          "ker_omega_f_dim": 0,
+          "dims_ok": true,
+          "iota_shape": [
+            2,
+            0
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f3"
+        },
+        {
+          "f_label": "f4",
+          "omega_ker_dim": 0,
+          "ker_omega_f_dim": 0,
+          "dims_ok": true,
+          "iota_shape": [
+            1,
+            0
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f4"
+        }
+      ],
+      "cokernel": [
+        {
+          "f_label": "f1",
+          "omega_coker_dim": 1,
+          "coker_omega_f_dim": 1,
+          "dims_ok": true,
+          "pi_shape": [
+            1,
+            2
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f1"
+        },
+        {
+          "f_label": "f2",
+          "omega_coker_dim": 0,
+          "coker_omega_f_dim": 0,
+          "dims_ok": true,
+          "pi_shape": [
+            0,
+            1
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f2"
+        },
+        {
+          "f_label": "f3",
+          "omega_coker_dim": 0,
+          "coker_omega_f_dim": 0,
+          "dims_ok": true,
+          "pi_shape": [
+            0,
+            2
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f3"
+        },
+        {
+          "f_label": "f4",
+          "omega_coker_dim": 1,
+          "coker_omega_f_dim": 1,
+          "dims_ok": true,
+          "pi_shape": [
+            1,
+            2
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f4"
+        }
+      ],
+      "direct_sum": [
+        {
+          "R1": "T1",
+          "R2": "T1",
+          "omega_R1_plus_R2": 2,
+          "omega_R1_plus_omega_R2": 2,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "T1"
+          ]
+        },
+        {
+          "R1": "T1",
+          "R2": "J2",
+          "omega_R1_plus_R2": 3,
+          "omega_R1_plus_omega_R2": 3,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "J2"
+          ]
+        },
+        {
+          "R1": "J2",
+          "R2": "J3",
+          "omega_R1_plus_R2": 5,
+          "omega_R1_plus_omega_R2": 5,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J3"
+          ]
+        }
+      ],
+      "faithful": [
+        {
+          "f_source_dim": 2,
+          "f_target_dim": 2,
+          "shapes_match": true,
+          "morphism_equal": false,
+          "matrix_equal": false,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        },
+        {
+          "f_source_dim": 2,
+          "f_target_dim": 2,
+          "shapes_match": true,
+          "morphism_equal": true,
+          "matrix_equal": true,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        },
+        {
+          "f_source_dim": 1,
+          "f_target_dim": 2,
+          "shapes_match": true,
+          "morphism_equal": true,
+          "matrix_equal": true,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        },
+        {
+          "f_source_dim": 2,
+          "f_target_dim": 1,
+          "shapes_match": true,
+          "morphism_equal": true,
+          "matrix_equal": true,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        }
+      ],
+      "zero_residuals": 20,
+      "total_identities": 20
+    },
+    "3": {
+      "unit": {
+        "n_max": 3,
+        "omega_unit_dim": 1,
+        "expected_dim": 1,
+        "ok": true,
+        "bit_exact": true
+      },
+      "tensor": [
+        {
+          "M": "T1",
+          "N": "J2",
+          "omega_M_tensor_N": 2,
+          "omega_M_times_omega_N": 2,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "J2"
+          ]
+        },
+        {
+          "M": "J2",
+          "N": "J2",
+          "omega_M_tensor_N": 4,
+          "omega_M_times_omega_N": 4,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J2"
+          ]
+        },
+        {
+          "M": "J2",
+          "N": "J3",
+          "omega_M_tensor_N": 6,
+          "omega_M_times_omega_N": 6,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J3"
+          ]
+        },
+        {
+          "M": "J3",
+          "N": "J2",
+          "omega_M_tensor_N": 6,
+          "omega_M_times_omega_N": 6,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J3",
+            "J2"
+          ]
+        }
+      ],
+      "kernel": [
+        {
+          "f_label": "f1",
+          "omega_ker_dim": 0,
+          "ker_omega_f_dim": 0,
+          "dims_ok": true,
+          "iota_shape": [
+            1,
+            0
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f1"
+        },
+        {
+          "f_label": "f2",
+          "omega_ker_dim": 1,
+          "ker_omega_f_dim": 1,
+          "dims_ok": true,
+          "iota_shape": [
+            2,
+            1
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f2"
+        },
+        {
+          "f_label": "f3",
+          "omega_ker_dim": 0,
+          "ker_omega_f_dim": 0,
+          "dims_ok": true,
+          "iota_shape": [
+            2,
+            0
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f3"
+        },
+        {
+          "f_label": "f4",
+          "omega_ker_dim": 0,
+          "ker_omega_f_dim": 0,
+          "dims_ok": true,
+          "iota_shape": [
+            1,
+            0
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f4"
+        }
+      ],
+      "cokernel": [
+        {
+          "f_label": "f1",
+          "omega_coker_dim": 1,
+          "coker_omega_f_dim": 1,
+          "dims_ok": true,
+          "pi_shape": [
+            1,
+            2
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f1"
+        },
+        {
+          "f_label": "f2",
+          "omega_coker_dim": 0,
+          "coker_omega_f_dim": 0,
+          "dims_ok": true,
+          "pi_shape": [
+            0,
+            1
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f2"
+        },
+        {
+          "f_label": "f3",
+          "omega_coker_dim": 0,
+          "coker_omega_f_dim": 0,
+          "dims_ok": true,
+          "pi_shape": [
+            0,
+            2
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f3"
+        },
+        {
+          "f_label": "f4",
+          "omega_coker_dim": 1,
+          "coker_omega_f_dim": 1,
+          "dims_ok": true,
+          "pi_shape": [
+            1,
+            2
+          ],
+          "ok": true,
+          "bit_exact": true,
+          "morphism": "f4"
+        }
+      ],
+      "direct_sum": [
+        {
+          "R1": "T1",
+          "R2": "T1",
+          "omega_R1_plus_R2": 2,
+          "omega_R1_plus_omega_R2": 2,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "T1"
+          ]
+        },
+        {
+          "R1": "T1",
+          "R2": "J2",
+          "omega_R1_plus_R2": 3,
+          "omega_R1_plus_omega_R2": 3,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "J2"
+          ]
+        },
+        {
+          "R1": "J2",
+          "R2": "J3",
+          "omega_R1_plus_R2": 5,
+          "omega_R1_plus_omega_R2": 5,
+          "dims_ok": true,
+          "ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J3"
+          ]
+        }
+      ],
+      "faithful": [
+        {
+          "f_source_dim": 2,
+          "f_target_dim": 2,
+          "shapes_match": true,
+          "morphism_equal": false,
+          "matrix_equal": false,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        },
+        {
+          "f_source_dim": 2,
+          "f_target_dim": 2,
+          "shapes_match": true,
+          "morphism_equal": true,
+          "matrix_equal": true,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        },
+        {
+          "f_source_dim": 1,
+          "f_target_dim": 2,
+          "shapes_match": true,
+          "morphism_equal": true,
+          "matrix_equal": true,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        },
+        {
+          "f_source_dim": 2,
+          "f_target_dim": 1,
+          "shapes_match": true,
+          "morphism_equal": true,
+          "matrix_equal": true,
+          "faithful_consistent": true,
+          "ok": true,
+          "bit_exact": true
+        }
+      ],
+      "zero_residuals": 20,
+      "total_identities": 20
+    }
+  },
+  "totals": {
+    "zero_residuals": 40,
+    "total_identities": 40
+  },
+  "wall_time_seconds": 0.009808540344238281
+}

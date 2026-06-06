@@ -1,0 +1,343 @@
+{
+  "sprint": "Q5'-ProSystem-Lockdown PS-2",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "n_triples": 10,
+  "n_pairs": 10,
+  "mellin_slots": [
+    0,
+    1,
+    2
+  ],
+  "N_sectors": {
+    "1": 2,
+    "2": 5,
+    "3": 9,
+    "4": 14,
+    "5": 20
+  },
+  "n_primitive_generators": {
+    "1": 6,
+    "2": 15,
+    "3": 27,
+    "4": 42,
+    "5": 60
+  },
+  "hopf_cofiltered_results": [
+    {
+      "m": 3,
+      "n": 2,
+      "k": 1,
+      "dim_high": 27,
+      "dim_low": 6,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 4,
+      "n": 2,
+      "k": 1,
+      "dim_high": 42,
+      "dim_low": 6,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 4,
+      "n": 3,
+      "k": 1,
+      "dim_high": 42,
+      "dim_low": 6,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 4,
+      "n": 3,
+      "k": 2,
+      "dim_high": 42,
+      "dim_low": 15,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 5,
+      "n": 2,
+      "k": 1,
+      "dim_high": 60,
+      "dim_low": 6,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 5,
+      "n": 3,
+      "k": 1,
+      "dim_high": 60,
+      "dim_low": 6,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 5,
+      "n": 3,
+      "k": 2,
+      "dim_high": 60,
+      "dim_low": 15,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 5,
+      "n": 4,
+      "k": 1,
+      "dim_high": 60,
+      "dim_low": 6,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 5,
+      "n": 4,
+      "k": 2,
+      "dim_high": 60,
+      "dim_low": 15,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    },
+    {
+      "m": 5,
+      "n": 4,
+      "k": 3,
+      "dim_high": 60,
+      "dim_low": 27,
+      "bit_exact": true,
+      "residual_norm_squared": 0
+    }
+  ],
+  "hopf_cofiltered_all_bit_exact": true,
+  "Ga_pair_results": [
+    {
+      "m": 2,
+      "k": 1,
+      "total_generators": 15,
+      "n_survived": 6,
+      "n_killed": 9,
+      "expected_survived": 6,
+      "expected_killed": 9,
+      "all_bit_exact": true
+    },
+    {
+      "m": 3,
+      "k": 1,
+      "total_generators": 27,
+      "n_survived": 6,
+      "n_killed": 21,
+      "expected_survived": 6,
+      "expected_killed": 21,
+      "all_bit_exact": true
+    },
+    {
+      "m": 3,
+      "k": 2,
+      "total_generators": 27,
+      "n_survived": 15,
+      "n_killed": 12,
+      "expected_survived": 15,
+      "expected_killed": 12,
+      "all_bit_exact": true
+    },
+    {
+      "m": 4,
+      "k": 1,
+      "total_generators": 42,
+      "n_survived": 6,
+      "n_killed": 36,
+      "expected_survived": 6,
+      "expected_killed": 36,
+      "all_bit_exact": true
+    },
+    {
+      "m": 4,
+      "k": 2,
+      "total_generators": 42,
+      "n_survived": 15,
+      "n_killed": 27,
+      "expected_survived": 15,
+      "expected_killed": 27,
+      "all_bit_exact": true
+    },
+    {
+      "m": 4,
+      "k": 3,
+      "total_generators": 42,
+      "n_survived": 27,
+      "n_killed": 15,
+      "expected_survived": 27,
+      "expected_killed": 15,
+      "all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 1,
+      "total_generators": 60,
+      "n_survived": 6,
+      "n_killed": 54,
+      "expected_survived": 6,
+      "expected_killed": 54,
+      "all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 2,
+      "total_generators": 60,
+      "n_survived": 15,
+      "n_killed": 45,
+      "expected_survived": 15,
+      "expected_killed": 45,
+      "all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 3,
+      "total_generators": 60,
+      "n_survived": 27,
+      "n_killed": 33,
+      "expected_survived": 27,
+      "expected_killed": 33,
+      "all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 4,
+      "total_generators": 60,
+      "n_survived": 42,
+      "n_killed": 18,
+      "expected_survived": 42,
+      "expected_killed": 18,
+      "all_bit_exact": true
+    }
+  ],
+  "Ga_all_bit_exact": true,
+  "Ga_total_generator_checks": 435,
+  "class_pair_results": [
+    {
+      "m": 2,
+      "k": 1,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 3,
+      "k": 1,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 3,
+      "k": 2,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 4,
+      "k": 1,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 4,
+      "k": 2,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 4,
+      "k": 3,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 1,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 2,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 3,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    },
+    {
+      "m": 5,
+      "k": 4,
+      "chi_lhs_eq_rhs": true,
+      "chi_lhs_eq_psi_low": true,
+      "chi_all_bit_exact": true,
+      "eta_lhs_eq_rhs": true,
+      "eta_lhs_eq_psi_low": true,
+      "eta_all_bit_exact": true
+    }
+  ],
+  "class_chi_all_bit_exact": true,
+  "class_eta_all_bit_exact": true,
+  "SL2_categorical_commutativity": true,
+  "bit_exact_summary": {
+    "hopf_cofiltered_triples": 10,
+    "Ga_generator_checks": 435,
+    "class_chi_identities": 20,
+    "class_eta_identities": 20,
+    "total_zero_residuals": 485,
+    "total_identities": 485
+  },
+  "wall_time_seconds": 0.21044516563415527
+}

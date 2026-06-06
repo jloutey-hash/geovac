@@ -1,0 +1,397 @@
+{
+  "sprint": "Q5'-Tannakian-Closure TC-1a",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    2,
+    3
+  ],
+  "results_by_cutoff": {
+    "2": {
+      "zero_object": [
+        {
+          "label": "R0_zero",
+          "dim_R": "0",
+          "zero_to_R_shape": "[0, 0]",
+          "R_to_zero_shape": "[0, 0]",
+          "bit_exact": "True",
+          "rep": "R0"
+        },
+        {
+          "label": "T1_trivial1",
+          "dim_R": "1",
+          "zero_to_R_shape": "[1, 0]",
+          "R_to_zero_shape": "[0, 1]",
+          "bit_exact": "True",
+          "rep": "T1"
+        },
+        {
+          "label": "T2_trivial2",
+          "dim_R": "2",
+          "zero_to_R_shape": "[2, 0]",
+          "R_to_zero_shape": "[0, 2]",
+          "bit_exact": "True",
+          "rep": "T2"
+        },
+        {
+          "label": "J2_jordan",
+          "dim_R": "2",
+          "zero_to_R_shape": "[2, 0]",
+          "R_to_zero_shape": "[0, 2]",
+          "bit_exact": "True",
+          "rep": "J2"
+        },
+        {
+          "label": "J3_jordan",
+          "dim_R": "3",
+          "zero_to_R_shape": "[3, 0]",
+          "R_to_zero_shape": "[0, 3]",
+          "bit_exact": "True",
+          "rep": "J3"
+        }
+      ],
+      "direct_sum": [
+        {
+          "R1_label": "T1_trivial1",
+          "R2_label": "T1_trivial1",
+          "p1_i1_eq_id_R1": "True",
+          "p2_i2_eq_id_R2": "True",
+          "p1_i2_zero": "True",
+          "p2_i1_zero": "True",
+          "i1_p1_plus_i2_p2_eq_id_S": "True",
+          "bit_exact": "True",
+          "pair": "['T1', 'T1']"
+        },
+        {
+          "R1_label": "T1_trivial1",
+          "R2_label": "J2_jordan",
+          "p1_i1_eq_id_R1": "True",
+          "p2_i2_eq_id_R2": "True",
+          "p1_i2_zero": "True",
+          "p2_i1_zero": "True",
+          "i1_p1_plus_i2_p2_eq_id_S": "True",
+          "bit_exact": "True",
+          "pair": "['T1', 'J2']"
+        },
+        {
+          "R1_label": "J2_jordan",
+          "R2_label": "J3_jordan",
+          "p1_i1_eq_id_R1": "True",
+          "p2_i2_eq_id_R2": "True",
+          "p1_i2_zero": "True",
+          "p2_i1_zero": "True",
+          "i1_p1_plus_i2_p2_eq_id_S": "True",
+          "bit_exact": "True",
+          "pair": "['J2', 'J3']"
+        }
+      ],
+      "kernel": [
+        {
+          "label": "f1_T1_to_J2",
+          "K_dim": "0",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f1"
+        },
+        {
+          "label": "f2_J2_to_T1",
+          "K_dim": "1",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f2"
+        },
+        {
+          "label": "f3_id_J2",
+          "K_dim": "0",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f3"
+        },
+        {
+          "label": "f4_T1_to_T2",
+          "K_dim": "0",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f4"
+        }
+      ],
+      "cokernel": [
+        {
+          "label": "f1_T1_to_J2",
+          "C_dim": "1",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f1"
+        },
+        {
+          "label": "f2_J2_to_T1",
+          "C_dim": "0",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f2"
+        },
+        {
+          "label": "f3_id_J2",
+          "C_dim": "0",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f3"
+        },
+        {
+          "label": "f4_T1_to_T2",
+          "C_dim": "1",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f4"
+        }
+      ],
+      "mono_eq_ker_coker": [
+        {
+          "label": "f1_T1_to_J2",
+          "iota_mono": "True",
+          "K_prime_dim": "1",
+          "K_original_dim": "1",
+          "dim_match": "True",
+          "image_match": "True",
+          "bit_exact": "True",
+          "morphism": "f1"
+        },
+        {
+          "label": "f4_T1_to_T2",
+          "iota_mono": "True",
+          "K_prime_dim": "1",
+          "K_original_dim": "1",
+          "dim_match": "True",
+          "image_match": "True",
+          "bit_exact": "True",
+          "morphism": "f4"
+        }
+      ],
+      "epi_eq_coker_ker": [
+        {
+          "label": "f2_J2_to_T1",
+          "pi_epi": "True",
+          "C_prime_dim": "1",
+          "C_original_dim": "1",
+          "dim_match": "True",
+          "kernel_match": "True",
+          "bit_exact": "True",
+          "morphism": "f2"
+        },
+        {
+          "label": "f3_id_J2",
+          "pi_epi": "True",
+          "C_prime_dim": "2",
+          "C_original_dim": "2",
+          "dim_match": "True",
+          "kernel_match": "True",
+          "bit_exact": "True",
+          "morphism": "f3"
+        }
+      ]
+    },
+    "3": {
+      "zero_object": [
+        {
+          "label": "R0_zero",
+          "dim_R": "0",
+          "zero_to_R_shape": "[0, 0]",
+          "R_to_zero_shape": "[0, 0]",
+          "bit_exact": "True",
+          "rep": "R0"
+        },
+        {
+          "label": "T1_trivial1",
+          "dim_R": "1",
+          "zero_to_R_shape": "[1, 0]",
+          "R_to_zero_shape": "[0, 1]",
+          "bit_exact": "True",
+          "rep": "T1"
+        },
+        {
+          "label": "T2_trivial2",
+          "dim_R": "2",
+          "zero_to_R_shape": "[2, 0]",
+          "R_to_zero_shape": "[0, 2]",
+          "bit_exact": "True",
+          "rep": "T2"
+        },
+        {
+          "label": "J2_jordan",
+          "dim_R": "2",
+          "zero_to_R_shape": "[2, 0]",
+          "R_to_zero_shape": "[0, 2]",
+          "bit_exact": "True",
+          "rep": "J2"
+        },
+        {
+          "label": "J3_jordan",
+          "dim_R": "3",
+          "zero_to_R_shape": "[3, 0]",
+          "R_to_zero_shape": "[0, 3]",
+          "bit_exact": "True",
+          "rep": "J3"
+        }
+      ],
+      "direct_sum": [
+        {
+          "R1_label": "T1_trivial1",
+          "R2_label": "T1_trivial1",
+          "p1_i1_eq_id_R1": "True",
+          "p2_i2_eq_id_R2": "True",
+          "p1_i2_zero": "True",
+          "p2_i1_zero": "True",
+          "i1_p1_plus_i2_p2_eq_id_S": "True",
+          "bit_exact": "True",
+          "pair": "['T1', 'T1']"
+        },
+        {
+          "R1_label": "T1_trivial1",
+          "R2_label": "J2_jordan",
+          "p1_i1_eq_id_R1": "True",
+          "p2_i2_eq_id_R2": "True",
+          "p1_i2_zero": "True",
+          "p2_i1_zero": "True",
+          "i1_p1_plus_i2_p2_eq_id_S": "True",
+          "bit_exact": "True",
+          "pair": "['T1', 'J2']"
+        },
+        {
+          "R1_label": "J2_jordan",
+          "R2_label": "J3_jordan",
+          "p1_i1_eq_id_R1": "True",
+          "p2_i2_eq_id_R2": "True",
+          "p1_i2_zero": "True",
+          "p2_i1_zero": "True",
+          "i1_p1_plus_i2_p2_eq_id_S": "True",
+          "bit_exact": "True",
+          "pair": "['J2', 'J3']"
+        }
+      ],
+      "kernel": [
+        {
+          "label": "f1_T1_to_J2",
+          "K_dim": "0",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f1"
+        },
+        {
+          "label": "f2_J2_to_T1",
+          "K_dim": "1",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f2"
+        },
+        {
+          "label": "f3_id_J2",
+          "K_dim": "0",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f3"
+        },
+        {
+          "label": "f4_T1_to_T2",
+          "K_dim": "0",
+          "f_compose_iota_zero": "True",
+          "iota_mono": "True",
+          "bit_exact": "True",
+          "morphism": "f4"
+        }
+      ],
+      "cokernel": [
+        {
+          "label": "f1_T1_to_J2",
+          "C_dim": "1",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f1"
+        },
+        {
+          "label": "f2_J2_to_T1",
+          "C_dim": "0",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f2"
+        },
+        {
+          "label": "f3_id_J2",
+          "C_dim": "0",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f3"
+        },
+        {
+          "label": "f4_T1_to_T2",
+          "C_dim": "1",
+          "pi_compose_f_zero": "True",
+          "pi_epi": "True",
+          "bit_exact": "True",
+          "morphism": "f4"
+        }
+      ],
+      "mono_eq_ker_coker": [
+        {
+          "label": "f1_T1_to_J2",
+          "iota_mono": "True",
+          "K_prime_dim": "1",
+          "K_original_dim": "1",
+          "dim_match": "True",
+          "image_match": "True",
+          "bit_exact": "True",
+          "morphism": "f1"
+        },
+        {
+          "label": "f4_T1_to_T2",
+          "iota_mono": "True",
+          "K_prime_dim": "1",
+          "K_original_dim": "1",
+          "dim_match": "True",
+          "image_match": "True",
+          "bit_exact": "True",
+          "morphism": "f4"
+        }
+      ],
+      "epi_eq_coker_ker": [
+        {
+          "label": "f2_J2_to_T1",
+          "pi_epi": "True",
+          "C_prime_dim": "1",
+          "C_original_dim": "1",
+          "dim_match": "True",
+          "kernel_match": "True",
+          "bit_exact": "True",
+          "morphism": "f2"
+        },
+        {
+          "label": "f3_id_J2",
+          "pi_epi": "True",
+          "C_prime_dim": "2",
+          "C_original_dim": "2",
+          "dim_match": "True",
+          "kernel_match": "True",
+          "bit_exact": "True",
+          "morphism": "f3"
+        }
+      ]
+    }
+  },
+  "totals": {
+    "zero_residuals": 106,
+    "total_identities": 106
+  },
+  "wall_time_seconds": 0.03494071960449219
+}

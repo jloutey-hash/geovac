@@ -1,0 +1,558 @@
+{
+  "sprint": "Q5'-ProSystem-Lockdown PS-4",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "m_max_for_upward_lift": 6,
+  "dim_summary": [
+    {
+      "n_max": 2,
+      "N": 5,
+      "block_sizes": [
+        2,
+        3
+      ],
+      "dim_end_compat_closed_form": 19,
+      "dim_full_M_N_Q": 25,
+      "dim_scalar_diagonal": 5
+    },
+    {
+      "n_max": 3,
+      "N": 9,
+      "block_sizes": [
+        2,
+        3,
+        4
+      ],
+      "dim_end_compat_closed_form": 55,
+      "dim_full_M_N_Q": 81,
+      "dim_scalar_diagonal": 9
+    },
+    {
+      "n_max": 4,
+      "N": 14,
+      "block_sizes": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "dim_end_compat_closed_form": 125,
+      "dim_full_M_N_Q": 196,
+      "dim_scalar_diagonal": 14
+    },
+    {
+      "n_max": 5,
+      "N": 20,
+      "block_sizes": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "dim_end_compat_closed_form": 245,
+      "dim_full_M_N_Q": 400,
+      "dim_scalar_diagonal": 20
+    }
+  ],
+  "basis_results": [
+    {
+      "n_max": 2,
+      "basis_size": 19,
+      "expected_dim": 19,
+      "size_matches_expected": true,
+      "n_compatible_basis_elements": 19,
+      "all_basis_compatible": true,
+      "subalgebra_closure": {
+        "pairs_tested": 9,
+        "closure_bit_exact": true,
+        "n_representatives": 3
+      }
+    },
+    {
+      "n_max": 3,
+      "basis_size": 55,
+      "expected_dim": 55,
+      "size_matches_expected": true,
+      "n_compatible_basis_elements": 55,
+      "all_basis_compatible": true,
+      "subalgebra_closure": {
+        "pairs_tested": 36,
+        "closure_bit_exact": true,
+        "n_representatives": 6
+      }
+    },
+    {
+      "n_max": 4,
+      "basis_size": 125,
+      "expected_dim": 125,
+      "size_matches_expected": true,
+      "n_compatible_basis_elements": 125,
+      "all_basis_compatible": true,
+      "subalgebra_closure": {
+        "pairs_tested": 100,
+        "closure_bit_exact": true,
+        "n_representatives": 10
+      }
+    },
+    {
+      "n_max": 5,
+      "basis_size": 245,
+      "expected_dim": 245,
+      "size_matches_expected": true,
+      "n_compatible_basis_elements": 245,
+      "all_basis_compatible": true,
+      "subalgebra_closure": {
+        "pairs_tested": 225,
+        "closure_bit_exact": true,
+        "n_representatives": 15
+      }
+    }
+  ],
+  "falsifier_results": [
+    {
+      "n_max": 2,
+      "witness_entry": [
+        0,
+        2
+      ],
+      "in_lower_block_triangular": false,
+      "is_compatible": false,
+      "falsifier_passes": true
+    },
+    {
+      "n_max": 3,
+      "witness_entry": [
+        0,
+        2
+      ],
+      "in_lower_block_triangular": false,
+      "is_compatible": false,
+      "falsifier_passes": true
+    },
+    {
+      "n_max": 4,
+      "witness_entry": [
+        0,
+        2
+      ],
+      "in_lower_block_triangular": false,
+      "is_compatible": false,
+      "falsifier_passes": true
+    },
+    {
+      "n_max": 5,
+      "witness_entry": [
+        0,
+        2
+      ],
+      "in_lower_block_triangular": false,
+      "is_compatible": false,
+      "falsifier_passes": true
+    }
+  ],
+  "upward_lift_results": [
+    {
+      "n_max": 2,
+      "n_sampled": 5,
+      "m_max": 6,
+      "n_lift_checks": 20,
+      "all_lifts_bit_exact": true,
+      "per_basis": [
+        {
+          "basis_idx": 0,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 3,
+              "bit_exact": true
+            },
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 4,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 3,
+              "bit_exact": true
+            },
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 9,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 3,
+              "bit_exact": true
+            },
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 14,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 3,
+              "bit_exact": true
+            },
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 18,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 3,
+              "bit_exact": true
+            },
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n_max": 3,
+      "n_sampled": 5,
+      "m_max": 6,
+      "n_lift_checks": 15,
+      "all_lifts_bit_exact": true,
+      "per_basis": [
+        {
+          "basis_idx": 0,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 13,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 27,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 41,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 54,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 4,
+              "bit_exact": true
+            },
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n_max": 4,
+      "n_sampled": 5,
+      "m_max": 6,
+      "n_lift_checks": 10,
+      "all_lifts_bit_exact": true,
+      "per_basis": [
+        {
+          "basis_idx": 0,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 31,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 62,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 93,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 124,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 5,
+              "bit_exact": true
+            },
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n_max": 5,
+      "n_sampled": 5,
+      "m_max": 6,
+      "n_lift_checks": 5,
+      "all_lifts_bit_exact": true,
+      "per_basis": [
+        {
+          "basis_idx": 0,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 61,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 122,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 183,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        },
+        {
+          "basis_idx": 244,
+          "all_lifts_exist": true,
+          "per_m": [
+            {
+              "m": 6,
+              "bit_exact": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tannakian_gap_list": [
+    {
+      "prerequisite": "Abelian category structure",
+      "where_gv_stands": "The category Rep(H_GV) of finite-dimensional Q-rational representations of the abelian primitive Hopf algebra H_GV = Sym_Q(V_{n_max}) (v3.61.0 Track A) is abelian: kernels and cokernels of H_GV-module morphisms are well-defined by inheritance from Vec_Q (Q is a field, Sym(V) is a Hopf algebra over Q, so its finite-dim module category is abelian).",
+      "status_at_finite_cutoff": "SATISFIED",
+      "gap_before_tannakian_closure": "None at the abelian-category level. The natural target category for Tannakian closure is Rep(H_GV) restricted to objects of bounded weight/depth (M2/M3 filtrations of Paper 18 SS III.7); these subcategories inherit abelianness from the full Rep(H_GV).",
+      "classification": "SPRINT-SCALE (1-2 weeks bookkeeping if pursued)"
+    },
+    {
+      "prerequisite": "Symmetric monoidal (tensor) structure",
+      "where_gv_stands": "The category Rep(H_GV) has the standard tensor product of H_GV-modules: (V tensor W) is an H_GV-module via the primitive coproduct Delta(x) = x tensor 1 + 1 tensor x. The unit object is Q with trivial H_GV-action. Symmetry: V tensor W -> W tensor V via vector-space swap is H_GV-linear (primitive coproduct is symmetric).",
+      "status_at_finite_cutoff": "SATISFIED",
+      "gap_before_tannakian_closure": "Tensor product preserves weight/depth filtration in the M2/M3 sectors (additive in weights). The U*-action on tensor products factors through the diagonal G_a-action (v3.66.0 FO3 Interpretation C). No structural gap.",
+      "classification": "SPRINT-SCALE (1-2 weeks bookkeeping if pursued)"
+    },
+    {
+      "prerequisite": "Rigidity (every object has a dual)",
+      "where_gv_stands": "For finite-dim modules over a commutative Hopf algebra with antipode S, the dual V* = Hom_Q(V, Q) has H_GV-action (x . f)(v) = -f(x . v) (using S(x) = -x on primitives). Standard duality pairing V tensor V* -> Q is H_GV-linear. Bidual V** = V via the evaluation map (finite dim Q-vector spaces are reflexive).",
+      "status_at_finite_cutoff": "SATISFIED for finite-dim modules",
+      "gap_before_tannakian_closure": "Rigidity at finite cutoff is automatic on the finite-dim Rep(H_GV) subcategory. The substantive gap is at the inverse-limit level: O_infty = lim_<- O_{n_max} (PS-3) is infinite-dim and its 'rigid objects' need to be pro-finite-dim (filtered colim of finite-dim duals). Standard in Tannakian formalism (cf. Deligne 1990, Section 1) but a sprint-scale bookkeeping step.",
+      "classification": "SPRINT-SCALE (2-3 weeks: pro-finite duality lift)"
+    },
+    {
+      "prerequisite": "Fiber functor to Vec_Q",
+      "where_gv_stands": "The natural candidate is the forgetful functor omega: Rep(H_GV) -> Vec_Q sending an H_GV-module to its underlying Q-vector space. omega is faithful (a Q-linear map between H_GV-modules is determined by its underlying vector-space map), exact (kernel/cokernel computed in Vec_Q match those in Rep(H_GV)), and tensor-preserving (omega(V tensor W) = omega(V) tensor omega(W) as Q-vector spaces by construction).",
+      "status_at_finite_cutoff": "SATISFIED for finite-dim Rep(H_GV)",
+      "gap_before_tannakian_closure": "At finite cutoff omega is a valid fiber functor; the Tannakian reconstruction theorem (Deligne 1990, Theorem 2.11) then recovers H_GV via Aut^tensor(omega). The substantive gap is the identification of Aut^tensor(omega) with the cosmic-Galois U* of v3.63.0 L1, and the verification that this agrees with the Interpretation C closure of v3.66.0 FO3 (which acts on chi, eta, F(s) at the period level). This identification is the heart of Tannakian closure proper and is multi-year.",
+      "classification": "MULTI-YEAR (Tannakian closure proper)"
+    }
+  ],
+  "bit_exact_summary": {
+    "n_basis_checks": 444,
+    "n_subalgebra_closure_checks": 370,
+    "n_falsifier_checks": 4,
+    "n_falsifier_pass": 4,
+    "n_dim_predictions": 4,
+    "n_dim_predictions_ok": 4,
+    "n_upward_lift_checks": 50,
+    "overall_all_bit_exact": true
+  },
+  "wall_time_seconds": 0.39372706413269043
+}

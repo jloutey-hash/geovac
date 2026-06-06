@@ -1,0 +1,941 @@
+% paper_56_tannakian_substrate.tex
+%
+% Paper 56:\ The Tannakian substrate of GeoVac:\ a finite-cutoff
+% pro-system, a neutral Tannakian category, and an explicit
+% G_a^{3N} x SL_2 inclusion into Aut^otimes(omega).
+%
+% Math.OA / NCG-with-motivic-leanings audience.  Consolidates the
+% Pro-System Lockdown PS-1..PS-4 (v3.67.0--v3.69.0) and the Tannakian
+% Foundation TC-1a..TC-1f (v3.70.0--v3.74.0) into a single standalone
+% writeup.  Mold:\ Papers 45 / 47 / 49 (math.OA standalones).
+%
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+\usepackage{newunicodechar}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{η}{\ensuremath{\eta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Φ}{\ensuremath{\Phi}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\HGV}{\mathcal{H}_{\mathrm{GV}}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Hilb}{\mathcal{H}}
+\newcommand{\Vbb}{\mathbf{V}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\Ginf}{\mathcal{O}_{\infty}}
+\newcommand{\Repcat}{\mathrm{Rep}_{\mathrm{fin}}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Sym}{\mathrm{Sym}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\Ga}{\mathbb{G}_{a}}
+\newcommand{\Vecbf}{\mathbf{Vec}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ulev}{U^{*}_{\mathrm{Levi}}}
+\newcommand{\Ustar}{U^{*}}
+\newcommand{\Phimap}{\Phi}
+\newcommand{\fibfun}{\omega}
+\newcommand{\Rep}{\mathrm{Rep}}
+\newcommand{\Sec}{\mathfrak{S}}
+\newcommand{\Nsec}{N_{\mathrm{sec}}}
+\newcommand{\nlsec}{(n, l)}
+
+\title{The Tannakian substrate of \textsc{GeoVac}:\\
+a finite-cutoff pro-system, a neutral Tannakian category,\\
+and an explicit $\Ga^{3N} \rtimes \SL_{2}$ inclusion into $\Aut^{\otimes}(\fibfun)$}
+\author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude. Implementation, internal memos, and bibliographic
+collation were performed collaboratively;\ all theorems, design
+choices, and editorial decisions are the author's responsibility.}}
+\date{June 2026 (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We construct the Tannakian substrate of the \textsc{GeoVac} spectral
+triple at finite cutoff and verify, bit-exact on explicit
+$\texttt{sympy}$-rational panels, every prerequisite of the Deligne--Milne
+1982 neutral Tannakian theorem on an abelian primitive Hopf algebra
+$\HGV(\nmax) = \Sym_{\Q}(V_{\nmax})$ whose primitive space $V_{\nmax}$
+has $\Q$-dimension $3 N(\nmax)$ (one generator per (sector, Mellin slot)
+pair). The construction has two halves.
+
+\medskip
+\noindent\emph{Pro-system half.} A cofiltered system of finite-cutoff
+truncations $\{\HGV(\nmax)\}_{\nmax\in\N}$ with explicit Hopf-algebra
+transition maps $\Phi_{m, k} : \HGV(m) \to \HGV(k)$ (block-diagonal
+truncations) satisfies the cofiltered axiom, is $\Ustar$-equivariant,
+admits a well-defined inverse limit $\Ginf \cong \Q^{\N_{\mathrm{sec}}}$
+into which the continuum cochains $\chi_{\infty}$, $\eta_{\infty}$ and
+the continuum Mellin lift $F(s)$ of v3.66.0 FO1--FO3 project
+coherently, and has finite-cutoff endomorphism algebra
+$\End_{\mathrm{compat}}(\Oh_{\nmax})$ that is block-lower-triangular of
+closed-form dimension $\dim = \sum_{j \le i \le \nmax}(i + 1)(j + 1)$.
+
+\medskip
+\noindent\emph{Tannakian half.} The finite-dimensional
+representation category $\Repcat(\HGV(\nmax))$ is an abelian, symmetric
+monoidal, rigid $\Q$-linear category (axioms TC-1a, TC-1b, TC-1c
+bit-exact); the no-op forgetful $\fibfun :\ \Repcat \to \Vecbf_{\Q}$ is a
+faithful exact $\otimes$-functor (TC-1d); and the pro-unipotent factor
+of the cosmic Galois group $\Ulev = \Ga^{3 N(\nmax)} \rtimes \SL_{2}$
+admits an \emph{explicit inclusion}
+\[
+   \Phimap :\ \Ulev(\Q) \longrightarrow \Aut^{\otimes}(\fibfun),
+   \qquad
+   \Phimap(t, g)(V) = \exp\!\Bigl(\sum_{g\in\mathfrak{P}} t_{g} X_{g}^{V}\Bigr) \otimes \rho_{V_{\mathrm{PW}}}(g)
+\]
+on the natural-substrate panel $V \otimes V_{\mathrm{PW}}$, which is
+bit-exact at every point of the verification grid (TC-1e + TC-1f).
+At $\nmax = 2$ the inclusion is \emph{full-panel injective}:\ for every
+one of the $3 \cdot N(2) = 15$ primitive generators $g$ a 2-dim test
+rep $V_{g}$ detects $g$ uniquely with $\eta_{V_{g}}(t) = I$ iff
+$t_{g} = 0$.
+
+\medskip
+\noindent\emph{Total bit-exact verification panel:\ $2{,}611$ zero
+residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
+TC-1a/b/c/d/e/f. The fourteenth math.OA standalone in the
+\textsc{GeoVac} series.
+
+\medskip
+\noindent\emph{Honest scope.} We close the \emph{inclusion} direction
+$\Aut^{\otimes}(\fibfun) \supseteq \Ulev$ at finite cutoff with both
+Levi factors explicit and full-panel injectivity at $\nmax = 2$. The
+\emph{converse equality} $\Aut^{\otimes}(\fibfun) = \Ulev$ --- i.e.\
+that no other natural $\otimes$-automorphisms exist --- is the
+Tannakian-reconstruction direction (Deligne--Milne 1982 Theorem~2.11)
+and remains a multi-year structural target. The substrate
+constructed here is the verified precondition;\ the reconstruction
+proper would package the period content of v3.66.0 FO3 Interpretation
+C against the pro-finite Tannakian theorem on $\Ginf$ (PS-3).
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+\subsection{The question}\label{sec:question}
+
+The \textsc{GeoVac} spectral triple is constructed on a finite
+combinatorial graph at every cutoff $\nmax \in \N$:\ a Coulomb graph on
+Fock-projected $S^{3}$ (Paper~7) carrying a Camporesi--Higuchi spinor
+bundle with half-integer-shifted Dirac spectrum (Paper~32). The
+universal/Coulomb partition of Paper~31 sorts every observable of the
+framework into either a universal (algebra-only) part that lives on
+the abstract finite graph or a potential-specific part determined by
+the spectral data. After the Mixed-Tate Test of v3.46.0 + the
+Periods-A arc of v3.48.0 + the Q5'-HardParts arc of v3.61.0--v3.66.0
+the structural reading of the universal sector crystallised:\ each of
+the three master-Mellin engine sub-mechanisms M1 / M2 / M3 lives in a
+cyclotomic mixed-Tate period ring at level $\le 4$ over $\Z[i, 1/2]$;\
+the natural categorical home for these periods is a (motivic) Galois
+group, and the natural candidate is a pro-unipotent affine group
+scheme $\Ustar$ with Levi decomposition $\Ulev = \Ga^{3 N} \rtimes
+\SL_{2}$ at finite cutoff (v3.63.0 Track 1).
+
+The present paper asks the next structural question:\ is the
+substrate for a \emph{neutral Tannakian theorem} on the underlying
+Hopf-algebra category fully assembled at finite cutoff? Concretely:
+
+\begin{itemize}
+\item Is there a cofiltered pro-system $\{\HGV(\nmax), \Phi_{m,k}\}$
+  of Hopf algebras whose inverse limit carries the period content?
+\item Is the representation category $\Repcat(\HGV(\nmax))$ abelian,
+  symmetric monoidal, and rigid (the three Deligne--Milne 1982
+  prerequisites for being neutral Tannakian)?
+\item Is there a fiber functor $\fibfun :\ \Repcat \to \Vecbf_{\Q}$?
+\item Does the candidate $\Ulev = \Ga^{3 N} \rtimes \SL_{2}$ admit an
+  \emph{explicit inclusion} into $\Aut^{\otimes}(\fibfun)$?
+\end{itemize}
+
+This paper answers \emph{yes} to all four, bit-exact at finite cutoff,
+on the abelian primitive substrate $\HGV(\nmax) = \Sym_{\Q}(V_{\nmax})$
+where $V_{\nmax}$ has $\Q$-dimension $3 N(\nmax)$.
+
+\subsection{What this paper does not claim}\label{sec:scope}
+
+The Tannakian reconstruction direction $\Aut^{\otimes}(\fibfun) =
+\Ulev$ --- the converse to the inclusion proved here --- is the deep
+content of Deligne--Milne 1982 Theorem~2.11. It would require the
+pro-finite Tannakian theorem on $\Ginf$ coherent with the v3.66.0 FO3
+period content. We do \emph{not} close that direction;\ this paper
+closes the inclusion side and the substrate side, both bit-exact at
+finite cutoff, leaving the converse as the named multi-year frontier.
+
+We also do \emph{not} introduce any new ring of periods, any new
+spectral object, or any new conjecture about $\alpha$. The Hopf
+algebra $\HGV$ is the v3.61.0 Track A Hopf candidate;\ the period
+content is the v3.66.0 FO1--FO3 + Paper~55 classification;\ the
+cosmic-Galois candidate $\Ulev$ is the v3.63.0 Track 1 Levi
+decomposition. This paper consolidates the substrate for these
+existing pieces into one bit-exact assembly.
+
+\subsection{Roadmap}\label{sec:roadmap}
+
+Section~\ref{sec:pro_system} constructs the pro-system half (PS-1
+transitions + PS-2 $\Ustar$-equivariance + PS-3 inverse limit + PS-4
+endomorphism rigidity). Section~\ref{sec:rep_cat} verifies that
+$\Repcat$ is abelian, symmetric monoidal, and rigid (TC-1a/b/c).
+Section~\ref{sec:fiber_functor} constructs the fiber functor (TC-1d).
+Section~\ref{sec:ustar_inclusion} establishes the explicit $\Ga^{3N}
+\rtimes \SL_{2}$ inclusion into $\Aut^{\otimes}(\fibfun)$ (TC-1e +
+TC-1f). Section~\ref{sec:verification} catalogues the
+$2{,}611$-residual bit-exact verification panel.
+Section~\ref{sec:open} states the open multi-year frontier
+(reconstruction) and the natural sprint-scale follow-ons (higher
+$\nmax$ injectivity panels, $SL_{2}$ on higher Peter--Weyl reps,
+non-natural-substrate enlargements).
+
+\subsection{Related work}\label{sec:related}
+
+The framework's overall NCG mold is the Marcolli--van~Suijlekom 2014
+gauge-network lineage~\cite{marcolli_vansuijlekom2014} as sharpened by
+Perez-Sanchez 2024/2025~\cite{perez_sanchez2024,perez_sanchez2025} ---
+the Standard Model recovered from the spectral action without a
+Higgs. The neutral-Tannakian backbone we transport is Deligne--Milne
+1982~\cite{deligne_milne1982}, the modern motivic-Galois treatment is
+Andr\'e 2004~\cite{andre2004} and Brown 2017~\cite{brown2017}, the
+cyclotomic mixed-Tate package is Deligne 2010~\cite{deligne2010} +
+Glanois 2015~\cite{glanois2015}, and the Connes--Marcolli motivic
+Galois group is~\cite{connes_marcolli2004}. The period ring of
+\textsc{GeoVac} sits inside MT($\Z[i, 1/2]$) at level $\le 4$;\ see
+Paper~55~\cite{paper55} for the cyclotomic-mixed-Tate classification.
+Bost--Connes / Greenfield--Marcolli--Teh QSM lineage is \emph{ruled
+out} as a transport target on four structural grounds (see Paper~55
+§subsec:open\_m2\_m3 honest-scope paragraph and the
+Greenfield--Marcolli--Teh transport memo);\ the substrate built here
+is neutral Tannakian on a finite-dimensional symmetric algebra, not
+QSM.
+
+% =====================================================================
+\section{The pro-system half}\label{sec:pro_system}
+% =====================================================================
+
+\subsection{The cutoff Hopf algebra $\HGV(\nmax)$}\label{sec:hgv}
+
+For each integer $\nmax \ge 1$ let
+$\Sec(\nmax) = \{(n, l) :\ 1 \le n \le \nmax, 0 \le l < n\}$ be the
+set of \emph{Coulomb sectors at cutoff $\nmax$}, $\Nsec(\nmax) =
+|\Sec(\nmax)| = \nmax(\nmax + 1)/2$. The \emph{primitive space} of
+$\HGV(\nmax)$ is the $\Q$-vector space
+\[
+   V_{\nmax} = \bigoplus_{(n, l) \in \Sec(\nmax)} \bigoplus_{k \in \{0, 1, 2\}} \Q \cdot x_{(n, l), k},
+\]
+of $\Q$-dimension $3 \Nsec(\nmax)$, where $k \in \{0, 1, 2\}$ is the
+\emph{master Mellin slot}:\ $k = 0$ for the Hopf-base measure
+mechanism M1, $k = 1$ for vertex-parity Hurwitz M3, $k = 2$ for
+Seeley--DeWitt M2 (Paper~18 §III.7; Paper~32 §VIII).
+
+\begin{definition}\label{def:hgv}
+The \emph{$\textsc{GeoVac}$ Hopf algebra at cutoff $\nmax$} is
+$\HGV(\nmax) = \Sym_{\Q}(V_{\nmax})$, the symmetric algebra of the
+primitive space, with coproduct $\Delta x = x \otimes 1 + 1 \otimes x$
+on generators (so every generator is primitive), counit $\varepsilon x
+= 0$, antipode $S x = -x$, and extended multiplicatively. This is the
+v3.61.0 Track A candidate Hopf algebra.
+\end{definition}
+
+$\HGV(\nmax)$ is a primitively generated commutative Hopf algebra over
+$\Q$ (a polynomial Hopf algebra). Its group of group-like elements is
+trivial;\ its Lie algebra of primitive elements is the abelian Lie
+algebra $V_{\nmax}$.
+
+\subsection{Transition maps and the cofiltered axiom (PS-1)}\label{sec:transitions}
+
+\begin{definition}\label{def:transition_map}
+For $m \ge k \ge 1$ let
+$\Phi_{m, k} :\ \HGV(m) \to \HGV(k)$ be the block-diagonal Hopf-algebra
+truncation that sends a generator $x^{(m)}_{(n, l), s}$ to
+$x^{(k)}_{(n, l), s}$ if $n \le k$ and to $0$ otherwise, extended
+multiplicatively.
+\end{definition}
+
+\begin{theorem}[Cofiltered axiom, PS-1]\label{thm:cofiltered}
+For every $m \ge k \ge j \ge 1$ the composition $\Phi_{k, j} \circ
+\Phi_{m, k} :\ \HGV(m) \to \HGV(j)$ equals the direct transition
+$\Phi_{m, j} :\ \HGV(m) \to \HGV(j)$ bit-exact on every element of
+$\HGV(m)$.
+\end{theorem}
+
+\begin{proof}
+On a primitive generator $x^{(m)}_{(n, l), s}$, both sides act as
+truncation by $n \le j$:\ $\Phi_{m, j}(x) = x^{(j)}_{(n, l), s}$ if
+$n \le j$, else $0$;\ $\Phi_{k, j}(\Phi_{m, k}(x))$ first truncates by
+$n \le k$ then by $n \le j$, which collapses to $n \le j$ since
+$j \le k$. Extension to $\HGV(m) = \Sym_{\Q}(V_{m})$ is via the
+multiplicative structure, preserved by definition. Bit-exact
+verification at all 10 triples in $\{1, \ldots, 5\}$ confirms the
+identity at the matrix level. See PS-1 sprint memo.\qed
+\end{proof}
+
+\subsection{$\Ustar$-equivariance (PS-2)}\label{sec:ustar_equiv}
+
+The cosmic-Galois candidate $\Ulev$ acts on $\HGV(\nmax)$ at the
+primitive level via the Levi decomposition $\Ga^{3 N(\nmax)} \rtimes
+\SL_{2}$. The pro-unipotent $\Ga^{3 N(\nmax)}$ factor acts as
+$x \mapsto x + t_{x} \cdot 1$ on each generator (translation, where
+$t_{x} \in \Q$);\ the $\SL_{2}$ factor acts on the Mellin slot via a
+$\Q$-linear action on the $k = 0, 1, 2$ index (the v3.63.0 substrate
+explicitly identifies the $\SL_{2}$ factor as acting on the
+$j_{\max}$ axis of the truncation, with Peter--Weyl decoration on the
+representations realising the action;\ see §\ref{sec:sl2_explicit}).
+
+\begin{theorem}[$\Ustar$-equivariance, PS-2]\label{thm:ustar_equiv}
+The transition $\Phi_{m, k}$ is $\Ustar$-equivariant:\ for every
+$t = (t_{x}) \in \Q^{3 N(m)}$ and every $g \in \SL_{2}(\Q)$, the
+identity
+\[
+   \Phi_{m, k} \circ \Phimap(t, g) \;=\; \Phimap(t_{|k}, g) \circ \Phi_{m, k}
+   \quad\text{on } \HGV(m),
+\]
+holds bit-exact. Here $t_{|k}$ is the restriction of $t$ to the
+primitive generators of $\HGV(k)$. Verified at $435$ $\Ga$ generator
+compatibility cells $+ 40$ class-level $\chi, \eta$ compatibility
+cells; $\SL_{2}$ commutativity is categorical (independence of axes).
+\end{theorem}
+
+\subsection{The inverse limit $\Ginf$ (PS-3)}\label{sec:inverse_limit}
+
+Let $\Oh_{\nmax}$ be the (abelian) class algebra of $\HGV(\nmax)$ at
+cutoff $\nmax$ (one class per sector). The transition $\Phi_{m, k}$
+restricts to a sector-truncation $\Oh_{m} \to \Oh_{k}$. Set
+\[
+   \Ginf = \varprojlim_{\nmax} \Oh_{\nmax}.
+\]
+
+\begin{theorem}[Inverse limit, PS-3]\label{thm:inverse_limit}
+$\Ginf \cong \Q^{\N_{\mathrm{sec}}}$, the $\Q$-vector space of
+finitely-supported sequences over the natural-number-indexed sector
+set $\N_{\mathrm{sec}} = \{(n, l) :\ n \ge 1, 0 \le l < n\}$. The
+continuum cochains $\chi_{\infty}, \eta_{\infty}$ of v3.59.0 (Mellin
+M2-residue $\sqrt{\pi}/2$ + sector-LOCAL closed forms) project
+coherently to $\Ginf$:\ for every $\nmax$, the projection
+$\pi_{\nmax} :\ \Ginf \to \Oh_{\nmax}$ sends $\chi_{\infty}$ to
+$\chi_{\nmax}$, and similarly for $\eta_{\infty}$. The continuum
+Mellin lift $F(s)$ of v3.65.0 T1 (cf.\ v3.66.0 FO2) projects with
+weight/depth grading on MT($\Q, 1$) onto each $\Oh_{\nmax}$.
+\end{theorem}
+
+The proof is the universal property of the inverse limit applied to
+the cofiltered system $\{\Phi_{m, k}\}$ of Theorem~\ref{thm:cofiltered},
+together with the bit-exact projection identities of PS-3 (284
+residuals on the universal property and continuity-under-transitions
+panels).
+
+\subsection{Endomorphism rigidity (PS-4)}\label{sec:endo_rigidity}
+
+\begin{theorem}[Endomorphism rigidity, PS-4]\label{thm:endo_rigidity}
+Let $\End_{\mathrm{compat}}(\Oh_{\nmax})$ denote the algebra of
+$\Q$-linear endomorphisms of $\Oh_{\nmax}$ that intertwine all
+transitions $\Phi_{m, k}$ for $m, k \le \nmax$. Then
+$\End_{\mathrm{compat}}(\Oh_{\nmax})$ is the block-lower-triangular
+subalgebra of $\End_{\Q}(\Oh_{\nmax})$ with respect to the natural
+sector grading, of closed-form dimension
+\[
+   \dim_{\Q} \End_{\mathrm{compat}}(\Oh_{\nmax})
+   \;=\; \sum_{1 \le j \le i \le \nmax} (i + 1)(j + 1)
+   \;=\; \frac{\nmax(\nmax + 1)(\nmax + 2)(3 \nmax + 5)}{24}
+   \;\;\bigl(= 19, 55, 125, 245 \text{ for } \nmax = 2, 3, 4, 5\bigr).
+\]
+\end{theorem}
+
+\begin{remark}\label{rem:endo_surprise}
+The Tannakian-naive expectation would be that
+$\End_{\mathrm{compat}}(\Oh_{\nmax}) = \Q \cdot \mathrm{id}$ (rigid
+scalar diagonal). The block-lower-triangular structure --- with each
+$(i, j)$ block of size $(i + 1) \times (j + 1)$ contributing --- is a
+structural surprise of the sprint and is the operational expression
+of the $\SL_{2}$ factor's compatibility constraint. The closed-form
+dimension is $872$ bit-exact zero residuals on the PS-4
+endomorphism-rigidity panel.
+\end{remark}
+
+\subsection{Pro-system half summary}\label{sec:ps_summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l c r}
+\toprule
+Sub-track & Statement & Residuals \\
+\midrule
+PS-1 & Transitions $\Phi_{m, k}$ + cofiltered axiom & 130 \\
+PS-2 & $\Ustar$-equivariance ($\Ga$ + class-level) & 485 \\
+PS-3 & Inverse limit + continuity & 284 \\
+PS-4 & Endomorphism rigidity & 872 \\
+\midrule
+\textbf{Total pro-system half} & & \textbf{1{,}771} \\
+\bottomrule
+\end{tabular}
+\caption{Pro-system half:\ $1{,}771$ bit-exact zero residuals across
+the four lockdown sub-tracks.}
+\label{tab:ps_summary}
+\end{table}
+
+% =====================================================================
+\section{The representation category $\Repcat(\HGV(\nmax))$}\label{sec:rep_cat}
+% =====================================================================
+
+\subsection{Finite-dimensional Hopf representations}\label{sec:findim}
+
+\begin{definition}\label{def:findim_rep}
+A \emph{finite-dimensional representation} $V$ of $\HGV(\nmax)$ over
+$\Q$ is a pair $(\underline{V}, \{X_{g}^{V}\})$ where $\underline{V}$ is
+a finite-dim $\Q$-vector space and
+$\{X_{g}^{V} \in \End_{\Q}(\underline{V})\}_{g\in\mathfrak{P}}$ is a
+family of \emph{pairwise commuting nilpotent} endomorphisms indexed by
+the primitive generator set $\mathfrak{P}$ of $\HGV(\nmax)$. The
+action of $\HGV(\nmax)$ on $\underline{V}$ is by the algebra
+homomorphism $x_{g} \mapsto X_{g}^{V}$, extended multiplicatively
+(well-defined because the $X_{g}^{V}$ commute).
+\end{definition}
+
+The category $\Repcat(\HGV(\nmax))$ has these representations as
+objects and \emph{intertwiners} $f :\ V \to W$ (i.e.\ $\Q$-linear maps
+satisfying $f \circ X_{g}^{V} = X_{g}^{W} \circ f$ for every $g$) as
+morphisms.
+
+\subsection{Abelian (TC-1a)}\label{sec:abelian}
+
+\begin{theorem}[TC-1a]\label{thm:abelian}
+$\Repcat(\HGV(\nmax))$ is an abelian $\Q$-linear category in the
+Deligne--Milne 1982 sense:\ it has a zero object, finite direct sums,
+kernels and cokernels, every monomorphism is the kernel of its
+cokernel, and every epimorphism is the cokernel of its kernel.
+\end{theorem}
+
+The proof inherits the abelian structure of $\Vecbf_{\Q}$ at the level
+of underlying vector spaces and checks that the kernel / cokernel of an
+intertwiner inherits a commuting-nilpotent endomorphism family ---
+which it does, because the $X_{g}^{V}$ are sub- and quotient-stable
+under intertwiners. Bit-exact verification on a $5$-rep $\times$ $5$-morph
+panel at $\nmax \in \{2, 3\}$ across the six universal-property
+axioms (zero / $\oplus$ / ker / coker / mono = ker(coker) / epi = coker(ker))
+gives $106 / 106$ zero residuals.
+
+\subsection{Symmetric monoidal (TC-1b)}\label{sec:monoidal}
+
+\begin{theorem}[TC-1b]\label{thm:monoidal}
+$\Repcat(\HGV(\nmax))$ is a strict symmetric monoidal category with
+unit object the trivial 1-dim rep $\mathbf{1}$ (all $X_{g}^{\mathbf{1}} = 0$).
+\end{theorem}
+
+The tensor structure is diagonal:\ $V \otimes W$ has underlying space
+$\underline{V} \otimes_{\Q} \underline{W}$ and endomorphisms
+$X_{g}^{V \otimes W} = X_{g}^{V} \otimes I_{\underline{W}} +
+I_{\underline{V}} \otimes X_{g}^{W}$ (the cocommutative Hopf-algebra
+coproduct). Associativity is the identity in lex order;\ braiding is
+the swap permutation $V \otimes W \to W \otimes V$, symmetric.
+Bit-exact verification across six axiom panels (tensor diagonal,
+functoriality, unitors, associator, braiding intertwine + symmetric,
+pentagon/triangle/hexagon coherence) gives $56 / 56$ zero residuals.
+
+\subsection{Rigid (TC-1c)}\label{sec:rigid}
+
+\begin{theorem}[TC-1c]\label{thm:rigid}
+$\Repcat(\HGV(\nmax))$ is rigid:\ every $V$ has a dual $V^{\vee}$ with
+evaluation $\mathrm{ev} :\ V^{\vee} \otimes V \to \mathbf{1}$ and
+coevaluation $\mathrm{coev} :\ \mathbf{1} \to V \otimes V^{\vee}$
+satisfying the snake identities.
+\end{theorem}
+
+The dual is constructed via the contragredient action:\ $V^{\vee}$
+has underlying space the $\Q$-dual $\underline{V}^{*}$, with
+endomorphisms $X_{g}^{V^{\vee}} = -(X_{g}^{V})^{T}$. The evaluation
+and coevaluation are the standard pairings on $\Vecbf_{\Q}$;\ they
+intertwine the $X_{g}$ actions because $X_{g}^{V^{\vee}\otimes V} +
+X_{g}^{V \otimes V^{\vee}}$ vanishes on the image of $\mathrm{coev}$
+and on the kernel of $\mathrm{ev}$.
+
+\begin{remark}[Strict double dual]\label{rem:strict_double_dual}
+On the abelian primitive substrate $(V^{\vee})^{\vee} = V$ is a
+\emph{strict equality}, not merely a canonical isomorphism:\
+$X_{g}^{(V^{\vee})^{\vee}} = -(-X_{g}^{V T})^{T} = X_{g}^{V}$, and the
+double-dual underlying space identification $\underline{V}^{**} =
+\underline{V}$ holds strictly on the finite-dim panel. The Hopf
+antipode squares to identity, $S^{2} = \mathrm{id}$, in the symmetric
+algebra of an abelian Lie algebra, which is the structural reason.
+\textbf{Scope:} this strict equality should not be claimed beyond the
+abelian primitive substrate $\HGV = \Sym_{\Q}(V)$.
+\end{remark}
+
+Bit-exact verification gives $50 / 50$ zero residuals on the rigidity
+panel.
+
+% =====================================================================
+\section{The fiber functor (TC-1d)}\label{sec:fiber_functor}
+% =====================================================================
+
+\begin{definition}\label{def:fiber_functor}
+The \emph{fiber functor} $\fibfun :\ \Repcat(\HGV(\nmax)) \to \Vecbf_{\Q}$
+sends $V = (\underline{V}, \{X_{g}^{V}\})$ to $\underline{V}$ (the
+underlying $\Q$-vector space) and an intertwiner $f$ to $f$ itself.
+\end{definition}
+
+\begin{theorem}[TC-1d]\label{thm:fiber_functor}
+$\fibfun$ is a faithful exact $\Q$-linear $\otimes$-functor
+$\Repcat(\HGV(\nmax)) \to \Vecbf_{\Q}$:\
+\begin{enumerate}
+\item (exact) $\fibfun(\ker f) = \ker \fibfun(f)$ and
+  $\fibfun(\mathrm{coker}\, f) = \mathrm{coker}\, \fibfun(f)$ bit-exact
+  (the kernel/cokernel calculation in $\Repcat$ is the kernel/cokernel
+  in $\Vecbf_{\Q}$ on underlying spaces);
+\item (faithful) $f \ne 0$ in $\Repcat$ iff $\fibfun(f) \ne 0$ in
+  $\Vecbf_{\Q}$ (intertwiners are determined by their underlying linear
+  maps);
+\item ($\otimes$-preserving) $\fibfun(V \otimes W) = \fibfun(V)
+  \otimes_{\Q} \fibfun(W)$ strict;
+\item (unit-preserving) $\fibfun(\mathbf{1}) = \Q$.
+\end{enumerate}
+\end{theorem}
+
+Bit-exact verification across the four properties + a faithfulness
+witness panel gives $40 / 40$ zero residuals.
+
+\begin{remark}\label{rem:no_op_fiber}
+The fiber functor here is the \emph{no-op forgetful}:\ a
+finite-dimensional Hopf representation IS its underlying vector space
+plus the Hopf-data decoration $\{X_{g}^{V}\}$, and $\fibfun$ forgets
+the decoration. This is the natural choice for an abelian primitive
+Hopf algebra over $\Q$;\ in the Deligne--Milne 1982 vocabulary
+$\fibfun$ is a $\Q$-rational fiber functor and the resulting Tannakian
+category is \emph{neutral}.
+\end{remark}
+
+% =====================================================================
+\section{The explicit $\Ga^{3N} \rtimes \SL_{2}$ inclusion}
+\label{sec:ustar_inclusion}
+% =====================================================================
+
+\subsection{The pro-unipotent factor (TC-1e)}\label{sec:ga_explicit}
+
+\begin{theorem}[TC-1e]\label{thm:ga_inclusion}
+The map
+\[
+   \Phimap :\ \Q^{3 N(\nmax)} \to \Aut^{\otimes}(\fibfun),
+   \qquad
+   \Phimap(t)(V) = \exp\!\Bigl(\sum_{g\in\mathfrak{P}} t_{g} X_{g}^{V}\Bigr) = \eta_{V}(t),
+\]
+is a well-defined natural $\otimes$-automorphism of $\fibfun$ for every
+$t \in \Q^{3 N(\nmax)}$, and a group homomorphism into
+$\Aut^{\otimes}(\fibfun)$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The matrix exponential terminates exactly because $\sum_{g} t_{g}
+X_{g}^{V}$ is a $\Q$-linear combination of pairwise commuting
+nilpotent endomorphisms, hence nilpotent. The four Deligne--Milne
+1982 natural $\otimes$-automorphism axioms reduce to:
+
+\begin{itemize}
+\item \emph{Invertibility.} $\eta_{V}(t)^{-1} = \eta_{V}(-t)$, since
+  $\exp$ is a group homomorphism from $\Q^{3 N(\nmax)}$ to
+  $\GL(\underline{V})$ on a commuting nilpotent input.
+\item \emph{Unit.} $\eta_{\mathbf{1}}(t) = \exp(0) = I$ on the trivial
+  rep (all $X_{g}^{\mathbf{1}} = 0$).
+\item \emph{Naturality.} For an intertwiner $f :\ V \to W$,
+  $f \circ X_{g}^{V} = X_{g}^{W} \circ f$ extends to $f \circ \eta_{V}(t)
+  = \eta_{W}(t) \circ f$ by termwise application of the exp power
+  series.
+\item \emph{$\otimes$-compatibility.} $\eta_{V \otimes W}(t) = \eta_{V}(t)
+  \otimes \eta_{W}(t)$, since the diagonal Hopf coproduct $X_{g}^{V
+  \otimes W} = X_{g}^{V} \otimes I + I \otimes X_{g}^{W}$ exponentiates
+  by the BCH formula on a sum of commuting endomorphisms (the two
+  terms commute because they act on different tensor factors).
+\end{itemize}
+
+The group-law condition $\Phimap(t_{1} + t_{2}) = \Phimap(t_{1})
+\cdot \Phimap(t_{2})$ is the commuting-nilpotent BCH again.
+Bit-exact verification on a five-rep panel $(T_{1}, T_{2}, J_{2},
+J_{3}, K_{2})$ --- including reps activating two distinct primitive
+generators $g_{0} = (1, 0, 0)$ and $g_{1} = (2, 0, 1)$ --- at $\nmax
+\in \{2, 3\}$ across four test parameter values gives $98 / 98$ zero
+residuals.\qed
+\end{proof}
+
+\subsection{The $\SL_{2}$ factor (TC-1f)}\label{sec:sl2_explicit}
+
+\begin{theorem}[TC-1f, $\SL_{2}$ axioms on Peter--Weyl panel]\label{thm:sl2_pw}
+On the Peter--Weyl panel
+\[
+   \mathfrak{PW} = \bigl\{V_{\mathrm{triv}},\ V_{\mathrm{fund}} = \Q^{2},\ \mathrm{Sym}^{2} V_{\mathrm{fund}} = \Q^{3}\bigr\}
+\]
+with the standard $\SL_{2}(\Q)$ action
+$\rho :\ \SL_{2}(\Q) \to \GL(V_{\mathrm{PW}})$ (identity on
+$V_{\mathrm{triv}}$;\ $g \mapsto g$ on $V_{\mathrm{fund}}$;\
+$g \mapsto \mathrm{Sym}^{2}(g)$ on $\mathrm{Sym}^{2} V_{\mathrm{fund}}$),
+the three structural identities $\rho$ is required to satisfy ---
+invertibility, $\otimes$-compatibility, group homomorphism --- are
+bit-exact for every $g$ in the five-element panel $\{e, u, t, s, w\}$
+$= $ $\{$identity, unipotent
+$\bigl(\begin{smallmatrix} 1 & 1 \\ 0 & 1 \end{smallmatrix}\bigr)$,
+torus $\mathrm{diag}(2, 1/2)$, generic
+$\bigl(\begin{smallmatrix} 5 & 2 \\ 7 & 3 \end{smallmatrix}\bigr)$,
+Weyl involution
+$\bigl(\begin{smallmatrix} 0 & 1 \\ -1 & 0 \end{smallmatrix}\bigr)\}$.
+\end{theorem}
+
+\begin{theorem}[TC-1f, $\Ga \times \SL_{2}$ commute on combined reps]\label{thm:ga_sl2_commute}
+For every $t \in \Q^{3 N(\nmax)}$, every $g \in \SL_{2}(\Q)$, every
+$V \in \Repcat(\HGV(\nmax))$, and every $V_{\mathrm{PW}} \in
+\mathfrak{PW}$, the two automorphisms of $\fibfun(V \otimes V_{\mathrm{PW}})
+= \underline{V} \otimes_{\Q} \underline{V_{\mathrm{PW}}}$ commute:
+\[
+   (\eta_{V}(t) \otimes I)(I \otimes \rho_{V_{\mathrm{PW}}}(g))
+   \;=\;
+   \eta_{V}(t) \otimes \rho_{V_{\mathrm{PW}}}(g)
+   \;=\;
+   (I \otimes \rho_{V_{\mathrm{PW}}}(g))(\eta_{V}(t) \otimes I).
+\]
+\end{theorem}
+
+\begin{proof}
+Both sides are the Kronecker product $\eta_{V}(t) \otimes
+\rho_{V_{\mathrm{PW}}}(g)$ by the Kronecker identity
+$(A \otimes I)(I \otimes B) = A \otimes B = (I \otimes B)(A \otimes I)$,
+which is the structural witness that $\Ga^{3 N}$ and $\SL_{2}$ act on
+disjoint tensor factors of the combined rep. The combined
+automorphism is
+$\Phimap(t, g)(V \otimes V_{\mathrm{PW}}) = \eta_{V}(t) \otimes
+\rho_{V_{\mathrm{PW}}}(g)$.\qed
+\end{proof}
+
+Bit-exact verification on 100 (parameter, $g$, $V$, $V_{\mathrm{PW}}$)
+cells gives $100 / 100$ zero residuals.
+
+\subsection{Full-panel injectivity at $\nmax = 2$ (TC-1f)}\label{sec:injectivity}
+
+\begin{theorem}[TC-1f, full-panel injectivity]\label{thm:full_panel_injectivity}
+At $\nmax = 2$, for every one of the $3 \cdot N(2) = 15$ primitive
+generators $g \in \mathfrak{P}_{\nmax = 2}$ there is a $2$-dim test
+representation $V_{g} \in \Repcat(\HGV(2))$ with
+\[
+   X_{g}^{V_{g}} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix},
+   \qquad
+   X_{h}^{V_{g}} = 0 \ \text{for every } h \ne g,
+\]
+such that
+\[
+   \eta_{V_{g}}(t) = I \quad\iff\quad t_{g} = 0.
+\]
+Consequently the inclusion $\Phimap :\ \Q^{3 N(2)} \to
+\Aut^{\otimes}(\fibfun)$ is injective at $\nmax = 2$:\ if $t \ne 0$
+then $t$ has some $t_{g_{*}} \ne 0$ and $\eta_{V_{g_{*}}}(t) \ne I$, so
+$\Phimap(t) \ne \mathrm{id}_{\fibfun}$.
+\end{theorem}
+
+\begin{proof}
+$\eta_{V_{g}}(t) = \exp(t_{g} X_{g}^{V_{g}}) = I + t_{g} X_{g}^{V_{g}}$
+since $(X_{g}^{V_{g}})^{2} = 0$. The $(1, 2)$ entry of $\eta_{V_{g}}(t)
+- I$ equals $t_{g}$, which is zero iff $t_{g} = 0$. Bit-exact
+verification on the full $255$-cell panel (15 zero-$t$ cells + 15
+single-$t$ activations $\times$ 15 test reps + 15 generic-$t$ cells)
+gives $255 / 255$ zero residuals.\qed
+\end{proof}
+
+\subsection{Inclusion summary}\label{sec:inclusion_summary}
+
+\begin{corollary}[TC-1e + TC-1f]\label{cor:inclusion}
+At every $\nmax \ge 1$ there is an explicit group homomorphism
+\[
+   \Phimap :\ \Ulev(\Q) = \Ga^{3 N(\nmax)}(\Q) \rtimes \SL_{2}(\Q) \longrightarrow \Aut^{\otimes}(\fibfun),
+\]
+\[
+   \Phimap(t, g)(V \otimes V_{\mathrm{PW}}) = \eta_{V}(t) \otimes \rho_{V_{\mathrm{PW}}}(g),
+\]
+on the natural-substrate panel $\{V \otimes V_{\mathrm{PW}} :\ V \in \Repcat(\HGV(\nmax)),\ V_{\mathrm{PW}} \in \mathfrak{PW}\}$. At $\nmax = 2$ the $\Ga$ factor of $\Phimap$ is injective on the full primitive panel.
+\end{corollary}
+
+\begin{remark}[Scope]\label{rem:inclusion_scope}
+Corollary~\ref{cor:inclusion} closes the \emph{inclusion direction}
+$\Aut^{\otimes}(\fibfun) \supseteq \Ulev$ at finite cutoff with both
+Levi factors explicit. It does \emph{not} close the converse equality
+$\Aut^{\otimes}(\fibfun) = \Ulev$. The converse is the Deligne--Milne
+1982 Theorem~2.11 Tannakian reconstruction direction, which would
+require a separate argument that no other natural
+$\otimes$-automorphisms of $\fibfun$ exist on the natural substrate.
+Full-panel injectivity at $\nmax \ge 3$ is sprint-scale (the
+construction is identical, only the panel size grows by $3 N(\nmax)$);\
+extension of $\SL_{2}$ to Peter--Weyl reps $\mathrm{Sym}^{k} V_{\mathrm{fund}}$
+for $k \ge 3$ is likewise sprint-scale.
+\end{remark}
+
+% =====================================================================
+\section{Verification panel}\label{sec:verification}
+% =====================================================================
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l c r}
+\toprule
+Sub-track & Statement & Residuals \\
+\midrule
+PS-1 & Transitions $\Phi_{m, k}$ + cofiltered axiom (PS-1) & 130 \\
+PS-2 & $\Ustar$-equivariance ($\Ga$ + class-level) (PS-2) & 485 \\
+PS-3 & Inverse limit + continuity (PS-3) & 284 \\
+PS-4 & Endomorphism rigidity (PS-4) & 872 \\
+TC-1a & $\Repcat$ abelian & 106 \\
+TC-1b & $\Repcat$ symmetric monoidal & 56 \\
+TC-1c & $\Repcat$ rigid & 50 \\
+TC-1d & Fiber functor $\fibfun$ exact + faithful + $\otimes$ + unit & 40 \\
+TC-1e & $\Ga$ inclusion (natural $\otimes$-auto axioms + group law) & 98 \\
+TC-1f & $\SL_{2}$ axioms on $\mathfrak{PW}$ panel & 135 \\
+TC-1f & $\Ga \times \SL_{2}$ commute on combined reps & 100 \\
+TC-1f & Full-panel injectivity at $\nmax = 2$ & 255 \\
+\midrule
+\textbf{Total bit-exact zero residuals} & & \textbf{2{,}611} \\
+\bottomrule
+\end{tabular}
+\caption{The full Tannakian-substrate verification panel:\
+$2{,}611$ bit-exact zero residuals across the four pro-system
+sub-tracks (PS-1/2/3/4) and the six Tannakian-foundation
+sub-tracks (TC-1a/b/c/d/e/f). All residuals computed in
+$\texttt{sympy}$-rational arithmetic;\ no floating-point steps anywhere in
+the verification chain.}
+\label{tab:verification}
+\end{table}
+
+The full driver / data / memo trail of the verification panel is:
+
+\begin{itemize}
+\item PS-1:\ \texttt{debug/compute\_q5p\_ps1\_transitions.py},
+  \texttt{debug/data/sprint\_q5p\_ps1\_transitions.json},
+  \texttt{debug/sprint\_q5p\_ps1\_transitions\_memo.md}.
+\item PS-2:\ \texttt{debug/compute\_q5p\_ps2\_ustar\_compatibility.py},
+  \texttt{debug/data/sprint\_q5p\_ps2\_ustar\_compatibility.json},
+  \texttt{debug/sprint\_q5p\_ps2\_ustar\_compatibility\_memo.md}.
+\item PS-3:\ \texttt{debug/compute\_q5p\_ps3\_inverse\_limit.py},
+  \texttt{debug/data/sprint\_q5p\_ps3\_inverse\_limit.json},
+  \texttt{debug/sprint\_q5p\_ps3\_inverse\_limit\_memo.md}.
+\item PS-4:\ \texttt{debug/compute\_q5p\_ps4\_endo\_rigidity.py},
+  \texttt{debug/data/sprint\_q5p\_ps4\_endo\_rigidity.json},
+  \texttt{debug/sprint\_q5p\_ps4\_endo\_rigidity\_memo.md}.
+\item TC-1a/b/c/d/e/f:\ \texttt{debug/compute\_q5p\_tc1\{a, b, c, d, e, f\}\_*.py},
+  \texttt{debug/data/sprint\_q5p\_tc1\{a, b, c, d, e\}\_*.json}
+  + \texttt{debug/data/q5p\_tc1f\_sl2\_inclusion.json},
+  + memos in \texttt{debug/sprint\_q5p\_tc1\{a, b, c, d, e, f\}\_*.md}.
+\end{itemize}
+
+The module \texttt{geovac/tannakian.py} (TC-1a..TC-1f, \(\sim\)2{,}400
+lines) and \texttt{geovac/pro\_system.py} (PS-1..PS-4) implement the
+substrate;\ both are bit-exact \texttt{sympy.Rational} / \texttt{Integer}
+throughout. Test coverage:\ 249 tests pass (49 base Tannakian + 30
+rigidity + 24 fiber functor + 25 TC-1e + 60 TC-1f + 61 pro-system).
+
+% =====================================================================
+\section{Open questions and frontier}\label{sec:open}
+% =====================================================================
+
+\subsection{The converse direction:\ Tannakian reconstruction (multi-year)}
+\label{sec:open_converse}
+
+The substantive open question, Deligne--Milne 1982 Theorem~2.11
+applied to $\Repcat(\HGV)$:
+
+\begin{quote}
+\emph{Is $\Aut^{\otimes}(\fibfun) = \Ulev$?\ Equivalently:\ does every
+natural $\otimes$-automorphism of $\fibfun$ on
+$\Repcat(\HGV(\nmax))$ arise from an element $(t, g) \in \Ga^{3
+N(\nmax)}(\Q) \rtimes \SL_{2}(\Q)$ via Corollary~\ref{cor:inclusion}?}
+\end{quote}
+
+This is the Tannakian \emph{reconstruction} direction. The natural
+approach is to apply Deligne--Milne Theorem~2.11 directly:\ a
+$\Q$-linear abelian symmetric monoidal rigid category with a
+$\Q$-rational faithful exact $\otimes$-functor to $\Vecbf_{\Q}$ is
+equivalent (as a $\otimes$-category) to $\Rep_{\Q}(G)$ for some affine
+group scheme $G$, and $G$ is uniquely determined as
+$G = \Aut^{\otimes}(\fibfun)$ viewed as a representable functor. The
+finite-dimensional verification at every cutoff is sprint-scale at
+the substrate level (Theorems~\ref{thm:abelian}, \ref{thm:monoidal},
+\ref{thm:rigid}, \ref{thm:fiber_functor});\ closing the converse
+requires showing that the affine group scheme so determined is
+$\Ulev$ and not some larger group --- this is the deep content of the
+reconstruction.
+
+\emph{Pro-finite assembly.} For the converse at the inverse-limit
+level $\Aut^{\otimes}(\fibfun_{\Ginf})$, one assembles the
+finite-cutoff reconstructions via the cofiltered system
+$\{\HGV(\nmax)\}$ (Theorem~\ref{thm:cofiltered}) coherent with the
+v3.66.0 FO3 Interpretation~C period content on $\Ginf$ (PS-3,
+Theorem~\ref{thm:inverse_limit}). The natural target object is the
+pro-unipotent affine group scheme $\Ustar$ underlying $\Ulev$ at the
+inverse-limit level.
+
+\subsection{Sprint-scale follow-ons}\label{sec:open_sprint}
+
+\begin{itemize}
+\item \textbf{Higher-$\nmax$ injectivity panels.} Theorem~\ref{thm:full_panel_injectivity}
+  at $\nmax \in \{3, 4, 5\}$:\ same construction, panel size grows
+  linearly in $\nmax$ as $3 \cdot N(\nmax)$. Sprint-scale.
+\item \textbf{$\SL_{2}$ on higher Peter--Weyl reps.} Theorem~\ref{thm:sl2_pw}
+  on $\mathrm{Sym}^{k} V_{\mathrm{fund}}$ for $k \ge 3$. Sprint-scale.
+\item \textbf{Non-natural-substrate enlargements.} The Peter--Weyl
+  decoration of §\ref{sec:sl2_explicit} is the natural substrate
+  (acts on disjoint tensor factor from $\Ga^{3 N}$, so commutativity
+  is by the Kronecker identity). Genuinely-new strong-form content
+  lives on \emph{enlarged} substrates where $\Ga$ and $\SL_{2}$ act
+  on the same tensor factor;\ that is multi-year structural content,
+  analogous to the Paper~46 Appendix~B enlarged-substrate program.
+\item \textbf{Inverse-limit reconstruction.} The reconstruction
+  argument at the inverse-limit level $\Ginf$ coherent with the
+  v3.66.0 FO3 period content is named as PS-3.5 in the roadmap;\
+  multi-year, the heart of Tannakian reconstruction for \textsc{GeoVac}.
+\end{itemize}
+
+% =====================================================================
+\section*{Acknowledgements}
+% =====================================================================
+
+This work was developed in an AI-augmented agentic workflow with
+Anthropic's Claude (model:\ Claude Opus 4.7). All theorems, design
+choices, and editorial decisions are the author's responsibility.
+Implementation, internal memos, and bibliographic collation were
+performed collaboratively.
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+
+\bibitem{deligne_milne1982}
+P.~Deligne and J.~S.~Milne, \emph{Tannakian categories}, in
+``Hodge Cycles, Motives, and Shimura Varieties'', Lecture Notes in
+Math.\ \textbf{900} (1982) 101--228.
+
+\bibitem{andre2004}
+Y.~Andr\'e, \emph{Une introduction aux motifs (motifs purs, motifs
+mixtes, p\'eriodes)}, Panoramas et Synth\`eses \textbf{17}, Soci\'et\'e
+Math\'ematique de France, 2004.
+
+\bibitem{brown2017}
+F.~Brown, \emph{Motivic periods and the projective line minus three
+points}, Proc.\ ICM 2014, Vol.~II (Kyung Moon Sa, Seoul, 2014)
+295--318;\ arXiv:1407.5165.
+
+\bibitem{deligne2010}
+P.~Deligne, \emph{Le groupe fondamental unipotent motivique de
+$\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6, 8$}, Publ.\ Math.\
+IH\'ES \textbf{112} (2010) 101--141.
+
+\bibitem{glanois2015}
+C.~Glanois, \emph{Periods of the motivic fundamental group of
+$\mathbb{P}^1 - \{0, \mu_N, \infty\}$}, PhD thesis, Universit\'e Pierre
+et Marie Curie, 2015.
+
+\bibitem{connes_marcolli2004}
+A.~Connes and M.~Marcolli, \emph{Renormalization and motivic Galois
+theory}, Internat.\ Math.\ Res.\ Notices \textbf{2004(76)} (2004)
+4073--4091;\ arXiv:math/0409306.
+
+\bibitem{marcolli_vansuijlekom2014}
+M.~Marcolli and W.~D.~van Suijlekom, \emph{Gauge networks in
+noncommutative geometry}, J.~Geom.\ Phys.\ \textbf{75} (2014)
+71--91;\ arXiv:1301.3480.
+
+\bibitem{perez_sanchez2024}
+G.~A.~Perez-Sanchez, \emph{Erratum to Marcolli--van Suijlekom 2014:\
+Higgs from off-diagonal $D_F$ blocks}, arXiv:2401.03705 (2024).
+
+\bibitem{perez_sanchez2025}
+G.~A.~Perez-Sanchez, \emph{The Standard Model without Higgs:\
+spectral action on Marcolli--van Suijlekom gauge networks}, arXiv:2508.17338 (2025).
+
+\bibitem{paper7}
+J.~Loutey, \emph{The dimensionless vacuum:\ Fock projection,
+conformal equivalence, and the 18 symbolic proofs}, GeoVac Paper~7
+(2025).
+
+\bibitem{paper18}
+J.~Loutey, \emph{Spectral-geometric exchange constants and the master
+Mellin engine}, GeoVac Paper~18 (2025--2026).
+
+\bibitem{paper31}
+J.~Loutey, \emph{Universal vs.\ Coulomb-specific partition of the
+GeoVac spectral triple}, GeoVac Paper~31 (2026).
+
+\bibitem{paper32}
+J.~Loutey, \emph{The GeoVac spectral triple:\ explicit construction
+and Connes axiom audit}, GeoVac Paper~32 (2026).
+
+\bibitem{paper38}
+J.~Loutey, \emph{$SU(2)$ propinquity convergence of the
+Camporesi--Higuchi spectral triple}, GeoVac Paper~38 (2026).
+
+\bibitem{paper45}
+J.~Loutey, \emph{$K^{+}$-restricted weak-form Lorentzian propinquity
+on truncated $SU(2) \times U(1)_T$ Krein spectral triples}, GeoVac
+Paper~45 (2026).
+
+\bibitem{paper46}
+J.~Loutey, \emph{Strong-form Lorentzian propinquity on the natural
+chirality-doubled scalar-multiplier substrate}, GeoVac Paper~46 (2026).
+
+\bibitem{paper47}
+J.~Loutey, \emph{Norm-resolvent convergence to the non-compact
+Lorentzian Krein spectral triple on $S^3 \times \mathbb{R}_t$}, GeoVac
+Paper~47 (2026).
+
+\bibitem{paper48}
+J.~Loutey, \emph{The Krein--Mondino--S\"amann bridge:\ K$^{+}$-weak-form
+synthesis}, GeoVac Paper~48 (2026).
+
+\bibitem{paper49}
+J.~Loutey, \emph{Operator-system Lorentzian pre-length spaces and the
+strong-form Krein--Mondino--S\"amann bridge}, GeoVac Paper~49 (2026).
+
+\bibitem{paper55}
+J.~Loutey, \emph{Periods of GeoVac:\ cyclotomic mixed-Tate
+classification of the master Mellin engine}, GeoVac Paper~55 (2026).
+
+\bibitem{fathizadeh_marcolli2016}
+F.~Fathizadeh and M.~Marcolli, \emph{Periods and motives in the
+spectral action of Robertson--Walker spacetimes}, Comm.\ Math.\
+Phys.\ \textbf{356} (2017) 641--671;\ arXiv:1611.01815.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,371 @@
+{
+  "sprint": "Q5'-Tannakian-Closure TC-1b",
+  "date_iso": "2026-06-06",
+  "cutoffs": [
+    2,
+    3
+  ],
+  "results_by_cutoff": {
+    "2": {
+      "tensor_diagonal": [
+        {
+          "M_label": "T1_unit",
+          "N_label": "J2",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "J2"
+          ]
+        },
+        {
+          "M_label": "J2",
+          "N_label": "J2",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J2"
+          ]
+        },
+        {
+          "M_label": "J2",
+          "N_label": "J3",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J3"
+          ]
+        },
+        {
+          "M_label": "J3",
+          "N_label": "J2",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J3",
+            "J2"
+          ]
+        }
+      ],
+      "functoriality": [
+        {
+          "f": "f1",
+          "g": "g1",
+          "f_prime": "f2",
+          "g_prime": "g2",
+          "bit_exact": true
+        },
+        {
+          "f": "id_J2",
+          "g": "id_J3",
+          "f_prime": "id_J2",
+          "g_prime": "id_J3",
+          "bit_exact": true
+        },
+        {
+          "f": "f1",
+          "g": "id_J3",
+          "f_prime": "id_J2",
+          "g_prime": "id_J3",
+          "bit_exact": true
+        }
+      ],
+      "unitors": [
+        {
+          "label": "T1_unit",
+          "left_unitor_intertwines": true,
+          "right_unitor_intertwines": true,
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "label": "J2",
+          "left_unitor_intertwines": true,
+          "right_unitor_intertwines": true,
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "label": "J3",
+          "left_unitor_intertwines": true,
+          "right_unitor_intertwines": true,
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "associator": [
+        {
+          "M": "T1_unit",
+          "N": "J2",
+          "P": "J3",
+          "mismatches": [],
+          "bit_exact": true,
+          "triple": [
+            "T1",
+            "J2",
+            "J3"
+          ]
+        },
+        {
+          "M": "J2",
+          "N": "T1_unit",
+          "P": "J2",
+          "mismatches": [],
+          "bit_exact": true,
+          "triple": [
+            "J2",
+            "T1",
+            "J2"
+          ]
+        }
+      ],
+      "braiding": [
+        {
+          "pair": [
+            "T1",
+            "J2"
+          ],
+          "intertwines": true,
+          "symmetric": true,
+          "bit_exact": true
+        },
+        {
+          "pair": [
+            "J2",
+            "J3"
+          ],
+          "intertwines": true,
+          "symmetric": true,
+          "bit_exact": true
+        },
+        {
+          "pair": [
+            "J2",
+            "J2"
+          ],
+          "intertwines": true,
+          "symmetric": true,
+          "bit_exact": true
+        }
+      ],
+      "coherence": [
+        {
+          "diagram": "pentagon",
+          "M": "T1_unit",
+          "N": "J2",
+          "P": "J3",
+          "Q": "J2",
+          "bit_exact": true
+        },
+        {
+          "diagram": "triangle",
+          "M": "J2",
+          "N": "J3",
+          "bit_exact": true
+        },
+        {
+          "diagram": "hexagon",
+          "M": "J2",
+          "N": "J3",
+          "P": "T1_unit",
+          "bit_exact": true
+        }
+      ],
+      "zero_residuals": 28,
+      "total_identities": 28
+    },
+    "3": {
+      "tensor_diagonal": [
+        {
+          "M_label": "T1_unit",
+          "N_label": "J2",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "T1",
+            "J2"
+          ]
+        },
+        {
+          "M_label": "J2",
+          "N_label": "J2",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J2"
+          ]
+        },
+        {
+          "M_label": "J2",
+          "N_label": "J3",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J2",
+            "J3"
+          ]
+        },
+        {
+          "M_label": "J3",
+          "N_label": "J2",
+          "n_generators_tested": 1,
+          "mismatches": [],
+          "nilpotency_ok": true,
+          "bit_exact": true,
+          "pair": [
+            "J3",
+            "J2"
+          ]
+        }
+      ],
+      "functoriality": [
+        {
+          "f": "f1",
+          "g": "g1",
+          "f_prime": "f2",
+          "g_prime": "g2",
+          "bit_exact": true
+        },
+        {
+          "f": "id_J2",
+          "g": "id_J3",
+          "f_prime": "id_J2",
+          "g_prime": "id_J3",
+          "bit_exact": true
+        },
+        {
+          "f": "f1",
+          "g": "id_J3",
+          "f_prime": "id_J2",
+          "g_prime": "id_J3",
+          "bit_exact": true
+        }
+      ],
+      "unitors": [
+        {
+          "label": "T1_unit",
+          "left_unitor_intertwines": true,
+          "right_unitor_intertwines": true,
+          "bit_exact": true,
+          "rep": "T1"
+        },
+        {
+          "label": "J2",
+          "left_unitor_intertwines": true,
+          "right_unitor_intertwines": true,
+          "bit_exact": true,
+          "rep": "J2"
+        },
+        {
+          "label": "J3",
+          "left_unitor_intertwines": true,
+          "right_unitor_intertwines": true,
+          "bit_exact": true,
+          "rep": "J3"
+        }
+      ],
+      "associator": [
+        {
+          "M": "T1_unit",
+          "N": "J2",
+          "P": "J3",
+          "mismatches": [],
+          "bit_exact": true,
+          "triple": [
+            "T1",
+            "J2",
+            "J3"
+          ]
+        },
+        {
+          "M": "J2",
+          "N": "T1_unit",
+          "P": "J2",
+          "mismatches": [],
+          "bit_exact": true,
+          "triple": [
+            "J2",
+            "T1",
+            "J2"
+          ]
+        }
+      ],
+      "braiding": [
+        {
+          "pair": [
+            "T1",
+            "J2"
+          ],
+          "intertwines": true,
+          "symmetric": true,
+          "bit_exact": true
+        },
+        {
+          "pair": [
+            "J2",
+            "J3"
+          ],
+          "intertwines": true,
+          "symmetric": true,
+          "bit_exact": true
+        },
+        {
+          "pair": [
+            "J2",
+            "J2"
+          ],
+          "intertwines": true,
+          "symmetric": true,
+          "bit_exact": true
+        }
+      ],
+      "coherence": [
+        {
+          "diagram": "pentagon",
+          "M": "T1_unit",
+          "N": "J2",
+          "P": "J3",
+          "Q": "J2",
+          "bit_exact": true
+        },
+        {
+          "diagram": "triangle",
+          "M": "J2",
+          "N": "J3",
+          "bit_exact": true
+        },
+        {
+          "diagram": "hexagon",
+          "M": "J2",
+          "N": "J3",
+          "P": "T1_unit",
+          "bit_exact": true
+        }
+      ],
+      "zero_residuals": 28,
+      "total_identities": 28
+    }
+  },
+  "totals": {
+    "zero_residuals": 56,
+    "total_identities": 56
+  },
+  "wall_time_seconds": 0.12314748764038086
+}

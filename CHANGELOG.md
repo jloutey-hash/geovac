@@ -7,6 +7,415 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.74.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-1f — explicit $\mathbb{G}_a \times SL_2$ inclusion + full-panel injectivity at $n_{\max} = 2$.** Two of the three multi-year follow-ons named at v3.73.0 close at sprint scale. (i) The $SL_2$ factor of $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ is realised on the Peter--Weyl panel $\{V_{\mathrm{triv}}, V_{\mathrm{fund}} = \mathbb{Q}^2, \mathrm{Sym}^2 V_{\mathrm{fund}} = \mathbb{Q}^3\}$ with explicit rep $\rho: SL_2(\mathbb{Q}) \to \mathrm{GL}(V_{\mathrm{PW}})$, and the same three structural identities TC-1e proved for $\mathbb{G}_a$ — invertibility, $\otimes$-compatibility, group law — are bit-exact for $SL_2$ across a five-element $SL_2(\mathbb{Q})$ panel (identity, unipotent $\bigl(\begin{smallmatrix} 1 & 1 \\ 0 & 1 \end{smallmatrix}\bigr)$, torus $\mathrm{diag}(2, 1/2)$, generic $\bigl(\begin{smallmatrix} 5 & 2 \\ 7 & 3 \end{smallmatrix}\bigr)$, Weyl involution $\bigl(\begin{smallmatrix} 0 & 1 \\ -1 & 0 \end{smallmatrix}\bigr)$). (ii) $\mathbb{G}_a \times SL_2$ commutativity on combined reps $V \otimes V_{\mathrm{PW}}$ is bit-exact by the Kronecker identity $(A \otimes I)(I \otimes B) = A \otimes B = (I \otimes B)(A \otimes I)$ on $100 / 100$ (parameter, $g$, $V$, $V_{\mathrm{PW}}$) cells. (iii) Full-panel injectivity at $n_{\max} = 2$:\ for each of the $3 \cdot N(2) = 15$ primitive generators $g \in \{1,2\} \times \{0, \ldots\} \times \{0, 1, 2\}$ a 2-dim test rep $V_g$ with $X_g^{V_g} = E_{12}$ and $X_h^{V_g} = 0$ for $h \ne g$ detects $g$ uniquely, with $\eta_{V_g}(t) = I$ iff $t_g = 0$;\ predicate bit-exact on $255 / 255$ (generator, parameter regime) cells across zero, single-generator, and generic three-generator test parameters. **Total bit-exact zero residuals:\ 490 / 490** ($SL_2$ invertibility 15, tensor 45, group homomorphism 75, $\mathbb{G}_a \times SL_2$ commute 100, full-panel injectivity 255). **Wall time:\ 0.6 s.** Memo:\ `debug/sprint_q5p_tc1f_sl2_inclusion_memo.md`.
+
+The remaining multi-year content unchanged from v3.73.0:\ the **converse equality** $\mathrm{Aut}^\otimes(\omega) = U^*_{\mathrm{Levi}}$ (full Tannakian closure proper, Deligne--Milne 1982 Theorem 2.11 reconstruction direction). TC-1f closes the explicit inclusion at finite cutoff for both Levi factors and witnesses faithfulness at $n_{\max} = 2$ on every primitive generator;\ the converse remains the open multi-year frontier.
+
+### Closed
+
+- **TC-1f explicit $\mathbb{G}_a \times SL_2$ inclusion + injectivity — POSITIVE.**  Three blocks:\
+  (1) **SL_2 axioms on PW reps** — invertibility (15 cells:\ 5 $SL_2$ panel $\times$ 3 PW reps), tensor (45 cells:\ 5 $\times$ 9 PW pairs), group homomorphism (75 cells:\ 25 $SL_2$ pairs $\times$ 3 PW reps). 135/135.\
+  (2) **$\mathbb{G}_a \times SL_2$ commute on combined reps** (100 cells:\ 5 $t$ values $\times$ 5 $SL_2$ panel $\times$ 2 $V$ panel $\times$ 2 $V_{\mathrm{PW}}$ panel). 100/100.\
+  (3) **Full-panel injectivity at $n_{\max} = 2$** (255 cells:\ 15 generators + 15 $\times$ 15 single-$t$ + 15 generic-$t$). 255/255.\
+  Total $135 + 100 + 255 = 490 / 490$ bit-exact zero residuals.  Driver `debug/compute_q5p_tc1f_sl2_inclusion.py`;\ data `debug/data/q5p_tc1f_sl2_inclusion.json`;\ memo `debug/sprint_q5p_tc1f_sl2_inclusion_memo.md`;\ tests `tests/test_tannakian_sl2.py` (60 tests, all pass in 1.03 s).
+
+### Added
+
+- **`geovac/tannakian.py` TC-1f additions (~250 lines, total ~2400 lines)**.  Public API:\ `PWRep`, `PWMorphism` classes;\ `sl2_standard_action(g)`, `_pw_standard_rep`, `_pw_sym2_rep`, `_pw_trivial_rep` (private symmetric-square action helper `_sl2_sym2_action`);\ `verify_sl2_invertibility(g, V_pw)`, `verify_sl2_tensor(g, V, W)`, `verify_sl2_group_homomorphism(g1, g2, V_pw)`, `verify_ga_sl2_commute(t_dict, g, V, V_pw)`, `primitive_generator_rep(n_max, g)`, `verify_injectivity_at_generator(t_dict, g, n_max)`. Bit-exact `sympy.Rational`/`Integer` throughout. `__all__` updated.
+
+- **`tests/test_tannakian_sl2.py`** — 60 TC-1f tests covering PW plumbing (`PWRep`/`PWMorphism`, `_sl2_sym2_action` closed-form for identity / unipotent / torus), $SL_2$ axioms (invertibility on a 5-elt $\times$ 2-rep parametrize grid, tensor on a 5 $\times$ 3 pair grid, group homomorphism on a 4-pair $\times$ 2-rep grid + identity-element edge cases), $\mathbb{G}_a \times SL_2$ commutativity ($J_2 \otimes V_{\mathrm{fund}}$ across 4 $SL_2$ elements;\ $J_3 \otimes \mathrm{Sym}^2$ across 2 elements;\ zero-$t$ and identity-$g$ edge cases), generator-rep construction (dim/label/endo-structure), and full-panel injectivity at $n_{\max} = 2$ (zero-$t$, single-$t$ detection of matching generator, generic-$t$ detection of active subset, panel-size assertion $= 15$). All pass in 1.03 s.
+
+- **`debug/compute_q5p_tc1f_sl2_inclusion.py`** — TC-1f driver (~220 lines, 0.6 s wall).
+
+- **`debug/data/q5p_tc1f_sl2_inclusion.json`** — bit-exact data dump (block-by-block totals).
+
+- **Paper 55 \S subsec:open\_m2\_m3** — ONE new \emph-prefixed paragraph after the v3.73.0 TC-1e paragraph. Pages:\ 33 $\to$ 34, three-pass clean.
+
+- **Paper 56 (NEW math.OA standalone, \texttt{papers/group3\_foundations/paper\_56\_tannakian\_substrate.tex}, 11pp, three-pass clean)** — \emph{The Tannakian substrate of \textsc{GeoVac}:\ a finite-cutoff pro-system, a neutral Tannakian category, and an explicit $\mathbb{G}_a^{3N} \rtimes \mathrm{SL}_2$ inclusion into $\mathrm{Aut}^\otimes(\omega)$}. Fourteenth math.OA standalone in the GeoVac series. Consolidates the Pro-System Lockdown PS-1/2/3/4 (v3.67.0--v3.69.0) + Tannakian Foundation TC-1a/b/c/d/e/f (v3.70.0--v3.74.0) into one writeup. Six sections:\ \S1 Introduction (the question + scope + roadmap + related work, including Marcolli--vS + Perez-Sanchez Erratum / SM-without-Higgs lineage);\ \S2 Pro-system half (Thm 2.2 cofiltered axiom + Thm 2.4 $U^*$-equivariance + Thm 2.5 inverse limit + Thm 2.6 endo rigidity with closed-form $\dim = \sum_{j \le i}(i+1)(j+1)$);\ \S3 Rep category abelian / sym-monoidal / rigid (Thm 3.1, 3.2, 3.3, with strict double-dual scope flag);\ \S4 Fiber functor as no-op forgetful (Thm 4.2);\ \S5 Explicit $\mathbb{G}_a \times SL_2$ inclusion (Thm 5.1 $\mathbb{G}_a$ + Thm 5.2 $SL_2$ axioms + Thm 5.3 $\mathbb{G}_a \times SL_2$ commute + Thm 5.4 full-panel injectivity + Cor 5.5 inclusion summary);\ \S6 Verification panel (\textbf{2{,}611} bit-exact zero residuals);\ \S7 Open questions (converse + sprint-scale follow-ons). Honest scope:\ inclusion direction $\mathrm{Aut}^\otimes(\fibfun) \supseteq U^*_{\mathrm{Levi}}$ closed at finite cutoff with full-panel injectivity at $\nmax = 2$;\ converse equality (Deligne--Milne 1982 Thm 2.11 reconstruction direction) named as multi-year frontier. arXiv-ready pending PI metadata sign-off (math.OA primary, math-ph secondary, math.RT tertiary).
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 61/61 pro-system tests pass.
+- 49/49 base tannakian tests pass.
+- 30/30 rigidity tests pass.
+- 24/24 fiber-functor tests pass.
+- 25/25 TC-1e Aut-inclusion tests pass.
+- 60/60 TC-1f SL_2 inclusion tests pass (NEW).
+- Total Tannakian arc:\ 249/249 (full module sweep, 1.77 s).
+- Paper 55 three-pass clean compile;\ pages 33 $\to$ 34, ~16,900 words.
+- 18/18 topological-integrity tests pass.
+
+## [3.73.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-1e — first stone of the multi-year wall.** The pro-unipotent factor $\mathbb{G}_a^{3 N(n_{\max})}(\mathbb{Q})$ of the cosmic-Galois $U^*_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ (v3.63.0 L1) maps explicitly into the natural $\otimes$-automorphisms of the fiber functor $\omega$ (TC-1d) via
+
+$$\Phi: \mathbb{Q}^{3 N(n_{\max})} \to \mathrm{Aut}^\otimes(\omega), \qquad \Phi(t)(V) = \exp\!\Big(\sum_g t_g X_g^V\Big).$$
+
+Each $\eta_V(t) = \Phi(t)(V)$ is the truncated matrix exponential of a $\mathbb{Q}$-linear combination of the commuting nilpotent endomorphisms $\{X_g^V\}_g$;\ well-defined because the sum is nilpotent and the power series terminates exactly. All four Deligne--Milne 1982 natural $\otimes$-automorphism axioms (invertibility, unit, naturality, $\otimes$-compatibility) plus the group law $\Phi(t_1 + t_2) = \Phi(t_1) \cdot \Phi(t_2)$ verified bit-exact on a **five-rep panel** $(T_1, T_2, J_2, J_3, K_2)$ — including reps activating TWO distinct primitive generators $g_0 = (1, 0, 0)$ and $g_1 = (2, 0, 1)$ — at $n_{\max} \in \{2, 3\}$ across **four test parameter values** $(0, t_{g_0}, t_{g_1}, t_{\mathrm{mixed}})$. **Total bit-exact zero residuals:\ 98 / 98** (49 per cutoff). $SL_2$ commutativity at the inclusion level is **categorical** (independence-of-axes:\ $SL_2$ acts on the $j_{\max}$ axis of the Peter--Weyl decoration, $\Phi$ on the $n_{\max}$ axis of the fiber-functor substrate). **TC-1e closes the inclusion direction $\mathrm{Aut}^\otimes(\omega) \supseteq U^*_{\mathrm{Levi}}$ at finite cutoff** as the first stone of the multi-year wall named by PS-4 (v3.69.0). The **converse equality** $\mathrm{Aut}^\otimes(\omega) = U^*$ (full Tannakian closure proper, requiring the pro-finite Tannakian theorem coherent with v3.66.0 FO3 Interpretation C at the period level on $\mathcal{O}_\infty$ / PS-3) remains multi-year content. Memo:\ `debug/sprint_q5p_tc1e_aut_inclusion_memo.md`.
+
+### Closed
+
+- **TC-1e (first stone of multi-year wall) — POSITIVE.**  Panel:\ five reps $T_1, T_2, J_2$ (Jordan 2-dim activating $g_0$), $J_3$ (Jordan 3-dim activating $g_0$), $K_2$ (Jordan 2-dim activating $g_1$) plus morphisms $f_1: T_1 \hookrightarrow J_2$, $f_2: J_2 \twoheadrightarrow T_1$. Four test parameters $t^{(0)} = 0$, $t^{(1)} = (1, 0, \ldots)$ on $g_0$, $t^{(2)} = (0, \ldots, 1, \ldots)$ on $g_1$, $t^{(3)} = (2/3 \text{ on } g_0, -1/4 \text{ on } g_1)$. Per $t$ at each cutoff:\ invertibility on 5 reps + unit + naturality on 2 morphisms + $\otimes$-compatibility on 3 pairs $= 11$. Across 4 $t$ values per cutoff:\ $44$. Group law $\Phi(t^{(1)} + t^{(2)}) = \Phi(t^{(1)}) \cdot \Phi(t^{(2)})$ on $J_2, J_3, K_2$ + $\Phi(2 t^{(1)}) = \Phi(t^{(1)})^2$ on $J_2, J_3$:\ $5$ per cutoff. Per-cutoff total $49$;\ two cutoffs $98$. **Wall time:\ 0.03 s.** Driver `debug/compute_q5p_tc1e_aut_inclusion.py`;\ data `debug/data/sprint_q5p_tc1e_aut_inclusion.json`;\ memo `debug/sprint_q5p_tc1e_aut_inclusion_memo.md`;\ tests `tests/test_tannakian_aut.py` (25 tests, all pass in 0.90 s).
+
+### Added
+
+- **`geovac/tannakian.py` TC-1e additions (~250 lines, total ~2150 lines)**. Public API:\ `levi_unipotent_action(t_dict, V)` returning $\eta_V(t)$ via truncated exp;\ `verify_natural_auto_invertibility`, `verify_natural_auto_unit`, `verify_natural_auto_naturality`, `verify_natural_auto_tensor`, `verify_natural_auto_group_law`. Internal helper `_matrix_exp_nilpotent(M, dim)`. Bit-exact `sympy.Rational`/`Integer` throughout.
+
+- **`tests/test_tannakian_aut.py`** — 25 TC-1e tests covering closed-form sanity of `levi_unipotent_action` (zero param $\Rightarrow$ identity;\ Jordan 2-dim and 3-dim exact matrices at rational parameters;\ trivial reps unchanged;\ unit), invertibility on the panel, unit axiom, naturality on mono / epi, $\otimes$-compatibility on $J_2 \otimes J_2$ / $J_2 \otimes K_2$ / $T_1 \otimes J_3$, group law with distinct generators / doubling / zero-identity. All pass in 0.90 s.
+
+- **`debug/compute_q5p_tc1e_aut_inclusion.py`** — TC-1e driver (~210 lines, 0.03 s wall).
+
+- **`debug/data/sprint_q5p_tc1e_aut_inclusion.json`** — bit-exact data dump.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — ONE new \emph-prefixed paragraph after the v3.72.0 TC-1d paragraph. Pages:\ 33 (unchanged within budget), three-pass clean.
+
+### Sprint plan context — TC-1 Tannakian Foundation sprint COMPLETE
+
+**Tannakian Reconstruction Foundation sprint:\ 5 sub-tracks closed across v3.70.0–v3.73.0.**
+
+- **TC-1a (v3.70.0)** — $\mathrm{Rep}_{\mathrm{fin}}$ is abelian. 106 / 106.
+- **TC-1b (v3.71.0)** — symmetric monoidal. 56 / 56.
+- **TC-1c (v3.72.0)** — rigidity. 50 / 50.
+- **TC-1d (v3.72.0)** — fiber functor $\omega$. 40 / 40.
+- **TC-1e (v3.73.0)** — first stone of multi-year wall:\ $\Phi: \mathbb{G}_a^{3N} \hookrightarrow \mathrm{Aut}^\otimes(\omega)$ inclusion direction. 98 / 98.
+
+**Total TC-1 Tannakian Foundation panel:\ $106 + 56 + 50 + 40 + 98 = 350$ bit-exact zero residuals across the five sub-tracks.**
+
+The Tannakian-closure precondition is fully constructed at the verified-precondition level;\ the explicit inclusion direction $\mathrm{Aut}^\otimes(\omega) \supseteq U^*_{\mathrm{Levi}}$ at finite cutoff is bit-exact. The substrate for Tannakian closure as a standalone sprint or collaboration target with the motives community (Marcolli, Fathizadeh, Brown, Glanois, Deligne lineages) is now fully assembled.
+
+**Multi-year content (NOT closed by TC-1e):**
+
+- Converse equality $\mathrm{Aut}^\otimes(\omega) = U^*_{\mathrm{Levi}}$ — requires pro-finite Tannakian theorem coherent with v3.66.0 FO3 Interpretation C at the period level on $\mathcal{O}_\infty$ (PS-3).
+- $SL_2$ explicit inclusion via Peter--Weyl decoration substrate — sprint-scale follow-on.
+- Full panel injectivity activating all $3 N(n_{\max})$ generators — sprint-scale extension.
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 61/61 pro-system tests pass.
+- 49/49 base tannakian tests pass.
+- 30/30 rigidity tests pass.
+- 24/24 fiber tests pass.
+- 25/25 aut tests pass.
+- **207/207 combined regression** in 2.65 s.
+- Paper 55 three-pass clean LaTeX (33 pages, 770 KB PDF, no substantive warnings).
+- Hard prohibitions check clean.
+
+---
+
+## [3.72.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-1c + TC-1d — Tannakian prereqs 4 / 4 CLOSED.** Final two sprint-scale Tannakian-closure prerequisites named by PS-4 (v3.69.0) closed in parallel via worktree-isolated sub-agents (PI direction:\ "can we do the remaining prerequisites in parallel?"). **TC-1c: rigidity.** Every finite-dim rep $V \in \mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$ admits a dual $V^\vee = \mathrm{Hom}_\mathbb{Q}(V, \mathbb{Q})$ with contragredient Hopf action $X_g^{V^\vee} = -(X_g^V)^T$ determined by the antipode $S(x_g) = -x_g$ of the v3.61.0 Track A abelian primitive Hopf algebra. Evaluation $\mathrm{ev}_V: V^\vee \otimes V \to \mathbf{1}$ and coevaluation $\mathrm{coev}_V: \mathbf{1} \to V \otimes V^\vee$ as explicit Kronecker-delta morphisms; both snake (zigzag) identities reduce to matrix identities in the canonical lex bases (TC-1b associator and unitors are identity matrices) and verify bit-exact on a four-rep panel at $n_{\max} \in \{2, 3\}$ across seven axiom panels totalling **50 / 50 bit-exact zero residuals**. **Structural surprise:** double dual $(V^\vee)^\vee = V$ as **strict equality of endomorphism data** on the Track-A abelian substrate (because $S^2 = \mathrm{id}$ via $S(x_g) = -x_g$ and $(M^T)^T = M$ — not claimed beyond TC-1c, since a non-abelian extension would introduce a non-trivial canonical iso in place of strict equality). **TC-1d: fiber functor $\omega: \mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}) \to \mathrm{Vec}_\mathbb{Q}$** as the no-op forgetful (a rep IS its underlying $\mathbb{Q}$-vector space + extra Hopf-action structure;\ forgetting the action returns the rep's dim / matrix unchanged). Naturality of $\otimes$-preservation automatic because tensor products use Kronecker products in canonical lex basis (TC-1b convention). Four Deligne--Milne 1982 properties verified bit-exact at $n_{\max} \in \{2, 3\}$ on representative panel: **40 / 40 bit-exact zero residuals** (1 unit + 4 $\otimes$-preservation + 4 kernel + 4 cokernel + 3 direct-sum + 4 faithfulness, per cutoff). **Combined panel: 50 + 40 = 90 bit-exact zero residuals.** The motivic Galois group $\mathrm{Aut}^\otimes(\omega) = U^{*(n_{\max})}_{\mathrm{GeoVac}} = \mathbb{G}_a^{3 N(n_{\max})}$ is the v3.61.0 Track A structural reading;\ TC-1e (multi-year first stone:\ explicit inclusion $\mathrm{Aut}^\otimes(\omega) \supseteq U^\ast_{\mathrm{Levi}}$ at $n_{\max} = 2$) opens the heart of Tannakian closure proper. Memos:\ `debug/sprint_q5p_tc1c_rigidity_memo.md`, `debug/sprint_q5p_tc1d_fiber_functor_memo.md`.
+
+### Closed
+
+- **TC-1c (rigidity) — POSITIVE.**  Four-rep panel $(T_1, T_2, J_2, J_3)$ at $n_{\max} \in \{2, 3\}$ across seven axiom panels:\ (i) contragredient action $X_g^{V^\vee} = -(X_g^V)^T$ with nilpotency + commutativity audit (4 reps $\times$ 2 cutoffs $=$ 8);\ (ii) evaluation intertwining $\mathrm{ev}_V \cdot X_g^{V^\vee \otimes V} = 0$ (8);\ (iii) coevaluation intertwining $X_g^{V \otimes V^\vee} \cdot \mathrm{coev}_V = 0$ (8);\ (iv) first snake identity $(\mathrm{ev}_V \otimes \mathrm{id}_{V^\vee}) \circ (\mathrm{id}_{V^\vee} \otimes \mathrm{coev}_V) = \mathrm{id}_{V^\vee}$ (8);\ (v) second snake identity $(\mathrm{id}_V \otimes \mathrm{ev}_V) \circ (\mathrm{coev}_V \otimes \mathrm{id}_V) = \mathrm{id}_V$ (8);\ (vi) double dual $(V^\vee)^\vee = V$ as strict equality (8);\ (vii) unit self-dual $\mathbf{1}^\vee = \mathbf{1}$ (2). **Total bit-exact zero residuals:\ 50 / 50.** Wall time:\ 0.02 s. Driver `debug/compute_q5p_tc1c_rigidity.py`;\ data `debug/data/sprint_q5p_tc1c_rigidity.json`;\ memo `debug/sprint_q5p_tc1c_rigidity_memo.md`;\ tests `tests/test_tannakian_rigidity.py` (30 tests, all pass).
+
+- **TC-1d (fiber functor $\omega$) — POSITIVE.** Four Deligne--Milne 1982 fiber-functor properties verified on representative panel $\{\mathbf{1}, T_2, J_2, J_3\}$ and morphism panel $\{f_1, f_2, f_3, f_4\}$ (mono / epi / identity / zero) at $n_{\max} \in \{2, 3\}$:\ (i) unit preservation $\omega(\mathbf{1}) = \mathbb{Q}$ (1 / 2 cutoffs);\ (ii) $\otimes$-preservation $\omega(M \otimes N) = \omega(M) \otimes_\mathbb{Q} \omega(N)$ as identity in canonical lex basis (4 pairs $\times$ 2 cutoffs $= 8$);\ (iii) kernel preservation $\omega(\ker f) = \ker \omega(f)$ (4 morphisms $\times$ 2 cutoffs $= 8$);\ (iv) cokernel preservation $\omega(\mathrm{coker}\, f) = \mathrm{coker}\, \omega(f)$ (8);\ (v) direct sum preservation $\omega(R_1 \oplus R_2) = \omega(R_1) \oplus \omega(R_2)$ (3 pairs $\times$ 2 cutoffs $= 6$);\ (vi) faithfulness $f = g \Leftrightarrow \omega(f) = \omega(g)$ (4 tests $\times$ 2 cutoffs $= 8$). **Total bit-exact zero residuals:\ 40 / 40.** Wall time:\ 0.01 s. Driver `debug/compute_q5p_tc1d_fiber_functor.py`;\ data `debug/data/sprint_q5p_tc1d_fiber_functor.json`;\ memo `debug/sprint_q5p_tc1d_fiber_functor_memo.md`;\ tests `tests/test_tannakian_fiber.py` (24 tests, all pass).
+
+### Added
+
+- **`geovac/tannakian.py` TC-1c + TC-1d additions (~530 lines)**. TC-1c public API:\ `dual_rep(V)`, `evaluation_morphism(V)`, `coevaluation_morphism(V)`, `verify_dual_action`, `verify_evaluation_intertwines`, `verify_coevaluation_intertwines`, `verify_snake_identity_first`, `verify_snake_identity_second`, `verify_double_dual_iso`, `verify_unit_self_dual`. TC-1d public API:\ `fiber_functor_object(V)`, `fiber_functor_morphism(f)`, `verify_omega_unit(n_max)`, `verify_omega_tensor_preservation(M, N)`, `verify_omega_preserves_kernel(f)`, `verify_omega_preserves_cokernel(f)`, `verify_omega_preserves_direct_sum(R1, R2)`, `verify_omega_faithful(f, g)`. Bit-exact `sympy.Rational`/`Integer` throughout. Module total ~1900 lines.
+
+- **`tests/test_tannakian_rigidity.py`** — 30 TC-1c tests covering dual_rep, ev/coev intertwining, snake identities, double dual strict equality, unit self-dual at $n_{\max} \in \{2, 3\}$. All pass in 0.90 s.
+
+- **`tests/test_tannakian_fiber.py`** — 24 TC-1d tests covering fiber functor on objects + morphisms, unit preservation, $\otimes$-preservation, kernel/cokernel/direct-sum preservation, faithfulness at $n_{\max} \in \{2, 3\}$. All pass in 0.93 s.
+
+- **`debug/compute_q5p_tc1c_rigidity.py`** — TC-1c driver (0.02 s wall, 50 / 50 zero residuals).
+
+- **`debug/compute_q5p_tc1d_fiber_functor.py`** — TC-1d driver (0.01 s wall, 40 / 40 zero residuals).
+
+- **`debug/data/sprint_q5p_tc1c_rigidity.json`** and **`debug/data/sprint_q5p_tc1d_fiber_functor.json`** — bit-exact data dumps.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — TWO new \emph-prefixed paragraphs after the v3.71.0 TC-1b paragraph (TC-1c then TC-1d). Pages:\ 32 $\to$ 33, three-pass clean.
+
+### Sprint plan context — Tannakian foundation 4 / 4 CLOSED
+
+**TC-1 Tannakian Reconstruction Foundation sprint:\ all four sprint-scale prerequisites CLOSED.**
+
+- **TC-1a (v3.70.0)** — $\mathrm{Rep}_{\mathrm{fin}}$ is abelian. 106 / 106 zero residuals.
+- **TC-1b (v3.71.0)** — symmetric monoidal with diagonal Hopf action. 56 / 56 zero residuals.
+- **TC-1c (this release)** — rigidity:\ duals via contragredient action, ev/coev, snake identities, double dual strict equality. 50 / 50 zero residuals.
+- **TC-1d (this release)** — fiber functor $\omega$:\ exactness, faithfulness, $\otimes$-preservation, unit preservation. 40 / 40 zero residuals.
+
+**Total Tannakian foundation panel:\ $106 + 56 + 50 + 40 = 252$ bit-exact zero residuals.**
+
+**Next:** TC-1e (multi-year first stone) — explicit inclusion $\mathrm{Aut}^\otimes(\omega) \supseteq U^\ast_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ at $n_{\max} = 2$. Every $(t, g) \in U^\ast_{\mathrm{Levi}}(\mathbb{Q})$ defines a natural $\otimes$-automorphism of $\omega$;\ bit-exact verification at $n_{\max} = 2$. **The converse equality** (full Tannakian closure:\ $\mathrm{Aut}^\otimes(\omega) = U^\ast$ in the pro-system limit + coherence with v3.66.0 FO3 Interpretation C at the period level on $\mathcal{O}_\infty$) remains multi-year.
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 61/61 pro-system tests pass.
+- 49/49 base tannakian tests pass (TC-1a + TC-1b).
+- 30/30 tannakian rigidity tests pass (TC-1c).
+- 24/24 tannakian fiber tests pass (TC-1d).
+- **182/182 combined regression** in 2.52 s.
+- Paper 55 three-pass clean LaTeX (33 pages, 767 KB PDF, no substantive warnings).
+- Hard prohibitions check clean.
+
+---
+
+## [3.71.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-1b — $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}})$ is symmetric monoidal.** Second sub-track of the Tannakian Reconstruction Foundation sprint, single-thread continuation of TC-1a. Tensor product $\otimes_\mathbb{Q}$ with the diagonal Hopf action $X_g^{M \otimes N} = X_g^M \otimes I_N + I_M \otimes X_g^N$ determined by the v3.61.0 Track A abelian primitive coproduct $\Delta(x_g) = x_g \otimes 1 + 1 \otimes x_g$. Unit object $\mathbf{1} = $ trivial 1-dim rep;\ unitors $\lambda_M, \rho_M = $ identity matrices on $\dim(M)$;\ associator $\alpha_{M, N, P} = $ identity in canonical lex basis;\ braiding $\sigma_{M, N} = $ swap-permutation matrix, symmetric. Six axiom panels verified bit-exact at $n_{\max} \in \{2, 3\}$:\ tensor diagonal action, functoriality, unitor intertwining, associator intertwining, braiding intertwining + symmetric, pentagon + triangle + hexagon coherence. **Total bit-exact zero residuals:\ 56 / 56.** Closes the **second of four sprint-scale Tannakian-closure prerequisites** named by PS-4 (v3.69.0). TC-1c (rigidity), TC-1d (fiber functor) remain sprint-scale;\ TC-1e (first stone of multi-year wall) opens the heart of Tannakian closure. Memo:\ `debug/sprint_q5p_tc1b_monoidal_memo.md`.
+
+### Closed
+
+- **TC-1b (symmetric monoidal structure) — POSITIVE.**  Six bit-exact axiom panels at $n_{\max} \in \{2, 3\}$ on a four-rep substrate ($\mathbf{1} = T_1$, $T_2$, $J_2$, $J_3$):
+
+  1. **Tensor diagonal action** (4 pairs $\times$ 2 checks $\times$ 2 cutoffs $= 16$): for each pair $(M, N) \in \{(T_1, J_2), (J_2, J_2), (J_2, J_3), (J_3, J_2)\}$, the constructed $X_g^{M \otimes N}$ matches the independent reconstruction via Kronecker assembly bit-exact, and nilpotency is preserved.
+
+  2. **Tensor functoriality** (3 tests $\times$ 2 cutoffs $= 6$): $(f' \otimes g') \circ (f \otimes g) = (f' \circ f) \otimes (g' \circ g)$ bit-exact for three composition pairs.
+
+  3. **Unitor intertwining** (3 reps $\times$ 2 unitors $\times$ 2 cutoffs $= 12$): both $\lambda_M: \mathbf{1} \otimes M \to M$ and $\rho_M: M \otimes \mathbf{1} \to M$ intertwine the action for $M \in \{T_1, J_2, J_3\}$.
+
+  4. **Associator intertwining** (2 triples $\times$ 2 cutoffs $= 4$): $\alpha_{M, N, P}$ intertwines the diagonal action for $(M, N, P) \in \{(T_1, J_2, J_3), (J_2, T_1, J_2)\}$.
+
+  5. **Braiding intertwining + symmetric** (3 pairs $\times$ 2 checks $\times$ 2 cutoffs $= 12$): for $(M, N) \in \{(T_1, J_2), (J_2, J_3), (J_2, J_2)\}$, both $\sigma_{M, N}(X_g^{M \otimes N} v) = X_g^{N \otimes M}(\sigma_{M, N} v)$ (intertwining) and $\sigma_{N, M} \circ \sigma_{M, N} = \mathrm{id}_{M \otimes N}$ (symmetric).
+
+  6. **Coherence diagrams** (3 $\times$ 2 cutoffs $= 6$): pentagon on $(T_1, J_2, J_3, J_2)$, triangle on $(J_2, J_3)$, hexagon on $(J_2, J_3, T_1)$.
+
+  **Total bit-exact zero residuals:\ 56 / 56.** **Structural reason for the fast closure (0.12 s):** the abelian primitive coproduct $\Delta(x) = x \otimes 1 + 1 \otimes x$ makes the Hopf structure on tensor products entirely determined by the constituent reps, and the canonical lex basis on tensor products makes the associator the identity matrix (so pentagon coherence reduces to a tautology). The substantive content is the braiding intertwining check and the hexagon coherence diagram. Driver `debug/compute_q5p_tc1b_monoidal.py` (0.12 s wall);\ data `debug/data/sprint_q5p_tc1b_monoidal.json`;\ memo `debug/sprint_q5p_tc1b_monoidal_memo.md`;\ module `geovac/tannakian.py` (TC-1b additions ~450 lines, total ~1150 lines);\ tests `tests/test_tannakian.py` (21 new tests appended for total 49, all pass in 0.96 s).
+
+### Added
+
+- **`geovac/tannakian.py` TC-1b additions (~450 lines)**. Public API additions:\ `unit_object(n_max)`, `tensor_rep(M, N)`, `tensor_morphism(f, g)`, `left_unitor(M)`, `right_unitor(M)`, `associator(M, N, P)`, `braiding(M, N)`. Verifiers:\ `verify_tensor_diagonal_action`, `verify_tensor_functoriality`, `verify_unitor_intertwines`, `verify_associator_intertwines`, `verify_braiding_intertwines`, `verify_braiding_symmetric`, `verify_pentagon_coherence`, `verify_triangle_coherence`, `verify_hexagon_coherence`. Plus the internal `_kron(A, B)` helper for Kronecker products.
+
+- **`tests/test_tannakian.py`** — 21 new TC-1b tests appended for total 49 (all pass in 0.96 s). New tests cover `tensor_rep` dimension and diagonal action, $\mathbf{1} \otimes M = M$ identity, $J \otimes J$ Kronecker sum, parametrized verifier panels for diagonal action / unitor / associator / braiding / pentagon / triangle / hexagon at $n_{\max} \in \{2, 3\}$, tensor functoriality with identities, and unit object construction.
+
+- **`debug/compute_q5p_tc1b_monoidal.py`** — TC-1b driver (~280 lines, 0.12 s wall).
+
+- **`debug/data/sprint_q5p_tc1b_monoidal.json`** — bit-exact data dump.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — ONE new \emph-prefixed paragraph after the v3.70.0 TC-1a paragraph. Pages:\ 32 (unchanged within budget), three-pass clean.
+
+### Sprint plan context — TC-1 series
+
+The Tannakian Reconstruction Foundation sprint (TC-1) is single-threaded per PI direction. Progress:
+
+- **TC-1a (v3.70.0)** — $\mathrm{Rep}_{\mathrm{fin}}$ is abelian. **CLOSED** (106 / 106 bit-exact).
+- **TC-1b (this release)** — symmetric monoidal structure with diagonal Hopf action. **CLOSED** (56 / 56 bit-exact).
+- **TC-1c (next)** — rigidity. Duals $V^\vee$ with contragredient action $X_g^{V^\vee} = -(X_g^V)^T$ (uses antipode $S(x) = -x$). Evaluation, coevaluation, snake identities.
+- **TC-1d** — fiber functor $\omega$ to $\mathrm{Vec}_\mathbb{Q}$. Exactness, faithfulness, $\otimes$-preservation.
+- **TC-1e** — first stone of multi-year wall:\ $\mathrm{Aut}^\otimes(\omega) \supseteq U^\ast_{\mathrm{Levi}}$ at $n_{\max} = 2$.
+
+**Tannakian closure itself remains a multi-year frontier.**
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 61/61 pro-system tests pass (TC-1b does not touch pro_system module).
+- 49/49 tannakian tests pass (28 TC-1a + 21 TC-1b, 0.96 s).
+- Paper 55 three-pass clean LaTeX (32 pages, 762 KB PDF, no substantive warnings).
+- TC-1b driver:\ 56 / 56 bit-exact zero residuals (0.12 s wall).
+- Hard prohibitions check clean.
+
+---
+
+## [3.70.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-1a — $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}})$ is abelian.** First sub-track of the Tannakian Reconstruction Foundation sprint (TC-1), single-threaded continuation of the Pro-System-Lockdown arc per PI direction. The category of finite-dim rational representations of the v3.61.0 Track A abelian primitive Hopf algebra $\mathcal{H}_{\mathrm{GV}}(n_{\max}) = \mathrm{Sym}_\mathbb{Q}(V_{n_{\max}}) = \mathcal{O}(\mathbb{G}_a^{3 N(n_{\max})})$ is an **abelian category** in the Deligne--Milne 1982 sense, verified bit-exact on a five-rep five-morphism panel at $n_{\max} \in \{2, 3\}$ across all six standard universal-property axioms:\ zero object, finite direct sums, kernels, cokernels, mono $=$ ker(coker), epi $=$ coker(ker). **106 / 106 bit-exact zero residuals.** Closes the **first of four sprint-scale Tannakian-closure prerequisites** named by PS-4 (v3.69.0). TC-1b (symmetric monoidal), TC-1c (rigidity), TC-1d (fiber functor) are the remaining sprint-scale prerequisites;\ TC-1e (the first stone of the multi-year wall:\ $\mathrm{Aut}^\otimes(\omega) \supseteq U^\ast_{\mathrm{Levi}}$ at $n_{\max} = 2$) opens the multi-year arc. Memo:\ `debug/sprint_q5p_tc1a_abelian_memo.md`.
+
+### Closed
+
+- **TC-1a ($\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}})$ is abelian) — POSITIVE.**  An object of the category is a finite-dim $\mathbb{Q}$-vector space $M$ together with $3 N(n_{\max})$ pairwise commuting nilpotent $\mathbb{Q}$-linear endomorphisms $\{X_g\}_g$ (one per primitive generator $g = (n, l, s)$ of $\mathcal{H}_{\mathrm{GV}}$);\ a morphism is a $\mathbb{Q}$-linear map intertwining all $X_g$. The $\mathbb{G}_a^{3 N(n_{\max})}$-action is $\rho(t) = \exp(\sum_g t_g X_g)$ (truncated by nilpotency). **Five-rep five-morphism panel:** zero rep $R_0$, trivial 1-dim $T_1$, trivial 2-dim $T_2$, Jordan 2-dim $J_2$ ($X_{(1,0,0)} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$), Jordan 3-dim $J_3$ ($X_{(1,0,0)}$ canonical $3 \times 3$ nilpotent);\ morphisms $f_0$ (zero), $f_1: T_1 \hookrightarrow J_2$ (mono), $f_2: J_2 \twoheadrightarrow T_1$ (epi), $f_3 = \mathrm{id}_{J_2}$ (iso), $f_4: T_1 \hookrightarrow T_2$ (mono). **Six axiom panels at each cutoff $n_{\max} \in \{2, 3\}$:**\ (1) zero object axiom — 5 reps $\times$ 2 directions (10 identities);\ (2) direct sum universal property — 3 pairs $\times$ 5 identities (15 identities);\ (3) kernel universal property — 4 morphisms $\times$ 2 conditions (8 identities);\ (4) cokernel universal property — 4 morphisms $\times$ 2 conditions (8 identities);\ (5) mono $=$ ker(coker) — 2 mono tests $\times$ 3 conditions (6 identities);\ (6) epi $=$ coker(ker) — 2 epi tests $\times$ 3 conditions (6 identities). Per-cutoff total:\ 53. Both cutoffs:\ **106 / 106 bit-exact zero residuals**. **The category structure inherits from the v3.61.0 Track A abelian primitive Hopf substrate with no GeoVac-specific obstructions** — TC-1a is bookkeeping on existing substrate, as PS-4's gap-list predicted (sprint-scale). Driver `debug/compute_q5p_tc1a_abelian.py` (0.03 s wall);\ data `debug/data/sprint_q5p_tc1a_abelian.json`;\ memo `debug/sprint_q5p_tc1a_abelian_memo.md`;\ module `geovac/tannakian.py` (new, ~700 lines);\ tests `tests/test_tannakian.py` (28 tests, all pass in 0.92 s).
+
+### Added
+
+- **`geovac/tannakian.py`** — new module providing the Tannakian-reconstruction substrate. Public API:\ `FinDimRep(n_max, dim, endos={...}, label="", validate=True)` with `.X(g)`, `.non_zero_endos()`, `.is_zero_object()`;\ `RepMorphism(source, target, matrix, label="", validate=True)` with `.is_zero()`, `.is_injective()`, `.is_surjective()`;\ `zero_rep(n_max)`, `trivial_rep(n_max, dim=1)`;\ `compose(g, f)`, `kernel(f)`, `cokernel(f)`, `direct_sum(R1, R2)`;\ verifiers `verify_zero_object_axiom`, `verify_kernel_universal_property`, `verify_cokernel_universal_property`, `verify_direct_sum_universal_property`, `verify_mono_eq_ker_coker`, `verify_epi_eq_coker_ker`. Bit-exact `sympy.Rational` / `sympy.Integer` throughout. Construction-time validation enforces nilpotency, pairwise commutativity (for FinDimRep), and intertwining (for RepMorphism).
+
+- **`tests/test_tannakian.py`** — 28 tests covering FinDimRep construction + validation rejection (nilpotency, commutativity, unknown generator, bad shape), RepMorphism intertwining validation, identity / zero morphism intertwining, compose, kernel of zero / identity / Jordan projection, cokernel of zero / identity, direct sum dim / endos / universal property, and parametrized abelian-axiom checks at $n_{\max} \in \{2, 3\}$. All pass in 0.92 s.
+
+- **`debug/compute_q5p_tc1a_abelian.py`** — TC-1a driver (~330 lines). Builds the five-rep five-morphism panel and runs the six axiom panels at $n_{\max} \in \{2, 3\}$. 0.03 s wall.
+
+- **`debug/data/sprint_q5p_tc1a_abelian.json`** — bit-exact data dump.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — ONE new \emph-prefixed paragraph after the v3.69.0 PS-4 paragraph, opening the TC-1 series with TC-1a's abelian-category closure. Pages:\ 32 (unchanged within the existing page budget), three-pass clean.
+
+### Sprint plan context
+
+This release opens the **Tannakian Reconstruction Foundation sprint (TC-1)**, single-threaded continuation of the Pro-System-Lockdown arc per PI direction ("let's do that next big internal sprint"). The five TC-1 sub-tracks address the four standard Deligne--Milne 1982 prerequisites + a first-stone first encounter with the multi-year fiber-functor identification:
+
+- **TC-1a (this release)** — $\mathrm{Rep}_{\mathrm{fin}}$ is abelian. **CLOSED.**
+- **TC-1b (next)** — symmetric monoidal structure $\otimes_\mathbb{Q}$. Diagonal Hopf action via the primitive coproduct $\Delta(x) = x \otimes 1 + 1 \otimes x$;\ unit object $=$ trivial 1-dim rep;\ associator + unitor + braiding + triangle/pentagon/hexagon coherence. Bit-exact at small reps and $n_{\max} \in \{2, 3\}$.
+- **TC-1c** — rigidity. Duals $V^\vee = \mathrm{Hom}_\mathbb{Q}(V, \mathbb{Q})$ with contragredient Hopf action $X_g^{V^\vee} = -(X_g^V)^T$ (uses $S(x) = -x$). Evaluation, coevaluation, snake identities.
+- **TC-1d** — fiber functor $\omega: \mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}) \to \mathrm{Vec}_\mathbb{Q}$. Forget the Hopf action, keep the ℚ-vector-space. Verify exactness, faithfulness, $\otimes$-preservation, $\omega(\mathbf{1}) = \mathbb{Q}$.
+- **TC-1e** — first stone of the multi-year wall:\ explicit inclusion $\mathrm{Aut}^\otimes(\omega) \supseteq U^\ast_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ at $n_{\max} = 2$. Every $(t, g) \in U^\ast_{\mathrm{Levi}}(\mathbb{Q})$ defines a natural $\otimes$-automorphism of $\omega$. **The converse equality** (Tannakian closure proper, coherent with v3.66.0 FO3 Interpretation C at the period level on $\mathcal{O}_\infty$ in the pro-system limit) remains multi-year.
+
+### Verification
+
+- 18/18 topological-integrity tests pass (`tests/test_fock_projection.py` + `tests/test_fock_laplacian.py`).
+- 61/61 pro-system tests pass (`tests/test_pro_system.py`, 0.96 s) — TC-1a does not touch pro_system module.
+- 28/28 tannakian tests pass (`tests/test_tannakian.py`, 0.92 s).
+- Paper 55 three-pass clean LaTeX (32 pages, 758 KB PDF, no substantive warnings).
+- TC-1a driver:\ 106 / 106 bit-exact zero residuals (0.03 s wall).
+- Hard prohibitions check clean.
+
+---
+
+## [3.69.0] - 2026-06-06
+
+### Summary
+
+**Q5'-ProSystem-Lockdown PS-3 + PS-4 — Lockdown sprint CLOSED 4/4.** Final two sub-tracks closed in parallel (PS-3 foreground main session, PS-4 background sub-agent per PI "kick off the remaining item in parallel" direction). **Pro-System-Lockdown sprint is now complete:\ all four sub-tracks (PS-1 / PS-2 / PS-3 / PS-4) closed bit-exact at theorem grade**, with $130 + 485 + 284 + 872 = 1771$ bit-exact zero residuals total across the lockdown panel. The pro-system substrate for Tannakian closure is fully constructed:\ closed-form transitions (PS-1), $U^*$-action compatibility (PS-2), inverse limit + continuum $F(s)$ (PS-3), endomorphism rigidity + Tannakian-readiness gap-list (PS-4).
+
+**PS-3** carries the v3.66.0 FO2 $F(s)$ panel and the v3.66.0 FO3 Interpretation C closure to the inverse-limit setting:\ explicit construction of $\mathcal{O}_\infty = \varprojlim_{n_{\max}} \mathcal{O}_{n_{\max}} \cong \mathbb{Q}^{\mathbb{N}_{\mathrm{sec}}}$;\ closed-form continuum cocycle classes $\chi_\infty, \eta_\infty$ via sector-local extension;\ universal property + continuity bit-exact at $n_{\max} \le 6$ (new falsifier cell adds 27 sectors at shell 6, $\dim \mathcal{H} = 224$);\ $F(s)$ at integer $s \in \{6, \ldots, 10\}$ carried to the limit with bit-exact MT(ℚ, 1) weight + depth grading per term (25 terms $\times$ 4 attributes = 100 identities;\ M2 depth-0 weight-$2k$ + M3 depth-1 weight-$2k+1$ partition aligns bit-exactly with the standard motivic Galois depth/weight grading).
+
+**PS-4** characterises algebra-level endomorphism rigidity at finite cutoff and maps the four standard Deligne--Milne Tannakian-closure prerequisites. **Substantive finding:**\ $\mathrm{End}_{\mathrm{compat}}(\mathcal{O}_n)$ is **NOT** the scalar diagonal $\mathbb{Q}^{N(n_{\max})}$ as the task anticipation conjectured;\ it is the **block-lower-triangular subalgebra** under the shell filtration, with closed-form dimension $\sum_{1 \le j \le i \le n_{\max}} (i+1)(j+1)$. Bit-exact panel:\ $\dim = 19, 55, 125, 245$ at $n_{\max} = 2, 3, 4, 5$ via direct basis enumeration. **Algebra-of-functions rigidity at finite cutoff is structurally weaker than scalar-diagonal rigidity** because the algebra is commutative and the transitions are sector projections. The Tannakian-rigidity content (Deligne--Milne 1982) lives one level up at $\mathrm{Rep}(\mathcal{H}_{\mathrm{GV}})$, where the abelian primitive coproduct + $S(x) = -x$ make rigidity automatic on finite-dim modules. **Tannakian-readiness gap-list:**\ abelian / tensor / rigidity are SATISFIED with sprint-scale ($\sim 1$--$2$ months combined) bookkeeping closures;\ the fiber functor identification $\mathrm{Aut}^\otimes(\omega) \cong U^*_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ is the multi-year heart of Tannakian closure proper.
+
+Memos:\ `debug/sprint_q5p_ps3_inverse_limit_memo.md`, `debug/sprint_q5p_ps4_endo_rigidity_memo.md`.
+
+### Closed
+
+- **PS-3 (inverse limit $\mathcal{O}_\infty$ and continuum $F(s)$) — POSITIVE.**  Inverse limit defined as $\mathbb{Q}^{\mathbb{N}_{\mathrm{sec}}}$ (functions on the infinite sector index $\mathbb{N}_{\mathrm{sec}} = \{(n, l) : n \ge 1, 0 \le l \le n\}$) with product / inverse-limit topology under which every projection $\pi_{n_{\max}}: \mathcal{O}_\infty \to \mathcal{O}_{n_{\max}}$ is continuous. Continuum cocycle classes $\chi_\infty, \eta_\infty$ via closed-form sector-local extensions $\chi_{(n, l)} = +2$ if $l < n$, $-2n$ if $l = n$;\ $\eta_{(n, l)} = (2l+1)(2n+1)$ if $l < n$, $n(2n+1)$ if $l = n$. **Three bit-exact panels:**\ (i) universal property $\pi_{n_{\max}}(\chi_\infty) = \chi^{(n_{\max})}$ + same for $\eta$ across $n_{\max} \in \{1, \ldots, 6\}$ at all 77 sectors per character (154 sector-level identities);\ (ii) continuity $P_{m, k}(\pi_m(\chi_\infty)) = \pi_k(\chi_\infty)$ + same for $\eta$ at all 15 pairs $(m, k) \le 6$ (30 identities);\ (iii) v3.66.0 FO2 $F(s)$ integer-$s$ panel at $s \in \{6, 7, 8, 9, 10\}$ carried to the limit with bit-exact MT weight + depth grading per term (25 terms $\times$ 4 attributes: classification panel-vs-symbolic, weight, depth, MT(ℚ, 1) membership; 100 identities). The M2 / M3 partition aligns bit-exactly with the standard motivic Galois depth/weight grading (M2 depth 0 weight $2k$;\ M3 depth 1 weight $2k+1$). **Total bit-exact zero residuals:\ 284 / 284** ($154 + 30 + 100$). The cosmic-Galois $U^*$-action on $F(s)$ at the period level decomposes into M2 Tate-invariant scaling + M3 standard motivic Galois action on odd-zeta generators (Brown 2012, Glanois 2015);\ $U^*$-orbit closure at the panel's (weight, depth) level is automatic by the one-dimensionality of the (depth-1, weight-$2k+1$) slots in MT(ℚ, 1) at weight $\le 10$. Driver `debug/compute_q5p_ps3_inverse_limit.py` (0.32 s wall);\ data `debug/data/sprint_q5p_ps3_inverse_limit.json`;\ memo `debug/sprint_q5p_ps3_inverse_limit_memo.md`;\ module `geovac/pro_system.py` (PS-3 additions ~230 lines, total 840 lines);\ tests `tests/test_pro_system.py` (10 new tests appended for total 61, all pass).
+
+- **PS-4 (endomorphism rigidity probe + Tannakian-readiness gap-list) — POSITIVE.**  $\mathrm{End}_{\mathrm{compat}}(\mathcal{O}_n)$ at finite cutoff is the **block-lower-triangular subalgebra** under the shell filtration $N(1) \subset \cdots \subset N(n_{\max})$, with closed-form dimension
+
+  $$\dim_\mathbb{Q} \mathrm{End}_{\mathrm{compat}}(\mathcal{O}_n) = \sum_{1 \le j \le i \le n_{\max}} (i+1)(j+1)$$
+
+  giving $\dim = 19, 55, 125, 245$ at $n_{\max} = 2, 3, 4, 5$. Strictly larger than the depth-0 scalar diagonal $\mathbb{Q}^{N(n_{\max})}$ and strictly smaller than $M_N(\mathbb{Q})$;\ asymptotic ratio $\dim / N^2 \to 5/8 = 0.625$. Bit-exact panel:\ 444 basis-element compatibility checks + 370 subalgebra-closure checks (representative basis pairs land back in lower-block-triangular) + 4 upper-block falsifier rejection witnesses + 4 closed-form dimension predictions + 50 upward-lift checks. **Total bit-exact checks:\ 872 / 872.**  **Honest framing:**\ the PS-4 task anticipation that algebra-of-functions rigidity reduces to scalar diagonal at finite cutoff was WRONG;\ the actual answer (lower-block-triangular) is strictly larger because the algebra is commutative and the transitions are sector projections. The Tannakian-rigidity content lives one level up at $\mathrm{Rep}(\mathcal{H}_{\mathrm{GV}})$ where the abelian primitive coproduct + $S(x) = -x$ make rigidity automatic on finite-dim modules. **Tannakian-readiness gap-list across the four standard Deligne--Milne 1982 prerequisites:**\ (a) abelian category structure SATISFIED, $\sim 1$--$2$ weeks bookkeeping;\ (b) symmetric monoidal structure SATISFIED, $\sim 1$--$2$ weeks bookkeeping;\ (c) rigidity SATISFIED for finite-dim, $\sim 2$--$3$ weeks for pro-finite duality lift;\ (d) fiber functor SATISFIED for finite-dim, **MULTI-YEAR** for identification of $\mathrm{Aut}^\otimes(\omega)$ with $U^*_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ via Tannakian reconstruction + matching with v3.63.0 L1 + verification against v3.66.0 FO3 Interpretation C at the period level on the inverse limit $\mathcal{O}_\infty$ (PS-3). Driver `debug/compute_q5p_ps4_endo_rigidity.py` (0.40 s wall);\ data `debug/data/sprint_q5p_ps4_endo_rigidity.json`;\ memo `debug/sprint_q5p_ps4_endo_rigidity_memo.md`. No `geovac/pro_system.py` additions (PS-4 uses PS-1 substrate directly).
+
+### Added
+
+- **`geovac/pro_system.py` PS-3 additions (~230 lines, total ~840 lines)**. Public API additions:\ `InverseLimitClass(closed_form, label="")` with `.at(n, l)`, `.project(n_max)`, `.project_to_vector(n_max)`;\ `chi_infinity()`, `eta_infinity()` returning continuum cocycle classes;\ `project_to_cutoff(psi_inf, n_max)`;\ `verify_universal_property(psi_inf, psi_by_cutoff)`;\ `verify_continuity_under_transitions(psi_inf, pairs)`. PS-4 added no module code (used PS-1 substrate directly).
+
+- **`tests/test_pro_system.py`** — 10 new PS-3 tests appended for total 61 (all pass in 0.96 s). New tests cover `chi_infinity` / `eta_infinity` closed forms, `InverseLimitClass.at` out-of-range raising, `.project` and `.project_to_vector`, universal property through $n_{\max} = 6$ (77 sectors), continuity under transitions at $n_{\max} \in \{2, 3, 4, 5\}$ pairs (10 pairs), `project_to_cutoff`, and invalid-pair raising. PS-4 has no new tests (panel is exhaustively self-verified by the driver via closed-form dimension matches and 872 bit-exact checks).
+
+- **`debug/compute_q5p_ps3_inverse_limit.py`** — PS-3 driver (~430 lines, 0.32 s wall).
+
+- **`debug/data/sprint_q5p_ps3_inverse_limit.json`** — bit-exact data dump for PS-3.
+
+- **`debug/compute_q5p_ps4_endo_rigidity.py`** — PS-4 driver (~430 lines, 0.40 s wall).
+
+- **`debug/data/sprint_q5p_ps4_endo_rigidity.json`** — bit-exact data dump for PS-4.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — TWO new \emph-prefixed paragraphs applied sequentially after the v3.68.0 PS-2 paragraph:\ PS-3 paragraph (closed-form inverse limit, continuum $\chi_\infty / \eta_\infty$, $F(s)$ at the limit with weight/depth grading, $U^*$-orbit closure documentation) + PS-4 paragraph (block-lower-triangular subalgebra characterisation, closed-form dimension, Tannakian-readiness gap-list). Pages:\ 31 $\to$ 32, three-pass clean.
+
+### Sprint plan context — LOCKDOWN COMPLETE
+
+**Pro-System-Lockdown sprint:\ 4 / 4 sub-tracks CLOSED.**
+
+- **PS-1 (v3.67.0)** — transition maps as closed-form 0/1 matrices, cofiltered axiom, $n_{\max} = 5$ extension. 130 zero residuals.
+- **PS-2 (v3.68.0)** — block-diagonal Hopf-hom $\Phi_{m, k}$, $\mathbb{G}_a$ generator + class-level $U^*$-action compatibility, categorical $SL_2$. 485 zero residuals.
+- **PS-3 (v3.69.0)** — inverse limit $\mathcal{O}_\infty$, continuum $\chi_\infty / \eta_\infty$, $F(s)$ at the limit with MT(ℚ, 1) weight/depth grading. 284 zero residuals.
+- **PS-4 (v3.69.0)** — endomorphism rigidity probe + Tannakian-readiness gap-list. 872 zero residuals.
+
+**Total bit-exact panel across the lockdown sprint:\ $130 + 485 + 284 + 872 = 1771$ bit-exact zero residuals / checks.**
+
+The Pro-System-Lockdown sprint achieves what it set out to do:\ transition maps are explicit closed-form objects (PS-1), the cosmic-Galois $U^*$ acts compatibly with them (PS-2), the inverse limit + continuum $F(s)$ are constructed bit-exactly (PS-3), and the substrate for Tannakian closure is mapped to the four standard Deligne--Milne prerequisites (PS-4). **Tannakian closure itself remains a multi-year frontier** — named in v3.66.0 §5.2 and re-confirmed by PS-4 as the fiber-functor identification $\mathrm{Aut}^\otimes(\omega) \cong U^*$. The lockdown sprint produces the named substrate from which that frontier can be attacked, either as a large internal sprint or as the natural collaboration target with the motives community (Marcolli, Fathizadeh, Brown, Glanois, Deligne lineages).
+
+### Verification
+
+- 18/18 topological-integrity tests pass (`tests/test_fock_projection.py` + `tests/test_fock_laplacian.py`).
+- 61/61 pro-system tests pass (`tests/test_pro_system.py`, 0.96 s).
+- Paper 55 three-pass clean LaTeX (32 pages, 755 KB PDF, no substantive warnings).
+- PS-3 driver:\ 284 / 284 bit-exact zero residuals (0.32 s wall).
+- PS-4 driver:\ 872 / 872 bit-exact checks (0.40 s wall).
+- Hard prohibitions check clean.
+
+---
+
+## [3.68.0] - 2026-06-06
+
+### Summary
+
+**Q5'-ProSystem-Lockdown PS-2 — $U^*$-action lifts compatibly with PS-1's pro-system transitions.** Second of four sub-tracks in the Pro-System-Lockdown sprint. The Levi-decomposed cosmic-Galois $U^* = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ (v3.63.0 L1) acts compatibly with PS-1's closed-form $P_{m, k}$ at every level of the panel:\ the block-diagonal Hopf-hom lift $\Phi_{m, k}: \mathcal{H}_{\mathrm{GV}}(m) \to \mathcal{H}_{\mathrm{GV}}(k)$ satisfies the cofiltered axiom $\Phi_{m, k} = \Phi_{n, k} \cdot \Phi_{m, n}$ bit-exact at all 10 triples in $\{1, \ldots, 5\}$;\ all 435 $\mathbb{G}_a^{3 N(m)}$ translation generators across the 10 pairs obey the sector-locality survival rule bit-exact (surviving generators lift cleanly to their $(m \to k)$ images, killed generators drop to zero);\ class-level $U^*$-action on $\chi, \eta$ commutes with $\Phi_{m, k}$ bit-exact across all 10 pairs $\times$ 2 characters $\times$ 2 boolean conditions (40 identities), reducing to PS-1's pull-back identity by the v3.66.0 FO3 Interpretation C depth-0 triviality. The $SL_2$ factor commutes categorically with $\Phi_{m, k}$ by independence of the $j_{\max}$ and $n_{\max}$ axes. **Total bit-exact zero residuals:\ 485 / 485** (10 cofiltered + 435 $\mathbb{G}_a$ generator + 40 class-level). The cosmic-Galois $U^*$ lifts to the PS-1 pro-system by construction. Memo:\ `debug/sprint_q5p_ps2_ustar_compatibility_memo.md`.
+
+### Closed
+
+- **PS-2 ($U^*$-action compatibility with PS-1 transitions) — POSITIVE.**  Block-diagonal Hopf-hom lift $\Phi_{m, k}$ of PS-1's algebra-level $P_{m, k}$ defined on the abelian primitive substrate $\mathcal{H}_{\mathrm{GV}}(n_{\max}) = \mathrm{Sym}_{\mathbb{Q}}(V_{n_{\max}})$ (v3.61.0 Track A) by
+
+  $$\Phi_{m, k}(x_{(n, l), s}^{(m)}) = \begin{cases} x_{(n, l), s}^{(k)} & \text{if } n \le k, \\ 0 & \text{if } n > k, \end{cases}$$
+
+  where $s \in \{0, 1, 2\}$ indexes the master Mellin engine slots (M1 Hopf-base measure, M3 vertex-parity Hurwitz, M2 Seeley--DeWitt per Paper 18 §III.7). As a $3 N(k) \times 3 N(m)$ matrix:\ $\mathrm{diag}(P_{m, k}, P_{m, k}, P_{m, k})$, three independent copies of PS-1's transition. **Hopf-axiom compatibility under $\Phi_{m, k}$ is structurally trivial on the abelian primitive substrate** — substantive PS-2 content lives at the cofiltered-axiom + generator-compatibility + class-action levels. Three bit-exact panels:\ (i) cofiltered axiom $\Phi_{m, k} = \Phi_{n, k} \cdot \Phi_{m, n}$ at all 10 triples in $\{1, \ldots, 5\}$ (matrix dimensions up to $27 \times 60$);\ (ii) sector-locality survival rule for the 435 $\mathbb{G}_a^{3 N(m)}$ translation generators across the 10 pairs $(m, k) \le 5$ (each pair has $3 N(k)$ survivors $+$ $3 (N(m) - N(k))$ killed, matching PS-1's sector-locality structurally);\ (iii) class-level $U^*$-action compatibility $P_{m, k}(U^* \cdot \psi^{(m)}) = U^* \cdot P_{m, k}(\psi^{(m)}) = \psi^{(k)}$ for $\psi \in \{\chi, \eta\}$ across all 10 pairs (Interpretation C depth-0 trivial action by v3.66.0 FO3 reduces both sides to PS-1's pull-back identity bit-exact). **$SL_2$ commutativity with $\Phi_{m, k}$ is categorical** — $SL_2$ acts on the Peter--Weyl decoration ($j_{\max}$ axis), independent of the $n_{\max}$ axis on which $\Phi_{m, k}$ acts; commutativity is the independence-of-axes statement, not requiring a per-cell check. **Total bit-exact zero residuals:\ 485 / 485** (10 cofiltered + 435 generator + 20 $\chi$ class + 20 $\eta$ class). Driver `debug/compute_q5p_ps2_ustar_compatibility.py` (0.21 s wall);\ data `debug/data/sprint_q5p_ps2_ustar_compatibility.json`;\ memo `debug/sprint_q5p_ps2_ustar_compatibility_memo.md`;\ module `geovac/pro_system.py` (PS-2 additions ~280 lines, total 610 lines);\ tests `tests/test_pro_system.py` (22 new tests appended for total 51, all pass).
+
+### Added
+
+- **`geovac/pro_system.py` PS-2 additions (~280 lines)**.  Public API:\ `MELLIN_SLOTS` constant `(0, 1, 2)` for the master Mellin engine slots;\ `n_primitive_generators(n_max)` returning $3 N(n_{\max})$;\ `primitive_generators(n_max)` returning canonical list of $(n, l, k)$ triples in lex-within-slot order;\ `HopfTransition(n_high, n_low)` class with `.matrix` (block-diagonal $3 N(k) \times 3 N(m)$ from three copies of PS-1's transition), `.apply_to_generator(gen)` returning surviving image or `None` if killed;\ `verify_hopf_cofiltered_axiom(m, n, k)` (matrix-level identity verification);\ `verify_Ga_generator_compatibility(m, k)` (per-generator sector-locality check);\ `verify_class_action_compatibility(m, k, psi_high, psi_low)` (Interpretation C depth-0 triviality check).
+
+- **`tests/test_pro_system.py`** — 22 new tests appended for total 51 (all pass in 0.93 s). New tests cover `n_primitive_generators` closed form at $n_{\max} \in \{1, \ldots, 5\}$, `primitive_generators` count and slot-grouping, `HopfTransition` block-diagonal structure, `apply_to_generator` survival, Hopf-hom cofiltered axiom at 4 triples, $\mathbb{G}_a$ generator compatibility at 6 pairs, class-level action triviality at $(2, 1)$ on a depth-0 example.
+
+- **`debug/compute_q5p_ps2_ustar_compatibility.py`** — PS-2 driver (~280 lines). 0.21 s wall.
+
+- **`debug/data/sprint_q5p_ps2_ustar_compatibility.json`** — bit-exact data dump.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — ONE new \emph-prefixed paragraph after the PS-1 paragraph from v3.67.0, capturing PS-2 (block-diagonal Hopf-hom lift, cofiltered axiom, $\mathbb{G}_a$ generator compatibility, class-level action triviality, categorical $SL_2$ commutativity, 485 bit-exact zero residuals). Pages:\ 30 $\to$ 31, three-pass clean.
+
+### Sprint plan context
+
+This release is **PS-2 of the four-track Pro-System-Lockdown sprint**, single-threaded per PI direction. Progress:
+
+- **PS-1 (v3.67.0)** — transition maps as closed-form algebra homomorphisms, cofiltered axiom bit-exact, $n_{\max} = 5$ falsifier extension. **CLOSED.**
+- **PS-2 (this release)** — $U^*$ compatibility with transitions. Block-diagonal Hopf-hom lift, generator compatibility, class-level action triviality, categorical $SL_2$. **CLOSED.**
+- **PS-3 (next)** — inverse limit $\mathcal{O}_\infty = \varprojlim \mathcal{O}_{n_{\max}}$;\ extend the closed-form transitions and $U^*$-action to the limit;\ verify continuity and density;\ carry $F(s)$ (continuum Mellin lift, v3.66.0 FO2) to the limit and test the non-trivial $U^*$-action on M2 (Tate subgroup) and M3 (standard motivic Galois action on $\mathrm{MT}(\mathbb{Q}, 1)$ odd-zeta classes).
+- **PS-4** — endomorphism rigidity / Tannakian readiness probe;\ named-gap list for Tannakian closure proper.
+
+PS-2 confirms $U^*$ lifts to the PS-1 pro-system substrate. PS-3 lifts to the inverse limit, where $F(s)$ lives and the substantive (M2 / M3) part of the $U^*$-action is non-trivial. **Tannakian closure remains a multi-year frontier** — named at v3.66.0 sprint §5.2 follow-on register;\ PS-1 / PS-2 / PS-3 / PS-4 jointly produce the substrate from which Tannakian closure can be attempted as a sprint or collaboration target.
+
+### Verification
+
+- 18/18 topological-integrity tests pass (`tests/test_fock_projection.py` + `tests/test_fock_laplacian.py`).
+- 51/51 pro-system tests pass (`tests/test_pro_system.py`, 0.93 s).
+- Paper 55 three-pass clean LaTeX (31 pages, 749 KB PDF, no substantive warnings).
+- Hard prohibitions check clean.
+
+---
+
+## [3.67.0] - 2026-06-06
+
+### Summary
+
+**Q5'-ProSystem-Lockdown PS-1 — transition maps as closed-form algebra homomorphisms with bit-exact cofiltered axiom.** First sub-track of a four-track Pro-System-Lockdown sprint (PS-1 / PS-2 / PS-3 / PS-4 single-threaded per PI direction, working toward Tannakian closure as a multi-year frontier). PS-1 promotes v3.60.0's pull-back compatibility at consecutive cutoffs to a closed-form inverse system in the strict categorical sense:\ transitions $P_{m, k}: \mathcal{O}_m \to \mathcal{O}_k$ are realised as $N(k) \times N(m)$ 0/1 integer matrices in canonical lex order on sectors, the cofiltered axiom $P_{m, k} = P_{n, k} \cdot P_{m, n}$ holds bit-exact at all 10 triples $(m, n, k)$ with $1 \le k < n < m \le 5$, the per-sector closed forms $\chi_{(n, l)}, \eta_{(n, l)}$ extend bit-exact to the new cell $n_{\max} = 5$ (20 sectors), and all-pairs pull-back identities $P^*_{m, k}[\psi^{(m)}] = [\psi^{(k)}]$ close bit-exact for all 10 pairs $\times$ 2 characters at the class-vector level. **Total bit-exact zero residuals:\ 130 / 130** (100 per-sector predictions + 10 cofiltered triples + 20 all-pairs pull-back identities). Memo:\ `debug/sprint_q5p_ps1_transitions_memo.md`.
+
+### Closed
+
+- **PS-1 (transition maps, cofiltered axiom, $n_{\max} = 5$ extension) — POSITIVE.**  v3.60.0's pull-back compatibility result (verified at consecutive cutoff pairs at the value level) is promoted to a closed-form inverse system with three additional structural ingredients:\ (i) the transition map $P_{m, k}: \mathcal{O}_m \to \mathcal{O}_k$ is realised as the $N(k) \times N(m)$ 0/1 integer matrix $[I_{N(k)} \mid 0_{N(k) \times (N(m) - N(k))}]$ in canonical lex order on sectors, sending $e_{(n, l)} \mapsto e_{(n, l)}$ if $n \le k$ and $0$ otherwise (algebra homomorphism, not just per-cell value check);\ (ii) the cofiltered axiom $P_{m, k} = P_{n, k} \cdot P_{m, n}$ is verified bit-exact for every triple $1 \le k < n < m \le 5$ (10 matrix-level identities, 10 bit-exact zero residuals) — the load-bearing condition that promotes "compatible family at consecutive cutoffs" to "inverse system" in the categorical sense;\ (iii) the per-sector closed forms $\chi_{(n, l)} = +2$ if $l < n$, $-2n$ if $l = n$ and $\eta_{(n, l)} = (2l+1)(2n+1)$ if $l < n$, $n(2n+1)$ if $l = n$ extend bit-exact to the new cell $n_{\max} = 5$ (six new sectors, 20 total), with totals $\sum \chi_s = 0$ and $M_3(5) = 630$ matching the polynomial closed forms. **All-pairs pull-back $P^*_{m, k}[\psi^{(m)}] = [\psi^{(k)}]$ at the class-vector level** holds bit-exact for all 10 pairs $\{(m, k) : 1 \le k < m \le 5\}$ and both characters $\chi, \eta$ (20 bit-exact zero residuals). **Total bit-exact zero residuals:\ 130 / 130.** Driver `debug/compute_q5p_ps1_transitions.py` (0.14 s wall);\ data `debug/data/sprint_q5p_ps1_transitions.json`;\ memo `debug/sprint_q5p_ps1_transitions_memo.md`;\ module `geovac/pro_system.py` (~300 lines, public API:\ `sectors_at_cutoff`, `N_sectors`, `TransitionMap`, `compose`, `verify_cofiltered_axiom`);\ tests `tests/test_pro_system.py` (29 tests, all pass, 0.92 s).
+
+### Added
+
+- **`geovac/pro_system.py`** — new module providing the closed-form pro-system substrate. Public API:\ `sectors_at_cutoff(n_max)`, `N_sectors(n_max)`, `TransitionMap(n_high, n_low)` (with `.matrix`, `.apply_to_vector(v)`, `.apply_to_class(dict)`), `compose(P_outer, P_inner)`, `verify_cofiltered_axiom(m, n, k)`. Bit-exact `sympy.Integer`/`sympy.Rational` throughout.
+
+- **`tests/test_pro_system.py`** — 29 tests covering sector enumeration closed form ($n_{\max} \in \{1, \ldots, 5\}$), `TransitionMap` matrix shape and block-projection structure, identity-at-$n = m$, vector / class apply, cofiltered axiom at all 10 triples in $\{1, \ldots, 5\}$, and `compose` correctness. All pass in 0.92 s.
+
+- **`debug/compute_q5p_ps1_transitions.py`** — PS-1 driver (~350 lines). Constructs `FockSpectralTriple` at $n_{\max} \in \{1, \ldots, 5\}$, extracts $\chi, \eta$ classes, verifies per-sector closed forms and pull-back / cofiltered identities. 0.14 s wall.
+
+- **`debug/data/sprint_q5p_ps1_transitions.json`** — bit-exact data dump for the 130-identity panel.
+
+- **Paper 55 \S subsec:open\_m2\_m3** — ONE new \emph-prefixed paragraph after the v3.66.0 FO3 Interpretation C closure paragraph, capturing PS-1 (closed-form transitions, cofiltered axiom at all 10 triples in $\{1, \ldots, 5\}$, $n_{\max} = 5$ extension, $130$ bit-exact zero residuals, named follow-ons PS-2 / PS-3 / PS-4). Pages:\ 30 (unchanged), three-pass clean.
+
+### Sprint plan context
+
+This release is **PS-1 of a four-track Pro-System-Lockdown sprint**, single-threaded per PI direction ("we're going to single thread this for now; start at the top and work down"). The full sprint architecture is:
+
+- **PS-1** (this release) — transition maps as closed-form algebra homomorphisms, cofiltered axiom bit-exact, $n_{\max} = 5$ falsifier extension. **CLOSED.**
+- **PS-2** (next) — $U^*$ compatibility with transitions. Verify each generator of $U^* = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ (v3.63.0 Levi decomposition) commutes with $P_{m, k}$ on the three Interpretation-C-closed characters $\chi, \eta, F(s)$. If bit-exact:\ $U^*$ lifts to the pro-system by construction.
+- **PS-3** — inverse limit $\mathcal{O}_\infty = \varprojlim \mathcal{O}_{n_{\max}}$ and extended $U^*$-action;\ carries $F(s)$ (continuum Mellin lift, v3.66.0 FO2) to the limit object.
+- **PS-4** — endomorphism rigidity / Tannakian readiness probe;\ named-gap list for Tannakian closure proper (abelian setting, tensor structure, rigidity, fiber functor).
+
+**Tannakian closure itself remains a multi-year frontier** (named at v3.66.0 sprint §5.2 follow-on register as "the canonical next step after the pro-system is locked down"). PS-1 is the substrate layer of that lockdown.
+
+### Verification
+
+- 18/18 topological-integrity tests pass (`tests/test_fock_projection.py` + `tests/test_fock_laplacian.py`, 1.66 s).
+- 29/29 pro-system tests pass (`tests/test_pro_system.py`, 0.92 s).
+- Paper 55 three-pass clean LaTeX (30 pages, 745 KB PDF, no substantive warnings).
+- Hard prohibitions check clean (no natural-geometry-hierarchy change, no fitted parameters, no §3 deletions, no Paper 2 combination-rule relabel).
+
+---
+
 ## [3.66.0] - 2026-06-06
 
 ### Summary
